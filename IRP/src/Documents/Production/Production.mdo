@@ -440,7 +440,7 @@
   </synonym>
   <synonym>
    <key>tr</key>
-   <value>Extra cost amount by ratio</value>
+   <value>Orana göre ek maliyet miktarı</value>
   </synonym>
   <type>
    <types>DefinedType.typePercent</types>
@@ -463,7 +463,7 @@
   </synonym>
   <synonym>
    <key>tr</key>
-   <value>Extra cost tax amount by ratio</value>
+   <value>Orana göre ek maliyet vergi miktarı</value>
   </synonym>
   <type>
    <types>DefinedType.typePercent</types>
@@ -486,7 +486,7 @@
   </synonym>
   <synonym>
    <key>tr</key>
-   <value>Duration of production</value>
+   <value>Ьretim sьresi</value>
   </synonym>
   <type>
    <types>Number</types>
@@ -537,7 +537,7 @@
   </synonym>
   <synonym>
    <key>tr</key>
-   <value>Extra direct cost amount</value>
+   <value>Ekstra doğrudan maliyet miktarı</value>
   </synonym>
   <type>
    <types>DefinedType.typeAmount</types>
@@ -560,7 +560,7 @@
   </synonym>
   <synonym>
    <key>tr</key>
-   <value>Extra direct cost tax amount</value>
+   <value>Ekstra doğrudan maliyet vergi miktarı</value>
   </synonym>
   <type>
    <types>DefinedType.typeAmount</types>

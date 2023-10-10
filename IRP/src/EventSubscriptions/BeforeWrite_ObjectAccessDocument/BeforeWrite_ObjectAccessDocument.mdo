@@ -11,7 +11,7 @@
  </synonym>
  <synonym>
   <key>tr</key>
-  <value>Before write object access document</value>
+  <value>Yazma öncesi nesne erişim belgesi</value>
  </synonym>
  <source>
   <types>DocumentObject</types>

@@ -162,7 +162,7 @@
     </editFormat>
     <editFormat>
      <key>tr</key>
-     <value>BF=Single; BT=Multi</value>
+     <value>BF=Tek; BT=Зoklu</value>
     </editFormat>
    </extInfo>
   </items>
@@ -329,7 +329,7 @@
   </title>
   <title>
    <key>tr</key>
-   <value>Multiline</value>
+   <value>Çok satırlı</value>
   </title>
   <id>2</id>
   <valueType>
@@ -354,7 +354,7 @@
   </title>
   <title>
    <key>tr</key>
-   <value>Delimiter</value>
+   <value>Ayırıcı</value>
   </title>
   <id>3</id>
   <valueType>

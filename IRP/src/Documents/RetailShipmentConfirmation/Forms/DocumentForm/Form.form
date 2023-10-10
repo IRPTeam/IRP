@@ -2620,7 +2620,7 @@
       </title>
       <title>
        <key>tr</key>
-       <value>Group shipment left</value>
+       <value>Grup sevkiyat sol</value>
       </title>
       <extendedTooltip>
        <name>GroupShipmentLeftExtendedTooltip</name>
@@ -2663,7 +2663,7 @@
        </title>
        <title>
         <key>tr</key>
-        <value>Ship from address</value>
+        <value>Gцnderen adresi</value>
        </title>
        <visible>true</visible>
        <enabled>true</enabled>
@@ -2839,7 +2839,7 @@
       </title>
       <title>
        <key>tr</key>
-       <value>Group shipment right</value>
+       <value>Grup sevkiyat hakkı</value>
       </title>
       <extendedTooltip>
        <name>GroupShipmentRightExtendedTooltip</name>
@@ -2881,7 +2881,7 @@
      </title>
      <title>
       <key>tr</key>
-      <value>Group shipment top</value>
+      <value>Grup sevkiyat ьst</value>
      </title>
      <extendedTooltip>
       <name>GroupShipmentTopExtendedTooltip</name>
@@ -2924,7 +2924,7 @@
     </title>
     <title>
      <key>tr</key>
-     <value>Shipment</value>
+     <value>Sevkiyat</value>
     </title>
     <horizontalStretch>true</horizontalStretch>
     <extendedTooltip>
@@ -5677,7 +5677,7 @@
   </title>
   <title>
    <key>tr</key>
-   <value>Edit quantity in base unit</value>
+   <value>Temel birimde miktarı düzenle</value>
   </title>
   <id>8</id>
   <use>

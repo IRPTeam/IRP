@@ -16,7 +16,7 @@
  </synonym>
  <synonym>
   <key>tr</key>
-  <value>Retail shipment confirmation transaction types</value>
+  <value>Perakende sevkiyat onayı işlem türleri</value>
  </synonym>
  <quickChoice>true</quickChoice>
  <choiceMode>BothWays</choiceMode>
@@ -32,7 +32,7 @@
   </synonym>
   <synonym>
    <key>tr</key>
-   <value>Courier delivery</value>
+   <value>Kurye teslimatı</value>
   </synonym>
  </enumValues>
  <enumValues uuid="a83bfc5b-bb69-4feb-aa1a-443f4afc6a42">

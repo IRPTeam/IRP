@@ -20,7 +20,7 @@
  </synonym>
  <synonym>
   <key>tr</key>
-  <value>T7051 Production duration details</value>
+  <value>T7051 Üretim süresi detayları</value>
  </synonym>
  <useStandardCommands>true</useStandardCommands>
  <editType>InDialog</editType>
@@ -39,7 +39,7 @@
   </synonym>
   <synonym>
    <key>tr</key>
-   <value>Duration</value>
+   <value>Sьre</value>
   </synonym>
   <type>
    <types>Number</types>

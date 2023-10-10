@@ -15,7 +15,7 @@
  </synonym>
  <synonym>
   <key>tr</key>
-  <value>Additional document tables check</value>
+  <value>Ek belge tabloları kontrolü</value>
  </synonym>
  <useStandardCommands>true</useStandardCommands>
  <mainDataCompositionSchema>Report.AdditionalDocumentTablesCheck.Template.Template</mainDataCompositionSchema>

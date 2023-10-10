@@ -198,7 +198,7 @@
   </title>
   <title>
    <key>tr</key>
-   <value>Code text</value>
+   <value>Kod metni</value>
   </title>
   <id>1</id>
   <valueType>
@@ -224,7 +224,7 @@
   </title>
   <title>
    <key>tr</key>
-   <value>Object table</value>
+   <value>Nesne tablosu</value>
   </title>
   <id>2</id>
   <valueType>
@@ -274,7 +274,7 @@
   </title>
   <title>
    <key>tr</key>
-   <value>Run code</value>
+   <value>Kod çalıştır</value>
   </title>
   <id>1</id>
   <use>

@@ -16,7 +16,7 @@
  </synonym>
  <synonym>
   <key>tr</key>
-  <value>Expense types</value>
+  <value>Gider tьrleri</value>
  </synonym>
  <quickChoice>true</quickChoice>
  <choiceMode>BothWays</choiceMode>
@@ -32,7 +32,7 @@
   </synonym>
   <synonym>
    <key>tr</key>
-   <value>General expenses</value>
+   <value>Genel giderler</value>
   </synonym>
  </enumValues>
  <enumValues uuid="c3aa5289-b0c8-4584-b739-9f53f360d4d3">
@@ -47,7 +47,7 @@
   </synonym>
   <synonym>
    <key>tr</key>
-   <value>Production costs</value>
+   <value>Ьretim maliyetleri</value>
   </synonym>
  </enumValues>
 </mdclass:Enum>

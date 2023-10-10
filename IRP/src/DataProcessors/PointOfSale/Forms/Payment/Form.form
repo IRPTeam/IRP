@@ -42,7 +42,7 @@
    <commandName>Form.Command.SearchByBarcode</commandName>
    <representation>Auto</representation>
    <autoMaxWidth>true</autoMaxWidth>
-   <height>2</height>
+   <height>1</height>
    <autoMaxHeight>true</autoMaxHeight>
    <placementArea>UserCmds</placementArea>
    <representationInContextMenu>Auto</representationInContextMenu>
@@ -86,6 +86,153 @@
     <horizontalAlign>Left</horizontalAlign>
    </extInfo>
   </items>
+  <items xsi:type="form:FormGroup">
+   <name>AdditionalCommandBar</name>
+   <id>310</id>
+   <items xsi:type="form:FormGroup">
+    <name>AdditionalSettings</name>
+    <id>312</id>
+    <items xsi:type="form:Button">
+     <name>ReconnectFiscalPrinter</name>
+     <id>314</id>
+     <visible>true</visible>
+     <enabled>true</enabled>
+     <userVisible>
+      <common>true</common>
+     </userVisible>
+     <extendedTooltip>
+      <name>ReconnectFiscalPrinterExtendedTooltip</name>
+      <id>315</id>
+      <visible>true</visible>
+      <enabled>true</enabled>
+      <userVisible>
+       <common>true</common>
+      </userVisible>
+      <type>Label</type>
+      <autoMaxWidth>true</autoMaxWidth>
+      <autoMaxHeight>true</autoMaxHeight>
+      <extInfo xsi:type="form:LabelDecorationExtInfo">
+       <horizontalAlign>Left</horizontalAlign>
+      </extInfo>
+     </extendedTooltip>
+     <commandName>Form.Command.ReconnectFiscalPrinter</commandName>
+     <representation>Auto</representation>
+     <autoMaxWidth>true</autoMaxWidth>
+     <autoMaxHeight>true</autoMaxHeight>
+     <placementArea>UserCmds</placementArea>
+     <representationInContextMenu>Auto</representationInContextMenu>
+    </items>
+    <items xsi:type="form:Button">
+     <name>ActivateOKButton</name>
+     <id>316</id>
+     <visible>true</visible>
+     <enabled>true</enabled>
+     <userVisible>
+      <common>true</common>
+     </userVisible>
+     <extendedTooltip>
+      <name>ActivateOKButtonExtendedTooltip</name>
+      <id>317</id>
+      <visible>true</visible>
+      <enabled>true</enabled>
+      <userVisible>
+       <common>true</common>
+      </userVisible>
+      <type>Label</type>
+      <autoMaxWidth>true</autoMaxWidth>
+      <autoMaxHeight>true</autoMaxHeight>
+      <extInfo xsi:type="form:LabelDecorationExtInfo">
+       <horizontalAlign>Left</horizontalAlign>
+      </extInfo>
+     </extendedTooltip>
+     <commandName>Form.Command.ActivateOKButton</commandName>
+     <representation>Auto</representation>
+     <autoMaxWidth>true</autoMaxWidth>
+     <autoMaxHeight>true</autoMaxHeight>
+     <placementArea>UserCmds</placementArea>
+     <representationInContextMenu>Auto</representationInContextMenu>
+    </items>
+    <visible>true</visible>
+    <enabled>true</enabled>
+    <userVisible>
+     <common>true</common>
+    </userVisible>
+    <title>
+     <key>en</key>
+     <value>Additional settings</value>
+    </title>
+    <title>
+     <key>ru</key>
+     <value>Дополнительные настройки</value>
+    </title>
+    <title>
+     <key>tr</key>
+     <value>Ek ayarlar</value>
+    </title>
+    <extendedTooltip>
+     <name>AdditionalSettingsExtendedTooltip</name>
+     <id>313</id>
+     <visible>true</visible>
+     <enabled>true</enabled>
+     <userVisible>
+      <common>true</common>
+     </userVisible>
+     <type>Label</type>
+     <autoMaxWidth>true</autoMaxWidth>
+     <autoMaxHeight>true</autoMaxHeight>
+     <extInfo xsi:type="form:LabelDecorationExtInfo">
+      <horizontalAlign>Left</horizontalAlign>
+     </extInfo>
+    </extendedTooltip>
+    <type>Popup</type>
+    <extInfo xsi:type="form:PopupGroupExtInfo">
+     <picture xsi:type="core:PictureRef">
+      <picture>CommonPicture.Settings</picture>
+     </picture>
+     <representation>Picture</representation>
+    </extInfo>
+   </items>
+   <visible>true</visible>
+   <enabled>true</enabled>
+   <userVisible>
+    <common>true</common>
+   </userVisible>
+   <title>
+    <key>en</key>
+    <value>Additional command bar</value>
+   </title>
+   <title>
+    <key>ru</key>
+    <value>Дополнительная командная панель</value>
+   </title>
+   <title>
+    <key>tr</key>
+    <value>Ek komut çubuğu</value>
+   </title>
+   <height>1</height>
+   <horizontalStretch>false</horizontalStretch>
+   <groupHorizontalAlign>Center</groupHorizontalAlign>
+   <groupVerticalAlign>Center</groupVerticalAlign>
+   <extendedTooltip>
+    <name>AdditionalCommandBarExtendedTooltip</name>
+    <id>311</id>
+    <visible>true</visible>
+    <enabled>true</enabled>
+    <userVisible>
+     <common>true</common>
+    </userVisible>
+    <type>Label</type>
+    <autoMaxWidth>true</autoMaxWidth>
+    <autoMaxHeight>true</autoMaxHeight>
+    <extInfo xsi:type="form:LabelDecorationExtInfo">
+     <horizontalAlign>Left</horizontalAlign>
+    </extInfo>
+   </extendedTooltip>
+   <type>CommandBar</type>
+   <extInfo xsi:type="form:CommandBarExtInfo">
+    <horizontalAlign>Left</horizontalAlign>
+   </extInfo>
+  </items>
   <items xsi:type="form:Button">
    <name>FormCloseButton</name>
    <id>31</id>
@@ -116,7 +263,7 @@
    <autoMaxHeight>true</autoMaxHeight>
    <placementArea>UserCmds</placementArea>
    <font xsi:type="core:FontRef">
-    <font>Style.ExtraLargeTextFont</font>
+    <font>Style.NormalTextFont</font>
    </font>
    <representationInContextMenu>Auto</representationInContextMenu>
   </items>
@@ -473,7 +620,7 @@
    </title>
    <title>
     <key>tr</key>
-    <value>Group bank type list</value>
+    <value>Grup banka tьrь listesi</value>
    </title>
    <width>20</width>
    <horizontalStretch>true</horizontalStretch>
@@ -744,7 +891,7 @@
       </title>
       <title>
        <key>tr</key>
-       <value>Group payment by acquiring</value>
+       <value>Grup ödeme tarafından edinme</value>
       </title>
       <horizontalStretch>true</horizontalStretch>
       <groupHorizontalAlign>Left</groupHorizontalAlign>
@@ -832,7 +979,7 @@
      </title>
      <title>
       <key>tr</key>
-      <value>Group payment by acquiring top</value>
+      <value>Grup ödeme tarafından edinme üst</value>
      </title>
      <extendedTooltip>
       <name>GroupPaymentByAcquiringTopExtendedTooltip</name>
@@ -1187,7 +1334,7 @@
       </toolTip>
       <toolTip>
        <key>tr</key>
-       <value>RRN code</value>
+       <value>RRN kodu</value>
       </toolTip>
       <extendedTooltip>
        <name>PaymentsRRNCodeExtendedTooltip</name>
@@ -1240,7 +1387,7 @@
        </inputHint>
        <inputHint>
         <key>tr</key>
-        <value>RRN Code</value>
+        <value>RRN Kodu</value>
        </inputHint>
       </extInfo>
      </items>
@@ -1725,7 +1872,7 @@
       </title>
       <title>
        <key>tr</key>
-       <value>Decoration wait</value>
+       <value>Dekorasyon bekle</value>
       </title>
       <visible>true</visible>
       <enabled>true</enabled>
@@ -3533,7 +3680,7 @@
    </title>
    <title>
     <key>tr</key>
-    <value>Payment info</value>
+    <value>Цdeme bilgisi</value>
    </title>
    <id>35</id>
    <valueType>
@@ -3612,7 +3759,7 @@
    </title>
    <title>
     <key>tr</key>
-    <value>Payment done</value>
+    <value>Ödeme yapıldı</value>
    </title>
    <id>44</id>
    <valueType>
@@ -3637,7 +3784,7 @@
    </title>
    <title>
     <key>tr</key>
-    <value>Payment agent legal name contract</value>
+    <value>Ödeme acentesi yasal adı sözleşme</value>
    </title>
    <id>56</id>
    <valueType>
@@ -3662,7 +3809,7 @@
    </title>
    <title>
     <key>tr</key>
-    <value>Payment agent legal name</value>
+    <value>Ödeme acentesi yasal adı</value>
    </title>
    <id>57</id>
    <valueType>
@@ -3687,7 +3834,7 @@
    </title>
    <title>
     <key>tr</key>
-    <value>Payment agent partner</value>
+    <value>Ödeme acentesi ortağı</value>
    </title>
    <id>58</id>
    <valueType>
@@ -3712,7 +3859,7 @@
    </title>
    <title>
     <key>tr</key>
-    <value>Payment agent partner terms</value>
+    <value>Ödeme acentesi ortak şartları</value>
    </title>
    <id>59</id>
    <valueType>
@@ -3762,7 +3909,7 @@
    </title>
    <title>
     <key>tr</key>
-    <value>Can be deleted</value>
+    <value>Silinebilir</value>
    </title>
    <id>64</id>
    <valueType>
@@ -4237,7 +4384,7 @@
    </title>
    <title>
     <key>tr</key>
-    <value>Legalname</value>
+    <value>Yasal ad</value>
    </title>
    <id>54</id>
    <valueType>
@@ -4442,7 +4589,7 @@
   </title>
   <title>
    <key>tr</key>
-   <value>Retail basis</value>
+   <value>Perakende temeli</value>
   </title>
   <id>42</id>
   <valueType>
@@ -4492,7 +4639,7 @@
   </title>
   <title>
    <key>tr</key>
-   <value>Bank payment type list</value>
+   <value>Banka цdeme tьrь listesi</value>
   </title>
   <id>48</id>
   <valueType>
@@ -4737,7 +4884,7 @@ WHERE
   </title>
   <title>
    <key>tr</key>
-   <value>Return in the same consolidate sales</value>
+   <value>Aynı konsolide satışta iade</value>
   </title>
   <id>50</id>
   <valueType>
@@ -4762,7 +4909,7 @@ WHERE
   </title>
   <title>
    <key>tr</key>
-   <value>Certificate payment types</value>
+   <value>Sertifika цdeme tьrleri</value>
   </title>
   <id>63</id>
   <valueType>
@@ -5363,7 +5510,7 @@ WHERE
   </title>
   <title>
    <key>tr</key>
-   <value>Pay</value>
+   <value>Цde</value>
   </title>
   <id>27</id>
   <use>
@@ -5450,7 +5597,7 @@ WHERE
   </title>
   <title>
    <key>tr</key>
-   <value>Set payment check</value>
+   <value>Цdeme зekini ayarla</value>
   </title>
   <id>31</id>
   <use>
@@ -5475,7 +5622,7 @@ WHERE
   </title>
   <title>
    <key>tr</key>
-   <value>Set payment uncheck</value>
+   <value>Ödeme işaretini kaldır</value>
   </title>
   <id>32</id>
   <use>
@@ -5519,6 +5666,56 @@ bul (F7)</value>
    </handler>
   </action>
   <representation>Picture</representation>
+  <currentRowUse>Auto</currentRowUse>
+ </formCommands>
+ <formCommands>
+  <name>ReconnectFiscalPrinter</name>
+  <title>
+   <key>en</key>
+   <value>Reconnect fiscal printer</value>
+  </title>
+  <title>
+   <key>ru</key>
+   <value>Переподключить фискальный принтер</value>
+  </title>
+  <title>
+   <key>tr</key>
+   <value>Fiskal yazıcıyı yeniden bağla</value>
+  </title>
+  <id>34</id>
+  <use>
+   <common>true</common>
+  </use>
+  <action xsi:type="form:FormCommandHandlerContainer">
+   <handler>
+    <name>ReconnectFiscalPrinter</name>
+   </handler>
+  </action>
+  <currentRowUse>Auto</currentRowUse>
+ </formCommands>
+ <formCommands>
+  <name>ActivateOKButton</name>
+  <title>
+   <key>en</key>
+   <value>Activate OK button</value>
+  </title>
+  <title>
+   <key>ru</key>
+   <value>Активировать кнопку ОК</value>
+  </title>
+  <title>
+   <key>tr</key>
+   <value>Tamam düğmesini etkinleştir</value>
+  </title>
+  <id>35</id>
+  <use>
+   <common>true</common>
+  </use>
+  <action xsi:type="form:FormCommandHandlerContainer">
+   <handler>
+    <name>ActivateOKButton</name>
+   </handler>
+  </action>
   <currentRowUse>Auto</currentRowUse>
  </formCommands>
  <parameters>

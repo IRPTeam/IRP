@@ -11,7 +11,7 @@
  </synonym>
  <synonym>
   <key>tr</key>
-  <value>Doc retail goods receipt server</value>
+  <value>Belge perakende mal alımı sunucusu</value>
  </synonym>
  <server>true</server>
  <serverCall>true</serverCall>

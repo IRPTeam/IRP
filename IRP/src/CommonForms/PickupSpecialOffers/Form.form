@@ -136,7 +136,7 @@
      </title>
      <title>
       <key>tr</key>
-      <value>Presentetion</value>
+      <value>Sunum</value>
      </title>
      <extendedTooltip>
       <name>OffersGroupPresentationExtendedTooltip</name>
@@ -1071,7 +1071,7 @@
    </title>
    <title>
     <key>tr</key>
-    <value>Total in group offers</value>
+    <value>Grup tekliflerinde toplam</value>
    </title>
    <id>25</id>
    <valueType>
@@ -1096,7 +1096,7 @@
    </title>
    <title>
     <key>tr</key>
-    <value>All rule is ok</value>
+    <value>Tьm kural tamam</value>
    </title>
    <id>26</id>
    <valueType>
@@ -1146,7 +1146,7 @@
    </title>
    <title>
     <key>tr</key>
-    <value>Ready offer</value>
+    <value>Hazır teklif</value>
    </title>
    <id>28</id>
    <valueType>
@@ -1250,7 +1250,7 @@
    </title>
    <title>
     <key>tr</key>
-    <value>Offer group type</value>
+    <value>Teklif grubu tьrь</value>
    </title>
    <id>32</id>
    <valueType>
@@ -1275,7 +1275,7 @@
    </title>
    <title>
     <key>tr</key>
-    <value>Is rule</value>
+    <value>Kuraldır</value>
    </title>
    <id>33</id>
    <valueType>

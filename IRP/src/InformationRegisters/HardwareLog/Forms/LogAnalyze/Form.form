@@ -78,7 +78,7 @@
     </toolTip>
     <toolTip>
      <key>tr</key>
-     <value>Time zone</value>
+     <value>Saat dilimi</value>
     </toolTip>
     <extendedTooltip>
      <name>TimeZoneExtendedTooltip</name>
@@ -234,7 +234,7 @@
    </title>
    <title>
     <key>tr</key>
-    <value>Log settings</value>
+    <value>Günlük ayarları</value>
    </title>
    <extendedTooltip>
     <name>GroupLogSettingsExtendedTooltip</name>
@@ -947,7 +947,7 @@
    </title>
    <title>
     <key>tr</key>
-    <value>Data Info</value>
+    <value>Veri Bilgisi</value>
    </title>
    <extendedTooltip>
     <name>GroupDataInfoExtendedTooltip</name>
@@ -1125,7 +1125,7 @@
   </title>
   <title>
    <key>tr</key>
-   <value>Time zone</value>
+   <value>Saat dilimi</value>
   </title>
   <id>3</id>
   <valueType>
@@ -1153,7 +1153,7 @@
   </title>
   <title>
    <key>tr</key>
-   <value>Transaction list</value>
+   <value>İşlem listesi</value>
   </title>
   <id>4</id>
   <valueType>
@@ -1305,7 +1305,7 @@
    </title>
    <title>
     <key>tr</key>
-    <value>Print info</value>
+    <value>Bilgiyi yazdır</value>
    </title>
    <id>12</id>
    <valueType>
@@ -1412,7 +1412,7 @@
   </title>
   <title>
    <key>tr</key>
-   <value>Print data</value>
+   <value>Veriyi yazdır</value>
   </title>
   <id>2</id>
   <use>

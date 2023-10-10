@@ -716,7 +716,7 @@
     </title>
     <title>
      <key>tr</key>
-     <value>Type filter</value>
+     <value>Tьr filtresi</value>
     </title>
     <extendedTooltip>
      <name>GroupTypeFilterExtendedTooltip</name>
@@ -2818,7 +2818,7 @@
   </title>
   <title>
    <key>tr</key>
-   <value>Type filter</value>
+   <value>Tьr filtresi</value>
   </title>
   <id>3</id>
   <valueType>
@@ -2844,7 +2844,7 @@
   </title>
   <title>
    <key>tr</key>
-   <value>Form add data</value>
+   <value>Forma veri ekle</value>
   </title>
   <id>4</id>
   <valueType/>

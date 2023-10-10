@@ -178,7 +178,7 @@
     </title>
     <title>
      <key>tr</key>
-     <value>Top Group</value>
+     <value>Ьst Grup</value>
     </title>
     <extendedTooltip>
      <name>TopGroupExtendedTooltip</name>
@@ -583,7 +583,7 @@
       </title>
       <title>
        <key>tr</key>
-       <value>The third line of the ItemList group</value>
+       <value>ItemList grubunun üçüncü satırı</value>
       </title>
       <extendedTooltip>
        <name>ItemListGroupThirdRowExtendedTooltip</name>
@@ -1965,7 +1965,7 @@ WHERE
   </title>
   <title>
    <key>tr</key>
-   <value>Hide decoration</value>
+   <value>Dekorasyonu gizle</value>
   </title>
   <id>5</id>
   <valueType>

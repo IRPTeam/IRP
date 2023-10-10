@@ -186,7 +186,7 @@
   </synonym>
   <synonym>
    <key>tr</key>
-   <value>Other company</value>
+   <value>Diğer şirket</value>
   </synonym>
   <type>
    <types>CatalogRef.Companies</types>
@@ -581,7 +581,7 @@
    </synonym>
    <synonym>
     <key>tr</key>
-    <value>Payment period</value>
+    <value>Цdeme dцnemi</value>
    </synonym>
    <type>
     <types>CatalogRef.PlanningPeriods</types>
@@ -609,7 +609,7 @@
    </synonym>
    <synonym>
     <key>tr</key>
-    <value>Financial movement type (other company)</value>
+    <value>Finansal hareket türü (diğer şirket)</value>
    </synonym>
    <type>
     <types>CatalogRef.ExpenseAndRevenueTypes</types>
@@ -631,7 +631,7 @@
    </synonym>
    <synonym>
     <key>tr</key>
-    <value>VAT</value>
+    <value>KDV</value>
    </synonym>
    <type>
     <types>CatalogRef.TaxRates</types>
@@ -658,7 +658,7 @@
   </synonym>
   <synonym>
    <key>tr</key>
-   <value>DELETE tax list</value>
+   <value>Vergi listesini SİL</value>
   </synonym>
   <attributes uuid="b470cbd6-81dc-4b8c-88f5-e44a658ab615">
    <name>Key</name>

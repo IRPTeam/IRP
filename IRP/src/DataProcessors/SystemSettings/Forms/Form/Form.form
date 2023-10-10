@@ -416,7 +416,7 @@
   </title>
   <title>
    <key>tr</key>
-   <value>Time zone</value>
+   <value>Saat dilimi</value>
   </title>
   <extendedTooltip>
    <name>GroupTimeZoneExtendedTooltip</name>
@@ -675,7 +675,7 @@ After that - all jobs in CURRENT session will be start as common code, not like 
   </title>
   <title>
    <key>tr</key>
-   <value>Info base time zone</value>
+   <value>Bilgi tabanı zaman dilimi</value>
   </title>
   <id>4</id>
   <valueType>
@@ -701,7 +701,7 @@ After that - all jobs in CURRENT session will be start as common code, not like 
   </title>
   <title>
    <key>tr</key>
-   <value>Current database time zone</value>
+   <value>Mevcut veritabanı saat dilimi</value>
   </title>
   <id>5</id>
   <valueType>
@@ -727,7 +727,7 @@ After that - all jobs in CURRENT session will be start as common code, not like 
   </title>
   <title>
    <key>tr</key>
-   <value>Current session time zone</value>
+   <value>Mevcut oturum saat dilimi</value>
   </title>
   <id>6</id>
   <valueType>
@@ -753,7 +753,7 @@ After that - all jobs in CURRENT session will be start as common code, not like 
   </title>
   <title>
    <key>tr</key>
-   <value>Current database time</value>
+   <value>Mevcut veritabanı saati</value>
   </title>
   <id>7</id>
   <valueType>
@@ -779,7 +779,7 @@ After that - all jobs in CURRENT session will be start as common code, not like 
   </title>
   <title>
    <key>tr</key>
-   <value>Current session time</value>
+   <value>Mevcut oturum sьresi</value>
   </title>
   <id>8</id>
   <valueType>
@@ -805,7 +805,7 @@ After that - all jobs in CURRENT session will be start as common code, not like 
   </title>
   <title>
    <key>tr</key>
-   <value>Current user PC time</value>
+   <value>Mevcut kullanıcı PC zamanı</value>
   </title>
   <id>9</id>
   <valueType>
@@ -831,7 +831,7 @@ After that - all jobs in CURRENT session will be start as common code, not like 
   </title>
   <title>
    <key>tr</key>
-   <value>Session time zone</value>
+   <value>Oturum zaman dilimi</value>
   </title>
   <id>10</id>
   <valueType>
@@ -857,7 +857,7 @@ After that - all jobs in CURRENT session will be start as common code, not like 
   </title>
   <title>
    <key>tr</key>
-   <value>Update time info</value>
+   <value>Zaman bilgisini gьncelle</value>
   </title>
   <id>1</id>
   <use>

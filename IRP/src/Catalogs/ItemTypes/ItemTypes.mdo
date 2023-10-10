@@ -301,7 +301,7 @@
   </synonym>
   <synonym>
    <key>tr</key>
-   <value>Single row</value>
+   <value>Tek satır</value>
   </synonym>
   <type>
    <types>Boolean</types>
@@ -324,7 +324,7 @@
   </synonym>
   <synonym>
    <key>tr</key>
-   <value>Not use line grouping</value>
+   <value>Satır gruplamasını kullanma</value>
   </synonym>
   <type>
    <types>Boolean</types>

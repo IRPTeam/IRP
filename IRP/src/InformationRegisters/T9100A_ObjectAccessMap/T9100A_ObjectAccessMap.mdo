@@ -20,7 +20,7 @@
  </synonym>
  <synonym>
   <key>tr</key>
-  <value>T9100A Object access map</value>
+  <value>T9100A Nesne erişim haritası</value>
  </synonym>
  <editType>InDialog</editType>
  <dataLockControlMode>Managed</dataLockControlMode>
@@ -34,7 +34,7 @@
  </recordPresentation>
  <recordPresentation>
   <key>tr</key>
-  <value>T9100A Object access map</value>
+  <value>T9100A Nesne erişim haritası</value>
  </recordPresentation>
  <listPresentation>
   <key>en</key>
@@ -46,7 +46,7 @@
  </listPresentation>
  <listPresentation>
   <key>tr</key>
-  <value>T9100A Object access maps</value>
+  <value>T9100A Nesne erişim haritaları</value>
  </listPresentation>
  <resources uuid="2ad68611-af0a-4917-ba1e-28b5a9a945b3">
   <name>ObjectAccessKeys</name>
@@ -60,7 +60,7 @@
   </synonym>
   <synonym>
    <key>tr</key>
-   <value>Object access keys</value>
+   <value>Nesne erişim anahtarları</value>
   </synonym>
   <type>
    <types>CatalogRef.ObjectAccessKeys</types>

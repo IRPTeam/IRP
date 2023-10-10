@@ -11,7 +11,7 @@
  </synonym>
  <synonym>
   <key>tr</key>
-  <value>Object access full access</value>
+  <value>Nesne erişim tam erişim</value>
  </synonym>
  <server>true</server>
  <privileged>true</privileged>

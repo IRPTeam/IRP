@@ -18,7 +18,7 @@
  </synonym>
  <synonym>
   <key>tr</key>
-  <value>Time sheet</value>
+  <value>Zaman зizelgesi</value>
  </synonym>
  <useStandardCommands>true</useStandardCommands>
  <inputByString>Document.TimeSheet.StandardAttribute.Number</inputByString>
@@ -62,7 +62,7 @@
  </listPresentation>
  <listPresentation>
   <key>tr</key>
-  <value>Time sheets</value>
+  <value>Zaman зizelgeleri</value>
  </listPresentation>
  <numberLength>12</numberLength>
  <numberAllowedLength>Variable</numberAllowedLength>
@@ -221,7 +221,7 @@
   </synonym>
   <synonym>
    <key>tr</key>
-   <value>Time sheet list</value>
+   <value>Zaman зizelgesi listesi</value>
   </synonym>
   <attributes uuid="ef268511-a3cb-401c-8592-286ec850cf62">
    <name>Key</name>
@@ -312,7 +312,7 @@
    </synonym>
    <synonym>
     <key>tr</key>
-    <value>Position</value>
+    <value>Pozisyon</value>
    </synonym>
    <type>
     <types>CatalogRef.EmployeePositions</types>
@@ -335,7 +335,7 @@
    </synonym>
    <synonym>
     <key>tr</key>
-    <value>Accrual and deduction type</value>
+    <value>Tahakkuk ve kesinti tьrь</value>
    </synonym>
    <type>
     <types>CatalogRef.AccrualAndDeductionTypes</types>

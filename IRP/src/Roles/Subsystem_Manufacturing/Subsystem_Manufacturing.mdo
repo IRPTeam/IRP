@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mdclass:Role xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="55a49c5a-1153-4faa-9a32-fe5a9e472186">
+ <name>Subsystem_Manufacturing</name>
+ <synonym>
+  <key>en</key>
+  <value>Subsystem Manufacturing</value>
+ </synonym>
+ <synonym>
+  <key>ru</key>
+  <value>Подсистема Производство</value>
+ </synonym>
+ <synonym>
+  <key>tr</key>
+  <value>Üretim Alt Sistemi</value>
+ </synonym>
+</mdclass:Role>

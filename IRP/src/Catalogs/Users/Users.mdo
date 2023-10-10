@@ -323,7 +323,7 @@
   </synonym>
   <synonym>
    <key>tr</key>
-   <value>Time zone</value>
+   <value>Saat dilimi</value>
   </synonym>
   <type>
    <types>String</types>
@@ -349,7 +349,7 @@
   </synonym>
   <synonym>
    <key>tr</key>
-   <value>User ID</value>
+   <value>Kullanıcı Kimliği</value>
   </synonym>
   <type>
    <types>DefinedType.typeBarcode</types>
@@ -520,4 +520,27 @@
   <usePurposes>PersonalComputer</usePurposes>
   <usePurposes>MobileDevice</usePurposes>
  </forms>
+ <commands uuid="ce88bd40-884d-49ed-9983-4abdc36bc4dc">
+  <name>RunSession</name>
+  <synonym>
+   <key>en</key>
+   <value>Run session</value>
+  </synonym>
+  <synonym>
+   <key>ru</key>
+   <value>Запустить сессию</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Oturumu çalıştır</value>
+  </synonym>
+  <group>CommandGroup.Service</group>
+  <commandParameterType>
+   <types>CatalogRef.Users</types>
+  </commandParameterType>
+  <representation>Auto</representation>
+  <picture xsi:type="core:PictureRef">
+   <picture>StdPicture.ActiveUsers</picture>
+  </picture>
+ </commands>
 </mdclass:Catalog>

@@ -376,7 +376,7 @@
         </title>
         <title>
          <key>tr</key>
-         <value>Rights applied</value>
+         <value>Haklar uygulandı</value>
         </title>
         <titleTextColor xsi:type="core:ColorRef">
          <color>Style.SpecialTextColor</color>
@@ -1058,7 +1058,7 @@
            </title>
            <title>
             <key>tr</key>
-            <value>Item list group quantity</value>
+            <value>Öğe listesi grup miktarı</value>
            </title>
            <extendedTooltip>
             <name>ItemListGroupQuantityExtendedTooltip</name>
@@ -2294,7 +2294,7 @@
          </title>
          <title>
           <key>tr</key>
-          <value>Group of clearing receipt</value>
+          <value>Makbuz temizleme grubu</value>
          </title>
          <extendedTooltip>
           <name>ClearReceiptGroupExtendedTooltip</name>
@@ -2494,7 +2494,7 @@
           </title>
           <title>
            <key>tr</key>
-           <value>Postpone receipt (Group)</value>
+           <value>Erteleme makbuzu (Grup)</value>
           </title>
           <extendedTooltip>
            <name>PostponeReceiptExtendedTooltip</name>
@@ -5007,7 +5007,7 @@
          </title>
          <title>
           <key>tr</key>
-          <value>Special offers group Offer</value>
+          <value>Цzel teklifler grubu Teklif</value>
          </title>
          <extendedTooltip>
           <name>SpecialOffersGroupOfferExtendedTooltip</name>
@@ -5148,7 +5148,7 @@
          </title>
          <title>
           <key>tr</key>
-          <value>Special offers group Bonus</value>
+          <value>Цzel teklifler grubu Bonus</value>
          </title>
          <extendedTooltip>
           <name>SpecialOffersGroupBonusExtendedTooltip</name>
@@ -7464,7 +7464,7 @@ End</presentationExpression>
     </title>
     <title>
      <key>tr</key>
-     <value>Retail basis</value>
+     <value>Perakende temeli</value>
     </title>
     <id>190</id>
     <valueType>
@@ -7489,7 +7489,7 @@ End</presentationExpression>
     </title>
     <title>
      <key>tr</key>
-     <value>Retail basis quantity</value>
+     <value>Perakende temel miktarı</value>
     </title>
     <id>195</id>
     <valueType>
@@ -7514,7 +7514,7 @@ End</presentationExpression>
     </title>
     <title>
      <key>tr</key>
-     <value>Control code string state</value>
+     <value>Kontrol kodu dize durumu</value>
     </title>
     <id>209</id>
     <valueType>
@@ -8273,7 +8273,7 @@ End</presentationExpression>
   </title>
   <title>
    <key>tr</key>
-   <value>Retail sales receipt (basis)</value>
+   <value>Perakende satış fişi (temel)</value>
   </title>
   <id>191</id>
   <valueType>
@@ -8298,7 +8298,7 @@ End</presentationExpression>
   </title>
   <title>
    <key>tr</key>
-   <value>Basis payments</value>
+   <value>Temel цdemeler</value>
   </title>
   <id>192</id>
   <valueType>
@@ -8373,7 +8373,7 @@ End</presentationExpression>
   </title>
   <title>
    <key>tr</key>
-   <value>Retail basis special offers</value>
+   <value>Perakende temel цzel teklifler</value>
   </title>
   <id>198</id>
   <valueType>
@@ -8548,7 +8548,7 @@ End</presentationExpression>
   </title>
   <title>
    <key>tr</key>
-   <value>User admin</value>
+   <value>Kullanıcı yönetici</value>
   </title>
   <id>203</id>
   <valueType>
@@ -8573,7 +8573,7 @@ End</presentationExpression>
   </title>
   <title>
    <key>tr</key>
-   <value>Keep rights</value>
+   <value>Hakları koru</value>
   </title>
   <id>204</id>
   <valueType>
@@ -8598,7 +8598,7 @@ End</presentationExpression>
   </title>
   <title>
    <key>tr</key>
-   <value>User admin by default</value>
+   <value>Kullanıcı varsayılan olarak yönetici</value>
   </title>
   <id>205</id>
   <valueType>
@@ -8624,7 +8624,7 @@ End</presentationExpression>
   </title>
   <title>
    <key>tr</key>
-   <value>Auto calculate offers</value>
+   <value>Teklifleri otomatik hesapla</value>
   </title>
   <id>206</id>
   <valueType>
@@ -8649,7 +8649,7 @@ End</presentationExpression>
   </title>
   <title>
    <key>tr</key>
-   <value>Current item list ID</value>
+   <value>Mevcut öğe listesi ID</value>
   </title>
   <id>210</id>
   <valueType>
@@ -8675,7 +8675,7 @@ End</presentationExpression>
   </title>
   <title>
    <key>tr</key>
-   <value>Postponed receipt</value>
+   <value>Ertelemiş alım</value>
   </title>
   <id>213</id>
   <valueType>
@@ -9338,7 +9338,7 @@ elemanı seç</value>
   </title>
   <title>
    <key>tr</key>
-   <value>Change / Rollback right</value>
+   <value>Değiştirme / Geri alma hakkı</value>
   </title>
   <id>32</id>
   <use>
@@ -9363,7 +9363,7 @@ elemanı seç</value>
   </title>
   <title>
    <key>tr</key>
-   <value>Create and post</value>
+   <value>Oluştur ve yayımla</value>
   </title>
   <id>33</id>
   <use>
@@ -9506,7 +9506,7 @@ document</value>
   </title>
   <title>
    <key>tr</key>
-   <value>Show transactions</value>
+   <value>İşlemleri göster</value>
   </title>
   <id>39</id>
   <use>
@@ -9531,7 +9531,7 @@ document</value>
   </title>
   <title>
    <key>tr</key>
-   <value>Settlement (without shift close)</value>
+   <value>Uzlaşma (vardiya kapanışı olmadan)</value>
   </title>
   <id>40</id>
   <use>
@@ -9556,7 +9556,7 @@ document</value>
   </title>
   <title>
    <key>tr</key>
-   <value>Postpone current receipt</value>
+   <value>Mevcut alımı erteleyin</value>
   </title>
   <id>41</id>
   <use>
@@ -9585,7 +9585,7 @@ document</value>
   </title>
   <title>
    <key>tr</key>
-   <value>Open postponed receipt</value>
+   <value>Açık ertelenmiş makbuz</value>
   </title>
   <id>42</id>
   <use>
@@ -9614,7 +9614,7 @@ document</value>
   </title>
   <title>
    <key>tr</key>
-   <value>Postpone current receipt with reserve</value>
+   <value>Rezervle mevcut makbuzu ertele</value>
   </title>
   <id>43</id>
   <use>
@@ -9643,7 +9643,7 @@ document</value>
   </title>
   <title>
    <key>tr</key>
-   <value>Clear current receipt</value>
+   <value>Mevcut alımı temizle</value>
   </title>
   <id>44</id>
   <use>

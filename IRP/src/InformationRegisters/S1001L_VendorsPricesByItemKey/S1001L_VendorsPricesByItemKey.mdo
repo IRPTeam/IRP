@@ -20,7 +20,7 @@
  </synonym>
  <synonym>
   <key>tr</key>
-  <value>S1001L Vendors prices by item key</value>
+  <value>S1001L Tedarikçi fiyatları ürün anahtarı tarafından</value>
  </synonym>
  <editType>InDialog</editType>
  <informationRegisterPeriodicity>RecorderPosition</informationRegisterPeriodicity>
@@ -38,7 +38,7 @@
  </listPresentation>
  <listPresentation>
   <key>tr</key>
-  <value>S1001L Vendors prices by item key</value>
+  <value>S1001L Tedarikçi fiyatları ürün anahtarı tarafından</value>
  </listPresentation>
  <resources uuid="e4b384e6-4b92-4a83-a2f8-b56a70346dad">
   <name>Price</name>
@@ -75,7 +75,7 @@
   </synonym>
   <synonym>
    <key>tr</key>
-   <value>Total price</value>
+   <value>Toplam fiyat</value>
   </synonym>
   <type>
    <types>DefinedType.typePrice</types>
@@ -98,7 +98,7 @@
   </synonym>
   <synonym>
    <key>tr</key>
-   <value>Net price</value>
+   <value>Net fiyat</value>
   </synonym>
   <type>
    <types>DefinedType.typePrice</types>

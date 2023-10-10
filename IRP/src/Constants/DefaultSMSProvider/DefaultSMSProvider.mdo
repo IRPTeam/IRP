@@ -16,7 +16,7 @@
  </synonym>
  <synonym>
   <key>tr</key>
-  <value>Default SMSProvider</value>
+  <value>Varsayılan SMSProvider</value>
  </synonym>
  <type>
   <types>CatalogRef.IntegrationSettings</types>

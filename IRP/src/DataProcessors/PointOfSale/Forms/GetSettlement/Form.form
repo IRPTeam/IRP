@@ -552,7 +552,7 @@
   </title>
   <title>
    <key>tr</key>
-   <value>Get settlement</value>
+   <value>Цdeme al</value>
   </title>
   <id>1</id>
   <use>
@@ -577,7 +577,7 @@
   </title>
   <title>
    <key>tr</key>
-   <value>Print last settlement</value>
+   <value>Son ödemeyi yazdır</value>
   </title>
   <id>2</id>
   <use>

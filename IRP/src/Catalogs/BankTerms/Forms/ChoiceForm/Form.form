@@ -480,7 +480,7 @@ FROM
   </title>
   <title>
    <key>tr</key>
-   <value>Filter payment type</value>
+   <value>Цdeme tьrьnь filtrele</value>
   </title>
   <id>2</id>
   <valueType>
@@ -505,7 +505,7 @@ FROM
   </title>
   <title>
    <key>tr</key>
-   <value>Filter branch</value>
+   <value>Filtre şubesi</value>
   </title>
   <id>3</id>
   <valueType>

@@ -19,7 +19,7 @@
  </synonym>
  <synonym>
   <key>tr</key>
-  <value>R5015 Other partners transactions</value>
+  <value>R5015 Diğer ortaklar işlemleri</value>
  </synonym>
  <useStandardCommands>true</useStandardCommands>
  <dataLockControlMode>Managed</dataLockControlMode>
@@ -166,7 +166,7 @@
   </synonym>
   <synonym>
    <key>tr</key>
-   <value>Transaction currency</value>
+   <value>İşlem para birimi</value>
   </synonym>
   <type>
    <types>CatalogRef.Currencies</types>

@@ -11,7 +11,7 @@
  </synonym>
  <synonym>
   <key>tr</key>
-  <value>Salary server reuse</value>
+  <value>Maaş sunucusu yeniden kullanımı</value>
  </synonym>
  <server>true</server>
  <serverCall>true</serverCall>

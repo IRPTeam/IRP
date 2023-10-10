@@ -14,7 +14,7 @@
  </synonym>
  <synonym>
   <key>tr</key>
-  <value>Type object with special offers</value>
+  <value>Цzel tekliflerle nesne tьrь</value>
  </synonym>
  <type>
   <types>DocumentObject.PurchaseInvoice</types>

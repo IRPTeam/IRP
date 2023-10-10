@@ -715,7 +715,7 @@
     </title>
     <title>
      <key>tr</key>
-     <value>Main info</value>
+     <value>Ana bilgi</value>
     </title>
     <extendedTooltip>
      <name>GroupMainInfoExtendedTooltip</name>
@@ -1040,7 +1040,7 @@
     </title>
     <title>
      <key>tr</key>
-     <value>Additional info</value>
+     <value>Ek bilgi</value>
     </title>
     <extendedTooltip>
      <name>GroupAdditionalInfoExtendedTooltip</name>
@@ -1230,7 +1230,7 @@
      </title>
      <title>
       <key>tr</key>
-      <value>Price flags</value>
+      <value>Fiyat bayrakları</value>
      </title>
      <extendedTooltip>
       <name>GroupPriceFlagsExtendedTooltip</name>
@@ -1272,7 +1272,7 @@
     </title>
     <title>
      <key>tr</key>
-     <value>Price settings</value>
+     <value>Fiyat ayarları</value>
     </title>
     <extendedTooltip>
      <name>GroupPriceSettingsExtendedTooltip</name>
@@ -1420,7 +1420,7 @@
     </title>
     <title>
      <key>tr</key>
-     <value>Agreement info</value>
+     <value>Anlaşma bilgisi</value>
     </title>
     <extendedTooltip>
      <name>GroupAgreementInfoExtendedTooltip</name>
@@ -1568,7 +1568,7 @@
     </title>
     <title>
      <key>tr</key>
-     <value>Store and delivery</value>
+     <value>Mağaza ve teslimat</value>
     </title>
     <extendedTooltip>
      <name>GroupStoreAndDeliverySettingsExtendedTooltip</name>

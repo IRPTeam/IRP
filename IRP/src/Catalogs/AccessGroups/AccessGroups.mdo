@@ -256,7 +256,7 @@
   </synonym>
   <synonym>
    <key>tr</key>
-   <value>Object access</value>
+   <value>Nesne erişimi</value>
   </synonym>
   <attributes uuid="f7fb02b0-b1fd-40a6-8381-8435f8d55ce0">
    <name>Key</name>
@@ -295,7 +295,7 @@
    </synonym>
    <synonym>
     <key>tr</key>
-    <value>Value ref</value>
+    <value>Değer ref</value>
    </synonym>
    <type>
     <types>AnyRef</types>
@@ -317,7 +317,7 @@
    </synonym>
    <synonym>
     <key>tr</key>
-    <value>Modify</value>
+    <value>Değiştir</value>
    </synonym>
    <type>
     <types>Boolean</types>
@@ -339,10 +339,43 @@
    </synonym>
    <synonym>
     <key>tr</key>
-    <value>Do not control</value>
+    <value>Kontrol etme</value>
    </synonym>
    <type>
     <types>Boolean</types>
+   </type>
+   <minValue xsi:type="core:UndefinedValue"/>
+   <maxValue xsi:type="core:UndefinedValue"/>
+   <dataHistory>Use</dataHistory>
+   <fullTextSearch>Use</fullTextSearch>
+  </attributes>
+  <attributes uuid="cb023c0e-bf66-40f6-8526-8063f7d75bc6">
+   <name>Value</name>
+   <synonym>
+    <key>en</key>
+    <value>Value</value>
+   </synonym>
+   <synonym>
+    <key>ru</key>
+    <value>Значение</value>
+   </synonym>
+   <synonym>
+    <key>tr</key>
+    <value>Değer</value>
+   </synonym>
+   <type>
+    <types>String</types>
+    <types>Date</types>
+    <types>Boolean</types>
+    <types>Number</types>
+    <numberQualifiers>
+     <precision>15</precision>
+     <scale>5</scale>
+    </numberQualifiers>
+    <stringQualifiers>
+     <length>64</length>
+    </stringQualifiers>
+    <dateQualifiers/>
    </type>
    <minValue xsi:type="core:UndefinedValue"/>
    <maxValue xsi:type="core:UndefinedValue"/>

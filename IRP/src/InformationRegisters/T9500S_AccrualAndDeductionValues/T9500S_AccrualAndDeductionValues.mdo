@@ -20,7 +20,7 @@
  </synonym>
  <synonym>
   <key>tr</key>
-  <value>T9500 Accrual and deduction values</value>
+  <value>T9500 Tahakkuk ve kesinti değerleri</value>
  </synonym>
  <useStandardCommands>true</useStandardCommands>
  <editType>InDialog</editType>
@@ -36,7 +36,7 @@
  </recordPresentation>
  <recordPresentation>
   <key>tr</key>
-  <value>T9500 Accrual and deduction values</value>
+  <value>T9500 Tahakkuk ve kesinti değerleri</value>
  </recordPresentation>
  <resources uuid="b59ca333-121f-4f6b-8e16-8c8f767e566d">
   <name>Value</name>
@@ -73,7 +73,7 @@
   </synonym>
   <synonym>
    <key>tr</key>
-   <value>Employee or position</value>
+   <value>Çalışan veya pozisyon</value>
   </synonym>
   <type>
    <types>CatalogRef.Partners</types>
@@ -98,7 +98,7 @@
   </synonym>
   <synonym>
    <key>tr</key>
-   <value>Accual or deduction type</value>
+   <value>Tahakkuk veya kesinti tьrь</value>
   </synonym>
   <type>
    <types>CatalogRef.AccrualAndDeductionTypes</types>

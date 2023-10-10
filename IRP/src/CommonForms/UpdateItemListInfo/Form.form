@@ -78,7 +78,9 @@
   </title>
   <title>
    <key>tr</key>
-   <value>Command bar</value>
+   <value>
+
+</value>
   </title>
   <extendedTooltip>
    <name>GroupCommandBarExtendedTooltip</name>

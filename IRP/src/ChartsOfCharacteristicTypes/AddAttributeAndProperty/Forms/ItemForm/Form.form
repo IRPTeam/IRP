@@ -231,7 +231,7 @@
     </title>
     <title>
      <key>tr</key>
-     <value>Group of value type</value>
+     <value>Değer türü grubu</value>
     </title>
     <extendedTooltip>
      <name>ValueTypeGroupExtendedTooltip</name>

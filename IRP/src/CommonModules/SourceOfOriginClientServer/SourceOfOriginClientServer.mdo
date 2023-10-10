@@ -11,7 +11,7 @@
  </synonym>
  <synonym>
   <key>tr</key>
-  <value>Source of origin client server</value>
+  <value>Köken kaynağı istemci sunucusu</value>
  </synonym>
  <clientManagedApplication>true</clientManagedApplication>
  <server>true</server>

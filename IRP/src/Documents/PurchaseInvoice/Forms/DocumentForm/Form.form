@@ -4769,7 +4769,7 @@
     </title>
     <title>
      <key>tr</key>
-     <value>Prices</value>
+     <value>Fiyatlar</value>
     </title>
     <extendedTooltip>
      <name>GroupPricesExtendedTooltip</name>
@@ -8145,7 +8145,7 @@
   </title>
   <title>
    <key>tr</key>
-   <value>Edit quantity in base unit</value>
+   <value>Temel birimde miktarı düzenle</value>
   </title>
   <id>19</id>
   <use>

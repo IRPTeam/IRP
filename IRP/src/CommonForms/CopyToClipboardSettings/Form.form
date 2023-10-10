@@ -198,7 +198,7 @@
   </title>
   <title>
    <key>tr</key>
-   <value>Copy quantity as</value>
+   <value>Miktarı olarak kopyala</value>
   </title>
   <id>1</id>
   <valueType>
@@ -224,11 +224,36 @@
   </title>
   <title>
    <key>tr</key>
-   <value>Copy selected rows</value>
+   <value>Seçili satırları kopyala</value>
   </title>
   <id>2</id>
   <valueType>
    <types>Boolean</types>
+  </valueType>
+  <view>
+   <common>true</common>
+  </view>
+  <edit>
+   <common>true</common>
+  </edit>
+ </attributes>
+ <attributes>
+  <name>SourceRef</name>
+  <title>
+   <key>en</key>
+   <value>Source ref</value>
+  </title>
+  <title>
+   <key>ru</key>
+   <value>Ссылка источника</value>
+  </title>
+  <title>
+   <key>tr</key>
+   <value>Kaynak ref</value>
+  </title>
+  <id>3</id>
+  <valueType>
+   <types>DocumentRef</types>
   </valueType>
   <view>
    <common>true</common>

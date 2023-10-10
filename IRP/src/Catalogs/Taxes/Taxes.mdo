@@ -367,7 +367,7 @@
   </synonym>
   <synonym>
    <key>tr</key>
-   <value>Transaction types</value>
+   <value>İşlem türleri</value>
   </synonym>
   <attributes uuid="1ef75181-7070-40d7-bc96-216189698656">
    <name>DocumentName</name>
@@ -480,7 +480,7 @@
   </synonym>
   <synonym>
    <key>tr</key>
-   <value>Choice transaction types</value>
+   <value>İşlem türlerini seç</value>
   </synonym>
   <usePurposes>PersonalComputer</usePurposes>
   <usePurposes>MobileDevice</usePurposes>

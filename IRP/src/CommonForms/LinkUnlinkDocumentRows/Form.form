@@ -5050,7 +5050,7 @@
    </title>
    <title>
     <key>tr</key>
-    <value>Stock quantity</value>
+    <value>Stok miktarı</value>
    </title>
    <id>47</id>
    <valueType>
@@ -5684,7 +5684,7 @@
    </title>
    <title>
     <key>tr</key>
-    <value>Stock quantity</value>
+    <value>Stok miktarı</value>
    </title>
    <id>63</id>
    <valueType>
@@ -6345,7 +6345,7 @@
    </title>
    <title>
     <key>tr</key>
-    <value>Stock quantity</value>
+    <value>Stok miktarı</value>
    </title>
    <id>63</id>
    <valueType>
@@ -6653,7 +6653,7 @@
   </title>
   <title>
    <key>tr</key>
-   <value>Calculate rows</value>
+   <value>Satırları hesapla</value>
   </title>
   <id>92</id>
   <valueType>
@@ -6678,7 +6678,7 @@
   </title>
   <title>
    <key>tr</key>
-   <value>Setting key</value>
+   <value>Ayar anahtarı</value>
   </title>
   <id>93</id>
   <valueType>

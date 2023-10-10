@@ -18,7 +18,7 @@
  </synonym>
  <synonym>
   <key>tr</key>
-  <value>Retail goods receipt</value>
+  <value>Perakende mal alımı</value>
  </synonym>
  <useStandardCommands>true</useStandardCommands>
  <inputByString>Document.RetailGoodsReceipt.StandardAttribute.Number</inputByString>
@@ -62,7 +62,7 @@
  </listPresentation>
  <listPresentation>
   <key>tr</key>
-  <value>Retail goods receipts</value>
+  <value>Perakende malzeme teslimatları</value>
  </listPresentation>
  <numberLength>12</numberLength>
  <numberAllowedLength>Variable</numberAllowedLength>
@@ -142,7 +142,7 @@
   </synonym>
   <synonym>
    <key>tr</key>
-   <value>Courier</value>
+   <value>Kurye</value>
   </synonym>
   <type>
    <types>CatalogRef.Partners</types>
@@ -456,7 +456,7 @@
    </synonym>
    <synonym>
     <key>tr</key>
-    <value>Stock quantity</value>
+    <value>Stok miktarı</value>
    </synonym>
    <type>
     <types>DefinedType.typeQuantity</types>
@@ -521,7 +521,7 @@
    </synonym>
    <synonym>
     <key>tr</key>
-    <value>Quantity is fixed</value>
+    <value>Miktar sabittir</value>
    </synonym>
    <type>
     <types>Boolean</types>
@@ -1070,7 +1070,7 @@
   </synonym>
   <synonym>
    <key>tr</key>
-   <value>DELETE consignor batches</value>
+   <value>Göndereni sil toplu işler</value>
   </synonym>
   <attributes uuid="55c33df3-65b2-4ef3-8bf1-8de7f5c8007d">
    <name>Key</name>
@@ -1347,7 +1347,7 @@
   </synonym>
   <synonym>
    <key>tr</key>
-   <value>Retail goods receipt</value>
+   <value>Perakende mal alımı</value>
   </synonym>
   <group>FormCommandBarCreateBasedOn</group>
   <commandParameterType>

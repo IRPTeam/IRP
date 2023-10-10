@@ -16,7 +16,7 @@
  </synonym>
  <synonym>
   <key>tr</key>
-  <value>Address types</value>
+  <value>Adres tьrleri</value>
  </synonym>
  <quickChoice>true</quickChoice>
  <choiceMode>BothWays</choiceMode>
@@ -47,7 +47,7 @@
   </synonym>
   <synonym>
    <key>tr</key>
-   <value>Phisical</value>
+   <value>Fiziksel</value>
   </synonym>
  </enumValues>
  <enumValues uuid="a235c31b-ad9d-4431-b583-95f2933b5e06">
@@ -62,7 +62,7 @@
   </synonym>
   <synonym>
    <key>tr</key>
-   <value>Shipment</value>
+   <value>Sevkiyat</value>
   </synonym>
  </enumValues>
  <enumValues uuid="0270931a-aa87-484f-b087-5b4c3b906721">

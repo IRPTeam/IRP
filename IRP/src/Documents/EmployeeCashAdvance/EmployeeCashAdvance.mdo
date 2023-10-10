@@ -459,7 +459,7 @@
    </synonym>
    <synonym>
     <key>tr</key>
-    <value>VAT</value>
+    <value>KDV</value>
    </synonym>
    <type>
     <types>CatalogRef.TaxRates</types>
@@ -486,7 +486,7 @@
   </synonym>
   <synonym>
    <key>tr</key>
-   <value>DELETE tax list</value>
+   <value>Vergi listesini SİL</value>
   </synonym>
   <attributes uuid="8d4b37f1-e065-40d9-90e2-04a17a2dc1b4">
    <name>Key</name>

@@ -2173,7 +2173,7 @@
   </title>
   <title>
    <key>tr</key>
-   <value>Count scan the same item</value>
+   <value>Aynı öğeyi say</value>
   </title>
   <id>10</id>
   <valueType>
@@ -2205,7 +2205,7 @@
   </title>
   <title>
    <key>tr</key>
-   <value>Already scan count</value>
+   <value>Zaten taranan sayı</value>
   </title>
   <id>12</id>
   <valueType>
@@ -2234,7 +2234,7 @@
   </title>
   <title>
    <key>tr</key>
-   <value>Hide scan button</value>
+   <value>Tarama düğmesini gizle</value>
   </title>
   <id>13</id>
   <valueType>
@@ -2262,7 +2262,7 @@
   </title>
   <title>
    <key>tr</key>
-   <value>Hide status button</value>
+   <value>Durum düğmesini gizle</value>
   </title>
   <id>14</id>
   <valueType>

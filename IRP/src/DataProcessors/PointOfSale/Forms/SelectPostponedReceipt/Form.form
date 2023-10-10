@@ -10,7 +10,7 @@
  </title>
  <title>
   <key>tr</key>
-  <value>Select postponed receipt</value>
+  <value>Ertelemeli makbuzu seз</value>
  </title>
  <items xsi:type="form:Table">
   <name>Receipts</name>
@@ -1558,7 +1558,7 @@
   </title>
   <title>
    <key>tr</key>
-   <value>Receipts</value>
+   <value>Makbuzlar</value>
   </title>
   <id>1</id>
   <valueType>
@@ -2024,7 +2024,7 @@ WHERE
   </title>
   <title>
    <key>tr</key>
-   <value>Current branch</value>
+   <value>Mevcut şube</value>
   </title>
   <id>12</id>
   <valueType>
@@ -2049,7 +2049,7 @@ WHERE
   </title>
   <title>
    <key>tr</key>
-   <value>Cancel receipts</value>
+   <value>Makbuzları iptal et</value>
   </title>
   <id>1</id>
   <use>

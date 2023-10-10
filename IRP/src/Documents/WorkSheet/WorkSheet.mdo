@@ -434,7 +434,7 @@
    </synonym>
    <synonym>
     <key>tr</key>
-    <value>Stock quantity</value>
+    <value>Stok miktarı</value>
    </synonym>
    <type>
     <types>DefinedType.typeQuantity</types>
@@ -543,7 +543,7 @@
    </synonym>
    <synonym>
     <key>tr</key>
-    <value>Quantity is fixed</value>
+    <value>Miktar sabittir</value>
    </synonym>
    <type>
     <types>Boolean</types>

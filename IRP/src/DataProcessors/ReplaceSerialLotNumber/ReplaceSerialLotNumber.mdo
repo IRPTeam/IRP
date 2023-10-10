@@ -15,7 +15,7 @@
  </synonym>
  <synonym>
   <key>tr</key>
-  <value>Replace serial lot number</value>
+  <value>Seri lot numarasını değiştir</value>
  </synonym>
  <useStandardCommands>true</useStandardCommands>
  <defaultForm>DataProcessor.ReplaceSerialLotNumber.Form.Form</defaultForm>
@@ -48,7 +48,7 @@
   </synonym>
   <synonym>
    <key>tr</key>
-   <value>Load serial lot numbers</value>
+   <value>Seri lot numaralarını yükle</value>
   </synonym>
   <usePurposes>PersonalComputer</usePurposes>
   <usePurposes>MobileDevice</usePurposes>

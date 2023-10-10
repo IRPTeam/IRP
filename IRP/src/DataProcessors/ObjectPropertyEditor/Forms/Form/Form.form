@@ -162,6 +162,149 @@
     <textEdit>true</textEdit>
    </extInfo>
   </items>
+  <items xsi:type="form:FormGroup">
+   <name>GroupButtoms</name>
+   <id>117</id>
+   <items xsi:type="form:FormGroup">
+    <name>GroupSetToFilter</name>
+    <id>119</id>
+    <items xsi:type="form:Button">
+     <name>FilterFromQuery</name>
+     <id>121</id>
+     <visible>true</visible>
+     <enabled>true</enabled>
+     <userVisible>
+      <common>true</common>
+     </userVisible>
+     <extendedTooltip>
+      <name>FilterFromQueryExtendedTooltip</name>
+      <id>122</id>
+      <visible>true</visible>
+      <enabled>true</enabled>
+      <userVisible>
+       <common>true</common>
+      </userVisible>
+      <type>Label</type>
+      <autoMaxWidth>true</autoMaxWidth>
+      <autoMaxHeight>true</autoMaxHeight>
+      <extInfo xsi:type="form:LabelDecorationExtInfo">
+       <horizontalAlign>Left</horizontalAlign>
+      </extInfo>
+     </extendedTooltip>
+     <commandName>Form.Command.FilterFromQuery</commandName>
+     <representation>Auto</representation>
+     <autoMaxWidth>true</autoMaxWidth>
+     <autoMaxHeight>true</autoMaxHeight>
+     <placementArea>UserCmds</placementArea>
+     <representationInContextMenu>Auto</representationInContextMenu>
+     <locationInCommandBar>InCommandBar</locationInCommandBar>
+    </items>
+    <items xsi:type="form:Button">
+     <name>FilterFromClipboard</name>
+     <id>123</id>
+     <visible>true</visible>
+     <enabled>true</enabled>
+     <userVisible>
+      <common>true</common>
+     </userVisible>
+     <extendedTooltip>
+      <name>FilterFromClipboardExtendedTooltip</name>
+      <id>124</id>
+      <visible>true</visible>
+      <enabled>true</enabled>
+      <userVisible>
+       <common>true</common>
+      </userVisible>
+      <type>Label</type>
+      <autoMaxWidth>true</autoMaxWidth>
+      <autoMaxHeight>true</autoMaxHeight>
+      <extInfo xsi:type="form:LabelDecorationExtInfo">
+       <horizontalAlign>Left</horizontalAlign>
+      </extInfo>
+     </extendedTooltip>
+     <commandName>Form.Command.FilterFromClipboard</commandName>
+     <representation>Auto</representation>
+     <autoMaxWidth>true</autoMaxWidth>
+     <autoMaxHeight>true</autoMaxHeight>
+     <placementArea>UserCmds</placementArea>
+     <representationInContextMenu>Auto</representationInContextMenu>
+    </items>
+    <visible>true</visible>
+    <enabled>true</enabled>
+    <userVisible>
+     <common>true</common>
+    </userVisible>
+    <title>
+     <key>en</key>
+     <value>Set to filter</value>
+    </title>
+    <title>
+     <key>ru</key>
+     <value>Установить в фильтр</value>
+    </title>
+    <title>
+     <key>tr</key>
+     <value>Filtreye ayarla</value>
+    </title>
+    <extendedTooltip>
+     <name>GroupSetToFilterExtendedTooltip</name>
+     <id>120</id>
+     <visible>true</visible>
+     <enabled>true</enabled>
+     <userVisible>
+      <common>true</common>
+     </userVisible>
+     <type>Label</type>
+     <autoMaxWidth>true</autoMaxWidth>
+     <autoMaxHeight>true</autoMaxHeight>
+     <extInfo xsi:type="form:LabelDecorationExtInfo">
+      <horizontalAlign>Left</horizontalAlign>
+     </extInfo>
+    </extendedTooltip>
+    <type>Popup</type>
+    <extInfo xsi:type="form:PopupGroupExtInfo">
+     <picture xsi:type="core:PictureRef">
+      <picture>StdPicture.FilterCriterion</picture>
+     </picture>
+     <representation>Auto</representation>
+    </extInfo>
+   </items>
+   <visible>true</visible>
+   <enabled>true</enabled>
+   <userVisible>
+    <common>true</common>
+   </userVisible>
+   <title>
+    <key>en</key>
+    <value>Group of buttoms</value>
+   </title>
+   <title>
+    <key>ru</key>
+    <value>Группа кнопок</value>
+   </title>
+   <title>
+    <key>tr</key>
+    <value>Düğmeler grubu</value>
+   </title>
+   <horizontalStretch>true</horizontalStretch>
+   <extendedTooltip>
+    <name>GroupButtomsExtendedTooltip</name>
+    <id>118</id>
+    <visible>true</visible>
+    <enabled>true</enabled>
+    <userVisible>
+     <common>true</common>
+    </userVisible>
+    <type>Label</type>
+    <autoMaxWidth>true</autoMaxWidth>
+    <autoMaxHeight>true</autoMaxHeight>
+    <extInfo xsi:type="form:LabelDecorationExtInfo">
+     <horizontalAlign>Left</horizontalAlign>
+    </extInfo>
+   </extendedTooltip>
+   <type>CommandBar</type>
+   <extInfo xsi:type="form:CommandBarExtInfo"/>
+  </items>
   <items xsi:type="form:Button">
    <name>Refresh</name>
    <id>30</id>
@@ -192,6 +335,7 @@
    <autoMaxHeight>true</autoMaxHeight>
    <placementArea>UserCmds</placementArea>
    <representationInContextMenu>Auto</representationInContextMenu>
+   <locationInCommandBar>InCommandBar</locationInCommandBar>
   </items>
   <items xsi:type="form:Button">
    <name>Settings</name>
@@ -223,7 +367,7 @@
    <autoMaxHeight>true</autoMaxHeight>
    <placementArea>UserCmds</placementArea>
    <representationInContextMenu>Auto</representationInContextMenu>
-   <locationInCommandBar>InAdditionalSubmenu</locationInCommandBar>
+   <locationInCommandBar>InCommandBar</locationInCommandBar>
   </items>
   <items xsi:type="form:Button">
    <name>Save</name>
@@ -256,6 +400,7 @@
    <autoMaxHeight>true</autoMaxHeight>
    <placementArea>UserCmds</placementArea>
    <representationInContextMenu>Auto</representationInContextMenu>
+   <locationInCommandBar>InCommandBar</locationInCommandBar>
   </items>
   <visible>true</visible>
   <enabled>true</enabled>
@@ -336,7 +481,7 @@
     </toolTip>
     <toolTip>
      <key>tr</key>
-     <value>Marked objects will be processed by group operations</value>
+     <value>İşaretli nesneler grup işlemleri tarafından işlenecek</value>
     </toolTip>
     <extendedTooltip>
      <name>PropertiesTableMarkedExtendedTooltip</name>
@@ -497,7 +642,7 @@
     </toolTip>
     <toolTip>
      <key>tr</key>
-     <value>Marked objects will be written to the database</value>
+     <value>İşaretli nesneler veritabanına yazılacak</value>
     </toolTip>
     <extendedTooltip>
      <name>PropertiesTableisModifiedExtendedTooltip</name>
@@ -550,7 +695,7 @@
    </title>
    <title>
     <key>tr</key>
-    <value>Properties table left group</value>
+    <value>Цzellikler tablosu sol grup</value>
    </title>
    <extendedTooltip>
     <name>PropertiesTableLeftGroupExtendedTooltip</name>
@@ -1478,7 +1623,7 @@
   </title>
   <title>
    <key>tr</key>
-   <value>Is table mode</value>
+   <value>Tablo modu mu</value>
   </title>
   <id>11</id>
   <valueType>
@@ -1793,7 +1938,7 @@
   </title>
   <title>
    <key>tr</key>
-   <value>Run a code for marked rows</value>
+   <value>İşaretli satırlar için bir kod çalıştırın</value>
   </title>
   <id>17</id>
   <use>
@@ -1805,6 +1950,62 @@
   <action xsi:type="form:FormCommandHandlerContainer">
    <handler>
     <name>RunACodeForMarkedRows</name>
+   </handler>
+  </action>
+  <currentRowUse>Auto</currentRowUse>
+ </formCommands>
+ <formCommands>
+  <name>FilterFromQuery</name>
+  <title>
+   <key>en</key>
+   <value>Set filter from query</value>
+  </title>
+  <title>
+   <key>ru</key>
+   <value>Установить фильтр из запроса</value>
+  </title>
+  <title>
+   <key>tr</key>
+   <value>Filtreyi sorgudan ayarla</value>
+  </title>
+  <id>18</id>
+  <use>
+   <common>true</common>
+  </use>
+  <picture xsi:type="core:PictureRef">
+   <picture>StdPicture.DataCompositionUserFields</picture>
+  </picture>
+  <action xsi:type="form:FormCommandHandlerContainer">
+   <handler>
+    <name>FilterFromQuery</name>
+   </handler>
+  </action>
+  <currentRowUse>Auto</currentRowUse>
+ </formCommands>
+ <formCommands>
+  <name>FilterFromClipboard</name>
+  <title>
+   <key>en</key>
+   <value>Set filter from clipboard</value>
+  </title>
+  <title>
+   <key>ru</key>
+   <value>Установить фильтр из буфера обмена</value>
+  </title>
+  <title>
+   <key>tr</key>
+   <value>Filtreyi panodan ayarla</value>
+  </title>
+  <id>19</id>
+  <use>
+   <common>true</common>
+  </use>
+  <picture xsi:type="core:PictureRef">
+   <picture>CommonPicture.PasteRowsFromClipboard</picture>
+  </picture>
+  <action xsi:type="form:FormCommandHandlerContainer">
+   <handler>
+    <name>FilterFromBuffer</name>
    </handler>
   </action>
   <currentRowUse>Auto</currentRowUse>

@@ -20,7 +20,7 @@
  </synonym>
  <synonym>
   <key>tr</key>
-  <value>T9510 Staffing</value>
+  <value>T9510 Kadrolama</value>
  </synonym>
  <useStandardCommands>true</useStandardCommands>
  <editType>InDialog</editType>
@@ -37,7 +37,7 @@
  </recordPresentation>
  <recordPresentation>
   <key>tr</key>
-  <value>T9510 Staffing</value>
+  <value>T9510 Kadrolama</value>
  </recordPresentation>
  <resources uuid="9cb6e57a-70d6-4fc2-9027-a2450ac5952d">
   <name>Fired</name>
@@ -51,7 +51,7 @@
   </synonym>
   <synonym>
    <key>tr</key>
-   <value>Fired</value>
+   <value>Kovuldu</value>
   </synonym>
   <type>
    <types>Boolean</types>
@@ -128,7 +128,7 @@
   </synonym>
   <synonym>
    <key>tr</key>
-   <value>Position</value>
+   <value>Pozisyon</value>
   </synonym>
   <type>
    <types>CatalogRef.EmployeePositions</types>

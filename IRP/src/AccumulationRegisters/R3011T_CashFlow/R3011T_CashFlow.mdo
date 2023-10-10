@@ -19,7 +19,7 @@
  </synonym>
  <synonym>
   <key>tr</key>
-  <value>R3011 Cash flow</value>
+  <value>R3011 Nakit akışı</value>
  </synonym>
  <useStandardCommands>true</useStandardCommands>
  <registerType>Turnovers</registerType>

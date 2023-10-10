@@ -166,7 +166,7 @@ Async Procedure WriteSettings(Command)
 		Return;
 	EndIf;
 	
-	Settings = Await HardwareClient.FillDriverParametersSettings(Object.Ref, False);
+	Settings = Await HardwareClient.FillDriverParametersSettings(Object.Ref);
 	Settings.ServiceCallback = New NotifyDescription("EndWriteSettings", ThisObject, Settings);
 	HardwareClient.SetParameter_End(, , Settings);
 EndProcedure
@@ -189,7 +189,7 @@ Async Procedure Test(Command)
 		Return;
 	EndIf;
 	
-	Settings = Await HardwareClient.FillDriverParametersSettings(Object.Ref, False);
+	Settings = Await HardwareClient.FillDriverParametersSettings(Object.Ref);
 	Settings.Callback = New NotifyDescription("EndTestDevice", ThisObject, Settings);
 	Settings.AdditionalCommand = "CheckHealth";
 	
@@ -219,12 +219,16 @@ EndProcedure
 
 &AtClient
 Procedure UpdateStatus(Command)
-	Connections = globalEquipments.ConnectionSettings.Get(ThisObject.Object.Ref);
+	Connections = globalEquipments.ConnectionSettings.Get(ThisObject.Object.Ref); // See HardwareClient.GetDriverObject
 	If Connections = Undefined Then
 		CommandResult = StrTemplate(R().Eq_005, Object.Ref);
 	Else
 		CommandResult = StrTemplate(R().Eq_004, Object.Ref);
 		CommandResult = CommandResult + Chars.LF + "ID:" + Connections.ID;
+		CommandResult = CommandResult + Chars.LF + "Last Update:" + Connections.LastUseDate;
+		CommandResult = CommandResult + Chars.LF + "Sleep after:" + Connections.SleepAfter;
+		CommandResult = CommandResult + Chars.LF + "Is IS:" + Connections.UseIS;
+		CommandResult = CommandResult + Chars.LF + "Write Log:" + Connections.WriteLog;
 	EndIf;
 EndProcedure
 

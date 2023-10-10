@@ -182,7 +182,7 @@
   </synonym>
   <synonym>
    <key>tr</key>
-   <value>Other income</value>
+   <value>Diğer gelir</value>
   </synonym>
  </enumValues>
  <enumValues uuid="3612b47d-85e9-41e6-83cf-0cd84c7eb486">
@@ -197,7 +197,7 @@
   </synonym>
   <synonym>
    <key>tr</key>
-   <value>Other partner</value>
+   <value>Diğer ortak</value>
   </synonym>
  </enumValues>
 </mdclass:Enum>

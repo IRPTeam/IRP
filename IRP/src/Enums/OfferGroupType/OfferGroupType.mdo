@@ -16,7 +16,7 @@
  </synonym>
  <synonym>
   <key>tr</key>
-  <value>Offer group type</value>
+  <value>Teklif grubu tьrь</value>
  </synonym>
  <quickChoice>true</quickChoice>
  <choiceMode>BothWays</choiceMode>
@@ -32,7 +32,7 @@
   </synonym>
   <synonym>
    <key>tr</key>
-   <value>Sum</value>
+   <value>Toplam</value>
   </synonym>
  </enumValues>
  <enumValues uuid="105e55d5-5c75-4aea-a369-d5ca83d44fd6">
@@ -47,7 +47,7 @@
   </synonym>
   <synonym>
    <key>tr</key>
-   <value>Max</value>
+   <value>Maks</value>
   </synonym>
  </enumValues>
  <enumValues uuid="756868c6-316a-40f4-bef5-821cb32063e7">
@@ -62,7 +62,7 @@
   </synonym>
   <synonym>
    <key>tr</key>
-   <value>Max by row</value>
+   <value>Satır başına maksimum</value>
   </synonym>
  </enumValues>
  <enumValues uuid="4d3eea54-cd26-4f95-b5c1-d8485ffd1453">
@@ -92,7 +92,7 @@
   </synonym>
   <synonym>
    <key>tr</key>
-   <value>Consequentially</value>
+   <value>Ardışık olarak</value>
   </synonym>
  </enumValues>
  <enumValues uuid="3cddac61-c134-4b22-b5f7-46ec8856ef76">
@@ -107,7 +107,7 @@
   </synonym>
   <synonym>
    <key>tr</key>
-   <value>Use external calculation</value>
+   <value>Dış hesaplamayı kullan</value>
   </synonym>
  </enumValues>
 </mdclass:Enum>

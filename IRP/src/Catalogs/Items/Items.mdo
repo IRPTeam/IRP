@@ -249,7 +249,7 @@
   </synonym>
   <synonym>
    <key>tr</key>
-   <value>Control code string</value>
+   <value>Kontrol kod dizesi</value>
   </synonym>
   <type>
    <types>Boolean</types>
@@ -264,7 +264,7 @@
   </toolTip>
   <toolTip>
    <key>tr</key>
-   <value>Conrol code string before sale on POS</value>
+   <value>POS'ta satıştan önce kontrol kodu dizesi</value>
   </toolTip>
   <minValue xsi:type="core:UndefinedValue"/>
   <maxValue xsi:type="core:UndefinedValue"/>
@@ -284,7 +284,7 @@
   </synonym>
   <synonym>
    <key>tr</key>
-   <value>Check code string</value>
+   <value>Kod dizesini kontrol et</value>
   </synonym>
   <type>
    <types>Boolean</types>
@@ -299,7 +299,7 @@
   </toolTip>
   <toolTip>
    <key>tr</key>
-   <value>On sale system will check in external source - is this code string can be sold.</value>
+   <value>Satış sistemi, bu kod dizesinin satılabileceğini dış kaynakta kontrol edecek.</value>
   </toolTip>
   <minValue xsi:type="core:UndefinedValue"/>
   <maxValue xsi:type="core:UndefinedValue"/>
@@ -388,7 +388,7 @@
   </synonym>
   <synonym>
    <key>tr</key>
-   <value>Consignors info</value>
+   <value>Gцnderen bilgileri</value>
   </synonym>
   <attributes uuid="b3e741c5-882f-4843-abf9-66751c2aeba7">
    <name>Company</name>

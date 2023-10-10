@@ -773,7 +773,7 @@
   </synonym>
   <synonym>
    <key>tr</key>
-   <value>Record purchase prices</value>
+   <value>Satın alma fiyatlarını kaydet</value>
   </synonym>
   <type>
    <types>Boolean</types>

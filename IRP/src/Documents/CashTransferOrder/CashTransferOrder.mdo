@@ -458,7 +458,7 @@
   </synonym>
   <synonym>
    <key>tr</key>
-   <value>Receive branch</value>
+   <value>Alma şubesi</value>
   </synonym>
   <type>
    <types>CatalogRef.BusinessUnits</types>

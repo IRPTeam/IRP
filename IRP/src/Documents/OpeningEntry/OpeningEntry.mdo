@@ -2982,7 +2982,7 @@
   </synonym>
   <synonym>
    <key>tr</key>
-   <value>Advance from retail customers</value>
+   <value>Perakende müşterilerinden avans</value>
   </synonym>
   <attributes uuid="ecd696cc-4931-40e1-bb27-dea0270c2760">
    <name>Key</name>
@@ -3090,7 +3090,7 @@
   </synonym>
   <synonym>
    <key>tr</key>
-   <value>Salary payment</value>
+   <value>Maaş ödemesi</value>
   </synonym>
   <attributes uuid="6ecb84ef-eb5f-4c58-a81e-294fe8e59fbe">
    <name>Key</name>
@@ -3199,7 +3199,7 @@
    </synonym>
    <synonym>
     <key>tr</key>
-    <value>Payment period</value>
+    <value>Цdeme dцnemi</value>
    </synonym>
    <type>
     <types>CatalogRef.PlanningPeriods</types>
@@ -3232,7 +3232,7 @@
   </synonym>
   <synonym>
    <key>tr</key>
-   <value>Account receivable other</value>
+   <value>Diğer alacak hesabı</value>
   </synonym>
   <attributes uuid="8b5971fb-865d-4c83-a94f-a97be6e7cd1d">
    <name>Key</name>
@@ -3414,7 +3414,7 @@
   </synonym>
   <synonym>
    <key>tr</key>
-   <value>Account payable other</value>
+   <value>Diğer ödenecek hesap</value>
   </synonym>
   <attributes uuid="a46b9bff-095f-4ae4-9930-7934acac70b5">
    <name>Key</name>
@@ -3746,7 +3746,7 @@
    </synonym>
    <synonym>
     <key>tr</key>
-    <value>Receipting branch</value>
+    <value>Makbuz şubesi</value>
    </synonym>
    <type>
     <types>CatalogRef.BusinessUnits</types>

@@ -14,7 +14,7 @@
  </synonym>
  <synonym>
   <key>tr</key>
-  <value>Additional table control document</value>
+  <value>Ek tablo kontrol belgesi</value>
  </synonym>
  <type>
   <types>DocumentRef.RetailSalesReceipt</types>

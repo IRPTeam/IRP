@@ -729,7 +729,7 @@
    </synonym>
    <synonym>
     <key>tr</key>
-    <value>Sending account</value>
+    <value>Hesap gцnderme</value>
    </synonym>
    <type>
     <types>CatalogRef.CashAccounts</types>
@@ -751,7 +751,7 @@
    </synonym>
    <synonym>
     <key>tr</key>
-    <value>Sending branch</value>
+    <value>Şube gönderme</value>
    </synonym>
    <type>
     <types>CatalogRef.BusinessUnits</types>
@@ -773,7 +773,7 @@
    </synonym>
    <synonym>
     <key>tr</key>
-    <value>VAT</value>
+    <value>KDV</value>
    </synonym>
    <type>
     <types>CatalogRef.TaxRates</types>
@@ -1085,7 +1085,7 @@
   </synonym>
   <synonym>
    <key>tr</key>
-   <value>DELETE tax list</value>
+   <value>Vergi listesini SİL</value>
   </synonym>
   <attributes uuid="f372c03e-005d-41e0-a594-dcf2c96797a3">
    <name>Key</name>

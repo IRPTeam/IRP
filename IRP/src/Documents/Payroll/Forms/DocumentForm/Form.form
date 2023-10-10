@@ -1445,7 +1445,7 @@
    </title>
    <title>
     <key>tr</key>
-    <value>Accrual</value>
+    <value>Tahakkuk</value>
    </title>
    <extendedTooltip>
     <name>GroupAccrualExtendedTooltip</name>
@@ -2196,7 +2196,7 @@
    </title>
    <title>
     <key>tr</key>
-    <value>Deduction</value>
+    <value>Kesinti</value>
    </title>
    <extendedTooltip>
     <name>GroupDeductionExtendedTooltip</name>
@@ -2700,7 +2700,7 @@
    </title>
    <title>
     <key>tr</key>
-    <value>Cash advance deduction</value>
+    <value>Avans kesintisi</value>
    </title>
    <extendedTooltip>
     <name>GroupCashAdvanceDeductionExtendedTooltip</name>
@@ -3170,7 +3170,7 @@
      </title>
      <title>
       <key>tr</key>
-      <value>Accrual</value>
+      <value>Tahakkuk</value>
      </title>
      <visible>true</visible>
      <enabled>true</enabled>
@@ -3236,7 +3236,7 @@
     </title>
     <title>
      <key>tr</key>
-     <value>Group total accrual amount</value>
+     <value>Grup toplam tahakkuk miktarı</value>
     </title>
     <extendedTooltip>
      <name>GroupTotalAccrualAmountExtendedTooltip</name>
@@ -3278,7 +3278,7 @@
      </title>
      <title>
       <key>tr</key>
-      <value>Deduction</value>
+      <value>Kesinti</value>
      </title>
      <visible>true</visible>
      <enabled>true</enabled>
@@ -3344,7 +3344,7 @@
     </title>
     <title>
      <key>tr</key>
-     <value>Group deduction amount</value>
+     <value>Grup kesinti miktarı</value>
     </title>
     <extendedTooltip>
      <name>GroupDeductionAmountExtendedTooltip</name>
@@ -3386,7 +3386,7 @@
      </title>
      <title>
       <key>tr</key>
-      <value>C/A Deduction</value>
+      <value>C/A İndirimi</value>
      </title>
      <visible>true</visible>
      <enabled>true</enabled>
@@ -3452,7 +3452,7 @@
     </title>
     <title>
      <key>tr</key>
-     <value>Group cash advance deduction amoun</value>
+     <value>Grup avans kesinti miktarı</value>
     </title>
     <extendedTooltip>
      <name>GroupCashAdvanceDeductionAmounExtendedTooltip</name>
@@ -3607,7 +3607,9 @@
     </title>
     <title>
      <key>tr</key>
-     <value>Group payment amount</value>
+     <value>
+
+</value>
     </title>
     <extendedTooltip>
      <name>GroupPaymentAmountExtendedTooltip</name>
@@ -3875,7 +3877,7 @@
   </title>
   <title>
    <key>tr</key>
-   <value>Main tables</value>
+   <value>Ana tablolar</value>
   </title>
   <id>11</id>
   <valueType>
@@ -3901,7 +3903,7 @@
   </title>
   <title>
    <key>tr</key>
-   <value>Total payment amount</value>
+   <value>Toplam ödeme miktarı</value>
   </title>
   <id>12</id>
   <valueType>
@@ -3982,7 +3984,7 @@
   </title>
   <title>
    <key>tr</key>
-   <value>Edit currencies accrual</value>
+   <value>Avans para birimlerini dьzenle</value>
   </title>
   <id>17</id>
   <use>
@@ -4010,7 +4012,7 @@
   </title>
   <title>
    <key>tr</key>
-   <value>Edit currencies cash advance deduction</value>
+   <value>Para birimleri avans kesintisini dьzenle</value>
   </title>
   <id>18</id>
   <use>
@@ -4038,7 +4040,7 @@
   </title>
   <title>
    <key>tr</key>
-   <value>Edit currencies deduction</value>
+   <value>Para birimlerini dьzenle kesinti</value>
   </title>
   <id>19</id>
   <use>
@@ -4066,7 +4068,7 @@
   </title>
   <title>
    <key>tr</key>
-   <value>Fill accrual</value>
+   <value>Tahakkuk doldur</value>
   </title>
   <id>20</id>
   <use>
@@ -4095,7 +4097,7 @@
   </title>
   <title>
    <key>tr</key>
-   <value>Fill deduction</value>
+   <value>Kesintiyi doldur</value>
   </title>
   <id>21</id>
   <use>
@@ -4124,7 +4126,7 @@
   </title>
   <title>
    <key>tr</key>
-   <value>Fill cash advance deduction</value>
+   <value>Nakit avans kesintisini doldur</value>
   </title>
   <id>22</id>
   <use>

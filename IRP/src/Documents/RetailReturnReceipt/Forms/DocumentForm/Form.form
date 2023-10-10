@@ -7841,7 +7841,7 @@
     </title>
     <title>
      <key>tr</key>
-     <value>Control code string state</value>
+     <value>Kontrol kodu dize durumu</value>
     </title>
     <id>175</id>
     <valueType>
@@ -8340,7 +8340,7 @@
   </title>
   <title>
    <key>tr</key>
-   <value>Unlock form</value>
+   <value>Formun kilidini aз</value>
   </title>
   <id>176</id>
   <valueType>
@@ -8665,7 +8665,7 @@
   </title>
   <title>
    <key>tr</key>
-   <value>Edit quantity in base unit</value>
+   <value>Temel birimde miktarı düzenle</value>
   </title>
   <id>12</id>
   <use>
@@ -8719,7 +8719,7 @@
   </title>
   <title>
    <key>tr</key>
-   <value>Unlock form</value>
+   <value>Formun kilidini aз</value>
   </title>
   <id>14</id>
   <use>

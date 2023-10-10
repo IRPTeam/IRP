@@ -20,7 +20,7 @@
  </synonym>
  <synonym>
   <key>tr</key>
-  <value>Data versions</value>
+  <value>Veri sьrьmleri</value>
  </synonym>
  <editType>InDialog</editType>
  <dataLockControlMode>Managed</dataLockControlMode>
@@ -34,7 +34,7 @@
  </recordPresentation>
  <recordPresentation>
   <key>tr</key>
-  <value>Data versions</value>
+  <value>Veri sьrьmleri</value>
  </recordPresentation>
  <resources uuid="3adc17c1-98f0-461e-9ec1-73a971f17a60">
   <name>Data</name>
@@ -118,7 +118,7 @@
   </synonym>
   <synonym>
    <key>tr</key>
-   <value>Data ref</value>
+   <value>Veri ref</value>
   </synonym>
   <type>
    <types>AnyRef</types>
@@ -144,7 +144,7 @@
   </synonym>
   <synonym>
    <key>tr</key>
-   <value>Package ID</value>
+   <value>Paket ID</value>
   </synonym>
   <type>
    <types>UUID</types>

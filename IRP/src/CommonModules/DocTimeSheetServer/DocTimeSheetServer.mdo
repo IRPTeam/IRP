@@ -11,7 +11,7 @@
  </synonym>
  <synonym>
   <key>tr</key>
-  <value>Doc time sheet server</value>
+  <value>Müşteri zaman çizelgesi sunucusu</value>
  </synonym>
  <server>true</server>
  <serverCall>true</serverCall>

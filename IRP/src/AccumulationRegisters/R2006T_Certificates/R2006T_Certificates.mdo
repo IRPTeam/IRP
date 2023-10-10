@@ -19,7 +19,7 @@
  </synonym>
  <synonym>
   <key>tr</key>
-  <value>R2006 Certificates</value>
+  <value>R2006 Sertifikalar</value>
  </synonym>
  <useStandardCommands>true</useStandardCommands>
  <registerType>Turnovers</registerType>
@@ -35,7 +35,7 @@
  </listPresentation>
  <listPresentation>
   <key>tr</key>
-  <value>R2006 Certificates</value>
+  <value>R2006 Sertifikalar</value>
  </listPresentation>
  <resources uuid="643be08c-53a5-4efb-85c8-81ae4e470121">
   <name>Quantity</name>

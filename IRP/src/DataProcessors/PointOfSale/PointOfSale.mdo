@@ -236,7 +236,7 @@
   </synonym>
   <synonym>
    <key>tr</key>
-   <value>Change right</value>
+   <value>Değişiklik hakkı</value>
   </synonym>
   <usePurposes>PersonalComputer</usePurposes>
   <usePurposes>MobileDevice</usePurposes>
@@ -253,7 +253,7 @@
   </synonym>
   <synonym>
    <key>tr</key>
-   <value>Select basis document</value>
+   <value>Temel belgeyi seз</value>
   </synonym>
   <usePurposes>PersonalComputer</usePurposes>
   <usePurposes>MobileDevice</usePurposes>
@@ -270,7 +270,7 @@
   </synonym>
   <synonym>
    <key>tr</key>
-   <value>Get settlement</value>
+   <value>Цdeme al</value>
   </synonym>
   <usePurposes>PersonalComputer</usePurposes>
   <usePurposes>MobileDevice</usePurposes>
@@ -287,7 +287,7 @@
   </synonym>
   <synonym>
    <key>tr</key>
-   <value>Select postponed receipt</value>
+   <value>Ertelemeli makbuzu seз</value>
   </synonym>
   <usePurposes>PersonalComputer</usePurposes>
   <usePurposes>MobileDevice</usePurposes>

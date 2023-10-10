@@ -20,7 +20,7 @@
  </synonym>
  <synonym>
   <key>tr</key>
-  <value>T9530 Work days</value>
+  <value>T9530 Çalışma günleri</value>
  </synonym>
  <useStandardCommands>true</useStandardCommands>
  <editType>InDialog</editType>
@@ -35,7 +35,7 @@
  </recordPresentation>
  <recordPresentation>
   <key>tr</key>
-  <value>T9530 Work days</value>
+  <value>T9530 Çalışma günleri</value>
  </recordPresentation>
  <resources uuid="0495093c-858e-4535-bb67-2d11c590f85e">
   <name>CountDays</name>
@@ -49,7 +49,7 @@
   </synonym>
   <synonym>
    <key>tr</key>
-   <value>Count days</value>
+   <value>Gün sayısı</value>
   </synonym>
   <type>
    <types>Number</types>
@@ -129,7 +129,7 @@
   </synonym>
   <synonym>
    <key>tr</key>
-   <value>Accrual and deduction type</value>
+   <value>Tahakkuk ve kesinti tьrь</value>
   </synonym>
   <type>
    <types>CatalogRef.AccrualAndDeductionTypes</types>

@@ -11,7 +11,7 @@
  </synonym>
  <synonym>
   <key>tr</key>
-  <value>Source node ID</value>
+  <value>Kaynak düğüm kimliği</value>
  </synonym>
  <type>
   <types>String</types>

@@ -391,7 +391,7 @@
      </title>
      <title>
       <key>tr</key>
-      <value>Serialized</value>
+      <value>Seri numaralı</value>
      </title>
      <extendedTooltip>
       <name>PageSerializedInfoExtendedTooltip</name>
@@ -482,7 +482,7 @@
      </title>
      <title>
       <key>tr</key>
-      <value>Archived</value>
+      <value>Arşivlendi</value>
      </title>
      <extendedTooltip>
       <name>PageArchivedInfoExtendedTooltip</name>
@@ -731,7 +731,7 @@
    </title>
    <title>
     <key>tr</key>
-    <value>Import</value>
+    <value>İçe aktar</value>
    </title>
    <extendedTooltip>
     <name>PageImportExtendedTooltip</name>
@@ -856,7 +856,7 @@
     </title>
     <title>
      <key>tr</key>
-     <value>Group Find Ref</value>
+     <value>Grup Bul Ref</value>
     </title>
     <extendedTooltip>
      <name>GroupFindRefExtendedTooltip</name>
@@ -1325,7 +1325,7 @@
    </title>
    <title>
     <key>tr</key>
-    <value>Find refs</value>
+    <value>Ref'leri bul</value>
    </title>
    <extendedTooltip>
     <name>PageFindRefExtendedTooltip</name>
@@ -1514,7 +1514,7 @@
   </title>
   <title>
    <key>tr</key>
-   <value>Form items</value>
+   <value>Form öğeleri</value>
   </title>
   <id>2</id>
   <valueType>
@@ -1591,7 +1591,7 @@
   </title>
   <title>
    <key>tr</key>
-   <value>Logs</value>
+   <value>Gьnlьkler</value>
   </title>
   <id>6</id>
   <valueType>
@@ -1617,7 +1617,7 @@
   </title>
   <title>
    <key>tr</key>
-   <value>Import data to product data base is granted</value>
+   <value>Ürün veri tabanına veri aktarma izni verildi</value>
   </title>
   <id>7</id>
   <valueType>
@@ -1642,7 +1642,7 @@
   </title>
   <title>
    <key>tr</key>
-   <value>Search ref</value>
+   <value>Arama ref</value>
   </title>
   <id>8</id>
   <valueType>
@@ -1667,7 +1667,7 @@
   </title>
   <title>
    <key>tr</key>
-   <value>Found ref list</value>
+   <value>Bulunan ref listesi</value>
   </title>
   <id>9</id>
   <valueType>
@@ -1716,7 +1716,7 @@
    </title>
    <title>
     <key>tr</key>
-    <value>Metadata name</value>
+    <value>Metadata adı</value>
    </title>
    <id>11</id>
    <valueType>
@@ -1742,7 +1742,7 @@
    </title>
    <title>
     <key>tr</key>
-    <value>Filter</value>
+    <value>Filtre</value>
    </title>
    <id>12</id>
    <valueType>
@@ -1797,7 +1797,7 @@
   </title>
   <title>
    <key>tr</key>
-   <value>Serialize</value>
+   <value>Seri hale getir</value>
   </title>
   <id>2</id>
   <toolTip>
@@ -1810,7 +1810,7 @@
   </toolTip>
   <toolTip>
    <key>tr</key>
-   <value>Serialize all selected rows in selected form</value>
+   <value>Seçili formdaki tüm seçili satırları seri hale getir</value>
   </toolTip>
   <use>
    <common>true</common>
@@ -1834,7 +1834,7 @@
   </title>
   <title>
    <key>tr</key>
-   <value>Import</value>
+   <value>İçe aktar</value>
   </title>
   <id>3</id>
   <use>
@@ -1859,7 +1859,7 @@
   </title>
   <title>
    <key>tr</key>
-   <value>Find ref</value>
+   <value>Ref bul</value>
   </title>
   <id>4</id>
   <use>

@@ -18,7 +18,7 @@
  </synonym>
  <synonym>
   <key>tr</key>
-  <value>Vehicles</value>
+  <value>Araзlar</value>
  </synonym>
  <useStandardCommands>true</useStandardCommands>
  <inputByString>Catalog.Vehicles.StandardAttribute.Code</inputByString>
@@ -73,7 +73,7 @@
  </listPresentation>
  <listPresentation>
   <key>tr</key>
-  <value>Vehicles</value>
+  <value>Araзlar</value>
  </listPresentation>
  <levelCount>2</levelCount>
  <foldersOnTop>true</foldersOnTop>
@@ -98,7 +98,7 @@
   </synonym>
   <synonym>
    <key>tr</key>
-   <value>ID (plate)</value>
+   <value>ID (plaka)</value>
   </synonym>
   <type>
    <types>String</types>

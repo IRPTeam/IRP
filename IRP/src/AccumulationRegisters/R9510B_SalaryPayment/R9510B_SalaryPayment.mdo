@@ -19,7 +19,7 @@
  </synonym>
  <synonym>
   <key>tr</key>
-  <value>R9510 Salary payment</value>
+  <value>R9510 Maaş ödemesi</value>
  </synonym>
  <useStandardCommands>true</useStandardCommands>
  <dataLockControlMode>Managed</dataLockControlMode>
@@ -123,7 +123,7 @@
   </synonym>
   <synonym>
    <key>tr</key>
-   <value>Payment period</value>
+   <value>Цdeme dцnemi</value>
   </synonym>
   <type>
    <types>CatalogRef.PlanningPeriods</types>
@@ -167,7 +167,7 @@
   </synonym>
   <synonym>
    <key>tr</key>
-   <value>Transaction currency</value>
+   <value>İşlem para birimi</value>
   </synonym>
   <type>
    <types>CatalogRef.Currencies</types>

@@ -18,7 +18,7 @@
  </synonym>
  <synonym>
   <key>tr</key>
-  <value>Addresses</value>
+  <value>Adresler</value>
  </synonym>
  <useStandardCommands>true</useStandardCommands>
  <inputByString>Catalog.Addresses.StandardAttribute.Code</inputByString>

@@ -1215,7 +1215,7 @@
    </title>
    <title>
     <key>tr</key>
-    <value>Staffing</value>
+    <value>Kadro</value>
    </title>
    <extendedTooltip>
     <name>GroupStaffingExtendedTooltip</name>
@@ -1456,7 +1456,7 @@ WHERE
   </title>
   <title>
    <key>tr</key>
-   <value>Staffing</value>
+   <value>Kadro</value>
   </title>
   <id>4</id>
   <valueType>

@@ -74,7 +74,7 @@
     </title>
     <title>
      <key>tr</key>
-     <value>Group filter documents</value>
+     <value>Belgeleri grupla filtrele</value>
     </title>
     <extendedTooltip>
      <name>GroupFilterDocumentsExtendedTooltip</name>
@@ -583,7 +583,7 @@
    </title>
    <title>
     <key>tr</key>
-    <value>Filter</value>
+    <value>Filtre</value>
    </title>
    <extendedTooltip>
     <name>PageFilterExtendedTooltip</name>
@@ -1917,7 +1917,7 @@
   </title>
   <title>
    <key>tr</key>
-   <value>Document list</value>
+   <value>Belge listesi</value>
   </title>
   <id>3</id>
   <valueType>
@@ -2079,7 +2079,7 @@
   </title>
   <title>
    <key>tr</key>
-   <value>Check list</value>
+   <value>Kontrol listesi</value>
   </title>
   <id>7</id>
   <valueType>
@@ -2131,7 +2131,7 @@
    </title>
    <title>
     <key>tr</key>
-    <value>Error ID</value>
+    <value>Hata ID</value>
    </title>
    <id>11</id>
    <valueType>
@@ -2235,7 +2235,7 @@
    </title>
    <title>
     <key>tr</key>
-    <value>Problem while quick fix</value>
+    <value>Hızlı düzeltme sırasında sorun</value>
    </title>
    <id>15</id>
    <valueType>
@@ -2317,7 +2317,7 @@
   </title>
   <title>
    <key>tr</key>
-   <value>Errors groups</value>
+   <value>Hata grupları</value>
   </title>
   <id>20</id>
   <valueType>
@@ -2341,7 +2341,7 @@
    </title>
    <title>
     <key>tr</key>
-    <value>Error ID</value>
+    <value>Hata ID</value>
    </title>
    <id>21</id>
    <valueType>
@@ -2396,7 +2396,7 @@
    </title>
    <title>
     <key>tr</key>
-    <value>Cases</value>
+    <value>Durumlar</value>
    </title>
    <id>23</id>
    <valueType>
@@ -2475,7 +2475,7 @@
    </title>
    <title>
     <key>tr</key>
-    <value>Fix description</value>
+    <value>Açıklamayı düzelt</value>
    </title>
    <id>26</id>
    <valueType>
@@ -2502,7 +2502,7 @@
   </title>
   <title>
    <key>tr</key>
-   <value>Error filter</value>
+   <value>Hata filtresi</value>
   </title>
   <id>27</id>
   <valueType>
@@ -2528,7 +2528,7 @@
   </title>
   <title>
    <key>tr</key>
-   <value>Full check list</value>
+   <value>Tam kontrol listesi</value>
   </title>
   <id>28</id>
   <valueType>
@@ -2580,7 +2580,7 @@
    </title>
    <title>
     <key>tr</key>
-    <value>Error ID</value>
+    <value>Hata ID</value>
    </title>
    <id>11</id>
    <valueType>
@@ -2684,7 +2684,7 @@
    </title>
    <title>
     <key>tr</key>
-    <value>Problem while quick fix</value>
+    <value>Hızlı düzeltme sırasında sorun</value>
    </title>
    <id>15</id>
    <valueType>
@@ -2766,7 +2766,7 @@
   </title>
   <title>
    <key>tr</key>
-   <value>Fill documents</value>
+   <value>Belgeleri doldur</value>
   </title>
   <id>1</id>
   <use>
@@ -2791,7 +2791,7 @@
   </title>
   <title>
    <key>tr</key>
-   <value>Check documents</value>
+   <value>Belgeleri kontrol et</value>
   </title>
   <id>4</id>
   <use>
@@ -2816,7 +2816,7 @@
   </title>
   <title>
    <key>tr</key>
-   <value>Quick fix (selected rows)</value>
+   <value>Hızlı düzeltme (seçili satırlar)</value>
   </title>
   <id>5</id>
   <use>
@@ -2841,7 +2841,7 @@
   </title>
   <title>
    <key>tr</key>
-   <value>Quick fix (error)</value>
+   <value>Hızlı düzeltme (hata)</value>
   </title>
   <id>6</id>
   <use>
@@ -2870,7 +2870,7 @@
   </title>
   <title>
    <key>tr</key>
-   <value>Set filter by error</value>
+   <value>Hata tarafından filtre ayarla</value>
   </title>
   <id>7</id>
   <use>

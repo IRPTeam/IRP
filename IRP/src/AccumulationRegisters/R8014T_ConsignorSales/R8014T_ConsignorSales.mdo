@@ -98,7 +98,7 @@
   </synonym>
   <synonym>
    <key>tr</key>
-   <value>DELETE row key</value>
+   <value>Satır anahtarını SİL</value>
   </synonym>
   <type>
    <types>DefinedType.typeRowID</types>
@@ -143,7 +143,7 @@
   </synonym>
   <synonym>
    <key>tr</key>
-   <value>DELETE partner</value>
+   <value>DELETE ortak</value>
   </synonym>
   <type>
    <types>CatalogRef.Partners</types>
@@ -166,7 +166,7 @@
   </synonym>
   <synonym>
    <key>tr</key>
-   <value>DELETE Partner term</value>
+   <value>Ortaklık süresini SİL</value>
   </synonym>
   <type>
    <types>CatalogRef.Agreements</types>
@@ -211,7 +211,7 @@
   </synonym>
   <synonym>
    <key>tr</key>
-   <value>DELETE purchase invoice</value>
+   <value>Satın alma faturasını SİL</value>
   </synonym>
   <type>
    <types>DocumentRef.PurchaseInvoice</types>
@@ -341,7 +341,7 @@
   </synonym>
   <synonym>
    <key>tr</key>
-   <value>DELETE dont calculate row</value>
+   <value>SİL hesaplama satırı</value>
   </synonym>
   <type>
    <types>Boolean</types>
@@ -426,7 +426,7 @@
   </synonym>
   <synonym>
    <key>tr</key>
-   <value>DELETE consignor price</value>
+   <value>Gönderen fiyatını SİL</value>
   </synonym>
   <type>
    <types>DefinedType.typePrice</types>

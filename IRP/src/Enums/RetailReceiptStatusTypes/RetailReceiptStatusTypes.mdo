@@ -16,7 +16,7 @@
  </synonym>
  <synonym>
   <key>tr</key>
-  <value>Retail receipt status types</value>
+  <value>Perakende makbuz durum tьrleri</value>
  </synonym>
  <quickChoice>true</quickChoice>
  <choiceMode>BothWays</choiceMode>
@@ -77,7 +77,7 @@
   </synonym>
   <synonym>
    <key>tr</key>
-   <value>Postponed with reserve</value>
+   <value>Rezervle ertelendi</value>
   </synonym>
  </enumValues>
 </mdclass:Enum>

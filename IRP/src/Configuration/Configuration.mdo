@@ -284,26 +284,6 @@
  <sessionParameters>SessionParameter.Workstation</sessionParameters>
  <roles>Role.BasicRole</roles>
  <roles>Role.CreateOrModifyUsers</roles>
- <roles>Role.FilterForUserSettings</roles>
- <roles>Role.FullAccess</roles>
- <roles>Role.FullAccessInArea</roles>
- <roles>Role.FullAccessOnlyRead</roles>
- <roles>Role.RunMobileClient</roles>
- <roles>Role.RunThickClient</roles>
- <roles>Role.RunThinClient</roles>
- <roles>Role.RunWebClient</roles>
- <roles>Role.SaveUserData</roles>
- <roles>Role.SystemAdministrator</roles>
- <roles>Role.TemplateAccumulationRegisters</roles>
- <roles>Role.TemplateCatalogs</roles>
- <roles>Role.TemplateDocument</roles>
- <roles>Role.TemplateInformationRegisters</roles>
- <roles>Role.UseAllFunctionsMode</roles>
- <roles>Role.UseEventLog</roles>
- <roles>Role.UseExternalDataProcessors</roles>
- <roles>Role.UseExternalReports</roles>
- <roles>Role.UseOutput</roles>
- <roles>Role.UseGroupEditingProperties</roles>
  <roles>Role.Document_AdditionalCostAllocation</roles>
  <roles>Role.Document_AdditionalRevenueAllocation</roles>
  <roles>Role.Document_BankPayment</roles>
@@ -374,6 +354,36 @@
  <roles>Role.Document_WorkOrder</roles>
  <roles>Role.Document_WorkOrderClosing</roles>
  <roles>Role.Document_WorkSheet</roles>
+ <roles>Role.FilterForUserSettings</roles>
+ <roles>Role.FullAccess</roles>
+ <roles>Role.FullAccessInArea</roles>
+ <roles>Role.FullAccessOnlyRead</roles>
+ <roles>Role.RunMobileClient</roles>
+ <roles>Role.RunThickClient</roles>
+ <roles>Role.RunThinClient</roles>
+ <roles>Role.RunWebClient</roles>
+ <roles>Role.SaveUserData</roles>
+ <roles>Role.Subsystem_Accounting</roles>
+ <roles>Role.Subsystem_Inventory</roles>
+ <roles>Role.Subsystem_Manufacturing</roles>
+ <roles>Role.Subsystem_MasterData</roles>
+ <roles>Role.Subsystem_PurchaseAP</roles>
+ <roles>Role.Subsystem_Reports</roles>
+ <roles>Role.Subsystem_Retail</roles>
+ <roles>Role.Subsystem_Salary</roles>
+ <roles>Role.Subsystem_SalesAR</roles>
+ <roles>Role.SystemAdministrator</roles>
+ <roles>Role.TemplateAccumulationRegisters</roles>
+ <roles>Role.TemplateCatalogs</roles>
+ <roles>Role.TemplateChartOfCharacteristicTypes</roles>
+ <roles>Role.TemplateDocument</roles>
+ <roles>Role.TemplateInformationRegisters</roles>
+ <roles>Role.UseAllFunctionsMode</roles>
+ <roles>Role.UseEventLog</roles>
+ <roles>Role.UseExternalDataProcessors</roles>
+ <roles>Role.UseExternalReports</roles>
+ <roles>Role.UseGroupEditingProperties</roles>
+ <roles>Role.UseOutput</roles>
  <commonTemplates>CommonTemplate.HTMLPictureSlider</commonTemplates>
  <commonTemplates>CommonTemplate.HTMLAddAttributes</commonTemplates>
  <commonTemplates>CommonTemplate.HTMLGallery</commonTemplates>
@@ -1121,6 +1131,7 @@
  <enums>Enum.TypeExternalObject</enums>
  <enums>Enum.TaxKind</enums>
  <enums>Enum.RetailReceiptStatusTypes</enums>
+ <enums>Enum.PhysicalCountByLocationTransactionType</enums>
  <reports>Report.AllRegistersMovement</reports>
  <reports>Report.BatchBalance</reports>
  <reports>Report.BatchBalanceSimple</reports>

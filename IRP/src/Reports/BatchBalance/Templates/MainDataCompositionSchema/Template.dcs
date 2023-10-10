@@ -327,7 +327,7 @@
 				</v8:item>
 				<v8:item>
 					<v8:lang>tr</v8:lang>
-					<v8:content>Resources.Receipt</v8:content>
+					<v8:content>Kaynaklar.Alım</v8:content>
 				</v8:item>
 			</title>
 		</field>
@@ -378,7 +378,7 @@
 				</v8:item>
 				<v8:item>
 					<v8:lang>tr</v8:lang>
-					<v8:content>Resources</v8:content>
+					<v8:content>Kaynaklar</v8:content>
 				</v8:item>
 			</title>
 		</field>
@@ -396,7 +396,7 @@
 				</v8:item>
 				<v8:item>
 					<v8:lang>tr</v8:lang>
-					<v8:content>Invoice amount</v8:content>
+					<v8:content>Fatura miktarı</v8:content>
 				</v8:item>
 			</title>
 			<role>
@@ -438,7 +438,7 @@
 				</v8:item>
 				<v8:item>
 					<v8:lang>tr</v8:lang>
-					<v8:content>Invoice amount</v8:content>
+					<v8:content>Fatura miktarı</v8:content>
 				</v8:item>
 			</title>
 			<appearance>
@@ -475,7 +475,7 @@
 				</v8:item>
 				<v8:item>
 					<v8:lang>tr</v8:lang>
-					<v8:content>Invoice amount</v8:content>
+					<v8:content>Fatura miktarı</v8:content>
 				</v8:item>
 			</title>
 			<appearance>
@@ -512,7 +512,7 @@
 				</v8:item>
 				<v8:item>
 					<v8:lang>tr</v8:lang>
-					<v8:content>Invoice amount</v8:content>
+					<v8:content>Fatura miktarı</v8:content>
 				</v8:item>
 			</title>
 			<role>
@@ -554,7 +554,7 @@
 				</v8:item>
 				<v8:item>
 					<v8:lang>tr</v8:lang>
-					<v8:content>Invoice (tax)</v8:content>
+					<v8:content>Fatura (vergi)</v8:content>
 				</v8:item>
 			</title>
 			<role>
@@ -596,7 +596,7 @@
 				</v8:item>
 				<v8:item>
 					<v8:lang>tr</v8:lang>
-					<v8:content>Invoice (tax)</v8:content>
+					<v8:content>Fatura (vergi)</v8:content>
 				</v8:item>
 			</title>
 			<appearance>
@@ -633,7 +633,7 @@
 				</v8:item>
 				<v8:item>
 					<v8:lang>tr</v8:lang>
-					<v8:content>Invoice (tax)</v8:content>
+					<v8:content>Fatura (vergi)</v8:content>
 				</v8:item>
 			</title>
 			<appearance>
@@ -670,7 +670,7 @@
 				</v8:item>
 				<v8:item>
 					<v8:lang>tr</v8:lang>
-					<v8:content>Invoice (tax)</v8:content>
+					<v8:content>Fatura (vergi)</v8:content>
 				</v8:item>
 			</title>
 			<role>
@@ -712,7 +712,7 @@
 				</v8:item>
 				<v8:item>
 					<v8:lang>tr</v8:lang>
-					<v8:content>Indirect cost</v8:content>
+					<v8:content>Dolaylı maliyet</v8:content>
 				</v8:item>
 			</title>
 			<role>
@@ -754,7 +754,7 @@
 				</v8:item>
 				<v8:item>
 					<v8:lang>tr</v8:lang>
-					<v8:content>Indirect cost</v8:content>
+					<v8:content>Dolaylı maliyet</v8:content>
 				</v8:item>
 			</title>
 			<appearance>
@@ -791,7 +791,7 @@
 				</v8:item>
 				<v8:item>
 					<v8:lang>tr</v8:lang>
-					<v8:content>Indirect cost</v8:content>
+					<v8:content>Dolaylı maliyet</v8:content>
 				</v8:item>
 			</title>
 			<appearance>
@@ -828,7 +828,7 @@
 				</v8:item>
 				<v8:item>
 					<v8:lang>tr</v8:lang>
-					<v8:content>Indirect cost</v8:content>
+					<v8:content>Dolaylı maliyet</v8:content>
 				</v8:item>
 			</title>
 			<role>
@@ -870,7 +870,7 @@
 				</v8:item>
 				<v8:item>
 					<v8:lang>tr</v8:lang>
-					<v8:content>Indirect cost (tax)</v8:content>
+					<v8:content>Dolaylı maliyet (vergi)</v8:content>
 				</v8:item>
 			</title>
 			<role>
@@ -912,7 +912,7 @@
 				</v8:item>
 				<v8:item>
 					<v8:lang>tr</v8:lang>
-					<v8:content>Indirect cost (tax)</v8:content>
+					<v8:content>Dolaylı maliyet (vergi)</v8:content>
 				</v8:item>
 			</title>
 			<appearance>
@@ -949,7 +949,7 @@
 				</v8:item>
 				<v8:item>
 					<v8:lang>tr</v8:lang>
-					<v8:content>Indirect cost (tax)</v8:content>
+					<v8:content>Dolaylı maliyet (vergi)</v8:content>
 				</v8:item>
 			</title>
 			<appearance>
@@ -986,7 +986,7 @@
 				</v8:item>
 				<v8:item>
 					<v8:lang>tr</v8:lang>
-					<v8:content>Indirect cost (tax)</v8:content>
+					<v8:content>Dolaylı maliyet (vergi)</v8:content>
 				</v8:item>
 			</title>
 			<role>
@@ -1028,7 +1028,7 @@
 				</v8:item>
 				<v8:item>
 					<v8:lang>tr</v8:lang>
-					<v8:content>Extra cost by ratio</v8:content>
+					<v8:content>Oranla ekstra maliyet</v8:content>
 				</v8:item>
 			</title>
 			<role>
@@ -1070,7 +1070,7 @@
 				</v8:item>
 				<v8:item>
 					<v8:lang>tr</v8:lang>
-					<v8:content>Extra cost by ratio</v8:content>
+					<v8:content>Oranla ekstra maliyet</v8:content>
 				</v8:item>
 			</title>
 			<appearance>
@@ -1107,7 +1107,7 @@
 				</v8:item>
 				<v8:item>
 					<v8:lang>tr</v8:lang>
-					<v8:content>Extra cost by ratio</v8:content>
+					<v8:content>Oranla ekstra maliyet</v8:content>
 				</v8:item>
 			</title>
 			<appearance>
@@ -1144,7 +1144,7 @@
 				</v8:item>
 				<v8:item>
 					<v8:lang>tr</v8:lang>
-					<v8:content>Extra cost by ratio</v8:content>
+					<v8:content>Oranla ekstra maliyet</v8:content>
 				</v8:item>
 			</title>
 			<role>
@@ -1186,7 +1186,7 @@
 				</v8:item>
 				<v8:item>
 					<v8:lang>tr</v8:lang>
-					<v8:content>Extra cost by ratio (tax)</v8:content>
+					<v8:content>Ekstra maliyet oranıyla (vergi)</v8:content>
 				</v8:item>
 			</title>
 			<role>
@@ -1228,7 +1228,7 @@
 				</v8:item>
 				<v8:item>
 					<v8:lang>tr</v8:lang>
-					<v8:content>Extra cost by ratio (tax)</v8:content>
+					<v8:content>Ekstra maliyet oranıyla (vergi)</v8:content>
 				</v8:item>
 			</title>
 			<appearance>
@@ -1265,7 +1265,7 @@
 				</v8:item>
 				<v8:item>
 					<v8:lang>tr</v8:lang>
-					<v8:content>Extra cost by ratio (tax)</v8:content>
+					<v8:content>Ekstra maliyet oranıyla (vergi)</v8:content>
 				</v8:item>
 			</title>
 			<appearance>
@@ -1302,7 +1302,7 @@
 				</v8:item>
 				<v8:item>
 					<v8:lang>tr</v8:lang>
-					<v8:content>Extra cost by ratio (tax)</v8:content>
+					<v8:content>Ekstra maliyet oranıyla (vergi)</v8:content>
 				</v8:item>
 			</title>
 			<role>
@@ -1344,7 +1344,7 @@
 				</v8:item>
 				<v8:item>
 					<v8:lang>tr</v8:lang>
-					<v8:content>Extra direct cost</v8:content>
+					<v8:content>Ekstra direkt maliyet</v8:content>
 				</v8:item>
 			</title>
 			<role>
@@ -1386,7 +1386,7 @@
 				</v8:item>
 				<v8:item>
 					<v8:lang>tr</v8:lang>
-					<v8:content>Extra direct cost</v8:content>
+					<v8:content>Ekstra direkt maliyet</v8:content>
 				</v8:item>
 			</title>
 			<appearance>
@@ -1423,7 +1423,7 @@
 				</v8:item>
 				<v8:item>
 					<v8:lang>tr</v8:lang>
-					<v8:content>Extra direct cost</v8:content>
+					<v8:content>Ekstra direkt maliyet</v8:content>
 				</v8:item>
 			</title>
 			<appearance>
@@ -1460,7 +1460,7 @@
 				</v8:item>
 				<v8:item>
 					<v8:lang>tr</v8:lang>
-					<v8:content>Extra direct cost</v8:content>
+					<v8:content>Ekstra direkt maliyet</v8:content>
 				</v8:item>
 			</title>
 			<role>
@@ -1502,7 +1502,7 @@
 				</v8:item>
 				<v8:item>
 					<v8:lang>tr</v8:lang>
-					<v8:content>Extra direct cost (tax)</v8:content>
+					<v8:content>Ekstra direkt maliyet (vergi)</v8:content>
 				</v8:item>
 			</title>
 			<role>
@@ -1544,7 +1544,7 @@
 				</v8:item>
 				<v8:item>
 					<v8:lang>tr</v8:lang>
-					<v8:content>Extra direct cost (tax)</v8:content>
+					<v8:content>Ekstra direkt maliyet (vergi)</v8:content>
 				</v8:item>
 			</title>
 			<appearance>
@@ -1581,7 +1581,7 @@
 				</v8:item>
 				<v8:item>
 					<v8:lang>tr</v8:lang>
-					<v8:content>Extra direct cost (tax)</v8:content>
+					<v8:content>Ekstra direkt maliyet (vergi)</v8:content>
 				</v8:item>
 			</title>
 			<appearance>
@@ -1618,7 +1618,7 @@
 				</v8:item>
 				<v8:item>
 					<v8:lang>tr</v8:lang>
-					<v8:content>Extra direct cost (tax)</v8:content>
+					<v8:content>Ekstra direkt maliyet (vergi)</v8:content>
 				</v8:item>
 			</title>
 			<role>
@@ -1660,7 +1660,7 @@
 				</v8:item>
 				<v8:item>
 					<v8:lang>tr</v8:lang>
-					<v8:content>Allocated cost</v8:content>
+					<v8:content>Ayrılan maliyet</v8:content>
 				</v8:item>
 			</title>
 			<role>
@@ -1702,7 +1702,7 @@
 				</v8:item>
 				<v8:item>
 					<v8:lang>tr</v8:lang>
-					<v8:content>Allocated cost</v8:content>
+					<v8:content>Ayrılan maliyet</v8:content>
 				</v8:item>
 			</title>
 			<appearance>
@@ -1739,7 +1739,7 @@
 				</v8:item>
 				<v8:item>
 					<v8:lang>tr</v8:lang>
-					<v8:content>Allocated cost</v8:content>
+					<v8:content>Ayrılan maliyet</v8:content>
 				</v8:item>
 			</title>
 			<appearance>
@@ -1776,7 +1776,7 @@
 				</v8:item>
 				<v8:item>
 					<v8:lang>tr</v8:lang>
-					<v8:content>Allocated cost</v8:content>
+					<v8:content>Ayrılan maliyet</v8:content>
 				</v8:item>
 			</title>
 			<role>
@@ -1818,7 +1818,7 @@
 				</v8:item>
 				<v8:item>
 					<v8:lang>tr</v8:lang>
-					<v8:content>Allocated cost (tax)</v8:content>
+					<v8:content>Ayrılan maliyet (vergi)</v8:content>
 				</v8:item>
 			</title>
 			<role>
@@ -1860,7 +1860,7 @@
 				</v8:item>
 				<v8:item>
 					<v8:lang>tr</v8:lang>
-					<v8:content>Allocated cost (tax)</v8:content>
+					<v8:content>Ayrılan maliyet (vergi)</v8:content>
 				</v8:item>
 			</title>
 			<appearance>
@@ -1897,7 +1897,7 @@
 				</v8:item>
 				<v8:item>
 					<v8:lang>tr</v8:lang>
-					<v8:content>Allocated cost (tax)</v8:content>
+					<v8:content>Ayrılan maliyet (vergi)</v8:content>
 				</v8:item>
 			</title>
 			<appearance>
@@ -1934,7 +1934,7 @@
 				</v8:item>
 				<v8:item>
 					<v8:lang>tr</v8:lang>
-					<v8:content>Allocated cost (tax)</v8:content>
+					<v8:content>Ayrılan maliyet (vergi)</v8:content>
 				</v8:item>
 			</title>
 			<role>
@@ -1976,7 +1976,7 @@
 				</v8:item>
 				<v8:item>
 					<v8:lang>tr</v8:lang>
-					<v8:content>Allocated revenue</v8:content>
+					<v8:content>Ayrılan gelir</v8:content>
 				</v8:item>
 			</title>
 			<role>
@@ -2018,7 +2018,7 @@
 				</v8:item>
 				<v8:item>
 					<v8:lang>tr</v8:lang>
-					<v8:content>Allocated revenue</v8:content>
+					<v8:content>Ayrılan gelir</v8:content>
 				</v8:item>
 			</title>
 			<appearance>
@@ -2055,7 +2055,7 @@
 				</v8:item>
 				<v8:item>
 					<v8:lang>tr</v8:lang>
-					<v8:content>Allocated revenue</v8:content>
+					<v8:content>Ayrılan gelir</v8:content>
 				</v8:item>
 			</title>
 			<appearance>
@@ -2092,7 +2092,7 @@
 				</v8:item>
 				<v8:item>
 					<v8:lang>tr</v8:lang>
-					<v8:content>Allocated revenue</v8:content>
+					<v8:content>Ayrılan gelir</v8:content>
 				</v8:item>
 			</title>
 			<role>
@@ -2134,7 +2134,7 @@
 				</v8:item>
 				<v8:item>
 					<v8:lang>tr</v8:lang>
-					<v8:content>Allocated revenue (tax)</v8:content>
+					<v8:content>Tahsis edilen gelir (vergi)</v8:content>
 				</v8:item>
 			</title>
 			<role>
@@ -2176,7 +2176,7 @@
 				</v8:item>
 				<v8:item>
 					<v8:lang>tr</v8:lang>
-					<v8:content>Allocated revenue (tax)</v8:content>
+					<v8:content>Tahsis edilen gelir (vergi)</v8:content>
 				</v8:item>
 			</title>
 			<appearance>
@@ -2213,7 +2213,7 @@
 				</v8:item>
 				<v8:item>
 					<v8:lang>tr</v8:lang>
-					<v8:content>Allocated revenue (tax)</v8:content>
+					<v8:content>Tahsis edilen gelir (vergi)</v8:content>
 				</v8:item>
 			</title>
 			<appearance>
@@ -2250,7 +2250,7 @@
 				</v8:item>
 				<v8:item>
 					<v8:lang>tr</v8:lang>
-					<v8:content>Allocated revenue (tax)</v8:content>
+					<v8:content>Tahsis edilen gelir (vergi)</v8:content>
 				</v8:item>
 			</title>
 			<role>
@@ -3619,7 +3619,7 @@ ORDER BY
 					</v8:item>
 					<v8:item>
 						<v8:lang>tr</v8:lang>
-						<v8:content>Invoice amount receipt</v8:content>
+						<v8:content>Fatura miktarı makbuz</v8:content>
 					</v8:item>
 				</title>
 				<role>

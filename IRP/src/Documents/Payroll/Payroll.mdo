@@ -18,7 +18,7 @@
  </synonym>
  <synonym>
   <key>tr</key>
-  <value>Payroll</value>
+  <value>Bordro</value>
  </synonym>
  <useStandardCommands>true</useStandardCommands>
  <inputByString>Document.Payroll.StandardAttribute.Number</inputByString>
@@ -62,7 +62,7 @@
  </listPresentation>
  <listPresentation>
   <key>tr</key>
-  <value>Payrolls</value>
+  <value>Maaş bordroları</value>
  </listPresentation>
  <numberLength>12</numberLength>
  <numberAllowedLength>Variable</numberAllowedLength>
@@ -203,7 +203,7 @@
   </synonym>
   <synonym>
    <key>tr</key>
-   <value>Payment period</value>
+   <value>Цdeme dцnemi</value>
   </synonym>
   <type>
    <types>CatalogRef.PlanningPeriods</types>
@@ -283,7 +283,7 @@
   </synonym>
   <synonym>
    <key>tr</key>
-   <value>Choice by accrual form</value>
+   <value>Avans formu ile seзim</value>
   </synonym>
   <usePurposes>PersonalComputer</usePurposes>
   <usePurposes>MobileDevice</usePurposes>
@@ -304,7 +304,7 @@
   </synonym>
   <synonym>
    <key>tr</key>
-   <value>Accrual list</value>
+   <value>Tahakkuk listesi</value>
   </synonym>
   <attributes uuid="e200e073-c6f8-407b-aea8-b41878b6950b">
    <name>Key</name>
@@ -369,7 +369,7 @@
    </synonym>
    <synonym>
     <key>tr</key>
-    <value>Position</value>
+    <value>Pozisyon</value>
    </synonym>
    <type>
     <types>CatalogRef.EmployeePositions</types>
@@ -392,7 +392,7 @@
    </synonym>
    <synonym>
     <key>tr</key>
-    <value>Accrual type</value>
+    <value>Tahakkuk tьrь</value>
    </synonym>
    <type>
     <types>CatalogRef.AccrualAndDeductionTypes</types>
@@ -494,7 +494,7 @@
   </synonym>
   <synonym>
    <key>tr</key>
-   <value>Deduction list</value>
+   <value>Kesinti listesi</value>
   </synonym>
   <attributes uuid="037105e7-89d4-4782-96b5-97d710b723cc">
    <name>Key</name>
@@ -559,7 +559,7 @@
    </synonym>
    <synonym>
     <key>tr</key>
-    <value>Position</value>
+    <value>Pozisyon</value>
    </synonym>
    <type>
     <types>CatalogRef.EmployeePositions</types>
@@ -582,7 +582,7 @@
    </synonym>
    <synonym>
     <key>tr</key>
-    <value>Deduction type</value>
+    <value>Kesinti tьrь</value>
    </synonym>
    <type>
     <types>CatalogRef.AccrualAndDeductionTypes</types>
@@ -706,7 +706,7 @@
   </synonym>
   <synonym>
    <key>tr</key>
-   <value>Cash advance deduction list</value>
+   <value>Avans kesinti listesi</value>
   </synonym>
   <attributes uuid="d9978904-846e-46ef-b219-fbcfd38d4364">
    <name>Key</name>

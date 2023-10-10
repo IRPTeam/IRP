@@ -3158,7 +3158,7 @@
      </title>
      <title>
       <key>tr</key>
-      <value>Resources</value>
+      <value>Kaynaklar</value>
      </title>
      <extendedTooltip>
       <name>Group8ExtendedTooltip</name>
@@ -3234,7 +3234,7 @@
    </title>
    <title>
     <key>tr</key>
-    <value>Group3</value>
+    <value>Grup3</value>
    </title>
    <extendedTooltip>
     <name>Group3ExtendedTooltip</name>
@@ -3571,7 +3571,7 @@
    </title>
    <title>
     <key>tr</key>
-    <value>Dep tabular section</value>
+    <value>Dep tablo bцlьmь</value>
    </title>
    <id>9</id>
    <valueType>
@@ -3597,7 +3597,7 @@
    </title>
    <title>
     <key>tr</key>
-    <value>Dep line number</value>
+    <value>Dep satır numarası</value>
    </title>
    <id>10</id>
    <valueType>
@@ -3650,7 +3650,7 @@
    </title>
    <title>
     <key>tr</key>
-    <value>Is ok</value>
+    <value>Tamam</value>
    </title>
    <id>12</id>
    <valueType>
@@ -3751,7 +3751,7 @@
    </title>
    <title>
     <key>tr</key>
-    <value>Repeating lines</value>
+    <value>Tekrarlayan satırlar</value>
    </title>
    <id>27</id>
    <valueType>
@@ -3804,7 +3804,7 @@
    </title>
    <title>
     <key>tr</key>
-    <value>Current price</value>
+    <value>Mevcut fiyat</value>
    </title>
    <id>33</id>
    <valueType>
@@ -3829,7 +3829,7 @@
    </title>
    <title>
     <key>tr</key>
-    <value>New price</value>
+    <value>Yeni fiyat</value>
    </title>
    <id>34</id>
    <valueType>
@@ -3854,7 +3854,7 @@
    </title>
    <title>
     <key>tr</key>
-    <value>Result price type</value>
+    <value>Sonuз fiyat tьrь</value>
    </title>
    <id>35</id>
    <valueType>
@@ -3879,7 +3879,7 @@
    </title>
    <title>
     <key>tr</key>
-    <value>Result price</value>
+    <value>Sonuç fiyatı</value>
    </title>
    <id>36</id>
    <valueType>
@@ -3904,7 +3904,7 @@
    </title>
    <title>
     <key>tr</key>
-    <value>Change price</value>
+    <value>Fiyatı değiştir</value>
    </title>
    <id>37</id>
    <valueType>
@@ -3929,7 +3929,7 @@
    </title>
    <title>
     <key>tr</key>
-    <value>With price</value>
+    <value>Fiyatlı</value>
    </title>
    <id>40</id>
    <valueType>
@@ -3954,7 +3954,7 @@
    </title>
    <title>
     <key>tr</key>
-    <value>Key SLN</value>
+    <value>SLN Anahtarı</value>
    </title>
    <id>48</id>
    <valueType>
@@ -3981,7 +3981,7 @@
   </title>
   <title>
    <key>tr</key>
-   <value>Registers</value>
+   <value>Kayıtlar</value>
   </title>
   <id>16</id>
   <valueType>
@@ -4031,7 +4031,7 @@
    </title>
    <title>
     <key>tr</key>
-    <value>Record UUID</value>
+    <value>Kayıt UUID</value>
    </title>
    <id>18</id>
    <valueType>
@@ -4083,7 +4083,7 @@
    </title>
    <title>
     <key>tr</key>
-    <value>Resources</value>
+    <value>Kaynaklar</value>
    </title>
    <id>20</id>
    <valueType>
@@ -4109,7 +4109,7 @@
    </title>
    <title>
     <key>tr</key>
-    <value>Key SLN</value>
+    <value>SLN Anahtarı</value>
    </title>
    <id>49</id>
    <valueType>
@@ -4186,7 +4186,7 @@
    </title>
    <title>
     <key>tr</key>
-    <value>Record UUID</value>
+    <value>Kayıt UUID</value>
    </title>
    <id>23</id>
    <valueType>
@@ -4235,7 +4235,7 @@
    </title>
    <title>
     <key>tr</key>
-    <value>New value</value>
+    <value>Yeni değer</value>
    </title>
    <id>38</id>
    <valueType/>
@@ -4309,7 +4309,7 @@
    </title>
    <title>
     <key>tr</key>
-    <value>Record UUID</value>
+    <value>Kayıt UUID</value>
    </title>
    <id>23</id>
    <valueType>
@@ -4358,7 +4358,7 @@
    </title>
    <title>
     <key>tr</key>
-    <value>New value</value>
+    <value>Yeni değer</value>
    </title>
    <id>39</id>
    <valueType/>
@@ -4456,7 +4456,7 @@
    </title>
    <title>
     <key>tr</key>
-    <value>New item</value>
+    <value>Yeni öğe</value>
    </title>
    <id>44</id>
    <valueType>
@@ -4506,7 +4506,7 @@
    </title>
    <title>
     <key>tr</key>
-    <value>New item key</value>
+    <value>Yeni ürün anahtarı</value>
    </title>
    <id>46</id>
    <valueType>
@@ -4531,7 +4531,7 @@
    </title>
    <title>
     <key>tr</key>
-    <value>Key SLN</value>
+    <value>SLN Anahtarı</value>
    </title>
    <id>47</id>
    <valueType>
@@ -4608,7 +4608,7 @@
   </title>
   <title>
    <key>tr</key>
-   <value>Find refs</value>
+   <value>Ref'leri bul</value>
   </title>
   <id>1</id>
   <use>
@@ -4633,7 +4633,7 @@
   </title>
   <title>
    <key>tr</key>
-   <value>Replace</value>
+   <value>Değiştir</value>
   </title>
   <id>2</id>
   <use>
@@ -4658,7 +4658,7 @@
   </title>
   <title>
    <key>tr</key>
-   <value>Set item key</value>
+   <value>Öğe anahtarını ayarla</value>
   </title>
   <id>3</id>
   <use>
@@ -4683,7 +4683,7 @@
   </title>
   <title>
    <key>tr</key>
-   <value>Load</value>
+   <value>Yьkle</value>
   </title>
   <id>4</id>
   <use>

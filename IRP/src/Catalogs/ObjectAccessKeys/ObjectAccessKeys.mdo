@@ -18,7 +18,7 @@
  </synonym>
  <synonym>
   <key>tr</key>
-  <value>Object access keys</value>
+  <value>Nesne erişim anahtarları</value>
  </synonym>
  <useStandardCommands>true</useStandardCommands>
  <inputByString>Catalog.ObjectAccessKeys.StandardAttribute.Code</inputByString>
@@ -36,7 +36,7 @@
  </objectPresentation>
  <objectPresentation>
   <key>tr</key>
-  <value>Object access key</value>
+  <value>Nesne erişim anahtarı</value>
  </objectPresentation>
  <listPresentation>
   <key>en</key>
@@ -48,7 +48,7 @@
  </listPresentation>
  <listPresentation>
   <key>tr</key>
-  <value>Object access keys</value>
+  <value>Nesne erişim anahtarları</value>
  </listPresentation>
  <levelCount>2</levelCount>
  <foldersOnTop>true</foldersOnTop>
@@ -75,7 +75,7 @@
   </synonym>
   <synonym>
    <key>tr</key>
-   <value>Filter data list</value>
+   <value>Veri listesini filtrele</value>
   </synonym>
   <attributes uuid="7998b236-a965-4beb-9d6c-f8d0f53a5453">
    <name>Key</name>
@@ -114,7 +114,7 @@
    </synonym>
    <synonym>
     <key>tr</key>
-    <value>Value ref1</value>
+    <value>Değer ref1</value>
    </synonym>
    <type>
     <types>AnyRef</types>
@@ -136,7 +136,7 @@
    </synonym>
    <synonym>
     <key>tr</key>
-    <value>Value ref2</value>
+    <value>Değer ref2</value>
    </synonym>
    <type>
     <types>AnyRef</types>
@@ -158,7 +158,7 @@
    </synonym>
    <synonym>
     <key>tr</key>
-    <value>Value ref3</value>
+    <value>Değer ref3</value>
    </synonym>
    <type>
     <types>AnyRef</types>
@@ -180,7 +180,7 @@
    </synonym>
    <synonym>
     <key>tr</key>
-    <value>Value ref4</value>
+    <value>Değer ref4</value>
    </synonym>
    <type>
     <types>AnyRef</types>
@@ -202,7 +202,7 @@
    </synonym>
    <synonym>
     <key>tr</key>
-    <value>Value ref5</value>
+    <value>Değer ref5</value>
    </synonym>
    <type>
     <types>AnyRef</types>

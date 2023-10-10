@@ -11,7 +11,7 @@
  </synonym>
  <synonym>
   <key>tr</key>
-  <value>Copy paste server</value>
+  <value>Sunucuya kopyala yapıştır</value>
  </synonym>
  <server>true</server>
  <clientOrdinaryApplication>true</clientOrdinaryApplication>

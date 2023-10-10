@@ -528,6 +528,8 @@ Scenario: _0850000 preparation (fiscal printer)
 				| 'Yes'       | 'Fiscal printer'         |
 				| 'Yes'       | 'Acquiring terminal'     |
 		And I click "Save and close" button
+		And I close TestClient session
+		Given I open new TestClient session or connect the existing one	
 	* Check fiscal printer status
 		Given I open hyperlink "e1cib/list/Catalog.Hardware"
 		And I go to line in "List" table
@@ -2700,7 +2702,7 @@ Scenario: _0260160 check Get Last Error button
 Scenario: _0260180 check fiscal logs
 	And I close all client application windows
 	Given I open hyperlink "e1cib/list/InformationRegister.HardwareLog"
-	Then the number of "List" table lines is "равно" "676"	
+	Then the number of "List" table lines is "равно" "678"	
 	* Check log records form
 		And I go to the first line in "List" table
 		And I select current line in "List" table
@@ -3024,9 +3026,48 @@ Scenario: _0260189 print X report from CRS
 	And I close all client application windows
 	
 
-				
-				
-
-				
-
-
+Scenario: _0260190 check reconnect fiscal printer from payment form
+	And I close all client application windows
+	* Open POS
+		And In the command interface I select "Retail" "Point of sale"	
+		And I click "Open session" button
+	* Add items and open payment form
+		And I click "Search by barcode (F7)" button
+		And I input "2202283705" text in the field named "Barcode"
+		And I move to the next attribute
+	* Payment
+		And I click "Payment (+)" button
+		Then "Payment" window is opened
+	* Reconnect fiscal printer
+		Then "Payment" window is opened
+		And I click "Reconnect fiscal printer" button
+		Then there are lines in TestClient message log
+			|'Done'|
+		Given I open hyperlink "e1cib/list/InformationRegister.HardwareLog"
+		And I go to the last line in "List" table
+		And the current line of "List" table is equal to
+			| 'Method' |
+			| 'Open' |
+		And I go to the previous line in "List" table
+		And the current line of "List" table is equal to
+			| 'Method' |
+			| 'Open' |
+		And I go to the previous line in "List" table
+		And the current line of "List" table is equal to
+			| 'Method' |
+			| 'SetParameter' |
+		And I go to the previous line in "List" table
+		And the current line of "List" table is equal to
+			| 'Method' |
+			| 'SetParameter' |
+		And I go to the previous line in "List" table
+		And the current line of "List" table is equal to
+			| 'Method' |
+			| 'Close' |
+		And I go to the previous line in "List" table
+		And the current line of "List" table is equal to
+			| 'Method' |
+			| 'Close' |
+		And I close current window
+		And I close "Payment" window
+		And I click "Clear current receipt" button

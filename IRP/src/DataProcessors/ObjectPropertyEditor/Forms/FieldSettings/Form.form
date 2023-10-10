@@ -71,7 +71,7 @@
      </presentation>
      <presentation>
       <key>tr</key>
-      <value>Normal writing</value>
+      <value>Normal yazma</value>
      </presentation>
      <value xsi:type="core:NumberValue">
       <value>0</value>
@@ -88,7 +88,7 @@
      </presentation>
      <presentation>
       <key>tr</key>
-      <value>Update related fields</value>
+      <value>İlgili alanları güncelle</value>
      </presentation>
      <value xsi:type="core:NumberValue">
       <value>1</value>
@@ -105,7 +105,7 @@
      </presentation>
      <presentation>
       <key>tr</key>
-      <value>Forced writing (dangerous)</value>
+      <value>Zorla yazma (tehlikeli)</value>
      </presentation>
      <value xsi:type="core:NumberValue">
       <value>2</value>
@@ -219,7 +219,7 @@
    </title>
    <title>
     <key>tr</key>
-    <value>Group of showing service data</value>
+    <value>Hizmet veri gцsterme grubu</value>
    </title>
    <extendedTooltip>
     <name>ShowServiceDataExtendedTooltip</name>
@@ -261,7 +261,7 @@
   </title>
   <title>
    <key>tr</key>
-   <value>Group of additional settings</value>
+   <value>Ek ayarlar grubu</value>
   </title>
   <extendedTooltip>
    <name>AdditionalSettingsExtendedTooltip</name>
@@ -927,7 +927,7 @@
    </title>
    <title>
     <key>tr</key>
-    <value>Is service attribute</value>
+    <value>Hizmet özelliği</value>
    </title>
    <id>7</id>
    <valueType>
@@ -953,7 +953,7 @@
   </title>
   <title>
    <key>tr</key>
-   <value>Show service attributes</value>
+   <value>Servis цzelliklerini gцster</value>
   </title>
   <id>6</id>
   <valueType>
@@ -978,7 +978,7 @@
   </title>
   <title>
    <key>tr</key>
-   <value>Show service tables</value>
+   <value>Servis tablolarını göster</value>
   </title>
   <id>10</id>
   <valueType>
@@ -1003,7 +1003,7 @@
   </title>
   <title>
    <key>tr</key>
-   <value>Writing mode</value>
+   <value>Yazma modu</value>
   </title>
   <id>11</id>
   <valueType>

@@ -164,7 +164,7 @@
   </synonym>
   <synonym>
    <key>tr</key>
-   <value>Sale address</value>
+   <value>Satış adresi</value>
   </synonym>
   <type>
    <types>String</types>
@@ -188,7 +188,7 @@
   </synonym>
   <synonym>
    <key>tr</key>
-   <value>Sale location</value>
+   <value>Satış konumu</value>
   </synonym>
   <type>
    <types>String</types>
@@ -212,7 +212,7 @@
   </synonym>
   <synonym>
    <key>tr</key>
-   <value>Cutter</value>
+   <value>Kesici</value>
   </synonym>
   <type>
    <types>String</types>
@@ -267,7 +267,7 @@
   </synonym>
   <synonym>
    <key>tr</key>
-   <value>Equipment API module</value>
+   <value>Ekipman API modьlь</value>
   </synonym>
   <type>
    <types>EnumRef.EquipmentAPIModule</types>
@@ -285,7 +285,7 @@
   </synonym>
   <synonym>
    <key>tr</key>
-   <value>Print copy if cutter not found</value>
+   <value>Kesici bulunamazsa kopyayı yazdır</value>
   </synonym>
   <type>
    <types>Boolean</types>

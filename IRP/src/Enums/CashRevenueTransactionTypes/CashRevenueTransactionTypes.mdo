@@ -16,7 +16,7 @@
  </synonym>
  <synonym>
   <key>tr</key>
-  <value>Cash revenue transaction types</value>
+  <value>Nakit gelir işlem türleri</value>
  </synonym>
  <quickChoice>true</quickChoice>
  <choiceMode>BothWays</choiceMode>
@@ -32,7 +32,7 @@
   </synonym>
   <synonym>
    <key>tr</key>
-   <value>Current company revenue</value>
+   <value>Mevcut şirket geliri</value>
   </synonym>
  </enumValues>
  <enumValues uuid="b37f8a54-8d3c-487d-a756-41c2056ebe59">
@@ -47,7 +47,7 @@
   </synonym>
   <synonym>
    <key>tr</key>
-   <value>Other company revenue</value>
+   <value>Diğer şirket geliri</value>
   </synonym>
  </enumValues>
 </mdclass:Enum>

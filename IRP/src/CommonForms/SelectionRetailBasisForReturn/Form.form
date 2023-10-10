@@ -880,7 +880,7 @@ HAVING
       </content>
       <content>
        <key>tr</key>
-       <value>Fiscal data</value>
+       <value>Fiskal veri</value>
       </content>
      </localValue>
     </title>
@@ -971,7 +971,7 @@ HAVING
   </title>
   <title>
    <key>tr</key>
-   <value>Fiscal number</value>
+   <value>Fatura numarası</value>
   </title>
   <id>4</id>
   <valueType>
@@ -997,7 +997,7 @@ HAVING
   </title>
   <title>
    <key>tr</key>
-   <value>Choose</value>
+   <value>Seз</value>
   </title>
   <id>1</id>
   <use>

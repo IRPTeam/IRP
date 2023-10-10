@@ -762,7 +762,7 @@
   </synonym>
   <synonym>
    <key>tr</key>
-   <value>X report</value>
+   <value>X raporu</value>
   </synonym>
   <group>CommandGroup.Fiscalization</group>
   <commandParameterType>

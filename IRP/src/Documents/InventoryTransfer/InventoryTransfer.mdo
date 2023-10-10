@@ -267,7 +267,7 @@
   </synonym>
   <synonym>
    <key>tr</key>
-   <value>Ship from</value>
+   <value>Gцnderen</value>
   </synonym>
   <type>
    <types>CatalogRef.Partners</types>
@@ -290,7 +290,7 @@
   </synonym>
   <synonym>
    <key>tr</key>
-   <value>Ship from address</value>
+   <value>Gцnderen adresi</value>
   </synonym>
   <type>
    <types>CatalogRef.Addresses</types>
@@ -313,7 +313,7 @@
   </synonym>
   <synonym>
    <key>tr</key>
-   <value>Ship to</value>
+   <value>Gцnderilen</value>
   </synonym>
   <type>
    <types>CatalogRef.Partners</types>
@@ -359,7 +359,7 @@
   </synonym>
   <synonym>
    <key>tr</key>
-   <value>Carrier</value>
+   <value>Taşıyıcı</value>
   </synonym>
   <type>
    <types>CatalogRef.Partners</types>
@@ -633,7 +633,7 @@
    </synonym>
    <synonym>
     <key>tr</key>
-    <value>Stock quantity</value>
+    <value>Stok miktarı</value>
    </synonym>
    <type>
     <types>DefinedType.typeQuantity</types>
@@ -721,7 +721,7 @@
    </synonym>
    <synonym>
     <key>tr</key>
-    <value>Quantity is fixed</value>
+    <value>Miktar sabittir</value>
    </synonym>
    <type>
     <types>Boolean</types>
@@ -1098,7 +1098,7 @@
   </synonym>
   <synonym>
    <key>tr</key>
-   <value>DELETE consignor batches</value>
+   <value>Göndereni sil toplu işler</value>
   </synonym>
   <attributes uuid="c9fb00cc-2cdd-4577-b561-f0e61ac51c85">
    <name>Key</name>

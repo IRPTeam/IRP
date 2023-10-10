@@ -102,7 +102,7 @@
   </title>
   <title>
    <key>tr</key>
-   <value>Transaction was canceled</value>
+   <value>İşlem iptal edildi</value>
   </title>
   <enabled>true</enabled>
   <userVisible>
@@ -546,7 +546,7 @@
   </title>
   <title>
    <key>tr</key>
-   <value>Interactive</value>
+   <value>Etkileşimli</value>
   </title>
   <id>6</id>
   <valueType>
@@ -600,7 +600,7 @@
   </title>
   <title>
    <key>tr</key>
-   <value>Revers</value>
+   <value>Ters</value>
   </title>
   <id>2</id>
   <use>
@@ -629,7 +629,7 @@
   </title>
   <title>
    <key>tr</key>
-   <value>Pay</value>
+   <value>Цde</value>
   </title>
   <id>3</id>
   <use>

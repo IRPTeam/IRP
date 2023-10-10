@@ -215,7 +215,7 @@
    </synonym>
    <synonym>
     <key>tr</key>
-    <value>Scanned serial lot number</value>
+    <value>Taranan seri lot numarası</value>
    </synonym>
    <type>
     <types>CatalogRef.SerialLotNumbers</types>

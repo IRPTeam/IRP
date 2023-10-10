@@ -1196,7 +1196,7 @@
       </title>
       <title>
        <key>tr</key>
-       <value>Copy current values</value>
+       <value>Mevcut değerleri kopyala</value>
       </title>
       <extendedTooltip>
        <name>AttributesGroup_CopyCurrentValuesExtendedTooltip</name>
@@ -2471,7 +2471,7 @@
       </title>
       <title>
        <key>tr</key>
-       <value>Copy current values</value>
+       <value>Mevcut değerleri kopyala</value>
       </title>
       <extendedTooltip>
        <name>ExtensionAttributesGroup_CopyCurrentValuesExtendedTooltip</name>
@@ -3275,7 +3275,7 @@
   </title>
   <title>
    <key>tr</key>
-   <value>Copy "Condition"</value>
+   <value>Koşul kopyala</value>
   </title>
   <id>9</id>
   <use>
@@ -3304,7 +3304,7 @@
   </title>
   <title>
    <key>tr</key>
-   <value>Copy attribute "Show"</value>
+   <value>Show özelliğini kopyala</value>
   </title>
   <id>10</id>
   <use>
@@ -3333,7 +3333,7 @@
   </title>
   <title>
    <key>tr</key>
-   <value>Copy attribute "Show in HTML"</value>
+   <value>HTML'de Göster özelliğini kopyala</value>
   </title>
   <id>11</id>
   <use>
@@ -3362,7 +3362,7 @@
   </title>
   <title>
    <key>tr</key>
-   <value>Copy attribute "Required"</value>
+   <value>Gerekli özelliğini kopyala</value>
   </title>
   <id>12</id>
   <use>
@@ -3391,7 +3391,7 @@
   </title>
   <title>
    <key>tr</key>
-   <value>Copy "Interface group"</value>
+   <value>Arayьz grubunu kopyala</value>
   </title>
   <id>13</id>
   <use>

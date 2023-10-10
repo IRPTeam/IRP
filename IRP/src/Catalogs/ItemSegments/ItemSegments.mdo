@@ -211,7 +211,7 @@
   </synonym>
   <synonym>
    <key>tr</key>
-   <value>Add to segment</value>
+   <value>Segmente ekle</value>
   </synonym>
   <group>CommandGroup.Service</group>
   <commandParameterType>

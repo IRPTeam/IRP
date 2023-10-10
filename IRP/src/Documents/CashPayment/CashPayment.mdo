@@ -667,7 +667,7 @@
    </synonym>
    <synonym>
     <key>tr</key>
-    <value>Payment period</value>
+    <value>Цdeme dцnemi</value>
    </synonym>
    <type>
     <types>CatalogRef.PlanningPeriods</types>
@@ -717,7 +717,7 @@
    </synonym>
    <synonym>
     <key>tr</key>
-    <value>Receipting branch</value>
+    <value>Makbuz şubesi</value>
    </synonym>
    <type>
     <types>CatalogRef.BusinessUnits</types>
@@ -739,7 +739,7 @@
    </synonym>
    <synonym>
     <key>tr</key>
-    <value>VAT</value>
+    <value>KDV</value>
    </synonym>
    <type>
     <types>CatalogRef.TaxRates</types>
@@ -1051,7 +1051,7 @@
   </synonym>
   <synonym>
    <key>tr</key>
-   <value>DELETE tax list</value>
+   <value>Vergi listesini SİL</value>
   </synonym>
   <attributes uuid="8a3db9c7-9829-45e6-9069-e97d0db9f5ef">
    <name>Key</name>

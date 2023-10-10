@@ -18,7 +18,7 @@
  </synonym>
  <synonym>
   <key>tr</key>
-  <value>Accrual and deduction types</value>
+  <value>Tahakkuk ve kesinti tьrleri</value>
  </synonym>
  <useStandardCommands>true</useStandardCommands>
  <fullTextSearchOnInputByString>DontUse</fullTextSearchOnInputByString>
@@ -177,7 +177,7 @@
   </synonym>
   <synonym>
    <key>tr</key>
-   <value>Algorithm ID</value>
+   <value>Algoritma Kimliği</value>
   </synonym>
   <type>
    <types>String</types>

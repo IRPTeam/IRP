@@ -673,7 +673,7 @@
    </synonym>
    <synonym>
     <key>tr</key>
-    <value>Stock quantity</value>
+    <value>Stok miktarı</value>
    </synonym>
    <type>
     <types>DefinedType.typeQuantity</types>
@@ -877,7 +877,7 @@
    </synonym>
    <synonym>
     <key>tr</key>
-    <value>Quantity is fixed</value>
+    <value>Miktar sabittir</value>
    </synonym>
    <type>
     <types>Boolean</types>
@@ -899,7 +899,7 @@
    </synonym>
    <synonym>
     <key>tr</key>
-    <value>VAT</value>
+    <value>KDV</value>
    </synonym>
    <type>
     <types>CatalogRef.TaxRates</types>
@@ -926,7 +926,7 @@
   </synonym>
   <synonym>
    <key>tr</key>
-   <value>DELETE tax list</value>
+   <value>Vergi listesini SİL</value>
   </synonym>
   <attributes uuid="04c46990-3dee-47f6-8626-e2b0d10ae54e">
    <name>Key</name>

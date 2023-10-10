@@ -11,7 +11,7 @@
  </synonym>
  <synonym>
   <key>tr</key>
-  <value>Doc order closing server</value>
+  <value>Belge sipariş kapatma sunucusu</value>
  </synonym>
  <server>true</server>
  <serverCall>true</serverCall>

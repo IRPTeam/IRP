@@ -15,7 +15,7 @@
  </synonym>
  <synonym>
   <key>tr</key>
-  <value>Group photo uploading</value>
+  <value>Grup fotoğrafı yükleme</value>
  </synonym>
  <useStandardCommands>true</useStandardCommands>
  <defaultForm>DataProcessor.GroupPhotoUploading.Form.Form</defaultForm>

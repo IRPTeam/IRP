@@ -16,7 +16,7 @@
  </synonym>
  <synonym>
   <key>tr</key>
-  <value>Cash expense transaction types</value>
+  <value>Nakit gider işlem türleri</value>
  </synonym>
  <quickChoice>true</quickChoice>
  <choiceMode>BothWays</choiceMode>
@@ -32,7 +32,7 @@
   </synonym>
   <synonym>
    <key>tr</key>
-   <value>Current company expense</value>
+   <value>Mevcut şirket gideri</value>
   </synonym>
  </enumValues>
  <enumValues uuid="2a4e70ad-5d9c-48e7-ad79-d4a22f380a2a">
@@ -47,7 +47,7 @@
   </synonym>
   <synonym>
    <key>tr</key>
-   <value>Other company expense</value>
+   <value>Diğer şirket gideri</value>
   </synonym>
  </enumValues>
  <enumValues uuid="793ce70b-95ea-467d-8fd3-041b24f3c73d">
@@ -62,7 +62,7 @@
   </synonym>
   <synonym>
    <key>tr</key>
-   <value>Salary payment</value>
+   <value>Maaş ödemesi</value>
   </synonym>
  </enumValues>
 </mdclass:Enum>

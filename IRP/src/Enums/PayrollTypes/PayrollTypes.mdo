@@ -16,7 +16,7 @@
  </synonym>
  <synonym>
   <key>tr</key>
-  <value>Payroll types</value>
+  <value>Maaş bordrosu türleri</value>
  </synonym>
  <quickChoice>true</quickChoice>
  <choiceMode>BothWays</choiceMode>
@@ -32,7 +32,7 @@
   </synonym>
   <synonym>
    <key>tr</key>
-   <value>Accrual</value>
+   <value>Tahakkuk</value>
   </synonym>
  </enumValues>
  <enumValues uuid="fd46c290-1097-4a65-bc8e-1ace19f33252">
@@ -47,7 +47,7 @@
   </synonym>
   <synonym>
    <key>tr</key>
-   <value>Deduction</value>
+   <value>Kesinti</value>
   </synonym>
  </enumValues>
  <enumValues uuid="bce661b5-d0cb-46b0-911d-892bf411a1cc">
@@ -62,7 +62,7 @@
   </synonym>
   <synonym>
    <key>tr</key>
-   <value>Cash advance deductions</value>
+   <value>Avans kesintileri</value>
   </synonym>
  </enumValues>
 </mdclass:Enum>

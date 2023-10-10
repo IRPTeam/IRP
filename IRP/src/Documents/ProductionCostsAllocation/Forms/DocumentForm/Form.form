@@ -1285,7 +1285,7 @@
    </title>
    <title>
     <key>tr</key>
-    <value>Costs</value>
+    <value>Maliyetler</value>
    </title>
    <extendedTooltip>
     <name>GroupCostsExtendedTooltip</name>
@@ -2017,7 +2017,7 @@
    </title>
    <title>
     <key>tr</key>
-    <value>Durations</value>
+    <value>Sьreler</value>
    </title>
    <extendedTooltip>
     <name>GroupDurationsExtendedTooltip</name>
@@ -2551,7 +2551,7 @@
   </title>
   <title>
    <key>tr</key>
-   <value>Fill durations</value>
+   <value>Sьreleri doldur</value>
   </title>
   <id>9</id>
   <use>
@@ -2580,7 +2580,7 @@
   </title>
   <title>
    <key>tr</key>
-   <value>Fill costs</value>
+   <value>Maliyetleri doldur</value>
   </title>
   <id>10</id>
   <use>
@@ -2609,7 +2609,7 @@
   </title>
   <title>
    <key>tr</key>
-   <value>Allocate amounts</value>
+   <value>Miktarları tahsis et</value>
   </title>
   <id>11</id>
   <use>

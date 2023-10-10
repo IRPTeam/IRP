@@ -944,7 +944,7 @@
   </synonym>
   <synonym>
    <key>tr</key>
-   <value>Transaction type GR Return</value>
+   <value>İşlem türü GR İade</value>
   </synonym>
   <type>
    <types>EnumRef.GoodsReceiptTransactionTypes</types>
@@ -968,7 +968,7 @@
   </synonym>
   <synonym>
    <key>tr</key>
-   <value>Transaction type SC Return</value>
+   <value>İşlem türü SC İade</value>
   </synonym>
   <type>
    <types>EnumRef.ShipmentConfirmationTransactionTypes</types>
@@ -992,7 +992,7 @@
   </synonym>
   <synonym>
    <key>tr</key>
-   <value>Transaction type SC Retail</value>
+   <value>İşlem türü SC Perakende</value>
   </synonym>
   <type>
    <types>EnumRef.RetailShipmentConfirmationTransactionTypes</types>
@@ -1015,7 +1015,7 @@
   </synonym>
   <synonym>
    <key>tr</key>
-   <value>Transaction type GR Retail</value>
+   <value>İşlem türü GR Perakende</value>
   </synonym>
   <type>
    <types>EnumRef.RetailGoodsReceiptTransactionTypes</types>

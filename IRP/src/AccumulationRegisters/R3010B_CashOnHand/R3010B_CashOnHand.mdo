@@ -166,7 +166,7 @@
   </synonym>
   <synonym>
    <key>tr</key>
-   <value>Transaction currency</value>
+   <value>İşlem para birimi</value>
   </synonym>
   <type>
    <types>CatalogRef.Currencies</types>

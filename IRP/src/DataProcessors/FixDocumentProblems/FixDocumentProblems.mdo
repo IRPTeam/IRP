@@ -15,7 +15,7 @@
  </synonym>
  <synonym>
   <key>tr</key>
-  <value>Fix document problems</value>
+  <value>Belge sorunlarını düzelt</value>
  </synonym>
  <useStandardCommands>true</useStandardCommands>
  <defaultForm>DataProcessor.FixDocumentProblems.Form.Form</defaultForm>

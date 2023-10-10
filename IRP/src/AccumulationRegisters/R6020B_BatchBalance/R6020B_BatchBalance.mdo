@@ -57,7 +57,7 @@
   </synonym>
   <synonym>
    <key>tr</key>
-   <value>Invoice amount</value>
+   <value>Fatura miktarı</value>
   </synonym>
   <type>
    <types>DefinedType.typeAmount</types>
@@ -78,7 +78,7 @@
   </synonym>
   <synonym>
    <key>tr</key>
-   <value>Invoice tax amount</value>
+   <value>Fatura vergi miktarı</value>
   </synonym>
   <type>
    <types>DefinedType.typeAmount</types>
@@ -99,7 +99,7 @@
   </synonym>
   <synonym>
    <key>tr</key>
-   <value>Indirect cost amount</value>
+   <value>Dolaylı maliyet miktarı</value>
   </synonym>
   <type>
    <types>DefinedType.typeAmount</types>
@@ -120,7 +120,7 @@
   </synonym>
   <synonym>
    <key>tr</key>
-   <value>Indirect cost tax amount</value>
+   <value>Dolaylı maliyet vergi miktarı</value>
   </synonym>
   <type>
    <types>DefinedType.typeAmount</types>
@@ -141,7 +141,7 @@
   </synonym>
   <synonym>
    <key>tr</key>
-   <value>Extra cost amount by ratio</value>
+   <value>Orana göre ek maliyet miktarı</value>
   </synonym>
   <type>
    <types>DefinedType.typeAmount</types>
@@ -162,7 +162,7 @@
   </synonym>
   <synonym>
    <key>tr</key>
-   <value>Extra cost tax amount by ratio</value>
+   <value>Orana göre ek maliyet vergi miktarı</value>
   </synonym>
   <type>
    <types>DefinedType.typeAmount</types>
@@ -183,7 +183,7 @@
   </synonym>
   <synonym>
    <key>tr</key>
-   <value>Extra direct cost amount</value>
+   <value>Ekstra doğrudan maliyet miktarı</value>
   </synonym>
   <type>
    <types>DefinedType.typeAmount</types>
@@ -204,7 +204,7 @@
   </synonym>
   <synonym>
    <key>tr</key>
-   <value>Extra direct cost tax amount</value>
+   <value>Ekstra doğrudan maliyet vergi miktarı</value>
   </synonym>
   <type>
    <types>DefinedType.typeAmount</types>
@@ -225,7 +225,7 @@
   </synonym>
   <synonym>
    <key>tr</key>
-   <value>Allocated cost amount</value>
+   <value>Tahsis edilen maliyet miktarı</value>
   </synonym>
   <type>
    <types>DefinedType.typeAmount</types>
@@ -246,7 +246,7 @@
   </synonym>
   <synonym>
    <key>tr</key>
-   <value>Allocated cost tax amount</value>
+   <value>Tahsis edilen maliyet vergi miktarı</value>
   </synonym>
   <type>
    <types>DefinedType.typeAmount</types>
@@ -267,7 +267,7 @@
   </synonym>
   <synonym>
    <key>tr</key>
-   <value>Allocated revenue amount</value>
+   <value>Ayrılan gelir miktarı</value>
   </synonym>
   <type>
    <types>DefinedType.typeAmount</types>
@@ -288,7 +288,7 @@
   </synonym>
   <synonym>
    <key>tr</key>
-   <value>Allocated revenue tax amount</value>
+   <value>Ayrılan gelir vergi miktarı</value>
   </synonym>
   <type>
    <types>DefinedType.typeAmount</types>

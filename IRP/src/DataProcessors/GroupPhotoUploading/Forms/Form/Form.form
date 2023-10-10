@@ -299,7 +299,7 @@
   </title>
   <title>
    <key>tr</key>
-   <value>Group of path</value>
+   <value>Yol grubu</value>
   </title>
   <horizontalStretch>true</horizontalStretch>
   <extendedTooltip>
@@ -1002,7 +1002,7 @@
   </title>
   <title>
    <key>tr</key>
-   <value>Group of File Area</value>
+   <value>Dosya Alanı Grubu</value>
   </title>
   <extendedTooltip>
    <name>GroupFileAreaExtendedTooltip</name>
@@ -1081,7 +1081,7 @@
   </title>
   <title>
    <key>tr</key>
-   <value>Folder path</value>
+   <value>Klasцr yolu</value>
   </title>
   <id>2</id>
   <valueType>
@@ -1107,7 +1107,7 @@
   </title>
   <title>
    <key>tr</key>
-   <value>Files table</value>
+   <value>Dosyalar tablosu</value>
   </title>
   <id>3</id>
   <valueType>
@@ -1131,7 +1131,7 @@
    </title>
    <title>
     <key>tr</key>
-    <value>File path</value>
+    <value>Dosya yolu</value>
    </title>
    <id>4</id>
    <valueType>
@@ -1210,7 +1210,7 @@
    </title>
    <title>
     <key>tr</key>
-    <value>Size (Mb)</value>
+    <value>Boyut (Mb)</value>
    </title>
    <id>8</id>
    <valueType>
@@ -1267,7 +1267,7 @@
    </title>
    <title>
     <key>tr</key>
-    <value>File ref</value>
+    <value>Dosya ref</value>
    </title>
    <id>13</id>
    <valueType>
@@ -1346,7 +1346,7 @@
    </title>
    <title>
     <key>tr</key>
-    <value>Is saved</value>
+    <value>Kaydedildi</value>
    </title>
    <id>17</id>
    <valueType>
@@ -1371,7 +1371,7 @@
    </title>
    <title>
     <key>tr</key>
-    <value>Is file create</value>
+    <value>Dosya oluşturma mı</value>
    </title>
    <id>18</id>
    <valueType>
@@ -1423,7 +1423,7 @@
   </title>
   <title>
    <key>tr</key>
-   <value>Picture integration settings</value>
+   <value>Resim entegrasyon ayarları</value>
   </title>
   <id>7</id>
   <valueType/>
@@ -1497,7 +1497,7 @@
   </title>
   <title>
    <key>tr</key>
-   <value>Enable to load</value>
+   <value>Yüklemeyi etkinleştir</value>
   </title>
   <id>11</id>
   <valueType>
@@ -1522,7 +1522,7 @@
   </title>
   <title>
    <key>tr</key>
-   <value>Picture connection setting</value>
+   <value>Resim bağlantı ayarı</value>
   </title>
   <id>15</id>
   <valueType/>
@@ -1597,7 +1597,7 @@
   </title>
   <title>
    <key>tr</key>
-   <value>Preview scale size</value>
+   <value>Цnizleme цlзek boyutu</value>
   </title>
   <id>22</id>
   <valueType>
@@ -1626,7 +1626,7 @@
   </title>
   <title>
    <key>tr</key>
-   <value>Select path</value>
+   <value>Yolu seзin</value>
   </title>
   <id>1</id>
   <use>
@@ -1655,7 +1655,7 @@
   </title>
   <title>
    <key>tr</key>
-   <value>Analize folder</value>
+   <value>Klasцrь analiz et</value>
   </title>
   <id>2</id>
   <use>
@@ -1684,7 +1684,7 @@
   </title>
   <title>
    <key>tr</key>
-   <value>Find owner</value>
+   <value>Sahibi bul</value>
   </title>
   <id>3</id>
   <use>
@@ -1713,7 +1713,7 @@
   </title>
   <title>
    <key>tr</key>
-   <value>Load</value>
+   <value>Yьkle</value>
   </title>
   <id>4</id>
   <use>

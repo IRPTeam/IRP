@@ -16,7 +16,7 @@
  </synonym>
  <synonym>
   <key>tr</key>
-  <value>Disable linked rows integrity</value>
+  <value>Bağlantılı satırların bütünlüğünü devre dışı bırak</value>
  </synonym>
  <type>
   <types>Boolean</types>

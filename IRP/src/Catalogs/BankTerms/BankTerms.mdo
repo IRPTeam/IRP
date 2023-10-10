@@ -94,7 +94,7 @@
   </synonym>
   <synonym>
    <key>tr</key>
-   <value>Bank term type</value>
+   <value>Banka dцnem tьrь</value>
   </synonym>
   <type>
    <types>EnumRef.BankTermTypes</types>

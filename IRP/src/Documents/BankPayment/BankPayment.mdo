@@ -296,7 +296,7 @@
   </synonym>
   <synonym>
    <key>tr</key>
-   <value>RRN Code</value>
+   <value>RRN Kodu</value>
   </synonym>
   <type>
    <types>String</types>
@@ -321,7 +321,7 @@
   </synonym>
   <synonym>
    <key>tr</key>
-   <value>Payment info</value>
+   <value>Цdeme bilgisi</value>
   </synonym>
   <type>
    <types>String</types>
@@ -934,7 +934,7 @@
    </synonym>
    <synonym>
     <key>tr</key>
-    <value>Payment period</value>
+    <value>Цdeme dцnemi</value>
    </synonym>
    <type>
     <types>CatalogRef.PlanningPeriods</types>
@@ -984,7 +984,7 @@
    </synonym>
    <synonym>
     <key>tr</key>
-    <value>Receipting branch</value>
+    <value>Makbuz şubesi</value>
    </synonym>
    <type>
     <types>CatalogRef.BusinessUnits</types>
@@ -1006,7 +1006,7 @@
    </synonym>
    <synonym>
     <key>tr</key>
-    <value>VAT</value>
+    <value>KDV</value>
    </synonym>
    <type>
     <types>CatalogRef.TaxRates</types>
@@ -1318,7 +1318,7 @@
   </synonym>
   <synonym>
    <key>tr</key>
-   <value>DELETE tax list</value>
+   <value>Vergi listesini SİL</value>
   </synonym>
   <attributes uuid="8e8d0a50-202c-4dd1-b9a5-de28cf03f172">
    <name>Key</name>

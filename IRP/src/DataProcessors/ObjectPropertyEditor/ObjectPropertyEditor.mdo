@@ -116,7 +116,7 @@
   </synonym>
   <synonym>
    <key>tr</key>
-   <value>Run code form</value>
+   <value>Kod formunu çalıştır</value>
   </synonym>
   <usePurposes>PersonalComputer</usePurposes>
   <usePurposes>MobileDevice</usePurposes>
@@ -133,7 +133,7 @@
   </synonym>
   <synonym>
    <key>tr</key>
-   <value>Group editing of properties</value>
+   <value>Цzelliklerin grup dьzenlemesi</value>
   </synonym>
   <group>FormCommandBarImportant</group>
   <commandParameterType>

@@ -461,7 +461,7 @@
   </title>
   <title>
    <key>tr</key>
-   <value>Group of content</value>
+   <value>İçerik grubu</value>
   </title>
   <extendedTooltip>
    <name>GroupContentExtendedTooltip</name>
@@ -543,7 +543,7 @@
   </title>
   <title>
    <key>tr</key>
-   <value>Content segment</value>
+   <value>İçerik segmenti</value>
   </title>
   <id>2</id>
   <valueType>

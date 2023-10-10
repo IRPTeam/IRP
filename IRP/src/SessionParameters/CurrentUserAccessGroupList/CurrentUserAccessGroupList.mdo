@@ -11,7 +11,7 @@
  </synonym>
  <synonym>
   <key>tr</key>
-  <value>Current user access group list</value>
+  <value>Mevcut kullanıcı erişim grubu listesi</value>
  </synonym>
  <type>
   <types>FixedArray</types>

@@ -16,7 +16,7 @@
  </synonym>
  <synonym>
   <key>tr</key>
-  <value>Retail goods receipt transaction types</value>
+  <value>Perakende mal alımı işlem türleri</value>
  </synonym>
  <quickChoice>true</quickChoice>
  <choiceMode>BothWays</choiceMode>
@@ -32,7 +32,7 @@
   </synonym>
   <synonym>
    <key>tr</key>
-   <value>Courier delivery</value>
+   <value>Kurye teslimatı</value>
   </synonym>
  </enumValues>
  <enumValues uuid="be987c52-cbaa-4092-8f5d-f4ac35c41c35">

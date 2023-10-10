@@ -294,7 +294,7 @@
      </presentation>
      <presentation>
       <key>tr</key>
-      <value>Monthly salary</value>
+      <value>Aylık maaş</value>
      </presentation>
      <value xsi:type="core:StringValue">
       <value>_MonthlySalary</value>
@@ -367,7 +367,7 @@
   </title>
   <title>
    <key>tr</key>
-   <value>Algorithm</value>
+   <value>Algoritma</value>
   </title>
   <extendedTooltip>
    <name>GroupAlgorithmExtendedTooltip</name>

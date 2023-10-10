@@ -646,7 +646,7 @@ GROUP BY
       </content>
       <content>
        <key>tr</key>
-       <value>TaxAmount</value>
+       <value>VergiMiktarı</value>
       </content>
      </localValue>
     </title>

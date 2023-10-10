@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mdclass:Role xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="2f191879-9abe-42ea-bd00-f8d15e7d583a">
+ <name>Subsystem_MasterData</name>
+ <synonym>
+  <key>en</key>
+  <value>Subsystem Master data</value>
+ </synonym>
+ <synonym>
+  <key>ru</key>
+  <value>Подсистема Мастер-данные</value>
+ </synonym>
+ <synonym>
+  <key>tr</key>
+  <value>Ana Veri Alt Sistemi</value>
+ </synonym>
+</mdclass:Role>

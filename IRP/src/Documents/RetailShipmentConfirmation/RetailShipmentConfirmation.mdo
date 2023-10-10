@@ -18,7 +18,7 @@
  </synonym>
  <synonym>
   <key>tr</key>
-  <value>Retail shipment confirmation</value>
+  <value>Perakende sevkiyat onayı</value>
  </synonym>
  <useStandardCommands>true</useStandardCommands>
  <inputByString>Document.RetailShipmentConfirmation.StandardAttribute.Number</inputByString>
@@ -62,7 +62,7 @@
  </listPresentation>
  <listPresentation>
   <key>tr</key>
-  <value>Retail shipment confirmations</value>
+  <value>Perakende sevkiyat onayları</value>
  </listPresentation>
  <numberLength>12</numberLength>
  <numberAllowedLength>Variable</numberAllowedLength>
@@ -143,7 +143,7 @@
   </synonym>
   <synonym>
    <key>tr</key>
-   <value>Courier</value>
+   <value>Kurye</value>
   </synonym>
   <type>
    <types>CatalogRef.Partners</types>
@@ -190,7 +190,7 @@
   </synonym>
   <synonym>
    <key>tr</key>
-   <value>Ship from</value>
+   <value>Gцnderen</value>
   </synonym>
   <type>
    <types>CatalogRef.Partners</types>
@@ -213,7 +213,7 @@
   </synonym>
   <synonym>
    <key>tr</key>
-   <value>Ship from address</value>
+   <value>Gцnderen adresi</value>
   </synonym>
   <type>
    <types>CatalogRef.Addresses</types>
@@ -236,7 +236,7 @@
   </synonym>
   <synonym>
    <key>tr</key>
-   <value>Ship to</value>
+   <value>Gцnderilen</value>
   </synonym>
   <type>
    <types>CatalogRef.Partners</types>
@@ -282,7 +282,7 @@
   </synonym>
   <synonym>
    <key>tr</key>
-   <value>Carrier</value>
+   <value>Taşıyıcı</value>
   </synonym>
   <type>
    <types>CatalogRef.Partners</types>
@@ -563,7 +563,7 @@
    </synonym>
    <synonym>
     <key>tr</key>
-    <value>Stock quantity</value>
+    <value>Stok miktarı</value>
    </synonym>
    <type>
     <types>DefinedType.typeQuantity</types>
@@ -628,7 +628,7 @@
    </synonym>
    <synonym>
     <key>tr</key>
-    <value>Quantity is fixed</value>
+    <value>Miktar sabittir</value>
    </synonym>
    <type>
     <types>Boolean</types>
@@ -1028,7 +1028,7 @@
   </synonym>
   <synonym>
    <key>tr</key>
-   <value>DELETE consignor batches</value>
+   <value>Göndereni sil toplu işler</value>
   </synonym>
   <attributes uuid="430d8d60-c3e1-4f76-82b7-8e10db6d787d">
    <name>Key</name>
@@ -1305,7 +1305,7 @@
   </synonym>
   <synonym>
    <key>tr</key>
-   <value>Retail shipment confirmation</value>
+   <value>Perakende sevkiyat onayı</value>
   </synonym>
   <group>FormCommandBarCreateBasedOn</group>
   <commandParameterType>

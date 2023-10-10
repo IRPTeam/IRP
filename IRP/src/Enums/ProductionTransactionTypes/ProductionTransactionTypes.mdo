@@ -16,7 +16,7 @@
  </synonym>
  <synonym>
   <key>tr</key>
-  <value>Production transaction types</value>
+  <value>Üretim işlem türleri</value>
  </synonym>
  <quickChoice>true</quickChoice>
  <choiceMode>BothWays</choiceMode>
@@ -47,7 +47,7 @@
   </synonym>
   <synonym>
    <key>tr</key>
-   <value>Repacking</value>
+   <value>Yeniden paketleme</value>
   </synonym>
  </enumValues>
 </mdclass:Enum>

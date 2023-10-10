@@ -554,7 +554,7 @@ FROM
       </content>
       <content>
        <key>tr</key>
-       <value>Boundary</value>
+       <value>Sınır</value>
       </content>
      </localValue>
     </title>
@@ -675,7 +675,7 @@ FROM
       </content>
       <content>
        <key>tr</key>
-       <value>Array of employee</value>
+       <value>Çalışan dizisi</value>
       </content>
      </localValue>
     </title>

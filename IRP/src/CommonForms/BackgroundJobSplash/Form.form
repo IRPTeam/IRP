@@ -16,7 +16,7 @@
    </title>
    <title>
     <key>tr</key>
-    <value>Decoration1</value>
+    <value>Dekorasyon1</value>
    </title>
    <visible>true</visible>
    <enabled>true</enabled>
@@ -190,7 +190,7 @@
     </title>
     <title>
      <key>tr</key>
-     <value>Group Top</value>
+     <value>Grup Ьst</value>
     </title>
     <extendedTooltip>
      <name>GroupTopExtendedTooltip</name>
@@ -413,7 +413,7 @@
      </toolTip>
      <toolTip>
       <key>tr</key>
-      <value>Do not close this form on finish</value>
+      <value>Bu formu bitirirken kapatma</value>
      </toolTip>
      <toolTipRepresentation>Button</toolTipRepresentation>
      <extendedTooltip>
@@ -744,7 +744,7 @@
     </title>
     <title>
      <key>tr</key>
-     <value>Messages</value>
+     <value>Mesajlar</value>
     </title>
     <extendedTooltip>
      <name>GroupMessagesExtendedTooltip</name>
@@ -788,7 +788,7 @@
    </title>
    <title>
     <key>tr</key>
-    <value>Group Info</value>
+    <value>Grup Bilgisi</value>
    </title>
    <extendedTooltip>
     <name>GroupInfoExtendedTooltip</name>
@@ -830,7 +830,7 @@
   </title>
   <title>
    <key>tr</key>
-   <value>Group picture and info</value>
+   <value>Grup resmi ve bilgisi</value>
   </title>
   <extendedTooltip>
    <name>GroupPictureAndInfoExtendedTooltip</name>
@@ -955,7 +955,7 @@
   </title>
   <title>
    <key>tr</key>
-   <value>Job title</value>
+   <value>İş unvanı</value>
   </title>
   <id>1</id>
   <valueType>
@@ -1063,7 +1063,7 @@
   </title>
   <title>
    <key>tr</key>
-   <value>End in ~</value>
+   <value>~ ile bit</value>
   </title>
   <id>5</id>
   <valueType>
@@ -1091,7 +1091,7 @@
   </title>
   <title>
    <key>tr</key>
-   <value>System messages</value>
+   <value>Sistem mesajları</value>
   </title>
   <id>6</id>
   <valueType>
@@ -1142,7 +1142,7 @@
   </title>
   <title>
    <key>tr</key>
-   <value>Do not close on finish</value>
+   <value>Bitirirken kapatma</value>
   </title>
   <id>8</id>
   <valueType>
@@ -1170,7 +1170,7 @@
   </title>
   <title>
    <key>tr</key>
-   <value>Form can be close</value>
+   <value>Form kapatılabilir</value>
   </title>
   <id>9</id>
   <valueType>
@@ -1223,7 +1223,7 @@
   </title>
   <title>
    <key>tr</key>
-   <value>Job UUID</value>
+   <value>İş UUID</value>
   </title>
   <id>11</id>
   <valueType>

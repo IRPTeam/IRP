@@ -20,7 +20,7 @@
  </synonym>
  <synonym>
   <key>tr</key>
-  <value>T1020 Cache</value>
+  <value>T1020 Цnbellek</value>
  </synonym>
  <useStandardCommands>true</useStandardCommands>
  <editType>InDialog</editType>
@@ -35,7 +35,7 @@
  </recordPresentation>
  <recordPresentation>
   <key>tr</key>
-  <value>T1020 Cache</value>
+  <value>T1020 Цnbellek</value>
  </recordPresentation>
  <resources uuid="8ca74338-df4c-41ac-8114-c7d65cfd4025">
   <name>Data</name>
@@ -96,7 +96,7 @@
   </synonym>
   <synonym>
    <key>tr</key>
-   <value>Last get</value>
+   <value>Son al</value>
   </synonym>
   <type>
    <types>Date</types>

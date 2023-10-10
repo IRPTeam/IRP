@@ -167,12 +167,38 @@
   </synonym>
   <synonym>
    <key>tr</key>
-   <value>Revision number</value>
+   <value>Revizyon numarası</value>
   </synonym>
   <type>
    <types>Number</types>
    <numberQualifiers>
     <precision>5</precision>
+   </numberQualifiers>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fillValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <dataHistory>Use</dataHistory>
+ </attributes>
+ <attributes uuid="ff5fad99-3167-4ca3-9312-d397e7f7747f">
+  <name>SleepAfter</name>
+  <synonym>
+   <key>en</key>
+   <value>Sleep after (sec)</value>
+  </synonym>
+  <synonym>
+   <key>ru</key>
+   <value>Сон после (сек)</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Sonra uyku (sn)</value>
+  </synonym>
+  <type>
+   <types>Number</types>
+   <numberQualifiers>
+    <precision>10</precision>
    </numberQualifiers>
   </type>
   <minValue xsi:type="core:UndefinedValue"/>

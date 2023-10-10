@@ -127,7 +127,7 @@
      </title>
      <title>
       <key>tr</key>
-      <value>Additional fields</value>
+      <value>Ek alanlar</value>
      </title>
      <extendedTooltip>
       <name>GroupAdditionalFieldsExtendedTooltip</name>
@@ -1075,7 +1075,7 @@
   </title>
   <title>
    <key>tr</key>
-   <value>Result spreadsheet</value>
+   <value>Sonuз hesap tablosu</value>
   </title>
   <id>3</id>
   <valueType>
@@ -1155,7 +1155,7 @@
   </title>
   <title>
    <key>tr</key>
-   <value>Show image</value>
+   <value>Resmi gцster</value>
   </title>
   <id>8</id>
   <valueType>
@@ -1389,7 +1389,7 @@
   </title>
   <title>
    <key>tr</key>
-   <value>Additional fields</value>
+   <value>Ek alanlar</value>
   </title>
   <id>21</id>
   <valueType/>
@@ -1412,7 +1412,7 @@
   </title>
   <title>
    <key>tr</key>
-   <value>Target field</value>
+   <value>Hedef alan</value>
   </title>
   <id>22</id>
   <valueType>
@@ -1438,7 +1438,7 @@
   </title>
   <title>
    <key>tr</key>
-   <value>No item key</value>
+   <value>Öğe anahtarı yok</value>
   </title>
   <id>23</id>
   <valueType>

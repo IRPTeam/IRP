@@ -11,7 +11,7 @@
  </synonym>
  <synonym>
   <key>tr</key>
-  <value>Equipment acquiring server</value>
+  <value>Ekipman edinme sunucusu</value>
  </synonym>
  <server>true</server>
  <serverCall>true</serverCall>

@@ -501,7 +501,6 @@ Scenario: _604719 change Row ID info and partner (ObjectPropertyEditor), forced 
 		And I go to line in "PropertiesTable" table
 			| '#'   | 'Is modified'   | 'Key'                                    | 'Marked'   | 'Next step'   | 'Object'                                         | 'Quantity'   | 'Row ID'                                 | 'Row ref'                                 |
 			| '1'   | 'No'            | '3e2661d8-cf3b-4695-8cf7-a14ecc9f32ce'   | 'No'       | 'PI&GR'       | 'Purchase order 115 dated 12.02.2021 12:44:43'   | '10'         | '3e2661d8-cf3b-4695-8cf7-a14ecc9f32ce'   | '3e2661d8-cf3b-4695-8cf7-a14ecc9f32ce'    |
-		And I activate "Next step" field in "PropertiesTable" table
 		And I select current line in "PropertiesTable" table
 		And I click choice button of "Next step" attribute in "PropertiesTable" table
 		And I go to line in "List" table
@@ -511,7 +510,7 @@ Scenario: _604719 change Row ID info and partner (ObjectPropertyEditor), forced 
 		And I finish line editing in "PropertiesTable" table
 		And I click the button named "Save"
 		And Delay 2
-		And "PropertiesTable" table contains lines
+		If "PropertiesTable" table does not contain lines Then
 			| 'Marked'   | 'Is modified'   | 'Object'                                         | '#'   | 'Key'                                    | 'Basis'   | 'Row ID'                                 | 'Next step'   | 'Quantity'   | 'Current step'   | 'Row ref'                                | 'Basis key'                               |
 			| 'No'       | 'No'            | 'Purchase order 115 dated 12.02.2021 12:44:43'   | '1'   | '3e2661d8-cf3b-4695-8cf7-a14ecc9f32ce'   | ''        | '3e2661d8-cf3b-4695-8cf7-a14ecc9f32ce'   | 'GR'          | '10'         | ''               | '3e2661d8-cf3b-4695-8cf7-a14ecc9f32ce'   | '                                    '    |
 			| 'No'       | 'No'            | 'Purchase order 115 dated 12.02.2021 12:44:43'   | '2'   | '9db770ce-c5f9-4f4c-a8a9-7adc10793d77'   | ''        | '9db770ce-c5f9-4f4c-a8a9-7adc10793d77'   | 'PI'          | '2'          | ''               | '9db770ce-c5f9-4f4c-a8a9-7adc10793d77'   | '                                    '    |
@@ -519,6 +518,26 @@ Scenario: _604719 change Row ID info and partner (ObjectPropertyEditor), forced 
 			| 'No'       | 'No'            | 'Purchase order 116 dated 12.02.2021 12:44:59'   | '1'   | 'baf60337-67a7-4627-8518-6881217d1593'   | ''        | 'baf60337-67a7-4627-8518-6881217d1593'   | 'PI&GR'       | '2'          | ''               | 'baf60337-67a7-4627-8518-6881217d1593'   | '                                    '    |
 			| 'No'       | 'No'            | 'Purchase order 116 dated 12.02.2021 12:44:59'   | '2'   | '59a126c2-0ca4-4dad-b39b-606e75973f8e'   | ''        | '59a126c2-0ca4-4dad-b39b-606e75973f8e'   | 'PI'          | '2'          | ''               | '59a126c2-0ca4-4dad-b39b-606e75973f8e'   | '                                    '    |
 			| 'No'       | 'No'            | 'Purchase order 116 dated 12.02.2021 12:44:59'   | '3'   | '2f854b37-44db-469e-a5cb-6478adca5001'   | ''        | '2f854b37-44db-469e-a5cb-6478adca5001'   | 'PI&GR'       | '5'          | ''               | '2f854b37-44db-469e-a5cb-6478adca5001'   | '                                    '    |
+			And I go to line in "PropertiesTable" table
+				| '#'   | 'Is modified'   | 'Key'                                    | 'Marked'   | 'Next step'   | 'Object'                                         | 'Quantity'   | 'Row ID'                                 | 'Row ref'                                 |
+				| '1'   | 'No'            | '3e2661d8-cf3b-4695-8cf7-a14ecc9f32ce'   | 'No'       | 'PI&GR'       | 'Purchase order 115 dated 12.02.2021 12:44:43'   | '10'         | '3e2661d8-cf3b-4695-8cf7-a14ecc9f32ce'   | '3e2661d8-cf3b-4695-8cf7-a14ecc9f32ce'    |
+			And I select current line in "PropertiesTable" table
+			And I click choice button of "Next step" attribute in "PropertiesTable" table
+			And I go to line in "List" table
+				| 'Description'    |
+				| 'GR'             |
+			And I select current line in "List" table
+			And I finish line editing in "PropertiesTable" table
+			And I click the button named "Save"
+			And Delay 2
+			And "PropertiesTable" table contains lines
+				| 'Marked'   | 'Is modified'   | 'Object'                                         | '#'   | 'Key'                                    | 'Basis'   | 'Row ID'                                 | 'Next step'   | 'Quantity'   | 'Current step'   | 'Row ref'                                | 'Basis key'                               |
+				| 'No'       | 'No'            | 'Purchase order 115 dated 12.02.2021 12:44:43'   | '1'   | '3e2661d8-cf3b-4695-8cf7-a14ecc9f32ce'   | ''        | '3e2661d8-cf3b-4695-8cf7-a14ecc9f32ce'   | 'GR'          | '10'         | ''               | '3e2661d8-cf3b-4695-8cf7-a14ecc9f32ce'   | '                                    '    |
+				| 'No'       | 'No'            | 'Purchase order 115 dated 12.02.2021 12:44:43'   | '2'   | '9db770ce-c5f9-4f4c-a8a9-7adc10793d77'   | ''        | '9db770ce-c5f9-4f4c-a8a9-7adc10793d77'   | 'PI'          | '2'          | ''               | '9db770ce-c5f9-4f4c-a8a9-7adc10793d77'   | '                                    '    |
+				| 'No'       | 'No'            | 'Purchase order 115 dated 12.02.2021 12:44:43'   | '3'   | '18d36228-af88-4ba5-a17a-f3ab3ddb6816'   | ''        | '18d36228-af88-4ba5-a17a-f3ab3ddb6816'   | 'PI&GR'       | '5'          | ''               | '18d36228-af88-4ba5-a17a-f3ab3ddb6816'   | '                                    '    |
+				| 'No'       | 'No'            | 'Purchase order 116 dated 12.02.2021 12:44:59'   | '1'   | 'baf60337-67a7-4627-8518-6881217d1593'   | ''        | 'baf60337-67a7-4627-8518-6881217d1593'   | 'PI&GR'       | '2'          | ''               | 'baf60337-67a7-4627-8518-6881217d1593'   | '                                    '    |
+				| 'No'       | 'No'            | 'Purchase order 116 dated 12.02.2021 12:44:59'   | '2'   | '59a126c2-0ca4-4dad-b39b-606e75973f8e'   | ''        | '59a126c2-0ca4-4dad-b39b-606e75973f8e'   | 'PI'          | '2'          | ''               | '59a126c2-0ca4-4dad-b39b-606e75973f8e'   | '                                    '    |
+				| 'No'       | 'No'            | 'Purchase order 116 dated 12.02.2021 12:44:59'   | '3'   | '2f854b37-44db-469e-a5cb-6478adca5001'   | ''        | '2f854b37-44db-469e-a5cb-6478adca5001'   | 'PI&GR'       | '5'          | ''               | '2f854b37-44db-469e-a5cb-6478adca5001'   | '                                    '    |
 		And I click the button named "Refresh"
 		And "PropertiesTable" table contains lines
 			| 'Marked'   | 'Is modified'   | 'Object'                                         | '#'   | 'Key'                                    | 'Basis'   | 'Row ID'                                 | 'Next step'   | 'Quantity'   | 'Current step'   | 'Row ref'                                | 'Basis key'                               |

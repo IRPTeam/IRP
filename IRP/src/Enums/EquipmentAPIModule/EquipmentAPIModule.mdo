@@ -16,7 +16,7 @@
  </synonym>
  <synonym>
   <key>tr</key>
-  <value>Equipment APIModule</value>
+  <value>Ekipman APIModule</value>
  </synonym>
  <quickChoice>true</quickChoice>
  <choiceMode>QuickChoice</choiceMode>
@@ -33,7 +33,7 @@
   </synonym>
   <synonym>
    <key>tr</key>
-   <value>Fiscal printer Common API</value>
+   <value>Fiscal printer Ortak API</value>
   </synonym>
  </enumValues>
  <enumValues uuid="7da43a3c-38c2-40b6-bcac-9a906f5b4774">
@@ -48,7 +48,7 @@
   </synonym>
   <synonym>
    <key>tr</key>
-   <value>Acquiring Common API</value>
+   <value>Edinme Ortak API</value>
   </synonym>
  </enumValues>
 </mdclass:Enum>

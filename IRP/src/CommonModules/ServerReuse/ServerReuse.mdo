@@ -11,7 +11,7 @@
  </synonym>
  <synonym>
   <key>tr</key>
-  <value>Server reuse</value>
+  <value>Sunucu yeniden kullanımı</value>
  </synonym>
  <server>true</server>
  <serverCall>true</serverCall>

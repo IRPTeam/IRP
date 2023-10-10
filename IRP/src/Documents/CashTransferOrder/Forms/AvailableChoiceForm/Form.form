@@ -982,7 +982,7 @@ where
       </content>
       <content>
        <key>tr</key>
-       <value>Array of selected documents</value>
+       <value>Seзili belgeler dizisi</value>
       </content>
      </localValue>
     </title>
@@ -1004,7 +1004,7 @@ where
       </content>
       <content>
        <key>tr</key>
-       <value>Array of planing transaction basis</value>
+       <value>Planlama işlemi temeli dizisi</value>
       </content>
      </localValue>
     </title>
@@ -1026,7 +1026,7 @@ where
       </content>
       <content>
        <key>tr</key>
-       <value>Use array of selected documents</value>
+       <value>Seçili belgeler dizisini kullanın</value>
       </content>
      </localValue>
     </title>

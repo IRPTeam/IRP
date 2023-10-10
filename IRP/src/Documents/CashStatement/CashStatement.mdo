@@ -751,7 +751,7 @@
    </synonym>
    <synonym>
     <key>tr</key>
-    <value>Use basis document</value>
+    <value>Temel belgeyi kullanın</value>
    </synonym>
    <type>
     <types>Boolean</types>

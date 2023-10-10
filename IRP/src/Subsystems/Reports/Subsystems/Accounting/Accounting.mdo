@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mdclass:Subsystem xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="2df312c9-9ce1-4228-a5e2-550e891067f0">
+ <name>Accounting</name>
+ <synonym>
+  <key>en</key>
+  <value>Accounting</value>
+ </synonym>
+ <synonym>
+  <key>ru</key>
+  <value>Упр. бухгалтерия</value>
+ </synonym>
+ <synonym>
+  <key>tr</key>
+  <value>Muhasebe</value>
+ </synonym>
+ <includeHelpInContents>true</includeHelpInContents>
+ <includeInCommandInterface>true</includeInCommandInterface>
+ <parentSubsystem>Subsystem.Reports</parentSubsystem>
+</mdclass:Subsystem>

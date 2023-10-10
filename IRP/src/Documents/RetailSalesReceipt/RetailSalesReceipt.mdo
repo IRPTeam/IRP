@@ -1018,7 +1018,7 @@
    </synonym>
    <synonym>
     <key>tr</key>
-    <value>Stock quantity</value>
+    <value>Stok miktarı</value>
    </synonym>
    <type>
     <types>DefinedType.typeQuantity</types>
@@ -1177,7 +1177,7 @@
    </synonym>
    <synonym>
     <key>tr</key>
-    <value>Is control code string</value>
+    <value>Kontrol kodu dizesi mi</value>
    </synonym>
    <type>
     <types>Boolean</types>
@@ -1199,7 +1199,7 @@
    </synonym>
    <synonym>
     <key>tr</key>
-    <value>Quantity is fixed</value>
+    <value>Miktar sabittir</value>
    </synonym>
    <type>
     <types>Boolean</types>
@@ -1221,7 +1221,7 @@
    </synonym>
    <synonym>
     <key>tr</key>
-    <value>VAT</value>
+    <value>KDV</value>
    </synonym>
    <type>
     <types>CatalogRef.TaxRates</types>
@@ -1395,7 +1395,7 @@
   </synonym>
   <synonym>
    <key>tr</key>
-   <value>DELETE tax list</value>
+   <value>Vergi listesini SİL</value>
   </synonym>
   <attributes uuid="99098571-a720-48ec-99d7-baf8706c634e">
    <name>Key</name>
@@ -2054,7 +2054,7 @@
    </synonym>
    <synonym>
     <key>tr</key>
-    <value>RRN Code</value>
+    <value>RRN Kodu</value>
    </synonym>
    <type>
     <types>String</types>
@@ -2079,7 +2079,7 @@
    </synonym>
    <synonym>
     <key>tr</key>
-    <value>Payment info</value>
+    <value>Цdeme bilgisi</value>
    </synonym>
    <type>
     <types>String</types>
@@ -2131,7 +2131,7 @@
    </synonym>
    <synonym>
     <key>tr</key>
-    <value>Payment agent partner</value>
+    <value>Ödeme acentesi ortağı</value>
    </synonym>
    <type>
     <types>CatalogRef.Partners</types>
@@ -2153,7 +2153,7 @@
    </synonym>
    <synonym>
     <key>tr</key>
-    <value>Payment agent legal name</value>
+    <value>Ödeme acentesi yasal adı</value>
    </synonym>
    <type>
     <types>CatalogRef.Companies</types>
@@ -2183,7 +2183,7 @@
    </synonym>
    <synonym>
     <key>tr</key>
-    <value>Payment agent partner terms</value>
+    <value>Ödeme acentesi ortak şartları</value>
    </synonym>
    <type>
     <types>CatalogRef.Agreements</types>
@@ -2219,7 +2219,7 @@
    </synonym>
    <synonym>
     <key>tr</key>
-    <value>Payment agent legal name contract</value>
+    <value>Ödeme acentesi yasal adı sözleşme</value>
    </synonym>
    <type>
     <types>CatalogRef.LegalNameContracts</types>
@@ -2859,7 +2859,7 @@
   </synonym>
   <synonym>
    <key>tr</key>
-   <value>DELETE consignor batches</value>
+   <value>Göndereni sil toplu işler</value>
   </synonym>
   <attributes uuid="4ec573ef-6b75-4dfc-90c2-6e4783fc5433">
    <name>Key</name>
@@ -3140,7 +3140,7 @@
   </synonym>
   <synonym>
    <key>tr</key>
-   <value>Control code strings</value>
+   <value>Kontrol kodu dizeleri</value>
   </synonym>
   <attributes uuid="130f37c6-6f58-4912-8e04-c5fabf6cf4cf">
    <name>Key</name>
@@ -3200,7 +3200,7 @@
    </synonym>
    <synonym>
     <key>tr</key>
-    <value>Code is approved</value>
+    <value>Kod onaylandı</value>
    </synonym>
    <type>
     <types>Boolean</types>
@@ -3222,7 +3222,7 @@
    </synonym>
    <synonym>
     <key>tr</key>
-    <value>Not check</value>
+    <value>Kontrol etme</value>
    </synonym>
    <type>
     <types>Boolean</types>
@@ -3415,7 +3415,7 @@
   </synonym>
   <synonym>
    <key>tr</key>
-   <value>Print copy receipt</value>
+   <value>Makbuz kopyasını yazdır</value>
   </synonym>
   <group>CommandGroup.Fiscalization</group>
   <commandParameterType>

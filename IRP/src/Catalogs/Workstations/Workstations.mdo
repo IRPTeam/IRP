@@ -212,7 +212,7 @@
   </synonym>
   <synonym>
    <key>tr</key>
-   <value>Auto calculate discount</value>
+   <value>İndirimi otomatik hesapla</value>
   </synonym>
   <type>
    <types>Boolean</types>
@@ -235,7 +235,7 @@
   </synonym>
   <synonym>
    <key>tr</key>
-   <value>Ignore code string control</value>
+   <value>Kod dizesi kontrolьnь yoksay</value>
   </synonym>
   <type>
    <types>Boolean</types>
@@ -258,7 +258,7 @@
   </synonym>
   <synonym>
    <key>tr</key>
-   <value>Print barcode with document UUID</value>
+   <value>Belge UUID ile barkod yazdır</value>
   </synonym>
   <type>
    <types>Boolean</types>
@@ -281,7 +281,7 @@
   </synonym>
   <synonym>
    <key>tr</key>
-   <value>Postpone with reserve</value>
+   <value>Rezervle ertele</value>
   </synonym>
   <type>
    <types>Boolean</types>
@@ -304,7 +304,7 @@
   </synonym>
   <synonym>
    <key>tr</key>
-   <value>Postpone without reserve</value>
+   <value>Rezerve etmeden erteleyin</value>
   </synonym>
   <type>
    <types>Boolean</types>

@@ -8375,7 +8375,7 @@
    </title>
    <title>
     <key>tr</key>
-    <value>Account payable (other)</value>
+    <value>Hesaplanabilir (diğer)</value>
    </title>
    <extendedTooltip>
     <name>GroupAccountPayableOtherExtendedTooltip</name>
@@ -9061,7 +9061,7 @@
    </title>
    <title>
     <key>tr</key>
-    <value>Account receivable (other)</value>
+    <value>Diğer alacaklar (diğer)</value>
    </title>
    <extendedTooltip>
     <name>GroupAccountReceivableOtherExtendedTooltip</name>
@@ -12261,7 +12261,7 @@
    </title>
    <title>
     <key>tr</key>
-    <value>Advance from retail customers</value>
+    <value>Perakende müşterilerinden avans</value>
    </title>
    <extendedTooltip>
     <name>GroupAdvanceFromRetailCustomersExtendedTooltip</name>
@@ -12823,7 +12823,7 @@
    </title>
    <title>
     <key>tr</key>
-    <value>Salary payment</value>
+    <value>Maaş ödemesi</value>
    </title>
    <extendedTooltip>
     <name>GroupSalaryPaymentExtendedTooltip</name>
@@ -13734,7 +13734,7 @@
   </title>
   <title>
    <key>tr</key>
-   <value>Edit currencies employee cash advance</value>
+   <value>Çalışan avans para birimlerini düzenle</value>
   </title>
   <id>11</id>
   <use>
@@ -13763,7 +13763,7 @@
   </title>
   <title>
    <key>tr</key>
-   <value>Edit currencies Advance from retail customers</value>
+   <value>Para birimlerini düzenle Perakende müşterilerinden avans</value>
   </title>
   <id>12</id>
   <use>
@@ -13792,7 +13792,7 @@
   </title>
   <title>
    <key>tr</key>
-   <value>Edit currencies salary payment</value>
+   <value>Para birimleri maaş ödemesini düzenle</value>
   </title>
   <id>13</id>
   <use>
@@ -13821,7 +13821,7 @@
   </title>
   <title>
    <key>tr</key>
-   <value>Edit currencies account payable other</value>
+   <value>Düzenle para birimleri hesaplanabilir diğer</value>
   </title>
   <id>14</id>
   <use>
@@ -13850,7 +13850,7 @@
   </title>
   <title>
    <key>tr</key>
-   <value>Edit currencies account receivable other</value>
+   <value>Para birimlerini düzenle diğer alacak hesabı</value>
   </title>
   <id>15</id>
   <use>
@@ -13879,7 +13879,7 @@
   </title>
   <title>
    <key>tr</key>
-   <value>Edit currencies cash in transit</value>
+   <value>Para birimlerini dьzenle transit nakit</value>
   </title>
   <id>16</id>
   <use>

@@ -301,7 +301,7 @@
   </title>
   <title>
    <key>tr</key>
-   <value>Scan control code</value>
+   <value>Tarama kontrol kodu</value>
   </title>
   <visible>true</visible>
   <enabled>true</enabled>
@@ -359,7 +359,7 @@
   </title>
   <title>
    <key>tr</key>
-   <value>Additional check not using</value>
+   <value>Ek kontrol kullanılmıyor</value>
   </title>
   <visible>true</visible>
   <enabled>true</enabled>
@@ -446,7 +446,7 @@
    </title>
    <title>
     <key>tr</key>
-    <value>Scanned codes</value>
+    <value>Taranan kodlar</value>
    </title>
    <visible>true</visible>
    <enabled>true</enabled>
@@ -1027,7 +1027,7 @@
   </title>
   <title>
    <key>tr</key>
-   <value>Line in document</value>
+   <value>Belgedeki satır</value>
   </title>
   <id>5</id>
   <valueType>
@@ -1055,7 +1055,7 @@
   </title>
   <title>
    <key>tr</key>
-   <value>Current codes</value>
+   <value>Mevcut kodlar</value>
   </title>
   <id>7</id>
   <valueType>
@@ -1079,7 +1079,7 @@
    </title>
    <title>
     <key>tr</key>
-    <value>Scanned codes</value>
+    <value>Taranan kodlar</value>
    </title>
    <id>8</id>
    <valueType>
@@ -1105,7 +1105,7 @@
    </title>
    <title>
     <key>tr</key>
-    <value>Code is approved</value>
+    <value>Kod onaylandı</value>
    </title>
    <id>9</id>
    <valueType>
@@ -1130,7 +1130,7 @@
    </title>
    <title>
     <key>tr</key>
-    <value>Not check</value>
+    <value>Kontrol etme</value>
    </title>
    <id>12</id>
    <valueType>
@@ -1181,7 +1181,7 @@
   </title>
   <title>
    <key>tr</key>
-   <value>Additional check is on</value>
+   <value>Ek kontrol açık</value>
   </title>
   <id>11</id>
   <valueType>
@@ -1206,7 +1206,7 @@
   </title>
   <title>
    <key>tr</key>
-   <value>Get code string from serial lot number</value>
+   <value>Seri lot numarasından kod dizesini al</value>
   </title>
   <id>14</id>
   <valueType>
@@ -1286,7 +1286,7 @@
   </title>
   <title>
    <key>tr</key>
-   <value>Code string is missing</value>
+   <value>Kod dizesi eksik</value>
   </title>
   <id>5</id>
   <use>
@@ -1315,7 +1315,7 @@
   </title>
   <title>
    <key>tr</key>
-   <value>Get code string from serial lot number</value>
+   <value>Seri lot numarasından kod dizesini al</value>
   </title>
   <id>6</id>
   <use>

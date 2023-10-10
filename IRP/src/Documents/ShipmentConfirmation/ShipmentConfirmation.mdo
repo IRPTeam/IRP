@@ -199,7 +199,7 @@
   </synonym>
   <synonym>
    <key>tr</key>
-   <value>Save scanned barcode</value>
+   <value>Taranan barkodu kaydet</value>
   </synonym>
   <type>
    <types>Boolean</types>
@@ -222,7 +222,7 @@
   </synonym>
   <synonym>
    <key>tr</key>
-   <value>Is package</value>
+   <value>Paket</value>
   </synonym>
   <type>
    <types>Boolean</types>
@@ -245,7 +245,7 @@
   </synonym>
   <synonym>
    <key>tr</key>
-   <value>Package ID</value>
+   <value>Paket ID</value>
   </synonym>
   <type>
    <types>String</types>
@@ -271,7 +271,7 @@
   </synonym>
   <synonym>
    <key>tr</key>
-   <value>External package ID</value>
+   <value>Dış paket ID</value>
   </synonym>
   <type>
    <types>String</types>
@@ -297,7 +297,7 @@
   </synonym>
   <synonym>
    <key>tr</key>
-   <value>Ship from</value>
+   <value>Gцnderen</value>
   </synonym>
   <type>
    <types>CatalogRef.Partners</types>
@@ -320,7 +320,7 @@
   </synonym>
   <synonym>
    <key>tr</key>
-   <value>Ship from address</value>
+   <value>Gцnderen adresi</value>
   </synonym>
   <type>
    <types>CatalogRef.Addresses</types>
@@ -343,7 +343,7 @@
   </synonym>
   <synonym>
    <key>tr</key>
-   <value>Ship to</value>
+   <value>Gцnderilen</value>
   </synonym>
   <type>
    <types>CatalogRef.Partners</types>
@@ -389,7 +389,7 @@
   </synonym>
   <synonym>
    <key>tr</key>
-   <value>Carrier</value>
+   <value>Taşıyıcı</value>
   </synonym>
   <type>
    <types>CatalogRef.Partners</types>
@@ -694,7 +694,7 @@
    </synonym>
    <synonym>
     <key>tr</key>
-    <value>Stock quantity</value>
+    <value>Stok miktarı</value>
    </synonym>
    <type>
     <types>DefinedType.typeQuantity</types>
@@ -869,7 +869,7 @@
    </synonym>
    <synonym>
     <key>tr</key>
-    <value>Quantity is fixed</value>
+    <value>Miktar sabittir</value>
    </synonym>
    <type>
     <types>Boolean</types>

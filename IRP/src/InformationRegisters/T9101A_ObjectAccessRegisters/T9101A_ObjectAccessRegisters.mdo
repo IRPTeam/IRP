@@ -20,7 +20,7 @@
  </synonym>
  <synonym>
   <key>tr</key>
-  <value>T9101A Object access registers</value>
+  <value>T9101A Nesne erişim kayıtları</value>
  </synonym>
  <useStandardCommands>true</useStandardCommands>
  <editType>InDialog</editType>
@@ -35,7 +35,7 @@
  </recordPresentation>
  <recordPresentation>
   <key>tr</key>
-  <value>T9101A Object access registers</value>
+  <value>T9101A Nesne erişim kayıtları</value>
  </recordPresentation>
  <resources uuid="b18e8245-63a5-4991-9348-6b1757327d82">
   <name>Value1</name>
@@ -49,7 +49,7 @@
   </synonym>
   <synonym>
    <key>tr</key>
-   <value>Value1</value>
+   <value>Değer1</value>
   </synonym>
   <type>
    <types>AnyRef</types>
@@ -72,7 +72,7 @@
   </synonym>
   <synonym>
    <key>tr</key>
-   <value>Value2</value>
+   <value>Değer2</value>
   </synonym>
   <type>
    <types>AnyRef</types>
@@ -95,7 +95,7 @@
   </synonym>
   <synonym>
    <key>tr</key>
-   <value>Value3</value>
+   <value>Değer3</value>
   </synonym>
   <type>
    <types>AnyRef</types>
@@ -118,7 +118,7 @@
   </synonym>
   <synonym>
    <key>tr</key>
-   <value>Value4</value>
+   <value>Değer4</value>
   </synonym>
   <type>
    <types>AnyRef</types>
@@ -141,7 +141,7 @@
   </synonym>
   <synonym>
    <key>tr</key>
-   <value>Value5</value>
+   <value>Değer5</value>
   </synonym>
   <type>
    <types>AnyRef</types>

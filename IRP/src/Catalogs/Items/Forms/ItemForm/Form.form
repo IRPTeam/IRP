@@ -824,7 +824,7 @@
       </toolTip>
       <toolTip>
        <key>tr</key>
-       <value>Do additional check by control string in POS</value>
+       <value>POS'ta kontrol dizesiyle ek kontrol yap</value>
       </toolTip>
       <toolTipRepresentation>Button</toolTipRepresentation>
       <handlers>
@@ -926,7 +926,7 @@
      </title>
      <title>
       <key>tr</key>
-      <value>Accounting settings</value>
+      <value>Muhasebe ayarları</value>
      </title>
      <extendedTooltip>
       <name>GroupAccountingSettingsExtendedTooltip</name>
@@ -957,7 +957,7 @@
       </collapsedRepresentationTitle>
       <collapsedRepresentationTitle>
        <key>tr</key>
-       <value>Accounting settings</value>
+       <value>Muhasebe ayarları</value>
       </collapsedRepresentationTitle>
       <collapsed>true</collapsed>
       <representation>WeakSeparation</representation>
@@ -1320,7 +1320,7 @@
      </title>
      <title>
       <key>tr</key>
-      <value>Consignors info</value>
+      <value>Gцnderen bilgileri</value>
      </title>
      <extendedTooltip>
       <name>GroupConsignorsInfoExtendedTooltip</name>
@@ -1351,7 +1351,7 @@
       </collapsedRepresentationTitle>
       <collapsedRepresentationTitle>
        <key>tr</key>
-       <value>Consignors info</value>
+       <value>Gцnderen bilgileri</value>
       </collapsedRepresentationTitle>
       <collapsed>true</collapsed>
       <representation>WeakSeparation</representation>

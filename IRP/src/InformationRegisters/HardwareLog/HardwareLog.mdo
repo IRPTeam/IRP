@@ -20,7 +20,7 @@
  </synonym>
  <synonym>
   <key>tr</key>
-  <value>Hardware log</value>
+  <value>Donanım günlüğü</value>
  </synonym>
  <useStandardCommands>true</useStandardCommands>
  <editType>InDialog</editType>
@@ -38,7 +38,7 @@
  </recordPresentation>
  <recordPresentation>
   <key>tr</key>
-  <value>Hardware log</value>
+  <value>Donanım günlüğü</value>
  </recordPresentation>
  <listPresentation>
   <key>en</key>
@@ -50,7 +50,7 @@
  </listPresentation>
  <listPresentation>
   <key>tr</key>
-  <value>Hardware logs</value>
+  <value>Donanım günlükleri</value>
  </listPresentation>
  <resources uuid="e69f1b2a-96ba-43d6-a86b-9bead233c059">
   <name>Method</name>
@@ -271,7 +271,7 @@
   </synonym>
   <synonym>
    <key>tr</key>
-   <value>Log analyze</value>
+   <value>Gьnlьk analiz</value>
   </synonym>
   <usePurposes>PersonalComputer</usePurposes>
   <usePurposes>MobileDevice</usePurposes>
@@ -288,7 +288,7 @@
   </synonym>
   <synonym>
    <key>tr</key>
-   <value>Analyze log</value>
+   <value>Günlüğü analiz et</value>
   </synonym>
   <group>CommandGroup.Service</group>
   <commandParameterType>

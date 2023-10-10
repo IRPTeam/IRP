@@ -4,7 +4,7 @@ Procedure BeforeWrite(Cancel, WriteMode, PostingMode)
 	EndIf;
 	If Not Cancel And WriteMode = DocumentWriteMode.Posting Then
 		If ThisObject.AllocationMode = Enums.AllocationMode.ByDocuments Then
-			// Remove me
+			// See #2206
 			ThisObject.RegisterRecords.R6070T_OtherPeriodsExpenses.Read();
 			If ThisObject.RegisterRecords.R6070T_OtherPeriodsExpenses.Count() Then
 				ThisObject.RegisterRecords.R6070T_OtherPeriodsExpenses.Clear();

@@ -2004,8 +2004,14 @@ Procedure SaveAtServer()
 				EndIf;
 			EndDo;
 			
-			BuilderAPI.Write(ModifiedObj);
-				
+			Try
+				BuilderAPI.Write(ModifiedObj);
+			Except
+				ErrorInfo = ErrorInfo();
+				CommonFunctionsClientServer.ShowUsersMessage(ErrorProcessing.BriefErrorDescription(ErrorInfo));
+				Log.Write("Object property editor", ErrorProcessing.DetailErrorDescription(ErrorInfo), , , ObjectLineRow.Object);
+			EndTry;
+			
 		ElsIf GetObjectTable(ThisObject) = "Ref" And Not FormCash.UpdateRelatedFieldsWhenWriting Then
 			LineNumberRows = ThisObject.PropertiesTable.FindRows(New Structure("Object", ObjectItem));
 			ObjectLineRow = LineNumberRows[0];
@@ -2022,7 +2028,13 @@ Procedure SaveAtServer()
 			EndDo;
 			
 			ModifiedObject.DataExchange.Load = FormCash.ForcedWriting;
-			ModifiedObject.Write();
+			Try
+				ModifiedObject.Write();
+			Except
+				ErrorInfo = ErrorInfo();
+				CommonFunctionsClientServer.ShowUsersMessage(ErrorProcessing.BriefErrorDescription(ErrorInfo));
+				Log.Write("Object property editor", ErrorProcessing.DetailErrorDescription(ErrorInfo), , , ModifiedObject.Ref);
+			EndTry;
 				
 		ElsIf StrStartsWith(GetObjectTable(ThisObject), "TS_") And FormCash.UpdateRelatedFieldsWhenWriting Then
 			
@@ -2042,7 +2054,13 @@ Procedure SaveAtServer()
 				EndDo;
 			EndDo;
 				
-			BuilderAPI.Write(ModifiedObj);
+			Try
+				BuilderAPI.Write(ModifiedObj);
+			Except
+				ErrorInfo = ErrorInfo();
+				CommonFunctionsClientServer.ShowUsersMessage(ErrorProcessing.BriefErrorDescription(ErrorInfo));
+				Log.Write("Object property editor", ErrorProcessing.DetailErrorDescription(ErrorInfo), , , ObjectLineRow.Object);
+			EndTry;
 				
 		ElsIf StrStartsWith(GetObjectTable(ThisObject), "TS_") And Not FormCash.UpdateRelatedFieldsWhenWriting Then
 			ModifiedObject = ObjectItem.GetObject();
@@ -2062,7 +2080,13 @@ Procedure SaveAtServer()
 			EndDo;
 			
 			ModifiedObject.DataExchange.Load = FormCash.ForcedWriting;
-			ModifiedObject.Write();
+			Try
+				ModifiedObject.Write();
+			Except
+				ErrorInfo = ErrorInfo();
+				CommonFunctionsClientServer.ShowUsersMessage(ErrorProcessing.BriefErrorDescription(ErrorInfo));
+				Log.Write("Object property editor", ErrorProcessing.DetailErrorDescription(ErrorInfo), , , ModifiedObject.Ref);
+			EndTry;
 
 		ElsIf StrStartsWith(GetObjectTable(ThisObject), "InfoReg_") Then
 			Table_String = GetObjectTable(ThisObject);
@@ -2093,8 +2117,13 @@ Procedure SaveAtServer()
 				EndIf;
 			EndDo;
 			
-			RecordSet.Write(True);
-				
+			Try
+				RecordSet.Write(True);
+			Except
+				ErrorInfo = ErrorInfo();
+				CommonFunctionsClientServer.ShowUsersMessage(ErrorProcessing.BriefErrorDescription(ErrorInfo));
+				Log.Write("Object property editor", ErrorProcessing.DetailErrorDescription(ErrorInfo));
+			EndTry;	
 		Else
 
 			LineNumberRows = ThisObject.PropertiesTable.FindRows(New Structure("Object", ObjectItem));
@@ -2123,7 +2152,13 @@ Procedure SaveAtServer()
 			EndDo;
 			
 			ModifiedObject.DataExchange.Load = FormCash.ForcedWriting;
-			ModifiedObject.Write();
+			Try
+				ModifiedObject.Write();
+			Except
+				ErrorInfo = ErrorInfo();
+				CommonFunctionsClientServer.ShowUsersMessage(ErrorProcessing.BriefErrorDescription(ErrorInfo));
+				Log.Write("Object property editor", ErrorProcessing.DetailErrorDescription(ErrorInfo), , , ModifiedObject.Ref);
+			EndTry;
 
 		EndIf;
 			

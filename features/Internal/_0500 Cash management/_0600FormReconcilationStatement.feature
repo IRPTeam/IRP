@@ -1,4 +1,4 @@
-#language: en
+﻿#language: en
 @tree
 @Positive
 @CashManagement
@@ -70,7 +70,54 @@ Scenario: _060005 availability of Currency, Begin and End period field in Reconc
 	Then the form attribute named "Currency" became equal to "TRY"
 
 
-
+Scenario: _060006 check auto filling Reconcilation statement (currency and transactions)
+	And I close all client application windows
+	Given I open hyperlink "e1cib/list/Document.ReconciliationStatement"
+	And I click the button named "FormCreate"
+	* Select Company and Partner
+		And I click Choice button of the field named "Company"
+		And I go to line in "List" table
+			| 'Description'  |
+			| 'Main Company' |
+		And I select current line in "List" table
+		And I click Choice button of the field named "Partner"
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Lunch'       |
+		And I select current line in "List" table
+	* Check filling
+		Then the form attribute named "Currency" became equal to "TRY"
+		And the field named "BeginPeriod" is filled
+		And the field named "EndPeriod" is filled
+		Then the number of "Transactions" table lines is "больше" "0"
+	* Select another partner with two currency and check filling currency
+		And I click Choice button of the field named "Currency"
+		And I go to line in "List" table
+			| 'Code' |
+			| 'EUR'  |
+		And I select current line in "List" table
+		And I click Choice button of the field named "Partner"
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Kalipso'     |
+		And I select current line in "List" table
+		Then the form attribute named "Currency" became equal to ""	
+	* Select partner that have current currency	
+		And I click Choice button of the field named "Currency"
+		And I go to line in "List" table
+			| 'Code' |
+			| 'USD'  |
+		And I select current line in "List" table	
+		And I click Choice button of the field named "Partner"
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Ferron BP'     |
+		And I select current line in "List" table
+		Then the form attribute named "Currency" became equal to "USD"		
+		
+						
+				
+	
 
 
 

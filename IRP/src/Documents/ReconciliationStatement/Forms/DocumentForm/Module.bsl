@@ -218,6 +218,16 @@ EndProcedure
 &AtClient
 Procedure PartnerOnChange(Item)
 	DocReconciliationStatementClient.PartnerOnChange(Object, ThisObject, Item);
+	
+	If Object.Transactions.Count() = 0
+			And ValueIsFilled(Object.Partner) 
+			And ValueIsFilled(Object.LegalName) 
+			And ValueIsFilled(Object.Currency) 
+			And ValueIsFilled(Object.Company) 
+			And ValueIsFilled(Object.BeginPeriod) 
+			And ValueIsFilled(Object.EndPeriod) Then
+		FillAtServer();
+	EndIf;
 EndProcedure
 
 &AtClient

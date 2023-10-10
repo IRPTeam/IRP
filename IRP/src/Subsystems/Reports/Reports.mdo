@@ -19,4 +19,9 @@
   <subsystems>Purchase</subsystems>
   <subsystems>Inventory</subsystems>
   <subsystems>Finance</subsystems>
+  <subsystems>Retail</subsystems>
+  <subsystems>Treasury</subsystems>
+  <subsystems>Manufacturing</subsystems>
+  <subsystems>Accounting</subsystems>
+  <subsystems>Salary</subsystems>
 </mdclass:Subsystem>

@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mdclass:Subsystem xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="44e2d64e-a05e-4a50-9fd6-8f7ee76e3467">
+  <name>Retail</name>
+  <synonym>
+    <key>en</key>
+    <value>Retail</value>
+  </synonym>
+  <includeHelpInContents>true</includeHelpInContents>
+  <includeInCommandInterface>true</includeInCommandInterface>
+  <parentSubsystem>Subsystem.Reports</parentSubsystem>
+</mdclass:Subsystem>

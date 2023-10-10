@@ -136,10 +136,10 @@
     <dataHistory>Use</dataHistory>
   </attributes>
   <attributes uuid="6a1fc8d2-5cd0-4ce5-83f9-c510613252b8">
-    <name>BranchSender</name>
+    <name>BusinessUnitSender</name>
     <synonym>
       <key>en</key>
-      <value>Branch sender</value>
+      <value>Business unit sender</value>
     </synonym>
     <type>
       <types>CatalogRef.BusinessUnits</types>
@@ -152,10 +152,10 @@
     <dataHistory>Use</dataHistory>
   </attributes>
   <attributes uuid="0bfc7809-ccd1-47ea-a71e-fece8aeb1f6b">
-    <name>BranchReceiver</name>
+    <name>BusinessUnitReceiver</name>
     <synonym>
       <key>en</key>
-      <value>Branch receiver</value>
+      <value>Business unit receiver</value>
     </synonym>
     <type>
       <types>CatalogRef.BusinessUnits</types>

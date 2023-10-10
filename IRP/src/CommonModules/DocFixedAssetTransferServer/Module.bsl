@@ -31,9 +31,9 @@ Procedure SetGroupItemsList(Object, Form)
 	AttributesArray.Add("Company");
 	AttributesArray.Add("FixedAsset");
 	AttributesArray.Add("ResponsiblePersonSender");
-	AttributesArray.Add("BranchSender");
+	AttributesArray.Add("BusinessUnitSender");
 	AttributesArray.Add("ResponsiblePersonReceiver");
-	AttributesArray.Add("BranchReceiver");
+	AttributesArray.Add("BusinessUnitReceiver");
 	DocumentsServer.DeleteUnavailableTitleItemNames(AttributesArray);
 	For Each Attr In AttributesArray Do
 		Form.GroupItems.Add(Attr, ?(ValueIsFilled(Form.Items[Attr].Title), Form.Items[Attr].Title,

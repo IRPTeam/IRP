@@ -2463,7 +2463,7 @@ Function BindDate(Parameters)
 	
 	Binding.Insert("FixedAssetTransfer", 
 		"StepChangeResponsiblePersonSenderByFixedAsset,
-		|StepChangeBranchSenderByFixedAsset");
+		|StepChangeBusinessUnitSenderByFixedAsset");
 	
 	Return BindSteps("BindVoid", DataPath, Binding, Parameters, "BindDate");
 EndFunction
@@ -2634,7 +2634,7 @@ Function BindCompany(Parameters)
 	
 	Binding.Insert("FixedAssetTransfer", 
 		"StepChangeResponsiblePersonSenderByFixedAsset,
-		|StepChangeBranchSenderByFixedAsset");
+		|StepChangeBusinessUnitSenderByFixedAsset");
 	
 	Return BindSteps("BindVoid", DataPath, Binding, Parameters, "BindCompany");
 EndFunction
@@ -2776,7 +2776,7 @@ Function BindFixedAsset(Parameters)
 	Binding = New Structure();
 	Binding.Insert("FixedAssetTransfer", 
 		"StepChangeResponsiblePersonSenderByFixedAsset,
-		|StepChangeBranchSenderByFixedAsset");
+		|StepChangeBusinessUnitSenderByFixedAsset");
 
 	Return BindSteps("BindVoid", DataPath, Binding, Parameters, "BindFixedAsset");
 EndFunction
@@ -2817,32 +2817,32 @@ EndProcedure
 
 #Region BRANCH_SENDER
 
-// BranchSender.Set
-Procedure SetBranchSender(Parameters, Results) Export
-	Binding = BindBranchSender(Parameters);
+// BusinessUnitSender.Set
+Procedure SetBusinessUnitSender(Parameters, Results) Export
+	Binding = BindBusinessUnitSender(Parameters);
 	SetterObject(Binding.StepsEnabler, Binding.DataPath, Parameters, Results);
 EndProcedure
 
-// BranchSender.Bind
-Function BindBranchSender(Parameters)
-	DataPath = "BranchSender";
+// BusinessUnitSender.Bind
+Function BindBusinessUnitSender(Parameters)
+	DataPath = "BusinessUnitSender";
 	Binding = New Structure();
-	Return BindSteps("BindVoid", DataPath, Binding, Parameters, "BindBranchSender");
+	Return BindSteps("BindVoid", DataPath, Binding, Parameters, "BindBusinessUnitSender");
 EndFunction
 
-// BranchSender.ChangeBranchSenderSenderByFixedAsset.Step
-Procedure StepChangeBranchSenderByFixedAsset(Parameters, Chain) Export
-	Chain.ChangeBranchSenderByFixedAsset.Enable = True;
+// BusinessUnitSender.ChangeBusinessUnitSenderSenderByFixedAsset.Step
+Procedure StepChangeBusinessUnitSenderByFixedAsset(Parameters, Chain) Export
+	Chain.ChangeBusinessUnitSenderByFixedAsset.Enable = True;
 	If Chain.Idle Then
 		Return;
 	EndIf;
-	Chain.ChangeBranchSenderByFixedAsset.Setter = "SetBranchSender";
-	Options = ModelClientServer_V2.ChangeBranchSenderByFixedAssetOptions();
+	Chain.ChangeBusinessUnitSenderByFixedAsset.Setter = "SetBusinessUnitSender";
+	Options = ModelClientServer_V2.ChangeBusinessUnitSenderByFixedAssetOptions();
 	Options.FixedAsset = GetFixedAsset(Parameters);
 	Options.Company    = GetCompany(Parameters);
 	Options.Date       = GetDate(Parameters);
-	Options.StepName = "StepChangeBranchSenderByFixedAsset";
-	Chain.ChangeBranchSenderByFixedAsset.Options.Add(Options);
+	Options.StepName = "StepChangeBusinessUnitSenderByFixedAsset";
+	Chain.ChangeBusinessUnitSenderByFixedAsset.Options.Add(Options);
 EndProcedure
 
 #EndRegion
@@ -13880,6 +13880,8 @@ Procedure ExecuteViewNotify(Parameters, ViewNotify)
 	If ViewNotify = "OnOpenFormNotify"                         Then ViewClient_V2.OnOpenFormNotify(Parameters);
 	ElsIf ViewNotify = "InventoryOnAddRowFormNotify"           Then ViewClient_V2.InventoryOnAddRowFormNotify(Parameters);
 	ElsIf ViewNotify = "InventoryOnCopyRowFormNotify"          Then ViewClient_V2.InventoryOnCopyRowFormNotify(Parameters);
+	ElsIf ViewNotify = "FixedAssetsOnAddRowFormNotify"         Then ViewClient_V2.FixedAssetsOnAddRowFormNotify(Parameters);
+	ElsIf ViewNotify = "FixedAssetsOnCopyRowFormNotify"        Then ViewClient_V2.FixedAssetsOnCopyRowFormNotify(Parameters);
 	ElsIf ViewNotify = "AccountBalanceOnAddRowFormNotify"      Then ViewClient_V2.AccountBalanceOnAddRowFormNotify(Parameters);
 	ElsIf ViewNotify = "AccountBalanceOnCopyRowFormNotify"     Then ViewClient_V2.AccountBalanceOnCopyRowFormNotify(Parameters);
 	ElsIf ViewNotify = "CashInTransitOnAddRowFormNotify"       Then ViewClient_V2.AccountBalanceOnAddRowFormNotify(Parameters);

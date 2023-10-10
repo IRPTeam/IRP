@@ -112,7 +112,7 @@ Function GetAdditionalQueryParameters(Ref)
 	StrParams = New Structure;
 	StrParams.Insert("Ref"           , Ref);
 	StrParams.Insert("Company"       , Ref.Company);
-	StrParams.Insert("Branch"        , Ref.Branch);
+	StrParams.Insert("Branch"        , Ref.BusinessUnit);
 	StrParams.Insert("FixedAsset"    , Ref.FixedAsset);
 	If ValueIsFilled(Ref) Then
 		StrParams.Insert("BalancePeriod" , New Boundary(Ref.PointInTime(), BoundaryType.Excluding));
@@ -157,7 +157,7 @@ Function ItemList()
 		"SELECT
 		|	ItemList.Ref.Date AS Period,
 		|	ItemList.Ref.Company AS Company,
-		|	ItemList.Ref.Branch AS Branch,
+		|	ItemList.Ref.BusinessUnit AS Branch,
 		|	ItemList.Ref.FixedAsset AS FixedAsset,
 		|	ItemList.Ref AS Ref,
 		|	ItemList.Store AS Store,
@@ -178,7 +178,7 @@ Function SerialLotNumbers()
 		"SELECT
 		|	SerialLotNumbers.Ref.Date AS Period,
 		|	SerialLotNumbers.Ref.Company AS Company,
-		|	SerialLotNumbers.Ref.Branch AS Branch,
+		|	SerialLotNumbers.Ref.BusinessUnit AS Branch,
 		|	SerialLotNumbers.Key,
 		|	SerialLotNumbers.SerialLotNumber,
 		|	SerialLotNumbers.SerialLotNumber.StockBalanceDetail AS StockBalanceDetail,

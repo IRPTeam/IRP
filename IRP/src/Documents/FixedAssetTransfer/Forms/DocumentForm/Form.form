@@ -652,7 +652,7 @@
           </extInfo>
         </items>
         <items xsi:type="form:FormField">
-          <name>BranchSender</name>
+          <name>BusinessUnitSender</name>
           <id>1095</id>
           <visible>true</visible>
           <enabled>true</enabled>
@@ -660,10 +660,10 @@
             <common>true</common>
           </userVisible>
           <dataPath xsi:type="form:DataPath">
-            <segments>Object.BranchSender</segments>
+            <segments>Object.BusinessUnitSender</segments>
           </dataPath>
           <extendedTooltip>
-            <name>BranchSenderExtendedTooltip</name>
+            <name>BusinessUnitSenderExtendedTooltip</name>
             <id>1097</id>
             <visible>true</visible>
             <enabled>true</enabled>
@@ -678,7 +678,7 @@
             </extInfo>
           </extendedTooltip>
           <contextMenu>
-            <name>BranchSenderContextMenu</name>
+            <name>BusinessUnitSenderContextMenu</name>
             <id>1096</id>
             <visible>true</visible>
             <enabled>true</enabled>
@@ -792,7 +792,7 @@
           </extInfo>
         </items>
         <items xsi:type="form:FormField">
-          <name>BranchReceiver</name>
+          <name>BusinessUnitReceiver</name>
           <id>1092</id>
           <visible>true</visible>
           <enabled>true</enabled>
@@ -800,10 +800,10 @@
             <common>true</common>
           </userVisible>
           <dataPath xsi:type="form:DataPath">
-            <segments>Object.BranchReceiver</segments>
+            <segments>Object.BusinessUnitReceiver</segments>
           </dataPath>
           <extendedTooltip>
-            <name>BranchReceiverExtendedTooltip</name>
+            <name>BusinessUnitReceiverExtendedTooltip</name>
             <id>1094</id>
             <visible>true</visible>
             <enabled>true</enabled>
@@ -818,7 +818,7 @@
             </extInfo>
           </extendedTooltip>
           <contextMenu>
-            <name>BranchReceiverContextMenu</name>
+            <name>BusinessUnitReceiverContextMenu</name>
             <id>1093</id>
             <visible>true</visible>
             <enabled>true</enabled>

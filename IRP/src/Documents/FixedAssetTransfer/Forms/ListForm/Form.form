@@ -345,19 +345,19 @@
       </extInfo>
     </items>
     <items xsi:type="form:FormField">
-      <name>BranchSender</name>
-      <id>67</id>
+      <name>BusinessUnitSender</name>
+      <id>73</id>
       <visible>true</visible>
       <enabled>true</enabled>
       <userVisible>
         <common>true</common>
       </userVisible>
       <dataPath xsi:type="form:DataPath">
-        <segments>List.BranchSender</segments>
+        <segments>List.BusinessUnitSender</segments>
       </dataPath>
       <extendedTooltip>
-        <name>BranchSenderExtendedTooltip</name>
-        <id>69</id>
+        <name>BusinessUnitSenderExtendedTooltip</name>
+        <id>75</id>
         <visible>true</visible>
         <enabled>true</enabled>
         <userVisible>
@@ -371,8 +371,8 @@
         </extInfo>
       </extendedTooltip>
       <contextMenu>
-        <name>BranchSenderContextMenu</name>
-        <id>68</id>
+        <name>BusinessUnitSenderContextMenu</name>
+        <id>74</id>
         <visible>true</visible>
         <enabled>true</enabled>
         <userVisible>
@@ -445,19 +445,19 @@
       </extInfo>
     </items>
     <items xsi:type="form:FormField">
-      <name>BranchReceiver</name>
-      <id>70</id>
+      <name>BusinessUnitReceiver</name>
+      <id>76</id>
       <visible>true</visible>
       <enabled>true</enabled>
       <userVisible>
         <common>true</common>
       </userVisible>
       <dataPath xsi:type="form:DataPath">
-        <segments>List.BranchReceiver</segments>
+        <segments>List.BusinessUnitReceiver</segments>
       </dataPath>
       <extendedTooltip>
-        <name>BranchReceiverExtendedTooltip</name>
-        <id>72</id>
+        <name>BusinessUnitReceiverExtendedTooltip</name>
+        <id>78</id>
         <visible>true</visible>
         <enabled>true</enabled>
         <userVisible>
@@ -471,8 +471,8 @@
         </extInfo>
       </extendedTooltip>
       <contextMenu>
-        <name>BranchReceiverContextMenu</name>
-        <id>71</id>
+        <name>BusinessUnitReceiverContextMenu</name>
+        <id>77</id>
         <visible>true</visible>
         <enabled>true</enabled>
         <userVisible>

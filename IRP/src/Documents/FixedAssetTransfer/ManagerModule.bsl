@@ -87,9 +87,8 @@ Function GetAdditionalQueryParameters(Ref)
 	StrParams = New Structure;
 	StrParams.Insert("Ref", Ref);
 	StrParams.Insert("Company"       , Ref.Company);
-	StrParams.Insert("Branch"        , Ref.BranchSender);
-	StrParams.Insert("BranchSender"  , Ref.BranchSender);
-	StrParams.Insert("BranchReceiver", Ref.BranchReceiver);
+	StrParams.Insert("BusinessUnitSender"  , Ref.BusinessUnitSender);
+	StrParams.Insert("BusinessUnitReceiver", Ref.BusinessUnitReceiver);
 	StrParams.Insert("FixedAsset"    , Ref.FixedAsset);
 	If ValueIsFilled(Ref) Then
 		StrParams.Insert("BalancePeriod" , New Boundary(Ref.PointInTime(), BoundaryType.Excluding));
@@ -134,7 +133,7 @@ Function T8515S_FixedAssetsLocation()
 		|FROM
 		|	InformationRegister.T8515S_FixedAssetsLocation.SliceLast(&BalancePeriod, Company = &Company
 		|	AND FixedAsset = &FixedAsset
-		|	AND Branch = &Branch) AS T8515S_FixedAssetsLocationSliceLast
+		|	AND Branch = &BusinessUnitSender) AS T8515S_FixedAssetsLocationSliceLast
 		|WHERE
 		|	T8515S_FixedAssetsLocationSliceLast.IsActive
 		|
@@ -145,7 +144,7 @@ Function T8515S_FixedAssetsLocation()
 		|	FixedAssetTransfer.Company,
 		|	FixedAssetTransfer.FixedAsset,
 		|	FixedAssetTransfer.ResponsiblePersonReceiver,
-		|	FixedAssetTransfer.BranchReceiver,
+		|	FixedAssetTransfer.BusinessUnitReceiver,
 		|	TRUE
 		|FROM
 		|	Document.FixedAssetTransfer AS FixedAssetTransfer
@@ -166,7 +165,7 @@ Function R8510B_BookValueOfFixedAsset()
 		|INTO _BookValueOfFixedAsset
 		|FROM
 		|	AccumulationRegister.R8510B_BookValueOfFixedAsset.Balance(&BalancePeriod, FixedAsset = &FixedAsset
-		|	AND Branch = &BranchSender
+		|	AND Branch = &BusinessUnitSender
 		|	AND Company = &Company
 		|	AND CurrencyMovementType = VALUE(ChartOfCharacteristicTypes.CurrencyMovementType.SettlementCurrency)) AS
 		|		R8510B_BookValueOfFixedAssetBalance
@@ -177,7 +176,7 @@ Function R8510B_BookValueOfFixedAsset()
 		|	VALUE(AccumulationRecordType.Expense) AS RecordType,
 		|	_BookValueOfFixedAsset.Period,
 		|	_BookValueOfFixedAsset.Company,
-		|	&BranchSender AS Branch,
+		|	&BusinessUnitSender AS Branch,
 		|	_BookValueOfFixedAsset.FixedAsset,
 		|	_BookValueOfFixedAsset.LedgerType,
 		|	_BookValueOfFixedAsset.Schedule,
@@ -195,7 +194,7 @@ Function R8510B_BookValueOfFixedAsset()
 		|	VALUE(AccumulationRecordType.Receipt),
 		|	_BookValueOfFixedAsset.Period,
 		|	_BookValueOfFixedAsset.Company,
-		|	&BranchReceiver,
+		|	&BusinessUnitReceiver,
 		|	_BookValueOfFixedAsset.FixedAsset,
 		|	_BookValueOfFixedAsset.LedgerType,
 		|	_BookValueOfFixedAsset.Schedule,
@@ -221,10 +220,7 @@ EndFunction
 Function GetAccessKey(Obj) Export
 	AccessKeyMap = New Map;
 	AccessKeyMap.Insert("Company", Obj.Company);
-	BranchList = New Array;
-	BranchList.Add(Obj.BranchSender);
-	BranchList.Add(Obj.BranchReceiver);
-	AccessKeyMap.Insert("Branch", BranchList);
+	AccessKeyMap.Insert("Branch", Obj.Branch);
 	Return AccessKeyMap;
 EndFunction
 

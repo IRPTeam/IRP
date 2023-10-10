@@ -149,7 +149,7 @@ Function ItemList()
 		|	ItemList.Ref AS Ref,
 		|	ItemList.Ref.Date AS Period,
 		|	ItemList.Ref.Company AS Company,
-		|	ItemList.Ref.Branch AS Branch,
+		|	ItemList.Ref.BusinessUnit AS Branch,
 		|	ItemList.Ref.FixedAsset AS FixedAsset,
 		|	ItemList.Store AS Store,
 		|	ItemList.ItemKey AS ItemKey,
@@ -170,7 +170,7 @@ Function SerialLotNumbers()
 		"SELECT
 		|	SerialLotNumbers.Ref.Date AS Period,
 		|	SerialLotNumbers.Ref.Company AS Company,
-		|	SerialLotNumbers.Ref.Branch AS Branch,
+		|	SerialLotNumbers.Ref.BusinessUnit AS Branch,
 		|	SerialLotNumbers.Key,
 		|	SerialLotNumbers.SerialLotNumber,
 		|	SerialLotNumbers.SerialLotNumber.StockBalanceDetail AS StockBalanceDetail,

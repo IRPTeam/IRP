@@ -422,7 +422,7 @@ Function GetChain()
 	Chain.Insert("ChangeShipmentModeByTransactionType"   , GetChainLink("ChangeShipmentModeByTransactionTypeExecute"));
 	
 	Chain.Insert("ChangeResponsiblePersonSenderByFixedAsset" , GetChainLink("ChangeResponsiblePersonSenderByFixedAssetExecute"));
-	Chain.Insert("ChangeBranchSenderByFixedAsset"            , GetChainLink("ChangeBranchSenderByFixedAssetExecute"));
+	Chain.Insert("ChangeBusinessUnitSenderByFixedAsset"            , GetChainLink("ChangeBusinessUnitSenderByFixedAssetExecute"));
 	
 	// Extractors
 	Chain.Insert("ExtractDataAgreementApArPostingDetail"   , GetChainLink("ExtractDataAgreementApArPostingDetailExecute"));
@@ -1901,11 +1901,11 @@ EndFunction
 
 #Region CHANGE_BRANCH_SENDER_BY_FIXED_ASSET
 
-Function ChangeBranchSenderByFixedAssetOptions() Export
+Function ChangeBusinessUnitSenderByFixedAssetOptions() Export
 	Return GetChainLinkOptions("FixedAsset, Company, Date");
 EndFunction
 
-Function ChangeBranchSenderByFixedAssetExecute(Options) Export
+Function ChangeBusinessUnitSenderByFixedAssetExecute(Options) Export
 	Result = DocFixedAssetTransferServer.GetFixedAssetLocation(Options.Date, Options.Company, Options.FixedAsset);
 	Return Result.Branch;
 EndFunction

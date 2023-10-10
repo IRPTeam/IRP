@@ -835,6 +835,7 @@ Scenario: _0155273 select items from RSC in POS
 		And "RetailShipmentConfirmation" table became equal
 			| 'Number' | 'Date'                | 'Retail customer' | 'Courier' | 'Transaction type' | 'Branch' |
 			| '317'    | '11.08.2023 16:02:15' | 'Daniel Smith'    | ''        | 'Courier delivery' | ''       |
+			| '318'    | '11.08.2023 16:07:56' | 'Daniel Smith'    | ''        | 'Courier delivery' | ''       |
 		And I go to line in "RetailShipmentConfirmation" table
 			| 'Number' | 'Date'                | 'Retail customer' | 'Courier' | 'Transaction type' | 'Branch' |
 			| '317'    | '11.08.2023 16:02:15' | 'Daniel Smith'    | ''        | 'Courier delivery' | ''       |
@@ -949,6 +950,11 @@ Scenario: _0155275 add items in POS	and link lines to basis document
 		And I click "Search by barcode (F7)" button
 		And I input "978020137962" text in the field named "Barcode"
 		And I move to the next attribute
+		Then "Select sales person" window is opened
+		And I go to line in "" table
+			| 'Column1'       |
+			| 'David Romanov' |
+		And I click "OK" button	
 		And I click "Link unlink basis documents" button
 		And "ItemListRows" table became equal
 			| '#' | 'Row presentation' | 'Unit' | 'Quantity' | 'Store'    |

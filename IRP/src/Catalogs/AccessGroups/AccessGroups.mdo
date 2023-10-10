@@ -229,6 +229,31 @@
       <dataHistory>Use</dataHistory>
       <fullTextSearch>Use</fullTextSearch>
     </attributes>
+    <attributes uuid="cb023c0e-bf66-40f6-8526-8063f7d75bc6">
+      <name>Value</name>
+      <synonym>
+        <key>en</key>
+        <value>Value</value>
+      </synonym>
+      <type>
+        <types>String</types>
+        <types>Date</types>
+        <types>Boolean</types>
+        <types>Number</types>
+        <numberQualifiers>
+          <precision>15</precision>
+          <scale>5</scale>
+        </numberQualifiers>
+        <stringQualifiers>
+          <length>64</length>
+        </stringQualifiers>
+        <dateQualifiers/>
+      </type>
+      <minValue xsi:type="core:UndefinedValue"/>
+      <maxValue xsi:type="core:UndefinedValue"/>
+      <dataHistory>Use</dataHistory>
+      <fullTextSearch>Use</fullTextSearch>
+    </attributes>
   </tabularSections>
   <forms uuid="4834790e-58e6-473b-b3f3-988d799569ee">
     <name>ItemForm</name>

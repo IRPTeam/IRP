@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mdclass:Role xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="01a2773d-3b4e-49e7-9ff3-2eafde9cd24a">
+  <name>Subsystem_Salary</name>
+  <synonym>
+    <key>en</key>
+    <value>Subsystem Salary</value>
+  </synonym>
+</mdclass:Role>

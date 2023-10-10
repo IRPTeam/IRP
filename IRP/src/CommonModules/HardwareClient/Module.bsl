@@ -92,7 +92,7 @@ Async Function ConnectHardware(Hardware) Export
 	
 	If Not ConnectedDevice.Connected Then
 		Device = HardwareServer.GetConnectionSettings(Hardware);
-		Settings = Await FillDriverParametersSettings(Hardware, False);
+		Settings = Await FillDriverParametersSettings(Hardware);
 		
 		If Settings.ConnectedDriver = Undefined Then
 			// @skip-check property-return-type, invocation-parameter-type-intersect
@@ -195,6 +195,8 @@ EndFunction
 // * WriteLog - Boolean - Write log
 // * UseIS - Boolean - Use integration settings
 // * IntegrationSettings - CatalogRef.IntegrationSettings -
+// * LastUseDate - Date -
+// * SleepAfter - Number -
 Async Function GetDriverObject(DriverInfo) Export
 	ConnectionSettings = globalEquipment_GetConnectionSettings(DriverInfo.Hardware);
 	If ConnectionSettings.Connected Then
@@ -231,6 +233,9 @@ Async Function GetDriverObject(DriverInfo) Export
 	DeviceConnection.Insert("WriteLog", DriverInfo.WriteLog);
 	DeviceConnection.Insert("IntegrationSettings", DriverInfo.IntegrationSettings);
 	DeviceConnection.Insert("UseIS", DriverInfo.UseIS);
+	DeviceConnection.Insert("LastUseDate", Date(1, 1, 1));
+	DeviceConnection.Insert("SleepAfter", DriverInfo.SleepAfter);
+	
 	globalEquipment_AddConnectionSettings(DriverInfo.Hardware, DeviceConnection);
 	Return DeviceConnection;
 
@@ -280,7 +285,6 @@ EndProcedure
 // 
 // Parameters:
 //  Hardware - CatalogRef.Hardware
-// 	AutoConnect - Boolean - Open device if it closed
 // 	
 // Returns:
 //  Structure - Fill driver parameters settings:
@@ -293,14 +297,10 @@ EndProcedure
 // * SetParameters - Structure -
 // * OutParameters - Array of String -
 // * ServiceCallback - NotifyDescription, Undefined -
-Async Function FillDriverParametersSettings(Hardware, AutoConnect = True) Export
+Async Function FillDriverParametersSettings(Hardware) Export
 		
 	Device = HardwareServer.GetConnectionSettings(Hardware);
 	ConnectedDriver = Await GetDriverObject(Device);
-	
-	If AutoConnect And IsBlankString(ConnectedDriver.ID) Then
-		Device_Open(ConnectedDriver, ConnectedDriver.DriverObject, ConnectedDriver.ID);
-	EndIf;
 	
 	Str = New Structure;
 	Str.Insert("Hardware", Hardware);
@@ -562,6 +562,10 @@ Function Device_Open(Settings, DriverObject, ID) Export
 	
 	//@skip-check property-return-type, statement-type-change
 	ID = Structure.Out.ID;
+	
+	If Result Then
+		Settings.LastUseDate = CurrentDate();
+	EndIf;
 	
 	Return Result;
 EndFunction
@@ -956,8 +960,17 @@ Function globalEquipment_GetConnectionSettings(Hardware) Export
 	CurrentConnection = globalEquipment.ConnectionSettings.Get(Hardware); // See GetDriverObject
 	
 	If Not CurrentConnection = Undefined Then
-		Str.Connected = True;
-		Str.Settings = CurrentConnection;
+		If CurrentConnection.SleepAfter > 0 Then
+			//@skip-check use-non-recommended-method
+			Str.Connected = CurrentDate() - CurrentConnection.LastUseDate < CurrentConnection.SleepAfter;
+		Else
+			Str.Connected = True;
+		EndIf;
+		If Str.Connected Then
+			Str.Settings = CurrentConnection;
+		Else
+			globalEquipment_RemoveConnectionSettings(Hardware);
+		EndIf;
 	EndIf;
 	
 	Return Str;

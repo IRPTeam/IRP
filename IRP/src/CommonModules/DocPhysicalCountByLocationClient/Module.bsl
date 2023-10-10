@@ -19,6 +19,14 @@ EndProcedure
 
 #EndRegion
 
+#Region TRANSACTION_TYPE
+
+Procedure TransactionTypeOnChange(Object, Form, Item) Export
+	ViewClient_V2.TransactionTypeOnChange(Object, Form, "ItemList");
+EndProcedure
+
+#EndRegion
+
 #Region ITEM_LIST
 
 Procedure ItemListSelection(Object, Form, Item, RowSelected, Field, StandardProcessing) Export

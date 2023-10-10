@@ -1302,10 +1302,11 @@ Scenario: _01541952 check copy lines from Sales report from trade agent
 			| 'Dress'   | 'XS/Blue'    | 'box Dress (8 pcs)'   | '2,000'       |
 		And I close all client application windows
 
-Scenario: _01541953 check copy lines from Physical count by location
+Scenario: _01541953 check copy lines from Physical count by location (transaction type Physical inventory) 
 	And I close all client application windows
 	Given I open hyperlink "e1cib/list/Document.PhysicalCountByLocation"
 	And I click the button named "FormCreate"
+	And I select "Physical inventory" exact value from "Transaction type" drop-down list
 	* Add items
 		And I fill "ItemList" table with data
 			| 'Item'    | 'Item key'   | 'Unit'                | 'Phys. count'    |
@@ -1326,4 +1327,27 @@ Scenario: _01541953 check copy lines from Physical count by location
 			| 'Item'    | 'Item key'   | 'Unit'                | 'Phys. count'    |
 			| 'Bag'     | 'PZU'        | 'pcs'                 | '3,000'          |
 			| 'Dress'   | 'XS/Blue'    | 'box Dress (8 pcs)'   | '2,000'          |
+		And I close all client application windows
+
+Scenario: _01541954 check copy lines from Physical count by location (transaction type Package) 
+	And I close all client application windows
+	Given I open hyperlink "e1cib/list/Document.PhysicalCountByLocation"
+	And I click the button named "FormCreate"
+	And I select "Package" exact value from "Transaction type" drop-down list
+	* Add items
+		And I fill "ItemList" table with data
+			| 'Item'    | 'Item key'   | 'Unit'                | 'Phys. count'    |
+			| 'Bag'     | 'PZU'        | 'pcs'                 | '3,000'          |
+			| 'Dress'   | 'XS/Blue'    | 'box Dress (8 pcs)'   | '2,000'          |
+	* Copy lines
+		And I go to the first line in "ItemList" table
+		Then I select all lines of "ItemList" table
+		And in the table "ItemList" I click "Copy to clipboard" button
+	* Past lines
+		Given I open hyperlink "e1cib/app/DataProcessor.PrintLabels"		
+		And I click "Paste from clipboard" button
+		And "ItemList" table became equal
+			| 'Item'  | 'Item key' | 'Unit'              | 'Quantity' |
+			| 'Bag'   | 'PZU'      | 'pcs'               | '3'        |
+			| 'Dress' | 'XS/Blue'  | 'box Dress (8 pcs)' | '2'        |
 		And I close all client application windows

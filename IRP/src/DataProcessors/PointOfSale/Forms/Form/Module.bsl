@@ -572,7 +572,7 @@ Procedure qPayment(Command)
 	ObjectParameters.Insert("Discount", Object.ItemList.Total("OffersAmount"));
 	ObjectParameters.Insert("ConsolidatedRetailSales", ConsolidatedRetailSales);
 	OpenForm("DataProcessor.PointOfSale.Form.Payment", ObjectParameters, ThisObject, UUID, , ,
-		OpenFormNotifyDescription, FormWindowOpeningMode.LockWholeInterface);
+		OpenFormNotifyDescription, FormWindowOpeningMode.LockOwnerWindow);
 EndProcedure
 
 &AtServer
@@ -731,7 +731,8 @@ Function IsRetailCustomerHasOrders()
 	Query = New Query;
 	Query.Text =
 		"SELECT ALLOWED DISTINCT
-		|	R2012B_SalesOrdersInvoiceClosingBalance.Order
+		|	R2012B_SalesOrdersInvoiceClosingBalance.Order,
+		|	R2012B_SalesOrdersInvoiceClosingBalance.ItemKey
 		|FROM
 		|	AccumulationRegister.R2012B_SalesOrdersInvoiceClosing.Balance(, Order.RetailCustomer = &RetailCustomer) AS
 		|		R2012B_SalesOrdersInvoiceClosingBalance
@@ -740,11 +741,14 @@ Function IsRetailCustomerHasOrders()
 		|
 		|UNION ALL
 		|
-		|SELECT DISTINCT
-		|	R4032B_GoodsInTransitOutgoing.Basis
+		|SELECT
+		|	R4032B_GoodsInTransitOutgoing.Basis,
+		|	R4032B_GoodsInTransitOutgoing.ItemKey
 		|FROM
-		|	AccumulationRegister.R4032B_GoodsInTransitOutgoing.Balance(, Basis.RetailCustomer = &RetailCustomer) AS
-		|		R4032B_GoodsInTransitOutgoing";
+		|	AccumulationRegister.R4032B_GoodsInTransitOutgoing.BalanceAndTurnovers(,,,,
+		|		Basis.RetailCustomer = &RetailCustomer) AS R4032B_GoodsInTransitOutgoing
+		|WHERE
+		|	R4032B_GoodsInTransitOutgoing.QuantityClosingBalance < 0";
 
 	Query.SetParameter("RetailCustomer", Object.RetailCustomer);
 	SetPrivilegedMode(True);
@@ -1072,6 +1076,7 @@ Async Procedure PaymentFormClose(Result, AdditionalData) Export
 	DPPointOfSaleClient.BeforeStartNewTransaction(Object, ThisObject, DocRef);
 
 	NewTransaction();
+	SetSelectBasisDocumentColor();
 	Modified = False;
 EndProcedure
 

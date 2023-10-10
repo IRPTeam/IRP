@@ -205,6 +205,23 @@
       <common>true</common>
     </edit>
   </attributes>
+  <attributes>
+    <name>SourceRef</name>
+    <title>
+      <key>en</key>
+      <value>Source ref</value>
+    </title>
+    <id>3</id>
+    <valueType>
+      <types>DocumentRef</types>
+    </valueType>
+    <view>
+      <common>true</common>
+    </view>
+    <edit>
+      <common>true</common>
+    </edit>
+  </attributes>
   <formCommands>
     <name>OK</name>
     <title>

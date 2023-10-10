@@ -4123,7 +4123,7 @@ Scenario: create RetailSalesOrder, RetailGoodsReceipt, RetailShipmentConfirmatio
 
 	And I refill object tabular section "ShipmentConfirmations":
 		| 'Ref'                                                                         | 'Key'                                  | 'ShipmentConfirmation'                                                                | 'Quantity' | 'QuantityInShipmentConfirmation' | 'BasisKey'                             |
-		| 'e1cib/data/Document.RetailGoodsReceipt?ref=b7a5dc9c15bba2d111ee3845c4df4ff7' | 'a260af97-f396-4c8f-843e-88af4ad16745' | 'e1cib/data/Document.RetailShipmentConfirmation?ref=b7a5dc9c15bba2d111ee3845c4df4ff6' | 2          | 2                                | 'b0842f55-f15f-416d-8e4c-b6f13022d2f1' |
+		| 'e1cib/data/Document.RetailGoodsReceipt?ref=b7a5dc9c15bba2d111ee3845c4df4ff7' | 'a260af97-f396-4c8f-843e-88af4ad16745' | 'e1cib/data/Document.RetailShipmentConfirmation?ref=b7a5dc9c15bba2d111ee3845c4df4ff6' | 1          | 1                                | 'b0842f55-f15f-416d-8e4c-b6f13022d2f1' |
 
 	And I refill object tabular section "SourceOfOrigins":
 		| 'Ref'                                                                         | 'Key'                                  | 'SerialLotNumber' | 'SourceOfOrigin' | 'Quantity' |

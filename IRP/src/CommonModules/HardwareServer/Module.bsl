@@ -1,5 +1,16 @@
 #Region Public
 
+// Get driver settings.
+// 
+// Parameters:
+//  AddInID - String - AddIn ID
+// 
+// Returns:
+//  Structure -  Get driver settings:
+// * EquipmentDriver - CatalogRef.EquipmentDrivers -
+// * AddInID - String -
+// * DriverLoaded - Boolean -
+// * SleepAfter - Number -
 Function GetDriverSettings(AddInID) Export
 	Query = New Query();
 	Query.Text =
@@ -8,7 +19,8 @@ Function GetDriverSettings(AddInID) Export
 	|	EquipmentDrivers.Ref,
 	|	EquipmentDrivers.Driver,
 	|	EquipmentDrivers.AddInID,
-	|	EquipmentDrivers.DriverLoaded
+	|	EquipmentDrivers.DriverLoaded,
+	|	EquipmentDrivers.SleepAfter
 	|FROM
 	|	Catalog.EquipmentDrivers AS EquipmentDrivers
 	|WHERE
@@ -24,6 +36,7 @@ Function GetDriverSettings(AddInID) Export
 		Settings.Insert("EquipmentDriver", SelectionDetailRecords.Ref);
 		Settings.Insert("AddInID", SelectionDetailRecords.AddInID);
 		Settings.Insert("DriverLoaded", SelectionDetailRecords.DriverLoaded);
+		Settings.Insert("SleepAfter", SelectionDetailRecords.SleepAfter);
 	EndIf;
 	Return Settings;
 EndFunction
@@ -45,6 +58,7 @@ EndFunction
 // * OldRevision - Boolean - Revision less then 3000
 // * UseIS - Boolean - Use IntegrationSettings. Driver not using.
 // * WriteLog - Boolean -
+// * SleepAfter - Number -
 Function GetConnectionSettings(HardwareRef) Export
 	Query = New Query();
 	Query.Text =
@@ -52,6 +66,7 @@ Function GetConnectionSettings(HardwareRef) Export
 	|	Hardware.Ref,
 	|	Hardware.EquipmentType,
 	|	Hardware.Driver,
+	|	ISNULL(Hardware.Driver.SleepAfter, 0) AS SleepAfter,
 	|	Hardware.Driver.AddInID AS AddInID,
 	|	Hardware.Driver.RevisionNumber < 3000 AS OldRevision,
 	|	Hardware.IntegrationSettings,
@@ -75,6 +90,7 @@ Function GetConnectionSettings(HardwareRef) Export
 		Settings.Insert("WriteLog", SelectionDetailRecords.Log);
 		Settings.Insert("IntegrationSettings", SelectionDetailRecords.IntegrationSettings);
 		Settings.Insert("UseIS", Not SelectionDetailRecords.IntegrationSettings.IsEmpty());
+		Settings.Insert("SleepAfter", SelectionDetailRecords.SleepAfter);
 		
 		ConnectParameters = New Structure();
 		ConnectParameters.Insert("EquipmentType", GetDriverEquipmentType(SelectionDetailRecords.EquipmentType));
@@ -84,6 +100,7 @@ Function GetConnectionSettings(HardwareRef) Export
 		Settings.Insert("ConnectParameters", ConnectParameters);
 	EndIf;
 
+	//@skip-check constructor-function-return-section
 	Return Settings;
 EndFunction
 

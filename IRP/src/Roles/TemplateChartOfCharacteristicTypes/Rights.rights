@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Rights xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://v8.1c.ru/8.2/roles" xsi:type="Rights">
+	<setForNewObjects>false</setForNewObjects>
+	<setForAttributesByDefault>true</setForAttributesByDefault>
+	<independentRightsOfChildObjects>false</independentRightsOfChildObjects>
+	<object>
+		<name>ChartOfCharacteristicTypes.IDInfoTypes</name>
+		<right>
+			<name>View</name>
+			<value>true</value>
+		</right>
+		<right>
+			<name>InputByString</name>
+			<value>true</value>
+		</right>
+		<right>
+			<name>Read</name>
+			<value>true</value>
+		</right>
+	</object>
+	<object>
+		<name>ChartOfCharacteristicTypes.CurrencyMovementType</name>
+		<right>
+			<name>View</name>
+			<value>true</value>
+		</right>
+		<right>
+			<name>InputByString</name>
+			<value>true</value>
+		</right>
+		<right>
+			<name>Read</name>
+			<value>true</value>
+		</right>
+	</object>
+	<object>
+		<name>ChartOfCharacteristicTypes.AccountingExtraDimensionTypes</name>
+		<right>
+			<name>View</name>
+			<value>true</value>
+		</right>
+		<right>
+			<name>InputByString</name>
+			<value>true</value>
+		</right>
+		<right>
+			<name>Read</name>
+			<value>true</value>
+		</right>
+	</object>
+	<object>
+		<name>ChartOfCharacteristicTypes.AddAttributeAndProperty</name>
+		<right>
+			<name>View</name>
+			<value>true</value>
+		</right>
+		<right>
+			<name>InputByString</name>
+			<value>true</value>
+		</right>
+		<right>
+			<name>Read</name>
+			<value>true</value>
+		</right>
+	</object>
+	<object>
+		<name>ChartOfCharacteristicTypes.CustomUserSettings</name>
+		<right>
+			<name>View</name>
+			<value>true</value>
+		</right>
+		<right>
+			<name>InputByString</name>
+			<value>true</value>
+		</right>
+		<right>
+			<name>Read</name>
+			<value>true</value>
+		</right>
+	</object>
+	<restrictionTemplate>
+		<name>Access(KeySynonym, AttributePath, AdditionalRule)</name>
+		<condition>// Table WHERE #Access("Company", "Company", "")
+// Table WHERE #Access("Branch", "Ref", "")
+// Table WHERE #Access("Company", "Company", "") AND (#Access("Account", "Ref", "") OR #Access("Branch", "Branch", ""))
+// Table WHERE #Access("Company", "Ref", "TRUE OR NOT Table.OurCompany")
+
+#If Not &amp;UseObjectAccess #Then
+	// Access restiction not using. Set UseObjectAccess functional option TRUE
+	TRUE
+#Else    
+	TRUE IN(
+		SELECT 
+			TRUE
+		FROM Catalog.AccessGroups.ObjectAccess AS AG
+		WHERE
+			AG.Ref IN (&amp;CurrentUserAccessGroupList)
+			#If #CurrentAccessRightName = "Insert" OR #CurrentAccessRightName = "Update" #Then
+				AND AG.Modify
+			#EndIf                  
+		AND
+			(
+			#If Not "#KeySynonym" = "" AND Not "#AttributePath" = "ac" #Then
+			AG.Key = "#KeySynonym"
+			AND (
+				AG.ValueRef = #AttributePath
+				OR AG.Value = #AttributePath
+				OR AG.DoNotControl
+				)    
+			#EndIf
+			#If Not "#AdditionalRule" = "" #Then
+				AND #AdditionalRule
+			#EndIf                     
+			)
+	)	                                            
+#EndIf</condition>
+	</restrictionTemplate>
+</Rights>

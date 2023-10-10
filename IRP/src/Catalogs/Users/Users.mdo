@@ -352,4 +352,19 @@
     <usePurposes>PersonalComputer</usePurposes>
     <usePurposes>MobileDevice</usePurposes>
   </forms>
+  <commands uuid="ce88bd40-884d-49ed-9983-4abdc36bc4dc">
+    <name>RunSession</name>
+    <synonym>
+      <key>en</key>
+      <value>Run session</value>
+    </synonym>
+    <group>CommandGroup.Service</group>
+    <commandParameterType>
+      <types>CatalogRef.Users</types>
+    </commandParameterType>
+    <representation>Auto</representation>
+    <picture xsi:type="core:PictureRef">
+      <picture>StdPicture.ActiveUsers</picture>
+    </picture>
+  </commands>
 </mdclass:Catalog>

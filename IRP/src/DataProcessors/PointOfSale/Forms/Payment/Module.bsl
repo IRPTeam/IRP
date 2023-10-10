@@ -350,6 +350,24 @@ Procedure SearchByBarcode(Command, Barcode = "")
 	DocumentsClient.SearchByBarcode(Barcode, Object, ThisObject, ThisObject);
 EndProcedure
 
+&AtClient
+Async Procedure ReconnectFiscalPrinter(Command)
+	Hardware = CommonFunctionsServer.GetRefAttribute(ThisObject.ConsolidatedRetailSales, "FiscalPrinter");
+	HardwareClient.DisconnectHardware(Hardware);
+	ConnectResult = Await HardwareClient.ConnectHardware(Hardware);
+	If Not ConnectResult.Result Then
+		CommonFunctionsClientServer.ShowUsersMessage(ConnectResult.String);
+	Else
+		CommonFunctionsClientServer.ShowUsersMessage(R().InfoMessage_005);
+	EndIf;
+	
+EndProcedure
+
+&AtClient
+Procedure ActivateOKButton(Command)
+	Items.Enter.Enabled = True;
+EndProcedure
+
 #EndRegion
 
 #Region Private

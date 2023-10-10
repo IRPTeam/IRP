@@ -133,6 +133,24 @@
     <fullTextSearch>Use</fullTextSearch>
     <dataHistory>Use</dataHistory>
   </attributes>
+  <attributes uuid="ff5fad99-3167-4ca3-9312-d397e7f7747f">
+    <name>SleepAfter</name>
+    <synonym>
+      <key>en</key>
+      <value>Sleep after (sec)</value>
+    </synonym>
+    <type>
+      <types>Number</types>
+      <numberQualifiers>
+        <precision>10</precision>
+      </numberQualifiers>
+    </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <fillValue xsi:type="core:UndefinedValue"/>
+    <fullTextSearch>Use</fullTextSearch>
+    <dataHistory>Use</dataHistory>
+  </attributes>
   <tabularSections uuid="0992d6cf-cc34-493b-b258-01c607054de6">
     <producedTypes>
       <objectType typeId="18392ead-1e0b-4444-b026-531a884a133f" valueTypeId="3071f623-4260-4136-845e-786e654e0bd6"/>

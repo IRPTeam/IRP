@@ -1512,17 +1512,17 @@ WHERE
     </notDefaultUseAlwaysAttributes>
     <extInfo xsi:type="form:DynamicListExtInfo">
       <queryText>SELECT ALLOWED DISTINCT
-	R4012B_StockReservationBalanceAndTurnovers.Basis
+	R4032B_GoodsInTransitOutgoing.Basis,
+	R4032B_GoodsInTransitOutgoing.ItemKey
 INTO RSC
 FROM
-	AccumulationRegister.R4032B_GoodsInTransitOutgoing.BalanceAndTurnovers() AS
-		R4012B_StockReservationBalanceAndTurnovers
+	AccumulationRegister.R4032B_GoodsInTransitOutgoing.BalanceAndTurnovers() AS R4032B_GoodsInTransitOutgoing
 WHERE
-	R4012B_StockReservationBalanceAndTurnovers.QuantityClosingBalance > 0
+	R4032B_GoodsInTransitOutgoing.QuantityClosingBalance &lt; 0
 ;
 
 ////////////////////////////////////////////////////////////////////////////////
-SELECT
+ SELECT
 	RetailShipmentConfirmation.Ref,
 	RetailShipmentConfirmation.DeletionMark,
 	RetailShipmentConfirmation.Number,
@@ -1666,8 +1666,8 @@ WHERE
         <field>SerialLotNumbers</field>
       </fields>
       <fields xsi:type="schema:DataCompositionSchemaDataSetField">
-        <dataPath>ConsignorBatches</dataPath>
-        <field>ConsignorBatches</field>
+        <dataPath>DELETE_ConsignorBatches</dataPath>
+        <field>DELETE_ConsignorBatches</field>
       </fields>
       <fields xsi:type="schema:DataCompositionSchemaDataSetField">
         <dataPath>SourceOfOrigins</dataPath>

@@ -5,6 +5,7 @@
 
 Feature: check fiscal printer
 
+
 Variables:
 import "Variables.feature"
 
@@ -259,6 +260,26 @@ SalesReceiptXML20 =
 </CheckPackage>
 """
 
+SalesReceiptXML21 =
+"""xml
+<?xml version="1.0" encoding="UTF-8"?>
+<CheckPackage>
+	<Parameters CashierName="Арина Браун" CashierINN="1111111111" SaleAddress="Sale address" SaleLocation="Sale location" OperationType="1" TaxationSystem="0"/>
+	<Positions>
+		<FiscalString AmountWithDiscount="100" DiscountAmount="0" MeasureOfQuantity="255" CalculationSubject="1" Name="Product with Unique SLN ODS [0909088998998898789]" Quantity="1" PaymentMethod="4" PriceWithDiscount="100" VATRate="18" VATAmount="15.25" CalculationAgent="5">
+			<VendorData VendorINN="1" VendorName="Consignor 1" VendorPhone=""/>
+		</FiscalString>
+		<FiscalString AmountWithDiscount="100" DiscountAmount="0" MeasureOfQuantity="255" CalculationSubject="1" Name="Product with Unique SLN ODS [0909088998998898790]" Quantity="1" PaymentMethod="4" PriceWithDiscount="100" VATRate="18" VATAmount="15.25" CalculationAgent="5">
+			<VendorData VendorINN="2" VendorName="Consignor 2" VendorPhone=""/>
+		</FiscalString>
+		<FiscalString AmountWithDiscount="100" DiscountAmount="0" MeasureOfQuantity="255" CalculationSubject="1" Name="Product with Unique SLN PZU [0909088998998898791]" Quantity="1" PaymentMethod="4" PriceWithDiscount="100" VATRate="18" VATAmount="15.25" CalculationAgent="5">
+			<VendorData VendorINN="1" VendorName="Consignor 1" VendorPhone=""/>
+		</FiscalString>
+	</Positions>
+	<Payments Cash="300" ElectronicPayment="0" PrePayment="0" PostPayment="0" Barter="0"/>
+</CheckPackage>
+"""
+
 Background:
 	Given I launch TestClient opening script or connect the existing one
 
@@ -316,6 +337,7 @@ Scenario: _0850000 preparation (fiscal printer)
 		When Create information register Barcodes records (serial lot numbers)
 		When Create catalog SerialLotNumbers objects (serial lot numbers, with batch balance details)
 		When Create catalog SerialLotNumbers objects (serial lot numbers)
+		When create consignors Items with unique SLN
 		When update ItemKeys
 		When Create catalog Partners objects and Companies objects (Customer)
 		When Create catalog Agreements objects (Customer)
@@ -3071,3 +3093,31 @@ Scenario: _0260190 check reconnect fiscal printer from payment form
 		And I close current window
 		And I close "Payment" window
 		And I click "Clear current receipt" button
+
+
+Scenario: _0260195 check consignor from SLN
+	And I close all client application windows
+	* Open POS
+		And In the command interface I select "Retail" "Point of sale"	
+	* Add items and open payment form
+		And I click "Search by barcode (F7)" button
+		And I input "0909088998998898789" text in the field named "Barcode"
+		And I move to the next attribute
+		And I click "Search by barcode (F7)" button
+		And I input "0909088998998898790" text in the field named "Barcode"
+		And I move to the next attribute
+		And I click "Search by barcode (F7)" button
+		And I input "0909088998998898791" text in the field named "Barcode"
+		And I move to the next attribute
+		And for each line of "ItemList" table I do
+			And I input "100,00" text in "Price" field of "ItemList" table
+	* Payment
+		And I click "Payment (+)" button
+		And I click "Cash (/)" button
+		And I click "OK" button
+	* Check 
+		And Delay 5
+		And I parsed the log of the fiscal emulator by the path '$$LogPath$$' into the variable "ParsingResult"
+		And I check "$ParsingResult$" with "0" and method is "ProcessCheck"
+		And I check "$ParsingResult$" with "0" and data in "In.Parameter3" the same as "SalesReceiptXML21"
+			

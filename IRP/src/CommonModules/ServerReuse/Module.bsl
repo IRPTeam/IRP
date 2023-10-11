@@ -41,8 +41,8 @@ EndFunction
 
 // Commission trade
 
-Function GetInventoryOriginAndConsignor(Company, Item, ItemKey) Export
-	Return CommissionTradeServer._GetInventoryOriginAndConsignor(Company, Item, ItemKey);
+Function GetInventoryOriginAndConsignor(Company, Item, ItemKey, SerialLotNumber) Export
+	Return CommissionTradeServer._GetInventoryOriginAndConsignor(Company, Item, ItemKey, SerialLotNumber);
 EndFunction
 
 // Currencies

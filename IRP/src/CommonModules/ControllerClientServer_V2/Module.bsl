@@ -10714,6 +10714,7 @@ Procedure StepItemListChangeConsignorByItemKey(Parameters, Chain) Export
 		Options.Item = GetItemListItem(Parameters, Row.Key);
 		Options.ItemKey = GetItemListItemKey(Parameters, Row.Key);
 		Options.Company = GetCompany(Parameters);
+		Options.Object  = Parameters.Object;
 		Options.Key = Row.Key;
 		Options.StepName = "StepItemListChangeConsignorByItemKey";
 		Chain.ChangeConsignorByItemKey.Options.Add(Options);
@@ -10781,6 +10782,7 @@ Procedure StepItemListChangeInventoryOriginByItemKey(Parameters, Chain) Export
 		Options.Item = GetItemListItem(Parameters, Row.Key);
 		Options.ItemKey = GetItemListItemKey(Parameters, Row.Key);
 		Options.Company = GetCompany(Parameters);
+		Options.Object  = Parameters.Object;
 		Options.Key = Row.Key;
 		Options.StepName = "StepItemListChangeInventoryOriginByItemKey";
 		Chain.ChangeInventoryOriginByItemKey.Options.Add(Options);
@@ -11121,6 +11123,47 @@ Procedure StepClearSerialLotNumberByItemKey(Parameters, Chain) Export
 		Chain.ClearSerialLotNumberByItemKey.Options.Add(Options);
 	EndDo;	
 EndProcedure
+
+#EndRegion
+
+#Region SINGLE_ROW_SERIAL_LOT_NUMBER
+
+// SingleRowSerialLotNumber.OnChange
+Procedure SingleRowSerialLotNumberOnChange(Parameters) Export
+	Binding = BindSingleRowSerialLotNumber(Parameters);
+	ModelClientServer_V2.EntryPoint(Binding.StepsEnabler, Parameters);
+EndProcedure
+
+// SingleRowSerialLotNumber.Bind
+Function BindSingleRowSerialLotNumber(Parameters)
+	DataPath = Undefined;
+	Binding = New Structure();
+		
+	Binding.Insert("SalesInvoice",
+		"StepItemListChangeInventoryOriginByItemKey,
+		|StepItemListChangeConsignorByItemKey");
+	
+	Binding.Insert("RetailSalesReceipt",
+		"StepItemListChangeInventoryOriginByItemKey,
+		|StepItemListChangeConsignorByItemKey");
+		
+	Binding.Insert("InventoryTransfer", "StepItemListChangeInventoryOriginByItemKey");
+
+	
+	Binding.Insert("SalesReturn",
+		"StepItemListChangeInventoryOriginByItemKey,
+		|StepItemListChangeConsignorByItemKey");
+	
+	
+	Binding.Insert("RetailReturnReceipt",
+		"StepItemListChangeInventoryOriginByItemKey,
+		|StepItemListChangeConsignorByItemKey");
+		
+	Binding.Insert("RetailShipmentConfirmation", "StepItemListChangeInventoryOriginByItemKey");
+	Binding.Insert("RetailGoodsReceipt", "StepItemListChangeInventoryOriginByItemKey");
+	
+	Return BindSteps("BindVoid", DataPath, Binding, Parameters, "BindSingleRowSerialLotNumber");
+EndFunction
 
 #EndRegion
 
@@ -13837,7 +13880,11 @@ Procedure OnChainComplete(Parameters) Export
 	#IF Client THEN
 		// on client need ask user, do not transfer from cache to object
 		// web-client-buf-fix
-		ViewClient_V2.OnChainComplete(Parameters);
+		If Parameters.Form = Undefined Then
+			CommitChainChanges(Parameters);
+		Else	
+			ViewClient_V2.OnChainComplete(Parameters);
+		EndIf;
 	#ENDIF
 	
 	#IF Server THEN

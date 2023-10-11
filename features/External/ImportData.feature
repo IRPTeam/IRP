@@ -3077,3 +3077,56 @@ Scenario: Create Certificate
 		| 'e1cib/data/Catalog.SerialLotNumbers?ref=b7a6804cd0be6fd011ee40c26d392dc0' | 'False'        | '99999999998' | 'e1cib/data/Catalog.ItemKeys?ref=b7a6804cd0be6fd011ee40258580e606' | 'False'    | 'False'              | 'True'                        | 'False'              | ''           | ''             |
 
 
+Scenario: create consignors Items with unique SLN
+
+	// Catalog.ItemTypes
+
+	And I check or create catalog "ItemTypes" objects:
+		| 'Ref'                                                               | 'DeletionMark' | 'Parent' | 'IsFolder' | 'Type'                   | 'UseSerialLotNumber' | 'StockBalanceDetail'                        | 'EachSerialLotNumberIsUnique' | 'AlwaysAddNewRowAfterScan' | 'SingleRow' | 'NotUseLineGrouping' | 'Description_en'                 | 'Description_hash' | 'Description_ru' | 'Description_tr'             | 'UniqueID'                          | 'SourceNodeID' |
+		| 'e1cib/data/Catalog.ItemTypes?ref=b7aa9f63eb85c76911ee6827f4884c15' | 'False'        | ''       | 'False'    | 'Enum.ItemTypes.Product' | 'True'               | 'Enum.StockBalanceDetail.BySerialLotNumber' | 'True'                        | 'True'                     | 'True'      | 'True'               | 'With SLN (add new row, unique)' | ''                 | ''               | 'With serial lot numbers TR' | '_222e13b9e3094cdba312170dc5c27f84' | ''             |
+
+	And I refill object tabular section "AvailableAttributes":
+		| 'Ref'                                                               | 'Attribute'                                                                                          | 'AffectPricing' | 'Required' | 'ShowInHTML' |
+		| 'e1cib/data/Catalog.ItemTypes?ref=b7aa9f63eb85c76911ee6827f4884c15' | 'e1cib/data/ChartOfCharacteristicTypes.AddAttributeAndProperty?ref=aa78120ed92fbced11eaf114c59ef032' | 'False'         | 'False'    | 'False'      |
+
+	// Catalog.Items
+
+	And I check or create catalog "Items" objects:
+		| 'Ref'                                                           | 'DeletionMark' | 'ItemType'                                                          | 'Unit'                                                          | 'MainPricture'                          | 'Vendor' | 'ItemID' | 'PackageUnit' | 'ControlCodeString' | 'CheckCodeString' | 'Description_en'          | 'Description_hash' | 'Description_ru' | 'Description_tr' | 'Height' | 'Length' | 'Volume' | 'Weight' | 'Width' | 'LocalFullDescription' | 'ForeignFullDescription' | 'SourceNodeID' |
+		| 'e1cib/data/Catalog.Items?ref=b7aa9f63eb85c76911ee6827f4884c13' | 'False'        | 'e1cib/data/Catalog.ItemTypes?ref=b7aa9f63eb85c76911ee6827f4884c15' | 'e1cib/data/Catalog.Units?ref=aa78120ed92fbced11eaf113ba6c1862' | 'ValueStorage:AQEIAAAAAAAAAO+7v3siVSJ9' | ''       | ''       | ''            | 'False'             | 'False'           | 'Product with Unique SLN' | ''                 | ''               | ''               |          |          |          |          |         | ''                     | ''                       | ''             |
+	
+	// Catalog.ItemKeys
+
+	And I check or create catalog "ItemKeys" objects:
+		| 'Ref'                                                              | 'DeletionMark' | 'Item'                                                          | 'Unit' | 'Specification' | 'AffectPricingMD5' | 'UniqueMD5'                                       | 'ItemKeyID' | 'DefaultBillOfMaterials' | 'UseIncomingStockReservation' | 'PackageUnit' | 'Description_en' | 'Description_hash' | 'Description_ru' | 'Description_tr' | 'Height' | 'Length' | 'Volume' | 'Weight' | 'Width' | 'LocalFullDescription' | 'ForeignFullDescription' | 'SourceNodeID' |
+		| 'e1cib/data/Catalog.ItemKeys?ref=b7aa9f63eb85c76911ee6827f4884c14' | 'False'        | 'e1cib/data/Catalog.Items?ref=b7aa9f63eb85c76911ee6827f4884c13' | ''     | ''              | ''                 | '77 B8 6D 8A 94 5C DA 2D AC 65 B0 7B 54 3B 65 6A' | ''          | ''                       | 'False'                       | ''            | 'ODS'            | 'ODS'              | 'ODS'            | 'ODS'            |          |          |          |          |         | ''                     | ''                       | ''             |
+		| 'e1cib/data/Catalog.ItemKeys?ref=b7aa9f63eb85c76911ee6827f4884c16' | 'False'        | 'e1cib/data/Catalog.Items?ref=b7aa9f63eb85c76911ee6827f4884c13' | ''     | ''              | ''                 | 'DC 68 E7 6D D7 01 79 86 47 F8 EA D2 EA 30 FC 6D' | ''          | ''                       | 'False'                       | ''            | 'PZU'            | 'PZU'              | 'PZU'            | 'PZU'            |          |          |          |          |         | ''                     | ''                       | ''             |
+
+	And I refill object tabular section "AddAttributes":
+		| 'Ref'                                                              | 'Property'                                                                                           | 'Value'                                                                                 | 'SearchLiteral' |
+		| 'e1cib/data/Catalog.ItemKeys?ref=b7aa9f63eb85c76911ee6827f4884c14' | 'e1cib/data/ChartOfCharacteristicTypes.AddAttributeAndProperty?ref=aa78120ed92fbced11eaf114c59ef032' | 'e1cib/data/Catalog.AddAttributeAndPropertyValues?ref=aa78120ed92fbced11eaf115bcc9c5eb' | ''              |
+		| 'e1cib/data/Catalog.ItemKeys?ref=b7aa9f63eb85c76911ee6827f4884c16' | 'e1cib/data/ChartOfCharacteristicTypes.AddAttributeAndProperty?ref=aa78120ed92fbced11eaf114c59ef032' | 'e1cib/data/Catalog.AddAttributeAndPropertyValues?ref=aa78120ed92fbced11eaf115bcc9c5ea' | ''              |
+
+	// Catalog.SerialLotNumbers
+
+	And I check or create catalog "SerialLotNumbers" objects:
+		| 'Ref'                                                                      | 'DeletionMark' | 'Code' | 'Description'         | 'SerialLotNumberOwner'                                             | 'Inactive' | 'StockBalanceDetail' | 'EachSerialLotNumberIsUnique' | 'BatchBalanceDetail' | 'CodeString' | 'SourceNodeID' |
+		| 'e1cib/data/Catalog.SerialLotNumbers?ref=b7aa9f63eb85c76911ee6827f4884c17' | 'False'        | 40     | '0909088998998898789' | 'e1cib/data/Catalog.ItemKeys?ref=b7aa9f63eb85c76911ee6827f4884c14' | 'False'    | 'True'               | 'True'                        | 'False'              | ''           | ''             |
+		| 'e1cib/data/Catalog.SerialLotNumbers?ref=b7aa9f63eb85c76911ee6827f4884c18' | 'False'        | 41     | '0909088998998898790' | 'e1cib/data/Catalog.ItemKeys?ref=b7aa9f63eb85c76911ee6827f4884c14' | 'False'    | 'True'               | 'True'                        | 'False'              | ''           | ''             |
+		| 'e1cib/data/Catalog.SerialLotNumbers?ref=b7aa9f63eb85c76911ee6827f4884c19' | 'False'        | 42     | '0909088998998898791' | 'e1cib/data/Catalog.ItemKeys?ref=b7aa9f63eb85c76911ee6827f4884c16' | 'False'    | 'True'               | 'True'                        | 'True'               | ''           | ''             |
+
+	And I refill object tabular section "ConsignorsInfo":
+		| 'Ref'                                                                      | 'Company'                                                           | 'Consignor'                                                         |
+		| 'e1cib/data/Catalog.SerialLotNumbers?ref=b7aa9f63eb85c76911ee6827f4884c17' | 'e1cib/data/Catalog.Companies?ref=aa78120ed92fbced11eaf113ba6c185c' | 'e1cib/data/Catalog.Companies?ref=b788b483d858e32911ed56c495eca79f' |
+		| 'e1cib/data/Catalog.SerialLotNumbers?ref=b7aa9f63eb85c76911ee6827f4884c17' | 'e1cib/data/Catalog.Companies?ref=aa78120ed92fbced11eaf128cde918b4' | 'e1cib/data/Catalog.Companies?ref=b788b483d858e32911ed56c495eca7a5' |
+		| 'e1cib/data/Catalog.SerialLotNumbers?ref=b7aa9f63eb85c76911ee6827f4884c18' | 'e1cib/data/Catalog.Companies?ref=aa78120ed92fbced11eaf113ba6c185c' | 'e1cib/data/Catalog.Companies?ref=b788b483d858e32911ed56c495eca7a5' |
+		| 'e1cib/data/Catalog.SerialLotNumbers?ref=b7aa9f63eb85c76911ee6827f4884c19' | 'e1cib/data/Catalog.Companies?ref=aa78120ed92fbced11eaf113ba6c185c' | 'e1cib/data/Catalog.Companies?ref=b788b483d858e32911ed56c495eca79f' |
+
+	// InformationRegister.Barcodes
+
+	And I check or create information register "Barcodes" records:
+		| 'Barcode'             | 'ItemKey'                                                          | 'SerialLotNumber'                                                          | 'SourceOfOrigin' | 'Unit'                                                          | 'Presentation' |
+		| '0909088998998898789' | 'e1cib/data/Catalog.ItemKeys?ref=b7aa9f63eb85c76911ee6827f4884c14' | 'e1cib/data/Catalog.SerialLotNumbers?ref=b7aa9f63eb85c76911ee6827f4884c17' | ''               | 'e1cib/data/Catalog.Units?ref=aa78120ed92fbced11eaf113ba6c1862' | ''             |
+		| '0909088998998898790' | 'e1cib/data/Catalog.ItemKeys?ref=b7aa9f63eb85c76911ee6827f4884c14' | 'e1cib/data/Catalog.SerialLotNumbers?ref=b7aa9f63eb85c76911ee6827f4884c18' | ''               | 'e1cib/data/Catalog.Units?ref=aa78120ed92fbced11eaf113ba6c1862' | ''             |
+		| '0909088998998898791' | 'e1cib/data/Catalog.ItemKeys?ref=b7aa9f63eb85c76911ee6827f4884c16' | 'e1cib/data/Catalog.SerialLotNumbers?ref=b7aa9f63eb85c76911ee6827f4884c19' | ''               | 'e1cib/data/Catalog.Units?ref=aa78120ed92fbced11eaf113ba6c1862' | ''             |
+

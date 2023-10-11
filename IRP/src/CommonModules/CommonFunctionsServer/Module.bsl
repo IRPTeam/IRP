@@ -1027,7 +1027,7 @@ EndFunction
 //  ExternalFunction - CatalogRef.ExternalFunctions - External function
 Procedure CreateScheduledJob(ExternalFunction) Export
 	
-	If Not ExternalFunction.isSchedulerSet Then
+	If Not ExternalFunction.isSchedulerSet Or Not ExternalFunction.Enable Then
 		DeleteScheduledJob(ExternalFunction);
 		Return;
 	EndIf;

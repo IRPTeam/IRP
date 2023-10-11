@@ -571,3 +571,16 @@ Function CurrencyRowMatchFilter(CurrencyRow, Filter)
 		And CurrencyRow.CurrencyFrom = Filter.CurrencyFrom
 		And CurrencyRow.MovementType = Filter.MovementType;
 EndFunction
+
+Function GetLandedCostCurrency(Company) Export
+	Return ServerReuse.GetLandedCostCurrency(Company);
+EndFunction
+
+Function _GetLandedCostCurrency(Company) Export
+	If Not ValueIsFilled(Company) Then
+		Return Catalogs.Currencies.EmptyRef();
+	EndIf;
+	
+	Return Company.LandedCostCurrencyMovementType.Currency;
+EndFunction
+

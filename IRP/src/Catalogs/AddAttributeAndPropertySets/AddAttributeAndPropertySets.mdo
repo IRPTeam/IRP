@@ -872,6 +872,55 @@
         <value>128</value>
       </code>
     </items>
+    <items id="88fdba44-4667-49a8-a556-05ab15cfcf0c">
+      <name>Catalog_FixedAssets</name>
+      <description></description>
+      <code xsi:type="core:NumberValue">
+        <value>129</value>
+      </code>
+    </items>
+    <items id="efa3559d-a93c-44e5-be51-2b3fbcf437ba">
+      <name>Catalog_DepreciationSchedules</name>
+      <description></description>
+      <code xsi:type="core:NumberValue">
+        <value>130</value>
+      </code>
+    </items>
+    <items id="96d8f3a3-9974-4b62-b6ca-885ef5b5346c">
+      <name>Catalog_FixedAssetsLedgerTypes</name>
+      <description></description>
+      <code xsi:type="core:NumberValue">
+        <value>131</value>
+      </code>
+    </items>
+    <items id="b735cabc-8a22-4fe6-9187-75f49af277a4">
+      <name>Document_CommissioningOfFixedAsset</name>
+      <description></description>
+      <code xsi:type="core:NumberValue">
+        <value>132</value>
+      </code>
+    </items>
+    <items id="aec62e32-2676-4925-9943-3c69b00ddb4a">
+      <name>Document_DecommissioningOfFixedAsset</name>
+      <description></description>
+      <code xsi:type="core:NumberValue">
+        <value>133</value>
+      </code>
+    </items>
+    <items id="346a438c-1755-49fc-a301-d90c73458426">
+      <name>Document_FixedAssetTransfer</name>
+      <description></description>
+      <code xsi:type="core:NumberValue">
+        <value>134</value>
+      </code>
+    </items>
+    <items id="a3f8e553-777f-4ade-ad31-82f407bbf9db">
+      <name>Document_ModernizationOfFixedAsset</name>
+      <description></description>
+      <code xsi:type="core:NumberValue">
+        <value>135</value>
+      </code>
+    </items>
   </predefined>
   <editType>InDialog</editType>
   <choiceMode>BothWays</choiceMode>

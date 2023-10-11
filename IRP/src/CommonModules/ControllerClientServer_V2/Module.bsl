@@ -2461,6 +2461,10 @@ Function BindDate(Parameters)
 	Binding.Insert("Production", 
 		"StepChangePlanningPeriodByDateAndBusinessUnit");
 	
+	Binding.Insert("FixedAssetTransfer", 
+		"StepChangeResponsiblePersonSenderByFixedAsset,
+		|StepChangeBusinessUnitSenderByFixedAsset");
+	
 	Return BindSteps("BindVoid", DataPath, Binding, Parameters, "BindDate");
 EndFunction
 
@@ -2628,6 +2632,10 @@ Function BindCompany(Parameters)
 	Binding.Insert("RetailShipmentConfirmation", "StepItemListChangeInventoryOriginByItemKey");
 	Binding.Insert("RetailGoodsReceipt", "StepItemListChangeInventoryOriginByItemKey");
 	
+	Binding.Insert("FixedAssetTransfer", 
+		"StepChangeResponsiblePersonSenderByFixedAsset,
+		|StepChangeBusinessUnitSenderByFixedAsset");
+	
 	Return BindSteps("BindVoid", DataPath, Binding, Parameters, "BindCompany");
 EndFunction
 
@@ -2738,6 +2746,103 @@ Procedure StepChangeReceiveBranchByAccount(Parameters, Chain) Export
 	Options.ReceiveBranch = GetReceiveBranch(Parameters);
 	Options.StepName = "StepChangeReceiveBranchByAccount";
 	Chain.ChangeReceiveBranchByAccount.Options.Add(Options);
+EndProcedure
+
+#EndRegion
+
+#Region FIXED_ASSET
+
+// FixedAsset.OnChange
+Procedure FixedAssetOnChange(Parameters) Export
+	AddViewNotify("OnSetFixedAssetNotify", Parameters);
+	Binding = BindFixedAsset(Parameters);
+	ModelClientServer_V2.EntryPoint(Binding.StepsEnabler, Parameters);
+EndProcedure
+
+// FixedAsset.Set
+Procedure SetFixedAsset(Parameters, Results) Export
+	Binding = BindFixedAsset(Parameters);
+	SetterObject(Binding.StepsEnabler, Binding.DataPath, Parameters, Results, "OnSetFixedAssetNotify");
+EndProcedure
+
+// FixedAsset.Get
+Function GetFixedAsset(Parameters)
+	Return GetPropertyObject(Parameters, BindFixedAsset(Parameters).DataPath);
+EndFunction
+
+// FixedAsset.Bind
+Function BindFixedAsset(Parameters)
+	DataPath = "FixedAsset";
+	Binding = New Structure();
+	Binding.Insert("FixedAssetTransfer", 
+		"StepChangeResponsiblePersonSenderByFixedAsset,
+		|StepChangeBusinessUnitSenderByFixedAsset");
+
+	Return BindSteps("BindVoid", DataPath, Binding, Parameters, "BindFixedAsset");
+EndFunction
+
+#EndRegion
+
+#Region RESPONSIBLE_PERSON_SENDER
+
+// ResponsiblePersonSender.Set
+Procedure SetResponsiblePersonSender(Parameters, Results) Export
+	Binding = BindResponsiblePersonSender(Parameters);
+	SetterObject(Binding.StepsEnabler, Binding.DataPath, Parameters, Results);
+EndProcedure
+
+// ResponsiblePersonSender.Bind
+Function BindResponsiblePersonSender(Parameters)
+	DataPath = "ResponsiblePersonSender";
+	Binding = New Structure();
+	Return BindSteps("BindVoid", DataPath, Binding, Parameters, "BindResponsiblePersonSender");
+EndFunction
+
+// ResponsiblePersonSender.ChangeResponsiblePersonSenderByFixedAsset.Step
+Procedure StepChangeResponsiblePersonSenderByFixedAsset(Parameters, Chain) Export
+	Chain.ChangeResponsiblePersonSenderByFixedAsset.Enable = True;
+	If Chain.Idle Then
+		Return;
+	EndIf;
+	Chain.ChangeResponsiblePersonSenderByFixedAsset.Setter = "SetResponsiblePersonSender";
+	Options = ModelClientServer_V2.ChangeResponsiblePersonSenderByFixedAssetOptions();
+	Options.FixedAsset = GetFixedAsset(Parameters);
+	Options.Company    = GetCompany(Parameters);
+	Options.Date       = GetDate(Parameters);
+	Options.StepName = "StepChangeResponsiblePersonSenderByFixedAsset";
+	Chain.ChangeResponsiblePersonSenderByFixedAsset.Options.Add(Options);
+EndProcedure
+
+#EndRegion
+
+#Region BRANCH_SENDER
+
+// BusinessUnitSender.Set
+Procedure SetBusinessUnitSender(Parameters, Results) Export
+	Binding = BindBusinessUnitSender(Parameters);
+	SetterObject(Binding.StepsEnabler, Binding.DataPath, Parameters, Results);
+EndProcedure
+
+// BusinessUnitSender.Bind
+Function BindBusinessUnitSender(Parameters)
+	DataPath = "BusinessUnitSender";
+	Binding = New Structure();
+	Return BindSteps("BindVoid", DataPath, Binding, Parameters, "BindBusinessUnitSender");
+EndFunction
+
+// BusinessUnitSender.ChangeBusinessUnitSenderSenderByFixedAsset.Step
+Procedure StepChangeBusinessUnitSenderByFixedAsset(Parameters, Chain) Export
+	Chain.ChangeBusinessUnitSenderByFixedAsset.Enable = True;
+	If Chain.Idle Then
+		Return;
+	EndIf;
+	Chain.ChangeBusinessUnitSenderByFixedAsset.Setter = "SetBusinessUnitSender";
+	Options = ModelClientServer_V2.ChangeBusinessUnitSenderByFixedAssetOptions();
+	Options.FixedAsset = GetFixedAsset(Parameters);
+	Options.Company    = GetCompany(Parameters);
+	Options.Date       = GetDate(Parameters);
+	Options.StepName = "StepChangeBusinessUnitSenderByFixedAsset";
+	Chain.ChangeBusinessUnitSenderByFixedAsset.Options.Add(Options);
 EndProcedure
 
 #EndRegion
@@ -9093,6 +9198,9 @@ Function BindItemListItem(Parameters)
 	Binding.Insert("RetailGoodsReceipt"              , "StepItemListChangeItemKeyByItem");
 	Binding.Insert("StockAdjustmentAsSurplus"  , "StepItemListChangeItemKeyByItem");
 	Binding.Insert("StockAdjustmentAsWriteOff" , "StepItemListChangeItemKeyByItem");
+	Binding.Insert("CommissioningOfFixedAsset" , "StepItemListChangeItemKeyByItem");
+	Binding.Insert("ModernizationOfFixedAsset" , "StepItemListChangeItemKeyByItem");
+	Binding.Insert("DecommissioningOfFixedAsset" , "StepItemListChangeItemKeyByItem");
 	Binding.Insert("SalesOrder"                , "StepItemListChangeItemKeyByItem");
 	Binding.Insert("WorkOrder"                 , "StepItemListChangeItemKeyByItem");
 	Binding.Insert("WorkSheet"                 , "StepItemListChangeItemKeyByItem");
@@ -9192,6 +9300,18 @@ Function BindItemListItemKey(Parameters)
 		|StepItemListChangeUnitByItemKey");
 		
 	Binding.Insert("StockAdjustmentAsWriteOff",
+		"StepChangeUseSerialLotNumberByItemKey,
+		|StepItemListChangeUnitByItemKey");
+	
+	Binding.Insert("CommissioningOfFixedAsset",
+		"StepChangeUseSerialLotNumberByItemKey,
+		|StepItemListChangeUnitByItemKey");
+	
+	Binding.Insert("ModernizationOfFixedAsset",
+		"StepChangeUseSerialLotNumberByItemKey,
+		|StepItemListChangeUnitByItemKey");
+	
+	Binding.Insert("DecommissioningOfFixedAsset",
 		"StepChangeUseSerialLotNumberByItemKey,
 		|StepItemListChangeUnitByItemKey");
 
@@ -9805,6 +9925,10 @@ Function BindDefaultItemListStore(Parameters)
 	
 	Binding.Insert("RetailShipmentConfirmation", "StepItemListDefaultStoreInList_WithoutAgreement");
 	Binding.Insert("RetailGoodsReceipt"        , "StepItemListDefaultStoreInList_WithoutAgreement");
+	
+	Binding.Insert("CommissioningOfFixedAsset" , "StepItemListDefaultStoreInList_WithoutAgreement");
+	Binding.Insert("ModernizationOfFixedAsset" , "StepItemListDefaultStoreInList_WithoutAgreement");
+	Binding.Insert("DecommissioningOfFixedAsset" , "StepItemListDefaultStoreInList_WithoutAgreement");
 
 	Binding.Insert("SalesOrder"           , "StepItemListDefaultStoreInList_AgreementInHeader");
 	Binding.Insert("SalesInvoice"         , "StepItemListDefaultStoreInList_AgreementInHeader");
@@ -9824,16 +9948,14 @@ EndFunction
 Function BindItemListStore(Parameters)
 	DataPath = "ItemList.Store";
 	Binding = New Structure();
-	Binding.Insert("ShipmentConfirmation", "StepChangeStoreInHeaderByStoresInList");
-	Binding.Insert("GoodsReceipt"        , "StepChangeStoreInHeaderByStoresInList");
-	
-	Binding.Insert("RetailShipmentConfirmation", 
-		"StepChangeStoreInHeaderByStoresInList");
-		
+	Binding.Insert("ShipmentConfirmation"      , "StepChangeStoreInHeaderByStoresInList");
+	Binding.Insert("GoodsReceipt"              , "StepChangeStoreInHeaderByStoresInList");
+	Binding.Insert("CommissioningOfFixedAsset" , "StepChangeStoreInHeaderByStoresInList");
+	Binding.Insert("ModernizationOfFixedAsset" , "StepChangeStoreInHeaderByStoresInList");
+	Binding.Insert("DecommissioningOfFixedAsset" , "StepChangeStoreInHeaderByStoresInList");
+	Binding.Insert("RetailShipmentConfirmation", "StepChangeStoreInHeaderByStoresInList");
 	Binding.Insert("RetailGoodsReceipt"        , "StepChangeStoreInHeaderByStoresInList");
-
-	Binding.Insert("SalesOrder",
-		"StepChangeStoreInHeaderByStoresInList");
+	Binding.Insert("SalesOrder"                , "StepChangeStoreInHeaderByStoresInList");
 
 	Binding.Insert("SalesInvoice",
 		"StepItemListChangeUseShipmentConfirmationByStore,
@@ -13758,6 +13880,8 @@ Procedure ExecuteViewNotify(Parameters, ViewNotify)
 	If ViewNotify = "OnOpenFormNotify"                         Then ViewClient_V2.OnOpenFormNotify(Parameters);
 	ElsIf ViewNotify = "InventoryOnAddRowFormNotify"           Then ViewClient_V2.InventoryOnAddRowFormNotify(Parameters);
 	ElsIf ViewNotify = "InventoryOnCopyRowFormNotify"          Then ViewClient_V2.InventoryOnCopyRowFormNotify(Parameters);
+	ElsIf ViewNotify = "FixedAssetsOnAddRowFormNotify"         Then ViewClient_V2.FixedAssetsOnAddRowFormNotify(Parameters);
+	ElsIf ViewNotify = "FixedAssetsOnCopyRowFormNotify"        Then ViewClient_V2.FixedAssetsOnCopyRowFormNotify(Parameters);
 	ElsIf ViewNotify = "AccountBalanceOnAddRowFormNotify"      Then ViewClient_V2.AccountBalanceOnAddRowFormNotify(Parameters);
 	ElsIf ViewNotify = "AccountBalanceOnCopyRowFormNotify"     Then ViewClient_V2.AccountBalanceOnCopyRowFormNotify(Parameters);
 	ElsIf ViewNotify = "CashInTransitOnAddRowFormNotify"       Then ViewClient_V2.AccountBalanceOnAddRowFormNotify(Parameters);
@@ -13796,6 +13920,7 @@ Procedure ExecuteViewNotify(Parameters, ViewNotify)
 	ElsIf ViewNotify = "OnSetStoreReceiverNotify"              Then ViewClient_V2.OnSetStoreReceiverNotify(Parameters);
 	ElsIf ViewNotify = "OnSetDeliveryDateNotify"               Then ViewClient_V2.OnSetDeliveryDateNotify(Parameters);
 	ElsIf ViewNotify = "OnSetCompanyNotify"                    Then ViewClient_V2.OnSetCompanyNotify(Parameters);
+	ElsIf ViewNotify = "OnSetFixedAssetNotify"                 Then ViewClient_V2.OnSetFixedAssetNotify(Parameters);
 	ElsIf ViewNotify = "OnSetAccountNotify"                    Then ViewClient_V2.OnSetAccountNotify(Parameters);
 	ElsIf ViewNotify = "OnSetCashAccountNotify"                Then ViewClient_V2.OnSetCashAccountNotify(Parameters);
 	ElsIf ViewNotify = "OnSetTransactionTypeNotify"            Then ViewClient_V2.OnSetTransactionTypeNotify(Parameters);

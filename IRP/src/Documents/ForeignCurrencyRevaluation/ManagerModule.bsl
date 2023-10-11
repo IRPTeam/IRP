@@ -126,6 +126,17 @@ Function PostingGetDocumentDataTables(Ref, Cancel, PostingMode, Parameters, AddI
 	|	and (CurrencyMovementType = VALUE(ChartOfCharacteristicTypes.CurrencyMovementType.SettlementCurrency)
 	|	or Currency <> TransactionCurrency)) AS Reg
 	|;
+	|// active
+	|SELECT
+	|	*,
+	|	Reg.CurrencyMovementType.Source AS Source,
+	|	Reg.AmountBalance AS Amount
+	|INTO _R8510B_BookValueOfFixedAsset
+	|FROM
+	|	AccumulationRegister.R8510B_BookValueOfFixedAsset.Balance(&Period, Company = &Company
+	|	and (CurrencyMovementType = VALUE(ChartOfCharacteristicTypes.CurrencyMovementType.SettlementCurrency)
+	|	or Currency <> TransactionCurrency)) AS Reg
+	|;
 	|// passive
 	|SELECT
 	|	*,
@@ -250,6 +261,15 @@ Function PostingGetDocumentDataTables(Ref, Cancel, PostingMode, Parameters, AddI
 	|	Reg.Source
 	|FROM
 	|	_R3027B_EmployeeCashAdvance AS Reg
+	|
+	|UNION ALL
+	|
+	|SELECT
+	|	Reg.TransactionCurrency,
+	|	Reg.Currency,
+	|	Reg.Source
+	|FROM
+	|	_R8510B_BookValueOfFixedAsset AS Reg
 	|
 	|UNION ALL
 	|
@@ -383,6 +403,7 @@ Function PostingGetDocumentDataTables(Ref, Cancel, PostingMode, Parameters, AddI
 	ArrayOfActives.Add("R3022B_CashInTransitOutgoing");
 	ArrayOfActives.Add("R3027B_EmployeeCashAdvance");
 	ArrayOfActives.Add("R5015B_OtherPartnersTransactions");
+	ArrayOfActives.Add("R8510B_BookValueOfFixedAsset");
 
 	ArrayOfPassives = New Array;
 	ArrayOfPassives.Add("R1021B_VendorsTransactions");
@@ -698,6 +719,7 @@ Function GetQueryTextsMasterTables()
 	QueryArray.Add(R6070T_OtherPeriodsExpenses());
 	QueryArray.Add(R6080T_OtherPeriodsRevenues());
 	QueryArray.Add(R9510B_SalaryPayment());
+	QueryArray.Add(R8510B_BookValueOfFixedAsset());
 	Return QueryArray;
 EndFunction
 
@@ -841,6 +863,15 @@ Function R5015B_OtherPartnersTransactions()
 		   |INTO R5015B_OtherPartnersTransactions
 		   |FROM 
 		   |	Revaluated_R5015B_OtherPartnersTransactions
+		   |WHERE
+		   |	TRUE";
+EndFunction
+
+	Function R8510B_BookValueOfFixedAsset()
+	Return "SELECT *
+		   |INTO R8510B_BookValueOfFixedAsset
+		   |FROM 
+		   |	Revaluated_R8510B_BookValueOfFixedAsset
 		   |WHERE
 		   |	TRUE";
 EndFunction

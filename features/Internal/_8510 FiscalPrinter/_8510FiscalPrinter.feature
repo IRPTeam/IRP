@@ -3088,6 +3088,7 @@ Scenario: _0260193 check timeout
 		And I click the button named "Connect"
 		And I click the button named "UpdateStatus"
 		And I save the value of the field named "CommandResult" as "CommandResult1"
+		And Delay 7
 	* Create RSR
 		And I close all client application windows
 		And In the command interface I select "Retail" "Point of sale"		

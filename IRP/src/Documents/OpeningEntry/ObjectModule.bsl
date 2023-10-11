@@ -20,6 +20,7 @@ Procedure BeforeWrite(Cancel, WriteMode, PostingMode)
 	ArrayOfTableNames.Add("AccountReceivableOther");
 	ArrayOfTableNames.Add("AccountPayableOther");
 	ArrayOfTableNames.Add("CashInTransit");
+	ArrayOfTableNames.Add("FixedAssets");
 	
 	For Each TableName In ArrayOfTableNames Do
 		For Each Row In ThisObject[TableName] Do
@@ -31,6 +32,11 @@ Procedure BeforeWrite(Cancel, WriteMode, PostingMode)
 	
 	For Each Row In ThisObject.AccountBalance Do
 		Parameters = CurrenciesClientServer.GetParameters_V6(ThisObject, Row);
+		CurrenciesClientServer.DeleteRowsByKeyFromCurrenciesTable(ThisObject.Currencies, Row.Key);
+		CurrenciesServer.UpdateCurrencyTable(Parameters, ThisObject.Currencies);
+	EndDo;
+	For Each Row In ThisObject.FixedAssets Do
+		Parameters = CurrenciesClientServer.GetParameters_V11(ThisObject, Row);
 		CurrenciesClientServer.DeleteRowsByKeyFromCurrenciesTable(ThisObject.Currencies, Row.Key);
 		CurrenciesServer.UpdateCurrencyTable(Parameters, ThisObject.Currencies);
 	EndDo;

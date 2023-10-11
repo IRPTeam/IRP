@@ -83,6 +83,7 @@ Procedure SetVisibilityAvailability(Object, Form)
 	Form.Items.EditCurrenciesCashInTransit.Enabled                 = Not Form.ReadOnly;
 	Form.Items.EditCurrenciesAccountPayableOther.Enabled           = Not Form.ReadOnly;
 	Form.Items.EditCurrenciesAccountReceivableOther.Enabled        = Not Form.ReadOnly;
+	Form.Items.EditCurrenciesFixedAssets.Enabled                   = Not Form.ReadOnly;
 
 	UseCommissionTrading = FOServer.IsUseCommissionTrading();
 	
@@ -309,6 +310,20 @@ EndProcedure
 #EndRegion
 
 #EndRegion
+
+#EndRegion
+
+#Region FIXED_ASSETS
+
+&AtClient
+Procedure FixedAssetsBeforeAddRow(Item, Cancel, Clone, Parent, IsFolder, Parameter)
+	DocOpeningEntryClient.FixedAssetsBeforeAddRow(Object, ThisObject, Item, Cancel, Clone, Parent, IsFolder, Parameter);
+EndProcedure
+
+&AtClient
+Procedure FixedAssetsAfterDeleteRow(Item)
+	DocOpeningEntryClient.FixedAssetsAfterDeleteRow(Object, ThisObject, Item);
+EndProcedure
 
 #EndRegion
 
@@ -970,6 +985,21 @@ Procedure EditCurrenciesAccountBalance(Command)
 EndProcedure
 
 &AtClient
+Procedure EditCurrenciesFixedAssets(Command)
+	CurrentData = ThisObject.Items.FixedAssets.CurrentData;
+	If CurrentData = Undefined Then
+		Return;
+	EndIf;
+	FormParameters = CurrenciesClientServer.GetParameters_V11(Object, CurrentData);
+	NotifyParameters = New Structure();
+	NotifyParameters.Insert("Object", Object);
+	NotifyParameters.Insert("Form"  , ThisObject);
+	Notify = New NotifyDescription("EditCurrenciesContinue", CurrenciesClient, NotifyParameters);
+	OpenForm("CommonForm.EditCurrencies", FormParameters, , , , , Notify, FormWindowOpeningMode.LockOwnerWindow);
+EndProcedure
+
+
+&AtClient
 Procedure EditCurrenciesCashInTransit(Command)
 	CurrentData = ThisObject.Items.CashInTransit.CurrentData;
 	If CurrentData = Undefined Then
@@ -1563,5 +1593,5 @@ MainTables = "AccountBalance, AdvanceFromCustomers, AdvanceToSuppliers,
 		|Inventory,
 		|ShipmentToTradeAgent, ReceiptFromConsignor,
 		|EmployeeCashAdvance, AdvanceFromRetailCustomers, SalaryPayment,
-		|AccountReceivableOther, AccountPayableOther, CashInTransit";
+		|AccountReceivableOther, AccountPayableOther, CashInTransit, FixedAssets";
 

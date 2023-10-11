@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mdclass:Subsystem xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="c4ca3050-cafc-4966-9748-e78e29226153">
+  <name>FixedAssets</name>
+  <synonym>
+    <key>en</key>
+    <value>Fixed assets</value>
+  </synonym>
+  <includeHelpInContents>true</includeHelpInContents>
+  <includeInCommandInterface>true</includeInCommandInterface>
+  <content>CommonCommand.OpenFixedAssets</content>
+  <content>Catalog.DepreciationSchedules</content>
+  <content>Document.CommissioningOfFixedAsset</content>
+  <content>Document.DepreciationCalculation</content>
+  <content>Catalog.FixedAssetsLedgerTypes</content>
+  <content>Document.DecommissioningOfFixedAsset</content>
+  <content>Document.FixedAssetTransfer</content>
+  <content>InformationRegister.T8515S_FixedAssetsLocation</content>
+  <content>Document.ModernizationOfFixedAsset</content>
+</mdclass:Subsystem>

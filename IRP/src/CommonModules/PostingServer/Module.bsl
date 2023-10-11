@@ -182,7 +182,7 @@ Function RecordSetIsEqual(DocObject, RecordSet, TableForLoad)
 		EndDo;
 		InformationRegisters.T6030S_BatchRelevance.BatchRelevance_SetBound(DocObject, TableForLoadEmpty);
 	EndIf;
-	
+		
 	Return Result;
 EndFunction
 

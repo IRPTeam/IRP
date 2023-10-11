@@ -45,6 +45,17 @@ Function GetInventoryOriginAndConsignor(Company, Item, ItemKey) Export
 	Return CommissionTradeServer._GetInventoryOriginAndConsignor(Company, Item, ItemKey);
 EndFunction
 
+// Currencies
+
+Function GetLandedCostCurrency(Company) Export
+	Return CurrenciesServer._GetLandedCostCurrency(Company);	
+EndFunction
+
+// Fixed assets
+Function GetFixedAssetLocation(Date, Company, FixedAsset) Export
+	Return DocFixedAssetTransferServer._GetFixedAssetLocation(Date, Company, FixedAsset);
+EndFunction
+
 // Other
 
 Function GetBankTermInfo(PaymentType, BankTerm) Export

@@ -1115,6 +1115,32 @@ EndProcedure
 
 #EndRegion
 
+#Region FIXED_ASSETS
+
+Function FixedAssetsBeforeAddRow(Object, Form, Cancel = False, Clone = False, CurrentData = Undefined) Export
+	NewRow = AddOrCopyRow(Object, Form, "FixedAssets", Cancel, Clone, CurrentData,
+		"FixedAssetsOnAddRowFormNotify", "FixedAssetsOnCopyRowFormNotify");
+	Form.Items.FixedAssets.CurrentRow = NewRow.GetID();
+	If Form.Items.FixedAssets.CurrentRow <> Undefined Then
+		Form.Items.FixedAssets.ChangeRow();
+	EndIf;
+	Return NewRow;
+EndFunction
+
+Procedure FixedAssetsOnAddRowFormNotify(Parameters) Export
+	Parameters.Form.Modified = True;
+EndProcedure
+
+Procedure FixedAssetsOnCopyRowFormNotify(Parameters) Export
+	Parameters.Form.Modified = True;
+EndProcedure
+
+Procedure FixedAssetsAfterDeleteRow(Object, Form) Export
+	DeleteRows(Object, Form, "FixedAssets");
+EndProcedure
+
+#EndRegion
+
 #Region EMPLOYEE_CASH_ADVANCE
 
 Function EmployeeCashAdvanceBeforeAddRow(Object, Form, Cancel = False, Clone = False, CurrentData = Undefined) Export
@@ -3317,6 +3343,26 @@ EndProcedure
 Procedure OnSetCompanyNotify(Parameters) Export
 	DocumentsClientServer.ChangeTitleGroupTitle(Parameters.Object, Parameters.Form);
 EndProcedure
+
+#EndRegion
+
+#Region FIXED_ASSETS
+
+Procedure FixedAssetOnChange(Object, Form, TableNames) Export
+	FormParameters = GetFormParameters(Form);
+	For Each TableName In StrSplit(TableNames, ",") Do
+		ServerParameters = GetServerParameters(Object);
+		ServerParameters.TableName = TrimAll(TableName);
+		Parameters = GetParameters(ServerParameters, FormParameters);
+		ControllerClientServer_V2.FixedAssetOnChange(Parameters);
+	EndDo;
+EndProcedure
+
+Procedure OnSetFixedAssetNotify(Parameters) Export
+	DocumentsClientServer.ChangeTitleGroupTitle(Parameters.Object, Parameters.Form);
+EndProcedure
+
+//
 
 #EndRegion
 

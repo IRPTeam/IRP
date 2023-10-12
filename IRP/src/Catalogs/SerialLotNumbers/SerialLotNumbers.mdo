@@ -303,6 +303,56 @@
       <fullTextSearch>Use</fullTextSearch>
     </attributes>
   </tabularSections>
+  <tabularSections uuid="c22e65ad-f79a-476d-b8c3-0f642ce791de">
+    <producedTypes>
+      <objectType typeId="5f2a9bc4-a3d7-4789-94fc-218daf25ed8a" valueTypeId="785a3e14-50a7-430c-85f7-aac35c29e262"/>
+      <rowType typeId="42d1ff24-f5ae-4678-985f-6ae7a6cc4cdd" valueTypeId="1401d646-9c20-49c3-a575-886adf5c582e"/>
+    </producedTypes>
+    <name>ConsignorsInfo</name>
+    <synonym>
+      <key>en</key>
+      <value>Consignors info</value>
+    </synonym>
+    <attributes uuid="d3fbe316-0bf8-441b-aeed-aabf82471e6a">
+      <name>Company</name>
+      <synonym>
+        <key>en</key>
+        <value>Company</value>
+      </synonym>
+      <type>
+        <types>CatalogRef.Companies</types>
+      </type>
+      <minValue xsi:type="core:UndefinedValue"/>
+      <maxValue xsi:type="core:UndefinedValue"/>
+      <fillChecking>ShowError</fillChecking>
+      <choiceParameters>
+        <name>Filter.OurCompany</name>
+        <value xsi:type="core:BooleanValue">
+          <value>true</value>
+        </value>
+      </choiceParameters>
+      <dataHistory>Use</dataHistory>
+      <fullTextSearch>Use</fullTextSearch>
+    </attributes>
+    <attributes uuid="cb15e341-e8eb-4203-870b-83beeebab44f">
+      <name>Consignor</name>
+      <synonym>
+        <key>en</key>
+        <value>Consignor</value>
+      </synonym>
+      <type>
+        <types>CatalogRef.Companies</types>
+      </type>
+      <minValue xsi:type="core:UndefinedValue"/>
+      <maxValue xsi:type="core:UndefinedValue"/>
+      <choiceParameters>
+        <name>Filter.OurCompany</name>
+        <value xsi:type="core:BooleanValue"/>
+      </choiceParameters>
+      <dataHistory>Use</dataHistory>
+      <fullTextSearch>Use</fullTextSearch>
+    </attributes>
+  </tabularSections>
   <forms uuid="4012058a-2719-416a-87de-1c070120f477">
     <name>ItemForm</name>
     <synonym>

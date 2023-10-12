@@ -66,12 +66,12 @@ Procedure AddNewSerialLotNumbers(DataResults, Parameters, AddNewLot = False, Add
 	EndIf;
 	
 	For Each Result In ArrayOfResults Do		
-		TotalQuantity = SerialLotNumberClientServer.AddNewSerialLotNumbers(Parameters.Object, Result.RowKey, Result.SerialLotNumbers, AddNewLot);
+		SerialLotNumberInfo = SerialLotNumberClientServer.AddNewSerialLotNumbers(Parameters.Object, Result.RowKey, Result.SerialLotNumbers, AddNewLot);
 		
 		If CommonFunctionsClientServer.ObjectHasProperty(Parameters.Object, "ItemList") Then
 			ArrayOfItemListRows = Parameters.Object.ItemList.FindRows(New Structure("Key", Result.RowKey));
 			If ArrayOfItemListRows.Count() = 1 Then
-				ViewClient_V2.SetItemListQuantity(Parameters.Object, Parameters.Form, ArrayOfItemListRows[0], TotalQuantity);
+				ViewClient_V2.SetItemListQuantity(Parameters.Object, Parameters.Form, ArrayOfItemListRows[0], SerialLotNumberInfo.TotalQuantity);
 			EndIf;
 		EndIf;
 	EndDo;
@@ -137,6 +137,8 @@ Procedure UpdateSerialLotNumbersPresentation(Object) Export
 EndProcedure
 
 Procedure DeleteUnusedSerialLotNumbers(Object, KeyForDelete = Undefined) Export
+	DeletedKeys = New Array();
+	
 	If KeyForDelete = Undefined Then
 		ArrayOfUnusedRows = New Array();
 		For Each Row In Object.SerialLotNumbers Do
@@ -145,6 +147,7 @@ Procedure DeleteUnusedSerialLotNumbers(Object, KeyForDelete = Undefined) Export
 			EndIf;
 		EndDo;
 		For Each Row In ArrayOfUnusedRows Do
+			DeletedKeys.Add(Row.Key);
 			Object.SerialLotNumbers.Delete(Row);
 		EndDo;
 		
@@ -175,6 +178,7 @@ Procedure DeleteUnusedSerialLotNumbers(Object, KeyForDelete = Undefined) Export
 			EndDo;
 		
 			For Each Row In ArrayForDelete Do
+				DeletedKeys.Add(Row.Key);
 				Object.SerialLotNumbers.Delete(Row);
 			EndDo;
 		EndIf;
@@ -182,8 +186,30 @@ Procedure DeleteUnusedSerialLotNumbers(Object, KeyForDelete = Undefined) Export
 	Else // Ke <> Undefined
 		ArrayRowsForDelete = Object.SerialLotNumbers.FindRows(New Structure("Key", KeyForDelete));
 		For Each Row In ArrayRowsForDelete Do
+			DeletedKeys.Add(Row.Key);
 			Object.SerialLotNumbers.Delete(Row);
 		EndDo;
+	EndIf;
+	
+	ArrayOfItemListRows = New Array();
+	For Each DeletedKey In DeletedKeys Do
+		SLNRows = Object.SerialLotNumbers.FindRows(New Structure("Key", DeletedKey));
+		If SLNRows.Count() = 0 Or SLNRows.Count() = 1  Then
+			ItemListRows = Object.ItemList.FindRows(New Structure("Key", DeletedKey));
+			If ItemListRows.Count() =1 
+				And CommonFunctionsClientServer.ObjectHasProperty(ItemListRows[0], "InventoryOrigin") Then
+					ArrayOfItemListRows.Add(ItemListRows[0]);
+			EndIf;
+		EndIf;		
+	EndDo;
+
+	If ArrayOfItemListRows.Count() Then
+		ServerParameters = ControllerClientServer_V2.GetServerParameters(Object);
+		ServerParameters.TableName = "ItemList";
+		ServerParameters.Rows = ItemListRows;
+		Parameters = ControllerClientServer_V2.GetParameters(ServerParameters);
+			
+		ControllerClientServer_V2.SingleRowSerialLotNumberOnChange(Parameters);	
 	EndIf;
 EndProcedure
 

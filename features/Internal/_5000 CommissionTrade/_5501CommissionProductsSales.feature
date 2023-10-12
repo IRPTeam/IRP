@@ -64,6 +64,7 @@ Scenario: _05502 preparation (commission products sales)
 		When Create catalog BusinessUnits objects
 		When Create catalog ExpenseAndRevenueTypes objects
 		When Create information register UserSettings records (Retail)
+		When create consignors Items with unique SLN
 		When update ItemKeys
 		When Create catalog Partners objects
 		When Create catalog CashAccounts objects
@@ -1255,6 +1256,15 @@ Scenario: _050053 check filling consignor from serial lot number in the RetailSa
 		And in the table "ItemList" I click the button named "SearchByBarcode"
 		And I input "57897909799" text in the field named "Barcode"
 		And I move to the next attribute
+		And in the table "ItemList" I click the button named "SearchByBarcode"
+		And I input "0909088998998898789" text in the field named "Barcode"
+		And I move to the next attribute
+		And in the table "ItemList" I click the button named "SearchByBarcode"
+		And I input "0909088998998898790" text in the field named "Barcode"
+		And I move to the next attribute
+		And in the table "ItemList" I click the button named "SearchByBarcode"
+		And I input "0909088998998898791" text in the field named "Barcode"
+		And I move to the next attribute
 	* Add items (input by line)
 		And in the table "ItemList" I click the button named "ItemListAdd"
 		And I activate "Item" field in "ItemList" table
@@ -1303,16 +1313,47 @@ Scenario: _050053 check filling consignor from serial lot number in the RetailSa
 		And I input "1,000" text in "Quantity" field of "SerialLotNumbers" table
 		And I finish line editing in "SerialLotNumbers" table
 		And I click "Ok" button	
+		* Add one more item (consignor in the SLN)
+			And in the table "ItemList" I click the button named "ItemListAdd"
+			And I activate "Item" field in "ItemList" table
+			And I click choice button of "Item" attribute in "ItemList" table
+			And I go to line in "List" table
+				| 'Description'             |
+				| 'Product with Unique SLN' |
+			And I activate field named "Description" in "List" table
+			And I select current line in "List" table
+			And I activate field named "ItemListItemKey" in "ItemList" table
+			And I click choice button of the attribute named "ItemListItemKey" in "ItemList" table
+			And I go to line in "List" table
+				| 'Item'                    | 'Item key' |
+				| 'Product with Unique SLN' | 'ODS'      |
+			And I activate "Item key" field in "List" table
+			And I select current line in "List" table
+			And I click choice button of "Serial lot numbers" attribute in "ItemList" table
+			And I click Select button of "Serial lot number" field
+			Then "Item serial/lot numbers" window is opened
+			And I go to line in "List" table
+				| 'Owner' | 'Serial number'       |
+				| 'ODS'   | '0909088998998898789' |
+			And I activate "Serial number" field in "List" table
+			And I select current line in "List" table
+			And I click "Ok" button
 	* Check consignor
 		And I click "Show row key" button
 		And "ItemList" table became equal
-			| 'Item'                                                                  | 'Consignor'   | 'Unit' | 'Item key' | 'VAT'         |
-			| 'Product 11 with SLN (Main Company - Consignor 1)'                      | 'Consignor 1' | 'pcs'  | 'UNIQ'     | '18%'         |
-			| 'Product 11 with SLN (Main Company - Consignor 1)'                      | 'Consignor 1' | 'pcs'  | 'UNIQ'     | '18%'         |
-			| 'Product 6 with SLN'                                                    | ''            | 'pcs'  | 'PZU'      | '18%'         |
-			| 'Product 12 with SLN (Main Company - different consignor for item key)' | 'Consignor 1' | 'pcs'  | 'ODS'      | '18%'         |
-			| 'Product 16 with SLN (Main Company - Consignor 2)'                      | 'Consignor 2' | 'pcs'  | 'PZU'      | 'Without VAT' |
+			| 'Item'                                                                  | 'Consignor'   | 'Serial lot numbers'  | 'Unit' | 'Item key' | 'Quantity' |
+			| 'Product 11 with SLN (Main Company - Consignor 1)'                      | 'Consignor 1' | '11111111111111'      | 'pcs'  | 'UNIQ'     | '1,000'    |
+			| 'Product 11 with SLN (Main Company - Consignor 1)'                      | 'Consignor 1' | '11111111111111'      | 'pcs'  | 'UNIQ'     | '1,000'    |
+			| 'Product 6 with SLN'                                                    | ''            | '57897909799'         | 'pcs'  | 'PZU'      | '1,000'    |
+			| 'Product with Unique SLN'                                               | 'Consignor 1' | '0909088998998898789' | 'pcs'  | 'ODS'      | '1,000'    |
+			| 'Product with Unique SLN'                                               | 'Consignor 2' | '0909088998998898790' | 'pcs'  | 'ODS'      | '1,000'    |
+			| 'Product with Unique SLN'                                               | 'Consignor 1' | '0909088998998898791' | 'pcs'  | 'PZU'      | '1,000'    |
+			| 'Product 12 with SLN (Main Company - different consignor for item key)' | 'Consignor 1' | '1123'                | 'pcs'  | 'ODS'      | '1,000'    |
+			| 'Product 16 with SLN (Main Company - Consignor 2)'                      | 'Consignor 2' | '900889900900777'     | 'pcs'  | 'PZU'      | '1,000'    |
+			| 'Product with Unique SLN'                                               | 'Consignor 1' | '0909088998998898789' | 'pcs'  | 'ODS'      | '1,000'    |	
 	* Post document and check consignor
+		And I go to the last line in "ItemList" table
+		And in the table "ItemList" I click the button named "ItemListContextMenuDelete"		
 		And for each line of "ItemList" table I do
 			And I input "100,00" text in "Price" field of "ItemList" table
 		And I move to "Payments" tab
@@ -1324,7 +1365,7 @@ Scenario: _050053 check filling consignor from serial lot number in the RetailSa
 			| 'Cash'           |
 		And I select current line in "List" table
 		And I activate field named "PaymentsAmount" in "Payments" table
-		And I input "572,00" text in the field named "PaymentsAmount" of "Payments" table
+		And I input "926,00" text in the field named "PaymentsAmount" of "Payments" table
 		And I finish line editing in "Payments" table
 		And I activate "Account" field in "Payments" table
 		And I select current line in "Payments" table
@@ -1337,12 +1378,15 @@ Scenario: _050053 check filling consignor from serial lot number in the RetailSa
 		And I click "Post" button
 		And in the table "ItemList" I click "Edit quantity in base unit" button
 		And "ItemList" table became equal
-			| 'Item'                                                                  | 'Consignor'   | 'Unit' | 'Tax amount' | 'Item key' | 'VAT'         |
-			| 'Product 11 with SLN (Main Company - Consignor 1)'                      | 'Consignor 1' | 'pcs'  | '18,00'      | 'UNIQ'     | '18%'         |
-			| 'Product 11 with SLN (Main Company - Consignor 1)'                      | 'Consignor 1' | 'pcs'  | '18,00'      | 'UNIQ'     | '18%'         |
-			| 'Product 6 with SLN'                                                    | ''            | 'pcs'  | '18,00'      | 'PZU'      | '18%'         |
-			| 'Product 12 with SLN (Main Company - different consignor for item key)' | 'Consignor 1' | 'pcs'  | '18,00'      | 'ODS'      | '18%'         |
-			| 'Product 16 with SLN (Main Company - Consignor 2)'                      | 'Consignor 2' | 'pcs'  | ''           | 'PZU'      | 'Without VAT' |
+			| 'Item'                                                                  | 'Consignor'   | 'Serial lot numbers'  | 'Unit' | 'Item key' | 'Quantity' |
+			| 'Product 11 with SLN (Main Company - Consignor 1)'                      | 'Consignor 1' | '11111111111111'      | 'pcs'  | 'UNIQ'     | '1,000'    |
+			| 'Product 11 with SLN (Main Company - Consignor 1)'                      | 'Consignor 1' | '11111111111111'      | 'pcs'  | 'UNIQ'     | '1,000'    |
+			| 'Product 6 with SLN'                                                    | ''            | '57897909799'         | 'pcs'  | 'PZU'      | '1,000'    |
+			| 'Product with Unique SLN'                                               | 'Consignor 1' | '0909088998998898789' | 'pcs'  | 'ODS'      | '1,000'    |
+			| 'Product with Unique SLN'                                               | 'Consignor 2' | '0909088998998898790' | 'pcs'  | 'ODS'      | '1,000'    |
+			| 'Product with Unique SLN'                                               | 'Consignor 1' | '0909088998998898791' | 'pcs'  | 'PZU'      | '1,000'    |
+			| 'Product 12 with SLN (Main Company - different consignor for item key)' | 'Consignor 1' | '1123'                | 'pcs'  | 'ODS'      | '1,000'    |
+			| 'Product 16 with SLN (Main Company - Consignor 2)'                      | 'Consignor 2' | '900889900900777'     | 'pcs'  | 'PZU'      | '1,000'    |
 		And I close all client application windows
 
 		
@@ -1378,6 +1422,15 @@ Scenario: _050054 check filling consignor from serial lot number in the SalesInv
 		And I move to the next attribute
 		And in the table "ItemList" I click the button named "SearchByBarcode"
 		And I input "57897909799" text in the field named "Barcode"
+		And I move to the next attribute
+		And in the table "ItemList" I click the button named "SearchByBarcode"
+		And I input "0909088998998898789" text in the field named "Barcode"
+		And I move to the next attribute
+		And in the table "ItemList" I click the button named "SearchByBarcode"
+		And I input "0909088998998898790" text in the field named "Barcode"
+		And I move to the next attribute
+		And in the table "ItemList" I click the button named "SearchByBarcode"
+		And I input "0909088998998898791" text in the field named "Barcode"
 		And I move to the next attribute
 	* Add items (input by line)
 		And in the table "ItemList" I click the button named "ItemListAdd"
@@ -1424,25 +1477,59 @@ Scenario: _050054 check filling consignor from serial lot number in the SalesInv
 		And I activate "Quantity" field in "SerialLotNumbers" table
 		And I input "1,000" text in "Quantity" field of "SerialLotNumbers" table
 		And I finish line editing in "SerialLotNumbers" table
-		And I click "Ok" button	
+		And I click "Ok" button
+		* Add one more item (consignor in the SLN)
+			And in the table "ItemList" I click the button named "ItemListAdd"
+			And I activate "Item" field in "ItemList" table
+			And I click choice button of "Item" attribute in "ItemList" table
+			And I go to line in "List" table
+				| 'Description'             |
+				| 'Product with Unique SLN' |
+			And I activate field named "Description" in "List" table
+			And I select current line in "List" table
+			And I activate field named "ItemListItemKey" in "ItemList" table
+			And I click choice button of the attribute named "ItemListItemKey" in "ItemList" table
+			And I go to line in "List" table
+				| 'Item'                    | 'Item key' |
+				| 'Product with Unique SLN' | 'ODS'      |
+			And I activate "Item key" field in "List" table
+			And I select current line in "List" table
+			And I click choice button of "Serial lot numbers" attribute in "ItemList" table
+			And I click Select button of "Serial lot number" field
+			Then "Item serial/lot numbers" window is opened
+			And I go to line in "List" table
+				| 'Owner' | 'Serial number'       |
+				| 'ODS'   | '0909088998998898789' |
+			And I activate "Serial number" field in "List" table
+			And I select current line in "List" table
+			And I click "Ok" button
 	* Check consignor
 		And I click "Show row key" button
 		And "ItemList" table became equal
-			| 'Item'                                                                  | 'Consignor'   | 'Unit' | 'Item key' | 'VAT'         |
-			| 'Product 11 with SLN (Main Company - Consignor 1)'                      | 'Consignor 1' | 'pcs'  | 'UNIQ'     | '18%'         |
-			| 'Product 11 with SLN (Main Company - Consignor 1)'                      | 'Consignor 1' | 'pcs'  | 'UNIQ'     | '18%'         |
-			| 'Product 6 with SLN'                                                    | ''            | 'pcs'  | 'PZU'      | '18%'         |
-			| 'Product 12 with SLN (Main Company - different consignor for item key)' | 'Consignor 1' | 'pcs'  | 'ODS'      | '18%'         |
-			| 'Product 16 with SLN (Main Company - Consignor 2)'                      | 'Consignor 2' | 'pcs'  | 'PZU'      | 'Without VAT' |
+			| 'Item'                                                                  | 'Consignor'   | 'Serial lot numbers'  | 'Unit' | 'Item key' | 'Quantity' |
+			| 'Product 11 with SLN (Main Company - Consignor 1)'                      | 'Consignor 1' | '11111111111111'      | 'pcs'  | 'UNIQ'     | '1,000'    |
+			| 'Product 11 with SLN (Main Company - Consignor 1)'                      | 'Consignor 1' | '11111111111111'      | 'pcs'  | 'UNIQ'     | '1,000'    |
+			| 'Product 6 with SLN'                                                    | ''            | '57897909799'         | 'pcs'  | 'PZU'      | '1,000'    |
+			| 'Product with Unique SLN'                                               | 'Consignor 1' | '0909088998998898789' | 'pcs'  | 'ODS'      | '1,000'    |
+			| 'Product with Unique SLN'                                               | 'Consignor 2' | '0909088998998898790' | 'pcs'  | 'ODS'      | '1,000'    |
+			| 'Product with Unique SLN'                                               | 'Consignor 1' | '0909088998998898791' | 'pcs'  | 'PZU'      | '1,000'    |
+			| 'Product 12 with SLN (Main Company - different consignor for item key)' | 'Consignor 1' | '1123'                | 'pcs'  | 'ODS'      | '1,000'    |
+			| 'Product 16 with SLN (Main Company - Consignor 2)'                      | 'Consignor 2' | '900889900900777'     | 'pcs'  | 'PZU'      | '1,000'    |
+			| 'Product with Unique SLN'                                               | 'Consignor 1' | '0909088998998898789' | 'pcs'  | 'ODS'      | '1,000'    |	
+		And I go to the last line in "ItemList" table
+		And in the table "ItemList" I click the button named "ItemListContextMenuDelete"
 	* Post document and check consignor
 		And for each line of "ItemList" table I do
 			And I input "100,00" text in "Price" field of "ItemList" table
 		And I click "Post" button
 		And "ItemList" table became equal
-			| 'Item'                                                                  | 'Consignor'   | 'Unit' | 'Tax amount' | 'Item key' | 'VAT'         |
-			| 'Product 11 with SLN (Main Company - Consignor 1)'                      | 'Consignor 1' | 'pcs'  | '18,00'      | 'UNIQ'     | '18%'         |
-			| 'Product 11 with SLN (Main Company - Consignor 1)'                      | 'Consignor 1' | 'pcs'  | '18,00'      | 'UNIQ'     | '18%'         |
-			| 'Product 6 with SLN'                                                    | ''            | 'pcs'  | '18,00'      | 'PZU'      | '18%'         |
-			| 'Product 12 with SLN (Main Company - different consignor for item key)' | 'Consignor 1' | 'pcs'  | '18,00'      | 'ODS'      | '18%'         |
-			| 'Product 16 with SLN (Main Company - Consignor 2)'                      | 'Consignor 2' | 'pcs'  | ''           | 'PZU'      | 'Without VAT' |
+			| 'Item'                                                                  | 'Consignor'   | 'Serial lot numbers'  | 'Unit' | 'Item key' | 'Quantity' |
+			| 'Product 11 with SLN (Main Company - Consignor 1)'                      | 'Consignor 1' | '11111111111111'      | 'pcs'  | 'UNIQ'     | '1,000'    |
+			| 'Product 11 with SLN (Main Company - Consignor 1)'                      | 'Consignor 1' | '11111111111111'      | 'pcs'  | 'UNIQ'     | '1,000'    |
+			| 'Product 6 with SLN'                                                    | ''            | '57897909799'         | 'pcs'  | 'PZU'      | '1,000'    |
+			| 'Product with Unique SLN'                                               | 'Consignor 1' | '0909088998998898789' | 'pcs'  | 'ODS'      | '1,000'    |
+			| 'Product with Unique SLN'                                               | 'Consignor 2' | '0909088998998898790' | 'pcs'  | 'ODS'      | '1,000'    |
+			| 'Product with Unique SLN'                                               | 'Consignor 1' | '0909088998998898791' | 'pcs'  | 'PZU'      | '1,000'    |
+			| 'Product 12 with SLN (Main Company - different consignor for item key)' | 'Consignor 1' | '1123'                | 'pcs'  | 'ODS'      | '1,000'    |
+			| 'Product 16 with SLN (Main Company - Consignor 2)'                      | 'Consignor 2' | '900889900900777'     | 'pcs'  | 'PZU'      | '1,000'    |	
 		And I close all client application windows

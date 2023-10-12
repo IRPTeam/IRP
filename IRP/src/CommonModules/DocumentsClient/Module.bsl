@@ -1039,6 +1039,8 @@ Function GetFormItemNames()
 				|RowIDInfo,
 				|BasisesTreeBasis, BasisesTreeBasisUnit, BasisesTreeQuantityInBaseUnit, BasisesTreeKey,
 				|BasisesTreeRowID, BasisesTreeRowRef, BasisesTreeBasisKey, BasisesTreeCurrentStep,
+				|BasisesTreeReverseBasis, BasisesTreeReverseBasisUnit, BasisesTreeReverseQuantityInBaseUnit, BasisesTreeReverseKey,
+				|BasisesTreeReverseRowID, BasisesTreeReverseRowRef, BasisesTreeReverseBasisKey, BasisesTreeReverseCurrentStep,
 				|ResultsTreeBasis, ResultsTreeBasisUnit, ResultsTreeQuantityInBaseUnit, ResultsTreeKey,
 				|ResultsTreeRowID, ResultsTreeRowRef, ResultsTreeBasisKey, ResultsTreeCurrentStep,
 				|LinkedBasises,
@@ -1061,7 +1063,7 @@ Function GetFormItemNames()
 				|WorkersQuantityInBaseUnit, WorkersKey,
 				|MaterialsQuantityInBaseUnit, MaterialsQuantityInBaseUnitBOM, MaterialsKey, MaterialsKeyOwner, MaterialsIsVisible, MaterialsIsManualChanged,
 				|MaterialsUniqueID, MaterialsBillOfMaterials,
-				|DocumentsTreeKey, DocumentsTreeBasisKey,
+				|DocumentsTreeKey, DocumentsTreeBasisKey, DocumentsTreeDocumentName,
 				|GroupBillOfMaterials,
 				|ProductionTreeWriteofStoreEnable,
 				|ProductionTreeSurplusStoreEnable,
@@ -1127,68 +1129,46 @@ EndProcedure
 #Region LINKED_DOCUMENTS
 
 Procedure OpenLinkedDocuments(Object, Form, TableName, DocumentColumnName, QuantityColumnName) Export
-	FormParameters = New Structure();
+	ArrayOfRows_ItemList = New Array();
+	ArrayOfRows_Documents = New Array();
+	
+	For Each Row_ItemList In Object.ItemList Do
+		ArrayOfDocuments = Object[TableName].FindRows(New Structure("Key", Row_ItemList.Key));
 
+		If Not ArrayOfDocuments.Count() Then
+			Continue;
+		EndIf;
+	
+		For Each Row_Document In ArrayOfDocuments Do
+			NewRow_Document = New Structure();
+			NewRow_Document.Insert("Key"      , Row_Document.Key);
+			NewRow_Document.Insert("BasisKey" , Row_Document.BasisKey);
+			NewRow_Document.Insert("Document" , Row_Document[DocumentColumnName]);
+			
+			NewRow_Document.Insert("Quantity"           , Row_Document.Quantity);
+			NewRow_Document.Insert("QuantityInDocument" , Row_Document[QuantityColumnName]);
+			
+			ArrayOfRows_Documents.Add(NewRow_Document);
+		EndDo;
+		
+		
+		NewRow_ItemList = New Structure("Key, Item, ItemKey, QuantityInBaseUnit");
+		FillPropertyValues(NewRow_ItemList, Row_ItemList);
+		ArrayOfRows_ItemList.Add(NewRow_ItemList);
+	EndDo;
+		
+	FormParameters = New Structure();
 	FormParameters.Insert("TableName", TableName);
 	FormParameters.Insert("DocumentColumnName", DocumentColumnName);
 	FormParameters.Insert("QuantityColumnName", QuantityColumnName);
+	FormParameters.Insert("ArrayOfRows_ItemList", ArrayOfRows_ItemList);
+	FormParameters.Insert("ArrayOfRows_Documents", ArrayOfRows_Documents);
+	FormParameters.Insert("Ref", Object.Ref);
 	
 	AdditionalParameters = New Structure();
 	AdditionalParameters.Insert("Object"    , Object);
 	AdditionalParameters.Insert("Form"      , Form);
 	AdditionalParameters.Insert("TableName" , TableName);
-	
-	ArrayOfRows = New Array();
-	For Each Row In Object.ItemList Do
-		ArrayOfDocuments = Object[TableName].FindRows(New Structure("Key", Row.Key));
-
-		If Not ArrayOfDocuments.Count() Then
-			Continue;
-		EndIf;
-
-		NewRow = New Structure("Key, Item, ItemKey, QuantityInBaseUnit");
-		FillPropertyValues(NewRow, Row);
-		ArrayOfRows.Add(NewRow);
-	EndDo;
-	
-	Tree = New Array();
-	For Each Row In ArrayOfRows Do
-		NewRow0 = New Structure();
-		NewRow0.Insert("Level"             , 1);
-		NewRow0.Insert("Key"               , Row.Key);
-		NewRow0.Insert("Item"              , Row.Item);
-		NewRow0.Insert("ItemKey"           , Row.ItemKey);
-		
-		NewRow0.Insert("QuantityInInvoice" , Row.QuantityInBaseUnit);
-		NewRow0.Insert("Quantity"          , 0);
-		NewRow0.Insert("QuantityInDocument", 0);
-		
-		NewRow0.Insert("Rows"              , New Array());
-
-		ArrayOfDocuments = Object[TableName].FindRows(New Structure("Key", Row.Key));
-
-		For Each ItemOfArray In ArrayOfDocuments Do
-			NewRow1 = New Structure();
-			
-			NewRow1.Insert("Level"           , 2);
-			NewRow1.Insert("PictureEdit"     , True);
-			
-			NewRow1.Insert("Key"      , ItemOfArray.Key);
-			NewRow1.Insert("BasisKey" , ItemOfArray.BasisKey);
-			NewRow1.Insert("Document" , ItemOfArray[DocumentColumnName]);
-			
-			NewRow1.Insert("Quantity"           , ItemOfArray.Quantity);
-			NewRow1.Insert("QuantityInDocument" , ItemOfArray[QuantityColumnName]);
-			
-			NewRow0.Quantity = NewRow0.Quantity + ItemOfArray.Quantity;
-			NewRow0.QuantityInDocument = NewRow0.QuantityInDocument + ItemOfArray[QuantityColumnName];
-			
-			NewRow0.Rows.Add(NewRow1);
-		EndDo;
-		Tree.Add(NewRow0);
-	EndDo;
-	
-	FormParameters.Insert("Tree", Tree);
 	
 	Notify = New NotifyDescription("LinkedDocumentsEnd", ThisObject, AdditionalParameters);
 	OpenForm("CommonForm.LinkedDocuments", FormParameters, Form, , , , Notify, FormWindowOpeningMode.LockOwnerWindow);

@@ -693,6 +693,42 @@ Function GetAdditionalSettings(RowOwner, TableOfSettings)
 	NewRow_Documents.Rows.Add(NewSetting);
 	AddRowToTableOfSettings(TableOfSettings, NewSetting.FullName, NewSetting.Name, NewSetting.SettingID);
 	
+	// Use reverse basises tree on link rows
+	NewSetting = New Structure();
+	NewSetting.Insert("Name", "UseReverseBasisesTree");
+	NewSetting.Insert("FullName", FullName + ".UseReverseBasisesTree");
+	NewSetting.Insert("Synonym" , R().Add_Setiings_009);
+	NewSetting.Insert("KindOfAttribute", Enums.KindsOfAttributes.AdditionalSetting);
+	NewSetting.Insert("TypeRestriction", New TypeDescription("Boolean"));
+	NewSetting.Insert("SettingID"      , New UUID());
+	NewSetting.Insert("PictureIndex"   , 12);
+	NewRow_Documents.Rows.Add(NewSetting);
+	AddRowToTableOfSettings(TableOfSettings, NewSetting.FullName, NewSetting.Name, NewSetting.SettingID);
+	
+	RowOwner.Rows.Add(NewRow_Documents);
+	
+	// Linked documents
+	FullName = "Documents.LinkedDocuments.Settings";
+	
+	NewRow_Documents = New Structure();
+	NewRow_Documents.Insert("FullName"     , FullName);
+	NewRow_Documents.Insert("Name"         , "LinkedDocuments");
+	NewRow_Documents.Insert("Synonym"      , R().Add_Setiings_010);
+	NewRow_Documents.Insert("PictureIndex" , 1);
+	NewRow_Documents.Insert("Rows"         , New Array());
+	
+	// Use reverse tree
+	NewSetting = New Structure();
+	NewSetting.Insert("Name", "UseReverseTree");
+	NewSetting.Insert("FullName", FullName + ".UseReverseTree");
+	NewSetting.Insert("Synonym" , R().Add_Setiings_011);
+	NewSetting.Insert("KindOfAttribute", Enums.KindsOfAttributes.AdditionalSetting);
+	NewSetting.Insert("TypeRestriction", New TypeDescription("Boolean"));
+	NewSetting.Insert("SettingID"      , New UUID());
+	NewSetting.Insert("PictureIndex"   , 12);
+	NewRow_Documents.Rows.Add(NewSetting);
+	AddRowToTableOfSettings(TableOfSettings, NewSetting.FullName, NewSetting.Name, NewSetting.SettingID);
+	
 	RowOwner.Rows.Add(NewRow_Documents);
 	
 	Return True;

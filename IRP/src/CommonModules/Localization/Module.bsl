@@ -1339,6 +1339,9 @@ Function Strings(Lang) Export
 	Strings.Insert("Add_Setiings_006", NStr("en = 'Disable - Change author'", Lang));
 	Strings.Insert("Add_Setiings_007", NStr("en = 'Link\Unlink document rows'", Lang));
 	Strings.Insert("Add_Setiings_008", NStr("en = 'Disable - Calculate rows on link rows'", Lang));
+	Strings.Insert("Add_Setiings_009", NStr("en = 'Use reverse basises tree'", Lang));
+	Strings.Insert("Add_Setiings_010", NStr("en = 'Linked documents'", Lang));
+	Strings.Insert("Add_Setiings_011", NStr("en = 'Use reverse tree'", Lang));
 #EndRegion
 
 #Region Mobile

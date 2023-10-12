@@ -49,7 +49,17 @@ Procedure OnCreateAtServer(Cancel, StandardProcessing)
 	EndIf;
 	
 	ThisObject.CalculateRows = Not DisableCalculateRowsOnLinkRows;
+
+	UseReverseBasisesTreeSetting = 
+		CommonSettingsStorage.Load("Documents.LinkUnlinkDocumentRows.Settings.UseReverseBasisesTree", ThisObject.SettingKey);
+	If UseReverseBasisesTreeSetting = Undefined Then
+		UseReverseBasisesTreeSetting = UserSettingsServer.LinkUnlinkDocumentRows_Settings_UseReverseBasisesTreeOnLinkRows();
+	EndIf;
 	
+	ThisObject.UseReverseBasisesTree = UseReverseBasisesTreeSetting;
+	
+	Items.BasisesTree.Visible = Not ThisObject.UseReverseBasisesTree;
+	Items.BasisesTreeReverse.Visible = ThisObject.UseReverseBasisesTree;
 EndProcedure
 
 &AtClient
@@ -69,6 +79,8 @@ EndProcedure
 &AtClient
 Procedure ExpandAllTrees() Export
 	RowIDInfoClient.ExpandTree(Items.BasisesTree, ThisObject.BasisesTree.GetItems());
+	RowIDInfoClient.ExpandTree(Items.BasisesTreeReverse, ThisObject.BasisesTreeReverse.GetItems());
+	
 	RowIDInfoClient.ExpandTree(Items.ResultsTree, ThisObject.ResultsTree.GetItems());
 	SetButtonsEnabled();
 EndProcedure
@@ -78,10 +90,20 @@ Procedure CalculateRowsOnChange(Item)
 	SaveUserSettingAtServer();
 EndProcedure
 
+&AtClient
+Procedure UseReverseBasisesTreeOnChange(Item)
+	SaveUserSettingAtServer();
+	Items.BasisesTree.Visible = Not ThisObject.UseReverseBasisesTree;
+	Items.BasisesTreeReverse.Visible = ThisObject.UseReverseBasisesTree;
+	AttachIdleHandler("ExpandAllTrees", 1, True);
+EndProcedure
+
 &AtServer
 Procedure SaveUserSettingAtServer()
 	CommonSettingsStorage.Save("Documents.LinkUnlinkDocumentRows.Settings.DisableCalculateRowsOnLinkRows", 
 		ThisObject.SettingKey, Not ThisObject.CalculateRows);
+	CommonSettingsStorage.Save("Documents.LinkUnlinkDocumentRows.Settings.UseReverseBasisesTree", 
+		ThisObject.SettingKey, ThisObject.UseReverseBasisesTree);		
 EndProcedure
 
 &AtClient
@@ -217,8 +239,7 @@ Procedure FillResultsTree(SelectedRow)
 	EndDo;
 	TreeReverseInfo = RowIDInfoPrivileged.CreateBasisesTreeReverse(BasisesTable);
 
-	RowIDInfoPrivileged.CreateBasisesTree(TreeReverseInfo, BasisesTable, ThisObject.ResultsTable.Unload(),
-		ThisObject.ResultsTree.GetItems());
+	RowIDInfoPrivileged.CreateBasisesTree(TreeReverseInfo, BasisesTable, ThisObject.ResultsTable.Unload(), ThisObject.ResultsTree.GetItems());
 
 	ThisObject.LinkedRowID = "";
 	ThisObject.ShippingReceipt = False;
@@ -233,9 +254,120 @@ Procedure FillBasisesTree(SelectedRowInfo)
 
 	BasisesTable = CreateBasisesTable(SelectedRowInfo);
 	TreeReverseInfo = RowIDInfoPrivileged.CreateBasisesTreeReverse(BasisesTable);
-	RowIDInfoPrivileged.CreateBasisesTree(TreeReverseInfo, BasisesTable, ThisObject.ResultsTable.Unload(),
-		ThisObject.BasisesTree.GetItems());
+	RowIDInfoPrivileged.CreateBasisesTree(TreeReverseInfo, BasisesTable, ThisObject.ResultsTable.Unload(), ThisObject.BasisesTree.GetItems());
 	FillVisibleFields(ThisObject.BasisesTree, "BasisesTree");
+	
+	ThisObject.BasisesTreeReverse.GetItems().Clear();
+	
+	DeepLevelRows = GetDeepLevelRows(ThisObject.BasisesTree.GetItems());
+	DeepLevelRowsCopy = DeepLevelRows.Copy();
+	DeepLevelRowsCopy.GroupBy("Item, ItemKey, Unit, BasisUnit, RowPresentation");
+	For Each Row In DeepLevelRowsCopy Do
+		NewRow = ThisObject.BasisesTreeReverse.GetItems().Add();
+		FillPropertyValues(NewRow, Row);
+		
+		Filter = New Structure("Item, ItemKey, Unit, BasisUnit");
+		FillPropertyValues(Filter, Row);
+		For Each OriginalRow In DeepLevelRows.FindRows(Filter) Do
+			TopLevelRow = GetTopLevelRow(OriginalRow.Parent);
+			CopyTreeBranch(ThisObject.BasisesTreeReverse, NewRow.GetItems(), TopLevelRow);
+		EndDo;
+	EndDo;
+	FillVisibleFields(ThisObject.BasisesTreeReverse, "BasisesTreeReverse");
+EndProcedure
+
+&AtServer
+Function GetDeepLevelRows(Tree)
+	DeepLevelRows = New ValueTable();
+	DeepLevelRows.Columns.Add("Item");
+	DeepLevelRows.Columns.Add("ItemKey");
+	DeepLevelRows.Columns.Add("Unit");
+	DeepLevelRows.Columns.Add("BasisUnit");
+	DeepLevelRows.Columns.Add("RowPresentation");
+	DeepLevelRows.Columns.Add("Parent");
+	
+	_GetDeepLevelRows(Tree, DeepLevelRows);
+	Return DeepLevelRows;
+EndFunction
+
+&AtServer
+Procedure _GetDeepLevelRows(TreeRows, DeepLevelRows)
+	For Each Row In TreeRows Do
+		If Row.DeepLevel Then
+			NewRow = DeepLevelRows.Add();
+			FillPropertyValues(NewRow, Row);
+			NewRow.Parent = Row.GetParent();
+		Else
+			_GetDeepLevelRows(Row.GetItems(), DeepLevelRows)
+		EndIf;
+	EndDo;
+EndProcedure
+
+&AtServer
+Function GetTopLevelRow(val Parent)
+	TopLevelRow = Undefined;
+	_GetTopLevelRow(Parent, TopLevelRow);
+	Return TopLevelRow;
+EndFunction
+	
+&AtServer
+Procedure _GetTopLevelRow(Parent, TopLevelRow)
+	If TopLevelRow <> Undefined Then
+		Return;
+	EndIf;
+	RowParent = Parent.GetParent();
+	If RowParent = Undefined Then
+		TopLevelRow = Parent;
+	Else
+		_GetTopLevelRow(RowParent, TopLevelRow);
+	EndIf;
+EndProcedure	
+
+&AtServer
+Procedure CopyTreeBranch(Tree, Parent, TopLevelRow)
+	RowKey = TopLevelRow.Key;
+	For Each Row In TopLevelRow.GetItems() Do
+		If Row.DeepLevel Then
+			RowKey = Row.Key;
+			Break;
+		EndIf;
+	EndDo;
+	
+	If FindRowInTree(Tree, TopLevelRow.Basis, RowKey) <> Undefined Then
+		Return;
+	EndIf;
+	
+	NewRow = Parent.Add();
+	FillPropertyValues(NewRow, TopLevelRow);
+	
+	For Each Row In TopLevelRow.GetItems() Do
+		If Row.DeepLevel Then
+			FillPropertyValues(NewRow, Row, ,"Basis, RowPresentation, Picture, IsMainDocument");
+		Else
+			CopyTreeBranch(Tree, NewRow.GetItems(), Row);
+		EndIf;
+	EndDo;
+EndProcedure
+
+&AtServer
+Function FindRowInTree(Tree, Basis, RowKey)
+	FoundedRow = Undefined;
+	_FindRowInTree(Tree, Basis, RowKey, FoundedRow);
+	Return FoundedRow;
+EndFunction
+
+&AtServer
+Procedure _FindRowInTree(Tree, Basis, RowKey, FoundedRow)
+	If FoundedRow <> Undefined Then
+		Return;
+	EndIf;
+	For Each Row In Tree.GetItems() Do
+		If Row.Basis = Basis And Row.Key = RowKey Then
+			FoundedRow = Row;
+		Else
+			_FindRowInTree(Row, Basis, RowKey, FoundedRow);
+		EndIf;
+	EndDo;
 EndProcedure
 
 &AtServer
@@ -312,7 +444,11 @@ Function IsCanLink(ItemListRowsData = Undefined, BasisesTreeData = Undefined)
 	EndIf;
 	
 	If BasisesTreeData = Undefined Then
-		BasisesTreeData = Items.BasisesTree.CurrentData;
+		If ThisObject.UseReverseBasisesTree Then
+			BasisesTreeData = Items.BasisesTreeReverse.CurrentData;
+		Else
+			BasisesTreeData = Items.BasisesTree.CurrentData;
+		EndIf;
 		If BasisesTreeData = Undefined Then
 			Return Result;
 		EndIf;

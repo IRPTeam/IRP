@@ -1943,7 +1943,7 @@ Function CreateReturnOnBase(PaymentData, StatusType)
 				FillPropertyValues(NewControlCodeRow, ControlCode);
 				ObjectRowIDInfo = ThisObject.Object.RowIDInfo.FindRows(New Structure("Key", ControlCode.Key));
 				If ObjectRowIDInfo.Count() > 0 Then
-					NewSerialRow.Key = ObjectRowIDInfo[0].BasisKey;
+					NewControlCodeRow.Key = ObjectRowIDInfo[0].BasisKey;
 				EndIf;
 			EndDo;
 			For Each ItemListRow In ExtractedDataItem.ItemList Do

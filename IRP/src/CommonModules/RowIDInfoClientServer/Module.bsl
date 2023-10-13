@@ -290,6 +290,9 @@ EndFunction
 Procedure FillVisibleFields(BasisesTree, VisibleFields) Export
 	For Each Field In VisibleFields Do
 		For Each TopLevel In BasisesTree.GetItems() Do
+			If Not ValueIsFilled(TopLevel.Basis) Then
+				Continue;
+			EndIf;
 			TopLevel[Field.Key + "Presentation"] = TopLevel.Basis[Field.Key];
 		EndDo;
 	EndDo;

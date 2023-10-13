@@ -3094,6 +3094,41 @@ Scenario: _0260190 check reconnect fiscal printer from payment form
 		And I close "Payment" window
 		And I click "Clear current receipt" button
 
+Scenario: _0260193 check timeout
+	And I close all client application windows
+	* Add timeout
+		Given I open hyperlink "e1cib/list/Catalog.Hardware"		
+		And I go to line in "List" table
+			| 'Description'    |
+			| 'Fiscal printer' |
+		And I select current line in "List" table
+		And I click Open button of the field named "Driver"
+		And I input "5" text in "Sleep after (sec)" field
+		And I click "Save and close" button
+		And I click "Save" button
+		And I click the button named "Disconnect"
+		And I click the button named "Connect"
+		And I click the button named "UpdateStatus"
+		And I save the value of the field named "CommandResult" as "CommandResult1"
+		And Delay 7
+	* Create RSR
+		And I close all client application windows
+		And In the command interface I select "Retail" "Point of sale"		
+		And I click "Search by barcode (F7)" button
+		And I input "2202283705" text in the field named "Barcode"
+		And I move to the next attribute	
+		And I click "Payment (+)" button
+		And I click "Cash (/)" button
+		And I click "OK" button	
+	* Check info about timeout in the fiscal printer
+		Given I open hyperlink "e1cib/list/Catalog.Hardware"		
+		And I go to line in "List" table
+			| 'Description'    |
+			| 'Fiscal printer' |
+		And I select current line in "List" table
+		And I click the button named "UpdateStatus"
+		And I save the value of the field named "CommandResult" as "CommandResult2"
+		And 1C:Enterprise language expression "not $CommandResult1$ = $CommandResult2$" is true
 
 Scenario: _0260195 check consignor from SLN
 	And I close all client application windows

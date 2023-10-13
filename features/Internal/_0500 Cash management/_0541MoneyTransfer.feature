@@ -1,4 +1,4 @@
-#language: en
+﻿#language: en
 @tree
 @Positive
 @CashManagement
@@ -34,10 +34,16 @@ Scenario: _054100 preparation (Money transfer)
 		When Create catalog PartnerSegments objects
 		When Create chart of characteristic types CurrencyMovementType objects
 		When Create catalog TaxRates objects
+		When Create catalog Partners objects (Ferron BP)
 		When Create catalog Taxes objects	
+		When Create catalog Companies objects (partners company)
+		When Create information register PartnerSegments records
+		When Create catalog PartnerSegments objects
+		When Create catalog Agreements objects
 		When Create information register TaxSettings records
 		When Create catalog IntegrationSettings objects
 		When Create information register CurrencyRates records
+		When Create catalog Partners objects
 		When Create catalog CashAccounts objects
 		When Create catalog Partners objects (Employee)
 		When Create catalog ExpenseAndRevenueTypes objects

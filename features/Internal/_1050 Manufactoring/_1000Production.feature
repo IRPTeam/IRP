@@ -228,6 +228,12 @@ Scenario: _1010 create document Production planning
 			Then the form attribute named "PlanningPeriod" became equal to "First month"
 			Then the form attribute named "PlanningPeriodBeginDate" became equal to "$$StartDateFirstMonth$$"
 			Then the form attribute named "PlanningPeriodEndDate" became equal to "$$EndDateFirstMonth$$"
+			And I move to "Other" tab
+			And I click Choice button of the field named "Branch"
+			And I go to line in "List" table
+				| 'Description' |
+				| 'Цех 07'      |
+			And I select current line in "List" table
 		* Filling in item tab
 			And in the table "Productions" I click the button named "ProductionsAdd"
 			And I click choice button of "Item" attribute in "Productions" table
@@ -1323,6 +1329,7 @@ Scenario: _1037 create document Production based on production planning
 		Then the form attribute named "ItemKey" became equal to "Стремянка номер 6 ступенчатая"
 		Then the form attribute named "BillOfMaterials" became equal to "Стремянка номер 6 ступенчатая"
 		Then the form attribute named "Unit" became equal to "pcs"
+		Then the form attribute named "Branch" became equal to "Цех 07"		
 		Then the form attribute named "StoreProduction" became equal to "Store 01"		
 		And the editing text of form attribute named "Quantity" became equal to "90,000"
 		And I move to "Materials" tab

@@ -118,7 +118,7 @@ Scenario: _5003 create IT + PR from Production Workspace (product)
 			| '9'   | 'Копыта на стремянки Класс 30х20, черный'   | 'Копыта на стремянки Класс 30х20, черный'   | 'pcs'          | '4,000'     | 'Копыта на стремянки Класс 30х20, черный'   | 'Копыта на стремянки Класс 30х20, черный'   | 'Semiproduct'     | 'Store 04'         | 'pcs'    | '4,000'     |
 		Then the form attribute named "ProductionType" became equal to "Product"
 		Then the form attribute named "Finished" became equal to "Yes"
-		Then the form attribute named "Branch" became equal to "Production store 05"
+		Then the form attribute named "Branch" became equal to ""
 		And field "Author" is filled
 	* Check creation IT
 		Given I open hyperlink "e1cib/list/Document.InventoryTransfer"	
@@ -238,7 +238,7 @@ Scenario: _5005 create IT from Production Workspace (product)
 		
 		Then the form attribute named "ProductionType" became equal to "Semiproduct"
 		Then the form attribute named "Finished" became equal to "Yes"
-		Then the form attribute named "Branch" became equal to "Production store 05"
+		Then the form attribute named "Branch" became equal to ""
 		And field "Author" is filled
 	And I close all client application windows
 

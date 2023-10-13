@@ -1751,6 +1751,11 @@ Procedure FindRetailBasisFinish(Result, RowID) Export
 		FillPropertyValues(ThisObject.BasisPayments.Add(), PaymentItem);
 	EndDo;
 
+	ThisObject.RetailBasisSpecialOffers.Clear();
+	For Each OffersItem In RetailBasisData.SpecialOffers Do
+		FillPropertyValues(ThisObject.RetailBasisSpecialOffers.Add(), OffersItem);
+	EndDo;
+
 	FillOnSelectBasisDocument(Result);
 	SerialLotNumberClient.UpdateSerialLotNumbersPresentation(ThisObject.Object);
 	ThisObject.Object.ControlCodeStrings.Clear();
@@ -2070,10 +2075,16 @@ Procedure RecalculateOffer(ListItem)
 	ListItem.OffersAmount = 0;
 	OfferRows = ThisObject.Object.SpecialOffers.FindRows(New Structure("Key", ListItem.Key));
 	For Each OfferRow In OfferRows Do
+		RowKey = OfferRow.Key;
+		ObjectRowIDInfo = ThisObject.Object.RowIDInfo.FindRows(New Structure("Key", RowKey));
+		If ObjectRowIDInfo.Count() > 0 Then
+			RowKey = ObjectRowIDInfo[0].BasisKey;
+		EndIf;
+		
 		RetailBasisAmount = 0;
 		RetailBasisBonus = 0;
 		BasisOffers = ThisObject.RetailBasisSpecialOffers.FindRows(
-			New Structure("Key, Offer", OfferRow.Key, OfferRow.Offer));
+			New Structure("Key, Offer", RowKey, OfferRow.Offer));
 		For Each BasisOffer In BasisOffers Do
 			RetailBasisAmount = RetailBasisAmount + BasisOffer.Amount;
 			RetailBasisBonus = RetailBasisBonus + BasisOffer.Bonus;

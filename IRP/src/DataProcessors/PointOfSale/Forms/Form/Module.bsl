@@ -2175,6 +2175,9 @@ Procedure FillOnSelectBasisDocument(BasisDocRef)
 		For Each ItemListRow In Object.ItemList Do
 			ItemListRow.RetailBasis = BasisDocRef;
 			ItemListRow.RetailBasisQuantity = ItemListRow.Quantity; 
+			If Not ItemListRow.isControlCodeString Then
+				ItemListRow.isControlCodeString = CommonFunctionsServer.GetRefAttribute(ItemListRow.Item, "ControlCodeString");
+			EndIf;
 		EndDo;
 	EndIf;
 EndProcedure

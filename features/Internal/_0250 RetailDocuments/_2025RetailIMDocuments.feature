@@ -427,7 +427,7 @@ Scenario: _0155267 create Retail SC (link form)
 			And I click "Ok" button
 	* Link
 		And in the table "ItemList" I click "Link unlink basis documents" button
-		And in the table "BasisesTree" I click "Auto link" button
+		And I click "Auto link" button
 		And I click "Ok" button
 	* Check filling
 		Then the form attribute named "RetailCustomer" became equal to "Sam Jons"
@@ -595,7 +595,7 @@ Scenario: _0155270 create Retail GR	(link)
 			And I click "Ok" button			
 	* Link
 		And in the table "ItemList" I click "Link unlink basis documents" button
-		And in the table "BasisesTree" I click "Auto link" button
+		And I click "Auto link" button
 		And I click "Ok" button
 	* Check
 		And "ItemList" table contains lines
@@ -768,7 +768,7 @@ Scenario: _0155272 create RSC - RGR - RSR transaction type (pickup), without ret
 				And I click "Ok" button
 		* Link
 			And in the table "ItemList" I click "Link unlink basis documents" button
-			And in the table "BasisesTree" I click "Auto link" button
+			And I click "Auto link" button
 			And I click "Ok" button
 		* Check
 			And I click "Show hidden tables" button
@@ -963,7 +963,7 @@ Scenario: _0155275 add items in POS	and link lines to basis document
 			| 'Row presentation'                          | 'Quantity' | 'Unit' | 'Price'  | 'Currency' |
 			| 'Sales order 317 dated 11.08.2023 15:50:42' | ''         | ''     | ''       | ''         |
 			| 'Boots (37/18SD)'                           | '3,000'    | 'pcs'  | '700,00' | 'TRY'      |
-		And in the table "BasisesTree" I click "Auto link" button
+		And I click "Auto link" button
 		And I click "Ok" button
 	* Check
 		And "ItemList" table became equal

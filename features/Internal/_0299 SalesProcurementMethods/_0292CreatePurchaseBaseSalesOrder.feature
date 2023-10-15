@@ -816,7 +816,7 @@ Scenario: _029210 SO - PO - GR - SC - PI - SI
 			| '38/Black'    | 'Shirt'      | ''               |
 			| 'M/White'     | 'Dress'      | ''               |
 		And in the table "ItemList" I click "Link unlink basis documents" button
-		And in the table "BasisesTree" I click "Auto link" button
+		And I click "Auto link" button
 		And I click "Ok" button
 		And "ItemList" table contains lines
 			| 'Item key'    | 'Item'       | 'Sales order'            | 'Purchase basis'          |
@@ -865,7 +865,7 @@ Scenario: _029210 SO - PO - GR - SC - PI - SI
 			| 'Shirt'      | '38/Black'    | ''              | ''                  |
 			| 'Dress'      | 'M/White'     | ''              | ''                  |
 		And in the table "ItemList" I click "Link unlink basis documents" button
-		And in the table "BasisesTree" I click "Auto link" button
+		And I click "Auto link" button
 		And I click "Ok" button
 		And "ItemList" table contains lines
 			| 'Item'       | 'Item key'    | 'Sales order'            | 'Purchase order'             |
@@ -900,7 +900,7 @@ Scenario: _029210 SO - PO - GR - SC - PI - SI
 			| 'Shirt'      | '38/Black'    | ''              | ''                  |
 			| 'Dress'      | 'M/White'     | ''              | ''                  |
 		And in the table "ItemList" I click "Link unlink basis documents" button
-		And in the table "BasisesTree" I click "Auto link" button
+		And I click "Auto link" button
 		And I click "Ok" button
 		And "ItemList" table contains lines
 			| 'Item'       | 'Item key'    | 'Sales order'            | 'Shipment basis'          |
@@ -935,7 +935,7 @@ Scenario: _029210 SO - PO - GR - SC - PI - SI
 			| 'Shirt'      | '38/Black'    | ''              | ''                  |
 			| 'Dress'      | 'M/White'     | ''              | ''                  |
 		And in the table "ItemList" I click "Link unlink basis documents" button
-		And in the table "BasisesTree" I click "Auto link" button
+		And I click "Auto link" button
 		And I click "Ok" button
 		And "ItemList" table contains lines
 			| 'Item'       | 'Item key'    | 'Sales order'            | 'Purchase order'             |
@@ -986,7 +986,7 @@ Scenario: _029210 SO - PO - GR - SC - PI - SI
 			| 'Shirt'      | '38/Black'    | ''               |
 			| 'Dress'      | 'M/White'     | ''               |
 		And in the table "ItemList" I click "Link unlink basis documents" button
-		And in the table "BasisesTree" I click "Auto link" button
+		And I click "Auto link" button
 		And I click "Ok" button
 		And "ItemList" table contains lines
 			| 'Item'       | 'Item key'    | 'Sales order'             |
@@ -1052,7 +1052,7 @@ Scenario: _029212 SO - PO - GR - PI - SC - SI
 			| '38/Black'    | 'Shirt'      | ''               |
 			| 'M/White'     | 'Dress'      | ''               |
 		And in the table "ItemList" I click "Link unlink basis documents" button
-		And in the table "BasisesTree" I click "Auto link" button
+		And I click "Auto link" button
 		And I click "Ok" button
 		And "ItemList" table contains lines
 			| 'Item key'    | 'Item'       | 'Sales order'            | 'Purchase basis'          |
@@ -1101,7 +1101,7 @@ Scenario: _029212 SO - PO - GR - PI - SC - SI
 			| 'Shirt'      | '38/Black'    | ''              | ''                  |
 			| 'Dress'      | 'M/White'     | ''              | ''                  |
 		And in the table "ItemList" I click "Link unlink basis documents" button
-		And in the table "BasisesTree" I click "Auto link" button
+		And I click "Auto link" button
 		And I click "Ok" button
 		And "ItemList" table contains lines
 			| 'Item'       | 'Item key'    | 'Sales order'            | 'Purchase order'             |
@@ -1136,7 +1136,7 @@ Scenario: _029212 SO - PO - GR - PI - SC - SI
 			| 'Shirt'      | '38/Black'    | ''              | ''                  |
 			| 'Dress'      | 'M/White'     | ''              | ''                  |
 		And in the table "ItemList" I click "Link unlink basis documents" button
-		And in the table "BasisesTree" I click "Auto link" button
+		And I click "Auto link" button
 		And I click "Ok" button
 		And "ItemList" table contains lines
 			| 'Item'       | 'Item key'    | 'Sales order'            | 'Purchase order'             |
@@ -1187,7 +1187,7 @@ Scenario: _029212 SO - PO - GR - PI - SC - SI
 			| 'Shirt'      | '38/Black'    | ''              | ''                  |
 			| 'Dress'      | 'M/White'     | ''              | ''                  |
 		And in the table "ItemList" I click "Link unlink basis documents" button
-		And in the table "BasisesTree" I click "Auto link" button
+		And I click "Auto link" button
 		And I click "Ok" button
 		And "ItemList" table contains lines
 			| 'Item'       | 'Item key'    | 'Sales order'            | 'Shipment basis'          |
@@ -1222,7 +1222,7 @@ Scenario: _029212 SO - PO - GR - PI - SC - SI
 			| 'Shirt'      | '38/Black'    | ''               |
 			| 'Dress'      | 'M/White'     | ''               |
 		And in the table "ItemList" I click "Link unlink basis documents" button
-		And in the table "BasisesTree" I click "Auto link" button
+		And I click "Auto link" button
 		And I click "Ok" button
 		And "ItemList" table contains lines
 			| 'Item'       | 'Item key'    | 'Sales order'             |
@@ -1289,7 +1289,7 @@ Scenario: _029216 SO - PO - PI - SI
 			| '38/Black'    | 'Shirt'      | ''               |
 			| 'M/White'     | 'Dress'      | ''               |
 		And in the table "ItemList" I click "Link unlink basis documents" button
-		And in the table "BasisesTree" I click "Auto link" button
+		And I click "Auto link" button
 		And I click "Ok" button
 		And "ItemList" table contains lines
 			| 'Item key'    | 'Item'       | 'Sales order'            | 'Purchase basis'          |
@@ -1341,7 +1341,7 @@ Scenario: _029216 SO - PO - PI - SI
 			| 'Shirt'      | '38/Black'    | ''              | ''                  |
 			| 'Dress'      | 'M/White'     | ''              | ''                  |
 		And in the table "ItemList" I click "Link unlink basis documents" button
-		And in the table "BasisesTree" I click "Auto link" button
+		And I click "Auto link" button
 		And I click "Ok" button
 		And "ItemList" table contains lines
 			| 'Item'       | 'Item key'    | 'Sales order'            | 'Purchase order'             |
@@ -1392,7 +1392,7 @@ Scenario: _029216 SO - PO - PI - SI
 			| 'Shirt'      | '38/Black'    | ''               |
 			| 'Dress'      | 'M/White'     | ''               |
 		And in the table "ItemList" I click "Link unlink basis documents" button
-		And in the table "BasisesTree" I click "Auto link" button
+		And I click "Auto link" button
 		And I click "Ok" button
 		And "ItemList" table contains lines
 			| 'Item'       | 'Item key'    | 'Sales order'             |
@@ -1456,7 +1456,7 @@ Scenario: _029218 SO - PO - PI - SI - SC
 			| '38/Black'    | 'Shirt'      | ''               |
 			| 'M/White'     | 'Dress'      | ''               |
 		And in the table "ItemList" I click "Link unlink basis documents" button
-		And in the table "BasisesTree" I click "Auto link" button
+		And I click "Auto link" button
 		And I click "Ok" button
 		And "ItemList" table contains lines
 			| 'Item key'    | 'Item'       | 'Sales order'            | 'Purchase basis'          |
@@ -1508,7 +1508,7 @@ Scenario: _029218 SO - PO - PI - SI - SC
 			| 'Shirt'      | '38/Black'    | ''              | ''                  |
 			| 'Dress'      | 'M/White'     | ''              | ''                  |
 		And in the table "ItemList" I click "Link unlink basis documents" button
-		And in the table "BasisesTree" I click "Auto link" button
+		And I click "Auto link" button
 		And I click "Ok" button
 		And "ItemList" table contains lines
 			| 'Item'       | 'Item key'    | 'Sales order'            | 'Purchase order'             |
@@ -1559,7 +1559,7 @@ Scenario: _029218 SO - PO - PI - SI - SC
 			| 'Shirt'      | '38/Black'    | ''               |
 			| 'Dress'      | 'M/White'     | ''               |
 		And in the table "ItemList" I click "Link unlink basis documents" button
-		And in the table "BasisesTree" I click "Auto link" button
+		And I click "Auto link" button
 		And I click "Ok" button
 		And "ItemList" table contains lines
 			| 'Item'       | 'Item key'    | 'Sales order'             |
@@ -1595,7 +1595,7 @@ Scenario: _029218 SO - PO - PI - SI - SC
 			| 'Shirt'      | '38/Black'    | ''              | ''                  |
 			| 'Dress'      | 'M/White'     | ''              | ''                  |
 		And in the table "ItemList" I click "Link unlink basis documents" button
-		And in the table "BasisesTree" I click "Auto link" button
+		And I click "Auto link" button
 		And I click "Ok" button
 		And "ItemList" table contains lines
 			| 'Item'       | 'Item key'    | 'Sales order'            | 'Shipment basis'           | 'Sales invoice'             |
@@ -1660,7 +1660,7 @@ Scenario: _029220 SO - PO - PI - GR - SI
 			| '38/Black'    | 'Shirt'      | ''               |
 			| 'M/White'     | 'Dress'      | ''               |
 		And in the table "ItemList" I click "Link unlink basis documents" button
-		And in the table "BasisesTree" I click "Auto link" button
+		And I click "Auto link" button
 		And I click "Ok" button
 		And "ItemList" table contains lines
 			| 'Item key'    | 'Item'       | 'Sales order'            | 'Purchase basis'          |
@@ -1712,7 +1712,7 @@ Scenario: _029220 SO - PO - PI - GR - SI
 			| 'Shirt'      | '38/Black'    | ''              | ''                  |
 			| 'Dress'      | 'M/White'     | ''              | ''                  |
 		And in the table "ItemList" I click "Link unlink basis documents" button
-		And in the table "BasisesTree" I click "Auto link" button
+		And I click "Auto link" button
 		And I click "Ok" button
 		And "ItemList" table contains lines
 			| 'Item'       | 'Item key'    | 'Sales order'            | 'Purchase order'             |
@@ -1766,7 +1766,7 @@ Scenario: _029220 SO - PO - PI - GR - SI
 			| 'Shirt'      | '38/Black'    | ''              | ''                 | ''                 |
 			| 'Dress'      | 'M/White'     | ''              | ''                 | ''                 |
 		And in the table "ItemList" I click "Link unlink basis documents" button
-		And in the table "BasisesTree" I click "Auto link" button
+		And I click "Auto link" button
 		And I click "Ok" button
 		And "ItemList" table contains lines
 			| 'Item'       | 'Item key'    | 'Sales order'            | 'Purchase order'            | 'Receipt basis'                |
@@ -1801,7 +1801,7 @@ Scenario: _029220 SO - PO - PI - GR - SI
 			| 'Shirt'      | '38/Black'    | ''               |
 			| 'Dress'      | 'M/White'     | ''               |
 		And in the table "ItemList" I click "Link unlink basis documents" button
-		And in the table "BasisesTree" I click "Auto link" button
+		And I click "Auto link" button
 		And I click "Ok" button
 		And "ItemList" table contains lines
 			| 'Item'       | 'Item key'    | 'Sales order'             |
@@ -1866,7 +1866,7 @@ Scenario: _029222 SO - PO - PI - SC - SI
 			| '38/Black'    | 'Shirt'      | ''               |
 			| 'M/White'     | 'Dress'      | ''               |
 		And in the table "ItemList" I click "Link unlink basis documents" button
-		And in the table "BasisesTree" I click "Auto link" button
+		And I click "Auto link" button
 		And I click "Ok" button
 		And "ItemList" table contains lines
 			| 'Item key'    | 'Item'       | 'Sales order'            | 'Purchase basis'          |
@@ -1918,7 +1918,7 @@ Scenario: _029222 SO - PO - PI - SC - SI
 			| 'Shirt'      | '38/Black'    | ''              | ''                  |
 			| 'Dress'      | 'M/White'     | ''              | ''                  |
 		And in the table "ItemList" I click "Link unlink basis documents" button
-		And in the table "BasisesTree" I click "Auto link" button
+		And I click "Auto link" button
 		And I click "Ok" button
 		And "ItemList" table contains lines
 			| 'Item'       | 'Item key'    | 'Sales order'            | 'Purchase order'             |
@@ -1969,7 +1969,7 @@ Scenario: _029222 SO - PO - PI - SC - SI
 			| 'Shirt'      | '38/Black'    | ''              | ''                  |
 			| 'Dress'      | 'M/White'     | ''              | ''                  |
 		And in the table "ItemList" I click "Link unlink basis documents" button
-		And in the table "BasisesTree" I click "Auto link" button
+		And I click "Auto link" button
 		And I click "Ok" button
 		And "ItemList" table contains lines
 			| 'Item'       | 'Item key'    | 'Sales order'            | 'Shipment basis'         | 'Sales invoice'    |
@@ -2004,7 +2004,7 @@ Scenario: _029222 SO - PO - PI - SC - SI
 			| 'Shirt'      | '38/Black'    | ''               |
 			| 'Dress'      | 'M/White'     | ''               |
 		And in the table "ItemList" I click "Link unlink basis documents" button
-		And in the table "BasisesTree" I click "Auto link" button
+		And I click "Auto link" button
 		And I click "Ok" button
 		And "ItemList" table contains lines
 			| 'Item'       | 'Item key'    | 'Sales order'             |
@@ -2068,7 +2068,7 @@ Scenario: _029224 SO - PO - PI  - GR - SI - SC
 			| '38/Black'    | 'Shirt'      | ''               |
 			| 'M/White'     | 'Dress'      | ''               |
 		And in the table "ItemList" I click "Link unlink basis documents" button
-		And in the table "BasisesTree" I click "Auto link" button
+		And I click "Auto link" button
 		And I click "Ok" button
 		And "ItemList" table contains lines
 			| 'Item key'    | 'Item'       | 'Sales order'            | 'Purchase basis'          |
@@ -2120,7 +2120,7 @@ Scenario: _029224 SO - PO - PI  - GR - SI - SC
 			| 'Shirt'      | '38/Black'    | ''              | ''                  |
 			| 'Dress'      | 'M/White'     | ''              | ''                  |
 		And in the table "ItemList" I click "Link unlink basis documents" button
-		And in the table "BasisesTree" I click "Auto link" button
+		And I click "Auto link" button
 		And I click "Ok" button
 		And "ItemList" table contains lines
 			| 'Item'       | 'Item key'    | 'Sales order'            | 'Purchase order'             |
@@ -2174,7 +2174,7 @@ Scenario: _029224 SO - PO - PI  - GR - SI - SC
 			| 'Shirt'      | '38/Black'    | ''              | ''                 | ''                 |
 			| 'Dress'      | 'M/White'     | ''              | ''                 | ''                 |
 		And in the table "ItemList" I click "Link unlink basis documents" button
-		And in the table "BasisesTree" I click "Auto link" button
+		And I click "Auto link" button
 		And I click "Ok" button
 		And "ItemList" table contains lines
 			| 'Item'       | 'Item key'    | 'Sales order'            | 'Purchase order'            | 'Receipt basis'                |
@@ -2209,7 +2209,7 @@ Scenario: _029224 SO - PO - PI  - GR - SI - SC
 			| 'Shirt'      | '38/Black'    | ''               |
 			| 'Dress'      | 'M/White'     | ''               |
 		And in the table "ItemList" I click "Link unlink basis documents" button
-		And in the table "BasisesTree" I click "Auto link" button
+		And I click "Auto link" button
 		And I click "Ok" button
 		And "ItemList" table contains lines
 			| 'Item'       | 'Item key'    | 'Sales order'             |
@@ -2245,7 +2245,7 @@ Scenario: _029224 SO - PO - PI  - GR - SI - SC
 			| 'Shirt'      | '38/Black'    | ''              | ''                  |
 			| 'Dress'      | 'M/White'     | ''              | ''                  |
 		And in the table "ItemList" I click "Link unlink basis documents" button
-		And in the table "BasisesTree" I click "Auto link" button
+		And I click "Auto link" button
 		And I click "Ok" button
 		And "ItemList" table contains lines
 			| 'Item'       | 'Item key'    | 'Sales order'            | 'Shipment basis'           | 'Sales invoice'             |
@@ -2310,7 +2310,7 @@ Scenario: _029226 SO - PO - PI  - GR - SC - SI
 			| '38/Black'    | 'Shirt'      | ''               |
 			| 'M/White'     | 'Dress'      | ''               |
 		And in the table "ItemList" I click "Link unlink basis documents" button
-		And in the table "BasisesTree" I click "Auto link" button
+		And I click "Auto link" button
 		And I click "Ok" button
 		And "ItemList" table contains lines
 			| 'Item key'    | 'Item'       | 'Sales order'            | 'Purchase basis'          |
@@ -2362,7 +2362,7 @@ Scenario: _029226 SO - PO - PI  - GR - SC - SI
 			| 'Shirt'      | '38/Black'    | ''              | ''                  |
 			| 'Dress'      | 'M/White'     | ''              | ''                  |
 		And in the table "ItemList" I click "Link unlink basis documents" button
-		And in the table "BasisesTree" I click "Auto link" button
+		And I click "Auto link" button
 		And I click "Ok" button
 		And "ItemList" table contains lines
 			| 'Item'       | 'Item key'    | 'Sales order'            | 'Purchase order'             |
@@ -2416,7 +2416,7 @@ Scenario: _029226 SO - PO - PI  - GR - SC - SI
 			| 'Shirt'      | '38/Black'    | ''              | ''                 | ''                 |
 			| 'Dress'      | 'M/White'     | ''              | ''                 | ''                 |
 		And in the table "ItemList" I click "Link unlink basis documents" button
-		And in the table "BasisesTree" I click "Auto link" button
+		And I click "Auto link" button
 		And I click "Ok" button
 		And "ItemList" table contains lines
 			| 'Item'       | 'Item key'    | 'Sales order'            | 'Purchase order'            | 'Receipt basis'                |
@@ -2451,7 +2451,7 @@ Scenario: _029226 SO - PO - PI  - GR - SC - SI
 			| 'Shirt'      | '38/Black'    | ''              | ''                  |
 			| 'Dress'      | 'M/White'     | ''              | ''                  |
 		And in the table "ItemList" I click "Link unlink basis documents" button
-		And in the table "BasisesTree" I click "Auto link" button
+		And I click "Auto link" button
 		And I click "Ok" button
 		And "ItemList" table contains lines
 			| 'Item'       | 'Item key'    | 'Sales order'            | 'Shipment basis'          |
@@ -2486,7 +2486,7 @@ Scenario: _029226 SO - PO - PI  - GR - SC - SI
 			| 'Shirt'      | '38/Black'    | ''               |
 			| 'Dress'      | 'M/White'     | ''               |
 		And in the table "ItemList" I click "Link unlink basis documents" button
-		And in the table "BasisesTree" I click "Auto link" button
+		And I click "Auto link" button
 		And I click "Ok" button
 		And "ItemList" table contains lines
 			| 'Item'       | 'Item key'    | 'Sales order'             |
@@ -2550,7 +2550,7 @@ Scenario: _029226 SO - PO - PI  - GR - SC - SI
 # 			| '38/Black'    | 'Shirt'      | ''               |
 # 			| 'M/White'     | 'Dress'      | ''               |
 # 		And in the table "ItemList" I click "Link unlink basis documents" button
-# 		And in the table "BasisesTree" I click "Auto link" button
+# 		And I click "Auto link" button
 # 		And I click "Ok" button
 # 		And "ItemList" table contains lines
 # 			| 'Item key'    | 'Item'       | 'Sales order'            | 'Purchase basis'          |
@@ -2602,7 +2602,7 @@ Scenario: _029226 SO - PO - PI  - GR - SC - SI
 # 			| 'Shirt'      | '38/Black'    | ''              | ''                  |
 # 			| 'Dress'      | 'M/White'     | ''              | ''                  |
 # 		And in the table "ItemList" I click "Link unlink basis documents" button
-# 		And in the table "BasisesTree" I click "Auto link" button
+# 		And I click "Auto link" button
 # 		And I click "Ok" button
 # 		And "ItemList" table contains lines
 # 			| 'Item'       | 'Item key'    | 'Sales order'            | 'Purchase order'             |
@@ -2655,7 +2655,7 @@ Scenario: _029226 SO - PO - PI  - GR - SC - SI
 # 			| 'Shirt'      | '38/Black'    | ''               |
 # 			| 'Dress'      | 'M/White'     | ''               |
 # 		And in the table "ItemList" I click "Link unlink basis documents" button
-# 		And in the table "BasisesTree" I click "Auto link" button
+# 		And I click "Auto link" button
 # 		And I click "Ok" button
 # 		And "ItemList" table contains lines
 # 			| 'Item'       | 'Item key'    | 'Sales order'             |
@@ -2692,7 +2692,7 @@ Scenario: _029226 SO - PO - PI  - GR - SC - SI
 # 			| 'Shirt'      | '38/Black'    | ''              | ''                 | ''                 |
 # 			| 'Dress'      | 'M/White'     | ''              | ''                 | ''                 |
 # 		And in the table "ItemList" I click "Link unlink basis documents" button
-# 		And in the table "BasisesTree" I click "Auto link" button
+# 		And I click "Auto link" button
 # 		And I click "Ok" button
 # 		And "ItemList" table contains lines
 # 			| 'Item'       | 'Item key'    | 'Sales order'            | 'Purchase order'            | 'Receipt basis'                |
@@ -2727,7 +2727,7 @@ Scenario: _029226 SO - PO - PI  - GR - SC - SI
 # 			| 'Shirt'      | '38/Black'    | ''              | ''                  |
 # 			| 'Dress'      | 'M/White'     | ''              | ''                  |
 # 		And in the table "ItemList" I click "Link unlink basis documents" button
-# 		And in the table "BasisesTree" I click "Auto link" button
+# 		And I click "Auto link" button
 # 		And I click "Ok" button
 # 		And "ItemList" table contains lines
 # 			| 'Item'       | 'Item key'    | 'Sales order'            | 'Shipment basis'           | 'Sales invoice'             |

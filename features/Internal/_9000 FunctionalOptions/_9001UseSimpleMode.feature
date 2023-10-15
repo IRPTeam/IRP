@@ -520,7 +520,7 @@ Scenario: _900021 create Purchase return
 		And I finish line editing in "ItemList" table
 		And in the table "ItemList" I click "Link unlink basis documents" button
 		Then "Link / unlink document row" window is opened
-		And in the table "BasisesTree" I click "Auto link" button
+		And I click "Auto link" button
 		And I click "Ok" button
 		And in the table "ItemList" I click "Add basis documents" button
 		Then "Add linked document rows" window is opened
@@ -618,7 +618,7 @@ Scenario: _900029 create Sales return
 		And I finish line editing in "ItemList" table
 		And in the table "ItemList" I click "Link unlink basis documents" button
 		Then "Link / unlink document row" window is opened
-		And in the table "BasisesTree" I click "Auto link" button
+		And I click "Auto link" button
 		And I click "Ok" button
 		And in the table "ItemList" I click "Add basis documents" button
 		Then "Add linked document rows" window is opened

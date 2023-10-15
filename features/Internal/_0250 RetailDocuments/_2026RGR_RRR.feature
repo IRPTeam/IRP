@@ -401,7 +401,7 @@ Scenario: _0202603 create RRR based on RGR (without RSR)
 		And I click "Ok" button	
 	* Link back
 		And in the table "ItemList" I click "Link unlink basis documents" button
-		And in the table "BasisesTree" I click "Auto link" button
+		And I click "Auto link" button
 		And I click "Ok" button
 		And in the table "ItemList" I click "Goods receipts" button
 		And Delay 2

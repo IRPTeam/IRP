@@ -630,7 +630,7 @@ Scenario: _2060004 check button not calculate rows
 		And I set checkbox "Linked documents"
 		And in the table "ResultsTree" I click "Unlink all" button
 		Then the form attribute named "CalculateRows" became equal to "No"
-		And in the table "BasisesTree" I click "Auto link" button
+		And I click "Auto link" button
 		And I click "Ok" button
 		And "ItemList" table became equal
 				| '#' | 'Price type'              | 'Item'                         | 'Item key' | 'Dont calculate row' | 'Tax amount' | 'Unit' | 'Serial lot numbers' | 'Quantity' | 'Price' | 'VAT' | 'Net amount' | 'Total amount' | 'Use work sheet' | 'Is additional item revenue' | 'Store'    | 'Use shipment confirmation' |
@@ -2092,7 +2092,7 @@ Scenario: _2060017 check link form in the SI with 3 lines with the same items
 			| 'Sales order 1 052 dated 07.09.2021 21:06:20'        | ''         | ''     | ''       | ''         |
 			| 'Shipment confirmation 1 053 dated 07.09.2021 21:07:30' | ''         | ''     | ''       | ''         |
 			| 'Scarf (XS/Red)'                                     | '100,000'  | 'pcs'  | '100,00' | 'TRY'      |
-		And in the table "BasisesTree" I click "Auto link" button
+		And I click "Auto link" button
 		And I click "Ok" button
 		And "ItemList" table contains lines
 			| '#' | 'Revenue type' | 'Price type'              | 'Item'  | 'Item key' | 'Profit loss center' | 'Dont calculate row' | 'Serial lot numbers' | 'Quantity' | 'Unit' | 'Tax amount' | 'Price'  | 'VAT' | 'Offers amount' | 'Net amount' | 'Total amount' | 'Additional analytic' | 'Store'    | 'Delivery date' | 'Use shipment confirmation' | 'Detail' | 'Sales order' |
@@ -2197,7 +2197,7 @@ Scenario: _2060018 check link form in the PI with 2 lines with the same items
 		And I click "Link unlink basis documents" button
 		And I change checkbox "Linked documents"
 		And in the table "ResultsTree" I click "Unlink all" button
-		And in the table "BasisesTree" I click "Auto link" button
+		And I click "Auto link" button
 		And I click "Ok" button
 		And "ItemList" table contains lines
 			| '#' | 'Price type'              | 'Item'  | 'Item key' | 'Profit loss center' | 'Dont calculate row' | 'Tax amount' | 'Unit' | 'Serial lot numbers' | 'Quantity'     | 'Price'  | 'VAT' | 'Offers amount' | 'Total amount' | 'Additional analytic' | 'Internal supply request' | 'Store'    | 'Delivery date' | 'Expense type' | 'Purchase order'                                 | 'Detail' | 'Sales order' | 'Net amount' | 'Use goods receipt' |
@@ -2353,7 +2353,7 @@ Scenario: _2060019 check link form in the PI with Serial Lot number
 			And I finish line editing in "ItemList" table
 	* Link PI with PO (auto link)
 		And I click "Link unlink basis documents" button
-		And in the table "BasisesTree" I click "Auto link" button
+		And I click "Auto link" button
 		And I click "Ok" button
 	* Check tab
 		And "ItemList" table became equal
@@ -2528,7 +2528,7 @@ Scenario: _2060023 check auto form in the SC - SO (with sln)
 		And I select current line in "List" table
 	* Auto link
 		And in the table "ItemList" I click "Link unlink basis documents" button
-		And in the table "BasisesTree" I click "Auto link" button
+		And I click "Auto link" button
 		And I click "Ok" button
 		And "ItemList" table contains lines
 			| '#' | 'Item'                         | 'Inventory transfer' | 'Item key' | 'Serial lot numbers' | 'Unit' | 'Quantity' | 'Sales invoice' | 'Store'    | 'Shipment basis'                              | 'Sales order'                                 | 'Inventory transfer order' | 'Purchase return order' | 'Purchase return' |
@@ -2558,7 +2558,7 @@ Scenario: _2060023 check auto form in the SC - SO (with sln)
 			| '2 055'  |
 		And I select current line in "List" table	
 		And in the table "ItemList" I click "Link unlink basis documents" button
-		And in the table "BasisesTree" I click "Auto link" button
+		And I click "Auto link" button
 		And I click "Ok" button	
 		And "ItemList" table became equal
 			| '#' | 'Item'                         | 'Inventory transfer' | 'Item key' | 'Serial lot numbers' | 'Unit' | 'Quantity' | 'Sales invoice' | 'Store'    | 'Shipment basis'                              | 'Sales order'                                 | 'Inventory transfer order' | 'Purchase return order' | 'Purchase return' |
@@ -2595,7 +2595,7 @@ Scenario: _2060024 check auto form in the SI - SO (with sln)
 		And I select current line in "List" table	
 	* Auto link
 		And in the table "ItemList" I click "Link unlink basis documents" button
-		And in the table "BasisesTree" I click "Auto link" button
+		And I click "Auto link" button
 		And I click "Ok" button	
 		And "ItemList" table contains lines
 			| '#' | 'Price type'              | 'Item'                         | 'Item key' | 'Dont calculate row' | 'Tax amount' | 'Unit' | 'Serial lot numbers' | 'Quantity' | 'Price'  | 'VAT' | 'Offers amount' | 'Net amount' | 'Total amount' | 'Use work sheet' | 'Is additional item revenue' | 'Store'    | 'Use shipment confirmation' | 'Sales order'                                 |
@@ -2637,7 +2637,7 @@ Scenario: _2060025 check auto form in the IT - ITO (with sln)
 		And I select current line in "List" table	
 	* Auto link
 		And in the table "ItemList" I click "Link unlink basis documents" button
-		And in the table "BasisesTree" I click "Auto link" button
+		And I click "Auto link" button
 		And I click "Ok" button	
 		And "ItemList" table became equal
 			| '#' | 'Item'                         | 'Item key' | 'Serial lot numbers' | 'Unit' | 'Quantity' | 'Inventory transfer order'                                 |
@@ -2682,7 +2682,7 @@ Scenario: _2060026 check auto form in the Physical inventory - Stock adjustment 
 		And I select current line in "List" table	
 	* Auto link
 		And in the table "ItemList" I click "Link unlink basis documents" button
-		And in the table "BasisesTree" I click "Auto link" button
+		And I click "Auto link" button
 		And I click "Ok" button	
 		And "ItemList" table became equal
 			| '#' | 'Item'                         | 'Basis document'                                   | 'Item key' | 'Profit loss center' | 'Physical inventory'                               | 'Serial lot numbers' | 'Unit' | 'Source of origins' | 'Quantity' | 'Expense type' |

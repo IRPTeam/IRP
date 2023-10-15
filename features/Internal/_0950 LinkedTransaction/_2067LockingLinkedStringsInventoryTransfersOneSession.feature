@@ -795,7 +795,7 @@ Scenario: _2067039 check SC and GR based on IT with different sender and receive
 			And I go to line in "BasisesTree" table
 				| 'Quantity'    | 'Row presentation'    | 'Unit'     |
 				| '20,000'      | 'Bag (ODS)'           | 'pcs'      |
-			And in the table "BasisesTree" I click the button named "Link"
+			And I click the button named "Link"
 			And I go to line in "ItemListRows" table
 				| '#'    | 'Quantity'    | 'Row presentation'        | 'Store'       | 'Unit'                       |
 				| '2'    | '2,000'       | 'High shoes (39/19SD)'    | 'Store 02'    | 'High shoes box (8 pcs)'     |
@@ -803,7 +803,7 @@ Scenario: _2067039 check SC and GR based on IT with different sender and receive
 			And I go to line in "BasisesTree" table
 				| 'Quantity'    | 'Row presentation'        | 'Unit'                       |
 				| '10,000'      | 'High shoes (39/19SD)'    | 'High shoes box (8 pcs)'     |
-			And in the table "BasisesTree" I click the button named "Link"
+			And I click the button named "Link"
 			And I click "Ok" button
 		* Try to change branch
 			When I Check the steps for Exception
@@ -881,7 +881,7 @@ Scenario: _2067039 check SC and GR based on IT with different sender and receive
 			And I go to line in "BasisesTree" table
 				| 'Quantity'    | 'Row presentation'    | 'Unit'     |
 				| '20,000'      | 'Bag (ODS)'           | 'pcs'      |
-			And in the table "BasisesTree" I click the button named "Link"
+			And I click the button named "Link"
 			And I go to line in "ItemListRows" table
 				| '#'    | 'Quantity'    | 'Row presentation'        | 'Store'       | 'Unit'                       |
 				| '2'    | '2,000'       | 'High shoes (39/19SD)'    | 'Store 03'    | 'High shoes box (8 pcs)'     |
@@ -889,7 +889,7 @@ Scenario: _2067039 check SC and GR based on IT with different sender and receive
 			And I go to line in "BasisesTree" table
 				| 'Quantity'    | 'Row presentation'        | 'Unit'                       |
 				| '10,000'      | 'High shoes (39/19SD)'    | 'High shoes box (8 pcs)'     |
-			And in the table "BasisesTree" I click the button named "Link"
+			And I click the button named "Link"
 			And I click "Ok" button
 		And I click the button named "FormPostAndClose"
 		And I wait "Goods receipt (create) *" window closing in 5 seconds

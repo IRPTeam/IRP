@@ -223,6 +223,7 @@ Scenario: _20600011 check preparation
 			
 	
 Scenario: _2060002 check link/unlink form in the SC
+		And I close all client application windows
 	* Open form for create SC
 		Given I open hyperlink "e1cib/list/Document.ShipmentConfirmation"
 		And I click the button named "FormCreate"
@@ -400,6 +401,26 @@ Scenario: _2060002 check link/unlink form in the SC
 			| 'Store 02' | 'Boots' | '37/18SD'  | '2,000'    | ''              | 'Boots (12 pcs)' |
 			| 'Store 02' | 'Boots' | '36/18SD'  | '2,000'    | ''              | 'Boots (12 pcs)' |
 			| 'Store 02' | 'Dress' | 'S/Yellow' | '8,000'    | ''              | 'pcs'            |
+	* Check use reserve basis tree
+		And in the table "ItemList" I click "Link unlink basis documents" button
+		And I set checkbox "Use reverse basises tree"
+		And I expand current line in "BasisesTreeReverse" table
+		And "BasisesTreeReverse" table became equal
+			| 'Row presentation'                            | 'Quantity' | 'Unit' | 'Price'  | 'Currency' |
+			| 'Dress (M/White)'                             | ''         | 'pcs'  | ''       | ''         |
+			| 'Sales invoice 103 dated 05.03.2021 12:59:44' | '8,000'    | 'pcs'  | '440,68' | 'TRY'      |
+		And I go to line in "ItemListRows" table
+			| '#' | 'Quantity' | 'Row presentation' | 'Store'    | 'Unit' |
+			| '2' | '2,000'    | 'Boots (37/18SD)'  | 'Store 01' | 'pcs'  |
+		And I expand a line in "BasisesTreeReverse" table
+			| 'Row presentation' | 'Unit' |
+			| 'Boots (37/18SD)'  | 'pcs'  |
+		And I activate field named "ItemListRowsRowPresentation" in "ItemListRows" table
+		And "BasisesTreeReverse" table became equal
+			| 'Row presentation'                            | 'Quantity' | 'Unit' | 'Price'  | 'Currency' |
+			| 'Boots (37/18SD)'                             | ''         | 'pcs'  | ''       | ''         |
+			| 'Sales invoice 101 dated 05.03.2021 12:56:38' | '2,000'    | 'pcs'  | '700,00' | 'TRY'      |
+			| 'Sales invoice 102 dated 05.03.2021 12:57:59' | '1,000'    | 'pcs'  | '700,00' | 'TRY'      |										
 		And I close all client application windows
 		
 		
@@ -608,7 +629,7 @@ Scenario: _2060004 check button not calculate rows
 		And I go to line in "BasisesTree" table
 			| 'Currency' | 'Price'  | 'Quantity' | 'Row presentation' | 'Unit' |
 			| 'TRY'      | '520,00' | '2,000'    | 'Dress (XS/Blue)'  | 'pcs'  |
-		And in the table "BasisesTree" I click the button named "Link"
+		And I click the button named "Link"
 		And I go to line in "ItemListRows" table
 			| '#' | 'Quantity' | 'Row presentation'                             | 'Store'    | 'Unit' |
 			| '2' | '1,000'    | 'Product 7 with SLN (new row) (PZU) (9009099)' | 'Store 01' | 'pcs'  |
@@ -619,7 +640,7 @@ Scenario: _2060004 check button not calculate rows
 		And I go to line in "BasisesTree" table
 			| 'Currency' | 'Price'  | 'Quantity' | 'Row presentation'                   | 'Unit' |
 			| 'TRY'      | '100,00' | '3,000'    | 'Product 7 with SLN (new row) (PZU)' | 'pcs'  |
-		And in the table "BasisesTree" I click the button named "Link"
+		And I click the button named "Link"
 		And I click "Ok" button
 		And "ItemList" table became equal
 				| '#' | 'Price type'              | 'Item'                         | 'Item key' | 'Dont calculate row' | 'Tax amount' | 'Unit' | 'Serial lot numbers' | 'Quantity' | 'Price' | 'VAT' | 'Net amount' | 'Total amount' | 'Use work sheet' | 'Is additional item revenue' | 'Store'    | 'Use shipment confirmation' |
@@ -767,7 +788,7 @@ Scenario: _20600031 check Link unlink basis documents form
 			And I go to line in "BasisesTree" table
 				| 'Currency' | 'Price'  | 'Quantity' | 'Row presentation' | 'Unit' |
 				| 'TRY'      | '520,00' | '1,000'    | 'Dress (XS/Blue)'  | 'pcs'  |
-			And in the table "BasisesTree" I click the button named "Link"
+			And I click the button named "Link"
 			And I click "Ok" button
 			And "ItemList" table became equal
 				| 'Item'  | 'Item key' | 'Quantity'     | 'Unit' | 'Price'  | 'Sales order'                             |
@@ -1022,10 +1043,10 @@ Scenario: _2060005 check link/unlink form in the SR
 		And I click "Unlink" button
 		And I click "Ok" button
 		And "ItemList" table contains lines
-			| 'Item'  | 'Quantity'     | 'Unit' | 'Sales invoice'                               | 'Item key' |
-			| 'Boots' | '1,000' | 'pcs'  | 'Sales invoice 102 dated 05.03.2021 12:57:59' | '37/18SD'  |
-			| 'Boots' | '2,000' | 'pcs'  | ''                                            | '37/18SD'  |
-			| 'Dress' | '4,000' | 'pcs'  | 'Sales invoice 101 dated 05.03.2021 12:56:38' | 'M/White'  |	
+			| 'Item'  | 'Quantity' | 'Unit' | 'Sales invoice'                               | 'Item key' |
+			| 'Boots' | '1,000'    | 'pcs'  | 'Sales invoice 102 dated 05.03.2021 12:57:59' | '37/18SD'  |
+			| 'Boots' | '2,000'    | 'pcs'  | ''                                            | '37/18SD'  |
+			| 'Dress' | '4,000'    | 'pcs'  | 'Sales invoice 101 dated 05.03.2021 12:56:38' | 'M/White'  |
 	* Link line
 		And I click "Link unlink basis documents" button
 		And I go to line in "ItemListRows" table
@@ -1842,14 +1863,14 @@ Scenario: _2060015 check price in the SI when link document with different price
 		And I go to line in "BasisesTree" table
 			| 'Currency' | 'Price'  | 'Quantity' | 'Row presentation' | 'Unit' |
 			| 'TRY'      | '520,00' | '55,000'   | 'Dress (XS/Blue)'  | 'pcs'  |
-		And in the table "BasisesTree" I click the button named "Link"
+		And I click the button named "Link"
 		And I go to line in "ItemListRows" table
 			| '#' | 'Quantity' | 'Row presentation' | 'Store'    | 'Unit' |
 			| '2' | '1,000'    | 'Dress (S/Yellow)' | 'Store 01' | 'pcs'  |
 		And I go to line in "BasisesTree" table
 			| 'Currency' | 'Price'  | 'Quantity' | 'Row presentation' | 'Unit' |
 			| 'TRY'      | '550,00' | '250,000'  | 'Dress (S/Yellow)' | 'pcs'  |
-		And in the table "BasisesTree" I click the button named "Link"
+		And I click the button named "Link"
 		And I click "Ok" button
 	* Check item tab
 		And "ItemList" table contains lines
@@ -1942,14 +1963,14 @@ Scenario: _2060016 check price in the PI when link document with different price
 		And I go to line in "BasisesTree" table
 			| 'Currency' | 'Price'  | 'Quantity' | 'Row presentation' | 'Unit' |
 			| 'TRY'      | '520,00' | '250,000'   | 'Dress (XS/Blue)'  | 'pcs'  |
-		And in the table "BasisesTree" I click the button named "Link"
+		And I click the button named "Link"
 		And I go to line in "ItemListRows" table
 			| '#' | 'Quantity' | 'Row presentation' | 'Store'    | 'Unit' |
 			| '2' | '1,000'    | 'Dress (S/Yellow)' | 'Store 03' | 'pcs'  |
 		And I go to line in "BasisesTree" table
 			| 'Currency' | 'Price'  | 'Quantity' | 'Row presentation' | 'Unit' |
 			| 'TRY'      | '550,00' | '55,000'  | 'Dress (S/Yellow)' | 'pcs'  |
-		And in the table "BasisesTree" I click the button named "Link"
+		And I click the button named "Link"
 		And I click "Ok" button
 	* Check item tab
 		And "ItemList" table contains lines
@@ -2046,21 +2067,21 @@ Scenario: _2060017 check link form in the SI with 3 lines with the same items
 		And I go to line in "BasisesTree" table
 			| 'Currency' | 'Price'  | 'Quantity' | 'Row presentation' | 'Unit' |
 			| 'TRY'      | '100,00' | '100,000'  | 'Scarf (XS/Red)'   | 'pcs'  |
-		And in the table "BasisesTree" I click the button named "Link"
+		And I click the button named "Link"
 		And I go to line in "ItemListRows" table
 			| 'Quantity' | 'Row presentation' | 'Store'    | 'Unit' |
 			| '3,000'    | 'Scarf (XS/Red)'   | 'Store 01' | 'pcs'  |
 		And I go to line in "BasisesTree" table
 			| 'Currency' | 'Price'  | 'Quantity' | 'Row presentation' | 'Unit' |
 			| 'TRY'      | '100,00' | '5,000'    | 'Scarf (XS/Red)'   | 'pcs'  |
-		And in the table "BasisesTree" I click the button named "Link"
+		And I click the button named "Link"
 		And I go to line in "ItemListRows" table
 			| 'Quantity' | 'Row presentation' | 'Store'    | 'Unit' |
 			| '1,000'    | 'Scarf (XS/Red)'   | 'Store 01' | 'pcs'  |
 		And I go to line in "BasisesTree" table
 			| 'Currency' | 'Price'  | 'Quantity' | 'Row presentation' | 'Unit' |
 			| 'TRY'      | '100,00' | '100,000'  | 'Scarf (XS/Red)'   | 'pcs'  |
-		And in the table "BasisesTree" I click the button named "Link"
+		And I click the button named "Link"
 		Then the number of "BasisesTree" table lines is "равно" 0
 		And I go to line in "ItemListRows" table
 			| '#' | 'Quantity' | 'Row presentation' | 'Store'    | 'Unit' |
@@ -2174,7 +2195,7 @@ Scenario: _2060018 check link form in the PI with 2 lines with the same items
 		And I go to line in "BasisesTree" table
 			| 'Currency' | 'Price'  | 'Quantity' | 'Row presentation' | 'Unit' |
 			| 'TRY'      | '100,00' | '10,000'   | 'Scarf (XS/Red)' | 'pcs'  |
-		And in the table "BasisesTree" I click the button named "Link"
+		And I click the button named "Link"
 		And I go to line in "ItemListRows" table
 			| '#' | 'Quantity' | 'Row presentation' | 'Store'    | 'Unit' |
 			| '2' | '1,000'    | 'Scarf (XS/Red)'   | 'Store 03' | 'pcs'  |
@@ -2187,7 +2208,7 @@ Scenario: _2060018 check link form in the PI with 2 lines with the same items
 		And I go to line in "BasisesTree" table
 			| 'Currency' | 'Price'  | 'Quantity' | 'Row presentation' | 'Unit' |
 			| 'TRY'      | '100,00' | '10,000'   | 'Scarf (XS/Red)' | 'pcs'  |
-		And in the table "BasisesTree" I click the button named "Link"
+		And I click the button named "Link"
 		And I click "Ok" button
 		And "ItemList" table contains lines
 			| '#' | 'Price type'              | 'Item'  | 'Item key' | 'Profit loss center' | 'Dont calculate row' | 'Tax amount' | 'Unit' | 'Serial lot numbers' | 'Quantity'     | 'Price'  | 'VAT' | 'Offers amount' | 'Total amount' | 'Additional analytic' | 'Internal supply request' | 'Store'    | 'Delivery date' | 'Expense type' | 'Purchase order'                                 | 'Detail' | 'Sales order' | 'Net amount' | 'Use goods receipt' |
@@ -2747,14 +2768,14 @@ Scenario: _2060028 check SR (different store then in the SI) - GR link form
 		And I go to line in "BasisesTree" table
 			| 'Currency' | 'Price'  | 'Quantity' | 'Row presentation' | 'Unit' |
 			| 'TRY'      | '520,00' | '45,000'   | 'Dress (XS/Blue)'  | 'pcs'  |
-		And in the table "BasisesTree" I click the button named "Link"
+		And I click the button named "Link"
 		And I go to line in "ItemListRows" table
 			| '#' | 'Quantity' | 'Row presentation' | 'Store'    | 'Unit' |
 			| '2' | '750,000'  | 'Dress (S/Yellow)' | 'Store 01' | 'pcs'  |
 		And I go to line in "BasisesTree" table
 			| 'Currency' | 'Price'  | 'Quantity' | 'Row presentation' | 'Unit' |
 			| 'TRY'      | '550,00' | '750,000'  | 'Dress (S/Yellow)' | 'pcs'  |
-		And in the table "BasisesTree" I click the button named "Link"
+		And I click the button named "Link"
 		And I click "Ok" button
 	* Check
 		And "ItemList" table became equal
@@ -2801,14 +2822,14 @@ Scenario: _2060028 check SR (different store then in the SI) - GR link form
 		And I go to line in "BasisesTree" table
 			| 'Currency' | 'Price'  | 'Quantity' | 'Row presentation' | 'Unit' |
 			| 'TRY'      | '520,00' | '45,000'   | 'Dress (XS/Blue)'  | 'pcs'  |
-		And in the table "BasisesTree" I click the button named "Link"
+		And I click the button named "Link"
 		And I go to line in "ItemListRows" table
 			| '#' | 'Quantity' | 'Row presentation' | 'Store'    | 'Unit' |
 			| '2' | '11,000'   | 'Dress (S/Yellow)' | 'Store 02' | 'pcs'  |
 		And I go to line in "BasisesTree" table
 			| 'Currency' | 'Price'  | 'Quantity' | 'Row presentation' | 'Unit' |
 			| 'TRY'      | '550,00' | '750,000'  | 'Dress (S/Yellow)' | 'pcs'  |
-		And in the table "BasisesTree" I click the button named "Link"
+		And I click the button named "Link"
 		And I click "Ok" button
 	* Check
 		And "ItemList" table became equal
@@ -2858,14 +2879,14 @@ Scenario: _2060028 check SR (different store then in the SI) - GR link form
 		And I go to line in "BasisesTree" table
 			| 'Quantity' | 'Row presentation' | 'Unit' |
 			| '10,000'   | 'Dress (XS/Blue)'  | 'pcs'  |
-		And in the table "BasisesTree" I click the button named "Link"
+		And I click the button named "Link"
 		And I go to line in "ItemListRows" table
 			| '#' | 'Quantity' | 'Row presentation' | 'Store'    | 'Unit' |
 			| '2' | '11,000'   | 'Dress (S/Yellow)' | 'Store 02' | 'pcs'  |
 		And I go to line in "BasisesTree" table
 			| 'Quantity' | 'Row presentation' | 'Unit' |
 			| '11,000'   | 'Dress (S/Yellow)' | 'pcs'  |
-		And in the table "BasisesTree" I click the button named "Link"
+		And I click the button named "Link"
 		And I click "Ok" button
 		And I click "Post" button
 		And "ItemList" table became equal

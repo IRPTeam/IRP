@@ -817,11 +817,11 @@ Scenario: _024029 create SI based on SC with two same items (link items)
 		And I go to line in "BasisesTree" table
 			| 'Currency'   | 'Price'    | 'Quantity'   | 'Row presentation'   | 'Unit'    |
 			| 'TRY'        | '520,00'   | '10,000'     | 'Dress (XS/Blue)'    | 'pcs'     |
-		And in the table "BasisesTree" I click the button named "Link"
+		And I click the button named "Link"
 		And I go to line in "BasisesTree" table
 			| 'Currency'   | 'Price'    | 'Quantity'   | 'Row presentation'   | 'Unit'    |
 			| 'TRY'        | '520,00'   | '9,000'      | 'Dress (XS/Blue)'    | 'pcs'     |
-		And in the table "BasisesTree" I click the button named "Link"	
+		And I click the button named "Link"	
 		And I click "Ok" button				
 	* Check
 		And "ItemList" table contains lines

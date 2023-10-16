@@ -792,6 +792,7 @@ Scenario: _2067039 check SC and GR based on IT with different sender and receive
 				| '1'    | 'Bag'     | 'ODS'         | '2,000'       | 'Store 02'    | 'pcs'      |
 			And I activate field named "ItemListItemKey" in "ItemList" table
 			And in the table "ItemList" I click "Link unlink basis documents" button
+			And I remove checkbox named "UseReverseBasisesTree"
 			And I go to line in "BasisesTree" table
 				| 'Quantity'    | 'Row presentation'    | 'Unit'     |
 				| '20,000'      | 'Bag (ODS)'           | 'pcs'      |

@@ -574,7 +574,7 @@ Scenario: _050014 create SR (return commission products that was sailed our cust
 		And I go to line in "BasisesTree" table
 			| 'Currency' | 'Price'  | 'Quantity' | 'Row presentation'                                                                   | 'Unit' |
 			| 'TRY'      | '400,00' | '4,000'    | 'Product 13 without SLN (Main Company - different consignor for item key) (M/Black)' | 'pcs'  |
-		And in the table "BasisesTree" I click the button named "Link"
+		And I click the button named "Link"
 		And I go to line in "ItemListRows" table
 			| '#' | 'Quantity' | 'Row presentation'                                        | 'Store'    | 'Unit' |
 			| '1' | '1,000'    | 'Product 11 with SLN (Main Company - Consignor 1) (UNIQ)' | 'Store 02' | 'pcs'  |
@@ -582,7 +582,7 @@ Scenario: _050014 create SR (return commission products that was sailed our cust
 		And I go to line in "BasisesTree" table
 			| 'Currency' | 'Price'  | 'Quantity' | 'Row presentation'                                        | 'Unit' |
 			| 'TRY'      | '120,00' | '4,000'    | 'Product 11 with SLN (Main Company - Consignor 1) (UNIQ)' | 'pcs'  |
-		And in the table "BasisesTree" I click the button named "Link"
+		And I click the button named "Link"
 		And I click "Ok" button
 	* Check filling
 		And "ItemList" table became equal

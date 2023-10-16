@@ -347,11 +347,11 @@ EndProcedure
 
 &AtClient
 Procedure ItemListQuantityOnChange(Item)
-	DocRetailSalesReceiptClient.ItemListQuantityOnChange(Object, ThisObject, Item);
 	If ThisObject.isReturn Then
 		RecalculateOffer(Items.ItemList.CurrentData);
 		CheckByRetailBasis();
 	EndIf;
+	DocRetailSalesReceiptClient.ItemListQuantityOnChange(Object, ThisObject, Item);
 EndProcedure
 
 &AtClient

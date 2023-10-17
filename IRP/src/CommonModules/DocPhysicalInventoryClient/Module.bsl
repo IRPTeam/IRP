@@ -93,7 +93,7 @@ Procedure CreatePhysicalCount(ObjectRef) Export
 	AddInfo.Insert("CountDocsToCreate", CountDocsToCreate);
 
 	NotifyDescription = New NotifyDescription("CreatePhysicalCountEnd", ThisObject, AddInfo);
-	ShowInputNumber(NotifyDescription, CountDocsToCreate, R().QuestionToUser_017, 2, 0);	
+	ShowInputNumber(NotifyDescription, CountDocsToCreate, R().QuestionToUser_017, 3, 0);	
 EndProcedure
 
 Procedure CreatePhysicalCountEnd(CountDocsToCreate, AdditionalParameters) Export

@@ -1039,7 +1039,7 @@ Function T1040T_AccountingAmounts()
 		   |	PaymentList.Key AS Key,
 		   |	PaymentList.Currency,
 		   |	PaymentList.Amount,
-		   |	VALUE(Catalog.AccountingOperations.BankReceipt_DR_R3010B_CR_R2020B_R2021B) AS Operation,
+		   |	VALUE(Catalog.AccountingOperations.BankReceipt_DR_R3010B_CashOnHand_CR_R2020B_AdvancesFromCustomers_R2021B_CustomersTransactions) AS Operation,
 		   |	UNDEFINED AS AdvancesClosing
 		   |INTO T1040T_AccountingAmounts
 		   |FROM
@@ -1055,7 +1055,7 @@ Function T1040T_AccountingAmounts()
 		   |	OffsetOfAdvances.Key,
 		   |	OffsetOfAdvances.Currency,
 		   |	OffsetOfAdvances.Amount,
-		   |	VALUE(Catalog.AccountingOperations.BankReceipt_DR_R2021B_CR_R2020B),
+		   |	VALUE(Catalog.AccountingOperations.BankReceipt_DR_R2021B_CustomersTransactions_CR_R2020B_AdvancesFromCustomers),
 		   |	OffsetOfAdvances.Recorder
 		   |FROM
 		   |	InformationRegister.T2010S_OffsetOfAdvances AS OffsetOfAdvances
@@ -1064,9 +1064,9 @@ Function T1040T_AccountingAmounts()
 EndFunction
 
 Function GetAccountingAnalytics(Parameters) Export
-	If Parameters.Operation = Catalogs.AccountingOperations.BankReceipt_DR_R3010B_CR_R2020B_R2021B Then
+	If Parameters.Operation = Catalogs.AccountingOperations.BankReceipt_DR_R3010B_CashOnHand_CR_R2020B_AdvancesFromCustomers_R2021B_CustomersTransactions Then
 		Return GetAnalytics_DR_R3010B_CR_R2020B_R2021B(Parameters); // Cash on hand -  Customer transactions
-	ElsIf Parameters.Operation = Catalogs.AccountingOperations.BankReceipt_DR_R2021B_CR_R2020B Then
+	ElsIf Parameters.Operation = Catalogs.AccountingOperations.BankReceipt_DR_R2021B_CustomersTransactions_CR_R2020B_AdvancesFromCustomers Then
 		Return GetAnalytics_DR_R2021B_CR_R2020B(Parameters); // Customer transactions - Advances from customer 
 	EndIf;
 	Return Undefined;
@@ -1127,7 +1127,7 @@ Function GetAnalytics_DR_R2021B_CR_R2020B(Parameters)
 EndFunction
 
 Function GetHintDebitExtDimension(Parameters, ExtDimensionType, Value) Export
-	If Parameters.Operation = Catalogs.AccountingOperations.BankReceipt_DR_R3010B_CR_R2020B_R2021B 
+	If Parameters.Operation = Catalogs.AccountingOperations.BankReceipt_DR_R3010B_CashOnHand_CR_R2020B_AdvancesFromCustomers_R2021B_CustomersTransactions 
 		And ExtDimensionType.ValueType.Types().Find(Type("CatalogRef.ExpenseAndRevenueTypes")) <> Undefined Then
 		Return Parameters.RowData.FinancialMovementType;
 	EndIf;

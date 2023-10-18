@@ -51,12 +51,22 @@ Procedure FillRegisterRecords()
 	TotalsTable.Columns.Add("ChartOfAccountCr");
 	TotalsTable.Columns.Add("Amount", Metadata.AccountingRegisters.Basic.Resources.Amount.Type);
 	
+	RecordSet = InformationRegisters.T9050S_AccountingRowAnalytics.CreateRecordSet();
+	RecordSet.Filter.Recorder.Set(ThisObject.Basis);
+	RecordSet.Read();
+	_AccountingRowAnalytics = RecordSet.Unload();
+	
+	RecordSet = InformationRegisters.T9051S_AccountingExtDimensions.CreateRecordSet();
+	RecordSet.Filter.Recorder.Set(ThisObject.Basis);
+	RecordSet.Read();
+	_AccountingExtDimensions = RecordSet.Unload();
+
 	ArrayOfCharts = New Array();
 	
 	ThisObject.Errors.Clear();
 	
 	ThisObject.RegisterRecords.Basic.Clear();
-	For Each Row In ThisObject.Basis.AccountingRowAnalytics Do
+	For Each Row In _AccountingRowAnalytics Do
 		If Row.LedgerType <> ThisObject.LedgerType Then
 			Continue;
 		EndIf;
@@ -99,7 +109,7 @@ Procedure FillRegisterRecords()
 		// Debit analytics
 		Record.AccountDr = Row.AccountDebit;
 		Filter.AnalyticType = Enums.AccountingAnalyticTypes.Debit;
-		AccountingExtDimensionRows = ThisObject.Basis.AccountingExtDimensions.FindRows(Filter);
+		AccountingExtDimensionRows = _AccountingExtDimensions.FindRows(Filter);
 		For Each ExtDim In AccountingExtDimensionRows Do
 			Record.ExtDimensionsDr[ExtDim.ExtDimensionType] = ExtDim.ExtDimension;
 		EndDo;
@@ -107,7 +117,7 @@ Procedure FillRegisterRecords()
 		// Credit analytics
 		Record.AccountCr = Row.AccountCredit;
 		Filter.AnalyticType = Enums.AccountingAnalyticTypes.Credit;
-		AccountingExtDimensionRows = ThisObject.Basis.AccountingExtDimensions.FindRows(Filter);
+		AccountingExtDimensionRows = _AccountingExtDimensions.FindRows(Filter);
 		For Each ExtDim In AccountingExtDimensionRows Do
 			Record.ExtDimensionsCr[ExtDim.ExtDimensionType] = ExtDim.ExtDimension;
 		EndDo;

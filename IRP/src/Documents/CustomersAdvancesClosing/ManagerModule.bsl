@@ -1593,9 +1593,9 @@ Procedure Write_SelfRecords(Parameters, Records_OffsetOfAdvances)
 			NewRow_AccountingAmounts.AdvancesClosing = Parameters.Object.Ref;
 			NewRow_AccountingAmounts.RowKey = RowOffset.Key;
 			If TypeOf(Row.Document) = Type("DocumentRef.BankReceipt") Then
-				NewRow_AccountingAmounts.Operation = Catalogs.AccountingOperations.BankReceipt_DR_R2021B_CR_R2020B;
+				NewRow_AccountingAmounts.Operation = Catalogs.AccountingOperations.BankReceipt_DR_R2021B_CustomersTransactions_CR_R2020B_AdvancesFromCustomers;
 			ElsIf TypeOf(Row.Document) = Type("DocumentRef.SalesInvoice") Then
-				NewRow_AccountingAmounts.Operation = Catalogs.AccountingOperations.SalesInvoice_DR_R2021B_CR_R2020B;
+				NewRow_AccountingAmounts.Operation = Catalogs.AccountingOperations.SalesInvoice_DR_R2021B_CustomersTransactions_CR_R2020B_AdvancesFromCustomers;
 			EndIf;
 			If UseKeyForCurrency Then
 				NewRow_AccountingAmounts.Key = RowOffset.Key;

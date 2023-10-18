@@ -38,56 +38,62 @@ Procedure ChangeCheck(Value)
 EndProcedure
 
 &AtClient
-Procedure CreateDocuments(Command)
+Procedure UpdateAnalytics(Command)
 	For Each Row In ThisObject.TableDocuments Do
 		If Row.Use Then
-			CreateDocumentsAtServer(Row.Name);
+			UpdateAnalyticsAtServer(Row.Name);
 		EndIf;
 	EndDo;
 EndProcedure
 
 &AtServer
-Procedure CreateDocumentsAtServer(DocumentName)
+Procedure UpdateAnalyticsAtServer(DocumentName)
 	Query = New Query();
 	Query_Text = 
 	"SELECT
 	|	Doc.Ref
-	|INTO Documents
 	|FROM
 	|	Document.%1 AS Doc
 	|WHERE
 	|	Doc.Posted
 	|	AND Doc.Date BETWEEN BEGINOFPERIOD(&StartDate, DAY) AND ENDOFPERIOD(&EndDate, DAY)
-	|	AND Doc.Company = &Company
-	|;
-	|
-	|////////////////////////////////////////////////////////////////////////////////
-	|SELECT
-	|	Documents.Ref AS Basis,
-	|	JournalEntry.Ref AS JournalEntry
-	|FROM
-	|	Documents AS Documents
-	|		LEFT JOIN Document.JournalEntry AS JournalEntry
-	|		ON Documents.Ref = JournalEntry.Basis
-	|		AND NOT JournalEntry.DeletionMark
-	|		AND JournalEntry.LedgerType = &LedgerType";
+	|	AND Doc.Company = &Company";
+	
 	Query.Text = StrTemplate(Query_Text, DocumentName);
 	Query.SetParameter("StartDate"  , ThisObject.Period.StartDate);
 	Query.SetParameter("EndDate"    , ThisObject.Period.EndDate);
 	Query.SetParameter("Company"    , ThisObject.Company);
-	Query.SetParameter("LedgerType" , ThisObject.LedgerType);
 	
 	QueryResult = Query.Execute();
 	QuerySelection = QueryResult.Select();
 	While QuerySelection.Next() Do
-		If ValueIsFilled(QuerySelection.JournalEntry) Then
-			DocObject = QuerySelection.JournalEntry.GetObject();
-			DocObject.Write(DocumentWriteMode.Write);
+		RecordSet_T9050S = InformationRegisters.T9050S_AccountingRowAnalytics.CreateRecordSet();
+		RecordSet_T9050S.Filter.Recorder.Set(QuerySelection.Ref);
+		RecordSet_T9050S.Read();
+		_AccountingRowAnalytics = RecordSet_T9050S.Unload();
+		
+		RecordSet_T9051S = InformationRegisters.T9051S_AccountingExtDimensions.CreateRecordSet();
+		RecordSet_T9051S.Filter.Recorder.Set(QuerySelection.Ref);
+		RecordSet_T9051S.Read();
+		_AccountingExtDimensions = RecordSet_T9051S.Unload();
+			
+		MainTable = "";
+		If CommonFunctionsClientServer.ObjectHasProperty(QuerySelection.Ref, "ItemList") Then
+			MainTable = "ItemList";
+		ElsIf CommonFunctionsClientServer.ObjectHasProperty(QuerySelection.Ref, "PaymentList") Then
+			MainTable = "PaymentList";
 		Else
-			DocObject = Documents.JournalEntry.CreateDocument();
-			DocObject.Fill(New Structure("Basis, LedgerType", QuerySelection.Basis, ThisObject.LedgerType));
-			DocObject.Date = QuerySelection.Basis.Date;
-			DocObject.Write(DocumentWriteMode.Write);
+			Raise StrTemplate("Main table is not defined [%1]", QuerySelection.Ref);
 		EndIf;
+		
+		AccountingClientServer.UpdateAccountingTables(QuerySelection.Ref, _AccountingRowAnalytics, _AccountingExtDimensions, MainTable);
+		_AccountingRowAnalytics.FillValues(True, "Active");
+		_AccountingExtDimensions.FillValues(True, "Active");
+		
+		RecordSet_T9050S.Load(_AccountingRowAnalytics);
+		RecordSet_T9050S.Write();
+		
+		RecordSet_T9051S.Load(_AccountingExtDimensions);
+		RecordSet_T9051S.Write();		
 	EndDo;
 EndProcedure

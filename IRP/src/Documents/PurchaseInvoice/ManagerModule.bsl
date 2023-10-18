@@ -1452,7 +1452,7 @@ Function T1040T_AccountingAmounts()
 		   |	ItemList.Key AS RowKey,
 		   |	ItemList.Currency,
 		   |	ItemList.NetAmount AS Amount,
-		   |	VALUE(Catalog.AccountingOperations.PurchaseInvoice_DR_R4050B_R5022T_CR_R1021B) AS Operation,
+		   |	VALUE(Catalog.AccountingOperations.PurchaseInvoice_DR_R4050B_StockInventory_R5022T_Expenses_CR_R1021B_VendorsTransactions) AS Operation,
 		   |	UNDEFINED AS AdvancesClosing
 		   |INTO T1040T_AccountingAmounts
 		   |FROM
@@ -1467,7 +1467,7 @@ Function T1040T_AccountingAmounts()
 		   |	ItemList.Key AS RowKey,
 		   |	ItemList.Currency,
 		   |	ItemList.TaxAmount,
-		   |	VALUE(Catalog.AccountingOperations.PurchaseInvoice_DR_R1040B_CR_R1021B),
+		   |	VALUE(Catalog.AccountingOperations.PurchaseInvoice_DR_R1040B_TaxesOutgoing_CR_R1021B_VendorsTransactions),
 		   |	UNDEFINED
 		   |FROM
 		   |	ItemList as ItemList
@@ -1481,7 +1481,7 @@ Function T1040T_AccountingAmounts()
 		   |	T2010S_OffsetOfAdvances.Key AS RowKey,
 		   |	T2010S_OffsetOfAdvances.Currency,
 		   |	T2010S_OffsetOfAdvances.Amount,
-		   |	VALUE(Catalog.AccountingOperations.PurchaseInvoice_DR_R1040B_CR_R1021B),
+		   |	VALUE(Catalog.AccountingOperations.PurchaseInvoice_DR_R1040B_TaxesOutgoing_CR_R1021B_VendorsTransactions),
 		   |	T2010S_OffsetOfAdvances.Recorder
 		   |FROM
 		   |	InformationRegister.T2010S_OffsetOfAdvances AS T2010S_OffsetOfAdvances
@@ -1493,7 +1493,7 @@ Function T1050T_AccountingQuantities()
 	Return "SELECT
 		   |	ItemList.Period,
 		   |	ItemList.Key AS RowKey,
-		   |	VALUE(Catalog.AccountingOperations.PurchaseInvoice_DR_R4050B_R5022T_CR_R1021B) AS Operation,
+		   |	VALUE(Catalog.AccountingOperations.PurchaseInvoice_DR_R4050B_StockInventory_R5022T_Expenses_CR_R1021B_VendorsTransactions) AS Operation,
 		   |	ItemList.Quantity
 		   |INTO T1050T_AccountingQuantities
 		   |FROM
@@ -1504,11 +1504,11 @@ EndFunction
 
 Function GetAccountingAnalytics(Parameters) Export
 	Operations = Catalogs.AccountingOperations;
-	If Parameters.Operation = Operations.PurchaseInvoice_DR_R4050B_R5022T_CR_R1021B Then
+	If Parameters.Operation = Operations.PurchaseInvoice_DR_R4050B_StockInventory_R5022T_Expenses_CR_R1021B_VendorsTransactions Then
 		Return GetAnalytics_DR_R4050B_CR_R1021B(Parameters); // Stock inventory - Vendors transactions
-	ElsIf Parameters.Operation = Operations.PurchaseInvoice_DR_R1021B_CR_R1020B Then
+	ElsIf Parameters.Operation = Operations.PurchaseInvoice_DR_R1021B_VendorsTransactions_CR_R1020B_AdvancesToVendors Then
 		Return GetAnalytics_DR_R1021B_CR_R1020B(Parameters); // Vendors transactions - Advances to vendors
-	ElsIf Parameters.Operation = Operations.PurchaseInvoice_DR_R1040B_CR_R1021B Then
+	ElsIf Parameters.Operation = Operations.PurchaseInvoice_DR_R1040B_TaxesOutgoing_CR_R1021B_VendorsTransactions Then
 		Return GetAnalytics_DR_R1040B_CR_R1021B(Parameters); // Taxes outgoing - Vendors transactions
 	EndIf;
 	Return Undefined;
@@ -1587,7 +1587,7 @@ Function GetAnalytics_DR_R1040B_CR_R1021B(Parameters)
 EndFunction
 
 Function GetHintDebitExtDimension(Parameters, ExtDimensionType, Value) Export
-	If Parameters.Operation = Catalogs.AccountingOperations.PurchaseInvoice_DR_R1021B_CR_R1020B
+	If Parameters.Operation = Catalogs.AccountingOperations.PurchaseInvoice_DR_R1021B_VendorsTransactions_CR_R1020B_AdvancesToVendors
 		And ExtDimensionType.ValueType.Types().Find(Type("CatalogRef.Companies")) <> Undefined Then
 		Return Parameters.ObjectData.LegalName;
 	EndIf;
@@ -1595,9 +1595,9 @@ Function GetHintDebitExtDimension(Parameters, ExtDimensionType, Value) Export
 EndFunction
 
 Function GetHintCreditExtDimension(Parameters, ExtDimensionType, Value) Export
-	If (Parameters.Operation = Catalogs.AccountingOperations.PurchaseInvoice_DR_R1021B_CR_R1020B
-		Or Parameters.Operation = Catalogs.AccountingOperations.PurchaseInvoice_DR_R1040B_CR_R1021B
-		Or Parameters.Operation = Catalogs.AccountingOperations.PurchaseInvoice_DR_R4050B_R5022T_CR_R1021B)
+	If (Parameters.Operation = Catalogs.AccountingOperations.PurchaseInvoice_DR_R1021B_VendorsTransactions_CR_R1020B_AdvancesToVendors
+		Or Parameters.Operation = Catalogs.AccountingOperations.PurchaseInvoice_DR_R1040B_TaxesOutgoing_CR_R1021B_VendorsTransactions
+		Or Parameters.Operation = Catalogs.AccountingOperations.PurchaseInvoice_DR_R4050B_StockInventory_R5022T_Expenses_CR_R1021B_VendorsTransactions)
 		And ExtDimensionType.ValueType.Types().Find(Type("CatalogRef.Companies")) <> Undefined Then
 		Return Parameters.ObjectData.LegalName;
 	EndIf;

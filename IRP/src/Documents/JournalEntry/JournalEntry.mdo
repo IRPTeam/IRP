@@ -178,6 +178,15 @@
     <usePurposes>PersonalComputer</usePurposes>
     <usePurposes>MobileDevice</usePurposes>
   </forms>
+  <forms uuid="f66b5f4a-5c19-4a8e-8f7c-53bfc3a142a9">
+    <name>UpdateAnalytics</name>
+    <synonym>
+      <key>en</key>
+      <value>Update analytics</value>
+    </synonym>
+    <usePurposes>PersonalComputer</usePurposes>
+    <usePurposes>MobileDevice</usePurposes>
+  </forms>
   <tabularSections uuid="8701e96e-1e6a-4e84-89d4-488947079cde">
     <producedTypes>
       <objectType typeId="65c49faa-3787-43bf-8ac2-d344564087e6" valueTypeId="7dea86f3-5982-4794-8098-a4b719a20776"/>

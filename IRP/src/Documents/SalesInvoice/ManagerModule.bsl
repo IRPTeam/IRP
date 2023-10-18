@@ -1279,7 +1279,7 @@ Function T1040T_AccountingAmounts()
 		|	ItemList.Key AS RowKey,
 		|	ItemList.Currency,
 		|	ItemList.Amount AS Amount,
-		|	VALUE(Catalog.AccountingOperations.SalesInvoice_DR_R2021B_CR_R5021T) AS Operation,
+		|	VALUE(Catalog.AccountingOperations.SalesInvoice_DR_R2021B_CustomersTransactions_CR_R5021T_Revenues) AS Operation,
 		|	UNDEFINED AS AdvancesClosing
 		|INTO T1040T_AccountingAmounts
 		|FROM
@@ -1294,7 +1294,7 @@ Function T1040T_AccountingAmounts()
 		|	ItemList.Key AS RowKey,
 		|	ItemList.Currency,
 		|	ItemList.TaxAmount,
-		|	VALUE(Catalog.AccountingOperations.SalesInvoice_DR_R5021T_CR_R1040B),
+		|	VALUE(Catalog.AccountingOperations.SalesInvoice_DR_R5021T_Revenues_CR_R2040B_TaxesIncoming),
 		|	UNDEFINED
 		|FROM
 		|	ItemList as ItemList
@@ -1308,7 +1308,7 @@ Function T1040T_AccountingAmounts()
 		|	T2010S_OffsetOfAdvances.Key AS RowKey,
 		|	T2010S_OffsetOfAdvances.Currency,
 		|	T2010S_OffsetOfAdvances.Amount,
-		|	VALUE(Catalog.AccountingOperations.SalesInvoice_DR_R2021B_CR_R2020B),
+		|	VALUE(Catalog.AccountingOperations.SalesInvoice_DR_R2021B_CustomersTransactions_CR_R2020B_AdvancesFromCustomers),
 		|	T2010S_OffsetOfAdvances.Recorder
 		|FROM
 		|	InformationRegister.T2010S_OffsetOfAdvances AS T2010S_OffsetOfAdvances
@@ -1321,7 +1321,7 @@ Function T1050T_AccountingQuantities()
 		"SELECT
 		|	ItemList.Period,
 		|	ItemList.Key AS RowKey,
-		|	VALUE(Catalog.AccountingOperations.SalesInvoice_DR_R5022T_CR_R4050B) AS Operation,
+		|	VALUE(Catalog.AccountingOperations.SalesInvoice_DR_R5022T_Expenses_CR_R4050B_StockInventory) AS Operation,
 		|	ItemList.Quantity
 		|INTO T1050T_AccountingQuantities
 		|FROM
@@ -1331,13 +1331,13 @@ EndFunction
 Function GetAccountingAnalytics(Parameters) Export
 	Operations = Catalogs.AccountingOperations;
 	
-	If Parameters.Operation = Operations.SalesInvoice_DR_R2021B_CR_R5021T Then
+	If Parameters.Operation = Operations.SalesInvoice_DR_R2021B_CustomersTransactions_CR_R5021T_Revenues Then
 		Return GetAnalytics_DR_R2021B_CR_R5021T(Parameters); // Customer transactions - Revenues
-	ElsIf Parameters.Operation = Operations.SalesInvoice_DR_R5021T_CR_R1040B Then
+	ElsIf Parameters.Operation = Operations.SalesInvoice_DR_R5021T_Revenues_CR_R2040B_TaxesIncoming Then
 		Return GetAnalytics_DR_R5021T_CR_R1040B(Parameters); // Revenues - Tax outgoing
-	ElsIf Parameters.Operation = Operations.SalesInvoice_DR_R2021B_CR_R2020B Then
+	ElsIf Parameters.Operation = Operations.SalesInvoice_DR_R2021B_CustomersTransactions_CR_R2020B_AdvancesFromCustomers Then
 		Return GetAnalytics_DR_R2021B_CR_R2020B(Parameters); // Customer transactions - Advances from customer
-	ElsIf Parameters.Operation = Operations.SalesInvoice_DR_R5022T_CR_R4050B Then
+	ElsIf Parameters.Operation = Operations.SalesInvoice_DR_R5022T_Expenses_CR_R4050B_StockInventory Then
 		Return GetAnalytics_DR_R5022T_CR_R4050B(Parameters); // Expenses (landed cost) - Stock inventory
 	EndIf;
 	

@@ -1187,6 +1187,8 @@
   <informationRegisters>InformationRegister.T1020S_Cache</informationRegisters>
   <informationRegisters>InformationRegister.T8510S_FixedAssetsInfo</informationRegisters>
   <informationRegisters>InformationRegister.T8515S_FixedAssetsLocation</informationRegisters>
+  <informationRegisters>InformationRegister.T9050S_AccountingRowAnalytics</informationRegisters>
+  <informationRegisters>InformationRegister.T9051S_AccountingExtDimensions</informationRegisters>
   <accumulationRegisters>AccumulationRegister.CashInTransit</accumulationRegisters>
   <accumulationRegisters>AccumulationRegister.R1001T_Purchases</accumulationRegisters>
   <accumulationRegisters>AccumulationRegister.R1002T_PurchaseReturns</accumulationRegisters>

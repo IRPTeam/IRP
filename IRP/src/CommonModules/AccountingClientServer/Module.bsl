@@ -1,17 +1,35 @@
 
-Procedure UpdateAccountingTables(Object, MainTableName, Filter_LedgerType = Undefined, IgnoreFixed = False) Export
-	AccountingServer.UpdateAccountingTables(Object, MainTableName, Filter_LedgerType, IgnoreFixed);
+Procedure UpdateAccountingTables(Object, 
+		                         AccountingRowAnalytics, 
+		                         AccountingExtDimensions,
+		                         MainTableName, 
+		                         Filter_LedgerType = Undefined, 
+		                         IgnoreFixed = False) Export
+		                         
+	AccountingServer.UpdateAccountingTables(Object, 
+											AccountingRowAnalytics,
+											AccountingExtDimensions,
+		                                    MainTableName, 
+		                                    Filter_LedgerType, 
+		                                    IgnoreFixed);
 EndProcedure
 
-Function GetParametersEditAccounting(Object, CurrentData, MainTableName, Filter_LedgerType = Undefined) Export
+Function GetParametersEditAccounting(Object, 
+		                             AccountingRowAnalytics, 
+		                             AccountingExtDimensions, 
+		                             CurrentData, 
+		                             MainTableName, 
+		                             Filter_LedgerType = Undefined) Export
 	Parameters = New Structure();
 	Parameters.Insert("DocumentRef"       , Object.Ref);
 	Parameters.Insert("MainTableName"     , MainTableName);
 	Parameters.Insert("ArrayOfLedgerTypes", AccountingServer.GetLedgerTypesByCompany(Object.Ref, Object.Date, Object.Company));
 	Parameters.Insert("RowKey"            , CurrentData.Key);
+	Parameters.Insert("AccountingRowAnalytics"  , AccountingRowAnalytics);
+	Parameters.Insert("AccountingExtDimensions" , AccountingExtDimensions);
 	
 	Parameters.Insert("AccountingAnalytics", New Array());
-	For Each RowAnalytics In Object.AccountingRowAnalytics Do
+	For Each RowAnalytics In AccountingRowAnalytics Do
 		If Not (RowAnalytics.Key = CurrentData.Key Or Not ValueIsFilled(RowAnalytics.Key)) Then
 			Continue;
 		EndIf;
@@ -32,7 +50,7 @@ Function GetParametersEditAccounting(Object, CurrentData, MainTableName, Filter_
 		NewAnalyticRow.Insert("DebitExtDimensions"  , New Array());
 		NewAnalyticRow.Insert("CreditExtDimensions" , New Array());
 	
-		For Each RowExtDimensions In Object.AccountingExtDimensions Do
+		For Each RowExtDimensions In AccountingExtDimensions Do
 			If RowExtDimensions.Key <> RowAnalytics.Key
 				Or RowExtDimensions.Operation <> RowAnalytics.Operation
 				Or RowExtDimensions.LedgerType <> RowAnalytics.LedgerType Then

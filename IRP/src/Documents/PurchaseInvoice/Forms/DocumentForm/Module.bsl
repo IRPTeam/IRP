@@ -18,6 +18,7 @@ EndProcedure
 &AtServer
 Procedure BeforeWriteAtServer(Cancel, CurrentObject, WriteParameters)
 	AddAttributesAndPropertiesServer.BeforeWriteAtServer(ThisObject, Cancel, CurrentObject, WriteParameters);
+	AccountingServer.BeforeWriteAtServer(Object, ThisObject, Cancel, CurrentObject, WriteParameters);
 EndProcedure
 
 &AtServer
@@ -810,7 +811,13 @@ EndProcedure
 
 &AtServer
 Procedure UpdateAccountingData()
-	AccountingClientServer.UpdateAccountingTables(Object, "ItemList");
+	_AccountingRowAnalytics = ThisObject.AccountingRowAnalytics.Unload();
+	_AccountingExtDimensions = ThisObject.AccountingExtDimensions.Unload();
+	AccountingClientServer.UpdateAccountingTables(Object, 
+			                                      _AccountingRowAnalytics, 
+		                                          _AccountingExtDimensions, "ItemList");
+	ThisObject.AccountingRowAnalytics.Load(_AccountingRowAnalytics);
+	ThisObject.AccountingExtDimensions.Load(_AccountingExtDimensions);
 EndProcedure
 
 #EndRegion

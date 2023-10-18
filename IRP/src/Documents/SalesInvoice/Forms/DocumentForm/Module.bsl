@@ -85,6 +85,7 @@ Procedure SetVisibilityAvailability(Object, Form)
 	Form.Items.LegalName.Enabled = ValueIsFilled(Object.Partner);
 	Form.Items.GroupAging.Visible = IsTransactionType_Sales;
 	Form.Items.EditCurrencies.Enabled = Not Form.ReadOnly;
+	Form.Items.EditAccounting.Enabled = Not Form.ReadOnly;
 	
 	_QuantityIsFixed = False;
 	For Each Row In Object.ItemList Do
@@ -800,6 +801,21 @@ EndProcedure
 &AtClient
 Procedure ShowHiddenTables(Command)
 	DocumentsClient.ShowHiddenTables(Object, ThisObject);
+EndProcedure
+
+&AtClient
+Procedure EditAccounting(Command)
+	CurrentData = ThisObject.Items.ItemList.CurrentData;
+	If CurrentData = Undefined Then
+		Return;
+	EndIf;
+	UpdateAccountingData();
+	AccountingClient.OpenFormEditAccounting(Object, ThisObject, CurrentData, "ItemList");
+EndProcedure
+
+&AtServer
+Procedure UpdateAccountingData()
+	AccountingClientServer.UpdateAccountingTables(Object, "ItemList");
 EndProcedure
 
 #EndRegion

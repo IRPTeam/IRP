@@ -196,6 +196,7 @@ Procedure SetVisibilityAvailability(Object, Form)
 	
 	Form.Items.TransitAccount.ReadOnly = ValueIsFilled(Object.TransitAccount);
 	Form.Items.EditCurrencies.Enabled = Not Form.ReadOnly;
+	Form.Items.EditAccounting.Enabled = Not Form.ReadOnly;
 EndProcedure
 
 &AtClient
@@ -598,6 +599,21 @@ EndProcedure
 &AtClient
 Procedure ShowHiddenTables(Command)
 	DocumentsClient.ShowHiddenTables(Object, ThisObject);
+EndProcedure
+
+&AtClient
+Procedure EditAccounting(Command)
+	CurrentData = ThisObject.Items.PaymentList.CurrentData;
+	If CurrentData = Undefined Then
+		Return;
+	EndIf;
+	UpdateAccountingData();
+	AccountingClient.OpenFormEditAccounting(Object, ThisObject, CurrentData, "PaymentList");
+EndProcedure
+
+&AtServer
+Procedure UpdateAccountingData()
+	AccountingClientServer.UpdateAccountingTables(Object, "PaymentList");
 EndProcedure
 
 #EndRegion

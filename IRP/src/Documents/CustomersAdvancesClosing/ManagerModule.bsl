@@ -1535,6 +1535,12 @@ Procedure Write_SelfRecords(Parameters, Records_OffsetOfAdvances)
 			Or TypeOf(Row.Document) = Type("DocumentRef.DebitNote") Or TypeOf(Row.Document) = Type(
 			"DocumentRef.OpeningEntry");
 
+		// Accounting amounts
+		RecordSet_AccountingAmounts = AccumulationRegisters.T1040T_AccountingAmounts.CreateRecordSet();
+		RecordSet_AccountingAmounts.Filter.Recorder.Set(Row.Document);
+		TableAccountingAmounts = RecordSet_AccountingAmounts.UnloadColumns();
+		TableAccountingAmounts.Columns.Delete(TableAccountingAmounts.Columns.PointInTime);
+
 		RecordSet_AdvancesFromCustomers = AccumulationRegisters.R2020B_AdvancesFromCustomers.CreateRecordSet();
 		RecordSet_AdvancesFromCustomers.Filter.Recorder.Set(Row.Document);
 		TableAdvances = RecordSet_AdvancesFromCustomers.UnloadColumns();
@@ -1550,6 +1556,7 @@ Procedure Write_SelfRecords(Parameters, Records_OffsetOfAdvances)
 		If UseKeyForCurrency Then
 			TableAdvances.Columns.Add("Key", Metadata.DefinedTypes.typeRowID.Type);
 			TableTransactions.Columns.Add("Key", Metadata.DefinedTypes.typeRowID.Type);
+			TableAccountingAmounts.Columns.Add("Key", Metadata.DefinedTypes.typeRowID.Type);
 		EndIf;
 
 		OffsetInfoByDocument = Records_OffsetOfAdvances.Copy(New Structure("Document", Row.Document));
@@ -1579,6 +1586,21 @@ Procedure Write_SelfRecords(Parameters, Records_OffsetOfAdvances)
 			If UseKeyForCurrency Then
 				NewRow_Transactions.Key = RowOffset.Key;
 			EndIf;
+			
+			// Accounting amounts
+			NewRow_AccountingAmounts = TableAccountingAmounts.Add();
+			FillPropertyValues(NewRow_AccountingAmounts, RowOffset);
+			NewRow_AccountingAmounts.AdvancesClosing = Parameters.Object.Ref;
+			NewRow_AccountingAmounts.RowKey = RowOffset.Key;
+			If TypeOf(Row.Document) = Type("DocumentRef.BankReceipt") Then
+				NewRow_AccountingAmounts.Operation = Catalogs.AccountingOperations.BankReceipt_DR_R2021B_CR_R2020B;
+			ElsIf TypeOf(Row.Document) = Type("DocumentRef.SalesInvoice") Then
+				NewRow_AccountingAmounts.Operation = Catalogs.AccountingOperations.SalesInvoice_DR_R2021B_CR_R2020B;
+			EndIf;
+			If UseKeyForCurrency Then
+				NewRow_AccountingAmounts.Key = RowOffset.Key;
+			EndIf;
+			
 		EndDo;
 	
 		// Currency calculation
@@ -1588,6 +1610,7 @@ Procedure Write_SelfRecords(Parameters, Records_OffsetOfAdvances)
 
 		PostingDataTables.Insert(RecordSet_AdvancesFromCustomers, New Structure("RecordSet", TableAdvances));
 		PostingDataTables.Insert(RecordSet_CustomersTransactions, New Structure("RecordSet", TableTransactions));
+		PostingDataTables.Insert(RecordSet_AccountingAmounts, New Structure("RecordSet", TableAccountingAmounts));
 		ArrayOfPostingInfo = New Array;
 		For Each DataTable In PostingDataTables Do
 			ArrayOfPostingInfo.Add(DataTable);
@@ -1615,6 +1638,16 @@ Procedure Write_SelfRecords(Parameters, Records_OffsetOfAdvances)
 				EndDo;
 				RecordSet_CustomersTransactions.SetActive(True);
 				RecordSet_CustomersTransactions.Write();
+			EndIf;
+			
+			// Accounting amounts (advances)
+			If TypeOf(ItemOfPostingInfo.Key) = Type("AccumulationRegisterRecordSet.T1040T_AccountingAmounts") Then
+				RecordSet_AccountingAmounts.Read();
+				For Each RowPostingInfo In ItemOfPostingInfo.Value.RecordSet Do
+					FillPropertyValues(RecordSet_AccountingAmounts.Add(), RowPostingInfo);
+				EndDo;
+				RecordSet_AccountingAmounts.SetActive(True);
+				RecordSet_AccountingAmounts.Write();
 			EndIf;
 		EndDo;
 	EndDo;
@@ -1652,43 +1685,60 @@ Procedure Clear_SelfRecords(Parameters)
 	|WHERE
 	|	R5011B_CustomersAging.AgingClosing = &Ref
 	|GROUP BY
-	|	R5011B_CustomersAging.Recorder";
-
+	|	R5011B_CustomersAging.Recorder
+	|;
+	|
+	|////////////////////////////////////////////////////////////////////////////////
+	|SELECT
+	|	T1040T_AccountingAmounts.Recorder
+	|FROM
+	|	AccumulationRegister.T1040T_AccountingAmounts AS T1040T_AccountingAmounts
+	|WHERE
+	|	T1040T_AccountingAmounts.AdvancesClosing = &Ref
+	|GROUP BY
+	|	T1040T_AccountingAmounts.Recorder";
+	
 	Ref = Parameters.Object.Ref;
 	Query.SetParameter("Ref", Ref);
 	QueryResults = Query.ExecuteBatch();
 
-	For Each Row In QueryResults[0].Unload() Do
-		RecordSet = AccumulationRegisters.R2020B_AdvancesFromCustomers.CreateRecordSet();
-		RecordSet.Filter.Recorder.Set(Row.Recorder);
-		RecordSet.Read();
-		ArrayForDelete = New Array;
-		For Each Record In RecordSet Do
-			If Record.CustomersAdvancesClosing = Ref Then
-				ArrayForDelete.Add(Record);
-			EndIf;
-		EndDo;
-		For Each ItemForDelete In ArrayForDelete Do
-			RecordSet.Delete(ItemForDelete);
-		EndDo;
-		RecordSet.Write();
-	EndDo;
+	ClearRegisterRecords(Ref, QueryResults[0].Unload(), "R2020B_AdvancesFromCustomers", "CustomersAdvancesClosing");
+	ClearRegisterRecords(Ref, QueryResults[1].Unload(), "R2021B_CustomersTransactions", "CustomersAdvancesClosing");
+	ClearRegisterRecords(Ref, QueryResults[2].Unload(), "R5011B_CustomersAging", "AgingClosing");
+	ClearRegisterRecords(Ref, QueryResults[3].Unload(), "T1040T_AccountingAmounts", "AdvancesClosing");
+	
 
-	For Each Row In QueryResults[1].Unload() Do
-		RecordSet = AccumulationRegisters.R2021B_CustomersTransactions.CreateRecordSet();
-		RecordSet.Filter.Recorder.Set(Row.Recorder);
-		RecordSet.Read();
-		ArrayForDelete = New Array;
-		For Each Record In RecordSet Do
-			If Record.CustomersAdvancesClosing = Ref Then
-				ArrayForDelete.Add(Record);
-			EndIf;
-		EndDo;
-		For Each ItemForDelete In ArrayForDelete Do
-			RecordSet.Delete(ItemForDelete);
-		EndDo;
-		RecordSet.Write();
-	EndDo;
+//	For Each Row In QueryResults[0].Unload() Do
+//		RecordSet = AccumulationRegisters.R2020B_AdvancesFromCustomers.CreateRecordSet();
+//		RecordSet.Filter.Recorder.Set(Row.Recorder);
+//		RecordSet.Read();
+//		ArrayForDelete = New Array;
+//		For Each Record In RecordSet Do
+//			If Record.CustomersAdvancesClosing = Ref Then
+//				ArrayForDelete.Add(Record);
+//			EndIf;
+//		EndDo;
+//		For Each ItemForDelete In ArrayForDelete Do
+//			RecordSet.Delete(ItemForDelete);
+//		EndDo;
+//		RecordSet.Write();
+//	EndDo;
+
+//	For Each Row In QueryResults[1].Unload() Do
+//		RecordSet = AccumulationRegisters.R2021B_CustomersTransactions.CreateRecordSet();
+//		RecordSet.Filter.Recorder.Set(Row.Recorder);
+//		RecordSet.Read();
+//		ArrayForDelete = New Array;
+//		For Each Record In RecordSet Do
+//			If Record.CustomersAdvancesClosing = Ref Then
+//				ArrayForDelete.Add(Record);
+//			EndIf;
+//		EndDo;
+//		For Each ItemForDelete In ArrayForDelete Do
+//			RecordSet.Delete(ItemForDelete);
+//		EndDo;
+//		RecordSet.Write();
+//	EndDo;
 
 	For Each Row In QueryResults[2].Unload() Do
 		RecordSet = AccumulationRegisters.R5011B_CustomersAging.CreateRecordSet();
@@ -1697,6 +1747,24 @@ Procedure Clear_SelfRecords(Parameters)
 		ArrayForDelete = New Array;
 		For Each Record In RecordSet Do
 			If Record.AgingClosing = Ref Then
+				ArrayForDelete.Add(Record);
+			EndIf;
+		EndDo;
+		For Each ItemForDelete In ArrayForDelete Do
+			RecordSet.Delete(ItemForDelete);
+		EndDo;
+		RecordSet.Write();
+	EndDo;
+EndProcedure
+
+Procedure ClearRegisterRecords(DocRef, TableOfRecorders, RegisterName, AttrName)
+	For Each Row In TableOfRecorders Do
+		RecordSet = AccumulationRegisters[RegisterName].CreateRecordSet();
+		RecordSet.Filter.Recorder.Set(Row.Recorder);
+		RecordSet.Read();
+		ArrayForDelete = New Array;
+		For Each Record In RecordSet Do
+			If Record[AttrName] = DocRef Then
 				ArrayForDelete.Add(Record);
 			EndIf;
 		EndDo;

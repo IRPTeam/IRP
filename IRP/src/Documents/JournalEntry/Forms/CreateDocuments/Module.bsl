@@ -4,6 +4,7 @@ Procedure OnCreateAtServer(Cancel, StandardProcessing)
 	ArrayOfDocuments = New Array();
 	Docs = Metadata.Documents;
 	ArrayOfDocuments.Add(Docs.BankPayment);	
+	ArrayOfDocuments.Add(Docs.BankReceipt);	
 	ArrayOfDocuments.Add(Docs.PurchaseInvoice);	
 	ArrayOfDocuments.Add(Docs.RetailSalesReceipt);
 	

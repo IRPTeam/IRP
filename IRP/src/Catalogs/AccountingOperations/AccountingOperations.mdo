@@ -179,10 +179,17 @@
       </code>
       <isFolder>true</isFolder>
       <content id="84005d98-3b5e-4d01-9885-c136d7fa2202">
-        <name>BankReceipt_DR_R3010B_CR_R2021B</name>
+        <name>BankReceipt_DR_R3010B_CR_R2020B_R2021B</name>
         <description>Dr Cash account - Cr partner account</description>
         <code xsi:type="core:NumberValue">
           <value>4</value>
+        </code>
+      </content>
+      <content id="e6f92cc0-3065-4c8d-b902-aee4c0468291">
+        <name>BankReceipt_DR_R2021B_CR_R2020B</name>
+        <description></description>
+        <code xsi:type="core:NumberValue">
+          <value>14</value>
         </code>
       </content>
     </items>
@@ -225,6 +232,42 @@
         <name>RetailSalesReceipt_DR_R5022T_CR_R4050B</name>
         <code xsi:type="core:NumberValue">
           <value>12</value>
+        </code>
+      </content>
+    </items>
+    <items id="ac174994-2762-4d95-8dc9-154a578a14a2">
+      <name>Document_SalesInvoice</name>
+      <description></description>
+      <code xsi:type="core:NumberValue">
+        <value>13</value>
+      </code>
+      <isFolder>true</isFolder>
+      <content id="13cc96b1-55aa-4a8f-9ffa-84fd9cd02e1c">
+        <name>SalesInvoice_DR_R2021B_CR_R5021T</name>
+        <description></description>
+        <code xsi:type="core:NumberValue">
+          <value>15</value>
+        </code>
+      </content>
+      <content id="1b7650ad-043d-4694-a395-c0f1ec19d281">
+        <name>SalesInvoice_DR_R5021T_CR_R1040B</name>
+        <description></description>
+        <code xsi:type="core:NumberValue">
+          <value>16</value>
+        </code>
+      </content>
+      <content id="0e27f185-a673-4288-a461-e63f85ec7165">
+        <name>SalesInvoice_DR_R5022T_CR_R4050B</name>
+        <description></description>
+        <code xsi:type="core:NumberValue">
+          <value>17</value>
+        </code>
+      </content>
+      <content id="3070b93b-5d84-4762-a76a-9a4a2167f2ee">
+        <name>SalesInvoice_DR_R2021B_CR_R2020B</name>
+        <description></description>
+        <code xsi:type="core:NumberValue">
+          <value>18</value>
         </code>
       </content>
     </items>

@@ -208,6 +208,7 @@ Procedure PostingCheckBeforeWrite(Ref, Cancel, PostingMode, Parameters, AddInfo 
 	Tables.R3011T_CashFlow.Columns.Add("Key", Metadata.DefinedTypes.typeRowID.Type);
 	Tables.R5021T_Revenues.Columns.Add("Key", Metadata.DefinedTypes.typeRowID.Type);
 	Tables.R5015B_OtherPartnersTransactions.Columns.Add("Key", Metadata.DefinedTypes.typeRowID.Type);
+	Tables.T1040T_AccountingAmounts.Columns.Add("Key", Metadata.DefinedTypes.typeRowID.Type);
 
 	PostingServer.FillPostingTables(Tables, Ref, QueryArray, Parameters);
 EndProcedure
@@ -422,6 +423,7 @@ Function GetQueryTextsMasterTables()
 	QueryArray.Add(R5022T_Expenses());
 	QueryArray.Add(T2014S_AdvancesInfo());
 	QueryArray.Add(T2015S_TransactionsInfo());
+	QueryArray.Add(T1040T_AccountingAmounts());
 	Return QueryArray;
 EndFunction
 
@@ -1027,3 +1029,116 @@ Function GetAccessKey(Obj) Export
 EndFunction
 
 #EndRegion
+
+#Region Accounting
+
+Function T1040T_AccountingAmounts()
+	Return "SELECT
+		   |	PaymentList.Period,
+		   |	PaymentList.Key AS RowKey,
+		   |	PaymentList.Key AS Key,
+		   |	PaymentList.Currency,
+		   |	PaymentList.Amount,
+		   |	VALUE(Catalog.AccountingOperations.BankReceipt_DR_R3010B_CR_R2020B_R2021B) AS Operation,
+		   |	UNDEFINED AS AdvancesClosing
+		   |INTO T1040T_AccountingAmounts
+		   |FROM
+		   |	PaymentList AS PaymentList
+		   |WHERE
+		   |	PaymentList.IsPaymentFromCustomer
+		   |
+		   |UNION ALL
+		   |
+		   |SELECT
+		   |	OffsetOfAdvances.Period,
+		   |	OffsetOfAdvances.Key,
+		   |	OffsetOfAdvances.Key,
+		   |	OffsetOfAdvances.Currency,
+		   |	OffsetOfAdvances.Amount,
+		   |	VALUE(Catalog.AccountingOperations.BankReceipt_DR_R2021B_CR_R2020B),
+		   |	OffsetOfAdvances.Recorder
+		   |FROM
+		   |	InformationRegister.T2010S_OffsetOfAdvances AS OffsetOfAdvances
+		   |WHERE
+		   |	OffsetOfAdvances.Document = &Ref";
+EndFunction
+
+Function GetAccountingAnalytics(Parameters) Export
+	If Parameters.Operation = Catalogs.AccountingOperations.BankReceipt_DR_R3010B_CR_R2020B_R2021B Then
+		Return GetAnalytics_DR_R3010B_CR_R2020B_R2021B(Parameters); // Cash on hand -  Customer transactions
+	ElsIf Parameters.Operation = Catalogs.AccountingOperations.BankReceipt_DR_R2021B_CR_R2020B Then
+		Return GetAnalytics_DR_R2021B_CR_R2020B(Parameters); // Customer transactions - Advances from customer 
+	EndIf;
+	Return Undefined;
+EndFunction
+
+#Region Accounting_Analytics
+
+// Cash on hand - Customer transaction
+Function GetAnalytics_DR_R3010B_CR_R2020B_R2021B(Parameters)
+	AccountingAnalytics = AccountingServer.GetAccountingAnalyticsResult(Parameters);
+	AccountParameters   = AccountingServer.GetAccountParameters(Parameters);
+	
+	Debit = AccountingServer.GetT9011S_AccountsCashAccount(AccountParameters, Parameters.ObjectData.Account);
+	If ValueIsFilled(Debit.Account) Then
+		AccountingAnalytics.Debit = Debit.Account;
+	EndIf;
+	// Debit - Analytics
+	AdditionalAnalytics = New Structure();
+	AdditionalAnalytics.Insert("Account", Parameters.ObjectData.Account);
+	AccountingServer.SetDebitExtDimensions(Parameters, AccountingAnalytics, AdditionalAnalytics);
+	
+	Credit = AccountingServer.GetT9012S_AccountsPartner(AccountParameters, Parameters.RowData.Partner, Parameters.RowData.Agreement);
+	IsAdvance = AccountingServer.IsAdvance(Parameters.RowData);
+	If IsAdvance Then
+		If ValueIsFilled(Credit.AccountAdvancesCustomer) Then
+			AccountingAnalytics.Credit = Credit.AccountAdvancesCustomer;
+		EndIf;
+	Else
+		If ValueIsFilled(Credit.AccountTransactionsCustomer) Then
+			AccountingAnalytics.Credit = Credit.AccountTransactionsCustomer;
+		EndIf;
+	EndIf;
+	// Credit - Analytics
+	AccountingServer.SetCreditExtDimensions(Parameters, AccountingAnalytics);
+	
+	Return AccountingAnalytics;
+EndFunction
+
+// Customer transactions - Advances from customer
+Function GetAnalytics_DR_R2021B_CR_R2020B(Parameters)
+	AccountingAnalytics = AccountingServer.GetAccountingAnalyticsResult(Parameters);
+	AccountParameters   = AccountingServer.GetAccountParameters(Parameters);
+
+	Accounts = AccountingServer.GetT9012S_AccountsPartner(AccountParameters, Parameters.RowData.Partner, Parameters.RowData.Agreement);
+	If ValueIsFilled(Accounts.AccountTransactionsCustomer) Then
+		AccountingAnalytics.Debit = Accounts.AccountTransactionsCustomer;
+	EndIf;
+	// Debit - Analytics
+	AccountingServer.SetDebitExtDimensions(Parameters, AccountingAnalytics);
+
+	If ValueIsFilled(Accounts.AccountAdvancesCustomer) Then
+		AccountingAnalytics.Credit = Accounts.AccountAdvancesCustomer;
+	EndIf;
+	// Credit - Analytics
+	AccountingServer.SetCreditExtDimensions(Parameters, AccountingAnalytics);
+
+	Return AccountingAnalytics;
+EndFunction
+
+Function GetHintDebitExtDimension(Parameters, ExtDimensionType, Value) Export
+	If Parameters.Operation = Catalogs.AccountingOperations.BankReceipt_DR_R3010B_CR_R2020B_R2021B 
+		And ExtDimensionType.ValueType.Types().Find(Type("CatalogRef.ExpenseAndRevenueTypes")) <> Undefined Then
+		Return Parameters.RowData.FinancialMovementType;
+	EndIf;
+	Return Value;
+EndFunction
+
+Function GetHintCreditExtDimension(Parameters, ExtDimensionType, Value) Export
+	Return Value;
+EndFunction
+
+#EndRegion
+
+#EndRegion
+

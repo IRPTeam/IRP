@@ -460,7 +460,7 @@ Function __GetT9012S_AccountsPartner(Period, Company, LedgerTypeVariant, Partner
 	Result.Insert("AccountAdvancesVendor"        , Undefined);
 	Result.Insert("AccountTransactionsVendor"    , Undefined);
 	Result.Insert("AccountAdvancesCustomer"      , Undefined);
-	Result.Insert("AccountTransactionsCustomers" , Undefined);
+	Result.Insert("AccountTransactionsCustomer" , Undefined);
 
 	If QuerySelection.Next() Then
 		FillPropertyValues(Result, QuerySelection);
@@ -809,12 +809,19 @@ Function GetOperationsDefinition()
 	Map.Insert(AO.BankPayment_DR_R5022T_CR_R3010B , New Structure("ByRow", True));
 	
 	// Bank receipt
-	Map.Insert(AO.BankReceipt_DR_R3010B_CR_R2021B , New Structure("ByRow", True));
+	Map.Insert(AO.BankReceipt_DR_R3010B_CR_R2020B_R2021B , New Structure("ByRow", True));
+	Map.Insert(AO.BankReceipt_DR_R2021B_CR_R2020B , New Structure("ByRow", True));
 	
 	// Purchase invoice
 	Map.Insert(AO.PurchaseInvoice_DR_R4050B_R5022T_CR_R1021B , New Structure("ByRow", True));
 	Map.Insert(AO.PurchaseInvoice_DR_R1021B_CR_R1020B , New Structure("ByRow", False));
 	Map.Insert(AO.PurchaseInvoice_DR_R1040B_CR_R1021B , New Structure("ByRow", True));
+	
+	// Sales invoice
+	Map.Insert(AO.SalesInvoice_DR_R2021B_CR_R2020B , New Structure("ByRow", False));
+	Map.Insert(AO.SalesInvoice_DR_R2021B_CR_R5021T , New Structure("ByRow", True));
+	Map.Insert(AO.SalesInvoice_DR_R5021T_CR_R1040B , New Structure("ByRow", True));
+	Map.Insert(AO.SalesInvoice_DR_R5022T_CR_R4050B , New Structure("ByRow", True));
 	
 	// Retail sales receipt
 	Map.Insert(AO.RetailSalesReceipt_DR_R5022T_CR_R4050B , New Structure("ByRow", True));
@@ -834,7 +841,7 @@ Function GetAccountingData_RetailSalesReceipt_DR_R5022T_CR_R4050B(Parameters)
 	|	ItemList.QuantityInBaseUnit
 	|INTO ItemList
 	|FROM
-	|	Document.RetailSalesReceipt.ItemList AS ItemList
+	|	Document.%1.ItemList AS ItemList
 	|WHERE
 	|	ItemList.Ref = &Recorder and ItemList.Key = &RowKey
 	|;
@@ -845,7 +852,7 @@ Function GetAccountingData_RetailSalesReceipt_DR_R5022T_CR_R4050B(Parameters)
 	|	R6020B_BatchBalance.Company.LandedCostCurrencyMovementType.Currency AS Currency,
 	|	ItemList.QuantityInBaseUnit AS Quantity,
 	|	sum(isnull(R6020B_BatchBalance.Quantity, 0)) AS QuantityBatchBalance,
-	|	sum(isnull(R6020B_BatchBalance.Amount, 0)) + sum(isnull(R6020B_BatchBalance.AllocatedCostAmount, 0)) AS AmountBatchBalance,
+	|	sum(isnull(R6020B_BatchBalance.TotalNetAmount, 0)) AS AmountBatchBalance,
 	|	0 AS Amount
 	|FROM
 	|	ItemList AS ItemList
@@ -857,6 +864,8 @@ Function GetAccountingData_RetailSalesReceipt_DR_R5022T_CR_R4050B(Parameters)
 	|	ItemList.Key,
 	|	R6020B_BatchBalance.Company.LandedCostCurrencyMovementType.Currency,
 	|	ItemList.QuantityInBaseUnit";
+	
+	Query.Text = StrTemplate(Query.Text, Parameters.Recorder.MeTadata().Name);
 	
 	OperationsDefinition = GetOperationsDefinition();
 	Property = OperationsDefinition.Get(Parameters.Operation);
@@ -1007,6 +1016,10 @@ EndFunction
 Function GetAccountingData(Parameters)
 	// test function landed cost
 	If Parameters.Operation = Catalogs.AccountingOperations.RetailSalesReceipt_DR_R5022T_CR_R4050B Then
+		Return GetAccountingData_RetailSalesReceipt_DR_R5022T_CR_R4050B(Parameters);
+	EndIf;
+	
+	If Parameters.Operation = Catalogs.AccountingOperations.SalesInvoice_DR_R5022T_CR_R4050B Then
 		Return GetAccountingData_RetailSalesReceipt_DR_R5022T_CR_R4050B(Parameters);
 	EndIf;
 	

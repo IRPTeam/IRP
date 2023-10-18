@@ -1003,7 +1003,9 @@ Function GetAnalytics_DR_R1020B_R1021B_CR_3010B(Parameters)
 		AccountingAnalytics.Credit = Credit.Account;
 	EndIf;
 	// Credit - Analytics
-	AccountingServer.SetCreditExtDimensions(Parameters, AccountingAnalytics);
+	AdditionalAnalytics = New Structure();
+	AdditionalAnalytics.Insert("Account", Parameters.ObjectData.Account);
+	AccountingServer.SetCreditExtDimensions(Parameters, AccountingAnalytics, AdditionalAnalytics);
 	Return AccountingAnalytics;
 EndFunction
 
@@ -1045,7 +1047,9 @@ Function GetAnalytics_DRr5022T_CR_3010B(Parameters)
 		AccountingAnalytics.Credit = Credit.Account;
 	EndIf;
 	// Credit - Analytics
-	AccountingServer.SetCreditExtDimensions(Parameters, AccountingAnalytics);
+	AdditionalAnalytics = New Structure();
+	AdditionalAnalytics.Insert("Account", Parameters.ObjectData.Account);
+	AccountingServer.SetCreditExtDimensions(Parameters, AccountingAnalytics, AdditionalAnalytics);
 	Return AccountingAnalytics;
 EndFunction
 

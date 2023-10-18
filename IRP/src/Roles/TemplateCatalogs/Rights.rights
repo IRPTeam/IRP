@@ -31,7 +31,7 @@
 			<name>Insert</name>
 			<value>false</value>
 			<restrictionByCondition>
-				<condition>Table WHERE #Access("Company", "Company", "")</condition>
+				<condition>Table WHERE #Access("Company", "Table.Company", "")</condition>
 			</restrictionByCondition>
 		</right>
 		<right>
@@ -333,7 +333,7 @@
 			<name>Insert</name>
 			<value>false</value>
 			<restrictionByCondition>
-				<condition>Table WHERE #Access("Company", "Company", "") AND (#Access("Account", "Ref", "") OR #Access("Branch", "Branch", ""))</condition>
+				<condition>Table WHERE #Access("Company", "Table.Company", "") AND (#Access("Account", "Table.Ref", "") OR #Access("Branch", "Table.Branch", ""))</condition>
 			</restrictionByCondition>
 		</right>
 		<right>
@@ -681,6 +681,13 @@
 			<name>InputByString</name>
 			<value>true</value>
 		</right>
+		<right>
+			<name>Insert</name>
+			<value>false</value>
+			<restrictionByCondition>
+				<condition>Table WHERE #Access("Store", "Table.Ref", "")</condition>
+			</restrictionByCondition>
+		</right>
 	</object>
 	<object>
 		<name>Catalog.AccessProfiles</name>
@@ -920,7 +927,7 @@
 			<name>Insert</name>
 			<value>false</value>
 			<restrictionByCondition>
-				<condition>Table WHERE #Access("Branch", "Ref", "")</condition>
+				<condition>Table WHERE #Access("Branch", "Table.Ref", "")</condition>
 			</restrictionByCondition>
 		</right>
 		<right>
@@ -1147,7 +1154,7 @@
 			<name>Insert</name>
 			<value>false</value>
 			<restrictionByCondition>
-				<condition>Table WHERE #Access("PriceType", "Ref", "TRUE OR Table.Predefined")</condition>
+				<condition>Table WHERE #Access("PriceType", "Table.Ref", "TRUE OR Table.Predefined")</condition>
 			</restrictionByCondition>
 		</right>
 		<right>
@@ -1341,7 +1348,7 @@
 			<name>Insert</name>
 			<value>false</value>
 			<restrictionByCondition>
-				<condition>Table WHERE #Access("Company", "Ref", "TRUE OR NOT Table.OurCompany")</condition>
+				<condition>Table WHERE #Access("Company", "Table.Ref", "TRUE OR NOT Table.OurCompany")</condition>
 			</restrictionByCondition>
 		</right>
 		<right>

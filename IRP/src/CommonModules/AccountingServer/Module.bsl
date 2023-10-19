@@ -1185,8 +1185,11 @@ Procedure OnWrite(Object, Cancel) Export
 		RecordSet.Read();
 		_AccountingExtDimensions = RecordSet.Unload();
 	EndIf;
-			
-	AccountingClientServer.UpdateAccountingTables(Object, _AccountingRowAnalytics, _AccountingExtDimensions, "PaymentList");
+		
+	AccountingClientServer.UpdateAccountingTables(Object, 
+		                                         _AccountingRowAnalytics, 
+		                                         _AccountingExtDimensions,
+		                                         AccountingClientServer.GetDocumentMainTable(Object));
 		
 	Object.AdditionalProperties.Insert("AccountingRowAnalytics"  , _AccountingRowAnalytics);
 	Object.AdditionalProperties.Insert("AccountingExtDimensions" , _AccountingExtDimensions);

@@ -291,6 +291,8 @@ Function PostingGetDocumentDataTables(Ref, Cancel, PostingMode, Parameters, AddI
 	Query.SetParameter("T2", BatchKeysInfo_DataTableGrouped);
 	Query.Execute();
 
+	AccountingServer.CreateAccountingDataTables(Ref, Cancel, PostingMode, Parameters, AddInfo);
+
 	Return Tables;
 EndFunction
 

@@ -76,17 +76,12 @@ Procedure UpdateAnalyticsAtServer(DocumentName)
 		RecordSet_T9051S.Filter.Recorder.Set(QuerySelection.Ref);
 		RecordSet_T9051S.Read();
 		_AccountingExtDimensions = RecordSet_T9051S.Unload();
-			
-		MainTable = "";
-		If CommonFunctionsClientServer.ObjectHasProperty(QuerySelection.Ref, "ItemList") Then
-			MainTable = "ItemList";
-		ElsIf CommonFunctionsClientServer.ObjectHasProperty(QuerySelection.Ref, "PaymentList") Then
-			MainTable = "PaymentList";
-		Else
-			Raise StrTemplate("Main table is not defined [%1]", QuerySelection.Ref);
-		EndIf;
-		
-		AccountingClientServer.UpdateAccountingTables(QuerySelection.Ref, _AccountingRowAnalytics, _AccountingExtDimensions, MainTable);
+					
+		AccountingClientServer.UpdateAccountingTables(QuerySelection.Ref, 
+													  _AccountingRowAnalytics, 
+													  _AccountingExtDimensions, 
+													  AccountingClientServer.GetDocumentMainTable(QuerySelection.Ref));
+													  
 		_AccountingRowAnalytics.FillValues(True, "Active");
 		_AccountingExtDimensions.FillValues(True, "Active");
 		

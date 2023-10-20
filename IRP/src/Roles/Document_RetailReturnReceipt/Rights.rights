@@ -111,6 +111,20 @@
 			<value>true</value>
 		</right>
 	</object>
+	<object>
+		<name>Document.RetailReturnReceipt.Command.PrintReceipt</name>
+		<right>
+			<name>View</name>
+			<value>true</value>
+		</right>
+	</object>
+	<object>
+		<name>Document.RetailReturnReceipt.Command.Genarate</name>
+		<right>
+			<name>View</name>
+			<value>true</value>
+		</right>
+	</object>
 	<restrictionTemplate>
 		<name>CheckDocumentAccess</name>
 		<condition>

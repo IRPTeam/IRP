@@ -1027,8 +1027,8 @@ EndFunction
 //  ExternalFunction - CatalogRef.ExternalFunctions - External function
 Procedure CreateScheduledJob(ExternalFunction) Export
 	
-	If Not ExternalFunction.isSchedulerSet Or Not ExternalFunction.Enable Then
-		DeleteScheduledJob(ExternalFunction);
+	DeleteScheduledJob(ExternalFunction);
+	If Not ExternalFunction.isSchedulerSet Or Not ExternalFunction.Enable Then		
 		Return;
 	EndIf;
 
@@ -1040,6 +1040,7 @@ Procedure CreateScheduledJob(ExternalFunction) Export
 	NewScheduledJobs.Description = ExternalFunction.Description;
 	NewScheduledJobs.Key = String(ExternalFunction.UUID());
 	NewScheduledJobs.Use = ExternalFunction.isSchedulerSet;
+	NewScheduledJobs.UserName = ExternalFunction.User.Description;
 	JobSchedule = ExternalFunction.JobSchedule.Get(); // JobSchedule
 	NewScheduledJobs.Schedule = JobSchedule;
 	//@skip-check typed-value-adding-to-untyped-collection

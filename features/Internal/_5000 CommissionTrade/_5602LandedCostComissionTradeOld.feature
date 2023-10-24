@@ -1,6 +1,7 @@
-#language: en
+﻿#language: en
 @tree
 @Positive
+@CommissionTradeLandedCost
 
 
 
@@ -36,6 +37,7 @@ Scenario: _05702 preparation (landed cost commission trade)
 		When Create catalog Units objects
 		When Create catalog Items objects
 		When Create catalog PriceTypes objects
+		When Create catalog Items objects (commission trade)
 		When Create catalog Specifications objects
 		When Create catalog Partners objects (trade agent and consignor)
 		When Create chart of characteristic types AddAttributeAndProperty objects
@@ -61,9 +63,12 @@ Scenario: _05702 preparation (landed cost commission trade)
 		When Create information register CurrencyRates records
 		When Create catalog BusinessUnits objects
 		When Create catalog ExpenseAndRevenueTypes objects
+		When Create catalog SerialLotNumbers objects
 		When update ItemKeys
 		When Create catalog Partners objects
 		When Data preparation (comission stock)
+		* Setting for Company
+			When settings for Company (commission trade)
 		When Create information register Taxes records (VAT)
 		When Create catalog Partners objects (Kalipso)
 	* Load documents

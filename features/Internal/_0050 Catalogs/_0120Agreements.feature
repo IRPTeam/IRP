@@ -413,6 +413,7 @@ Scenario: _012005 creation of an individual Partner term in USD
 		And I click "Save and close" button
 		And I click "Select" button
 		And I click "Save and close" button
+		And Delay 5
 		Then I check for the "Agreements" catalog element with the "Description_en" 'Vendor Ferron, TRY'
 	* Creating and checking vendor Partner term Vendor Ferron, USD
 		Given I open hyperlink "e1cib/list/Catalog.Agreements"

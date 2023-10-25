@@ -1533,3 +1533,115 @@ Scenario: _050054 check filling consignor from serial lot number in the SalesInv
 			| 'Product 12 with SLN (Main Company - different consignor for item key)' | 'Consignor 1' | '1123'                | 'pcs'  | 'ODS'      | '1,000'    |
 			| 'Product 16 with SLN (Main Company - Consignor 2)'                      | 'Consignor 2' | '900889900900777'     | 'pcs'  | 'PZU'      | '1,000'    |	
 		And I close all client application windows
+
+Scenario: _050055 check filling consignor from serial lot number in the IT (scan barcode)
+	And I close all client application windows
+	Given I open hyperlink "e1cib/list/Document.InventoryTransfer"
+	And I click the button named "FormCreate"
+	* Filling in the details
+		And I select from the drop-down list named "Company" by "main company" string
+		And I select from "Store sender" drop-down list by "01" string
+		And I select from "Store receiver" drop-down list by "02" string
+	* Add items (scan barcode)
+		And in the table "ItemList" I click the button named "SearchByBarcode"
+		And I input "11111111111111" text in the field named "Barcode"
+		And I move to the next attribute
+		And in the table "ItemList" I click the button named "SearchByBarcode"
+		And I input "11111111111111" text in the field named "Barcode"
+		And I move to the next attribute
+		And in the table "ItemList" I click the button named "SearchByBarcode"
+		And I input "57897909799" text in the field named "Barcode"
+		And I move to the next attribute
+		And in the table "ItemList" I click the button named "SearchByBarcode"
+		And I input "0909088998998898789" text in the field named "Barcode"
+		And I move to the next attribute
+		And in the table "ItemList" I click the button named "SearchByBarcode"
+		And I input "0909088998998898790" text in the field named "Barcode"
+		And I move to the next attribute
+		And in the table "ItemList" I click the button named "SearchByBarcode"
+		And I input "0909088998998898791" text in the field named "Barcode"
+		And I move to the next attribute
+	* Add items (input by line)
+		And in the table "ItemList" I click the button named "ItemListAdd"
+		And I activate "Item" field in "ItemList" table
+		And I select current line in "ItemList" table
+		And I select "Product 12 with SLN (Main Company - different consignor for item key)" from "Item" drop-down list by string in "ItemList" table
+		And I finish line editing in "ItemList" table
+		And I activate field named "ItemListItemKey" in "ItemList" table
+		And I select current line in "ItemList" table
+		And I select "ODS" by string from the drop-down list named "ItemListItemKey" in "ItemList" table
+		And I finish line editing in "ItemList" table	
+		And I click choice button of "Serial lot numbers" attribute in "ItemList" table
+		And in the table "SerialLotNumbers" I click "Add" button
+		And I click choice button of the attribute named "SerialLotNumbersSerialLotNumber" in "SerialLotNumbers" table
+		And I go to line in "List" table
+			| 'Serial number'   |
+			| '1123' |
+		And I select current line in "List" table
+		And I activate "Quantity" field in "SerialLotNumbers" table
+		And I input "1,000" text in "Quantity" field of "SerialLotNumbers" table
+		And I finish line editing in "SerialLotNumbers" table
+		And I click "Ok" button			
+	* Select from list
+		And in the table "ItemList" I click the button named "ItemListAdd"
+		And I activate "Item" field in "ItemList" table
+		And I click choice button of "Item" attribute in "ItemList" table
+		And I go to line in "List" table
+			| 'Description'                                      |
+			| 'Product 16 with SLN (Main Company - Consignor 2)' |
+		And I select current line in "List" table
+		And I activate field named "ItemListItemKey" in "ItemList" table
+		And I click choice button of the attribute named "ItemListItemKey" in "ItemList" table
+		And I go to line in "List" table
+			| 'Item'                                             | 'Item key' |
+			| 'Product 16 with SLN (Main Company - Consignor 2)' | 'PZU'      |
+		And I select current line in "List" table
+		And I click choice button of "Serial lot numbers" attribute in "ItemList" table
+		And in the table "SerialLotNumbers" I click "Add" button
+		And I click choice button of the attribute named "SerialLotNumbersSerialLotNumber" in "SerialLotNumbers" table
+		And I go to line in "List" table
+			| 'Owner' | 'Serial number'   |
+			| 'PZU'   | '900889900900777' |
+		And I select current line in "List" table
+		And I activate "Quantity" field in "SerialLotNumbers" table
+		And I input "1,000" text in "Quantity" field of "SerialLotNumbers" table
+		And I finish line editing in "SerialLotNumbers" table
+		And I click "Ok" button
+		* Add one more item (consignor in the SLN)
+			And in the table "ItemList" I click the button named "ItemListAdd"
+			And I activate "Item" field in "ItemList" table
+			And I click choice button of "Item" attribute in "ItemList" table
+			And I go to line in "List" table
+				| 'Description'             |
+				| 'Product with Unique SLN' |
+			And I activate field named "Description" in "List" table
+			And I select current line in "List" table
+			And I activate field named "ItemListItemKey" in "ItemList" table
+			And I click choice button of the attribute named "ItemListItemKey" in "ItemList" table
+			And I go to line in "List" table
+				| 'Item'                    | 'Item key' |
+				| 'Product with Unique SLN' | 'ODS'      |
+			And I activate "Item key" field in "List" table
+			And I select current line in "List" table
+			And I click choice button of "Serial lot numbers" attribute in "ItemList" table
+			And I click Select button of "Serial lot number" field
+			Then "Item serial/lot numbers" window is opened
+			And I go to line in "List" table
+				| 'Owner' | 'Serial number'       |
+				| 'ODS'   | '0909088998998898789' |
+			And I activate "Serial number" field in "List" table
+			And I select current line in "List" table
+			And I click "Ok" button
+	* Check consignor
+		And "ItemList" table became equal
+			| 'Item'                                                                  | 'Serial lot numbers'  | 'Unit' | 'Item key' | 'Quantity' |'Inventory origin'     |
+			| 'Product 11 with SLN (Main Company - Consignor 1)'                      | '11111111111111'      | 'pcs'  | 'UNIQ'     | '1,000'    | 'Consignor stocks'    |
+			| 'Product 11 with SLN (Main Company - Consignor 1)'                      | '11111111111111'      | 'pcs'  | 'UNIQ'     | '1,000'    | 'Consignor stocks'    |
+			| 'Product 6 with SLN'                                                    | '57897909799'         | 'pcs'  | 'PZU'      | '1,000'    | 'Own stocks'          |
+			| 'Product with Unique SLN'                                               | '0909088998998898789' | 'pcs'  | 'ODS'      | '1,000'    | 'Consignor stocks'    |
+			| 'Product with Unique SLN'                                               | '0909088998998898790' | 'pcs'  | 'ODS'      | '1,000'    | 'Consignor stocks'    |
+			| 'Product with Unique SLN'                                               | '0909088998998898791' | 'pcs'  | 'PZU'      | '1,000'    | 'Consignor stocks'    |
+			| 'Product 12 with SLN (Main Company - different consignor for item key)' | '1123'                | 'pcs'  | 'ODS'      | '1,000'    | 'Consignor stocks'    |
+			| 'Product 16 with SLN (Main Company - Consignor 2)'                      | '900889900900777'     | 'pcs'  | 'PZU'      | '1,000'    | 'Consignor stocks'    |
+			| 'Product with Unique SLN'                                               | '0909088998998898789' | 'pcs'  | 'ODS'      | '1,000'    | 'Consignor stocks'    |
+		And I close all client application windows			

@@ -111,6 +111,13 @@
 			<value>true</value>
 		</right>
 	</object>
+	<object>
+		<name>Document.JournalEntry.Command.JournalEntry</name>
+		<right>
+			<name>View</name>
+			<value>true</value>
+		</right>
+	</object>
 	<restrictionTemplate>
 		<name>CheckDocumentAccess</name>
 		<condition>

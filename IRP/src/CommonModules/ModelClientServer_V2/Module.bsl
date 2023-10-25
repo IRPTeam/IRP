@@ -421,6 +421,9 @@ Function GetChain()
 	Chain.Insert("ChangeCourierByTransactionType"        , GetChainLink("ChangeCourierByTransactionTypeExecute"));
 	Chain.Insert("ChangeShipmentModeByTransactionType"   , GetChainLink("ChangeShipmentModeByTransactionTypeExecute"));
 	
+	Chain.Insert("ChangeResponsiblePersonSenderByFixedAsset" , GetChainLink("ChangeResponsiblePersonSenderByFixedAssetExecute"));
+	Chain.Insert("ChangeBusinessUnitSenderByFixedAsset"            , GetChainLink("ChangeBusinessUnitSenderByFixedAssetExecute"));
+	
 	// Extractors
 	Chain.Insert("ExtractDataAgreementApArPostingDetail"   , GetChainLink("ExtractDataAgreementApArPostingDetailExecute"));
 	Chain.Insert("ExtractDataCurrencyFromAccount"          , GetChainLink("ExtractDataCurrencyFromAccountExecute"));
@@ -451,11 +454,19 @@ EndFunction
 #Region CHANGE_INVENTORY_ORIGIN_BY_ITEM_KEY
 
 Function ChangeInventoryOriginByItemKeyOptions() Export
-	Return GetChainLinkOptions("Company, Item, ItemKey");
+	Return GetChainLinkOptions("Company, Item, ItemKey, Object");
 EndFunction
 
 Function ChangeInventoryOriginByItemKeyExecute(Options) Export
-	Result = CommissionTradeServer.GetInventoryOriginAndConsignor(Options.Company, Options.Item, Options.ItemKey);
+	SerialLotNumber = Undefined;
+	If CommonFunctionsClientServer.ObjectHasProperty(Options.Object, "SerialLotNumbers") Then
+		SLNRows = Options.Object.SerialLotNumbers.FindRows(New Structure("Key", Options.Key));
+		If SLNRows.Count() = 1 And ValueIsFilled(SLNRows[0].SerialLotNumber) Then
+			SerialLotNumber = SLNRows[0].SerialLotNumber;
+		EndIf;
+	EndIf;
+	
+	Result = CommissionTradeServer.GetInventoryOriginAndConsignor(Options.Company, Options.Item, Options.ItemKey, SerialLotNumber);
 	Return Result.InventoryOrigin;
 EndFunction
 
@@ -464,11 +475,19 @@ EndFunction
 #Region CHANGE_CONSIGNOR_BY_ITEM_KEY
 
 Function ChangeConsignorByItemKeyOptions() Export
-	Return GetChainLinkOptions("Company, Item, ItemKey");
+	Return GetChainLinkOptions("Company, Item, ItemKey, Object");
 EndFunction
 
 Function ChangeConsignorByItemKeyExecute(Options) Export
-	Result = CommissionTradeServer.GetInventoryOriginAndConsignor(Options.Company, Options.Item, Options.ItemKey);
+	SerialLotNumber = Undefined;
+	If CommonFunctionsClientServer.ObjectHasProperty(Options.Object, "SerialLotNumbers") Then
+		SLNRows = Options.Object.SerialLotNumbers.FindRows(New Structure("Key", Options.Key));
+		If SLNRows.Count() = 1 And ValueIsFilled(SLNRows[0].SerialLotNumber) Then
+			SerialLotNumber = SLNRows[0].SerialLotNumber;
+		EndIf;
+	EndIf;
+	
+	Result = CommissionTradeServer.GetInventoryOriginAndConsignor(Options.Company, Options.Item, Options.ItemKey, SerialLotNumber);
 	Return Result.Consignor;
 EndFunction
 
@@ -1879,6 +1898,32 @@ Function ChangeReceiveBranchByAccountExecute(Options) Export
 		Return ReceiveBranch;
 	EndIf;
 	Return Options.ReceiveBranch;
+EndFunction
+
+#EndRegion
+
+#Region CHANGE_RESPONSIBLE_PERSON_BY_FIXED_ASSET
+	
+Function ChangeResponsiblePersonSenderByFixedAssetOptions() Export
+	Return GetChainLinkOptions("FixedAsset, Company, Date");
+EndFunction
+
+Function ChangeResponsiblePersonSenderByFixedAssetExecute(Options) Export
+	Result = DocFixedAssetTransferServer.GetFixedAssetLocation(Options.Date, Options.Company, Options.FixedAsset);
+	Return Result.ResponsiblePerson;
+EndFunction
+	
+#EndRegion
+
+#Region CHANGE_BRANCH_SENDER_BY_FIXED_ASSET
+
+Function ChangeBusinessUnitSenderByFixedAssetOptions() Export
+	Return GetChainLinkOptions("FixedAsset, Company, Date");
+EndFunction
+
+Function ChangeBusinessUnitSenderByFixedAssetExecute(Options) Export
+	Result = DocFixedAssetTransferServer.GetFixedAssetLocation(Options.Date, Options.Company, Options.FixedAsset);
+	Return Result.Branch;
 EndFunction
 
 #EndRegion

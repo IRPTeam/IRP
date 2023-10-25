@@ -754,7 +754,29 @@ Function PickupItemEnd(Val Parameters, Val ScanData) Export
 		
 		If Parameters.UseSerialLotNumbers Then
 			If ValueIsFilled(ScanDataItem.SerialLotNumber) Then
-				AddNewSerialLotNumber(Object, RowKey, ScanDataItem);
+				SerialLotNumberInfo = AddNewSerialLotNumber(Object, RowKey, ScanDataItem);
+				
+				If SerialLotNumberInfo.Cache <> Undefined And SerialLotNumberInfo.Cache.Property("ItemList") Then
+					For Each InfoRow In SerialLotNumberInfo.Cache.ItemList Do
+						For Each ResultRow In Result.NewRows Do
+							If ResultRow.Cache.Property("ItemList") Then
+								For Each ItemListRow In ResultRow.Cache.ItemList Do
+									If ItemListRow.Key = InfoRow.Key Then
+										
+										If InfoRow.Property("InventoryOrigin") Then
+											ItemListRow.Insert("InventoryOrigin", InfoRow.InventoryOrigin);
+										EndIf;
+										
+										If InfoRow.Property("Consignor") Then
+											ItemListRow.Insert("Consignor", InfoRow.Consignor);
+										EndIf;
+										
+									EndIf;
+								EndDo;
+							EndIf;
+						EndDo;
+					EndDo;
+				EndIf;
 			ElsIf ScanDataItem.UseSerialLotNumber Then
 				Result.ChoiceForms.PresentationStartChoice_Counter = Result.ChoiceForms.PresentationStartChoice_Counter + 1;
 				Result.ChoiceForms.PresentationStartChoice_Key = RowKey;
@@ -864,15 +886,16 @@ Function FillCache(Object, ArrayOfTableNames, Result)
 	Return Result;
 EndFunction
 
-Procedure AddNewSerialLotNumber(Object, RowKey, ScanDataItem)	
+Function AddNewSerialLotNumber(Object, RowKey, ScanDataItem)	
 	_SerialLotNumbers = New Array();
 	_SerialLotNumbers.Add(New Structure("SerialLotNumber, Quantity", 
 		ScanDataItem.SerialLotNumber, ScanDataItem.Quantity));
-	SerialLotNumberClientServer.AddNewSerialLotNumbers(Object, RowKey, _SerialLotNumbers, True);
+	SerialLotNumberInfo = SerialLotNumberClientServer.AddNewSerialLotNumbers(Object, RowKey, _SerialLotNumbers, True);
 	
 	SourceOfOriginClientServer.UpdateSourceOfOriginsQuantity(Object);
 	SourceOfOriginClientServer.DeleteUnusedSourceOfOrigins(Object);
-EndProcedure
+	Return SerialLotNumberInfo;
+EndFunction
 
 Procedure AddNewSourceOfOrigin(Object, RowKey, ScanDataItem)
 	_SourceOfOrigins = New Array();

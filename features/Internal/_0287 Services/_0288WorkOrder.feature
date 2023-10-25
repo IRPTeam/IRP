@@ -322,7 +322,7 @@ Scenario: _029203 create work order	based on Sales order (link form)
 		And I go to line in "BasisesTree" table
 			| 'Currency'   | 'Price'    | 'Quantity'   | 'Row presentation'      | 'Unit'    |
 			| 'TRY'        | '120,00'   | '1,000'      | 'Delivery (Delivery)'   | 'pcs'     |
-		And in the table "BasisesTree" I click the button named "Link"
+		And I click the button named "Link"
 		And I click "Ok" button
 	* Check
 		And "ItemList" table became equal

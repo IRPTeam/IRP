@@ -111,6 +111,27 @@
 			<value>true</value>
 		</right>
 	</object>
+	<object>
+		<name>Document.RetailSalesReceipt.Command.PrintCopyReceipt</name>
+		<right>
+			<name>View</name>
+			<value>true</value>
+		</right>
+	</object>
+	<object>
+		<name>Document.RetailSalesReceipt.Command.PrintReceipt</name>
+		<right>
+			<name>View</name>
+			<value>true</value>
+		</right>
+	</object>
+	<object>
+		<name>Document.RetailSalesReceipt.Command.Genarate</name>
+		<right>
+			<name>View</name>
+			<value>true</value>
+		</right>
+	</object>
 	<restrictionTemplate>
 		<name>CheckDocumentAccess</name>
 		<condition>

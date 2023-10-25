@@ -76,6 +76,7 @@ Function GetExclude_AddAttributes()
 	ArrayOfExcluded.Add("Document.ChequeBondTransactionItem");
 	ArrayOfExcluded.Add("Document.WorkOrderClosing");
 	ArrayOfExcluded.Add("Document.ForeignCurrencyRevaluation");
+	ArrayOfExcluded.Add("Document.DepreciationCalculation");
 	Return ArrayOfExcluded;
 EndFunction
 
@@ -115,6 +116,7 @@ Function GetExclude_Properties()
 	ArrayOfExcluded.Add("Document.ChequeBondTransactionItem");
 	ArrayOfExcluded.Add("Document.WorkOrderClosing");
 	ArrayOfExcluded.Add("Document.ForeignCurrencyRevaluation");
+	ArrayOfExcluded.Add("Document.DepreciationCalculation");
 	Return ArrayOfExcluded;
 EndFunction
 

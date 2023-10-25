@@ -116,10 +116,6 @@ Function GetAdditionalQueryParameters(Ref)
 	Return StrParams;
 EndFunction
 
-#EndRegion
-
-#Region Posting_SourceTable
-
 Function GetQueryTextsSecondaryTables()
 	QueryArray = New Array;
 	QueryArray.Add(ItemList());
@@ -130,6 +126,26 @@ Function GetQueryTextsSecondaryTables()
 	QueryArray.Add(PostingServer.Exists_R4014B_SerialLotNumber());
 	Return QueryArray;
 EndFunction
+
+Function GetQueryTextsMasterTables()
+	QueryArray = New Array;
+	QueryArray.Add(R4010B_ActualStocks());
+	QueryArray.Add(R4011B_FreeStocks());
+	QueryArray.Add(R4014B_SerialLotNumber());
+	QueryArray.Add(R4050B_StockInventory());
+	QueryArray.Add(R4052T_StockAdjustmentAsSurplus());
+	QueryArray.Add(R5021T_Revenues());
+	QueryArray.Add(R9010B_SourceOfOriginStock());
+	QueryArray.Add(T3010S_RowIDInfo());
+	QueryArray.Add(T6010S_BatchesInfo());
+	QueryArray.Add(T6020S_BatchKeysInfo());
+	QueryArray.Add(R4031B_GoodsInTransitIncoming());
+	Return QueryArray;
+EndFunction
+
+#EndRegion
+
+#Region Posting_SourceTable
 
 Function ItemList()
 	Return 
@@ -219,22 +235,6 @@ EndFunction
 #EndRegion
 
 #Region Posting_MainTables
-
-Function GetQueryTextsMasterTables()
-	QueryArray = New Array;
-	QueryArray.Add(R4010B_ActualStocks());
-	QueryArray.Add(R4011B_FreeStocks());
-	QueryArray.Add(R4014B_SerialLotNumber());
-	QueryArray.Add(R4050B_StockInventory());
-	QueryArray.Add(R4052T_StockAdjustmentAsSurplus());
-	QueryArray.Add(R5021T_Revenues());
-	QueryArray.Add(R9010B_SourceOfOriginStock());
-	QueryArray.Add(T3010S_RowIDInfo());
-	QueryArray.Add(T6010S_BatchesInfo());
-	QueryArray.Add(T6020S_BatchKeysInfo());
-	QueryArray.Add(R4031B_GoodsInTransitIncoming());
-	Return QueryArray;
-EndFunction
 
 Function R4031B_GoodsInTransitIncoming()
 	Return 

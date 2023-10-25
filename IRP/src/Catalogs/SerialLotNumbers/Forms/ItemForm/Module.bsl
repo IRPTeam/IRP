@@ -27,6 +27,7 @@ Procedure OnCreateAtServer(Cancel, StandardProcessing)
 	ExtensionServer.AddAttributesFromExtensions(ThisObject, Object.Ref);
 	If Parameters.Key.IsEmpty() Then
 		FillParamsOnCreate();
+		FillInheritConsignorsInfo();
 		SetVisibilityAvailability(Object, ThisObject);
 	EndIf;
 EndProcedure
@@ -35,11 +36,22 @@ EndProcedure
 Procedure SetVisibilityAvailability(Object, Form)
 	Form.Items.Owner.Visible = Form.OwnerSelect = "Manual";
 	Form.Items.CreateBarcodeWithSerialLotNumber.Visible = Not ValueIsFilled(Object.Ref);
+	
+	Form.Items.GroupConsignorInfo.Visible = Form.UseConsignorInfo;
+	
+	If Not (TypeOf(Object.SerialLotNumberOwner) = Type("CatalogRef.Items") 
+		Or TypeOf(Object.SerialLotNumberOwner) = Type("CatalogRef.ItemKeys")) Then
+		Form.ConsignorInfoMode = "Own";
+	EndIf;
+		
+	Form.Items.ConsignorsInfo.Visible = Form.ConsignorInfoMode = "Own";
+	Form.Items.InheritConsignorsInfo.Visible = Form.ConsignorInfoMode = "Inherit";	
 EndProcedure
 
 &AtServer
 Procedure OnReadAtServer(CurrentObject)
 	ThisObject.OwnerSelect = "Manual";
+	FillInheritConsignorsInfo();
 	SetVisibilityAvailability(Object, ThisObject);
 EndProcedure
 
@@ -62,6 +74,8 @@ EndProcedure
 &AtClient
 Procedure OwnerOnChange(Item)
 	UpdateAttributesByOwner();
+	FillInheritConsignorsInfo();
+	SetVisibilityAvailability(Object, ThisObject);
 EndProcedure
 
 &AtClient
@@ -160,3 +174,79 @@ EndProcedure
 Procedure BeforeClose(Cancel, Exit, WarningText, StandardProcessing)
 	Close(Object.Ref);
 EndProcedure
+
+&AtClient
+Procedure ConsignorInfoModeOnChange(Item)
+	If ThisObject.ConsignorInfoMode = "Inherit" Then
+		Object.ConsignorsInfo.Clear();
+	Else // Onw
+		Object.ConsignorsInfo.Clear();
+		For Each Row In ThisObject.InheritConsignorsInfo Do
+			NewRow = Object.ConsignorsInfo.Add();
+			FillPropertyValues(NewRow, Row);
+		EndDo;
+	EndIf;
+	ThisObject.Modified = True;
+	SetVisibilityAvailability(Object, ThisObject);
+EndProcedure
+
+&AtServer
+Procedure FillInheritConsignorsInfo()
+	ThisObject.UseConsignorInfo = False;
+	
+	ThisObject.ConsignorInfoMode = ?(Object.ConsignorsInfo.Count()>0, "Own", "Inherit");
+	
+	_itemKey  = Catalogs.ItemKeys.EmptyRef();
+	_item     = Catalogs.Items.EmptyRef();
+	_itemType = Catalogs.ItemTypes.EmptyRef();
+	
+	If TypeOf(Object.SerialLotNumberOwner) = Type("CatalogRef.Items") Then
+		_item     = Object.SerialLotNumberOwner;
+		_itemType = Object.SerialLotNumberOwner.ItemType;
+	EndIf;
+	If TypeOf(Object.SerialLotNumberOwner) = Type("CatalogRef.ItemKeys") Then
+		_itemKey  = Object.SerialLotNumberOwner;
+		_Item     = _itemKey.Item;
+		_itemType = _item.ItemType;
+	EndIf;
+		
+	Query = New Query();
+	Query.Text = 
+	"SELECT
+	|	ItemKeysConsignorsInfo.Company AS Company,
+	|	ItemKeysConsignorsInfo.Consignor AS Consignor,
+	|	0 AS Priority
+	|FROM
+	|	Catalog.ItemKeys.ConsignorsInfo AS ItemKeysConsignorsInfo
+	|WHERE
+	|	ItemKeysConsignorsInfo.Ref = &RefItemKey
+	|
+	|UNION
+	|
+	|SELECT
+	|	ItemsConsignorsInfo.Company,
+	|	ItemsConsignorsInfo.Consignor,
+	|	1
+	|FROM
+	|	Catalog.Items.ConsignorsInfo AS ItemsConsignorsInfo
+	|WHERE
+	|	ItemsConsignorsInfo.Ref = &RefItem";
+	Query.SetParameter("RefItemKey", _itemKey);
+	Query.SetParameter("RefItem"   , _item);
+	QueryResult = Query.Execute();
+	QueryTable = QueryResult.Unload();
+	
+	Table0 = QueryTable.Copy(New Structure("Priority", 0));
+	Table1 = QueryTable.Copy(New Structure("Priority", 1));
+	
+	If Table0.Count() > 0 Then
+		ThisObject.InheritConsignorsInfo.Load(Table0);
+	ElsIf Table1.Count() > 0 Then
+		ThisObject.InheritConsignorsInfo.Load(Table1);
+	EndIf;	
+	
+	If ValueIsFilled(_itemType) Then
+		ThisObject.UseConsignorInfo = _itemType.SingleRow;
+	EndIf;	
+EndProcedure
+

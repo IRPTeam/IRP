@@ -181,7 +181,7 @@ Procedure FillTables_ByDocuments()
 				_RowAllocation_ColumnName = 0;
 			EndIf;
 			
-			If Not ValueIsFilled(Total) = 0 Then
+			If Not ValueIsFilled(Total) Then
 				Continue;
 			EndIf;
 	

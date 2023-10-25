@@ -508,8 +508,9 @@ Scenario: _604719 change Row ID info and partner (ObjectPropertyEditor), forced 
 			| 'GR'             |
 		And I select current line in "List" table
 		And I finish line editing in "PropertiesTable" table
+		And Delay 4
 		And I click the button named "Save"
-		And Delay 2
+		And Delay 4
 		If "PropertiesTable" table does not contain lines Then
 			| 'Marked'   | 'Is modified'   | 'Object'                                         | '#'   | 'Key'                                    | 'Basis'   | 'Row ID'                                 | 'Next step'   | 'Quantity'   | 'Current step'   | 'Row ref'                                | 'Basis key'                               |
 			| 'No'       | 'No'            | 'Purchase order 115 dated 12.02.2021 12:44:43'   | '1'   | '3e2661d8-cf3b-4695-8cf7-a14ecc9f32ce'   | ''        | '3e2661d8-cf3b-4695-8cf7-a14ecc9f32ce'   | 'GR'          | '10'         | ''               | '3e2661d8-cf3b-4695-8cf7-a14ecc9f32ce'   | '                                    '    |
@@ -528,8 +529,9 @@ Scenario: _604719 change Row ID info and partner (ObjectPropertyEditor), forced 
 				| 'GR'             |
 			And I select current line in "List" table
 			And I finish line editing in "PropertiesTable" table
+			And Delay 4
 			And I click the button named "Save"
-			And Delay 2
+			And Delay 4
 			And "PropertiesTable" table contains lines
 				| 'Marked'   | 'Is modified'   | 'Object'                                         | '#'   | 'Key'                                    | 'Basis'   | 'Row ID'                                 | 'Next step'   | 'Quantity'   | 'Current step'   | 'Row ref'                                | 'Basis key'                               |
 				| 'No'       | 'No'            | 'Purchase order 115 dated 12.02.2021 12:44:43'   | '1'   | '3e2661d8-cf3b-4695-8cf7-a14ecc9f32ce'   | ''        | '3e2661d8-cf3b-4695-8cf7-a14ecc9f32ce'   | 'GR'          | '10'         | ''               | '3e2661d8-cf3b-4695-8cf7-a14ecc9f32ce'   | '                                    '    |

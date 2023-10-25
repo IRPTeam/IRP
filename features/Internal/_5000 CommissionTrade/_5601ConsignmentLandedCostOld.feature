@@ -1,7 +1,7 @@
 ﻿#language: en
 @tree
 @Positive
-
+@CommissionTradeLandedCost
 
 
 Feature: consignment landed cost
@@ -62,21 +62,22 @@ Scenario: _05602 preparation (consignment landed cost)
 		When Create information register CurrencyRates records
 		When Create catalog BusinessUnits objects
 		When Create catalog ExpenseAndRevenueTypes objects
+		When Create catalog Items objects (commission trade)
 		When update ItemKeys
 		When Create catalog Partners objects
 		When Data preparation (comission stock)
+		* Setting for Company
+			When settings for Company (commission trade)
 		When Create information register TaxSettings records (Concignor 1)
 		When Create information register Taxes records (VAT)
 		When Create catalog Partners objects (Kalipso)
 	* Post document
 		And I execute 1C:Enterprise script at server
-				| "Documents.PurchaseInvoice.FindByNumber(192).GetObject().Write(DocumentWriteMode.Posting);"     |
+				| "Documents.PurchaseInvoice.FindByNumber(202).GetObject().Write(DocumentWriteMode.Posting);"     |
 		And I execute 1C:Enterprise script at server
-				| "Documents.PurchaseInvoice.FindByNumber(195).GetObject().Write(DocumentWriteMode.Posting);"     |
+				| "Documents.PurchaseInvoice.FindByNumber(200).GetObject().Write(DocumentWriteMode.Posting);"     |
 		And I execute 1C:Enterprise script at server
-				| "Documents.PurchaseInvoice.FindByNumber(196).GetObject().Write(DocumentWriteMode.Posting);"     |
-	* Setting for Company
-		When settings for Company (commission trade)
+				| "Documents.PurchaseInvoice.FindByNumber(201).GetObject().Write(DocumentWriteMode.Posting);"     |
 	And I close all client application windows
 	* LoadDocuments
 		When Create document PurchaseInvoice objects (comission trade, consignment)

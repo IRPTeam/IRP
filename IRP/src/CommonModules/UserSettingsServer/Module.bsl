@@ -37,6 +37,24 @@ Function LinkUnlinkDocumentRows_Settings_DisableCalculateRowsOnLinkRows(val User
 	Return False;	
 EndFunction
 
+Function LinkUnlinkDocumentRows_Settings_UseReverseBasisesTreeOnLinkRows(val User = Undefined) Export
+	Value = GetUserSettings(User, New Structure("MetadataObject",
+		"Documents.LinkUnlinkDocumentRows.Settings.UseReverseBasisesTree"));
+	If Value.Count() Then
+		Return Value[0].Value;
+	EndIf;
+	Return False;	
+EndFunction
+
+Function LinkedDocumets_Settings_UseReverseTree(val User = Undefined) Export
+	Value = GetUserSettings(User, New Structure("MetadataObject",
+		"Documents.LinkedDocuments.Settings.UseReverseTree"));
+	If Value.Count() Then
+		Return Value[0].Value;
+	EndIf;
+	Return False;	
+EndFunction
+
 #EndRegion
 
 Function GetPredefinedUserSettingNames() Export

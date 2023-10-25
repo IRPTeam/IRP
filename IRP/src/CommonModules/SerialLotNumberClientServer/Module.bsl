@@ -18,6 +18,23 @@ Function AddNewSerialLotNumbers(Object, RowKey, SerialLotNumbers, AddNewLot) Exp
 		NewRow.SerialLotNumber = Row.SerialLotNumber;
 		NewRow.Quantity = NewRow.Quantity + Row.Quantity;
 	EndDo;
+	
+	Cache = Undefined;
+	SLNRows = Object.SerialLotNumbers.FindRows(New Structure("Key", RowKey));
+	If SLNRows.Count() = 1 Then
+		ItemListRows = Object.ItemList.FindRows(New Structure("Key", RowKey));
+		If ItemListRows.Count() =1 
+			And CommonFunctionsClientServer.ObjectHasProperty(ItemListRows[0], "InventoryOrigin") Then
+				
+			ServerParameters = ControllerClientServer_V2.GetServerParameters(Object);
+			ServerParameters.TableName = "ItemList";
+			ServerParameters.Rows = ItemListRows;
+			Parameters = ControllerClientServer_V2.GetParameters(ServerParameters);
+			
+			ControllerClientServer_V2.SingleRowSerialLotNumberOnChange(Parameters);	
+			Cache = Parameters.Cache;
+		EndIf;		
+	EndIf;
 		
 	TotalQuantity = 0;
 	For Each Row In Object.SerialLotNumbers Do
@@ -25,5 +42,5 @@ Function AddNewSerialLotNumbers(Object, RowKey, SerialLotNumbers, AddNewLot) Exp
 			TotalQuantity = TotalQuantity + Row.Quantity;
 		EndIf;
 	EndDo;
-	Return TotalQuantity;	
+	Return New Structure("TotalQuantity, Cache", TotalQuantity, Cache);	
 EndFunction

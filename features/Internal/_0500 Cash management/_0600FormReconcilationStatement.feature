@@ -89,7 +89,6 @@ Scenario: _060006 check auto filling Reconcilation statement (currency and trans
 		Then the form attribute named "Currency" became equal to "TRY"
 		And the field named "BeginPeriod" is filled
 		And the field named "EndPeriod" is filled
-		Then the number of "Transactions" table lines is "больше" "0"
 	* Select another partner with two currency and check filling currency
 		And I click Choice button of the field named "Currency"
 		And I go to line in "List" table

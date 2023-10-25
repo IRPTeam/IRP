@@ -492,7 +492,7 @@ Scenario: _092003 check serial lot number in the Retail return receipt
 			And I go to line in "BasisesTree" table
 				| 'Currency'    | 'Price'     | 'Quantity'    | 'Row presentation'        | 'Unit'     |
 				| 'TRY'         | '400,00'    | '3,000'       | 'Trousers (38/Yellow)'    | 'pcs'      |
-			And in the table "BasisesTree" I click the button named "Link"
+			And I click the button named "Link"
 			And I click "Ok" button
 			And I go to line in "ItemList" table
 				| 'Item'        | 'Item key'      |
@@ -511,7 +511,7 @@ Scenario: _092003 check serial lot number in the Retail return receipt
 			And I click "Ok" button
 			And in the table "ItemList" I click "Link unlink basis documents" button
 			Then "Link / unlink document row" window is opened
-			And in the table "BasisesTree" I click "Auto link" button
+			And I click "Auto link" button
 			And I click "Ok" button
 			And I go to line in "ItemList" table
 				| 'Item'        | 'Item key'      |

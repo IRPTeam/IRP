@@ -1,6 +1,10 @@
 
 // Tax rates
 
+// Get vat ref.
+// 
+// Returns:
+//  CatalogRef.Taxes -  Get vat ref
 Function GetVatRef() Export
 	Return ServerReuse.GetVatRef();
 EndFunction

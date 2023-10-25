@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mdclass:Role xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="65ff495c-a91c-43aa-8a5e-cbc4ee004b5b">
+ <name>Document_ModernizationOfFixedAsset</name>
+ <synonym>
+  <key>en</key>
+  <value>Document "Modernization of fixed asset"</value>
+ </synonym>
+ <synonym>
+  <key>ru</key>
+  <value>Документ "Модернизация ОС"</value>
+ </synonym>
+ <synonym>
+  <key>tr</key>
+  <value>Document "Modernization of fixed asset"</value>
+ </synonym>
+</mdclass:Role>

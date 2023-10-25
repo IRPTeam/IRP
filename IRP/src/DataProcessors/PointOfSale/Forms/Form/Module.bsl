@@ -1743,6 +1743,7 @@ Procedure FindRetailBasisFinish(Result, RowID) Export
 	EndIf;
 
 	ThisObject.RetailBasis = Result;
+	
 	RetailBasisData = GetRetailBasisData();
 
 	ThisObject.BasisPayments.Clear();
@@ -1750,36 +1751,18 @@ Procedure FindRetailBasisFinish(Result, RowID) Export
 		FillPropertyValues(ThisObject.BasisPayments.Add(), PaymentItem);
 	EndDo;
 
-	ThisObject.Object.ItemList.Clear();
-	For Each ListItem In RetailBasisData.ItemList Do
-		Row = ViewClient_V2.ItemListAddFilledRow(ThisObject.Object, ThisObject, ListItem);
-		Row.Key = ListItem.Key;
-		Row.RetailBasis = ThisObject.RetailBasis;
-		Row.RetailBasisQuantity = ListItem.Quantity;
-	EndDo;
-
-	ThisObject.Object.SpecialOffers.Clear();
 	ThisObject.RetailBasisSpecialOffers.Clear();
 	For Each OffersItem In RetailBasisData.SpecialOffers Do
-		FillPropertyValues(ThisObject.Object.SpecialOffers.Add(), OffersItem);
 		FillPropertyValues(ThisObject.RetailBasisSpecialOffers.Add(), OffersItem);
 	EndDo;
-	If ThisObject.Object.SpecialOffers.Count() Then
-		ViewClient_V2.OffersOnChange(Object, ThisObject);
-	EndIf;
 
-	ThisObject.Object.SerialLotNumbers.Clear();
-	For Each SerialLotNumberItem In RetailBasisData.SerialLotNumbers Do
-		Row = ThisObject.Object.SerialLotNumbers.Add();
-		Row.Key = SerialLotNumberItem.Key;
-		Row.SerialLotNumber = SerialLotNumberItem.SerialLotNumber;
-		Row.Quantity = SerialLotNumberItem.Quantity;
-	EndDo;
+	FillOnSelectBasisDocument(Result);
 	SerialLotNumberClient.UpdateSerialLotNumbersPresentation(ThisObject.Object);
 	ThisObject.Object.ControlCodeStrings.Clear();
 	ControlCodeStringsClient.UpdateState(ThisObject.Object);
-
-	EnabledPaymentButton();
+	FillSalesPersonInItemList();
+	EnabledPaymentButton();	
+	
 EndProcedure
 
 &AtServer
@@ -1922,7 +1905,12 @@ Function CreateReturnOnBase(PaymentData, StatusType)
 
 	ClearArray = New Array;
 	For Each BasisesTableItem In BasisesTable Do
-		ReturnDataItems = ThisObject.Object.ItemList.FindRows(New Structure("Key", BasisesTableItem.Key));
+		ItemRowKey = BasisesTableItem.Key;
+		ObjectRowIDInfo = ThisObject.Object.RowIDInfo.FindRows(New Structure("BasisKey", ItemRowKey));
+		If ObjectRowIDInfo.Count() > 0 Then
+			ItemRowKey = ObjectRowIDInfo[0].Key;
+		EndIf;
+		ReturnDataItems = ThisObject.Object.ItemList.FindRows(New Structure("Key", ItemRowKey));
 		If ReturnDataItems.Count() > 0 And ReturnDataItems[0].QuantityInBaseUnit > 0 Then
 			BasisesTableItem.QuantityInBaseUnit = ReturnDataItems[0].QuantityInBaseUnit;
 		Else
@@ -1948,13 +1936,28 @@ Function CreateReturnOnBase(PaymentData, StatusType)
 				FillPropertyValues(ExtractedDataItem.Payments.Add(), PaymentDataItem);
 			EndDo;
 			For Each SerialItem In ThisObject.Object.SerialLotNumbers Do
-				FillPropertyValues(ExtractedDataItem.SerialLotNumbers.Add(), SerialItem);
+				NewSerialRow = ExtractedDataItem.SerialLotNumbers.Add();
+				FillPropertyValues(NewSerialRow, SerialItem);
+				ObjectRowIDInfo = ThisObject.Object.RowIDInfo.FindRows(New Structure("Key", SerialItem.Key));
+				If ObjectRowIDInfo.Count() > 0 Then
+					NewSerialRow.Key = ObjectRowIDInfo[0].BasisKey;
+				EndIf;
 			EndDo;
 			For Each ControlCode In Object.ControlCodeStrings Do
-				FillPropertyValues(ExtractedDataItem.ControlCodeStrings.Add(), ControlCode);
+				NewControlCodeRow = ExtractedDataItem.ControlCodeStrings.Add();
+				FillPropertyValues(NewControlCodeRow, ControlCode);
+				ObjectRowIDInfo = ThisObject.Object.RowIDInfo.FindRows(New Structure("Key", ControlCode.Key));
+				If ObjectRowIDInfo.Count() > 0 Then
+					NewControlCodeRow.Key = ObjectRowIDInfo[0].BasisKey;
+				EndIf;
 			EndDo;
 			For Each ItemListRow In ExtractedDataItem.ItemList Do
-				ReturnDataItems = ThisObject.Object.ItemList.FindRows(New Structure("Key", ItemListRow.Key));
+				ItemRowKey = ItemListRow.Key;
+				ObjectRowIDInfo = ThisObject.Object.RowIDInfo.FindRows(New Structure("BasisKey", ItemRowKey));
+				If ObjectRowIDInfo.Count() > 0 Then
+					ItemRowKey = ObjectRowIDInfo[0].Key;
+				EndIf;
+				ReturnDataItems = ThisObject.Object.ItemList.FindRows(New Structure("Key", ItemRowKey));
 				ItemListRow.isControlCodeString = ReturnDataItems[0].isControlCodeString;
 			EndDo;
 		EndIf;
@@ -2072,10 +2075,16 @@ Procedure RecalculateOffer(ListItem)
 	ListItem.OffersAmount = 0;
 	OfferRows = ThisObject.Object.SpecialOffers.FindRows(New Structure("Key", ListItem.Key));
 	For Each OfferRow In OfferRows Do
+		RowKey = OfferRow.Key;
+		ObjectRowIDInfo = ThisObject.Object.RowIDInfo.FindRows(New Structure("Key", RowKey));
+		If ObjectRowIDInfo.Count() > 0 Then
+			RowKey = ObjectRowIDInfo[0].BasisKey;
+		EndIf;
+		
 		RetailBasisAmount = 0;
 		RetailBasisBonus = 0;
 		BasisOffers = ThisObject.RetailBasisSpecialOffers.FindRows(
-			New Structure("Key, Offer", OfferRow.Key, OfferRow.Offer));
+			New Structure("Key, Offer", RowKey, OfferRow.Offer));
 		For Each BasisOffer In BasisOffers Do
 			RetailBasisAmount = RetailBasisAmount + BasisOffer.Amount;
 			RetailBasisBonus = RetailBasisBonus + BasisOffer.Bonus;
@@ -2092,8 +2101,13 @@ Procedure CheckByRetailBasisAtServer()
 	BasisesTable = GetBasisTable(ThisObject.RetailBasis);
 
 	For Each ListItem In ThisObject.Object.ItemList Do
+		BasisKey = ListItem.Key;
+		RowsID = ThisObject.Object.RowIDInfo.FindRows(New Structure("Key", ListItem.Key));
+		If RowsID.Count() > 0 Then
+			BasisKey = RowsID[0].BasisKey;
+		EndIf;
 		NeedQuantity = ListItem.QuantityInBaseUnit;
-		BasisRow = BasisesTable.Find(ListItem.Key, "Key");
+		BasisRow = BasisesTable.Find(BasisKey, "Key");
 		If Not BasisRow = Undefined Then
 			UseQuantity = Min(NeedQuantity, BasisRow.QuantityInBaseUnit);
 			NeedQuantity = NeedQuantity - UseQuantity;
@@ -2147,7 +2161,12 @@ EndProcedure
 &AtServer
 Procedure FillOnSelectBasisDocument(BasisDocRef)
 
-	NewDocRef = Documents.RetailSalesReceipt.EmptyRef();
+	If ThisObject.isReturn Then
+		NewDocRef = Documents.RetailReturnReceipt.EmptyRef();
+	Else
+		NewDocRef = Documents.RetailSalesReceipt.EmptyRef();
+	EndIf;
+	
 	FillParameters = New Structure("Basises, Ref", New Array, NewDocRef);
 	FillParameters.Basises.Add(BasisDocRef);
 
@@ -2163,6 +2182,15 @@ Procedure FillOnSelectBasisDocument(BasisDocRef)
 	NewObj = Documents.RetailSalesReceipt.CreateDocument();
 	NewObj.Fill(FillingValues[0]);
 	ValueToFormAttribute(NewObj, "Object");
+	If ThisObject.isReturn Then
+		For Each ItemListRow In Object.ItemList Do
+			ItemListRow.RetailBasis = BasisDocRef;
+			ItemListRow.RetailBasisQuantity = ItemListRow.Quantity; 
+			If Not ItemListRow.isControlCodeString Then
+				ItemListRow.isControlCodeString = CommonFunctionsServer.GetRefAttribute(ItemListRow.Item, "ControlCodeString");
+			EndIf;
+		EndDo;
+	EndIf;
 EndProcedure
 
 #EndRegion
@@ -2370,35 +2398,6 @@ Procedure OpenPostponedReceiptAtServer(Receipt)
 			If Not ItemListRow.RetailSalesReceipt.IsEmpty() Then
 				NewRecord.RetailBasis = ItemListRow.RetailSalesReceipt;
 				ThisObject.RetailBasis = NewRecord.RetailBasis;
-				
-				CurrentKey = ItemListRow.Key;
-				KeyRow = RowIDInfoTable.Find(CurrentKey, "Key");
-				If KeyRow = Undefined Then
-					Continue;
-				EndIf;
-				BasisKey = KeyRow.BasisKey;
-				KeyRow.Key = BasisKey;
-				KeyRow.RowID = BasisKey;
-				KeyRow.BasisKey = "";
-				KeyRow.Basis = Undefined;
-				
-				NewRecord.Key = BasisKey;
-				TableRows = SpecialOffersTable.FindRows(New Structure("Key", CurrentKey));
-				For Each TableRow In TableRows Do
-					TableRow.Key = BasisKey;
-				EndDo;
-				TableRows = SerialLotNumbersTable.FindRows(New Structure("Key", CurrentKey));
-				For Each TableRow In TableRows Do
-					TableRow.Key = BasisKey;
-				EndDo;
-				TableRows = SourceOfOriginsTable.FindRows(New Structure("Key", CurrentKey));
-				For Each TableRow In TableRows Do
-					TableRow.Key = BasisKey;
-				EndDo;
-				TableRows = ControlCodeStringsTable.FindRows(New Structure("Key", CurrentKey));
-				For Each TableRow In TableRows Do
-					TableRow.Key = BasisKey;
-				EndDo;
 			EndIf;
 		EndDo;
 		

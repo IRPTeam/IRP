@@ -2234,6 +2234,15 @@ Function Strings(Lang) Export
 	Strings.Insert("Add_Setiings_008", NStr("en='Disable - Calculate rows on link rows';
 		|ru='Отключить - Расчет строки при связке строк';
 		|tr='Devre dışı bırak - Bağlantı satırlarında satırları hesapla'", Lang));
+	Strings.Insert("Add_Setiings_009", NStr("en='Use reverse basises tree';
+		|ru='Использовать перевернутое дерево оснований';
+		|tr='Use reverse basises tree'", Lang));
+	Strings.Insert("Add_Setiings_010", NStr("en='Linked documents';
+		|ru='Документы связанные по строкам';
+		|tr='Bağlı evraklar'", Lang));
+	Strings.Insert("Add_Setiings_011", NStr("en='Use reverse tree';
+		|ru='Перевернуть дерево';
+		|tr='Use reverse tree'", Lang));
 #EndRegion
 
 #Region Mobile

@@ -359,6 +359,15 @@ Scenario: _018004 create PI based on GR without PO
 			| 'Goods receipt 12 dated 02.03.2021 12:16:02'   | ''          | '20,000'               | '20,000'      |
 			| 'Boots (39/18SD)'                              | '24,000'    | '24,000'               | '24,000'      |
 			| 'Goods receipt 12 dated 02.03.2021 12:16:02'   | ''          | '24,000'               | '24,000'      |
+	* Check use reserve tree
+		And I set checkbox "Use reverse tree"
+		And "DocumentsTree" table became equal
+			| 'Presentation'                               | 'QuantityInDocument' | 'Quantity' |
+			| 'Goods receipt 12 dated 02.03.2021 12:16:02' | ''                   | ''         |
+			| 'Dress (XS/Blue)'                            | '10,000'             | '10,000'   |
+			| 'Dress (XS/Blue)'                            | '2,000'              | '2,000'    |
+			| 'Trousers (38/Yellow)'                       | '20,000'             | '20,000'   |
+			| 'Boots (39/18SD)'                            | '24,000'             | '24,000'   |			
 		And I close all client application windows
 
 Scenario: _018005 create Purchase invoice based on Internal supply request
@@ -815,11 +824,11 @@ Scenario: _018017 create PI based on GR with two same items (link items)
 		And I go to line in "BasisesTree" table
 			| 'Currency'   | 'Price'    | 'Quantity'   | 'Row presentation'   | 'Unit'    |
 			| 'TRY'        | '520,00'   | '10,000'     | 'Dress (XS/Blue)'    | 'pcs'     |
-		And in the table "BasisesTree" I click the button named "Link"
+		And I click the button named "Link"
 		And I go to line in "BasisesTree" table
 			| 'Currency'   | 'Price'    | 'Quantity'   | 'Row presentation'   | 'Unit'    |
 			| 'TRY'        | '520,00'   | '9,000'      | 'Dress (XS/Blue)'    | 'pcs'     |
-		And in the table "BasisesTree" I click the button named "Link"
+		And I click the button named "Link"
 		And I click "Ok" button	
 	* Check
 		And "ItemList" table became equal

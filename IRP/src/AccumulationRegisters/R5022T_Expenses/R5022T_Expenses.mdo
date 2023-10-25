@@ -219,6 +219,50 @@
   <fullTextSearch>Use</fullTextSearch>
   <useInTotals>true</useInTotals>
  </dimensions>
+ <dimensions uuid="46fe0a3c-6a08-40b7-adac-344f4aa24fc0">
+  <name>FixedAsset</name>
+  <synonym>
+   <key>en</key>
+   <value>Fixed asset</value>
+  </synonym>
+  <synonym>
+   <key>ru</key>
+   <value>Основное средство</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Fixed asset</value>
+  </synonym>
+  <type>
+   <types>CatalogRef.FixedAssets</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <useInTotals>true</useInTotals>
+ </dimensions>
+ <dimensions uuid="187d8f0c-09d7-4479-9b45-3baecd94c1b4">
+  <name>LedgerType</name>
+  <synonym>
+   <key>en</key>
+   <value>Ledger type</value>
+  </synonym>
+  <synonym>
+   <key>ru</key>
+   <value>Тип учета</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Defter tipi</value>
+  </synonym>
+  <type>
+   <types>CatalogRef.FixedAssetsLedgerTypes</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <useInTotals>true</useInTotals>
+ </dimensions>
  <dimensions uuid="800e2f34-8d88-485f-af3e-20f0e257d230">
   <name>Currency</name>
   <synonym>

@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mdclass:CommonModule xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="8cc72b16-0626-4bfe-9407-a327301bf004">
+ <name>DocModernizationOfFixedAssetClient</name>
+ <synonym>
+  <key>en</key>
+  <value>Doc modernization of fixed asset client</value>
+ </synonym>
+ <synonym>
+  <key>ru</key>
+  <value>Док Модернизация основного средства клиент</value>
+ </synonym>
+ <synonym>
+  <key>tr</key>
+  <value>Doc modernization of fixed asset client</value>
+ </synonym>
+ <clientManagedApplication>true</clientManagedApplication>
+ <clientOrdinaryApplication>true</clientOrdinaryApplication>
+</mdclass:CommonModule>

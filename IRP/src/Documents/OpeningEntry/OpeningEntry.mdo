@@ -107,6 +107,9 @@
  <registerRecords>AccumulationRegister.R5015B_OtherPartnersTransactions</registerRecords>
  <registerRecords>AccumulationRegister.R3021B_CashInTransitIncoming</registerRecords>
  <registerRecords>AccumulationRegister.CashInTransit</registerRecords>
+ <registerRecords>InformationRegister.T8515S_FixedAssetsLocation</registerRecords>
+ <registerRecords>AccumulationRegister.R8510B_BookValueOfFixedAsset</registerRecords>
+ <registerRecords>AccumulationRegister.R8515T_CostOfFixedAsset</registerRecords>
  <postInPrivilegedMode>true</postInPrivilegedMode>
  <unpostInPrivilegedMode>true</unpostInPrivilegedMode>
  <choiceHistoryOnInput>DontUse</choiceHistoryOnInput>
@@ -3754,6 +3757,237 @@
    <minValue xsi:type="core:UndefinedValue"/>
    <maxValue xsi:type="core:UndefinedValue"/>
    <fillChecking>ShowError</fillChecking>
+   <dataHistory>Use</dataHistory>
+   <fullTextSearch>Use</fullTextSearch>
+  </attributes>
+ </tabularSections>
+ <tabularSections uuid="5479f678-d453-4a90-83e0-f277f4bb1bd2">
+  <producedTypes>
+   <objectType typeId="5394675e-7eb4-472a-b18e-20a03df448bb" valueTypeId="c2e9dd2e-144a-4a6f-8f02-a0832bb99d9b"/>
+   <rowType typeId="ac34a911-18df-4337-ac30-b1a475d00d16" valueTypeId="6c072cfc-2248-46ee-93ea-36ae423d43bc"/>
+  </producedTypes>
+  <name>FixedAssets</name>
+  <synonym>
+   <key>en</key>
+   <value>Fixed assets</value>
+  </synonym>
+  <synonym>
+   <key>ru</key>
+   <value>Основные средства</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Fixed assets</value>
+  </synonym>
+  <attributes uuid="b3a77a60-2dc8-4872-b689-8a54906e3ffe">
+   <name>Key</name>
+   <synonym>
+    <key>en</key>
+    <value>Key</value>
+   </synonym>
+   <synonym>
+    <key>ru</key>
+    <value>Ключ</value>
+   </synonym>
+   <synonym>
+    <key>tr</key>
+    <value>Anahtar</value>
+   </synonym>
+   <type>
+    <types>DefinedType.typeRowID</types>
+   </type>
+   <minValue xsi:type="core:UndefinedValue"/>
+   <maxValue xsi:type="core:UndefinedValue"/>
+   <dataHistory>Use</dataHistory>
+   <fullTextSearch>Use</fullTextSearch>
+  </attributes>
+  <attributes uuid="14c13c05-5de9-4697-a85a-1cfe91992a57">
+   <name>FixedAsset</name>
+   <synonym>
+    <key>en</key>
+    <value>Fixed asset</value>
+   </synonym>
+   <synonym>
+    <key>ru</key>
+    <value>Основное средство</value>
+   </synonym>
+   <synonym>
+    <key>tr</key>
+    <value>Fixed asset</value>
+   </synonym>
+   <type>
+    <types>CatalogRef.FixedAssets</types>
+   </type>
+   <minValue xsi:type="core:UndefinedValue"/>
+   <maxValue xsi:type="core:UndefinedValue"/>
+   <fillChecking>ShowError</fillChecking>
+   <dataHistory>Use</dataHistory>
+   <fullTextSearch>Use</fullTextSearch>
+  </attributes>
+  <attributes uuid="bc36aec7-d271-47aa-9cde-cc3a142aaa82">
+   <name>ResponsiblePerson</name>
+   <synonym>
+    <key>en</key>
+    <value>Responsible person</value>
+   </synonym>
+   <synonym>
+    <key>ru</key>
+    <value>МОЛ</value>
+   </synonym>
+   <synonym>
+    <key>tr</key>
+    <value>Responsible person</value>
+   </synonym>
+   <type>
+    <types>CatalogRef.Partners</types>
+   </type>
+   <minValue xsi:type="core:UndefinedValue"/>
+   <maxValue xsi:type="core:UndefinedValue"/>
+   <choiceParameters>
+    <name>Filter.Employee</name>
+    <value xsi:type="core:BooleanValue">
+     <value>true</value>
+    </value>
+   </choiceParameters>
+   <dataHistory>Use</dataHistory>
+   <fullTextSearch>Use</fullTextSearch>
+  </attributes>
+  <attributes uuid="587037a7-5032-492e-8dcd-68d486ba2011">
+   <name>BusinessUnit</name>
+   <synonym>
+    <key>en</key>
+    <value>Business unit</value>
+   </synonym>
+   <synonym>
+    <key>ru</key>
+    <value>Подразделение</value>
+   </synonym>
+   <synonym>
+    <key>tr</key>
+    <value>Departman</value>
+   </synonym>
+   <type>
+    <types>CatalogRef.BusinessUnits</types>
+   </type>
+   <minValue xsi:type="core:UndefinedValue"/>
+   <maxValue xsi:type="core:UndefinedValue"/>
+   <dataHistory>Use</dataHistory>
+   <fullTextSearch>Use</fullTextSearch>
+  </attributes>
+  <attributes uuid="8e4905f9-8e64-4f5d-920b-7a0e8af51c0c">
+   <name>LedgerType</name>
+   <synonym>
+    <key>en</key>
+    <value>Ledger type</value>
+   </synonym>
+   <synonym>
+    <key>ru</key>
+    <value>Тип учета</value>
+   </synonym>
+   <synonym>
+    <key>tr</key>
+    <value>Defter tipi</value>
+   </synonym>
+   <type>
+    <types>CatalogRef.FixedAssetsLedgerTypes</types>
+   </type>
+   <minValue xsi:type="core:UndefinedValue"/>
+   <maxValue xsi:type="core:UndefinedValue"/>
+   <fillChecking>ShowError</fillChecking>
+   <dataHistory>Use</dataHistory>
+   <fullTextSearch>Use</fullTextSearch>
+  </attributes>
+  <attributes uuid="09e51ae1-7034-433c-9045-ee854009e179">
+   <name>CommissioningDate</name>
+   <synonym>
+    <key>en</key>
+    <value>Commissioning date</value>
+   </synonym>
+   <synonym>
+    <key>ru</key>
+    <value>Дата ввода в эксплуатацию</value>
+   </synonym>
+   <synonym>
+    <key>tr</key>
+    <value>Commissioning date</value>
+   </synonym>
+   <type>
+    <types>Date</types>
+    <dateQualifiers>
+     <dateFractions>Date</dateFractions>
+    </dateQualifiers>
+   </type>
+   <minValue xsi:type="core:UndefinedValue"/>
+   <maxValue xsi:type="core:UndefinedValue"/>
+   <fillChecking>ShowError</fillChecking>
+   <dataHistory>Use</dataHistory>
+   <fullTextSearch>Use</fullTextSearch>
+  </attributes>
+  <attributes uuid="818e0d43-d07f-46b4-af21-6cbdc1839209">
+   <name>OriginalAmount</name>
+   <synonym>
+    <key>en</key>
+    <value>Original amount</value>
+   </synonym>
+   <synonym>
+    <key>ru</key>
+    <value>Первоначальная стоимость</value>
+   </synonym>
+   <synonym>
+    <key>tr</key>
+    <value>Original amount</value>
+   </synonym>
+   <type>
+    <types>DefinedType.typeAmount</types>
+   </type>
+   <minValue xsi:type="core:UndefinedValue"/>
+   <maxValue xsi:type="core:UndefinedValue"/>
+   <fillChecking>ShowError</fillChecking>
+   <dataHistory>Use</dataHistory>
+   <fullTextSearch>Use</fullTextSearch>
+  </attributes>
+  <attributes uuid="146a979e-d129-4c4d-8ed5-0eccfb3378d6">
+   <name>BalanceAmount</name>
+   <synonym>
+    <key>en</key>
+    <value>Balance amount</value>
+   </synonym>
+   <synonym>
+    <key>ru</key>
+    <value>Остаточная стоимость</value>
+   </synonym>
+   <synonym>
+    <key>tr</key>
+    <value>Balance amount</value>
+   </synonym>
+   <type>
+    <types>DefinedType.typeAmount</types>
+   </type>
+   <minValue xsi:type="core:UndefinedValue"/>
+   <maxValue xsi:type="core:UndefinedValue"/>
+   <fillChecking>ShowError</fillChecking>
+   <dataHistory>Use</dataHistory>
+   <fullTextSearch>Use</fullTextSearch>
+  </attributes>
+  <attributes uuid="3954f81c-7fa4-4104-bc3d-fe201549dea4">
+   <name>Currency</name>
+   <synonym>
+    <key>en</key>
+    <value>Currency</value>
+   </synonym>
+   <synonym>
+    <key>ru</key>
+    <value>Валюта</value>
+   </synonym>
+   <synonym>
+    <key>tr</key>
+    <value>Döviz</value>
+   </synonym>
+   <type>
+    <types>CatalogRef.Currencies</types>
+   </type>
+   <minValue xsi:type="core:UndefinedValue"/>
+   <maxValue xsi:type="core:UndefinedValue"/>
    <dataHistory>Use</dataHistory>
    <fullTextSearch>Use</fullTextSearch>
   </attributes>

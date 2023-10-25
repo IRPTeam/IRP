@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mdclass:Role xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="0944b9b1-a0f0-4887-87d2-b0f40535da4d">
+ <name>Document_FixedAssetTransfer</name>
+ <synonym>
+  <key>en</key>
+  <value>Document "Fixed asset transfer"</value>
+ </synonym>
+ <synonym>
+  <key>ru</key>
+  <value>Документ "Перемещение основных средств"</value>
+ </synonym>
+ <synonym>
+  <key>tr</key>
+  <value>Document "Fixed asset transfer"</value>
+ </synonym>
+</mdclass:Role>

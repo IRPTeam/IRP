@@ -154,6 +154,7 @@ Procedure PostingCheckBeforeWrite(Ref, Cancel, PostingMode, Parameters, AddInfo 
 	Tables.R9510B_SalaryPayment.Columns.Add("Key", Metadata.DefinedTypes.typeRowID.Type);
 	Tables.R5015B_OtherPartnersTransactions.Columns.Add("Key", Metadata.DefinedTypes.typeRowID.Type);
 	Tables.R3021B_CashInTransitIncoming.Columns.Add("Key", Metadata.DefinedTypes.typeRowID.Type);
+	Tables.R8510B_BookValueOfFixedAsset.Columns.Add("Key", Metadata.DefinedTypes.typeRowID.Type);
 
 	PostingServer.FillPostingTables(Tables, Ref, QueryArray, Parameters);
 EndProcedure
@@ -238,10 +239,6 @@ Function GetAdditionalQueryParameters(Ref)
 	Return StrParams;
 EndFunction
 
-#EndRegion
-
-#Region Posting_SourceTable
-
 Function GetQueryTextsSecondaryTables()
 	QueryArray = New Array;
 	QueryArray.Add(ItemList());
@@ -260,11 +257,47 @@ Function GetQueryTextsSecondaryTables()
 	QueryArray.Add(OtherVendorsTransactions());
 	QueryArray.Add(OtherCustomersTransactions());
 	QueryArray.Add(CashInTransit());
+	QueryArray.Add(FixedAssets());
 	QueryArray.Add(PostingServer.Exists_R4010B_ActualStocks());
 	QueryArray.Add(PostingServer.Exists_R4011B_FreeStocks());
 	QueryArray.Add(PostingServer.Exists_R4014B_SerialLotNumber());
 	Return QueryArray;
 EndFunction
+
+Function GetQueryTextsMasterTables()
+	QueryArray = New Array;
+	QueryArray.Add(R1020B_AdvancesToVendors());
+	QueryArray.Add(R1021B_VendorsTransactions());
+	QueryArray.Add(R2020B_AdvancesFromCustomers());
+	QueryArray.Add(R2021B_CustomersTransactions());
+	QueryArray.Add(R2023B_AdvancesFromRetailCustomers());
+	QueryArray.Add(R3010B_CashOnHand());
+	QueryArray.Add(R3027B_EmployeeCashAdvance());
+	QueryArray.Add(R4010B_ActualStocks());
+	QueryArray.Add(R4011B_FreeStocks());
+	QueryArray.Add(R4014B_SerialLotNumber());
+	QueryArray.Add(R4050B_StockInventory());
+	QueryArray.Add(R5010B_ReconciliationStatement());
+	QueryArray.Add(R5011B_CustomersAging());
+	QueryArray.Add(R5012B_VendorsAging());
+	QueryArray.Add(R8015T_ConsignorPrices());
+	QueryArray.Add(R9010B_SourceOfOriginStock());
+	QueryArray.Add(R9510B_SalaryPayment());
+	QueryArray.Add(T2014S_AdvancesInfo());
+	QueryArray.Add(T2015S_TransactionsInfo());
+	QueryArray.Add(T6010S_BatchesInfo());
+	QueryArray.Add(T6020S_BatchKeysInfo());
+	QueryArray.Add(R5015B_OtherPartnersTransactions());
+	QueryArray.Add(R3021B_CashInTransitIncoming());
+	QueryArray.Add(T8515S_FixedAssetsLocation());
+	QueryArray.Add(R8515T_CostOfFixedAsset());
+	QueryArray.Add(R8510B_BookValueOfFixedAsset());
+	Return QueryArray;
+EndFunction
+
+#EndRegion
+
+#Region Posting_SourceTable
 
 Function ItemList()
 	Return "SELECT
@@ -653,37 +686,30 @@ Function CashInTransit()
 		|	CashInTransit.Ref = &Ref";
 EndFunction
 
+Function FixedAssets()
+	Return
+		"SELECT
+		|	OpeningEntryFixedAssets.Ref.Date AS Period,
+		|	OpeningEntryFixedAssets.Ref.Company,
+		|	OpeningEntryFixedAssets.FixedAsset,
+		|	OpeningEntryFixedAssets.ResponsiblePerson,
+		|	OpeningEntryFixedAssets.BusinessUnit AS Branch,
+		|	OpeningEntryFixedAssets.LedgerType,
+		|	OpeningEntryFixedAssets.CommissioningDate,
+		|	OpeningEntryFixedAssets.OriginalAmount,
+		|	OpeningEntryFixedAssets.BalanceAmount,
+		|	OpeningEntryFixedAssets.Currency,
+		|	OpeningEntryFixedAssets.Key
+		|INTO FixedAssets
+		|FROM
+		|	Document.OpeningEntry.FixedAssets AS OpeningEntryFixedAssets
+		|WHERE
+		|	OpeningEntryFixedAssets.Ref = &Ref";
+EndFunction
+
 #EndRegion
 
 #Region Posting_MainTables
-
-Function GetQueryTextsMasterTables()
-	QueryArray = New Array;
-	QueryArray.Add(R1020B_AdvancesToVendors());
-	QueryArray.Add(R1021B_VendorsTransactions());
-	QueryArray.Add(R2020B_AdvancesFromCustomers());
-	QueryArray.Add(R2021B_CustomersTransactions());
-	QueryArray.Add(R2023B_AdvancesFromRetailCustomers());
-	QueryArray.Add(R3010B_CashOnHand());
-	QueryArray.Add(R3027B_EmployeeCashAdvance());
-	QueryArray.Add(R4010B_ActualStocks());
-	QueryArray.Add(R4011B_FreeStocks());
-	QueryArray.Add(R4014B_SerialLotNumber());
-	QueryArray.Add(R4050B_StockInventory());
-	QueryArray.Add(R5010B_ReconciliationStatement());
-	QueryArray.Add(R5011B_CustomersAging());
-	QueryArray.Add(R5012B_VendorsAging());
-	QueryArray.Add(R8015T_ConsignorPrices());
-	QueryArray.Add(R9010B_SourceOfOriginStock());
-	QueryArray.Add(R9510B_SalaryPayment());
-	QueryArray.Add(T2014S_AdvancesInfo());
-	QueryArray.Add(T2015S_TransactionsInfo());
-	QueryArray.Add(T6010S_BatchesInfo());
-	QueryArray.Add(T6020S_BatchKeysInfo());
-	QueryArray.Add(R5015B_OtherPartnersTransactions());
-	QueryArray.Add(R3021B_CashInTransitIncoming());
-	Return QueryArray;
-EndFunction
 
 Function R1020B_AdvancesToVendors()
 	Return "SELECT 
@@ -1560,6 +1586,53 @@ Function R9510B_SalaryPayment()
 		   |	SalaryPayment
 		   |WHERE
 		   |	TRUE";
+EndFunction
+
+Function T8515S_FixedAssetsLocation()
+	Return
+		"SELECT
+		|	FixedAssets.CommissioningDate AS Period,
+		|	FixedAssets.Company,
+		|	FixedAssets.FixedAsset,
+		|	FixedAssets.ResponsiblePerson,
+		|	FixedAssets.Branch,
+		|	TRUE AS IsActive
+		|INTO T8515S_FixedAssetsLocation
+		|FROM
+		|	FixedAssets AS FixedAssets
+		|GROUP BY
+		|	FixedAssets.CommissioningDate,
+		|	FixedAssets.Company,
+		|	FixedAssets.FixedAsset,
+		|	FixedAssets.ResponsiblePerson,
+		|	FixedAssets.Branch";
+EndFunction
+
+Function R8515T_CostOfFixedAsset()
+	Return
+		"SELECT
+		|	FixedAssets.*,
+		|	FixedAssets.OriginalAmount AS Amount
+		|INTO R8515T_CostOfFixedAsset
+		|FROM
+		|	FixedAssets AS FixedAssets";
+EndFunction
+	
+Function R8510B_BookValueOfFixedAsset()
+	Return
+		"SELECT
+		|	FixedAssets.*,
+		|	VALUE(AccumulationRecordType.Receipt) AS RecordType,
+		|	FixedAssets.BalanceAmount AS Amount,
+		|	FixedAssetsDepreciationInfo.Schedule AS Shedule
+		|INTO R8510B_BookValueOfFixedAsset
+		|FROM
+		|	FixedAssets AS FixedAssets
+		|		LEFT JOIN Catalog.FixedAssets.DepreciationInfo AS FixedAssetsDepreciationInfo
+		|		ON FixedAssetsDepreciationInfo.Ref = FixedAssets.FixedAsset
+		|		AND FixedAssetsDepreciationInfo.LedgerType = FixedAssets.LedgerType
+		|WHERE
+		|	FixedAssetsDepreciationInfo.LedgerType.CalculateDepreciation"
 EndFunction
 
 #EndRegion

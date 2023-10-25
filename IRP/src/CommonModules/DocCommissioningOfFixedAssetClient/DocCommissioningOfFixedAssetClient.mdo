@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mdclass:CommonModule xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="22683ea3-203b-455e-a715-92be71e9928f">
+ <name>DocCommissioningOfFixedAssetClient</name>
+ <synonym>
+  <key>en</key>
+  <value>Doc commissioning of fixed asset client</value>
+ </synonym>
+ <synonym>
+  <key>ru</key>
+  <value>Док Принятие к учету основные средства клиент</value>
+ </synonym>
+ <synonym>
+  <key>tr</key>
+  <value>Doc commissioning of fixed asset client</value>
+ </synonym>
+ <clientManagedApplication>true</clientManagedApplication>
+ <clientOrdinaryApplication>true</clientOrdinaryApplication>
+</mdclass:CommonModule>

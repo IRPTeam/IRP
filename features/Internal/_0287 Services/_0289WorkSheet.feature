@@ -128,7 +128,7 @@ Scenario: _0293002 create Work sheet based on Work order without SO (link, unlin
 		And I go to line in "BasisesTree" table
 			| 'Currency'   | 'Price'    | 'Quantity'   | 'Row presentation'      | 'Unit'    |
 			| 'TRY'        | '200,00'   | '1,000'      | 'Assembly (Assembly)'   | 'pcs'     |
-		And in the table "BasisesTree" I click the button named "Link"
+		And I click the button named "Link"
 		And I go to line in "ItemListRows" table
 			| '#'   | 'Quantity'   | 'Row presentation'              | 'Unit'    |
 			| '2'   | '1,000'      | 'Installation (Installation)'   | 'pcs'     |
@@ -138,7 +138,7 @@ Scenario: _0293002 create Work sheet based on Work order without SO (link, unlin
 		And I go to line in "BasisesTree" table
 			| 'Currency'   | 'Price'    | 'Quantity'   | 'Row presentation'              | 'Unit'    |
 			| 'TRY'        | '100,00'   | '1,000'      | 'Installation (Installation)'   | 'pcs'     |
-		And in the table "BasisesTree" I click the button named "Link"
+		And I click the button named "Link"
 		And I click "Ok" button
 	* Check
 		And "ItemList" table became equal

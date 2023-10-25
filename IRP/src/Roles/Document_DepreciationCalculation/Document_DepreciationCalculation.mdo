@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mdclass:Role xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="d141f56c-ef38-4323-a1e3-63733623f6d6">
+ <name>Document_DepreciationCalculation</name>
+ <synonym>
+  <key>en</key>
+  <value>Document "Depreciation calculation"</value>
+ </synonym>
+ <synonym>
+  <key>ru</key>
+  <value>Документ "Расчет амортизации основных средств"</value>
+ </synonym>
+ <synonym>
+  <key>tr</key>
+  <value>Document "Depreciation calculation"</value>
+ </synonym>
+</mdclass:Role>

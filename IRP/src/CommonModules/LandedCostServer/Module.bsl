@@ -1,6 +1,12 @@
 
 // strict-types
 
+// T6095S_WriteOffBatchesInfo
+// R6010B_BatchWiseBalance
+// T6030S_BatchRelevance
+// R6030T_BatchShortageOutgoing
+// R6040T_BatchShortageIncoming
+
 #Region TRANSFER_DOCUMENTS
 
 Function GetArrayOfTransferDocument()
@@ -137,6 +143,9 @@ Function GetArrayOfBatchDocumentTypes()
 	ArrayOfTypes.Add(Type("DocumentRef.WorkSheet"));
 	ArrayOfTypes.Add(Type("DocumentRef.Production"));
 	ArrayOfTypes.Add(Type("DocumentRef.SalesReportFromTradeAgent"));
+	ArrayOfTypes.Add(Type("DocumentRef.CommissioningOfFixedAsset"));
+	ArrayOfTypes.Add(Type("DocumentRef.ModernizationOfFixedAsset"));
+	ArrayOfTypes.Add(Type("DocumentRef.DecommissioningOfFixedAsset"));
 	Return ArrayOfTypes;
 EndFunction
 
@@ -666,7 +675,59 @@ Procedure DoRegistration_CalculationMode_LandedCost(LocksStorage, CalculationSet
 
 	RecordSet.Write();
 	
+	// Fixed assets
+	RecordSet = InformationRegisters.T8510S_FixedAssetsInfo.CreateRecordSet();
+	RecordSet.Filter.Recorder.Set(CalculationSettings.CalculationMovementCostRef);
 	
+	_DataForFixedAssets = BatchWiseBalanceTables.DataForFixedAssets.Copy();
+	_DataForFixedAssets.Columns.Add("Amount");
+	_DataForFixedAssets.Columns.Add("Currency");
+	
+	ArrayOfFixedAssets = New Array();
+	_Currency = CurrenciesServer.GetLandedCostCurrency(CalculationSettings.Company);
+	
+	For Each Row In _DataForFixedAssets Do
+		Row.Amount = 
+			Row.InvoiceAmount
+			+ Row.IndirectCostAmount
+			+ Row.ExtraCostAmountByRatio
+			+ Row.ExtraDirectCostAmount
+			+ Row.AllocatedCostAmount
+			+ Row.AllocatedRevenueAmount;
+		
+		Row.Currency = _Currency;
+		
+		If ArrayOfFixedAssets.Find(Row.FixedAsset) = Undefined Then
+			ArrayOfFixedAssets.Add(Row.FixedAsset);
+		EndIf;
+	EndDo;
+	
+	_DataForFixedAssets.GroupBy("Period, Document, Company, Branch, FixedAsset, LedgerType, Schedule, Currency", 
+		"Amount");
+	
+	_DataForFixedAssetsByLedgerTypes = _DataForFixedAssets.CopyColumns();
+	
+	For Each FixedAsset In ArrayOfFixedAssets Do
+		_DataForFixedAssetsRows = _DataForFixedAssets.FindRows(New Structure("FixedAsset", FixedAsset));
+		For Each Row In _DataForFixedAssetsRows Do
+			For Each RowDepreciationInfo In FixedAsset.DepreciationInfo Do
+				NewRow = _DataForFixedAssetsByLedgerTypes.Add();
+				FillPropertyValues(NewRow, Row);
+				NewRow.LedgerType = RowDepreciationInfo.LedgerType;
+				NewRow.Schedule   = RowDepreciationInfo.Schedule;
+			EndDo;
+		EndDo; 
+	EndDo;
+	
+	For Each Row In _DataForFixedAssetsByLedgerTypes Do
+		NewRecord = RecordSet.Add();
+		FillPropertyValues(NewRecord, Row);
+		NewRecord.Period = Row.Period;
+		NewRecord.Recorder = CalculationSettings.CalculationMovementCostRef;
+	EndDo;
+
+	RecordSet.Write();
+		
 	// Batch balance
 	AccumulationRegisters.R6020B_BatchBalance.BatchBalance_LoadRecords(CalculationSettings.CalculationMovementCostRef);
 	
@@ -676,14 +737,18 @@ Procedure DoRegistration_CalculationMode_LandedCost(LocksStorage, CalculationSet
 	// Expenses
 	AccumulationRegisters.R5022T_Expenses.Expenses_LoadRecords(CalculationSettings.CalculationMovementCostRef);
 	
+	// Book value of fixed assets
+	AccumulationRegisters.R8510B_BookValueOfFixedAsset.BookValueOfFixedAsset_LoadRecords(CalculationSettings.CalculationMovementCostRef);
+	
+	// Cost of fixed asset
+	AccumulationRegisters.R8515T_CostOfFixedAsset.CostOfFixedAsset_LoadRecords(CalculationSettings.CalculationMovementCostRef);
+	
 	// Relevance
 	InformationRegisters.T6030S_BatchRelevance.BatchRelevance_Clear(CalculationSettings.Company, CalculationSettings.EndPeriod);
 	InformationRegisters.T6030S_BatchRelevance.BatchRelevance_Restore(CalculationSettings.Company, CalculationSettings.EndPeriod);	
 EndProcedure
 
 Function GetBatchWiseBalance(CalculationSettings)
-	tmp_manager = New TempTablesManager();
-	Tree = GetBatchTree(tmp_manager, CalculationSettings);
 
 	// EmptyTable_BatchWiseBalance
 	RegMetadata = Metadata.AccumulationRegisters.R6010B_BatchWiseBalance;
@@ -695,23 +760,23 @@ Function GetBatchWiseBalance(CalculationSettings)
 	EmptyTable_BatchWiseBalance.Columns.Add("Period"    , RegMetadata.StandardAttributes.Period.Type);
 	EmptyTable_BatchWiseBalance.Columns.Add("Quantity"  , RegMetadata.Resources.Quantity.Type);
 
-	EmptyTable_BatchWiseBalance.Columns.Add("InvoiceAmount"    , RegMetadata.Resources.InvoiceAmount.Type);
-	EmptyTable_BatchWiseBalance.Columns.Add("InvoiceTaxAmount" , RegMetadata.Resources.InvoiceTaxAmount.Type);
+	EmptyTable_BatchWiseBalance.Columns.Add("InvoiceAmount"             , RegMetadata.Resources.InvoiceAmount.Type);
+	EmptyTable_BatchWiseBalance.Columns.Add("InvoiceTaxAmount"          , RegMetadata.Resources.InvoiceTaxAmount.Type);
 	
-	EmptyTable_BatchWiseBalance.Columns.Add("IndirectCostAmount"  , RegMetadata.Resources.IndirectCostAmount.Type);
-	EmptyTable_BatchWiseBalance.Columns.Add("IndirectCostTaxAmount"  , RegMetadata.Resources.IndirectCostTaxAmount.Type);
+	EmptyTable_BatchWiseBalance.Columns.Add("IndirectCostAmount"        , RegMetadata.Resources.IndirectCostAmount.Type);
+	EmptyTable_BatchWiseBalance.Columns.Add("IndirectCostTaxAmount"     , RegMetadata.Resources.IndirectCostTaxAmount.Type);
 	
-	EmptyTable_BatchWiseBalance.Columns.Add("ExtraCostAmountByRatio" , RegMetadata.Resources.ExtraCostAmountByRatio.Type);
+	EmptyTable_BatchWiseBalance.Columns.Add("ExtraCostAmountByRatio"    , RegMetadata.Resources.ExtraCostAmountByRatio.Type);
 	EmptyTable_BatchWiseBalance.Columns.Add("ExtraCostTaxAmountByRatio" , RegMetadata.Resources.ExtraCostTaxAmountByRatio.Type);
 	
-	EmptyTable_BatchWiseBalance.Columns.Add("ExtraDirectCostAmount" , RegMetadata.Resources.ExtraDirectCostAmount.Type);
-	EmptyTable_BatchWiseBalance.Columns.Add("ExtraDirectCostTaxAmount" , RegMetadata.Resources.ExtraDirectCostTaxAmount.Type);
+	EmptyTable_BatchWiseBalance.Columns.Add("ExtraDirectCostAmount"     , RegMetadata.Resources.ExtraDirectCostAmount.Type);
+	EmptyTable_BatchWiseBalance.Columns.Add("ExtraDirectCostTaxAmount"  , RegMetadata.Resources.ExtraDirectCostTaxAmount.Type);
 	
-	EmptyTable_BatchWiseBalance.Columns.Add("AllocatedCostAmount"      , RegMetadata.Resources.AllocatedCostAmount.Type);
-	EmptyTable_BatchWiseBalance.Columns.Add("AllocatedCostTaxAmount"   , RegMetadata.Resources.AllocatedCostTaxAmount.Type);
+	EmptyTable_BatchWiseBalance.Columns.Add("AllocatedCostAmount"       , RegMetadata.Resources.AllocatedCostAmount.Type);
+	EmptyTable_BatchWiseBalance.Columns.Add("AllocatedCostTaxAmount"    , RegMetadata.Resources.AllocatedCostTaxAmount.Type);
 	
-	EmptyTable_BatchWiseBalance.Columns.Add("AllocatedRevenueAmount"   , RegMetadata.Resources.AllocatedRevenueAmount.Type);
-	EmptyTable_BatchWiseBalance.Columns.Add("AllocatedRevenueTaxAmount", RegMetadata.Resources.AllocatedRevenueTaxAmount.Type);
+	EmptyTable_BatchWiseBalance.Columns.Add("AllocatedRevenueAmount"    , RegMetadata.Resources.AllocatedRevenueAmount.Type);
+	EmptyTable_BatchWiseBalance.Columns.Add("AllocatedRevenueTaxAmount" , RegMetadata.Resources.AllocatedRevenueTaxAmount.Type);
 	
 	Tables = New Structure();
 	Tables.Insert("DataForExpense"               , EmptyTable_BatchWiseBalance.CopyColumns());
@@ -732,25 +797,25 @@ Function GetBatchWiseBalance(CalculationSettings)
 	DataForBundleAmountValues.Columns.Add("Company"        , RegMetadata.Dimensions.Company.Type);
 	DataForBundleAmountValues.Columns.Add("Batch"          , RegMetadata.Dimensions.Batch.Type);
 	DataForBundleAmountValues.Columns.Add("BatchKey"       , RegMetadata.Dimensions.BatchKey.Type);
-	DataForBundleAmountValues.Columns.Add("BatchKeyBundle"  , RegMetadata.Dimensions.BatchKeyBundle.Type);
+	DataForBundleAmountValues.Columns.Add("BatchKeyBundle" , RegMetadata.Dimensions.BatchKeyBundle.Type);
 	
-	DataForBundleAmountValues.Columns.Add("InvoiceAmount"    , RegMetadata.Resources.InvoiceAmount.Type);
-	DataForBundleAmountValues.Columns.Add("InvoiceTaxAmount" , RegMetadata.Resources.InvoiceTaxAmount.Type);
+	DataForBundleAmountValues.Columns.Add("InvoiceAmount"             , RegMetadata.Resources.InvoiceAmount.Type);
+	DataForBundleAmountValues.Columns.Add("InvoiceTaxAmount"          , RegMetadata.Resources.InvoiceTaxAmount.Type);
 
-	DataForBundleAmountValues.Columns.Add("IndirectCostAmount" , RegMetadata.Resources.IndirectCostAmount.Type);
-	DataForBundleAmountValues.Columns.Add("IndirectCostTaxAmount" , RegMetadata.Resources.IndirectCostTaxAmount.Type);
+	DataForBundleAmountValues.Columns.Add("IndirectCostAmount"        , RegMetadata.Resources.IndirectCostAmount.Type);
+	DataForBundleAmountValues.Columns.Add("IndirectCostTaxAmount"     , RegMetadata.Resources.IndirectCostTaxAmount.Type);
 	
-	DataForBundleAmountValues.Columns.Add("ExtraCostAmountByRatio" , RegMetadata.Resources.ExtraCostAmountByRatio.Type);
+	DataForBundleAmountValues.Columns.Add("ExtraCostAmountByRatio"    , RegMetadata.Resources.ExtraCostAmountByRatio.Type);
 	DataForBundleAmountValues.Columns.Add("ExtraCostTaxAmountByRatio" , RegMetadata.Resources.ExtraCostTaxAmountByRatio.Type);
 	
-	DataForBundleAmountValues.Columns.Add("ExtraDirectCostAmount" , RegMetadata.Resources.ExtraDirectCostAmount.Type);
-	DataForBundleAmountValues.Columns.Add("ExtraDirectCostTaxAmount" , RegMetadata.Resources.ExtraDirectCostTaxAmount.Type);
+	DataForBundleAmountValues.Columns.Add("ExtraDirectCostAmount"     , RegMetadata.Resources.ExtraDirectCostAmount.Type);
+	DataForBundleAmountValues.Columns.Add("ExtraDirectCostTaxAmount"  , RegMetadata.Resources.ExtraDirectCostTaxAmount.Type);
 		
-	DataForBundleAmountValues.Columns.Add("AllocatedCostAmount"      , RegMetadata.Resources.AllocatedCostAmount.Type);
-	DataForBundleAmountValues.Columns.Add("AllocatedCostTaxAmount"   , RegMetadata.Resources.AllocatedCostTaxAmount.Type);
+	DataForBundleAmountValues.Columns.Add("AllocatedCostAmount"       , RegMetadata.Resources.AllocatedCostAmount.Type);
+	DataForBundleAmountValues.Columns.Add("AllocatedCostTaxAmount"    , RegMetadata.Resources.AllocatedCostTaxAmount.Type);
 	
-	DataForBundleAmountValues.Columns.Add("AllocatedRevenueAmount"   , RegMetadata.Resources.AllocatedRevenueAmount.Type);
-	DataForBundleAmountValues.Columns.Add("AllocatedRevenueTaxAmount", RegMetadata.Resources.AllocatedRevenueTaxAmount.Type);
+	DataForBundleAmountValues.Columns.Add("AllocatedRevenueAmount"    , RegMetadata.Resources.AllocatedRevenueAmount.Type);
+	DataForBundleAmountValues.Columns.Add("AllocatedRevenueTaxAmount" , RegMetadata.Resources.AllocatedRevenueTaxAmount.Type);
 	
 	Tables.Insert("DataForBundleAmountValues", DataForBundleAmountValues);
 	
@@ -765,23 +830,23 @@ Function GetBatchWiseBalance(CalculationSettings)
 	DataForCompositeBatchesAmountValues.Columns.Add("BatchKeyComposite" , RegMetadata.Dimensions.BatchKeyComposite.Type);
 	DataForCompositeBatchesAmountValues.Columns.Add("Quantity"          , RegMetadata.Resources.Quantity.Type);
 	
-	DataForCompositeBatchesAmountValues.Columns.Add("InvoiceAmount"            , RegMetadata.Resources.InvoiceAmount.Type);
-	DataForCompositeBatchesAmountValues.Columns.Add("InvoiceTaxAmount"         , RegMetadata.Resources.InvoiceTaxAmount.Type);
+	DataForCompositeBatchesAmountValues.Columns.Add("InvoiceAmount"              , RegMetadata.Resources.InvoiceAmount.Type);
+	DataForCompositeBatchesAmountValues.Columns.Add("InvoiceTaxAmount"           , RegMetadata.Resources.InvoiceTaxAmount.Type);
 	
-	DataForCompositeBatchesAmountValues.Columns.Add("IndirectCostAmount"    , RegMetadata.Resources.IndirectCostAmount.Type);
-	DataForCompositeBatchesAmountValues.Columns.Add("IndirectCostTaxAmount"    , RegMetadata.Resources.IndirectCostTaxAmount.Type);
+	DataForCompositeBatchesAmountValues.Columns.Add("IndirectCostAmount"         , RegMetadata.Resources.IndirectCostAmount.Type);
+	DataForCompositeBatchesAmountValues.Columns.Add("IndirectCostTaxAmount"      , RegMetadata.Resources.IndirectCostTaxAmount.Type);
 	
-	DataForCompositeBatchesAmountValues.Columns.Add("ExtraCostAmountByRatio"   , RegMetadata.Resources.ExtraCostAmountByRatio.Type);
-	DataForCompositeBatchesAmountValues.Columns.Add("ExtraCostTaxAmountByRatio"   , RegMetadata.Resources.ExtraCostTaxAmountByRatio.Type);
+	DataForCompositeBatchesAmountValues.Columns.Add("ExtraCostAmountByRatio"     , RegMetadata.Resources.ExtraCostAmountByRatio.Type);
+	DataForCompositeBatchesAmountValues.Columns.Add("ExtraCostTaxAmountByRatio"  , RegMetadata.Resources.ExtraCostTaxAmountByRatio.Type);
 	
-	DataForCompositeBatchesAmountValues.Columns.Add("ExtraDirectCostAmount"   , RegMetadata.Resources.ExtraDirectCostAmount.Type);
+	DataForCompositeBatchesAmountValues.Columns.Add("ExtraDirectCostAmount"      , RegMetadata.Resources.ExtraDirectCostAmount.Type);
 	DataForCompositeBatchesAmountValues.Columns.Add("ExtraDirectCostTaxAmount"   , RegMetadata.Resources.ExtraDirectCostTaxAmount.Type);
 	
-	DataForCompositeBatchesAmountValues.Columns.Add("AllocatedCostAmount"      , RegMetadata.Resources.AllocatedCostAmount.Type);
-	DataForCompositeBatchesAmountValues.Columns.Add("AllocatedCostTaxAmount"   , RegMetadata.Resources.AllocatedCostTaxAmount.Type);
+	DataForCompositeBatchesAmountValues.Columns.Add("AllocatedCostAmount"        , RegMetadata.Resources.AllocatedCostAmount.Type);
+	DataForCompositeBatchesAmountValues.Columns.Add("AllocatedCostTaxAmount"     , RegMetadata.Resources.AllocatedCostTaxAmount.Type);
 	
-	DataForCompositeBatchesAmountValues.Columns.Add("AllocatedRevenueAmount"   , RegMetadata.Resources.AllocatedRevenueAmount.Type);
-	DataForCompositeBatchesAmountValues.Columns.Add("AllocatedRevenueTaxAmount", RegMetadata.Resources.AllocatedRevenueTaxAmount.Type);
+	DataForCompositeBatchesAmountValues.Columns.Add("AllocatedRevenueAmount"     , RegMetadata.Resources.AllocatedRevenueAmount.Type);
+	DataForCompositeBatchesAmountValues.Columns.Add("AllocatedRevenueTaxAmount"  , RegMetadata.Resources.AllocatedRevenueTaxAmount.Type);
 	
 	Tables.Insert("DataForCompositeBatchesAmountValues", DataForCompositeBatchesAmountValues);
 	
@@ -794,23 +859,23 @@ Function GetBatchWiseBalance(CalculationSettings)
 	DataForReallocatedBatchesAmountValues.Columns.Add("BatchKey"         , RegMetadata.Dimensions.BatchKey.Type);
 	DataForReallocatedBatchesAmountValues.Columns.Add("Quantity"         , RegMetadata.Resources.Quantity.Type);
 	
-	DataForReallocatedBatchesAmountValues.Columns.Add("InvoiceAmount"           , RegMetadata.Resources.InvoiceAmount.Type);
-	DataForReallocatedBatchesAmountValues.Columns.Add("InvoiceTaxAmount"        , RegMetadata.Resources.InvoiceTaxAmount.Type);
+	DataForReallocatedBatchesAmountValues.Columns.Add("InvoiceAmount"             , RegMetadata.Resources.InvoiceAmount.Type);
+	DataForReallocatedBatchesAmountValues.Columns.Add("InvoiceTaxAmount"          , RegMetadata.Resources.InvoiceTaxAmount.Type);
 	
-	DataForReallocatedBatchesAmountValues.Columns.Add("IndirectCostAmount"   , RegMetadata.Resources.IndirectCostAmount.Type);
-	DataForReallocatedBatchesAmountValues.Columns.Add("IndirectCostTaxAmount"   , RegMetadata.Resources.IndirectCostTaxAmount.Type);
+	DataForReallocatedBatchesAmountValues.Columns.Add("IndirectCostAmount"        , RegMetadata.Resources.IndirectCostAmount.Type);
+	DataForReallocatedBatchesAmountValues.Columns.Add("IndirectCostTaxAmount"     , RegMetadata.Resources.IndirectCostTaxAmount.Type);
 	
-	DataForReallocatedBatchesAmountValues.Columns.Add("ExtraCostAmountByRatio"  , RegMetadata.Resources.ExtraCostAmountByRatio.Type);
-	DataForReallocatedBatchesAmountValues.Columns.Add("ExtraCostTaxAmountByRatio"  , RegMetadata.Resources.ExtraCostTaxAmountByRatio.Type);
+	DataForReallocatedBatchesAmountValues.Columns.Add("ExtraCostAmountByRatio"    , RegMetadata.Resources.ExtraCostAmountByRatio.Type);
+	DataForReallocatedBatchesAmountValues.Columns.Add("ExtraCostTaxAmountByRatio" , RegMetadata.Resources.ExtraCostTaxAmountByRatio.Type);
 	
-	DataForReallocatedBatchesAmountValues.Columns.Add("ExtraDirectCostAmount"  , RegMetadata.Resources.ExtraDirectCostAmount.Type);
+	DataForReallocatedBatchesAmountValues.Columns.Add("ExtraDirectCostAmount"     , RegMetadata.Resources.ExtraDirectCostAmount.Type);
 	DataForReallocatedBatchesAmountValues.Columns.Add("ExtraDirectCostTaxAmount"  , RegMetadata.Resources.ExtraDirectCostTaxAmount.Type);
 	
-	DataForReallocatedBatchesAmountValues.Columns.Add("AllocatedCostAmount"      , RegMetadata.Resources.AllocatedCostAmount.Type);
-	DataForReallocatedBatchesAmountValues.Columns.Add("AllocatedCostTaxAmount"   , RegMetadata.Resources.AllocatedCostTaxAmount.Type);
+	DataForReallocatedBatchesAmountValues.Columns.Add("AllocatedCostAmount"       , RegMetadata.Resources.AllocatedCostAmount.Type);
+	DataForReallocatedBatchesAmountValues.Columns.Add("AllocatedCostTaxAmount"    , RegMetadata.Resources.AllocatedCostTaxAmount.Type);
 	
-	DataForReallocatedBatchesAmountValues.Columns.Add("AllocatedRevenueAmount"   , RegMetadata.Resources.AllocatedRevenueAmount.Type);
-	DataForReallocatedBatchesAmountValues.Columns.Add("AllocatedRevenueTaxAmount", RegMetadata.Resources.AllocatedRevenueTaxAmount.Type);
+	DataForReallocatedBatchesAmountValues.Columns.Add("AllocatedRevenueAmount"    , RegMetadata.Resources.AllocatedRevenueAmount.Type);
+	DataForReallocatedBatchesAmountValues.Columns.Add("AllocatedRevenueTaxAmount" , RegMetadata.Resources.AllocatedRevenueTaxAmount.Type);
 	
 	Tables.Insert("DataForReallocatedBatchesAmountValues", DataForReallocatedBatchesAmountValues);
 	
@@ -827,71 +892,106 @@ Function GetBatchWiseBalance(CalculationSettings)
 	DataForWriteOffBatches.Columns.Add("Currency"         , RegMetadata.Dimensions.Currency.Type);
 	DataForWriteOffBatches.Columns.Add("RowID"            , RegMetadata.Dimensions.RowID.Type);
 	
-	DataForWriteOffBatches.Columns.Add("InvoiceAmount"           , RegMetadata.Resources.InvoiceAmount.Type);
-	DataForWriteOffBatches.Columns.Add("InvoiceTaxAmount"        , RegMetadata.Resources.InvoiceTaxAmount.Type);
+	DataForWriteOffBatches.Columns.Add("InvoiceAmount"             , RegMetadata.Resources.InvoiceAmount.Type);
+	DataForWriteOffBatches.Columns.Add("InvoiceTaxAmount"          , RegMetadata.Resources.InvoiceTaxAmount.Type);
 	
-	DataForWriteOffBatches.Columns.Add("IndirectCostAmount"   , RegMetadata.Resources.IndirectCostAmount.Type);
-	DataForWriteOffBatches.Columns.Add("IndirectCostTaxAmount"   , RegMetadata.Resources.IndirectCostTaxAmount.Type);
+	DataForWriteOffBatches.Columns.Add("IndirectCostAmount"        , RegMetadata.Resources.IndirectCostAmount.Type);
+	DataForWriteOffBatches.Columns.Add("IndirectCostTaxAmount"     , RegMetadata.Resources.IndirectCostTaxAmount.Type);
 	
-	DataForWriteOffBatches.Columns.Add("ExtraCostAmountByRatio"  , RegMetadata.Resources.ExtraCostAmountByRatio.Type);
-	DataForWriteOffBatches.Columns.Add("ExtraCostTaxAmountByRatio"  , RegMetadata.Resources.ExtraCostTaxAmountByRatio.Type);
+	DataForWriteOffBatches.Columns.Add("ExtraCostAmountByRatio"    , RegMetadata.Resources.ExtraCostAmountByRatio.Type);
+	DataForWriteOffBatches.Columns.Add("ExtraCostTaxAmountByRatio" , RegMetadata.Resources.ExtraCostTaxAmountByRatio.Type);
 	
-	DataForWriteOffBatches.Columns.Add("ExtraDirectCostAmount"  , RegMetadata.Resources.ExtraDirectCostAmount.Type);
+	DataForWriteOffBatches.Columns.Add("ExtraDirectCostAmount"     , RegMetadata.Resources.ExtraDirectCostAmount.Type);
 	DataForWriteOffBatches.Columns.Add("ExtraDirectCostTaxAmount"  , RegMetadata.Resources.ExtraDirectCostTaxAmount.Type);
 	
-	DataForWriteOffBatches.Columns.Add("AllocatedCostAmount"      , RegMetadata.Resources.AllocatedCostAmount.Type);
-	DataForWriteOffBatches.Columns.Add("AllocatedCostTaxAmount"   , RegMetadata.Resources.AllocatedCostTaxAmount.Type);
+	DataForWriteOffBatches.Columns.Add("AllocatedCostAmount"       , RegMetadata.Resources.AllocatedCostAmount.Type);
+	DataForWriteOffBatches.Columns.Add("AllocatedCostTaxAmount"    , RegMetadata.Resources.AllocatedCostTaxAmount.Type);
 	
-	DataForWriteOffBatches.Columns.Add("AllocatedRevenueAmount"   , RegMetadata.Resources.AllocatedRevenueAmount.Type);
-	DataForWriteOffBatches.Columns.Add("AllocatedRevenueTaxAmount", RegMetadata.Resources.AllocatedRevenueTaxAmount.Type);
+	DataForWriteOffBatches.Columns.Add("AllocatedRevenueAmount"    , RegMetadata.Resources.AllocatedRevenueAmount.Type);
+	DataForWriteOffBatches.Columns.Add("AllocatedRevenueTaxAmount" , RegMetadata.Resources.AllocatedRevenueTaxAmount.Type);
 	
 	Tables.Insert("DataForWriteOffBatches", DataForWriteOffBatches);
+	
+	// DataForFixedAssets
+	RegMetadata = Metadata.InformationRegisters.T8510S_FixedAssetsInfo;
+	DataForFixedAssets = New ValueTable();
+	DataForFixedAssets.Columns.Add("Period"           , RegMetadata.StandardAttributes.Period.Type);
+	DataForFixedAssets.Columns.Add("Document"         , RegMetadata.Dimensions.Document.Type);
+	DataForFixedAssets.Columns.Add("Company"          , RegMetadata.Dimensions.Company.Type);
+	DataForFixedAssets.Columns.Add("Branch"           , RegMetadata.Dimensions.Branch.Type);
+	DataForFixedAssets.Columns.Add("FixedAsset"       , RegMetadata.Dimensions.FixedAsset.Type);
+	DataForFixedAssets.Columns.Add("LedgerType"       , RegMetadata.Dimensions.LedgerType.Type);
+	DataForFixedAssets.Columns.Add("Schedule"         , RegMetadata.Dimensions.Schedule.Type);
+	
+	DataForFixedAssets.Columns.Add("InvoiceAmount"             , RegMetadata.Resources.Amount.Type);
+	DataForFixedAssets.Columns.Add("InvoiceTaxAmount"          , RegMetadata.Resources.Amount.Type);
+	
+	DataForFixedAssets.Columns.Add("IndirectCostAmount"        , RegMetadata.Resources.Amount.Type);
+	DataForFixedAssets.Columns.Add("IndirectCostTaxAmount"     , RegMetadata.Resources.Amount.Type);
+	
+	DataForFixedAssets.Columns.Add("ExtraCostAmountByRatio"    , RegMetadata.Resources.Amount.Type);
+	DataForFixedAssets.Columns.Add("ExtraCostTaxAmountByRatio" , RegMetadata.Resources.Amount.Type);
+	
+	DataForFixedAssets.Columns.Add("ExtraDirectCostAmount"     , RegMetadata.Resources.Amount.Type);
+	DataForFixedAssets.Columns.Add("ExtraDirectCostTaxAmount"  , RegMetadata.Resources.Amount.Type);
+	
+	DataForFixedAssets.Columns.Add("AllocatedCostAmount"       , RegMetadata.Resources.Amount.Type);
+	DataForFixedAssets.Columns.Add("AllocatedCostTaxAmount"    , RegMetadata.Resources.Amount.Type);
+	
+	DataForFixedAssets.Columns.Add("AllocatedRevenueAmount"    , RegMetadata.Resources.Amount.Type);
+	DataForFixedAssets.Columns.Add("AllocatedRevenueTaxAmount" , RegMetadata.Resources.Amount.Type);
+	
+	Tables.Insert("DataForFixedAssets", DataForFixedAssets);
 	
 	//TableOfReturnedBatches
 	RegMetadata = Metadata.InformationRegisters.T6020S_BatchKeysInfo;
 	TableOfReturnedBatches = New ValueTable();
-	TableOfReturnedBatches.Columns.Add("IsOpeningBalance" , New TypeDescription("Boolean"));
-	TableOfReturnedBatches.Columns.Add("Skip"             , New TypeDescription("Boolean"));
-	TableOfReturnedBatches.Columns.Add("Priority"         , New TypeDescription("Number"));
-	TableOfReturnedBatches.Columns.Add("BatchKey"         , New TypeDescription("CatalogRef.BatchKeys"));
-	TableOfReturnedBatches.Columns.Add("Quantity"         , RegMetadata.Resources.Quantity.Type);
-	
-	TableOfReturnedBatches.Columns.Add("InvoiceAmount"           , RegMetadata.Resources.InvoiceAmount.Type);
-	TableOfReturnedBatches.Columns.Add("InvoiceTaxAmount"        , RegMetadata.Resources.InvoiceTaxAmount.Type);
-	
-	TableOfReturnedBatches.Columns.Add("IndirectCostAmount"   , RegMetadata.Resources.IndirectCostAmount.Type);
-	TableOfReturnedBatches.Columns.Add("IndirectCostTaxAmount"   , RegMetadata.Resources.IndirectCostTaxAmount.Type);
-	
-	TableOfReturnedBatches.Columns.Add("ExtraCostAmountByRatio"  , RegMetadata.Resources.ExtraCostAmountByRatio.Type);
-	TableOfReturnedBatches.Columns.Add("ExtraCostTaxAmountByRatio"  , RegMetadata.Resources.ExtraCostTaxAmountByRatio.Type);
-	
-	TableOfReturnedBatches.Columns.Add("ExtraDirectCostAmount"  , RegMetadata.Resources.ExtraDirectCostAmount.Type);
-	TableOfReturnedBatches.Columns.Add("ExtraDirectCostTaxAmount"  , RegMetadata.Resources.ExtraDirectCostTaxAmount.Type);
-	
-	TableOfReturnedBatches.Columns.Add("AllocatedCostAmount"       , RegMetadata.Resources.AllocatedCostAmount.Type);
-	TableOfReturnedBatches.Columns.Add("AllocatedCostTaxAmount"    , RegMetadata.Resources.AllocatedCostTaxAmount.Type);
-	
-	TableOfReturnedBatches.Columns.Add("AllocatedRevenueAmount"    , RegMetadata.Resources.AllocatedRevenueAmount.Type);
-	TableOfReturnedBatches.Columns.Add("AllocatedRevenueTaxAmount" , RegMetadata.Resources.AllocatedRevenueTaxAmount.Type);
-	
 	TableOfReturnedBatches.Columns.Add("Document"         , GetBatchDocumentsTypes());
 	TableOfReturnedBatches.Columns.Add("Date"             , RegMetadata.StandardAttributes.Period.Type);
 	TableOfReturnedBatches.Columns.Add("Company"          , RegMetadata.Dimensions.Company.Type);
 	TableOfReturnedBatches.Columns.Add("Direction"        , RegMetadata.Dimensions.Direction.Type);
 	TableOfReturnedBatches.Columns.Add("Batch"            , New TypeDescription("CatalogRef.Batches"));
 	TableOfReturnedBatches.Columns.Add("QuantityBalance"  , RegMetadata.Resources.Quantity.Type);
+	TableOfReturnedBatches.Columns.Add("IsOpeningBalance" , New TypeDescription("Boolean"));
+	TableOfReturnedBatches.Columns.Add("Skip"             , New TypeDescription("Boolean"));
+	TableOfReturnedBatches.Columns.Add("Priority"         , New TypeDescription("Number"));
+	TableOfReturnedBatches.Columns.Add("BatchKey"         , New TypeDescription("CatalogRef.BatchKeys"));
+	TableOfReturnedBatches.Columns.Add("Quantity"         , RegMetadata.Resources.Quantity.Type);
 	
-	TableOfReturnedBatches.Columns.Add("InvoiceAmountBalance"    , RegMetadata.Resources.InvoiceAmount.Type);
-	TableOfReturnedBatches.Columns.Add("InvoiceTaxAmountBalance" , RegMetadata.Resources.InvoiceTaxAmount.Type);
+	TableOfReturnedBatches.Columns.Add("BatchDocument"    , RegMetadata.Dimensions.BatchDocument.Type);
+	TableOfReturnedBatches.Columns.Add("SalesInvoice"     , RegMetadata.Dimensions.SalesInvoice.Type); 
+	TableOfReturnedBatches.Columns.Add("AlreadyReceived"  , New TypeDescription("Boolean"));
 	
-	TableOfReturnedBatches.Columns.Add("IndirectCostAmountBalance"  , RegMetadata.Resources.IndirectCostAmount.Type);
-	TableOfReturnedBatches.Columns.Add("IndirectCostTaxAmountBalance"  , RegMetadata.Resources.IndirectCostTaxAmount.Type);
+	TableOfReturnedBatches.Columns.Add("InvoiceAmount"              , RegMetadata.Resources.InvoiceAmount.Type);
+	TableOfReturnedBatches.Columns.Add("InvoiceTaxAmount"           , RegMetadata.Resources.InvoiceTaxAmount.Type);
 	
-	TableOfReturnedBatches.Columns.Add("ExtraCostAmountByRatioBalance" , RegMetadata.Resources.ExtraCostAmountByRatio.Type);
+	TableOfReturnedBatches.Columns.Add("IndirectCostAmount"         , RegMetadata.Resources.IndirectCostAmount.Type);
+	TableOfReturnedBatches.Columns.Add("IndirectCostTaxAmount"      , RegMetadata.Resources.IndirectCostTaxAmount.Type);
+	
+	TableOfReturnedBatches.Columns.Add("ExtraCostAmountByRatio"     , RegMetadata.Resources.ExtraCostAmountByRatio.Type);
+	TableOfReturnedBatches.Columns.Add("ExtraCostTaxAmountByRatio"  , RegMetadata.Resources.ExtraCostTaxAmountByRatio.Type);
+	
+	TableOfReturnedBatches.Columns.Add("ExtraDirectCostAmount"      , RegMetadata.Resources.ExtraDirectCostAmount.Type);
+	TableOfReturnedBatches.Columns.Add("ExtraDirectCostTaxAmount"   , RegMetadata.Resources.ExtraDirectCostTaxAmount.Type);
+	
+	TableOfReturnedBatches.Columns.Add("AllocatedCostAmount"        , RegMetadata.Resources.AllocatedCostAmount.Type);
+	TableOfReturnedBatches.Columns.Add("AllocatedCostTaxAmount"     , RegMetadata.Resources.AllocatedCostTaxAmount.Type);
+	
+	TableOfReturnedBatches.Columns.Add("AllocatedRevenueAmount"     , RegMetadata.Resources.AllocatedRevenueAmount.Type);
+	TableOfReturnedBatches.Columns.Add("AllocatedRevenueTaxAmount"  , RegMetadata.Resources.AllocatedRevenueTaxAmount.Type);
+	
+	
+	TableOfReturnedBatches.Columns.Add("InvoiceAmountBalance"             , RegMetadata.Resources.InvoiceAmount.Type);
+	TableOfReturnedBatches.Columns.Add("InvoiceTaxAmountBalance"          , RegMetadata.Resources.InvoiceTaxAmount.Type);
+	
+	TableOfReturnedBatches.Columns.Add("IndirectCostAmountBalance"        , RegMetadata.Resources.IndirectCostAmount.Type);
+	TableOfReturnedBatches.Columns.Add("IndirectCostTaxAmountBalance"     , RegMetadata.Resources.IndirectCostTaxAmount.Type);
+	
+	TableOfReturnedBatches.Columns.Add("ExtraCostAmountByRatioBalance"    , RegMetadata.Resources.ExtraCostAmountByRatio.Type);
 	TableOfReturnedBatches.Columns.Add("ExtraCostTaxAmountByRatioBalance" , RegMetadata.Resources.ExtraCostTaxAmountByRatio.Type);
 	
-	TableOfReturnedBatches.Columns.Add("ExtraDirectCostAmountBalance" , RegMetadata.Resources.ExtraDirectCostAmount.Type);
-	TableOfReturnedBatches.Columns.Add("ExtraDirectCostTaxAmountBalance" , RegMetadata.Resources.ExtraDirectCostTaxAmount.Type);
+	TableOfReturnedBatches.Columns.Add("ExtraDirectCostAmountBalance"     , RegMetadata.Resources.ExtraDirectCostAmount.Type);
+	TableOfReturnedBatches.Columns.Add("ExtraDirectCostTaxAmountBalance"  , RegMetadata.Resources.ExtraDirectCostTaxAmount.Type);
 	
 	TableOfReturnedBatches.Columns.Add("AllocatedCostAmountBalance"       , RegMetadata.Resources.AllocatedCostAmount.Type);
 	TableOfReturnedBatches.Columns.Add("AllocatedCostTaxAmountBalance"    , RegMetadata.Resources.AllocatedCostTaxAmount.Type);
@@ -899,9 +999,8 @@ Function GetBatchWiseBalance(CalculationSettings)
 	TableOfReturnedBatches.Columns.Add("AllocatedRevenueAmountBalance"    , RegMetadata.Resources.AllocatedRevenueAmount.Type);
 	TableOfReturnedBatches.Columns.Add("AllocatedRevenueTaxAmountBalance" , RegMetadata.Resources.AllocatedRevenueTaxAmount.Type);
 	
-	TableOfReturnedBatches.Columns.Add("BatchDocument"    , RegMetadata.Dimensions.BatchDocument.Type);
-	TableOfReturnedBatches.Columns.Add("SalesInvoice"     , RegMetadata.Dimensions.SalesInvoice.Type); 
-	TableOfReturnedBatches.Columns.Add("AlreadyReceived"  , New TypeDescription("Boolean"));
+	tmp_manager = New TempTablesManager();
+	Tree = GetBatchTree(tmp_manager, CalculationSettings);
 	
 	For Each Row In Tree.Rows Do
 		CalculateBatch(Row.Document, Row.Rows, Tables, Tree, TableOfReturnedBatches, EmptyTable_BatchWiseBalance, CalculationSettings);
@@ -994,6 +1093,8 @@ Function GetBatchTree(TempTablesManager, CalculationSettings)
 	|	case
 	|		when T6020S_BatchKeysInfo.Recorder refs Document.StockAdjustmentAsWriteOff
 	|		OR T6020S_BatchKeysInfo.Recorder refs Document.WorkSheet
+	|		OR T6020S_BatchKeysInfo.Recorder refs Document.CommissioningOfFixedAsset
+	|		OR T6020S_BatchKeysInfo.Recorder refs Document.ModernizationOfFixedAsset
 	|			then T6020S_BatchKeysInfo.Branch
 	|		else undefined
 	|	end AS Branch,
@@ -1009,6 +1110,7 @@ Function GetBatchTree(TempTablesManager, CalculationSettings)
 	|		else undefined
 	|	end AS ItemLinkID,
 	|	T6020S_BatchKeysInfo.Store AS Store,
+	|	T6020S_BatchKeysInfo.FixedAsset AS FixedAsset,
 	|	T6020S_BatchKeysInfo.SerialLotNumber AS SerialLotNumber,
 	|	T6020S_BatchKeysInfo.SourceOfOrigin AS SourceOfOrigin,
 	|	T6020S_BatchKeysInfo.ItemKey AS ItemKey
@@ -1075,6 +1177,8 @@ Function GetBatchTree(TempTablesManager, CalculationSettings)
 	|	case
 	|		when T6020S_BatchKeysInfo.Recorder refs Document.StockAdjustmentAsWriteOff
 	|		OR T6020S_BatchKeysInfo.Recorder refs Document.WorkSheet
+	|		OR T6020S_BatchKeysInfo.Recorder refs Document.CommissioningOfFixedAsset
+	|		OR T6020S_BatchKeysInfo.Recorder refs Document.ModernizationOfFixedAsset
 	|			then T6020S_BatchKeysInfo.Branch
 	|		else undefined
 	|	end,
@@ -1090,6 +1194,7 @@ Function GetBatchTree(TempTablesManager, CalculationSettings)
 	|		else undefined
 	|	end,
 	|	T6020S_BatchKeysInfo.Store,
+	|	T6020S_BatchKeysInfo.FixedAsset,
 	|	T6020S_BatchKeysInfo.SerialLotNumber,
 	|	T6020S_BatchKeysInfo.SourceOfOrigin,
 	|	T6020S_BatchKeysInfo.ItemKey
@@ -1195,6 +1300,8 @@ Function GetBatchTree(TempTablesManager, CalculationSettings)
 	|	case
 	|		when T6020S_BatchKeysInfo.Recorder refs Document.StockAdjustmentAsWriteOff
 	|		OR T6020S_BatchKeysInfo.Recorder refs Document.WorkSheet
+	|		OR T6020S_BatchKeysInfo.Recorder refs Document.CommissioningOfFixedAsset
+	|		OR T6020S_BatchKeysInfo.Recorder refs Document.ModernizationOfFixedAsset
 	|			then T6020S_BatchKeysInfo.Branch
 	|		else undefined
 	|	end AS Branch,
@@ -1210,6 +1317,7 @@ Function GetBatchTree(TempTablesManager, CalculationSettings)
 	|		else undefined
 	|	end AS ItemLinkID,
 	|	T6020S_BatchKeysInfo.Store AS Store,
+	|	T6020S_BatchKeysInfo.FixedAsset AS FixedAsset,
 	|	T6020S_BatchKeysInfo.SerialLotNumber AS SerialLotNumber,
 	|	T6020S_BatchKeysInfo.SourceOfOrigin AS SourceOfOrigin,
 	|	T6020S_BatchKeysInfo.ItemKey AS ItemKey
@@ -1271,6 +1379,8 @@ Function GetBatchTree(TempTablesManager, CalculationSettings)
 	|	case
 	|		when T6020S_BatchKeysInfo.Recorder refs Document.StockAdjustmentAsWriteOff
 	|		OR T6020S_BatchKeysInfo.Recorder refs Document.WorkSheet
+	|		OR T6020S_BatchKeysInfo.Recorder refs Document.CommissioningOfFixedAsset
+	|		OR T6020S_BatchKeysInfo.Recorder refs Document.ModernizationOfFixedAsset
 	|			then T6020S_BatchKeysInfo.Branch
 	|		else undefined
 	|	end,
@@ -1286,6 +1396,7 @@ Function GetBatchTree(TempTablesManager, CalculationSettings)
 	|		else undefined
 	|	end,
 	|	T6020S_BatchKeysInfo.Store,
+	|	T6020S_BatchKeysInfo.FixedAsset,
 	|	T6020S_BatchKeysInfo.SerialLotNumber,
 	|	T6020S_BatchKeysInfo.SourceOfOrigin,
 	|	T6020S_BatchKeysInfo.ItemKey
@@ -1320,6 +1431,7 @@ Function GetBatchTree(TempTablesManager, CalculationSettings)
 	|	BatchKeysRegister.Currency AS Currency,
 	|	BatchKeysRegister.ItemLinkID AS ItemLinkID,
 	|	BatchKeysRegister.Store AS Store,
+	|	BatchKeysRegister.FixedAsset AS FixedAsset,
 	|	BatchKeysRegister.SerialLotNumber AS SerialLotNumber,
 	|	BatchKeysRegister.SourceOfOrigin AS SourceOfOrigin,
 	|	BatchKeysRegister.ItemKey AS ItemKey
@@ -1357,6 +1469,7 @@ Function GetBatchTree(TempTablesManager, CalculationSettings)
 	|	BatchKeysRegisterOutPeriod.Currency,
 	|	BatchKeysRegisterOutPeriod.ItemLinkID,
 	|	BatchKeysRegisterOutPeriod.Store,
+	|	BatchKeysRegisterOutPeriod.FixedAsset,
 	|	BatchKeysRegisterOutPeriod.SerialLotNumber,
 	|	BatchKeysRegisterOutPeriod.SourceOfOrigin,
 	|	BatchKeysRegisterOutPeriod.ItemKey
@@ -1392,7 +1505,8 @@ Function GetBatchTree(TempTablesManager, CalculationSettings)
 	|	BatchKeysInfo.RowID AS RowID,
 	|	BatchKeysInfo.Branch AS Branch,
 	|	BatchKeysInfo.Currency AS Currency,
-	|	BatchKeysInfo.ItemLinkID AS ItemLinkID
+	|	BatchKeysInfo.ItemLinkID AS ItemLinkID,
+	|	BatchKeysInfo.FixedAsset AS FixedAsset
 	|INTO BatchKeys
 	|FROM
 	|	BatchKeysInfo AS BatchKeysInfo
@@ -1416,7 +1530,8 @@ Function GetBatchTree(TempTablesManager, CalculationSettings)
 	|	BatchKeysInfo.RowID,
 	|	BatchKeysInfo.Branch,
 	|	BatchKeysInfo.Currency,
-	|	BatchKeysInfo.ItemLinkID
+	|	BatchKeysInfo.ItemLinkID,
+	|	BatchKeysInfo.FixedAsset
 	|;
 	|
 	////////////////////////////////////////////////////////////////////////////////
@@ -1527,7 +1642,8 @@ Function GetBatchTree(TempTablesManager, CalculationSettings)
 	|	BatchKeys.RowID AS RowID,
 	|	BatchKeys.Branch AS Branch,
 	|	BatchKeys.Currency AS Currency,
-	|	BatchKeys.ItemLinkID AS ItemLinkID
+	|	BatchKeys.ItemLinkID AS ItemLinkID,
+	|	BatchKeys.FixedAsset AS FixedAsset
 	|INTO AllData
 	|FROM
 	|	BatchKeys AS BatchKeys
@@ -1574,6 +1690,7 @@ Function GetBatchTree(TempTablesManager, CalculationSettings)
 	|	R6010B_BatchWiseBalance.AllocatedCostTaxAmountBalance,
 	|	R6010B_BatchWiseBalance.AllocatedRevenueAmountBalance,
 	|	R6010B_BatchWiseBalance.AllocatedRevenueTaxAmountBalance,
+	|	UNDEFINED,
 	|	UNDEFINED,
 	|	UNDEFINED,
 	|	UNDEFINED,
@@ -1634,7 +1751,8 @@ Function GetBatchTree(TempTablesManager, CalculationSettings)
 	|	AllData.RowID AS RowID,
 	|	AllData.Branch AS Branch,
 	|	AllData.Currency AS Currency,
-	|	AllData.ItemLinkID AS ItemLinkID
+	|	AllData.ItemLinkID AS ItemLinkID,
+	|	AllData.FixedAsset AS FixedAsset
 	|INTO AllDataGrouped
 	|FROM
 	|	AllData AS AllData
@@ -1654,7 +1772,8 @@ Function GetBatchTree(TempTablesManager, CalculationSettings)
 	|	AllData.RowID,
 	|	AllData.Branch,
 	|	AllData.Currency,
-	|	AllData.ItemLinkID
+	|	AllData.ItemLinkID,
+	|	AllData.FixedAsset
 	|;
 	|
 	////////////////////////////////////////////////////////////////////////////////
@@ -1700,6 +1819,7 @@ Function GetBatchTree(TempTablesManager, CalculationSettings)
 	|	AllDataGrouped.Branch AS Branch,
 	|	AllDataGrouped.Currency AS Currency,
 	|	AllDataGrouped.ItemLinkID AS ItemLinkID,
+	|	AllDataGrouped.FixedAsset AS FixedAsset,
 	|	FALSE AS Skip,
 	|	0 AS Priority
 	|FROM
@@ -2155,7 +2275,17 @@ Procedure CalculateBatch(Document, Rows, Tables, Tree, TableOfReturnedBatches, E
 						NewRow_WriteOffBatches.Branch           = Row.Branch;
 						NewRow_WriteOffBatches.Currency         = Row.Currency;
 						NewRow_WriteOffBatches.RowID            = Row.RowID;
-					EndIf;		
+					EndIf;	
+						
+						// fixed asset
+					If TypeOf(Row.Document) = Type("DocumentRef.CommissioningOfFixedAsset")
+						Or TypeOf(Row.Document) = Type("DocumentRef.ModernizationOfFixedAsset") Then
+						NewRow_DataForFixedAssets = Tables.DataForFixedAssets.Add();
+						FillPropertyValues(NewRow_DataForFixedAssets, NewRow);
+						NewRow_DataForFixedAssets.FixedAsset = Row.FixedAsset;						
+						NewRow_DataForFixedAssets.Branch = Row.Branch;						
+					EndIf;	
+						
 				EndIf;
 
 			EndDo; // FilteredRows

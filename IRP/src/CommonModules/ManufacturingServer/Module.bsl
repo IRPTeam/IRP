@@ -389,6 +389,7 @@ Function GetProductionFillingData(Parameters) Export
 	FillingData.Insert("ProductionPlanning" , Parameters.ProductionPlanning);
 	FillingData.Insert("Company"            , Parameters.Company);
 	FillingData.Insert("BusinessUnit"       , Parameters.BusinessUnit);
+	FillingData.Insert("Branch"             , Parameters.ProductionPlanning.Branch);
 	FillingData.Insert("StoreProduction"    , Parameters.StoreProduction);
 	FillingData.Insert("Item"               , Parameters.ItemKey.Item);
 	FillingData.Insert("ItemKey"            , Parameters.ItemKey);

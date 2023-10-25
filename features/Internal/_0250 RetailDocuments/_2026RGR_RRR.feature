@@ -151,7 +151,7 @@ Scenario: _0202601 create RGR based on RSR
 		And I go to line in "BasisesTree" table
 			| 'Currency' | 'Price'  | 'Quantity' | 'Row presentation' | 'Unit' |
 			| 'TRY'      | '550,00' | '1,000'    | 'Dress (L/Green)'  | 'pcs'  |
-		And in the table "BasisesTree" I click the button named "Link"
+		And I click the button named "Link"
 		And I go to line in "ItemListRows" table
 			| '#' | 'Quantity' | 'Row presentation' | 'Store'    | 'Unit' |
 			| '1' | '2,000'    | 'Shirt (38/Black)' | 'Store 01' | 'pcs'  |
@@ -161,7 +161,7 @@ Scenario: _0202601 create RGR based on RSR
 		And I go to line in "BasisesTree" table
 			| 'Currency' | 'Price'  | 'Quantity' | 'Row presentation' | 'Unit' |
 			| 'TRY'      | '350,00' | '2,000'    | 'Shirt (38/Black)' | 'pcs'  |
-		And in the table "BasisesTree" I click the button named "Link"
+		And I click the button named "Link"
 		And I click "Ok" button
 		And "ItemList" table became equal
 			| '#' | 'Retail sales receipt'                                 | 'Item'  | 'Item key' | 'Serial lot numbers' | 'Unit' | 'Source of origins' | 'Quantity' | 'Store'    | 'Sales order' |
@@ -261,14 +261,14 @@ Scenario: _0202602 create RRR based on RGR (with RSR)
 		And I go to line in "BasisesTree" table
 			| 'Currency' | 'Price'  | 'Quantity' | 'Row presentation' | 'Unit' |
 			| 'TRY'      | '350,00' | '2,000'    | 'Shirt (38/Black)' | 'pcs'  |
-		And in the table "BasisesTree" I click the button named "Link"
+		And I click the button named "Link"
 		And I go to line in "ItemListRows" table
 			| '#' | 'Quantity' | 'Row presentation'         | 'Store'    | 'Unit' |
 			| '2' | '2,000'    | 'Product 1 with SLN (PZU)' | 'Store 01' | 'pcs'  |
 		And I go to line in "BasisesTree" table
 			| 'Currency' | 'Price'  | 'Quantity' | 'Row presentation'         | 'Unit' |
 			| 'TRY'      | '400,00' | '2,000'    | 'Product 1 with SLN (PZU)' | 'pcs'  |
-		And in the table "BasisesTree" I click the button named "Link"	
+		And I click the button named "Link"	
 		And I click "Ok" button
 		And "ItemList" table became equal
 			| '#' | 'Retail sales receipt'                                 | 'Item'               | 'Sales person'  | 'Item key' | 'Profit loss center' | 'Dont calculate row' | 'Tax amount' | 'Serial lot numbers' | 'Unit' | 'Return reason' | 'Source of origins' | 'Quantity' | 'Price'  | 'Net amount' | 'Total amount' | 'Additional analytic' | 'Store'    | 'Revenue type' | 'Detail' | 'VAT' | 'Offers amount' | 'Landed cost' | 'Landed cost tax' |
@@ -401,7 +401,7 @@ Scenario: _0202603 create RRR based on RGR (without RSR)
 		And I click "Ok" button	
 	* Link back
 		And in the table "ItemList" I click "Link unlink basis documents" button
-		And in the table "BasisesTree" I click "Auto link" button
+		And I click "Auto link" button
 		And I click "Ok" button
 		And in the table "ItemList" I click "Goods receipts" button
 		And Delay 2

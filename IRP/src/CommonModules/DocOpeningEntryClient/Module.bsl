@@ -106,6 +106,18 @@ EndProcedure
 
 #EndRegion
 
+#Region FIXED_ASSETS
+
+Procedure FixedAssetsBeforeAddRow(Object, Form, Item, Cancel, Clone, Parent, IsFolder, Parameter) Export
+	ViewClient_V2.FixedAssetsBeforeAddRow(Object, Form, Cancel, Clone);
+EndProcedure
+
+Procedure FixedAssetsAfterDeleteRow(Object, Form, Item) Export
+	ViewClient_V2.FixedAssetsAfterDeleteRow(Object, Form);
+EndProcedure
+
+#EndRegion
+
 #Region ACCOUNT_BALANCE
 
 Procedure AccountBalanceBeforeAddRow(Object, Form, Item, Cancel, Clone, Parent, IsFolder, Parameter) Export

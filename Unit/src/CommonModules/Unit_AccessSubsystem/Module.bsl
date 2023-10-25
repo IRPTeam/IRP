@@ -690,18 +690,21 @@ Function GenerateDataForAccessTest()
 	Store.Write();
 	
 	CashAccount = Catalogs.CashAccounts.CreateItem();
+	CashAccount.Company = Data.Company[0];
 	CashAccount.Description_en = "CashAccount Read and Write Access";	
 	CashAccount.DataExchange.Load = True;
 	CashAccount.SetNewObjectRef(Data.Account[0]);
 	CashAccount.Write();
 	
 	CashAccount = Catalogs.CashAccounts.CreateItem();
+	CashAccount.Company = Data.Company[1];
 	CashAccount.Description_en = "CashAccount Only read access";	
 	CashAccount.DataExchange.Load = True;
 	CashAccount.SetNewObjectRef(Data.Account[1]);
 	CashAccount.Write();
 	
 	CashAccount = Catalogs.CashAccounts.CreateItem();
+	CashAccount.Company = Data.Company[2];
 	CashAccount.Description_en = "CashAccount access deny";	
 	CashAccount.DataExchange.Load = True;
 	CashAccount.SetNewObjectRef(Data.Account[2]);

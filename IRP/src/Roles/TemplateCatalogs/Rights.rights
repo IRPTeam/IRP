@@ -333,7 +333,7 @@
 			<name>Insert</name>
 			<value>false</value>
 			<restrictionByCondition>
-				<condition>Table WHERE #Access("Company", "Table.Company", "") AND (#Access("Account", "Table.Ref", "") OR #Access("Branch", "Table.Branch", ""))</condition>
+				<condition>Table WHERE #Access("Company", "Table.Company", "") AND (#Access("Ref", "Table.Ref", "") OR #Access("Branch", "Table.Branch", ""))</condition>
 			</restrictionByCondition>
 		</right>
 		<right>

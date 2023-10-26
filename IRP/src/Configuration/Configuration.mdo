@@ -187,6 +187,7 @@
   <commonPictures>CommonPicture.CopyRowsToClipboard</commonPictures>
   <commonPictures>CommonPicture.PasteRowsFromClipboard</commonPictures>
   <commonPictures>CommonPicture.ControlCodeString</commonPictures>
+  <commonPictures>CommonPicture.FixedAssets</commonPictures>
   <sessionParameters>SessionParameter.Buffer</sessionParameters>
   <sessionParameters>SessionParameter.ClientType</sessionParameters>
   <sessionParameters>SessionParameter.ConnectedAddDataProc</sessionParameters>

@@ -280,7 +280,6 @@ Async Function CashInCome(ConsolidatedRetailSales, DataSource, Amount) Export
 		Return CurrentStatus;
 	EndIf;
 
-	CashInOutcomeSettings = EquipmentFiscalPrinterAPIClient.CashInOutcomeSettings();
 	CashInOutcomeSettings.In.Amount = Amount;
 	CashInOutcomeSettings.In.InputParameters = InputParameters;
 	If Await EquipmentFiscalPrinterAPIClient.CashInOutcome(CRS.FiscalPrinter, CashInOutcomeSettings) Then

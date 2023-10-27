@@ -232,6 +232,14 @@ Function PrepareAccess_Document(Keys, MetaObj)
 	If Not MetaObj.Attributes.Find("TransitAccount") = Undefined Then
 		AccessKey.Insert("TransitAccount", "Account");
 	EndIf;
+
+	If Not MetaObj.Attributes.Find("Sender") = Undefined Then
+		AccessKey.Insert("Sender", "Account");
+	EndIf;
+	
+	If Not MetaObj.Attributes.Find("Receiver") = Undefined Then
+		AccessKey.Insert("Receiver", "Account");
+	EndIf;
 	
 	If Not MetaObj.Attributes.Find("AccountDebit") = Undefined Then
 		AccessKey.Insert("AccountDebit", "Account");

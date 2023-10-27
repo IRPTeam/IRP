@@ -111,6 +111,20 @@
 			<value>true</value>
 		</right>
 	</object>
+	<object>
+		<name>Document.CashReceipt.Command.PrintCashIn</name>
+		<right>
+			<name>View</name>
+			<value>true</value>
+		</right>
+	</object>
+	<object>
+		<name>Document.CashReceipt.Command.GenarateCashReceipt</name>
+		<right>
+			<name>View</name>
+			<value>true</value>
+		</right>
+	</object>
 	<restrictionTemplate>
 		<name>CheckDocumentAccess</name>
 		<condition>

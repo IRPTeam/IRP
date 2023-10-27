@@ -832,6 +832,60 @@ Function GetUUID(Ref) Export
 	Return Ref.UUID();
 EndFunction
 
+// Is same data.
+// 
+// Parameters:
+//  Data1 - AnyRef - Data
+//  Data2 - AnyRef - Data
+//  Settings - See GetIsSameDataSettings
+// 
+// Returns:
+//  Boolean
+Function IsSameData(Data1, Data2, Settings) Export
+	CompareData1 = New Structure;
+	CompareData2 = New Structure;
+	
+	For Each Attr In Settings.Attributes Do
+		CompareData1.Insert(Attr, Data1[Attr]);
+		CompareData2.Insert(Attr, Data2[Attr]);
+	EndDo;
+
+	For Each Table In Settings.ValueTables Do // KeyAndValue
+		Columns = StrConcat(Table.Value, ",");
+		TableVT1 = Data1[Table.Key]; // TabularSection 
+		Table1 = TableVT1.Unload(, Columns);
+		TableVT1 = Undefined;
+		 
+		TableVT2 = Data2[Table.Key]; // TabularSection 
+		Table2 = TableVT2.Unload(, Columns);
+		TableVT2 = Undefined;
+		
+		Table1.Sort(Columns);
+		Table2.Sort(Columns);
+		
+		CompareData1.Insert(Table.Key, Table1);
+		CompareData2.Insert(Table.Key, Table2);
+	EndDo;
+	
+	Return GetMD5(CompareData1, True, True) = GetMD5(CompareData2, True, True);
+EndFunction
+
+// Get is same data settings.
+// 
+// Returns:
+//  Structure - Get object m d5 by structure settings:
+// * Attributes - Array Of String - 
+// * ValueTables - Array Of KeyAndValue: 
+// ** Key - String -
+// ** Value - Array of String -
+Function GetIsSameDataSettings() Export
+	Str = New Structure;
+	Str.Insert("Attributes", New Array);
+	Str.Insert("ValueTables", New Structure);
+	//@skip-check constructor-function-return-section
+	Return Str;
+EndFunction
+
 #EndRegion
 
 #Region XDTO
@@ -1027,8 +1081,8 @@ EndFunction
 //  ExternalFunction - CatalogRef.ExternalFunctions - External function
 Procedure CreateScheduledJob(ExternalFunction) Export
 	
-	If Not ExternalFunction.isSchedulerSet Or Not ExternalFunction.Enable Then
-		DeleteScheduledJob(ExternalFunction);
+	DeleteScheduledJob(ExternalFunction);
+	If Not ExternalFunction.isSchedulerSet Or Not ExternalFunction.Enable Then		
 		Return;
 	EndIf;
 
@@ -1040,6 +1094,7 @@ Procedure CreateScheduledJob(ExternalFunction) Export
 	NewScheduledJobs.Description = ExternalFunction.Description;
 	NewScheduledJobs.Key = String(ExternalFunction.UUID());
 	NewScheduledJobs.Use = ExternalFunction.isSchedulerSet;
+	NewScheduledJobs.UserName = ExternalFunction.User.Description;
 	JobSchedule = ExternalFunction.JobSchedule.Get(); // JobSchedule
 	NewScheduledJobs.Schedule = JobSchedule;
 	//@skip-check typed-value-adding-to-untyped-collection

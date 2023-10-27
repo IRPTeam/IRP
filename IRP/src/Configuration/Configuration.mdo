@@ -187,6 +187,7 @@
   <commonPictures>CommonPicture.CopyRowsToClipboard</commonPictures>
   <commonPictures>CommonPicture.PasteRowsFromClipboard</commonPictures>
   <commonPictures>CommonPicture.ControlCodeString</commonPictures>
+  <commonPictures>CommonPicture.FixedAssets</commonPictures>
   <sessionParameters>SessionParameter.Buffer</sessionParameters>
   <sessionParameters>SessionParameter.ClientType</sessionParameters>
   <sessionParameters>SessionParameter.ConnectedAddDataProc</sessionParameters>
@@ -221,11 +222,15 @@
   <roles>Role.Document_CashTransferOrder</roles>
   <roles>Role.Document_ChequeBondTransaction</roles>
   <roles>Role.Document_ChequeBondTransactionItem</roles>
+  <roles>Role.Document_CommissioningOfFixedAsset</roles>
   <roles>Role.Document_ConsolidatedRetailSales</roles>
   <roles>Role.Document_CreditNote</roles>
   <roles>Role.Document_CustomersAdvancesClosing</roles>
   <roles>Role.Document_DebitNote</roles>
+  <roles>Role.Document_DecommissioningOfFixedAsset</roles>
+  <roles>Role.Document_DepreciationCalculation</roles>
   <roles>Role.Document_EmployeeCashAdvance</roles>
+  <roles>Role.Document_FixedAssetTransfer</roles>
   <roles>Role.Document_ForeignCurrencyRevaluation</roles>
   <roles>Role.Document_GoodsReceipt</roles>
   <roles>Role.Document_IncomingPaymentOrder</roles>
@@ -236,6 +241,7 @@
   <roles>Role.Document_JournalEntry</roles>
   <roles>Role.Document_Labeling</roles>
   <roles>Role.Document_ManualRegisterEntry</roles>
+  <roles>Role.Document_ModernizationOfFixedAsset</roles>
   <roles>Role.Document_MoneyTransfer</roles>
   <roles>Role.Document_OpeningEntry</roles>
   <roles>Role.Document_OutgoingPaymentOrder</roles>
@@ -275,11 +281,6 @@
   <roles>Role.Document_WorkOrder</roles>
   <roles>Role.Document_WorkOrderClosing</roles>
   <roles>Role.Document_WorkSheet</roles>
-  <roles>Role.Document_CommissioningOfFixedAsset</roles>
-  <roles>Role.Document_DecommissioningOfFixedAsset</roles>
-  <roles>Role.Document_DepreciationCalculation</roles>
-  <roles>Role.Document_FixedAssetTransfer</roles>
-  <roles>Role.Document_ModernizationOfFixedAsset</roles>
   <roles>Role.FilterForUserSettings</roles>
   <roles>Role.FullAccess</roles>
   <roles>Role.FullAccessInArea</roles>
@@ -298,6 +299,7 @@
   <roles>Role.Subsystem_Retail</roles>
   <roles>Role.Subsystem_Salary</roles>
   <roles>Role.Subsystem_SalesAR</roles>
+  <roles>Role.SubsystemTreasury</roles>
   <roles>Role.SystemAdministrator</roles>
   <roles>Role.TemplateAccumulationRegisters</roles>
   <roles>Role.TemplateCatalogs</roles>

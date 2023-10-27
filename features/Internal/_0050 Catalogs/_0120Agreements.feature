@@ -1,4 +1,4 @@
-#language: en
+﻿#language: en
 @tree
 @Positive
 @PartnerCatalogs
@@ -20,6 +20,9 @@ Scenario: _012000 preparation (partners term)
 		Given I open new TestClient session or connect the existing one
 		When Create catalog Partners objects (Ferron BP)
 		When Create catalog Partners objects (Kalipso)
+		When Create catalog Companies objects (partners company)
+		When Create catalog Partners objects
+		When Create catalog BusinessUnits objects
 		When Create catalog PartnerSegments objects
 		When Create catalog Companies objects (Main company)
 		When Create catalog Countries objects
@@ -344,7 +347,20 @@ Scenario: _012005 creation of an individual Partner term in USD
 		And I input "Personal Partner terms, $" text in the field named "Description_en"
 		And I input "Personal Partner terms, $" text in the field named "Description_tr"
 		And I click "Ok" button
+	* Select account
+		And I click Choice button of the field named "Account"
+		And I click "Create" button
+		And I input "Partner account 1" text in "ENG" field
+		And I input "56788999000" text in the field named "Number"
+		And I click Choice button of the field named "Currency"
+		And I select current line in "List" table
+		And I select from the drop-down list named "Partner" by "kalipso" string
+		And I select from "Legal entity" drop-down list by "kalipso" string	
+		And I input "Bank 1" text in "Bank name" field
+		And I select from the drop-down list named "Branch" by "Front office" string	
 		And I click "Save and close" button
+		And I click "Select" button
+		And I click "Save and close" button		
 		And Delay 5
 		Then I check for the "Agreements" catalog element with the "Description_en" 'Personal Partner terms, $'
 	* Creating and checking vendor Partner term Vendor Ferron, TRY
@@ -383,6 +399,19 @@ Scenario: _012005 creation of an individual Partner term in USD
 		And I input "Vendor Ferron, TRY" text in the field named "Description_en"
 		And I input "Vendor Ferron, TRY TR" text in the field named "Description_tr"
 		And I click "Ok" button
+	* Select account
+		And I click Choice button of the field named "Account"
+		And I click "Create" button
+		And I input "Partner account 1" text in "ENG" field
+		And I input "56788999001" text in the field named "Number"
+		And I click Choice button of the field named "Currency"
+		And I select current line in "List" table
+		And I select from the drop-down list named "Partner" by "ferron" string
+		And I select from "Legal entity" drop-down list by "ferron" string	
+		And I input "Bank 1" text in "Bank name" field
+		And I select from the drop-down list named "Branch" by "Front office" string	
+		And I click "Save and close" button
+		And I click "Select" button
 		And I click "Save and close" button
 		And Delay 5
 		Then I check for the "Agreements" catalog element with the "Description_en" 'Vendor Ferron, TRY'
@@ -421,8 +450,8 @@ Scenario: _012005 creation of an individual Partner term in USD
 		And I input "Vendor Ferron, USD" text in the field named "Description_en"
 		And I input "Vendor Ferron, USD TR" text in the field named "Description_tr"
 		And I click "Ok" button
-		And I click "Save and close" button
-		And Delay 5
+		And I click "Save and close" button	
+		And Delay 2
 		Then I check for the "Agreements" catalog element with the "Description_en" 'Vendor Ferron, USD'
 	
 

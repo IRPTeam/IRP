@@ -267,6 +267,7 @@
  <commonPictures>CommonPicture.CopyRowsToClipboard</commonPictures>
  <commonPictures>CommonPicture.PasteRowsFromClipboard</commonPictures>
  <commonPictures>CommonPicture.ControlCodeString</commonPictures>
+ <commonPictures>CommonPicture.FixedAssets</commonPictures>
  <sessionParameters>SessionParameter.Buffer</sessionParameters>
  <sessionParameters>SessionParameter.ClientType</sessionParameters>
  <sessionParameters>SessionParameter.ConnectedAddDataProc</sessionParameters>
@@ -378,6 +379,7 @@
  <roles>Role.Subsystem_Retail</roles>
  <roles>Role.Subsystem_Salary</roles>
  <roles>Role.Subsystem_SalesAR</roles>
+ <roles>Role.SubsystemTreasury</roles>
  <roles>Role.SystemAdministrator</roles>
  <roles>Role.TemplateAccumulationRegisters</roles>
  <roles>Role.TemplateCatalogs</roles>

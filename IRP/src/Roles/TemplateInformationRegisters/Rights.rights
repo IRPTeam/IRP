@@ -101,10 +101,7 @@
 			<name>Read</name>
 			<value>true</value>
 			<restrictionByCondition>
-				<condition>#AccessRegisters(
-	"Company", "Branch", "", "", "",
-	"OAR.Value1 = Table.Document.Company AND OAR.Value2 = Table.Document.Branch"
-)</condition>
+				<condition>#AccessRegisters("", "", "", "", "",	"")</condition>
 			</restrictionByCondition>
 		</right>
 		<right>
@@ -146,7 +143,7 @@
 			<name>Read</name>
 			<value>true</value>
 			<restrictionByCondition>
-				<condition>#AccessRegisters("Company", "BusinessUnit", "", "", "", "")</condition>
+				<condition>#AccessRegisters("Company", "", "", "", "", "")</condition>
 			</restrictionByCondition>
 		</right>
 		<right>
@@ -311,10 +308,7 @@
 			<name>Read</name>
 			<value>true</value>
 			<restrictionByCondition>
-				<condition>#AccessRegisters(
-	"Company", "Branch", "", "", "",
-	"OAR.Value1 = Table.Document.Company AND OAR.Value2 = Table.Document.Branch"
-)</condition>
+				<condition>#AccessRegisters("", "", "", "", "",	"")</condition>
 			</restrictionByCondition>
 		</right>
 		<right>
@@ -409,10 +403,7 @@
 			<name>Read</name>
 			<value>true</value>
 			<restrictionByCondition>
-				<condition>#AccessRegisters(
-	"Company", "", "", "", "",
-	"OAR.Value1 = Table.OutgoingDocument.Company OR OAR.Value1 = Table.IncomingDocument.Branch"
-)</condition>
+				<condition>#AccessRegisters("", "", "", "", "",	"")</condition>
 			</restrictionByCondition>
 		</right>
 		<right>
@@ -426,7 +417,7 @@
 			<name>Read</name>
 			<value>true</value>
 			<restrictionByCondition>
-				<condition>#AccessRegisters("Company", "BusinessUnit", "Store", "", "", "")</condition>
+				<condition>#AccessRegisters("Company", "Store", "", "", "", "")</condition>
 			</restrictionByCondition>
 		</right>
 		<right>
@@ -493,10 +484,7 @@
 			<name>Read</name>
 			<value>true</value>
 			<restrictionByCondition>
-				<condition>#AccessRegisters(
-	"Company", "Branch", "Store", "", "",
-	"OAR.Value1 = Table.Document.Company AND OAR.Value2 = Table.Document.Branch AND OAR.Value3 = Table.Document.Store"
-)</condition>
+				<condition>#AccessRegisters("", "", "", "", "",	"")</condition>
 			</restrictionByCondition>
 		</right>
 		<right>
@@ -588,10 +576,7 @@
 			<name>Read</name>
 			<value>true</value>
 			<restrictionByCondition>
-				<condition>#AccessRegisters(
-	"Company", "Branch", "", "", "",
-	"OAR.Value1 = Table.Order.Company AND OAR.Value2 = Table.Order.Branch"
-)</condition>
+				<condition>#AccessRegisters("", "", "", "", "",	"")</condition>
 			</restrictionByCondition>
 		</right>
 		<right>

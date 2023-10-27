@@ -109,11 +109,14 @@ Procedure CalculateAndUpdateAccessKey_Document(Source)
 	EndIf;
 	
 	// If not set ref, then can not use RLS on create or update mode
-	If IsBlankString(Source.Ref.DataVersion) Then
-		Ref = Documents[Source.Metadata().Name].GetRef();
-		Source.SetNewObjectRef(Ref);
+	If Source.IsNew() Then
+		Ref = Source.GetNewObjectRef();
 	Else
 		Ref = Source.Ref;
+	EndIf;
+	If Ref.IsEmpty() Then
+		Ref = Documents[Source.Metadata().Name].GetRef();
+		Source.SetNewObjectRef(Ref);
 	EndIf;
 
 	Reg = InformationRegisters.T9100A_ObjectAccessMap.CreateRecordManager();

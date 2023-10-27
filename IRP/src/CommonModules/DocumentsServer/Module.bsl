@@ -771,6 +771,9 @@ Function PickupItemEnd(Val Parameters, Val ScanData) Export
 											ItemListRow.Insert("Consignor", InfoRow.Consignor);
 										EndIf;
 										
+										If InfoRow.Property("VatRate") Then
+											ItemListRow.Insert("VatRate", InfoRow.VatRate);
+										EndIf;										
 									EndIf;
 								EndDo;
 							EndIf;

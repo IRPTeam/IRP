@@ -68,12 +68,12 @@ Procedure UpdateAnalyticsAtServer(DocumentName)
 	QuerySelection = QueryResult.Select();
 	While QuerySelection.Next() Do
 		RecordSet_T9050S = InformationRegisters.T9050S_AccountingRowAnalytics.CreateRecordSet();
-		RecordSet_T9050S.Filter.Recorder.Set(QuerySelection.Ref);
+		RecordSet_T9050S.Filter.Document.Set(QuerySelection.Ref);
 		RecordSet_T9050S.Read();
 		_AccountingRowAnalytics = RecordSet_T9050S.Unload();
 		
 		RecordSet_T9051S = InformationRegisters.T9051S_AccountingExtDimensions.CreateRecordSet();
-		RecordSet_T9051S.Filter.Recorder.Set(QuerySelection.Ref);
+		RecordSet_T9051S.Filter.Document.Set(QuerySelection.Ref);
 		RecordSet_T9051S.Read();
 		_AccountingExtDimensions = RecordSet_T9051S.Unload();
 					

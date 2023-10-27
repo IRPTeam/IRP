@@ -16,8 +16,28 @@
   </synonym>
   <useStandardCommands>true</useStandardCommands>
   <editType>InDialog</editType>
-  <writeMode>RecorderSubordinate</writeMode>
   <dataLockControlMode>Managed</dataLockControlMode>
+  <dimensions uuid="c5ed342b-b856-4b42-a710-f4ca4d89a3fe">
+    <name>Document</name>
+    <synonym>
+      <key>en</key>
+      <value>Document</value>
+    </synonym>
+    <type>
+      <types>DocumentRef.BankPayment</types>
+      <types>DocumentRef.BankReceipt</types>
+      <types>DocumentRef.ForeignCurrencyRevaluation</types>
+      <types>DocumentRef.PurchaseInvoice</types>
+      <types>DocumentRef.SalesInvoice</types>
+      <types>DocumentRef.RetailSalesReceipt</types>
+    </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <fullTextSearch>Use</fullTextSearch>
+    <dataHistory>Use</dataHistory>
+    <fillValue xsi:type="core:UndefinedValue"/>
+    <mainFilter>true</mainFilter>
+  </dimensions>
   <dimensions uuid="3d4cfdc0-45d9-44fb-b562-f90319e0f9d1">
     <name>Key</name>
     <synonym>

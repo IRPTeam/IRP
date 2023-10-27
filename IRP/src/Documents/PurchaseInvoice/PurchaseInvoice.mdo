@@ -114,8 +114,6 @@
   <registerRecords>AccumulationRegister.R8015T_ConsignorPrices</registerRecords>
   <registerRecords>AccumulationRegister.R9010B_SourceOfOriginStock</registerRecords>
   <registerRecords>InformationRegister.S1001L_VendorsPricesByItemKey</registerRecords>
-  <registerRecords>InformationRegister.T9050S_AccountingRowAnalytics</registerRecords>
-  <registerRecords>InformationRegister.T9051S_AccountingExtDimensions</registerRecords>
   <postInPrivilegedMode>true</postInPrivilegedMode>
   <unpostInPrivilegedMode>true</unpostInPrivilegedMode>
   <choiceHistoryOnInput>DontUse</choiceHistoryOnInput>

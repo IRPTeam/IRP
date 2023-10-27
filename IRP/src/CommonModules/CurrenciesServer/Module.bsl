@@ -162,10 +162,137 @@ Procedure PreparePostingDataTables(Parameters, CurrencyTable, AddInfo = Undefine
 				UseAgreementMovementType = IsUseAgreementMovementType(ItemOfPostingInfo);
 				UseCurrencyJoin = IsUseCurrencyJoin(Parameters, ItemOfPostingInfo);
 				ItemOfPostingInfo.Value.RecordSet = ExpandTable(TempTableManager, ItemOfPostingInfo.Value.RecordSet, UseAgreementMovementType, UseCurrencyJoin);
+				
+				
+				IsOffsetOfAdvances = CommonFunctionsClientServer.GetFromAddInfo(Parameters, "IsOffsetOfAdvances", False);
+				
+				If Not IsOffsetOfAdvances Then
+				
+					// Advances
+					If TypeOf(ItemOfPostingInfo.Key) = Type("AccumulationRegisterRecordSet.R1020B_AdvancesToVendors")
+						Or TypeOf(ItemOfPostingInfo.Key) = Type("AccumulationRegisterRecordSet.R2020B_AdvancesFromCustomers") Then
+					
+						AdvancesCurrencyRevaluation = GetAdvancesCurrencyRevaluation(Parameters.Object.Ref);
+						For Each Row In AdvancesCurrencyRevaluation Do
+							FillPropertyValues(ItemOfPostingInfo.Value.RecordSet.Add(), Row);
+						EndDo;	
+					
+					EndIf;
+			
+					// Transactions
+					If TypeOf(ItemOfPostingInfo.Key) = Type("AccumulationRegisterRecordSet.R1021B_VendorsTransactions")
+						Or TypeOf(ItemOfPostingInfo.Key) = Type("AccumulationRegisterRecordSet.R2021B_CustomersTransactions") Then
+					
+						TransactionsCurrencyRevaluation = GetTransactionsCurrencyRevaluation(Parameters.Object.Ref);
+						For Each Row In TransactionsCurrencyRevaluation Do
+							FillPropertyValues(ItemOfPostingInfo.Value.RecordSet.Add(), Row);
+						EndDo;	
+					
+					EndIf;
+			
+					// Accounting amounts
+					If TypeOf(ItemOfPostingInfo.Key) = Type("AccumulationRegisterRecordSet.T1040T_AccountingAmounts") Then
+						Op = Catalogs.AccountingOperations;
+						
+						AccountingOperations = New Map();
+						AccountingOperations.Insert(Type("DocumentRef.PurchaseInvoice") , Op.PurchaseInvoice_DR_R1021B_VendorsTransactions_CR_R1020B_AdvancesToVendors_CurrencyRevaluation);
+						AccountingOperations.Insert(Type("DocumentRef.SalesInvoice")    , Op.SalesInvoice_DR_R2020B_AdvancesFromCustomers_CR_R2021B_CustomersTransactions_CurrencyRevaluation);
+						
+						AccountingAmounts = GetAccountingAmounts(Parameters.Object.Ref);
+						AccountingAmounts.Columns.Add("Operation", New TypeDescription("CatalogRef.AccountingOperations"));
+						
+						Operation = AccountingOperations.Get(TypeOf(Parameters.Object.Ref));
+						If Operation <> Undefined Then
+							AccountingAmounts.FillValues(Operation, "Operation");
+						EndIf;
+						
+						For Each Row In AccountingAmounts Do
+							FillPropertyValues(ItemOfPostingInfo.Value.RecordSet.Add(), Row);
+						EndDo;
+						
+					EndIf;
+			
+				EndIf; // Not IsOffsetOfAdvances 
 			EndIf;
 		EndDo;
 	EndIf;
 EndProcedure
+
+Function GetAdvancesCurrencyRevaluation(DocRef)
+	Query = New Query();
+	Query.Text = 
+	"SELECT
+	|	VALUE(AccumulationRecordType.Expense) AS RecordType,
+	|	Table.Period,
+	|	Table.Recorder AS VendorsAdvancesClosing,
+	|	Table.Recorder AS CustomersAdvancesClosing,
+	|	Table.AdvancesOrder AS Order,
+	|	Table.Company,
+	|	Table.Branch,
+	|	Table.Currency,
+	|	Table.LegalName,
+	|	Table.Partner,
+	|	Table.Amount,
+	|	Table.CurrencyMovementType,
+	|	Table.TransactionCurrency
+	|FROM
+	|	InformationRegister.T2012S_AdvancesCurrencyRevaluation AS Table
+	|WHERE
+	|	Table.Document = &DocRef";
+	Query.SetParameter("DocRef", DocRef);
+	QueryResult = Query.Execute();
+	QueryTable = QueryResult.Unload();
+	Return QueryTable;
+EndFunction
+
+Function GetTransactionsCurrencyRevaluation(DocRef)
+	Query = New Query();
+	Query.Text = 
+	"SELECT
+	|	VALUE(AccumulationRecordType.Expense) AS RecordType,
+	|	Table.Period,
+	|	Table.Recorder AS VendorsAdvancesClosing,
+	|	Table.Recorder AS CustomersAdvancesClosing,
+	|	Table.TransactionOrder AS Order,
+	|	Table.TransactionDocument AS Basis,
+	|	Table.Company,
+	|	Table.Branch,
+	|	Table.Currency,
+	|	Table.LegalName,
+	|	Table.Partner,
+	|	Table.Agreement,
+	|	Table.Amount,
+	|	Table.CurrencyMovementType,
+	|	Table.TransactionCurrency
+	|FROM
+	|	InformationRegister.T2011S_TransactionsCurrencyRevaluation AS Table
+	|WHERE
+	|	Table.Document = &DocRef";
+	Query.SetParameter("DocRef", DocRef);
+	QueryResult = Query.Execute();
+	QueryTable = QueryResult.Unload();
+	Return QueryTable;
+EndFunction
+
+Function GetAccountingAmounts(DocRef)
+	Query = New Query();
+	Query.Text = 
+	"SELECT
+	|	Table.Period,
+	|	Table.Currency,
+	|	Table.CurrencyMovementType,
+	|	Table.Amount,
+	|	Table.Recorder AS AdvancesClosing
+	|FROM
+	|	InformationRegister.T2012S_AdvancesCurrencyRevaluation AS Table
+	|WHERE
+	|	Table.Document = &DocRef";
+		
+	Query.SetParameter("DocRef", DocRef);
+	QueryResult = Query.Execute();
+	QueryTable = QueryResult.Unload();
+	Return QueryTable;
+EndFunction
 
 Function IsUseAgreementMovementType(ItemOfPostingInfo)
 	UseAgreementMovementType = True;
@@ -584,3 +711,679 @@ Function _GetLandedCostCurrency(Company) Export
 	Return Company.LandedCostCurrencyMovementType.Currency;
 EndFunction
 
+Procedure ExcludePostingDataTable(Parameters, RegMetadata) Export
+	If Parameters.Property("MultiCurrencyExcludePostingDataTables") Then
+		Parameters.MultiCurrencyExcludePostingDataTables.Add(RegMetadata);
+	Else
+		Array = New Array();
+		Array.Add(RegMetadata);
+		Parameters.Insert("MultiCurrencyExcludePostingDataTables", Array);
+	EndIf;
+EndProcedure
+
+#Region CURRENCY_REVALUATION
+
+Function CreateExpenseRevenueInfo(Params) Export
+
+	AccRegMetadata = Metadata.AccumulationRegisters.R5022T_Expenses;
+	ExpensesTable = New ValueTable();
+	ExpensesTable.Columns.Add("Period"               , AccRegMetadata.StandardAttributes.Period.Type);
+	ExpensesTable.Columns.Add("Company"              , AccRegMetadata.Dimensions.Company.Type);
+	ExpensesTable.Columns.Add("Branch"               , AccRegMetadata.Dimensions.Branch.Type);
+	ExpensesTable.Columns.Add("ProfitLossCenter"     , AccRegMetadata.Dimensions.ProfitLossCenter.Type);
+	ExpensesTable.Columns.Add("ExpenseType"          , AccRegMetadata.Dimensions.ExpenseType.Type);
+	ExpensesTable.Columns.Add("Currency"             , AccRegMetadata.Dimensions.Currency.Type);
+	ExpensesTable.Columns.Add("AdditionalAnalytic"   , AccRegMetadata.Dimensions.AdditionalAnalytic.Type);
+	ExpensesTable.Columns.Add("CurrencyMovementType" , AccRegMetadata.Dimensions.CurrencyMovementType.Type);
+	ExpensesTable.Columns.Add("Amount"               , AccRegMetadata.Resources.Amount.Type);
+
+	AccRegMetadata = Metadata.AccumulationRegisters.R5021T_Revenues;
+	RevenuesTable = New ValueTable();
+	RevenuesTable.Columns.Add("Period"               , AccRegMetadata.StandardAttributes.Period.Type);
+	RevenuesTable.Columns.Add("Company"              , AccRegMetadata.Dimensions.Company.Type);
+	RevenuesTable.Columns.Add("Branch"               , AccRegMetadata.Dimensions.Branch.Type);
+	RevenuesTable.Columns.Add("ProfitLossCenter"     , AccRegMetadata.Dimensions.ProfitLossCenter.Type);
+	RevenuesTable.Columns.Add("RevenueType"          , AccRegMetadata.Dimensions.RevenueType.Type);
+	RevenuesTable.Columns.Add("Currency"             , AccRegMetadata.Dimensions.Currency.Type);
+	RevenuesTable.Columns.Add("AdditionalAnalytic"   , AccRegMetadata.Dimensions.AdditionalAnalytic.Type);
+	RevenuesTable.Columns.Add("CurrencyMovementType" , AccRegMetadata.Dimensions.CurrencyMovementType.Type);
+	RevenuesTable.Columns.Add("Amount"               , AccRegMetadata.Resources.Amount.Type);
+
+	ExpenseRevenueInfo = New Structure();
+	ExpenseRevenueInfo.Insert("DocumentDate", Params.DocumentDate);
+
+	ExpenseRevenueInfo.Insert("RevenuesTable"              , RevenuesTable);
+	ExpenseRevenueInfo.Insert("Revenue_ProfitLossCenter"   , Params.Revenue_ProfitLossCenter);
+	ExpenseRevenueInfo.Insert("Revenue_AdditionalAnalytic" , Params.Revenue_AdditionalAnalytic);
+	ExpenseRevenueInfo.Insert("RevenueType"                , Params.RevenueType);
+
+	ExpenseRevenueInfo.Insert("ExpensesTable"              , ExpensesTable);
+	ExpenseRevenueInfo.Insert("Expense_ProfitLossCenter"   , Params.Expense_ProfitLossCenter);
+	ExpenseRevenueInfo.Insert("Expense_AdditionalAnalytic" , Params.Expense_AdditionalAnalytic);
+	ExpenseRevenueInfo.Insert("ExpenseType"                , Params.ExpenseType);
+
+	Return ExpenseRevenueInfo;
+EndFunction
+
+Procedure RevaluateCurrency(_TempTablesManager, ArrayOfRegisterNames, CurrencyRates, RegisterType, ExpenseRevenueInfo) Export
+	For Each RegisterName In ArrayOfRegisterNames Do
+		QueryTable = _TempTablesManager.Tables.Find("_" + RegisterName).GetData().Unload();
+
+		DimensionsInfo = CreateDimensionsTableAndFilter(RegisterName);
+
+		For Each Row In QueryTable Do
+			If Row.CurrencyMovementType <> ChartsOfCharacteristicTypes.CurrencyMovementType.SettlementCurrency Then
+				Continue;
+			EndIf;
+			FillPropertyValues(DimensionsInfo.DimensionsFilter, Row);
+
+			OtherCurrenciesRows = QueryTable.FindRows(DimensionsInfo.DimensionsFilter);
+			For Each OtherCurrencyRow In OtherCurrenciesRows Do
+				If OtherCurrencyRow.CurrencyMovementType = ChartsOfCharacteristicTypes.CurrencyMovementType.SettlementCurrency Then
+					Continue;
+				EndIf;
+
+				CurrencyRatesFilter = New Structure;
+				CurrencyRatesFilter.Insert("CurrencyFrom", OtherCurrencyRow.TransactionCurrency);
+				CurrencyRatesFilter.Insert("CurrencyTo", OtherCurrencyRow.Currency);
+				CurrencyRatesFilter.Insert("Source", OtherCurrencyRow.Source);
+
+				CurrencyInfo = CurrencyRates.FindRows(CurrencyRatesFilter);
+				If CurrencyInfo.Count() > 1 Then
+					Raise "CurrencyInfo.Count() > 1"; // some thing is wrong
+				EndIf;
+
+				If Not CurrencyInfo.Count() Then
+					Continue; // currency rate not set
+				EndIf;
+
+				If Not ValueIsFilled(CurrencyInfo[0].Rate) Or Not ValueIsFilled(CurrencyInfo[0].Multiplicity) Then
+					Continue;
+				EndIf;
+
+				_IsNegative = False;
+				If OtherCurrencyRow.Amount < 0 Then
+					_IsNegative = True;
+					OtherCurrencyRow.Amount = -OtherCurrencyRow.Amount;
+				EndIf;
+
+				If Row.Amount < 0 Then
+					Row.Amount = -Row.Amount;
+				EndIf;
+				
+				//Row.Amount; -  amount in transaction currency
+				AmountRevaluated = (Row.Amount * CurrencyInfo[0].Rate) / CurrencyInfo[0].Multiplicity;
+
+				If AmountRevaluated <> OtherCurrencyRow.Amount Then
+					_RecordType = Undefined;
+					AmountDifference = 0;
+					If AmountRevaluated > OtherCurrencyRow.Amount Then
+						_RecordType = AccumulationRecordType.Receipt;
+						AmountDifference = AmountRevaluated - OtherCurrencyRow.Amount;
+					Else
+						_RecordType = AccumulationRecordType.Expense;
+						AmountDifference = OtherCurrencyRow.Amount - AmountRevaluated;
+					EndIf;
+										
+					NewRow = DimensionsInfo.DimensionsTable.Add();
+					FillPropertyValues(NewRow, OtherCurrencyRow);
+					NewRow.RecordType = _RecordType;
+					NewRow.Period = ExpenseRevenueInfo.DocumentDate;
+					NewRow.Key = String(New UUID());
+					
+					If _IsNegative Then
+						NewRow.AmountRevaluated = -AmountDifference;
+					Else
+						NewRow.AmountRevaluated = AmountDifference;
+					EndIf;
+
+					_IsExpense = False;
+					_IsRevenue = False;
+
+					If RegisterType = "Active" Then
+						If AmountRevaluated > OtherCurrencyRow.Amount Then // revenue
+							_IsRevenue = True;
+						Else // expense
+							_IsExpense = True;
+						EndIf;
+					EndIf;
+
+					If RegisterType = "Passive" Then
+						If AmountRevaluated > OtherCurrencyRow.Amount Then // expense
+							_IsExpense = True;
+						Else // revenue
+							_IsRevenue = True;
+						EndIf;
+					EndIf;
+
+					If _IsRevenue Then
+						NewRevenue = ExpenseRevenueInfo.RevenuesTable.Add();
+						FillPropertyValues(NewRevenue, NewRow);
+						NewRevenue.Period = ExpenseRevenueInfo.DocumentDate;
+						NewRevenue.ProfitLossCenter    = ExpenseRevenueInfo.Revenue_ProfitLossCenter;
+						NewRevenue.RevenueType         = ExpenseRevenueInfo.RevenueType;
+						NewRevenue.AdditionalAnalytic  = ExpenseRevenueInfo.Revenue_AdditionalAnalytic;
+						If _IsNegative Then
+							NewRevenue.Amount = -AmountDifference;
+						Else
+							NewRevenue.Amount = AmountDifference;
+						EndIf;
+					EndIf;
+
+					If _IsExpense Then
+						NewExpense = ExpenseRevenueInfo.ExpensesTable.Add();
+						FillPropertyValues(NewExpense, NewRow);
+						NewExpense.Period = ExpenseRevenueInfo.DocumentDate;
+						NewExpense.ProfitLossCenter    = ExpenseRevenueInfo.Expense_ProfitLossCenter;
+						NewExpense.ExpenseType         = ExpenseRevenueInfo.ExpenseType;
+						NewExpense.AdditionalAnalytic  = ExpenseRevenueInfo.Expense_AdditionalAnalytic;
+						If _IsNegative Then
+							NewExpense.Amount = -AmountDifference;
+						Else
+							NewExpense.Amount = AmountDifference;
+						EndIf;
+					EndIf;
+
+				EndIf; // AmountRevaluated <> OtherCurrencyRow.Amount
+
+			EndDo; // OtherCurrenciesRows
+		EndDo; // QueryTable
+		
+		DeleteEmptyAmounts(DimensionsInfo.DimensionsTable, "AmountRevaluated");
+		
+		If DimensionsInfo.DimensionsTable.Count() Then
+			Query = New Query;
+			Query.TempTablesManager = _TempTablesManager;
+			Query.Text = StrTemplate(
+				"SELECT *, DimensionsTable.AmountRevaluated AS Amount INTO %1 FROM &DimensionsTable AS DimensionsTable",
+				"Revaluated_" + RegisterName);
+			Query.SetParameter("DimensionsTable", DimensionsInfo.DimensionsTable);
+			Query.Execute();
+		EndIf;
+	EndDo; // ArrayOfRegisterNames
+EndProcedure
+
+Procedure CreateVirtualTables(Parameters, ArrayOfRegisterNames) Export
+	Query = New Query;
+	Query.TempTablesManager = Parameters.TempTablesManager;
+
+	For Each RegisterName In ArrayOfRegisterNames Do
+		DimensionsInfo = CreateDimensionsTableAndFilter(RegisterName);
+		If Parameters.TempTablesManager.Tables.Find("Revaluated_" + RegisterName) = Undefined Then
+			Query.Text = Query.Text + StrTemplate("SELECT * INTO %1 FROM &DimensionsTable AS DimensionsTable; ",
+				"Revaluated_" + RegisterName);
+			Query.SetParameter("DimensionsTable", DimensionsInfo.DimensionsTable);
+		EndIf;
+	EndDo;
+	If ValueIsFilled(Query.Text) Then
+		Query.Execute();
+	EndIf;
+EndProcedure
+
+Procedure DeleteEmptyAmounts(Table, ColumnName) Export
+	ArrayForDelete = New Array();
+	For Each Row In Table Do
+		If Row[ColumnName] = 0 Then
+			ArrayForDelete.Add(Row);
+		EndIf;
+	EndDo;
+		
+	For Each ItemOfArray In ArrayForDelete Do
+		Table.Delete(ItemOfArray);
+	EndDo;
+EndProcedure
+
+Function CreateDimensionsTableAndFilter(RegisterName)
+	DimensionsFilter = New Structure;
+	DimensionsTable = New ValueTable;
+	For Each Dimension In Metadata.AccumulationRegisters[RegisterName].Dimensions Do
+		DimensionsTable.Columns.Add(Dimension.Name, Dimension.Type);
+		If Upper(Dimension.Name) = Upper("CurrencyMovementType") Or Upper(Dimension.Name) = Upper("Currency") Then
+			Continue;
+		EndIf;
+		DimensionsFilter.Insert(Dimension.Name);
+	EndDo;
+	DimensionsTable.Columns.Add("AmountRevaluated", Metadata.DefinedTypes.typeAmount.Type);
+	DimensionsTable.Columns.Add("RecordType"      , Metadata.AccumulationRegisters[RegisterName].StandardAttributes.RecordType.Type);
+	DimensionsTable.Columns.Add("Period"          , Metadata.AccumulationRegisters[RegisterName].StandardAttributes.Period.Type);
+	DimensionsTable.Columns.Add("Key"      , Metadata.DefinedTypes.typeRowID.Type);
+	
+	Result = New Structure;
+	Result.Insert("DimensionsTable", DimensionsTable);
+	Result.Insert("DimensionsFilter", DimensionsFilter);
+	Return Result;
+EndFunction
+
+Procedure RevaluateCurrency_Advances(Parameters, 
+	                                 RecordSet_Advances, 
+	                                 TableTransactions_CurrencyRevaluation,
+	                                 TableAccountingAmounts_CurrencyRevaluation,
+	                                 Records_AdvancesCurrencyRevaluation) Export
+	Query = New Query();
+	Query.Text = 
+	"SELECT
+	|	tmp1.Company,
+	|	tmp1.Branch,
+	|	tmp1.LegalName,
+	|	tmp1.Partner,
+	|	tmp1.Order,
+	|	tmp1.Currency,
+	|	tmp1.TransactionCurrency,
+	|	tmp1.CurrencyMovementType,
+	|	tmp1.Amount
+	|INTO tmp1
+	|FROM
+	|	AccumulationRegister.R2020B_AdvancesFromCustomers AS tmp1
+	|WHERE
+	|	tmp1.RecordType = VALUE(AccumulationRecordType.Expense)
+	|	AND tmp1.Recorder = &Recorder
+	|	and (tmp1.CurrencyMovementType = VALUE(ChartOfCharacteristicTypes.CurrencyMovementType.SettlementCurrency)
+	|	OR tmp1.Currency <> tmp1.TransactionCurrency)
+	|;
+	|
+	|////////////////////////////////////////////////////////////////////////////////
+	|SELECT
+	|	tmp1.Company,
+	|	tmp1.Branch,
+	|	tmp1.CurrencyMovementType,
+	|	tmp1.Currency,
+	|	tmp1.TransactionCurrency,
+	|	tmp1.LegalName,
+	|	tmp1.Partner,
+	|	tmp1.Order,
+	|	SUM(tmp1.Amount) AS Amount,
+	|	SUM(tmp2.AmountBalance) AS AmountBalance
+	|INTO tmp2
+	|FROM
+	|	tmp1 AS tmp1
+	|		LEFT JOIN AccumulationRegister.R2020B_AdvancesFromCustomers.Balance(&BalancePeriod, (Company, Branch, LegalName,
+	|			Partner, Order, Currency, TransactionCurrency, CurrencyMovementType) IN
+	|			(SELECT
+	|				Reg.Company,
+	|				Reg.Branch,
+	|				Reg.LegalName,
+	|				Reg.Partner,
+	|				Reg.Order,
+	|				Reg.Currency,
+	|				Reg.TransactionCurrency,
+	|				Reg.CurrencyMovementType
+	|			FROM
+	|				tmp1 AS Reg)) AS tmp2
+	|		ON (tmp1.Company = tmp2.Company)
+	|		AND (tmp1.Branch = tmp2.Branch)
+	|		AND (tmp1.CurrencyMovementType = tmp2.CurrencyMovementType)
+	|		AND (tmp1.Currency = tmp2.Currency)
+	|		AND (tmp1.TransactionCurrency = tmp2.TransactionCurrency)
+	|		AND (tmp1.LegalName = tmp2.LegalName)
+	|		AND (tmp1.Partner = tmp2.Partner)
+	|		AND (tmp1.Order = tmp2.Order)
+	|GROUP BY
+	|	tmp1.Company,
+	|	tmp1.Branch,
+	|	tmp1.CurrencyMovementType,
+	|	tmp1.Currency,
+	|	tmp1.TransactionCurrency,
+	|	tmp1.LegalName,
+	|	tmp1.Partner,
+	|	tmp1.Order
+	|;
+	|
+	|////////////////////////////////////////////////////////////////////////////////
+	|SELECT
+	|	tmp2.Company,
+	|	tmp2.Branch,
+	|	tmp2.CurrencyMovementType,
+	|	tmp2.Currency,
+	|	tmp2.TransactionCurrency,
+	|	tmp2.LegalName,
+	|	tmp2.Partner,
+	|	tmp2.Order,
+	|	CASE
+	|		WHEN tmp3.AmountBalance = tmp3.Amount
+	|			THEN tmp2.AmountBalance - tmp2.Amount
+	|		ELSE tmp2.AmountBalance / tmp3.AmountBalance * tmp3.Amount - tmp2.Amount
+	|	END AS Amount
+	|INTO tmp3
+	|FROM
+	|	tmp2 AS tmp2
+	|		LEFT JOIN tmp2 AS tmp3
+	|		ON (tmp2.Company = tmp3.Company)
+	|		AND (tmp2.Branch = tmp3.Branch)
+	|		AND (tmp2.TransactionCurrency = tmp3.TransactionCurrency)
+	|		AND (tmp2.LegalName = tmp3.LegalName)
+	|		AND (tmp2.Partner = tmp3.Partner)
+	|		AND (tmp2.Order = tmp3.Order)
+	|		AND (tmp3.CurrencyMovementType = VALUE(ChartOfCharacteristicTypes.CurrencyMovementType.SettlementCurrency))
+	|WHERE
+	|	tmp2.CurrencyMovementType <> VALUE(ChartOfCharacteristicTypes.CurrencyMovementType.SettlementCurrency)
+	|;
+	|
+	|////////////////////////////////////////////////////////////////////////////////
+	|SELECT
+	|	VALUE(AccumulationRecordType.Expense) AS RecordType,
+	|	&Period AS Period,
+	|	tmp3.Company,
+	|	tmp3.Branch,
+	|	tmp3.CurrencyMovementType,
+	|	tmp3.Currency,
+	|	tmp3.TransactionCurrency,
+	|	tmp3.LegalName,
+	|	tmp3.Partner,
+	|	tmp3.Order,
+	|	tmp3.Amount
+	|FROM
+	|	tmp3 AS tmp3
+	|WHERE
+	|	tmp3.Amount <> 0";
+	
+	Query.Text = StrReplace(Query.Text, "R2020B_AdvancesFromCustomers", Parameters.RegisterName_Advances);
+	
+	Recorder = RecordSet_Advances.Filter.Recorder.Value;
+				
+	Query.SetParameter("Recorder", Recorder);
+	Query.SetParameter("BalancePeriod", New Boundary(Recorder.PointInTime(), BoundaryType.Excluding));
+	Query.SetParameter("Period", Recorder.Date);
+				
+	QueryTable = Query.Execute().Unload();
+	
+	Op = Catalogs.AccountingOperations;
+	AccountingOperations = New Map();
+	AccountingOperations.Insert(Type("DocumentRef.SalesInvoice")    , Op.SalesInvoice_DR_R2020B_AdvancesFromCustomers_CR_R2021B_CustomersTransactions_CurrencyRevaluation);
+	AccountingOperations.Insert(Type("DocumentRef.PurchaseInvoice") , Op.PurchaseInvoice_DR_R1021B_VendorsTransactions_CR_R1020B_AdvancesToVendors_CurrencyRevaluation);
+				
+	For Each QueryTableRow In QueryTable Do
+		NewRow_RecordSet = RecordSet_Advances.Add();
+		FillPropertyValues(NewRow_RecordSet, QueryTableRow);
+		NewRow_RecordSet[Parameters.DocumentName] = Parameters.Object.Ref;
+		
+		NewRow_RecordSet = Records_AdvancesCurrencyRevaluation.Add();
+		FillPropertyValues(NewRow_RecordSet, QueryTableRow);
+		NewRow_RecordSet.Document = Recorder;
+		NewRow_RecordSet.AdvancesOrder = QueryTableRow.Order;
+		
+		// Customers transaction (currency revaluation)
+		NewRow_Transaction = TableTransactions_CurrencyRevaluation.Add();
+		FillPropertyValues(NewRow_Transaction, QueryTableRow);
+		NewRow_Transaction[Parameters.DocumentName] = Parameters.Object.Ref;
+							
+		// Accounting amounts (currency revaluation)
+		NewRow_Accounting = TableAccountingAmounts_CurrencyRevaluation.Add();
+		FillPropertyValues(NewRow_Accounting, QueryTableRow);
+		NewRow_Accounting.AdvancesClosing = Parameters.Object.Ref;
+		
+		Operation = AccountingOperations.Get(TypeOf(Recorder));
+		If Operation <> Undefined Then
+			NewRow_Accounting.Operation = Operation;
+		EndIf;
+	EndDo;
+EndProcedure
+
+Procedure RevaluateCurrency_Transactions(Parameters, 
+	                                     RecordSet_Transactions,
+	                                     TableTransactions_CurrencyRevaluation, 
+	                                     TableAccountingAmounts_CurrencyRevaluation,
+	                                     Records_TransactionsCurrencyRevaluation) Export
+	Query = New Query();
+	Query.Text = 
+	"SELECT
+	|	tmp1.Company,
+	|	tmp1.Branch,
+	|	tmp1.LegalName,
+	|	tmp1.Partner,
+	|	tmp1.Agreement,
+	|	tmp1.Basis,
+	|	tmp1.Order,
+	|	tmp1.Currency,
+	|	tmp1.TransactionCurrency,
+	|	tmp1.CurrencyMovementType,
+	|	tmp1.Amount
+	|INTO tmp1
+	|FROM
+	|	&RecordSet_Transactions AS tmp1
+	|WHERE
+	|	tmp1.RecordType = VALUE(AccumulationRecordType.Expense)
+	|;
+	|
+	|////////////////////////////////////////////////////////////////////////////////
+	|SELECT
+	|	tmp2.Company,
+	|	tmp2.Branch,
+	|	tmp2.LegalName,
+	|	tmp2.Partner,
+	|	tmp2.Order,
+	|	tmp2.Currency,
+	|	tmp2.TransactionCurrency,
+	|	tmp2.CurrencyMovementType,
+	|	tmp2.Amount
+	|INTO tmp2
+	|FROM
+	|	&TableTransactions_CurrencyRevaluation AS tmp2
+	|;
+	|
+	|////////////////////////////////////////////////////////////////////////////////
+	|SELECT
+	|	VALUE(AccumulationRecordType.Expense) AS RecordType,
+	|	&Period AS Period,
+	|	tmp2.Company,
+	|	tmp2.Branch,
+	|	tmp2.LegalName,
+	|	tmp2.Partner,
+	|	tmp2.Order,
+	|	tmp2.Currency,
+	|	tmp2.TransactionCurrency,
+	|	tmp2.CurrencyMovementType,
+	|	tmp1.Agreement,
+	|	tmp1.Basis,
+	|	tmp2.Amount
+	|FROM
+	|	tmp2 AS tmp2
+	|		LEFT JOIN tmp1 AS tmp1
+	|		ON tmp2.Company = tmp1.Company
+	|		AND tmp2.Branch = tmp1.Branch
+	|		AND tmp2.LegalName = tmp1.LegalName
+	|		AND tmp2.Partner = tmp1.Partner
+	|		AND tmp2.Order = tmp1.Order
+	|		AND tmp2.Currency = tmp1.Currency
+	|		AND tmp2.TransactionCurrency = tmp1.TransactionCurrency
+	|		AND tmp2.CurrencyMovementType = tmp1.CurrencyMovementType";
+	
+	Recorder = RecordSet_Transactions.Filter.Recorder.Value;
+	
+	Query.SetParameter("RecordSet_Transactions", RecordSet_Transactions);
+	Query.SetParameter("TableTransactions_CurrencyRevaluation", TableTransactions_CurrencyRevaluation);
+	Query.SetParameter("Period", Recorder.Date);			
+	QueryTable = Query.Execute().Unload();
+				
+	Op = Catalogs.AccountingOperations;
+	AccountingOperations = New Map();
+	AccountingOperations.Insert(Type("DocumentRef.SalesInvoice")    , Op.SalesInvoice_DR_R2021B_CustomersTransactions_CR_R5021T_Revenues_CurrencyRevaluation);
+	AccountingOperations.Insert(Type("DocumentRef.PurchaseInvoice") , Op.PurchaseInvoice_DR_R4050B_StockInventory_R5022T_Expenses_CR_R1021B_VendorsTransactions_CurrencyRevaluation);
+	
+	
+	For Each QueryTableRow In QueryTable Do
+		NewRow_RecordSet = RecordSet_Transactions.Add();
+		FillPropertyValues(NewRow_RecordSet, QueryTableRow);
+		NewRow_RecordSet[Parameters.DocumentName] = Parameters.Object.Ref;
+					
+		NewRow_RecordSet = Records_TransactionsCurrencyRevaluation.Add();
+		FillPropertyValues(NewRow_RecordSet, QueryTableRow);
+		NewRow_RecordSet.Document = Recorder;			
+		NewRow_RecordSet.TransactionDocument = QueryTableRow.Basis;			
+		NewRow_RecordSet.TransactionOrder    = QueryTableRow.Order;			
+					
+		// Accounting amounts (currency revaluation)
+		NewRow_Accounting = TableAccountingAmounts_CurrencyRevaluation.Add();
+		FillPropertyValues(NewRow_Accounting, QueryTableRow);
+		NewRow_Accounting.AdvancesClosing = Parameters.Object.Ref;
+		
+		Operation = AccountingOperations.Get(TypeOf(Recorder));
+		If Operation <> Undefined Then
+			NewRow_Accounting.Operation = Operation;
+		EndIf;
+		
+		//If TypeOf(Recorder) = Type("DocumentRef.SalesInvoice") Then
+		//	NewRow_Accounting.Operation = 
+		//	Catalogs.AccountingOperations.SalesInvoice_DR_R2021B_CustomersTransactions_CR_R5021T_Revenues_CurrencyRevaluation;
+		//EndIf;				
+	EndDo;
+EndProcedure
+
+//Procedure RevaluateCurrency_CustomersTransactions(Parameters, RecordSet_CustomersTransactions, TableAccountingAmounts_CurrencyRevaluation) Export
+//	Query = New Query();
+//	Query.Text = 
+//	"SELECT
+//	|	tmp1.Company,
+//	|	tmp1.Branch,
+//	|	tmp1.LegalName,
+//	|	tmp1.Partner,
+//	|	tmp1.Agreement,
+//	|	tmp1.Basis,
+//	|	tmp1.Order,
+//	|	tmp1.Currency,
+//	|	tmp1.TransactionCurrency,
+//	|	tmp1.CurrencyMovementType,
+//	|	tmp1.Amount
+//	|INTO tmp1
+//	|FROM
+//	|	AccumulationRegister.R2021B_CustomersTransactions AS tmp1
+//	|WHERE
+//	|	tmp1.RecordType = VALUE(AccumulationRecordType.Expense)
+//	|	AND tmp1.Recorder = &Recorder
+//	|	and (tmp1.CurrencyMovementType = VALUE(ChartOfCharacteristicTypes.CurrencyMovementType.SettlementCurrency)
+//	|	OR tmp1.Currency <> tmp1.TransactionCurrency)
+//	|;
+//	|
+//	|////////////////////////////////////////////////////////////////////////////////
+//	|SELECT
+//	|	tmp1.Company,
+//	|	tmp1.Branch,
+//	|	tmp1.CurrencyMovementType,
+//	|	tmp1.Currency,
+//	|	tmp1.TransactionCurrency,
+//	|	tmp1.LegalName,
+//	|	tmp1.Partner,
+//	|	tmp1.Agreement,
+//	|	tmp1.Basis,
+//	|	tmp1.Order,
+//	|	SUM(tmp1.Amount) AS Amount,
+//	|	SUM(tmp2.AmountBalance) AS AmountBalance
+//	|INTO tmp2
+//	|FROM
+//	|	tmp1 AS tmp1
+//	|		LEFT JOIN AccumulationRegister.R2021B_CustomersTransactions.Balance(&BalancePeriod, (Company, Branch, LegalName,
+//	|			Partner, Agreement, Basis, Order, Currency, TransactionCurrency, CurrencyMovementType) IN
+//	|			(SELECT
+//	|				Reg.Company,
+//	|				Reg.Branch,
+//	|				Reg.LegalName,
+//	|				Reg.Partner,
+//	|				Reg.Agreement,
+//	|				Reg.Basis,
+//	|				Reg.Order,
+//	|				Reg.Currency,
+//	|				Reg.TransactionCurrency,
+//	|				Reg.CurrencyMovementType
+//	|			FROM
+//	|				tmp1 AS Reg)) AS tmp2
+//	|		ON (tmp1.Company = tmp2.Company)
+//	|		AND (tmp1.Branch = tmp2.Branch)
+//	|		AND (tmp1.CurrencyMovementType = tmp2.CurrencyMovementType)
+//	|		AND (tmp1.Currency = tmp2.Currency)
+//	|		AND (tmp1.TransactionCurrency = tmp2.TransactionCurrency)
+//	|		AND (tmp1.LegalName = tmp2.LegalName)
+//	|		AND (tmp1.Partner = tmp2.Partner)
+//	|		AND (tmp1.Agreement = tmp2.Agreement)
+//	|		AND (tmp1.Basis = tmp2.Basis)
+//	|		AND (tmp1.Order = tmp2.Order)
+//	|GROUP BY
+//	|	tmp1.Company,
+//	|	tmp1.Branch,
+//	|	tmp1.CurrencyMovementType,
+//	|	tmp1.Currency,
+//	|	tmp1.TransactionCurrency,
+//	|	tmp1.LegalName,
+//	|	tmp1.Partner,
+//	|	tmp1.Agreement,
+//	|	tmp1.Basis,
+//	|	tmp1.Order
+//	|;
+//	|
+//	|////////////////////////////////////////////////////////////////////////////////
+//	|SELECT
+//	|	tmp2.Company,
+//	|	tmp2.Branch,
+//	|	tmp2.CurrencyMovementType,
+//	|	tmp2.Currency,
+//	|	tmp2.TransactionCurrency,
+//	|	tmp2.LegalName,
+//	|	tmp2.Partner,
+//	|	tmp2.Agreement,
+//	|	tmp2.Basis,
+//	|	tmp2.Order,
+//	|	CASE
+//	|		WHEN tmp3.AmountBalance = tmp3.Amount
+//	|			THEN tmp2.AmountBalance - tmp2.Amount
+//	|		ELSE tmp2.AmountBalance / tmp3.AmountBalance * tmp3.Amount - tmp2.Amount
+//	|	END AS Amount
+//	|INTO tmp3
+//	|FROM
+//	|	tmp2 AS tmp2
+//	|		LEFT JOIN tmp2 AS tmp3
+//	|		ON (tmp2.Company = tmp3.Company)
+//	|		AND (tmp2.Branch = tmp3.Branch)
+//	|		AND (tmp2.TransactionCurrency = tmp3.TransactionCurrency)
+//	|		AND (tmp2.LegalName = tmp3.LegalName)
+//	|		AND (tmp2.Partner = tmp3.Partner)
+//	|		AND (tmp2.Agreement = tmp3.Agreement)
+//	|		AND (tmp2.Basis = tmp3.Basis)
+//	|		AND (tmp2.Order = tmp3.Order)
+//	|		AND (tmp3.CurrencyMovementType = VALUE(ChartOfCharacteristicTypes.CurrencyMovementType.SettlementCurrency))
+//	|WHERE
+//	|	tmp2.CurrencyMovementType <> VALUE(ChartOfCharacteristicTypes.CurrencyMovementType.SettlementCurrency)
+//	|;
+//	|
+//	|////////////////////////////////////////////////////////////////////////////////
+//	|SELECT
+//	|	VALUE(AccumulationRecordType.Expense) AS RecordType,
+//	|	&Period AS Period,
+//	|	tmp3.Company,
+//	|	tmp3.Branch,
+//	|	tmp3.CurrencyMovementType,
+//	|	tmp3.Currency,
+//	|	tmp3.TransactionCurrency,
+//	|	tmp3.LegalName,
+//	|	tmp3.Partner,
+//	|	tmp3.Agreement,
+//	|	tmp3.Basis,
+//	|	tmp3.Order,
+//	|	tmp3.Amount
+//	|FROM
+//	|	tmp3 AS tmp3
+//	|WHERE
+//	|	tmp3.Amount <> 0";
+//	
+//	Recorder = RecordSet_CustomersTransactions.Filter.Recorder.Value;
+//				
+//	Query.SetParameter("Recorder", Recorder);
+//	Query.SetParameter("BalancePeriod", New Boundary(Recorder.PointInTime(), BoundaryType.Excluding));
+//	Query.SetParameter("Period", Recorder.Date);
+//				
+//	QueryTable = Query.Execute().Unload();
+//				
+//	For Each QueryTableRow In QueryTable Do
+//		NewRow_RecordSet = RecordSet_CustomersTransactions.Add();
+//		FillPropertyValues(NewRow_RecordSet, QueryTableRow);
+//		NewRow_RecordSet.CustomersAdvancesClosing = Parameters.Object.Ref;
+//					
+//		// Accounting amounts (currency revaluation)
+//		NewRow_Accounting = TableAccountingAmounts_CurrencyRevaluation.Add();
+//		FillPropertyValues(NewRow_Accounting, QueryTableRow);
+//		NewRow_Accounting.AdvancesClosing = Parameters.Object.Ref;
+//		If TypeOf(Recorder) = Type("DocumentRef.SalesInvoice") Then
+//			NewRow_Accounting.Operation = 
+//			Catalogs.AccountingOperations.SalesInvoice_DR_R2021B_CustomersTransactions_CR_R5021T_Revenues_CurrencyRevaluation;
+//		EndIf;				
+//	EndDo;
+//EndProcedure
+
+#EndRegion

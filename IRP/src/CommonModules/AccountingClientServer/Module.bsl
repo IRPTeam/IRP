@@ -4,14 +4,16 @@ Procedure UpdateAccountingTables(Object,
 		                         AccountingExtDimensions,
 		                         MainTableName, 
 		                         Filter_LedgerType = Undefined, 
-		                         IgnoreFixed = False) Export
+		                         IgnoreFixed = False,
+		                         AddInfo = Undefined) Export
 		                         
 	AccountingServer.UpdateAccountingTables(Object, 
 											AccountingRowAnalytics,
 											AccountingExtDimensions,
 		                                    MainTableName, 
 		                                    Filter_LedgerType, 
-		                                    IgnoreFixed);
+		                                    IgnoreFixed,
+		                                    AddInfo);
 EndProcedure
 
 Function GetParametersEditAccounting(Object, 

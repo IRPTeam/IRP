@@ -110,8 +110,6 @@
   <registerRecords>AccumulationRegister.R8014T_ConsignorSales</registerRecords>
   <registerRecords>AccumulationRegister.R9010B_SourceOfOriginStock</registerRecords>
   <registerRecords>AccumulationRegister.T1050T_AccountingQuantities</registerRecords>
-  <registerRecords>InformationRegister.T9050S_AccountingRowAnalytics</registerRecords>
-  <registerRecords>InformationRegister.T9051S_AccountingExtDimensions</registerRecords>
   <postInPrivilegedMode>true</postInPrivilegedMode>
   <unpostInPrivilegedMode>true</unpostInPrivilegedMode>
   <choiceHistoryOnInput>DontUse</choiceHistoryOnInput>

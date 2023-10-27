@@ -1,4 +1,61 @@
 
+Function GetOperationsDefinition()
+	Map = New Map();
+	AO = Catalogs.AccountingOperations;
+	// Bank payment
+	Map.Insert(AO.BankPayment_DR_R1020B_AdvancesToVendors_R1021B_VendorsTransactions_CR_R3010B , New Structure("ByRow", True));
+	Map.Insert(AO.BankPayment_R1021B_VendorsTransactions_CR_R1020B_AdvancesToVendors , New Structure("ByRow", True));
+	Map.Insert(AO.BankPayment_DR_R5022T_Expenses_CR_R3010B_CashOnHand , New Structure("ByRow", True));
+	
+	// Bank receipt
+	Map.Insert(AO.BankReceipt_DR_R3010B_CashOnHand_CR_R2020B_AdvancesFromCustomers_R2021B_CustomersTransactions , New Structure("ByRow", True));
+	Map.Insert(AO.BankReceipt_DR_R2021B_CustomersTransactions_CR_R2020B_AdvancesFromCustomers , New Structure("ByRow", True));
+	
+	// Purchase invoice
+	//
+	// receipt inventory
+	Map.Insert(AO.PurchaseInvoice_DR_R4050B_StockInventory_R5022T_Expenses_CR_R1021B_VendorsTransactions , New Structure("ByRow", True));
+	Map.Insert(AO.PurchaseInvoice_DR_R4050B_StockInventory_R5022T_Expenses_CR_R1021B_VendorsTransactions_CurrencyRevaluation , New Structure("ByRow", True));
+	// offset of advabces
+	Map.Insert(AO.PurchaseInvoice_DR_R1021B_VendorsTransactions_CR_R1020B_AdvancesToVendors , New Structure("ByRow", False));
+	Map.Insert(AO.PurchaseInvoice_DR_R1021B_VendorsTransactions_CR_R1020B_AdvancesToVendors_CurrencyRevaluation , New Structure("ByRow", False));
+	
+	Map.Insert(AO.PurchaseInvoice_DR_R1040B_TaxesOutgoing_CR_R1021B_VendorsTransactions , New Structure("ByRow", True));
+	
+	// Sales invoice
+	//
+	// sales inventory
+	Map.Insert(AO.SalesInvoice_DR_R2021B_CustomersTransactions_CR_R5021T_Revenues , New Structure("ByRow", False));
+	Map.Insert(AO.SalesInvoice_DR_R2021B_CustomersTransactions_CR_R5021T_Revenues_CurrencyRevaluation , New Structure("ByRow", False));
+	// offset of advances
+	Map.Insert(AO.SalesInvoice_DR_R2020B_AdvancesFromCustomers_CR_R2021B_CustomersTransactions , New Structure("ByRow", False));
+	Map.Insert(AO.SalesInvoice_DR_R2020B_AdvancesFromCustomers_CR_R2021B_CustomersTransactions_CurrencyRevaluation , New Structure("ByRow", False));
+	
+	Map.Insert(AO.SalesInvoice_DR_R5021T_Revenues_CR_R2040B_TaxesIncoming , New Structure("ByRow", True));
+	Map.Insert(AO.SalesInvoice_DR_R5022T_Expenses_CR_R4050B_StockInventory , New Structure("ByRow", True));
+	
+	// Retail sales receipt
+	Map.Insert(AO.RetailSalesReceipt_DR_R5022T_Expenses_CR_R4050B_StockInventory , New Structure("ByRow", True));
+
+	// Foreign currency revaluation
+	Map.Insert(AO.ForeignCurrencyRevaluation_DR_R2020B_AdvancesFromCustomers_CR_R5021T_Revenues , New Structure("ByRow, RequestTable", True, True));
+	Map.Insert(AO.ForeignCurrencyRevaluation_DR_R5022T_Expenses_CR_R2020B_AdvancesFromCustomers , New Structure("ByRow, RequestTable", True, True));
+	
+
+	Return Map;
+EndFunction
+
+Function GetSupportedDocuments() Export
+	ArrayOfDocuments = New Array();
+	Docs = Metadata.Documents;
+	ArrayOfDocuments.Add(Docs.BankPayment);	
+	ArrayOfDocuments.Add(Docs.BankReceipt);	
+	ArrayOfDocuments.Add(Docs.PurchaseInvoice);	
+	ArrayOfDocuments.Add(Docs.RetailSalesReceipt);
+	ArrayOfDocuments.Add(Docs.SalesInvoice);
+	Return ArrayOfDocuments;
+EndFunction
+
 #Region Service
 
 Function GetAccountingAnalyticsResult(Parameters) Export
@@ -87,11 +144,21 @@ Function ExtractValueByType(ObjectData, RowData, ArrayOfTypes, AdditionalAnalyti
 	EndIf;
 
 	If RowData <> Undefined Then
-		For Each KeyValue In RowData Do
-			If ArrayOfTypes.Find(TypeOf(RowData[KeyValue.Key])) <> Undefined Then
-				Return RowData[KeyValue.Key];
-			EndIf;
-		EndDo;
+		If TypeOf(RowData) = Type("ValueTableRow") Then
+			For Each RowItem In RowData Do
+				If ArrayOfTypes.Find(TypeOf(RowItem)) <> Undefined Then
+					Return RowItem;
+				EndIf;
+			EndDo;
+		ElsIf TypeOf(RowData) = Type("Structure") Then	
+			For Each KeyValue In RowData Do
+				If ArrayOfTypes.Find(TypeOf(RowData[KeyValue.Key])) <> Undefined Then
+					Return RowData[KeyValue.Key];
+				EndIf;
+			EndDo;
+		Else
+			Raise "Unsupported type of row data";
+		EndIf;
 	EndIf;
 	
 	For Each KeyValue In ObjectData Do
@@ -193,10 +260,14 @@ Function GetAccountingOperationsByLedgerType(Ref, Period, LedgerType) Export
 	
 	ArrayOfAccountingOperations = New Array();
 	While QuerySelection.Next() Do
-		Property = OperationsDefinition.Get(QuerySelection.AccountingOperation);
-		ByRow = ?(Property = Undefined, False, Property.ByRow);
-		ArrayOfAccountingOperations.Add(New Structure("Operation, ByRow, MetadataName",
-			QuerySelection.AccountingOperation, ByRow, MetadataName));
+		Def = OperationsDefinition.Get(QuerySelection.AccountingOperation);
+		ByRow = ?(Def = Undefined, False, Def.ByRow);
+		RequestTable = False;
+		If Def <> Undefined And Def.Property("RequestTable") Then
+			RequestTable = Def.RequestTable;
+		EndIf;
+		ArrayOfAccountingOperations.Add(New Structure("Operation, ByRow, RequestTable, MetadataName",
+			QuerySelection.AccountingOperation, ByRow, RequestTable, MetadataName));
 	EndDo;
 	Return ArrayOfAccountingOperations;
 EndFunction
@@ -217,17 +288,6 @@ Function GetLedgerTypeVariants() Export
 		Result.Add(QuerySelection.Ref);
 	EndDo;
 	Return Result;
-EndFunction
-
-Function GetSupportedDocuments() Export
-	ArrayOfDocuments = New Array();
-	Docs = Metadata.Documents;
-	ArrayOfDocuments.Add(Docs.BankPayment);	
-	ArrayOfDocuments.Add(Docs.BankReceipt);	
-	ArrayOfDocuments.Add(Docs.PurchaseInvoice);	
-	ArrayOfDocuments.Add(Docs.RetailSalesReceipt);
-	ArrayOfDocuments.Add(Docs.SalesInvoice);
-	Return ArrayOfDocuments;
 EndFunction
 
 #EndRegion
@@ -535,7 +595,7 @@ Function __GetT9013S_AccountsTax(Period, Company, LedgerTypeVariant, Tax) Export
 EndFunction
 
 Function GetT9014S_AccountsExpenseRevenue(AccountParameters, ExpenseRevenue) Export
-	Return AccountingServerReuse.GetT9014S_AccountsExpenseRevenue_Reuse(
+	Return __GetT9014S_AccountsExpenseRevenue(//AccountingServerReuse.GetT9014S_AccountsExpenseRevenue_Reuse(
 		AccountParameters.Period, 
 		AccountParameters.Company, 
 		AccountParameters.LedgerTypeVariant, 
@@ -592,7 +652,8 @@ Procedure UpdateAccountingTables(Object,
 							     AccountingExtDimensions,
 							     MainTableName, 
 							     Filter_LedgerType = Undefined, 
-							     IgnoreFixed = False) Export
+							     IgnoreFixed = False,
+							     AddInfo = Undefined) Export
 	
 	Period = CommonFunctionsClientServer.GetSliceLastDateByRefAndDate(Object.Ref, Object.Date);
 	LedgerTypes = GetLedgerTypesByCompany(Object.Ref, Period, Object.Company);
@@ -632,27 +693,54 @@ Procedure UpdateAccountingTables(Object,
 		FillAccountingRowAnalytics(Parameters);
 	EndDo;
 	
-	For Each Row In Object[MainTableName] Do
-		RowData = GetDocumentData(Object, Row, MainTableName).RowData;
+	If MainTableName = Undefined Then
 		For Each Operation In OperationsByLedgerType Do
-			If Not Operation.OperationInfo.ByRow Then
+			If Not Operation.OperationInfo.RequestTable Then
 				Continue;
 			EndIf;
-			Parameters = New Structure();
-			Parameters.Insert("Object"        , Object);
-			Parameters.Insert("Operation"     , Operation.OperationInfo.Operation);
-			Parameters.Insert("LedgerType"    , Operation.LedgerType);
-			Parameters.Insert("MetadataName"  , Operation.OperationInfo.MetadataName);
-			Parameters.Insert("MainTableName" , MainTableName);
-			Parameters.Insert("IgnoreFixed"   , IgnoreFixed);
-			Parameters.Insert("ObjectData"    , ObjectData);
-			Parameters.Insert("RowData"       , RowData);
-			Parameters.Insert("AccountingRowAnalytics"  , AccountingRowAnalytics);
-			Parameters.Insert("AccountingExtDimensions" , AccountingExtDimensions);
 			
-			FillAccountingRowAnalytics(Parameters, Row);
+			DataTable = Documents[Operation.OperationInfo.MetadataName].GetAccountingDataTable(Operation.OperationInfo.Operation, AddInfo);
+			
+			For Each Row In DataTable Do
+				Parameters = New Structure();
+				Parameters.Insert("Object"        , Object);
+				Parameters.Insert("Operation"     , Operation.OperationInfo.Operation);
+				Parameters.Insert("LedgerType"    , Operation.LedgerType);
+				Parameters.Insert("MetadataName"  , Operation.OperationInfo.MetadataName);
+				Parameters.Insert("MainTableName" , MainTableName);
+				Parameters.Insert("IgnoreFixed"   , IgnoreFixed);
+				Parameters.Insert("ObjectData"    , ObjectData);
+				Parameters.Insert("RowData"       , Row);
+				Parameters.Insert("AccountingRowAnalytics"  , AccountingRowAnalytics);
+				Parameters.Insert("AccountingExtDimensions" , AccountingExtDimensions);
+			
+				FillAccountingRowAnalytics(Parameters, Row);
+			EndDo;
+			
 		EndDo;
-	EndDo;	
+	Else
+		For Each Row In Object[MainTableName] Do
+			RowData = GetDocumentData(Object, Row, MainTableName).RowData;
+			For Each Operation In OperationsByLedgerType Do
+				If Not Operation.OperationInfo.ByRow Then
+					Continue;
+				EndIf;
+				Parameters = New Structure();
+				Parameters.Insert("Object"        , Object);
+				Parameters.Insert("Operation"     , Operation.OperationInfo.Operation);
+				Parameters.Insert("LedgerType"    , Operation.LedgerType);
+				Parameters.Insert("MetadataName"  , Operation.OperationInfo.MetadataName);
+				Parameters.Insert("MainTableName" , MainTableName);
+				Parameters.Insert("IgnoreFixed"   , IgnoreFixed);
+				Parameters.Insert("ObjectData"    , ObjectData);
+				Parameters.Insert("RowData"       , RowData);
+				Parameters.Insert("AccountingRowAnalytics"  , AccountingRowAnalytics);
+				Parameters.Insert("AccountingExtDimensions" , AccountingExtDimensions);
+			
+				FillAccountingRowAnalytics(Parameters, Row);
+			EndDo;
+		EndDo;
+	EndIf;
 EndProcedure
 
 Function GetDocumentData(Object, TableRow, MainTableName)
@@ -780,13 +868,18 @@ Procedure ClearAccountingTables(Object, AccountingRowAnalytics, AccountingExtDim
 		EndDo;
 		If Operations.Find(Row.Operation) = Undefined Then
 			ArrayForDelete.Add(Row);
-		EndIf;
-		
-		If Not ValueIsFilled(Row.Key) Then
 			Continue;
 		EndIf;
-		If Not Object[MainTableName].FindRows(New Structure("Key", Row.Key)).Count() Then
+		
+		If Not ValueIsFilled(MainTableName) Then
 			ArrayForDelete.Add(Row);
+		Else		
+			If Not ValueIsFilled(Row.Key) Then
+				Continue;
+			EndIf;
+			If Not Object[MainTableName].FindRows(New Structure("Key", Row.Key)).Count() Then
+				ArrayForDelete.Add(Row);
+			EndIf;
 		EndIf;
 	EndDo;
 	For Each ItemForDelete In ArrayForDelete Do
@@ -809,48 +902,24 @@ Procedure ClearAccountingTables(Object, AccountingRowAnalytics, AccountingExtDim
 		EndDo;
 		If Operations.Find(Row.Operation) = Undefined Then
 			ArrayForDelete.Add(Row);
-		EndIf;
-		
-		If Not ValueIsFilled(Row.Key) Then
 			Continue;
 		EndIf;
-		If Not Object[MainTableName].FindRows(New Structure("Key", Row.Key)).Count() Then
+		
+		If Not ValueIsFilled(MainTableName) Then
 			ArrayForDelete.Add(Row);
+		Else	
+			If Not ValueIsFilled(Row.Key) Then
+				Continue;
+			EndIf;
+			If Not Object[MainTableName].FindRows(New Structure("Key", Row.Key)).Count() Then
+				ArrayForDelete.Add(Row);
+			EndIf;
 		EndIf;
 	EndDo;
 	For Each ItemForDelete In ArrayForDelete Do
 		AccountingExtDimensions.Delete(ItemForDelete);
 	EndDo;
 EndProcedure
-
-Function GetOperationsDefinition()
-	Map = New Map();
-	AO = Catalogs.AccountingOperations;
-	// Bank payment
-	Map.Insert(AO.BankPayment_DR_R1020B_AdvancesToVendors_R1021B_VendorsTransactions_CR_R3010B , New Structure("ByRow", True));
-	Map.Insert(AO.BankPayment_R1021B_VendorsTransactions_CR_R1020B_AdvancesToVendors , New Structure("ByRow", True));
-	Map.Insert(AO.BankPayment_DR_R5022T_Expenses_CR_R3010B_CashOnHand , New Structure("ByRow", True));
-	
-	// Bank receipt
-	Map.Insert(AO.BankReceipt_DR_R3010B_CashOnHand_CR_R2020B_AdvancesFromCustomers_R2021B_CustomersTransactions , New Structure("ByRow", True));
-	Map.Insert(AO.BankReceipt_DR_R2021B_CustomersTransactions_CR_R2020B_AdvancesFromCustomers , New Structure("ByRow", True));
-	
-	// Purchase invoice
-	Map.Insert(AO.PurchaseInvoice_DR_R4050B_StockInventory_R5022T_Expenses_CR_R1021B_VendorsTransactions , New Structure("ByRow", True));
-	Map.Insert(AO.PurchaseInvoice_DR_R1021B_VendorsTransactions_CR_R1020B_AdvancesToVendors , New Structure("ByRow", False));
-	Map.Insert(AO.PurchaseInvoice_DR_R1040B_TaxesOutgoing_CR_R1021B_VendorsTransactions , New Structure("ByRow", True));
-	
-	// Sales invoice
-	Map.Insert(AO.SalesInvoice_DR_R2021B_CustomersTransactions_CR_R2020B_AdvancesFromCustomers , New Structure("ByRow", False));
-	Map.Insert(AO.SalesInvoice_DR_R2021B_CustomersTransactions_CR_R5021T_Revenues , New Structure("ByRow", True));
-	Map.Insert(AO.SalesInvoice_DR_R5021T_Revenues_CR_R2040B_TaxesIncoming , New Structure("ByRow", True));
-	Map.Insert(AO.SalesInvoice_DR_R5022T_Expenses_CR_R4050B_StockInventory , New Structure("ByRow", True));
-	
-	// Retail sales receipt
-	Map.Insert(AO.RetailSalesReceipt_DR_R5022T_Expenses_CR_R4050B_StockInventory , New Structure("ByRow", True));
-
-	Return Map;
-EndFunction
 
 Function GetAccountingData_LandedCost(Parameters)
 	Query = New Query();
@@ -1157,12 +1226,12 @@ EndProcedure
 
 Procedure UpdateFormTables(Object, Form)
 	RecordSet = InformationRegisters.T9050S_AccountingRowAnalytics.CreateRecordSet();
-	RecordSet.Filter.Recorder.Set(Object.Ref);
+	RecordSet.Filter.Document.Set(Object.Ref);
 	RecordSet.Read();
 	Form.AccountingRowAnalytics.Load(RecordSet.Unload());
 	
 	RecordSet = InformationRegisters.T9051S_AccountingExtDimensions.CreateRecordSet();
-	RecordSet.Filter.Recorder.Set(Object.Ref);
+	RecordSet.Filter.Document.Set(Object.Ref);
 	RecordSet.Read();
 	Form.AccountingExtDimensions.Load(RecordSet.Unload());
 EndProcedure	
@@ -1173,7 +1242,7 @@ Procedure OnWrite(Object, Cancel) Export
 	_AccountingRowAnalytics = CommonFunctionsClientServer.GetFromAddInfo(Object.AdditionalProperties, "AccountingRowAnalytics", Undefined);
 	If _AccountingRowAnalytics = Undefined Then
 		RecordSet = InformationRegisters.T9050S_AccountingRowAnalytics.CreateRecordSet();
-		RecordSet.Filter.Recorder.Set(Object.Ref);
+		RecordSet.Filter.Document.Set(Object.Ref);
 		RecordSet.Read();
 		_AccountingRowAnalytics = RecordSet.Unload();
 	EndIf;
@@ -1181,7 +1250,7 @@ Procedure OnWrite(Object, Cancel) Export
 	_AccountingExtDimensions = CommonFunctionsClientServer.GetFromAddInfo(Object.AdditionalProperties, "AccountingExtDimensions", Undefined);
 	If _AccountingExtDimensions = Undefined Then
 		RecordSet = InformationRegisters.T9051S_AccountingExtDimensions.CreateRecordSet();
-		RecordSet.Filter.Recorder.Set(Object.Ref);
+		RecordSet.Filter.Document.Set(Object.Ref);
 		RecordSet.Read();
 		_AccountingExtDimensions = RecordSet.Unload();
 	EndIf;
@@ -1198,14 +1267,26 @@ EndProcedure
 // Manager
 
 Procedure CreateAccountingDataTables(Ref, Cancel, PostingMode, Parameters, AddInfo) Export
-	Query = New Query();
-	Query.TempTablesManager = Parameters.TempTablesManager;
-	Query.Text = 
-	"SELECT * INTO T9050S_AccountingRowAnalytics FROM &T1 AS AccountingRowAnalytics;
-	|SELECT * INTO T9051S_AccountingExtDimensions FROM &T2 AS AccountingExtDimensions";
-	Query.SetParameter("T1", CommonFunctionsClientServer.GetFromAddInfo(AddInfo, "AccountingRowAnalytics"));
-	Query.SetParameter("T2", CommonFunctionsClientServer.GetFromAddInfo(AddInfo, "AccountingExtDimensions"));
-	Query.Execute();
+	_AccountingRowAnalytics  = CommonFunctionsClientServer.GetFromAddInfo(AddInfo, "AccountingRowAnalytics", Undefined);
+	_AccountingExtDimensions = CommonFunctionsClientServer.GetFromAddInfo(AddInfo, "AccountingExtDimensions", Undefined);
+	
+	If _AccountingRowAnalytics = Undefined Or _AccountingExtDimensions = Undefined Then
+		Return;
+	EndIf;
+	
+	_AccountingRowAnalytics.FillValues(Ref, "Document");
+	
+	RecordSet = InformationRegisters.T9050S_AccountingRowAnalytics.CreateRecordSet();
+	RecordSet.Filter.Document.Set(Ref);
+	RecordSet.Load(_AccountingRowAnalytics);
+	RecordSet.Write();
+		
+	_AccountingExtDimensions.FillValues(Ref, "Document");
+	
+	RecordSet = InformationRegisters.T9051S_AccountingExtDimensions.CreateRecordSet();
+	RecordSet.Filter.Document.Set(Ref);
+	RecordSet.Load(_AccountingExtDimensions);
+	RecordSet.Write();	
 EndProcedure
 
 #EndRegion

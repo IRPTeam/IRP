@@ -251,15 +251,8 @@ Function PostingGetDocumentDataTables(Ref, Cancel, PostingMode, Parameters, AddI
 	Parameters.Insert("PostingDataTables", PostingDataTables);
 	CurrenciesServer.PreparePostingDataTables(Parameters, CurrencyTable, AddInfo);
 
-	BatchKeysInfoMetadata = Parameters.Object.RegisterRecords.T6020S_BatchKeysInfo.Metadata();
-	If Parameters.Property("MultiCurrencyExcludePostingDataTables") Then
-		Parameters.MultiCurrencyExcludePostingDataTables.Add(BatchKeysInfoMetadata);
-	Else
-		ArrayOfMultiCurrencyExcludePostingDataTables = New Array;
-		ArrayOfMultiCurrencyExcludePostingDataTables.Add(BatchKeysInfoMetadata);
-		Parameters.Insert("MultiCurrencyExcludePostingDataTables", ArrayOfMultiCurrencyExcludePostingDataTables);
-	EndIf;
-
+	CurrenciesServer.ExcludePostingDataTable(Parameters, Parameters.Object.RegisterRecords.T6020S_BatchKeysInfo.Metadata());
+	
 	BatchKeysInfo_DataTable = Parameters.PostingDataTables.Get(
 		Parameters.Object.RegisterRecords.T6020S_BatchKeysInfo).RecordSet;
 	BatchKeysInfo_DataTableGrouped = BatchKeysInfo_DataTable.CopyColumns();
@@ -792,16 +785,23 @@ Function R1012B_PurchaseOrdersInvoiceClosing()
 EndFunction
 
 Function R1020B_AdvancesToVendors()
-	Return "SELECT
-		   |	VALUE(AccumulationRecordType.Expense) AS RecordType,
-		   |	OffsetOfAdvances.Recorder AS VendorsAdvancesClosing,
-		   |	OffsetOfAdvances.AdvancesOrder AS Order,
-		   |	*
-		   |INTO R1020B_AdvancesToVendors
-		   |FROM
-		   |	InformationRegister.T2010S_OffsetOfAdvances AS OffsetOfAdvances
-		   |WHERE
-		   |	OffsetOfAdvances.Document = &Ref";
+	Return 
+		"SELECT
+		|	VALUE(AccumulationRecordType.Expense) AS RecordType,
+		|	OffsetOfAdvances.Period,
+		|	OffsetOfAdvances.Recorder AS VendorsAdvancesClosing,
+		|	OffsetOfAdvances.AdvancesOrder AS Order,
+		|	OffsetOfAdvances.Company,
+		|	OffsetOfAdvances.Branch,
+		|	OffsetOfAdvances.Currency,
+		|	OffsetOfAdvances.LegalName,
+		|	OffsetOfAdvances.Partner,
+		|	OffsetOfAdvances.Amount
+		|INTO R1020B_AdvancesToVendors
+		|FROM
+		|	InformationRegister.T2010S_OffsetOfAdvances AS OffsetOfAdvances
+		|WHERE
+		|	OffsetOfAdvances.Document = &Ref";
 EndFunction
 
 Function R1021B_VendorsTransactions()
@@ -1449,46 +1449,48 @@ EndFunction
 #Region Accounting
 
 Function T1040T_AccountingAmounts()
-	Return "SELECT
-		   |	ItemList.Period,
-		   |	ItemList.Key AS RowKey,
-		   |	ItemList.Currency,
-		   |	ItemList.NetAmount AS Amount,
-		   |	VALUE(Catalog.AccountingOperations.PurchaseInvoice_DR_R4050B_StockInventory_R5022T_Expenses_CR_R1021B_VendorsTransactions) AS Operation,
-		   |	UNDEFINED AS AdvancesClosing
-		   |INTO T1040T_AccountingAmounts
-		   |FROM
-		   |	ItemList AS ItemList
-		   |WHERE
-		   |	ItemList.IsPurchase
-		   |
-		   |UNION ALL
-		   |
-		   |SELECT
-		   |	ItemList.Period,
-		   |	ItemList.Key AS RowKey,
-		   |	ItemList.Currency,
-		   |	ItemList.TaxAmount,
-		   |	VALUE(Catalog.AccountingOperations.PurchaseInvoice_DR_R1040B_TaxesOutgoing_CR_R1021B_VendorsTransactions),
-		   |	UNDEFINED
-		   |FROM
-		   |	ItemList as ItemList
-		   |WHERE
-		   |	ItemList.IsPurchase
-		   |
-		   |UNION ALL
-		   |
-		   |SELECT
-		   |	T2010S_OffsetOfAdvances.Period,
-		   |	T2010S_OffsetOfAdvances.Key AS RowKey,
-		   |	T2010S_OffsetOfAdvances.Currency,
-		   |	T2010S_OffsetOfAdvances.Amount,
-		   |	VALUE(Catalog.AccountingOperations.PurchaseInvoice_DR_R1040B_TaxesOutgoing_CR_R1021B_VendorsTransactions),
-		   |	T2010S_OffsetOfAdvances.Recorder
-		   |FROM
-		   |	InformationRegister.T2010S_OffsetOfAdvances AS T2010S_OffsetOfAdvances
-		   |WHERE
-		   |	T2010S_OffsetOfAdvances.Document = &Ref";
+	Return 
+		"SELECT
+		|	ItemList.Period,
+		|	ItemList.Key AS RowKey,
+		|	ItemList.Currency,
+		|	ItemList.NetAmount AS Amount,
+		|	VALUE(Catalog.AccountingOperations.PurchaseInvoice_DR_R4050B_StockInventory_R5022T_Expenses_CR_R1021B_VendorsTransactions) AS
+		|		Operation,
+		|	UNDEFINED AS AdvancesClosing
+		|INTO T1040T_AccountingAmounts
+		|FROM
+		|	ItemList AS ItemList
+		|WHERE
+		|	ItemList.IsPurchase
+		|
+		|UNION ALL
+		|
+		|SELECT
+		|	ItemList.Period,
+		|	ItemList.Key AS RowKey,
+		|	ItemList.Currency,
+		|	ItemList.TaxAmount,
+		|	VALUE(Catalog.AccountingOperations.PurchaseInvoice_DR_R1040B_TaxesOutgoing_CR_R1021B_VendorsTransactions),
+		|	UNDEFINED
+		|FROM
+		|	ItemList as ItemList
+		|WHERE
+		|	ItemList.IsPurchase
+		|
+		|UNION ALL
+		|
+		|SELECT
+		|	T2010S_OffsetOfAdvances.Period,
+		|	T2010S_OffsetOfAdvances.Key AS RowKey,
+		|	T2010S_OffsetOfAdvances.Currency,
+		|	T2010S_OffsetOfAdvances.Amount,
+		|	VALUE(Catalog.AccountingOperations.PurchaseInvoice_DR_R1021B_VendorsTransactions_CR_R1020B_AdvancesToVendors),
+		|	T2010S_OffsetOfAdvances.Recorder
+		|FROM
+		|	InformationRegister.T2010S_OffsetOfAdvances AS T2010S_OffsetOfAdvances
+		|WHERE
+		|	T2010S_OffsetOfAdvances.Document = &Ref";
 EndFunction
 
 Function T1050T_AccountingQuantities()
@@ -1506,12 +1508,18 @@ EndFunction
 
 Function GetAccountingAnalytics(Parameters) Export
 	Operations = Catalogs.AccountingOperations;
-	If Parameters.Operation = Operations.PurchaseInvoice_DR_R4050B_StockInventory_R5022T_Expenses_CR_R1021B_VendorsTransactions Then
-		Return GetAnalytics_DR_R4050B_CR_R1021B(Parameters); // Stock inventory - Vendors transactions
-	ElsIf Parameters.Operation = Operations.PurchaseInvoice_DR_R1021B_VendorsTransactions_CR_R1020B_AdvancesToVendors Then
-		Return GetAnalytics_DR_R1021B_CR_R1020B(Parameters); // Vendors transactions - Advances to vendors
+	If Parameters.Operation = Operations.PurchaseInvoice_DR_R4050B_StockInventory_R5022T_Expenses_CR_R1021B_VendorsTransactions 
+		Or Parameters.Operation = Operations.PurchaseInvoice_DR_R4050B_StockInventory_R5022T_Expenses_CR_R1021B_VendorsTransactions_CurrencyRevaluation Then
+		
+		Return GetAnalytics_ReceiptInventory(Parameters); // Stock inventory - Vendors transactions
+		
+	ElsIf Parameters.Operation = Operations.PurchaseInvoice_DR_R1021B_VendorsTransactions_CR_R1020B_AdvancesToVendors 
+		Or Parameters.Operation = Operations.PurchaseInvoice_DR_R1021B_VendorsTransactions_CR_R1020B_AdvancesToVendors_CurrencyRevaluation Then
+		
+		Return GetAnalytics_OffsetOfAdvances(Parameters); // Vendors transactions - Advances to vendors
+	
 	ElsIf Parameters.Operation = Operations.PurchaseInvoice_DR_R1040B_TaxesOutgoing_CR_R1021B_VendorsTransactions Then
-		Return GetAnalytics_DR_R1040B_CR_R1021B(Parameters); // Taxes outgoing - Vendors transactions
+		Return GetAnalytics_VATIncoming(Parameters); // Taxes outgoing - Vendors transactions
 	EndIf;
 	Return Undefined;
 EndFunction
@@ -1519,7 +1527,7 @@ EndFunction
 #Region Accounting_Analytics
 
 // Stock inventory - Vendors transactions
-Function GetAnalytics_DR_R4050B_CR_R1021B(Parameters)
+Function GetAnalytics_ReceiptInventory(Parameters)
 	AccountingAnalytics = AccountingServer.GetAccountingAnalyticsResult(Parameters);
 	AccountParameters   = AccountingServer.GetAccountParameters(Parameters);
 
@@ -1544,7 +1552,7 @@ Function GetAnalytics_DR_R4050B_CR_R1021B(Parameters)
 EndFunction
 
 // Vendors transactions - Advances to vendors
-Function GetAnalytics_DR_R1021B_CR_R1020B(Parameters)
+Function GetAnalytics_OffsetOfAdvances(Parameters)
 	AccountingAnalytics = AccountingServer.GetAccountingAnalyticsResult(Parameters);
 	AccountParameters   = AccountingServer.GetAccountParameters(Parameters);
 
@@ -1566,7 +1574,7 @@ Function GetAnalytics_DR_R1021B_CR_R1020B(Parameters)
 EndFunction
 
 // Taxes outgoing - Vendors transactions
-Function GetAnalytics_DR_R1040B_CR_R1021B(Parameters)
+Function GetAnalytics_VATIncoming(Parameters)
 	AccountingAnalytics = AccountingServer.GetAccountingAnalyticsResult(Parameters);
 	AccountParameters   = AccountingServer.GetAccountParameters(Parameters);
 		

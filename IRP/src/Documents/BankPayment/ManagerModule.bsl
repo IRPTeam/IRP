@@ -969,11 +969,11 @@ EndFunction
 
 Function GetAccountingAnalytics(Parameters) Export
 	If Parameters.Operation = Catalogs.AccountingOperations.BankPayment_DR_R1020B_AdvancesToVendors_R1021B_VendorsTransactions_CR_R3010B Then
-		Return GetAnalytics_DR_R1020B_R1021B_CR_3010B(Parameters); // Vendors transactions - Cash on hand
+		Return GetAnalytics_PaymentToVendor(Parameters); // Vendors transactions - Cash on hand
 	ElsIf Parameters.Operation = Catalogs.AccountingOperations.BankPayment_R1021B_VendorsTransactions_CR_R1020B_AdvancesToVendors Then
-		Return GetAnalytics_DR_R1021B_CR_R1020B(Parameters); // Vendors transactions - Advances to vendors 
+		Return GetAnalytics_OffsetOfAdvances(Parameters); // Vendors transactions - Advances to vendors 
 	ElsIf Parameters.Operation = Catalogs.AccountingOperations.BankPayment_DR_R5022T_Expenses_CR_R3010B_CashOnHand Then
-		Return GetAnalytics_DRr5022T_CR_3010B(Parameters); // Expenses - Cash on hand
+		Return GetAnalytics_BankCommission(Parameters); // Expenses - Cash on hand
 	EndIf;
 	Return Undefined;
 EndFunction
@@ -981,7 +981,7 @@ EndFunction
 #Region Accounting_Analytics
 
 // Vendors transactions - Cash on hand
-Function GetAnalytics_DR_R1020B_R1021B_CR_3010B(Parameters)
+Function GetAnalytics_PaymentToVendor(Parameters)
 	AccountingAnalytics = AccountingServer.GetAccountingAnalyticsResult(Parameters);
 	AccountParameters   = AccountingServer.GetAccountParameters(Parameters);
 
@@ -1011,7 +1011,7 @@ Function GetAnalytics_DR_R1020B_R1021B_CR_3010B(Parameters)
 EndFunction
 
 // Vendors transactions - Advances to vendors
-Function GetAnalytics_DR_R1021B_CR_R1020B(Parameters)
+Function GetAnalytics_OffsetOfAdvances(Parameters)
 	AccountingAnalytics = AccountingServer.GetAccountingAnalyticsResult(Parameters);
 	AccountParameters   = AccountingServer.GetAccountParameters(Parameters);
 
@@ -1032,7 +1032,7 @@ Function GetAnalytics_DR_R1021B_CR_R1020B(Parameters)
 EndFunction
 
 // Expenses - Cash on hand
-Function GetAnalytics_DRr5022T_CR_3010B(Parameters)
+Function GetAnalytics_BankCommission(Parameters)
 	AccountingAnalytics = AccountingServer.GetAccountingAnalyticsResult(Parameters);
 	AccountParameters   = AccountingServer.GetAccountParameters(Parameters);
 

@@ -16,15 +16,8 @@ Function PostingGetDocumentDataTables(Ref, Cancel, PostingMode, Parameters, AddI
 
 	Tables.Insert("CustomersTransactions", PostingServer.GetQueryTableByName("CustomersTransactions", Parameters));
 
-	BatchKeysInfoMetadata = Parameters.Object.RegisterRecords.T6020S_BatchKeysInfo.Metadata();
-	If Parameters.Property("MultiCurrencyExcludePostingDataTables") Then
-		Parameters.MultiCurrencyExcludePostingDataTables.Add(BatchKeysInfoMetadata);
-	Else
-		ArrayOfMultiCurrencyExcludePostingDataTables = New Array;
-		ArrayOfMultiCurrencyExcludePostingDataTables.Add(BatchKeysInfoMetadata);
-		Parameters.Insert("MultiCurrencyExcludePostingDataTables", ArrayOfMultiCurrencyExcludePostingDataTables);
-	EndIf;
-
+	CurrenciesServer.ExcludePostingDataTable(Parameters, Parameters.Object.RegisterRecords.T6020S_BatchKeysInfo.Metadata());
+	
 	AccountingServer.CreateAccountingDataTables(Ref, Cancel, PostingMode, Parameters, AddInfo);
 	Return Tables;
 EndFunction
@@ -1309,7 +1302,7 @@ Function T1040T_AccountingAmounts()
 		|	T2010S_OffsetOfAdvances.Key AS RowKey,
 		|	T2010S_OffsetOfAdvances.Currency,
 		|	T2010S_OffsetOfAdvances.Amount,
-		|	VALUE(Catalog.AccountingOperations.SalesInvoice_DR_R2021B_CustomersTransactions_CR_R2020B_AdvancesFromCustomers),
+		|	VALUE(Catalog.AccountingOperations.SalesInvoice_DR_R2020B_AdvancesFromCustomers_CR_R2021B_CustomersTransactions),
 		|	T2010S_OffsetOfAdvances.Recorder
 		|FROM
 		|	InformationRegister.T2010S_OffsetOfAdvances AS T2010S_OffsetOfAdvances
@@ -1332,12 +1325,20 @@ EndFunction
 Function GetAccountingAnalytics(Parameters) Export
 	Operations = Catalogs.AccountingOperations;
 	
-	If Parameters.Operation = Operations.SalesInvoice_DR_R2021B_CustomersTransactions_CR_R5021T_Revenues Then
-		Return GetAnalytics_DR_R2021B_CR_R5021T(Parameters); // Customer transactions - Revenues
-	ElsIf Parameters.Operation = Operations.SalesInvoice_DR_R5021T_Revenues_CR_R2040B_TaxesIncoming Then
-		Return GetAnalytics_DR_R5021T_CR_R1040B(Parameters); // Revenues - Tax outgoing
-	ElsIf Parameters.Operation = Operations.SalesInvoice_DR_R2021B_CustomersTransactions_CR_R2020B_AdvancesFromCustomers Then
-		Return GetAnalytics_DR_R2021B_CR_R2020B(Parameters); // Customer transactions - Advances from customer
+	If Parameters.Operation = Operations.SalesInvoice_DR_R2021B_CustomersTransactions_CR_R5021T_Revenues
+		Or Parameters.Operation = Operations.SalesInvoice_DR_R2021B_CustomersTransactions_CR_R5021T_Revenues_CurrencyRevaluation Then
+		
+		Return GetAnalytics_RevenueFromSales(Parameters); // Customer transactions - Revenues
+	
+	ElsIf Parameters.Operation = Operations.SalesInvoice_DR_R5021T_Revenues_CR_R2040B_TaxesIncoming Then 
+		
+		Return GetAnalytics_VATOutgoing(Parameters); // Revenues - Tax outgoing
+	
+	ElsIf Parameters.Operation = Operations.SalesInvoice_DR_R2020B_AdvancesFromCustomers_CR_R2021B_CustomersTransactions
+		Or Parameters.Operation = Operations.SalesInvoice_DR_R2020B_AdvancesFromCustomers_CR_R2021B_CustomersTransactions_CurrencyRevaluation  Then
+			
+		Return GetAnalytics_OffsetOfAdvances(Parameters); // Offset of advances (Advances from customer - Customer transactions)
+		
 	ElsIf Parameters.Operation = Operations.SalesInvoice_DR_R5022T_Expenses_CR_R4050B_StockInventory Then
 		Return GetAnalytics_DR_R5022T_CR_R4050B(Parameters); // Expenses (landed cost) - Stock inventory
 	EndIf;
@@ -1348,7 +1349,7 @@ EndFunction
 #Region Accounting_Analytics
 
 // Customer transactions - Revenues
-Function GetAnalytics_DR_R2021B_CR_R5021T(Parameters)
+Function GetAnalytics_RevenueFromSales(Parameters)
 	AccountingAnalytics = AccountingServer.GetAccountingAnalyticsResult(Parameters);
 	AccountParameters   = AccountingServer.GetAccountParameters(Parameters);
 
@@ -1361,17 +1362,17 @@ Function GetAnalytics_DR_R2021B_CR_R5021T(Parameters)
 	AccountingServer.SetDebitExtDimensions(Parameters, AccountingAnalytics, AdditionalAnalytics);
 	
 	// Credit
-	Credit = AccountingServer.GetT9014S_AccountsExpenseRevenue(AccountParameters, Parameters.RowData.RevenueType);
-	If ValueIsFilled(Credit.Account) Then
-		AccountingAnalytics.Credit = Credit.Account;
-	EndIf;
+	//Credit = AccountingServer.GetT9014S_AccountsExpenseRevenue(AccountParameters, Parameters.RowData.RevenueType);
+	//If ValueIsFilled(Credit.Account) Then
+		AccountingAnalytics.Credit = ChartsOfAccounts.Basic.FindByCode("REV-SALES");//Credit.Account;
+	//EndIf;
 	// Credit - Analytics
 	AccountingServer.SetCreditExtDimensions(Parameters, AccountingAnalytics);
 	Return AccountingAnalytics;
 EndFunction
 
 // Revenues - Taxes outgoing
-Function GetAnalytics_DR_R5021T_CR_R1040B(Parameters)
+Function GetAnalytics_VATOutgoing(Parameters)
 	AccountingAnalytics = AccountingServer.GetAccountingAnalyticsResult(Parameters);
 	AccountParameters   = AccountingServer.GetAccountParameters(Parameters);
 		
@@ -1393,28 +1394,28 @@ Function GetAnalytics_DR_R5021T_CR_R1040B(Parameters)
 	Return AccountingAnalytics;
 EndFunction
 
-// Customer transactions - Advances from customer
-Function GetAnalytics_DR_R2021B_CR_R2020B(Parameters)
+// Offset of advances (Customer transactions - Advances from customer)
+Function GetAnalytics_OffsetOfAdvances(Parameters)
 	AccountingAnalytics = AccountingServer.GetAccountingAnalyticsResult(Parameters);
 	AccountParameters   = AccountingServer.GetAccountParameters(Parameters);
+	Accounts = AccountingServer.GetT9012S_AccountsPartner(AccountParameters, Parameters.ObjectData.Partner, Parameters.ObjectData.Agreement);
 
 	// Debit
-	Accounts = AccountingServer.GetT9012S_AccountsPartner(AccountParameters, Parameters.ObjectData.Partner, Parameters.ObjectData.Agreement);
-	If ValueIsFilled(Accounts.AccountTransactionsCustomer) Then
-		AccountingAnalytics.Debit = Accounts.AccountTransactionsCustomer;
+	If ValueIsFilled(Accounts.AccountAdvancesCustomer) Then
+		AccountingAnalytics.Debit = Accounts.AccountAdvancesCustomer;
 	EndIf;
 	AdditionalAnalytics = New Structure();
 	AdditionalAnalytics.Insert("Partner", Parameters.ObjectData.Partner);
 	AccountingServer.SetDebitExtDimensions(Parameters, AccountingAnalytics);
-	
+
 	// Credit
-	If ValueIsFilled(Accounts.AccountAdvancesCustomer) Then
-		AccountingAnalytics.Credit = Accounts.AccountAdvancesCustomer;
+	If ValueIsFilled(Accounts.AccountTransactionsCustomer) Then
+		AccountingAnalytics.Credit = Accounts.AccountTransactionsCustomer;
 	EndIf;
 	AdditionalAnalytics = New Structure();
 	AdditionalAnalytics.Insert("Partner", Parameters.ObjectData.Partner);
 	AccountingServer.SetCreditExtDimensions(Parameters, AccountingAnalytics);
-
+	
 	Return AccountingAnalytics;
 EndFunction
 

@@ -32,7 +32,7 @@ EndProcedure
 
 &AtClient
 Procedure ExpandAllTrees() Export
-	RowIDInfoClient.ExpandTree(Items.BasisesTree, ThisObject.BasisesTree.GetItems());
+	CommonFormActions.ExpandTree(Items.BasisesTree, ThisObject.BasisesTree.GetItems());
 EndProcedure
 
 &AtServer

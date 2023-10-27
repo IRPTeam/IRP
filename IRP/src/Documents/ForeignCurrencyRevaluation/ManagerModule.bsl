@@ -357,44 +357,7 @@ Function PostingGetDocumentDataTables(Ref, Cancel, PostingMode, Parameters, AddI
 
 	CurrencyRates = Parameters.TempTablesManager.Tables.Find("CurrencyRates").GetData().Unload();
 
-	AccRegMetadata = Metadata.AccumulationRegisters.R5022T_Expenses;
-	ExpensesTable = New ValueTable;
-	ExpensesTable.Columns.Add("Period", AccRegMetadata.StandardAttributes.Period.Type);
-	ExpensesTable.Columns.Add("Company", AccRegMetadata.Dimensions.Company.Type);
-	ExpensesTable.Columns.Add("Branch", AccRegMetadata.Dimensions.Branch.Type);
-	ExpensesTable.Columns.Add("ProfitLossCenter", AccRegMetadata.Dimensions.ProfitLossCenter.Type);
-	ExpensesTable.Columns.Add("ExpenseType", AccRegMetadata.Dimensions.ExpenseType.Type);
-	ExpensesTable.Columns.Add("Currency", AccRegMetadata.Dimensions.Currency.Type);
-	ExpensesTable.Columns.Add("AdditionalAnalytic", AccRegMetadata.Dimensions.AdditionalAnalytic.Type);
-	ExpensesTable.Columns.Add("CurrencyMovementType", AccRegMetadata.Dimensions.CurrencyMovementType.Type);
-	ExpensesTable.Columns.Add("Amount", AccRegMetadata.Resources.Amount.Type);
-
-	AccRegMetadata = Metadata.AccumulationRegisters.R5021T_Revenues;
-	RevenuesTable = New ValueTable;
-	RevenuesTable.Columns.Add("Period", AccRegMetadata.StandardAttributes.Period.Type);
-	RevenuesTable.Columns.Add("Company", AccRegMetadata.Dimensions.Company.Type);
-	RevenuesTable.Columns.Add("Branch", AccRegMetadata.Dimensions.Branch.Type);
-	RevenuesTable.Columns.Add("ProfitLossCenter", AccRegMetadata.Dimensions.ProfitLossCenter.Type);
-	RevenuesTable.Columns.Add("RevenueType", AccRegMetadata.Dimensions.RevenueType.Type);
-	RevenuesTable.Columns.Add("Currency", AccRegMetadata.Dimensions.Currency.Type);
-	RevenuesTable.Columns.Add("AdditionalAnalytic", AccRegMetadata.Dimensions.AdditionalAnalytic.Type);
-	RevenuesTable.Columns.Add("CurrencyMovementType", AccRegMetadata.Dimensions.CurrencyMovementType.Type);
-	RevenuesTable.Columns.Add("Amount", AccRegMetadata.Resources.Amount.Type);
-
-	ExpenseRevenueInfo = New Structure;
-	ExpenseRevenueInfo.Insert("DocumentDate", DocumentDate);
-
-	ExpenseRevenueInfo.Insert("RevenuesTable", RevenuesTable);
-	ExpenseRevenueInfo.Insert("Revenue_ProfitLossCenter", Ref.RevenueProfitLossCenter);
-	ExpenseRevenueInfo.Insert("Revenue_AdditionalAnalytic", Ref.RevenueAdditionalAnalytic);
-	ExpenseRevenueInfo.Insert("RevenueType", Ref.RevenueType);
-
-	ExpenseRevenueInfo.Insert("ExpensesTable", ExpensesTable);
-	ExpenseRevenueInfo.Insert("Expense_ProfitLossCenter", Ref.ExpenseProfitLossCenter);
-	ExpenseRevenueInfo.Insert("Expense_AdditionalAnalytic", Ref.ExpenseAdditionalAnalytic);
-	ExpenseRevenueInfo.Insert("ExpenseType", Ref.ExpenseType);
-
-	ArrayOfActives = New Array;
+	ArrayOfActives = New Array();
 	ArrayOfActives.Add("R1020B_AdvancesToVendors");
 	ArrayOfActives.Add("R2021B_CustomersTransactions");
 	ArrayOfActives.Add("R3010B_CashOnHand");
@@ -405,23 +368,39 @@ Function PostingGetDocumentDataTables(Ref, Cancel, PostingMode, Parameters, AddI
 	ArrayOfActives.Add("R5015B_OtherPartnersTransactions");
 	ArrayOfActives.Add("R8510B_BookValueOfFixedAsset");
 
-	ArrayOfPassives = New Array;
+	ArrayOfPassives = New Array();
 	ArrayOfPassives.Add("R1021B_VendorsTransactions");
 	ArrayOfPassives.Add("R2020B_AdvancesFromCustomers");
 	ArrayOfPassives.Add("R9510B_SalaryPayment");
 
-	ArrayOfOthers = New Array;
+	ArrayOfOthers = New Array();
 	ArrayOfOthers.Add("R3016B_ChequeAndBonds");
 	ArrayOfOthers.Add("R6070T_OtherPeriodsExpenses");
 	ArrayOfOthers.Add("R6080T_OtherPeriodsRevenues");
 
-	RevaluateCurrency(Parameters, ArrayOfActives, CurrencyRates, "Active", ExpenseRevenueInfo);
-	RevaluateCurrency(Parameters, ArrayOfPassives, CurrencyRates, "Passive", ExpenseRevenueInfo);
-	RevaluateCurrency(Parameters, ArrayOfOthers, CurrencyRates, "Others", ExpenseRevenueInfo);
+	ExpenseRevenueParams = New Structure();
+	ExpenseRevenueParams.Insert("DocumentDate", DocumentDate);
+	
+	ExpenseRevenueParams.Insert("Revenue_ProfitLossCenter"   , Ref.RevenueProfitLossCenter);
+	ExpenseRevenueParams.Insert("Revenue_AdditionalAnalytic" , Ref.RevenueAdditionalAnalytic);
+	ExpenseRevenueParams.Insert("RevenueType"                , Ref.RevenueType);
 
-	CreateVirtualTables(Parameters, ArrayOfActives);
-	CreateVirtualTables(Parameters, ArrayOfPassives);
-	CreateVirtualTables(Parameters, ArrayOfOthers);
+	ExpenseRevenueParams.Insert("Expense_ProfitLossCenter"   , Ref.ExpenseProfitLossCenter);
+	ExpenseRevenueParams.Insert("Expense_AdditionalAnalytic" , Ref.ExpenseAdditionalAnalytic);
+	ExpenseRevenueParams.Insert("ExpenseType"                , Ref.ExpenseType);
+	
+	ExpenseRevenueInfo = CurrenciesServer.CreateExpenseRevenueInfo(ExpenseRevenueParams);
+	
+	CurrenciesServer.RevaluateCurrency(Parameters.TempTablesManager, ArrayOfActives,  CurrencyRates, "Active",  ExpenseRevenueInfo);
+	CurrenciesServer.RevaluateCurrency(Parameters.TempTablesManager, ArrayOfPassives, CurrencyRates, "Passive", ExpenseRevenueInfo);
+	CurrenciesServer.RevaluateCurrency(Parameters.TempTablesManager, ArrayOfOthers,   CurrencyRates, "Others",  ExpenseRevenueInfo);
+
+	CurrenciesServer.DeleteEmptyAmounts(ExpenseRevenueInfo.RevenuesTable, "Amount");
+	CurrenciesServer.DeleteEmptyAmounts(ExpenseRevenueInfo.ExpensesTable, "Amount");
+	
+	CurrenciesServer.CreateVirtualTables(Parameters, ArrayOfActives);
+	CurrenciesServer.CreateVirtualTables(Parameters, ArrayOfPassives);
+	CurrenciesServer.CreateVirtualTables(Parameters, ArrayOfOthers);
 
 	Query.Text =
 	"SELECT * INTO _R5021T_Revenues FROM &RevenuesTable AS Table;
@@ -430,192 +409,105 @@ Function PostingGetDocumentDataTables(Ref, Cancel, PostingMode, Parameters, AddI
 	Query.SetParameter("ExpensesTable", ExpenseRevenueInfo.ExpensesTable);
 	Query.Execute();
 
-	R5022T_Expenses_Metadata = Parameters.Object.RegisterRecords.R5022T_Expenses.Metadata();
-	R5021T_Revenues_Metadata = Parameters.Object.RegisterRecords.R5021T_Revenues.Metadata();
-	If Parameters.Property("MultiCurrencyExcludePostingDataTables") Then
-		Parameters.MultiCurrencyExcludePostingDataTables.Add(R5022T_Expenses_Metadata);
-		Parameters.MultiCurrencyExcludePostingDataTables.Add(R5021T_Revenues_Metadata);
-	Else
-		ArrayOfMultiCurrencyExcludePostingDataTables = New Array;
-		ArrayOfMultiCurrencyExcludePostingDataTables.Add(R5022T_Expenses_Metadata);
-		ArrayOfMultiCurrencyExcludePostingDataTables.Add(R5021T_Revenues_Metadata);
-		Parameters.Insert("MultiCurrencyExcludePostingDataTables", ArrayOfMultiCurrencyExcludePostingDataTables);
-	EndIf;
-
+	CurrenciesServer.ExcludePostingDataTable(Parameters, Parameters.Object.RegisterRecords.R5022T_Expenses.Metadata());
+	CurrenciesServer.ExcludePostingDataTable(Parameters, Parameters.Object.RegisterRecords.R5021T_Revenues.Metadata());
+	
+	// Accounting
+	
+	RecordSet = InformationRegisters.T9050S_AccountingRowAnalytics.CreateRecordSet();
+	RecordSet.Filter.Recorder.Set(Ref);
+	RecordSet.Read();
+	_AccountingRowAnalytics = RecordSet.Unload();
+			
+	RecordSet = InformationRegisters.T9051S_AccountingExtDimensions.CreateRecordSet();
+	RecordSet.Filter.Recorder.Set(Ref);
+	RecordSet.Read();
+	_AccountingExtDimensions = RecordSet.Unload();
+	
+	AccountingClientServer.UpdateAccountingTables(Ref, _AccountingRowAnalytics, _AccountingExtDimensions, Undefined,,, 
+		New Structure("Parameters", Parameters));
+		
+	AccountingServer.CreateAccountingDataTables(Ref, Cancel, PostingMode, Parameters, 
+		New Structure("AccountingRowAnalytics, AccountingExtDimensions", _AccountingRowAnalytics, _AccountingExtDimensions));
 	Return New Structure;
 EndFunction
 
-Procedure RevaluateCurrency(Parameters, ArrayOfRegisterNames, CurrencyRates, RegisterType, ExpenseRevenueInfo)
-	For Each RegisterName In ArrayOfRegisterNames Do
-		QueryTable = Parameters.TempTablesManager.Tables.Find("_" + RegisterName).GetData().Unload();
+#Region Accounting
 
-		DimensionsInfo = CreateDimensionsTableAndFilter(RegisterName);
-
-		For Each Row In QueryTable Do
-			If Row.CurrencyMovementType <> ChartsOfCharacteristicTypes.CurrencyMovementType.SettlementCurrency Then
-				Continue;
-			EndIf;
-			FillPropertyValues(DimensionsInfo.DimensionsFilter, Row);
-
-			OtherCurrenciesRows = QueryTable.FindRows(DimensionsInfo.DimensionsFilter);
-			For Each OtherCurrencyRow In OtherCurrenciesRows Do
-				If OtherCurrencyRow.CurrencyMovementType
-					= ChartsOfCharacteristicTypes.CurrencyMovementType.SettlementCurrency Then
-					Continue;
-				EndIf;
-
-				CurrencyRatesFilter = New Structure;
-				CurrencyRatesFilter.Insert("CurrencyFrom", OtherCurrencyRow.TransactionCurrency);
-				CurrencyRatesFilter.Insert("CurrencyTo", OtherCurrencyRow.Currency);
-				CurrencyRatesFilter.Insert("Source", OtherCurrencyRow.Source);
-
-				CurrencyInfo = CurrencyRates.FindRows(CurrencyRatesFilter);
-				If CurrencyInfo.Count() > 1 Then
-					Raise "CurrencyInfo.Count() > 1"; // some thing is wrong
-				EndIf;
-
-				If Not CurrencyInfo.Count() Then
-					Continue; // currency rate not set
-				EndIf;
-
-				If Not ValueIsFilled(CurrencyInfo[0].Rate) Or Not ValueIsFilled(CurrencyInfo[0].Multiplicity) Then
-					Continue;
-				EndIf;
-
-				_IsNegative = False;
-				If OtherCurrencyRow.Amount < 0 Then
-					_IsNegative = True;
-					OtherCurrencyRow.Amount = -OtherCurrencyRow.Amount;
-				EndIf;
-
-				If Row.Amount < 0 Then
-					Row.Amount = -Row.Amount;
-				EndIf;
-				
-				//Row.Amount; -  amount in transaction currency
-				AmountRevaluated = (Row.Amount * CurrencyInfo[0].Rate) / CurrencyInfo[0].Multiplicity;
-
-				If AmountRevaluated <> OtherCurrencyRow.Amount Then
-					_RecordType = Undefined;
-					AmountDifference = 0;
-					If AmountRevaluated > OtherCurrencyRow.Amount Then
-						_RecordType = AccumulationRecordType.Receipt;
-						AmountDifference = AmountRevaluated - OtherCurrencyRow.Amount;
-					Else
-						_RecordType = AccumulationRecordType.Expense;
-						AmountDifference = OtherCurrencyRow.Amount - AmountRevaluated;
-					EndIf;
-
-					NewRow = DimensionsInfo.DimensionsTable.Add();
-					FillPropertyValues(NewRow, OtherCurrencyRow);
-					NewRow.RecordType = _RecordType;
-					NewRow.Period = ExpenseRevenueInfo.DocumentDate;
-					If _IsNegative Then
-						NewRow.AmountRevaluated = -AmountDifference;
-					Else
-						NewRow.AmountRevaluated = AmountDifference;
-					EndIf;
-
-					_IsExpense = False;
-					_IsRevenue = False;
-
-					If RegisterType = "Active" Then
-						If AmountRevaluated > OtherCurrencyRow.Amount Then // revenue
-							_IsRevenue = True;
-						Else // expense
-							_IsExpense = True;
-						EndIf;
-					EndIf;
-
-					If RegisterType = "Passive" Then
-						If AmountRevaluated > OtherCurrencyRow.Amount Then // expense
-							_IsExpense = True;
-						Else // revenue
-							_IsRevenue = True;
-						EndIf;
-					EndIf;
-
-					If _IsRevenue Then
-						NewRevenue = ExpenseRevenueInfo.RevenuesTable.Add();
-						FillPropertyValues(NewRevenue, NewRow);
-						NewRevenue.Period = ExpenseRevenueInfo.DocumentDate;
-						NewRevenue.ProfitLossCenter    = ExpenseRevenueInfo.Revenue_ProfitLossCenter;
-						NewRevenue.RevenueType         = ExpenseRevenueInfo.RevenueType;
-						NewRevenue.AdditionalAnalytic  = ExpenseRevenueInfo.Revenue_AdditionalAnalytic;
-						If _IsNegative Then
-							NewRevenue.Amount = -AmountDifference;
-						Else
-							NewRevenue.Amount = AmountDifference;
-						EndIf;
-					EndIf;
-
-					If _IsExpense Then
-						NewExpense = ExpenseRevenueInfo.ExpensesTable.Add();
-						FillPropertyValues(NewExpense, NewRow);
-						NewExpense.Period = ExpenseRevenueInfo.DocumentDate;
-						NewExpense.ProfitLossCenter    = ExpenseRevenueInfo.Expense_ProfitLossCenter;
-						NewExpense.ExpenseType         = ExpenseRevenueInfo.ExpenseType;
-						NewExpense.AdditionalAnalytic  = ExpenseRevenueInfo.Expense_AdditionalAnalytic;
-						If _IsNegative Then
-							NewExpense.Amount = -AmountDifference;
-						Else
-							NewExpense.Amount = AmountDifference;
-						EndIf;
-					EndIf;
-
-				EndIf;
-
-			EndDo; // OtherCurrenciesRows
-		EndDo; // QueryTable
-
-		If DimensionsInfo.DimensionsTable.Count() Then
-			Query = New Query;
-			Query.TempTablesManager = Parameters.TempTablesManager;
-			Query.Text = StrTemplate(
-				"SELECT *, DimensionsTable.AmountRevaluated AS Amount INTO %1 FROM &DimensionsTable AS DimensionsTable",
-				"Revaluated_" + RegisterName);
-			Query.SetParameter("DimensionsTable", DimensionsInfo.DimensionsTable);
-			Query.Execute();
-		EndIf;
-	EndDo; // ArrayOfRegisterNames
-EndProcedure
-
-Procedure CreateVirtualTables(Parameters, ArrayOfRegisterNames)
-	Query = New Query;
-	Query.TempTablesManager = Parameters.TempTablesManager;
-
-	For Each RegisterName In ArrayOfRegisterNames Do
-		DimensionsInfo = CreateDimensionsTableAndFilter(RegisterName);
-		If Parameters.TempTablesManager.Tables.Find("Revaluated_" + RegisterName) = Undefined Then
-			Query.Text = Query.Text + StrTemplate("SELECT * INTO %1 FROM &DimensionsTable AS DimensionsTable; ",
-				"Revaluated_" + RegisterName);
-			Query.SetParameter("DimensionsTable", DimensionsInfo.DimensionsTable);
-		EndIf;
-	EndDo;
-	If ValueIsFilled(Query.Text) Then
-		Query.Execute();
-	EndIf;
-EndProcedure
-
-Function CreateDimensionsTableAndFilter(RegisterName)
-	DimensionsFilter = New Structure;
-	DimensionsTable = New ValueTable;
-	For Each Dimension In Metadata.AccumulationRegisters[RegisterName].Dimensions Do
-		DimensionsTable.Columns.Add(Dimension.Name, Dimension.Type);
-		If Upper(Dimension.Name) = Upper("CurrencyMovementType") Or Upper(Dimension.Name) = Upper("Currency") Then
-			Continue;
-		EndIf;
-		DimensionsFilter.Insert(Dimension.Name);
-	EndDo;
-	DimensionsTable.Columns.Add("AmountRevaluated", Metadata.DefinedTypes.typeAmount.Type);
-	DimensionsTable.Columns.Add("RecordType",
-		Metadata.AccumulationRegisters[RegisterName].StandardAttributes.RecordType.Type);
-	DimensionsTable.Columns.Add("Period", Metadata.AccumulationRegisters[RegisterName].StandardAttributes.Period.Type);
-	Result = New Structure;
-	Result.Insert("DimensionsTable", DimensionsTable);
-	Result.Insert("DimensionsFilter", DimensionsFilter);
-	Return Result;
+Function T1040T_AccountingAmounts()
+	Return 
+		"SELECT
+		|	Table.Period,
+		|	Table.Key AS RowKey,
+		|	Table.Key AS Key,
+		|	Table.Currency,
+		|	Table.CurrencyMovementType,
+		|	Table.AmountRevaluated AS Amount,
+		|	VALUE(Catalog.AccountingOperations.ForeignCurrencyRevaluation_DR_R5022T_Expenses_CR_R2020B_AdvancesFromCustomers) AS Operation
+		|INTO T1040T_AccountingAmounts
+		|FROM
+		|	Revaluated_R2020B_AdvancesFromCustomers AS Table
+		|WHERE
+		|	Table.RecordType = Value(AccumulationRecordType.Receipt)
+		|	AND Table.AmountRevaluated > 0";
 EndFunction
+
+Function GetAccountingDataTable(Operation, AddInfo) Export
+	If Operation = Catalogs.AccountingOperations.ForeignCurrencyRevaluation_DR_R5022T_Expenses_CR_R2020B_AdvancesFromCustomers Then
+		Query = New Query();
+		Query.TempTablesManager = AddInfo.Parameters.TempTablesManager;
+		Query.Text = 
+		"SELECT * FROM Revaluated_R2020B_AdvancesFromCustomers AS Table WHERE 
+		|Table.RecordType = Value(AccumulationRecordType.Receipt) AND Table.AmountRevaluated > 0";
+		Return Query.Execute().Unload();
+	EndIf;
+	Return New ValueTable();
+EndFunction
+
+Function GetAccountingAnalytics(Parameters) Export
+	If Parameters.Operation = Catalogs.AccountingOperations.ForeignCurrencyRevaluation_DR_R5022T_Expenses_CR_R2020B_AdvancesFromCustomers Then
+		Return GetAnalytics_DR_R5022T_Expenses_CR_R2020B_AdvancesFromCustomers(Parameters); // Expenses - Advance from customers
+	EndIf;
+	Return Undefined;
+EndFunction
+
+#Region Accounting_Analytics
+
+// Expenses - Advance from customers
+Function GetAnalytics_DR_R5022T_Expenses_CR_R2020B_AdvancesFromCustomers(Parameters)
+	AccountingAnalytics = AccountingServer.GetAccountingAnalyticsResult(Parameters);
+	AccountParameters   = AccountingServer.GetAccountParameters(Parameters);
+
+	// Debit
+	Debit = AccountingServer.GetT9014S_AccountsExpenseRevenue(AccountParameters, Parameters.ObjectData.ExpenseType);
+	If ValueIsFilled(Debit.Account) Then
+		AccountingAnalytics.Debit = Debit.Account;
+	EndIf;
+	AdditionalAnalytics = New Structure();
+	AdditionalAnalytics.Insert("ProfitCenter", Parameters.ObjectData.ExpenseProfitLossCenter);
+	AccountingServer.SetDebitExtDimensions(Parameters, AccountingAnalytics, AdditionalAnalytics);
+
+	// Credit
+	Credit = AccountingServer.GetT9012S_AccountsPartner(AccountParameters, Parameters.RowData.Partner, Undefined);
+	If ValueIsFilled(Credit.AccountAdvancesCustomer) Then
+		AccountingAnalytics.Credit = Credit.AccountAdvancesCustomer;
+	EndIf;
+	AccountingServer.SetCreditExtDimensions(Parameters, AccountingAnalytics);
+
+	Return AccountingAnalytics;
+EndFunction
+
+Function GetHintDebitExtDimension(Parameters, ExtDimensionType, Value) Export
+	Return Value;
+EndFunction
+
+Function GetHintCreditExtDimension(Parameters, ExtDimensionType, Value) Export
+	Return Value;
+EndFunction
+
+#EndRegion
+
+#EndRegion
 
 Function PostingGetLockDataSource(Ref, Cancel, PostingMode, Parameters, AddInfo = Undefined) Export
 	DataMapWithLockFields = New Map;
@@ -720,6 +612,7 @@ Function GetQueryTextsMasterTables()
 	QueryArray.Add(R6080T_OtherPeriodsRevenues());
 	QueryArray.Add(R9510B_SalaryPayment());
 	QueryArray.Add(R8510B_BookValueOfFixedAsset());
+	QueryArray.Add(T1040T_AccountingAmounts());
 	Return QueryArray;
 EndFunction
 
@@ -867,7 +760,7 @@ Function R5015B_OtherPartnersTransactions()
 		   |	TRUE";
 EndFunction
 
-	Function R8510B_BookValueOfFixedAsset()
+Function R8510B_BookValueOfFixedAsset()
 	Return "SELECT *
 		   |INTO R8510B_BookValueOfFixedAsset
 		   |FROM 

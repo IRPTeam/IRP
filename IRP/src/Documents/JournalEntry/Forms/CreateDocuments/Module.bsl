@@ -56,8 +56,7 @@ Procedure CreateDocumentsAtServer(DocumentName)
 	|FROM
 	|	Document.%1 AS Doc
 	|WHERE
-	|	Doc.Posted
-	|	AND Doc.Date BETWEEN BEGINOFPERIOD(&StartDate, DAY) AND ENDOFPERIOD(&EndDate, DAY)
+	|	Doc.Date BETWEEN BEGINOFPERIOD(&StartDate, DAY) AND ENDOFPERIOD(&EndDate, DAY)
 	|	AND Doc.Company = &Company
 	|;
 	|

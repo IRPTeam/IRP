@@ -68,7 +68,7 @@
 			<name>Read</name>
 			<value>true</value>
 			<restrictionByCondition>
-				<condition>#AccessRegisters("Company", "BusinessUnit", "Store", "", "", "")</condition>
+				<condition>#AccessRegisters("Company", "Store", "", "", "", "")</condition>
 			</restrictionByCondition>
 		</right>
 		<right>
@@ -250,7 +250,7 @@
 			<name>Read</name>
 			<value>true</value>
 			<restrictionByCondition>
-				<condition>#AccessRegisters("Company", "BusinessUnit", "", "", "", "")</condition>
+				<condition>#AccessRegisters("Company", "", "", "", "", "")</condition>
 			</restrictionByCondition>
 		</right>
 		<right>
@@ -446,7 +446,7 @@
 			<name>Read</name>
 			<value>true</value>
 			<restrictionByCondition>
-				<condition>#AccessRegisters("Company", "BusinessUnit", "", "", "", "")</condition>
+				<condition>#AccessRegisters("Company", "", "", "", "", "")</condition>
 			</restrictionByCondition>
 		</right>
 		<right>
@@ -645,7 +645,7 @@
 			<name>Read</name>
 			<value>true</value>
 			<restrictionByCondition>
-				<condition>#AccessRegisters("Company", "BusinessUnit", "Store", "", "", "")</condition>
+				<condition>#AccessRegisters("Company", "Store", "", "", "", "")</condition>
 			</restrictionByCondition>
 		</right>
 		<right>
@@ -1194,7 +1194,7 @@
 			<name>Read</name>
 			<value>true</value>
 			<restrictionByCondition>
-				<condition>#AccessRegisters("Company", "BusinessUnit", "Store", "", "", "")</condition>
+				<condition>#AccessRegisters("Company", "Store", "", "", "", "")</condition>
 			</restrictionByCondition>
 		</right>
 		<right>

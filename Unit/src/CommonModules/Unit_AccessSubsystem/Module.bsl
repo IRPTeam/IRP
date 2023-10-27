@@ -232,6 +232,14 @@ Function PrepareAccess_Document(Keys, MetaObj)
 	If Not MetaObj.Attributes.Find("TransitAccount") = Undefined Then
 		AccessKey.Insert("TransitAccount", "Account");
 	EndIf;
+
+	If Not MetaObj.Attributes.Find("Sender") = Undefined Then
+		AccessKey.Insert("Sender", "Account");
+	EndIf;
+	
+	If Not MetaObj.Attributes.Find("Receiver") = Undefined Then
+		AccessKey.Insert("Receiver", "Account");
+	EndIf;
 	
 	If Not MetaObj.Attributes.Find("AccountDebit") = Undefined Then
 		AccessKey.Insert("AccountDebit", "Account");
@@ -634,18 +642,21 @@ Function GenerateDataForAccessTest()
 	
 	Company = Catalogs.Companies.CreateItem();
 	Company.Description_en = "Company Read and Write Access";	
+	Company.OurCompany = True;
 	Company.DataExchange.Load = True;
 	Company.SetNewObjectRef(Data.Company[0]);
 	Company.Write();
 	
 	Company = Catalogs.Companies.CreateItem();
-	Company.Description_en = "Company Only read access";	
+	Company.Description_en = "Company Only read access";
+	Company.OurCompany = True;	
 	Company.DataExchange.Load = True;
 	Company.SetNewObjectRef(Data.Company[1]);
 	Company.Write();
 	
 	Company = Catalogs.Companies.CreateItem();
-	Company.Description_en = "Company access deny";	
+	Company.Description_en = "Company access deny";
+	Company.OurCompany = True;	
 	Company.DataExchange.Load = True;
 	Company.SetNewObjectRef(Data.Company[2]);
 	Company.Write();

@@ -93,7 +93,9 @@ EndFunction
 
 Function GetQueryTextsSecondaryTables(Parameters = Undefined)
 	QueryArray = New Array;
-	QueryArray.Add(OffsetOfAdvancesServer.OffsetOfAdvancesAndAging(Parameters));
+	If Parameters <> Undefined Then
+		QueryArray.Add(OffsetOfAdvancesServer.OffsetOfAdvancesAndAging(Parameters));
+	EndIf;
 	Return QueryArray;
 EndFunction
 

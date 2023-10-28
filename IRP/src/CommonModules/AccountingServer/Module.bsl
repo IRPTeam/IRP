@@ -25,8 +25,8 @@ Function GetOperationsDefinition()
 	// Sales invoice
 	//
 	// sales inventory
-	Map.Insert(AO.SalesInvoice_DR_R2021B_CustomersTransactions_CR_R5021T_Revenues , New Structure("ByRow", False));
-	Map.Insert(AO.SalesInvoice_DR_R2021B_CustomersTransactions_CR_R5021T_Revenues_CurrencyRevaluation , New Structure("ByRow", False));
+	Map.Insert(AO.SalesInvoice_DR_R2021B_CustomersTransactions_CR_R5021T_Revenues , New Structure("ByRow", True));
+	Map.Insert(AO.SalesInvoice_DR_R2021B_CustomersTransactions_CR_R5021T_Revenues_CurrencyRevaluation , New Structure("ByRow", True));
 	// offset of advances
 	Map.Insert(AO.SalesInvoice_DR_R2020B_AdvancesFromCustomers_CR_R2021B_CustomersTransactions , New Structure("ByRow", False));
 	Map.Insert(AO.SalesInvoice_DR_R2020B_AdvancesFromCustomers_CR_R2021B_CustomersTransactions_CurrencyRevaluation , New Structure("ByRow", False));
@@ -1005,6 +1005,21 @@ Function GetAccountingData_LandedCost(Parameters)
 	EndDo;
 	
 	// Currency calculation
+	
+	CurrenciesTableParams = New Structure();
+	CurrenciesTableParams.Insert("Ref"            , Parameters.Recorder);
+	CurrenciesTableParams.Insert("Date"           , Parameters.Recorder.Date);
+	CurrenciesTableParams.Insert("Company"        , Parameters.Recorder.Company);
+	CurrenciesTableParams.Insert("Currency"       , Parameters.Recorder.Company.LandedCostCurrencyMovementType.Currency);
+	CurrenciesTableParams.Insert("Agreement"      , Undefined);
+	CurrenciesTableParams.Insert("RowKey"         , "");
+	CurrenciesTableParams.Insert("DocumentAmount" , 0);
+	CurrenciesTableParams.Insert("Currencies"     , New Array());
+	
+	CurrenciesTable = Parameters.Recorder.Currencies.UnloadColumns();
+	CurrenciesServer.UpdateCurrencyTable(CurrenciesTableParams, CurrenciesTable);
+	
+	
 	CurrenciesParameters = New Structure();
 	PostingDataTables = New Map();
 	PostingDataTables.Insert(RecordSet_AccountingAmounts, New Structure("RecordSet", TableAccountingAmounts));
@@ -1014,7 +1029,8 @@ Function GetAccountingData_LandedCost(Parameters)
 	EndDo;
 	CurrenciesParameters.Insert("Object", Parameters.Recorder);
 	CurrenciesParameters.Insert("ArrayOfPostingInfo", ArrayOfPostingInfo);
-	CurrenciesServer.PreparePostingDataTables(CurrenciesParameters, Undefined);
+	CurrenciesParameters.Insert("IsLandedCost", True);
+	CurrenciesServer.PreparePostingDataTables(CurrenciesParameters, CurrenciesTable);
 	
 	For Each ItemOfPostingInfo In ArrayOfPostingInfo Do
 		If TypeOf(ItemOfPostingInfo.Key) = Type("AccumulationRegisterRecordSet.T1040T_AccountingAmounts") Then

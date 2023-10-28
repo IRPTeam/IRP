@@ -415,12 +415,12 @@ Function PostingGetDocumentDataTables(Ref, Cancel, PostingMode, Parameters, AddI
 	// Accounting
 	
 	RecordSet = InformationRegisters.T9050S_AccountingRowAnalytics.CreateRecordSet();
-	RecordSet.Filter.Recorder.Set(Ref);
+	RecordSet.Filter.Document.Set(Ref);
 	RecordSet.Read();
 	_AccountingRowAnalytics = RecordSet.Unload();
 			
 	RecordSet = InformationRegisters.T9051S_AccountingExtDimensions.CreateRecordSet();
-	RecordSet.Filter.Recorder.Set(Ref);
+	RecordSet.Filter.Document.Set(Ref);
 	RecordSet.Read();
 	_AccountingExtDimensions = RecordSet.Unload();
 	

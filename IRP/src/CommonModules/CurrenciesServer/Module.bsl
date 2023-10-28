@@ -165,8 +165,9 @@ Procedure PreparePostingDataTables(Parameters, CurrencyTable, AddInfo = Undefine
 				
 				
 				IsOffsetOfAdvances = CommonFunctionsClientServer.GetFromAddInfo(Parameters, "IsOffsetOfAdvances", False);
+				IsLandedCost = CommonFunctionsClientServer.GetFromAddInfo(Parameters, "IsLandedCost", False);
 				
-				If Not IsOffsetOfAdvances Then
+				If Not IsOffsetOfAdvances And Not IsLandedCost Then
 				
 					// Advances
 					If TypeOf(ItemOfPostingInfo.Key) = Type("AccumulationRegisterRecordSet.R1020B_AdvancesToVendors")
@@ -194,20 +195,42 @@ Procedure PreparePostingDataTables(Parameters, CurrencyTable, AddInfo = Undefine
 					If TypeOf(ItemOfPostingInfo.Key) = Type("AccumulationRegisterRecordSet.T1040T_AccountingAmounts") Then
 						Op = Catalogs.AccountingOperations;
 						
-						AccountingOperations = New Map();
-						AccountingOperations.Insert(Type("DocumentRef.PurchaseInvoice") , Op.PurchaseInvoice_DR_R1021B_VendorsTransactions_CR_R1020B_AdvancesToVendors_CurrencyRevaluation);
-						AccountingOperations.Insert(Type("DocumentRef.SalesInvoice")    , Op.SalesInvoice_DR_R2020B_AdvancesFromCustomers_CR_R2021B_CustomersTransactions_CurrencyRevaluation);
+						AccountingOperations = New ValueTable();
+						AccountingOperations.Columns.Add("DocType");
+						AccountingOperations.Columns.Add("AmountType");
+						AccountingOperations.Columns.Add("Operations");
+						
+						// purchase invoice
+						NewOperation = AccountingOperations.Add();
+						NewOperation.DocType = Type("DocumentRef.PurchaseInvoice");
+						NewOperation.AmountType = "Advance";
+						NewOperation.Operations = New Array();
+						NewOperation.Operations.Add(Op.PurchaseInvoice_DR_R1021B_VendorsTransactions_CR_R1020B_AdvancesToVendors_CurrencyRevaluation);
+						
+						// sales invoice
+						NewOperation = AccountingOperations.Add();
+						NewOperation.DocType = Type("DocumentRef.SalesInvoice");
+						NewOperation.AmountType = "Advance";
+						NewOperation.Operations = New Array();
+						NewOperation.Operations.Add(Op.SalesInvoice_DR_R2020B_AdvancesFromCustomers_CR_R2021B_CustomersTransactions_CurrencyRevaluation);
+						
+						NewOperation = AccountingOperations.Add();
+						NewOperation.DocType = Type("DocumentRef.SalesInvoice");
+						NewOperation.AmountType = "Transaction";
+						NewOperation.Operations = New Array();
+						NewOperation.Operations.Add(Op.SalesInvoice_DR_R2021B_CustomersTransactions_CR_R5021T_Revenues_CurrencyRevaluation);
 						
 						AccountingAmounts = GetAccountingAmounts(Parameters.Object.Ref);
 						AccountingAmounts.Columns.Add("Operation", New TypeDescription("CatalogRef.AccountingOperations"));
-						
-						Operation = AccountingOperations.Get(TypeOf(Parameters.Object.Ref));
-						If Operation <> Undefined Then
-							AccountingAmounts.FillValues(Operation, "Operation");
-						EndIf;
-						
-						For Each Row In AccountingAmounts Do
-							FillPropertyValues(ItemOfPostingInfo.Value.RecordSet.Add(), Row);
+												
+						For Each RowAmounts In AccountingAmounts Do
+							For Each RowOperation In AccountingOperations.FindRows(New Structure("DocType, AmountType", TypeOf(Parameters.Object.Ref), RowAmounts.AmountType)) Do
+								For Each OperationItem In RowOperation.Operations Do
+									NewRow = ItemOfPostingInfo.Value.RecordSet.Add();
+									FillPropertyValues(NewRow, RowAmounts);
+									NewRow.Operation = OperationItem;
+								EndDo;
+							EndDo;
 						EndDo;
 						
 					EndIf;
@@ -282,9 +305,24 @@ Function GetAccountingAmounts(DocRef)
 	|	Table.Currency,
 	|	Table.CurrencyMovementType,
 	|	Table.Amount,
-	|	Table.Recorder AS AdvancesClosing
+	|	Table.Recorder AS AdvancesClosing,
+	|	""Advance"" AS AmountType
 	|FROM
 	|	InformationRegister.T2012S_AdvancesCurrencyRevaluation AS Table
+	|WHERE
+	|	Table.Document = &DocRef
+	|
+	|UNION ALL
+	|
+	|SELECT
+	|	Table.Period,
+	|	Table.Currency,
+	|	Table.CurrencyMovementType,
+	|	Table.Amount,
+	|	Table.Recorder,
+	|	""Transaction""
+	|FROM
+	|	InformationRegister.T2011S_TransactionsCurrencyRevaluation AS Table
 	|WHERE
 	|	Table.Document = &DocRef";
 		

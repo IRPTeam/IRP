@@ -218,8 +218,9 @@ Procedure CheckMatchingToBasisDocument(Object, ObjectAttribute, BasisAttribute, 
 	|		INNER JOIN Document.CashTransferOrder AS CashTransferOrder
 	|		ON tmpPaymentList.PlaningTransactionBasis = CashTransferOrder.Ref
 	|		AND NOT tmpPaymentList.Account = CashTransferOrder.%1", BasisAttribute);
-	
+	SetPrivilegedMode(True);
 	SelectionRecords = Query.Execute().Select();
+	SetPrivilegedMode(False);
 	While SelectionRecords.Next() Do
 		Cancel = True;
 		CommonFunctionsClientServer.ShowUsersMessage(

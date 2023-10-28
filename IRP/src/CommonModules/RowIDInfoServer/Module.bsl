@@ -10381,8 +10381,9 @@ Function GetBasisesTable(StepArray, FilterValues, FilterSets)
 	|	Basis,
 	|	LineNumber
 	|AUTOORDER";
-
+	SetPrivilegedMode(True);
 	QueryResult = Query.Execute();
+	SetPrivilegedMode(False);
 	QueryTable = QueryResult.Unload();
 	QueryTable.Columns.Add("ParentBasis", Documents.AllRefsType());
 	Return QueryTable;

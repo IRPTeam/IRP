@@ -137,8 +137,9 @@ Function CreateNewSerialLotNumber(Options) Export
 	NewSerial.EachSerialLotNumberIsUnique = GetItemTypeByOwner(Options.Owner).EachSerialLotNumberIsUnique;
 	If NewSerial.CheckFilling() Then
 		NewSerial.Write();
+	Else
+		Return Catalogs.SerialLotNumbers.EmptyRef();
 	EndIf;
-	NewSerial.Write();
 	
 	Return NewSerial.Ref;
 EndFunction

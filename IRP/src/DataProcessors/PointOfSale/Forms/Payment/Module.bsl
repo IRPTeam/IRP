@@ -356,7 +356,7 @@ Async Procedure ReconnectFiscalPrinter(Command)
 	HardwareClient.DisconnectHardware(Hardware);
 	ConnectResult = Await HardwareClient.ConnectHardware(Hardware);
 	If Not ConnectResult.Result Then
-		CommonFunctionsClientServer.ShowUsersMessage(ConnectResult.String);
+		CommonFunctionsClientServer.ShowUsersMessage(ConnectResult.ErrorDescription);
 	Else
 		CommonFunctionsClientServer.ShowUsersMessage(R().InfoMessage_005);
 	EndIf;

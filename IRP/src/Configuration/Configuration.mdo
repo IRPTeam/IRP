@@ -17,7 +17,7 @@
   <usePurposes>PersonalComputer</usePurposes>
   <defaultRoles>Role.FullAccess</defaultRoles>
   <vendor>IRP Team</vendor>
-  <version>2023.43.3117</version>
+  <version>2023.44.3127</version>
   <updateCatalogAddress>https://github.com/IRPTeam/IRP</updateCatalogAddress>
   <useManagedFormInOrdinaryApplication>true</useManagedFormInOrdinaryApplication>
   <useOrdinaryFormInManagedApplication>true</useOrdinaryFormInManagedApplication>
@@ -836,6 +836,7 @@
   <commonForms>CommonForm.HTMLPrintForm</commonForms>
   <commonForms>CommonForm.AdditionalTableControlSettings</commonForms>
   <catalogs>Catalog.AccessGroups</catalogs>
+  <catalogs>Catalog.AccessKey</catalogs>
   <catalogs>Catalog.AccessProfiles</catalogs>
   <catalogs>Catalog.AccountingOperations</catalogs>
   <catalogs>Catalog.AccrualAndDeductionTypes</catalogs>
@@ -861,6 +862,7 @@
   <catalogs>Catalog.DataAreas</catalogs>
   <catalogs>Catalog.DataBaseStatus</catalogs>
   <catalogs>Catalog.DataMappingItems</catalogs>
+  <catalogs>Catalog.DepreciationSchedules</catalogs>
   <catalogs>Catalog.EmployeePositions</catalogs>
   <catalogs>Catalog.EquipmentDrivers</catalogs>
   <catalogs>Catalog.ExpenseAndRevenueTypes</catalogs>
@@ -871,6 +873,8 @@
   <catalogs>Catalog.FileStoragesInfo</catalogs>
   <catalogs>Catalog.FileStorageVolumes</catalogs>
   <catalogs>Catalog.FillingTemplates</catalogs>
+  <catalogs>Catalog.FixedAssets</catalogs>
+  <catalogs>Catalog.FixedAssetsLedgerTypes</catalogs>
   <catalogs>Catalog.Hardware</catalogs>
   <catalogs>Catalog.IDInfoAddresses</catalogs>
   <catalogs>Catalog.IDInfoSets</catalogs>
@@ -919,9 +923,6 @@
   <catalogs>Catalog.Vehicles</catalogs>
   <catalogs>Catalog.VehicleTypes</catalogs>
   <catalogs>Catalog.Workstations</catalogs>
-  <catalogs>Catalog.FixedAssets</catalogs>
-  <catalogs>Catalog.DepreciationSchedules</catalogs>
-  <catalogs>Catalog.FixedAssetsLedgerTypes</catalogs>
   <documents>Document.AdditionalCostAllocation</documents>
   <documents>Document.AdditionalRevenueAllocation</documents>
   <documents>Document.BankPayment</documents>

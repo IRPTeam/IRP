@@ -179,11 +179,27 @@
       <type>
         <types>String</types>
         <stringQualifiers>
-          <length>200</length>
+          <length>50</length>
         </stringQualifiers>
       </type>
       <minValue xsi:type="core:UndefinedValue"/>
       <maxValue xsi:type="core:UndefinedValue"/>
+      <fillChecking>ShowError</fillChecking>
+      <dataHistory>Use</dataHistory>
+      <fullTextSearch>Use</fullTextSearch>
+    </attributes>
+    <attributes uuid="5370bf4b-53fd-4f4c-b4e8-af21c061073c">
+      <name>AccessKey</name>
+      <synonym>
+        <key>en</key>
+        <value>Access key</value>
+      </synonym>
+      <type>
+        <types>CatalogRef.AccessKey</types>
+      </type>
+      <minValue xsi:type="core:UndefinedValue"/>
+      <maxValue xsi:type="core:UndefinedValue"/>
+      <fillChecking>ShowError</fillChecking>
       <dataHistory>Use</dataHistory>
       <fullTextSearch>Use</fullTextSearch>
     </attributes>

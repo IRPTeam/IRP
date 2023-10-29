@@ -28,6 +28,37 @@ Procedure ObjectAccessDoNotControlOnChange(Item)
 	CurrentRow.ValueRef = Undefined;
 EndProcedure
 
+&AtClient
+Procedure CopySettings(Command)
+	NotifyOnClose = New NotifyDescription("CopySettingsAfterSelect", ThisObject);
+	OpenForm("Catalog.AccessGroups.ChoiceForm", , , , , , NotifyOnClose);
+EndProcedure
+
+&AtClient
+Procedure CopySettingsAfterSelect(Result, AddInfo) Export
+	If Not ValueIsFilled(Result) Then
+		Return;
+	EndIf;
+	CopySettingsAtServer(Result);
+EndProcedure
+
+// Copy settings at server.
+// 
+// Parameters:
+//  SelectedAG - CatalogRef.AccessGroups -
+&AtServer
+Procedure CopySettingsAtServer(SelectedAG)
+	For Each Row In SelectedAG.ObjectAccess Do
+		FillPropertyValues(Object.ObjectAccess.Add(), Row);
+	EndDo;
+EndProcedure
+
+&AtClient
+Procedure ObjectAccessAccessKeyOnChange(Item)
+	CurrentRow = Items.ObjectAccess.CurrentData;
+	CurrentRow.Key = String(CurrentRow.AccessKey);
+EndProcedure
+
 #Region AddAttributes
 
 &AtClient

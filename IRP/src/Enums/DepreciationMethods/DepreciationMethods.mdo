@@ -16,7 +16,7 @@
  </synonym>
  <synonym>
   <key>tr</key>
-  <value>Depreciation methods</value>
+  <value>Amortisman yöntemleri</value>
  </synonym>
  <quickChoice>true</quickChoice>
  <choiceMode>BothWays</choiceMode>
@@ -32,7 +32,7 @@
   </synonym>
   <synonym>
    <key>tr</key>
-   <value>Straight line</value>
+   <value>Doğrusal</value>
   </synonym>
  </enumValues>
  <enumValues uuid="efe77869-0448-4eea-a8eb-afecc651e615">
@@ -47,7 +47,7 @@
   </synonym>
   <synonym>
    <key>tr</key>
-   <value>Declining balance</value>
+   <value>Azalan denge</value>
   </synonym>
  </enumValues>
 </mdclass:Enum>

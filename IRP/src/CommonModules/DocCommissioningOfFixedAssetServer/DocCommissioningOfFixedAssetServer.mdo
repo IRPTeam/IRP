@@ -11,7 +11,7 @@
  </synonym>
  <synonym>
   <key>tr</key>
-  <value>Doc commissioning of fixed asset server</value>
+  <value>Sabit varlık sunucusunun belge devreye alması</value>
  </synonym>
  <server>true</server>
  <serverCall>true</serverCall>

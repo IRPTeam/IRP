@@ -16,7 +16,7 @@
  </synonym>
  <synonym>
   <key>tr</key>
-  <value>Fixed asset types</value>
+  <value>Sabit varlık türleri</value>
  </synonym>
  <quickChoice>true</quickChoice>
  <choiceMode>BothWays</choiceMode>
@@ -32,7 +32,7 @@
   </synonym>
   <synonym>
    <key>tr</key>
-   <value>Tangible assets</value>
+   <value>Maddi varlıklar</value>
   </synonym>
  </enumValues>
  <enumValues uuid="d70c8771-2a8a-4d57-9c17-f612da115951">
@@ -47,7 +47,7 @@
   </synonym>
   <synonym>
    <key>tr</key>
-   <value>Intangible assets</value>
+   <value>Maddi olmayan varlıklar</value>
   </synonym>
  </enumValues>
 </mdclass:Enum>

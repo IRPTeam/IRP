@@ -83,12 +83,18 @@ EndProcedure
 //  * ErrorDescription - String
 //  * ConnectParameters - See GetDriverObject
 Async Function ConnectHardware(Hardware) Export
-	ConnectedDevice = globalEquipment_GetConnectionSettings(Hardware);
-
+	
 	ResultData = New Structure();
 	ResultData.Insert("Result", False);
 	ResultData.Insert("ErrorDescription", "");
 	ResultData.Insert("ConnectParameters", New Structure());
+
+	If Not ValueIsFilled(Hardware) Then
+		ResultData.Insert("ErrorDescription", R().Eq_013);
+		Return ResultData;
+	EndIf;
+	
+	ConnectedDevice = globalEquipment_GetConnectionSettings(Hardware);
 	
 	If Not ConnectedDevice.Connected Then
 		Device = HardwareServer.GetConnectionSettings(Hardware);

@@ -807,7 +807,7 @@
   </synonym>
   <synonym>
    <key>tr</key>
-   <value>Fixed asset</value>
+   <value>Sabit varlık</value>
   </synonym>
   <type>
    <types>CatalogRef.FixedAssets</types>

@@ -11,7 +11,7 @@
  </synonym>
  <synonym>
   <key>tr</key>
-  <value>Doc fixed asset transfer server</value>
+  <value>Sabit varlık transfer belgesi sunucusu</value>
  </synonym>
  <server>true</server>
  <serverCall>true</serverCall>

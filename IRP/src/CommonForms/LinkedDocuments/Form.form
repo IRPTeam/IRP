@@ -143,7 +143,7 @@
    </title>
    <title>
     <key>tr</key>
-    <value>Form command bar</value>
+    <value>Form komut çubuğu</value>
    </title>
    <extendedTooltip>
     <name>GroupFormCommandBarExtendedTooltip</name>
@@ -1549,7 +1549,7 @@
   </title>
   <title>
    <key>tr</key>
-   <value>Array of rows item list</value>
+   <value>Satır öğe listesi dizisi</value>
   </title>
   <id>174</id>
   <valueType>
@@ -1577,7 +1577,7 @@
   </title>
   <title>
    <key>tr</key>
-   <value>Array of rows documents</value>
+   <value>Satır belgeleri dizisi</value>
   </title>
   <id>175</id>
   <valueType>
@@ -1605,7 +1605,7 @@
   </title>
   <title>
    <key>tr</key>
-   <value>Use reverse tree</value>
+   <value>Ters ağacı kullan</value>
   </title>
   <id>176</id>
   <valueType>
@@ -1734,7 +1734,7 @@
   </title>
   <title>
    <key>tr</key>
-   <value>Open basis document</value>
+   <value>Temel belgeyi aç</value>
   </title>
   <id>4</id>
   <use>

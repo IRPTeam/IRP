@@ -11,7 +11,7 @@
  </synonym>
  <synonym>
   <key>tr</key>
-  <value>Doc decommissioning of fixed asset server</value>
+  <value>Sabit varlık sunucusunun belge devredışı bırakılması</value>
  </synonym>
  <server>true</server>
  <serverCall>true</serverCall>

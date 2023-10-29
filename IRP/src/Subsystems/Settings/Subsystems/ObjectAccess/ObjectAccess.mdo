@@ -25,5 +25,6 @@
  <content>Role.TemplateAccumulationRegisters</content>
  <content>InformationRegister.T9101A_ObjectAccessRegisters</content>
  <content>Role.TemplateCatalogs</content>
+ <content>Catalog.AccessKey</content>
  <parentSubsystem>Subsystem.Settings</parentSubsystem>
 </mdclass:Subsystem>

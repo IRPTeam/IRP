@@ -120,7 +120,7 @@
   </synonym>
   <synonym>
    <key>tr</key>
-   <value>Fixed asset</value>
+   <value>Sabit varlık</value>
   </synonym>
   <type>
    <types>CatalogRef.FixedAssets</types>
@@ -144,7 +144,7 @@
   </synonym>
   <synonym>
    <key>tr</key>
-   <value>Responsible person</value>
+   <value>Sorumlu kişi</value>
   </synonym>
   <type>
    <types>CatalogRef.Partners</types>

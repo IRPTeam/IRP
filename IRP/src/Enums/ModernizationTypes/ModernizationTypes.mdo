@@ -16,7 +16,7 @@
  </synonym>
  <synonym>
   <key>tr</key>
-  <value>Modernization types</value>
+  <value>Modernizasyon türleri</value>
  </synonym>
  <quickChoice>true</quickChoice>
  <choiceMode>BothWays</choiceMode>
@@ -32,7 +32,7 @@
   </synonym>
   <synonym>
    <key>tr</key>
-   <value>Mount</value>
+   <value>Montaj</value>
   </synonym>
  </enumValues>
  <enumValues uuid="70e2ca7d-a3bb-4a6f-baf9-53d86f057785">
@@ -47,7 +47,7 @@
   </synonym>
   <synonym>
    <key>tr</key>
-   <value>Unmount</value>
+   <value>Sökme</value>
   </synonym>
  </enumValues>
 </mdclass:Enum>

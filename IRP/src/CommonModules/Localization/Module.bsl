@@ -680,6 +680,9 @@ Function Strings(Lang) Export
 	Strings.Insert("Eq_012", NStr("en='Already disconnected';
 		|ru='Уже подключен';
 		|tr='Zaten bağlantı kesildi'", Lang));
+	Strings.Insert("Eq_013", NStr("en='Hardware not found';
+		|ru='Оборудование не найдено';
+		|tr='Donanım bulunamadı'", Lang));
 	Strings.Insert("Eq_CanNotFindAPIModule", NStr("en='Can not find API module. Check `Equipment API Module` in Hardware';
 		|ru='API модуль не найден. Проверьте ""Модуль API оборудования"" в торговом оборудовании';
 		|tr='API modülü bulunamıyor. Donanımda `Ekipman API Modülü`nü kontrol edin'", Lang));
@@ -2236,13 +2239,13 @@ Function Strings(Lang) Export
 		|tr='Devre dışı bırak - Bağlantı satırlarında satırları hesapla'", Lang));
 	Strings.Insert("Add_Setiings_009", NStr("en='Use reverse basises tree';
 		|ru='Использовать перевернутое дерево оснований';
-		|tr='Use reverse basises tree'", Lang));
+		|tr='Ters temel ağacını kullan'", Lang));
 	Strings.Insert("Add_Setiings_010", NStr("en='Linked documents';
 		|ru='Документы связанные по строкам';
 		|tr='Bağlı evraklar'", Lang));
 	Strings.Insert("Add_Setiings_011", NStr("en='Use reverse tree';
 		|ru='Перевернуть дерево';
-		|tr='Use reverse tree'", Lang));
+		|tr='Ters ağacı kullan'", Lang));
 #EndRegion
 
 #Region Mobile

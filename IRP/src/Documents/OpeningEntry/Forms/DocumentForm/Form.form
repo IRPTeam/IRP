@@ -1938,7 +1938,7 @@
    </title>
    <title>
     <key>ru</key>
-    <value>Остатки и обороты денежных средств (AccountBalance)</value>
+    <value>Остатки денежных средств</value>
    </title>
    <title>
     <key>tr</key>
@@ -13581,7 +13581,7 @@
    </title>
    <title>
     <key>tr</key>
-    <value>Fixed assets</value>
+    <value>Sabit varlıklar</value>
    </title>
    <extendedTooltip>
     <name>GroupFixedAssetsExtendedTooltip</name>
@@ -14666,7 +14666,7 @@
   </title>
   <title>
    <key>tr</key>
-   <value>Edit currencies fixed assets</value>
+   <value>Sabit varlıkların para birimlerini düzenle</value>
   </title>
   <id>17</id>
   <use>

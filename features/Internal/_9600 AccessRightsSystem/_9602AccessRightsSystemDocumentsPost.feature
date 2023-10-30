@@ -271,3 +271,69 @@ Scenario: 963020 try post Labeling (LimitedAccess)
 	And I click "Post and close" button
 	Then user message window does not contain messages
 	Then I wait "Labeling * dated * *" window closing in "5" seconds
+
+Scenario: 963021 try post Cash statement (LimitedAccess)
+	And I close all client application windows
+	Given I open hyperlink "e1cib/list/Document.CashStatement"
+	And I go to line in "List" table
+		| 'Number'  | 'Date'                 |
+		| '28'      | '30.10.2023 16:40:34'  |
+	And I select current line in "List" table
+	And I click "Post and close" button
+	Then user message window does not contain messages
+	Then I wait "Cash statement * dated * *" window closing in "5" seconds
+
+Scenario: 963021 try post RetailGoodsReceipt (LimitedAccess)
+	And I close all client application windows
+	Given I open hyperlink "e1cib/list/Document.RetailGoodsReceipt"
+	And I go to line in "List" table
+		| 'Number'  | 'Date'                 |
+		| '73'      | '30.10.2023 16:41:52'  |
+	And I select current line in "List" table
+	And I click "Post and close" button
+	Then user message window does not contain messages
+	Then I wait "Retail goods receipt * dated * *" window closing in "5" seconds
+
+Scenario: 963021 try post RetailShipmentConfirmation (LimitedAccess)
+	And I close all client application windows
+	Given I open hyperlink "e1cib/list/Document.RetailShipmentConfirmation"
+	And I go to line in "List" table
+		| 'Number'  | 'Date'                 |
+		| '73'      | '30.10.2023 16:42:31'  |
+	And I select current line in "List" table
+	And I click "Post and close" button
+	Then user message window does not contain messages
+	Then I wait "Retail shipment confirmation * dated * *" window closing in "5" seconds
+
+Scenario: 963021 try post RetailSalesReceipt (LimitedAccess)
+	And I close all client application windows
+	Given I open hyperlink "e1cib/list/Document.RetailSalesReceipt"
+	And I go to line in "List" table
+		| 'Number'  | 'Date'                 |
+		| '73'      | '30.10.2023 16:43:38'  |
+	And I select current line in "List" table
+	And I click "Post and close" button
+	Then user message window does not contain messages
+	Then I wait "Retail sales receipt * dated * *" window closing in "5" seconds
+
+Scenario: 963021 try post RetailReturnReceipt (LimitedAccess)
+	And I close all client application windows
+	Given I open hyperlink "e1cib/list/Document.RetailReturnReceipt"
+	And I go to line in "List" table
+		| 'Number'  | 'Date'                 |
+		| '73'      | '30.10.2023 16:47:40'  |
+	And I select current line in "List" table
+	And I click "Post and close" button
+	Then user message window does not contain messages
+	Then I wait "Retail return receipt * dated * *" window closing in "5" seconds
+
+Scenario: 963021 try post ConsolidatedRetailSales (LimitedAccess)
+	And I close all client application windows
+	Given I open hyperlink "e1cib/list/Document.ConsolidatedRetailSales"
+	And I go to line in "List" table
+		| 'Number'  | 'Date'                 |
+		| '28'      | '30.10.2023 16:47:25'  |
+	And I select current line in "List" table
+	And I click "Post and close" button
+	Then user message window does not contain messages
+	Then I wait "Consolidated retail sales * dated * *" window closing in "5" seconds

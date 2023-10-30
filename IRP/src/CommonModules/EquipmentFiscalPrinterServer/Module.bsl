@@ -86,6 +86,7 @@ Procedure FillCheckPackageByRetailSalesReceipt(SourceData, CheckPackage) Export
 			EndIf;
 		EndIf;
 		FiscalStringData.MeasureOfQuantity = 255;
+		FiscalStringData.MeasureOfQuantityRef = ItemRow.Unit.UOM;
 		
 #Region GenerateName		
 		Name = New Array; // Array Of String
@@ -264,6 +265,7 @@ Procedure FillCheckPackageByPayment(SourceData, CheckPackage, isCash)
 		FiscalStringData.DiscountAmount = 0;
 		FiscalStringData.CalculationSubject = 10;	//https://its.1c.ru/db/metod8dev#content:4829:hdoc:signcalculationobject
 		FiscalStringData.MeasureOfQuantity = 255;
+		FiscalStringData.MeasureOfQuantityRef = Catalogs.UnitsOfMeasurement.EmptyRef();
 		FiscalStringData.Name = String(RetailCustomer);
 		FiscalStringData.Quantity = 1;
 		FiscalStringData.PaymentMethod = 3;

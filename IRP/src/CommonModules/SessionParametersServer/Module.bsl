@@ -79,6 +79,10 @@ Function GetSessionParameter(ParameterName) Export
 	Return SessionParameters[ParameterName];
 EndFunction
 
+Procedure SetSessionParameter(ParameterName, Value) Export
+	SessionParameters[ParameterName] = Value;
+EndProcedure
+
 Function OurCompanies()
 	OurCompanies = New Array();	
 	If GetFunctionalOption("UseCompanies") = True Then

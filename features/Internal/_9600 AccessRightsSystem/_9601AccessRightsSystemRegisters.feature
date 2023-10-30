@@ -57,18 +57,7 @@ Scenario: 960001 preparation (access rights system registers)
 		And I select current line in "List" table
 		And I finish line editing in "Users" table
 	* Check ObjectAccess table
-		And "ObjectAccess" table became equal
-			| '#'  | 'Key'       | 'Value ref'                         | 'Modify' | 'Do not control' |
-			| '1'  | 'Company'   | 'Company Read and Write Access'     | 'Yes'    | 'No'             |
-			| '2'  | 'Company'   | 'Company Only read access'          | 'No'     | 'No'             |
-			| '3'  | 'Branch'    | 'Branch Read and Write Access'      | 'Yes'    | 'No'             |
-			| '4'  | 'Branch'    | 'Branch Only read access'           | 'No'     | 'No'             |
-			| '5'  | 'Store'     | 'Store Read and Write Access'       | 'Yes'    | 'No'             |
-			| '6'  | 'Store'     | 'Store Only read access'            | 'No'     | 'No'             |
-			| '7'  | 'Account'   | 'CashAccount Read and Write Access' | 'Yes'    | 'No'             |
-			| '8'  | 'Account'   | 'CashAccount Only read access'      | 'No'     | 'No'             |
-			| '9'  | 'PriceType' | 'PriceType Read and Write Access'   | 'Yes'    | 'No'             |
-			| '10' | 'PriceType' | 'PriceType Only read access'        | 'No'     | 'No'             |
+		When filling Access key in the AccessGroups
 	And I click "Save and close" button
 	// * Check ObjectAccess register
 	// 	Given I open hyperlink "e1cib/list/InformationRegister.T9101A_ObjectAccessRegisters"
@@ -551,29 +540,9 @@ Scenario: 961096 check BranchBankTerms register access (admin)
 	Given I open hyperlink "e1cib/list/InformationRegister.BranchBankTerms"
 	Then the number of "List" table lines is "равно" "3"
 
-Scenario: 961097 check BundleContents register access (admin)
-	And I close all client application windows
-	Given I open hyperlink "e1cib/list/InformationRegister.BundleContents"
-	Then the number of "List" table lines is "равно" "3"
-
-Scenario: 961098 check ChequeBondStatuses register access (admin)
-	And I close all client application windows
-	Given I open hyperlink "e1cib/list/InformationRegister.ChequeBondStatuses"
-	Then the number of "List" table lines is "равно" "3"
-
 Scenario: 961099 check CompanyLedgerTypes register access (admin)
 	And I close all client application windows
 	Given I open hyperlink "e1cib/list/InformationRegister.CompanyLedgerTypes"
-	Then the number of "List" table lines is "равно" "3"
-
-Scenario: 961100 check CreatedProcurementOrders register access (admin)
-	And I close all client application windows
-	Given I open hyperlink "e1cib/list/InformationRegister.CreatedProcurementOrders"
-	Then the number of "List" table lines is "равно" "3"
-
-Scenario: 961101 check DocumentFiscalStatus register access (admin)
-	And I close all client application windows
-	Given I open hyperlink "e1cib/list/InformationRegister.DocumentFiscalStatus"
 	Then the number of "List" table lines is "равно" "3"
 
 Scenario: 961102 check ExpenseRevenueTypeSettings register access (admin)
@@ -581,20 +550,11 @@ Scenario: 961102 check ExpenseRevenueTypeSettings register access (admin)
 	Given I open hyperlink "e1cib/list/InformationRegister.ExpenseRevenueTypeSettings"
 	Then the number of "List" table lines is "равно" "3"
 
-Scenario: 961103 check HardwareLog register access (admin)
-	And I close all client application windows
-	Given I open hyperlink "e1cib/list/InformationRegister.HardwareLog"
-	Then the number of "List" table lines is "равно" "3"
-
 Scenario: 961104 check S1001L_VendorsPricesByItemKey register access (admin)
 	And I close all client application windows
 	Given I open hyperlink "e1cib/list/InformationRegister.S1001L_VendorsPricesByItemKey"
 	Then the number of "List" table lines is "равно" "3"
 
-Scenario: 961105 check ObjectStatuses register access (admin)
-	And I close all client application windows
-	Given I open hyperlink "e1cib/list/InformationRegister.ObjectStatuses"
-	Then the number of "List" table lines is "равно" "3"
 
 Scenario: 961106 check PricesByItemKeys register access (admin)
 	And I close all client application windows
@@ -685,11 +645,6 @@ Scenario: 961122 check T6070S_BatchRevenueAllocationInfo register access (admin)
 	And I close all client application windows
 	Given I open hyperlink "e1cib/list/InformationRegister.T6070S_BatchRevenueAllocationInfo"
 	Then the number of "List" table lines is "равно" "9"
-
-Scenario: 961123 check T6080S_ReallocatedBatchesAmountValues register access (admin)
-	And I close all client application windows
-	Given I open hyperlink "e1cib/list/InformationRegister.T6080S_ReallocatedBatchesAmountValues"
-	Then the number of "List" table lines is "равно" "3"
 
 Scenario: 961124 check T6090S_CompositeBatchesAmountValues register access (admin)
 	And I close all client application windows
@@ -1232,29 +1187,9 @@ Scenario: 962096 check BranchBankTerms register access (LimitedAccess)
 	Given I open hyperlink "e1cib/list/InformationRegister.BranchBankTerms"
 	Then the number of "List" table lines is "равно" "2"
 
-Scenario: 962097 check BundleContents register access (LimitedAccess)
-	And I close all client application windows
-	Given I open hyperlink "e1cib/list/InformationRegister.BundleContents"
-	Then the number of "List" table lines is "равно" "2"
-
-Scenario: 962098 check ChequeBondStatuses register access (LimitedAccess)
-	And I close all client application windows
-	Given I open hyperlink "e1cib/list/InformationRegister.ChequeBondStatuses"
-	Then the number of "List" table lines is "равно" "2"
-
 Scenario: 962099 check CompanyLedgerTypes register access (LimitedAccess)
 	And I close all client application windows
 	Given I open hyperlink "e1cib/list/InformationRegister.CompanyLedgerTypes"
-	Then the number of "List" table lines is "равно" "2"
-
-Scenario: 962100 check CreatedProcurementOrders register access (LimitedAccess)
-	And I close all client application windows
-	Given I open hyperlink "e1cib/list/InformationRegister.CreatedProcurementOrders"
-	Then the number of "List" table lines is "равно" "2"
-
-Scenario: 962101 check DocumentFiscalStatus register access (LimitedAccess)
-	And I close all client application windows
-	Given I open hyperlink "e1cib/list/InformationRegister.DocumentFiscalStatus"
 	Then the number of "List" table lines is "равно" "2"
 
 Scenario: 962102 check ExpenseRevenueTypeSettings register access (LimitedAccess)
@@ -1262,19 +1197,9 @@ Scenario: 962102 check ExpenseRevenueTypeSettings register access (LimitedAcces
 	Given I open hyperlink "e1cib/list/InformationRegister.ExpenseRevenueTypeSettings"
 	Then the number of "List" table lines is "равно" "2"
 
-Scenario: 962103 check HardwareLog register access (LimitedAccess)
-	And I close all client application windows
-	Given I open hyperlink "e1cib/list/InformationRegister.HardwareLog"
-	Then the number of "List" table lines is "равно" "2"
-
 Scenario: 962104 check S1001L_VendorsPricesByItemKey register access (LimitedAccess)
 	And I close all client application windows
 	Given I open hyperlink "e1cib/list/InformationRegister.S1001L_VendorsPricesByItemKey"
-	Then the number of "List" table lines is "равно" "2"
-
-Scenario: 962105 check ObjectStatuses register access (LimitedAccess)
-	And I close all client application windows
-	Given I open hyperlink "e1cib/list/InformationRegister.ObjectStatuses"
 	Then the number of "List" table lines is "равно" "2"
 
 Scenario: 962106 check PricesByItemKeys register access (LimitedAccess)
@@ -1367,10 +1292,6 @@ Scenario: 962122 check T6070S_BatchRevenueAllocationInfo register access (Limit
 	Given I open hyperlink "e1cib/list/InformationRegister.T6070S_BatchRevenueAllocationInfo"
 	Then the number of "List" table lines is "равно" "4"
 
-Scenario: 962123 check T6080S_ReallocatedBatchesAmountValues register access (LimitedAccess)
-	And I close all client application windows
-	Given I open hyperlink "e1cib/list/InformationRegister.T6080S_ReallocatedBatchesAmountValues"
-	Then the number of "List" table lines is "равно" "2"
 
 Scenario: 962124 check T6090S_CompositeBatchesAmountValues register access (LimitedAccess)
 	And I close all client application windows

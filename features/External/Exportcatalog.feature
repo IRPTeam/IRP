@@ -45,24 +45,25 @@ Scenario: Create catalog Users and AccessProfiles objects (LimitedAccess)
 		| 'e1cib/data/Catalog.AccessProfiles?ref=b7a0d8de1a1c04c611ee1a4d84e42191' | 'False'        | 1      | 'Unit profile'   | ''                 | ''               | ''               |
 
 	And I refill object tabular section "Roles":
-		| 'Ref'                                                                    | 'Role'                          | 'Configuration' |
-		| 'e1cib/data/Catalog.AccessProfiles?ref=b7a0d8de1a1c04c611ee1a4d84e42191' | 'BasicRole'                     | 'IRP'           |
-		| 'e1cib/data/Catalog.AccessProfiles?ref=b7a0d8de1a1c04c611ee1a4d84e42191' | 'RunThinClient'                 | 'IRP'           |
-		| 'e1cib/data/Catalog.AccessProfiles?ref=b7a0d8de1a1c04c611ee1a4d84e42191' | 'Subsystem_Accounting'          | 'IRP'           |
-		| 'e1cib/data/Catalog.AccessProfiles?ref=b7a0d8de1a1c04c611ee1a4d84e42191' | 'Subsystem_Inventory'           | 'IRP'           |
-		| 'e1cib/data/Catalog.AccessProfiles?ref=b7a0d8de1a1c04c611ee1a4d84e42191' | 'Subsystem_Manufacturing'       | 'IRP'           |
-		| 'e1cib/data/Catalog.AccessProfiles?ref=b7a0d8de1a1c04c611ee1a4d84e42191' | 'Subsystem_MasterData'          | 'IRP'           |
-		| 'e1cib/data/Catalog.AccessProfiles?ref=b7a0d8de1a1c04c611ee1a4d84e42191' | 'Subsystem_PurchaseAP'          | 'IRP'           |
-		| 'e1cib/data/Catalog.AccessProfiles?ref=b7a0d8de1a1c04c611ee1a4d84e42191' | 'Subsystem_Reports'             | 'IRP'           |
-		| 'e1cib/data/Catalog.AccessProfiles?ref=b7a0d8de1a1c04c611ee1a4d84e42191' | 'Subsystem_Retail'              | 'IRP'           |
-		| 'e1cib/data/Catalog.AccessProfiles?ref=b7a0d8de1a1c04c611ee1a4d84e42191' | 'Subsystem_Salary'              | 'IRP'           |
-		| 'e1cib/data/Catalog.AccessProfiles?ref=b7a0d8de1a1c04c611ee1a4d84e42191' | 'Subsystem_SalesAR'             | 'IRP'           |
-		| 'e1cib/data/Catalog.AccessProfiles?ref=b7a0d8de1a1c04c611ee1a4d84e42191' | 'SubsystemTreasury'             | 'IRP'           |
-		| 'e1cib/data/Catalog.AccessProfiles?ref=b7a0d8de1a1c04c611ee1a4d84e42191' | 'TemplateAccumulationRegisters' | 'IRP'           |
-		| 'e1cib/data/Catalog.AccessProfiles?ref=b7a0d8de1a1c04c611ee1a4d84e42191' | 'TemplateCatalogs'              | 'IRP'           |
-		| 'e1cib/data/Catalog.AccessProfiles?ref=b7a0d8de1a1c04c611ee1a4d84e42191' | 'TemplateDocument'              | 'IRP'           |
-		| 'e1cib/data/Catalog.AccessProfiles?ref=b7a0d8de1a1c04c611ee1a4d84e42191' | 'TemplateInformationRegisters'  | 'IRP'           |
-		| 'e1cib/data/Catalog.AccessProfiles?ref=b7a0d8de1a1c04c611ee1a4d84e42191' | 'UseAllFunctionsMode'           | 'IRP'           |
+		| 'Ref'                                                                    | 'Role'                               | 'Configuration' |
+		| 'e1cib/data/Catalog.AccessProfiles?ref=b7a0d8de1a1c04c611ee1a4d84e42191' | 'BasicRole'                          | 'IRP'           |
+		| 'e1cib/data/Catalog.AccessProfiles?ref=b7a0d8de1a1c04c611ee1a4d84e42191' | 'RunThinClient'                      | 'IRP'           |
+		| 'e1cib/data/Catalog.AccessProfiles?ref=b7a0d8de1a1c04c611ee1a4d84e42191' | 'Subsystem_Accounting'               | 'IRP'           |
+		| 'e1cib/data/Catalog.AccessProfiles?ref=b7a0d8de1a1c04c611ee1a4d84e42191' | 'Subsystem_Inventory'                | 'IRP'           |
+		| 'e1cib/data/Catalog.AccessProfiles?ref=b7a0d8de1a1c04c611ee1a4d84e42191' | 'Subsystem_Manufacturing'            | 'IRP'           |
+		| 'e1cib/data/Catalog.AccessProfiles?ref=b7a0d8de1a1c04c611ee1a4d84e42191' | 'Subsystem_MasterData'               | 'IRP'           |
+		| 'e1cib/data/Catalog.AccessProfiles?ref=b7a0d8de1a1c04c611ee1a4d84e42191' | 'Subsystem_PurchaseAP'               | 'IRP'           |
+		| 'e1cib/data/Catalog.AccessProfiles?ref=b7a0d8de1a1c04c611ee1a4d84e42191' | 'Subsystem_Reports'                  | 'IRP'           |
+		| 'e1cib/data/Catalog.AccessProfiles?ref=b7a0d8de1a1c04c611ee1a4d84e42191' | 'Subsystem_Retail'                   | 'IRP'           |
+		| 'e1cib/data/Catalog.AccessProfiles?ref=b7a0d8de1a1c04c611ee1a4d84e42191' | 'Subsystem_Salary'                   | 'IRP'           |
+		| 'e1cib/data/Catalog.AccessProfiles?ref=b7a0d8de1a1c04c611ee1a4d84e42191' | 'Subsystem_SalesAR'                  | 'IRP'           |
+		| 'e1cib/data/Catalog.AccessProfiles?ref=b7a0d8de1a1c04c611ee1a4d84e42191' | 'SubsystemTreasury'                  | 'IRP'           |
+		| 'e1cib/data/Catalog.AccessProfiles?ref=b7a0d8de1a1c04c611ee1a4d84e42191' | 'TemplateAccumulationRegisters'      | 'IRP'           |
+		| 'e1cib/data/Catalog.AccessProfiles?ref=b7a0d8de1a1c04c611ee1a4d84e42191' | 'TemplateCatalogs'                   | 'IRP'           |
+		| 'e1cib/data/Catalog.AccessProfiles?ref=b7a0d8de1a1c04c611ee1a4d84e42191' | 'TemplateDocument'                   | 'IRP'           |
+		| 'e1cib/data/Catalog.AccessProfiles?ref=b7a0d8de1a1c04c611ee1a4d84e42191' | 'TemplateInformationRegisters'       | 'IRP'           |
+		| 'e1cib/data/Catalog.AccessProfiles?ref=b7a0d8de1a1c04c611ee1a4d84e42191' | 'UseAllFunctionsMode'                | 'IRP'           |
+		| 'e1cib/data/Catalog.AccessProfiles?ref=b7a0d8de1a1c04c611ee1a4d84e42191' | 'TemplateChartOfCharacteristicTypes' | 'IRP'           |
 
 	Given I open hyperlink "e1cib/list/Catalog.Users"	
 	If "List" table does not contain lines Then
@@ -73,3 +74,65 @@ Scenario: Create catalog Users and AccessProfiles objects (LimitedAccess)
 			| 'e1cib/data/Catalog.Users?ref=b7a0d8de1a1c04c611ee1a4d84e42192' | 'False'        | 1      | 'LimitedAccess' | '34ea67b1-2505-405f-8ca6-3ad54becf04f' | ''        | 'en'               | 'False'      | ''          | 'en'                        | ''                 | 'False'   | 'False'                     | ''         | ''       | 'LimitedAccess'  | ''                 | ''               | ''               |
 
 
+Scenario: filling Access key in the AccessGroups
+		And I move to "Access" tab
+		And I go to line in "ObjectAccess" table
+			| 'Value ref'                |
+			| 'Company Only read access' |
+		And I select current line in "ObjectAccess" table
+		And I select "comp" from "Access key" drop-down list by string in "ObjectAccess" table
+		And I finish line editing in "ObjectAccess" table
+		And I go to line in "ObjectAccess" table
+			| 'Value ref'                     |
+			| 'Company Read and Write Access' |
+		And I select current line in "ObjectAccess" table
+		And I select "compa" from "Access key" drop-down list by string in "ObjectAccess" table
+		And I finish line editing in "ObjectAccess" table
+		And I go to line in "ObjectAccess" table
+			| 'Value ref'                    |
+			| 'Branch Read and Write Access' |
+		And I select current line in "ObjectAccess" table
+		And I select "bra" from "Access key" drop-down list by string in "ObjectAccess" table
+		And I finish line editing in "ObjectAccess" table
+		And I go to line in "ObjectAccess" table
+			| 'Value ref'               |
+			| 'Branch Only read access' |
+		And I select current line in "ObjectAccess" table
+		And I select "bran" from "Access key" drop-down list by string in "ObjectAccess" table
+		And I finish line editing in "ObjectAccess" table
+		And I go to line in "ObjectAccess" table
+			| 'Value ref'                   |
+			| 'Store Read and Write Access' |
+		And I select current line in "ObjectAccess" table
+		And I select "store" from "Access key" drop-down list by string in "ObjectAccess" table
+		And I finish line editing in "ObjectAccess" table
+		And I go to line in "ObjectAccess" table
+			| 'Value ref'              |
+			| 'Store Only read access' |
+		And I select current line in "ObjectAccess" table
+		And I select "store" from "Access key" drop-down list by string in "ObjectAccess" table
+		And I finish line editing in "ObjectAccess" table
+		And I go to line in "ObjectAccess" table
+			| 'Value ref'                         |
+			| 'CashAccount Read and Write Access' |
+		And I select current line in "ObjectAccess" table
+		And I select "acc" from "Access key" drop-down list by string in "ObjectAccess" table
+		And I finish line editing in "ObjectAccess" table
+		And I go to line in "ObjectAccess" table
+			| 'Value ref'                    |
+			| 'CashAccount Only read access' |
+		And I select current line in "ObjectAccess" table
+		And I select "acc" from "Access key" drop-down list by string in "ObjectAccess" table
+		And I finish line editing in "ObjectAccess" table
+		And I go to line in "ObjectAccess" table
+			| 'Value ref'                       |
+			| 'PriceType Read and Write Access' |
+		And I select current line in "ObjectAccess" table
+		And I select "price" from "Access key" drop-down list by string in "ObjectAccess" table
+		And I finish line editing in "ObjectAccess" table
+		And I go to line in "ObjectAccess" table
+			| 'Value ref'                  |
+			| 'PriceType Only read access' |
+		And I select current line in "ObjectAccess" table
+		And I select "price" from "Access key" drop-down list by string in "ObjectAccess" table
+		And I finish line editing in "ObjectAccess" table

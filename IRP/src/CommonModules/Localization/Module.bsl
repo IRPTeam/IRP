@@ -544,6 +544,7 @@ Function Strings(Lang) Export
 	Strings.Insert("Eq_010", NStr("en = 'Can not disconnect device %1'", Lang));
 	Strings.Insert("Eq_011", NStr("en = 'Already connected'", Lang));
 	Strings.Insert("Eq_012", NStr("en = 'Already disconnected'", Lang));
+	Strings.Insert("Eq_013", NStr("en = 'Hardware not found'", Lang));
 	Strings.Insert("Eq_CanNotFindAPIModule", NStr("en = 'Can not find API module. Check `Equipment API Module` in Hardware'", Lang));
 	
 	Strings.Insert("EqError_001", NStr(

@@ -24,21 +24,7 @@
 			<name>Read</name>
 			<value>true</value>
 			<restrictionByCondition>
-				<condition>Table WHERE #Access("Company", "Company", "")</condition>
-			</restrictionByCondition>
-		</right>
-		<right>
-			<name>Insert</name>
-			<value>false</value>
-			<restrictionByCondition>
 				<condition>Table WHERE #Access("Company", "Table.Company", "")</condition>
-			</restrictionByCondition>
-		</right>
-		<right>
-			<name>Update</name>
-			<value>false</value>
-			<restrictionByCondition>
-				<condition>Table WHERE #Access("Company", "Company", "")</condition>
 			</restrictionByCondition>
 		</right>
 		<right>
@@ -326,21 +312,7 @@
 			<name>Read</name>
 			<value>true</value>
 			<restrictionByCondition>
-				<condition>Table WHERE #Access("Company", "Company", "") AND (#Access("Account", "Ref", "") OR #Access("Branch", "Branch", ""))</condition>
-			</restrictionByCondition>
-		</right>
-		<right>
-			<name>Insert</name>
-			<value>false</value>
-			<restrictionByCondition>
 				<condition>Table WHERE #Access("Company", "Table.Company", "") AND (#Access("Account", "Table.Ref", "") OR #Access("Branch", "Table.Branch", ""))</condition>
-			</restrictionByCondition>
-		</right>
-		<right>
-			<name>Update</name>
-			<value>false</value>
-			<restrictionByCondition>
-				<condition>Table WHERE #Access("Company", "Company", "") AND (#Access("Account", "Ref", "") OR #Access("Branch", "Branch", ""))</condition>
 			</restrictionByCondition>
 		</right>
 		<right>
@@ -672,6 +644,9 @@
 		<right>
 			<name>Read</name>
 			<value>true</value>
+			<restrictionByCondition>
+				<condition>Table WHERE #Access("Store", "Table.Ref", "")</condition>
+			</restrictionByCondition>
 		</right>
 		<right>
 			<name>View</name>
@@ -680,13 +655,6 @@
 		<right>
 			<name>InputByString</name>
 			<value>true</value>
-		</right>
-		<right>
-			<name>Insert</name>
-			<value>false</value>
-			<restrictionByCondition>
-				<condition>Table WHERE #Access("Store", "Table.Ref", "")</condition>
-			</restrictionByCondition>
 		</right>
 	</object>
 	<object>
@@ -920,21 +888,7 @@
 			<name>Read</name>
 			<value>true</value>
 			<restrictionByCondition>
-				<condition>Table WHERE #Access("Branch", "Ref", "")</condition>
-			</restrictionByCondition>
-		</right>
-		<right>
-			<name>Insert</name>
-			<value>false</value>
-			<restrictionByCondition>
 				<condition>Table WHERE #Access("Branch", "Table.Ref", "")</condition>
-			</restrictionByCondition>
-		</right>
-		<right>
-			<name>Update</name>
-			<value>false</value>
-			<restrictionByCondition>
-				<condition>Table WHERE #Access("Branch", "Ref", "")</condition>
 			</restrictionByCondition>
 		</right>
 		<right>
@@ -1147,21 +1101,7 @@
 			<name>Read</name>
 			<value>true</value>
 			<restrictionByCondition>
-				<condition>Table WHERE #Access("PriceType", "Ref", "TRUE OR Table.Predefined")</condition>
-			</restrictionByCondition>
-		</right>
-		<right>
-			<name>Insert</name>
-			<value>false</value>
-			<restrictionByCondition>
-				<condition>Table WHERE #Access("PriceType", "Table.Ref", "TRUE OR Table.Predefined")</condition>
-			</restrictionByCondition>
-		</right>
-		<right>
-			<name>Update</name>
-			<value>false</value>
-			<restrictionByCondition>
-				<condition>Table WHERE #Access("PriceType", "Ref", "TRUE OR Table.Predefined")</condition>
+				<condition>Table WHERE #Access("PriceType", "Table.Ref", "OR Table.Predefined")</condition>
 			</restrictionByCondition>
 		</right>
 		<right>
@@ -1309,53 +1249,12 @@
 		</right>
 	</object>
 	<object>
-		<name>Configuration.IRP</name>
-		<right>
-			<name>MainWindowModeNormal</name>
-			<value>true</value>
-		</right>
-		<right>
-			<name>MainWindowModeWorkplace</name>
-			<value>true</value>
-		</right>
-		<right>
-			<name>MainWindowModeEmbeddedWorkplace</name>
-			<value>true</value>
-		</right>
-		<right>
-			<name>MainWindowModeFullscreenWorkplace</name>
-			<value>true</value>
-		</right>
-		<right>
-			<name>MainWindowModeKiosk</name>
-			<value>true</value>
-		</right>
-		<right>
-			<name>AnalyticsSystemClient</name>
-			<value>true</value>
-		</right>
-	</object>
-	<object>
 		<name>Catalog.Companies</name>
 		<right>
 			<name>Read</name>
 			<value>true</value>
 			<restrictionByCondition>
-				<condition>Table WHERE #Access("Company", "Ref", "TRUE OR NOT Table.OurCompany")</condition>
-			</restrictionByCondition>
-		</right>
-		<right>
-			<name>Insert</name>
-			<value>false</value>
-			<restrictionByCondition>
-				<condition>Table WHERE #Access("Company", "Table.Ref", "TRUE OR NOT Table.OurCompany")</condition>
-			</restrictionByCondition>
-		</right>
-		<right>
-			<name>Update</name>
-			<value>false</value>
-			<restrictionByCondition>
-				<condition>Table WHERE #Access("Company", "Ref", "TRUE OR NOT Table.OurCompany")</condition>
+				<condition>Table WHERE #Access("Company", "Table.Ref", "OR NOT Table.OurCompany")</condition>
 			</restrictionByCondition>
 		</right>
 		<right>
@@ -1382,6 +1281,185 @@
 			<value>true</value>
 		</right>
 	</object>
+	<object>
+		<name>Catalog.DepreciationSchedules</name>
+		<right>
+			<name>InputByString</name>
+			<value>true</value>
+		</right>
+		<right>
+			<name>Read</name>
+			<value>true</value>
+		</right>
+		<right>
+			<name>View</name>
+			<value>true</value>
+		</right>
+	</object>
+	<object>
+		<name>Catalog.AccessKey</name>
+		<right>
+			<name>InputByString</name>
+			<value>true</value>
+		</right>
+		<right>
+			<name>Read</name>
+			<value>true</value>
+		</right>
+		<right>
+			<name>View</name>
+			<value>true</value>
+		</right>
+	</object>
+	<object>
+		<name>Catalog.FixedAssets</name>
+		<right>
+			<name>InputByString</name>
+			<value>true</value>
+		</right>
+		<right>
+			<name>Read</name>
+			<value>true</value>
+		</right>
+		<right>
+			<name>View</name>
+			<value>true</value>
+		</right>
+	</object>
+	<object>
+		<name>Catalog.FixedAssetsLedgerTypes</name>
+		<right>
+			<name>InputByString</name>
+			<value>true</value>
+		</right>
+		<right>
+			<name>Read</name>
+			<value>true</value>
+		</right>
+		<right>
+			<name>View</name>
+			<value>true</value>
+		</right>
+	</object>
+	<object>
+		<name>Catalog.AdvancesKeys.StandardAttribute.Code</name>
+		<right>
+			<name>Edit</name>
+			<value>false</value>
+		</right>
+	</object>
+	<object>
+		<name>Catalog.AdvancesKeys.Attribute.Company</name>
+		<right>
+			<name>Edit</name>
+			<value>false</value>
+		</right>
+	</object>
+	<object>
+		<name>Catalog.AdvancesKeys.StandardAttribute.Ref</name>
+		<right>
+			<name>Edit</name>
+			<value>false</value>
+		</right>
+	</object>
+	<object>
+		<name>Catalog.AdvancesKeys.Attribute.Order</name>
+		<right>
+			<name>Edit</name>
+			<value>false</value>
+		</right>
+	</object>
+	<object>
+		<name>Catalog.AdvancesKeys.StandardAttribute.PredefinedDataName</name>
+		<right>
+			<name>Edit</name>
+			<value>false</value>
+		</right>
+	</object>
+	<object>
+		<name>Catalog.AdvancesKeys.StandardAttribute.DeletionMark</name>
+		<right>
+			<name>Edit</name>
+			<value>false</value>
+		</right>
+	</object>
+	<object>
+		<name>Catalog.AdvancesKeys.StandardAttribute.Description</name>
+		<right>
+			<name>Edit</name>
+			<value>false</value>
+		</right>
+	</object>
+	<object>
+		<name>Catalog.AdvancesKeys.StandardAttribute.IsFolder</name>
+		<right>
+			<name>Edit</name>
+			<value>false</value>
+		</right>
+	</object>
+	<object>
+		<name>Catalog.AdvancesKeys.StandardAttribute.Predefined</name>
+		<right>
+			<name>Edit</name>
+			<value>false</value>
+		</right>
+	</object>
+	<object>
+		<name>Catalog.AdvancesKeys.Attribute.Currency</name>
+		<right>
+			<name>Edit</name>
+			<value>false</value>
+		</right>
+	</object>
+	<object>
+		<name>Catalog.AdvancesKeys.Attribute.Branch</name>
+		<right>
+			<name>Edit</name>
+			<value>false</value>
+		</right>
+	</object>
+	<object>
+		<name>Catalog.AdvancesKeys.StandardAttribute.Owner</name>
+		<right>
+			<name>Edit</name>
+			<value>false</value>
+		</right>
+	</object>
+	<object>
+		<name>Catalog.AdvancesKeys.StandardAttribute.Parent</name>
+		<right>
+			<name>Edit</name>
+			<value>false</value>
+		</right>
+	</object>
+	<object>
+		<name>Catalog.AdvancesKeys.Attribute.LegalName</name>
+		<right>
+			<name>Edit</name>
+			<value>false</value>
+		</right>
+	</object>
+	<object>
+		<name>Catalog.AdvancesKeys.Attribute.Partner</name>
+		<right>
+			<name>Edit</name>
+			<value>false</value>
+		</right>
+	</object>
+	<object>
+		<name>Catalog.AdvancesKeys.Attribute.IsVendorAdvance</name>
+		<right>
+			<name>Edit</name>
+			<value>false</value>
+		</right>
+	</object>
+	<object>
+		<name>Catalog.AdvancesKeys.Attribute.IsCustomerAdvance</name>
+		<right>
+			<name>Edit</name>
+			<value>false</value>
+		</right>
+	</object>
 	<restrictionTemplate>
 		<name>Access(KeySynonym, AttributePath, AdditionalRule)</name>
 		<condition>// Table WHERE #Access("Company", "Company", "")
@@ -1404,7 +1482,7 @@
 			#EndIf                  
 		AND
 			(
-			#If Not "#KeySynonym" = "" AND Not "#AttributePath" = "ac" #Then
+			#If Not "#KeySynonym" = "" AND Not "#AttributePath" = "" #Then
 			AG.Key = "#KeySynonym"
 			AND (
 				AG.ValueRef = #AttributePath
@@ -1413,7 +1491,7 @@
 				)    
 			#EndIf
 			#If Not "#AdditionalRule" = "" #Then
-				AND #AdditionalRule
+				#AdditionalRule
 			#EndIf                     
 			)
 	)	                                            

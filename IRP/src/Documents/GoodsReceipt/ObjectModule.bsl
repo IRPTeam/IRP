@@ -62,7 +62,7 @@ Procedure FillCheckProcessing(Cancel, CheckedAttributes)
 	|	&ItemList AS tmp
 	|;
 	|////////////////////////////////////////////////////////////////////////////////
-	|SELECT
+	|SELECT ALLOWED
 	|	tmp.ReceiptBasis.Currency AS Currency,
 	|	SUM(1) AS CountCurrencies
 	|FROM
@@ -72,7 +72,9 @@ Procedure FillCheckProcessing(Cancel, CheckedAttributes)
 	|GROUP BY
 	|	tmp.ReceiptBasis.Currency";
 	Query.SetParameter("ItemList", ThisObject.ItemList.Unload());
+	SetPrivilegedMode(True);
 	QueryResult = Query.Execute();
+	SetPrivilegedMode(False);
 	QuerySelection = QueryResult.Select();
 	If QuerySelection.Count() > 1 Then
 		CommonFunctionsClientServer.ShowUsersMessage(R().S_022);

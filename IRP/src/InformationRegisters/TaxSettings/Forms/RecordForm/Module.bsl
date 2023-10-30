@@ -111,7 +111,7 @@ Function GetTransactionTypeEnumTypes()
 			EndIf;
 		EndIf;
 		
-		If Attr = Undefined Or TaxesExists Then
+		If Attr = Undefined Or Not TaxesExists Then
 			Continue;
 		EndIf;
 		

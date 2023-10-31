@@ -283,7 +283,7 @@ Scenario: 963021 try post Cash statement (LimitedAccess)
 	Then user message window does not contain messages
 	Then I wait "Cash statement * dated * *" window closing in "5" seconds
 
-Scenario: 963021 try post RetailGoodsReceipt (LimitedAccess)
+Scenario: 963022 try post RetailGoodsReceipt (LimitedAccess)
 	And I close all client application windows
 	Given I open hyperlink "e1cib/list/Document.RetailGoodsReceipt"
 	And I go to line in "List" table
@@ -294,7 +294,7 @@ Scenario: 963021 try post RetailGoodsReceipt (LimitedAccess)
 	Then user message window does not contain messages
 	Then I wait "Retail goods receipt * dated * *" window closing in "5" seconds
 
-Scenario: 963021 try post RetailShipmentConfirmation (LimitedAccess)
+Scenario: 963023 try post RetailShipmentConfirmation (LimitedAccess)
 	And I close all client application windows
 	Given I open hyperlink "e1cib/list/Document.RetailShipmentConfirmation"
 	And I go to line in "List" table
@@ -305,7 +305,7 @@ Scenario: 963021 try post RetailShipmentConfirmation (LimitedAccess)
 	Then user message window does not contain messages
 	Then I wait "Retail shipment confirmation * dated * *" window closing in "5" seconds
 
-Scenario: 963021 try post RetailSalesReceipt (LimitedAccess)
+Scenario: 963024 try post RetailSalesReceipt (LimitedAccess)
 	And I close all client application windows
 	Given I open hyperlink "e1cib/list/Document.RetailSalesReceipt"
 	And I go to line in "List" table
@@ -316,7 +316,7 @@ Scenario: 963021 try post RetailSalesReceipt (LimitedAccess)
 	Then user message window does not contain messages
 	Then I wait "Retail sales receipt * dated * *" window closing in "5" seconds
 
-Scenario: 963021 try post RetailReturnReceipt (LimitedAccess)
+Scenario: 963025 try post RetailReturnReceipt (LimitedAccess)
 	And I close all client application windows
 	Given I open hyperlink "e1cib/list/Document.RetailReturnReceipt"
 	And I go to line in "List" table
@@ -327,7 +327,7 @@ Scenario: 963021 try post RetailReturnReceipt (LimitedAccess)
 	Then user message window does not contain messages
 	Then I wait "Retail return receipt * dated * *" window closing in "5" seconds
 
-Scenario: 963021 try post ConsolidatedRetailSales (LimitedAccess)
+Scenario: 963026 try post ConsolidatedRetailSales (LimitedAccess)
 	And I close all client application windows
 	Given I open hyperlink "e1cib/list/Document.ConsolidatedRetailSales"
 	And I go to line in "List" table
@@ -337,3 +337,333 @@ Scenario: 963021 try post ConsolidatedRetailSales (LimitedAccess)
 	And I click "Post and close" button
 	Then user message window does not contain messages
 	Then I wait "Consolidated retail sales * dated * *" window closing in "5" seconds
+
+Scenario: 963027 try post AdditionalCostAllocation (LimitedAccess)
+	And I close all client application windows
+	Given I open hyperlink "e1cib/list/Document.AdditionalCostAllocation"
+	And I go to line in "List" table
+		| 'Number'  | 'Date'                 |
+		| '73'      | '31.10.2023 09:50:59'  |
+	And I select current line in "List" table
+	And I click "Post and close" button
+	Then user message window does not contain messages
+	Then I wait "Additional cost allocation * dated * *" window closing in "5" seconds
+
+Scenario: 963028 try post AdditionalRevenueAllocation (LimitedAccess)
+	And I close all client application windows
+	Given I open hyperlink "e1cib/list/Document.AdditionalRevenueAllocation"
+	And I go to line in "List" table
+		| 'Number'  | 'Date'                 |
+		| '73'      | '31.10.2023 09:51:45'  |
+	And I select current line in "List" table
+	And I click "Post and close" button
+	Then user message window does not contain messages
+	Then I wait "Additional revenue allocation * dated * *" window closing in "5" seconds
+
+Scenario: 963029 try post Bundling (LimitedAccess)
+	And I close all client application windows
+	Given I open hyperlink "e1cib/list/Document.Bundling"
+	And I go to line in "List" table
+		| 'Number'  | 'Date'                 |
+		| '28'      | '31.10.2023 09:52:46'  |
+	And I select current line in "List" table
+	And I click "Post and close" button
+	Then user message window does not contain messages
+	Then I wait "Bundling * dated * *" window closing in "5" seconds
+
+Scenario: 963030 try post CalculationMovementCosts (LimitedAccess)
+	And I close all client application windows
+	Given I open hyperlink "e1cib/list/Document.CalculationMovementCosts"
+	And I go to line in "List" table
+		| 'Number'  | 'Date'                 |
+		| '4'       | '31.10.2023 09:50:35'  |
+	And I select current line in "List" table
+	And I click "Post and close" button
+	Then user message window does not contain messages
+	Then I wait "Calculation movement costs * dated * *" window closing in "5" seconds
+
+Scenario: 963031 try post InventoryTransfer (LimitedAccess)
+	And I close all client application windows
+	Given I open hyperlink "e1cib/list/Document.InventoryTransfer"
+	And I go to line in "List" table
+		| 'Number'  | 'Date'                 |
+		| '244'     | '31.10.2023 09:36:46'  |
+	And I select current line in "List" table
+	And I click "Post and close" button
+	Then user message window does not contain messages
+	Then I wait "Inventory transfer * dated * *" window closing in "5" seconds
+
+Scenario: 963032 try post InventoryTransferOrder (LimitedAccess)
+	And I close all client application windows
+	Given I open hyperlink "e1cib/list/Document.InventoryTransferOrder"
+	And I go to line in "List" table
+		| 'Number' | 'Date'                 |
+		| '82'     | '31.10.2023 09:37:17'  |
+	And I select current line in "List" table
+	And I click "Post and close" button
+	Then user message window does not contain messages
+	Then I wait "Inventory transfer order * dated * *" window closing in "5" seconds
+
+Scenario: 963033 try post ItemStockAdjustment (LimitedAccess)
+	And I close all client application windows
+	Given I open hyperlink "e1cib/list/Document.ItemStockAdjustment"
+	And I go to line in "List" table
+		| 'Number' | 'Date'                 |
+		| '28'     | '31.10.2023 09:35:50'  |
+	And I select current line in "List" table
+	And I click "Post and close" button
+	Then user message window does not contain messages
+	Then I wait "Item stock adjustment * dated * *" window closing in "5" seconds
+
+Scenario: 963034 try post PhysicalCountByLocation (LimitedAccess)
+	And I close all client application windows
+	Given I open hyperlink "e1cib/list/Document.PhysicalCountByLocation"
+	And I go to line in "List" table
+		| 'Number' | 'Date'                 |
+		| '10'     | '31.10.2023 09:47:30'  |
+	And I select current line in "List" table
+	And I click "Save and close" button
+	Then user message window does not contain messages
+	Then I wait "Physical count by location * dated * *" window closing in "5" seconds
+
+Scenario: 963035 try post PhysicalInventory (LimitedAccess)
+	And I close all client application windows
+	Given I open hyperlink "e1cib/list/Document.PhysicalInventory"
+	And I go to line in "List" table
+		| 'Number' | 'Date'                 |
+		| '10'     | '31.10.2023 09:43:14'  |
+	And I select current line in "List" table
+	And I click "Post and close" button
+	Then user message window does not contain messages
+	Then I wait "Physical inventory * dated * *" window closing in "5" seconds
+
+Scenario: 963036 try post StockAdjustmentAsSurplus (LimitedAccess)
+	And I close all client application windows
+	Given I open hyperlink "e1cib/list/Document.StockAdjustmentAsSurplus"
+	And I go to line in "List" table
+		| 'Number' | 'Date'                 |
+		| '28'     | '31.10.2023 09:49:18'  |
+	And I select current line in "List" table
+	And I click "Post and close" button
+	Then user message window does not contain messages
+	Then I wait "Stock adjustment as surplus * dated * *" window closing in "5" seconds
+
+Scenario: 963037 try post StockAdjustmentAsWriteOff (LimitedAccess)
+	And I close all client application windows
+	Given I open hyperlink "e1cib/list/Document.StockAdjustmentAsWriteOff"
+	And I go to line in "List" table
+		| 'Number' | 'Date'                 |
+		| '28'     | '31.10.2023 09:50:02'  |
+	And I select current line in "List" table
+	And I click "Post and close" button
+	Then user message window does not contain messages
+	Then I wait "Stock adjustment as write off * dated * *" window closing in "5" seconds
+
+Scenario: 963038 try post Unbundling (LimitedAccess)
+	And I close all client application windows
+	Given I open hyperlink "e1cib/list/Document.Unbundling"
+	And I go to line in "List" table
+		| 'Number' | 'Date'                 |
+		| '28'     | '31.10.2023 09:53:14'  |
+	And I select current line in "List" table
+	And I click "Post and close" button
+	Then user message window does not contain messages
+	Then I wait "Unbundling * dated * *" window closing in "5" seconds
+
+Scenario: 963039 try post Unbundling (LimitedAccess)
+	And I close all client application windows
+	Given I open hyperlink "e1cib/list/Document.Unbundling"
+	And I go to line in "List" table
+		| 'Number' | 'Date'                 |
+		| '28'     | '31.10.2023 09:53:14'  |
+	And I select current line in "List" table
+	And I click "Post and close" button
+	Then user message window does not contain messages
+	Then I wait "Unbundling * dated * *" window closing in "5" seconds
+
+Scenario: 963040 try post BankPayment (LimitedAccess)
+	And I close all client application windows
+	Given I open hyperlink "e1cib/list/Document.BankPayment"
+	And I go to line in "List" table
+		| 'Number' | 'Date'                 |
+		| '82'     | '31.10.2023 11:45:20'  |
+	And I select current line in "List" table
+	And I click "Post and close" button
+	Then user message window does not contain messages
+	Then I wait "Bank payment * dated * *" window closing in "5" seconds
+
+Scenario: 963040 try post BankReceipt (LimitedAccess)
+	And I close all client application windows
+	Given I open hyperlink "e1cib/list/Document.BankReceipt"
+	And I go to line in "List" table
+		| 'Number' | 'Date'                 |
+		| '82'     | '31.10.2023 11:46:28'  |
+	And I select current line in "List" table
+	And I click "Post and close" button
+	Then user message window does not contain messages
+	Then I wait "Bank receipt * dated * *" window closing in "5" seconds
+
+Scenario: 963041 try post CashExpense (LimitedAccess)
+	And I close all client application windows
+	Given I open hyperlink "e1cib/list/Document.CashExpense"
+	And I go to line in "List" table
+		| 'Number' | 'Date'                 |
+		| '82'     | '31.10.2023 11:48:21'  |
+	And I select current line in "List" table
+	And I click "Post and close" button
+	Then user message window does not contain messages
+	Then I wait "Cash expense * dated * *" window closing in "5" seconds
+
+Scenario: 963041 try post CashPayment (LimitedAccess)
+	And I close all client application windows
+	Given I open hyperlink "e1cib/list/Document.CashPayment"
+	And I go to line in "List" table
+		| 'Number' | 'Date'                 |
+		| '28'     | '31.10.2023 11:46:55'  |
+	And I select current line in "List" table
+	And I click "Post and close" button
+	Then user message window does not contain messages
+	Then I wait "Cash payment * dated * *" window closing in "5" seconds
+
+Scenario: 963041 try post CashReceipt (LimitedAccess)
+	And I close all client application windows
+	Given I open hyperlink "e1cib/list/Document.CashReceipt"
+	And I go to line in "List" table
+		| 'Number' | 'Date'                 |
+		| '28'     | '31.10.2023 11:47:16'  |
+	And I select current line in "List" table
+	And I click "Post and close" button
+	Then user message window does not contain messages
+	Then I wait "Cash receipt * dated * *" window closing in "5" seconds
+
+Scenario: 963041 try post CashRevenue (LimitedAccess)
+	And I close all client application windows
+	Given I open hyperlink "e1cib/list/Document.CashRevenue"
+	And I go to line in "List" table
+		| 'Number' | 'Date'                 |
+		| '28'     | '31.10.2023 11:48:49'  |
+	And I select current line in "List" table
+	And I click "Post and close" button
+	Then user message window does not contain messages
+	Then I wait "Cash revenue * dated * *" window closing in "5" seconds
+
+Scenario: 963041 try post CashTransferOrder (LimitedAccess)
+	And I close all client application windows
+	Given I open hyperlink "e1cib/list/Document.CashTransferOrder"
+	And I go to line in "List" table
+		| 'Number'  | 'Date'                 |
+		| '244'     | '31.10.2023 11:54:02'  |
+	And I select current line in "List" table
+	And I click "Post and close" button
+	Then user message window does not contain messages
+	Then I wait "Cash transfer order * dated * *" window closing in "5" seconds
+
+Scenario: 963041 try post CreditNote (LimitedAccess)
+	And I close all client application windows
+	Given I open hyperlink "e1cib/list/Document.CreditNote"
+	And I go to line in "List" table
+		| 'Number' | 'Date'                 |
+		| '10'     | '31.10.2023 11:50:10'  |
+	And I select current line in "List" table
+	And I click "Post and close" button
+	Then user message window does not contain messages
+	Then I wait "Credit note * dated * *" window closing in "5" seconds
+
+Scenario: 963041 try post CustomersAdvancesClosing (LimitedAccess)
+	And I close all client application windows
+	Given I open hyperlink "e1cib/list/Document.CustomersAdvancesClosing"
+	And I go to line in "List" table
+		| 'Number' | 'Date'                 |
+		| '10'     | '31.10.2023 11:50:26'  |
+	And I select current line in "List" table
+	And I click "Post and close" button
+	Then user message window does not contain messages
+	Then I wait "Customers advances closing * dated * *" window closing in "5" seconds
+
+Scenario: 963041 try post DebitNote (LimitedAccess)
+	And I close all client application windows
+	Given I open hyperlink "e1cib/list/Document.DebitNote"
+	And I go to line in "List" table
+		| 'Number' | 'Date'                 |
+		| '10'     | '31.10.2023 11:49:37'  |
+	And I select current line in "List" table
+	And I click "Post and close" button
+	Then user message window does not contain messages
+	Then I wait "Debit note * dated * *" window closing in "5" seconds
+
+Scenario: 963041 try post EmployeeCashAdvance (LimitedAccess)
+	And I close all client application windows
+	Given I open hyperlink "e1cib/list/Document.EmployeeCashAdvance"
+	And I go to line in "List" table
+		| 'Number' | 'Date'                 |
+		| '10'     | '31.10.2023 11:51:24'  |
+	And I select current line in "List" table
+	And I click "Post and close" button
+	Then user message window does not contain messages
+	Then I wait "Employee cash advance * dated * *" window closing in "5" seconds
+
+Scenario: 963041 try post ForeignCurrencyRevaluation (LimitedAccess)
+	And I close all client application windows
+	Given I open hyperlink "e1cib/list/Document.ForeignCurrencyRevaluation"
+	And I go to line in "List" table
+		| 'Number'| 'Date'                 |
+		| '4'     | '31.10.2023 11:51:47'  |
+	And I select current line in "List" table
+	And I click "Post and close" button
+	Then user message window does not contain messages
+	Then I wait "Foreign currency revaluation * dated * *" window closing in "5" seconds
+
+Scenario: 963041 try post IncomingPaymentOrder (LimitedAccess)
+	And I close all client application windows
+	Given I open hyperlink "e1cib/list/Document.IncomingPaymentOrder"
+	And I go to line in "List" table
+		| 'Number' | 'Date'                 |
+		| '10'     | '31.10.2023 11:54:57'  |
+	And I select current line in "List" table
+	And I click "Post and close" button
+	Then user message window does not contain messages
+	Then I wait "Incoming payment order * dated * *" window closing in "5" seconds
+
+Scenario: 963041 try post MoneyTransfer (LimitedAccess)
+	And I close all client application windows
+	Given I open hyperlink "e1cib/list/Document.MoneyTransfer"
+	And I go to line in "List" table
+		| 'Number' | 'Date'                 |
+		| '244'    | '31.10.2023 11:54:30'  |
+	And I select current line in "List" table
+	And I click "Post and close" button
+	Then user message window does not contain messages
+	Then I wait "Money transfer * dated * *" window closing in "5" seconds
+
+Scenario: 963041 try post OutgoingPaymentOrder (LimitedAccess)
+	And I close all client application windows
+	Given I open hyperlink "e1cib/list/Document.OutgoingPaymentOrder"
+	And I go to line in "List" table
+		| 'Number' | 'Date'                 |
+		| '28'     | '31.10.2023 11:55:21'  |
+	And I select current line in "List" table
+	And I click "Post and close" button
+	Then user message window does not contain messages
+	Then I wait "Outgoing payment order * dated * *" window closing in "5" seconds
+
+Scenario: 963041 try post ReconciliationStatement (LimitedAccess)
+	And I close all client application windows
+	Given I open hyperlink "e1cib/list/Document.ReconciliationStatement"
+	And I go to line in "List" table
+		| 'Number' | 'Date'                 |
+		| '10'     | '31.10.2023 11:47:36'  |
+	And I select current line in "List" table
+	And I click "Post and close" button
+	Then user message window does not contain messages
+	Then I wait "Reconciliation statement * dated * *" window closing in "5" seconds
+
+Scenario: 963041 try post VendorsAdvancesClosing (LimitedAccess)
+	And I close all client application windows
+	Given I open hyperlink "e1cib/list/Document.VendorsAdvancesClosing"
+	And I go to line in "List" table
+		| 'Number' | 'Date'                 |
+		| '10'     | '31.10.2023 11:50:47'  |
+	And I select current line in "List" table
+	And I click "Post and close" button
+	Then user message window does not contain messages
+	Then I wait "Vendors advances closing * dated * *" window closing in "5" seconds

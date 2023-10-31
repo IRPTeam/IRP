@@ -5197,24 +5197,17 @@ Scenario: 960132 check ProductionPlanning access rights (LimitedAccess)
 		| 'Document.ProductionPlanning Branch: Branch Only read access;Company: Company Read and Write Access;'      |
 		| 'Document.ProductionPlanning Branch: Branch Read and Write Access;Company: Company Only read access;'      |
 		| 'Document.ProductionPlanning Branch: Branch Only read access;Company: Company Only read access;'           |
-	
 		
-			
 Scenario: 960133 check ProductionPlanningClosing access rights (LimitedAccess)	
 	And I close all client application windows
 	Given I open hyperlink "e1cib/list/Document.ProductionPlanningClosing"
 	And "List" table became equal
-		| 'Description'                                                                                                                                                |
-		| 'Document.ProductionPlanningClosing Branch: Branch Read and Write Access;Company: Company Read and Write Access;BusinessUnit: Branch Read and Write Access;' |
-		| 'Document.ProductionPlanningClosing Branch: Branch Only read access;Company: Company Read and Write Access;BusinessUnit: Branch Read and Write Access;'      |
-		| 'Document.ProductionPlanningClosing Branch: Branch Read and Write Access;Company: Company Only read access;BusinessUnit: Branch Read and Write Access;'      |
-		| 'Document.ProductionPlanningClosing Branch: Branch Only read access;Company: Company Only read access;BusinessUnit: Branch Read and Write Access;'           |
-		| 'Document.ProductionPlanningClosing Branch: Branch Read and Write Access;Company: Company Read and Write Access;BusinessUnit: Branch Only read access;'      |
-		| 'Document.ProductionPlanningClosing Branch: Branch Only read access;Company: Company Read and Write Access;BusinessUnit: Branch Only read access;'           |
-		| 'Document.ProductionPlanningClosing Branch: Branch Read and Write Access;Company: Company Only read access;BusinessUnit: Branch Only read access;'           |
-		| 'Document.ProductionPlanningClosing Branch: Branch Only read access;Company: Company Only read access;BusinessUnit: Branch Only read access;'                |
+		| 'Description'                                                                                                     |
+		| 'Document.ProductionPlanningClosing Branch: Branch Read and Write Access;Company: Company Read and Write Access;' |
+		| 'Document.ProductionPlanningClosing Branch: Branch Only read access;Company: Company Read and Write Access;'      |
+		| 'Document.ProductionPlanningClosing Branch: Branch Read and Write Access;Company: Company Only read access;'      |
+		| 'Document.ProductionPlanningClosing Branch: Branch Only read access;Company: Company Only read access;'           |
 	
-			
 Scenario: 960134 check ProductionPlanningCorrection access rights (LimitedAccess)	
 	And I close all client application windows
 	Given I open hyperlink "e1cib/list/Document.ProductionPlanningCorrection"

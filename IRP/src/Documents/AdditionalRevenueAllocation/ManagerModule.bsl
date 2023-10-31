@@ -112,17 +112,8 @@ Procedure PostingCheckBeforeWrite(Ref, Cancel, PostingMode, Parameters, AddInfo 
 	BatchKeysInfo.FillValues(Enums.BatchDirection.Receipt, "Direction");
 	Tables.T6020S_BatchKeysInfo = BatchKeysInfo;
 
-	OtherPeriodsRevenuesMetadata    = Parameters.Object.RegisterRecords.R6080T_OtherPeriodsRevenues.Metadata();
-	BatchRevenueAllocationInfoMetadata = Parameters.Object.RegisterRecords.T6070S_BatchRevenueAllocationInfo.Metadata();
-	If Parameters.Property("MultiCurrencyExcludePostingDataTables") Then
-		Parameters.MultiCurrencyExcludePostingDataTables.Add(OtherPeriodsRevenuesMetadata);
-		Parameters.MultiCurrencyExcludePostingDataTables.Add(BatchRevenueAllocationInfoMetadata);
-	Else
-		ArrayOfMultiCurrencyExcludePostingDataTables = New Array;
-		ArrayOfMultiCurrencyExcludePostingDataTables.Add(OtherPeriodsRevenuesMetadata);
-		ArrayOfMultiCurrencyExcludePostingDataTables.Add(BatchRevenueAllocationInfoMetadata);
-		Parameters.Insert("MultiCurrencyExcludePostingDataTables", ArrayOfMultiCurrencyExcludePostingDataTables);
-	EndIf;
+	CurrenciesServer.ExcludePostingDataTable(Parameters, Parameters.Object.RegisterRecords.R6080T_OtherPeriodsRevenues.Metadata());
+	CurrenciesServer.ExcludePostingDataTable(Parameters, Parameters.Object.RegisterRecords.T6070S_BatchRevenueAllocationInfo.Metadata());	
 EndProcedure
 
 Function PostingGetPostingDataTables(Ref, Cancel, PostingMode, Parameters, AddInfo = Undefined) Export

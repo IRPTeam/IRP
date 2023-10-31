@@ -27,4 +27,9 @@ Procedure CreateDocuments(Command)
 	OpenForm("Document.JournalEntry.Form.CreateDocuments", , ThisObject, , , , , FormWindowOpeningMode.LockOwnerWindow);
 EndProcedure
 
+&AtClient
+Procedure UpdateAnalytics(Command)
+	OpenForm("Document.JournalEntry.Form.UpdateAnalytics", , ThisObject, , , , , FormWindowOpeningMode.LockOwnerWindow);
+EndProcedure
+
 #EndRegion

@@ -76,15 +76,8 @@ Function PostingGetDocumentDataTables(Ref, Cancel, PostingMode, Parameters, AddI
 	Parameters.Insert("PostingDataTables", PostingDataTables);
 	CurrenciesServer.PreparePostingDataTables(Parameters, CurrencyTable, AddInfo);
 
-	BatchKeysInfoMetadata = Parameters.Object.RegisterRecords.T6020S_BatchKeysInfo.Metadata();
-	If Parameters.Property("MultiCurrencyExcludePostingDataTables") Then
-		Parameters.MultiCurrencyExcludePostingDataTables.Add(BatchKeysInfoMetadata);
-	Else
-		ArrayOfMultiCurrencyExcludePostingDataTables = New Array;
-		ArrayOfMultiCurrencyExcludePostingDataTables.Add(BatchKeysInfoMetadata);
-		Parameters.Insert("MultiCurrencyExcludePostingDataTables", ArrayOfMultiCurrencyExcludePostingDataTables);
-	EndIf;
-
+	CurrenciesServer.ExcludePostingDataTable(Parameters, Parameters.Object.RegisterRecords.T6020S_BatchKeysInfo.Metadata());
+	
 	BatchKeysInfo_DataTable = Parameters.PostingDataTables.Get(
 		Parameters.Object.RegisterRecords.T6020S_BatchKeysInfo).RecordSet;
 	BatchKeysInfo_DataTableGrouped = BatchKeysInfo_DataTable.CopyColumns();

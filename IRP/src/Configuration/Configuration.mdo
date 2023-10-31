@@ -596,6 +596,7 @@
   <commonModules>CommonModule.DocFixedAssetTransferClient</commonModules>
   <commonModules>CommonModule.DocModernizationOfFixedAssetServer</commonModules>
   <commonModules>CommonModule.DocModernizationOfFixedAssetClient</commonModules>
+  <commonModules>CommonModule.OffsetOfAdvancesServer</commonModules>
   <commonAttributes>CommonAttribute.Author</commonAttributes>
   <commonAttributes>CommonAttribute.Branch</commonAttributes>
   <commonAttributes>CommonAttribute.Description</commonAttributes>
@@ -740,6 +741,7 @@
   <commonCommands>CommonCommand.UpdateAllUserRoles</commonCommands>
   <commonCommands>CommonCommand.OpenPartnersEmployee</commonCommands>
   <commonCommands>CommonCommand.OpenFixedAssets</commonCommands>
+  <commonCommands>CommonCommand.OpenAccountingRecords</commonCommands>
   <commandGroups>CommandGroup.Service</commandGroups>
   <commandGroups>CommandGroup.Print</commandGroups>
   <commandGroups>CommandGroup.Fiscalization</commandGroups>
@@ -1190,6 +1192,10 @@
   <informationRegisters>InformationRegister.T1020S_Cache</informationRegisters>
   <informationRegisters>InformationRegister.T8510S_FixedAssetsInfo</informationRegisters>
   <informationRegisters>InformationRegister.T8515S_FixedAssetsLocation</informationRegisters>
+  <informationRegisters>InformationRegister.T9050S_AccountingRowAnalytics</informationRegisters>
+  <informationRegisters>InformationRegister.T9051S_AccountingExtDimensions</informationRegisters>
+  <informationRegisters>InformationRegister.T2011S_TransactionsCurrencyRevaluation</informationRegisters>
+  <informationRegisters>InformationRegister.T2012S_AdvancesCurrencyRevaluation</informationRegisters>
   <accumulationRegisters>AccumulationRegister.CashInTransit</accumulationRegisters>
   <accumulationRegisters>AccumulationRegister.R1001T_Purchases</accumulationRegisters>
   <accumulationRegisters>AccumulationRegister.R1002T_PurchaseReturns</accumulationRegisters>

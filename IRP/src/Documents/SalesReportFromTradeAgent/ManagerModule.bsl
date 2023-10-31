@@ -16,15 +16,8 @@ Function PostingGetDocumentDataTables(Ref, Cancel, PostingMode, Parameters, AddI
 
 	Tables.Insert("CustomersTransactions", PostingServer.GetQueryTableByName("CustomersTransactions", Parameters));
 
-	BatchKeysInfoMetadata = Parameters.Object.RegisterRecords.T6020S_BatchKeysInfo.Metadata();
-	If Parameters.Property("MultiCurrencyExcludePostingDataTables") Then
-		Parameters.MultiCurrencyExcludePostingDataTables.Add(BatchKeysInfoMetadata);
-	Else
-		ArrayOfMultiCurrencyExcludePostingDataTables = New Array;
-		ArrayOfMultiCurrencyExcludePostingDataTables.Add(BatchKeysInfoMetadata);
-		Parameters.Insert("MultiCurrencyExcludePostingDataTables", ArrayOfMultiCurrencyExcludePostingDataTables);
-	EndIf;
-
+	CurrenciesServer.ExcludePostingDataTable(Parameters, Parameters.Object.RegisterRecords.T6020S_BatchKeysInfo.Metadata());
+	
 	Return Tables;
 EndFunction
 

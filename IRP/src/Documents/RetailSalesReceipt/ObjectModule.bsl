@@ -20,10 +20,8 @@ Procedure BeforeWrite(Cancel, WriteMode, PostingMode)
 	CurrenciesClientServer.DeleteRowsByKeyFromCurrenciesTable(ThisObject.Currencies);
 	CurrenciesServer.UpdateCurrencyTable(Parameters, ThisObject.Currencies);
 
-	If FOServer.IsUseAccounting() And WriteMode = DocumentWriteMode.Posting Then
-		AccountingClientServer.UpdateAccountingTables(ThisObject, "ItemList");
-	EndIf;
-
+	ThisObject.AdditionalProperties.Insert("WriteMode", WriteMode);
+	
 	ThisObject.DocumentAmount = ThisObject.ItemList.Total("TotalAmount");
 	
 	ValuesBeforeWrite = New Structure();
@@ -55,6 +53,11 @@ Procedure OnWrite(Cancel)
 		EndIf;
 	EndIf;
 	RowIDInfoPrivileged.OnWrite_RowID(ThisObject, Cancel);
+	
+	WriteMode = CommonFunctionsClientServer.GetFromAddInfo(ThisObject.AdditionalProperties, "WriteMode");
+	If FOServer.IsUseAccounting() And WriteMode = DocumentWriteMode.Posting Then
+		AccountingServer.OnWrite(ThisObject, Cancel);
+	EndIf;
 EndProcedure
 
 Procedure BeforeDelete(Cancel)

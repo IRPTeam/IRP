@@ -12,6 +12,9 @@ Procedure OnCreateAtServer(Cancel, StandardProcessing)
 		ThisObject.LedgerType = Parameters.ArrayOfLedgerTypes[0];
 	EndIf;
 	
+	ThisObject.AccountingRowAnalytics.Load(Parameters.AccountingRowAnalytics.Unload());
+	ThisObject.AccountingExtDimensions.Load(Parameters.AccountingExtDimensions.Unload());
+	
 	FillAccountingAnalytics(Parameters.AccountingAnalytics);
 EndProcedure
 
@@ -254,9 +257,26 @@ EndProcedure
 
 &AtServer
 Function GetDefaultAccountingAnalytics(Val Object, MainTableName, RowKey, Filter_LedgerType, IgnoreFixed)
-	AccountingClientServer.UpdateAccountingTables(Object, MainTableName, Filter_LedgerType, IgnoreFixed);
+	_AccountingRowAnalytics = ThisObject.AccountingRowAnalytics.Unload();
+	_AccountingExtDimensions = ThisObject.AccountingExtDimensions.Unload();
+	
+	AccountingClientServer.UpdateAccountingTables(Object, 
+												  _AccountingRowAnalytics, 
+												  _AccountingExtDimensions, 
+												  MainTableName, 
+												  Filter_LedgerType, 
+												  IgnoreFixed);
+	
+	ThisObject.AccountingRowAnalytics.Load(_AccountingRowAnalytics);
+	ThisObject.AccountingExtDimensions.Load(_AccountingExtDimensions);
+	
 	CurrentData = New Structure("Key" , RowKey);
-	Result = AccountingClientServer.GetParametersEditAccounting(Object, CurrentData, MainTableName, Filter_LedgerType);
+	Result = AccountingClientServer.GetParametersEditAccounting(Object,
+																ThisObject.AccountingRowAnalytics,
+																ThisObject.AccountingExtDimensions, 
+																CurrentData, 
+																MainTableName, 
+																Filter_LedgerType);
 	Return Result;
 EndFunction
 

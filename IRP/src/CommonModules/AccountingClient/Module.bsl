@@ -1,6 +1,10 @@
 
 Procedure OpenFormEditAccounting(Object, Form, CurrentData, TableName) Export	
-	FormParameters = AccountingClientServer.GetParametersEditAccounting(Object, CurrentData, TableName);
+	FormParameters = AccountingClientServer.GetParametersEditAccounting(Object,
+											                            Form.AccountingRowAnalytics,
+											                            Form.AccountingExtDimensions, 
+																		CurrentData, 
+																		TableName);
 	NotifyParameters = New Structure();
 	NotifyParameters.Insert("Object", Object);
 	NotifyParameters.Insert("Form"  , Form);
@@ -41,11 +45,11 @@ Procedure EditAccounting(Result, AdditionalParameters) Export
 	DebitType = PredefinedValue("Enum.AccountingAnalyticTypes.Debit");
 	CreditType = PredefinedValue("Enum.AccountingAnalyticTypes.Credit");
 	
-	Object.AccountingRowAnalytics.Clear();
-	Object.AccountingExtDimensions.Clear();
+	Form.AccountingRowAnalytics.Clear();
+	Form.AccountingExtDimensions.Clear();
 	
 	For Each Row In Result.AccountingAnalytics Do
-		NewRow = Object.AccountingRowAnalytics.Add();
+		NewRow = Form.AccountingRowAnalytics.Add();
 		NewRow.Key = Row.Key;
 		NewRow.IsFixed = Row.IsFixed;
 		NewRow.Operation     = Row.Operation;
@@ -53,13 +57,13 @@ Procedure EditAccounting(Result, AdditionalParameters) Export
 		NewRow.AccountDebit  = Row.AccountDebit;
 		NewRow.AccountCredit = Row.AccountCredit;
 		
-		AddExtDimensionRow(Object, Row, DebitType, Row.ExtDimensionTypeDr1, Row.ExtDimensionDr1);
-		AddExtDimensionRow(Object, Row, DebitType, Row.ExtDimensionTypeDr2, Row.ExtDimensionDr2);
-		AddExtDimensionRow(Object, Row, DebitType, Row.ExtDimensionTypeDr3, Row.ExtDimensionDr3);
+		AddExtDimensionRow(Object, Form, Row, DebitType, Row.ExtDimensionTypeDr1, Row.ExtDimensionDr1);
+		AddExtDimensionRow(Object, Form, Row, DebitType, Row.ExtDimensionTypeDr2, Row.ExtDimensionDr2);
+		AddExtDimensionRow(Object, Form, Row, DebitType, Row.ExtDimensionTypeDr3, Row.ExtDimensionDr3);
 		
-		AddExtDimensionRow(Object, Row, CreditType, Row.ExtDimensionTypeCr1, Row.ExtDimensionCr1);
-		AddExtDimensionRow(Object, Row, CreditType, Row.ExtDimensionTypeCr2, Row.ExtDimensionCr2);
-		AddExtDimensionRow(Object, Row, CreditType, Row.ExtDimensionTypeCr3, Row.ExtDimensionCr3);
+		AddExtDimensionRow(Object, Form, Row, CreditType, Row.ExtDimensionTypeCr1, Row.ExtDimensionCr1);
+		AddExtDimensionRow(Object, Form, Row, CreditType, Row.ExtDimensionTypeCr2, Row.ExtDimensionCr2);
+		AddExtDimensionRow(Object, Form, Row, CreditType, Row.ExtDimensionTypeCr3, Row.ExtDimensionCr3);
 	EndDo;
 EndProcedure
 
@@ -73,11 +77,11 @@ Procedure SelectLedgerType(Result, AdditionalParameters) Export
 		Result.LedgerTypeRef);
 EndProcedure
 
-Procedure AddExtDimensionRow(Object, AnalyticRow, AnalyticType, ExtDimType, ExtDim)
+Procedure AddExtDimensionRow(Object, Form, AnalyticRow, AnalyticType, ExtDimType, ExtDim)
 	If Not ValueIsFilled(ExtDim) Then
 		Return;
 	EndIf;
-	NewRow = Object.AccountingExtDimensions.Add();
+	NewRow = Form.AccountingExtDimensions.Add();
 	NewRow.Key = AnalyticRow.Key;
 	NewRow.Operation    = AnalyticRow.Operation;
 	NewRow.LedgerType   = AnalyticRow.LedgerType;

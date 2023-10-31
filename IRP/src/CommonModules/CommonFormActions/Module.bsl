@@ -133,3 +133,14 @@ Procedure OpenObjectForm(Field, FieldName, Ref, StandardProcessing) Export
 		OpenForm(CommonFormActionsServer.GetMetadataFullName(Ref) + ".ObjectForm", OpenParameters);
 	EndIf;	
 EndProcedure
+
+Procedure ExpandTree(Tree, TreeRows) Export
+	If Not Tree.Visible Then
+		Return;
+	EndIf;
+	For Each ItemTreeRows In TreeRows Do
+		Tree.Expand(ItemTreeRows.GetID());
+		ExpandTree(Tree, ItemTreeRows.GetItems());
+	EndDo;
+EndProcedure
+

@@ -78,10 +78,9 @@ EndProcedure
 
 &AtClient
 Procedure ExpandAllTrees() Export
-	RowIDInfoClient.ExpandTree(Items.BasisesTree, ThisObject.BasisesTree.GetItems());
-	RowIDInfoClient.ExpandTree(Items.BasisesTreeReverse, ThisObject.BasisesTreeReverse.GetItems());
-	
-	RowIDInfoClient.ExpandTree(Items.ResultsTree, ThisObject.ResultsTree.GetItems());
+	CommonFormActions.ExpandTree(Items.BasisesTree, ThisObject.BasisesTree.GetItems());
+	CommonFormActions.ExpandTree(Items.BasisesTreeReverse, ThisObject.BasisesTreeReverse.GetItems());
+	CommonFormActions.ExpandTree(Items.ResultsTree, ThisObject.ResultsTree.GetItems());
 	SetButtonsEnabled();
 EndProcedure
 

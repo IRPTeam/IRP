@@ -14,15 +14,9 @@ Function PostingGetDocumentDataTables(Ref, Cancel, PostingMode, Parameters, AddI
 	Parameters.Insert("QueryParameters", GetAdditionalQueryParameters(Ref));
 	PostingServer.ExecuteQuery(Ref, QueryArray, Parameters);
 
-	BatchKeysInfoMetadata = Parameters.Object.RegisterRecords.T6020S_BatchKeysInfo.Metadata();
-	If Parameters.Property("MultiCurrencyExcludePostingDataTables") Then
-		Parameters.MultiCurrencyExcludePostingDataTables.Add(BatchKeysInfoMetadata);
-	Else
-		ArrayOfMultiCurrencyExcludePostingDataTables = New Array;
-		ArrayOfMultiCurrencyExcludePostingDataTables.Add(BatchKeysInfoMetadata);
-		Parameters.Insert("MultiCurrencyExcludePostingDataTables", ArrayOfMultiCurrencyExcludePostingDataTables);
-	EndIf;
-
+	CurrenciesServer.ExcludePostingDataTable(Parameters, Parameters.Object.RegisterRecords.T6020S_BatchKeysInfo.Metadata());
+	
+	AccountingServer.CreateAccountingDataTables(Ref, Cancel, PostingMode, Parameters, AddInfo);
 	Return Tables;
 EndFunction
 
@@ -1321,7 +1315,7 @@ Function T1050T_AccountingQuantities()
 	Return "SELECT
 		   |	ItemList.Period,
 		   |	ItemList.Key AS RowKey,
-		   |	VALUE(Catalog.AccountingOperations.RetailSalesReceipt_DR_R5022T_CR_R4050B) AS Operation,
+		   |	VALUE(Catalog.AccountingOperations.RetailSalesReceipt_DR_R5022T_Expenses_CR_R4050B_StockInventory) AS Operation,
 		   |	ItemList.Quantity
 		   |INTO T1050T_AccountingQuantities
 		   |FROM
@@ -1330,7 +1324,7 @@ EndFunction
 
 Function GetAccountingAnalytics(Parameters) Export
 	Operations = Catalogs.AccountingOperations;
-	If Parameters.Operation = Operations.RetailSalesReceipt_DR_R5022T_CR_R4050B Then
+	If Parameters.Operation = Operations.RetailSalesReceipt_DR_R5022T_Expenses_CR_R4050B_StockInventory Then
 		Return GetAnalytics_DR_R5022T_CR_R4050B(Parameters); // Expenses (landed cost) - Stock inventory
 	EndIf;
 	Return Undefined;
@@ -1362,7 +1356,7 @@ Function GetAnalytics_DR_R5022T_CR_R4050B(Parameters)
 EndFunction
 
 Function GetHintDebitExtDimension(Parameters, ExtDimensionType, Value) Export
-	If Parameters.Operation = Catalogs.AccountingOperations.RetailSalesReceipt_DR_R5022T_CR_R4050B Then
+	If Parameters.Operation = Catalogs.AccountingOperations.RetailSalesReceipt_DR_R5022T_Expenses_CR_R4050B_StockInventory Then
 
 		If ExtDimensionType.ValueType.Types().Find(Type("CatalogRef.ExpenseAndRevenueTypes")) <> Undefined Then
 			Return Parameters.ObjectData.Company.LandedCostExpenseType;
@@ -1378,7 +1372,7 @@ Function GetHintDebitExtDimension(Parameters, ExtDimensionType, Value) Export
 EndFunction
 
 Function GetHintCreditExtDimension(Parameters, ExtDimensionType, Value) Export
-	If Parameters.Operation = Catalogs.AccountingOperations.RetailSalesReceipt_DR_R5022T_CR_R4050B
+	If Parameters.Operation = Catalogs.AccountingOperations.RetailSalesReceipt_DR_R5022T_Expenses_CR_R4050B_StockInventory
 		And ExtDimensionType.ValueType.Types().Find(Type("CatalogRef.Items")) <> Undefined Then
 		Return Parameters.RowData.ItemKey.Item;
 	EndIf;

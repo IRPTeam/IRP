@@ -8368,11 +8368,6 @@ Procedure ApplyFilterSet_RGR_ForRRR(Query)
 	|					THEN RowRef.CompanyReturn = &CompanyReturn
 	|				ELSE FALSE
 	|			END
-//	|			AND CASE
-//	|				WHEN &Filter_BranchReturn
-//	|					THEN RowRef.BranchReturn = &BranchReturn
-//	|				ELSE FALSE
-//	|			END
 	|			AND CASE
 	|				WHEN &Filter_PartnerSales
 	|					THEN RowRef.PartnerSales = &PartnerSales

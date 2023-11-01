@@ -791,12 +791,6 @@
 		<right>
 			<name>Read</name>
 			<value>true</value>
-			<restrictionByCondition>
-				<condition>#AccessRegisters(
-	"Company", "", "", "", "",
-	"OAR.Value1 = Table.Object.Company"
-)</condition>
-			</restrictionByCondition>
 		</right>
 		<right>
 			<name>View</name>

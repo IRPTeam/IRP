@@ -12,8 +12,7 @@ EndProcedure
 
 Function GetChoiceDataTable(Parameters)
 	Filter = "
-			 |	AND (Table.Item = &Item
-			 |	OR Table.Item = VALUE(Catalog.Items.EmptyRef))
+			 |	AND (Table.Item = &Item or  Table.Ref = &Unit)
 			 |";
 	Settings = New Structure();
 	Settings.Insert("MetadataObject", Metadata.Catalogs.Units);
@@ -33,11 +32,20 @@ Function GetChoiceDataTable(Parameters)
 		Query.SetParameter(Filter.Key, Filter.Value);
 	EndDo;
 	
+	UnitParameter = EmptyRef();
+	If Parameters.Filter.Property("Item") And ValueIsFilled(Parameters.Filter.Item) Then
+		UnitParameter = Parameters.Filter.Item.Unit;
+	EndIf;
+	Query.SetParameter("Unit", UnitParameter);
+	
 	// parameters search by code
 	SearchStringNumber = CommonFunctionsClientServer.GetSearchStringNumber(Parameters.SearchString);
 	Query.SetParameter("SearchStringNumber", SearchStringNumber);
+	
+	QueryResult = Query.Execute();
+	QueryTable = QueryResult.Unload();
 
-	Return Query.Execute().Unload();	
+	Return QueryTable;	
 EndFunction
 
 Function GetUnitFactor(FromUnit, ToUnit = Undefined) Export

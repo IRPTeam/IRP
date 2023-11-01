@@ -16,15 +16,9 @@ Function PostingGetDocumentDataTables(Ref, Cancel, PostingMode, Parameters, AddI
 
 	Tables.Insert("CustomersTransactions", PostingServer.GetQueryTableByName("CustomersTransactions", Parameters));
 
-	BatchKeysInfoMetadata = Parameters.Object.RegisterRecords.T6020S_BatchKeysInfo.Metadata();
-	If Parameters.Property("MultiCurrencyExcludePostingDataTables") Then
-		Parameters.MultiCurrencyExcludePostingDataTables.Add(BatchKeysInfoMetadata);
-	Else
-		ArrayOfMultiCurrencyExcludePostingDataTables = New Array;
-		ArrayOfMultiCurrencyExcludePostingDataTables.Add(BatchKeysInfoMetadata);
-		Parameters.Insert("MultiCurrencyExcludePostingDataTables", ArrayOfMultiCurrencyExcludePostingDataTables);
-	EndIf;
-
+	CurrenciesServer.ExcludePostingDataTable(Parameters, Parameters.Object.RegisterRecords.T6020S_BatchKeysInfo.Metadata());
+	
+	AccountingServer.CreateAccountingDataTables(Ref, Cancel, PostingMode, Parameters, AddInfo);
 	Return Tables;
 EndFunction
 
@@ -135,10 +129,6 @@ Function GetAdditionalQueryParameters(Ref)
 	Return StrParams;
 EndFunction
 
-#EndRegion
-
-#Region Posting_SourceTable
-
 Function GetQueryTextsSecondaryTables()
 	QueryArray = New Array;
 	QueryArray.Add(ItemList());
@@ -152,6 +142,43 @@ Function GetQueryTextsSecondaryTables()
 	QueryArray.Add(PostingServer.Exists_R2001T_Sales());
 	Return QueryArray;
 EndFunction
+
+Function GetQueryTextsMasterTables()
+	QueryArray = New Array;
+	QueryArray.Add(R2001T_Sales());
+	QueryArray.Add(R2005T_SalesSpecialOffers());
+	QueryArray.Add(R2011B_SalesOrdersShipment());
+	QueryArray.Add(R2012B_SalesOrdersInvoiceClosing());
+	QueryArray.Add(R2013T_SalesOrdersProcurement());
+	QueryArray.Add(R2020B_AdvancesFromCustomers());
+	QueryArray.Add(R2021B_CustomersTransactions());
+	QueryArray.Add(R2022B_CustomersPaymentPlanning());
+	QueryArray.Add(R2031B_ShipmentInvoicing());
+	QueryArray.Add(R2040B_TaxesIncoming());
+	QueryArray.Add(R4010B_ActualStocks());
+	QueryArray.Add(R4011B_FreeStocks());
+	QueryArray.Add(R4012B_StockReservation());
+	QueryArray.Add(R4014B_SerialLotNumber());
+	QueryArray.Add(R4032B_GoodsInTransitOutgoing());
+	QueryArray.Add(R4034B_GoodsShipmentSchedule());
+	QueryArray.Add(R4050B_StockInventory());
+	QueryArray.Add(R5010B_ReconciliationStatement());
+	QueryArray.Add(R5011B_CustomersAging());
+	QueryArray.Add(R5021T_Revenues());
+	QueryArray.Add(R6080T_OtherPeriodsRevenues());
+	QueryArray.Add(R8014T_ConsignorSales());
+	QueryArray.Add(R9010B_SourceOfOriginStock());
+	QueryArray.Add(T2015S_TransactionsInfo());
+	QueryArray.Add(T3010S_RowIDInfo());
+	QueryArray.Add(T6020S_BatchKeysInfo());
+	QueryArray.Add(T1040T_AccountingAmounts());
+	QueryArray.Add(T1050T_AccountingQuantities());
+	Return QueryArray;
+EndFunction
+
+#EndRegion
+
+#Region Posting_SourceTable
 
 Function ItemList()
 	Return "SELECT
@@ -369,37 +396,6 @@ EndFunction
 #EndRegion
 
 #Region Posting_MainTables
-
-Function GetQueryTextsMasterTables()
-	QueryArray = New Array;
-	QueryArray.Add(R2001T_Sales());
-	QueryArray.Add(R2005T_SalesSpecialOffers());
-	QueryArray.Add(R2011B_SalesOrdersShipment());
-	QueryArray.Add(R2012B_SalesOrdersInvoiceClosing());
-	QueryArray.Add(R2013T_SalesOrdersProcurement());
-	QueryArray.Add(R2020B_AdvancesFromCustomers());
-	QueryArray.Add(R2021B_CustomersTransactions());
-	QueryArray.Add(R2022B_CustomersPaymentPlanning());
-	QueryArray.Add(R2031B_ShipmentInvoicing());
-	QueryArray.Add(R2040B_TaxesIncoming());
-	QueryArray.Add(R4010B_ActualStocks());
-	QueryArray.Add(R4011B_FreeStocks());
-	QueryArray.Add(R4012B_StockReservation());
-	QueryArray.Add(R4014B_SerialLotNumber());
-	QueryArray.Add(R4032B_GoodsInTransitOutgoing());
-	QueryArray.Add(R4034B_GoodsShipmentSchedule());
-	QueryArray.Add(R4050B_StockInventory());
-	QueryArray.Add(R5010B_ReconciliationStatement());
-	QueryArray.Add(R5011B_CustomersAging());
-	QueryArray.Add(R5021T_Revenues());
-	QueryArray.Add(R6080T_OtherPeriodsRevenues());
-	QueryArray.Add(R8014T_ConsignorSales());
-	QueryArray.Add(R9010B_SourceOfOriginStock());
-	QueryArray.Add(T2015S_TransactionsInfo());
-	QueryArray.Add(T3010S_RowIDInfo());
-	QueryArray.Add(T6020S_BatchKeysInfo());
-	Return QueryArray;
-EndFunction
 
 Function R9010B_SourceOfOriginStock()
 	Return "SELECT
@@ -1265,5 +1261,196 @@ Function GetAccessKey(Obj) Export
 	AccessKeyMap.Insert("Store", CopyTable.UnloadColumn("Store"));
 	Return AccessKeyMap;
 EndFunction
+
+#EndRegion
+
+#Region Accounting
+
+Function T1040T_AccountingAmounts()
+	Return 
+		"SELECT
+		|	ItemList.Period,
+		|	ItemList.Key AS RowKey,
+		|	ItemList.Currency,
+		|	ItemList.Amount AS Amount,
+		|	VALUE(Catalog.AccountingOperations.SalesInvoice_DR_R2021B_CustomersTransactions_CR_R5021T_Revenues) AS Operation,
+		|	UNDEFINED AS AdvancesClosing
+		|INTO T1040T_AccountingAmounts
+		|FROM
+		|	ItemList AS ItemList
+		|WHERE
+		|	ItemList.IsSales
+		|
+		|UNION ALL
+		|
+		|SELECT
+		|	ItemList.Period,
+		|	ItemList.Key AS RowKey,
+		|	ItemList.Currency,
+		|	ItemList.TaxAmount,
+		|	VALUE(Catalog.AccountingOperations.SalesInvoice_DR_R5021T_Revenues_CR_R2040B_TaxesIncoming),
+		|	UNDEFINED
+		|FROM
+		|	ItemList as ItemList
+		|WHERE
+		|	ItemList.IsSales
+		|
+		|UNION ALL
+		|
+		|SELECT
+		|	T2010S_OffsetOfAdvances.Period,
+		|	T2010S_OffsetOfAdvances.Key AS RowKey,
+		|	T2010S_OffsetOfAdvances.Currency,
+		|	T2010S_OffsetOfAdvances.Amount,
+		|	VALUE(Catalog.AccountingOperations.SalesInvoice_DR_R2020B_AdvancesFromCustomers_CR_R2021B_CustomersTransactions),
+		|	T2010S_OffsetOfAdvances.Recorder
+		|FROM
+		|	InformationRegister.T2010S_OffsetOfAdvances AS T2010S_OffsetOfAdvances
+		|WHERE
+		|	T2010S_OffsetOfAdvances.Document = &Ref";
+EndFunction
+
+Function T1050T_AccountingQuantities()
+	Return 
+		"SELECT
+		|	ItemList.Period,
+		|	ItemList.Key AS RowKey,
+		|	VALUE(Catalog.AccountingOperations.SalesInvoice_DR_R5022T_Expenses_CR_R4050B_StockInventory) AS Operation,
+		|	ItemList.Quantity
+		|INTO T1050T_AccountingQuantities
+		|FROM
+		|	ItemList AS ItemList";
+EndFunction
+
+Function GetAccountingAnalytics(Parameters) Export
+	Operations = Catalogs.AccountingOperations;
+	
+	If Parameters.Operation = Operations.SalesInvoice_DR_R2021B_CustomersTransactions_CR_R5021T_Revenues
+		Or Parameters.Operation = Operations.SalesInvoice_DR_R2021B_CustomersTransactions_CR_R5021T_Revenues_CurrencyRevaluation Then
+		
+		Return GetAnalytics_RevenueFromSales(Parameters); // Customer transactions - Revenues
+	
+	ElsIf Parameters.Operation = Operations.SalesInvoice_DR_R5021T_Revenues_CR_R2040B_TaxesIncoming Then 
+		
+		Return GetAnalytics_VATOutgoing(Parameters); // Revenues - Tax outgoing
+	
+	ElsIf Parameters.Operation = Operations.SalesInvoice_DR_R2020B_AdvancesFromCustomers_CR_R2021B_CustomersTransactions
+		Or Parameters.Operation = Operations.SalesInvoice_DR_R2020B_AdvancesFromCustomers_CR_R2021B_CustomersTransactions_CurrencyRevaluation  Then
+			
+		Return GetAnalytics_OffsetOfAdvances(Parameters); // Offset of advances (Advances from customer - Customer transactions)
+		
+	ElsIf Parameters.Operation = Operations.SalesInvoice_DR_R5022T_Expenses_CR_R4050B_StockInventory Then
+		Return GetAnalytics_DR_R5022T_CR_R4050B(Parameters); // Expenses (landed cost) - Stock inventory
+	EndIf;
+	
+	Return Undefined;
+EndFunction
+
+#Region Accounting_Analytics
+
+// Customer transactions - Revenues
+Function GetAnalytics_RevenueFromSales(Parameters)
+	AccountingAnalytics = AccountingServer.GetAccountingAnalyticsResult(Parameters);
+	AccountParameters   = AccountingServer.GetAccountParameters(Parameters);
+
+	// Debit
+	Debit = AccountingServer.GetT9012S_AccountsPartner(AccountParameters, Parameters.ObjectData.Partner, Parameters.ObjectData.Agreement);
+	AccountingAnalytics.Debit = Debit.AccountTransactionsCustomer;
+	// Debit - Analytics
+	AdditionalAnalytics = New Structure();
+	AdditionalAnalytics.Insert("Partner", Parameters.ObjectData.Partner);
+	AccountingServer.SetDebitExtDimensions(Parameters, AccountingAnalytics, AdditionalAnalytics);
+	
+	// Credit
+	//Credit = AccountingServer.GetT9014S_AccountsExpenseRevenue(AccountParameters, Parameters.RowData.RevenueType);
+	//If ValueIsFilled(Credit.Account) Then
+		AccountingAnalytics.Credit = ChartsOfAccounts.Basic.FindByCode("REV-SALES");//Credit.Account;
+	//EndIf;
+	// Credit - Analytics
+	AccountingServer.SetCreditExtDimensions(Parameters, AccountingAnalytics);
+	Return AccountingAnalytics;
+EndFunction
+
+// Revenues - Taxes outgoing
+Function GetAnalytics_VATOutgoing(Parameters)
+	AccountingAnalytics = AccountingServer.GetAccountingAnalyticsResult(Parameters);
+	AccountParameters   = AccountingServer.GetAccountParameters(Parameters);
+		
+	// Debit
+	Debit = AccountingServer.GetT9014S_AccountsExpenseRevenue(AccountParameters, Parameters.RowData.RevenueType);
+	If ValueIsFilled(Debit.Account) Then
+		AccountingAnalytics.Debit = Debit.Account;
+	EndIf;
+	// Debit - Analytics
+	AccountingServer.SetDebitExtDimensions(Parameters, AccountingAnalytics);
+	
+	// Credit
+	Credit = AccountingServer.GetT9013S_AccountsTax(AccountParameters, Parameters.RowData.TaxInfo.Tax);
+	If ValueIsFilled(Credit.Account) Then
+		AccountingAnalytics.Credit = Credit.Account;
+	EndIf;
+	AccountingServer.SetCreditExtDimensions(Parameters, AccountingAnalytics, Parameters.RowData.TaxInfo);
+	
+	Return AccountingAnalytics;
+EndFunction
+
+// Offset of advances (Customer transactions - Advances from customer)
+Function GetAnalytics_OffsetOfAdvances(Parameters)
+	AccountingAnalytics = AccountingServer.GetAccountingAnalyticsResult(Parameters);
+	AccountParameters   = AccountingServer.GetAccountParameters(Parameters);
+	Accounts = AccountingServer.GetT9012S_AccountsPartner(AccountParameters, Parameters.ObjectData.Partner, Parameters.ObjectData.Agreement);
+
+	// Debit
+	If ValueIsFilled(Accounts.AccountAdvancesCustomer) Then
+		AccountingAnalytics.Debit = Accounts.AccountAdvancesCustomer;
+	EndIf;
+	AdditionalAnalytics = New Structure();
+	AdditionalAnalytics.Insert("Partner", Parameters.ObjectData.Partner);
+	AccountingServer.SetDebitExtDimensions(Parameters, AccountingAnalytics);
+
+	// Credit
+	If ValueIsFilled(Accounts.AccountTransactionsCustomer) Then
+		AccountingAnalytics.Credit = Accounts.AccountTransactionsCustomer;
+	EndIf;
+	AdditionalAnalytics = New Structure();
+	AdditionalAnalytics.Insert("Partner", Parameters.ObjectData.Partner);
+	AccountingServer.SetCreditExtDimensions(Parameters, AccountingAnalytics);
+	
+	Return AccountingAnalytics;
+EndFunction
+
+// Expenses (landed cost) - Stock inventory 
+Function GetAnalytics_DR_R5022T_CR_R4050B(Parameters)
+	AccountingAnalytics = AccountingServer.GetAccountingAnalyticsResult(Parameters);
+	AccountParameters   = AccountingServer.GetAccountParameters(Parameters);
+
+	// Debit
+	Debit = AccountingServer.GetT9014S_AccountsExpenseRevenue(AccountParameters, Parameters.ObjectData.Company.LandedCostExpenseType);
+	If ValueIsFilled(Debit.Account) Then
+		AccountingAnalytics.Debit = Debit.Account;
+	EndIf;
+	AdditionalAnalytics = New Structure();
+	AdditionalAnalytics.Insert("ExpenseType", Parameters.ObjectData.Company.LandedCostExpenseType);
+	AccountingServer.SetDebitExtDimensions(Parameters, AccountingAnalytics, AdditionalAnalytics);
+	
+	// Credit
+	Credit = AccountingServer.GetT9010S_AccountsItemKey(AccountParameters, Parameters.RowData.ItemKey);
+	If ValueIsFilled(Credit.Account) Then
+		AccountingAnalytics.Credit = Credit.Account;
+	EndIf;
+	AccountingServer.SetCreditExtDimensions(Parameters, AccountingAnalytics);
+
+	Return AccountingAnalytics;
+EndFunction
+
+Function GetHintDebitExtDimension(Parameters, ExtDimensionType, Value) Export
+	Return Value;
+EndFunction
+
+Function GetHintCreditExtDimension(Parameters, ExtDimensionType, Value) Export
+	Return Value;
+EndFunction
+
+#EndRegion
 
 #EndRegion

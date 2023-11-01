@@ -25,11 +25,12 @@ Function PostingGetDocumentDataTables(Ref, Cancel, PostingMode, Parameters, AddI
 	Query.SetParameter("QueryTable", QueryTablePaymentList);
 	QueryResults = Query.ExecuteBatch();
 
-	Tables.CashInTransit           = QueryResults[1].Unload();
+	Tables.CashInTransit = QueryResults[1].Unload();
 
 	QueryArray = GetQueryTextsSecondaryTables();
 	PostingServer.ExecuteQuery(Ref, QueryArray, Parameters);
 
+	AccountingServer.CreateAccountingDataTables(Ref, Cancel, PostingMode, Parameters, AddInfo);
 	Return Tables;
 EndFunction
 
@@ -927,7 +928,7 @@ Function T1040T_AccountingAmounts()
 		   |	PaymentList.Key AS Key,
 		   |	PaymentList.Currency,
 		   |	PaymentList.Amount,
-		   |	VALUE(Catalog.AccountingOperations.BankPayment_DR_R1020B_R1021B_CR_R3010B) AS Operation,
+		   |	VALUE(Catalog.AccountingOperations.BankPayment_DR_R1020B_AdvancesToVendors_R1021B_VendorsTransactions_CR_R3010B) AS Operation,
 		   |	UNDEFINED AS AdvancesClosing
 		   |INTO T1040T_AccountingAmounts
 		   |FROM
@@ -943,7 +944,7 @@ Function T1040T_AccountingAmounts()
 		   |	PaymentList.Key,
 		   |	PaymentList.Currency,
 		   |	PaymentList.Commission,
-		   |	VALUE(Catalog.AccountingOperations.BankPayment_DR_R5022T_CR_R3010B),
+		   |	VALUE(Catalog.AccountingOperations.BankPayment_DR_R5022T_Expenses_CR_R3010B_CashOnHand),
 		   |	UNDEFINED
 		   |FROM
 		   |	PaymentList AS PaymentList
@@ -958,7 +959,7 @@ Function T1040T_AccountingAmounts()
 		   |	OffsetOfAdvances.Key,
 		   |	OffsetOfAdvances.Currency,
 		   |	OffsetOfAdvances.Amount,
-		   |	VALUE(Catalog.AccountingOperations.BankPayment_DR_R1021B_CR_R1020B),
+		   |	VALUE(Catalog.AccountingOperations.BankPayment_R1021B_VendorsTransactions_CR_R1020B_AdvancesToVendors),
 		   |	OffsetOfAdvances.Recorder
 		   |FROM
 		   |	InformationRegister.T2010S_OffsetOfAdvances AS OffsetOfAdvances
@@ -967,12 +968,12 @@ Function T1040T_AccountingAmounts()
 EndFunction
 
 Function GetAccountingAnalytics(Parameters) Export
-	If Parameters.Operation = Catalogs.AccountingOperations.BankPayment_DR_R1020B_R1021B_CR_R3010B Then
-		Return GetAnalytics_DR_R1020B_R1021B_CR_3010B(Parameters); // Vendors transactions - Cash on hand
-	ElsIf Parameters.Operation = Catalogs.AccountingOperations.BankPayment_DR_R1021B_CR_R1020B Then
-		Return GetAnalytics_DR_R1021B_CR_R1020B(Parameters); // Vendors transactions - Advances to vendors 
-	ElsIf Parameters.Operation = Catalogs.AccountingOperations.BankPayment_DR_R5022T_CR_R3010B Then
-		Return GetAnalytics_DRr5022T_CR_3010B(Parameters); // Expenses - Cash on hand
+	If Parameters.Operation = Catalogs.AccountingOperations.BankPayment_DR_R1020B_AdvancesToVendors_R1021B_VendorsTransactions_CR_R3010B Then
+		Return GetAnalytics_PaymentToVendor(Parameters); // Vendors transactions - Cash on hand
+	ElsIf Parameters.Operation = Catalogs.AccountingOperations.BankPayment_R1021B_VendorsTransactions_CR_R1020B_AdvancesToVendors Then
+		Return GetAnalytics_OffsetOfAdvances(Parameters); // Vendors transactions - Advances to vendors 
+	ElsIf Parameters.Operation = Catalogs.AccountingOperations.BankPayment_DR_R5022T_Expenses_CR_R3010B_CashOnHand Then
+		Return GetAnalytics_BankCommission(Parameters); // Expenses - Cash on hand
 	EndIf;
 	Return Undefined;
 EndFunction
@@ -980,7 +981,7 @@ EndFunction
 #Region Accounting_Analytics
 
 // Vendors transactions - Cash on hand
-Function GetAnalytics_DR_R1020B_R1021B_CR_3010B(Parameters)
+Function GetAnalytics_PaymentToVendor(Parameters)
 	AccountingAnalytics = AccountingServer.GetAccountingAnalyticsResult(Parameters);
 	AccountParameters   = AccountingServer.GetAccountParameters(Parameters);
 
@@ -1003,12 +1004,14 @@ Function GetAnalytics_DR_R1020B_R1021B_CR_3010B(Parameters)
 		AccountingAnalytics.Credit = Credit.Account;
 	EndIf;
 	// Credit - Analytics
-	AccountingServer.SetCreditExtDimensions(Parameters, AccountingAnalytics);
+	AdditionalAnalytics = New Structure();
+	AdditionalAnalytics.Insert("Account", Parameters.ObjectData.Account);
+	AccountingServer.SetCreditExtDimensions(Parameters, AccountingAnalytics, AdditionalAnalytics);
 	Return AccountingAnalytics;
 EndFunction
 
 // Vendors transactions - Advances to vendors
-Function GetAnalytics_DR_R1021B_CR_R1020B(Parameters)
+Function GetAnalytics_OffsetOfAdvances(Parameters)
 	AccountingAnalytics = AccountingServer.GetAccountingAnalyticsResult(Parameters);
 	AccountParameters   = AccountingServer.GetAccountParameters(Parameters);
 
@@ -1029,7 +1032,7 @@ Function GetAnalytics_DR_R1021B_CR_R1020B(Parameters)
 EndFunction
 
 // Expenses - Cash on hand
-Function GetAnalytics_DRr5022T_CR_3010B(Parameters)
+Function GetAnalytics_BankCommission(Parameters)
 	AccountingAnalytics = AccountingServer.GetAccountingAnalyticsResult(Parameters);
 	AccountParameters   = AccountingServer.GetAccountParameters(Parameters);
 
@@ -1045,22 +1048,24 @@ Function GetAnalytics_DRr5022T_CR_3010B(Parameters)
 		AccountingAnalytics.Credit = Credit.Account;
 	EndIf;
 	// Credit - Analytics
-	AccountingServer.SetCreditExtDimensions(Parameters, AccountingAnalytics);
+	AdditionalAnalytics = New Structure();
+	AdditionalAnalytics.Insert("Account", Parameters.ObjectData.Account);
+	AccountingServer.SetCreditExtDimensions(Parameters, AccountingAnalytics, AdditionalAnalytics);
 	Return AccountingAnalytics;
 EndFunction
 
 Function GetHintDebitExtDimension(Parameters, ExtDimensionType, Value) Export
-	If Parameters.Operation = Catalogs.AccountingOperations.BankPayment_DR_R5022T_CR_R3010B And ExtDimensionType.ValueType.Types().Find(Type("CatalogRef.ExpenseAndRevenueTypes")) <> Undefined Then
+	If Parameters.Operation = Catalogs.AccountingOperations.BankPayment_DR_R5022T_Expenses_CR_R3010B_CashOnHand And ExtDimensionType.ValueType.Types().Find(Type("CatalogRef.ExpenseAndRevenueTypes")) <> Undefined Then
 		Return Parameters.RowData.ExpenseType;
 	EndIf;
-	If Parameters.Operation = Catalogs.AccountingOperations.BankPayment_DR_R5022T_CR_R3010B And ExtDimensionType.ValueType.Types().Find(Type("CatalogRef.BusinessUnits")) <> Undefined Then
+	If Parameters.Operation = Catalogs.AccountingOperations.BankPayment_DR_R5022T_Expenses_CR_R3010B_CashOnHand And ExtDimensionType.ValueType.Types().Find(Type("CatalogRef.BusinessUnits")) <> Undefined Then
 		Return Parameters.RowData.ProfitLossCenter;
 	EndIf;
 	Return Value;
 EndFunction
 
 Function GetHintCreditExtDimension(Parameters, ExtDimensionType, Value) Export
-	If (Parameters.Operation = Catalogs.AccountingOperations.BankPayment_DR_R1020B_R1021B_CR_R3010B Or Parameters.Operation = Catalogs.AccountingOperations.BankPayment_DR_R5022T_CR_R3010B)
+	If (Parameters.Operation = Catalogs.AccountingOperations.BankPayment_DR_R1020B_AdvancesToVendors_R1021B_VendorsTransactions_CR_R3010B Or Parameters.Operation = Catalogs.AccountingOperations.BankPayment_DR_R5022T_Expenses_CR_R3010B_CashOnHand)
 		And ExtDimensionType.ValueType.Types().Find(Type("CatalogRef.ExpenseAndRevenueTypes")) <> Undefined Then
 		Return Parameters.RowData.FinancialMovementType;
 	EndIf;

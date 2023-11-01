@@ -1,10 +1,7 @@
 
 &AtServer
 Procedure OnCreateAtServer(Cancel, StandardProcessing)
-	ArrayOfDocuments = New Array();
-	Docs = Metadata.Documents;
-	ArrayOfDocuments.Add(Docs.PurchaseInvoice);	
-	ArrayOfDocuments.Add(Docs.RetailSalesReceipt);
+	ArrayOfDocuments = AccountingServer.GetSupportedDocuments();
 	
 	For Each Doc In ArrayOfDocuments Do
 		NewRow = ThisObject.TableDocuments.Add();
@@ -59,8 +56,7 @@ Procedure CreateDocumentsAtServer(DocumentName)
 	|FROM
 	|	Document.%1 AS Doc
 	|WHERE
-	|	Doc.Posted
-	|	AND Doc.Date BETWEEN BEGINOFPERIOD(&StartDate, DAY) AND ENDOFPERIOD(&EndDate, DAY)
+	|	Doc.Date BETWEEN BEGINOFPERIOD(&StartDate, DAY) AND ENDOFPERIOD(&EndDate, DAY)
 	|	AND Doc.Company = &Company
 	|;
 	|

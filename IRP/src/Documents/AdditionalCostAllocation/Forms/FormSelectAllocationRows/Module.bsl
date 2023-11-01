@@ -56,7 +56,7 @@ EndProcedure
 
 &AtClient
 Procedure ExpandAllTrees() Export
-	RowIDInfoClient.ExpandTree(Items.ResultTree, ThisObject.ResultTree.GetItems());
+	CommonFormActions.ExpandTree(Items.ResultTree, ThisObject.ResultTree.GetItems());
 EndProcedure
 
 &AtClient
@@ -133,7 +133,7 @@ Procedure EditorOk(Command)
 		SaveRowsToResultTree(Document, ArrayOfRows);
 	EndIf;
 	ClearDocumentsWithOutRows();
-	RowIDInfoClient.ExpandTree(Items.ResultTree, ThisObject.ResultTree.GetItems());
+	CommonFormActions.ExpandTree(Items.ResultTree, ThisObject.ResultTree.GetItems());
 	Items.GroupRowEditor.CurrentPage = Items.GroupDocuments;
 EndProcedure
 

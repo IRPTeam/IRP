@@ -24,9 +24,10 @@ EndProcedure
 
 &AtClient
 Procedure OnOpen(Cancel)
-	SetSettings();
 	PictureViewerClient.UpdateObjectPictures(ThisObject, Object.Ref);
 	AddAttributesAndPropertiesClient.UpdateObjectAddAttributeHTML(ThisObject, Object.Ref);
+	SetSettings();
+	ChangingFormBySettings();
 EndProcedure
 
 &AtServer
@@ -63,10 +64,12 @@ EndProcedure
 
 &AtClient
 Async Procedure UpdateAddAttributesHTMLDocument()
-	HTMLWindow = PictureViewerClient.InfoDocumentComplete(Items.AddAttributeViewHTML);
-	JSON = AddAttributesAndPropertiesClient.AddAttributeInfoForHTML(Object.Ref, UUID);
-	HTMLWindow.clearAll();
-	HTMLWindow.fillData(JSON);
+	If Items.ViewAdditionalAttribute.Check Then
+		HTMLWindow = PictureViewerClient.InfoDocumentComplete(Items.AddAttributeViewHTML);
+		JSON = AddAttributesAndPropertiesClient.AddAttributeInfoForHTML(Object.Ref, UUID);
+		HTMLWindow.clearAll();
+		HTMLWindow.fillData(JSON);
+	EndIf;
 EndProcedure
 
 #EndRegion
@@ -76,6 +79,7 @@ EndProcedure
 &AtClient
 Procedure HTMLViewControl(Command)
 	PictureViewerClient.HTMLViewControl(ThisObject, Command.Name);
+	ChangingFormBySettings();
 	SaveSettings();
 EndProcedure
 
@@ -150,6 +154,19 @@ Procedure SetSettings()
 	PictureViewerClient.HTMLViewControl(ThisObject, "ViewAdditionalAttribute");
 EndProcedure
 
+&AtClient
+Procedure ChangingFormBySettings()
+	If Items.ViewPictures.Check Then
+		Items.GroupAllItems.Group = ChildFormItemsGroup.Vertical;
+		Items.GroupMainAttributes.Group = ChildFormItemsGroup.Vertical;
+		Items.GroupBottom.Group = ChildFormItemsGroup.Horizontal;
+	Else
+		Items.GroupAllItems.Group = ChildFormItemsGroup.Horizontal;
+		Items.GroupMainAttributes.Group = ChildFormItemsGroup.Horizontal;
+		Items.GroupBottom.Group = ChildFormItemsGroup.Vertical;
+	EndIf;
+EndProcedure	
+
 &AtServer
 Procedure SaveSettings()
 	NewSettings = New Structure;
@@ -174,6 +191,6 @@ Procedure RestoreSettings()
 		EndIf;
 	EndIf;
 
-EndProcedure	
+EndProcedure
 
 #EndRegion

@@ -1062,9 +1062,13 @@ Scenario: _092006 check serial lot number in the PurchaseInvoice
 			And I click the button named "FormCreate"
 			And I input "99098809009999" text in "Serial number" field
 			And I click "Save and close" button
+			Then there are lines in TestClient message log
+				|'Serial lot number is not unique, duplicate codes:[29]'|	
+			And I input "990988090099991" text in "Serial number" field
+			And I click "Save and close" button		
 		And I go to line in "List" table
 			| 'Owner'       | 'Serial number'     |
-			| '38/Yellow'   | '99098809009999'    |
+			| '38/Yellow'   | '990988090099991'    |
 		And I activate "Serial number" field in "List" table
 		And I click the button named "FormChoose"
 		And I activate "Quantity" field in "SerialLotNumbers" table
@@ -1077,7 +1081,7 @@ Scenario: _092006 check serial lot number in the PurchaseInvoice
 			| 'Boots'   | '38/18SD'    | '1,000'       |
 		And I select current line in "ItemList" table
 		When I Check the steps for Exception
-								| "And I click choice button of the attribute named "ItemListSerialLotNumbersPresentation" in "ItemList" table"         |
+			| "And I click choice button of the attribute named "ItemListSerialLotNumbersPresentation" in "ItemList" table"         |
 	* Post Purchase invoice and check movements in the register Register  "R4014 Serial lot numbers"
 		And I click the button named "FormPost"
 		And I delete "$$PurchaseInvoice092006$$" variable
@@ -1095,7 +1099,7 @@ Scenario: _092006 check serial lot number in the PurchaseInvoice
 			| 'Register  "R4014 Serial lot numbers"'   | ''              | ''                                | ''            | ''               | ''         | ''        | ''            | ''                     |
 			| ''                                       | 'Record type'   | 'Period'                          | 'Resources'   | 'Dimensions'     | ''         | ''        | ''            | ''                     |
 			| ''                                       | ''              | ''                                | 'Quantity'    | 'Company'        | 'Branch'   | 'Store'   | 'Item key'    | 'Serial lot number'    |
-			| ''                                       | 'Receipt'       | '$$DatePurchaseInvoice092006$$'   | '1'           | 'Main Company'   | '*'        | ''        | '38/Yellow'   | '99098809009999'       |
+			| ''                                       | 'Receipt'       | '$$DatePurchaseInvoice092006$$'   | '1'           | 'Main Company'   | '*'        | ''        | '38/Yellow'   | '990988090099991'       |
 		And I close all client application windows
 		
 	
@@ -1167,11 +1171,11 @@ Scenario: _0920061 check serial lot number controls in the PurchaseInvoice
 		And I click choice button of "Serial lot number" attribute in "SerialLotNumbers" table
 		* Create serial lot number for item
 			And I click the button named "FormCreate"
-			And I input "99098809009999" text in "Serial number" field
+			And I input "990988090099992" text in "Serial number" field
 			And I click "Save and close" button
 		And I go to line in "List" table
 			| 'Owner'       | 'Serial number'     |
-			| '38/Yellow'   | '99098809009999'    |
+			| '38/Yellow'   | '990988090099992'    |
 		And I activate "Serial number" field in "List" table
 		And I click the button named "FormChoose"
 		And I activate "Quantity" field in "SerialLotNumbers" table
@@ -1217,7 +1221,7 @@ Scenario: _0920061 check serial lot number controls in the PurchaseInvoice
 			And I click "Ok" button
 			And "ItemList" table became equal
 				| '#'    | 'Price type'                 | 'Item'        | 'Item key'     | 'Profit loss center'    | 'Dont calculate row'    | 'Tax amount'    | 'Unit'    | 'Serial lot numbers'                | 'Price'     | 'VAT'    | 'Offers amount'    | 'Total amount'    | 'Additional analytic'    | 'Internal supply request'    | 'Store'       | 'Delivery date'    | 'Quantity'    | 'Is additional item cost'    | 'Expense type'    | 'Purchase order'    | 'Detail'    | 'Sales order'    | 'Net amount'    | 'Use goods receipt'     |
-				| '1'    | 'en description is empty'    | 'Trousers'    | '38/Yellow'    | ''                      | 'No'                    | '244,07'        | 'pcs'     | '99098809009999; 99098809009908'    | '400,00'    | '18%'    | ''                 | '1 600,00'        | ''                       | ''                           | 'Store 01'    | ''                 | '4,000'       | 'No'                         | ''                | ''                  | ''          | ''               | '1 355,93'      | 'No'                    |
+				| '1'    | 'en description is empty'    | 'Trousers'    | '38/Yellow'    | ''                      | 'No'                    | '244,07'        | 'pcs'     | '990988090099992; 99098809009908'   | '400,00'    | '18%'    | ''                 | '1 600,00'        | ''                       | ''                           | 'Store 01'    | ''                 | '4,000'       | 'No'                         | ''                | ''                  | ''          | ''               | '1 355,93'      | 'No'                    |
 				| '2'    | 'en description is empty'    | 'Boots'       | '38/18SD'      | ''                      | 'No'                    | '106,78'        | 'pcs'     | ''                                  | '700,00'    | '18%'    | ''                 | '700,00'          | ''                       | ''                           | 'Store 01'    | ''                 | '1,000'       | 'No'                         | ''                | ''                  | ''          | ''               | '593,22'        | 'No'                    |
 		* Change serial/lot numbers quantity to 3
 			And I go to line in "ItemList" table
@@ -1244,7 +1248,7 @@ Scenario: _0920061 check serial lot number controls in the PurchaseInvoice
 			| 'Register  "R4014 Serial lot numbers"'   | ''              | ''                                 | ''            | ''               | ''         | ''        | ''            | ''                     |
 			| ''                                       | 'Record type'   | 'Period'                           | 'Resources'   | 'Dimensions'     | ''         | ''        | ''            | ''                     |
 			| ''                                       | ''              | ''                                 | 'Quantity'    | 'Company'        | 'Branch'   | 'Store'   | 'Item key'    | 'Serial lot number'    |
-			| ''                                       | 'Receipt'       | '$$DatePurchaseInvoice0920061$$'   | '1'           | 'Main Company'   | '*'        | ''        | '38/Yellow'   | '99098809009999'       |
+			| ''                                       | 'Receipt'       | '$$DatePurchaseInvoice0920061$$'   | '1'           | 'Main Company'   | '*'        | ''        | '38/Yellow'   | '990988090099992'      |
 			| ''                                       | 'Receipt'       | '$$DatePurchaseInvoice0920061$$'   | '2'           | 'Main Company'   | '*'        | ''        | '38/Yellow'   | '99098809009908'       |
 		And I close current window
 	* Check the message to the user when the serial number was not filled in
@@ -1367,11 +1371,11 @@ Scenario: _092007 check serial lot number in the PurchaseReturn
 		And I click choice button of "Serial lot number" attribute in "SerialLotNumbers" table
 		* Create serial lot number for item
 			And I click the button named "FormCreate"
-			And I input "99098809009999" text in "Serial number" field
+			And I input "990988090099993" text in "Serial number" field
 			And I click "Save and close" button
 		And I go to line in "List" table
 			| 'Owner'       | 'Serial number'     |
-			| '38/Yellow'   | '99098809009999'    |
+			| '38/Yellow'   | '990988090099993'   |
 		And I activate "Serial number" field in "List" table
 		And I click the button named "FormChoose"
 		And I activate "Quantity" field in "SerialLotNumbers" table
@@ -1384,7 +1388,7 @@ Scenario: _092007 check serial lot number in the PurchaseReturn
 			| 'Boots'   | '38/18SD'    | '1,000'       |
 		And I select current line in "ItemList" table
 		When I Check the steps for Exception
-								| "And I click choice button of the attribute named "ItemListSerialLotNumbersPresentation" in "ItemList" table"         |
+			| "And I click choice button of the attribute named "ItemListSerialLotNumbersPresentation" in "ItemList" table"         |
 	* Post Purchase return and check movements in the register Register  "R4014 Serial lot numbers"
 		And I click the button named "FormPost"
 		And I delete "$$PurchaseReturn092007$$" variable
@@ -1402,7 +1406,7 @@ Scenario: _092007 check serial lot number in the PurchaseReturn
 			| 'Register  "R4014 Serial lot numbers"'   | ''              | ''                               | ''            | ''               | ''         | ''        | ''            | ''                     |
 			| ''                                       | 'Record type'   | 'Period'                         | 'Resources'   | 'Dimensions'     | ''         | ''        | ''            | ''                     |
 			| ''                                       | ''              | ''                               | 'Quantity'    | 'Company'        | 'Branch'   | 'Store'   | 'Item key'    | 'Serial lot number'    |
-			| ''                                       | 'Expense'       | '$$DatePurchaseReturn092007$$'   | '1'           | 'Main Company'   | '*'        | ''        | '38/Yellow'   | '99098809009999'       |
+			| ''                                       | 'Expense'       | '$$DatePurchaseReturn092007$$'   | '1'           | 'Main Company'   | '*'        | ''        | '38/Yellow'   | '990988090099993'      |
 		And I close all client application windows
 		
 
@@ -1473,11 +1477,11 @@ Scenario: _0920071 check serial lot number controls in the PurchaseReturn
 		And I click choice button of "Serial lot number" attribute in "SerialLotNumbers" table
 		* Create serial lot number for item
 			And I click the button named "FormCreate"
-			And I input "99098809009999" text in "Serial number" field
+			And I input "990988090099994" text in "Serial number" field
 			And I click "Save and close" button
 		And I go to line in "List" table
 			| 'Owner'       | 'Serial number'     |
-			| '38/Yellow'   | '99098809009999'    |
+			| '38/Yellow'   | '990988090099994'   |
 		And I activate "Serial number" field in "List" table
 		And I click the button named "FormChoose"
 		And I activate "Quantity" field in "SerialLotNumbers" table
@@ -1490,7 +1494,7 @@ Scenario: _0920071 check serial lot number controls in the PurchaseReturn
 			| 'Boots'   | '38/18SD'    | '1,000'       |
 		And I select current line in "ItemList" table
 		When I Check the steps for Exception
-								| "And I click choice button of the attribute named "ItemListSerialLotNumbersPresentation" in "ItemList" table"         |
+			| "And I click choice button of the attribute named "ItemListSerialLotNumbersPresentation" in "ItemList" table"         |
 	* Post Purchase return and check movements in the register Register  "R4014 Serial lot numbers"
 		And I click the button named "FormPost"
 		And I delete "$$PurchaseReturn0920071$$" variable
@@ -1530,7 +1534,7 @@ Scenario: _0920071 check serial lot number controls in the PurchaseReturn
 			And I click "Ok" button
 			And "ItemList" table became equal
 				| '#'    | 'Item'        | 'Item key'     | 'Profit loss center'    | 'Dont calculate row'    | 'Tax amount'    | 'Serial lot numbers'                | 'Unit'    | 'Price'     | 'VAT'    | 'Offers amount'    | 'Total amount'    | 'Additional analytic'    | 'Store'       | 'Quantity'    | 'Expense type'    | 'Use shipment confirmation'    | 'Detail'    | 'Return reason'    | 'Net amount'    | 'Purchase invoice'    | 'Purchase return order'     |
-				| '1'    | 'Trousers'    | '38/Yellow'    | ''                      | 'No'                    | '244,07'        | '99098809009999; 99098809009008'    | 'pcs'     | '400,00'    | '18%'    | ''                 | '1 600,00'        | ''                       | 'Store 01'    | '4,000'       | ''                | 'No'                           | ''          | ''                 | '1 355,93'      | ''                    | ''                          |
+				| '1'    | 'Trousers'    | '38/Yellow'    | ''                      | 'No'                    | '244,07'        | '990988090099994; 99098809009008'   | 'pcs'     | '400,00'    | '18%'    | ''                 | '1 600,00'        | ''                       | 'Store 01'    | '4,000'       | ''                | 'No'                           | ''          | ''                 | '1 355,93'      | ''                    | ''                          |
 				| '2'    | 'Boots'       | '38/18SD'      | ''                      | 'No'                    | '106,78'        | ''                                  | 'pcs'     | '700,00'    | '18%'    | ''                 | '700,00'          | ''                       | 'Store 01'    | '1,000'       | ''                | 'No'                           | ''          | ''                 | '593,22'        | ''                    | ''                          |
 		* Change serial/lot numbers quantity to 3
 			And I go to line in "ItemList" table
@@ -1557,7 +1561,7 @@ Scenario: _0920071 check serial lot number controls in the PurchaseReturn
 			| 'Register  "R4014 Serial lot numbers"'   | ''              | ''                                | ''            | ''               | ''         | ''        | ''            | ''                     |
 			| ''                                       | 'Record type'   | 'Period'                          | 'Resources'   | 'Dimensions'     | ''         | ''        | ''            | ''                     |
 			| ''                                       | ''              | ''                                | 'Quantity'    | 'Company'        | 'Branch'   | 'Store'   | 'Item key'    | 'Serial lot number'    |
-			| ''                                       | 'Expense'       | '$$DatePurchaseReturn0920071$$'   | '1'           | 'Main Company'   | '*'        | ''        | '38/Yellow'   | '99098809009999'       |
+			| ''                                       | 'Expense'       | '$$DatePurchaseReturn0920071$$'   | '1'           | 'Main Company'   | '*'        | ''        | '38/Yellow'   | '990988090099994'      |
 			| ''                                       | 'Expense'       | '$$DatePurchaseReturn0920071$$'   | '2'           | 'Main Company'   | '*'        | ''        | '38/Yellow'   | '99098809009008'       |
 		And I close current window
 	* Check the message to the user when the serial number was not filled in
@@ -2584,11 +2588,11 @@ Scenario: _092015 check serial lot number in the Shipment confirmation
 		And I click choice button of "Serial lot number" attribute in "SerialLotNumbers" table
 		* Create serial lot number for item
 			And I click the button named "FormCreate"
-			And I input "99098809009999" text in "Serial number" field
+			And I input "990988090099995" text in "Serial number" field
 			And I click "Save and close" button
 		And I go to line in "List" table
 			| 'Owner'       | 'Serial number'     |
-			| '38/Yellow'   | '99098809009999'    |
+			| '38/Yellow'   | '990988090099995'   |
 		And I activate "Serial number" field in "List" table
 		And I click the button named "FormChoose"
 		And I activate "Quantity" field in "SerialLotNumbers" table
@@ -2601,7 +2605,7 @@ Scenario: _092015 check serial lot number in the Shipment confirmation
 			| 'Boots'   | '38/18SD'    | '1,000'       |
 		And I select current line in "ItemList" table
 		When I Check the steps for Exception
-								| "And I click choice button of the attribute named "ItemListSerialLotNumbersPresentation" in "ItemList" table"         |
+			| "And I click choice button of the attribute named "ItemListSerialLotNumbersPresentation" in "ItemList" table"         |
 
 Scenario: _092016 check serial lot number in the Goods receipt
 		And I close all client application windows
@@ -2666,11 +2670,11 @@ Scenario: _092016 check serial lot number in the Goods receipt
 		And I click choice button of "Serial lot number" attribute in "SerialLotNumbers" table
 		* Create serial lot number for item
 			And I click the button named "FormCreate"
-			And I input "99098809009999" text in "Serial number" field
+			And I input "990988090099996" text in "Serial number" field
 			And I click "Save and close" button
 		And I go to line in "List" table
 			| 'Owner'       | 'Serial number'     |
-			| '38/Yellow'   | '99098809009999'    |
+			| '38/Yellow'   | '990988090099996'   |
 		And I activate "Serial number" field in "List" table
 		And I click the button named "FormChoose"
 		And I activate "Quantity" field in "SerialLotNumbers" table
@@ -2683,7 +2687,7 @@ Scenario: _092016 check serial lot number in the Goods receipt
 			| 'Boots'   | '38/18SD'    | '1,000'       |
 		And I select current line in "ItemList" table
 		When I Check the steps for Exception
-								| "And I click choice button of the attribute named "ItemListSerialLotNumbersPresentation" in "ItemList" table"         |
+			| "And I click choice button of the attribute named "ItemListSerialLotNumbersPresentation" in "ItemList" table"         |
 
 Scenario: _092007 check serial lot number in the Inventory transfer
 		And I close all client application windows
@@ -2742,11 +2746,11 @@ Scenario: _092007 check serial lot number in the Inventory transfer
 		And I click choice button of "Serial lot number" attribute in "SerialLotNumbers" table
 		* Create serial lot number for item
 			And I click the button named "FormCreate"
-			And I input "99098809009999" text in "Serial number" field
+			And I input "990988090099997" text in "Serial number" field
 			And I click "Save and close" button
 		And I go to line in "List" table
 			| 'Owner'       | 'Serial number'     |
-			| '38/Yellow'   | '99098809009999'    |
+			| '38/Yellow'   | '990988090099997'   |
 		And I activate "Serial number" field in "List" table
 		And I click the button named "FormChoose"
 		And I activate "Quantity" field in "SerialLotNumbers" table
@@ -2759,7 +2763,7 @@ Scenario: _092007 check serial lot number in the Inventory transfer
 			| 'Boots'   | '38/18SD'    | '1,000'       |
 		And I select current line in "ItemList" table
 		When I Check the steps for Exception
-								| "And I click choice button of the attribute named "ItemListSerialLotNumbersPresentation" in "ItemList" table"         |
+			| "And I click choice button of the attribute named "ItemListSerialLotNumbersPresentation" in "ItemList" table"         |
 
 Scenario: _092020 check choice form Serial Lot number
 		And I close all client application windows

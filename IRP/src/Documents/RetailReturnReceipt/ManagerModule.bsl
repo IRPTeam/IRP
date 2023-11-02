@@ -846,7 +846,7 @@ Function R3010B_CashOnHand()
 		   |	Payments AS Payments
 		   |WHERE
 		   |	NOT (Payments.IsPostponedPayment
-		   |	OR Payments.IsPaymentAgent)
+		   |	OR Payments.IsPaymentAgent OR Payments.IsCertificate)
 		   |	AND Payments.StatusType = VALUE(ENUM.RetailReceiptStatusTypes.Completed)";
 EndFunction
 
@@ -928,7 +928,7 @@ Function R3050T_PosCashBalances()
 		   |FROM
 		   |	Payments AS Payments
 		   |WHERE
-		   |	NOT Payments.IsPaymentAgent
+		   |	NOT (Payments.IsPaymentAgent OR Payments.IsPostponedPayment OR Payments.IsCertificate)
 		   |	AND Payments.StatusType = VALUE(ENUM.RetailReceiptStatusTypes.Completed)";
 EndFunction
 

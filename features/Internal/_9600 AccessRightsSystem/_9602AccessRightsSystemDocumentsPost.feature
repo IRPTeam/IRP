@@ -49,6 +49,12 @@ Scenario: 960001 preparation (access rights system registers)
 	And I click "Save and close" button
 	And I connect "TestAdmin" TestClient using "LimitedAccess" login and "" password
 	When import data for access rights
+	* Add VA extension
+		Given I open hyperlink "e1cib/list/Catalog.Extensions"
+		If "List" table does not contain lines Then
+				| "Description"     |
+				| "VAExtension"     |
+			When add VAExtension
 	And I close all client application windows
 
 Scenario: 963002 try post SO (LimitedAccess)	

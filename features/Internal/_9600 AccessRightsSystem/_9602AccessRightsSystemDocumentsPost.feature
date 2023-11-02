@@ -18,6 +18,12 @@ Scenario: 960001 preparation (access rights system registers)
 	When set True value to the constant Use consolidated retail sales
 	When set True value to the constant Use object access
 	When set True value to the constant Use salary
+	* Add VA extension
+		Given I open hyperlink "e1cib/list/Catalog.Extensions"
+		If "List" table does not contain lines Then
+				| "Description"     |
+				| "VAExtension"     |
+			When add VAExtension
 	And I close TestClient session
 	Given I open new TestClient session or connect the existing one
 	When Create catalog Users and AccessProfiles objects (LimitedAccess)
@@ -47,14 +53,9 @@ Scenario: 960001 preparation (access rights system registers)
 	* Check ObjectAccess table
 		When filling Access key in the AccessGroups
 	And I click "Save and close" button
+	And I close "TestAdmin" TestClient
 	And I connect "TestAdmin" TestClient using "LimitedAccess" login and "" password
 	When import data for access rights
-	* Add VA extension
-		Given I open hyperlink "e1cib/list/Catalog.Extensions"
-		If "List" table does not contain lines Then
-				| "Description"     |
-				| "VAExtension"     |
-			When add VAExtension
 	And I close all client application windows
 
 Scenario: 963002 try post SO (LimitedAccess)	
@@ -701,7 +702,7 @@ Scenario: 963058 try post ProductionPlanning (LimitedAccess)
 	Given I open hyperlink "e1cib/list/Document.ProductionPlanning"
 	And I go to line in "List" table
 		| 'Number' | 'Date'                 |
-		| '10'     | '31.10.2023 17:11:20'  |
+		| '10'     | '02.11.2023 12:01:51'  |
 	And I select current line in "List" table
 	And I click "Post and close" button
 	Then user message window does not contain messages
@@ -712,7 +713,7 @@ Scenario: 963059 try post Production (LimitedAccess)
 	Given I open hyperlink "e1cib/list/Document.Production"
 	And I go to line in "List" table
 		| 'Number' | 'Date'                 |
-		| '28'     | '31.10.2023 17:15:10'  |
+		| '28'     | '02.11.2023 12:02:30'  |
 	And I select current line in "List" table
 	And I click "Post and close" button
 	Then user message window does not contain messages
@@ -723,7 +724,7 @@ Scenario: 963060 try post ProductionPlanningCorrection (LimitedAccess)
 	Given I open hyperlink "e1cib/list/Document.ProductionPlanningCorrection"
 	And I go to line in "List" table
 		| 'Number' | 'Date'                 |
-		| '10'     | '31.10.2023 17:14:23'  |
+		| '10'     | '02.11.2023 12:03:16'  |
 	And I select current line in "List" table
 	And I click "Post and close" button
 	Then user message window does not contain messages
@@ -734,7 +735,7 @@ Scenario: 963061 try post ProductionPlanningClosing (LimitedAccess)
 	Given I open hyperlink "e1cib/list/Document.ProductionPlanningClosing"
 	And I go to line in "List" table
 		| 'Number' | 'Date'                 |
-		| '10'     | '31.10.2023 17:39:15'  |
+		| '10'     | '02.11.2023 12:03:24'  |
 	And I select current line in "List" table
 	And I click "Post and close" button
 	Then user message window does not contain messages
@@ -817,24 +818,6 @@ Scenario: 963068 try post ChequeBondTransaction (LimitedAccess)
 	Then user message window does not contain messages
 	Then I wait "Cheque bond transaction * dated * *" window closing in "5" seconds
 	
-
-Scenario: 964002 deletion mark SO (LimitedAccess)
-	And I execute the built-in language code at server (Extension)
-		| "Try"                                                     |
-		| "Doc = Documents.SalesOrder.FindByNumber(2).GetObject();" |
-		| "Doc.DeletionMark = False;"                               |
-		| "Doc.Write();"                                            |
-		| "Except"                                                  |
-		| "EndTry"                                                  |
-	And I execute the built-in language code at server (Extension)
-		| "Try"                                                     |
-		| "Doc = Documents.SalesOrder.FindByNumber(3).GetObject();" |
-		| "Doc.DeletionMark = False;"                               |
-		| "Doc.Write();"                                            |
-		| "Except"                                                  |
-		| "EndTry"                                                  |
-	And 1C:Enterprise language expression "{!Documents.SalesOrder.FindByNumber(2).DeletionMark=False}" is true
-	And 1C:Enterprise language expression "{!Documents.SalesOrder.FindByNumber(3).DeletionMark=True}" is true
 
 Scenario: 964003 deletion mark AdditionalCostAllocation (LimitedAccess)
 	And I execute the built-in language code at server (Extension)

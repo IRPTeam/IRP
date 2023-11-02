@@ -392,6 +392,19 @@ Function GetEventHandlersByDataPath(Parameters, DataPath, IsBuilder)
 	
 	EventHandlerMap.Insert("ItemList.InventoryOrigin"        , "SetItemListInventoryOrigin");
 	
+	// Payments
+	EventHandlerMap.Insert("Payments.PaymentType"                   , "SetPaymentsPaymentType");
+	EventHandlerMap.Insert("Payments.FinancialMovementType"         , "SetPaymentsFinancialMovementType");
+	EventHandlerMap.Insert("Payments.BankTerm"                      , "SetPaymentsBankTerm");
+	EventHandlerMap.Insert("Payments.PaymentAgentLegalNameContract" , "SetPaymentsPaymentAgentLegalNameContract");
+	EventHandlerMap.Insert("Payments.PaymentAgentPartnerTerms"      , "SetPaymentsPaymentAgentPartnerTerms");
+	EventHandlerMap.Insert("Payments.PaymentAgentLegalName"         , "SetPaymentsPaymentAgentLegalName");
+	EventHandlerMap.Insert("Payments.PaymentAgentPartner"           , "SetPaymentsPaymentAgentPartner");
+	EventHandlerMap.Insert("Payments.Percent"                       , "SetPaymentsPercent");
+	EventHandlerMap.Insert("Payments.Commission"                    , "SetPaymentsCommission");
+	EventHandlerMap.Insert("Payments.Amount"                        , "SetPaymentsAmount");
+	EventHandlerMap.Insert("Payments.Account"                       , "SetPaymentsAccount");
+
 	// Materials
 	EventHandlerMap.Insert("Materials.BillOfMaterials"    , "SetMaterialsBillOfMaterials");
 	EventHandlerMap.Insert("Materials.Item"               , "SetMaterialsItem");

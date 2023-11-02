@@ -53,6 +53,44 @@ Function CheckSerialLotNumberName(Object, Cancel) Export
 	Return RegExpSettings;
 EndFunction
 
+// Check serial lot number unique.
+// 
+// Parameters:
+//  Object - CatalogObject.SerialLotNumbers - Object
+//  Cancel - Boolean - Cancel
+// 
+// Returns:
+//  ValueTable - Check serial lot number name
+Function CheckSerialLotNumberUnique(Object, Cancel) Export
+	Query = New Query();
+	Query.Text = 
+	"SELECT
+	|	SerialLotNumbers.Ref,
+	|	SerialLotNumbers.Description,
+	|	SerialLotNumbers.Code
+	|FROM
+	|	Catalog.SerialLotNumbers AS SerialLotNumbers
+	|WHERE
+	|	SerialLotNumbers.Description = &Description
+	|	AND SerialLotNumbers.DeletionMark = &DeletionMark
+	|	AND SerialLotNumbers.SerialLotNumberOwner = &SerialLotNumberOwner
+	|	AND SerialLotNumbers.Ref <> &Ref";
+	
+	Query.SetParameter("Description"          , Object.Description);
+	Query.SetParameter("DeletionMark"         , Object.DeletionMark);
+	Query.SetParameter("SerialLotNumberOwner" , Object.SerialLotNumberOwner);
+	Query.SetParameter("Ref"                  , Object.Ref);
+	
+	QueryResult = Query.Execute();
+	QueryTable = QueryResult.Unload();
+	
+	If QueryTable.Count() Then
+		Cancel = True;
+	EndIf;
+	
+	Return QueryTable;
+EndFunction
+
 Function IsItemKeyWithSerialLotNumbers(ItemKey, AddInfo = Undefined) Export
 	If Not ValueIsFilled(ItemKey) Then
 		Return False;

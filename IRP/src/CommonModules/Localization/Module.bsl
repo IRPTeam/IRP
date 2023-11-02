@@ -1044,6 +1044,7 @@ Function Strings(Lang) Export
 	Strings.Insert("Error_133", NStr("en = 'Opening entry [Shipment to trade agent] is available only for own stocks, [%1][%2] is [%3] stocks'", Lang));
 	Strings.Insert("Error_134", NStr("en = 'Transaction type [Receipt from consignor] is available only for consignor stocks, [%1][%2] is own stocks'", Lang));
 	Strings.Insert("Error_135", NStr("en = 'Receipt from consignor [%1][%2] is available only for consignor [%3]'", Lang));	
+	Strings.Insert("Error_136", NStr("en = 'Serial lot number is not unique, duplicate codes:[%1]'", Lang));	
 	
 	
 	Strings.Insert("Error_FillTotalAmount", NStr("en = 'Fill total amount. Row: [%1]'", Lang));

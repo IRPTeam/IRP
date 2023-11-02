@@ -48,6 +48,29 @@ Scenario: _0051 external function folder
 			| 'Description' |
 			| 'Test'        |
 	And I close all client application windows
+
+Scenario: _0052 form settings for Jobs
+	And I close all client application windows
+	* Open external function catalog
+		Given I open hyperlink "e1cib/list/Catalog.ExternalFunctions"
+		And I click the button named "FormCreate"
+		And I input "Test" text in the field named "Description"
+		And I set checkbox "Use for set description"
+		And I set checkbox "Use scheduler"
+		And I move to "Scheduler" tab
+		And I click Choice button of the field named "User"
+		And I go to line in "List" table
+			| 'Login' |
+			| 'CI'    |
+		And I select current line in "List" table
+		And I click "Save" button
+		And I click "Save and close" button
+		And I wait "Error Eval code (External function)" window closing in 10 seconds
+	* Check creation
+		And "List" table contains lines
+			| 'Description' |
+			| 'Test'        |
+	And I close all client application windows
 		
 		
 				

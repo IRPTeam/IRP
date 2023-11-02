@@ -18,6 +18,12 @@ Scenario: 960001 preparation (access rights system registers)
 	When set True value to the constant Use consolidated retail sales
 	When set True value to the constant Use object access
 	When set True value to the constant Use salary
+	* Add VA extension
+		Given I open hyperlink "e1cib/list/Catalog.Extensions"
+		If "List" table does not contain lines Then
+				| "Description"     |
+				| "VAExtension"     |
+			When add VAExtension
 	And I close TestClient session
 	Given I open new TestClient session or connect the existing one
 	When Create catalog Users and AccessProfiles objects (LimitedAccess)
@@ -47,6 +53,7 @@ Scenario: 960001 preparation (access rights system registers)
 	* Check ObjectAccess table
 		When filling Access key in the AccessGroups
 	And I click "Save and close" button
+	And I close "TestAdmin" TestClient
 	And I connect "TestAdmin" TestClient using "LimitedAccess" login and "" password
 	When import data for access rights
 	And I close all client application windows
@@ -514,7 +521,7 @@ Scenario: 963041 try post CashExpense (LimitedAccess)
 	Then user message window does not contain messages
 	Then I wait "Cash expense * dated * *" window closing in "5" seconds
 
-Scenario: 963041 try post CashPayment (LimitedAccess)
+Scenario: 963042 try post CashPayment (LimitedAccess)
 	And I close all client application windows
 	Given I open hyperlink "e1cib/list/Document.CashPayment"
 	And I go to line in "List" table
@@ -525,7 +532,7 @@ Scenario: 963041 try post CashPayment (LimitedAccess)
 	Then user message window does not contain messages
 	Then I wait "Cash payment * dated * *" window closing in "5" seconds
 
-Scenario: 963041 try post CashReceipt (LimitedAccess)
+Scenario: 963043 try post CashReceipt (LimitedAccess)
 	And I close all client application windows
 	Given I open hyperlink "e1cib/list/Document.CashReceipt"
 	And I go to line in "List" table
@@ -536,7 +543,7 @@ Scenario: 963041 try post CashReceipt (LimitedAccess)
 	Then user message window does not contain messages
 	Then I wait "Cash receipt * dated * *" window closing in "5" seconds
 
-Scenario: 963041 try post CashRevenue (LimitedAccess)
+Scenario: 963044 try post CashRevenue (LimitedAccess)
 	And I close all client application windows
 	Given I open hyperlink "e1cib/list/Document.CashRevenue"
 	And I go to line in "List" table
@@ -547,7 +554,7 @@ Scenario: 963041 try post CashRevenue (LimitedAccess)
 	Then user message window does not contain messages
 	Then I wait "Cash revenue * dated * *" window closing in "5" seconds
 
-Scenario: 963041 try post CashTransferOrder (LimitedAccess)
+Scenario: 963045 try post CashTransferOrder (LimitedAccess)
 	And I close all client application windows
 	Given I open hyperlink "e1cib/list/Document.CashTransferOrder"
 	And I go to line in "List" table
@@ -558,7 +565,7 @@ Scenario: 963041 try post CashTransferOrder (LimitedAccess)
 	Then user message window does not contain messages
 	Then I wait "Cash transfer order * dated * *" window closing in "5" seconds
 
-Scenario: 963041 try post CreditNote (LimitedAccess)
+Scenario: 963046 try post CreditNote (LimitedAccess)
 	And I close all client application windows
 	Given I open hyperlink "e1cib/list/Document.CreditNote"
 	And I go to line in "List" table
@@ -569,7 +576,7 @@ Scenario: 963041 try post CreditNote (LimitedAccess)
 	Then user message window does not contain messages
 	Then I wait "Credit note * dated * *" window closing in "5" seconds
 
-Scenario: 963041 try post CustomersAdvancesClosing (LimitedAccess)
+Scenario: 963047 try post CustomersAdvancesClosing (LimitedAccess)
 	And I close all client application windows
 	Given I open hyperlink "e1cib/list/Document.CustomersAdvancesClosing"
 	And I go to line in "List" table
@@ -580,7 +587,7 @@ Scenario: 963041 try post CustomersAdvancesClosing (LimitedAccess)
 	Then user message window does not contain messages
 	Then I wait "Customers advances closing * dated * *" window closing in "5" seconds
 
-Scenario: 963041 try post DebitNote (LimitedAccess)
+Scenario: 963048 try post DebitNote (LimitedAccess)
 	And I close all client application windows
 	Given I open hyperlink "e1cib/list/Document.DebitNote"
 	And I go to line in "List" table
@@ -591,7 +598,7 @@ Scenario: 963041 try post DebitNote (LimitedAccess)
 	Then user message window does not contain messages
 	Then I wait "Debit note * dated * *" window closing in "5" seconds
 
-Scenario: 963041 try post EmployeeCashAdvance (LimitedAccess)
+Scenario: 963049 try post EmployeeCashAdvance (LimitedAccess)
 	And I close all client application windows
 	Given I open hyperlink "e1cib/list/Document.EmployeeCashAdvance"
 	And I go to line in "List" table
@@ -602,7 +609,7 @@ Scenario: 963041 try post EmployeeCashAdvance (LimitedAccess)
 	Then user message window does not contain messages
 	Then I wait "Employee cash advance * dated * *" window closing in "5" seconds
 
-Scenario: 963041 try post ForeignCurrencyRevaluation (LimitedAccess)
+Scenario: 963050 try post ForeignCurrencyRevaluation (LimitedAccess)
 	And I close all client application windows
 	Given I open hyperlink "e1cib/list/Document.ForeignCurrencyRevaluation"
 	And I go to line in "List" table
@@ -613,7 +620,7 @@ Scenario: 963041 try post ForeignCurrencyRevaluation (LimitedAccess)
 	Then user message window does not contain messages
 	Then I wait "Foreign currency revaluation * dated * *" window closing in "5" seconds
 
-Scenario: 963041 try post IncomingPaymentOrder (LimitedAccess)
+Scenario: 963051 try post IncomingPaymentOrder (LimitedAccess)
 	And I close all client application windows
 	Given I open hyperlink "e1cib/list/Document.IncomingPaymentOrder"
 	And I go to line in "List" table
@@ -624,7 +631,7 @@ Scenario: 963041 try post IncomingPaymentOrder (LimitedAccess)
 	Then user message window does not contain messages
 	Then I wait "Incoming payment order * dated * *" window closing in "5" seconds
 
-Scenario: 963041 try post MoneyTransfer (LimitedAccess)
+Scenario: 963052 try post MoneyTransfer (LimitedAccess)
 	And I close all client application windows
 	Given I open hyperlink "e1cib/list/Document.MoneyTransfer"
 	And I go to line in "List" table
@@ -635,7 +642,7 @@ Scenario: 963041 try post MoneyTransfer (LimitedAccess)
 	Then user message window does not contain messages
 	Then I wait "Money transfer * dated * *" window closing in "5" seconds
 
-Scenario: 963041 try post OutgoingPaymentOrder (LimitedAccess)
+Scenario: 963053 try post OutgoingPaymentOrder (LimitedAccess)
 	And I close all client application windows
 	Given I open hyperlink "e1cib/list/Document.OutgoingPaymentOrder"
 	And I go to line in "List" table
@@ -646,7 +653,7 @@ Scenario: 963041 try post OutgoingPaymentOrder (LimitedAccess)
 	Then user message window does not contain messages
 	Then I wait "Outgoing payment order * dated * *" window closing in "5" seconds
 
-Scenario: 963041 try post ReconciliationStatement (LimitedAccess)
+Scenario: 963054 try post ReconciliationStatement (LimitedAccess)
 	And I close all client application windows
 	Given I open hyperlink "e1cib/list/Document.ReconciliationStatement"
 	And I go to line in "List" table
@@ -657,7 +664,7 @@ Scenario: 963041 try post ReconciliationStatement (LimitedAccess)
 	Then user message window does not contain messages
 	Then I wait "Reconciliation statement * dated * *" window closing in "5" seconds
 
-Scenario: 963041 try post VendorsAdvancesClosing (LimitedAccess)
+Scenario: 963055 try post VendorsAdvancesClosing (LimitedAccess)
 	And I close all client application windows
 	Given I open hyperlink "e1cib/list/Document.VendorsAdvancesClosing"
 	And I go to line in "List" table
@@ -667,3 +674,1482 @@ Scenario: 963041 try post VendorsAdvancesClosing (LimitedAccess)
 	And I click "Post and close" button
 	Then user message window does not contain messages
 	Then I wait "Vendors advances closing * dated * *" window closing in "5" seconds
+
+Scenario: 963056 try post Payroll (LimitedAccess)
+	And I close all client application windows
+	Given I open hyperlink "e1cib/list/Document.Payroll"
+	And I go to line in "List" table
+		| 'Number' | 'Date'                 |
+		| '10'     | '31.10.2023 17:01:18'  |
+	And I select current line in "List" table
+	And I click "Post and close" button
+	Then user message window does not contain messages
+	Then I wait "Payroll * dated * *" window closing in "5" seconds
+
+Scenario: 963057 try post TimeSheet (LimitedAccess)
+	And I close all client application windows
+	Given I open hyperlink "e1cib/list/Document.TimeSheet"
+	And I go to line in "List" table
+		| 'Number' | 'Date'                 |
+		| '10'     | '31.10.2023 17:02:09'  |
+	And I select current line in "List" table
+	And I click "Post and close" button
+	Then user message window does not contain messages
+	Then I wait "Time sheet * dated * *" window closing in "5" seconds
+
+Scenario: 963058 try post ProductionPlanning (LimitedAccess)
+	And I close all client application windows
+	Given I open hyperlink "e1cib/list/Document.ProductionPlanning"
+	And I go to line in "List" table
+		| 'Number' | 'Date'                 |
+		| '10'     | '02.11.2023 12:01:51'  |
+	And I select current line in "List" table
+	And I click "Post and close" button
+	Then user message window does not contain messages
+	Then I wait "Production planning * dated * *" window closing in "5" seconds
+
+Scenario: 963059 try post Production (LimitedAccess)
+	And I close all client application windows
+	Given I open hyperlink "e1cib/list/Document.Production"
+	And I go to line in "List" table
+		| 'Number' | 'Date'                 |
+		| '28'     | '02.11.2023 12:02:30'  |
+	And I select current line in "List" table
+	And I click "Post and close" button
+	Then user message window does not contain messages
+	Then I wait "Production * dated * *" window closing in "5" seconds
+
+Scenario: 963060 try post ProductionPlanningCorrection (LimitedAccess)
+	And I close all client application windows
+	Given I open hyperlink "e1cib/list/Document.ProductionPlanningCorrection"
+	And I go to line in "List" table
+		| 'Number' | 'Date'                 |
+		| '10'     | '02.11.2023 12:03:16'  |
+	And I select current line in "List" table
+	And I click "Post and close" button
+	Then user message window does not contain messages
+	Then I wait "Production planning correction * dated * *" window closing in "5" seconds
+
+Scenario: 963061 try post ProductionPlanningClosing (LimitedAccess)
+	And I close all client application windows
+	Given I open hyperlink "e1cib/list/Document.ProductionPlanningClosing"
+	And I go to line in "List" table
+		| 'Number' | 'Date'                 |
+		| '10'     | '02.11.2023 12:03:24'  |
+	And I select current line in "List" table
+	And I click "Post and close" button
+	Then user message window does not contain messages
+	Then I wait "Production planning closing * dated * *" window closing in "5" seconds
+
+Scenario: 963062 try post SalesOrderClosing (LimitedAccess)
+	And I close all client application windows
+	Given I open hyperlink "e1cib/list/Document.SalesOrderClosing"
+	And I go to line in "List" table
+		| 'Number' | 'Date'                 |
+		| '73'     | '01.11.2023 13:35:53'  |
+	And I select current line in "List" table
+	And I click "Post and close" button
+	Then user message window does not contain messages
+	Then I wait "Sales order closing * dated * *" window closing in "5" seconds
+
+Scenario: 963063 try post PurchaseOrderClosing (LimitedAccess)
+	And I close all client application windows
+	Given I open hyperlink "e1cib/list/Document.PurchaseOrderClosing"
+	And I go to line in "List" table
+		| 'Number' | 'Date'                 |
+		| '73'     | '01.11.2023 13:36:20'  |
+	And I select current line in "List" table
+	And I click "Post and close" button
+	Then user message window does not contain messages
+	Then I wait "Purchase order closing * dated * *" window closing in "5" seconds
+
+Scenario: 963064 try post CommissioningOfFixedAsset (LimitedAccess)
+	And I close all client application windows
+	Given I open hyperlink "e1cib/list/Document.CommissioningOfFixedAsset"
+	And I go to line in "List" table
+		| 'Number' | 'Date'                 |
+		| '73'     | '01.11.2023 13:15:18'  |
+	And I select current line in "List" table
+	And I click "Post and close" button
+	Then user message window does not contain messages
+	Then I wait "Commissioning of fixed asset * dated * *" window closing in "5" seconds
+
+Scenario: 963065 try post DecommissioningOfFixedAsset (LimitedAccess)
+	And I close all client application windows
+	Given I open hyperlink "e1cib/list/Document.DecommissioningOfFixedAsset"
+	And I go to line in "List" table
+		| 'Number' | 'Date'                 |
+		| '73'     | '01.11.2023 13:15:51'  |
+	And I select current line in "List" table
+	And I click "Post and close" button
+	Then user message window does not contain messages
+	Then I wait "Decommissioning of fixed asset * dated * *" window closing in "5" seconds
+
+Scenario: 963066 try post DepreciationCalculation (LimitedAccess)
+	And I close all client application windows
+	Given I open hyperlink "e1cib/list/Document.DepreciationCalculation"
+	And I go to line in "List" table
+		| 'Number' | 'Date'                 |
+		| '10'     | '01.11.2023 13:16:01'  |
+	And I select current line in "List" table
+	And I click "Post and close" button
+	Then user message window does not contain messages
+	Then I wait "Depreciation calculation * dated * *" window closing in "5" seconds
+
+Scenario: 963067 try post ModernizationOfFixedAsset (LimitedAccess)
+	And I close all client application windows
+	Given I open hyperlink "e1cib/list/Document.ModernizationOfFixedAsset"
+	And I go to line in "List" table
+		| 'Number' | 'Date'                 |
+		| '73'     | '01.11.2023 13:35:12'  |
+	And I select current line in "List" table
+	And I click "Post and close" button
+	Then user message window does not contain messages
+	Then I wait "Modernization of fixed asset * dated * *" window closing in "5" seconds
+
+Scenario: 963068 try post ChequeBondTransaction (LimitedAccess)
+	And I close all client application windows
+	Given I open hyperlink "e1cib/list/Document.ChequeBondTransaction"
+	And I go to line in "List" table
+		| 'Number' | 'Date'                 |
+		| '10'     | '01.11.2023 13:54:15'  |
+	And I select current line in "List" table
+	And I click "Post and close" button
+	Then user message window does not contain messages
+	Then I wait "Cheque bond transaction * dated * *" window closing in "5" seconds
+	
+
+Scenario: 964003 deletion mark AdditionalCostAllocation (LimitedAccess)
+	And I execute the built-in language code at server (Extension)
+		| "Try"                                                     |
+		| "Doc = Documents.AdditionalCostAllocation.FindByNumber(2).GetObject();" |
+		| "Doc.DeletionMark = False;"                               |
+		| "Doc.Write();"                                            |
+		| "Except"                                                  |
+		| "EndTry"                                                  |
+	And I execute the built-in language code at server (Extension)
+		| "Try"                                                     |
+		| "Doc = Documents.AdditionalCostAllocation.FindByNumber(26).GetObject();" |
+		| "Doc.DeletionMark = False;"                               |
+		| "Doc.Write();"                                            |
+		| "Except"                                                  |
+		| "EndTry"                                                  |
+	And 1C:Enterprise language expression "{!Documents.AdditionalCostAllocation.FindByNumber(2).DeletionMark=False}" is true
+	And 1C:Enterprise language expression "{!Documents.AdditionalCostAllocation.FindByNumber(26).DeletionMark=True}" is true
+
+Scenario: 964004 deletion mark AdditionalRevenueAllocation (LimitedAccess)
+	And I execute the built-in language code at server (Extension)
+		| "Try"                                                     |
+		| "Doc = Documents.AdditionalRevenueAllocation.FindByNumber(2).GetObject();" |
+		| "Doc.DeletionMark = False;"                               |
+		| "Doc.Write();"                                            |
+		| "Except"                                                  |
+		| "EndTry"                                                  |
+	And I execute the built-in language code at server (Extension)
+		| "Try"                                                     |
+		| "Doc = Documents.AdditionalRevenueAllocation.FindByNumber(26).GetObject();" |
+		| "Doc.DeletionMark = False;"                               |
+		| "Doc.Write();"                                            |
+		| "Except"                                                  |
+		| "EndTry"                                                  |
+	And 1C:Enterprise language expression "{!Documents.AdditionalRevenueAllocation.FindByNumber(2).DeletionMark=False}" is true
+	And 1C:Enterprise language expression "{!Documents.AdditionalRevenueAllocation.FindByNumber(26).DeletionMark=True}" is true
+
+Scenario: 964005 deletion mark BankPayment (LimitedAccess)
+	And I execute the built-in language code at server (Extension)
+		| "Try"                                                     |
+		| "Doc = Documents.BankPayment.FindByNumber(1).GetObject();" |
+		| "Doc.DeletionMark = False;"                               |
+		| "Doc.Write();"                                            |
+		| "Except"                                                  |
+		| "EndTry"                                                  |
+	And I execute the built-in language code at server (Extension)
+		| "Try"                                                     |
+		| "Doc = Documents.BankPayment.FindByNumber(14).GetObject();" |
+		| "Doc.DeletionMark = False;"                               |
+		| "Doc.Write();"                                            |
+		| "Except"                                                  |
+		| "EndTry"                                                  |
+	And 1C:Enterprise language expression "{!Documents.BankPayment.FindByNumber(1).DeletionMark=False}" is true
+	And 1C:Enterprise language expression "{!Documents.BankPayment.FindByNumber(14).DeletionMark=True}" is true
+
+Scenario: 964006 deletion mark BankReceipt (LimitedAccess)
+	And I execute the built-in language code at server (Extension)
+		| "Try"                                                     |
+		| "Doc = Documents.BankReceipt.FindByNumber(1).GetObject();" |
+		| "Doc.DeletionMark = False;"                               |
+		| "Doc.Write();"                                            |
+		| "Except"                                                  |
+		| "EndTry"                                                  |
+	And I execute the built-in language code at server (Extension)
+		| "Try"                                                     |
+		| "Doc = Documents.BankReceipt.FindByNumber(14).GetObject();" |
+		| "Doc.DeletionMark = False;"                               |
+		| "Doc.Write();"                                            |
+		| "Except"                                                  |
+		| "EndTry"                                                  |
+	And 1C:Enterprise language expression "{!Documents.BankReceipt.FindByNumber(1).DeletionMark=False}" is true
+	And 1C:Enterprise language expression "{!Documents.BankReceipt.FindByNumber(14).DeletionMark=True}" is true
+
+Scenario: 964007 deletion mark BatchReallocateIncoming (LimitedAccess)
+	And I execute the built-in language code at server (Extension)
+		| "Try"                                                     |
+		| "Doc = Documents.BatchReallocateIncoming.FindByNumber(2).GetObject();" |
+		| "Doc.DeletionMark = False;"                               |
+		| "Doc.Write();"                                            |
+		| "Except"                                                  |
+		| "EndTry"                                                  |
+	And I execute the built-in language code at server (Extension)
+		| "Try"                                                     |
+		| "Doc = Documents.BatchReallocateIncoming.FindByNumber(10).GetObject();" |
+		| "Doc.DeletionMark = False;"                               |
+		| "Doc.Write();"                                            |
+		| "Except"                                                  |
+		| "EndTry"                                                  |
+	And 1C:Enterprise language expression "{!Documents.BatchReallocateIncoming.FindByNumber(2).DeletionMark=False}" is true
+	And 1C:Enterprise language expression "{!Documents.BatchReallocateIncoming.FindByNumber(10).DeletionMark=True}" is true
+
+Scenario: 964008 deletion mark BatchReallocateOutgoing (LimitedAccess)
+	And I execute the built-in language code at server (Extension)
+		| "Try"                                                     |
+		| "Doc = Documents.BatchReallocateOutgoing.FindByNumber(2).GetObject();" |
+		| "Doc.DeletionMark = False;"                               |
+		| "Doc.Write();"                                            |
+		| "Except"                                                  |
+		| "EndTry"                                                  |
+	And I execute the built-in language code at server (Extension)
+		| "Try"                                                     |
+		| "Doc = Documents.BatchReallocateOutgoing.FindByNumber(10).GetObject();" |
+		| "Doc.DeletionMark = False;"                               |
+		| "Doc.Write();"                                            |
+		| "Except"                                                  |
+		| "EndTry"                                                  |
+	And 1C:Enterprise language expression "{!Documents.BatchReallocateOutgoing.FindByNumber(2).DeletionMark=False}" is true
+	And 1C:Enterprise language expression "{!Documents.BatchReallocateOutgoing.FindByNumber(10).DeletionMark=True}" is true
+
+Scenario: 964009 deletion mark Bundling (LimitedAccess)
+	And I execute the built-in language code at server (Extension)
+		| "Try"                                                     |
+		| "Doc = Documents.Bundling.FindByNumber(1).GetObject();" |
+		| "Doc.DeletionMark = False;"                               |
+		| "Doc.Write();"                                            |
+		| "Except"                                                  |
+		| "EndTry"                                                  |
+	And I execute the built-in language code at server (Extension)
+		| "Try"                                                     |
+		| "Doc = Documents.Bundling.FindByNumber(14).GetObject();" |
+		| "Doc.DeletionMark = False;"                               |
+		| "Doc.Write();"                                            |
+		| "Except"                                                  |
+		| "EndTry"                                                  |
+	And 1C:Enterprise language expression "{!Documents.Bundling.FindByNumber(1).DeletionMark=False}" is true
+	And 1C:Enterprise language expression "{!Documents.Bundling.FindByNumber(14).DeletionMark=True}" is true
+
+Scenario: 964010 deletion mark CalculationMovementCosts (LimitedAccess)
+	And I execute the built-in language code at server (Extension)
+		| "Try"                                                     |
+		| "Doc = Documents.CalculationMovementCosts.FindByNumber(1).GetObject();" |
+		| "Doc.DeletionMark = False;"                               |
+		| "Doc.Write();"                                            |
+		| "Except"                                                  |
+		| "EndTry"                                                  |
+	And I execute the built-in language code at server (Extension)
+		| "Try"                                                     |
+		| "Doc = Documents.CalculationMovementCosts.FindByNumber(2).GetObject();" |
+		| "Doc.DeletionMark = False;"                               |
+		| "Doc.Write();"                                            |
+		| "Except"                                                  |
+		| "EndTry"                                                  |
+	And 1C:Enterprise language expression "{!Documents.CalculationMovementCosts.FindByNumber(1).DeletionMark=False}" is true
+	And 1C:Enterprise language expression "{!Documents.CalculationMovementCosts.FindByNumber(2).DeletionMark=True}" is true
+
+Scenario: 964011 deletion mark CashExpense (LimitedAccess)
+	And I execute the built-in language code at server (Extension)
+		| "Try"                                                     |
+		| "Doc = Documents.CashExpense.FindByNumber(1).GetObject();" |
+		| "Doc.DeletionMark = False;"                               |
+		| "Doc.Write();"                                            |
+		| "Except"                                                  |
+		| "EndTry"                                                  |
+	And I execute the built-in language code at server (Extension)
+		| "Try"                                                     |
+		| "Doc = Documents.CashExpense.FindByNumber(41).GetObject();" |
+		| "Doc.DeletionMark = False;"                               |
+		| "Doc.Write();"                                            |
+		| "Except"                                                  |
+		| "EndTry"                                                  |
+	And 1C:Enterprise language expression "{!Documents.CashExpense.FindByNumber(1).DeletionMark=False}" is true
+	And 1C:Enterprise language expression "{!Documents.CashExpense.FindByNumber(41).DeletionMark=True}" is true
+
+Scenario: 964012 deletion mark CashPayment (LimitedAccess)
+	And I execute the built-in language code at server (Extension)
+		| "Try"                                                     |
+		| "Doc = Documents.CashPayment.FindByNumber(1).GetObject();" |
+		| "Doc.DeletionMark = False;"                               |
+		| "Doc.Write();"                                            |
+		| "Except"                                                  |
+		| "EndTry"                                                  |
+	And I execute the built-in language code at server (Extension)
+		| "Try"                                                     |
+		| "Doc = Documents.CashPayment.FindByNumber(14).GetObject();" |
+		| "Doc.DeletionMark = False;"                               |
+		| "Doc.Write();"                                            |
+		| "Except"                                                  |
+		| "EndTry"                                                  |
+	And 1C:Enterprise language expression "{!Documents.CashPayment.FindByNumber(1).DeletionMark=False}" is true
+	And 1C:Enterprise language expression "{!Documents.CashPayment.FindByNumber(14).DeletionMark=True}" is true
+
+Scenario: 964013 deletion mark CashReceipt (LimitedAccess)
+	And I execute the built-in language code at server (Extension)
+		| "Try"                                                     |
+		| "Doc = Documents.CashReceipt.FindByNumber(1).GetObject();" |
+		| "Doc.DeletionMark = False;"                               |
+		| "Doc.Write();"                                            |
+		| "Except"                                                  |
+		| "EndTry"                                                  |
+	And I execute the built-in language code at server (Extension)
+		| "Try"                                                     |
+		| "Doc = Documents.CashReceipt.FindByNumber(14).GetObject();" |
+		| "Doc.DeletionMark = False;"                               |
+		| "Doc.Write();"                                            |
+		| "Except"                                                  |
+		| "EndTry"                                                  |
+	And 1C:Enterprise language expression "{!Documents.CashReceipt.FindByNumber(1).DeletionMark=False}" is true
+	And 1C:Enterprise language expression "{!Documents.CashReceipt.FindByNumber(14).DeletionMark=True}" is true
+
+Scenario: 964014 deletion mark CashRevenue (LimitedAccess)
+	And I execute the built-in language code at server (Extension)
+		| "Try"                                                     |
+		| "Doc = Documents.CashRevenue.FindByNumber(1).GetObject();" |
+		| "Doc.DeletionMark = False;"                               |
+		| "Doc.Write();"                                            |
+		| "Except"                                                  |
+		| "EndTry"                                                  |
+	And I execute the built-in language code at server (Extension)
+		| "Try"                                                     |
+		| "Doc = Documents.CashRevenue.FindByNumber(14).GetObject();" |
+		| "Doc.DeletionMark = False;"                               |
+		| "Doc.Write();"                                            |
+		| "Except"                                                  |
+		| "EndTry"                                                  |
+	And 1C:Enterprise language expression "{!Documents.CashRevenue.FindByNumber(1).DeletionMark=False}" is true
+	And 1C:Enterprise language expression "{!Documents.CashRevenue.FindByNumber(14).DeletionMark=True}" is true
+
+Scenario: 964015 deletion mark CashStatement (LimitedAccess)
+	And I execute the built-in language code at server (Extension)
+		| "Try"                                                     |
+		| "Doc = Documents.CashStatement.FindByNumber(1).GetObject();" |
+		| "Doc.DeletionMark = False;"                               |
+		| "Doc.Write();"                                            |
+		| "Except"                                                  |
+		| "EndTry"                                                  |
+	And I execute the built-in language code at server (Extension)
+		| "Try"                                                     |
+		| "Doc = Documents.CashStatement.FindByNumber(14).GetObject();" |
+		| "Doc.DeletionMark = False;"                               |
+		| "Doc.Write();"                                            |
+		| "Except"                                                  |
+		| "EndTry"                                                  |
+	And 1C:Enterprise language expression "{!Documents.CashStatement.FindByNumber(1).DeletionMark=False}" is true
+	And 1C:Enterprise language expression "{!Documents.CashStatement.FindByNumber(14).DeletionMark=True}" is true
+
+Scenario: 964016 deletion mark CashTransferOrder (LimitedAccess)
+	And I execute the built-in language code at server (Extension)
+		| "Try"                                                     |
+		| "Doc = Documents.CashTransferOrder.FindByNumber(1).GetObject();" |
+		| "Doc.DeletionMark = False;"                               |
+		| "Doc.Write();"                                            |
+		| "Except"                                                  |
+		| "EndTry"                                                  |
+	And I execute the built-in language code at server (Extension)
+		| "Try"                                                     |
+		| "Doc = Documents.CashTransferOrder.FindByNumber(14).GetObject();" |
+		| "Doc.DeletionMark = False;"                               |
+		| "Doc.Write();"                                            |
+		| "Except"                                                  |
+		| "EndTry"                                                  |
+	And 1C:Enterprise language expression "{!Documents.CashTransferOrder.FindByNumber(1).DeletionMark=False}" is true
+	And 1C:Enterprise language expression "{!Documents.CashTransferOrder.FindByNumber(14).DeletionMark=True}" is true
+
+Scenario: 964017 deletion mark ChequeBondTransaction (LimitedAccess)
+	And I execute the built-in language code at server (Extension)
+		| "Try"                                                     |
+		| "Doc = Documents.ChequeBondTransaction.FindByNumber(1).GetObject();" |
+		| "Doc.DeletionMark = False;"                               |
+		| "Doc.Write();"                                            |
+		| "Except"                                                  |
+		| "EndTry"                                                  |
+	And I execute the built-in language code at server (Extension)
+		| "Try"                                                     |
+		| "Doc = Documents.ChequeBondTransaction.FindByNumber(5).GetObject();" |
+		| "Doc.DeletionMark = False;"                               |
+		| "Doc.Write();"                                            |
+		| "Except"                                                  |
+		| "EndTry"                                                  |
+	And 1C:Enterprise language expression "{!Documents.ChequeBondTransaction.FindByNumber(1).DeletionMark=False}" is true
+	And 1C:Enterprise language expression "{!Documents.ChequeBondTransaction.FindByNumber(5).DeletionMark=True}" is true
+
+Scenario: 964018 deletion mark ChequeBondTransactionItem (LimitedAccess)
+	And I execute the built-in language code at server (Extension)
+		| "Try"                                                     |
+		| "Doc = Documents.ChequeBondTransactionItem.FindByNumber(1).GetObject();" |
+		| "Doc.DeletionMark = False;"                               |
+		| "Doc.Write();"                                            |
+		| "Except"                                                  |
+		| "EndTry"                                                  |
+	And I execute the built-in language code at server (Extension)
+		| "Try"                                                     |
+		| "Doc = Documents.ChequeBondTransactionItem.FindByNumber(5).GetObject();" |
+		| "Doc.DeletionMark = False;"                               |
+		| "Doc.Write();"                                            |
+		| "Except"                                                  |
+		| "EndTry"                                                  |
+	And 1C:Enterprise language expression "{!Documents.ChequeBondTransactionItem.FindByNumber(1).DeletionMark=False}" is true
+	And 1C:Enterprise language expression "{!Documents.ChequeBondTransactionItem.FindByNumber(5).DeletionMark=True}" is true
+
+Scenario: 964019 deletion mark ConsolidatedRetailSales (LimitedAccess)
+	And I execute the built-in language code at server (Extension)
+		| "Try"                                                     |
+		| "Doc = Documents.ConsolidatedRetailSales.FindByNumber(1).GetObject();" |
+		| "Doc.DeletionMark = False;"                               |
+		| "Doc.Write();"                                            |
+		| "Except"                                                  |
+		| "EndTry"                                                  |
+	And I execute the built-in language code at server (Extension)
+		| "Try"                                                     |
+		| "Doc = Documents.ConsolidatedRetailSales.FindByNumber(14).GetObject();" |
+		| "Doc.DeletionMark = False;"                               |
+		| "Doc.Write();"                                            |
+		| "Except"                                                  |
+		| "EndTry"                                                  |
+	And 1C:Enterprise language expression "{!Documents.ConsolidatedRetailSales.FindByNumber(1).DeletionMark=False}" is true
+	And 1C:Enterprise language expression "{!Documents.ConsolidatedRetailSales.FindByNumber(14).DeletionMark=True}" is true
+
+Scenario: 964020 deletion mark CreditNote (LimitedAccess)
+	And I execute the built-in language code at server (Extension)
+		| "Try"                                                     |
+		| "Doc = Documents.CreditNote.FindByNumber(1).GetObject();" |
+		| "Doc.DeletionMark = False;"                               |
+		| "Doc.Write();"                                            |
+		| "Except"                                                  |
+		| "EndTry"                                                  |
+	And I execute the built-in language code at server (Extension)
+		| "Try"                                                     |
+		| "Doc = Documents.CreditNote.FindByNumber(5).GetObject();" |
+		| "Doc.DeletionMark = False;"                               |
+		| "Doc.Write();"                                            |
+		| "Except"                                                  |
+		| "EndTry"                                                  |
+	And 1C:Enterprise language expression "{!Documents.CreditNote.FindByNumber(1).DeletionMark=False}" is true
+	And 1C:Enterprise language expression "{!Documents.CreditNote.FindByNumber(5).DeletionMark=True}" is true
+
+Scenario: 964021 deletion mark CustomersAdvancesClosing (LimitedAccess)
+	And I execute the built-in language code at server (Extension)
+		| "Try"                                                     |
+		| "Doc = Documents.CustomersAdvancesClosing.FindByNumber(1).GetObject();" |
+		| "Doc.DeletionMark = False;"                               |
+		| "Doc.Write();"                                            |
+		| "Except"                                                  |
+		| "EndTry"                                                  |
+	And I execute the built-in language code at server (Extension)
+		| "Try"                                                     |
+		| "Doc = Documents.CustomersAdvancesClosing.FindByNumber(5).GetObject();" |
+		| "Doc.DeletionMark = False;"                               |
+		| "Doc.Write();"                                            |
+		| "Except"                                                  |
+		| "EndTry"                                                  |
+	And 1C:Enterprise language expression "{!Documents.CustomersAdvancesClosing.FindByNumber(1).DeletionMark=False}" is true
+	And 1C:Enterprise language expression "{!Documents.CustomersAdvancesClosing.FindByNumber(5).DeletionMark=True}" is true
+
+Scenario: 964022 deletion mark DebitNote (LimitedAccess)
+	And I execute the built-in language code at server (Extension)
+		| "Try"                                                     |
+		| "Doc = Documents.DebitNote.FindByNumber(1).GetObject();" |
+		| "Doc.DeletionMark = False;"                               |
+		| "Doc.Write();"                                            |
+		| "Except"                                                  |
+		| "EndTry"                                                  |
+	And I execute the built-in language code at server (Extension)
+		| "Try"                                                     |
+		| "Doc = Documents.DebitNote.FindByNumber(5).GetObject();" |
+		| "Doc.DeletionMark = False;"                               |
+		| "Doc.Write();"                                            |
+		| "Except"                                                  |
+		| "EndTry"                                                  |
+	And 1C:Enterprise language expression "{!Documents.DebitNote.FindByNumber(1).DeletionMark=False}" is true
+	And 1C:Enterprise language expression "{!Documents.DebitNote.FindByNumber(5).DeletionMark=True}" is true
+
+Scenario: 964023 deletion mark EmployeeCashAdvance (LimitedAccess)
+	And I execute the built-in language code at server (Extension)
+		| "Try"                                                     |
+		| "Doc = Documents.EmployeeCashAdvance.FindByNumber(1).GetObject();" |
+		| "Doc.DeletionMark = False;"                               |
+		| "Doc.Write();"                                            |
+		| "Except"                                                  |
+		| "EndTry"                                                  |
+	And I execute the built-in language code at server (Extension)
+		| "Try"                                                     |
+		| "Doc = Documents.EmployeeCashAdvance.FindByNumber(5).GetObject();" |
+		| "Doc.DeletionMark = False;"                               |
+		| "Doc.Write();"                                            |
+		| "Except"                                                  |
+		| "EndTry"                                                  |
+	And 1C:Enterprise language expression "{!Documents.EmployeeCashAdvance.FindByNumber(1).DeletionMark=False}" is true
+	And 1C:Enterprise language expression "{!Documents.EmployeeCashAdvance.FindByNumber(5).DeletionMark=True}" is true
+
+Scenario: 964024 deletion mark ForeignCurrencyRevaluation (LimitedAccess)
+	And I execute the built-in language code at server (Extension)
+		| "Try"                                                     |
+		| "Doc = Documents.ForeignCurrencyRevaluation.FindByNumber(1).GetObject();" |
+		| "Doc.DeletionMark = False;"                               |
+		| "Doc.Write();"                                            |
+		| "Except"                                                  |
+		| "EndTry"                                                  |
+	And I execute the built-in language code at server (Extension)
+		| "Try"                                                     |
+		| "Doc = Documents.ForeignCurrencyRevaluation.FindByNumber(2).GetObject();" |
+		| "Doc.DeletionMark = False;"                               |
+		| "Doc.Write();"                                            |
+		| "Except"                                                  |
+		| "EndTry"                                                  |
+	And 1C:Enterprise language expression "{!Documents.ForeignCurrencyRevaluation.FindByNumber(1).DeletionMark=False}" is true
+	And 1C:Enterprise language expression "{!Documents.ForeignCurrencyRevaluation.FindByNumber(2).DeletionMark=True}" is true
+
+Scenario: 964025 deletion mark GoodsReceipt (LimitedAccess)
+	And I execute the built-in language code at server (Extension)
+		| "Try"                                                     |
+		| "Doc = Documents.GoodsReceipt.FindByNumber(2).GetObject();" |
+		| "Doc.DeletionMark = False;"                               |
+		| "Doc.Write();"                                            |
+		| "Except"                                                  |
+		| "EndTry"                                                  |
+	And I execute the built-in language code at server (Extension)
+		| "Try"                                                     |
+		| "Doc = Documents.GoodsReceipt.FindByNumber(11).GetObject();" |
+		| "Doc.DeletionMark = False;"                               |
+		| "Doc.Write();"                                            |
+		| "Except"                                                  |
+		| "EndTry"                                                  |
+	And 1C:Enterprise language expression "{!Documents.GoodsReceipt.FindByNumber(2).DeletionMark=False}" is true
+	And 1C:Enterprise language expression "{!Documents.GoodsReceipt.FindByNumber(11).DeletionMark=True}" is true
+
+Scenario: 964026 deletion mark IncomingPaymentOrder (LimitedAccess)
+	And I execute the built-in language code at server (Extension)
+		| "Try"                                                     |
+		| "Doc = Documents.IncomingPaymentOrder.FindByNumber(1).GetObject();" |
+		| "Doc.DeletionMark = False;"                               |
+		| "Doc.Write();"                                            |
+		| "Except"                                                  |
+		| "EndTry"                                                  |
+	And I execute the built-in language code at server (Extension)
+		| "Try"                                                     |
+		| "Doc = Documents.IncomingPaymentOrder.FindByNumber(5).GetObject();" |
+		| "Doc.DeletionMark = False;"                               |
+		| "Doc.Write();"                                            |
+		| "Except"                                                  |
+		| "EndTry"                                                  |
+	And 1C:Enterprise language expression "{!Documents.IncomingPaymentOrder.FindByNumber(1).DeletionMark=False}" is true
+	And 1C:Enterprise language expression "{!Documents.IncomingPaymentOrder.FindByNumber(5).DeletionMark=True}" is true
+
+Scenario: 964027 deletion mark InternalSupplyRequest (LimitedAccess)
+	And I execute the built-in language code at server (Extension)
+		| "Try"                                                     |
+		| "Doc = Documents.InternalSupplyRequest.FindByNumber(1).GetObject();" |
+		| "Doc.DeletionMark = False;"                               |
+		| "Doc.Write();"                                            |
+		| "Except"                                                  |
+		| "EndTry"                                                  |
+	And I execute the built-in language code at server (Extension)
+		| "Try"                                                     |
+		| "Doc = Documents.InternalSupplyRequest.FindByNumber(5).GetObject();" |
+		| "Doc.DeletionMark = False;"                               |
+		| "Doc.Write();"                                            |
+		| "Except"                                                  |
+		| "EndTry"                                                  |
+	And 1C:Enterprise language expression "{!Documents.InternalSupplyRequest.FindByNumber(1).DeletionMark=False}" is true
+	And 1C:Enterprise language expression "{!Documents.InternalSupplyRequest.FindByNumber(5).DeletionMark=True}" is true
+
+Scenario: 964028 deletion mark InventoryTransfer (LimitedAccess)
+	And I execute the built-in language code at server (Extension)
+		| "Try"                                                     |
+		| "Doc = Documents.InventoryTransfer.FindByNumber(1).GetObject();" |
+		| "Doc.DeletionMark = False;"                               |
+		| "Doc.Write();"                                            |
+		| "Except"                                                  |
+		| "EndTry"                                                  |
+	And I execute the built-in language code at server (Extension)
+		| "Try"                                                     |
+		| "Doc = Documents.InventoryTransfer.FindByNumber(5).GetObject();" |
+		| "Doc.DeletionMark = False;"                               |
+		| "Doc.Write();"                                            |
+		| "Except"                                                  |
+		| "EndTry"                                                  |
+	And 1C:Enterprise language expression "{!Documents.InventoryTransfer.FindByNumber(1).DeletionMark=False}" is true
+	And 1C:Enterprise language expression "{!Documents.InventoryTransfer.FindByNumber(5).DeletionMark=True}" is true
+
+Scenario: 964029 deletion mark InventoryTransferOrder (LimitedAccess)
+	And I execute the built-in language code at server (Extension)
+		| "Try"                                                     |
+		| "Doc = Documents.InventoryTransferOrder.FindByNumber(1).GetObject();" |
+		| "Doc.DeletionMark = False;"                               |
+		| "Doc.Write();"                                            |
+		| "Except"                                                  |
+		| "EndTry"                                                  |
+	And I execute the built-in language code at server (Extension)
+		| "Try"                                                     |
+		| "Doc = Documents.InventoryTransferOrder.FindByNumber(5).GetObject();" |
+		| "Doc.DeletionMark = False;"                               |
+		| "Doc.Write();"                                            |
+		| "Except"                                                  |
+		| "EndTry"                                                  |
+	And 1C:Enterprise language expression "{!Documents.InventoryTransferOrder.FindByNumber(1).DeletionMark=False}" is true
+	And 1C:Enterprise language expression "{!Documents.InventoryTransferOrder.FindByNumber(5).DeletionMark=True}" is true
+
+Scenario: 964030 deletion mark ItemStockAdjustment (LimitedAccess)
+	And I execute the built-in language code at server (Extension)
+		| "Try"                                                     |
+		| "Doc = Documents.ItemStockAdjustment.FindByNumber(1).GetObject();" |
+		| "Doc.DeletionMark = False;"                               |
+		| "Doc.Write();"                                            |
+		| "Except"                                                  |
+		| "EndTry"                                                  |
+	And I execute the built-in language code at server (Extension)
+		| "Try"                                                     |
+		| "Doc = Documents.ItemStockAdjustment.FindByNumber(5).GetObject();" |
+		| "Doc.DeletionMark = False;"                               |
+		| "Doc.Write();"                                            |
+		| "Except"                                                  |
+		| "EndTry"                                                  |
+	And 1C:Enterprise language expression "{!Documents.ItemStockAdjustment.FindByNumber(1).DeletionMark=False}" is true
+	And 1C:Enterprise language expression "{!Documents.ItemStockAdjustment.FindByNumber(5).DeletionMark=True}" is true
+
+
+Scenario: 964032 deletion mark Labeling (LimitedAccess)
+	And I execute the built-in language code at server (Extension)
+		| "Try"                                                     |
+		| "Doc = Documents.Labeling.FindByNumber(1).GetObject();" |
+		| "Doc.DeletionMark = False;"                               |
+		| "Doc.Write();"                                            |
+		| "Except"                                                  |
+		| "EndTry"                                                  |
+	And I execute the built-in language code at server (Extension)
+		| "Try"                                                     |
+		| "Doc = Documents.Labeling.FindByNumber(2).GetObject();" |
+		| "Doc.DeletionMark = False;"                               |
+		| "Doc.Write();"                                            |
+		| "Except"                                                  |
+		| "EndTry"                                                  |
+	And 1C:Enterprise language expression "{!Documents.Labeling.FindByNumber(1).DeletionMark=False}" is true
+	And 1C:Enterprise language expression "{!Documents.Labeling.FindByNumber(2).DeletionMark=True}" is true
+
+Scenario: 964033 deletion mark ManualRegisterEntry (LimitedAccess)
+	And I execute the built-in language code at server (Extension)
+		| "Try"                                                     |
+		| "Doc = Documents.ManualRegisterEntry.FindByNumber(1).GetObject();" |
+		| "Doc.DeletionMark = False;"                               |
+		| "Doc.Write();"                                            |
+		| "Except"                                                  |
+		| "EndTry"                                                  |
+	And I execute the built-in language code at server (Extension)
+		| "Try"                                                     |
+		| "Doc = Documents.ManualRegisterEntry.FindByNumber(2).GetObject();" |
+		| "Doc.DeletionMark = False;"                               |
+		| "Doc.Write();"                                            |
+		| "Except"                                                  |
+		| "EndTry"                                                  |
+	And 1C:Enterprise language expression "{!Documents.ManualRegisterEntry.FindByNumber(1).DeletionMark=False}" is true
+	And 1C:Enterprise language expression "{!Documents.ManualRegisterEntry.FindByNumber(2).DeletionMark=True}" is true
+
+Scenario: 964034 deletion mark MoneyTransfer (LimitedAccess)
+	And I execute the built-in language code at server (Extension)
+		| "Try"                                                     |
+		| "Doc = Documents.MoneyTransfer.FindByNumber(1).GetObject();" |
+		| "Doc.DeletionMark = False;"                               |
+		| "Doc.Write();"                                            |
+		| "Except"                                                  |
+		| "EndTry"                                                  |
+	And I execute the built-in language code at server (Extension)
+		| "Try"                                                     |
+		| "Doc = Documents.MoneyTransfer.FindByNumber(14).GetObject();" |
+		| "Doc.DeletionMark = False;"                               |
+		| "Doc.Write();"                                            |
+		| "Except"                                                  |
+		| "EndTry"                                                  |
+	And 1C:Enterprise language expression "{!Documents.MoneyTransfer.FindByNumber(1).DeletionMark=False}" is true
+	And 1C:Enterprise language expression "{!Documents.MoneyTransfer.FindByNumber(14).DeletionMark=True}" is true
+
+Scenario: 964035 deletion mark OpeningEntry (LimitedAccess)
+	And I execute the built-in language code at server (Extension)
+		| "Try"                                                     |
+		| "Doc = Documents.OpeningEntry.FindByNumber(1).GetObject();" |
+		| "Doc.DeletionMark = False;"                               |
+		| "Doc.Write();"                                            |
+		| "Except"                                                  |
+		| "EndTry"                                                  |
+	And I execute the built-in language code at server (Extension)
+		| "Try"                                                     |
+		| "Doc = Documents.OpeningEntry.FindByNumber(5).GetObject();" |
+		| "Doc.DeletionMark = False;"                               |
+		| "Doc.Write();"                                            |
+		| "Except"                                                  |
+		| "EndTry"                                                  |
+	And 1C:Enterprise language expression "{!Documents.OpeningEntry.FindByNumber(1).DeletionMark=False}" is true
+	And 1C:Enterprise language expression "{!Documents.OpeningEntry.FindByNumber(5).DeletionMark=True}" is true
+
+Scenario: 964036 deletion mark OutgoingPaymentOrder (LimitedAccess)
+	And I execute the built-in language code at server (Extension)
+		| "Try"                                                     |
+		| "Doc = Documents.OutgoingPaymentOrder.FindByNumber(1).GetObject();" |
+		| "Doc.DeletionMark = False;"                               |
+		| "Doc.Write();"                                            |
+		| "Except"                                                  |
+		| "EndTry"                                                  |
+	And I execute the built-in language code at server (Extension)
+		| "Try"                                                     |
+		| "Doc = Documents.OutgoingPaymentOrder.FindByNumber(5).GetObject();" |
+		| "Doc.DeletionMark = False;"                               |
+		| "Doc.Write();"                                            |
+		| "Except"                                                  |
+		| "EndTry"                                                  |
+	And 1C:Enterprise language expression "{!Documents.OutgoingPaymentOrder.FindByNumber(1).DeletionMark=False}" is true
+	And 1C:Enterprise language expression "{!Documents.OutgoingPaymentOrder.FindByNumber(5).DeletionMark=True}" is true
+
+
+Scenario: 964037 deletion mark Payroll (LimitedAccess)
+	And I execute the built-in language code at server (Extension)
+		| "Try"                                                     |
+		| "Doc = Documents.Payroll.FindByNumber(1).GetObject();" |
+		| "Doc.DeletionMark = False;"                               |
+		| "Doc.Write();"                                            |
+		| "Except"                                                  |
+		| "EndTry"                                                  |
+	And I execute the built-in language code at server (Extension)
+		| "Try"                                                     |
+		| "Doc = Documents.Payroll.FindByNumber(5).GetObject();" |
+		| "Doc.DeletionMark = False;"                               |
+		| "Doc.Write();"                                            |
+		| "Except"                                                  |
+		| "EndTry"                                                  |
+	And 1C:Enterprise language expression "{!Documents.Payroll.FindByNumber(1).DeletionMark=False}" is true
+	And 1C:Enterprise language expression "{!Documents.Payroll.FindByNumber(5).DeletionMark=True}" is true
+
+Scenario: 964038 deletion mark PhysicalCountByLocation (LimitedAccess)
+	And I execute the built-in language code at server (Extension)
+		| "Try"                                                     |
+		| "Doc = Documents.PhysicalCountByLocation.FindByNumber(1).GetObject();" |
+		| "Doc.DeletionMark = False;"                               |
+		| "Doc.Write();"                                            |
+		| "Except"                                                  |
+		| "EndTry"                                                  |
+	And I execute the built-in language code at server (Extension)
+		| "Try"                                                     |
+		| "Doc = Documents.PhysicalCountByLocation.FindByNumber(5).GetObject();" |
+		| "Doc.DeletionMark = False;"                               |
+		| "Doc.Write();"                                            |
+		| "Except"                                                  |
+		| "EndTry"                                                  |
+	And 1C:Enterprise language expression "{!Documents.PhysicalCountByLocation.FindByNumber(1).DeletionMark=False}" is true
+	And 1C:Enterprise language expression "{!Documents.PhysicalCountByLocation.FindByNumber(5).DeletionMark=True}" is true
+
+Scenario: 964039 deletion mark PhysicalInventory (LimitedAccess)
+	And I execute the built-in language code at server (Extension)
+		| "Try"                                                     |
+		| "Doc = Documents.PhysicalInventory.FindByNumber(1).GetObject();" |
+		| "Doc.DeletionMark = False;"                               |
+		| "Doc.Write();"                                            |
+		| "Except"                                                  |
+		| "EndTry"                                                  |
+	And I execute the built-in language code at server (Extension)
+		| "Try"                                                     |
+		| "Doc = Documents.PhysicalInventory.FindByNumber(5).GetObject();" |
+		| "Doc.DeletionMark = False;"                               |
+		| "Doc.Write();"                                            |
+		| "Except"                                                  |
+		| "EndTry"                                                  |
+	And 1C:Enterprise language expression "{!Documents.PhysicalInventory.FindByNumber(1).DeletionMark=False}" is true
+	And 1C:Enterprise language expression "{!Documents.PhysicalInventory.FindByNumber(5).DeletionMark=True}" is true
+
+Scenario: 964040 deletion mark PlannedReceiptReservation (LimitedAccess)
+	And I execute the built-in language code at server (Extension)
+		| "Try"                                                     |
+		| "Doc = Documents.PlannedReceiptReservation.FindByNumber(1).GetObject();" |
+		| "Doc.DeletionMark = False;"                               |
+		| "Doc.Write();"                                            |
+		| "Except"                                                  |
+		| "EndTry"                                                  |
+	And I execute the built-in language code at server (Extension)
+		| "Try"                                                     |
+		| "Doc = Documents.PlannedReceiptReservation.FindByNumber(118).GetObject();" |
+		| "Doc.DeletionMark = False;"                               |
+		| "Doc.Write();"                                            |
+		| "Except"                                                  |
+		| "EndTry"                                                  |
+	And 1C:Enterprise language expression "{!Documents.PlannedReceiptReservation.FindByNumber(1).DeletionMark=False}" is true
+	And 1C:Enterprise language expression "{!Documents.PlannedReceiptReservation.FindByNumber(118).DeletionMark=True}" is true
+
+Scenario: 964041 deletion mark PriceList (LimitedAccess)
+	And I execute the built-in language code at server (Extension)
+		| "Try"                                                     |
+		| "Doc = Documents.PriceList.FindByNumber(1).GetObject();" |
+		| "Doc.DeletionMark = False;"                               |
+		| "Doc.Write();"                                            |
+		| "Except"                                                  |
+		| "EndTry"                                                  |
+	And I execute the built-in language code at server (Extension)
+		| "Try"                                                     |
+		| "Doc = Documents.PriceList.FindByNumber(5).GetObject();" |
+		| "Doc.DeletionMark = False;"                               |
+		| "Doc.Write();"                                            |
+		| "Except"                                                  |
+		| "EndTry"                                                  |
+	And 1C:Enterprise language expression "{!Documents.PriceList.FindByNumber(1).DeletionMark=False}" is true
+	And 1C:Enterprise language expression "{!Documents.PriceList.FindByNumber(5).DeletionMark=True}" is true
+
+Scenario: 964042 deletion mark Production (LimitedAccess)
+	And I execute the built-in language code at server (Extension)
+		| "Try"                                                     |
+		| "Doc = Documents.Production.FindByNumber(1).GetObject();" |
+		| "Doc.DeletionMark = False;"                               |
+		| "Doc.Write();"                                            |
+		| "Except"                                                  |
+		| "EndTry"                                                  |
+	And I execute the built-in language code at server (Extension)
+		| "Try"                                                     |
+		| "Doc = Documents.Production.FindByNumber(5).GetObject();" |
+		| "Doc.DeletionMark = False;"                               |
+		| "Doc.Write();"                                            |
+		| "Except"                                                  |
+		| "EndTry"                                                  |
+	And 1C:Enterprise language expression "{!Documents.Production.FindByNumber(1).DeletionMark=False}" is true
+	And 1C:Enterprise language expression "{!Documents.Production.FindByNumber(5).DeletionMark=True}" is true
+
+Scenario: 964043 deletion mark ProductionCostsAllocation (LimitedAccess)
+	And I execute the built-in language code at server (Extension)
+		| "Try"                                                     |
+		| "Doc = Documents.ProductionCostsAllocation.FindByNumber(1).GetObject();" |
+		| "Doc.DeletionMark = False;"                               |
+		| "Doc.Write();"                                            |
+		| "Except"                                                  |
+		| "EndTry"                                                  |
+	And I execute the built-in language code at server (Extension)
+		| "Try"                                                     |
+		| "Doc = Documents.ProductionCostsAllocation.FindByNumber(5).GetObject();" |
+		| "Doc.DeletionMark = False;"                               |
+		| "Doc.Write();"                                            |
+		| "Except"                                                  |
+		| "EndTry"                                                  |
+	And 1C:Enterprise language expression "{!Documents.ProductionCostsAllocation.FindByNumber(1).DeletionMark=False}" is true
+	And 1C:Enterprise language expression "{!Documents.ProductionCostsAllocation.FindByNumber(5).DeletionMark=True}" is true
+
+Scenario: 964044 deletion mark ProductionPlanning (LimitedAccess)
+	And I execute the built-in language code at server (Extension)
+		| "Try"                                                     |
+		| "Doc = Documents.ProductionPlanning.FindByNumber(1).GetObject();" |
+		| "Doc.DeletionMark = False;"                               |
+		| "Doc.Write();"                                            |
+		| "Except"                                                  |
+		| "EndTry"                                                  |
+	And I execute the built-in language code at server (Extension)
+		| "Try"                                                     |
+		| "Doc = Documents.ProductionPlanning.FindByNumber(5).GetObject();" |
+		| "Doc.DeletionMark = False;"                               |
+		| "Doc.Write();"                                            |
+		| "Except"                                                  |
+		| "EndTry"                                                  |
+	And 1C:Enterprise language expression "{!Documents.ProductionPlanning.FindByNumber(1).DeletionMark=False}" is true
+	And 1C:Enterprise language expression "{!Documents.ProductionPlanning.FindByNumber(5).DeletionMark=True}" is true
+
+Scenario: 964045 deletion mark ProductionPlanningClosing (LimitedAccess)
+	And I execute the built-in language code at server (Extension)
+		| "Try"                                                     |
+		| "Doc = Documents.ProductionPlanningClosing.FindByNumber(1).GetObject();" |
+		| "Doc.DeletionMark = False;"                               |
+		| "Doc.Write();"                                            |
+		| "Except"                                                  |
+		| "EndTry"                                                  |
+	And I execute the built-in language code at server (Extension)
+		| "Try"                                                     |
+		| "Doc = Documents.ProductionPlanningClosing.FindByNumber(5).GetObject();" |
+		| "Doc.DeletionMark = False;"                               |
+		| "Doc.Write();"                                            |
+		| "Except"                                                  |
+		| "EndTry"                                                  |
+	And 1C:Enterprise language expression "{!Documents.ProductionPlanningClosing.FindByNumber(1).DeletionMark=False}" is true
+	And 1C:Enterprise language expression "{!Documents.ProductionPlanningClosing.FindByNumber(5).DeletionMark=True}" is true
+
+Scenario: 964046 deletion mark ProductionPlanningCorrection (LimitedAccess)
+	And I execute the built-in language code at server (Extension)
+		| "Try"                                                     |
+		| "Doc = Documents.ProductionPlanningCorrection.FindByNumber(1).GetObject();" |
+		| "Doc.DeletionMark = False;"                               |
+		| "Doc.Write();"                                            |
+		| "Except"                                                  |
+		| "EndTry"                                                  |
+	And I execute the built-in language code at server (Extension)
+		| "Try"                                                     |
+		| "Doc = Documents.ProductionPlanningCorrection.FindByNumber(5).GetObject();" |
+		| "Doc.DeletionMark = False;"                               |
+		| "Doc.Write();"                                            |
+		| "Except"                                                  |
+		| "EndTry"                                                  |
+	And 1C:Enterprise language expression "{!Documents.ProductionPlanningCorrection.FindByNumber(1).DeletionMark=False}" is true
+	And 1C:Enterprise language expression "{!Documents.ProductionPlanningCorrection.FindByNumber(5).DeletionMark=True}" is true
+
+Scenario: 964047 deletion mark PurchaseInvoice (LimitedAccess)
+	And I execute the built-in language code at server (Extension)
+		| "Try"                                                     |
+		| "Doc = Documents.PurchaseInvoice.FindByNumber(2).GetObject();" |
+		| "Doc.DeletionMark = False;"                               |
+		| "Doc.Write();"                                            |
+		| "Except"                                                  |
+		| "EndTry"                                                  |
+	And I execute the built-in language code at server (Extension)
+		| "Try"                                                     |
+		| "Doc = Documents.PurchaseInvoice.FindByNumber(26).GetObject();" |
+		| "Doc.DeletionMark = False;"                               |
+		| "Doc.Write();"                                            |
+		| "Except"                                                  |
+		| "EndTry"                                                  |
+	And 1C:Enterprise language expression "{!Documents.PurchaseInvoice.FindByNumber(2).DeletionMark=False}" is true
+	And 1C:Enterprise language expression "{!Documents.PurchaseInvoice.FindByNumber(26).DeletionMark=True}" is true
+
+Scenario: 964048 deletion mark PurchaseOrder (LimitedAccess)
+	And I execute the built-in language code at server (Extension)
+		| "Try"                                                     |
+		| "Doc = Documents.PurchaseOrder.FindByNumber(2).GetObject();" |
+		| "Doc.DeletionMark = False;"                               |
+		| "Doc.Write();"                                            |
+		| "Except"                                                  |
+		| "EndTry"                                                  |
+	And I execute the built-in language code at server (Extension)
+		| "Try"                                                     |
+		| "Doc = Documents.PurchaseOrder.FindByNumber(26).GetObject();" |
+		| "Doc.DeletionMark = False;"                               |
+		| "Doc.Write();"                                            |
+		| "Except"                                                  |
+		| "EndTry"                                                  |
+	And 1C:Enterprise language expression "{!Documents.PurchaseOrder.FindByNumber(2).DeletionMark=False}" is true
+	And 1C:Enterprise language expression "{!Documents.PurchaseOrder.FindByNumber(26).DeletionMark=True}" is true
+
+Scenario: 964049 deletion mark PurchaseOrderClosing (LimitedAccess)
+	And I execute the built-in language code at server (Extension)
+		| "Try"                                                     |
+		| "Doc = Documents.PurchaseOrderClosing.FindByNumber(2).GetObject();" |
+		| "Doc.DeletionMark = False;"                               |
+		| "Doc.Write();"                                            |
+		| "Except"                                                  |
+		| "EndTry"                                                  |
+	And I execute the built-in language code at server (Extension)
+		| "Try"                                                     |
+		| "Doc = Documents.PurchaseOrderClosing.FindByNumber(26).GetObject();" |
+		| "Doc.DeletionMark = False;"                               |
+		| "Doc.Write();"                                            |
+		| "Except"                                                  |
+		| "EndTry"                                                  |
+	And 1C:Enterprise language expression "{!Documents.PurchaseOrderClosing.FindByNumber(2).DeletionMark=False}" is true
+	And 1C:Enterprise language expression "{!Documents.PurchaseOrderClosing.FindByNumber(26).DeletionMark=True}" is true
+
+Scenario: 964050 deletion mark PurchaseReturn (LimitedAccess)
+	And I execute the built-in language code at server (Extension)
+		| "Try"                                                     |
+		| "Doc = Documents.PurchaseReturn.FindByNumber(2).GetObject();" |
+		| "Doc.DeletionMark = False;"                               |
+		| "Doc.Write();"                                            |
+		| "Except"                                                  |
+		| "EndTry"                                                  |
+	And I execute the built-in language code at server (Extension)
+		| "Try"                                                     |
+		| "Doc = Documents.PurchaseReturn.FindByNumber(26).GetObject();" |
+		| "Doc.DeletionMark = False;"                               |
+		| "Doc.Write();"                                            |
+		| "Except"                                                  |
+		| "EndTry"                                                  |
+	And 1C:Enterprise language expression "{!Documents.PurchaseReturn.FindByNumber(2).DeletionMark=False}" is true
+	And 1C:Enterprise language expression "{!Documents.PurchaseReturn.FindByNumber(26).DeletionMark=True}" is true
+
+Scenario: 964051 deletion mark PurchaseReturnOrder (LimitedAccess)
+	And I execute the built-in language code at server (Extension)
+		| "Try"                                                     |
+		| "Doc = Documents.PurchaseReturnOrder.FindByNumber(2).GetObject();" |
+		| "Doc.DeletionMark = False;"                               |
+		| "Doc.Write();"                                            |
+		| "Except"                                                  |
+		| "EndTry"                                                  |
+	And I execute the built-in language code at server (Extension)
+		| "Try"                                                     |
+		| "Doc = Documents.PurchaseReturnOrder.FindByNumber(26).GetObject();" |
+		| "Doc.DeletionMark = False;"                               |
+		| "Doc.Write();"                                            |
+		| "Except"                                                  |
+		| "EndTry"                                                  |
+	And 1C:Enterprise language expression "{!Documents.PurchaseReturnOrder.FindByNumber(2).DeletionMark=False}" is true
+	And 1C:Enterprise language expression "{!Documents.PurchaseReturnOrder.FindByNumber(26).DeletionMark=True}" is true
+
+Scenario: 964052 deletion mark ReconciliationStatement (LimitedAccess)
+	And I execute the built-in language code at server (Extension)
+		| "Try"                                                     |
+		| "Doc = Documents.ReconciliationStatement.FindByNumber(1).GetObject();" |
+		| "Doc.DeletionMark = False;"                               |
+		| "Doc.Write();"                                            |
+		| "Except"                                                  |
+		| "EndTry"                                                  |
+	And I execute the built-in language code at server (Extension)
+		| "Try"                                                     |
+		| "Doc = Documents.ReconciliationStatement.FindByNumber(5).GetObject();" |
+		| "Doc.DeletionMark = False;"                               |
+		| "Doc.Write();"                                            |
+		| "Except"                                                  |
+		| "EndTry"                                                  |
+	And 1C:Enterprise language expression "{!Documents.ReconciliationStatement.FindByNumber(1).DeletionMark=False}" is true
+	And 1C:Enterprise language expression "{!Documents.ReconciliationStatement.FindByNumber(5).DeletionMark=True}" is true
+
+Scenario: 964053 deletion mark RetailGoodsReceipt (LimitedAccess)
+	And I execute the built-in language code at server (Extension)
+		| "Try"                                                     |
+		| "Doc = Documents.RetailGoodsReceipt.FindByNumber(2).GetObject();" |
+		| "Doc.DeletionMark = False;"                               |
+		| "Doc.Write();"                                            |
+		| "Except"                                                  |
+		| "EndTry"                                                  |
+	And I execute the built-in language code at server (Extension)
+		| "Try"                                                     |
+		| "Doc = Documents.RetailGoodsReceipt.FindByNumber(26).GetObject();" |
+		| "Doc.DeletionMark = False;"                               |
+		| "Doc.Write();"                                            |
+		| "Except"                                                  |
+		| "EndTry"                                                  |
+	And 1C:Enterprise language expression "{!Documents.RetailGoodsReceipt.FindByNumber(2).DeletionMark=False}" is true
+	And 1C:Enterprise language expression "{!Documents.RetailGoodsReceipt.FindByNumber(26).DeletionMark=True}" is true
+
+Scenario: 964054 deletion mark RetailReturnReceipt (LimitedAccess)
+	And I execute the built-in language code at server (Extension)
+		| "Try"                                                     |
+		| "Doc = Documents.RetailReturnReceipt.FindByNumber(2).GetObject();" |
+		| "Doc.DeletionMark = False;"                               |
+		| "Doc.Write();"                                            |
+		| "Except"                                                  |
+		| "EndTry"                                                  |
+	And I execute the built-in language code at server (Extension)
+		| "Try"                                                     |
+		| "Doc = Documents.RetailReturnReceipt.FindByNumber(26).GetObject();" |
+		| "Doc.DeletionMark = False;"                               |
+		| "Doc.Write();"                                            |
+		| "Except"                                                  |
+		| "EndTry"                                                  |
+	And 1C:Enterprise language expression "{!Documents.RetailReturnReceipt.FindByNumber(2).DeletionMark=False}" is true
+	And 1C:Enterprise language expression "{!Documents.RetailReturnReceipt.FindByNumber(26).DeletionMark=True}" is true
+
+Scenario: 964055 deletion mark RetailSalesReceipt (LimitedAccess)
+	And I execute the built-in language code at server (Extension)
+		| "Try"                                                     |
+		| "Doc = Documents.RetailSalesReceipt.FindByNumber(2).GetObject();" |
+		| "Doc.DeletionMark = False;"                               |
+		| "Doc.Write();"                                            |
+		| "Except"                                                  |
+		| "EndTry"                                                  |
+	And I execute the built-in language code at server (Extension)
+		| "Try"                                                     |
+		| "Doc = Documents.RetailSalesReceipt.FindByNumber(26).GetObject();" |
+		| "Doc.DeletionMark = False;"                               |
+		| "Doc.Write();"                                            |
+		| "Except"                                                  |
+		| "EndTry"                                                  |
+	And 1C:Enterprise language expression "{!Documents.RetailSalesReceipt.FindByNumber(2).DeletionMark=False}" is true
+	And 1C:Enterprise language expression "{!Documents.RetailSalesReceipt.FindByNumber(26).DeletionMark=True}" is true
+
+Scenario: 964056 deletion mark RetailShipmentConfirmation (LimitedAccess)
+	And I execute the built-in language code at server (Extension)
+		| "Try"                                                     |
+		| "Doc = Documents.RetailShipmentConfirmation.FindByNumber(2).GetObject();" |
+		| "Doc.DeletionMark = False;"                               |
+		| "Doc.Write();"                                            |
+		| "Except"                                                  |
+		| "EndTry"                                                  |
+	And I execute the built-in language code at server (Extension)
+		| "Try"                                                     |
+		| "Doc = Documents.RetailShipmentConfirmation.FindByNumber(26).GetObject();" |
+		| "Doc.DeletionMark = False;"                               |
+		| "Doc.Write();"                                            |
+		| "Except"                                                  |
+		| "EndTry"                                                  |
+	And 1C:Enterprise language expression "{!Documents.RetailShipmentConfirmation.FindByNumber(2).DeletionMark=False}" is true
+	And 1C:Enterprise language expression "{!Documents.RetailShipmentConfirmation.FindByNumber(26).DeletionMark=True}" is true
+
+Scenario: 964057 deletion mark SalesInvoice (LimitedAccess)
+	And I execute the built-in language code at server (Extension)
+		| "Try"                                                     |
+		| "Doc = Documents.SalesInvoice.FindByNumber(2).GetObject();" |
+		| "Doc.DeletionMark = False;"                               |
+		| "Doc.Write();"                                            |
+		| "Except"                                                  |
+		| "EndTry"                                                  |
+	And I execute the built-in language code at server (Extension)
+		| "Try"                                                     |
+		| "Doc = Documents.SalesInvoice.FindByNumber(26).GetObject();" |
+		| "Doc.DeletionMark = False;"                               |
+		| "Doc.Write();"                                            |
+		| "Except"                                                  |
+		| "EndTry"                                                  |
+	And 1C:Enterprise language expression "{!Documents.SalesInvoice.FindByNumber(2).DeletionMark=False}" is true
+	And 1C:Enterprise language expression "{!Documents.SalesInvoice.FindByNumber(26).DeletionMark=True}" is true
+
+Scenario: 964058 deletion mark SalesOrder (LimitedAccess)
+	And I execute the built-in language code at server (Extension)
+		| "Try"                                                     |
+		| "Doc = Documents.SalesOrder.FindByNumber(2).GetObject();" |
+		| "Doc.DeletionMark = False;"                               |
+		| "Doc.Write();"                                            |
+		| "Except"                                                  |
+		| "EndTry"                                                  |
+	And I execute the built-in language code at server (Extension)
+		| "Try"                                                     |
+		| "Doc = Documents.SalesOrder.FindByNumber(26).GetObject();" |
+		| "Doc.DeletionMark = False;"                               |
+		| "Doc.Write();"                                            |
+		| "Except"                                                  |
+		| "EndTry"                                                  |
+	And 1C:Enterprise language expression "{!Documents.SalesOrder.FindByNumber(2).DeletionMark=False}" is true
+	And 1C:Enterprise language expression "{!Documents.SalesOrder.FindByNumber(26).DeletionMark=True}" is true
+
+Scenario: 964059 deletion mark SalesOrderClosing (LimitedAccess)
+	And I execute the built-in language code at server (Extension)
+		| "Try"                                                     |
+		| "Doc = Documents.SalesOrderClosing.FindByNumber(2).GetObject();" |
+		| "Doc.DeletionMark = False;"                               |
+		| "Doc.Write();"                                            |
+		| "Except"                                                  |
+		| "EndTry"                                                  |
+	And I execute the built-in language code at server (Extension)
+		| "Try"                                                     |
+		| "Doc = Documents.SalesOrderClosing.FindByNumber(26).GetObject();" |
+		| "Doc.DeletionMark = False;"                               |
+		| "Doc.Write();"                                            |
+		| "Except"                                                  |
+		| "EndTry"                                                  |
+	And 1C:Enterprise language expression "{!Documents.SalesOrderClosing.FindByNumber(2).DeletionMark=False}" is true
+	And 1C:Enterprise language expression "{!Documents.SalesOrderClosing.FindByNumber(26).DeletionMark=True}" is true
+
+Scenario: 964060 deletion mark SalesReportFromTradeAgent (LimitedAccess)
+	And I execute the built-in language code at server (Extension)
+		| "Try"                                                     |
+		| "Doc = Documents.SalesReportFromTradeAgent.FindByNumber(1).GetObject();" |
+		| "Doc.DeletionMark = False;"                               |
+		| "Doc.Write();"                                            |
+		| "Except"                                                  |
+		| "EndTry"                                                  |
+	And I execute the built-in language code at server (Extension)
+		| "Try"                                                     |
+		| "Doc = Documents.SalesReportFromTradeAgent.FindByNumber(5).GetObject();" |
+		| "Doc.DeletionMark = False;"                               |
+		| "Doc.Write();"                                            |
+		| "Except"                                                  |
+		| "EndTry"                                                  |
+	And 1C:Enterprise language expression "{!Documents.SalesReportFromTradeAgent.FindByNumber(1).DeletionMark=False}" is true
+	And 1C:Enterprise language expression "{!Documents.SalesReportFromTradeAgent.FindByNumber(5).DeletionMark=True}" is true
+
+Scenario: 964061 deletion mark SalesReportToConsignor (LimitedAccess)
+	And I execute the built-in language code at server (Extension)
+		| "Try"                                                     |
+		| "Doc = Documents.SalesReportToConsignor.FindByNumber(1).GetObject();" |
+		| "Doc.DeletionMark = False;"                               |
+		| "Doc.Write();"                                            |
+		| "Except"                                                  |
+		| "EndTry"                                                  |
+	And I execute the built-in language code at server (Extension)
+		| "Try"                                                     |
+		| "Doc = Documents.SalesReportToConsignor.FindByNumber(5).GetObject();" |
+		| "Doc.DeletionMark = False;"                               |
+		| "Doc.Write();"                                            |
+		| "Except"                                                  |
+		| "EndTry"                                                  |
+	And 1C:Enterprise language expression "{!Documents.SalesReportToConsignor.FindByNumber(1).DeletionMark=False}" is true
+	And 1C:Enterprise language expression "{!Documents.SalesReportToConsignor.FindByNumber(5).DeletionMark=True}" is true
+
+Scenario: 964062 deletion mark SalesReturn (LimitedAccess)
+	And I execute the built-in language code at server (Extension)
+		| "Try"                                                     |
+		| "Doc = Documents.SalesReturn.FindByNumber(2).GetObject();" |
+		| "Doc.DeletionMark = False;"                               |
+		| "Doc.Write();"                                            |
+		| "Except"                                                  |
+		| "EndTry"                                                  |
+	And I execute the built-in language code at server (Extension)
+		| "Try"                                                     |
+		| "Doc = Documents.SalesReturn.FindByNumber(26).GetObject();" |
+		| "Doc.DeletionMark = False;"                               |
+		| "Doc.Write();"                                            |
+		| "Except"                                                  |
+		| "EndTry"                                                  |
+	And 1C:Enterprise language expression "{!Documents.SalesReturn.FindByNumber(2).DeletionMark=False}" is true
+	And 1C:Enterprise language expression "{!Documents.SalesReturn.FindByNumber(26).DeletionMark=True}" is true
+
+Scenario: 964063 deletion mark SalesReturnOrder (LimitedAccess)
+	And I execute the built-in language code at server (Extension)
+		| "Try"                                                     |
+		| "Doc = Documents.SalesReturnOrder.FindByNumber(2).GetObject();" |
+		| "Doc.DeletionMark = False;"                               |
+		| "Doc.Write();"                                            |
+		| "Except"                                                  |
+		| "EndTry"                                                  |
+	And I execute the built-in language code at server (Extension)
+		| "Try"                                                     |
+		| "Doc = Documents.SalesReturnOrder.FindByNumber(26).GetObject();" |
+		| "Doc.DeletionMark = False;"                               |
+		| "Doc.Write();"                                            |
+		| "Except"                                                  |
+		| "EndTry"                                                  |
+	And 1C:Enterprise language expression "{!Documents.SalesReturnOrder.FindByNumber(2).DeletionMark=False}" is true
+	And 1C:Enterprise language expression "{!Documents.SalesReturnOrder.FindByNumber(26).DeletionMark=True}" is true
+
+Scenario: 964064 deletion mark ShipmentConfirmation (LimitedAccess)
+	And I execute the built-in language code at server (Extension)
+		| "Try"                                                     |
+		| "Doc = Documents.ShipmentConfirmation.FindByNumber(2).GetObject();" |
+		| "Doc.DeletionMark = False;"                               |
+		| "Doc.Write();"                                            |
+		| "Except"                                                  |
+		| "EndTry"                                                  |
+	And I execute the built-in language code at server (Extension)
+		| "Try"                                                     |
+		| "Doc = Documents.ShipmentConfirmation.FindByNumber(26).GetObject();" |
+		| "Doc.DeletionMark = False;"                               |
+		| "Doc.Write();"                                            |
+		| "Except"                                                  |
+		| "EndTry"                                                  |
+	And 1C:Enterprise language expression "{!Documents.ShipmentConfirmation.FindByNumber(2).DeletionMark=False}" is true
+	And 1C:Enterprise language expression "{!Documents.ShipmentConfirmation.FindByNumber(26).DeletionMark=True}" is true
+
+Scenario: 964065 deletion mark StockAdjustmentAsSurplus (LimitedAccess)
+	And I execute the built-in language code at server (Extension)
+		| "Try"                                                     |
+		| "Doc = Documents.StockAdjustmentAsSurplus.FindByNumber(1).GetObject();" |
+		| "Doc.DeletionMark = False;"                               |
+		| "Doc.Write();"                                            |
+		| "Except"                                                  |
+		| "EndTry"                                                  |
+	And I execute the built-in language code at server (Extension)
+		| "Try"                                                     |
+		| "Doc = Documents.StockAdjustmentAsSurplus.FindByNumber(5).GetObject();" |
+		| "Doc.DeletionMark = False;"                               |
+		| "Doc.Write();"                                            |
+		| "Except"                                                  |
+		| "EndTry"                                                  |
+	And 1C:Enterprise language expression "{!Documents.StockAdjustmentAsSurplus.FindByNumber(1).DeletionMark=False}" is true
+	And 1C:Enterprise language expression "{!Documents.StockAdjustmentAsSurplus.FindByNumber(5).DeletionMark=True}" is true
+
+Scenario: 964066 deletion mark StockAdjustmentAsWriteOff (LimitedAccess)
+	And I execute the built-in language code at server (Extension)
+		| "Try"                                                     |
+		| "Doc = Documents.StockAdjustmentAsWriteOff.FindByNumber(1).GetObject();" |
+		| "Doc.DeletionMark = False;"                               |
+		| "Doc.Write();"                                            |
+		| "Except"                                                  |
+		| "EndTry"                                                  |
+	And I execute the built-in language code at server (Extension)
+		| "Try"                                                     |
+		| "Doc = Documents.StockAdjustmentAsWriteOff.FindByNumber(5).GetObject();" |
+		| "Doc.DeletionMark = False;"                               |
+		| "Doc.Write();"                                            |
+		| "Except"                                                  |
+		| "EndTry"                                                  |
+	And 1C:Enterprise language expression "{!Documents.StockAdjustmentAsWriteOff.FindByNumber(1).DeletionMark=False}" is true
+	And 1C:Enterprise language expression "{!Documents.StockAdjustmentAsWriteOff.FindByNumber(5).DeletionMark=True}" is true
+
+Scenario: 964067 deletion mark TimeSheet (LimitedAccess)
+	And I execute the built-in language code at server (Extension)
+		| "Try"                                                     |
+		| "Doc = Documents.TimeSheet.FindByNumber(1).GetObject();" |
+		| "Doc.DeletionMark = False;"                               |
+		| "Doc.Write();"                                            |
+		| "Except"                                                  |
+		| "EndTry"                                                  |
+	And I execute the built-in language code at server (Extension)
+		| "Try"                                                     |
+		| "Doc = Documents.TimeSheet.FindByNumber(5).GetObject();" |
+		| "Doc.DeletionMark = False;"                               |
+		| "Doc.Write();"                                            |
+		| "Except"                                                  |
+		| "EndTry"                                                  |
+	And 1C:Enterprise language expression "{!Documents.TimeSheet.FindByNumber(1).DeletionMark=False}" is true
+	And 1C:Enterprise language expression "{!Documents.TimeSheet.FindByNumber(5).DeletionMark=True}" is true
+
+Scenario: 964068 deletion mark Unbundling (LimitedAccess)
+	And I execute the built-in language code at server (Extension)
+		| "Try"                                                     |
+		| "Doc = Documents.Unbundling.FindByNumber(1).GetObject();" |
+		| "Doc.DeletionMark = False;"                               |
+		| "Doc.Write();"                                            |
+		| "Except"                                                  |
+		| "EndTry"                                                  |
+	And I execute the built-in language code at server (Extension)
+		| "Try"                                                     |
+		| "Doc = Documents.Unbundling.FindByNumber(5).GetObject();" |
+		| "Doc.DeletionMark = False;"                               |
+		| "Doc.Write();"                                            |
+		| "Except"                                                  |
+		| "EndTry"                                                  |
+	And 1C:Enterprise language expression "{!Documents.Unbundling.FindByNumber(1).DeletionMark=False}" is true
+	And 1C:Enterprise language expression "{!Documents.Unbundling.FindByNumber(5).DeletionMark=True}" is true
+
+Scenario: 964069 deletion mark VendorsAdvancesClosing (LimitedAccess)
+	And I execute the built-in language code at server (Extension)
+		| "Try"                                                     |
+		| "Doc = Documents.VendorsAdvancesClosing.FindByNumber(1).GetObject();" |
+		| "Doc.DeletionMark = False;"                               |
+		| "Doc.Write();"                                            |
+		| "Except"                                                  |
+		| "EndTry"                                                  |
+	And I execute the built-in language code at server (Extension)
+		| "Try"                                                     |
+		| "Doc = Documents.VendorsAdvancesClosing.FindByNumber(5).GetObject();" |
+		| "Doc.DeletionMark = False;"                               |
+		| "Doc.Write();"                                            |
+		| "Except"                                                  |
+		| "EndTry"                                                  |
+	And 1C:Enterprise language expression "{!Documents.VendorsAdvancesClosing.FindByNumber(1).DeletionMark=False}" is true
+	And 1C:Enterprise language expression "{!Documents.VendorsAdvancesClosing.FindByNumber(5).DeletionMark=True}" is true
+
+Scenario: 964070 deletion mark WorkOrder (LimitedAccess)
+	And I execute the built-in language code at server (Extension)
+		| "Try"                                                     |
+		| "Doc = Documents.WorkOrder.FindByNumber(1).GetObject();" |
+		| "Doc.DeletionMark = False;"                               |
+		| "Doc.Write();"                                            |
+		| "Except"                                                  |
+		| "EndTry"                                                  |
+	And I execute the built-in language code at server (Extension)
+		| "Try"                                                     |
+		| "Doc = Documents.WorkOrder.FindByNumber(5).GetObject();" |
+		| "Doc.DeletionMark = False;"                               |
+		| "Doc.Write();"                                            |
+		| "Except"                                                  |
+		| "EndTry"                                                  |
+	And 1C:Enterprise language expression "{!Documents.WorkOrder.FindByNumber(1).DeletionMark=False}" is true
+	And 1C:Enterprise language expression "{!Documents.WorkOrder.FindByNumber(5).DeletionMark=True}" is true
+
+Scenario: 964071 deletion mark WorkOrderClosing (LimitedAccess)
+	And I execute the built-in language code at server (Extension)
+		| "Try"                                                     |
+		| "Doc = Documents.WorkOrderClosing.FindByNumber(1).GetObject();" |
+		| "Doc.DeletionMark = False;"                               |
+		| "Doc.Write();"                                            |
+		| "Except"                                                  |
+		| "EndTry"                                                  |
+	And I execute the built-in language code at server (Extension)
+		| "Try"                                                     |
+		| "Doc = Documents.WorkOrderClosing.FindByNumber(5).GetObject();" |
+		| "Doc.DeletionMark = False;"                               |
+		| "Doc.Write();"                                            |
+		| "Except"                                                  |
+		| "EndTry"                                                  |
+	And 1C:Enterprise language expression "{!Documents.WorkOrderClosing.FindByNumber(1).DeletionMark=False}" is true
+	And 1C:Enterprise language expression "{!Documents.WorkOrderClosing.FindByNumber(5).DeletionMark=True}" is true
+
+Scenario: 964072 deletion mark WorkSheet (LimitedAccess)
+	And I execute the built-in language code at server (Extension)
+		| "Try"                                                     |
+		| "Doc = Documents.WorkSheet.FindByNumber(1).GetObject();"  |
+		| "Doc.DeletionMark = False;"                               |
+		| "Doc.Write();"                                            |
+		| "Except"                                                  |
+		| "EndTry"                                                  |
+	And I execute the built-in language code at server (Extension)
+		| "Try"                                                     |
+		| "Doc = Documents.WorkSheet.FindByNumber(5).GetObject();" |
+		| "Doc.DeletionMark = False;"                               |
+		| "Doc.Write();"                                            |
+		| "Except"                                                  |
+		| "EndTry"                                                  |
+	And 1C:Enterprise language expression "{!Documents.WorkSheet.FindByNumber(1).DeletionMark=False}" is true
+	And 1C:Enterprise language expression "{!Documents.WorkSheet.FindByNumber(5).DeletionMark=True}" is true
+
+Scenario: 964073 deletion mark CommissioningOfFixedAsset (LimitedAccess)
+	And I execute the built-in language code at server (Extension)
+		| "Try"                                                     |
+		| "Doc = Documents.CommissioningOfFixedAsset.FindByNumber(2).GetObject();" |
+		| "Doc.DeletionMark = False;"                               |
+		| "Doc.Write();"                                            |
+		| "Except"                                                  |
+		| "EndTry"                                                  |
+	And I execute the built-in language code at server (Extension)
+		| "Try"                                                     |
+		| "Doc = Documents.CommissioningOfFixedAsset.FindByNumber(26).GetObject();" |
+		| "Doc.DeletionMark = False;"                               |
+		| "Doc.Write();"                                            |
+		| "Except"                                                  |
+		| "EndTry"                                                  |
+	And 1C:Enterprise language expression "{!Documents.CommissioningOfFixedAsset.FindByNumber(2).DeletionMark=False}" is true
+	And 1C:Enterprise language expression "{!Documents.CommissioningOfFixedAsset.FindByNumber(26).DeletionMark=True}" is true
+
+Scenario: 964074 deletion mark DecommissioningOfFixedAsset (LimitedAccess)
+	And I execute the built-in language code at server (Extension)
+		| "Try"                                                     |
+		| "Doc = Documents.DecommissioningOfFixedAsset.FindByNumber(2).GetObject();" |
+		| "Doc.DeletionMark = False;"                               |
+		| "Doc.Write();"                                            |
+		| "Except"                                                  |
+		| "EndTry"                                                  |
+	And I execute the built-in language code at server (Extension)
+		| "Try"                                                     |
+		| "Doc = Documents.DecommissioningOfFixedAsset.FindByNumber(26).GetObject();" |
+		| "Doc.DeletionMark = False;"                               |
+		| "Doc.Write();"                                            |
+		| "Except"                                                  |
+		| "EndTry"                                                  |
+	And 1C:Enterprise language expression "{!Documents.DecommissioningOfFixedAsset.FindByNumber(2).DeletionMark=False}" is true
+	And 1C:Enterprise language expression "{!Documents.DecommissioningOfFixedAsset.FindByNumber(26).DeletionMark=True}" is true
+
+Scenario: 964075 deletion mark DepreciationCalculation (LimitedAccess)
+	And I execute the built-in language code at server (Extension)
+		| "Try"                                                     |
+		| "Doc = Documents.DepreciationCalculation.FindByNumber(1).GetObject();" |
+		| "Doc.DeletionMark = False;"                               |
+		| "Doc.Write();"                                            |
+		| "Except"                                                  |
+		| "EndTry"                                                  |
+	And I execute the built-in language code at server (Extension)
+		| "Try"                                                     |
+		| "Doc = Documents.DepreciationCalculation.FindByNumber(5).GetObject();" |
+		| "Doc.DeletionMark = False;"                               |
+		| "Doc.Write();"                                            |
+		| "Except"                                                  |
+		| "EndTry"                                                  |
+	And 1C:Enterprise language expression "{!Documents.DepreciationCalculation.FindByNumber(1).DeletionMark=False}" is true
+	And 1C:Enterprise language expression "{!Documents.DepreciationCalculation.FindByNumber(5).DeletionMark=True}" is true
+
+Scenario: 964076 deletion mark FixedAssetTransfer (LimitedAccess)
+	And I execute the built-in language code at server (Extension)
+		| "Try"                                                     |
+		| "Doc = Documents.FixedAssetTransfer.FindByNumber(1).GetObject();" |
+		| "Doc.DeletionMark = False;"                               |
+		| "Doc.Write();"                                            |
+		| "Except"                                                  |
+		| "EndTry"                                                  |
+	And I execute the built-in language code at server (Extension)
+		| "Try"                                                     |
+		| "Doc = Documents.FixedAssetTransfer.FindByNumber(5).GetObject();" |
+		| "Doc.DeletionMark = False;"                               |
+		| "Doc.Write();"                                            |
+		| "Except"                                                  |
+		| "EndTry"                                                  |
+	And 1C:Enterprise language expression "{!Documents.FixedAssetTransfer.FindByNumber(1).DeletionMark=False}" is true
+	And 1C:Enterprise language expression "{!Documents.FixedAssetTransfer.FindByNumber(5).DeletionMark=True}" is true
+
+Scenario: 964077 deletion mark ModernizationOfFixedAsset (LimitedAccess)
+	And I execute the built-in language code at server (Extension)
+		| "Try"                                                     |
+		| "Doc = Documents.ModernizationOfFixedAsset.FindByNumber(2).GetObject();" |
+		| "Doc.DeletionMark = False;"                               |
+		| "Doc.Write();"                                            |
+		| "Except"                                                  |
+		| "EndTry"                                                  |
+	And I execute the built-in language code at server (Extension)
+		| "Try"                                                     |
+		| "Doc = Documents.ModernizationOfFixedAsset.FindByNumber(26).GetObject();" |
+		| "Doc.DeletionMark = False;"                               |
+		| "Doc.Write();"                                            |
+		| "Except"                                                  |
+		| "EndTry"                                                  |
+	And 1C:Enterprise language expression "{!Documents.ModernizationOfFixedAsset.FindByNumber(2).DeletionMark=False}" is true
+	And 1C:Enterprise language expression "{!Documents.ModernizationOfFixedAsset.FindByNumber(26).DeletionMark=True}" is true
+

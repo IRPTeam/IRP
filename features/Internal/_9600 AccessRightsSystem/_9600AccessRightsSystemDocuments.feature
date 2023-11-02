@@ -60,7 +60,37 @@ Scenario: 960000 preparation (access rights system documents)
 	// 	Given I open hyperlink "e1cib/list/InformationRegister.T9100A_ObjectAccessMap"
 	// 	And "List" table is equal to "ObjectAccessMap" by template
 	And I close all client application windows
-	
+
+Scenario: 960001 check preparation
+	When check preparation	
+
+Scenario: 9600011 check copy user access group settings
+	And I close all client application windows
+	* Create user access group
+		Given I open hyperlink "e1cib/list/Catalog.AccessGroups"
+		And I click the button named "FormCreate"
+		And I move to "Access" tab
+		And in the table "ObjectAccess" I click "Copy settings" button
+		And I go to line in "List" table
+			| 'Description'       |
+			| 'Unit access group' |
+		And I click "Select" button
+	* Check
+		And "ObjectAccess" table became equal
+			| 'Access key' | 'Value ref'                         | 'Value' | 'Modify' | 'Do not control' |
+			| 'Company'    | 'Company Read and Write Access'     | ''      | 'Yes'    | 'No'             |
+			| 'Company'    | 'Company Only read access'          | ''      | 'No'     | 'No'             |
+			| 'Branch'     | 'Branch Read and Write Access'      | ''      | 'Yes'    | 'No'             |
+			| 'Branch'     | 'Branch Only read access'           | ''      | 'No'     | 'No'             |
+			| 'Store'      | 'Store Read and Write Access'       | ''      | 'Yes'    | 'No'             |
+			| 'Store'      | 'Store Only read access'            | ''      | 'No'     | 'No'             |
+			| 'Account'    | 'CashAccount Read and Write Access' | ''      | 'Yes'    | 'No'             |
+			| 'Account'    | 'CashAccount Only read access'      | ''      | 'No'     | 'No'             |
+			| 'PriceType'  | 'PriceType Read and Write Access'   | ''      | 'Yes'    | 'No'             |
+			| 'PriceType'  | 'PriceType Only read access'        | ''      | 'No'     | 'No'             |
+		And I close all client application windows
+		
+
 Scenario: 960002 check SO creation
 	And I close all client application windows
 	Given I open hyperlink "e1cib/list/Document.SalesOrder"
@@ -4109,31 +4139,40 @@ Scenario: 960091 check AdditionalCostAllocation access rights (LimitedAccess)
 	Given I open hyperlink "e1cib/list/Document.AdditionalCostAllocation"	
 	And "List" table became equal
 		| 'Description'                                                                                                                                                                               |
+		| 'Document.AdditionalCostAllocation Branch: Branch Read and Write Access;Company: Company Read and Write Access;'                                                                            |
 		| 'Document.AdditionalCostAllocation Branch: Branch Read and Write Access;Company: Company Read and Write Access;Store: Store Read and Write Access'                                          |
 		| 'Document.AdditionalCostAllocation Branch: Branch Read and Write Access;Company: Company Read and Write Access;Store: Store Only read access'                                               |
+		| 'Document.AdditionalCostAllocation Branch: Branch Read and Write Access;Company: Company Read and Write Access;Store: Store access deny'                                                    |
 		| 'Document.AdditionalCostAllocation Branch: Branch Read and Write Access;Company: Company Read and Write Access;Store: Store Read and Write Access&Store Only read access'                   |
 		| 'Document.AdditionalCostAllocation Branch: Branch Read and Write Access;Company: Company Read and Write Access;Store: Store Only read access&Store access deny'                             |
 		| 'Document.AdditionalCostAllocation Branch: Branch Read and Write Access;Company: Company Read and Write Access;Store: Store Read and Write Access&Store access deny'                        |
 		| 'Document.AdditionalCostAllocation Branch: Branch Read and Write Access;Company: Company Read and Write Access;Store: Store Read and Write Access&Store Only read access&Store access deny' |
+		| 'Document.AdditionalCostAllocation Branch: Branch Only read access;Company: Company Read and Write Access;'                                                                                 |
 		| 'Document.AdditionalCostAllocation Branch: Branch Only read access;Company: Company Read and Write Access;Store: Store Read and Write Access'                                               |
 		| 'Document.AdditionalCostAllocation Branch: Branch Only read access;Company: Company Read and Write Access;Store: Store Only read access'                                                    |
+		| 'Document.AdditionalCostAllocation Branch: Branch Only read access;Company: Company Read and Write Access;Store: Store access deny'                                                         |
 		| 'Document.AdditionalCostAllocation Branch: Branch Only read access;Company: Company Read and Write Access;Store: Store Read and Write Access&Store Only read access'                        |
 		| 'Document.AdditionalCostAllocation Branch: Branch Only read access;Company: Company Read and Write Access;Store: Store Only read access&Store access deny'                                  |
 		| 'Document.AdditionalCostAllocation Branch: Branch Only read access;Company: Company Read and Write Access;Store: Store Read and Write Access&Store access deny'                             |
 		| 'Document.AdditionalCostAllocation Branch: Branch Only read access;Company: Company Read and Write Access;Store: Store Read and Write Access&Store Only read access&Store access deny'      |
+		| 'Document.AdditionalCostAllocation Branch: Branch Read and Write Access;Company: Company Only read access;'                                                                                 |
 		| 'Document.AdditionalCostAllocation Branch: Branch Read and Write Access;Company: Company Only read access;Store: Store Read and Write Access'                                               |
 		| 'Document.AdditionalCostAllocation Branch: Branch Read and Write Access;Company: Company Only read access;Store: Store Only read access'                                                    |
+		| 'Document.AdditionalCostAllocation Branch: Branch Read and Write Access;Company: Company Only read access;Store: Store access deny'                                                         |
 		| 'Document.AdditionalCostAllocation Branch: Branch Read and Write Access;Company: Company Only read access;Store: Store Read and Write Access&Store Only read access'                        |
 		| 'Document.AdditionalCostAllocation Branch: Branch Read and Write Access;Company: Company Only read access;Store: Store Only read access&Store access deny'                                  |
 		| 'Document.AdditionalCostAllocation Branch: Branch Read and Write Access;Company: Company Only read access;Store: Store Read and Write Access&Store access deny'                             |
 		| 'Document.AdditionalCostAllocation Branch: Branch Read and Write Access;Company: Company Only read access;Store: Store Read and Write Access&Store Only read access&Store access deny'      |
+		| 'Document.AdditionalCostAllocation Branch: Branch Only read access;Company: Company Only read access;'                                                                                      |
 		| 'Document.AdditionalCostAllocation Branch: Branch Only read access;Company: Company Only read access;Store: Store Read and Write Access'                                                    |
 		| 'Document.AdditionalCostAllocation Branch: Branch Only read access;Company: Company Only read access;Store: Store Only read access'                                                         |
+		| 'Document.AdditionalCostAllocation Branch: Branch Only read access;Company: Company Only read access;Store: Store access deny'                                                              |
 		| 'Document.AdditionalCostAllocation Branch: Branch Only read access;Company: Company Only read access;Store: Store Read and Write Access&Store Only read access'                             |
 		| 'Document.AdditionalCostAllocation Branch: Branch Only read access;Company: Company Only read access;Store: Store Only read access&Store access deny'                                       |
 		| 'Document.AdditionalCostAllocation Branch: Branch Only read access;Company: Company Only read access;Store: Store Read and Write Access&Store access deny'                                  |
 		| 'Document.AdditionalCostAllocation Branch: Branch Only read access;Company: Company Only read access;Store: Store Read and Write Access&Store Only read access&Store access deny'           |
 	
+		
 		
 			
 Scenario: 960092 check AdditionalRevenueAllocation access rights (LimitedAccess)

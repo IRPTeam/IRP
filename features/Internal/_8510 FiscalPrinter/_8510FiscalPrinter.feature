@@ -3180,9 +3180,6 @@ Scenario: _0260200 click reconect hardware without fiscal printer
 		And I click "Reconnect fiscal printer" button
 		Then there are lines in TestClient message log
 			|'Hardware not found'|
+		And I close "Payment" window
+		And I click "Clear current receipt" button		
 	And I close all client application windows
-	
-				
-				
-		
-	

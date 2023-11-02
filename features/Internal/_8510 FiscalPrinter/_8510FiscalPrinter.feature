@@ -3156,3 +3156,33 @@ Scenario: _0260195 check consignor from SLN
 		And I check "$ParsingResult$" with "0" and method is "ProcessCheck"
 		And I check "$ParsingResult$" with "0" and data in "In.Parameter3" the same as "SalesReceiptXML21"
 			
+Scenario: _0260200 click reconect hardware without fiscal printer
+	And I close all client application windows
+	* Select Workstation 02
+		Given I open hyperlink "e1cib/list/Catalog.Workstations"
+		And I go to line in "List" table
+			| 'Description'       |
+			| 'Workstation 02'    |	
+		And I click "Set current workstation" button
+	* Open POS
+		And In the command interface I select "Retail" "Point of sale"
+		And I click "Open session" button
+		And I expand a line in "ItemsPickup" table
+			| 'Item'          |
+			| '(10004) Boots' |
+		And I go to line in "ItemsPickup" table
+			| 'Item'                   |
+			| '(10004) Boots, 37/18SD' |
+		And I select current line in "ItemsPickup" table
+		And I click "Payment (+)" button
+		Then "Payment" window is opened
+	* Check button reconnect fiscal printer
+		And I click "Reconnect fiscal printer" button
+		Then there are lines in TestClient message log
+			|'Hardware not found'|
+	And I close all client application windows
+	
+				
+				
+		
+	

@@ -157,13 +157,9 @@ EndProcedure
 &AtClient
 Procedure ChangingFormBySettings()
 	If Items.ViewPictures.Check Then
-		Items.GroupAllItems.Group = ChildFormItemsGroup.Vertical;
-		Items.GroupMainAttributes.Group = ChildFormItemsGroup.Vertical;
-		Items.GroupBottom.Group = ChildFormItemsGroup.Horizontal;
+		Items.GroupMainLeft.Group = ChildFormItemsGroup.Vertical;
 	Else
-		Items.GroupAllItems.Group = ChildFormItemsGroup.Horizontal;
-		Items.GroupMainAttributes.Group = ChildFormItemsGroup.Horizontal;
-		Items.GroupBottom.Group = ChildFormItemsGroup.Vertical;
+		Items.GroupMainLeft.Group = ChildFormItemsGroup.Horizontal;
 	EndIf;
 EndProcedure	
 

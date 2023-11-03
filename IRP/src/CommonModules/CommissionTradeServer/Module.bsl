@@ -22,7 +22,7 @@ Procedure FillCheckProcessing_ReceiptFromConsignor(Cancel, ItemList, Transaction
 			Cancel = True;
 		Else
 			If Row.LegalName <> Row.Consignor Then
-				ErrorMessage = StrTemplate(R().Error_131, Row.Item, Row.ItemKey, Row.LegalName);
+				ErrorMessage = StrTemplate(R().Error_131, Row.Item, Row.ItemKey, Row.Consignor);
 				Cancel = True;
 			EndIf;
 		EndIf;

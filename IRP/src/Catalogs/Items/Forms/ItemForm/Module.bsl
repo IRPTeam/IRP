@@ -19,12 +19,15 @@ Procedure OnCreateAtServer(Cancel, StandardProcessing)
 		EndDo;
 	EndIf;
 	ExtensionServer.AddAttributesFromExtensions(ThisObject, Object.Ref);
+	RestoreSettings();
 EndProcedure
 
 &AtClient
 Procedure OnOpen(Cancel)
 	PictureViewerClient.UpdateObjectPictures(ThisObject, Object.Ref);
 	AddAttributesAndPropertiesClient.UpdateObjectAddAttributeHTML(ThisObject, Object.Ref);
+	SetSettings();
+	ChangingFormBySettings();
 EndProcedure
 
 &AtServer
@@ -61,15 +64,24 @@ EndProcedure
 
 &AtClient
 Async Procedure UpdateAddAttributesHTMLDocument()
-	HTMLWindow = PictureViewerClient.InfoDocumentComplete(Items.AddAttributeViewHTML);
-	JSON = AddAttributesAndPropertiesClient.AddAttributeInfoForHTML(Object.Ref, UUID);
-	HTMLWindow.clearAll();
-	HTMLWindow.fillData(JSON);
+	If Items.ViewAdditionalAttribute.Check Then
+		HTMLWindow = PictureViewerClient.InfoDocumentComplete(Items.AddAttributeViewHTML);
+		JSON = AddAttributesAndPropertiesClient.AddAttributeInfoForHTML(Object.Ref, UUID);
+		HTMLWindow.clearAll();
+		HTMLWindow.fillData(JSON);
+	EndIf;
 EndProcedure
 
 #EndRegion
 
 #Region PictureViewer
+
+&AtClient
+Procedure HTMLViewControl(Command)
+	PictureViewerClient.HTMLViewControl(ThisObject, Command.Name);
+	ChangingFormBySettings();
+	SaveSettings();
+EndProcedure
 
 &AtClient
 Procedure PictureViewHTMLOnClick(Item, EventData, StandardProcessing)
@@ -134,6 +146,47 @@ EndProcedure
 &AtClient
 Procedure SetVisibleCodeString()
 	Items.CheckCodeString.Visible = Object.ControlCodeString;
+EndProcedure
+
+&AtClient
+Procedure SetSettings()
+	PictureViewerClient.HTMLViewControl(ThisObject, "ViewPictures");
+	PictureViewerClient.HTMLViewControl(ThisObject, "ViewAdditionalAttribute");
+EndProcedure
+
+&AtClient
+Procedure ChangingFormBySettings()
+	If Items.ViewPictures.Check Then
+		Items.GroupMainLeft.Group = ChildFormItemsGroup.Vertical;
+	Else
+		Items.GroupMainLeft.Group = ChildFormItemsGroup.Horizontal;
+	EndIf;
+EndProcedure	
+
+&AtServer
+Procedure SaveSettings()
+	NewSettings = New Structure;
+	NewSettings.Insert("ViewPictures", Items.ViewPictures.Check);
+	NewSettings.Insert("ViewAdditionalAttribute", Items.ViewAdditionalAttribute.Check);
+	CommonSettingsStorage.Save("Catalog_Item", "Settings", NewSettings);
+EndProcedure	
+
+&AtServer
+Procedure RestoreSettings()
+	
+	Items.ViewPictures.Check = True;
+	Items.ViewAdditionalAttribute.Check = True;
+	
+	RestoreSettings = CommonSettingsStorage.Load("Catalog_Item", "Settings"); // Structure
+	If TypeOf(RestoreSettings) = Type("Structure") Then
+		If RestoreSettings.Property("ViewPictures") Then
+			Items.ViewPictures.Check = Not RestoreSettings.ViewPictures;
+		EndIf;
+		If RestoreSettings.Property("ViewAdditionalAttribute") Then
+			Items.ViewAdditionalAttribute.Check = Not RestoreSettings.ViewAdditionalAttribute;
+		EndIf;
+	EndIf;
+
 EndProcedure
 
 #EndRegion

@@ -1,4 +1,4 @@
-#language: en
+﻿#language: en
 @tree
 @Positive
 @ExtensionReportForm
@@ -261,6 +261,7 @@ Scenario: _300103 item pictures upload
 			| 'Description'    |
 			| 'Dress'          |
 		And I select current line in "List" table
+		And I click the button named "ViewPictures"		
 	* Add picture
 		And I select external file "$Path$/features/Internal/_4000 TestWithExtension/reddress.png"
 		And I click "add_picture" button

@@ -121,6 +121,7 @@
   <type>
    <types>DefinedType.typeAmount</types>
   </type>
+  <markNegatives>true</markNegatives>
   <minValue xsi:type="core:UndefinedValue"/>
   <maxValue xsi:type="core:UndefinedValue"/>
   <fullTextSearch>Use</fullTextSearch>
@@ -144,6 +145,7 @@
   <type>
    <types>DefinedType.typeQuantity</types>
   </type>
+  <markNegatives>true</markNegatives>
   <minValue xsi:type="core:UndefinedValue"/>
   <maxValue xsi:type="core:UndefinedValue"/>
   <fullTextSearch>Use</fullTextSearch>
@@ -167,6 +169,7 @@
   <type>
    <types>DefinedType.typeAmount</types>
   </type>
+  <markNegatives>true</markNegatives>
   <minValue xsi:type="core:UndefinedValue"/>
   <maxValue xsi:type="core:UndefinedValue"/>
   <fullTextSearch>Use</fullTextSearch>

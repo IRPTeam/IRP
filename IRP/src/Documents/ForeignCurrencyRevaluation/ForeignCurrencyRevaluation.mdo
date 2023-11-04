@@ -76,6 +76,7 @@
  <registerRecords>AccumulationRegister.R5021T_Revenues</registerRecords>
  <registerRecords>AccumulationRegister.R5015B_OtherPartnersTransactions</registerRecords>
  <registerRecords>AccumulationRegister.R8510B_BookValueOfFixedAsset</registerRecords>
+ <registerRecords>AccumulationRegister.T1040T_AccountingAmounts</registerRecords>
  <postInPrivilegedMode>true</postInPrivilegedMode>
  <unpostInPrivilegedMode>true</unpostInPrivilegedMode>
  <attributes uuid="14d7bac9-3932-46e7-8838-06e4db8f8928">

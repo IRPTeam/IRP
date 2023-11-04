@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mdclass:CommonCommand xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="c99a6167-ea2f-4b22-a8ed-7aaeac5cd19b">
+ <name>OpenAccountingRecords</name>
+ <synonym>
+  <key>en</key>
+  <value>Accounting records</value>
+ </synonym>
+ <synonym>
+  <key>ru</key>
+  <value>Бухгалтерские записи</value>
+ </synonym>
+ <synonym>
+  <key>tr</key>
+  <value>Accounting records</value>
+ </synonym>
+ <group>NavigationPanelImportant</group>
+ <representation>Auto</representation>
+</mdclass:CommonCommand>

@@ -242,15 +242,8 @@ Function PostingGetDocumentDataTables(Ref, Cancel, PostingMode, Parameters, AddI
 	Parameters.Insert("PostingDataTables", PostingDataTables);
 	CurrenciesServer.PreparePostingDataTables(Parameters, CurrencyTable, AddInfo);
 
-	BatchKeysInfoMetadata = Parameters.Object.RegisterRecords.T6020S_BatchKeysInfo.Metadata();
-	If Parameters.Property("MultiCurrencyExcludePostingDataTables") Then
-		Parameters.MultiCurrencyExcludePostingDataTables.Add(BatchKeysInfoMetadata);
-	Else
-		ArrayOfMultiCurrencyExcludePostingDataTables = New Array;
-		ArrayOfMultiCurrencyExcludePostingDataTables.Add(BatchKeysInfoMetadata);
-		Parameters.Insert("MultiCurrencyExcludePostingDataTables", ArrayOfMultiCurrencyExcludePostingDataTables);
-	EndIf;
-
+	CurrenciesServer.ExcludePostingDataTable(Parameters, Parameters.Object.RegisterRecords.T6020S_BatchKeysInfo.Metadata());
+	
 	BatchKeysInfo_DataTable = Parameters.PostingDataTables.Get(
 		Parameters.Object.RegisterRecords.T6020S_BatchKeysInfo).RecordSet;
 	BatchKeysInfo_DataTableGrouped = BatchKeysInfo_DataTable.CopyColumns();
@@ -853,7 +846,7 @@ Function R3010B_CashOnHand()
 		   |	Payments AS Payments
 		   |WHERE
 		   |	NOT (Payments.IsPostponedPayment
-		   |	OR Payments.IsPaymentAgent)
+		   |	OR Payments.IsPaymentAgent OR Payments.IsCertificate)
 		   |	AND Payments.StatusType = VALUE(ENUM.RetailReceiptStatusTypes.Completed)";
 EndFunction
 
@@ -935,7 +928,7 @@ Function R3050T_PosCashBalances()
 		   |FROM
 		   |	Payments AS Payments
 		   |WHERE
-		   |	NOT Payments.IsPaymentAgent
+		   |	NOT (Payments.IsPaymentAgent OR Payments.IsPostponedPayment OR Payments.IsCertificate)
 		   |	AND Payments.StatusType = VALUE(ENUM.RetailReceiptStatusTypes.Completed)";
 EndFunction
 

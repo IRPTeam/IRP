@@ -432,6 +432,29 @@
   <fullTextSearch>Use</fullTextSearch>
   <dataHistory>Use</dataHistory>
  </attributes>
+ <attributes uuid="84823959-5bb9-479f-b626-60b7769b0054">
+  <name>isDraft</name>
+  <synonym>
+   <key>en</key>
+   <value>Is draft</value>
+  </synonym>
+  <synonym>
+   <key>ru</key>
+   <value>Это черновик</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Bu taslak</value>
+  </synonym>
+  <type>
+   <types>Boolean</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fillValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <dataHistory>Use</dataHistory>
+ </attributes>
  <tabularSections uuid="d199093a-d6ed-4204-82e8-ccd2e47d6b33">
   <producedTypes>
    <objectType typeId="c26f695f-f115-44a8-9f9c-487ab561a3c1" valueTypeId="b37fb1f8-8db3-47eb-bde2-b6dc3b5e8d35"/>

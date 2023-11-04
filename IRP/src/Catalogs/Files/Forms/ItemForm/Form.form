@@ -6,20 +6,123 @@
   <items xsi:type="form:FormGroup">
    <name>Group2</name>
    <id>63</id>
-   <items xsi:type="form:FormField">
-    <name>Code</name>
-    <id>67</id>
+   <items xsi:type="form:FormGroup">
+    <name>HeaderGroup</name>
+    <id>73</id>
+    <items xsi:type="form:FormField">
+     <name>Code</name>
+     <id>67</id>
+     <visible>true</visible>
+     <enabled>true</enabled>
+     <userVisible>
+      <common>true</common>
+     </userVisible>
+     <dataPath xsi:type="form:DataPath">
+      <segments>Object.Code</segments>
+     </dataPath>
+     <extendedTooltip>
+      <name>CodeExtendedTooltip</name>
+      <id>69</id>
+      <visible>true</visible>
+      <enabled>true</enabled>
+      <userVisible>
+       <common>true</common>
+      </userVisible>
+      <type>Label</type>
+      <autoMaxWidth>true</autoMaxWidth>
+      <autoMaxHeight>true</autoMaxHeight>
+      <extInfo xsi:type="form:LabelDecorationExtInfo">
+       <horizontalAlign>Left</horizontalAlign>
+      </extInfo>
+     </extendedTooltip>
+     <contextMenu>
+      <name>CodeContextMenu</name>
+      <id>68</id>
+      <visible>true</visible>
+      <enabled>true</enabled>
+      <userVisible>
+       <common>true</common>
+      </userVisible>
+      <autoFill>true</autoFill>
+     </contextMenu>
+     <type>InputField</type>
+     <editMode>Enter</editMode>
+     <showInHeader>true</showInHeader>
+     <headerHorizontalAlign>Left</headerHorizontalAlign>
+     <showInFooter>true</showInFooter>
+     <extInfo xsi:type="form:InputFieldExtInfo">
+      <autoMaxWidth>true</autoMaxWidth>
+      <autoMaxHeight>true</autoMaxHeight>
+      <wrap>true</wrap>
+      <chooseType>true</chooseType>
+      <typeDomainEnabled>true</typeDomainEnabled>
+      <textEdit>true</textEdit>
+     </extInfo>
+    </items>
+    <items xsi:type="form:FormField">
+     <name>isDraft</name>
+     <id>75</id>
+     <visible>true</visible>
+     <enabled>true</enabled>
+     <userVisible>
+      <common>true</common>
+     </userVisible>
+     <dataPath xsi:type="form:DataPath">
+      <segments>Object.isDraft</segments>
+     </dataPath>
+     <titleLocation>Right</titleLocation>
+     <extendedTooltip>
+      <name>isDraftExtendedTooltip</name>
+      <id>77</id>
+      <visible>true</visible>
+      <enabled>true</enabled>
+      <userVisible>
+       <common>true</common>
+      </userVisible>
+      <type>Label</type>
+      <autoMaxWidth>true</autoMaxWidth>
+      <autoMaxHeight>true</autoMaxHeight>
+      <extInfo xsi:type="form:LabelDecorationExtInfo">
+       <horizontalAlign>Left</horizontalAlign>
+      </extInfo>
+     </extendedTooltip>
+     <contextMenu>
+      <name>isDraftContextMenu</name>
+      <id>76</id>
+      <visible>true</visible>
+      <enabled>true</enabled>
+      <userVisible>
+       <common>true</common>
+      </userVisible>
+      <autoFill>true</autoFill>
+     </contextMenu>
+     <type>CheckBoxField</type>
+     <editMode>Enter</editMode>
+     <showInHeader>true</showInHeader>
+     <headerHorizontalAlign>Left</headerHorizontalAlign>
+     <showInFooter>true</showInFooter>
+     <extInfo xsi:type="form:CheckBoxFieldExtInfo"/>
+    </items>
     <visible>true</visible>
     <enabled>true</enabled>
     <userVisible>
      <common>true</common>
     </userVisible>
-    <dataPath xsi:type="form:DataPath">
-     <segments>Object.Code</segments>
-    </dataPath>
+    <title>
+     <key>en</key>
+     <value>Header Group </value>
+    </title>
+    <title>
+     <key>ru</key>
+     <value>Группа заголовков </value>
+    </title>
+    <title>
+     <key>tr</key>
+     <value>Header Group </value>
+    </title>
     <extendedTooltip>
-     <name>CodeExtendedTooltip</name>
-     <id>69</id>
+     <name>HeaderGroupExtendedTooltip</name>
+     <id>74</id>
      <visible>true</visible>
      <enabled>true</enabled>
      <userVisible>
@@ -32,28 +135,14 @@
       <horizontalAlign>Left</horizontalAlign>
      </extInfo>
     </extendedTooltip>
-    <contextMenu>
-     <name>CodeContextMenu</name>
-     <id>68</id>
-     <visible>true</visible>
-     <enabled>true</enabled>
-     <userVisible>
-      <common>true</common>
-     </userVisible>
-     <autoFill>true</autoFill>
-    </contextMenu>
-    <type>InputField</type>
-    <editMode>Enter</editMode>
-    <showInHeader>true</showInHeader>
-    <headerHorizontalAlign>Left</headerHorizontalAlign>
-    <showInFooter>true</showInFooter>
-    <extInfo xsi:type="form:InputFieldExtInfo">
-     <autoMaxWidth>true</autoMaxWidth>
-     <autoMaxHeight>true</autoMaxHeight>
-     <wrap>true</wrap>
-     <chooseType>true</chooseType>
-     <typeDomainEnabled>true</typeDomainEnabled>
-     <textEdit>true</textEdit>
+    <type>UsualGroup</type>
+    <extInfo xsi:type="form:UsualGroupExtInfo">
+     <group>AlwaysHorizontal</group>
+     <behavior>Auto</behavior>
+     <showLeftMargin>true</showLeftMargin>
+     <united>true</united>
+     <throughAlign>Auto</throughAlign>
+     <currentRowUse>Auto</currentRowUse>
     </extInfo>
    </items>
    <items xsi:type="form:FormField">

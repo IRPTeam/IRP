@@ -20,7 +20,7 @@ EndProcedure
 
 &AtClient
 Procedure ExpandTree() Export
-	RowIDInfoClient.ExpandTree(Items.ProductionTree, ThisObject.ProductionTree.GetItems());
+	CommonFormActions.ExpandTree(Items.ProductionTree, ThisObject.ProductionTree.GetItems());
 EndProcedure
 
 &AtClient

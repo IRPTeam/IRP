@@ -224,8 +224,8 @@ Scenario: _0202602 create RRR based on RGR (with RSR)
 	* Filling branch
 		And I click Choice button of the field named "Branch"
 		And I go to line in "List" table
-			| 'Description'             |
-			| 'Distribution department' |
+			| 'Description' |
+			| 'Shop 01'     |
 		And I select current line in "List" table
 	* Check
 		And "ItemList" table became equal

@@ -147,10 +147,12 @@
    <types>DocumentRef.PurchaseInvoice</types>
    <types>DocumentRef.BankPayment</types>
    <types>DocumentRef.RetailSalesReceipt</types>
+   <types>DocumentRef.BankReceipt</types>
+   <types>DocumentRef.SalesInvoice</types>
+   <types>DocumentRef.ForeignCurrencyRevaluation</types>
   </type>
   <minValue xsi:type="core:UndefinedValue"/>
   <maxValue xsi:type="core:UndefinedValue"/>
-  <fillChecking>ShowError</fillChecking>
   <fillValue xsi:type="core:UndefinedValue"/>
   <indexing>Index</indexing>
   <fullTextSearch>Use</fullTextSearch>
@@ -260,6 +262,23 @@
   <synonym>
    <key>tr</key>
    <value>Evrakları oluştur</value>
+  </synonym>
+  <usePurposes>PersonalComputer</usePurposes>
+  <usePurposes>MobileDevice</usePurposes>
+ </forms>
+ <forms uuid="f66b5f4a-5c19-4a8e-8f7c-53bfc3a142a9">
+  <name>UpdateAnalytics</name>
+  <synonym>
+   <key>en</key>
+   <value>Update analytics</value>
+  </synonym>
+  <synonym>
+   <key>ru</key>
+   <value>Обновить аналитику</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Update analytics</value>
   </synonym>
   <usePurposes>PersonalComputer</usePurposes>
   <usePurposes>MobileDevice</usePurposes>
@@ -521,6 +540,9 @@
    <types>DocumentRef.PurchaseInvoice</types>
    <types>DocumentRef.BankPayment</types>
    <types>DocumentRef.RetailSalesReceipt</types>
+   <types>DocumentRef.BankReceipt</types>
+   <types>DocumentRef.SalesInvoice</types>
+   <types>DocumentRef.ForeignCurrencyRevaluation</types>
   </commandParameterType>
   <representation>PictureAndText</representation>
   <picture xsi:type="core:PictureRef">

@@ -83,6 +83,7 @@
   </synonym>
   <type>
    <types>DocumentRef.VendorsAdvancesClosing</types>
+   <types>DocumentRef.CustomersAdvancesClosing</types>
   </type>
   <minValue xsi:type="core:UndefinedValue"/>
   <maxValue xsi:type="core:UndefinedValue"/>

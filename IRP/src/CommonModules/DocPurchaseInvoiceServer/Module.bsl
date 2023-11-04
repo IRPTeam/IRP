@@ -14,6 +14,7 @@ EndProcedure
 Procedure AfterWriteAtServer(Object, Form, CurrentObject, WriteParameters) Export
 	DocumentsClientServer.ChangeTitleGroupTitle(CurrentObject, Form);
 	RowIDInfoServer.AfterWriteAtServer(Object, Form, CurrentObject, WriteParameters);
+	AccountingServer.AfterWriteAtServer(Object, Form, CurrentObject, WriteParameters);
 EndProcedure
 
 Procedure OnReadAtServer(Object, Form, CurrentObject) Export
@@ -24,6 +25,7 @@ Procedure OnReadAtServer(Object, Form, CurrentObject) Export
 	RowIDInfoServer.OnReadAtServer(Object, Form, CurrentObject);
 	LockDataModificationPrivileged.LockFormIfObjectIsLocked(Form, CurrentObject);
 	SerialLotNumbersServer.UpdateSerialLotNumbersPresentation(Object);
+	AccountingServer.OnReadAtServer(Object, Form, CurrentObject);
 EndProcedure
 
 #EndRegion

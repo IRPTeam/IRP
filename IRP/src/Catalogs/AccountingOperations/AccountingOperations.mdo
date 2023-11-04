@@ -176,20 +176,20 @@
    </code>
    <isFolder>true</isFolder>
    <content id="0a5ed6e5-a6f6-4167-b3d9-198842f906e6">
-    <name>BankPayment_DR_R1020B_R1021B_CR_R3010B</name>
+    <name>BankPayment_DR_R1020B_AdvancesToVendors_R1021B_VendorsTransactions_CR_R3010B</name>
     <description>Dr Partner account - Cr Cash account</description>
     <code xsi:type="core:NumberValue">
      <value>3</value>
     </code>
    </content>
    <content id="084c14d6-0bf2-4b3f-a728-f9be108187ca">
-    <name>BankPayment_DR_R5022T_CR_R3010B</name>
+    <name>BankPayment_DR_R5022T_Expenses_CR_R3010B_CashOnHand</name>
     <code xsi:type="core:NumberValue">
      <value>9</value>
     </code>
    </content>
    <content id="74335ed0-2922-43c2-85c5-27c87eb943ba">
-    <name>BankPayment_DR_R1021B_CR_R1020B</name>
+    <name>BankPayment_R1021B_VendorsTransactions_CR_R1020B_AdvancesToVendors</name>
     <code xsi:type="core:NumberValue">
      <value>10</value>
     </code>
@@ -203,10 +203,17 @@
    </code>
    <isFolder>true</isFolder>
    <content id="84005d98-3b5e-4d01-9885-c136d7fa2202">
-    <name>BankReceipt_DR_R3010B_CR_R2021B</name>
+    <name>BankReceipt_DR_R3010B_CashOnHand_CR_R2020B_AdvancesFromCustomers_R2021B_CustomersTransactions</name>
     <description>Dr Cash account - Cr partner account</description>
     <code xsi:type="core:NumberValue">
      <value>4</value>
+    </code>
+   </content>
+   <content id="e6f92cc0-3065-4c8d-b902-aee4c0468291">
+    <name>BankReceipt_DR_R2021B_CustomersTransactions_CR_R2020B_AdvancesFromCustomers</name>
+    <description/>
+    <code xsi:type="core:NumberValue">
+     <value>14</value>
     </code>
    </content>
   </items>
@@ -218,24 +225,38 @@
    </code>
    <isFolder>true</isFolder>
    <content id="436a2614-e716-45b0-b595-9b5dc7abd846">
-    <name>PurchaseInvoice_DR_R4050B_R5022T_CR_R1021B</name>
+    <name>PurchaseInvoice_DR_R4050B_StockInventory_R5022T_Expenses_CR_R1021B_VendorsTransactions</name>
     <description>Dr Item key account - Cr Partner account</description>
     <code xsi:type="core:NumberValue">
      <value>6</value>
     </code>
    </content>
    <content id="d758c87d-587a-4d4a-a0dd-fdb979084274">
-    <name>PurchaseInvoice_DR_R1021B_CR_R1020B</name>
+    <name>PurchaseInvoice_DR_R1021B_VendorsTransactions_CR_R1020B_AdvancesToVendors</name>
     <description>Dr Partner account trn - Cr Partner account adv</description>
     <code xsi:type="core:NumberValue">
      <value>7</value>
     </code>
    </content>
    <content id="d75b04c3-eee9-4726-821b-2984b3e3d799">
-    <name>PurchaseInvoice_DR_R1040B_CR_R1021B</name>
+    <name>PurchaseInvoice_DR_R1040B_TaxesOutgoing_CR_R1021B_VendorsTransactions</name>
     <description>Dr Tax account - Cr Partner account</description>
     <code xsi:type="core:NumberValue">
      <value>8</value>
+    </code>
+   </content>
+   <content id="3139d27d-f017-4cd2-9371-581a24328085">
+    <name>PurchaseInvoice_DR_R1021B_VendorsTransactions_CR_R1020B_AdvancesToVendors_CurrencyRevaluation</name>
+    <description/>
+    <code xsi:type="core:NumberValue">
+     <value>24</value>
+    </code>
+   </content>
+   <content id="bfff9af6-8d6a-4bb7-bc85-dcb122c941a7">
+    <name>PurchaseInvoice_DR_R4050B_StockInventory_R5022T_Expenses_CR_R1021B_VendorsTransactions_CurrencyRevaluation</name>
+    <description/>
+    <code xsi:type="core:NumberValue">
+     <value>25</value>
     </code>
    </content>
   </items>
@@ -246,9 +267,81 @@
    </code>
    <isFolder>true</isFolder>
    <content id="f2fd559e-6f20-450c-9dcc-5585777939b7">
-    <name>RetailSalesReceipt_DR_R5022T_CR_R4050B</name>
+    <name>RetailSalesReceipt_DR_R5022T_Expenses_CR_R4050B_StockInventory</name>
     <code xsi:type="core:NumberValue">
      <value>12</value>
+    </code>
+   </content>
+  </items>
+  <items id="ac174994-2762-4d95-8dc9-154a578a14a2">
+   <name>Document_SalesInvoice</name>
+   <description/>
+   <code xsi:type="core:NumberValue">
+    <value>13</value>
+   </code>
+   <isFolder>true</isFolder>
+   <content id="13cc96b1-55aa-4a8f-9ffa-84fd9cd02e1c">
+    <name>SalesInvoice_DR_R2021B_CustomersTransactions_CR_R5021T_Revenues</name>
+    <description/>
+    <code xsi:type="core:NumberValue">
+     <value>15</value>
+    </code>
+   </content>
+   <content id="1b7650ad-043d-4694-a395-c0f1ec19d281">
+    <name>SalesInvoice_DR_R5021T_Revenues_CR_R2040B_TaxesIncoming</name>
+    <description/>
+    <code xsi:type="core:NumberValue">
+     <value>16</value>
+    </code>
+   </content>
+   <content id="0e27f185-a673-4288-a461-e63f85ec7165">
+    <name>SalesInvoice_DR_R5022T_Expenses_CR_R4050B_StockInventory</name>
+    <description/>
+    <code xsi:type="core:NumberValue">
+     <value>17</value>
+    </code>
+   </content>
+   <content id="3070b93b-5d84-4762-a76a-9a4a2167f2ee">
+    <name>SalesInvoice_DR_R2020B_AdvancesFromCustomers_CR_R2021B_CustomersTransactions</name>
+    <description/>
+    <code xsi:type="core:NumberValue">
+     <value>18</value>
+    </code>
+   </content>
+   <content id="494bc5e0-6a57-4f1c-ad2d-657643e6436f">
+    <name>SalesInvoice_DR_R2020B_AdvancesFromCustomers_CR_R2021B_CustomersTransactions_CurrencyRevaluation</name>
+    <description/>
+    <code xsi:type="core:NumberValue">
+     <value>22</value>
+    </code>
+   </content>
+   <content id="7c250c81-c5a7-4347-9445-d06ba1390361">
+    <name>SalesInvoice_DR_R2021B_CustomersTransactions_CR_R5021T_Revenues_CurrencyRevaluation</name>
+    <description/>
+    <code xsi:type="core:NumberValue">
+     <value>23</value>
+    </code>
+   </content>
+  </items>
+  <items id="75cbb6bf-1e5f-4185-b83d-648393a21e9c">
+   <name>Document_ForeignCurrencyRevaluation</name>
+   <description/>
+   <code xsi:type="core:NumberValue">
+    <value>19</value>
+   </code>
+   <isFolder>true</isFolder>
+   <content id="dfa58a7e-3be1-4264-80cd-080643a5604e">
+    <name>ForeignCurrencyRevaluation_DR_R2020B_AdvancesFromCustomers_CR_R5021T_Revenues</name>
+    <description/>
+    <code xsi:type="core:NumberValue">
+     <value>20</value>
+    </code>
+   </content>
+   <content id="38c3d013-996a-417f-8c24-447320fbd054">
+    <name>ForeignCurrencyRevaluation_DR_R5022T_Expenses_CR_R2020B_AdvancesFromCustomers</name>
+    <description/>
+    <code xsi:type="core:NumberValue">
+     <value>21</value>
     </code>
    </content>
   </items>

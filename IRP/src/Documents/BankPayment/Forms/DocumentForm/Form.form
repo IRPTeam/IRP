@@ -2459,36 +2459,6 @@
       <representationInContextMenu>Auto</representationInContextMenu>
      </items>
      <items xsi:type="form:Button">
-      <name>PaymentListChoiceByAccrual</name>
-      <id>398</id>
-      <visible>true</visible>
-      <enabled>true</enabled>
-      <userVisible>
-       <common>true</common>
-      </userVisible>
-      <extendedTooltip>
-       <name>PaymentListChoiceByAccrualExtendedTooltip</name>
-       <id>399</id>
-       <visible>true</visible>
-       <enabled>true</enabled>
-       <userVisible>
-        <common>true</common>
-       </userVisible>
-       <type>Label</type>
-       <autoMaxWidth>true</autoMaxWidth>
-       <autoMaxHeight>true</autoMaxHeight>
-       <extInfo xsi:type="form:LabelDecorationExtInfo">
-        <horizontalAlign>Left</horizontalAlign>
-       </extInfo>
-      </extendedTooltip>
-      <commandName>Form.Command.ChoiceByAccrual</commandName>
-      <representation>Auto</representation>
-      <autoMaxWidth>true</autoMaxWidth>
-      <autoMaxHeight>true</autoMaxHeight>
-      <placementArea>UserCmds</placementArea>
-      <representationInContextMenu>Auto</representationInContextMenu>
-     </items>
-     <items xsi:type="form:Button">
       <name>EditAccounting</name>
       <id>336</id>
       <visible>true</visible>
@@ -2512,6 +2482,36 @@
        </extInfo>
       </extendedTooltip>
       <commandName>Form.Command.EditAccounting</commandName>
+      <representation>Auto</representation>
+      <autoMaxWidth>true</autoMaxWidth>
+      <autoMaxHeight>true</autoMaxHeight>
+      <placementArea>UserCmds</placementArea>
+      <representationInContextMenu>Auto</representationInContextMenu>
+     </items>
+     <items xsi:type="form:Button">
+      <name>PaymentListChoiceByAccrual</name>
+      <id>398</id>
+      <visible>true</visible>
+      <enabled>true</enabled>
+      <userVisible>
+       <common>true</common>
+      </userVisible>
+      <extendedTooltip>
+       <name>PaymentListChoiceByAccrualExtendedTooltip</name>
+       <id>399</id>
+       <visible>true</visible>
+       <enabled>true</enabled>
+       <userVisible>
+        <common>true</common>
+       </userVisible>
+       <type>Label</type>
+       <autoMaxWidth>true</autoMaxWidth>
+       <autoMaxHeight>true</autoMaxHeight>
+       <extInfo xsi:type="form:LabelDecorationExtInfo">
+        <horizontalAlign>Left</horizontalAlign>
+       </extInfo>
+      </extendedTooltip>
+      <commandName>Form.Command.ChoiceByAccrual</commandName>
       <representation>Auto</representation>
       <autoMaxWidth>true</autoMaxWidth>
       <autoMaxHeight>true</autoMaxHeight>
@@ -3985,6 +3985,56 @@
   <id>14</id>
   <valueType>
    <types>Boolean</types>
+  </valueType>
+  <view>
+   <common>true</common>
+  </view>
+  <edit>
+   <common>true</common>
+  </edit>
+ </attributes>
+ <attributes>
+  <name>AccountingRowAnalytics</name>
+  <title>
+   <key>en</key>
+   <value>Accounting row analytics</value>
+  </title>
+  <title>
+   <key>ru</key>
+   <value>Аналитика строки бух. проводки</value>
+  </title>
+  <title>
+   <key>tr</key>
+   <value>Muhasebe satır analitikleri</value>
+  </title>
+  <id>16</id>
+  <valueType>
+   <types>InformationRegisterRecordSet.T9050S_AccountingRowAnalytics</types>
+  </valueType>
+  <view>
+   <common>true</common>
+  </view>
+  <edit>
+   <common>true</common>
+  </edit>
+ </attributes>
+ <attributes>
+  <name>AccountingExtDimensions</name>
+  <title>
+   <key>en</key>
+   <value>Accounting ext dimensions</value>
+  </title>
+  <title>
+   <key>ru</key>
+   <value>Бухгалтерские субконто</value>
+  </title>
+  <title>
+   <key>tr</key>
+   <value>Muhasebe kırılımları</value>
+  </title>
+  <id>17</id>
+  <valueType>
+   <types>InformationRegisterRecordSet.T9051S_AccountingExtDimensions</types>
   </valueType>
   <view>
    <common>true</common>

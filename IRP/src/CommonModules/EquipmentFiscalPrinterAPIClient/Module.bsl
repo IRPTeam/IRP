@@ -955,6 +955,7 @@ EndFunction
 // ** VendorName - String - Name of the vendor
 // ** VendorINN - String - INN of the vendor
 // * MeasureOfQuantity - Number - Measure of quantity for the item
+// * MeasureOfQuantityRef - CatalogRef.UnitsOfMeasurement - Measure of quantity for the item
 // * FractionalQuantity - Structure:
 // ** Numerator - Number - Fractional quantity of marked product (numerator)
 // ** Denominator - Number - Fractional quantity of marked product (denominator)
@@ -995,6 +996,7 @@ Function CheckPackage_FiscalString() Export
     Str.VendorData.Insert("VendorINN", "");
 
     Str.Insert("MeasureOfQuantity", 0);
+    Str.Insert("MeasureOfQuantityRef", "");
     Str.Insert("FractionalQuantity", New Structure);
     Str.FractionalQuantity.Insert("Numerator", 0);
     Str.FractionalQuantity.Insert("Denominator", 0);

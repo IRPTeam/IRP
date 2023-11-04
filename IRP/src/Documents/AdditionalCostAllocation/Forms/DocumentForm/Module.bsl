@@ -112,8 +112,8 @@ Procedure RefreshRowsAllocationTreesAtClient()
 	RefreshRowsAllocationTreesAtServer();
 	UpdateAllocatedStatus();
 	
-	RowIDInfoClient.ExpandTree(Items.CostRows, ThisObject.CostRows.GetItems());
-	RowIDInfoClient.ExpandTree(Items.AllocationRows, ThisObject.AllocationRows.GetItems());
+	CommonFormActions.ExpandTree(Items.CostRows, ThisObject.CostRows.GetItems());
+	CommonFormActions.ExpandTree(Items.AllocationRows, ThisObject.AllocationRows.GetItems());
 EndProcedure
 
 &AtServer

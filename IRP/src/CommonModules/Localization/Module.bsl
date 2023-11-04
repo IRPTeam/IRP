@@ -1593,6 +1593,9 @@ Function Strings(Lang) Export
 	Strings.Insert("Error_135", NStr("en='Receipt from consignor [%1][%2] is available only for consignor [%3]';
 		|ru='Получение от комитента [%1][%2] доступно только для комитента [%3]';
 		|tr='Gönderen [%1][%2] tarafından alınan makbuz yalnızca gönderen [%3] için geçerlidir'", Lang));	
+	Strings.Insert("Error_136", NStr("en='Serial lot number is not unique, duplicate codes:[%1]';
+		|ru='Serial lot number is not unique, duplicate codes:[%1]';
+		|tr='Serial lot number is not unique, duplicate codes:[%1]'", Lang));	
 	
 	
 	Strings.Insert("Error_FillTotalAmount", NStr("en='Fill total amount. Row: [%1]';

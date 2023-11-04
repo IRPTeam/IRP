@@ -14,13 +14,8 @@ Procedure SetStatus(Document, Status, FiscalResponse, DataPresentation = "") Exp
 	NewRecord.Status = Status;
 	NewRecord.DataPresentation = DataPresentation;
 	
-	If FiscalResponse.Property("Info") Then
-		For Each Prop In FiscalResponse.Info Do
-			If Not CommonFunctionsServer.IsPrimitiveValue(Prop.Value) Then
-				FiscalResponse.Info[Prop.Key] = String(Prop.Value);
-			EndIf;
-		EndDo;
-	EndIf;
+	HardwareServer.FixTypesForWrite(FiscalResponse);
+	
 	NewRecord.FiscalResponse = CommonFunctionsServer.SerializeJSON(FiscalResponse);
 	If TypeOf(FiscalResponse) = Type("Structure") Then
 		If FiscalResponse.Property("Out") And FiscalResponse.Out.Property("DocumentOutputParameters") And TypeOf(FiscalResponse.Out.DocumentOutputParameters) = Type("Structure") Then

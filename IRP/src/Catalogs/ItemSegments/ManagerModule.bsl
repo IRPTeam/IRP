@@ -75,7 +75,7 @@ Procedure CheckContent(Segment) Export
 	"SELECT
 	|	ItemSegments.Segment,
 	|	ItemSegments.ItemKey,
-	|	ItemSegments.ItemKey.Item
+	|	ItemSegments.ItemKey.Item AS Item
 	|FROM
 	|	InformationRegister.ItemSegments AS ItemSegments
 	|WHERE
@@ -85,12 +85,12 @@ Procedure CheckContent(Segment) Export
 	QuerySelection = Query.Execute().Select();
 	While QuerySelection.Next() Do
 		RecordSet = InformationRegisters.ItemSegments.CreateRecordSet();
-		RecordSet.Filter.Segment = QuerySelection.Segment;
-		RecordSet.Filter.ItemKey = QuerySelection.ItemKey;
+		RecordSet.Filter.Segment.Set(QuerySelection.Segment);
+		RecordSet.Filter.ItemKey.Set(QuerySelection.ItemKey);
 		
 		RecordRow = RecordSet.Add();
 		FillPropertyValues(RecordRow, QuerySelection);
-		Record.Write(True);
+		RecordSet.Write(True);
 	EndDo;
 	
 EndProcedure

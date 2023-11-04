@@ -1365,7 +1365,7 @@ Scenario: _050053 check filling consignor from serial lot number in the RetailSa
 			| 'Cash'           |
 		And I select current line in "List" table
 		And I activate field named "PaymentsAmount" in "Payments" table
-		And I input "926,00" text in the field named "PaymentsAmount" of "Payments" table
+		And I input "908,00" text in the field named "PaymentsAmount" of "Payments" table
 		And I finish line editing in "Payments" table
 		And I activate "Account" field in "Payments" table
 		And I select current line in "Payments" table

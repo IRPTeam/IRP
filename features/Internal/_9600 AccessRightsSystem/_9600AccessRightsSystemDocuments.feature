@@ -3,7 +3,7 @@
 @Positive
 @AccessRightsSystem
 
-Feature: access rights system documents
+Feature: access rights system documents and catalogs
 
 
 Background:
@@ -47,31 +47,50 @@ Scenario: 960000 preparation (access rights system documents)
 		| 'LimitedAccess' |
 	And I select current line in "List" table
 	And I finish line editing in "Users" table
-	* Check ObjectAccess table
-		And "ObjectAccess" table became equal
-			| '#'  | 'Key'       | 'Value ref'                         | 'Modify' | 'Do not control' |
-			| '1'  | 'Company'   | 'Company Read and Write Access'     | 'Yes'    | 'No'             |
-			| '2'  | 'Company'   | 'Company Only read access'          | 'No'     | 'No'             |
-			| '3'  | 'Branch'    | 'Branch Read and Write Access'      | 'Yes'    | 'No'             |
-			| '4'  | 'Branch'    | 'Branch Only read access'           | 'No'     | 'No'             |
-			| '5'  | 'Store'     | 'Store Read and Write Access'       | 'Yes'    | 'No'             |
-			| '6'  | 'Store'     | 'Store Only read access'            | 'No'     | 'No'             |
-			| '7'  | 'Account'   | 'CashAccount Read and Write Access' | 'Yes'    | 'No'             |
-			| '8'  | 'Account'   | 'CashAccount Only read access'      | 'No'     | 'No'             |
-			| '9'  | 'PriceType' | 'PriceType Read and Write Access'   | 'Yes'    | 'No'             |
-			| '10' | 'PriceType' | 'PriceType Only read access'        | 'No'     | 'No'             |
+	* Fill ObjectAccess table
+		When filling Access key in the AccessGroups		
 	And I click "Save and close" button
-	* Check ObjectAccess register
-		Given I open hyperlink "e1cib/list/InformationRegister.T9101A_ObjectAccessRegisters"
-		And "List" table contains "ObjectAccessRegister" template lines by template
-	* Check catalog Object access keys
-		Given I open hyperlink "e1cib/list/Catalog.ObjectAccessKeys"
-		And "List" table is equal to "ObjectAccessKeys" by template
-	* Check catalog Object access keys
-		Given I open hyperlink "e1cib/list/InformationRegister.T9100A_ObjectAccessMap"
-		And "List" table is equal to "ObjectAccessMap" by template
+	// * Check ObjectAccess register
+	// 	Given I open hyperlink "e1cib/list/InformationRegister.T9101A_ObjectAccessRegisters"
+	// 	And "List" table contains "ObjectAccessRegister" template lines by template
+	// * Check catalog Object access keys
+	// 	Given I open hyperlink "e1cib/list/Catalog.ObjectAccessKeys"
+	// 	And "List" table is equal to "ObjectAccessKeys" by template
+	// * Check catalog Object access keys
+	// 	Given I open hyperlink "e1cib/list/InformationRegister.T9100A_ObjectAccessMap"
+	// 	And "List" table is equal to "ObjectAccessMap" by template
 	And I close all client application windows
-	
+
+Scenario: 960001 check preparation
+	When check preparation	
+
+Scenario: 9600011 check copy user access group settings
+	And I close all client application windows
+	* Create user access group
+		Given I open hyperlink "e1cib/list/Catalog.AccessGroups"
+		And I click the button named "FormCreate"
+		And I move to "Access" tab
+		And in the table "ObjectAccess" I click "Copy settings" button
+		And I go to line in "List" table
+			| 'Description'       |
+			| 'Unit access group' |
+		And I click "Select" button
+	* Check
+		And "ObjectAccess" table became equal
+			| 'Access key' | 'Value ref'                         | 'Value' | 'Modify' | 'Do not control' |
+			| 'Company'    | 'Company Read and Write Access'     | ''      | 'Yes'    | 'No'             |
+			| 'Company'    | 'Company Only read access'          | ''      | 'No'     | 'No'             |
+			| 'Branch'     | 'Branch Read and Write Access'      | ''      | 'Yes'    | 'No'             |
+			| 'Branch'     | 'Branch Only read access'           | ''      | 'No'     | 'No'             |
+			| 'Store'      | 'Store Read and Write Access'       | ''      | 'Yes'    | 'No'             |
+			| 'Store'      | 'Store Only read access'            | ''      | 'No'     | 'No'             |
+			| 'Account'    | 'CashAccount Read and Write Access' | ''      | 'Yes'    | 'No'             |
+			| 'Account'    | 'CashAccount Only read access'      | ''      | 'No'     | 'No'             |
+			| 'PriceType'  | 'PriceType Read and Write Access'   | ''      | 'Yes'    | 'No'             |
+			| 'PriceType'  | 'PriceType Only read access'        | ''      | 'No'     | 'No'             |
+		And I close all client application windows
+		
+
 Scenario: 960002 check SO creation
 	And I close all client application windows
 	Given I open hyperlink "e1cib/list/Document.SalesOrder"
@@ -813,35 +832,252 @@ Scenario: 960016 check CashTransferOrder creation
 	And I close all client application windows
 	Given I open hyperlink "e1cib/list/Document.CashTransferOrder"	
 	And "List" table became equal
-		| 'Number' | 'Company'                       | 'Description'                                                                                                                                         |
-		| '1'      | 'Company Read and Write Access' | 'Document.CashTransferOrder Branch: Branch Read and Write Access;Company: Company Read and Write Access;ReceiveBranch: Branch Read and Write Access;' |
-		| '2'      | 'Company Read and Write Access' | 'Document.CashTransferOrder Branch: Branch Only read access;Company: Company Read and Write Access;ReceiveBranch: Branch Read and Write Access;'      |
-		| '3'      | 'Company Read and Write Access' | 'Document.CashTransferOrder Branch: Branch access deny;Company: Company Read and Write Access;ReceiveBranch: Branch Read and Write Access;'           |
-		| '4'      | 'Company Only read access'      | 'Document.CashTransferOrder Branch: Branch Read and Write Access;Company: Company Only read access;ReceiveBranch: Branch Read and Write Access;'      |
-		| '5'      | 'Company Only read access'      | 'Document.CashTransferOrder Branch: Branch Only read access;Company: Company Only read access;ReceiveBranch: Branch Read and Write Access;'           |
-		| '6'      | 'Company Only read access'      | 'Document.CashTransferOrder Branch: Branch access deny;Company: Company Only read access;ReceiveBranch: Branch Read and Write Access;'                |
-		| '7'      | 'Company access deny'           | 'Document.CashTransferOrder Branch: Branch Read and Write Access;Company: Company access deny;ReceiveBranch: Branch Read and Write Access;'           |
-		| '8'      | 'Company access deny'           | 'Document.CashTransferOrder Branch: Branch Only read access;Company: Company access deny;ReceiveBranch: Branch Read and Write Access;'                |
-		| '9'      | 'Company access deny'           | 'Document.CashTransferOrder Branch: Branch access deny;Company: Company access deny;ReceiveBranch: Branch Read and Write Access;'                     |
-		| '10'     | 'Company Read and Write Access' | 'Document.CashTransferOrder Branch: Branch Read and Write Access;Company: Company Read and Write Access;ReceiveBranch: Branch Only read access;'      |
-		| '11'     | 'Company Read and Write Access' | 'Document.CashTransferOrder Branch: Branch Only read access;Company: Company Read and Write Access;ReceiveBranch: Branch Only read access;'           |
-		| '12'     | 'Company Read and Write Access' | 'Document.CashTransferOrder Branch: Branch access deny;Company: Company Read and Write Access;ReceiveBranch: Branch Only read access;'                |
-		| '13'     | 'Company Only read access'      | 'Document.CashTransferOrder Branch: Branch Read and Write Access;Company: Company Only read access;ReceiveBranch: Branch Only read access;'           |
-		| '14'     | 'Company Only read access'      | 'Document.CashTransferOrder Branch: Branch Only read access;Company: Company Only read access;ReceiveBranch: Branch Only read access;'                |
-		| '15'     | 'Company Only read access'      | 'Document.CashTransferOrder Branch: Branch access deny;Company: Company Only read access;ReceiveBranch: Branch Only read access;'                     |
-		| '16'     | 'Company access deny'           | 'Document.CashTransferOrder Branch: Branch Read and Write Access;Company: Company access deny;ReceiveBranch: Branch Only read access;'                |
-		| '17'     | 'Company access deny'           | 'Document.CashTransferOrder Branch: Branch Only read access;Company: Company access deny;ReceiveBranch: Branch Only read access;'                     |
-		| '18'     | 'Company access deny'           | 'Document.CashTransferOrder Branch: Branch access deny;Company: Company access deny;ReceiveBranch: Branch Only read access;'                          |
-		| '19'     | 'Company Read and Write Access' | 'Document.CashTransferOrder Branch: Branch Read and Write Access;Company: Company Read and Write Access;ReceiveBranch: Branch access deny;'           |
-		| '20'     | 'Company Read and Write Access' | 'Document.CashTransferOrder Branch: Branch Only read access;Company: Company Read and Write Access;ReceiveBranch: Branch access deny;'                |
-		| '21'     | 'Company Read and Write Access' | 'Document.CashTransferOrder Branch: Branch access deny;Company: Company Read and Write Access;ReceiveBranch: Branch access deny;'                     |
-		| '22'     | 'Company Only read access'      | 'Document.CashTransferOrder Branch: Branch Read and Write Access;Company: Company Only read access;ReceiveBranch: Branch access deny;'                |
-		| '23'     | 'Company Only read access'      | 'Document.CashTransferOrder Branch: Branch Only read access;Company: Company Only read access;ReceiveBranch: Branch access deny;'                     |
-		| '24'     | 'Company Only read access'      | 'Document.CashTransferOrder Branch: Branch access deny;Company: Company Only read access;ReceiveBranch: Branch access deny;'                          |
-		| '25'     | 'Company access deny'           | 'Document.CashTransferOrder Branch: Branch Read and Write Access;Company: Company access deny;ReceiveBranch: Branch access deny;'                     |
-		| '26'     | 'Company access deny'           | 'Document.CashTransferOrder Branch: Branch Only read access;Company: Company access deny;ReceiveBranch: Branch access deny;'                          |
-		| '27'     | 'Company access deny'           | 'Document.CashTransferOrder Branch: Branch access deny;Company: Company access deny;ReceiveBranch: Branch access deny;'                               |
+		| 'Description'                                                                                                                                                                                                                               |
+		| 'Document.CashTransferOrder Branch: Branch Read and Write Access;Company: Company Read and Write Access;ReceiveBranch: Branch Read and Write Access;Sender: CashAccount Read and Write Access;Receiver: CashAccount Read and Write Access;' |
+		| 'Document.CashTransferOrder Branch: Branch Only read access;Company: Company Read and Write Access;ReceiveBranch: Branch Read and Write Access;Sender: CashAccount Read and Write Access;Receiver: CashAccount Read and Write Access;'      |
+		| 'Document.CashTransferOrder Branch: Branch access deny;Company: Company Read and Write Access;ReceiveBranch: Branch Read and Write Access;Sender: CashAccount Read and Write Access;Receiver: CashAccount Read and Write Access;'           |
+		| 'Document.CashTransferOrder Branch: Branch Read and Write Access;Company: Company Only read access;ReceiveBranch: Branch Read and Write Access;Sender: CashAccount Read and Write Access;Receiver: CashAccount Read and Write Access;'      |
+		| 'Document.CashTransferOrder Branch: Branch Only read access;Company: Company Only read access;ReceiveBranch: Branch Read and Write Access;Sender: CashAccount Read and Write Access;Receiver: CashAccount Read and Write Access;'           |
+		| 'Document.CashTransferOrder Branch: Branch access deny;Company: Company Only read access;ReceiveBranch: Branch Read and Write Access;Sender: CashAccount Read and Write Access;Receiver: CashAccount Read and Write Access;'                |
+		| 'Document.CashTransferOrder Branch: Branch Read and Write Access;Company: Company access deny;ReceiveBranch: Branch Read and Write Access;Sender: CashAccount Read and Write Access;Receiver: CashAccount Read and Write Access;'           |
+		| 'Document.CashTransferOrder Branch: Branch Only read access;Company: Company access deny;ReceiveBranch: Branch Read and Write Access;Sender: CashAccount Read and Write Access;Receiver: CashAccount Read and Write Access;'                |
+		| 'Document.CashTransferOrder Branch: Branch access deny;Company: Company access deny;ReceiveBranch: Branch Read and Write Access;Sender: CashAccount Read and Write Access;Receiver: CashAccount Read and Write Access;'                     |
+		| 'Document.CashTransferOrder Branch: Branch Read and Write Access;Company: Company Read and Write Access;ReceiveBranch: Branch Only read access;Sender: CashAccount Read and Write Access;Receiver: CashAccount Read and Write Access;'      |
+		| 'Document.CashTransferOrder Branch: Branch Only read access;Company: Company Read and Write Access;ReceiveBranch: Branch Only read access;Sender: CashAccount Read and Write Access;Receiver: CashAccount Read and Write Access;'           |
+		| 'Document.CashTransferOrder Branch: Branch access deny;Company: Company Read and Write Access;ReceiveBranch: Branch Only read access;Sender: CashAccount Read and Write Access;Receiver: CashAccount Read and Write Access;'                |
+		| 'Document.CashTransferOrder Branch: Branch Read and Write Access;Company: Company Only read access;ReceiveBranch: Branch Only read access;Sender: CashAccount Read and Write Access;Receiver: CashAccount Read and Write Access;'           |
+		| 'Document.CashTransferOrder Branch: Branch Only read access;Company: Company Only read access;ReceiveBranch: Branch Only read access;Sender: CashAccount Read and Write Access;Receiver: CashAccount Read and Write Access;'                |
+		| 'Document.CashTransferOrder Branch: Branch access deny;Company: Company Only read access;ReceiveBranch: Branch Only read access;Sender: CashAccount Read and Write Access;Receiver: CashAccount Read and Write Access;'                     |
+		| 'Document.CashTransferOrder Branch: Branch Read and Write Access;Company: Company access deny;ReceiveBranch: Branch Only read access;Sender: CashAccount Read and Write Access;Receiver: CashAccount Read and Write Access;'                |
+		| 'Document.CashTransferOrder Branch: Branch Only read access;Company: Company access deny;ReceiveBranch: Branch Only read access;Sender: CashAccount Read and Write Access;Receiver: CashAccount Read and Write Access;'                     |
+		| 'Document.CashTransferOrder Branch: Branch access deny;Company: Company access deny;ReceiveBranch: Branch Only read access;Sender: CashAccount Read and Write Access;Receiver: CashAccount Read and Write Access;'                          |
+		| 'Document.CashTransferOrder Branch: Branch Read and Write Access;Company: Company Read and Write Access;ReceiveBranch: Branch access deny;Sender: CashAccount Read and Write Access;Receiver: CashAccount Read and Write Access;'           |
+		| 'Document.CashTransferOrder Branch: Branch Only read access;Company: Company Read and Write Access;ReceiveBranch: Branch access deny;Sender: CashAccount Read and Write Access;Receiver: CashAccount Read and Write Access;'                |
+		| 'Document.CashTransferOrder Branch: Branch access deny;Company: Company Read and Write Access;ReceiveBranch: Branch access deny;Sender: CashAccount Read and Write Access;Receiver: CashAccount Read and Write Access;'                     |
+		| 'Document.CashTransferOrder Branch: Branch Read and Write Access;Company: Company Only read access;ReceiveBranch: Branch access deny;Sender: CashAccount Read and Write Access;Receiver: CashAccount Read and Write Access;'                |
+		| 'Document.CashTransferOrder Branch: Branch Only read access;Company: Company Only read access;ReceiveBranch: Branch access deny;Sender: CashAccount Read and Write Access;Receiver: CashAccount Read and Write Access;'                     |
+		| 'Document.CashTransferOrder Branch: Branch access deny;Company: Company Only read access;ReceiveBranch: Branch access deny;Sender: CashAccount Read and Write Access;Receiver: CashAccount Read and Write Access;'                          |
+		| 'Document.CashTransferOrder Branch: Branch Read and Write Access;Company: Company access deny;ReceiveBranch: Branch access deny;Sender: CashAccount Read and Write Access;Receiver: CashAccount Read and Write Access;'                     |
+		| 'Document.CashTransferOrder Branch: Branch Only read access;Company: Company access deny;ReceiveBranch: Branch access deny;Sender: CashAccount Read and Write Access;Receiver: CashAccount Read and Write Access;'                          |
+		| 'Document.CashTransferOrder Branch: Branch access deny;Company: Company access deny;ReceiveBranch: Branch access deny;Sender: CashAccount Read and Write Access;Receiver: CashAccount Read and Write Access;'                               |
+		| 'Document.CashTransferOrder Branch: Branch Read and Write Access;Company: Company Read and Write Access;ReceiveBranch: Branch Read and Write Access;Sender: CashAccount Only read access;Receiver: CashAccount Read and Write Access;'      |
+		| 'Document.CashTransferOrder Branch: Branch Only read access;Company: Company Read and Write Access;ReceiveBranch: Branch Read and Write Access;Sender: CashAccount Only read access;Receiver: CashAccount Read and Write Access;'           |
+		| 'Document.CashTransferOrder Branch: Branch access deny;Company: Company Read and Write Access;ReceiveBranch: Branch Read and Write Access;Sender: CashAccount Only read access;Receiver: CashAccount Read and Write Access;'                |
+		| 'Document.CashTransferOrder Branch: Branch Read and Write Access;Company: Company Only read access;ReceiveBranch: Branch Read and Write Access;Sender: CashAccount Only read access;Receiver: CashAccount Read and Write Access;'           |
+		| 'Document.CashTransferOrder Branch: Branch Only read access;Company: Company Only read access;ReceiveBranch: Branch Read and Write Access;Sender: CashAccount Only read access;Receiver: CashAccount Read and Write Access;'                |
+		| 'Document.CashTransferOrder Branch: Branch access deny;Company: Company Only read access;ReceiveBranch: Branch Read and Write Access;Sender: CashAccount Only read access;Receiver: CashAccount Read and Write Access;'                     |
+		| 'Document.CashTransferOrder Branch: Branch Read and Write Access;Company: Company access deny;ReceiveBranch: Branch Read and Write Access;Sender: CashAccount Only read access;Receiver: CashAccount Read and Write Access;'                |
+		| 'Document.CashTransferOrder Branch: Branch Only read access;Company: Company access deny;ReceiveBranch: Branch Read and Write Access;Sender: CashAccount Only read access;Receiver: CashAccount Read and Write Access;'                     |
+		| 'Document.CashTransferOrder Branch: Branch access deny;Company: Company access deny;ReceiveBranch: Branch Read and Write Access;Sender: CashAccount Only read access;Receiver: CashAccount Read and Write Access;'                          |
+		| 'Document.CashTransferOrder Branch: Branch Read and Write Access;Company: Company Read and Write Access;ReceiveBranch: Branch Only read access;Sender: CashAccount Only read access;Receiver: CashAccount Read and Write Access;'           |
+		| 'Document.CashTransferOrder Branch: Branch Only read access;Company: Company Read and Write Access;ReceiveBranch: Branch Only read access;Sender: CashAccount Only read access;Receiver: CashAccount Read and Write Access;'                |
+		| 'Document.CashTransferOrder Branch: Branch access deny;Company: Company Read and Write Access;ReceiveBranch: Branch Only read access;Sender: CashAccount Only read access;Receiver: CashAccount Read and Write Access;'                     |
+		| 'Document.CashTransferOrder Branch: Branch Read and Write Access;Company: Company Only read access;ReceiveBranch: Branch Only read access;Sender: CashAccount Only read access;Receiver: CashAccount Read and Write Access;'                |
+		| 'Document.CashTransferOrder Branch: Branch Only read access;Company: Company Only read access;ReceiveBranch: Branch Only read access;Sender: CashAccount Only read access;Receiver: CashAccount Read and Write Access;'                     |
+		| 'Document.CashTransferOrder Branch: Branch access deny;Company: Company Only read access;ReceiveBranch: Branch Only read access;Sender: CashAccount Only read access;Receiver: CashAccount Read and Write Access;'                          |
+		| 'Document.CashTransferOrder Branch: Branch Read and Write Access;Company: Company access deny;ReceiveBranch: Branch Only read access;Sender: CashAccount Only read access;Receiver: CashAccount Read and Write Access;'                     |
+		| 'Document.CashTransferOrder Branch: Branch Only read access;Company: Company access deny;ReceiveBranch: Branch Only read access;Sender: CashAccount Only read access;Receiver: CashAccount Read and Write Access;'                          |
+		| 'Document.CashTransferOrder Branch: Branch access deny;Company: Company access deny;ReceiveBranch: Branch Only read access;Sender: CashAccount Only read access;Receiver: CashAccount Read and Write Access;'                               |
+		| 'Document.CashTransferOrder Branch: Branch Read and Write Access;Company: Company Read and Write Access;ReceiveBranch: Branch access deny;Sender: CashAccount Only read access;Receiver: CashAccount Read and Write Access;'                |
+		| 'Document.CashTransferOrder Branch: Branch Only read access;Company: Company Read and Write Access;ReceiveBranch: Branch access deny;Sender: CashAccount Only read access;Receiver: CashAccount Read and Write Access;'                     |
+		| 'Document.CashTransferOrder Branch: Branch access deny;Company: Company Read and Write Access;ReceiveBranch: Branch access deny;Sender: CashAccount Only read access;Receiver: CashAccount Read and Write Access;'                          |
+		| 'Document.CashTransferOrder Branch: Branch Read and Write Access;Company: Company Only read access;ReceiveBranch: Branch access deny;Sender: CashAccount Only read access;Receiver: CashAccount Read and Write Access;'                     |
+		| 'Document.CashTransferOrder Branch: Branch Only read access;Company: Company Only read access;ReceiveBranch: Branch access deny;Sender: CashAccount Only read access;Receiver: CashAccount Read and Write Access;'                          |
+		| 'Document.CashTransferOrder Branch: Branch access deny;Company: Company Only read access;ReceiveBranch: Branch access deny;Sender: CashAccount Only read access;Receiver: CashAccount Read and Write Access;'                               |
+		| 'Document.CashTransferOrder Branch: Branch Read and Write Access;Company: Company access deny;ReceiveBranch: Branch access deny;Sender: CashAccount Only read access;Receiver: CashAccount Read and Write Access;'                          |
+		| 'Document.CashTransferOrder Branch: Branch Only read access;Company: Company access deny;ReceiveBranch: Branch access deny;Sender: CashAccount Only read access;Receiver: CashAccount Read and Write Access;'                               |
+		| 'Document.CashTransferOrder Branch: Branch access deny;Company: Company access deny;ReceiveBranch: Branch access deny;Sender: CashAccount Only read access;Receiver: CashAccount Read and Write Access;'                                    |
+		| 'Document.CashTransferOrder Branch: Branch Read and Write Access;Company: Company Read and Write Access;ReceiveBranch: Branch Read and Write Access;Sender: CashAccount access deny;Receiver: CashAccount Read and Write Access;'           |
+		| 'Document.CashTransferOrder Branch: Branch Only read access;Company: Company Read and Write Access;ReceiveBranch: Branch Read and Write Access;Sender: CashAccount access deny;Receiver: CashAccount Read and Write Access;'                |
+		| 'Document.CashTransferOrder Branch: Branch access deny;Company: Company Read and Write Access;ReceiveBranch: Branch Read and Write Access;Sender: CashAccount access deny;Receiver: CashAccount Read and Write Access;'                     |
+		| 'Document.CashTransferOrder Branch: Branch Read and Write Access;Company: Company Only read access;ReceiveBranch: Branch Read and Write Access;Sender: CashAccount access deny;Receiver: CashAccount Read and Write Access;'                |
+		| 'Document.CashTransferOrder Branch: Branch Only read access;Company: Company Only read access;ReceiveBranch: Branch Read and Write Access;Sender: CashAccount access deny;Receiver: CashAccount Read and Write Access;'                     |
+		| 'Document.CashTransferOrder Branch: Branch access deny;Company: Company Only read access;ReceiveBranch: Branch Read and Write Access;Sender: CashAccount access deny;Receiver: CashAccount Read and Write Access;'                          |
+		| 'Document.CashTransferOrder Branch: Branch Read and Write Access;Company: Company access deny;ReceiveBranch: Branch Read and Write Access;Sender: CashAccount access deny;Receiver: CashAccount Read and Write Access;'                     |
+		| 'Document.CashTransferOrder Branch: Branch Only read access;Company: Company access deny;ReceiveBranch: Branch Read and Write Access;Sender: CashAccount access deny;Receiver: CashAccount Read and Write Access;'                          |
+		| 'Document.CashTransferOrder Branch: Branch access deny;Company: Company access deny;ReceiveBranch: Branch Read and Write Access;Sender: CashAccount access deny;Receiver: CashAccount Read and Write Access;'                               |
+		| 'Document.CashTransferOrder Branch: Branch Read and Write Access;Company: Company Read and Write Access;ReceiveBranch: Branch Only read access;Sender: CashAccount access deny;Receiver: CashAccount Read and Write Access;'                |
+		| 'Document.CashTransferOrder Branch: Branch Only read access;Company: Company Read and Write Access;ReceiveBranch: Branch Only read access;Sender: CashAccount access deny;Receiver: CashAccount Read and Write Access;'                     |
+		| 'Document.CashTransferOrder Branch: Branch access deny;Company: Company Read and Write Access;ReceiveBranch: Branch Only read access;Sender: CashAccount access deny;Receiver: CashAccount Read and Write Access;'                          |
+		| 'Document.CashTransferOrder Branch: Branch Read and Write Access;Company: Company Only read access;ReceiveBranch: Branch Only read access;Sender: CashAccount access deny;Receiver: CashAccount Read and Write Access;'                     |
+		| 'Document.CashTransferOrder Branch: Branch Only read access;Company: Company Only read access;ReceiveBranch: Branch Only read access;Sender: CashAccount access deny;Receiver: CashAccount Read and Write Access;'                          |
+		| 'Document.CashTransferOrder Branch: Branch access deny;Company: Company Only read access;ReceiveBranch: Branch Only read access;Sender: CashAccount access deny;Receiver: CashAccount Read and Write Access;'                               |
+		| 'Document.CashTransferOrder Branch: Branch Read and Write Access;Company: Company access deny;ReceiveBranch: Branch Only read access;Sender: CashAccount access deny;Receiver: CashAccount Read and Write Access;'                          |
+		| 'Document.CashTransferOrder Branch: Branch Only read access;Company: Company access deny;ReceiveBranch: Branch Only read access;Sender: CashAccount access deny;Receiver: CashAccount Read and Write Access;'                               |
+		| 'Document.CashTransferOrder Branch: Branch access deny;Company: Company access deny;ReceiveBranch: Branch Only read access;Sender: CashAccount access deny;Receiver: CashAccount Read and Write Access;'                                    |
+		| 'Document.CashTransferOrder Branch: Branch Read and Write Access;Company: Company Read and Write Access;ReceiveBranch: Branch access deny;Sender: CashAccount access deny;Receiver: CashAccount Read and Write Access;'                     |
+		| 'Document.CashTransferOrder Branch: Branch Only read access;Company: Company Read and Write Access;ReceiveBranch: Branch access deny;Sender: CashAccount access deny;Receiver: CashAccount Read and Write Access;'                          |
+		| 'Document.CashTransferOrder Branch: Branch access deny;Company: Company Read and Write Access;ReceiveBranch: Branch access deny;Sender: CashAccount access deny;Receiver: CashAccount Read and Write Access;'                               |
+		| 'Document.CashTransferOrder Branch: Branch Read and Write Access;Company: Company Only read access;ReceiveBranch: Branch access deny;Sender: CashAccount access deny;Receiver: CashAccount Read and Write Access;'                          |
+		| 'Document.CashTransferOrder Branch: Branch Only read access;Company: Company Only read access;ReceiveBranch: Branch access deny;Sender: CashAccount access deny;Receiver: CashAccount Read and Write Access;'                               |
+		| 'Document.CashTransferOrder Branch: Branch access deny;Company: Company Only read access;ReceiveBranch: Branch access deny;Sender: CashAccount access deny;Receiver: CashAccount Read and Write Access;'                                    |
+		| 'Document.CashTransferOrder Branch: Branch Read and Write Access;Company: Company access deny;ReceiveBranch: Branch access deny;Sender: CashAccount access deny;Receiver: CashAccount Read and Write Access;'                               |
+		| 'Document.CashTransferOrder Branch: Branch Only read access;Company: Company access deny;ReceiveBranch: Branch access deny;Sender: CashAccount access deny;Receiver: CashAccount Read and Write Access;'                                    |
+		| 'Document.CashTransferOrder Branch: Branch access deny;Company: Company access deny;ReceiveBranch: Branch access deny;Sender: CashAccount access deny;Receiver: CashAccount Read and Write Access;'                                         |
+		| 'Document.CashTransferOrder Branch: Branch Read and Write Access;Company: Company Read and Write Access;ReceiveBranch: Branch Read and Write Access;Sender: CashAccount Read and Write Access;Receiver: CashAccount Only read access;'      |
+		| 'Document.CashTransferOrder Branch: Branch Only read access;Company: Company Read and Write Access;ReceiveBranch: Branch Read and Write Access;Sender: CashAccount Read and Write Access;Receiver: CashAccount Only read access;'           |
+		| 'Document.CashTransferOrder Branch: Branch access deny;Company: Company Read and Write Access;ReceiveBranch: Branch Read and Write Access;Sender: CashAccount Read and Write Access;Receiver: CashAccount Only read access;'                |
+		| 'Document.CashTransferOrder Branch: Branch Read and Write Access;Company: Company Only read access;ReceiveBranch: Branch Read and Write Access;Sender: CashAccount Read and Write Access;Receiver: CashAccount Only read access;'           |
+		| 'Document.CashTransferOrder Branch: Branch Only read access;Company: Company Only read access;ReceiveBranch: Branch Read and Write Access;Sender: CashAccount Read and Write Access;Receiver: CashAccount Only read access;'                |
+		| 'Document.CashTransferOrder Branch: Branch access deny;Company: Company Only read access;ReceiveBranch: Branch Read and Write Access;Sender: CashAccount Read and Write Access;Receiver: CashAccount Only read access;'                     |
+		| 'Document.CashTransferOrder Branch: Branch Read and Write Access;Company: Company access deny;ReceiveBranch: Branch Read and Write Access;Sender: CashAccount Read and Write Access;Receiver: CashAccount Only read access;'                |
+		| 'Document.CashTransferOrder Branch: Branch Only read access;Company: Company access deny;ReceiveBranch: Branch Read and Write Access;Sender: CashAccount Read and Write Access;Receiver: CashAccount Only read access;'                     |
+		| 'Document.CashTransferOrder Branch: Branch access deny;Company: Company access deny;ReceiveBranch: Branch Read and Write Access;Sender: CashAccount Read and Write Access;Receiver: CashAccount Only read access;'                          |
+		| 'Document.CashTransferOrder Branch: Branch Read and Write Access;Company: Company Read and Write Access;ReceiveBranch: Branch Only read access;Sender: CashAccount Read and Write Access;Receiver: CashAccount Only read access;'           |
+		| 'Document.CashTransferOrder Branch: Branch Only read access;Company: Company Read and Write Access;ReceiveBranch: Branch Only read access;Sender: CashAccount Read and Write Access;Receiver: CashAccount Only read access;'                |
+		| 'Document.CashTransferOrder Branch: Branch access deny;Company: Company Read and Write Access;ReceiveBranch: Branch Only read access;Sender: CashAccount Read and Write Access;Receiver: CashAccount Only read access;'                     |
+		| 'Document.CashTransferOrder Branch: Branch Read and Write Access;Company: Company Only read access;ReceiveBranch: Branch Only read access;Sender: CashAccount Read and Write Access;Receiver: CashAccount Only read access;'                |
+		| 'Document.CashTransferOrder Branch: Branch Only read access;Company: Company Only read access;ReceiveBranch: Branch Only read access;Sender: CashAccount Read and Write Access;Receiver: CashAccount Only read access;'                     |
+		| 'Document.CashTransferOrder Branch: Branch access deny;Company: Company Only read access;ReceiveBranch: Branch Only read access;Sender: CashAccount Read and Write Access;Receiver: CashAccount Only read access;'                          |
+		| 'Document.CashTransferOrder Branch: Branch Read and Write Access;Company: Company access deny;ReceiveBranch: Branch Only read access;Sender: CashAccount Read and Write Access;Receiver: CashAccount Only read access;'                     |
+		| 'Document.CashTransferOrder Branch: Branch Only read access;Company: Company access deny;ReceiveBranch: Branch Only read access;Sender: CashAccount Read and Write Access;Receiver: CashAccount Only read access;'                          |
+		| 'Document.CashTransferOrder Branch: Branch access deny;Company: Company access deny;ReceiveBranch: Branch Only read access;Sender: CashAccount Read and Write Access;Receiver: CashAccount Only read access;'                               |
+		| 'Document.CashTransferOrder Branch: Branch Read and Write Access;Company: Company Read and Write Access;ReceiveBranch: Branch access deny;Sender: CashAccount Read and Write Access;Receiver: CashAccount Only read access;'                |
+		| 'Document.CashTransferOrder Branch: Branch Only read access;Company: Company Read and Write Access;ReceiveBranch: Branch access deny;Sender: CashAccount Read and Write Access;Receiver: CashAccount Only read access;'                     |
+		| 'Document.CashTransferOrder Branch: Branch access deny;Company: Company Read and Write Access;ReceiveBranch: Branch access deny;Sender: CashAccount Read and Write Access;Receiver: CashAccount Only read access;'                          |
+		| 'Document.CashTransferOrder Branch: Branch Read and Write Access;Company: Company Only read access;ReceiveBranch: Branch access deny;Sender: CashAccount Read and Write Access;Receiver: CashAccount Only read access;'                     |
+		| 'Document.CashTransferOrder Branch: Branch Only read access;Company: Company Only read access;ReceiveBranch: Branch access deny;Sender: CashAccount Read and Write Access;Receiver: CashAccount Only read access;'                          |
+		| 'Document.CashTransferOrder Branch: Branch access deny;Company: Company Only read access;ReceiveBranch: Branch access deny;Sender: CashAccount Read and Write Access;Receiver: CashAccount Only read access;'                               |
+		| 'Document.CashTransferOrder Branch: Branch Read and Write Access;Company: Company access deny;ReceiveBranch: Branch access deny;Sender: CashAccount Read and Write Access;Receiver: CashAccount Only read access;'                          |
+		| 'Document.CashTransferOrder Branch: Branch Only read access;Company: Company access deny;ReceiveBranch: Branch access deny;Sender: CashAccount Read and Write Access;Receiver: CashAccount Only read access;'                               |
+		| 'Document.CashTransferOrder Branch: Branch access deny;Company: Company access deny;ReceiveBranch: Branch access deny;Sender: CashAccount Read and Write Access;Receiver: CashAccount Only read access;'                                    |
+		| 'Document.CashTransferOrder Branch: Branch Read and Write Access;Company: Company Read and Write Access;ReceiveBranch: Branch Read and Write Access;Sender: CashAccount Only read access;Receiver: CashAccount Only read access;'           |
+		| 'Document.CashTransferOrder Branch: Branch Only read access;Company: Company Read and Write Access;ReceiveBranch: Branch Read and Write Access;Sender: CashAccount Only read access;Receiver: CashAccount Only read access;'                |
+		| 'Document.CashTransferOrder Branch: Branch access deny;Company: Company Read and Write Access;ReceiveBranch: Branch Read and Write Access;Sender: CashAccount Only read access;Receiver: CashAccount Only read access;'                     |
+		| 'Document.CashTransferOrder Branch: Branch Read and Write Access;Company: Company Only read access;ReceiveBranch: Branch Read and Write Access;Sender: CashAccount Only read access;Receiver: CashAccount Only read access;'                |
+		| 'Document.CashTransferOrder Branch: Branch Only read access;Company: Company Only read access;ReceiveBranch: Branch Read and Write Access;Sender: CashAccount Only read access;Receiver: CashAccount Only read access;'                     |
+		| 'Document.CashTransferOrder Branch: Branch access deny;Company: Company Only read access;ReceiveBranch: Branch Read and Write Access;Sender: CashAccount Only read access;Receiver: CashAccount Only read access;'                          |
+		| 'Document.CashTransferOrder Branch: Branch Read and Write Access;Company: Company access deny;ReceiveBranch: Branch Read and Write Access;Sender: CashAccount Only read access;Receiver: CashAccount Only read access;'                     |
+		| 'Document.CashTransferOrder Branch: Branch Only read access;Company: Company access deny;ReceiveBranch: Branch Read and Write Access;Sender: CashAccount Only read access;Receiver: CashAccount Only read access;'                          |
+		| 'Document.CashTransferOrder Branch: Branch access deny;Company: Company access deny;ReceiveBranch: Branch Read and Write Access;Sender: CashAccount Only read access;Receiver: CashAccount Only read access;'                               |
+		| 'Document.CashTransferOrder Branch: Branch Read and Write Access;Company: Company Read and Write Access;ReceiveBranch: Branch Only read access;Sender: CashAccount Only read access;Receiver: CashAccount Only read access;'                |
+		| 'Document.CashTransferOrder Branch: Branch Only read access;Company: Company Read and Write Access;ReceiveBranch: Branch Only read access;Sender: CashAccount Only read access;Receiver: CashAccount Only read access;'                     |
+		| 'Document.CashTransferOrder Branch: Branch access deny;Company: Company Read and Write Access;ReceiveBranch: Branch Only read access;Sender: CashAccount Only read access;Receiver: CashAccount Only read access;'                          |
+		| 'Document.CashTransferOrder Branch: Branch Read and Write Access;Company: Company Only read access;ReceiveBranch: Branch Only read access;Sender: CashAccount Only read access;Receiver: CashAccount Only read access;'                     |
+		| 'Document.CashTransferOrder Branch: Branch Only read access;Company: Company Only read access;ReceiveBranch: Branch Only read access;Sender: CashAccount Only read access;Receiver: CashAccount Only read access;'                          |
+		| 'Document.CashTransferOrder Branch: Branch access deny;Company: Company Only read access;ReceiveBranch: Branch Only read access;Sender: CashAccount Only read access;Receiver: CashAccount Only read access;'                               |
+		| 'Document.CashTransferOrder Branch: Branch Read and Write Access;Company: Company access deny;ReceiveBranch: Branch Only read access;Sender: CashAccount Only read access;Receiver: CashAccount Only read access;'                          |
+		| 'Document.CashTransferOrder Branch: Branch Only read access;Company: Company access deny;ReceiveBranch: Branch Only read access;Sender: CashAccount Only read access;Receiver: CashAccount Only read access;'                               |
+		| 'Document.CashTransferOrder Branch: Branch access deny;Company: Company access deny;ReceiveBranch: Branch Only read access;Sender: CashAccount Only read access;Receiver: CashAccount Only read access;'                                    |
+		| 'Document.CashTransferOrder Branch: Branch Read and Write Access;Company: Company Read and Write Access;ReceiveBranch: Branch access deny;Sender: CashAccount Only read access;Receiver: CashAccount Only read access;'                     |
+		| 'Document.CashTransferOrder Branch: Branch Only read access;Company: Company Read and Write Access;ReceiveBranch: Branch access deny;Sender: CashAccount Only read access;Receiver: CashAccount Only read access;'                          |
+		| 'Document.CashTransferOrder Branch: Branch access deny;Company: Company Read and Write Access;ReceiveBranch: Branch access deny;Sender: CashAccount Only read access;Receiver: CashAccount Only read access;'                               |
+		| 'Document.CashTransferOrder Branch: Branch Read and Write Access;Company: Company Only read access;ReceiveBranch: Branch access deny;Sender: CashAccount Only read access;Receiver: CashAccount Only read access;'                          |
+		| 'Document.CashTransferOrder Branch: Branch Only read access;Company: Company Only read access;ReceiveBranch: Branch access deny;Sender: CashAccount Only read access;Receiver: CashAccount Only read access;'                               |
+		| 'Document.CashTransferOrder Branch: Branch access deny;Company: Company Only read access;ReceiveBranch: Branch access deny;Sender: CashAccount Only read access;Receiver: CashAccount Only read access;'                                    |
+		| 'Document.CashTransferOrder Branch: Branch Read and Write Access;Company: Company access deny;ReceiveBranch: Branch access deny;Sender: CashAccount Only read access;Receiver: CashAccount Only read access;'                               |
+		| 'Document.CashTransferOrder Branch: Branch Only read access;Company: Company access deny;ReceiveBranch: Branch access deny;Sender: CashAccount Only read access;Receiver: CashAccount Only read access;'                                    |
+		| 'Document.CashTransferOrder Branch: Branch access deny;Company: Company access deny;ReceiveBranch: Branch access deny;Sender: CashAccount Only read access;Receiver: CashAccount Only read access;'                                         |
+		| 'Document.CashTransferOrder Branch: Branch Read and Write Access;Company: Company Read and Write Access;ReceiveBranch: Branch Read and Write Access;Sender: CashAccount access deny;Receiver: CashAccount Only read access;'                |
+		| 'Document.CashTransferOrder Branch: Branch Only read access;Company: Company Read and Write Access;ReceiveBranch: Branch Read and Write Access;Sender: CashAccount access deny;Receiver: CashAccount Only read access;'                     |
+		| 'Document.CashTransferOrder Branch: Branch access deny;Company: Company Read and Write Access;ReceiveBranch: Branch Read and Write Access;Sender: CashAccount access deny;Receiver: CashAccount Only read access;'                          |
+		| 'Document.CashTransferOrder Branch: Branch Read and Write Access;Company: Company Only read access;ReceiveBranch: Branch Read and Write Access;Sender: CashAccount access deny;Receiver: CashAccount Only read access;'                     |
+		| 'Document.CashTransferOrder Branch: Branch Only read access;Company: Company Only read access;ReceiveBranch: Branch Read and Write Access;Sender: CashAccount access deny;Receiver: CashAccount Only read access;'                          |
+		| 'Document.CashTransferOrder Branch: Branch access deny;Company: Company Only read access;ReceiveBranch: Branch Read and Write Access;Sender: CashAccount access deny;Receiver: CashAccount Only read access;'                               |
+		| 'Document.CashTransferOrder Branch: Branch Read and Write Access;Company: Company access deny;ReceiveBranch: Branch Read and Write Access;Sender: CashAccount access deny;Receiver: CashAccount Only read access;'                          |
+		| 'Document.CashTransferOrder Branch: Branch Only read access;Company: Company access deny;ReceiveBranch: Branch Read and Write Access;Sender: CashAccount access deny;Receiver: CashAccount Only read access;'                               |
+		| 'Document.CashTransferOrder Branch: Branch access deny;Company: Company access deny;ReceiveBranch: Branch Read and Write Access;Sender: CashAccount access deny;Receiver: CashAccount Only read access;'                                    |
+		| 'Document.CashTransferOrder Branch: Branch Read and Write Access;Company: Company Read and Write Access;ReceiveBranch: Branch Only read access;Sender: CashAccount access deny;Receiver: CashAccount Only read access;'                     |
+		| 'Document.CashTransferOrder Branch: Branch Only read access;Company: Company Read and Write Access;ReceiveBranch: Branch Only read access;Sender: CashAccount access deny;Receiver: CashAccount Only read access;'                          |
+		| 'Document.CashTransferOrder Branch: Branch access deny;Company: Company Read and Write Access;ReceiveBranch: Branch Only read access;Sender: CashAccount access deny;Receiver: CashAccount Only read access;'                               |
+		| 'Document.CashTransferOrder Branch: Branch Read and Write Access;Company: Company Only read access;ReceiveBranch: Branch Only read access;Sender: CashAccount access deny;Receiver: CashAccount Only read access;'                          |
+		| 'Document.CashTransferOrder Branch: Branch Only read access;Company: Company Only read access;ReceiveBranch: Branch Only read access;Sender: CashAccount access deny;Receiver: CashAccount Only read access;'                               |
+		| 'Document.CashTransferOrder Branch: Branch access deny;Company: Company Only read access;ReceiveBranch: Branch Only read access;Sender: CashAccount access deny;Receiver: CashAccount Only read access;'                                    |
+		| 'Document.CashTransferOrder Branch: Branch Read and Write Access;Company: Company access deny;ReceiveBranch: Branch Only read access;Sender: CashAccount access deny;Receiver: CashAccount Only read access;'                               |
+		| 'Document.CashTransferOrder Branch: Branch Only read access;Company: Company access deny;ReceiveBranch: Branch Only read access;Sender: CashAccount access deny;Receiver: CashAccount Only read access;'                                    |
+		| 'Document.CashTransferOrder Branch: Branch access deny;Company: Company access deny;ReceiveBranch: Branch Only read access;Sender: CashAccount access deny;Receiver: CashAccount Only read access;'                                         |
+		| 'Document.CashTransferOrder Branch: Branch Read and Write Access;Company: Company Read and Write Access;ReceiveBranch: Branch access deny;Sender: CashAccount access deny;Receiver: CashAccount Only read access;'                          |
+		| 'Document.CashTransferOrder Branch: Branch Only read access;Company: Company Read and Write Access;ReceiveBranch: Branch access deny;Sender: CashAccount access deny;Receiver: CashAccount Only read access;'                               |
+		| 'Document.CashTransferOrder Branch: Branch access deny;Company: Company Read and Write Access;ReceiveBranch: Branch access deny;Sender: CashAccount access deny;Receiver: CashAccount Only read access;'                                    |
+		| 'Document.CashTransferOrder Branch: Branch Read and Write Access;Company: Company Only read access;ReceiveBranch: Branch access deny;Sender: CashAccount access deny;Receiver: CashAccount Only read access;'                               |
+		| 'Document.CashTransferOrder Branch: Branch Only read access;Company: Company Only read access;ReceiveBranch: Branch access deny;Sender: CashAccount access deny;Receiver: CashAccount Only read access;'                                    |
+		| 'Document.CashTransferOrder Branch: Branch access deny;Company: Company Only read access;ReceiveBranch: Branch access deny;Sender: CashAccount access deny;Receiver: CashAccount Only read access;'                                         |
+		| 'Document.CashTransferOrder Branch: Branch Read and Write Access;Company: Company access deny;ReceiveBranch: Branch access deny;Sender: CashAccount access deny;Receiver: CashAccount Only read access;'                                    |
+		| 'Document.CashTransferOrder Branch: Branch Only read access;Company: Company access deny;ReceiveBranch: Branch access deny;Sender: CashAccount access deny;Receiver: CashAccount Only read access;'                                         |
+		| 'Document.CashTransferOrder Branch: Branch access deny;Company: Company access deny;ReceiveBranch: Branch access deny;Sender: CashAccount access deny;Receiver: CashAccount Only read access;'                                              |
+		| 'Document.CashTransferOrder Branch: Branch Read and Write Access;Company: Company Read and Write Access;ReceiveBranch: Branch Read and Write Access;Sender: CashAccount Read and Write Access;Receiver: CashAccount access deny;'           |
+		| 'Document.CashTransferOrder Branch: Branch Only read access;Company: Company Read and Write Access;ReceiveBranch: Branch Read and Write Access;Sender: CashAccount Read and Write Access;Receiver: CashAccount access deny;'                |
+		| 'Document.CashTransferOrder Branch: Branch access deny;Company: Company Read and Write Access;ReceiveBranch: Branch Read and Write Access;Sender: CashAccount Read and Write Access;Receiver: CashAccount access deny;'                     |
+		| 'Document.CashTransferOrder Branch: Branch Read and Write Access;Company: Company Only read access;ReceiveBranch: Branch Read and Write Access;Sender: CashAccount Read and Write Access;Receiver: CashAccount access deny;'                |
+		| 'Document.CashTransferOrder Branch: Branch Only read access;Company: Company Only read access;ReceiveBranch: Branch Read and Write Access;Sender: CashAccount Read and Write Access;Receiver: CashAccount access deny;'                     |
+		| 'Document.CashTransferOrder Branch: Branch access deny;Company: Company Only read access;ReceiveBranch: Branch Read and Write Access;Sender: CashAccount Read and Write Access;Receiver: CashAccount access deny;'                          |
+		| 'Document.CashTransferOrder Branch: Branch Read and Write Access;Company: Company access deny;ReceiveBranch: Branch Read and Write Access;Sender: CashAccount Read and Write Access;Receiver: CashAccount access deny;'                     |
+		| 'Document.CashTransferOrder Branch: Branch Only read access;Company: Company access deny;ReceiveBranch: Branch Read and Write Access;Sender: CashAccount Read and Write Access;Receiver: CashAccount access deny;'                          |
+		| 'Document.CashTransferOrder Branch: Branch access deny;Company: Company access deny;ReceiveBranch: Branch Read and Write Access;Sender: CashAccount Read and Write Access;Receiver: CashAccount access deny;'                               |
+		| 'Document.CashTransferOrder Branch: Branch Read and Write Access;Company: Company Read and Write Access;ReceiveBranch: Branch Only read access;Sender: CashAccount Read and Write Access;Receiver: CashAccount access deny;'                |
+		| 'Document.CashTransferOrder Branch: Branch Only read access;Company: Company Read and Write Access;ReceiveBranch: Branch Only read access;Sender: CashAccount Read and Write Access;Receiver: CashAccount access deny;'                     |
+		| 'Document.CashTransferOrder Branch: Branch access deny;Company: Company Read and Write Access;ReceiveBranch: Branch Only read access;Sender: CashAccount Read and Write Access;Receiver: CashAccount access deny;'                          |
+		| 'Document.CashTransferOrder Branch: Branch Read and Write Access;Company: Company Only read access;ReceiveBranch: Branch Only read access;Sender: CashAccount Read and Write Access;Receiver: CashAccount access deny;'                     |
+		| 'Document.CashTransferOrder Branch: Branch Only read access;Company: Company Only read access;ReceiveBranch: Branch Only read access;Sender: CashAccount Read and Write Access;Receiver: CashAccount access deny;'                          |
+		| 'Document.CashTransferOrder Branch: Branch access deny;Company: Company Only read access;ReceiveBranch: Branch Only read access;Sender: CashAccount Read and Write Access;Receiver: CashAccount access deny;'                               |
+		| 'Document.CashTransferOrder Branch: Branch Read and Write Access;Company: Company access deny;ReceiveBranch: Branch Only read access;Sender: CashAccount Read and Write Access;Receiver: CashAccount access deny;'                          |
+		| 'Document.CashTransferOrder Branch: Branch Only read access;Company: Company access deny;ReceiveBranch: Branch Only read access;Sender: CashAccount Read and Write Access;Receiver: CashAccount access deny;'                               |
+		| 'Document.CashTransferOrder Branch: Branch access deny;Company: Company access deny;ReceiveBranch: Branch Only read access;Sender: CashAccount Read and Write Access;Receiver: CashAccount access deny;'                                    |
+		| 'Document.CashTransferOrder Branch: Branch Read and Write Access;Company: Company Read and Write Access;ReceiveBranch: Branch access deny;Sender: CashAccount Read and Write Access;Receiver: CashAccount access deny;'                     |
+		| 'Document.CashTransferOrder Branch: Branch Only read access;Company: Company Read and Write Access;ReceiveBranch: Branch access deny;Sender: CashAccount Read and Write Access;Receiver: CashAccount access deny;'                          |
+		| 'Document.CashTransferOrder Branch: Branch access deny;Company: Company Read and Write Access;ReceiveBranch: Branch access deny;Sender: CashAccount Read and Write Access;Receiver: CashAccount access deny;'                               |
+		| 'Document.CashTransferOrder Branch: Branch Read and Write Access;Company: Company Only read access;ReceiveBranch: Branch access deny;Sender: CashAccount Read and Write Access;Receiver: CashAccount access deny;'                          |
+		| 'Document.CashTransferOrder Branch: Branch Only read access;Company: Company Only read access;ReceiveBranch: Branch access deny;Sender: CashAccount Read and Write Access;Receiver: CashAccount access deny;'                               |
+		| 'Document.CashTransferOrder Branch: Branch access deny;Company: Company Only read access;ReceiveBranch: Branch access deny;Sender: CashAccount Read and Write Access;Receiver: CashAccount access deny;'                                    |
+		| 'Document.CashTransferOrder Branch: Branch Read and Write Access;Company: Company access deny;ReceiveBranch: Branch access deny;Sender: CashAccount Read and Write Access;Receiver: CashAccount access deny;'                               |
+		| 'Document.CashTransferOrder Branch: Branch Only read access;Company: Company access deny;ReceiveBranch: Branch access deny;Sender: CashAccount Read and Write Access;Receiver: CashAccount access deny;'                                    |
+		| 'Document.CashTransferOrder Branch: Branch access deny;Company: Company access deny;ReceiveBranch: Branch access deny;Sender: CashAccount Read and Write Access;Receiver: CashAccount access deny;'                                         |
+		| 'Document.CashTransferOrder Branch: Branch Read and Write Access;Company: Company Read and Write Access;ReceiveBranch: Branch Read and Write Access;Sender: CashAccount Only read access;Receiver: CashAccount access deny;'                |
+		| 'Document.CashTransferOrder Branch: Branch Only read access;Company: Company Read and Write Access;ReceiveBranch: Branch Read and Write Access;Sender: CashAccount Only read access;Receiver: CashAccount access deny;'                     |
+		| 'Document.CashTransferOrder Branch: Branch access deny;Company: Company Read and Write Access;ReceiveBranch: Branch Read and Write Access;Sender: CashAccount Only read access;Receiver: CashAccount access deny;'                          |
+		| 'Document.CashTransferOrder Branch: Branch Read and Write Access;Company: Company Only read access;ReceiveBranch: Branch Read and Write Access;Sender: CashAccount Only read access;Receiver: CashAccount access deny;'                     |
+		| 'Document.CashTransferOrder Branch: Branch Only read access;Company: Company Only read access;ReceiveBranch: Branch Read and Write Access;Sender: CashAccount Only read access;Receiver: CashAccount access deny;'                          |
+		| 'Document.CashTransferOrder Branch: Branch access deny;Company: Company Only read access;ReceiveBranch: Branch Read and Write Access;Sender: CashAccount Only read access;Receiver: CashAccount access deny;'                               |
+		| 'Document.CashTransferOrder Branch: Branch Read and Write Access;Company: Company access deny;ReceiveBranch: Branch Read and Write Access;Sender: CashAccount Only read access;Receiver: CashAccount access deny;'                          |
+		| 'Document.CashTransferOrder Branch: Branch Only read access;Company: Company access deny;ReceiveBranch: Branch Read and Write Access;Sender: CashAccount Only read access;Receiver: CashAccount access deny;'                               |
+		| 'Document.CashTransferOrder Branch: Branch access deny;Company: Company access deny;ReceiveBranch: Branch Read and Write Access;Sender: CashAccount Only read access;Receiver: CashAccount access deny;'                                    |
+		| 'Document.CashTransferOrder Branch: Branch Read and Write Access;Company: Company Read and Write Access;ReceiveBranch: Branch Only read access;Sender: CashAccount Only read access;Receiver: CashAccount access deny;'                     |
+		| 'Document.CashTransferOrder Branch: Branch Only read access;Company: Company Read and Write Access;ReceiveBranch: Branch Only read access;Sender: CashAccount Only read access;Receiver: CashAccount access deny;'                          |
+		| 'Document.CashTransferOrder Branch: Branch access deny;Company: Company Read and Write Access;ReceiveBranch: Branch Only read access;Sender: CashAccount Only read access;Receiver: CashAccount access deny;'                               |
+		| 'Document.CashTransferOrder Branch: Branch Read and Write Access;Company: Company Only read access;ReceiveBranch: Branch Only read access;Sender: CashAccount Only read access;Receiver: CashAccount access deny;'                          |
+		| 'Document.CashTransferOrder Branch: Branch Only read access;Company: Company Only read access;ReceiveBranch: Branch Only read access;Sender: CashAccount Only read access;Receiver: CashAccount access deny;'                               |
+		| 'Document.CashTransferOrder Branch: Branch access deny;Company: Company Only read access;ReceiveBranch: Branch Only read access;Sender: CashAccount Only read access;Receiver: CashAccount access deny;'                                    |
+		| 'Document.CashTransferOrder Branch: Branch Read and Write Access;Company: Company access deny;ReceiveBranch: Branch Only read access;Sender: CashAccount Only read access;Receiver: CashAccount access deny;'                               |
+		| 'Document.CashTransferOrder Branch: Branch Only read access;Company: Company access deny;ReceiveBranch: Branch Only read access;Sender: CashAccount Only read access;Receiver: CashAccount access deny;'                                    |
+		| 'Document.CashTransferOrder Branch: Branch access deny;Company: Company access deny;ReceiveBranch: Branch Only read access;Sender: CashAccount Only read access;Receiver: CashAccount access deny;'                                         |
+		| 'Document.CashTransferOrder Branch: Branch Read and Write Access;Company: Company Read and Write Access;ReceiveBranch: Branch access deny;Sender: CashAccount Only read access;Receiver: CashAccount access deny;'                          |
+		| 'Document.CashTransferOrder Branch: Branch Only read access;Company: Company Read and Write Access;ReceiveBranch: Branch access deny;Sender: CashAccount Only read access;Receiver: CashAccount access deny;'                               |
+		| 'Document.CashTransferOrder Branch: Branch access deny;Company: Company Read and Write Access;ReceiveBranch: Branch access deny;Sender: CashAccount Only read access;Receiver: CashAccount access deny;'                                    |
+		| 'Document.CashTransferOrder Branch: Branch Read and Write Access;Company: Company Only read access;ReceiveBranch: Branch access deny;Sender: CashAccount Only read access;Receiver: CashAccount access deny;'                               |
+		| 'Document.CashTransferOrder Branch: Branch Only read access;Company: Company Only read access;ReceiveBranch: Branch access deny;Sender: CashAccount Only read access;Receiver: CashAccount access deny;'                                    |
+		| 'Document.CashTransferOrder Branch: Branch access deny;Company: Company Only read access;ReceiveBranch: Branch access deny;Sender: CashAccount Only read access;Receiver: CashAccount access deny;'                                         |
+		| 'Document.CashTransferOrder Branch: Branch Read and Write Access;Company: Company access deny;ReceiveBranch: Branch access deny;Sender: CashAccount Only read access;Receiver: CashAccount access deny;'                                    |
+		| 'Document.CashTransferOrder Branch: Branch Only read access;Company: Company access deny;ReceiveBranch: Branch access deny;Sender: CashAccount Only read access;Receiver: CashAccount access deny;'                                         |
+		| 'Document.CashTransferOrder Branch: Branch access deny;Company: Company access deny;ReceiveBranch: Branch access deny;Sender: CashAccount Only read access;Receiver: CashAccount access deny;'                                              |
+		| 'Document.CashTransferOrder Branch: Branch Read and Write Access;Company: Company Read and Write Access;ReceiveBranch: Branch Read and Write Access;Sender: CashAccount access deny;Receiver: CashAccount access deny;'                     |
+		| 'Document.CashTransferOrder Branch: Branch Only read access;Company: Company Read and Write Access;ReceiveBranch: Branch Read and Write Access;Sender: CashAccount access deny;Receiver: CashAccount access deny;'                          |
+		| 'Document.CashTransferOrder Branch: Branch access deny;Company: Company Read and Write Access;ReceiveBranch: Branch Read and Write Access;Sender: CashAccount access deny;Receiver: CashAccount access deny;'                               |
+		| 'Document.CashTransferOrder Branch: Branch Read and Write Access;Company: Company Only read access;ReceiveBranch: Branch Read and Write Access;Sender: CashAccount access deny;Receiver: CashAccount access deny;'                          |
+		| 'Document.CashTransferOrder Branch: Branch Only read access;Company: Company Only read access;ReceiveBranch: Branch Read and Write Access;Sender: CashAccount access deny;Receiver: CashAccount access deny;'                               |
+		| 'Document.CashTransferOrder Branch: Branch access deny;Company: Company Only read access;ReceiveBranch: Branch Read and Write Access;Sender: CashAccount access deny;Receiver: CashAccount access deny;'                                    |
+		| 'Document.CashTransferOrder Branch: Branch Read and Write Access;Company: Company access deny;ReceiveBranch: Branch Read and Write Access;Sender: CashAccount access deny;Receiver: CashAccount access deny;'                               |
+		| 'Document.CashTransferOrder Branch: Branch Only read access;Company: Company access deny;ReceiveBranch: Branch Read and Write Access;Sender: CashAccount access deny;Receiver: CashAccount access deny;'                                    |
+		| 'Document.CashTransferOrder Branch: Branch access deny;Company: Company access deny;ReceiveBranch: Branch Read and Write Access;Sender: CashAccount access deny;Receiver: CashAccount access deny;'                                         |
+		| 'Document.CashTransferOrder Branch: Branch Read and Write Access;Company: Company Read and Write Access;ReceiveBranch: Branch Only read access;Sender: CashAccount access deny;Receiver: CashAccount access deny;'                          |
+		| 'Document.CashTransferOrder Branch: Branch Only read access;Company: Company Read and Write Access;ReceiveBranch: Branch Only read access;Sender: CashAccount access deny;Receiver: CashAccount access deny;'                               |
+		| 'Document.CashTransferOrder Branch: Branch access deny;Company: Company Read and Write Access;ReceiveBranch: Branch Only read access;Sender: CashAccount access deny;Receiver: CashAccount access deny;'                                    |
+		| 'Document.CashTransferOrder Branch: Branch Read and Write Access;Company: Company Only read access;ReceiveBranch: Branch Only read access;Sender: CashAccount access deny;Receiver: CashAccount access deny;'                               |
+		| 'Document.CashTransferOrder Branch: Branch Only read access;Company: Company Only read access;ReceiveBranch: Branch Only read access;Sender: CashAccount access deny;Receiver: CashAccount access deny;'                                    |
+		| 'Document.CashTransferOrder Branch: Branch access deny;Company: Company Only read access;ReceiveBranch: Branch Only read access;Sender: CashAccount access deny;Receiver: CashAccount access deny;'                                         |
+		| 'Document.CashTransferOrder Branch: Branch Read and Write Access;Company: Company access deny;ReceiveBranch: Branch Only read access;Sender: CashAccount access deny;Receiver: CashAccount access deny;'                                    |
+		| 'Document.CashTransferOrder Branch: Branch Only read access;Company: Company access deny;ReceiveBranch: Branch Only read access;Sender: CashAccount access deny;Receiver: CashAccount access deny;'                                         |
+		| 'Document.CashTransferOrder Branch: Branch access deny;Company: Company access deny;ReceiveBranch: Branch Only read access;Sender: CashAccount access deny;Receiver: CashAccount access deny;'                                              |
+		| 'Document.CashTransferOrder Branch: Branch Read and Write Access;Company: Company Read and Write Access;ReceiveBranch: Branch access deny;Sender: CashAccount access deny;Receiver: CashAccount access deny;'                               |
+		| 'Document.CashTransferOrder Branch: Branch Only read access;Company: Company Read and Write Access;ReceiveBranch: Branch access deny;Sender: CashAccount access deny;Receiver: CashAccount access deny;'                                    |
+		| 'Document.CashTransferOrder Branch: Branch access deny;Company: Company Read and Write Access;ReceiveBranch: Branch access deny;Sender: CashAccount access deny;Receiver: CashAccount access deny;'                                         |
+		| 'Document.CashTransferOrder Branch: Branch Read and Write Access;Company: Company Only read access;ReceiveBranch: Branch access deny;Sender: CashAccount access deny;Receiver: CashAccount access deny;'                                    |
+		| 'Document.CashTransferOrder Branch: Branch Only read access;Company: Company Only read access;ReceiveBranch: Branch access deny;Sender: CashAccount access deny;Receiver: CashAccount access deny;'                                         |
+		| 'Document.CashTransferOrder Branch: Branch access deny;Company: Company Only read access;ReceiveBranch: Branch access deny;Sender: CashAccount access deny;Receiver: CashAccount access deny;'                                              |
+		| 'Document.CashTransferOrder Branch: Branch Read and Write Access;Company: Company access deny;ReceiveBranch: Branch access deny;Sender: CashAccount access deny;Receiver: CashAccount access deny;'                                         |
+		| 'Document.CashTransferOrder Branch: Branch Only read access;Company: Company access deny;ReceiveBranch: Branch access deny;Sender: CashAccount access deny;Receiver: CashAccount access deny;'                                              |
+		| 'Document.CashTransferOrder Branch: Branch access deny;Company: Company access deny;ReceiveBranch: Branch access deny;Sender: CashAccount access deny;Receiver: CashAccount access deny;'                                                   |
 	
+		
 Scenario: 960017 check ChequeBondTransaction creation
 	And I close all client application windows
 	Given I open hyperlink "e1cib/list/Document.ChequeBondTransaction"
@@ -1533,10 +1769,10 @@ Scenario: 960033 check ManualRegisterEntry creation
 	And I close all client application windows
 	Given I open hyperlink "e1cib/list/Document.ManualRegisterEntry"
 	And "List" table became equal
-		| 'Number' | 'Company'                       | 'Description'                                                          |
-		| '1'      | 'Company Read and Write Access' | 'Document.ManualRegisterEntry Company: Company Read and Write Access;' |
-		| '2'      | 'Company Only read access'      | 'Document.ManualRegisterEntry Company: Company Only read access;'      |
-		| '3'      | 'Company access deny'           | 'Document.ManualRegisterEntry Company: Company access deny;'           |
+		| 'Description'                                                          |
+		| 'Document.ManualRegisterEntry Company: Company Read and Write Access;' |
+		| 'Document.ManualRegisterEntry Company: Company Only read access;'      |
+		| 'Document.ManualRegisterEntry Company: Company access deny;'           |
 	
 		
 
@@ -1544,35 +1780,252 @@ Scenario: 960034 check MoneyTransfer creation
 	And I close all client application windows
 	Given I open hyperlink "e1cib/list/Document.MoneyTransfer"
 	And "List" table became equal
-		| 'Number' | 'Company'                       | 'Description'                                                                                                                                     |
-		| '1'      | 'Company Read and Write Access' | 'Document.MoneyTransfer Branch: Branch Read and Write Access;Company: Company Read and Write Access;ReceiveBranch: Branch Read and Write Access;' |
-		| '2'      | 'Company Read and Write Access' | 'Document.MoneyTransfer Branch: Branch Only read access;Company: Company Read and Write Access;ReceiveBranch: Branch Read and Write Access;'      |
-		| '3'      | 'Company Read and Write Access' | 'Document.MoneyTransfer Branch: Branch access deny;Company: Company Read and Write Access;ReceiveBranch: Branch Read and Write Access;'           |
-		| '4'      | 'Company Only read access'      | 'Document.MoneyTransfer Branch: Branch Read and Write Access;Company: Company Only read access;ReceiveBranch: Branch Read and Write Access;'      |
-		| '5'      | 'Company Only read access'      | 'Document.MoneyTransfer Branch: Branch Only read access;Company: Company Only read access;ReceiveBranch: Branch Read and Write Access;'           |
-		| '6'      | 'Company Only read access'      | 'Document.MoneyTransfer Branch: Branch access deny;Company: Company Only read access;ReceiveBranch: Branch Read and Write Access;'                |
-		| '7'      | 'Company access deny'           | 'Document.MoneyTransfer Branch: Branch Read and Write Access;Company: Company access deny;ReceiveBranch: Branch Read and Write Access;'           |
-		| '8'      | 'Company access deny'           | 'Document.MoneyTransfer Branch: Branch Only read access;Company: Company access deny;ReceiveBranch: Branch Read and Write Access;'                |
-		| '9'      | 'Company access deny'           | 'Document.MoneyTransfer Branch: Branch access deny;Company: Company access deny;ReceiveBranch: Branch Read and Write Access;'                     |
-		| '10'     | 'Company Read and Write Access' | 'Document.MoneyTransfer Branch: Branch Read and Write Access;Company: Company Read and Write Access;ReceiveBranch: Branch Only read access;'      |
-		| '11'     | 'Company Read and Write Access' | 'Document.MoneyTransfer Branch: Branch Only read access;Company: Company Read and Write Access;ReceiveBranch: Branch Only read access;'           |
-		| '12'     | 'Company Read and Write Access' | 'Document.MoneyTransfer Branch: Branch access deny;Company: Company Read and Write Access;ReceiveBranch: Branch Only read access;'                |
-		| '13'     | 'Company Only read access'      | 'Document.MoneyTransfer Branch: Branch Read and Write Access;Company: Company Only read access;ReceiveBranch: Branch Only read access;'           |
-		| '14'     | 'Company Only read access'      | 'Document.MoneyTransfer Branch: Branch Only read access;Company: Company Only read access;ReceiveBranch: Branch Only read access;'                |
-		| '15'     | 'Company Only read access'      | 'Document.MoneyTransfer Branch: Branch access deny;Company: Company Only read access;ReceiveBranch: Branch Only read access;'                     |
-		| '16'     | 'Company access deny'           | 'Document.MoneyTransfer Branch: Branch Read and Write Access;Company: Company access deny;ReceiveBranch: Branch Only read access;'                |
-		| '17'     | 'Company access deny'           | 'Document.MoneyTransfer Branch: Branch Only read access;Company: Company access deny;ReceiveBranch: Branch Only read access;'                     |
-		| '18'     | 'Company access deny'           | 'Document.MoneyTransfer Branch: Branch access deny;Company: Company access deny;ReceiveBranch: Branch Only read access;'                          |
-		| '19'     | 'Company Read and Write Access' | 'Document.MoneyTransfer Branch: Branch Read and Write Access;Company: Company Read and Write Access;ReceiveBranch: Branch access deny;'           |
-		| '20'     | 'Company Read and Write Access' | 'Document.MoneyTransfer Branch: Branch Only read access;Company: Company Read and Write Access;ReceiveBranch: Branch access deny;'                |
-		| '21'     | 'Company Read and Write Access' | 'Document.MoneyTransfer Branch: Branch access deny;Company: Company Read and Write Access;ReceiveBranch: Branch access deny;'                     |
-		| '22'     | 'Company Only read access'      | 'Document.MoneyTransfer Branch: Branch Read and Write Access;Company: Company Only read access;ReceiveBranch: Branch access deny;'                |
-		| '23'     | 'Company Only read access'      | 'Document.MoneyTransfer Branch: Branch Only read access;Company: Company Only read access;ReceiveBranch: Branch access deny;'                     |
-		| '24'     | 'Company Only read access'      | 'Document.MoneyTransfer Branch: Branch access deny;Company: Company Only read access;ReceiveBranch: Branch access deny;'                          |
-		| '25'     | 'Company access deny'           | 'Document.MoneyTransfer Branch: Branch Read and Write Access;Company: Company access deny;ReceiveBranch: Branch access deny;'                     |
-		| '26'     | 'Company access deny'           | 'Document.MoneyTransfer Branch: Branch Only read access;Company: Company access deny;ReceiveBranch: Branch access deny;'                          |
-		| '27'     | 'Company access deny'           | 'Document.MoneyTransfer Branch: Branch access deny;Company: Company access deny;ReceiveBranch: Branch access deny;'                               |
+		| 'Description'                                                                                                                                                                                                                           |
+		| 'Document.MoneyTransfer Branch: Branch Read and Write Access;Company: Company Read and Write Access;ReceiveBranch: Branch Read and Write Access;Sender: CashAccount Read and Write Access;Receiver: CashAccount Read and Write Access;' |
+		| 'Document.MoneyTransfer Branch: Branch Only read access;Company: Company Read and Write Access;ReceiveBranch: Branch Read and Write Access;Sender: CashAccount Read and Write Access;Receiver: CashAccount Read and Write Access;'      |
+		| 'Document.MoneyTransfer Branch: Branch access deny;Company: Company Read and Write Access;ReceiveBranch: Branch Read and Write Access;Sender: CashAccount Read and Write Access;Receiver: CashAccount Read and Write Access;'           |
+		| 'Document.MoneyTransfer Branch: Branch Read and Write Access;Company: Company Only read access;ReceiveBranch: Branch Read and Write Access;Sender: CashAccount Read and Write Access;Receiver: CashAccount Read and Write Access;'      |
+		| 'Document.MoneyTransfer Branch: Branch Only read access;Company: Company Only read access;ReceiveBranch: Branch Read and Write Access;Sender: CashAccount Read and Write Access;Receiver: CashAccount Read and Write Access;'           |
+		| 'Document.MoneyTransfer Branch: Branch access deny;Company: Company Only read access;ReceiveBranch: Branch Read and Write Access;Sender: CashAccount Read and Write Access;Receiver: CashAccount Read and Write Access;'                |
+		| 'Document.MoneyTransfer Branch: Branch Read and Write Access;Company: Company access deny;ReceiveBranch: Branch Read and Write Access;Sender: CashAccount Read and Write Access;Receiver: CashAccount Read and Write Access;'           |
+		| 'Document.MoneyTransfer Branch: Branch Only read access;Company: Company access deny;ReceiveBranch: Branch Read and Write Access;Sender: CashAccount Read and Write Access;Receiver: CashAccount Read and Write Access;'                |
+		| 'Document.MoneyTransfer Branch: Branch access deny;Company: Company access deny;ReceiveBranch: Branch Read and Write Access;Sender: CashAccount Read and Write Access;Receiver: CashAccount Read and Write Access;'                     |
+		| 'Document.MoneyTransfer Branch: Branch Read and Write Access;Company: Company Read and Write Access;ReceiveBranch: Branch Only read access;Sender: CashAccount Read and Write Access;Receiver: CashAccount Read and Write Access;'      |
+		| 'Document.MoneyTransfer Branch: Branch Only read access;Company: Company Read and Write Access;ReceiveBranch: Branch Only read access;Sender: CashAccount Read and Write Access;Receiver: CashAccount Read and Write Access;'           |
+		| 'Document.MoneyTransfer Branch: Branch access deny;Company: Company Read and Write Access;ReceiveBranch: Branch Only read access;Sender: CashAccount Read and Write Access;Receiver: CashAccount Read and Write Access;'                |
+		| 'Document.MoneyTransfer Branch: Branch Read and Write Access;Company: Company Only read access;ReceiveBranch: Branch Only read access;Sender: CashAccount Read and Write Access;Receiver: CashAccount Read and Write Access;'           |
+		| 'Document.MoneyTransfer Branch: Branch Only read access;Company: Company Only read access;ReceiveBranch: Branch Only read access;Sender: CashAccount Read and Write Access;Receiver: CashAccount Read and Write Access;'                |
+		| 'Document.MoneyTransfer Branch: Branch access deny;Company: Company Only read access;ReceiveBranch: Branch Only read access;Sender: CashAccount Read and Write Access;Receiver: CashAccount Read and Write Access;'                     |
+		| 'Document.MoneyTransfer Branch: Branch Read and Write Access;Company: Company access deny;ReceiveBranch: Branch Only read access;Sender: CashAccount Read and Write Access;Receiver: CashAccount Read and Write Access;'                |
+		| 'Document.MoneyTransfer Branch: Branch Only read access;Company: Company access deny;ReceiveBranch: Branch Only read access;Sender: CashAccount Read and Write Access;Receiver: CashAccount Read and Write Access;'                     |
+		| 'Document.MoneyTransfer Branch: Branch access deny;Company: Company access deny;ReceiveBranch: Branch Only read access;Sender: CashAccount Read and Write Access;Receiver: CashAccount Read and Write Access;'                          |
+		| 'Document.MoneyTransfer Branch: Branch Read and Write Access;Company: Company Read and Write Access;ReceiveBranch: Branch access deny;Sender: CashAccount Read and Write Access;Receiver: CashAccount Read and Write Access;'           |
+		| 'Document.MoneyTransfer Branch: Branch Only read access;Company: Company Read and Write Access;ReceiveBranch: Branch access deny;Sender: CashAccount Read and Write Access;Receiver: CashAccount Read and Write Access;'                |
+		| 'Document.MoneyTransfer Branch: Branch access deny;Company: Company Read and Write Access;ReceiveBranch: Branch access deny;Sender: CashAccount Read and Write Access;Receiver: CashAccount Read and Write Access;'                     |
+		| 'Document.MoneyTransfer Branch: Branch Read and Write Access;Company: Company Only read access;ReceiveBranch: Branch access deny;Sender: CashAccount Read and Write Access;Receiver: CashAccount Read and Write Access;'                |
+		| 'Document.MoneyTransfer Branch: Branch Only read access;Company: Company Only read access;ReceiveBranch: Branch access deny;Sender: CashAccount Read and Write Access;Receiver: CashAccount Read and Write Access;'                     |
+		| 'Document.MoneyTransfer Branch: Branch access deny;Company: Company Only read access;ReceiveBranch: Branch access deny;Sender: CashAccount Read and Write Access;Receiver: CashAccount Read and Write Access;'                          |
+		| 'Document.MoneyTransfer Branch: Branch Read and Write Access;Company: Company access deny;ReceiveBranch: Branch access deny;Sender: CashAccount Read and Write Access;Receiver: CashAccount Read and Write Access;'                     |
+		| 'Document.MoneyTransfer Branch: Branch Only read access;Company: Company access deny;ReceiveBranch: Branch access deny;Sender: CashAccount Read and Write Access;Receiver: CashAccount Read and Write Access;'                          |
+		| 'Document.MoneyTransfer Branch: Branch access deny;Company: Company access deny;ReceiveBranch: Branch access deny;Sender: CashAccount Read and Write Access;Receiver: CashAccount Read and Write Access;'                               |
+		| 'Document.MoneyTransfer Branch: Branch Read and Write Access;Company: Company Read and Write Access;ReceiveBranch: Branch Read and Write Access;Sender: CashAccount Only read access;Receiver: CashAccount Read and Write Access;'      |
+		| 'Document.MoneyTransfer Branch: Branch Only read access;Company: Company Read and Write Access;ReceiveBranch: Branch Read and Write Access;Sender: CashAccount Only read access;Receiver: CashAccount Read and Write Access;'           |
+		| 'Document.MoneyTransfer Branch: Branch access deny;Company: Company Read and Write Access;ReceiveBranch: Branch Read and Write Access;Sender: CashAccount Only read access;Receiver: CashAccount Read and Write Access;'                |
+		| 'Document.MoneyTransfer Branch: Branch Read and Write Access;Company: Company Only read access;ReceiveBranch: Branch Read and Write Access;Sender: CashAccount Only read access;Receiver: CashAccount Read and Write Access;'           |
+		| 'Document.MoneyTransfer Branch: Branch Only read access;Company: Company Only read access;ReceiveBranch: Branch Read and Write Access;Sender: CashAccount Only read access;Receiver: CashAccount Read and Write Access;'                |
+		| 'Document.MoneyTransfer Branch: Branch access deny;Company: Company Only read access;ReceiveBranch: Branch Read and Write Access;Sender: CashAccount Only read access;Receiver: CashAccount Read and Write Access;'                     |
+		| 'Document.MoneyTransfer Branch: Branch Read and Write Access;Company: Company access deny;ReceiveBranch: Branch Read and Write Access;Sender: CashAccount Only read access;Receiver: CashAccount Read and Write Access;'                |
+		| 'Document.MoneyTransfer Branch: Branch Only read access;Company: Company access deny;ReceiveBranch: Branch Read and Write Access;Sender: CashAccount Only read access;Receiver: CashAccount Read and Write Access;'                     |
+		| 'Document.MoneyTransfer Branch: Branch access deny;Company: Company access deny;ReceiveBranch: Branch Read and Write Access;Sender: CashAccount Only read access;Receiver: CashAccount Read and Write Access;'                          |
+		| 'Document.MoneyTransfer Branch: Branch Read and Write Access;Company: Company Read and Write Access;ReceiveBranch: Branch Only read access;Sender: CashAccount Only read access;Receiver: CashAccount Read and Write Access;'           |
+		| 'Document.MoneyTransfer Branch: Branch Only read access;Company: Company Read and Write Access;ReceiveBranch: Branch Only read access;Sender: CashAccount Only read access;Receiver: CashAccount Read and Write Access;'                |
+		| 'Document.MoneyTransfer Branch: Branch access deny;Company: Company Read and Write Access;ReceiveBranch: Branch Only read access;Sender: CashAccount Only read access;Receiver: CashAccount Read and Write Access;'                     |
+		| 'Document.MoneyTransfer Branch: Branch Read and Write Access;Company: Company Only read access;ReceiveBranch: Branch Only read access;Sender: CashAccount Only read access;Receiver: CashAccount Read and Write Access;'                |
+		| 'Document.MoneyTransfer Branch: Branch Only read access;Company: Company Only read access;ReceiveBranch: Branch Only read access;Sender: CashAccount Only read access;Receiver: CashAccount Read and Write Access;'                     |
+		| 'Document.MoneyTransfer Branch: Branch access deny;Company: Company Only read access;ReceiveBranch: Branch Only read access;Sender: CashAccount Only read access;Receiver: CashAccount Read and Write Access;'                          |
+		| 'Document.MoneyTransfer Branch: Branch Read and Write Access;Company: Company access deny;ReceiveBranch: Branch Only read access;Sender: CashAccount Only read access;Receiver: CashAccount Read and Write Access;'                     |
+		| 'Document.MoneyTransfer Branch: Branch Only read access;Company: Company access deny;ReceiveBranch: Branch Only read access;Sender: CashAccount Only read access;Receiver: CashAccount Read and Write Access;'                          |
+		| 'Document.MoneyTransfer Branch: Branch access deny;Company: Company access deny;ReceiveBranch: Branch Only read access;Sender: CashAccount Only read access;Receiver: CashAccount Read and Write Access;'                               |
+		| 'Document.MoneyTransfer Branch: Branch Read and Write Access;Company: Company Read and Write Access;ReceiveBranch: Branch access deny;Sender: CashAccount Only read access;Receiver: CashAccount Read and Write Access;'                |
+		| 'Document.MoneyTransfer Branch: Branch Only read access;Company: Company Read and Write Access;ReceiveBranch: Branch access deny;Sender: CashAccount Only read access;Receiver: CashAccount Read and Write Access;'                     |
+		| 'Document.MoneyTransfer Branch: Branch access deny;Company: Company Read and Write Access;ReceiveBranch: Branch access deny;Sender: CashAccount Only read access;Receiver: CashAccount Read and Write Access;'                          |
+		| 'Document.MoneyTransfer Branch: Branch Read and Write Access;Company: Company Only read access;ReceiveBranch: Branch access deny;Sender: CashAccount Only read access;Receiver: CashAccount Read and Write Access;'                     |
+		| 'Document.MoneyTransfer Branch: Branch Only read access;Company: Company Only read access;ReceiveBranch: Branch access deny;Sender: CashAccount Only read access;Receiver: CashAccount Read and Write Access;'                          |
+		| 'Document.MoneyTransfer Branch: Branch access deny;Company: Company Only read access;ReceiveBranch: Branch access deny;Sender: CashAccount Only read access;Receiver: CashAccount Read and Write Access;'                               |
+		| 'Document.MoneyTransfer Branch: Branch Read and Write Access;Company: Company access deny;ReceiveBranch: Branch access deny;Sender: CashAccount Only read access;Receiver: CashAccount Read and Write Access;'                          |
+		| 'Document.MoneyTransfer Branch: Branch Only read access;Company: Company access deny;ReceiveBranch: Branch access deny;Sender: CashAccount Only read access;Receiver: CashAccount Read and Write Access;'                               |
+		| 'Document.MoneyTransfer Branch: Branch access deny;Company: Company access deny;ReceiveBranch: Branch access deny;Sender: CashAccount Only read access;Receiver: CashAccount Read and Write Access;'                                    |
+		| 'Document.MoneyTransfer Branch: Branch Read and Write Access;Company: Company Read and Write Access;ReceiveBranch: Branch Read and Write Access;Sender: CashAccount access deny;Receiver: CashAccount Read and Write Access;'           |
+		| 'Document.MoneyTransfer Branch: Branch Only read access;Company: Company Read and Write Access;ReceiveBranch: Branch Read and Write Access;Sender: CashAccount access deny;Receiver: CashAccount Read and Write Access;'                |
+		| 'Document.MoneyTransfer Branch: Branch access deny;Company: Company Read and Write Access;ReceiveBranch: Branch Read and Write Access;Sender: CashAccount access deny;Receiver: CashAccount Read and Write Access;'                     |
+		| 'Document.MoneyTransfer Branch: Branch Read and Write Access;Company: Company Only read access;ReceiveBranch: Branch Read and Write Access;Sender: CashAccount access deny;Receiver: CashAccount Read and Write Access;'                |
+		| 'Document.MoneyTransfer Branch: Branch Only read access;Company: Company Only read access;ReceiveBranch: Branch Read and Write Access;Sender: CashAccount access deny;Receiver: CashAccount Read and Write Access;'                     |
+		| 'Document.MoneyTransfer Branch: Branch access deny;Company: Company Only read access;ReceiveBranch: Branch Read and Write Access;Sender: CashAccount access deny;Receiver: CashAccount Read and Write Access;'                          |
+		| 'Document.MoneyTransfer Branch: Branch Read and Write Access;Company: Company access deny;ReceiveBranch: Branch Read and Write Access;Sender: CashAccount access deny;Receiver: CashAccount Read and Write Access;'                     |
+		| 'Document.MoneyTransfer Branch: Branch Only read access;Company: Company access deny;ReceiveBranch: Branch Read and Write Access;Sender: CashAccount access deny;Receiver: CashAccount Read and Write Access;'                          |
+		| 'Document.MoneyTransfer Branch: Branch access deny;Company: Company access deny;ReceiveBranch: Branch Read and Write Access;Sender: CashAccount access deny;Receiver: CashAccount Read and Write Access;'                               |
+		| 'Document.MoneyTransfer Branch: Branch Read and Write Access;Company: Company Read and Write Access;ReceiveBranch: Branch Only read access;Sender: CashAccount access deny;Receiver: CashAccount Read and Write Access;'                |
+		| 'Document.MoneyTransfer Branch: Branch Only read access;Company: Company Read and Write Access;ReceiveBranch: Branch Only read access;Sender: CashAccount access deny;Receiver: CashAccount Read and Write Access;'                     |
+		| 'Document.MoneyTransfer Branch: Branch access deny;Company: Company Read and Write Access;ReceiveBranch: Branch Only read access;Sender: CashAccount access deny;Receiver: CashAccount Read and Write Access;'                          |
+		| 'Document.MoneyTransfer Branch: Branch Read and Write Access;Company: Company Only read access;ReceiveBranch: Branch Only read access;Sender: CashAccount access deny;Receiver: CashAccount Read and Write Access;'                     |
+		| 'Document.MoneyTransfer Branch: Branch Only read access;Company: Company Only read access;ReceiveBranch: Branch Only read access;Sender: CashAccount access deny;Receiver: CashAccount Read and Write Access;'                          |
+		| 'Document.MoneyTransfer Branch: Branch access deny;Company: Company Only read access;ReceiveBranch: Branch Only read access;Sender: CashAccount access deny;Receiver: CashAccount Read and Write Access;'                               |
+		| 'Document.MoneyTransfer Branch: Branch Read and Write Access;Company: Company access deny;ReceiveBranch: Branch Only read access;Sender: CashAccount access deny;Receiver: CashAccount Read and Write Access;'                          |
+		| 'Document.MoneyTransfer Branch: Branch Only read access;Company: Company access deny;ReceiveBranch: Branch Only read access;Sender: CashAccount access deny;Receiver: CashAccount Read and Write Access;'                               |
+		| 'Document.MoneyTransfer Branch: Branch access deny;Company: Company access deny;ReceiveBranch: Branch Only read access;Sender: CashAccount access deny;Receiver: CashAccount Read and Write Access;'                                    |
+		| 'Document.MoneyTransfer Branch: Branch Read and Write Access;Company: Company Read and Write Access;ReceiveBranch: Branch access deny;Sender: CashAccount access deny;Receiver: CashAccount Read and Write Access;'                     |
+		| 'Document.MoneyTransfer Branch: Branch Only read access;Company: Company Read and Write Access;ReceiveBranch: Branch access deny;Sender: CashAccount access deny;Receiver: CashAccount Read and Write Access;'                          |
+		| 'Document.MoneyTransfer Branch: Branch access deny;Company: Company Read and Write Access;ReceiveBranch: Branch access deny;Sender: CashAccount access deny;Receiver: CashAccount Read and Write Access;'                               |
+		| 'Document.MoneyTransfer Branch: Branch Read and Write Access;Company: Company Only read access;ReceiveBranch: Branch access deny;Sender: CashAccount access deny;Receiver: CashAccount Read and Write Access;'                          |
+		| 'Document.MoneyTransfer Branch: Branch Only read access;Company: Company Only read access;ReceiveBranch: Branch access deny;Sender: CashAccount access deny;Receiver: CashAccount Read and Write Access;'                               |
+		| 'Document.MoneyTransfer Branch: Branch access deny;Company: Company Only read access;ReceiveBranch: Branch access deny;Sender: CashAccount access deny;Receiver: CashAccount Read and Write Access;'                                    |
+		| 'Document.MoneyTransfer Branch: Branch Read and Write Access;Company: Company access deny;ReceiveBranch: Branch access deny;Sender: CashAccount access deny;Receiver: CashAccount Read and Write Access;'                               |
+		| 'Document.MoneyTransfer Branch: Branch Only read access;Company: Company access deny;ReceiveBranch: Branch access deny;Sender: CashAccount access deny;Receiver: CashAccount Read and Write Access;'                                    |
+		| 'Document.MoneyTransfer Branch: Branch access deny;Company: Company access deny;ReceiveBranch: Branch access deny;Sender: CashAccount access deny;Receiver: CashAccount Read and Write Access;'                                         |
+		| 'Document.MoneyTransfer Branch: Branch Read and Write Access;Company: Company Read and Write Access;ReceiveBranch: Branch Read and Write Access;Sender: CashAccount Read and Write Access;Receiver: CashAccount Only read access;'      |
+		| 'Document.MoneyTransfer Branch: Branch Only read access;Company: Company Read and Write Access;ReceiveBranch: Branch Read and Write Access;Sender: CashAccount Read and Write Access;Receiver: CashAccount Only read access;'           |
+		| 'Document.MoneyTransfer Branch: Branch access deny;Company: Company Read and Write Access;ReceiveBranch: Branch Read and Write Access;Sender: CashAccount Read and Write Access;Receiver: CashAccount Only read access;'                |
+		| 'Document.MoneyTransfer Branch: Branch Read and Write Access;Company: Company Only read access;ReceiveBranch: Branch Read and Write Access;Sender: CashAccount Read and Write Access;Receiver: CashAccount Only read access;'           |
+		| 'Document.MoneyTransfer Branch: Branch Only read access;Company: Company Only read access;ReceiveBranch: Branch Read and Write Access;Sender: CashAccount Read and Write Access;Receiver: CashAccount Only read access;'                |
+		| 'Document.MoneyTransfer Branch: Branch access deny;Company: Company Only read access;ReceiveBranch: Branch Read and Write Access;Sender: CashAccount Read and Write Access;Receiver: CashAccount Only read access;'                     |
+		| 'Document.MoneyTransfer Branch: Branch Read and Write Access;Company: Company access deny;ReceiveBranch: Branch Read and Write Access;Sender: CashAccount Read and Write Access;Receiver: CashAccount Only read access;'                |
+		| 'Document.MoneyTransfer Branch: Branch Only read access;Company: Company access deny;ReceiveBranch: Branch Read and Write Access;Sender: CashAccount Read and Write Access;Receiver: CashAccount Only read access;'                     |
+		| 'Document.MoneyTransfer Branch: Branch access deny;Company: Company access deny;ReceiveBranch: Branch Read and Write Access;Sender: CashAccount Read and Write Access;Receiver: CashAccount Only read access;'                          |
+		| 'Document.MoneyTransfer Branch: Branch Read and Write Access;Company: Company Read and Write Access;ReceiveBranch: Branch Only read access;Sender: CashAccount Read and Write Access;Receiver: CashAccount Only read access;'           |
+		| 'Document.MoneyTransfer Branch: Branch Only read access;Company: Company Read and Write Access;ReceiveBranch: Branch Only read access;Sender: CashAccount Read and Write Access;Receiver: CashAccount Only read access;'                |
+		| 'Document.MoneyTransfer Branch: Branch access deny;Company: Company Read and Write Access;ReceiveBranch: Branch Only read access;Sender: CashAccount Read and Write Access;Receiver: CashAccount Only read access;'                     |
+		| 'Document.MoneyTransfer Branch: Branch Read and Write Access;Company: Company Only read access;ReceiveBranch: Branch Only read access;Sender: CashAccount Read and Write Access;Receiver: CashAccount Only read access;'                |
+		| 'Document.MoneyTransfer Branch: Branch Only read access;Company: Company Only read access;ReceiveBranch: Branch Only read access;Sender: CashAccount Read and Write Access;Receiver: CashAccount Only read access;'                     |
+		| 'Document.MoneyTransfer Branch: Branch access deny;Company: Company Only read access;ReceiveBranch: Branch Only read access;Sender: CashAccount Read and Write Access;Receiver: CashAccount Only read access;'                          |
+		| 'Document.MoneyTransfer Branch: Branch Read and Write Access;Company: Company access deny;ReceiveBranch: Branch Only read access;Sender: CashAccount Read and Write Access;Receiver: CashAccount Only read access;'                     |
+		| 'Document.MoneyTransfer Branch: Branch Only read access;Company: Company access deny;ReceiveBranch: Branch Only read access;Sender: CashAccount Read and Write Access;Receiver: CashAccount Only read access;'                          |
+		| 'Document.MoneyTransfer Branch: Branch access deny;Company: Company access deny;ReceiveBranch: Branch Only read access;Sender: CashAccount Read and Write Access;Receiver: CashAccount Only read access;'                               |
+		| 'Document.MoneyTransfer Branch: Branch Read and Write Access;Company: Company Read and Write Access;ReceiveBranch: Branch access deny;Sender: CashAccount Read and Write Access;Receiver: CashAccount Only read access;'                |
+		| 'Document.MoneyTransfer Branch: Branch Only read access;Company: Company Read and Write Access;ReceiveBranch: Branch access deny;Sender: CashAccount Read and Write Access;Receiver: CashAccount Only read access;'                     |
+		| 'Document.MoneyTransfer Branch: Branch access deny;Company: Company Read and Write Access;ReceiveBranch: Branch access deny;Sender: CashAccount Read and Write Access;Receiver: CashAccount Only read access;'                          |
+		| 'Document.MoneyTransfer Branch: Branch Read and Write Access;Company: Company Only read access;ReceiveBranch: Branch access deny;Sender: CashAccount Read and Write Access;Receiver: CashAccount Only read access;'                     |
+		| 'Document.MoneyTransfer Branch: Branch Only read access;Company: Company Only read access;ReceiveBranch: Branch access deny;Sender: CashAccount Read and Write Access;Receiver: CashAccount Only read access;'                          |
+		| 'Document.MoneyTransfer Branch: Branch access deny;Company: Company Only read access;ReceiveBranch: Branch access deny;Sender: CashAccount Read and Write Access;Receiver: CashAccount Only read access;'                               |
+		| 'Document.MoneyTransfer Branch: Branch Read and Write Access;Company: Company access deny;ReceiveBranch: Branch access deny;Sender: CashAccount Read and Write Access;Receiver: CashAccount Only read access;'                          |
+		| 'Document.MoneyTransfer Branch: Branch Only read access;Company: Company access deny;ReceiveBranch: Branch access deny;Sender: CashAccount Read and Write Access;Receiver: CashAccount Only read access;'                               |
+		| 'Document.MoneyTransfer Branch: Branch access deny;Company: Company access deny;ReceiveBranch: Branch access deny;Sender: CashAccount Read and Write Access;Receiver: CashAccount Only read access;'                                    |
+		| 'Document.MoneyTransfer Branch: Branch Read and Write Access;Company: Company Read and Write Access;ReceiveBranch: Branch Read and Write Access;Sender: CashAccount Only read access;Receiver: CashAccount Only read access;'           |
+		| 'Document.MoneyTransfer Branch: Branch Only read access;Company: Company Read and Write Access;ReceiveBranch: Branch Read and Write Access;Sender: CashAccount Only read access;Receiver: CashAccount Only read access;'                |
+		| 'Document.MoneyTransfer Branch: Branch access deny;Company: Company Read and Write Access;ReceiveBranch: Branch Read and Write Access;Sender: CashAccount Only read access;Receiver: CashAccount Only read access;'                     |
+		| 'Document.MoneyTransfer Branch: Branch Read and Write Access;Company: Company Only read access;ReceiveBranch: Branch Read and Write Access;Sender: CashAccount Only read access;Receiver: CashAccount Only read access;'                |
+		| 'Document.MoneyTransfer Branch: Branch Only read access;Company: Company Only read access;ReceiveBranch: Branch Read and Write Access;Sender: CashAccount Only read access;Receiver: CashAccount Only read access;'                     |
+		| 'Document.MoneyTransfer Branch: Branch access deny;Company: Company Only read access;ReceiveBranch: Branch Read and Write Access;Sender: CashAccount Only read access;Receiver: CashAccount Only read access;'                          |
+		| 'Document.MoneyTransfer Branch: Branch Read and Write Access;Company: Company access deny;ReceiveBranch: Branch Read and Write Access;Sender: CashAccount Only read access;Receiver: CashAccount Only read access;'                     |
+		| 'Document.MoneyTransfer Branch: Branch Only read access;Company: Company access deny;ReceiveBranch: Branch Read and Write Access;Sender: CashAccount Only read access;Receiver: CashAccount Only read access;'                          |
+		| 'Document.MoneyTransfer Branch: Branch access deny;Company: Company access deny;ReceiveBranch: Branch Read and Write Access;Sender: CashAccount Only read access;Receiver: CashAccount Only read access;'                               |
+		| 'Document.MoneyTransfer Branch: Branch Read and Write Access;Company: Company Read and Write Access;ReceiveBranch: Branch Only read access;Sender: CashAccount Only read access;Receiver: CashAccount Only read access;'                |
+		| 'Document.MoneyTransfer Branch: Branch Only read access;Company: Company Read and Write Access;ReceiveBranch: Branch Only read access;Sender: CashAccount Only read access;Receiver: CashAccount Only read access;'                     |
+		| 'Document.MoneyTransfer Branch: Branch access deny;Company: Company Read and Write Access;ReceiveBranch: Branch Only read access;Sender: CashAccount Only read access;Receiver: CashAccount Only read access;'                          |
+		| 'Document.MoneyTransfer Branch: Branch Read and Write Access;Company: Company Only read access;ReceiveBranch: Branch Only read access;Sender: CashAccount Only read access;Receiver: CashAccount Only read access;'                     |
+		| 'Document.MoneyTransfer Branch: Branch Only read access;Company: Company Only read access;ReceiveBranch: Branch Only read access;Sender: CashAccount Only read access;Receiver: CashAccount Only read access;'                          |
+		| 'Document.MoneyTransfer Branch: Branch access deny;Company: Company Only read access;ReceiveBranch: Branch Only read access;Sender: CashAccount Only read access;Receiver: CashAccount Only read access;'                               |
+		| 'Document.MoneyTransfer Branch: Branch Read and Write Access;Company: Company access deny;ReceiveBranch: Branch Only read access;Sender: CashAccount Only read access;Receiver: CashAccount Only read access;'                          |
+		| 'Document.MoneyTransfer Branch: Branch Only read access;Company: Company access deny;ReceiveBranch: Branch Only read access;Sender: CashAccount Only read access;Receiver: CashAccount Only read access;'                               |
+		| 'Document.MoneyTransfer Branch: Branch access deny;Company: Company access deny;ReceiveBranch: Branch Only read access;Sender: CashAccount Only read access;Receiver: CashAccount Only read access;'                                    |
+		| 'Document.MoneyTransfer Branch: Branch Read and Write Access;Company: Company Read and Write Access;ReceiveBranch: Branch access deny;Sender: CashAccount Only read access;Receiver: CashAccount Only read access;'                     |
+		| 'Document.MoneyTransfer Branch: Branch Only read access;Company: Company Read and Write Access;ReceiveBranch: Branch access deny;Sender: CashAccount Only read access;Receiver: CashAccount Only read access;'                          |
+		| 'Document.MoneyTransfer Branch: Branch access deny;Company: Company Read and Write Access;ReceiveBranch: Branch access deny;Sender: CashAccount Only read access;Receiver: CashAccount Only read access;'                               |
+		| 'Document.MoneyTransfer Branch: Branch Read and Write Access;Company: Company Only read access;ReceiveBranch: Branch access deny;Sender: CashAccount Only read access;Receiver: CashAccount Only read access;'                          |
+		| 'Document.MoneyTransfer Branch: Branch Only read access;Company: Company Only read access;ReceiveBranch: Branch access deny;Sender: CashAccount Only read access;Receiver: CashAccount Only read access;'                               |
+		| 'Document.MoneyTransfer Branch: Branch access deny;Company: Company Only read access;ReceiveBranch: Branch access deny;Sender: CashAccount Only read access;Receiver: CashAccount Only read access;'                                    |
+		| 'Document.MoneyTransfer Branch: Branch Read and Write Access;Company: Company access deny;ReceiveBranch: Branch access deny;Sender: CashAccount Only read access;Receiver: CashAccount Only read access;'                               |
+		| 'Document.MoneyTransfer Branch: Branch Only read access;Company: Company access deny;ReceiveBranch: Branch access deny;Sender: CashAccount Only read access;Receiver: CashAccount Only read access;'                                    |
+		| 'Document.MoneyTransfer Branch: Branch access deny;Company: Company access deny;ReceiveBranch: Branch access deny;Sender: CashAccount Only read access;Receiver: CashAccount Only read access;'                                         |
+		| 'Document.MoneyTransfer Branch: Branch Read and Write Access;Company: Company Read and Write Access;ReceiveBranch: Branch Read and Write Access;Sender: CashAccount access deny;Receiver: CashAccount Only read access;'                |
+		| 'Document.MoneyTransfer Branch: Branch Only read access;Company: Company Read and Write Access;ReceiveBranch: Branch Read and Write Access;Sender: CashAccount access deny;Receiver: CashAccount Only read access;'                     |
+		| 'Document.MoneyTransfer Branch: Branch access deny;Company: Company Read and Write Access;ReceiveBranch: Branch Read and Write Access;Sender: CashAccount access deny;Receiver: CashAccount Only read access;'                          |
+		| 'Document.MoneyTransfer Branch: Branch Read and Write Access;Company: Company Only read access;ReceiveBranch: Branch Read and Write Access;Sender: CashAccount access deny;Receiver: CashAccount Only read access;'                     |
+		| 'Document.MoneyTransfer Branch: Branch Only read access;Company: Company Only read access;ReceiveBranch: Branch Read and Write Access;Sender: CashAccount access deny;Receiver: CashAccount Only read access;'                          |
+		| 'Document.MoneyTransfer Branch: Branch access deny;Company: Company Only read access;ReceiveBranch: Branch Read and Write Access;Sender: CashAccount access deny;Receiver: CashAccount Only read access;'                               |
+		| 'Document.MoneyTransfer Branch: Branch Read and Write Access;Company: Company access deny;ReceiveBranch: Branch Read and Write Access;Sender: CashAccount access deny;Receiver: CashAccount Only read access;'                          |
+		| 'Document.MoneyTransfer Branch: Branch Only read access;Company: Company access deny;ReceiveBranch: Branch Read and Write Access;Sender: CashAccount access deny;Receiver: CashAccount Only read access;'                               |
+		| 'Document.MoneyTransfer Branch: Branch access deny;Company: Company access deny;ReceiveBranch: Branch Read and Write Access;Sender: CashAccount access deny;Receiver: CashAccount Only read access;'                                    |
+		| 'Document.MoneyTransfer Branch: Branch Read and Write Access;Company: Company Read and Write Access;ReceiveBranch: Branch Only read access;Sender: CashAccount access deny;Receiver: CashAccount Only read access;'                     |
+		| 'Document.MoneyTransfer Branch: Branch Only read access;Company: Company Read and Write Access;ReceiveBranch: Branch Only read access;Sender: CashAccount access deny;Receiver: CashAccount Only read access;'                          |
+		| 'Document.MoneyTransfer Branch: Branch access deny;Company: Company Read and Write Access;ReceiveBranch: Branch Only read access;Sender: CashAccount access deny;Receiver: CashAccount Only read access;'                               |
+		| 'Document.MoneyTransfer Branch: Branch Read and Write Access;Company: Company Only read access;ReceiveBranch: Branch Only read access;Sender: CashAccount access deny;Receiver: CashAccount Only read access;'                          |
+		| 'Document.MoneyTransfer Branch: Branch Only read access;Company: Company Only read access;ReceiveBranch: Branch Only read access;Sender: CashAccount access deny;Receiver: CashAccount Only read access;'                               |
+		| 'Document.MoneyTransfer Branch: Branch access deny;Company: Company Only read access;ReceiveBranch: Branch Only read access;Sender: CashAccount access deny;Receiver: CashAccount Only read access;'                                    |
+		| 'Document.MoneyTransfer Branch: Branch Read and Write Access;Company: Company access deny;ReceiveBranch: Branch Only read access;Sender: CashAccount access deny;Receiver: CashAccount Only read access;'                               |
+		| 'Document.MoneyTransfer Branch: Branch Only read access;Company: Company access deny;ReceiveBranch: Branch Only read access;Sender: CashAccount access deny;Receiver: CashAccount Only read access;'                                    |
+		| 'Document.MoneyTransfer Branch: Branch access deny;Company: Company access deny;ReceiveBranch: Branch Only read access;Sender: CashAccount access deny;Receiver: CashAccount Only read access;'                                         |
+		| 'Document.MoneyTransfer Branch: Branch Read and Write Access;Company: Company Read and Write Access;ReceiveBranch: Branch access deny;Sender: CashAccount access deny;Receiver: CashAccount Only read access;'                          |
+		| 'Document.MoneyTransfer Branch: Branch Only read access;Company: Company Read and Write Access;ReceiveBranch: Branch access deny;Sender: CashAccount access deny;Receiver: CashAccount Only read access;'                               |
+		| 'Document.MoneyTransfer Branch: Branch access deny;Company: Company Read and Write Access;ReceiveBranch: Branch access deny;Sender: CashAccount access deny;Receiver: CashAccount Only read access;'                                    |
+		| 'Document.MoneyTransfer Branch: Branch Read and Write Access;Company: Company Only read access;ReceiveBranch: Branch access deny;Sender: CashAccount access deny;Receiver: CashAccount Only read access;'                               |
+		| 'Document.MoneyTransfer Branch: Branch Only read access;Company: Company Only read access;ReceiveBranch: Branch access deny;Sender: CashAccount access deny;Receiver: CashAccount Only read access;'                                    |
+		| 'Document.MoneyTransfer Branch: Branch access deny;Company: Company Only read access;ReceiveBranch: Branch access deny;Sender: CashAccount access deny;Receiver: CashAccount Only read access;'                                         |
+		| 'Document.MoneyTransfer Branch: Branch Read and Write Access;Company: Company access deny;ReceiveBranch: Branch access deny;Sender: CashAccount access deny;Receiver: CashAccount Only read access;'                                    |
+		| 'Document.MoneyTransfer Branch: Branch Only read access;Company: Company access deny;ReceiveBranch: Branch access deny;Sender: CashAccount access deny;Receiver: CashAccount Only read access;'                                         |
+		| 'Document.MoneyTransfer Branch: Branch access deny;Company: Company access deny;ReceiveBranch: Branch access deny;Sender: CashAccount access deny;Receiver: CashAccount Only read access;'                                              |
+		| 'Document.MoneyTransfer Branch: Branch Read and Write Access;Company: Company Read and Write Access;ReceiveBranch: Branch Read and Write Access;Sender: CashAccount Read and Write Access;Receiver: CashAccount access deny;'           |
+		| 'Document.MoneyTransfer Branch: Branch Only read access;Company: Company Read and Write Access;ReceiveBranch: Branch Read and Write Access;Sender: CashAccount Read and Write Access;Receiver: CashAccount access deny;'                |
+		| 'Document.MoneyTransfer Branch: Branch access deny;Company: Company Read and Write Access;ReceiveBranch: Branch Read and Write Access;Sender: CashAccount Read and Write Access;Receiver: CashAccount access deny;'                     |
+		| 'Document.MoneyTransfer Branch: Branch Read and Write Access;Company: Company Only read access;ReceiveBranch: Branch Read and Write Access;Sender: CashAccount Read and Write Access;Receiver: CashAccount access deny;'                |
+		| 'Document.MoneyTransfer Branch: Branch Only read access;Company: Company Only read access;ReceiveBranch: Branch Read and Write Access;Sender: CashAccount Read and Write Access;Receiver: CashAccount access deny;'                     |
+		| 'Document.MoneyTransfer Branch: Branch access deny;Company: Company Only read access;ReceiveBranch: Branch Read and Write Access;Sender: CashAccount Read and Write Access;Receiver: CashAccount access deny;'                          |
+		| 'Document.MoneyTransfer Branch: Branch Read and Write Access;Company: Company access deny;ReceiveBranch: Branch Read and Write Access;Sender: CashAccount Read and Write Access;Receiver: CashAccount access deny;'                     |
+		| 'Document.MoneyTransfer Branch: Branch Only read access;Company: Company access deny;ReceiveBranch: Branch Read and Write Access;Sender: CashAccount Read and Write Access;Receiver: CashAccount access deny;'                          |
+		| 'Document.MoneyTransfer Branch: Branch access deny;Company: Company access deny;ReceiveBranch: Branch Read and Write Access;Sender: CashAccount Read and Write Access;Receiver: CashAccount access deny;'                               |
+		| 'Document.MoneyTransfer Branch: Branch Read and Write Access;Company: Company Read and Write Access;ReceiveBranch: Branch Only read access;Sender: CashAccount Read and Write Access;Receiver: CashAccount access deny;'                |
+		| 'Document.MoneyTransfer Branch: Branch Only read access;Company: Company Read and Write Access;ReceiveBranch: Branch Only read access;Sender: CashAccount Read and Write Access;Receiver: CashAccount access deny;'                     |
+		| 'Document.MoneyTransfer Branch: Branch access deny;Company: Company Read and Write Access;ReceiveBranch: Branch Only read access;Sender: CashAccount Read and Write Access;Receiver: CashAccount access deny;'                          |
+		| 'Document.MoneyTransfer Branch: Branch Read and Write Access;Company: Company Only read access;ReceiveBranch: Branch Only read access;Sender: CashAccount Read and Write Access;Receiver: CashAccount access deny;'                     |
+		| 'Document.MoneyTransfer Branch: Branch Only read access;Company: Company Only read access;ReceiveBranch: Branch Only read access;Sender: CashAccount Read and Write Access;Receiver: CashAccount access deny;'                          |
+		| 'Document.MoneyTransfer Branch: Branch access deny;Company: Company Only read access;ReceiveBranch: Branch Only read access;Sender: CashAccount Read and Write Access;Receiver: CashAccount access deny;'                               |
+		| 'Document.MoneyTransfer Branch: Branch Read and Write Access;Company: Company access deny;ReceiveBranch: Branch Only read access;Sender: CashAccount Read and Write Access;Receiver: CashAccount access deny;'                          |
+		| 'Document.MoneyTransfer Branch: Branch Only read access;Company: Company access deny;ReceiveBranch: Branch Only read access;Sender: CashAccount Read and Write Access;Receiver: CashAccount access deny;'                               |
+		| 'Document.MoneyTransfer Branch: Branch access deny;Company: Company access deny;ReceiveBranch: Branch Only read access;Sender: CashAccount Read and Write Access;Receiver: CashAccount access deny;'                                    |
+		| 'Document.MoneyTransfer Branch: Branch Read and Write Access;Company: Company Read and Write Access;ReceiveBranch: Branch access deny;Sender: CashAccount Read and Write Access;Receiver: CashAccount access deny;'                     |
+		| 'Document.MoneyTransfer Branch: Branch Only read access;Company: Company Read and Write Access;ReceiveBranch: Branch access deny;Sender: CashAccount Read and Write Access;Receiver: CashAccount access deny;'                          |
+		| 'Document.MoneyTransfer Branch: Branch access deny;Company: Company Read and Write Access;ReceiveBranch: Branch access deny;Sender: CashAccount Read and Write Access;Receiver: CashAccount access deny;'                               |
+		| 'Document.MoneyTransfer Branch: Branch Read and Write Access;Company: Company Only read access;ReceiveBranch: Branch access deny;Sender: CashAccount Read and Write Access;Receiver: CashAccount access deny;'                          |
+		| 'Document.MoneyTransfer Branch: Branch Only read access;Company: Company Only read access;ReceiveBranch: Branch access deny;Sender: CashAccount Read and Write Access;Receiver: CashAccount access deny;'                               |
+		| 'Document.MoneyTransfer Branch: Branch access deny;Company: Company Only read access;ReceiveBranch: Branch access deny;Sender: CashAccount Read and Write Access;Receiver: CashAccount access deny;'                                    |
+		| 'Document.MoneyTransfer Branch: Branch Read and Write Access;Company: Company access deny;ReceiveBranch: Branch access deny;Sender: CashAccount Read and Write Access;Receiver: CashAccount access deny;'                               |
+		| 'Document.MoneyTransfer Branch: Branch Only read access;Company: Company access deny;ReceiveBranch: Branch access deny;Sender: CashAccount Read and Write Access;Receiver: CashAccount access deny;'                                    |
+		| 'Document.MoneyTransfer Branch: Branch access deny;Company: Company access deny;ReceiveBranch: Branch access deny;Sender: CashAccount Read and Write Access;Receiver: CashAccount access deny;'                                         |
+		| 'Document.MoneyTransfer Branch: Branch Read and Write Access;Company: Company Read and Write Access;ReceiveBranch: Branch Read and Write Access;Sender: CashAccount Only read access;Receiver: CashAccount access deny;'                |
+		| 'Document.MoneyTransfer Branch: Branch Only read access;Company: Company Read and Write Access;ReceiveBranch: Branch Read and Write Access;Sender: CashAccount Only read access;Receiver: CashAccount access deny;'                     |
+		| 'Document.MoneyTransfer Branch: Branch access deny;Company: Company Read and Write Access;ReceiveBranch: Branch Read and Write Access;Sender: CashAccount Only read access;Receiver: CashAccount access deny;'                          |
+		| 'Document.MoneyTransfer Branch: Branch Read and Write Access;Company: Company Only read access;ReceiveBranch: Branch Read and Write Access;Sender: CashAccount Only read access;Receiver: CashAccount access deny;'                     |
+		| 'Document.MoneyTransfer Branch: Branch Only read access;Company: Company Only read access;ReceiveBranch: Branch Read and Write Access;Sender: CashAccount Only read access;Receiver: CashAccount access deny;'                          |
+		| 'Document.MoneyTransfer Branch: Branch access deny;Company: Company Only read access;ReceiveBranch: Branch Read and Write Access;Sender: CashAccount Only read access;Receiver: CashAccount access deny;'                               |
+		| 'Document.MoneyTransfer Branch: Branch Read and Write Access;Company: Company access deny;ReceiveBranch: Branch Read and Write Access;Sender: CashAccount Only read access;Receiver: CashAccount access deny;'                          |
+		| 'Document.MoneyTransfer Branch: Branch Only read access;Company: Company access deny;ReceiveBranch: Branch Read and Write Access;Sender: CashAccount Only read access;Receiver: CashAccount access deny;'                               |
+		| 'Document.MoneyTransfer Branch: Branch access deny;Company: Company access deny;ReceiveBranch: Branch Read and Write Access;Sender: CashAccount Only read access;Receiver: CashAccount access deny;'                                    |
+		| 'Document.MoneyTransfer Branch: Branch Read and Write Access;Company: Company Read and Write Access;ReceiveBranch: Branch Only read access;Sender: CashAccount Only read access;Receiver: CashAccount access deny;'                     |
+		| 'Document.MoneyTransfer Branch: Branch Only read access;Company: Company Read and Write Access;ReceiveBranch: Branch Only read access;Sender: CashAccount Only read access;Receiver: CashAccount access deny;'                          |
+		| 'Document.MoneyTransfer Branch: Branch access deny;Company: Company Read and Write Access;ReceiveBranch: Branch Only read access;Sender: CashAccount Only read access;Receiver: CashAccount access deny;'                               |
+		| 'Document.MoneyTransfer Branch: Branch Read and Write Access;Company: Company Only read access;ReceiveBranch: Branch Only read access;Sender: CashAccount Only read access;Receiver: CashAccount access deny;'                          |
+		| 'Document.MoneyTransfer Branch: Branch Only read access;Company: Company Only read access;ReceiveBranch: Branch Only read access;Sender: CashAccount Only read access;Receiver: CashAccount access deny;'                               |
+		| 'Document.MoneyTransfer Branch: Branch access deny;Company: Company Only read access;ReceiveBranch: Branch Only read access;Sender: CashAccount Only read access;Receiver: CashAccount access deny;'                                    |
+		| 'Document.MoneyTransfer Branch: Branch Read and Write Access;Company: Company access deny;ReceiveBranch: Branch Only read access;Sender: CashAccount Only read access;Receiver: CashAccount access deny;'                               |
+		| 'Document.MoneyTransfer Branch: Branch Only read access;Company: Company access deny;ReceiveBranch: Branch Only read access;Sender: CashAccount Only read access;Receiver: CashAccount access deny;'                                    |
+		| 'Document.MoneyTransfer Branch: Branch access deny;Company: Company access deny;ReceiveBranch: Branch Only read access;Sender: CashAccount Only read access;Receiver: CashAccount access deny;'                                         |
+		| 'Document.MoneyTransfer Branch: Branch Read and Write Access;Company: Company Read and Write Access;ReceiveBranch: Branch access deny;Sender: CashAccount Only read access;Receiver: CashAccount access deny;'                          |
+		| 'Document.MoneyTransfer Branch: Branch Only read access;Company: Company Read and Write Access;ReceiveBranch: Branch access deny;Sender: CashAccount Only read access;Receiver: CashAccount access deny;'                               |
+		| 'Document.MoneyTransfer Branch: Branch access deny;Company: Company Read and Write Access;ReceiveBranch: Branch access deny;Sender: CashAccount Only read access;Receiver: CashAccount access deny;'                                    |
+		| 'Document.MoneyTransfer Branch: Branch Read and Write Access;Company: Company Only read access;ReceiveBranch: Branch access deny;Sender: CashAccount Only read access;Receiver: CashAccount access deny;'                               |
+		| 'Document.MoneyTransfer Branch: Branch Only read access;Company: Company Only read access;ReceiveBranch: Branch access deny;Sender: CashAccount Only read access;Receiver: CashAccount access deny;'                                    |
+		| 'Document.MoneyTransfer Branch: Branch access deny;Company: Company Only read access;ReceiveBranch: Branch access deny;Sender: CashAccount Only read access;Receiver: CashAccount access deny;'                                         |
+		| 'Document.MoneyTransfer Branch: Branch Read and Write Access;Company: Company access deny;ReceiveBranch: Branch access deny;Sender: CashAccount Only read access;Receiver: CashAccount access deny;'                                    |
+		| 'Document.MoneyTransfer Branch: Branch Only read access;Company: Company access deny;ReceiveBranch: Branch access deny;Sender: CashAccount Only read access;Receiver: CashAccount access deny;'                                         |
+		| 'Document.MoneyTransfer Branch: Branch access deny;Company: Company access deny;ReceiveBranch: Branch access deny;Sender: CashAccount Only read access;Receiver: CashAccount access deny;'                                              |
+		| 'Document.MoneyTransfer Branch: Branch Read and Write Access;Company: Company Read and Write Access;ReceiveBranch: Branch Read and Write Access;Sender: CashAccount access deny;Receiver: CashAccount access deny;'                     |
+		| 'Document.MoneyTransfer Branch: Branch Only read access;Company: Company Read and Write Access;ReceiveBranch: Branch Read and Write Access;Sender: CashAccount access deny;Receiver: CashAccount access deny;'                          |
+		| 'Document.MoneyTransfer Branch: Branch access deny;Company: Company Read and Write Access;ReceiveBranch: Branch Read and Write Access;Sender: CashAccount access deny;Receiver: CashAccount access deny;'                               |
+		| 'Document.MoneyTransfer Branch: Branch Read and Write Access;Company: Company Only read access;ReceiveBranch: Branch Read and Write Access;Sender: CashAccount access deny;Receiver: CashAccount access deny;'                          |
+		| 'Document.MoneyTransfer Branch: Branch Only read access;Company: Company Only read access;ReceiveBranch: Branch Read and Write Access;Sender: CashAccount access deny;Receiver: CashAccount access deny;'                               |
+		| 'Document.MoneyTransfer Branch: Branch access deny;Company: Company Only read access;ReceiveBranch: Branch Read and Write Access;Sender: CashAccount access deny;Receiver: CashAccount access deny;'                                    |
+		| 'Document.MoneyTransfer Branch: Branch Read and Write Access;Company: Company access deny;ReceiveBranch: Branch Read and Write Access;Sender: CashAccount access deny;Receiver: CashAccount access deny;'                               |
+		| 'Document.MoneyTransfer Branch: Branch Only read access;Company: Company access deny;ReceiveBranch: Branch Read and Write Access;Sender: CashAccount access deny;Receiver: CashAccount access deny;'                                    |
+		| 'Document.MoneyTransfer Branch: Branch access deny;Company: Company access deny;ReceiveBranch: Branch Read and Write Access;Sender: CashAccount access deny;Receiver: CashAccount access deny;'                                         |
+		| 'Document.MoneyTransfer Branch: Branch Read and Write Access;Company: Company Read and Write Access;ReceiveBranch: Branch Only read access;Sender: CashAccount access deny;Receiver: CashAccount access deny;'                          |
+		| 'Document.MoneyTransfer Branch: Branch Only read access;Company: Company Read and Write Access;ReceiveBranch: Branch Only read access;Sender: CashAccount access deny;Receiver: CashAccount access deny;'                               |
+		| 'Document.MoneyTransfer Branch: Branch access deny;Company: Company Read and Write Access;ReceiveBranch: Branch Only read access;Sender: CashAccount access deny;Receiver: CashAccount access deny;'                                    |
+		| 'Document.MoneyTransfer Branch: Branch Read and Write Access;Company: Company Only read access;ReceiveBranch: Branch Only read access;Sender: CashAccount access deny;Receiver: CashAccount access deny;'                               |
+		| 'Document.MoneyTransfer Branch: Branch Only read access;Company: Company Only read access;ReceiveBranch: Branch Only read access;Sender: CashAccount access deny;Receiver: CashAccount access deny;'                                    |
+		| 'Document.MoneyTransfer Branch: Branch access deny;Company: Company Only read access;ReceiveBranch: Branch Only read access;Sender: CashAccount access deny;Receiver: CashAccount access deny;'                                         |
+		| 'Document.MoneyTransfer Branch: Branch Read and Write Access;Company: Company access deny;ReceiveBranch: Branch Only read access;Sender: CashAccount access deny;Receiver: CashAccount access deny;'                                    |
+		| 'Document.MoneyTransfer Branch: Branch Only read access;Company: Company access deny;ReceiveBranch: Branch Only read access;Sender: CashAccount access deny;Receiver: CashAccount access deny;'                                         |
+		| 'Document.MoneyTransfer Branch: Branch access deny;Company: Company access deny;ReceiveBranch: Branch Only read access;Sender: CashAccount access deny;Receiver: CashAccount access deny;'                                              |
+		| 'Document.MoneyTransfer Branch: Branch Read and Write Access;Company: Company Read and Write Access;ReceiveBranch: Branch access deny;Sender: CashAccount access deny;Receiver: CashAccount access deny;'                               |
+		| 'Document.MoneyTransfer Branch: Branch Only read access;Company: Company Read and Write Access;ReceiveBranch: Branch access deny;Sender: CashAccount access deny;Receiver: CashAccount access deny;'                                    |
+		| 'Document.MoneyTransfer Branch: Branch access deny;Company: Company Read and Write Access;ReceiveBranch: Branch access deny;Sender: CashAccount access deny;Receiver: CashAccount access deny;'                                         |
+		| 'Document.MoneyTransfer Branch: Branch Read and Write Access;Company: Company Only read access;ReceiveBranch: Branch access deny;Sender: CashAccount access deny;Receiver: CashAccount access deny;'                                    |
+		| 'Document.MoneyTransfer Branch: Branch Only read access;Company: Company Only read access;ReceiveBranch: Branch access deny;Sender: CashAccount access deny;Receiver: CashAccount access deny;'                                         |
+		| 'Document.MoneyTransfer Branch: Branch access deny;Company: Company Only read access;ReceiveBranch: Branch access deny;Sender: CashAccount access deny;Receiver: CashAccount access deny;'                                              |
+		| 'Document.MoneyTransfer Branch: Branch Read and Write Access;Company: Company access deny;ReceiveBranch: Branch access deny;Sender: CashAccount access deny;Receiver: CashAccount access deny;'                                         |
+		| 'Document.MoneyTransfer Branch: Branch Only read access;Company: Company access deny;ReceiveBranch: Branch access deny;Sender: CashAccount access deny;Receiver: CashAccount access deny;'                                              |
+		| 'Document.MoneyTransfer Branch: Branch access deny;Company: Company access deny;ReceiveBranch: Branch access deny;Sender: CashAccount access deny;Receiver: CashAccount access deny;'                                                   |
 	
+		
 		
 
 
@@ -1931,37 +2384,35 @@ Scenario: 960042 check Production creation
 	And I close all client application windows
 	Given I open hyperlink "e1cib/list/Document.Production"
 	And "List" table became equal
-		| 'Description'                                                                                                                                 |
-		| 'Document.Production Branch: Branch Read and Write Access;Company: Company Read and Write Access;BusinessUnit: Branch Read and Write Access;' |
-		| 'Document.Production Branch: Branch Only read access;Company: Company Read and Write Access;BusinessUnit: Branch Read and Write Access;'      |
-		| 'Document.Production Branch: Branch access deny;Company: Company Read and Write Access;BusinessUnit: Branch Read and Write Access;'           |
-		| 'Document.Production Branch: Branch Read and Write Access;Company: Company Only read access;BusinessUnit: Branch Read and Write Access;'      |
-		| 'Document.Production Branch: Branch Only read access;Company: Company Only read access;BusinessUnit: Branch Read and Write Access;'           |
-		| 'Document.Production Branch: Branch access deny;Company: Company Only read access;BusinessUnit: Branch Read and Write Access;'                |
-		| 'Document.Production Branch: Branch Read and Write Access;Company: Company access deny;BusinessUnit: Branch Read and Write Access;'           |
-		| 'Document.Production Branch: Branch Only read access;Company: Company access deny;BusinessUnit: Branch Read and Write Access;'                |
-		| 'Document.Production Branch: Branch access deny;Company: Company access deny;BusinessUnit: Branch Read and Write Access;'                     |
-		| 'Document.Production Branch: Branch Read and Write Access;Company: Company Read and Write Access;BusinessUnit: Branch Only read access;'      |
-		| 'Document.Production Branch: Branch Only read access;Company: Company Read and Write Access;BusinessUnit: Branch Only read access;'           |
-		| 'Document.Production Branch: Branch access deny;Company: Company Read and Write Access;BusinessUnit: Branch Only read access;'                |
-		| 'Document.Production Branch: Branch Read and Write Access;Company: Company Only read access;BusinessUnit: Branch Only read access;'           |
-		| 'Document.Production Branch: Branch Only read access;Company: Company Only read access;BusinessUnit: Branch Only read access;'                |
-		| 'Document.Production Branch: Branch access deny;Company: Company Only read access;BusinessUnit: Branch Only read access;'                     |
-		| 'Document.Production Branch: Branch Read and Write Access;Company: Company access deny;BusinessUnit: Branch Only read access;'                |
-		| 'Document.Production Branch: Branch Only read access;Company: Company access deny;BusinessUnit: Branch Only read access;'                     |
-		| 'Document.Production Branch: Branch access deny;Company: Company access deny;BusinessUnit: Branch Only read access;'                          |
-		| 'Document.Production Branch: Branch Read and Write Access;Company: Company Read and Write Access;BusinessUnit: Branch access deny;'           |
-		| 'Document.Production Branch: Branch Only read access;Company: Company Read and Write Access;BusinessUnit: Branch access deny;'                |
-		| 'Document.Production Branch: Branch access deny;Company: Company Read and Write Access;BusinessUnit: Branch access deny;'                     |
-		| 'Document.Production Branch: Branch Read and Write Access;Company: Company Only read access;BusinessUnit: Branch access deny;'                |
-		| 'Document.Production Branch: Branch Only read access;Company: Company Only read access;BusinessUnit: Branch access deny;'                     |
-		| 'Document.Production Branch: Branch access deny;Company: Company Only read access;BusinessUnit: Branch access deny;'                          |
-		| 'Document.Production Branch: Branch Read and Write Access;Company: Company access deny;BusinessUnit: Branch access deny;'                     |
-		| 'Document.Production Branch: Branch Only read access;Company: Company access deny;BusinessUnit: Branch access deny;'                          |
-		| 'Document.Production Branch: Branch access deny;Company: Company access deny;BusinessUnit: Branch access deny;'                               |
+		| 'Description'                                                                                                                                   |
+		| 'Document.Production Branch: Branch Read and Write Access;Company: Company Read and Write Access;StoreProduction: Store Read and Write Access;' |
+		| 'Document.Production Branch: Branch Only read access;Company: Company Read and Write Access;StoreProduction: Store Read and Write Access;'      |
+		| 'Document.Production Branch: Branch access deny;Company: Company Read and Write Access;StoreProduction: Store Read and Write Access;'           |
+		| 'Document.Production Branch: Branch Read and Write Access;Company: Company Only read access;StoreProduction: Store Read and Write Access;'      |
+		| 'Document.Production Branch: Branch Only read access;Company: Company Only read access;StoreProduction: Store Read and Write Access;'           |
+		| 'Document.Production Branch: Branch access deny;Company: Company Only read access;StoreProduction: Store Read and Write Access;'                |
+		| 'Document.Production Branch: Branch Read and Write Access;Company: Company access deny;StoreProduction: Store Read and Write Access;'           |
+		| 'Document.Production Branch: Branch Only read access;Company: Company access deny;StoreProduction: Store Read and Write Access;'                |
+		| 'Document.Production Branch: Branch access deny;Company: Company access deny;StoreProduction: Store Read and Write Access;'                     |
+		| 'Document.Production Branch: Branch Read and Write Access;Company: Company Read and Write Access;StoreProduction: Store Only read access;'      |
+		| 'Document.Production Branch: Branch Only read access;Company: Company Read and Write Access;StoreProduction: Store Only read access;'           |
+		| 'Document.Production Branch: Branch access deny;Company: Company Read and Write Access;StoreProduction: Store Only read access;'                |
+		| 'Document.Production Branch: Branch Read and Write Access;Company: Company Only read access;StoreProduction: Store Only read access;'           |
+		| 'Document.Production Branch: Branch Only read access;Company: Company Only read access;StoreProduction: Store Only read access;'                |
+		| 'Document.Production Branch: Branch access deny;Company: Company Only read access;StoreProduction: Store Only read access;'                     |
+		| 'Document.Production Branch: Branch Read and Write Access;Company: Company access deny;StoreProduction: Store Only read access;'                |
+		| 'Document.Production Branch: Branch Only read access;Company: Company access deny;StoreProduction: Store Only read access;'                     |
+		| 'Document.Production Branch: Branch access deny;Company: Company access deny;StoreProduction: Store Only read access;'                          |
+		| 'Document.Production Branch: Branch Read and Write Access;Company: Company Read and Write Access;StoreProduction: Store access deny;'           |
+		| 'Document.Production Branch: Branch Only read access;Company: Company Read and Write Access;StoreProduction: Store access deny;'                |
+		| 'Document.Production Branch: Branch access deny;Company: Company Read and Write Access;StoreProduction: Store access deny;'                     |
+		| 'Document.Production Branch: Branch Read and Write Access;Company: Company Only read access;StoreProduction: Store access deny;'                |
+		| 'Document.Production Branch: Branch Only read access;Company: Company Only read access;StoreProduction: Store access deny;'                     |
+		| 'Document.Production Branch: Branch access deny;Company: Company Only read access;StoreProduction: Store access deny;'                          |
+		| 'Document.Production Branch: Branch Read and Write Access;Company: Company access deny;StoreProduction: Store access deny;'                     |
+		| 'Document.Production Branch: Branch Only read access;Company: Company access deny;StoreProduction: Store access deny;'                          |
+		| 'Document.Production Branch: Branch access deny;Company: Company access deny;StoreProduction: Store access deny;'                               |
 	
-		
-
 
 
 Scenario: 960043 check ProductionCostsAllocation creation
@@ -1984,112 +2435,49 @@ Scenario: 960044 check ProductionPlanning creation
 	And I close all client application windows
 	Given I open hyperlink "e1cib/list/Document.ProductionPlanning"
 	And "List" table became equal
-		| 'Number' | 'Company'                       | 'Business unit'                | 'Description'                                                                                                                                         |
-		| '1'      | 'Company Read and Write Access' | 'Branch Read and Write Access' | 'Document.ProductionPlanning Branch: Branch Read and Write Access;Company: Company Read and Write Access;BusinessUnit: Branch Read and Write Access;' |
-		| '2'      | 'Company Read and Write Access' | 'Branch Read and Write Access' | 'Document.ProductionPlanning Branch: Branch Only read access;Company: Company Read and Write Access;BusinessUnit: Branch Read and Write Access;'      |
-		| '3'      | 'Company Read and Write Access' | 'Branch Read and Write Access' | 'Document.ProductionPlanning Branch: Branch access deny;Company: Company Read and Write Access;BusinessUnit: Branch Read and Write Access;'           |
-		| '4'      | 'Company Only read access'      | 'Branch Read and Write Access' | 'Document.ProductionPlanning Branch: Branch Read and Write Access;Company: Company Only read access;BusinessUnit: Branch Read and Write Access;'      |
-		| '5'      | 'Company Only read access'      | 'Branch Read and Write Access' | 'Document.ProductionPlanning Branch: Branch Only read access;Company: Company Only read access;BusinessUnit: Branch Read and Write Access;'           |
-		| '6'      | 'Company Only read access'      | 'Branch Read and Write Access' | 'Document.ProductionPlanning Branch: Branch access deny;Company: Company Only read access;BusinessUnit: Branch Read and Write Access;'                |
-		| '7'      | 'Company access deny'           | 'Branch Read and Write Access' | 'Document.ProductionPlanning Branch: Branch Read and Write Access;Company: Company access deny;BusinessUnit: Branch Read and Write Access;'           |
-		| '8'      | 'Company access deny'           | 'Branch Read and Write Access' | 'Document.ProductionPlanning Branch: Branch Only read access;Company: Company access deny;BusinessUnit: Branch Read and Write Access;'                |
-		| '9'      | 'Company access deny'           | 'Branch Read and Write Access' | 'Document.ProductionPlanning Branch: Branch access deny;Company: Company access deny;BusinessUnit: Branch Read and Write Access;'                     |
-		| '10'     | 'Company Read and Write Access' | 'Branch Only read access'      | 'Document.ProductionPlanning Branch: Branch Read and Write Access;Company: Company Read and Write Access;BusinessUnit: Branch Only read access;'      |
-		| '11'     | 'Company Read and Write Access' | 'Branch Only read access'      | 'Document.ProductionPlanning Branch: Branch Only read access;Company: Company Read and Write Access;BusinessUnit: Branch Only read access;'           |
-		| '12'     | 'Company Read and Write Access' | 'Branch Only read access'      | 'Document.ProductionPlanning Branch: Branch access deny;Company: Company Read and Write Access;BusinessUnit: Branch Only read access;'                |
-		| '13'     | 'Company Only read access'      | 'Branch Only read access'      | 'Document.ProductionPlanning Branch: Branch Read and Write Access;Company: Company Only read access;BusinessUnit: Branch Only read access;'           |
-		| '14'     | 'Company Only read access'      | 'Branch Only read access'      | 'Document.ProductionPlanning Branch: Branch Only read access;Company: Company Only read access;BusinessUnit: Branch Only read access;'                |
-		| '15'     | 'Company Only read access'      | 'Branch Only read access'      | 'Document.ProductionPlanning Branch: Branch access deny;Company: Company Only read access;BusinessUnit: Branch Only read access;'                     |
-		| '16'     | 'Company access deny'           | 'Branch Only read access'      | 'Document.ProductionPlanning Branch: Branch Read and Write Access;Company: Company access deny;BusinessUnit: Branch Only read access;'                |
-		| '17'     | 'Company access deny'           | 'Branch Only read access'      | 'Document.ProductionPlanning Branch: Branch Only read access;Company: Company access deny;BusinessUnit: Branch Only read access;'                     |
-		| '18'     | 'Company access deny'           | 'Branch Only read access'      | 'Document.ProductionPlanning Branch: Branch access deny;Company: Company access deny;BusinessUnit: Branch Only read access;'                          |
-		| '19'     | 'Company Read and Write Access' | 'Branch access deny'           | 'Document.ProductionPlanning Branch: Branch Read and Write Access;Company: Company Read and Write Access;BusinessUnit: Branch access deny;'           |
-		| '20'     | 'Company Read and Write Access' | 'Branch access deny'           | 'Document.ProductionPlanning Branch: Branch Only read access;Company: Company Read and Write Access;BusinessUnit: Branch access deny;'                |
-		| '21'     | 'Company Read and Write Access' | 'Branch access deny'           | 'Document.ProductionPlanning Branch: Branch access deny;Company: Company Read and Write Access;BusinessUnit: Branch access deny;'                     |
-		| '22'     | 'Company Only read access'      | 'Branch access deny'           | 'Document.ProductionPlanning Branch: Branch Read and Write Access;Company: Company Only read access;BusinessUnit: Branch access deny;'                |
-		| '23'     | 'Company Only read access'      | 'Branch access deny'           | 'Document.ProductionPlanning Branch: Branch Only read access;Company: Company Only read access;BusinessUnit: Branch access deny;'                     |
-		| '24'     | 'Company Only read access'      | 'Branch access deny'           | 'Document.ProductionPlanning Branch: Branch access deny;Company: Company Only read access;BusinessUnit: Branch access deny;'                          |
-		| '25'     | 'Company access deny'           | 'Branch access deny'           | 'Document.ProductionPlanning Branch: Branch Read and Write Access;Company: Company access deny;BusinessUnit: Branch access deny;'                     |
-		| '26'     | 'Company access deny'           | 'Branch access deny'           | 'Document.ProductionPlanning Branch: Branch Only read access;Company: Company access deny;BusinessUnit: Branch access deny;'                          |
-		| '27'     | 'Company access deny'           | 'Branch access deny'           | 'Document.ProductionPlanning Branch: Branch access deny;Company: Company access deny;BusinessUnit: Branch access deny;'                               |
+		| 'Description'                                                                                              |
+		| 'Document.ProductionPlanning Branch: Branch Read and Write Access;Company: Company Read and Write Access;' |
+		| 'Document.ProductionPlanning Branch: Branch Only read access;Company: Company Read and Write Access;'      |
+		| 'Document.ProductionPlanning Branch: Branch access deny;Company: Company Read and Write Access;'           |
+		| 'Document.ProductionPlanning Branch: Branch Read and Write Access;Company: Company Only read access;'      |
+		| 'Document.ProductionPlanning Branch: Branch Only read access;Company: Company Only read access;'           |
+		| 'Document.ProductionPlanning Branch: Branch access deny;Company: Company Only read access;'                |
+		| 'Document.ProductionPlanning Branch: Branch Read and Write Access;Company: Company access deny;'           |
+		| 'Document.ProductionPlanning Branch: Branch Only read access;Company: Company access deny;'                |
+		| 'Document.ProductionPlanning Branch: Branch access deny;Company: Company access deny;'                     |
 	
-		
-		
-
 
 Scenario: 960045 check ProductionPlanningClosing creation
 	And I close all client application windows
 	Given I open hyperlink "e1cib/list/Document.ProductionPlanningClosing"
 	And "List" table became equal
-		| 'Number' | 'Company'                       | 'Business unit'                | 'Description'                                                                                                                                                |
-		| '1'      | 'Company Read and Write Access' | 'Branch Read and Write Access' | 'Document.ProductionPlanningClosing Branch: Branch Read and Write Access;Company: Company Read and Write Access;BusinessUnit: Branch Read and Write Access;' |
-		| '2'      | 'Company Read and Write Access' | 'Branch Read and Write Access' | 'Document.ProductionPlanningClosing Branch: Branch Only read access;Company: Company Read and Write Access;BusinessUnit: Branch Read and Write Access;'      |
-		| '3'      | 'Company Read and Write Access' | 'Branch Read and Write Access' | 'Document.ProductionPlanningClosing Branch: Branch access deny;Company: Company Read and Write Access;BusinessUnit: Branch Read and Write Access;'           |
-		| '4'      | 'Company Only read access'      | 'Branch Read and Write Access' | 'Document.ProductionPlanningClosing Branch: Branch Read and Write Access;Company: Company Only read access;BusinessUnit: Branch Read and Write Access;'      |
-		| '5'      | 'Company Only read access'      | 'Branch Read and Write Access' | 'Document.ProductionPlanningClosing Branch: Branch Only read access;Company: Company Only read access;BusinessUnit: Branch Read and Write Access;'           |
-		| '6'      | 'Company Only read access'      | 'Branch Read and Write Access' | 'Document.ProductionPlanningClosing Branch: Branch access deny;Company: Company Only read access;BusinessUnit: Branch Read and Write Access;'                |
-		| '7'      | 'Company access deny'           | 'Branch Read and Write Access' | 'Document.ProductionPlanningClosing Branch: Branch Read and Write Access;Company: Company access deny;BusinessUnit: Branch Read and Write Access;'           |
-		| '8'      | 'Company access deny'           | 'Branch Read and Write Access' | 'Document.ProductionPlanningClosing Branch: Branch Only read access;Company: Company access deny;BusinessUnit: Branch Read and Write Access;'                |
-		| '9'      | 'Company access deny'           | 'Branch Read and Write Access' | 'Document.ProductionPlanningClosing Branch: Branch access deny;Company: Company access deny;BusinessUnit: Branch Read and Write Access;'                     |
-		| '10'     | 'Company Read and Write Access' | 'Branch Only read access'      | 'Document.ProductionPlanningClosing Branch: Branch Read and Write Access;Company: Company Read and Write Access;BusinessUnit: Branch Only read access;'      |
-		| '11'     | 'Company Read and Write Access' | 'Branch Only read access'      | 'Document.ProductionPlanningClosing Branch: Branch Only read access;Company: Company Read and Write Access;BusinessUnit: Branch Only read access;'           |
-		| '12'     | 'Company Read and Write Access' | 'Branch Only read access'      | 'Document.ProductionPlanningClosing Branch: Branch access deny;Company: Company Read and Write Access;BusinessUnit: Branch Only read access;'                |
-		| '13'     | 'Company Only read access'      | 'Branch Only read access'      | 'Document.ProductionPlanningClosing Branch: Branch Read and Write Access;Company: Company Only read access;BusinessUnit: Branch Only read access;'           |
-		| '14'     | 'Company Only read access'      | 'Branch Only read access'      | 'Document.ProductionPlanningClosing Branch: Branch Only read access;Company: Company Only read access;BusinessUnit: Branch Only read access;'                |
-		| '15'     | 'Company Only read access'      | 'Branch Only read access'      | 'Document.ProductionPlanningClosing Branch: Branch access deny;Company: Company Only read access;BusinessUnit: Branch Only read access;'                     |
-		| '16'     | 'Company access deny'           | 'Branch Only read access'      | 'Document.ProductionPlanningClosing Branch: Branch Read and Write Access;Company: Company access deny;BusinessUnit: Branch Only read access;'                |
-		| '17'     | 'Company access deny'           | 'Branch Only read access'      | 'Document.ProductionPlanningClosing Branch: Branch Only read access;Company: Company access deny;BusinessUnit: Branch Only read access;'                     |
-		| '18'     | 'Company access deny'           | 'Branch Only read access'      | 'Document.ProductionPlanningClosing Branch: Branch access deny;Company: Company access deny;BusinessUnit: Branch Only read access;'                          |
-		| '19'     | 'Company Read and Write Access' | 'Branch access deny'           | 'Document.ProductionPlanningClosing Branch: Branch Read and Write Access;Company: Company Read and Write Access;BusinessUnit: Branch access deny;'           |
-		| '20'     | 'Company Read and Write Access' | 'Branch access deny'           | 'Document.ProductionPlanningClosing Branch: Branch Only read access;Company: Company Read and Write Access;BusinessUnit: Branch access deny;'                |
-		| '21'     | 'Company Read and Write Access' | 'Branch access deny'           | 'Document.ProductionPlanningClosing Branch: Branch access deny;Company: Company Read and Write Access;BusinessUnit: Branch access deny;'                     |
-		| '22'     | 'Company Only read access'      | 'Branch access deny'           | 'Document.ProductionPlanningClosing Branch: Branch Read and Write Access;Company: Company Only read access;BusinessUnit: Branch access deny;'                |
-		| '23'     | 'Company Only read access'      | 'Branch access deny'           | 'Document.ProductionPlanningClosing Branch: Branch Only read access;Company: Company Only read access;BusinessUnit: Branch access deny;'                     |
-		| '24'     | 'Company Only read access'      | 'Branch access deny'           | 'Document.ProductionPlanningClosing Branch: Branch access deny;Company: Company Only read access;BusinessUnit: Branch access deny;'                          |
-		| '25'     | 'Company access deny'           | 'Branch access deny'           | 'Document.ProductionPlanningClosing Branch: Branch Read and Write Access;Company: Company access deny;BusinessUnit: Branch access deny;'                     |
-		| '26'     | 'Company access deny'           | 'Branch access deny'           | 'Document.ProductionPlanningClosing Branch: Branch Only read access;Company: Company access deny;BusinessUnit: Branch access deny;'                          |
-		| '27'     | 'Company access deny'           | 'Branch access deny'           | 'Document.ProductionPlanningClosing Branch: Branch access deny;Company: Company access deny;BusinessUnit: Branch access deny;'                               |
+		| 'Description'                                                                                                     |
+		| 'Document.ProductionPlanningClosing Branch: Branch Read and Write Access;Company: Company Read and Write Access;' |
+		| 'Document.ProductionPlanningClosing Branch: Branch Only read access;Company: Company Read and Write Access;'      |
+		| 'Document.ProductionPlanningClosing Branch: Branch access deny;Company: Company Read and Write Access;'           |
+		| 'Document.ProductionPlanningClosing Branch: Branch Read and Write Access;Company: Company Only read access;'      |
+		| 'Document.ProductionPlanningClosing Branch: Branch Only read access;Company: Company Only read access;'           |
+		| 'Document.ProductionPlanningClosing Branch: Branch access deny;Company: Company Only read access;'                |
+		| 'Document.ProductionPlanningClosing Branch: Branch Read and Write Access;Company: Company access deny;'           |
+		| 'Document.ProductionPlanningClosing Branch: Branch Only read access;Company: Company access deny;'                |
+		| 'Document.ProductionPlanningClosing Branch: Branch access deny;Company: Company access deny;'                     |
+
 	
-		
-
-
-
 Scenario: 960046 check ProductionPlanningCorrection creation
 	And I close all client application windows
 	Given I open hyperlink "e1cib/list/Document.ProductionPlanningCorrection"
 	And "List" table became equal
-		| 'Number' | 'Company'                       | 'Business unit'                | 'Description'                                                                                                                                                   |
-		| '1'      | 'Company Read and Write Access' | 'Branch Read and Write Access' | 'Document.ProductionPlanningCorrection Branch: Branch Read and Write Access;Company: Company Read and Write Access;BusinessUnit: Branch Read and Write Access;' |
-		| '2'      | 'Company Read and Write Access' | 'Branch Read and Write Access' | 'Document.ProductionPlanningCorrection Branch: Branch Only read access;Company: Company Read and Write Access;BusinessUnit: Branch Read and Write Access;'      |
-		| '3'      | 'Company Read and Write Access' | 'Branch Read and Write Access' | 'Document.ProductionPlanningCorrection Branch: Branch access deny;Company: Company Read and Write Access;BusinessUnit: Branch Read and Write Access;'           |
-		| '4'      | 'Company Only read access'      | 'Branch Read and Write Access' | 'Document.ProductionPlanningCorrection Branch: Branch Read and Write Access;Company: Company Only read access;BusinessUnit: Branch Read and Write Access;'      |
-		| '5'      | 'Company Only read access'      | 'Branch Read and Write Access' | 'Document.ProductionPlanningCorrection Branch: Branch Only read access;Company: Company Only read access;BusinessUnit: Branch Read and Write Access;'           |
-		| '6'      | 'Company Only read access'      | 'Branch Read and Write Access' | 'Document.ProductionPlanningCorrection Branch: Branch access deny;Company: Company Only read access;BusinessUnit: Branch Read and Write Access;'                |
-		| '7'      | 'Company access deny'           | 'Branch Read and Write Access' | 'Document.ProductionPlanningCorrection Branch: Branch Read and Write Access;Company: Company access deny;BusinessUnit: Branch Read and Write Access;'           |
-		| '8'      | 'Company access deny'           | 'Branch Read and Write Access' | 'Document.ProductionPlanningCorrection Branch: Branch Only read access;Company: Company access deny;BusinessUnit: Branch Read and Write Access;'                |
-		| '9'      | 'Company access deny'           | 'Branch Read and Write Access' | 'Document.ProductionPlanningCorrection Branch: Branch access deny;Company: Company access deny;BusinessUnit: Branch Read and Write Access;'                     |
-		| '10'     | 'Company Read and Write Access' | 'Branch Only read access'      | 'Document.ProductionPlanningCorrection Branch: Branch Read and Write Access;Company: Company Read and Write Access;BusinessUnit: Branch Only read access;'      |
-		| '11'     | 'Company Read and Write Access' | 'Branch Only read access'      | 'Document.ProductionPlanningCorrection Branch: Branch Only read access;Company: Company Read and Write Access;BusinessUnit: Branch Only read access;'           |
-		| '12'     | 'Company Read and Write Access' | 'Branch Only read access'      | 'Document.ProductionPlanningCorrection Branch: Branch access deny;Company: Company Read and Write Access;BusinessUnit: Branch Only read access;'                |
-		| '13'     | 'Company Only read access'      | 'Branch Only read access'      | 'Document.ProductionPlanningCorrection Branch: Branch Read and Write Access;Company: Company Only read access;BusinessUnit: Branch Only read access;'           |
-		| '14'     | 'Company Only read access'      | 'Branch Only read access'      | 'Document.ProductionPlanningCorrection Branch: Branch Only read access;Company: Company Only read access;BusinessUnit: Branch Only read access;'                |
-		| '15'     | 'Company Only read access'      | 'Branch Only read access'      | 'Document.ProductionPlanningCorrection Branch: Branch access deny;Company: Company Only read access;BusinessUnit: Branch Only read access;'                     |
-		| '16'     | 'Company access deny'           | 'Branch Only read access'      | 'Document.ProductionPlanningCorrection Branch: Branch Read and Write Access;Company: Company access deny;BusinessUnit: Branch Only read access;'                |
-		| '17'     | 'Company access deny'           | 'Branch Only read access'      | 'Document.ProductionPlanningCorrection Branch: Branch Only read access;Company: Company access deny;BusinessUnit: Branch Only read access;'                     |
-		| '18'     | 'Company access deny'           | 'Branch Only read access'      | 'Document.ProductionPlanningCorrection Branch: Branch access deny;Company: Company access deny;BusinessUnit: Branch Only read access;'                          |
-		| '19'     | 'Company Read and Write Access' | 'Branch access deny'           | 'Document.ProductionPlanningCorrection Branch: Branch Read and Write Access;Company: Company Read and Write Access;BusinessUnit: Branch access deny;'           |
-		| '20'     | 'Company Read and Write Access' | 'Branch access deny'           | 'Document.ProductionPlanningCorrection Branch: Branch Only read access;Company: Company Read and Write Access;BusinessUnit: Branch access deny;'                |
-		| '21'     | 'Company Read and Write Access' | 'Branch access deny'           | 'Document.ProductionPlanningCorrection Branch: Branch access deny;Company: Company Read and Write Access;BusinessUnit: Branch access deny;'                     |
-		| '22'     | 'Company Only read access'      | 'Branch access deny'           | 'Document.ProductionPlanningCorrection Branch: Branch Read and Write Access;Company: Company Only read access;BusinessUnit: Branch access deny;'                |
-		| '23'     | 'Company Only read access'      | 'Branch access deny'           | 'Document.ProductionPlanningCorrection Branch: Branch Only read access;Company: Company Only read access;BusinessUnit: Branch access deny;'                     |
-		| '24'     | 'Company Only read access'      | 'Branch access deny'           | 'Document.ProductionPlanningCorrection Branch: Branch access deny;Company: Company Only read access;BusinessUnit: Branch access deny;'                          |
-		| '25'     | 'Company access deny'           | 'Branch access deny'           | 'Document.ProductionPlanningCorrection Branch: Branch Read and Write Access;Company: Company access deny;BusinessUnit: Branch access deny;'                     |
-		| '26'     | 'Company access deny'           | 'Branch access deny'           | 'Document.ProductionPlanningCorrection Branch: Branch Only read access;Company: Company access deny;BusinessUnit: Branch access deny;'                          |
-		| '27'     | 'Company access deny'           | 'Branch access deny'           | 'Document.ProductionPlanningCorrection Branch: Branch access deny;Company: Company access deny;BusinessUnit: Branch access deny;'                               |
+		| 'Description'                                                                                                        |
+		| 'Document.ProductionPlanningCorrection Branch: Branch Read and Write Access;Company: Company Read and Write Access;' |
+		| 'Document.ProductionPlanningCorrection Branch: Branch Only read access;Company: Company Read and Write Access;'      |
+		| 'Document.ProductionPlanningCorrection Branch: Branch access deny;Company: Company Read and Write Access;'           |
+		| 'Document.ProductionPlanningCorrection Branch: Branch Read and Write Access;Company: Company Only read access;'      |
+		| 'Document.ProductionPlanningCorrection Branch: Branch Only read access;Company: Company Only read access;'           |
+		| 'Document.ProductionPlanningCorrection Branch: Branch access deny;Company: Company Only read access;'                |
+		| 'Document.ProductionPlanningCorrection Branch: Branch Read and Write Access;Company: Company access deny;'           |
+		| 'Document.ProductionPlanningCorrection Branch: Branch Only read access;Company: Company access deny;'                |
+		| 'Document.ProductionPlanningCorrection Branch: Branch access deny;Company: Company access deny;'                     |
 	
-		
-
-
 
 Scenario: 960047 check PurchaseInvoice creation
 	And I close all client application windows
@@ -3434,16 +3822,16 @@ Scenario: 960072 check WorkOrderClosing creation
 	And I close all client application windows
 	Given I open hyperlink "e1cib/list/Document.WorkOrderClosing"
 	And "List" table became equal
-		| 'Number' | 'Company'                       | 'Branch'                       | 'Description'                                                                                            |
-		| '1'      | 'Company Read and Write Access' | 'Branch Read and Write Access' | 'Document.WorkOrderClosing Branch: Branch Read and Write Access;Company: Company Read and Write Access;' |
-		| '2'      | 'Company Read and Write Access' | 'Branch Only read access'      | 'Document.WorkOrderClosing Branch: Branch Only read access;Company: Company Read and Write Access;'      |
-		| '3'      | 'Company Read and Write Access' | 'Branch access deny'           | 'Document.WorkOrderClosing Branch: Branch access deny;Company: Company Read and Write Access;'           |
-		| '4'      | 'Company Only read access'      | 'Branch Read and Write Access' | 'Document.WorkOrderClosing Branch: Branch Read and Write Access;Company: Company Only read access;'      |
-		| '5'      | 'Company Only read access'      | 'Branch Only read access'      | 'Document.WorkOrderClosing Branch: Branch Only read access;Company: Company Only read access;'           |
-		| '6'      | 'Company Only read access'      | 'Branch access deny'           | 'Document.WorkOrderClosing Branch: Branch access deny;Company: Company Only read access;'                |
-		| '7'      | 'Company access deny'           | 'Branch Read and Write Access' | 'Document.WorkOrderClosing Branch: Branch Read and Write Access;Company: Company access deny;'           |
-		| '8'      | 'Company access deny'           | 'Branch Only read access'      | 'Document.WorkOrderClosing Branch: Branch Only read access;Company: Company access deny;'                |
-		| '9'      | 'Company access deny'           | 'Branch access deny'           | 'Document.WorkOrderClosing Branch: Branch access deny;Company: Company access deny;'                     |
+		| 'Description'                                                                                            |
+		| 'Document.WorkOrderClosing Branch: Branch Read and Write Access;Company: Company Read and Write Access;' |
+		| 'Document.WorkOrderClosing Branch: Branch Only read access;Company: Company Read and Write Access;'      |
+		| 'Document.WorkOrderClosing Branch: Branch access deny;Company: Company Read and Write Access;'           |
+		| 'Document.WorkOrderClosing Branch: Branch Read and Write Access;Company: Company Only read access;'      |
+		| 'Document.WorkOrderClosing Branch: Branch Only read access;Company: Company Only read access;'           |
+		| 'Document.WorkOrderClosing Branch: Branch access deny;Company: Company Only read access;'                |
+		| 'Document.WorkOrderClosing Branch: Branch Read and Write Access;Company: Company access deny;'           |
+		| 'Document.WorkOrderClosing Branch: Branch Only read access;Company: Company access deny;'                |
+		| 'Document.WorkOrderClosing Branch: Branch access deny;Company: Company access deny;'                     |
 	
 		
 
@@ -3451,1166 +3839,2162 @@ Scenario: 960073 check WorkSheet creation
 	And I close all client application windows
 	Given I open hyperlink "e1cib/list/Document.WorkSheet"
 	And "List" table became equal
-		| 'Number' | 'Company'                       | 'Branch'                       | 'Description'                                                                                     |
-		| '1'      | 'Company Read and Write Access' | 'Branch Read and Write Access' | 'Document.WorkSheet Branch: Branch Read and Write Access;Company: Company Read and Write Access;' |
-		| '2'      | 'Company Read and Write Access' | 'Branch Only read access'      | 'Document.WorkSheet Branch: Branch Only read access;Company: Company Read and Write Access;'      |
-		| '3'      | 'Company Read and Write Access' | 'Branch access deny'           | 'Document.WorkSheet Branch: Branch access deny;Company: Company Read and Write Access;'           |
-		| '4'      | 'Company Only read access'      | 'Branch Read and Write Access' | 'Document.WorkSheet Branch: Branch Read and Write Access;Company: Company Only read access;'      |
-		| '5'      | 'Company Only read access'      | 'Branch Only read access'      | 'Document.WorkSheet Branch: Branch Only read access;Company: Company Only read access;'           |
-		| '6'      | 'Company Only read access'      | 'Branch access deny'           | 'Document.WorkSheet Branch: Branch access deny;Company: Company Only read access;'                |
-		| '7'      | 'Company access deny'           | 'Branch Read and Write Access' | 'Document.WorkSheet Branch: Branch Read and Write Access;Company: Company access deny;'           |
-		| '8'      | 'Company access deny'           | 'Branch Only read access'      | 'Document.WorkSheet Branch: Branch Only read access;Company: Company access deny;'                |
-		| '9'      | 'Company access deny'           | 'Branch access deny'           | 'Document.WorkSheet Branch: Branch access deny;Company: Company access deny;'                     |
+		| 'Description'                                                                                     |
+		| 'Document.WorkSheet Branch: Branch Read and Write Access;Company: Company Read and Write Access;' |
+		| 'Document.WorkSheet Branch: Branch Only read access;Company: Company Read and Write Access;'      |
+		| 'Document.WorkSheet Branch: Branch access deny;Company: Company Read and Write Access;'           |
+		| 'Document.WorkSheet Branch: Branch Read and Write Access;Company: Company Only read access;'      |
+		| 'Document.WorkSheet Branch: Branch Only read access;Company: Company Only read access;'           |
+		| 'Document.WorkSheet Branch: Branch access deny;Company: Company Only read access;'                |
+		| 'Document.WorkSheet Branch: Branch Read and Write Access;Company: Company access deny;'           |
+		| 'Document.WorkSheet Branch: Branch Only read access;Company: Company access deny;'                |
+		| 'Document.WorkSheet Branch: Branch access deny;Company: Company access deny;'                     |
+
+Scenario: 960074 check CommissioningOfFixedAsset creation
+	And I close all client application windows
+	Given I open hyperlink "e1cib/list/Document.CommissioningOfFixedAsset"
+	And "List" table became equal
+		| 'Description'                                                                                                                                                                                |
+		| 'Document.CommissioningOfFixedAsset Branch: Branch Read and Write Access;Company: Company Read and Write Access;'                                                                            |
+		| 'Document.CommissioningOfFixedAsset Branch: Branch Read and Write Access;Company: Company Read and Write Access;Store: Store Read and Write Access'                                          |
+		| 'Document.CommissioningOfFixedAsset Branch: Branch Read and Write Access;Company: Company Read and Write Access;Store: Store Only read access'                                               |
+		| 'Document.CommissioningOfFixedAsset Branch: Branch Read and Write Access;Company: Company Read and Write Access;Store: Store access deny'                                                    |
+		| 'Document.CommissioningOfFixedAsset Branch: Branch Read and Write Access;Company: Company Read and Write Access;Store: Store Read and Write Access&Store Only read access'                   |
+		| 'Document.CommissioningOfFixedAsset Branch: Branch Read and Write Access;Company: Company Read and Write Access;Store: Store Only read access&Store access deny'                             |
+		| 'Document.CommissioningOfFixedAsset Branch: Branch Read and Write Access;Company: Company Read and Write Access;Store: Store Read and Write Access&Store access deny'                        |
+		| 'Document.CommissioningOfFixedAsset Branch: Branch Read and Write Access;Company: Company Read and Write Access;Store: Store Read and Write Access&Store Only read access&Store access deny' |
+		| 'Document.CommissioningOfFixedAsset Branch: Branch Only read access;Company: Company Read and Write Access;'                                                                                 |
+		| 'Document.CommissioningOfFixedAsset Branch: Branch Only read access;Company: Company Read and Write Access;Store: Store Read and Write Access'                                               |
+		| 'Document.CommissioningOfFixedAsset Branch: Branch Only read access;Company: Company Read and Write Access;Store: Store Only read access'                                                    |
+		| 'Document.CommissioningOfFixedAsset Branch: Branch Only read access;Company: Company Read and Write Access;Store: Store access deny'                                                         |
+		| 'Document.CommissioningOfFixedAsset Branch: Branch Only read access;Company: Company Read and Write Access;Store: Store Read and Write Access&Store Only read access'                        |
+		| 'Document.CommissioningOfFixedAsset Branch: Branch Only read access;Company: Company Read and Write Access;Store: Store Only read access&Store access deny'                                  |
+		| 'Document.CommissioningOfFixedAsset Branch: Branch Only read access;Company: Company Read and Write Access;Store: Store Read and Write Access&Store access deny'                             |
+		| 'Document.CommissioningOfFixedAsset Branch: Branch Only read access;Company: Company Read and Write Access;Store: Store Read and Write Access&Store Only read access&Store access deny'      |
+		| 'Document.CommissioningOfFixedAsset Branch: Branch access deny;Company: Company Read and Write Access;'                                                                                      |
+		| 'Document.CommissioningOfFixedAsset Branch: Branch access deny;Company: Company Read and Write Access;Store: Store Read and Write Access'                                                    |
+		| 'Document.CommissioningOfFixedAsset Branch: Branch access deny;Company: Company Read and Write Access;Store: Store Only read access'                                                         |
+		| 'Document.CommissioningOfFixedAsset Branch: Branch access deny;Company: Company Read and Write Access;Store: Store access deny'                                                              |
+		| 'Document.CommissioningOfFixedAsset Branch: Branch access deny;Company: Company Read and Write Access;Store: Store Read and Write Access&Store Only read access'                             |
+		| 'Document.CommissioningOfFixedAsset Branch: Branch access deny;Company: Company Read and Write Access;Store: Store Only read access&Store access deny'                                       |
+		| 'Document.CommissioningOfFixedAsset Branch: Branch access deny;Company: Company Read and Write Access;Store: Store Read and Write Access&Store access deny'                                  |
+		| 'Document.CommissioningOfFixedAsset Branch: Branch access deny;Company: Company Read and Write Access;Store: Store Read and Write Access&Store Only read access&Store access deny'           |
+		| 'Document.CommissioningOfFixedAsset Branch: Branch Read and Write Access;Company: Company Only read access;'                                                                                 |
+		| 'Document.CommissioningOfFixedAsset Branch: Branch Read and Write Access;Company: Company Only read access;Store: Store Read and Write Access'                                               |
+		| 'Document.CommissioningOfFixedAsset Branch: Branch Read and Write Access;Company: Company Only read access;Store: Store Only read access'                                                    |
+		| 'Document.CommissioningOfFixedAsset Branch: Branch Read and Write Access;Company: Company Only read access;Store: Store access deny'                                                         |
+		| 'Document.CommissioningOfFixedAsset Branch: Branch Read and Write Access;Company: Company Only read access;Store: Store Read and Write Access&Store Only read access'                        |
+		| 'Document.CommissioningOfFixedAsset Branch: Branch Read and Write Access;Company: Company Only read access;Store: Store Only read access&Store access deny'                                  |
+		| 'Document.CommissioningOfFixedAsset Branch: Branch Read and Write Access;Company: Company Only read access;Store: Store Read and Write Access&Store access deny'                             |
+		| 'Document.CommissioningOfFixedAsset Branch: Branch Read and Write Access;Company: Company Only read access;Store: Store Read and Write Access&Store Only read access&Store access deny'      |
+		| 'Document.CommissioningOfFixedAsset Branch: Branch Only read access;Company: Company Only read access;'                                                                                      |
+		| 'Document.CommissioningOfFixedAsset Branch: Branch Only read access;Company: Company Only read access;Store: Store Read and Write Access'                                                    |
+		| 'Document.CommissioningOfFixedAsset Branch: Branch Only read access;Company: Company Only read access;Store: Store Only read access'                                                         |
+		| 'Document.CommissioningOfFixedAsset Branch: Branch Only read access;Company: Company Only read access;Store: Store access deny'                                                              |
+		| 'Document.CommissioningOfFixedAsset Branch: Branch Only read access;Company: Company Only read access;Store: Store Read and Write Access&Store Only read access'                             |
+		| 'Document.CommissioningOfFixedAsset Branch: Branch Only read access;Company: Company Only read access;Store: Store Only read access&Store access deny'                                       |
+		| 'Document.CommissioningOfFixedAsset Branch: Branch Only read access;Company: Company Only read access;Store: Store Read and Write Access&Store access deny'                                  |
+		| 'Document.CommissioningOfFixedAsset Branch: Branch Only read access;Company: Company Only read access;Store: Store Read and Write Access&Store Only read access&Store access deny'           |
+		| 'Document.CommissioningOfFixedAsset Branch: Branch access deny;Company: Company Only read access;'                                                                                           |
+		| 'Document.CommissioningOfFixedAsset Branch: Branch access deny;Company: Company Only read access;Store: Store Read and Write Access'                                                         |
+		| 'Document.CommissioningOfFixedAsset Branch: Branch access deny;Company: Company Only read access;Store: Store Only read access'                                                              |
+		| 'Document.CommissioningOfFixedAsset Branch: Branch access deny;Company: Company Only read access;Store: Store access deny'                                                                   |
+		| 'Document.CommissioningOfFixedAsset Branch: Branch access deny;Company: Company Only read access;Store: Store Read and Write Access&Store Only read access'                                  |
+		| 'Document.CommissioningOfFixedAsset Branch: Branch access deny;Company: Company Only read access;Store: Store Only read access&Store access deny'                                            |
+		| 'Document.CommissioningOfFixedAsset Branch: Branch access deny;Company: Company Only read access;Store: Store Read and Write Access&Store access deny'                                       |
+		| 'Document.CommissioningOfFixedAsset Branch: Branch access deny;Company: Company Only read access;Store: Store Read and Write Access&Store Only read access&Store access deny'                |
+		| 'Document.CommissioningOfFixedAsset Branch: Branch Read and Write Access;Company: Company access deny;'                                                                                      |
+		| 'Document.CommissioningOfFixedAsset Branch: Branch Read and Write Access;Company: Company access deny;Store: Store Read and Write Access'                                                    |
+		| 'Document.CommissioningOfFixedAsset Branch: Branch Read and Write Access;Company: Company access deny;Store: Store Only read access'                                                         |
+		| 'Document.CommissioningOfFixedAsset Branch: Branch Read and Write Access;Company: Company access deny;Store: Store access deny'                                                              |
+		| 'Document.CommissioningOfFixedAsset Branch: Branch Read and Write Access;Company: Company access deny;Store: Store Read and Write Access&Store Only read access'                             |
+		| 'Document.CommissioningOfFixedAsset Branch: Branch Read and Write Access;Company: Company access deny;Store: Store Only read access&Store access deny'                                       |
+		| 'Document.CommissioningOfFixedAsset Branch: Branch Read and Write Access;Company: Company access deny;Store: Store Read and Write Access&Store access deny'                                  |
+		| 'Document.CommissioningOfFixedAsset Branch: Branch Read and Write Access;Company: Company access deny;Store: Store Read and Write Access&Store Only read access&Store access deny'           |
+		| 'Document.CommissioningOfFixedAsset Branch: Branch Only read access;Company: Company access deny;'                                                                                           |
+		| 'Document.CommissioningOfFixedAsset Branch: Branch Only read access;Company: Company access deny;Store: Store Read and Write Access'                                                         |
+		| 'Document.CommissioningOfFixedAsset Branch: Branch Only read access;Company: Company access deny;Store: Store Only read access'                                                              |
+		| 'Document.CommissioningOfFixedAsset Branch: Branch Only read access;Company: Company access deny;Store: Store access deny'                                                                   |
+		| 'Document.CommissioningOfFixedAsset Branch: Branch Only read access;Company: Company access deny;Store: Store Read and Write Access&Store Only read access'                                  |
+		| 'Document.CommissioningOfFixedAsset Branch: Branch Only read access;Company: Company access deny;Store: Store Only read access&Store access deny'                                            |
+		| 'Document.CommissioningOfFixedAsset Branch: Branch Only read access;Company: Company access deny;Store: Store Read and Write Access&Store access deny'                                       |
+		| 'Document.CommissioningOfFixedAsset Branch: Branch Only read access;Company: Company access deny;Store: Store Read and Write Access&Store Only read access&Store access deny'                |
+		| 'Document.CommissioningOfFixedAsset Branch: Branch access deny;Company: Company access deny;'                                                                                                |
+		| 'Document.CommissioningOfFixedAsset Branch: Branch access deny;Company: Company access deny;Store: Store Read and Write Access'                                                              |
+		| 'Document.CommissioningOfFixedAsset Branch: Branch access deny;Company: Company access deny;Store: Store Only read access'                                                                   |
+		| 'Document.CommissioningOfFixedAsset Branch: Branch access deny;Company: Company access deny;Store: Store access deny'                                                                        |
+		| 'Document.CommissioningOfFixedAsset Branch: Branch access deny;Company: Company access deny;Store: Store Read and Write Access&Store Only read access'                                       |
+		| 'Document.CommissioningOfFixedAsset Branch: Branch access deny;Company: Company access deny;Store: Store Only read access&Store access deny'                                                 |
+		| 'Document.CommissioningOfFixedAsset Branch: Branch access deny;Company: Company access deny;Store: Store Read and Write Access&Store access deny'                                            |
+		| 'Document.CommissioningOfFixedAsset Branch: Branch access deny;Company: Company access deny;Store: Store Read and Write Access&Store Only read access&Store access deny'                     |
 	
+		
+Scenario: 960075 check DecommissioningOfFixedAsset creation
+	And I close all client application windows
+	Given I open hyperlink "e1cib/list/Document.DecommissioningOfFixedAsset"
+	And "List" table became equal
+		| 'Description'                                                                                                                                                                                  |
+		| 'Document.DecommissioningOfFixedAsset Branch: Branch Read and Write Access;Company: Company Read and Write Access;'                                                                            |
+		| 'Document.DecommissioningOfFixedAsset Branch: Branch Read and Write Access;Company: Company Read and Write Access;Store: Store Read and Write Access'                                          |
+		| 'Document.DecommissioningOfFixedAsset Branch: Branch Read and Write Access;Company: Company Read and Write Access;Store: Store Only read access'                                               |
+		| 'Document.DecommissioningOfFixedAsset Branch: Branch Read and Write Access;Company: Company Read and Write Access;Store: Store access deny'                                                    |
+		| 'Document.DecommissioningOfFixedAsset Branch: Branch Read and Write Access;Company: Company Read and Write Access;Store: Store Read and Write Access&Store Only read access'                   |
+		| 'Document.DecommissioningOfFixedAsset Branch: Branch Read and Write Access;Company: Company Read and Write Access;Store: Store Only read access&Store access deny'                             |
+		| 'Document.DecommissioningOfFixedAsset Branch: Branch Read and Write Access;Company: Company Read and Write Access;Store: Store Read and Write Access&Store access deny'                        |
+		| 'Document.DecommissioningOfFixedAsset Branch: Branch Read and Write Access;Company: Company Read and Write Access;Store: Store Read and Write Access&Store Only read access&Store access deny' |
+		| 'Document.DecommissioningOfFixedAsset Branch: Branch Only read access;Company: Company Read and Write Access;'                                                                                 |
+		| 'Document.DecommissioningOfFixedAsset Branch: Branch Only read access;Company: Company Read and Write Access;Store: Store Read and Write Access'                                               |
+		| 'Document.DecommissioningOfFixedAsset Branch: Branch Only read access;Company: Company Read and Write Access;Store: Store Only read access'                                                    |
+		| 'Document.DecommissioningOfFixedAsset Branch: Branch Only read access;Company: Company Read and Write Access;Store: Store access deny'                                                         |
+		| 'Document.DecommissioningOfFixedAsset Branch: Branch Only read access;Company: Company Read and Write Access;Store: Store Read and Write Access&Store Only read access'                        |
+		| 'Document.DecommissioningOfFixedAsset Branch: Branch Only read access;Company: Company Read and Write Access;Store: Store Only read access&Store access deny'                                  |
+		| 'Document.DecommissioningOfFixedAsset Branch: Branch Only read access;Company: Company Read and Write Access;Store: Store Read and Write Access&Store access deny'                             |
+		| 'Document.DecommissioningOfFixedAsset Branch: Branch Only read access;Company: Company Read and Write Access;Store: Store Read and Write Access&Store Only read access&Store access deny'      |
+		| 'Document.DecommissioningOfFixedAsset Branch: Branch access deny;Company: Company Read and Write Access;'                                                                                      |
+		| 'Document.DecommissioningOfFixedAsset Branch: Branch access deny;Company: Company Read and Write Access;Store: Store Read and Write Access'                                                    |
+		| 'Document.DecommissioningOfFixedAsset Branch: Branch access deny;Company: Company Read and Write Access;Store: Store Only read access'                                                         |
+		| 'Document.DecommissioningOfFixedAsset Branch: Branch access deny;Company: Company Read and Write Access;Store: Store access deny'                                                              |
+		| 'Document.DecommissioningOfFixedAsset Branch: Branch access deny;Company: Company Read and Write Access;Store: Store Read and Write Access&Store Only read access'                             |
+		| 'Document.DecommissioningOfFixedAsset Branch: Branch access deny;Company: Company Read and Write Access;Store: Store Only read access&Store access deny'                                       |
+		| 'Document.DecommissioningOfFixedAsset Branch: Branch access deny;Company: Company Read and Write Access;Store: Store Read and Write Access&Store access deny'                                  |
+		| 'Document.DecommissioningOfFixedAsset Branch: Branch access deny;Company: Company Read and Write Access;Store: Store Read and Write Access&Store Only read access&Store access deny'           |
+		| 'Document.DecommissioningOfFixedAsset Branch: Branch Read and Write Access;Company: Company Only read access;'                                                                                 |
+		| 'Document.DecommissioningOfFixedAsset Branch: Branch Read and Write Access;Company: Company Only read access;Store: Store Read and Write Access'                                               |
+		| 'Document.DecommissioningOfFixedAsset Branch: Branch Read and Write Access;Company: Company Only read access;Store: Store Only read access'                                                    |
+		| 'Document.DecommissioningOfFixedAsset Branch: Branch Read and Write Access;Company: Company Only read access;Store: Store access deny'                                                         |
+		| 'Document.DecommissioningOfFixedAsset Branch: Branch Read and Write Access;Company: Company Only read access;Store: Store Read and Write Access&Store Only read access'                        |
+		| 'Document.DecommissioningOfFixedAsset Branch: Branch Read and Write Access;Company: Company Only read access;Store: Store Only read access&Store access deny'                                  |
+		| 'Document.DecommissioningOfFixedAsset Branch: Branch Read and Write Access;Company: Company Only read access;Store: Store Read and Write Access&Store access deny'                             |
+		| 'Document.DecommissioningOfFixedAsset Branch: Branch Read and Write Access;Company: Company Only read access;Store: Store Read and Write Access&Store Only read access&Store access deny'      |
+		| 'Document.DecommissioningOfFixedAsset Branch: Branch Only read access;Company: Company Only read access;'                                                                                      |
+		| 'Document.DecommissioningOfFixedAsset Branch: Branch Only read access;Company: Company Only read access;Store: Store Read and Write Access'                                                    |
+		| 'Document.DecommissioningOfFixedAsset Branch: Branch Only read access;Company: Company Only read access;Store: Store Only read access'                                                         |
+		| 'Document.DecommissioningOfFixedAsset Branch: Branch Only read access;Company: Company Only read access;Store: Store access deny'                                                              |
+		| 'Document.DecommissioningOfFixedAsset Branch: Branch Only read access;Company: Company Only read access;Store: Store Read and Write Access&Store Only read access'                             |
+		| 'Document.DecommissioningOfFixedAsset Branch: Branch Only read access;Company: Company Only read access;Store: Store Only read access&Store access deny'                                       |
+		| 'Document.DecommissioningOfFixedAsset Branch: Branch Only read access;Company: Company Only read access;Store: Store Read and Write Access&Store access deny'                                  |
+		| 'Document.DecommissioningOfFixedAsset Branch: Branch Only read access;Company: Company Only read access;Store: Store Read and Write Access&Store Only read access&Store access deny'           |
+		| 'Document.DecommissioningOfFixedAsset Branch: Branch access deny;Company: Company Only read access;'                                                                                           |
+		| 'Document.DecommissioningOfFixedAsset Branch: Branch access deny;Company: Company Only read access;Store: Store Read and Write Access'                                                         |
+		| 'Document.DecommissioningOfFixedAsset Branch: Branch access deny;Company: Company Only read access;Store: Store Only read access'                                                              |
+		| 'Document.DecommissioningOfFixedAsset Branch: Branch access deny;Company: Company Only read access;Store: Store access deny'                                                                   |
+		| 'Document.DecommissioningOfFixedAsset Branch: Branch access deny;Company: Company Only read access;Store: Store Read and Write Access&Store Only read access'                                  |
+		| 'Document.DecommissioningOfFixedAsset Branch: Branch access deny;Company: Company Only read access;Store: Store Only read access&Store access deny'                                            |
+		| 'Document.DecommissioningOfFixedAsset Branch: Branch access deny;Company: Company Only read access;Store: Store Read and Write Access&Store access deny'                                       |
+		| 'Document.DecommissioningOfFixedAsset Branch: Branch access deny;Company: Company Only read access;Store: Store Read and Write Access&Store Only read access&Store access deny'                |
+		| 'Document.DecommissioningOfFixedAsset Branch: Branch Read and Write Access;Company: Company access deny;'                                                                                      |
+		| 'Document.DecommissioningOfFixedAsset Branch: Branch Read and Write Access;Company: Company access deny;Store: Store Read and Write Access'                                                    |
+		| 'Document.DecommissioningOfFixedAsset Branch: Branch Read and Write Access;Company: Company access deny;Store: Store Only read access'                                                         |
+		| 'Document.DecommissioningOfFixedAsset Branch: Branch Read and Write Access;Company: Company access deny;Store: Store access deny'                                                              |
+		| 'Document.DecommissioningOfFixedAsset Branch: Branch Read and Write Access;Company: Company access deny;Store: Store Read and Write Access&Store Only read access'                             |
+		| 'Document.DecommissioningOfFixedAsset Branch: Branch Read and Write Access;Company: Company access deny;Store: Store Only read access&Store access deny'                                       |
+		| 'Document.DecommissioningOfFixedAsset Branch: Branch Read and Write Access;Company: Company access deny;Store: Store Read and Write Access&Store access deny'                                  |
+		| 'Document.DecommissioningOfFixedAsset Branch: Branch Read and Write Access;Company: Company access deny;Store: Store Read and Write Access&Store Only read access&Store access deny'           |
+		| 'Document.DecommissioningOfFixedAsset Branch: Branch Only read access;Company: Company access deny;'                                                                                           |
+		| 'Document.DecommissioningOfFixedAsset Branch: Branch Only read access;Company: Company access deny;Store: Store Read and Write Access'                                                         |
+		| 'Document.DecommissioningOfFixedAsset Branch: Branch Only read access;Company: Company access deny;Store: Store Only read access'                                                              |
+		| 'Document.DecommissioningOfFixedAsset Branch: Branch Only read access;Company: Company access deny;Store: Store access deny'                                                                   |
+		| 'Document.DecommissioningOfFixedAsset Branch: Branch Only read access;Company: Company access deny;Store: Store Read and Write Access&Store Only read access'                                  |
+		| 'Document.DecommissioningOfFixedAsset Branch: Branch Only read access;Company: Company access deny;Store: Store Only read access&Store access deny'                                            |
+		| 'Document.DecommissioningOfFixedAsset Branch: Branch Only read access;Company: Company access deny;Store: Store Read and Write Access&Store access deny'                                       |
+		| 'Document.DecommissioningOfFixedAsset Branch: Branch Only read access;Company: Company access deny;Store: Store Read and Write Access&Store Only read access&Store access deny'                |
+		| 'Document.DecommissioningOfFixedAsset Branch: Branch access deny;Company: Company access deny;'                                                                                                |
+		| 'Document.DecommissioningOfFixedAsset Branch: Branch access deny;Company: Company access deny;Store: Store Read and Write Access'                                                              |
+		| 'Document.DecommissioningOfFixedAsset Branch: Branch access deny;Company: Company access deny;Store: Store Only read access'                                                                   |
+		| 'Document.DecommissioningOfFixedAsset Branch: Branch access deny;Company: Company access deny;Store: Store access deny'                                                                        |
+		| 'Document.DecommissioningOfFixedAsset Branch: Branch access deny;Company: Company access deny;Store: Store Read and Write Access&Store Only read access'                                       |
+		| 'Document.DecommissioningOfFixedAsset Branch: Branch access deny;Company: Company access deny;Store: Store Only read access&Store access deny'                                                 |
+		| 'Document.DecommissioningOfFixedAsset Branch: Branch access deny;Company: Company access deny;Store: Store Read and Write Access&Store access deny'                                            |
+		| 'Document.DecommissioningOfFixedAsset Branch: Branch access deny;Company: Company access deny;Store: Store Read and Write Access&Store Only read access&Store access deny'                     |
+	
+Scenario: 960076 check FixedAssetTransfer creation
+	And I close all client application windows
+	Given I open hyperlink "e1cib/list/Document.FixedAssetTransfer"
+	And "List" table became equal
+		| 'Description'                                                                                              |
+		| 'Document.FixedAssetTransfer Branch: Branch Read and Write Access;Company: Company Read and Write Access;' |
+		| 'Document.FixedAssetTransfer Branch: Branch Only read access;Company: Company Read and Write Access;'      |
+		| 'Document.FixedAssetTransfer Branch: Branch access deny;Company: Company Read and Write Access;'           |
+		| 'Document.FixedAssetTransfer Branch: Branch Read and Write Access;Company: Company Only read access;'      |
+		| 'Document.FixedAssetTransfer Branch: Branch Only read access;Company: Company Only read access;'           |
+		| 'Document.FixedAssetTransfer Branch: Branch access deny;Company: Company Only read access;'                |
+		| 'Document.FixedAssetTransfer Branch: Branch Read and Write Access;Company: Company access deny;'           |
+		| 'Document.FixedAssetTransfer Branch: Branch Only read access;Company: Company access deny;'                |
+		| 'Document.FixedAssetTransfer Branch: Branch access deny;Company: Company access deny;'                     |
+	
+		
+Scenario: 960077 check ModernizationOfFixedAsset creation
+	And I close all client application windows
+	Given I open hyperlink "e1cib/list/Document.ModernizationOfFixedAsset"
+	And "List" table became equal
+		| 'Description'                                                                                                                                                                                |
+		| 'Document.ModernizationOfFixedAsset Branch: Branch Read and Write Access;Company: Company Read and Write Access;'                                                                            |
+		| 'Document.ModernizationOfFixedAsset Branch: Branch Read and Write Access;Company: Company Read and Write Access;Store: Store Read and Write Access'                                          |
+		| 'Document.ModernizationOfFixedAsset Branch: Branch Read and Write Access;Company: Company Read and Write Access;Store: Store Only read access'                                               |
+		| 'Document.ModernizationOfFixedAsset Branch: Branch Read and Write Access;Company: Company Read and Write Access;Store: Store access deny'                                                    |
+		| 'Document.ModernizationOfFixedAsset Branch: Branch Read and Write Access;Company: Company Read and Write Access;Store: Store Read and Write Access&Store Only read access'                   |
+		| 'Document.ModernizationOfFixedAsset Branch: Branch Read and Write Access;Company: Company Read and Write Access;Store: Store Only read access&Store access deny'                             |
+		| 'Document.ModernizationOfFixedAsset Branch: Branch Read and Write Access;Company: Company Read and Write Access;Store: Store Read and Write Access&Store access deny'                        |
+		| 'Document.ModernizationOfFixedAsset Branch: Branch Read and Write Access;Company: Company Read and Write Access;Store: Store Read and Write Access&Store Only read access&Store access deny' |
+		| 'Document.ModernizationOfFixedAsset Branch: Branch Only read access;Company: Company Read and Write Access;'                                                                                 |
+		| 'Document.ModernizationOfFixedAsset Branch: Branch Only read access;Company: Company Read and Write Access;Store: Store Read and Write Access'                                               |
+		| 'Document.ModernizationOfFixedAsset Branch: Branch Only read access;Company: Company Read and Write Access;Store: Store Only read access'                                                    |
+		| 'Document.ModernizationOfFixedAsset Branch: Branch Only read access;Company: Company Read and Write Access;Store: Store access deny'                                                         |
+		| 'Document.ModernizationOfFixedAsset Branch: Branch Only read access;Company: Company Read and Write Access;Store: Store Read and Write Access&Store Only read access'                        |
+		| 'Document.ModernizationOfFixedAsset Branch: Branch Only read access;Company: Company Read and Write Access;Store: Store Only read access&Store access deny'                                  |
+		| 'Document.ModernizationOfFixedAsset Branch: Branch Only read access;Company: Company Read and Write Access;Store: Store Read and Write Access&Store access deny'                             |
+		| 'Document.ModernizationOfFixedAsset Branch: Branch Only read access;Company: Company Read and Write Access;Store: Store Read and Write Access&Store Only read access&Store access deny'      |
+		| 'Document.ModernizationOfFixedAsset Branch: Branch access deny;Company: Company Read and Write Access;'                                                                                      |
+		| 'Document.ModernizationOfFixedAsset Branch: Branch access deny;Company: Company Read and Write Access;Store: Store Read and Write Access'                                                    |
+		| 'Document.ModernizationOfFixedAsset Branch: Branch access deny;Company: Company Read and Write Access;Store: Store Only read access'                                                         |
+		| 'Document.ModernizationOfFixedAsset Branch: Branch access deny;Company: Company Read and Write Access;Store: Store access deny'                                                              |
+		| 'Document.ModernizationOfFixedAsset Branch: Branch access deny;Company: Company Read and Write Access;Store: Store Read and Write Access&Store Only read access'                             |
+		| 'Document.ModernizationOfFixedAsset Branch: Branch access deny;Company: Company Read and Write Access;Store: Store Only read access&Store access deny'                                       |
+		| 'Document.ModernizationOfFixedAsset Branch: Branch access deny;Company: Company Read and Write Access;Store: Store Read and Write Access&Store access deny'                                  |
+		| 'Document.ModernizationOfFixedAsset Branch: Branch access deny;Company: Company Read and Write Access;Store: Store Read and Write Access&Store Only read access&Store access deny'           |
+		| 'Document.ModernizationOfFixedAsset Branch: Branch Read and Write Access;Company: Company Only read access;'                                                                                 |
+		| 'Document.ModernizationOfFixedAsset Branch: Branch Read and Write Access;Company: Company Only read access;Store: Store Read and Write Access'                                               |
+		| 'Document.ModernizationOfFixedAsset Branch: Branch Read and Write Access;Company: Company Only read access;Store: Store Only read access'                                                    |
+		| 'Document.ModernizationOfFixedAsset Branch: Branch Read and Write Access;Company: Company Only read access;Store: Store access deny'                                                         |
+		| 'Document.ModernizationOfFixedAsset Branch: Branch Read and Write Access;Company: Company Only read access;Store: Store Read and Write Access&Store Only read access'                        |
+		| 'Document.ModernizationOfFixedAsset Branch: Branch Read and Write Access;Company: Company Only read access;Store: Store Only read access&Store access deny'                                  |
+		| 'Document.ModernizationOfFixedAsset Branch: Branch Read and Write Access;Company: Company Only read access;Store: Store Read and Write Access&Store access deny'                             |
+		| 'Document.ModernizationOfFixedAsset Branch: Branch Read and Write Access;Company: Company Only read access;Store: Store Read and Write Access&Store Only read access&Store access deny'      |
+		| 'Document.ModernizationOfFixedAsset Branch: Branch Only read access;Company: Company Only read access;'                                                                                      |
+		| 'Document.ModernizationOfFixedAsset Branch: Branch Only read access;Company: Company Only read access;Store: Store Read and Write Access'                                                    |
+		| 'Document.ModernizationOfFixedAsset Branch: Branch Only read access;Company: Company Only read access;Store: Store Only read access'                                                         |
+		| 'Document.ModernizationOfFixedAsset Branch: Branch Only read access;Company: Company Only read access;Store: Store access deny'                                                              |
+		| 'Document.ModernizationOfFixedAsset Branch: Branch Only read access;Company: Company Only read access;Store: Store Read and Write Access&Store Only read access'                             |
+		| 'Document.ModernizationOfFixedAsset Branch: Branch Only read access;Company: Company Only read access;Store: Store Only read access&Store access deny'                                       |
+		| 'Document.ModernizationOfFixedAsset Branch: Branch Only read access;Company: Company Only read access;Store: Store Read and Write Access&Store access deny'                                  |
+		| 'Document.ModernizationOfFixedAsset Branch: Branch Only read access;Company: Company Only read access;Store: Store Read and Write Access&Store Only read access&Store access deny'           |
+		| 'Document.ModernizationOfFixedAsset Branch: Branch access deny;Company: Company Only read access;'                                                                                           |
+		| 'Document.ModernizationOfFixedAsset Branch: Branch access deny;Company: Company Only read access;Store: Store Read and Write Access'                                                         |
+		| 'Document.ModernizationOfFixedAsset Branch: Branch access deny;Company: Company Only read access;Store: Store Only read access'                                                              |
+		| 'Document.ModernizationOfFixedAsset Branch: Branch access deny;Company: Company Only read access;Store: Store access deny'                                                                   |
+		| 'Document.ModernizationOfFixedAsset Branch: Branch access deny;Company: Company Only read access;Store: Store Read and Write Access&Store Only read access'                                  |
+		| 'Document.ModernizationOfFixedAsset Branch: Branch access deny;Company: Company Only read access;Store: Store Only read access&Store access deny'                                            |
+		| 'Document.ModernizationOfFixedAsset Branch: Branch access deny;Company: Company Only read access;Store: Store Read and Write Access&Store access deny'                                       |
+		| 'Document.ModernizationOfFixedAsset Branch: Branch access deny;Company: Company Only read access;Store: Store Read and Write Access&Store Only read access&Store access deny'                |
+		| 'Document.ModernizationOfFixedAsset Branch: Branch Read and Write Access;Company: Company access deny;'                                                                                      |
+		| 'Document.ModernizationOfFixedAsset Branch: Branch Read and Write Access;Company: Company access deny;Store: Store Read and Write Access'                                                    |
+		| 'Document.ModernizationOfFixedAsset Branch: Branch Read and Write Access;Company: Company access deny;Store: Store Only read access'                                                         |
+		| 'Document.ModernizationOfFixedAsset Branch: Branch Read and Write Access;Company: Company access deny;Store: Store access deny'                                                              |
+		| 'Document.ModernizationOfFixedAsset Branch: Branch Read and Write Access;Company: Company access deny;Store: Store Read and Write Access&Store Only read access'                             |
+		| 'Document.ModernizationOfFixedAsset Branch: Branch Read and Write Access;Company: Company access deny;Store: Store Only read access&Store access deny'                                       |
+		| 'Document.ModernizationOfFixedAsset Branch: Branch Read and Write Access;Company: Company access deny;Store: Store Read and Write Access&Store access deny'                                  |
+		| 'Document.ModernizationOfFixedAsset Branch: Branch Read and Write Access;Company: Company access deny;Store: Store Read and Write Access&Store Only read access&Store access deny'           |
+		| 'Document.ModernizationOfFixedAsset Branch: Branch Only read access;Company: Company access deny;'                                                                                           |
+		| 'Document.ModernizationOfFixedAsset Branch: Branch Only read access;Company: Company access deny;Store: Store Read and Write Access'                                                         |
+		| 'Document.ModernizationOfFixedAsset Branch: Branch Only read access;Company: Company access deny;Store: Store Only read access'                                                              |
+		| 'Document.ModernizationOfFixedAsset Branch: Branch Only read access;Company: Company access deny;Store: Store access deny'                                                                   |
+		| 'Document.ModernizationOfFixedAsset Branch: Branch Only read access;Company: Company access deny;Store: Store Read and Write Access&Store Only read access'                                  |
+		| 'Document.ModernizationOfFixedAsset Branch: Branch Only read access;Company: Company access deny;Store: Store Only read access&Store access deny'                                            |
+		| 'Document.ModernizationOfFixedAsset Branch: Branch Only read access;Company: Company access deny;Store: Store Read and Write Access&Store access deny'                                       |
+		| 'Document.ModernizationOfFixedAsset Branch: Branch Only read access;Company: Company access deny;Store: Store Read and Write Access&Store Only read access&Store access deny'                |
+		| 'Document.ModernizationOfFixedAsset Branch: Branch access deny;Company: Company access deny;'                                                                                                |
+		| 'Document.ModernizationOfFixedAsset Branch: Branch access deny;Company: Company access deny;Store: Store Read and Write Access'                                                              |
+		| 'Document.ModernizationOfFixedAsset Branch: Branch access deny;Company: Company access deny;Store: Store Only read access'                                                                   |
+		| 'Document.ModernizationOfFixedAsset Branch: Branch access deny;Company: Company access deny;Store: Store access deny'                                                                        |
+		| 'Document.ModernizationOfFixedAsset Branch: Branch access deny;Company: Company access deny;Store: Store Read and Write Access&Store Only read access'                                       |
+		| 'Document.ModernizationOfFixedAsset Branch: Branch access deny;Company: Company access deny;Store: Store Only read access&Store access deny'                                                 |
+		| 'Document.ModernizationOfFixedAsset Branch: Branch access deny;Company: Company access deny;Store: Store Read and Write Access&Store access deny'                                            |
+		| 'Document.ModernizationOfFixedAsset Branch: Branch access deny;Company: Company access deny;Store: Store Read and Write Access&Store Only read access&Store access deny'                     |
+					
 		
 Scenario: 960090 check sales order access rights (LimitedAccess)
 	And I close all client application windows
 	And I connect "TestAdmin" TestClient using "LimitedAccess" login and "" password
 	Given I open hyperlink "e1cib/list/Document.SalesOrder"
 	And "List" table became equal
-		| 'Number' | 'Company'                       | 'Store'                       | 'Description'                                                                                                                                               |
-		| '1'      | 'Company Read and Write Access' | ''                            | 'Document.SalesOrder Branch: Branch Read and Write Access;Company: Company Read and Write Access;'                                                          |
-		| '2'      | 'Company Read and Write Access' | 'Store Read and Write Access' | 'Document.SalesOrder Branch: Branch Read and Write Access;Company: Company Read and Write Access;Store: Store Read and Write Access'                        |
-		| '3'      | 'Company Read and Write Access' | 'Store Only read access'      | 'Document.SalesOrder Branch: Branch Read and Write Access;Company: Company Read and Write Access;Store: Store Only read access'                             |
-		| '5'      | 'Company Read and Write Access' | ''                            | 'Document.SalesOrder Branch: Branch Read and Write Access;Company: Company Read and Write Access;Store: Store Read and Write Access&Store Only read access' |
-		| '9'      | 'Company Read and Write Access' | ''                            | 'Document.SalesOrder Branch: Branch Only read access;Company: Company Read and Write Access;'                                                               |
-		| '10'     | 'Company Read and Write Access' | 'Store Read and Write Access' | 'Document.SalesOrder Branch: Branch Only read access;Company: Company Read and Write Access;Store: Store Read and Write Access'                             |
-		| '11'     | 'Company Read and Write Access' | 'Store Only read access'      | 'Document.SalesOrder Branch: Branch Only read access;Company: Company Read and Write Access;Store: Store Only read access'                                  |
-		| '13'     | 'Company Read and Write Access' | ''                            | 'Document.SalesOrder Branch: Branch Only read access;Company: Company Read and Write Access;Store: Store Read and Write Access&Store Only read access'      |
-		| '25'     | 'Company Only read access'      | ''                            | 'Document.SalesOrder Branch: Branch Read and Write Access;Company: Company Only read access;'                                                               |
-		| '26'     | 'Company Only read access'      | 'Store Read and Write Access' | 'Document.SalesOrder Branch: Branch Read and Write Access;Company: Company Only read access;Store: Store Read and Write Access'                             |
-		| '27'     | 'Company Only read access'      | 'Store Only read access'      | 'Document.SalesOrder Branch: Branch Read and Write Access;Company: Company Only read access;Store: Store Only read access'                                  |
-		| '29'     | 'Company Only read access'      | ''                            | 'Document.SalesOrder Branch: Branch Read and Write Access;Company: Company Only read access;Store: Store Read and Write Access&Store Only read access'      |
-		| '33'     | 'Company Only read access'      | ''                            | 'Document.SalesOrder Branch: Branch Only read access;Company: Company Only read access;'                                                                    |
-		| '34'     | 'Company Only read access'      | 'Store Read and Write Access' | 'Document.SalesOrder Branch: Branch Only read access;Company: Company Only read access;Store: Store Read and Write Access'                                  |
-		| '35'     | 'Company Only read access'      | 'Store Only read access'      | 'Document.SalesOrder Branch: Branch Only read access;Company: Company Only read access;Store: Store Only read access'                                       |
-		| '37'     | 'Company Only read access'      | ''                            | 'Document.SalesOrder Branch: Branch Only read access;Company: Company Only read access;Store: Store Read and Write Access&Store Only read access'           |
+		| 'Description'                                                                                                                                                                 |
+		| 'Document.SalesOrder Branch: Branch Read and Write Access;Company: Company Read and Write Access;Store: Store Read and Write Access'                                          |
+		| 'Document.SalesOrder Branch: Branch Read and Write Access;Company: Company Read and Write Access;Store: Store Only read access'                                               |
+		| 'Document.SalesOrder Branch: Branch Read and Write Access;Company: Company Read and Write Access;Store: Store Read and Write Access&Store Only read access'                   |
+		| 'Document.SalesOrder Branch: Branch Read and Write Access;Company: Company Read and Write Access;Store: Store Only read access&Store access deny'                             |
+		| 'Document.SalesOrder Branch: Branch Read and Write Access;Company: Company Read and Write Access;Store: Store Read and Write Access&Store access deny'                        |
+		| 'Document.SalesOrder Branch: Branch Read and Write Access;Company: Company Read and Write Access;Store: Store Read and Write Access&Store Only read access&Store access deny' |
+		| 'Document.SalesOrder Branch: Branch Only read access;Company: Company Read and Write Access;Store: Store Read and Write Access'                                               |
+		| 'Document.SalesOrder Branch: Branch Only read access;Company: Company Read and Write Access;Store: Store Only read access'                                                    |
+		| 'Document.SalesOrder Branch: Branch Only read access;Company: Company Read and Write Access;Store: Store Read and Write Access&Store Only read access'                        |
+		| 'Document.SalesOrder Branch: Branch Only read access;Company: Company Read and Write Access;Store: Store Only read access&Store access deny'                                  |
+		| 'Document.SalesOrder Branch: Branch Only read access;Company: Company Read and Write Access;Store: Store Read and Write Access&Store access deny'                             |
+		| 'Document.SalesOrder Branch: Branch Only read access;Company: Company Read and Write Access;Store: Store Read and Write Access&Store Only read access&Store access deny'      |
+		| 'Document.SalesOrder Branch: Branch Read and Write Access;Company: Company Only read access;Store: Store Read and Write Access'                                               |
+		| 'Document.SalesOrder Branch: Branch Read and Write Access;Company: Company Only read access;Store: Store Only read access'                                                    |
+		| 'Document.SalesOrder Branch: Branch Read and Write Access;Company: Company Only read access;Store: Store Read and Write Access&Store Only read access'                        |
+		| 'Document.SalesOrder Branch: Branch Read and Write Access;Company: Company Only read access;Store: Store Only read access&Store access deny'                                  |
+		| 'Document.SalesOrder Branch: Branch Read and Write Access;Company: Company Only read access;Store: Store Read and Write Access&Store access deny'                             |
+		| 'Document.SalesOrder Branch: Branch Read and Write Access;Company: Company Only read access;Store: Store Read and Write Access&Store Only read access&Store access deny'      |
+		| 'Document.SalesOrder Branch: Branch Only read access;Company: Company Only read access;Store: Store Read and Write Access'                                                    |
+		| 'Document.SalesOrder Branch: Branch Only read access;Company: Company Only read access;Store: Store Only read access'                                                         |
+		| 'Document.SalesOrder Branch: Branch Only read access;Company: Company Only read access;Store: Store Read and Write Access&Store Only read access'                             |
+		| 'Document.SalesOrder Branch: Branch Only read access;Company: Company Only read access;Store: Store Only read access&Store access deny'                                       |
+		| 'Document.SalesOrder Branch: Branch Only read access;Company: Company Only read access;Store: Store Read and Write Access&Store access deny'                                  |
+		| 'Document.SalesOrder Branch: Branch Only read access;Company: Company Only read access;Store: Store Read and Write Access&Store Only read access&Store access deny'           |
 	
+		
 Scenario: 960091 check AdditionalCostAllocation access rights (LimitedAccess)
 	And I close all client application windows
 	Given I open hyperlink "e1cib/list/Document.AdditionalCostAllocation"	
 	And "List" table became equal
-		| 'Number' | 'Company'                       | 'Description'                                                                                                                                                             |
-		| '1'      | 'Company Read and Write Access' | 'Document.AdditionalCostAllocation Branch: Branch Read and Write Access;Company: Company Read and Write Access;'                                                          |
-		| '2'      | 'Company Read and Write Access' | 'Document.AdditionalCostAllocation Branch: Branch Read and Write Access;Company: Company Read and Write Access;Store: Store Read and Write Access'                        |
-		| '3'      | 'Company Read and Write Access' | 'Document.AdditionalCostAllocation Branch: Branch Read and Write Access;Company: Company Read and Write Access;Store: Store Only read access'                             |
-		| '5'      | 'Company Read and Write Access' | 'Document.AdditionalCostAllocation Branch: Branch Read and Write Access;Company: Company Read and Write Access;Store: Store Read and Write Access&Store Only read access' |
-		| '9'      | 'Company Read and Write Access' | 'Document.AdditionalCostAllocation Branch: Branch Only read access;Company: Company Read and Write Access;'                                                               |
-		| '10'     | 'Company Read and Write Access' | 'Document.AdditionalCostAllocation Branch: Branch Only read access;Company: Company Read and Write Access;Store: Store Read and Write Access'                             |
-		| '11'     | 'Company Read and Write Access' | 'Document.AdditionalCostAllocation Branch: Branch Only read access;Company: Company Read and Write Access;Store: Store Only read access'                                  |
-		| '13'     | 'Company Read and Write Access' | 'Document.AdditionalCostAllocation Branch: Branch Only read access;Company: Company Read and Write Access;Store: Store Read and Write Access&Store Only read access'      |
-		| '25'     | 'Company Only read access'      | 'Document.AdditionalCostAllocation Branch: Branch Read and Write Access;Company: Company Only read access;'                                                               |
-		| '26'     | 'Company Only read access'      | 'Document.AdditionalCostAllocation Branch: Branch Read and Write Access;Company: Company Only read access;Store: Store Read and Write Access'                             |
-		| '27'     | 'Company Only read access'      | 'Document.AdditionalCostAllocation Branch: Branch Read and Write Access;Company: Company Only read access;Store: Store Only read access'                                  |
-		| '29'     | 'Company Only read access'      | 'Document.AdditionalCostAllocation Branch: Branch Read and Write Access;Company: Company Only read access;Store: Store Read and Write Access&Store Only read access'      |
-		| '33'     | 'Company Only read access'      | 'Document.AdditionalCostAllocation Branch: Branch Only read access;Company: Company Only read access;'                                                                    |
-		| '34'     | 'Company Only read access'      | 'Document.AdditionalCostAllocation Branch: Branch Only read access;Company: Company Only read access;Store: Store Read and Write Access'                                  |
-		| '35'     | 'Company Only read access'      | 'Document.AdditionalCostAllocation Branch: Branch Only read access;Company: Company Only read access;Store: Store Only read access'                                       |
-		| '37'     | 'Company Only read access'      | 'Document.AdditionalCostAllocation Branch: Branch Only read access;Company: Company Only read access;Store: Store Read and Write Access&Store Only read access'           |
+		| 'Description'                                                                                                                                                                               |
+		| 'Document.AdditionalCostAllocation Branch: Branch Read and Write Access;Company: Company Read and Write Access;'                                                                            |
+		| 'Document.AdditionalCostAllocation Branch: Branch Read and Write Access;Company: Company Read and Write Access;Store: Store Read and Write Access'                                          |
+		| 'Document.AdditionalCostAllocation Branch: Branch Read and Write Access;Company: Company Read and Write Access;Store: Store Only read access'                                               |
+		| 'Document.AdditionalCostAllocation Branch: Branch Read and Write Access;Company: Company Read and Write Access;Store: Store access deny'                                                    |
+		| 'Document.AdditionalCostAllocation Branch: Branch Read and Write Access;Company: Company Read and Write Access;Store: Store Read and Write Access&Store Only read access'                   |
+		| 'Document.AdditionalCostAllocation Branch: Branch Read and Write Access;Company: Company Read and Write Access;Store: Store Only read access&Store access deny'                             |
+		| 'Document.AdditionalCostAllocation Branch: Branch Read and Write Access;Company: Company Read and Write Access;Store: Store Read and Write Access&Store access deny'                        |
+		| 'Document.AdditionalCostAllocation Branch: Branch Read and Write Access;Company: Company Read and Write Access;Store: Store Read and Write Access&Store Only read access&Store access deny' |
+		| 'Document.AdditionalCostAllocation Branch: Branch Only read access;Company: Company Read and Write Access;'                                                                                 |
+		| 'Document.AdditionalCostAllocation Branch: Branch Only read access;Company: Company Read and Write Access;Store: Store Read and Write Access'                                               |
+		| 'Document.AdditionalCostAllocation Branch: Branch Only read access;Company: Company Read and Write Access;Store: Store Only read access'                                                    |
+		| 'Document.AdditionalCostAllocation Branch: Branch Only read access;Company: Company Read and Write Access;Store: Store access deny'                                                         |
+		| 'Document.AdditionalCostAllocation Branch: Branch Only read access;Company: Company Read and Write Access;Store: Store Read and Write Access&Store Only read access'                        |
+		| 'Document.AdditionalCostAllocation Branch: Branch Only read access;Company: Company Read and Write Access;Store: Store Only read access&Store access deny'                                  |
+		| 'Document.AdditionalCostAllocation Branch: Branch Only read access;Company: Company Read and Write Access;Store: Store Read and Write Access&Store access deny'                             |
+		| 'Document.AdditionalCostAllocation Branch: Branch Only read access;Company: Company Read and Write Access;Store: Store Read and Write Access&Store Only read access&Store access deny'      |
+		| 'Document.AdditionalCostAllocation Branch: Branch Read and Write Access;Company: Company Only read access;'                                                                                 |
+		| 'Document.AdditionalCostAllocation Branch: Branch Read and Write Access;Company: Company Only read access;Store: Store Read and Write Access'                                               |
+		| 'Document.AdditionalCostAllocation Branch: Branch Read and Write Access;Company: Company Only read access;Store: Store Only read access'                                                    |
+		| 'Document.AdditionalCostAllocation Branch: Branch Read and Write Access;Company: Company Only read access;Store: Store access deny'                                                         |
+		| 'Document.AdditionalCostAllocation Branch: Branch Read and Write Access;Company: Company Only read access;Store: Store Read and Write Access&Store Only read access'                        |
+		| 'Document.AdditionalCostAllocation Branch: Branch Read and Write Access;Company: Company Only read access;Store: Store Only read access&Store access deny'                                  |
+		| 'Document.AdditionalCostAllocation Branch: Branch Read and Write Access;Company: Company Only read access;Store: Store Read and Write Access&Store access deny'                             |
+		| 'Document.AdditionalCostAllocation Branch: Branch Read and Write Access;Company: Company Only read access;Store: Store Read and Write Access&Store Only read access&Store access deny'      |
+		| 'Document.AdditionalCostAllocation Branch: Branch Only read access;Company: Company Only read access;'                                                                                      |
+		| 'Document.AdditionalCostAllocation Branch: Branch Only read access;Company: Company Only read access;Store: Store Read and Write Access'                                                    |
+		| 'Document.AdditionalCostAllocation Branch: Branch Only read access;Company: Company Only read access;Store: Store Only read access'                                                         |
+		| 'Document.AdditionalCostAllocation Branch: Branch Only read access;Company: Company Only read access;Store: Store access deny'                                                              |
+		| 'Document.AdditionalCostAllocation Branch: Branch Only read access;Company: Company Only read access;Store: Store Read and Write Access&Store Only read access'                             |
+		| 'Document.AdditionalCostAllocation Branch: Branch Only read access;Company: Company Only read access;Store: Store Only read access&Store access deny'                                       |
+		| 'Document.AdditionalCostAllocation Branch: Branch Only read access;Company: Company Only read access;Store: Store Read and Write Access&Store access deny'                                  |
+		| 'Document.AdditionalCostAllocation Branch: Branch Only read access;Company: Company Only read access;Store: Store Read and Write Access&Store Only read access&Store access deny'           |
 	
+		
+		
 			
 Scenario: 960092 check AdditionalRevenueAllocation access rights (LimitedAccess)
 	And I close all client application windows
 	Given I open hyperlink "e1cib/list/Document.AdditionalRevenueAllocation"
 	And "List" table became equal
-		| 'Number' | 'Company'                       | 'Description'                                                                                                                                                                |
-		| '1'      | 'Company Read and Write Access' | 'Document.AdditionalRevenueAllocation Branch: Branch Read and Write Access;Company: Company Read and Write Access;'                                                          |
-		| '2'      | 'Company Read and Write Access' | 'Document.AdditionalRevenueAllocation Branch: Branch Read and Write Access;Company: Company Read and Write Access;Store: Store Read and Write Access'                        |
-		| '3'      | 'Company Read and Write Access' | 'Document.AdditionalRevenueAllocation Branch: Branch Read and Write Access;Company: Company Read and Write Access;Store: Store Only read access'                             |
-		| '5'      | 'Company Read and Write Access' | 'Document.AdditionalRevenueAllocation Branch: Branch Read and Write Access;Company: Company Read and Write Access;Store: Store Read and Write Access&Store Only read access' |
-		| '9'      | 'Company Read and Write Access' | 'Document.AdditionalRevenueAllocation Branch: Branch Only read access;Company: Company Read and Write Access;'                                                               |
-		| '10'     | 'Company Read and Write Access' | 'Document.AdditionalRevenueAllocation Branch: Branch Only read access;Company: Company Read and Write Access;Store: Store Read and Write Access'                             |
-		| '11'     | 'Company Read and Write Access' | 'Document.AdditionalRevenueAllocation Branch: Branch Only read access;Company: Company Read and Write Access;Store: Store Only read access'                                  |
-		| '13'     | 'Company Read and Write Access' | 'Document.AdditionalRevenueAllocation Branch: Branch Only read access;Company: Company Read and Write Access;Store: Store Read and Write Access&Store Only read access'      |
-		| '25'     | 'Company Only read access'      | 'Document.AdditionalRevenueAllocation Branch: Branch Read and Write Access;Company: Company Only read access;'                                                               |
-		| '26'     | 'Company Only read access'      | 'Document.AdditionalRevenueAllocation Branch: Branch Read and Write Access;Company: Company Only read access;Store: Store Read and Write Access'                             |
-		| '27'     | 'Company Only read access'      | 'Document.AdditionalRevenueAllocation Branch: Branch Read and Write Access;Company: Company Only read access;Store: Store Only read access'                                  |
-		| '29'     | 'Company Only read access'      | 'Document.AdditionalRevenueAllocation Branch: Branch Read and Write Access;Company: Company Only read access;Store: Store Read and Write Access&Store Only read access'      |
-		| '33'     | 'Company Only read access'      | 'Document.AdditionalRevenueAllocation Branch: Branch Only read access;Company: Company Only read access;'                                                                    |
-		| '34'     | 'Company Only read access'      | 'Document.AdditionalRevenueAllocation Branch: Branch Only read access;Company: Company Only read access;Store: Store Read and Write Access'                                  |
-		| '35'     | 'Company Only read access'      | 'Document.AdditionalRevenueAllocation Branch: Branch Only read access;Company: Company Only read access;Store: Store Only read access'                                       |
-		| '37'     | 'Company Only read access'      | 'Document.AdditionalRevenueAllocation Branch: Branch Only read access;Company: Company Only read access;Store: Store Read and Write Access&Store Only read access'           |
+		| 'Description'                                                                                                                                                                                  |
+		| 'Document.AdditionalRevenueAllocation Branch: Branch Read and Write Access;Company: Company Read and Write Access;Store: Store Read and Write Access'                                          |
+		| 'Document.AdditionalRevenueAllocation Branch: Branch Read and Write Access;Company: Company Read and Write Access;Store: Store Only read access'                                               |
+		| 'Document.AdditionalRevenueAllocation Branch: Branch Read and Write Access;Company: Company Read and Write Access;Store: Store Read and Write Access&Store Only read access'                   |
+		| 'Document.AdditionalRevenueAllocation Branch: Branch Read and Write Access;Company: Company Read and Write Access;Store: Store Only read access&Store access deny'                             |
+		| 'Document.AdditionalRevenueAllocation Branch: Branch Read and Write Access;Company: Company Read and Write Access;Store: Store Read and Write Access&Store access deny'                        |
+		| 'Document.AdditionalRevenueAllocation Branch: Branch Read and Write Access;Company: Company Read and Write Access;Store: Store Read and Write Access&Store Only read access&Store access deny' |
+		| 'Document.AdditionalRevenueAllocation Branch: Branch Only read access;Company: Company Read and Write Access;Store: Store Read and Write Access'                                               |
+		| 'Document.AdditionalRevenueAllocation Branch: Branch Only read access;Company: Company Read and Write Access;Store: Store Only read access'                                                    |
+		| 'Document.AdditionalRevenueAllocation Branch: Branch Only read access;Company: Company Read and Write Access;Store: Store Read and Write Access&Store Only read access'                        |
+		| 'Document.AdditionalRevenueAllocation Branch: Branch Only read access;Company: Company Read and Write Access;Store: Store Only read access&Store access deny'                                  |
+		| 'Document.AdditionalRevenueAllocation Branch: Branch Only read access;Company: Company Read and Write Access;Store: Store Read and Write Access&Store access deny'                             |
+		| 'Document.AdditionalRevenueAllocation Branch: Branch Only read access;Company: Company Read and Write Access;Store: Store Read and Write Access&Store Only read access&Store access deny'      |
+		| 'Document.AdditionalRevenueAllocation Branch: Branch Read and Write Access;Company: Company Only read access;Store: Store Read and Write Access'                                               |
+		| 'Document.AdditionalRevenueAllocation Branch: Branch Read and Write Access;Company: Company Only read access;Store: Store Only read access'                                                    |
+		| 'Document.AdditionalRevenueAllocation Branch: Branch Read and Write Access;Company: Company Only read access;Store: Store Read and Write Access&Store Only read access'                        |
+		| 'Document.AdditionalRevenueAllocation Branch: Branch Read and Write Access;Company: Company Only read access;Store: Store Only read access&Store access deny'                                  |
+		| 'Document.AdditionalRevenueAllocation Branch: Branch Read and Write Access;Company: Company Only read access;Store: Store Read and Write Access&Store access deny'                             |
+		| 'Document.AdditionalRevenueAllocation Branch: Branch Read and Write Access;Company: Company Only read access;Store: Store Read and Write Access&Store Only read access&Store access deny'      |
+		| 'Document.AdditionalRevenueAllocation Branch: Branch Only read access;Company: Company Only read access;Store: Store Read and Write Access'                                                    |
+		| 'Document.AdditionalRevenueAllocation Branch: Branch Only read access;Company: Company Only read access;Store: Store Only read access'                                                         |
+		| 'Document.AdditionalRevenueAllocation Branch: Branch Only read access;Company: Company Only read access;Store: Store Read and Write Access&Store Only read access'                             |
+		| 'Document.AdditionalRevenueAllocation Branch: Branch Only read access;Company: Company Only read access;Store: Store Only read access&Store access deny'                                       |
+		| 'Document.AdditionalRevenueAllocation Branch: Branch Only read access;Company: Company Only read access;Store: Store Read and Write Access&Store access deny'                                  |
+		| 'Document.AdditionalRevenueAllocation Branch: Branch Only read access;Company: Company Only read access;Store: Store Read and Write Access&Store Only read access&Store access deny'           |
 	
 		
-
-	
+		
 Scenario: 960093 check BankPayment access rights (LimitedAccess)
 	And I close all client application windows
 	Given I open hyperlink "e1cib/list/Document.BankPayment"
 	And "List" table became equal
-		| 'Number' | 'Company'                       | 'Account'                           | 'Description'                                                                                                                                                                                    |
-		| '1'      | 'Company Read and Write Access' | 'CashAccount Read and Write Access' | 'Document.BankPayment Account: CashAccount Read and Write Access;Branch: Branch Read and Write Access;Company: Company Read and Write Access;TransitAccount: CashAccount Read and Write Access;' |
-		| '2'      | 'Company Read and Write Access' | 'CashAccount Only read access'      | 'Document.BankPayment Account: CashAccount Only read access;Branch: Branch Read and Write Access;Company: Company Read and Write Access;TransitAccount: CashAccount Read and Write Access;'      |
-		| '4'      | 'Company Read and Write Access' | 'CashAccount Read and Write Access' | 'Document.BankPayment Account: CashAccount Read and Write Access;Branch: Branch Only read access;Company: Company Read and Write Access;TransitAccount: CashAccount Read and Write Access;'      |
-		| '5'      | 'Company Read and Write Access' | 'CashAccount Only read access'      | 'Document.BankPayment Account: CashAccount Only read access;Branch: Branch Only read access;Company: Company Read and Write Access;TransitAccount: CashAccount Read and Write Access;'           |
-		| '10'     | 'Company Only read access'      | 'CashAccount Read and Write Access' | 'Document.BankPayment Account: CashAccount Read and Write Access;Branch: Branch Read and Write Access;Company: Company Only read access;TransitAccount: CashAccount Read and Write Access;'      |
-		| '11'     | 'Company Only read access'      | 'CashAccount Only read access'      | 'Document.BankPayment Account: CashAccount Only read access;Branch: Branch Read and Write Access;Company: Company Only read access;TransitAccount: CashAccount Read and Write Access;'           |
-		| '13'     | 'Company Only read access'      | 'CashAccount Read and Write Access' | 'Document.BankPayment Account: CashAccount Read and Write Access;Branch: Branch Only read access;Company: Company Only read access;TransitAccount: CashAccount Read and Write Access;'           |
-		| '14'     | 'Company Only read access'      | 'CashAccount Only read access'      | 'Document.BankPayment Account: CashAccount Only read access;Branch: Branch Only read access;Company: Company Only read access;TransitAccount: CashAccount Read and Write Access;'                |
-		| '28'     | 'Company Read and Write Access' | 'CashAccount Read and Write Access' | 'Document.BankPayment Account: CashAccount Read and Write Access;Branch: Branch Read and Write Access;Company: Company Read and Write Access;TransitAccount: CashAccount Only read access;'      |
-		| '29'     | 'Company Read and Write Access' | 'CashAccount Only read access'      | 'Document.BankPayment Account: CashAccount Only read access;Branch: Branch Read and Write Access;Company: Company Read and Write Access;TransitAccount: CashAccount Only read access;'           |
-		| '31'     | 'Company Read and Write Access' | 'CashAccount Read and Write Access' | 'Document.BankPayment Account: CashAccount Read and Write Access;Branch: Branch Only read access;Company: Company Read and Write Access;TransitAccount: CashAccount Only read access;'           |
-		| '32'     | 'Company Read and Write Access' | 'CashAccount Only read access'      | 'Document.BankPayment Account: CashAccount Only read access;Branch: Branch Only read access;Company: Company Read and Write Access;TransitAccount: CashAccount Only read access;'                |
-		| '37'     | 'Company Only read access'      | 'CashAccount Read and Write Access' | 'Document.BankPayment Account: CashAccount Read and Write Access;Branch: Branch Read and Write Access;Company: Company Only read access;TransitAccount: CashAccount Only read access;'           |
-		| '38'     | 'Company Only read access'      | 'CashAccount Only read access'      | 'Document.BankPayment Account: CashAccount Only read access;Branch: Branch Read and Write Access;Company: Company Only read access;TransitAccount: CashAccount Only read access;'                |
-		| '40'     | 'Company Only read access'      | 'CashAccount Read and Write Access' | 'Document.BankPayment Account: CashAccount Read and Write Access;Branch: Branch Only read access;Company: Company Only read access;TransitAccount: CashAccount Only read access;'                |
-		| '41'     | 'Company Only read access'      | 'CashAccount Only read access'      | 'Document.BankPayment Account: CashAccount Only read access;Branch: Branch Only read access;Company: Company Only read access;TransitAccount: CashAccount Only read access;'                     |
+		| 'Description'                                                                                                                                                                                    |
+		| 'Document.BankPayment Account: CashAccount Read and Write Access;Branch: Branch Read and Write Access;Company: Company Read and Write Access;TransitAccount: CashAccount Read and Write Access;' |
+		| 'Document.BankPayment Account: CashAccount Only read access;Branch: Branch Read and Write Access;Company: Company Read and Write Access;TransitAccount: CashAccount Read and Write Access;'      |
+		| 'Document.BankPayment Account: CashAccount access deny;Branch: Branch Read and Write Access;Company: Company Read and Write Access;TransitAccount: CashAccount Read and Write Access;'           |
+		| 'Document.BankPayment Account: CashAccount Read and Write Access;Branch: Branch Only read access;Company: Company Read and Write Access;TransitAccount: CashAccount Read and Write Access;'      |
+		| 'Document.BankPayment Account: CashAccount Only read access;Branch: Branch Only read access;Company: Company Read and Write Access;TransitAccount: CashAccount Read and Write Access;'           |
+		| 'Document.BankPayment Account: CashAccount access deny;Branch: Branch Only read access;Company: Company Read and Write Access;TransitAccount: CashAccount Read and Write Access;'                |
+		| 'Document.BankPayment Account: CashAccount Read and Write Access;Branch: Branch Read and Write Access;Company: Company Only read access;TransitAccount: CashAccount Read and Write Access;'      |
+		| 'Document.BankPayment Account: CashAccount Only read access;Branch: Branch Read and Write Access;Company: Company Only read access;TransitAccount: CashAccount Read and Write Access;'           |
+		| 'Document.BankPayment Account: CashAccount access deny;Branch: Branch Read and Write Access;Company: Company Only read access;TransitAccount: CashAccount Read and Write Access;'                |
+		| 'Document.BankPayment Account: CashAccount Read and Write Access;Branch: Branch Only read access;Company: Company Only read access;TransitAccount: CashAccount Read and Write Access;'           |
+		| 'Document.BankPayment Account: CashAccount Only read access;Branch: Branch Only read access;Company: Company Only read access;TransitAccount: CashAccount Read and Write Access;'                |
+		| 'Document.BankPayment Account: CashAccount access deny;Branch: Branch Only read access;Company: Company Only read access;TransitAccount: CashAccount Read and Write Access;'                     |
+		| 'Document.BankPayment Account: CashAccount Read and Write Access;Branch: Branch Read and Write Access;Company: Company Read and Write Access;TransitAccount: CashAccount Only read access;'      |
+		| 'Document.BankPayment Account: CashAccount Only read access;Branch: Branch Read and Write Access;Company: Company Read and Write Access;TransitAccount: CashAccount Only read access;'           |
+		| 'Document.BankPayment Account: CashAccount access deny;Branch: Branch Read and Write Access;Company: Company Read and Write Access;TransitAccount: CashAccount Only read access;'                |
+		| 'Document.BankPayment Account: CashAccount Read and Write Access;Branch: Branch Only read access;Company: Company Read and Write Access;TransitAccount: CashAccount Only read access;'           |
+		| 'Document.BankPayment Account: CashAccount Only read access;Branch: Branch Only read access;Company: Company Read and Write Access;TransitAccount: CashAccount Only read access;'                |
+		| 'Document.BankPayment Account: CashAccount access deny;Branch: Branch Only read access;Company: Company Read and Write Access;TransitAccount: CashAccount Only read access;'                     |
+		| 'Document.BankPayment Account: CashAccount Read and Write Access;Branch: Branch Read and Write Access;Company: Company Only read access;TransitAccount: CashAccount Only read access;'           |
+		| 'Document.BankPayment Account: CashAccount Only read access;Branch: Branch Read and Write Access;Company: Company Only read access;TransitAccount: CashAccount Only read access;'                |
+		| 'Document.BankPayment Account: CashAccount access deny;Branch: Branch Read and Write Access;Company: Company Only read access;TransitAccount: CashAccount Only read access;'                     |
+		| 'Document.BankPayment Account: CashAccount Read and Write Access;Branch: Branch Only read access;Company: Company Only read access;TransitAccount: CashAccount Only read access;'                |
+		| 'Document.BankPayment Account: CashAccount Only read access;Branch: Branch Only read access;Company: Company Only read access;TransitAccount: CashAccount Only read access;'                     |
+		| 'Document.BankPayment Account: CashAccount access deny;Branch: Branch Only read access;Company: Company Only read access;TransitAccount: CashAccount Only read access;'                          |
+		| 'Document.BankPayment Account: CashAccount Read and Write Access;Branch: Branch Read and Write Access;Company: Company Read and Write Access;TransitAccount: CashAccount access deny;'           |
+		| 'Document.BankPayment Account: CashAccount Only read access;Branch: Branch Read and Write Access;Company: Company Read and Write Access;TransitAccount: CashAccount access deny;'                |
+		| 'Document.BankPayment Account: CashAccount Read and Write Access;Branch: Branch Only read access;Company: Company Read and Write Access;TransitAccount: CashAccount access deny;'                |
+		| 'Document.BankPayment Account: CashAccount Only read access;Branch: Branch Only read access;Company: Company Read and Write Access;TransitAccount: CashAccount access deny;'                     |
+		| 'Document.BankPayment Account: CashAccount Read and Write Access;Branch: Branch Read and Write Access;Company: Company Only read access;TransitAccount: CashAccount access deny;'                |
+		| 'Document.BankPayment Account: CashAccount Only read access;Branch: Branch Read and Write Access;Company: Company Only read access;TransitAccount: CashAccount access deny;'                     |
+		| 'Document.BankPayment Account: CashAccount Read and Write Access;Branch: Branch Only read access;Company: Company Only read access;TransitAccount: CashAccount access deny;'                     |
+		| 'Document.BankPayment Account: CashAccount Only read access;Branch: Branch Only read access;Company: Company Only read access;TransitAccount: CashAccount access deny;'                          |
 	
+		
 Scenario: 960094 check BankReceipt access rights (LimitedAccess)
 	And I close all client application windows
 	Given I open hyperlink "e1cib/list/Document.BankReceipt"
 	And "List" table became equal
-		| 'Number' | 'Company'                       | 'Account'                           | 'Description'                                                                                                                                                                                    |
-		| '1'      | 'Company Read and Write Access' | 'CashAccount Read and Write Access' | 'Document.BankReceipt Account: CashAccount Read and Write Access;Branch: Branch Read and Write Access;Company: Company Read and Write Access;TransitAccount: CashAccount Read and Write Access;' |
-		| '2'      | 'Company Read and Write Access' | 'CashAccount Only read access'      | 'Document.BankReceipt Account: CashAccount Only read access;Branch: Branch Read and Write Access;Company: Company Read and Write Access;TransitAccount: CashAccount Read and Write Access;'      |
-		| '4'      | 'Company Read and Write Access' | 'CashAccount Read and Write Access' | 'Document.BankReceipt Account: CashAccount Read and Write Access;Branch: Branch Only read access;Company: Company Read and Write Access;TransitAccount: CashAccount Read and Write Access;'      |
-		| '5'      | 'Company Read and Write Access' | 'CashAccount Only read access'      | 'Document.BankReceipt Account: CashAccount Only read access;Branch: Branch Only read access;Company: Company Read and Write Access;TransitAccount: CashAccount Read and Write Access;'           |
-		| '10'     | 'Company Only read access'      | 'CashAccount Read and Write Access' | 'Document.BankReceipt Account: CashAccount Read and Write Access;Branch: Branch Read and Write Access;Company: Company Only read access;TransitAccount: CashAccount Read and Write Access;'      |
-		| '11'     | 'Company Only read access'      | 'CashAccount Only read access'      | 'Document.BankReceipt Account: CashAccount Only read access;Branch: Branch Read and Write Access;Company: Company Only read access;TransitAccount: CashAccount Read and Write Access;'           |
-		| '13'     | 'Company Only read access'      | 'CashAccount Read and Write Access' | 'Document.BankReceipt Account: CashAccount Read and Write Access;Branch: Branch Only read access;Company: Company Only read access;TransitAccount: CashAccount Read and Write Access;'           |
-		| '14'     | 'Company Only read access'      | 'CashAccount Only read access'      | 'Document.BankReceipt Account: CashAccount Only read access;Branch: Branch Only read access;Company: Company Only read access;TransitAccount: CashAccount Read and Write Access;'                |
-		| '28'     | 'Company Read and Write Access' | 'CashAccount Read and Write Access' | 'Document.BankReceipt Account: CashAccount Read and Write Access;Branch: Branch Read and Write Access;Company: Company Read and Write Access;TransitAccount: CashAccount Only read access;'      |
-		| '29'     | 'Company Read and Write Access' | 'CashAccount Only read access'      | 'Document.BankReceipt Account: CashAccount Only read access;Branch: Branch Read and Write Access;Company: Company Read and Write Access;TransitAccount: CashAccount Only read access;'           |
-		| '31'     | 'Company Read and Write Access' | 'CashAccount Read and Write Access' | 'Document.BankReceipt Account: CashAccount Read and Write Access;Branch: Branch Only read access;Company: Company Read and Write Access;TransitAccount: CashAccount Only read access;'           |
-		| '32'     | 'Company Read and Write Access' | 'CashAccount Only read access'      | 'Document.BankReceipt Account: CashAccount Only read access;Branch: Branch Only read access;Company: Company Read and Write Access;TransitAccount: CashAccount Only read access;'                |
-		| '37'     | 'Company Only read access'      | 'CashAccount Read and Write Access' | 'Document.BankReceipt Account: CashAccount Read and Write Access;Branch: Branch Read and Write Access;Company: Company Only read access;TransitAccount: CashAccount Only read access;'           |
-		| '38'     | 'Company Only read access'      | 'CashAccount Only read access'      | 'Document.BankReceipt Account: CashAccount Only read access;Branch: Branch Read and Write Access;Company: Company Only read access;TransitAccount: CashAccount Only read access;'                |
-		| '40'     | 'Company Only read access'      | 'CashAccount Read and Write Access' | 'Document.BankReceipt Account: CashAccount Read and Write Access;Branch: Branch Only read access;Company: Company Only read access;TransitAccount: CashAccount Only read access;'                |
-		| '41'     | 'Company Only read access'      | 'CashAccount Only read access'      | 'Document.BankReceipt Account: CashAccount Only read access;Branch: Branch Only read access;Company: Company Only read access;TransitAccount: CashAccount Only read access;'                     |
+		| 'Description'                                                                                                                                                                                    |
+		| 'Document.BankReceipt Account: CashAccount Read and Write Access;Branch: Branch Read and Write Access;Company: Company Read and Write Access;TransitAccount: CashAccount Read and Write Access;' |
+		| 'Document.BankReceipt Account: CashAccount Only read access;Branch: Branch Read and Write Access;Company: Company Read and Write Access;TransitAccount: CashAccount Read and Write Access;'      |
+		| 'Document.BankReceipt Account: CashAccount access deny;Branch: Branch Read and Write Access;Company: Company Read and Write Access;TransitAccount: CashAccount Read and Write Access;'           |
+		| 'Document.BankReceipt Account: CashAccount Read and Write Access;Branch: Branch Only read access;Company: Company Read and Write Access;TransitAccount: CashAccount Read and Write Access;'      |
+		| 'Document.BankReceipt Account: CashAccount Only read access;Branch: Branch Only read access;Company: Company Read and Write Access;TransitAccount: CashAccount Read and Write Access;'           |
+		| 'Document.BankReceipt Account: CashAccount access deny;Branch: Branch Only read access;Company: Company Read and Write Access;TransitAccount: CashAccount Read and Write Access;'                |
+		| 'Document.BankReceipt Account: CashAccount Read and Write Access;Branch: Branch Read and Write Access;Company: Company Only read access;TransitAccount: CashAccount Read and Write Access;'      |
+		| 'Document.BankReceipt Account: CashAccount Only read access;Branch: Branch Read and Write Access;Company: Company Only read access;TransitAccount: CashAccount Read and Write Access;'           |
+		| 'Document.BankReceipt Account: CashAccount access deny;Branch: Branch Read and Write Access;Company: Company Only read access;TransitAccount: CashAccount Read and Write Access;'                |
+		| 'Document.BankReceipt Account: CashAccount Read and Write Access;Branch: Branch Only read access;Company: Company Only read access;TransitAccount: CashAccount Read and Write Access;'           |
+		| 'Document.BankReceipt Account: CashAccount Only read access;Branch: Branch Only read access;Company: Company Only read access;TransitAccount: CashAccount Read and Write Access;'                |
+		| 'Document.BankReceipt Account: CashAccount access deny;Branch: Branch Only read access;Company: Company Only read access;TransitAccount: CashAccount Read and Write Access;'                     |
+		| 'Document.BankReceipt Account: CashAccount Read and Write Access;Branch: Branch Read and Write Access;Company: Company Read and Write Access;TransitAccount: CashAccount Only read access;'      |
+		| 'Document.BankReceipt Account: CashAccount Only read access;Branch: Branch Read and Write Access;Company: Company Read and Write Access;TransitAccount: CashAccount Only read access;'           |
+		| 'Document.BankReceipt Account: CashAccount access deny;Branch: Branch Read and Write Access;Company: Company Read and Write Access;TransitAccount: CashAccount Only read access;'                |
+		| 'Document.BankReceipt Account: CashAccount Read and Write Access;Branch: Branch Only read access;Company: Company Read and Write Access;TransitAccount: CashAccount Only read access;'           |
+		| 'Document.BankReceipt Account: CashAccount Only read access;Branch: Branch Only read access;Company: Company Read and Write Access;TransitAccount: CashAccount Only read access;'                |
+		| 'Document.BankReceipt Account: CashAccount access deny;Branch: Branch Only read access;Company: Company Read and Write Access;TransitAccount: CashAccount Only read access;'                     |
+		| 'Document.BankReceipt Account: CashAccount Read and Write Access;Branch: Branch Read and Write Access;Company: Company Only read access;TransitAccount: CashAccount Only read access;'           |
+		| 'Document.BankReceipt Account: CashAccount Only read access;Branch: Branch Read and Write Access;Company: Company Only read access;TransitAccount: CashAccount Only read access;'                |
+		| 'Document.BankReceipt Account: CashAccount access deny;Branch: Branch Read and Write Access;Company: Company Only read access;TransitAccount: CashAccount Only read access;'                     |
+		| 'Document.BankReceipt Account: CashAccount Read and Write Access;Branch: Branch Only read access;Company: Company Only read access;TransitAccount: CashAccount Only read access;'                |
+		| 'Document.BankReceipt Account: CashAccount Only read access;Branch: Branch Only read access;Company: Company Only read access;TransitAccount: CashAccount Only read access;'                     |
+		| 'Document.BankReceipt Account: CashAccount access deny;Branch: Branch Only read access;Company: Company Only read access;TransitAccount: CashAccount Only read access;'                          |
+		| 'Document.BankReceipt Account: CashAccount Read and Write Access;Branch: Branch Read and Write Access;Company: Company Read and Write Access;TransitAccount: CashAccount access deny;'           |
+		| 'Document.BankReceipt Account: CashAccount Only read access;Branch: Branch Read and Write Access;Company: Company Read and Write Access;TransitAccount: CashAccount access deny;'                |
+		| 'Document.BankReceipt Account: CashAccount Read and Write Access;Branch: Branch Only read access;Company: Company Read and Write Access;TransitAccount: CashAccount access deny;'                |
+		| 'Document.BankReceipt Account: CashAccount Only read access;Branch: Branch Only read access;Company: Company Read and Write Access;TransitAccount: CashAccount access deny;'                     |
+		| 'Document.BankReceipt Account: CashAccount Read and Write Access;Branch: Branch Read and Write Access;Company: Company Only read access;TransitAccount: CashAccount access deny;'                |
+		| 'Document.BankReceipt Account: CashAccount Only read access;Branch: Branch Read and Write Access;Company: Company Only read access;TransitAccount: CashAccount access deny;'                     |
+		| 'Document.BankReceipt Account: CashAccount Read and Write Access;Branch: Branch Only read access;Company: Company Only read access;TransitAccount: CashAccount access deny;'                     |
+		| 'Document.BankReceipt Account: CashAccount Only read access;Branch: Branch Only read access;Company: Company Only read access;TransitAccount: CashAccount access deny;'                          |
 	
+		
 			
 Scenario: 960095 check BatchReallocateIncoming access rights (LimitedAccess)
 	And I close all client application windows
 	Given I open hyperlink "e1cib/list/Document.BatchReallocateIncoming"
 	And "List" table became equal
-		| 'Number' | 'Company'                       | 'Description'                                                                                                                       |
-		| '1'      | 'Company Read and Write Access' | 'Document.BatchReallocateIncoming Company: Company Read and Write Access;'                                                          |
-		| '2'      | 'Company Read and Write Access' | 'Document.BatchReallocateIncoming Company: Company Read and Write Access;Store: Store Read and Write Access'                        |
-		| '3'      | 'Company Read and Write Access' | 'Document.BatchReallocateIncoming Company: Company Read and Write Access;Store: Store Only read access'                             |
-		| '5'      | 'Company Read and Write Access' | 'Document.BatchReallocateIncoming Company: Company Read and Write Access;Store: Store Read and Write Access&Store Only read access' |
-		| '9'      | 'Company Only read access'      | 'Document.BatchReallocateIncoming Company: Company Only read access;'                                                               |
-		| '10'     | 'Company Only read access'      | 'Document.BatchReallocateIncoming Company: Company Only read access;Store: Store Read and Write Access'                             |
-		| '11'     | 'Company Only read access'      | 'Document.BatchReallocateIncoming Company: Company Only read access;Store: Store Only read access'                                  |
-		| '13'     | 'Company Only read access'      | 'Document.BatchReallocateIncoming Company: Company Only read access;Store: Store Read and Write Access&Store Only read access'      |
-	
+		| 'Description'                                                                                                                                         |
+		| 'Document.BatchReallocateIncoming Company: Company Read and Write Access;Store: Store Read and Write Access'                                          |
+		| 'Document.BatchReallocateIncoming Company: Company Read and Write Access;Store: Store Only read access'                                               |
+		| 'Document.BatchReallocateIncoming Company: Company Read and Write Access;Store: Store Read and Write Access&Store Only read access'                   |
+		| 'Document.BatchReallocateIncoming Company: Company Read and Write Access;Store: Store Only read access&Store access deny'                             |
+		| 'Document.BatchReallocateIncoming Company: Company Read and Write Access;Store: Store Read and Write Access&Store access deny'                        |
+		| 'Document.BatchReallocateIncoming Company: Company Read and Write Access;Store: Store Read and Write Access&Store Only read access&Store access deny' |
+		| 'Document.BatchReallocateIncoming Company: Company Only read access;Store: Store Read and Write Access'                                               |
+		| 'Document.BatchReallocateIncoming Company: Company Only read access;Store: Store Only read access'                                                    |
+		| 'Document.BatchReallocateIncoming Company: Company Only read access;Store: Store Read and Write Access&Store Only read access'                        |
+		| 'Document.BatchReallocateIncoming Company: Company Only read access;Store: Store Only read access&Store access deny'                                  |
+		| 'Document.BatchReallocateIncoming Company: Company Only read access;Store: Store Read and Write Access&Store access deny'                             |
+		| 'Document.BatchReallocateIncoming Company: Company Only read access;Store: Store Read and Write Access&Store Only read access&Store access deny'      |
+		
 			
 Scenario: 960096 check BatchReallocateOutgoing access rights (LimitedAccess)
 	And I close all client application windows
 	Given I open hyperlink "e1cib/list/Document.BatchReallocateOutgoing"
 	And "List" table became equal
-		| 'Number' | 'Company'                       | 'Description'                                                                                                                       |
-		| '1'      | 'Company Read and Write Access' | 'Document.BatchReallocateOutgoing Company: Company Read and Write Access;'                                                          |
-		| '2'      | 'Company Read and Write Access' | 'Document.BatchReallocateOutgoing Company: Company Read and Write Access;Store: Store Read and Write Access'                        |
-		| '3'      | 'Company Read and Write Access' | 'Document.BatchReallocateOutgoing Company: Company Read and Write Access;Store: Store Only read access'                             |
-		| '5'      | 'Company Read and Write Access' | 'Document.BatchReallocateOutgoing Company: Company Read and Write Access;Store: Store Read and Write Access&Store Only read access' |
-		| '9'      | 'Company Only read access'      | 'Document.BatchReallocateOutgoing Company: Company Only read access;'                                                               |
-		| '10'     | 'Company Only read access'      | 'Document.BatchReallocateOutgoing Company: Company Only read access;Store: Store Read and Write Access'                             |
-		| '11'     | 'Company Only read access'      | 'Document.BatchReallocateOutgoing Company: Company Only read access;Store: Store Only read access'                                  |
-		| '13'     | 'Company Only read access'      | 'Document.BatchReallocateOutgoing Company: Company Only read access;Store: Store Read and Write Access&Store Only read access'      |
+		| 'Description'                                                                                                                                         |
+		| 'Document.BatchReallocateOutgoing Company: Company Read and Write Access;Store: Store Read and Write Access'                                          |
+		| 'Document.BatchReallocateOutgoing Company: Company Read and Write Access;Store: Store Only read access'                                               |
+		| 'Document.BatchReallocateOutgoing Company: Company Read and Write Access;Store: Store Read and Write Access&Store Only read access'                   |
+		| 'Document.BatchReallocateOutgoing Company: Company Read and Write Access;Store: Store Only read access&Store access deny'                             |
+		| 'Document.BatchReallocateOutgoing Company: Company Read and Write Access;Store: Store Read and Write Access&Store access deny'                        |
+		| 'Document.BatchReallocateOutgoing Company: Company Read and Write Access;Store: Store Read and Write Access&Store Only read access&Store access deny' |
+		| 'Document.BatchReallocateOutgoing Company: Company Only read access;Store: Store Read and Write Access'                                               |
+		| 'Document.BatchReallocateOutgoing Company: Company Only read access;Store: Store Only read access'                                                    |
+		| 'Document.BatchReallocateOutgoing Company: Company Only read access;Store: Store Read and Write Access&Store Only read access'                        |
+		| 'Document.BatchReallocateOutgoing Company: Company Only read access;Store: Store Only read access&Store access deny'                                  |
+		| 'Document.BatchReallocateOutgoing Company: Company Only read access;Store: Store Read and Write Access&Store access deny'                             |
+		| 'Document.BatchReallocateOutgoing Company: Company Only read access;Store: Store Read and Write Access&Store Only read access&Store access deny'      |
 	
+		
 Scenario: 960097 check Bundling access rights (LimitedAccess)
 	And I close all client application windows
 	Given I open hyperlink "e1cib/list/Document.Bundling"
 	And "List" table became equal
-		| 'Number' | 'Company'                       | 'Store'                       | 'Description'                                                                                                                       |
-		| '1'      | 'Company Read and Write Access' | 'Store Read and Write Access' | 'Document.Bundling Store: Store Read and Write Access;Branch: Branch Read and Write Access;Company: Company Read and Write Access;' |
-		| '2'      | 'Company Read and Write Access' | 'Store Only read access'      | 'Document.Bundling Store: Store Only read access;Branch: Branch Read and Write Access;Company: Company Read and Write Access;'      |
-		| '4'      | 'Company Read and Write Access' | 'Store Read and Write Access' | 'Document.Bundling Store: Store Read and Write Access;Branch: Branch Only read access;Company: Company Read and Write Access;'      |
-		| '5'      | 'Company Read and Write Access' | 'Store Only read access'      | 'Document.Bundling Store: Store Only read access;Branch: Branch Only read access;Company: Company Read and Write Access;'           |
-		| '10'     | 'Company Only read access'      | 'Store Read and Write Access' | 'Document.Bundling Store: Store Read and Write Access;Branch: Branch Read and Write Access;Company: Company Only read access;'      |
-		| '11'     | 'Company Only read access'      | 'Store Only read access'      | 'Document.Bundling Store: Store Only read access;Branch: Branch Read and Write Access;Company: Company Only read access;'           |
-		| '13'     | 'Company Only read access'      | 'Store Read and Write Access' | 'Document.Bundling Store: Store Read and Write Access;Branch: Branch Only read access;Company: Company Only read access;'           |
-		| '14'     | 'Company Only read access'      | 'Store Only read access'      | 'Document.Bundling Store: Store Only read access;Branch: Branch Only read access;Company: Company Only read access;'                |
+		| 'Description'                                                                                                                       |
+		| 'Document.Bundling Store: Store Read and Write Access;Branch: Branch Read and Write Access;Company: Company Read and Write Access;' |
+		| 'Document.Bundling Store: Store Only read access;Branch: Branch Read and Write Access;Company: Company Read and Write Access;'      |
+		| 'Document.Bundling Store: Store Read and Write Access;Branch: Branch Only read access;Company: Company Read and Write Access;'      |
+		| 'Document.Bundling Store: Store Only read access;Branch: Branch Only read access;Company: Company Read and Write Access;'           |
+		| 'Document.Bundling Store: Store Read and Write Access;Branch: Branch Read and Write Access;Company: Company Only read access;'      |
+		| 'Document.Bundling Store: Store Only read access;Branch: Branch Read and Write Access;Company: Company Only read access;'           |
+		| 'Document.Bundling Store: Store Read and Write Access;Branch: Branch Only read access;Company: Company Only read access;'           |
+		| 'Document.Bundling Store: Store Only read access;Branch: Branch Only read access;Company: Company Only read access;'                |
 	
 			
 Scenario: 960098 check CalculationMovementCosts access rights (LimitedAccess)
 	And I close all client application windows
 	Given I open hyperlink "e1cib/list/Document.CalculationMovementCosts"
 	And "List" table became equal
-		| 'Number' | 'Company'                       | 'Description'                                                               |
-		| '1'      | 'Company Read and Write Access' | 'Document.CalculationMovementCosts Company: Company Read and Write Access;' |
-		| '2'      | 'Company Only read access'      | 'Document.CalculationMovementCosts Company: Company Only read access;'      |
+		| 'Description'                                                               |
+		| 'Document.CalculationMovementCosts Company: Company Read and Write Access;' |
+		| 'Document.CalculationMovementCosts Company: Company Only read access;'      |
 	
 		
 Scenario: 960099 check CashExpense access rights (LimitedAccess)
 	And I close all client application windows
 	Given I open hyperlink "e1cib/list/Document.CashExpense"
 	And "List" table became equal
-		| 'Number' | 'Company'                       | 'Account'                           | 'Description'                                                                                                                                                                              |
-		| '1'      | 'Company Read and Write Access' | 'CashAccount Read and Write Access' | 'Document.CashExpense Account: CashAccount Read and Write Access;Branch: Branch Read and Write Access;Company: Company Read and Write Access;OtherCompany: Company Read and Write Access;' |
-		| '2'      | 'Company Read and Write Access' | 'CashAccount Only read access'      | 'Document.CashExpense Account: CashAccount Only read access;Branch: Branch Read and Write Access;Company: Company Read and Write Access;OtherCompany: Company Read and Write Access;'      |
-		| '4'      | 'Company Read and Write Access' | 'CashAccount Read and Write Access' | 'Document.CashExpense Account: CashAccount Read and Write Access;Branch: Branch Only read access;Company: Company Read and Write Access;OtherCompany: Company Read and Write Access;'      |
-		| '5'      | 'Company Read and Write Access' | 'CashAccount Only read access'      | 'Document.CashExpense Account: CashAccount Only read access;Branch: Branch Only read access;Company: Company Read and Write Access;OtherCompany: Company Read and Write Access;'           |
-		| '10'     | 'Company Only read access'      | 'CashAccount Read and Write Access' | 'Document.CashExpense Account: CashAccount Read and Write Access;Branch: Branch Read and Write Access;Company: Company Only read access;OtherCompany: Company Read and Write Access;'      |
-		| '11'     | 'Company Only read access'      | 'CashAccount Only read access'      | 'Document.CashExpense Account: CashAccount Only read access;Branch: Branch Read and Write Access;Company: Company Only read access;OtherCompany: Company Read and Write Access;'           |
-		| '13'     | 'Company Only read access'      | 'CashAccount Read and Write Access' | 'Document.CashExpense Account: CashAccount Read and Write Access;Branch: Branch Only read access;Company: Company Only read access;OtherCompany: Company Read and Write Access;'           |
-		| '14'     | 'Company Only read access'      | 'CashAccount Only read access'      | 'Document.CashExpense Account: CashAccount Only read access;Branch: Branch Only read access;Company: Company Only read access;OtherCompany: Company Read and Write Access;'                |
-		| '28'     | 'Company Read and Write Access' | 'CashAccount Read and Write Access' | 'Document.CashExpense Account: CashAccount Read and Write Access;Branch: Branch Read and Write Access;Company: Company Read and Write Access;OtherCompany: Company Only read access;'      |
-		| '29'     | 'Company Read and Write Access' | 'CashAccount Only read access'      | 'Document.CashExpense Account: CashAccount Only read access;Branch: Branch Read and Write Access;Company: Company Read and Write Access;OtherCompany: Company Only read access;'           |
-		| '31'     | 'Company Read and Write Access' | 'CashAccount Read and Write Access' | 'Document.CashExpense Account: CashAccount Read and Write Access;Branch: Branch Only read access;Company: Company Read and Write Access;OtherCompany: Company Only read access;'           |
-		| '32'     | 'Company Read and Write Access' | 'CashAccount Only read access'      | 'Document.CashExpense Account: CashAccount Only read access;Branch: Branch Only read access;Company: Company Read and Write Access;OtherCompany: Company Only read access;'                |
-		| '37'     | 'Company Only read access'      | 'CashAccount Read and Write Access' | 'Document.CashExpense Account: CashAccount Read and Write Access;Branch: Branch Read and Write Access;Company: Company Only read access;OtherCompany: Company Only read access;'           |
-		| '38'     | 'Company Only read access'      | 'CashAccount Only read access'      | 'Document.CashExpense Account: CashAccount Only read access;Branch: Branch Read and Write Access;Company: Company Only read access;OtherCompany: Company Only read access;'                |
-		| '40'     | 'Company Only read access'      | 'CashAccount Read and Write Access' | 'Document.CashExpense Account: CashAccount Read and Write Access;Branch: Branch Only read access;Company: Company Only read access;OtherCompany: Company Only read access;'                |
-		| '41'     | 'Company Only read access'      | 'CashAccount Only read access'      | 'Document.CashExpense Account: CashAccount Only read access;Branch: Branch Only read access;Company: Company Only read access;OtherCompany: Company Only read access;'                     |
+		| 'Description'                                                                                                                                                                              |
+		| 'Document.CashExpense Account: CashAccount Read and Write Access;Branch: Branch Read and Write Access;Company: Company Read and Write Access;OtherCompany: Company Read and Write Access;' |
+		| 'Document.CashExpense Account: CashAccount Only read access;Branch: Branch Read and Write Access;Company: Company Read and Write Access;OtherCompany: Company Read and Write Access;'      |
+		| 'Document.CashExpense Account: CashAccount Read and Write Access;Branch: Branch Only read access;Company: Company Read and Write Access;OtherCompany: Company Read and Write Access;'      |
+		| 'Document.CashExpense Account: CashAccount Only read access;Branch: Branch Only read access;Company: Company Read and Write Access;OtherCompany: Company Read and Write Access;'           |
+		| 'Document.CashExpense Account: CashAccount Read and Write Access;Branch: Branch Read and Write Access;Company: Company Only read access;OtherCompany: Company Read and Write Access;'      |
+		| 'Document.CashExpense Account: CashAccount Only read access;Branch: Branch Read and Write Access;Company: Company Only read access;OtherCompany: Company Read and Write Access;'           |
+		| 'Document.CashExpense Account: CashAccount Read and Write Access;Branch: Branch Only read access;Company: Company Only read access;OtherCompany: Company Read and Write Access;'           |
+		| 'Document.CashExpense Account: CashAccount Only read access;Branch: Branch Only read access;Company: Company Only read access;OtherCompany: Company Read and Write Access;'                |
+		| 'Document.CashExpense Account: CashAccount Read and Write Access;Branch: Branch Read and Write Access;Company: Company Read and Write Access;OtherCompany: Company Only read access;'      |
+		| 'Document.CashExpense Account: CashAccount Only read access;Branch: Branch Read and Write Access;Company: Company Read and Write Access;OtherCompany: Company Only read access;'           |
+		| 'Document.CashExpense Account: CashAccount Read and Write Access;Branch: Branch Only read access;Company: Company Read and Write Access;OtherCompany: Company Only read access;'           |
+		| 'Document.CashExpense Account: CashAccount Only read access;Branch: Branch Only read access;Company: Company Read and Write Access;OtherCompany: Company Only read access;'                |
+		| 'Document.CashExpense Account: CashAccount Read and Write Access;Branch: Branch Read and Write Access;Company: Company Only read access;OtherCompany: Company Only read access;'           |
+		| 'Document.CashExpense Account: CashAccount Only read access;Branch: Branch Read and Write Access;Company: Company Only read access;OtherCompany: Company Only read access;'                |
+		| 'Document.CashExpense Account: CashAccount Read and Write Access;Branch: Branch Only read access;Company: Company Only read access;OtherCompany: Company Only read access;'                |
+		| 'Document.CashExpense Account: CashAccount Only read access;Branch: Branch Only read access;Company: Company Only read access;OtherCompany: Company Only read access;'                     |
+		| 'Document.CashExpense Account: CashAccount Read and Write Access;Branch: Branch Read and Write Access;Company: Company Read and Write Access;OtherCompany: Company access deny;'           |
+		| 'Document.CashExpense Account: CashAccount Only read access;Branch: Branch Read and Write Access;Company: Company Read and Write Access;OtherCompany: Company access deny;'                |
+		| 'Document.CashExpense Account: CashAccount Read and Write Access;Branch: Branch Only read access;Company: Company Read and Write Access;OtherCompany: Company access deny;'                |
+		| 'Document.CashExpense Account: CashAccount Only read access;Branch: Branch Only read access;Company: Company Read and Write Access;OtherCompany: Company access deny;'                     |
+		| 'Document.CashExpense Account: CashAccount Read and Write Access;Branch: Branch Read and Write Access;Company: Company Only read access;OtherCompany: Company access deny;'                |
+		| 'Document.CashExpense Account: CashAccount Only read access;Branch: Branch Read and Write Access;Company: Company Only read access;OtherCompany: Company access deny;'                     |
+		| 'Document.CashExpense Account: CashAccount Read and Write Access;Branch: Branch Only read access;Company: Company Only read access;OtherCompany: Company access deny;'                     |
+		| 'Document.CashExpense Account: CashAccount Only read access;Branch: Branch Only read access;Company: Company Only read access;OtherCompany: Company access deny;'                          |
+	
 		
 		
 Scenario: 960100 check CashPayment access rights (LimitedAccess)
 	And I close all client application windows
 	Given I open hyperlink "e1cib/list/Document.CashPayment"
 	And "List" table became equal
-		| 'Number' | 'Company'                       | 'Cash account'                      | 'Description'                                                                                                                                      |
-		| '1'      | 'Company Read and Write Access' | 'CashAccount Read and Write Access' | 'Document.CashPayment Branch: Branch Read and Write Access;Company: Company Read and Write Access;CashAccount: CashAccount Read and Write Access;' |
-		| '2'      | 'Company Read and Write Access' | 'CashAccount Read and Write Access' | 'Document.CashPayment Branch: Branch Only read access;Company: Company Read and Write Access;CashAccount: CashAccount Read and Write Access;'      |
-		| '4'      | 'Company Only read access'      | 'CashAccount Read and Write Access' | 'Document.CashPayment Branch: Branch Read and Write Access;Company: Company Only read access;CashAccount: CashAccount Read and Write Access;'      |
-		| '5'      | 'Company Only read access'      | 'CashAccount Read and Write Access' | 'Document.CashPayment Branch: Branch Only read access;Company: Company Only read access;CashAccount: CashAccount Read and Write Access;'           |
-		| '10'     | 'Company Read and Write Access' | 'CashAccount Only read access'      | 'Document.CashPayment Branch: Branch Read and Write Access;Company: Company Read and Write Access;CashAccount: CashAccount Only read access;'      |
-		| '11'     | 'Company Read and Write Access' | 'CashAccount Only read access'      | 'Document.CashPayment Branch: Branch Only read access;Company: Company Read and Write Access;CashAccount: CashAccount Only read access;'           |
-		| '13'     | 'Company Only read access'      | 'CashAccount Only read access'      | 'Document.CashPayment Branch: Branch Read and Write Access;Company: Company Only read access;CashAccount: CashAccount Only read access;'           |
-		| '14'     | 'Company Only read access'      | 'CashAccount Only read access'      | 'Document.CashPayment Branch: Branch Only read access;Company: Company Only read access;CashAccount: CashAccount Only read access;'                |
+		| 'Description'                                                                                                                                      |
+		| 'Document.CashPayment Branch: Branch Read and Write Access;Company: Company Read and Write Access;CashAccount: CashAccount Read and Write Access;' |
+		| 'Document.CashPayment Branch: Branch Only read access;Company: Company Read and Write Access;CashAccount: CashAccount Read and Write Access;'      |
+		| 'Document.CashPayment Branch: Branch Read and Write Access;Company: Company Only read access;CashAccount: CashAccount Read and Write Access;'      |
+		| 'Document.CashPayment Branch: Branch Only read access;Company: Company Only read access;CashAccount: CashAccount Read and Write Access;'           |
+		| 'Document.CashPayment Branch: Branch Read and Write Access;Company: Company Read and Write Access;CashAccount: CashAccount Only read access;'      |
+		| 'Document.CashPayment Branch: Branch Only read access;Company: Company Read and Write Access;CashAccount: CashAccount Only read access;'           |
+		| 'Document.CashPayment Branch: Branch Read and Write Access;Company: Company Only read access;CashAccount: CashAccount Only read access;'           |
+		| 'Document.CashPayment Branch: Branch Only read access;Company: Company Only read access;CashAccount: CashAccount Only read access;'                |
 	
 		
 Scenario: 960101 check CashReceipt access rights (LimitedAccess)
 	And I close all client application windows
 	Given I open hyperlink "e1cib/list/Document.CashReceipt"
 	And "List" table became equal
-		| 'Number' | 'Company'                       | 'Cash account'                      | 'Description'                                                                                                                                      |
-		| '1'      | 'Company Read and Write Access' | 'CashAccount Read and Write Access' | 'Document.CashReceipt Branch: Branch Read and Write Access;Company: Company Read and Write Access;CashAccount: CashAccount Read and Write Access;' |
-		| '2'      | 'Company Read and Write Access' | 'CashAccount Read and Write Access' | 'Document.CashReceipt Branch: Branch Only read access;Company: Company Read and Write Access;CashAccount: CashAccount Read and Write Access;'      |
-		| '4'      | 'Company Only read access'      | 'CashAccount Read and Write Access' | 'Document.CashReceipt Branch: Branch Read and Write Access;Company: Company Only read access;CashAccount: CashAccount Read and Write Access;'      |
-		| '5'      | 'Company Only read access'      | 'CashAccount Read and Write Access' | 'Document.CashReceipt Branch: Branch Only read access;Company: Company Only read access;CashAccount: CashAccount Read and Write Access;'           |
-		| '10'     | 'Company Read and Write Access' | 'CashAccount Only read access'      | 'Document.CashReceipt Branch: Branch Read and Write Access;Company: Company Read and Write Access;CashAccount: CashAccount Only read access;'      |
-		| '11'     | 'Company Read and Write Access' | 'CashAccount Only read access'      | 'Document.CashReceipt Branch: Branch Only read access;Company: Company Read and Write Access;CashAccount: CashAccount Only read access;'           |
-		| '13'     | 'Company Only read access'      | 'CashAccount Only read access'      | 'Document.CashReceipt Branch: Branch Read and Write Access;Company: Company Only read access;CashAccount: CashAccount Only read access;'           |
-		| '14'     | 'Company Only read access'      | 'CashAccount Only read access'      | 'Document.CashReceipt Branch: Branch Only read access;Company: Company Only read access;CashAccount: CashAccount Only read access;'                |
+		| 'Description'                                                                                                                                      |
+		| 'Document.CashReceipt Branch: Branch Read and Write Access;Company: Company Read and Write Access;CashAccount: CashAccount Read and Write Access;' |
+		| 'Document.CashReceipt Branch: Branch Only read access;Company: Company Read and Write Access;CashAccount: CashAccount Read and Write Access;'      |
+		| 'Document.CashReceipt Branch: Branch Read and Write Access;Company: Company Only read access;CashAccount: CashAccount Read and Write Access;'      |
+		| 'Document.CashReceipt Branch: Branch Only read access;Company: Company Only read access;CashAccount: CashAccount Read and Write Access;'           |
+		| 'Document.CashReceipt Branch: Branch Read and Write Access;Company: Company Read and Write Access;CashAccount: CashAccount Only read access;'      |
+		| 'Document.CashReceipt Branch: Branch Only read access;Company: Company Read and Write Access;CashAccount: CashAccount Only read access;'           |
+		| 'Document.CashReceipt Branch: Branch Read and Write Access;Company: Company Only read access;CashAccount: CashAccount Only read access;'           |
+		| 'Document.CashReceipt Branch: Branch Only read access;Company: Company Only read access;CashAccount: CashAccount Only read access;'                |
 	
 		
 Scenario: 960102 check CashRevenue access rights (LimitedAccess)
 	And I close all client application windows
 	Given I open hyperlink "e1cib/list/Document.CashRevenue"	
 	And "List" table became equal
-		| 'Number' | 'Company'                       | 'Description'                                                                                                                                   |
-		| '14'     | 'Company Only read access'      | 'Document.CashRevenue Branch: Branch Only read access;Company: Company Only read access;OtherCompany: Company Only read access;'                |
-		| '13'     | 'Company Only read access'      | 'Document.CashRevenue Branch: Branch Read and Write Access;Company: Company Only read access;OtherCompany: Company Only read access;'           |
-		| '11'     | 'Company Read and Write Access' | 'Document.CashRevenue Branch: Branch Only read access;Company: Company Read and Write Access;OtherCompany: Company Only read access;'           |
-		| '10'     | 'Company Read and Write Access' | 'Document.CashRevenue Branch: Branch Read and Write Access;Company: Company Read and Write Access;OtherCompany: Company Only read access;'      |
-		| '5'      | 'Company Only read access'      | 'Document.CashRevenue Branch: Branch Only read access;Company: Company Only read access;OtherCompany: Company Read and Write Access;'           |
-		| '4'      | 'Company Only read access'      | 'Document.CashRevenue Branch: Branch Read and Write Access;Company: Company Only read access;OtherCompany: Company Read and Write Access;'      |
-		| '2'      | 'Company Read and Write Access' | 'Document.CashRevenue Branch: Branch Only read access;Company: Company Read and Write Access;OtherCompany: Company Read and Write Access;'      |
-		| '1'      | 'Company Read and Write Access' | 'Document.CashRevenue Branch: Branch Read and Write Access;Company: Company Read and Write Access;OtherCompany: Company Read and Write Access;' |
+		| 'Description'                                                                                                                                   |
+		| 'Document.CashRevenue Branch: Branch Read and Write Access;Company: Company Read and Write Access;OtherCompany: Company Read and Write Access;' |
+		| 'Document.CashRevenue Branch: Branch Only read access;Company: Company Read and Write Access;OtherCompany: Company Read and Write Access;'      |
+		| 'Document.CashRevenue Branch: Branch Read and Write Access;Company: Company Only read access;OtherCompany: Company Read and Write Access;'      |
+		| 'Document.CashRevenue Branch: Branch Only read access;Company: Company Only read access;OtherCompany: Company Read and Write Access;'           |
+		| 'Document.CashRevenue Branch: Branch Read and Write Access;Company: Company Read and Write Access;OtherCompany: Company Only read access;'      |
+		| 'Document.CashRevenue Branch: Branch Only read access;Company: Company Read and Write Access;OtherCompany: Company Only read access;'           |
+		| 'Document.CashRevenue Branch: Branch Read and Write Access;Company: Company Only read access;OtherCompany: Company Only read access;'           |
+		| 'Document.CashRevenue Branch: Branch Only read access;Company: Company Only read access;OtherCompany: Company Only read access;'                |
+		| 'Document.CashRevenue Branch: Branch Read and Write Access;Company: Company Read and Write Access;OtherCompany: Company access deny;'           |
+		| 'Document.CashRevenue Branch: Branch Only read access;Company: Company Read and Write Access;OtherCompany: Company access deny;'                |
+		| 'Document.CashRevenue Branch: Branch Read and Write Access;Company: Company Only read access;OtherCompany: Company access deny;'                |
+		| 'Document.CashRevenue Branch: Branch Only read access;Company: Company Only read access;OtherCompany: Company access deny;'                     |
 	
+		
 Scenario: 960103 check CashStatement access rights (LimitedAccess)
 	And I close all client application windows
 	Given I open hyperlink "e1cib/list/Document.CashStatement"	
 	And "List" table became equal
-		| 'Number' | 'Description'                                                                                                                                        |
-		| '1'      | 'Document.CashStatement Branch: Branch Read and Write Access;Company: Company Read and Write Access;CashAccount: CashAccount Read and Write Access;' |
-		| '2'      | 'Document.CashStatement Branch: Branch Only read access;Company: Company Read and Write Access;CashAccount: CashAccount Read and Write Access;'      |
-		| '4'      | 'Document.CashStatement Branch: Branch Read and Write Access;Company: Company Only read access;CashAccount: CashAccount Read and Write Access;'      |
-		| '5'      | 'Document.CashStatement Branch: Branch Only read access;Company: Company Only read access;CashAccount: CashAccount Read and Write Access;'           |
-		| '10'     | 'Document.CashStatement Branch: Branch Read and Write Access;Company: Company Read and Write Access;CashAccount: CashAccount Only read access;'      |
-		| '11'     | 'Document.CashStatement Branch: Branch Only read access;Company: Company Read and Write Access;CashAccount: CashAccount Only read access;'           |
-		| '13'     | 'Document.CashStatement Branch: Branch Read and Write Access;Company: Company Only read access;CashAccount: CashAccount Only read access;'           |
-		| '14'     | 'Document.CashStatement Branch: Branch Only read access;Company: Company Only read access;CashAccount: CashAccount Only read access;'                |
+		| 'Description'                                                                                                                                        |
+		| 'Document.CashStatement Branch: Branch Read and Write Access;Company: Company Read and Write Access;CashAccount: CashAccount Read and Write Access;' |
+		| 'Document.CashStatement Branch: Branch Only read access;Company: Company Read and Write Access;CashAccount: CashAccount Read and Write Access;'      |
+		| 'Document.CashStatement Branch: Branch Read and Write Access;Company: Company Only read access;CashAccount: CashAccount Read and Write Access;'      |
+		| 'Document.CashStatement Branch: Branch Only read access;Company: Company Only read access;CashAccount: CashAccount Read and Write Access;'           |
+		| 'Document.CashStatement Branch: Branch Read and Write Access;Company: Company Read and Write Access;CashAccount: CashAccount Only read access;'      |
+		| 'Document.CashStatement Branch: Branch Only read access;Company: Company Read and Write Access;CashAccount: CashAccount Only read access;'           |
+		| 'Document.CashStatement Branch: Branch Read and Write Access;Company: Company Only read access;CashAccount: CashAccount Only read access;'           |
+		| 'Document.CashStatement Branch: Branch Only read access;Company: Company Only read access;CashAccount: CashAccount Only read access;'                |
 
 Scenario: 960104 check CashTransferOrder access rights (LimitedAccess)	
 	And I close all client application windows
 	Given I open hyperlink "e1cib/list/Document.CashTransferOrder"	
 	And "List" table became equal
-		| 'Number' | 'Company'                       | 'Description'                                                                                                                                         |
-		| '1'      | 'Company Read and Write Access' | 'Document.CashTransferOrder Branch: Branch Read and Write Access;Company: Company Read and Write Access;ReceiveBranch: Branch Read and Write Access;' |
-		| '2'      | 'Company Read and Write Access' | 'Document.CashTransferOrder Branch: Branch Only read access;Company: Company Read and Write Access;ReceiveBranch: Branch Read and Write Access;'      |
-		| '4'      | 'Company Only read access'      | 'Document.CashTransferOrder Branch: Branch Read and Write Access;Company: Company Only read access;ReceiveBranch: Branch Read and Write Access;'      |
-		| '5'      | 'Company Only read access'      | 'Document.CashTransferOrder Branch: Branch Only read access;Company: Company Only read access;ReceiveBranch: Branch Read and Write Access;'           |
-		| '10'     | 'Company Read and Write Access' | 'Document.CashTransferOrder Branch: Branch Read and Write Access;Company: Company Read and Write Access;ReceiveBranch: Branch Only read access;'      |
-		| '11'     | 'Company Read and Write Access' | 'Document.CashTransferOrder Branch: Branch Only read access;Company: Company Read and Write Access;ReceiveBranch: Branch Only read access;'           |
-		| '13'     | 'Company Only read access'      | 'Document.CashTransferOrder Branch: Branch Read and Write Access;Company: Company Only read access;ReceiveBranch: Branch Only read access;'           |
-		| '14'     | 'Company Only read access'      | 'Document.CashTransferOrder Branch: Branch Only read access;Company: Company Only read access;ReceiveBranch: Branch Only read access;'                |
-
+		| 'Description'                                                                                                                                                                                                                               |
+		| 'Document.CashTransferOrder Branch: Branch Read and Write Access;Company: Company Read and Write Access;ReceiveBranch: Branch Read and Write Access;Sender: CashAccount Read and Write Access;Receiver: CashAccount Read and Write Access;' |
+		| 'Document.CashTransferOrder Branch: Branch Only read access;Company: Company Read and Write Access;ReceiveBranch: Branch Read and Write Access;Sender: CashAccount Read and Write Access;Receiver: CashAccount Read and Write Access;'      |
+		| 'Document.CashTransferOrder Branch: Branch access deny;Company: Company Read and Write Access;ReceiveBranch: Branch Read and Write Access;Sender: CashAccount Read and Write Access;Receiver: CashAccount Read and Write Access;'           |
+		| 'Document.CashTransferOrder Branch: Branch Read and Write Access;Company: Company Only read access;ReceiveBranch: Branch Read and Write Access;Sender: CashAccount Read and Write Access;Receiver: CashAccount Read and Write Access;'      |
+		| 'Document.CashTransferOrder Branch: Branch Only read access;Company: Company Only read access;ReceiveBranch: Branch Read and Write Access;Sender: CashAccount Read and Write Access;Receiver: CashAccount Read and Write Access;'           |
+		| 'Document.CashTransferOrder Branch: Branch access deny;Company: Company Only read access;ReceiveBranch: Branch Read and Write Access;Sender: CashAccount Read and Write Access;Receiver: CashAccount Read and Write Access;'                |
+		| 'Document.CashTransferOrder Branch: Branch Read and Write Access;Company: Company Read and Write Access;ReceiveBranch: Branch Only read access;Sender: CashAccount Read and Write Access;Receiver: CashAccount Read and Write Access;'      |
+		| 'Document.CashTransferOrder Branch: Branch Only read access;Company: Company Read and Write Access;ReceiveBranch: Branch Only read access;Sender: CashAccount Read and Write Access;Receiver: CashAccount Read and Write Access;'           |
+		| 'Document.CashTransferOrder Branch: Branch access deny;Company: Company Read and Write Access;ReceiveBranch: Branch Only read access;Sender: CashAccount Read and Write Access;Receiver: CashAccount Read and Write Access;'                |
+		| 'Document.CashTransferOrder Branch: Branch Read and Write Access;Company: Company Only read access;ReceiveBranch: Branch Only read access;Sender: CashAccount Read and Write Access;Receiver: CashAccount Read and Write Access;'           |
+		| 'Document.CashTransferOrder Branch: Branch Only read access;Company: Company Only read access;ReceiveBranch: Branch Only read access;Sender: CashAccount Read and Write Access;Receiver: CashAccount Read and Write Access;'                |
+		| 'Document.CashTransferOrder Branch: Branch access deny;Company: Company Only read access;ReceiveBranch: Branch Only read access;Sender: CashAccount Read and Write Access;Receiver: CashAccount Read and Write Access;'                     |
+		| 'Document.CashTransferOrder Branch: Branch Read and Write Access;Company: Company Read and Write Access;ReceiveBranch: Branch access deny;Sender: CashAccount Read and Write Access;Receiver: CashAccount Read and Write Access;'           |
+		| 'Document.CashTransferOrder Branch: Branch Only read access;Company: Company Read and Write Access;ReceiveBranch: Branch access deny;Sender: CashAccount Read and Write Access;Receiver: CashAccount Read and Write Access;'                |
+		| 'Document.CashTransferOrder Branch: Branch Read and Write Access;Company: Company Only read access;ReceiveBranch: Branch access deny;Sender: CashAccount Read and Write Access;Receiver: CashAccount Read and Write Access;'                |
+		| 'Document.CashTransferOrder Branch: Branch Only read access;Company: Company Only read access;ReceiveBranch: Branch access deny;Sender: CashAccount Read and Write Access;Receiver: CashAccount Read and Write Access;'                     |
+		| 'Document.CashTransferOrder Branch: Branch Read and Write Access;Company: Company Read and Write Access;ReceiveBranch: Branch Read and Write Access;Sender: CashAccount Only read access;Receiver: CashAccount Read and Write Access;'      |
+		| 'Document.CashTransferOrder Branch: Branch Only read access;Company: Company Read and Write Access;ReceiveBranch: Branch Read and Write Access;Sender: CashAccount Only read access;Receiver: CashAccount Read and Write Access;'           |
+		| 'Document.CashTransferOrder Branch: Branch access deny;Company: Company Read and Write Access;ReceiveBranch: Branch Read and Write Access;Sender: CashAccount Only read access;Receiver: CashAccount Read and Write Access;'                |
+		| 'Document.CashTransferOrder Branch: Branch Read and Write Access;Company: Company Only read access;ReceiveBranch: Branch Read and Write Access;Sender: CashAccount Only read access;Receiver: CashAccount Read and Write Access;'           |
+		| 'Document.CashTransferOrder Branch: Branch Only read access;Company: Company Only read access;ReceiveBranch: Branch Read and Write Access;Sender: CashAccount Only read access;Receiver: CashAccount Read and Write Access;'                |
+		| 'Document.CashTransferOrder Branch: Branch access deny;Company: Company Only read access;ReceiveBranch: Branch Read and Write Access;Sender: CashAccount Only read access;Receiver: CashAccount Read and Write Access;'                     |
+		| 'Document.CashTransferOrder Branch: Branch Read and Write Access;Company: Company Read and Write Access;ReceiveBranch: Branch Only read access;Sender: CashAccount Only read access;Receiver: CashAccount Read and Write Access;'           |
+		| 'Document.CashTransferOrder Branch: Branch Only read access;Company: Company Read and Write Access;ReceiveBranch: Branch Only read access;Sender: CashAccount Only read access;Receiver: CashAccount Read and Write Access;'                |
+		| 'Document.CashTransferOrder Branch: Branch access deny;Company: Company Read and Write Access;ReceiveBranch: Branch Only read access;Sender: CashAccount Only read access;Receiver: CashAccount Read and Write Access;'                     |
+		| 'Document.CashTransferOrder Branch: Branch Read and Write Access;Company: Company Only read access;ReceiveBranch: Branch Only read access;Sender: CashAccount Only read access;Receiver: CashAccount Read and Write Access;'                |
+		| 'Document.CashTransferOrder Branch: Branch Only read access;Company: Company Only read access;ReceiveBranch: Branch Only read access;Sender: CashAccount Only read access;Receiver: CashAccount Read and Write Access;'                     |
+		| 'Document.CashTransferOrder Branch: Branch access deny;Company: Company Only read access;ReceiveBranch: Branch Only read access;Sender: CashAccount Only read access;Receiver: CashAccount Read and Write Access;'                          |
+		| 'Document.CashTransferOrder Branch: Branch Read and Write Access;Company: Company Read and Write Access;ReceiveBranch: Branch access deny;Sender: CashAccount Only read access;Receiver: CashAccount Read and Write Access;'                |
+		| 'Document.CashTransferOrder Branch: Branch Only read access;Company: Company Read and Write Access;ReceiveBranch: Branch access deny;Sender: CashAccount Only read access;Receiver: CashAccount Read and Write Access;'                     |
+		| 'Document.CashTransferOrder Branch: Branch Read and Write Access;Company: Company Only read access;ReceiveBranch: Branch access deny;Sender: CashAccount Only read access;Receiver: CashAccount Read and Write Access;'                     |
+		| 'Document.CashTransferOrder Branch: Branch Only read access;Company: Company Only read access;ReceiveBranch: Branch access deny;Sender: CashAccount Only read access;Receiver: CashAccount Read and Write Access;'                          |
+		| 'Document.CashTransferOrder Branch: Branch Read and Write Access;Company: Company Read and Write Access;ReceiveBranch: Branch Read and Write Access;Sender: CashAccount access deny;Receiver: CashAccount Read and Write Access;'           |
+		| 'Document.CashTransferOrder Branch: Branch Only read access;Company: Company Read and Write Access;ReceiveBranch: Branch Read and Write Access;Sender: CashAccount access deny;Receiver: CashAccount Read and Write Access;'                |
+		| 'Document.CashTransferOrder Branch: Branch access deny;Company: Company Read and Write Access;ReceiveBranch: Branch Read and Write Access;Sender: CashAccount access deny;Receiver: CashAccount Read and Write Access;'                     |
+		| 'Document.CashTransferOrder Branch: Branch Read and Write Access;Company: Company Only read access;ReceiveBranch: Branch Read and Write Access;Sender: CashAccount access deny;Receiver: CashAccount Read and Write Access;'                |
+		| 'Document.CashTransferOrder Branch: Branch Only read access;Company: Company Only read access;ReceiveBranch: Branch Read and Write Access;Sender: CashAccount access deny;Receiver: CashAccount Read and Write Access;'                     |
+		| 'Document.CashTransferOrder Branch: Branch access deny;Company: Company Only read access;ReceiveBranch: Branch Read and Write Access;Sender: CashAccount access deny;Receiver: CashAccount Read and Write Access;'                          |
+		| 'Document.CashTransferOrder Branch: Branch Read and Write Access;Company: Company Read and Write Access;ReceiveBranch: Branch Only read access;Sender: CashAccount access deny;Receiver: CashAccount Read and Write Access;'                |
+		| 'Document.CashTransferOrder Branch: Branch Only read access;Company: Company Read and Write Access;ReceiveBranch: Branch Only read access;Sender: CashAccount access deny;Receiver: CashAccount Read and Write Access;'                     |
+		| 'Document.CashTransferOrder Branch: Branch access deny;Company: Company Read and Write Access;ReceiveBranch: Branch Only read access;Sender: CashAccount access deny;Receiver: CashAccount Read and Write Access;'                          |
+		| 'Document.CashTransferOrder Branch: Branch Read and Write Access;Company: Company Only read access;ReceiveBranch: Branch Only read access;Sender: CashAccount access deny;Receiver: CashAccount Read and Write Access;'                     |
+		| 'Document.CashTransferOrder Branch: Branch Only read access;Company: Company Only read access;ReceiveBranch: Branch Only read access;Sender: CashAccount access deny;Receiver: CashAccount Read and Write Access;'                          |
+		| 'Document.CashTransferOrder Branch: Branch access deny;Company: Company Only read access;ReceiveBranch: Branch Only read access;Sender: CashAccount access deny;Receiver: CashAccount Read and Write Access;'                               |
+		| 'Document.CashTransferOrder Branch: Branch Read and Write Access;Company: Company Read and Write Access;ReceiveBranch: Branch access deny;Sender: CashAccount access deny;Receiver: CashAccount Read and Write Access;'                     |
+		| 'Document.CashTransferOrder Branch: Branch Only read access;Company: Company Read and Write Access;ReceiveBranch: Branch access deny;Sender: CashAccount access deny;Receiver: CashAccount Read and Write Access;'                          |
+		| 'Document.CashTransferOrder Branch: Branch Read and Write Access;Company: Company Only read access;ReceiveBranch: Branch access deny;Sender: CashAccount access deny;Receiver: CashAccount Read and Write Access;'                          |
+		| 'Document.CashTransferOrder Branch: Branch Only read access;Company: Company Only read access;ReceiveBranch: Branch access deny;Sender: CashAccount access deny;Receiver: CashAccount Read and Write Access;'                               |
+		| 'Document.CashTransferOrder Branch: Branch Read and Write Access;Company: Company Read and Write Access;ReceiveBranch: Branch Read and Write Access;Sender: CashAccount Read and Write Access;Receiver: CashAccount Only read access;'      |
+		| 'Document.CashTransferOrder Branch: Branch Only read access;Company: Company Read and Write Access;ReceiveBranch: Branch Read and Write Access;Sender: CashAccount Read and Write Access;Receiver: CashAccount Only read access;'           |
+		| 'Document.CashTransferOrder Branch: Branch access deny;Company: Company Read and Write Access;ReceiveBranch: Branch Read and Write Access;Sender: CashAccount Read and Write Access;Receiver: CashAccount Only read access;'                |
+		| 'Document.CashTransferOrder Branch: Branch Read and Write Access;Company: Company Only read access;ReceiveBranch: Branch Read and Write Access;Sender: CashAccount Read and Write Access;Receiver: CashAccount Only read access;'           |
+		| 'Document.CashTransferOrder Branch: Branch Only read access;Company: Company Only read access;ReceiveBranch: Branch Read and Write Access;Sender: CashAccount Read and Write Access;Receiver: CashAccount Only read access;'                |
+		| 'Document.CashTransferOrder Branch: Branch access deny;Company: Company Only read access;ReceiveBranch: Branch Read and Write Access;Sender: CashAccount Read and Write Access;Receiver: CashAccount Only read access;'                     |
+		| 'Document.CashTransferOrder Branch: Branch Read and Write Access;Company: Company Read and Write Access;ReceiveBranch: Branch Only read access;Sender: CashAccount Read and Write Access;Receiver: CashAccount Only read access;'           |
+		| 'Document.CashTransferOrder Branch: Branch Only read access;Company: Company Read and Write Access;ReceiveBranch: Branch Only read access;Sender: CashAccount Read and Write Access;Receiver: CashAccount Only read access;'                |
+		| 'Document.CashTransferOrder Branch: Branch access deny;Company: Company Read and Write Access;ReceiveBranch: Branch Only read access;Sender: CashAccount Read and Write Access;Receiver: CashAccount Only read access;'                     |
+		| 'Document.CashTransferOrder Branch: Branch Read and Write Access;Company: Company Only read access;ReceiveBranch: Branch Only read access;Sender: CashAccount Read and Write Access;Receiver: CashAccount Only read access;'                |
+		| 'Document.CashTransferOrder Branch: Branch Only read access;Company: Company Only read access;ReceiveBranch: Branch Only read access;Sender: CashAccount Read and Write Access;Receiver: CashAccount Only read access;'                     |
+		| 'Document.CashTransferOrder Branch: Branch access deny;Company: Company Only read access;ReceiveBranch: Branch Only read access;Sender: CashAccount Read and Write Access;Receiver: CashAccount Only read access;'                          |
+		| 'Document.CashTransferOrder Branch: Branch Read and Write Access;Company: Company Read and Write Access;ReceiveBranch: Branch access deny;Sender: CashAccount Read and Write Access;Receiver: CashAccount Only read access;'                |
+		| 'Document.CashTransferOrder Branch: Branch Only read access;Company: Company Read and Write Access;ReceiveBranch: Branch access deny;Sender: CashAccount Read and Write Access;Receiver: CashAccount Only read access;'                     |
+		| 'Document.CashTransferOrder Branch: Branch Read and Write Access;Company: Company Only read access;ReceiveBranch: Branch access deny;Sender: CashAccount Read and Write Access;Receiver: CashAccount Only read access;'                     |
+		| 'Document.CashTransferOrder Branch: Branch Only read access;Company: Company Only read access;ReceiveBranch: Branch access deny;Sender: CashAccount Read and Write Access;Receiver: CashAccount Only read access;'                          |
+		| 'Document.CashTransferOrder Branch: Branch Read and Write Access;Company: Company Read and Write Access;ReceiveBranch: Branch Read and Write Access;Sender: CashAccount Only read access;Receiver: CashAccount Only read access;'           |
+		| 'Document.CashTransferOrder Branch: Branch Only read access;Company: Company Read and Write Access;ReceiveBranch: Branch Read and Write Access;Sender: CashAccount Only read access;Receiver: CashAccount Only read access;'                |
+		| 'Document.CashTransferOrder Branch: Branch access deny;Company: Company Read and Write Access;ReceiveBranch: Branch Read and Write Access;Sender: CashAccount Only read access;Receiver: CashAccount Only read access;'                     |
+		| 'Document.CashTransferOrder Branch: Branch Read and Write Access;Company: Company Only read access;ReceiveBranch: Branch Read and Write Access;Sender: CashAccount Only read access;Receiver: CashAccount Only read access;'                |
+		| 'Document.CashTransferOrder Branch: Branch Only read access;Company: Company Only read access;ReceiveBranch: Branch Read and Write Access;Sender: CashAccount Only read access;Receiver: CashAccount Only read access;'                     |
+		| 'Document.CashTransferOrder Branch: Branch access deny;Company: Company Only read access;ReceiveBranch: Branch Read and Write Access;Sender: CashAccount Only read access;Receiver: CashAccount Only read access;'                          |
+		| 'Document.CashTransferOrder Branch: Branch Read and Write Access;Company: Company Read and Write Access;ReceiveBranch: Branch Only read access;Sender: CashAccount Only read access;Receiver: CashAccount Only read access;'                |
+		| 'Document.CashTransferOrder Branch: Branch Only read access;Company: Company Read and Write Access;ReceiveBranch: Branch Only read access;Sender: CashAccount Only read access;Receiver: CashAccount Only read access;'                     |
+		| 'Document.CashTransferOrder Branch: Branch access deny;Company: Company Read and Write Access;ReceiveBranch: Branch Only read access;Sender: CashAccount Only read access;Receiver: CashAccount Only read access;'                          |
+		| 'Document.CashTransferOrder Branch: Branch Read and Write Access;Company: Company Only read access;ReceiveBranch: Branch Only read access;Sender: CashAccount Only read access;Receiver: CashAccount Only read access;'                     |
+		| 'Document.CashTransferOrder Branch: Branch Only read access;Company: Company Only read access;ReceiveBranch: Branch Only read access;Sender: CashAccount Only read access;Receiver: CashAccount Only read access;'                          |
+		| 'Document.CashTransferOrder Branch: Branch access deny;Company: Company Only read access;ReceiveBranch: Branch Only read access;Sender: CashAccount Only read access;Receiver: CashAccount Only read access;'                               |
+		| 'Document.CashTransferOrder Branch: Branch Read and Write Access;Company: Company Read and Write Access;ReceiveBranch: Branch access deny;Sender: CashAccount Only read access;Receiver: CashAccount Only read access;'                     |
+		| 'Document.CashTransferOrder Branch: Branch Only read access;Company: Company Read and Write Access;ReceiveBranch: Branch access deny;Sender: CashAccount Only read access;Receiver: CashAccount Only read access;'                          |
+		| 'Document.CashTransferOrder Branch: Branch Read and Write Access;Company: Company Only read access;ReceiveBranch: Branch access deny;Sender: CashAccount Only read access;Receiver: CashAccount Only read access;'                          |
+		| 'Document.CashTransferOrder Branch: Branch Only read access;Company: Company Only read access;ReceiveBranch: Branch access deny;Sender: CashAccount Only read access;Receiver: CashAccount Only read access;'                               |
+		| 'Document.CashTransferOrder Branch: Branch Read and Write Access;Company: Company Read and Write Access;ReceiveBranch: Branch Read and Write Access;Sender: CashAccount access deny;Receiver: CashAccount Only read access;'                |
+		| 'Document.CashTransferOrder Branch: Branch Only read access;Company: Company Read and Write Access;ReceiveBranch: Branch Read and Write Access;Sender: CashAccount access deny;Receiver: CashAccount Only read access;'                     |
+		| 'Document.CashTransferOrder Branch: Branch access deny;Company: Company Read and Write Access;ReceiveBranch: Branch Read and Write Access;Sender: CashAccount access deny;Receiver: CashAccount Only read access;'                          |
+		| 'Document.CashTransferOrder Branch: Branch Read and Write Access;Company: Company Only read access;ReceiveBranch: Branch Read and Write Access;Sender: CashAccount access deny;Receiver: CashAccount Only read access;'                     |
+		| 'Document.CashTransferOrder Branch: Branch Only read access;Company: Company Only read access;ReceiveBranch: Branch Read and Write Access;Sender: CashAccount access deny;Receiver: CashAccount Only read access;'                          |
+		| 'Document.CashTransferOrder Branch: Branch access deny;Company: Company Only read access;ReceiveBranch: Branch Read and Write Access;Sender: CashAccount access deny;Receiver: CashAccount Only read access;'                               |
+		| 'Document.CashTransferOrder Branch: Branch Read and Write Access;Company: Company Read and Write Access;ReceiveBranch: Branch Only read access;Sender: CashAccount access deny;Receiver: CashAccount Only read access;'                     |
+		| 'Document.CashTransferOrder Branch: Branch Only read access;Company: Company Read and Write Access;ReceiveBranch: Branch Only read access;Sender: CashAccount access deny;Receiver: CashAccount Only read access;'                          |
+		| 'Document.CashTransferOrder Branch: Branch access deny;Company: Company Read and Write Access;ReceiveBranch: Branch Only read access;Sender: CashAccount access deny;Receiver: CashAccount Only read access;'                               |
+		| 'Document.CashTransferOrder Branch: Branch Read and Write Access;Company: Company Only read access;ReceiveBranch: Branch Only read access;Sender: CashAccount access deny;Receiver: CashAccount Only read access;'                          |
+		| 'Document.CashTransferOrder Branch: Branch Only read access;Company: Company Only read access;ReceiveBranch: Branch Only read access;Sender: CashAccount access deny;Receiver: CashAccount Only read access;'                               |
+		| 'Document.CashTransferOrder Branch: Branch access deny;Company: Company Only read access;ReceiveBranch: Branch Only read access;Sender: CashAccount access deny;Receiver: CashAccount Only read access;'                                    |
+		| 'Document.CashTransferOrder Branch: Branch Read and Write Access;Company: Company Read and Write Access;ReceiveBranch: Branch access deny;Sender: CashAccount access deny;Receiver: CashAccount Only read access;'                          |
+		| 'Document.CashTransferOrder Branch: Branch Only read access;Company: Company Read and Write Access;ReceiveBranch: Branch access deny;Sender: CashAccount access deny;Receiver: CashAccount Only read access;'                               |
+		| 'Document.CashTransferOrder Branch: Branch Read and Write Access;Company: Company Only read access;ReceiveBranch: Branch access deny;Sender: CashAccount access deny;Receiver: CashAccount Only read access;'                               |
+		| 'Document.CashTransferOrder Branch: Branch Only read access;Company: Company Only read access;ReceiveBranch: Branch access deny;Sender: CashAccount access deny;Receiver: CashAccount Only read access;'                                    |
+		| 'Document.CashTransferOrder Branch: Branch Read and Write Access;Company: Company Read and Write Access;ReceiveBranch: Branch Read and Write Access;Sender: CashAccount Read and Write Access;Receiver: CashAccount access deny;'           |
+		| 'Document.CashTransferOrder Branch: Branch Only read access;Company: Company Read and Write Access;ReceiveBranch: Branch Read and Write Access;Sender: CashAccount Read and Write Access;Receiver: CashAccount access deny;'                |
+		| 'Document.CashTransferOrder Branch: Branch access deny;Company: Company Read and Write Access;ReceiveBranch: Branch Read and Write Access;Sender: CashAccount Read and Write Access;Receiver: CashAccount access deny;'                     |
+		| 'Document.CashTransferOrder Branch: Branch Read and Write Access;Company: Company Only read access;ReceiveBranch: Branch Read and Write Access;Sender: CashAccount Read and Write Access;Receiver: CashAccount access deny;'                |
+		| 'Document.CashTransferOrder Branch: Branch Only read access;Company: Company Only read access;ReceiveBranch: Branch Read and Write Access;Sender: CashAccount Read and Write Access;Receiver: CashAccount access deny;'                     |
+		| 'Document.CashTransferOrder Branch: Branch access deny;Company: Company Only read access;ReceiveBranch: Branch Read and Write Access;Sender: CashAccount Read and Write Access;Receiver: CashAccount access deny;'                          |
+		| 'Document.CashTransferOrder Branch: Branch Read and Write Access;Company: Company Read and Write Access;ReceiveBranch: Branch Only read access;Sender: CashAccount Read and Write Access;Receiver: CashAccount access deny;'                |
+		| 'Document.CashTransferOrder Branch: Branch Only read access;Company: Company Read and Write Access;ReceiveBranch: Branch Only read access;Sender: CashAccount Read and Write Access;Receiver: CashAccount access deny;'                     |
+		| 'Document.CashTransferOrder Branch: Branch access deny;Company: Company Read and Write Access;ReceiveBranch: Branch Only read access;Sender: CashAccount Read and Write Access;Receiver: CashAccount access deny;'                          |
+		| 'Document.CashTransferOrder Branch: Branch Read and Write Access;Company: Company Only read access;ReceiveBranch: Branch Only read access;Sender: CashAccount Read and Write Access;Receiver: CashAccount access deny;'                     |
+		| 'Document.CashTransferOrder Branch: Branch Only read access;Company: Company Only read access;ReceiveBranch: Branch Only read access;Sender: CashAccount Read and Write Access;Receiver: CashAccount access deny;'                          |
+		| 'Document.CashTransferOrder Branch: Branch access deny;Company: Company Only read access;ReceiveBranch: Branch Only read access;Sender: CashAccount Read and Write Access;Receiver: CashAccount access deny;'                               |
+		| 'Document.CashTransferOrder Branch: Branch Read and Write Access;Company: Company Read and Write Access;ReceiveBranch: Branch access deny;Sender: CashAccount Read and Write Access;Receiver: CashAccount access deny;'                     |
+		| 'Document.CashTransferOrder Branch: Branch Only read access;Company: Company Read and Write Access;ReceiveBranch: Branch access deny;Sender: CashAccount Read and Write Access;Receiver: CashAccount access deny;'                          |
+		| 'Document.CashTransferOrder Branch: Branch Read and Write Access;Company: Company Only read access;ReceiveBranch: Branch access deny;Sender: CashAccount Read and Write Access;Receiver: CashAccount access deny;'                          |
+		| 'Document.CashTransferOrder Branch: Branch Only read access;Company: Company Only read access;ReceiveBranch: Branch access deny;Sender: CashAccount Read and Write Access;Receiver: CashAccount access deny;'                               |
+		| 'Document.CashTransferOrder Branch: Branch Read and Write Access;Company: Company Read and Write Access;ReceiveBranch: Branch Read and Write Access;Sender: CashAccount Only read access;Receiver: CashAccount access deny;'                |
+		| 'Document.CashTransferOrder Branch: Branch Only read access;Company: Company Read and Write Access;ReceiveBranch: Branch Read and Write Access;Sender: CashAccount Only read access;Receiver: CashAccount access deny;'                     |
+		| 'Document.CashTransferOrder Branch: Branch access deny;Company: Company Read and Write Access;ReceiveBranch: Branch Read and Write Access;Sender: CashAccount Only read access;Receiver: CashAccount access deny;'                          |
+		| 'Document.CashTransferOrder Branch: Branch Read and Write Access;Company: Company Only read access;ReceiveBranch: Branch Read and Write Access;Sender: CashAccount Only read access;Receiver: CashAccount access deny;'                     |
+		| 'Document.CashTransferOrder Branch: Branch Only read access;Company: Company Only read access;ReceiveBranch: Branch Read and Write Access;Sender: CashAccount Only read access;Receiver: CashAccount access deny;'                          |
+		| 'Document.CashTransferOrder Branch: Branch access deny;Company: Company Only read access;ReceiveBranch: Branch Read and Write Access;Sender: CashAccount Only read access;Receiver: CashAccount access deny;'                               |
+		| 'Document.CashTransferOrder Branch: Branch Read and Write Access;Company: Company Read and Write Access;ReceiveBranch: Branch Only read access;Sender: CashAccount Only read access;Receiver: CashAccount access deny;'                     |
+		| 'Document.CashTransferOrder Branch: Branch Only read access;Company: Company Read and Write Access;ReceiveBranch: Branch Only read access;Sender: CashAccount Only read access;Receiver: CashAccount access deny;'                          |
+		| 'Document.CashTransferOrder Branch: Branch access deny;Company: Company Read and Write Access;ReceiveBranch: Branch Only read access;Sender: CashAccount Only read access;Receiver: CashAccount access deny;'                               |
+		| 'Document.CashTransferOrder Branch: Branch Read and Write Access;Company: Company Only read access;ReceiveBranch: Branch Only read access;Sender: CashAccount Only read access;Receiver: CashAccount access deny;'                          |
+		| 'Document.CashTransferOrder Branch: Branch Only read access;Company: Company Only read access;ReceiveBranch: Branch Only read access;Sender: CashAccount Only read access;Receiver: CashAccount access deny;'                               |
+		| 'Document.CashTransferOrder Branch: Branch access deny;Company: Company Only read access;ReceiveBranch: Branch Only read access;Sender: CashAccount Only read access;Receiver: CashAccount access deny;'                                    |
+		| 'Document.CashTransferOrder Branch: Branch Read and Write Access;Company: Company Read and Write Access;ReceiveBranch: Branch access deny;Sender: CashAccount Only read access;Receiver: CashAccount access deny;'                          |
+		| 'Document.CashTransferOrder Branch: Branch Only read access;Company: Company Read and Write Access;ReceiveBranch: Branch access deny;Sender: CashAccount Only read access;Receiver: CashAccount access deny;'                               |
+		| 'Document.CashTransferOrder Branch: Branch Read and Write Access;Company: Company Only read access;ReceiveBranch: Branch access deny;Sender: CashAccount Only read access;Receiver: CashAccount access deny;'                               |
+		| 'Document.CashTransferOrder Branch: Branch Only read access;Company: Company Only read access;ReceiveBranch: Branch access deny;Sender: CashAccount Only read access;Receiver: CashAccount access deny;'                                    |
+	
+		
 Scenario: 960105 check ChequeBondTransaction access rights (LimitedAccess)	
 	And I close all client application windows
 	Given I open hyperlink "e1cib/list/Document.ChequeBondTransaction"	
 	And "List" table became equal
-		| 'Number' | 'Company'                       | 'Branch'                       | 'Description'                                                                                                 |
-		| '1'      | 'Company Read and Write Access' | 'Branch Read and Write Access' | 'Document.ChequeBondTransaction Branch: Branch Read and Write Access;Company: Company Read and Write Access;' |
-		| '2'      | 'Company Read and Write Access' | 'Branch Only read access'      | 'Document.ChequeBondTransaction Branch: Branch Only read access;Company: Company Read and Write Access;'      |
-		| '4'      | 'Company Only read access'      | 'Branch Read and Write Access' | 'Document.ChequeBondTransaction Branch: Branch Read and Write Access;Company: Company Only read access;'      |
-		| '5'      | 'Company Only read access'      | 'Branch Only read access'      | 'Document.ChequeBondTransaction Branch: Branch Only read access;Company: Company Only read access;'           |
+		| 'Description'                                                                                                 |
+		| 'Document.ChequeBondTransaction Branch: Branch Read and Write Access;Company: Company Read and Write Access;' |
+		| 'Document.ChequeBondTransaction Branch: Branch Only read access;Company: Company Read and Write Access;'      |
+		| 'Document.ChequeBondTransaction Branch: Branch Read and Write Access;Company: Company Only read access;'      |
+		| 'Document.ChequeBondTransaction Branch: Branch Only read access;Company: Company Only read access;'           |
 	
 Scenario: 960106 check ChequeBondTransactionItem access rights (LimitedAccess)	
 	And I close all client application windows
 	Given I open hyperlink "e1cib/list/Document.ChequeBondTransactionItem"		
 	And "List" table became equal
-		| 'Number' | 'Company'                       | 'Branch'                       | 'Description'                                                                                                     |
-		| '1'      | 'Company Read and Write Access' | 'Branch Read and Write Access' | 'Document.ChequeBondTransactionItem Branch: Branch Read and Write Access;Company: Company Read and Write Access;' |
-		| '2'      | 'Company Read and Write Access' | 'Branch Only read access'      | 'Document.ChequeBondTransactionItem Branch: Branch Only read access;Company: Company Read and Write Access;'      |
-		| '4'      | 'Company Only read access'      | 'Branch Read and Write Access' | 'Document.ChequeBondTransactionItem Branch: Branch Read and Write Access;Company: Company Only read access;'      |
-		| '5'      | 'Company Only read access'      | 'Branch Only read access'      | 'Document.ChequeBondTransactionItem Branch: Branch Only read access;Company: Company Only read access;'           |
+		| 'Description'                                                                                                     |
+		| 'Document.ChequeBondTransactionItem Branch: Branch Read and Write Access;Company: Company Read and Write Access;' |
+		| 'Document.ChequeBondTransactionItem Branch: Branch Only read access;Company: Company Read and Write Access;'      |
+		| 'Document.ChequeBondTransactionItem Branch: Branch Read and Write Access;Company: Company Only read access;'      |
+		| 'Document.ChequeBondTransactionItem Branch: Branch Only read access;Company: Company Only read access;'           |
 	
 Scenario: 960107 check ConsolidatedRetailSales access rights (LimitedAccess)	
 	And I close all client application windows
 	Given I open hyperlink "e1cib/list/Document.ConsolidatedRetailSales"
 	And "List" table became equal
-		| 'Number' | 'Company'                       | 'Branch'                       | 'Cash account'                      | 'Description'                                                                                                                                                  |
-		| '1'      | 'Company Read and Write Access' | 'Branch Read and Write Access' | 'CashAccount Read and Write Access' | 'Document.ConsolidatedRetailSales Branch: Branch Read and Write Access;Company: Company Read and Write Access;CashAccount: CashAccount Read and Write Access;' |
-		| '2'      | 'Company Read and Write Access' | 'Branch Only read access'      | 'CashAccount Read and Write Access' | 'Document.ConsolidatedRetailSales Branch: Branch Only read access;Company: Company Read and Write Access;CashAccount: CashAccount Read and Write Access;'      |
-		| '4'      | 'Company Only read access'      | 'Branch Read and Write Access' | 'CashAccount Read and Write Access' | 'Document.ConsolidatedRetailSales Branch: Branch Read and Write Access;Company: Company Only read access;CashAccount: CashAccount Read and Write Access;'      |
-		| '5'      | 'Company Only read access'      | 'Branch Only read access'      | 'CashAccount Read and Write Access' | 'Document.ConsolidatedRetailSales Branch: Branch Only read access;Company: Company Only read access;CashAccount: CashAccount Read and Write Access;'           |
-		| '10'     | 'Company Read and Write Access' | 'Branch Read and Write Access' | 'CashAccount Only read access'      | 'Document.ConsolidatedRetailSales Branch: Branch Read and Write Access;Company: Company Read and Write Access;CashAccount: CashAccount Only read access;'      |
-		| '11'     | 'Company Read and Write Access' | 'Branch Only read access'      | 'CashAccount Only read access'      | 'Document.ConsolidatedRetailSales Branch: Branch Only read access;Company: Company Read and Write Access;CashAccount: CashAccount Only read access;'           |
-		| '13'     | 'Company Only read access'      | 'Branch Read and Write Access' | 'CashAccount Only read access'      | 'Document.ConsolidatedRetailSales Branch: Branch Read and Write Access;Company: Company Only read access;CashAccount: CashAccount Only read access;'           |
-		| '14'     | 'Company Only read access'      | 'Branch Only read access'      | 'CashAccount Only read access'      | 'Document.ConsolidatedRetailSales Branch: Branch Only read access;Company: Company Only read access;CashAccount: CashAccount Only read access;'                |
+		| 'Description'                                                                                                                                                  |
+		| 'Document.ConsolidatedRetailSales Branch: Branch Read and Write Access;Company: Company Read and Write Access;CashAccount: CashAccount Read and Write Access;' |
+		| 'Document.ConsolidatedRetailSales Branch: Branch Only read access;Company: Company Read and Write Access;CashAccount: CashAccount Read and Write Access;'      |
+		| 'Document.ConsolidatedRetailSales Branch: Branch Read and Write Access;Company: Company Only read access;CashAccount: CashAccount Read and Write Access;'      |
+		| 'Document.ConsolidatedRetailSales Branch: Branch Only read access;Company: Company Only read access;CashAccount: CashAccount Read and Write Access;'           |
+		| 'Document.ConsolidatedRetailSales Branch: Branch Read and Write Access;Company: Company Read and Write Access;CashAccount: CashAccount Only read access;'      |
+		| 'Document.ConsolidatedRetailSales Branch: Branch Only read access;Company: Company Read and Write Access;CashAccount: CashAccount Only read access;'           |
+		| 'Document.ConsolidatedRetailSales Branch: Branch Read and Write Access;Company: Company Only read access;CashAccount: CashAccount Only read access;'           |
+		| 'Document.ConsolidatedRetailSales Branch: Branch Only read access;Company: Company Only read access;CashAccount: CashAccount Only read access;'                |
 	
 Scenario: 960108 check CreditNote access rights (LimitedAccess)	
 	And I close all client application windows
 	Given I open hyperlink "e1cib/list/Document.CreditNote"	
 	And "List" table became equal
-		| 'Number' | 'Company'                       | 'Description'                                                                                      |
-		| '1'      | 'Company Read and Write Access' | 'Document.CreditNote Branch: Branch Read and Write Access;Company: Company Read and Write Access;' |
-		| '2'      | 'Company Read and Write Access' | 'Document.CreditNote Branch: Branch Only read access;Company: Company Read and Write Access;'      |
-		| '4'      | 'Company Only read access'      | 'Document.CreditNote Branch: Branch Read and Write Access;Company: Company Only read access;'      |
-		| '5'      | 'Company Only read access'      | 'Document.CreditNote Branch: Branch Only read access;Company: Company Only read access;'           |
+		| 'Description'                                                                                      |
+		| 'Document.CreditNote Branch: Branch Read and Write Access;Company: Company Read and Write Access;' |
+		| 'Document.CreditNote Branch: Branch Only read access;Company: Company Read and Write Access;'      |
+		| 'Document.CreditNote Branch: Branch Read and Write Access;Company: Company Only read access;'      |
+		| 'Document.CreditNote Branch: Branch Only read access;Company: Company Only read access;'           |
 	
 Scenario: 960109 check CustomersAdvancesClosing access rights (LimitedAccess)	
 	And I close all client application windows
 	Given I open hyperlink "e1cib/list/Document.CustomersAdvancesClosing"
 	And "List" table became equal
-		| 'Number' | 'Company'                       | 'Branch'                       | 'Description'                                                                                                    |
-		| '1'      | 'Company Read and Write Access' | 'Branch Read and Write Access' | 'Document.CustomersAdvancesClosing Branch: Branch Read and Write Access;Company: Company Read and Write Access;' |
-		| '2'      | 'Company Read and Write Access' | 'Branch Only read access'      | 'Document.CustomersAdvancesClosing Branch: Branch Only read access;Company: Company Read and Write Access;'      |
-		| '4'      | 'Company Only read access'      | 'Branch Read and Write Access' | 'Document.CustomersAdvancesClosing Branch: Branch Read and Write Access;Company: Company Only read access;'      |
-		| '5'      | 'Company Only read access'      | 'Branch Only read access'      | 'Document.CustomersAdvancesClosing Branch: Branch Only read access;Company: Company Only read access;'           |
+		| 'Description'                                                                                                    |
+		| 'Document.CustomersAdvancesClosing Branch: Branch Read and Write Access;Company: Company Read and Write Access;' |
+		| 'Document.CustomersAdvancesClosing Branch: Branch Only read access;Company: Company Read and Write Access;'      |
+		| 'Document.CustomersAdvancesClosing Branch: Branch Read and Write Access;Company: Company Only read access;'      |
+		| 'Document.CustomersAdvancesClosing Branch: Branch Only read access;Company: Company Only read access;'           |
 	
 Scenario: 960110 check DebitNote access rights (LimitedAccess)	
 	And I close all client application windows
 	Given I open hyperlink "e1cib/list/Document.DebitNote"
 	And "List" table became equal
-		| 'Number' | 'Company'                       | 'Description'                                                                                     |
-		| '1'      | 'Company Read and Write Access' | 'Document.DebitNote Branch: Branch Read and Write Access;Company: Company Read and Write Access;' |
-		| '2'      | 'Company Read and Write Access' | 'Document.DebitNote Branch: Branch Only read access;Company: Company Read and Write Access;'      |
-		| '4'      | 'Company Only read access'      | 'Document.DebitNote Branch: Branch Read and Write Access;Company: Company Only read access;'      |
-		| '5'      | 'Company Only read access'      | 'Document.DebitNote Branch: Branch Only read access;Company: Company Only read access;'           |
+		| 'Description'                                                                                     |
+		| 'Document.DebitNote Branch: Branch Read and Write Access;Company: Company Read and Write Access;' |
+		| 'Document.DebitNote Branch: Branch Only read access;Company: Company Read and Write Access;'      |
+		| 'Document.DebitNote Branch: Branch Read and Write Access;Company: Company Only read access;'      |
+		| 'Document.DebitNote Branch: Branch Only read access;Company: Company Only read access;'           |
 	
 Scenario: 960111 check EmployeeCashAdvance access rights (LimitedAccess)	
 	And I close all client application windows
 	Given I open hyperlink "e1cib/list/Document.EmployeeCashAdvance"
 	And "List" table became equal
-		| 'Number' | 'Company'                       | 'Branch'                       | 'Description'                                                                                               |
-		| '1'      | 'Company Read and Write Access' | 'Branch Read and Write Access' | 'Document.EmployeeCashAdvance Branch: Branch Read and Write Access;Company: Company Read and Write Access;' |
-		| '2'      | 'Company Read and Write Access' | 'Branch Only read access'      | 'Document.EmployeeCashAdvance Branch: Branch Only read access;Company: Company Read and Write Access;'      |
-		| '4'      | 'Company Only read access'      | 'Branch Read and Write Access' | 'Document.EmployeeCashAdvance Branch: Branch Read and Write Access;Company: Company Only read access;'      |
-		| '5'      | 'Company Only read access'      | 'Branch Only read access'      | 'Document.EmployeeCashAdvance Branch: Branch Only read access;Company: Company Only read access;'           |
+		| 'Description'                                                                                               |
+		| 'Document.EmployeeCashAdvance Branch: Branch Read and Write Access;Company: Company Read and Write Access;' |
+		| 'Document.EmployeeCashAdvance Branch: Branch Only read access;Company: Company Read and Write Access;'      |
+		| 'Document.EmployeeCashAdvance Branch: Branch Read and Write Access;Company: Company Only read access;'      |
+		| 'Document.EmployeeCashAdvance Branch: Branch Only read access;Company: Company Only read access;'           |
 	
 Scenario: 960112 check ForeignCurrencyRevaluation access rights (LimitedAccess)	
 	And I close all client application windows
 	Given I open hyperlink "e1cib/list/Document.ForeignCurrencyRevaluation"	
 	And "List" table became equal
-		| 'Number' | 'Company'                       | 'Description'                                                                 |
-		| '1'      | 'Company Read and Write Access' | 'Document.ForeignCurrencyRevaluation Company: Company Read and Write Access;' |
-		| '2'      | 'Company Only read access'      | 'Document.ForeignCurrencyRevaluation Company: Company Only read access;'      |
+		| 'Description'                                                                 |
+		| 'Document.ForeignCurrencyRevaluation Company: Company Read and Write Access;' |
+		| 'Document.ForeignCurrencyRevaluation Company: Company Only read access;'      |
 	
 Scenario: 960113 check GoodsReceipt access rights (LimitedAccess)	
 	And I close all client application windows
 	Given I open hyperlink "e1cib/list/Document.GoodsReceipt"
 	And "List" table became equal
-		| 'Number' | 'Company'                       | 'Store'                       | 'Description'                                                                                                                                                 |
-		| '1'      | 'Company Read and Write Access' | ''                            | 'Document.GoodsReceipt Branch: Branch Read and Write Access;Company: Company Read and Write Access;'                                                          |
-		| '2'      | 'Company Read and Write Access' | 'Store Read and Write Access' | 'Document.GoodsReceipt Branch: Branch Read and Write Access;Company: Company Read and Write Access;Store: Store Read and Write Access'                        |
-		| '3'      | 'Company Read and Write Access' | 'Store Only read access'      | 'Document.GoodsReceipt Branch: Branch Read and Write Access;Company: Company Read and Write Access;Store: Store Only read access'                             |
-		| '5'      | 'Company Read and Write Access' | ''                            | 'Document.GoodsReceipt Branch: Branch Read and Write Access;Company: Company Read and Write Access;Store: Store Read and Write Access&Store Only read access' |
-		| '9'      | 'Company Read and Write Access' | ''                            | 'Document.GoodsReceipt Branch: Branch Only read access;Company: Company Read and Write Access;'                                                               |
-		| '10'     | 'Company Read and Write Access' | 'Store Read and Write Access' | 'Document.GoodsReceipt Branch: Branch Only read access;Company: Company Read and Write Access;Store: Store Read and Write Access'                             |
-		| '11'     | 'Company Read and Write Access' | 'Store Only read access'      | 'Document.GoodsReceipt Branch: Branch Only read access;Company: Company Read and Write Access;Store: Store Only read access'                                  |
-		| '13'     | 'Company Read and Write Access' | ''                            | 'Document.GoodsReceipt Branch: Branch Only read access;Company: Company Read and Write Access;Store: Store Read and Write Access&Store Only read access'      |
-		| '25'     | 'Company Only read access'      | ''                            | 'Document.GoodsReceipt Branch: Branch Read and Write Access;Company: Company Only read access;'                                                               |
-		| '26'     | 'Company Only read access'      | 'Store Read and Write Access' | 'Document.GoodsReceipt Branch: Branch Read and Write Access;Company: Company Only read access;Store: Store Read and Write Access'                             |
-		| '27'     | 'Company Only read access'      | 'Store Only read access'      | 'Document.GoodsReceipt Branch: Branch Read and Write Access;Company: Company Only read access;Store: Store Only read access'                                  |
-		| '29'     | 'Company Only read access'      | ''                            | 'Document.GoodsReceipt Branch: Branch Read and Write Access;Company: Company Only read access;Store: Store Read and Write Access&Store Only read access'      |
-		| '33'     | 'Company Only read access'      | ''                            | 'Document.GoodsReceipt Branch: Branch Only read access;Company: Company Only read access;'                                                                    |
-		| '34'     | 'Company Only read access'      | 'Store Read and Write Access' | 'Document.GoodsReceipt Branch: Branch Only read access;Company: Company Only read access;Store: Store Read and Write Access'                                  |
-		| '35'     | 'Company Only read access'      | 'Store Only read access'      | 'Document.GoodsReceipt Branch: Branch Only read access;Company: Company Only read access;Store: Store Only read access'                                       |
-		| '37'     | 'Company Only read access'      | ''                            | 'Document.GoodsReceipt Branch: Branch Only read access;Company: Company Only read access;Store: Store Read and Write Access&Store Only read access'           |
+		| 'Description'                                                                                                                                                                   |
+		| 'Document.GoodsReceipt Branch: Branch Read and Write Access;Company: Company Read and Write Access;Store: Store Read and Write Access'                                          |
+		| 'Document.GoodsReceipt Branch: Branch Read and Write Access;Company: Company Read and Write Access;Store: Store Only read access'                                               |
+		| 'Document.GoodsReceipt Branch: Branch Read and Write Access;Company: Company Read and Write Access;Store: Store Read and Write Access&Store Only read access'                   |
+		| 'Document.GoodsReceipt Branch: Branch Read and Write Access;Company: Company Read and Write Access;Store: Store Only read access&Store access deny'                             |
+		| 'Document.GoodsReceipt Branch: Branch Read and Write Access;Company: Company Read and Write Access;Store: Store Read and Write Access&Store access deny'                        |
+		| 'Document.GoodsReceipt Branch: Branch Read and Write Access;Company: Company Read and Write Access;Store: Store Read and Write Access&Store Only read access&Store access deny' |
+		| 'Document.GoodsReceipt Branch: Branch Only read access;Company: Company Read and Write Access;Store: Store Read and Write Access'                                               |
+		| 'Document.GoodsReceipt Branch: Branch Only read access;Company: Company Read and Write Access;Store: Store Only read access'                                                    |
+		| 'Document.GoodsReceipt Branch: Branch Only read access;Company: Company Read and Write Access;Store: Store Read and Write Access&Store Only read access'                        |
+		| 'Document.GoodsReceipt Branch: Branch Only read access;Company: Company Read and Write Access;Store: Store Only read access&Store access deny'                                  |
+		| 'Document.GoodsReceipt Branch: Branch Only read access;Company: Company Read and Write Access;Store: Store Read and Write Access&Store access deny'                             |
+		| 'Document.GoodsReceipt Branch: Branch Only read access;Company: Company Read and Write Access;Store: Store Read and Write Access&Store Only read access&Store access deny'      |
+		| 'Document.GoodsReceipt Branch: Branch Read and Write Access;Company: Company Only read access;Store: Store Read and Write Access'                                               |
+		| 'Document.GoodsReceipt Branch: Branch Read and Write Access;Company: Company Only read access;Store: Store Only read access'                                                    |
+		| 'Document.GoodsReceipt Branch: Branch Read and Write Access;Company: Company Only read access;Store: Store Read and Write Access&Store Only read access'                        |
+		| 'Document.GoodsReceipt Branch: Branch Read and Write Access;Company: Company Only read access;Store: Store Only read access&Store access deny'                                  |
+		| 'Document.GoodsReceipt Branch: Branch Read and Write Access;Company: Company Only read access;Store: Store Read and Write Access&Store access deny'                             |
+		| 'Document.GoodsReceipt Branch: Branch Read and Write Access;Company: Company Only read access;Store: Store Read and Write Access&Store Only read access&Store access deny'      |
+		| 'Document.GoodsReceipt Branch: Branch Only read access;Company: Company Only read access;Store: Store Read and Write Access'                                                    |
+		| 'Document.GoodsReceipt Branch: Branch Only read access;Company: Company Only read access;Store: Store Only read access'                                                         |
+		| 'Document.GoodsReceipt Branch: Branch Only read access;Company: Company Only read access;Store: Store Read and Write Access&Store Only read access'                             |
+		| 'Document.GoodsReceipt Branch: Branch Only read access;Company: Company Only read access;Store: Store Only read access&Store access deny'                                       |
+		| 'Document.GoodsReceipt Branch: Branch Only read access;Company: Company Only read access;Store: Store Read and Write Access&Store access deny'                                  |
+		| 'Document.GoodsReceipt Branch: Branch Only read access;Company: Company Only read access;Store: Store Read and Write Access&Store Only read access&Store access deny'           |
 	
+		
 Scenario: 960114 check IncomingPaymentOrder access rights (LimitedAccess)	
 	And I close all client application windows
 	Given I open hyperlink "e1cib/list/Document.IncomingPaymentOrder"	
 	And "List" table became equal
-		| 'Number' | 'Company'                       | 'Description'                                                                                                |
-		| '1'      | 'Company Read and Write Access' | 'Document.IncomingPaymentOrder Branch: Branch Read and Write Access;Company: Company Read and Write Access;' |
-		| '2'      | 'Company Read and Write Access' | 'Document.IncomingPaymentOrder Branch: Branch Only read access;Company: Company Read and Write Access;'      |
-		| '4'      | 'Company Only read access'      | 'Document.IncomingPaymentOrder Branch: Branch Read and Write Access;Company: Company Only read access;'      |
-		| '5'      | 'Company Only read access'      | 'Document.IncomingPaymentOrder Branch: Branch Only read access;Company: Company Only read access;'           |
+		| 'Description'                                                                                                |
+		| 'Document.IncomingPaymentOrder Branch: Branch Read and Write Access;Company: Company Read and Write Access;' |
+		| 'Document.IncomingPaymentOrder Branch: Branch Only read access;Company: Company Read and Write Access;'      |
+		| 'Document.IncomingPaymentOrder Branch: Branch Read and Write Access;Company: Company Only read access;'      |
+		| 'Document.IncomingPaymentOrder Branch: Branch Only read access;Company: Company Only read access;'           |
 	
 Scenario: 960115 check InternalSupplyRequest access rights (LimitedAccess)	
 	And I close all client application windows
 	Given I open hyperlink "e1cib/list/Document.InternalSupplyRequest"	
 	And "List" table became equal
-		| 'Number' | 'Company'                       | 'Store'                       | 'Description'                                                                                                                                    |
-		| '1'      | 'Company Read and Write Access' | 'Store Read and Write Access' | 'Document.InternalSupplyRequest Store: Store Read and Write Access;Branch: Branch Read and Write Access;Company: Company Read and Write Access;' |
-		| '2'      | 'Company Read and Write Access' | 'Store Only read access'      | 'Document.InternalSupplyRequest Store: Store Only read access;Branch: Branch Read and Write Access;Company: Company Read and Write Access;'      |
-		| '4'      | 'Company Read and Write Access' | 'Store Read and Write Access' | 'Document.InternalSupplyRequest Store: Store Read and Write Access;Branch: Branch Only read access;Company: Company Read and Write Access;'      |
-		| '5'      | 'Company Read and Write Access' | 'Store Only read access'      | 'Document.InternalSupplyRequest Store: Store Only read access;Branch: Branch Only read access;Company: Company Read and Write Access;'           |
-		| '10'     | 'Company Only read access'      | 'Store Read and Write Access' | 'Document.InternalSupplyRequest Store: Store Read and Write Access;Branch: Branch Read and Write Access;Company: Company Only read access;'      |
-		| '11'     | 'Company Only read access'      | 'Store Only read access'      | 'Document.InternalSupplyRequest Store: Store Only read access;Branch: Branch Read and Write Access;Company: Company Only read access;'           |
-		| '13'     | 'Company Only read access'      | 'Store Read and Write Access' | 'Document.InternalSupplyRequest Store: Store Read and Write Access;Branch: Branch Only read access;Company: Company Only read access;'           |
-		| '14'     | 'Company Only read access'      | 'Store Only read access'      | 'Document.InternalSupplyRequest Store: Store Only read access;Branch: Branch Only read access;Company: Company Only read access;'                |
+		| 'Description'                                                                                                                                    |
+		| 'Document.InternalSupplyRequest Store: Store Read and Write Access;Branch: Branch Read and Write Access;Company: Company Read and Write Access;' |
+		| 'Document.InternalSupplyRequest Store: Store Only read access;Branch: Branch Read and Write Access;Company: Company Read and Write Access;'      |
+		| 'Document.InternalSupplyRequest Store: Store Read and Write Access;Branch: Branch Only read access;Company: Company Read and Write Access;'      |
+		| 'Document.InternalSupplyRequest Store: Store Only read access;Branch: Branch Only read access;Company: Company Read and Write Access;'           |
+		| 'Document.InternalSupplyRequest Store: Store Read and Write Access;Branch: Branch Read and Write Access;Company: Company Only read access;'      |
+		| 'Document.InternalSupplyRequest Store: Store Only read access;Branch: Branch Read and Write Access;Company: Company Only read access;'           |
+		| 'Document.InternalSupplyRequest Store: Store Read and Write Access;Branch: Branch Only read access;Company: Company Only read access;'           |
+		| 'Document.InternalSupplyRequest Store: Store Only read access;Branch: Branch Only read access;Company: Company Only read access;'                |
 	
 Scenario: 960116 check InventoryTransfer access rights (LimitedAccess)	
 	And I close all client application windows
 	Given I open hyperlink "e1cib/list/Document.InventoryTransfer"
 	And "List" table became equal
-		| 'Number' | 'Company'                       | 'Store sender'                | 'Store transit'               | 'Description'                                                                                                                                                                                                                           |
-		| '1'      | 'Company Read and Write Access' | 'Store Read and Write Access' | 'Store Read and Write Access' | 'Document.InventoryTransfer Branch: Branch Read and Write Access;Company: Company Read and Write Access;StoreReceiver: Store Read and Write Access;StoreSender: Store Read and Write Access;StoreTransit: Store Read and Write Access;' |
-		| '2'      | 'Company Read and Write Access' | 'Store Read and Write Access' | 'Store Read and Write Access' | 'Document.InventoryTransfer Branch: Branch Only read access;Company: Company Read and Write Access;StoreReceiver: Store Read and Write Access;StoreSender: Store Read and Write Access;StoreTransit: Store Read and Write Access;'      |
-		| '4'      | 'Company Only read access'      | 'Store Read and Write Access' | 'Store Read and Write Access' | 'Document.InventoryTransfer Branch: Branch Read and Write Access;Company: Company Only read access;StoreReceiver: Store Read and Write Access;StoreSender: Store Read and Write Access;StoreTransit: Store Read and Write Access;'      |
-		| '5'      | 'Company Only read access'      | 'Store Read and Write Access' | 'Store Read and Write Access' | 'Document.InventoryTransfer Branch: Branch Only read access;Company: Company Only read access;StoreReceiver: Store Read and Write Access;StoreSender: Store Read and Write Access;StoreTransit: Store Read and Write Access;'           |
-		| '10'     | 'Company Read and Write Access' | 'Store Read and Write Access' | 'Store Read and Write Access' | 'Document.InventoryTransfer Branch: Branch Read and Write Access;Company: Company Read and Write Access;StoreReceiver: Store Only read access;StoreSender: Store Read and Write Access;StoreTransit: Store Read and Write Access;'      |
-		| '11'     | 'Company Read and Write Access' | 'Store Read and Write Access' | 'Store Read and Write Access' | 'Document.InventoryTransfer Branch: Branch Only read access;Company: Company Read and Write Access;StoreReceiver: Store Only read access;StoreSender: Store Read and Write Access;StoreTransit: Store Read and Write Access;'           |
-		| '13'     | 'Company Only read access'      | 'Store Read and Write Access' | 'Store Read and Write Access' | 'Document.InventoryTransfer Branch: Branch Read and Write Access;Company: Company Only read access;StoreReceiver: Store Only read access;StoreSender: Store Read and Write Access;StoreTransit: Store Read and Write Access;'           |
-		| '14'     | 'Company Only read access'      | 'Store Read and Write Access' | 'Store Read and Write Access' | 'Document.InventoryTransfer Branch: Branch Only read access;Company: Company Only read access;StoreReceiver: Store Only read access;StoreSender: Store Read and Write Access;StoreTransit: Store Read and Write Access;'                |
-		| '28'     | 'Company Read and Write Access' | 'Store Only read access'      | 'Store Read and Write Access' | 'Document.InventoryTransfer Branch: Branch Read and Write Access;Company: Company Read and Write Access;StoreReceiver: Store Read and Write Access;StoreSender: Store Only read access;StoreTransit: Store Read and Write Access;'      |
-		| '29'     | 'Company Read and Write Access' | 'Store Only read access'      | 'Store Read and Write Access' | 'Document.InventoryTransfer Branch: Branch Only read access;Company: Company Read and Write Access;StoreReceiver: Store Read and Write Access;StoreSender: Store Only read access;StoreTransit: Store Read and Write Access;'           |
-		| '31'     | 'Company Only read access'      | 'Store Only read access'      | 'Store Read and Write Access' | 'Document.InventoryTransfer Branch: Branch Read and Write Access;Company: Company Only read access;StoreReceiver: Store Read and Write Access;StoreSender: Store Only read access;StoreTransit: Store Read and Write Access;'           |
-		| '32'     | 'Company Only read access'      | 'Store Only read access'      | 'Store Read and Write Access' | 'Document.InventoryTransfer Branch: Branch Only read access;Company: Company Only read access;StoreReceiver: Store Read and Write Access;StoreSender: Store Only read access;StoreTransit: Store Read and Write Access;'                |
-		| '37'     | 'Company Read and Write Access' | 'Store Only read access'      | 'Store Read and Write Access' | 'Document.InventoryTransfer Branch: Branch Read and Write Access;Company: Company Read and Write Access;StoreReceiver: Store Only read access;StoreSender: Store Only read access;StoreTransit: Store Read and Write Access;'           |
-		| '38'     | 'Company Read and Write Access' | 'Store Only read access'      | 'Store Read and Write Access' | 'Document.InventoryTransfer Branch: Branch Only read access;Company: Company Read and Write Access;StoreReceiver: Store Only read access;StoreSender: Store Only read access;StoreTransit: Store Read and Write Access;'                |
-		| '40'     | 'Company Only read access'      | 'Store Only read access'      | 'Store Read and Write Access' | 'Document.InventoryTransfer Branch: Branch Read and Write Access;Company: Company Only read access;StoreReceiver: Store Only read access;StoreSender: Store Only read access;StoreTransit: Store Read and Write Access;'                |
-		| '41'     | 'Company Only read access'      | 'Store Only read access'      | 'Store Read and Write Access' | 'Document.InventoryTransfer Branch: Branch Only read access;Company: Company Only read access;StoreReceiver: Store Only read access;StoreSender: Store Only read access;StoreTransit: Store Read and Write Access;'                     |
-		| '82'     | 'Company Read and Write Access' | 'Store Read and Write Access' | 'Store Only read access'      | 'Document.InventoryTransfer Branch: Branch Read and Write Access;Company: Company Read and Write Access;StoreReceiver: Store Read and Write Access;StoreSender: Store Read and Write Access;StoreTransit: Store Only read access;'      |
-		| '83'     | 'Company Read and Write Access' | 'Store Read and Write Access' | 'Store Only read access'      | 'Document.InventoryTransfer Branch: Branch Only read access;Company: Company Read and Write Access;StoreReceiver: Store Read and Write Access;StoreSender: Store Read and Write Access;StoreTransit: Store Only read access;'           |
-		| '85'     | 'Company Only read access'      | 'Store Read and Write Access' | 'Store Only read access'      | 'Document.InventoryTransfer Branch: Branch Read and Write Access;Company: Company Only read access;StoreReceiver: Store Read and Write Access;StoreSender: Store Read and Write Access;StoreTransit: Store Only read access;'           |
-		| '86'     | 'Company Only read access'      | 'Store Read and Write Access' | 'Store Only read access'      | 'Document.InventoryTransfer Branch: Branch Only read access;Company: Company Only read access;StoreReceiver: Store Read and Write Access;StoreSender: Store Read and Write Access;StoreTransit: Store Only read access;'                |
-		| '91'     | 'Company Read and Write Access' | 'Store Read and Write Access' | 'Store Only read access'      | 'Document.InventoryTransfer Branch: Branch Read and Write Access;Company: Company Read and Write Access;StoreReceiver: Store Only read access;StoreSender: Store Read and Write Access;StoreTransit: Store Only read access;'           |
-		| '92'     | 'Company Read and Write Access' | 'Store Read and Write Access' | 'Store Only read access'      | 'Document.InventoryTransfer Branch: Branch Only read access;Company: Company Read and Write Access;StoreReceiver: Store Only read access;StoreSender: Store Read and Write Access;StoreTransit: Store Only read access;'                |
-		| '94'     | 'Company Only read access'      | 'Store Read and Write Access' | 'Store Only read access'      | 'Document.InventoryTransfer Branch: Branch Read and Write Access;Company: Company Only read access;StoreReceiver: Store Only read access;StoreSender: Store Read and Write Access;StoreTransit: Store Only read access;'                |
-		| '95'     | 'Company Only read access'      | 'Store Read and Write Access' | 'Store Only read access'      | 'Document.InventoryTransfer Branch: Branch Only read access;Company: Company Only read access;StoreReceiver: Store Only read access;StoreSender: Store Read and Write Access;StoreTransit: Store Only read access;'                     |
-		| '109'    | 'Company Read and Write Access' | 'Store Only read access'      | 'Store Only read access'      | 'Document.InventoryTransfer Branch: Branch Read and Write Access;Company: Company Read and Write Access;StoreReceiver: Store Read and Write Access;StoreSender: Store Only read access;StoreTransit: Store Only read access;'           |
-		| '110'    | 'Company Read and Write Access' | 'Store Only read access'      | 'Store Only read access'      | 'Document.InventoryTransfer Branch: Branch Only read access;Company: Company Read and Write Access;StoreReceiver: Store Read and Write Access;StoreSender: Store Only read access;StoreTransit: Store Only read access;'                |
-		| '112'    | 'Company Only read access'      | 'Store Only read access'      | 'Store Only read access'      | 'Document.InventoryTransfer Branch: Branch Read and Write Access;Company: Company Only read access;StoreReceiver: Store Read and Write Access;StoreSender: Store Only read access;StoreTransit: Store Only read access;'                |
-		| '113'    | 'Company Only read access'      | 'Store Only read access'      | 'Store Only read access'      | 'Document.InventoryTransfer Branch: Branch Only read access;Company: Company Only read access;StoreReceiver: Store Read and Write Access;StoreSender: Store Only read access;StoreTransit: Store Only read access;'                     |
-		| '118'    | 'Company Read and Write Access' | 'Store Only read access'      | 'Store Only read access'      | 'Document.InventoryTransfer Branch: Branch Read and Write Access;Company: Company Read and Write Access;StoreReceiver: Store Only read access;StoreSender: Store Only read access;StoreTransit: Store Only read access;'                |
-		| '119'    | 'Company Read and Write Access' | 'Store Only read access'      | 'Store Only read access'      | 'Document.InventoryTransfer Branch: Branch Only read access;Company: Company Read and Write Access;StoreReceiver: Store Only read access;StoreSender: Store Only read access;StoreTransit: Store Only read access;'                     |
-		| '121'    | 'Company Only read access'      | 'Store Only read access'      | 'Store Only read access'      | 'Document.InventoryTransfer Branch: Branch Read and Write Access;Company: Company Only read access;StoreReceiver: Store Only read access;StoreSender: Store Only read access;StoreTransit: Store Only read access;'                     |
-		| '122'    | 'Company Only read access'      | 'Store Only read access'      | 'Store Only read access'      | 'Document.InventoryTransfer Branch: Branch Only read access;Company: Company Only read access;StoreReceiver: Store Only read access;StoreSender: Store Only read access;StoreTransit: Store Only read access;'                          |
+		| 'Description'                                                                                                                                                                                                                           |
+		| 'Document.InventoryTransfer Branch: Branch Read and Write Access;Company: Company Read and Write Access;StoreReceiver: Store Read and Write Access;StoreSender: Store Read and Write Access;StoreTransit: Store Read and Write Access;' |
+		| 'Document.InventoryTransfer Branch: Branch Only read access;Company: Company Read and Write Access;StoreReceiver: Store Read and Write Access;StoreSender: Store Read and Write Access;StoreTransit: Store Read and Write Access;'      |
+		| 'Document.InventoryTransfer Branch: Branch Read and Write Access;Company: Company Only read access;StoreReceiver: Store Read and Write Access;StoreSender: Store Read and Write Access;StoreTransit: Store Read and Write Access;'      |
+		| 'Document.InventoryTransfer Branch: Branch Only read access;Company: Company Only read access;StoreReceiver: Store Read and Write Access;StoreSender: Store Read and Write Access;StoreTransit: Store Read and Write Access;'           |
+		| 'Document.InventoryTransfer Branch: Branch Read and Write Access;Company: Company Read and Write Access;StoreReceiver: Store Only read access;StoreSender: Store Read and Write Access;StoreTransit: Store Read and Write Access;'      |
+		| 'Document.InventoryTransfer Branch: Branch Only read access;Company: Company Read and Write Access;StoreReceiver: Store Only read access;StoreSender: Store Read and Write Access;StoreTransit: Store Read and Write Access;'           |
+		| 'Document.InventoryTransfer Branch: Branch Read and Write Access;Company: Company Only read access;StoreReceiver: Store Only read access;StoreSender: Store Read and Write Access;StoreTransit: Store Read and Write Access;'           |
+		| 'Document.InventoryTransfer Branch: Branch Only read access;Company: Company Only read access;StoreReceiver: Store Only read access;StoreSender: Store Read and Write Access;StoreTransit: Store Read and Write Access;'                |
+		| 'Document.InventoryTransfer Branch: Branch Read and Write Access;Company: Company Read and Write Access;StoreReceiver: Store access deny;StoreSender: Store Read and Write Access;StoreTransit: Store Read and Write Access;'           |
+		| 'Document.InventoryTransfer Branch: Branch Only read access;Company: Company Read and Write Access;StoreReceiver: Store access deny;StoreSender: Store Read and Write Access;StoreTransit: Store Read and Write Access;'                |
+		| 'Document.InventoryTransfer Branch: Branch Read and Write Access;Company: Company Only read access;StoreReceiver: Store access deny;StoreSender: Store Read and Write Access;StoreTransit: Store Read and Write Access;'                |
+		| 'Document.InventoryTransfer Branch: Branch Only read access;Company: Company Only read access;StoreReceiver: Store access deny;StoreSender: Store Read and Write Access;StoreTransit: Store Read and Write Access;'                     |
+		| 'Document.InventoryTransfer Branch: Branch Read and Write Access;Company: Company Read and Write Access;StoreReceiver: Store Read and Write Access;StoreSender: Store Only read access;StoreTransit: Store Read and Write Access;'      |
+		| 'Document.InventoryTransfer Branch: Branch Only read access;Company: Company Read and Write Access;StoreReceiver: Store Read and Write Access;StoreSender: Store Only read access;StoreTransit: Store Read and Write Access;'           |
+		| 'Document.InventoryTransfer Branch: Branch Read and Write Access;Company: Company Only read access;StoreReceiver: Store Read and Write Access;StoreSender: Store Only read access;StoreTransit: Store Read and Write Access;'           |
+		| 'Document.InventoryTransfer Branch: Branch Only read access;Company: Company Only read access;StoreReceiver: Store Read and Write Access;StoreSender: Store Only read access;StoreTransit: Store Read and Write Access;'                |
+		| 'Document.InventoryTransfer Branch: Branch Read and Write Access;Company: Company Read and Write Access;StoreReceiver: Store Only read access;StoreSender: Store Only read access;StoreTransit: Store Read and Write Access;'           |
+		| 'Document.InventoryTransfer Branch: Branch Only read access;Company: Company Read and Write Access;StoreReceiver: Store Only read access;StoreSender: Store Only read access;StoreTransit: Store Read and Write Access;'                |
+		| 'Document.InventoryTransfer Branch: Branch Read and Write Access;Company: Company Only read access;StoreReceiver: Store Only read access;StoreSender: Store Only read access;StoreTransit: Store Read and Write Access;'                |
+		| 'Document.InventoryTransfer Branch: Branch Only read access;Company: Company Only read access;StoreReceiver: Store Only read access;StoreSender: Store Only read access;StoreTransit: Store Read and Write Access;'                     |
+		| 'Document.InventoryTransfer Branch: Branch Read and Write Access;Company: Company Read and Write Access;StoreReceiver: Store access deny;StoreSender: Store Only read access;StoreTransit: Store Read and Write Access;'                |
+		| 'Document.InventoryTransfer Branch: Branch Only read access;Company: Company Read and Write Access;StoreReceiver: Store access deny;StoreSender: Store Only read access;StoreTransit: Store Read and Write Access;'                     |
+		| 'Document.InventoryTransfer Branch: Branch Read and Write Access;Company: Company Only read access;StoreReceiver: Store access deny;StoreSender: Store Only read access;StoreTransit: Store Read and Write Access;'                     |
+		| 'Document.InventoryTransfer Branch: Branch Only read access;Company: Company Only read access;StoreReceiver: Store access deny;StoreSender: Store Only read access;StoreTransit: Store Read and Write Access;'                          |
+		| 'Document.InventoryTransfer Branch: Branch Read and Write Access;Company: Company Read and Write Access;StoreReceiver: Store Read and Write Access;StoreSender: Store access deny;StoreTransit: Store Read and Write Access;'           |
+		| 'Document.InventoryTransfer Branch: Branch Only read access;Company: Company Read and Write Access;StoreReceiver: Store Read and Write Access;StoreSender: Store access deny;StoreTransit: Store Read and Write Access;'                |
+		| 'Document.InventoryTransfer Branch: Branch Read and Write Access;Company: Company Only read access;StoreReceiver: Store Read and Write Access;StoreSender: Store access deny;StoreTransit: Store Read and Write Access;'                |
+		| 'Document.InventoryTransfer Branch: Branch Only read access;Company: Company Only read access;StoreReceiver: Store Read and Write Access;StoreSender: Store access deny;StoreTransit: Store Read and Write Access;'                     |
+		| 'Document.InventoryTransfer Branch: Branch Read and Write Access;Company: Company Read and Write Access;StoreReceiver: Store Only read access;StoreSender: Store access deny;StoreTransit: Store Read and Write Access;'                |
+		| 'Document.InventoryTransfer Branch: Branch Only read access;Company: Company Read and Write Access;StoreReceiver: Store Only read access;StoreSender: Store access deny;StoreTransit: Store Read and Write Access;'                     |
+		| 'Document.InventoryTransfer Branch: Branch Read and Write Access;Company: Company Only read access;StoreReceiver: Store Only read access;StoreSender: Store access deny;StoreTransit: Store Read and Write Access;'                     |
+		| 'Document.InventoryTransfer Branch: Branch Only read access;Company: Company Only read access;StoreReceiver: Store Only read access;StoreSender: Store access deny;StoreTransit: Store Read and Write Access;'                          |
+		| 'Document.InventoryTransfer Branch: Branch Read and Write Access;Company: Company Read and Write Access;StoreReceiver: Store access deny;StoreSender: Store access deny;StoreTransit: Store Read and Write Access;'                     |
+		| 'Document.InventoryTransfer Branch: Branch Only read access;Company: Company Read and Write Access;StoreReceiver: Store access deny;StoreSender: Store access deny;StoreTransit: Store Read and Write Access;'                          |
+		| 'Document.InventoryTransfer Branch: Branch Read and Write Access;Company: Company Only read access;StoreReceiver: Store access deny;StoreSender: Store access deny;StoreTransit: Store Read and Write Access;'                          |
+		| 'Document.InventoryTransfer Branch: Branch Only read access;Company: Company Only read access;StoreReceiver: Store access deny;StoreSender: Store access deny;StoreTransit: Store Read and Write Access;'                               |
+		| 'Document.InventoryTransfer Branch: Branch Read and Write Access;Company: Company Read and Write Access;StoreReceiver: Store Read and Write Access;StoreSender: Store Read and Write Access;StoreTransit: Store Only read access;'      |
+		| 'Document.InventoryTransfer Branch: Branch Only read access;Company: Company Read and Write Access;StoreReceiver: Store Read and Write Access;StoreSender: Store Read and Write Access;StoreTransit: Store Only read access;'           |
+		| 'Document.InventoryTransfer Branch: Branch Read and Write Access;Company: Company Only read access;StoreReceiver: Store Read and Write Access;StoreSender: Store Read and Write Access;StoreTransit: Store Only read access;'           |
+		| 'Document.InventoryTransfer Branch: Branch Only read access;Company: Company Only read access;StoreReceiver: Store Read and Write Access;StoreSender: Store Read and Write Access;StoreTransit: Store Only read access;'                |
+		| 'Document.InventoryTransfer Branch: Branch Read and Write Access;Company: Company Read and Write Access;StoreReceiver: Store Only read access;StoreSender: Store Read and Write Access;StoreTransit: Store Only read access;'           |
+		| 'Document.InventoryTransfer Branch: Branch Only read access;Company: Company Read and Write Access;StoreReceiver: Store Only read access;StoreSender: Store Read and Write Access;StoreTransit: Store Only read access;'                |
+		| 'Document.InventoryTransfer Branch: Branch Read and Write Access;Company: Company Only read access;StoreReceiver: Store Only read access;StoreSender: Store Read and Write Access;StoreTransit: Store Only read access;'                |
+		| 'Document.InventoryTransfer Branch: Branch Only read access;Company: Company Only read access;StoreReceiver: Store Only read access;StoreSender: Store Read and Write Access;StoreTransit: Store Only read access;'                     |
+		| 'Document.InventoryTransfer Branch: Branch Read and Write Access;Company: Company Read and Write Access;StoreReceiver: Store access deny;StoreSender: Store Read and Write Access;StoreTransit: Store Only read access;'                |
+		| 'Document.InventoryTransfer Branch: Branch Only read access;Company: Company Read and Write Access;StoreReceiver: Store access deny;StoreSender: Store Read and Write Access;StoreTransit: Store Only read access;'                     |
+		| 'Document.InventoryTransfer Branch: Branch Read and Write Access;Company: Company Only read access;StoreReceiver: Store access deny;StoreSender: Store Read and Write Access;StoreTransit: Store Only read access;'                     |
+		| 'Document.InventoryTransfer Branch: Branch Only read access;Company: Company Only read access;StoreReceiver: Store access deny;StoreSender: Store Read and Write Access;StoreTransit: Store Only read access;'                          |
+		| 'Document.InventoryTransfer Branch: Branch Read and Write Access;Company: Company Read and Write Access;StoreReceiver: Store Read and Write Access;StoreSender: Store Only read access;StoreTransit: Store Only read access;'           |
+		| 'Document.InventoryTransfer Branch: Branch Only read access;Company: Company Read and Write Access;StoreReceiver: Store Read and Write Access;StoreSender: Store Only read access;StoreTransit: Store Only read access;'                |
+		| 'Document.InventoryTransfer Branch: Branch Read and Write Access;Company: Company Only read access;StoreReceiver: Store Read and Write Access;StoreSender: Store Only read access;StoreTransit: Store Only read access;'                |
+		| 'Document.InventoryTransfer Branch: Branch Only read access;Company: Company Only read access;StoreReceiver: Store Read and Write Access;StoreSender: Store Only read access;StoreTransit: Store Only read access;'                     |
+		| 'Document.InventoryTransfer Branch: Branch Read and Write Access;Company: Company Read and Write Access;StoreReceiver: Store Only read access;StoreSender: Store Only read access;StoreTransit: Store Only read access;'                |
+		| 'Document.InventoryTransfer Branch: Branch Only read access;Company: Company Read and Write Access;StoreReceiver: Store Only read access;StoreSender: Store Only read access;StoreTransit: Store Only read access;'                     |
+		| 'Document.InventoryTransfer Branch: Branch Read and Write Access;Company: Company Only read access;StoreReceiver: Store Only read access;StoreSender: Store Only read access;StoreTransit: Store Only read access;'                     |
+		| 'Document.InventoryTransfer Branch: Branch Only read access;Company: Company Only read access;StoreReceiver: Store Only read access;StoreSender: Store Only read access;StoreTransit: Store Only read access;'                          |
+		| 'Document.InventoryTransfer Branch: Branch Read and Write Access;Company: Company Read and Write Access;StoreReceiver: Store access deny;StoreSender: Store Only read access;StoreTransit: Store Only read access;'                     |
+		| 'Document.InventoryTransfer Branch: Branch Only read access;Company: Company Read and Write Access;StoreReceiver: Store access deny;StoreSender: Store Only read access;StoreTransit: Store Only read access;'                          |
+		| 'Document.InventoryTransfer Branch: Branch Read and Write Access;Company: Company Only read access;StoreReceiver: Store access deny;StoreSender: Store Only read access;StoreTransit: Store Only read access;'                          |
+		| 'Document.InventoryTransfer Branch: Branch Only read access;Company: Company Only read access;StoreReceiver: Store access deny;StoreSender: Store Only read access;StoreTransit: Store Only read access;'                               |
+		| 'Document.InventoryTransfer Branch: Branch Read and Write Access;Company: Company Read and Write Access;StoreReceiver: Store Read and Write Access;StoreSender: Store access deny;StoreTransit: Store Only read access;'                |
+		| 'Document.InventoryTransfer Branch: Branch Only read access;Company: Company Read and Write Access;StoreReceiver: Store Read and Write Access;StoreSender: Store access deny;StoreTransit: Store Only read access;'                     |
+		| 'Document.InventoryTransfer Branch: Branch Read and Write Access;Company: Company Only read access;StoreReceiver: Store Read and Write Access;StoreSender: Store access deny;StoreTransit: Store Only read access;'                     |
+		| 'Document.InventoryTransfer Branch: Branch Only read access;Company: Company Only read access;StoreReceiver: Store Read and Write Access;StoreSender: Store access deny;StoreTransit: Store Only read access;'                          |
+		| 'Document.InventoryTransfer Branch: Branch Read and Write Access;Company: Company Read and Write Access;StoreReceiver: Store Only read access;StoreSender: Store access deny;StoreTransit: Store Only read access;'                     |
+		| 'Document.InventoryTransfer Branch: Branch Only read access;Company: Company Read and Write Access;StoreReceiver: Store Only read access;StoreSender: Store access deny;StoreTransit: Store Only read access;'                          |
+		| 'Document.InventoryTransfer Branch: Branch Read and Write Access;Company: Company Only read access;StoreReceiver: Store Only read access;StoreSender: Store access deny;StoreTransit: Store Only read access;'                          |
+		| 'Document.InventoryTransfer Branch: Branch Only read access;Company: Company Only read access;StoreReceiver: Store Only read access;StoreSender: Store access deny;StoreTransit: Store Only read access;'                               |
+		| 'Document.InventoryTransfer Branch: Branch Read and Write Access;Company: Company Read and Write Access;StoreReceiver: Store access deny;StoreSender: Store access deny;StoreTransit: Store Only read access;'                          |
+		| 'Document.InventoryTransfer Branch: Branch Only read access;Company: Company Read and Write Access;StoreReceiver: Store access deny;StoreSender: Store access deny;StoreTransit: Store Only read access;'                               |
+		| 'Document.InventoryTransfer Branch: Branch Read and Write Access;Company: Company Only read access;StoreReceiver: Store access deny;StoreSender: Store access deny;StoreTransit: Store Only read access;'                               |
+		| 'Document.InventoryTransfer Branch: Branch Only read access;Company: Company Only read access;StoreReceiver: Store access deny;StoreSender: Store access deny;StoreTransit: Store Only read access;'                                    |
+		| 'Document.InventoryTransfer Branch: Branch Read and Write Access;Company: Company Read and Write Access;StoreReceiver: Store Read and Write Access;StoreSender: Store Read and Write Access;StoreTransit: Store access deny;'           |
+		| 'Document.InventoryTransfer Branch: Branch Only read access;Company: Company Read and Write Access;StoreReceiver: Store Read and Write Access;StoreSender: Store Read and Write Access;StoreTransit: Store access deny;'                |
+		| 'Document.InventoryTransfer Branch: Branch Read and Write Access;Company: Company Only read access;StoreReceiver: Store Read and Write Access;StoreSender: Store Read and Write Access;StoreTransit: Store access deny;'                |
+		| 'Document.InventoryTransfer Branch: Branch Only read access;Company: Company Only read access;StoreReceiver: Store Read and Write Access;StoreSender: Store Read and Write Access;StoreTransit: Store access deny;'                     |
+		| 'Document.InventoryTransfer Branch: Branch Read and Write Access;Company: Company Read and Write Access;StoreReceiver: Store Only read access;StoreSender: Store Read and Write Access;StoreTransit: Store access deny;'                |
+		| 'Document.InventoryTransfer Branch: Branch Only read access;Company: Company Read and Write Access;StoreReceiver: Store Only read access;StoreSender: Store Read and Write Access;StoreTransit: Store access deny;'                     |
+		| 'Document.InventoryTransfer Branch: Branch Read and Write Access;Company: Company Only read access;StoreReceiver: Store Only read access;StoreSender: Store Read and Write Access;StoreTransit: Store access deny;'                     |
+		| 'Document.InventoryTransfer Branch: Branch Only read access;Company: Company Only read access;StoreReceiver: Store Only read access;StoreSender: Store Read and Write Access;StoreTransit: Store access deny;'                          |
+		| 'Document.InventoryTransfer Branch: Branch Read and Write Access;Company: Company Read and Write Access;StoreReceiver: Store access deny;StoreSender: Store Read and Write Access;StoreTransit: Store access deny;'                     |
+		| 'Document.InventoryTransfer Branch: Branch Only read access;Company: Company Read and Write Access;StoreReceiver: Store access deny;StoreSender: Store Read and Write Access;StoreTransit: Store access deny;'                          |
+		| 'Document.InventoryTransfer Branch: Branch Read and Write Access;Company: Company Only read access;StoreReceiver: Store access deny;StoreSender: Store Read and Write Access;StoreTransit: Store access deny;'                          |
+		| 'Document.InventoryTransfer Branch: Branch Only read access;Company: Company Only read access;StoreReceiver: Store access deny;StoreSender: Store Read and Write Access;StoreTransit: Store access deny;'                               |
+		| 'Document.InventoryTransfer Branch: Branch Read and Write Access;Company: Company Read and Write Access;StoreReceiver: Store Read and Write Access;StoreSender: Store Only read access;StoreTransit: Store access deny;'                |
+		| 'Document.InventoryTransfer Branch: Branch Only read access;Company: Company Read and Write Access;StoreReceiver: Store Read and Write Access;StoreSender: Store Only read access;StoreTransit: Store access deny;'                     |
+		| 'Document.InventoryTransfer Branch: Branch Read and Write Access;Company: Company Only read access;StoreReceiver: Store Read and Write Access;StoreSender: Store Only read access;StoreTransit: Store access deny;'                     |
+		| 'Document.InventoryTransfer Branch: Branch Only read access;Company: Company Only read access;StoreReceiver: Store Read and Write Access;StoreSender: Store Only read access;StoreTransit: Store access deny;'                          |
+		| 'Document.InventoryTransfer Branch: Branch Read and Write Access;Company: Company Read and Write Access;StoreReceiver: Store Only read access;StoreSender: Store Only read access;StoreTransit: Store access deny;'                     |
+		| 'Document.InventoryTransfer Branch: Branch Only read access;Company: Company Read and Write Access;StoreReceiver: Store Only read access;StoreSender: Store Only read access;StoreTransit: Store access deny;'                          |
+		| 'Document.InventoryTransfer Branch: Branch Read and Write Access;Company: Company Only read access;StoreReceiver: Store Only read access;StoreSender: Store Only read access;StoreTransit: Store access deny;'                          |
+		| 'Document.InventoryTransfer Branch: Branch Only read access;Company: Company Only read access;StoreReceiver: Store Only read access;StoreSender: Store Only read access;StoreTransit: Store access deny;'                               |
+		| 'Document.InventoryTransfer Branch: Branch Read and Write Access;Company: Company Read and Write Access;StoreReceiver: Store access deny;StoreSender: Store Only read access;StoreTransit: Store access deny;'                          |
+		| 'Document.InventoryTransfer Branch: Branch Only read access;Company: Company Read and Write Access;StoreReceiver: Store access deny;StoreSender: Store Only read access;StoreTransit: Store access deny;'                               |
+		| 'Document.InventoryTransfer Branch: Branch Read and Write Access;Company: Company Only read access;StoreReceiver: Store access deny;StoreSender: Store Only read access;StoreTransit: Store access deny;'                               |
+		| 'Document.InventoryTransfer Branch: Branch Only read access;Company: Company Only read access;StoreReceiver: Store access deny;StoreSender: Store Only read access;StoreTransit: Store access deny;'                                    |
+		| 'Document.InventoryTransfer Branch: Branch Read and Write Access;Company: Company Read and Write Access;StoreReceiver: Store Read and Write Access;StoreSender: Store access deny;StoreTransit: Store access deny;'                     |
+		| 'Document.InventoryTransfer Branch: Branch Only read access;Company: Company Read and Write Access;StoreReceiver: Store Read and Write Access;StoreSender: Store access deny;StoreTransit: Store access deny;'                          |
+		| 'Document.InventoryTransfer Branch: Branch Read and Write Access;Company: Company Only read access;StoreReceiver: Store Read and Write Access;StoreSender: Store access deny;StoreTransit: Store access deny;'                          |
+		| 'Document.InventoryTransfer Branch: Branch Only read access;Company: Company Only read access;StoreReceiver: Store Read and Write Access;StoreSender: Store access deny;StoreTransit: Store access deny;'                               |
+		| 'Document.InventoryTransfer Branch: Branch Read and Write Access;Company: Company Read and Write Access;StoreReceiver: Store Only read access;StoreSender: Store access deny;StoreTransit: Store access deny;'                          |
+		| 'Document.InventoryTransfer Branch: Branch Only read access;Company: Company Read and Write Access;StoreReceiver: Store Only read access;StoreSender: Store access deny;StoreTransit: Store access deny;'                               |
+		| 'Document.InventoryTransfer Branch: Branch Read and Write Access;Company: Company Only read access;StoreReceiver: Store Only read access;StoreSender: Store access deny;StoreTransit: Store access deny;'                               |
+		| 'Document.InventoryTransfer Branch: Branch Only read access;Company: Company Only read access;StoreReceiver: Store Only read access;StoreSender: Store access deny;StoreTransit: Store access deny;'                                    |
 	
+		
 Scenario: 960117 check InventoryTransferOrder access rights (LimitedAccess)	
 	And I close all client application windows
 	Given I open hyperlink "e1cib/list/Document.InventoryTransferOrder"	
 	And "List" table became equal
-		| 'Number' | 'Company'                       | 'Store sender'                | 'Store receiver'              | 'Description'                                                                                                                                                                                      |
-		| '1'      | 'Company Read and Write Access' | 'Store Read and Write Access' | 'Store Read and Write Access' | 'Document.InventoryTransferOrder Branch: Branch Read and Write Access;Company: Company Read and Write Access;StoreReceiver: Store Read and Write Access;StoreSender: Store Read and Write Access;' |
-		| '2'      | 'Company Read and Write Access' | 'Store Read and Write Access' | 'Store Read and Write Access' | 'Document.InventoryTransferOrder Branch: Branch Only read access;Company: Company Read and Write Access;StoreReceiver: Store Read and Write Access;StoreSender: Store Read and Write Access;'      |
-		| '4'      | 'Company Only read access'      | 'Store Read and Write Access' | 'Store Read and Write Access' | 'Document.InventoryTransferOrder Branch: Branch Read and Write Access;Company: Company Only read access;StoreReceiver: Store Read and Write Access;StoreSender: Store Read and Write Access;'      |
-		| '5'      | 'Company Only read access'      | 'Store Read and Write Access' | 'Store Read and Write Access' | 'Document.InventoryTransferOrder Branch: Branch Only read access;Company: Company Only read access;StoreReceiver: Store Read and Write Access;StoreSender: Store Read and Write Access;'           |
-		| '10'     | 'Company Read and Write Access' | 'Store Read and Write Access' | 'Store Only read access'      | 'Document.InventoryTransferOrder Branch: Branch Read and Write Access;Company: Company Read and Write Access;StoreReceiver: Store Only read access;StoreSender: Store Read and Write Access;'      |
-		| '11'     | 'Company Read and Write Access' | 'Store Read and Write Access' | 'Store Only read access'      | 'Document.InventoryTransferOrder Branch: Branch Only read access;Company: Company Read and Write Access;StoreReceiver: Store Only read access;StoreSender: Store Read and Write Access;'           |
-		| '13'     | 'Company Only read access'      | 'Store Read and Write Access' | 'Store Only read access'      | 'Document.InventoryTransferOrder Branch: Branch Read and Write Access;Company: Company Only read access;StoreReceiver: Store Only read access;StoreSender: Store Read and Write Access;'           |
-		| '14'     | 'Company Only read access'      | 'Store Read and Write Access' | 'Store Only read access'      | 'Document.InventoryTransferOrder Branch: Branch Only read access;Company: Company Only read access;StoreReceiver: Store Only read access;StoreSender: Store Read and Write Access;'                |
-		| '28'     | 'Company Read and Write Access' | 'Store Only read access'      | 'Store Read and Write Access' | 'Document.InventoryTransferOrder Branch: Branch Read and Write Access;Company: Company Read and Write Access;StoreReceiver: Store Read and Write Access;StoreSender: Store Only read access;'      |
-		| '29'     | 'Company Read and Write Access' | 'Store Only read access'      | 'Store Read and Write Access' | 'Document.InventoryTransferOrder Branch: Branch Only read access;Company: Company Read and Write Access;StoreReceiver: Store Read and Write Access;StoreSender: Store Only read access;'           |
-		| '31'     | 'Company Only read access'      | 'Store Only read access'      | 'Store Read and Write Access' | 'Document.InventoryTransferOrder Branch: Branch Read and Write Access;Company: Company Only read access;StoreReceiver: Store Read and Write Access;StoreSender: Store Only read access;'           |
-		| '32'     | 'Company Only read access'      | 'Store Only read access'      | 'Store Read and Write Access' | 'Document.InventoryTransferOrder Branch: Branch Only read access;Company: Company Only read access;StoreReceiver: Store Read and Write Access;StoreSender: Store Only read access;'                |
-		| '37'     | 'Company Read and Write Access' | 'Store Only read access'      | 'Store Only read access'      | 'Document.InventoryTransferOrder Branch: Branch Read and Write Access;Company: Company Read and Write Access;StoreReceiver: Store Only read access;StoreSender: Store Only read access;'           |
-		| '38'     | 'Company Read and Write Access' | 'Store Only read access'      | 'Store Only read access'      | 'Document.InventoryTransferOrder Branch: Branch Only read access;Company: Company Read and Write Access;StoreReceiver: Store Only read access;StoreSender: Store Only read access;'                |
-		| '40'     | 'Company Only read access'      | 'Store Only read access'      | 'Store Only read access'      | 'Document.InventoryTransferOrder Branch: Branch Read and Write Access;Company: Company Only read access;StoreReceiver: Store Only read access;StoreSender: Store Only read access;'                |
-		| '41'     | 'Company Only read access'      | 'Store Only read access'      | 'Store Only read access'      | 'Document.InventoryTransferOrder Branch: Branch Only read access;Company: Company Only read access;StoreReceiver: Store Only read access;StoreSender: Store Only read access;'                     |
+		| 'Description'                                                                                                                                                                                      |
+		| 'Document.InventoryTransferOrder Branch: Branch Read and Write Access;Company: Company Read and Write Access;StoreReceiver: Store Read and Write Access;StoreSender: Store Read and Write Access;' |
+		| 'Document.InventoryTransferOrder Branch: Branch Only read access;Company: Company Read and Write Access;StoreReceiver: Store Read and Write Access;StoreSender: Store Read and Write Access;'      |
+		| 'Document.InventoryTransferOrder Branch: Branch Read and Write Access;Company: Company Only read access;StoreReceiver: Store Read and Write Access;StoreSender: Store Read and Write Access;'      |
+		| 'Document.InventoryTransferOrder Branch: Branch Only read access;Company: Company Only read access;StoreReceiver: Store Read and Write Access;StoreSender: Store Read and Write Access;'           |
+		| 'Document.InventoryTransferOrder Branch: Branch Read and Write Access;Company: Company Read and Write Access;StoreReceiver: Store Only read access;StoreSender: Store Read and Write Access;'      |
+		| 'Document.InventoryTransferOrder Branch: Branch Only read access;Company: Company Read and Write Access;StoreReceiver: Store Only read access;StoreSender: Store Read and Write Access;'           |
+		| 'Document.InventoryTransferOrder Branch: Branch Read and Write Access;Company: Company Only read access;StoreReceiver: Store Only read access;StoreSender: Store Read and Write Access;'           |
+		| 'Document.InventoryTransferOrder Branch: Branch Only read access;Company: Company Only read access;StoreReceiver: Store Only read access;StoreSender: Store Read and Write Access;'                |
+		| 'Document.InventoryTransferOrder Branch: Branch Read and Write Access;Company: Company Read and Write Access;StoreReceiver: Store access deny;StoreSender: Store Read and Write Access;'           |
+		| 'Document.InventoryTransferOrder Branch: Branch Only read access;Company: Company Read and Write Access;StoreReceiver: Store access deny;StoreSender: Store Read and Write Access;'                |
+		| 'Document.InventoryTransferOrder Branch: Branch Read and Write Access;Company: Company Only read access;StoreReceiver: Store access deny;StoreSender: Store Read and Write Access;'                |
+		| 'Document.InventoryTransferOrder Branch: Branch Only read access;Company: Company Only read access;StoreReceiver: Store access deny;StoreSender: Store Read and Write Access;'                     |
+		| 'Document.InventoryTransferOrder Branch: Branch Read and Write Access;Company: Company Read and Write Access;StoreReceiver: Store Read and Write Access;StoreSender: Store Only read access;'      |
+		| 'Document.InventoryTransferOrder Branch: Branch Only read access;Company: Company Read and Write Access;StoreReceiver: Store Read and Write Access;StoreSender: Store Only read access;'           |
+		| 'Document.InventoryTransferOrder Branch: Branch Read and Write Access;Company: Company Only read access;StoreReceiver: Store Read and Write Access;StoreSender: Store Only read access;'           |
+		| 'Document.InventoryTransferOrder Branch: Branch Only read access;Company: Company Only read access;StoreReceiver: Store Read and Write Access;StoreSender: Store Only read access;'                |
+		| 'Document.InventoryTransferOrder Branch: Branch Read and Write Access;Company: Company Read and Write Access;StoreReceiver: Store Only read access;StoreSender: Store Only read access;'           |
+		| 'Document.InventoryTransferOrder Branch: Branch Only read access;Company: Company Read and Write Access;StoreReceiver: Store Only read access;StoreSender: Store Only read access;'                |
+		| 'Document.InventoryTransferOrder Branch: Branch Read and Write Access;Company: Company Only read access;StoreReceiver: Store Only read access;StoreSender: Store Only read access;'                |
+		| 'Document.InventoryTransferOrder Branch: Branch Only read access;Company: Company Only read access;StoreReceiver: Store Only read access;StoreSender: Store Only read access;'                     |
+		| 'Document.InventoryTransferOrder Branch: Branch Read and Write Access;Company: Company Read and Write Access;StoreReceiver: Store access deny;StoreSender: Store Only read access;'                |
+		| 'Document.InventoryTransferOrder Branch: Branch Only read access;Company: Company Read and Write Access;StoreReceiver: Store access deny;StoreSender: Store Only read access;'                     |
+		| 'Document.InventoryTransferOrder Branch: Branch Read and Write Access;Company: Company Only read access;StoreReceiver: Store access deny;StoreSender: Store Only read access;'                     |
+		| 'Document.InventoryTransferOrder Branch: Branch Only read access;Company: Company Only read access;StoreReceiver: Store access deny;StoreSender: Store Only read access;'                          |
+		| 'Document.InventoryTransferOrder Branch: Branch Read and Write Access;Company: Company Read and Write Access;StoreReceiver: Store Read and Write Access;StoreSender: Store access deny;'           |
+		| 'Document.InventoryTransferOrder Branch: Branch Only read access;Company: Company Read and Write Access;StoreReceiver: Store Read and Write Access;StoreSender: Store access deny;'                |
+		| 'Document.InventoryTransferOrder Branch: Branch Read and Write Access;Company: Company Only read access;StoreReceiver: Store Read and Write Access;StoreSender: Store access deny;'                |
+		| 'Document.InventoryTransferOrder Branch: Branch Only read access;Company: Company Only read access;StoreReceiver: Store Read and Write Access;StoreSender: Store access deny;'                     |
+		| 'Document.InventoryTransferOrder Branch: Branch Read and Write Access;Company: Company Read and Write Access;StoreReceiver: Store Only read access;StoreSender: Store access deny;'                |
+		| 'Document.InventoryTransferOrder Branch: Branch Only read access;Company: Company Read and Write Access;StoreReceiver: Store Only read access;StoreSender: Store access deny;'                     |
+		| 'Document.InventoryTransferOrder Branch: Branch Read and Write Access;Company: Company Only read access;StoreReceiver: Store Only read access;StoreSender: Store access deny;'                     |
+		| 'Document.InventoryTransferOrder Branch: Branch Only read access;Company: Company Only read access;StoreReceiver: Store Only read access;StoreSender: Store access deny;'                          |
+	
 	
 Scenario: 960118 check ItemStockAdjustment access rights (LimitedAccess)	
 	And I close all client application windows
 	Given I open hyperlink "e1cib/list/Document.ItemStockAdjustment"
 	And "List" table became equal
-		| 'Number' | 'Company'                       | 'Store'                       | 'Description'                                                                                                                                  |
-		| '1'      | 'Company Read and Write Access' | 'Store Read and Write Access' | 'Document.ItemStockAdjustment Store: Store Read and Write Access;Branch: Branch Read and Write Access;Company: Company Read and Write Access;' |
-		| '2'      | 'Company Read and Write Access' | 'Store Only read access'      | 'Document.ItemStockAdjustment Store: Store Only read access;Branch: Branch Read and Write Access;Company: Company Read and Write Access;'      |
-		| '4'      | 'Company Read and Write Access' | 'Store Read and Write Access' | 'Document.ItemStockAdjustment Store: Store Read and Write Access;Branch: Branch Only read access;Company: Company Read and Write Access;'      |
-		| '5'      | 'Company Read and Write Access' | 'Store Only read access'      | 'Document.ItemStockAdjustment Store: Store Only read access;Branch: Branch Only read access;Company: Company Read and Write Access;'           |
-		| '10'     | 'Company Only read access'      | 'Store Read and Write Access' | 'Document.ItemStockAdjustment Store: Store Read and Write Access;Branch: Branch Read and Write Access;Company: Company Only read access;'      |
-		| '11'     | 'Company Only read access'      | 'Store Only read access'      | 'Document.ItemStockAdjustment Store: Store Only read access;Branch: Branch Read and Write Access;Company: Company Only read access;'           |
-		| '13'     | 'Company Only read access'      | 'Store Read and Write Access' | 'Document.ItemStockAdjustment Store: Store Read and Write Access;Branch: Branch Only read access;Company: Company Only read access;'           |
-		| '14'     | 'Company Only read access'      | 'Store Only read access'      | 'Document.ItemStockAdjustment Store: Store Only read access;Branch: Branch Only read access;Company: Company Only read access;'                |
+		| 'Description'                                                                                                                                  |
+		| 'Document.ItemStockAdjustment Store: Store Read and Write Access;Branch: Branch Read and Write Access;Company: Company Read and Write Access;' |
+		| 'Document.ItemStockAdjustment Store: Store Only read access;Branch: Branch Read and Write Access;Company: Company Read and Write Access;'      |
+		| 'Document.ItemStockAdjustment Store: Store Read and Write Access;Branch: Branch Only read access;Company: Company Read and Write Access;'      |
+		| 'Document.ItemStockAdjustment Store: Store Only read access;Branch: Branch Only read access;Company: Company Read and Write Access;'           |
+		| 'Document.ItemStockAdjustment Store: Store Read and Write Access;Branch: Branch Read and Write Access;Company: Company Only read access;'      |
+		| 'Document.ItemStockAdjustment Store: Store Only read access;Branch: Branch Read and Write Access;Company: Company Only read access;'           |
+		| 'Document.ItemStockAdjustment Store: Store Read and Write Access;Branch: Branch Only read access;Company: Company Only read access;'           |
+		| 'Document.ItemStockAdjustment Store: Store Only read access;Branch: Branch Only read access;Company: Company Only read access;'                |
 	
 Scenario: 960119 check JournalEntry access rights (LimitedAccess)	
 	And I close all client application windows
 	Given I open hyperlink "e1cib/list/Document.JournalEntry"
 	And "List" table became equal
-		| 'Number' | 'Company'                       | 'Description'                                                                                        |
-		| '1'      | 'Company Read and Write Access' | 'Document.JournalEntry Branch: Branch Read and Write Access;Company: Company Read and Write Access;' |
-		| '2'      | 'Company Read and Write Access' | 'Document.JournalEntry Branch: Branch Only read access;Company: Company Read and Write Access;'      |
-		| '4'      | 'Company Only read access'      | 'Document.JournalEntry Branch: Branch Read and Write Access;Company: Company Only read access;'      |
-		| '5'      | 'Company Only read access'      | 'Document.JournalEntry Branch: Branch Only read access;Company: Company Only read access;'           |
+		| 'Description'                                                                                        |
+		| 'Document.JournalEntry Branch: Branch Read and Write Access;Company: Company Read and Write Access;' |
+		| 'Document.JournalEntry Branch: Branch Only read access;Company: Company Read and Write Access;'      |
+		| 'Document.JournalEntry Branch: Branch Read and Write Access;Company: Company Only read access;'      |
+		| 'Document.JournalEntry Branch: Branch Only read access;Company: Company Only read access;'           |
 	
 Scenario: 960120 check Labeling access rights (LimitedAccess)	
 	And I close all client application windows
 	Given I open hyperlink "e1cib/list/Document.Labeling"	
 	And "List" table became equal
-		| 'Number' | 'Description'                                             |
-		| '1'      | 'Document.Labeling Branch: Branch Read and Write Access;' |
-		| '2'      | 'Document.Labeling Branch: Branch Only read access;'      |
+		| 'Description'                                             |
+		| 'Document.Labeling Branch: Branch Read and Write Access;' |
+		| 'Document.Labeling Branch: Branch Only read access;'      |
 	
 Scenario: 960121 check ManualRegisterEntry access rights (LimitedAccess)	
 	And I close all client application windows
 	Given I open hyperlink "e1cib/list/Document.ManualRegisterEntry"
 	And "List" table became equal
-		| 'Number' | 'Company'                       | 'Description'                                                          |
-		| '1'      | 'Company Read and Write Access' | 'Document.ManualRegisterEntry Company: Company Read and Write Access;' |
-		| '2'      | 'Company Only read access'      | 'Document.ManualRegisterEntry Company: Company Only read access;'      |
+		| 'Description'                                                          |
+		| 'Document.ManualRegisterEntry Company: Company Read and Write Access;' |
+		| 'Document.ManualRegisterEntry Company: Company Only read access;'      |
 	
 																																	
 Scenario: 960122 check MoneyTransfer access rights (LimitedAccess)	
 	And I close all client application windows
 	Given I open hyperlink "e1cib/list/Document.MoneyTransfer"	
 	And "List" table became equal
-		| 'Number' | 'Company'                       | 'Description'                                                                                                                                     |
-		| '1'      | 'Company Read and Write Access' | 'Document.MoneyTransfer Branch: Branch Read and Write Access;Company: Company Read and Write Access;ReceiveBranch: Branch Read and Write Access;' |
-		| '2'      | 'Company Read and Write Access' | 'Document.MoneyTransfer Branch: Branch Only read access;Company: Company Read and Write Access;ReceiveBranch: Branch Read and Write Access;'      |
-		| '4'      | 'Company Only read access'      | 'Document.MoneyTransfer Branch: Branch Read and Write Access;Company: Company Only read access;ReceiveBranch: Branch Read and Write Access;'      |
-		| '5'      | 'Company Only read access'      | 'Document.MoneyTransfer Branch: Branch Only read access;Company: Company Only read access;ReceiveBranch: Branch Read and Write Access;'           |
-		| '10'     | 'Company Read and Write Access' | 'Document.MoneyTransfer Branch: Branch Read and Write Access;Company: Company Read and Write Access;ReceiveBranch: Branch Only read access;'      |
-		| '11'     | 'Company Read and Write Access' | 'Document.MoneyTransfer Branch: Branch Only read access;Company: Company Read and Write Access;ReceiveBranch: Branch Only read access;'           |
-		| '13'     | 'Company Only read access'      | 'Document.MoneyTransfer Branch: Branch Read and Write Access;Company: Company Only read access;ReceiveBranch: Branch Only read access;'           |
-		| '14'     | 'Company Only read access'      | 'Document.MoneyTransfer Branch: Branch Only read access;Company: Company Only read access;ReceiveBranch: Branch Only read access;'                |
+		| 'Description'                                                                                                                                                                                                                           |
+		| 'Document.MoneyTransfer Branch: Branch Read and Write Access;Company: Company Read and Write Access;ReceiveBranch: Branch Read and Write Access;Sender: CashAccount Read and Write Access;Receiver: CashAccount Read and Write Access;' |
+		| 'Document.MoneyTransfer Branch: Branch Only read access;Company: Company Read and Write Access;ReceiveBranch: Branch Read and Write Access;Sender: CashAccount Read and Write Access;Receiver: CashAccount Read and Write Access;'      |
+		| 'Document.MoneyTransfer Branch: Branch access deny;Company: Company Read and Write Access;ReceiveBranch: Branch Read and Write Access;Sender: CashAccount Read and Write Access;Receiver: CashAccount Read and Write Access;'           |
+		| 'Document.MoneyTransfer Branch: Branch Read and Write Access;Company: Company Only read access;ReceiveBranch: Branch Read and Write Access;Sender: CashAccount Read and Write Access;Receiver: CashAccount Read and Write Access;'      |
+		| 'Document.MoneyTransfer Branch: Branch Only read access;Company: Company Only read access;ReceiveBranch: Branch Read and Write Access;Sender: CashAccount Read and Write Access;Receiver: CashAccount Read and Write Access;'           |
+		| 'Document.MoneyTransfer Branch: Branch access deny;Company: Company Only read access;ReceiveBranch: Branch Read and Write Access;Sender: CashAccount Read and Write Access;Receiver: CashAccount Read and Write Access;'                |
+		| 'Document.MoneyTransfer Branch: Branch Read and Write Access;Company: Company Read and Write Access;ReceiveBranch: Branch Only read access;Sender: CashAccount Read and Write Access;Receiver: CashAccount Read and Write Access;'      |
+		| 'Document.MoneyTransfer Branch: Branch Only read access;Company: Company Read and Write Access;ReceiveBranch: Branch Only read access;Sender: CashAccount Read and Write Access;Receiver: CashAccount Read and Write Access;'           |
+		| 'Document.MoneyTransfer Branch: Branch access deny;Company: Company Read and Write Access;ReceiveBranch: Branch Only read access;Sender: CashAccount Read and Write Access;Receiver: CashAccount Read and Write Access;'                |
+		| 'Document.MoneyTransfer Branch: Branch Read and Write Access;Company: Company Only read access;ReceiveBranch: Branch Only read access;Sender: CashAccount Read and Write Access;Receiver: CashAccount Read and Write Access;'           |
+		| 'Document.MoneyTransfer Branch: Branch Only read access;Company: Company Only read access;ReceiveBranch: Branch Only read access;Sender: CashAccount Read and Write Access;Receiver: CashAccount Read and Write Access;'                |
+		| 'Document.MoneyTransfer Branch: Branch access deny;Company: Company Only read access;ReceiveBranch: Branch Only read access;Sender: CashAccount Read and Write Access;Receiver: CashAccount Read and Write Access;'                     |
+		| 'Document.MoneyTransfer Branch: Branch Read and Write Access;Company: Company Read and Write Access;ReceiveBranch: Branch access deny;Sender: CashAccount Read and Write Access;Receiver: CashAccount Read and Write Access;'           |
+		| 'Document.MoneyTransfer Branch: Branch Only read access;Company: Company Read and Write Access;ReceiveBranch: Branch access deny;Sender: CashAccount Read and Write Access;Receiver: CashAccount Read and Write Access;'                |
+		| 'Document.MoneyTransfer Branch: Branch Read and Write Access;Company: Company Only read access;ReceiveBranch: Branch access deny;Sender: CashAccount Read and Write Access;Receiver: CashAccount Read and Write Access;'                |
+		| 'Document.MoneyTransfer Branch: Branch Only read access;Company: Company Only read access;ReceiveBranch: Branch access deny;Sender: CashAccount Read and Write Access;Receiver: CashAccount Read and Write Access;'                     |
+		| 'Document.MoneyTransfer Branch: Branch Read and Write Access;Company: Company Read and Write Access;ReceiveBranch: Branch Read and Write Access;Sender: CashAccount Only read access;Receiver: CashAccount Read and Write Access;'      |
+		| 'Document.MoneyTransfer Branch: Branch Only read access;Company: Company Read and Write Access;ReceiveBranch: Branch Read and Write Access;Sender: CashAccount Only read access;Receiver: CashAccount Read and Write Access;'           |
+		| 'Document.MoneyTransfer Branch: Branch access deny;Company: Company Read and Write Access;ReceiveBranch: Branch Read and Write Access;Sender: CashAccount Only read access;Receiver: CashAccount Read and Write Access;'                |
+		| 'Document.MoneyTransfer Branch: Branch Read and Write Access;Company: Company Only read access;ReceiveBranch: Branch Read and Write Access;Sender: CashAccount Only read access;Receiver: CashAccount Read and Write Access;'           |
+		| 'Document.MoneyTransfer Branch: Branch Only read access;Company: Company Only read access;ReceiveBranch: Branch Read and Write Access;Sender: CashAccount Only read access;Receiver: CashAccount Read and Write Access;'                |
+		| 'Document.MoneyTransfer Branch: Branch access deny;Company: Company Only read access;ReceiveBranch: Branch Read and Write Access;Sender: CashAccount Only read access;Receiver: CashAccount Read and Write Access;'                     |
+		| 'Document.MoneyTransfer Branch: Branch Read and Write Access;Company: Company Read and Write Access;ReceiveBranch: Branch Only read access;Sender: CashAccount Only read access;Receiver: CashAccount Read and Write Access;'           |
+		| 'Document.MoneyTransfer Branch: Branch Only read access;Company: Company Read and Write Access;ReceiveBranch: Branch Only read access;Sender: CashAccount Only read access;Receiver: CashAccount Read and Write Access;'                |
+		| 'Document.MoneyTransfer Branch: Branch access deny;Company: Company Read and Write Access;ReceiveBranch: Branch Only read access;Sender: CashAccount Only read access;Receiver: CashAccount Read and Write Access;'                     |
+		| 'Document.MoneyTransfer Branch: Branch Read and Write Access;Company: Company Only read access;ReceiveBranch: Branch Only read access;Sender: CashAccount Only read access;Receiver: CashAccount Read and Write Access;'                |
+		| 'Document.MoneyTransfer Branch: Branch Only read access;Company: Company Only read access;ReceiveBranch: Branch Only read access;Sender: CashAccount Only read access;Receiver: CashAccount Read and Write Access;'                     |
+		| 'Document.MoneyTransfer Branch: Branch access deny;Company: Company Only read access;ReceiveBranch: Branch Only read access;Sender: CashAccount Only read access;Receiver: CashAccount Read and Write Access;'                          |
+		| 'Document.MoneyTransfer Branch: Branch Read and Write Access;Company: Company Read and Write Access;ReceiveBranch: Branch access deny;Sender: CashAccount Only read access;Receiver: CashAccount Read and Write Access;'                |
+		| 'Document.MoneyTransfer Branch: Branch Only read access;Company: Company Read and Write Access;ReceiveBranch: Branch access deny;Sender: CashAccount Only read access;Receiver: CashAccount Read and Write Access;'                     |
+		| 'Document.MoneyTransfer Branch: Branch Read and Write Access;Company: Company Only read access;ReceiveBranch: Branch access deny;Sender: CashAccount Only read access;Receiver: CashAccount Read and Write Access;'                     |
+		| 'Document.MoneyTransfer Branch: Branch Only read access;Company: Company Only read access;ReceiveBranch: Branch access deny;Sender: CashAccount Only read access;Receiver: CashAccount Read and Write Access;'                          |
+		| 'Document.MoneyTransfer Branch: Branch Read and Write Access;Company: Company Read and Write Access;ReceiveBranch: Branch Read and Write Access;Sender: CashAccount access deny;Receiver: CashAccount Read and Write Access;'           |
+		| 'Document.MoneyTransfer Branch: Branch Only read access;Company: Company Read and Write Access;ReceiveBranch: Branch Read and Write Access;Sender: CashAccount access deny;Receiver: CashAccount Read and Write Access;'                |
+		| 'Document.MoneyTransfer Branch: Branch access deny;Company: Company Read and Write Access;ReceiveBranch: Branch Read and Write Access;Sender: CashAccount access deny;Receiver: CashAccount Read and Write Access;'                     |
+		| 'Document.MoneyTransfer Branch: Branch Read and Write Access;Company: Company Only read access;ReceiveBranch: Branch Read and Write Access;Sender: CashAccount access deny;Receiver: CashAccount Read and Write Access;'                |
+		| 'Document.MoneyTransfer Branch: Branch Only read access;Company: Company Only read access;ReceiveBranch: Branch Read and Write Access;Sender: CashAccount access deny;Receiver: CashAccount Read and Write Access;'                     |
+		| 'Document.MoneyTransfer Branch: Branch access deny;Company: Company Only read access;ReceiveBranch: Branch Read and Write Access;Sender: CashAccount access deny;Receiver: CashAccount Read and Write Access;'                          |
+		| 'Document.MoneyTransfer Branch: Branch Read and Write Access;Company: Company Read and Write Access;ReceiveBranch: Branch Only read access;Sender: CashAccount access deny;Receiver: CashAccount Read and Write Access;'                |
+		| 'Document.MoneyTransfer Branch: Branch Only read access;Company: Company Read and Write Access;ReceiveBranch: Branch Only read access;Sender: CashAccount access deny;Receiver: CashAccount Read and Write Access;'                     |
+		| 'Document.MoneyTransfer Branch: Branch access deny;Company: Company Read and Write Access;ReceiveBranch: Branch Only read access;Sender: CashAccount access deny;Receiver: CashAccount Read and Write Access;'                          |
+		| 'Document.MoneyTransfer Branch: Branch Read and Write Access;Company: Company Only read access;ReceiveBranch: Branch Only read access;Sender: CashAccount access deny;Receiver: CashAccount Read and Write Access;'                     |
+		| 'Document.MoneyTransfer Branch: Branch Only read access;Company: Company Only read access;ReceiveBranch: Branch Only read access;Sender: CashAccount access deny;Receiver: CashAccount Read and Write Access;'                          |
+		| 'Document.MoneyTransfer Branch: Branch access deny;Company: Company Only read access;ReceiveBranch: Branch Only read access;Sender: CashAccount access deny;Receiver: CashAccount Read and Write Access;'                               |
+		| 'Document.MoneyTransfer Branch: Branch Read and Write Access;Company: Company Read and Write Access;ReceiveBranch: Branch access deny;Sender: CashAccount access deny;Receiver: CashAccount Read and Write Access;'                     |
+		| 'Document.MoneyTransfer Branch: Branch Only read access;Company: Company Read and Write Access;ReceiveBranch: Branch access deny;Sender: CashAccount access deny;Receiver: CashAccount Read and Write Access;'                          |
+		| 'Document.MoneyTransfer Branch: Branch Read and Write Access;Company: Company Only read access;ReceiveBranch: Branch access deny;Sender: CashAccount access deny;Receiver: CashAccount Read and Write Access;'                          |
+		| 'Document.MoneyTransfer Branch: Branch Only read access;Company: Company Only read access;ReceiveBranch: Branch access deny;Sender: CashAccount access deny;Receiver: CashAccount Read and Write Access;'                               |
+		| 'Document.MoneyTransfer Branch: Branch Read and Write Access;Company: Company Read and Write Access;ReceiveBranch: Branch Read and Write Access;Sender: CashAccount Read and Write Access;Receiver: CashAccount Only read access;'      |
+		| 'Document.MoneyTransfer Branch: Branch Only read access;Company: Company Read and Write Access;ReceiveBranch: Branch Read and Write Access;Sender: CashAccount Read and Write Access;Receiver: CashAccount Only read access;'           |
+		| 'Document.MoneyTransfer Branch: Branch access deny;Company: Company Read and Write Access;ReceiveBranch: Branch Read and Write Access;Sender: CashAccount Read and Write Access;Receiver: CashAccount Only read access;'                |
+		| 'Document.MoneyTransfer Branch: Branch Read and Write Access;Company: Company Only read access;ReceiveBranch: Branch Read and Write Access;Sender: CashAccount Read and Write Access;Receiver: CashAccount Only read access;'           |
+		| 'Document.MoneyTransfer Branch: Branch Only read access;Company: Company Only read access;ReceiveBranch: Branch Read and Write Access;Sender: CashAccount Read and Write Access;Receiver: CashAccount Only read access;'                |
+		| 'Document.MoneyTransfer Branch: Branch access deny;Company: Company Only read access;ReceiveBranch: Branch Read and Write Access;Sender: CashAccount Read and Write Access;Receiver: CashAccount Only read access;'                     |
+		| 'Document.MoneyTransfer Branch: Branch Read and Write Access;Company: Company Read and Write Access;ReceiveBranch: Branch Only read access;Sender: CashAccount Read and Write Access;Receiver: CashAccount Only read access;'           |
+		| 'Document.MoneyTransfer Branch: Branch Only read access;Company: Company Read and Write Access;ReceiveBranch: Branch Only read access;Sender: CashAccount Read and Write Access;Receiver: CashAccount Only read access;'                |
+		| 'Document.MoneyTransfer Branch: Branch access deny;Company: Company Read and Write Access;ReceiveBranch: Branch Only read access;Sender: CashAccount Read and Write Access;Receiver: CashAccount Only read access;'                     |
+		| 'Document.MoneyTransfer Branch: Branch Read and Write Access;Company: Company Only read access;ReceiveBranch: Branch Only read access;Sender: CashAccount Read and Write Access;Receiver: CashAccount Only read access;'                |
+		| 'Document.MoneyTransfer Branch: Branch Only read access;Company: Company Only read access;ReceiveBranch: Branch Only read access;Sender: CashAccount Read and Write Access;Receiver: CashAccount Only read access;'                     |
+		| 'Document.MoneyTransfer Branch: Branch access deny;Company: Company Only read access;ReceiveBranch: Branch Only read access;Sender: CashAccount Read and Write Access;Receiver: CashAccount Only read access;'                          |
+		| 'Document.MoneyTransfer Branch: Branch Read and Write Access;Company: Company Read and Write Access;ReceiveBranch: Branch access deny;Sender: CashAccount Read and Write Access;Receiver: CashAccount Only read access;'                |
+		| 'Document.MoneyTransfer Branch: Branch Only read access;Company: Company Read and Write Access;ReceiveBranch: Branch access deny;Sender: CashAccount Read and Write Access;Receiver: CashAccount Only read access;'                     |
+		| 'Document.MoneyTransfer Branch: Branch Read and Write Access;Company: Company Only read access;ReceiveBranch: Branch access deny;Sender: CashAccount Read and Write Access;Receiver: CashAccount Only read access;'                     |
+		| 'Document.MoneyTransfer Branch: Branch Only read access;Company: Company Only read access;ReceiveBranch: Branch access deny;Sender: CashAccount Read and Write Access;Receiver: CashAccount Only read access;'                          |
+		| 'Document.MoneyTransfer Branch: Branch Read and Write Access;Company: Company Read and Write Access;ReceiveBranch: Branch Read and Write Access;Sender: CashAccount Only read access;Receiver: CashAccount Only read access;'           |
+		| 'Document.MoneyTransfer Branch: Branch Only read access;Company: Company Read and Write Access;ReceiveBranch: Branch Read and Write Access;Sender: CashAccount Only read access;Receiver: CashAccount Only read access;'                |
+		| 'Document.MoneyTransfer Branch: Branch access deny;Company: Company Read and Write Access;ReceiveBranch: Branch Read and Write Access;Sender: CashAccount Only read access;Receiver: CashAccount Only read access;'                     |
+		| 'Document.MoneyTransfer Branch: Branch Read and Write Access;Company: Company Only read access;ReceiveBranch: Branch Read and Write Access;Sender: CashAccount Only read access;Receiver: CashAccount Only read access;'                |
+		| 'Document.MoneyTransfer Branch: Branch Only read access;Company: Company Only read access;ReceiveBranch: Branch Read and Write Access;Sender: CashAccount Only read access;Receiver: CashAccount Only read access;'                     |
+		| 'Document.MoneyTransfer Branch: Branch access deny;Company: Company Only read access;ReceiveBranch: Branch Read and Write Access;Sender: CashAccount Only read access;Receiver: CashAccount Only read access;'                          |
+		| 'Document.MoneyTransfer Branch: Branch Read and Write Access;Company: Company Read and Write Access;ReceiveBranch: Branch Only read access;Sender: CashAccount Only read access;Receiver: CashAccount Only read access;'                |
+		| 'Document.MoneyTransfer Branch: Branch Only read access;Company: Company Read and Write Access;ReceiveBranch: Branch Only read access;Sender: CashAccount Only read access;Receiver: CashAccount Only read access;'                     |
+		| 'Document.MoneyTransfer Branch: Branch access deny;Company: Company Read and Write Access;ReceiveBranch: Branch Only read access;Sender: CashAccount Only read access;Receiver: CashAccount Only read access;'                          |
+		| 'Document.MoneyTransfer Branch: Branch Read and Write Access;Company: Company Only read access;ReceiveBranch: Branch Only read access;Sender: CashAccount Only read access;Receiver: CashAccount Only read access;'                     |
+		| 'Document.MoneyTransfer Branch: Branch Only read access;Company: Company Only read access;ReceiveBranch: Branch Only read access;Sender: CashAccount Only read access;Receiver: CashAccount Only read access;'                          |
+		| 'Document.MoneyTransfer Branch: Branch access deny;Company: Company Only read access;ReceiveBranch: Branch Only read access;Sender: CashAccount Only read access;Receiver: CashAccount Only read access;'                               |
+		| 'Document.MoneyTransfer Branch: Branch Read and Write Access;Company: Company Read and Write Access;ReceiveBranch: Branch access deny;Sender: CashAccount Only read access;Receiver: CashAccount Only read access;'                     |
+		| 'Document.MoneyTransfer Branch: Branch Only read access;Company: Company Read and Write Access;ReceiveBranch: Branch access deny;Sender: CashAccount Only read access;Receiver: CashAccount Only read access;'                          |
+		| 'Document.MoneyTransfer Branch: Branch Read and Write Access;Company: Company Only read access;ReceiveBranch: Branch access deny;Sender: CashAccount Only read access;Receiver: CashAccount Only read access;'                          |
+		| 'Document.MoneyTransfer Branch: Branch Only read access;Company: Company Only read access;ReceiveBranch: Branch access deny;Sender: CashAccount Only read access;Receiver: CashAccount Only read access;'                               |
+		| 'Document.MoneyTransfer Branch: Branch Read and Write Access;Company: Company Read and Write Access;ReceiveBranch: Branch Read and Write Access;Sender: CashAccount access deny;Receiver: CashAccount Only read access;'                |
+		| 'Document.MoneyTransfer Branch: Branch Only read access;Company: Company Read and Write Access;ReceiveBranch: Branch Read and Write Access;Sender: CashAccount access deny;Receiver: CashAccount Only read access;'                     |
+		| 'Document.MoneyTransfer Branch: Branch access deny;Company: Company Read and Write Access;ReceiveBranch: Branch Read and Write Access;Sender: CashAccount access deny;Receiver: CashAccount Only read access;'                          |
+		| 'Document.MoneyTransfer Branch: Branch Read and Write Access;Company: Company Only read access;ReceiveBranch: Branch Read and Write Access;Sender: CashAccount access deny;Receiver: CashAccount Only read access;'                     |
+		| 'Document.MoneyTransfer Branch: Branch Only read access;Company: Company Only read access;ReceiveBranch: Branch Read and Write Access;Sender: CashAccount access deny;Receiver: CashAccount Only read access;'                          |
+		| 'Document.MoneyTransfer Branch: Branch access deny;Company: Company Only read access;ReceiveBranch: Branch Read and Write Access;Sender: CashAccount access deny;Receiver: CashAccount Only read access;'                               |
+		| 'Document.MoneyTransfer Branch: Branch Read and Write Access;Company: Company Read and Write Access;ReceiveBranch: Branch Only read access;Sender: CashAccount access deny;Receiver: CashAccount Only read access;'                     |
+		| 'Document.MoneyTransfer Branch: Branch Only read access;Company: Company Read and Write Access;ReceiveBranch: Branch Only read access;Sender: CashAccount access deny;Receiver: CashAccount Only read access;'                          |
+		| 'Document.MoneyTransfer Branch: Branch access deny;Company: Company Read and Write Access;ReceiveBranch: Branch Only read access;Sender: CashAccount access deny;Receiver: CashAccount Only read access;'                               |
+		| 'Document.MoneyTransfer Branch: Branch Read and Write Access;Company: Company Only read access;ReceiveBranch: Branch Only read access;Sender: CashAccount access deny;Receiver: CashAccount Only read access;'                          |
+		| 'Document.MoneyTransfer Branch: Branch Only read access;Company: Company Only read access;ReceiveBranch: Branch Only read access;Sender: CashAccount access deny;Receiver: CashAccount Only read access;'                               |
+		| 'Document.MoneyTransfer Branch: Branch access deny;Company: Company Only read access;ReceiveBranch: Branch Only read access;Sender: CashAccount access deny;Receiver: CashAccount Only read access;'                                    |
+		| 'Document.MoneyTransfer Branch: Branch Read and Write Access;Company: Company Read and Write Access;ReceiveBranch: Branch access deny;Sender: CashAccount access deny;Receiver: CashAccount Only read access;'                          |
+		| 'Document.MoneyTransfer Branch: Branch Only read access;Company: Company Read and Write Access;ReceiveBranch: Branch access deny;Sender: CashAccount access deny;Receiver: CashAccount Only read access;'                               |
+		| 'Document.MoneyTransfer Branch: Branch Read and Write Access;Company: Company Only read access;ReceiveBranch: Branch access deny;Sender: CashAccount access deny;Receiver: CashAccount Only read access;'                               |
+		| 'Document.MoneyTransfer Branch: Branch Only read access;Company: Company Only read access;ReceiveBranch: Branch access deny;Sender: CashAccount access deny;Receiver: CashAccount Only read access;'                                    |
+		| 'Document.MoneyTransfer Branch: Branch Read and Write Access;Company: Company Read and Write Access;ReceiveBranch: Branch Read and Write Access;Sender: CashAccount Read and Write Access;Receiver: CashAccount access deny;'           |
+		| 'Document.MoneyTransfer Branch: Branch Only read access;Company: Company Read and Write Access;ReceiveBranch: Branch Read and Write Access;Sender: CashAccount Read and Write Access;Receiver: CashAccount access deny;'                |
+		| 'Document.MoneyTransfer Branch: Branch access deny;Company: Company Read and Write Access;ReceiveBranch: Branch Read and Write Access;Sender: CashAccount Read and Write Access;Receiver: CashAccount access deny;'                     |
+		| 'Document.MoneyTransfer Branch: Branch Read and Write Access;Company: Company Only read access;ReceiveBranch: Branch Read and Write Access;Sender: CashAccount Read and Write Access;Receiver: CashAccount access deny;'                |
+		| 'Document.MoneyTransfer Branch: Branch Only read access;Company: Company Only read access;ReceiveBranch: Branch Read and Write Access;Sender: CashAccount Read and Write Access;Receiver: CashAccount access deny;'                     |
+		| 'Document.MoneyTransfer Branch: Branch access deny;Company: Company Only read access;ReceiveBranch: Branch Read and Write Access;Sender: CashAccount Read and Write Access;Receiver: CashAccount access deny;'                          |
+		| 'Document.MoneyTransfer Branch: Branch Read and Write Access;Company: Company Read and Write Access;ReceiveBranch: Branch Only read access;Sender: CashAccount Read and Write Access;Receiver: CashAccount access deny;'                |
+		| 'Document.MoneyTransfer Branch: Branch Only read access;Company: Company Read and Write Access;ReceiveBranch: Branch Only read access;Sender: CashAccount Read and Write Access;Receiver: CashAccount access deny;'                     |
+		| 'Document.MoneyTransfer Branch: Branch access deny;Company: Company Read and Write Access;ReceiveBranch: Branch Only read access;Sender: CashAccount Read and Write Access;Receiver: CashAccount access deny;'                          |
+		| 'Document.MoneyTransfer Branch: Branch Read and Write Access;Company: Company Only read access;ReceiveBranch: Branch Only read access;Sender: CashAccount Read and Write Access;Receiver: CashAccount access deny;'                     |
+		| 'Document.MoneyTransfer Branch: Branch Only read access;Company: Company Only read access;ReceiveBranch: Branch Only read access;Sender: CashAccount Read and Write Access;Receiver: CashAccount access deny;'                          |
+		| 'Document.MoneyTransfer Branch: Branch access deny;Company: Company Only read access;ReceiveBranch: Branch Only read access;Sender: CashAccount Read and Write Access;Receiver: CashAccount access deny;'                               |
+		| 'Document.MoneyTransfer Branch: Branch Read and Write Access;Company: Company Read and Write Access;ReceiveBranch: Branch access deny;Sender: CashAccount Read and Write Access;Receiver: CashAccount access deny;'                     |
+		| 'Document.MoneyTransfer Branch: Branch Only read access;Company: Company Read and Write Access;ReceiveBranch: Branch access deny;Sender: CashAccount Read and Write Access;Receiver: CashAccount access deny;'                          |
+		| 'Document.MoneyTransfer Branch: Branch Read and Write Access;Company: Company Only read access;ReceiveBranch: Branch access deny;Sender: CashAccount Read and Write Access;Receiver: CashAccount access deny;'                          |
+		| 'Document.MoneyTransfer Branch: Branch Only read access;Company: Company Only read access;ReceiveBranch: Branch access deny;Sender: CashAccount Read and Write Access;Receiver: CashAccount access deny;'                               |
+		| 'Document.MoneyTransfer Branch: Branch Read and Write Access;Company: Company Read and Write Access;ReceiveBranch: Branch Read and Write Access;Sender: CashAccount Only read access;Receiver: CashAccount access deny;'                |
+		| 'Document.MoneyTransfer Branch: Branch Only read access;Company: Company Read and Write Access;ReceiveBranch: Branch Read and Write Access;Sender: CashAccount Only read access;Receiver: CashAccount access deny;'                     |
+		| 'Document.MoneyTransfer Branch: Branch access deny;Company: Company Read and Write Access;ReceiveBranch: Branch Read and Write Access;Sender: CashAccount Only read access;Receiver: CashAccount access deny;'                          |
+		| 'Document.MoneyTransfer Branch: Branch Read and Write Access;Company: Company Only read access;ReceiveBranch: Branch Read and Write Access;Sender: CashAccount Only read access;Receiver: CashAccount access deny;'                     |
+		| 'Document.MoneyTransfer Branch: Branch Only read access;Company: Company Only read access;ReceiveBranch: Branch Read and Write Access;Sender: CashAccount Only read access;Receiver: CashAccount access deny;'                          |
+		| 'Document.MoneyTransfer Branch: Branch access deny;Company: Company Only read access;ReceiveBranch: Branch Read and Write Access;Sender: CashAccount Only read access;Receiver: CashAccount access deny;'                               |
+		| 'Document.MoneyTransfer Branch: Branch Read and Write Access;Company: Company Read and Write Access;ReceiveBranch: Branch Only read access;Sender: CashAccount Only read access;Receiver: CashAccount access deny;'                     |
+		| 'Document.MoneyTransfer Branch: Branch Only read access;Company: Company Read and Write Access;ReceiveBranch: Branch Only read access;Sender: CashAccount Only read access;Receiver: CashAccount access deny;'                          |
+		| 'Document.MoneyTransfer Branch: Branch access deny;Company: Company Read and Write Access;ReceiveBranch: Branch Only read access;Sender: CashAccount Only read access;Receiver: CashAccount access deny;'                               |
+		| 'Document.MoneyTransfer Branch: Branch Read and Write Access;Company: Company Only read access;ReceiveBranch: Branch Only read access;Sender: CashAccount Only read access;Receiver: CashAccount access deny;'                          |
+		| 'Document.MoneyTransfer Branch: Branch Only read access;Company: Company Only read access;ReceiveBranch: Branch Only read access;Sender: CashAccount Only read access;Receiver: CashAccount access deny;'                               |
+		| 'Document.MoneyTransfer Branch: Branch access deny;Company: Company Only read access;ReceiveBranch: Branch Only read access;Sender: CashAccount Only read access;Receiver: CashAccount access deny;'                                    |
+		| 'Document.MoneyTransfer Branch: Branch Read and Write Access;Company: Company Read and Write Access;ReceiveBranch: Branch access deny;Sender: CashAccount Only read access;Receiver: CashAccount access deny;'                          |
+		| 'Document.MoneyTransfer Branch: Branch Only read access;Company: Company Read and Write Access;ReceiveBranch: Branch access deny;Sender: CashAccount Only read access;Receiver: CashAccount access deny;'                               |
+		| 'Document.MoneyTransfer Branch: Branch Read and Write Access;Company: Company Only read access;ReceiveBranch: Branch access deny;Sender: CashAccount Only read access;Receiver: CashAccount access deny;'                               |
+		| 'Document.MoneyTransfer Branch: Branch Only read access;Company: Company Only read access;ReceiveBranch: Branch access deny;Sender: CashAccount Only read access;Receiver: CashAccount access deny;'                                    |
 	
+		
 Scenario: 960123 check OpeningEntry access rights (LimitedAccess)	
 	And I close all client application windows
 	Given I open hyperlink "e1cib/list/Document.OpeningEntry"
 	And "List" table became equal
-		| 'Number' | 'Company'                       | 'Description'                                                                                        |
-		| '1'      | 'Company Read and Write Access' | 'Document.OpeningEntry Branch: Branch Read and Write Access;Company: Company Read and Write Access;' |
-		| '2'      | 'Company Read and Write Access' | 'Document.OpeningEntry Branch: Branch Only read access;Company: Company Read and Write Access;'      |
-		| '4'      | 'Company Only read access'      | 'Document.OpeningEntry Branch: Branch Read and Write Access;Company: Company Only read access;'      |
-		| '5'      | 'Company Only read access'      | 'Document.OpeningEntry Branch: Branch Only read access;Company: Company Only read access;'           |
+		| 'Description'                                                                                        |
+		| 'Document.OpeningEntry Branch: Branch Read and Write Access;Company: Company Read and Write Access;' |
+		| 'Document.OpeningEntry Branch: Branch Only read access;Company: Company Read and Write Access;'      |
+		| 'Document.OpeningEntry Branch: Branch Read and Write Access;Company: Company Only read access;'      |
+		| 'Document.OpeningEntry Branch: Branch Only read access;Company: Company Only read access;'           |
 	
 Scenario: 960124 check OutgoingPaymentOrder access rights (LimitedAccess)	
 	And I close all client application windows
 	Given I open hyperlink "e1cib/list/Document.OutgoingPaymentOrder"	
 	And "List" table became equal
-		| 'Number' | 'Company'                       | 'Account'                           | 'Description'                                                                                                                                           |
-		| '1'      | 'Company Read and Write Access' | 'CashAccount Read and Write Access' | 'Document.OutgoingPaymentOrder Account: CashAccount Read and Write Access;Branch: Branch Read and Write Access;Company: Company Read and Write Access;' |
-		| '2'      | 'Company Read and Write Access' | 'CashAccount Only read access'      | 'Document.OutgoingPaymentOrder Account: CashAccount Only read access;Branch: Branch Read and Write Access;Company: Company Read and Write Access;'      |
-		| '4'      | 'Company Read and Write Access' | 'CashAccount Read and Write Access' | 'Document.OutgoingPaymentOrder Account: CashAccount Read and Write Access;Branch: Branch Only read access;Company: Company Read and Write Access;'      |
-		| '5'      | 'Company Read and Write Access' | 'CashAccount Only read access'      | 'Document.OutgoingPaymentOrder Account: CashAccount Only read access;Branch: Branch Only read access;Company: Company Read and Write Access;'           |
-		| '10'     | 'Company Only read access'      | 'CashAccount Read and Write Access' | 'Document.OutgoingPaymentOrder Account: CashAccount Read and Write Access;Branch: Branch Read and Write Access;Company: Company Only read access;'      |
-		| '11'     | 'Company Only read access'      | 'CashAccount Only read access'      | 'Document.OutgoingPaymentOrder Account: CashAccount Only read access;Branch: Branch Read and Write Access;Company: Company Only read access;'           |
-		| '13'     | 'Company Only read access'      | 'CashAccount Read and Write Access' | 'Document.OutgoingPaymentOrder Account: CashAccount Read and Write Access;Branch: Branch Only read access;Company: Company Only read access;'           |
-		| '14'     | 'Company Only read access'      | 'CashAccount Only read access'      | 'Document.OutgoingPaymentOrder Account: CashAccount Only read access;Branch: Branch Only read access;Company: Company Only read access;'                |
+		| 'Description'                                                                                                                                           |
+		| 'Document.OutgoingPaymentOrder Account: CashAccount Read and Write Access;Branch: Branch Read and Write Access;Company: Company Read and Write Access;' |
+		| 'Document.OutgoingPaymentOrder Account: CashAccount Only read access;Branch: Branch Read and Write Access;Company: Company Read and Write Access;'      |
+		| 'Document.OutgoingPaymentOrder Account: CashAccount Read and Write Access;Branch: Branch Only read access;Company: Company Read and Write Access;'      |
+		| 'Document.OutgoingPaymentOrder Account: CashAccount Only read access;Branch: Branch Only read access;Company: Company Read and Write Access;'           |
+		| 'Document.OutgoingPaymentOrder Account: CashAccount Read and Write Access;Branch: Branch Read and Write Access;Company: Company Only read access;'      |
+		| 'Document.OutgoingPaymentOrder Account: CashAccount Only read access;Branch: Branch Read and Write Access;Company: Company Only read access;'           |
+		| 'Document.OutgoingPaymentOrder Account: CashAccount Read and Write Access;Branch: Branch Only read access;Company: Company Only read access;'           |
+		| 'Document.OutgoingPaymentOrder Account: CashAccount Only read access;Branch: Branch Only read access;Company: Company Only read access;'                |
 	
 Scenario: 960125 check Payroll access rights (LimitedAccess)	
 	And I close all client application windows
 	Given I open hyperlink "e1cib/list/Document.Payroll"
 	And "List" table became equal
-		| 'Number' | 'Company'                       | 'Branch'                       | 'Description'                                                                                   |
-		| '1'      | 'Company Read and Write Access' | 'Branch Read and Write Access' | 'Document.Payroll Branch: Branch Read and Write Access;Company: Company Read and Write Access;' |
-		| '2'      | 'Company Read and Write Access' | 'Branch Only read access'      | 'Document.Payroll Branch: Branch Only read access;Company: Company Read and Write Access;'      |
-		| '4'      | 'Company Only read access'      | 'Branch Read and Write Access' | 'Document.Payroll Branch: Branch Read and Write Access;Company: Company Only read access;'      |
-		| '5'      | 'Company Only read access'      | 'Branch Only read access'      | 'Document.Payroll Branch: Branch Only read access;Company: Company Only read access;'           |
+		| 'Description'                                                                                   |
+		| 'Document.Payroll Branch: Branch Read and Write Access;Company: Company Read and Write Access;' |
+		| 'Document.Payroll Branch: Branch Only read access;Company: Company Read and Write Access;'      |
+		| 'Document.Payroll Branch: Branch Read and Write Access;Company: Company Only read access;'      |
+		| 'Document.Payroll Branch: Branch Only read access;Company: Company Only read access;'           |
 	
 Scenario: 960126 check PhysicalCountByLocation access rights (LimitedAccess)	
 	And I close all client application windows
 	Given I open hyperlink "e1cib/list/Document.PhysicalCountByLocation"
 	And "List" table became equal
-		| 'Number' | 'Store'                       | 'Description'                                                                                               |
-		| '1'      | 'Store Read and Write Access' | 'Document.PhysicalCountByLocation Store: Store Read and Write Access;Branch: Branch Read and Write Access;' |
-		| '2'      | 'Store Only read access'      | 'Document.PhysicalCountByLocation Store: Store Only read access;Branch: Branch Read and Write Access;'      |
-		| '4'      | 'Store Read and Write Access' | 'Document.PhysicalCountByLocation Store: Store Read and Write Access;Branch: Branch Only read access;'      |
-		| '5'      | 'Store Only read access'      | 'Document.PhysicalCountByLocation Store: Store Only read access;Branch: Branch Only read access;'           |
+		| 'Description'                                                                                               |
+		| 'Document.PhysicalCountByLocation Store: Store Read and Write Access;Branch: Branch Read and Write Access;' |
+		| 'Document.PhysicalCountByLocation Store: Store Only read access;Branch: Branch Read and Write Access;'      |
+		| 'Document.PhysicalCountByLocation Store: Store Read and Write Access;Branch: Branch Only read access;'      |
+		| 'Document.PhysicalCountByLocation Store: Store Only read access;Branch: Branch Only read access;'           |
 	
 Scenario: 960127 check PhysicalInventory access rights (LimitedAccess)	
 	And I close all client application windows
 	Given I open hyperlink "e1cib/list/Document.PhysicalInventory"							
 	And "List" table became equal
-		| 'Number' | 'Store'                       | 'Description'                                                                                         |
-		| '1'      | 'Store Read and Write Access' | 'Document.PhysicalInventory Store: Store Read and Write Access;Branch: Branch Read and Write Access;' |
-		| '2'      | 'Store Only read access'      | 'Document.PhysicalInventory Store: Store Only read access;Branch: Branch Read and Write Access;'      |
-		| '4'      | 'Store Read and Write Access' | 'Document.PhysicalInventory Store: Store Read and Write Access;Branch: Branch Only read access;'      |
-		| '5'      | 'Store Only read access'      | 'Document.PhysicalInventory Store: Store Only read access;Branch: Branch Only read access;'           |
+		| 'Description'                                                                                         |
+		| 'Document.PhysicalInventory Store: Store Read and Write Access;Branch: Branch Read and Write Access;' |
+		| 'Document.PhysicalInventory Store: Store Only read access;Branch: Branch Read and Write Access;'      |
+		| 'Document.PhysicalInventory Store: Store Read and Write Access;Branch: Branch Only read access;'      |
+		| 'Document.PhysicalInventory Store: Store Only read access;Branch: Branch Only read access;'           |
 	
 Scenario: 960128 check PlannedReceiptReservation access rights (LimitedAccess)	
 	And I close all client application windows
 	Given I open hyperlink "e1cib/list/Document.PlannedReceiptReservation"
 	And "List" table became equal
-		| 'Number' | 'Company'                       | 'Store (incoming)'            | 'Store outgoing'              | 'Description'                                                                                                                                                                                                 |
-		| '1'      | 'Company Read and Write Access' | 'Store Read and Write Access' | ''                            | 'Document.PlannedReceiptReservation Store: Store Read and Write Access;Branch: Branch Read and Write Access;Company: Company Read and Write Access;'                                                          |
-		| '2'      | 'Company Read and Write Access' | 'Store Read and Write Access' | 'Store Read and Write Access' | 'Document.PlannedReceiptReservation Store: Store Read and Write Access;Branch: Branch Read and Write Access;Company: Company Read and Write Access;Store: Store Read and Write Access'                        |
-		| '3'      | 'Company Read and Write Access' | 'Store Read and Write Access' | 'Store Only read access'      | 'Document.PlannedReceiptReservation Store: Store Read and Write Access;Branch: Branch Read and Write Access;Company: Company Read and Write Access;Store: Store Only read access'                             |
-		| '5'      | 'Company Read and Write Access' | 'Store Read and Write Access' | ''                            | 'Document.PlannedReceiptReservation Store: Store Read and Write Access;Branch: Branch Read and Write Access;Company: Company Read and Write Access;Store: Store Read and Write Access&Store Only read access' |
-		| '9'      | 'Company Read and Write Access' | 'Store Only read access'      | ''                            | 'Document.PlannedReceiptReservation Store: Store Only read access;Branch: Branch Read and Write Access;Company: Company Read and Write Access;'                                                               |
-		| '10'     | 'Company Read and Write Access' | 'Store Only read access'      | 'Store Read and Write Access' | 'Document.PlannedReceiptReservation Store: Store Only read access;Branch: Branch Read and Write Access;Company: Company Read and Write Access;Store: Store Read and Write Access'                             |
-		| '11'     | 'Company Read and Write Access' | 'Store Only read access'      | 'Store Only read access'      | 'Document.PlannedReceiptReservation Store: Store Only read access;Branch: Branch Read and Write Access;Company: Company Read and Write Access;Store: Store Only read access'                                  |
-		| '13'     | 'Company Read and Write Access' | 'Store Only read access'      | ''                            | 'Document.PlannedReceiptReservation Store: Store Only read access;Branch: Branch Read and Write Access;Company: Company Read and Write Access;Store: Store Read and Write Access&Store Only read access'      |
-		| '25'     | 'Company Read and Write Access' | 'Store Read and Write Access' | ''                            | 'Document.PlannedReceiptReservation Store: Store Read and Write Access;Branch: Branch Only read access;Company: Company Read and Write Access;'                                                               |
-		| '26'     | 'Company Read and Write Access' | 'Store Read and Write Access' | 'Store Read and Write Access' | 'Document.PlannedReceiptReservation Store: Store Read and Write Access;Branch: Branch Only read access;Company: Company Read and Write Access;Store: Store Read and Write Access'                             |
-		| '27'     | 'Company Read and Write Access' | 'Store Read and Write Access' | 'Store Only read access'      | 'Document.PlannedReceiptReservation Store: Store Read and Write Access;Branch: Branch Only read access;Company: Company Read and Write Access;Store: Store Only read access'                                  |
-		| '29'     | 'Company Read and Write Access' | 'Store Read and Write Access' | ''                            | 'Document.PlannedReceiptReservation Store: Store Read and Write Access;Branch: Branch Only read access;Company: Company Read and Write Access;Store: Store Read and Write Access&Store Only read access'      |
-		| '33'     | 'Company Read and Write Access' | 'Store Only read access'      | ''                            | 'Document.PlannedReceiptReservation Store: Store Only read access;Branch: Branch Only read access;Company: Company Read and Write Access;'                                                                    |
-		| '34'     | 'Company Read and Write Access' | 'Store Only read access'      | 'Store Read and Write Access' | 'Document.PlannedReceiptReservation Store: Store Only read access;Branch: Branch Only read access;Company: Company Read and Write Access;Store: Store Read and Write Access'                                  |
-		| '35'     | 'Company Read and Write Access' | 'Store Only read access'      | 'Store Only read access'      | 'Document.PlannedReceiptReservation Store: Store Only read access;Branch: Branch Only read access;Company: Company Read and Write Access;Store: Store Only read access'                                       |
-		| '37'     | 'Company Read and Write Access' | 'Store Only read access'      | ''                            | 'Document.PlannedReceiptReservation Store: Store Only read access;Branch: Branch Only read access;Company: Company Read and Write Access;Store: Store Read and Write Access&Store Only read access'           |
-		| '73'     | 'Company Only read access'      | 'Store Read and Write Access' | ''                            | 'Document.PlannedReceiptReservation Store: Store Read and Write Access;Branch: Branch Read and Write Access;Company: Company Only read access;'                                                               |
-		| '74'     | 'Company Only read access'      | 'Store Read and Write Access' | 'Store Read and Write Access' | 'Document.PlannedReceiptReservation Store: Store Read and Write Access;Branch: Branch Read and Write Access;Company: Company Only read access;Store: Store Read and Write Access'                             |
-		| '75'     | 'Company Only read access'      | 'Store Read and Write Access' | 'Store Only read access'      | 'Document.PlannedReceiptReservation Store: Store Read and Write Access;Branch: Branch Read and Write Access;Company: Company Only read access;Store: Store Only read access'                                  |
-		| '77'     | 'Company Only read access'      | 'Store Read and Write Access' | ''                            | 'Document.PlannedReceiptReservation Store: Store Read and Write Access;Branch: Branch Read and Write Access;Company: Company Only read access;Store: Store Read and Write Access&Store Only read access'      |
-		| '81'     | 'Company Only read access'      | 'Store Only read access'      | ''                            | 'Document.PlannedReceiptReservation Store: Store Only read access;Branch: Branch Read and Write Access;Company: Company Only read access;'                                                                    |
-		| '82'     | 'Company Only read access'      | 'Store Only read access'      | 'Store Read and Write Access' | 'Document.PlannedReceiptReservation Store: Store Only read access;Branch: Branch Read and Write Access;Company: Company Only read access;Store: Store Read and Write Access'                                  |
-		| '83'     | 'Company Only read access'      | 'Store Only read access'      | 'Store Only read access'      | 'Document.PlannedReceiptReservation Store: Store Only read access;Branch: Branch Read and Write Access;Company: Company Only read access;Store: Store Only read access'                                       |
-		| '85'     | 'Company Only read access'      | 'Store Only read access'      | ''                            | 'Document.PlannedReceiptReservation Store: Store Only read access;Branch: Branch Read and Write Access;Company: Company Only read access;Store: Store Read and Write Access&Store Only read access'           |
-		| '97'     | 'Company Only read access'      | 'Store Read and Write Access' | ''                            | 'Document.PlannedReceiptReservation Store: Store Read and Write Access;Branch: Branch Only read access;Company: Company Only read access;'                                                                    |
-		| '98'     | 'Company Only read access'      | 'Store Read and Write Access' | 'Store Read and Write Access' | 'Document.PlannedReceiptReservation Store: Store Read and Write Access;Branch: Branch Only read access;Company: Company Only read access;Store: Store Read and Write Access'                                  |
-		| '99'     | 'Company Only read access'      | 'Store Read and Write Access' | 'Store Only read access'      | 'Document.PlannedReceiptReservation Store: Store Read and Write Access;Branch: Branch Only read access;Company: Company Only read access;Store: Store Only read access'                                       |
-		| '101'    | 'Company Only read access'      | 'Store Read and Write Access' | ''                            | 'Document.PlannedReceiptReservation Store: Store Read and Write Access;Branch: Branch Only read access;Company: Company Only read access;Store: Store Read and Write Access&Store Only read access'           |
-		| '105'    | 'Company Only read access'      | 'Store Only read access'      | ''                            | 'Document.PlannedReceiptReservation Store: Store Only read access;Branch: Branch Only read access;Company: Company Only read access;'                                                                         |
-		| '106'    | 'Company Only read access'      | 'Store Only read access'      | 'Store Read and Write Access' | 'Document.PlannedReceiptReservation Store: Store Only read access;Branch: Branch Only read access;Company: Company Only read access;Store: Store Read and Write Access'                                       |
-		| '107'    | 'Company Only read access'      | 'Store Only read access'      | 'Store Only read access'      | 'Document.PlannedReceiptReservation Store: Store Only read access;Branch: Branch Only read access;Company: Company Only read access;Store: Store Only read access'                                            |
-		| '109'    | 'Company Only read access'      | 'Store Only read access'      | ''                            | 'Document.PlannedReceiptReservation Store: Store Only read access;Branch: Branch Only read access;Company: Company Only read access;Store: Store Read and Write Access&Store Only read access'                |
+		| 'Description'                                                                                                                                                                                                                   |
+		| 'Document.PlannedReceiptReservation Store: Store Read and Write Access;Branch: Branch Read and Write Access;Company: Company Read and Write Access;'                                                                            |
+		| 'Document.PlannedReceiptReservation Store: Store Read and Write Access;Branch: Branch Read and Write Access;Company: Company Read and Write Access;Store: Store Read and Write Access'                                          |
+		| 'Document.PlannedReceiptReservation Store: Store Read and Write Access;Branch: Branch Read and Write Access;Company: Company Read and Write Access;Store: Store Only read access'                                               |
+		| 'Document.PlannedReceiptReservation Store: Store Read and Write Access;Branch: Branch Read and Write Access;Company: Company Read and Write Access;Store: Store access deny'                                                    |
+		| 'Document.PlannedReceiptReservation Store: Store Read and Write Access;Branch: Branch Read and Write Access;Company: Company Read and Write Access;Store: Store Read and Write Access&Store Only read access'                   |
+		| 'Document.PlannedReceiptReservation Store: Store Read and Write Access;Branch: Branch Read and Write Access;Company: Company Read and Write Access;Store: Store Only read access&Store access deny'                             |
+		| 'Document.PlannedReceiptReservation Store: Store Read and Write Access;Branch: Branch Read and Write Access;Company: Company Read and Write Access;Store: Store Read and Write Access&Store access deny'                        |
+		| 'Document.PlannedReceiptReservation Store: Store Read and Write Access;Branch: Branch Read and Write Access;Company: Company Read and Write Access;Store: Store Read and Write Access&Store Only read access&Store access deny' |
+		| 'Document.PlannedReceiptReservation Store: Store Only read access;Branch: Branch Read and Write Access;Company: Company Read and Write Access;'                                                                                 |
+		| 'Document.PlannedReceiptReservation Store: Store Only read access;Branch: Branch Read and Write Access;Company: Company Read and Write Access;Store: Store Read and Write Access'                                               |
+		| 'Document.PlannedReceiptReservation Store: Store Only read access;Branch: Branch Read and Write Access;Company: Company Read and Write Access;Store: Store Only read access'                                                    |
+		| 'Document.PlannedReceiptReservation Store: Store Only read access;Branch: Branch Read and Write Access;Company: Company Read and Write Access;Store: Store access deny'                                                         |
+		| 'Document.PlannedReceiptReservation Store: Store Only read access;Branch: Branch Read and Write Access;Company: Company Read and Write Access;Store: Store Read and Write Access&Store Only read access'                        |
+		| 'Document.PlannedReceiptReservation Store: Store Only read access;Branch: Branch Read and Write Access;Company: Company Read and Write Access;Store: Store Only read access&Store access deny'                                  |
+		| 'Document.PlannedReceiptReservation Store: Store Only read access;Branch: Branch Read and Write Access;Company: Company Read and Write Access;Store: Store Read and Write Access&Store access deny'                             |
+		| 'Document.PlannedReceiptReservation Store: Store Only read access;Branch: Branch Read and Write Access;Company: Company Read and Write Access;Store: Store Read and Write Access&Store Only read access&Store access deny'      |
+		| 'Document.PlannedReceiptReservation Store: Store access deny;Branch: Branch Read and Write Access;Company: Company Read and Write Access;Store: Store Read and Write Access'                                                    |
+		| 'Document.PlannedReceiptReservation Store: Store access deny;Branch: Branch Read and Write Access;Company: Company Read and Write Access;Store: Store Only read access'                                                         |
+		| 'Document.PlannedReceiptReservation Store: Store access deny;Branch: Branch Read and Write Access;Company: Company Read and Write Access;Store: Store Read and Write Access&Store Only read access'                             |
+		| 'Document.PlannedReceiptReservation Store: Store access deny;Branch: Branch Read and Write Access;Company: Company Read and Write Access;Store: Store Only read access&Store access deny'                                       |
+		| 'Document.PlannedReceiptReservation Store: Store access deny;Branch: Branch Read and Write Access;Company: Company Read and Write Access;Store: Store Read and Write Access&Store access deny'                                  |
+		| 'Document.PlannedReceiptReservation Store: Store access deny;Branch: Branch Read and Write Access;Company: Company Read and Write Access;Store: Store Read and Write Access&Store Only read access&Store access deny'           |
+		| 'Document.PlannedReceiptReservation Store: Store Read and Write Access;Branch: Branch Only read access;Company: Company Read and Write Access;'                                                                                 |
+		| 'Document.PlannedReceiptReservation Store: Store Read and Write Access;Branch: Branch Only read access;Company: Company Read and Write Access;Store: Store Read and Write Access'                                               |
+		| 'Document.PlannedReceiptReservation Store: Store Read and Write Access;Branch: Branch Only read access;Company: Company Read and Write Access;Store: Store Only read access'                                                    |
+		| 'Document.PlannedReceiptReservation Store: Store Read and Write Access;Branch: Branch Only read access;Company: Company Read and Write Access;Store: Store access deny'                                                         |
+		| 'Document.PlannedReceiptReservation Store: Store Read and Write Access;Branch: Branch Only read access;Company: Company Read and Write Access;Store: Store Read and Write Access&Store Only read access'                        |
+		| 'Document.PlannedReceiptReservation Store: Store Read and Write Access;Branch: Branch Only read access;Company: Company Read and Write Access;Store: Store Only read access&Store access deny'                                  |
+		| 'Document.PlannedReceiptReservation Store: Store Read and Write Access;Branch: Branch Only read access;Company: Company Read and Write Access;Store: Store Read and Write Access&Store access deny'                             |
+		| 'Document.PlannedReceiptReservation Store: Store Read and Write Access;Branch: Branch Only read access;Company: Company Read and Write Access;Store: Store Read and Write Access&Store Only read access&Store access deny'      |
+		| 'Document.PlannedReceiptReservation Store: Store Only read access;Branch: Branch Only read access;Company: Company Read and Write Access;'                                                                                      |
+		| 'Document.PlannedReceiptReservation Store: Store Only read access;Branch: Branch Only read access;Company: Company Read and Write Access;Store: Store Read and Write Access'                                                    |
+		| 'Document.PlannedReceiptReservation Store: Store Only read access;Branch: Branch Only read access;Company: Company Read and Write Access;Store: Store Only read access'                                                         |
+		| 'Document.PlannedReceiptReservation Store: Store Only read access;Branch: Branch Only read access;Company: Company Read and Write Access;Store: Store access deny'                                                              |
+		| 'Document.PlannedReceiptReservation Store: Store Only read access;Branch: Branch Only read access;Company: Company Read and Write Access;Store: Store Read and Write Access&Store Only read access'                             |
+		| 'Document.PlannedReceiptReservation Store: Store Only read access;Branch: Branch Only read access;Company: Company Read and Write Access;Store: Store Only read access&Store access deny'                                       |
+		| 'Document.PlannedReceiptReservation Store: Store Only read access;Branch: Branch Only read access;Company: Company Read and Write Access;Store: Store Read and Write Access&Store access deny'                                  |
+		| 'Document.PlannedReceiptReservation Store: Store Only read access;Branch: Branch Only read access;Company: Company Read and Write Access;Store: Store Read and Write Access&Store Only read access&Store access deny'           |
+		| 'Document.PlannedReceiptReservation Store: Store access deny;Branch: Branch Only read access;Company: Company Read and Write Access;Store: Store Read and Write Access'                                                         |
+		| 'Document.PlannedReceiptReservation Store: Store access deny;Branch: Branch Only read access;Company: Company Read and Write Access;Store: Store Only read access'                                                              |
+		| 'Document.PlannedReceiptReservation Store: Store access deny;Branch: Branch Only read access;Company: Company Read and Write Access;Store: Store Read and Write Access&Store Only read access'                                  |
+		| 'Document.PlannedReceiptReservation Store: Store access deny;Branch: Branch Only read access;Company: Company Read and Write Access;Store: Store Only read access&Store access deny'                                            |
+		| 'Document.PlannedReceiptReservation Store: Store access deny;Branch: Branch Only read access;Company: Company Read and Write Access;Store: Store Read and Write Access&Store access deny'                                       |
+		| 'Document.PlannedReceiptReservation Store: Store access deny;Branch: Branch Only read access;Company: Company Read and Write Access;Store: Store Read and Write Access&Store Only read access&Store access deny'                |
+		| 'Document.PlannedReceiptReservation Store: Store Read and Write Access;Branch: Branch Read and Write Access;Company: Company Only read access;'                                                                                 |
+		| 'Document.PlannedReceiptReservation Store: Store Read and Write Access;Branch: Branch Read and Write Access;Company: Company Only read access;Store: Store Read and Write Access'                                               |
+		| 'Document.PlannedReceiptReservation Store: Store Read and Write Access;Branch: Branch Read and Write Access;Company: Company Only read access;Store: Store Only read access'                                                    |
+		| 'Document.PlannedReceiptReservation Store: Store Read and Write Access;Branch: Branch Read and Write Access;Company: Company Only read access;Store: Store access deny'                                                         |
+		| 'Document.PlannedReceiptReservation Store: Store Read and Write Access;Branch: Branch Read and Write Access;Company: Company Only read access;Store: Store Read and Write Access&Store Only read access'                        |
+		| 'Document.PlannedReceiptReservation Store: Store Read and Write Access;Branch: Branch Read and Write Access;Company: Company Only read access;Store: Store Only read access&Store access deny'                                  |
+		| 'Document.PlannedReceiptReservation Store: Store Read and Write Access;Branch: Branch Read and Write Access;Company: Company Only read access;Store: Store Read and Write Access&Store access deny'                             |
+		| 'Document.PlannedReceiptReservation Store: Store Read and Write Access;Branch: Branch Read and Write Access;Company: Company Only read access;Store: Store Read and Write Access&Store Only read access&Store access deny'      |
+		| 'Document.PlannedReceiptReservation Store: Store Only read access;Branch: Branch Read and Write Access;Company: Company Only read access;'                                                                                      |
+		| 'Document.PlannedReceiptReservation Store: Store Only read access;Branch: Branch Read and Write Access;Company: Company Only read access;Store: Store Read and Write Access'                                                    |
+		| 'Document.PlannedReceiptReservation Store: Store Only read access;Branch: Branch Read and Write Access;Company: Company Only read access;Store: Store Only read access'                                                         |
+		| 'Document.PlannedReceiptReservation Store: Store Only read access;Branch: Branch Read and Write Access;Company: Company Only read access;Store: Store access deny'                                                              |
+		| 'Document.PlannedReceiptReservation Store: Store Only read access;Branch: Branch Read and Write Access;Company: Company Only read access;Store: Store Read and Write Access&Store Only read access'                             |
+		| 'Document.PlannedReceiptReservation Store: Store Only read access;Branch: Branch Read and Write Access;Company: Company Only read access;Store: Store Only read access&Store access deny'                                       |
+		| 'Document.PlannedReceiptReservation Store: Store Only read access;Branch: Branch Read and Write Access;Company: Company Only read access;Store: Store Read and Write Access&Store access deny'                                  |
+		| 'Document.PlannedReceiptReservation Store: Store Only read access;Branch: Branch Read and Write Access;Company: Company Only read access;Store: Store Read and Write Access&Store Only read access&Store access deny'           |
+		| 'Document.PlannedReceiptReservation Store: Store access deny;Branch: Branch Read and Write Access;Company: Company Only read access;Store: Store Read and Write Access'                                                         |
+		| 'Document.PlannedReceiptReservation Store: Store access deny;Branch: Branch Read and Write Access;Company: Company Only read access;Store: Store Only read access'                                                              |
+		| 'Document.PlannedReceiptReservation Store: Store access deny;Branch: Branch Read and Write Access;Company: Company Only read access;Store: Store Read and Write Access&Store Only read access'                                  |
+		| 'Document.PlannedReceiptReservation Store: Store access deny;Branch: Branch Read and Write Access;Company: Company Only read access;Store: Store Only read access&Store access deny'                                            |
+		| 'Document.PlannedReceiptReservation Store: Store access deny;Branch: Branch Read and Write Access;Company: Company Only read access;Store: Store Read and Write Access&Store access deny'                                       |
+		| 'Document.PlannedReceiptReservation Store: Store access deny;Branch: Branch Read and Write Access;Company: Company Only read access;Store: Store Read and Write Access&Store Only read access&Store access deny'                |
+		| 'Document.PlannedReceiptReservation Store: Store Read and Write Access;Branch: Branch Only read access;Company: Company Only read access;'                                                                                      |
+		| 'Document.PlannedReceiptReservation Store: Store Read and Write Access;Branch: Branch Only read access;Company: Company Only read access;Store: Store Read and Write Access'                                                    |
+		| 'Document.PlannedReceiptReservation Store: Store Read and Write Access;Branch: Branch Only read access;Company: Company Only read access;Store: Store Only read access'                                                         |
+		| 'Document.PlannedReceiptReservation Store: Store Read and Write Access;Branch: Branch Only read access;Company: Company Only read access;Store: Store access deny'                                                              |
+		| 'Document.PlannedReceiptReservation Store: Store Read and Write Access;Branch: Branch Only read access;Company: Company Only read access;Store: Store Read and Write Access&Store Only read access'                             |
+		| 'Document.PlannedReceiptReservation Store: Store Read and Write Access;Branch: Branch Only read access;Company: Company Only read access;Store: Store Only read access&Store access deny'                                       |
+		| 'Document.PlannedReceiptReservation Store: Store Read and Write Access;Branch: Branch Only read access;Company: Company Only read access;Store: Store Read and Write Access&Store access deny'                                  |
+		| 'Document.PlannedReceiptReservation Store: Store Read and Write Access;Branch: Branch Only read access;Company: Company Only read access;Store: Store Read and Write Access&Store Only read access&Store access deny'           |
+		| 'Document.PlannedReceiptReservation Store: Store Only read access;Branch: Branch Only read access;Company: Company Only read access;'                                                                                           |
+		| 'Document.PlannedReceiptReservation Store: Store Only read access;Branch: Branch Only read access;Company: Company Only read access;Store: Store Read and Write Access'                                                         |
+		| 'Document.PlannedReceiptReservation Store: Store Only read access;Branch: Branch Only read access;Company: Company Only read access;Store: Store Only read access'                                                              |
+		| 'Document.PlannedReceiptReservation Store: Store Only read access;Branch: Branch Only read access;Company: Company Only read access;Store: Store access deny'                                                                   |
+		| 'Document.PlannedReceiptReservation Store: Store Only read access;Branch: Branch Only read access;Company: Company Only read access;Store: Store Read and Write Access&Store Only read access'                                  |
+		| 'Document.PlannedReceiptReservation Store: Store Only read access;Branch: Branch Only read access;Company: Company Only read access;Store: Store Only read access&Store access deny'                                            |
+		| 'Document.PlannedReceiptReservation Store: Store Only read access;Branch: Branch Only read access;Company: Company Only read access;Store: Store Read and Write Access&Store access deny'                                       |
+		| 'Document.PlannedReceiptReservation Store: Store Only read access;Branch: Branch Only read access;Company: Company Only read access;Store: Store Read and Write Access&Store Only read access&Store access deny'                |
+		| 'Document.PlannedReceiptReservation Store: Store access deny;Branch: Branch Only read access;Company: Company Only read access;Store: Store Read and Write Access'                                                              |
+		| 'Document.PlannedReceiptReservation Store: Store access deny;Branch: Branch Only read access;Company: Company Only read access;Store: Store Only read access'                                                                   |
+		| 'Document.PlannedReceiptReservation Store: Store access deny;Branch: Branch Only read access;Company: Company Only read access;Store: Store Read and Write Access&Store Only read access'                                       |
+		| 'Document.PlannedReceiptReservation Store: Store access deny;Branch: Branch Only read access;Company: Company Only read access;Store: Store Only read access&Store access deny'                                                 |
+		| 'Document.PlannedReceiptReservation Store: Store access deny;Branch: Branch Only read access;Company: Company Only read access;Store: Store Read and Write Access&Store access deny'                                            |
+		| 'Document.PlannedReceiptReservation Store: Store access deny;Branch: Branch Only read access;Company: Company Only read access;Store: Store Read and Write Access&Store Only read access&Store access deny'                     |
 	
+		
 Scenario: 960129 check PriceList access rights (LimitedAccess)	
 	And I close all client application windows
 	Given I open hyperlink "e1cib/list/Document.PriceList"	
 	And "List" table became equal
-		| 'Number' | 'Price type'                      | 'Description'                                                                                         |
-		| '1'      | 'PriceType Read and Write Access' | 'Document.PriceList PriceType: PriceType Read and Write Access;Branch: Branch Read and Write Access;' |
-		| '2'      | 'PriceType Only read access'      | 'Document.PriceList PriceType: PriceType Only read access;Branch: Branch Read and Write Access;'      |
-		| '4'      | 'PriceType Read and Write Access' | 'Document.PriceList PriceType: PriceType Read and Write Access;Branch: Branch Only read access;'      |
-		| '5'      | 'PriceType Only read access'      | 'Document.PriceList PriceType: PriceType Only read access;Branch: Branch Only read access;'           |
+		| 'Description'                                                                                         |
+		| 'Document.PriceList PriceType: PriceType Read and Write Access;Branch: Branch Read and Write Access;' |
+		| 'Document.PriceList PriceType: PriceType Only read access;Branch: Branch Read and Write Access;'      |
+		| 'Document.PriceList PriceType: PriceType Read and Write Access;Branch: Branch Only read access;'      |
+		| 'Document.PriceList PriceType: PriceType Only read access;Branch: Branch Only read access;'           |
 	
 Scenario: 960130 check Production access rights (LimitedAccess)	
 	And I close all client application windows
 	Given I open hyperlink "e1cib/list/Document.Production"	
 	And "List" table became equal
-		| 'Number' | 'Company'                       | 'Business unit'                | 'Description'                                                                                                                                 |
-		| '1'      | 'Company Read and Write Access' | 'Branch Read and Write Access' | 'Document.Production Branch: Branch Read and Write Access;Company: Company Read and Write Access;BusinessUnit: Branch Read and Write Access;' |
-		| '2'      | 'Company Read and Write Access' | 'Branch Read and Write Access' | 'Document.Production Branch: Branch Only read access;Company: Company Read and Write Access;BusinessUnit: Branch Read and Write Access;'      |
-		| '4'      | 'Company Only read access'      | 'Branch Read and Write Access' | 'Document.Production Branch: Branch Read and Write Access;Company: Company Only read access;BusinessUnit: Branch Read and Write Access;'      |
-		| '5'      | 'Company Only read access'      | 'Branch Read and Write Access' | 'Document.Production Branch: Branch Only read access;Company: Company Only read access;BusinessUnit: Branch Read and Write Access;'           |
-		| '10'     | 'Company Read and Write Access' | 'Branch Only read access'      | 'Document.Production Branch: Branch Read and Write Access;Company: Company Read and Write Access;BusinessUnit: Branch Only read access;'      |
-		| '11'     | 'Company Read and Write Access' | 'Branch Only read access'      | 'Document.Production Branch: Branch Only read access;Company: Company Read and Write Access;BusinessUnit: Branch Only read access;'           |
-		| '13'     | 'Company Only read access'      | 'Branch Only read access'      | 'Document.Production Branch: Branch Read and Write Access;Company: Company Only read access;BusinessUnit: Branch Only read access;'           |
-		| '14'     | 'Company Only read access'      | 'Branch Only read access'      | 'Document.Production Branch: Branch Only read access;Company: Company Only read access;BusinessUnit: Branch Only read access;'                |
+		| 'Description'                                                                                                                                   |
+		| 'Document.Production Branch: Branch Read and Write Access;Company: Company Read and Write Access;StoreProduction: Store Read and Write Access;' |
+		| 'Document.Production Branch: Branch Only read access;Company: Company Read and Write Access;StoreProduction: Store Read and Write Access;'      |
+		| 'Document.Production Branch: Branch Read and Write Access;Company: Company Only read access;StoreProduction: Store Read and Write Access;'      |
+		| 'Document.Production Branch: Branch Only read access;Company: Company Only read access;StoreProduction: Store Read and Write Access;'           |
+		| 'Document.Production Branch: Branch Read and Write Access;Company: Company Read and Write Access;StoreProduction: Store Only read access;'      |
+		| 'Document.Production Branch: Branch Only read access;Company: Company Read and Write Access;StoreProduction: Store Only read access;'           |
+		| 'Document.Production Branch: Branch Read and Write Access;Company: Company Only read access;StoreProduction: Store Only read access;'           |
+		| 'Document.Production Branch: Branch Only read access;Company: Company Only read access;StoreProduction: Store Only read access;'                |
+	
+		
 	
 		
 Scenario: 960131 check ProductionCostsAllocation access rights (LimitedAccess)	
 	And I close all client application windows
 	Given I open hyperlink "e1cib/list/Document.ProductionCostsAllocation"
 	And "List" table became equal
-		| 'Number' | 'Company'                       | 'Description'                                                                                                     |
-		| '1'      | 'Company Read and Write Access' | 'Document.ProductionCostsAllocation Branch: Branch Read and Write Access;Company: Company Read and Write Access;' |
-		| '2'      | 'Company Read and Write Access' | 'Document.ProductionCostsAllocation Branch: Branch Only read access;Company: Company Read and Write Access;'      |
-		| '4'      | 'Company Only read access'      | 'Document.ProductionCostsAllocation Branch: Branch Read and Write Access;Company: Company Only read access;'      |
-		| '5'      | 'Company Only read access'      | 'Document.ProductionCostsAllocation Branch: Branch Only read access;Company: Company Only read access;'           |
+		| 'Description'                                                                                                     |
+		| 'Document.ProductionCostsAllocation Branch: Branch Read and Write Access;Company: Company Read and Write Access;' |
+		| 'Document.ProductionCostsAllocation Branch: Branch Only read access;Company: Company Read and Write Access;'      |
+		| 'Document.ProductionCostsAllocation Branch: Branch Read and Write Access;Company: Company Only read access;'      |
+		| 'Document.ProductionCostsAllocation Branch: Branch Only read access;Company: Company Only read access;'           |
 	
 Scenario: 960132 check ProductionPlanning access rights (LimitedAccess)	
 	And I close all client application windows
 	Given I open hyperlink "e1cib/list/Document.ProductionPlanning"	
 	And "List" table became equal
-		| 'Number' | 'Company'                       | 'Business unit'                | 'Description'                                                                                                                                         |
-		| '1'      | 'Company Read and Write Access' | 'Branch Read and Write Access' | 'Document.ProductionPlanning Branch: Branch Read and Write Access;Company: Company Read and Write Access;BusinessUnit: Branch Read and Write Access;' |
-		| '2'      | 'Company Read and Write Access' | 'Branch Read and Write Access' | 'Document.ProductionPlanning Branch: Branch Only read access;Company: Company Read and Write Access;BusinessUnit: Branch Read and Write Access;'      |
-		| '4'      | 'Company Only read access'      | 'Branch Read and Write Access' | 'Document.ProductionPlanning Branch: Branch Read and Write Access;Company: Company Only read access;BusinessUnit: Branch Read and Write Access;'      |
-		| '5'      | 'Company Only read access'      | 'Branch Read and Write Access' | 'Document.ProductionPlanning Branch: Branch Only read access;Company: Company Only read access;BusinessUnit: Branch Read and Write Access;'           |
-		| '10'     | 'Company Read and Write Access' | 'Branch Only read access'      | 'Document.ProductionPlanning Branch: Branch Read and Write Access;Company: Company Read and Write Access;BusinessUnit: Branch Only read access;'      |
-		| '11'     | 'Company Read and Write Access' | 'Branch Only read access'      | 'Document.ProductionPlanning Branch: Branch Only read access;Company: Company Read and Write Access;BusinessUnit: Branch Only read access;'           |
-		| '13'     | 'Company Only read access'      | 'Branch Only read access'      | 'Document.ProductionPlanning Branch: Branch Read and Write Access;Company: Company Only read access;BusinessUnit: Branch Only read access;'           |
-		| '14'     | 'Company Only read access'      | 'Branch Only read access'      | 'Document.ProductionPlanning Branch: Branch Only read access;Company: Company Only read access;BusinessUnit: Branch Only read access;'                |
-	
-			
+		| 'Description'                                                                                              |
+		| 'Document.ProductionPlanning Branch: Branch Read and Write Access;Company: Company Read and Write Access;' |
+		| 'Document.ProductionPlanning Branch: Branch Only read access;Company: Company Read and Write Access;'      |
+		| 'Document.ProductionPlanning Branch: Branch Read and Write Access;Company: Company Only read access;'      |
+		| 'Document.ProductionPlanning Branch: Branch Only read access;Company: Company Only read access;'           |
+		
 Scenario: 960133 check ProductionPlanningClosing access rights (LimitedAccess)	
 	And I close all client application windows
 	Given I open hyperlink "e1cib/list/Document.ProductionPlanningClosing"
 	And "List" table became equal
-		| 'Number' | 'Company'                       | 'Business unit'                | 'Description'                                                                                                                                                |
-		| '1'      | 'Company Read and Write Access' | 'Branch Read and Write Access' | 'Document.ProductionPlanningClosing Branch: Branch Read and Write Access;Company: Company Read and Write Access;BusinessUnit: Branch Read and Write Access;' |
-		| '2'      | 'Company Read and Write Access' | 'Branch Read and Write Access' | 'Document.ProductionPlanningClosing Branch: Branch Only read access;Company: Company Read and Write Access;BusinessUnit: Branch Read and Write Access;'      |
-		| '4'      | 'Company Only read access'      | 'Branch Read and Write Access' | 'Document.ProductionPlanningClosing Branch: Branch Read and Write Access;Company: Company Only read access;BusinessUnit: Branch Read and Write Access;'      |
-		| '5'      | 'Company Only read access'      | 'Branch Read and Write Access' | 'Document.ProductionPlanningClosing Branch: Branch Only read access;Company: Company Only read access;BusinessUnit: Branch Read and Write Access;'           |
-		| '10'     | 'Company Read and Write Access' | 'Branch Only read access'      | 'Document.ProductionPlanningClosing Branch: Branch Read and Write Access;Company: Company Read and Write Access;BusinessUnit: Branch Only read access;'      |
-		| '11'     | 'Company Read and Write Access' | 'Branch Only read access'      | 'Document.ProductionPlanningClosing Branch: Branch Only read access;Company: Company Read and Write Access;BusinessUnit: Branch Only read access;'           |
-		| '13'     | 'Company Only read access'      | 'Branch Only read access'      | 'Document.ProductionPlanningClosing Branch: Branch Read and Write Access;Company: Company Only read access;BusinessUnit: Branch Only read access;'           |
-		| '14'     | 'Company Only read access'      | 'Branch Only read access'      | 'Document.ProductionPlanningClosing Branch: Branch Only read access;Company: Company Only read access;BusinessUnit: Branch Only read access;'                |
+		| 'Description'                                                                                                     |
+		| 'Document.ProductionPlanningClosing Branch: Branch Read and Write Access;Company: Company Read and Write Access;' |
+		| 'Document.ProductionPlanningClosing Branch: Branch Only read access;Company: Company Read and Write Access;'      |
+		| 'Document.ProductionPlanningClosing Branch: Branch Read and Write Access;Company: Company Only read access;'      |
+		| 'Document.ProductionPlanningClosing Branch: Branch Only read access;Company: Company Only read access;'           |
 	
-			
 Scenario: 960134 check ProductionPlanningCorrection access rights (LimitedAccess)	
 	And I close all client application windows
 	Given I open hyperlink "e1cib/list/Document.ProductionPlanningCorrection"
 	And "List" table became equal
-		| 'Number' | 'Company'                       | 'Business unit'                | 'Description'                                                                                                                                                   |
-		| '1'      | 'Company Read and Write Access' | 'Branch Read and Write Access' | 'Document.ProductionPlanningCorrection Branch: Branch Read and Write Access;Company: Company Read and Write Access;BusinessUnit: Branch Read and Write Access;' |
-		| '2'      | 'Company Read and Write Access' | 'Branch Read and Write Access' | 'Document.ProductionPlanningCorrection Branch: Branch Only read access;Company: Company Read and Write Access;BusinessUnit: Branch Read and Write Access;'      |
-		| '4'      | 'Company Only read access'      | 'Branch Read and Write Access' | 'Document.ProductionPlanningCorrection Branch: Branch Read and Write Access;Company: Company Only read access;BusinessUnit: Branch Read and Write Access;'      |
-		| '5'      | 'Company Only read access'      | 'Branch Read and Write Access' | 'Document.ProductionPlanningCorrection Branch: Branch Only read access;Company: Company Only read access;BusinessUnit: Branch Read and Write Access;'           |
-		| '10'     | 'Company Read and Write Access' | 'Branch Only read access'      | 'Document.ProductionPlanningCorrection Branch: Branch Read and Write Access;Company: Company Read and Write Access;BusinessUnit: Branch Only read access;'      |
-		| '11'     | 'Company Read and Write Access' | 'Branch Only read access'      | 'Document.ProductionPlanningCorrection Branch: Branch Only read access;Company: Company Read and Write Access;BusinessUnit: Branch Only read access;'           |
-		| '13'     | 'Company Only read access'      | 'Branch Only read access'      | 'Document.ProductionPlanningCorrection Branch: Branch Read and Write Access;Company: Company Only read access;BusinessUnit: Branch Only read access;'           |
-		| '14'     | 'Company Only read access'      | 'Branch Only read access'      | 'Document.ProductionPlanningCorrection Branch: Branch Only read access;Company: Company Only read access;BusinessUnit: Branch Only read access;'                |
+		| 'Description'                                                                                                        |
+		| 'Document.ProductionPlanningCorrection Branch: Branch Read and Write Access;Company: Company Read and Write Access;' |
+		| 'Document.ProductionPlanningCorrection Branch: Branch Only read access;Company: Company Read and Write Access;'      |
+		| 'Document.ProductionPlanningCorrection Branch: Branch Read and Write Access;Company: Company Only read access;'      |
+		| 'Document.ProductionPlanningCorrection Branch: Branch Only read access;Company: Company Only read access;'           |
 	
+
 Scenario: 960135 check PurchaseInvoice access rights (LimitedAccess)	
 	And I close all client application windows
 	Given I open hyperlink "e1cib/list/Document.PurchaseInvoice"
 	And "List" table became equal
-		| 'Number' | 'Company'                       | 'Status' | 'Store'                       | 'Description'                                                                                                                                                    |
-		| '1'      | 'Company Read and Write Access' | 'Closed' | ''                            | 'Document.PurchaseInvoice Branch: Branch Read and Write Access;Company: Company Read and Write Access;'                                                          |
-		| '2'      | 'Company Read and Write Access' | 'Closed' | 'Store Read and Write Access' | 'Document.PurchaseInvoice Branch: Branch Read and Write Access;Company: Company Read and Write Access;Store: Store Read and Write Access'                        |
-		| '3'      | 'Company Read and Write Access' | 'Closed' | 'Store Only read access'      | 'Document.PurchaseInvoice Branch: Branch Read and Write Access;Company: Company Read and Write Access;Store: Store Only read access'                             |
-		| '5'      | 'Company Read and Write Access' | 'Closed' | ''                            | 'Document.PurchaseInvoice Branch: Branch Read and Write Access;Company: Company Read and Write Access;Store: Store Read and Write Access&Store Only read access' |
-		| '9'      | 'Company Read and Write Access' | 'Closed' | ''                            | 'Document.PurchaseInvoice Branch: Branch Only read access;Company: Company Read and Write Access;'                                                               |
-		| '10'     | 'Company Read and Write Access' | 'Closed' | 'Store Read and Write Access' | 'Document.PurchaseInvoice Branch: Branch Only read access;Company: Company Read and Write Access;Store: Store Read and Write Access'                             |
-		| '11'     | 'Company Read and Write Access' | 'Closed' | 'Store Only read access'      | 'Document.PurchaseInvoice Branch: Branch Only read access;Company: Company Read and Write Access;Store: Store Only read access'                                  |
-		| '13'     | 'Company Read and Write Access' | 'Closed' | ''                            | 'Document.PurchaseInvoice Branch: Branch Only read access;Company: Company Read and Write Access;Store: Store Read and Write Access&Store Only read access'      |
-		| '25'     | 'Company Only read access'      | 'Closed' | ''                            | 'Document.PurchaseInvoice Branch: Branch Read and Write Access;Company: Company Only read access;'                                                               |
-		| '26'     | 'Company Only read access'      | 'Closed' | 'Store Read and Write Access' | 'Document.PurchaseInvoice Branch: Branch Read and Write Access;Company: Company Only read access;Store: Store Read and Write Access'                             |
-		| '27'     | 'Company Only read access'      | 'Closed' | 'Store Only read access'      | 'Document.PurchaseInvoice Branch: Branch Read and Write Access;Company: Company Only read access;Store: Store Only read access'                                  |
-		| '29'     | 'Company Only read access'      | 'Closed' | ''                            | 'Document.PurchaseInvoice Branch: Branch Read and Write Access;Company: Company Only read access;Store: Store Read and Write Access&Store Only read access'      |
-		| '33'     | 'Company Only read access'      | 'Closed' | ''                            | 'Document.PurchaseInvoice Branch: Branch Only read access;Company: Company Only read access;'                                                                    |
-		| '34'     | 'Company Only read access'      | 'Closed' | 'Store Read and Write Access' | 'Document.PurchaseInvoice Branch: Branch Only read access;Company: Company Only read access;Store: Store Read and Write Access'                                  |
-		| '35'     | 'Company Only read access'      | 'Closed' | 'Store Only read access'      | 'Document.PurchaseInvoice Branch: Branch Only read access;Company: Company Only read access;Store: Store Only read access'                                       |
-		| '37'     | 'Company Only read access'      | 'Closed' | ''                            | 'Document.PurchaseInvoice Branch: Branch Only read access;Company: Company Only read access;Store: Store Read and Write Access&Store Only read access'           |
+		| 'Description'                                                                                                                                                                      |
+		| 'Document.PurchaseInvoice Branch: Branch Read and Write Access;Company: Company Read and Write Access;Store: Store Read and Write Access'                                          |
+		| 'Document.PurchaseInvoice Branch: Branch Read and Write Access;Company: Company Read and Write Access;Store: Store Only read access'                                               |
+		| 'Document.PurchaseInvoice Branch: Branch Read and Write Access;Company: Company Read and Write Access;Store: Store Read and Write Access&Store Only read access'                   |
+		| 'Document.PurchaseInvoice Branch: Branch Read and Write Access;Company: Company Read and Write Access;Store: Store Only read access&Store access deny'                             |
+		| 'Document.PurchaseInvoice Branch: Branch Read and Write Access;Company: Company Read and Write Access;Store: Store Read and Write Access&Store access deny'                        |
+		| 'Document.PurchaseInvoice Branch: Branch Read and Write Access;Company: Company Read and Write Access;Store: Store Read and Write Access&Store Only read access&Store access deny' |
+		| 'Document.PurchaseInvoice Branch: Branch Only read access;Company: Company Read and Write Access;Store: Store Read and Write Access'                                               |
+		| 'Document.PurchaseInvoice Branch: Branch Only read access;Company: Company Read and Write Access;Store: Store Only read access'                                                    |
+		| 'Document.PurchaseInvoice Branch: Branch Only read access;Company: Company Read and Write Access;Store: Store Read and Write Access&Store Only read access'                        |
+		| 'Document.PurchaseInvoice Branch: Branch Only read access;Company: Company Read and Write Access;Store: Store Only read access&Store access deny'                                  |
+		| 'Document.PurchaseInvoice Branch: Branch Only read access;Company: Company Read and Write Access;Store: Store Read and Write Access&Store access deny'                             |
+		| 'Document.PurchaseInvoice Branch: Branch Only read access;Company: Company Read and Write Access;Store: Store Read and Write Access&Store Only read access&Store access deny'      |
+		| 'Document.PurchaseInvoice Branch: Branch Read and Write Access;Company: Company Only read access;Store: Store Read and Write Access'                                               |
+		| 'Document.PurchaseInvoice Branch: Branch Read and Write Access;Company: Company Only read access;Store: Store Only read access'                                                    |
+		| 'Document.PurchaseInvoice Branch: Branch Read and Write Access;Company: Company Only read access;Store: Store Read and Write Access&Store Only read access'                        |
+		| 'Document.PurchaseInvoice Branch: Branch Read and Write Access;Company: Company Only read access;Store: Store Only read access&Store access deny'                                  |
+		| 'Document.PurchaseInvoice Branch: Branch Read and Write Access;Company: Company Only read access;Store: Store Read and Write Access&Store access deny'                             |
+		| 'Document.PurchaseInvoice Branch: Branch Read and Write Access;Company: Company Only read access;Store: Store Read and Write Access&Store Only read access&Store access deny'      |
+		| 'Document.PurchaseInvoice Branch: Branch Only read access;Company: Company Only read access;Store: Store Read and Write Access'                                                    |
+		| 'Document.PurchaseInvoice Branch: Branch Only read access;Company: Company Only read access;Store: Store Only read access'                                                         |
+		| 'Document.PurchaseInvoice Branch: Branch Only read access;Company: Company Only read access;Store: Store Read and Write Access&Store Only read access'                             |
+		| 'Document.PurchaseInvoice Branch: Branch Only read access;Company: Company Only read access;Store: Store Only read access&Store access deny'                                       |
+		| 'Document.PurchaseInvoice Branch: Branch Only read access;Company: Company Only read access;Store: Store Read and Write Access&Store access deny'                                  |
+		| 'Document.PurchaseInvoice Branch: Branch Only read access;Company: Company Only read access;Store: Store Read and Write Access&Store Only read access&Store access deny'           |
 	
+		
 Scenario: 960136 check PurchaseOrder access rights (LimitedAccess)	
 	And I close all client application windows
 	Given I open hyperlink "e1cib/list/Document.PurchaseOrder"	
 	And "List" table became equal
-		| 'Number' | 'Company'                       | 'Store'                       | 'Description'                                                                                                                                                  |
-		| '1'      | 'Company Read and Write Access' | ''                            | 'Document.PurchaseOrder Branch: Branch Read and Write Access;Company: Company Read and Write Access;'                                                          |
-		| '2'      | 'Company Read and Write Access' | 'Store Read and Write Access' | 'Document.PurchaseOrder Branch: Branch Read and Write Access;Company: Company Read and Write Access;Store: Store Read and Write Access'                        |
-		| '3'      | 'Company Read and Write Access' | 'Store Only read access'      | 'Document.PurchaseOrder Branch: Branch Read and Write Access;Company: Company Read and Write Access;Store: Store Only read access'                             |
-		| '5'      | 'Company Read and Write Access' | ''                            | 'Document.PurchaseOrder Branch: Branch Read and Write Access;Company: Company Read and Write Access;Store: Store Read and Write Access&Store Only read access' |
-		| '9'      | 'Company Read and Write Access' | ''                            | 'Document.PurchaseOrder Branch: Branch Only read access;Company: Company Read and Write Access;'                                                               |
-		| '10'     | 'Company Read and Write Access' | 'Store Read and Write Access' | 'Document.PurchaseOrder Branch: Branch Only read access;Company: Company Read and Write Access;Store: Store Read and Write Access'                             |
-		| '11'     | 'Company Read and Write Access' | 'Store Only read access'      | 'Document.PurchaseOrder Branch: Branch Only read access;Company: Company Read and Write Access;Store: Store Only read access'                                  |
-		| '13'     | 'Company Read and Write Access' | ''                            | 'Document.PurchaseOrder Branch: Branch Only read access;Company: Company Read and Write Access;Store: Store Read and Write Access&Store Only read access'      |
-		| '25'     | 'Company Only read access'      | ''                            | 'Document.PurchaseOrder Branch: Branch Read and Write Access;Company: Company Only read access;'                                                               |
-		| '26'     | 'Company Only read access'      | 'Store Read and Write Access' | 'Document.PurchaseOrder Branch: Branch Read and Write Access;Company: Company Only read access;Store: Store Read and Write Access'                             |
-		| '27'     | 'Company Only read access'      | 'Store Only read access'      | 'Document.PurchaseOrder Branch: Branch Read and Write Access;Company: Company Only read access;Store: Store Only read access'                                  |
-		| '29'     | 'Company Only read access'      | ''                            | 'Document.PurchaseOrder Branch: Branch Read and Write Access;Company: Company Only read access;Store: Store Read and Write Access&Store Only read access'      |
-		| '33'     | 'Company Only read access'      | ''                            | 'Document.PurchaseOrder Branch: Branch Only read access;Company: Company Only read access;'                                                                    |
-		| '34'     | 'Company Only read access'      | 'Store Read and Write Access' | 'Document.PurchaseOrder Branch: Branch Only read access;Company: Company Only read access;Store: Store Read and Write Access'                                  |
-		| '35'     | 'Company Only read access'      | 'Store Only read access'      | 'Document.PurchaseOrder Branch: Branch Only read access;Company: Company Only read access;Store: Store Only read access'                                       |
-		| '37'     | 'Company Only read access'      | ''                            | 'Document.PurchaseOrder Branch: Branch Only read access;Company: Company Only read access;Store: Store Read and Write Access&Store Only read access'           |
+		| 'Description'                                                                                                                                                                    |
+		| 'Document.PurchaseOrder Branch: Branch Read and Write Access;Company: Company Read and Write Access;Store: Store Read and Write Access'                                          |
+		| 'Document.PurchaseOrder Branch: Branch Read and Write Access;Company: Company Read and Write Access;Store: Store Only read access'                                               |
+		| 'Document.PurchaseOrder Branch: Branch Read and Write Access;Company: Company Read and Write Access;Store: Store Read and Write Access&Store Only read access'                   |
+		| 'Document.PurchaseOrder Branch: Branch Read and Write Access;Company: Company Read and Write Access;Store: Store Only read access&Store access deny'                             |
+		| 'Document.PurchaseOrder Branch: Branch Read and Write Access;Company: Company Read and Write Access;Store: Store Read and Write Access&Store access deny'                        |
+		| 'Document.PurchaseOrder Branch: Branch Read and Write Access;Company: Company Read and Write Access;Store: Store Read and Write Access&Store Only read access&Store access deny' |
+		| 'Document.PurchaseOrder Branch: Branch Only read access;Company: Company Read and Write Access;Store: Store Read and Write Access'                                               |
+		| 'Document.PurchaseOrder Branch: Branch Only read access;Company: Company Read and Write Access;Store: Store Only read access'                                                    |
+		| 'Document.PurchaseOrder Branch: Branch Only read access;Company: Company Read and Write Access;Store: Store Read and Write Access&Store Only read access'                        |
+		| 'Document.PurchaseOrder Branch: Branch Only read access;Company: Company Read and Write Access;Store: Store Only read access&Store access deny'                                  |
+		| 'Document.PurchaseOrder Branch: Branch Only read access;Company: Company Read and Write Access;Store: Store Read and Write Access&Store access deny'                             |
+		| 'Document.PurchaseOrder Branch: Branch Only read access;Company: Company Read and Write Access;Store: Store Read and Write Access&Store Only read access&Store access deny'      |
+		| 'Document.PurchaseOrder Branch: Branch Read and Write Access;Company: Company Only read access;Store: Store Read and Write Access'                                               |
+		| 'Document.PurchaseOrder Branch: Branch Read and Write Access;Company: Company Only read access;Store: Store Only read access'                                                    |
+		| 'Document.PurchaseOrder Branch: Branch Read and Write Access;Company: Company Only read access;Store: Store Read and Write Access&Store Only read access'                        |
+		| 'Document.PurchaseOrder Branch: Branch Read and Write Access;Company: Company Only read access;Store: Store Only read access&Store access deny'                                  |
+		| 'Document.PurchaseOrder Branch: Branch Read and Write Access;Company: Company Only read access;Store: Store Read and Write Access&Store access deny'                             |
+		| 'Document.PurchaseOrder Branch: Branch Read and Write Access;Company: Company Only read access;Store: Store Read and Write Access&Store Only read access&Store access deny'      |
+		| 'Document.PurchaseOrder Branch: Branch Only read access;Company: Company Only read access;Store: Store Read and Write Access'                                                    |
+		| 'Document.PurchaseOrder Branch: Branch Only read access;Company: Company Only read access;Store: Store Only read access'                                                         |
+		| 'Document.PurchaseOrder Branch: Branch Only read access;Company: Company Only read access;Store: Store Read and Write Access&Store Only read access'                             |
+		| 'Document.PurchaseOrder Branch: Branch Only read access;Company: Company Only read access;Store: Store Only read access&Store access deny'                                       |
+		| 'Document.PurchaseOrder Branch: Branch Only read access;Company: Company Only read access;Store: Store Read and Write Access&Store access deny'                                  |
+		| 'Document.PurchaseOrder Branch: Branch Only read access;Company: Company Only read access;Store: Store Read and Write Access&Store Only read access&Store access deny'           |
 	
+		
 Scenario: 960137 check PurchaseOrderClosing access rights (LimitedAccess)	
 	And I close all client application windows
 	Given I open hyperlink "e1cib/list/Document.PurchaseOrderClosing"	
 	And "List" table became equal
-		| 'Number' | 'Company'                       | 'Store'                       | 'Description'                                                                                                                                                         |
-		| '1'      | 'Company Read and Write Access' | ''                            | 'Document.PurchaseOrderClosing Branch: Branch Read and Write Access;Company: Company Read and Write Access;'                                                          |
-		| '2'      | 'Company Read and Write Access' | 'Store Read and Write Access' | 'Document.PurchaseOrderClosing Branch: Branch Read and Write Access;Company: Company Read and Write Access;Store: Store Read and Write Access'                        |
-		| '3'      | 'Company Read and Write Access' | 'Store Only read access'      | 'Document.PurchaseOrderClosing Branch: Branch Read and Write Access;Company: Company Read and Write Access;Store: Store Only read access'                             |
-		| '5'      | 'Company Read and Write Access' | ''                            | 'Document.PurchaseOrderClosing Branch: Branch Read and Write Access;Company: Company Read and Write Access;Store: Store Read and Write Access&Store Only read access' |
-		| '9'      | 'Company Read and Write Access' | ''                            | 'Document.PurchaseOrderClosing Branch: Branch Only read access;Company: Company Read and Write Access;'                                                               |
-		| '10'     | 'Company Read and Write Access' | 'Store Read and Write Access' | 'Document.PurchaseOrderClosing Branch: Branch Only read access;Company: Company Read and Write Access;Store: Store Read and Write Access'                             |
-		| '11'     | 'Company Read and Write Access' | 'Store Only read access'      | 'Document.PurchaseOrderClosing Branch: Branch Only read access;Company: Company Read and Write Access;Store: Store Only read access'                                  |
-		| '13'     | 'Company Read and Write Access' | ''                            | 'Document.PurchaseOrderClosing Branch: Branch Only read access;Company: Company Read and Write Access;Store: Store Read and Write Access&Store Only read access'      |
-		| '25'     | 'Company Only read access'      | ''                            | 'Document.PurchaseOrderClosing Branch: Branch Read and Write Access;Company: Company Only read access;'                                                               |
-		| '26'     | 'Company Only read access'      | 'Store Read and Write Access' | 'Document.PurchaseOrderClosing Branch: Branch Read and Write Access;Company: Company Only read access;Store: Store Read and Write Access'                             |
-		| '27'     | 'Company Only read access'      | 'Store Only read access'      | 'Document.PurchaseOrderClosing Branch: Branch Read and Write Access;Company: Company Only read access;Store: Store Only read access'                                  |
-		| '29'     | 'Company Only read access'      | ''                            | 'Document.PurchaseOrderClosing Branch: Branch Read and Write Access;Company: Company Only read access;Store: Store Read and Write Access&Store Only read access'      |
-		| '33'     | 'Company Only read access'      | ''                            | 'Document.PurchaseOrderClosing Branch: Branch Only read access;Company: Company Only read access;'                                                                    |
-		| '34'     | 'Company Only read access'      | 'Store Read and Write Access' | 'Document.PurchaseOrderClosing Branch: Branch Only read access;Company: Company Only read access;Store: Store Read and Write Access'                                  |
-		| '35'     | 'Company Only read access'      | 'Store Only read access'      | 'Document.PurchaseOrderClosing Branch: Branch Only read access;Company: Company Only read access;Store: Store Only read access'                                       |
-		| '37'     | 'Company Only read access'      | ''                            | 'Document.PurchaseOrderClosing Branch: Branch Only read access;Company: Company Only read access;Store: Store Read and Write Access&Store Only read access'           |
+		| 'Description'                                                                                                                                                                           |
+		| 'Document.PurchaseOrderClosing Branch: Branch Read and Write Access;Company: Company Read and Write Access;Store: Store Read and Write Access'                                          |
+		| 'Document.PurchaseOrderClosing Branch: Branch Read and Write Access;Company: Company Read and Write Access;Store: Store Only read access'                                               |
+		| 'Document.PurchaseOrderClosing Branch: Branch Read and Write Access;Company: Company Read and Write Access;Store: Store Read and Write Access&Store Only read access'                   |
+		| 'Document.PurchaseOrderClosing Branch: Branch Read and Write Access;Company: Company Read and Write Access;Store: Store Only read access&Store access deny'                             |
+		| 'Document.PurchaseOrderClosing Branch: Branch Read and Write Access;Company: Company Read and Write Access;Store: Store Read and Write Access&Store access deny'                        |
+		| 'Document.PurchaseOrderClosing Branch: Branch Read and Write Access;Company: Company Read and Write Access;Store: Store Read and Write Access&Store Only read access&Store access deny' |
+		| 'Document.PurchaseOrderClosing Branch: Branch Only read access;Company: Company Read and Write Access;Store: Store Read and Write Access'                                               |
+		| 'Document.PurchaseOrderClosing Branch: Branch Only read access;Company: Company Read and Write Access;Store: Store Only read access'                                                    |
+		| 'Document.PurchaseOrderClosing Branch: Branch Only read access;Company: Company Read and Write Access;Store: Store Read and Write Access&Store Only read access'                        |
+		| 'Document.PurchaseOrderClosing Branch: Branch Only read access;Company: Company Read and Write Access;Store: Store Only read access&Store access deny'                                  |
+		| 'Document.PurchaseOrderClosing Branch: Branch Only read access;Company: Company Read and Write Access;Store: Store Read and Write Access&Store access deny'                             |
+		| 'Document.PurchaseOrderClosing Branch: Branch Only read access;Company: Company Read and Write Access;Store: Store Read and Write Access&Store Only read access&Store access deny'      |
+		| 'Document.PurchaseOrderClosing Branch: Branch Read and Write Access;Company: Company Only read access;Store: Store Read and Write Access'                                               |
+		| 'Document.PurchaseOrderClosing Branch: Branch Read and Write Access;Company: Company Only read access;Store: Store Only read access'                                                    |
+		| 'Document.PurchaseOrderClosing Branch: Branch Read and Write Access;Company: Company Only read access;Store: Store Read and Write Access&Store Only read access'                        |
+		| 'Document.PurchaseOrderClosing Branch: Branch Read and Write Access;Company: Company Only read access;Store: Store Only read access&Store access deny'                                  |
+		| 'Document.PurchaseOrderClosing Branch: Branch Read and Write Access;Company: Company Only read access;Store: Store Read and Write Access&Store access deny'                             |
+		| 'Document.PurchaseOrderClosing Branch: Branch Read and Write Access;Company: Company Only read access;Store: Store Read and Write Access&Store Only read access&Store access deny'      |
+		| 'Document.PurchaseOrderClosing Branch: Branch Only read access;Company: Company Only read access;Store: Store Read and Write Access'                                                    |
+		| 'Document.PurchaseOrderClosing Branch: Branch Only read access;Company: Company Only read access;Store: Store Only read access'                                                         |
+		| 'Document.PurchaseOrderClosing Branch: Branch Only read access;Company: Company Only read access;Store: Store Read and Write Access&Store Only read access'                             |
+		| 'Document.PurchaseOrderClosing Branch: Branch Only read access;Company: Company Only read access;Store: Store Only read access&Store access deny'                                       |
+		| 'Document.PurchaseOrderClosing Branch: Branch Only read access;Company: Company Only read access;Store: Store Read and Write Access&Store access deny'                                  |
+		| 'Document.PurchaseOrderClosing Branch: Branch Only read access;Company: Company Only read access;Store: Store Read and Write Access&Store Only read access&Store access deny'           |
 	
+		
 							
 Scenario: 960138 check PurchaseReturn access rights (LimitedAccess)	
 	And I close all client application windows
 	Given I open hyperlink "e1cib/list/Document.PurchaseReturn"
 	And "List" table became equal
-		| 'Number' | 'Company'                       | 'Store'                       | 'Description'                                                                                                                                                   |
-		| '1'      | 'Company Read and Write Access' | ''                            | 'Document.PurchaseReturn Branch: Branch Read and Write Access;Company: Company Read and Write Access;'                                                          |
-		| '2'      | 'Company Read and Write Access' | 'Store Read and Write Access' | 'Document.PurchaseReturn Branch: Branch Read and Write Access;Company: Company Read and Write Access;Store: Store Read and Write Access'                        |
-		| '3'      | 'Company Read and Write Access' | 'Store Only read access'      | 'Document.PurchaseReturn Branch: Branch Read and Write Access;Company: Company Read and Write Access;Store: Store Only read access'                             |
-		| '5'      | 'Company Read and Write Access' | ''                            | 'Document.PurchaseReturn Branch: Branch Read and Write Access;Company: Company Read and Write Access;Store: Store Read and Write Access&Store Only read access' |
-		| '9'      | 'Company Read and Write Access' | ''                            | 'Document.PurchaseReturn Branch: Branch Only read access;Company: Company Read and Write Access;'                                                               |
-		| '10'     | 'Company Read and Write Access' | 'Store Read and Write Access' | 'Document.PurchaseReturn Branch: Branch Only read access;Company: Company Read and Write Access;Store: Store Read and Write Access'                             |
-		| '11'     | 'Company Read and Write Access' | 'Store Only read access'      | 'Document.PurchaseReturn Branch: Branch Only read access;Company: Company Read and Write Access;Store: Store Only read access'                                  |
-		| '13'     | 'Company Read and Write Access' | ''                            | 'Document.PurchaseReturn Branch: Branch Only read access;Company: Company Read and Write Access;Store: Store Read and Write Access&Store Only read access'      |
-		| '25'     | 'Company Only read access'      | ''                            | 'Document.PurchaseReturn Branch: Branch Read and Write Access;Company: Company Only read access;'                                                               |
-		| '26'     | 'Company Only read access'      | 'Store Read and Write Access' | 'Document.PurchaseReturn Branch: Branch Read and Write Access;Company: Company Only read access;Store: Store Read and Write Access'                             |
-		| '27'     | 'Company Only read access'      | 'Store Only read access'      | 'Document.PurchaseReturn Branch: Branch Read and Write Access;Company: Company Only read access;Store: Store Only read access'                                  |
-		| '29'     | 'Company Only read access'      | ''                            | 'Document.PurchaseReturn Branch: Branch Read and Write Access;Company: Company Only read access;Store: Store Read and Write Access&Store Only read access'      |
-		| '33'     | 'Company Only read access'      | ''                            | 'Document.PurchaseReturn Branch: Branch Only read access;Company: Company Only read access;'                                                                    |
-		| '34'     | 'Company Only read access'      | 'Store Read and Write Access' | 'Document.PurchaseReturn Branch: Branch Only read access;Company: Company Only read access;Store: Store Read and Write Access'                                  |
-		| '35'     | 'Company Only read access'      | 'Store Only read access'      | 'Document.PurchaseReturn Branch: Branch Only read access;Company: Company Only read access;Store: Store Only read access'                                       |
-		| '37'     | 'Company Only read access'      | ''                            | 'Document.PurchaseReturn Branch: Branch Only read access;Company: Company Only read access;Store: Store Read and Write Access&Store Only read access'           |
+		| 'Description'                                                                                                                                                                     |
+		| 'Document.PurchaseReturn Branch: Branch Read and Write Access;Company: Company Read and Write Access;Store: Store Read and Write Access'                                          |
+		| 'Document.PurchaseReturn Branch: Branch Read and Write Access;Company: Company Read and Write Access;Store: Store Only read access'                                               |
+		| 'Document.PurchaseReturn Branch: Branch Read and Write Access;Company: Company Read and Write Access;Store: Store Read and Write Access&Store Only read access'                   |
+		| 'Document.PurchaseReturn Branch: Branch Read and Write Access;Company: Company Read and Write Access;Store: Store Only read access&Store access deny'                             |
+		| 'Document.PurchaseReturn Branch: Branch Read and Write Access;Company: Company Read and Write Access;Store: Store Read and Write Access&Store access deny'                        |
+		| 'Document.PurchaseReturn Branch: Branch Read and Write Access;Company: Company Read and Write Access;Store: Store Read and Write Access&Store Only read access&Store access deny' |
+		| 'Document.PurchaseReturn Branch: Branch Only read access;Company: Company Read and Write Access;Store: Store Read and Write Access'                                               |
+		| 'Document.PurchaseReturn Branch: Branch Only read access;Company: Company Read and Write Access;Store: Store Only read access'                                                    |
+		| 'Document.PurchaseReturn Branch: Branch Only read access;Company: Company Read and Write Access;Store: Store Read and Write Access&Store Only read access'                        |
+		| 'Document.PurchaseReturn Branch: Branch Only read access;Company: Company Read and Write Access;Store: Store Only read access&Store access deny'                                  |
+		| 'Document.PurchaseReturn Branch: Branch Only read access;Company: Company Read and Write Access;Store: Store Read and Write Access&Store access deny'                             |
+		| 'Document.PurchaseReturn Branch: Branch Only read access;Company: Company Read and Write Access;Store: Store Read and Write Access&Store Only read access&Store access deny'      |
+		| 'Document.PurchaseReturn Branch: Branch Read and Write Access;Company: Company Only read access;Store: Store Read and Write Access'                                               |
+		| 'Document.PurchaseReturn Branch: Branch Read and Write Access;Company: Company Only read access;Store: Store Only read access'                                                    |
+		| 'Document.PurchaseReturn Branch: Branch Read and Write Access;Company: Company Only read access;Store: Store Read and Write Access&Store Only read access'                        |
+		| 'Document.PurchaseReturn Branch: Branch Read and Write Access;Company: Company Only read access;Store: Store Only read access&Store access deny'                                  |
+		| 'Document.PurchaseReturn Branch: Branch Read and Write Access;Company: Company Only read access;Store: Store Read and Write Access&Store access deny'                             |
+		| 'Document.PurchaseReturn Branch: Branch Read and Write Access;Company: Company Only read access;Store: Store Read and Write Access&Store Only read access&Store access deny'      |
+		| 'Document.PurchaseReturn Branch: Branch Only read access;Company: Company Only read access;Store: Store Read and Write Access'                                                    |
+		| 'Document.PurchaseReturn Branch: Branch Only read access;Company: Company Only read access;Store: Store Only read access'                                                         |
+		| 'Document.PurchaseReturn Branch: Branch Only read access;Company: Company Only read access;Store: Store Read and Write Access&Store Only read access'                             |
+		| 'Document.PurchaseReturn Branch: Branch Only read access;Company: Company Only read access;Store: Store Only read access&Store access deny'                                       |
+		| 'Document.PurchaseReturn Branch: Branch Only read access;Company: Company Only read access;Store: Store Read and Write Access&Store access deny'                                  |
+		| 'Document.PurchaseReturn Branch: Branch Only read access;Company: Company Only read access;Store: Store Read and Write Access&Store Only read access&Store access deny'           |
 	
+		
 		
 Scenario: 960139 check PurchaseReturnOrder access rights (LimitedAccess)	
 	And I close all client application windows
 	Given I open hyperlink "e1cib/list/Document.PurchaseReturnOrder"
 	And "List" table became equal
-		| 'Number' | 'Company'                       | 'Description'                                                                                                                                                        |
-		| '1'      | 'Company Read and Write Access' | 'Document.PurchaseReturnOrder Branch: Branch Read and Write Access;Company: Company Read and Write Access;'                                                          |
-		| '2'      | 'Company Read and Write Access' | 'Document.PurchaseReturnOrder Branch: Branch Read and Write Access;Company: Company Read and Write Access;Store: Store Read and Write Access'                        |
-		| '3'      | 'Company Read and Write Access' | 'Document.PurchaseReturnOrder Branch: Branch Read and Write Access;Company: Company Read and Write Access;Store: Store Only read access'                             |
-		| '5'      | 'Company Read and Write Access' | 'Document.PurchaseReturnOrder Branch: Branch Read and Write Access;Company: Company Read and Write Access;Store: Store Read and Write Access&Store Only read access' |
-		| '9'      | 'Company Read and Write Access' | 'Document.PurchaseReturnOrder Branch: Branch Only read access;Company: Company Read and Write Access;'                                                               |
-		| '10'     | 'Company Read and Write Access' | 'Document.PurchaseReturnOrder Branch: Branch Only read access;Company: Company Read and Write Access;Store: Store Read and Write Access'                             |
-		| '11'     | 'Company Read and Write Access' | 'Document.PurchaseReturnOrder Branch: Branch Only read access;Company: Company Read and Write Access;Store: Store Only read access'                                  |
-		| '13'     | 'Company Read and Write Access' | 'Document.PurchaseReturnOrder Branch: Branch Only read access;Company: Company Read and Write Access;Store: Store Read and Write Access&Store Only read access'      |
-		| '25'     | 'Company Only read access'      | 'Document.PurchaseReturnOrder Branch: Branch Read and Write Access;Company: Company Only read access;'                                                               |
-		| '26'     | 'Company Only read access'      | 'Document.PurchaseReturnOrder Branch: Branch Read and Write Access;Company: Company Only read access;Store: Store Read and Write Access'                             |
-		| '27'     | 'Company Only read access'      | 'Document.PurchaseReturnOrder Branch: Branch Read and Write Access;Company: Company Only read access;Store: Store Only read access'                                  |
-		| '29'     | 'Company Only read access'      | 'Document.PurchaseReturnOrder Branch: Branch Read and Write Access;Company: Company Only read access;Store: Store Read and Write Access&Store Only read access'      |
-		| '33'     | 'Company Only read access'      | 'Document.PurchaseReturnOrder Branch: Branch Only read access;Company: Company Only read access;'                                                                    |
-		| '34'     | 'Company Only read access'      | 'Document.PurchaseReturnOrder Branch: Branch Only read access;Company: Company Only read access;Store: Store Read and Write Access'                                  |
-		| '35'     | 'Company Only read access'      | 'Document.PurchaseReturnOrder Branch: Branch Only read access;Company: Company Only read access;Store: Store Only read access'                                       |
-		| '37'     | 'Company Only read access'      | 'Document.PurchaseReturnOrder Branch: Branch Only read access;Company: Company Only read access;Store: Store Read and Write Access&Store Only read access'           |
+		| 'Description'                                                                                                                                                                          |
+		| 'Document.PurchaseReturnOrder Branch: Branch Read and Write Access;Company: Company Read and Write Access;Store: Store Read and Write Access'                                          |
+		| 'Document.PurchaseReturnOrder Branch: Branch Read and Write Access;Company: Company Read and Write Access;Store: Store Only read access'                                               |
+		| 'Document.PurchaseReturnOrder Branch: Branch Read and Write Access;Company: Company Read and Write Access;Store: Store Read and Write Access&Store Only read access'                   |
+		| 'Document.PurchaseReturnOrder Branch: Branch Read and Write Access;Company: Company Read and Write Access;Store: Store Only read access&Store access deny'                             |
+		| 'Document.PurchaseReturnOrder Branch: Branch Read and Write Access;Company: Company Read and Write Access;Store: Store Read and Write Access&Store access deny'                        |
+		| 'Document.PurchaseReturnOrder Branch: Branch Read and Write Access;Company: Company Read and Write Access;Store: Store Read and Write Access&Store Only read access&Store access deny' |
+		| 'Document.PurchaseReturnOrder Branch: Branch Only read access;Company: Company Read and Write Access;Store: Store Read and Write Access'                                               |
+		| 'Document.PurchaseReturnOrder Branch: Branch Only read access;Company: Company Read and Write Access;Store: Store Only read access'                                                    |
+		| 'Document.PurchaseReturnOrder Branch: Branch Only read access;Company: Company Read and Write Access;Store: Store Read and Write Access&Store Only read access'                        |
+		| 'Document.PurchaseReturnOrder Branch: Branch Only read access;Company: Company Read and Write Access;Store: Store Only read access&Store access deny'                                  |
+		| 'Document.PurchaseReturnOrder Branch: Branch Only read access;Company: Company Read and Write Access;Store: Store Read and Write Access&Store access deny'                             |
+		| 'Document.PurchaseReturnOrder Branch: Branch Only read access;Company: Company Read and Write Access;Store: Store Read and Write Access&Store Only read access&Store access deny'      |
+		| 'Document.PurchaseReturnOrder Branch: Branch Read and Write Access;Company: Company Only read access;Store: Store Read and Write Access'                                               |
+		| 'Document.PurchaseReturnOrder Branch: Branch Read and Write Access;Company: Company Only read access;Store: Store Only read access'                                                    |
+		| 'Document.PurchaseReturnOrder Branch: Branch Read and Write Access;Company: Company Only read access;Store: Store Read and Write Access&Store Only read access'                        |
+		| 'Document.PurchaseReturnOrder Branch: Branch Read and Write Access;Company: Company Only read access;Store: Store Only read access&Store access deny'                                  |
+		| 'Document.PurchaseReturnOrder Branch: Branch Read and Write Access;Company: Company Only read access;Store: Store Read and Write Access&Store access deny'                             |
+		| 'Document.PurchaseReturnOrder Branch: Branch Read and Write Access;Company: Company Only read access;Store: Store Read and Write Access&Store Only read access&Store access deny'      |
+		| 'Document.PurchaseReturnOrder Branch: Branch Only read access;Company: Company Only read access;Store: Store Read and Write Access'                                                    |
+		| 'Document.PurchaseReturnOrder Branch: Branch Only read access;Company: Company Only read access;Store: Store Only read access'                                                         |
+		| 'Document.PurchaseReturnOrder Branch: Branch Only read access;Company: Company Only read access;Store: Store Read and Write Access&Store Only read access'                             |
+		| 'Document.PurchaseReturnOrder Branch: Branch Only read access;Company: Company Only read access;Store: Store Only read access&Store access deny'                                       |
+		| 'Document.PurchaseReturnOrder Branch: Branch Only read access;Company: Company Only read access;Store: Store Read and Write Access&Store access deny'                                  |
+		| 'Document.PurchaseReturnOrder Branch: Branch Only read access;Company: Company Only read access;Store: Store Read and Write Access&Store Only read access&Store access deny'           |
 	
+		
 Scenario: 960140 check ReconciliationStatement access rights (LimitedAccess)	
 	And I close all client application windows
 	Given I open hyperlink "e1cib/list/Document.ReconciliationStatement"
 	And "List" table became equal
-		| 'Number' | 'Company'                       | 'Description'                                                                                                   |
-		| '1'      | 'Company Read and Write Access' | 'Document.ReconciliationStatement Branch: Branch Read and Write Access;Company: Company Read and Write Access;' |
-		| '2'      | 'Company Read and Write Access' | 'Document.ReconciliationStatement Branch: Branch Only read access;Company: Company Read and Write Access;'      |
-		| '4'      | 'Company Only read access'      | 'Document.ReconciliationStatement Branch: Branch Read and Write Access;Company: Company Only read access;'      |
-		| '5'      | 'Company Only read access'      | 'Document.ReconciliationStatement Branch: Branch Only read access;Company: Company Only read access;'           |
+		| 'Description'                                                                                                   |
+		| 'Document.ReconciliationStatement Branch: Branch Read and Write Access;Company: Company Read and Write Access;' |
+		| 'Document.ReconciliationStatement Branch: Branch Only read access;Company: Company Read and Write Access;'      |
+		| 'Document.ReconciliationStatement Branch: Branch Read and Write Access;Company: Company Only read access;'      |
+		| 'Document.ReconciliationStatement Branch: Branch Only read access;Company: Company Only read access;'           |
 	
 Scenario: 960141 check RetailGoodsReceipt rights (LimitedAccess)	
 	And I close all client application windows
 	Given I open hyperlink "e1cib/list/Document.RetailGoodsReceipt"		
 	And "List" table became equal
-		| 'Number' | 'Company'                       | 'Description'                                                                                                                                                       |
-		| '1'      | 'Company Read and Write Access' | 'Document.RetailGoodsReceipt Branch: Branch Read and Write Access;Company: Company Read and Write Access;'                                                          |
-		| '2'      | 'Company Read and Write Access' | 'Document.RetailGoodsReceipt Branch: Branch Read and Write Access;Company: Company Read and Write Access;Store: Store Read and Write Access'                        |
-		| '3'      | 'Company Read and Write Access' | 'Document.RetailGoodsReceipt Branch: Branch Read and Write Access;Company: Company Read and Write Access;Store: Store Only read access'                             |
-		| '5'      | 'Company Read and Write Access' | 'Document.RetailGoodsReceipt Branch: Branch Read and Write Access;Company: Company Read and Write Access;Store: Store Read and Write Access&Store Only read access' |
-		| '9'      | 'Company Read and Write Access' | 'Document.RetailGoodsReceipt Branch: Branch Only read access;Company: Company Read and Write Access;'                                                               |
-		| '10'     | 'Company Read and Write Access' | 'Document.RetailGoodsReceipt Branch: Branch Only read access;Company: Company Read and Write Access;Store: Store Read and Write Access'                             |
-		| '11'     | 'Company Read and Write Access' | 'Document.RetailGoodsReceipt Branch: Branch Only read access;Company: Company Read and Write Access;Store: Store Only read access'                                  |
-		| '13'     | 'Company Read and Write Access' | 'Document.RetailGoodsReceipt Branch: Branch Only read access;Company: Company Read and Write Access;Store: Store Read and Write Access&Store Only read access'      |
-		| '25'     | 'Company Only read access'      | 'Document.RetailGoodsReceipt Branch: Branch Read and Write Access;Company: Company Only read access;'                                                               |
-		| '26'     | 'Company Only read access'      | 'Document.RetailGoodsReceipt Branch: Branch Read and Write Access;Company: Company Only read access;Store: Store Read and Write Access'                             |
-		| '27'     | 'Company Only read access'      | 'Document.RetailGoodsReceipt Branch: Branch Read and Write Access;Company: Company Only read access;Store: Store Only read access'                                  |
-		| '29'     | 'Company Only read access'      | 'Document.RetailGoodsReceipt Branch: Branch Read and Write Access;Company: Company Only read access;Store: Store Read and Write Access&Store Only read access'      |
-		| '33'     | 'Company Only read access'      | 'Document.RetailGoodsReceipt Branch: Branch Only read access;Company: Company Only read access;'                                                                    |
-		| '34'     | 'Company Only read access'      | 'Document.RetailGoodsReceipt Branch: Branch Only read access;Company: Company Only read access;Store: Store Read and Write Access'                                  |
-		| '35'     | 'Company Only read access'      | 'Document.RetailGoodsReceipt Branch: Branch Only read access;Company: Company Only read access;Store: Store Only read access'                                       |
-		| '37'     | 'Company Only read access'      | 'Document.RetailGoodsReceipt Branch: Branch Only read access;Company: Company Only read access;Store: Store Read and Write Access&Store Only read access'           |
+		| 'Description'                                                                                                                                                                         |
+		| 'Document.RetailGoodsReceipt Branch: Branch Read and Write Access;Company: Company Read and Write Access;Store: Store Read and Write Access'                                          |
+		| 'Document.RetailGoodsReceipt Branch: Branch Read and Write Access;Company: Company Read and Write Access;Store: Store Only read access'                                               |
+		| 'Document.RetailGoodsReceipt Branch: Branch Read and Write Access;Company: Company Read and Write Access;Store: Store Read and Write Access&Store Only read access'                   |
+		| 'Document.RetailGoodsReceipt Branch: Branch Read and Write Access;Company: Company Read and Write Access;Store: Store Only read access&Store access deny'                             |
+		| 'Document.RetailGoodsReceipt Branch: Branch Read and Write Access;Company: Company Read and Write Access;Store: Store Read and Write Access&Store access deny'                        |
+		| 'Document.RetailGoodsReceipt Branch: Branch Read and Write Access;Company: Company Read and Write Access;Store: Store Read and Write Access&Store Only read access&Store access deny' |
+		| 'Document.RetailGoodsReceipt Branch: Branch Only read access;Company: Company Read and Write Access;Store: Store Read and Write Access'                                               |
+		| 'Document.RetailGoodsReceipt Branch: Branch Only read access;Company: Company Read and Write Access;Store: Store Only read access'                                                    |
+		| 'Document.RetailGoodsReceipt Branch: Branch Only read access;Company: Company Read and Write Access;Store: Store Read and Write Access&Store Only read access'                        |
+		| 'Document.RetailGoodsReceipt Branch: Branch Only read access;Company: Company Read and Write Access;Store: Store Only read access&Store access deny'                                  |
+		| 'Document.RetailGoodsReceipt Branch: Branch Only read access;Company: Company Read and Write Access;Store: Store Read and Write Access&Store access deny'                             |
+		| 'Document.RetailGoodsReceipt Branch: Branch Only read access;Company: Company Read and Write Access;Store: Store Read and Write Access&Store Only read access&Store access deny'      |
+		| 'Document.RetailGoodsReceipt Branch: Branch Read and Write Access;Company: Company Only read access;Store: Store Read and Write Access'                                               |
+		| 'Document.RetailGoodsReceipt Branch: Branch Read and Write Access;Company: Company Only read access;Store: Store Only read access'                                                    |
+		| 'Document.RetailGoodsReceipt Branch: Branch Read and Write Access;Company: Company Only read access;Store: Store Read and Write Access&Store Only read access'                        |
+		| 'Document.RetailGoodsReceipt Branch: Branch Read and Write Access;Company: Company Only read access;Store: Store Only read access&Store access deny'                                  |
+		| 'Document.RetailGoodsReceipt Branch: Branch Read and Write Access;Company: Company Only read access;Store: Store Read and Write Access&Store access deny'                             |
+		| 'Document.RetailGoodsReceipt Branch: Branch Read and Write Access;Company: Company Only read access;Store: Store Read and Write Access&Store Only read access&Store access deny'      |
+		| 'Document.RetailGoodsReceipt Branch: Branch Only read access;Company: Company Only read access;Store: Store Read and Write Access'                                                    |
+		| 'Document.RetailGoodsReceipt Branch: Branch Only read access;Company: Company Only read access;Store: Store Only read access'                                                         |
+		| 'Document.RetailGoodsReceipt Branch: Branch Only read access;Company: Company Only read access;Store: Store Read and Write Access&Store Only read access'                             |
+		| 'Document.RetailGoodsReceipt Branch: Branch Only read access;Company: Company Only read access;Store: Store Only read access&Store access deny'                                       |
+		| 'Document.RetailGoodsReceipt Branch: Branch Only read access;Company: Company Only read access;Store: Store Read and Write Access&Store access deny'                                  |
+		| 'Document.RetailGoodsReceipt Branch: Branch Only read access;Company: Company Only read access;Store: Store Read and Write Access&Store Only read access&Store access deny'           |
 	
+		
 Scenario: 960142 check RetailReturnReceipt rights (LimitedAccess)	
 	And I close all client application windows
 	Given I open hyperlink "e1cib/list/Document.RetailReturnReceipt"
 	And "List" table became equal
-		| 'Number' | 'Company'                       | 'Store'                       | 'Description'                                                                                                                                                        |
-		| '1'      | 'Company Read and Write Access' | ''                            | 'Document.RetailReturnReceipt Branch: Branch Read and Write Access;Company: Company Read and Write Access;'                                                          |
-		| '2'      | 'Company Read and Write Access' | 'Store Read and Write Access' | 'Document.RetailReturnReceipt Branch: Branch Read and Write Access;Company: Company Read and Write Access;Store: Store Read and Write Access'                        |
-		| '3'      | 'Company Read and Write Access' | 'Store Only read access'      | 'Document.RetailReturnReceipt Branch: Branch Read and Write Access;Company: Company Read and Write Access;Store: Store Only read access'                             |
-		| '5'      | 'Company Read and Write Access' | ''                            | 'Document.RetailReturnReceipt Branch: Branch Read and Write Access;Company: Company Read and Write Access;Store: Store Read and Write Access&Store Only read access' |
-		| '9'      | 'Company Read and Write Access' | ''                            | 'Document.RetailReturnReceipt Branch: Branch Only read access;Company: Company Read and Write Access;'                                                               |
-		| '10'     | 'Company Read and Write Access' | 'Store Read and Write Access' | 'Document.RetailReturnReceipt Branch: Branch Only read access;Company: Company Read and Write Access;Store: Store Read and Write Access'                             |
-		| '11'     | 'Company Read and Write Access' | 'Store Only read access'      | 'Document.RetailReturnReceipt Branch: Branch Only read access;Company: Company Read and Write Access;Store: Store Only read access'                                  |
-		| '13'     | 'Company Read and Write Access' | ''                            | 'Document.RetailReturnReceipt Branch: Branch Only read access;Company: Company Read and Write Access;Store: Store Read and Write Access&Store Only read access'      |
-		| '25'     | 'Company Only read access'      | ''                            | 'Document.RetailReturnReceipt Branch: Branch Read and Write Access;Company: Company Only read access;'                                                               |
-		| '26'     | 'Company Only read access'      | 'Store Read and Write Access' | 'Document.RetailReturnReceipt Branch: Branch Read and Write Access;Company: Company Only read access;Store: Store Read and Write Access'                             |
-		| '27'     | 'Company Only read access'      | 'Store Only read access'      | 'Document.RetailReturnReceipt Branch: Branch Read and Write Access;Company: Company Only read access;Store: Store Only read access'                                  |
-		| '29'     | 'Company Only read access'      | ''                            | 'Document.RetailReturnReceipt Branch: Branch Read and Write Access;Company: Company Only read access;Store: Store Read and Write Access&Store Only read access'      |
-		| '33'     | 'Company Only read access'      | ''                            | 'Document.RetailReturnReceipt Branch: Branch Only read access;Company: Company Only read access;'                                                                    |
-		| '34'     | 'Company Only read access'      | 'Store Read and Write Access' | 'Document.RetailReturnReceipt Branch: Branch Only read access;Company: Company Only read access;Store: Store Read and Write Access'                                  |
-		| '35'     | 'Company Only read access'      | 'Store Only read access'      | 'Document.RetailReturnReceipt Branch: Branch Only read access;Company: Company Only read access;Store: Store Only read access'                                       |
-		| '37'     | 'Company Only read access'      | ''                            | 'Document.RetailReturnReceipt Branch: Branch Only read access;Company: Company Only read access;Store: Store Read and Write Access&Store Only read access'           |
+		| 'Description'                                                                                                                                                                          |
+		| 'Document.RetailReturnReceipt Branch: Branch Read and Write Access;Company: Company Read and Write Access;Store: Store Read and Write Access'                                          |
+		| 'Document.RetailReturnReceipt Branch: Branch Read and Write Access;Company: Company Read and Write Access;Store: Store Only read access'                                               |
+		| 'Document.RetailReturnReceipt Branch: Branch Read and Write Access;Company: Company Read and Write Access;Store: Store Read and Write Access&Store Only read access'                   |
+		| 'Document.RetailReturnReceipt Branch: Branch Read and Write Access;Company: Company Read and Write Access;Store: Store Only read access&Store access deny'                             |
+		| 'Document.RetailReturnReceipt Branch: Branch Read and Write Access;Company: Company Read and Write Access;Store: Store Read and Write Access&Store access deny'                        |
+		| 'Document.RetailReturnReceipt Branch: Branch Read and Write Access;Company: Company Read and Write Access;Store: Store Read and Write Access&Store Only read access&Store access deny' |
+		| 'Document.RetailReturnReceipt Branch: Branch Only read access;Company: Company Read and Write Access;Store: Store Read and Write Access'                                               |
+		| 'Document.RetailReturnReceipt Branch: Branch Only read access;Company: Company Read and Write Access;Store: Store Only read access'                                                    |
+		| 'Document.RetailReturnReceipt Branch: Branch Only read access;Company: Company Read and Write Access;Store: Store Read and Write Access&Store Only read access'                        |
+		| 'Document.RetailReturnReceipt Branch: Branch Only read access;Company: Company Read and Write Access;Store: Store Only read access&Store access deny'                                  |
+		| 'Document.RetailReturnReceipt Branch: Branch Only read access;Company: Company Read and Write Access;Store: Store Read and Write Access&Store access deny'                             |
+		| 'Document.RetailReturnReceipt Branch: Branch Only read access;Company: Company Read and Write Access;Store: Store Read and Write Access&Store Only read access&Store access deny'      |
+		| 'Document.RetailReturnReceipt Branch: Branch Read and Write Access;Company: Company Only read access;Store: Store Read and Write Access'                                               |
+		| 'Document.RetailReturnReceipt Branch: Branch Read and Write Access;Company: Company Only read access;Store: Store Only read access'                                                    |
+		| 'Document.RetailReturnReceipt Branch: Branch Read and Write Access;Company: Company Only read access;Store: Store Read and Write Access&Store Only read access'                        |
+		| 'Document.RetailReturnReceipt Branch: Branch Read and Write Access;Company: Company Only read access;Store: Store Only read access&Store access deny'                                  |
+		| 'Document.RetailReturnReceipt Branch: Branch Read and Write Access;Company: Company Only read access;Store: Store Read and Write Access&Store access deny'                             |
+		| 'Document.RetailReturnReceipt Branch: Branch Read and Write Access;Company: Company Only read access;Store: Store Read and Write Access&Store Only read access&Store access deny'      |
+		| 'Document.RetailReturnReceipt Branch: Branch Only read access;Company: Company Only read access;Store: Store Read and Write Access'                                                    |
+		| 'Document.RetailReturnReceipt Branch: Branch Only read access;Company: Company Only read access;Store: Store Only read access'                                                         |
+		| 'Document.RetailReturnReceipt Branch: Branch Only read access;Company: Company Only read access;Store: Store Read and Write Access&Store Only read access'                             |
+		| 'Document.RetailReturnReceipt Branch: Branch Only read access;Company: Company Only read access;Store: Store Only read access&Store access deny'                                       |
+		| 'Document.RetailReturnReceipt Branch: Branch Only read access;Company: Company Only read access;Store: Store Read and Write Access&Store access deny'                                  |
+		| 'Document.RetailReturnReceipt Branch: Branch Only read access;Company: Company Only read access;Store: Store Read and Write Access&Store Only read access&Store access deny'           |
 	
-			
+				
 Scenario: 960143 check RetailSalesReceipt rights (LimitedAccess)	
 	And I close all client application windows
 	Given I open hyperlink "e1cib/list/Document.RetailSalesReceipt"
 	And "List" table became equal
-		| 'Number' | 'Company'                       | 'Store'                       | 'Branch'                       | 'Description'                                                                                                                                                       |
-		| '1'      | 'Company Read and Write Access' | ''                            | 'Branch Read and Write Access' | 'Document.RetailSalesReceipt Branch: Branch Read and Write Access;Company: Company Read and Write Access;'                                                          |
-		| '2'      | 'Company Read and Write Access' | 'Store Read and Write Access' | 'Branch Read and Write Access' | 'Document.RetailSalesReceipt Branch: Branch Read and Write Access;Company: Company Read and Write Access;Store: Store Read and Write Access'                        |
-		| '3'      | 'Company Read and Write Access' | 'Store Only read access'      | 'Branch Read and Write Access' | 'Document.RetailSalesReceipt Branch: Branch Read and Write Access;Company: Company Read and Write Access;Store: Store Only read access'                             |
-		| '5'      | 'Company Read and Write Access' | ''                            | 'Branch Read and Write Access' | 'Document.RetailSalesReceipt Branch: Branch Read and Write Access;Company: Company Read and Write Access;Store: Store Read and Write Access&Store Only read access' |
-		| '9'      | 'Company Read and Write Access' | ''                            | 'Branch Only read access'      | 'Document.RetailSalesReceipt Branch: Branch Only read access;Company: Company Read and Write Access;'                                                               |
-		| '10'     | 'Company Read and Write Access' | 'Store Read and Write Access' | 'Branch Only read access'      | 'Document.RetailSalesReceipt Branch: Branch Only read access;Company: Company Read and Write Access;Store: Store Read and Write Access'                             |
-		| '11'     | 'Company Read and Write Access' | 'Store Only read access'      | 'Branch Only read access'      | 'Document.RetailSalesReceipt Branch: Branch Only read access;Company: Company Read and Write Access;Store: Store Only read access'                                  |
-		| '13'     | 'Company Read and Write Access' | ''                            | 'Branch Only read access'      | 'Document.RetailSalesReceipt Branch: Branch Only read access;Company: Company Read and Write Access;Store: Store Read and Write Access&Store Only read access'      |
-		| '25'     | 'Company Only read access'      | ''                            | 'Branch Read and Write Access' | 'Document.RetailSalesReceipt Branch: Branch Read and Write Access;Company: Company Only read access;'                                                               |
-		| '26'     | 'Company Only read access'      | 'Store Read and Write Access' | 'Branch Read and Write Access' | 'Document.RetailSalesReceipt Branch: Branch Read and Write Access;Company: Company Only read access;Store: Store Read and Write Access'                             |
-		| '27'     | 'Company Only read access'      | 'Store Only read access'      | 'Branch Read and Write Access' | 'Document.RetailSalesReceipt Branch: Branch Read and Write Access;Company: Company Only read access;Store: Store Only read access'                                  |
-		| '29'     | 'Company Only read access'      | ''                            | 'Branch Read and Write Access' | 'Document.RetailSalesReceipt Branch: Branch Read and Write Access;Company: Company Only read access;Store: Store Read and Write Access&Store Only read access'      |
-		| '33'     | 'Company Only read access'      | ''                            | 'Branch Only read access'      | 'Document.RetailSalesReceipt Branch: Branch Only read access;Company: Company Only read access;'                                                                    |
-		| '34'     | 'Company Only read access'      | 'Store Read and Write Access' | 'Branch Only read access'      | 'Document.RetailSalesReceipt Branch: Branch Only read access;Company: Company Only read access;Store: Store Read and Write Access'                                  |
-		| '35'     | 'Company Only read access'      | 'Store Only read access'      | 'Branch Only read access'      | 'Document.RetailSalesReceipt Branch: Branch Only read access;Company: Company Only read access;Store: Store Only read access'                                       |
-		| '37'     | 'Company Only read access'      | ''                            | 'Branch Only read access'      | 'Document.RetailSalesReceipt Branch: Branch Only read access;Company: Company Only read access;Store: Store Read and Write Access&Store Only read access'           |
+		| 'Description'                                                                                                                                                                         |
+		| 'Document.RetailSalesReceipt Branch: Branch Read and Write Access;Company: Company Read and Write Access;Store: Store Read and Write Access'                                          |
+		| 'Document.RetailSalesReceipt Branch: Branch Read and Write Access;Company: Company Read and Write Access;Store: Store Only read access'                                               |
+		| 'Document.RetailSalesReceipt Branch: Branch Read and Write Access;Company: Company Read and Write Access;Store: Store Read and Write Access&Store Only read access'                   |
+		| 'Document.RetailSalesReceipt Branch: Branch Read and Write Access;Company: Company Read and Write Access;Store: Store Only read access&Store access deny'                             |
+		| 'Document.RetailSalesReceipt Branch: Branch Read and Write Access;Company: Company Read and Write Access;Store: Store Read and Write Access&Store access deny'                        |
+		| 'Document.RetailSalesReceipt Branch: Branch Read and Write Access;Company: Company Read and Write Access;Store: Store Read and Write Access&Store Only read access&Store access deny' |
+		| 'Document.RetailSalesReceipt Branch: Branch Only read access;Company: Company Read and Write Access;Store: Store Read and Write Access'                                               |
+		| 'Document.RetailSalesReceipt Branch: Branch Only read access;Company: Company Read and Write Access;Store: Store Only read access'                                                    |
+		| 'Document.RetailSalesReceipt Branch: Branch Only read access;Company: Company Read and Write Access;Store: Store Read and Write Access&Store Only read access'                        |
+		| 'Document.RetailSalesReceipt Branch: Branch Only read access;Company: Company Read and Write Access;Store: Store Only read access&Store access deny'                                  |
+		| 'Document.RetailSalesReceipt Branch: Branch Only read access;Company: Company Read and Write Access;Store: Store Read and Write Access&Store access deny'                             |
+		| 'Document.RetailSalesReceipt Branch: Branch Only read access;Company: Company Read and Write Access;Store: Store Read and Write Access&Store Only read access&Store access deny'      |
+		| 'Document.RetailSalesReceipt Branch: Branch Read and Write Access;Company: Company Only read access;Store: Store Read and Write Access'                                               |
+		| 'Document.RetailSalesReceipt Branch: Branch Read and Write Access;Company: Company Only read access;Store: Store Only read access'                                                    |
+		| 'Document.RetailSalesReceipt Branch: Branch Read and Write Access;Company: Company Only read access;Store: Store Read and Write Access&Store Only read access'                        |
+		| 'Document.RetailSalesReceipt Branch: Branch Read and Write Access;Company: Company Only read access;Store: Store Only read access&Store access deny'                                  |
+		| 'Document.RetailSalesReceipt Branch: Branch Read and Write Access;Company: Company Only read access;Store: Store Read and Write Access&Store access deny'                             |
+		| 'Document.RetailSalesReceipt Branch: Branch Read and Write Access;Company: Company Only read access;Store: Store Read and Write Access&Store Only read access&Store access deny'      |
+		| 'Document.RetailSalesReceipt Branch: Branch Only read access;Company: Company Only read access;Store: Store Read and Write Access'                                                    |
+		| 'Document.RetailSalesReceipt Branch: Branch Only read access;Company: Company Only read access;Store: Store Only read access'                                                         |
+		| 'Document.RetailSalesReceipt Branch: Branch Only read access;Company: Company Only read access;Store: Store Read and Write Access&Store Only read access'                             |
+		| 'Document.RetailSalesReceipt Branch: Branch Only read access;Company: Company Only read access;Store: Store Only read access&Store access deny'                                       |
+		| 'Document.RetailSalesReceipt Branch: Branch Only read access;Company: Company Only read access;Store: Store Read and Write Access&Store access deny'                                  |
+		| 'Document.RetailSalesReceipt Branch: Branch Only read access;Company: Company Only read access;Store: Store Read and Write Access&Store Only read access&Store access deny'           |
 	
+		
 Scenario: 960144 check RetailShipmentConfirmation rights (LimitedAccess)	
 	And I close all client application windows
 	Given I open hyperlink "e1cib/list/Document.RetailShipmentConfirmation"	
 	And "List" table became equal
-		| 'Number' | 'Company'                       | 'Description'                                                                                                                                                               |
-		| '1'      | 'Company Read and Write Access' | 'Document.RetailShipmentConfirmation Branch: Branch Read and Write Access;Company: Company Read and Write Access;'                                                          |
-		| '2'      | 'Company Read and Write Access' | 'Document.RetailShipmentConfirmation Branch: Branch Read and Write Access;Company: Company Read and Write Access;Store: Store Read and Write Access'                        |
-		| '3'      | 'Company Read and Write Access' | 'Document.RetailShipmentConfirmation Branch: Branch Read and Write Access;Company: Company Read and Write Access;Store: Store Only read access'                             |
-		| '5'      | 'Company Read and Write Access' | 'Document.RetailShipmentConfirmation Branch: Branch Read and Write Access;Company: Company Read and Write Access;Store: Store Read and Write Access&Store Only read access' |
-		| '9'      | 'Company Read and Write Access' | 'Document.RetailShipmentConfirmation Branch: Branch Only read access;Company: Company Read and Write Access;'                                                               |
-		| '10'     | 'Company Read and Write Access' | 'Document.RetailShipmentConfirmation Branch: Branch Only read access;Company: Company Read and Write Access;Store: Store Read and Write Access'                             |
-		| '11'     | 'Company Read and Write Access' | 'Document.RetailShipmentConfirmation Branch: Branch Only read access;Company: Company Read and Write Access;Store: Store Only read access'                                  |
-		| '13'     | 'Company Read and Write Access' | 'Document.RetailShipmentConfirmation Branch: Branch Only read access;Company: Company Read and Write Access;Store: Store Read and Write Access&Store Only read access'      |
-		| '25'     | 'Company Only read access'      | 'Document.RetailShipmentConfirmation Branch: Branch Read and Write Access;Company: Company Only read access;'                                                               |
-		| '26'     | 'Company Only read access'      | 'Document.RetailShipmentConfirmation Branch: Branch Read and Write Access;Company: Company Only read access;Store: Store Read and Write Access'                             |
-		| '27'     | 'Company Only read access'      | 'Document.RetailShipmentConfirmation Branch: Branch Read and Write Access;Company: Company Only read access;Store: Store Only read access'                                  |
-		| '29'     | 'Company Only read access'      | 'Document.RetailShipmentConfirmation Branch: Branch Read and Write Access;Company: Company Only read access;Store: Store Read and Write Access&Store Only read access'      |
-		| '33'     | 'Company Only read access'      | 'Document.RetailShipmentConfirmation Branch: Branch Only read access;Company: Company Only read access;'                                                                    |
-		| '34'     | 'Company Only read access'      | 'Document.RetailShipmentConfirmation Branch: Branch Only read access;Company: Company Only read access;Store: Store Read and Write Access'                                  |
-		| '35'     | 'Company Only read access'      | 'Document.RetailShipmentConfirmation Branch: Branch Only read access;Company: Company Only read access;Store: Store Only read access'                                       |
-		| '37'     | 'Company Only read access'      | 'Document.RetailShipmentConfirmation Branch: Branch Only read access;Company: Company Only read access;Store: Store Read and Write Access&Store Only read access'           |
+		| 'Description'                                                                                                                                                                                 |
+		| 'Document.RetailShipmentConfirmation Branch: Branch Read and Write Access;Company: Company Read and Write Access;Store: Store Read and Write Access'                                          |
+		| 'Document.RetailShipmentConfirmation Branch: Branch Read and Write Access;Company: Company Read and Write Access;Store: Store Only read access'                                               |
+		| 'Document.RetailShipmentConfirmation Branch: Branch Read and Write Access;Company: Company Read and Write Access;Store: Store Read and Write Access&Store Only read access'                   |
+		| 'Document.RetailShipmentConfirmation Branch: Branch Read and Write Access;Company: Company Read and Write Access;Store: Store Only read access&Store access deny'                             |
+		| 'Document.RetailShipmentConfirmation Branch: Branch Read and Write Access;Company: Company Read and Write Access;Store: Store Read and Write Access&Store access deny'                        |
+		| 'Document.RetailShipmentConfirmation Branch: Branch Read and Write Access;Company: Company Read and Write Access;Store: Store Read and Write Access&Store Only read access&Store access deny' |
+		| 'Document.RetailShipmentConfirmation Branch: Branch Only read access;Company: Company Read and Write Access;Store: Store Read and Write Access'                                               |
+		| 'Document.RetailShipmentConfirmation Branch: Branch Only read access;Company: Company Read and Write Access;Store: Store Only read access'                                                    |
+		| 'Document.RetailShipmentConfirmation Branch: Branch Only read access;Company: Company Read and Write Access;Store: Store Read and Write Access&Store Only read access'                        |
+		| 'Document.RetailShipmentConfirmation Branch: Branch Only read access;Company: Company Read and Write Access;Store: Store Only read access&Store access deny'                                  |
+		| 'Document.RetailShipmentConfirmation Branch: Branch Only read access;Company: Company Read and Write Access;Store: Store Read and Write Access&Store access deny'                             |
+		| 'Document.RetailShipmentConfirmation Branch: Branch Only read access;Company: Company Read and Write Access;Store: Store Read and Write Access&Store Only read access&Store access deny'      |
+		| 'Document.RetailShipmentConfirmation Branch: Branch Read and Write Access;Company: Company Only read access;Store: Store Read and Write Access'                                               |
+		| 'Document.RetailShipmentConfirmation Branch: Branch Read and Write Access;Company: Company Only read access;Store: Store Only read access'                                                    |
+		| 'Document.RetailShipmentConfirmation Branch: Branch Read and Write Access;Company: Company Only read access;Store: Store Read and Write Access&Store Only read access'                        |
+		| 'Document.RetailShipmentConfirmation Branch: Branch Read and Write Access;Company: Company Only read access;Store: Store Only read access&Store access deny'                                  |
+		| 'Document.RetailShipmentConfirmation Branch: Branch Read and Write Access;Company: Company Only read access;Store: Store Read and Write Access&Store access deny'                             |
+		| 'Document.RetailShipmentConfirmation Branch: Branch Read and Write Access;Company: Company Only read access;Store: Store Read and Write Access&Store Only read access&Store access deny'      |
+		| 'Document.RetailShipmentConfirmation Branch: Branch Only read access;Company: Company Only read access;Store: Store Read and Write Access'                                                    |
+		| 'Document.RetailShipmentConfirmation Branch: Branch Only read access;Company: Company Only read access;Store: Store Only read access'                                                         |
+		| 'Document.RetailShipmentConfirmation Branch: Branch Only read access;Company: Company Only read access;Store: Store Read and Write Access&Store Only read access'                             |
+		| 'Document.RetailShipmentConfirmation Branch: Branch Only read access;Company: Company Only read access;Store: Store Only read access&Store access deny'                                       |
+		| 'Document.RetailShipmentConfirmation Branch: Branch Only read access;Company: Company Only read access;Store: Store Read and Write Access&Store access deny'                                  |
+		| 'Document.RetailShipmentConfirmation Branch: Branch Only read access;Company: Company Only read access;Store: Store Read and Write Access&Store Only read access&Store access deny'           |
 	
+		
 Scenario: 960145 check SalesInvoice rights (LimitedAccess)	
 	And I close all client application windows
 	Given I open hyperlink "e1cib/list/Document.SalesInvoice"
 	And "List" table became equal
-		| 'Number' | 'Company'                       | 'Store'                       | 'Description'                                                                                                                                                 |
-		| '1'      | 'Company Read and Write Access' | ''                            | 'Document.SalesInvoice Branch: Branch Read and Write Access;Company: Company Read and Write Access;'                                                          |
-		| '2'      | 'Company Read and Write Access' | 'Store Read and Write Access' | 'Document.SalesInvoice Branch: Branch Read and Write Access;Company: Company Read and Write Access;Store: Store Read and Write Access'                        |
-		| '3'      | 'Company Read and Write Access' | 'Store Only read access'      | 'Document.SalesInvoice Branch: Branch Read and Write Access;Company: Company Read and Write Access;Store: Store Only read access'                             |
-		| '5'      | 'Company Read and Write Access' | ''                            | 'Document.SalesInvoice Branch: Branch Read and Write Access;Company: Company Read and Write Access;Store: Store Read and Write Access&Store Only read access' |
-		| '9'      | 'Company Read and Write Access' | ''                            | 'Document.SalesInvoice Branch: Branch Only read access;Company: Company Read and Write Access;'                                                               |
-		| '10'     | 'Company Read and Write Access' | 'Store Read and Write Access' | 'Document.SalesInvoice Branch: Branch Only read access;Company: Company Read and Write Access;Store: Store Read and Write Access'                             |
-		| '11'     | 'Company Read and Write Access' | 'Store Only read access'      | 'Document.SalesInvoice Branch: Branch Only read access;Company: Company Read and Write Access;Store: Store Only read access'                                  |
-		| '13'     | 'Company Read and Write Access' | ''                            | 'Document.SalesInvoice Branch: Branch Only read access;Company: Company Read and Write Access;Store: Store Read and Write Access&Store Only read access'      |
-		| '25'     | 'Company Only read access'      | ''                            | 'Document.SalesInvoice Branch: Branch Read and Write Access;Company: Company Only read access;'                                                               |
-		| '26'     | 'Company Only read access'      | 'Store Read and Write Access' | 'Document.SalesInvoice Branch: Branch Read and Write Access;Company: Company Only read access;Store: Store Read and Write Access'                             |
-		| '27'     | 'Company Only read access'      | 'Store Only read access'      | 'Document.SalesInvoice Branch: Branch Read and Write Access;Company: Company Only read access;Store: Store Only read access'                                  |
-		| '29'     | 'Company Only read access'      | ''                            | 'Document.SalesInvoice Branch: Branch Read and Write Access;Company: Company Only read access;Store: Store Read and Write Access&Store Only read access'      |
-		| '33'     | 'Company Only read access'      | ''                            | 'Document.SalesInvoice Branch: Branch Only read access;Company: Company Only read access;'                                                                    |
-		| '34'     | 'Company Only read access'      | 'Store Read and Write Access' | 'Document.SalesInvoice Branch: Branch Only read access;Company: Company Only read access;Store: Store Read and Write Access'                                  |
-		| '35'     | 'Company Only read access'      | 'Store Only read access'      | 'Document.SalesInvoice Branch: Branch Only read access;Company: Company Only read access;Store: Store Only read access'                                       |
-		| '37'     | 'Company Only read access'      | ''                            | 'Document.SalesInvoice Branch: Branch Only read access;Company: Company Only read access;Store: Store Read and Write Access&Store Only read access'           |
+		| 'Description'                                                                                                                                                                   |
+		| 'Document.SalesInvoice Branch: Branch Read and Write Access;Company: Company Read and Write Access;Store: Store Read and Write Access'                                          |
+		| 'Document.SalesInvoice Branch: Branch Read and Write Access;Company: Company Read and Write Access;Store: Store Only read access'                                               |
+		| 'Document.SalesInvoice Branch: Branch Read and Write Access;Company: Company Read and Write Access;Store: Store Read and Write Access&Store Only read access'                   |
+		| 'Document.SalesInvoice Branch: Branch Read and Write Access;Company: Company Read and Write Access;Store: Store Only read access&Store access deny'                             |
+		| 'Document.SalesInvoice Branch: Branch Read and Write Access;Company: Company Read and Write Access;Store: Store Read and Write Access&Store access deny'                        |
+		| 'Document.SalesInvoice Branch: Branch Read and Write Access;Company: Company Read and Write Access;Store: Store Read and Write Access&Store Only read access&Store access deny' |
+		| 'Document.SalesInvoice Branch: Branch Only read access;Company: Company Read and Write Access;Store: Store Read and Write Access'                                               |
+		| 'Document.SalesInvoice Branch: Branch Only read access;Company: Company Read and Write Access;Store: Store Only read access'                                                    |
+		| 'Document.SalesInvoice Branch: Branch Only read access;Company: Company Read and Write Access;Store: Store Read and Write Access&Store Only read access'                        |
+		| 'Document.SalesInvoice Branch: Branch Only read access;Company: Company Read and Write Access;Store: Store Only read access&Store access deny'                                  |
+		| 'Document.SalesInvoice Branch: Branch Only read access;Company: Company Read and Write Access;Store: Store Read and Write Access&Store access deny'                             |
+		| 'Document.SalesInvoice Branch: Branch Only read access;Company: Company Read and Write Access;Store: Store Read and Write Access&Store Only read access&Store access deny'      |
+		| 'Document.SalesInvoice Branch: Branch Read and Write Access;Company: Company Only read access;Store: Store Read and Write Access'                                               |
+		| 'Document.SalesInvoice Branch: Branch Read and Write Access;Company: Company Only read access;Store: Store Only read access'                                                    |
+		| 'Document.SalesInvoice Branch: Branch Read and Write Access;Company: Company Only read access;Store: Store Read and Write Access&Store Only read access'                        |
+		| 'Document.SalesInvoice Branch: Branch Read and Write Access;Company: Company Only read access;Store: Store Only read access&Store access deny'                                  |
+		| 'Document.SalesInvoice Branch: Branch Read and Write Access;Company: Company Only read access;Store: Store Read and Write Access&Store access deny'                             |
+		| 'Document.SalesInvoice Branch: Branch Read and Write Access;Company: Company Only read access;Store: Store Read and Write Access&Store Only read access&Store access deny'      |
+		| 'Document.SalesInvoice Branch: Branch Only read access;Company: Company Only read access;Store: Store Read and Write Access'                                                    |
+		| 'Document.SalesInvoice Branch: Branch Only read access;Company: Company Only read access;Store: Store Only read access'                                                         |
+		| 'Document.SalesInvoice Branch: Branch Only read access;Company: Company Only read access;Store: Store Read and Write Access&Store Only read access'                             |
+		| 'Document.SalesInvoice Branch: Branch Only read access;Company: Company Only read access;Store: Store Only read access&Store access deny'                                       |
+		| 'Document.SalesInvoice Branch: Branch Only read access;Company: Company Only read access;Store: Store Read and Write Access&Store access deny'                                  |
+		| 'Document.SalesInvoice Branch: Branch Only read access;Company: Company Only read access;Store: Store Read and Write Access&Store Only read access&Store access deny'           |
 	
+		
 Scenario: 960146 check SalesOrder rights (LimitedAccess)	
 	And I close all client application windows
 	Given I open hyperlink "e1cib/list/Document.SalesOrder"		
 	And "List" table became equal
-		| 'Number' | 'Company'                       | 'Store'                       | 'Description'                                                                                                                                               |
-		| '1'      | 'Company Read and Write Access' | ''                            | 'Document.SalesOrder Branch: Branch Read and Write Access;Company: Company Read and Write Access;'                                                          |
-		| '2'      | 'Company Read and Write Access' | 'Store Read and Write Access' | 'Document.SalesOrder Branch: Branch Read and Write Access;Company: Company Read and Write Access;Store: Store Read and Write Access'                        |
-		| '3'      | 'Company Read and Write Access' | 'Store Only read access'      | 'Document.SalesOrder Branch: Branch Read and Write Access;Company: Company Read and Write Access;Store: Store Only read access'                             |
-		| '5'      | 'Company Read and Write Access' | ''                            | 'Document.SalesOrder Branch: Branch Read and Write Access;Company: Company Read and Write Access;Store: Store Read and Write Access&Store Only read access' |
-		| '9'      | 'Company Read and Write Access' | ''                            | 'Document.SalesOrder Branch: Branch Only read access;Company: Company Read and Write Access;'                                                               |
-		| '10'     | 'Company Read and Write Access' | 'Store Read and Write Access' | 'Document.SalesOrder Branch: Branch Only read access;Company: Company Read and Write Access;Store: Store Read and Write Access'                             |
-		| '11'     | 'Company Read and Write Access' | 'Store Only read access'      | 'Document.SalesOrder Branch: Branch Only read access;Company: Company Read and Write Access;Store: Store Only read access'                                  |
-		| '13'     | 'Company Read and Write Access' | ''                            | 'Document.SalesOrder Branch: Branch Only read access;Company: Company Read and Write Access;Store: Store Read and Write Access&Store Only read access'      |
-		| '25'     | 'Company Only read access'      | ''                            | 'Document.SalesOrder Branch: Branch Read and Write Access;Company: Company Only read access;'                                                               |
-		| '26'     | 'Company Only read access'      | 'Store Read and Write Access' | 'Document.SalesOrder Branch: Branch Read and Write Access;Company: Company Only read access;Store: Store Read and Write Access'                             |
-		| '27'     | 'Company Only read access'      | 'Store Only read access'      | 'Document.SalesOrder Branch: Branch Read and Write Access;Company: Company Only read access;Store: Store Only read access'                                  |
-		| '29'     | 'Company Only read access'      | ''                            | 'Document.SalesOrder Branch: Branch Read and Write Access;Company: Company Only read access;Store: Store Read and Write Access&Store Only read access'      |
-		| '33'     | 'Company Only read access'      | ''                            | 'Document.SalesOrder Branch: Branch Only read access;Company: Company Only read access;'                                                                    |
-		| '34'     | 'Company Only read access'      | 'Store Read and Write Access' | 'Document.SalesOrder Branch: Branch Only read access;Company: Company Only read access;Store: Store Read and Write Access'                                  |
-		| '35'     | 'Company Only read access'      | 'Store Only read access'      | 'Document.SalesOrder Branch: Branch Only read access;Company: Company Only read access;Store: Store Only read access'                                       |
-		| '37'     | 'Company Only read access'      | ''                            | 'Document.SalesOrder Branch: Branch Only read access;Company: Company Only read access;Store: Store Read and Write Access&Store Only read access'           |
+		| 'Description'                                                                                                                                                                 |
+		| 'Document.SalesOrder Branch: Branch Read and Write Access;Company: Company Read and Write Access;Store: Store Read and Write Access'                                          |
+		| 'Document.SalesOrder Branch: Branch Read and Write Access;Company: Company Read and Write Access;Store: Store Only read access'                                               |
+		| 'Document.SalesOrder Branch: Branch Read and Write Access;Company: Company Read and Write Access;Store: Store Read and Write Access&Store Only read access'                   |
+		| 'Document.SalesOrder Branch: Branch Read and Write Access;Company: Company Read and Write Access;Store: Store Only read access&Store access deny'                             |
+		| 'Document.SalesOrder Branch: Branch Read and Write Access;Company: Company Read and Write Access;Store: Store Read and Write Access&Store access deny'                        |
+		| 'Document.SalesOrder Branch: Branch Read and Write Access;Company: Company Read and Write Access;Store: Store Read and Write Access&Store Only read access&Store access deny' |
+		| 'Document.SalesOrder Branch: Branch Only read access;Company: Company Read and Write Access;Store: Store Read and Write Access'                                               |
+		| 'Document.SalesOrder Branch: Branch Only read access;Company: Company Read and Write Access;Store: Store Only read access'                                                    |
+		| 'Document.SalesOrder Branch: Branch Only read access;Company: Company Read and Write Access;Store: Store Read and Write Access&Store Only read access'                        |
+		| 'Document.SalesOrder Branch: Branch Only read access;Company: Company Read and Write Access;Store: Store Only read access&Store access deny'                                  |
+		| 'Document.SalesOrder Branch: Branch Only read access;Company: Company Read and Write Access;Store: Store Read and Write Access&Store access deny'                             |
+		| 'Document.SalesOrder Branch: Branch Only read access;Company: Company Read and Write Access;Store: Store Read and Write Access&Store Only read access&Store access deny'      |
+		| 'Document.SalesOrder Branch: Branch Read and Write Access;Company: Company Only read access;Store: Store Read and Write Access'                                               |
+		| 'Document.SalesOrder Branch: Branch Read and Write Access;Company: Company Only read access;Store: Store Only read access'                                                    |
+		| 'Document.SalesOrder Branch: Branch Read and Write Access;Company: Company Only read access;Store: Store Read and Write Access&Store Only read access'                        |
+		| 'Document.SalesOrder Branch: Branch Read and Write Access;Company: Company Only read access;Store: Store Only read access&Store access deny'                                  |
+		| 'Document.SalesOrder Branch: Branch Read and Write Access;Company: Company Only read access;Store: Store Read and Write Access&Store access deny'                             |
+		| 'Document.SalesOrder Branch: Branch Read and Write Access;Company: Company Only read access;Store: Store Read and Write Access&Store Only read access&Store access deny'      |
+		| 'Document.SalesOrder Branch: Branch Only read access;Company: Company Only read access;Store: Store Read and Write Access'                                                    |
+		| 'Document.SalesOrder Branch: Branch Only read access;Company: Company Only read access;Store: Store Only read access'                                                         |
+		| 'Document.SalesOrder Branch: Branch Only read access;Company: Company Only read access;Store: Store Read and Write Access&Store Only read access'                             |
+		| 'Document.SalesOrder Branch: Branch Only read access;Company: Company Only read access;Store: Store Only read access&Store access deny'                                       |
+		| 'Document.SalesOrder Branch: Branch Only read access;Company: Company Only read access;Store: Store Read and Write Access&Store access deny'                                  |
+		| 'Document.SalesOrder Branch: Branch Only read access;Company: Company Only read access;Store: Store Read and Write Access&Store Only read access&Store access deny'           |
 	
+		
 Scenario: 960147 check SalesOrderClosing rights (LimitedAccess)	
 	And I close all client application windows
 	Given I open hyperlink "e1cib/list/Document.SalesOrderClosing"	
 	And "List" table became equal
-		| 'Number' | 'Company'                       | 'Store'                       | 'Description'                                                                                                                                                      |
-		| '1'      | 'Company Read and Write Access' | ''                            | 'Document.SalesOrderClosing Branch: Branch Read and Write Access;Company: Company Read and Write Access;'                                                          |
-		| '2'      | 'Company Read and Write Access' | 'Store Read and Write Access' | 'Document.SalesOrderClosing Branch: Branch Read and Write Access;Company: Company Read and Write Access;Store: Store Read and Write Access'                        |
-		| '3'      | 'Company Read and Write Access' | 'Store Only read access'      | 'Document.SalesOrderClosing Branch: Branch Read and Write Access;Company: Company Read and Write Access;Store: Store Only read access'                             |
-		| '5'      | 'Company Read and Write Access' | ''                            | 'Document.SalesOrderClosing Branch: Branch Read and Write Access;Company: Company Read and Write Access;Store: Store Read and Write Access&Store Only read access' |
-		| '9'      | 'Company Read and Write Access' | ''                            | 'Document.SalesOrderClosing Branch: Branch Only read access;Company: Company Read and Write Access;'                                                               |
-		| '10'     | 'Company Read and Write Access' | 'Store Read and Write Access' | 'Document.SalesOrderClosing Branch: Branch Only read access;Company: Company Read and Write Access;Store: Store Read and Write Access'                             |
-		| '11'     | 'Company Read and Write Access' | 'Store Only read access'      | 'Document.SalesOrderClosing Branch: Branch Only read access;Company: Company Read and Write Access;Store: Store Only read access'                                  |
-		| '13'     | 'Company Read and Write Access' | ''                            | 'Document.SalesOrderClosing Branch: Branch Only read access;Company: Company Read and Write Access;Store: Store Read and Write Access&Store Only read access'      |
-		| '25'     | 'Company Only read access'      | ''                            | 'Document.SalesOrderClosing Branch: Branch Read and Write Access;Company: Company Only read access;'                                                               |
-		| '26'     | 'Company Only read access'      | 'Store Read and Write Access' | 'Document.SalesOrderClosing Branch: Branch Read and Write Access;Company: Company Only read access;Store: Store Read and Write Access'                             |
-		| '27'     | 'Company Only read access'      | 'Store Only read access'      | 'Document.SalesOrderClosing Branch: Branch Read and Write Access;Company: Company Only read access;Store: Store Only read access'                                  |
-		| '29'     | 'Company Only read access'      | ''                            | 'Document.SalesOrderClosing Branch: Branch Read and Write Access;Company: Company Only read access;Store: Store Read and Write Access&Store Only read access'      |
-		| '33'     | 'Company Only read access'      | ''                            | 'Document.SalesOrderClosing Branch: Branch Only read access;Company: Company Only read access;'                                                                    |
-		| '34'     | 'Company Only read access'      | 'Store Read and Write Access' | 'Document.SalesOrderClosing Branch: Branch Only read access;Company: Company Only read access;Store: Store Read and Write Access'                                  |
-		| '35'     | 'Company Only read access'      | 'Store Only read access'      | 'Document.SalesOrderClosing Branch: Branch Only read access;Company: Company Only read access;Store: Store Only read access'                                       |
-		| '37'     | 'Company Only read access'      | ''                            | 'Document.SalesOrderClosing Branch: Branch Only read access;Company: Company Only read access;Store: Store Read and Write Access&Store Only read access'           |
+		| 'Description'                                                                                                                                                                        |
+		| 'Document.SalesOrderClosing Branch: Branch Read and Write Access;Company: Company Read and Write Access;Store: Store Read and Write Access'                                          |
+		| 'Document.SalesOrderClosing Branch: Branch Read and Write Access;Company: Company Read and Write Access;Store: Store Only read access'                                               |
+		| 'Document.SalesOrderClosing Branch: Branch Read and Write Access;Company: Company Read and Write Access;Store: Store Read and Write Access&Store Only read access'                   |
+		| 'Document.SalesOrderClosing Branch: Branch Read and Write Access;Company: Company Read and Write Access;Store: Store Only read access&Store access deny'                             |
+		| 'Document.SalesOrderClosing Branch: Branch Read and Write Access;Company: Company Read and Write Access;Store: Store Read and Write Access&Store access deny'                        |
+		| 'Document.SalesOrderClosing Branch: Branch Read and Write Access;Company: Company Read and Write Access;Store: Store Read and Write Access&Store Only read access&Store access deny' |
+		| 'Document.SalesOrderClosing Branch: Branch Only read access;Company: Company Read and Write Access;Store: Store Read and Write Access'                                               |
+		| 'Document.SalesOrderClosing Branch: Branch Only read access;Company: Company Read and Write Access;Store: Store Only read access'                                                    |
+		| 'Document.SalesOrderClosing Branch: Branch Only read access;Company: Company Read and Write Access;Store: Store Read and Write Access&Store Only read access'                        |
+		| 'Document.SalesOrderClosing Branch: Branch Only read access;Company: Company Read and Write Access;Store: Store Only read access&Store access deny'                                  |
+		| 'Document.SalesOrderClosing Branch: Branch Only read access;Company: Company Read and Write Access;Store: Store Read and Write Access&Store access deny'                             |
+		| 'Document.SalesOrderClosing Branch: Branch Only read access;Company: Company Read and Write Access;Store: Store Read and Write Access&Store Only read access&Store access deny'      |
+		| 'Document.SalesOrderClosing Branch: Branch Read and Write Access;Company: Company Only read access;Store: Store Read and Write Access'                                               |
+		| 'Document.SalesOrderClosing Branch: Branch Read and Write Access;Company: Company Only read access;Store: Store Only read access'                                                    |
+		| 'Document.SalesOrderClosing Branch: Branch Read and Write Access;Company: Company Only read access;Store: Store Read and Write Access&Store Only read access'                        |
+		| 'Document.SalesOrderClosing Branch: Branch Read and Write Access;Company: Company Only read access;Store: Store Only read access&Store access deny'                                  |
+		| 'Document.SalesOrderClosing Branch: Branch Read and Write Access;Company: Company Only read access;Store: Store Read and Write Access&Store access deny'                             |
+		| 'Document.SalesOrderClosing Branch: Branch Read and Write Access;Company: Company Only read access;Store: Store Read and Write Access&Store Only read access&Store access deny'      |
+		| 'Document.SalesOrderClosing Branch: Branch Only read access;Company: Company Only read access;Store: Store Read and Write Access'                                                    |
+		| 'Document.SalesOrderClosing Branch: Branch Only read access;Company: Company Only read access;Store: Store Only read access'                                                         |
+		| 'Document.SalesOrderClosing Branch: Branch Only read access;Company: Company Only read access;Store: Store Read and Write Access&Store Only read access'                             |
+		| 'Document.SalesOrderClosing Branch: Branch Only read access;Company: Company Only read access;Store: Store Only read access&Store access deny'                                       |
+		| 'Document.SalesOrderClosing Branch: Branch Only read access;Company: Company Only read access;Store: Store Read and Write Access&Store access deny'                                  |
+		| 'Document.SalesOrderClosing Branch: Branch Only read access;Company: Company Only read access;Store: Store Read and Write Access&Store Only read access&Store access deny'           |
 	
+		
 Scenario: 960148 check SalesReportFromTradeAgent rights (LimitedAccess)	
 	And I close all client application windows
 	Given I open hyperlink "e1cib/list/Document.SalesReportFromTradeAgent"	
 	And "List" table became equal
-		| 'Number' | 'Company'                       | 'Description'                                                                                                     |
-		| '1'      | 'Company Read and Write Access' | 'Document.SalesReportFromTradeAgent Branch: Branch Read and Write Access;Company: Company Read and Write Access;' |
-		| '2'      | 'Company Read and Write Access' | 'Document.SalesReportFromTradeAgent Branch: Branch Only read access;Company: Company Read and Write Access;'      |
-		| '4'      | 'Company Only read access'      | 'Document.SalesReportFromTradeAgent Branch: Branch Read and Write Access;Company: Company Only read access;'      |
-		| '5'      | 'Company Only read access'      | 'Document.SalesReportFromTradeAgent Branch: Branch Only read access;Company: Company Only read access;'           |
+		| 'Description'                                                                                                     |
+		| 'Document.SalesReportFromTradeAgent Branch: Branch Read and Write Access;Company: Company Read and Write Access;' |
+		| 'Document.SalesReportFromTradeAgent Branch: Branch Only read access;Company: Company Read and Write Access;'      |
+		| 'Document.SalesReportFromTradeAgent Branch: Branch Read and Write Access;Company: Company Only read access;'      |
+		| 'Document.SalesReportFromTradeAgent Branch: Branch Only read access;Company: Company Only read access;'           |
 	
 Scenario: 960149 check SalesReportToConsignor rights (LimitedAccess)	
 	And I close all client application windows
 	Given I open hyperlink "e1cib/list/Document.SalesReportToConsignor"	
 	And "List" table became equal
-		| 'Number' | 'Company'                       | 'Description'                                                                                                  |
-		| '1'      | 'Company Read and Write Access' | 'Document.SalesReportToConsignor Branch: Branch Read and Write Access;Company: Company Read and Write Access;' |
-		| '2'      | 'Company Read and Write Access' | 'Document.SalesReportToConsignor Branch: Branch Only read access;Company: Company Read and Write Access;'      |
-		| '4'      | 'Company Only read access'      | 'Document.SalesReportToConsignor Branch: Branch Read and Write Access;Company: Company Only read access;'      |
-		| '5'      | 'Company Only read access'      | 'Document.SalesReportToConsignor Branch: Branch Only read access;Company: Company Only read access;'           |
+		| 'Description'                                                                                                  |
+		| 'Document.SalesReportToConsignor Branch: Branch Read and Write Access;Company: Company Read and Write Access;' |
+		| 'Document.SalesReportToConsignor Branch: Branch Only read access;Company: Company Read and Write Access;'      |
+		| 'Document.SalesReportToConsignor Branch: Branch Read and Write Access;Company: Company Only read access;'      |
+		| 'Document.SalesReportToConsignor Branch: Branch Only read access;Company: Company Only read access;'           |
 	
 Scenario: 960150 check SalesReturn rights (LimitedAccess)	
 	And I close all client application windows
 	Given I open hyperlink "e1cib/list/Document.SalesReturn"	
 	And "List" table became equal
-		| 'Number' | 'Company'                       | 'Store'                       | 'Description'                                                                                                                                                |
-		| '1'      | 'Company Read and Write Access' | ''                            | 'Document.SalesReturn Branch: Branch Read and Write Access;Company: Company Read and Write Access;'                                                          |
-		| '2'      | 'Company Read and Write Access' | 'Store Read and Write Access' | 'Document.SalesReturn Branch: Branch Read and Write Access;Company: Company Read and Write Access;Store: Store Read and Write Access'                        |
-		| '3'      | 'Company Read and Write Access' | 'Store Only read access'      | 'Document.SalesReturn Branch: Branch Read and Write Access;Company: Company Read and Write Access;Store: Store Only read access'                             |
-		| '5'      | 'Company Read and Write Access' | ''                            | 'Document.SalesReturn Branch: Branch Read and Write Access;Company: Company Read and Write Access;Store: Store Read and Write Access&Store Only read access' |
-		| '9'      | 'Company Read and Write Access' | ''                            | 'Document.SalesReturn Branch: Branch Only read access;Company: Company Read and Write Access;'                                                               |
-		| '10'     | 'Company Read and Write Access' | 'Store Read and Write Access' | 'Document.SalesReturn Branch: Branch Only read access;Company: Company Read and Write Access;Store: Store Read and Write Access'                             |
-		| '11'     | 'Company Read and Write Access' | 'Store Only read access'      | 'Document.SalesReturn Branch: Branch Only read access;Company: Company Read and Write Access;Store: Store Only read access'                                  |
-		| '13'     | 'Company Read and Write Access' | ''                            | 'Document.SalesReturn Branch: Branch Only read access;Company: Company Read and Write Access;Store: Store Read and Write Access&Store Only read access'      |
-		| '25'     | 'Company Only read access'      | ''                            | 'Document.SalesReturn Branch: Branch Read and Write Access;Company: Company Only read access;'                                                               |
-		| '26'     | 'Company Only read access'      | 'Store Read and Write Access' | 'Document.SalesReturn Branch: Branch Read and Write Access;Company: Company Only read access;Store: Store Read and Write Access'                             |
-		| '27'     | 'Company Only read access'      | 'Store Only read access'      | 'Document.SalesReturn Branch: Branch Read and Write Access;Company: Company Only read access;Store: Store Only read access'                                  |
-		| '29'     | 'Company Only read access'      | ''                            | 'Document.SalesReturn Branch: Branch Read and Write Access;Company: Company Only read access;Store: Store Read and Write Access&Store Only read access'      |
-		| '33'     | 'Company Only read access'      | ''                            | 'Document.SalesReturn Branch: Branch Only read access;Company: Company Only read access;'                                                                    |
-		| '34'     | 'Company Only read access'      | 'Store Read and Write Access' | 'Document.SalesReturn Branch: Branch Only read access;Company: Company Only read access;Store: Store Read and Write Access'                                  |
-		| '35'     | 'Company Only read access'      | 'Store Only read access'      | 'Document.SalesReturn Branch: Branch Only read access;Company: Company Only read access;Store: Store Only read access'                                       |
-		| '37'     | 'Company Only read access'      | ''                            | 'Document.SalesReturn Branch: Branch Only read access;Company: Company Only read access;Store: Store Read and Write Access&Store Only read access'           |
+		| 'Description'                                                                                                                                                                  |
+		| 'Document.SalesReturn Branch: Branch Read and Write Access;Company: Company Read and Write Access;Store: Store Read and Write Access'                                          |
+		| 'Document.SalesReturn Branch: Branch Read and Write Access;Company: Company Read and Write Access;Store: Store Only read access'                                               |
+		| 'Document.SalesReturn Branch: Branch Read and Write Access;Company: Company Read and Write Access;Store: Store Read and Write Access&Store Only read access'                   |
+		| 'Document.SalesReturn Branch: Branch Read and Write Access;Company: Company Read and Write Access;Store: Store Only read access&Store access deny'                             |
+		| 'Document.SalesReturn Branch: Branch Read and Write Access;Company: Company Read and Write Access;Store: Store Read and Write Access&Store access deny'                        |
+		| 'Document.SalesReturn Branch: Branch Read and Write Access;Company: Company Read and Write Access;Store: Store Read and Write Access&Store Only read access&Store access deny' |
+		| 'Document.SalesReturn Branch: Branch Only read access;Company: Company Read and Write Access;Store: Store Read and Write Access'                                               |
+		| 'Document.SalesReturn Branch: Branch Only read access;Company: Company Read and Write Access;Store: Store Only read access'                                                    |
+		| 'Document.SalesReturn Branch: Branch Only read access;Company: Company Read and Write Access;Store: Store Read and Write Access&Store Only read access'                        |
+		| 'Document.SalesReturn Branch: Branch Only read access;Company: Company Read and Write Access;Store: Store Only read access&Store access deny'                                  |
+		| 'Document.SalesReturn Branch: Branch Only read access;Company: Company Read and Write Access;Store: Store Read and Write Access&Store access deny'                             |
+		| 'Document.SalesReturn Branch: Branch Only read access;Company: Company Read and Write Access;Store: Store Read and Write Access&Store Only read access&Store access deny'      |
+		| 'Document.SalesReturn Branch: Branch Read and Write Access;Company: Company Only read access;Store: Store Read and Write Access'                                               |
+		| 'Document.SalesReturn Branch: Branch Read and Write Access;Company: Company Only read access;Store: Store Only read access'                                                    |
+		| 'Document.SalesReturn Branch: Branch Read and Write Access;Company: Company Only read access;Store: Store Read and Write Access&Store Only read access'                        |
+		| 'Document.SalesReturn Branch: Branch Read and Write Access;Company: Company Only read access;Store: Store Only read access&Store access deny'                                  |
+		| 'Document.SalesReturn Branch: Branch Read and Write Access;Company: Company Only read access;Store: Store Read and Write Access&Store access deny'                             |
+		| 'Document.SalesReturn Branch: Branch Read and Write Access;Company: Company Only read access;Store: Store Read and Write Access&Store Only read access&Store access deny'      |
+		| 'Document.SalesReturn Branch: Branch Only read access;Company: Company Only read access;Store: Store Read and Write Access'                                                    |
+		| 'Document.SalesReturn Branch: Branch Only read access;Company: Company Only read access;Store: Store Only read access'                                                         |
+		| 'Document.SalesReturn Branch: Branch Only read access;Company: Company Only read access;Store: Store Read and Write Access&Store Only read access'                             |
+		| 'Document.SalesReturn Branch: Branch Only read access;Company: Company Only read access;Store: Store Only read access&Store access deny'                                       |
+		| 'Document.SalesReturn Branch: Branch Only read access;Company: Company Only read access;Store: Store Read and Write Access&Store access deny'                                  |
+		| 'Document.SalesReturn Branch: Branch Only read access;Company: Company Only read access;Store: Store Read and Write Access&Store Only read access&Store access deny'           |
 	
+		
 							
 Scenario: 960151 check SalesReturnOrder rights (LimitedAccess)	
 	And I close all client application windows
 	Given I open hyperlink "e1cib/list/Document.SalesReturnOrder"
 	And "List" table became equal
-		| 'Number' | 'Company'                       | 'Store'                       | 'Description'                                                                                                                                                     |
-		| '1'      | 'Company Read and Write Access' | ''                            | 'Document.SalesReturnOrder Branch: Branch Read and Write Access;Company: Company Read and Write Access;'                                                          |
-		| '2'      | 'Company Read and Write Access' | 'Store Read and Write Access' | 'Document.SalesReturnOrder Branch: Branch Read and Write Access;Company: Company Read and Write Access;Store: Store Read and Write Access'                        |
-		| '3'      | 'Company Read and Write Access' | 'Store Only read access'      | 'Document.SalesReturnOrder Branch: Branch Read and Write Access;Company: Company Read and Write Access;Store: Store Only read access'                             |
-		| '5'      | 'Company Read and Write Access' | ''                            | 'Document.SalesReturnOrder Branch: Branch Read and Write Access;Company: Company Read and Write Access;Store: Store Read and Write Access&Store Only read access' |
-		| '9'      | 'Company Read and Write Access' | ''                            | 'Document.SalesReturnOrder Branch: Branch Only read access;Company: Company Read and Write Access;'                                                               |
-		| '10'     | 'Company Read and Write Access' | 'Store Read and Write Access' | 'Document.SalesReturnOrder Branch: Branch Only read access;Company: Company Read and Write Access;Store: Store Read and Write Access'                             |
-		| '11'     | 'Company Read and Write Access' | 'Store Only read access'      | 'Document.SalesReturnOrder Branch: Branch Only read access;Company: Company Read and Write Access;Store: Store Only read access'                                  |
-		| '13'     | 'Company Read and Write Access' | ''                            | 'Document.SalesReturnOrder Branch: Branch Only read access;Company: Company Read and Write Access;Store: Store Read and Write Access&Store Only read access'      |
-		| '25'     | 'Company Only read access'      | ''                            | 'Document.SalesReturnOrder Branch: Branch Read and Write Access;Company: Company Only read access;'                                                               |
-		| '26'     | 'Company Only read access'      | 'Store Read and Write Access' | 'Document.SalesReturnOrder Branch: Branch Read and Write Access;Company: Company Only read access;Store: Store Read and Write Access'                             |
-		| '27'     | 'Company Only read access'      | 'Store Only read access'      | 'Document.SalesReturnOrder Branch: Branch Read and Write Access;Company: Company Only read access;Store: Store Only read access'                                  |
-		| '29'     | 'Company Only read access'      | ''                            | 'Document.SalesReturnOrder Branch: Branch Read and Write Access;Company: Company Only read access;Store: Store Read and Write Access&Store Only read access'      |
-		| '33'     | 'Company Only read access'      | ''                            | 'Document.SalesReturnOrder Branch: Branch Only read access;Company: Company Only read access;'                                                                    |
-		| '34'     | 'Company Only read access'      | 'Store Read and Write Access' | 'Document.SalesReturnOrder Branch: Branch Only read access;Company: Company Only read access;Store: Store Read and Write Access'                                  |
-		| '35'     | 'Company Only read access'      | 'Store Only read access'      | 'Document.SalesReturnOrder Branch: Branch Only read access;Company: Company Only read access;Store: Store Only read access'                                       |
-		| '37'     | 'Company Only read access'      | ''                            | 'Document.SalesReturnOrder Branch: Branch Only read access;Company: Company Only read access;Store: Store Read and Write Access&Store Only read access'           |
+		| 'Description'                                                                                                                                                                       |
+		| 'Document.SalesReturnOrder Branch: Branch Read and Write Access;Company: Company Read and Write Access;Store: Store Read and Write Access'                                          |
+		| 'Document.SalesReturnOrder Branch: Branch Read and Write Access;Company: Company Read and Write Access;Store: Store Only read access'                                               |
+		| 'Document.SalesReturnOrder Branch: Branch Read and Write Access;Company: Company Read and Write Access;Store: Store Read and Write Access&Store Only read access'                   |
+		| 'Document.SalesReturnOrder Branch: Branch Read and Write Access;Company: Company Read and Write Access;Store: Store Only read access&Store access deny'                             |
+		| 'Document.SalesReturnOrder Branch: Branch Read and Write Access;Company: Company Read and Write Access;Store: Store Read and Write Access&Store access deny'                        |
+		| 'Document.SalesReturnOrder Branch: Branch Read and Write Access;Company: Company Read and Write Access;Store: Store Read and Write Access&Store Only read access&Store access deny' |
+		| 'Document.SalesReturnOrder Branch: Branch Only read access;Company: Company Read and Write Access;Store: Store Read and Write Access'                                               |
+		| 'Document.SalesReturnOrder Branch: Branch Only read access;Company: Company Read and Write Access;Store: Store Only read access'                                                    |
+		| 'Document.SalesReturnOrder Branch: Branch Only read access;Company: Company Read and Write Access;Store: Store Read and Write Access&Store Only read access'                        |
+		| 'Document.SalesReturnOrder Branch: Branch Only read access;Company: Company Read and Write Access;Store: Store Only read access&Store access deny'                                  |
+		| 'Document.SalesReturnOrder Branch: Branch Only read access;Company: Company Read and Write Access;Store: Store Read and Write Access&Store access deny'                             |
+		| 'Document.SalesReturnOrder Branch: Branch Only read access;Company: Company Read and Write Access;Store: Store Read and Write Access&Store Only read access&Store access deny'      |
+		| 'Document.SalesReturnOrder Branch: Branch Read and Write Access;Company: Company Only read access;Store: Store Read and Write Access'                                               |
+		| 'Document.SalesReturnOrder Branch: Branch Read and Write Access;Company: Company Only read access;Store: Store Only read access'                                                    |
+		| 'Document.SalesReturnOrder Branch: Branch Read and Write Access;Company: Company Only read access;Store: Store Read and Write Access&Store Only read access'                        |
+		| 'Document.SalesReturnOrder Branch: Branch Read and Write Access;Company: Company Only read access;Store: Store Only read access&Store access deny'                                  |
+		| 'Document.SalesReturnOrder Branch: Branch Read and Write Access;Company: Company Only read access;Store: Store Read and Write Access&Store access deny'                             |
+		| 'Document.SalesReturnOrder Branch: Branch Read and Write Access;Company: Company Only read access;Store: Store Read and Write Access&Store Only read access&Store access deny'      |
+		| 'Document.SalesReturnOrder Branch: Branch Only read access;Company: Company Only read access;Store: Store Read and Write Access'                                                    |
+		| 'Document.SalesReturnOrder Branch: Branch Only read access;Company: Company Only read access;Store: Store Only read access'                                                         |
+		| 'Document.SalesReturnOrder Branch: Branch Only read access;Company: Company Only read access;Store: Store Read and Write Access&Store Only read access'                             |
+		| 'Document.SalesReturnOrder Branch: Branch Only read access;Company: Company Only read access;Store: Store Only read access&Store access deny'                                       |
+		| 'Document.SalesReturnOrder Branch: Branch Only read access;Company: Company Only read access;Store: Store Read and Write Access&Store access deny'                                  |
+		| 'Document.SalesReturnOrder Branch: Branch Only read access;Company: Company Only read access;Store: Store Read and Write Access&Store Only read access&Store access deny'           |
 	
+		
 Scenario: 960152 check ShipmentConfirmation rights (LimitedAccess)	
 	And I close all client application windows
 	Given I open hyperlink "e1cib/list/Document.ShipmentConfirmation"
 	And "List" table became equal
-		| 'Number' | 'Company'                       | 'Store'                       | 'Description'                                                                                                                                                         |
-		| '1'      | 'Company Read and Write Access' | ''                            | 'Document.ShipmentConfirmation Branch: Branch Read and Write Access;Company: Company Read and Write Access;'                                                          |
-		| '2'      | 'Company Read and Write Access' | 'Store Read and Write Access' | 'Document.ShipmentConfirmation Branch: Branch Read and Write Access;Company: Company Read and Write Access;Store: Store Read and Write Access'                        |
-		| '3'      | 'Company Read and Write Access' | 'Store Only read access'      | 'Document.ShipmentConfirmation Branch: Branch Read and Write Access;Company: Company Read and Write Access;Store: Store Only read access'                             |
-		| '5'      | 'Company Read and Write Access' | ''                            | 'Document.ShipmentConfirmation Branch: Branch Read and Write Access;Company: Company Read and Write Access;Store: Store Read and Write Access&Store Only read access' |
-		| '9'      | 'Company Read and Write Access' | ''                            | 'Document.ShipmentConfirmation Branch: Branch Only read access;Company: Company Read and Write Access;'                                                               |
-		| '10'     | 'Company Read and Write Access' | 'Store Read and Write Access' | 'Document.ShipmentConfirmation Branch: Branch Only read access;Company: Company Read and Write Access;Store: Store Read and Write Access'                             |
-		| '11'     | 'Company Read and Write Access' | 'Store Only read access'      | 'Document.ShipmentConfirmation Branch: Branch Only read access;Company: Company Read and Write Access;Store: Store Only read access'                                  |
-		| '13'     | 'Company Read and Write Access' | ''                            | 'Document.ShipmentConfirmation Branch: Branch Only read access;Company: Company Read and Write Access;Store: Store Read and Write Access&Store Only read access'      |
-		| '25'     | 'Company Only read access'      | ''                            | 'Document.ShipmentConfirmation Branch: Branch Read and Write Access;Company: Company Only read access;'                                                               |
-		| '26'     | 'Company Only read access'      | 'Store Read and Write Access' | 'Document.ShipmentConfirmation Branch: Branch Read and Write Access;Company: Company Only read access;Store: Store Read and Write Access'                             |
-		| '27'     | 'Company Only read access'      | 'Store Only read access'      | 'Document.ShipmentConfirmation Branch: Branch Read and Write Access;Company: Company Only read access;Store: Store Only read access'                                  |
-		| '29'     | 'Company Only read access'      | ''                            | 'Document.ShipmentConfirmation Branch: Branch Read and Write Access;Company: Company Only read access;Store: Store Read and Write Access&Store Only read access'      |
-		| '33'     | 'Company Only read access'      | ''                            | 'Document.ShipmentConfirmation Branch: Branch Only read access;Company: Company Only read access;'                                                                    |
-		| '34'     | 'Company Only read access'      | 'Store Read and Write Access' | 'Document.ShipmentConfirmation Branch: Branch Only read access;Company: Company Only read access;Store: Store Read and Write Access'                                  |
-		| '35'     | 'Company Only read access'      | 'Store Only read access'      | 'Document.ShipmentConfirmation Branch: Branch Only read access;Company: Company Only read access;Store: Store Only read access'                                       |
-		| '37'     | 'Company Only read access'      | ''                            | 'Document.ShipmentConfirmation Branch: Branch Only read access;Company: Company Only read access;Store: Store Read and Write Access&Store Only read access'           |
+		| 'Description'                                                                                                                                                                           |
+		| 'Document.ShipmentConfirmation Branch: Branch Read and Write Access;Company: Company Read and Write Access;Store: Store Read and Write Access'                                          |
+		| 'Document.ShipmentConfirmation Branch: Branch Read and Write Access;Company: Company Read and Write Access;Store: Store Only read access'                                               |
+		| 'Document.ShipmentConfirmation Branch: Branch Read and Write Access;Company: Company Read and Write Access;Store: Store Read and Write Access&Store Only read access'                   |
+		| 'Document.ShipmentConfirmation Branch: Branch Read and Write Access;Company: Company Read and Write Access;Store: Store Only read access&Store access deny'                             |
+		| 'Document.ShipmentConfirmation Branch: Branch Read and Write Access;Company: Company Read and Write Access;Store: Store Read and Write Access&Store access deny'                        |
+		| 'Document.ShipmentConfirmation Branch: Branch Read and Write Access;Company: Company Read and Write Access;Store: Store Read and Write Access&Store Only read access&Store access deny' |
+		| 'Document.ShipmentConfirmation Branch: Branch Only read access;Company: Company Read and Write Access;Store: Store Read and Write Access'                                               |
+		| 'Document.ShipmentConfirmation Branch: Branch Only read access;Company: Company Read and Write Access;Store: Store Only read access'                                                    |
+		| 'Document.ShipmentConfirmation Branch: Branch Only read access;Company: Company Read and Write Access;Store: Store Read and Write Access&Store Only read access'                        |
+		| 'Document.ShipmentConfirmation Branch: Branch Only read access;Company: Company Read and Write Access;Store: Store Only read access&Store access deny'                                  |
+		| 'Document.ShipmentConfirmation Branch: Branch Only read access;Company: Company Read and Write Access;Store: Store Read and Write Access&Store access deny'                             |
+		| 'Document.ShipmentConfirmation Branch: Branch Only read access;Company: Company Read and Write Access;Store: Store Read and Write Access&Store Only read access&Store access deny'      |
+		| 'Document.ShipmentConfirmation Branch: Branch Read and Write Access;Company: Company Only read access;Store: Store Read and Write Access'                                               |
+		| 'Document.ShipmentConfirmation Branch: Branch Read and Write Access;Company: Company Only read access;Store: Store Only read access'                                                    |
+		| 'Document.ShipmentConfirmation Branch: Branch Read and Write Access;Company: Company Only read access;Store: Store Read and Write Access&Store Only read access'                        |
+		| 'Document.ShipmentConfirmation Branch: Branch Read and Write Access;Company: Company Only read access;Store: Store Only read access&Store access deny'                                  |
+		| 'Document.ShipmentConfirmation Branch: Branch Read and Write Access;Company: Company Only read access;Store: Store Read and Write Access&Store access deny'                             |
+		| 'Document.ShipmentConfirmation Branch: Branch Read and Write Access;Company: Company Only read access;Store: Store Read and Write Access&Store Only read access&Store access deny'      |
+		| 'Document.ShipmentConfirmation Branch: Branch Only read access;Company: Company Only read access;Store: Store Read and Write Access'                                                    |
+		| 'Document.ShipmentConfirmation Branch: Branch Only read access;Company: Company Only read access;Store: Store Only read access'                                                         |
+		| 'Document.ShipmentConfirmation Branch: Branch Only read access;Company: Company Only read access;Store: Store Read and Write Access&Store Only read access'                             |
+		| 'Document.ShipmentConfirmation Branch: Branch Only read access;Company: Company Only read access;Store: Store Only read access&Store access deny'                                       |
+		| 'Document.ShipmentConfirmation Branch: Branch Only read access;Company: Company Only read access;Store: Store Read and Write Access&Store access deny'                                  |
+		| 'Document.ShipmentConfirmation Branch: Branch Only read access;Company: Company Only read access;Store: Store Read and Write Access&Store Only read access&Store access deny'           |
 	
+		
 Scenario: 960153 check StockAdjustmentAsSurplus rights (LimitedAccess)	
 	And I close all client application windows
 	Given I open hyperlink "e1cib/list/Document.StockAdjustmentAsSurplus"
 	And "List" table became equal
-		| 'Number' | 'Store'                       | 'Description'                                                                                                                                       |
-		| '1'      | 'Store Read and Write Access' | 'Document.StockAdjustmentAsSurplus Store: Store Read and Write Access;Branch: Branch Read and Write Access;Company: Company Read and Write Access;' |
-		| '2'      | 'Store Only read access'      | 'Document.StockAdjustmentAsSurplus Store: Store Only read access;Branch: Branch Read and Write Access;Company: Company Read and Write Access;'      |
-		| '4'      | 'Store Read and Write Access' | 'Document.StockAdjustmentAsSurplus Store: Store Read and Write Access;Branch: Branch Only read access;Company: Company Read and Write Access;'      |
-		| '5'      | 'Store Only read access'      | 'Document.StockAdjustmentAsSurplus Store: Store Only read access;Branch: Branch Only read access;Company: Company Read and Write Access;'           |
-		| '10'     | 'Store Read and Write Access' | 'Document.StockAdjustmentAsSurplus Store: Store Read and Write Access;Branch: Branch Read and Write Access;Company: Company Only read access;'      |
-		| '11'     | 'Store Only read access'      | 'Document.StockAdjustmentAsSurplus Store: Store Only read access;Branch: Branch Read and Write Access;Company: Company Only read access;'           |
-		| '13'     | 'Store Read and Write Access' | 'Document.StockAdjustmentAsSurplus Store: Store Read and Write Access;Branch: Branch Only read access;Company: Company Only read access;'           |
-		| '14'     | 'Store Only read access'      | 'Document.StockAdjustmentAsSurplus Store: Store Only read access;Branch: Branch Only read access;Company: Company Only read access;'                |
+		| 'Description'                                                                                                                                       |
+		| 'Document.StockAdjustmentAsSurplus Store: Store Read and Write Access;Branch: Branch Read and Write Access;Company: Company Read and Write Access;' |
+		| 'Document.StockAdjustmentAsSurplus Store: Store Only read access;Branch: Branch Read and Write Access;Company: Company Read and Write Access;'      |
+		| 'Document.StockAdjustmentAsSurplus Store: Store Read and Write Access;Branch: Branch Only read access;Company: Company Read and Write Access;'      |
+		| 'Document.StockAdjustmentAsSurplus Store: Store Only read access;Branch: Branch Only read access;Company: Company Read and Write Access;'           |
+		| 'Document.StockAdjustmentAsSurplus Store: Store Read and Write Access;Branch: Branch Read and Write Access;Company: Company Only read access;'      |
+		| 'Document.StockAdjustmentAsSurplus Store: Store Only read access;Branch: Branch Read and Write Access;Company: Company Only read access;'           |
+		| 'Document.StockAdjustmentAsSurplus Store: Store Read and Write Access;Branch: Branch Only read access;Company: Company Only read access;'           |
+		| 'Document.StockAdjustmentAsSurplus Store: Store Only read access;Branch: Branch Only read access;Company: Company Only read access;'                |
 	
 Scenario: 960154 check StockAdjustmentAsWriteOff rights (LimitedAccess)	
 	And I close all client application windows
 	Given I open hyperlink "e1cib/list/Document.StockAdjustmentAsWriteOff"
 	And "List" table became equal
-		| 'Number' | 'Company'                       | 'Store'                       | 'Description'                                                                                                                                        |
-		| '1'      | 'Company Read and Write Access' | 'Store Read and Write Access' | 'Document.StockAdjustmentAsWriteOff Store: Store Read and Write Access;Branch: Branch Read and Write Access;Company: Company Read and Write Access;' |
-		| '2'      | 'Company Read and Write Access' | 'Store Only read access'      | 'Document.StockAdjustmentAsWriteOff Store: Store Only read access;Branch: Branch Read and Write Access;Company: Company Read and Write Access;'      |
-		| '4'      | 'Company Read and Write Access' | 'Store Read and Write Access' | 'Document.StockAdjustmentAsWriteOff Store: Store Read and Write Access;Branch: Branch Only read access;Company: Company Read and Write Access;'      |
-		| '5'      | 'Company Read and Write Access' | 'Store Only read access'      | 'Document.StockAdjustmentAsWriteOff Store: Store Only read access;Branch: Branch Only read access;Company: Company Read and Write Access;'           |
-		| '10'     | 'Company Only read access'      | 'Store Read and Write Access' | 'Document.StockAdjustmentAsWriteOff Store: Store Read and Write Access;Branch: Branch Read and Write Access;Company: Company Only read access;'      |
-		| '11'     | 'Company Only read access'      | 'Store Only read access'      | 'Document.StockAdjustmentAsWriteOff Store: Store Only read access;Branch: Branch Read and Write Access;Company: Company Only read access;'           |
-		| '13'     | 'Company Only read access'      | 'Store Read and Write Access' | 'Document.StockAdjustmentAsWriteOff Store: Store Read and Write Access;Branch: Branch Only read access;Company: Company Only read access;'           |
-		| '14'     | 'Company Only read access'      | 'Store Only read access'      | 'Document.StockAdjustmentAsWriteOff Store: Store Only read access;Branch: Branch Only read access;Company: Company Only read access;'                |
+		| 'Description'                                                                                                                                        |
+		| 'Document.StockAdjustmentAsWriteOff Store: Store Read and Write Access;Branch: Branch Read and Write Access;Company: Company Read and Write Access;' |
+		| 'Document.StockAdjustmentAsWriteOff Store: Store Only read access;Branch: Branch Read and Write Access;Company: Company Read and Write Access;'      |
+		| 'Document.StockAdjustmentAsWriteOff Store: Store Read and Write Access;Branch: Branch Only read access;Company: Company Read and Write Access;'      |
+		| 'Document.StockAdjustmentAsWriteOff Store: Store Only read access;Branch: Branch Only read access;Company: Company Read and Write Access;'           |
+		| 'Document.StockAdjustmentAsWriteOff Store: Store Read and Write Access;Branch: Branch Read and Write Access;Company: Company Only read access;'      |
+		| 'Document.StockAdjustmentAsWriteOff Store: Store Only read access;Branch: Branch Read and Write Access;Company: Company Only read access;'           |
+		| 'Document.StockAdjustmentAsWriteOff Store: Store Read and Write Access;Branch: Branch Only read access;Company: Company Only read access;'           |
+		| 'Document.StockAdjustmentAsWriteOff Store: Store Only read access;Branch: Branch Only read access;Company: Company Only read access;'                |
 	
 Scenario: 960155 check TimeSheet rights (LimitedAccess)	
 	And I close all client application windows
 	Given I open hyperlink "e1cib/list/Document.TimeSheet"
 	And "List" table became equal
-		| 'Number' | 'Company'                       | 'Branch'                       | 'Description'                                                                                     |
-		| '1'      | 'Company Read and Write Access' | 'Branch Read and Write Access' | 'Document.TimeSheet Branch: Branch Read and Write Access;Company: Company Read and Write Access;' |
-		| '2'      | 'Company Read and Write Access' | 'Branch Only read access'      | 'Document.TimeSheet Branch: Branch Only read access;Company: Company Read and Write Access;'      |
-		| '4'      | 'Company Only read access'      | 'Branch Read and Write Access' | 'Document.TimeSheet Branch: Branch Read and Write Access;Company: Company Only read access;'      |
-		| '5'      | 'Company Only read access'      | 'Branch Only read access'      | 'Document.TimeSheet Branch: Branch Only read access;Company: Company Only read access;'           |
+		| 'Description'                                                                                     |
+		| 'Document.TimeSheet Branch: Branch Read and Write Access;Company: Company Read and Write Access;' |
+		| 'Document.TimeSheet Branch: Branch Only read access;Company: Company Read and Write Access;'      |
+		| 'Document.TimeSheet Branch: Branch Read and Write Access;Company: Company Only read access;'      |
+		| 'Document.TimeSheet Branch: Branch Only read access;Company: Company Only read access;'           |
 	
 Scenario: 960156 check Unbundling rights (LimitedAccess)	
 	And I close all client application windows
 	Given I open hyperlink "e1cib/list/Document.Unbundling"	
 	And "List" table became equal
-		| 'Number' | 'Company'                       | 'Store'                       | 'Description'                                                                                                                         |
-		| '1'      | 'Company Read and Write Access' | 'Store Read and Write Access' | 'Document.Unbundling Store: Store Read and Write Access;Branch: Branch Read and Write Access;Company: Company Read and Write Access;' |
-		| '2'      | 'Company Read and Write Access' | 'Store Only read access'      | 'Document.Unbundling Store: Store Only read access;Branch: Branch Read and Write Access;Company: Company Read and Write Access;'      |
-		| '4'      | 'Company Read and Write Access' | 'Store Read and Write Access' | 'Document.Unbundling Store: Store Read and Write Access;Branch: Branch Only read access;Company: Company Read and Write Access;'      |
-		| '5'      | 'Company Read and Write Access' | 'Store Only read access'      | 'Document.Unbundling Store: Store Only read access;Branch: Branch Only read access;Company: Company Read and Write Access;'           |
-		| '10'     | 'Company Only read access'      | 'Store Read and Write Access' | 'Document.Unbundling Store: Store Read and Write Access;Branch: Branch Read and Write Access;Company: Company Only read access;'      |
-		| '11'     | 'Company Only read access'      | 'Store Only read access'      | 'Document.Unbundling Store: Store Only read access;Branch: Branch Read and Write Access;Company: Company Only read access;'           |
-		| '13'     | 'Company Only read access'      | 'Store Read and Write Access' | 'Document.Unbundling Store: Store Read and Write Access;Branch: Branch Only read access;Company: Company Only read access;'           |
-		| '14'     | 'Company Only read access'      | 'Store Only read access'      | 'Document.Unbundling Store: Store Only read access;Branch: Branch Only read access;Company: Company Only read access;'                |
+		| 'Description'                                                                                                                         |
+		| 'Document.Unbundling Store: Store Read and Write Access;Branch: Branch Read and Write Access;Company: Company Read and Write Access;' |
+		| 'Document.Unbundling Store: Store Only read access;Branch: Branch Read and Write Access;Company: Company Read and Write Access;'      |
+		| 'Document.Unbundling Store: Store Read and Write Access;Branch: Branch Only read access;Company: Company Read and Write Access;'      |
+		| 'Document.Unbundling Store: Store Only read access;Branch: Branch Only read access;Company: Company Read and Write Access;'           |
+		| 'Document.Unbundling Store: Store Read and Write Access;Branch: Branch Read and Write Access;Company: Company Only read access;'      |
+		| 'Document.Unbundling Store: Store Only read access;Branch: Branch Read and Write Access;Company: Company Only read access;'           |
+		| 'Document.Unbundling Store: Store Read and Write Access;Branch: Branch Only read access;Company: Company Only read access;'           |
+		| 'Document.Unbundling Store: Store Only read access;Branch: Branch Only read access;Company: Company Only read access;'                |
 	
 Scenario: 960157 check VendorsAdvancesClosing rights (LimitedAccess)	
 	And I close all client application windows
 	Given I open hyperlink "e1cib/list/Document.VendorsAdvancesClosing"	
 	And "List" table became equal
-		| 'Number' | 'Company'                       | 'Branch'                       | 'Description'                                                                                                  |
-		| '1'      | 'Company Read and Write Access' | 'Branch Read and Write Access' | 'Document.VendorsAdvancesClosing Branch: Branch Read and Write Access;Company: Company Read and Write Access;' |
-		| '2'      | 'Company Read and Write Access' | 'Branch Only read access'      | 'Document.VendorsAdvancesClosing Branch: Branch Only read access;Company: Company Read and Write Access;'      |
-		| '4'      | 'Company Only read access'      | 'Branch Read and Write Access' | 'Document.VendorsAdvancesClosing Branch: Branch Read and Write Access;Company: Company Only read access;'      |
-		| '5'      | 'Company Only read access'      | 'Branch Only read access'      | 'Document.VendorsAdvancesClosing Branch: Branch Only read access;Company: Company Only read access;'           |
+		| 'Description'                                                                                                  |
+		| 'Document.VendorsAdvancesClosing Branch: Branch Read and Write Access;Company: Company Read and Write Access;' |
+		| 'Document.VendorsAdvancesClosing Branch: Branch Only read access;Company: Company Read and Write Access;'      |
+		| 'Document.VendorsAdvancesClosing Branch: Branch Read and Write Access;Company: Company Only read access;'      |
+		| 'Document.VendorsAdvancesClosing Branch: Branch Only read access;Company: Company Only read access;'           |
 	
 Scenario: 960158 check WorkOrder rights (LimitedAccess)	
 	And I close all client application windows
 	Given I open hyperlink "e1cib/list/Document.WorkOrder"
 	And "List" table became equal
-		| 'Number' | 'Company'                       | 'Branch'                       | 'Description'                                                                                     |
-		| '1'      | 'Company Read and Write Access' | 'Branch Read and Write Access' | 'Document.WorkOrder Branch: Branch Read and Write Access;Company: Company Read and Write Access;' |
-		| '2'      | 'Company Read and Write Access' | 'Branch Only read access'      | 'Document.WorkOrder Branch: Branch Only read access;Company: Company Read and Write Access;'      |
-		| '4'      | 'Company Only read access'      | 'Branch Read and Write Access' | 'Document.WorkOrder Branch: Branch Read and Write Access;Company: Company Only read access;'      |
-		| '5'      | 'Company Only read access'      | 'Branch Only read access'      | 'Document.WorkOrder Branch: Branch Only read access;Company: Company Only read access;'           |
+		| 'Description'                                                                                     |
+		| 'Document.WorkOrder Branch: Branch Read and Write Access;Company: Company Read and Write Access;' |
+		| 'Document.WorkOrder Branch: Branch Only read access;Company: Company Read and Write Access;'      |
+		| 'Document.WorkOrder Branch: Branch Read and Write Access;Company: Company Only read access;'      |
+		| 'Document.WorkOrder Branch: Branch Only read access;Company: Company Only read access;'           |
 	
 Scenario: 960159 check WorkOrderClosing rights (LimitedAccess)	
 	And I close all client application windows
 	Given I open hyperlink "e1cib/list/Document.WorkOrderClosing"	
 	And "List" table became equal
-		| 'Number' | 'Company'                       | 'Branch'                       | 'Description'                                                                                            |
-		| '1'      | 'Company Read and Write Access' | 'Branch Read and Write Access' | 'Document.WorkOrderClosing Branch: Branch Read and Write Access;Company: Company Read and Write Access;' |
-		| '2'      | 'Company Read and Write Access' | 'Branch Only read access'      | 'Document.WorkOrderClosing Branch: Branch Only read access;Company: Company Read and Write Access;'      |
-		| '4'      | 'Company Only read access'      | 'Branch Read and Write Access' | 'Document.WorkOrderClosing Branch: Branch Read and Write Access;Company: Company Only read access;'      |
-		| '5'      | 'Company Only read access'      | 'Branch Only read access'      | 'Document.WorkOrderClosing Branch: Branch Only read access;Company: Company Only read access;'           |
+		| 'Description'                                                                                            |
+		| 'Document.WorkOrderClosing Branch: Branch Read and Write Access;Company: Company Read and Write Access;' |
+		| 'Document.WorkOrderClosing Branch: Branch Only read access;Company: Company Read and Write Access;'      |
+		| 'Document.WorkOrderClosing Branch: Branch Read and Write Access;Company: Company Only read access;'      |
+		| 'Document.WorkOrderClosing Branch: Branch Only read access;Company: Company Only read access;'           |
 	
 Scenario: 960160 check WorkSheet rights (LimitedAccess)	
 	And I close all client application windows
 	Given I open hyperlink "e1cib/list/Document.WorkSheet"
 	And "List" table became equal
-		| 'Number' | 'Company'                       | 'Branch'                       | 'Description'                                                                                     |
-		| '1'      | 'Company Read and Write Access' | 'Branch Read and Write Access' | 'Document.WorkSheet Branch: Branch Read and Write Access;Company: Company Read and Write Access;' |
-		| '2'      | 'Company Read and Write Access' | 'Branch Only read access'      | 'Document.WorkSheet Branch: Branch Only read access;Company: Company Read and Write Access;'      |
-		| '4'      | 'Company Only read access'      | 'Branch Read and Write Access' | 'Document.WorkSheet Branch: Branch Read and Write Access;Company: Company Only read access;'      |
-		| '5'      | 'Company Only read access'      | 'Branch Only read access'      | 'Document.WorkSheet Branch: Branch Only read access;Company: Company Only read access;'           |
+		| 'Description'                                                                                     |
+		| 'Document.WorkSheet Branch: Branch Read and Write Access;Company: Company Read and Write Access;' |
+		| 'Document.WorkSheet Branch: Branch Only read access;Company: Company Read and Write Access;'      |
+		| 'Document.WorkSheet Branch: Branch Read and Write Access;Company: Company Only read access;'      |
+		| 'Document.WorkSheet Branch: Branch Only read access;Company: Company Only read access;'           |
+
+Scenario: 960161 check CommissioningOfFixedAsset rights (LimitedAccess)	
+	And I close all client application windows
+	Given I open hyperlink "e1cib/list/Document.CommissioningOfFixedAsset"
+	And "List" table became equal
+		| 'Description'                                                                                                                                                                                |
+		| 'Document.CommissioningOfFixedAsset Branch: Branch Read and Write Access;Company: Company Read and Write Access;Store: Store Read and Write Access'                                          |
+		| 'Document.CommissioningOfFixedAsset Branch: Branch Read and Write Access;Company: Company Read and Write Access;Store: Store Only read access'                                               |
+		| 'Document.CommissioningOfFixedAsset Branch: Branch Read and Write Access;Company: Company Read and Write Access;Store: Store Read and Write Access&Store Only read access'                   |
+		| 'Document.CommissioningOfFixedAsset Branch: Branch Read and Write Access;Company: Company Read and Write Access;Store: Store Only read access&Store access deny'                             |
+		| 'Document.CommissioningOfFixedAsset Branch: Branch Read and Write Access;Company: Company Read and Write Access;Store: Store Read and Write Access&Store access deny'                        |
+		| 'Document.CommissioningOfFixedAsset Branch: Branch Read and Write Access;Company: Company Read and Write Access;Store: Store Read and Write Access&Store Only read access&Store access deny' |
+		| 'Document.CommissioningOfFixedAsset Branch: Branch Only read access;Company: Company Read and Write Access;Store: Store Read and Write Access'                                               |
+		| 'Document.CommissioningOfFixedAsset Branch: Branch Only read access;Company: Company Read and Write Access;Store: Store Only read access'                                                    |
+		| 'Document.CommissioningOfFixedAsset Branch: Branch Only read access;Company: Company Read and Write Access;Store: Store Read and Write Access&Store Only read access'                        |
+		| 'Document.CommissioningOfFixedAsset Branch: Branch Only read access;Company: Company Read and Write Access;Store: Store Only read access&Store access deny'                                  |
+		| 'Document.CommissioningOfFixedAsset Branch: Branch Only read access;Company: Company Read and Write Access;Store: Store Read and Write Access&Store access deny'                             |
+		| 'Document.CommissioningOfFixedAsset Branch: Branch Only read access;Company: Company Read and Write Access;Store: Store Read and Write Access&Store Only read access&Store access deny'      |
+		| 'Document.CommissioningOfFixedAsset Branch: Branch Read and Write Access;Company: Company Only read access;Store: Store Read and Write Access'                                               |
+		| 'Document.CommissioningOfFixedAsset Branch: Branch Read and Write Access;Company: Company Only read access;Store: Store Only read access'                                                    |
+		| 'Document.CommissioningOfFixedAsset Branch: Branch Read and Write Access;Company: Company Only read access;Store: Store Read and Write Access&Store Only read access'                        |
+		| 'Document.CommissioningOfFixedAsset Branch: Branch Read and Write Access;Company: Company Only read access;Store: Store Only read access&Store access deny'                                  |
+		| 'Document.CommissioningOfFixedAsset Branch: Branch Read and Write Access;Company: Company Only read access;Store: Store Read and Write Access&Store access deny'                             |
+		| 'Document.CommissioningOfFixedAsset Branch: Branch Read and Write Access;Company: Company Only read access;Store: Store Read and Write Access&Store Only read access&Store access deny'      |
+		| 'Document.CommissioningOfFixedAsset Branch: Branch Only read access;Company: Company Only read access;Store: Store Read and Write Access'                                                    |
+		| 'Document.CommissioningOfFixedAsset Branch: Branch Only read access;Company: Company Only read access;Store: Store Only read access'                                                         |
+		| 'Document.CommissioningOfFixedAsset Branch: Branch Only read access;Company: Company Only read access;Store: Store Read and Write Access&Store Only read access'                             |
+		| 'Document.CommissioningOfFixedAsset Branch: Branch Only read access;Company: Company Only read access;Store: Store Only read access&Store access deny'                                       |
+		| 'Document.CommissioningOfFixedAsset Branch: Branch Only read access;Company: Company Only read access;Store: Store Read and Write Access&Store access deny'                                  |
+		| 'Document.CommissioningOfFixedAsset Branch: Branch Only read access;Company: Company Only read access;Store: Store Read and Write Access&Store Only read access&Store access deny'           |
 	
-Scenario: 960180 try open and save SO (LimitedAccess)
+		
+Scenario: 960162 check DecommissioningOfFixedAsset rights (LimitedAccess)	
 	And I close all client application windows
-	Given I open hyperlink "e1cib/list/Document.SalesOrder"
-	And I go to line in "List" table
-		| 'Description'                                                                                      |
-		| 'Document.SalesOrder Branch: Branch Read and Write Access;Company: Company Read and Write Access;' |
-	And I select current line in "List" table
-	And I click "Save" button
-	And I close current window
-	And I go to line in "List" table
-		| 'Description'                                                                                      |
-		| 'Document.SalesOrder Branch: Branch Only read access;Company: Company Only read access;Store: Store Read and Write Access&Store Only read access' |
-	And I select current line in "List" table
-	And I click "Save" button
-	Then "1C:Enterprise" window is opened
-	And I click the button named "OK"
+	Given I open hyperlink "e1cib/list/Document.DecommissioningOfFixedAsset"
+	And "List" table became equal
+		| 'Description'                                                                                                                                                                                  |
+		| 'Document.DecommissioningOfFixedAsset Branch: Branch Read and Write Access;Company: Company Read and Write Access;Store: Store Read and Write Access'                                          |
+		| 'Document.DecommissioningOfFixedAsset Branch: Branch Read and Write Access;Company: Company Read and Write Access;Store: Store Only read access'                                               |
+		| 'Document.DecommissioningOfFixedAsset Branch: Branch Read and Write Access;Company: Company Read and Write Access;Store: Store Read and Write Access&Store Only read access'                   |
+		| 'Document.DecommissioningOfFixedAsset Branch: Branch Read and Write Access;Company: Company Read and Write Access;Store: Store Only read access&Store access deny'                             |
+		| 'Document.DecommissioningOfFixedAsset Branch: Branch Read and Write Access;Company: Company Read and Write Access;Store: Store Read and Write Access&Store access deny'                        |
+		| 'Document.DecommissioningOfFixedAsset Branch: Branch Read and Write Access;Company: Company Read and Write Access;Store: Store Read and Write Access&Store Only read access&Store access deny' |
+		| 'Document.DecommissioningOfFixedAsset Branch: Branch Only read access;Company: Company Read and Write Access;Store: Store Read and Write Access'                                               |
+		| 'Document.DecommissioningOfFixedAsset Branch: Branch Only read access;Company: Company Read and Write Access;Store: Store Only read access'                                                    |
+		| 'Document.DecommissioningOfFixedAsset Branch: Branch Only read access;Company: Company Read and Write Access;Store: Store Read and Write Access&Store Only read access'                        |
+		| 'Document.DecommissioningOfFixedAsset Branch: Branch Only read access;Company: Company Read and Write Access;Store: Store Only read access&Store access deny'                                  |
+		| 'Document.DecommissioningOfFixedAsset Branch: Branch Only read access;Company: Company Read and Write Access;Store: Store Read and Write Access&Store access deny'                             |
+		| 'Document.DecommissioningOfFixedAsset Branch: Branch Only read access;Company: Company Read and Write Access;Store: Store Read and Write Access&Store Only read access&Store access deny'      |
+		| 'Document.DecommissioningOfFixedAsset Branch: Branch Read and Write Access;Company: Company Only read access;Store: Store Read and Write Access'                                               |
+		| 'Document.DecommissioningOfFixedAsset Branch: Branch Read and Write Access;Company: Company Only read access;Store: Store Only read access'                                                    |
+		| 'Document.DecommissioningOfFixedAsset Branch: Branch Read and Write Access;Company: Company Only read access;Store: Store Read and Write Access&Store Only read access'                        |
+		| 'Document.DecommissioningOfFixedAsset Branch: Branch Read and Write Access;Company: Company Only read access;Store: Store Only read access&Store access deny'                                  |
+		| 'Document.DecommissioningOfFixedAsset Branch: Branch Read and Write Access;Company: Company Only read access;Store: Store Read and Write Access&Store access deny'                             |
+		| 'Document.DecommissioningOfFixedAsset Branch: Branch Read and Write Access;Company: Company Only read access;Store: Store Read and Write Access&Store Only read access&Store access deny'      |
+		| 'Document.DecommissioningOfFixedAsset Branch: Branch Only read access;Company: Company Only read access;Store: Store Read and Write Access'                                                    |
+		| 'Document.DecommissioningOfFixedAsset Branch: Branch Only read access;Company: Company Only read access;Store: Store Only read access'                                                         |
+		| 'Document.DecommissioningOfFixedAsset Branch: Branch Only read access;Company: Company Only read access;Store: Store Read and Write Access&Store Only read access'                             |
+		| 'Document.DecommissioningOfFixedAsset Branch: Branch Only read access;Company: Company Only read access;Store: Store Only read access&Store access deny'                                       |
+		| 'Document.DecommissioningOfFixedAsset Branch: Branch Only read access;Company: Company Only read access;Store: Store Read and Write Access&Store access deny'                                  |
+		| 'Document.DecommissioningOfFixedAsset Branch: Branch Only read access;Company: Company Only read access;Store: Store Read and Write Access&Store Only read access&Store access deny'           |
+	
+		
+Scenario: 960163 check DecommissioningOfFixedAsset rights (LimitedAccess)	
 	And I close all client application windows
+	Given I open hyperlink "e1cib/list/Document.FixedAssetTransfer"
+	And "List" table became equal
+		| 'Description'                                                                                              |
+		| 'Document.FixedAssetTransfer Branch: Branch Read and Write Access;Company: Company Read and Write Access;' |
+		| 'Document.FixedAssetTransfer Branch: Branch Only read access;Company: Company Read and Write Access;'      |
+		| 'Document.FixedAssetTransfer Branch: Branch Read and Write Access;Company: Company Only read access;'      |
+		| 'Document.FixedAssetTransfer Branch: Branch Only read access;Company: Company Only read access;'           |
+	
+		
+Scenario: 960164 check DecommissioningOfFixedAsset rights (LimitedAccess)	
+	And I close all client application windows
+	Given I open hyperlink "e1cib/list/Document.ModernizationOfFixedAsset"
+	And "List" table became equal
+		| 'Description'                                                                                                                                                                                |
+		| 'Document.ModernizationOfFixedAsset Branch: Branch Read and Write Access;Company: Company Read and Write Access;Store: Store Read and Write Access'                                          |
+		| 'Document.ModernizationOfFixedAsset Branch: Branch Read and Write Access;Company: Company Read and Write Access;Store: Store Only read access'                                               |
+		| 'Document.ModernizationOfFixedAsset Branch: Branch Read and Write Access;Company: Company Read and Write Access;Store: Store Read and Write Access&Store Only read access'                   |
+		| 'Document.ModernizationOfFixedAsset Branch: Branch Read and Write Access;Company: Company Read and Write Access;Store: Store Only read access&Store access deny'                             |
+		| 'Document.ModernizationOfFixedAsset Branch: Branch Read and Write Access;Company: Company Read and Write Access;Store: Store Read and Write Access&Store access deny'                        |
+		| 'Document.ModernizationOfFixedAsset Branch: Branch Read and Write Access;Company: Company Read and Write Access;Store: Store Read and Write Access&Store Only read access&Store access deny' |
+		| 'Document.ModernizationOfFixedAsset Branch: Branch Only read access;Company: Company Read and Write Access;Store: Store Read and Write Access'                                               |
+		| 'Document.ModernizationOfFixedAsset Branch: Branch Only read access;Company: Company Read and Write Access;Store: Store Only read access'                                                    |
+		| 'Document.ModernizationOfFixedAsset Branch: Branch Only read access;Company: Company Read and Write Access;Store: Store Read and Write Access&Store Only read access'                        |
+		| 'Document.ModernizationOfFixedAsset Branch: Branch Only read access;Company: Company Read and Write Access;Store: Store Only read access&Store access deny'                                  |
+		| 'Document.ModernizationOfFixedAsset Branch: Branch Only read access;Company: Company Read and Write Access;Store: Store Read and Write Access&Store access deny'                             |
+		| 'Document.ModernizationOfFixedAsset Branch: Branch Only read access;Company: Company Read and Write Access;Store: Store Read and Write Access&Store Only read access&Store access deny'      |
+		| 'Document.ModernizationOfFixedAsset Branch: Branch Read and Write Access;Company: Company Only read access;Store: Store Read and Write Access'                                               |
+		| 'Document.ModernizationOfFixedAsset Branch: Branch Read and Write Access;Company: Company Only read access;Store: Store Only read access'                                                    |
+		| 'Document.ModernizationOfFixedAsset Branch: Branch Read and Write Access;Company: Company Only read access;Store: Store Read and Write Access&Store Only read access'                        |
+		| 'Document.ModernizationOfFixedAsset Branch: Branch Read and Write Access;Company: Company Only read access;Store: Store Only read access&Store access deny'                                  |
+		| 'Document.ModernizationOfFixedAsset Branch: Branch Read and Write Access;Company: Company Only read access;Store: Store Read and Write Access&Store access deny'                             |
+		| 'Document.ModernizationOfFixedAsset Branch: Branch Read and Write Access;Company: Company Only read access;Store: Store Read and Write Access&Store Only read access&Store access deny'      |
+		| 'Document.ModernizationOfFixedAsset Branch: Branch Only read access;Company: Company Only read access;Store: Store Read and Write Access'                                                    |
+		| 'Document.ModernizationOfFixedAsset Branch: Branch Only read access;Company: Company Only read access;Store: Store Only read access'                                                         |
+		| 'Document.ModernizationOfFixedAsset Branch: Branch Only read access;Company: Company Only read access;Store: Store Read and Write Access&Store Only read access'                             |
+		| 'Document.ModernizationOfFixedAsset Branch: Branch Only read access;Company: Company Only read access;Store: Store Only read access&Store access deny'                                       |
+		| 'Document.ModernizationOfFixedAsset Branch: Branch Only read access;Company: Company Only read access;Store: Store Read and Write Access&Store access deny'                                  |
+		| 'Document.ModernizationOfFixedAsset Branch: Branch Only read access;Company: Company Only read access;Store: Store Read and Write Access&Store Only read access&Store access deny'           |
+	
+		
+Scenario: 960190 check Company catalog rights (LimitedAccess)	
+	And I close all client application windows
+	Given I open hyperlink "e1cib/list/Catalog.Companies"
+	And "List" table became equal
+		| 'Code' | 'Description'                   |
+		| ''     | 'Company Read and Write Access' |
+		| ''     | 'Company Only read access'      |
+		| '1'    | ''                              |
+
+	
+
+Scenario: 960191 check Stores catalog rights (LimitedAccess)	
+	And I close all client application windows
+	Given I open hyperlink "e1cib/list/Catalog.Stores"
+	And "List" table became equal
+		| 'Description'                 |
+		| 'Store Read and Write Access' |
+		| 'Store Only read access'      |
+	
+		
+Scenario: 960192 check PriceTypes catalog rights (LimitedAccess)	
+	And I close all client application windows
+	Given I open hyperlink "e1cib/list/Catalog.PriceTypes"
+	And "List" table became equal
+		| 'Code' | 'Description'                     |
+		| ''     | 'PriceType Read and Write Access' |
+		| ''     | 'PriceType Only read access'      |
+		| ''     | ''                                |
+		| '1'    | ''                                |
+		| '2'    | ''                                |
+	
+Scenario: 960193 check CashAccounts catalog rights (LimitedAccess)	
+	And I close all client application windows
+	Given I open hyperlink "e1cib/list/Catalog.CashAccounts"
+	And "List" table became equal
+		| 'Description'                       |
+		| 'CashAccount Read and Write Access' |
+		| 'CashAccount Only read access'      |
+
+Scenario: 960194 check BusinessUnits catalog rights (LimitedAccess)	
+	And I close all client application windows
+	Given I open hyperlink "e1cib/list/Catalog.BusinessUnits"
+	And "List" table became equal
+		| 'Description'                  |
+		| 'Branch Read and Write Access' |
+		| 'Branch Only read access'      |

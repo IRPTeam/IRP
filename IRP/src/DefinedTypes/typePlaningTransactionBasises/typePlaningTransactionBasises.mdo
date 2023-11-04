@@ -20,5 +20,6 @@
     <types>DocumentRef.MoneyTransfer</types>
     <types>DocumentRef.CashStatement</types>
     <types>DocumentRef.SalesInvoice</types>
+    <types>DocumentRef.OpeningEntry</types>
   </type>
 </mdclass:DefinedType>

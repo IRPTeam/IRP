@@ -208,16 +208,6 @@ Procedure FindRowInTreeRecursive(Filter, TreeRows, RowID)
 	EndDo;
 EndProcedure
 
-Procedure ExpandTree(Tree, TreeRows) Export
-	If Not Tree.Visible Then
-		Return;
-	EndIf;
-	For Each ItemTreeRows In TreeRows Do
-		Tree.Expand(ItemTreeRows.GetID());
-		ExpandTree(Tree, ItemTreeRows.GetItems());
-	EndDo;
-EndProcedure
-
 #Region LockLinkedRows
 
 #Region EventHandlers

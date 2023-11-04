@@ -67,9 +67,11 @@ Procedure PresentationFieldsGetProcessing(Fields, StandardProcessing)
 	Fields.Add("Basis");
 EndProcedure
 
-Procedure PresentationGetProcessing(Data, Presentation, StandardProcessing)
-	StandardProcessing = False;
-	Presentation = Data.Basis;
+Procedure PresentationGetProcessing(Data, Presentation, StandardProcessing)	
+	If ValueIsFilled(Data.Basis) Then
+		StandardProcessing = False;
+		Presentation = Data.Basis;
+	EndIf;
 EndProcedure
 
 #EndRegion

@@ -25,6 +25,12 @@ Procedure FillCheckProcessing(Cancel, CheckedAttributes)
 			TextError = StrTemplate(R().Error_109, ThisObject.Description, StrConcat(RegExpSettings.Example, Chars.LF));
 			CommonFunctionsClientServer.ShowUsersMessage(TextError, "Description");
 		EndIf;
+		
+		Duplicates = SerialLotNumbersServer.CheckSerialLotNumberUnique(ThisObject, Cancel);
+		If Duplicates.Count() Then
+			TextError = StrTemplate(R().Error_136, StrConcat(Duplicates.UnloadColumn("Code")));
+			CommonFunctionsClientServer.ShowUsersMessage(TextError, "Description");
+		EndIf;
 	EndIf;
 	
 	If Not IsNew() And Ref.StockBalanceDetail And Not ThisObject.StockBalanceDetail Then

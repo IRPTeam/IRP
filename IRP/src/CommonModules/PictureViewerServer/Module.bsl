@@ -179,7 +179,8 @@ Function GetPicturesByObjectRef(OwnerRef, DirectLink = False, FileRef = Undefine
 		|	AttachedFiles.File.Volume.GETIntegrationSettings.IntegrationType = VALUE(Enum.IntegrationType.LocalFileStorage) AS
 		|		isLocalPictureURL,
 		|	AttachedFiles.File.URI AS URI,
-		|	AttachedFiles.Priority AS Priority
+		|	AttachedFiles.Priority AS Priority,
+		|	AttachedFiles.File.isDraft AS isDraft
 		|FROM
 		|	InformationRegister.AttachedFiles AS AttachedFiles
 		|		INNER JOIN tmp AS tmp
@@ -192,6 +193,7 @@ Function GetPicturesByObjectRef(OwnerRef, DirectLink = False, FileRef = Undefine
 		|	END
 		|
 		|ORDER BY
+		|	isDraft,
 		|	Priority";
 	Else
 		Query.Text =
@@ -203,7 +205,8 @@ Function GetPicturesByObjectRef(OwnerRef, DirectLink = False, FileRef = Undefine
 		|	AttachedFiles.File.Volume.GETIntegrationSettings.IntegrationType = VALUE(Enum.IntegrationType.LocalFileStorage) AS
 		|		isLocalPictureURL,
 		|	AttachedFiles.File.URI AS URI,
-		|	AttachedFiles.Priority AS Priority
+		|	AttachedFiles.Priority AS Priority,
+		|	AttachedFiles.File.isDraft AS isDraft
 		|FROM
 		|	InformationRegister.AttachedFiles AS AttachedFiles
 		|WHERE
@@ -215,6 +218,7 @@ Function GetPicturesByObjectRef(OwnerRef, DirectLink = False, FileRef = Undefine
 		|	END
 		|
 		|ORDER BY
+		|	isDraft,
 		|	Priority";
 	EndIf;
 	Query.SetParameter("Owner", OwnerRef);
@@ -441,6 +445,7 @@ Procedure ChangePriorityFile(OwnerRef, FileRef, Rise = 0) Export
 		|	AttachedFiles.Owner = &Owner
 		|
 		|ORDER BY
+		|	isDraft,
 		|	Priority";
 	
 	Query.SetParameter("Owner", OwnerRef);
@@ -469,7 +474,6 @@ Procedure ChangePriorityFile(OwnerRef, FileRef, Rise = 0) Export
 		EndIf;
 	EndDo;
 	
-
 EndProcedure
 
 Procedure UnlinkFileFromObject(FileRef, OwnerRef) Export

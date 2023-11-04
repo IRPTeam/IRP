@@ -34,7 +34,7 @@ Procedure AfterWriteAtServer(CurrentObject, WriteParameters)
 				Continue;
 			EndIf;
 			RecordSet = InformationRegisters.LedgerTypeOperations.CreateRecordSet();
-			RecordSet.Filter.Period.Set(Level2.Period);
+			//RecordSet.Filter.Period.Set(Level2.Period);
 			RecordSet.Filter.LedgerType.Set(Object.Ref);
 			RecordSet.Filter.AccountingOperation.Set(Level2.AccountingOperation);
 			NewRecord = RecordSet.Add();
@@ -46,6 +46,21 @@ Procedure AfterWriteAtServer(CurrentObject, WriteParameters)
 		EndDo;
 	EndDo;
 	SetVisibilityAvailability(Object, ThisObject);
+EndProcedure
+
+&AtClient
+Procedure OnOpen(Cancel)
+	AttachIdleHandler("ExpandAllTrees", 1, True);
+EndProcedure
+
+&AtClient
+Procedure AfterWrite(WriteParameters)
+	AttachIdleHandler("ExpandAllTrees", 1, True);
+EndProcedure
+
+&AtClient
+Procedure ExpandAllTrees() Export
+	CommonFormActions.ExpandTree(Items.OperationsTree, ThisObject.OperationsTree.GetItems());
 EndProcedure
 
 &AtServer

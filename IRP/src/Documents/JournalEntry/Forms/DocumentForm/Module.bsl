@@ -17,6 +17,7 @@ EndProcedure
 
 &AtServer
 Procedure BeforeWriteAtServer(Cancel, CurrentObject, WriteParameters)
+	CurrentObject.AdditionalProperties.Insert("WriteOnForm", True);
 	AddAttributesAndPropertiesServer.BeforeWriteAtServer(ThisObject, Cancel, CurrentObject, WriteParameters);
 EndProcedure
 
@@ -108,10 +109,16 @@ EndProcedure
 
 &AtServer
 Procedure SwitchRecordsActivityAtServer()
-	Records = Object.RegisterRecords.Basic;
-	For Each Record In Records Do
-		Record.Active = Not Record.Active;
-	EndDo;
+	If ValueIsFilled(Object.Ref) Then
+		RecordSet = AccountingRegisters.Basic.CreateRecordSet();
+		RecordSet.Filter.Recorder.Set(Object.Ref);
+		RecordSet.Read();
+		For Each Record In RecordSet Do
+			Record.Active = Not Record.Active;
+		EndDo;
+		RecordSet.Write();
+		Object.RegisterRecords.Basic.Load(RecordSet.Unload());
+	EndIf;
 EndProcedure
 
 #EndRegion

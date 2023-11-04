@@ -6,6 +6,7 @@
     <value>Accounting</value>
   </synonym>
   <includeHelpInContents>true</includeHelpInContents>
+  <includeInCommandInterface>true</includeInCommandInterface>
   <picture xsi:type="core:PictureRef">
     <picture>CommonPicture.Bookkeeping</picture>
   </picture>
@@ -16,6 +17,7 @@
   <content>FunctionalOption.UseAccounting</content>
   <content>Catalog.AccountingOperations</content>
   <content>AccountingRegister.Basic</content>
+  <content>CommonCommand.OpenAccountingRecords</content>
   <subsystems>Accounts</subsystems>
   <subsystems>LedgerTypes</subsystems>
   <subsystems>Other</subsystems>

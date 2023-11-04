@@ -182,6 +182,22 @@ EndFunction
 
 Procedure WriteLog(Hardware, Val Method, Val isRequest, Val Data, Val Result = False) Export
 	
+	FixTypesForWrite(Data);
+	
+	Reg = InformationRegisters.HardwareLog.CreateRecordManager();
+	Reg.Date = CurrentUniversalDateInMilliseconds();
+	Reg.Hardware = Hardware;
+	Reg.Period = CurrentUniversalDate();
+	Reg.User = SessionParameters.CurrentUser;
+	Reg.Method = Method;
+	Reg.Request = isRequest;
+	Reg.Data = CommonFunctionsServer.SerializeJSON(Data);
+	Reg.Result = Result;
+	Reg.Write(); 
+EndProcedure
+
+Procedure FixTypesForWrite(Data) Export
+	
 	If TypeOf(Data) = Type("Structure") Then
 		If Data.Property("Info") Then
 			For Each Prop In Data.Info Do
@@ -196,18 +212,16 @@ Procedure WriteLog(Hardware, Val Method, Val isRequest, Val Data, Val Result = F
 				EndDo;
 			EndIf;
 		EndIf;
+		If Data.Property("In") And Data.In.Property("CheckPackage") And Data.In.CheckPackage.Property("Positions") Then
+			For Each Row In Data.In.CheckPackage.Positions.FiscalStrings Do
+				For Each Prop In Row Do
+					If Not CommonFunctionsServer.IsPrimitiveValue(Prop.Value) Then
+						Row[Prop.Key] = String(Prop.Value);
+					EndIf;
+				EndDo;
+			EndDo;
+		EndIf;
 	EndIf;
-	
-	Reg = InformationRegisters.HardwareLog.CreateRecordManager();
-	Reg.Date = CurrentUniversalDateInMilliseconds();
-	Reg.Hardware = Hardware;
-	Reg.Period = CurrentUniversalDate();
-	Reg.User = SessionParameters.CurrentUser;
-	Reg.Method = Method;
-	Reg.Request = isRequest;
-	Reg.Data = CommonFunctionsServer.SerializeJSON(Data);
-	Reg.Result = Result;
-	Reg.Write(); 
 EndProcedure
 
 #EndRegion

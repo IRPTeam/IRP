@@ -288,9 +288,9 @@ Function GetTRN_KEY(Company, Branch, Currency, Partner, LegalName, Agreement, Or
 	|	AND TransactionsKeys.Currency = &Currency
 	|	AND TransactionsKeys.Partner = &Partner
 	|	AND TransactionsKeys.LegalName = &LegalName
-	|	AND TransactionsKeys.Order = &Order
+	|	AND CASE WHEN &Filter_Order THEN TransactionsKeys.Order = &Order ELSE TransactionsKeys.Order.Ref IS NULL END 
 	|	AND NOT TransactionsKeys.DeletionMark
-	|	AND TransactionsKeys.TransactionBasis = &TransactionBasis
+//	|	AND TransactionsKeys.TransactionBasis = &TransactionBasis
 	|	AND TransactionsKeys.Agreement = &Agreement
 	|	AND TransactionsKeys.IsVendorTransaction";
 	
@@ -304,6 +304,7 @@ Function GetTRN_KEY(Company, Branch, Currency, Partner, LegalName, Agreement, Or
 	Query.SetParameter("Partner", Partner);
 	Query.SetParameter("LegalName", LegalName);
 	Query.SetParameter("Order"            , Order);
+	Query.SetParameter("Filter_Order"     , ValueIsFilled(Order));
 	Query.SetParameter("Agreement"        , Agreement);
 	Query.SetParameter("TransactionBasis" , TransactionBasis);
 	QueryResult = Query.Execute();
@@ -328,7 +329,7 @@ Function GetADV_KEY(Company, Branch, Currency, Partner, LegalName, Order)
 	|	AND AdvancesKeys.Currency = &Currency
 	|	AND AdvancesKeys.Partner = &Partner
 	|	AND AdvancesKeys.LegalName = &LegalName
-	|	AND AdvancesKeys.Order = &Order
+	|	AND CASE WHEN &Filter_Order THEN AdvancesKeys.Order = &Order ELSE AdvancesKeys.Order.Ref IS NULL END
 	|	AND AdvancesKeys.IsVendorAdvance
 	|	AND NOT AdvancesKeys.DeletionMark";
 	
@@ -342,6 +343,7 @@ Function GetADV_KEY(Company, Branch, Currency, Partner, LegalName, Order)
 	Query.SetParameter("Partner", Partner);
 	Query.SetParameter("LegalName", LegalName);
 	Query.SetParameter("Order", Order);
+	Query.SetParameter("Filter_Order", ValueIsFilled(Order));
 	QueryResult = Query.Execute();
 	QuerySelection = QueryResult.Select();
 	If QuerySelection.Next() Then

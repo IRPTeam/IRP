@@ -42,6 +42,7 @@ EndFunction
 
 Function GetExclude_AddAttributes()
 	ArrayOfExcluded = New Array();
+	ArrayOfExcluded.Add("Catalog.AccessKey");
 	ArrayOfExcluded.Add("Catalog.AddAttributeAndPropertySets");
 	ArrayOfExcluded.Add("Catalog.AddAttributeAndPropertyValues");
 	ArrayOfExcluded.Add("Catalog.AdvancesKeys");
@@ -82,6 +83,7 @@ EndFunction
 
 Function GetExclude_Properties()
 	ArrayOfExcluded = New Array();
+	ArrayOfExcluded.Add("Catalog.AccessKey");
 	ArrayOfExcluded.Add("Catalog.AddAttributeAndPropertySets");
 	ArrayOfExcluded.Add("Catalog.AddAttributeAndPropertyValues");
 	ArrayOfExcluded.Add("Catalog.AdvancesKeys");

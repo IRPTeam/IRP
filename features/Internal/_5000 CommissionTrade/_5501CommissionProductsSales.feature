@@ -32,6 +32,7 @@ Scenario: _05502 preparation (commission products sales)
 		When Create catalog SerialLotNumbers objects (serial lot numbers)
 		When Create information register Barcodes records
 		When Create catalog ItemTypes objects
+		When Create catalog RetailCustomers objects
 		When Create catalog Units objects
 		When Create catalog Items objects
 		When Create catalog Users objects
@@ -1645,3 +1646,127 @@ Scenario: _050055 check filling consignor from serial lot number in the IT (scan
 			| 'Product 16 with SLN (Main Company - Consignor 2)'                      | '900889900900777'     | 'pcs'  | 'PZU'      | '1,000'    | 'Consignor stocks'    |
 			| 'Product with Unique SLN'                                               | '0909088998998898789' | 'pcs'  | 'ODS'      | '1,000'    | 'Consignor stocks'    |
 		And I close all client application windows			
+	
+Scenario: _050057 check filling consignor RGR-RRR (scan barcode)
+	And I close all client application windows
+	* Create RGR (return from customer)
+		Given I open hyperlink "e1cib/list/Document.RetailGoodsReceipt"
+		And I click "Create" button
+		And I select from the drop-down list named "Company" by "main" string
+		And I click Select button of "Retail customer" field
+		And I go to line in "List" table
+			| 'Description'   |
+			| 'Test01 Test01' |
+		And I select current line in "List" table
+		And I select "Return from customer" exact value from "Transaction type" drop-down list
+		And I click Choice button of the field named "Store"
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Store 02'    |
+		And I select current line in "List" table
+		* Add items
+			And in the table "ItemList" I click the button named "SearchByBarcode"
+			And I input "0909088998998898789" text in the field named "Barcode"
+			And I move to the next attribute
+			And in the table "ItemList" I click the button named "SearchByBarcode"
+			And I input "0909088998998898790" text in the field named "Barcode"
+			And I move to the next attribute
+			And in the table "ItemList" I click the button named "SearchByBarcode"
+			And I input "11111111111111" text in the field named "Barcode"
+			And I move to the next attribute
+		* Check
+			And "ItemList" table became equal
+				| 'Item'                                             | 'Inventory origin' | 'Item key' | 'Serial lot numbers'  | 'Unit' | 'Source of origins'   | 'Quantity' | 'Store'    |
+				| 'Product with Unique SLN'                          | 'Consignor stocks' | 'ODS'      | '0909088998998898789' | 'pcs'  | ''                    | '1,000'    | 'Store 02' |
+				| 'Product with Unique SLN'                          | 'Consignor stocks' | 'ODS'      | '0909088998998898790' | 'pcs'  | ''                    | '1,000'    | 'Store 02' |
+				| 'Product 11 with SLN (Main Company - Consignor 1)' | 'Consignor stocks' | 'UNIQ'     | '11111111111111'      | 'pcs'  | 'Source of origin 10' | '1,000'    | 'Store 02' |
+		* Post
+			And I click the button named "FormPost"
+			And I delete "$$RGR050057$$" variable
+			And I delete "$$NumberRGR050057$$" variable
+			And I save the window as "$$RGR050057$$"
+	* Create RRR
+		And I click "Sales return" button
+		Then "Add linked document rows" window is opened
+		And I click "Ok" button
+		And I click "Show row key" button
+		And "ItemList" table became equal
+			| 'Store'    | 'Use serial lot number' | 'Item'                                             | 'Consignor'   | 'Inventory origin' | 'Unit' | 'Serial lot numbers'  | 'Item key' | 'Source of origins' | 'Quantity' | 'VAT'         |
+			| 'Store 02' | 'Yes'                   | 'Product with Unique SLN'                          | 'Consignor 1' | 'Consignor stocks' | 'pcs'  | '0909088998998898789' | 'ODS'      | ''                  | '1,000'    | '18%'         |
+			| 'Store 02' | 'Yes'                   | 'Product with Unique SLN'                          | 'Consignor 2' | 'Consignor stocks' | 'pcs'  | '0909088998998898790' | 'ODS'      | ''                  | '1,000'    | 'Without VAT' |
+			| 'Store 02' | 'Yes'                   | 'Product 11 with SLN (Main Company - Consignor 1)' | 'Consignor 1' | 'Consignor stocks' | 'pcs'  | '11111111111111'      | 'UNIQ'     | ''                  | '1,000'    | '18%'         |
+		* Unlink and link back
+			And in the table "ItemList" I click "Link unlink basis documents" button
+			Then "Link / unlink document row" window is opened
+			And I change checkbox "Linked documents"
+			And in the table "ResultsTree" I click "Unlink all" button
+			And I click "Ok" button
+			And "ItemList" table became equal
+				| 'Store'    | 'Use serial lot number' | 'Item'                                             | 'Consignor'   | 'Inventory origin' | 'Unit' | 'Serial lot numbers'  | 'Item key' | 'Source of origins' | 'Quantity' | 'VAT'         |
+				| 'Store 02' | 'Yes'                   | 'Product with Unique SLN'                          | 'Consignor 1' | 'Consignor stocks' | 'pcs'  | '0909088998998898789' | 'ODS'      | ''                  | '1,000'    | '18%'         |
+				| 'Store 02' | 'Yes'                   | 'Product with Unique SLN'                          | 'Consignor 2' | 'Consignor stocks' | 'pcs'  | '0909088998998898790' | 'ODS'      | ''                  | '1,000'    | 'Without VAT' |
+				| 'Store 02' | 'Yes'                   | 'Product 11 with SLN (Main Company - Consignor 1)' | 'Consignor 1' | 'Consignor stocks' | 'pcs'  | '11111111111111'      | 'UNIQ'     | ''                  | '1,000'    | '18%'         |
+			And in the table "ItemList" I click "Goods receipts" button
+			Then the number of "DocumentsTree" table lines is "равно" 0
+			And I close current window								
+			And in the table "ItemList" I click "Link unlink basis documents" button
+			And I go to line in "ItemListRows" table
+				| 'Quantity' | 'Row presentation'                                    |
+				| '1,000'    | 'Product with Unique SLN (ODS) (0909088998998898790)' |
+			And I go to line in "BasisesTree" table
+				| 'Quantity' | 'Row presentation'                                    | 'Unit' | 'Price' |
+				| '1,000'    | 'Product with Unique SLN (ODS) (0909088998998898790)' | 'pcs'  | ''      |
+			And I click the button named "Link"
+			And I go to line in "ItemListRows" table
+				| 'Row presentation'                                    | 'Store'    | 'Unit' |
+				| 'Product with Unique SLN (ODS) (0909088998998898789)' | 'Store 02' | 'pcs'  |
+			And I go to line in "BasisesTree" table
+				| 'Quantity' | 'Row presentation'                                    | 'Unit' | 'Price' |
+				| '1,000'    | 'Product with Unique SLN (ODS) (0909088998998898789)' | 'pcs'  | ''      |
+			And I click the button named "Link"
+			And I go to line in "ItemListRows" table
+				| 'Quantity' | 'Row presentation'                                        | 'Store'    | 'Unit' |
+				| '1,000'    | 'Product 11 with SLN (Main Company - Consignor 1) (UNIQ)' | 'Store 02' | 'pcs'  |
+			And I go to line in "BasisesTree" table
+				| 'Quantity' | 'Row presentation'                                        | 'Unit' | 'Price' |
+				| '1,000'    | 'Product 11 with SLN (Main Company - Consignor 1) (UNIQ)' | 'pcs'  | ''      |
+			And I click the button named "Link"
+			And I click "Ok" button
+		* Check
+			And in the table "ItemList" I click "Goods receipts" button
+			And "DocumentsTree" table became equal
+				| 'Presentation'                                            | 'Invoice' | 'QuantityInDocument' | 'Quantity' |
+				| 'Product with Unique SLN (ODS)'                           | '1,000'   | '1,000'              | '1,000'    |
+				| '$$RGR050057$$'                                           | ''        | '1,000'              | '1,000'    |
+				| 'Product with Unique SLN (ODS)'                           | '1,000'   | '1,000'              | '1,000'    |
+				| '$$RGR050057$$'                                           | ''        | '1,000'              | '1,000'    |
+				| 'Product 11 with SLN (Main Company - Consignor 1) (UNIQ)' | '1,000'   | '1,000'              | '1,000'    |
+				| '$$RGR050057$$'                                           | ''        | '1,000'              | '1,000'    |
+			And I close current window
+			And "ItemList" table became equal
+				| 'Store'    | 'Use serial lot number' | 'Item'                                             | 'Consignor'   | 'Inventory origin' | 'Unit' | 'Serial lot numbers'  | 'Item key' | 'Source of origins' | 'Quantity' | 'VAT'         |
+				| 'Store 02' | 'Yes'                   | 'Product with Unique SLN'                          | 'Consignor 1' | 'Consignor stocks' | 'pcs'  | '0909088998998898789' | 'ODS'      | ''                  | '1,000'    | '18%'         |
+				| 'Store 02' | 'Yes'                   | 'Product with Unique SLN'                          | 'Consignor 2' | 'Consignor stocks' | 'pcs'  | '0909088998998898790' | 'ODS'      | ''                  | '1,000'    | 'Without VAT' |
+				| 'Store 02' | 'Yes'                   | 'Product 11 with SLN (Main Company - Consignor 1)' | 'Consignor 1' | 'Consignor stocks' | 'pcs'  | '11111111111111'      | 'UNIQ'     | ''                  | '1,000'    | '18%'         |
+		And I close all client application windows
+		
+			
+						
+						
+						
+						
+
+
+						
+		
+				
+				
+				
+				
+
+						
+
+
+				
+
+

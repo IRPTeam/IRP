@@ -1761,7 +1761,12 @@ Scenario: _050059 check sequence of filling consignor from item, item key and SL
 		If "ConsignorsInfo" table does not contain lines Then
 			| 'Company'      | 'Consignor'   |
 			| 'Main Company' | 'Consignor 2' |
-			And in the table "ConsignorsInfo" I click "Add" button			
+			And in the table "ConsignorsInfo" I click "Add" button	
+			And I click choice button of "Company" attribute in "ConsignorsInfo" table
+			And I go to line in "List" table
+				| 'Description' |
+				| 'Main Company' |
+			And I select current line in "List" table		
 			And I click choice button of "Consignor" attribute in "ConsignorsInfo" table
 			And I go to line in "List" table
 				| 'Description' |
@@ -1769,7 +1774,7 @@ Scenario: _050059 check sequence of filling consignor from item, item key and SL
 			And I select current line in "List" table
 			And I finish line editing in "ConsignorsInfo" table
 			And I click "Save and close" button
-	* Check filling consignor from SLN
+	* Check filling consignor from SLN in RSR
 		Given I open hyperlink "e1cib/list/Document.RetailSalesReceipt"
 		And I click "Create" button
 		* Scan SLN
@@ -1812,6 +1817,59 @@ Scenario: _050059 check sequence of filling consignor from item, item key and SL
 				| 'Consignor stocks' | 'Basic Price Types'       | 'Product with Unique SLN' | 'PZU'      | 'Shop 02'            | 'No'                 | '0909088998998898791' | 'pcs'  | '16,93'      | '1,000'    | '111,00' | '18%'         | '94,07'      | '111,00'       | 'Store 01' |
 				| 'Consignor stocks' | 'Basic Price Types'       | 'Product with Unique SLN' | 'ODS'      | 'Shop 02'            | 'No'                 | '0909088998998898790' | 'pcs'  | ''           | '1,000'    | '111,00' | 'Without VAT' | '111,00'     | '111,00'       | 'Store 01' |
 		And I close all client application windows
+	* Check filling consignor from SLN in POS
+		And In the command interface I select "Retail" "Point of sale"
+		* Scan SLN
+			And I click "Search by barcode (F7)" button
+			And I input "0909088998998898791" text in the field named "Barcode"
+			And I move to the next attribute
+			And I finish line editing in "ItemList" table
+		* Select SLN 
+			And I move to "Items" tab
+			And I go to line in "ItemsPickup" table
+				| 'Item'                    |
+				| 'Product with Unique SLN' |
+			And I expand current line in "ItemsPickup" table
+			And I go to line in "ItemsPickup" table
+				| 'Item'                         |
+				| 'Product with Unique SLN, PZU' |
+			And I select current line in "ItemsPickup" table
+			And I click the button named "FormSearchByBarcode"
+			And I input "0909088998998898791" text in the field named "Barcode"
+			And I move to the next attribute
+			And I go to line in "ItemsPickup" table
+				| 'Item'                         |
+				| 'Product with Unique SLN, PZU' |
+			And I select current line in "ItemsPickup" table
+			And I select from the drop-down list named "SerialLotNumberSingle" by "0909088998998898791" string
+			And I click "Ok" button
+			And I click "Search by barcode (F7)" button
+			And I input "0909088998998898790" text in the field named "Barcode"
+			And I move to the next attribute
+			And I finish line editing in "ItemList" table
+			And I click "Payment (+)" button
+			And I click "Cash (/)" button
+			And I click "OK" button
+		* Check
+			And I save message text as "RSRNumber"
+			And I execute 1C:Enterprise script
+        		| "Контекст.Insert("RSRNumber", TrimR(Контекст["RSRNumber"]))" |
+			Given I open hyperlink "e1cib/list/Document.RetailSalesReceipt"									
+			And I go to line in "List" table
+				| 'Number'      |
+				| '$RSRNumber$' |
+			And I select current line in "List" table
+		* Check
+			And "ItemList" table became equal
+				| 'Inventory origin' | 'Price type'              | 'Item'                    | 'Item key' | 'Profit loss center' | 'Dont calculate row' | 'Serial lot numbers'  | 'Unit' | 'Tax amount' | 'Quantity' | 'Price'  | 'VAT'         | 'Net amount' | 'Total amount' | 'Store'    |
+				| 'Consignor stocks' | 'Basic Price Types'       | 'Product with Unique SLN' | 'PZU'      | 'Shop 02'            | 'No'                 | '0909088998998898791' | 'pcs'  | '16,93'      | '1,000'    | '111,00' | '18%'         | '94,07'      | '111,00'       | 'Store 01' |
+				| 'Consignor stocks' | 'Basic Price Types'       | 'Product with Unique SLN' | 'PZU'      | 'Shop 02'            | 'No'                 | '0909088998998898791' | 'pcs'  | '16,93'      | '1,000'    | '111,00' | '18%'         | '94,07'      | '111,00'       | 'Store 01' |
+				| 'Consignor stocks' | 'Basic Price Types'       | 'Product with Unique SLN' | 'PZU'      | 'Shop 02'            | 'No'                 | '0909088998998898791' | 'pcs'  | '16,93'      | '1,000'    | '111,00' | '18%'         | '94,07'      | '111,00'       | 'Store 01' |
+				| 'Consignor stocks' | 'Basic Price Types'       | 'Product with Unique SLN' | 'ODS'      | 'Shop 02'            | 'No'                 | '0909088998998898790' | 'pcs'  | ''           | '1,000'    | '111,00' | 'Without VAT' | '111,00'     | '111,00'       | 'Store 01' |
+		And I close all client application windows
+
+Scenario: _050060 check sequence of filling consignor from item key and SLN
+		And I close all client application windows
 	* Change consignor for item key 
 		Given I open hyperlink "e1cib/data/Catalog.ItemKeys?ref=b7aa9f63eb85c76911ee6827f4884c14"
 		And I expand "Consignors info" group		
@@ -1819,6 +1877,11 @@ Scenario: _050059 check sequence of filling consignor from item, item key and SL
 		If "ConsignorsInfo" table contains lines Then
 			| 'Company'      | 'Consignor'   |
 			| 'Main Company' | 'Consignor 2' |	
+			And I click choice button of "Company" attribute in "ConsignorsInfo" table
+			And I go to line in "List" table
+				| 'Description' |
+				| 'Main Company' |
+			And I select current line in "List" table	
 			And I click choice button of "Consignor" attribute in "ConsignorsInfo" table
 			And I go to line in "List" table
 				| 'Description' |
@@ -1868,6 +1931,57 @@ Scenario: _050059 check sequence of filling consignor from item, item key and SL
 				| 'Consignor stocks' | 'Basic Price Types' | 'Product with Unique SLN' | 'ODS'      | 'Shop 02'            | 'No'                 | '0909088998998898790' | 'pcs'  | ''           | '1,000'    | '111,00' | 'Without VAT' | '111,00'     | '111,00'       | 'Store 01' |
 				| 'Consignor stocks' | 'Basic Price Types' | 'Product with Unique SLN' | 'ODS'      | 'Shop 02'            | 'No'                 | '0909088998998898790' | 'pcs'  | ''           | '1,000'    | '111,00' | 'Without VAT' | '111,00'     | '111,00'       | 'Store 01' |
 				| 'Consignor stocks' | 'Basic Price Types' | 'Product with Unique SLN' | 'ODS'      | 'Shop 02'            | 'No'                 | '0909088998998898789' | 'pcs'  | '16,93'      | '1,000'    | '111,00' | '18%'         | '94,07'      | '111,00'       | 'Store 01' |
+			And I close all client application windows
+	* Check filling consignor from SLN in POS
+		And In the command interface I select "Retail" "Point of sale"
+		* Scan SLN
+			And I click "Search by barcode (F7)" button
+			And I input "0909088998998898790" text in the field named "Barcode"
+			And I move to the next attribute
+			And I finish line editing in "ItemList" table
+		* Select SLN 
+			And I move to "Items" tab
+			And I go to line in "ItemsPickup" table
+				| 'Item'                    |
+				| 'Product with Unique SLN' |
+			And I expand current line in "ItemsPickup" table
+			And I go to line in "ItemsPickup" table
+				| 'Item'                         |
+				| 'Product with Unique SLN, ODS' |
+			And I select current line in "ItemsPickup" table
+			And I click the button named "FormSearchByBarcode"
+			And I input "0909088998998898790" text in the field named "Barcode"
+			And I move to the next attribute
+			And I go to line in "ItemsPickup" table
+				| 'Item'                         |
+				| 'Product with Unique SLN, ODS' |
+			And I select current line in "ItemsPickup" table
+			And I select from the drop-down list named "SerialLotNumberSingle" by "0909088998998898790" string
+			And I click "Ok" button
+			And I click "Search by barcode (F7)" button
+			And I input "0909088998998898789" text in the field named "Barcode"
+			And I move to the next attribute
+			And I finish line editing in "ItemList" table
+			And I click "Payment (+)" button
+			And I click "Cash (/)" button
+			And I click "OK" button
+		* Check
+			And I save message text as "RSRNumber"
+			And I execute 1C:Enterprise script
+        		| "Контекст.Insert("RSRNumber", TrimR(Контекст["RSRNumber"]))" |
+			Given I open hyperlink "e1cib/list/Document.RetailSalesReceipt"									
+			And I go to line in "List" table
+				| 'Number'      |
+				| '$RSRNumber$' |
+			And I select current line in "List" table
+		* Check
+			And "ItemList" table became equal
+				| 'Inventory origin' | 'Price type'        | 'Item'                    | 'Item key' | 'Profit loss center' | 'Dont calculate row' | 'Serial lot numbers'  | 'Unit' | 'Tax amount' | 'Quantity' | 'Price'  | 'VAT'         | 'Net amount' | 'Total amount' | 'Store'    |
+				| 'Consignor stocks' | 'Basic Price Types' | 'Product with Unique SLN' | 'ODS'      | 'Shop 02'            | 'No'                 | '0909088998998898790' | 'pcs'  | ''           | '1,000'    | '111,00' | 'Without VAT' | '111,00'     | '111,00'       | 'Store 01' |
+				| 'Consignor stocks' | 'Basic Price Types' | 'Product with Unique SLN' | 'ODS'      | 'Shop 02'            | 'No'                 | '0909088998998898790' | 'pcs'  | ''           | '1,000'    | '111,00' | 'Without VAT' | '111,00'     | '111,00'       | 'Store 01' |
+				| 'Consignor stocks' | 'Basic Price Types' | 'Product with Unique SLN' | 'ODS'      | 'Shop 02'            | 'No'                 | '0909088998998898790' | 'pcs'  | ''           | '1,000'    | '111,00' | 'Without VAT' | '111,00'     | '111,00'       | 'Store 01' |
+				| 'Consignor stocks' | 'Basic Price Types' | 'Product with Unique SLN' | 'ODS'      | 'Shop 02'            | 'No'                 | '0909088998998898789' | 'pcs'  | '16,93'      | '1,000'    | '111,00' | '18%'         | '94,07'      | '111,00'       | 'Store 01' |
+		And I close all client application windows
 	And I close all client application windows
 		
 						

@@ -1767,6 +1767,34 @@ Scenario: Create information register PricesByItemKeys records
 		| "Documents.PriceList.FindByNumber(25).GetObject().Write(DocumentWriteMode.Posting);"   |
 	And I execute 1C:Enterprise script at server
 		| "Documents.PriceList.FindByNumber(26).GetObject().Write(DocumentWriteMode.Posting);"   |
+	
+Scenario: Create information register PricesByItems records
+
+	And I check or create document "PriceList" objects:
+		| 'Ref'                                                                | 'DeletionMark' | 'Number' | 'Date'                | 'Posted' | 'ItemType' | 'PriceListType'                    | 'PriceType'                                                          | 'Author'                                                        | 'Branch' | 'Description' | 'SourceNodeID' |
+		| 'e1cib/data/Document.PriceList?ref=b7ada8ce13eec17811ee7cb5439b461c' | 'False'        | 27       | '06.01.2023 12:00:00' | 'False'  | ''         | 'Enum.PriceListTypes.PriceByItems' | 'e1cib/data/Catalog.PriceTypes?ref=aa78120ed92fbced11eaf114c59eeffe' | 'e1cib/data/Catalog.Users?ref=aa7f120ed92fbced11eb13d7279770c0' | ''       | ''            | ''             |
+
+	And I refill object tabular section "ItemList":
+		| 'Ref'                                                                | 'Item'                                                          | 'Price' | 'InputUnit'                                                     | 'InputPrice' | 'Unit'                                                          |
+		| 'e1cib/data/Document.PriceList?ref=b7ada8ce13eec17811ee7cb5439b461c' | 'e1cib/data/Catalog.Items?ref=b780c87413d4c65f11ecd519fda7206f' | 100     | 'e1cib/data/Catalog.Units?ref=aa78120ed92fbced11eaf113ba6c1862' |              | 'e1cib/data/Catalog.Units?ref=aa78120ed92fbced11eaf113ba6c1862' |
+		| 'e1cib/data/Document.PriceList?ref=b7ada8ce13eec17811ee7cb5439b461c' | 'e1cib/data/Catalog.Items?ref=b780c87413d4c65f11ecd51a0388f5a3' | 112     | 'e1cib/data/Catalog.Units?ref=aa78120ed92fbced11eaf113ba6c1862' |              | 'e1cib/data/Catalog.Units?ref=aa78120ed92fbced11eaf113ba6c1862' |
+		| 'e1cib/data/Document.PriceList?ref=b7ada8ce13eec17811ee7cb5439b461c' | 'e1cib/data/Catalog.Items?ref=b781cf3f5e36b25611ecd69f89585358' | 111     | 'e1cib/data/Catalog.Units?ref=aa78120ed92fbced11eaf113ba6c1862' |              | 'e1cib/data/Catalog.Units?ref=aa78120ed92fbced11eaf113ba6c1862' |
+		| 'e1cib/data/Document.PriceList?ref=b7ada8ce13eec17811ee7cb5439b461c' | 'e1cib/data/Catalog.Items?ref=b781cf3f5e36b25611ecd69f89585359' | 111     | 'e1cib/data/Catalog.Units?ref=aa78120ed92fbced11eaf113ba6c1862' |              | 'e1cib/data/Catalog.Units?ref=aa78120ed92fbced11eaf113ba6c1862' |
+		| 'e1cib/data/Document.PriceList?ref=b7ada8ce13eec17811ee7cb5439b461c' | 'e1cib/data/Catalog.Items?ref=b78db8d3fd6dff8b11ed7f8d992046ec' | 111     | 'e1cib/data/Catalog.Units?ref=aa78120ed92fbced11eaf113ba6c1862' |              | 'e1cib/data/Catalog.Units?ref=aa78120ed92fbced11eaf113ba6c1862' |
+		| 'e1cib/data/Document.PriceList?ref=b7ada8ce13eec17811ee7cb5439b461c' | 'e1cib/data/Catalog.Items?ref=b78db8d3fd6dff8b11ed7f8d992046ee' | 111     | 'e1cib/data/Catalog.Units?ref=aa78120ed92fbced11eaf113ba6c1862' |              | 'e1cib/data/Catalog.Units?ref=aa78120ed92fbced11eaf113ba6c1862' |
+		| 'e1cib/data/Document.PriceList?ref=b7ada8ce13eec17811ee7cb5439b461c' | 'e1cib/data/Catalog.Items?ref=b78db8d3fd6dff8b11ed7f8d992047ee' | 111     | 'e1cib/data/Catalog.Units?ref=aa78120ed92fbced11eaf113ba6c1862' |              | 'e1cib/data/Catalog.Units?ref=aa78120ed92fbced11eaf113ba6c1862' |
+		| 'e1cib/data/Document.PriceList?ref=b7ada8ce13eec17811ee7cb5439b461c' | 'e1cib/data/Catalog.Items?ref=b78db8d3fd6dff8b11ed7f8d992048ee' | 111     | 'e1cib/data/Catalog.Units?ref=aa78120ed92fbced11eaf113ba6c1862' |              | 'e1cib/data/Catalog.Units?ref=aa78120ed92fbced11eaf113ba6c1862' |
+		| 'e1cib/data/Document.PriceList?ref=b7ada8ce13eec17811ee7cb5439b461c' | 'e1cib/data/Catalog.Items?ref=b7a0d8de1a1c04c611ee174b1c02bb67' | 111     | 'e1cib/data/Catalog.Units?ref=aa78120ed92fbced11eaf113ba6c1862' |              | 'e1cib/data/Catalog.Units?ref=aa78120ed92fbced11eaf113ba6c1862' |
+		| 'e1cib/data/Document.PriceList?ref=b7ada8ce13eec17811ee7cb5439b461c' | 'e1cib/data/Catalog.Items?ref=b7a6804cd0be6fd011ee3d9af9c11a69' | 111     | 'e1cib/data/Catalog.Units?ref=aa78120ed92fbced11eaf113ba6c1862' |              | 'e1cib/data/Catalog.Units?ref=aa78120ed92fbced11eaf113ba6c1862' |
+		| 'e1cib/data/Document.PriceList?ref=b7ada8ce13eec17811ee7cb5439b461c' | 'e1cib/data/Catalog.Items?ref=b7a6804cd0be6fd011ee3d9af9c11a6e' | 111     | 'e1cib/data/Catalog.Units?ref=aa78120ed92fbced11eaf113ba6c1862' |              | 'e1cib/data/Catalog.Units?ref=aa78120ed92fbced11eaf113ba6c1862' |
+		| 'e1cib/data/Document.PriceList?ref=b7ada8ce13eec17811ee7cb5439b461c' | 'e1cib/data/Catalog.Items?ref=b7a6804cd0be6fd011ee3d9af9c11a73' | 111     | 'e1cib/data/Catalog.Units?ref=aa78120ed92fbced11eaf113ba6c1862' |              | 'e1cib/data/Catalog.Units?ref=aa78120ed92fbced11eaf113ba6c1862' |
+		| 'e1cib/data/Document.PriceList?ref=b7ada8ce13eec17811ee7cb5439b461c' | 'e1cib/data/Catalog.Items?ref=b7a6804cd0be6fd011ee3d9af9c11a76' | 111     | 'e1cib/data/Catalog.Units?ref=aa78120ed92fbced11eaf113ba6c1862' |              | 'e1cib/data/Catalog.Units?ref=aa78120ed92fbced11eaf113ba6c1862' |
+		| 'e1cib/data/Document.PriceList?ref=b7ada8ce13eec17811ee7cb5439b461c' | 'e1cib/data/Catalog.Items?ref=b7a78aa93c3f864f11ee456973542842' | 111     | 'e1cib/data/Catalog.Units?ref=aa78120ed92fbced11eaf113ba6c1862' |              | 'e1cib/data/Catalog.Units?ref=aa78120ed92fbced11eaf113ba6c1862' |
+		| 'e1cib/data/Document.PriceList?ref=b7ada8ce13eec17811ee7cb5439b461c' | 'e1cib/data/Catalog.Items?ref=b7a8f897b743125011ee458b9c4997a0' | 111     | 'e1cib/data/Catalog.Units?ref=aa78120ed92fbced11eaf113ba6c1862' |              | 'e1cib/data/Catalog.Units?ref=aa78120ed92fbced11eaf113ba6c1862' |
+		| 'e1cib/data/Document.PriceList?ref=b7ada8ce13eec17811ee7cb5439b461c' | 'e1cib/data/Catalog.Items?ref=b7aa9f63eb85c76911ee6827f4884c13' | 111     | 'e1cib/data/Catalog.Units?ref=aa78120ed92fbced11eaf113ba6c1862' |              | 'e1cib/data/Catalog.Units?ref=aa78120ed92fbced11eaf113ba6c1862' |
+
+	And I execute 1C:Enterprise script at server
+		| "Documents.PriceList.FindByNumber(27).GetObject().Write(DocumentWriteMode.Posting);"   |
 
 
 Scenario: Create information register PricesByProperties records

@@ -74,7 +74,8 @@ Procedure RetailSalesReceiptsSelection(Item, RowSelected, Field, StandardProcess
 	If CurrentData = Undefined Then
 		Return;
 	EndIf;
-	OpenForm("Document.RetailSalesReceipt.ObjectForm", New Structure("Key", CurrentData.Ref));
+	ShowValue(, CurrentData.Document);
+//	OpenForm("Document.RetailSalesReceipt.ObjectForm", New Structure("Key", CurrentData.Document));
 EndProcedure
 
 #EndRegion

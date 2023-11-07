@@ -32,6 +32,7 @@ Scenario: _05502 preparation (commission products sales)
 		When Create catalog SerialLotNumbers objects (serial lot numbers)
 		When Create information register Barcodes records
 		When Create catalog ItemTypes objects
+		When Create catalog RetailCustomers objects
 		When Create catalog Units objects
 		When Create catalog Items objects
 		When Create catalog Users objects
@@ -59,6 +60,7 @@ Scenario: _05502 preparation (commission products sales)
 		When Create information register TaxSettings records
 		When Create catalog Agreements objects (commision trade, own companies)
 		When Create information register PricesByItemKeys records
+		When Create information register PricesByItems records
 		When Create catalog IntegrationSettings objects
 		When Create information register CurrencyRates records
 		When Create catalog BusinessUnits objects
@@ -976,7 +978,7 @@ Scenario: _050026 check trade agent fee calculation
 		And "ItemList" table became equal
 			| '#' | 'Price type'              | 'Item'                                                                     | 'Item key' | 'Consignor price' | 'Dont calculate row' | 'Serial lot numbers' | 'Unit' | 'Tax amount' | 'Source of origins' | 'Sales invoice' | 'Quantity' | 'Trade agent fee percent' | 'Trade agent fee amount' | 'Price'  | 'VAT' | 'Purchase invoice' | 'Net amount' | 'Total amount' |
 			| '1' | 'en description is empty' | 'Product 11 with SLN (Main Company - Consignor 1)'                         | 'UNIQ'     | '190,00'          | 'No'                 | '11111111111111'     | 'pcs'  | '61,02'      | ''                  | ''              | '2,000'    | '10,00'                   | '40,00'                  | '200,00' | '18%' | ''                 | '338,98'     | '400,00'       |
-			| '2' | 'Basic Price Types'       | 'Product 13 without SLN (Main Company - different consignor for item key)' | 'M/Black'  | '400,00'          | 'No'                 | ''                   | 'pcs'  | ''           | ''                  | ''              | '1,000'    | '10,00'                   | ''                       | ''       | '18%' | ''                 | ''           | ''             |
+			| '2' | 'Basic Price Types'       | 'Product 13 without SLN (Main Company - different consignor for item key)' | 'M/Black'  | '400,00'          | 'No'                 | ''                   | 'pcs'  | '16,93'      | ''                  | ''              | '1,000'    | '10,00'                   | '11,10'                  | '111,00' | '18%' | ''                 | '94,07'      | '111,00'       |
 	* Change price
 		And I activate "Price" field in "ItemList" table
 		And I go to line in "ItemList" table
@@ -1645,3 +1647,366 @@ Scenario: _050055 check filling consignor from serial lot number in the IT (scan
 			| 'Product 16 with SLN (Main Company - Consignor 2)'                      | '900889900900777'     | 'pcs'  | 'PZU'      | '1,000'    | 'Consignor stocks'    |
 			| 'Product with Unique SLN'                                               | '0909088998998898789' | 'pcs'  | 'ODS'      | '1,000'    | 'Consignor stocks'    |
 		And I close all client application windows			
+	
+Scenario: _050057 check filling consignor RGR-RRR (scan barcode)
+	And I close all client application windows
+	* Create RGR (return from customer)
+		Given I open hyperlink "e1cib/list/Document.RetailGoodsReceipt"
+		And I click "Create" button
+		And I select from the drop-down list named "Company" by "main" string
+		And I click Select button of "Retail customer" field
+		And I go to line in "List" table
+			| 'Description'   |
+			| 'Test01 Test01' |
+		And I select current line in "List" table
+		And I select "Return from customer" exact value from "Transaction type" drop-down list
+		And I click Choice button of the field named "Store"
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Store 02'    |
+		And I select current line in "List" table
+		* Add items
+			And in the table "ItemList" I click the button named "SearchByBarcode"
+			And I input "0909088998998898789" text in the field named "Barcode"
+			And I move to the next attribute
+			And in the table "ItemList" I click the button named "SearchByBarcode"
+			And I input "0909088998998898790" text in the field named "Barcode"
+			And I move to the next attribute
+			And in the table "ItemList" I click the button named "SearchByBarcode"
+			And I input "11111111111111" text in the field named "Barcode"
+			And I move to the next attribute
+		* Check
+			And "ItemList" table became equal
+				| 'Item'                                             | 'Inventory origin' | 'Item key' | 'Serial lot numbers'  | 'Unit' | 'Source of origins'   | 'Quantity' | 'Store'    |
+				| 'Product with Unique SLN'                          | 'Consignor stocks' | 'ODS'      | '0909088998998898789' | 'pcs'  | ''                    | '1,000'    | 'Store 02' |
+				| 'Product with Unique SLN'                          | 'Consignor stocks' | 'ODS'      | '0909088998998898790' | 'pcs'  | ''                    | '1,000'    | 'Store 02' |
+				| 'Product 11 with SLN (Main Company - Consignor 1)' | 'Consignor stocks' | 'UNIQ'     | '11111111111111'      | 'pcs'  | 'Source of origin 10' | '1,000'    | 'Store 02' |
+		* Post
+			And I click the button named "FormPost"
+			And I delete "$$RGR050057$$" variable
+			And I delete "$$NumberRGR050057$$" variable
+			And I save the window as "$$RGR050057$$"
+	* Create RRR
+		And I click "Sales return" button
+		Then "Add linked document rows" window is opened
+		And I click "Ok" button
+		And I click "Show row key" button
+		And "ItemList" table became equal
+			| 'Store'    | 'Use serial lot number' | 'Item'                                             | 'Consignor'   | 'Inventory origin' | 'Unit' | 'Serial lot numbers'  | 'Item key' | 'Source of origins' | 'Quantity' | 'VAT'         |
+			| 'Store 02' | 'Yes'                   | 'Product with Unique SLN'                          | 'Consignor 1' | 'Consignor stocks' | 'pcs'  | '0909088998998898789' | 'ODS'      | ''                  | '1,000'    | '18%'         |
+			| 'Store 02' | 'Yes'                   | 'Product with Unique SLN'                          | 'Consignor 2' | 'Consignor stocks' | 'pcs'  | '0909088998998898790' | 'ODS'      | ''                  | '1,000'    | 'Without VAT' |
+			| 'Store 02' | 'Yes'                   | 'Product 11 with SLN (Main Company - Consignor 1)' | 'Consignor 1' | 'Consignor stocks' | 'pcs'  | '11111111111111'      | 'UNIQ'     | ''                  | '1,000'    | '18%'         |
+		* Unlink and link back
+			And in the table "ItemList" I click "Link unlink basis documents" button
+			Then "Link / unlink document row" window is opened
+			And I change checkbox "Linked documents"
+			And in the table "ResultsTree" I click "Unlink all" button
+			And I click "Ok" button
+			And "ItemList" table became equal
+				| 'Store'    | 'Use serial lot number' | 'Item'                                             | 'Consignor'   | 'Inventory origin' | 'Unit' | 'Serial lot numbers'  | 'Item key' | 'Source of origins' | 'Quantity' | 'VAT'         |
+				| 'Store 02' | 'Yes'                   | 'Product with Unique SLN'                          | 'Consignor 1' | 'Consignor stocks' | 'pcs'  | '0909088998998898789' | 'ODS'      | ''                  | '1,000'    | '18%'         |
+				| 'Store 02' | 'Yes'                   | 'Product with Unique SLN'                          | 'Consignor 2' | 'Consignor stocks' | 'pcs'  | '0909088998998898790' | 'ODS'      | ''                  | '1,000'    | 'Without VAT' |
+				| 'Store 02' | 'Yes'                   | 'Product 11 with SLN (Main Company - Consignor 1)' | 'Consignor 1' | 'Consignor stocks' | 'pcs'  | '11111111111111'      | 'UNIQ'     | ''                  | '1,000'    | '18%'         |
+			And in the table "ItemList" I click "Goods receipts" button
+			Then the number of "DocumentsTree" table lines is "равно" 0
+			And I close current window								
+			And in the table "ItemList" I click "Link unlink basis documents" button
+			And I go to line in "ItemListRows" table
+				| 'Quantity' | 'Row presentation'                                    |
+				| '1,000'    | 'Product with Unique SLN (ODS) (0909088998998898790)' |
+			And I go to line in "BasisesTree" table
+				| 'Quantity' | 'Row presentation'                                    | 'Unit' | 'Price' |
+				| '1,000'    | 'Product with Unique SLN (ODS) (0909088998998898790)' | 'pcs'  | ''      |
+			And I click the button named "Link"
+			And I go to line in "ItemListRows" table
+				| 'Row presentation'                                    | 'Store'    | 'Unit' |
+				| 'Product with Unique SLN (ODS) (0909088998998898789)' | 'Store 02' | 'pcs'  |
+			And I go to line in "BasisesTree" table
+				| 'Quantity' | 'Row presentation'                                    | 'Unit' | 'Price' |
+				| '1,000'    | 'Product with Unique SLN (ODS) (0909088998998898789)' | 'pcs'  | ''      |
+			And I click the button named "Link"
+			And I go to line in "ItemListRows" table
+				| 'Quantity' | 'Row presentation'                                        | 'Store'    | 'Unit' |
+				| '1,000'    | 'Product 11 with SLN (Main Company - Consignor 1) (UNIQ)' | 'Store 02' | 'pcs'  |
+			And I go to line in "BasisesTree" table
+				| 'Quantity' | 'Row presentation'                                        | 'Unit' | 'Price' |
+				| '1,000'    | 'Product 11 with SLN (Main Company - Consignor 1) (UNIQ)' | 'pcs'  | ''      |
+			And I click the button named "Link"
+			And I click "Ok" button
+		* Check
+			And in the table "ItemList" I click "Goods receipts" button
+			And "DocumentsTree" table became equal
+				| 'Presentation'                                            | 'Invoice' | 'QuantityInDocument' | 'Quantity' |
+				| 'Product with Unique SLN (ODS)'                           | '1,000'   | '1,000'              | '1,000'    |
+				| '$$RGR050057$$'                                           | ''        | '1,000'              | '1,000'    |
+				| 'Product with Unique SLN (ODS)'                           | '1,000'   | '1,000'              | '1,000'    |
+				| '$$RGR050057$$'                                           | ''        | '1,000'              | '1,000'    |
+				| 'Product 11 with SLN (Main Company - Consignor 1) (UNIQ)' | '1,000'   | '1,000'              | '1,000'    |
+				| '$$RGR050057$$'                                           | ''        | '1,000'              | '1,000'    |
+			And I close current window
+			And "ItemList" table became equal
+				| 'Store'    | 'Use serial lot number' | 'Item'                                             | 'Consignor'   | 'Inventory origin' | 'Unit' | 'Serial lot numbers'  | 'Item key' | 'Source of origins' | 'Quantity' | 'VAT'         |
+				| 'Store 02' | 'Yes'                   | 'Product with Unique SLN'                          | 'Consignor 1' | 'Consignor stocks' | 'pcs'  | '0909088998998898789' | 'ODS'      | ''                  | '1,000'    | '18%'         |
+				| 'Store 02' | 'Yes'                   | 'Product with Unique SLN'                          | 'Consignor 2' | 'Consignor stocks' | 'pcs'  | '0909088998998898790' | 'ODS'      | ''                  | '1,000'    | 'Without VAT' |
+				| 'Store 02' | 'Yes'                   | 'Product 11 with SLN (Main Company - Consignor 1)' | 'Consignor 1' | 'Consignor stocks' | 'pcs'  | '11111111111111'      | 'UNIQ'     | ''                  | '1,000'    | '18%'         |
+		And I close all client application windows
+		
+			
+						
+Scenario: _050059 check sequence of filling consignor from item, item key and SLN
+	And I close all client application windows
+	* Preparation (filling consignor for item)
+		Given I open hyperlink "e1cib/data/Catalog.Items?ref=b7aa9f63eb85c76911ee6827f4884c13"
+		And I expand "Consignors info" group
+		If "ConsignorsInfo" table does not contain lines Then
+			| 'Company'      | 'Consignor'   |
+			| 'Main Company' | 'Consignor 2' |
+			And in the table "ConsignorsInfo" I click "Add" button	
+			And I click choice button of "Company" attribute in "ConsignorsInfo" table
+			And I go to line in "List" table
+				| 'Description' |
+				| 'Main Company' |
+			And I select current line in "List" table		
+			And I click choice button of "Consignor" attribute in "ConsignorsInfo" table
+			And I go to line in "List" table
+				| 'Description' |
+				| 'Consignor 2' |
+			And I select current line in "List" table
+			And I finish line editing in "ConsignorsInfo" table
+			And I click "Save and close" button
+	* Check filling consignor from SLN in RSR
+		Given I open hyperlink "e1cib/list/Document.RetailSalesReceipt"
+		And I click "Create" button
+		* Scan SLN
+			And in the table "ItemList" I click the button named "SearchByBarcode"
+			And I input "0909088998998898791" text in the field named "Barcode"
+			And I move to the next attribute
+		* Select SLN 
+			And I finish line editing in "ItemList" table
+			And in the table "ItemList" I click the button named "ItemListAdd"
+			And I activate "Item" field in "ItemList" table
+			And I select "Product with Unique SLN" from "Item" drop-down list by string in "ItemList" table
+			And I activate field named "ItemListItemKey" in "ItemList" table
+			And I select "pzu" by string from the drop-down list named "ItemListItemKey" in "ItemList" table
+			And I activate "Serial lot numbers" field in "ItemList" table
+			And I click choice button of "Serial lot numbers" attribute in "ItemList" table
+			And I select from the drop-down list named "SerialLotNumberSingle" by "0909088998998898791" string
+			And I click "Ok" button
+			And I finish line editing in "ItemList" table
+			And in the table "ItemList" I click the button named "ItemListAdd"
+			And I activate "Item" field in "ItemList" table
+			And I select current line in "ItemList" table
+			And I select "Product with Unique SLN" from "Item" drop-down list by string in "ItemList" table
+			And I activate field named "ItemListItemKey" in "ItemList" table
+			And I select "pzu" by string from the drop-down list named "ItemListItemKey" in "ItemList" table
+			And I activate "Serial lot numbers" field in "ItemList" table
+			And I click choice button of "Serial lot numbers" attribute in "ItemList" table
+			And I click the button named "FormSearchByBarcode"
+			Then "Barcode" window is opened
+			And I input "0909088998998898791" text in the field named "Barcode"
+			And I move to the next attribute
+			And I finish line editing in "ItemList" table
+			And in the table "ItemList" I click the button named "SearchByBarcode"
+			And I input "0909088998998898790" text in the field named "Barcode"
+			And I move to the next attribute
+		* Check
+			And "ItemList" table became equal
+				| 'Inventory origin' | 'Price type'              | 'Item'                    | 'Item key' | 'Profit loss center' | 'Dont calculate row' | 'Serial lot numbers'  | 'Unit' | 'Tax amount' | 'Quantity' | 'Price'  | 'VAT'         | 'Net amount' | 'Total amount' | 'Store'    |
+				| 'Consignor stocks' | 'Basic Price Types'       | 'Product with Unique SLN' | 'PZU'      | 'Shop 02'            | 'No'                 | '0909088998998898791' | 'pcs'  | '16,93'      | '1,000'    | '111,00' | '18%'         | '94,07'      | '111,00'       | 'Store 01' |
+				| 'Consignor stocks' | 'Basic Price Types'       | 'Product with Unique SLN' | 'PZU'      | 'Shop 02'            | 'No'                 | '0909088998998898791' | 'pcs'  | '16,93'      | '1,000'    | '111,00' | '18%'         | '94,07'      | '111,00'       | 'Store 01' |
+				| 'Consignor stocks' | 'Basic Price Types'       | 'Product with Unique SLN' | 'PZU'      | 'Shop 02'            | 'No'                 | '0909088998998898791' | 'pcs'  | '16,93'      | '1,000'    | '111,00' | '18%'         | '94,07'      | '111,00'       | 'Store 01' |
+				| 'Consignor stocks' | 'Basic Price Types'       | 'Product with Unique SLN' | 'ODS'      | 'Shop 02'            | 'No'                 | '0909088998998898790' | 'pcs'  | ''           | '1,000'    | '111,00' | 'Without VAT' | '111,00'     | '111,00'       | 'Store 01' |
+		And I close all client application windows
+	* Check filling consignor from SLN in POS
+		And In the command interface I select "Retail" "Point of sale"
+		* Scan SLN
+			And I click "Search by barcode (F7)" button
+			And I input "0909088998998898791" text in the field named "Barcode"
+			And I move to the next attribute
+			And I finish line editing in "ItemList" table
+		* Select SLN 
+			And I move to "Items" tab
+			And I go to line in "ItemsPickup" table
+				| 'Item'                    |
+				| 'Product with Unique SLN' |
+			And I expand current line in "ItemsPickup" table
+			And I go to line in "ItemsPickup" table
+				| 'Item'                         |
+				| 'Product with Unique SLN, PZU' |
+			And I select current line in "ItemsPickup" table
+			And I click the button named "FormSearchByBarcode"
+			And I input "0909088998998898791" text in the field named "Barcode"
+			And I move to the next attribute
+			And I go to line in "ItemsPickup" table
+				| 'Item'                         |
+				| 'Product with Unique SLN, PZU' |
+			And I select current line in "ItemsPickup" table
+			And I select from the drop-down list named "SerialLotNumberSingle" by "0909088998998898791" string
+			And I click "Ok" button
+			And I click "Search by barcode (F7)" button
+			And I input "0909088998998898790" text in the field named "Barcode"
+			And I move to the next attribute
+			And I finish line editing in "ItemList" table
+			And I click "Payment (+)" button
+			And I click "Cash (/)" button
+			And I click "OK" button
+		* Check
+			And I save message text as "RSRNumber"
+			And I execute 1C:Enterprise script
+        		| "Контекст.Insert("RSRNumber", TrimR(Контекст["RSRNumber"]))" |
+			Given I open hyperlink "e1cib/list/Document.RetailSalesReceipt"									
+			And I go to line in "List" table
+				| 'Number'      |
+				| '$RSRNumber$' |
+			And I select current line in "List" table
+		* Check
+			And "ItemList" table became equal
+				| 'Inventory origin' | 'Price type'              | 'Item'                    | 'Item key' | 'Profit loss center' | 'Dont calculate row' | 'Serial lot numbers'  | 'Unit' | 'Tax amount' | 'Quantity' | 'Price'  | 'VAT'         | 'Net amount' | 'Total amount' | 'Store'    |
+				| 'Consignor stocks' | 'Basic Price Types'       | 'Product with Unique SLN' | 'PZU'      | 'Shop 02'            | 'No'                 | '0909088998998898791' | 'pcs'  | '16,93'      | '1,000'    | '111,00' | '18%'         | '94,07'      | '111,00'       | 'Store 01' |
+				| 'Consignor stocks' | 'Basic Price Types'       | 'Product with Unique SLN' | 'PZU'      | 'Shop 02'            | 'No'                 | '0909088998998898791' | 'pcs'  | '16,93'      | '1,000'    | '111,00' | '18%'         | '94,07'      | '111,00'       | 'Store 01' |
+				| 'Consignor stocks' | 'Basic Price Types'       | 'Product with Unique SLN' | 'PZU'      | 'Shop 02'            | 'No'                 | '0909088998998898791' | 'pcs'  | '16,93'      | '1,000'    | '111,00' | '18%'         | '94,07'      | '111,00'       | 'Store 01' |
+				| 'Consignor stocks' | 'Basic Price Types'       | 'Product with Unique SLN' | 'ODS'      | 'Shop 02'            | 'No'                 | '0909088998998898790' | 'pcs'  | ''           | '1,000'    | '111,00' | 'Without VAT' | '111,00'     | '111,00'       | 'Store 01' |
+		And I close all client application windows
+
+Scenario: _050060 check sequence of filling consignor from item key and SLN
+		And I close all client application windows
+	* Change consignor for item key 
+		Given I open hyperlink "e1cib/data/Catalog.ItemKeys?ref=b7aa9f63eb85c76911ee6827f4884c14"
+		And I expand "Consignors info" group		
+		And I change the radio button named "ConsignorInfoMode" value to "Own"	
+		If "ConsignorsInfo" table contains lines Then
+			| 'Company'      | 'Consignor'   |
+			| 'Main Company' | 'Consignor 2' |	
+			And I click choice button of "Company" attribute in "ConsignorsInfo" table
+			And I go to line in "List" table
+				| 'Description' |
+				| 'Main Company' |
+			And I select current line in "List" table	
+			And I click choice button of "Consignor" attribute in "ConsignorsInfo" table
+			And I go to line in "List" table
+				| 'Description' |
+				| 'Consignor 1' |
+			And I select current line in "List" table
+			And I finish line editing in "ConsignorsInfo" table
+			And I click "Save and close" button
+	* Check filling consignor from SLN
+		Given I open hyperlink "e1cib/list/Document.RetailSalesReceipt"
+		And I click "Create" button
+		* Scan SLN
+			And in the table "ItemList" I click the button named "SearchByBarcode"
+			And I input "0909088998998898790" text in the field named "Barcode"
+			And I move to the next attribute
+		* Select SLN 
+			And I finish line editing in "ItemList" table
+			And in the table "ItemList" I click the button named "ItemListAdd"
+			And I activate "Item" field in "ItemList" table
+			And I select "Product with Unique SLN" from "Item" drop-down list by string in "ItemList" table
+			And I activate field named "ItemListItemKey" in "ItemList" table
+			And I select "ods" by string from the drop-down list named "ItemListItemKey" in "ItemList" table
+			And I activate "Serial lot numbers" field in "ItemList" table
+			And I click choice button of "Serial lot numbers" attribute in "ItemList" table
+			And I select from the drop-down list named "SerialLotNumberSingle" by "0909088998998898790" string
+			And I click "Ok" button
+			And I finish line editing in "ItemList" table
+			And in the table "ItemList" I click the button named "ItemListAdd"
+			And I activate "Item" field in "ItemList" table
+			And I select current line in "ItemList" table
+			And I select "Product with Unique SLN" from "Item" drop-down list by string in "ItemList" table
+			And I activate field named "ItemListItemKey" in "ItemList" table
+			And I select "ods" by string from the drop-down list named "ItemListItemKey" in "ItemList" table
+			And I activate "Serial lot numbers" field in "ItemList" table
+			And I click choice button of "Serial lot numbers" attribute in "ItemList" table
+			And I click the button named "FormSearchByBarcode"
+			And I input "0909088998998898790" text in the field named "Barcode"
+			And I move to the next attribute
+			And I finish line editing in "ItemList" table
+			And in the table "ItemList" I click the button named "SearchByBarcode"
+			And I input "0909088998998898789" text in the field named "Barcode"
+			And I move to the next attribute
+		* Check
+			And Delay 2
+			And "ItemList" table became equal
+				| 'Inventory origin' | 'Price type'        | 'Item'                    | 'Item key' | 'Profit loss center' | 'Dont calculate row' | 'Serial lot numbers'  | 'Unit' | 'Tax amount' | 'Quantity' | 'Price'  | 'VAT'         | 'Net amount' | 'Total amount' | 'Store'    |
+				| 'Consignor stocks' | 'Basic Price Types' | 'Product with Unique SLN' | 'ODS'      | 'Shop 02'            | 'No'                 | '0909088998998898790' | 'pcs'  | ''           | '1,000'    | '111,00' | 'Without VAT' | '111,00'     | '111,00'       | 'Store 01' |
+				| 'Consignor stocks' | 'Basic Price Types' | 'Product with Unique SLN' | 'ODS'      | 'Shop 02'            | 'No'                 | '0909088998998898790' | 'pcs'  | ''           | '1,000'    | '111,00' | 'Without VAT' | '111,00'     | '111,00'       | 'Store 01' |
+				| 'Consignor stocks' | 'Basic Price Types' | 'Product with Unique SLN' | 'ODS'      | 'Shop 02'            | 'No'                 | '0909088998998898790' | 'pcs'  | ''           | '1,000'    | '111,00' | 'Without VAT' | '111,00'     | '111,00'       | 'Store 01' |
+				| 'Consignor stocks' | 'Basic Price Types' | 'Product with Unique SLN' | 'ODS'      | 'Shop 02'            | 'No'                 | '0909088998998898789' | 'pcs'  | '16,93'      | '1,000'    | '111,00' | '18%'         | '94,07'      | '111,00'       | 'Store 01' |
+			And I close all client application windows
+	* Check filling consignor from SLN in POS
+		And In the command interface I select "Retail" "Point of sale"
+		* Scan SLN
+			And I click "Search by barcode (F7)" button
+			And I input "0909088998998898790" text in the field named "Barcode"
+			And I move to the next attribute
+			And I finish line editing in "ItemList" table
+		* Select SLN 
+			And I move to "Items" tab
+			And I go to line in "ItemsPickup" table
+				| 'Item'                    |
+				| 'Product with Unique SLN' |
+			And I expand current line in "ItemsPickup" table
+			And I go to line in "ItemsPickup" table
+				| 'Item'                         |
+				| 'Product with Unique SLN, ODS' |
+			And I select current line in "ItemsPickup" table
+			And I click the button named "FormSearchByBarcode"
+			And I input "0909088998998898790" text in the field named "Barcode"
+			And I move to the next attribute
+			And I go to line in "ItemsPickup" table
+				| 'Item'                         |
+				| 'Product with Unique SLN, ODS' |
+			And I select current line in "ItemsPickup" table
+			And I select from the drop-down list named "SerialLotNumberSingle" by "0909088998998898790" string
+			And I click "Ok" button
+			And I click "Search by barcode (F7)" button
+			And I input "0909088998998898789" text in the field named "Barcode"
+			And I move to the next attribute
+			And I finish line editing in "ItemList" table
+			And I click "Payment (+)" button
+			And I click "Cash (/)" button
+			And I click "OK" button
+		* Check
+			And I save message text as "RSRNumber"
+			And I execute 1C:Enterprise script
+        		| "Контекст.Insert("RSRNumber", TrimR(Контекст["RSRNumber"]))" |
+			Given I open hyperlink "e1cib/list/Document.RetailSalesReceipt"									
+			And I go to line in "List" table
+				| 'Number'      |
+				| '$RSRNumber$' |
+			And I select current line in "List" table
+		* Check
+			And "ItemList" table became equal
+				| 'Inventory origin' | 'Price type'        | 'Item'                    | 'Item key' | 'Profit loss center' | 'Dont calculate row' | 'Serial lot numbers'  | 'Unit' | 'Tax amount' | 'Quantity' | 'Price'  | 'VAT'         | 'Net amount' | 'Total amount' | 'Store'    |
+				| 'Consignor stocks' | 'Basic Price Types' | 'Product with Unique SLN' | 'ODS'      | 'Shop 02'            | 'No'                 | '0909088998998898790' | 'pcs'  | ''           | '1,000'    | '111,00' | 'Without VAT' | '111,00'     | '111,00'       | 'Store 01' |
+				| 'Consignor stocks' | 'Basic Price Types' | 'Product with Unique SLN' | 'ODS'      | 'Shop 02'            | 'No'                 | '0909088998998898790' | 'pcs'  | ''           | '1,000'    | '111,00' | 'Without VAT' | '111,00'     | '111,00'       | 'Store 01' |
+				| 'Consignor stocks' | 'Basic Price Types' | 'Product with Unique SLN' | 'ODS'      | 'Shop 02'            | 'No'                 | '0909088998998898790' | 'pcs'  | ''           | '1,000'    | '111,00' | 'Without VAT' | '111,00'     | '111,00'       | 'Store 01' |
+				| 'Consignor stocks' | 'Basic Price Types' | 'Product with Unique SLN' | 'ODS'      | 'Shop 02'            | 'No'                 | '0909088998998898789' | 'pcs'  | '16,93'      | '1,000'    | '111,00' | '18%'         | '94,07'      | '111,00'       | 'Store 01' |
+		And I close all client application windows
+	And I close all client application windows
+		
+						
+		
+						
+
+						
+
+
+						
+
+						
+						
+
+
+						
+		
+				
+				
+				
+				
+
+						
+
+
+				
+
+

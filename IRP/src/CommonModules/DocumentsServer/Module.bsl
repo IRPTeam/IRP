@@ -774,7 +774,15 @@ Function PickupItemEnd(Val Parameters, Val ScanData) Export
 										
 										If InfoRow.Property("VatRate") Then
 											ItemListRow.Insert("VatRate", InfoRow.VatRate);
-										EndIf;										
+										EndIf;	
+																			
+										If InfoRow.Property("TaxAmount") Then
+											ItemListRow.Insert("TaxAmount", InfoRow.TaxAmount);
+										EndIf;	
+										
+										If InfoRow.Property("TotalAmount") Then
+											ItemListRow.Insert("TotalAmount", InfoRow.TotalAmount);
+										EndIf;	
 									EndIf;
 								EndDo;
 							EndIf;

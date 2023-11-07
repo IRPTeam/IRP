@@ -23,8 +23,7 @@ Function AddNewSerialLotNumbers(Object, RowKey, SerialLotNumbers, AddNewLot) Exp
 	SLNRows = Object.SerialLotNumbers.FindRows(New Structure("Key", RowKey));
 	If SLNRows.Count() = 1 Then
 		ItemListRows = Object.ItemList.FindRows(New Structure("Key", RowKey));
-		If ItemListRows.Count() =1 
-			And CommonFunctionsClientServer.ObjectHasProperty(ItemListRows[0], "InventoryOrigin") Then
+		If ItemListRows.Count() =1 And CommonFunctionsClientServer.ObjectHasProperty(ItemListRows[0], "InventoryOrigin") Then
 				
 			ServerParameters = ControllerClientServer_V2.GetServerParameters(Object);
 			ServerParameters.TableName = "ItemList";

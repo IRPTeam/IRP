@@ -75,6 +75,7 @@ EndFunction
 
 Function GetExclude_Catalogs()
 	ArrayOfExcluded = New Array();
+	ArrayOfExcluded.Add("Catalog.AccessKey");
 	ArrayOfExcluded.Add("Catalog.Currencies");
 	ArrayOfExcluded.Add("Catalog.MovementRules");
 	ArrayOfExcluded.Add("Catalog.ReportOptions");

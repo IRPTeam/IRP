@@ -295,6 +295,21 @@
     <fullTextSearch>Use</fullTextSearch>
     <dataHistory>Use</dataHistory>
   </attributes>
+  <attributes uuid="1ec8b08e-d585-4f38-9b4a-9f8decc3a3e4">
+    <name>DefaultCarrier</name>
+    <synonym>
+      <key>en</key>
+      <value>Default carrier</value>
+    </synonym>
+    <type>
+      <types>CatalogRef.Partners</types>
+    </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <fillValue xsi:type="core:UndefinedValue"/>
+    <fullTextSearch>Use</fullTextSearch>
+    <dataHistory>Use</dataHistory>
+  </attributes>
   <tabularSections uuid="0f3997c1-d4c3-4285-ac02-48b8f2135aec">
     <producedTypes>
       <objectType typeId="68d06b99-215e-4c26-90cf-7850dea4cfc7" valueTypeId="971686f2-98a4-40a4-870f-5ce3e0daa05d"/>

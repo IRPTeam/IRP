@@ -11,7 +11,7 @@
  </synonym>
  <synonym>
   <key>tr</key>
-  <value>Sabit varlık sunucusunun belge devredışı bırakılması</value>
+  <value>Belge sabit kıymet devre dışı bırakma sunucusu</value>
  </synonym>
  <server>true</server>
  <serverCall>true</serverCall>

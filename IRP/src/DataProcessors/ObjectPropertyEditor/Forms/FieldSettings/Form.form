@@ -71,7 +71,7 @@
      </presentation>
      <presentation>
       <key>tr</key>
-      <value>Normal yazma</value>
+      <value>Normal yazı</value>
      </presentation>
      <value xsi:type="core:NumberValue">
       <value>0</value>
@@ -105,7 +105,7 @@
      </presentation>
      <presentation>
       <key>tr</key>
-      <value>Zorla yazma (tehlikeli)</value>
+      <value>Zorunlu yazma (tehlikeli)</value>
      </presentation>
      <value xsi:type="core:NumberValue">
       <value>2</value>
@@ -219,7 +219,7 @@
    </title>
    <title>
     <key>tr</key>
-    <value>Hizmet veri gцsterme grubu</value>
+    <value>Servis verilerinin gösterildiği grup</value>
    </title>
    <extendedTooltip>
     <name>ShowServiceDataExtendedTooltip</name>
@@ -261,7 +261,7 @@
   </title>
   <title>
    <key>tr</key>
-   <value>Ek ayarlar grubu</value>
+   <value>Ek ayarların grubu</value>
   </title>
   <extendedTooltip>
    <name>AdditionalSettingsExtendedTooltip</name>
@@ -927,7 +927,7 @@
    </title>
    <title>
     <key>tr</key>
-    <value>Hizmet özelliği</value>
+    <value>Servis özelliği mi</value>
    </title>
    <id>7</id>
    <valueType>
@@ -953,7 +953,7 @@
   </title>
   <title>
    <key>tr</key>
-   <value>Servis цzelliklerini gцster</value>
+   <value>Hizmet özelliklerini göster</value>
   </title>
   <id>6</id>
   <valueType>

@@ -163,7 +163,7 @@
   </synonym>
   <synonym>
    <key>tr</key>
-   <value>Sipariş net miktarı</value>
+   <value>Sipariş edilen net miktar</value>
   </synonym>
   <type>
    <types>DefinedType.typeAmount</types>
@@ -247,7 +247,7 @@
   </synonym>
   <synonym>
    <key>tr</key>
-   <value>Satın alma net miktarı</value>
+   <value>Net satın alma tutarı</value>
   </synonym>
   <type>
    <types>DefinedType.typeAmount</types>
@@ -268,7 +268,7 @@
   </synonym>
   <synonym>
    <key>tr</key>
-   <value>Satın alma toplam miktarı</value>
+   <value>Toplam satın alma miktarı</value>
   </synonym>
   <type>
    <types>DefinedType.typeAmount</types>
@@ -289,7 +289,7 @@
   </synonym>
   <synonym>
    <key>tr</key>
-   <value>Satış net miktarı</value>
+   <value>Satış net tutarı</value>
   </synonym>
   <type>
    <types>DefinedType.typeAmount</types>
@@ -310,7 +310,7 @@
   </synonym>
   <synonym>
    <key>tr</key>
-   <value>Satış toplam miktarı</value>
+   <value>Toplam satış tutarı</value>
   </synonym>
   <type>
    <types>DefinedType.typeAmount</types>

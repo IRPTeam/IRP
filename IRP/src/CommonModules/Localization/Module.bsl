@@ -461,16 +461,16 @@ Function Strings(Lang) Export
 	
 	Strings.Insert("CERT_OnlyProdOrCert", NStr("en='In the document, there can be either goods or certificates.';
 		|ru='В документе могут быть либо товары, либо сертификаты.';
-		|tr='Belgede ya mal ya da sertifikalar olabilir.'", Lang));
+		|tr='Belgede ya mallar ya da sertifikalar olabilir.'", Lang));
 	Strings.Insert("CERT_CertAlreadyUsed", NStr("en='Certificate %1 has already been used before and cannot be used again.';
 		|ru='Сертификат %1 уже использовался ранее и не может быть использован снова.';
-		|tr='Sertifika %1 daha önce kullanılmıştır ve tekrar kullanılamaz.'", Lang));
+		|tr='Sertifika %1 daha önce kullanılmış ve tekrar kullanılamaz.'", Lang));
 	Strings.Insert("CERT_CannotBeSold", NStr("en='Certificate %1 cannot be issued again.';
 		|ru='Сертификат %1 не может быть выдан снова.';
-		|tr='Sertifika %1 tekrar dьzenlenemez.'", Lang));
+		|tr='Sertifika %1 tekrar düzenlenemez.'", Lang));
 	Strings.Insert("CERT_HasNotBeenUsed", NStr("en='Certificate %1 has not been used before.';
 		|ru='Сертификат %1 не использовался ранее.';
-		|tr='Sertifika %1 daha önce kullanılmamıştır.'", Lang));
+		|tr='Sertifika %1 daha önce kullanılmadı.'", Lang));
 
 #EndRegion
 
@@ -481,34 +481,34 @@ Function Strings(Lang) Export
 		|tr='E-posta boş.'", Lang));
 	Strings.Insert("Only1SymbolAtCanBeSet", NStr("en='Only 1 symbol @ can be set.';
 		|ru='Только один символ @ может быть установлен.';
-		|tr='Sadece 1 sembol @ ayarlanabilir.'", Lang));
+		|tr='Yalnızca 1 sembol @ kullanılabilir.'", Lang));
 	Strings.Insert("InvalidLengthOfLocalPart", NStr("en='Invalid length of the local part.';
 		|ru='Не корректная длинна левой части.';
-		|tr='Yerel kısmın geçersiz uzunluğu.'", Lang));
+		|tr='Yerel kısmın uzunluğu geçersiz.'", Lang));
 	Strings.Insert("InvalidLengthOfDomainPart", NStr("en='Invalid length of the domain part.';
 		|ru='Не корректная длинна доменной части.';
-		|tr='Alanın geçersiz uzunluğu.'", Lang));
+		|tr='Alan adının uzunluğu geçersiz.'", Lang));
 	Strings.Insert("LocalPartStartEndDot", NStr("en='The local part should not start or end with a dot.';
 		|ru='Левая часть не может начинаться или заканчиваться на точку.';
-		|tr='Yerel kısım bir nokta ile başlamamalı veya bitmemeli.'", Lang));
+		|tr='Yerel kısım nokta ile başlamamalı veya bitmemeli.'", Lang));
 	Strings.Insert("LocalPartConsecutiveDots", NStr("en='Local part contains consecutive dots.';
 		|ru='Левая часть содержит последовательные точки.';
 		|tr='Yerel kısım ardışık noktalar içeriyor.'", Lang));
 	Strings.Insert("DomainPartStartsWithDot", NStr("en='Domain part starts with a dot.';
 		|ru='Доменная часть начинается с точки.';
-		|tr='Alanın başı bir nokta ile başlar.'", Lang));
+		|tr='Etki alanı kısmı bir nokta ile başlar.'", Lang));
 	Strings.Insert("DomainPartConsecutiveDots", NStr("en='Domain part contains consecutive dots.';
 		|ru='Доменная часть содержит последовательные точки.';
-		|tr='Alan kısmı ardışık noktalar içeriyor.'", Lang));
+		|tr='Etki alanı kısmı ardışık noktalar içeriyor.'", Lang));
 	Strings.Insert("DomainPartMin1Dot", NStr("en='Domain part has to contain at least 1 dot.';
 		|ru='Доменная часть должна содержать хотя бы одну точку.';
-		|tr='Alanın en az 1 nokta içermesi gerekiyor.'", Lang));
+		|tr='Etki alanı kısmında en az 1 nokta bulunmalıdır.'", Lang));
 	Strings.Insert("DomainIdentifierExceedsLength", NStr("en='Domain identifier exceeds the allowed length.';
 		|ru='Идентификатор домена превышает допустимую длинну';
-		|tr='Alan tanımlayıcısı izin verilen uzunluğu aşıyor.'", Lang));
+		|tr='Alan tanımlayıcı izin verilen uzunluğu aşıyor.'", Lang));
 	Strings.Insert("InvalidCharacterInAddress", NStr("en='Invalid character: ""%1""';
 		|ru='Не корректный символ: ""%1""';
-		|tr='Geзersiz karakter: ""%1""'", Lang));
+		|tr='Geçersiz karakter: ""%1""'", Lang));
 
 #EndRegion
 
@@ -518,128 +518,128 @@ Function Strings(Lang) Export
 		|tr='SMS başarıyla gönderildi'", Lang));
 	Strings.Insert("SMS_SendIsError", NStr("en='Error while SMS send';
 		|ru='Обшика при отправке SMS';
-		|tr='SMS gцnderirken hata'", Lang));
+		|tr='SMS gönderilirken hata oluştu'", Lang));
 	Strings.Insert("SMS_WaitUntilNextSend", NStr("en='Wait until next send. %1 second';
 		|ru='Подождите следующей отправки. %1 секунд';
-		|tr='Sonraki gцnderiyi bekle. %1 saniye'", Lang));
+		|tr='Bir sonraki gönderiye kadar bekle. %1 saniye'", Lang));
 	Strings.Insert("SMS_SMSCodeWrong", NStr("en='Not valid SMS code. Try again.';
 		|ru='Не корректный SMS код. Повторите еще раз.';
-		|tr='Geзerli olmayan SMS kodu. Tekrar deneyin.'", Lang));
+		|tr='Geçersiz SMS kodu. Tekrar deneyin.'", Lang));
 #EndRegion
 
 #Region AdditionalTableControl
 
 	Strings.Insert("ATC_001", NStr("en='Unknown document type: %1';
 		|ru='Неизвестный тип документа: %1';
-		|tr='Bilinmeyen belge tьrь: %1'", Lang));
+		|tr='Bilinmeyen belge türü: %1'", Lang));
 	Strings.Insert("ATC_NotSupported", NStr("en='Not supported. Documents need to be edited manually.';
 		|ru='Не поддерживается. Документы необходимо редактировать вручную.';
-		|tr='Desteklenmiyor. Belgeler manuel olarak dьzenlenmelidir.'", Lang));
+		|tr='Desteklenmiyor. Belgeler manuel olarak düzenlenmelidir.'", Lang));
 	
 	Strings.Insert("ATC_ErrorTaxAmountInItemListNotEqualTaxAmountInTaxList", NStr("en='Row: %1. Tax amount in item list is not equal to tax amount in tax list';
 		|ru='Строка: %1. Сумма налогов не равна общей сумме налогов в табличной части налогов';
-		|tr='Satır: %1. Öğe listesindeki vergi miktarı, vergi listesindeki vergi miktarına eşit değil'", Lang));
+		|tr='Satır: %1. Kalemler listesindeki vergi tutarı ile vergi listesindeki vergi tutarı eşit değil'", Lang));
 	Strings.Insert("ATC_ErrorNetAmountGreaterTotalAmount", NStr("en='Row: %1. Net amount is greater than total amount';
 		|ru='Строка: %1. Сумма без налогов больше суммы документа';
-		|tr='Satır: %1. Net miktar, toplam miktardan büyük'", Lang));
+		|tr='Satır: %1. Net tutar toplam tutardan daha büyük'", Lang));
 	Strings.Insert("ATC_ErrorQuantityIsZero", NStr("en='Row: %1. Quantity is zero';
 		|ru='Строка: %1. Количество равно 0';
 		|tr='Satır: %1. Miktar sıfır'", Lang));
 	Strings.Insert("ATC_ErrorQuantityInBaseUnitIsZero", NStr("en='Row: %1. Quantity in base unit is zero';
 		|ru='Строка: %1. Коеффициент в основной ед. изм. равно 0';
-		|tr='Satır: %1. Temel birimdeki miktar sıfır'", Lang));
+		|tr='Satır: %1. Temel birimde miktar sıfır'", Lang));
 	Strings.Insert("ATC_ErrorOffersAmountInItemListNotEqualOffersAmountInOffersList", NStr("en='Row: %1. Offers amount in item list is not equal to offers amount in offers list';
 		|ru='Строка: %1. Суммы скидок в табличной части товаров не равна общей сумме скидок в табличной части скидок';
-		|tr='Satır: %1. Öğe listesindeki teklif miktarı, teklifler listesindeki teklif miktarına eşit değil'", Lang));
+		|tr='Satır: %1. Ürün listesindeki teklif miktarı teklifler listesindeki teklif miktarıyla eşit değil'", Lang));
 	Strings.Insert("ATC_ErrorItemTypeIsNotService", NStr("en='Row: %1. Item type is not service';
 		|ru='Строка: %1. Вид номенклатуры не является услугой';
-		|tr='Satır: %1. Ürün türü servis değil'", Lang));
+		|tr='Satır: %1. Öğe türü hizmet değil'", Lang));
 	Strings.Insert("ATC_ErrorItemTypeUseSerialNumbers", NStr("en='Row: %1. Item type uses serial numbers';
 		|ru='Строка: %1. Вид номенклатуры использует серийные номера';
-		|tr='Satır: %1. Ürün türü seri numaraları kullanıyor'", Lang));
+		|tr='Satır: %1. Öğe tipi seri numaraları kullanıyor'", Lang));
 	Strings.Insert("ATC_ErrorItemTypeNotUseSerialNumbers", NStr("en='Row: %1. Item type does not use serial numbers';
 		|ru='Строка: %1. Тип элемента не использует серийные номера';
-		|tr='Satır: %1. Ürün türü seri numaraları kullanmıyor'", Lang));
+		|tr='Satır: %1. Ürün türü seri numaralarını kullanmıyor'", Lang));
 	Strings.Insert("ATC_ErrorUseSerialButSerialNotSet", NStr("en='Row: %1. Serial is not set but is required';
 		|ru='Строка: %1. Серийные номера отсутствуют, но они обязательны к заполнению';
-		|tr='Satır: %1. Seri ayarlanmamış ancak gereklidir'", Lang));
+		|tr='Satır: %1. Seri belirtilmemiş ancak gereklidir'", Lang));
 	Strings.Insert("ATC_ErrorNotTheSameQuantityInSerialListTableAndInItemList", NStr("en='Row: %1. Quantity in serial list table is not the same as quantity in item list';
 		|ru='Строка: %1. Количество в серийных номерах не соответствует количеству в товарах';
-		|tr='Satır: %1. Seri listesi tablosundaki miktar, öğe listesindeki miktarla aynı değil'", Lang));
+		|tr='Satır: %1. Seri liste tablosundaki miktar, öğe listesindeki miktarla aynı değil'", Lang));
 	Strings.Insert("ATC_ErrorItemNotEqualItemInItemKey", NStr("en='Row: %1. Item is not equal to item in item key';
 		|ru='Строка: %1. Номенклатура в строке не соответствует номенклатуре в характеристике';
-		|tr='Satır: %1. Öğe, öğe anahtarındaki öğeye eşit değil'", Lang));
+		|tr='Satır: %1. Ürün, anahtarın içindeki ürünle eşit değil'", Lang));
 	Strings.Insert("ATC_ErrorTotalAmountMinusNetAmountNotEqualTaxAmount", NStr("en='Row: %1. Total amount minus net amount is not equal to tax amount';
 		|ru='Строка: %1. Сумма документа за вычетом налогов не равна сумме без налогов';
-		|tr='Satır: %1. Toplam miktar eksi net miktar, vergi miktarına eşit değil'", Lang));
+		|tr='Satır: %1. Toplam tutar net tutardan vergi tutarıyla eşit değil'", Lang));
 	Strings.Insert("ATC_ErrorQuantityInItemListNotEqualQuantityInRowID", NStr("en='Row: %1. Quantity in item list is not equal to quantity in row ID';
 		|ru='Строка: %1. Количество в табличной части Товары не соответствует количеству в Row ID';
-		|tr='Satır: %1. Öğe listesindeki miktar, satır kimliğindeki miktarla eşleşmiyor'", Lang));
+		|tr='Satır: %1. Ürün listesindeki miktar ile satır ID''deki miktar eşit değil'", Lang));
 	Strings.Insert("ATC_ErrorQuantityNotEqualQuantityInBaseUnit", NStr("en='Row: %1. Quantity not equal quantity in base unit when unit quantity equal 1';
 		|ru='Строка: %1. Количество не равняется количеству в основной ед. изм. не смотря на то, что коефф. ед. изм равен 1';
-		|tr='Satır: %1. Birim miktarı 1''e eşit olduğunda miktar, temel birimdeki miktarla eşit değil'", Lang));
+		|tr='Satır: %1. Miktar, birim miktarı 1 olduğunda temel birimdeki miktarla eşit değil'", Lang));
 	Strings.Insert("ATC_ErrorNotFilledQuantityInSourceOfOrigins", NStr("en='Row: %1. Not filled quantity in source of origins';
 		|ru='Строка: %1. Не заполнено количество в источниках происхождения';
-		|tr='Satır: %1. Kökenlerin kaynağında miktar doldurulmamış'", Lang));
+		|tr='Satır: %1. Kaynak kökenlerinde miktar doldurulmadı'", Lang));
 	Strings.Insert("ATC_ErrorQuantityInSourceOfOriginsDiffQuantityInSerialLotNumber", NStr("en='Row: %1. Quantity in source of origins diff quantity in serial lot number';
 		|ru='Строка: %1. Количество в источниках происхождения отличается от количества в серийных номерах';
-		|tr='Satır: %1. Köken kaynaklarındaki miktar, seri lot numarasında farklı'", Lang));
+		|tr='Satır: %1. Köken kaynağındaki miktar seri lot numarasındaki miktarla farklı'", Lang));
 	Strings.Insert("ATC_ErrorQuantityInSourceOfOriginsDiffQuantityInItemList", NStr("en='Row: %1. Quantity in source of origins diff quantity in item list';
 		|ru='Строка: %1. Количество в источниках происхождения отличается от количества в товарах';
-		|tr='Satır: %1. Köken kaynaklarındaki miktar, ürün listesindeki miktardan farklı'", Lang));
+		|tr='Satır: %1. Köken kaynaklarının miktarı, öğe listesindeki miktarla farklı'", Lang));
 	Strings.Insert("ATC_ErrorNotFilledUnit", NStr("en='Row: %1. Not filled Unit';
 		|ru='Строка: %1. Не заполненна единица измерений';
-		|tr='Satır: %1. Birim doldurulmadı'", Lang));
+		|tr='Satır: %1. Birim doldurulmamış'", Lang));
 	Strings.Insert("ATC_ErrorNotFilledInventoryOrigin", NStr("en='Row: %1. Not filled Inventory origin';
 		|ru='Строка: %1. Не заполнен источник происождения';
-		|tr='Satır: %1. Envanter kökeni doldurulmadı'", Lang));
+		|tr='Satır: %1. Stok başlangıcı doldurulmamış'", Lang));
 	Strings.Insert("ATC_ErrorPaymentsAmountIsZero", NStr("en='Row: %1. Payment amount is zero';
 		|ru='Строка: %1. Сумма платежа равна нулю';
 		|tr='Satır: %1. Ödeme miktarı sıfır'", Lang));
 	
 	Strings.Insert("ATC_ErrorNotFilledPaymentMethod", NStr("en='Not filled Payment method';
 		|ru='Метод оплаты не заполнен';
-		|tr='Ödeme yöntemi doldurulmamış'", Lang));
+		|tr='Ödeme yöntemi doldurulmadı'", Lang));
 	Strings.Insert("ATC_ErrorNotFilledPurchaseTransactionType", NStr("en='Not filled Transaction type in Purchase';
 		|ru='Не заполнен тип транзакции в Покупке';
-		|tr='Satın alımda İşlem türü doldurulmamış'", Lang));
+		|tr='Satınalmada İşlem türü doldurulmadı'", Lang));
 	Strings.Insert("ATC_ErrorNotFilledSalesTransactionType", NStr("en='Not filled Transaction type in Sale';
 		|ru='Не заполнен тип транзакции в Продаже';
-		|tr='Satışta İşlem türü doldurulmadı'", Lang));
+		|tr='Satışta İşlem tipi doldurulmamış'", Lang));
 	Strings.Insert("ATC_ErrorNotFilledSalesReturnTransactionType", NStr("en='Not filled Transaction type in Sale Return';
 		|ru='Не заполнен тип транзакции в Возврате продажи';
-		|tr='Satış İadesinde İşlem türü doldurulmamış'", Lang));
+		|tr='Satış İadesinde İşlem Türü doldurulmamış'", Lang));
 	Strings.Insert("ATC_ErrorNotFilledPurchaseReturnTransactionType", NStr("en='Not filled Transaction type in Purchase Return';
 		|ru='Не заполнен тип транзакции в Возврате покупки';
 		|tr='Satın Alma İadesinde İşlem türü doldurulmamış'", Lang));
 	
 	Strings.Insert("ATC_FIX_ErrorItemTypeUseSerialNumbers", NStr("en='Setting the ""Use serial lot number"" flag in document lines.';
 		|ru='Установка флага ""Использовать серийный номер партии"" в строках документа.';
-		|tr='Belge satırlarında ""Seri lot numarasını kullan"" bayrağını ayarlama.'", Lang));
+		|tr='Belge satırlarında ""Seri lot numarası kullan"" bayrağını ayarlama.'", Lang));
 	Strings.Insert("ATC_FIX_ErrorItemTypeNotUseSerialNumbers", NStr("en='Unchecking the ""Use serial lot number"" flag in document lines.';
 		|ru='Снятие флага ""Использовать серийный номер партии"" в строках документа.';
-		|tr='Belge satırlarında ""Seri lot numarasını kullan"" bayrağının işaretini kaldırma.'", Lang));
+		|tr='Belge satırlarında ""Seri lot numarasını kullan"" işaretinin kaldırılması.'", Lang));
 	Strings.Insert("ATC_FIX_ErrorNotFilledQuantityInSourceOfOrigins", NStr("en='Adds or updates rows in the ""Source of origins"" table to match the related rows in the ""Item list""';
 		|ru='Добавляет или изменяет строки в табличной части ""Источнике происхождения"" для того что бы сопоставить их с табличной частью ""Товары""';
-		|tr='Kaynak kökenleri tablosundaki satırları, ""Ürün listesi""ndeki ilgili satırlarla eşleşecek şekilde ekler veya günceller'", Lang));
+		|tr='""Köken kaynakları"" tablosundaki satırları, ""Öğe listesi""ndeki ilgili satırlarla eşleşecek şekilde ekler veya günceller'", Lang));
 	Strings.Insert("ATC_FIX_ErrorNotFilledInventoryOrigin", NStr("en='Instead of empty values, ""Own stocks"" will be set.';
 		|ru='Вместо пустых значений будет установлено ""Собственные запасы"".';
-		|tr='Boş değerler yerine ""Kendi stokları"" ayarlanacaktır.'", Lang));
+		|tr='Boş değerler yerine ""Kendi stoklar"" ayarlanacak.'", Lang));
 	Strings.Insert("ATC_FIX_ErrorNotFilledPaymentMethod", NStr("en='Instead of empty values, ""Full calculation"" will be set.';
 		|ru='Вместо пустых значений будет установлено ""Полный расчет"".';
-		|tr='Boş değerler yerine ""Tam hesaplama"" ayarlanacak.'", Lang));
+		|tr='Boş değerler yerine, ""Tam hesaplama"" ayarlanacak.'", Lang));
 	Strings.Insert("ATC_FIX_ErrorNotFilledPurchaseTransactionType", NStr("en='Instead of empty values, ""Purchase"" will be set.';
 		|ru='Вместо пустых значений будет установлено ""Покупка"".';
 		|tr='Boş değerler yerine ""Satın Alma"" ayarlanacak.'", Lang));
 	Strings.Insert("ATC_FIX_ErrorNotFilledSalesTransactionType", NStr("en='Instead of empty values, ""Sales"" will be set.';
 		|ru='Вместо пустых значений будет установлено ""Продажи"".';
-		|tr='Boş değerler yerine ""Satışlar"" ayarlanacak.'", Lang));
+		|tr='Boş değerler yerine, ""Satışlar"" ayarlanacak.'", Lang));
 	Strings.Insert("ATC_FIX_ErrorNotFilledSalesReturnTransactionType", NStr("en='Instead of empty values, ""Return from customer"" will be set.';
 		|ru='Вместо пустых значений будет установлено ""Возврат от клиента"".';
-		|tr='Boş değerler yerine ""Müşteriden iade"" ayarlanacak.'", Lang));
+		|tr='Boş değerler yerine, ""Müşteriden iade"" ayarlanacak.'", Lang));
 	Strings.Insert("ATC_FIX_ErrorNotFilledPurchaseReturnTransactionType", NStr("en='Instead of empty values, ""Return to vendor"" will be set.';
 		|ru='Вместо пустых значений будет установлено ""Возврат поставщику"".';
-		|tr='Boş değerler yerine ""Satıcıya iade"" ayarlanacak.'", Lang));
+		|tr='Boş değerler yerine, ""Satıcıya iade"" ayarlanacak.'", Lang));
 	
 #EndRegion
 
@@ -670,22 +670,22 @@ Function Strings(Lang) Export
 		|tr='%1 bağlantısı kesildi.'", Lang));
 	Strings.Insert("Eq_009", NStr("en='%1 NOT disconnected.';
 		|ru='%1 НЕ отключен.';
-		|tr='%1 BAĞLANTI KESİLMEDİ.'", Lang));
+		|tr='%1 bağlantısı kesilmedi.'", Lang));
 	Strings.Insert("Eq_010", NStr("en='Can not disconnect device %1';
 		|ru='Оборудование %1 не получилось отключить';
 		|tr='Cihaz %1 bağlantısı kesilemiyor'", Lang));
 	Strings.Insert("Eq_011", NStr("en='Already connected';
 		|ru='Уже подключен';
-		|tr='Zaten bağlandı'", Lang));
+		|tr='Zaten bağlı'", Lang));
 	Strings.Insert("Eq_012", NStr("en='Already disconnected';
 		|ru='Уже подключен';
-		|tr='Zaten bağlantı kesildi'", Lang));
+		|tr='Zaten bağlantısı kesildi'", Lang));
 	Strings.Insert("Eq_013", NStr("en='Hardware not found';
 		|ru='Оборудование не найдено';
 		|tr='Donanım bulunamadı'", Lang));
 	Strings.Insert("Eq_CanNotFindAPIModule", NStr("en='Can not find API module. Check `Equipment API Module` in Hardware';
 		|ru='API модуль не найден. Проверьте ""Модуль API оборудования"" в торговом оборудовании';
-		|tr='API modülü bulunamıyor. Donanımda `Ekipman API Modülü`nü kontrol edin'", Lang));
+		|tr='API modülü bulunamadı. Donanımda `Ekipman API Modülü`nü kontrol edin'", Lang));
 	
 	Strings.Insert("EqError_001", NStr("en='The device is connected. The device must be disabled before the operation.';
 		|ru='Устройство подключено. Устройство должно быть отключено перед началом работы.';
@@ -720,62 +720,62 @@ Function Strings(Lang) Export
 		|tr='Vardya kapanmıştı.'", Lang));
 	Strings.Insert("EqFP_DocumentAlreadyPrinted", NStr("en='Operation cannot be completed because the document has already been printed. You can only print a copy.';
 		|ru='Действие не может быть совершено, потому что документ уже был распечатан. Возможно только печать копии.';
-		|tr='İşlem tamamlanamaz çünkü belge zaten yazdırılmıştır. Yalnızca bir kopya yazdırabilirsiniz.'", Lang));
+		|tr='İşlem tamamlanamaz çünkü belge zaten basılmış. Yalnızca bir kopyasını yazdırabilirsiniz.'", Lang));
 	Strings.Insert("EqFP_DocumentNotPrintedOnFiscal", NStr("en='Document was not found on the fiscal device.';
 		|ru='Документ не был найден на фискальном регистраторе';
-		|tr='Belge fiskal cihazda bulunamadı.'", Lang));
+		|tr='Belge mali cihazda bulunamadı.'", Lang));
 	Strings.Insert("EqFP_FiscalDeviceIsEmpty", NStr("en='Fiscal device not set.';
 		|ru='Фискальное устройство не установлено.';
 		|tr='Fiskal cihaz ayarlanmadı.'", Lang));
 	Strings.Insert("EqFP_CannotPrintNotPosted", NStr("en='Document in not posted.';
 		|ru='Документ не проведен.';
-		|tr='Belge yayımlanmadı.'", Lang));
+		|tr='Belge kaydedilmedi.'", Lang));
 	Strings.Insert("EqFP_CanPrintOnlyComplete", NStr("en='Document can be printed only in Complete status.';
 		|ru='Документ может быть напечатан только в статусе Завершено.';
-		|tr='Belge yalnızca Tamamlanmış durumda yazdırılabilir.'", Lang));
+		|tr='Belge yalnızca Tamamlandı durumunda yazdırılabilir.'", Lang));
 	
 	Strings.Insert("EqAc_AlreadyhasTransaction", NStr("en='The document is already has transaction code. Transaction already was done. Else clear RRN code.';
 		|ru='В документе уже есть код транзакции. Транзакция уже проведена. При необходимости можно очистить ККИ код.';
-		|tr='Belgenin zaten işlem kodu var. İşlem zaten yapıldı. Aksi takdirde RRN kodunu temizleyin.'", Lang));
+		|tr='Belge zaten işlem koduna sahip. İşlem zaten yapıldı. Aksi takdirde RRN kodunu temizleyin.'", Lang));
 	Strings.Insert("EqAc_LastSettlementHasError", NStr("en='Last settlement has error. Try get new one.';
 		|ru='В последней сверке обнаружена ошибка. Попробуйте получить новую.';
-		|tr='Son yerleşme hatası var. Yenisini almayı deneyin.'", Lang));
+		|tr='Son ödeme hatası var. Yeni bir tane almayı deneyin.'", Lang));
 	Strings.Insert("EqAc_LastSettlementNotFound", NStr("en='Last settlement not found. Make sure that logging is enabled for this equipment.';
 		|ru='Последняя сверка не найдена. Убедитесь, что для этого оборудования включено ведение логов.';
-		|tr='Son yerleşme bulunamadı. Bu ekipman için günlüğün etkinleştirildiğinden emin olun.'", Lang));
+		|tr='Son yerleşim bulunamadı. Bu ekipman için günlüğe kaydetmenin etkinleştirildiğinden emin olun.'", Lang));
 	Strings.Insert("EqAc_NotAllPaymentDone", NStr("en='Not all payment done.';
 		|ru='Не все платежи выполнены.';
-		|tr='Tüm ödeme yapılmadı.'", Lang));
+		|tr='Tüm ödemeler yapılmadı.'", Lang));
 	
 	Strings.Insert("EqFP_CanNotOpenSessionRegistrationKM", NStr("en='Can not open session registration KM.';
 		|ru='Не удалось открыть сессию регистрации кодов';
-		|tr='Oturum kaydı KM''yi açamaz.'", Lang));
+		|tr='KM oturum kaydı açılamıyor.'", Lang));
 	Strings.Insert("EqFP_CanNotRequestKM", NStr("en='Can not request KM.';
 		|ru='Не удалось запросить состояние кодов';
-		|tr='KM talep edemez.'", Lang));
+		|tr='KM talep edilemiyor.'", Lang));
 	Strings.Insert("EqFP_CanNotGetProcessingKMResult", NStr("en='Can not get processing KM result.';
 		|ru='Не удалось получить данные о регистрации кодов';
-		|tr='Processing KM sonucu alınamıyor.'", Lang));
+		|tr='İşlem KM sonucu alınamıyor.'", Lang));
 	Strings.Insert("EqFP_CanNotCloseSessionRegistrationKM", NStr("en='Can not close session registration KM.';
 		|ru='Не удалось закрыть сессию регистрации кодов';
-		|tr='Oturum kaydı KM''yi kapatamaz.'", Lang));
+		|tr='KM oturum kaydı kapatılamıyor.'", Lang));
 	Strings.Insert("EqFP_GetWrongAnswerFromProcessingKM", NStr("en='Get wrong answer from Processing KM.';
 		|ru='Получен ошибочный ответ при проверке кодов';
-		|tr='Processing KM''den yanlış yanıt alındı.'", Lang));
+		|tr='KM İşleme yanlış cevap alındı.'", Lang));
 	Strings.Insert("EqFP_ScanedCodeStringAlreadyExists", NStr("en='Current barcode already use at document line: %1';
 		|ru='Текущий штрихкод уже используется в документе. Строка: %1';
-		|tr='Mevcut barkod zaten belge satırında kullanılıyor: %1'", Lang));
+		|tr='Geçerli barkod zaten belge satırında kullanılıyor: %1'", Lang));
 
 	Strings.Insert("EqFP_ProblemWhileCheckCodeString", NStr("en='Problem while check code: %1';
 		|ru='Ошибка при проверке кода: %1';
-		|tr='Kod kontrolьnde sorun: %1'", Lang));
+		|tr='Kod kontrolü sırasında sorun oluştu: %1'", Lang));
 
 	Strings.Insert("EqFP_ErrorWhileConfirmCode", NStr("en='Error while confirm code on request: %1';
 		|ru='Ошибка при попытке запроса подтверждения: %1';
-		|tr='Kod talebinde onaylama hatası: %1'", Lang));
+		|tr='İstek üzerinde kod onaylanırken hata: %1'", Lang));
 	Strings.Insert("EqFP_CashierNameCanNotBeEmpty", NStr("en='Cashier name can not be empty. Author -> Partner -> Description (lang)';
 		|ru='Имя кассира не может быть пустым. Автор -> Партнер -> Наименование (язык)';
-		|tr='Kasiyer adı boş olamaz. Yazar -> Ortak -> Açıklama (dil)'", Lang));
+		|tr='Kasiyer adı boş olamaz. Yazar -> Ortak -> Tanım (dil)'", Lang));
 
 #EndRegion
 
@@ -798,46 +798,46 @@ Function Strings(Lang) Export
 		|tr='Satış elemanı seç'", Lang));
 	Strings.Insert("POS_s6", NStr("en='Clear all Items before closing POS';
 		|ru='Удалить все строки перед закрытие рабочего места кассира';
-		|tr='POS''u kapatmadan önce tüm öğeleri temizle'", Lang));
+		|tr='POS kapatılmadan önce tüm Öğeleri temizle'", Lang));
 	
 	Strings.Insert("POS_Error_ErrorOnClosePayment", NStr("en='Cancel all payment before close form.';
 		|ru='Провести отмену всех оплат перед закрытием формы.';
-		|tr='Tьm цdemeleri formu kapatmadan цnce iptal et.'", Lang));
+		|tr='Formu kapatmadan önce tüm ödemeleri iptal edin.'", Lang));
 	Strings.Insert("POS_Error_ErrorOnPayment", NStr("en='There some problem to do payment with %1. Retry?';
 		|ru='Возникли проблемы с оплатой %1. Повторить?';
-		|tr='%1 ile цdeme yaparken bir sorun var. Tekrar deneyin mi?'", Lang));
+		|tr='%1 ile ödeme yaparken bazı sorunlar var. Tekrar deneyin mi?'", Lang));
 	Strings.Insert("POS_Error_CancelPayment", NStr("en='Operation with %1 by amount: %2 will be canceled.';
 		|ru='Операция с %1 на сумму: %2 будет отменена.';
-		|tr='%1 ile miktar: %2 işlemi iptal edilecektir.'", Lang));
+		|tr='%1 ile yapılan %2 tutarındaki işlem iptal edilecek.'", Lang));
 	Strings.Insert("POS_Error_CancelPaymentProblem", NStr("en='Cancel payment problem [%1: %2]. Payment not canceled.
 		|Copy message and send it to administrator';
 		|ru='Проблема отмены платежа [%1: %2]. Платеж не отменен.
 		|Скопируйте сообщение и отправьте его администратору';
-		|tr='Cancel payment problem [%1: %2]. Payment not canceled.
-		|Copy message and send it to administrator'", Lang));
+		|tr='Ödeme iptali sorunu [%1: %2]. Ödeme iptal edilmedi.
+		|Mesajı kopyalayın ve yöneticiye gönderin'", Lang));
 	Strings.Insert("POS_Error_ReturnAmountLess", NStr("en='There are %2 of ""%1"", which is more than the available %3 for return in document ""%4"" .';
 		|ru='Для документа возврата ""%4"" есть более подходящяя позиция %3, чем %2 из %1.';
-		|tr='%1den %2 var, bu belgedeki ""%4"" iзin mevcut olan %3''ten daha fazla.'", Lang));
+		|tr='""%1"" öğesinden %2 adet var, bu miktar ""%4"" belgesinde iade için mevcut olan %3 miktarından fazla.'", Lang));
 	Strings.Insert("POS_Error_CannotFindUser", NStr("en='Can not find user with barcode [%1]';
 		|ru='Не найден пользователь для штрихкода [%1]';
-		|tr='Barkod ile kullanıcı bulunamıyor [%1]'", Lang));
+		|tr='Barkodla [%1] kullanıcı bulunamıyor'", Lang));
 	
 	Strings.Insert("POS_Error_ThisBarcodeFromAnotherItem", NStr("en='This is barcode used for %1';
 		|ru='Этот код уже используется для %1';
-		|tr='Bu %1 için kullanılan bir barkoddur'", Lang));
+		|tr='Bu barkod %1 için kullanılıyor'", Lang));
 	Strings.Insert("POS_Error_ThisIsNotControleStringBarcode", NStr("en='Scan control string barcode. Wrong barcode %1';
 		|ru='Просканируйте штрихкод маркировки. Не верный штрихкод: %1';
-		|tr='Tarama kontrol dizesi barkodu. Yanlış barkod %1'", Lang));
+		|tr='Kontrol dizesi barkodunu tarayın. Yanlış barkod %1'", Lang));
 	Strings.Insert("POS_Error_CheckFillingForAllCodes", NStr("en='Scan control string for each item.';
 		|ru='Сканировать котнрольные коды для каждого элемента';
-		|tr='Her ьrьn iзin tarama kontrol dizesi.'", Lang));
+		|tr='Her öğe için kontrol dizesi tarayın.'", Lang));
 	
 	Strings.Insert("POS_ClearAllItems", NStr("en='Clear all items before continuing';
 		|ru='Очистите все элементы перед продолжением';
-		|tr='Devam etmeden önce tüm öğeleri temizle'", Lang));
+		|tr='Devam etmeden önce tüm öğeleri temizleyin'", Lang));
 	Strings.Insert("POS_CancelPostponed", NStr("en='%1 postponed receipts cancelled';
 		|ru='%1 отложенных чеков отменено';
-		|tr='%1 ertelenmiş makbuz iptal edildi'", Lang));
+		|tr='%1 ertelenmiş alımlar iptal edildi'", Lang));
 	
 #EndRegion
 
@@ -927,7 +927,7 @@ Function Strings(Lang) Export
 		|tr='veya'", Lang));
 	Strings.Insert("S_032", NStr("en='Add code, ex: CommonFunctionsServer.GetCurrentSessionDate()';
 		|ru='Добавить код, например: CommonFunctionsServer.GetCurrentSessionDate()';
-		|tr='Kod ekle, цr: CommonFunctionsServer.GetCurrentSessionDate()'", Lang));
+		|tr='Kod ekle, örn: CommonFunctionsServer.GetCurrentSessionDate()'", Lang));
 #EndRegion
 
 #Region Service
@@ -1565,42 +1565,42 @@ Function Strings(Lang) Export
 		|tr='Belge için fatura: [%1] boş'", Lang));
 	Strings.Insert("Error_126", NStr("en='Document does not have transaction types';
 		|ru='В документе не указан тип транзакции';
-		|tr='Belgede işlem türleri yok'", Lang));
+		|tr='Belge işlem türlerine sahip değil'", Lang));
 	Strings.Insert("Error_127", NStr("en='Quantity must be more than 0';
 		|ru='Количество должно быть больше 0';
-		|tr='Miktarın 0''dan fazla olması gerekiyor'", Lang));
+		|tr='Miktar 0''dan fazla olmalıdır'", Lang));
 	Strings.Insert("Error_128", NStr("en='Wrong data in basis document';
 		|ru='Не правильные данные в документе основания';
 		|tr='Temel belgede yanlış veri'", Lang));
 	Strings.Insert("Error_129", NStr("en='Transaction type [%1] is available only for own stocks, [%2][%3] is [%4] stocks';
 		|ru='Тип транзакции [%1] доступен только для собственных запасов, [%2][%3] является запасами [%4]';
-		|tr='İşlem türü [%1] yalnızca kendi stoklarınız için geçerlidir, [%2][%3] [%4] stoklarıdır'", Lang));
+		|tr='İşlem türü [%1] yalnızca kendi stokları için geçerlidir, [%2][%3] [%4] stoklarıdır'", Lang));
 	Strings.Insert("Error_130", NStr("en='Transaction type [%1] is available only for consignor stocks, [%2][%3] is own stocks';
 		|ru='Тип транзакции [%1] доступен только для запасов комитента, [%2][%3] являются собственными запасами';
-		|tr='İşlem türü [%1] yalnızca gönderen stokları için kullanılabilir, [%2][%3] kendi stoklarıdır'", Lang));
+		|tr='İşlem türü [%1] sadece komitent stokları için geçerlidir, [%2][%3] kendi stoklarıdır'", Lang));
 	Strings.Insert("Error_131", NStr("en='Receipt from consignor [%1][%2] is available only for consignor [%3]';
 		|ru='Получение от комитента [%1][%2] доступно только для комитента [%3]';
-		|tr='Gönderen [%1][%2] tarafından alınan makbuz yalnızca gönderen [%3] için geçerlidir'", Lang));	
+		|tr='Komitent [%1][%2] tarafından alınan fiş yalnızca komitent [%3] için geçerlidir'", Lang));	
 	Strings.Insert("Error_132", NStr("en='Company [%1] can only be specified once';
 		|ru='Компания [%1] может быть указана только один раз';
 		|tr='Şirket [%1] yalnızca bir kez belirtilebilir'", Lang));	
 	Strings.Insert("Error_133", NStr("en='Opening entry [Shipment to trade agent] is available only for own stocks, [%1][%2] is [%3] stocks';
 		|ru='Открытие записи [Отгрузка торговому агенту] доступно только для собственных запасов, [%1][%2] является запасами [%3]';
-		|tr='Açılış girişi [Ticari acente için sevkiyat] yalnızca kendi stoklarınız için geçerlidir, [%1][%2] [%3] stoklarıdır'", Lang));
+		|tr='Açılış kaydı [Ticari acente için sevkiyat] yalnızca kendi stoklarınız için geçerlidir, [%1][%2] [%3] stoklarıdır'", Lang));
 	Strings.Insert("Error_134", NStr("en='Transaction type [Receipt from consignor] is available only for consignor stocks, [%1][%2] is own stocks';
 		|ru='Тип транзакции [Получение от комитента] доступен только для запасов комитента, [%1][%2] являются собственными запасами';
-		|tr='İşlem türü [Gönderenden alınan] yalnızca gönderen stokları için kullanılabilir, [%1][%2] kendi stoklarıdır'", Lang));
+		|tr='İşlem türü [Komitentten alım] sadece komitent stokları için geçerlidir, [%1][%2] kendi stoklarıdır'", Lang));
 	Strings.Insert("Error_135", NStr("en='Receipt from consignor [%1][%2] is available only for consignor [%3]';
 		|ru='Получение от комитента [%1][%2] доступно только для комитента [%3]';
-		|tr='Gönderen [%1][%2] tarafından alınan makbuz yalnızca gönderen [%3] için geçerlidir'", Lang));	
+		|tr='Komitent [%1][%2] tarafından alınan fiş yalnızca komitent [%3] için geçerlidir'", Lang));	
 	Strings.Insert("Error_136", NStr("en='Serial lot number is not unique, duplicate codes:[%1]';
 		|ru='Serial lot number is not unique, duplicate codes:[%1]';
-		|tr='Serial lot number is not unique, duplicate codes:[%1]'", Lang));	
+		|tr='Seri lot numarası benzersiz değil, yinelenen kodlar:[%1]'", Lang));	
 	
 	
 	Strings.Insert("Error_FillTotalAmount", NStr("en='Fill total amount. Row: [%1]';
 		|ru='Необходимо заполнить сумму итого. Строка: [%1]';
-		|tr='Toplam miktarı doldurun. Satır: [%1]'", Lang));
+		|tr='Toplam tutarı doldur. Satır: [%1]'", Lang));
 	
 	// manufacturing errors
 	Strings.Insert("MF_Error_001", NStr("en='Repetitive materials [%1]';
@@ -1655,7 +1655,7 @@ Function Strings(Lang) Export
 	
 	Strings.Insert("Error_MaximumAccessKey", NStr("en='Can not create access key. Add new [ValueRef] attribute to catalog [ObjectAccessKeys]';
 		|ru='Не удалось создать ключ доступа. Необходимо добавить новый реквизит [ValueRef] к справочнику [ObjectAccessKeys]';
-		|tr='Erişim anahtarı oluşturulamıyor. Kataloğa yeni [ValueRef] özelliği ekleyin [ObjectAccessKeys]'", Lang));
+		|tr='Erişim anahtarı oluşturulamıyor. Katalog [ObjectAccessKeys] içine yeni [ValueRef] özelliği ekleyin'", Lang));
 #EndRegion
 
 #Region LandedCost
@@ -1842,14 +1842,14 @@ Function Strings(Lang) Export
 		|tr='Nakit vardiya yalnızca ""Yeni"" durumundaki bir belge için açılabilir.'", Lang));
 	Strings.Insert("InfoMessage_CanCloseOnlyOpenStatus", NStr("en='Cash shift can only be closed for a document with the status ""Open"".';
 		|ru='Кассовую смену можно закрыть только для документа со статусом ""Открыто"".';
-		|tr='Nakit vardiya yalnızca ""Açık"" durumundaki bir belge için kapatılabilir.'", Lang));
+		|tr='Kasa vardiyası yalnızca ""Açık"" durumundaki bir belge için kapatılabilir.'", Lang));
 	
 	Strings.Insert("InfoMessage_NotProperty", NStr("en='The object has no properties for editing';
 		|ru='У объекта нет свойств для редактирования';
-		|tr='Nesnenin dьzenlenecek цzellikleri yok'", Lang));
+		|tr='Nesnenin düzenleme için özellikleri yok'", Lang));
 	Strings.Insert("InfoMessage_DataUpdated", NStr("en='The data has been updated';
 		|ru='Данные были обновлены';
-		|tr='Veriler gьncellendi'", Lang));
+		|tr='Veriler güncellendi'", Lang));
 	Strings.Insert("InfoMessage_DataSaved", NStr("en='The data has been saved';
 		|ru='Данные были сохранены';
 		|tr='Veriler kaydedildi'", Lang));
@@ -1858,7 +1858,7 @@ Function Strings(Lang) Export
 		|tr='Ayarlar uygulandı'", Lang));
 	Strings.Insert("InfoMessage_ImportError", NStr("en='Import data to product database is locked. Go to Settings page';
 		|ru='Импорт данных в рабочую базу заблокирован. Перейдите на вкладку настроек.';
-		|tr='Ürün veritabanına veri aktarma kilitlendi. Ayarlar sayfasına gidin'", Lang));
+		|tr='Ürün veritabanına veri aktarımı kilitlendi. Ayarlar sayfasına gidin'", Lang));
 	
 #EndRegion
 
@@ -1937,10 +1937,10 @@ Function Strings(Lang) Export
 		|tr='Planlama dönemi değiştirmek ister misiniz?'", Lang));
 	Strings.Insert("QuestionToUser_025", NStr("en='Do you want to update filled tax rates?';
 		|ru='Вы действительно хотите обновить заполненные налоговые ставки?';
-		|tr='Doldurulmuş vergi oranlarını güncellemek istiyor musunuz?'", Lang));
+		|tr='Doldurulan vergi oranlarını güncellemek istiyor musunuz?'", Lang));
 	Strings.Insert("QuestionToUser_026", NStr("en='Do you want to update payment agent?';
 		|ru='Вы хотите обновить платежного агента?';
-		|tr='Ödeme ajanını güncellemek istiyor musunuz?'", Lang));
+		|tr='Ödeme acentesini güncellemek istiyor musunuz?'", Lang));
 #EndRegion
 
 #Region SuggestionToUser
@@ -1970,7 +1970,7 @@ Function Strings(Lang) Export
 		|tr='Yalnızca Yönetici başka bir kullanıcıyı başlatabilir.'", Lang));
 	Strings.Insert("UsersEvent_004", NStr("en='Infobase user not found.';
 		|ru='Пользователь информационной базы не найден.';
-		|tr='Bilgi tabanı kullanıcısı bulunamadı.'", Lang));
+		|tr='Infobase kullanıcısı bulunamadı.'", Lang));
 	Strings.Insert("UsersEvent_005", NStr("en='Very long launch. Password returned without confirmation.';
 		|ru='Очень долгий запуск. Пароль возвращен без подтверждения.';
 		|tr='Çok uzun başlatma. Şifre onay alınmadan geri döndü.'", Lang));
@@ -2036,7 +2036,7 @@ Function Strings(Lang) Export
 		|tr='Hata: %1'", Lang));
 	Strings.Insert("Exc_010", NStr("en='Unknown metadata type: %1';
 		|ru='Неизвестный тип метаданных: %1';
-		|tr='Bilinmeyen metadata tьrь: %1'", Lang));
+		|tr='Bilinmeyen meta veri türü: %1'", Lang));
 #EndRegion
 
 #Region Saas
@@ -2224,7 +2224,7 @@ Function Strings(Lang) Export
 		|tr='Satış ekranı'", Lang));
 	Strings.Insert("Add_Setiings_003", NStr("en='Disable - Change price';
 		|ru='Запретить - Замена цены';
-		|tr='Devre dışı - Fiyatı değiştir'", Lang));
+		|tr='Devre dışı bırak - Fiyatı değiştir'", Lang));
 	Strings.Insert("Add_Setiings_004", NStr("en='Disable - Create return';
 		|ru='Запретить - Создание возврата';
 		|tr='Devre dışı bırak - İade oluştur'", Lang));
@@ -2236,13 +2236,13 @@ Function Strings(Lang) Export
 		|tr='Devre dışı bırak - Yazarı değiştir'", Lang));
 	Strings.Insert("Add_Setiings_007", NStr("en='Link\Unlink document rows';
 		|ru='Связать\отменить связку строки документов';
-		|tr='Belge satırlarını bağla/bağlantısını kaldır'", Lang));
+		|tr='Belge satırlarını Bağla\Bağlantıyı kes'", Lang));
 	Strings.Insert("Add_Setiings_008", NStr("en='Disable - Calculate rows on link rows';
 		|ru='Отключить - Расчет строки при связке строк';
-		|tr='Devre dışı bırak - Bağlantı satırlarında satırları hesapla'", Lang));
+		|tr='Devre Dışı Bırak - Bağlantı satırlarındaki satırları hesapla'", Lang));
 	Strings.Insert("Add_Setiings_009", NStr("en='Use reverse basises tree';
 		|ru='Использовать перевернутое дерево оснований';
-		|tr='Ters temel ağacını kullan'", Lang));
+		|tr='Ters basit ağaçları kullan'", Lang));
 	Strings.Insert("Add_Setiings_010", NStr("en='Linked documents';
 		|ru='Документы связанные по строкам';
 		|tr='Bağlı evraklar'", Lang));
@@ -2258,8 +2258,8 @@ Function Strings(Lang) Export
 		|But before you scan for %2';
 		|ru='Текущий штрихкод использован в %1
 		|Но перед этим был просканирован %2';
-		|tr='Current barcode used in %1
-		|But before you scan for %2'", Lang));
+		|tr='Mevcut barkod %1''de kullanımda
+		|Ancak önce %2 için taradınız'", Lang));
 #EndRegion
 	
 #Region CopyPaste
@@ -2298,7 +2298,7 @@ Function Strings(Lang) Export
 		|tr='[%1] için hiçbir şey bulunamadı'", Lang));
 	Strings.Insert("LDT_TooMuchFound", NStr("en='Several variants were found for [%1]';
 		|ru='Несколько вариантов было найдено для [%1]';
-		|tr='[%1] iзin birkaз varyant bulundu'", Lang));
+		|tr='[%1] için birden fazla varyant bulundu'", Lang));
 #EndRegion	
 
 #Region OpenSerialLotNumberTree
@@ -2313,10 +2313,10 @@ Function Strings(Lang) Export
 #Region BackgroundJobs
 	Strings.Insert("BgJ_Title_001",   NStr("en='Background job is running';
 		|ru='Фоновое задание запущено';
-		|tr='Arka plan işi çalışıyor'", Lang));
+		|tr='Arkaplan işi çalışıyor'", Lang));
 	Strings.Insert("BgJ_Title_002",   NStr("en='Load Item list';
 		|ru='Загрузить список товаров';
-		|tr='Öğe listesini yükle'", Lang));
+		|tr='Ürün listesi yükle'", Lang));
 #EndRegion	
 	
 	Return Strings;

@@ -18,7 +18,7 @@
  </synonym>
  <synonym>
   <key>tr</key>
-  <value>Araзlar</value>
+  <value>Araçlar</value>
  </synonym>
  <useStandardCommands>true</useStandardCommands>
  <inputByString>Catalog.Vehicles.StandardAttribute.Code</inputByString>
@@ -73,7 +73,7 @@
  </listPresentation>
  <listPresentation>
   <key>tr</key>
-  <value>Araзlar</value>
+  <value>Araçlar</value>
  </listPresentation>
  <levelCount>2</levelCount>
  <foldersOnTop>true</foldersOnTop>
@@ -128,6 +128,29 @@
   </synonym>
   <type>
    <types>CatalogRef.VehicleTypes</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fillValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <dataHistory>Use</dataHistory>
+ </attributes>
+ <attributes uuid="b0c4c37f-d992-4b68-b285-aa82ad783a40">
+  <name>DefaultDriver</name>
+  <synonym>
+   <key>en</key>
+   <value>Default driver</value>
+  </synonym>
+  <synonym>
+   <key>ru</key>
+   <value>Default driver</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Default driver</value>
+  </synonym>
+  <type>
+   <types>CatalogRef.Partners</types>
   </type>
   <minValue xsi:type="core:UndefinedValue"/>
   <maxValue xsi:type="core:UndefinedValue"/>

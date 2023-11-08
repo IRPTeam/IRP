@@ -11,7 +11,7 @@
  </synonym>
  <synonym>
   <key>tr</key>
-  <value>Nesne erişimini kullanın</value>
+  <value>Nesne erişimini kullan</value>
  </synonym>
  <location>Constant.UseObjectAccess</location>
  <privilegedGetMode>true</privilegedGetMode>

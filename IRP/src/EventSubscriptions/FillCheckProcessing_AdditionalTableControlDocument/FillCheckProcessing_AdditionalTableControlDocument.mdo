@@ -11,7 +11,7 @@
  </synonym>
  <synonym>
   <key>tr</key>
-  <value>Ek tablo kontrol belgesi işleme kontrolünü doldurun</value>
+  <value>Kontrol belgesi ek tablo doldurma işlemini kontrol et</value>
  </synonym>
  <source>
   <types>DefinedType.AdditionalTableControlDocumentObject</types>

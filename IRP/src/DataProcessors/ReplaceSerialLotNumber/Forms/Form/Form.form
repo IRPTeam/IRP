@@ -3571,7 +3571,7 @@
    </title>
    <title>
     <key>tr</key>
-    <value>Dep tablo bцlьmь</value>
+    <value>Dep tablo bölümü</value>
    </title>
    <id>9</id>
    <valueType>
@@ -3597,7 +3597,7 @@
    </title>
    <title>
     <key>tr</key>
-    <value>Dep satır numarası</value>
+    <value>Amortisman satır numarası</value>
    </title>
    <id>10</id>
    <valueType>
@@ -3751,7 +3751,7 @@
    </title>
    <title>
     <key>tr</key>
-    <value>Tekrarlayan satırlar</value>
+    <value>Tekrar eden satırlar</value>
    </title>
    <id>27</id>
    <valueType>
@@ -3854,7 +3854,7 @@
    </title>
    <title>
     <key>tr</key>
-    <value>Sonuз fiyat tьrь</value>
+    <value>Sonuç fiyat türü</value>
    </title>
    <id>35</id>
    <valueType>
@@ -3954,7 +3954,7 @@
    </title>
    <title>
     <key>tr</key>
-    <value>SLN Anahtarı</value>
+    <value>Anahtar SLN</value>
    </title>
    <id>48</id>
    <valueType>
@@ -4109,7 +4109,7 @@
    </title>
    <title>
     <key>tr</key>
-    <value>SLN Anahtarı</value>
+    <value>Anahtar SLN</value>
    </title>
    <id>49</id>
    <valueType>
@@ -4506,7 +4506,7 @@
    </title>
    <title>
     <key>tr</key>
-    <value>Yeni ürün anahtarı</value>
+    <value>Yeni öğe anahtarı</value>
    </title>
    <id>46</id>
    <valueType>
@@ -4531,7 +4531,7 @@
    </title>
    <title>
     <key>tr</key>
-    <value>SLN Anahtarı</value>
+    <value>Anahtar SLN</value>
    </title>
    <id>47</id>
    <valueType>
@@ -4608,7 +4608,7 @@
   </title>
   <title>
    <key>tr</key>
-   <value>Ref'leri bul</value>
+   <value>Referansları bul</value>
   </title>
   <id>1</id>
   <use>
@@ -4683,7 +4683,7 @@
   </title>
   <title>
    <key>tr</key>
-   <value>Yьkle</value>
+   <value>Yükle</value>
   </title>
   <id>4</id>
   <use>

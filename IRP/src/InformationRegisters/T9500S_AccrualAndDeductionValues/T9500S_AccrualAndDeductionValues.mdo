@@ -20,7 +20,7 @@
  </synonym>
  <synonym>
   <key>tr</key>
-  <value>T9500 Tahakkuk ve kesinti değerleri</value>
+  <value>T9500 Tahakkuk ve indirim değerleri</value>
  </synonym>
  <useStandardCommands>true</useStandardCommands>
  <editType>InDialog</editType>
@@ -36,7 +36,7 @@
  </recordPresentation>
  <recordPresentation>
   <key>tr</key>
-  <value>T9500 Tahakkuk ve kesinti değerleri</value>
+  <value>T9500 Tahakkuk ve indirim değerleri</value>
  </recordPresentation>
  <resources uuid="b59ca333-121f-4f6b-8e16-8c8f767e566d">
   <name>Value</name>
@@ -98,7 +98,7 @@
   </synonym>
   <synonym>
    <key>tr</key>
-   <value>Tahakkuk veya kesinti tьrь</value>
+   <value>Birikim veya kesinti türü</value>
   </synonym>
   <type>
    <types>CatalogRef.AccrualAndDeductionTypes</types>

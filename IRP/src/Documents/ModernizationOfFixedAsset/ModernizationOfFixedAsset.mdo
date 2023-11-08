@@ -18,7 +18,7 @@
  </synonym>
  <synonym>
   <key>tr</key>
-  <value>Sabit varlık modernizasyonu</value>
+  <value>Sabit kıymetin modernizasyonu</value>
  </synonym>
  <useStandardCommands>true</useStandardCommands>
  <inputByString>Document.ModernizationOfFixedAsset.StandardAttribute.Number</inputByString>
@@ -60,7 +60,7 @@
  </listPresentation>
  <listPresentation>
   <key>tr</key>
-  <value>Sabit varlıkların modernizasyonu</value>
+  <value>Sabit kıymetlerin modernizasyonu</value>
  </listPresentation>
  <numberLength>12</numberLength>
  <numberAllowedLength>Variable</numberAllowedLength>
@@ -120,7 +120,7 @@
   </synonym>
   <synonym>
    <key>tr</key>
-   <value>Sabit varlık</value>
+   <value>Sabit kıymet</value>
   </synonym>
   <type>
    <types>CatalogRef.FixedAssets</types>
@@ -424,7 +424,7 @@
    </synonym>
    <synonym>
     <key>tr</key>
-    <value>Miktar sabittir</value>
+    <value>Miktar sabitlendi</value>
    </synonym>
    <type>
     <types>Boolean</types>
@@ -490,7 +490,7 @@
    </synonym>
    <synonym>
     <key>tr</key>
-    <value>Modernizasyon tipi</value>
+    <value>Modernizasyon türü</value>
    </synonym>
    <type>
     <types>EnumRef.ModernizationTypes</types>

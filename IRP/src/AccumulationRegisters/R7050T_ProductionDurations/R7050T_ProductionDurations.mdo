@@ -19,7 +19,7 @@
  </synonym>
  <synonym>
   <key>tr</key>
-  <value>R7050 Ьretim sьreleri</value>
+  <value>R7050 Üretim süreleri</value>
  </synonym>
  <useStandardCommands>true</useStandardCommands>
  <registerType>Turnovers</registerType>
@@ -37,7 +37,7 @@
   </synonym>
   <synonym>
    <key>tr</key>
-   <value>Sьre</value>
+   <value>Süre</value>
   </synonym>
   <type>
    <types>Number</types>

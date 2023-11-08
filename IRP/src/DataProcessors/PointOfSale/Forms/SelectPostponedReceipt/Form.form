@@ -10,7 +10,7 @@
  </title>
  <title>
   <key>tr</key>
-  <value>Ertelemeli makbuzu seз</value>
+  <value>Erteleme fişini seçin</value>
  </title>
  <items xsi:type="form:Table">
   <name>Receipts</name>

@@ -19,7 +19,7 @@
  </synonym>
  <synonym>
   <key>tr</key>
-  <value>R8510 Book value of fixed asset</value>
+  <value>R8510 Sabit kıymetin defter değeri</value>
  </synonym>
  <useStandardCommands>true</useStandardCommands>
  <dataLockControlMode>Managed</dataLockControlMode>
@@ -123,7 +123,7 @@
   </synonym>
   <synonym>
    <key>tr</key>
-   <value>Sabit varlık</value>
+   <value>Sabit kıymet</value>
   </synonym>
   <type>
    <types>CatalogRef.FixedAssets</types>
@@ -167,7 +167,7 @@
   </synonym>
   <synonym>
    <key>tr</key>
-   <value>Schedule</value>
+   <value>Program</value>
   </synonym>
   <type>
    <types>CatalogRef.DepreciationSchedules</types>

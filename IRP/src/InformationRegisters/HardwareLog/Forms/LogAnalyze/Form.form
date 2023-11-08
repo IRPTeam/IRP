@@ -78,7 +78,7 @@
     </toolTip>
     <toolTip>
      <key>tr</key>
-     <value>Saat dilimi</value>
+     <value>Zaman dilimi</value>
     </toolTip>
     <extendedTooltip>
      <name>TimeZoneExtendedTooltip</name>
@@ -1125,7 +1125,7 @@
   </title>
   <title>
    <key>tr</key>
-   <value>Saat dilimi</value>
+   <value>Zaman dilimi</value>
   </title>
   <id>3</id>
   <valueType>
@@ -1305,7 +1305,7 @@
    </title>
    <title>
     <key>tr</key>
-    <value>Bilgiyi yazdır</value>
+    <value>Bilgi yazdır</value>
    </title>
    <id>12</id>
    <valueType>
@@ -1383,7 +1383,7 @@
   </title>
   <title>
    <key>tr</key>
-   <value>Update</value>
+   <value>Güncelle</value>
   </title>
   <id>1</id>
   <use>
@@ -1412,7 +1412,7 @@
   </title>
   <title>
    <key>tr</key>
-   <value>Veriyi yazdır</value>
+   <value>Verileri yazdır</value>
   </title>
   <id>2</id>
   <use>

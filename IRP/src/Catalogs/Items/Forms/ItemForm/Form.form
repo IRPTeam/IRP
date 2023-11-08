@@ -598,7 +598,7 @@
      </title>
      <title>
       <key>tr</key>
-      <value>Group main left (first part)</value>
+      <value>Grup ana sol (ilk kısım)</value>
      </title>
      <extendedTooltip>
       <name>GroupMainLeftFirstPartExtendedTooltip</name>
@@ -1034,7 +1034,7 @@
        </toolTip>
        <toolTip>
         <key>tr</key>
-        <value>POS'ta kontrol dizesiyle ek kontrol yap</value>
+        <value>POS'da kontrol dizesi ile ek kontrol yap</value>
        </toolTip>
        <toolTipRepresentation>Button</toolTipRepresentation>
        <handlers>
@@ -1526,11 +1526,11 @@
       </title>
       <title>
        <key>ru</key>
-       <value>Информация о грузоотправителях</value>
+       <value>Информация о кометенте</value>
       </title>
       <title>
        <key>tr</key>
-       <value>Gцnderen bilgileri</value>
+       <value>Gönderenler bilgisi</value>
       </title>
       <extendedTooltip>
        <name>GroupConsignorsInfoExtendedTooltip</name>
@@ -1557,11 +1557,11 @@
        </collapsedRepresentationTitle>
        <collapsedRepresentationTitle>
         <key>ru</key>
-        <value>Информация о грузоотправителях</value>
+        <value>Информация о кометенте</value>
        </collapsedRepresentationTitle>
        <collapsedRepresentationTitle>
         <key>tr</key>
-        <value>Gцnderen bilgileri</value>
+        <value>Gönderenler bilgisi</value>
        </collapsedRepresentationTitle>
        <collapsed>true</collapsed>
        <representation>WeakSeparation</representation>
@@ -1587,7 +1587,7 @@
      </title>
      <title>
       <key>tr</key>
-      <value>Group main left (second part)</value>
+      <value>Grup ana sol (ikinci kısım)</value>
      </title>
      <extendedTooltip>
       <name>GroupMainLeftSecondPartExtendedTooltip</name>

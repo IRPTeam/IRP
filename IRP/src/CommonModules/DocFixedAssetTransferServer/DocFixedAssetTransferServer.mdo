@@ -11,7 +11,7 @@
  </synonym>
  <synonym>
   <key>tr</key>
-  <value>Sabit varlık transfer belgesi sunucusu</value>
+  <value>Sabit kıymet transfer sunucusu</value>
  </synonym>
  <server>true</server>
  <serverCall>true</serverCall>

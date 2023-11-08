@@ -231,7 +231,7 @@
   </synonym>
   <synonym>
    <key>tr</key>
-   <value>Sabit varlık</value>
+   <value>Sabit kıymet</value>
   </synonym>
   <type>
    <types>CatalogRef.FixedAssets</types>

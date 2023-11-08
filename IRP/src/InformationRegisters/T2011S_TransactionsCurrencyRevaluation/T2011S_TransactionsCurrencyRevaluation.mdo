@@ -20,7 +20,7 @@
  </synonym>
  <synonym>
   <key>tr</key>
-  <value>T2011S Transactions currency revaluation</value>
+  <value>T2011S İşlemler para birimi değerlemesi</value>
  </synonym>
  <useStandardCommands>true</useStandardCommands>
  <editType>InDialog</editType>

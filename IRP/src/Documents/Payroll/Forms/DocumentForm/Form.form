@@ -3236,7 +3236,7 @@
     </title>
     <title>
      <key>tr</key>
-     <value>Grup toplam tahakkuk miktarı</value>
+     <value>Grup toplam birikim tutarı</value>
     </title>
     <extendedTooltip>
      <name>GroupTotalAccrualAmountExtendedTooltip</name>
@@ -3344,7 +3344,7 @@
     </title>
     <title>
      <key>tr</key>
-     <value>Grup kesinti miktarı</value>
+     <value>Grup indirimi tutarı</value>
     </title>
     <extendedTooltip>
      <name>GroupDeductionAmountExtendedTooltip</name>
@@ -3386,7 +3386,7 @@
      </title>
      <title>
       <key>tr</key>
-      <value>C/A İndirimi</value>
+      <value>C/A Kesintisi</value>
      </title>
      <visible>true</visible>
      <enabled>true</enabled>
@@ -3452,7 +3452,7 @@
     </title>
     <title>
      <key>tr</key>
-     <value>Grup avans kesinti miktarı</value>
+     <value>Grup avans kesintisi tutarı</value>
     </title>
     <extendedTooltip>
      <name>GroupCashAdvanceDeductionAmounExtendedTooltip</name>
@@ -3607,9 +3607,7 @@
     </title>
     <title>
      <key>tr</key>
-     <value>
-
-</value>
+     <value>Grup ödeme miktarı</value>
     </title>
     <extendedTooltip>
      <name>GroupPaymentAmountExtendedTooltip</name>
@@ -3903,7 +3901,7 @@
   </title>
   <title>
    <key>tr</key>
-   <value>Toplam ödeme miktarı</value>
+   <value>Toplam ödeme tutarı</value>
   </title>
   <id>12</id>
   <valueType>
@@ -3984,7 +3982,7 @@
   </title>
   <title>
    <key>tr</key>
-   <value>Avans para birimlerini dьzenle</value>
+   <value>Birikim dövizlerini düzenle</value>
   </title>
   <id>17</id>
   <use>
@@ -4012,7 +4010,7 @@
   </title>
   <title>
    <key>tr</key>
-   <value>Para birimleri avans kesintisini dьzenle</value>
+   <value>Dövizler avans kesintisi düzenle</value>
   </title>
   <id>18</id>
   <use>
@@ -4040,7 +4038,7 @@
   </title>
   <title>
    <key>tr</key>
-   <value>Para birimlerini dьzenle kesinti</value>
+   <value>Para birimlerini düşme düzenle</value>
   </title>
   <id>19</id>
   <use>
@@ -4097,7 +4095,7 @@
   </title>
   <title>
    <key>tr</key>
-   <value>Kesintiyi doldur</value>
+   <value>Kesinti doldur</value>
   </title>
   <id>21</id>
   <use>
@@ -4126,7 +4124,7 @@
   </title>
   <title>
    <key>tr</key>
-   <value>Nakit avans kesintisini doldur</value>
+   <value>Avans kesintisini doldur</value>
   </title>
   <id>22</id>
   <use>

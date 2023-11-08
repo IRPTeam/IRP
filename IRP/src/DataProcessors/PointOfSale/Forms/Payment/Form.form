@@ -620,7 +620,7 @@
    </title>
    <title>
     <key>tr</key>
-    <value>Grup banka tьrь listesi</value>
+    <value>Grup banka tipi listesi</value>
    </title>
    <width>20</width>
    <horizontalStretch>true</horizontalStretch>
@@ -891,7 +891,7 @@
       </title>
       <title>
        <key>tr</key>
-       <value>Grup ödeme tarafından edinme</value>
+       <value>Edinme ile grup ödemesi</value>
       </title>
       <horizontalStretch>true</horizontalStretch>
       <groupHorizontalAlign>Left</groupHorizontalAlign>
@@ -979,7 +979,7 @@
      </title>
      <title>
       <key>tr</key>
-      <value>Grup ödeme tarafından edinme üst</value>
+      <value>Satın alımı yapan grubun en üstte ödeme</value>
      </title>
      <extendedTooltip>
       <name>GroupPaymentByAcquiringTopExtendedTooltip</name>
@@ -1872,7 +1872,7 @@
       </title>
       <title>
        <key>tr</key>
-       <value>Dekorasyon bekle</value>
+       <value>Dekorasyon bekleme</value>
       </title>
       <visible>true</visible>
       <enabled>true</enabled>
@@ -3680,7 +3680,7 @@
    </title>
    <title>
     <key>tr</key>
-    <value>Цdeme bilgisi</value>
+    <value>Ödeme bilgisi</value>
    </title>
    <id>35</id>
    <valueType>
@@ -3784,7 +3784,7 @@
    </title>
    <title>
     <key>tr</key>
-    <value>Ödeme acentesi yasal adı sözleşme</value>
+    <value>Ödeme acentesi yasal adı sözleşmesi</value>
    </title>
    <id>56</id>
    <valueType>
@@ -3809,7 +3809,7 @@
    </title>
    <title>
     <key>tr</key>
-    <value>Ödeme acentesi yasal adı</value>
+    <value>Ödeme acentesi yasal ismi</value>
    </title>
    <id>57</id>
    <valueType>
@@ -4384,7 +4384,7 @@
    </title>
    <title>
     <key>tr</key>
-    <value>Yasal ad</value>
+    <value>Yasal İsim</value>
    </title>
    <id>54</id>
    <valueType>
@@ -4459,7 +4459,7 @@
    </title>
    <title>
     <key>tr</key>
-    <value>Yüzde</value>
+    <value>Yüzde124</value>
    </title>
    <id>61</id>
    <valueType>
@@ -4589,7 +4589,7 @@
   </title>
   <title>
    <key>tr</key>
-   <value>Perakende temeli</value>
+   <value>Perakende esası</value>
   </title>
   <id>42</id>
   <valueType>
@@ -4639,7 +4639,7 @@
   </title>
   <title>
    <key>tr</key>
-   <value>Banka цdeme tьrь listesi</value>
+   <value>Banka ödeme türü listesi</value>
   </title>
   <id>48</id>
   <valueType>
@@ -4884,7 +4884,7 @@ WHERE
   </title>
   <title>
    <key>tr</key>
-   <value>Aynı konsolide satışta iade</value>
+   <value>Aynı konsolide satışlarda iade</value>
   </title>
   <id>50</id>
   <valueType>
@@ -4909,7 +4909,7 @@ WHERE
   </title>
   <title>
    <key>tr</key>
-   <value>Sertifika цdeme tьrleri</value>
+   <value>Sertifika ödeme türleri</value>
   </title>
   <id>63</id>
   <valueType>
@@ -5510,7 +5510,7 @@ WHERE
   </title>
   <title>
    <key>tr</key>
-   <value>Цde</value>
+   <value>Öde</value>
   </title>
   <id>27</id>
   <use>
@@ -5597,7 +5597,7 @@ WHERE
   </title>
   <title>
    <key>tr</key>
-   <value>Цdeme зekini ayarla</value>
+   <value>Ödeme kontrolü ayarla</value>
   </title>
   <id>31</id>
   <use>
@@ -5705,7 +5705,7 @@ bul (F7)</value>
   </title>
   <title>
    <key>tr</key>
-   <value>Tamam düğmesini etkinleştir</value>
+   <value>Tamam butonunu aktifleştir</value>
   </title>
   <id>35</id>
   <use>

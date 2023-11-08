@@ -18,7 +18,7 @@
  </synonym>
  <synonym>
   <key>tr</key>
-  <value>Fixed asset transfer</value>
+  <value>Sabit kıymet transferi</value>
  </synonym>
  <useStandardCommands>true</useStandardCommands>
  <inputByString>Document.FixedAssetTransfer.StandardAttribute.Number</inputByString>
@@ -60,7 +60,7 @@
  </listPresentation>
  <listPresentation>
   <key>tr</key>
-  <value>Fixed asset transfers</value>
+  <value>Sabit kıymet transferleri</value>
  </listPresentation>
  <numberLength>12</numberLength>
  <numberAllowedLength>Variable</numberAllowedLength>
@@ -111,7 +111,7 @@
   </synonym>
   <synonym>
    <key>tr</key>
-   <value>Sabit varlık</value>
+   <value>Sabit kıymet</value>
   </synonym>
   <type>
    <types>CatalogRef.FixedAssets</types>
@@ -135,7 +135,7 @@
   </synonym>
   <synonym>
    <key>tr</key>
-   <value>Responsible person sender</value>
+   <value>Sorumlu kişi gönderici</value>
   </synonym>
   <type>
    <types>CatalogRef.Partners</types>
@@ -165,7 +165,7 @@
   </synonym>
   <synonym>
    <key>tr</key>
-   <value>Responsible person receiver</value>
+   <value>Sorumlu kişi alıcı</value>
   </synonym>
   <type>
    <types>CatalogRef.Partners</types>
@@ -195,7 +195,7 @@
   </synonym>
   <synonym>
    <key>tr</key>
-   <value>Business unit sender</value>
+   <value>İş birimi gönderici</value>
   </synonym>
   <type>
    <types>CatalogRef.BusinessUnits</types>
@@ -219,7 +219,7 @@
   </synonym>
   <synonym>
    <key>tr</key>
-   <value>Business unit receiver</value>
+   <value>İş birimi alıcısı</value>
   </synonym>
   <type>
    <types>CatalogRef.BusinessUnits</types>

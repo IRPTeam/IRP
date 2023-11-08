@@ -5274,7 +5274,7 @@
       </title>
       <title>
        <key>tr</key>
-       <value>Grup sevkiyat sol</value>
+       <value>Grup sevkiyatı kaldı</value>
       </title>
       <extendedTooltip>
        <name>GroupShipmentLeftExtendedTooltip</name>
@@ -5317,7 +5317,7 @@
        </title>
        <title>
         <key>tr</key>
-        <value>Gцnderen adresi</value>
+        <value>Gönderim adresi</value>
        </title>
        <visible>true</visible>
        <enabled>true</enabled>
@@ -5535,7 +5535,7 @@
      </title>
      <title>
       <key>tr</key>
-      <value>Grup sevkiyat ьst</value>
+      <value>Grup sevkiyat üst</value>
      </title>
      <extendedTooltip>
       <name>GroupShipmentTopExtendedTooltip</name>

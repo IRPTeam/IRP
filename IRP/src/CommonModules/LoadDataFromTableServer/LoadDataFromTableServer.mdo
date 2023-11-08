@@ -11,7 +11,7 @@
  </synonym>
  <synonym>
   <key>tr</key>
-  <value>Verileri tablo sunucusundan yьkle</value>
+  <value>Veri tablosundan veri yükle</value>
  </synonym>
  <server>true</server>
  <clientOrdinaryApplication>true</clientOrdinaryApplication>

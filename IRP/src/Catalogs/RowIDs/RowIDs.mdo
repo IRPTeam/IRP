@@ -968,7 +968,7 @@
   </synonym>
   <synonym>
    <key>tr</key>
-   <value>İşlem türü SC İade</value>
+   <value>SC İade işlem türü</value>
   </synonym>
   <type>
    <types>EnumRef.ShipmentConfirmationTransactionTypes</types>
@@ -1015,7 +1015,7 @@
   </synonym>
   <synonym>
    <key>tr</key>
-   <value>İşlem türü GR Perakende</value>
+   <value>İşlem tipi GR Perakende</value>
   </synonym>
   <type>
    <types>EnumRef.RetailGoodsReceiptTransactionTypes</types>

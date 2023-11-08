@@ -222,7 +222,7 @@
   </synonym>
   <synonym>
    <key>tr</key>
-   <value>Paket</value>
+   <value>Paket mi</value>
   </synonym>
   <type>
    <types>Boolean</types>
@@ -271,7 +271,7 @@
   </synonym>
   <synonym>
    <key>tr</key>
-   <value>Dış paket ID</value>
+   <value>Harici paket ID</value>
   </synonym>
   <type>
    <types>String</types>
@@ -297,7 +297,7 @@
   </synonym>
   <synonym>
    <key>tr</key>
-   <value>Gцnderen</value>
+   <value>Gönderen</value>
   </synonym>
   <type>
    <types>CatalogRef.Partners</types>
@@ -320,7 +320,7 @@
   </synonym>
   <synonym>
    <key>tr</key>
-   <value>Gцnderen adresi</value>
+   <value>Gönderim adresi</value>
   </synonym>
   <type>
    <types>CatalogRef.Addresses</types>
@@ -343,7 +343,7 @@
   </synonym>
   <synonym>
    <key>tr</key>
-   <value>Gцnderilen</value>
+   <value>Gönderilecek yer</value>
   </synonym>
   <type>
    <types>CatalogRef.Partners</types>
@@ -869,7 +869,7 @@
    </synonym>
    <synonym>
     <key>tr</key>
-    <value>Miktar sabittir</value>
+    <value>Miktar sabitlendi</value>
    </synonym>
    <type>
     <types>Boolean</types>

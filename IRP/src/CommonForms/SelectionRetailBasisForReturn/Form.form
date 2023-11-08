@@ -971,7 +971,7 @@ HAVING
   </title>
   <title>
    <key>tr</key>
-   <value>Fatura numarası</value>
+   <value>Fiskal numara</value>
   </title>
   <id>4</id>
   <valueType>
@@ -997,7 +997,7 @@ HAVING
   </title>
   <title>
    <key>tr</key>
-   <value>Seз</value>
+   <value>Seç</value>
   </title>
   <id>1</id>
   <use>

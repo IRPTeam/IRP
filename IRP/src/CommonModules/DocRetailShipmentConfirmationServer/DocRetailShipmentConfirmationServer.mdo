@@ -11,7 +11,7 @@
  </synonym>
  <synonym>
   <key>tr</key>
-  <value>Doc perakende sevkiyat onayı sunucusu</value>
+  <value>Belge perakende sevkiyat onay sunucusu</value>
  </synonym>
  <server>true</server>
  <serverCall>true</serverCall>

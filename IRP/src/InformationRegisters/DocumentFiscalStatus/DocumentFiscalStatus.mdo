@@ -73,7 +73,7 @@
   </synonym>
   <synonym>
    <key>tr</key>
-   <value>Kontrol numarası</value>
+   <value>Çek numarası</value>
   </synonym>
   <type>
    <types>String</types>

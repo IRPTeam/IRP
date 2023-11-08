@@ -190,7 +190,7 @@
     </title>
     <title>
      <key>tr</key>
-     <value>Grup Ьst</value>
+     <value>Grup Üst</value>
     </title>
     <extendedTooltip>
      <name>GroupTopExtendedTooltip</name>
@@ -413,7 +413,7 @@
      </toolTip>
      <toolTip>
       <key>tr</key>
-      <value>Bu formu bitirirken kapatma</value>
+      <value>Bitirildiğinde bu formu kapatmayın</value>
      </toolTip>
      <toolTipRepresentation>Button</toolTipRepresentation>
      <extendedTooltip>
@@ -830,7 +830,7 @@
   </title>
   <title>
    <key>tr</key>
-   <value>Grup resmi ve bilgisi</value>
+   <value>Grup resmi ve bilgi</value>
   </title>
   <extendedTooltip>
    <name>GroupPictureAndInfoExtendedTooltip</name>
@@ -981,7 +981,7 @@
   </title>
   <title>
    <key>tr</key>
-   <value>Yüzde</value>
+   <value>Yüzde124</value>
   </title>
   <id>2</id>
   <valueType>
@@ -1063,7 +1063,7 @@
   </title>
   <title>
    <key>tr</key>
-   <value>~ ile bit</value>
+   <value>Bitiş yaklaşık ~</value>
   </title>
   <id>5</id>
   <valueType>
@@ -1142,7 +1142,7 @@
   </title>
   <title>
    <key>tr</key>
-   <value>Bitirirken kapatma</value>
+   <value>Bitince kapatma</value>
   </title>
   <id>8</id>
   <valueType>
@@ -1195,7 +1195,7 @@
   </title>
   <title>
    <key>tr</key>
-   <value>Start</value>
+   <value>Başlat</value>
   </title>
   <id>10</id>
   <valueType>

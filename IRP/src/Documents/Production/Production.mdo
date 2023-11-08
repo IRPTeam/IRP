@@ -67,7 +67,7 @@
  </objectPresentation>
  <objectPresentation>
   <key>tr</key>
-  <value>Üretim</value>
+  <value>Çalışma sistemi</value>
  </objectPresentation>
  <numberLength>12</numberLength>
  <numberAllowedLength>Variable</numberAllowedLength>
@@ -463,7 +463,7 @@
   </synonym>
   <synonym>
    <key>tr</key>
-   <value>Orana göre ek maliyet vergi miktarı</value>
+   <value>Oranla ek maliyet vergi tutarı</value>
   </synonym>
   <type>
    <types>DefinedType.typePercent</types>
@@ -486,7 +486,7 @@
   </synonym>
   <synonym>
    <key>tr</key>
-   <value>Ьretim sьresi</value>
+   <value>Üretim süresi</value>
   </synonym>
   <type>
    <types>Number</types>
@@ -537,7 +537,7 @@
   </synonym>
   <synonym>
    <key>tr</key>
-   <value>Ekstra doğrudan maliyet miktarı</value>
+   <value>Ekstra doğrudan maliyet tutarı</value>
   </synonym>
   <type>
    <types>DefinedType.typeAmount</types>
@@ -560,7 +560,7 @@
   </synonym>
   <synonym>
    <key>tr</key>
-   <value>Ekstra doğrudan maliyet vergi miktarı</value>
+   <value>Ek doğrudan maliyet vergi miktarı</value>
   </synonym>
   <type>
    <types>DefinedType.typeAmount</types>

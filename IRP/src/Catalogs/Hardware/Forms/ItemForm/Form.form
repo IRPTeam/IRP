@@ -329,7 +329,7 @@
     </title>
     <title>
      <key>tr</key>
-     <value>Bağlantı türü</value>
+     <value>Bağlantı tipi</value>
     </title>
     <extendedTooltip>
      <name>GroupConnectionTypeExtendedTooltip</name>
@@ -382,7 +382,7 @@
      </toolTip>
      <toolTip>
       <key>tr</key>
-      <value>Donanım günlük kaydına günlük yazma</value>
+      <value>Günlüğü Donanım günlük kaydına yaz</value>
      </toolTip>
      <extendedTooltip>
       <name>LogExtendedTooltip</name>
@@ -506,7 +506,7 @@
    </title>
    <title>
     <key>tr</key>
-    <value>Grup sol ьst</value>
+    <value>Grup üst sol</value>
    </title>
    <extendedTooltip>
     <name>GroupTopLeftExtendedTooltip</name>
@@ -773,7 +773,7 @@
    </title>
    <title>
     <key>tr</key>
-    <value>Grup sağ üst</value>
+    <value>Grup üst sağ</value>
    </title>
    <extendedTooltip>
     <name>GroupTopRightExtendedTooltip</name>

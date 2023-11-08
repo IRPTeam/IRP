@@ -32,7 +32,7 @@
   </synonym>
   <synonym>
    <key>tr</key>
-   <value>Gьnlьk</value>
+   <value>Günlük</value>
   </synonym>
  </enumValues>
  <enumValues uuid="0b1a7c6f-4f07-4805-b7f5-df97941eaee0">
@@ -47,7 +47,7 @@
   </synonym>
   <synonym>
    <key>tr</key>
-   <value>Dцneme gцre</value>
+   <value>Döneme göre</value>
   </synonym>
  </enumValues>
 </mdclass:Enum>

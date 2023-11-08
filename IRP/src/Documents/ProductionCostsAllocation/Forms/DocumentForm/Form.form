@@ -2017,7 +2017,7 @@
    </title>
    <title>
     <key>tr</key>
-    <value>Sьreler</value>
+    <value>Süreler</value>
    </title>
    <extendedTooltip>
     <name>GroupDurationsExtendedTooltip</name>
@@ -2551,7 +2551,7 @@
   </title>
   <title>
    <key>tr</key>
-   <value>Sьreleri doldur</value>
+   <value>Süreleri doldur</value>
   </title>
   <id>9</id>
   <use>

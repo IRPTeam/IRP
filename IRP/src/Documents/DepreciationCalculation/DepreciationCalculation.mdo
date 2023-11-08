@@ -18,7 +18,7 @@
  </synonym>
  <synonym>
   <key>tr</key>
-  <value>Depreciation calculation</value>
+  <value>Amortisman hesaplaması</value>
  </synonym>
  <useStandardCommands>true</useStandardCommands>
  <inputByString>Document.DepreciationCalculation.StandardAttribute.Number</inputByString>

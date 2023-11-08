@@ -8690,7 +8690,7 @@
     </title>
     <title>
      <key>tr</key>
-     <value>Kontrol kodu dize durumu</value>
+     <value>Kod dizesi kontrol durumu</value>
     </title>
     <id>174</id>
     <valueType>
@@ -9088,7 +9088,7 @@
   </title>
   <title>
    <key>tr</key>
-   <value>Formun kilidini aз</value>
+   <value>Formun kilidini aç</value>
   </title>
   <id>175</id>
   <valueType>
@@ -9547,7 +9547,7 @@
   </title>
   <title>
    <key>tr</key>
-   <value>Formun kilidini aз</value>
+   <value>Formun kilidini aç</value>
   </title>
   <id>15</id>
   <use>

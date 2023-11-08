@@ -74,7 +74,7 @@
     </title>
     <title>
      <key>tr</key>
-     <value>Belgeleri grupla filtrele</value>
+     <value>Belgeler için grup filtresi</value>
     </title>
     <extendedTooltip>
      <name>GroupFilterDocumentsExtendedTooltip</name>
@@ -2317,7 +2317,7 @@
   </title>
   <title>
    <key>tr</key>
-   <value>Hata grupları</value>
+   <value>Hatalar grupları</value>
   </title>
   <id>20</id>
   <valueType>
@@ -2392,11 +2392,11 @@
    </title>
    <title>
     <key>ru</key>
-    <value>Случаи</value>
+    <value>Варианты</value>
    </title>
    <title>
     <key>tr</key>
-    <value>Durumlar</value>
+    <value>Vakalar</value>
    </title>
    <id>23</id>
    <valueType>
@@ -2475,7 +2475,7 @@
    </title>
    <title>
     <key>tr</key>
-    <value>Açıklamayı düzelt</value>
+    <value>Tanımı düzelt</value>
    </title>
    <id>26</id>
    <valueType>
@@ -2555,7 +2555,7 @@
    </title>
    <title>
     <key>tr</key>
-    <value>Ref</value>
+    <value>REf</value>
    </title>
    <id>10</id>
    <valueType>
@@ -2870,7 +2870,7 @@
   </title>
   <title>
    <key>tr</key>
-   <value>Hata tarafından filtre ayarla</value>
+   <value>Hata ile filtreyi ayarla</value>
   </title>
   <id>7</id>
   <use>

@@ -18,7 +18,7 @@
  </synonym>
  <synonym>
   <key>tr</key>
-  <value>Bordro</value>
+  <value>Maaş Bordrosu</value>
  </synonym>
  <useStandardCommands>true</useStandardCommands>
  <inputByString>Document.Payroll.StandardAttribute.Number</inputByString>
@@ -203,7 +203,7 @@
   </synonym>
   <synonym>
    <key>tr</key>
-   <value>Цdeme dцnemi</value>
+   <value>Ödeme periyodu</value>
   </synonym>
   <type>
    <types>CatalogRef.PlanningPeriods</types>
@@ -283,7 +283,7 @@
   </synonym>
   <synonym>
    <key>tr</key>
-   <value>Avans formu ile seзim</value>
+   <value>Birikim formuna göre seçim</value>
   </synonym>
   <usePurposes>PersonalComputer</usePurposes>
   <usePurposes>MobileDevice</usePurposes>
@@ -392,7 +392,7 @@
    </synonym>
    <synonym>
     <key>tr</key>
-    <value>Tahakkuk tьrь</value>
+    <value>Tahakkuk türü</value>
    </synonym>
    <type>
     <types>CatalogRef.AccrualAndDeductionTypes</types>
@@ -582,7 +582,7 @@
    </synonym>
    <synonym>
     <key>tr</key>
-    <value>Kesinti tьrь</value>
+    <value>İndirim türü</value>
    </synonym>
    <type>
     <types>CatalogRef.AccrualAndDeductionTypes</types>

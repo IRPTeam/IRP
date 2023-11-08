@@ -449,7 +449,7 @@
   </synonym>
   <synonym>
    <key>tr</key>
-   <value>Alma şubesi</value>
+   <value>Alım подразделение</value>
   </synonym>
   <type>
    <types>CatalogRef.BusinessUnits</types>

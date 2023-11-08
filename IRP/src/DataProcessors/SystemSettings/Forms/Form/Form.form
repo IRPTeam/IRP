@@ -416,7 +416,7 @@
   </title>
   <title>
    <key>tr</key>
-   <value>Saat dilimi</value>
+   <value>Zaman dilimi</value>
   </title>
   <extendedTooltip>
    <name>GroupTimeZoneExtendedTooltip</name>
@@ -701,7 +701,7 @@ After that - all jobs in CURRENT session will be start as common code, not like 
   </title>
   <title>
    <key>tr</key>
-   <value>Mevcut veritabanı saat dilimi</value>
+   <value>Mevcut veritabanı zaman dilimi</value>
   </title>
   <id>5</id>
   <valueType>
@@ -727,7 +727,7 @@ After that - all jobs in CURRENT session will be start as common code, not like 
   </title>
   <title>
    <key>tr</key>
-   <value>Mevcut oturum saat dilimi</value>
+   <value>Mevcut oturumun zaman dilimi</value>
   </title>
   <id>6</id>
   <valueType>
@@ -753,7 +753,7 @@ After that - all jobs in CURRENT session will be start as common code, not like 
   </title>
   <title>
    <key>tr</key>
-   <value>Mevcut veritabanı saati</value>
+   <value>Mevcut veritabanı zamanı</value>
   </title>
   <id>7</id>
   <valueType>
@@ -779,7 +779,7 @@ After that - all jobs in CURRENT session will be start as common code, not like 
   </title>
   <title>
    <key>tr</key>
-   <value>Mevcut oturum sьresi</value>
+   <value>Geçerli oturum zamanı</value>
   </title>
   <id>8</id>
   <valueType>
@@ -857,7 +857,7 @@ After that - all jobs in CURRENT session will be start as common code, not like 
   </title>
   <title>
    <key>tr</key>
-   <value>Zaman bilgisini gьncelle</value>
+   <value>Zaman bilgisini güncelle</value>
   </title>
   <id>1</id>
   <use>

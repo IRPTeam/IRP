@@ -18,7 +18,7 @@
  </synonym>
  <synonym>
   <key>tr</key>
-  <value>Ьretim maliyetleri tahsisi</value>
+  <value>Üretim maliyetlerinin dağıtımı</value>
  </synonym>
  <useStandardCommands>true</useStandardCommands>
  <inputByString>Document.ProductionCostsAllocation.StandardAttribute.Number</inputByString>
@@ -62,7 +62,7 @@
  </listPresentation>
  <listPresentation>
   <key>tr</key>
-  <value>Üretim maliyetleri tahsisatları</value>
+  <value>Üretim maliyeti tahsisleri</value>
  </listPresentation>
  <numberLength>12</numberLength>
  <numberAllowedLength>Variable</numberAllowedLength>
@@ -221,7 +221,7 @@
   </synonym>
   <synonym>
    <key>tr</key>
-   <value>Ьretim maliyetleri listesi</value>
+   <value>Üretim maliyetleri listesi</value>
   </synonym>
   <attributes uuid="c34e7aca-0893-4443-be05-fef01fe4abc3">
    <name>Key</name>
@@ -361,7 +361,7 @@
   </synonym>
   <synonym>
    <key>tr</key>
-   <value>Ьretim sьreleri listesi</value>
+   <value>Üretim süreleri listesi</value>
   </synonym>
   <attributes uuid="5cbaacfa-b40a-4319-b53a-880052050497">
    <name>Key</name>
@@ -476,7 +476,7 @@
    </synonym>
    <synonym>
     <key>tr</key>
-    <value>Sьre</value>
+    <value>Süre</value>
    </synonym>
    <type>
     <types>Number</types>

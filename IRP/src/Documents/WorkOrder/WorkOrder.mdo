@@ -736,7 +736,7 @@
    </synonym>
    <synonym>
     <key>tr</key>
-    <value>Miktar sabittir</value>
+    <value>Miktar sabitlendi</value>
    </synonym>
    <type>
     <types>Boolean</types>
@@ -1223,7 +1223,7 @@
   </synonym>
   <synonym>
    <key>tr</key>
-   <value>Vergi listesini SİL</value>
+   <value>VERGİ listesini SİL</value>
   </synonym>
   <attributes uuid="78f288e4-9a66-40e9-a10d-9e643acaa208">
    <name>Key</name>

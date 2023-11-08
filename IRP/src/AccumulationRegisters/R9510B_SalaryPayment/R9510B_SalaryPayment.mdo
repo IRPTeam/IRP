@@ -123,7 +123,7 @@
   </synonym>
   <synonym>
    <key>tr</key>
-   <value>Цdeme dцnemi</value>
+   <value>Ödeme periyodu</value>
   </synonym>
   <type>
    <types>CatalogRef.PlanningPeriods</types>

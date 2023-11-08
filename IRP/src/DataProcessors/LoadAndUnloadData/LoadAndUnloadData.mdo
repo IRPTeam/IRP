@@ -15,7 +15,7 @@
  </synonym>
  <synonym>
   <key>tr</key>
-  <value>Veri yükleme ve boşaltma</value>
+  <value>Veri yükle ve boşalt</value>
  </synonym>
  <useStandardCommands>true</useStandardCommands>
  <defaultForm>DataProcessor.LoadAndUnloadData.Form.Form</defaultForm>
@@ -31,7 +31,7 @@
   </synonym>
   <synonym>
    <key>tr</key>
-   <value>Serialize edilmiş bilgi</value>
+   <value>Seri numaralandırılmış bilgi</value>
   </synonym>
   <type>
    <types>String</types>
@@ -73,7 +73,7 @@
   </synonym>
   <synonym>
    <key>tr</key>
-   <value>Deserialize edilmiş bilgi</value>
+   <value>Serileştirilmiş bilgi</value>
   </synonym>
   <type>
    <types>String</types>

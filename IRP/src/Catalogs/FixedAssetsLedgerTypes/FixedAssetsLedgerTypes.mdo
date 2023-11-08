@@ -18,7 +18,7 @@
  </synonym>
  <synonym>
   <key>tr</key>
-  <value>Fixed assets ledger types</value>
+  <value>Sabit kıymetler defteri türleri</value>
  </synonym>
  <useStandardCommands>true</useStandardCommands>
  <fullTextSearchOnInputByString>DontUse</fullTextSearchOnInputByString>
@@ -74,7 +74,7 @@
   </synonym>
   <synonym>
    <key>tr</key>
-   <value>Calculate depreciation</value>
+   <value>Amortismanı hesapla</value>
   </synonym>
   <type>
    <types>Boolean</types>

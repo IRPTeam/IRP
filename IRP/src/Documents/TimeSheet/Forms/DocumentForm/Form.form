@@ -1230,7 +1230,7 @@
     </title>
     <title>
      <key>tr</key>
-     <value>Zaman зizelgesi sol</value>
+     <value>Zaman çizelgesi sol</value>
     </title>
     <extendedTooltip>
      <name>GroupTimeSheetLeftExtendedTooltip</name>
@@ -1939,7 +1939,7 @@
    </title>
    <title>
     <key>tr</key>
-    <value>Zaman зizelgesi</value>
+    <value>Zaman çizelgesi</value>
    </title>
    <extendedTooltip>
     <name>GroupTimeSheetExtendedTooltip</name>
@@ -2874,7 +2874,7 @@
   </title>
   <title>
    <key>tr</key>
-   <value>Zaman зizelgesini doldur</value>
+   <value>Zaman çizelgesini doldur</value>
   </title>
   <id>16</id>
   <use>

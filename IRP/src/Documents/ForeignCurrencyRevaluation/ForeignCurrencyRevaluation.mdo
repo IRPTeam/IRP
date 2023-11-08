@@ -18,7 +18,7 @@
  </synonym>
  <synonym>
   <key>tr</key>
-  <value>Yabancı para değerlemesi</value>
+  <value>Yabancı para birimi değerlemesi</value>
  </synonym>
  <useStandardCommands>true</useStandardCommands>
  <inputByString>Document.ForeignCurrencyRevaluation.StandardAttribute.Number</inputByString>
@@ -36,7 +36,7 @@
  </objectPresentation>
  <objectPresentation>
   <key>tr</key>
-  <value>Yabancı para değerlemesi</value>
+  <value>Yabancı para birimi değerlemesi</value>
  </objectPresentation>
  <listPresentation>
   <key>en</key>
@@ -121,7 +121,7 @@
   </synonym>
   <synonym>
    <key>tr</key>
-   <value>(Gelir) Tьr</value>
+   <value>(Gelir) Türü</value>
   </synonym>
   <type>
    <types>CatalogRef.ExpenseAndRevenueTypes</types>
@@ -196,7 +196,7 @@
   </synonym>
   <synonym>
    <key>tr</key>
-   <value>(Gider) Tьr</value>
+   <value>(Gider) Türü</value>
   </synonym>
   <type>
    <types>CatalogRef.ExpenseAndRevenueTypes</types>

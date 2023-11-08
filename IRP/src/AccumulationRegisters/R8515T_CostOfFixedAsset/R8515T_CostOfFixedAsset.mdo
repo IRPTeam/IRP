@@ -19,7 +19,7 @@
  </synonym>
  <synonym>
   <key>tr</key>
-  <value>R8515 Cost of fixed asset</value>
+  <value>R8515 Sabit kıymet maliyeti</value>
  </synonym>
  <useStandardCommands>true</useStandardCommands>
  <registerType>Turnovers</registerType>
@@ -102,7 +102,7 @@
   </synonym>
   <synonym>
    <key>tr</key>
-   <value>Sabit varlık</value>
+   <value>Sabit kıymet</value>
   </synonym>
   <type>
    <types>CatalogRef.FixedAssets</types>

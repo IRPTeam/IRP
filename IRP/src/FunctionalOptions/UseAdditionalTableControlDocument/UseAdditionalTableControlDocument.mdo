@@ -11,7 +11,7 @@
  </synonym>
  <synonym>
   <key>tr</key>
-  <value>Ek tablo kontrol belgesi kullan</value>
+  <value>Ek tablo kontrol belgesi kullanın</value>
  </synonym>
  <location>Constant.UseAdditionalTableControlDocument</location>
  <privilegedGetMode>true</privilegedGetMode>

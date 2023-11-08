@@ -323,7 +323,7 @@
   </synonym>
   <synonym>
    <key>tr</key>
-   <value>Saat dilimi</value>
+   <value>Zaman dilimi</value>
   </synonym>
   <type>
    <types>String</types>
@@ -349,7 +349,7 @@
   </synonym>
   <synonym>
    <key>tr</key>
-   <value>Kullanıcı Kimliği</value>
+   <value>Kullanıcı ID</value>
   </synonym>
   <type>
    <types>DefinedType.typeBarcode</types>

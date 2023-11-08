@@ -18,7 +18,7 @@
  </synonym>
  <synonym>
   <key>tr</key>
-  <value>Araз tьrleri</value>
+  <value>Araç tipleri</value>
  </synonym>
  <useStandardCommands>true</useStandardCommands>
  <inputByString>Catalog.VehicleTypes.StandardAttribute.Code</inputByString>
@@ -60,7 +60,7 @@
  </objectPresentation>
  <objectPresentation>
   <key>tr</key>
-  <value>Araз tipi</value>
+  <value>Araç tipi</value>
  </objectPresentation>
  <listPresentation>
   <key>en</key>
@@ -72,7 +72,7 @@
  </listPresentation>
  <listPresentation>
   <key>tr</key>
-  <value>Araз tьrleri</value>
+  <value>Araç tipleri</value>
  </listPresentation>
  <levelCount>2</levelCount>
  <foldersOnTop>true</foldersOnTop>

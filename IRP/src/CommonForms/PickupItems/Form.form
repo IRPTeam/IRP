@@ -2250,7 +2250,7 @@
    </title>
    <title>
     <key>tr</key>
-    <value>Kontrol kod dizesi</value>
+    <value>Kontrol kodu dizesi</value>
    </title>
    <id>45</id>
    <valueType>
@@ -2275,7 +2275,7 @@
    </title>
    <title>
     <key>tr</key>
-    <value>Sertifika mı</value>
+    <value>Sertifika var</value>
    </title>
    <id>46</id>
    <valueType>
@@ -2614,7 +2614,7 @@
    </title>
    <title>
     <key>tr</key>
-    <value>Kontrol kod dizesi</value>
+    <value>Kontrol kodu dizesi</value>
    </title>
    <id>44</id>
    <valueType>
@@ -2639,7 +2639,7 @@
    </title>
    <title>
     <key>tr</key>
-    <value>Sertifika mı</value>
+    <value>Sertifika var</value>
    </title>
    <id>47</id>
    <valueType>
@@ -2966,7 +2966,7 @@
    </title>
    <title>
     <key>tr</key>
-    <value>Kontrol kod dizesi</value>
+    <value>Kontrol kodu dizesi</value>
    </title>
    <id>43</id>
    <valueType>
@@ -2991,7 +2991,7 @@
    </title>
    <title>
     <key>tr</key>
-    <value>Sertifika mı</value>
+    <value>Sertifika var</value>
    </title>
    <id>48</id>
    <valueType>

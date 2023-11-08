@@ -11,7 +11,7 @@
  </synonym>
  <synonym>
   <key>tr</key>
-  <value>Seri lot numarası istemci sunucusu</value>
+  <value>Seri lot numarası müşteri sunucusu</value>
  </synonym>
  <clientManagedApplication>true</clientManagedApplication>
  <server>true</server>

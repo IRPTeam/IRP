@@ -14,7 +14,7 @@
  </synonym>
  <synonym>
   <key>tr</key>
-  <value>Tür erişim belgesi</value>
+  <value>Erişim belgesi türü</value>
  </synonym>
  <type>
   <types>DocumentObject.AdditionalCostAllocation</types>

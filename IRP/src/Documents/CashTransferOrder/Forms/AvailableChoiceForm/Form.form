@@ -982,7 +982,7 @@ where
       </content>
       <content>
        <key>tr</key>
-       <value>Seзili belgeler dizisi</value>
+       <value>Seçilen belgeler dizisi</value>
       </content>
      </localValue>
     </title>
@@ -1026,7 +1026,7 @@ where
       </content>
       <content>
        <key>tr</key>
-       <value>Seçili belgeler dizisini kullanın</value>
+       <value>Seçili belgeler dizisini kullan</value>
       </content>
      </localValue>
     </title>

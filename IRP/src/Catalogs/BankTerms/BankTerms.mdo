@@ -94,7 +94,7 @@
   </synonym>
   <synonym>
    <key>tr</key>
-   <value>Banka dцnem tьrь</value>
+   <value>Banka dönem tipi</value>
   </synonym>
   <type>
    <types>EnumRef.BankTermTypes</types>

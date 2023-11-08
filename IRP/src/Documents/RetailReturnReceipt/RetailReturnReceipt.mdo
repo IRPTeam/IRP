@@ -1185,7 +1185,7 @@
    </synonym>
    <synonym>
     <key>tr</key>
-    <value>Miktar sabittir</value>
+    <value>Miktar sabitlendi</value>
    </synonym>
    <type>
     <types>Boolean</types>
@@ -1207,7 +1207,7 @@
    </synonym>
    <synonym>
     <key>tr</key>
-    <value>İndirilen maliyet vergisi</value>
+    <value>Karaya çıkarılan maliyet vergisi</value>
    </synonym>
    <type>
     <types>DefinedType.typeAmount</types>
@@ -1456,7 +1456,7 @@
   </synonym>
   <synonym>
    <key>tr</key>
-   <value>Vergi listesini SİL</value>
+   <value>VERGİ listesini SİL</value>
   </synonym>
   <standardAttributes>
    <dataHistory>Use</dataHistory>
@@ -2171,7 +2171,7 @@
    </synonym>
    <synonym>
     <key>tr</key>
-    <value>Цdeme bilgisi</value>
+    <value>Ödeme bilgisi</value>
    </synonym>
    <type>
     <types>String</types>
@@ -2245,7 +2245,7 @@
    </synonym>
    <synonym>
     <key>tr</key>
-    <value>Ödeme acentesi yasal adı</value>
+    <value>Ödeme acentesi yasal ismi</value>
    </synonym>
    <type>
     <types>CatalogRef.Companies</types>
@@ -2311,7 +2311,7 @@
    </synonym>
    <synonym>
     <key>tr</key>
-    <value>Ödeme acentesi yasal adı sözleşme</value>
+    <value>Ödeme acentesi yasal adı sözleşmesi</value>
    </synonym>
    <type>
     <types>CatalogRef.LegalNameContracts</types>
@@ -2752,7 +2752,7 @@
   </synonym>
   <synonym>
    <key>tr</key>
-   <value>Kontrol kodu dizeleri</value>
+   <value>Kontrol kod dizeleri</value>
   </synonym>
   <attributes uuid="c5f7dd16-ce65-4dd1-8e75-ed8a2ecd9ccc">
    <name>Key</name>

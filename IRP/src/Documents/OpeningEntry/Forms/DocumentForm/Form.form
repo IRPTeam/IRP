@@ -8375,7 +8375,7 @@
    </title>
    <title>
     <key>tr</key>
-    <value>Hesaplanabilir (diğer)</value>
+    <value>Alacak hesabı (diğer)</value>
    </title>
    <extendedTooltip>
     <name>GroupAccountPayableOtherExtendedTooltip</name>
@@ -9061,7 +9061,7 @@
    </title>
    <title>
     <key>tr</key>
-    <value>Diğer alacaklar (diğer)</value>
+    <value>Alacak hesabı (diğer)</value>
    </title>
    <extendedTooltip>
     <name>GroupAccountReceivableOtherExtendedTooltip</name>
@@ -12261,7 +12261,7 @@
    </title>
    <title>
     <key>tr</key>
-    <value>Perakende müşterilerinden avans</value>
+    <value>Perakende müşterilerden avans</value>
    </title>
    <extendedTooltip>
     <name>GroupAdvanceFromRetailCustomersExtendedTooltip</name>
@@ -13581,7 +13581,7 @@
    </title>
    <title>
     <key>tr</key>
-    <value>Sabit varlıklar</value>
+    <value>Sabit kıymetler</value>
    </title>
    <extendedTooltip>
     <name>GroupFixedAssetsExtendedTooltip</name>
@@ -14492,7 +14492,7 @@
   </title>
   <title>
    <key>tr</key>
-   <value>Çalışan avans para birimlerini düzenle</value>
+   <value>Avans dövizlerini düzenle</value>
   </title>
   <id>11</id>
   <use>
@@ -14521,7 +14521,7 @@
   </title>
   <title>
    <key>tr</key>
-   <value>Para birimlerini düzenle Perakende müşterilerinden avans</value>
+   <value>Dövizler Perakende müşterilerden avans düzenle</value>
   </title>
   <id>12</id>
   <use>
@@ -14550,7 +14550,7 @@
   </title>
   <title>
    <key>tr</key>
-   <value>Para birimleri maaş ödemesini düzenle</value>
+   <value>Maaş ödemeleri için dövizleri düzenle</value>
   </title>
   <id>13</id>
   <use>
@@ -14579,7 +14579,7 @@
   </title>
   <title>
    <key>tr</key>
-   <value>Düzenle para birimleri hesaplanabilir diğer</value>
+   <value>Diğer alacak hesabı dövizlerini düzenle</value>
   </title>
   <id>14</id>
   <use>
@@ -14608,7 +14608,7 @@
   </title>
   <title>
    <key>tr</key>
-   <value>Para birimlerini düzenle diğer alacak hesabı</value>
+   <value>Diğer alacaklar için para birimlerini düzenle</value>
   </title>
   <id>15</id>
   <use>
@@ -14637,7 +14637,7 @@
   </title>
   <title>
    <key>tr</key>
-   <value>Para birimlerini dьzenle transit nakit</value>
+   <value>Geçişteki nakit para birimlerini düzenle</value>
   </title>
   <id>16</id>
   <use>
@@ -14666,7 +14666,7 @@
   </title>
   <title>
    <key>tr</key>
-   <value>Sabit varlıkların para birimlerini düzenle</value>
+   <value>Sabit kıymetler için para birimlerini düzenle</value>
   </title>
   <id>17</id>
   <use>

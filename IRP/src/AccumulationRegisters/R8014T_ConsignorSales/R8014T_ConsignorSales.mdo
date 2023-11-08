@@ -166,7 +166,7 @@
   </synonym>
   <synonym>
    <key>tr</key>
-   <value>Ortaklık süresini SİL</value>
+   <value>SİL Ortak vade</value>
   </synonym>
   <type>
    <types>CatalogRef.Agreements</types>
@@ -341,7 +341,7 @@
   </synonym>
   <synonym>
    <key>tr</key>
-   <value>SİL hesaplama satırı</value>
+   <value>SİL satırı hesaplama</value>
   </synonym>
   <type>
    <types>Boolean</types>
@@ -426,7 +426,7 @@
   </synonym>
   <synonym>
    <key>tr</key>
-   <value>Gönderen fiyatını SİL</value>
+   <value>Komitent fiyatını SİL</value>
   </synonym>
   <type>
    <types>DefinedType.typePrice</types>

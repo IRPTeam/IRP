@@ -18,7 +18,7 @@
  </synonym>
  <synonym>
   <key>tr</key>
-  <value>Zaman зizelgesi</value>
+  <value>Zaman çizelgesi</value>
  </synonym>
  <useStandardCommands>true</useStandardCommands>
  <inputByString>Document.TimeSheet.StandardAttribute.Number</inputByString>
@@ -62,7 +62,7 @@
  </listPresentation>
  <listPresentation>
   <key>tr</key>
-  <value>Zaman зizelgeleri</value>
+  <value>Zaman çizelgeleri</value>
  </listPresentation>
  <numberLength>12</numberLength>
  <numberAllowedLength>Variable</numberAllowedLength>
@@ -221,7 +221,7 @@
   </synonym>
   <synonym>
    <key>tr</key>
-   <value>Zaman зizelgesi listesi</value>
+   <value>Zaman çizelgesi listesi</value>
   </synonym>
   <attributes uuid="ef268511-a3cb-401c-8592-286ec850cf62">
    <name>Key</name>
@@ -335,7 +335,7 @@
    </synonym>
    <synonym>
     <key>tr</key>
-    <value>Tahakkuk ve kesinti tьrь</value>
+    <value>Tahakkuk ve kesinti türü</value>
    </synonym>
    <type>
     <types>CatalogRef.AccrualAndDeductionTypes</types>

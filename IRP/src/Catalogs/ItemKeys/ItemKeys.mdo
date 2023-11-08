@@ -564,11 +564,11 @@
   </synonym>
   <synonym>
    <key>ru</key>
-   <value>Информация о грузоотправителях</value>
+   <value>Информация о кометенте</value>
   </synonym>
   <synonym>
    <key>tr</key>
-   <value>Gцnderen bilgileri</value>
+   <value>Gönderenler bilgisi</value>
   </synonym>
   <attributes uuid="94d13cf6-1b4f-40c5-a35d-a9eb1e5055dc">
    <name>Company</name>

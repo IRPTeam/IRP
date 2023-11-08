@@ -39,7 +39,7 @@
   </synonym>
   <synonym>
    <key>tr</key>
-   <value>Fatura miktarı</value>
+   <value>Fatura tutarı</value>
   </synonym>
   <type>
    <types>DefinedType.typeAmount</types>
@@ -61,7 +61,7 @@
   </synonym>
   <synonym>
    <key>tr</key>
-   <value>Fatura vergi miktarı</value>
+   <value>Fatura vergi tutarı</value>
   </synonym>
   <type>
    <types>DefinedType.typeAmount</types>
@@ -84,7 +84,7 @@
   </synonym>
   <synonym>
    <key>tr</key>
-   <value>Dolaylı maliyet miktarı</value>
+   <value>Dolaylı maliyet tutarı</value>
   </synonym>
   <type>
    <types>DefinedType.typeAmount</types>
@@ -107,7 +107,7 @@
   </synonym>
   <synonym>
    <key>tr</key>
-   <value>Dolaylı maliyet vergi miktarı</value>
+   <value>Dolaylı maliyet vergi tutarı</value>
   </synonym>
   <type>
    <types>DefinedType.typeAmount</types>
@@ -153,7 +153,7 @@
   </synonym>
   <synonym>
    <key>tr</key>
-   <value>Orana göre ek maliyet vergi miktarı</value>
+   <value>Oranla ek maliyet vergi tutarı</value>
   </synonym>
   <type>
    <types>DefinedType.typeAmount</types>
@@ -176,7 +176,7 @@
   </synonym>
   <synonym>
    <key>tr</key>
-   <value>Ekstra doğrudan maliyet miktarı</value>
+   <value>Ekstra doğrudan maliyet tutarı</value>
   </synonym>
   <type>
    <types>DefinedType.typeAmount</types>
@@ -199,7 +199,7 @@
   </synonym>
   <synonym>
    <key>tr</key>
-   <value>Ekstra doğrudan maliyet vergi miktarı</value>
+   <value>Ek doğrudan maliyet vergi miktarı</value>
   </synonym>
   <type>
    <types>DefinedType.typeAmount</types>
@@ -245,7 +245,7 @@
   </synonym>
   <synonym>
    <key>tr</key>
-   <value>Tahsis edilen maliyet vergi miktarı</value>
+   <value>Ayrılan maliyet vergi miktarı</value>
   </synonym>
   <type>
    <types>DefinedType.typeAmount</types>
@@ -268,7 +268,7 @@
   </synonym>
   <synonym>
    <key>tr</key>
-   <value>Ayrılan gelir miktarı</value>
+   <value>Dağıtılan gelir miktarı</value>
   </synonym>
   <type>
    <types>DefinedType.typeAmount</types>
@@ -291,7 +291,7 @@
   </synonym>
   <synonym>
    <key>tr</key>
-   <value>Ayrılan gelir vergi miktarı</value>
+   <value>Ayrılan gelir vergisi tutarı</value>
   </synonym>
   <type>
    <types>DefinedType.typeAmount</types>

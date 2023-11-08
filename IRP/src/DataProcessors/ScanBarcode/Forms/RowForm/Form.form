@@ -234,7 +234,7 @@
   </title>
   <title>
    <key>tr</key>
-   <value>SeriLot Numarası Grubu</value>
+   <value>SeriLot Numarası grubu</value>
   </title>
   <horizontalStretch>true</horizontalStretch>
   <extendedTooltip>
@@ -945,7 +945,7 @@
   </title>
   <title>
    <key>tr</key>
-   <value>Seri lot numarasına ihtiyaç var</value>
+   <value>Seri lot numarası gerekiyor</value>
   </title>
   <id>11</id>
   <valueType>

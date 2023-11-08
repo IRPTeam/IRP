@@ -2173,7 +2173,7 @@
   </title>
   <title>
    <key>tr</key>
-   <value>Aynı öğeyi say</value>
+   <value>Aynı ürünün taranma sayısı</value>
   </title>
   <id>10</id>
   <valueType>
@@ -2205,7 +2205,7 @@
   </title>
   <title>
    <key>tr</key>
-   <value>Zaten taranan sayı</value>
+   <value>Zaten taranan sayım</value>
   </title>
   <id>12</id>
   <valueType>
@@ -2234,7 +2234,7 @@
   </title>
   <title>
    <key>tr</key>
-   <value>Tarama düğmesini gizle</value>
+   <value>Tarama butonunu gizle</value>
   </title>
   <id>13</id>
   <valueType>

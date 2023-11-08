@@ -2985,7 +2985,7 @@
   </synonym>
   <synonym>
    <key>tr</key>
-   <value>Perakende müşterilerinden avans</value>
+   <value>Perakende müşterilerden avans</value>
   </synonym>
   <attributes uuid="ecd696cc-4931-40e1-bb27-dea0270c2760">
    <name>Key</name>
@@ -3202,7 +3202,7 @@
    </synonym>
    <synonym>
     <key>tr</key>
-    <value>Цdeme dцnemi</value>
+    <value>Ödeme periyodu</value>
    </synonym>
    <type>
     <types>CatalogRef.PlanningPeriods</types>
@@ -3235,7 +3235,7 @@
   </synonym>
   <synonym>
    <key>tr</key>
-   <value>Diğer alacak hesabı</value>
+   <value>Diğer alacaklar</value>
   </synonym>
   <attributes uuid="8b5971fb-865d-4c83-a94f-a97be6e7cd1d">
    <name>Key</name>
@@ -3417,7 +3417,7 @@
   </synonym>
   <synonym>
    <key>tr</key>
-   <value>Diğer ödenecek hesap</value>
+   <value>Diğer alacak hesabı</value>
   </synonym>
   <attributes uuid="a46b9bff-095f-4ae4-9930-7934acac70b5">
    <name>Key</name>
@@ -3749,7 +3749,7 @@
    </synonym>
    <synonym>
     <key>tr</key>
-    <value>Makbuz şubesi</value>
+    <value>Makbuz veren şube</value>
    </synonym>
    <type>
     <types>CatalogRef.BusinessUnits</types>
@@ -3777,7 +3777,7 @@
   </synonym>
   <synonym>
    <key>tr</key>
-   <value>Sabit varlıklar</value>
+   <value>Sabit kıymetler</value>
   </synonym>
   <attributes uuid="b3a77a60-2dc8-4872-b689-8a54906e3ffe">
    <name>Key</name>
@@ -3813,7 +3813,7 @@
    </synonym>
    <synonym>
     <key>tr</key>
-    <value>Sabit varlık</value>
+    <value>Sabit kıymet</value>
    </synonym>
    <type>
     <types>CatalogRef.FixedAssets</types>
@@ -3935,7 +3935,7 @@
    </synonym>
    <synonym>
     <key>tr</key>
-    <value>Orijinal miktar</value>
+    <value>Orjinal tutar</value>
    </synonym>
    <type>
     <types>DefinedType.typeAmount</types>
@@ -3958,7 +3958,7 @@
    </synonym>
    <synonym>
     <key>tr</key>
-    <value>Bakiye miktarı</value>
+    <value>Bakiye tutarı</value>
    </synonym>
    <type>
     <types>DefinedType.typeAmount</types>

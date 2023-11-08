@@ -1096,7 +1096,7 @@
    </title>
    <title>
     <key>tr</key>
-    <value>Tьm kural tamam</value>
+    <value>Tüm kural geçerli</value>
    </title>
    <id>26</id>
    <valueType>
@@ -1221,7 +1221,7 @@
    </title>
    <title>
     <key>tr</key>
-    <value>Yüzde</value>
+    <value>Yüzde124</value>
    </title>
    <id>31</id>
    <valueType>
@@ -1250,7 +1250,7 @@
    </title>
    <title>
     <key>tr</key>
-    <value>Teklif grubu tьrь</value>
+    <value>Teklif grup türü</value>
    </title>
    <id>32</id>
    <valueType>
@@ -1275,7 +1275,7 @@
    </title>
    <title>
     <key>tr</key>
-    <value>Kuraldır</value>
+    <value>Kural mı</value>
    </title>
    <id>33</id>
    <valueType>

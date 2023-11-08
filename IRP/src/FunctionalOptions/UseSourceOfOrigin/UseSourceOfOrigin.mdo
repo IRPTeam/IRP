@@ -11,7 +11,7 @@
  </synonym>
  <synonym>
   <key>tr</key>
-  <value>Köken kaynağını kullan</value>
+  <value>Kaynak kökeni kullan</value>
  </synonym>
  <location>Constant.UseSourceOfOrigin</location>
  <privilegedGetMode>true</privilegedGetMode>

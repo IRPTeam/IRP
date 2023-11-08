@@ -13,7 +13,7 @@
   </title>
   <title>
    <key>tr</key>
-   <value>ObjectRef - the name of the variable to work with the current data ref. </value>
+   <value>ObjectRef - geçerli veri ref ile çalışmak için değişkenin adı.</value>
   </title>
   <visible>true</visible>
   <enabled>true</enabled>

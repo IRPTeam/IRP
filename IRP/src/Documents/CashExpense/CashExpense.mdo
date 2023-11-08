@@ -581,7 +581,7 @@
    </synonym>
    <synonym>
     <key>tr</key>
-    <value>Цdeme dцnemi</value>
+    <value>Ödeme periyodu</value>
    </synonym>
    <type>
     <types>CatalogRef.PlanningPeriods</types>
@@ -658,7 +658,7 @@
   </synonym>
   <synonym>
    <key>tr</key>
-   <value>Vergi listesini SİL</value>
+   <value>VERGİ listesini SİL</value>
   </synonym>
   <attributes uuid="b470cbd6-81dc-4b8c-88f5-e44a658ab615">
    <name>Key</name>

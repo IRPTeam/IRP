@@ -18,7 +18,7 @@
  </synonym>
  <synonym>
   <key>tr</key>
-  <value>Depreciation schedules</value>
+  <value>Amortisman programları</value>
  </synonym>
  <useStandardCommands>true</useStandardCommands>
  <fullTextSearchOnInputByString>DontUse</fullTextSearchOnInputByString>
@@ -74,7 +74,7 @@
   </synonym>
   <synonym>
    <key>tr</key>
-   <value>Calculation method</value>
+   <value>Hesaplama yöntemi</value>
   </synonym>
   <type>
    <types>EnumRef.DepreciationMethods</types>
@@ -98,7 +98,7 @@
   </synonym>
   <synonym>
    <key>tr</key>
-   <value>Useful life (Months)</value>
+   <value>Yararlı ömür (Ay)</value>
   </synonym>
   <type>
    <types>Number</types>

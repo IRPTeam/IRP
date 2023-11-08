@@ -1199,7 +1199,7 @@
    </synonym>
    <synonym>
     <key>tr</key>
-    <value>Miktar sabittir</value>
+    <value>Miktar sabitlendi</value>
    </synonym>
    <type>
     <types>Boolean</types>
@@ -1395,7 +1395,7 @@
   </synonym>
   <synonym>
    <key>tr</key>
-   <value>Vergi listesini SİL</value>
+   <value>VERGİ listesini SİL</value>
   </synonym>
   <attributes uuid="99098571-a720-48ec-99d7-baf8706c634e">
    <name>Key</name>
@@ -2079,7 +2079,7 @@
    </synonym>
    <synonym>
     <key>tr</key>
-    <value>Цdeme bilgisi</value>
+    <value>Ödeme bilgisi</value>
    </synonym>
    <type>
     <types>String</types>
@@ -2153,7 +2153,7 @@
    </synonym>
    <synonym>
     <key>tr</key>
-    <value>Ödeme acentesi yasal adı</value>
+    <value>Ödeme acentesi yasal ismi</value>
    </synonym>
    <type>
     <types>CatalogRef.Companies</types>
@@ -2219,7 +2219,7 @@
    </synonym>
    <synonym>
     <key>tr</key>
-    <value>Ödeme acentesi yasal adı sözleşme</value>
+    <value>Ödeme acentesi yasal adı sözleşmesi</value>
    </synonym>
    <type>
     <types>CatalogRef.LegalNameContracts</types>
@@ -2553,7 +2553,7 @@
   </synonym>
   <synonym>
    <key>tr</key>
-   <value>Göndereni sil toplu işler</value>
+   <value>DELETE komitent partileri</value>
   </synonym>
   <attributes uuid="4ec573ef-6b75-4dfc-90c2-6e4783fc5433">
    <name>Key</name>
@@ -2834,7 +2834,7 @@
   </synonym>
   <synonym>
    <key>tr</key>
-   <value>Kontrol kodu dizeleri</value>
+   <value>Kontrol kod dizeleri</value>
   </synonym>
   <attributes uuid="130f37c6-6f58-4912-8e04-c5fabf6cf4cf">
    <name>Key</name>
@@ -3109,7 +3109,7 @@
   </synonym>
   <synonym>
    <key>tr</key>
-   <value>Makbuz kopyasını yazdır</value>
+   <value>Makbuz kopyası yazdır</value>
   </synonym>
   <group>CommandGroup.Fiscalization</group>
   <commandParameterType>

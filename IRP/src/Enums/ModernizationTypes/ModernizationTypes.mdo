@@ -32,7 +32,7 @@
   </synonym>
   <synonym>
    <key>tr</key>
-   <value>Montaj</value>
+   <value>Monte</value>
   </synonym>
  </enumValues>
  <enumValues uuid="70e2ca7d-a3bb-4a6f-baf9-53d86f057785">
@@ -47,7 +47,7 @@
   </synonym>
   <synonym>
    <key>tr</key>
-   <value>Sökme</value>
+   <value>Sök</value>
   </synonym>
  </enumValues>
 </mdclass:Enum>

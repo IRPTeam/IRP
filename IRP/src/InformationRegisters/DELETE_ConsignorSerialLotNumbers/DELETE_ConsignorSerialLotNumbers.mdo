@@ -20,7 +20,7 @@
  </synonym>
  <synonym>
   <key>tr</key>
-  <value>DELETE gönderen seri lot numaraları</value>
+  <value>DELETE комитент seri lot numaraları</value>
  </synonym>
  <useStandardCommands>true</useStandardCommands>
  <editType>InDialog</editType>
@@ -36,7 +36,7 @@
  </recordPresentation>
  <recordPresentation>
   <key>tr</key>
-  <value>Gönderen seri lot numaraları</value>
+  <value>Komitenin seri lot numaraları</value>
  </recordPresentation>
  <resources uuid="eef806ba-7839-434d-aa01-def9be09bbd8">
   <name>Consignor</name>

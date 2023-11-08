@@ -20,7 +20,7 @@
  </synonym>
  <synonym>
   <key>tr</key>
-  <value>Donanım günlüğü</value>
+  <value>Donanım kaydı</value>
  </synonym>
  <useStandardCommands>true</useStandardCommands>
  <editType>InDialog</editType>
@@ -38,7 +38,7 @@
  </recordPresentation>
  <recordPresentation>
   <key>tr</key>
-  <value>Donanım günlüğü</value>
+  <value>Donanım kaydı</value>
  </recordPresentation>
  <listPresentation>
   <key>en</key>
@@ -271,7 +271,7 @@
   </synonym>
   <synonym>
    <key>tr</key>
-   <value>Gьnlьk analiz</value>
+   <value>Günlük analizi</value>
   </synonym>
   <usePurposes>PersonalComputer</usePurposes>
   <usePurposes>MobileDevice</usePurposes>

@@ -303,7 +303,7 @@
   </toolTip>
   <toolTip>
    <key>tr</key>
-   <value>Taramadan sonra, ürün her zaman yeni bir satır olarak eklenir. Ancak, farklı yerlerde, örneğin seriye göre gruplandırılabilir.</value>
+   <value>Taramadan sonra, ürün her zaman yeni bir satır olarak eklenecektir. Ancak, farklı yerlerde, örneğin serilere göre gruplandırılabilir.</value>
   </toolTip>
   <toolTipRepresentation>Button</toolTipRepresentation>
   <handlers>
@@ -365,7 +365,7 @@
   </toolTip>
   <toolTip>
    <key>tr</key>
-   <value>Belgelere dayalı oluştururken, tarama yaparken, yükleme yaparken - ürün gruplandırılmayacak, ancak kaynakta olduğu gibi yüklenecektir.</value>
+   <value>Temel alınarak belgeler oluşturulurken, tarama yapılırken, yükleme yapılırken - ürün gruplanmayacak, kaynaktaki gibi aynı şekilde yüklenecek.</value>
   </toolTip>
   <toolTipRepresentation>Button</toolTipRepresentation>
   <extendedTooltip>
@@ -423,7 +423,7 @@
   </toolTip>
   <toolTip>
    <key>tr</key>
-   <value>Seri numaralarıyla izlemeyi etkinleştir. Bu durumda, bu tür ürünleri içeren daha önce oluşturulmuş belgeler varsa bu seçenek değiştirilmemelidir.</value>
+   <value>Seri numaralarına göre takibi etkinleştir. Bu durumda, ürün serileri tüm belgelerde belirtilmelidir. Bu seçenek, bu tür ürünlerle ilgili daha önce oluşturulmuş belgeler varsa değiştirilmemelidir.</value>
   </toolTip>
   <toolTipRepresentation>Button</toolTipRepresentation>
   <handlers>
@@ -995,7 +995,7 @@
     </toolTip>
     <toolTip>
      <key>tr</key>
-     <value>Bu seçenek etkinleştirildiğinde, sistem her serinin benzersiz olduğunu, yani sadece bir kez alınıp yazılabileceğini garanti eder. Aynı zamanda, serideki miktar 1 olarak ayarlanabilir. Örneğin, bir telefonun IMEI'si.</value>
+     <value>Bu seçenek etkinleştirildiğinde, sistem her serinin benzersiz olduğundan emin olacaktır, yani sadece bir kez alınabilir ve düşülebilir. Aynı zamanda, serideki miktar 1 olarak ayarlanabilir. Örneğin, bir telefonun IMEI'si.</value>
     </toolTip>
     <toolTipRepresentation>Button</toolTipRepresentation>
     <extendedTooltip>
@@ -1053,7 +1053,7 @@
     </toolTip>
     <toolTip>
      <key>tr</key>
-     <value>Bu seçeneği etkinleştirirseniz, sistem her seri numarasını ayrı bir satırda belirtmek zorunda kalacaktır. Yani, tek bir satırda birden fazla seri belirtmek mümkün olmayacak.</value>
+     <value>Bu seçeneği etkinleştirirseniz, her seri numarasını ayrı bir satırda belirtmek zorunda kalacaksınız. Yani, tek bir satırda birden fazla seriyi belirtmek mümkün olmayacak.</value>
     </toolTip>
     <toolTipRepresentation>Button</toolTipRepresentation>
     <handlers>

@@ -462,7 +462,7 @@
   </synonym>
   <synonym>
    <key>tr</key>
-   <value>Gцnderen</value>
+   <value>Gönderen</value>
   </synonym>
   <type>
    <types>CatalogRef.Partners</types>
@@ -485,7 +485,7 @@
   </synonym>
   <synonym>
    <key>tr</key>
-   <value>Gцnderen adresi</value>
+   <value>Gönderim adresi</value>
   </synonym>
   <type>
    <types>CatalogRef.Addresses</types>
@@ -508,7 +508,7 @@
   </synonym>
   <synonym>
    <key>tr</key>
-   <value>Gцnderilen</value>
+   <value>Gönderilecek yer</value>
   </synonym>
   <type>
    <types>CatalogRef.Partners</types>
@@ -1258,7 +1258,7 @@
    </synonym>
    <synonym>
     <key>tr</key>
-    <value>Miktar sabittir</value>
+    <value>Miktar sabitlendi</value>
    </synonym>
    <type>
     <types>Boolean</types>
@@ -1454,7 +1454,7 @@
   </synonym>
   <synonym>
    <key>tr</key>
-   <value>Vergi listesini SİL</value>
+   <value>VERGİ listesini SİL</value>
   </synonym>
   <attributes uuid="8e1c9037-d5ad-4f4a-ad23-caad3a900f68">
    <name>Key</name>

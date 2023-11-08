@@ -188,7 +188,7 @@
   </synonym>
   <synonym>
    <key>tr</key>
-   <value>Satış konumu</value>
+   <value>Satış yeri</value>
   </synonym>
   <type>
    <types>String</types>
@@ -267,7 +267,7 @@
   </synonym>
   <synonym>
    <key>tr</key>
-   <value>Ekipman API modьlь</value>
+   <value>Ekipman API modülü</value>
   </synonym>
   <type>
    <types>EnumRef.EquipmentAPIModule</types>
@@ -285,7 +285,7 @@
   </synonym>
   <synonym>
    <key>tr</key>
-   <value>Kesici bulunamazsa kopyayı yazdır</value>
+   <value>Kesici bulunamazsa kopya yazdır</value>
   </synonym>
   <type>
    <types>Boolean</types>

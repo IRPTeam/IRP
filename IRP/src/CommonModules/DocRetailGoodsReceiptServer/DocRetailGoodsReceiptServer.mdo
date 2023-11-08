@@ -11,7 +11,7 @@
  </synonym>
  <synonym>
   <key>tr</key>
-  <value>Belge perakende mal alımı sunucusu</value>
+  <value>Belge perakende mal kabul sunucusu</value>
  </synonym>
  <server>true</server>
  <serverCall>true</serverCall>

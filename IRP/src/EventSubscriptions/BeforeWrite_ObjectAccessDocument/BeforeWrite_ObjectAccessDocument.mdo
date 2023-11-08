@@ -11,7 +11,7 @@
  </synonym>
  <synonym>
   <key>tr</key>
-  <value>Yazma öncesi nesne erişim belgesi</value>
+  <value>Nesne erişim belgesi yazılmadan önce</value>
  </synonym>
  <source>
   <types>DocumentObject</types>

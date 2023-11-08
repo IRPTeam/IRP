@@ -333,7 +333,7 @@
   </synonym>
   <synonym>
    <key>tr</key>
-   <value>Цdeme bilgisi</value>
+   <value>Ödeme bilgisi</value>
   </synonym>
   <type>
    <types>String</types>
@@ -1010,7 +1010,7 @@
    </synonym>
    <synonym>
     <key>tr</key>
-    <value>Hesap gцnderme</value>
+    <value>Gönderen hesap</value>
    </synonym>
    <type>
     <types>CatalogRef.CashAccounts</types>
@@ -1032,7 +1032,7 @@
    </synonym>
    <synonym>
     <key>tr</key>
-    <value>Şube gönderme</value>
+    <value>Gönderen şube</value>
    </synonym>
    <type>
     <types>CatalogRef.BusinessUnits</types>
@@ -1366,7 +1366,7 @@
   </synonym>
   <synonym>
    <key>tr</key>
-   <value>Vergi listesini SİL</value>
+   <value>VERGİ listesini SİL</value>
   </synonym>
   <attributes uuid="52b3eee9-b497-42c4-b8c3-350afc251e22">
    <name>Key</name>

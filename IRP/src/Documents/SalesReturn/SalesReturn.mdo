@@ -1097,7 +1097,7 @@
    </synonym>
    <synonym>
     <key>tr</key>
-    <value>Miktar sabittir</value>
+    <value>Miktar sabitlendi</value>
    </synonym>
    <type>
     <types>Boolean</types>
@@ -1119,7 +1119,7 @@
    </synonym>
    <synonym>
     <key>tr</key>
-    <value>İndirilen maliyet vergisi</value>
+    <value>Karaya çıkarılan maliyet vergisi</value>
    </synonym>
    <type>
     <types>DefinedType.typeAmount</types>
@@ -1368,7 +1368,7 @@
   </synonym>
   <synonym>
    <key>tr</key>
-   <value>Vergi listesini SİL</value>
+   <value>VERGİ listesini SİL</value>
   </synonym>
   <standardAttributes>
    <dataHistory>Use</dataHistory>

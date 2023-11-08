@@ -552,7 +552,7 @@
   </title>
   <title>
    <key>tr</key>
-   <value>Цdeme al</value>
+   <value>Hesaplamayı al</value>
   </title>
   <id>1</id>
   <use>
@@ -577,7 +577,7 @@
   </title>
   <title>
    <key>tr</key>
-   <value>Son ödemeyi yazdır</value>
+   <value>Son hesaplamayı yazdır</value>
   </title>
   <id>2</id>
   <use>

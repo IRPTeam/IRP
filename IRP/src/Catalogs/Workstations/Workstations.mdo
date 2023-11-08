@@ -235,7 +235,7 @@
   </synonym>
   <synonym>
    <key>tr</key>
-   <value>Kod dizesi kontrolьnь yoksay</value>
+   <value>Kod dizesi kontrolünü yoksay</value>
   </synonym>
   <type>
    <types>Boolean</types>
@@ -258,7 +258,7 @@
   </synonym>
   <synonym>
    <key>tr</key>
-   <value>Belge UUID ile barkod yazdır</value>
+   <value>Belge UUID'si ile barkod yazdır</value>
   </synonym>
   <type>
    <types>Boolean</types>
@@ -281,7 +281,7 @@
   </synonym>
   <synonym>
    <key>tr</key>
-   <value>Rezervle ertele</value>
+   <value>Rezerv ile erteleyin</value>
   </synonym>
   <type>
    <types>Boolean</types>

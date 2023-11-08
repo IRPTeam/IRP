@@ -573,6 +573,56 @@
      <textEdit>true</textEdit>
     </extInfo>
    </items>
+   <items xsi:type="form:FormField">
+    <name>DefaultCarrier</name>
+    <id>136</id>
+    <visible>true</visible>
+    <enabled>true</enabled>
+    <userVisible>
+     <common>true</common>
+    </userVisible>
+    <dataPath xsi:type="form:DataPath">
+     <segments>Object.DefaultCarrier</segments>
+    </dataPath>
+    <extendedTooltip>
+     <name>DefaultCarrierExtendedTooltip</name>
+     <id>138</id>
+     <visible>true</visible>
+     <enabled>true</enabled>
+     <userVisible>
+      <common>true</common>
+     </userVisible>
+     <type>Label</type>
+     <autoMaxWidth>true</autoMaxWidth>
+     <autoMaxHeight>true</autoMaxHeight>
+     <extInfo xsi:type="form:LabelDecorationExtInfo">
+      <horizontalAlign>Left</horizontalAlign>
+     </extInfo>
+    </extendedTooltip>
+    <contextMenu>
+     <name>DefaultCarrierContextMenu</name>
+     <id>137</id>
+     <visible>true</visible>
+     <enabled>true</enabled>
+     <userVisible>
+      <common>true</common>
+     </userVisible>
+     <autoFill>true</autoFill>
+    </contextMenu>
+    <type>InputField</type>
+    <editMode>Enter</editMode>
+    <showInHeader>true</showInHeader>
+    <headerHorizontalAlign>Left</headerHorizontalAlign>
+    <showInFooter>true</showInFooter>
+    <extInfo xsi:type="form:InputFieldExtInfo">
+     <autoMaxWidth>true</autoMaxWidth>
+     <autoMaxHeight>true</autoMaxHeight>
+     <wrap>true</wrap>
+     <chooseType>true</chooseType>
+     <typeDomainEnabled>true</typeDomainEnabled>
+     <textEdit>true</textEdit>
+    </extInfo>
+   </items>
    <items xsi:type="form:FormGroup">
     <name>GroupAdditionalAttributes</name>
     <id>74</id>
@@ -1481,9 +1531,6 @@ WHERE
   <navigationPanel>
    <cmiFragmentRecord>
     <command>InformationRegister.PartnerSegments.StandardCommand.OpenByValue.Partner</command>
-    <commandParameter xsi:type="form:DataPath">
-     <segments>Object.Ref</segments>
-    </commandParameter>
     <group>FormNavigationPanelSeeAlso</group>
     <index>0</index>
     <userVisible>

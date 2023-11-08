@@ -451,7 +451,7 @@
   </synonym>
   <synonym>
    <key>tr</key>
-   <value>Teklif grubu tьrь</value>
+   <value>Teklif grup türü</value>
   </synonym>
   <type>
    <types>EnumRef.OfferGroupType</types>

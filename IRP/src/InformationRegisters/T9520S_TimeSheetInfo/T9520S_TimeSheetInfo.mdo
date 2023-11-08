@@ -20,7 +20,7 @@
  </synonym>
  <synonym>
   <key>tr</key>
-  <value>T9520 Zaman зizelgesi bilgisi</value>
+  <value>T9520 Zaman çizelgesi bilgisi</value>
  </synonym>
  <useStandardCommands>true</useStandardCommands>
  <editType>InDialog</editType>
@@ -161,7 +161,7 @@
   </synonym>
   <synonym>
    <key>tr</key>
-   <value>Tahakkuk ve kesinti tьrь</value>
+   <value>Tahakkuk ve kesinti türü</value>
   </synonym>
   <type>
    <types>CatalogRef.AccrualAndDeductionTypes</types>

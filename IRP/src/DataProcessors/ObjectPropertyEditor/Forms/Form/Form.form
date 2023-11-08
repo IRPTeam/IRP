@@ -244,7 +244,7 @@
     </title>
     <title>
      <key>tr</key>
-     <value>Filtreye ayarla</value>
+     <value>Filtrelemek için ayarla</value>
     </title>
     <extendedTooltip>
      <name>GroupSetToFilterExtendedTooltip</name>
@@ -284,7 +284,7 @@
    </title>
    <title>
     <key>tr</key>
-    <value>Düğmeler grubu</value>
+    <value>Buton grubu</value>
    </title>
    <horizontalStretch>true</horizontalStretch>
    <extendedTooltip>
@@ -642,7 +642,7 @@
     </toolTip>
     <toolTip>
      <key>tr</key>
-     <value>İşaretli nesneler veritabanına yazılacak</value>
+     <value>İşaretlenen nesneler veritabanına yazılacak</value>
     </toolTip>
     <extendedTooltip>
      <name>PropertiesTableisModifiedExtendedTooltip</name>
@@ -695,7 +695,7 @@
    </title>
    <title>
     <key>tr</key>
-    <value>Цzellikler tablosu sol grup</value>
+    <value>Özellikler tablosu sol grup</value>
    </title>
    <extendedTooltip>
     <name>PropertiesTableLeftGroupExtendedTooltip</name>
@@ -1938,7 +1938,7 @@
   </title>
   <title>
    <key>tr</key>
-   <value>İşaretli satırlar için bir kod çalıştırın</value>
+   <value>İşaretlenmiş satırlar için bir kod çalıştır</value>
   </title>
   <id>17</id>
   <use>
@@ -1966,7 +1966,7 @@
   </title>
   <title>
    <key>tr</key>
-   <value>Filtreyi sorgudan ayarla</value>
+   <value>Sorgudan filtre ayarla</value>
   </title>
   <id>18</id>
   <use>
@@ -1994,7 +1994,7 @@
   </title>
   <title>
    <key>tr</key>
-   <value>Filtreyi panodan ayarla</value>
+   <value>Panodan filtre ayarla</value>
   </title>
   <id>19</id>
   <use>

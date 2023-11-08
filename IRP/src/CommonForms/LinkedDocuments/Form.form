@@ -1549,7 +1549,7 @@
   </title>
   <title>
    <key>tr</key>
-   <value>Satır öğe listesi dizisi</value>
+   <value>Satır öğeleri listesi dizisi</value>
   </title>
   <id>174</id>
   <valueType>
@@ -1577,7 +1577,7 @@
   </title>
   <title>
    <key>tr</key>
-   <value>Satır belgeleri dizisi</value>
+   <value>Belge satırlarının dizisi</value>
   </title>
   <id>175</id>
   <valueType>

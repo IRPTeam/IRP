@@ -32,7 +32,7 @@
   </synonym>
   <synonym>
    <key>tr</key>
-   <value>Doğrusal</value>
+   <value>Doğrusal amortisman</value>
   </synonym>
  </enumValues>
  <enumValues uuid="efe77869-0448-4eea-a8eb-afecc651e615">
@@ -47,7 +47,7 @@
   </synonym>
   <synonym>
    <key>tr</key>
-   <value>Azalan denge</value>
+   <value>Azalan bakiye</value>
   </synonym>
  </enumValues>
 </mdclass:Enum>

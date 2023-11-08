@@ -18,7 +18,7 @@
  </synonym>
  <synonym>
   <key>tr</key>
-  <value>Commissioning of fixed asset</value>
+  <value>Sabit kıymetin devreye alınması</value>
  </synonym>
  <useStandardCommands>true</useStandardCommands>
  <inputByString>Document.CommissioningOfFixedAsset.StandardAttribute.Number</inputByString>
@@ -60,7 +60,7 @@
  </listPresentation>
  <listPresentation>
   <key>tr</key>
-  <value>Commissioning of fixed assets</value>
+  <value>Sabit kıymetlerin devreye alınması</value>
  </listPresentation>
  <numberLength>12</numberLength>
  <numberAllowedLength>Variable</numberAllowedLength>
@@ -120,7 +120,7 @@
   </synonym>
   <synonym>
    <key>tr</key>
-   <value>Sabit varlık</value>
+   <value>Sabit kıymet</value>
   </synonym>
   <type>
    <types>CatalogRef.FixedAssets</types>
@@ -453,7 +453,7 @@
    </synonym>
    <synonym>
     <key>tr</key>
-    <value>Miktar sabittir</value>
+    <value>Miktar sabitlendi</value>
    </synonym>
    <type>
     <types>Boolean</types>

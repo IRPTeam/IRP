@@ -20,7 +20,7 @@
  </synonym>
  <synonym>
   <key>tr</key>
-  <value>Veri sьrьmleri</value>
+  <value>Veri sürümleri</value>
  </synonym>
  <editType>InDialog</editType>
  <dataLockControlMode>Managed</dataLockControlMode>
@@ -34,7 +34,7 @@
  </recordPresentation>
  <recordPresentation>
   <key>tr</key>
-  <value>Veri sьrьmleri</value>
+  <value>Veri sürümleri</value>
  </recordPresentation>
  <resources uuid="3adc17c1-98f0-461e-9ec1-73a971f17a60">
   <name>Data</name>

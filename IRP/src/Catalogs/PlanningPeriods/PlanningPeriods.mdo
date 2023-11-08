@@ -149,7 +149,7 @@
   </synonym>
   <synonym>
    <key>tr</key>
-   <value>Finansal</value>
+   <value>Finansal mı</value>
   </synonym>
   <type>
    <types>Boolean</types>
@@ -173,7 +173,7 @@
   </synonym>
   <synonym>
    <key>tr</key>
-   <value>Üretim yapılıyor</value>
+   <value>Üretim yapıyor</value>
   </synonym>
   <type>
    <types>Boolean</types>

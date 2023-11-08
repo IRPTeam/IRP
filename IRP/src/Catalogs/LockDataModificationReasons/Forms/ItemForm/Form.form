@@ -716,7 +716,7 @@
     </title>
     <title>
      <key>tr</key>
-     <value>Tьr filtresi</value>
+     <value>Tip filtresi</value>
     </title>
     <extendedTooltip>
      <name>GroupTypeFilterExtendedTooltip</name>
@@ -2818,7 +2818,7 @@
   </title>
   <title>
    <key>tr</key>
-   <value>Tьr filtresi</value>
+   <value>Tip filtresi</value>
   </title>
   <id>3</id>
   <valueType>

@@ -16,7 +16,7 @@
  </synonym>
  <synonym>
   <key>tr</key>
-  <value>Gider tьrleri</value>
+  <value>Gider türleri</value>
  </synonym>
  <quickChoice>true</quickChoice>
  <choiceMode>BothWays</choiceMode>
@@ -47,7 +47,7 @@
   </synonym>
   <synonym>
    <key>tr</key>
-   <value>Ьretim maliyetleri</value>
+   <value>Üretim maliyetleri</value>
   </synonym>
  </enumValues>
 </mdclass:Enum>

@@ -1081,7 +1081,7 @@
   </title>
   <title>
    <key>tr</key>
-   <value>Klasцr yolu</value>
+   <value>Klasör yolu</value>
   </title>
   <id>2</id>
   <valueType>
@@ -1371,7 +1371,7 @@
    </title>
    <title>
     <key>tr</key>
-    <value>Dosya oluşturma mı</value>
+    <value>Dosya oluşturuldu mu</value>
    </title>
    <id>18</id>
    <valueType>
@@ -1497,7 +1497,7 @@
   </title>
   <title>
    <key>tr</key>
-   <value>Yüklemeyi etkinleştir</value>
+   <value>Yüklemeye etkinleştir</value>
   </title>
   <id>11</id>
   <valueType>
@@ -1597,7 +1597,7 @@
   </title>
   <title>
    <key>tr</key>
-   <value>Цnizleme цlзek boyutu</value>
+   <value>Önizleme ölçek boyutu</value>
   </title>
   <id>22</id>
   <valueType>
@@ -1626,7 +1626,7 @@
   </title>
   <title>
    <key>tr</key>
-   <value>Yolu seзin</value>
+   <value>Yol seç</value>
   </title>
   <id>1</id>
   <use>
@@ -1655,7 +1655,7 @@
   </title>
   <title>
    <key>tr</key>
-   <value>Klasцrь analiz et</value>
+   <value>Analiz klasörü</value>
   </title>
   <id>2</id>
   <use>
@@ -1713,7 +1713,7 @@
   </title>
   <title>
    <key>tr</key>
-   <value>Yьkle</value>
+   <value>Yükle</value>
   </title>
   <id>4</id>
   <use>

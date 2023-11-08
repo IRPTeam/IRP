@@ -20,7 +20,7 @@
  </synonym>
  <synonym>
   <key>tr</key>
-  <value>T8510 Fixed assets info</value>
+  <value>T8510 Sabit kıymetler bilgisi</value>
  </synonym>
  <useStandardCommands>true</useStandardCommands>
  <editType>InDialog</editType>
@@ -127,7 +127,7 @@
   </synonym>
   <synonym>
    <key>tr</key>
-   <value>Sabit varlık</value>
+   <value>Sabit kıymet</value>
   </synonym>
   <type>
    <types>CatalogRef.FixedAssets</types>
@@ -169,7 +169,7 @@
   </synonym>
   <synonym>
    <key>tr</key>
-   <value>Schedule</value>
+   <value>Program</value>
   </synonym>
   <type>
    <types>CatalogRef.DepreciationSchedules</types>

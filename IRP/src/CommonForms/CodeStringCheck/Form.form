@@ -301,7 +301,7 @@
   </title>
   <title>
    <key>tr</key>
-   <value>Tarama kontrol kodu</value>
+   <value>Kontrol kodu tara</value>
   </title>
   <visible>true</visible>
   <enabled>true</enabled>
@@ -1206,7 +1206,7 @@
   </title>
   <title>
    <key>tr</key>
-   <value>Seri lot numarasından kod dizesini al</value>
+   <value>Seri lot numarasından kod dizesi al</value>
   </title>
   <id>14</id>
   <valueType>
@@ -1315,7 +1315,7 @@
   </title>
   <title>
    <key>tr</key>
-   <value>Seri lot numarasından kod dizesini al</value>
+   <value>Seri lot numarasından kod dizesi al</value>
   </title>
   <id>6</id>
   <use>

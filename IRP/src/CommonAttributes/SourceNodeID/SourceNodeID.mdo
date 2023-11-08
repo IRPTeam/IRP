@@ -11,7 +11,7 @@
  </synonym>
  <synonym>
   <key>tr</key>
-  <value>Kaynak düğüm kimliği</value>
+  <value>Kaynak düğüm ID</value>
  </synonym>
  <type>
   <types>String</types>

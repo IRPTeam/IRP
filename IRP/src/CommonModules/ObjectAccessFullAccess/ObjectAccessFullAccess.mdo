@@ -11,7 +11,7 @@
  </synonym>
  <synonym>
   <key>tr</key>
-  <value>Nesne erişim tam erişim</value>
+  <value>Nesne erişimi tam yetki</value>
  </synonym>
  <server>true</server>
  <privileged>true</privileged>

@@ -16,7 +16,7 @@
  </synonym>
  <synonym>
   <key>tr</key>
-  <value>Teklif grubu tьrь</value>
+  <value>Teklif grup türü</value>
  </synonym>
  <quickChoice>true</quickChoice>
  <choiceMode>BothWays</choiceMode>
@@ -32,7 +32,7 @@
   </synonym>
   <synonym>
    <key>tr</key>
-   <value>Toplam</value>
+   <value>Tutar</value>
   </synonym>
  </enumValues>
  <enumValues uuid="105e55d5-5c75-4aea-a369-d5ca83d44fd6">
@@ -92,7 +92,7 @@
   </synonym>
   <synonym>
    <key>tr</key>
-   <value>Ardışık olarak</value>
+   <value>Ardışık</value>
   </synonym>
  </enumValues>
  <enumValues uuid="3cddac61-c134-4b22-b5f7-46ec8856ef76">
@@ -107,7 +107,7 @@
   </synonym>
   <synonym>
    <key>tr</key>
-   <value>Dış hesaplamayı kullan</value>
+   <value>Harici hesaplama kullan</value>
   </synonym>
  </enumValues>
 </mdclass:Enum>

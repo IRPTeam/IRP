@@ -1097,7 +1097,7 @@
   </title>
   <title>
    <key>tr</key>
-   <value>Consignor info</value>
+   <value>Komiten bilgisi</value>
   </title>
   <extendedTooltip>
    <name>GroupConsignorInfoExtendedTooltip</name>
@@ -1124,11 +1124,11 @@
    </collapsedRepresentationTitle>
    <collapsedRepresentationTitle>
     <key>ru</key>
-    <value>Информация о грузоотправителях</value>
+    <value>Информация о кометенте</value>
    </collapsedRepresentationTitle>
    <collapsedRepresentationTitle>
     <key>tr</key>
-    <value>Gцnderen bilgileri</value>
+    <value>Gönderenler bilgisi</value>
    </collapsedRepresentationTitle>
    <collapsed>true</collapsed>
    <representation>WeakSeparation</representation>
@@ -1579,7 +1579,7 @@
   </title>
   <title>
    <key>tr</key>
-   <value>Gцnderen bilgilerini devral</value>
+   <value>Gönderen bilgilerini devral</value>
   </title>
   <id>8</id>
   <valueType>
@@ -1654,7 +1654,7 @@
   </title>
   <title>
    <key>tr</key>
-   <value>Gцnderen bilgi modu</value>
+   <value>Komisyoncu bilgi modu</value>
   </title>
   <id>9</id>
   <valueType>
@@ -1680,7 +1680,7 @@
   </title>
   <title>
    <key>tr</key>
-   <value>Use consignor info</value>
+   <value>Gönderen bilgisini kullan</value>
   </title>
   <id>10</id>
   <valueType>

@@ -78,9 +78,7 @@
   </title>
   <title>
    <key>tr</key>
-   <value>
-
-</value>
+   <value>Komut çubuğu</value>
   </title>
   <extendedTooltip>
    <name>GroupCommandBarExtendedTooltip</name>

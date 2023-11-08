@@ -236,7 +236,7 @@
   </synonym>
   <synonym>
    <key>tr</key>
-   <value>Değişiklik hakkı</value>
+   <value>Hak değiştir</value>
   </synonym>
   <usePurposes>PersonalComputer</usePurposes>
   <usePurposes>MobileDevice</usePurposes>
@@ -253,7 +253,7 @@
   </synonym>
   <synonym>
    <key>tr</key>
-   <value>Temel belgeyi seз</value>
+   <value>Temel belge seç</value>
   </synonym>
   <usePurposes>PersonalComputer</usePurposes>
   <usePurposes>MobileDevice</usePurposes>
@@ -270,7 +270,7 @@
   </synonym>
   <synonym>
    <key>tr</key>
-   <value>Цdeme al</value>
+   <value>Hesaplamayı al</value>
   </synonym>
   <usePurposes>PersonalComputer</usePurposes>
   <usePurposes>MobileDevice</usePurposes>
@@ -287,7 +287,7 @@
   </synonym>
   <synonym>
    <key>tr</key>
-   <value>Ertelemeli makbuzu seз</value>
+   <value>Erteleme fişini seçin</value>
   </synonym>
   <usePurposes>PersonalComputer</usePurposes>
   <usePurposes>MobileDevice</usePurposes>

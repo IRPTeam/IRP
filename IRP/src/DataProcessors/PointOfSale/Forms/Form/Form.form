@@ -376,7 +376,7 @@
         </title>
         <title>
          <key>tr</key>
-         <value>Haklar uygulandı</value>
+         <value>Uygulanan haklar</value>
         </title>
         <titleTextColor xsi:type="core:ColorRef">
          <color>Style.SpecialTextColor</color>
@@ -1058,7 +1058,7 @@
            </title>
            <title>
             <key>tr</key>
-            <value>Öğe listesi grup miktarı</value>
+            <value>Ürün listesi grup miktarı</value>
            </title>
            <extendedTooltip>
             <name>ItemListGroupQuantityExtendedTooltip</name>
@@ -2294,7 +2294,7 @@
          </title>
          <title>
           <key>tr</key>
-          <value>Makbuz temizleme grubu</value>
+          <value>Makbuz düzenleme grubu</value>
          </title>
          <extendedTooltip>
           <name>ClearReceiptGroupExtendedTooltip</name>
@@ -2494,7 +2494,7 @@
           </title>
           <title>
            <key>tr</key>
-           <value>Erteleme makbuzu (Grup)</value>
+           <value>Alımı ertele (Grup)</value>
           </title>
           <extendedTooltip>
            <name>PostponeReceiptExtendedTooltip</name>
@@ -5007,7 +5007,7 @@
          </title>
          <title>
           <key>tr</key>
-          <value>Цzel teklifler grubu Teklif</value>
+          <value>Özel teklifler grubu Teklif</value>
          </title>
          <extendedTooltip>
           <name>SpecialOffersGroupOfferExtendedTooltip</name>
@@ -5148,7 +5148,7 @@
          </title>
          <title>
           <key>tr</key>
-          <value>Цzel teklifler grubu Bonus</value>
+          <value>Özel teklifler grubu Bonus</value>
          </title>
          <extendedTooltip>
           <name>SpecialOffersGroupBonusExtendedTooltip</name>
@@ -7464,7 +7464,7 @@ End</presentationExpression>
     </title>
     <title>
      <key>tr</key>
-     <value>Perakende temeli</value>
+     <value>Perakende esası</value>
     </title>
     <id>190</id>
     <valueType>
@@ -7489,7 +7489,7 @@ End</presentationExpression>
     </title>
     <title>
      <key>tr</key>
-     <value>Perakende temel miktarı</value>
+     <value>Perakende baz miktarı</value>
     </title>
     <id>195</id>
     <valueType>
@@ -7514,7 +7514,7 @@ End</presentationExpression>
     </title>
     <title>
      <key>tr</key>
-     <value>Kontrol kodu dize durumu</value>
+     <value>Kod dizesi kontrol durumu</value>
     </title>
     <id>209</id>
     <valueType>
@@ -8298,7 +8298,7 @@ End</presentationExpression>
   </title>
   <title>
    <key>tr</key>
-   <value>Temel цdemeler</value>
+   <value>Temel ödemeler</value>
   </title>
   <id>192</id>
   <valueType>
@@ -8373,7 +8373,7 @@ End</presentationExpression>
   </title>
   <title>
    <key>tr</key>
-   <value>Perakende temel цzel teklifler</value>
+   <value>Perakende bazında özel teklifler</value>
   </title>
   <id>198</id>
   <valueType>
@@ -8548,7 +8548,7 @@ End</presentationExpression>
   </title>
   <title>
    <key>tr</key>
-   <value>Kullanıcı yönetici</value>
+   <value>Kullanıcı yöneticisi</value>
   </title>
   <id>203</id>
   <valueType>
@@ -8598,7 +8598,7 @@ End</presentationExpression>
   </title>
   <title>
    <key>tr</key>
-   <value>Kullanıcı varsayılan olarak yönetici</value>
+   <value>Varsayılan olarak kullanıcı yöneticisi</value>
   </title>
   <id>205</id>
   <valueType>
@@ -8675,7 +8675,7 @@ End</presentationExpression>
   </title>
   <title>
    <key>tr</key>
-   <value>Ertelemiş alım</value>
+   <value>Ertelenmiş alım</value>
   </title>
   <id>213</id>
   <valueType>
@@ -9363,7 +9363,7 @@ elemanı seç</value>
   </title>
   <title>
    <key>tr</key>
-   <value>Oluştur ve yayımla</value>
+   <value>Oluştur ve gönder</value>
   </title>
   <id>33</id>
   <use>
@@ -9419,8 +9419,8 @@ document</value>
   </title>
   <title>
    <key>tr</key>
-   <value>Select basis
-document</value>
+   <value>Temel
+dokümanı seç</value>
   </title>
   <id>36</id>
   <use>
@@ -9531,7 +9531,7 @@ document</value>
   </title>
   <title>
    <key>tr</key>
-   <value>Uzlaşma (vardiya kapanışı olmadan)</value>
+   <value>Kapanış olmadan ödeme (vardiya)</value>
   </title>
   <id>40</id>
   <use>
@@ -9556,7 +9556,7 @@ document</value>
   </title>
   <title>
    <key>tr</key>
-   <value>Mevcut alımı erteleyin</value>
+   <value>Mevcut fişi erteleyin</value>
   </title>
   <id>41</id>
   <use>
@@ -9614,7 +9614,7 @@ document</value>
   </title>
   <title>
    <key>tr</key>
-   <value>Rezervle mevcut makbuzu ertele</value>
+   <value>Mevcut alımı rezerve ile erteleyin</value>
   </title>
   <id>43</id>
   <use>

@@ -18,7 +18,7 @@
  </synonym>
  <synonym>
   <key>tr</key>
-  <value>Perakende mal alımı</value>
+  <value>Perakende mal kabulü</value>
  </synonym>
  <useStandardCommands>true</useStandardCommands>
  <inputByString>Document.RetailGoodsReceipt.StandardAttribute.Number</inputByString>
@@ -62,7 +62,7 @@
  </listPresentation>
  <listPresentation>
   <key>tr</key>
-  <value>Perakende malzeme teslimatları</value>
+  <value>Perakende mal kabulleri</value>
  </listPresentation>
  <numberLength>12</numberLength>
  <numberAllowedLength>Variable</numberAllowedLength>
@@ -521,7 +521,7 @@
    </synonym>
    <synonym>
     <key>tr</key>
-    <value>Miktar sabittir</value>
+    <value>Miktar sabitlendi</value>
    </synonym>
    <type>
     <types>Boolean</types>
@@ -1070,7 +1070,7 @@
   </synonym>
   <synonym>
    <key>tr</key>
-   <value>Göndereni sil toplu işler</value>
+   <value>DELETE komitent partileri</value>
   </synonym>
   <attributes uuid="55c33df3-65b2-4ef3-8bf1-8de7f5c8007d">
    <name>Key</name>
@@ -1347,7 +1347,7 @@
   </synonym>
   <synonym>
    <key>tr</key>
-   <value>Perakende mal alımı</value>
+   <value>Perakende mal kabulü</value>
   </synonym>
   <group>FormCommandBarCreateBasedOn</group>
   <commandParameterType>

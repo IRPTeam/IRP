@@ -1146,7 +1146,7 @@
      </title>
      <title>
       <key>tr</key>
-      <value>Ağaç temel komut çubuğu</value>
+      <value>Temeller ağacı komut çubuğu</value>
      </title>
      <extendedTooltip>
       <name>BasesTreeCommandBarGroupExtendedTooltip</name>
@@ -2434,7 +2434,7 @@
      </title>
      <title>
       <key>tr</key>
-      <value>Ters ağaç temel grup sunumu</value>
+      <value>Temel ağaç ters grup sunumu</value>
      </title>
      <extendedTooltip>
       <name>BasisesTreeReverseGroupPresentationExtendedTooltip</name>
@@ -8527,7 +8527,7 @@
   </title>
   <title>
    <key>tr</key>
-   <value>Ters temel ağacını kullan</value>
+   <value>Ters basit ağaçları kullan</value>
   </title>
   <id>95</id>
   <valueType>

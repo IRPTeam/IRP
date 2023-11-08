@@ -18,7 +18,7 @@
  </synonym>
  <synonym>
   <key>tr</key>
-  <value>Sabit varlıklar</value>
+  <value>Sabit kıymetler</value>
  </synonym>
  <useStandardCommands>true</useStandardCommands>
  <fullTextSearchOnInputByString>DontUse</fullTextSearchOnInputByString>
@@ -98,7 +98,7 @@
   </synonym>
   <synonym>
    <key>tr</key>
-   <value>Inventory number</value>
+   <value>Envanter numarası</value>
   </synonym>
   <type>
    <types>String</types>
@@ -220,7 +220,7 @@
   </synonym>
   <synonym>
    <key>tr</key>
-   <value>Depreciation info</value>
+   <value>Amortisman bilgisi</value>
   </synonym>
   <fillChecking>ShowError</fillChecking>
   <attributes uuid="b98d98da-324a-4903-b07d-8a5af3451bc5">
@@ -258,7 +258,7 @@
    </synonym>
    <synonym>
     <key>tr</key>
-    <value>Schedule</value>
+    <value>Program</value>
    </synonym>
    <type>
     <types>CatalogRef.DepreciationSchedules</types>

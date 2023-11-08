@@ -97,7 +97,7 @@
   </synonym>
   <synonym>
    <key>tr</key>
-   <value>Aynı öğe anahtar barkodu</value>
+   <value>Aynı ürün anahtar barkodu</value>
   </synonym>
   <templateType>BinaryData</templateType>
  </templates>

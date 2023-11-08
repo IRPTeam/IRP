@@ -321,7 +321,7 @@
   </synonym>
   <synonym>
    <key>tr</key>
-   <value>Цdeme bilgisi</value>
+   <value>Ödeme bilgisi</value>
   </synonym>
   <type>
    <types>String</types>
@@ -934,7 +934,7 @@
    </synonym>
    <synonym>
     <key>tr</key>
-    <value>Цdeme dцnemi</value>
+    <value>Ödeme periyodu</value>
    </synonym>
    <type>
     <types>CatalogRef.PlanningPeriods</types>
@@ -984,7 +984,7 @@
    </synonym>
    <synonym>
     <key>tr</key>
-    <value>Makbuz şubesi</value>
+    <value>Makbuz veren şube</value>
    </synonym>
    <type>
     <types>CatalogRef.BusinessUnits</types>
@@ -1318,7 +1318,7 @@
   </synonym>
   <synonym>
    <key>tr</key>
-   <value>Vergi listesini SİL</value>
+   <value>VERGİ listesini SİL</value>
   </synonym>
   <attributes uuid="8e8d0a50-202c-4dd1-b9a5-de28cf03f172">
    <name>Key</name>

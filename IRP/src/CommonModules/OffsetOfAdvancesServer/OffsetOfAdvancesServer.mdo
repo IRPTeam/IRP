@@ -11,7 +11,7 @@
  </synonym>
  <synonym>
   <key>tr</key>
-  <value>Offset of advances server</value>
+  <value>Avansların mahsubu sunucusu</value>
  </synonym>
  <server>true</server>
  <externalConnection>true</externalConnection>

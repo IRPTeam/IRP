@@ -11,7 +11,7 @@
  </synonym>
  <synonym>
   <key>tr</key>
-  <value>Veri sьrьmleme sunucusu</value>
+  <value>Veri sürümleme sunucusu</value>
  </synonym>
  <server>true</server>
  <serverCall>true</serverCall>

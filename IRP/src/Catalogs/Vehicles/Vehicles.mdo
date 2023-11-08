@@ -143,11 +143,11 @@
   </synonym>
   <synonym>
    <key>ru</key>
-   <value>Default driver</value>
+   <value>Водитель по умолчанию</value>
   </synonym>
   <synonym>
    <key>tr</key>
-   <value>Default driver</value>
+   <value>Varsayılan şoför</value>
   </synonym>
   <type>
    <types>CatalogRef.Partners</types>

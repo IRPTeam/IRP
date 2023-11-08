@@ -391,11 +391,11 @@
   </synonym>
   <synonym>
    <key>ru</key>
-   <value>Default carrier</value>
+   <value>Перевозчик по умолчанию</value>
   </synonym>
   <synonym>
    <key>tr</key>
-   <value>Default carrier</value>
+   <value>Varsayılan taşıyıcı</value>
   </synonym>
   <type>
    <types>CatalogRef.Partners</types>

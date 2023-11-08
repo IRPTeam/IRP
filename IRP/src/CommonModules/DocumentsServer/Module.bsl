@@ -764,17 +764,31 @@ Function PickupItemEnd(Val Parameters, Val ScanData) Export
 								For Each ItemListRow In ResultRow.Cache.ItemList Do
 									If ItemListRow.Key = InfoRow.Key Then
 										
-										If InfoRow.Property("InventoryOrigin") Then
-											ItemListRow.Insert("InventoryOrigin", InfoRow.InventoryOrigin);
-										EndIf;
 										
-										If InfoRow.Property("Consignor") Then
-											ItemListRow.Insert("Consignor", InfoRow.Consignor);
-										EndIf;
+										For Each KeyValue In InfoRow Do
+											ItemListRow.Insert(KeyValue.Key, InfoRow[KeyValue.Key])
+										EndDo;
 										
-										If InfoRow.Property("VatRate") Then
-											ItemListRow.Insert("VatRate", InfoRow.VatRate);
-										EndIf;										
+										//If InfoRow.Property("InventoryOrigin") Then
+										//	ItemListRow.Insert("InventoryOrigin", InfoRow.InventoryOrigin);
+										//EndIf;
+										
+										//If InfoRow.Property("Consignor") Then
+										//	ItemListRow.Insert("Consignor", InfoRow.Consignor);
+										//EndIf;
+										
+										//If InfoRow.Property("VatRate") Then
+										//	ItemListRow.Insert("VatRate", InfoRow.VatRate);
+										//EndIf;	
+																			
+										//If InfoRow.Property("TaxAmount") Then
+										//	ItemListRow.Insert("TaxAmount", InfoRow.TaxAmount);
+										//EndIf;	
+										
+										//If InfoRow.Property("TotalAmount") Then
+										//	ItemListRow.Insert("TotalAmount", InfoRow.TotalAmount);
+										//EndIf;
+											
 									EndIf;
 								EndDo;
 							EndIf;

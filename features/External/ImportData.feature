@@ -3105,7 +3105,7 @@ Scenario: Create Certificate
 		| 'e1cib/data/Catalog.SerialLotNumbers?ref=b7a6804cd0be6fd011ee40c26d392dc0' | 'False'        | '99999999998' | 'e1cib/data/Catalog.ItemKeys?ref=b7a6804cd0be6fd011ee40258580e606' | 'False'    | 'False'              | 'True'                        | 'False'              | ''           | ''             |
 
 
-Scenario: create consignors Items with unique SLN
+Scenario: create consignors Items with SLN
 
 	// Catalog.ItemTypes
 
@@ -3138,10 +3138,10 @@ Scenario: create consignors Items with unique SLN
 	// Catalog.SerialLotNumbers
 
 	And I check or create catalog "SerialLotNumbers" objects:
-		| 'Ref'                                                                      | 'DeletionMark' | 'Code' | 'Description'         | 'SerialLotNumberOwner'                                             | 'Inactive' | 'StockBalanceDetail' | 'EachSerialLotNumberIsUnique' | 'BatchBalanceDetail' | 'CodeString' | 'SourceNodeID' |
-		| 'e1cib/data/Catalog.SerialLotNumbers?ref=b7aa9f63eb85c76911ee6827f4884c17' | 'False'        | 40     | '0909088998998898789' | 'e1cib/data/Catalog.ItemKeys?ref=b7aa9f63eb85c76911ee6827f4884c14' | 'False'    | 'True'               | 'True'                        | 'False'              | ''           | ''             |
-		| 'e1cib/data/Catalog.SerialLotNumbers?ref=b7aa9f63eb85c76911ee6827f4884c18' | 'False'        | 41     | '0909088998998898790' | 'e1cib/data/Catalog.ItemKeys?ref=b7aa9f63eb85c76911ee6827f4884c14' | 'False'    | 'True'               | 'True'                        | 'False'              | ''           | ''             |
-		| 'e1cib/data/Catalog.SerialLotNumbers?ref=b7aa9f63eb85c76911ee6827f4884c19' | 'False'        | 42     | '0909088998998898791' | 'e1cib/data/Catalog.ItemKeys?ref=b7aa9f63eb85c76911ee6827f4884c16' | 'False'    | 'True'               | 'True'                        | 'True'               | ''           | ''             |
+		| 'Ref'                                                                      | 'DeletionMark' | 'Code' | 'Description'         | 'SerialLotNumberOwner'                                             | 'Inactive' | 'StockBalanceDetail' | 'EachSerialLotNumberIsUnique'  | 'BatchBalanceDetail' | 'CodeString' | 'SourceNodeID' |
+		| 'e1cib/data/Catalog.SerialLotNumbers?ref=b7aa9f63eb85c76911ee6827f4884c17' | 'False'        | 40     | '0909088998998898789' | 'e1cib/data/Catalog.ItemKeys?ref=b7aa9f63eb85c76911ee6827f4884c14' | 'False'    | 'True'               | 'False'                        | 'False'              | ''           | ''             |
+		| 'e1cib/data/Catalog.SerialLotNumbers?ref=b7aa9f63eb85c76911ee6827f4884c18' | 'False'        | 41     | '0909088998998898790' | 'e1cib/data/Catalog.ItemKeys?ref=b7aa9f63eb85c76911ee6827f4884c14' | 'False'    | 'True'               | 'False'                        | 'False'              | ''           | ''             |
+		| 'e1cib/data/Catalog.SerialLotNumbers?ref=b7aa9f63eb85c76911ee6827f4884c19' | 'False'        | 42     | '0909088998998898791' | 'e1cib/data/Catalog.ItemKeys?ref=b7aa9f63eb85c76911ee6827f4884c16' | 'False'    | 'True'               | 'False'                        | 'True'               | ''           | ''             |
 
 	And I refill object tabular section "ConsignorsInfo":
 		| 'Ref'                                                                      | 'Company'                                                           | 'Consignor'                                                         |

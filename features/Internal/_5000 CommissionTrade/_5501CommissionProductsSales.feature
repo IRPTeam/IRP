@@ -66,7 +66,7 @@ Scenario: _05502 preparation (commission products sales)
 		When Create catalog BusinessUnits objects
 		When Create catalog ExpenseAndRevenueTypes objects
 		When Create information register UserSettings records (Retail)
-		When create consignors Items with unique SLN
+		When create consignors Items with SLN
 		When update ItemKeys
 		When Create catalog Partners objects
 		When Create catalog CashAccounts objects

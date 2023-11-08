@@ -58,6 +58,21 @@
   <defaultObjectForm>Catalog.Addresses.Form.ItemForm</defaultObjectForm>
   <defaultListForm>Catalog.Addresses.Form.ListForm</defaultListForm>
   <defaultChoiceForm>Catalog.Addresses.Form.ChoiceForm</defaultChoiceForm>
+  <attributes uuid="7723461e-5709-4aac-b443-5c547f9b27d6">
+    <name>Default</name>
+    <synonym>
+      <key>en</key>
+      <value>Default</value>
+    </synonym>
+    <type>
+      <types>Boolean</types>
+    </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <fillValue xsi:type="core:UndefinedValue"/>
+    <fullTextSearch>Use</fullTextSearch>
+    <dataHistory>Use</dataHistory>
+  </attributes>
   <tabularSections uuid="a75510cb-f329-4eb8-ba5b-298317163f2b">
     <producedTypes>
       <objectType typeId="b4d989ae-d07c-4498-ae1b-5e0144aab074" valueTypeId="901cb339-b332-4167-a712-fa6e8f586591"/>

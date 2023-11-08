@@ -337,7 +337,7 @@ Scenario: _0850000 preparation (fiscal printer)
 		When Create information register Barcodes records (serial lot numbers)
 		When Create catalog SerialLotNumbers objects (serial lot numbers, with batch balance details)
 		When Create catalog SerialLotNumbers objects (serial lot numbers)
-		When create consignors Items with unique SLN
+		When create consignors Items with SLN
 		When update ItemKeys
 		When Create catalog Partners objects and Companies objects (Customer)
 		When Create catalog Agreements objects (Customer)

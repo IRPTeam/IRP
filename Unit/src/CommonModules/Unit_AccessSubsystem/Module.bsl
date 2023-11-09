@@ -135,59 +135,59 @@ Procedure CreateDocumentsWithTable(Data, MetaObj, TabSection, AttrName, Descr, R
 	EndIf;
 	
 	NewDoc = CreateDoc(Row, MetaObj);
-	NewRow = NewDoc[TabSection].Add();
+	NewRow = AddRowToDocTable(NewDoc, MetaObj, TabSection);
 	NewRow[AttrName] = Data[AttrName][0];
 	NewDoc.Description = Descr + AttrName + ": " + Data[AttrName][0];
 	NewDoc.Write();
 	AllDoc.Add(NewDoc.Description);
 	
 	NewDoc = CreateDoc(Row, MetaObj);
-	NewRow = NewDoc[TabSection].Add();
+	NewRow = AddRowToDocTable(NewDoc, MetaObj, TabSection);
 	NewRow[AttrName] = Data[AttrName][1];
 	NewDoc.Description = Descr + AttrName + ": " + Data[AttrName][1];
 	NewDoc.Write();
 	AllDoc.Add(NewDoc.Description);
 	
 	NewDoc = CreateDoc(Row, MetaObj);
-	NewRow = NewDoc[TabSection].Add();
+	NewRow = AddRowToDocTable(NewDoc, MetaObj, TabSection);
 	NewRow[AttrName] = Data[AttrName][2];
 	NewDoc.Description = Descr + AttrName + ": " + Data[AttrName][2];
 	NewDoc.Write();
 	AllDoc.Add(NewDoc.Description);
 	
 	NewDoc = CreateDoc(Row, MetaObj);
-	NewRow = NewDoc[TabSection].Add();
+	NewRow = AddRowToDocTable(NewDoc, MetaObj, TabSection);
 	NewRow[AttrName] = Data[AttrName][0];
-	NewRow = NewDoc[TabSection].Add();
+	NewRow = AddRowToDocTable(NewDoc, MetaObj, TabSection);
 	NewRow[AttrName] = Data[AttrName][1];
 	NewDoc.Description = Descr + AttrName + ": " + Data[AttrName][0] + "&" + Data[AttrName][1];
 	NewDoc.Write();
 	AllDoc.Add(NewDoc.Description);
 	
 	NewDoc = CreateDoc(Row, MetaObj);
-	NewRow = NewDoc[TabSection].Add();
+	NewRow = AddRowToDocTable(NewDoc, MetaObj, TabSection);
 	NewRow[AttrName] = Data[AttrName][1];
-	NewRow = NewDoc[TabSection].Add();
+	NewRow = AddRowToDocTable(NewDoc, MetaObj, TabSection);
 	NewRow[AttrName] = Data[AttrName][2];
 	NewDoc.Description = Descr + AttrName + ": " + Data[AttrName][1] + "&" + Data[AttrName][2];
 	NewDoc.Write();
 	AllDoc.Add(NewDoc.Description);
 	
 	NewDoc = CreateDoc(Row, MetaObj);
-	NewRow = NewDoc[TabSection].Add();
+	NewRow = AddRowToDocTable(NewDoc, MetaObj, TabSection);
 	NewRow[AttrName] = Data[AttrName][0];
-	NewRow = NewDoc[TabSection].Add();
+	NewRow = AddRowToDocTable(NewDoc, MetaObj, TabSection);
 	NewRow[AttrName] = Data[AttrName][2];
 	NewDoc.Description = Descr + AttrName + ": " + Data[AttrName][0] + "&" + Data[AttrName][2];
 	NewDoc.Write();
 	AllDoc.Add(NewDoc.Description);
 	
 	NewDoc = CreateDoc(Row, MetaObj);
-	NewRow = NewDoc[TabSection].Add();
+	NewRow = AddRowToDocTable(NewDoc, MetaObj, TabSection);
 	NewRow[AttrName] = Data[AttrName][0];
-	NewRow = NewDoc[TabSection].Add();
+	NewRow = AddRowToDocTable(NewDoc, MetaObj, TabSection);
 	NewRow[AttrName] = Data[AttrName][1];
-	NewRow = NewDoc[TabSection].Add();
+	NewRow = AddRowToDocTable(NewDoc, MetaObj, TabSection);
 	NewRow[AttrName] = Data[AttrName][2];	
 	NewDoc.Description = Descr + AttrName + ": " + Data[AttrName][0] + "&" + Data[AttrName][1] + "&" + Data[AttrName][2];		
 	NewDoc.Write();
@@ -204,6 +204,14 @@ Function CreateDoc(Row, MetaObj)
 	Return NewDoc;
 EndFunction
 
+Function AddRowToDocTable(DocObject, DocMetadata, TabSectionName)
+	NewRow = DocObject[TabSectionName].Add();
+	If DocMetadata.TabularSections[TabSectionName].Attributes.Find("Key") <> Undefined Then
+		NewRow.Key = String(New UUID());
+	EndIf;
+	Return NewRow;
+EndFunction
+	
 Function PrepareAccess_Document(Keys, MetaObj)
 	
 	AccessKey = New Structure;

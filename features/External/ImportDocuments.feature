@@ -252,8 +252,8 @@ Scenario: Create document RetailReturnReceipt objects
 		| 'e1cib/data/Document.RetailReturnReceipt?ref=aa78120ed92fbced11eaf1b279d944cd'  | 'ebe7dd47-4a00-4e70-915f-4bbfaabaeb91'  | 'e1cib/data/Catalog.Currencies?ref=aa78120ed92fbced11eaf113ba6c1855'  | '5,84'  | '0,1712'       | 'False'            | '1'             | 'e1cib/data/ChartOfCharacteristicTypes.CurrencyMovementType?ref=aa78120ed92fbced11eaf113ba6c185e'  | '282,53'   |
 
 	And I refill object tabular section "Payments":
-		| 'Ref'                                                                           | 'PaymentType'                                                           | 'PaymentTerminal'  | 'Account'                                                               | 'Amount'  | 'Percent'  | 'Commission'   |
-		| 'e1cib/data/Document.RetailReturnReceipt?ref=aa78120ed92fbced11eaf1b279d944cd'  | 'e1cib/data/Catalog.PaymentTypes?ref=aa78120ed92fbced11eaf12effe70fd0'  | ''                 | 'e1cib/data/Catalog.CashAccounts?ref=aa78120ed92fbced11eaf113ba6c186e'  | '1 650'   | '1'        | '20,5'         |
+		| 'Ref'                                                                           | 'PaymentType'                                                           | 'PaymentTerminal'  | 'Account'                                                               | 'Amount'  | 'Percent'  | 'Commission'   | 'Key'                                  |
+		| 'e1cib/data/Document.RetailReturnReceipt?ref=aa78120ed92fbced11eaf1b279d944cd'  | 'e1cib/data/Catalog.PaymentTypes?ref=aa78120ed92fbced11eaf12effe70fd0'  | ''                 | 'e1cib/data/Catalog.CashAccounts?ref=aa78120ed92fbced11eaf113ba6c186e'  | '1 650'   | '1'        | '20,5'         | 'f09f21c2-d0d7-42f0-baee-09c5a94721f4' |
 
 
 
@@ -270,9 +270,9 @@ Scenario: Create document RetailSalesReceipt objects
 		| 'e1cib/data/Document.RetailSalesReceipt?ref=aa78120ed92fbced11eaf12effe70fd4'  | 400            | 338.98       | 'e1cib/data/Catalog.Items?ref=aa78120ed92fbced11eaf115bcc9c5f4'  | 'e1cib/data/Catalog.ItemKeys?ref=aa78120ed92fbced11eaf115bcc9c601'  | 'e1cib/data/Catalog.Stores?ref=aa78120ed92fbced11eaf114c59ef00b'  |                 | 400      | 1           | 61.02        | '11886d36-a1fb-49f2-8320-71c16952950c'  | 'e1cib/data/Catalog.Units?ref=aa78120ed92fbced11eaf113ba6c1862'  | 'e1cib/data/Catalog.PriceTypes?ref=aa78120ed92fbced11eaf114c59eeffe'  | ''        | ''                  | ''             | ''                    | 'False'             |                       | ''             | 'False'               | 'False'       |'e1cib/data/Catalog.TaxRates?ref=aa78120ed92fbced11eaf114c59ef010'|
 
 	And I refill object tabular section "Payments":
-		| 'Ref'                                                                          | 'PaymentType'                                                           | 'PaymentTerminal'  | 'Account'  | 'Amount'  | 'Percent'  | 'Commission'  | 'BankTerm'   |
-		| 'e1cib/data/Document.RetailSalesReceipt?ref=aa78120ed92fbced11eaf12effe70fd4'  | 'e1cib/data/Catalog.PaymentTypes?ref=aa78120ed92fbced11eaf12effe70fcf'  | ''                 | ''         | '2 051'   | '0'        | '0'           | ''           |
-		| 'e1cib/data/Document.RetailSalesReceipt?ref=aa78120ed92fbced11eaf12effe70fd4'  | 'e1cib/data/Catalog.PaymentTypes?ref=aa78120ed92fbced11eaf12effe70fcf'  | ''                 | ''         | '-1'      | '0'        | '0'           | ''           |
+		| 'Ref'                                                                          | 'PaymentType'                                                           | 'PaymentTerminal'  | 'Account'  | 'Amount'  | 'Percent'  | 'Commission'  | 'BankTerm'   | 'Key'                                  |
+		| 'e1cib/data/Document.RetailSalesReceipt?ref=aa78120ed92fbced11eaf12effe70fd4'  | 'e1cib/data/Catalog.PaymentTypes?ref=aa78120ed92fbced11eaf12effe70fcf'  | ''                 | ''         | '2 051'   | '0'        | '0'           | ''           | '24dc6a91-f427-44e8-a937-4e932e6a3928' |
+		| 'e1cib/data/Document.RetailSalesReceipt?ref=aa78120ed92fbced11eaf12effe70fd4'  | 'e1cib/data/Catalog.PaymentTypes?ref=aa78120ed92fbced11eaf12effe70fcf'  | ''                 | ''         | '-1'      | '0'        | '0'           | ''           | '24dc6a91-f427-44e8-a937-4e932e7a3928' |
 
 
 Scenario: Create document BankPayment objects
@@ -2908,8 +2908,8 @@ Scenario: Create document RetailReturnReceipt objects (stock control)
 		| 'e1cib/data/Document.RetailReturnReceipt?ref=b762b13668d0905011eb832c02e0c9f4'  | 'efc69413-677d-4b32-a7c0-d9d8f7f82d16'  | 'e1cib/data/Catalog.Currencies?ref=aa78120ed92fbced11eaf113ba6c1855'  | '0,1712'  | '5,8411'       | 'False'            | '1'             | 'e1cib/data/ChartOfCharacteristicTypes.CurrencyMovementType?ref=aa78120ed92fbced11eaf113ba6c185e'  | '859,42'   |
 
 	And I refill object tabular section "Payments":
-		| 'Ref'                                                                           | 'PaymentType'                                                           | 'PaymentTerminal'  | 'Account'                                                               | 'Amount'  | 'Percent'  | 'Commission'   |
-		| 'e1cib/data/Document.RetailReturnReceipt?ref=b762b13668d0905011eb832c02e0c9f4'  | 'e1cib/data/Catalog.PaymentTypes?ref=b762b13668d0905011eb832c2b2de70c'  | ''                 | 'e1cib/data/Catalog.CashAccounts?ref=aa78120ed92fbced11eaf113ba6c1868'  | '5 020'   | '0'        | '0'            |
+		| 'Ref'                                                                           | 'PaymentType'                                                           | 'PaymentTerminal'  | 'Account'                                                               | 'Amount'  | 'Percent'  | 'Commission'   | 'Key'                                  |
+		| 'e1cib/data/Document.RetailReturnReceipt?ref=b762b13668d0905011eb832c02e0c9f4'  | 'e1cib/data/Catalog.PaymentTypes?ref=b762b13668d0905011eb832c2b2de70c'  | ''                 | 'e1cib/data/Catalog.CashAccounts?ref=aa78120ed92fbced11eaf113ba6c1868'  | '5 020'   | '0'        | '0'            | '24dc6a91-f427-44e8-a937-4e932e5a4028' |
 
 	And I refill object tabular section "SourceOfOrigins":
 		| 'Ref'                                                                          | 'Key'                                  | 'SerialLotNumber' | 'SourceOfOrigin' | 'Quantity' |

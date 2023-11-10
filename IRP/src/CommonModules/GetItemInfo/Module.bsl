@@ -1526,3 +1526,101 @@ EndFunction
 	
 #EndRegion
 
+Function CheckUnitForItem(ItemObject) Export
+	Result = New Structure("Error, Document, UnitFrom, UnitTo", False, Undefined, Undefined, Undefined);
+	If ValueIsFilled(ItemObject.Ref) 
+		And ItemObject.Unit <> ItemObject.Ref.Unit Then
+			
+			CheckResult = ItemInRegisterRecords(ItemObject.Ref);
+			
+			Result.Error    = CheckResult.Error;
+			Result.Document = CheckResult.Document;
+			Result.UnitFrom = ItemObject.Ref.Unit;
+			Result.UnitTo   = ItemObject.Unit;
+	EndIf;
+	Return Result;
+EndFunction
+
+Function CheckUnitForItemKey(ItemKeyObject) Export
+	Result = New Structure("Error, Document, UnitFrom, UnitTo", False, Undefined, Undefined, Undefined);
+	If ValueIsFilled(ItemKeyObject.Ref) Then
+		OldUnit = ItemKeyObject.Ref.Unit;
+		If Not ValueIsFilled(OldUnit) And ValueIsFilled(ItemKeyObject.Item) Then
+			OldUnit = ItemKeyObject.Item.Unit;
+		EndIf;
+		
+		If ItemKeyObject.Unit <> OldUnit Then
+			
+			CheckResult = ItemInRegisterRecords(ItemKeyObject.Ref);
+			
+			Result.Error    = CheckResult.Error;
+			Result.Document = CheckResult.Document;
+			Result.UnitFrom = OldUnit;
+			Result.UnitTo   = ItemKeyObject.Unit;
+		EndIf;
+		
+	EndIf;
+	Return Result;
+EndFunction
+
+Function ItemInRegisterRecords(ItemOrItemKey)
+	Query = New Query();
+	Query.Text = 
+	"SELECT TOP 1
+	|	R4010B_ActualStocks.Recorder
+	|FROM
+	|	AccumulationRegister.R4010B_ActualStocks AS R4010B_ActualStocks
+	|WHERE
+	|	CASE
+	|		WHEN &Filter_ItemKey
+	|			THEN R4010B_ActualStocks.ItemKey = &ItemKey
+	|		ELSE TRUE
+	|	END
+	|	AND CASE
+	|		WHEN &Filter_Item
+	|			THEN R4010B_ActualStocks.ItemKey.Item = &Item
+	|		ELSE TRUE
+	|	END
+	|
+	|UNION ALL
+	|
+	|SELECT TOP 1
+	|	R4050B_StockInventory.Recorder
+	|FROM
+	|	AccumulationRegister.R4050B_StockInventory AS R4050B_StockInventory
+	|WHERE
+	|	CASE
+	|		WHEN &Filter_ItemKey
+	|			THEN R4050B_StockInventory.ItemKey = &ItemKey
+	|		ELSE TRUE
+	|	END
+	|	AND CASE
+	|		WHEN &Filter_Item
+	|			THEN R4050B_StockInventory.ItemKey.Item = &Item
+	|		ELSE TRUE
+	|	END";
+	
+	If TypeOf(ItemOrItemKey) = Type("CatalogRef.Items") Then
+		Query.SetParameter("Filter_ItemKey" , False);
+		Query.SetParameter("ItemKey"        , Undefined);
+		
+		Query.SetParameter("Filter_Item"    , True);
+		Query.SetParameter("Item"           , ItemOrItemKey);
+	ElsIf TypeOf(ItemOrItemKey) = Type("CatalogRef.ItemKeys") Then
+		Query.SetParameter("Filter_ItemKey" , True);
+		Query.SetParameter("ItemKey"        , ItemOrItemKey);
+		
+		Query.SetParameter("Filter_Item"    , False);
+		Query.SetParameter("Item"           , Undefined);		
+	EndIf;
+	QueryResult = Query.Execute();
+	QuerySelection = QueryResult.Select();
+	Result = New Structure("Error, Document", False, Undefined);
+	If QuerySelection.Next() Then
+		Result.Error = True;
+		Result.Document = QuerySelection.Recorder;
+	EndIf;
+	Return Result;
+EndFunction
+
+

@@ -6,6 +6,13 @@ Procedure BeforeWrite(Cancel)
 	EndIf;
 	
 	ThisObject.Unit = FOServer.GetDefault_Unit(ThisObject.Unit);
+	
+	CheckResult = ServerPrivileged.CheckUnitForItem(ThisObject);
+	If CheckResult.Error Then
+		Cancel = True;
+		CommonFunctionsClientServer.ShowUsersMessage(R().Error_138, 
+			CheckResult.UnitFrom, CheckResult.UnitTo, CheckResult.Document);
+	EndIf;
 EndProcedure
 
 Procedure OnWrite(Cancel)

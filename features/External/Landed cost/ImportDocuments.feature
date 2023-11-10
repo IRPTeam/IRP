@@ -828,10 +828,10 @@ Scenario: Create document RetailReturnReceipt objects (LC)
 		| 'e1cib/data/Document.RetailReturnReceipt?ref=b76e892a86cabee011ebfe98af57d4cc'  | '74233763-fae1-4018-a3e9-9066bdae01c2'  | 'e1cib/data/Catalog.Currencies?ref=86ffd69b4676df1211ea9f63629ef588'  | '0,1712'  | '5,8411'       | 'False'            | '1'             | 'e1cib/data/ChartOfCharacteristicTypes.CurrencyMovementType?ref=86ffd69b4676df1211ea9f63aa133490'  | '34,24'    |
 
 	And I refill object tabular section "Payments":
-		| 'Ref'                                                                           | 'PaymentType'  | 'PaymentTerminal'  | 'Account'  | 'Amount'  | 'Percent'  | 'Commission'   |
-		| 'e1cib/data/Document.RetailReturnReceipt?ref=b76e892a86cabee011ebfe98af57d4c9'  | ''             | ''                 | ''         | '400'     | '0'        | '0'            |
-		| 'e1cib/data/Document.RetailReturnReceipt?ref=b76e892a86cabee011ebfe98af57d4ca'  | ''             | ''                 | ''         | '300'     | '0'        | '0'            |
-		| 'e1cib/data/Document.RetailReturnReceipt?ref=b76e892a86cabee011ebfe98af57d4cc'  | ''             | ''                 | ''         | '200'     | '0'        | '0'            |
+		| 'Ref'                                                                           | 'PaymentType'  | 'PaymentTerminal'  | 'Account'  | 'Amount'  | 'Percent'  | 'Commission'   | 'Key'                                  |
+		| 'e1cib/data/Document.RetailReturnReceipt?ref=b76e892a86cabee011ebfe98af57d4c9'  | ''             | ''                 | ''         | '400'     | '0'        | '0'            | '24dc6a91-f427-44e8-a937-4e972e5a3928' |
+		| 'e1cib/data/Document.RetailReturnReceipt?ref=b76e892a86cabee011ebfe98af57d4ca'  | ''             | ''                 | ''         | '300'     | '0'        | '0'            | '24dc6a91-f427-44e8-a937-4e982e5a3928' |
+		| 'e1cib/data/Document.RetailReturnReceipt?ref=b76e892a86cabee011ebfe98af57d4cc'  | ''             | ''                 | ''         | '200'     | '0'        | '0'            | '24dc6a91-f427-44e8-a937-4e912e5a3928' |
 
 	And I refill object tabular section "RowIDInfo":
 		| 'Ref'                                                                          | 'Key'                                  | 'RowID'                                | 'Quantity' | 'Basis'                                                                       | 'CurrentStep'                                  | 'NextStep' | 'RowRef'                                                         | 'BasisKey'                             |
@@ -886,12 +886,12 @@ Scenario: Create document RetailSalesReceipt objects (LC)
 		| 'e1cib/data/Document.RetailSalesReceipt?ref=b76e892a86cabee011ebfe98af57d4c8'  | 'e35b6281-a657-43df-bea5-d2e5d3fafcea'  | 'e1cib/data/Catalog.Currencies?ref=86ffd69b4676df1211ea9f63629ef588'  | '0,1712'  | '5,8411'       | 'False'            | '1'             | 'e1cib/data/ChartOfCharacteristicTypes.CurrencyMovementType?ref=86ffd69b4676df1211ea9f63aa133490'  | '68,48'      |
 
 	And I refill object tabular section "Payments":
-		| 'Ref'                                                                          | 'PaymentType'  | 'PaymentTerminal'  | 'Account'  | 'Amount'  | 'Percent'  | 'Commission'  | 'BankTerm'   |
-		| 'e1cib/data/Document.RetailSalesReceipt?ref=b76e892a86cabee011ebfe98af57d4bf'  | ''             | ''                 | ''         | '7 200'   | '0'        | '0'           | ''           |
-		| 'e1cib/data/Document.RetailSalesReceipt?ref=b76e892a86cabee011ebfe98af57d4c2'  | ''             | ''                 | ''         | '6 800'   | '0'        | '0'           | ''           |
-		| 'e1cib/data/Document.RetailSalesReceipt?ref=b76e892a86cabee011ebfe98af57d4c4'  | ''             | ''                 | ''         | '1 600'   | '0'        | '0'           | ''           |
-		| 'e1cib/data/Document.RetailSalesReceipt?ref=b76e892a86cabee011ebfe98af57d4c6'  | ''             | ''                 | ''         | '400'     | '0'        | '0'           | ''           |
-		| 'e1cib/data/Document.RetailSalesReceipt?ref=b76e892a86cabee011ebfe98af57d4c8'  | ''             | ''                 | ''         | '400'     | '0'        | '0'           | ''           |
+		| 'Ref'                                                                          | 'PaymentType'  | 'PaymentTerminal'  | 'Account'  | 'Amount'  | 'Percent'  | 'Commission'  | 'BankTerm'   | 'Key'                                  |
+		| 'e1cib/data/Document.RetailSalesReceipt?ref=b76e892a86cabee011ebfe98af57d4bf'  | ''             | ''                 | ''         | '7 200'   | '0'        | '0'           | ''           | '24dc6a91-f429-44e8-a937-4e932e5a3928' |
+		| 'e1cib/data/Document.RetailSalesReceipt?ref=b76e892a86cabee011ebfe98af57d4c2'  | ''             | ''                 | ''         | '6 800'   | '0'        | '0'           | ''           | '24dc6a91-f421-44e8-a937-4e932e5a3928' |
+		| 'e1cib/data/Document.RetailSalesReceipt?ref=b76e892a86cabee011ebfe98af57d4c4'  | ''             | ''                 | ''         | '1 600'   | '0'        | '0'           | ''           | '24dc6a91-f422-44e8-a937-4e932e5a3928' |
+		| 'e1cib/data/Document.RetailSalesReceipt?ref=b76e892a86cabee011ebfe98af57d4c6'  | ''             | ''                 | ''         | '400'     | '0'        | '0'           | ''           | '24dc6a91-f423-44e8-a937-4e932e5a3928' |
+		| 'e1cib/data/Document.RetailSalesReceipt?ref=b76e892a86cabee011ebfe98af57d4c8'  | ''             | ''                 | ''         | '400'     | '0'        | '0'           | ''           | '24dc6a91-f424-44e8-a937-4e932e5a3928' |
 
 	And I refill object tabular section "RowIDInfo":
 		| 'Ref'                                                                          | 'Key'                                   | 'RowID'                                 | 'Quantity'  | 'Basis'  | 'CurrentStep'  | 'NextStep'  | 'RowRef'                                                          | 'BasisKey'   |

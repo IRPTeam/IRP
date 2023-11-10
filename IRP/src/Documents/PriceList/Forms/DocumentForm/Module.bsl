@@ -491,12 +491,14 @@ Procedure LoadDataAtServer(DataForLoad)
 		Object.ItemList.Clear();
 		For Each Row In DataForLoad.ItemList Do
 			NewRow = Object.ItemList.Add();
+			NewRow.Key = String(New UUID());
 			FillPropertyValues(NewRow, Row);
 		EndDo;
 	ElsIf Object.PriceListType = Enums.PriceListTypes.PriceByItemKeys Then
 		Object.ItemKeyList.Clear();
 		For Each Row In DataForLoad.ItemKeyList Do
 			NewRow = Object.ItemKeyList.Add();
+			NewRow.Key = String(New UUID());
 			FillPropertyValues(NewRow, Row);
 		EndDo;
 	ElsIf Object.PriceListType = Enums.PriceListTypes.PriceByProperties Then

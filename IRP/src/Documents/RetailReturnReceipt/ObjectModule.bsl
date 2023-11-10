@@ -3,6 +3,12 @@ Procedure BeforeWrite(Cancel, WriteMode, PostingMode)
 		Return;
 	EndIf;
 
+	For Each Row In ThisObject.Payments Do
+		If Not ValueIsFilled(Row.Key) Then
+			Row.Key = String(New UUID());
+		EndIf;
+	EndDo;
+	
 	Parameters = CurrenciesClientServer.GetParameters_V3(ThisObject);
 	CurrenciesClientServer.DeleteRowsByKeyFromCurrenciesTable(ThisObject.Currencies);
 	CurrenciesServer.UpdateCurrencyTable(Parameters, ThisObject.Currencies);

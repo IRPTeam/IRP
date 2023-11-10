@@ -926,3 +926,36 @@ Procedure AddNewSourceOfOrigin(Object, RowKey, ScanDataItem)
 	
 	SourceOfOriginClientServer.AddNewSourceOfOrigins(Object, RowKey, _SourceOfOrigins);
 EndProcedure
+
+Procedure BeforeWrite_CheckFillingRowKeyBeforeWrite(Source, Cancel, WriteMode, PostingMode) Export
+	If Source.DataExchange.Load Then
+		Return;
+	EndIf;
+	
+	If Cancel Then
+		Return;
+	EndIf;
+	
+	ArrayOfExcludedTabularSectionNames = New Array();
+	ArrayOfExcludedTabularSectionNames.Add("Currencies");
+	
+	For Each TabularSection In Source.Ref.Metadata().TabularSections Do
+		If ArrayOfExcludedTabularSectionNames.Find(TabularSection.Name) <> Undefined Then
+			Continue;
+		EndIf;
+		
+		If TabularSection.Attributes.Find("Key") = Undefined Then
+			Continue;
+		EndIf;
+		
+		For Each Row In Source[TabularSection.Name] Do
+			If Not ValueIsFilled(Row.Key) Then
+				CommonFunctionsClientServer.ShowUsersMessage(StrTemplate(R().Error_137, TabularSection.Name, Row.LineNumber));
+				Cancel = True;
+			EndIf;
+		EndDo;
+	EndDo;
+EndProcedure
+
+
+

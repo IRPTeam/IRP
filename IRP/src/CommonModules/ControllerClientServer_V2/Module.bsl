@@ -14533,7 +14533,7 @@ Procedure BindVoid(Parameters, Chain) Export
 	Return;
 EndProcedure
 
-Function BindSteps(DefaulStepsEnabler, DataPath, Binding, Parameters, BindName)
+Function BindSteps(DefaulStepsEnabler, DataPath, Binding, Parameters, BindName, ExtensionPrefix = "")
 	Result = Parameters.BindingMap.Get(BindName);
 	If Result <> Undefined Then
 		Return Result;
@@ -14555,8 +14555,16 @@ Function BindSteps(DefaulStepsEnabler, DataPath, Binding, Parameters, BindName)
 	For Each KeyValue In Binding Do
 		ObjectName = KeyValue.Key;
 		ObjectNameSegments = StrSplit(ObjectName, "__", False);
-		If ObjectNameSegments.Count() = 2 And Parameters.TableName <> ObjectNameSegments[1] Then
-			Continue;
+		
+		If ObjectNameSegments.Count() = 2 
+			And ValueIsFilled(ExtensionPrefix)
+			And Upper(ObjectNameSegments[0]) = Upper(ExtensionPrefix) Then
+				
+				MetadataBinding.Insert(ObjectNameSegments[0] +"_"+ObjectNameSegments[1]+"." + DataPath, Binding[ObjectName]);	
+		Else
+			If ObjectNameSegments.Count() = 2 And Parameters.TableName <> ObjectNameSegments[1] Then
+				Continue;
+			EndIf;
 		EndIf;
 		MetadataBinding.Insert(ObjectNameSegments[0] + "." + DataPath, Binding[ObjectName]);
 	EndDo;

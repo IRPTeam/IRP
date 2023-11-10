@@ -332,7 +332,7 @@ EndProcedure
 #Region API
 
 // attributes that available through API
-Function GetEventHandlersByDataPath(Parameters, DataPath, IsBuilder)
+Function GetEventHandlerMap(Parameters, DataPath, IsBuilder)
 	EventHandlerMap = New Map();
 	EventHandlerMap.Insert("Sender"          , "SetAccountSender");
 	EventHandlerMap.Insert("SendCurrency"    , "SetSendCurrency");
@@ -437,7 +437,12 @@ Function GetEventHandlersByDataPath(Parameters, DataPath, IsBuilder)
 	EventHandlerMap.Insert("DeductionList.Amount"            , "SetPayrollListsAmount");
 	EventHandlerMap.Insert("DeductionList.DeductionType"     , "SetPayrollListsAccrualDeductionType");
 	EventHandlerMap.Insert("CashAdvanceDeductionList.Amount" , "SetPayrollListsAmount");
-	
+
+	Return EventHandlerMap;
+EndFunction
+
+Function GetEventHandlersByDataPath(Parameters, DataPath, IsBuilder)
+	EventHandlerMap = GetEventHandlerMap(Parameters, DataPath, IsBuilder);	
 	Return EventHandlerMap.Get(DataPath);
 EndFunction
 

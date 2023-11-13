@@ -349,8 +349,8 @@ Scenario: _604717 change main attributes (ObjectPropertyEditor)
 		And I click the button named "Refresh"
 	* Change unit and Vendor
 		And I go to line in "PropertiesTable" table
-			| 'Is modified'   | 'Item ID'   | 'Item type'   | 'Marked'   | 'Object'     | 'Unit'    |
-			| 'No'            | '10002'     | 'Clothes'     | 'No'       | 'Trousers'   | 'pcs'     |
+			| 'Is modified' | 'Item ID' | 'Item type' | 'Marked' | 'Object' | 'Unit' |
+			| 'No'          | 'D18001'  | 'Bags'      | 'No'     | 'Bag'    | 'pcs'  |
 		And I activate "Unit" field in "PropertiesTable" table
 		And I select current line in "PropertiesTable" table
 		And I click choice button of "Unit" attribute in "PropertiesTable" table
@@ -380,8 +380,8 @@ Scenario: _604717 change main attributes (ObjectPropertyEditor)
 		Then the form attribute named "Vendor" became equal to "Kalipso"
 		And I close current window
 		And I go to line in "List" table
-			| 'Description'    |
-			| 'Trousers'       |
+			| 'Description'|
+			| 'Bag'        |
 		And I select current line in "List" table	
 		Then the form attribute named "Unit" became equal to "box (8 pcs)"
 	And I close all client application windows

@@ -677,6 +677,7 @@
  <commonModules>CommonModule.DocModernizationOfFixedAssetServer</commonModules>
  <commonModules>CommonModule.DocModernizationOfFixedAssetClient</commonModules>
  <commonModules>CommonModule.OffsetOfAdvancesServer</commonModules>
+ <commonModules>CommonModule.ServerPrivileged</commonModules>
  <commonAttributes>CommonAttribute.Author</commonAttributes>
  <commonAttributes>CommonAttribute.Branch</commonAttributes>
  <commonAttributes>CommonAttribute.Description</commonAttributes>

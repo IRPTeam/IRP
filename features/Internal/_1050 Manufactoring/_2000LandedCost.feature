@@ -120,6 +120,7 @@ Scenario: _2000 preparation (landed cost)
 		| "Documents.SalesInvoice.FindByNumber(1).GetObject().Write(DocumentWriteMode.Posting);"   |
 	And I execute 1C:Enterprise script at server
 		| "Documents.SalesInvoice.FindByNumber(2).GetObject().Write(DocumentWriteMode.Posting);"   |
+	When Data preparation for multiple semiproducts with complex digits
 	And I close all client application windows
 
 
@@ -599,4 +600,41 @@ Scenario: _2020 check filling extra direct cost from bill of material
 	And I close all client application windows
 
 				
-						
+Scenario: _2022 check landed cost for multiple semiproducts with complex digits 
+	And I close all client application windows
+	* Preparation
+		And I execute 1C:Enterprise script at server
+			| "Documents.PurchaseInvoice.FindByNumber(18).GetObject().Write(DocumentWriteMode.Posting);"   |	
+		And I execute 1C:Enterprise script at server
+			| "Documents.PurchaseInvoice.FindByNumber(19).GetObject().Write(DocumentWriteMode.Posting);"   |		
+		And I execute 1C:Enterprise script at server
+			| "Documents.PurchaseInvoice.FindByNumber(20).GetObject().Write(DocumentWriteMode.Posting);"   |
+		And I execute 1C:Enterprise script at server
+			| "Documents.AdditionalCostAllocation.FindByNumber(4).GetObject().Write(DocumentWriteMode.Posting);"   |
+		And I execute 1C:Enterprise script at server
+			| "Documents.Production.FindByNumber(16).GetObject().Write(DocumentWriteMode.Posting);"   |	
+		And I execute 1C:Enterprise script at server
+			| "Documents.Production.FindByNumber(17).GetObject().Write(DocumentWriteMode.Posting);"   |	
+		And I execute 1C:Enterprise script at server
+			| "Documents.Production.FindByNumber(18).GetObject().Write(DocumentWriteMode.Posting);"   |
+	* Calculate batches
+		Given I open hyperlink "e1cib/list/Document.CalculationMovementCosts"
+		And I go to line in "List" table
+			| 'Number'                                 |
+			| '$$NumberCalculationMovementCosts1$$'    |
+		And in the table "List" I click the button named "ListContextMenuPost"
+	* Check landed cost
+		Given I open hyperlink "e1cib/app/Report.BatchBalance"
+		And I click "Select option..." button
+		And I move to "Custom" tab
+		And I select current line in "StandardOptions" table
+		And I click Choice button of the field named "SettingsComposerUserSettingsItem2Value"
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Store 05'    |
+		And I select current line in "List" table
+		And I remove checkbox named "SettingsComposerUserSettingsItem1Use"
+		And I click "Generate" button
+		Given "Result" spreadsheet document is equal to "LandedCost6" by template
+		And I close all client application windows
+		

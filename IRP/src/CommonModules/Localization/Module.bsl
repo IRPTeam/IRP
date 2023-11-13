@@ -1596,6 +1596,9 @@ Function Strings(Lang) Export
 	Strings.Insert("Error_136", NStr("en='Serial lot number is not unique, duplicate codes:[%1]';
 		|ru='Serial lot number is not unique, duplicate codes:[%1]';
 		|tr='Seri lot numarası benzersiz değil, yinelenen kodlar:[%1]'", Lang));	
+	Strings.Insert("Error_137", NStr("en='Not filled [Key] in tabular section [%1] line number[%2]';
+		|ru='Not filled [Key] in tabular section [%1] line number[%2]';
+		|tr='Not filled [Key] in tabular section [%1] line number[%2]'", Lang));	
 	
 	
 	Strings.Insert("Error_FillTotalAmount", NStr("en='Fill total amount. Row: [%1]';

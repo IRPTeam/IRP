@@ -1547,7 +1547,7 @@ Scenario: Create Retail sales receipt, Retail return receipt (locking linked str
 
 	And I refill object tabular section "Payments":
 		| 'Ref'                                                                          | 'Key'                                   | 'PaymentType'                                                           | 'PaymentTerminal'  | 'Account'                                                               | 'Amount'  | 'Percent'  | 'Commission'  | 'BankTerm'   |
-		| 'e1cib/data/Document.RetailSalesReceipt?ref=b76fba77ffd4077e11ec259dc4b0006c'  | '                                    '  | 'e1cib/data/Catalog.PaymentTypes?ref=b76fba77ffd4077e11ec259dc4b00066'  | ''                 | 'e1cib/data/Catalog.CashAccounts?ref=aa78120ed92fbced11eaf124a9ba0839'  | 8350      |            |               | ''           |
+		| 'e1cib/data/Document.RetailSalesReceipt?ref=b76fba77ffd4077e11ec259dc4b0006c'  | 'fd2e165c-f0a0-4e5c-8be2-0b6b62bf3d6a'  | 'e1cib/data/Catalog.PaymentTypes?ref=b76fba77ffd4077e11ec259dc4b00066'  | ''                 | 'e1cib/data/Catalog.CashAccounts?ref=aa78120ed92fbced11eaf124a9ba0839'  | 8350      |            |               | ''           |
 
 	And I refill object tabular section "SourceOfOrigins":
 		| 'Ref'                                                                         | 'Key'                                  | 'SerialLotNumber' | 'SourceOfOrigin' | 'Quantity' |
@@ -1580,7 +1580,7 @@ Scenario: Create Retail sales receipt, Retail return receipt (locking linked str
 
 	And I refill object tabular section "Payments":
 		| 'Ref'                                                                           | 'Key'                                   | 'PaymentType'                                                           | 'PaymentTerminal'  | 'Account'                                                               | 'Amount'  | 'Percent'  | 'Commission'  | 'PostponedPayment'  | 'BankTerm'   |
-		| 'e1cib/data/Document.RetailReturnReceipt?ref=b76fba77ffd4077e11ec259dc4b0006d'  | '                                    '  | 'e1cib/data/Catalog.PaymentTypes?ref=b76fba77ffd4077e11ec259dc4b00066'  | ''                 | 'e1cib/data/Catalog.CashAccounts?ref=aa78120ed92fbced11eaf124a9ba0839'  | 5560      |            |               | 'False'             | ''           |
+		| 'e1cib/data/Document.RetailReturnReceipt?ref=b76fba77ffd4077e11ec259dc4b0006d'  | '15ba131c-3dd4-4ffa-a935-21f7827e3bd7'  | 'e1cib/data/Catalog.PaymentTypes?ref=b76fba77ffd4077e11ec259dc4b00066'  | ''                 | 'e1cib/data/Catalog.CashAccounts?ref=aa78120ed92fbced11eaf124a9ba0839'  | 5560      |            |               | 'False'             | ''           |
 
 	And I refill object tabular section "RowIDInfo":
 		| 'Ref'                                                                           | 'Key'                                   | 'RowID'                                 | 'Quantity'  | 'Basis'                                                                        | 'CurrentStep'                                   | 'NextStep'  | 'RowRef'                                                          | 'BasisKey'                               |

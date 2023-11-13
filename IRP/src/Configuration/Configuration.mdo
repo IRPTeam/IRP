@@ -718,6 +718,7 @@
  <eventSubscriptions>EventSubscription.PresentationFieldsGetProcessing_GetCatalogPresentationFields</eventSubscriptions>
  <eventSubscriptions>EventSubscription.PresentationGetProcessing_GetCatalogPresentation</eventSubscriptions>
  <eventSubscriptions>EventSubscription.BeforeWrite_ObjectAccessDocument</eventSubscriptions>
+ <eventSubscriptions>EventSubscription.BeforeWrite_CheckFillingRowKey</eventSubscriptions>
  <scheduledJobs>ScheduledJob.AddExternalFunctionsToJobQueue</scheduledJobs>
  <scheduledJobs>ScheduledJob.AreaUpdate</scheduledJobs>
  <scheduledJobs>ScheduledJob.ExportData</scheduledJobs>

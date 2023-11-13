@@ -348,7 +348,7 @@ Scenario: _0260107 create RSR and check Consolidated retail sales filling
 			| '*'          | 'Main Company'   | '3 180'    | 'Shop 02'   | 'TRY'        | 'CI'        |
 			| '*'          | 'Main Company'   | '2 110'    | 'Shop 02'   | 'TRY'        | 'CI'        |
 			| '*'          | 'Main Company'   | '5 440'    | 'Shop 02'   | 'TRY'        | 'CI'        |
-		Then the number of "Documents" table lines is "равно" "5"	
+		Then the number of "Documents" table lines is "равно" "6"	
 		Then the form attribute named "Branch" became equal to "Shop 02"
 		Then the form attribute named "Author" became equal to "CI"
 		And I delete "$$OpeningDate$$" variable
@@ -407,13 +407,14 @@ Scenario: _0260111 create RRR day to day and check Consolidated retail sales fil
 		Then the form attribute named "CashAccount" became equal to "Pos cash account 1"
 		Then the form attribute named "Status" became equal to "Open"
 		And "Documents" table became equal
-			| 'Document'                     | 'Company'        | 'Amount'   | 'Branch'    | 'Currency'   | 'Author'    |
-			| '$$RetailSalesReceiptNew$$'    | 'Main Company'   | '1 590'    | 'Shop 02'   | 'TRY'        | 'CI'        |
-			| '*'                            | 'Main Company'   | '3 180'    | 'Shop 02'   | 'TRY'        | 'CI'        |
-			| '*'                            | 'Main Company'   | '3 180'    | 'Shop 02'   | 'TRY'        | 'CI'        |
-			| '*'                            | 'Main Company'   | '2 110'    | 'Shop 02'   | 'TRY'        | 'CI'        |
-			| '*'                            | 'Main Company'   | '5 440'    | 'Shop 02'   | 'TRY'        | 'CI'        |
-			| '$$RetailReturnReceiptNew$$'   | 'Main Company'   | '-550'     | 'Shop 02'   | 'TRY'        | 'CI'        |
+			| 'Document'                   | 'Company'      | 'Amount' | 'Branch'  | 'Currency' | 'Author' |
+			| '*'                          | 'Main Company' | '1 000'  | 'Shop 02' | 'TRY'      | 'CI'     |
+			| '$$RetailSalesReceiptNew$$'  | 'Main Company' | '1 590'  | 'Shop 02' | 'TRY'      | 'CI'     |
+			| '*'                          | 'Main Company' | '3 180'  | 'Shop 02' | 'TRY'      | 'CI'     |
+			| '*'                          | 'Main Company' | '3 180'  | 'Shop 02' | 'TRY'      | 'CI'     |
+			| '*'                          | 'Main Company' | '2 110'  | 'Shop 02' | 'TRY'      | 'CI'     |
+			| '*'                          | 'Main Company' | '5 440'  | 'Shop 02' | 'TRY'      | 'CI'     |
+			| '$$RetailReturnReceiptNew$$' | 'Main Company' | '-550'   | 'Shop 02' | 'TRY'      | 'CI'     |
 		Then the form attribute named "Branch" became equal to "Shop 02"
 		Then the form attribute named "Author" became equal to "CI"
 		And I close all client application windows	
@@ -507,6 +508,7 @@ Scenario: _0260115 create RRR prior periods and check Consolidated retail sales 
 		Then the form attribute named "Status" became equal to "Open"
 		And "Documents" table became equal
 			| 'Document'                     | 'Company'        | 'Amount'   | 'Branch'    | 'Currency'   | 'Author'    |
+			| '*'                            | 'Main Company'   | '1 000'    | 'Shop 02'   | 'TRY'        | 'CI'        |
 			| '$$RetailSalesReceiptNew$$'    | 'Main Company'   | '1 590'    | 'Shop 02'   | 'TRY'        | 'CI'        |
 			| '*'                            | 'Main Company'   | '3 180'    | 'Shop 02'   | 'TRY'        | 'CI'        |
 			| '*'                            | 'Main Company'   | '3 180'    | 'Shop 02'   | 'TRY'        | 'CI'        |
@@ -516,7 +518,7 @@ Scenario: _0260115 create RRR prior periods and check Consolidated retail sales 
 			| '*'                            | 'Main Company'   | '-520'     | 'Shop 02'   | 'TRY'        | 'CI'        |
 			| '*'                            | 'Main Company'   | '-550'     | 'Shop 02'   | 'TRY'        | 'CI'        |
 			| '$$RetailReturnReceiptOld$$'   | 'Main Company'   | '-1 040'   | 'Shop 02'   | 'TRY'        | 'CI'        |
-		Then the number of "Documents" table lines is "equal" "9"
+		Then the number of "Documents" table lines is "equal" "10"
 		Then the form attribute named "Branch" became equal to "Shop 02"
 		Then the form attribute named "Author" became equal to "CI"
 		And I close all client application windows
@@ -1277,7 +1279,7 @@ Scenario: _0260135 close session and check Consolidated retail sales filling
 		Then the form attribute named "Company" became equal to "Main Company"
 		Then the form attribute named "CashAccount" became equal to "Pos cash account 1"
 		Then the form attribute named "Status" became equal to "Close"
-		And "Documents" table became equal
+		And "Documents" table contains lines
 			| 'Document'                     | 'Company'        | 'Amount'   | 'Branch'    | 'Currency'   | 'Author'    |
 			| '$$RetailSalesReceiptNew$$'    | 'Main Company'   | '1 590'    | 'Shop 02'   | 'TRY'        | 'CI'        |
 			| '*'                            | 'Main Company'   | '3 180'    | 'Shop 02'   | 'TRY'        | 'CI'        |
@@ -1294,7 +1296,7 @@ Scenario: _0260135 close session and check Consolidated retail sales filling
 			| '*'                            | 'Main Company'   | '-750'     | 'Shop 02'   | 'TRY'        | 'CI'        |
 			| '*'                            | 'Main Company'   | '-1 040'   | 'Shop 02'   | 'TRY'        | 'CI'        |
 			| '*'                            | 'Main Company'   | '-1 070'   | 'Shop 02'   | 'TRY'        | 'CI'        |
-		Then the number of "Documents" table lines is "equal" "15"
+		Then the number of "Documents" table lines is "equal" "23"
 		Then the form attribute named "Branch" became equal to "Shop 02"
 		And the editing text of form attribute named "BalanceEnd" became equal to "3 977,00"
 		And the editing text of form attribute named "BalanceReal" became equal to "4 000,00"

@@ -667,6 +667,12 @@ Scenario: _0850002 open session
 	When I Check the steps for Exception
 		| 'And I click "Open session" button'   |
 	And I close all client application windows
+	* Save number CRS
+		Given I open hyperlink "e1cib/list/Document.ConsolidatedRetailSales"
+		And I go to the last line in "List" table
+		And I select current line in "List" table
+		And I delete "$$NumberCRS11$$" variable
+		And I save the value of the field named "Number" as "$$NumberCRS11$$"
 	And I parsed the log of the fiscal emulator by the path '$$LogPath$$' into the variable "ParsingResult"
 	And I check "$ParsingResult$" with "0" and method is "OpenShift"
 	And I check "$ParsingResult$" with "0" and data in "In.Parameter2" contains 'CashierName="Арина Браун"'
@@ -3183,3 +3189,115 @@ Scenario: _0260200 click reconect hardware without fiscal printer
 		And I close "Payment" window
 		And I click "Clear current receipt" button		
 	And I close all client application windows
+
+Scenario: _0260210 on double click in CRS
+	And I close all client application windows
+	* Preparation
+		* Create CR (without fiscalization)
+			Given I open hyperlink "e1cib/list/Document.CashReceipt"
+			And I go to line in "List" table
+				| 'Amount'   |
+				| '1 000,00' |	
+			And in the table "List" I click the button named "ListContextMenuCopy"
+			And I click Select button of "Consolidated retail sales" field
+			And I go to line in "List" table
+				| 'Number'          |
+				| '$$NumberCRS11$$' |
+			And I select current line in "List" table
+			And I click "Post" button
+			And I delete "$$CR11$$" variable
+			And I save the window as "$$CR11$$" 
+			And I click "Post and close" button
+		* Create BR (without fiscalization)
+			Given I open hyperlink "e1cib/list/Document.BankReceipt"
+			And I go to line in "List" table
+				| 'Amount' |
+				| '10,00'  |
+			And in the table "List" I click the button named "ListContextMenuCopy"
+			And I click Select button of "Consolidated retail sales" field
+			And I go to line in "List" table
+				| 'Number'          |
+				| '$$NumberCRS11$$' |
+			And I select current line in "List" table
+			And I click "Post" button
+			And I delete "$$BR11$$" variable
+			And I save the window as "$$BR11$$" 
+			And I click "Post and close" button	
+		* Create CP (without fiscalization)
+			Given I open hyperlink "e1cib/list/Document.CashPayment"
+			And I go to line in "List" table
+				| 'Amount' |
+				| '200,00' |	
+			And in the table "List" I click the button named "ListContextMenuCopy"
+			And I click Select button of "Consolidated retail sales" field
+			And I go to line in "List" table
+				| 'Number'          |
+				| '$$NumberCRS11$$' |
+			And I select current line in "List" table
+			And I click "Post" button
+			And I delete "$$CP11$$" variable
+			And I save the window as "$$CP11$$" 
+			And I click "Post and close" button
+		* Create BP (without fiscalization)
+			Given I open hyperlink "e1cib/list/Document.BankPayment"
+			And I go to line in "List" table
+				| 'Amount' |
+				| '200,00' |
+			And in the table "List" I click the button named "ListContextMenuCopy"
+			And I click Select button of "Consolidated retail sales" field
+			And I go to line in "List" table
+				| 'Number'          |
+				| '$$NumberCRS11$$' |
+			And I select current line in "List" table
+			And I click "Post" button
+			And I delete "$$BP11$$" variable
+			And I save the window as "$$BP11$$" 
+			And I click "Post and close" button
+		* Create MT (without fiscalization)
+			Given I open hyperlink "e1cib/list/Document.MoneyTransfer"
+			And I go to line in "List" table
+				| 'Send amount' |
+				| '11,00'       |
+			And in the table "List" I click the button named "ListContextMenuCopy"
+			And I click Select button of "Consolidated retail sales" field
+			And I go to line in "List" table
+				| 'Number'          |
+				| '$$NumberCRS11$$' |
+			And I select current line in "List" table
+			And I click "Post" button
+			And I delete "$$MT11$$" variable
+			And I save the window as "$$MT11$$" 
+			And I click "Post and close" button
+	* Select CRS
+		Given I open hyperlink "e1cib/list/Document.ConsolidatedRetailSales"
+		And I go to line in "List" table
+			| 'Number'          |
+			| '$$NumberCRS11$$' |
+		And I select current line in "List" table
+	* Check filling documents with fiscalization
+		And "Documents" table contains lines
+			| 'Document'                 | 'Company'      | 'Amount' | 'Branch'  | 'Currency' | 'Author' | 'Receipt' | 'Send' |
+			| 'Cash receipt*'            | 'Main Company' | '1 000'  | 'Shop 02' | 'TRY'      | 'CI'     | '1 000'   | ''     |
+			| 'Retail sales receipt*'    | 'Main Company' | '300'    | 'Shop 02' | 'TRY'      | 'CI'     | '300'     | ''     |
+			| 'Bank receipt*'            | 'Main Company' | '10'     | 'Shop 02' | 'TRY'      | 'CI'     | '10'      | ''     |
+			| 'Retail return receipt 1*' | 'Main Company' | '-100'   | 'Shop 02' | 'TRY'      | 'CI'     | ''        | '100'  |
+			| 'Bank payment 1*'          | 'Main Company' | '-200'   | 'Shop 02' | 'TRY'      | 'CI'     | ''        | '200'  |
+			| 'Cash payment 1*'          | 'Main Company' | '-200'   | 'Shop 02' | 'TRY'      | 'CI'     | ''        | '200'  |
+			| 'Retail return receipt 4*' | 'Main Company' | '-210'   | 'Shop 02' | 'TRY'      | 'CI'     | ''        | '210'  |
+			| 'Retail return receipt 5*' | 'Main Company' | '-118'   | 'Shop 02' | 'TRY'      | 'CI'     | ''        | '118'  |
+			| 'Retail return receipt 6*' | 'Main Company' | '-520'   | 'Shop 02' | 'TRY'      | 'CI'     | ''        | '520'  |
+			| 'Money transfer 13*'       | 'Main Company' | '1 000'  | ''        | 'TRY'      | 'CI'     | '1 000'   | ''     |
+		And "Documents" table contains lines
+			| 'Document'                                          |
+			| '$$MT11$$'                                          |
+			| '$$CR11$$'                                          |
+			| '$$CP11$$'                                          |
+			| '$$BP11$$'                                          |
+			| '$$BR11$$'                                          |
+	* Double click RSR
+		And I go to line in "Documents" table
+			| 'Amount' | 'Author' | 'Branch'  | 'Company'      | 'Currency' | 'Receipt' |
+			| '720'    | 'CI'     | 'Shop 02' | 'Main Company' | 'TRY'      | '720'     |
+		And I select current line in "Documents" table
+		Then system warning window does not appear
+		And I close all client application windows	

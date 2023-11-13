@@ -332,7 +332,7 @@ EndProcedure
 #Region API
 
 // attributes that available through API
-Function GetEventHandlersByDataPath(Parameters, DataPath, IsBuilder)
+Function GetEventHandlerMap(Parameters, DataPath, IsBuilder)
 	EventHandlerMap = New Map();
 	EventHandlerMap.Insert("Sender"          , "SetAccountSender");
 	EventHandlerMap.Insert("SendCurrency"    , "SetSendCurrency");
@@ -437,7 +437,12 @@ Function GetEventHandlersByDataPath(Parameters, DataPath, IsBuilder)
 	EventHandlerMap.Insert("DeductionList.Amount"            , "SetPayrollListsAmount");
 	EventHandlerMap.Insert("DeductionList.DeductionType"     , "SetPayrollListsAccrualDeductionType");
 	EventHandlerMap.Insert("CashAdvanceDeductionList.Amount" , "SetPayrollListsAmount");
-	
+
+	Return EventHandlerMap;
+EndFunction
+
+Function GetEventHandlersByDataPath(Parameters, DataPath, IsBuilder)
+	EventHandlerMap = GetEventHandlerMap(Parameters, DataPath, IsBuilder);	
 	Return EventHandlerMap.Get(DataPath);
 EndFunction
 
@@ -14533,7 +14538,7 @@ Procedure BindVoid(Parameters, Chain) Export
 	Return;
 EndProcedure
 
-Function BindSteps(DefaulStepsEnabler, DataPath, Binding, Parameters, BindName)
+Function BindSteps(DefaulStepsEnabler, DataPath, Binding, Parameters, BindName, ExtensionPrefix = "")
 	Result = Parameters.BindingMap.Get(BindName);
 	If Result <> Undefined Then
 		Return Result;
@@ -14555,8 +14560,16 @@ Function BindSteps(DefaulStepsEnabler, DataPath, Binding, Parameters, BindName)
 	For Each KeyValue In Binding Do
 		ObjectName = KeyValue.Key;
 		ObjectNameSegments = StrSplit(ObjectName, "__", False);
-		If ObjectNameSegments.Count() = 2 And Parameters.TableName <> ObjectNameSegments[1] Then
-			Continue;
+		
+		If ObjectNameSegments.Count() = 2 
+			And ValueIsFilled(ExtensionPrefix)
+			And Upper(ObjectNameSegments[0]) = Upper(ExtensionPrefix) Then
+				
+				MetadataBinding.Insert(ObjectNameSegments[0] +"_"+ObjectNameSegments[1]+"." + DataPath, Binding[ObjectName]);	
+		Else
+			If ObjectNameSegments.Count() = 2 And Parameters.TableName <> ObjectNameSegments[1] Then
+				Continue;
+			EndIf;
 		EndIf;
 		MetadataBinding.Insert(ObjectNameSegments[0] + "." + DataPath, Binding[ObjectName]);
 	EndDo;

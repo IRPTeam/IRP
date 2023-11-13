@@ -2,6 +2,12 @@ Procedure BeforeWrite(Cancel, WriteMode, PostingMode)
 	If DataExchange.Load Then
 		Return;
 	EndIf;
+	
+	For Each Row In ThisObject.ItemList Do
+		If Not ValueIsFilled(Row.Key) Then
+			Row.Key = String(New UUID());
+		EndIf;
+	EndDo;
 EndProcedure
 
 Procedure OnWrite(Cancel)

@@ -1549,7 +1549,7 @@ Function CheckUnitForItemKey(ItemKeyObject) Export
 			OldUnit = ItemKeyObject.Item.Unit;
 		EndIf;
 		
-		If ItemKeyObject.Unit <> OldUnit Then
+		If ValueIsFilled(ItemKeyObject.Unit) And ItemKeyObject.Unit <> OldUnit Then
 			
 			CheckResult = ItemInRegisterRecords(ItemKeyObject.Ref);
 			

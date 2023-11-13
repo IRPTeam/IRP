@@ -3158,3 +3158,9 @@ Scenario: create consignors Items with SLN
 		| '0909088998998898790' | 'e1cib/data/Catalog.ItemKeys?ref=b7aa9f63eb85c76911ee6827f4884c14' | 'e1cib/data/Catalog.SerialLotNumbers?ref=b7aa9f63eb85c76911ee6827f4884c18' | ''               | 'e1cib/data/Catalog.Units?ref=aa78120ed92fbced11eaf113ba6c1862' | ''             |
 		| '0909088998998898791' | 'e1cib/data/Catalog.ItemKeys?ref=b7aa9f63eb85c76911ee6827f4884c16' | 'e1cib/data/Catalog.SerialLotNumbers?ref=b7aa9f63eb85c76911ee6827f4884c19' | ''               | 'e1cib/data/Catalog.Units?ref=aa78120ed92fbced11eaf113ba6c1862' | ''             |
 
+Scenario: create Test unit
+
+	And I check or create catalog "Units" objects:
+		| 'Ref'                                                           | 'DeletionMark' | 'Code' | 'Item' | 'Quantity' | 'BasisUnit' | 'UOM' | 'Description_en' | 'Description_hash' | 'Description_ru' | 'Description_tr' | 'Height' | 'Length' | 'Volume' | 'Weight' | 'Width' | 'SourceNodeID' |
+		| 'e1cib/data/Catalog.Units?ref=b7af813f69b829cc11ee8231a4cbaff0' | 'False'        | 29     | ''     | 1          | ''          | ''    | 'Test unit'      | ''                 | ''               | 'adet'           |          |          |          |          |         | ''             |
+

@@ -185,6 +185,13 @@
       <types>DocumentRef.DecommissioningOfFixedAsset</types>
       <types>DocumentRef.FixedAssetTransfer</types>
       <types>DocumentRef.ModernizationOfFixedAsset</types>
+      <types>DocumentRef.AdditionalAccrual</types>
+      <types>DocumentRef.AdditionalDeduction</types>
+      <types>DocumentRef.EmployeeFiring</types>
+      <types>DocumentRef.EmployeeHiring</types>
+      <types>DocumentRef.EmployeeSickLeave</types>
+      <types>DocumentRef.EmployeeTransfer</types>
+      <types>DocumentRef.EmployeeVacation</types>
     </commandParameterType>
     <representation>Auto</representation>
   </commands>

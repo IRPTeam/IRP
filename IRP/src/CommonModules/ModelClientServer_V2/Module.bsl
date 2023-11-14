@@ -422,7 +422,13 @@ Function GetChain()
 	Chain.Insert("ChangeShipmentModeByTransactionType"   , GetChainLink("ChangeShipmentModeByTransactionTypeExecute"));
 	
 	Chain.Insert("ChangeResponsiblePersonSenderByFixedAsset" , GetChainLink("ChangeResponsiblePersonSenderByFixedAssetExecute"));
-	Chain.Insert("ChangeBusinessUnitSenderByFixedAsset"            , GetChainLink("ChangeBusinessUnitSenderByFixedAssetExecute"));
+	Chain.Insert("ChangeBusinessUnitSenderByFixedAsset"      , GetChainLink("ChangeBusinessUnitSenderByFixedAssetExecute"));
+	
+	Chain.Insert("ChangePositionByEmployee"         , GetChainLink("ChangePositionByEmployeeExecute"));	
+	Chain.Insert("ChangeEmployeeScheduleByEmployee" , GetChainLink("ChangeEmployeeScheduleByEmployeeExecute"));
+	Chain.Insert("ChangeProfitLossCenterByEmployee" , GetChainLink("ChangeProfitLossCenterByEmployeeExecute"));
+	Chain.Insert("ChangeBranchByEmployee"           , GetChainLink("ChangeBranchByEmployeeExecute"));
+	
 	
 	// Extractors
 	Chain.Insert("ExtractDataAgreementApArPostingDetail"   , GetChainLink("ExtractDataAgreementApArPostingDetailExecute"));
@@ -4035,6 +4041,58 @@ Function ChangeEndDateByPlanningPeriodExecute(Options) Export
 		Return Undefined;
 	EndIf;
 	Return CommonFunctionsServer.GetRefAttribute(Options.PlanningPeriod, "EndDate");
+EndFunction
+
+#EndRegion
+
+#Region CHANGE_POSITION_BY_EMPLOYEE
+
+Function ChangePositionByEmployeeOptions() Export
+	Return GetChainLinkOptions("Ref, Date, Company, Employee");
+EndFunction
+
+Function ChangePositionByEmployeeExecute(Options) Export
+	Result = SalaryServer.GetEmployeeInfo(Options.Ref, Options.Date, Options.Company, Options.Employee);
+	Return Result.Position;
+EndFunction
+
+#EndRegion
+
+#Region CHANGE_EMPLOYEE_SCHEDULE_BY_EMPLOYEE
+
+Function ChangeEmployeeScheduleByEmployeeOptions() Export
+	Return GetChainLinkOptions("Ref, Date, Company, Employee");
+EndFunction
+
+Function ChangeEmployeeScheduleByEmployeeExecute(Options) Export
+	Result = SalaryServer.GetEmployeeInfo(Options.Ref, Options.Date, Options.Company, Options.Employee);
+	Return Result.EmployeeSchedule;
+EndFunction
+
+#EndRegion
+
+#Region CHANGE_PROFIT_LOSS_CENTER_BY_EMPLOYEE
+
+Function ChangeProfitLossCenterByEmployeeOptions() Export
+	Return GetChainLinkOptions("Ref, Date, Company, Employee");
+EndFunction
+
+Function ChangeProfitLossCenterByEmployeeExecute(Options) Export
+	Result = SalaryServer.GetEmployeeInfo(Options.Ref, Options.Date, Options.Company, Options.Employee);
+	Return Result.ProfitLossCenter;
+EndFunction
+
+#EndRegion
+
+#Region CHANGE_BRANCH_BY_EMPLOYEE
+
+Function ChangeBranchByEmployeeOptions() Export
+	Return GetChainLinkOptions("Ref, Date, Company, Employee");
+EndFunction
+
+Function ChangeBranchByEmployeeExecute(Options) Export
+	Result = SalaryServer.GetEmployeeInfo(Options.Ref, Options.Date, Options.Company, Options.Employee);
+	Return Result.Branch;
 EndFunction
 
 #EndRegion

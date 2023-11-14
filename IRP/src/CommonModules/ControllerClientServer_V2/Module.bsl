@@ -2483,6 +2483,19 @@ Function BindDate(Parameters)
 		"StepChangeResponsiblePersonSenderByFixedAsset,
 		|StepChangeBusinessUnitSenderByFixedAsset");
 	
+	Binding.Insert("EmployeeTransfer", 
+		"StepChangePositionByEmployee,
+		|StepChangeEmployeeScheduleByEmployee,
+		|StepChangeProfitLossCenterByEmployee,
+		|StepChangeBranchByEmployee");
+	
+	
+	Binding.Insert("EmployeeFiring", 
+		"StepChangePositionByEmployee,
+		|StepChangeEmployeeScheduleByEmployee,
+		|StepChangeProfitLossCenterByEmployee,
+		|StepChangeBranchByEmployee");
+
 	Return BindSteps("BindVoid", DataPath, Binding, Parameters, "BindDate");
 EndFunction
 
@@ -2654,6 +2667,19 @@ Function BindCompany(Parameters)
 		"StepChangeResponsiblePersonSenderByFixedAsset,
 		|StepChangeBusinessUnitSenderByFixedAsset");
 	
+	Binding.Insert("EmployeeTransfer", 
+		"StepChangePositionByEmployee,
+		|StepChangeEmployeeScheduleByEmployee,
+		|StepChangeProfitLossCenterByEmployee,
+		|StepChangeBranchByEmployee");
+	
+	
+	Binding.Insert("EmployeeFiring", 
+		"StepChangePositionByEmployee,
+		|StepChangeEmployeeScheduleByEmployee,
+		|StepChangeProfitLossCenterByEmployee,
+		|StepChangeBranchByEmployee");
+	
 	Return BindSteps("BindVoid", DataPath, Binding, Parameters, "BindCompany");
 EndFunction
 
@@ -2728,6 +2754,22 @@ Function BindBranch(Parameters)
 		
 	Return BindSteps("BindVoid", DataPath, Binding, Parameters, "BindBranch");
 EndFunction
+
+// Branch.ChangeBranchByEmployee.Step
+Procedure StepChangeBranchByEmployee(Parameters, Chain) Export
+	Chain.ChangeBranchByEmployee.Enable = True;
+	If Chain.Idle Then
+		Return;
+	EndIf;
+	Chain.ChangeBranchByEmployee.Setter = "SetBranch";
+	Options = ModelClientServer_V2.ChangeBranchByEmployeeOptions();
+	Options.Employee  = GetEmployee(Parameters);
+	Options.Date      = GetDate(Parameters);
+	Options.Company   = GetCompany(Parameters);
+	Options.Ref       = Parameters.Object.Ref;
+	Options.StepName = "StepChangeBranchByEmployee";
+	Chain.ChangeBranchByEmployee.Options.Add(Options);
+EndProcedure
 
 #EndRegion
 
@@ -3154,6 +3196,149 @@ Procedure StepChangeCourierByTransactionType(Parameters, Chain) Export
 	Options.CurrentCourier        = GetCourier(Parameters);
 	Options.StepName = "StepChangeCourierByTransactionType";
 	Chain.ChangeCourierByTransactionType.Options.Add(Options);
+EndProcedure
+
+#EndRegion
+
+#Region EMPLOYEE
+
+// Employee.OnChange
+Procedure EmployeeOnChange(Parameters) Export
+	AddViewNotify("OnSetEmployeeNotify", Parameters);
+	Binding = BindEmployee(Parameters);
+	ModelClientServer_V2.EntryPoint(Binding.StepsEnabler, Parameters);
+EndProcedure
+
+// Employee.Get
+Function GetEmployee(Parameters)
+	Return GetPropertyObject(Parameters, BindEmployee(Parameters).DataPath);
+EndFunction
+
+// Employee.Bind
+Function BindEmployee(Parameters)
+	DataPath = "Employee";
+	Binding = New Structure();
+	
+	Binding.Insert("EmployeeTransfer", 
+		"StepChangePositionByEmployee,
+		|StepChangeEmployeeScheduleByEmployee,
+		|StepChangeProfitLossCenterByEmployee,
+		|StepChangeBranchByEmployee");
+	
+	
+	Binding.Insert("EmployeeFiring", 
+		"StepChangePositionByEmployee,
+		|StepChangeEmployeeScheduleByEmployee,
+		|StepChangeProfitLossCenterByEmployee,
+		|StepChangeBranchByEmployee");
+	
+	Return BindSteps("BindVoid", DataPath, Binding, Parameters, "BindEmployee");
+EndFunction
+
+#EndRegion
+
+#Region POSITION
+
+// Position.Set
+Procedure SetPosition(Parameters, Results) Export
+	Binding = BindPosition(Parameters);
+	SetterObject(Binding.StepsEnabler, Binding.DataPath, Parameters, Results);
+EndProcedure
+
+// Position.Bind
+Function BindPosition(Parameters)
+	DataPath = New Map();
+	DataPath.Insert("EmployeeTransfer", "FromPosition");
+	DataPath.Insert("EmployeeFiring"  , "Position");
+	Binding = New Structure();
+	Return BindSteps("BindVoid", DataPath, Binding, Parameters, "BindPosition");
+EndFunction
+
+// Position.ChangePositionByEmployee.Step
+Procedure StepChangePositionByEmployee(Parameters, Chain) Export
+	Chain.ChangePositionByEmployee.Enable = True;
+	If Chain.Idle Then
+		Return;
+	EndIf;
+	Chain.ChangePositionByEmployee.Setter = "SetPosition";
+	Options = ModelClientServer_V2.ChangePositionByEmployeeOptions();
+	Options.Employee  = GetEmployee(Parameters);
+	Options.Date      = GetDate(Parameters);
+	Options.Company   = GetCompany(Parameters);
+	Options.Ref       = Parameters.Object.Ref;	
+	Options.StepName = "StepChangePositionByEmployee";
+	Chain.ChangePositionByEmployee.Options.Add(Options);
+EndProcedure
+
+#EndRegion
+
+#Region EMPLOYEE_SCHEDULE
+
+// EmployeeSchedule.Set
+Procedure SetEmployeeSchedule(Parameters, Results) Export
+	Binding = BindEmployeeSchedule(Parameters);
+	SetterObject(Binding.StepsEnabler, Binding.DataPath, Parameters, Results);
+EndProcedure
+
+// EmployeeSchedule.Bind
+Function BindEmployeeSchedule(Parameters)
+	DataPath = New Map();
+	DataPath.Insert("EmployeeTransfer", "FromEmployeeSchedule");
+	DataPath.Insert("EmployeeFiring"  , "EmployeeSchedule");
+	Binding = New Structure();
+	
+	Return BindSteps("BindVoid", DataPath, Binding, Parameters, "BindEmployeeSchedule");
+EndFunction
+
+// EmployeeSchedule.ChangeEmployeeScheduleByEmployee.Step
+Procedure StepChangeEmployeeScheduleByEmployee(Parameters, Chain) Export
+	Chain.ChangeEmployeeScheduleByEmployee.Enable = True;
+	If Chain.Idle Then
+		Return;
+	EndIf;
+	Chain.ChangeEmployeeScheduleByEmployee.Setter = "SetEmployeeSchedule";
+	Options = ModelClientServer_V2.ChangeEmployeeScheduleByEmployeeOptions();
+	Options.Employee  = GetEmployee(Parameters);
+	Options.Date      = GetDate(Parameters);
+	Options.Company   = GetCompany(Parameters);
+	Options.Ref       = Parameters.Object.Ref;
+	Options.StepName = "StepChangeEmployeeScheduleByEmployee";
+	Chain.ChangeEmployeeScheduleByEmployee.Options.Add(Options);
+EndProcedure
+
+#EndRegion
+
+#Region PROFIT_LOSS_CENTER
+
+// ProfitLossCenter.Set
+Procedure SetProfitLossCenter(Parameters, Results) Export
+	Binding = BindProfitLossCenter(Parameters);
+	SetterObject(Binding.StepsEnabler, Binding.DataPath, Parameters, Results);
+EndProcedure
+
+// ProfitLossCenter.Bind
+Function BindProfitLossCenter(Parameters)
+	DataPath = New Map();
+	DataPath.Insert("EmployeeTransfer", "FromProfitLossCenter");
+	DataPath.Insert("EmployeeFiring"  , "ProfitLossCenter");
+	Binding = New Structure();
+	Return BindSteps("BindVoid", DataPath, Binding, Parameters, "BindProfitLossCenter");
+EndFunction
+
+// ProfitLossCenter.ChangeProfitLossCenterByEmployee.Step
+Procedure StepChangeProfitLossCenterByEmployee(Parameters, Chain) Export
+	Chain.ChangeProfitLossCenterByEmployee.Enable = True;
+	If Chain.Idle Then
+		Return;
+	EndIf;
+	Chain.ChangeProfitLossCenterByEmployee.Setter = "SetProfitLossCenter";
+	Options = ModelClientServer_V2.ChangeProfitLossCenterByEmployeeOptions();
+	Options.Employee  = GetEmployee(Parameters);
+	Options.Date      = GetDate(Parameters);
+	Options.Company   = GetCompany(Parameters);
+	Options.Ref       = Parameters.Object.Ref;
+	Options.StepName = "StepChangeProfitLossCenterByEmployee";
+	Chain.ChangeProfitLossCenterByEmployee.Options.Add(Options);
 EndProcedure
 
 #EndRegion
@@ -13993,6 +14178,7 @@ Procedure ExecuteViewNotify(Parameters, ViewNotify)
 	ElsIf ViewNotify = "OnSetPartnerNotify"                    Then ViewClient_V2.OnSetPartnerNotify(Parameters);
 	ElsIf ViewNotify = "OnSetLegalNameNotify"                  Then ViewClient_V2.OnSetLegalNameNotify(Parameters);
 	ElsIf ViewNotify = "OnSetCourierNotify"                    Then ViewClient_V2.OnSetCourierNotify(Parameters);
+	ElsIf ViewNotify = "OnSetEmployeeNotify"                   Then ViewClient_V2.OnSetEmployeeNotify(Parameters);
 	ElsIf ViewNotify = "OnSetConsolidatedRetailSalesNotify"    Then ViewClient_V2.OnSetConsolidatedRetailSalesNotify(Parameters);
 	ElsIf ViewNotify = "OnSetBranchNotify"                     Then ViewClient_V2.OnSetBranchNotify(Parameters);
 	ElsIf ViewNotify = "OnSetStatusNotify"                     Then ViewClient_V2.OnSetStatusNotify(Parameters);

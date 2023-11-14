@@ -56,6 +56,13 @@ Function GetFixedAssetLocation(Date, Company, FixedAsset) Export
 	Return DocFixedAssetTransferServer._GetFixedAssetLocation(Date, Company, FixedAsset);
 EndFunction
 
+// Salary
+
+Function GetEmployeeInfo(Ref, Date,  Company, Employee) Export
+	Return SalaryServer._GetEmployeeInfo(Ref, Date, Company, Employee);	
+EndFunction
+
+
 // Other
 
 Function GetBankTermInfo(PaymentType, BankTerm) Export

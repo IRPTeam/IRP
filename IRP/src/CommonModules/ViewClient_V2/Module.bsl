@@ -3575,6 +3575,21 @@ EndProcedure
 
 #EndRegion
 
+#Region EMPLOYEE
+
+Procedure EmployeeOnChange(Object, Form, TableNames) Export
+	For Each TableName In StrSplit(TableNames, ",") Do
+		Parameters = GetSimpleParameters(Object, Form, TableName);
+		ControllerClientServer_V2.EmployeeOnChange(Parameters);
+	EndDo;
+EndProcedure
+
+Procedure OnSetEmployeeNotify(Parameters) Export
+	DocumentsClientServer.ChangeTitleGroupTitle(Parameters.Object, Parameters.Form);
+EndProcedure
+
+#EndRegion
+
 #Region LEGAL_NAME
 
 Procedure LegalNameOnChange(Object, Form, TableNames) Export

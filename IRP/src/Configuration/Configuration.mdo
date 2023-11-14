@@ -312,6 +312,13 @@
   <roles>Role.UseExternalReports</roles>
   <roles>Role.UseGroupEditingProperties</roles>
   <roles>Role.UseOutput</roles>
+  <roles>Role.Document_EmployeeHiring</roles>
+  <roles>Role.Document_EmployeeTransfer</roles>
+  <roles>Role.Document_EmployeeFiring</roles>
+  <roles>Role.Document_EmployeeVacation</roles>
+  <roles>Role.Document_EmployeeSickLeave</roles>
+  <roles>Role.Document_AdditionalAccrual</roles>
+  <roles>Role.Document_AdditionalDeduction</roles>
   <commonTemplates>CommonTemplate.HTMLPictureSlider</commonTemplates>
   <commonTemplates>CommonTemplate.HTMLAddAttributes</commonTemplates>
   <commonTemplates>CommonTemplate.HTMLGallery</commonTemplates>
@@ -598,6 +605,21 @@
   <commonModules>CommonModule.DocModernizationOfFixedAssetClient</commonModules>
   <commonModules>CommonModule.OffsetOfAdvancesServer</commonModules>
   <commonModules>CommonModule.ServerPrivileged</commonModules>
+  <commonModules>CommonModule.DocEmployeeHiringClient</commonModules>
+  <commonModules>CommonModule.DocEmployeeHiringServer</commonModules>
+  <commonModules>CommonModule.DocEmployeeTransferClient</commonModules>
+  <commonModules>CommonModule.DocEmployeeTransferServer</commonModules>
+  <commonModules>CommonModule.DocEmployeeFiringClient</commonModules>
+  <commonModules>CommonModule.DocEmployeeFiringServer</commonModules>
+  <commonModules>CommonModule.DocEmployeeVacationClient</commonModules>
+  <commonModules>CommonModule.DocEmployeeVacationServer</commonModules>
+  <commonModules>CommonModule.DocEmployeeSickLeaveClient</commonModules>
+  <commonModules>CommonModule.DocEmployeeSickLeaveServer</commonModules>
+  <commonModules>CommonModule.DocAdditionalAccrualClient</commonModules>
+  <commonModules>CommonModule.DocAdditionalAccrualServer</commonModules>
+  <commonModules>CommonModule.DocAdditionalDeductionClient</commonModules>
+  <commonModules>CommonModule.DocAdditionalDeductionServer</commonModules>
+  <commonModules>CommonModule.SalaryServer</commonModules>
   <commonAttributes>CommonAttribute.Author</commonAttributes>
   <commonAttributes>CommonAttribute.Branch</commonAttributes>
   <commonAttributes>CommonAttribute.Description</commonAttributes>
@@ -927,6 +949,7 @@
   <catalogs>Catalog.Vehicles</catalogs>
   <catalogs>Catalog.VehicleTypes</catalogs>
   <catalogs>Catalog.Workstations</catalogs>
+  <catalogs>Catalog.EmployeeSchedule</catalogs>
   <documents>Document.AdditionalCostAllocation</documents>
   <documents>Document.AdditionalRevenueAllocation</documents>
   <documents>Document.BankPayment</documents>
@@ -1002,6 +1025,13 @@
   <documents>Document.DepreciationCalculation</documents>
   <documents>Document.FixedAssetTransfer</documents>
   <documents>Document.ModernizationOfFixedAsset</documents>
+  <documents>Document.EmployeeHiring</documents>
+  <documents>Document.EmployeeTransfer</documents>
+  <documents>Document.EmployeeFiring</documents>
+  <documents>Document.EmployeeVacation</documents>
+  <documents>Document.EmployeeSickLeave</documents>
+  <documents>Document.AdditionalAccrual</documents>
+  <documents>Document.AdditionalDeduction</documents>
   <documentJournals>DocumentJournal.DocumentsForIncomingPayment</documentJournals>
   <documentJournals>DocumentJournal.DocumentsForOutgoingPayment</documentJournals>
   <enums>Enum.AccountingAnalyticTypes</enums>

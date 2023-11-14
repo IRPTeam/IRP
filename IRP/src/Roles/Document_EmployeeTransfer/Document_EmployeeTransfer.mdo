@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mdclass:Role xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="d8d91d69-8106-44f6-b826-980972693a7f">
+  <name>Document_EmployeeTransfer</name>
+  <synonym>
+    <key>en</key>
+    <value>Document employee transfer</value>
+  </synonym>
+</mdclass:Role>

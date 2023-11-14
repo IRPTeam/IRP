@@ -14,4 +14,12 @@
   <content>Document.TimeSheet</content>
   <content>InformationRegister.T9530S_WorkDays</content>
   <content>Subsystem.Salary</content>
+  <content>Document.AdditionalAccrual</content>
+  <content>Document.EmployeeHiring</content>
+  <content>Document.EmployeeFiring</content>
+  <content>Document.EmployeeTransfer</content>
+  <content>Document.EmployeeSickLeave</content>
+  <content>Document.AdditionalDeduction</content>
+  <content>Catalog.EmployeeSchedule</content>
+  <content>Document.EmployeeVacation</content>
 </mdclass:FunctionalOption>

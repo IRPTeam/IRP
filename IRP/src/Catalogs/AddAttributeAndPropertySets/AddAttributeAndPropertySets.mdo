@@ -921,6 +921,62 @@
         <value>135</value>
       </code>
     </items>
+    <items id="ef72c694-7d9f-411e-b892-108e36692a64">
+      <name>Document_EmployeeHiring</name>
+      <description></description>
+      <code xsi:type="core:NumberValue">
+        <value>136</value>
+      </code>
+    </items>
+    <items id="4c34eb20-4cca-4e6f-a263-d4a7b67128d7">
+      <name>Document_EmployeeTransfer</name>
+      <description></description>
+      <code xsi:type="core:NumberValue">
+        <value>137</value>
+      </code>
+    </items>
+    <items id="89e91249-99fe-4225-870f-5d1b9b5fbf08">
+      <name>Document_EmployeeFiring</name>
+      <description></description>
+      <code xsi:type="core:NumberValue">
+        <value>138</value>
+      </code>
+    </items>
+    <items id="fcdff4b5-9550-4f77-9846-0df35d48b609">
+      <name>Document_EmployeeVacation</name>
+      <description></description>
+      <code xsi:type="core:NumberValue">
+        <value>139</value>
+      </code>
+    </items>
+    <items id="5b92b035-7545-4ca4-9086-d3a679843be3">
+      <name>Document_EmployeeSickLeave</name>
+      <description></description>
+      <code xsi:type="core:NumberValue">
+        <value>140</value>
+      </code>
+    </items>
+    <items id="4bffccd0-7033-48cc-9785-17b38e4c7a99">
+      <name>Document_AdditionalAccrual</name>
+      <description></description>
+      <code xsi:type="core:NumberValue">
+        <value>141</value>
+      </code>
+    </items>
+    <items id="8afafecf-dfac-4695-ba40-a02fdfa5f706">
+      <name>Document_AdditionalDeduction</name>
+      <description></description>
+      <code xsi:type="core:NumberValue">
+        <value>142</value>
+      </code>
+    </items>
+    <items id="868a60f5-28ba-4d82-ba25-715e4c9e943a">
+      <name>Catalog_EmployeeSchedule</name>
+      <description></description>
+      <code xsi:type="core:NumberValue">
+        <value>143</value>
+      </code>
+    </items>
   </predefined>
   <editType>InDialog</editType>
   <choiceMode>BothWays</choiceMode>

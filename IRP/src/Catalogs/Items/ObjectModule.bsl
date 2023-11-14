@@ -7,7 +7,7 @@ Procedure BeforeWrite(Cancel)
 	
 	ThisObject.Unit = FOServer.GetDefault_Unit(ThisObject.Unit);
 	
-	CheckResult = ServerPrivileged.CheckUnitForItem(ThisObject);
+	CheckResult = CheckDataPrivileged.CheckUnitForItem(ThisObject);
 	If CheckResult.Error Then
 		Cancel = True;
 		CommonFunctionsClientServer.ShowUsersMessage(StrTemplate(R().Error_138, 

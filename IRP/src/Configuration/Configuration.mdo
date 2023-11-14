@@ -350,6 +350,8 @@
   <commonModules>CommonModule.CatPartnersServer</commonModules>
   <commonModules>CommonModule.CatRetailCustomersClient</commonModules>
   <commonModules>CommonModule.CatRetailCustomersServer</commonModules>
+  <commonModules>CommonModule.CertificateServer</commonModules>
+  <commonModules>CommonModule.CheckDataPrivileged</commonModules>
   <commonModules>CommonModule.CommissionTradePrivileged</commonModules>
   <commonModules>CommonModule.CommissionTradeServer</commonModules>
   <commonModules>CommonModule.CommonFormActions</commonModules>
@@ -390,12 +392,18 @@
   <commonModules>CommonModule.DocCashTransferOrderServer</commonModules>
   <commonModules>CommonModule.DocChequeBondTransactionClient</commonModules>
   <commonModules>CommonModule.DocChequeBondTransactionServer</commonModules>
+  <commonModules>CommonModule.DocCommissioningOfFixedAssetClient</commonModules>
+  <commonModules>CommonModule.DocCommissioningOfFixedAssetServer</commonModules>
   <commonModules>CommonModule.DocConsolidatedRetailSalesClient</commonModules>
   <commonModules>CommonModule.DocConsolidatedRetailSalesServer</commonModules>
   <commonModules>CommonModule.DocCreditDebitNoteClient</commonModules>
   <commonModules>CommonModule.DocCreditDebitNoteServer</commonModules>
+  <commonModules>CommonModule.DocDecommissioningOfFixedAssetClient</commonModules>
+  <commonModules>CommonModule.DocDecommissioningOfFixedAssetServer</commonModules>
   <commonModules>CommonModule.DocEmployeeCashAdvanceClient</commonModules>
   <commonModules>CommonModule.DocEmployeeCashAdvanceServer</commonModules>
+  <commonModules>CommonModule.DocFixedAssetTransferClient</commonModules>
+  <commonModules>CommonModule.DocFixedAssetTransferServer</commonModules>
   <commonModules>CommonModule.DocGoodsReceiptClient</commonModules>
   <commonModules>CommonModule.DocGoodsReceiptServer</commonModules>
   <commonModules>CommonModule.DocIncomingPaymentOrderClient</commonModules>
@@ -414,6 +422,8 @@
   <commonModules>CommonModule.DocLabelingServer</commonModules>
   <commonModules>CommonModule.DocManualRegisterEntryClient</commonModules>
   <commonModules>CommonModule.DocManualRegisterEntryServer</commonModules>
+  <commonModules>CommonModule.DocModernizationOfFixedAssetClient</commonModules>
+  <commonModules>CommonModule.DocModernizationOfFixedAssetServer</commonModules>
   <commonModules>CommonModule.DocMoneyTransferClient</commonModules>
   <commonModules>CommonModule.DocMoneyTransferServer</commonModules>
   <commonModules>CommonModule.DocOpeningEntryClient</commonModules>
@@ -495,8 +505,8 @@
   <commonModules>CommonModule.EquipmentAcquiring_CommonAPI</commonModules>
   <commonModules>CommonModule.EquipmentAcquiringAPIClient</commonModules>
   <commonModules>CommonModule.EquipmentAcquiringServer</commonModules>
-  <commonModules>CommonModule.EquipmentFiscalPrinterAPIClient</commonModules>
   <commonModules>CommonModule.EquipmentFiscalPrinter_CommonAPI</commonModules>
+  <commonModules>CommonModule.EquipmentFiscalPrinterAPIClient</commonModules>
   <commonModules>CommonModule.EquipmentFiscalPrinterClient</commonModules>
   <commonModules>CommonModule.EquipmentFiscalPrinterServer</commonModules>
   <commonModules>CommonModule.ExtensionServer</commonModules>
@@ -546,6 +556,7 @@
   <commonModules>CommonModule.OffersClient</commonModules>
   <commonModules>CommonModule.OffersClientServer</commonModules>
   <commonModules>CommonModule.OffersServer</commonModules>
+  <commonModules>CommonModule.OffsetOfAdvancesServer</commonModules>
   <commonModules>CommonModule.PictureViewerClient</commonModules>
   <commonModules>CommonModule.PictureViewerClientServer</commonModules>
   <commonModules>CommonModule.PictureViewerServer</commonModules>
@@ -587,17 +598,6 @@
   <commonModules>CommonModule.ViewServer_V2</commonModules>
   <commonModules>CommonModule.WorkstationClient</commonModules>
   <commonModules>CommonModule.WorkstationServer</commonModules>
-  <commonModules>CommonModule.CertificateServer</commonModules>
-  <commonModules>CommonModule.DocCommissioningOfFixedAssetServer</commonModules>
-  <commonModules>CommonModule.DocCommissioningOfFixedAssetClient</commonModules>
-  <commonModules>CommonModule.DocDecommissioningOfFixedAssetServer</commonModules>
-  <commonModules>CommonModule.DocDecommissioningOfFixedAssetClient</commonModules>
-  <commonModules>CommonModule.DocFixedAssetTransferServer</commonModules>
-  <commonModules>CommonModule.DocFixedAssetTransferClient</commonModules>
-  <commonModules>CommonModule.DocModernizationOfFixedAssetServer</commonModules>
-  <commonModules>CommonModule.DocModernizationOfFixedAssetClient</commonModules>
-  <commonModules>CommonModule.OffsetOfAdvancesServer</commonModules>
-  <commonModules>CommonModule.ServerPrivileged</commonModules>
   <commonAttributes>CommonAttribute.Author</commonAttributes>
   <commonAttributes>CommonAttribute.Branch</commonAttributes>
   <commonAttributes>CommonAttribute.Description</commonAttributes>

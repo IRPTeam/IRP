@@ -1,5 +1,5 @@
 
-Function CheckUnitForItem(ItemObject) Export
+Function CheckUnitForItem(ItemObject) Export 
 	Return GetItemInfo.CheckUnitForItem(ItemObject);
 EndFunction
 

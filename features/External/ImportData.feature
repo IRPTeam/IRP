@@ -2582,6 +2582,7 @@ Scenario: Create information register UserSettings records (remaining stock cont
 		| '$$IdCI$$'     | 'Document.SalesReturn'                | 'CheckBalance_R4011B_FreeStocks'    | 'Enum.KindsOfAttributes.Custom'  | 'True'    |
 		| '$$IdCI$$'     | 'Document.WorkOrder'                  | 'CheckBalance_R4011B_FreeStocks'    | 'Enum.KindsOfAttributes.Custom'  | 'True'    |
 		| '$$IdCI$$'     | 'Document.WorkSheet'                  | 'CheckBalance_R4010B_ActualStocks'  | 'Enum.KindsOfAttributes.Custom'  | 'True'    |
+		| '$$IdCI$$'     | 'Document.Production'                 | 'CheckBalance_R4010B_ActualStocks'  | 'Enum.KindsOfAttributes.Custom'  | 'True'    |
 
 
 

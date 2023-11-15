@@ -149,5 +149,6 @@
     <types>DocumentRef.AdditionalRevenueAllocation</types>
     <types>DocumentRef.AdditionalCostAllocation</types>
     <types>DocumentRef.AdditionalAccrual</types>
+    <types>CatalogRef.EmployeeSchedule</types>
   </type>
 </mdclass:DefinedType>

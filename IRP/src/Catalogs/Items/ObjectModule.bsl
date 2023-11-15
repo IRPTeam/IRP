@@ -13,6 +13,11 @@ Procedure BeforeWrite(Cancel)
 		CommonFunctionsClientServer.ShowUsersMessage(StrTemplate(R().Error_138, 
 			CheckResult.UnitFrom, CheckResult.UnitTo, CheckResult.Document));
 	EndIf;
+	
+	If ControlCodeString And ControlCodeStringType.IsEmpty() Then
+		Cancel = True;
+		CommonFunctionsClientServer.ShowUsersMessage(StrTemplate(R().Error_010, Metadata.Catalogs.Items.Attributes.ControlCodeStringType.Synonym));
+	EndIf;
 EndProcedure
 
 Procedure OnWrite(Cancel)

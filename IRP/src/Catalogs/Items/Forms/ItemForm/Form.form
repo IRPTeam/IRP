@@ -1012,9 +1012,57 @@
               </extInfo>
             </items>
             <items xsi:type="form:FormField">
+              <name>ControlCodeStringType</name>
+              <id>230</id>
+              <enabled>true</enabled>
+              <userVisible>
+                <common>true</common>
+              </userVisible>
+              <dataPath xsi:type="form:DataPath">
+                <segments>Object.ControlCodeStringType</segments>
+              </dataPath>
+              <extendedTooltip>
+                <name>ControlCodeStringTypeExtendedTooltip</name>
+                <id>232</id>
+                <visible>true</visible>
+                <enabled>true</enabled>
+                <userVisible>
+                  <common>true</common>
+                </userVisible>
+                <type>Label</type>
+                <autoMaxWidth>true</autoMaxWidth>
+                <autoMaxHeight>true</autoMaxHeight>
+                <extInfo xsi:type="form:LabelDecorationExtInfo">
+                  <horizontalAlign>Left</horizontalAlign>
+                </extInfo>
+              </extendedTooltip>
+              <contextMenu>
+                <name>ControlCodeStringTypeContextMenu</name>
+                <id>231</id>
+                <visible>true</visible>
+                <enabled>true</enabled>
+                <userVisible>
+                  <common>true</common>
+                </userVisible>
+                <autoFill>true</autoFill>
+              </contextMenu>
+              <type>InputField</type>
+              <editMode>Enter</editMode>
+              <showInHeader>true</showInHeader>
+              <headerHorizontalAlign>Left</headerHorizontalAlign>
+              <showInFooter>true</showInFooter>
+              <extInfo xsi:type="form:InputFieldExtInfo">
+                <autoMaxWidth>true</autoMaxWidth>
+                <autoMaxHeight>true</autoMaxHeight>
+                <wrap>true</wrap>
+                <chooseType>true</chooseType>
+                <typeDomainEnabled>true</typeDomainEnabled>
+                <textEdit>true</textEdit>
+              </extInfo>
+            </items>
+            <items xsi:type="form:FormField">
               <name>CheckCodeString</name>
               <id>175</id>
-              <visible>true</visible>
               <enabled>true</enabled>
               <userVisible>
                 <common>true</common>
@@ -2059,42 +2107,27 @@
     <navigationPanel>
       <cmiFragmentRecord>
         <command>Catalog.ItemKeys.Command.OpenItemKeysList</command>
-        <commandParameter xsi:type="form:DataPath">
-          <segments>Object.Ref</segments>
-        </commandParameter>
         <group>FormNavigationPanelGoTo</group>
         <index>0</index>
       </cmiFragmentRecord>
       <cmiFragmentRecord>
         <command>InformationRegister.Barcodes.Command.ShowBarcodeList</command>
-        <commandParameter xsi:type="form:DataPath">
-          <segments>Object.Ref</segments>
-        </commandParameter>
         <group>FormNavigationPanelGoTo</group>
         <index>1</index>
       </cmiFragmentRecord>
       <cmiFragmentRecord>
         <command>InformationRegister.PricesByItems.StandardCommand.OpenByValue.Item</command>
-        <commandParameter xsi:type="form:DataPath">
-          <segments>Object.Ref</segments>
-        </commandParameter>
         <group>FormNavigationPanelGoTo</group>
         <index>2</index>
         <userVisible/>
       </cmiFragmentRecord>
       <cmiFragmentRecord>
         <command>InformationRegister.TaxSettings.StandardCommand.OpenByValue.Item</command>
-        <commandParameter xsi:type="form:DataPath">
-          <segments>Object.Ref</segments>
-        </commandParameter>
         <group>FormNavigationPanelGoTo</group>
         <index>4</index>
       </cmiFragmentRecord>
       <cmiFragmentRecord>
         <command>InformationRegister.BarcodeScanInfoCheck.StandardCommand.OpenByValue.Item</command>
-        <commandParameter xsi:type="form:DataPath">
-          <segments>Object.Ref</segments>
-        </commandParameter>
         <userVisible/>
       </cmiFragmentRecord>
     </navigationPanel>

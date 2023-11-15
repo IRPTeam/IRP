@@ -28,6 +28,7 @@ Procedure OnOpen(Cancel)
 	AddAttributesAndPropertiesClient.UpdateObjectAddAttributeHTML(ThisObject, Object.Ref);
 	SetSettings();
 	ChangingFormBySettings();
+	SetVisibleCodeString();
 EndProcedure
 
 &AtServer
@@ -135,6 +136,7 @@ EndProcedure
 Procedure ControlCodeStringOnChange(Item)
 	If Not Object.ControlCodeString Then
 		Object.CheckCodeString = False;
+		Object.ControlCodeStringType = Undefined;
 	EndIf;
 	SetVisibleCodeString();
 EndProcedure
@@ -146,6 +148,7 @@ EndProcedure
 &AtClient
 Procedure SetVisibleCodeString()
 	Items.CheckCodeString.Visible = Object.ControlCodeString;
+	Items.ControlCodeStringType.Visible = Object.ControlCodeString;
 EndProcedure
 
 &AtClient

@@ -23,7 +23,7 @@ Scenario: _206101 check item unit list form
 		| 'pcs'            |
 		| 'box (8 pcs)'    |
 		| 'box (16 pcs)'   |
-	Then the number of "List" table lines is "равно" "4"
+	Then the number of "List" table lines is "равно" "5"
 	And I click "Show all units" button
 	And "List" table contains lines
 		| 'Description'              |

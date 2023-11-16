@@ -120,8 +120,12 @@ SalesReceiptXML9 =
 <CheckPackage>
 	<Parameters CashierName="Арина Браун" CashierINN="1111111111" SaleAddress="Sale address" SaleLocation="Sale location" OperationType="2" TaxationSystem="0"/>
 	<Positions>
-		<FiscalString AmountWithDiscount="442" DiscountAmount="0" MeasureOfQuantity="255" CalculationSubject="1" Name="Product 11 with SLN (Main Company - Consignor 1) PZU [11111111111112]" Quantity="2" PaymentMethod="4" PriceWithDiscount="221" VATRate="18" VATAmount="67.42"/>
-		<FiscalString AmountWithDiscount="101" DiscountAmount="0" MeasureOfQuantity="255" CalculationSubject="1" Name="Product 13 without SLN (Main Company - different consignor for item key) M/Black" Quantity="1" PaymentMethod="4" PriceWithDiscount="101" VATRate="18" VATAmount="15.41"/>
+		<FiscalString AmountWithDiscount="442" DiscountAmount="0" MeasureOfQuantity="255" CalculationSubject="1" Name="Product 11 with SLN (Main Company - Consignor 1) PZU [11111111111112]" Quantity="2" PaymentMethod="4" PriceWithDiscount="221" VATRate="18" VATAmount="67.42" CalculationAgent="5">
+			<VendorData VendorINN="1" VendorName="Consignor 1" VendorPhone=""/>
+		</FiscalString>
+		<FiscalString AmountWithDiscount="101" DiscountAmount="0" MeasureOfQuantity="255" CalculationSubject="1" Name="Product 13 without SLN (Main Company - different consignor for item key) M/Black" Quantity="1" PaymentMethod="4" PriceWithDiscount="101" VATRate="18" VATAmount="15.41" CalculationAgent="5">
+			<VendorData VendorINN="1" VendorName="Consignor 1" VendorPhone=""/>
+		</FiscalString>
 	</Positions>
 	<Payments Cash="543" ElectronicPayment="0" PrePayment="0" PostPayment="0" Barter="0"/>
 </CheckPackage>
@@ -306,10 +310,12 @@ SalesReceiptXML23 =
 <CheckPackage>
 	<Parameters CashierName="Арина Браун" CashierINN="1111111111" SaleAddress="Sale address" SaleLocation="Sale location" OperationType="2" TaxationSystem="0"/>
 	<Positions>
-		<FiscalString AmountWithDiscount="300" DiscountAmount="0" MeasureOfQuantity="255" CalculationSubject="1" Name="Product 16 with SLN and Good code data (Main Company - Consignor 1) PZU [89000008999]" Quantity="1" PaymentMethod="4" PriceWithDiscount="300" VATRate="18" VATAmount="45.76">
+		<FiscalString AmountWithDiscount="300" DiscountAmount="0" MeasureOfQuantity="255" CalculationSubject="1" Name="Product 16 with SLN and Good code data (Main Company - Consignor 1) PZU [89000008999]" Quantity="1" PaymentMethod="4" PriceWithDiscount="300" VATRate="18" VATAmount="45.76" CalculationAgent="5">
+			<VendorData VendorINN="1" VendorName="Consignor 1" VendorPhone=""/>
 			<GoodCodeData NotIdentified="Q3VycmVudCByb3cgd2lsbCBkZWNvZGUgdG8gYmFzZTY1"/>
 		</FiscalString>
-		<FiscalString AmountWithDiscount="300" DiscountAmount="0" MeasureOfQuantity="255" CalculationSubject="1" Name="Product 16 with SLN and Good code data (Main Company - Consignor 1) ODS [9099009909999999]" Quantity="1" PaymentMethod="4" PriceWithDiscount="300" VATRate="18" VATAmount="45.76">
+		<FiscalString AmountWithDiscount="300" DiscountAmount="0" MeasureOfQuantity="255" CalculationSubject="1" Name="Product 16 with SLN and Good code data (Main Company - Consignor 1) ODS [9099009909999999]" Quantity="1" PaymentMethod="4" PriceWithDiscount="300" VATRate="18" VATAmount="45.76" CalculationAgent="5">
+			<VendorData VendorINN="1" VendorName="Consignor 1" VendorPhone=""/>
 			<GoodCodeData NotIdentified="Q3VycmVudCByb3cgd2lsbCBkZWNvZGUgdG8gYmFzZTY2"/>
 		</FiscalString>
 		<FiscalString AmountWithDiscount="300" DiscountAmount="0" MeasureOfQuantity="255" CalculationSubject="1" Name="Product 2 with SLN UNIQ [0514]" Quantity="1" PaymentMethod="4" PriceWithDiscount="300" VATRate="18" VATAmount="45.76"/>

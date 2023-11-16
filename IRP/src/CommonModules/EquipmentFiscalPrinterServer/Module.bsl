@@ -51,11 +51,7 @@ Procedure FillCheckPackageByRetailSalesReceipt(SourceData, CheckPackage) Export
 		RowFilter.Insert("Key", ItemRow.Key);
 
 		CCSRows = SourceData.ControlCodeStrings.FindRows(RowFilter);
-		_consignor = Undefined;
-		If TypeOf(SourceData.Ref) = Type("DocumentRef.RetailSalesReceipt") Then
-			_consignor = ItemRow.Consignor;
-		EndIf;
-		 
+
 		FiscalStringData = CommonFunctionsServer.DeserializeJSON(CheckPackage.Positions.FiscalStringJSON); // See EquipmentFiscalPrinterAPIClient.CheckPackage_FiscalString
 		FiscalStringData.AmountWithDiscount = ItemRow.TotalAmount;
 		FiscalStringData.DiscountAmount = ItemRow.OffersAmount;
@@ -152,9 +148,9 @@ Procedure FillCheckPackageByRetailSalesReceipt(SourceData, CheckPackage) Export
 			FiscalStringData.VATAmount = 0;
 		EndIf;
 		
-		If ValueIsFilled(_consignor) Then
-			FiscalStringData.VendorData.VendorINN = _consignor.TaxID;
-			FiscalStringData.VendorData.VendorName = String(_consignor);
+		If ValueIsFilled(ItemRow.Consignor) Then
+			FiscalStringData.VendorData.VendorINN = ItemRow.Consignor.TaxID;
+			FiscalStringData.VendorData.VendorName = String(ItemRow.Consignor);
 			FiscalStringData.VendorData.VendorPhone = "";
 			FiscalStringData.CalculationAgent = 5;
 		EndIf;

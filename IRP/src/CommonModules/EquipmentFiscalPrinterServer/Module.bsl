@@ -28,6 +28,8 @@ EndProcedure
 Procedure FillCheckPackageByRetailSalesReceipt(SourceData, CheckPackage) Export
 	FillInputParameters(SourceData, CheckPackage.Parameters);
 
+	For Each ItemRow In SourceData.ItemList Do
+
 	If TypeOf(SourceData.Ref) = Type("DocumentRef.RetailSalesReceipt") Then
 		CheckPackage.Parameters.OperationType = 1;
 	Else

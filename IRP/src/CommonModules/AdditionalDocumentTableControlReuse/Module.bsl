@@ -301,7 +301,11 @@ Function ErrorItemList()
 	));
 	
 	Str.Insert("ErrorTotalAmountMinusNetAmountNotEqualTaxAmount", New Structure("Query, Fields, QueryNumber", 
-		"Not ItemList.DontCalculateRow And Not (ItemList.TotalAmount - ItemList.NetAmount = ItemList.TaxAmount)",
+		"Not ItemList.DontCalculateRow And Not (
+		|ItemList.TotalAmount - ItemList.NetAmount - ItemList.TaxAmount <= 0.01 
+		|AND
+		|ItemList.TotalAmount - ItemList.NetAmount - ItemList.TaxAmount >= -0.01
+		|)",
 		"DontCalculateRow, TotalAmount, NetAmount, TaxAmount",
 		0
 	));

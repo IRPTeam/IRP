@@ -56,7 +56,7 @@ Procedure BeforeWrite(Cancel)
 		EndIf;
 	EndIf;
 
-	CheckResult = ServerPrivileged.CheckUnitForItemKey(ThisObject);
+	CheckResult = CheckDataPrivileged.CheckUnitForItemKey(ThisObject);
 	If CheckResult.Error Then
 		Cancel = True;
 		CommonFunctionsClientServer.ShowUsersMessage(StrTemplate(R().Error_138, 

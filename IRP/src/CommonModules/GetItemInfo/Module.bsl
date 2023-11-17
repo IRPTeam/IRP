@@ -763,6 +763,7 @@ EndFunction
 //  * EachSerialLotNumberIsUnique - Boolean -
 //  * ControlCodeString - Boolean -
 //  * SourceOfOrigin - CatalogRef.SourceOfOrigins -
+//  * ControlCodeStringType - EnumRef.ControlCodeStringType -
 Function GetInfoByItemsKey(ItemsKey, Agreement = Undefined) Export
 	ItemKeyArray = New Array; // Array Of CatalogRef.ItemKeys
 	If TypeOf(ItemsKey) = Type("Array") Then
@@ -802,7 +803,8 @@ Function GetInfoByItemsKey(ItemsKey, Agreement = Undefined) Export
 	|	ELSE 
 	|		ItemKey.Item.ControlCodeString 
 	|	END AS ControlCodeString,
-	|	VALUE(Catalog.SourceOfOrigins.EmptyRef) AS SourceOfOrigin
+	|	VALUE(Catalog.SourceOfOrigins.EmptyRef) AS SourceOfOrigin,
+	|	ItemKey.Item.ControlCodeStringType AS ControlCodeStringType
 	|FROM
 	|	Catalog.ItemKeys AS ItemKey
 	|WHERE

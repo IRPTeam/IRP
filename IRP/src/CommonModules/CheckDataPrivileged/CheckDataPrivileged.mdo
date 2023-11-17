@@ -1,17 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <mdclass:CommonModule xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="1d20a966-2e28-4ebd-91e2-8f81432721e6">
- <name>ServerPrivileged</name>
+ <name>CheckDataPrivileged</name>
  <synonym>
   <key>en</key>
-  <value>Server privileged</value>
+  <value>Check data privileged</value>
  </synonym>
  <synonym>
   <key>ru</key>
-  <value>Привилегированный сервер</value>
+  <value>Check data privileged</value>
  </synonym>
  <synonym>
   <key>tr</key>
-  <value>Sunucu ayrıcalıklı</value>
+  <value>Check data privileged</value>
  </synonym>
  <server>true</server>
  <externalConnection>true</externalConnection>

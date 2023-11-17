@@ -125,26 +125,7 @@ EndFunction
 // Returns:
 //  See EquipmentFiscalPrinterAPIClient.ProcessCheckSettings
 Async Function ProcessCheck(ConsolidatedRetailSales, DataSource) Export
-	StatusData = EquipmentFiscalPrinterServer.GetStatusData(DataSource);
-	If StatusData.IsPrinted Then
-		Raise R().EqFP_DocumentAlreadyPrinted;
-	EndIf;
-	
-	If TypeOf(DataSource) = Type("DocumentRef.RetailSalesReceipt")
-		OR TypeOf(DataSource) = Type("DocumentRef.RetailReturnReceipt") Then
-	
-		StatusData = CommonFunctionsServer.GetAttributesFromRef(DataSource, "StatusType, Posted");
-		
-		If Not StatusData.StatusType = PredefinedValue("Enum.RetailReceiptStatusTypes.Completed") Then
-			Raise R().EqFP_CanPrintOnlyComplete;
-		EndIf;
-	Else
-		StatusData = CommonFunctionsServer.GetAttributesFromRef(DataSource, "Posted");
-	EndIf;
-	
-	If Not StatusData.Posted Then
-		Raise R().EqFP_CannotPrintNotPosted;
-	EndIf;
+	ValidateProcessCheck(DataSource);
 	
 	ProcessCheckSettings = EquipmentFiscalPrinterAPIClient.ProcessCheckSettings();
 	ProcessCheckSettings.Info.Document = DataSource;
@@ -165,6 +146,44 @@ Async Function ProcessCheck(ConsolidatedRetailSales, DataSource) Export
 	CheckPackage = EquipmentFiscalPrinterAPIClient.CheckPackage();
 	EquipmentFiscalPrinterServer.FillData(DataSource, CheckPackage);
 
+	Await CheckControlStrings(DataSource, CRS);
+
+	ProcessCheckSettings.In.CheckPackage = CheckPackage;
+	If Await EquipmentFiscalPrinterAPIClient.ProcessCheck(CRS.FiscalPrinter, ProcessCheckSettings) Then
+		DataPresentation = String(ProcessCheckSettings.Out.DocumentOutputParameters.ShiftNumber) + " " + ProcessCheckSettings.Out.DocumentOutputParameters.DateTime;
+		EquipmentFiscalPrinterServer.SetFiscalStatus(DataSource, PredefinedValue("Enum.DocumentFiscalStatuses.Printed"), ProcessCheckSettings, DataPresentation);
+	Else
+		EquipmentFiscalPrinterServer.SetFiscalStatus(DataSource, PredefinedValue("Enum.DocumentFiscalStatuses.FiscalReturnedError"), ProcessCheckSettings);
+	EndIf;
+
+	Return ProcessCheckSettings;
+EndFunction
+
+Procedure ValidateProcessCheck(DataSource)
+	StatusData = EquipmentFiscalPrinterServer.GetStatusData(DataSource);
+	If StatusData.IsPrinted Then
+		Raise R().EqFP_DocumentAlreadyPrinted;
+	EndIf;
+	
+	If TypeOf(DataSource) = Type("DocumentRef.RetailSalesReceipt")
+		OR TypeOf(DataSource) = Type("DocumentRef.RetailReturnReceipt") Then
+	
+		StatusData = CommonFunctionsServer.GetAttributesFromRef(DataSource, "StatusType, Posted");
+		
+		If Not StatusData.StatusType = PredefinedValue("Enum.RetailReceiptStatusTypes.Completed") Then
+			Raise R().EqFP_CanPrintOnlyComplete;
+		EndIf;
+	Else
+		StatusData = CommonFunctionsServer.GetAttributesFromRef(DataSource, "Posted");
+	EndIf;
+	
+	If Not StatusData.Posted Then
+		Raise R().EqFP_CannotPrintNotPosted;
+	EndIf;
+EndProcedure
+
+//@skip-check function-should-return-value
+Async Function CheckControlStrings(DataSource, CRS)
 	If TypeOf(DataSource) = Type("DocumentRef.RetailSalesReceipt")
 		Or TypeOf(DataSource) = Type("DocumentRef.RetailReturnReceipt") Then
 		isReturn = TypeOf(DataSource) = Type("DocumentRef.RetailReturnReceipt");
@@ -203,16 +222,6 @@ Async Function ProcessCheck(ConsolidatedRetailSales, DataSource) Export
 			EndDo;
 		EndIf;
 	EndIf;
-
-	ProcessCheckSettings.In.CheckPackage = CheckPackage;
-	If Await EquipmentFiscalPrinterAPIClient.ProcessCheck(CRS.FiscalPrinter, ProcessCheckSettings) Then
-		DataPresentation = String(ProcessCheckSettings.Out.DocumentOutputParameters.ShiftNumber) + " " + ProcessCheckSettings.Out.DocumentOutputParameters.DateTime;
-		EquipmentFiscalPrinterServer.SetFiscalStatus(DataSource, PredefinedValue("Enum.DocumentFiscalStatuses.Printed"), ProcessCheckSettings, DataPresentation);
-	Else
-		EquipmentFiscalPrinterServer.SetFiscalStatus(DataSource, PredefinedValue("Enum.DocumentFiscalStatuses.FiscalReturnedError"), ProcessCheckSettings);
-	EndIf;
-
-	Return ProcessCheckSettings;
 EndFunction
 
 // Print check copy.

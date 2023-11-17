@@ -31,4 +31,5 @@
  <content>Enum.PaymentTypes</content>
  <content>Document.RetailShipmentConfirmation</content>
  <content>Document.RetailGoodsReceipt</content>
+ <content>Subsystem.Retail</content>
 </mdclass:FunctionalOption>

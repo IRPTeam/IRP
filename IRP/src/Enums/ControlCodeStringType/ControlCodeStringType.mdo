@@ -12,7 +12,7 @@
  </synonym>
  <synonym>
   <key>ru</key>
-  <value>Control code string type</value>
+  <value>Тип маркировки товаров</value>
  </synonym>
  <synonym>
   <key>tr</key>
@@ -28,7 +28,7 @@
   </synonym>
   <synonym>
    <key>ru</key>
-   <value>None</value>
+   <value>Нет</value>
   </synonym>
   <synonym>
    <key>tr</key>
@@ -43,7 +43,7 @@
   </synonym>
   <synonym>
    <key>ru</key>
-   <value>Marking code</value>
+   <value>Честный знак</value>
   </synonym>
   <synonym>
    <key>tr</key>
@@ -58,7 +58,7 @@
   </synonym>
   <synonym>
    <key>ru</key>
-   <value>Good code data</value>
+   <value>КиЗ</value>
   </synonym>
   <synonym>
    <key>tr</key>

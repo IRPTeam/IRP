@@ -1594,10 +1594,10 @@ Function Strings(Lang) Export
 		|ru='Получение от комитента [%1][%2] доступно только для комитента [%3]';
 		|tr='Komitent [%1][%2] tarafından alınan fiş yalnızca komitent [%3] için geçerlidir'", Lang));	
 	Strings.Insert("Error_136", NStr("en='Serial lot number is not unique, duplicate codes:[%1]';
-		|ru='Serial lot number is not unique, duplicate codes:[%1]';
+		|ru='Серийный номер партии не уникален, дублирующие коды:[%1]';
 		|tr='Seri lot numarası benzersiz değil, yinelenen kodlar:[%1]'", Lang));	
 	Strings.Insert("Error_137", NStr("en='Not filled [Key] in tabular section [%1] line number[%2]';
-		|ru='Not filled [Key] in tabular section [%1] line number[%2]';
+		|ru='Не заполнено [Key] в табличной части [%1] номер строки[%2]';
 		|tr='Not filled [Key] in tabular section [%1] line number[%2]'", Lang));	
 	Strings.Insert("Error_138", NStr("en='Cannot change the unit from [%1] to [%2], used in document [%3]';
 		|ru='Невозможно изменить единицу измерения с [%1] на [%2], используется в документе [%3]';

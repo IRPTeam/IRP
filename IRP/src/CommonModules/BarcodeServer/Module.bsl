@@ -72,7 +72,6 @@ EndFunction
 //   * Unit - CatalogRef.Units -
 //   * Quantity - DefinedType.typeQuantity
 //   * BarcodeEmpty - Boolean -
-//   * SourceOfOrigin - CatalogRef.SourceOfOrigins -
 //   * PriceType - CatalogRef.PriceTypes -
 //   * Date  - Date -
 //   * hasSpecification - Boolean -
@@ -84,6 +83,7 @@ EndFunction
 //   * EachSerialLotNumberIsUnique - Boolean -
 //   * ControlCodeString - Boolean -
 //   * SourceOfOrigin - CatalogRef.SourceOfOrigins -
+//   * ControlCodeStringType - EnumRef.ControlCodeStringType -
 Function FillFoundedItems(Val Row, QueryTable) Export
 	ItemStructure = New Structure();
 	For Each Column In QueryTable.Columns Do
@@ -124,6 +124,7 @@ EndFunction
 //  * EachSerialLotNumberIsUnique - Boolean -
 //  * ControlCodeString - Boolean -
 //  * SourceOfOrigin - CatalogRef.SourceOfOrigins -
+//  * ControlCodeStringType - EnumRef.ControlCodeStringType -
 Function GetItemInfoByBarcode(Settings, BarcodeVT)
 	Query = New Query();
 	Query.Text = 
@@ -159,7 +160,8 @@ Function GetItemInfoByBarcode(Settings, BarcodeVT)
 		|	ELSE 
 		|		Barcodes.ItemKey.Item.ControlCodeString 
 		|	END AS ControlCodeString,
-		|	Barcodes.SourceOfOrigin AS SourceOfOrigin
+		|	Barcodes.SourceOfOrigin AS SourceOfOrigin,
+		|	Barcodes.ItemKey.Item.ControlCodeStringType AS ControlCodeStringType
 		|FROM
 		|	VTBarcode AS VTBarcode
 		|		LEFT JOIN InformationRegister.Barcodes AS Barcodes

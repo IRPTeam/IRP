@@ -100,11 +100,13 @@ Scenario: _0263100 preparation postponed retails receipts
 		And I expand "Accounting settings" group
 		And I move to "Accounting settings" tab
 		And I set checkbox "Control code string"
+		And I select "Marking code" exact value from "Control code string type" drop-down list
 		And I click "Save and close" button		
 		Given I open hyperlink "e1cib/data/Catalog.Items?ref=b7a0d8de1a1c04c611ee174b1c02bb67"
 		And I expand "Accounting settings" group
 		And I move to "Accounting settings" tab
 		And I set checkbox "Control code string"
+		And I select "Marking code" exact value from "Control code string type" drop-down list
 		And I click "Save and close" button		
 	* Create payment terminal
 		Given I open hyperlink "e1cib/list/Catalog.PaymentTerminals"

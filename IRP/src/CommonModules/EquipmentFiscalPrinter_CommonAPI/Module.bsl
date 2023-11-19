@@ -925,6 +925,11 @@ Function CheckPackage_ToXML(CheckPackage)
 			XMLWriter.WriteAttribute("VendorPhone", ToXMLString(Item.VendorData.VendorPhone));
 			XMLWriter.WriteEndElement();
 		EndIf;
+		For Each GoodCodeData In Item.GoodCodeData Do
+			XMLWriter.WriteStartElement("GoodCodeData");
+			XMLWriter.WriteAttribute(GoodCodeData.Key, ToXMLString(GoodCodeData.Value));
+			XMLWriter.WriteEndElement();
+		EndDo;
 		XMLWriter.WriteEndElement();
 	EndDo;
 	For Each Text In CheckPackage.Positions.TextStrings Do

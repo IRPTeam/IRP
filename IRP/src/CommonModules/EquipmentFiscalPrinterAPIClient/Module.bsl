@@ -959,7 +959,7 @@ EndFunction
 // * FractionalQuantity - Structure:
 // ** Numerator - Number - Fractional quantity of marked product (numerator)
 // ** Denominator - Number - Fractional quantity of marked product (denominator)
-// * GoodCodeData - Structure - Data of the good code
+// * GoodCodeData - Map - Data of the good code
 // * MarkingCode - String - Control marking code
 // * CountryOfOrigin - String - Digital code of the product's country of origin
 // * CustomsDeclaration - String - Customs declaration registration number
@@ -1000,7 +1000,7 @@ Function CheckPackage_FiscalString() Export
     Str.Insert("FractionalQuantity", New Structure);
     Str.FractionalQuantity.Insert("Numerator", 0);
     Str.FractionalQuantity.Insert("Denominator", 0);
-    Str.Insert("GoodCodeData", New Structure);
+    Str.Insert("GoodCodeData", New Map);
     Str.Insert("MarkingCode", "");
     Str.Insert("CountryOfOrigin", "");
     Str.Insert("CustomsDeclaration", "");

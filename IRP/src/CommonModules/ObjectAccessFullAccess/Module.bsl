@@ -109,7 +109,9 @@ Procedure CalculateAndUpdateAccessKey_Document(Source)
 	EndIf;
 	
 	// If not set ref, then can not use RLS on create or update mode
-	If Source.IsNew() Then
+	If Source = Source.Ref Then
+		Ref = Source.Ref;
+	ElsIf Source.IsNew() Then
 		Ref = Source.GetNewObjectRef();
 	Else
 		Ref = Source.Ref;

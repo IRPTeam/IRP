@@ -150,6 +150,56 @@
       </extInfo>
     </items>
     <items xsi:type="form:FormField">
+      <name>Type</name>
+      <id>25</id>
+      <visible>true</visible>
+      <enabled>true</enabled>
+      <userVisible>
+        <common>true</common>
+      </userVisible>
+      <dataPath xsi:type="form:DataPath">
+        <segments>List.Type</segments>
+      </dataPath>
+      <extendedTooltip>
+        <name>TypeExtendedTooltip</name>
+        <id>27</id>
+        <visible>true</visible>
+        <enabled>true</enabled>
+        <userVisible>
+          <common>true</common>
+        </userVisible>
+        <type>Label</type>
+        <autoMaxWidth>true</autoMaxWidth>
+        <autoMaxHeight>true</autoMaxHeight>
+        <extInfo xsi:type="form:LabelDecorationExtInfo">
+          <horizontalAlign>Left</horizontalAlign>
+        </extInfo>
+      </extendedTooltip>
+      <contextMenu>
+        <name>TypeContextMenu</name>
+        <id>26</id>
+        <visible>true</visible>
+        <enabled>true</enabled>
+        <userVisible>
+          <common>true</common>
+        </userVisible>
+        <autoFill>true</autoFill>
+      </contextMenu>
+      <type>InputField</type>
+      <editMode>Enter</editMode>
+      <showInHeader>true</showInHeader>
+      <headerHorizontalAlign>Left</headerHorizontalAlign>
+      <showInFooter>true</showInFooter>
+      <extInfo xsi:type="form:InputFieldExtInfo">
+        <autoMaxWidth>true</autoMaxWidth>
+        <autoMaxHeight>true</autoMaxHeight>
+        <wrap>true</wrap>
+        <chooseType>true</chooseType>
+        <typeDomainEnabled>true</typeDomainEnabled>
+        <textEdit>true</textEdit>
+      </extInfo>
+    </items>
+    <items xsi:type="form:FormField">
       <name>Ref</name>
       <id>22</id>
       <visible>true</visible>
@@ -430,6 +480,7 @@
 	Table.Ref,
 	Table.DeletionMark,
 	Table.Code,
+	Table.Type,
 	Table.Description_en AS Description
 FROM
 	Catalog.EmployeeSchedule AS Table</queryText>
@@ -467,10 +518,6 @@ FROM
         <field>Type</field>
       </fields>
       <fields xsi:type="schema:DataCompositionSchemaDataSetField">
-        <dataPath>InventoryNumber</dataPath>
-        <field>InventoryNumber</field>
-      </fields>
-      <fields xsi:type="schema:DataCompositionSchemaDataSetField">
         <dataPath>Description_hash</dataPath>
         <field>Description_hash</field>
       </fields>
@@ -485,10 +532,6 @@ FROM
       <fields xsi:type="schema:DataCompositionSchemaDataSetField">
         <dataPath>AddAttributes</dataPath>
         <field>AddAttributes</field>
-      </fields>
-      <fields xsi:type="schema:DataCompositionSchemaDataSetField">
-        <dataPath>DepreciationInfo</dataPath>
-        <field>DepreciationInfo</field>
       </fields>
       <fields xsi:type="schema:DataCompositionSchemaDataSetField">
         <dataPath>Predefined</dataPath>

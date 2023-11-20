@@ -62,6 +62,17 @@ Function GetEmployeeInfo(Ref, Date,  Company, Employee) Export
 	Return SalaryServer._GetEmployeeInfo(Ref, Date, Company, Employee);	
 EndFunction
 
+Function GetAccualAndDeductionValue(Date, Employee, Position, AccualOrDeductionType) Export
+	Return SalaryServer._GetAccualAndDeductionValue(Date, Employee, Position, AccualOrDeductionType);
+EndFunction
+
+Function GetWorkDays(BeginDate, EndDate, AccrualAndDeductionType) Export
+	Return SalaryServer._GetWorkDays(BeginDate, EndDate, AccrualAndDeductionType);
+EndFunction
+
+Function GetCountDays(Date, Company, Branch, Employee, Position, AccrualAndDeductionType) Export
+	Return SalaryServer._GetCountDays(Date, Company, Branch, Employee, Position, AccrualAndDeductionType);
+EndFunction
 
 // Other
 

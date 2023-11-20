@@ -54,6 +54,22 @@
   <defaultListForm>Catalog.EmployeeSchedule.Form.ListForm</defaultListForm>
   <defaultChoiceForm>Catalog.EmployeeSchedule.Form.ChoiceForm</defaultChoiceForm>
   <choiceHistoryOnInput>DontUse</choiceHistoryOnInput>
+  <attributes uuid="9ae18f21-794a-4062-9885-0b16d04b4b20">
+    <name>Type</name>
+    <synonym>
+      <key>en</key>
+      <value>Type</value>
+    </synonym>
+    <type>
+      <types>EnumRef.EmployeeScheduleTypes</types>
+    </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <fillChecking>ShowError</fillChecking>
+    <fillValue xsi:type="core:UndefinedValue"/>
+    <fullTextSearch>Use</fullTextSearch>
+    <dataHistory>Use</dataHistory>
+  </attributes>
   <tabularSections uuid="b3942f05-41da-494d-8819-ec22d6e491e5">
     <producedTypes>
       <objectType typeId="804993c3-9735-40f2-8ef0-108895094e7a" valueTypeId="87d87627-0db2-4ae0-98fb-357e003a53e4"/>

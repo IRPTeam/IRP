@@ -577,7 +577,6 @@
   <commonModules>CommonModule.RowIDInfoServerReuse</commonModules>
   <commonModules>CommonModule.Saas</commonModules>
   <commonModules>CommonModule.SaasClient</commonModules>
-  <commonModules>CommonModule.SalaryServerReuse</commonModules>
   <commonModules>CommonModule.ScheduledJobsForExtentions</commonModules>
   <commonModules>CommonModule.SerialLotNumberClient</commonModules>
   <commonModules>CommonModule.SerialLotNumberClientServer</commonModules>
@@ -1129,6 +1128,7 @@
   <enums>Enum.TradeAgentFeeTypes</enums>
   <enums>Enum.TypeEquipment</enums>
   <enums>Enum.TypeExternalObject</enums>
+  <enums>Enum.EmployeeScheduleTypes</enums>
   <reports>Report.AllRegistersMovement</reports>
   <reports>Report.BatchBalance</reports>
   <reports>Report.BatchBalanceSimple</reports>

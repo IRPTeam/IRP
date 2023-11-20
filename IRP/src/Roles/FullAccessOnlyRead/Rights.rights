@@ -167,7 +167,7 @@
 		</right>
 	</object>
 	<object>
-		<name>InformationRegister.T9530S_WorkDays.Resource.CountDays</name>
+		<name>InformationRegister.T9530S_WorkDays.Resource.CountDaysHours</name>
 		<right>
 			<name>Edit</name>
 			<value>false</value>
@@ -1009,7 +1009,7 @@
 		</right>
 	</object>
 	<object>
-		<name>InformationRegister.T9530S_WorkDays.Dimension.BeginDate</name>
+		<name>InformationRegister.T9530S_WorkDays.Dimension.Date</name>
 		<right>
 			<name>Edit</name>
 			<value>false</value>
@@ -6217,13 +6217,6 @@
 		</right>
 	</object>
 	<object>
-		<name>InformationRegister.T9530S_WorkDays.Dimension.EndDate</name>
-		<right>
-			<name>Edit</name>
-			<value>false</value>
-		</right>
-	</object>
-	<object>
 		<name>Constant.UseCashTransaction</name>
 		<right>
 			<name>Read</name>
@@ -8740,7 +8733,7 @@
 		</right>
 	</object>
 	<object>
-		<name>InformationRegister.T9530S_WorkDays.Dimension.AccrualAndDeductionType</name>
+		<name>InformationRegister.T9530S_WorkDays.Dimension.EmployeeSchedule</name>
 		<right>
 			<name>Edit</name>
 			<value>false</value>

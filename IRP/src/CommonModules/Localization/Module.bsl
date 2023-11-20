@@ -1382,5 +1382,19 @@ Function Strings(Lang) Export
 	Strings.Insert("BgJ_Title_002",   NStr("en = 'Load Item list'", Lang));
 #EndRegion	
 	
+#Region Salary
+	Strings.Insert("Salary_001",   NStr("en = 'In two days'", Lang));
+	Strings.Insert("Salary_002",   NStr("en = 'Week with days off'", Lang));
+	
+	Strings.Insert("Salary_WeekDays_1",   NStr("en = 'Monday'", Lang));
+	Strings.Insert("Salary_WeekDays_2",   NStr("en = 'Tuesday'", Lang));
+	Strings.Insert("Salary_WeekDays_3",   NStr("en = 'Wednesday'", Lang));
+	Strings.Insert("Salary_WeekDays_4",   NStr("en = 'Thursday'", Lang));
+	Strings.Insert("Salary_WeekDays_5",   NStr("en = 'Friday'", Lang));
+	Strings.Insert("Salary_WeekDays_6",   NStr("en = 'Saturday'", Lang));
+	Strings.Insert("Salary_WeekDays_7",   NStr("en = 'Sunday'", Lang));
+	
+#EndRegion
+	
 	Return Strings;
 EndFunction

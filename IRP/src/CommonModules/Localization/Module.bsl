@@ -1383,8 +1383,9 @@ Function Strings(Lang) Export
 #EndRegion	
 	
 #Region Salary
-	Strings.Insert("Salary_001",   NStr("en = 'In two days'", Lang));
-	Strings.Insert("Salary_002",   NStr("en = 'Week with days off'", Lang));
+
+	Strings.Insert("Salary_Err_001",   NStr("en = 'Wrong period'", Lang));
+	Strings.Insert("Salary_Err_002",   NStr("en = 'Employee schedule not selected'", Lang));
 	
 	Strings.Insert("Salary_WeekDays_1",   NStr("en = 'Monday'", Lang));
 	Strings.Insert("Salary_WeekDays_2",   NStr("en = 'Tuesday'", Lang));

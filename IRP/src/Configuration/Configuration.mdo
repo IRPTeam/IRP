@@ -604,17 +604,6 @@
   <commonModules>CommonModule.ViewServer_V2</commonModules>
   <commonModules>CommonModule.WorkstationClient</commonModules>
   <commonModules>CommonModule.WorkstationServer</commonModules>
-  <commonModules>CommonModule.CertificateServer</commonModules>
-  <commonModules>CommonModule.DocCommissioningOfFixedAssetServer</commonModules>
-  <commonModules>CommonModule.DocCommissioningOfFixedAssetClient</commonModules>
-  <commonModules>CommonModule.DocDecommissioningOfFixedAssetServer</commonModules>
-  <commonModules>CommonModule.DocDecommissioningOfFixedAssetClient</commonModules>
-  <commonModules>CommonModule.DocFixedAssetTransferServer</commonModules>
-  <commonModules>CommonModule.DocFixedAssetTransferClient</commonModules>
-  <commonModules>CommonModule.DocModernizationOfFixedAssetServer</commonModules>
-  <commonModules>CommonModule.DocModernizationOfFixedAssetClient</commonModules>
-  <commonModules>CommonModule.OffsetOfAdvancesServer</commonModules>
-  <commonModules>CommonModule.ServerPrivileged</commonModules>
   <commonModules>CommonModule.DocEmployeeHiringClient</commonModules>
   <commonModules>CommonModule.DocEmployeeHiringServer</commonModules>
   <commonModules>CommonModule.DocEmployeeTransferClient</commonModules>

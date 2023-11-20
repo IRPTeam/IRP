@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<form:Form xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:form="http://g5.1c.ru/v8/dt/form">
+<form:Form xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:core="http://g5.1c.ru/v8/dt/mcore" xmlns:form="http://g5.1c.ru/v8/dt/form">
   <items xsi:type="form:FormField">
     <name>Period</name>
     <id>8</id>
@@ -61,6 +61,10 @@
     <dataPath xsi:type="form:DataPath">
       <segments>EmployeeSchedule</segments>
     </dataPath>
+    <handlers>
+      <event>OnChange</event>
+      <name>EmployeeScheduleOnChange</name>
+    </handlers>
     <extendedTooltip>
       <name>EmployeeScheduleExtendedTooltip</name>
       <id>7</id>
@@ -101,6 +105,56 @@
     </extInfo>
   </items>
   <items xsi:type="form:FormField">
+    <name>CountHours</name>
+    <id>46</id>
+    <visible>true</visible>
+    <enabled>true</enabled>
+    <userVisible>
+      <common>true</common>
+    </userVisible>
+    <dataPath xsi:type="form:DataPath">
+      <segments>CountHours</segments>
+    </dataPath>
+    <extendedTooltip>
+      <name>CountHoursExtendedTooltip</name>
+      <id>48</id>
+      <visible>true</visible>
+      <enabled>true</enabled>
+      <userVisible>
+        <common>true</common>
+      </userVisible>
+      <type>Label</type>
+      <autoMaxWidth>true</autoMaxWidth>
+      <autoMaxHeight>true</autoMaxHeight>
+      <extInfo xsi:type="form:LabelDecorationExtInfo">
+        <horizontalAlign>Left</horizontalAlign>
+      </extInfo>
+    </extendedTooltip>
+    <contextMenu>
+      <name>CountHoursContextMenu</name>
+      <id>47</id>
+      <visible>true</visible>
+      <enabled>true</enabled>
+      <userVisible>
+        <common>true</common>
+      </userVisible>
+      <autoFill>true</autoFill>
+    </contextMenu>
+    <type>InputField</type>
+    <editMode>Enter</editMode>
+    <showInHeader>true</showInHeader>
+    <headerHorizontalAlign>Left</headerHorizontalAlign>
+    <showInFooter>true</showInFooter>
+    <extInfo xsi:type="form:InputFieldExtInfo">
+      <autoMaxWidth>true</autoMaxWidth>
+      <autoMaxHeight>true</autoMaxHeight>
+      <wrap>true</wrap>
+      <chooseType>true</chooseType>
+      <typeDomainEnabled>true</typeDomainEnabled>
+      <textEdit>true</textEdit>
+    </extInfo>
+  </items>
+  <items xsi:type="form:FormField">
     <name>ScheduleVariant</name>
     <id>14</id>
     <visible>true</visible>
@@ -111,6 +165,10 @@
     <dataPath xsi:type="form:DataPath">
       <segments>ScheduleVariant</segments>
     </dataPath>
+    <handlers>
+      <event>OnChange</event>
+      <name>ScheduleVariantOnChange</name>
+    </handlers>
     <extendedTooltip>
       <name>ScheduleVariantExtendedTooltip</name>
       <id>16</id>
@@ -149,6 +207,24 @@
       <chooseType>true</chooseType>
       <typeDomainEnabled>true</typeDomainEnabled>
       <textEdit>true</textEdit>
+      <choiceList>
+        <presentation>
+          <key>en</key>
+          <value>In two days</value>
+        </presentation>
+        <value xsi:type="core:StringValue">
+          <value>InTwoDays</value>
+        </value>
+      </choiceList>
+      <choiceList>
+        <presentation>
+          <key>en</key>
+          <value>Week with days off</value>
+        </presentation>
+        <value xsi:type="core:StringValue">
+          <value>WeekWithDaysOff</value>
+        </value>
+      </choiceList>
     </extInfo>
   </items>
   <items xsi:type="form:FormField">
@@ -676,7 +752,10 @@
     </title>
     <id>6</id>
     <valueType>
-      <types>ValueList</types>
+      <types>String</types>
+      <stringQualifiers>
+        <length>20</length>
+      </stringQualifiers>
     </valueType>
     <view>
       <common>true</common>
@@ -685,14 +764,6 @@
       <common>true</common>
     </edit>
     <fillChecking>ShowError</fillChecking>
-    <extInfo xsi:type="form:ValueListExtInfo">
-      <itemValueType>
-        <types>String</types>
-        <stringQualifiers>
-          <length>10</length>
-        </stringQualifiers>
-      </itemValueType>
-    </extInfo>
   </attributes>
   <attributes>
     <name>StartWorkingDay</name>
@@ -715,6 +786,27 @@
     </edit>
     <fillChecking>ShowError</fillChecking>
   </attributes>
+  <attributes>
+    <name>CountHours</name>
+    <title>
+      <key>en</key>
+      <value>Count hours</value>
+    </title>
+    <id>8</id>
+    <valueType>
+      <types>Number</types>
+      <numberQualifiers>
+        <precision>10</precision>
+      </numberQualifiers>
+    </valueType>
+    <view>
+      <common>true</common>
+    </view>
+    <edit>
+      <common>true</common>
+    </edit>
+    <fillChecking>ShowError</fillChecking>
+  </attributes>
   <formCommands>
     <name>Ok</name>
     <title>
@@ -725,6 +817,11 @@
     <use>
       <common>true</common>
     </use>
+    <action xsi:type="form:FormCommandHandlerContainer">
+      <handler>
+        <name>Ok</name>
+      </handler>
+    </action>
     <currentRowUse>Auto</currentRowUse>
   </formCommands>
   <formCommands>
@@ -737,6 +834,11 @@
     <use>
       <common>true</common>
     </use>
+    <action xsi:type="form:FormCommandHandlerContainer">
+      <handler>
+        <name>Cancel</name>
+      </handler>
+    </action>
     <currentRowUse>Auto</currentRowUse>
   </formCommands>
   <commandInterface>

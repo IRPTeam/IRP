@@ -94,6 +94,60 @@
     </extInfo>
   </items>
   <items xsi:type="form:FormField">
+    <name>Period</name>
+    <id>47</id>
+    <visible>true</visible>
+    <enabled>true</enabled>
+    <userVisible>
+      <common>true</common>
+    </userVisible>
+    <dataPath xsi:type="form:DataPath">
+      <segments>Period</segments>
+    </dataPath>
+    <handlers>
+      <event>OnChange</event>
+      <name>PeriodOnChange</name>
+    </handlers>
+    <extendedTooltip>
+      <name>PeriodExtendedTooltip</name>
+      <id>49</id>
+      <visible>true</visible>
+      <enabled>true</enabled>
+      <userVisible>
+        <common>true</common>
+      </userVisible>
+      <type>Label</type>
+      <autoMaxWidth>true</autoMaxWidth>
+      <autoMaxHeight>true</autoMaxHeight>
+      <extInfo xsi:type="form:LabelDecorationExtInfo">
+        <horizontalAlign>Left</horizontalAlign>
+      </extInfo>
+    </extendedTooltip>
+    <contextMenu>
+      <name>PeriodContextMenu</name>
+      <id>48</id>
+      <visible>true</visible>
+      <enabled>true</enabled>
+      <userVisible>
+        <common>true</common>
+      </userVisible>
+      <autoFill>true</autoFill>
+    </contextMenu>
+    <type>InputField</type>
+    <editMode>Enter</editMode>
+    <showInHeader>true</showInHeader>
+    <headerHorizontalAlign>Left</headerHorizontalAlign>
+    <showInFooter>true</showInFooter>
+    <extInfo xsi:type="form:InputFieldExtInfo">
+      <autoMaxWidth>true</autoMaxWidth>
+      <autoMaxHeight>true</autoMaxHeight>
+      <wrap>true</wrap>
+      <chooseType>true</chooseType>
+      <typeDomainEnabled>true</typeDomainEnabled>
+      <textEdit>true</textEdit>
+    </extInfo>
+  </items>
+  <items xsi:type="form:FormField">
     <name>ListMode</name>
     <id>30</id>
     <visible>true</visible>
@@ -144,19 +198,19 @@
       <choiceList>
         <presentation>
           <key>en</key>
-          <value>View</value>
+          <value>Calendar</value>
         </presentation>
         <value xsi:type="core:StringValue">
-          <value>View</value>
+          <value>Calendar</value>
         </value>
       </choiceList>
       <choiceList>
         <presentation>
           <key>en</key>
-          <value>Edit</value>
+          <value>Table</value>
         </presentation>
         <value xsi:type="core:StringValue">
-          <value>Edit</value>
+          <value>Table</value>
         </value>
       </choiceList>
     </extInfo>
@@ -584,6 +638,14 @@
         <headerHorizontalAlign>Left</headerHorizontalAlign>
         <showInFooter>true</showInFooter>
         <extInfo xsi:type="form:CalendarFieldExtInfo">
+          <handlers>
+            <event>OnPeriodOutput</event>
+            <name>CalendarOnPeriodOutput</name>
+          </handlers>
+          <handlers>
+            <event>Selection</event>
+            <name>CalendarSelection</name>
+          </handlers>
           <width>16</width>
           <autoMaxWidth>true</autoMaxWidth>
           <height>9</height>
@@ -652,7 +714,6 @@
     </extendedTooltip>
     <type>Pages</type>
     <extInfo xsi:type="form:PagesGroupExtInfo">
-      <pagesRepresentation>Auto</pagesRepresentation>
       <currentRowUse>Auto</currentRowUse>
     </extInfo>
   </items>
@@ -760,7 +821,8 @@
 FROM
 	InformationRegister.T9530S_WorkDays AS T9530S_WorkDays
 WHERE
-	T9530S_WorkDays.EmployeeSchedule = &amp;EmployeeSchedule</queryText>
+	T9530S_WorkDays.EmployeeSchedule = &amp;EmployeeSchedule
+	AND T9530S_WorkDays.Date BETWEEN BEGINOFPERIOD(&amp;BeginPeriod, DAY) AND ENDOFPERIOD(&amp;EndPeriod, DAY)</queryText>
       <mainTable>InformationRegister.T9530S_WorkDays</mainTable>
       <dynamicDataRead>true</dynamicDataRead>
       <autoFillAvailableFields>true</autoFillAvailableFields>
@@ -791,6 +853,38 @@ WHERE
         </title>
         <valueType>
           <types>CatalogRef.EmployeeSchedule</types>
+        </valueType>
+        <useRestriction>true</useRestriction>
+      </parameters>
+      <parameters>
+        <name>BeginPeriod</name>
+        <title>
+          <localValue>
+            <content>
+              <key>en</key>
+              <value>Begin period</value>
+            </content>
+          </localValue>
+        </title>
+        <valueType>
+          <types>Date</types>
+          <dateQualifiers/>
+        </valueType>
+        <useRestriction>true</useRestriction>
+      </parameters>
+      <parameters>
+        <name>EndPeriod</name>
+        <title>
+          <localValue>
+            <content>
+              <key>en</key>
+              <value>End period</value>
+            </content>
+          </localValue>
+        </title>
+        <valueType>
+          <types>Date</types>
+          <dateQualifiers/>
         </valueType>
         <useRestriction>true</useRestriction>
       </parameters>
@@ -843,6 +937,23 @@ WHERE
       <dateQualifiers>
         <dateFractions>Date</dateFractions>
       </dateQualifiers>
+    </valueType>
+    <view>
+      <common>true</common>
+    </view>
+    <edit>
+      <common>true</common>
+    </edit>
+  </attributes>
+  <attributes>
+    <name>Period</name>
+    <title>
+      <key>en</key>
+      <value>Period</value>
+    </title>
+    <id>6</id>
+    <valueType>
+      <types>StandardPeriod</types>
     </valueType>
     <view>
       <common>true</common>

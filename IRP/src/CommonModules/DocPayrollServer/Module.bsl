@@ -145,16 +145,16 @@ Function GetPayrolls(Parameters) Export
 EndFunction
 
 Function _MonthlySalary(Parameters, QuerySelection)
-	Value = SalaryServerReuse.GetAccualAndDeductionValue(QuerySelection.Date, 
+	Value = SalaryServer.GetAccualAndDeductionValue(QuerySelection.Date, 
 			QuerySelection.Employee,
 			QuerySelection.Position,
 			QuerySelection.AccrualAndDeductionType);
 		
-	TotalDays = SalaryServerReuse.GetWorkDays(Parameters.BeginDate,
+	TotalDays = SalaryServer.GetWorkDays(Parameters.BeginDate,
 			Parameters.EndDate,
 			QuerySelection.AccrualAndDeductionType);
 		
-	CountDays = SalaryServerReuse.GetCountDays(QuerySelection.Date,
+	CountDays = SalaryServer.GetCountDays(QuerySelection.Date,
 			Parameters.Company,
 			Parameters.Branch,
 			QuerySelection.Employee,

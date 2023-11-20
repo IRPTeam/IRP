@@ -16,6 +16,7 @@
   </synonym>
   <useStandardCommands>true</useStandardCommands>
   <editType>InDialog</editType>
+  <defaultRecordForm>InformationRegister.T9530S_WorkDays.Form.RecordForm</defaultRecordForm>
   <defaultListForm>InformationRegister.T9530S_WorkDays.Form.ListForm</defaultListForm>
   <dataLockControlMode>Managed</dataLockControlMode>
   <recordPresentation>
@@ -100,6 +101,15 @@
     <synonym>
       <key>en</key>
       <value>Copy schedule</value>
+    </synonym>
+    <usePurposes>PersonalComputer</usePurposes>
+    <usePurposes>MobileDevice</usePurposes>
+  </forms>
+  <forms uuid="4d64914a-8302-4a79-83b3-a0a1338f79df">
+    <name>RecordForm</name>
+    <synonym>
+      <key>en</key>
+      <value>Record form</value>
     </synonym>
     <usePurposes>PersonalComputer</usePurposes>
     <usePurposes>MobileDevice</usePurposes>

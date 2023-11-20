@@ -357,6 +357,8 @@
   <commonModules>CommonModule.CatPartnersServer</commonModules>
   <commonModules>CommonModule.CatRetailCustomersClient</commonModules>
   <commonModules>CommonModule.CatRetailCustomersServer</commonModules>
+  <commonModules>CommonModule.CertificateServer</commonModules>
+  <commonModules>CommonModule.CheckDataPrivileged</commonModules>
   <commonModules>CommonModule.CommissionTradePrivileged</commonModules>
   <commonModules>CommonModule.CommissionTradeServer</commonModules>
   <commonModules>CommonModule.CommonFormActions</commonModules>
@@ -397,12 +399,18 @@
   <commonModules>CommonModule.DocCashTransferOrderServer</commonModules>
   <commonModules>CommonModule.DocChequeBondTransactionClient</commonModules>
   <commonModules>CommonModule.DocChequeBondTransactionServer</commonModules>
+  <commonModules>CommonModule.DocCommissioningOfFixedAssetClient</commonModules>
+  <commonModules>CommonModule.DocCommissioningOfFixedAssetServer</commonModules>
   <commonModules>CommonModule.DocConsolidatedRetailSalesClient</commonModules>
   <commonModules>CommonModule.DocConsolidatedRetailSalesServer</commonModules>
   <commonModules>CommonModule.DocCreditDebitNoteClient</commonModules>
   <commonModules>CommonModule.DocCreditDebitNoteServer</commonModules>
+  <commonModules>CommonModule.DocDecommissioningOfFixedAssetClient</commonModules>
+  <commonModules>CommonModule.DocDecommissioningOfFixedAssetServer</commonModules>
   <commonModules>CommonModule.DocEmployeeCashAdvanceClient</commonModules>
   <commonModules>CommonModule.DocEmployeeCashAdvanceServer</commonModules>
+  <commonModules>CommonModule.DocFixedAssetTransferClient</commonModules>
+  <commonModules>CommonModule.DocFixedAssetTransferServer</commonModules>
   <commonModules>CommonModule.DocGoodsReceiptClient</commonModules>
   <commonModules>CommonModule.DocGoodsReceiptServer</commonModules>
   <commonModules>CommonModule.DocIncomingPaymentOrderClient</commonModules>
@@ -421,6 +429,8 @@
   <commonModules>CommonModule.DocLabelingServer</commonModules>
   <commonModules>CommonModule.DocManualRegisterEntryClient</commonModules>
   <commonModules>CommonModule.DocManualRegisterEntryServer</commonModules>
+  <commonModules>CommonModule.DocModernizationOfFixedAssetClient</commonModules>
+  <commonModules>CommonModule.DocModernizationOfFixedAssetServer</commonModules>
   <commonModules>CommonModule.DocMoneyTransferClient</commonModules>
   <commonModules>CommonModule.DocMoneyTransferServer</commonModules>
   <commonModules>CommonModule.DocOpeningEntryClient</commonModules>
@@ -502,8 +512,8 @@
   <commonModules>CommonModule.EquipmentAcquiring_CommonAPI</commonModules>
   <commonModules>CommonModule.EquipmentAcquiringAPIClient</commonModules>
   <commonModules>CommonModule.EquipmentAcquiringServer</commonModules>
-  <commonModules>CommonModule.EquipmentFiscalPrinterAPIClient</commonModules>
   <commonModules>CommonModule.EquipmentFiscalPrinter_CommonAPI</commonModules>
+  <commonModules>CommonModule.EquipmentFiscalPrinterAPIClient</commonModules>
   <commonModules>CommonModule.EquipmentFiscalPrinterClient</commonModules>
   <commonModules>CommonModule.EquipmentFiscalPrinterServer</commonModules>
   <commonModules>CommonModule.ExtensionServer</commonModules>
@@ -553,6 +563,7 @@
   <commonModules>CommonModule.OffersClient</commonModules>
   <commonModules>CommonModule.OffersClientServer</commonModules>
   <commonModules>CommonModule.OffersServer</commonModules>
+  <commonModules>CommonModule.OffsetOfAdvancesServer</commonModules>
   <commonModules>CommonModule.PictureViewerClient</commonModules>
   <commonModules>CommonModule.PictureViewerClientServer</commonModules>
   <commonModules>CommonModule.PictureViewerServer</commonModules>
@@ -821,8 +832,12 @@
   <constants>Constant.UseSourceOfOrigin</constants>
   <constants>Constant.AdditionalTableControlExceptions</constants>
   <constants>Constant.UseFixedAssets</constants>
+  <commonForms>CommonForm.AdditionalTableControlSettings</commonForms>
   <commonForms>CommonForm.AddLinkedDocumentRows</commonForms>
   <commonForms>CommonForm.AttachFile</commonForms>
+  <commonForms>CommonForm.BackgroundJobSplash</commonForms>
+  <commonForms>CommonForm.CheckPhoneNumber</commonForms>
+  <commonForms>CommonForm.CodeStringCheck</commonForms>
   <commonForms>CommonForm.ConstantsForm</commonForms>
   <commonForms>CommonForm.CopyToClipboardSettings</commonForms>
   <commonForms>CommonForm.DataMappingForm</commonForms>
@@ -836,6 +851,7 @@
   <commonForms>CommonForm.EditStores</commonForms>
   <commonForms>CommonForm.EditUserSettings</commonForms>
   <commonForms>CommonForm.HTMLField</commonForms>
+  <commonForms>CommonForm.HTMLPrintForm</commonForms>
   <commonForms>CommonForm.InfoLinkedDocumentRows</commonForms>
   <commonForms>CommonForm.InputBarcode</commonForms>
   <commonForms>CommonForm.LinkedDocuments</commonForms>
@@ -853,14 +869,9 @@
   <commonForms>CommonForm.RelatedDocuments</commonForms>
   <commonForms>CommonForm.ReportForm</commonForms>
   <commonForms>CommonForm.SelectionRetailBasisForReturn</commonForms>
+  <commonForms>CommonForm.SerialLotNumbersTree</commonForms>
   <commonForms>CommonForm.ShareToUsers</commonForms>
   <commonForms>CommonForm.UpdateItemListInfo</commonForms>
-  <commonForms>CommonForm.SerialLotNumbersTree</commonForms>
-  <commonForms>CommonForm.CodeStringCheck</commonForms>
-  <commonForms>CommonForm.CheckPhoneNumber</commonForms>
-  <commonForms>CommonForm.BackgroundJobSplash</commonForms>
-  <commonForms>CommonForm.HTMLPrintForm</commonForms>
-  <commonForms>CommonForm.AdditionalTableControlSettings</commonForms>
   <catalogs>Catalog.AccessGroups</catalogs>
   <catalogs>Catalog.AccessKey</catalogs>
   <catalogs>Catalog.AccessProfiles</catalogs>
@@ -1055,8 +1066,10 @@
   <enums>Enum.ChequeBondTypes</enums>
   <enums>Enum.CompanyLegalType</enums>
   <enums>Enum.ConsolidatedRetailSalesStatuses</enums>
+  <enums>Enum.ControlCodeStringType</enums>
   <enums>Enum.CurrencyType</enums>
   <enums>Enum.DataAreaStatus</enums>
+  <enums>Enum.DepreciationMethods</enums>
   <enums>Enum.DocumentFiscalStatuses</enums>
   <enums>Enum.DocumentPostingTypes</enums>
   <enums>Enum.EquipmentAPIModule</enums>
@@ -1064,6 +1077,7 @@
   <enums>Enum.ExpenseTypes</enums>
   <enums>Enum.ExternalFunctionType</enums>
   <enums>Enum.FileTypes</enums>
+  <enums>Enum.FixedAssetTypes</enums>
   <enums>Enum.FormTypes</enums>
   <enums>Enum.GoodsReceiptTransactionTypes</enums>
   <enums>Enum.IncomingPaymentTransactionType</enums>
@@ -1079,11 +1093,13 @@
   <enums>Enum.MaterialTypes</enums>
   <enums>Enum.MetadataSubtype</enums>
   <enums>Enum.MetadataTypes</enums>
+  <enums>Enum.ModernizationTypes</enums>
   <enums>Enum.OfferGroupType</enums>
   <enums>Enum.OffersDocumentTypes</enums>
   <enums>Enum.OutgoingPaymentTransactionTypes</enums>
   <enums>Enum.PaymentTypes</enums>
   <enums>Enum.PayrollTypes</enums>
+  <enums>Enum.PhysicalCountByLocationTransactionType</enums>
   <enums>Enum.PriceAssignment</enums>
   <enums>Enum.PriceListTypes</enums>
   <enums>Enum.PrintTemplateTypes</enums>
@@ -1095,6 +1111,7 @@
   <enums>Enum.PurchaseTransactionTypes</enums>
   <enums>Enum.ReceiptPaymentMethods</enums>
   <enums>Enum.RetailGoodsReceiptTransactionTypes</enums>
+  <enums>Enum.RetailReceiptStatusTypes</enums>
   <enums>Enum.RetailShipmentConfirmationTransactionTypes</enums>
   <enums>Enum.Rights</enums>
   <enums>Enum.SalesReturnTransactionTypes</enums>
@@ -1107,16 +1124,11 @@
   <enums>Enum.SpecificationType</enums>
   <enums>Enum.StockBalanceDetail</enums>
   <enums>Enum.SystemClientType</enums>
+  <enums>Enum.TaxKind</enums>
   <enums>Enum.TaxType</enums>
   <enums>Enum.TradeAgentFeeTypes</enums>
   <enums>Enum.TypeEquipment</enums>
   <enums>Enum.TypeExternalObject</enums>
-  <enums>Enum.TaxKind</enums>
-  <enums>Enum.RetailReceiptStatusTypes</enums>
-  <enums>Enum.FixedAssetTypes</enums>
-  <enums>Enum.DepreciationMethods</enums>
-  <enums>Enum.ModernizationTypes</enums>
-  <enums>Enum.PhysicalCountByLocationTransactionType</enums>
   <reports>Report.AllRegistersMovement</reports>
   <reports>Report.BatchBalance</reports>
   <reports>Report.BatchBalanceSimple</reports>

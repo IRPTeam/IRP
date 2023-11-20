@@ -156,6 +156,7 @@ Scenario:_800000 preparation (remaining stock control)
 			| "Documents.PurchaseInvoice.FindByNumber(1114).GetObject().Write(DocumentWriteMode.Posting);"    |
 		When Create information register UserSettings records (Retail document)
 		When create SalesInvoice and StockAdjustmentAsSurplus (stock control)
+		When Create document Production objects (stock control)
 	When create payment terminal
 	When create PaymentTypes
 	When create bank terms
@@ -3119,3 +3120,50 @@ Scenario:_800083 check stock control in the IT (Store sender does not use stock 
 		And in the table "List" I click the button named "ListContextMenuUndoPosting"
 		Then user message window does not contain messages
 		And I close all client application windows
+
+Scenario:_800085 check stock control in the Production (store with and without stock control for materials)
+	And I close all client application windows
+	* Select Production document
+		Given I open hyperlink "e1cib/data/Document.Production?ref=b7af813f69b829cc11ee83a2de45fa2d"
+	* Try post (store use stock control, materials are enough)
+		And I click "Post" button
+		Then user message window does not contain messages
+	* Try post (store use stock control, materials are not enough)
+		And I go to line in "Materials" table
+			| 'Item'       | 'Item key'   |
+			| 'Material 2' | 'Material 2' |
+		And I activate "Q" field in "Materials" table
+		And I select current line in "Materials" table
+		And I input "58,000" text in "Q" field of "Materials" table
+		And I finish line editing in "Materials" table
+		And I click "Post" button
+		Then "1C:Enterprise" window is opened
+		And I click the button named "OK"
+		Then there are lines in TestClient message log
+			|'Line No. [2] [Material 2 Material 2] R4010B_ActualStocks remaining: 20 . Required: 58 . Lacking: 38 .'|	
+	* Try post (store not use stock control, materials are not enough)	
+		And I activate "Writeoff store" field in "Materials" table
+		And I select current line in "Materials" table
+		And I click Open button of "Writeoff store" field
+		And I remove checkbox "Negative stock control"
+		And I click "Save and close" button
+		And I finish line editing in "Materials" table
+		And I click "Post" button
+		Then user message window does not contain messages
+		And I activate "Writeoff store" field in "Materials" table
+		And I select current line in "Materials" table
+		And I click Open button of "Writeoff store" field
+		And I set checkbox "Negative stock control"
+		And I click "Save and close" button
+		And I finish line editing in "Materials" table
+		And I click "Post" button
+		Then "1C:Enterprise" window is opened
+		And I click the button named "OK"
+		Then there are lines in TestClient message log
+			|'Line No. [2] [Material 2 Material 2] R4010B_ActualStocks remaining: 20 . Required: 58 . Lacking: 38 .'|	
+	And I close all client application windows
+	
+
+				
+
+						

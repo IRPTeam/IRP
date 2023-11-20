@@ -2582,6 +2582,7 @@ Scenario: Create information register UserSettings records (remaining stock cont
 		| '$$IdCI$$'     | 'Document.SalesReturn'                | 'CheckBalance_R4011B_FreeStocks'    | 'Enum.KindsOfAttributes.Custom'  | 'True'    |
 		| '$$IdCI$$'     | 'Document.WorkOrder'                  | 'CheckBalance_R4011B_FreeStocks'    | 'Enum.KindsOfAttributes.Custom'  | 'True'    |
 		| '$$IdCI$$'     | 'Document.WorkSheet'                  | 'CheckBalance_R4010B_ActualStocks'  | 'Enum.KindsOfAttributes.Custom'  | 'True'    |
+		| '$$IdCI$$'     | 'Document.Production'                 | 'CheckBalance_R4010B_ActualStocks'  | 'Enum.KindsOfAttributes.Custom'  | 'True'    |
 
 
 
@@ -3157,6 +3158,46 @@ Scenario: create consignors Items with SLN
 		| '0909088998998898789' | 'e1cib/data/Catalog.ItemKeys?ref=b7aa9f63eb85c76911ee6827f4884c14' | 'e1cib/data/Catalog.SerialLotNumbers?ref=b7aa9f63eb85c76911ee6827f4884c17' | ''               | 'e1cib/data/Catalog.Units?ref=aa78120ed92fbced11eaf113ba6c1862' | ''             |
 		| '0909088998998898790' | 'e1cib/data/Catalog.ItemKeys?ref=b7aa9f63eb85c76911ee6827f4884c14' | 'e1cib/data/Catalog.SerialLotNumbers?ref=b7aa9f63eb85c76911ee6827f4884c18' | ''               | 'e1cib/data/Catalog.Units?ref=aa78120ed92fbced11eaf113ba6c1862' | ''             |
 		| '0909088998998898791' | 'e1cib/data/Catalog.ItemKeys?ref=b7aa9f63eb85c76911ee6827f4884c16' | 'e1cib/data/Catalog.SerialLotNumbers?ref=b7aa9f63eb85c76911ee6827f4884c19' | ''               | 'e1cib/data/Catalog.Units?ref=aa78120ed92fbced11eaf113ba6c1862' | ''             |
+
+Scenario: create consignors Items with control code string type (Good code data)
+
+	// Catalog.Items
+
+	And I check or create catalog "Items" objects:
+		| 'Ref'                                                           | 'DeletionMark' | 'Code' | 'ItemType'                                                          | 'Unit'                                                          | 'MainPricture'                          | 'Vendor' | 'ItemID' | 'PackageUnit' | 'ControlCodeString' | 'CheckCodeString' | 'ControlCodeStringType'                   | 'Description_en'                                                      | 'Description_hash' | 'Description_ru' | 'Description_tr' | 'Height' | 'Length' | 'Volume' | 'Weight' | 'Width' | 'LocalFullDescription' | 'ForeignFullDescription' | 'SourceNodeID' |
+		| 'e1cib/data/Catalog.Items?ref=b7af813f69b829cc11ee8456e7cc90de' | 'False'        | 199    | 'e1cib/data/Catalog.ItemTypes?ref=b798d684e43e460511edc7cd0d4d1c08' | 'e1cib/data/Catalog.Units?ref=aa78120ed92fbced11eaf113ba6c1862' | 'ValueStorage:AQEIAAAAAAAAAO+7v3siVSJ9' | ''       | ''       | ''            | 'True'              | 'True'            | 'Enum.ControlCodeStringType.GoodCodeData' | 'Product 16 with SLN and Good code data (Main Company - Consignor 1)' | ''                 | ''               | ''               |          |          |          |          |         | ''                     | ''                       | ''             |
+
+	And I refill object tabular section "ConsignorsInfo":
+		| 'Ref'                                                           | 'Company'                                                           | 'Consignor'                                                         |
+		| 'e1cib/data/Catalog.Items?ref=b7af813f69b829cc11ee8456e7cc90de' | 'e1cib/data/Catalog.Companies?ref=aa78120ed92fbced11eaf113ba6c185c' | 'e1cib/data/Catalog.Companies?ref=b788b483d858e32911ed56c495eca79f' |
+
+	// Catalog.ItemKeys
+
+	And I check or create for catalog "ItemKeys" objects with Data Exchange Load parameter set to true:
+		| 'Ref'                                                              | 'DeletionMark' | 'Code' | 'Item'                                                          | 'Unit' | 'Specification' | 'AffectPricingMD5' | 'UniqueMD5'                                       | 'ItemKeyID' | 'DefaultBillOfMaterials' | 'UseIncomingStockReservation' | 'PackageUnit' | 'Description_en'                                                      | 'Description_hash'                                                    | 'Description_ru'                                                      | 'Description_tr'                                                      | 'Height' | 'Length' | 'Volume' | 'Weight' | 'Width' | 'LocalFullDescription' | 'ForeignFullDescription' | 'SourceNodeID' |
+		| 'e1cib/data/Catalog.ItemKeys?ref=b7af813f69b829cc11ee845dfb5fab2a' | 'False'        | 69     | 'e1cib/data/Catalog.Items?ref=b7af813f69b829cc11ee8456e7cc90de' | ''     | ''              | ''                 | 'B1 08 5D EE 72 A5 71 9B 77 93 FF 8F D2 ED AA BB' | ''          | ''                       | 'False'                       | ''            | 'ODS'                                                                 | 'ODS'                                                                 | 'ODS'                                                                 | 'ODS'                                                                 |          |          |          |          |         | ''                     | ''                       | ''             |
+		| 'e1cib/data/Catalog.ItemKeys?ref=b7af813f69b829cc11ee845dfb5fab2b' | 'False'        | 70     | 'e1cib/data/Catalog.Items?ref=b7af813f69b829cc11ee8456e7cc90de' | ''     | ''              | ''                 | 'FE AD 09 A5 81 8A A6 98 80 26 76 2F DB 8C 6E 2E' | ''          | ''                       | 'False'                       | ''            | 'PZU'                                                                 | 'PZU'                                                                 | 'PZU'                                                                 | 'PZU'                                                                 |          |          |          |          |         | ''                     | ''                       | ''             |
+
+	And I refill object tabular section "AddAttributes":
+		| 'Ref'                                                              | 'Property'                                                                                           | 'Value'                                                                                 | 'SearchLiteral' |
+		| 'e1cib/data/Catalog.ItemKeys?ref=b7af813f69b829cc11ee845dfb5fab2a' | 'e1cib/data/ChartOfCharacteristicTypes.AddAttributeAndProperty?ref=aa78120ed92fbced11eaf114c59ef032' | 'e1cib/data/Catalog.AddAttributeAndPropertyValues?ref=aa78120ed92fbced11eaf115bcc9c5eb' | ''              |
+		| 'e1cib/data/Catalog.ItemKeys?ref=b7af813f69b829cc11ee845dfb5fab2b' | 'e1cib/data/ChartOfCharacteristicTypes.AddAttributeAndProperty?ref=aa78120ed92fbced11eaf114c59ef032' | 'e1cib/data/Catalog.AddAttributeAndPropertyValues?ref=aa78120ed92fbced11eaf115bcc9c5ea' | ''              |
+
+	// Catalog.SerialLotNumbers
+
+	And I check or create catalog "SerialLotNumbers" objects:
+		| 'Ref'                                                                      | 'DeletionMark' | 'Code' | 'Description'      | 'SerialLotNumberOwner'                                             | 'Inactive' | 'StockBalanceDetail' | 'EachSerialLotNumberIsUnique' | 'BatchBalanceDetail' | 'CodeString'               | 'SourceNodeID' |
+		| 'e1cib/data/Catalog.SerialLotNumbers?ref=b7af813f69b829cc11ee8456e7cc90e1' | 'False'        | 57     | '9099009909999999' | 'e1cib/data/Catalog.ItemKeys?ref=b7af813f69b829cc11ee845dfb5fab2a' | 'False'    | 'True'               | 'False'                       | 'False'              | 'MLKLJEBN6897979786688566' | ''             |
+		| 'e1cib/data/Catalog.SerialLotNumbers?ref=b7af813f69b829cc11ee8456e7cc90e2' | 'False'        | 58     | '89000008999'      | 'e1cib/data/Catalog.ItemKeys?ref=b7af813f69b829cc11ee845dfb5fab2b' | 'False'    | 'True'               | 'False'                       | 'False'              | 'MLHHFYIGG9088979978079'   | ''             |
+
+	// InformationRegister.Barcodes
+
+	And I check or create information register "Barcodes" records:
+		| 'Barcode'          | 'ItemKey'                                                          | 'SerialLotNumber'                                                          | 'SourceOfOrigin' | 'Unit'                                                          | 'Presentation' |
+		| '9099009909999999' | 'e1cib/data/Catalog.ItemKeys?ref=b7af813f69b829cc11ee845dfb5fab2a' | 'e1cib/data/Catalog.SerialLotNumbers?ref=b7af813f69b829cc11ee8456e7cc90e1' | ''               | 'e1cib/data/Catalog.Units?ref=aa78120ed92fbced11eaf113ba6c1862' | ''             |
+		| '89000008999'      | 'e1cib/data/Catalog.ItemKeys?ref=b7af813f69b829cc11ee845dfb5fab2b' | 'e1cib/data/Catalog.SerialLotNumbers?ref=b7af813f69b829cc11ee8456e7cc90e2' | ''               | 'e1cib/data/Catalog.Units?ref=aa78120ed92fbced11eaf113ba6c1862' | ''             |
+
+
 
 Scenario: create Test unit
 

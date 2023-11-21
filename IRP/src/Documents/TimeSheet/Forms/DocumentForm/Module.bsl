@@ -95,9 +95,59 @@ Procedure CalendarOnPeriodOutput(Item, PeriodAppearance)
 			
 		Elsif CalendarDates.NotWorkedDays.Find(Appearance.Date) <> Undefined Then
 			Appearance.BackColor = WebColors.LightGray;
+		
+		Elsif CalendarDates.VacationDays.Find(Appearance.Date) <> Undefined Then
+			Appearance.BackColor = WebColors.LightBlue;
+		
+		Elsif CalendarDates.SickLeaveDays.Find(Appearance.Date) <> Undefined Then
+			Appearance.BackColor = WebColors.PeachPuff;
+		
 		EndIf;
 	EndDo;
 EndProcedure
+
+&AtServer
+Function GetCalendarDates()
+	Result = New Structure();
+	Result.Insert("Weekend"        , New Array()); // red
+	Result.Insert("FullWorkedDays" , New Array()); // green
+	Result.Insert("NotWorkedDays"  , New Array()); // gray
+	Result.Insert("VacationDays"   , New Array());  // blue
+	Result.Insert("SickLeaveDays"  , New Array());  // yellow
+	
+	For Each Row In Object.TimeSheetList Do
+		If Not Row.Visible Then
+			Continue;
+		EndIf;
+		
+		If Not ValueIsFilled(Row.CountDaysHours) 
+			And Not ValueIsFilled(Row.ActuallyDaysHours) Then
+			Result.Weekend.Add(Row.Date);
+		
+		
+		ElsIf ValueIsFilled(Row.ActuallyDaysHours)
+			And Not Row.IsVacation And Not Row.IsSickLeave Then	
+			Result.FullWorkedDays.Add(Row.Date);
+				
+		ElsIf ValueIsFilled(Row.CountDaysHours) 
+			And Not ValueIsFilled(Row.ActuallyDaysHours) Then
+			Result.NotWorkedDays.Add(Row.Date);
+			
+		ElsIf ValueIsFilled(Row.CountDaysHours) 
+			And ValueIsFilled(Row.ActuallyDaysHours)
+			And Row.IsVacation Then
+			Result.VacationDays.Add(Row.Date);
+			
+		ElsIf ValueIsFilled(Row.CountDaysHours) 
+			And ValueIsFilled(Row.ActuallyDaysHours)
+			And Row.IsSickLeave Then
+			Result.SickLeaveDays.Add(Row.Date);
+			
+		EndIf;
+	EndDo;	
+	
+	Return Result;
+EndFunction
 
 &AtClient
 Procedure CalendarSelection(Item, SelectedDate)
@@ -123,6 +173,8 @@ Procedure CalendarSelection(Item, SelectedDate)
 	OpeningParameters.Insert("Date"           , TimeSheetRows[0].Date);
 	OpeningParameters.Insert("CountDaysHours" , TimeSheetRows[0].CountDaysHours);
 	OpeningParameters.Insert("ActuallyDaysHours" , TimeSheetRows[0].ActuallyDaysHours);
+	OpeningParameters.Insert("IsVacation"        , TimeSheetRows[0].IsVacation);
+	OpeningParameters.Insert("IsSickLeave"       , TimeSheetRows[0].IsSickLeave);
 	
 	OpenForm("Document.TimeSheet.Form.EditCalendarDay", 
 		OpeningParameters, ThisObject, , , , 
@@ -148,31 +200,6 @@ Procedure PeriodOnChange(Item)
 	Object.EndDate = ThisObject.Period.EndDate;	
 	SetVisibilityAvailability(Object, ThisObject);
 EndProcedure
-
-&AtServer
-Function GetCalendarDates()
-	Result = New Structure();
-	Result.Insert("Weekend"        , New Array()); // red
-	Result.Insert("FullWorkedDays" , New Array()); // green
-	Result.Insert("NotWorkedDays"  , New Array()); // gray
-	
-	For Each Row In Object.TimeSheetList Do
-		If Not Row.Visible Then
-			Continue;
-		EndIf;
-		
-		If Not ValueIsFilled(Row.CountDaysHours) Then
-			Result.Weekend.Add(Row.Date);
-		ElsIf ValueIsFilled(Row.CountDaysHours) And Row.CountDaysHours = Row.ActuallyDaysHours Then
-			Result.FullWorkedDays.Add(Row.Date);
-		ElsIf ValueIsFilled(Row.CountDaysHours) And Not ValueIsFilled(Row.ActuallyDaysHours) Then
-			Result.NotWorkedDays.Add(Row.Date);
-		EndIf;
-	EndDo;	
-	
-	Return Result;
-EndFunction
-
 
 &AtClient
 Procedure _IdeHandler()
@@ -229,26 +256,11 @@ EndProcedure
 &AtClient
 Procedure TimeSheetListBeforeAddRow(Item, Cancel, Clone, Parent, IsFolder, Parameter)
 	Cancel = True;
-	
-//	DocTimeSheetClient.TimeSheetListBeforeAddRow(Object, ThisObject, Item, Cancel, Clone, Parent, IsFolder, Parameter);
-//	CurrentData = Items.Workers.CurrentData;
-//	If CurrentData = Undefined Then
-//		Return;
-//	EndIf;
-//	FillingValues = New Structure();
-//	FillingValues.Insert("Employee"         , CurrentData.Employee);
-//	FillingValues.Insert("EmployeeSchedule" ,CurrentData.EmployeeSchedule);
-//	FillingValues.Insert("Position"         , CurrentData.Position);
-//	
-//	ViewClient_V2.TimeSheetListAddFilledRow(Object, ThisObject, FillingValues);
-//	SetVisibleRowsTimeSheetList();
 EndProcedure
 
 &AtClient
 Procedure TimeSheetListBeforeDeleteRow(Item, Cancel)
 	Cancel = True;
-	
-//	DocTimeSheetClient.TimeSheetListBeforeDeleteRow(Object, ThisObject, Item, Cancel);
 EndProcedure
 
 &AtClient

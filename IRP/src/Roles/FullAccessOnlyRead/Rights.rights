@@ -16465,4 +16465,26 @@
 			<value>true</value>
 		</right>
 	</object>
+	<object>
+		<name>InformationRegister.T9540S_EmployeeVacations</name>
+		<right>
+			<name>Read</name>
+			<value>true</value>
+		</right>
+		<right>
+			<name>View</name>
+			<value>true</value>
+		</right>
+	</object>
+	<object>
+		<name>InformationRegister.T9550S_EmployeeSickLeave</name>
+		<right>
+			<name>Read</name>
+			<value>true</value>
+		</right>
+		<right>
+			<name>View</name>
+			<value>true</value>
+		</right>
+	</object>
 </Rights>

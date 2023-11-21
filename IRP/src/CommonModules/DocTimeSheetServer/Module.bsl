@@ -28,8 +28,6 @@ EndProcedure
 Procedure SetGroupItemsList(Object, Form)
 	AttributesArray = New Array();
 	AttributesArray.Add("Company");
-//	AttributesArray.Add("BeginDate");
-//	AttributesArray.Add("EndDate");
 	DocumentsServer.DeleteUnavailableTitleItemNames(AttributesArray);
 	For Each Attr In AttributesArray Do
 		Form.GroupItems.Add(Attr, ?(ValueIsFilled(Form.Items[Attr].Title), Form.Items[Attr].Title,
@@ -64,6 +62,8 @@ Function GetTimeSheet(Parameters) Export
 	ResultTable.Columns.Add("ProfitLossCenter");
 	ResultTable.Columns.Add("CountDaysHours");
 	ResultTable.Columns.Add("ActuallyDaysHours");
+	ResultTable.Columns.Add("IsVacation");
+	ResultTable.Columns.Add("IsSickLeave");
 	
 	ResultTable.Columns.Add("SumColumn");
 	
@@ -82,7 +82,7 @@ Function GetTimeSheet(Parameters) Export
 		BeginDate = EndOfDay(BeginDate) + 1;
 	EndDo;
 	
-	GroupColumn = "Date, Employee, EmployeeSchedule, Position, ProfitLossCenter, CountDaysHours, ActuallyDaysHours";
+	GroupColumn = "Date, Employee, EmployeeSchedule, Position, ProfitLossCenter, CountDaysHours, ActuallyDaysHours, IsVacation, IsSickLeave";
 	SumColumn = "SumColumn";
 	
 	ResultTable.Sort("Employee, Date");
@@ -119,12 +119,32 @@ Function GetStaffing(Company, Branch, _Day)
 	|	Staffing.Position AS Position,
 	|	Staffing.ProfitLossCenter AS ProfitLossCenter,
 	|	Staffing.Date AS Date,
-	|	T9530S_WorkDays.CountDaysHours AS CountDaysHours
+	|	ISNULL(T9530S_WorkDays.CountDaysHours, 0) AS CountDaysHours,
+	|	CASE
+	|		WHEN T9540S_EmployeeVacations.Date IS NULL
+	|			THEN FALSE
+	|		ELSE TRUE
+	|	END AS IsVacation,
+	|	CASE
+	|		WHEN T9550S_EmployeeSickLeave.Date IS NULL
+	|			THEN FALSE
+	|		ELSE TRUE
+	|	END AS IsSickLeave
 	|FROM
 	|	Staffing AS Staffing
 	|		LEFT JOIN InformationRegister.T9530S_WorkDays AS T9530S_WorkDays
 	|		ON Staffing.EmployeeSchedule = T9530S_WorkDays.EmployeeSchedule
-	|		AND Staffing.Date = T9530S_WorkDays.Date";
+	|		AND Staffing.Date = T9530S_WorkDays.Date
+	|		LEFT JOIN InformationRegister.T9540S_EmployeeVacations AS T9540S_EmployeeVacations
+	|		ON Staffing.Company = T9540S_EmployeeVacations.Company
+	|		AND Staffing.Branch = T9540S_EmployeeVacations.Branch
+	|		AND Staffing.Employee = T9540S_EmployeeVacations.Employee
+	|		AND Staffing.Date = T9540S_EmployeeVacations.Date
+	|		LEFT JOIN InformationRegister.T9550S_EmployeeSickLeave AS T9550S_EmployeeSickLeave
+	|		ON Staffing.Company = T9550S_EmployeeSickLeave.Company
+	|		AND Staffing.Branch = T9550S_EmployeeSickLeave.Branch
+	|		AND Staffing.Employee = T9550S_EmployeeSickLeave.Employee
+	|		AND Staffing.Date = T9550S_EmployeeSickLeave.Date";
 	Query.SetParameter("Company", Company);
 	Query.SetParameter("Branch" , Branch);
 	Query.SetParameter("_Day"   , _Day);
@@ -142,6 +162,8 @@ Function GetStaffing(Company, Branch, _Day)
 		NewRow.Insert("ProfitLossCenter"  , QuerySelection.ProfitLossCenter);
 		NewRow.Insert("CountDaysHours"    , QuerySelection.CountDaysHours);
 		NewRow.Insert("ActuallyDaysHours" , QuerySelection.CountDaysHours);
+		NewRow.Insert("IsVacation"        , QuerySelection.IsVacation);
+		NewRow.Insert("IsSickLeave"       , QuerySelection.IsSickLeave);
 		
 		ArrayOfResults.Add(NewRow);
 	EndDo;

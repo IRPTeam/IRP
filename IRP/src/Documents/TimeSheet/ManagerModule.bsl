@@ -108,7 +108,9 @@ Function TimeSheet()
 		|	TimeSheetTimeSheetList.Position,
 		|	TimeSheetTimeSheetList.ProfitLossCenter,
 		|	TimeSheetTimeSheetList.CountDaysHours,
-		|	TimeSheetTimeSheetList.ActuallyDaysHours
+		|	TimeSheetTimeSheetList.ActuallyDaysHours,
+		|	TimeSheetTimeSheetList.IsVacation,
+		|	TimeSheetTimeSheetList.IsSickLeave
 		|INTO TimeSheet
 		|FROM
 		|	Document.TimeSheet.TimeSheetList AS TimeSheetTimeSheetList
@@ -137,7 +139,9 @@ Function T9520S_TimeSheetInfo()
 		|	TimeSheet.Position,
 		|	TimeSheet.ProfitLossCenter,
 		|	TimeSheet.CountDaysHours,
-		|	TimeSheet.ActuallyDaysHours
+		|	TimeSheet.ActuallyDaysHours,
+		|	TimeSheet.IsVacation,
+		|	TimeSheet.IsSickLeave
 		|INTO T9520S_TimeSheetInfo
 		|FROM
 		|	TimeSheet AS TimeSheet

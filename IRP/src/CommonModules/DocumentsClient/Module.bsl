@@ -1085,6 +1085,7 @@ Function GetFormItemNames()
 				|PayrollListKey, 
 				|TimeSheetListKey, TimeSheetListVisible, TimeSheetListLineNumber, 
 				|TimeSheetListEmployee, TimeSheetListPosition, TimeSheetListEmployeeSchedule, TimeSheetListEmployeeSchedule,
+				|TimeSheetListIsVacation, TimeSheetListIsSickLeave,
 				|EmployeeCashAdvanceKey, AdvanceFromRetailCustomersKey, SalaryPaymentKey, EmployeeCashAdvanceIsFixedCurrency,
 				|ItemListPurchaseOrderKey, ItemListSalesOrderKey,
 				|AccrualListKey, DeductionListKey, CashAdvanceDeductionListKey,

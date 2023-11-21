@@ -22,4 +22,6 @@
   <content>Document.AdditionalDeduction</content>
   <content>Catalog.EmployeeSchedule</content>
   <content>Document.EmployeeVacation</content>
+  <content>InformationRegister.T9550S_EmployeeSickLeave</content>
+  <content>InformationRegister.T9540S_EmployeeVacations</content>
 </mdclass:FunctionalOption>

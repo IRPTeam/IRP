@@ -1386,6 +1386,7 @@ Function Strings(Lang) Export
 
 	Strings.Insert("Salary_Err_001",   NStr("en = 'Wrong period'", Lang));
 	Strings.Insert("Salary_Err_002",   NStr("en = 'Employee schedule not selected'", Lang));
+	Strings.Insert("Salary_Err_003",   NStr("en = 'Begin Date less than End Date'", Lang));
 	
 	Strings.Insert("Salary_WeekDays_1",   NStr("en = 'Monday'", Lang));
 	Strings.Insert("Salary_WeekDays_2",   NStr("en = 'Tuesday'", Lang));

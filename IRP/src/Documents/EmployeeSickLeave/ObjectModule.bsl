@@ -29,5 +29,14 @@ Procedure Filling(FillingData, FillingText, StandardProcessing)
 EndProcedure
 
 Procedure FillCheckProcessing(Cancel, CheckedAttributes)
-	Return;
+	For Each Row In ThisObject.EmployeeList Do
+		If ValueIsFilled(Row.BeginDate) And ValueIsFilled(Row.EndDate)
+			And Row.BeginDate > Row.EndDate Then
+			
+			CommonFunctionsClientServer.ShowUsersMessage(R().Salary_Err_003, 
+				"EmployeeList[" + (Row.LineNumber - 1) + "].BeginDate", ThisObject);
+			
+			Cancel = True;
+		EndIf;
+	EndDo;
 EndProcedure

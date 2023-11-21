@@ -56,6 +56,7 @@
   <defaultListForm>Document.EmployeeVacation.Form.ListForm</defaultListForm>
   <defaultChoiceForm>Document.EmployeeVacation.Form.ChoiceForm</defaultChoiceForm>
   <realTimePosting>Deny</realTimePosting>
+  <registerRecords>InformationRegister.T9540S_EmployeeVacations</registerRecords>
   <postInPrivilegedMode>true</postInPrivilegedMode>
   <unpostInPrivilegedMode>true</unpostInPrivilegedMode>
   <choiceHistoryOnInput>DontUse</choiceHistoryOnInput>
@@ -112,6 +113,74 @@
     <usePurposes>PersonalComputer</usePurposes>
     <usePurposes>MobileDevice</usePurposes>
   </forms>
+  <tabularSections uuid="6ff5e981-4062-4489-8214-b22d0536c6a1">
+    <producedTypes>
+      <objectType typeId="f298265b-a7b6-474d-8a8c-70a0e70ec1b6" valueTypeId="bd8e31ac-5e11-4917-9fe6-0b16f0e71fe9"/>
+      <rowType typeId="23cf870f-c167-4e4d-9ba5-5bdad39a6f6d" valueTypeId="f549bab6-f613-46cd-84dd-897d86962338"/>
+    </producedTypes>
+    <name>EmployeeList</name>
+    <synonym>
+      <key>en</key>
+      <value>Employee list</value>
+    </synonym>
+    <attributes uuid="6c55f633-4877-4220-a91c-aa0b80af52a1">
+      <name>Employee</name>
+      <synonym>
+        <key>en</key>
+        <value>Employee</value>
+      </synonym>
+      <type>
+        <types>CatalogRef.Partners</types>
+      </type>
+      <minValue xsi:type="core:UndefinedValue"/>
+      <maxValue xsi:type="core:UndefinedValue"/>
+      <fillChecking>ShowError</fillChecking>
+      <choiceParameters>
+        <name>Filter.Employee</name>
+        <value xsi:type="core:BooleanValue">
+          <value>true</value>
+        </value>
+      </choiceParameters>
+      <dataHistory>Use</dataHistory>
+      <fullTextSearch>Use</fullTextSearch>
+    </attributes>
+    <attributes uuid="0f06a6e6-8b6e-4123-b42e-da7778c26367">
+      <name>BeginDate</name>
+      <synonym>
+        <key>en</key>
+        <value>Begin date</value>
+      </synonym>
+      <type>
+        <types>Date</types>
+        <dateQualifiers>
+          <dateFractions>Date</dateFractions>
+        </dateQualifiers>
+      </type>
+      <minValue xsi:type="core:UndefinedValue"/>
+      <maxValue xsi:type="core:UndefinedValue"/>
+      <fillChecking>ShowError</fillChecking>
+      <dataHistory>Use</dataHistory>
+      <fullTextSearch>Use</fullTextSearch>
+    </attributes>
+    <attributes uuid="162804eb-e5bb-48d8-8e69-9daef05b421b">
+      <name>EndDate</name>
+      <synonym>
+        <key>en</key>
+        <value>End date</value>
+      </synonym>
+      <type>
+        <types>Date</types>
+        <dateQualifiers>
+          <dateFractions>Date</dateFractions>
+        </dateQualifiers>
+      </type>
+      <minValue xsi:type="core:UndefinedValue"/>
+      <maxValue xsi:type="core:UndefinedValue"/>
+      <fillChecking>ShowError</fillChecking>
+      <dataHistory>Use</dataHistory>
+      <fullTextSearch>Use</fullTextSearch>
+    </attributes>
+  </tabularSections>
   <tabularSections uuid="0ec660d1-4fc2-41e2-908f-27df1ad30bcb">
     <producedTypes>
       <objectType typeId="e20c9e11-aaa9-41dd-a838-93c15eadc7de" valueTypeId="5fc04893-7041-465f-8641-e39efbce3ecd"/>

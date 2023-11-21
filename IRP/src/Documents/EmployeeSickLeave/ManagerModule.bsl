@@ -12,6 +12,57 @@ Function PostingGetDocumentDataTables(Ref, Cancel, PostingMode, Parameters, AddI
 	Tables = New Structure;
 	QueryArray = GetQueryTextsSecondaryTables();
 	Parameters.Insert("QueryParameters", GetAdditionalQueryParameters(Ref));
+	
+	Query = New Query();
+	Query.TempTablesManager = Parameters.TempTablesManager;
+	Query.Text = 
+	"SELECT
+	|	MIN(EmployeeList.BeginDate) AS BeginDate,
+	|	MAX(EmployeeList.EndDate) AS EndDate,
+	|	DATETIME(1, 1, 1) AS Date
+	|FROM
+	|	Document.EmployeeSickLeave.EmployeeList AS EmployeeList
+	|WHERE
+	|	EmployeeList.Ref = &Ref";
+	Query.SetParameter("Ref", Ref);
+	QueryResult = Query.Execute();
+	QueryTable = QueryResult.Unload();
+	DateTable = QueryTable.CopyColumns("Date");
+	If QueryTable.Count() Then
+		_CurrentDate = BegOfDay(QueryTable[0].BeginDate);
+		While _CurrentDate <= BegOfDay(QueryTable[0].EndDate) Do
+			DateTable.Add().Date = _CurrentDate;
+			_CurrentDate = BegOfDay(EndOfDay(_CurrentDate) + 1);
+		EndDo;
+	EndIf;
+	Query.SetParameter("DateTable", DateTable);
+	
+	Query.Text = 
+	"SELECT
+	|	DateTable.Date
+	|INTO DateTable
+	|FROM
+	|	&DateTable AS DateTable
+	|;
+	|
+	|////////////////////////////////////////////////////////////////////////////////
+	|SELECT
+	|	EmployeeList.Ref.Date AS Period,
+	|	DateTable.Date AS Date,
+	|	EmployeeList.Employee AS Employee,
+	|	EmployeeList.Ref.Company AS Company,
+	|	EmployeeList.Ref.Branch AS Branch
+	|INTO EmployeeSickLeaves
+	|FROM
+	|	Document.EmployeeSickLeave.EmployeeList AS EmployeeList
+	|		LEFT JOIN DateTable AS DateTable
+	|		ON DateTable.Date >= EmployeeList.BeginDate
+	|		AND DateTable.Date <= EmployeeList.EndDate
+	|		AND EmployeeList.Ref = &Ref
+	|WHERE
+	|	EmployeeList.Ref = &Ref";
+	Query.Execute();
+	
 	PostingServer.ExecuteQuery(Ref, QueryArray, Parameters);
 	Return Tables;
 EndFunction
@@ -95,6 +146,7 @@ EndFunction
 
 Function GetQueryTextsMasterTables()
 	QueryArray = New Array;
+	QueryArray.Add(T9550S_EmployeeSickLeave());
 	Return QueryArray;
 EndFunction
 
@@ -106,6 +158,20 @@ EndFunction
 
 #Region Posting_MainTables
 
+Function T9550S_EmployeeSickLeave()
+	Return
+		"SELECT
+		|	EmployeeSickLeaves.Period,
+		|	EmployeeSickLeaves.Date,
+		|	EmployeeSickLeaves.Company,
+		|	EmployeeSickLeaves.Branch,
+		|	EmployeeSickLeaves.Employee
+		|INTO T9550S_EmployeeSickLeave
+		|FROM
+		|	EmployeeSickLeaves AS EmployeeSickLeaves
+		|WHERE
+		|	TRUE";	
+EndFunction
 
 #EndRegion
 

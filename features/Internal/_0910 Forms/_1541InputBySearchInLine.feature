@@ -75,8 +75,6 @@ Scenario: _0154000 preparation
 		When update ItemKeys
 	* Data for salary
 		When Create catalog EmployeePositions objects
-		When Create information register T9510S_Staffing records
-		When Create information register T9530S_WorkDays records
 		When Create catalog AccrualAndDeductionTypes objects
 		When Create information register Taxes records (VAT)
 

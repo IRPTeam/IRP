@@ -1,4 +1,4 @@
-#language: en
+﻿#language: en
 @tree
 @Positive
 @Salary
@@ -62,320 +62,284 @@ Scenario: _097700 preparation (Сheck payroll)
 		When Create catalog CashAccounts objects (POS)
 	* Data for salary
 		When Create catalog EmployeePositions objects
-		When Create information register T9510S_Staffing records
-		When Create information register T9530S_WorkDays records
 		When Create catalog AccrualAndDeductionTypes objects
 		When Create information register T9500S_AccrualAndDeductionValues records
 		When Create information register Taxes records (VAT)
+		When Create catalog EmployeeSchedule objects
+		When Create document EmployeeHiring objects
+		And I execute 1C:Enterprise script at server
+			| "Documents.EmployeeHiring.FindByNumber(2).GetObject().Write(DocumentWriteMode.Write);"   |
+			| "Documents.EmployeeHiring.FindByNumber(3).GetObject().Write(DocumentWriteMode.Posting);" |
+			| "Documents.EmployeeHiring.FindByNumber(4).GetObject().Write(DocumentWriteMode.Posting);" |
 	
+Scenario: _097701 check preparation
+	When check preparation
 
 
-Scenario: _097705 create accrual and deduction values
+Scenario: _097704 check Employee hiring
 	And I close all client application windows
-	* Open new form element accrual and deduction values
-		Given I open hyperlink "e1cib/list/InformationRegister.T9500S_AccrualAndDeductionValues"
+	* Create EmployeeHiring (David Romanov)
+		Given I open hyperlink "e1cib/list/Document.EmployeeHiring"
 		And I click the button named "FormCreate"
-	* Filling details
-		And I click Select button of "Employee or position" field
-		Then "Select data type" window is opened
-		And I go to line in "" table
-			| ''           |
-			| 'Partner'    |
-		And I select current line in "" table
-		And I go to line in "List" table
-			| 'Description'    |
-			| 'Arina Brown'    |
-		And I select current line in "List" table
-		And I click Select button of "Accual or deduction type" field
-		And I go to line in "List" table
-			| 'Description'    |
-			| 'Salary'         |
-		And I select current line in "List" table
-		And I input "1 000,00" text in the field named "Value"
-		And I click "Save and close" button
-	* Check creation
+	* Filling main info
+		And I select from the drop-down list named "Company" by "Main Company" string
+		And I move to the next attribute
+		And I select from the drop-down list named "Employee" by "David Romanov" string
+		And I move to the next attribute
+		And I select from the drop-down list named "Position" by "Manager" string
+		And I move to the next attribute
+		And I select from "Employee schedule" drop-down list by "5 working days / 2 days off (day)" string
+		And I select from "Profit loss center" drop-down list by "shop 01" string
+		And I move to "Other" tab
+		And I move to "More" tab
+		And I select from the drop-down list named "Branch" by "shop 01" string
+		And I move to "Employee hiring" tab
+		And I input "01.11.2023 00:00:00" text in the field named "Date"	
+		And I click the button named "FormPostAndClose"
+	* Check
 		And "List" table contains lines
-			| 'Employee or position'   | 'Value'       |
-			| 'Arina Brown'            | '1 000,00'    |
-		And I close all client application windows
+			| 'Date'                | 'Company'      | 'Employee'      | 'Position' | 'Branch'  |
+			| '01.11.2023 12:00:00' | 'Main Company' | 'David Romanov' | 'Manager'  | 'Shop 01' |
 		
-
-Scenario: _097706 create staffing
+				
+Scenario: _097705 check Employee firings
 	And I close all client application windows
-	* Open new form element staffing
-		Given I open hyperlink "e1cib/list/InformationRegister.T9510S_Staffing"
+	* Create EmployeeFiring (Arina Brown)
+		Given I open hyperlink "e1cib/list/Document.EmployeeFiring"
 		And I click the button named "FormCreate"
-	* Filling details
-		And I input "01.01.2021" text in the field named "Period"
+	* Filling main info
+		And I select from the drop-down list named "Company" by "Main Company" string
+		And I move to the next attribute
+		And I select from the drop-down list named "Employee" by "Arina Brown" string
+		Then the form attribute named "Position" became equal to "Sales person"
+		Then the form attribute named "EmployeeSchedule" became equal to "5 working days / 2 days off (hours)"
+		Then the form attribute named "ProfitLossCenter" became equal to "Shop 01"
+		Then the form attribute named "Branch" became equal to "Shop 01"								
+		And I move to "Other" tab
+		And I move to "More" tab
+		And I input "20.11.2023 00:00:00" text in the field named "Date"	
+		And I click "Post" button	
+		And I save the value of "Number" field as "NumberEmployeeFiring"
+		And I click "Post and close" button
+	* Check
+		And "List" table contains lines
+			| 'Number'                 |
+			| '$NumberEmployeeFiring$' |
+				
+Scenario: _097706 check Employee sick leave
+	And I close all client application windows
+	* Create EmployeeSickLeave (Arina Brown, David Romanov)
+		Given I open hyperlink "e1cib/list/Document.EmployeeSickLeave"
+		And I click the button named "FormCreate"
+	* Filling main info
+		And I select from the drop-down list named "Company" by "Main Company" string
+		And in the table "EmployeeList" I click the button named "EmployeeListAdd"
+		And I click choice button of "Employee" attribute in "EmployeeList" table
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Arina Brown' |
+		And I select current line in "List" table
+		And I activate "Begin date" field in "EmployeeList" table
+		And I input "01.11.2023" text in "Begin date" field of "EmployeeList" table
+		And I activate "End date" field in "EmployeeList" table
+		And I input "05.11.2023" text in "End date" field of "EmployeeList" table
+		And I finish line editing in "EmployeeList" table
+		And in the table "EmployeeList" I click the button named "EmployeeListAdd"
+		And I click choice button of "Employee" attribute in "EmployeeList" table
+		And I go to line in "List" table
+			| 'Description'   |
+			| 'David Romanov' |
+		And I select current line in "List" table
+		And I activate "Begin date" field in "EmployeeList" table
+		And I input "04.11.2023" text in "Begin date" field of "EmployeeList" table
+		And I activate "End date" field in "EmployeeList" table
+		And I input "08.11.2023" text in "End date" field of "EmployeeList" table
+		And I finish line editing in "EmployeeList" table
+		And I move to "Other" tab
+		And I move to "More" tab
+		And I select from the drop-down list named "Branch" by "shop 01" string
+		And I move to "Employee sick leave" tab
+		And I click "Post" button	
+		And I save the value of "Number" field as "NumberEmployeeSickLeave"
+		And I click "Post and close" button
+	* Check
+		And "List" table contains lines
+			| 'Number'                    |
+			| '$NumberEmployeeSickLeave$' |
+
+Scenario: _097707 check Employee vacation
+	And I close all client application windows
+	* Create EmployeeVacation (Arina Brown, Anna Petrova)
+		Given I open hyperlink "e1cib/list/Document.EmployeeVacation"
+		And I click the button named "FormCreate"
+	* Filling main info
+		And I select from the drop-down list named "Company" by "Main Company" string
+		And in the table "EmployeeList" I click the button named "EmployeeListAdd"
+		And I click choice button of "Employee" attribute in "EmployeeList" table
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Arina Brown' |
+		And I select current line in "List" table
+		And I activate "Begin date" field in "EmployeeList" table
+		And I input "06.11.2023" text in "Begin date" field of "EmployeeList" table
+		And I activate "End date" field in "EmployeeList" table
+		And I input "15.11.2023" text in "End date" field of "EmployeeList" table
+		And I finish line editing in "EmployeeList" table
+		And in the table "EmployeeList" I click the button named "EmployeeListAdd"
+		And I click choice button of "Employee" attribute in "EmployeeList" table
+		And I go to line in "List" table
+			| 'Description'   |
+			| 'Anna Petrova' |
+		And I select current line in "List" table
+		And I activate "Begin date" field in "EmployeeList" table
+		And I input "04.11.2023" text in "Begin date" field of "EmployeeList" table
+		And I activate "End date" field in "EmployeeList" table
+		And I input "08.11.2023" text in "End date" field of "EmployeeList" table
+		And I finish line editing in "EmployeeList" table
+		And I move to "Other" tab
+		And I move to "More" tab
+		And I select from the drop-down list named "Branch" by "shop 01" string
+		And I click "Post" button	
+		And I save the value of "Number" field as "NumberEmployeeVacation"
+		And I click "Post and close" button
+	* Check
+		And "List" table contains lines
+			| 'Number'                   |
+			| '$NumberEmployeeVacation$' |
+
+Scenario: _097708 check Employee transfer
+	And I close all client application windows
+	* Create EmployeeTransfer (Arina Brown)
+		Given I open hyperlink "e1cib/list/Document.EmployeeTransfer"
+		And I click the button named "FormCreate" 
+	* Filling main info
+		And I select from the drop-down list named "Company" by "Main Company" string
 		And I click Choice button of the field named "Employee"
 		And I go to line in "List" table
-			| 'Description'    |
-			| 'Arina Brown'    |
+			| 'Description' |
+			| 'Arina Brown' |
 		And I select current line in "List" table
-		And I click Choice button of the field named "Company"
+		And I input "17.11.2023" text in "End of date" field
+		And I move to "Other" tab
+		And I move to "More" tab
+		And I input "16.11.2023 00:00:00" text in the field named "Date"
+		And I move to "Employee transfer" tab
+		And I click Select button of "To position" field
 		And I go to line in "List" table
-			| 'Description'       |
-			| 'Second Company'    |
+			| 'Description'  |
+			| 'Sales person' |
 		And I select current line in "List" table
-		And I click Choice button of the field named "Branch"
+		And I click Select button of "To employee schedule" field
 		And I go to line in "List" table
-			| 'Description'    |
-			| 'Shop 01'        |
+			| 'Description'             |
+			| '5 working days / 2 days off (day)' |
 		And I select current line in "List" table
-		And I click Choice button of the field named "Position"
+		And I click Select button of "To branch" field
 		And I go to line in "List" table
-			| 'Description'    |
-			| 'Accountant'     |
+			| 'Description'             |
+			| 'Distribution department' |
 		And I select current line in "List" table
-		And I click "Save and close" button		
-	* Check creation
+		And I click Select button of "To profit loss center" field
+		And I go to line in "List" table
+			| 'Description'             |
+			| 'Distribution department' |
+		And I select current line in "List" table
+	* Check filling
+		Then the form attribute named "Author" became equal to "en description is empty"
+		Then the form attribute named "Branch" became equal to "Shop 01"
+		Then the form attribute named "Company" became equal to "Main Company"
+		Then the form attribute named "Date" became equal to "16.11.2023 00:00:00"
+		Then the form attribute named "Employee" became equal to "Arina Brown"
+		And the editing text of form attribute named "EndOfDate" became equal to "17.11.2023"
+		Then the form attribute named "FromEmployeeSchedule" became equal to "5 working days / 2 days off (hours)"
+		Then the form attribute named "FromPosition" became equal to "Sales person"
+		Then the form attribute named "FromProfitLossCenter" became equal to "Shop 01"
+		Then the form attribute named "ToBranch" became equal to "Distribution department"
+		Then the form attribute named "ToEmployeeSchedule" became equal to "5 working days / 2 days off (day)"
+		Then the form attribute named "ToPosition" became equal to "Sales person"
+		Then the form attribute named "ToProfitLossCenter" became equal to "Distribution department"
+		And I click "Post" button	
+		And I save the value of "Number" field as "NumberEmployeeTransfer"
+		And I click "Post and close" button
+	* Check
 		And "List" table contains lines
-			| 'Employee'      | 'Company'           |
-			| 'Arina Brown'   | 'Second Company'    |
-		And I close all client application windows
-		
+			| 'Number'                   |
+			| '$NumberEmployeeTransfer$' |
+			
+				
 
-Scenario: _097707 create work days
+
+
+Scenario: _097709 create Accrual and deduction values records (T9500)
 	And I close all client application windows
-	* Open new form work days
-		Given I open hyperlink "e1cib/list/InformationRegister.T9530S_WorkDays"
+	* Open  Accrual and deduction values records register
+		Given I open hyperlink "e1cib/list/InformationRegister.T9500S_AccrualAndDeductionValues"
+		* For partner
+			And I click the button named "FormCreate"
+			And I click Select button of "Employee or position" field
+			Then "Select data type" window is opened
+			And I go to line in "" table
+				| ''           |
+				| 'Partner'    |
+			And I select current line in "" table
+			And I go to line in "List" table
+				| 'Description'    |
+				| 'Arina Brown'    |
+			And I select current line in "List" table
+			And I input "01.10.2023" text in the field named "Period"			
+			And I click Select button of "Accual or deduction type" field
+			And I go to line in "List" table
+				| 'Description'    |
+				| 'Salary'         |
+			And I select current line in "List" table
+			And I input "1 000,00" text in the field named "Value"
+			And I click "Save and close" button
+		* Check creation
+			And "List" table contains lines
+				| 'Employee or position'   | 'Value'       |
+				| 'Arina Brown'            | '1 000,00'    |
+		* For position
+			And I click the button named "FormCreate"
+			And I click Select button of "Employee or position" field
+			Then "Select data type" window is opened
+			And I go to line in "" table
+				| ''                         |
+				| 'Expense and revenue type' |
+			And I select current line in "" table
+			And I go to line in "List" table
+				| 'Description'    |
+				| 'Accountant'     |
+			And I select current line in "List" table
+			And I click Select button of "Accual or deduction type" field
+			And I go to line in "List" table
+				| 'Description'    |
+				| 'Salary'         |
+			And I select current line in "List" table
+			And I input "12 000,00" text in the field named "Value"
+			And I click "Save and close" button
+		* Check creation
+			And "List" table contains lines
+				| 'Employee or position'   | 'Value'        |
+				| 'Accountant'             | '12 000,00'    |
+			And I close all client application windows
+
+Scenario: _097710 create Employee position
+	And I close all client application windows
+	* Create Employee position
+		Given I open hyperlink "e1cib/list/Catalog.EmployeePositions"
 		And I click the button named "FormCreate"
-	* Filling details
-		And I input "01.01.2022" text in "Begin date" field
-		And I input "31.01.2022" text in "End date" field
-		And I click Select button of "Accrual and deduction type" field
-		And I go to line in "List" table
-			| 'Description'    |
-			| 'Salary'         |
-		And I select current line in "List" table
-		And I input "20" text in "Count days" field
+		And I click Open button of "ENG" field
+		And I input "Director" text in "ENG" field
+		And I input "Director TR" text in "TR" field
+		And I click "Ok" button
 		And I click "Save and close" button
-	* Check creation
-		And "List" table contains lines
-			| 'Begin date'   | 'End date'     | 'Accrual and deduction type'   | 'Count days'    |
-			| '01.01.2022'   | '31.01.2022'   | 'Salary'                       | '20'            |
-		And I close all client application windows
-					
-Scenario: _097710 create time sheet
-	And I close all client application windows
-	* Open new time sheet
-		Given I open hyperlink "e1cib/list/Document.TimeSheet"
-		And I click the button named "FormCreate"
-	* Filling in the details
-		And I click Choice button of the field named "Company"
-		And I go to line in "List" table
-			| 'Description'     |
-			| 'Main Company'    |
-		And I select current line in "List" table
-		And I click Choice button of the field named "Branch"
-		And I go to line in "List" table
-			| 'Description'     |
-			| 'Front office'    |
-		And I select current line in "List" table
-		And I input "01.01.2023" text in the field named "BeginDate"
-		And I input "31.01.2023" text in the field named "EndDate"
-		And in the table "TimeSheetList" I click "Fill time sheet" button
-	* Check filling
-		And "Workers" table became equal
-			| 'Employee'          | 'Begin date'   | 'End date'     | 'Position'       | 'Profit loss center'         |
-			| 'Alexander Orlov'   | '01.01.2023'   | '19.01.2023'   | 'Manager'        | 'Accountants office'         |
-			| 'Anna Petrova'      | '05.01.2023'   | '31.01.2023'   | 'Manager'        | 'Distribution department'    |
-			| 'David Romanov'     | '01.01.2023'   | '31.01.2023'   | 'Sales person'   | 'Accountants office'         |
-		And I go to line in "Workers" table
-			| 'Begin date'   | 'Employee'          | 'End date'     | 'Position'    |
-			| '01.01.2023'   | 'Alexander Orlov'   | '19.01.2023'   | 'Manager'     |
-	* Select another period
-		And I input "01.01.2023" text in the field named "BeginDate"
-		And I input "04.01.2023" text in the field named "EndDate"
-		And in the table "TimeSheetList" I click "Fill time sheet" button
-		And I click "OK" button		
-		And "Workers" table became equal
-			| 'Employee'          | 'Begin date'   | 'End date'     | 'Position'       | 'Profit loss center'    |
-			| 'Alexander Orlov'   | '01.01.2023'   | '04.01.2023'   | 'Manager'        | 'Accountants office'    |
-			| 'David Romanov'     | '01.01.2023'   | '04.01.2023'   | 'Sales person'   | 'Accountants office'    |
-	* Filling accrual and deduction type
-		And I finish line editing in "TimeSheetList" table
-		And I go to line in "Workers" table
-			| 'Begin date'   | 'Employee'          | 'End date'     | 'Position'    |
-			| '01.01.2023'   | 'Alexander Orlov'   | '04.01.2023'   | 'Manager'     |
-		And I activate field named "WorkersBeginDate" in "Workers" table
-		And I go to line in "TimeSheetList" table
-			| 'Date'          |
-			| '02.01.2023'    |
-		And I select current line in "TimeSheetList" table
-		And I click choice button of "Accrual and deduction type" attribute in "TimeSheetList" table
-		And I go to line in "List" table
-			| 'Description'    |
-			| 'Salary'         |
-		And I select current line in "List" table
-		And I finish line editing in "TimeSheetList" table
-		And I go to line in "TimeSheetList" table
-			| 'Date'          |
-			| '03.01.2023'    |
-		And I select current line in "TimeSheetList" table
-		And I click choice button of "Accrual and deduction type" attribute in "TimeSheetList" table
-		And I go to line in "List" table
-			| 'Description'    |
-			| 'Salary'         |
-		And I select current line in "List" table
-		And I finish line editing in "TimeSheetList" table
-		And I go to line in "TimeSheetList" table
-			| 'Date'          |
-			| '04.01.2023'    |
-		And I select current line in "TimeSheetList" table
-		And I click choice button of "Accrual and deduction type" attribute in "TimeSheetList" table
-		And I go to line in "List" table
-			| 'Description'    |
-			| 'Salary'         |
-		And I select current line in "List" table
-		And I finish line editing in "TimeSheetList" table
-		And I go to line in "Workers" table
-			| 'Begin date'   | 'Employee'        | 'End date'     | 'Position'        |
-			| '01.01.2023'   | 'David Romanov'   | '04.01.2023'   | 'Sales person'    |
-		And I select current line in "TimeSheetList" table
-		And I click choice button of "Accrual and deduction type" attribute in "TimeSheetList" table
-		And I go to line in "List" table
-			| 'Description'    |
-			| 'Salary'         |
-		And I select current line in "List" table
-		And I finish line editing in "TimeSheetList" table
-		And I go to line in "TimeSheetList" table
-			| 'Date'          |
-			| '03.01.2023'    |
-		And I select current line in "TimeSheetList" table
-		And I click choice button of "Accrual and deduction type" attribute in "TimeSheetList" table
-		And I go to line in "List" table
-			| 'Description'    |
-			| 'Salary'         |
-		And I select current line in "List" table
-		And I finish line editing in "TimeSheetList" table
-	* Check creation
-		And I click "Post" button
-		And I delete "$$NumberTS050003$$" variable
-		And I save the value of "Number" field as "$$NumberTS050003$$"
-		And I click "Post and close" button
-	* Check creation
-		And "List" table contains lines
-			| 'Number'                |
-			| '$$NumberTS050003$$'    |
-
-					
-Scenario: _097712 check payroll
-	And I close all client application windows
-	* Open new time sheet
-		Given I open hyperlink "e1cib/list/Document.Payroll"
-		And I click the button named "FormCreate"
-	* Filling in the details
-		And I click Choice button of the field named "Company"
-		And I go to line in "List" table
-			| 'Description'     |
-			| 'Main Company'    |
-		And I select current line in "List" table
-		And I click Choice button of the field named "Branch"
-		And I go to line in "List" table
-			| 'Description'     |
-			| 'Front office'    |
-		And I select current line in "List" table
-		And I click Choice button of the field named "Currency"
-		And I go to line in "List" table
-			| 'Code'    |
-			| 'TRY'     |
-		And I select current line in "List" table
-		And I click Choice button of the field named "PaymentPeriod"
-		And I go to line in "List" table
-			| 'Description'            |
-			| 'Third (only salary)'    |
-		And I select current line in "List" table
-		And the editing text of form attribute named "BeginDate" became equal to "01.02.2023"
-		And the editing text of form attribute named "EndDate" became equal to "28.02.2023"
-		And in the table "AccrualList" I click "Fill accrual" button
-		Then the number of "AccrualList" table lines is "равно" "0"
-		And I input "01.01.2023" text in the field named "BeginDate"
-		And I input "04.01.2023" text in the field named "EndDate"
-		And in the table "AccrualList" I click "Fill accrual" button
-	* Check filling
-		And "AccrualList" table became equal
-			| '#'   | 'Amount'     | 'Employee'          | 'Position'       | 'Accrual type'   | 'Expense type'   | 'Profit loss center'    |
-			| '1'   | '1 500,00'   | 'Alexander Orlov'   | 'Manager'        | 'Salary'         | 'Expense'        | 'Accountants office'    |
-			| '2'   | ''           | 'David Romanov'     | 'Sales person'   | 'Salary'         | 'Expense'        | 'Accountants office'    |
-	* Fill salary for Sales person
-		And I go to line in "AccrualList" table
-			| 'Employee'         |
-			| 'David Romanov'    |
-		And I activate "Amount" field in "AccrualList" table
-		And I select current line in "AccrualList" table
-		And I input "800,00" text in "Amount" field of "AccrualList" table
-		And I finish line editing in "AccrualList" table
-		And "AccrualList" table became equal
-			| '#'   | 'Amount'     | 'Employee'          | 'Position'       | 'Accrual type'   | 'Expense type'   | 'Profit loss center'    |
-			| '1'   | '1 500,00'   | 'Alexander Orlov'   | 'Manager'        | 'Salary'         | 'Expense'        | 'Accountants office'    |
-			| '2'   | '800,00'     | 'David Romanov'     | 'Sales person'   | 'Salary'         | 'Expense'        | 'Accountants office'    |
-		And I click "Post" button
-	* Fill deductions
-		And I move to "Deduction" tab
-		And in the table "DeductionList" I click "Fill deduction" button
-		And in the table "DeductionList" I click "Add" button
-		And I activate "Employee" field in "DeductionList" table
-		And I select current line in "DeductionList" table
-		And I click choice button of "Employee" attribute in "DeductionList" table
-		And I go to line in "List" table
-			| 'Description'      |
-			| 'David Romanov'    |
-		And I select current line in "List" table
-		And I activate "Position" field in "DeductionList" table
-		And I select "sales" from "Position" drop-down list by string in "DeductionList" table
-		And I activate "Deduction type" field in "DeductionList" table
-		And I select "Deduction" from "Deduction type" drop-down list by string in "DeductionList" table
-		And I activate "Is revenue" field in "DeductionList" table
-		And I set "Is revenue" checkbox in "DeductionList" table
-		And I finish line editing in "DeductionList" table
-		And I activate "Profit loss center" field in "DeductionList" table
-		And I select current line in "DeductionList" table
-		And I select "Logistics department" from "Profit loss center" drop-down list by string in "DeductionList" table
-		And I activate "Amount" field in "DeductionList" table
-		And I input "50,00" text in "Amount" field of "DeductionList" table
-		And I finish line editing in "DeductionList" table
-		And in the table "DeductionList" I click "Add" button
-		And I activate "Employee" field in "DeductionList" table
-		And I select "ale" from "Employee" drop-down list by string in "DeductionList" table
-		And I activate "Position" field in "DeductionList" table
-		And I select "Manager" from "Position" drop-down list by string in "DeductionList" table
-		And I activate "Deduction type" field in "DeductionList" table
-		And I select "Deduction" from "Deduction type" drop-down list by string in "DeductionList" table
-		And I activate "Profit loss center" field in "DeductionList" table
-		And I select "Accountants office" from "Profit loss center" drop-down list by string in "DeductionList" table
-		And I activate "Amount" field in "DeductionList" table
-		And I input "30,00" text in "Amount" field of "DeductionList" table
-		And I finish line editing in "DeductionList" table
 	* Check
-		And "DeductionList" table became equal
-			| '#'   | 'Amount'   | 'Employee'          | 'Position'       | 'Deduction type'   | 'Profit loss center'     | 'Expense type'   | 'Is revenue'    |
-			| '1'   | '50,00'    | 'David Romanov'     | 'Sales person'   | 'Deduction'        | 'Logistics department'   | 'Expense'        | 'Yes'           |
-			| '2'   | '30,00'    | 'Alexander Orlov'   | 'Manager'        | 'Deduction'        | 'Accountants office'     | 'Expense'        | 'No'            |
-	* Fill cash advance deductions
-		And in the table "CashAdvanceDeductionList" I click "Fill cash advance deduction" button
-		And in the table "CashAdvanceDeductionList" I click "Add" button
-		And I activate "Employee" field in "CashAdvanceDeductionList" table
-		And I select "david" from "Employee" drop-down list by string in "CashAdvanceDeductionList" table
-		And I activate "Amount" field in "CashAdvanceDeductionList" table
-		And I input "70,00" text in "Amount" field of "CashAdvanceDeductionList" table
-		And I finish line editing in "CashAdvanceDeductionList" table
-	* Check
-		And "CashAdvanceDeductionList" table became equal
-			| '#'   | 'Amount'   | 'Employee'         |
-			| '1'   | '70,00'    | 'David Romanov'    |
-	* Check totals
-		And the editing text of form attribute named "TotalAccrualAmount" became equal to "2 300,00"
-		And the editing text of form attribute named "TotalDeductionAmount" became equal to "80,00"
-		And the editing text of form attribute named "TotalCashAdvanceDeductionAmount" became equal to "70,00"
-		And the editing text of form attribute named "TotalPaymentAmount" became equal to "2 150,00"				
-	* Check creation
-		And I click "Post" button
-		And I delete "$$NumberPL050003$$" variable
-		And I save the value of "Number" field as "$$NumberPL050003$$"
-		And I click "Post and close" button
-	* Check creation
 		And "List" table contains lines
-			| 'Number'                |
-			| '$$NumberPL050003$$'    |
+			| 'Description' |
+			| 'Director'    |
+	And I close all client application windows
 	
+// Scenario: _097715 create work days
+		
+				
+						

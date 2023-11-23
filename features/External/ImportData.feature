@@ -1829,28 +1829,30 @@ Scenario: Create catalog EmployeePositions objects
 		| 'e1cib/data/Catalog.EmployeePositions?ref=b794e3cbd36876e811eda861f577c0ac'  | 'False'         | 2       | 'Sales person'    | ''                  | ''                | ''                 |
 		| 'e1cib/data/Catalog.EmployeePositions?ref=b794e3cbd36876e811eda861f577c0ad'  | 'False'         | 3       | 'Accountant'      | ''                  | ''                | ''                 |
 
-Scenario: Create information register T9510S_Staffing records
+Scenario: Create catalog EmployeeSchedule objects
 
-	And I check or create information register "T9510S_Staffing" records:
-		| 'Period'              | 'Employee'                                                          | 'Fired'  | 'Company'                                                            | 'Branch'                                                                 | 'Position'                                                                   | 'ProfitLossCenter'                                                        |
-		| '01.01.2023 0:00:00'  | 'e1cib/data/Catalog.Partners?ref=aa78120ed92fbced11eaf115bcc9c610'  | 'False'  | 'e1cib/data/Catalog.Companies?ref=aa78120ed92fbced11eaf113ba6c185c'  | 'e1cib/data/Catalog.BusinessUnits?ref=aa78120ed92fbced11eaf114c59ef023'  | 'e1cib/data/Catalog.EmployeePositions?ref=b794e3cbd36876e811eda861f577c0ab'  | 'e1cib/data/Catalog.BusinessUnits?ref=aa78120ed92fbced11eaf114c59ef024'   |
-		| '01.01.2023 0:00:00'  | 'e1cib/data/Catalog.Partners?ref=aa78120ed92fbced11eaf115bcc9c612'  | 'False'  | 'e1cib/data/Catalog.Companies?ref=aa78120ed92fbced11eaf113ba6c185c'  | 'e1cib/data/Catalog.BusinessUnits?ref=aa78120ed92fbced11eaf114c59ef023'  | 'e1cib/data/Catalog.EmployeePositions?ref=b794e3cbd36876e811eda861f577c0ac'  | 'e1cib/data/Catalog.BusinessUnits?ref=aa78120ed92fbced11eaf114c59ef024'   |
-		| '05.01.2023 0:00:00'  | 'e1cib/data/Catalog.Partners?ref=aa78120ed92fbced11eaf115bcc9c611'  | 'False'  | 'e1cib/data/Catalog.Companies?ref=aa78120ed92fbced11eaf113ba6c185c'  | 'e1cib/data/Catalog.BusinessUnits?ref=aa78120ed92fbced11eaf114c59ef023'  | 'e1cib/data/Catalog.EmployeePositions?ref=b794e3cbd36876e811eda861f577c0ab'  | 'e1cib/data/Catalog.BusinessUnits?ref=aa78120ed92fbced11eaf114c59ef025'   |
-		| '10.01.2023 0:00:00'  | 'e1cib/data/Catalog.Partners?ref=aa78120ed92fbced11eaf115bcc9c612'  | 'False'  | 'e1cib/data/Catalog.Companies?ref=aa78120ed92fbced11eaf113ba6c185c'  | 'e1cib/data/Catalog.BusinessUnits?ref=aa78120ed92fbced11eaf12effe70fd3'  | 'e1cib/data/Catalog.EmployeePositions?ref=b794e3cbd36876e811eda861f577c0ac'  | 'e1cib/data/Catalog.BusinessUnits?ref=aa78120ed92fbced11eaf12effe70fd3'   |
-		| '20.01.2023 0:00:00'  | 'e1cib/data/Catalog.Partners?ref=aa78120ed92fbced11eaf115bcc9c610'  | 'True'   | ''                                                                   | ''                                                                       | ''                                                                           | ''                                                                        |
+	And I check or create catalog "EmployeeSchedule" objects:
+		| 'Ref'                                                                      | 'DeletionMark' | 'Code' | 'Type'                            | 'Description_en'                      | 'Description_hash' | 'Description_ru' | 'Description_tr' |
+		| 'e1cib/data/Catalog.EmployeeSchedule?ref=b7b0f4345ecbeede11ee89f924f68887' | 'False'        | 1      | 'Enum.EmployeeScheduleTypes.Day'  | '5 working days / 2 days off (day)'   | ''                 | ''               | ''               |
+		| 'e1cib/data/Catalog.EmployeeSchedule?ref=b7b0f4345ecbeede11ee89f924f68888' | 'False'        | 2      | 'Enum.EmployeeScheduleTypes.Hour' | '5 working days / 2 days off (hours)' | ''                 | ''               | ''               |
+		| 'e1cib/data/Catalog.EmployeeSchedule?ref=b7b0f4345ecbeede11ee89f924f68889' | 'False'        | 3      | 'Enum.EmployeeScheduleTypes.Day'  | '1 working day / 2 days off (day)'    | ''                 | ''               | ''               |
 
+Scenario: Create document EmployeeHiring objects
 
-Scenario: Create information register T9530S_WorkDays records
+	And I check or create document "EmployeeHiring" objects:
+		| 'Ref'                                                                     | 'DeletionMark' | 'Number' | 'Date'                | 'Posted' | 'Company'                                                           | 'Employee'                                                         | 'Position'                                                                  | 'EmployeeSchedule'                                                         | 'ProfitLossCenter'                                                      | 'Author'                                                        | 'Branch'                                                                | 'Description' |
+		| 'e1cib/data/Document.EmployeeHiring?ref=b7b0f4345ecbeede11ee89f924f6888b' | 'False'        | 2        | '01.10.2023 12:00:00' | 'True'   | 'e1cib/data/Catalog.Companies?ref=aa78120ed92fbced11eaf113ba6c185c' | 'e1cib/data/Catalog.Partners?ref=aa78120ed92fbced11eaf115bcc9c611' | 'e1cib/data/Catalog.EmployeePositions?ref=b794e3cbd36876e811eda861f577c0ac' | 'e1cib/data/Catalog.EmployeeSchedule?ref=b7b0f4345ecbeede11ee89f924f68889' | 'e1cib/data/Catalog.BusinessUnits?ref=aa78120ed92fbced11eaf12effe70fd3' | 'e1cib/data/Catalog.Users?ref=aa7f120ed92fbced11eb13d7279770c0' | 'e1cib/data/Catalog.BusinessUnits?ref=aa78120ed92fbced11eaf12effe70fd3' | ''            |
+		| 'e1cib/data/Document.EmployeeHiring?ref=b7b0f4345ecbeede11ee89f924f6888c' | 'False'        | 3        | '01.10.2023 14:24:24' | 'True'   | 'e1cib/data/Catalog.Companies?ref=aa78120ed92fbced11eaf113ba6c185c' | 'e1cib/data/Catalog.Partners?ref=aa78120ed92fbced11eaf115bcc9c613' | 'e1cib/data/Catalog.EmployeePositions?ref=b794e3cbd36876e811eda861f577c0ac' | 'e1cib/data/Catalog.EmployeeSchedule?ref=b7b0f4345ecbeede11ee89f924f68888' | 'e1cib/data/Catalog.BusinessUnits?ref=aa78120ed92fbced11eaf12effe70fd3' | 'e1cib/data/Catalog.Users?ref=aa7f120ed92fbced11eb13d7279770c0' | 'e1cib/data/Catalog.BusinessUnits?ref=aa78120ed92fbced11eaf12effe70fd3' | ''            |
+		| 'e1cib/data/Document.EmployeeHiring?ref=b7b0f4345ecbeede11ee89f924f6888d' | 'False'        | 4        | '02.10.2023 14:25:05' | 'True'   | 'e1cib/data/Catalog.Companies?ref=aa78120ed92fbced11eaf113ba6c185c' | 'e1cib/data/Catalog.Partners?ref=aa78120ed92fbced11eaf115bcc9c610' | 'e1cib/data/Catalog.EmployeePositions?ref=b794e3cbd36876e811eda861f577c0ac' | 'e1cib/data/Catalog.EmployeeSchedule?ref=b7b0f4345ecbeede11ee89f924f68889' | 'e1cib/data/Catalog.BusinessUnits?ref=aa78120ed92fbced11eaf12effe70fd3' | 'e1cib/data/Catalog.Users?ref=aa7f120ed92fbced11eb13d7279770c0' | 'e1cib/data/Catalog.BusinessUnits?ref=aa78120ed92fbced11eaf12effe70fd3' | ''            |
 
-	And I check or create information register "T9530S_WorkDays" records:
-		| 'BeginDate'           | 'EndDate'             | 'AccrualAndDeductionType'                                                           | 'CountDays'   |
-		| '01.01.2023 0:00:00'  | '31.01.2023 0:00:00'  | 'e1cib/data/Catalog.AccrualAndDeductionTypes?ref=b794e3cbd36876e811eda864ba51300b'  | 20            |
 
 Scenario: Create information register T9500S_AccrualAndDeductionValues records
 
 	And I check or create information register "T9500S_AccrualAndDeductionValues" records:
-		| 'Period'              | 'EmployeeOrPosition'                                                         | 'AccualOrDeductionType'                                                             | 'Value'   |
-		| '01.01.2023 0:00:00'  | 'e1cib/data/Catalog.EmployeePositions?ref=b794e3cbd36876e811eda861f577c0ab'  | 'e1cib/data/Catalog.AccrualAndDeductionTypes?ref=b794e3cbd36876e811eda864ba51300b'  | 10000     |
+		| 'Period'             | 'EmployeeOrPosition'                                                        | 'AccualOrDeductionType'                                                            | 'Value' |
+		| '01.01.2023 0:00:00' | 'e1cib/data/Catalog.EmployeePositions?ref=b794e3cbd36876e811eda861f577c0ab' | 'e1cib/data/Catalog.AccrualAndDeductionTypes?ref=b794e3cbd36876e811eda864ba51300b' | 10000   |
+		| '01.01.2023 0:00:00' | 'e1cib/data/Catalog.EmployeePositions?ref=b794e3cbd36876e811eda861f577c0ac' | 'e1cib/data/Catalog.AccrualAndDeductionTypes?ref=b794e3cbd36876e811eda864ba51300b' | 7000    |
+
 
 
 Scenario: Create catalog AccrualAndDeductionTypes objects

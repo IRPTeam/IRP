@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mdclass:Document xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:core="http://g5.1c.ru/v8/dt/mcore" xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="037698ec-5fd5-49b5-81f0-aacc0bf56ba9">
+  <producedTypes>
+    <objectType typeId="2e0b3707-7889-425e-a71d-b76b25da9402" valueTypeId="454f705c-0729-4eb6-92a7-befcda59f3aa"/>
+    <refType typeId="dcd77930-9442-4562-a325-36c506eee8b9" valueTypeId="c48e5a25-faa2-4466-b680-20cddbb18905"/>
+    <selectionType typeId="73a11990-be5b-4c9c-8cee-e0bfd0178612" valueTypeId="fec74d34-c2c8-407c-abc9-218fc6b57022"/>
+    <listType typeId="1e57d0ae-b484-4708-b32c-5fbfc1e1ceb7" valueTypeId="ffd09730-436b-4041-a22f-329fc025aec0"/>
+    <managerType typeId="ffe6f78d-3419-46dc-a686-cfffdfe3fe39" valueTypeId="b5de9f32-d6e9-4c1a-b9a1-f3105a0f506c"/>
+  </producedTypes>
+  <name>VisitorCounter</name>
+  <synonym>
+    <key>en</key>
+    <value>Visitor counter</value>
+  </synonym>
+  <useStandardCommands>true</useStandardCommands>
+  <inputByString>Document.VisitorCounter.StandardAttribute.Number</inputByString>
+  <fullTextSearchOnInputByString>DontUse</fullTextSearchOnInputByString>
+  <createOnInput>DontUse</createOnInput>
+  <dataLockControlMode>Managed</dataLockControlMode>
+  <fullTextSearch>Use</fullTextSearch>
+  <objectPresentation>
+    <key>en</key>
+    <value>Visitor counter</value>
+  </objectPresentation>
+  <listPresentation>
+    <key>en</key>
+    <value>Visitor counters</value>
+  </listPresentation>
+  <numberLength>12</numberLength>
+  <numberAllowedLength>Variable</numberAllowedLength>
+  <checkUnique>true</checkUnique>
+  <autonumbering>true</autonumbering>
+  <defaultObjectForm>Document.VisitorCounter.Form.DocumentForm</defaultObjectForm>
+  <defaultListForm>Document.VisitorCounter.Form.ListForm</defaultListForm>
+  <defaultChoiceForm>Document.VisitorCounter.Form.ChoiceForm</defaultChoiceForm>
+  <realTimePosting>Deny</realTimePosting>
+  <postInPrivilegedMode>true</postInPrivilegedMode>
+  <unpostInPrivilegedMode>true</unpostInPrivilegedMode>
+  <attributes uuid="bd51bc41-d5c4-4b69-84a8-8482f2279f30">
+    <name>Company</name>
+    <synonym>
+      <key>en</key>
+      <value>Company</value>
+    </synonym>
+    <type>
+      <types>CatalogRef.Companies</types>
+    </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <fillValue xsi:type="core:UndefinedValue"/>
+    <fullTextSearch>Use</fullTextSearch>
+    <dataHistory>Use</dataHistory>
+  </attributes>
+  <attributes uuid="440cf36e-853d-418a-9925-8419c15844ad">
+    <name>Store</name>
+    <synonym>
+      <key>en</key>
+      <value>Store</value>
+    </synonym>
+    <type>
+      <types>CatalogRef.Stores</types>
+    </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <fillValue xsi:type="core:UndefinedValue"/>
+    <fullTextSearch>Use</fullTextSearch>
+    <dataHistory>Use</dataHistory>
+  </attributes>
+  <forms uuid="441fafca-f4d9-4a0a-9c65-0a23f79c46d6">
+    <name>DocumentForm</name>
+    <synonym>
+      <key>en</key>
+      <value>Document form</value>
+    </synonym>
+    <usePurposes>PersonalComputer</usePurposes>
+    <usePurposes>MobileDevice</usePurposes>
+  </forms>
+  <forms uuid="9f5607c9-ffb2-4463-9536-f2d4bdafcc95">
+    <name>ListForm</name>
+    <synonym>
+      <key>en</key>
+      <value>List form</value>
+    </synonym>
+    <usePurposes>PersonalComputer</usePurposes>
+    <usePurposes>MobileDevice</usePurposes>
+  </forms>
+  <forms uuid="c914a723-7231-49fe-8826-9b297e951822">
+    <name>ChoiceForm</name>
+    <synonym>
+      <key>en</key>
+      <value>Choice form</value>
+    </synonym>
+    <usePurposes>PersonalComputer</usePurposes>
+    <usePurposes>MobileDevice</usePurposes>
+  </forms>
+</mdclass:Document>

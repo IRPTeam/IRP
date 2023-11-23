@@ -140,5 +140,6 @@
     <types>DocumentRef.DecommissioningOfFixedAsset</types>
     <types>DocumentRef.FixedAssetTransfer</types>
     <types>DocumentRef.ModernizationOfFixedAsset</types>
+    <types>DocumentRef.VisitorCounter</types>
   </type>
 </mdclass:DefinedType>

@@ -106,6 +106,8 @@
       <types>DocumentRef.DecommissioningOfFixedAsset</types>
       <types>DocumentRef.FixedAssetTransfer</types>
       <types>DocumentRef.ModernizationOfFixedAsset</types>
+      <types>DocumentRef.VisitorCounter</types>
+      <types>DocumentRef.WorkOrderClosing</types>
     </commandParameterType>
     <representation>Auto</representation>
   </commands>

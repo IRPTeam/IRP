@@ -13,6 +13,7 @@
 - [ ] Set common attribute Use: `Author, Branch, Description, SourceNodeID`
 - [ ] RealTimePosting = `Deny` 
 - [ ] Add to `FilterCriteria` - `RelatedDocuments` add to content and to button
+- [ ] Add to content `FullExchange` in `Plan Exchange`
 
 ## Access
 - [ ] Copy any document Role and rename to `Document_DocName`. Set all right to this role, except `Delete`. Check, that `Restiction template` is filled.
@@ -47,109 +48,151 @@ EndFunction
 
 #EndRegion
 ```
-## Other
-- [ ] Add to content `FullExchange` in `Plan Exchange`
+## Add attributes
 - [ ] In `Catalog.AddAttributeAndPropertySets` add new predefined document with name `Document_DocumentName`, set description as `Document Document name`.
 - [ ] Copy from `document SalesOrder` table `AddAttributes` and setup it:
-![](CreateNewDocument/.png)
-![](https://user-images.githubusercontent.com/11927866/104844375-915e7900-58d8-11eb-93d9-f32e19b0e5cc.png)
-- [ ] Добавить реквизит документа Company
-- [ ] В Common Attributes указать что используются в документе - Author и Description всегда. DocumentAmount по необходимости
-- [ ] Добавить в определяемые типы typeAddPropertyOwners
-- [ ] Добавить в определяемые типы typeObjectWithItemList (если у документа есть табличная часть ItemList)
-- [ ] Добавить тип в команду отчета DocumentRegistrationsReport
-- [ ] Создать два общих модуля DocDocumentNameClient и DocDocumentNameServer, лучше скопировать их похожего документа и удалить лишнее
-- [ ] В функции SetGroupItemsList оставить те реквизиты, которые должны формировать представление документа
-- [ ] Добавить формы DocumentForm, ListForm, ChoiceForm именно в таком порядке они должны располагаться в метаданных
+![](CreateNewDocument/AddAttribute.png)
+![](CreateNewDocument/AddProperties.png)
 
-В форме ChoiceForm и ListForm 
-- [ ] вывести в таблицу Ref, и скрыть ее.
-![image](https://github.com/IRPTeam/IRP/assets/11927866/32a7f964-80c4-4beb-9fc3-0b49f74ad99b)
-- [ ] Вставить области Commands и FormEvents
-- [ ] В форме документа сформировать группу представлений (можно скопировать) 
+## Set refs
+- [ ] Add to `Defined types` - `typeAddPropertyOwners`
+- [ ] Add to `Defined types` - `typeObjectWithItemList` (if table `ItemList` is exists)
+- [ ] Add to command refs in report `DocumentRegistrationsReport`
+- [ ] Add form `DocumentForm`, `ListForm`, `ChoiceForm`. Order is important.
+- [ ] In list and choise form - `Dynamic list` - `Ref` - set `See always` = `True`. Move Ref column to the end and go to `User visibility` - `Visible` - set `False`:
+![](CreateNewDocument/SetRefView.png)
 
-![изображение](https://user-images.githubusercontent.com/11927866/104845289-4135e580-58dd-11eb-8720-9c2de3d67c41.png)
-
-- [ ] Сформировать страницы и группу подвала (даже если она будет пустая) 
-
-![изображение](https://user-images.githubusercontent.com/11927866/104845401-efda2600-58dd-11eb-91f8-e042b114b3b7.png)
-
-- [ ] Скопировать реквизиты формы:
-
-![изображение](https://user-images.githubusercontent.com/11927866/104851107-97198600-58fb-11eb-93ce-640257aa465e.png)
-
-- [ ] В модуле формы документа определить области:
-
+## Common modules
+If in the document we add 2 attributes `Company` and `Store`
+- [ ] Create new common modules `DocDocumentNameClient`, :
 ```bsl
-#Region Variables
-// Используется для описания переменных, лучше никогда не использовать
+#Region FORM
+// Template for extension
+Procedure OnOpen(Object, Form, Cancel) Export
+	Return;
+EndProcedure
+
 #EndRegion
 
-#Region FormEventHandlers
-// события самой формы - при открытии, при создании и т.д.
+#Region _DATE
+// Template for extension
+Procedure DateOnChange(Object, Form, Item) Export
+	Return;
+EndProcedure
+
 #EndRegion
 
-#Region FormHeaderItemsEventHandlers
-// события элементов формы, обычно- реквизиты при изменении, страницы и т.д.
-#EndRegion
+#Region COMPANY
+// Template for extension
+Procedure CompanyOnChange(Object, Form, Item) Export
+	Return;
+EndProcedure
 
-#Region FormTableItemsEventHandlers
-#Region TableName
-// События табличной части, 
-#EndRegion
-#EndRegion
+Procedure CompanyStartChoice(Object, Form, Item, ChoiceData, StandardProcessing) Export
+	OpenSettings = DocumentsClient.GetOpenSettingsStructure();
 
-#Region FormCommandsEventHandlers
-// события по нажатию кнопок формы (не табличных частей
-#EndRegion
+	OpenSettings.ArrayOfFilters = New Array();
+	OpenSettings.ArrayOfFilters.Add(DocumentsClientServer.CreateFilterItem("DeletionMark", True,
+		DataCompositionComparisonType.NotEqual));
+	OpenSettings.ArrayOfFilters.Add(DocumentsClientServer.CreateFilterItem("OurCompany", True,
+		DataCompositionComparisonType.Equal));
+	OpenSettings.FillingData = New Structure("OurCompany", True);
 
-#Region Initialize
-// инициализация - не использовать
-#EndRegion
+	DocumentsClient.CompanyStartChoice(Object, Form, Item, ChoiceData, StandardProcessing, OpenSettings);
+EndProcedure
 
-#Region Public
-// все методы, которые являются экспортными, и не относятся к оповещениям внутри формы
-#EndRegion
+Procedure CompanyEditTextChange(Object, Form, Item, Text, StandardProcessing) Export
+	ArrayOfFilters = New Array();
+	ArrayOfFilters.Add(DocumentsClientServer.CreateFilterItem("DeletionMark", True, ComparisonType.NotEqual));
+	ArrayOfFilters.Add(DocumentsClientServer.CreateFilterItem("OurCompany", True, ComparisonType.Equal));
+	DocumentsClient.CompanyEditTextChange(Object, Form, Item, Text, StandardProcessing, ArrayOfFilters);
+EndProcedure
 
-#Region Private
-// весь основной код.
 #EndRegion
 ```
-Надо понимать, что в во всех регионах - не должно быть никакой логики прописано, кроме модуля Private - там может быть прописана логика, в остальных местах - должны или вызываться общие модули документа, или функции из региона Privat.
 
-- [ ] Скопировать Регионы GroupTitleDecorations, DescriptionEvents, AddAttributes, ExternalCommands
-
-- [ ] В модуль объекта документа вставить код:
-
+- [ ] Create new common modules `DocDocumentNameServer`:
 ```bsl
+#Region FORM
 
-Procedure BeforeWrite(Cancel, WriteMode, PostingMode)
-	If DataExchange.Load Then
-		Return;
+Procedure OnCreateAtServer(Object, Form, Cancel, StandardProcessing) Export
+	DocumentsServer.OnCreateAtServer(Object, Form, Cancel, StandardProcessing);
+	If Form.Parameters.Key.IsEmpty() Then
+		SetGroupItemsList(Object, Form);
+		DocumentsClientServer.ChangeTitleGroupTitle(Object, Form);
 	EndIf;	
 EndProcedure
 
-Procedure OnWrite(Cancel)
-	If DataExchange.Load Then
-		Return;
-	EndIf;	
+Procedure AfterWriteAtServer(Object, Form, CurrentObject, WriteParameters) Export
+	DocumentsClientServer.ChangeTitleGroupTitle(CurrentObject, Form);
 EndProcedure
 
-Procedure BeforeDelete(Cancel)
-	If DataExchange.Load Then
-		Return;
+Procedure OnReadAtServer(Object, Form, CurrentObject) Export
+	If Not Form.GroupItems.Count() Then
+		SetGroupItemsList(Object, Form);
 	EndIf;
+	DocumentsClientServer.ChangeTitleGroupTitle(CurrentObject, Form);
+	LockDataModificationPrivileged.LockFormIfObjectIsLocked(Form, CurrentObject);
 EndProcedure
 
-Procedure Posting(Cancel, PostingMode)
-	PostingServer.Post(ThisObject, Cancel, PostingMode, ThisObject.AdditionalProperties);
+#EndRegion
+
+#Region GroupTitle
+
+Procedure SetGroupItemsList(Object, Form)
+	AttributesArray = New Array();
+	AttributesArray.Add("Company");
+	AttributesArray.Add("Store");
+	DocumentsServer.DeleteUnavailableTitleItemNames(AttributesArray);
+	For Each Attr In AttributesArray Do
+		Form.GroupItems.Add(Attr, ?(ValueIsFilled(Form.Items[Attr].Title), Form.Items[Attr].Title,
+			Object.Ref.Metadata().Attributes[Attr].Synonym + ":" + Chars.NBSp));
+	EndDo;
 EndProcedure
 
-Procedure UndoPosting(Cancel)
-	UndopostingServer.Undopost(ThisObject, Cancel, ThisObject.AdditionalProperties);
+#EndRegion
+
+#Region ListFormEvents
+
+Procedure OnCreateAtServerListForm(Form, Cancel, StandardProcessing) Export
+	DocumentsServer.OnCreateAtServerListForm(Form, Cancel, StandardProcessing);
 EndProcedure
+
+#EndRegion
+
+#Region ChoiceFormEvents
+
+Procedure OnCreateAtServerChoiceForm(Form, Cancel, StandardProcessing) Export
+	DocumentsServer.OnCreateAtServerChoiceForm(Form, Cancel, StandardProcessing);
+EndProcedure
+
+#EndRegion
 
 ```
+## Form module
+### Document form module
+- [ ] You need to find the most similar document to the one you need, for example - whether it has a table part 'ItemList' or not, and copy the code from there. Main regions:
+    - FORM
+    - _DATE
+    - COMPANY
+    - SERVICE
+- [ ] Copy Form attribute:
+    - Description
+
+- [ ] Copy command:
+    - ShowHiddenTables
+
+- [ ] Copy from other document GroupTitle.
+
+![](CreateNewDocument/GroupTitle.png)
+
+- [ ] Copy Group `GroupHead`, `Page`, `GroupBottom`. It can be empty. It has to be like that:
+![](CreateNewDocument/MinimalElementsForm.png)
+
+### Document List and Choise form module
+- [ ] You need to find the most similar document to the one you need, for example - whether it has a table part 'ItemList' or not, and copy the code from there. Main regions:
+    - FormEvents
+    - Commands
 
 - [ ] Вставить шаблон в модуль менеджера клиента:
 

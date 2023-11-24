@@ -556,6 +556,24 @@
     </notDefaultUseAlwaysAttributes>
     <main>true</main>
     <extInfo xsi:type="form:DynamicListExtInfo">
+      <queryText>SELECT
+	DocumentVisitorCounter.Ref,
+	DocumentVisitorCounter.DeletionMark,
+	DocumentVisitorCounter.Number,
+	DocumentVisitorCounter.Date,
+	DocumentVisitorCounter.Posted,
+	DocumentVisitorCounter.Company,
+	DocumentVisitorCounter.Store,
+	DocumentVisitorCounter.VisitorCounter,
+	DocumentVisitorCounter.CounterData.*,
+	DocumentVisitorCounter.AddAttributes.*,
+	DocumentVisitorCounter.PointInTime,
+	DocumentVisitorCounter.SourceNodeID,
+	DocumentVisitorCounter.Author,
+	DocumentVisitorCounter.Description,
+	DocumentVisitorCounter.Branch
+FROM
+	Document.VisitorCounter AS DocumentVisitorCounter</queryText>
       <mainTable>Document.VisitorCounter</mainTable>
       <dynamicDataRead>true</dynamicDataRead>
       <autoFillAvailableFields>true</autoFillAvailableFields>

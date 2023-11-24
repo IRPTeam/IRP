@@ -237,52 +237,6 @@
       </extInfo>
     </items>
     <items xsi:type="form:FormField">
-      <name>Author</name>
-      <id>31</id>
-      <visible>true</visible>
-      <enabled>true</enabled>
-      <userVisible>
-        <common>true</common>
-      </userVisible>
-      <dataPath xsi:type="form:DataPath">
-        <segments>List.Author</segments>
-      </dataPath>
-      <extendedTooltip>
-        <name>AuthorExtendedTooltip</name>
-        <id>33</id>
-        <visible>true</visible>
-        <enabled>true</enabled>
-        <userVisible>
-          <common>true</common>
-        </userVisible>
-        <type>Label</type>
-        <autoMaxWidth>true</autoMaxWidth>
-        <autoMaxHeight>true</autoMaxHeight>
-        <extInfo xsi:type="form:LabelDecorationExtInfo">
-          <horizontalAlign>Left</horizontalAlign>
-        </extInfo>
-      </extendedTooltip>
-      <contextMenu>
-        <name>AuthorContextMenu</name>
-        <id>32</id>
-        <visible>true</visible>
-        <enabled>true</enabled>
-        <userVisible>
-          <common>true</common>
-        </userVisible>
-        <autoFill>true</autoFill>
-      </contextMenu>
-      <type>LabelField</type>
-      <editMode>Enter</editMode>
-      <showInHeader>true</showInHeader>
-      <headerHorizontalAlign>Left</headerHorizontalAlign>
-      <showInFooter>true</showInFooter>
-      <extInfo xsi:type="form:LabelFieldExtInfo">
-        <autoMaxWidth>true</autoMaxWidth>
-        <autoMaxHeight>true</autoMaxHeight>
-      </extInfo>
-    </items>
-    <items xsi:type="form:FormField">
       <name>Branch</name>
       <id>34</id>
       <visible>true</visible>
@@ -604,6 +558,24 @@
     </notDefaultUseAlwaysAttributes>
     <main>true</main>
     <extInfo xsi:type="form:DynamicListExtInfo">
+      <queryText>SELECT
+	DocumentVisitorCounter.Ref,
+	DocumentVisitorCounter.DeletionMark,
+	DocumentVisitorCounter.Number,
+	DocumentVisitorCounter.Date,
+	DocumentVisitorCounter.Posted,
+	DocumentVisitorCounter.Company,
+	DocumentVisitorCounter.Store,
+	DocumentVisitorCounter.VisitorCounter,
+	DocumentVisitorCounter.CounterData.*,
+	DocumentVisitorCounter.AddAttributes.*,
+	DocumentVisitorCounter.PointInTime,
+	DocumentVisitorCounter.SourceNodeID,
+	DocumentVisitorCounter.Author,
+	DocumentVisitorCounter.Description,
+	DocumentVisitorCounter.Branch
+FROM
+	Document.VisitorCounter AS DocumentVisitorCounter</queryText>
       <mainTable>Document.VisitorCounter</mainTable>
       <dynamicDataRead>true</dynamicDataRead>
       <autoFillAvailableFields>true</autoFillAvailableFields>

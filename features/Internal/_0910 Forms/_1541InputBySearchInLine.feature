@@ -1,4 +1,4 @@
-#language: en
+﻿#language: en
 @tree
 @Positive
 
@@ -77,6 +77,7 @@ Scenario: _0154000 preparation
 		When Create catalog EmployeePositions objects
 		When Create catalog AccrualAndDeductionTypes objects
 		When Create information register Taxes records (VAT)
+		When Create catalog EmployeeSchedule objects
 
 
 
@@ -1953,25 +1954,7 @@ Scenario: _0154092 check company, branch input by search in line in TimeSheet (i
 		And I close all client application windows
 
 
-Scenario: _0154092 check company, branch input by search in line in Staffing (in english)
-	And I close all client application windows
-	* Open a creation form Staffing
-		Given I open hyperlink "e1cib/list/InformationRegister.T9510S_Staffing"
-		And I click the button named "FormCreate"
-	* Company input by search in line
-		And I select from "Company" drop-down list by "main" string
-	* Branch input by search in line
-		And I select from "Branch" drop-down list by "front" string
-	* Employee input by search in line
-		And I select from "Employee" drop-down list by "brow" string
-	* Position input by search in line
-		And I select from "Position" drop-down list by "manag" string
-	* Check filling in
-		Then the form attribute named "Company" became equal to "Main Company"
-		Then the form attribute named "Branch" became equal to "Front office"
-		Then the form attribute named "Employee" became equal to "Arina Brown"
-		Then the form attribute named "Position" became equal to "Manager"
-		And I close all client application windows
+
 
 Scenario: _0154093 check company, expense and revenue type input by search in line in ForeignCurrencyRevaluation (in english)
 	And I close all client application windows
@@ -2068,7 +2051,7 @@ Scenario: _0154096 check item and item key input by search in line in a document
 		And I close all client application windows
 
 
-Scenario: _0154095 check partner, legal name, company, store input by search in line in a document Retail Goods Receipt (in english)
+Scenario: _0154097 check partner, legal name, company, store input by search in line in a document Retail Goods Receipt (in english)
 	And I close all client application windows
 	* Open a creation form Retail Goods Receipt
 		Given I open hyperlink "e1cib/list/Document.RetailGoodsReceipt"
@@ -2088,3 +2071,140 @@ Scenario: _0154095 check partner, legal name, company, store input by search in 
 		Then the form attribute named "Company" became equal to "Main Company"
 		Then the form attribute named "Store" became equal to "Store 02"
 	And I close all client application windows
+
+Scenario: _0154098 check company, branch input by search in line in AdditionalAccrual (in english)
+	And I close all client application windows
+	* Open a creation form AdditionalAccrual
+		Given I open hyperlink "e1cib/list/Document.AdditionalAccrual"
+		And I click the button named "FormCreate"
+	* Company input by search in line
+		And I select from "Company" drop-down list by "main" string
+	* Branch input by search in line
+		And I select from "Branch" drop-down list by "front" string
+	* Check filling in
+		Then the form attribute named "Company" became equal to "Main Company"
+		Then the form attribute named "Branch" became equal to "Front office"
+		And I close all client application windows
+
+Scenario: _0154099 check company, branch input by search in line in AdditionalDeduction (in english)
+	And I close all client application windows
+	* Open a creation form AdditionalDeduction
+		Given I open hyperlink "e1cib/list/Document.AdditionalDeduction"
+		And I click the button named "FormCreate"
+	* Company input by search in line
+		And I select from "Company" drop-down list by "main" string
+	* Branch input by search in line
+		And I select from "Branch" drop-down list by "front" string
+	* Check filling in
+		Then the form attribute named "Company" became equal to "Main Company"
+		Then the form attribute named "Branch" became equal to "Front office"
+		And I close all client application windows
+
+Scenario: _01540100 check company, branch input by search in line in EmployeeHiring (in english)
+	And I close all client application windows
+	* Open a creation form EmployeeHiring
+		Given I open hyperlink "e1cib/list/Document.EmployeeHiring"
+		And I click the button named "FormCreate"
+	* Company input by search in line
+		And I select from "Company" drop-down list by "main" string
+	* Branch input by search in line
+		And I select from "Branch" drop-down list by "front" string
+	* ProfitLossCenter input by search in line
+		And I select from "Profit loss center" drop-down list by "front" string
+	* Position input by search in line
+		And I select from "Position" drop-down list by "Sales" string
+	* Employee input by search in line
+		And I select from "Employee" drop-down list by "Arina" string
+	* EmployeeSchedule input by search in line
+		And I select from "Employee schedule" drop-down list by "1 working day" string
+	* Check filling in
+		Then the form attribute named "Company" became equal to "Main Company"
+		Then the form attribute named "Branch" became equal to "Front office"
+		Then the form attribute named "ProfitLossCenter" became equal to "Front office"
+		Then the form attribute named "Position" became equal to "Sales person"
+		Then the form attribute named "EmployeeSchedule" became equal to "1 working day / 2 days off (day)"	
+		Then the form attribute named "Employee" became equal to "Arina Brown"			
+		And I close all client application windows
+	
+Scenario: _01540101 check company, branch input by search in line in EmployeeFiring (in english)
+	And I close all client application windows
+	* Open a creation form EmployeeFiring
+		Given I open hyperlink "e1cib/list/Document.EmployeeFiring"
+		And I click the button named "FormCreate"
+	* Company input by search in line
+		And I select from "Company" drop-down list by "main" string
+	* Employee input by search in line
+		And I select from "Employee" drop-down list by "Arina" string
+	* Check filling in
+		Then the form attribute named "Company" became equal to "Main Company"
+		Then the form attribute named "Employee" became equal to "Arina Brown"			
+		And I close all client application windows
+
+Scenario: _01540102 check company, branch input by search in line in EmployeeTransfer (in english)
+	And I close all client application windows
+	* Open a creation form EmployeeTransfer
+		Given I open hyperlink "e1cib/list/Document.EmployeeTransfer"
+		And I click the button named "FormCreate"
+	* Company input by search in line
+		And I select from "Company" drop-down list by "main" string
+	* Employee input by search in line
+		And I select from "Employee" drop-down list by "Arina" string
+	* ToPosition input by search in line
+		And I select from "To position" drop-down list by "Sales" string
+	* ToEmployeeSchedule input by search in line
+		And I select from "To employee schedule" drop-down list by "1 working day" string
+	* ToBranch input by search in line
+		And I select from "To branch" drop-down list by "Front" string
+	* ToProfitLossCenter input by search in line
+		And I select from "To profit loss center" drop-down list by "Front" string
+	* Check filling in
+		Then the form attribute named "Company" became equal to "Main Company"
+		Then the form attribute named "Employee" became equal to "Arina Brown"	
+		Then the form attribute named "ToPosition" became equal to "Sales person"
+		Then the form attribute named "ToEmployeeSchedule" became equal to "1 working day / 2 days off (day)"
+		Then the form attribute named "ToBranch" became equal to "Front office"
+		Then the form attribute named "ToProfitLossCenter" became equal to "Front office"
+		And I close all client application windows
+
+Scenario: _01540103 check company, branch input by search in line in EmployeeVacation (in english)
+	And I close all client application windows
+	* Open a creation form EmployeeVacation
+		Given I open hyperlink "e1cib/list/Document.EmployeeVacation"
+		And I click the button named "FormCreate"
+	* Company input by search in line
+		And I select from "Company" drop-down list by "main" string
+	* Branch input by search in line
+		And I select from "Branch" drop-down list by "front" string
+	* Employee input by search in line
+		And in the table "EmployeeList" I click the button named "EmployeeListAdd"
+		And I select "arina" from "Employee" drop-down list by string in "EmployeeList" table
+		And I finish line editing in "EmployeeList" table
+	* Check
+		Then the form attribute named "Company" became equal to "Main Company"
+		Then the form attribute named "Branch" became equal to "Front office"
+		And "EmployeeList" table became equal
+			| '#' | 'Employee'    | 'Begin date' | 'End date' |
+			| '1' | 'Arina Brown' | ''           | ''         |				
+	And I close all client application windows
+	
+		
+Scenario: _01540104 check company, branch input by search in line in EmployeeSickLeave (in english)
+	And I close all client application windows
+	* Open a creation form EmployeeSickLeave
+		Given I open hyperlink "e1cib/list/Document.EmployeeSickLeave"
+		And I click the button named "FormCreate"
+	* Company input by search in line
+		And I select from "Company" drop-down list by "main" string
+	* Branch input by search in line
+		And I select from "Branch" drop-down list by "front" string
+	* Employee input by search in line
+		And in the table "EmployeeList" I click the button named "EmployeeListAdd"
+		And I select "arina" from "Employee" drop-down list by string in "EmployeeList" table
+		And I finish line editing in "EmployeeList" table
+	* Check
+		Then the form attribute named "Company" became equal to "Main Company"
+		Then the form attribute named "Branch" became equal to "Front office"
+		And "EmployeeList" table became equal
+			| '#' | 'Employee'    | 'Begin date' | 'End date' |
+			| '1' | 'Arina Brown' | ''           | ''         |				
+	And I close all client application windows				

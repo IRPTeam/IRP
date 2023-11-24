@@ -1,4 +1,4 @@
-#language: en
+﻿#language: en
 @tree
 @Positive
 @BasicFormsCheck
@@ -890,7 +890,116 @@ Scenario: Open choise form "TimeSheet"
 		Then I raise "Failed to open document choise form TimeSheet" exception
 	And I close current window
 
+Scenario: Open list form "EmployeeFiring" 
+	And I close all client application windows
+	Given I open "EmployeeFiring" document default form
+	If the warning is displayed then
+		Then I raise "Failed to open document form EmployeeFiring" exception
+	And I close current window
 
+Scenario: Open object form "EmployeeFiring"
+	And I close all client application windows
+	Given I open "EmployeeFiring" document main form
+	If the warning is displayed then
+		Then I raise "Failed to open document form EmployeeFiring" exception
+	And I close current window
+
+Scenario: Open choise form "EmployeeFiring"
+	And I close all client application windows
+	And I execute the built-in language code (Extension)
+		| 'OpenForm("Document.EmployeeFiring.ChoiceForm", , Undefined, , , , , FormWindowOpeningMode.Independent)'   |
+	If the warning is displayed then
+		Then I raise "Failed to open document choise form EmployeeFiring" exception
+	And I close current window
+
+Scenario: Open list form "EmployeeHiring" 
+	And I close all client application windows
+	Given I open "EmployeeHiring" document default form
+	If the warning is displayed then
+		Then I raise "Failed to open document form EmployeeHiring" exception
+	And I close current window
+
+Scenario: Open object form "EmployeeHiring"
+	And I close all client application windows
+	Given I open "EmployeeHiring" document main form
+	If the warning is displayed then
+		Then I raise "Failed to open document form EmployeeHiring" exception
+	And I close current window
+
+Scenario: Open choise form "EmployeeHiring"
+	And I close all client application windows
+	And I execute the built-in language code (Extension)
+		| 'OpenForm("Document.EmployeeHiring.ChoiceForm", , Undefined, , , , , FormWindowOpeningMode.Independent)'   |
+	If the warning is displayed then
+		Then I raise "Failed to open document choise form EmployeeHiring" exception
+	And I close current window
+
+Scenario: Open list form "EmployeeSickLeave" 
+	And I close all client application windows
+	Given I open "EmployeeSickLeave" document default form
+	If the warning is displayed then
+		Then I raise "Failed to open document form EmployeeSickLeave" exception
+	And I close current window
+
+Scenario: Open object form "EmployeeSickLeave"
+	And I close all client application windows
+	Given I open "EmployeeSickLeave" document main form
+	If the warning is displayed then
+		Then I raise "Failed to open document form EmployeeSickLeave" exception
+	And I close current window
+
+Scenario: Open choise form "EmployeeSickLeave"
+	And I close all client application windows
+	And I execute the built-in language code (Extension)
+		| 'OpenForm("Document.EmployeeSickLeave.ChoiceForm", , Undefined, , , , , FormWindowOpeningMode.Independent)'   |
+	If the warning is displayed then
+		Then I raise "Failed to open document choise form EmployeeSickLeave" exception
+	And I close current window
+
+Scenario: Open list form "EmployeeTransfer" 
+	And I close all client application windows
+	Given I open "EmployeeTransfer" document default form
+	If the warning is displayed then
+		Then I raise "Failed to open document form EmployeeTransfer" exception
+	And I close current window
+
+Scenario: Open object form "EmployeeTransfer"
+	And I close all client application windows
+	Given I open "EmployeeTransfer" document main form
+	If the warning is displayed then
+		Then I raise "Failed to open document form EmployeeTransfer" exception
+	And I close current window
+
+Scenario: Open choise form "EmployeeTransfer"
+	And I close all client application windows
+	And I execute the built-in language code (Extension)
+		| 'OpenForm("Document.EmployeeTransfer.ChoiceForm", , Undefined, , , , , FormWindowOpeningMode.Independent)'   |
+	If the warning is displayed then
+		Then I raise "Failed to open document choise form EmployeeTransfer" exception
+	And I close current window
+
+Scenario: Open list form "EmployeeVacation" 
+	And I close all client application windows
+	Given I open "EmployeeVacation" document default form
+	If the warning is displayed then
+		Then I raise "Failed to open document form EmployeeVacation" exception
+	And I close current window
+
+Scenario: Open object form "EmployeeVacation"
+	And I close all client application windows
+	Given I open "EmployeeVacation" document main form
+	If the warning is displayed then
+		Then I raise "Failed to open document form EmployeeVacation" exception
+	And I close current window
+
+Scenario: Open choise form "EmployeeVacation"
+	And I close all client application windows
+	And I execute the built-in language code (Extension)
+		| 'OpenForm("Document.EmployeeVacation.ChoiceForm", , Undefined, , , , , FormWindowOpeningMode.Independent)'   |
+	If the warning is displayed then
+		Then I raise "Failed to open document choise form EmployeeVacation" exception
+	And I close current window
+	
 Scenario: Open list form "ForeignCurrencyRevaluation" 
 	And I close all client application windows
 	Given I open "ForeignCurrencyRevaluation" document default form

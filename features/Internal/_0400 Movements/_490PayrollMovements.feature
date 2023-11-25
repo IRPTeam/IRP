@@ -70,8 +70,6 @@ Scenario: _040990 preparation (payroll movements)
 		When Create catalog CancelReturnReasons objects
 	* Data for salary
 		When Create catalog EmployeePositions objects
-		When Create information register T9510S_Staffing records
-		When Create information register T9530S_WorkDays records
 		When Create catalog AccrualAndDeductionTypes objects
 		When Create information register T9500S_AccrualAndDeductionValues records
 		When create Payroll object (movements)

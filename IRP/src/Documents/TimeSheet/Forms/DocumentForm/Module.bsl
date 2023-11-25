@@ -62,7 +62,8 @@ EndProcedure
 
 &AtClientAtServerNoContext
 Procedure SetVisibilityAvailability(Object, Form)
-	Form.Items.FillTimeSheet.Enabled = Not Form.ReadOnly;
+	Form.Items.FillAll.Enabled = Not Form.ReadOnly;
+	Form.Items.RefillByCurrentEmployee.Enabled = Not Form.ReadOnly;
 	
 	If Form.ListMode = "Calendar" Then
 		Form.Items.GroupTimeSheetPages.CurrentPage = Form.Items.GroupTimeSheetPageCalendar;
@@ -467,7 +468,7 @@ EndProcedure
 #Region COMMANDS
 
 &AtClient
-Async Procedure FillTimeSheet(Command)	
+Async Procedure FillAllTimeSheet(Command)	
 	
 	If Not CheckFilling() Then
 		Return;
@@ -489,15 +490,53 @@ Async Procedure FillTimeSheet(Command)
 	SetVisibilityAvailability(Object, ThisObject);
 EndProcedure
 
+&AtClient
+Async Procedure RefillByCurrentEmployee(Command)
+	If Not CheckFilling() Then
+		Return;
+	EndIf;
+	
+	CurrentData = Items.Workers.CurrentData;
+	If CurrentData = Undefined Then
+		Return;
+	EndIf;
+	
+	CurrentData_Employee         = CurrentData.Employee;
+	CurrentData_EmployeeSchedule = CurrentData.EmployeeSchedule;
+	CurrentData_Position         = CurrentData.Position;
+	CurrentData_ProfitLisCenter  = CurrentData.ProfitLossCenter;
+		
+	If ValueIsFilled(CurrentData_Employee) Then
+		Answer = Await DoQueryBoxAsync(StrTemplate(R().QuestionToUser_027, CurrentData_Employee), QuestionDialogMode.OKCancel);
+	Else
+		Return;
+	EndIf;
+	
+	If Answer = DialogReturnCode.OK Then
+		Result = FillTimeSheetAtServer(CurrentData_Employee);
+		Rows = Object.TimeSheetList.FindRows(New Structure("Employee", CurrentData_Employee));
+		For Each Row In Rows Do
+			Object.TimeSheetList.Delete(Row);
+		EndDo;
+		ViewClient_V2.TimeSheetListLoad(Object, ThisObject, Result.Address, Result.GroupColumn, Result.SumColumn);
+		ThisObject.Modified = True;
+		FillWorkersAtClient();
+	EndIf;
+	
+	SetVisibilityAvailability(Object, ThisObject);
+EndProcedure
+
 &AtServer
-Function FillTimeSheetAtServer()
+Function FillTimeSheetAtServer(Filter_Employee = Undefined)
 	FillingParameters = New Structure();
 	FillingParameters.Insert("Company"   , Object.Company);
 	FillingParameters.Insert("Branch"    , Object.Branch);
 	FillingParameters.Insert("BeginDate" , Object.BeginDate);
 	FillingParameters.Insert("EndDate"   , Object.EndDate);
+	FillingParameters.Insert("Employee"  , Filter_Employee);
 	
 	Result = DocTimeSheetServer.GetTimeSheet(FillingParameters);
+	
 	Address = PutToTempStorage(Result.Table, ThisObject.UUID);
 	Return New Structure("Address, GroupColumn, SumColumn", Address, Result.GroupColumn, Result.SumColumn);
 EndFunction

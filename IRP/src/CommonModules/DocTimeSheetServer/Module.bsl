@@ -71,7 +71,7 @@ Function GetTimeSheet(Parameters) Export
 	EndDate = BegOfDay(Parameters.EndDate);
 	
 	While BeginDate <= EndDate Do	
-		ArrayOfStaffing = GetStaffing(Parameters.Company, Parameters.Branch, BeginDate);
+		ArrayOfStaffing = GetStaffing(Parameters.Company, Parameters.Branch, BeginDate, Parameters.Employee);
 		
 		For Each Row In ArrayOfStaffing Do
 			NewRow = ResultTable.Add();
@@ -89,7 +89,7 @@ Function GetTimeSheet(Parameters) Export
 	Return New Structure("Table, GroupColumn, SumColumn", ResultTable, GroupColumn, SumColumn);
 EndFunction
 
-Function GetStaffing(Company, Branch, _Day)
+Function GetStaffing(Company, Branch, _Day, Employee)
 	Query = New Query();
 	Query.Text = 
 	"SELECT
@@ -108,6 +108,11 @@ Function GetStaffing(Company, Branch, _Day)
 	|WHERE
 	|	NOT StaffingFiredSliceLast.Fired
 	|	AND StaffingSliceLast.Branch = &Branch
+	|	AND CASE
+	|		WHEN &Filter_Employee
+	|			THEN StaffingSliceLast.Employee = &Employee
+	|		ELSE TRUE
+	|	END
 	|;
 	|
 	|////////////////////////////////////////////////////////////////////////////////
@@ -148,6 +153,8 @@ Function GetStaffing(Company, Branch, _Day)
 	Query.SetParameter("Company", Company);
 	Query.SetParameter("Branch" , Branch);
 	Query.SetParameter("_Day"   , _Day);
+	Query.SetParameter("Filter_Employee" , ValueIsFilled(Employee));
+	Query.SetParameter("Employee" , Employee);
 	
 	QueryResult = Query.Execute();
 	QuerySelection = QueryResult.Select();

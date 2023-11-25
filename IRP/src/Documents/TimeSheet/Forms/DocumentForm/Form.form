@@ -1007,17 +1007,81 @@
               <representationInContextMenu>Auto</representationInContextMenu>
               <locationInCommandBar>InCommandBar</locationInCommandBar>
             </items>
-            <items xsi:type="form:Button">
-              <name>FillTimeSheet</name>
-              <id>1351</id>
+            <items xsi:type="form:FormGroup">
+              <name>WorkersGroupFill</name>
+              <id>1440</id>
+              <items xsi:type="form:Button">
+                <name>FillAll</name>
+                <id>1444</id>
+                <visible>true</visible>
+                <enabled>true</enabled>
+                <userVisible>
+                  <common>true</common>
+                </userVisible>
+                <extendedTooltip>
+                  <name>FillAllExtendedTooltip</name>
+                  <id>1445</id>
+                  <visible>true</visible>
+                  <enabled>true</enabled>
+                  <userVisible>
+                    <common>true</common>
+                  </userVisible>
+                  <type>Label</type>
+                  <autoMaxWidth>true</autoMaxWidth>
+                  <autoMaxHeight>true</autoMaxHeight>
+                  <extInfo xsi:type="form:LabelDecorationExtInfo">
+                    <horizontalAlign>Left</horizontalAlign>
+                  </extInfo>
+                </extendedTooltip>
+                <commandName>Form.Command.FillAll</commandName>
+                <representation>Auto</representation>
+                <autoMaxWidth>true</autoMaxWidth>
+                <autoMaxHeight>true</autoMaxHeight>
+                <placementArea>UserCmds</placementArea>
+                <representationInContextMenu>Auto</representationInContextMenu>
+              </items>
+              <items xsi:type="form:Button">
+                <name>RefillByCurrentEmployee</name>
+                <id>1442</id>
+                <visible>true</visible>
+                <enabled>true</enabled>
+                <userVisible>
+                  <common>true</common>
+                </userVisible>
+                <extendedTooltip>
+                  <name>RefillByCurrentEmployeeExtendedTooltip</name>
+                  <id>1443</id>
+                  <visible>true</visible>
+                  <enabled>true</enabled>
+                  <userVisible>
+                    <common>true</common>
+                  </userVisible>
+                  <type>Label</type>
+                  <autoMaxWidth>true</autoMaxWidth>
+                  <autoMaxHeight>true</autoMaxHeight>
+                  <extInfo xsi:type="form:LabelDecorationExtInfo">
+                    <horizontalAlign>Left</horizontalAlign>
+                  </extInfo>
+                </extendedTooltip>
+                <commandName>Form.Command.RefillByCurrentEmployee</commandName>
+                <representation>Auto</representation>
+                <autoMaxWidth>true</autoMaxWidth>
+                <autoMaxHeight>true</autoMaxHeight>
+                <placementArea>UserCmds</placementArea>
+                <representationInContextMenu>Auto</representationInContextMenu>
+              </items>
               <visible>true</visible>
               <enabled>true</enabled>
               <userVisible>
                 <common>true</common>
               </userVisible>
+              <title>
+                <key>en</key>
+                <value>Fill time sheet</value>
+              </title>
               <extendedTooltip>
-                <name>FillTimeSheetExtendedTooltip</name>
-                <id>1352</id>
+                <name>WorkersGroupFillExtendedTooltip</name>
+                <id>1441</id>
                 <visible>true</visible>
                 <enabled>true</enabled>
                 <userVisible>
@@ -1030,12 +1094,13 @@
                   <horizontalAlign>Left</horizontalAlign>
                 </extInfo>
               </extendedTooltip>
-              <commandName>Form.Command.FillTimeSheet</commandName>
-              <representation>Auto</representation>
-              <autoMaxWidth>true</autoMaxWidth>
-              <autoMaxHeight>true</autoMaxHeight>
-              <placementArea>UserCmds</placementArea>
-              <representationInContextMenu>Auto</representationInContextMenu>
+              <type>Popup</type>
+              <extInfo xsi:type="form:PopupGroupExtInfo">
+                <picture xsi:type="core:PictureRef">
+                  <picture>StdPicture.Calendar</picture>
+                </picture>
+                <representation>PictureAndText</representation>
+              </extInfo>
             </items>
             <visible>true</visible>
             <enabled>true</enabled>
@@ -3943,24 +4008,38 @@
     <currentRowUse>Auto</currentRowUse>
   </formCommands>
   <formCommands>
-    <name>FillTimeSheet</name>
+    <name>FillAll</name>
     <title>
       <key>en</key>
-      <value>Fill time sheet</value>
+      <value>Fill all</value>
     </title>
     <id>16</id>
     <use>
       <common>true</common>
     </use>
-    <picture xsi:type="core:PictureRef">
-      <picture>StdPicture.Calendar</picture>
-    </picture>
     <action xsi:type="form:FormCommandHandlerContainer">
       <handler>
-        <name>FillTimeSheet</name>
+        <name>FillAllTimeSheet</name>
       </handler>
     </action>
     <representation>TextPicture</representation>
+    <currentRowUse>Auto</currentRowUse>
+  </formCommands>
+  <formCommands>
+    <name>RefillByCurrentEmployee</name>
+    <title>
+      <key>en</key>
+      <value>Refill by current employee</value>
+    </title>
+    <id>17</id>
+    <use>
+      <common>true</common>
+    </use>
+    <action xsi:type="form:FormCommandHandlerContainer">
+      <handler>
+        <name>RefillByCurrentEmployee</name>
+      </handler>
+    </action>
     <currentRowUse>Auto</currentRowUse>
   </formCommands>
   <commandInterface>

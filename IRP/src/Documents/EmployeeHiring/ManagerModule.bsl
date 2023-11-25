@@ -12,6 +12,11 @@ Function PostingGetDocumentDataTables(Ref, Cancel, PostingMode, Parameters, AddI
 	Tables = New Structure;
 	QueryArray = GetQueryTextsSecondaryTables();
 	Parameters.Insert("QueryParameters", GetAdditionalQueryParameters(Ref));
+	
+	If ValueIsFilled(Ref.PersonalSalary) And ValueIsFilled(Ref.AccrualType) And PostingMode <> Undefined Then
+		WriteSelfRecords(Ref);
+	EndIf;
+	
 	PostingServer.ExecuteQuery(Ref, QueryArray, Parameters);
 	Return Tables;
 EndFunction
@@ -44,6 +49,7 @@ EndProcedure
 #Region Undoposting
 
 Function UndopostingGetDocumentDataTables(Ref, Cancel, Parameters, AddInfo = Undefined) Export
+	ClearSelfRecords(Ref);
 	Return PostingGetDocumentDataTables(Ref, Cancel, Undefined, Parameters, AddInfo);
 EndFunction
 
@@ -143,3 +149,66 @@ Function GetAccessKey(Obj) Export
 EndFunction
 
 #EndRegion
+
+#Region Service
+
+Procedure ClearSelfRecords(Ref)
+	Query = New Query();
+	Query.Text =
+	"SELECT
+	|	Table.EmployeeOrPosition,
+	|	Table.AccualOrDeductionType,
+	|	Table.Period
+	|FROM
+	|	InformationRegister.T9500S_AccrualAndDeductionValues AS Table
+	|WHERE
+	|	Table.EmployeeHiring = &EmployeeHiring";
+	Query.SetParameter("EmployeeHiring", Ref);
+	QueryResult = Query.Execute();
+	QuerySelection = QueryResult.Select();
+	
+	While QuerySelection.Next() Do
+		RecordSet = InformationRegisters.T9500S_AccrualAndDeductionValues.CreateRecordSet();
+		RecordSet.Filter.EmployeeOrPosition.Set(QuerySelection.EmployeeOrPosition);
+		RecordSet.Filter.AccualOrDeductionType.Set(QuerySelection.AccualOrDeductionType);
+		RecordSet.Filter.Period.Set(QuerySelection.Period);
+		RecordSet.Clear();
+		RecordSet.Write();
+	EndDo;
+EndProcedure
+
+Procedure WriteSelfRecords(Ref)
+	RecordSet = InformationRegisters.T9500S_AccrualAndDeductionValues.CreateRecordSet();
+	RecordSet.Filter.EmployeeOrPosition.Set(Ref.Employee);
+	RecordSet.Filter.AccualOrDeductionType.Set(Ref.AccrualType);
+	NewRecord = RecordSet.Add();
+	
+	NewRecord.Period = Ref.Date;
+	NewRecord.EmployeeOrPosition = Ref.Employee;
+	NewRecord.AccualOrDeductionType = Ref.AccrualType;
+	NewRecord.Value = Ref.PersonalSalary;
+	NewRecord.EmployeeHiring = Ref;
+	
+	RecordSet.Write();
+EndProcedure
+
+#EndRegion
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

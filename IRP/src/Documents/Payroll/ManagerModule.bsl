@@ -93,10 +93,6 @@ Function GetAdditionalQueryParameters(Ref)
 	Return StrParams;
 EndFunction
 
-#EndRegion
-
-#Region Posting_SourceTable
-
 Function GetQueryTextsSecondaryTables()
 	QueryArray = New Array;
 	QueryArray.Add(AccrualList());
@@ -105,23 +101,41 @@ Function GetQueryTextsSecondaryTables()
 	Return QueryArray;
 EndFunction
 
+Function GetQueryTextsMasterTables()
+	QueryArray = New Array;
+	QueryArray.Add(R3027B_EmployeeCashAdvance());
+	QueryArray.Add(R5021T_Revenues());
+	QueryArray.Add(R5022T_Expenses());
+	QueryArray.Add(R9510B_SalaryPayment());
+	QueryArray.Add(R9545T_PaidVacations());
+	QueryArray.Add(R9555T_PaidSickLeaves());
+	Return QueryArray;
+EndFunction
+
+#EndRegion
+
+#Region Posting_SourceTable
+
 Function AccrualList()
-	Return "SELECT
-		   |	AccrualList.Key,
-		   |	AccrualList.Ref.Date AS Period,
-		   |	AccrualList.Ref.Company AS Company,
-		   |	AccrualList.Ref.Branch AS Branch,
-		   |	AccrualList.Ref.Currency AS Currency,
-		   |	AccrualList.Ref.PaymentPeriod AS PaymentPeriod,
-		   |	AccrualList.Employee,
-		   |	AccrualList.ExpenseType,
-		   |	AccrualList.ProfitLossCenter,
-		   |	AccrualList.Amount
-		   |INTO AccrualList
-		   |FROM
-		   |	Document.Payroll.AccrualList AS AccrualList
-		   |WHERE
-		   |	AccrualList.Ref = &Ref";
+	Return 
+		"SELECT
+		|	AccrualList.Key,
+		|	AccrualList.Ref.Date AS Period,
+		|	AccrualList.Ref.Company AS Company,
+		|	AccrualList.Ref.Branch AS Branch,
+		|	AccrualList.Ref.Currency AS Currency,
+		|	AccrualList.Ref.PaymentPeriod AS PaymentPeriod,
+		|	AccrualList.Employee,
+		|	AccrualList.ExpenseType,
+		|	AccrualList.ProfitLossCenter,
+		|	AccrualList.Amount,
+		|	AccrualList.PaidVacationDays,
+		|	AccrualList.PaidSickLeaveDays
+		|INTO AccrualList
+		|FROM
+		|	Document.Payroll.AccrualList AS AccrualList
+		|WHERE
+		|	AccrualList.Ref = &Ref";
 EndFunction
 
 Function DeductionList()
@@ -165,132 +179,155 @@ EndFunction
 
 #Region Posting_MainTables
 
-Function GetQueryTextsMasterTables()
-	QueryArray = New Array;
-	QueryArray.Add(R3027B_EmployeeCashAdvance());
-	QueryArray.Add(R5021T_Revenues());
-	QueryArray.Add(R5022T_Expenses());
-	QueryArray.Add(R9510B_SalaryPayment());
-	Return QueryArray;
-EndFunction
-
 Function R5022T_Expenses()
-	Return "SELECT
-		   |	AccrualList.Period,
-		   |	AccrualList.Key,
-		   |	AccrualList.Company,
-		   |	AccrualList.Branch,
-		   |	AccrualList.Currency,
-		   |	AccrualList.ExpenseType,
-		   |	AccrualList.ProfitLossCenter,
-		   |	AccrualList.Amount AS Amount
-		   |INTO R5022T_Expenses
-		   |FROM
-		   |	AccrualList
-		   |WHERE
-		   |	TRUE
-		   |
-		   |UNION ALL
-		   |
-		   |SELECT
-		   |	DeductionList.Period,
-		   |	DeductionList.Key,
-		   |	DeductionList.Company,
-		   |	DeductionList.Branch,
-		   |	DeductionList.Currency,
-		   |	DeductionList.ExpenseType,
-		   |	DeductionList.ProfitLossCenter,
-		   |	-DeductionList.Amount AS Amount
-		   |FROM
-		   |	DeductionList
-		   |WHERE
-		   |	NOT DeductionList.IsRevenue";
+	Return 
+		"SELECT
+		|	AccrualList.Period,
+		|	AccrualList.Key,
+		|	AccrualList.Company,
+		|	AccrualList.Branch,
+		|	AccrualList.Currency,
+		|	AccrualList.ExpenseType,
+		|	AccrualList.ProfitLossCenter,
+		|	AccrualList.Amount AS Amount
+		|INTO R5022T_Expenses
+		|FROM
+		|	AccrualList
+		|WHERE
+		|	TRUE
+		|
+		|UNION ALL
+		|
+		|SELECT
+		|	DeductionList.Period,
+		|	DeductionList.Key,
+		|	DeductionList.Company,
+		|	DeductionList.Branch,
+		|	DeductionList.Currency,
+		|	DeductionList.ExpenseType,
+		|	DeductionList.ProfitLossCenter,
+		|	-DeductionList.Amount AS Amount
+		|FROM
+		|	DeductionList
+		|WHERE
+		|	NOT DeductionList.IsRevenue";
 EndFunction
 
 Function R5021T_Revenues()
-	Return "SELECT
-		   |	DeductionList.Period,
-		   |	DeductionList.Key,
-		   |	DeductionList.Company,
-		   |	DeductionList.Branch,
-		   |	DeductionList.Currency,
-		   |	DeductionList.ExpenseType AS RevenueType,
-		   |	DeductionList.ProfitLossCenter,
-		   |	DeductionList.Amount AS Amount
-		   |INTO R5021T_Revenues
-		   |FROM
-		   |	DeductionList
-		   |WHERE
-		   |	DeductionList.IsRevenue";
+	Return 
+		"SELECT
+		|	DeductionList.Period,
+		|	DeductionList.Key,
+		|	DeductionList.Company,
+		|	DeductionList.Branch,
+		|	DeductionList.Currency,
+		|	DeductionList.ExpenseType AS RevenueType,
+		|	DeductionList.ProfitLossCenter,
+		|	DeductionList.Amount AS Amount
+		|INTO R5021T_Revenues
+		|FROM
+		|	DeductionList
+		|WHERE
+		|	DeductionList.IsRevenue";
 EndFunction
 
 Function R9510B_SalaryPayment()
-	Return "SELECT
-		   |	VALUE(AccumulationRecordType.Receipt) AS RecordType,
-		   |	AccrualList.Period,
-		   |	AccrualList.Key,
-		   |	AccrualList.Company,
-		   |	AccrualList.Branch,
-		   |	AccrualList.Currency,
-		   |	AccrualList.PaymentPeriod,
-		   |	AccrualList.Employee,
-		   |	AccrualList.Amount
-		   |INTO R9510B_SalaryPayment
-		   |FROM
-		   |	AccrualList
-		   |WHERE
-		   |	TRUE
-		   |
-		   |UNION ALL
-		   |
-		   |SELECT
-		   |	VALUE(AccumulationRecordType.Expense),
-		   |	DeductionList.Period,
-		   |	DeductionList.Key,
-		   |	DeductionList.Company,
-		   |	DeductionList.Branch,
-		   |	DeductionList.Currency,
-		   |	DeductionList.PaymentPeriod,
-		   |	DeductionList.Employee,
-		   |	DeductionList.Amount
-		   |FROM
-		   |	DeductionList
-		   |WHERE
-		   |	TRUE
-		   |
-		   |UNION ALL
-		   |
-		   |SELECT
-		   |	VALUE(AccumulationRecordType.Expense),
-		   |	CashAdvanceDeductionList.Period,
-		   |	CashAdvanceDeductionList.Key,
-		   |	CashAdvanceDeductionList.Company,
-		   |	CashAdvanceDeductionList.Branch,
-		   |	CashAdvanceDeductionList.Currency,
-		   |	CashAdvanceDeductionList.PaymentPeriod,
-		   |	CashAdvanceDeductionList.Employee,
-		   |	CashAdvanceDeductionList.Amount
-		   |FROM
-		   |	CashAdvanceDeductionList
-		   |WHERE
-		   |	TRUE";
+	Return 
+		"SELECT
+		|	VALUE(AccumulationRecordType.Receipt) AS RecordType,
+		|	AccrualList.Period,
+		|	AccrualList.Key,
+		|	AccrualList.Company,
+		|	AccrualList.Branch,
+		|	AccrualList.Currency,
+		|	AccrualList.PaymentPeriod,
+		|	AccrualList.Employee,
+		|	AccrualList.Amount
+		|INTO R9510B_SalaryPayment
+		|FROM
+		|	AccrualList
+		|WHERE
+		|	TRUE
+		|
+		|UNION ALL
+		|
+		|SELECT
+		|	VALUE(AccumulationRecordType.Expense),
+		|	DeductionList.Period,
+		|	DeductionList.Key,
+		|	DeductionList.Company,
+		|	DeductionList.Branch,
+		|	DeductionList.Currency,
+		|	DeductionList.PaymentPeriod,
+		|	DeductionList.Employee,
+		|	DeductionList.Amount
+		|FROM
+		|	DeductionList
+		|WHERE
+		|	TRUE
+		|
+		|UNION ALL
+		|
+		|SELECT
+		|	VALUE(AccumulationRecordType.Expense),
+		|	CashAdvanceDeductionList.Period,
+		|	CashAdvanceDeductionList.Key,
+		|	CashAdvanceDeductionList.Company,
+		|	CashAdvanceDeductionList.Branch,
+		|	CashAdvanceDeductionList.Currency,
+		|	CashAdvanceDeductionList.PaymentPeriod,
+		|	CashAdvanceDeductionList.Employee,
+		|	CashAdvanceDeductionList.Amount
+		|FROM
+		|	CashAdvanceDeductionList
+		|WHERE
+		|	TRUE";
 EndFunction
 
 Function R3027B_EmployeeCashAdvance()
-	Return "SELECT
-		   |	VALUE(AccumulationRecordType.Expense) AS RecordType,
-		   |	CashAdvanceDeductionList.Period,
-		   |	CashAdvanceDeductionList.Key,
-		   |	CashAdvanceDeductionList.Company,
-		   |	CashAdvanceDeductionList.Branch,
-		   |	CashAdvanceDeductionList.Currency,
-		   |	CashAdvanceDeductionList.Employee AS Partner,
-		   |	CashAdvanceDeductionList.Amount
-		   |INTO R3027B_EmployeeCashAdvance
-		   |FROM
-		   |	CashAdvanceDeductionList
-		   |WHERE
-		   |	TRUE";
+	Return 
+		"SELECT
+		|	VALUE(AccumulationRecordType.Expense) AS RecordType,
+		|	CashAdvanceDeductionList.Period,
+		|	CashAdvanceDeductionList.Key,
+		|	CashAdvanceDeductionList.Company,
+		|	CashAdvanceDeductionList.Branch,
+		|	CashAdvanceDeductionList.Currency,
+		|	CashAdvanceDeductionList.Employee AS Partner,
+		|	CashAdvanceDeductionList.Amount
+		|INTO R3027B_EmployeeCashAdvance
+		|FROM
+		|	CashAdvanceDeductionList
+		|WHERE
+		|	TRUE";
+EndFunction
+
+Function R9545T_PaidVacations()
+	Return
+		"SELECT
+		|	AccrualList.Period,
+		|	AccrualList.Company,
+		|	AccrualList.Employee,
+		|	AccrualList.PaidVacationDays AS Paid
+		|INTO R9545T_PaidVacations
+		|FROM
+		|	AccrualList AS AccrualList
+		|WHERE
+		|	AccrualList.PaidVacationDays <> 0";
+EndFunction
+
+Function R9555T_PaidSickLeaves()
+	Return
+		"SELECT
+		|	AccrualList.Period,
+		|	AccrualList.Company,
+		|	AccrualList.Employee,
+		|	AccrualList.PaidSickLeaveDays AS Paid
+		|INTO R9555T_PaidSickLeaves
+		|FROM
+		|	AccrualList AS AccrualList
+		|WHERE
+		|	AccrualList.PaidSickLeaveDays <> 0";	
 EndFunction
 
 #EndRegion

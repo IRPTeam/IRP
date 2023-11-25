@@ -90,11 +90,13 @@ EndFunction
 
 Function GetQueryTextsSecondaryTables()
 	QueryArray = New Array;
+	QueryArray.Add(AccrualList());
 	Return QueryArray;
 EndFunction
 
 Function GetQueryTextsMasterTables()
 	QueryArray = New Array;
+	QueryArray.Add(R9560T_AdditionalAccrual());
 	Return QueryArray;
 EndFunction
 
@@ -102,10 +104,47 @@ EndFunction
 
 #Region Posting_SourceTable
 
+Function AccrualList()
+	Return
+		"SELECT
+		|	Table.Ref.Date AS Period,
+		|	Table.Ref.Company AS Company,
+		|	Table.Ref.Branch AS Branch,
+		|	Table.Employee,
+		|	Table.Position,
+		|	Table.AccrualType,
+		|	Table.ExpenseType,
+		|	Table.ProfitLossCenter,
+		|	Table.Amount
+		|INTO AccrualList
+		|FROM
+		|	Document.AdditionalAccrual.AccrualList AS Table
+		|WHERE
+		|	Table.Ref = &Ref";
+EndFunction
+
 #EndRegion
 
 #Region Posting_MainTables
 
+Function R9560T_AdditionalAccrual()
+	Return
+		"SELECT
+		|	AccrualList.Period,
+		|	AccrualList.Company,
+		|	AccrualList.Branch,
+		|	AccrualList.Employee,
+		|	AccrualList.Position,
+		|	AccrualList.AccrualType,
+		|	AccrualList.ExpenseType,
+		|	AccrualList.ProfitLossCenter,
+		|	AccrualList.Amount
+		|INTO R9560T_AdditionalAccrual
+		|FROM
+		|	AccrualList AS AccrualList
+		|WHERE
+		|	TRUE";
+EndFunction
 
 #EndRegion
 

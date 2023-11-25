@@ -1,4 +1,5 @@
 
+
 #Region FORM
 
 &AtServer
@@ -102,6 +103,24 @@ EndProcedure
 
 #EndRegion
 
+&AtClient
+Procedure FillAsFrom(Command)
+	If Not ValueIsFilled(Object.ToPosition) Then
+		Object.ToPosition = Object.FromPosition;
+	EndIf;
+	
+	If Not ValueIsFilled(Object.ToEmployeeSchedule) Then
+		Object.ToEmployeeSchedule = Object.FromEmployeeSchedule;
+	EndIf;
+	
+	If Not ValueIsFilled(Object.ToProfitLossCenter) Then
+		Object.ToProfitLossCenter = Object.FromProfitLossCenter;
+	EndIf;
+	
+	If Not ValueIsFilled(Object.ToBranch) Then
+		Object.ToBranch = Object.Branch;
+	EndIf;
+EndProcedure
 
 #Region SERVICE
 

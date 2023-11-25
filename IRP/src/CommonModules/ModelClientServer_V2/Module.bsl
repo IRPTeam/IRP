@@ -428,8 +428,9 @@ Function GetChain()
 	Chain.Insert("ChangeEmployeeScheduleByEmployee" , GetChainLink("ChangeEmployeeScheduleByEmployeeExecute"));
 	Chain.Insert("ChangeProfitLossCenterByEmployee" , GetChainLink("ChangeProfitLossCenterByEmployeeExecute"));
 	Chain.Insert("ChangeBranchByEmployee"           , GetChainLink("ChangeBranchByEmployeeExecute"));
-	
-	
+	Chain.Insert("ChangeAccrualTypeByCompany" , GetChainLink("ChangeAccrualTypeByCompanyExecute"));
+	Chain.Insert("ChangeSalaryByPosition"     , GetChainLink("ChangeSalaryByPositionExecute"));
+
 	// Extractors
 	Chain.Insert("ExtractDataAgreementApArPostingDetail"   , GetChainLink("ExtractDataAgreementApArPostingDetailExecute"));
 	Chain.Insert("ExtractDataCurrencyFromAccount"          , GetChainLink("ExtractDataCurrencyFromAccountExecute"));
@@ -4093,6 +4094,35 @@ EndFunction
 Function ChangeBranchByEmployeeExecute(Options) Export
 	Result = SalaryServer.GetEmployeeInfo(Options.Ref, Options.Date, Options.Company, Options.Employee);
 	Return Result.Branch;
+EndFunction
+
+#EndRegion
+
+#Region CHANGE_ACCRUAL_TYPE_BY_COMPANY
+
+Function ChangeAccrualTypeByCompanyOptions() Export
+	Return GetChainLinkOptions("Company");
+EndFunction
+
+Function ChangeAccrualTypeByCompanyExecute(Options) Export
+	If Not ValueIsFilled(Options.Company) Then
+		Return Undefined;
+	EndIf;
+	
+	Return CommonFunctionsServer.GetRefAttribute(Options.Company, "SalaryBasicPayroll");
+EndFunction
+
+#EndRegion
+
+#Region CHANGE_SALARY_BY_POSITION
+	
+Function ChangeSalaryByPositionOptions() Export
+	Return GetChainLinkOptions("Ref, Date, Position, AccrualType");
+EndFunction
+	
+Function ChangeSalaryByPositionExecute(Options) Export
+	Result = SalaryServer.GetSalaryValue(Options.Ref, Options.Date, Options.Position, Options.AccrualType);
+	Return Result;
 EndFunction
 
 #EndRegion

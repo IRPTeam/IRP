@@ -125,7 +125,7 @@
   <fullTextSearch>Use</fullTextSearch>
   <objectPresentation>
     <key>en</key>
-    <value>Expense and revenue type</value>
+    <value>Employee positions</value>
   </objectPresentation>
   <hierarchyType>HierarchyOfItems</hierarchyType>
   <levelCount>2</levelCount>

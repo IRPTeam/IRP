@@ -90,11 +90,13 @@ EndFunction
 
 Function GetQueryTextsSecondaryTables()
 	QueryArray = New Array;
+	QueryArray.Add(DeductionList());
 	Return QueryArray;
 EndFunction
 
 Function GetQueryTextsMasterTables()
 	QueryArray = New Array;
+	QueryArray.Add(R9570T_AdditionalDeduction());
 	Return QueryArray;
 EndFunction
 
@@ -102,10 +104,48 @@ EndFunction
 
 #Region Posting_SourceTable
 
+Function DeductionList()
+	Return
+		"SELECT
+		|	Table.Ref.Date AS Period,
+		|	Table.Ref.Company AS Company,
+		|	Table.Ref.Branch AS Branch,
+		|	Table.Employee,
+		|	Table.Position,
+		|	Table.DeductionType,
+		|	Table.ExpenseType,
+		|	Table.ProfitLossCenter,
+		|	Table.Amount
+		|INTO DeductionList
+		|FROM
+		|	Document.AdditionalDeduction.DeductionList AS Table
+		|WHERE
+		|	Table.Ref = &Ref";
+EndFunction
+
+	
 #EndRegion
 
 #Region Posting_MainTables
 
+Function R9570T_AdditionalDeduction()
+	Return
+		"SELECT
+		|	DeductionList.Period,
+		|	DeductionList.Company,
+		|	DeductionList.Branch,
+		|	DeductionList.Employee,
+		|	DeductionList.Position,
+		|	DeductionList.DeductionType,
+		|	DeductionList.ExpenseType,
+		|	DeductionList.ProfitLossCenter,
+		|	DeductionList.Amount
+		|INTO R9570T_AdditionalDeduction
+		|FROM
+		|	DeductionList AS DeductionList
+		|WHERE
+		|	TRUE";
+EndFunction
 
 #EndRegion
 

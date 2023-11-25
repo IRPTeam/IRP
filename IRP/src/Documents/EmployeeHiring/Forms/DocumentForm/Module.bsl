@@ -4,12 +4,14 @@
 &AtServer
 Procedure OnReadAtServer(CurrentObject)
 	DocEmployeeHiringServer.OnReadAtServer(Object, ThisObject, CurrentObject);
+	ThisObject.SalaryType = ?(ValueIsFilled(Object.PersonalSalary),"Personal", "ByPosition");
 	SetVisibilityAvailability(CurrentObject, ThisObject);
 EndProcedure
 
 &AtServer
 Procedure OnCreateAtServer(Cancel, StandardProcessing)
 	DocEmployeeHiringServer.OnCreateAtServer(Object, ThisObject, Cancel, StandardProcessing);
+	ThisObject.SalaryType = ?(ValueIsFilled(Object.PersonalSalary),"Personal", "ByPosition");
 	If Parameters.Key.IsEmpty() Then
 		SetVisibilityAvailability(Object, ThisObject);
 	EndIf;
@@ -54,8 +56,21 @@ Procedure FormSetVisibilityAvailability() Export
 EndProcedure
 
 &AtClientAtServerNoContext
-Procedure SetVisibilityAvailability(Object, Form)
-	Return
+Procedure SetVisibilityAvailability(Object, Form)	
+	If Form.SalaryType = "Personal" Then
+		Form.Items.GroupSalary.CurrentPage = Form.Items.GroupPerosnalSalary;
+	Else
+		Form.Items.GroupSalary.CurrentPage = Form.Items.GroupSalaryByPosition;
+	EndIf;
+EndProcedure
+
+&AtClient
+Procedure SalaryTypeOnChange(Item)
+	If ThisObject.SalaryType = "ByPosition" Then
+		Object.PersonalSalary = 0;
+	EndIf;
+	
+	SetVisibilityAvailability(Object, ThisObject);
 EndProcedure
 
 &AtClient
@@ -98,6 +113,15 @@ EndProcedure
 &AtClient
 Procedure EmployeeOnChange(Item)
 	DocEmployeeHiringClient.EmployeeOnChange(Object, ThisObject, Item);
+EndProcedure
+
+#EndRegion
+
+#Region POSITION
+
+&AtClient
+Procedure PositionOnChange(Item)
+	DocEmployeeHiringClient.PositionOnChange(Object, ThisObject, Item);	
 EndProcedure
 
 #EndRegion

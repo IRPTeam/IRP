@@ -1,12 +1,12 @@
 
 #Region FORM
-//++
+
 &AtServer
 Procedure OnReadAtServer(CurrentObject)
 	DocAdditionalAccrualServer.OnReadAtServer(Object, ThisObject, CurrentObject);
 	SetVisibilityAvailability(CurrentObject, ThisObject);
 EndProcedure
-//++
+
 &AtServer
 Procedure OnCreateAtServer(Cancel, StandardProcessing)
 	DocAdditionalAccrualServer.OnCreateAtServer(Object, ThisObject, Cancel, StandardProcessing);
@@ -19,14 +19,13 @@ EndProcedure
 Procedure BeforeWriteAtServer(Cancel, CurrentObject, WriteParameters)
 	AddAttributesAndPropertiesServer.BeforeWriteAtServer(ThisObject, Cancel, CurrentObject, WriteParameters);
 EndProcedure
-//++
+
 &AtServer
 Procedure AfterWriteAtServer(CurrentObject, WriteParameters)
 	DocAdditionalAccrualServer.AfterWriteAtServer(Object, ThisObject, CurrentObject, WriteParameters);
 	SetVisibilityAvailability(CurrentObject, ThisObject);
 EndProcedure
 
-//++
 &AtClient
 Procedure OnOpen(Cancel)
 	DocAdditionalAccrualClient.OnOpen(Object, ThisObject, Cancel);
@@ -43,7 +42,7 @@ EndProcedure
 Procedure OnWriteAtServer(Cancel, CurrentObject, WriteParameters)
 	DocumentsServer.OnWriteAtServer(Object, ThisObject, Cancel, CurrentObject, WriteParameters);
 EndProcedure
-//++
+
 &AtClient
 Procedure AfterWrite(WriteParameters)
 	DocAdditionalAccrualClient.AfterWriteAtClient(Object, ThisObject, WriteParameters);
@@ -56,7 +55,7 @@ EndProcedure
 
 &AtClientAtServerNoContext
 Procedure SetVisibilityAvailability(Object, Form)
-	Return
+	Form.Items.EditCurrencies.Enabled = Not Form.ReadOnly;
 EndProcedure
 
 &AtClient
@@ -77,7 +76,7 @@ EndProcedure
 #EndRegion
 
 #Region _DATE
-//++
+
 &AtClient
 Procedure DateOnChange(Item)
 	DocAdditionalAccrualClient.DateOnChange(Object, ThisObject, Item);
@@ -86,7 +85,7 @@ EndProcedure
 #EndRegion
 
 #Region COMPANY
-//++
+
 &AtClient
 Procedure CompanyOnChange(Item)
 	DocAdditionalAccrualClient.CompanyOnChange(Object, ThisObject, Item);
@@ -94,8 +93,48 @@ EndProcedure
 
 #EndRegion
 
+&AtClient
+Procedure CurrencyOnChange(Item)
+	DocAdditionalAccrualClient.CurrencyOnChange(Object, ThisObject, Item);
+EndProcedure
+
+&AtClient
+Procedure AccrualListBeforeAddRow(Item, Cancel, Clone, Parent, IsFolder, Parameter)
+	DocAdditionalAccrualClient.AccrualListBeforeAddRow(Object, ThisObject, Item, Cancel, Clone, Parent, IsFolder, Parameter);
+EndProcedure
+
+&AtClient
+Procedure AccrualListAfterDeleteRow(Item)
+	DocAdditionalAccrualClient.AccrualListAfterDeleteRow(Object, ThisObject, Item);
+EndProcedure
+
+&AtClient
+Procedure AccrualListBeforeDeleteRow(Item, Cancel)
+	DocAdditionalAccrualClient.AccrualListBeforeDeleteRow(Object, ThisObject, Item, Cancel);
+EndProcedure
+
+&AtClient
+Procedure AccrualListSelection(Item, RowSelected, Field, StandardProcessing)
+	DocAdditionalAccrualClient.AccrualListSelection(Object, ThisObject, Item, RowSelected, Field, StandardProcessing);
+EndProcedure
+
+&AtClient
+Procedure AccrualListEmployeeOnChange(Item)
+	DocAdditionalAccrualClient.AccrualListEmployeeOnChange(Object, ThisObject, Item, "AccrualList");
+EndProcedure
+
+&AtClient
+Procedure AccrualListAccrualTypeOnChange(Item)
+	DocAdditionalAccrualClient.AccrualListAccrualTypeOnChange(Object, ThisObject, Item, "AccrualList");
+EndProcedure
+
+&AtClient
+Procedure AccrualListAmountOnChange(Item)
+	DocAdditionalAccrualClient.AccrualListAmountOnChange(Object, ThisObject, Item, "AccrualList");
+EndProcedure
+
 #Region SERVICE
-//++
+
 &AtClient
 Function GetProcessingModule() Export
 	Str = New Structure;
@@ -172,6 +211,20 @@ EndProcedure
 #EndRegion
 
 #Region COMMANDS
+
+&AtClient
+Procedure EditCurrencies(Command)
+	CurrentData = ThisObject.Items.AccrualList.CurrentData;
+	If CurrentData = Undefined Then
+		Return;
+	EndIf;	
+	FormParameters = CurrenciesClientServer.GetParameters_V5(Object, CurrentData);
+	NotifyParameters = New Structure();
+	NotifyParameters.Insert("Object", Object);
+	NotifyParameters.Insert("Form"  , ThisObject);
+	Notify = New NotifyDescription("EditCurrenciesContinue", CurrenciesClient, NotifyParameters);
+	OpenForm("CommonForm.EditCurrencies", FormParameters, , , , , Notify, FormWindowOpeningMode.LockOwnerWindow);
+EndProcedure
 
 &AtClient
 Procedure ShowRowKey(Command)

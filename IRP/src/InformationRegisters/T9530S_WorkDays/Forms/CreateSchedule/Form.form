@@ -210,6 +210,15 @@
       <choiceList>
         <presentation>
           <key>en</key>
+          <value>Week with days off</value>
+        </presentation>
+        <value xsi:type="core:StringValue">
+          <value>WeekWithDaysOff</value>
+        </value>
+      </choiceList>
+      <choiceList>
+        <presentation>
+          <key>en</key>
           <value>In two days</value>
         </presentation>
         <value xsi:type="core:StringValue">
@@ -219,10 +228,19 @@
       <choiceList>
         <presentation>
           <key>en</key>
-          <value>Week with days off</value>
+          <value>Two in two days</value>
         </presentation>
         <value xsi:type="core:StringValue">
-          <value>WeekWithDaysOff</value>
+          <value>TwoInTwoDays</value>
+        </value>
+      </choiceList>
+      <choiceList>
+        <presentation>
+          <key>en</key>
+          <value>Three in Three days</value>
+        </presentation>
+        <value xsi:type="core:StringValue">
+          <value>ThreeInThreeDays</value>
         </value>
       </choiceList>
     </extInfo>

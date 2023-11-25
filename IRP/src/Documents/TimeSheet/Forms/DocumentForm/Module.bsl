@@ -75,7 +75,48 @@ Procedure SetVisibilityAvailability(Object, Form)
 	
 #IF Client THEN
 	Form.Items.Calendar.Refresh();
+
+	Form.TotalDays = 0;
+	Form.TotalWeekend = 0;
+	Form.TotalWorkingDays = 0;
+	Form.TotalNotWorkingDays = 0;
+	Form.TotalVacation = 0;
+	Form.TotalSickLeave = 0;
+	
+	For Each Row In Object.TimeSheetList Do
+		If Not Row.Visible Then
+			Continue;
+		EndIf;
+		
+		Form.TotalDays = Form.TotalDays + 1;
+		
+		If Not ValueIsFilled(Row.CountDaysHours)
+			And Not ValueIsFilled(Row.ActuallyDaysHours) Then
+				Form.TotalWeekend = Form.TotalWeekend + 1;
+				
+		ElsIf ValueIsFilled(Row.ActuallyDaysHours)
+				And Not Row.IsVacation 
+				And Not Row.IsSickLeave Then
+				Form.TotalWorkingDays = Form.TotalWorkingDays + 1;
+					
+		ElsIf ValueIsFilled(Row.CountDaysHours) 
+				And Not ValueIsFilled(Row.ActuallyDaysHours) Then
+				Form.TotalNotWorkingDays = Form.TotalNotWorkingDays + 1;
+			
+		ElsIf ValueIsFilled(Row.CountDaysHours) 
+				And ValueIsFilled(Row.ActuallyDaysHours)
+				And Row.IsVacation Then
+				Form.TotalVacation = Form.TotalVacation + 1;
+			
+		ElsIf ValueIsFilled(Row.CountDaysHours) 
+				And ValueIsFilled(Row.ActuallyDaysHours)
+				And Row.IsSickLeave Then
+				Form.TotalSickLeave = Form.TotalSickLeave + 1;
+
+		EndIf;
+	EndDo;
 #ENDIF
+
 EndProcedure
 
 &AtClient
@@ -191,6 +232,7 @@ Procedure EditCalendarDayEnd(Result, NotifyParams) Export
 	
 	TimeSheetRows = Object.TimeSheetList.FindRows(New Structure("Key", Result.RowKey));
 	TimeSheetRows[0].ActuallyDaysHours = Result.ActuallyDaysHours;
+	ThisObject.Modified = True;
 	SetVisibilityAvailability(Object, ThisObject);
 EndProcedure
 
@@ -311,7 +353,36 @@ EndProcedure
 
 &AtClient
 Procedure WorkersBeforeDeleteRow(Item, Cancel)
-	Cancel = True;
+	CurrentData = Items.Workers.CurrentData;
+	If CurrentData = Undefined Then
+		Cancel = True;
+		Return;
+	EndIf;
+	RemoveWorkerRow(CurrentData);
+EndProcedure
+
+&AtClient
+Procedure WorkersAfterDeleteRow(Item)
+	SetVisibilityAvailability(Object, ThisObject);
+EndProcedure
+
+&AtClient
+Procedure TimeSheetListActuallyDaysHoursOnChange(Item)
+	SetVisibilityAvailability(Object, ThisObject);
+EndProcedure
+
+&AtClient
+Procedure RemoveWorkerRow(CurrentData)
+	Filter = New Structure();
+	Filter.Insert("Employee"         , CurrentData.Employee);
+	Filter.Insert("EmployeeSchedule" , CurrentData.EmployeeSchedule);
+	Filter.Insert("Position"         , CurrentData.Position);
+	Filter.Insert("ProfitLossCenter" , CurrentData.ProfitLossCenter);
+	
+	Rows = Object.TimeSheetList.FindRows(Filter);
+	For Each Row In Rows Do
+		Object.TimeSheetList.Delete(Row);
+	EndDo;
 EndProcedure
 
 #EndRegion

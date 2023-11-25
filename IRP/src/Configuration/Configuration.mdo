@@ -619,6 +619,7 @@
   <commonModules>CommonModule.DocAdditionalDeductionClient</commonModules>
   <commonModules>CommonModule.DocAdditionalDeductionServer</commonModules>
   <commonModules>CommonModule.SalaryServer</commonModules>
+  <commonModules>CommonModule.SalaryPrivileged</commonModules>
   <commonAttributes>CommonAttribute.Author</commonAttributes>
   <commonAttributes>CommonAttribute.Branch</commonAttributes>
   <commonAttributes>CommonAttribute.Description</commonAttributes>
@@ -1328,6 +1329,10 @@
   <accumulationRegisters>AccumulationRegister.TM1030B_TransactionsKey</accumulationRegisters>
   <accumulationRegisters>AccumulationRegister.R8510B_BookValueOfFixedAsset</accumulationRegisters>
   <accumulationRegisters>AccumulationRegister.R8515T_CostOfFixedAsset</accumulationRegisters>
+  <accumulationRegisters>AccumulationRegister.R9545T_PaidVacations</accumulationRegisters>
+  <accumulationRegisters>AccumulationRegister.R9555T_PaidSickLeaves</accumulationRegisters>
+  <accumulationRegisters>AccumulationRegister.R9560T_AdditionalAccrual</accumulationRegisters>
+  <accumulationRegisters>AccumulationRegister.R9570T_AdditionalDeduction</accumulationRegisters>
   <chartsOfCharacteristicTypes>ChartOfCharacteristicTypes.AccountingExtraDimensionTypes</chartsOfCharacteristicTypes>
   <chartsOfCharacteristicTypes>ChartOfCharacteristicTypes.AddAttributeAndProperty</chartsOfCharacteristicTypes>
   <chartsOfCharacteristicTypes>ChartOfCharacteristicTypes.CurrencyMovementType</chartsOfCharacteristicTypes>

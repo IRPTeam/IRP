@@ -31,9 +31,14 @@ EndProcedure
 &AtClientAtServerNoContext
 Procedure SetVisibilityAvailability(Object, Form)
 	Form.Items.Weekends.Visible = (Form.ScheduleVariant = "WeekWithDaysOff");
-	Form.Items.StartWorkingDay.Visible = (Form.ScheduleVariant = "InTwoDays");
+	Form.Items.StartWorkingDay.Visible = 
+		(Form.ScheduleVariant = "InTwoDays" 
+			Or Form.ScheduleVariant = "TwoInTwoDays"
+			Or Form.ScheduleVariant = "ThreeInThreeDays");
+			
 	Form.Items.CountHours.Visible = 
-		CommonFunctionsServer.GetRefAttribute(Form.EmployeeSchedule, "Type") = PredefinedValue("Enum.EmployeeScheduleTypes.Hour");
+		(CommonFunctionsServer.GetRefAttribute(Form.EmployeeSchedule, "Type") = 
+			PredefinedValue("Enum.EmployeeScheduleTypes.Hour"));
 EndProcedure
 
 &AtServer
@@ -45,7 +50,7 @@ Procedure FillCheckProcessingAtServer(Cancel, CheckedAttributes)
 		Cancel = True;
 	EndIf; 
 	
-	If ThisObject.ScheduleVariant <> "InTwoDays" Then
+	If ThisObject.ScheduleVariant = "WeekWithDaysOff" Then
 		CommonFunctionsClientServer.DeleteValueFromArray(CheckedAttributes, "StartWorkingDay");
 	EndIf;
 	
@@ -80,6 +85,8 @@ Procedure CreateCalendarAtServer()
 	
 	_WorkingDate = BegOfDay(ThisObject.StartWorkingDay);
 	
+	_Counter = 0;
+	
 	While _CurrentDate <= BegOfDay(ThisObject.Period.EndDate) Do
 		NewRow = ResultTable.Add();
 		NewRow.Date = _CurrentDate;
@@ -102,12 +109,47 @@ Procedure CreateCalendarAtServer()
 			Else
 				NewRow.CountDaysHours = 0;
 			EndIf;
+		
+		ElsIf ThisObject.ScheduleVariant = "TwoInTwoDays" Then
+		
+			If _CurrentDate = _WorkingDate Then
+				If _Counter < 2 Then
+					NewRow.CountDaysHours = CountDaysHours;
+				Else
+					NewRow.CountDaysHours = 0;
+				EndIf;
 				
+				If _Counter + 1 >= 4 Then
+					_Counter = 0;
+				Else
+					_Counter = _Counter + 1;
+				EndIf;
+				
+				_WorkingDate = _WorkingDate + (60 * 60 * 24);
+			EndIf;
+				
+		ElsIf ThisObject.ScheduleVariant = "ThreeInThreeDays" Then
+		
+			If _CurrentDate = _WorkingDate Then
+				If _Counter < 3 Then
+					NewRow.CountDaysHours = CountDaysHours;
+				Else
+					NewRow.CountDaysHours = 0;
+				EndIf;
+				
+				If _Counter + 1 >= 6 Then
+					_Counter = 0;
+				Else
+					_Counter = _Counter + 1;
+				EndIf;
+				
+				_WorkingDate = _WorkingDate + (60 * 60 * 24);
+			EndIf;
+			
 		EndIf;
 		
 		_CurrentDate = BegOfDay(EndOfDay(_CurrentDate) + 1);
 	EndDo;
-	
 	
 	For Each Row In ResultTable Do
 		RecordSet = InformationRegisters.T9530S_WorkDays.CreateRecordSet();

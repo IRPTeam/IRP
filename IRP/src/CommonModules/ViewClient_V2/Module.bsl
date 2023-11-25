@@ -2863,6 +2863,17 @@ EndProcedure
 
 #Region PAYROLL_LISTS_COLUMNS
 
+#Region PAYROLL_LISTS_EMPLOYEE
+
+// PayrollLists.Employee
+Procedure PayrollListsEmployeeOnChange(Object, Form, TableName, CurrentData = Undefined) Export
+	Rows = GetRowsByCurrentData(Form, TableName, CurrentData);
+	Parameters = GetSimpleParameters(Object, Form, TableName, Rows);
+	ControllerClientServer_V2.PayrollListsEmployeeOnChange(Parameters);
+EndProcedure
+
+#EndRegion
+
 #Region PAYROLL_LISTS_ACCRUAL_DEDUCTION_TYPE
 
 // PayrollLists.AccrualDeductionType
@@ -3589,6 +3600,29 @@ Procedure OnSetEmployeeNotify(Parameters) Export
 EndProcedure
 
 #EndRegion
+
+#Region POSITION
+
+Procedure PositionOnChange(Object, Form, TableNames) Export
+	For Each TableName In StrSplit(TableNames, ",") Do
+		Parameters = GetSimpleParameters(Object, Form, TableName);
+		ControllerClientServer_V2.PositionOnChange(Parameters);
+	EndDo;
+EndProcedure
+
+#EndRegion
+
+#Region ACCRUAL_TYPE
+
+Procedure AccrualTypeOnChange(Object, Form, TableNames) Export
+	For Each TableName In StrSplit(TableNames, ",") Do
+		Parameters = GetSimpleParameters(Object, Form, TableName);
+		ControllerClientServer_V2.AccrualTypeOnChange(Parameters);
+	EndDo;
+EndProcedure
+
+#EndRegion
+
 
 #Region LEGAL_NAME
 

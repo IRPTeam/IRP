@@ -113,6 +113,11 @@ Function GetStaffing(Company, Branch, _Day, Employee)
 	|			THEN StaffingSliceLast.Employee = &Employee
 	|		ELSE TRUE
 	|	END
+	|	AND CASE
+	|		WHEN &Filter_ArrayOfEmployee
+	|			THEN StaffingSliceLast.Employee IN (&ArrayOfEmployee)
+	|		ELSE TRUE
+	|	END
 	|;
 	|
 	|////////////////////////////////////////////////////////////////////////////////
@@ -153,8 +158,18 @@ Function GetStaffing(Company, Branch, _Day, Employee)
 	Query.SetParameter("Company", Company);
 	Query.SetParameter("Branch" , Branch);
 	Query.SetParameter("_Day"   , _Day);
-	Query.SetParameter("Filter_Employee" , ValueIsFilled(Employee));
-	Query.SetParameter("Employee" , Employee);
+	
+	If TypeOf(Employee) = Type("Array") Then
+		Query.SetParameter("Filter_ArrayOfEmployee", True);
+		Query.SetParameter("ArrayOfEmployee", Employee);
+		Query.SetParameter("Filter_Employee", False);
+		Query.SetParameter("Employee", Undefined);
+	Else
+		Query.SetParameter("Filter_Employee" , ValueIsFilled(Employee));
+		Query.SetParameter("Employee" , Employee);
+		Query.SetParameter("Filter_ArrayOfEmployee", False);
+		Query.SetParameter("ArrayOfEmployee", Undefined);
+	EndIf;
 	
 	QueryResult = Query.Execute();
 	QuerySelection = QueryResult.Select();

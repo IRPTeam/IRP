@@ -148,6 +148,15 @@
     <usePurposes>PersonalComputer</usePurposes>
     <usePurposes>MobileDevice</usePurposes>
   </forms>
+  <forms uuid="6fb2f00c-78f5-4be0-8c9a-6fe28e1c99fc">
+    <name>AddEmployee</name>
+    <synonym>
+      <key>en</key>
+      <value>Add employee</value>
+    </synonym>
+    <usePurposes>PersonalComputer</usePurposes>
+    <usePurposes>MobileDevice</usePurposes>
+  </forms>
   <tabularSections uuid="24e166f6-4ac5-4b05-b834-918ade356398">
     <producedTypes>
       <objectType typeId="c04df7c7-93e5-4ada-8265-53f9807aa66a" valueTypeId="161e20a0-8c83-4835-8e6b-ac7b3ca318aa"/>

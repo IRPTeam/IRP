@@ -350,6 +350,57 @@ EndProcedure
 &AtClient
 Procedure WorkersBeforeAddRow(Item, Cancel, Clone, Parent, IsFolder, Parameter)
 	Cancel = True;
+	
+	If Not CheckFilling() Then
+		Return;
+	EndIf;
+	
+	Employees = New Array();
+	For Each Row In Object.TimeSheetList Do
+		Employees.Add(Row.Employee);
+	EndDo;
+	
+	OpeningParameters = New Structure();
+	OpeningParameters.Insert("Company"   , Object.Company);
+	OpeningParameters.Insert("Branch"    , Object.Branch);
+	OpeningParameters.Insert("EndDate"   , Object.EndDate);
+	OpeningParameters.Insert("BeginDate" , Object.BeginDate);
+	OpeningParameters.Insert("Employees" , Employees);
+	
+	NotifyParameters = New Structure();
+	Notify = New NotifyDescription("AddEmployeeEnd", ThisObject, NotifyParameters);
+	
+	OpenForm("Document.TimeSheet.Form.AddEmployee", OpeningParameters, 
+	ThisObject, , , , 
+	Notify , 
+	FormWindowOpeningMode.LockOwnerWindow);
+EndProcedure
+
+&AtClient
+Procedure AddEmployeeEnd(Result, NotifyParams) Export
+	If Result = Undefined Then 
+		Return;
+	EndIf;
+	
+	If Result.ArrayOfEmployee.Count() = 0 Then
+		Return;
+	EndIf;
+	
+	FillingResult = FillTimeSheetAtServer(Result.ArrayOfEmployee);
+	
+	ViewClient_V2.TimeSheetListLoad(Object, ThisObject, 
+		FillingResult.Address, FillingResult.GroupColumn, FillingResult.SumColumn);
+	ThisObject.Modified = True;
+	
+	
+	FillWorkersAtServer();
+	
+	For Each Row In ThisObject.Workers Do
+		If Row.Employee = Result.ArrayOfEmployee[0] Then
+			Items.Workers.CurrentRow = Row.GetID();
+			Break;
+		EndIf;
+	EndDo;
 EndProcedure
 
 &AtClient
@@ -544,6 +595,7 @@ EndFunction
 &AtClient
 Procedure FillWorkersAtClient()
 	CurrentData = Items.Workers.CurrentData;
+	
 	CurrentData_Employee         = Undefined;
 	CurrentData_EmployeeSchedule = Undefined;
 	CurrentData_Position         = Undefined;

@@ -1,4 +1,5 @@
 
+
 #Region FORM
 
 &AtServer
@@ -117,11 +118,21 @@ EndProcedure
 
 #EndRegion
 
+
 #Region POSITION
 
 &AtClient
 Procedure PositionOnChange(Item)
 	DocEmployeeHiringClient.PositionOnChange(Object, ThisObject, Item);	
+EndProcedure
+
+#EndRegion
+
+#Region ACCRUAL_TYPE
+
+&AtClient
+Procedure AccrualTypeOnChange(Item)
+	DocEmployeeHiringClient.AccrualTypeOnChange(Object, ThisObject, Item);		
 EndProcedure
 
 #EndRegion

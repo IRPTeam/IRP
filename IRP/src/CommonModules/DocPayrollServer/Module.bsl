@@ -248,7 +248,7 @@ Function GetPayrolls_Accrual(Parameters) Export
 		NewAccrualValue = AccrualValues.Add();
 		FillPropertyValues(NewAccrualValue, Row);
 		AccrualValue = GetAccrualByEmployeeOrPosition(Row);
-		If ValueIsFilled(AccrualValue.Accrual) Then
+		If AccrualValue <> Undefined And ValueIsFilled(AccrualValue.Accrual) Then
 			NewAccrualValue.Accrual = AccrualValue.Accrual; 	
 			NewAccrualValue.Value   = AccrualValue.Value;
 			NewAccrualValue.Period  = AccrualValue.Period;
@@ -548,11 +548,37 @@ Function _MonthlySalary(AccrualValues, BeginDate, EndDate)
 	tmp1 = AccrualValues.Copy();
 	tmp1.GroupBy("EmployeeSchedule");
 	
-	// by days
-
-	// by months
-	tmp2 = AccrualValues.Copy();
-	tmp2.GroupBy("Employee, EmployeeSchedule, Position, ProfitLossCenter, Accrual, Value, Period", "ActuallyDaysHours");
+	tmp_days = AccrualValues.CopyColumns();
+	tmp_days.Columns.Add("TotalFullActuallyDays", New TypeDescription("Number"));
+	
+	tmp_months = AccrualValues.CopyColumns();
+	
+	For Each Row In AccrualValues Do
+		_Periodicity = Row.Accrual.Periodicity;
+		If  _Periodicity = Enums.AccrualAndDeductionPeriodicity.ByDay Then
+			If ValueIsFilled(Row.ActuallyDaysHours) Then
+				new_row = tmp_days.Add();
+				FillPropertyValues(new_row, Row);
+				new_row.TotalFullActuallyDays = 1;
+			EndIf;
+		ElsIf _Periodicity = Enums.AccrualAndDeductionPeriodicity.ByPeriod Then
+			FillPropertyValues(tmp_months.Add(), Row);
+		EndIf;
+	EndDo;
+	tmp_days.GroupBy("Employee, EmployeeSchedule, Position, ProfitLossCenter, Accrual, Period", "TotalFullActuallyDays, Value, ActuallyDaysHours");
+	tmp_months.GroupBy("Employee, EmployeeSchedule, Position, ProfitLossCenter, Accrual, Value, Period", "ActuallyDaysHours");
+	
+	tmp2 = AccrualValues.CopyColumns();
+	tmp2.Columns.Add("TotalFullActuallyDays", New TypeDescription("Number"));
+	
+	For Each Row In tmp_days Do
+		FillPropertyValues(tmp2.Add(), Row);
+	EndDo;	
+	For Each Row In tmp_months Do
+		FillPropertyValues(tmp2.Add(), Row);
+	EndDo;
+	
+	// total
 	tmp2.Columns.Add("EndDate", New TypeDescription("Date"));
 	tmp2.Sort("Period");
 	
@@ -570,7 +596,9 @@ Function _MonthlySalary(AccrualValues, BeginDate, EndDate)
 			EndIf;
 			LastRow = Row2;
 		EndDo;
-		LastRow.EndDate = EndDate;
+		If LastRow <> Undefined Then
+			LastRow.EndDate = EndDate;
+		EndIf;
 	EndDo;
 	
 	Query = New Query();
@@ -592,7 +620,8 @@ Function _MonthlySalary(AccrualValues, BeginDate, EndDate)
 	|	tmp2.Value,
 	|	tmp2.Period,
 	|	tmp2.EndDate,
-	|	tmp2.ActuallyDaysHours
+	|	tmp2.ActuallyDaysHours,
+	|	tmp2.TotalFullActuallyDays
 	|INTO tmp2
 	|FROM
 	|	&tmp2 AS tmp2
@@ -621,7 +650,8 @@ Function _MonthlySalary(AccrualValues, BeginDate, EndDate)
 	|;
 	|SELECT
 	|	T9530S_WorkDays.EmployeeSchedule AS EmployeeSchedule,
-	|	SUM(ISNULL(T9530S_WorkDays.CountDaysHours, 0)) AS TotalCountDaysHours
+	|	SUM(ISNULL(T9530S_WorkDays.CountDaysHours, 0)) AS TotalCountDaysHours,
+	|	SUM( case when ISNULL(T9530S_WorkDays.CountDaysHours, 0) = 0 then 0 else 1 end) AS TotalFullDays
 	|INTO TotalBySchedule2
 	|FROM
 	|	InformationRegister.T9530S_WorkDays AS T9530S_WorkDays
@@ -645,9 +675,11 @@ Function _MonthlySalary(AccrualValues, BeginDate, EndDate)
 	|	tmp2.Accrual,
 	|	tmp2.Value,
 	|	tmp2.ActuallyDaysHours,
+	|	tmp2.TotalFullActuallyDays,
 	|	SUM(TotalBySchedule.CountDaysHours) AS CountDaysHours,
 	|	0 AS MoneyForPaid,
-	|	ISNULL(TotalBySchedule2.TotalCountDaysHours, 0) AS TotalCountDaysHours
+	|	ISNULL(TotalBySchedule2.TotalCountDaysHours, 0) AS TotalCountDaysHours,
+	|	ISNULL(TotalBySchedule2.TotalFullDays, 0) AS TotalFullDays
 	|FROM
 	|	tmp2 AS tmp2
 	|		LEFT JOIN TotalBySchedule AS TotalBySchedule
@@ -664,7 +696,9 @@ Function _MonthlySalary(AccrualValues, BeginDate, EndDate)
 	|	tmp2.ActuallyDaysHours,
 	|	tmp2.Position,
 	|	tmp2.ProfitLossCenter,
-	|	ISNULL(TotalBySchedule2.TotalCountDaysHours, 0)";
+	|	ISNULL(TotalBySchedule2.TotalCountDaysHours, 0),
+	|	ISNULL(TotalBySchedule2.TotalFullDays, 0),
+	|	tmp2.TotalFullActuallyDays";
 	
 	Query.SetParameter("BeginDate" , BeginDate);
 	Query.SetParameter("EndDate"   , EndDate);
@@ -689,7 +723,11 @@ Function _MonthlySalary(AccrualValues, BeginDate, EndDate)
 		If Row.CountDaysHours = Row.ActuallyDaysHours Then
 			Row.MoneyForPaid = _Value;
 		Else
-			Row.MoneyForPaid = _Value / Row.CountDaysHours * Row.ActuallyDaysHours;
+			If Row.Accrual.Periodicity = Enums.AccrualAndDeductionPeriodicity.ByDay Then
+				Row.MoneyForPaid = _Value / Row.TotalFullActuallyDays * Row.TotalFullDays / Row.CountDaysHours * Row.ActuallyDaysHours;
+			Else
+				Row.MoneyForPaid = _Value / Row.CountDaysHours * Row.ActuallyDaysHours;
+			EndIf;
 		EndIf;
 	EndDo;
 	

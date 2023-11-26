@@ -547,7 +547,10 @@ EndFUnction
 Function _MonthlySalary(AccrualValues, BeginDate, EndDate)	
 	tmp1 = AccrualValues.Copy();
 	tmp1.GroupBy("EmployeeSchedule");
+	
+	// by days
 
+	// by months
 	tmp2 = AccrualValues.Copy();
 	tmp2.GroupBy("Employee, EmployeeSchedule, Position, ProfitLossCenter, Accrual, Value, Period", "ActuallyDaysHours");
 	tmp2.Columns.Add("EndDate", New TypeDescription("Date"));

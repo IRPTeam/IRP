@@ -97,7 +97,7 @@ Async Procedure SearchByBarcodeEnd(Result, AdditionalParameters = Undefined) Exp
 	AllBarcodesIsOk = True;
 	For Each StringCode In ArrayOfApprovedCodeStrings Do // String
 		If AdditionalCheckIsOn AND ControlCodeStringType = PredefinedValue("Enum.ControlCodeStringType.MarkingCode") Then
-			If ControlCodeStringClient.CheckMarkingCode(StringCode, Hardware, isReturn) Then
+			If Await ControlCodeStringClient.CheckMarkingCode(StringCode, Hardware, isReturn) Then
 				NewRow = CurrentCodes.Add();
 				NewRow.StringCode = StringCode;
 				NewRow.CodeIsApproved = True;
@@ -158,6 +158,8 @@ Procedure Done(Command = Undefined)
 		Str.Insert("CodeString", Row.StringCode);
 		Str.Insert("CodeIsApproved", Row.CodeIsApproved);
 		Str.Insert("NotCheck", Row.NotCheck);
+		Str.Insert("ControlCodeStringType", Row.ControlCodeStringType);
+		Str.Insert("Prefix", Row.Prefix);
 		Array.Add(Str);
 	EndDo;
 	Result.Insert("Scaned", Array);

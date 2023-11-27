@@ -362,14 +362,14 @@ Function GetStatusData(DocumentRef) Export
 	Return FiscalStatus;
 EndFunction
 
-// Get string code.
+// Get marking code.
 //
 // Parameters:
 //  DocumentRef - DocumentRef.RetailReturnReceipt, DocumentRef.RetailSalesReceipt -
 //
 // Returns:
 //  Array Of String
-Function GetStringCode(DocumentRef) Export
+Function GetMarkingCode(DocumentRef) Export
 	Array = New Array; // Array Of String
 	For Each Row In DocumentRef.ControlCodeStrings Do
 
@@ -377,6 +377,10 @@ Function GetStringCode(DocumentRef) Export
 			Continue;
 		EndIf;
 
+		If Not Row.ControlCodeStringType = Enums.ControlCodeStringType.MarkingCode Then
+			Continue;
+		EndIf;
+		
 		Array.Add(Row.CodeString);
 	EndDo;
 	Return Array;

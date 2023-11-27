@@ -145,9 +145,22 @@ Async Function ProcessCheck(ConsolidatedRetailSales, DataSource) Export
 
 	CheckPackage = EquipmentFiscalPrinterAPIClient.CheckPackage();
 	EquipmentFiscalPrinterServer.FillData(DataSource, CheckPackage);
-
-	Await CheckControlStrings(DataSource, CRS);
-
+	
+	If TypeOf(DataSource) = Type("DocumentRef.RetailSalesReceipt")
+		Or TypeOf(DataSource) = Type("DocumentRef.RetailReturnReceipt") Then
+		
+		isReturn = TypeOf(DataSource) = Type("DocumentRef.RetailReturnReceipt");
+		CodeStringList = EquipmentFiscalPrinterServer.GetMarkingCode(DataSource);
+	
+		If Not CodeStringList.Count() = 0 Then
+			CheckControlStrings = Await CheckControlStrings(DataSource, CRS, isReturn, CodeStringList);
+	
+			If Not CheckControlStrings.Info.Success Then
+				Return CheckControlStrings;
+			EndIf;
+		EndIf;
+	EndIf;			
+			
 	ProcessCheckSettings.In.CheckPackage = CheckPackage;
 	If Await EquipmentFiscalPrinterAPIClient.ProcessCheck(CRS.FiscalPrinter, ProcessCheckSettings) Then
 		DataPresentation = String(ProcessCheckSettings.Out.DocumentOutputParameters.ShiftNumber) + " " + ProcessCheckSettings.Out.DocumentOutputParameters.DateTime;
@@ -183,46 +196,45 @@ Procedure ValidateProcessCheck(DataSource)
 EndProcedure
 
 //@skip-check function-should-return-value
-Async Function CheckControlStrings(DataSource, CRS)
-	If TypeOf(DataSource) = Type("DocumentRef.RetailSalesReceipt")
-		Or TypeOf(DataSource) = Type("DocumentRef.RetailReturnReceipt") Then
-		isReturn = TypeOf(DataSource) = Type("DocumentRef.RetailReturnReceipt");
-		CodeStringList = EquipmentFiscalPrinterServer.GetStringCode(DataSource);
-
-		If CodeStringList.Count() > 0 Then
-			
-			OpenSessionRegistrationKMSettings = EquipmentFiscalPrinterAPIClient.OpenSessionRegistrationKMSettings();
-			If Not Await EquipmentFiscalPrinterAPIClient.OpenSessionRegistrationKM(CRS.FiscalPrinter, OpenSessionRegistrationKMSettings) Then
-				CommonFunctionsClientServer.ShowUsersMessage(OpenSessionRegistrationKMSettings.Info.Error);
-				Raise R().EqFP_CanNotOpenSessionRegistrationKM;
-			EndIf;
-
-			ArrayForApprove = New Array; // Array Of String
-			For Each CodeString In EquipmentFiscalPrinterServer.GetStringCode(DataSource) Do
-				RequestKMSettings = EquipmentFiscalPrinterAPIClient.RequestKMInput(isReturn);
-				RequestKMSettings.MarkingCode = CodeString;
-				RequestKMSettings.Quantity = 1;
-				CheckResult = Await CheckKM(CRS.FiscalPrinter, RequestKMSettings, False); // See EquipmentFiscalPrinterAPIClient.GetProcessingKMResultSettings
-				If Not CheckResult.Info.Success Then
-					Raise CheckResult.Info.Error;
-				EndIf;
-
-				If Not CheckResult.Info.Approved Then
-					Raise StrTemplate(R().EqFP_ProblemWhileCheckCodeString, GetStringFromBinaryData(Base64Value(RequestKMSettings.MarkingCode)));
-				EndIf;
-				ArrayForApprove.Add(RequestKMSettings.GUID);
-			EndDo;
-
-			For Each ApproveUUID In ArrayForApprove Do
-				ConfirmKMSettings = EquipmentFiscalPrinterAPIClient.ConfirmKMSettings();
-				ConfirmKMSettings.In.GUID = ApproveUUID;
-				If Not Await EquipmentFiscalPrinterAPIClient.ConfirmKM(CRS.FiscalPrinter, ConfirmKMSettings) Then
-					CommonFunctionsClientServer.ShowUsersMessage(ConfirmKMSettings.Info.Error);
-					Raise StrTemplate(R().EqFP_ErrorWhileConfirmCode, ApproveUUID);
-				EndIf;
-			EndDo;
-		EndIf;
+Async Function CheckControlStrings(DataSource, CRS, isReturn, CodeStringList)
+	
+	Result = New Structure("Info", New Structure("Success", True));
+	
+	OpenSessionRegistrationKMSettings = EquipmentFiscalPrinterAPIClient.OpenSessionRegistrationKMSettings();
+	If Not Await EquipmentFiscalPrinterAPIClient.OpenSessionRegistrationKM(CRS.FiscalPrinter, OpenSessionRegistrationKMSettings) Then
+		OpenSessionRegistrationKMSettings.Info.Error = OpenSessionRegistrationKMSettings.Info.Error + Chars.LF + R().EqFP_CanNotOpenSessionRegistrationKM;
+		Return OpenSessionRegistrationKMSettings;
 	EndIf;
+
+	ArrayForApprove = New Array; // Array Of String
+	For Each CodeString In CodeStringList Do
+		RequestKMSettings = EquipmentFiscalPrinterAPIClient.RequestKMInput(isReturn);
+		RequestKMSettings.MarkingCode = CodeString;
+		RequestKMSettings.Quantity = 1;
+		CheckResult = Await CheckKM(CRS.FiscalPrinter, RequestKMSettings); // See EquipmentFiscalPrinterAPIClient.GetProcessingKMResultSettings
+		If Not CheckResult.Info.Success Then
+			CloseSessionRegistrationKMSettings = EquipmentFiscalPrinterAPIClient.CloseSessionRegistrationKMSettings();
+			Await EquipmentFiscalPrinterAPIClient.CloseSessionRegistrationKM(CRS.FiscalPrinter, CloseSessionRegistrationKMSettings);
+			Return CheckResult;
+		EndIf;
+
+		If Not CheckResult.Info.Approved Then
+			CheckResult.Info.Error = CheckResult.Info.Error + Chars.LF + StrTemplate(R().EqFP_ProblemWhileCheckCodeString, GetStringFromBinaryData(Base64Value(RequestKMSettings.MarkingCode)));
+			Return CheckResult;
+		EndIf;
+		ArrayForApprove.Add(RequestKMSettings.GUID);
+	EndDo;
+
+	For Each ApproveUUID In ArrayForApprove Do
+		ConfirmKMSettings = EquipmentFiscalPrinterAPIClient.ConfirmKMSettings();
+		ConfirmKMSettings.In.GUID = ApproveUUID;
+		If Not Await EquipmentFiscalPrinterAPIClient.ConfirmKM(CRS.FiscalPrinter, ConfirmKMSettings) Then
+			ConfirmKMSettings.Info.Error = ConfirmKMSettings.Info.Error + Chars.LF + StrTemplate(R().EqFP_ErrorWhileConfirmCode, ApproveUUID);
+			Return ConfirmKMSettings
+		EndIf;
+	EndDo;
+	
+	Return Result;
 EndFunction
 
 // Print check copy.
@@ -388,21 +400,13 @@ EndFunction
 //
 // Returns:
 //  See EquipmentFiscalPrinterAPIClient.GetProcessingKMResultSettings
-Async Function CheckKM(Hardware, RequestKM, OpenAndClose = False) Export
-
-	If OpenAndClose Then
-		OpenSessionRegistrationKMSettings = EquipmentFiscalPrinterAPIClient.OpenSessionRegistrationKMSettings();
-		If Not Await EquipmentFiscalPrinterAPIClient.OpenSessionRegistrationKM(Hardware, OpenSessionRegistrationKMSettings) Then
-			CommonFunctionsClientServer.ShowUsersMessage(OpenSessionRegistrationKMSettings.Info.Error);
-			Raise R().EqFP_CanNotOpenSessionRegistrationKM;
-		EndIf;
-	EndIf;
+Async Function CheckKM(Hardware, RequestKM) Export
 
 	RequestKMSettings = EquipmentFiscalPrinterAPIClient.RequestKMSettings();
 	RequestKMSettings.In.RequestKM = RequestKM;
 	If Not Await EquipmentFiscalPrinterAPIClient.RequestKM(Hardware, RequestKMSettings) Then
-		CommonFunctionsClientServer.ShowUsersMessage(RequestKMSettings.Info.Error);
-		Raise R().EqFP_CanNotRequestKM;
+		RequestKMSettings.Info.Error = RequestKMSettings.Info.Error + Chars.LF + R().EqFP_CanNotRequestKM;
+		Return RequestKMSettings;
 	EndIf;
 
 	ResultIsCorrect = False;
@@ -412,12 +416,13 @@ Async Function CheckKM(Hardware, RequestKM, OpenAndClose = False) Export
 		GetProcessingKMResultSettings = EquipmentFiscalPrinterAPIClient.GetProcessingKMResultSettings();
 		GetProcessingKMResultSettings.Info.GUID = RequestKMSettings.In.RequestKM.GUID;
 		If Not Await EquipmentFiscalPrinterAPIClient.GetProcessingKMResult(Hardware, GetProcessingKMResultSettings) Then
-			CommonFunctionsClientServer.ShowUsersMessage(RequestKMSettings.Info.Error);
-			Raise R().EqFP_CanNotGetProcessingKMResult;
+			GetProcessingKMResultSettings.Info.Error = RequestKMSettings.Info.Error + Chars.LF + R().EqFP_CanNotGetProcessingKMResult;
+			Return GetProcessingKMResultSettings;
 		EndIf;
 
 		If GetProcessingKMResultSettings.Out.RequestStatus = 2 Then
-			Raise R().EqFP_GetWrongAnswerFromProcessingKM;
+			GetProcessingKMResultSettings.Info.Error = RequestKMSettings.Info.Error + Chars.LF + R().EqFP_GetWrongAnswerFromProcessingKM;
+			Return GetProcessingKMResultSettings;
 		EndIf;
 
 		If GetProcessingKMResultSettings.Out.RequestStatus = 1 Then
@@ -432,15 +437,9 @@ Async Function CheckKM(Hardware, RequestKM, OpenAndClose = False) Export
 		Break;
 	EndDo;
 
-	If OpenAndClose Then
-		CloseSessionRegistrationKMSettings = EquipmentFiscalPrinterAPIClient.CloseSessionRegistrationKMSettings();
-		If Not Await EquipmentFiscalPrinterAPIClient.CloseSessionRegistrationKM(Hardware, CloseSessionRegistrationKMSettings) Then
-			Raise R().EqFP_CanNotCloseSessionRegistrationKM;
-		EndIf;
-	EndIf;
-
 	If Not ResultIsCorrect Then
-		Raise R().EqFP_GetWrongAnswerFromProcessingKM;
+		GetProcessingKMResultSettings.Info.Error = RequestKMSettings.Info.Error + Chars.LF + R().EqFP_GetWrongAnswerFromProcessingKM;
+		Return GetProcessingKMResultSettings;
 	EndIf;
 
 	GetProcessingKMResultSettings.Info.Approved = HardwareClient.GetAPIModule(Hardware).isCodeStringApproved(GetProcessingKMResultSettings);

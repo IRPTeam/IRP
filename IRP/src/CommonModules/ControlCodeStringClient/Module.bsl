@@ -41,18 +41,30 @@ EndFunction
 //  isReturn - Boolean - Is return
 // 
 // Returns:
-//  Promise - Check marking code
+//  Boolean - Check marking code
 Async Function CheckMarkingCode(StringCode, Hardware, isReturn) Export
+	OpenSessionRegistrationKMSettings = EquipmentFiscalPrinterAPIClient.OpenSessionRegistrationKMSettings();
+	If Not Await EquipmentFiscalPrinterAPIClient.OpenSessionRegistrationKM(Hardware, OpenSessionRegistrationKMSettings) Then
+		CommonFunctionsClientServer.ShowUsersMessage(OpenSessionRegistrationKMSettings.Info.Error + Chars.LF + R().EqFP_CanNotOpenSessionRegistrationKM);
+		Return False;
+	EndIf;
+	
 	RequestKMSettings = EquipmentFiscalPrinterAPIClient.RequestKMInput(isReturn);
 	RequestKMSettings.Quantity = 1;
 	RequestKMSettings.MarkingCode = StringCode;
-	Result = Await EquipmentFiscalPrinterClient.CheckKM(Hardware, RequestKMSettings, True); // See EquipmentFiscalPrinterAPIClient.GetProcessingKMResultSettings
+	Result = Await EquipmentFiscalPrinterClient.CheckKM(Hardware, RequestKMSettings); // See EquipmentFiscalPrinterAPIClient.GetProcessingKMResultSettings
+
+	CloseSessionRegistrationKMSettings = EquipmentFiscalPrinterAPIClient.CloseSessionRegistrationKMSettings();
+	If Not Await EquipmentFiscalPrinterAPIClient.CloseSessionRegistrationKM(Hardware, CloseSessionRegistrationKMSettings) Then
+		CommonFunctionsClientServer.ShowUsersMessage(CloseSessionRegistrationKMSettings.Info.Error + Chars.LF + R().EqFP_CanNotCloseSessionRegistrationKM);
+		Return False;
+	EndIf;
 
 	If Not Result.Info.Success Then
 		CommonFunctionsClientServer.ShowUsersMessage(Result.Info.Error);
 		Return False;
 	EndIf;
-
+		
 	If Not Result.Info.Approved Then
 		//@skip-check transfer-object-between-client-server
 		Log.Write("CodeStringCheck.CheckKM.Approved.False", Result, , , Hardware);

@@ -5,7 +5,6 @@
       <group>NavigationPanelOrdinary</group>
       <commands>Catalog.Taxes.StandardCommand.OpenList</commands>
       <commands>Catalog.TaxRates.StandardCommand.OpenList</commands>
-      <commands>InformationRegister.TaxSettings.StandardCommand.OpenList</commands>
       <commands>Catalog.TaxAnalytics.StandardCommand.OpenList</commands>
     </orderFragments>
   </commandsOrder>

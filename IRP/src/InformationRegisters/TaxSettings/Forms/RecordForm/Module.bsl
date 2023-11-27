@@ -16,6 +16,37 @@ Procedure OnCreateAtServer(Cancel, StandardProcessing)
 	SetVisible();
 	FillTaxRateChoiceList();
 	FillRecordTypeChoiceList();
+	
+	If Parameters.FillingValues.Property("Company") Then
+		Items.Company.ReadOnly = True;
+		Items.RecordType.ReadOnly = True;
+	EndIf;
+	
+	If Parameters.FillingValues.Property("ItemKey") Then
+		Items.ItemKey.ReadOnly = True;
+		Items.RecordType.ReadOnly = True;
+	EndIf;
+	
+	If Parameters.FillingValues.Property("Item") Then
+		Items.Item.ReadOnly = True;
+		Items.RecordType.ReadOnly = True;
+	EndIf;
+	
+	If Parameters.FillingValues.Property("ItemType") Then
+		Items.ItemType.ReadOnly = True;
+		Items.RecordType.ReadOnly = True;
+	EndIf;
+	
+	If Parameters.FillingValues.Property("Agreement") Then
+		Items.Agreement.ReadOnly = True;
+		Items.RecordType.ReadOnly = True;
+	EndIf;
+	
+	If Parameters.FillingValues.Property("TransactionType") Then
+		Items.TransactionType.ReadOnly = True;
+		Items.RecordType.ReadOnly = True;
+	EndIf;
+	
 EndProcedure
 
 &AtClient

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<form:Form xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:core="http://g5.1c.ru/v8/dt/mcore" xmlns:form="http://g5.1c.ru/v8/dt/form">
+<form:Form xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:core="http://g5.1c.ru/v8/dt/mcore" xmlns:form="http://g5.1c.ru/v8/dt/form" xmlns:schema="http://g5.1c.ru/v8/dt/data-composition-system/schema">
   <items xsi:type="form:FormGroup">
     <name>ListSettingsComposerUserSettings</name>
     <id>1</id>
@@ -556,29 +556,89 @@
     </notDefaultUseAlwaysAttributes>
     <main>true</main>
     <extInfo xsi:type="form:DynamicListExtInfo">
-      <queryText>SELECT
-	DocumentVisitorCounter.Ref,
-	DocumentVisitorCounter.DeletionMark,
-	DocumentVisitorCounter.Number,
-	DocumentVisitorCounter.Date,
-	DocumentVisitorCounter.Posted,
-	DocumentVisitorCounter.Company,
-	DocumentVisitorCounter.Store,
-	DocumentVisitorCounter.VisitorCounter,
-	DocumentVisitorCounter.CounterData.*,
-	DocumentVisitorCounter.AddAttributes.*,
-	DocumentVisitorCounter.PointInTime,
-	DocumentVisitorCounter.SourceNodeID,
-	DocumentVisitorCounter.Author,
-	DocumentVisitorCounter.Description,
-	DocumentVisitorCounter.Branch
-FROM
-	Document.VisitorCounter AS DocumentVisitorCounter</queryText>
+      <queryText>SELECT 
+       DocumentVisitorCounter.Ref, 
+       DocumentVisitorCounter.DeletionMark, 
+       DocumentVisitorCounter.Number, 
+       DocumentVisitorCounter.Date, 
+       DocumentVisitorCounter.Posted, 
+       DocumentVisitorCounter.Company, 
+       DocumentVisitorCounter.Store, 
+       DocumentVisitorCounter.VisitorCounter, 
+       DocumentVisitorCounter.Branch, 
+       DocumentVisitorCounter.SourceNodeID, 
+       DocumentVisitorCounter.Author, 
+       DocumentVisitorCounter.Description
+ FROM 
+       Document.VisitorCounter
+ AS 
+       DocumentVisitorCounter</queryText>
       <mainTable>Document.VisitorCounter</mainTable>
       <dynamicDataRead>true</dynamicDataRead>
       <autoFillAvailableFields>true</autoFillAvailableFields>
+      <customQuery>true</customQuery>
       <autoSaveUserSettings>true</autoSaveUserSettings>
       <getInvisibleFieldPresentations>true</getInvisibleFieldPresentations>
+      <fields xsi:type="schema:DataCompositionSchemaNestedDataSet">
+        <dataPath>CounterData</dataPath>
+        <field>CounterData</field>
+      </fields>
+      <fields xsi:type="schema:DataCompositionSchemaNestedDataSet">
+        <dataPath>AddAttributes</dataPath>
+        <field>AddAttributes</field>
+      </fields>
+      <fields xsi:type="schema:DataCompositionSchemaDataSetField">
+        <dataPath>Ref</dataPath>
+        <field>Ref</field>
+      </fields>
+      <fields xsi:type="schema:DataCompositionSchemaDataSetField">
+        <dataPath>DeletionMark</dataPath>
+        <field>DeletionMark</field>
+      </fields>
+      <fields xsi:type="schema:DataCompositionSchemaDataSetField">
+        <dataPath>Number</dataPath>
+        <field>Number</field>
+      </fields>
+      <fields xsi:type="schema:DataCompositionSchemaDataSetField">
+        <dataPath>Date</dataPath>
+        <field>Date</field>
+      </fields>
+      <fields xsi:type="schema:DataCompositionSchemaDataSetField">
+        <dataPath>Posted</dataPath>
+        <field>Posted</field>
+      </fields>
+      <fields xsi:type="schema:DataCompositionSchemaDataSetField">
+        <dataPath>Company</dataPath>
+        <field>Company</field>
+      </fields>
+      <fields xsi:type="schema:DataCompositionSchemaDataSetField">
+        <dataPath>Store</dataPath>
+        <field>Store</field>
+      </fields>
+      <fields xsi:type="schema:DataCompositionSchemaDataSetField">
+        <dataPath>VisitorCounter</dataPath>
+        <field>VisitorCounter</field>
+      </fields>
+      <fields xsi:type="schema:DataCompositionSchemaDataSetField">
+        <dataPath>PointInTime</dataPath>
+        <field>PointInTime</field>
+      </fields>
+      <fields xsi:type="schema:DataCompositionSchemaDataSetField">
+        <dataPath>Branch</dataPath>
+        <field>Branch</field>
+      </fields>
+      <fields xsi:type="schema:DataCompositionSchemaDataSetField">
+        <dataPath>SourceNodeID</dataPath>
+        <field>SourceNodeID</field>
+      </fields>
+      <fields xsi:type="schema:DataCompositionSchemaDataSetField">
+        <dataPath>Author</dataPath>
+        <field>Author</field>
+      </fields>
+      <fields xsi:type="schema:DataCompositionSchemaDataSetField">
+        <dataPath>Description</dataPath>
+        <field>Description</field>
+      </fields>
     </extInfo>
   </attributes>
   <commandInterface>

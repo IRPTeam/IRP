@@ -1760,7 +1760,37 @@ Scenario: _0260171 check filling payment agent in RRR
 		
 	
 
+Scenario: _0260180 create document Visitor counter	
+	And I close all client application windows
+	* Open document Visitor counter
+		Given I open hyperlink "e1cib/list/Document.VisitorCounter"
+		And I click the button named "FormCreate"
+	* Filling main attributes
+		And I select from the drop-down list named "Company" by "main" string
+		And I move to the next attribute
+		And I select from the drop-down list named "Store" by "store" string
+		And I move to the next attribute
+		And in the table "CounterData" I click the button named "CounterDataAdd"
+		And I input "18:00:00" text in "Time" field of "CounterData" table
+		And I activate "In" field in "CounterData" table
+		And I input "1" text in "In" field of "CounterData" table
+		And I activate "Out" field in "CounterData" table
+		And I input "2" text in "Out" field of "CounterData" table
+		And I finish line editing in "CounterData" table
+		And I move to "Other" tab
+		And I move to "More" tab
+		And I select from the drop-down list named "Branch" by "shop 01" string
+		And I click "Post" button
+		And I save the value of the field named "Number" as "NumberVisitorCounter"
+		And I click "Post and close" button
+	* Check
+		And "List" table contains lines
+			| 'Number'                 |
+			| '$NumberVisitorCounter$' |
+	And I close all client application windows
 		
+				
+					
 				
 		
 				

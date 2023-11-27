@@ -29,7 +29,10 @@
   </listPresentation>
   <codeLength>9</codeLength>
   <codeAllowedLength>Variable</codeAllowedLength>
-  <descriptionLength>25</descriptionLength>
+  <descriptionLength>150</descriptionLength>
+  <content>
+    <mdObject>Document.BatchReallocateOutgoing</mdObject>
+  </content>
   <content>
     <mdObject>Catalog.PaymentTerminals</mdObject>
   </content>
@@ -40,7 +43,40 @@
     <mdObject>AccumulationRegister.R1002T_PurchaseReturns</mdObject>
   </content>
   <content>
+    <mdObject>AccumulationRegister.DELETE_R8011B_TradeAgentSerialLotNumber</mdObject>
+  </content>
+  <content>
+    <mdObject>Catalog.AccessKey</mdObject>
+  </content>
+  <content>
+    <mdObject>Document.VisitorCounter</mdObject>
+  </content>
+  <content>
+    <mdObject>Document.VendorsAdvancesClosing</mdObject>
+  </content>
+  <content>
+    <mdObject>InformationRegister.T2015S_TransactionsInfo</mdObject>
+  </content>
+  <content>
+    <mdObject>Document.ForeignCurrencyRevaluation</mdObject>
+  </content>
+  <content>
+    <mdObject>Document.ProductionCostsAllocation</mdObject>
+  </content>
+  <content>
+    <mdObject>InformationRegister.T6060S_BatchCostAllocationInfo</mdObject>
+  </content>
+  <content>
+    <mdObject>Constant.UseSimpleMode</mdObject>
+  </content>
+  <content>
+    <mdObject>InformationRegister.T6020S_BatchKeysInfo</mdObject>
+  </content>
+  <content>
     <mdObject>Document.ManualRegisterEntry</mdObject>
+  </content>
+  <content>
+    <mdObject>InformationRegister.TemplateActions</mdObject>
   </content>
   <content>
     <mdObject>AccumulationRegister.R5022T_Expenses</mdObject>
@@ -49,16 +85,61 @@
     <mdObject>Catalog.FileStorageVolumes</mdObject>
   </content>
   <content>
+    <mdObject>AccumulationRegister.R6060T_CostOfGoodsSold</mdObject>
+  </content>
+  <content>
+    <mdObject>AccumulationRegister.TM1030B_TransactionsKey</mdObject>
+  </content>
+  <content>
     <mdObject>Catalog.DataBaseStatus</mdObject>
+  </content>
+  <content>
+    <mdObject>InformationRegister.T2013S_OffsetOfAging</mdObject>
   </content>
   <content>
     <mdObject>Catalog.Items</mdObject>
   </content>
   <content>
+    <mdObject>Constant.UseFixedAssets</mdObject>
+  </content>
+  <content>
+    <mdObject>Catalog.DepreciationSchedules</mdObject>
+  </content>
+  <content>
+    <mdObject>AccumulationRegister.R7040T_ManualMaterialsCorretionInProduction</mdObject>
+  </content>
+  <content>
+    <mdObject>AccountingRegister.Basic</mdObject>
+  </content>
+  <content>
+    <mdObject>Constant.UseAddAttributesAndProperties</mdObject>
+  </content>
+  <content>
+    <mdObject>Document.MoneyTransfer</mdObject>
+  </content>
+  <content>
     <mdObject>Catalog.SpecialOfferTypes</mdObject>
   </content>
   <content>
+    <mdObject>Document.DepreciationCalculation</mdObject>
+  </content>
+  <content>
+    <mdObject>Constant.UseRetailOrders</mdObject>
+  </content>
+  <content>
     <mdObject>Document.SalesOrder</mdObject>
+  </content>
+  <content>
+    <mdObject>Constant.UseSerialLotNumbers</mdObject>
+  </content>
+  <content>
+    <mdObject>Constant.DisableLinkedRowsIntegrity</mdObject>
+  </content>
+  <content>
+    <mdObject>Constant.UseBankDocuments</mdObject>
+  </content>
+  <content>
+    <mdObject>Catalog.LegalNameContracts</mdObject>
   </content>
   <content>
     <mdObject>Document.Labeling</mdObject>
@@ -73,7 +154,16 @@
     <mdObject>Catalog.PaymentSchedules</mdObject>
   </content>
   <content>
+    <mdObject>InformationRegister.T6040S_BundleAmountValues</mdObject>
+  </content>
+  <content>
     <mdObject>AccumulationRegister.R1021B_VendorsTransactions</mdObject>
+  </content>
+  <content>
+    <mdObject>AccumulationRegister.R2022B_CustomersPaymentPlanning</mdObject>
+  </content>
+  <content>
+    <mdObject>Catalog.FixedAssetsLedgerTypes</mdObject>
   </content>
   <content>
     <mdObject>InformationRegister.SharedReportOptions</mdObject>
@@ -82,7 +172,16 @@
     <mdObject>Document.PurchaseReturnOrder</mdObject>
   </content>
   <content>
+    <mdObject>Document.RetailGoodsReceipt</mdObject>
+  </content>
+  <content>
+    <mdObject>AccumulationRegister.TM1010B_RowIDMovements</mdObject>
+  </content>
+  <content>
     <mdObject>AccumulationRegister.R2010T_SalesOrders</mdObject>
+  </content>
+  <content>
+    <mdObject>InformationRegister.T9014S_AccountsExpenseRevenue</mdObject>
   </content>
   <content>
     <mdObject>AccumulationRegister.R3011T_CashFlow</mdObject>
@@ -94,10 +193,37 @@
     <mdObject>InformationRegister.PricesByItems</mdObject>
   </content>
   <content>
+    <mdObject>Constant.UsePartnersHierarchy</mdObject>
+  </content>
+  <content>
+    <mdObject>Document.ChequeBondTransaction</mdObject>
+  </content>
+  <content>
+    <mdObject>Catalog.TransactionsKeys</mdObject>
+  </content>
+  <content>
+    <mdObject>Constant.UseAdditionalTableControlDocument</mdObject>
+  </content>
+  <content>
+    <mdObject>AccumulationRegister.R4037B_PlannedReceiptReservationRequests</mdObject>
+  </content>
+  <content>
+    <mdObject>InformationRegister.T9510S_Staffing</mdObject>
+  </content>
+  <content>
     <mdObject>InformationRegister.IntegrationInfo</mdObject>
   </content>
   <content>
     <mdObject>AccumulationRegister.R2014T_CanceledSalesOrders</mdObject>
+  </content>
+  <content>
+    <mdObject>AccumulationRegister.R3027B_EmployeeCashAdvance</mdObject>
+  </content>
+  <content>
+    <mdObject>InformationRegister.T2010S_OffsetOfAdvances</mdObject>
+  </content>
+  <content>
+    <mdObject>InformationRegister.CompanyLedgerTypes</mdObject>
   </content>
   <content>
     <mdObject>Catalog.Users</mdObject>
@@ -121,7 +247,34 @@
     <mdObject>AccumulationRegister.R1005T_PurchaseSpecialOffers</mdObject>
   </content>
   <content>
+    <mdObject>Constant.UseConsolidatedRetailSales</mdObject>
+  </content>
+  <content>
+    <mdObject>Catalog.AdvancesKeys</mdObject>
+  </content>
+  <content>
+    <mdObject>InformationRegister.T7010S_BillOfMaterials</mdObject>
+  </content>
+  <content>
+    <mdObject>InformationRegister.ExpenseRevenueTypeSettings</mdObject>
+  </content>
+  <content>
     <mdObject>Catalog.FileStoragesInfo</mdObject>
+  </content>
+  <content>
+    <mdObject>InformationRegister.HardwareLog</mdObject>
+  </content>
+  <content>
+    <mdObject>InformationRegister.T7051S_ProductionDurationDetails</mdObject>
+  </content>
+  <content>
+    <mdObject>Document.BatchReallocateIncoming</mdObject>
+  </content>
+  <content>
+    <mdObject>Document.AdditionalCostAllocation</mdObject>
+  </content>
+  <content>
+    <mdObject>Constant.UseJobQueueForExternalFunctions</mdObject>
   </content>
   <content>
     <mdObject>InformationRegister.CreatedProcurementOrders</mdObject>
@@ -136,6 +289,18 @@
     <mdObject>AccumulationRegister.R5010B_ReconciliationStatement</mdObject>
   </content>
   <content>
+    <mdObject>Document.SalesReportFromTradeAgent</mdObject>
+  </content>
+  <content>
+    <mdObject>Document.CustomersAdvancesClosing</mdObject>
+  </content>
+  <content>
+    <mdObject>AccumulationRegister.R8510B_BookValueOfFixedAsset</mdObject>
+  </content>
+  <content>
+    <mdObject>Catalog.Batches</mdObject>
+  </content>
+  <content>
     <mdObject>Constant.UseItemKey</mdObject>
   </content>
   <content>
@@ -145,13 +310,43 @@
     <mdObject>InformationRegister.CurrencyRates</mdObject>
   </content>
   <content>
+    <mdObject>Constant.UsePartnerItems</mdObject>
+  </content>
+  <content>
+    <mdObject>Constant.UseEquipments</mdObject>
+  </content>
+  <content>
+    <mdObject>AccumulationRegister.R3025B_PurchaseOrdersToBePaid</mdObject>
+  </content>
+  <content>
     <mdObject>InformationRegister.ItemSegments</mdObject>
+  </content>
+  <content>
+    <mdObject>Document.CalculationMovementCosts</mdObject>
   </content>
   <content>
     <mdObject>Catalog.AddAttributeAndPropertyValues</mdObject>
   </content>
   <content>
+    <mdObject>InformationRegister.T9100A_ObjectAccessMap</mdObject>
+  </content>
+  <content>
+    <mdObject>InformationRegister.S1001L_VendorsPricesByItemKey</mdObject>
+  </content>
+  <content>
     <mdObject>AccumulationRegister.R4010B_ActualStocks</mdObject>
+  </content>
+  <content>
+    <mdObject>Catalog.FillingTemplates</mdObject>
+  </content>
+  <content>
+    <mdObject>InformationRegister.RetailWorkers</mdObject>
+  </content>
+  <content>
+    <mdObject>Constant.UseAging</mdObject>
+  </content>
+  <content>
+    <mdObject>InformationRegister.T3010S_RowIDInfo</mdObject>
   </content>
   <content>
     <mdObject>InformationRegister.BranchBankTerms</mdObject>
@@ -169,6 +364,12 @@
     <mdObject>InformationRegister.PartnerSegments</mdObject>
   </content>
   <content>
+    <mdObject>AccumulationRegister.T1050T_AccountingQuantities</mdObject>
+  </content>
+  <content>
+    <mdObject>InformationRegister.T1010S_ScannedBarcode</mdObject>
+  </content>
+  <content>
     <mdObject>Catalog.SpecialOffers</mdObject>
   </content>
   <content>
@@ -181,16 +382,25 @@
     <mdObject>InformationRegister.BundleContents</mdObject>
   </content>
   <content>
+    <mdObject>InformationRegister.T9530S_WorkDays</mdObject>
+  </content>
+  <content>
     <mdObject>Document.ReconciliationStatement</mdObject>
   </content>
   <content>
     <mdObject>Catalog.TaxRates</mdObject>
   </content>
   <content>
+    <mdObject>ChartOfCharacteristicTypes.AccountingExtraDimensionTypes</mdObject>
+  </content>
+  <content>
     <mdObject>Document.RetailReturnReceipt</mdObject>
   </content>
   <content>
     <mdObject>AccumulationRegister.R4020T_StockTransferOrders</mdObject>
+  </content>
+  <content>
+    <mdObject>Document.WorkOrder</mdObject>
   </content>
   <content>
     <mdObject>Document.CashExpense</mdObject>
@@ -205,10 +415,31 @@
     <mdObject>Document.StockAdjustmentAsSurplus</mdObject>
   </content>
   <content>
+    <mdObject>Catalog.PlanningPeriods</mdObject>
+  </content>
+  <content>
+    <mdObject>AccumulationRegister.R6010B_BatchWiseBalance</mdObject>
+  </content>
+  <content>
+    <mdObject>Catalog.LedgerTypes</mdObject>
+  </content>
+  <content>
+    <mdObject>Catalog.AccrualAndDeductionTypes</mdObject>
+  </content>
+  <content>
     <mdObject>Catalog.ItemKeys</mdObject>
   </content>
   <content>
     <mdObject>InformationRegister.ExternalCommands</mdObject>
+  </content>
+  <content>
+    <mdObject>InformationRegister.T8515S_FixedAssetsLocation</mdObject>
+  </content>
+  <content>
+    <mdObject>InformationRegister.T9050S_AccountingRowAnalytics</mdObject>
+  </content>
+  <content>
+    <mdObject>InformationRegister.T6080S_ReallocatedBatchesAmountValues</mdObject>
   </content>
   <content>
     <mdObject>Catalog.CashStatementStatuses</mdObject>
@@ -229,6 +460,9 @@
     <mdObject>InformationRegister.PricesByItemKeys</mdObject>
   </content>
   <content>
+    <mdObject>Catalog.VehicleTypes</mdObject>
+  </content>
+  <content>
     <mdObject>AccumulationRegister.R2002T_SalesReturns</mdObject>
   </content>
   <content>
@@ -238,13 +472,28 @@
     <mdObject>Document.PhysicalCountByLocation</mdObject>
   </content>
   <content>
+    <mdObject>Constant.UseAccounting</mdObject>
+  </content>
+  <content>
     <mdObject>AccumulationRegister.R3021B_CashInTransitIncoming</mdObject>
   </content>
   <content>
     <mdObject>AccumulationRegister.R1020B_AdvancesToVendors</mdObject>
   </content>
   <content>
+    <mdObject>AccumulationRegister.TM1020B_AdvancesKey</mdObject>
+  </content>
+  <content>
+    <mdObject>Catalog.FixedAssets</mdObject>
+  </content>
+  <content>
+    <mdObject>Constant.UseLandedCost</mdObject>
+  </content>
+  <content>
     <mdObject>Catalog.IntegrationSettings</mdObject>
+  </content>
+  <content>
+    <mdObject>Constant.UseContactInformation</mdObject>
   </content>
   <content>
     <mdObject>AccumulationRegister.R4050B_StockInventory</mdObject>
@@ -253,10 +502,31 @@
     <mdObject>AccumulationRegister.R2050T_RetailSales</mdObject>
   </content>
   <content>
+    <mdObject>InformationRegister.T9010S_AccountsItemKey</mdObject>
+  </content>
+  <content>
+    <mdObject>Document.CommissioningOfFixedAsset</mdObject>
+  </content>
+  <content>
+    <mdObject>AccumulationRegister.R9010B_SourceOfOriginStock</mdObject>
+  </content>
+  <content>
     <mdObject>InformationRegister.IDInfo</mdObject>
   </content>
   <content>
+    <mdObject>Catalog.BillOfMaterials</mdObject>
+  </content>
+  <content>
     <mdObject>Constant.DefaultPictureStorageVolume</mdObject>
+  </content>
+  <content>
+    <mdObject>InformationRegister.T2012S_AdvancesCurrencyRevaluation</mdObject>
+  </content>
+  <content>
+    <mdObject>Constant.UseCashTransaction</mdObject>
+  </content>
+  <content>
+    <mdObject>Constant.UseWorkOrders</mdObject>
   </content>
   <content>
     <mdObject>Catalog.Taxes</mdObject>
@@ -268,10 +538,31 @@
     <mdObject>Catalog.SpecialOfferRules</mdObject>
   </content>
   <content>
+    <mdObject>InformationRegister.T2014S_AdvancesInfo</mdObject>
+  </content>
+  <content>
+    <mdObject>InformationRegister.DELETE_ConsignorSerialLotNumbers</mdObject>
+  </content>
+  <content>
     <mdObject>Document.PurchaseReturn</mdObject>
   </content>
   <content>
     <mdObject>Catalog.UnitsOfMeasurement</mdObject>
+  </content>
+  <content>
+    <mdObject>AccumulationRegister.R8515T_CostOfFixedAsset</mdObject>
+  </content>
+  <content>
+    <mdObject>Document.TimeSheet</mdObject>
+  </content>
+  <content>
+    <mdObject>AccumulationRegister.R3026B_SalesOrdersCustomerAdvance</mdObject>
+  </content>
+  <content>
+    <mdObject>InformationRegister.T6050S_ManualBundleAmountValues</mdObject>
+  </content>
+  <content>
+    <mdObject>Document.ConsolidatedRetailSales</mdObject>
   </content>
   <content>
     <mdObject>Catalog.Files</mdObject>
@@ -289,6 +580,9 @@
     <mdObject>Catalog.Stores</mdObject>
   </content>
   <content>
+    <mdObject>InformationRegister.T2016S_VendorsAdvancesRelevance</mdObject>
+  </content>
+  <content>
     <mdObject>InformationRegister.BarcodeScanInfoCheck</mdObject>
   </content>
   <content>
@@ -301,7 +595,16 @@
     <mdObject>AccumulationRegister.R3035T_CashPlanning</mdObject>
   </content>
   <content>
+    <mdObject>InformationRegister.DataVersions</mdObject>
+  </content>
+  <content>
     <mdObject>Catalog.AccessProfiles</mdObject>
+  </content>
+  <content>
+    <mdObject>Constant.UsePlannedReceiptReservation</mdObject>
+  </content>
+  <content>
+    <mdObject>AccumulationRegister.R7030T_ProductionPlanning</mdObject>
   </content>
   <content>
     <mdObject>Document.CashRevenue</mdObject>
@@ -313,10 +616,19 @@
     <mdObject>Document.ShipmentConfirmation</mdObject>
   </content>
   <content>
+    <mdObject>Constant.UseBusinessUnits</mdObject>
+  </content>
+  <content>
     <mdObject>InformationRegister.LockDataModificationRules</mdObject>
   </content>
   <content>
+    <mdObject>InformationRegister.T6070S_BatchRevenueAllocationInfo</mdObject>
+  </content>
+  <content>
     <mdObject>AccumulationRegister.R2021B_CustomersTransactions</mdObject>
+  </content>
+  <content>
+    <mdObject>Document.ProductionPlanning</mdObject>
   </content>
   <content>
     <mdObject>Catalog.ConfigurationMetadata</mdObject>
@@ -328,7 +640,19 @@
     <mdObject>Catalog.Specifications</mdObject>
   </content>
   <content>
+    <mdObject>Catalog.BatchKeys</mdObject>
+  </content>
+  <content>
+    <mdObject>InformationRegister.JobQueue</mdObject>
+  </content>
+  <content>
     <mdObject>AccumulationRegister.R4011B_FreeStocks</mdObject>
+  </content>
+  <content>
+    <mdObject>Document.Production</mdObject>
+  </content>
+  <content>
+    <mdObject>InformationRegister.T9101A_ObjectAccessRegisters</mdObject>
   </content>
   <content>
     <mdObject>Catalog.CancelReturnReasons</mdObject>
@@ -337,7 +661,16 @@
     <mdObject>Catalog.PriceKeys</mdObject>
   </content>
   <content>
+    <mdObject>Constant.UseDeliveryDate</mdObject>
+  </content>
+  <content>
+    <mdObject>AccumulationRegister.R8015T_ConsignorPrices</mdObject>
+  </content>
+  <content>
     <mdObject>Catalog.ReportOptions</mdObject>
+  </content>
+  <content>
+    <mdObject>Constant.MaximumServerDifficultLevel</mdObject>
   </content>
   <content>
     <mdObject>Catalog.DataMappingItems</mdObject>
@@ -352,7 +685,13 @@
     <mdObject>AccumulationRegister.R1031B_ReceiptInvoicing</mdObject>
   </content>
   <content>
+    <mdObject>Document.SalesReportToConsignor</mdObject>
+  </content>
+  <content>
     <mdObject>AccumulationRegister.R1040B_TaxesOutgoing</mdObject>
+  </content>
+  <content>
+    <mdObject>Document.RetailShipmentConfirmation</mdObject>
   </content>
   <content>
     <mdObject>Catalog.DataAreas</mdObject>
@@ -367,7 +706,19 @@
     <mdObject>InformationRegister.DataMappingTable</mdObject>
   </content>
   <content>
+    <mdObject>Constant.UseAdditionalSettings</mdObject>
+  </content>
+  <content>
+    <mdObject>Document.AdditionalRevenueAllocation</mdObject>
+  </content>
+  <content>
+    <mdObject>AccumulationRegister.R7020T_MaterialPlanning</mdObject>
+  </content>
+  <content>
     <mdObject>InformationRegister.PricesByProperties</mdObject>
+  </content>
+  <content>
+    <mdObject>Document.DecommissioningOfFixedAsset</mdObject>
   </content>
   <content>
     <mdObject>AccumulationRegister.R4052T_StockAdjustmentAsSurplus</mdObject>
@@ -379,19 +730,52 @@
     <mdObject>AccumulationRegister.R4012B_StockReservation</mdObject>
   </content>
   <content>
+    <mdObject>Catalog.AccountingOperations</mdObject>
+  </content>
+  <content>
+    <mdObject>InformationRegister.T6010S_BatchesInfo</mdObject>
+  </content>
+  <content>
+    <mdObject>Document.Payroll</mdObject>
+  </content>
+  <content>
     <mdObject>Catalog.LockDataModificationReasons</mdObject>
   </content>
   <content>
     <mdObject>AccumulationRegister.R4031B_GoodsInTransitIncoming</mdObject>
   </content>
   <content>
+    <mdObject>AccumulationRegister.DELETE_R8012B_ConsignorInventory</mdObject>
+  </content>
+  <content>
+    <mdObject>InformationRegister.T6030S_BatchRelevance</mdObject>
+  </content>
+  <content>
+    <mdObject>InformationRegister.T9520S_TimeSheetInfo</mdObject>
+  </content>
+  <content>
     <mdObject>InformationRegister.AddProperties</mdObject>
+  </content>
+  <content>
+    <mdObject>Constant.UseExpenseAndRevenueTypes</mdObject>
   </content>
   <content>
     <mdObject>Document.Unbundling</mdObject>
   </content>
   <content>
+    <mdObject>Catalog.RowIDs</mdObject>
+  </content>
+  <content>
+    <mdObject>Document.WorkSheet</mdObject>
+  </content>
+  <content>
     <mdObject>Catalog.BusinessUnits</mdObject>
+  </content>
+  <content>
+    <mdObject>AccumulationRegister.R8014T_ConsignorSales</mdObject>
+  </content>
+  <content>
+    <mdObject>Constant.UseChequeBonds</mdObject>
   </content>
   <content>
     <mdObject>AccumulationRegister.R3010B_CashOnHand</mdObject>
@@ -403,10 +787,31 @@
     <mdObject>Document.OpeningEntry</mdObject>
   </content>
   <content>
+    <mdObject>Constant.UseIntegrations</mdObject>
+  </content>
+  <content>
+    <mdObject>Catalog.Addresses</mdObject>
+  </content>
+  <content>
+    <mdObject>Document.ProductionPlanningClosing</mdObject>
+  </content>
+  <content>
+    <mdObject>InformationRegister.T9051S_AccountingExtDimensions</mdObject>
+  </content>
+  <content>
     <mdObject>Document.Bundling</mdObject>
   </content>
   <content>
+    <mdObject>Constant.UsePartnerTerms</mdObject>
+  </content>
+  <content>
+    <mdObject>AccumulationRegister.R6070T_OtherPeriodsExpenses</mdObject>
+  </content>
+  <content>
     <mdObject>Document.PurchaseOrderClosing</mdObject>
+  </content>
+  <content>
+    <mdObject>Constant.UseSourceOfOrigin</mdObject>
   </content>
   <content>
     <mdObject>Constant.UseLockDataModification</mdObject>
@@ -424,10 +829,22 @@
     <mdObject>Catalog.ExpenseAndRevenueTypes</mdObject>
   </content>
   <content>
+    <mdObject>Catalog.EmployeePositions</mdObject>
+  </content>
+  <content>
     <mdObject>AccumulationRegister.R2020B_AdvancesFromCustomers</mdObject>
   </content>
   <content>
     <mdObject>Catalog.ExternalDataProc</mdObject>
+  </content>
+  <content>
+    <mdObject>AccumulationRegister.R7010T_DetailingSupplies</mdObject>
+  </content>
+  <content>
+    <mdObject>AccumulationRegister.R9510B_SalaryPayment</mdObject>
+  </content>
+  <content>
+    <mdObject>Document.ModernizationOfFixedAsset</mdObject>
   </content>
   <content>
     <mdObject>Document.OutgoingPaymentOrder</mdObject>
@@ -439,6 +856,12 @@
     <mdObject>AccumulationRegister.R5021T_Revenues</mdObject>
   </content>
   <content>
+    <mdObject>Constant.UseCommissionTrading</mdObject>
+  </content>
+  <content>
+    <mdObject>InformationRegister.T9500S_AccrualAndDeductionValues</mdObject>
+  </content>
+  <content>
     <mdObject>AccumulationRegister.CashInTransit</mdObject>
   </content>
   <content>
@@ -446,6 +869,9 @@
   </content>
   <content>
     <mdObject>InformationRegister.RemainingItemsInfo</mdObject>
+  </content>
+  <content>
+    <mdObject>Constant.DefaultFilesStorageVolume</mdObject>
   </content>
   <content>
     <mdObject>AccumulationRegister.R5041B_TaxesPayable</mdObject>
@@ -457,19 +883,76 @@
     <mdObject>Document.StockAdjustmentAsWriteOff</mdObject>
   </content>
   <content>
+    <mdObject>Constant.UseBundling</mdObject>
+  </content>
+  <content>
+    <mdObject>InformationRegister.T8510S_FixedAssetsInfo</mdObject>
+  </content>
+  <content>
+    <mdObject>AccumulationRegister.TM1010T_RowIDMovements</mdObject>
+  </content>
+  <content>
+    <mdObject>InformationRegister.DELETE_T8010S_ConsignorBatches</mdObject>
+  </content>
+  <content>
+    <mdObject>AccumulationRegister.R7050T_ProductionDurations</mdObject>
+  </content>
+  <content>
+    <mdObject>Constant.UseSalary</mdObject>
+  </content>
+  <content>
     <mdObject>Catalog.Partners</mdObject>
+  </content>
+  <content>
+    <mdObject>Document.WorkOrderClosing</mdObject>
+  </content>
+  <content>
+    <mdObject>Constant.UseManagersAndSalesPersons</mdObject>
   </content>
   <content>
     <mdObject>AccumulationRegister.R4034B_GoodsShipmentSchedule</mdObject>
   </content>
   <content>
+    <mdObject>InformationRegister.DocumentFiscalStatus</mdObject>
+  </content>
+  <content>
+    <mdObject>Catalog.ExternalFunctions</mdObject>
+  </content>
+  <content>
+    <mdObject>Constant.UseMobile</mdObject>
+  </content>
+  <content>
     <mdObject>Document.PriceList</mdObject>
+  </content>
+  <content>
+    <mdObject>AccumulationRegister.R2006T_Certificates</mdObject>
+  </content>
+  <content>
+    <mdObject>AccumulationRegister.DELETE_R8013B_ConsignorBatchWiseBalance</mdObject>
+  </content>
+  <content>
+    <mdObject>InformationRegister.T9012S_AccountsPartner</mdObject>
+  </content>
+  <content>
+    <mdObject>AccumulationRegister.R5012B_VendorsAging</mdObject>
+  </content>
+  <content>
+    <mdObject>InformationRegister.T1020S_Cache</mdObject>
   </content>
   <content>
     <mdObject>AccumulationRegister.R1014T_CanceledPurchaseOrders</mdObject>
   </content>
   <content>
+    <mdObject>Constant.UseRetail</mdObject>
+  </content>
+  <content>
     <mdObject>AccumulationRegister.R3015B_CashAdvance</mdObject>
+  </content>
+  <content>
+    <mdObject>AccumulationRegister.DELETE_R8010B_TradeAgentInventory</mdObject>
+  </content>
+  <content>
+    <mdObject>InformationRegister.T6090S_CompositeBatchesAmountValues</mdObject>
   </content>
   <content>
     <mdObject>InformationRegister.ObjectStatuses</mdObject>
@@ -478,10 +961,25 @@
     <mdObject>Document.IncomingPaymentOrder</mdObject>
   </content>
   <content>
+    <mdObject>AccumulationRegister.R6020B_BatchBalance</mdObject>
+  </content>
+  <content>
     <mdObject>AccumulationRegister.R4016B_InternalSupplyRequestOrdering</mdObject>
   </content>
   <content>
+    <mdObject>Catalog.SourceOfOrigins</mdObject>
+  </content>
+  <content>
+    <mdObject>Constant.UsePriceByProperties</mdObject>
+  </content>
+  <content>
     <mdObject>Catalog.ChequeBonds</mdObject>
+  </content>
+  <content>
+    <mdObject>Constant.UseUnitsAndDimensions</mdObject>
+  </content>
+  <content>
+    <mdObject>AccumulationRegister.R6050T_SalesBatches</mdObject>
   </content>
   <content>
     <mdObject>Catalog.PrintTemplates</mdObject>
@@ -496,13 +994,37 @@
     <mdObject>AccumulationRegister.R1010T_PurchaseOrders</mdObject>
   </content>
   <content>
+    <mdObject>InformationRegister.LedgerTypeOperations</mdObject>
+  </content>
+  <content>
+    <mdObject>AccumulationRegister.R1022B_VendorsPaymentPlanning</mdObject>
+  </content>
+  <content>
     <mdObject>Document.DebitNote</mdObject>
   </content>
   <content>
     <mdObject>Document.SalesReturnOrder</mdObject>
   </content>
   <content>
+    <mdObject>Constant.UseManufacturing</mdObject>
+  </content>
+  <content>
+    <mdObject>Document.JournalEntry</mdObject>
+  </content>
+  <content>
+    <mdObject>AccumulationRegister.R6080T_OtherPeriodsRevenues</mdObject>
+  </content>
+  <content>
+    <mdObject>Constant.UseOrders</mdObject>
+  </content>
+  <content>
     <mdObject>Constant.UseCompanies</mdObject>
+  </content>
+  <content>
+    <mdObject>Catalog.LedgerTypeVariants</mdObject>
+  </content>
+  <content>
+    <mdObject>Document.EmployeeCashAdvance</mdObject>
   </content>
   <content>
     <mdObject>InformationRegister.Barcodes</mdObject>
@@ -511,7 +1033,13 @@
     <mdObject>Document.PurchaseInvoice</mdObject>
   </content>
   <content>
+    <mdObject>Catalog.PartnerItems</mdObject>
+  </content>
+  <content>
     <mdObject>Catalog.IDInfoAddresses</mdObject>
+  </content>
+  <content>
+    <mdObject>Constant.SaasMode</mdObject>
   </content>
   <content>
     <mdObject>AccumulationRegister.R4033B_GoodsReceiptSchedule</mdObject>
@@ -523,13 +1051,22 @@
     <mdObject>Catalog.PriceTypes</mdObject>
   </content>
   <content>
+    <mdObject>Document.ProductionPlanningCorrection</mdObject>
+  </content>
+  <content>
     <mdObject>Catalog.PartnersBankAccounts</mdObject>
   </content>
   <content>
     <mdObject>Document.GoodsReceipt</mdObject>
   </content>
   <content>
+    <mdObject>InformationRegister.T2011S_TransactionsCurrencyRevaluation</mdObject>
+  </content>
+  <content>
     <mdObject>Document.PurchaseOrder</mdObject>
+  </content>
+  <content>
+    <mdObject>AccumulationRegister.T1040T_AccountingAmounts</mdObject>
   </content>
   <content>
     <mdObject>Document.PlannedReceiptReservation</mdObject>
@@ -544,6 +1081,12 @@
     <mdObject>Catalog.PaymentTypes</mdObject>
   </content>
   <content>
+    <mdObject>Catalog.Vehicles</mdObject>
+  </content>
+  <content>
+    <mdObject>Catalog.ObjectAccessKeys</mdObject>
+  </content>
+  <content>
     <mdObject>Catalog.SerialLotNumbers</mdObject>
   </content>
   <content>
@@ -553,13 +1096,31 @@
     <mdObject>Document.CreditNote</mdObject>
   </content>
   <content>
+    <mdObject>AccumulationRegister.R2023B_AdvancesFromRetailCustomers</mdObject>
+  </content>
+  <content>
+    <mdObject>Constant.AdditionalTableControlExceptions</mdObject>
+  </content>
+  <content>
+    <mdObject>ChartOfAccounts.Basic</mdObject>
+  </content>
+  <content>
+    <mdObject>AccumulationRegister.R3024B_SalesOrdersToBePaid</mdObject>
+  </content>
+  <content>
     <mdObject>Document.BankPayment</mdObject>
   </content>
   <content>
     <mdObject>AccumulationRegister.R4036B_IncomingStocksRequested</mdObject>
   </content>
   <content>
+    <mdObject>AccumulationRegister.R6030T_BatchShortageOutgoing</mdObject>
+  </content>
+  <content>
     <mdObject>InformationRegister.UserSettings</mdObject>
+  </content>
+  <content>
+    <mdObject>Constant.UseStores</mdObject>
   </content>
   <content>
     <mdObject>Document.InternalSupplyRequest</mdObject>
@@ -568,13 +1129,22 @@
     <mdObject>AccumulationRegister.R4014B_SerialLotNumber</mdObject>
   </content>
   <content>
+    <mdObject>Catalog.MovementRules</mdObject>
+  </content>
+  <content>
     <mdObject>AccumulationRegister.R4021B_StockTransferOrdersReceipt</mdObject>
   </content>
   <content>
     <mdObject>AccumulationRegister.R2031B_ShipmentInvoicing</mdObject>
   </content>
   <content>
+    <mdObject>AccumulationRegister.R6040T_BatchShortageIncoming</mdObject>
+  </content>
+  <content>
     <mdObject>AccumulationRegister.R3016B_ChequeAndBonds</mdObject>
+  </content>
+  <content>
+    <mdObject>Constant.UseSpecialOffers</mdObject>
   </content>
   <content>
     <mdObject>AccumulationRegister.R2012B_SalesOrdersInvoiceClosing</mdObject>
@@ -589,6 +1159,18 @@
     <mdObject>Document.CashTransferOrder</mdObject>
   </content>
   <content>
+    <mdObject>InformationRegister.ChequeBondStatuses</mdObject>
+  </content>
+  <content>
+    <mdObject>Constant.UseShipmentConfirmationAndGoodsReceipts</mdObject>
+  </content>
+  <content>
+    <mdObject>AccumulationRegister.R5015B_OtherPartnersTransactions</mdObject>
+  </content>
+  <content>
+    <mdObject>Document.ChequeBondTransactionItem</mdObject>
+  </content>
+  <content>
     <mdObject>AccumulationRegister.R1011B_PurchaseOrdersReceipt</mdObject>
   </content>
   <content>
@@ -598,499 +1180,40 @@
     <mdObject>InformationRegister.TaxSettings</mdObject>
   </content>
   <content>
-    <mdObject>Catalog.Companies</mdObject>
+    <mdObject>InformationRegister.T2017S_CustomersAdvancesRelevance</mdObject>
   </content>
   <content>
-    <mdObject>Catalog.TaxAnalytics</mdObject>
-  </content>
-  <content>
-    <mdObject>Document.CashStatement</mdObject>
-  </content>
-  <content>
-    <mdObject>ChartOfCharacteristicTypes.IDInfoTypes</mdObject>
-  </content>
-  <content>
-    <mdObject>Catalog.AccountingOperations</mdObject>
-  </content>
-  <content>
-    <mdObject>Catalog.AccrualAndDeductionTypes</mdObject>
-  </content>
-  <content>
-    <mdObject>Catalog.Addresses</mdObject>
-  </content>
-  <content>
-    <mdObject>Catalog.AdvancesKeys</mdObject>
-  </content>
-  <content>
-    <mdObject>Catalog.Batches</mdObject>
-  </content>
-  <content>
-    <mdObject>Catalog.BatchKeys</mdObject>
-  </content>
-  <content>
-    <mdObject>Catalog.BillOfMaterials</mdObject>
-  </content>
-  <content>
-    <mdObject>Catalog.EmployeePositions</mdObject>
-  </content>
-  <content>
-    <mdObject>Catalog.ExternalFunctions</mdObject>
-  </content>
-  <content>
-    <mdObject>Catalog.FillingTemplates</mdObject>
-  </content>
-  <content>
-    <mdObject>Catalog.LedgerTypes</mdObject>
-  </content>
-  <content>
-    <mdObject>Catalog.LedgerTypeVariants</mdObject>
-  </content>
-  <content>
-    <mdObject>Catalog.LegalNameContracts</mdObject>
-  </content>
-  <content>
-    <mdObject>Catalog.MovementRules</mdObject>
-  </content>
-  <content>
-    <mdObject>Catalog.PartnerItems</mdObject>
-  </content>
-  <content>
-    <mdObject>Catalog.PlanningPeriods</mdObject>
-  </content>
-  <content>
-    <mdObject>Catalog.RowIDs</mdObject>
-  </content>
-  <content>
-    <mdObject>Catalog.SourceOfOrigins</mdObject>
-  </content>
-  <content>
-    <mdObject>Catalog.TransactionsKeys</mdObject>
-  </content>
-  <content>
-    <mdObject>Catalog.Vehicles</mdObject>
-  </content>
-  <content>
-    <mdObject>Catalog.VehicleTypes</mdObject>
-  </content>
-  <content>
-    <mdObject>Document.AdditionalCostAllocation</mdObject>
-  </content>
-  <content>
-    <mdObject>Document.AdditionalRevenueAllocation</mdObject>
-  </content>
-  <content>
-    <mdObject>Document.BatchReallocateIncoming</mdObject>
-  </content>
-  <content>
-    <mdObject>Document.BatchReallocateOutgoing</mdObject>
-  </content>
-  <content>
-    <mdObject>Document.CalculationMovementCosts</mdObject>
-  </content>
-  <content>
-    <mdObject>Document.ChequeBondTransaction</mdObject>
-  </content>
-  <content>
-    <mdObject>Document.ChequeBondTransactionItem</mdObject>
-  </content>
-  <content>
-    <mdObject>Document.ConsolidatedRetailSales</mdObject>
-  </content>
-  <content>
-    <mdObject>Document.CustomersAdvancesClosing</mdObject>
-  </content>
-  <content>
-    <mdObject>Document.EmployeeCashAdvance</mdObject>
-  </content>
-  <content>
-    <mdObject>Document.ForeignCurrencyRevaluation</mdObject>
-  </content>
-  <content>
-    <mdObject>Document.JournalEntry</mdObject>
-  </content>
-  <content>
-    <mdObject>Document.MoneyTransfer</mdObject>
-  </content>
-  <content>
-    <mdObject>Document.Payroll</mdObject>
-  </content>
-  <content>
-    <mdObject>Document.Production</mdObject>
-  </content>
-  <content>
-    <mdObject>Document.ProductionCostsAllocation</mdObject>
-  </content>
-  <content>
-    <mdObject>Document.ProductionPlanning</mdObject>
-  </content>
-  <content>
-    <mdObject>Document.ProductionPlanningClosing</mdObject>
-  </content>
-  <content>
-    <mdObject>Document.ProductionPlanningCorrection</mdObject>
-  </content>
-  <content>
-    <mdObject>Document.SalesReportFromTradeAgent</mdObject>
-  </content>
-  <content>
-    <mdObject>Document.TimeSheet</mdObject>
-  </content>
-  <content>
-    <mdObject>Document.SalesReportToConsignor</mdObject>
-  </content>
-  <content>
-    <mdObject>Document.VendorsAdvancesClosing</mdObject>
-  </content>
-  <content>
-    <mdObject>Document.WorkOrder</mdObject>
-  </content>
-  <content>
-    <mdObject>Document.WorkOrderClosing</mdObject>
-  </content>
-  <content>
-    <mdObject>Document.WorkSheet</mdObject>
-  </content>
-  <content>
-    <mdObject>Constant.DefaultFilesStorageVolume</mdObject>
-  </content>
-  <content>
-    <mdObject>Constant.MaximumServerDifficultLevel</mdObject>
-  </content>
-  <content>
-    <mdObject>Constant.UseAccounting</mdObject>
-  </content>
-  <content>
-    <mdObject>Constant.UseAddAttributesAndProperties</mdObject>
-  </content>
-  <content>
-    <mdObject>Constant.UseAdditionalSettings</mdObject>
-  </content>
-  <content>
-    <mdObject>Constant.UseAging</mdObject>
+    <mdObject>Constant.DefaultSMSProvider</mdObject>
   </content>
   <content>
     <mdObject>Constant.UseAllFunctional</mdObject>
   </content>
   <content>
-    <mdObject>Constant.UseBankDocuments</mdObject>
+    <mdObject>Constant.UseObjectAccess</mdObject>
   </content>
   <content>
-    <mdObject>Constant.UseBundling</mdObject>
-  </content>
-  <content>
-    <mdObject>Constant.UseBusinessUnits</mdObject>
-  </content>
-  <content>
-    <mdObject>Constant.UseCashTransaction</mdObject>
-  </content>
-  <content>
-    <mdObject>Constant.UseChequeBonds</mdObject>
-  </content>
-  <content>
-    <mdObject>Constant.UseConsolidatedRetailSales</mdObject>
-  </content>
-  <content>
-    <mdObject>Constant.UseContactInformation</mdObject>
-  </content>
-  <content>
-    <mdObject>Constant.UseDeliveryDate</mdObject>
-  </content>
-  <content>
-    <mdObject>Constant.UseEquipments</mdObject>
-  </content>
-  <content>
-    <mdObject>Constant.UseExpenseAndRevenueTypes</mdObject>
-  </content>
-  <content>
-    <mdObject>Constant.UseIntegrations</mdObject>
-  </content>
-  <content>
-    <mdObject>Constant.UseJobQueueForExternalFunctions</mdObject>
-  </content>
-  <content>
-    <mdObject>Constant.UseLandedCost</mdObject>
-  </content>
-  <content>
-    <mdObject>Constant.UseManagersAndSalesPersons</mdObject>
-  </content>
-  <content>
-    <mdObject>Constant.UseManufacturing</mdObject>
-  </content>
-  <content>
-    <mdObject>Constant.UseMobile</mdObject>
-  </content>
-  <content>
-    <mdObject>Constant.UseOrders</mdObject>
-  </content>
-  <content>
-    <mdObject>Constant.UsePartnerItems</mdObject>
-  </content>
-  <content>
-    <mdObject>Constant.UsePartnersHierarchy</mdObject>
-  </content>
-  <content>
-    <mdObject>Constant.UsePartnerTerms</mdObject>
-  </content>
-  <content>
-    <mdObject>Constant.UsePlannedReceiptReservation</mdObject>
-  </content>
-  <content>
-    <mdObject>Constant.UsePriceByProperties</mdObject>
-  </content>
-  <content>
-    <mdObject>Constant.UseRetail</mdObject>
-  </content>
-  <content>
-    <mdObject>Constant.UseSerialLotNumbers</mdObject>
-  </content>
-  <content>
-    <mdObject>Constant.UseShipmentConfirmationAndGoodsReceipts</mdObject>
-  </content>
-  <content>
-    <mdObject>Constant.UseSimpleMode</mdObject>
-  </content>
-  <content>
-    <mdObject>Constant.UseSpecialOffers</mdObject>
-  </content>
-  <content>
-    <mdObject>Constant.UseStores</mdObject>
-  </content>
-  <content>
-    <mdObject>Constant.UseUnitsAndDimensions</mdObject>
-  </content>
-  <content>
-    <mdObject>Constant.UseWorkOrders</mdObject>
-  </content>
-  <content>
-    <mdObject>Constant.UseCommissionTrading</mdObject>
-  </content>
-  <content>
-    <mdObject>Constant.UseRetailOrders</mdObject>
-  </content>
-  <content>
-    <mdObject>Constant.UseSalary</mdObject>
-  </content>
-  <content>
-    <mdObject>ChartOfCharacteristicTypes.AccountingExtraDimensionTypes</mdObject>
-  </content>
-  <content>
-    <mdObject>ChartOfAccounts.Basic</mdObject>
-  </content>
-  <content>
-    <mdObject>InformationRegister.ChequeBondStatuses</mdObject>
-  </content>
-  <content>
-    <mdObject>InformationRegister.CompanyLedgerTypes</mdObject>
-  </content>
-  <content>
-    <mdObject>InformationRegister.ExpenseRevenueTypeSettings</mdObject>
-  </content>
-  <content>
-    <mdObject>InformationRegister.RetailWorkers</mdObject>
-  </content>
-  <content>
-    <mdObject>InformationRegister.T2010S_OffsetOfAdvances</mdObject>
-  </content>
-  <content>
-    <mdObject>InformationRegister.T2013S_OffsetOfAging</mdObject>
-  </content>
-  <content>
-    <mdObject>InformationRegister.T2014S_AdvancesInfo</mdObject>
-  </content>
-  <content>
-    <mdObject>InformationRegister.LedgerTypeOperations</mdObject>
-  </content>
-  <content>
-    <mdObject>InformationRegister.T1010S_ScannedBarcode</mdObject>
-  </content>
-  <content>
-    <mdObject>InformationRegister.T2015S_TransactionsInfo</mdObject>
-  </content>
-  <content>
-    <mdObject>InformationRegister.T2016S_VendorsAdvancesRelevance</mdObject>
-  </content>
-  <content>
-    <mdObject>InformationRegister.T2017S_CustomersAdvancesRelevance</mdObject>
-  </content>
-  <content>
-    <mdObject>InformationRegister.T3010S_RowIDInfo</mdObject>
-  </content>
-  <content>
-    <mdObject>InformationRegister.T6010S_BatchesInfo</mdObject>
-  </content>
-  <content>
-    <mdObject>InformationRegister.T6020S_BatchKeysInfo</mdObject>
-  </content>
-  <content>
-    <mdObject>InformationRegister.T6030S_BatchRelevance</mdObject>
-  </content>
-  <content>
-    <mdObject>InformationRegister.T6040S_BundleAmountValues</mdObject>
-  </content>
-  <content>
-    <mdObject>InformationRegister.T6050S_ManualBundleAmountValues</mdObject>
-  </content>
-  <content>
-    <mdObject>InformationRegister.T6060S_BatchCostAllocationInfo</mdObject>
-  </content>
-  <content>
-    <mdObject>InformationRegister.T6070S_BatchRevenueAllocationInfo</mdObject>
-  </content>
-  <content>
-    <mdObject>InformationRegister.T6080S_ReallocatedBatchesAmountValues</mdObject>
-  </content>
-  <content>
-    <mdObject>InformationRegister.T6090S_CompositeBatchesAmountValues</mdObject>
-  </content>
-  <content>
-    <mdObject>InformationRegister.T6095S_WriteOffBatchesInfo</mdObject>
-  </content>
-  <content>
-    <mdObject>InformationRegister.T7010S_BillOfMaterials</mdObject>
+    <mdObject>Catalog.Companies</mdObject>
   </content>
   <content>
     <mdObject>InformationRegister.T9011S_AccountsCashAccount</mdObject>
   </content>
   <content>
-    <mdObject>InformationRegister.T9010S_AccountsItemKey</mdObject>
+    <mdObject>Catalog.TaxAnalytics</mdObject>
   </content>
   <content>
-    <mdObject>InformationRegister.T9012S_AccountsPartner</mdObject>
+    <mdObject>InformationRegister.T6095S_WriteOffBatchesInfo</mdObject>
   </content>
   <content>
     <mdObject>InformationRegister.T9013S_AccountsTax</mdObject>
   </content>
   <content>
-    <mdObject>InformationRegister.T9014S_AccountsExpenseRevenue</mdObject>
+    <mdObject>Document.CashStatement</mdObject>
   </content>
   <content>
-    <mdObject>InformationRegister.DELETE_T8010S_ConsignorBatches</mdObject>
+    <mdObject>Document.FixedAssetTransfer</mdObject>
   </content>
   <content>
-    <mdObject>InformationRegister.T7051S_ProductionDurationDetails</mdObject>
-  </content>
-  <content>
-    <mdObject>InformationRegister.T9500S_AccrualAndDeductionValues</mdObject>
-  </content>
-  <content>
-    <mdObject>InformationRegister.T9510S_Staffing</mdObject>
-  </content>
-  <content>
-    <mdObject>InformationRegister.T9520S_TimeSheetInfo</mdObject>
-  </content>
-  <content>
-    <mdObject>InformationRegister.T9530S_WorkDays</mdObject>
-  </content>
-  <content>
-    <mdObject>AccumulationRegister.R1022B_VendorsPaymentPlanning</mdObject>
-  </content>
-  <content>
-    <mdObject>AccumulationRegister.R2022B_CustomersPaymentPlanning</mdObject>
-  </content>
-  <content>
-    <mdObject>AccumulationRegister.R3024B_SalesOrdersToBePaid</mdObject>
-  </content>
-  <content>
-    <mdObject>AccumulationRegister.R3025B_PurchaseOrdersToBePaid</mdObject>
-  </content>
-  <content>
-    <mdObject>AccumulationRegister.R4037B_PlannedReceiptReservationRequests</mdObject>
-  </content>
-  <content>
-    <mdObject>AccumulationRegister.R5012B_VendorsAging</mdObject>
-  </content>
-  <content>
-    <mdObject>AccumulationRegister.R6010B_BatchWiseBalance</mdObject>
-  </content>
-  <content>
-    <mdObject>AccumulationRegister.R6020B_BatchBalance</mdObject>
-  </content>
-  <content>
-    <mdObject>AccumulationRegister.R6030T_BatchShortageOutgoing</mdObject>
-  </content>
-  <content>
-    <mdObject>AccumulationRegister.R6040T_BatchShortageIncoming</mdObject>
-  </content>
-  <content>
-    <mdObject>AccumulationRegister.R6050T_SalesBatches</mdObject>
-  </content>
-  <content>
-    <mdObject>AccumulationRegister.R6060T_CostOfGoodsSold</mdObject>
-  </content>
-  <content>
-    <mdObject>AccumulationRegister.R6070T_OtherPeriodsExpenses</mdObject>
-  </content>
-  <content>
-    <mdObject>AccumulationRegister.R6080T_OtherPeriodsRevenues</mdObject>
-  </content>
-  <content>
-    <mdObject>AccumulationRegister.R7010T_DetailingSupplies</mdObject>
-  </content>
-  <content>
-    <mdObject>AccumulationRegister.R7020T_MaterialPlanning</mdObject>
-  </content>
-  <content>
-    <mdObject>AccumulationRegister.R7030T_ProductionPlanning</mdObject>
-  </content>
-  <content>
-    <mdObject>AccumulationRegister.R7040T_ManualMaterialsCorretionInProduction</mdObject>
-  </content>
-  <content>
-    <mdObject>AccumulationRegister.T1040T_AccountingAmounts</mdObject>
-  </content>
-  <content>
-    <mdObject>AccumulationRegister.T1050T_AccountingQuantities</mdObject>
-  </content>
-  <content>
-    <mdObject>AccumulationRegister.TM1010B_RowIDMovements</mdObject>
-  </content>
-  <content>
-    <mdObject>AccumulationRegister.TM1010T_RowIDMovements</mdObject>
-  </content>
-  <content>
-    <mdObject>AccumulationRegister.TM1020B_AdvancesKey</mdObject>
-  </content>
-  <content>
-    <mdObject>AccumulationRegister.TM1030B_TransactionsKey</mdObject>
-  </content>
-  <content>
-    <mdObject>AccumulationRegister.DELETE_R8010B_TradeAgentInventory</mdObject>
-  </content>
-  <content>
-    <mdObject>AccumulationRegister.DELETE_R8011B_TradeAgentSerialLotNumber</mdObject>
-  </content>
-  <content>
-    <mdObject>AccumulationRegister.DELETE_R8012B_ConsignorInventory</mdObject>
-  </content>
-  <content>
-    <mdObject>AccumulationRegister.DELETE_R8013B_ConsignorBatchWiseBalance</mdObject>
-  </content>
-  <content>
-    <mdObject>AccumulationRegister.R8014T_ConsignorSales</mdObject>
-  </content>
-  <content>
-    <mdObject>AccumulationRegister.R8015T_ConsignorPrices</mdObject>
-  </content>
-  <content>
-    <mdObject>AccumulationRegister.R9010B_SourceOfOriginStock</mdObject>
-  </content>
-  <content>
-    <mdObject>AccumulationRegister.R2023B_AdvancesFromRetailCustomers</mdObject>
-  </content>
-  <content>
-    <mdObject>AccumulationRegister.R3026B_SalesOrdersCustomerAdvance</mdObject>
-  </content>
-  <content>
-    <mdObject>AccumulationRegister.R3027B_EmployeeCashAdvance</mdObject>
-  </content>
-  <content>
-    <mdObject>AccumulationRegister.R7050T_ProductionDurations</mdObject>
-  </content>
-  <content>
-    <mdObject>AccumulationRegister.R9510B_SalaryPayment</mdObject>
-  </content>
-  <content>
-    <mdObject>AccountingRegister.Basic</mdObject>
+    <mdObject>ChartOfCharacteristicTypes.IDInfoTypes</mdObject>
   </content>
   <defaultPresentation>AsDescription</defaultPresentation>
   <editType>InDialog</editType>

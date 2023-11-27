@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mdclass:CommonModule xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="f0a7d639-c872-46ea-b7fa-6db73b5ea0b6">
+  <name>DocVisitorCounterClient</name>
+  <synonym>
+    <key>en</key>
+    <value>Doc visitor counter client</value>
+  </synonym>
+  <clientManagedApplication>true</clientManagedApplication>
+  <clientOrdinaryApplication>true</clientOrdinaryApplication>
+</mdclass:CommonModule>

@@ -190,6 +190,7 @@ Async Function CheckControlStrings(DataSource, CRS)
 		CodeStringList = EquipmentFiscalPrinterServer.GetStringCode(DataSource);
 
 		If CodeStringList.Count() > 0 Then
+			
 			OpenSessionRegistrationKMSettings = EquipmentFiscalPrinterAPIClient.OpenSessionRegistrationKMSettings();
 			If Not Await EquipmentFiscalPrinterAPIClient.OpenSessionRegistrationKM(CRS.FiscalPrinter, OpenSessionRegistrationKMSettings) Then
 				CommonFunctionsClientServer.ShowUsersMessage(OpenSessionRegistrationKMSettings.Info.Error);
@@ -443,6 +444,16 @@ Async Function CheckKM(Hardware, RequestKM, OpenAndClose = False) Export
 	EndIf;
 
 	GetProcessingKMResultSettings.Info.Approved = HardwareClient.GetAPIModule(Hardware).isCodeStringApproved(GetProcessingKMResultSettings);
+
+	If RequestKMSettings.In.RequestKM.MarkingCode = "TestFalseString"
+		OR RequestKMSettings.In.RequestKM.MarkingCode = "VGVzdEZhbHNlU3RyaW5n" Then
+
+		GetProcessingKMResultSettings.Info.Approved = False;
+	ElsIf RequestKMSettings.In.RequestKM.MarkingCode = "RiseTestFalseString"
+		OR RequestKMSettings.In.RequestKM.MarkingCode = "UmlzZVRlc3RGYWxzZVN0cmluZw==" Then
+	
+		Raise "RiseTestFalseString";
+	EndIf;
 
 	Return GetProcessingKMResultSettings;
 EndFunction

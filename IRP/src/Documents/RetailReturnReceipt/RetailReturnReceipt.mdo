@@ -1963,6 +1963,37 @@
       <maxValue xsi:type="core:UndefinedValue"/>
       <dataHistory>Use</dataHistory>
     </attributes>
+    <attributes uuid="5a1ebbe8-2aa9-4bb1-b474-3c52503fa781">
+      <name>ControlCodeStringType</name>
+      <synonym>
+        <key>en</key>
+        <value>Control code string type</value>
+      </synonym>
+      <type>
+        <types>EnumRef.ControlCodeStringType</types>
+      </type>
+      <minValue xsi:type="core:UndefinedValue"/>
+      <maxValue xsi:type="core:UndefinedValue"/>
+      <dataHistory>Use</dataHistory>
+      <fullTextSearch>Use</fullTextSearch>
+    </attributes>
+    <attributes uuid="eec86eaf-8e0d-46ec-a14d-525246cbcdf3">
+      <name>Prefix</name>
+      <synonym>
+        <key>en</key>
+        <value>Prefix</value>
+      </synonym>
+      <type>
+        <types>String</types>
+        <stringQualifiers>
+          <length>50</length>
+        </stringQualifiers>
+      </type>
+      <minValue xsi:type="core:UndefinedValue"/>
+      <maxValue xsi:type="core:UndefinedValue"/>
+      <dataHistory>Use</dataHistory>
+      <fullTextSearch>Use</fullTextSearch>
+    </attributes>
   </tabularSections>
   <commands uuid="da583033-ea5c-4fa1-8143-846671611e1a">
     <name>Genarate</name>

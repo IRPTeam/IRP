@@ -73,12 +73,13 @@ Procedure FillCheckPackageByRetailSalesReceipt(SourceData, CheckPackage) Export
 				ElsIf ItemRow.Item.ControlCodeStringType.IsEmpty() Then
 					Raise "Can not fiscalize item while Control Code String Type is Empty. Select type in item, or switch off Control string";
 				ElsIf ItemRow.Item.ControlCodeStringType = Enums.ControlCodeStringType.MarkingCode Then
-					If Not CommonFunctionsClientServer.isBase64Value(CodeString) Then
-						CodeString = Base64String(GetBinaryDataFromString(CodeString, TextEncoding.UTF8, False));
-					EndIf;
-					FiscalStringData.MarkingCode = CodeString;
+					FiscalStringData.MarkingCode = ControlCodeStringServer.GetMarkingCodeString(CodeString);
 				Else
-					FillGoodData(ItemRow.Item, CodeString, FiscalStringData);
+					GoodData = ControlCodeStringServer.GetGoodData(ItemRow.Item.ControlCodeStringType, CodeString);
+					
+					If Not GoodData = Undefined Then
+						FiscalStringData.GoodCodeData.Insert(GoodData.Type, GoodData.CodeString);
+					EndIf;
 				EndIf;
 				FiscalStringData.CalculationSubject = 33;	//https://its.1c.ru/db/metod8dev#content:4829:hdoc:signcalculationobject
 			EndIf;
@@ -223,17 +224,6 @@ Procedure FillCheckPackageByRetailSalesReceipt(SourceData, CheckPackage) Export
 
 	CheckPackage.Positions.FiscalStringJSON = "";
 
-EndProcedure
-
-Procedure FillGoodData(Item, Val CodeString, FiscalStringData)
-
-	If Item.ControlCodeStringType = Enums.ControlCodeStringType.GoodCodeData Then
-		If Not CommonFunctionsClientServer.isBase64Value(CodeString) Then
-			CodeString = Base64String(GetBinaryDataFromString(CodeString, TextEncoding.UTF8, False));
-		EndIf;
-		FiscalStringData.GoodCodeData.Insert("NotIdentified", CodeString);
-	EndIf;
-		
 EndProcedure
 
 // Fill check package by payment.

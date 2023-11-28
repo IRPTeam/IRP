@@ -26,6 +26,8 @@ Procedure OnOpen(Cancel)
 		NewRow.NotCheck = Row.NotCheck;
 		NewRow.ControlCodeStringType = Row.ControlCodeStringType;
 		NewRow.Prefix = Row.Prefix;
+		
+		ControlCodeStringType = Row.ControlCodeStringType; // Get from last row
 	EndDo;
 EndProcedure
 

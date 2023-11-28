@@ -859,8 +859,8 @@ Scenario: _0850015 create retail sales receipt from POS (own stock, card 02, ite
 		And I click "Payment (+)" button
 		* Check previous marking code
 			And "CurrentCodes" table became equal
-				| 'Scanned codes'                     | 'Code is approved' | 'Not check' |
-				| 'Current row will decode to base64' | 'Yes'              | 'No'        |
+				| 'Scanned codes'                     | 'Approved' | 'Not check' | 'Type'         |
+				| 'Current row will decode to base64' | 'Yes'      | 'No'        | 'Marking code' |
 		* Scan marking data that already used	
 			And I click "Search by barcode" button
 			Then "Barcode" window is opened

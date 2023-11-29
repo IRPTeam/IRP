@@ -1254,14 +1254,15 @@ Scenario: _0850023 check return payment by card and cash (sales by card)
 			| 'Retail sales receipt'       |
 			| '$$RetailSalesReceipt5$$'    |
 		And I select current line in "List" table
-	* Code scan
-		And I click "Payment Return" button
-		Then the form attribute named "isReturn" became equal to "Yes"	
-		And I click "Search by barcode" button
-		Then "Barcode" window is opened
-		And I input "11111111111111111111" text in the field named "Barcode"
-		And I move to the next attribute
-		And I click "Payment Return" button			
+	* Check marking code from RSR
+		And I activate "Control code string state" field in "ItemList" table
+		And I select current line in "ItemList" table
+		Then the form attribute named "isReturn" became equal to "Yes"
+		And "CurrentCodes" table became equal
+			| 'Type'         | 'Prefix' | 'Scanned codes'        | 'Approved' | 'Not check' |
+			| 'Marking code' | ''       | '11111111111111111111' | 'No'       | 'No'        |
+		And I close current window						
+		And I click "Payment Return" button		
 		Then "Payment" window is opened
 		And I click "Card (*)" button
 		And I go to line in "BankPaymentTypeList" table
@@ -2605,9 +2606,10 @@ Scenario: _0260165 Return of a product paid for with a certificate
 			| 'Product 1 with SLN' |
 		And I activate "Control code string state" field in "ItemList" table
 		And I select current line in "ItemList" table
-		And I click "Search by barcode" button
-		And I input "Q3VycmVudCByb3cgd2lsbCBkZWNvZGUgdG8gYmFzZTY0" text in the field named "Barcode"
-		And I move to the next attribute
+		And "CurrentCodes" table became equal
+			| 'Type'         | 'Prefix' | 'Scanned codes'                                | 'Approved' | 'Not check' |
+			| 'Marking code' | ''       | 'Q3VycmVudCByb3cgd2lsbCBkZWNvZGUgdG8gYmFzZTY0' | 'No'       | 'No'        |
+		And I close current window		
 		And I click "Payment Return" button
 		Then "Payment" window is opened
 		And "Payments" table became equal
@@ -2768,14 +2770,29 @@ Scenario: _0260170 Good code data control return (POS)
 			| 'Amount' |
 			| '900,00' |
 		And I select current line in "List" table
-		And I click "Payment Return" button
-		And I click "Search by barcode" button
-		And I input "Q3VycmVudCByb3cgd2lsbCBkZWNvZGUgdG8gYmFzZTY1" text in the field named "Barcode"
-		And I move to the next attribute
-		And I click "Payment Return" button
-		And I click "Search by barcode" button
-		And I input "Q3VycmVudCByb3cgd2lsbCBkZWNvZGUgdG8gYmFzZTY2" text in the field named "Barcode"
-		And I move to the next attribute
+	* Check Good code from RSR
+		And I go to line in "ItemList" table
+			| 'Item'                                                                | 'Item key' | 'Price'  | 'Quantity' | 'Serials'     | 'Total'  |
+			| 'Product 16 with SLN and Good code data (Main Company - Consignor 1)' | 'PZU'      | '300,00' | '1,000'    | '89000008999' | '300,00' |
+		And I activate "Control code string state" field in "ItemList" table
+		And I select current line in "ItemList" table
+		Then the form attribute named "ControlCodeStringType" became equal to "Good code data"
+		Then the form attribute named "isReturn" became equal to "Yes"	
+		And "CurrentCodes" table became equal
+			| 'Type'           | 'Prefix'        | 'Scanned codes'                                | 'Approved' | 'Not check' |
+			| 'Good code data' | 'NotIdentified' | 'Q3VycmVudCByb3cgd2lsbCBkZWNvZGUgdG8gYmFzZTY1' | 'No'       | 'No'        |
+		And I close current window
+		And I go to line in "ItemList" table
+			| 'Item'                                                                | 'Item key' | 'Price'  | 'Quantity' | 'Serials'          | 'Total'  |
+			| 'Product 16 with SLN and Good code data (Main Company - Consignor 1)' | 'ODS'      | '300,00' | '1,000'    | '9099009909999999' | '300,00' |
+		And I activate "Control code string state" field in "ItemList" table
+		And I select current line in "ItemList" table
+		Then the form attribute named "ControlCodeStringType" became equal to "Good code data"
+		Then the form attribute named "isReturn" became equal to "Yes"	
+		And "CurrentCodes" table became equal
+			| 'Type'           | 'Prefix'        | 'Scanned codes'                                | 'Approved' | 'Not check' |
+			| 'Good code data' | 'NotIdentified' | 'Q3VycmVudCByb3cgd2lsbCBkZWNvZGUgdG8gYmFzZTY2' | 'No'       | 'No'        |
+		And I close current window
 		And I click "Payment Return" button
 		And I click "Cash (/)" button
 		And I click "OK" button

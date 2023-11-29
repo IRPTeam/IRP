@@ -598,6 +598,8 @@
   <commonModules>CommonModule.ViewServer_V2</commonModules>
   <commonModules>CommonModule.WorkstationClient</commonModules>
   <commonModules>CommonModule.WorkstationServer</commonModules>
+  <commonModules>CommonModule.ControlCodeStringServer</commonModules>
+  <commonModules>CommonModule.ControlCodeStringClient</commonModules>
   <commonModules>CommonModule.DocVisitorCounterClient</commonModules>
   <commonModules>CommonModule.DocVisitorCounterServer</commonModules>
   <commonAttributes>CommonAttribute.Author</commonAttributes>

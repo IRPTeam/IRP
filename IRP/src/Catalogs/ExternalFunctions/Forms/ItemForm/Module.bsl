@@ -17,6 +17,7 @@ Procedure OnCreateAtServer(Cancel, StandardProcessing)
 	
 	TypeList = FillTypes();
 	For Each Row In TypeList Do
+		//@skip-check typed-value-adding-to-untyped-collection
 		Items.ResultType.ChoiceList.Add(Row.Value, Row.Presentation, , Row.Picture);
 	EndDo;
 EndProcedure

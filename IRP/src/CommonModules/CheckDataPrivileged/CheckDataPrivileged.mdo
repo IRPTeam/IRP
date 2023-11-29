@@ -11,7 +11,7 @@
  </synonym>
  <synonym>
   <key>tr</key>
-  <value>Check data privileged</value>
+  <value>Veri kontrol et öncellikli</value>
  </synonym>
  <server>true</server>
  <externalConnection>true</externalConnection>

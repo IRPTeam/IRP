@@ -16,7 +16,7 @@
  </synonym>
  <synonym>
   <key>tr</key>
-  <value>Control code string type</value>
+  <value>Kontrol kodu satır tipi</value>
  </synonym>
  <quickChoice>true</quickChoice>
  <choiceMode>BothWays</choiceMode>
@@ -32,7 +32,7 @@
   </synonym>
   <synonym>
    <key>tr</key>
-   <value>None</value>
+   <value>Yok</value>
   </synonym>
  </enumValues>
  <enumValues uuid="8525a5c2-b25b-4857-bace-43818a6d9983">
@@ -47,7 +47,7 @@
   </synonym>
   <synonym>
    <key>tr</key>
-   <value>Marking code</value>
+   <value>Etiketleme kodu</value>
   </synonym>
  </enumValues>
  <enumValues uuid="80890c5b-7c4a-4a00-8831-6d8202bde2b5">
@@ -62,7 +62,7 @@
   </synonym>
   <synonym>
    <key>tr</key>
-   <value>Good code data</value>
+   <value>Eşsiz QR verisi</value>
   </synonym>
  </enumValues>
 </mdclass:Enum>

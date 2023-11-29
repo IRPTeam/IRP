@@ -358,12 +358,12 @@
  <roles>Role.Document_TimeSheet</roles>
  <roles>Role.Document_Unbundling</roles>
  <roles>Role.Document_VendorsAdvancesClosing</roles>
+ <roles>Role.Document_VisitorCounter</roles>
  <roles>Role.Document_WorkOrder</roles>
  <roles>Role.Document_WorkOrderClosing</roles>
  <roles>Role.Document_WorkSheet</roles>
  <roles>Role.FilterForUserSettings</roles>
  <roles>Role.FullAccess</roles>
- <roles>Role.FullAccessInArea</roles>
  <roles>Role.FullAccessOnlyRead</roles>
  <roles>Role.RunMobileClient</roles>
  <roles>Role.RunThickClient</roles>
@@ -678,6 +678,8 @@
  <commonModules>CommonModule.ViewServer_V2</commonModules>
  <commonModules>CommonModule.WorkstationClient</commonModules>
  <commonModules>CommonModule.WorkstationServer</commonModules>
+ <commonModules>CommonModule.DocVisitorCounterClient</commonModules>
+ <commonModules>CommonModule.DocVisitorCounterServer</commonModules>
  <commonAttributes>CommonAttribute.Author</commonAttributes>
  <commonAttributes>CommonAttribute.Branch</commonAttributes>
  <commonAttributes>CommonAttribute.Description</commonAttributes>
@@ -1023,11 +1025,15 @@
  <documents>Document.CashTransferOrder</documents>
  <documents>Document.ChequeBondTransaction</documents>
  <documents>Document.ChequeBondTransactionItem</documents>
+ <documents>Document.CommissioningOfFixedAsset</documents>
  <documents>Document.ConsolidatedRetailSales</documents>
  <documents>Document.CreditNote</documents>
  <documents>Document.CustomersAdvancesClosing</documents>
  <documents>Document.DebitNote</documents>
+ <documents>Document.DecommissioningOfFixedAsset</documents>
+ <documents>Document.DepreciationCalculation</documents>
  <documents>Document.EmployeeCashAdvance</documents>
+ <documents>Document.FixedAssetTransfer</documents>
  <documents>Document.ForeignCurrencyRevaluation</documents>
  <documents>Document.GoodsReceipt</documents>
  <documents>Document.IncomingPaymentOrder</documents>
@@ -1038,6 +1044,7 @@
  <documents>Document.JournalEntry</documents>
  <documents>Document.Labeling</documents>
  <documents>Document.ManualRegisterEntry</documents>
+ <documents>Document.ModernizationOfFixedAsset</documents>
  <documents>Document.MoneyTransfer</documents>
  <documents>Document.OpeningEntry</documents>
  <documents>Document.OutgoingPaymentOrder</documents>
@@ -1074,14 +1081,10 @@
  <documents>Document.TimeSheet</documents>
  <documents>Document.Unbundling</documents>
  <documents>Document.VendorsAdvancesClosing</documents>
+ <documents>Document.VisitorCounter</documents>
  <documents>Document.WorkOrder</documents>
  <documents>Document.WorkOrderClosing</documents>
  <documents>Document.WorkSheet</documents>
- <documents>Document.CommissioningOfFixedAsset</documents>
- <documents>Document.DecommissioningOfFixedAsset</documents>
- <documents>Document.DepreciationCalculation</documents>
- <documents>Document.FixedAssetTransfer</documents>
- <documents>Document.ModernizationOfFixedAsset</documents>
  <documentJournals>DocumentJournal.DocumentsForIncomingPayment</documentJournals>
  <documentJournals>DocumentJournal.DocumentsForOutgoingPayment</documentJournals>
  <enums>Enum.AccountingAnalyticTypes</enums>

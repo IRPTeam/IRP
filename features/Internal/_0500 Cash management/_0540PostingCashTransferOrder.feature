@@ -1,4 +1,4 @@
-#language: en
+﻿#language: en
 @tree
 @Positive
 @CashManagement
@@ -452,6 +452,26 @@ Scenario: _054006 create Cash transfer order (from Cash/Bank accounts to bank ac
 		And "PaymentList" table contains lines
 			| 'Total amount'   | 'Planning transaction basis'     |
 			| '500,00'         | '$$CashTransferOrder054006$$'    |
+		* Change amount and reselect basis document
+			And I activate field named "PaymentListTotalAmount" in "PaymentList" table
+			And I input "400,00" text in the field named "PaymentListTotalAmount" of "PaymentList" table
+			And I finish line editing in "PaymentList" table
+			And I activate "Planning transaction basis" field in "PaymentList" table
+			And I select current line in "PaymentList" table
+			And I click choice button of "Planning transaction basis" attribute in "PaymentList" table
+			And I go to line in "List" table
+				| Number                               |
+				| $$NumberCashTransferOrder054006$$    |
+			And I select current line in "List" table
+			And "PaymentList" table contains lines
+				| 'Total amount'   | 'Planning transaction basis'     |
+				| '400,00'         | '$$CashTransferOrder054006$$'    |	
+			And I activate field named "PaymentListTotalAmount" in "PaymentList" table
+			And I input "500,00" text in the field named "PaymentListTotalAmount" of "PaymentList" table
+			And I finish line editing in "PaymentList" table
+			And "PaymentList" table contains lines
+				| 'Total amount'   | 'Planning transaction basis'     |
+				| '500,00'         | '$$CashTransferOrder054006$$'    |
 		And I click the button named "FormPost"
 		And I delete "$$NumberBankReceipt054006$$" variable
 		And I delete "$$BankReceipt054006$$" variable

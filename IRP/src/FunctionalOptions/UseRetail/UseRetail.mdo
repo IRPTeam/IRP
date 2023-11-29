@@ -32,4 +32,6 @@
  <content>Document.RetailShipmentConfirmation</content>
  <content>Document.RetailGoodsReceipt</content>
  <content>Subsystem.Retail</content>
+ <content>Subsystem.Retail.Subsystem.VisitorCounter</content>
+ <content>Document.VisitorCounter</content>
 </mdclass:FunctionalOption>

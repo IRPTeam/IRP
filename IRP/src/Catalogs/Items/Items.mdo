@@ -319,7 +319,7 @@
   </synonym>
   <synonym>
    <key>tr</key>
-   <value>Control code string type</value>
+   <value>Kontrol kodu satır tipi</value>
   </synonym>
   <type>
    <types>EnumRef.ControlCodeStringType</types>

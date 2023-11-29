@@ -15,7 +15,6 @@
  </synonym>
  <includeHelpInContents>true</includeHelpInContents>
  <includeInCommandInterface>true</includeInCommandInterface>
- <content>InformationRegister.TaxSettings</content>
  <content>Catalog.TaxRates</content>
  <content>Catalog.Taxes</content>
  <content>Catalog.TaxAnalytics</content>

@@ -178,9 +178,6 @@
      <role>Role.FullAccess</role>
     </for>
     <for>
-     <role>Role.FullAccessInArea</role>
-    </for>
-    <for>
      <role>Role.FullAccessOnlyRead</role>
     </for>
     <for>

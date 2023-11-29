@@ -140,4 +140,19 @@
    <value>Donanımlar</value>
   </synonym>
  </enumValues>
+ <enumValues uuid="cb7b990a-99f7-4969-a757-b0e63a17e95e">
+  <name>VisitorCounter</name>
+  <synonym>
+   <key>en</key>
+   <value>Visitor counter</value>
+  </synonym>
+  <synonym>
+   <key>ru</key>
+   <value>Счетчик посетителей</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Ziyaretçi sayacı</value>
+  </synonym>
+ </enumValues>
 </mdclass:Enum>

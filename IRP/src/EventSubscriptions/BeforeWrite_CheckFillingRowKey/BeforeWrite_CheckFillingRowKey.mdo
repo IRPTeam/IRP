@@ -11,7 +11,7 @@
  </synonym>
  <synonym>
   <key>tr</key>
-  <value>Before write check filling row key</value>
+  <value>Yazmadan önce satır anahtarını doldurmayı kontrol edin</value>
  </synonym>
  <source>
   <types>DocumentObject</types>

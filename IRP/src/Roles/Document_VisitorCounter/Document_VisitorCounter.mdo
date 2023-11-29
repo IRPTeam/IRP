@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mdclass:Role xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="50a73c52-0cfe-4b14-af19-bdfe867e3945">
+ <name>Document_VisitorCounter</name>
+ <synonym>
+  <key>en</key>
+  <value>Document "Visitor counter"</value>
+ </synonym>
+ <synonym>
+  <key>ru</key>
+  <value>Документ "Счетчик посетителей"</value>
+ </synonym>
+ <synonym>
+  <key>tr</key>
+  <value>Doc "Ziyaretçi sayacı"</value>
+ </synonym>
+</mdclass:Role>

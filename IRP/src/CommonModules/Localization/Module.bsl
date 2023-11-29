@@ -1598,7 +1598,7 @@ Function Strings(Lang) Export
 		|tr='Seri lot numarası benzersiz değil, yinelenen kodlar:[%1]'", Lang));	
 	Strings.Insert("Error_137", NStr("en='Not filled [Key] in tabular section [%1] line number[%2]';
 		|ru='Не заполнено [Key] в табличной части [%1] номер строки[%2]';
-		|tr='Not filled [Key] in tabular section [%1] line number[%2]'", Lang));	
+		|tr='[%1] tablo bölümündeki [%2] satır numarasında [Key] doldurulmamış'", Lang));	
 	Strings.Insert("Error_138", NStr("en='Cannot change the unit from [%1] to [%2], used in document [%3]';
 		|ru='Невозможно изменить единицу измерения с [%1] на [%2], используется в документе [%3]';
 		|tr='Birimi [%1]''den [%2]''ye değiştiremezsiniz, [%3] belgesinde kullanılmıştır'", Lang));	

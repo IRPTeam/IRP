@@ -148,5 +148,16 @@
   <types>DocumentRef.DecommissioningOfFixedAsset</types>
   <types>DocumentRef.FixedAssetTransfer</types>
   <types>DocumentRef.ModernizationOfFixedAsset</types>
+  <types>DocumentRef.VisitorCounter</types>
+  <types>DocumentRef.VendorsAdvancesClosing</types>
+  <types>DocumentRef.DepreciationCalculation</types>
+  <types>DocumentRef.ForeignCurrencyRevaluation</types>
+  <types>DocumentRef.CustomersAdvancesClosing</types>
+  <types>DocumentRef.ChequeBondTransactionItem</types>
+  <types>DocumentRef.CalculationMovementCosts</types>
+  <types>DocumentRef.BatchReallocateOutgoing</types>
+  <types>DocumentRef.BatchReallocateIncoming</types>
+  <types>DocumentRef.AdditionalRevenueAllocation</types>
+  <types>DocumentRef.AdditionalCostAllocation</types>
  </type>
 </mdclass:DefinedType>

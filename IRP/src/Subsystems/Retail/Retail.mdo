@@ -28,4 +28,5 @@
  <content>Document.RetailShipmentConfirmation</content>
  <content>Document.RetailGoodsReceipt</content>
  <subsystems>Sales</subsystems>
+ <subsystems>VisitorCounter</subsystems>
 </mdclass:Subsystem>

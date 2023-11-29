@@ -207,10 +207,6 @@
      <value>true</value>
      <role>Role.FullAccess</role>
     </for>
-    <for>
-     <value>true</value>
-     <role>Role.FullAccessInArea</role>
-    </for>
    </userVisible>
    <extendedTooltip>
     <name>FormShowCodeExtendedTooltip</name>

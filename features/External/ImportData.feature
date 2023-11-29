@@ -2668,10 +2668,11 @@ Scenario: Create catalog PaymentSchedules objects
 Scenario: Create catalog PlanningPeriods objects
 
 	And I check or create catalog "PlanningPeriods" objects:
-		| 'Ref'                                                                      | 'DeletionMark'  | 'Code'  | 'Description'          | 'BeginDate'           | 'EndDate'             | 'IsFinancial'  | 'IsManufacturing'  | 'IsSalary'   |
-		| 'e1cib/data/Catalog.PlanningPeriods?ref=b76bafe8d8921be311ebccdc0f9de002'  | 'False'         | 2       | 'First'                | '01.08.2021 0:00:00'  | '10.08.2021 0:00:00'  | 'True'         | 'False'            | 'True'       |
-		| 'e1cib/data/Catalog.PlanningPeriods?ref=b76bafe8d8921be311ebccdc0f9de003'  | 'False'         | 3       | 'Second'               | '11.08.2021 0:00:00'  | '20.08.2021 0:00:00'  | 'True'         | 'False'            | 'True'       |
-		| 'e1cib/data/Catalog.PlanningPeriods?ref=b79dc4a595d82c4911ee0130a1296aa2'  | 'False'         | 4       | 'Third (only salary)'  | '01.02.2023 0:00:00'  | '28.02.2023 0:00:00'  | 'False'        | 'False'            | 'True'       |
+		| 'Ref'                                                                     | 'DeletionMark' | 'Code' | 'Description'          | 'BeginDate'           | 'EndDate'             | 'IsFinancial' | 'IsManufacturing' | 'IsSalary' | 'SourceNodeID' |
+		| 'e1cib/data/Catalog.PlanningPeriods?ref=b76bafe8d8921be311ebccdc0f9de002' | 'False'        | 2      | 'First'                | '01.08.2021 00:00:00' | '10.08.2021 00:00:00' | 'True'        | 'False'           | 'True'     | ''             |
+		| 'e1cib/data/Catalog.PlanningPeriods?ref=b76bafe8d8921be311ebccdc0f9de003' | 'False'        | 3      | 'Second'               | '11.08.2021 00:00:00' | '20.08.2021 00:00:00' | 'True'        | 'False'           | 'True'     | ''             |
+		| 'e1cib/data/Catalog.PlanningPeriods?ref=b79dc4a595d82c4911ee0130a1296aa2' | 'False'        | 4      | 'Third (only salary)'  | '01.02.2023 00:00:00' | '28.02.2023 00:00:00' | 'False'       | 'False'           | 'True'     | ''             |
+		| 'e1cib/data/Catalog.PlanningPeriods?ref=b7b0f4345ecbeede11ee8ddbb37fa1a7' | 'False'        | 5      | 'Fourth (only salary)' | '01.11.2023 00:00:00' | '30.11.2023 00:00:00' | 'False'       | 'False'           | 'True'     | ''             |
 
 	
 Scenario: Create catalog Agreements objects (Customer)

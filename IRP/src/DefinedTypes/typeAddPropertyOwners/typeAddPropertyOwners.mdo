@@ -150,5 +150,6 @@
     <types>DocumentRef.AdditionalCostAllocation</types>
     <types>DocumentRef.AdditionalAccrual</types>
     <types>CatalogRef.EmployeeSchedule</types>
+    <types>DocumentRef.VisitorCounter</types>
   </type>
 </mdclass:DefinedType>

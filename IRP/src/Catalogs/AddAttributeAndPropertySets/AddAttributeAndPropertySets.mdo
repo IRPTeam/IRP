@@ -977,6 +977,13 @@
         <value>143</value>
       </code>
     </items>
+    <items id="5c945a10-daeb-4f00-8a1d-561bf8cc5576">
+      <name>Document_VisitorCounter</name>
+      <description></description>
+      <code xsi:type="core:NumberValue">
+        <value>144</value>
+      </code>
+    </items>
   </predefined>
   <editType>InDialog</editType>
   <choiceMode>BothWays</choiceMode>

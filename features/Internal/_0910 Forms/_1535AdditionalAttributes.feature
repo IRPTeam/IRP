@@ -18,7 +18,9 @@ Background:
 Scenario: _0153500 preparation
 	When set True value to the constant
 	When set True value to the constant Use accounting
+	And Delay 1
 	When set True value to the constant Use salary
+	And Delay 1
 	When set True value to the constant Use commission trading
 	And I close TestClient session
 	Given I open new TestClient session or connect the existing one
@@ -4870,6 +4872,7 @@ Scenario: _015400722 check that additional attributes and properties are display
 		Given I open hyperlink "e1cib/list/Catalog.EmployeeSchedule"
 		And I click the button named "FormCreate"
 		And I input "Test" text in the field named "Description_en"
+		And I select "Day" exact value from the drop-down list named "Type"
 		And I click "Save and close" button
 	* Open EmployeeSchedule form
 		Given I open hyperlink "e1cib/list/Catalog.EmployeeSchedule"
@@ -4901,7 +4904,8 @@ Scenario: _015400722 check that additional attributes and properties are display
 		And I finish line editing in "Properties" table
 		And I click "Save and close" button
 	* Check that the additional Test attribute has been displayed on the form
-		When I click command interface button "UI groups"
+		When in opened panel I select "Employee schedule"
+		// When I click command interface button "UI groups"
 		And field "Test" is present on the form
 		And I click Select button of "Test" field
 		And I go to line in "List" table
@@ -4952,7 +4956,8 @@ Scenario: _015400723 check that additional attributes and properties are display
 		And I finish line editing in "Properties" table
 		And I click "Save and close" button
 	* Check that the additional Test attribute has been displayed on the form
-		When I click command interface button "UI groups"
+		// When I click command interface button "UI groups"
+		When in opened panel I select "Employee positions"	
 		And field "Test" is present on the form
 		And I click Select button of "Test" field
 		And I go to line in "List" table
@@ -4972,6 +4977,7 @@ Scenario: _015400724 check that additional attributes and properties are display
 		Given I open hyperlink "e1cib/list/Catalog.AccrualAndDeductionTypes"
 		And I click the button named "FormCreate"
 		And I input "Test" text in the field named "Description_en"
+		And I select "Accrual" exact value from the drop-down list named "Type"		
 		And I click "Save and close" button
 	* Open AccrualAndDeductionTypes form
 		Given I open hyperlink "e1cib/list/Catalog.AccrualAndDeductionTypes"
@@ -5003,7 +5009,8 @@ Scenario: _015400724 check that additional attributes and properties are display
 		And I finish line editing in "Properties" table
 		And I click "Save and close" button
 	* Check that the additional Test attribute has been displayed on the form
-		When I click command interface button "UI groups"
+		// When I click command interface button "UI groups"
+		When in opened panel I select "Accrual and deduction types"
 		And field "Test" is present on the form
 		And I click Select button of "Test" field
 		And I go to line in "List" table

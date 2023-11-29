@@ -9,6 +9,8 @@ Procedure OnCreateAtServer(Cancel, StandardProcessing)
 	LineNumber = Parameters.LineNumber;
 	RowKey = Parameters.RowKey;
 	isReturn = Parameters.isReturn;
+	ControlCodeStringType = Item.ControlCodeStringType;
+	//@skip-check property-return-type, statement-type-change
 	AdditionalCheckIsOn = Parameters.Item.CheckCodeString;
 
 	Items.DecorationCheckIsOff.Visible = Not AdditionalCheckIsOn;
@@ -22,6 +24,10 @@ Procedure OnOpen(Cancel)
 		NewRow.StringCode = Row.CodeString;
 		NewRow.CodeIsApproved = Row.CodeIsApproved;
 		NewRow.NotCheck = Row.NotCheck;
+		NewRow.ControlCodeStringType = Row.ControlCodeStringType;
+		NewRow.Prefix = Row.Prefix;
+		
+		ControlCodeStringType = Row.ControlCodeStringType; // Get from last row
 	EndDo;
 EndProcedure
 
@@ -67,7 +73,7 @@ Async Procedure SearchByBarcodeEnd(Result, AdditionalParameters = Undefined) Exp
 	EndDo;
 
 	For Each StrCode In ArrayOfCodeStrings Do
-		If CheckCodeString(StrCode) Then
+		If ControlCodeStringClient.ValidateCodeString(ControlCodeStringType, StrCode) Then
 
 			//@skip-check property-return-type, dynamic-access-method-not-found, variable-value-type
 			dblRows = FormOwner.Object.ControlCodeStrings.FindRows(New Structure("CodeString", StrCode));
@@ -92,33 +98,38 @@ Async Procedure SearchByBarcodeEnd(Result, AdditionalParameters = Undefined) Exp
 
 	AllBarcodesIsOk = True;
 	For Each StringCode In ArrayOfApprovedCodeStrings Do // String
-		If AdditionalCheckIsOn Then
-			RequestKMSettings = EquipmentFiscalPrinterAPIClient.RequestKMInput(isReturn);
-			RequestKMSettings.Quantity = 1;
-			RequestKMSettings.MarkingCode = StringCode;
-			Result = Await EquipmentFiscalPrinterClient.CheckKM(Hardware, RequestKMSettings, True); // See EquipmentFiscalPrinterAPIClient.GetProcessingKMResultSettings
-
-			If Not Result.Info.Success Then
-				CommonFunctionsClientServer.ShowUsersMessage(Result.Info.Error);
-				Return;
-			EndIf;
-
-			If Not Result.Info.Approved Then
+		If AdditionalCheckIsOn AND ControlCodeStringType = PredefinedValue("Enum.ControlCodeStringType.MarkingCode") Then
+			If Await ControlCodeStringClient.CheckMarkingCode(StringCode, Hardware, isReturn) Then
+				NewRow = CurrentCodes.Add();
+				NewRow.StringCode = StringCode;
+				NewRow.CodeIsApproved = True;
+				NewRow.ControlCodeStringType = ControlCodeStringType;
+			Else
 				AllBarcodesIsOk = False;
-				//@skip-check transfer-object-between-client-server
-				Log.Write("CodeStringCheck.CheckKM.Approved.False", Result, , , Hardware);
-				//@skip-check invocation-parameter-type-intersect, property-return-type
-				CommonFunctionsClientServer.ShowUsersMessage(StrTemplate(R().EqFP_ProblemWhileCheckCodeString, StringCode));
-				Return;
 			EndIf;
-			NewRow = CurrentCodes.Add();
-			NewRow.StringCode = StringCode;
-			NewRow.CodeIsApproved = Result.Info.Approved;
+		ElsIf AdditionalCheckIsOn AND ControlCodeStringType = PredefinedValue("Enum.ControlCodeStringType.GoodCodeData") Then
+			If ControlCodeStringClient.CheckGoodCodeData(StringCode, Hardware, isReturn) Then
+				
+				GoodData = GetGoodData(StringCode);
+					
+				If Not GoodData = Undefined Then
+					NewRow = CurrentCodes.Add();
+					NewRow.StringCode = GoodData.CodeString;
+					NewRow.CodeIsApproved = True;
+					NewRow.Prefix = GoodData.Type;
+					NewRow.ControlCodeStringType = ControlCodeStringType;
+				Else
+					AllBarcodesIsOk = False;
+				EndIf;
+			Else
+				AllBarcodesIsOk = False;
+			EndIf; 
 		Else
 			NewRow = CurrentCodes.Add();
 			NewRow.StringCode = StringCode;
 			NewRow.CodeIsApproved = True;
 			NewRow.NotCheck = True;
+			NewRow.ControlCodeStringType = ControlCodeStringType;
 		EndIf;
 	EndDo;
 
@@ -127,6 +138,11 @@ Async Procedure SearchByBarcodeEnd(Result, AdditionalParameters = Undefined) Exp
 	EndIf;
 
 EndProcedure
+
+&AtServer
+Function GetGoodData(Val StringCode)
+	Return ControlCodeStringServer.GetGoodData(ControlCodeStringType, StringCode);
+EndFunction
 
 &AtClient
 Procedure ApproveWithoutScan(Command)
@@ -144,6 +160,8 @@ Procedure Done(Command = Undefined)
 		Str.Insert("CodeString", Row.StringCode);
 		Str.Insert("CodeIsApproved", Row.CodeIsApproved);
 		Str.Insert("NotCheck", Row.NotCheck);
+		Str.Insert("ControlCodeStringType", Row.ControlCodeStringType);
+		Str.Insert("Prefix", Row.Prefix);
 		Array.Add(Str);
 	EndDo;
 	Result.Insert("Scaned", Array);
@@ -151,16 +169,12 @@ Procedure Done(Command = Undefined)
 EndProcedure
 
 &AtClient
-Function CheckCodeString(StrCode)
-	If StrLen(StrCode) < 20 Then
-		Return False;
-	EndIf;
-
-	Return True;
-EndFunction
-
-&AtClient
 Procedure GetCodeStringFromSerialLotNumber(Command)
 	Items.GetCodeStringFromSerialLotNumber.Visible = True;
 	GetCodeStringFromSerialLotNumber = True;
+EndProcedure
+
+&AtClient
+Procedure ControlCodeStringTypeOnChange(Item)
+	CurrentCodes.Clear();
 EndProcedure

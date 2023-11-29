@@ -4602,7 +4602,9 @@ Function ExtractData_FromRSR(BasisesTable, DataReceiver, AddInfo = Undefined)
 	|	UNDEFINED AS Ref,
 	|	BasisesTable.Key,
 	|	ControlCodeStrings.CodeString,
-	|	ControlCodeStrings.CodeIsApproved
+	|	ControlCodeStrings.CodeIsApproved,
+	|	ControlCodeStrings.ControlCodeStringType,
+	|	ControlCodeStrings.Prefix
 	|FROM
 	|	Document.RetailSalesReceipt.ControlCodeStrings AS ControlCodeStrings
 	|		INNER JOIN BasisesTable AS BasisesTable
@@ -11411,7 +11413,7 @@ Function GetColumnNames_ControlCodeStrings()
 EndFunction
 
 Function GetColumnNamesSum_ControlCodeStrings()
-	Return "CodeString";
+	Return "CodeString, NotCheck, ControlCodeStringType, Prefix";
 EndFunction
 
 Function GetEmptyTable_ControlCodeStrings()

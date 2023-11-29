@@ -2596,11 +2596,12 @@ Scenario: _0260165 Return of a product paid for with a certificate
 			| 'Item'               | 'Sales person' | 'Item key' | 'Serials'    | 'Price'  | 'Quantity' | 'Offers' | 'Total'  |
 			| 'Dress'              | ''             | 'XS/Blue'  | ''           | '520,00' | '1,000'    | ''       | '520,00' |
 			| 'Product 1 with SLN' | ''             | 'PZU'      | '8908899880' | '200,00' | '1,000'    | ''       | '200,00' |
-		And "BasisPayments" table became equal
+		And "BasisPayments" table contains lines
 			| 'Payment type' | 'Amount' |
 			| 'Certificate'  | '500,00' |
 			| 'Cash'         | '20,00'  |
 			| 'Card 03'      | '200,00' |
+		Then the number of "BasisPayments" table lines is "равно" "3"
 		And I go to line in "ItemList" table
 			| 'Item'               |
 			| 'Product 1 with SLN' |

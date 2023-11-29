@@ -1443,7 +1443,8 @@ Function ChangeExpenseTypeByItemKeyOptions() Export
 EndFunction
 
 Function ChangeExpenseTypeByItemKeyExecute(Options) Export
-	Return CatExpenseAndRevenueTypesServer.GetExpenseType(Options.Company, Options.ItemKey);
+	ExpenseType = CatExpenseAndRevenueTypesServer.GetExpenseType(Options.Company, Options.ItemKey);
+	Return ExpenseType;
 EndFunction
 
 #EndRegion
@@ -1455,7 +1456,8 @@ Function ChangeRevenueTypeByItemKeyOptions() Export
 EndFunction
 
 Function ChangeRevenueTypeByItemKeyExecute(Options) Export
-	Return CatExpenseAndRevenueTypesServer.GetRevenueType(Options.Company, Options.ItemKey);
+	RevenueType = CatExpenseAndRevenueTypesServer.GetRevenueType(Options.Company, Options.ItemKey);
+	Return RevenueType;
 EndFunction
 
 #EndRegion

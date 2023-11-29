@@ -1840,7 +1840,27 @@ Scenario: check filling revenue type (item key)
 		And "ItemList" table became equal
 			| 'Revenue type'   | 'Item'    | 'Item key'   | 'Quantity'   | 'Unit'    |
 			| 'Delivery'       | 'Dress'   | 'S/Yellow'   | '1,000'      | 'pcs'     |
-
+	* Select item key without revenue type
+		And in the table "ItemList" I click the button named "ItemListAdd"
+		And I activate "Item" field in "ItemList" table
+		And I click choice button of "Item" attribute in "ItemList" table
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Bag'         |
+		And I select current line in "List" table
+		And I activate field named "ItemListItemKey" in "ItemList" table
+		And I click choice button of the attribute named "ItemListItemKey" in "ItemList" table
+		And I go to line in "List" table
+			| 'Item' | 'Item key' |
+			| 'Bag'  | 'ODS'      |
+		And I select current line in "List" table
+		And I finish line editing in "ItemList" table
+		And "ItemList" table became equal
+			| 'Item'  | 'Item key' | 'Unit' | 'Quantity' | 'Revenue type' |
+			| 'Dress' | 'S/Yellow' | 'pcs'  | '1,000'    | 'Delivery'     |
+			| 'Bag'   | 'ODS'      | 'pcs'  | '1,000'    | ''             |
+		
+				
 Scenario: check filling expense type (from item key)
 	* Select Company	
 		And I click "Create" button
@@ -1867,7 +1887,7 @@ Scenario: check filling expense type (from item key)
 			| 'XS/Blue'     |
 		And I select current line in "List" table
 		And I finish line editing in "ItemList" table		
-	* Check filling in revenue type
+	* Check filling in expense type
 		And "ItemList" table became equal
 			| 'Expense type'   | 'Item'    | 'Item key'   | 'Quantity'   | 'Unit'    |
 			| 'Software'       | 'Dress'   | 'XS/Blue'    | '1,000'      | 'pcs'     |
@@ -1879,11 +1899,43 @@ Scenario: check filling expense type (from item key)
 			| 'S/Yellow'    |
 		And I select current line in "List" table
 		And I finish line editing in "ItemList" table		
-	* Check filling in revenue type
+	* Check filling in expense type (item key without Expense type)
 		And "ItemList" table became equal
-			| 'Expense type' | 'Item'  | 'Item key' | 'Quantity'     | 'Unit' |
-			| 'Delivery'     | 'Dress' | 'S/Yellow' | '1,000' | 'pcs'  |
+			| 'Expense type' | 'Item'  | 'Item key' | 'Quantity' | 'Unit' |
+			| 'Delivery'     | 'Dress' | 'S/Yellow' | '1,000'    | 'pcs'  |
+		And in the table "ItemList" I click the button named "ItemListAdd"
+		And I activate "Item" field in "ItemList" table
+		And I click choice button of "Item" attribute in "ItemList" table
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Bag'         |
+		And I select current line in "List" table
+		And I activate field named "ItemListItemKey" in "ItemList" table
+		And I click choice button of the attribute named "ItemListItemKey" in "ItemList" table
+		And I go to line in "List" table
+			| 'Item' | 'Item key' |
+			| 'Bag'  | 'ODS'      |
+		And I select current line in "List" table
+		And I finish line editing in "ItemList" table
+		And "ItemList" table became equal
+			| 'Item'  | 'Item key' | 'Unit' | 'Quantity' | 'Expense type' |
+			| 'Dress' | 'S/Yellow' | 'pcs'  | '1,000'    | 'Delivery'     |
+			| 'Bag'   | 'ODS'      | 'pcs'  | '1,000'    | ''             |
 
+Scenario: delete ExpenseRevenueTypeSettings records for Company
+	And I close all client application windows
+	Given I open hyperlink "e1cib/list/InformationRegister.ExpenseRevenueTypeSettings"
+	If "List" table contains lines Then
+		| 'Company'        | 'Item type' | 'Item'  | 'Item key' | 'Expense type'             | 'Revenue type'             |
+		| 'Main Company'   | ''          | ''      | ''         | 'Rent'                     | 'Rent'                     |
+		And I go to line in "List" table
+			| 'Company'        | 'Item type' | 'Item'  | 'Item key' | 'Expense type'             | 'Revenue type'             |
+			| 'Main Company'   | ''          | ''      | ''         | 'Rent'                     | 'Rent'                     |
+		And in the table "List" I click the button named "ListContextMenuDelete"
+		Then "1C:Enterprise" window is opened
+		And I click "Yes" button
+						
+					
 Scenario: add different items in POS
 		* Product with SLN without marking code
 			And I click "Search by barcode (F7)" button

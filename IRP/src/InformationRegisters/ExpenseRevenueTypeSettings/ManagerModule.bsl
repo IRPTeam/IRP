@@ -55,24 +55,27 @@ Function GetERType(Filter)
 		|	ERTS.ExpenseType,
 		|	ERTS.RevenueType,
 		|	CASE
-		|		When ERTS.ItemKey = &ItemKey And Not ERTS.ItemKey = Value(Catalog.ItemKeys.EmptyRef)   
+		|		When ERTS.ItemKey = &ItemKey
+		|		And Not ERTS.ItemKey = Value(Catalog.ItemKeys.EmptyRef)
 		|			Then 1000
 		|		Else 0
 		|	END AS ItemKeyPart,
 		|	CASE
-		|		When ERTS.Item = &Item And Not ERTS.Item = Value(Catalog.Items.EmptyRef) 
+		|		When ERTS.Item = &Item
+		|		And Not ERTS.Item = Value(Catalog.Items.EmptyRef)
 		|			Then 100
 		|		Else 0
 		|	END AS ItemPart,
 		|	CASE
-		|		When ERTS.ItemType = &ItemType And Not ERTS.ItemType = Value(Catalog.ItemTypes.EmptyRef) 
+		|		When ERTS.ItemType = &ItemType
+		|		And Not ERTS.ItemType = Value(Catalog.ItemTypes.EmptyRef)
 		|			Then 10
 		|		Else 0
 		|	END AS ItemTypePart,
 		|	CASE
-		|		When ERTS.ItemType = Value(Catalog.ItemTypes.EmptyRef) 
-		|			AND ERTS.Item = Value(Catalog.Items.EmptyRef)
-		|			AND ERTS.ItemKey = Value(Catalog.ItemKeys.EmptyRef)
+		|		When ERTS.ItemType = Value(Catalog.ItemTypes.EmptyRef)
+		|		AND ERTS.Item = Value(Catalog.Items.EmptyRef)
+		|		AND ERTS.ItemKey = Value(Catalog.ItemKeys.EmptyRef)
 		|			Then 1
 		|		Else 0
 		|	END AS CompanyPart
@@ -90,6 +93,8 @@ Function GetERType(Filter)
 		|	VT.ItemKeyPart + VT.ItemPart + VT.ItemTypePart + VT.CompanyPart AS Priority
 		|FROM
 		|	VT AS VT
+		|WHERE
+		|	VT.ItemKeyPart + VT.ItemPart + VT.ItemTypePart + VT.CompanyPart > 0
 		|
 		|ORDER BY
 		|	Priority DESC";
@@ -99,7 +104,10 @@ Function GetERType(Filter)
 	Query.SetParameter("ItemType", Filter.ItemType);
 	Query.SetParameter("ItemKey", Filter.ItemKey);
 	
-	Return Query.Execute().Unload();
+	QueryResult = Query.Execute();
+	QueryTable = QueryResult.Unload();
+	
+	Return QueryTable;
 EndFunction
 
 // Get filter.

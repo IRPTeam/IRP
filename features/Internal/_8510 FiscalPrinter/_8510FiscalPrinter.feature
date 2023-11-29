@@ -324,6 +324,74 @@ SalesReceiptXML23 =
 </CheckPackage>
 """
 
+SalesReceiptXML24 =
+"""xml
+<?xml version="1.0" encoding="UTF-8"?>
+<CheckPackage>
+	<Parameters CashierName="Арина Браун" CashierINN="1111111111" SaleAddress="Sale address" SaleLocation="Sale location" OperationType="1" TaxationSystem="0"/>
+	<Positions>
+		<FiscalString AmountWithDiscount="301.11" DiscountAmount="0" MarkingCode="Q3VycmVudCByb3cgd2lsbCBkZWNvZGUgdG8gYmFzZTY3" MeasureOfQuantity="255" CalculationSubject="1" Name="Product 16 with SLN and Good code data (Main Company - Consignor 1) PZU [89000008999]" Quantity="1" PaymentMethod="4" PriceWithDiscount="301.11" VATRate="18" VATAmount="45.93" CalculationAgent="5">
+			<VendorData VendorINN="1" VendorName="Consignor 1" VendorPhone=""/>
+		</FiscalString>
+		<FiscalString AmountWithDiscount="300" DiscountAmount="0" MarkingCode="Q3VycmVudCByb3cgd2lsbCBkZWNvZGUgdG8gYmFzZTY4" MeasureOfQuantity="255" CalculationSubject="1" Name="Product 16 with SLN and Good code data (Main Company - Consignor 1) ODS [9099009909999999]" Quantity="1" PaymentMethod="4" PriceWithDiscount="300" VATRate="18" VATAmount="45.76" CalculationAgent="5">
+			<VendorData VendorINN="1" VendorName="Consignor 1" VendorPhone=""/>
+		</FiscalString>
+	</Positions>
+	<Payments Cash="601.11" ElectronicPayment="0" PrePayment="0" PostPayment="0" Barter="0"/>
+</CheckPackage>
+"""
+
+SalesReceiptXML25 =
+"""xml
+<?xml version="1.0" encoding="UTF-8"?>
+<CheckPackage>
+	<Parameters CashierName="Арина Браун" CashierINN="1111111111" SaleAddress="Sale address" SaleLocation="Sale location" OperationType="2" TaxationSystem="0"/>
+	<Positions>
+		<FiscalString AmountWithDiscount="301.11" DiscountAmount="0" MarkingCode="Q3VycmVudCByb3cgd2lsbCBkZWNvZGUgdG8gYmFzZTY3" MeasureOfQuantity="255" CalculationSubject="1" Name="Product 16 with SLN and Good code data (Main Company - Consignor 1) PZU [89000008999]" Quantity="1" PaymentMethod="4" PriceWithDiscount="301.11" VATRate="18" VATAmount="45.93" CalculationAgent="5">
+			<VendorData VendorINN="1" VendorName="Consignor 1" VendorPhone=""/>
+		</FiscalString>
+		<FiscalString AmountWithDiscount="300" DiscountAmount="0" MarkingCode="Q3VycmVudCByb3cgd2lsbCBkZWNvZGUgdG8gYmFzZTY4" MeasureOfQuantity="255" CalculationSubject="1" Name="Product 16 with SLN and Good code data (Main Company - Consignor 1) ODS [9099009909999999]" Quantity="1" PaymentMethod="4" PriceWithDiscount="300" VATRate="18" VATAmount="45.76" CalculationAgent="5">
+			<VendorData VendorINN="1" VendorName="Consignor 1" VendorPhone=""/>
+		</FiscalString>
+	</Positions>
+	<Payments Cash="601.11" ElectronicPayment="0" PrePayment="0" PostPayment="0" Barter="0"/>
+</CheckPackage>
+"""
+
+SalesReceiptXML26 =
+"""xml
+<?xml version="1.0" encoding="UTF-8"?>
+<CheckPackage>
+	<Parameters CashierName="Арина Браун" CashierINN="1111111111" SaleAddress="Sale address" SaleLocation="Sale location" OperationType="1" TaxationSystem="0"/>
+	<Positions>
+		<FiscalString AmountWithDiscount="401.11" DiscountAmount="0" MeasureOfQuantity="255" CalculationSubject="1" Name="Product 6 with SLN PZU [57897909799]" Quantity="1" PaymentMethod="4" PriceWithDiscount="401.11" VATRate="18" VATAmount="61.19">
+			<GoodCodeData NotIdentified="Q3VycmVudCByb3cgd2lsbCBkZWNvZGUgdG8gYmFzZTY8"/>
+		</FiscalString>
+		<FiscalString AmountWithDiscount="300" DiscountAmount="0" MeasureOfQuantity="255" CalculationSubject="1" Name="Product 6 with SLN PZU [57897909799]" Quantity="1" PaymentMethod="4" PriceWithDiscount="300" VATRate="18" VATAmount="45.76">
+			<GoodCodeData NotIdentified="Q3VycmVudCByb3cgd2lsbCBkZWNvZGUgdG8gYmFzZTY9"/>
+		</FiscalString>
+	</Positions>
+	<Payments Cash="701.11" ElectronicPayment="0" PrePayment="0" PostPayment="0" Barter="0"/>
+</CheckPackage>
+"""
+
+SalesReceiptXML27 =
+"""xml
+<?xml version="1.0" encoding="UTF-8"?>
+<CheckPackage>
+	<Parameters CashierName="Арина Браун" CashierINN="1111111111" SaleAddress="Sale address" SaleLocation="Sale location" OperationType="2" TaxationSystem="0"/>
+	<Positions>
+		<FiscalString AmountWithDiscount="401.11" DiscountAmount="0" MeasureOfQuantity="255" CalculationSubject="1" Name="Product 6 with SLN PZU [57897909799]" Quantity="1" PaymentMethod="4" PriceWithDiscount="401.11" VATRate="18" VATAmount="61.19">
+			<GoodCodeData NotIdentified="Q3VycmVudCByb3cgd2lsbCBkZWNvZGUgdG8gYmFzZTY8"/>
+		</FiscalString>
+		<FiscalString AmountWithDiscount="300" DiscountAmount="0" MeasureOfQuantity="255" CalculationSubject="1" Name="Product 6 with SLN PZU [57897909799]" Quantity="1" PaymentMethod="4" PriceWithDiscount="300" VATRate="18" VATAmount="45.76">
+			<GoodCodeData NotIdentified="Q3VycmVudCByb3cgd2lsbCBkZWNvZGUgdG8gYmFzZTY9"/>
+		</FiscalString>
+	</Positions>
+	<Payments Cash="701.11" ElectronicPayment="0" PrePayment="0" PostPayment="0" Barter="0"/>
+</CheckPackage>
+"""
+
 Background:
 	Given I launch TestClient opening script or connect the existing one
 
@@ -2725,7 +2793,59 @@ Scenario: _0260169 Good code data control sale (POS)
 		And I check "$ParsingResult$" with "0" and method is "ProcessCheck"
 		And I check "$ParsingResult$" with "0" and data in "In.Parameter3" the same as "SalesReceiptXML22"
 
+Scenario: _02601691 check Good code data from RSR in the RRR (POS)
+	And I close all client application windows
+	* Preparation 
+		If "Point of sales" window is opened Then
+			And I delete all lines of "ItemList" table
+		And In the command interface I select "Retail" "Point of sale"	
+		And I click the button named "Return"
+	* Select basis document
+		And I move to "Return" tab
+		And I click Select button of "Retail sales receipt (basis)" field	
+		Then "Selection retail basis for return" window is opened
+		And I go to line in "List" table
+			| 'Amount' |
+			| '900,00' |
+		And I select current line in "List" table
+	* Check Good code data filling
+		And I go to line in "ItemList" table
+			| 'Item'                                                                | 'Item key' | 'Price'  | 'Quantity' | 'Serials'     | 'Total'  |
+			| 'Product 16 with SLN and Good code data (Main Company - Consignor 1)' | 'PZU'      | '300,00' | '1,000'    | '89000008999' | '300,00' |
+		And I activate "Control code string state" field in "ItemList" table
+		And I select current line in "ItemList" table
+		Then the form attribute named "ControlCodeStringType" became equal to "Good code data"
+		Then the form attribute named "isReturn" became equal to "Yes"	
+		And "CurrentCodes" table became equal
+			| 'Type'           | 'Prefix'        | 'Scanned codes'                                | 'Approved' | 'Not check' |
+			| 'Good code data' | 'NotIdentified' | 'Q3VycmVudCByb3cgd2lsbCBkZWNvZGUgdG8gYmFzZTY1' | 'No'       | 'No'        |
+		And I close current window
+		And I go to line in "ItemList" table
+			| 'Item'                                                                | 'Item key' | 'Price'  | 'Quantity' | 'Serials'          | 'Total'  |
+			| 'Product 16 with SLN and Good code data (Main Company - Consignor 1)' | 'ODS'      | '300,00' | '1,000'    | '9099009909999999' | '300,00' |
+		And I activate "Control code string state" field in "ItemList" table
+		And I select current line in "ItemList" table
+		Then the form attribute named "ControlCodeStringType" became equal to "Good code data"
+		Then the form attribute named "isReturn" became equal to "Yes"
+		And "CurrentCodes" table became equal
+			| 'Type'           | 'Prefix'        | 'Scanned codes'                                | 'Approved' | 'Not check' |
+			| 'Good code data' | 'NotIdentified' | 'Q3VycmVudCByb3cgd2lsbCBkZWNvZGUgdG8gYmFzZTY2' | 'No'       | 'No'        |
+		And I close current window
+	* Payment
+		And I click "Payment Return" button
+		And I click "Cash (/)" button
+		And I click "OK" button
+		And I move to the next attribute
+		And I save message text as "NumberRRR"
+		And I execute 1C:Enterprise script
+        	| "Контекст.Insert("NumberRRR", TrimR(Контекст["NumberRRR"]))" |
+		Given I open hyperlink "e1cib/list/Document.RetailReturnReceipt"
+		And I go to line in "List" table
+			| 'Number'      |
+			| '$NumberRRR$' |
+		And in the table "List" I click the button named "ListContextMenuUndoPosting"
 				
+
 Scenario: _0260170 Good code data control return (POS)
 	And I close all client application windows
 	* Preparation 
@@ -2804,7 +2924,120 @@ Scenario: _0260170 Good code data control return (POS)
 		And I check "$ParsingResult$" with "0" and method is "ProcessCheck"
 		And I check "$ParsingResult$" with "0" and data in "In.Parameter3" the same as "SalesReceiptXML23"
 						
+Scenario: _0260173 RSR and RRR for item with good code, scan marking code
+	And I close all client application windows
+	* Preparation 
+		If "Point of sales" window is opened Then
+			And I delete all lines of "ItemList" table
+		And In the command interface I select "Retail" "Point of sale"
+	* Add first item with with good code
+		And I click "Search by barcode (F7)" button
+		And I input "89000008999" text in the field named "Barcode"
+		And I move to the next attribute
+		Then the form attribute named "ControlCodeStringType" became equal to "Good code data"
+		And I change "Control code string type" radio button value to "Marking code"
+		And I click "Search by barcode" button
+		And I input "Q3VycmVudCByb3cgd2lsbCBkZWNvZGUgdG8gYmFzZTY3" text in the field named "Barcode"
+		And I move to the next attribute		
+		And I input "301,11" text in "Price" field of "ItemList" table
+		And I finish line editing in "ItemList" table
+		And I click "Search by barcode (F7)" button
+		And I input "9099009909999999" text in the field named "Barcode"
+		And I move to the next attribute
+		Then the form attribute named "ControlCodeStringType" became equal to "Good code data"
+		And I change "Control code string type" radio button value to "Marking code"
+		And I click "Search by barcode" button
+		And I input "Q3VycmVudCByb3cgd2lsbCBkZWNvZGUgdG8gYmFzZTY4" text in the field named "Barcode"
+		And I move to the next attribute
+		And I select current line in "ItemList" table
+		And I input "300,00" text in "Price" field of "ItemList" table
+		And I finish line editing in "ItemList" table
+	* Payment
+		And I click "Payment (+)" button
+		And I click "Cash (/)" button
+		And I click "OK" button
+		And I move to the next attribute
+	* Check fiscal log
+		And Delay 2
+		And I parsed the log of the fiscal emulator by the path '$$LogPath$$' into the variable "ParsingResult"
+		And I check "$ParsingResult$" with "0" and method is "ProcessCheck"
+		And I check "$ParsingResult$" with "0" and data in "In.Parameter3" the same as "SalesReceiptXML24"	
+	* Create RRR
+		And I click the button named "Return"
+		And I move to "Return" tab
+		And I click Select button of "Retail sales receipt (basis)" field	
+		Then "Selection retail basis for return" window is opened
+		And I go to line in "List" table
+			| 'Amount' |
+			| '601,11' |
+		And I select current line in "List" table
+		And I click "Payment Return" button
+		And I click "Cash (/)" button
+		And I click "OK" button
+		And I move to the next attribute
+	* Check fiscal log
+		And Delay 2
+		And I parsed the log of the fiscal emulator by the path '$$LogPath$$' into the variable "ParsingResult"
+		And I check "$ParsingResult$" with "0" and method is "ProcessCheck"
+		And I check "$ParsingResult$" with "0" and data in "In.Parameter3" the same as "SalesReceiptXML25"
 
+						
+Scenario: _0260174 RSR and RRR for item with marking code, scan good code
+	And I close all client application windows
+	* Preparation 
+		If "Point of sales" window is opened Then
+			And I delete all lines of "ItemList" table
+		And In the command interface I select "Retail" "Point of sale"
+	* Add first item with with good code
+		And I click "Search by barcode (F7)" button
+		And I input "57897909799" text in the field named "Barcode"
+		And I move to the next attribute
+		Then the form attribute named "ControlCodeStringType" became equal to "Marking code"
+		And I change "Control code string type" radio button value to "Good code"
+		And I click "Search by barcode" button
+		And I input "Q3VycmVudCByb3cgd2lsbCBkZWNvZGUgdG8gYmFzZTY8" text in the field named "Barcode"
+		And I move to the next attribute		
+		And I input "401,11" text in "Price" field of "ItemList" table
+		And I finish line editing in "ItemList" table
+		And I click "Search by barcode (F7)" button
+		And I input "57897909799" text in the field named "Barcode"
+		And I move to the next attribute
+		Then the form attribute named "ControlCodeStringType" became equal to "Marking code"
+		And I change "Control code string type" radio button value to "Good code"
+		And I click "Search by barcode" button
+		And I input "Q3VycmVudCByb3cgd2lsbCBkZWNvZGUgdG8gYmFzZTY9" text in the field named "Barcode"
+		And I move to the next attribute
+		And I select current line in "ItemList" table
+		And I input "300,00" text in "Price" field of "ItemList" table
+		And I finish line editing in "ItemList" table
+	* Payment
+		And I click "Payment (+)" button
+		And I click "Cash (/)" button
+		And I click "OK" button
+		And I move to the next attribute
+	* Check fiscal log
+		And Delay 2
+		And I parsed the log of the fiscal emulator by the path '$$LogPath$$' into the variable "ParsingResult"
+		And I check "$ParsingResult$" with "0" and method is "ProcessCheck"
+		And I check "$ParsingResult$" with "0" and data in "In.Parameter3" the same as "SalesReceiptXML26"	
+	* Create RRR
+		And I click the button named "Return"
+		And I move to "Return" tab
+		And I click Select button of "Retail sales receipt (basis)" field	
+		Then "Selection retail basis for return" window is opened
+		And I go to line in "List" table
+			| 'Amount' |
+			| '701,11' |
+		And I select current line in "List" table
+		And I click "Payment Return" button
+		And I click "Cash (/)" button
+		And I click "OK" button
+		And I move to the next attribute
+	* Check fiscal log
+		And Delay 2
+		And I parsed the log of the fiscal emulator by the path '$$LogPath$$' into the variable "ParsingResult"
+		And I check "$ParsingResult$" with "0" and method is "ProcessCheck"
+		And I check "$ParsingResult$" with "0" and data in "In.Parameter3" the same as "SalesReceiptXML27"
 
 Scenario: _0260152 close session
 	And I close all client application windows

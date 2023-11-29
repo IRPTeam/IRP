@@ -1042,6 +1042,28 @@ Scenario: Open object form "ProductionCostsAllocation"
 		Then I raise "Failed to open document form ProductionCostsAllocation" exception
 	And I close current window
 
+Scenario: Open list form "VisitorCounter" 
+	And I close all client application windows
+	Given I open "VisitorCounter" document default form
+	If the warning is displayed then
+		Then I raise "Failed to open document form VisitorCounter" exception
+	And I close current window
+
+Scenario: Open object form "VisitorCounter"
+	And I close all client application windows
+	Given I open "VisitorCounter" document main form
+	If the warning is displayed then
+		Then I raise "Failed to open document form VisitorCounter" exception
+	And I close current window
+
+Scenario: Open choise form "VisitorCounter"
+	And I close all client application windows
+	And I execute the built-in language code (Extension)
+		| 'OpenForm("Document.VisitorCounter.ChoiceForm", , Undefined, , , , , FormWindowOpeningMode.Independent)'   |
+	If the warning is displayed then
+		Then I raise "Failed to open document choise form VisitorCounter" exception
+	And I close current window
+
 Scenario: Open choise form "ProductionCostsAllocation"
 	And I close all client application windows
 	And I execute the built-in language code (Extension)

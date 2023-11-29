@@ -2921,12 +2921,14 @@ Function FillByPTBBankPaymentExecute(Options) Export
 			Result.ReceiptingBranch  = OrderInfo.ReceiptingBranch;
 			Result.FinancialMovementType  = OrderInfo.SendFinancialMovementType;
 			
-			ArrayOfDocs = New Array();
-			ArrayOfDocs.Add(Options.PlanningTransactionBasis);
-			ArrayOfBalance = DocBankPaymentServer.GetDocumentTable_CashTransferOrder_ForClient(ArrayOfDocs, Options.Ref);
-			If ArrayOfBalance.Count() Then
-				Amount = ArrayOfBalance[0].Amount;
-				Result.TotalAmount = ?(ValueIsFilled(Amount), Amount, 0);
+			If Not ValueIsFilled(Result.TotalAmount) Then
+				ArrayOfDocs = New Array();
+				ArrayOfDocs.Add(Options.PlanningTransactionBasis);
+				ArrayOfBalance = DocBankPaymentServer.GetDocumentTable_CashTransferOrder_ForClient(ArrayOfDocs, Options.Ref);
+				If ArrayOfBalance.Count() Then
+					Amount = ArrayOfBalance[0].Amount;
+					Result.TotalAmount = ?(ValueIsFilled(Amount), Amount, 0);
+				EndIf;
 			EndIf;
 			
 			Return Result;
@@ -2937,7 +2939,9 @@ Function FillByPTBBankPaymentExecute(Options) Export
 			Result.Account     = OrderInfo.Account;
 			Result.Company     = OrderInfo.Company;
 			Result.Currency    = OrderInfo.Currency;
-			Result.TotalAmount = OrderInfo.Amount;
+			If Not ValueIsFilled(Result.TotalAmount) Then
+				Result.TotalAmount = OrderInfo.Amount;
+			EndIf;
 			Return Result;
 		EndIf;
 		Return Result;
@@ -2989,7 +2993,9 @@ Function FillByPTBBankReceiptExecute(Options) Export
 			ArrayOfBalance = DocBankReceiptServer.GetDocumentTable_CashTransferOrder_ForClient(ArrayOfDocs, Options.Ref);
 			If ArrayOfBalance.Count() Then
 				BalanceRow = ArrayOfBalance[0];
-				Result.TotalAmount     = ?(ValueIsFilled(BalanceRow.Amount), BalanceRow.Amount, 0);
+				If Not ValueIsFilled(Result.TotalAmount) Then
+					Result.TotalAmount     = ?(ValueIsFilled(BalanceRow.Amount), BalanceRow.Amount, 0);
+				EndIf;
 				Result.AmountExchange = ?(ValueIsFilled(BalanceRow.AmountExchange), BalanceRow.AmountExchange, 0);
 			EndIf;
 			Return Result;
@@ -3000,7 +3006,9 @@ Function FillByPTBBankReceiptExecute(Options) Export
 			Result.Account     = OrderInfo.Account;
 			Result.Company     = OrderInfo.Company;
 			Result.Currency    = OrderInfo.Currency;
-			Result.TotalAmount = OrderInfo.Amount;
+			If Not ValueIsFilled(Result.TotalAmount) Then
+				Result.TotalAmount = OrderInfo.Amount;
+			EndIf;
 			Result.AmountExchange   = Undefined;
 			Result.CurrencyExchange = Undefined;
 			Return Result;
@@ -3050,7 +3058,9 @@ Function FillByPTBCashPaymentExecute(Options) Export
 			ArrayOfBalance = DocCashPaymentServer.GetDocumentTable_CashTransferOrder_ForClient(ArrayOfDocs, Options.Ref);
 			If ArrayOfBalance.Count() Then
 				BalanceRow = ArrayOfBalance[0]; 
-				Result.TotalAmount = ?(ValueIsFilled(BalanceRow.Amount), BalanceRow.Amount, 0);
+				If Not ValueIsFilled(Result.TotalAmount) Then
+					Result.TotalAmount = ?(ValueIsFilled(BalanceRow.Amount), BalanceRow.Amount, 0);
+				EndIf;
 				Result.Partner = BalanceRow.Partner;
 			EndIf;
 		
@@ -3104,7 +3114,9 @@ Function FillByPTBCashReceiptExecute(Options) Export
 			ArrayOfBalance = DocCashReceiptServer.GetDocumentTable_CashTransferOrder_ForClient(ArrayOfDocs);
 			If ArrayOfBalance.Count() Then
 				BalanceRow = ArrayOfBalance[0];
-				Result.TotalAmount    = ?(ValueIsFilled(BalanceRow.Amount), BalanceRow.Amount, 0);
+				If Not ValueIsFilled(Result.TotalAmount) Then
+					Result.TotalAmount    = ?(ValueIsFilled(BalanceRow.Amount), BalanceRow.Amount, 0);
+				EndIf;
 				Result.AmountExchange = ?(ValueIsFilled(BalanceRow.AmountExchange), BalanceRow.AmountExchange, 0);
 				Result.Partner = BalanceRow.Partner;
 			EndIf;

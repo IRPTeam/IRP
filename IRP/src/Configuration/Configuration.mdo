@@ -278,12 +278,12 @@
   <roles>Role.Document_TimeSheet</roles>
   <roles>Role.Document_Unbundling</roles>
   <roles>Role.Document_VendorsAdvancesClosing</roles>
+  <roles>Role.Document_VisitorCounter</roles>
   <roles>Role.Document_WorkOrder</roles>
   <roles>Role.Document_WorkOrderClosing</roles>
   <roles>Role.Document_WorkSheet</roles>
   <roles>Role.FilterForUserSettings</roles>
   <roles>Role.FullAccess</roles>
-  <roles>Role.FullAccessInArea</roles>
   <roles>Role.FullAccessOnlyRead</roles>
   <roles>Role.RunMobileClient</roles>
   <roles>Role.RunThickClient</roles>
@@ -620,6 +620,8 @@
   <commonModules>CommonModule.DocAdditionalDeductionServer</commonModules>
   <commonModules>CommonModule.SalaryServer</commonModules>
   <commonModules>CommonModule.SalaryPrivileged</commonModules>
+  <commonModules>CommonModule.DocVisitorCounterClient</commonModules>
+  <commonModules>CommonModule.DocVisitorCounterServer</commonModules>
   <commonAttributes>CommonAttribute.Author</commonAttributes>
   <commonAttributes>CommonAttribute.Branch</commonAttributes>
   <commonAttributes>CommonAttribute.Description</commonAttributes>
@@ -1017,6 +1019,7 @@
   <documents>Document.TimeSheet</documents>
   <documents>Document.Unbundling</documents>
   <documents>Document.VendorsAdvancesClosing</documents>
+  <documents>Document.VisitorCounter</documents>
   <documents>Document.WorkOrder</documents>
   <documents>Document.WorkOrderClosing</documents>
   <documents>Document.WorkSheet</documents>

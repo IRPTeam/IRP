@@ -102,7 +102,7 @@ EndProcedure
 // Returns:
 //  Structure - Get access key:
 // * Company - CatalogRef.Companies -
-// * Store - CatalogRef.Stores -
+// * Branch - CatalogRef.BusinessUnits -
 Function GetAccessKey() Export
 	AccessKeyStructure = New Structure;
 	AccessKeyStructure.Insert("Company", Catalogs.Companies.EmptyRef());

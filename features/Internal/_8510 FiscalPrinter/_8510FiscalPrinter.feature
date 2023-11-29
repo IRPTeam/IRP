@@ -2893,7 +2893,7 @@ Scenario: _0260160 check Get Last Error button
 Scenario: _0260180 check fiscal logs
 	And I close all client application windows
 	Given I open hyperlink "e1cib/list/InformationRegister.HardwareLog"
-	Then the number of "List" table lines is "равно" "678"	
+	Then the number of "List" table lines is "равно" "762"	
 	* Check log records form
 		And I go to the first line in "List" table
 		And I select current line in "List" table

@@ -68,4 +68,11 @@
       <value>Equipment</value>
     </synonym>
   </enumValues>
+  <enumValues uuid="cb7b990a-99f7-4969-a757-b0e63a17e95e">
+    <name>VisitorCounter</name>
+    <synonym>
+      <key>en</key>
+      <value>Visitor counter</value>
+    </synonym>
+  </enumValues>
 </mdclass:Enum>

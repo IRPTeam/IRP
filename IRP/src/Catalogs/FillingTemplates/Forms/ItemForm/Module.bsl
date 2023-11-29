@@ -60,6 +60,10 @@ Procedure AddAttributesCreateFormControl()
 	AddAttributesAndPropertiesServer.CreateFormControls(ThisObject);
 EndProcedure
 
+// Add attribute button click.
+// 
+// Parameters:
+//  Item - FormField - Item
 &AtClient
 Procedure AddAttributeButtonClick(Item) Export
 	AddAttributesAndPropertiesClient.AddAttributeButtonClick(ThisObject, Item);

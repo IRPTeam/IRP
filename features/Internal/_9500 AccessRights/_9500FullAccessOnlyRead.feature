@@ -666,16 +666,11 @@ Scenario: 950032 check role Full access only read (Object statuses)
 		And I close all client application windows
 
 
-Scenario: 950034 check role Full access only read (Tax rate settings)
+Scenario: 950034 check role Full access only read (Tax rate settings not available from user interface)
 	And I close all client application windows
 	* Master data
-		And In the command interface I select "Settings" "Tax rate settings"		
-		And I go to line in "List" table
-			| 'Tax'    |
-			| 'VAT'    |
-		And I select current line in "List" table
-		If the warning is displayed then 
-			Then I raise "Failed to open" exception
+		When I Check the steps for Exception
+			| 'And In the command interface I select "Settings" "Tax rate settings"'    |
 		And I close all client application windows	
 
 

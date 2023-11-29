@@ -1,13 +1,13 @@
 {
   "version": 1,
   "settings": {
-    "module-structure-method-in-regions": {
-      "enabled": false
-    },
     "commit-transaction": {
       "enabled": true
     },
     "module-accessibility-at-client": {
+      "enabled": false
+    },
+    "module-structure-method-in-regions": {
       "enabled": false
     },
     "export-procedure-missing-comment": {
@@ -31,6 +31,9 @@
     "invocation-form-event-handler": {
       "enabled": false
     },
+    "db-object-ref-non-ref-type": {
+      "enabled": false
+    },
     "doc-comment-collection-item-type": {
       "enabled": false
     },
@@ -40,10 +43,10 @@
     "module-consecutive-blank-lines": {
       "enabled": true
     },
-    "common-module-name-full-access": {
+    "common-module-name-cached": {
       "enabled": false
     },
-    "common-module-name-cached": {
+    "common-module-name-full-access": {
       "enabled": false
     },
     "unknown-form-parameter-access": {
@@ -88,10 +91,10 @@
     "data-composition-conditional-appearance-use": {
       "enabled": false
     },
-    "common-module-name-server-call": {
+    "module-self-reference": {
       "enabled": false
     },
-    "module-self-reference": {
+    "common-module-name-server-call": {
       "enabled": false
     }
   }

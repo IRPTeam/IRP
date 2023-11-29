@@ -227,6 +227,7 @@ Scenario: _0202114 filling expence type in the PR (from item)
 
 Scenario: _0202120 filling revenue type in the SI (from item key)
 	And I close all client application windows
+	When delete ExpenseRevenueTypeSettings records for Company
 	Given I open hyperlink "e1cib/list/Document.SalesInvoice"
 	* Load registers settings
 		When Create information register ExpenseRevenueTypeSettings records (item key)
@@ -236,6 +237,7 @@ Scenario: _0202120 filling revenue type in the SI (from item key)
 
 Scenario: _0202121 filling revenue type in the SR (from item key)
 	And I close all client application windows
+	When delete ExpenseRevenueTypeSettings records for Company
 	Given I open hyperlink "e1cib/list/Document.SalesReturn"
 	* Load registers settings
 		When Create information register ExpenseRevenueTypeSettings records (item key)
@@ -245,6 +247,7 @@ Scenario: _0202121 filling revenue type in the SR (from item key)
 
 Scenario: _0202122 filling revenue type in the RSR (from item key)
 	And I close all client application windows
+	When delete ExpenseRevenueTypeSettings records for Company
 	Given I open hyperlink "e1cib/list/Document.RetailSalesReceipt"
 	* Load registers settings
 		When Create information register ExpenseRevenueTypeSettings records (item key)
@@ -254,6 +257,7 @@ Scenario: _0202122 filling revenue type in the RSR (from item key)
 
 Scenario: _0202123 filling revenue type in the RRR (from item key)
 	And I close all client application windows
+	When delete ExpenseRevenueTypeSettings records for Company
 	Given I open hyperlink "e1cib/list/Document.RetailReturnReceipt"
 	* Load registers settings
 		When Create information register ExpenseRevenueTypeSettings records (item key)
@@ -263,6 +267,7 @@ Scenario: _0202123 filling revenue type in the RRR (from item key)
 
 Scenario: _0202124 filling expence type in the PI (from item key)
 	And I close all client application windows
+	When delete ExpenseRevenueTypeSettings records for Company
 	Given I open hyperlink "e1cib/list/Document.PurchaseInvoice"
 	* Load registers settings
 		When Create information register ExpenseRevenueTypeSettings records (item key)
@@ -272,6 +277,7 @@ Scenario: _0202124 filling expence type in the PI (from item key)
 
 Scenario: _0202125 filling expence type in the PR (from item key)
 	And I close all client application windows
+	When delete ExpenseRevenueTypeSettings records for Company
 	Given I open hyperlink "e1cib/list/Document.PurchaseReturn"
 	* Load registers settings
 		When Create information register ExpenseRevenueTypeSettings records (item key)

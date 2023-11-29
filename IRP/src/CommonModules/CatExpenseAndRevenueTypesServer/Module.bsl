@@ -16,7 +16,8 @@ Function GetExpenseType(Company, ItemKey) Export
 	Filter.ItemKey  = ItemKey;
 	Filter.Item     = Filter.ItemKey.Item;
 	Filter.ItemType = Filter.Item.ItemType;
-	Return InformationRegisters.ExpenseRevenueTypeSettings.GetExpenseType(Filter);
+	ExpenseType = InformationRegisters.ExpenseRevenueTypeSettings.GetExpenseType(Filter);
+	Return ExpenseType;
 EndFunction
 
 Function GetRevenueType(Company, ItemKey) Export
@@ -25,5 +26,6 @@ Function GetRevenueType(Company, ItemKey) Export
 	Filter.ItemKey  = ItemKey;
 	Filter.Item     = Filter.ItemKey.Item;
 	Filter.ItemType = Filter.Item.ItemType;
-	Return InformationRegisters.ExpenseRevenueTypeSettings.GetRevenueType(Filter);
+	RevenueType = InformationRegisters.ExpenseRevenueTypeSettings.GetRevenueType(Filter);
+	Return RevenueType;
 EndFunction

@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mdclass:CommonModule xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="98b8056b-86b0-4187-968f-2ca0615ed495">
+ <name>ControlCodeStringClient</name>
+ <synonym>
+  <key>en</key>
+  <value>Control code string client</value>
+ </synonym>
+ <synonym>
+  <key>ru</key>
+  <value>Контрольный знак клиент</value>
+ </synonym>
+ <synonym>
+  <key>tr</key>
+  <value>Строка кода маркировки клиент</value>
+ </synonym>
+ <clientManagedApplication>true</clientManagedApplication>
+ <clientOrdinaryApplication>true</clientOrdinaryApplication>
+</mdclass:CommonModule>

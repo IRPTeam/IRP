@@ -15,11 +15,12 @@ Procedure FillSettingsAndClose()
 	If Not CheckFilling() Then
 		Return;
 	EndIf;
+	
+	Close();
 		
 	Settings = CopyPasteClient.PasteSettings();
 	FillPropertyValues(Settings, ThisObject);
 	ExecuteNotifyProcessing(ThisObject.OnCloseNotifyDescription, Settings);
-	Close();
 EndProcedure
 
 &AtClient

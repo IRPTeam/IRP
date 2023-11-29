@@ -2926,6 +2926,53 @@
    <dataHistory>Use</dataHistory>
    <fullTextSearch>Use</fullTextSearch>
   </attributes>
+  <attributes uuid="ad9f625a-3fe4-4da6-8c8f-d5d358f16277">
+   <name>ControlCodeStringType</name>
+   <synonym>
+    <key>en</key>
+    <value>Control code string type</value>
+   </synonym>
+   <synonym>
+    <key>ru</key>
+    <value>Тип маркировки товаров</value>
+   </synonym>
+   <synonym>
+    <key>tr</key>
+    <value>Kontrol kodu satır tipi</value>
+   </synonym>
+   <type>
+    <types>EnumRef.ControlCodeStringType</types>
+   </type>
+   <minValue xsi:type="core:UndefinedValue"/>
+   <maxValue xsi:type="core:UndefinedValue"/>
+   <dataHistory>Use</dataHistory>
+   <fullTextSearch>Use</fullTextSearch>
+  </attributes>
+  <attributes uuid="4b5bce5e-da8a-4fa1-a940-de95166f3ed0">
+   <name>Prefix</name>
+   <synonym>
+    <key>en</key>
+    <value>Prefix</value>
+   </synonym>
+   <synonym>
+    <key>ru</key>
+    <value>Префикс</value>
+   </synonym>
+   <synonym>
+    <key>tr</key>
+    <value>Önek</value>
+   </synonym>
+   <type>
+    <types>String</types>
+    <stringQualifiers>
+     <length>50</length>
+    </stringQualifiers>
+   </type>
+   <minValue xsi:type="core:UndefinedValue"/>
+   <maxValue xsi:type="core:UndefinedValue"/>
+   <dataHistory>Use</dataHistory>
+   <fullTextSearch>Use</fullTextSearch>
+  </attributes>
  </tabularSections>
  <tabularSections uuid="823b2bab-3058-4d74-ac02-dcebfca479c0">
   <producedTypes>
@@ -3094,7 +3141,6 @@
   <commandParameterType>
    <types>DocumentRef.RetailSalesReceipt</types>
   </commandParameterType>
-  <modifiesData>true</modifiesData>
   <representation>Auto</representation>
  </commands>
  <commands uuid="4d666b2d-c24f-4bf7-8109-959c03f8afb5">
@@ -3115,7 +3161,6 @@
   <commandParameterType>
    <types>DocumentRef.RetailSalesReceipt</types>
   </commandParameterType>
-  <modifiesData>true</modifiesData>
   <representation>Auto</representation>
  </commands>
 </mdclass:Document>

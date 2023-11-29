@@ -102,6 +102,106 @@
    <textEdit>true</textEdit>
   </extInfo>
  </items>
+ <items xsi:type="form:FormField">
+  <name>ControlCodeStringType</name>
+  <id>60</id>
+  <visible>true</visible>
+  <enabled>true</enabled>
+  <userVisible>
+   <common>true</common>
+  </userVisible>
+  <dataPath xsi:type="form:DataPath">
+   <segments>ControlCodeStringType</segments>
+  </dataPath>
+  <handlers>
+   <event>OnChange</event>
+   <name>ControlCodeStringTypeOnChange</name>
+  </handlers>
+  <extendedTooltip>
+   <name>ControlCodeStringTypeExtendedTooltip</name>
+   <id>62</id>
+   <visible>true</visible>
+   <enabled>true</enabled>
+   <userVisible>
+    <common>true</common>
+   </userVisible>
+   <type>Label</type>
+   <autoMaxWidth>true</autoMaxWidth>
+   <autoMaxHeight>true</autoMaxHeight>
+   <extInfo xsi:type="form:LabelDecorationExtInfo">
+    <horizontalAlign>Left</horizontalAlign>
+   </extInfo>
+  </extendedTooltip>
+  <contextMenu>
+   <name>ControlCodeStringTypeContextMenu</name>
+   <id>61</id>
+   <visible>true</visible>
+   <enabled>true</enabled>
+   <userVisible>
+    <common>true</common>
+   </userVisible>
+   <autoFill>true</autoFill>
+  </contextMenu>
+  <type>RadioButtonField</type>
+  <editMode>Enter</editMode>
+  <showInHeader>true</showInHeader>
+  <headerHorizontalAlign>Left</headerHorizontalAlign>
+  <showInFooter>true</showInFooter>
+  <extInfo xsi:type="form:RadioButtonsFieldExtInfo">
+   <radioButtonsType>Tumbler</radioButtonsType>
+   <choiceList>
+    <presentation>
+     <key>en</key>
+     <value>None</value>
+    </presentation>
+    <presentation>
+     <key>ru</key>
+     <value>Нет</value>
+    </presentation>
+    <presentation>
+     <key>tr</key>
+     <value>Yok</value>
+    </presentation>
+    <value xsi:type="core:ReferenceValue">
+     <value>Enum.ControlCodeStringType.EnumValue.None</value>
+    </value>
+   </choiceList>
+   <choiceList>
+    <presentation>
+     <key>en</key>
+     <value>Marking code</value>
+    </presentation>
+    <presentation>
+     <key>ru</key>
+     <value>Честный знак</value>
+    </presentation>
+    <presentation>
+     <key>tr</key>
+     <value>Etiketleme kodu</value>
+    </presentation>
+    <value xsi:type="core:ReferenceValue">
+     <value>Enum.ControlCodeStringType.EnumValue.MarkingCode</value>
+    </value>
+   </choiceList>
+   <choiceList>
+    <presentation>
+     <key>en</key>
+     <value>Good code</value>
+    </presentation>
+    <presentation>
+     <key>ru</key>
+     <value>Код честного знака</value>
+    </presentation>
+    <presentation>
+     <key>tr</key>
+     <value>Честный знак</value>
+    </presentation>
+    <value xsi:type="core:ReferenceValue">
+     <value>Enum.ControlCodeStringType.EnumValue.GoodCodeData</value>
+    </value>
+   </choiceList>
+  </extInfo>
+ </items>
  <items xsi:type="form:FormGroup">
   <name>GroupTop</name>
   <id>39</id>
@@ -434,6 +534,120 @@
   <excludedCommands>SortListAsc</excludedCommands>
   <excludedCommands>SelectAll</excludedCommands>
   <items xsi:type="form:FormField">
+   <name>CurrentCodesControlCodeStringType</name>
+   <id>63</id>
+   <title>
+    <key>en</key>
+    <value>Type</value>
+   </title>
+   <title>
+    <key>ru</key>
+    <value>Вид</value>
+   </title>
+   <title>
+    <key>tr</key>
+    <value>Tip</value>
+   </title>
+   <visible>true</visible>
+   <enabled>true</enabled>
+   <userVisible>
+    <common>true</common>
+   </userVisible>
+   <dataPath xsi:type="form:DataPath">
+    <segments>CurrentCodes.ControlCodeStringType</segments>
+   </dataPath>
+   <extendedTooltip>
+    <name>CurrentCodesControlCodeStringTypeExtendedTooltip</name>
+    <id>65</id>
+    <visible>true</visible>
+    <enabled>true</enabled>
+    <userVisible>
+     <common>true</common>
+    </userVisible>
+    <type>Label</type>
+    <autoMaxWidth>true</autoMaxWidth>
+    <autoMaxHeight>true</autoMaxHeight>
+    <extInfo xsi:type="form:LabelDecorationExtInfo">
+     <horizontalAlign>Left</horizontalAlign>
+    </extInfo>
+   </extendedTooltip>
+   <contextMenu>
+    <name>CurrentCodesControlCodeStringTypeContextMenu</name>
+    <id>64</id>
+    <visible>true</visible>
+    <enabled>true</enabled>
+    <userVisible>
+     <common>true</common>
+    </userVisible>
+    <autoFill>true</autoFill>
+   </contextMenu>
+   <type>InputField</type>
+   <editMode>Enter</editMode>
+   <showInHeader>true</showInHeader>
+   <headerHorizontalAlign>Left</headerHorizontalAlign>
+   <showInFooter>true</showInFooter>
+   <extInfo xsi:type="form:InputFieldExtInfo">
+    <width>5</width>
+    <autoMaxWidth>true</autoMaxWidth>
+    <autoMaxHeight>true</autoMaxHeight>
+    <wrap>true</wrap>
+    <chooseType>true</chooseType>
+    <typeDomainEnabled>true</typeDomainEnabled>
+    <textEdit>true</textEdit>
+   </extInfo>
+  </items>
+  <items xsi:type="form:FormField">
+   <name>CurrentCodesPrefix</name>
+   <id>66</id>
+   <visible>true</visible>
+   <enabled>true</enabled>
+   <userVisible>
+    <common>true</common>
+   </userVisible>
+   <dataPath xsi:type="form:DataPath">
+    <segments>CurrentCodes.Prefix</segments>
+   </dataPath>
+   <extendedTooltip>
+    <name>CurrentCodesPrefixExtendedTooltip</name>
+    <id>68</id>
+    <visible>true</visible>
+    <enabled>true</enabled>
+    <userVisible>
+     <common>true</common>
+    </userVisible>
+    <type>Label</type>
+    <autoMaxWidth>true</autoMaxWidth>
+    <autoMaxHeight>true</autoMaxHeight>
+    <extInfo xsi:type="form:LabelDecorationExtInfo">
+     <horizontalAlign>Left</horizontalAlign>
+    </extInfo>
+   </extendedTooltip>
+   <contextMenu>
+    <name>CurrentCodesPrefixContextMenu</name>
+    <id>67</id>
+    <visible>true</visible>
+    <enabled>true</enabled>
+    <userVisible>
+     <common>true</common>
+    </userVisible>
+    <autoFill>true</autoFill>
+   </contextMenu>
+   <type>InputField</type>
+   <editMode>Enter</editMode>
+   <showInHeader>true</showInHeader>
+   <headerHorizontalAlign>Left</headerHorizontalAlign>
+   <showInFooter>true</showInFooter>
+   <extInfo xsi:type="form:InputFieldExtInfo">
+    <width>5</width>
+    <autoMaxWidth>true</autoMaxWidth>
+    <autoMaxHeight>true</autoMaxHeight>
+    <wrap>true</wrap>
+    <chooseType>true</chooseType>
+    <typeDomainEnabled>true</typeDomainEnabled>
+    <textEdit>true</textEdit>
+   </extInfo>
+  </items>
+  <items xsi:type="form:FormField">
    <name>CurrentCodesStringCode</name>
    <id>28</id>
    <title>
@@ -499,6 +713,18 @@
   <items xsi:type="form:FormField">
    <name>CurrentCodesCodeIsApproved</name>
    <id>31</id>
+   <title>
+    <key>en</key>
+    <value>Approved</value>
+   </title>
+   <title>
+    <key>ru</key>
+    <value>Одобрено</value>
+   </title>
+   <title>
+    <key>tr</key>
+    <value>Approved</value>
+   </title>
    <visible>true</visible>
    <enabled>true</enabled>
    <userVisible>
@@ -1143,6 +1369,59 @@
     <common>true</common>
    </edit>
   </columns>
+  <columns>
+   <name>ControlCodeStringType</name>
+   <title>
+    <key>en</key>
+    <value>Type</value>
+   </title>
+   <title>
+    <key>ru</key>
+    <value>Вид</value>
+   </title>
+   <title>
+    <key>tr</key>
+    <value>Tip</value>
+   </title>
+   <id>16</id>
+   <valueType>
+    <types>EnumRef.ControlCodeStringType</types>
+   </valueType>
+   <view>
+    <common>true</common>
+   </view>
+   <edit>
+    <common>true</common>
+   </edit>
+  </columns>
+  <columns>
+   <name>Prefix</name>
+   <title>
+    <key>en</key>
+    <value>Prefix</value>
+   </title>
+   <title>
+    <key>ru</key>
+    <value>Префикс</value>
+   </title>
+   <title>
+    <key>tr</key>
+    <value>Önek</value>
+   </title>
+   <id>17</id>
+   <valueType>
+    <types>String</types>
+    <stringQualifiers>
+     <length>50</length>
+    </stringQualifiers>
+   </valueType>
+   <view>
+    <common>true</common>
+   </view>
+   <edit>
+    <common>true</common>
+   </edit>
+  </columns>
  </attributes>
  <attributes>
   <name>isReturn</name>
@@ -1211,6 +1490,31 @@
   <id>14</id>
   <valueType>
    <types>Boolean</types>
+  </valueType>
+  <view>
+   <common>true</common>
+  </view>
+  <edit>
+   <common>true</common>
+  </edit>
+ </attributes>
+ <attributes>
+  <name>ControlCodeStringType</name>
+  <title>
+   <key>en</key>
+   <value>Control code string type</value>
+  </title>
+  <title>
+   <key>ru</key>
+   <value>Тип маркировки товаров</value>
+  </title>
+  <title>
+   <key>tr</key>
+   <value>Kontrol kodu satır tipi</value>
+  </title>
+  <id>15</id>
+  <valueType>
+   <types>EnumRef.ControlCodeStringType</types>
   </valueType>
   <view>
    <common>true</common>

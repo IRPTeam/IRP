@@ -5,12 +5,16 @@
 &AtServer
 Procedure OnReadAtServer(CurrentObject)
 	DocEmployeeTransferServer.OnReadAtServer(Object, ThisObject, CurrentObject);
+	ThisObject.FromSalaryType = ?(ValueIsFilled(Object.FromPersonalSalary),"Personal", "ByPosition");
+	ThisObject.ToSalaryType = ?(ValueIsFilled(Object.ToPersonalSalary),"Personal", "ByPosition");
 	SetVisibilityAvailability(CurrentObject, ThisObject);
 EndProcedure
 
 &AtServer
 Procedure OnCreateAtServer(Cancel, StandardProcessing)
 	DocEmployeeTransferServer.OnCreateAtServer(Object, ThisObject, Cancel, StandardProcessing);
+	ThisObject.FromSalaryType = ?(ValueIsFilled(Object.FromPersonalSalary),"Personal", "ByPosition");
+	ThisObject.ToSalaryType = ?(ValueIsFilled(Object.ToPersonalSalary),"Personal", "ByPosition");
 	If Parameters.Key.IsEmpty() Then
 		SetVisibilityAvailability(Object, ThisObject);
 	EndIf;
@@ -56,7 +60,17 @@ EndProcedure
 
 &AtClientAtServerNoContext
 Procedure SetVisibilityAvailability(Object, Form)
-	Return
+	If Form.FromSalaryType = "Personal" Then
+		Form.Items.GroupFromSalaryAmount.CurrentPage = Form.Items.GroupFromPerosnalSalary;
+	Else
+		Form.Items.GroupFromSalaryAmount.CurrentPage = Form.Items.GroupFromSalaryByPosition;
+	EndIf;
+	
+	If Form.ToSalaryType = "Personal" Then
+		Form.Items.GroupToSalaryAmount.CurrentPage = Form.Items.GroupToPerosnalSalary;
+	Else
+		Form.Items.GroupToSalaryAmount.CurrentPage = Form.Items.GroupToSalaryByPosition;
+	EndIf;
 EndProcedure
 
 &AtClient
@@ -104,6 +118,25 @@ EndProcedure
 #EndRegion
 
 &AtClient
+Procedure ToPositionOnChange(Item)
+	DocEmployeeTransferClient.ToPositionOnChange(Object, ThisObject, Item);
+EndProcedure
+
+&AtClient
+Procedure ToAccrualTypeOnChange(Item)
+	DocEmployeeTransferClient.ToAccrualTypeOnChange(Object, ThisObject, Item);
+EndProcedure
+
+&AtClient
+Procedure ToSalaryTypeOnChange(Item)
+	If ThisObject.ToSalaryType = "ByPosition" Then
+		Object.ToPersonalSalary = 0;
+	EndIf;
+	
+	SetVisibilityAvailability(Object, ThisObject);	
+EndProcedure
+
+&AtClient
 Procedure FillAsFrom(Command)
 	If Not ValueIsFilled(Object.ToPosition) Then
 		Object.ToPosition = Object.FromPosition;
@@ -120,6 +153,14 @@ Procedure FillAsFrom(Command)
 	If Not ValueIsFilled(Object.ToBranch) Then
 		Object.ToBranch = Object.Branch;
 	EndIf;
+	
+	ThisObject.ToSalaryType = ThisObject.FromSalaryType;
+	
+	Object.ToAccrualType    = Object.FromAccrualType;
+	Object.ToSalary         = Object.FromSalary;
+	Object.ToPersonalSalary = Object.FromPersonalSalary;
+	
+	SetVisibilityAvailability(Object, ThisObject);
 EndProcedure
 
 #Region SERVICE

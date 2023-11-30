@@ -33,3 +33,19 @@ Procedure EmployeeOnChange(Object, Form, Item) Export
 EndProcedure
 
 #EndRegion
+
+#Region TO_POSITION
+
+Procedure ToPositionOnChange(Object, Form, Item) Export
+	ViewClient_V2.ToPositionOnChange(Object, Form, "");
+EndProcedure
+
+#EndRegion
+
+#Region TO_ACCRUAL_TYPE
+
+Procedure ToAccrualTypeOnChange(Object, Form, Item) Export
+	ViewClient_V2.ToAccrualTypeOnChange(Object, Form, "");
+EndProcedure
+
+#EndRegion

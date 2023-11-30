@@ -430,6 +430,8 @@ Function GetChain()
 	Chain.Insert("ChangeBranchByEmployee"           , GetChainLink("ChangeBranchByEmployeeExecute"));
 	Chain.Insert("ChangeAccrualTypeByCompany" , GetChainLink("ChangeAccrualTypeByCompanyExecute"));
 	Chain.Insert("ChangeSalaryByPosition"     , GetChainLink("ChangeSalaryByPositionExecute"));
+	Chain.Insert("ChangeSalaryByPositionOrEmployee"       , GetChainLink("ChangeSalaryByPositionOrEmployeeExecute"));
+	Chain.Insert("ChangeAccrualTypeByPositionOrEmployee"  , GetChainLink("ChangeAccrualTypeByPositionOrEmployeeExecute"));
 
 	// Extractors
 	Chain.Insert("ExtractDataAgreementApArPostingDetail"   , GetChainLink("ExtractDataAgreementApArPostingDetailExecute"));
@@ -4134,6 +4136,32 @@ EndFunction
 	
 Function ChangeSalaryByPositionExecute(Options) Export
 	Result = SalaryServer.GetSalaryValue(Options.Ref, Options.Date, Options.Position, Options.AccrualType);
+	Return Result;
+EndFunction
+
+#EndRegion
+
+#Region CHANGE_SALARY_BY_POSITION_OR_PERSONAL_SALARY
+
+Function ChangeSalaryByPositionOrEmployeeOptions() Export
+	Return GetChainLinkOptions("Ref, Date, Employee, Position, AccrualType");
+EndFunction
+	
+Function ChangeSalaryByPositionOrEmployeeExecute(Options) Export
+	Result = SalaryServer.GetSalaryByPositionOrEmployee(Options.Ref, Options.Date, Options.Employee, Options.Position, Options.AccrualType);
+	Return New Structure("Salary, PersonalSalary", Result.Salary, Result.PersonalSalary);
+EndFunction
+
+#EndRegion
+
+#Region CHANGE_ACCRUAL_TYPE_BY_POSITION_OR_EMPLOYEE
+
+Function ChangeAccrualTypeByPositionOrEmployeeOptions() Export
+	Return GetChainLinkOptions("Ref, Date, Employee, Position");
+EndFunction
+	
+Function ChangeAccrualTypeByPositionOrEmployeeExecute(Options) Export
+	Result = SalaryServer.GetAccrualTypeByPositionOrEmployee(Options.Ref, Options.Date, Options.Employee, Options.Position);
 	Return Result;
 EndFunction
 

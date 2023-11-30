@@ -59,9 +59,9 @@ EndProcedure
 &AtClientAtServerNoContext
 Procedure SetVisibilityAvailability(Object, Form)	
 	If Form.SalaryType = "Personal" Then
-		Form.Items.GroupSalary.CurrentPage = Form.Items.GroupPerosnalSalary;
+		Form.Items.GroupSalaryAmount.CurrentPage = Form.Items.GroupPerosnalSalary;
 	Else
-		Form.Items.GroupSalary.CurrentPage = Form.Items.GroupSalaryByPosition;
+		Form.Items.GroupSalaryAmount.CurrentPage = Form.Items.GroupSalaryByPosition;
 	EndIf;
 EndProcedure
 

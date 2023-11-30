@@ -13,6 +13,7 @@ Function PostingGetDocumentDataTables(Ref, Cancel, PostingMode, Parameters, AddI
 	QueryArray = GetQueryTextsSecondaryTables();
 	Parameters.Insert("QueryParameters", GetAdditionalQueryParameters(Ref));
 	
+	ClearSelfRecords(Ref);
 	If ValueIsFilled(Ref.PersonalSalary) And ValueIsFilled(Ref.AccrualType) And PostingMode <> Undefined Then
 		WriteSelfRecords(Ref);
 	EndIf;
@@ -162,8 +163,8 @@ Procedure ClearSelfRecords(Ref)
 	|FROM
 	|	InformationRegister.T9500S_AccrualAndDeductionValues AS Table
 	|WHERE
-	|	Table.EmployeeHiring = &EmployeeHiring";
-	Query.SetParameter("EmployeeHiring", Ref);
+	|	Table.Document = &Document";
+	Query.SetParameter("Document", Ref);
 	QueryResult = Query.Execute();
 	QuerySelection = QueryResult.Select();
 	
@@ -187,28 +188,9 @@ Procedure WriteSelfRecords(Ref)
 	NewRecord.EmployeeOrPosition = Ref.Employee;
 	NewRecord.AccualOrDeductionType = Ref.AccrualType;
 	NewRecord.Value = Ref.PersonalSalary;
-	NewRecord.EmployeeHiring = Ref;
+	NewRecord.Document = Ref;
 	
 	RecordSet.Write();
 EndProcedure
 
 #EndRegion
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

@@ -230,6 +230,110 @@
     <fullTextSearch>Use</fullTextSearch>
     <dataHistory>Use</dataHistory>
   </attributes>
+  <attributes uuid="aa6ab8b7-e573-4dab-9038-8a7b08ad7559">
+    <name>FromSalary</name>
+    <synonym>
+      <key>en</key>
+      <value>From salary</value>
+    </synonym>
+    <type>
+      <types>DefinedType.typeAmount</types>
+    </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <fillValue xsi:type="core:UndefinedValue"/>
+    <fullTextSearch>Use</fullTextSearch>
+    <dataHistory>Use</dataHistory>
+  </attributes>
+  <attributes uuid="4e6c6c18-4cc3-4632-904e-d8aa34d6b186">
+    <name>FromPersonalSalary</name>
+    <synonym>
+      <key>en</key>
+      <value>From personal salary</value>
+    </synonym>
+    <type>
+      <types>DefinedType.typeAmount</types>
+    </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <fillValue xsi:type="core:UndefinedValue"/>
+    <fullTextSearch>Use</fullTextSearch>
+    <dataHistory>Use</dataHistory>
+  </attributes>
+  <attributes uuid="c5a1f7cd-2925-433f-b654-0c035f447937">
+    <name>FromAccrualType</name>
+    <synonym>
+      <key>en</key>
+      <value>From accrual type</value>
+    </synonym>
+    <type>
+      <types>CatalogRef.AccrualAndDeductionTypes</types>
+    </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <fillChecking>ShowError</fillChecking>
+    <choiceParameters>
+      <name>Filter.Type</name>
+      <value xsi:type="core:ReferenceValue">
+        <value>Enum.PayrollTypes.EnumValue.Accrual</value>
+      </value>
+    </choiceParameters>
+    <fillValue xsi:type="core:UndefinedValue"/>
+    <fullTextSearch>Use</fullTextSearch>
+    <dataHistory>Use</dataHistory>
+  </attributes>
+  <attributes uuid="48298f10-dd7d-4d74-a519-8de4d3a9f61d">
+    <name>ToSalary</name>
+    <synonym>
+      <key>en</key>
+      <value>To salary</value>
+    </synonym>
+    <type>
+      <types>DefinedType.typeAmount</types>
+    </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <fillValue xsi:type="core:UndefinedValue"/>
+    <fullTextSearch>Use</fullTextSearch>
+    <dataHistory>Use</dataHistory>
+  </attributes>
+  <attributes uuid="a2aee301-abd3-426d-b8bd-ae5efd82ffbe">
+    <name>ToPersonalSalary</name>
+    <synonym>
+      <key>en</key>
+      <value>To personal salary</value>
+    </synonym>
+    <type>
+      <types>DefinedType.typeAmount</types>
+    </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <fillValue xsi:type="core:UndefinedValue"/>
+    <fullTextSearch>Use</fullTextSearch>
+    <dataHistory>Use</dataHistory>
+  </attributes>
+  <attributes uuid="b78e81d6-9f95-4f31-9475-93477e8e1be8">
+    <name>ToAccrualType</name>
+    <synonym>
+      <key>en</key>
+      <value>To accrual type</value>
+    </synonym>
+    <type>
+      <types>CatalogRef.AccrualAndDeductionTypes</types>
+    </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <fillChecking>ShowError</fillChecking>
+    <choiceParameters>
+      <name>Filter.Type</name>
+      <value xsi:type="core:ReferenceValue">
+        <value>Enum.PayrollTypes.EnumValue.Accrual</value>
+      </value>
+    </choiceParameters>
+    <fillValue xsi:type="core:UndefinedValue"/>
+    <fullTextSearch>Use</fullTextSearch>
+    <dataHistory>Use</dataHistory>
+  </attributes>
   <forms uuid="0eff0766-ee4f-4357-8e3b-dc7afcc12cef">
     <name>DocumentForm</name>
     <synonym>

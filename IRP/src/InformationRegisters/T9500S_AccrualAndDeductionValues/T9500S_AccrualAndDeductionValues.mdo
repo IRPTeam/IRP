@@ -55,13 +55,29 @@
     <fillValue xsi:type="core:UndefinedValue"/>
   </resources>
   <attributes uuid="d93d5b18-4b9a-471b-897e-6d67f427d109">
-    <name>EmployeeHiring</name>
+    <name>Document</name>
     <synonym>
       <key>en</key>
-      <value>Employee hiring</value>
+      <value>Document</value>
     </synonym>
     <type>
       <types>DocumentRef.EmployeeHiring</types>
+      <types>DocumentRef.EmployeeTransfer</types>
+    </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <fullTextSearch>Use</fullTextSearch>
+    <dataHistory>Use</dataHistory>
+    <fillValue xsi:type="core:UndefinedValue"/>
+  </attributes>
+  <attributes uuid="89af9ab4-0e63-4945-b391-dcffd894d355">
+    <name>CancelDocument</name>
+    <synonym>
+      <key>en</key>
+      <value>Cancel document</value>
+    </synonym>
+    <type>
+      <types>DocumentRef.EmployeeTransfer</types>
     </type>
     <minValue xsi:type="core:UndefinedValue"/>
     <maxValue xsi:type="core:UndefinedValue"/>

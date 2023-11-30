@@ -3612,6 +3612,17 @@ EndProcedure
 
 #EndRegion
 
+#Region TO_POSITION
+
+Procedure ToPositionOnChange(Object, Form, TableNames) Export
+	For Each TableName In StrSplit(TableNames, ",") Do
+		Parameters = GetSimpleParameters(Object, Form, TableName);
+		ControllerClientServer_V2.ToPositionOnChange(Parameters);
+	EndDo;
+EndProcedure
+
+#EndRegion
+
 #Region ACCRUAL_TYPE
 
 Procedure AccrualTypeOnChange(Object, Form, TableNames) Export
@@ -3623,6 +3634,29 @@ EndProcedure
 
 #EndRegion
 
+#Region TO_ACCRUAL_TYPE
+
+Procedure ToAccrualTypeOnChange(Object, Form, TableNames) Export
+	For Each TableName In StrSplit(TableNames, ",") Do
+		Parameters = GetSimpleParameters(Object, Form, TableName);
+		ControllerClientServer_V2.ToAccrualTypeOnChange(Parameters);
+	EndDo;
+EndProcedure
+
+#EndRegion
+
+#Region SALARY_AMOUNT
+
+Procedure OnSetSalaryAmountNotify(Parameters) Export
+	If Parameters.ObjectMetadataInfo.MetadataName = "EmployeeTransfer" Then
+		Parameters.Form.FromSalaryType = ?(ValueIsFilled(Parameters.Object.FromPersonalSalary),"Personal", "ByPosition");
+		Parameters.Form.ToSalaryType = ?(ValueIsFilled(Parameters.Object.ToPersonalSalary),"Personal", "ByPosition");
+	EndIf;
+	
+	Parameters.Form.FormSetVisibilityAvailability();
+EndProcedure
+
+#EndRegion
 
 #Region LEGAL_NAME
 

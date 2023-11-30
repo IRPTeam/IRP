@@ -66,6 +66,14 @@ Function GetSalaryValue(Ref, Date, Position, AccrualType) Export
 	Return SalaryServer._GetSalaryValue(Ref, Date, Position, AccrualType);
 EndFunction
 
+Function GetSalaryByPositionOrEmployee(Ref, Date, Employee, Position, AccrualType) Export
+	Return SalaryServer._GetSalaryByPositionOrEmployee(Ref, Date, Employee, Position, AccrualType);
+EndFunction
+
+Function GetAccrualTypeByPositionOrEmployee(Ref, Date, Employee, Position) Export
+	Return SalaryServer._GetAccrualTypeByPositionOrEmployee(Ref, Date, Employee, Position);
+EndFunction
+
 // Other
 
 Function GetBankTermInfo(PaymentType, BankTerm) Export

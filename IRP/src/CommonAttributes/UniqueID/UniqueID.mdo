@@ -61,6 +61,14 @@
     <metadata>Catalog.SpecialOffers</metadata>
     <use>Use</use>
   </content>
+  <content>
+    <metadata>ChartOfCharacteristicTypes.AccountingExtraDimensionTypes</metadata>
+    <use>Use</use>
+  </content>
+  <content>
+    <metadata>Catalog.LedgerTypeVariants</metadata>
+    <use>Use</use>
+  </content>
   <autoUse>DontUse</autoUse>
   <dataSeparation>DontUse</dataSeparation>
   <usersSeparation>DontUse</usersSeparation>

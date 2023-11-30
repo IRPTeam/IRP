@@ -14,7 +14,6 @@
     <key>en</key>
     <value>T9050 Accounting row analytics</value>
   </synonym>
-  <useStandardCommands>true</useStandardCommands>
   <editType>InDialog</editType>
   <dataLockControlMode>Managed</dataLockControlMode>
   <dimensions uuid="96c86a0b-59a3-4f6e-b9f4-aee00d7321fd">
@@ -36,6 +35,7 @@
     <fullTextSearch>Use</fullTextSearch>
     <dataHistory>Use</dataHistory>
     <fillValue xsi:type="core:UndefinedValue"/>
+    <master>true</master>
     <mainFilter>true</mainFilter>
   </dimensions>
   <dimensions uuid="8841446f-55d9-4309-b381-401d2ffc6c58">

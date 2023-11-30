@@ -243,6 +243,10 @@
     <dataPath xsi:type="form:DataPath">
       <segments>Object.Variant</segments>
     </dataPath>
+    <handlers>
+      <event>OnChange</event>
+      <name>VariantOnChange</name>
+    </handlers>
     <extendedTooltip>
       <name>VariantExtendedTooltip</name>
       <id>18</id>

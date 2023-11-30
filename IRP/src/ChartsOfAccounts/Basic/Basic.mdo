@@ -112,7 +112,6 @@
   </objectPresentation>
   <extDimensionTypes>ChartOfCharacteristicTypes.AccountingExtraDimensionTypes</extDimensionTypes>
   <maxExtDimensionCount>3</maxExtDimensionCount>
-  <codeMask>@@.@@</codeMask>
   <codeLength>9</codeLength>
   <checkUnique>true</checkUnique>
   <editType>InDialog</editType>

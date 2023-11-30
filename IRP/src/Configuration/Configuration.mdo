@@ -620,6 +620,8 @@
   <commonModules>CommonModule.DocAdditionalDeductionServer</commonModules>
   <commonModules>CommonModule.SalaryServer</commonModules>
   <commonModules>CommonModule.SalaryPrivileged</commonModules>
+  <commonModules>CommonModule.ControlCodeStringServer</commonModules>
+  <commonModules>CommonModule.ControlCodeStringClient</commonModules>
   <commonModules>CommonModule.DocVisitorCounterClient</commonModules>
   <commonModules>CommonModule.DocVisitorCounterServer</commonModules>
   <commonAttributes>CommonAttribute.Author</commonAttributes>

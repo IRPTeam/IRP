@@ -1755,10 +1755,9 @@ Procedure FindRetailBasisFinish(Result, RowID) Export
 	For Each OffersItem In RetailBasisData.SpecialOffers Do
 		FillPropertyValues(ThisObject.RetailBasisSpecialOffers.Add(), OffersItem);
 	EndDo;
-
+	ThisObject.Object.ControlCodeStrings.Clear();
 	FillOnSelectBasisDocument(Result);
 	SerialLotNumberClient.UpdateSerialLotNumbersPresentation(ThisObject.Object);
-	ThisObject.Object.ControlCodeStrings.Clear();
 	ControlCodeStringsClient.UpdateState(ThisObject.Object);
 	FillSalesPersonInItemList();
 	EnabledPaymentButton();	
@@ -1773,6 +1772,7 @@ Function GetRetailBasisData()
 	RowIDInfoArray = New Array;
 	SpecialOffersArray = New Array;
 	SerialLotNumbersArray = New Array;
+	ControlCodeStringsArray = New Array;
 
 	ArrayOfBasises = New Array();
 	ArrayOfBasises.Add(ThisObject.RetailBasis);
@@ -1838,6 +1838,15 @@ Function GetRetailBasisData()
 			ItemStructure.Insert("PriceType", TableItem.PriceType);
 			ItemListArray.Add(ItemStructure);
 		EndDo;
+		For Each TableItem In DocumentData.ControlCodeStrings Do
+			ItemStructure = New Structure;
+			ItemStructure.Insert("Key", TableItem.Key);
+			ItemStructure.Insert("CodeString", TableItem.CodeString);
+			ItemStructure.Insert("CodeIsApproved", TableItem.CodeIsApproved);
+			ItemStructure.Insert("ControlCodeStringType", TableItem.ControlCodeStringType);
+			ItemStructure.Insert("Prefix", TableItem.Prefix);
+			ControlCodeStringsArray.Add(ItemStructure);
+		EndDo;
 	EndIf;
 
 	Resultat = New Structure;
@@ -1846,6 +1855,7 @@ Function GetRetailBasisData()
 	Resultat.Insert("RowIDInfo", RowIDInfoArray);
 	Resultat.Insert("SpecialOffers", SpecialOffersArray);
 	Resultat.Insert("SerialLotNumbers", SerialLotNumbersArray);
+	Resultat.Insert("ControlCodeStrings", ControlCodeStringsArray);
 
 	Return Resultat;
 

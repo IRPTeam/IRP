@@ -55,33 +55,10 @@ Procedure FillCheckPackageByRetailSalesReceipt(SourceData, CheckPackage) Export
 		FiscalStringData = CommonFunctionsServer.DeserializeJSON(CheckPackage.Positions.FiscalStringJSON); // See EquipmentFiscalPrinterAPIClient.CheckPackage_FiscalString
 		FiscalStringData.AmountWithDiscount = ItemRow.TotalAmount;
 		FiscalStringData.DiscountAmount = ItemRow.OffersAmount;
+		
 		// TODO: Get from ItemType (or Item) CalculationSubject
 		If ItemRow.isControlCodeString Then
-			If CCSRows.Count() = 0 Then
-				Raise "Control string code not filled. Row: " + ItemRow.LineNumber;
-			ElsIf Not CCSRows.Count() = ItemRow.Quantity Then
-				Raise "Control string code count not the same as item quantity. Row: " + ItemRow.LineNumber;
-			ElsIf CCSRows.Count() > 1 Then // TODO: Fix this
-				Raise "Not suppoted send more then 1 control code by each row. Row: " + ItemRow.LineNumber;
-			ElsIf CCSRows[0].NotCheck And ItemRow.Item.ControlCodeStringType = Enums.ControlCodeStringType.MarkingCode Then
-				// Not check an not send
-				FiscalStringData.CalculationSubject = 1;
-			Else
-				CodeString = CCSRows[0].CodeString;
-				If ItemRow.Item.ControlCodeStringType = Enums.ControlCodeStringType.None Then
-					Raise "Can not fiscalize item with Control Code String Type as None. Select type in item, or switch off Control string";
-				ElsIf ItemRow.Item.ControlCodeStringType.IsEmpty() Then
-					Raise "Can not fiscalize item while Control Code String Type is Empty. Select type in item, or switch off Control string";
-				ElsIf ItemRow.Item.ControlCodeStringType = Enums.ControlCodeStringType.MarkingCode Then
-					If Not CommonFunctionsClientServer.isBase64Value(CodeString) Then
-						CodeString = Base64String(GetBinaryDataFromString(CodeString, TextEncoding.UTF8, False));
-					EndIf;
-					FiscalStringData.MarkingCode = CodeString;
-				Else
-					FillGoodData(ItemRow.Item, CodeString, FiscalStringData);
-				EndIf;
-				FiscalStringData.CalculationSubject = 33;	//https://its.1c.ru/db/metod8dev#content:4829:hdoc:signcalculationobject
-			EndIf;
+			FillControlString(CCSRows, ItemRow, FiscalStringData);
 		Else
 			If ItemRow.Item.ItemType.Type = Enums.ItemTypes.Certificate Then
 				FiscalStringData.CalculationSubject = 10;
@@ -89,123 +66,27 @@ Procedure FillCheckPackageByRetailSalesReceipt(SourceData, CheckPackage) Export
 				FiscalStringData.CalculationSubject = 1;	//https://its.1c.ru/db/metod8dev#content:4829:hdoc:signcalculationobject
 			EndIf;
 		EndIf;
+		
 		FiscalStringData.MeasureOfQuantity = 255;
 		FiscalStringData.MeasureOfQuantityRef = ItemRow.Unit.UOM;
 		
-#Region GenerateName		
-		Name = New Array; // Array Of String
-		Name.Add(String(ItemRow.Item));
-		If Not String(ItemRow.Item) = String(ItemRow.ItemKey) Then
-			Name.Add(String(ItemRow.ItemKey));
-		EndIf;
-		
-		SearchSerial = SourceData.SerialLotNumbers.FindRows(New Structure("Key", ItemRow.Key));
-		If SearchSerial.Count() > 0 Then
-			SerialName = New Array; // Array Of String
-			For Each Serial In SearchSerial Do
-				SerialName.Add(String(Serial.SerialLotNumber));
-			EndDo;
-			Name.Add("[" + StrConcat(SerialName, ",") + "]");
-		EndIf;
+		Name = GenerateItemName(SourceData, ItemRow);
 		FiscalStringData.Name = StrConcat(Name, " ");
-#EndRegion
 
 		FiscalStringData.Quantity = ItemRow.Quantity;
-		If SourceData.PaymentMethod = Enums.ReceiptPaymentMethods.FullPrepayment Then
-			FiscalStringData.PaymentMethod = 1;
-		ElsIf SourceData.PaymentMethod = Enums.ReceiptPaymentMethods.PartialPrepayment Then
-			FiscalStringData.PaymentMethod = 2;
-		ElsIf SourceData.PaymentMethod = Enums.ReceiptPaymentMethods.AdvancePayment Then
-			FiscalStringData.PaymentMethod = 3;
-		ElsIf SourceData.PaymentMethod = Enums.ReceiptPaymentMethods.FullCalculation Then
-			FiscalStringData.PaymentMethod = 4;
-		ElsIf SourceData.PaymentMethod = Enums.ReceiptPaymentMethods.PartialSettlementAndCredit Then
-			FiscalStringData.PaymentMethod = 5;
-		ElsIf SourceData.PaymentMethod = Enums.ReceiptPaymentMethods.TransferOnCredit Then
-			FiscalStringData.PaymentMethod = 6;
-		ElsIf SourceData.PaymentMethod = Enums.ReceiptPaymentMethods.LoanPayment Then
-			FiscalStringData.PaymentMethod = 7;
-		Else
-			FiscalStringData.PaymentMethod = 4;
-		EndIf;
 		
-		If ItemRow.Item.ItemType.Type = Enums.ItemTypes.Certificate Then
-			FiscalStringData.PaymentMethod = 3;
-		EndIf;
+		FillPaymentType(SourceData, FiscalStringData, ItemRow);
 		
 		FiscalStringData.PriceWithDiscount = Round(ItemRow.TotalAmount / ItemRow.Quantity, 2);
 		
-		If ValueIsFilled(ItemRow.VatRate) Then
-			If ItemRow.VatRate.NoRate Then
-				FiscalStringData.VATRate = "none";
-				FiscalStringData.VATAmount = 0;
-			Else
-				FiscalStringData.VATRate = Format(ItemRow.VatRate.Rate, "NZ=0; NG=0;");
-				FiscalStringData.VATAmount = ItemRow.TaxAmount;
-			EndIf;
-		Else
-			FiscalStringData.VATRate = "none";
-			FiscalStringData.VATAmount = 0;
-		EndIf;
+		FillVatRate(ItemRow, FiscalStringData);
 		
-		If ValueIsFilled(ItemRow.Consignor) Then
-			FiscalStringData.VendorData.VendorINN = ItemRow.Consignor.TaxID;
-			FiscalStringData.VendorData.VendorName = String(ItemRow.Consignor);
-			FiscalStringData.VendorData.VendorPhone = "";
-			FiscalStringData.CalculationAgent = 5;
-		EndIf;
-		
-		If FiscalStringData.CalculationAgent = 5 Then
-			If IsBlankString(FiscalStringData.VendorData.VendorINN)
-				OR IsBlankString(FiscalStringData.VendorData.VendorName) Then
-					Raise StrTemplate(R().Error_047, "VendorINN, VendorName");
-			EndIf;
-		EndIf;
+		FillConsignor(FiscalStringData, ItemRow);
 
 		CheckPackage.Positions.FiscalStrings.Add(FiscalStringData);
 	EndDo;
 
-	For Each Payment In SourceData.Payments Do
-		If Payment.Amount < 0 Then
-			Continue;
-		EndIf;
-
-		If SourceData.PaymentMethod = Enums.ReceiptPaymentMethods.FullPrepayment Then
-			CheckPackage.Payments.PrePayment = CheckPackage.Payments.PrePayment + Payment.Amount;
-		ElsIf SourceData.PaymentMethod = Enums.ReceiptPaymentMethods.PartialPrepayment Then
-			CheckPackage.Payments.PrePayment = CheckPackage.Payments.PrePayment + Payment.Amount;
-		ElsIf SourceData.PaymentMethod = Enums.ReceiptPaymentMethods.AdvancePayment Then
-			CheckPackage.Payments.PrePayment = CheckPackage.Payments.PrePayment + Payment.Amount;
-		ElsIf SourceData.PaymentMethod = Enums.ReceiptPaymentMethods.FullCalculation Then
-			If Payment.PaymentType.Type = Enums.PaymentTypes.Cash Then
-				CheckPackage.Payments.Cash = CheckPackage.Payments.Cash + Payment.Amount;
-			ElsIf Payment.PaymentType.Type = Enums.PaymentTypes.Card Then
-				CheckPackage.Payments.ElectronicPayment = CheckPackage.Payments.ElectronicPayment + Payment.Amount;
-			ElsIf Payment.PaymentType.Type = Enums.PaymentTypes.PaymentAgent Then
-				CheckPackage.Payments.PostPayment = CheckPackage.Payments.PostPayment + Payment.Amount;
-			ElsIf Payment.PaymentType.Type = Enums.PaymentTypes.Advance Then
-				CheckPackage.Payments.PrePayment = CheckPackage.Payments.PrePayment + Payment.Amount;
-			ElsIf Payment.PaymentType.Type = Enums.PaymentTypes.Certificate Then
-				CheckPackage.Payments.PrePayment = CheckPackage.Payments.PrePayment + Payment.Amount;
-			Else
-				CheckPackage.Payments.Cash = CheckPackage.Payments.Cash + Payment.Amount;
-			EndIf;
-		Else
-			If Payment.PaymentType.Type = Enums.PaymentTypes.Cash Then
-				CheckPackage.Payments.Cash = CheckPackage.Payments.Cash + Payment.Amount;
-			ElsIf Payment.PaymentType.Type = Enums.PaymentTypes.Card Then
-				CheckPackage.Payments.ElectronicPayment = CheckPackage.Payments.ElectronicPayment + Payment.Amount;
-			ElsIf Payment.PaymentType.Type = Enums.PaymentTypes.PaymentAgent Then
-				CheckPackage.Payments.PostPayment = CheckPackage.Payments.PostPayment + Payment.Amount;
-			ElsIf Payment.PaymentType.Type = Enums.PaymentTypes.Advance Then
-				CheckPackage.Payments.PrePayment = CheckPackage.Payments.PrePayment + Payment.Amount;
-			ElsIf Payment.PaymentType.Type = Enums.PaymentTypes.Certificate Then
-				CheckPackage.Payments.PrePayment = CheckPackage.Payments.PrePayment + Payment.Amount;
-			Else
-				CheckPackage.Payments.Cash = CheckPackage.Payments.Cash + Payment.Amount;
-			EndIf;
-		EndIf;
-	EndDo;
+	FillPayments(SourceData, CheckPackage);
 
 	If SessionParameters.Workstation.PrintBarcodeWithDocumentUUID Then
 		CheckPackage.Positions.Barcode.Value = BarcodeServer.GetDocumentBarcode(SourceData);
@@ -223,17 +104,6 @@ Procedure FillCheckPackageByRetailSalesReceipt(SourceData, CheckPackage) Export
 
 	CheckPackage.Positions.FiscalStringJSON = "";
 
-EndProcedure
-
-Procedure FillGoodData(Item, Val CodeString, FiscalStringData)
-
-	If Item.ControlCodeStringType = Enums.ControlCodeStringType.GoodCodeData Then
-		If Not CommonFunctionsClientServer.isBase64Value(CodeString) Then
-			CodeString = Base64String(GetBinaryDataFromString(CodeString, TextEncoding.UTF8, False));
-		EndIf;
-		FiscalStringData.GoodCodeData.Insert("NotIdentified", CodeString);
-	EndIf;
-		
 EndProcedure
 
 // Fill check package by payment.
@@ -372,14 +242,14 @@ Function GetStatusData(DocumentRef) Export
 	Return FiscalStatus;
 EndFunction
 
-// Get string code.
+// Get marking code.
 //
 // Parameters:
 //  DocumentRef - DocumentRef.RetailReturnReceipt, DocumentRef.RetailSalesReceipt -
 //
 // Returns:
 //  Array Of String
-Function GetStringCode(DocumentRef) Export
+Function GetMarkingCode(DocumentRef) Export
 	Array = New Array; // Array Of String
 	For Each Row In DocumentRef.ControlCodeStrings Do
 
@@ -387,6 +257,10 @@ Function GetStringCode(DocumentRef) Export
 			Continue;
 		EndIf;
 
+		If Not Row.ControlCodeStringType = Enums.ControlCodeStringType.MarkingCode Then
+			Continue;
+		EndIf;
+		
 		Array.Add(Row.CodeString);
 	EndDo;
 	Return Array;
@@ -414,6 +288,154 @@ Procedure FillInputParameters(Ref, InputParameters) Export
 		InputParameters.SaleAddress = Ref.ConsolidatedRetailSales.FiscalPrinter.SaleAddress;
 		InputParameters.SaleLocation = Ref.ConsolidatedRetailSales.FiscalPrinter.SaleLocation;
 	EndIf;
+EndProcedure
+
+#EndRegion
+
+#Region Service
+
+Procedure FillConsignor(FiscalStringData, ItemRow)
+	If ValueIsFilled(ItemRow.Consignor) Then
+		FiscalStringData.VendorData.VendorINN = ItemRow.Consignor.TaxID;
+		FiscalStringData.VendorData.VendorName = String(ItemRow.Consignor);
+		FiscalStringData.VendorData.VendorPhone = "";
+		FiscalStringData.CalculationAgent = 5;
+	EndIf;
+	
+	If FiscalStringData.CalculationAgent = 5 Then
+		If IsBlankString(FiscalStringData.VendorData.VendorINN)
+			OR IsBlankString(FiscalStringData.VendorData.VendorName) Then
+				Raise StrTemplate(R().Error_047, "VendorINN, VendorName");
+		EndIf;
+	EndIf;
+EndProcedure
+
+Procedure FillVatRate(ItemRow, FiscalStringData)
+	If ValueIsFilled(ItemRow.VatRate) Then
+		If ItemRow.VatRate.NoRate Then
+			FiscalStringData.VATRate = "none";
+			FiscalStringData.VATAmount = 0;
+		Else
+			FiscalStringData.VATRate = Format(ItemRow.VatRate.Rate, "NZ=0; NG=0;");
+			FiscalStringData.VATAmount = ItemRow.TaxAmount;
+		EndIf;
+	Else
+		FiscalStringData.VATRate = "none";
+		FiscalStringData.VATAmount = 0;
+	EndIf;
+EndProcedure
+
+Function GenerateItemName(SourceData, ItemRow)
+	Name = New Array; // Array Of String
+	Name.Add(String(ItemRow.Item));
+	If Not String(ItemRow.Item) = String(ItemRow.ItemKey) Then
+		Name.Add(String(ItemRow.ItemKey));
+	EndIf;
+	
+	SearchSerial = SourceData.SerialLotNumbers.FindRows(New Structure("Key", ItemRow.Key));
+	If SearchSerial.Count() > 0 Then
+		SerialName = New Array; // Array Of String
+		For Each Serial In SearchSerial Do
+			SerialName.Add(String(Serial.SerialLotNumber));
+		EndDo;
+		Name.Add("[" + StrConcat(SerialName, ",") + "]");
+	EndIf;
+	Return Name;
+EndFunction
+
+Procedure FillPaymentType(SourceData, FiscalStringData, ItemRow)
+	If SourceData.PaymentMethod = Enums.ReceiptPaymentMethods.FullPrepayment Then
+		FiscalStringData.PaymentMethod = 1;
+	ElsIf SourceData.PaymentMethod = Enums.ReceiptPaymentMethods.PartialPrepayment Then
+		FiscalStringData.PaymentMethod = 2;
+	ElsIf SourceData.PaymentMethod = Enums.ReceiptPaymentMethods.AdvancePayment Then
+		FiscalStringData.PaymentMethod = 3;
+	ElsIf SourceData.PaymentMethod = Enums.ReceiptPaymentMethods.FullCalculation Then
+		FiscalStringData.PaymentMethod = 4;
+	ElsIf SourceData.PaymentMethod = Enums.ReceiptPaymentMethods.PartialSettlementAndCredit Then
+		FiscalStringData.PaymentMethod = 5;
+	ElsIf SourceData.PaymentMethod = Enums.ReceiptPaymentMethods.TransferOnCredit Then
+		FiscalStringData.PaymentMethod = 6;
+	ElsIf SourceData.PaymentMethod = Enums.ReceiptPaymentMethods.LoanPayment Then
+		FiscalStringData.PaymentMethod = 7;
+	Else
+		FiscalStringData.PaymentMethod = 4;
+	EndIf;
+	
+	If ItemRow.Item.ItemType.Type = Enums.ItemTypes.Certificate Then
+		FiscalStringData.PaymentMethod = 3;
+	EndIf;
+EndProcedure
+
+Procedure FillControlString(CCSRows, ItemRow, FiscalStringData)
+	If CCSRows.Count() = 0 Then
+		Raise "Control string code not filled. Row: " + ItemRow.LineNumber;
+	ElsIf Not CCSRows.Count() = ItemRow.Quantity Then
+		Raise "Control string code count not the same as item quantity. Row: " + ItemRow.LineNumber;
+	ElsIf CCSRows.Count() > 1 Then // TODO: Fix this
+		Raise "Not suppoted send more then 1 control code by each row. Row: " + ItemRow.LineNumber;
+	ElsIf CCSRows[0].NotCheck And CCSRows[0].ControlCodeStringType = Enums.ControlCodeStringType.MarkingCode Then
+		// Not check and not send
+		FiscalStringData.CalculationSubject = 1;
+	Else
+		CodeString = CCSRows[0].CodeString;
+		If CCSRows[0].ControlCodeStringType = Enums.ControlCodeStringType.None Then
+			Raise "Can not fiscalize item with Control Code String Type as None. Select type in item, or switch off Control string";
+		ElsIf CCSRows[0].ControlCodeStringType.IsEmpty() Then
+			Raise "Can not fiscalize item while Control Code String Type is Empty. Select type in item, or switch off Control string";
+		ElsIf CCSRows[0].ControlCodeStringType = Enums.ControlCodeStringType.MarkingCode Then
+			FiscalStringData.MarkingCode = ControlCodeStringServer.GetMarkingCodeString(CodeString);
+		ElsIf CCSRows[0].ControlCodeStringType = Enums.ControlCodeStringType.GoodCodeData Then
+			FiscalStringData.GoodCodeData.Insert(CCSRows[0].Prefix, CodeString);
+		Else
+			Raise "Unknown ControlCodeStringType";
+		EndIf;
+		FiscalStringData.CalculationSubject = 33;	//https://its.1c.ru/db/metod8dev#content:4829:hdoc:signcalculationobject
+	EndIf;
+EndProcedure
+
+Procedure FillPayments(SourceData, CheckPackage)
+	For Each Payment In SourceData.Payments Do
+			If Payment.Amount < 0 Then
+				Continue;
+			EndIf;
+	
+			If SourceData.PaymentMethod = Enums.ReceiptPaymentMethods.FullPrepayment Then
+				CheckPackage.Payments.PrePayment = CheckPackage.Payments.PrePayment + Payment.Amount;
+			ElsIf SourceData.PaymentMethod = Enums.ReceiptPaymentMethods.PartialPrepayment Then
+				CheckPackage.Payments.PrePayment = CheckPackage.Payments.PrePayment + Payment.Amount;
+			ElsIf SourceData.PaymentMethod = Enums.ReceiptPaymentMethods.AdvancePayment Then
+				CheckPackage.Payments.PrePayment = CheckPackage.Payments.PrePayment + Payment.Amount;
+			ElsIf SourceData.PaymentMethod = Enums.ReceiptPaymentMethods.FullCalculation Then
+				If Payment.PaymentType.Type = Enums.PaymentTypes.Cash Then
+					CheckPackage.Payments.Cash = CheckPackage.Payments.Cash + Payment.Amount;
+				ElsIf Payment.PaymentType.Type = Enums.PaymentTypes.Card Then
+					CheckPackage.Payments.ElectronicPayment = CheckPackage.Payments.ElectronicPayment + Payment.Amount;
+				ElsIf Payment.PaymentType.Type = Enums.PaymentTypes.PaymentAgent Then
+					CheckPackage.Payments.PostPayment = CheckPackage.Payments.PostPayment + Payment.Amount;
+				ElsIf Payment.PaymentType.Type = Enums.PaymentTypes.Advance Then
+					CheckPackage.Payments.PrePayment = CheckPackage.Payments.PrePayment + Payment.Amount;
+				ElsIf Payment.PaymentType.Type = Enums.PaymentTypes.Certificate Then
+					CheckPackage.Payments.PrePayment = CheckPackage.Payments.PrePayment + Payment.Amount;
+				Else
+					CheckPackage.Payments.Cash = CheckPackage.Payments.Cash + Payment.Amount;
+				EndIf;
+			Else
+				If Payment.PaymentType.Type = Enums.PaymentTypes.Cash Then
+					CheckPackage.Payments.Cash = CheckPackage.Payments.Cash + Payment.Amount;
+				ElsIf Payment.PaymentType.Type = Enums.PaymentTypes.Card Then
+					CheckPackage.Payments.ElectronicPayment = CheckPackage.Payments.ElectronicPayment + Payment.Amount;
+				ElsIf Payment.PaymentType.Type = Enums.PaymentTypes.PaymentAgent Then
+					CheckPackage.Payments.PostPayment = CheckPackage.Payments.PostPayment + Payment.Amount;
+				ElsIf Payment.PaymentType.Type = Enums.PaymentTypes.Advance Then
+					CheckPackage.Payments.PrePayment = CheckPackage.Payments.PrePayment + Payment.Amount;
+				ElsIf Payment.PaymentType.Type = Enums.PaymentTypes.Certificate Then
+					CheckPackage.Payments.PrePayment = CheckPackage.Payments.PrePayment + Payment.Amount;
+				Else
+					CheckPackage.Payments.Cash = CheckPackage.Payments.Cash + Payment.Amount;
+				EndIf;
+			EndIf;
+		EndDo;
 EndProcedure
 
 #EndRegion

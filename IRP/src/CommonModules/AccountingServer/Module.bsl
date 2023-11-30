@@ -3,8 +3,8 @@ Function GetOperationsDefinition()
 	Map = New Map();
 	AO = Catalogs.AccountingOperations;
 	// Bank payment
-	Map.Insert(AO.BankPayment_DR_R1020B_AdvancesToVendors_R1021B_VendorsTransactions_CR_R3010B , New Structure("ByRow", True));
-	Map.Insert(AO.BankPayment_R1021B_VendorsTransactions_CR_R1020B_AdvancesToVendors , New Structure("ByRow", True));
+	Map.Insert(AO.BankPayment_DR_R1020B_AdvancesToVendors_R1021B_VendorsTransactions_CR_R3010B_CashOnHand , New Structure("ByRow", True));
+	Map.Insert(AO.BankPayment_DR_R1021B_VendorsTransactions_CR_R1020B_AdvancesToVendors , New Structure("ByRow", True));
 	Map.Insert(AO.BankPayment_DR_R5022T_Expenses_CR_R3010B_CashOnHand , New Structure("ByRow", True));
 	
 	// Bank receipt

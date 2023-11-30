@@ -299,7 +299,7 @@ Function GetAccountParameters(Parameters) Export
 	AccountParameters = New Structure();
 	AccountParameters.Insert("Period", Period);
 	AccountParameters.Insert("Company", Parameters.ObjectData.Company);
-	AccountParameters.Insert("LedgerTypeVariant", Parameters.LedgerType.Variant);
+	AccountParameters.Insert("LedgerTypeVariant", Parameters.LedgerType.LedgerTypeVariant);
 	Return AccountParameters;
 EndFunction
 
@@ -320,7 +320,7 @@ Function __GetT9010S_AccountsItemKey(Period, Company, LedgerTypeVariant, ItemKey
 	|INTO Accounts
 	|FROM
 	|	InformationRegister.T9010S_AccountsItemKey.SliceLast(&Period, Company = &Company
-	|	AND Variant = &Variant
+	|	AND LedgerTypeVariant = &LedgerTypeVariant
 	|	AND ItemKey = &ItemKey
 	|	AND Item.Ref IS NULL
 	|	AND ItemType.Ref IS NULL) AS ByItemKey
@@ -332,7 +332,7 @@ Function __GetT9010S_AccountsItemKey(Period, Company, LedgerTypeVariant, ItemKey
 	|	2
 	|FROM
 	|	InformationRegister.T9010S_AccountsItemKey.SliceLast(&Period, Company = &Company
-	|	AND Variant = &Variant
+	|	AND LedgerTypeVariant = &LedgerTypeVariant
 	|	AND ItemKey.Ref IS NULL
 	|	AND Item = &Item
 	|	AND ItemType.Ref IS NULL) AS ByItem
@@ -344,7 +344,7 @@ Function __GetT9010S_AccountsItemKey(Period, Company, LedgerTypeVariant, ItemKey
 	|	3
 	|FROM
 	|	InformationRegister.T9010S_AccountsItemKey.SliceLast(&Period, Company = &Company
-	|	AND Variant = &Variant
+	|	AND LedgerTypeVariant = &LedgerTypeVariant
 	|	AND ItemKey.Ref IS NULL
 	|	AND Item.Ref IS NULL
 	|	AND ItemType = &ItemType) AS ByItemType
@@ -356,7 +356,7 @@ Function __GetT9010S_AccountsItemKey(Period, Company, LedgerTypeVariant, ItemKey
 	|	4
 	|FROM
 	|	InformationRegister.T9010S_AccountsItemKey.SliceLast(&Period, Company = &Company
-	|	AND Variant = &Variant
+	|	AND LedgerTypeVariant = &LedgerTypeVariant
 	|	AND ItemKey.Ref IS NULL
 	|	AND Item.Ref IS NULL
 	|	AND ItemType.Ref IS NULL
@@ -369,7 +369,7 @@ Function __GetT9010S_AccountsItemKey(Period, Company, LedgerTypeVariant, ItemKey
 	|	5
 	|FROM
 	|	InformationRegister.T9010S_AccountsItemKey.SliceLast(&Period, Company = &Company
-	|	AND Variant = &Variant
+	|	AND LedgerTypeVariant = &LedgerTypeVariant
 	|	AND ItemKey.Ref IS NULL
 	|	AND Item.Ref IS NULL
 	|	AND ItemType.Ref IS NULL
@@ -387,7 +387,7 @@ Function __GetT9010S_AccountsItemKey(Period, Company, LedgerTypeVariant, ItemKey
 	|	Priority";
 	Query.SetParameter("Period"   , Period);
 	Query.SetParameter("Company"  , Company);
-	Query.SetParameter("Variant"  , LedgerTypeVariant);
+	Query.SetParameter("LedgerTypeVariant"  , LedgerTypeVariant);
 	Query.SetParameter("ItemKey"  , ItemKey);
 	Query.SetParameter("Item"     , ItemKey.Item);
 	Query.SetParameter("ItemType" , ItemKey.Item.ItemType);
@@ -419,7 +419,7 @@ Function __GetT9011S_AccountsCashAccount(Period, Company, LedgerTypeVariant, Cas
 	|INTO Accounts
 	|FROM
 	|	InformationRegister.T9011S_AccountsCashAccount.SliceLast(&Period, Company = &Company
-	|	AND Variant = &Variant
+	|	AND LedgerTypeVariant = &LedgerTypeVariant
 	|	AND CashAccount = &CashAccount) AS ByCashAccount
 	|
 	|UNION ALL
@@ -431,7 +431,7 @@ Function __GetT9011S_AccountsCashAccount(Period, Company, LedgerTypeVariant, Cas
 	|	2
 	|FROM
 	|	InformationRegister.T9011S_AccountsCashAccount.SliceLast(&Period, Company = &Company
-	|	AND Variant = &Variant
+	|	AND LedgerTypeVariant = &LedgerTypeVariant
 	|	AND CashAccount.Ref IS NULL) AS ByCompany
 	|;
 	|
@@ -448,7 +448,7 @@ Function __GetT9011S_AccountsCashAccount(Period, Company, LedgerTypeVariant, Cas
 	|	Priority";
 	Query.SetParameter("Period"      , Period);
 	Query.SetParameter("Company"     , Company);
-	Query.SetParameter("Variant"     , LedgerTypeVariant);
+	Query.SetParameter("LedgerTypeVariant"     , LedgerTypeVariant);
 	Query.SetParameter("CashAccount" , CashAccount);
 	QueryResult = Query.Execute();
 	QuerySelection = QueryResult.Select();
@@ -478,7 +478,7 @@ Function __GetT9012S_AccountsPartner(Period, Company, LedgerTypeVariant, Partner
 	|	1 AS Priority
 	|INTO Accounts
 	|FROM
-	|	InformationRegister.T9012S_AccountsPartner.SliceLast(&Period, Company = &Company AND Variant = &Variant
+	|	InformationRegister.T9012S_AccountsPartner.SliceLast(&Period, Company = &Company AND LedgerTypeVariant = &LedgerTypeVariant
 	|	AND Agreement = &Agreement
 	|	AND Partner.Ref IS NULL) AS ByAgreement
 	|
@@ -491,7 +491,7 @@ Function __GetT9012S_AccountsPartner(Period, Company, LedgerTypeVariant, Partner
 	|	ByPartner.AccountTransactionsCustomer,
 	|	2
 	|FROM
-	|	InformationRegister.T9012S_AccountsPartner.SliceLast(&Period, Company = &Company AND Variant = &Variant
+	|	InformationRegister.T9012S_AccountsPartner.SliceLast(&Period, Company = &Company AND LedgerTypeVariant = &LedgerTypeVariant
 	|	AND Partner = &Partner
 	|	AND Agreement.Ref IS NULL) AS ByPartner
 	|
@@ -504,7 +504,7 @@ Function __GetT9012S_AccountsPartner(Period, Company, LedgerTypeVariant, Partner
 	|	ByCompany.AccountTransactionsCustomer,
 	|	3
 	|FROM
-	|	InformationRegister.T9012S_AccountsPartner.SliceLast(&Period, Company = &Company AND Variant = &Variant
+	|	InformationRegister.T9012S_AccountsPartner.SliceLast(&Period, Company = &Company AND LedgerTypeVariant = &LedgerTypeVariant
 	|	AND Partner.Ref IS NULL
 	|	AND Agreement.Ref IS NULL) AS ByCompany
 	|;
@@ -522,7 +522,7 @@ Function __GetT9012S_AccountsPartner(Period, Company, LedgerTypeVariant, Partner
 	|	Priority";
 	Query.SetParameter("Period"    , Period);
 	Query.SetParameter("Company"   , Company);
-	Query.SetParameter("Variant"   , LedgerTypeVariant);
+	Query.SetParameter("LedgerTypeVariant"   , LedgerTypeVariant);
 	Query.SetParameter("Partner"   , Partner);
 	Query.SetParameter("Agreement" , Agreement);
 	QueryResult = Query.Execute();
@@ -556,7 +556,7 @@ Function __GetT9013S_AccountsTax(Period, Company, LedgerTypeVariant, Tax) Export
 	|	1 AS Priority
 	|INTO Accounts
 	|FROM
-	|	InformationRegister.T9013S_AccountsTax.SliceLast(&Period, Company = &Company AND Variant = &Variant
+	|	InformationRegister.T9013S_AccountsTax.SliceLast(&Period, Company = &Company AND LedgerTypeVariant = &LedgerTypeVariant
 	|	AND Tax = &Tax) AS ByTax
 	|
 	|UNION ALL
@@ -567,7 +567,7 @@ Function __GetT9013S_AccountsTax(Period, Company, LedgerTypeVariant, Tax) Export
 	|	ByCompany.Account,
 	|	2
 	|FROM
-	|	InformationRegister.T9013S_AccountsTax.SliceLast(&Period, Company = &Company AND Variant = &Variant
+	|	InformationRegister.T9013S_AccountsTax.SliceLast(&Period, Company = &Company AND LedgerTypeVariant = &LedgerTypeVariant
 	|	AND Tax.Ref IS NULL) AS ByCompany
 	|;
 	|
@@ -583,7 +583,7 @@ Function __GetT9013S_AccountsTax(Period, Company, LedgerTypeVariant, Tax) Export
 	|	Priority";
 	Query.SetParameter("Period"  , Period);
 	Query.SetParameter("Company" , Company);
-	Query.SetParameter("Variant" , LedgerTypeVariant);
+	Query.SetParameter("LedgerTypeVariant" , LedgerTypeVariant);
 	Query.SetParameter("Tax"     , Tax);
 	QueryResult = Query.Execute();
 	QuerySelection = QueryResult.Select();
@@ -610,7 +610,7 @@ Function __GetT9014S_AccountsExpenseRevenue(Period, Company, LedgerTypeVariant, 
 	|	1 AS Priority
 	|INTO Accounts
 	|FROM
-	|	InformationRegister.T9014S_AccountsExpenseRevenue.SliceLast(&Period, Company = &Company AND Variant = &Variant
+	|	InformationRegister.T9014S_AccountsExpenseRevenue.SliceLast(&Period, Company = &Company AND LedgerTypeVariant = &LedgerTypeVariant
 	|	AND ExpenseRevenue = &ExpenseRevenue) AS ByExpenseRevenue
 	|
 	|UNION ALL
@@ -619,7 +619,7 @@ Function __GetT9014S_AccountsExpenseRevenue(Period, Company, LedgerTypeVariant, 
 	|	ByCompany.Account,
 	|	2
 	|FROM
-	|	InformationRegister.T9014S_AccountsExpenseRevenue.SliceLast(&Period, Company = &Company AND Variant = &Variant
+	|	InformationRegister.T9014S_AccountsExpenseRevenue.SliceLast(&Period, Company = &Company AND LedgerTypeVariant = &LedgerTypeVariant
 	|	AND ExpenseRevenue.Ref IS NULL) AS ByCompany
 	|;
 	|
@@ -634,7 +634,7 @@ Function __GetT9014S_AccountsExpenseRevenue(Period, Company, LedgerTypeVariant, 
 	|	Priority";
 	Query.SetParameter("Period"  , Period);
 	Query.SetParameter("Company" , Company);
-	Query.SetParameter("Variant" , LedgerTypeVariant);
+	Query.SetParameter("LedgerTypeVariant" , LedgerTypeVariant);
 	Query.SetParameter("ExpenseRevenue" , ExpenseRevenue);
 	QueryResult = Query.Execute();
 	QuerySelection = QueryResult.Select();

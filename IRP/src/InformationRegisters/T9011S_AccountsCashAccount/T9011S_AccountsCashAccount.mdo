@@ -37,7 +37,7 @@
     <fillChecking>ShowError</fillChecking>
     <choiceParameterLinks>
       <name>Filter.Variant</name>
-      <field>InformationRegister.T9011S_AccountsCashAccount.Dimension.Variant</field>
+      <field>InformationRegister.T9011S_AccountsCashAccount.Dimension.LedgerTypeVariant</field>
     </choiceParameterLinks>
     <fullTextSearch>Use</fullTextSearch>
     <dataHistory>Use</dataHistory>
@@ -62,10 +62,10 @@
     <mainFilter>true</mainFilter>
   </dimensions>
   <dimensions uuid="7d863e08-0d7c-4734-8eb1-28aa2fcbdb93">
-    <name>Variant</name>
+    <name>LedgerTypeVariant</name>
     <synonym>
       <key>en</key>
-      <value>Variant</value>
+      <value>Ledger type variant</value>
     </synonym>
     <type>
       <types>CatalogRef.LedgerTypeVariants</types>

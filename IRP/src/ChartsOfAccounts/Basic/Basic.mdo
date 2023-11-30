@@ -74,7 +74,7 @@
     <fillValue xsi:type="core:UndefinedValue"/>
     <choiceParameterLinks>
       <name>Filter.Variant</name>
-      <field>ChartOfAccounts.Basic.Attribute.Variant</field>
+      <field>ChartOfAccounts.Basic.Attribute.LedgerTypeVariant</field>
     </choiceParameterLinks>
     <fullTextSearch>Use</fullTextSearch>
     <minValue xsi:type="core:UndefinedValue"/>
@@ -122,10 +122,10 @@
   <defaultChoiceForm>ChartOfAccounts.Basic.Form.ChoiceForm</defaultChoiceForm>
   <orderLength>3</orderLength>
   <attributes uuid="b37dad27-9ea5-4c9d-8d6d-bb9d13f202d7">
-    <name>Variant</name>
+    <name>LedgerTypeVariant</name>
     <synonym>
       <key>en</key>
-      <value>Variant</value>
+      <value>Ledger type variant</value>
     </synonym>
     <type>
       <types>CatalogRef.LedgerTypeVariants</types>

@@ -37,7 +37,7 @@
     <fillChecking>ShowError</fillChecking>
     <choiceParameterLinks>
       <name>Filter.Variant</name>
-      <field>InformationRegister.T9012S_AccountsPartner.Dimension.Variant</field>
+      <field>InformationRegister.T9012S_AccountsPartner.Dimension.LedgerTypeVariant</field>
     </choiceParameterLinks>
     <fullTextSearch>Use</fullTextSearch>
     <dataHistory>Use</dataHistory>
@@ -57,7 +57,7 @@
     <fillChecking>ShowError</fillChecking>
     <choiceParameterLinks>
       <name>Filter.Variant</name>
-      <field>InformationRegister.T9012S_AccountsPartner.Dimension.Variant</field>
+      <field>InformationRegister.T9012S_AccountsPartner.Dimension.LedgerTypeVariant</field>
     </choiceParameterLinks>
     <fullTextSearch>Use</fullTextSearch>
     <dataHistory>Use</dataHistory>
@@ -77,7 +77,7 @@
     <fillChecking>ShowError</fillChecking>
     <choiceParameterLinks>
       <name>Filter.Variant</name>
-      <field>InformationRegister.T9012S_AccountsPartner.Dimension.Variant</field>
+      <field>InformationRegister.T9012S_AccountsPartner.Dimension.LedgerTypeVariant</field>
     </choiceParameterLinks>
     <fullTextSearch>Use</fullTextSearch>
     <dataHistory>Use</dataHistory>
@@ -97,7 +97,7 @@
     <fillChecking>ShowError</fillChecking>
     <choiceParameterLinks>
       <name>Filter.Variant</name>
-      <field>InformationRegister.T9012S_AccountsPartner.Dimension.Variant</field>
+      <field>InformationRegister.T9012S_AccountsPartner.Dimension.LedgerTypeVariant</field>
     </choiceParameterLinks>
     <fullTextSearch>Use</fullTextSearch>
     <dataHistory>Use</dataHistory>
@@ -122,10 +122,10 @@
     <mainFilter>true</mainFilter>
   </dimensions>
   <dimensions uuid="2eca7011-c535-459c-92cc-b873b122e050">
-    <name>Variant</name>
+    <name>LedgerTypeVariant</name>
     <synonym>
       <key>en</key>
-      <value>Variant</value>
+      <value>Ledger type variant</value>
     </synonym>
     <type>
       <types>CatalogRef.LedgerTypeVariants</types>

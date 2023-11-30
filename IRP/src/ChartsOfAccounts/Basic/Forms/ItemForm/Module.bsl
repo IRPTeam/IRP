@@ -11,13 +11,13 @@ Procedure DescriptionOpening(Item, StandardProcessing) Export
 EndProcedure
 
 &AtClient
-Procedure VariantOnChange(Item)
+Procedure LedgerTypeVariantOnChange(Item)
 	SetCodeMask();
 EndProcedure
 
 &AtServer
 Procedure SetCodeMask()
-	If ValueIsFilled(Object.Variant) And ValueIsFilled(Object.Variant.AccountChartsCodeMask) Then
-		Items.Code.Mask = Object.Variant.AccountChartsCodeMask;
+	If ValueIsFilled(Object.LedgerTypeVariant) And ValueIsFilled(Object.LedgerTypeVariant.AccountChartsCodeMask) Then
+		Items.Code.Mask = Object.LedgerTypeVariant.AccountChartsCodeMask;
 	EndIf;
 EndProcedure

@@ -37,7 +37,7 @@
     <fillChecking>ShowError</fillChecking>
     <choiceParameterLinks>
       <name>Filter.Variant</name>
-      <field>InformationRegister.T9010S_AccountsItemKey.Dimension.Variant</field>
+      <field>InformationRegister.T9010S_AccountsItemKey.Dimension.LedgerTypeVariant</field>
     </choiceParameterLinks>
     <fullTextSearch>Use</fullTextSearch>
     <dataHistory>Use</dataHistory>
@@ -62,10 +62,10 @@
     <mainFilter>true</mainFilter>
   </dimensions>
   <dimensions uuid="32fe3276-60f3-49c5-bef8-2bd4e363ccd2">
-    <name>Variant</name>
+    <name>LedgerTypeVariant</name>
     <synonym>
       <key>en</key>
-      <value>Variant</value>
+      <value>Ledger type variant</value>
     </synonym>
     <type>
       <types>CatalogRef.LedgerTypeVariants</types>

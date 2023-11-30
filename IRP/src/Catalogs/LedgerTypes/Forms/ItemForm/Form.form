@@ -233,7 +233,7 @@
     </extInfo>
   </items>
   <items xsi:type="form:FormField">
-    <name>Variant</name>
+    <name>LedgerTypeVariant</name>
     <id>4</id>
     <visible>true</visible>
     <enabled>true</enabled>
@@ -241,10 +241,10 @@
       <common>true</common>
     </userVisible>
     <dataPath xsi:type="form:DataPath">
-      <segments>Object.Variant</segments>
+      <segments>Object.LedgerTypeVariant</segments>
     </dataPath>
     <extendedTooltip>
-      <name>VariantExtendedTooltip</name>
+      <name>LedgerTypeVariantExtendedTooltip</name>
       <id>6</id>
       <visible>true</visible>
       <enabled>true</enabled>
@@ -259,7 +259,7 @@
       </extInfo>
     </extendedTooltip>
     <contextMenu>
-      <name>VariantContextMenu</name>
+      <name>LedgerTypeVariantContextMenu</name>
       <id>5</id>
       <visible>true</visible>
       <enabled>true</enabled>

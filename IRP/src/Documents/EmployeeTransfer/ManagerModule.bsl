@@ -15,7 +15,7 @@ Function PostingGetDocumentDataTables(Ref, Cancel, PostingMode, Parameters, AddI
 	
 	ClearSelfRecords(Ref);
 	
-	If PostingMode <> Undefined Then
+	If PostingMode <> Undefined And Ref.ToPersonalSalary <> Ref.FromPersonalSalary Then
 		SetNotActualRecordSet(Ref);
 	EndIf;
 	
@@ -271,6 +271,7 @@ Procedure WriteSelfRecords(Ref)
 	RecordSet = InformationRegisters.T9500S_AccrualAndDeductionValues.CreateRecordSet();
 	RecordSet.Filter.EmployeeOrPosition.Set(Ref.Employee);
 	RecordSet.Filter.AccualOrDeductionType.Set(Ref.ToAccrualType);
+	RecordSet.Filter.Period.Set(Ref.Date);
 	NewRecord = RecordSet.Add();
 	
 	NewRecord.Period = Ref.Date;

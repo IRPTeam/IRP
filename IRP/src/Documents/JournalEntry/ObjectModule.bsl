@@ -54,9 +54,47 @@ Procedure Filling(FillingData, FillingText, StandardProcessing)
 EndProcedure
 
 Procedure FillCheckProcessing(Cancel, CheckedAttributes)
+	
+	SetObjectAndFormAttributeConformity(ThisObject, "Object");
+	
 	If Not ThisObject.UserDefined Then
 		CheckedAttributes.Add("Basis");
 	EndIf;
+	
+	Index = 0;
+	For Each Row In ThisObject.RegisterRecords.Basic Do 
+		If Not ValueIsFilled(Row.Period) Then
+			Cancel = True;
+			CommonFunctionsClientServer.ShowUsersMessage(R().AccountingError_04, "RegisterRecords.Basic["+ Index +"].Period", ThisObject);
+		EndIf;
+		
+		If Not ValueIsFilled(Row.AccountDr) Then
+			Cancel = True;
+			CommonFunctionsClientServer.ShowUsersMessage(
+				R().AccountingError_02, "RegisterRecords.Basic["+ Index +"].AccountDr", ThisObject);
+		Else
+			If Row.AccountDr.NotUsedForRecords Then
+				Cancel = True;
+				CommonFunctionsClientServer.ShowUsersMessage(
+					StrTemplate(R().AccountingError_01, Row.AccountDr), "RegisterRecords.Basic["+ Index +"].AccountDr", ThisObject);
+			EndIf;
+		EndIf;
+		
+		If Not ValueIsFilled(Row.AccountCr) Then
+			Cancel = True;
+			CommonFunctionsClientServer.ShowUsersMessage(
+				R().AccountingError_03, "RegisterRecords.Basic["+ Index +"].AccountCr", ThisObject);
+		Else
+			If Row.AccountCr.NotUsedForRecords Then
+				Cancel = True;
+				CommonFunctionsClientServer.ShowUsersMessage(
+					StrTemplate(R().AccountingError_01, Row.AccountCr), "RegisterRecords.Basic["+ Index +"].AccountCr", ThisObject);
+			EndIf;
+		EndIf;
+		
+		Index = Index + 1;
+	EndDo;
+	
 EndProcedure
 
 Procedure FillRegisterRecords()

@@ -36,7 +36,7 @@
     <maxValue xsi:type="core:UndefinedValue"/>
     <fillChecking>ShowError</fillChecking>
     <choiceParameterLinks>
-      <name>Filter.Variant</name>
+      <name>Filter.LedgerTypeVariant</name>
       <field>InformationRegister.T9012S_AccountsPartner.Dimension.LedgerTypeVariant</field>
     </choiceParameterLinks>
     <fullTextSearch>Use</fullTextSearch>
@@ -56,7 +56,7 @@
     <maxValue xsi:type="core:UndefinedValue"/>
     <fillChecking>ShowError</fillChecking>
     <choiceParameterLinks>
-      <name>Filter.Variant</name>
+      <name>Filter.LedgerTypeVariant</name>
       <field>InformationRegister.T9012S_AccountsPartner.Dimension.LedgerTypeVariant</field>
     </choiceParameterLinks>
     <fullTextSearch>Use</fullTextSearch>
@@ -76,7 +76,7 @@
     <maxValue xsi:type="core:UndefinedValue"/>
     <fillChecking>ShowError</fillChecking>
     <choiceParameterLinks>
-      <name>Filter.Variant</name>
+      <name>Filter.LedgerTypeVariant</name>
       <field>InformationRegister.T9012S_AccountsPartner.Dimension.LedgerTypeVariant</field>
     </choiceParameterLinks>
     <fullTextSearch>Use</fullTextSearch>
@@ -96,7 +96,7 @@
     <maxValue xsi:type="core:UndefinedValue"/>
     <fillChecking>ShowError</fillChecking>
     <choiceParameterLinks>
-      <name>Filter.Variant</name>
+      <name>Filter.LedgerTypeVariant</name>
       <field>InformationRegister.T9012S_AccountsPartner.Dimension.LedgerTypeVariant</field>
     </choiceParameterLinks>
     <fullTextSearch>Use</fullTextSearch>

@@ -772,7 +772,8 @@
 		END
 	END AS Type,
 	Table.Description_en AS Description,
-	Table.Order AS Order
+	Table.Order AS Order,
+	Table.NotUsedForRecords
 FROM
 	ChartOfAccounts.Basic AS Table</queryText>
       <mainTable>ChartOfAccounts.Basic</mainTable>
@@ -844,6 +845,14 @@ FROM
       <fields xsi:type="schema:DataCompositionSchemaDataSetField">
         <dataPath>Order</dataPath>
         <field>Order</field>
+      </fields>
+      <fields xsi:type="schema:DataCompositionSchemaDataSetField">
+        <dataPath>NotUsedForRecords</dataPath>
+        <field>NotUsedForRecords</field>
+      </fields>
+      <fields xsi:type="schema:DataCompositionSchemaDataSetField">
+        <dataPath>SearchCode</dataPath>
+        <field>SearchCode</field>
       </fields>
       <fields xsi:type="schema:DataCompositionSchemaDataSetField">
         <dataPath>ExtDimensionTypes</dataPath>

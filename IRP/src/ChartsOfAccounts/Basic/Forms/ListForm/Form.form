@@ -941,7 +941,8 @@
 	Table.Order AS Order,
 	ExtraDimension1.ExtraDimension AS ExtraDimension1,
 	ExtraDimension2.ExtraDimension AS ExtraDimension2,
-	ExtraDimension3.ExtraDimension AS ExtraDimension3
+	ExtraDimension3.ExtraDimension AS ExtraDimension3,
+	Table.NotUsedForRecords
 FROM
 	ChartOfAccounts.Basic AS Table
 		LEFT JOIN (SELECT
@@ -1090,8 +1091,16 @@ FROM
         </title>
       </fields>
       <fields xsi:type="schema:DataCompositionSchemaDataSetField">
+        <dataPath>NotUsedForRecords</dataPath>
+        <field>NotUsedForRecords</field>
+      </fields>
+      <fields xsi:type="schema:DataCompositionSchemaDataSetField">
         <dataPath>Predefined</dataPath>
         <field>Predefined</field>
+      </fields>
+      <fields xsi:type="schema:DataCompositionSchemaDataSetField">
+        <dataPath>SearchCode</dataPath>
+        <field>SearchCode</field>
       </fields>
       <fields xsi:type="schema:DataCompositionSchemaDataSetField">
         <dataPath>ExtDimensionTypes</dataPath>

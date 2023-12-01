@@ -112,7 +112,7 @@
   </objectPresentation>
   <extDimensionTypes>ChartOfCharacteristicTypes.AccountingExtraDimensionTypes</extDimensionTypes>
   <maxExtDimensionCount>3</maxExtDimensionCount>
-  <codeLength>9</codeLength>
+  <codeLength>12</codeLength>
   <checkUnique>true</checkUnique>
   <editType>InDialog</editType>
   <choiceMode>BothWays</choiceMode>
@@ -120,7 +120,7 @@
   <defaultObjectForm>ChartOfAccounts.Basic.Form.ItemForm</defaultObjectForm>
   <defaultListForm>ChartOfAccounts.Basic.Form.ListForm</defaultListForm>
   <defaultChoiceForm>ChartOfAccounts.Basic.Form.ChoiceForm</defaultChoiceForm>
-  <orderLength>3</orderLength>
+  <orderLength>12</orderLength>
   <attributes uuid="b37dad27-9ea5-4c9d-8d6d-bb9d13f202d7">
     <name>LedgerTypeVariant</name>
     <synonym>
@@ -134,6 +134,40 @@
     <maxValue xsi:type="core:UndefinedValue"/>
     <fillChecking>ShowError</fillChecking>
     <fillFromFillingValue>true</fillFromFillingValue>
+    <fillValue xsi:type="core:UndefinedValue"/>
+    <fullTextSearch>Use</fullTextSearch>
+    <dataHistory>Use</dataHistory>
+  </attributes>
+  <attributes uuid="2ad7938c-03c0-4956-9162-02d1e6897fde">
+    <name>SearchCode</name>
+    <synonym>
+      <key>en</key>
+      <value>Search code</value>
+    </synonym>
+    <type>
+      <types>String</types>
+      <stringQualifiers>
+        <length>12</length>
+      </stringQualifiers>
+    </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <fillValue xsi:type="core:UndefinedValue"/>
+    <indexing>Index</indexing>
+    <fullTextSearch>Use</fullTextSearch>
+    <dataHistory>Use</dataHistory>
+  </attributes>
+  <attributes uuid="9ae11d33-8fe3-4357-955f-bdd7e4d1a3a4">
+    <name>NotUsedForRecords</name>
+    <synonym>
+      <key>en</key>
+      <value>Not used for records</value>
+    </synonym>
+    <type>
+      <types>Boolean</types>
+    </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
     <fillValue xsi:type="core:UndefinedValue"/>
     <fullTextSearch>Use</fullTextSearch>
     <dataHistory>Use</dataHistory>

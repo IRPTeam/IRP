@@ -572,6 +572,10 @@
             <segments>Object.UserDefined</segments>
           </dataPath>
           <titleLocation>Left</titleLocation>
+          <handlers>
+            <event>OnChange</event>
+            <name>UserDefinedOnChange</name>
+          </handlers>
           <extendedTooltip>
             <name>UserDefinedExtendedTooltip</name>
             <id>161</id>
@@ -1245,6 +1249,7 @@
             <autoMaxWidth>true</autoMaxWidth>
             <autoMaxHeight>true</autoMaxHeight>
             <wrap>true</wrap>
+            <autoMarkIncomplete>true</autoMarkIncomplete>
             <chooseType>true</chooseType>
             <typeDomainEnabled>true</typeDomainEnabled>
             <textEdit>true</textEdit>
@@ -1679,6 +1684,7 @@
             <autoMaxWidth>true</autoMaxWidth>
             <autoMaxHeight>true</autoMaxHeight>
             <wrap>true</wrap>
+            <autoMarkIncomplete>true</autoMarkIncomplete>
             <chooseType>true</chooseType>
             <typeDomainEnabled>true</typeDomainEnabled>
             <textEdit>true</textEdit>

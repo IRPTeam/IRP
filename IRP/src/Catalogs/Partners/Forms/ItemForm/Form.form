@@ -757,6 +757,56 @@
         </dataPath>
         <titleLocation>None</titleLocation>
         <items xsi:type="form:FormField">
+          <name>StaffingRecorder</name>
+          <id>142</id>
+          <visible>true</visible>
+          <enabled>true</enabled>
+          <userVisible>
+            <common>true</common>
+          </userVisible>
+          <dataPath xsi:type="form:DataPath">
+            <segments>Staffing.Recorder</segments>
+          </dataPath>
+          <extendedTooltip>
+            <name>StaffingRecorderExtendedTooltip</name>
+            <id>144</id>
+            <visible>true</visible>
+            <enabled>true</enabled>
+            <userVisible>
+              <common>true</common>
+            </userVisible>
+            <type>Label</type>
+            <autoMaxWidth>true</autoMaxWidth>
+            <autoMaxHeight>true</autoMaxHeight>
+            <extInfo xsi:type="form:LabelDecorationExtInfo">
+              <horizontalAlign>Left</horizontalAlign>
+            </extInfo>
+          </extendedTooltip>
+          <contextMenu>
+            <name>StaffingRecorderContextMenu</name>
+            <id>143</id>
+            <visible>true</visible>
+            <enabled>true</enabled>
+            <userVisible>
+              <common>true</common>
+            </userVisible>
+            <autoFill>true</autoFill>
+          </contextMenu>
+          <type>InputField</type>
+          <editMode>Enter</editMode>
+          <showInHeader>true</showInHeader>
+          <headerHorizontalAlign>Left</headerHorizontalAlign>
+          <showInFooter>true</showInFooter>
+          <extInfo xsi:type="form:InputFieldExtInfo">
+            <autoMaxWidth>true</autoMaxWidth>
+            <autoMaxHeight>true</autoMaxHeight>
+            <wrap>true</wrap>
+            <chooseType>true</chooseType>
+            <typeDomainEnabled>true</typeDomainEnabled>
+            <textEdit>true</textEdit>
+          </extInfo>
+        </items>
+        <items xsi:type="form:FormField">
           <name>StaffingPeriod</name>
           <id>124</id>
           <visible>true</visible>
@@ -1048,6 +1098,56 @@
             <textEdit>true</textEdit>
           </extInfo>
         </items>
+        <items xsi:type="form:FormField">
+          <name>StaffingEmployeeSchedule</name>
+          <id>139</id>
+          <visible>true</visible>
+          <enabled>true</enabled>
+          <userVisible>
+            <common>true</common>
+          </userVisible>
+          <dataPath xsi:type="form:DataPath">
+            <segments>Staffing.EmployeeSchedule</segments>
+          </dataPath>
+          <extendedTooltip>
+            <name>StaffingEmployeeScheduleExtendedTooltip</name>
+            <id>141</id>
+            <visible>true</visible>
+            <enabled>true</enabled>
+            <userVisible>
+              <common>true</common>
+            </userVisible>
+            <type>Label</type>
+            <autoMaxWidth>true</autoMaxWidth>
+            <autoMaxHeight>true</autoMaxHeight>
+            <extInfo xsi:type="form:LabelDecorationExtInfo">
+              <horizontalAlign>Left</horizontalAlign>
+            </extInfo>
+          </extendedTooltip>
+          <contextMenu>
+            <name>StaffingEmployeeScheduleContextMenu</name>
+            <id>140</id>
+            <visible>true</visible>
+            <enabled>true</enabled>
+            <userVisible>
+              <common>true</common>
+            </userVisible>
+            <autoFill>true</autoFill>
+          </contextMenu>
+          <type>InputField</type>
+          <editMode>Enter</editMode>
+          <showInHeader>true</showInHeader>
+          <headerHorizontalAlign>Left</headerHorizontalAlign>
+          <showInFooter>true</showInFooter>
+          <extInfo xsi:type="form:InputFieldExtInfo">
+            <autoMaxWidth>true</autoMaxWidth>
+            <autoMaxHeight>true</autoMaxHeight>
+            <wrap>true</wrap>
+            <chooseType>true</chooseType>
+            <typeDomainEnabled>true</typeDomainEnabled>
+            <textEdit>true</textEdit>
+          </extInfo>
+        </items>
         <autoCommandBar>
           <name>StaffingCommandBar</name>
           <id>100</id>
@@ -1059,10 +1159,6 @@
           <horizontalAlign>Left</horizontalAlign>
           <autoFill>true</autoFill>
         </autoCommandBar>
-        <handlers>
-          <event>BeforeAddRow</event>
-          <name>StaffingBeforeAddRow</name>
-        </handlers>
         <searchStringAddition>
           <visible>true</visible>
           <enabled>true</enabled>

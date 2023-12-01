@@ -1,4 +1,4 @@
-#language: en
+﻿#language: en
 @tree
 @Positive
 @UserCatalogs
@@ -452,7 +452,6 @@ Scenario: _008009 create accrual and deduction types
 		And I input "Salary by day TR" text in "TR" field
 		And I click "Ok" button
 		And I select "By day" exact value from the drop-down list named "Periodicity"
-		And I select "Monthly salary" exact value from "Algorithm ID" drop-down list
 		And I select "Accrual" exact value from the drop-down list named "Type"
 		And I click Select button of "Expense type" field
 		And I click the button named "FormCreate"
@@ -469,7 +468,6 @@ Scenario: _008009 create accrual and deduction types
 		And I input "Monthly salary TR" text in "TR" field
 		And I click "Ok" button
 		And I select "By period" exact value from the drop-down list named "Periodicity"
-		And I select "Monthly salary" exact value from "Algorithm ID" drop-down list
 		And I select "Accrual" exact value from the drop-down list named "Type"		
 		And I click "Save and close" button	
 	* Create third element (deduction)

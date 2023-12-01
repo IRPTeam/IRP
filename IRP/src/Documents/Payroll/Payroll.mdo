@@ -60,6 +60,8 @@
   <registerRecords>AccumulationRegister.R5021T_Revenues</registerRecords>
   <registerRecords>AccumulationRegister.R9510B_SalaryPayment</registerRecords>
   <registerRecords>AccumulationRegister.R3027B_EmployeeCashAdvance</registerRecords>
+  <registerRecords>AccumulationRegister.R9545T_PaidVacations</registerRecords>
+  <registerRecords>AccumulationRegister.R9555T_PaidSickLeaves</registerRecords>
   <postInPrivilegedMode>true</postInPrivilegedMode>
   <unpostInPrivilegedMode>true</unpostInPrivilegedMode>
   <choiceHistoryOnInput>DontUse</choiceHistoryOnInput>
@@ -322,6 +324,74 @@
       <minValue xsi:type="core:UndefinedValue"/>
       <maxValue xsi:type="core:UndefinedValue"/>
       <fillChecking>ShowError</fillChecking>
+      <dataHistory>Use</dataHistory>
+      <fullTextSearch>Use</fullTextSearch>
+    </attributes>
+    <attributes uuid="420fc6e2-8c3d-46f0-bad5-dd69a7e9bc01">
+      <name>TotalVacationDays</name>
+      <synonym>
+        <key>en</key>
+        <value>Total vacation days</value>
+      </synonym>
+      <type>
+        <types>Number</types>
+        <numberQualifiers>
+          <precision>3</precision>
+        </numberQualifiers>
+      </type>
+      <minValue xsi:type="core:UndefinedValue"/>
+      <maxValue xsi:type="core:UndefinedValue"/>
+      <dataHistory>Use</dataHistory>
+      <fullTextSearch>Use</fullTextSearch>
+    </attributes>
+    <attributes uuid="e8aa3cc1-be49-4172-9760-0e681a72fff8">
+      <name>PaidVacationDays</name>
+      <synonym>
+        <key>en</key>
+        <value>Paid vacation days</value>
+      </synonym>
+      <type>
+        <types>Number</types>
+        <numberQualifiers>
+          <precision>3</precision>
+        </numberQualifiers>
+      </type>
+      <minValue xsi:type="core:UndefinedValue"/>
+      <maxValue xsi:type="core:UndefinedValue"/>
+      <dataHistory>Use</dataHistory>
+      <fullTextSearch>Use</fullTextSearch>
+    </attributes>
+    <attributes uuid="6ef1845c-de6f-41cc-83ae-8713878f4ac6">
+      <name>TotalSickLeaveDays</name>
+      <synonym>
+        <key>en</key>
+        <value>Total sick leave days</value>
+      </synonym>
+      <type>
+        <types>Number</types>
+        <numberQualifiers>
+          <precision>3</precision>
+        </numberQualifiers>
+      </type>
+      <minValue xsi:type="core:UndefinedValue"/>
+      <maxValue xsi:type="core:UndefinedValue"/>
+      <dataHistory>Use</dataHistory>
+      <fullTextSearch>Use</fullTextSearch>
+    </attributes>
+    <attributes uuid="dcf40b0d-b877-4a18-9cba-713564d0ebe6">
+      <name>PaidSickLeaveDays</name>
+      <synonym>
+        <key>en</key>
+        <value>Paid sick leave days</value>
+      </synonym>
+      <type>
+        <types>Number</types>
+        <numberQualifiers>
+          <precision>3</precision>
+        </numberQualifiers>
+      </type>
+      <minValue xsi:type="core:UndefinedValue"/>
+      <maxValue xsi:type="core:UndefinedValue"/>
       <dataHistory>Use</dataHistory>
       <fullTextSearch>Use</fullTextSearch>
     </attributes>

@@ -1210,6 +1210,7 @@ Function Strings(Lang) Export
 	Strings.Insert("QuestionToUser_024", NStr("en = 'Change planning period?'", Lang));
 	Strings.Insert("QuestionToUser_025", NStr("en = 'Do you want to update filled tax rates?'", Lang));
 	Strings.Insert("QuestionToUser_026", NStr("en = 'Do you want to update payment agent?'", Lang));
+	Strings.Insert("QuestionToUser_027", NStr("en = 'Filled data by employee [%1] will be cleared. Continue?'", Lang));
 #EndRegion
 
 #Region SuggestionToUser
@@ -1381,6 +1382,22 @@ Function Strings(Lang) Export
 	Strings.Insert("BgJ_Title_001",   NStr("en = 'Background job is running'", Lang));
 	Strings.Insert("BgJ_Title_002",   NStr("en = 'Load Item list'", Lang));
 #EndRegion	
+	
+#Region Salary
+
+	Strings.Insert("Salary_Err_001",   NStr("en = 'Wrong period'", Lang));
+	Strings.Insert("Salary_Err_002",   NStr("en = 'Employee schedule not selected'", Lang));
+	Strings.Insert("Salary_Err_003",   NStr("en = 'Begin Date less than End Date'", Lang));
+	
+	Strings.Insert("Salary_WeekDays_1",   NStr("en = 'Monday'", Lang));
+	Strings.Insert("Salary_WeekDays_2",   NStr("en = 'Tuesday'", Lang));
+	Strings.Insert("Salary_WeekDays_3",   NStr("en = 'Wednesday'", Lang));
+	Strings.Insert("Salary_WeekDays_4",   NStr("en = 'Thursday'", Lang));
+	Strings.Insert("Salary_WeekDays_5",   NStr("en = 'Friday'", Lang));
+	Strings.Insert("Salary_WeekDays_6",   NStr("en = 'Saturday'", Lang));
+	Strings.Insert("Salary_WeekDays_7",   NStr("en = 'Sunday'", Lang));
+	
+#EndRegion
 	
 	Return Strings;
 EndFunction

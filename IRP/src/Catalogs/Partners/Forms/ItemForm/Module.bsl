@@ -109,28 +109,28 @@ Procedure SetVisibilityAvailability(Object, Form)
 	NewFilter.RightValue = Object.Ref;
 EndProcedure
 
-&AtClient
-Procedure StaffingBeforeAddRow(Item, Cancel, Clone, Parent, IsFolder, Parameter)
-	If Not ValueIsFilled(Object.Ref) Then
-		Cancel = True;
-		// write object to continue?
-		NotifyParameters = New Structure();
-		NotifyParameters.Insert("Owner", Item);
-		Notify = New NotifyDescription("StaffingAddContinue", ThisObject, NotifyParameters);
-		ShowQueryBox(Notify, R().QuestionToUser_001, QuestionDialogMode.YesNo);
-	EndIf;	
-EndProcedure
+//&AtClient
+//Procedure StaffingBeforeAddRow(Item, Cancel, Clone, Parent, IsFolder, Parameter)
+//	If Not ValueIsFilled(Object.Ref) Then
+//		Cancel = True;
+//		// write object to continue?
+//		NotifyParameters = New Structure();
+//		NotifyParameters.Insert("Owner", Item);
+//		Notify = New NotifyDescription("StaffingAddContinue", ThisObject, NotifyParameters);
+//		ShowQueryBox(Notify, R().QuestionToUser_001, QuestionDialogMode.YesNo);
+//	EndIf;	
+//EndProcedure
 
-&AtClient
-Procedure StaffingAddContinue(Result, AdditionalParameters) Export
-	If Result = DialogReturnCode.Yes And ThisObject.CheckFilling() Then
-		Write();
-		FormParameters = New Structure();
-		FormParameters.Insert("FillingValues", New Structure("Employee", Object.Ref));
-		OpenForm("InformationRegister.T9510S_Staffing.RecordForm", FormParameters, 
-			AdditionalParameters.Owner, , , , , FormWindowOpeningMode.LockOwnerWindow);	
-	EndIf;
-EndProcedure
+//&AtClient
+//Procedure StaffingAddContinue(Result, AdditionalParameters) Export
+//	If Result = DialogReturnCode.Yes And ThisObject.CheckFilling() Then
+//		Write();
+//		FormParameters = New Structure();
+//		FormParameters.Insert("FillingValues", New Structure("Employee", Object.Ref));
+//		OpenForm("InformationRegister.T9510S_Staffing.RecordForm", FormParameters, 
+//			AdditionalParameters.Owner, , , , , FormWindowOpeningMode.LockOwnerWindow);	
+//	EndIf;
+//EndProcedure
 
 #EndRegion
 

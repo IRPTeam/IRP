@@ -167,7 +167,7 @@
 		</right>
 	</object>
 	<object>
-		<name>InformationRegister.T9530S_WorkDays.Resource.CountDays</name>
+		<name>InformationRegister.T9530S_WorkDays.Resource.CountDaysHours</name>
 		<right>
 			<name>Edit</name>
 			<value>false</value>
@@ -1009,7 +1009,7 @@
 		</right>
 	</object>
 	<object>
-		<name>InformationRegister.T9530S_WorkDays.Dimension.BeginDate</name>
+		<name>InformationRegister.T9530S_WorkDays.Dimension.Date</name>
 		<right>
 			<name>Edit</name>
 			<value>false</value>
@@ -2084,13 +2084,6 @@
 	</object>
 	<object>
 		<name>InformationRegister.T9510S_Staffing.StandardAttribute.Period</name>
-		<right>
-			<name>Edit</name>
-			<value>false</value>
-		</right>
-	</object>
-	<object>
-		<name>InformationRegister.T9510S_Staffing.Resource.Company</name>
 		<right>
 			<name>Edit</name>
 			<value>false</value>
@@ -6224,13 +6217,6 @@
 		</right>
 	</object>
 	<object>
-		<name>InformationRegister.T9530S_WorkDays.Dimension.EndDate</name>
-		<right>
-			<name>Edit</name>
-			<value>false</value>
-		</right>
-	</object>
-	<object>
 		<name>Constant.UseCashTransaction</name>
 		<right>
 			<name>Read</name>
@@ -8747,7 +8733,7 @@
 		</right>
 	</object>
 	<object>
-		<name>InformationRegister.T9530S_WorkDays.Dimension.AccrualAndDeductionType</name>
+		<name>InformationRegister.T9530S_WorkDays.Dimension.EmployeeSchedule</name>
 		<right>
 			<name>Edit</name>
 			<value>false</value>
@@ -14007,7 +13993,7 @@
 		</right>
 	</object>
 	<object>
-		<name>InformationRegister.T9520S_TimeSheetInfo.Dimension.AccrualAndDeductionType</name>
+		<name>InformationRegister.T9520S_TimeSheetInfo.Dimension.EmployeeSchedule</name>
 		<right>
 			<name>Edit</name>
 			<value>false</value>
@@ -16466,6 +16452,192 @@
 	</object>
 	<object>
 		<name>Subsystem.Reports.Subsystem.Accounting</name>
+		<right>
+			<name>View</name>
+			<value>true</value>
+		</right>
+	</object>
+	<object>
+		<name>Document.AdditionalAccrual</name>
+		<right>
+			<name>Read</name>
+			<value>true</value>
+		</right>
+		<right>
+			<name>View</name>
+			<value>true</value>
+		</right>
+		<right>
+			<name>InputByString</name>
+			<value>true</value>
+		</right>
+	</object>
+	<object>
+		<name>Document.EmployeeHiring</name>
+		<right>
+			<name>Read</name>
+			<value>true</value>
+		</right>
+		<right>
+			<name>View</name>
+			<value>true</value>
+		</right>
+		<right>
+			<name>InputByString</name>
+			<value>true</value>
+		</right>
+	</object>
+	<object>
+		<name>Document.EmployeeFiring</name>
+		<right>
+			<name>Read</name>
+			<value>true</value>
+		</right>
+		<right>
+			<name>View</name>
+			<value>true</value>
+		</right>
+		<right>
+			<name>InputByString</name>
+			<value>true</value>
+		</right>
+	</object>
+	<object>
+		<name>Document.EmployeeTransfer</name>
+		<right>
+			<name>Read</name>
+			<value>true</value>
+		</right>
+		<right>
+			<name>View</name>
+			<value>true</value>
+		</right>
+		<right>
+			<name>InputByString</name>
+			<value>true</value>
+		</right>
+	</object>
+	<object>
+		<name>Document.EmployeeSickLeave</name>
+		<right>
+			<name>Read</name>
+			<value>true</value>
+		</right>
+		<right>
+			<name>View</name>
+			<value>true</value>
+		</right>
+		<right>
+			<name>InputByString</name>
+			<value>true</value>
+		</right>
+	</object>
+	<object>
+		<name>Document.AdditionalDeduction</name>
+		<right>
+			<name>Read</name>
+			<value>true</value>
+		</right>
+		<right>
+			<name>View</name>
+			<value>true</value>
+		</right>
+		<right>
+			<name>InputByString</name>
+			<value>true</value>
+		</right>
+	</object>
+	<object>
+		<name>Catalog.EmployeeSchedule</name>
+		<right>
+			<name>Read</name>
+			<value>true</value>
+		</right>
+		<right>
+			<name>View</name>
+			<value>true</value>
+		</right>
+		<right>
+			<name>InputByString</name>
+			<value>true</value>
+		</right>
+	</object>
+	<object>
+		<name>Document.EmployeeVacation</name>
+		<right>
+			<name>Read</name>
+			<value>true</value>
+		</right>
+		<right>
+			<name>View</name>
+			<value>true</value>
+		</right>
+		<right>
+			<name>InputByString</name>
+			<value>true</value>
+		</right>
+	</object>
+	<object>
+		<name>InformationRegister.T9540S_EmployeeVacations</name>
+		<right>
+			<name>Read</name>
+			<value>true</value>
+		</right>
+		<right>
+			<name>View</name>
+			<value>true</value>
+		</right>
+	</object>
+	<object>
+		<name>InformationRegister.T9550S_EmployeeSickLeave</name>
+		<right>
+			<name>Read</name>
+			<value>true</value>
+		</right>
+		<right>
+			<name>View</name>
+			<value>true</value>
+		</right>
+	</object>
+	<object>
+		<name>AccumulationRegister.R9570T_AdditionalDeduction</name>
+		<right>
+			<name>Read</name>
+			<value>true</value>
+		</right>
+		<right>
+			<name>View</name>
+			<value>true</value>
+		</right>
+	</object>
+	<object>
+		<name>AccumulationRegister.R9545T_PaidVacations</name>
+		<right>
+			<name>Read</name>
+			<value>true</value>
+		</right>
+		<right>
+			<name>View</name>
+			<value>true</value>
+		</right>
+	</object>
+	<object>
+		<name>AccumulationRegister.R9560T_AdditionalAccrual</name>
+		<right>
+			<name>Read</name>
+			<value>true</value>
+		</right>
+		<right>
+			<name>View</name>
+			<value>true</value>
+		</right>
+	</object>
+	<object>
+		<name>AccumulationRegister.R9555T_PaidSickLeaves</name>
+		<right>
+			<name>Read</name>
+			<value>true</value>
+		</right>
 		<right>
 			<name>View</name>
 			<value>true</value>

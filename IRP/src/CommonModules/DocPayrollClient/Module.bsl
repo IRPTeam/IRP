@@ -82,6 +82,10 @@ Procedure PayrollListsAmountOnChange(Object, Form, Item, TableName, CurrentData 
 	ViewClient_V2.PayrollListsAmountOnChange(Object, Form, TableName, CurrentData);
 EndProcedure
 
+Procedure PayrollListsEmployeeOnChange(Object, Form, Item, TableName, CurrentData = Undefined) Export
+	ViewClient_V2.PayrollListsEmployeeOnChange(Object, Form, TableName, CurrentData);
+EndProcedure
+
 #EndRegion
 
 #EndRegion

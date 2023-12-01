@@ -422,8 +422,17 @@ Function GetChain()
 	Chain.Insert("ChangeShipmentModeByTransactionType"   , GetChainLink("ChangeShipmentModeByTransactionTypeExecute"));
 	
 	Chain.Insert("ChangeResponsiblePersonSenderByFixedAsset" , GetChainLink("ChangeResponsiblePersonSenderByFixedAssetExecute"));
-	Chain.Insert("ChangeBusinessUnitSenderByFixedAsset"            , GetChainLink("ChangeBusinessUnitSenderByFixedAssetExecute"));
+	Chain.Insert("ChangeBusinessUnitSenderByFixedAsset"      , GetChainLink("ChangeBusinessUnitSenderByFixedAssetExecute"));
 	
+	Chain.Insert("ChangePositionByEmployee"         , GetChainLink("ChangePositionByEmployeeExecute"));	
+	Chain.Insert("ChangeEmployeeScheduleByEmployee" , GetChainLink("ChangeEmployeeScheduleByEmployeeExecute"));
+	Chain.Insert("ChangeProfitLossCenterByEmployee" , GetChainLink("ChangeProfitLossCenterByEmployeeExecute"));
+	Chain.Insert("ChangeBranchByEmployee"           , GetChainLink("ChangeBranchByEmployeeExecute"));
+	Chain.Insert("ChangeAccrualTypeByCompany" , GetChainLink("ChangeAccrualTypeByCompanyExecute"));
+	Chain.Insert("ChangeSalaryByPosition"     , GetChainLink("ChangeSalaryByPositionExecute"));
+	Chain.Insert("ChangeSalaryByPositionOrEmployee"       , GetChainLink("ChangeSalaryByPositionOrEmployeeExecute"));
+	Chain.Insert("ChangeAccrualTypeByPositionOrEmployee"  , GetChainLink("ChangeAccrualTypeByPositionOrEmployeeExecute"));
+
 	// Extractors
 	Chain.Insert("ExtractDataAgreementApArPostingDetail"   , GetChainLink("ExtractDataAgreementApArPostingDetailExecute"));
 	Chain.Insert("ExtractDataCurrencyFromAccount"          , GetChainLink("ExtractDataCurrencyFromAccountExecute"));
@@ -4049,6 +4058,113 @@ Function ChangeEndDateByPlanningPeriodExecute(Options) Export
 		Return Undefined;
 	EndIf;
 	Return CommonFunctionsServer.GetRefAttribute(Options.PlanningPeriod, "EndDate");
+EndFunction
+
+#EndRegion
+
+#Region CHANGE_POSITION_BY_EMPLOYEE
+
+Function ChangePositionByEmployeeOptions() Export
+	Return GetChainLinkOptions("Ref, Date, Company, Employee");
+EndFunction
+
+Function ChangePositionByEmployeeExecute(Options) Export
+	Result = SalaryServer.GetEmployeeInfo(Options.Ref, Options.Date, Options.Company, Options.Employee);
+	Return Result.Position;
+EndFunction
+
+#EndRegion
+
+#Region CHANGE_EMPLOYEE_SCHEDULE_BY_EMPLOYEE
+
+Function ChangeEmployeeScheduleByEmployeeOptions() Export
+	Return GetChainLinkOptions("Ref, Date, Company, Employee");
+EndFunction
+
+Function ChangeEmployeeScheduleByEmployeeExecute(Options) Export
+	Result = SalaryServer.GetEmployeeInfo(Options.Ref, Options.Date, Options.Company, Options.Employee);
+	Return Result.EmployeeSchedule;
+EndFunction
+
+#EndRegion
+
+#Region CHANGE_PROFIT_LOSS_CENTER_BY_EMPLOYEE
+
+Function ChangeProfitLossCenterByEmployeeOptions() Export
+	Return GetChainLinkOptions("Ref, Date, Company, Employee");
+EndFunction
+
+Function ChangeProfitLossCenterByEmployeeExecute(Options) Export
+	Result = SalaryServer.GetEmployeeInfo(Options.Ref, Options.Date, Options.Company, Options.Employee);
+	Return Result.ProfitLossCenter;
+EndFunction
+
+#EndRegion
+
+#Region CHANGE_BRANCH_BY_EMPLOYEE
+
+Function ChangeBranchByEmployeeOptions() Export
+	Return GetChainLinkOptions("Ref, Date, Company, Employee");
+EndFunction
+
+Function ChangeBranchByEmployeeExecute(Options) Export
+	Result = SalaryServer.GetEmployeeInfo(Options.Ref, Options.Date, Options.Company, Options.Employee);
+	Return Result.Branch;
+EndFunction
+
+#EndRegion
+
+#Region CHANGE_ACCRUAL_TYPE_BY_COMPANY
+
+Function ChangeAccrualTypeByCompanyOptions() Export
+	Return GetChainLinkOptions("Company");
+EndFunction
+
+Function ChangeAccrualTypeByCompanyExecute(Options) Export
+	If Not ValueIsFilled(Options.Company) Then
+		Return Undefined;
+	EndIf;
+	
+	Return CommonFunctionsServer.GetRefAttribute(Options.Company, "SalaryBasicPayroll");
+EndFunction
+
+#EndRegion
+
+#Region CHANGE_SALARY_BY_POSITION
+	
+Function ChangeSalaryByPositionOptions() Export
+	Return GetChainLinkOptions("Ref, Date, Position, AccrualType");
+EndFunction
+	
+Function ChangeSalaryByPositionExecute(Options) Export
+	Result = SalaryServer.GetSalaryValue(Options.Ref, Options.Date, Options.Position, Options.AccrualType);
+	Return Result;
+EndFunction
+
+#EndRegion
+
+#Region CHANGE_SALARY_BY_POSITION_OR_PERSONAL_SALARY
+
+Function ChangeSalaryByPositionOrEmployeeOptions() Export
+	Return GetChainLinkOptions("Ref, Date, Employee, Position, AccrualType");
+EndFunction
+	
+Function ChangeSalaryByPositionOrEmployeeExecute(Options) Export
+	Result = SalaryServer.GetSalaryByPositionOrEmployee(Options.Ref, Options.Date, Options.Employee, Options.Position, Options.AccrualType);
+	Return New Structure("Salary, PersonalSalary", Result.Salary, Result.PersonalSalary);
+EndFunction
+
+#EndRegion
+
+#Region CHANGE_ACCRUAL_TYPE_BY_POSITION_OR_EMPLOYEE
+
+Function ChangeAccrualTypeByPositionOrEmployeeOptions() Export
+	Return GetChainLinkOptions("Ref, Date, Employee, Position");
+EndFunction
+	
+Function ChangeAccrualTypeByPositionOrEmployeeExecute(Options) Export
+	Result = SalaryServer.GetAccrualTypeByPositionOrEmployee(Options.Ref, Options.Date, Options.Employee, Options.Position);
+	Return Result;
 EndFunction
 
 #EndRegion

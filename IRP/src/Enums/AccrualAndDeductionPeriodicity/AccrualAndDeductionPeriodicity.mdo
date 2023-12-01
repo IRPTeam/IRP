@@ -26,4 +26,11 @@
       <value>By period</value>
     </synonym>
   </enumValues>
+  <enumValues uuid="8d74e46e-bab9-4515-909e-296a0905041f">
+    <name>OneTime</name>
+    <synonym>
+      <key>en</key>
+      <value>One time</value>
+    </synonym>
+  </enumValues>
 </mdclass:Enum>

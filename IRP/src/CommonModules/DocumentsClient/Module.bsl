@@ -1082,13 +1082,17 @@ Function GetFormItemNames()
 				|ReceiptFromConsignorKey, ReceiptFromConsignorUseSerialLotNumber,
 				|SourceOfOrigins,
 				|ProductionDurationsListKey, ProductionCostsListKey,
-				|PayrollListKey, TimeSheetListKey, TimeSheetListVisible, TimeSheetListLineNumber, TimeSheetListEmployee, TimeSheetListPosition,
+				|PayrollListKey, 
+				|TimeSheetListKey, TimeSheetListVisible, TimeSheetListLineNumber, 
+				|TimeSheetListEmployee, TimeSheetListPosition, TimeSheetListEmployeeSchedule, TimeSheetListEmployeeSchedule,
+				|TimeSheetListIsVacation, TimeSheetListIsSickLeave,
 				|EmployeeCashAdvanceKey, AdvanceFromRetailCustomersKey, SalaryPaymentKey, EmployeeCashAdvanceIsFixedCurrency,
 				|ItemListPurchaseOrderKey, ItemListSalesOrderKey,
 				|AccrualListKey, DeductionListKey, CashAdvanceDeductionListKey,
 				|ItemListConsignor, isControlCodeString,
 				|AccountPayableOtherKey, AccountReceivableOtherKey, CashInTransitKey, CashInTransitIsFixedCurrency,
-				|FixedAssetsKey";
+				|FixedAssetsKey,
+				|AccrualListTotalVacationDays, AccrualListPaidVacationDays, AccrualListTotalSickLeaveDays ,AccrualListPaidSickLeaveDays";
 	Return ItemNames;
 EndFunction	
 

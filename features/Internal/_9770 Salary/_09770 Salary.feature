@@ -317,16 +317,17 @@ Scenario: _097710 create T9530S_WorkDays
 	And I close all client application windows
 	And In the command interface I select "Salary" "T9530 Work days"
 	And I click Choice button of the field named "EmployeeScheduleFilter"
-	* 5 working days / 2 days off (day)
+	* 5 working days / 2 days off (day)	
 		And I go to line in "List" table
 			| 'Code' | 'Description'                       | 'Type' |
 			| '1'    | '5 working days / 2 days off (day)' | 'Day'  |
 		And I select current line in "List" table
-		And I click "Create schedule" button
 		And I click Choice button of the field named "Period"
 		And I input "01.11.2023" text in the field named "DateBegin"
 		And I input "30.11.2023" text in the field named "DateEnd"
 		And I click the button named "Select"	
+		And I click "Create schedule" button
+		Then the form attribute named "Period" became equal to "01.11.2023 - 30.11.2023"			
 		Then the form attribute named "EmployeeSchedule" became equal to "5 working days / 2 days off (day)"
 		And the editing text of form attribute named "ScheduleVariant" became equal to "Week with days off"
 		And "Weekends" table became equal

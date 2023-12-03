@@ -140,16 +140,16 @@
     <types>DocumentRef.DecommissioningOfFixedAsset</types>
     <types>DocumentRef.FixedAssetTransfer</types>
     <types>DocumentRef.ModernizationOfFixedAsset</types>
-    <types>DocumentRef.VisitorCounter</types>
-    <types>DocumentRef.VendorsAdvancesClosing</types>
-    <types>DocumentRef.DepreciationCalculation</types>
-    <types>DocumentRef.ForeignCurrencyRevaluation</types>
-    <types>DocumentRef.CustomersAdvancesClosing</types>
-    <types>DocumentRef.ChequeBondTransactionItem</types>
-    <types>DocumentRef.CalculationMovementCosts</types>
-    <types>DocumentRef.BatchReallocateOutgoing</types>
-    <types>DocumentRef.BatchReallocateIncoming</types>
+    <types>DocumentRef.EmployeeFiring</types>
+    <types>DocumentRef.EmployeeHiring</types>
+    <types>DocumentRef.EmployeeSickLeave</types>
+    <types>DocumentRef.EmployeeTransfer</types>
+    <types>DocumentRef.EmployeeVacation</types>
+    <types>DocumentRef.AdditionalDeduction</types>
     <types>DocumentRef.AdditionalRevenueAllocation</types>
     <types>DocumentRef.AdditionalCostAllocation</types>
+    <types>DocumentRef.AdditionalAccrual</types>
+    <types>CatalogRef.EmployeeSchedule</types>
+    <types>DocumentRef.VisitorCounter</types>
   </type>
 </mdclass:DefinedType>

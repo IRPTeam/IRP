@@ -2483,6 +2483,25 @@ Function BindDate(Parameters)
 		"StepChangeResponsiblePersonSenderByFixedAsset,
 		|StepChangeBusinessUnitSenderByFixedAsset");
 	
+	Binding.Insert("EmployeeTransfer", 
+		"StepChangeFromPositionByEmployee,
+		|StepChangeFromAccrualTypeByPositionOrEmployee,
+		|StepChangeFromSalaryByPositionOrEmployee,
+		|StepChangeToAccrualTypeByPositionOrEmployee,
+		|StepChangeToSalaryByPositionOrEmployee,
+		|StepChangeEmployeeScheduleByEmployee,
+		|StepChangeProfitLossCenterByEmployee,
+		|StepChangeBranchByEmployee");
+	
+	
+	Binding.Insert("EmployeeFiring", 
+		"StepChangePositionByEmployee,
+		|StepChangeEmployeeScheduleByEmployee,
+		|StepChangeProfitLossCenterByEmployee,
+		|StepChangeBranchByEmployee");
+
+	Binding.Insert("EmployeeHiring", "StepChangeSalaryByPosition");
+	
 	Return BindSteps("BindVoid", DataPath, Binding, Parameters, "BindDate");
 EndFunction
 
@@ -2654,6 +2673,21 @@ Function BindCompany(Parameters)
 		"StepChangeResponsiblePersonSenderByFixedAsset,
 		|StepChangeBusinessUnitSenderByFixedAsset");
 	
+	Binding.Insert("EmployeeTransfer", 
+		"StepChangeFromPositionByEmployee,
+		|StepChangeEmployeeScheduleByEmployee,
+		|StepChangeProfitLossCenterByEmployee,
+		|StepChangeBranchByEmployee");
+	
+	
+	Binding.Insert("EmployeeFiring", 
+		"StepChangePositionByEmployee,
+		|StepChangeEmployeeScheduleByEmployee,
+		|StepChangeProfitLossCenterByEmployee,
+		|StepChangeBranchByEmployee");
+	
+	Binding.Insert("EmployeeHiring", "StepChangeAccrualTypeByCompany");
+	
 	Return BindSteps("BindVoid", DataPath, Binding, Parameters, "BindCompany");
 EndFunction
 
@@ -2728,6 +2762,22 @@ Function BindBranch(Parameters)
 		
 	Return BindSteps("BindVoid", DataPath, Binding, Parameters, "BindBranch");
 EndFunction
+
+// Branch.ChangeBranchByEmployee.Step
+Procedure StepChangeBranchByEmployee(Parameters, Chain) Export
+	Chain.ChangeBranchByEmployee.Enable = True;
+	If Chain.Idle Then
+		Return;
+	EndIf;
+	Chain.ChangeBranchByEmployee.Setter = "SetBranch";
+	Options = ModelClientServer_V2.ChangeBranchByEmployeeOptions();
+	Options.Employee  = GetEmployee(Parameters);
+	Options.Date      = GetDate(Parameters);
+	Options.Company   = GetCompany(Parameters);
+	Options.Ref       = Parameters.Object.Ref;
+	Options.StepName = "StepChangeBranchByEmployee";
+	Chain.ChangeBranchByEmployee.Options.Add(Options);
+EndProcedure
 
 #EndRegion
 
@@ -3154,6 +3204,488 @@ Procedure StepChangeCourierByTransactionType(Parameters, Chain) Export
 	Options.CurrentCourier        = GetCourier(Parameters);
 	Options.StepName = "StepChangeCourierByTransactionType";
 	Chain.ChangeCourierByTransactionType.Options.Add(Options);
+EndProcedure
+
+#EndRegion
+
+#Region EMPLOYEE
+
+// Employee.OnChange
+Procedure EmployeeOnChange(Parameters) Export
+	AddViewNotify("OnSetEmployeeNotify", Parameters);
+	Binding = BindEmployee(Parameters);
+	ModelClientServer_V2.EntryPoint(Binding.StepsEnabler, Parameters);
+EndProcedure
+
+// Employee.Get
+Function GetEmployee(Parameters)
+	Return GetPropertyObject(Parameters, BindEmployee(Parameters).DataPath);
+EndFunction
+
+// Employee.Bind
+Function BindEmployee(Parameters)
+	DataPath = "Employee";
+	Binding = New Structure();
+	
+	Binding.Insert("EmployeeTransfer", 
+		"StepChangeFromPositionByEmployee,
+		|StepChangeFromAccrualTypeByPositionOrEmployee,
+		|StepChangeFromSalaryByPositionOrEmployee,
+		|StepChangeToAccrualTypeByPositionOrEmployee,
+		|StepChangeToSalaryByPositionOrEmployee,
+		|StepChangeEmployeeScheduleByEmployee,
+		|StepChangeProfitLossCenterByEmployee,
+		|StepChangeBranchByEmployee");
+	
+	
+	Binding.Insert("EmployeeFiring", 
+		"StepChangePositionByEmployee,
+		|StepChangeEmployeeScheduleByEmployee,
+		|StepChangeProfitLossCenterByEmployee,
+		|StepChangeBranchByEmployee");
+	
+	Return BindSteps("BindVoid", DataPath, Binding, Parameters, "BindEmployee");
+EndFunction
+
+#EndRegion
+
+#Region POSITION
+
+// Position.OnChange
+Procedure PositionOnChange(Parameters) Export
+	Binding = BindPosition(Parameters);
+	ModelClientServer_V2.EntryPoint(Binding.StepsEnabler, Parameters);
+EndProcedure
+
+// Position.Set
+Procedure SetPosition(Parameters, Results) Export
+	Binding = BindPosition(Parameters);
+	SetterObject(Binding.StepsEnabler, Binding.DataPath, Parameters, Results);
+EndProcedure
+
+// Position.Get
+Function GetPosition(Parameters)
+	Return GetPropertyObject(Parameters, BindPosition(Parameters).DataPath);
+EndFunction
+
+// Position.Bind
+Function BindPosition(Parameters)
+	DataPath = New Map();
+	DataPath.Insert("EmployeeTransfer", "FromPosition");
+	DataPath.Insert("EmployeeFiring"  , "Position");
+	DataPath.Insert("EmployeeHiring"  , "Position");
+	Binding = New Structure();
+	Binding.Insert("EmployeeHiring", "StepChangeSalaryByPosition");
+	Return BindSteps("BindVoid", DataPath, Binding, Parameters, "BindPosition");
+EndFunction
+
+// Position.ChangePositionByEmployee.Step
+Procedure StepChangePositionByEmployee(Parameters, Chain) Export
+	Chain.ChangePositionByEmployee.Enable = True;
+	If Chain.Idle Then
+		Return;
+	EndIf;
+	Chain.ChangePositionByEmployee.Setter = "SetPosition";
+	Options = ModelClientServer_V2.ChangePositionByEmployeeOptions();
+	Options.Employee  = GetEmployee(Parameters);
+	Options.Date      = GetDate(Parameters);
+	Options.Company   = GetCompany(Parameters);
+	Options.Ref       = Parameters.Object.Ref;	
+	Options.StepName = "StepChangePositionByEmployee";
+	Chain.ChangePositionByEmployee.Options.Add(Options);
+EndProcedure
+
+#EndRegion
+
+#Region FROM_POSITION
+
+// FromPosition.Set
+Procedure SetFromPosition(Parameters, Results) Export
+	Binding = BindFromPosition(Parameters);
+	SetterObject(Binding.StepsEnabler, Binding.DataPath, Parameters, Results);
+EndProcedure
+
+// FromPosition.Get
+Function GetFromPosition(Parameters)
+	Return GetPropertyObject(Parameters, BindFromPosition(Parameters).DataPath);
+EndFunction
+
+// FromPosition.Bind
+Function BindFromPosition(Parameters)
+	DataPath = "FromPosition";
+	Binding = New Structure();
+	
+	Binding.Insert("EmployeeTransfer", 
+		"StepChangeFromAccrualTypeByPositionOrEmployee,
+		|StepChangeFromSalaryByPositionOrEmployee");
+		
+	Return BindSteps("BindVoid", DataPath, Binding, Parameters, "BindFromPosition");
+EndFunction
+
+// Position.ChangeFromPositionByEmployee.Step
+Procedure StepChangeFromPositionByEmployee(Parameters, Chain) Export
+	Chain.ChangePositionByEmployee.Enable = True;
+	If Chain.Idle Then
+		Return;
+	EndIf;
+	Chain.ChangePositionByEmployee.Setter = "SetFromPosition";
+	Options = ModelClientServer_V2.ChangePositionByEmployeeOptions();
+	Options.Employee  = GetEmployee(Parameters);
+	Options.Date      = GetDate(Parameters);
+	Options.Company   = GetCompany(Parameters);
+	Options.Ref       = Parameters.Object.Ref;	
+	Options.StepName = "StepChangeFromPositionByEmployee";
+	Chain.ChangePositionByEmployee.Options.Add(Options);
+EndProcedure
+
+#EndRegion
+
+#Region TO_POSITION
+
+// ToPosition.OnChange
+Procedure ToPositionOnChange(Parameters) Export
+	Binding = BindToPosition(Parameters);
+	ModelClientServer_V2.EntryPoint(Binding.StepsEnabler, Parameters);
+EndProcedure
+
+// ToPosition.Set
+Procedure SetToPosition(Parameters, Results) Export
+	Binding = BindToPosition(Parameters);
+	SetterObject(Binding.StepsEnabler, Binding.DataPath, Parameters, Results);
+EndProcedure
+
+// ToPosition.Get
+Function GetToPosition(Parameters)
+	Return GetPropertyObject(Parameters, BindToPosition(Parameters).DataPath);
+EndFunction
+
+// ToPosition.Bind
+Function BindToPosition(Parameters)
+	DataPath = "ToPosition";
+	Binding = New Structure();
+	
+	Binding.Insert("EmployeeTransfer", 
+		"StepChangeToAccrualTypeByPositionOrEmployee,
+		|StepChangeToSalaryByPositionOrEmployee");
+
+	Return BindSteps("BindVoid", DataPath, Binding, Parameters, "BindToPosition");
+EndFunction
+
+#EndRegion
+
+#Region ACCRUAL_TYPE
+
+// AccrualType.OnChange
+Procedure AccrualTypeOnChange(Parameters) Export
+	Binding = BindAccrualType(Parameters);
+	ModelClientServer_V2.EntryPoint(Binding.StepsEnabler, Parameters);
+EndProcedure
+
+// AccrualType.Set
+Procedure SetAccrualType(Parameters, Results) Export
+	Binding = BindAccrualType(Parameters);
+	SetterObject(Binding.StepsEnabler, Binding.DataPath, Parameters, Results);
+EndProcedure
+
+// AccrualType.Get
+Function GetAccrualType(Parameters)
+	Return GetPropertyObject(Parameters, BindAccrualType(Parameters).DataPath);
+EndFunction
+
+// AccrualType.Bind
+Function BindAccrualType(Parameters)
+	DataPath = "AccrualType";
+	Binding = New Structure();
+	Binding.Insert("EmployeeHiring", "StepChangeSalaryByPosition");
+	Return BindSteps("BindVoid", DataPath, Binding, Parameters, "BindAccrualType");
+EndFunction
+
+// AccrualType.ChangeAccrualTypeByCompany.Step
+Procedure StepChangeAccrualTypeByCompany(Parameters, Chain) Export
+	Chain.ChangeAccrualTypeByCompany.Enable = True;
+	If Chain.Idle Then
+		Return;
+	EndIf;
+	Chain.ChangeAccrualTypeByCompany.Setter = "SetAccrualType";
+	Options = ModelClientServer_V2.ChangeAccrualTypeByCompanyOptions();
+	Options.Company   = GetCompany(Parameters);
+	Options.StepName = "StepChangeAccrualTypeByCompany";
+	Chain.ChangeAccrualTypeByCompany.Options.Add(Options);
+EndProcedure
+
+#EndRegion
+
+#Region FROM_ACCRUAL_TYPE
+
+// FromAccrualType.Set
+Procedure SetFromAccrualType(Parameters, Results) Export
+	Binding = BindFromAccrualType(Parameters);
+	SetterObject(Binding.StepsEnabler, Binding.DataPath, Parameters, Results);
+EndProcedure
+
+// FromAccrualType.Get
+Function GetFromAccrualType(Parameters)
+	Return GetPropertyObject(Parameters, BindFromAccrualType(Parameters).DataPath);
+EndFunction
+
+// FromAccrualType.Bind
+Function BindFromAccrualType(Parameters)
+	DataPath = "FromAccrualType";
+	Binding = New Structure();
+	Binding.Insert("EmployeeTransfer", "StepChangeFromSalaryByPositionOrEmployee");
+	Return BindSteps("BindVoid", DataPath, Binding, Parameters, "BindFromAccrualType");
+EndFunction
+
+// FromAccrualType.ChangeFromAccrualTypeByPositionOrEmployee.Step
+Procedure StepChangeFromAccrualTypeByPositionOrEmployee(Parameters, Chain) Export
+	Chain.ChangeAccrualTypeByPositionOrEmployee.Enable = True;
+	If Chain.Idle Then
+		Return;
+	EndIf;
+	Chain.ChangeAccrualTypeByPositionOrEmployee.Setter = "SetFromAccrualType";
+	Options = ModelClientServer_V2.ChangeAccrualTypeByPositionOrEmployeeOptions();
+	Options.Date       = GetDate(Parameters);
+	Options.Ref        = Parameters.Object.Ref;
+	Options.Employee   = GetEmployee(Parameters);
+	Options.Position   = GetFromPosition(Parameters);
+	Options.StepName = "StepChangeFromAccrualTypeByPositionOrEmployee";
+	Chain.ChangeAccrualTypeByPositionOrEmployee.Options.Add(Options);
+EndProcedure
+
+#EndRegion
+
+#Region TO_ACCRUAL_TYPE
+
+// ToAccrualType.OnChange
+Procedure ToAccrualTypeOnChange(Parameters) Export
+	Binding = BindToAccrualType(Parameters);
+	ModelClientServer_V2.EntryPoint(Binding.StepsEnabler, Parameters);
+EndProcedure
+
+// ToAccrualType.Set
+Procedure SetToAccrualType(Parameters, Results) Export
+	Binding = BindToAccrualType(Parameters);
+	SetterObject(Binding.StepsEnabler, Binding.DataPath, Parameters, Results);
+EndProcedure
+
+// ToAccrualType.Get
+Function GetToAccrualType(Parameters)
+	Return GetPropertyObject(Parameters, BindToAccrualType(Parameters).DataPath);
+EndFunction
+
+// ToAccrualType.Bind
+Function BindToAccrualType(Parameters)
+	DataPath = "ToAccrualType";
+	Binding = New Structure();
+	Binding.Insert("EmployeeTransfer", "StepChangeToSalaryByPositionOrEmployee");
+	Return BindSteps("BindVoid", DataPath, Binding, Parameters, "BindToAccrualType");
+EndFunction
+
+// ToAccrualType.ChangeToAccrualTypeByPositionOrEmployee.Step
+Procedure StepChangeToAccrualTypeByPositionOrEmployee(Parameters, Chain) Export
+	Chain.ChangeAccrualTypeByPositionOrEmployee.Enable = True;
+	If Chain.Idle Then
+		Return;
+	EndIf;
+	Chain.ChangeAccrualTypeByPositionOrEmployee.Setter = "SetToAccrualType";
+	Options = ModelClientServer_V2.ChangeAccrualTypeByPositionOrEmployeeOptions();
+	Options.Date       = GetDate(Parameters);
+	Options.Ref        = Parameters.Object.Ref;
+	Options.Employee   = GetEmployee(Parameters);
+	Options.Position   = GetToPosition(Parameters);
+	Options.StepName = "StepChangeToAccrualTypeByPositionOrEmployee";
+	Chain.ChangeAccrualTypeByPositionOrEmployee.Options.Add(Options);
+EndProcedure
+
+#EndRegion
+
+#Region SALARY
+
+// Salary.Set
+Procedure SetSalary(Parameters, Results) Export
+	Binding = BindSalary(Parameters);
+	SetterObject(Binding.StepsEnabler, Binding.DataPath, Parameters, Results);
+EndProcedure
+
+// Salary.Bind
+Function BindSalary(Parameters)
+	DataPath = "Salary";
+	Binding = New Structure();
+	Return BindSteps("BindVoid", DataPath, Binding, Parameters, "BindSalary");
+EndFunction
+
+// Salary.ChangeSalaryByPosition.Step
+Procedure StepChangeSalaryByPosition(Parameters, Chain) Export
+	Chain.ChangeSalaryByPosition.Enable = True;
+	If Chain.Idle Then
+		Return;
+	EndIf;
+	Chain.ChangeSalaryByPosition.Setter = "SetSalary";
+	Options = ModelClientServer_V2.ChangeSalaryByPositionOptions();
+	Options.Position    = GetPosition(Parameters);
+	Options.Date        = GetDate(Parameters);
+	Options.AccrualType = GetAccrualType(Parameters);
+	Options.Ref         = Parameters.Object.Ref;	
+	Options.StepName = "StepChangeSalaryByPosition";
+	Chain.ChangeSalaryByPosition.Options.Add(Options);
+EndProcedure
+
+#EndRegion
+
+#Region FROM_SALARY
+
+// FromSalary.MultiSet
+Procedure MultiSetFromSalary(Parameters, Results) Export
+	ResourceToBinding = New Map();
+	ResourceToBinding.Insert("Salary"         , BindFromSalary(Parameters));
+	ResourceToBinding.Insert("PersonalSalary" , BindFromPersonalSalary(Parameters));
+	MultiSetterObject(Parameters, Results, ResourceToBinding, "OnSetSalaryAmountNotify");
+EndProcedure
+
+// FromSalary.Bind
+Function BindFromSalary(Parameters)
+	DataPath = "FromSalary";
+	Binding = New Structure();
+	Return BindSteps("BindVoid", DataPath, Binding, Parameters, "BindFromSalary");
+EndFunction
+
+// FromPersonalSalary.Bind
+Function BindFromPersonalSalary(Parameters)
+	DataPath = "FromPersonalSalary";
+	Binding = New Structure();
+	Return BindSteps("BindVoid", DataPath, Binding, Parameters, "BindFromPersonalSalary");
+EndFunction
+
+// FromSalary.ChangeSalaryByPositionOrEmployee.Step
+Procedure StepChangeFromSalaryByPositionOrEmployee(Parameters, Chain) Export
+	Chain.ChangeSalaryByPositionOrEmployee.Enable = True;
+	If Chain.Idle Then
+		Return;
+	EndIf;
+	Chain.ChangeSalaryByPositionOrEmployee.Setter = "MultiSetFromSalary";
+	Options = ModelClientServer_V2.ChangeSalaryByPositionOrEmployeeOptions();
+	Options.Employee    = GetEmployee(Parameters);
+	Options.Position    = GetFromPosition(Parameters);
+	Options.Date        = GetDate(Parameters);
+	Options.AccrualType = GetFromAccrualType(Parameters);
+	Options.Ref         = Parameters.Object.Ref;	
+	Options.StepName = "StepChangeFromSalaryByPositionOrEmployee";
+	Chain.ChangeSalaryByPositionOrEmployee.Options.Add(Options);
+EndProcedure
+
+#EndRegion
+
+#Region TO_SALARY
+
+// ToSalary.MultiSet
+Procedure MultiSetToSalary(Parameters, Results) Export
+	ResourceToBinding = New Map();
+	ResourceToBinding.Insert("Salary"         , BindToSalary(Parameters));
+	ResourceToBinding.Insert("PersonalSalary" , BindToPersonalSalary(Parameters));
+	MultiSetterObject(Parameters, Results, ResourceToBinding, "OnSetSalaryAmountNotify");
+EndProcedure
+
+// ToSalary.Bind
+Function BindToSalary(Parameters)
+	DataPath = "ToSalary";
+	Binding = New Structure();
+	Return BindSteps("BindVoid", DataPath, Binding, Parameters, "BindToSalary");
+EndFunction
+
+// ToPersonalSalary.Bind
+Function BindToPersonalSalary(Parameters)
+	DataPath = "ToPersonalSalary";
+	Binding = New Structure();
+	Return BindSteps("BindVoid", DataPath, Binding, Parameters, "BindToPersonalSalary");
+EndFunction
+
+
+// ToSalary.ChangeSalaryByPositionOrEmployee.Step
+Procedure StepChangeToSalaryByPositionOrEmployee(Parameters, Chain) Export
+	Chain.ChangeSalaryByPositionOrEmployee.Enable = True;
+	If Chain.Idle Then
+		Return;
+	EndIf;
+	Chain.ChangeSalaryByPositionOrEmployee.Setter = "MultiSetToSalary";
+	Options = ModelClientServer_V2.ChangeSalaryByPositionOrEmployeeOptions();
+	Options.Employee    = GetEmployee(Parameters);
+	Options.Position    = GetToPosition(Parameters);
+	Options.Date        = GetDate(Parameters);
+	Options.AccrualType = GetToAccrualType(Parameters);
+	Options.Ref         = Parameters.Object.Ref;	
+	Options.StepName = "StepChangeToSalaryByPositionOrEmployee";
+	Chain.ChangeSalaryByPositionOrEmployee.Options.Add(Options);
+EndProcedure
+
+#EndRegion
+
+#Region EMPLOYEE_SCHEDULE
+
+// EmployeeSchedule.Set
+Procedure SetEmployeeSchedule(Parameters, Results) Export
+	Binding = BindEmployeeSchedule(Parameters);
+	SetterObject(Binding.StepsEnabler, Binding.DataPath, Parameters, Results);
+EndProcedure
+
+// EmployeeSchedule.Bind
+Function BindEmployeeSchedule(Parameters)
+	DataPath = New Map();
+	DataPath.Insert("EmployeeTransfer", "FromEmployeeSchedule");
+	DataPath.Insert("EmployeeFiring"  , "EmployeeSchedule");
+	Binding = New Structure();
+	
+	Return BindSteps("BindVoid", DataPath, Binding, Parameters, "BindEmployeeSchedule");
+EndFunction
+
+// EmployeeSchedule.ChangeEmployeeScheduleByEmployee.Step
+Procedure StepChangeEmployeeScheduleByEmployee(Parameters, Chain) Export
+	Chain.ChangeEmployeeScheduleByEmployee.Enable = True;
+	If Chain.Idle Then
+		Return;
+	EndIf;
+	Chain.ChangeEmployeeScheduleByEmployee.Setter = "SetEmployeeSchedule";
+	Options = ModelClientServer_V2.ChangeEmployeeScheduleByEmployeeOptions();
+	Options.Employee  = GetEmployee(Parameters);
+	Options.Date      = GetDate(Parameters);
+	Options.Company   = GetCompany(Parameters);
+	Options.Ref       = Parameters.Object.Ref;
+	Options.StepName = "StepChangeEmployeeScheduleByEmployee";
+	Chain.ChangeEmployeeScheduleByEmployee.Options.Add(Options);
+EndProcedure
+
+#EndRegion
+
+#Region PROFIT_LOSS_CENTER
+
+// ProfitLossCenter.Set
+Procedure SetProfitLossCenter(Parameters, Results) Export
+	Binding = BindProfitLossCenter(Parameters);
+	SetterObject(Binding.StepsEnabler, Binding.DataPath, Parameters, Results);
+EndProcedure
+
+// ProfitLossCenter.Bind
+Function BindProfitLossCenter(Parameters)
+	DataPath = New Map();
+	DataPath.Insert("EmployeeTransfer", "FromProfitLossCenter");
+	DataPath.Insert("EmployeeFiring"  , "ProfitLossCenter");
+	Binding = New Structure();
+	Return BindSteps("BindVoid", DataPath, Binding, Parameters, "BindProfitLossCenter");
+EndFunction
+
+// ProfitLossCenter.ChangeProfitLossCenterByEmployee.Step
+Procedure StepChangeProfitLossCenterByEmployee(Parameters, Chain) Export
+	Chain.ChangeProfitLossCenterByEmployee.Enable = True;
+	If Chain.Idle Then
+		Return;
+	EndIf;
+	Chain.ChangeProfitLossCenterByEmployee.Setter = "SetProfitLossCenter";
+	Options = ModelClientServer_V2.ChangeProfitLossCenterByEmployeeOptions();
+	Options.Employee  = GetEmployee(Parameters);
+	Options.Date      = GetDate(Parameters);
+	Options.Company   = GetCompany(Parameters);
+	Options.Ref       = Parameters.Object.Ref;
+	Options.StepName = "StepChangeProfitLossCenterByEmployee";
+	Chain.ChangeProfitLossCenterByEmployee.Options.Add(Options);
 EndProcedure
 
 #EndRegion
@@ -13658,6 +14190,119 @@ EndProcedure
 
 #Region PAYROLL_LISTS
 
+#Region PAYROLL_LISTS_EMPLOYEE
+
+// PayrollLists.Employee.OnChange
+Procedure PayrollListsEmployeeOnChange(Parameters) Export
+	Binding = BindPayrollListsEmployee(Parameters);
+	ModelClientServer_V2.EntryPoint(Binding.StepsEnabler, Parameters);
+EndProcedure
+
+// PayrollLists.Employee.Set
+Procedure SetPayrollListsEmployee(Parameters, Results) Export
+	Binding = BindPayrollListsEmployee(Parameters);
+	SetterObject(Binding.StepsEnabler, Binding.DataPath, Parameters, Results);
+EndProcedure
+
+// PayrollLists.Employee.Get
+Function GetPayrollListsEmployee(Parameters, _Key)
+	Return GetPropertyObject(Parameters, BindPayrollListsEmployee(Parameters).DataPath, _Key);
+EndFunction
+
+// PayrollLists.Employee.Bind
+Function BindPayrollListsEmployee(Parameters)
+	DataPathMap = New Map();
+	DataPathMap.Insert("AccrualList"   , "AccrualList.Employee");
+	DataPathMap.Insert("DeductionList" , "DeductionList.Employee");
+	DataPath = DataPathMap.Get(Parameters.TableName);
+	
+	Binding = New Structure();
+	Return BindSteps("StepPayrollListsChangeProfitLossCenterByEmployee,
+	|StepPayrollListsChangePositionByEmployee", DataPath, Binding, Parameters, "BindPayrollListsEmployee");
+EndFunction
+
+#EndRegion
+
+#Region PAYROLL_LISTS_POSITION
+
+// PayrollLists.Position.Set
+Procedure SetPayrollListsPosition(Parameters, Results) Export
+	Binding = BindPayrollListsPosition(Parameters);
+	SetterObject(Binding.StepsEnabler, Binding.DataPath, Parameters, Results);
+EndProcedure
+
+// PayrollLists.Position.Bind
+Function BindPayrollListsPosition(Parameters)
+	DataPathMap = New Map();
+	DataPathMap.Insert("AccrualList"   , "AccrualList.Position");
+	DataPathMap.Insert("DeductionList" , "DeductionList.Position");
+	DataPath = DataPathMap.Get(Parameters.TableName);
+	
+	Binding = New Structure();
+	Return BindSteps("BindVoid", DataPath, Binding, Parameters, "BindPayrollListsPosition");
+EndFunction
+
+// PayrollLists.ChangePositionByEmployee.Step
+Procedure StepPayrollListsChangePositionByEmployee(Parameters, Chain) Export
+	Chain.ChangePositionByEmployee.Enable = True;
+	If Chain.Idle Then
+		Return;
+	EndIf;
+	Chain.ChangePositionByEmployee.Setter = "SetPayrollListsPosition";
+	For Each Row In GetRows(Parameters, Parameters.TableName) Do
+		Options = ModelClientServer_V2.ChangePositionByEmployeeOptions();
+		Options.Employee  = GetPayrollListsEmployee(Parameters, Row.Key);
+		Options.Date      = GetDate(Parameters);
+		Options.Company   = GetCompany(Parameters);
+		Options.Ref       = Parameters.Object.Ref;
+		Options.Key = Row.Key;	
+		Options.StepName = "StepPayrollListsChangePositionByEmployee";
+		Chain.ChangePositionByEmployee.Options.Add(Options);
+	EndDo;
+EndProcedure
+
+#EndRegion
+
+#Region PAYROLL_LISTS_PROFIT_LOSS_CENTER
+
+// PayrollLists.ProfitLossCenter.Set
+Procedure SetPayrollListsProfitLossCenter(Parameters, Results) Export
+	Binding = BindPayrollListsProfitLossCenter(Parameters);
+	SetterObject(Binding.StepsEnabler, Binding.DataPath, Parameters, Results);
+EndProcedure
+
+// PayrollLists.ProfitLossCenter.Bind
+Function BindPayrollListsProfitLossCenter(Parameters)
+	DataPathMap = New Map();
+	DataPathMap.Insert("AccrualList"   , "AccrualList.ProfitLossCenter");
+	DataPathMap.Insert("DeductionList" , "DeductionList.ProfitLossCenter");
+	DataPath = DataPathMap.Get(Parameters.TableName);
+	
+	Binding = New Structure();
+	Return BindSteps("BindVoid", DataPath, Binding, Parameters, "BindPayrollListsProfitLossCenter");
+EndFunction
+
+// PayrollLists.ChangeProfitLossCenterByEmployee.Step
+Procedure StepPayrollListsChangeProfitLossCenterByEmployee(Parameters, Chain) Export
+	Chain.ChangeProfitLossCenterByEmployee.Enable = True;
+	If Chain.Idle Then
+		Return;
+	EndIf;
+	Chain.ChangeProfitLossCenterByEmployee.Setter = "SetPayrollListsProfitLossCenter";
+	For Each Row In GetRows(Parameters, Parameters.TableName) Do
+		Options = ModelClientServer_V2.ChangeProfitLossCenterByEmployeeOptions();
+		Options.Employee  = GetPayrollListsEmployee(Parameters, Row.Key);
+		Options.Date      = GetDate(Parameters);
+		Options.Company   = GetCompany(Parameters);
+		Options.Ref       = Parameters.Object.Ref;
+		Options.Key = Row.Key;
+		Options.StepName = "StepPayrollListsChangeProfitLossCenterByEmployee";
+		Chain.ChangeProfitLossCenterByEmployee.Options.Add(Options);
+	EndDo;
+EndProcedure
+
+#EndRegion
+
 #Region PAYROLL_LISTS_ACRUAL_DEDUCTION_TYPE
 
 // PayrollLists.AccrualDeductionType.OnChange
@@ -13993,6 +14638,7 @@ Procedure ExecuteViewNotify(Parameters, ViewNotify)
 	ElsIf ViewNotify = "OnSetPartnerNotify"                    Then ViewClient_V2.OnSetPartnerNotify(Parameters);
 	ElsIf ViewNotify = "OnSetLegalNameNotify"                  Then ViewClient_V2.OnSetLegalNameNotify(Parameters);
 	ElsIf ViewNotify = "OnSetCourierNotify"                    Then ViewClient_V2.OnSetCourierNotify(Parameters);
+	ElsIf ViewNotify = "OnSetEmployeeNotify"                   Then ViewClient_V2.OnSetEmployeeNotify(Parameters);
 	ElsIf ViewNotify = "OnSetConsolidatedRetailSalesNotify"    Then ViewClient_V2.OnSetConsolidatedRetailSalesNotify(Parameters);
 	ElsIf ViewNotify = "OnSetBranchNotify"                     Then ViewClient_V2.OnSetBranchNotify(Parameters);
 	ElsIf ViewNotify = "OnSetStatusNotify"                     Then ViewClient_V2.OnSetStatusNotify(Parameters);
@@ -14049,6 +14695,7 @@ Procedure ExecuteViewNotify(Parameters, ViewNotify)
 	ElsIf ViewNotify = "SalaryPaymentOnCopyRowFormNotify"              Then ViewClient_V2.SalaryPaymentOnCopyRowFormNotify(Parameters);
 	
 	ElsIf ViewNotify = "OnSetPayrollListsAmountNotify" Then ViewClient_V2.OnSetPayrollListsAmountNotify(Parameters);
+	ElsIf ViewNotify = "OnSetSalaryAmountNotify" Then ViewClient_V2.OnSetSalaryAmountNotify(Parameters);
 	
 	Else
 		Raise StrTemplate("Not handled view notify [%1]", ViewNotify);

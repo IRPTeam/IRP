@@ -265,6 +265,7 @@ Function GetHiddenTables() Export
 	HiddenTables.Add("RevenueList");
 	HiddenTables.Add("AllocationList");
 	HiddenTables.Add("ControlCodeStrings");
+	HiddenTables.Add("TimeSheetList");
 	
 	Return HiddenTables;
 	

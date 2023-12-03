@@ -9,5 +9,6 @@
   <includeInCommandInterface>true</includeInCommandInterface>
   <content>Catalog.AccrualAndDeductionTypes</content>
   <content>Catalog.EmployeePositions</content>
+  <content>Catalog.EmployeeSchedule</content>
   <parentSubsystem>Subsystem.Salary</parentSubsystem>
 </mdclass:Subsystem>

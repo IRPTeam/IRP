@@ -206,8 +206,18 @@ EndProcedure
 Procedure CashAdvanceDeductionListAmountOnChange(Item)
 	DocPayrollClient.PayrollListsAmountOnChange(Object, ThisObject, Item, "CashAdvanceDeductionList");
 EndProcedure
-	
+
 #EndRegion
+
+&AtClient
+Procedure AccrualListEmployeeOnChange(Item)
+	DocPayrollClient.PayrollListsEmployeeOnChange(Object, ThisObject, Item, "AccrualList");
+EndProcedure
+
+&AtClient
+Procedure DeductionListEmployeeOnChange(Item)
+	DocPayrollClient.PayrollListsEmployeeOnChange(Object, ThisObject, Item, "DeductionList");
+EndProcedure
 
 #EndRegion
 
@@ -353,6 +363,7 @@ Async Procedure FillPayrollLists(TableName, TypeColumnName, _Type)
 		Result = FillPayrollListsAtServer(TypeColumnName, _Type);
 		Object[TableName].Clear();		
 		ViewClient_V2.PayrollListsLoad(Object, ThisObject, Result.Address, TableName, Result.GroupColumn, Result.SumColumn);
+		ThisObject.Modified = True;
 	EndIf;
 EndProcedure
 
@@ -365,8 +376,13 @@ Function FillPayrollListsAtServer(TypeColumnName, _Type)
 	FillingParameters.Insert("EndDate"   , EndOfDay(Object.EndDate));
 	FillingParameters.Insert("_Type"     , _Type);
 	FillingParameters.Insert("TypeColumnName" , TypeColumnName);
+	FillingParameters.Insert("Ref" , Object.Ref);
 	
-	Result = DocPayrollServer.GetPayrolls(FillingParameters);
+	If _Type = Enums.PayrollTypes.Accrual Then
+		Result = DocPayrollServer.GetPayrolls_Accrual(FillingParameters);
+	Else
+		Result = DocPayrollServer.GetPayrolls_Deduction(FillingParameters);
+	EndIf;
 	Address = PutToTempStorage(Result.Table, ThisObject.UUID);
 	Return New Structure("Address, GroupColumn, SumColumn", Address, Result.GroupColumn, Result.SumColumn);
 EndFunction	

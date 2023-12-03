@@ -1,4 +1,4 @@
-#language: en
+﻿#language: en
 @tree
 @Positive
 @BasicFormsCheck
@@ -1029,6 +1029,28 @@ Scenario: Open choise form "EmployeePositions"
 		| 'OpenForm("Catalog.EmployeePositions.ChoiceForm", , Undefined, , , , , FormWindowOpeningMode.Independent)'   |
 	If the warning is displayed then
 		Then I raise "Failed to open catalog form EmployeePositions" exception
+	And I close current window
+
+Scenario: Open list form "EmployeeSchedule" 
+
+	Given I open "EmployeeSchedule" catalog default form
+	If the warning is displayed then
+		Then I raise "Failed to open catalog form EmployeeSchedule" exception
+	And I close current window
+
+Scenario: Open object form "EmployeeSchedule"
+	And I close all client application windows
+	Given I open "EmployeeSchedule" reference main form
+	If the warning is displayed then
+		Then I raise "Failed to open catalog form EmployeeSchedule" exception
+	And I close current window
+
+Scenario: Open choise form "EmployeeSchedule"
+	And I close all client application windows
+	And I execute the built-in language code (Extension)
+		| 'OpenForm("Catalog.EmployeeSchedule.ChoiceForm", , Undefined, , , , , FormWindowOpeningMode.Independent)'   |
+	If the warning is displayed then
+		Then I raise "Failed to open catalog form EmployeeSchedule" exception
 	And I close current window
 
 Scenario: Open choise form "AccrualAndDeductionTypes"

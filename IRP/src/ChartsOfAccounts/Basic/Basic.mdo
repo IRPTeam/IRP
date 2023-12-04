@@ -269,4 +269,20 @@
     <usePurposes>PersonalComputer</usePurposes>
     <usePurposes>MobileDevice</usePurposes>
   </forms>
+  <forms uuid="63de84ca-e180-403b-9c90-267964693080">
+    <name>LoadForm</name>
+    <synonym>
+      <key>en</key>
+      <value>Load form</value>
+    </synonym>
+    <usePurposes>PersonalComputer</usePurposes>
+    <usePurposes>MobileDevice</usePurposes>
+  </forms>
+  <templates uuid="77d18a0d-bcd6-43b3-ae0b-ad4cdbfa4fed">
+    <name>LoadTemplate</name>
+    <synonym>
+      <key>en</key>
+      <value>Load template</value>
+    </synonym>
+  </templates>
 </mdclass:ChartOfAccounts>

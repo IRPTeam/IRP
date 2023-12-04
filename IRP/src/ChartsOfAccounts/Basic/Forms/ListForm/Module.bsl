@@ -33,3 +33,9 @@ Procedure LedgerTypeVariantFilterOnChange(Item)
 		DataCompositionComparisonType.Equal, ValueIsFilled(ThisObject.LedgerTypeVariant));
 EndProcedure
 
+&AtClient
+Procedure LoadChartsOfAccounts(Command)
+	OpenForm("ChartOfAccounts.Basic.Form.LoadForm",,
+		ThisObject, ThisObject.UUID,,,,
+		FormWindowOpeningMode.Independent);	
+EndProcedure

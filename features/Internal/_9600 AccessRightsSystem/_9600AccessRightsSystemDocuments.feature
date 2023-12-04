@@ -4101,7 +4101,116 @@ Scenario: 960077 check ModernizationOfFixedAsset creation
 		| 'Document.ModernizationOfFixedAsset Branch: Branch access deny;Company: Company access deny;Store: Store Read and Write Access&Store access deny'                                            |
 		| 'Document.ModernizationOfFixedAsset Branch: Branch access deny;Company: Company access deny;Store: Store Read and Write Access&Store Only read access&Store access deny'                     |
 					
+Scenario: 960078 check EmployeeFiring creation
+	And I close all client application windows
+	Given I open hyperlink "e1cib/list/Document.EmployeeFiring"
+	And "List" table became equal
+		| 'Description'                                                                                          |
+		| 'Document.EmployeeFiring Branch: Branch Read and Write Access;Company: Company Read and Write Access;' |
+		| 'Document.EmployeeFiring Branch: Branch Only read access;Company: Company Read and Write Access;'      |
+		| 'Document.EmployeeFiring Branch: Branch access deny;Company: Company Read and Write Access;'           |
+		| 'Document.EmployeeFiring Branch: Branch Read and Write Access;Company: Company Only read access;'      |
+		| 'Document.EmployeeFiring Branch: Branch Only read access;Company: Company Only read access;'           |
+		| 'Document.EmployeeFiring Branch: Branch access deny;Company: Company Only read access;'                |
+		| 'Document.EmployeeFiring Branch: Branch Read and Write Access;Company: Company access deny;'           |
+		| 'Document.EmployeeFiring Branch: Branch Only read access;Company: Company access deny;'                |
+		| 'Document.EmployeeFiring Branch: Branch access deny;Company: Company access deny;'                     |
+	
+Scenario: 960079 check EmployeeHiring creation
+	And I close all client application windows
+	Given I open hyperlink "e1cib/list/Document.EmployeeHiring"
+	And "List" table became equal
+		| 'Description'                                                                                          |
+		| 'Document.EmployeeHiring Branch: Branch Read and Write Access;Company: Company Read and Write Access;' |
+		| 'Document.EmployeeHiring Branch: Branch Only read access;Company: Company Read and Write Access;'      |
+		| 'Document.EmployeeHiring Branch: Branch access deny;Company: Company Read and Write Access;'           |
+		| 'Document.EmployeeHiring Branch: Branch Read and Write Access;Company: Company Only read access;'      |
+		| 'Document.EmployeeHiring Branch: Branch Only read access;Company: Company Only read access;'           |
+		| 'Document.EmployeeHiring Branch: Branch access deny;Company: Company Only read access;'                |
+		| 'Document.EmployeeHiring Branch: Branch Read and Write Access;Company: Company access deny;'           |
+		| 'Document.EmployeeHiring Branch: Branch Only read access;Company: Company access deny;'                |
+		| 'Document.EmployeeHiring Branch: Branch access deny;Company: Company access deny;'                     |
+	
+Scenario: 960080 check EmployeeSickLeave creation
+	And I close all client application windows
+	Given I open hyperlink "e1cib/list/Document.EmployeeSickLeave"
+	And "List" table became equal
+		| 'Description'                                                                                             |
+		| 'Document.EmployeeSickLeave Branch: Branch Read and Write Access;Company: Company Read and Write Access;' |
+		| 'Document.EmployeeSickLeave Branch: Branch Only read access;Company: Company Read and Write Access;'      |
+		| 'Document.EmployeeSickLeave Branch: Branch access deny;Company: Company Read and Write Access;'           |
+		| 'Document.EmployeeSickLeave Branch: Branch Read and Write Access;Company: Company Only read access;'      |
+		| 'Document.EmployeeSickLeave Branch: Branch Only read access;Company: Company Only read access;'           |
+		| 'Document.EmployeeSickLeave Branch: Branch access deny;Company: Company Only read access;'                |
+		| 'Document.EmployeeSickLeave Branch: Branch Read and Write Access;Company: Company access deny;'           |
+		| 'Document.EmployeeSickLeave Branch: Branch Only read access;Company: Company access deny;'                |
+		| 'Document.EmployeeSickLeave Branch: Branch access deny;Company: Company access deny;'                     |
+	
+Scenario: 960081 check EmployeeTransfer creation
+	And I close all client application windows
+	Given I open hyperlink "e1cib/list/Document.EmployeeTransfer"
+	And "List" table became equal
+		| 'Description'                                                                                            |
+		| 'Document.EmployeeTransfer Branch: Branch Read and Write Access;Company: Company Read and Write Access;' |
+		| 'Document.EmployeeTransfer Branch: Branch Only read access;Company: Company Read and Write Access;'      |
+		| 'Document.EmployeeTransfer Branch: Branch access deny;Company: Company Read and Write Access;'           |
+		| 'Document.EmployeeTransfer Branch: Branch Read and Write Access;Company: Company Only read access;'      |
+		| 'Document.EmployeeTransfer Branch: Branch Only read access;Company: Company Only read access;'           |
+		| 'Document.EmployeeTransfer Branch: Branch access deny;Company: Company Only read access;'                |
+		| 'Document.EmployeeTransfer Branch: Branch Read and Write Access;Company: Company access deny;'           |
+		| 'Document.EmployeeTransfer Branch: Branch Only read access;Company: Company access deny;'                |
+		| 'Document.EmployeeTransfer Branch: Branch access deny;Company: Company access deny;'                     |
+	
+Scenario: 960082 check EmployeeVacation creation
+	And I close all client application windows
+	Given I open hyperlink "e1cib/list/Document.EmployeeVacation"
+	And "List" table became equal
+		| 'Description'                                                                                            |
+		| 'Document.EmployeeVacation Branch: Branch Read and Write Access;Company: Company Read and Write Access;' |
+		| 'Document.EmployeeVacation Branch: Branch Only read access;Company: Company Read and Write Access;'      |
+		| 'Document.EmployeeVacation Branch: Branch access deny;Company: Company Read and Write Access;'           |
+		| 'Document.EmployeeVacation Branch: Branch Read and Write Access;Company: Company Only read access;'      |
+		| 'Document.EmployeeVacation Branch: Branch Only read access;Company: Company Only read access;'           |
+		| 'Document.EmployeeVacation Branch: Branch access deny;Company: Company Only read access;'                |
+		| 'Document.EmployeeVacation Branch: Branch Read and Write Access;Company: Company access deny;'           |
+		| 'Document.EmployeeVacation Branch: Branch Only read access;Company: Company access deny;'                |
+		| 'Document.EmployeeVacation Branch: Branch access deny;Company: Company access deny;'                     |
+	
+Scenario: 960083 check VisitorCounter creation
+	And I close all client application windows
+	Given I open hyperlink "e1cib/list/Document.VisitorCounter"
+	And "List" table became equal
+		| 'Company'                       | 'Store'                       | 'Branch'                       |
+		| 'Company Read and Write Access' | 'Store Read and Write Access' | 'Branch Read and Write Access' |
+		| 'Company Read and Write Access' | 'Store Only read access'      | 'Branch Read and Write Access' |
+		| 'Company Read and Write Access' | 'Store access deny'           | 'Branch Read and Write Access' |
+		| 'Company Read and Write Access' | 'Store Read and Write Access' | 'Branch Only read access'      |
+		| 'Company Read and Write Access' | 'Store Only read access'      | 'Branch Only read access'      |
+		| 'Company Read and Write Access' | 'Store access deny'           | 'Branch Only read access'      |
+		| 'Company Read and Write Access' | 'Store Read and Write Access' | 'Branch access deny'           |
+		| 'Company Read and Write Access' | 'Store Only read access'      | 'Branch access deny'           |
+		| 'Company Read and Write Access' | 'Store access deny'           | 'Branch access deny'           |
+		| 'Company Only read access'      | 'Store Read and Write Access' | 'Branch Read and Write Access' |
+		| 'Company Only read access'      | 'Store Only read access'      | 'Branch Read and Write Access' |
+		| 'Company Only read access'      | 'Store access deny'           | 'Branch Read and Write Access' |
+		| 'Company Only read access'      | 'Store Read and Write Access' | 'Branch Only read access'      |
+		| 'Company Only read access'      | 'Store Only read access'      | 'Branch Only read access'      |
+		| 'Company Only read access'      | 'Store access deny'           | 'Branch Only read access'      |
+		| 'Company Only read access'      | 'Store Read and Write Access' | 'Branch access deny'           |
+		| 'Company Only read access'      | 'Store Only read access'      | 'Branch access deny'           |
+		| 'Company Only read access'      | 'Store access deny'           | 'Branch access deny'           |
+		| 'Company access deny'           | 'Store Read and Write Access' | 'Branch Read and Write Access' |
+		| 'Company access deny'           | 'Store Only read access'      | 'Branch Read and Write Access' |
+		| 'Company access deny'           | 'Store access deny'           | 'Branch Read and Write Access' |
+		| 'Company access deny'           | 'Store Read and Write Access' | 'Branch Only read access'      |
+		| 'Company access deny'           | 'Store Only read access'      | 'Branch Only read access'      |
+		| 'Company access deny'           | 'Store access deny'           | 'Branch Only read access'      |
+		| 'Company access deny'           | 'Store Read and Write Access' | 'Branch access deny'           |
+		| 'Company access deny'           | 'Store Only read access'      | 'Branch access deny'           |
+		| 'Company access deny'           | 'Store access deny'           | 'Branch access deny'           |
+	
 		
+
 Scenario: 960090 check sales order access rights (LimitedAccess)
 	And I close all client application windows
 	And I connect "TestAdmin" TestClient using "LimitedAccess" login and "" password
@@ -5951,7 +6060,51 @@ Scenario: 960164 check DecommissioningOfFixedAsset rights (LimitedAccess)
 		| 'Document.ModernizationOfFixedAsset Branch: Branch Only read access;Company: Company Only read access;Store: Store Read and Write Access&Store access deny'                                  |
 		| 'Document.ModernizationOfFixedAsset Branch: Branch Only read access;Company: Company Only read access;Store: Store Read and Write Access&Store Only read access&Store access deny'           |
 	
-		
+Scenario: 960165 check DecommissioningOfFixedAsset rights (LimitedAccess)	
+	And I close all client application windows
+	Given I open hyperlink "e1cib/list/Document.ModernizationOfFixedAsset"
+	And "List" table became equal
+		| 'Description'                                                                                                                                                                                |
+		| 'Document.ModernizationOfFixedAsset Branch: Branch Read and Write Access;Company: Company Read and Write Access;Store: Store Read and Write Access'                                          |
+		| 'Document.ModernizationOfFixedAsset Branch: Branch Read and Write Access;Company: Company Read and Write Access;Store: Store Only read access'                                               |
+		| 'Document.ModernizationOfFixedAsset Branch: Branch Read and Write Access;Company: Company Read and Write Access;Store: Store Read and Write Access&Store Only read access'                   |
+		| 'Document.ModernizationOfFixedAsset Branch: Branch Read and Write Access;Company: Company Read and Write Access;Store: Store Only read access&Store access deny'                             |
+		| 'Document.ModernizationOfFixedAsset Branch: Branch Read and Write Access;Company: Company Read and Write Access;Store: Store Read and Write Access&Store access deny'                        |
+		| 'Document.ModernizationOfFixedAsset Branch: Branch Read and Write Access;Company: Company Read and Write Access;Store: Store Read and Write Access&Store Only read access&Store access deny' |
+		| 'Document.ModernizationOfFixedAsset Branch: Branch Only read access;Company: Company Read and Write Access;Store: Store Read and Write Access'                                               |
+		| 'Document.ModernizationOfFixedAsset Branch: Branch Only read access;Company: Company Read and Write Access;Store: Store Only read access'                                                    |
+		| 'Document.ModernizationOfFixedAsset Branch: Branch Only read access;Company: Company Read and Write Access;Store: Store Read and Write Access&Store Only read access'                        |
+		| 'Document.ModernizationOfFixedAsset Branch: Branch Only read access;Company: Company Read and Write Access;Store: Store Only read access&Store access deny'                                  |
+		| 'Document.ModernizationOfFixedAsset Branch: Branch Only read access;Company: Company Read and Write Access;Store: Store Read and Write Access&Store access deny'                             |
+		| 'Document.ModernizationOfFixedAsset Branch: Branch Only read access;Company: Company Read and Write Access;Store: Store Read and Write Access&Store Only read access&Store access deny'      |
+		| 'Document.ModernizationOfFixedAsset Branch: Branch Read and Write Access;Company: Company Only read access;Store: Store Read and Write Access'                                               |
+		| 'Document.ModernizationOfFixedAsset Branch: Branch Read and Write Access;Company: Company Only read access;Store: Store Only read access'                                                    |
+		| 'Document.ModernizationOfFixedAsset Branch: Branch Read and Write Access;Company: Company Only read access;Store: Store Read and Write Access&Store Only read access'                        |
+		| 'Document.ModernizationOfFixedAsset Branch: Branch Read and Write Access;Company: Company Only read access;Store: Store Only read access&Store access deny'                                  |
+		| 'Document.ModernizationOfFixedAsset Branch: Branch Read and Write Access;Company: Company Only read access;Store: Store Read and Write Access&Store access deny'                             |
+		| 'Document.ModernizationOfFixedAsset Branch: Branch Read and Write Access;Company: Company Only read access;Store: Store Read and Write Access&Store Only read access&Store access deny'      |
+		| 'Document.ModernizationOfFixedAsset Branch: Branch Only read access;Company: Company Only read access;Store: Store Read and Write Access'                                                    |
+		| 'Document.ModernizationOfFixedAsset Branch: Branch Only read access;Company: Company Only read access;Store: Store Only read access'                                                         |
+		| 'Document.ModernizationOfFixedAsset Branch: Branch Only read access;Company: Company Only read access;Store: Store Read and Write Access&Store Only read access'                             |
+		| 'Document.ModernizationOfFixedAsset Branch: Branch Only read access;Company: Company Only read access;Store: Store Only read access&Store access deny'                                       |
+		| 'Document.ModernizationOfFixedAsset Branch: Branch Only read access;Company: Company Only read access;Store: Store Read and Write Access&Store access deny'                                  |
+		| 'Document.ModernizationOfFixedAsset Branch: Branch Only read access;Company: Company Only read access;Store: Store Read and Write Access&Store Only read access&Store access deny'           |
+
+Scenario: 960166 check VisitorCounter rights (LimitedAccess)	
+	And I close all client application windows
+	Given I open hyperlink "e1cib/list/Document.VisitorCounter"
+	And "List" table became equal
+		| 'Company'                       | 'Store'                       | 'Branch'                       |
+		| 'Company Read and Write Access' | 'Store Read and Write Access' | 'Branch Read and Write Access' |
+		| 'Company Read and Write Access' | 'Store Only read access'      | 'Branch Read and Write Access' |
+		| 'Company Read and Write Access' | 'Store Read and Write Access' | 'Branch Only read access'      |
+		| 'Company Read and Write Access' | 'Store Only read access'      | 'Branch Only read access'      |
+		| 'Company Only read access'      | 'Store Read and Write Access' | 'Branch Read and Write Access' |
+		| 'Company Only read access'      | 'Store Only read access'      | 'Branch Read and Write Access' |
+		| 'Company Only read access'      | 'Store Read and Write Access' | 'Branch Only read access'      |
+		| 'Company Only read access'      | 'Store Only read access'      | 'Branch Only read access'      |
+	
+
 Scenario: 960190 check Company catalog rights (LimitedAccess)	
 	And I close all client application windows
 	Given I open hyperlink "e1cib/list/Catalog.Companies"

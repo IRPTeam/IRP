@@ -16,6 +16,8 @@
   </synonym>
   <useStandardCommands>true</useStandardCommands>
   <editType>InDialog</editType>
+  <defaultRecordForm>InformationRegister.T9500S_AccrualAndDeductionValues.Form.RecordForm</defaultRecordForm>
+  <defaultListForm>InformationRegister.T9500S_AccrualAndDeductionValues.Form.ListForm</defaultListForm>
   <informationRegisterPeriodicity>Day</informationRegisterPeriodicity>
   <dataLockControlMode>Managed</dataLockControlMode>
   <recordPresentation>
@@ -37,6 +39,52 @@
     <dataHistory>Use</dataHistory>
     <fillValue xsi:type="core:UndefinedValue"/>
   </resources>
+  <resources uuid="d5cc1bae-3cca-4e49-9119-15ad179d41b7">
+    <name>NotActual</name>
+    <synonym>
+      <key>en</key>
+      <value>Not actual</value>
+    </synonym>
+    <type>
+      <types>Boolean</types>
+    </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <fullTextSearch>Use</fullTextSearch>
+    <dataHistory>Use</dataHistory>
+    <fillValue xsi:type="core:UndefinedValue"/>
+  </resources>
+  <attributes uuid="d93d5b18-4b9a-471b-897e-6d67f427d109">
+    <name>Document</name>
+    <synonym>
+      <key>en</key>
+      <value>Document</value>
+    </synonym>
+    <type>
+      <types>DocumentRef.EmployeeHiring</types>
+      <types>DocumentRef.EmployeeTransfer</types>
+    </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <fullTextSearch>Use</fullTextSearch>
+    <dataHistory>Use</dataHistory>
+    <fillValue xsi:type="core:UndefinedValue"/>
+  </attributes>
+  <attributes uuid="89af9ab4-0e63-4945-b391-dcffd894d355">
+    <name>CancelDocument</name>
+    <synonym>
+      <key>en</key>
+      <value>Cancel document</value>
+    </synonym>
+    <type>
+      <types>DocumentRef.EmployeeTransfer</types>
+    </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <fullTextSearch>Use</fullTextSearch>
+    <dataHistory>Use</dataHistory>
+    <fillValue xsi:type="core:UndefinedValue"/>
+  </attributes>
   <dimensions uuid="a863a8e5-d920-4eb4-aa7f-992e946932e7">
     <name>EmployeeOrPosition</name>
     <synonym>
@@ -70,4 +118,22 @@
     <fillValue xsi:type="core:UndefinedValue"/>
     <mainFilter>true</mainFilter>
   </dimensions>
+  <forms uuid="e5b29c2d-7605-4734-83a0-a5ead78dbbab">
+    <name>RecordForm</name>
+    <synonym>
+      <key>en</key>
+      <value>Record form</value>
+    </synonym>
+    <usePurposes>PersonalComputer</usePurposes>
+    <usePurposes>MobileDevice</usePurposes>
+  </forms>
+  <forms uuid="a5ee3e78-71e2-43f2-a36f-4657d1c8895b">
+    <name>ListForm</name>
+    <synonym>
+      <key>en</key>
+      <value>List form</value>
+    </synonym>
+    <usePurposes>PersonalComputer</usePurposes>
+    <usePurposes>MobileDevice</usePurposes>
+  </forms>
 </mdclass:InformationRegister>

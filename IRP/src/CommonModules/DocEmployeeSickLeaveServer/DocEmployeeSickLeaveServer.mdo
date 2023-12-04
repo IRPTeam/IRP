@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mdclass:CommonModule xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="fdba78dd-ff6d-4c1d-bf66-fec6951e6bd5">
+  <name>DocEmployeeSickLeaveServer</name>
+  <synonym>
+    <key>en</key>
+    <value>Doc employee sick leave server</value>
+  </synonym>
+  <server>true</server>
+  <serverCall>true</serverCall>
+</mdclass:CommonModule>

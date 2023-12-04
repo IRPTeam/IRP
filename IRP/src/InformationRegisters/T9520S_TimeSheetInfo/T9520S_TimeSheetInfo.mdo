@@ -18,6 +18,72 @@
   <editType>InDialog</editType>
   <writeMode>RecorderSubordinate</writeMode>
   <dataLockControlMode>Managed</dataLockControlMode>
+  <resources uuid="7548e7b3-3238-4dd0-9154-1b02e93486c5">
+    <name>CountDaysHours</name>
+    <synonym>
+      <key>en</key>
+      <value>Count days hours</value>
+    </synonym>
+    <type>
+      <types>Number</types>
+      <numberQualifiers>
+        <precision>3</precision>
+      </numberQualifiers>
+    </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <fullTextSearch>Use</fullTextSearch>
+    <dataHistory>Use</dataHistory>
+    <fillValue xsi:type="core:UndefinedValue"/>
+  </resources>
+  <resources uuid="967d2d80-b52f-4bd7-9e3a-4f02caec5106">
+    <name>ActuallyDaysHours</name>
+    <synonym>
+      <key>en</key>
+      <value>Actually days hours</value>
+    </synonym>
+    <type>
+      <types>Number</types>
+      <numberQualifiers>
+        <precision>3</precision>
+      </numberQualifiers>
+    </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <fullTextSearch>Use</fullTextSearch>
+    <dataHistory>Use</dataHistory>
+    <fillValue xsi:type="core:UndefinedValue"/>
+  </resources>
+  <resources uuid="ce20da66-e798-416b-8882-fb98f7f5cabb">
+    <name>IsVacation</name>
+    <synonym>
+      <key>en</key>
+      <value>Is vacation</value>
+    </synonym>
+    <type>
+      <types>Boolean</types>
+    </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <fullTextSearch>Use</fullTextSearch>
+    <dataHistory>Use</dataHistory>
+    <fillValue xsi:type="core:UndefinedValue"/>
+  </resources>
+  <resources uuid="432baeef-d88a-40ba-b1e7-853cd95dce9d">
+    <name>IsSickLeave</name>
+    <synonym>
+      <key>en</key>
+      <value>Is sick leave</value>
+    </synonym>
+    <type>
+      <types>Boolean</types>
+    </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <fullTextSearch>Use</fullTextSearch>
+    <dataHistory>Use</dataHistory>
+    <fillValue xsi:type="core:UndefinedValue"/>
+  </resources>
   <dimensions uuid="b5ce9181-ef7f-4ba3-a8ec-aa6e7ad11ad5">
     <name>Company</name>
     <synonym>
@@ -102,18 +168,19 @@
     <mainFilter>true</mainFilter>
   </dimensions>
   <dimensions uuid="f4e4bdd3-6f3e-4c4d-8810-f6c5cd05daaa">
-    <name>AccrualAndDeductionType</name>
+    <name>EmployeeSchedule</name>
     <synonym>
       <key>en</key>
-      <value>Accrual and deduction type</value>
+      <value>Employee schedule</value>
     </synonym>
     <type>
-      <types>CatalogRef.AccrualAndDeductionTypes</types>
+      <types>CatalogRef.EmployeeSchedule</types>
     </type>
     <minValue xsi:type="core:UndefinedValue"/>
     <maxValue xsi:type="core:UndefinedValue"/>
     <fullTextSearch>Use</fullTextSearch>
     <dataHistory>Use</dataHistory>
+    <fillValue xsi:type="core:UndefinedValue"/>
   </dimensions>
   <dimensions uuid="406fb9c4-9419-4d32-ae61-2ce43bf858d9">
     <name>ProfitLossCenter</name>

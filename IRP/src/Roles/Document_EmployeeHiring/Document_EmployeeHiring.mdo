@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mdclass:Role xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="ef0c58f3-853b-47b8-8d32-dcd257d66342">
+  <name>Document_EmployeeHiring</name>
+  <synonym>
+    <key>en</key>
+    <value>Document employee hiring</value>
+  </synonym>
+</mdclass:Role>

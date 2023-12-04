@@ -25,9 +25,15 @@ Procedure UndoPosting(Cancel)
 EndProcedure
 
 Procedure Filling(FillingData, FillingText, StandardProcessing)
-	Return;
+	ThisObject.BeginDate = BegOfMonth(CommonFunctionsServer.GetCurrentSessionDate());
+	ThisObject.EndDate = EndOfMonth(CommonFunctionsServer.GetCurrentSessionDate());
 EndProcedure
 
 Procedure FillCheckProcessing(Cancel, CheckedAttributes)
-	Return;
+	If Not ValueIsFilled(ThisObject.BeginDate) 
+		Or Not ValueIsFilled(ThisObject.EndDate)
+		Or ThisObject.BeginDate > ThisObject.EndDate Then
+		CommonFunctionsClientServer.ShowUsersMessage(R().Salary_Err_001, "Period");
+		Cancel = True;
+	EndIf; 
 EndProcedure

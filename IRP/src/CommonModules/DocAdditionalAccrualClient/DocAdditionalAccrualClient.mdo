@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mdclass:CommonModule xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="38234616-bef5-4d31-81f4-c95dc30f7bf5">
+ <name>DocAdditionalAccrualClient</name>
+ <synonym>
+  <key>en</key>
+  <value>Doc additional accrual client</value>
+ </synonym>
+ <synonym>
+  <key>ru</key>
+  <value>Клиент дополнительного начисления</value>
+ </synonym>
+ <synonym>
+  <key>tr</key>
+  <value>Doc additional accrual client</value>
+ </synonym>
+ <clientManagedApplication>true</clientManagedApplication>
+ <clientOrdinaryApplication>true</clientOrdinaryApplication>
+</mdclass:CommonModule>

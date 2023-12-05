@@ -122,7 +122,6 @@
   </type>
   <minValue xsi:type="core:UndefinedValue"/>
   <maxValue xsi:type="core:UndefinedValue"/>
-  <fillChecking>ShowError</fillChecking>
   <fillValue xsi:type="core:UndefinedValue"/>
   <fullTextSearch>Use</fullTextSearch>
   <dataHistory>Use</dataHistory>
@@ -149,7 +148,6 @@
   </type>
   <minValue xsi:type="core:UndefinedValue"/>
   <maxValue xsi:type="core:UndefinedValue"/>
-  <fillChecking>ShowError</fillChecking>
   <fillValue xsi:type="core:UndefinedValue"/>
   <fullTextSearch>Use</fullTextSearch>
   <dataHistory>Use</dataHistory>
@@ -201,6 +199,40 @@
   <synonym>
    <key>tr</key>
    <value>Seçim formu</value>
+  </synonym>
+  <usePurposes>PersonalComputer</usePurposes>
+  <usePurposes>MobileDevice</usePurposes>
+ </forms>
+ <forms uuid="a002db8e-988b-4313-b78b-441c6ae53c50">
+  <name>EditCalendarDay</name>
+  <synonym>
+   <key>en</key>
+   <value>Edit calendar day</value>
+  </synonym>
+  <synonym>
+   <key>ru</key>
+   <value>Редактировать календарный день</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Edit calendar day</value>
+  </synonym>
+  <usePurposes>PersonalComputer</usePurposes>
+  <usePurposes>MobileDevice</usePurposes>
+ </forms>
+ <forms uuid="6fb2f00c-78f5-4be0-8c9a-6fe28e1c99fc">
+  <name>AddEmployee</name>
+  <synonym>
+   <key>en</key>
+   <value>Add employee</value>
+  </synonym>
+  <synonym>
+   <key>ru</key>
+   <value>Добавить сотрудника</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Add employee</value>
   </synonym>
   <usePurposes>PersonalComputer</usePurposes>
   <usePurposes>MobileDevice</usePurposes>
@@ -323,28 +355,6 @@
    <dataHistory>Use</dataHistory>
    <fullTextSearch>Use</fullTextSearch>
   </attributes>
-  <attributes uuid="7fb15f97-9364-4cf0-b0dc-1b6eeaf1e462">
-   <name>AccrualAndDeductionType</name>
-   <synonym>
-    <key>en</key>
-    <value>Accrual and deduction type</value>
-   </synonym>
-   <synonym>
-    <key>ru</key>
-    <value>Вид начисления или удержания</value>
-   </synonym>
-   <synonym>
-    <key>tr</key>
-    <value>Tahakkuk ve kesinti türü</value>
-   </synonym>
-   <type>
-    <types>CatalogRef.AccrualAndDeductionTypes</types>
-   </type>
-   <minValue xsi:type="core:UndefinedValue"/>
-   <maxValue xsi:type="core:UndefinedValue"/>
-   <dataHistory>Use</dataHistory>
-   <fullTextSearch>Use</fullTextSearch>
-  </attributes>
   <attributes uuid="09097d6d-5eea-46c7-8b40-c612000e1328">
    <name>ProfitLossCenter</name>
    <synonym>
@@ -361,6 +371,122 @@
    </synonym>
    <type>
     <types>CatalogRef.BusinessUnits</types>
+   </type>
+   <minValue xsi:type="core:UndefinedValue"/>
+   <maxValue xsi:type="core:UndefinedValue"/>
+   <dataHistory>Use</dataHistory>
+   <fullTextSearch>Use</fullTextSearch>
+  </attributes>
+  <attributes uuid="dc4d22cc-4b92-4b89-9107-2255dd193842">
+   <name>EmployeeSchedule</name>
+   <synonym>
+    <key>en</key>
+    <value>Employee schedule</value>
+   </synonym>
+   <synonym>
+    <key>ru</key>
+    <value>Штатное расписание</value>
+   </synonym>
+   <synonym>
+    <key>tr</key>
+    <value>Employee schedule</value>
+   </synonym>
+   <type>
+    <types>CatalogRef.EmployeeSchedule</types>
+   </type>
+   <minValue xsi:type="core:UndefinedValue"/>
+   <maxValue xsi:type="core:UndefinedValue"/>
+   <dataHistory>Use</dataHistory>
+   <fullTextSearch>Use</fullTextSearch>
+  </attributes>
+  <attributes uuid="4aa54610-6f70-4714-babd-39387fdfe9bc">
+   <name>CountDaysHours</name>
+   <synonym>
+    <key>en</key>
+    <value>Count days/hours</value>
+   </synonym>
+   <synonym>
+    <key>ru</key>
+    <value>Подсчитать дни/часы</value>
+   </synonym>
+   <synonym>
+    <key>tr</key>
+    <value>Count days/hours</value>
+   </synonym>
+   <type>
+    <types>Number</types>
+    <numberQualifiers>
+     <precision>3</precision>
+    </numberQualifiers>
+   </type>
+   <minValue xsi:type="core:UndefinedValue"/>
+   <maxValue xsi:type="core:UndefinedValue"/>
+   <dataHistory>Use</dataHistory>
+   <fullTextSearch>Use</fullTextSearch>
+  </attributes>
+  <attributes uuid="992074fe-211a-42d7-b41f-c10bf1a1141c">
+   <name>ActuallyDaysHours</name>
+   <synonym>
+    <key>en</key>
+    <value>Actually days/hours</value>
+   </synonym>
+   <synonym>
+    <key>ru</key>
+    <value>Фактически дней/часов</value>
+   </synonym>
+   <synonym>
+    <key>tr</key>
+    <value>Actually days/hours</value>
+   </synonym>
+   <type>
+    <types>Number</types>
+    <numberQualifiers>
+     <precision>3</precision>
+    </numberQualifiers>
+   </type>
+   <minValue xsi:type="core:UndefinedValue"/>
+   <maxValue xsi:type="core:UndefinedValue"/>
+   <dataHistory>Use</dataHistory>
+   <fullTextSearch>Use</fullTextSearch>
+  </attributes>
+  <attributes uuid="a0c383f3-8d5d-41bc-96b1-f292c69ecebd">
+   <name>IsVacation</name>
+   <synonym>
+    <key>en</key>
+    <value>Is vacation</value>
+   </synonym>
+   <synonym>
+    <key>ru</key>
+    <value>Отпуск</value>
+   </synonym>
+   <synonym>
+    <key>tr</key>
+    <value>Is vacation</value>
+   </synonym>
+   <type>
+    <types>Boolean</types>
+   </type>
+   <minValue xsi:type="core:UndefinedValue"/>
+   <maxValue xsi:type="core:UndefinedValue"/>
+   <dataHistory>Use</dataHistory>
+   <fullTextSearch>Use</fullTextSearch>
+  </attributes>
+  <attributes uuid="91b6f06d-ccdc-4812-b24d-9195210e1f37">
+   <name>IsSickLeave</name>
+   <synonym>
+    <key>en</key>
+    <value>Is sick leave</value>
+   </synonym>
+   <synonym>
+    <key>ru</key>
+    <value>Больничный</value>
+   </synonym>
+   <synonym>
+    <key>tr</key>
+    <value>Is sick leave</value>
+   </synonym>
+   <type>
+    <types>Boolean</types>
    </type>
    <minValue xsi:type="core:UndefinedValue"/>
    <maxValue xsi:type="core:UndefinedValue"/>

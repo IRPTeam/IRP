@@ -885,6 +885,10 @@
      <dataPath xsi:type="form:DataPath">
       <segments>Object.AccrualList.Employee</segments>
      </dataPath>
+     <handlers>
+      <event>OnChange</event>
+      <name>AccrualListEmployeeOnChange</name>
+     </handlers>
      <extendedTooltip>
       <name>AccrualListEmployeeExtendedTooltip</name>
       <id>1456</id>
@@ -1161,6 +1165,202 @@
      <contextMenu>
       <name>AccrualListAmountContextMenu</name>
       <id>1470</id>
+      <visible>true</visible>
+      <enabled>true</enabled>
+      <userVisible>
+       <common>true</common>
+      </userVisible>
+      <autoFill>true</autoFill>
+     </contextMenu>
+     <type>InputField</type>
+     <editMode>Enter</editMode>
+     <showInHeader>true</showInHeader>
+     <headerHorizontalAlign>Left</headerHorizontalAlign>
+     <showInFooter>true</showInFooter>
+     <extInfo xsi:type="form:InputFieldExtInfo">
+      <autoMaxWidth>true</autoMaxWidth>
+      <autoMaxHeight>true</autoMaxHeight>
+      <wrap>true</wrap>
+      <chooseType>true</chooseType>
+      <typeDomainEnabled>true</typeDomainEnabled>
+      <textEdit>true</textEdit>
+     </extInfo>
+    </items>
+    <items xsi:type="form:FormField">
+     <name>AccrualListTotalVacationDays</name>
+     <id>1517</id>
+     <enabled>true</enabled>
+     <userVisible>
+      <common>true</common>
+     </userVisible>
+     <dataPath xsi:type="form:DataPath">
+      <segments>Object.AccrualList.TotalVacationDays</segments>
+     </dataPath>
+     <extendedTooltip>
+      <name>AccrualListTotalVacationDaysExtendedTooltip</name>
+      <id>1519</id>
+      <visible>true</visible>
+      <enabled>true</enabled>
+      <userVisible>
+       <common>true</common>
+      </userVisible>
+      <type>Label</type>
+      <autoMaxWidth>true</autoMaxWidth>
+      <autoMaxHeight>true</autoMaxHeight>
+      <extInfo xsi:type="form:LabelDecorationExtInfo">
+       <horizontalAlign>Left</horizontalAlign>
+      </extInfo>
+     </extendedTooltip>
+     <contextMenu>
+      <name>AccrualListTotalVacationDaysContextMenu</name>
+      <id>1518</id>
+      <visible>true</visible>
+      <enabled>true</enabled>
+      <userVisible>
+       <common>true</common>
+      </userVisible>
+      <autoFill>true</autoFill>
+     </contextMenu>
+     <type>InputField</type>
+     <editMode>Enter</editMode>
+     <showInHeader>true</showInHeader>
+     <headerHorizontalAlign>Left</headerHorizontalAlign>
+     <showInFooter>true</showInFooter>
+     <extInfo xsi:type="form:InputFieldExtInfo">
+      <autoMaxWidth>true</autoMaxWidth>
+      <autoMaxHeight>true</autoMaxHeight>
+      <wrap>true</wrap>
+      <chooseType>true</chooseType>
+      <typeDomainEnabled>true</typeDomainEnabled>
+      <textEdit>true</textEdit>
+     </extInfo>
+    </items>
+    <items xsi:type="form:FormField">
+     <name>AccrualListPaidVacationDays</name>
+     <id>1523</id>
+     <enabled>true</enabled>
+     <userVisible>
+      <common>true</common>
+     </userVisible>
+     <dataPath xsi:type="form:DataPath">
+      <segments>Object.AccrualList.PaidVacationDays</segments>
+     </dataPath>
+     <extendedTooltip>
+      <name>AccrualListPaidVacationDaysExtendedTooltip</name>
+      <id>1525</id>
+      <visible>true</visible>
+      <enabled>true</enabled>
+      <userVisible>
+       <common>true</common>
+      </userVisible>
+      <type>Label</type>
+      <autoMaxWidth>true</autoMaxWidth>
+      <autoMaxHeight>true</autoMaxHeight>
+      <extInfo xsi:type="form:LabelDecorationExtInfo">
+       <horizontalAlign>Left</horizontalAlign>
+      </extInfo>
+     </extendedTooltip>
+     <contextMenu>
+      <name>AccrualListPaidVacationDaysContextMenu</name>
+      <id>1524</id>
+      <visible>true</visible>
+      <enabled>true</enabled>
+      <userVisible>
+       <common>true</common>
+      </userVisible>
+      <autoFill>true</autoFill>
+     </contextMenu>
+     <type>InputField</type>
+     <editMode>Enter</editMode>
+     <showInHeader>true</showInHeader>
+     <headerHorizontalAlign>Left</headerHorizontalAlign>
+     <showInFooter>true</showInFooter>
+     <extInfo xsi:type="form:InputFieldExtInfo">
+      <autoMaxWidth>true</autoMaxWidth>
+      <autoMaxHeight>true</autoMaxHeight>
+      <wrap>true</wrap>
+      <chooseType>true</chooseType>
+      <typeDomainEnabled>true</typeDomainEnabled>
+      <textEdit>true</textEdit>
+     </extInfo>
+    </items>
+    <items xsi:type="form:FormField">
+     <name>AccrualListTotalSickLeaveDays</name>
+     <id>1520</id>
+     <enabled>true</enabled>
+     <userVisible>
+      <common>true</common>
+     </userVisible>
+     <dataPath xsi:type="form:DataPath">
+      <segments>Object.AccrualList.TotalSickLeaveDays</segments>
+     </dataPath>
+     <extendedTooltip>
+      <name>AccrualListTotalSickLeaveDaysExtendedTooltip</name>
+      <id>1522</id>
+      <visible>true</visible>
+      <enabled>true</enabled>
+      <userVisible>
+       <common>true</common>
+      </userVisible>
+      <type>Label</type>
+      <autoMaxWidth>true</autoMaxWidth>
+      <autoMaxHeight>true</autoMaxHeight>
+      <extInfo xsi:type="form:LabelDecorationExtInfo">
+       <horizontalAlign>Left</horizontalAlign>
+      </extInfo>
+     </extendedTooltip>
+     <contextMenu>
+      <name>AccrualListTotalSickLeaveDaysContextMenu</name>
+      <id>1521</id>
+      <visible>true</visible>
+      <enabled>true</enabled>
+      <userVisible>
+       <common>true</common>
+      </userVisible>
+      <autoFill>true</autoFill>
+     </contextMenu>
+     <type>InputField</type>
+     <editMode>Enter</editMode>
+     <showInHeader>true</showInHeader>
+     <headerHorizontalAlign>Left</headerHorizontalAlign>
+     <showInFooter>true</showInFooter>
+     <extInfo xsi:type="form:InputFieldExtInfo">
+      <autoMaxWidth>true</autoMaxWidth>
+      <autoMaxHeight>true</autoMaxHeight>
+      <wrap>true</wrap>
+      <chooseType>true</chooseType>
+      <typeDomainEnabled>true</typeDomainEnabled>
+      <textEdit>true</textEdit>
+     </extInfo>
+    </items>
+    <items xsi:type="form:FormField">
+     <name>AccrualListPaidSickLeaveDays</name>
+     <id>1526</id>
+     <enabled>true</enabled>
+     <userVisible>
+      <common>true</common>
+     </userVisible>
+     <dataPath xsi:type="form:DataPath">
+      <segments>Object.AccrualList.PaidSickLeaveDays</segments>
+     </dataPath>
+     <extendedTooltip>
+      <name>AccrualListPaidSickLeaveDaysExtendedTooltip</name>
+      <id>1528</id>
+      <visible>true</visible>
+      <enabled>true</enabled>
+      <userVisible>
+       <common>true</common>
+      </userVisible>
+      <type>Label</type>
+      <autoMaxWidth>true</autoMaxWidth>
+      <autoMaxHeight>true</autoMaxHeight>
+      <extInfo xsi:type="form:LabelDecorationExtInfo">
+       <horizontalAlign>Left</horizontalAlign>
+      </extInfo>
+     </extendedTooltip>
+     <contextMenu>
+      <name>AccrualListPaidSickLeaveDaysContextMenu</name>
+      <id>1527</id>
       <visible>true</visible>
       <enabled>true</enabled>
       <userVisible>
@@ -1593,6 +1793,10 @@
      <dataPath xsi:type="form:DataPath">
       <segments>Object.DeductionList.Employee</segments>
      </dataPath>
+     <handlers>
+      <event>OnChange</event>
+      <name>DeductionListEmployeeOnChange</name>
+     </handlers>
      <extendedTooltip>
       <name>DeductionListEmployeeExtendedTooltip</name>
       <id>1385</id>
@@ -4058,15 +4262,15 @@
   <name>FillAccrual</name>
   <title>
    <key>en</key>
-   <value>Fill accrual</value>
+   <value>Calculate</value>
   </title>
   <title>
    <key>ru</key>
-   <value>Заполнить начисление</value>
+   <value>Рассчитать</value>
   </title>
   <title>
    <key>tr</key>
-   <value>Tahakkuk doldur</value>
+   <value>Hesapla</value>
   </title>
   <id>20</id>
   <use>
@@ -4080,22 +4284,22 @@
     <name>FillAccrual</name>
    </handler>
   </action>
-  <representation>Picture</representation>
+  <representation>TextPicture</representation>
   <currentRowUse>Auto</currentRowUse>
  </formCommands>
  <formCommands>
   <name>FillDeduction</name>
   <title>
    <key>en</key>
-   <value>Fill deduction</value>
+   <value>Calculate</value>
   </title>
   <title>
    <key>ru</key>
-   <value>Заполнить удержания</value>
+   <value>Рассчитать</value>
   </title>
   <title>
    <key>tr</key>
-   <value>Kesinti doldur</value>
+   <value>Hesapla</value>
   </title>
   <id>21</id>
   <use>
@@ -4109,22 +4313,22 @@
     <name>FillDeduction</name>
    </handler>
   </action>
-  <representation>Picture</representation>
+  <representation>TextPicture</representation>
   <currentRowUse>Auto</currentRowUse>
  </formCommands>
  <formCommands>
   <name>FillCashAdvanceDeduction</name>
   <title>
    <key>en</key>
-   <value>Fill cash advance deduction</value>
+   <value>Calculate</value>
   </title>
   <title>
    <key>ru</key>
-   <value>Заполнить вычет наличными авансом</value>
+   <value>Рассчитать</value>
   </title>
   <title>
    <key>tr</key>
-   <value>Avans kesintisini doldur</value>
+   <value>Hesapla</value>
   </title>
   <id>22</id>
   <use>
@@ -4138,7 +4342,7 @@
     <name>FillCashAdvanceDeduction</name>
    </handler>
   </action>
-  <representation>Picture</representation>
+  <representation>TextPicture</representation>
   <currentRowUse>Auto</currentRowUse>
  </formCommands>
  <commandInterface>

@@ -1947,6 +1947,9 @@ Function Strings(Lang) Export
 	Strings.Insert("QuestionToUser_026", NStr("en='Do you want to update payment agent?';
 		|ru='Вы хотите обновить платежного агента?';
 		|tr='Ödeme acentesini güncellemek istiyor musunuz?'", Lang));
+	Strings.Insert("QuestionToUser_027", NStr("en='Filled data by employee [%1] will be cleared. Continue?';
+		|ru='Заполненные данные сотрудником [%1] будут очищены. Продолжить?';
+		|tr='Filled data by employee [%1] will be cleared. Continue?'", Lang));
 #EndRegion
 
 #Region SuggestionToUser
@@ -2324,6 +2327,42 @@ Function Strings(Lang) Export
 		|ru='Загрузить список товаров';
 		|tr='Ürün listesi yükle'", Lang));
 #EndRegion	
+	
+#Region Salary
+
+	Strings.Insert("Salary_Err_001",   NStr("en='Wrong period';
+		|ru='Неправильный период';
+		|tr='Wrong period'", Lang));
+	Strings.Insert("Salary_Err_002",   NStr("en='Employee schedule not selected';
+		|ru='Расписание сотрудника не выбрано';
+		|tr='Employee schedule not selected'", Lang));
+	Strings.Insert("Salary_Err_003",   NStr("en='Begin Date less than End Date';
+		|ru='Дата начала меньше даты окончания';
+		|tr='Begin Date less than End Date'", Lang));
+	
+	Strings.Insert("Salary_WeekDays_1",   NStr("en='Monday';
+		|ru='Понедельник';
+		|tr='Monday'", Lang));
+	Strings.Insert("Salary_WeekDays_2",   NStr("en='Tuesday';
+		|ru='Вторник';
+		|tr='Tuesday'", Lang));
+	Strings.Insert("Salary_WeekDays_3",   NStr("en='Wednesday';
+		|ru='Среда';
+		|tr='Wednesday'", Lang));
+	Strings.Insert("Salary_WeekDays_4",   NStr("en='Thursday';
+		|ru='Четверг';
+		|tr='Thursday'", Lang));
+	Strings.Insert("Salary_WeekDays_5",   NStr("en='Friday';
+		|ru='Пятница';
+		|tr='Friday'", Lang));
+	Strings.Insert("Salary_WeekDays_6",   NStr("en='Saturday';
+		|ru='Суббота';
+		|tr='Saturday'", Lang));
+	Strings.Insert("Salary_WeekDays_7",   NStr("en='Sunday';
+		|ru='Воскресенье';
+		|tr='Sunday'", Lang));
+	
+#EndRegion
 	
 	Return Strings;
 EndFunction

@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mdclass:Role xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="1af006aa-ea7d-4a9c-8919-2de6c7ba22c7">
+ <name>Document_EmployeeSickLeave</name>
+ <synonym>
+  <key>en</key>
+  <value>Document employee sick leave</value>
+ </synonym>
+ <synonym>
+  <key>ru</key>
+  <value>Документ больничный сотрудника</value>
+ </synonym>
+ <synonym>
+  <key>tr</key>
+  <value>Document employee sick leave</value>
+ </synonym>
+</mdclass:Role>

@@ -11,6 +11,11 @@ EndProcedure
 &AtServer
 Procedure OnCreateAtServer(Cancel, StandardProcessing)
 	DocTimeSheetServer.OnCreateAtServer(Object, ThisObject, Cancel, StandardProcessing);
+	ThisObject.ListMode = "Calendar";
+	
+	ThisObject.Period.StartDate = Object.BeginDate;
+	ThisObject.Period.EndDate = Object.EndDate;
+	
 	If Parameters.Key.IsEmpty() Then
 		SetVisibilityAvailability(Object, ThisObject);
 	EndIf;
@@ -57,7 +62,186 @@ EndProcedure
 
 &AtClientAtServerNoContext
 Procedure SetVisibilityAvailability(Object, Form)
-	Form.Items.FillTimeSheet.Enabled = Not Form.ReadOnly;
+	Form.Items.FillAll.Enabled = Not Form.ReadOnly;
+	Form.Items.RefillByCurrentEmployee.Enabled = Not Form.ReadOnly;
+	
+	If Form.ListMode = "Calendar" Then
+		Form.Items.GroupTimeSheetPages.CurrentPage = Form.Items.GroupTimeSheetPageCalendar;
+	Else
+		Form.Items.GroupTimeSheetPages.CurrentPage = Form.Items.GroupTimeSheetPageTable;
+	EndIf;
+	
+	Form.Items.Calendar.BeginOfRepresentationPeriod = Object.BeginDate;
+	Form.Items.Calendar.EndOfRepresentationPeriod   = Object.EndDate;
+	
+#IF Client THEN
+	Form.Items.Calendar.Refresh();
+
+	Form.TotalDays = 0;
+	Form.TotalWeekend = 0;
+	Form.TotalWorkingDays = 0;
+	Form.TotalNotWorkingDays = 0;
+	Form.TotalVacation = 0;
+	Form.TotalSickLeave = 0;
+	
+	For Each Row In Object.TimeSheetList Do
+		If Not Row.Visible Then
+			Continue;
+		EndIf;
+		
+		Form.TotalDays = Form.TotalDays + 1;
+		
+		If Not ValueIsFilled(Row.CountDaysHours)
+			And Not ValueIsFilled(Row.ActuallyDaysHours) Then
+				Form.TotalWeekend = Form.TotalWeekend + 1;
+				
+		ElsIf ValueIsFilled(Row.ActuallyDaysHours)
+				And Not Row.IsVacation 
+				And Not Row.IsSickLeave Then
+				Form.TotalWorkingDays = Form.TotalWorkingDays + 1;
+					
+		ElsIf ValueIsFilled(Row.CountDaysHours) 
+				And Not ValueIsFilled(Row.ActuallyDaysHours) Then
+				Form.TotalNotWorkingDays = Form.TotalNotWorkingDays + 1;
+			
+		ElsIf ValueIsFilled(Row.CountDaysHours) 
+				And ValueIsFilled(Row.ActuallyDaysHours)
+				And Row.IsVacation Then
+				Form.TotalVacation = Form.TotalVacation + 1;
+			
+		ElsIf ValueIsFilled(Row.CountDaysHours) 
+				And ValueIsFilled(Row.ActuallyDaysHours)
+				And Row.IsSickLeave Then
+				Form.TotalSickLeave = Form.TotalSickLeave + 1;
+
+		EndIf;
+	EndDo;
+#ENDIF
+
+EndProcedure
+
+&AtClient
+Procedure ListModeOnChange(Item)
+	SetVisibilityAvailability(Object, ThisObject);
+EndProcedure
+
+&AtClient
+Procedure CalendarOnPeriodOutput(Item, PeriodAppearance)
+	CalendarDates = GetCalendarDates();
+	For Each Appearance In PeriodAppearance.Dates Do
+		If CalendarDates.Weekend.Find(Appearance.Date) <> Undefined Then
+			Appearance.BackColor = WebColors.LightPink;
+		
+		ElsIf CalendarDates.FullWorkedDays.Find(Appearance.Date) <> Undefined Then
+			Appearance.BackColor = WebColors.LightGreen;
+			
+		Elsif CalendarDates.NotWorkedDays.Find(Appearance.Date) <> Undefined Then
+			Appearance.BackColor = WebColors.LightGray;
+		
+		Elsif CalendarDates.VacationDays.Find(Appearance.Date) <> Undefined Then
+			Appearance.BackColor = WebColors.LightBlue;
+		
+		Elsif CalendarDates.SickLeaveDays.Find(Appearance.Date) <> Undefined Then
+			Appearance.BackColor = WebColors.PeachPuff;
+		
+		EndIf;
+	EndDo;
+EndProcedure
+
+&AtServer
+Function GetCalendarDates()
+	Result = New Structure();
+	Result.Insert("Weekend"        , New Array()); // red
+	Result.Insert("FullWorkedDays" , New Array()); // green
+	Result.Insert("NotWorkedDays"  , New Array()); // gray
+	Result.Insert("VacationDays"   , New Array());  // blue
+	Result.Insert("SickLeaveDays"  , New Array());  // yellow
+	
+	For Each Row In Object.TimeSheetList Do
+		If Not Row.Visible Then
+			Continue;
+		EndIf;
+		
+		If Not ValueIsFilled(Row.CountDaysHours) 
+			And Not ValueIsFilled(Row.ActuallyDaysHours) Then
+			Result.Weekend.Add(Row.Date);
+		
+		
+		ElsIf ValueIsFilled(Row.ActuallyDaysHours)
+			And Not Row.IsVacation And Not Row.IsSickLeave Then	
+			Result.FullWorkedDays.Add(Row.Date);
+				
+		ElsIf ValueIsFilled(Row.CountDaysHours) 
+			And Not ValueIsFilled(Row.ActuallyDaysHours) Then
+			Result.NotWorkedDays.Add(Row.Date);
+			
+		ElsIf ValueIsFilled(Row.CountDaysHours) 
+			And ValueIsFilled(Row.ActuallyDaysHours)
+			And Row.IsVacation Then
+			Result.VacationDays.Add(Row.Date);
+			
+		ElsIf ValueIsFilled(Row.CountDaysHours) 
+			And ValueIsFilled(Row.ActuallyDaysHours)
+			And Row.IsSickLeave Then
+			Result.SickLeaveDays.Add(Row.Date);
+			
+		EndIf;
+	EndDo;	
+	
+	Return Result;
+EndFunction
+
+&AtClient
+Procedure CalendarSelection(Item, SelectedDate)
+	CurrentData = ThisObject.Items.Workers.CurrentData;
+	If CurrentData = Undefined Then
+		Return;
+	EndIf;
+	
+	Filter = New Structure();
+	Filter.Insert("Employee"         , CurrentData.Employee);
+	Filter.Insert("EmployeeSchedule" , CurrentData.EmployeeSchedule);
+	Filter.Insert("Position"         , CurrentData.Position);
+	Filter.Insert("ProfitLossCenter" , CurrentData.ProfitLossCenter);
+	Filter.Insert("Date"             , SelectedDate);
+	
+	TimeSheetRows = Object.TimeSheetList.FindRows(Filter);
+	If TimeSheetRows.Count() <> 1 Then
+		Return;
+	EndIf;
+	
+	OpeningParameters = New Structure();
+	OpeningParameters.Insert("RowKey"         , TimeSheetRows[0].Key);
+	OpeningParameters.Insert("Date"           , TimeSheetRows[0].Date);
+	OpeningParameters.Insert("CountDaysHours" , TimeSheetRows[0].CountDaysHours);
+	OpeningParameters.Insert("ActuallyDaysHours" , TimeSheetRows[0].ActuallyDaysHours);
+	OpeningParameters.Insert("IsVacation"        , TimeSheetRows[0].IsVacation);
+	OpeningParameters.Insert("IsSickLeave"       , TimeSheetRows[0].IsSickLeave);
+	
+	OpenForm("Document.TimeSheet.Form.EditCalendarDay", 
+		OpeningParameters, ThisObject, , , , 
+		New NotifyDescription("EditCalendarDayEnd", ThisObject), 
+		FormWindowOpeningMode.LockOwnerWindow);
+	
+EndProcedure
+
+&AtClient
+Procedure EditCalendarDayEnd(Result, NotifyParams) Export
+	If Result = Undefined Then
+		Return;
+	EndIf;
+	
+	TimeSheetRows = Object.TimeSheetList.FindRows(New Structure("Key", Result.RowKey));
+	TimeSheetRows[0].ActuallyDaysHours = Result.ActuallyDaysHours;
+	ThisObject.Modified = True;
+	SetVisibilityAvailability(Object, ThisObject);
+EndProcedure
+
+&AtClient
+Procedure PeriodOnChange(Item)
+	Object.BeginDate = ThisObject.Period.StartDate;
+	Object.EndDate = ThisObject.Period.EndDate;	
+	SetVisibilityAvailability(Object, ThisObject);
 EndProcedure
 
 &AtClient
@@ -114,22 +298,12 @@ EndProcedure
 
 &AtClient
 Procedure TimeSheetListBeforeAddRow(Item, Cancel, Clone, Parent, IsFolder, Parameter)
-	DocTimeSheetClient.TimeSheetListBeforeAddRow(Object, ThisObject, Item, Cancel, Clone, Parent, IsFolder, Parameter);
-	CurrentData = Items.Workers.CurrentData;
-	If CurrentData = Undefined Then
-		Return;
-	EndIf;
-	FillingValues = New Structure();
-	FillingValues.Insert("Employee", CurrentData.Employee);
-	FillingValues.Insert("Position", CurrentData.Position);
-	
-	ViewClient_V2.TimeSheetListAddFilledRow(Object, ThisObject, FillingValues);
-	SetVisibleRowsTimeSheetList();
+	Cancel = True;
 EndProcedure
 
 &AtClient
 Procedure TimeSheetListBeforeDeleteRow(Item, Cancel)
-	DocTimeSheetClient.TimeSheetListBeforeDeleteRow(Object, ThisObject, Item, Cancel);
+	Cancel = True;
 EndProcedure
 
 &AtClient
@@ -155,7 +329,8 @@ Procedure SetVisibleRowsTimeSheetList()
 	For Each Row In Object.TimeSheetList Do
 		Row.Visible = 
 			(Row.Employee = CurrentData.Employee)
-			And (Row.Position = CurrentData.Position);
+			And (Row.Position = CurrentData.Position)
+			And (Row.EmployeeSchedule = CurrentData.EmployeeSchedule);
 	EndDo;
 	
 	For Each Row In Object.TimeSheetList Do
@@ -169,16 +344,97 @@ EndProcedure
 &AtClient
 Procedure WorkersOnActivateRow(Item)
 	SetVisibleRowsTimeSheetList();
+	SetVisibilityAvailability(Object, ThisObject);
 EndProcedure
 
 &AtClient
 Procedure WorkersBeforeAddRow(Item, Cancel, Clone, Parent, IsFolder, Parameter)
 	Cancel = True;
+	
+	If Not CheckFilling() Then
+		Return;
+	EndIf;
+	
+	Employees = New Array();
+	For Each Row In Object.TimeSheetList Do
+		Employees.Add(Row.Employee);
+	EndDo;
+	
+	OpeningParameters = New Structure();
+	OpeningParameters.Insert("Company"   , Object.Company);
+	OpeningParameters.Insert("Branch"    , Object.Branch);
+	OpeningParameters.Insert("EndDate"   , Object.EndDate);
+	OpeningParameters.Insert("BeginDate" , Object.BeginDate);
+	OpeningParameters.Insert("Employees" , Employees);
+	
+	NotifyParameters = New Structure();
+	Notify = New NotifyDescription("AddEmployeeEnd", ThisObject, NotifyParameters);
+	
+	OpenForm("Document.TimeSheet.Form.AddEmployee", OpeningParameters, 
+	ThisObject, , , , 
+	Notify , 
+	FormWindowOpeningMode.LockOwnerWindow);
+EndProcedure
+
+&AtClient
+Procedure AddEmployeeEnd(Result, NotifyParams) Export
+	If Result = Undefined Then 
+		Return;
+	EndIf;
+	
+	If Result.ArrayOfEmployee.Count() = 0 Then
+		Return;
+	EndIf;
+	
+	FillingResult = FillTimeSheetAtServer(Result.ArrayOfEmployee);
+	
+	ViewClient_V2.TimeSheetListLoad(Object, ThisObject, 
+		FillingResult.Address, FillingResult.GroupColumn, FillingResult.SumColumn);
+	ThisObject.Modified = True;
+	
+	
+	FillWorkersAtServer();
+	
+	For Each Row In ThisObject.Workers Do
+		If Row.Employee = Result.ArrayOfEmployee[0] Then
+			Items.Workers.CurrentRow = Row.GetID();
+			Break;
+		EndIf;
+	EndDo;
 EndProcedure
 
 &AtClient
 Procedure WorkersBeforeDeleteRow(Item, Cancel)
-	Cancel = True;
+	CurrentData = Items.Workers.CurrentData;
+	If CurrentData = Undefined Then
+		Cancel = True;
+		Return;
+	EndIf;
+	RemoveWorkerRow(CurrentData);
+EndProcedure
+
+&AtClient
+Procedure WorkersAfterDeleteRow(Item)
+	SetVisibilityAvailability(Object, ThisObject);
+EndProcedure
+
+&AtClient
+Procedure TimeSheetListActuallyDaysHoursOnChange(Item)
+	SetVisibilityAvailability(Object, ThisObject);
+EndProcedure
+
+&AtClient
+Procedure RemoveWorkerRow(CurrentData)
+	Filter = New Structure();
+	Filter.Insert("Employee"         , CurrentData.Employee);
+	Filter.Insert("EmployeeSchedule" , CurrentData.EmployeeSchedule);
+	Filter.Insert("Position"         , CurrentData.Position);
+	Filter.Insert("ProfitLossCenter" , CurrentData.ProfitLossCenter);
+	
+	Rows = Object.TimeSheetList.FindRows(Filter);
+	For Each Row In Rows Do
+		Object.TimeSheetList.Delete(Row);
+	EndDo;
 EndProcedure
 
 #EndRegion
@@ -263,7 +519,12 @@ EndProcedure
 #Region COMMANDS
 
 &AtClient
-Async Procedure FillTimeSheet(Command)	
+Async Procedure FillAllTimeSheet(Command)	
+	
+	If Not CheckFilling() Then
+		Return;
+	EndIf;
+	
 	TableIsFilled = Object.TimeSheetList.Count() > 0;
 	
 	If TableIsFilled Then
@@ -277,17 +538,56 @@ Async Procedure FillTimeSheet(Command)
 		ThisObject.Modified = True;
 		FillWorkersAtClient();
 	EndIf;
+	SetVisibilityAvailability(Object, ThisObject);
+EndProcedure
+
+&AtClient
+Async Procedure RefillByCurrentEmployee(Command)
+	If Not CheckFilling() Then
+		Return;
+	EndIf;
+	
+	CurrentData = Items.Workers.CurrentData;
+	If CurrentData = Undefined Then
+		Return;
+	EndIf;
+	
+	CurrentData_Employee         = CurrentData.Employee;
+	CurrentData_EmployeeSchedule = CurrentData.EmployeeSchedule;
+	CurrentData_Position         = CurrentData.Position;
+	CurrentData_ProfitLisCenter  = CurrentData.ProfitLossCenter;
+		
+	If ValueIsFilled(CurrentData_Employee) Then
+		Answer = Await DoQueryBoxAsync(StrTemplate(R().QuestionToUser_027, CurrentData_Employee), QuestionDialogMode.OKCancel);
+	Else
+		Return;
+	EndIf;
+	
+	If Answer = DialogReturnCode.OK Then
+		Result = FillTimeSheetAtServer(CurrentData_Employee);
+		Rows = Object.TimeSheetList.FindRows(New Structure("Employee", CurrentData_Employee));
+		For Each Row In Rows Do
+			Object.TimeSheetList.Delete(Row);
+		EndDo;
+		ViewClient_V2.TimeSheetListLoad(Object, ThisObject, Result.Address, Result.GroupColumn, Result.SumColumn);
+		ThisObject.Modified = True;
+		FillWorkersAtClient();
+	EndIf;
+	
+	SetVisibilityAvailability(Object, ThisObject);
 EndProcedure
 
 &AtServer
-Function FillTimeSheetAtServer()
+Function FillTimeSheetAtServer(Filter_Employee = Undefined)
 	FillingParameters = New Structure();
 	FillingParameters.Insert("Company"   , Object.Company);
 	FillingParameters.Insert("Branch"    , Object.Branch);
 	FillingParameters.Insert("BeginDate" , Object.BeginDate);
 	FillingParameters.Insert("EndDate"   , Object.EndDate);
+	FillingParameters.Insert("Employee"  , Filter_Employee);
 	
 	Result = DocTimeSheetServer.GetTimeSheet(FillingParameters);
+	
 	Address = PutToTempStorage(Result.Table, ThisObject.UUID);
 	Return New Structure("Address, GroupColumn, SumColumn", Address, Result.GroupColumn, Result.SumColumn);
 EndFunction
@@ -295,25 +595,32 @@ EndFunction
 &AtClient
 Procedure FillWorkersAtClient()
 	CurrentData = Items.Workers.CurrentData;
-	CurrentData_Employee = Undefined;
-	CurrentData_Position = Undefined;
-	CurrentData_ProfitLisCenter = Undefined;
+	
+	CurrentData_Employee         = Undefined;
+	CurrentData_EmployeeSchedule = Undefined;
+	CurrentData_Position         = Undefined;
+	CurrentData_ProfitLisCenter  = Undefined;
+	
 	If CurrentData <> Undefined Then
-		CurrentData_Employee = CurrentData.Employee;
-		CurrentData_Position = CurrentData.Position;
-		CurrentData_ProfitLisCenter = CurrentData.ProfitLossCenter;
+		CurrentData_Employee         = CurrentData.Employee;
+		CurrentData_EmployeeSchedule = CurrentData.EmployeeSchedule;
+		CurrentData_Position         = CurrentData.Position;
+		CurrentData_ProfitLisCenter  = CurrentData.ProfitLossCenter;
 	EndIf;
-	FillWorkersAtServer(CurrentData_Employee, CurrentData_Position, CurrentData_ProfitLisCenter);
+	
+	FillWorkersAtServer(CurrentData_Employee, CurrentData_EmployeeSchedule, CurrentData_Position, CurrentData_ProfitLisCenter);
 EndProcedure
 
 &AtServer
 Procedure FillWorkersAtServer(CurrentData_Employee = Undefined, 
+							  CurrentData_EmployeeSchedule = Undefined,
 							  CurrentData_Position = Undefined, 
 							  CurrentData_ProfitLossCenter = Undefined)
 	Query = New Query();
 	Query.Text = 
 	"SELECT
 	|	TimeSheetList.Employee,
+	|	TimeSheetList.EmployeeSchedule,
 	|	TimeSheetList.Position,
 	|	TimeSheetList.ProfitLossCenter,
 	|	TimeSheetList.Date
@@ -325,6 +632,7 @@ Procedure FillWorkersAtServer(CurrentData_Employee = Undefined,
 	|////////////////////////////////////////////////////////////////////////////////
 	|SELECT
 	|	TimeSheetList.Employee,
+	|	TimeSheetList.EmployeeSchedule,
 	|	TimeSheetList.Position,
 	|	TimeSheetList.ProfitLossCenter,
 	|	MIN(TimeSheetList.Date) AS BeginDate,
@@ -333,6 +641,7 @@ Procedure FillWorkersAtServer(CurrentData_Employee = Undefined,
 	|	TimeSheetList AS TimeSheetList
 	|GROUP BY
 	|	TimeSheetList.Employee,
+	|	TimeSheetList.EmployeeSchedule,
 	|	TimeSheetList.Position,
 	|	TimeSheetList.ProfitLossCenter
 	|
@@ -346,12 +655,14 @@ Procedure FillWorkersAtServer(CurrentData_Employee = Undefined,
 	CurrentRowIsSet = False;
 	If CurrentData_Employee <> Undefined 
 		And CurrentData_Position <> Undefined 
-		And CurrentData_ProfitLossCenter <> Undefined Then
+		And CurrentData_ProfitLossCenter <> Undefined
+		And CurrentData_EmployeeSchedule <> Undefined Then
 		
 		For Each Row In ThisObject.Workers Do
 			If Row.Employee = CurrentData_Employee
 				And Row.Position = CurrentData_Position
-				And Row.ProfitLossCenter = CurrentData_ProfitLossCenter Then
+				And Row.ProfitLossCenter = CurrentData_ProfitLossCenter
+				And Row.EmployeeSchedule = CurrentData_EmployeeSchedule Then
 				Items.Workers.CurrentRow = Row.GetID();
 				CurrentRowIsSet = True;
 				Break;

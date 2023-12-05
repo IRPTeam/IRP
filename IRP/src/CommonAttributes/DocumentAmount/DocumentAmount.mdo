@@ -112,6 +112,14 @@
   <metadata>Document.Payroll</metadata>
   <use>Use</use>
  </content>
+ <content>
+  <metadata>Document.AdditionalAccrual</metadata>
+  <use>Use</use>
+ </content>
+ <content>
+  <metadata>Document.AdditionalDeduction</metadata>
+  <use>Use</use>
+ </content>
  <autoUse>DontUse</autoUse>
  <dataSeparation>DontUse</dataSeparation>
  <usersSeparation>DontUse</usersSeparation>

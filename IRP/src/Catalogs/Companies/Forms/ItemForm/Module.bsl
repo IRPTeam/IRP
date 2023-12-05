@@ -138,6 +138,7 @@ Procedure SetVisible()
 	Items.GroupLedgerTypes.Visible = Object.OurCompany;
 	Items.GroupLandedCost.Visible  = Object.OurCompany;
 	Items.GroupComissionTrading.Visible  = Object.OurCompany And FOServer.IsUseCommissionTrading();
+	Items.GroupSalary.Visible = Object.OurCompany And FOServer.IsUseSalary();
 EndProcedure
 
 &AtClient

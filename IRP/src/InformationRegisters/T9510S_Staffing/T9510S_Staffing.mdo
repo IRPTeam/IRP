@@ -24,8 +24,8 @@
  </synonym>
  <useStandardCommands>true</useStandardCommands>
  <editType>InDialog</editType>
- <defaultRecordForm>InformationRegister.T9510S_Staffing.Form.RecordForm</defaultRecordForm>
- <informationRegisterPeriodicity>Day</informationRegisterPeriodicity>
+ <informationRegisterPeriodicity>RecorderPosition</informationRegisterPeriodicity>
+ <writeMode>RecorderSubordinate</writeMode>
  <dataLockControlMode>Managed</dataLockControlMode>
  <recordPresentation>
   <key>en</key>
@@ -58,36 +58,6 @@
   </type>
   <minValue xsi:type="core:UndefinedValue"/>
   <maxValue xsi:type="core:UndefinedValue"/>
-  <fullTextSearch>Use</fullTextSearch>
-  <dataHistory>Use</dataHistory>
-  <fillValue xsi:type="core:UndefinedValue"/>
- </resources>
- <resources uuid="27f9eed6-634d-4fa4-b27a-a73dbea4fdb3">
-  <name>Company</name>
-  <synonym>
-   <key>en</key>
-   <value>Company</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Организация</value>
-  </synonym>
-  <synonym>
-   <key>tr</key>
-   <value>Şirket</value>
-  </synonym>
-  <type>
-   <types>CatalogRef.Companies</types>
-  </type>
-  <minValue xsi:type="core:UndefinedValue"/>
-  <maxValue xsi:type="core:UndefinedValue"/>
-  <fillChecking>ShowError</fillChecking>
-  <choiceParameters>
-   <name>Filter.OurCompany</name>
-   <value xsi:type="core:BooleanValue">
-    <value>true</value>
-   </value>
-  </choiceParameters>
   <fullTextSearch>Use</fullTextSearch>
   <dataHistory>Use</dataHistory>
   <fillValue xsi:type="core:UndefinedValue"/>
@@ -136,6 +106,29 @@
   <minValue xsi:type="core:UndefinedValue"/>
   <maxValue xsi:type="core:UndefinedValue"/>
   <fillChecking>ShowError</fillChecking>
+  <fullTextSearch>Use</fullTextSearch>
+  <dataHistory>Use</dataHistory>
+  <fillValue xsi:type="core:UndefinedValue"/>
+ </resources>
+ <resources uuid="7932025f-cf57-4902-a0d9-4970756e669a">
+  <name>EmployeeSchedule</name>
+  <synonym>
+   <key>en</key>
+   <value>Employee schedule</value>
+  </synonym>
+  <synonym>
+   <key>ru</key>
+   <value>Штатное расписание</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Employee schedule</value>
+  </synonym>
+  <type>
+   <types>CatalogRef.EmployeeSchedule</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
   <fullTextSearch>Use</fullTextSearch>
   <dataHistory>Use</dataHistory>
   <fillValue xsi:type="core:UndefinedValue"/>
@@ -195,21 +188,28 @@
   <fillValue xsi:type="core:UndefinedValue"/>
   <mainFilter>true</mainFilter>
  </dimensions>
- <forms uuid="8b006af9-f25d-4cdc-b68c-3d51833cc0bd">
-  <name>RecordForm</name>
+ <dimensions uuid="2e48b39e-efcf-4d15-b911-2f4ccc60e020">
+  <name>Company</name>
   <synonym>
    <key>en</key>
-   <value>Record form</value>
+   <value>Company</value>
   </synonym>
   <synonym>
    <key>ru</key>
-   <value>Форма записи</value>
+   <value>Организация</value>
   </synonym>
   <synonym>
    <key>tr</key>
-   <value>Kayıt formu</value>
+   <value>Şirket</value>
   </synonym>
-  <usePurposes>PersonalComputer</usePurposes>
-  <usePurposes>MobileDevice</usePurposes>
- </forms>
+  <type>
+   <types>CatalogRef.Companies</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <dataHistory>Use</dataHistory>
+  <fillValue xsi:type="core:UndefinedValue"/>
+  <mainFilter>true</mainFilter>
+ </dimensions>
 </mdclass:InformationRegister>

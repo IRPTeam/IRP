@@ -98,19 +98,24 @@ Function GetQueryTextsSecondaryTables()
 EndFunction
 
 Function TimeSheet()
-	Return "SELECT
-		   |	TimeSheetTimeSheetList.Ref.Company AS Company,
-		   |	TimeSheetTimeSheetList.Ref.Branch AS Branch,
-		   |	TimeSheetTimeSheetList.Date,
-		   |	TimeSheetTimeSheetList.Employee,
-		   |	TimeSheetTimeSheetList.Position,
-		   |	TimeSheetTimeSheetList.AccrualAndDeductionType,
-		   |	TimeSheetTimeSheetList.ProfitLossCenter
-		   |INTO TimeSheet
-		   |FROM
-		   |	Document.TimeSheet.TimeSheetList AS TimeSheetTimeSheetList
-		   |WHERE
-		   |	TimeSheetTimeSheetList.Ref = &Ref";
+	Return 
+		"SELECT
+		|	TimeSheetTimeSheetList.Ref.Company AS Company,
+		|	TimeSheetTimeSheetList.Ref.Branch AS Branch,
+		|	TimeSheetTimeSheetList.Date,
+		|	TimeSheetTimeSheetList.Employee,
+		|	TimeSheetTimeSheetList.EmployeeSchedule,
+		|	TimeSheetTimeSheetList.Position,
+		|	TimeSheetTimeSheetList.ProfitLossCenter,
+		|	TimeSheetTimeSheetList.CountDaysHours,
+		|	TimeSheetTimeSheetList.ActuallyDaysHours,
+		|	TimeSheetTimeSheetList.IsVacation,
+		|	TimeSheetTimeSheetList.IsSickLeave
+		|INTO TimeSheet
+		|FROM
+		|	Document.TimeSheet.TimeSheetList AS TimeSheetTimeSheetList
+		|WHERE
+		|	TimeSheetTimeSheetList.Ref = &Ref";
 EndFunction
 
 #EndRegion
@@ -124,19 +129,24 @@ Function GetQueryTextsMasterTables()
 EndFunction
 
 Function T9520S_TimeSheetInfo()
-	Return "SELECT
-		   |	TimeSheet.Company,
-		   |	TimeSheet.Branch,
-		   |	TimeSheet.Date,
-		   |	TimeSheet.Employee,
-		   |	TimeSheet.Position,
-		   |	TimeSheet.AccrualAndDeductionType,
-		   |	TimeSheet.ProfitLossCenter
-		   |INTO T9520S_TimeSheetInfo
-		   |FROM
-		   |	TimeSheet AS TimeSheet
-		   |WHERE
-		   |	TRUE";
+	Return 
+		"SELECT
+		|	TimeSheet.Company,
+		|	TimeSheet.Branch,
+		|	TimeSheet.Date,
+		|	TimeSheet.Employee,
+		|	TimeSheet.EmployeeSchedule,
+		|	TimeSheet.Position,
+		|	TimeSheet.ProfitLossCenter,
+		|	TimeSheet.CountDaysHours,
+		|	TimeSheet.ActuallyDaysHours,
+		|	TimeSheet.IsVacation,
+		|	TimeSheet.IsSickLeave
+		|INTO T9520S_TimeSheetInfo
+		|FROM
+		|	TimeSheet AS TimeSheet
+		|WHERE
+		|	TRUE";
 EndFunction
 
 #EndRegion

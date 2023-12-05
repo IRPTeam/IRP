@@ -306,6 +306,34 @@
   <use>Use</use>
  </content>
  <content>
+  <metadata>Document.EmployeeHiring</metadata>
+  <use>Use</use>
+ </content>
+ <content>
+  <metadata>Document.EmployeeTransfer</metadata>
+  <use>Use</use>
+ </content>
+ <content>
+  <metadata>Document.EmployeeFiring</metadata>
+  <use>Use</use>
+ </content>
+ <content>
+  <metadata>Document.EmployeeVacation</metadata>
+  <use>Use</use>
+ </content>
+ <content>
+  <metadata>Document.EmployeeSickLeave</metadata>
+  <use>Use</use>
+ </content>
+ <content>
+  <metadata>Document.AdditionalDeduction</metadata>
+  <use>Use</use>
+ </content>
+ <content>
+  <metadata>Document.AdditionalAccrual</metadata>
+  <use>Use</use>
+ </content>
+ <content>
   <metadata>Document.VisitorCounter</metadata>
   <use>Use</use>
  </content>

@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mdclass:Role xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="04365828-660a-41fb-8843-8878c0df5153">
+ <name>Document_AdditionalAccrual</name>
+ <synonym>
+  <key>en</key>
+  <value>Document additional accrual</value>
+ </synonym>
+ <synonym>
+  <key>ru</key>
+  <value>Документ дополнительное начисление</value>
+ </synonym>
+ <synonym>
+  <key>tr</key>
+  <value>Document additional accrual</value>
+ </synonym>
+</mdclass:Role>

@@ -21,6 +21,9 @@
  <content>Document.Payroll</content>
  <content>Document.TimeSheet</content>
  <content>CommonCommand.OpenPartnersEmployee</content>
+ <content>Document.AdditionalAccrual</content>
+ <content>Document.AdditionalDeduction</content>
  <subsystems>Settings</subsystems>
  <subsystems>Catalogs</subsystems>
+ <subsystems>PersonnelRecords</subsystems>
 </mdclass:Subsystem>

@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mdclass:Role xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="7df686db-ab3f-4c64-87c7-2d1218b927db">
+ <name>Document_EmployeeFiring</name>
+ <synonym>
+  <key>en</key>
+  <value>Document employee firing</value>
+ </synonym>
+ <synonym>
+  <key>ru</key>
+  <value>Документ увольнение сотрудника</value>
+ </synonym>
+ <synonym>
+  <key>tr</key>
+  <value>Document employee firing</value>
+ </synonym>
+</mdclass:Role>

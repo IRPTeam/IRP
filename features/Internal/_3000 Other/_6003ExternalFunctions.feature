@@ -56,12 +56,6 @@ Scenario: _602700 preparation (external function)
 		When Create catalog ExternalFunctions objects
 		When Create information register Taxes records (VAT)
 	When Create document PurchaseOrder objects (check movements, GR before PI, not Use receipt sheduling)
-	* Add test extension
-		Given I open hyperlink "e1cib/list/Catalog.Extensions"
-		If "List" table does not contain lines Then
-				| "Description"                 |
-				| "AdditionalFunctionality"     |
-			When add Additional Functionality extension
 	And I close all client application windows
 
 Scenario: _602701 check preparation

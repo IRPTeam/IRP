@@ -392,6 +392,13 @@
  <roles>Role.UseExternalReports</roles>
  <roles>Role.UseGroupEditingProperties</roles>
  <roles>Role.UseOutput</roles>
+ <roles>Role.Document_EmployeeHiring</roles>
+ <roles>Role.Document_EmployeeTransfer</roles>
+ <roles>Role.Document_EmployeeFiring</roles>
+ <roles>Role.Document_EmployeeVacation</roles>
+ <roles>Role.Document_EmployeeSickLeave</roles>
+ <roles>Role.Document_AdditionalAccrual</roles>
+ <roles>Role.Document_AdditionalDeduction</roles>
  <commonTemplates>CommonTemplate.HTMLPictureSlider</commonTemplates>
  <commonTemplates>CommonTemplate.HTMLAddAttributes</commonTemplates>
  <commonTemplates>CommonTemplate.HTMLGallery</commonTemplates>
@@ -650,7 +657,6 @@
  <commonModules>CommonModule.RowIDInfoServerReuse</commonModules>
  <commonModules>CommonModule.Saas</commonModules>
  <commonModules>CommonModule.SaasClient</commonModules>
- <commonModules>CommonModule.SalaryServerReuse</commonModules>
  <commonModules>CommonModule.ScheduledJobsForExtentions</commonModules>
  <commonModules>CommonModule.SerialLotNumberClient</commonModules>
  <commonModules>CommonModule.SerialLotNumberClientServer</commonModules>
@@ -678,6 +684,22 @@
  <commonModules>CommonModule.ViewServer_V2</commonModules>
  <commonModules>CommonModule.WorkstationClient</commonModules>
  <commonModules>CommonModule.WorkstationServer</commonModules>
+ <commonModules>CommonModule.DocEmployeeHiringClient</commonModules>
+ <commonModules>CommonModule.DocEmployeeHiringServer</commonModules>
+ <commonModules>CommonModule.DocEmployeeTransferClient</commonModules>
+ <commonModules>CommonModule.DocEmployeeTransferServer</commonModules>
+ <commonModules>CommonModule.DocEmployeeFiringClient</commonModules>
+ <commonModules>CommonModule.DocEmployeeFiringServer</commonModules>
+ <commonModules>CommonModule.DocEmployeeVacationClient</commonModules>
+ <commonModules>CommonModule.DocEmployeeVacationServer</commonModules>
+ <commonModules>CommonModule.DocEmployeeSickLeaveClient</commonModules>
+ <commonModules>CommonModule.DocEmployeeSickLeaveServer</commonModules>
+ <commonModules>CommonModule.DocAdditionalAccrualClient</commonModules>
+ <commonModules>CommonModule.DocAdditionalAccrualServer</commonModules>
+ <commonModules>CommonModule.DocAdditionalDeductionClient</commonModules>
+ <commonModules>CommonModule.DocAdditionalDeductionServer</commonModules>
+ <commonModules>CommonModule.SalaryServer</commonModules>
+ <commonModules>CommonModule.SalaryPrivileged</commonModules>
  <commonModules>CommonModule.ControlCodeStringServer</commonModules>
  <commonModules>CommonModule.ControlCodeStringClient</commonModules>
  <commonModules>CommonModule.DocVisitorCounterClient</commonModules>
@@ -1011,6 +1033,7 @@
  <catalogs>Catalog.Vehicles</catalogs>
  <catalogs>Catalog.VehicleTypes</catalogs>
  <catalogs>Catalog.Workstations</catalogs>
+ <catalogs>Catalog.EmployeeSchedule</catalogs>
  <documents>Document.AdditionalCostAllocation</documents>
  <documents>Document.AdditionalRevenueAllocation</documents>
  <documents>Document.BankPayment</documents>
@@ -1027,15 +1050,11 @@
  <documents>Document.CashTransferOrder</documents>
  <documents>Document.ChequeBondTransaction</documents>
  <documents>Document.ChequeBondTransactionItem</documents>
- <documents>Document.CommissioningOfFixedAsset</documents>
  <documents>Document.ConsolidatedRetailSales</documents>
  <documents>Document.CreditNote</documents>
  <documents>Document.CustomersAdvancesClosing</documents>
  <documents>Document.DebitNote</documents>
- <documents>Document.DecommissioningOfFixedAsset</documents>
- <documents>Document.DepreciationCalculation</documents>
  <documents>Document.EmployeeCashAdvance</documents>
- <documents>Document.FixedAssetTransfer</documents>
  <documents>Document.ForeignCurrencyRevaluation</documents>
  <documents>Document.GoodsReceipt</documents>
  <documents>Document.IncomingPaymentOrder</documents>
@@ -1046,7 +1065,6 @@
  <documents>Document.JournalEntry</documents>
  <documents>Document.Labeling</documents>
  <documents>Document.ManualRegisterEntry</documents>
- <documents>Document.ModernizationOfFixedAsset</documents>
  <documents>Document.MoneyTransfer</documents>
  <documents>Document.OpeningEntry</documents>
  <documents>Document.OutgoingPaymentOrder</documents>
@@ -1087,6 +1105,18 @@
  <documents>Document.WorkOrder</documents>
  <documents>Document.WorkOrderClosing</documents>
  <documents>Document.WorkSheet</documents>
+ <documents>Document.CommissioningOfFixedAsset</documents>
+ <documents>Document.DecommissioningOfFixedAsset</documents>
+ <documents>Document.DepreciationCalculation</documents>
+ <documents>Document.FixedAssetTransfer</documents>
+ <documents>Document.ModernizationOfFixedAsset</documents>
+ <documents>Document.EmployeeHiring</documents>
+ <documents>Document.EmployeeTransfer</documents>
+ <documents>Document.EmployeeFiring</documents>
+ <documents>Document.EmployeeVacation</documents>
+ <documents>Document.EmployeeSickLeave</documents>
+ <documents>Document.AdditionalAccrual</documents>
+ <documents>Document.AdditionalDeduction</documents>
  <documentJournals>DocumentJournal.DocumentsForIncomingPayment</documentJournals>
  <documentJournals>DocumentJournal.DocumentsForOutgoingPayment</documentJournals>
  <enums>Enum.AccountingAnalyticTypes</enums>
@@ -1173,6 +1203,7 @@
  <enums>Enum.TradeAgentFeeTypes</enums>
  <enums>Enum.TypeEquipment</enums>
  <enums>Enum.TypeExternalObject</enums>
+ <enums>Enum.EmployeeScheduleTypes</enums>
  <reports>Report.AllRegistersMovement</reports>
  <reports>Report.BatchBalance</reports>
  <reports>Report.BatchBalanceSimple</reports>
@@ -1284,6 +1315,8 @@
  <informationRegisters>InformationRegister.T9051S_AccountingExtDimensions</informationRegisters>
  <informationRegisters>InformationRegister.T2011S_TransactionsCurrencyRevaluation</informationRegisters>
  <informationRegisters>InformationRegister.T2012S_AdvancesCurrencyRevaluation</informationRegisters>
+ <informationRegisters>InformationRegister.T9540S_EmployeeVacations</informationRegisters>
+ <informationRegisters>InformationRegister.T9550S_EmployeeSickLeave</informationRegisters>
  <accumulationRegisters>AccumulationRegister.CashInTransit</accumulationRegisters>
  <accumulationRegisters>AccumulationRegister.R1001T_Purchases</accumulationRegisters>
  <accumulationRegisters>AccumulationRegister.R1002T_PurchaseReturns</accumulationRegisters>
@@ -1381,6 +1414,10 @@
  <accumulationRegisters>AccumulationRegister.TM1030B_TransactionsKey</accumulationRegisters>
  <accumulationRegisters>AccumulationRegister.R8510B_BookValueOfFixedAsset</accumulationRegisters>
  <accumulationRegisters>AccumulationRegister.R8515T_CostOfFixedAsset</accumulationRegisters>
+ <accumulationRegisters>AccumulationRegister.R9545T_PaidVacations</accumulationRegisters>
+ <accumulationRegisters>AccumulationRegister.R9555T_PaidSickLeaves</accumulationRegisters>
+ <accumulationRegisters>AccumulationRegister.R9560T_AdditionalAccrual</accumulationRegisters>
+ <accumulationRegisters>AccumulationRegister.R9570T_AdditionalDeduction</accumulationRegisters>
  <chartsOfCharacteristicTypes>ChartOfCharacteristicTypes.AccountingExtraDimensionTypes</chartsOfCharacteristicTypes>
  <chartsOfCharacteristicTypes>ChartOfCharacteristicTypes.AddAttributeAndProperty</chartsOfCharacteristicTypes>
  <chartsOfCharacteristicTypes>ChartOfCharacteristicTypes.CurrencyMovementType</chartsOfCharacteristicTypes>

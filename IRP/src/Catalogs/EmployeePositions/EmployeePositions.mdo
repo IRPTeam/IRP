@@ -141,15 +141,15 @@
  <fullTextSearch>Use</fullTextSearch>
  <objectPresentation>
   <key>en</key>
-  <value>Expense and revenue type</value>
+  <value>Employee positions</value>
  </objectPresentation>
  <objectPresentation>
   <key>ru</key>
-  <value>Статья доходов и расходов</value>
+  <value>Должности сотрудников</value>
  </objectPresentation>
  <objectPresentation>
   <key>tr</key>
-  <value>Gider ve gelir türü</value>
+  <value>Çalışan pozisyonları</value>
  </objectPresentation>
  <hierarchyType>HierarchyOfItems</hierarchyType>
  <levelCount>2</levelCount>

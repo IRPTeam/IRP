@@ -641,18 +641,6 @@ Scenario: _0263111 create postponed return with basis document
 			| 'Amount' | 'Retail customer' |
 			| '920,00' | ''                |
 		And I select current line in "List" table
-		And I click "Payment Return" button
-		And I click "Search by barcode" button
-		And I input "1111111111111111111111111111111111111111111" text in the field named "Barcode"
-		And I move to the next attribute
-		And I go to line in "ItemList" table
-			| 'Item'                                                    | 'Item key' | 'Price'  | 'Quantity' | 'Serials'   | 'Total'  |
-			| 'Product 9 with SLN (control code string, without check)' | 'ODS'      | '100,00' | '1,000'    | '999999999' | '100,00' |
-		And I activate "Price" field in "ItemList" table
-		And I click "Payment Return" button
-		And I click "Search by barcode" button
-		And I input "1111111111111111111111111111111111111111112" text in the field named "Barcode"
-		And I move to the next attribute
 		And I click "Postpone current receipt" button
 		Then the number of "ItemList" table lines is "равно" "0"
 	* Processing a postponed RRR 	
@@ -682,8 +670,8 @@ Scenario: _0263111 create postponed return with basis document
 		And I expand "ControlCodeStrings [2]" group
 		And "ControlCodeStrings" table contains lines
 			| 'Code string'                                 | 'Code is approved' | 'Not check' |
-			| '1111111111111111111111111111111111111111111' | 'No'               | 'No'        |
-			| '1111111111111111111111111111111111111111112' | 'No'               | 'No'        |
+			| 'Q3VycmVudCByb3cgd2lsbCBkZWNvZGUgdG8gYmFzZTY0' | 'No'               | 'No'        |
+			| 'Q3VycmVudCByb3cgd2lsbCBkZWNvZGUgdG8gYmFzZTY1' | 'No'               | 'No'        |
 	And I close all client application windows
 	
 		

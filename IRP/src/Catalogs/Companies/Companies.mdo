@@ -395,6 +395,145 @@
   <fullTextSearch>Use</fullTextSearch>
   <dataHistory>Use</dataHistory>
  </attributes>
+ <attributes uuid="c3f7264e-dcc3-4438-8c92-f449a4a48dfa">
+  <name>SalaryAccrualVacation</name>
+  <synonym>
+   <key>en</key>
+   <value>Vacation</value>
+  </synonym>
+  <synonym>
+   <key>ru</key>
+   <value>Отпуск</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Vacation</value>
+  </synonym>
+  <type>
+   <types>CatalogRef.AccrualAndDeductionTypes</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <choiceParameters>
+   <name>Filter.Type</name>
+   <value xsi:type="core:ReferenceValue">
+    <value>Enum.PayrollTypes.EnumValue.Accrual</value>
+   </value>
+  </choiceParameters>
+  <fillValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <dataHistory>Use</dataHistory>
+ </attributes>
+ <attributes uuid="05f16b0b-7882-40d6-aab4-75a392b2f015">
+  <name>SalaryMaxDaysVacation</name>
+  <synonym>
+   <key>en</key>
+   <value>Maximum days (year)</value>
+  </synonym>
+  <synonym>
+   <key>ru</key>
+   <value>Максимальное количество дней (год)</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Maximum days (year)</value>
+  </synonym>
+  <type>
+   <types>Number</types>
+   <numberQualifiers>
+    <precision>3</precision>
+   </numberQualifiers>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fillValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <dataHistory>Use</dataHistory>
+ </attributes>
+ <attributes uuid="92626f06-5022-4a3a-b2e7-913e8d4b5081">
+  <name>SalaryAccrualSickLeave</name>
+  <synonym>
+   <key>en</key>
+   <value>Sick leave</value>
+  </synonym>
+  <synonym>
+   <key>ru</key>
+   <value>Больничный</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Sick leave</value>
+  </synonym>
+  <type>
+   <types>CatalogRef.AccrualAndDeductionTypes</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <choiceParameters>
+   <name>Filter.Type</name>
+   <value xsi:type="core:ReferenceValue">
+    <value>Enum.PayrollTypes.EnumValue.Accrual</value>
+   </value>
+  </choiceParameters>
+  <fillValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <dataHistory>Use</dataHistory>
+ </attributes>
+ <attributes uuid="c97dfb8d-6914-4ebe-b5d4-35bd351f1a18">
+  <name>SalaryMaxDaysSickLeave</name>
+  <synonym>
+   <key>en</key>
+   <value>Maximum days (month)</value>
+  </synonym>
+  <synonym>
+   <key>ru</key>
+   <value>Максимальное количество дней (месяц)</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Maximum days (month)</value>
+  </synonym>
+  <type>
+   <types>Number</types>
+   <numberQualifiers>
+    <precision>3</precision>
+   </numberQualifiers>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fillValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <dataHistory>Use</dataHistory>
+ </attributes>
+ <attributes uuid="2e85ba2a-d0af-4e1a-a340-24a1a432a5cb">
+  <name>SalaryBasicPayroll</name>
+  <synonym>
+   <key>en</key>
+   <value>Salary basic payroll</value>
+  </synonym>
+  <synonym>
+   <key>ru</key>
+   <value>Основная заработная плата</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Salary basic payroll</value>
+  </synonym>
+  <type>
+   <types>CatalogRef.AccrualAndDeductionTypes</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <choiceParameters>
+   <name>Filter.Type</name>
+   <value xsi:type="core:ReferenceValue">
+    <value>Enum.PayrollTypes.EnumValue.Accrual</value>
+   </value>
+  </choiceParameters>
+  <fillValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <dataHistory>Use</dataHistory>
+ </attributes>
  <tabularSections uuid="1cef8184-c8f4-4ae0-b558-76db940b1ce5">
   <producedTypes>
    <objectType typeId="e9c801b9-6993-4bc6-9c66-a808cd465688" valueTypeId="ef76d03a-c4a6-4068-9bd0-e3f4f8ae223d"/>

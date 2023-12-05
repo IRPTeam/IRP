@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mdclass:Role xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="e7e3660c-0cdc-45bc-921d-b46ba30b892f">
+ <name>Document_EmployeeVacation</name>
+ <synonym>
+  <key>en</key>
+  <value>Document employee vacation</value>
+ </synonym>
+ <synonym>
+  <key>ru</key>
+  <value>Документ отпуск сотрудника</value>
+ </synonym>
+ <synonym>
+  <key>tr</key>
+  <value>Document employee vacation</value>
+ </synonym>
+</mdclass:Role>

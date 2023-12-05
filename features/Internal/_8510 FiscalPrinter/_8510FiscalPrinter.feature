@@ -535,12 +535,6 @@ Scenario: _0850000 preparation (fiscal printer)
 	* Setting for Company commission trade
 		When settings for Company (commission trade)
 	And I close all client application windows
-	* Add test extension
-		Given I open hyperlink "e1cib/list/Catalog.Extensions"
-		If "List" table does not contain lines Then
-				| "Description"                 |
-				| "AdditionalFunctionality"     |
-			When add Additional Functionality extension
 	* Instal fiscal driver
 		Given I open hyperlink "e1cib/list/Catalog.EquipmentDrivers"
 		And I click the button named "FormCreate"

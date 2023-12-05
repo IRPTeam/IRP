@@ -64,12 +64,6 @@ Scenario: _604700 preparation (Object property editor)
 	When Create document PurchaseOrder objects (check movements, GR before PI, Use receipt sheduling)
 	When Create document InventoryTransferOrder objects (check movements)
 	When Create document InternalSupplyRequest objects (check movements)
-	* Add test extension
-		Given I open hyperlink "e1cib/list/Catalog.Extensions"
-		If "List" table does not contain lines Then
-				| "Description"                 |
-				| "AdditionalFunctionality"     |
-			When add Additional Functionality extension
 	* PO posting
 		And I execute 1C:Enterprise script at server
 			| "Documents.PurchaseOrder.FindByNumber(115).GetObject().Write(DocumentWriteMode.Posting);"    |

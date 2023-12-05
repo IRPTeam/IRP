@@ -1662,19 +1662,6 @@ Scenario: set True value to the constant UseSimpleMode
 				| "Constants.UseSimpleMode.Set(True);"     |
 
 
-
-Scenario: add Additional Functionality extension
-	Given I open hyperlink "e1cib/list/Catalog.Extensions"
-	And I click the button named "FormCreate"
-	And I select external file "$Path$/DataProcessor/AdditionalFunctionality.cfe"
-	And I click "Add file" button
-	And Delay 2
-	And I input "AdditionalFunctionality" text in "Description" field
-	And I click the button named "FormWriteAndClose"
-	And I close TestClient session
-	And I install the "AdditionalFunctionality" extension
-	Given I open new TestClient session or connect the existing one	
-
 Scenario: add VAExtension
 	Given I open hyperlink "e1cib/list/Catalog.Extensions"
 	And I click the button named "FormCreate"

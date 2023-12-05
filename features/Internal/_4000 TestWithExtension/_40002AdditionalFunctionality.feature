@@ -35,12 +35,6 @@ Scenario: _4000200 preparation
 		When Create catalog AccessProfiles objects
 		When Create catalog CashAccounts objects
 		When update ItemKeys
-	* Add test extension
-		Given I open hyperlink "e1cib/list/Catalog.Extensions"
-		If "List" table does not contain lines Then
-				| "Description"                 |
-				| "AdditionalFunctionality"     |
-			When add Additional Functionality extension
 	When create Workstation				
 
 Scenario: _40002001 check preparation

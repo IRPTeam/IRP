@@ -70,7 +70,7 @@ Scenario: _097700 preparation (Сheck payroll)
 		When create Payroll and Time Sheet for Second Company
 		When Create document EmployeeHiring objects
 		And I execute 1C:Enterprise script at server
-			| "Documents.EmployeeHiring.FindByNumber(2).GetObject().Write(DocumentWriteMode.Write);"   |
+			| "Documents.EmployeeHiring.FindByNumber(2).GetObject().Write(DocumentWriteMode.Posting);"   |
 			| "Documents.EmployeeHiring.FindByNumber(3).GetObject().Write(DocumentWriteMode.Posting);" |
 			| "Documents.EmployeeHiring.FindByNumber(4).GetObject().Write(DocumentWriteMode.Posting);" |
 	* Salary settings for company
@@ -844,55 +844,17 @@ Scenario: _097716 create payroll
 			| '$$NumberPayroll$$' |	
 		
 
-Scenario: _097720 check of payroll calculation (position and salary change in the middle of the calculation period + vacation + truancy)
-	And I close all client application windows
-	* Preparation
-		When test data for payroll calculation (position and salary change in the middle of the calculation period + vacation + truancy)
-		And I execute 1C:Enterprise script at server
-			| "Documents.EmployeeHiring.FindByNumber(6).GetObject().Write(DocumentWriteMode.Write);"   |
-		And I execute 1C:Enterprise script at server
-			| "Documents.EmployeeTransfer.FindByNumber(2).GetObject().Write(DocumentWriteMode.Write);"   |
-		And I execute 1C:Enterprise script at server
-			| "Documents.EmployeeVacation.FindByNumber(3).GetObject().Write(DocumentWriteMode.Write);"   |
-	* Check Time Sheet
-		Given I open hyperlink "e1cib/list/Document.TimeSheet"		
-		And I go to line in "List" table
-			| 'Number' |
-			| '11'     |
-		And I select current line in "List" table
-		And in the table "Workers" I click "Fill all" button
-		And "Workers" table became equal
-			| 'Employee'                                        | 'Schedule'                          | 'Begin date' | 'End date'   | 'Position'   | 'Profit loss center' |
-			| 'Employee 1 (change salary + vacation + truancy)' | '5 working days / 2 days off (day)' | '01.11.2023' | '09.11.2023' | 'Manager'    | 'Front office'       |
-			| 'Employee 1 (change salary + vacation + truancy)' | '5 working days / 2 days off (day)' | '10.11.2023' | '30.11.2023' | 'Accountant' | 'Front office'       |
-		And I click "Post and close" button
-		And I wait "Time sheet * dated * *" window closing in 20 seconds
-	* Check Payroll
-		Given I open hyperlink "e1cib/list/Document.Payroll"		
-		And I go to line in "List" table
-			| 'Number' |
-			| '11'     |
-		And I select current line in "List" table
-		And in the table "AccrualList" I click "Calculate" button
-		And "AccrualList" table became equal
-			| 'Amount'   | 'Employee'                                        | 'Position'   | 'Accrual type' | 'Expense type' | 'Profit loss center' |
-			| '7 636,36' | 'Employee 1 (change salary + vacation + truancy)' | 'Accountant' | 'Salary'       | 'Expense'      | 'Front office'       |
-			| '3 181,82' | 'Employee 1 (change salary + vacation + truancy)' | 'Manager'    | 'Salary'       | 'Expense'      | 'Front office'       |
-		And I click "Post and close" button
-		And I wait "Payroll * dated * *" window closing in 20 seconds
-	And I close all client application windows
-	
 				
 Scenario: _097721 check of payroll calculation (position and salary change in the middle of the calculation period + vacation)
 	And I close all client application windows
 	* Preparation
 		When test data for payroll calculation (position and salary change in the middle of the calculation period + vacation + truancy)
 		And I execute 1C:Enterprise script at server
-			| "Documents.EmployeeHiring.FindByNumber(6).GetObject().Write(DocumentWriteMode.Write);"   |
+			| "Documents.EmployeeHiring.FindByNumber(6).GetObject().Write(DocumentWriteMode.Posting);"   |
 		And I execute 1C:Enterprise script at server
-			| "Documents.EmployeeTransfer.FindByNumber(2).GetObject().Write(DocumentWriteMode.Write);"   |
+			| "Documents.EmployeeTransfer.FindByNumber(2).GetObject().Write(DocumentWriteMode.Posting);"   |
 		And I execute 1C:Enterprise script at server
-			| "Documents.EmployeeVacation.FindByNumber(3).GetObject().Write(DocumentWriteMode.Write);"   |
+			| "Documents.EmployeeVacation.FindByNumber(3).GetObject().Write(DocumentWriteMode.Posting);"   |
 	* Check Time Sheet
 		Given I open hyperlink "e1cib/list/Document.TimeSheet"		
 		And I go to line in "List" table
@@ -929,13 +891,13 @@ Scenario: _097722 check of payroll calculation (work schedule change (days) + va
 	* Preparation
 		When test data for check of payroll calculation (work schedule change (days) + vacation + sick leave)
 		And I execute 1C:Enterprise script at server
-			| "Documents.EmployeeHiring.FindByNumber(7).GetObject().Write(DocumentWriteMode.Write);"   |
+			| "Documents.EmployeeHiring.FindByNumber(7).GetObject().Write(DocumentWriteMode.Posting);"   |
 		And I execute 1C:Enterprise script at server
-			| "Documents.EmployeeTransfer.FindByNumber(3).GetObject().Write(DocumentWriteMode.Write);"   |
+			| "Documents.EmployeeTransfer.FindByNumber(3).GetObject().Write(DocumentWriteMode.Posting);"   |
 		And I execute 1C:Enterprise script at server
-			| "Documents.EmployeeVacation.FindByNumber(4).GetObject().Write(DocumentWriteMode.Write);"   |
+			| "Documents.EmployeeVacation.FindByNumber(4).GetObject().Write(DocumentWriteMode.Posting);"   |
 		And I execute 1C:Enterprise script at server
-			| "Documents.EmployeeSickLeave.FindByNumber(11).GetObject().Write(DocumentWriteMode.Write);"   |
+			| "Documents.EmployeeSickLeave.FindByNumber(11).GetObject().Write(DocumentWriteMode.Posting);"   |
 	* Check Time Sheet
 		Given I open hyperlink "e1cib/list/Document.TimeSheet"		
 		And I go to line in "List" table
@@ -964,7 +926,7 @@ Scenario: _097722 check of payroll calculation (work schedule change (days) + va
 		And "AccrualList" table contains lines
 			| 'Amount'   | 'Employee'                                                   | 'Position'     | 'Accrual type' | 'Expense type' | 'Profit loss center' |
 			| '6 912,50' | 'Employee 2 (change shedule (days) + vacation + sick leave)' | 'Sales person' | 'Salary'       | 'Expense'      | 'Front office'       |	
-		Then the number of "Workers" table lines is "равно" "3"
+		Then the number of "AccrualList" table lines is "равно" "3"
 		And I click "Post and close" button
 		And I wait "Payroll * dated * *" window closing in 20 seconds
 	And I close all client application windows
@@ -975,9 +937,9 @@ Scenario: _097723 check of payroll calculation (vacation + truancy)
 	* Preparation
 		When test data for check of payroll calculation (vacation + truancy)
 		And I execute 1C:Enterprise script at server
-			| "Documents.EmployeeHiring.FindByNumber(8).GetObject().Write(DocumentWriteMode.Write);"   |
+			| "Documents.EmployeeHiring.FindByNumber(8).GetObject().Write(DocumentWriteMode.Posting);"   |
 		And I execute 1C:Enterprise script at server
-			| "Documents.EmployeeVacation.FindByNumber(5).GetObject().Write(DocumentWriteMode.Write);"   |
+			| "Documents.EmployeeVacation.FindByNumber(5).GetObject().Write(DocumentWriteMode.Posting);"   |
 	* Check Time Sheet
 		Given I open hyperlink "e1cib/list/Document.TimeSheet"		
 		And I go to line in "List" table
@@ -1026,11 +988,11 @@ Scenario: _097724 check of payroll calculation (change of work schedule (from ho
 	* Preparation
 		When test data for check of payroll calculation (change of work schedule (from hours to days) + sick leave)
 		And I execute 1C:Enterprise script at server
-			| "Documents.EmployeeHiring.FindByNumber(9).GetObject().Write(DocumentWriteMode.Write);"   |
+			| "Documents.EmployeeHiring.FindByNumber(9).GetObject().Write(DocumentWriteMode.Posting);"   |
 		And I execute 1C:Enterprise script at server
-			| "Documents.EmployeeSickLeave.FindByNumber(12).GetObject().Write(DocumentWriteMode.Write);"   |
+			| "Documents.EmployeeSickLeave.FindByNumber(12).GetObject().Write(DocumentWriteMode.Posting);"   |
 		And I execute 1C:Enterprise script at server
-			| "Documents.EmployeeTransfer.FindByNumber(4).GetObject().Write(DocumentWriteMode.Write);"   |
+			| "Documents.EmployeeTransfer.FindByNumber(4).GetObject().Write(DocumentWriteMode.Posting);"   |
 	* Check Time Sheet
 		Given I open hyperlink "e1cib/list/Document.TimeSheet"		
 		And I go to line in "List" table
@@ -1070,11 +1032,11 @@ Scenario: _097725 check of payroll calculation (several vacations)
 	* Preparation
 		When test data for check of payroll calculation (several vacations)
 		And I execute 1C:Enterprise script at server
-			| "Documents.EmployeeHiring.FindByNumber(10).GetObject().Write(DocumentWriteMode.Write);"   |
+			| "Documents.EmployeeHiring.FindByNumber(10).GetObject().Write(DocumentWriteMode.Posting);"   |
 		And I execute 1C:Enterprise script at server
-			| "Documents.EmployeeVacation.FindByNumber(6).GetObject().Write(DocumentWriteMode.Write);"   |
+			| "Documents.EmployeeVacation.FindByNumber(6).GetObject().Write(DocumentWriteMode.Posting);"   |
 		And I execute 1C:Enterprise script at server
-			| "Documents.EmployeeVacation.FindByNumber(7).GetObject().Write(DocumentWriteMode.Write);"   |
+			| "Documents.EmployeeVacation.FindByNumber(7).GetObject().Write(DocumentWriteMode.Posting);"   |
 	* Check Time Sheet
 		Given I open hyperlink "e1cib/list/Document.TimeSheet"		
 		And I go to line in "List" table
@@ -1112,7 +1074,7 @@ Scenario: _097726 check of payroll calculation (hours shedule + truancy)
 	* Preparation
 		When test data for check of payroll calculation (hours shedule + truancy)
 		And I execute 1C:Enterprise script at server
-			| "Documents.EmployeeHiring.FindByNumber(11).GetObject().Write(DocumentWriteMode.Write);"   |
+			| "Documents.EmployeeHiring.FindByNumber(11).GetObject().Write(DocumentWriteMode.Posting);"   |
 	* Check Time Sheet
 		Given I open hyperlink "e1cib/list/Document.TimeSheet"		
 		And I go to line in "List" table
@@ -1163,11 +1125,11 @@ Scenario: _097727 check of payroll calculation (several work schedule changes)
 	* Preparation
 		When test data for check of payroll calculation (several work schedule changes)
 		And I execute 1C:Enterprise script at server
-			| "Documents.EmployeeHiring.FindByNumber(12).GetObject().Write(DocumentWriteMode.Write);"   |
+			| "Documents.EmployeeHiring.FindByNumber(12).GetObject().Write(DocumentWriteMode.Posting);"   |
 		And I execute 1C:Enterprise script at server
-			| "Documents.EmployeeTransfer.FindByNumber(5).GetObject().Write(DocumentWriteMode.Write);"   |
+			| "Documents.EmployeeTransfer.FindByNumber(5).GetObject().Write(DocumentWriteMode.Posting);"   |
 		And I execute 1C:Enterprise script at server
-			| "Documents.EmployeeTransfer.FindByNumber(6).GetObject().Write(DocumentWriteMode.Write);"   |
+			| "Documents.EmployeeTransfer.FindByNumber(6).GetObject().Write(DocumentWriteMode.Posting);"   |
 	* Check Time Sheet
 		Given I open hyperlink "e1cib/list/Document.TimeSheet"		
 		And I go to line in "List" table
@@ -1207,13 +1169,13 @@ Scenario: _097728 check of payroll calculation (several vacation and sick leaves
 	* Preparation
 		When test data for check of payroll calculation (several vacation and sick leaves)
 		And I execute 1C:Enterprise script at server
-			| "Documents.EmployeeHiring.FindByNumber(13).GetObject().Write(DocumentWriteMode.Write);"   |
+			| "Documents.EmployeeHiring.FindByNumber(13).GetObject().Write(DocumentWriteMode.Posting);"   |
 		And I execute 1C:Enterprise script at server
-			| "Documents.EmployeeSickLeave.FindByNumber(13).GetObject().Write(DocumentWriteMode.Write);"   |
+			| "Documents.EmployeeSickLeave.FindByNumber(13).GetObject().Write(DocumentWriteMode.Posting);"   |
 		And I execute 1C:Enterprise script at server
-			| "Documents.EmployeeVacation.FindByNumber(8).GetObject().Write(DocumentWriteMode.Write);"   |
+			| "Documents.EmployeeVacation.FindByNumber(8).GetObject().Write(DocumentWriteMode.Posting);"   |
 		And I execute 1C:Enterprise script at server
-			| "Documents.EmployeeVacation.FindByNumber(9).GetObject().Write(DocumentWriteMode.Write);"   |
+			| "Documents.EmployeeVacation.FindByNumber(9).GetObject().Write(DocumentWriteMode.Posting);"   |
 	* Check Time Sheet
 		Given I open hyperlink "e1cib/list/Document.TimeSheet"		
 		And I go to line in "List" table
@@ -1251,9 +1213,9 @@ Scenario: _097729 check of payroll calculation (hours shedule + several sick lea
 	* Preparation
 		When test data for check of payroll calculation (hours shedule + several sick leave)
 		And I execute 1C:Enterprise script at server
-			| "Documents.EmployeeHiring.FindByNumber(14).GetObject().Write(DocumentWriteMode.Write);"   |
+			| "Documents.EmployeeHiring.FindByNumber(14).GetObject().Write(DocumentWriteMode.Posting);"   |
 		And I execute 1C:Enterprise script at server
-			| "Documents.EmployeeSickLeave.FindByNumber(14).GetObject().Write(DocumentWriteMode.Write);"   |
+			| "Documents.EmployeeSickLeave.FindByNumber(14).GetObject().Write(DocumentWriteMode.Posting);"   |
 	* Check Time Sheet
 		Given I open hyperlink "e1cib/list/Document.TimeSheet"		
 		And I go to line in "List" table

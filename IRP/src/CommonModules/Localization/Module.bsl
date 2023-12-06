@@ -1403,6 +1403,7 @@ Strings.Insert("AccountingError_01", NStr("en = 'Account [%1] not used for recor
 Strings.Insert("AccountingError_02", NStr("en = 'Debit - is a required field.'", Lang));
 Strings.Insert("AccountingError_03", NStr("en = 'Credit - is a required field.'", Lang));
 Strings.Insert("AccountingError_04", NStr("en = 'Record period - is a required field.'", Lang));
+Strings.Insert("AccountingError_05", NStr("en = 'Not set any ledger types'", Lang));
 
 Strings.Insert("AccountingQuestion_01", NStr("en = 'Change [Quantity] mark in analytics'", Lang));
 Strings.Insert("AccountingQuestion_02", NStr("en = 'Change [Currency] mark in analytics'", Lang));

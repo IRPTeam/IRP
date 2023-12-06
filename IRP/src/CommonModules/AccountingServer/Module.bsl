@@ -1307,4 +1307,174 @@ EndProcedure
 
 #EndRegion
 
+#Region Service
+
+Procedure CreateJE_ByDocumentName(DocumentName, Company, LedgerType, StartDate, EndDate) Export
+	Query = New Query();
+	Query_Text = 
+	"SELECT
+	|	Doc.Ref
+	|INTO Documents
+	|FROM
+	|	Document.%1 AS Doc
+	|WHERE
+	|	Doc.Date BETWEEN BEGINOFPERIOD(&StartDate, DAY) AND ENDOFPERIOD(&EndDate, DAY)
+	|	AND Doc.Company = &Company
+	|;
+	|
+	|////////////////////////////////////////////////////////////////////////////////
+	|SELECT
+	|	Documents.Ref AS Basis,
+	|	JournalEntry.Ref AS JournalEntry
+	|FROM
+	|	Documents AS Documents
+	|		LEFT JOIN Document.JournalEntry AS JournalEntry
+	|		ON Documents.Ref = JournalEntry.Basis
+	|		AND NOT JournalEntry.DeletionMark
+	|		AND JournalEntry.LedgerType = &LedgerType";
+	Query.Text = StrTemplate(Query_Text, DocumentName);
+	Query.SetParameter("StartDate"  , StartDate);
+	Query.SetParameter("EndDate"    , EndDate);
+	Query.SetParameter("Company"    , Company);
+	Query.SetParameter("LedgerType" , LedgerType);
+	
+	QueryResult = Query.Execute();
+	QueryTable = QueryResult.Unload();
+	
+	CreateJE(QueryTable);
+	
+EndProcedure
+
+Procedure CreateJE_ByArrayRefs(ArrayOfRefs, ArrayOfLedgerTypes) Export
+	Query = New Query();
+	Query.Text = 
+	"SELECT
+	|	Doc.Document,
+	|	Doc.LedgerType
+	|INTO Documents
+	|FROM
+	|	&Documents AS Doc
+	|;
+	|
+	|////////////////////////////////////////////////////////////////////////////////
+	|SELECT
+	|	Documents.Document AS Basis,
+	|	JournalEntry.Ref AS JournalEntry,
+	|	Documents.LedgerType
+	|FROM
+	|	Documents AS Documents
+	|		LEFT JOIN Document.JournalEntry AS JournalEntry
+	|		ON Documents.Document = JournalEntry.Basis
+	|		AND NOT JournalEntry.DeletionMark
+	|		AND JournalEntry.LedgerType = Documents.LedgerType";
+
+	DocumentTable = New ValueTable();
+	DocumentTable.Columns.Add("Document", Metadata.Documents.JournalEntry.Attributes.Basis.Type);
+	DocumentTable.Columns.Add("LedgerType", New TypeDescription("CatalogRef.LedgerTypes"));
+	
+	
+		For Each Ref In ArrayOfRefs Do
+			AvailableLedgerTypes = GetLedgerTypesByCompany(Ref, Ref.Date, Ref.Company);
+			For Each LedgerTpe In ArrayOfLedgerTypes Do
+				If AvailableLedgerTypes.Find(LedgerTpe) = Undefined Then
+					Continue;
+				EndIf;		
+				NewRow = DocumentTable.Add();
+				NewRow.Document = Ref;
+				NewRow.LedgerType = LedgerTpe;
+			EndDo;
+		EndDo;
+	
+	Query.SetParameter("Documents"  , DocumentTable);
+	
+	QueryResult = Query.Execute();
+	QueryTable = QueryResult.Unload();
+	
+	CreateJE(QueryTable);			
+EndProcedure
+
+Procedure CreateJE(QueryTable)
+	For Each Row In QueryTable Do
+		If ValueIsFilled(Row.JournalEntry) Then
+			DocObject = Row.JournalEntry.GetObject();
+			DocObject.Write(DocumentWriteMode.Write);
+		Else
+			DocObject = Documents.JournalEntry.CreateDocument();
+			DocObject.Fill(New Structure("Basis, LedgerType", Row.Basis, Row.LedgerType));
+			DocObject.Date = Row.Basis.Date;
+			DocObject.Write(DocumentWriteMode.Write);
+		EndIf;
+	EndDo;
+EndProcedure
+
+Procedure UpdateAnalyticsJE_ByDocumentName(DocumentName, Company, StartDate, EndDate) Export
+	Query = New Query();
+	Query_Text = 
+	"SELECT
+	|	Doc.Ref
+	|FROM
+	|	Document.%1 AS Doc
+	|WHERE
+	|	Doc.Posted
+	|	AND Doc.Date BETWEEN BEGINOFPERIOD(&StartDate, DAY) AND ENDOFPERIOD(&EndDate, DAY)
+	|	AND Doc.Company = &Company";
+	
+	Query.Text = StrTemplate(Query_Text, DocumentName);
+	Query.SetParameter("StartDate"  , StartDate);
+	Query.SetParameter("EndDate"    , EndDate);
+	Query.SetParameter("Company"    , Company);
+	
+	QueryResult = Query.Execute();
+	QueryTable = QueryResult.Unload();
+	
+	UpdateAnalyticsJE(QueryTable);
+EndProcedure
+
+Procedure UpdateAnalyticsJE_ByArrayRefs(ArrayOfRefs) Export
+	DocumentTable = New ValueTable();
+	DocumentTable.Columns.Add("Ref", Metadata.Documents.JournalEntry.Attributes.Basis.Type);
+	
+	For Each Ref In ArrayOfRefs Do
+		NewRow = DocumentTable.Add();
+		NewRow.Ref = Ref;
+	EndDo;
+	
+	UpdateAnalyticsJE(DocumentTable);
+EndProcedure
+
+Procedure UpdateAnalyticsJE(QueryTable)
+	For Each Row In QueryTable Do
+		RecordSet_T9050S = InformationRegisters.T9050S_AccountingRowAnalytics.CreateRecordSet();
+		RecordSet_T9050S.Filter.Document.Set(Row.Ref);
+		RecordSet_T9050S.Read();
+		_AccountingRowAnalytics = RecordSet_T9050S.Unload();
+		
+		RecordSet_T9051S = InformationRegisters.T9051S_AccountingExtDimensions.CreateRecordSet();
+		RecordSet_T9051S.Filter.Document.Set(Row.Ref);
+		RecordSet_T9051S.Read();
+		_AccountingExtDimensions = RecordSet_T9051S.Unload();
+					
+		AccountingClientServer.UpdateAccountingTables(Row.Ref, 
+													  _AccountingRowAnalytics, 
+													  _AccountingExtDimensions, 
+													  AccountingClientServer.GetDocumentMainTable(Row.Ref));
+													  
+		_AccountingRowAnalytics.FillValues(True, "Active");
+		_AccountingExtDimensions.FillValues(True, "Active");
+		
+		RecordSet_T9050S.Load(_AccountingRowAnalytics);
+		RecordSet_T9050S.Write();
+		
+		RecordSet_T9051S.Load(_AccountingExtDimensions);
+		RecordSet_T9051S.Write();		
+	EndDo;	
+EndProcedure
+
+#EndRegion
+
+
+
+
+
+
 

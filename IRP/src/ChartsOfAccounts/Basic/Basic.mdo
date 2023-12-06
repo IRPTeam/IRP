@@ -273,7 +273,7 @@
     <name>LoadForm</name>
     <synonym>
       <key>en</key>
-      <value>Load form</value>
+      <value>Load chart of accounts</value>
     </synonym>
     <usePurposes>PersonalComputer</usePurposes>
     <usePurposes>MobileDevice</usePurposes>

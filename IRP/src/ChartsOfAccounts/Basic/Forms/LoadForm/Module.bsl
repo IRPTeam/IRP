@@ -4,6 +4,10 @@ Procedure OnCreateAtServer(Cancel, StandardProcessing)
 	Template = ChartsOfAccounts.Basic.GetTemplate("LoadTemplate");
 	ThisObject.SpreadsheetDocument.Put(Template);
 	ThisObject.SpreadsheetDocument.FixedTop = 1;
+	
+	ThisObject.Languages.Add("EN");
+	ThisObject.Languages.Add("RU");
+	ThisObject.Languages.Add("TR");
 EndProcedure
 
 &AtClient
@@ -67,39 +71,45 @@ Procedure LoadAtServer()
 		EndDo;
 	EndDo;
 	
-	QueryTable = GetRefs(ValueTable);
+	QueryTableRefs = GetRefs(ValueTable);
 	
 	Cancel = False;
 		
-	CheckRef("LedgerType" , QueryTable, ArrayOfColumns, Cancel);
-	CheckRef("Sub1Type"   , QueryTable, ArrayOfColumns, Cancel);
-	CheckRef("Sub2Type"   , QueryTable, ArrayOfColumns, Cancel);
-	CheckRef("Sub3Type"   , QueryTable, ArrayOfColumns, Cancel);
+	CheckRef("LedgerType" , QueryTableRefs, ArrayOfColumns, Cancel);
+	CheckRef("Sub1Type"   , QueryTableRefs, ArrayOfColumns, Cancel);
+	CheckRef("Sub2Type"   , QueryTableRefs, ArrayOfColumns, Cancel);
+	CheckRef("Sub3Type"   , QueryTableRefs, ArrayOfColumns, Cancel);
 	
-	CheckIsFilled("AccountNo"   , QueryTable, ArrayOfColumns, Cancel);
-	CheckIsFilled("Description" , QueryTable, ArrayOfColumns, Cancel);
+	CheckIsFilled("AccountNo"   , QueryTableRefs, ArrayOfColumns, Cancel);
+	CheckIsFilled("Description" , QueryTableRefs, ArrayOfColumns, Cancel);
 		
 	If Cancel Then
 		Return;
 	EndIf;
 	
-	NewChart = ChartsOfAccounts.Basic.CreateAccount();
-	NewChart.LedgerTypeVariant = Undefined; // LedgerType
-	NewChart.NotUsedForRecords = False; // ForbidRecord
-	NewChart.Code = ""; // AccountNo
+	Try
+		BeginTransaction();
+		CreateUpdateAccounts(QueryTableRefs, ValueTable);
 	
-	NewChart.Currency = False;
-	NewChart.Quantity = False;
-	NewChart.OffBalance = False;
+		QueryTableOwners = GetOwners(ValueTable);
+		
+		SetOwners(QueryTableOwners, ValueTable)
+	Except
+		RollbackTransaction();
+		Raise ErrorDescription();
+	EndTry;
 	
-	NewChart.Type = AccountType.Active;
-	
-	Sub1Type = NewChart.ExtDimensionTypes.Add();
-	Sub1Type.ExtDimensionType = Undefined;
-	Sub1Type.TurnoversOnly = False;
-	Sub1Type.Quantity = False;
-	Sub1Type.Currency = False;
-	Sub1Type.ExtraDimensionsAccountingFlagName = False;
+	CommitTransaction();
+EndProcedure
+
+&AtClient
+Procedure LanguagesBeforeAddRow(Item, Cancel, Clone, Parent, IsFolder, Parameter)
+	Cancel = True;
+EndProcedure
+
+&AtClient
+Procedure LanguagesBeforeDeleteRow(Item, Cancel)
+	Cancel = True;
 EndProcedure
 
 &AtServer
@@ -108,6 +118,8 @@ Function GetRefs(ValueTable)
 	Query.Text = 
 	"SELECT
 	|	ValueTable.RowNumber,
+	|	ValueTable.Description,
+	|	ValueTable.AccountNo,
 	|	ValueTable.LedgerType,
 	|	ValueTable.Sub1Type,
 	|	ValueTable.Sub2Type,
@@ -119,69 +131,119 @@ Function GetRefs(ValueTable)
 	|
 	|////////////////////////////////////////////////////////////////////////////////
 	|SELECT
-	|	tmp_Ledgertype.RowNumber AS RowNumber,
-	|	tmp_Ledgertype.LedgerType AS LedgerType,
+	|	tmp.RowNumber AS RowNumber,
+	|	tmp.Description AS Description,
+	|	tmp.LedgerType AS LedgerType,
 	|	LedgerTypeVariants.Ref AS LedgerTypeRef,
 	|	CASE
 	|		WHEN LedgerTypeVariants.Ref IS NULL
 	|			THEN FALSE
 	|		ELSE TRUE
 	|	END AS IsFound_LedgerType,
-	|	tmp_Ledgertype.Sub1Type AS Sub1Type,
+	|	tmp.Sub1Type AS Sub1Type,
 	|	TableSub1Type.Ref AS Sub1TypeRef,
 	|	CASE
-	|		WHEN tmp_Ledgertype.Sub1Type <> """"
+	|		WHEN tmp.Sub1Type <> """"
 	|		AND TableSub1Type.Ref IS NULL
 	|			THEN FALSE
 	|		ELSE TRUE
 	|	END AS IsFound_Sub1Type,
-	|	tmp_Ledgertype.Sub2Type AS Sub2Type,
+	|	tmp.Sub2Type AS Sub2Type,
 	|	TableSub2Type.Ref AS Sub2TypeRef,
 	|	CASE
-	|		WHEN tmp_Ledgertype.Sub2Type <> """"
+	|		WHEN tmp.Sub2Type <> """"
 	|		AND TableSub2Type.Ref IS NULL
 	|			THEN FALSE
 	|		ELSE TRUE
 	|	END AS IsFound_Sub2Type,
-	|	tmp_Ledgertype.Sub3Type AS Sub3Type,
+	|	tmp.Sub3Type AS Sub3Type,
 	|	TableSub3Type.Ref AS Sub3TypeRef,
 	|	CASE
-	|		WHEN tmp_Ledgertype.Sub3Type <> """"
+	|		WHEN tmp.Sub3Type <> """"
 	|		AND TableSub3Type.Ref IS NULL
 	|			THEN FALSE
 	|		ELSE TRUE
-	|	END AS IsFound_Sub3Type
+	|	END AS IsFound_Sub3Type,
+	|	tmp.AccountNo AS AccountNo,
+	|	Basic.Ref AS AccountNoRef
 	|FROM
-	|	tmp_Ledgertype AS tmp_Ledgertype
+	|	tmp_Ledgertype AS tmp
 	|		LEFT JOIN Catalog.LedgerTypeVariants AS LedgerTypeVariants
-	|		ON tmp_Ledgertype.LedgerType = LedgerTypeVariants.UniqueID
+	|		ON tmp.LedgerType = LedgerTypeVariants.UniqueID
 	|		LEFT JOIN ChartOfCharacteristicTypes.AccountingExtraDimensionTypes AS TableSub1Type
 	|		ON CASE
-	|			WHEN tmp_Ledgertype.Sub1Type = """"
+	|			WHEN tmp.Sub1Type = """"
 	|				THEN FALSE
-	|			ELSE tmp_Ledgertype.Sub1Type = TableSub1Type.UniqueID
+	|			ELSE tmp.Sub1Type = TableSub1Type.UniqueID
 	|		END
 	|		LEFT JOIN ChartOfCharacteristicTypes.AccountingExtraDimensionTypes AS TableSub2Type
 	|		ON CASE
-	|			WHEN tmp_Ledgertype.Sub2Type = """"
+	|			WHEN tmp.Sub2Type = """"
 	|				THEN FALSE
-	|			ELSE tmp_Ledgertype.Sub2Type = TableSub2Type.UniqueID
+	|			ELSE tmp.Sub2Type = TableSub2Type.UniqueID
 	|		END
 	|		LEFT JOIN ChartOfCharacteristicTypes.AccountingExtraDimensionTypes AS TableSub3Type
 	|		ON CASE
-	|			WHEN tmp_Ledgertype.Sub3Type = """"
+	|			WHEN tmp.Sub3Type = """"
 	|				THEN FALSE
-	|			ELSE tmp_Ledgertype.Sub3Type = TableSub1Type.UniqueID
-	|		END";
+	|			ELSE tmp.Sub3Type = TableSub1Type.UniqueID
+	|		END
+	|		LEFT JOIN ChartOfAccounts.Basic AS Basic
+	|		ON Basic.Code = tmp.AccountNo";
 	
 	StringType = New TypeDescription("String", New StringQualifiers(100));
 	
 	ValueTableRefs = New ValueTable();
 	ValueTableRefs.Columns.Add("RowNumber"  , New TypeDescription("Number"));
+	ValueTableRefs.Columns.Add("AccountNo" , StringType);
+	ValueTableRefs.Columns.Add("Description" , StringType);
 	ValueTableRefs.Columns.Add("LedgerType" , StringType);
 	ValueTableRefs.Columns.Add("Sub1Type"   , StringType);
 	ValueTableRefs.Columns.Add("Sub2Type"   , StringType);
 	ValueTableRefs.Columns.Add("Sub3Type"   , StringType);
+	
+	For Each Row In ValueTable Do
+		FillPropertyValues(ValueTableRefs.Add(), Row);
+	EndDo;
+		
+	Query.SetParameter("ValueTable", ValueTableRefs);
+	QueryResult = Query.Execute();
+	
+	QueryTable = QueryResult.Unload();
+	
+	Return QueryTable;
+EndFunction
+
+&AtServer
+Function GetOwners(ValueTable)
+	Query = New Query();
+	Query.Text = 
+	"SELECT
+	|	ValueTable.OwnerNo,
+	|	ValueTable.AccountNo
+	|INTO tmp_Ledgertype
+	|FROM
+	|	&ValueTable AS ValueTable
+	|;
+	|
+	|////////////////////////////////////////////////////////////////////////////////
+	|SELECT
+	|	tmp.OwnerNo AS OwnerNo,
+	|	BasicOwner.Ref AS OwnerNoRef,
+	|	tmp.AccountNo AS AccountNo,
+	|	BasicAccount.Ref AS AccountNoRef
+	|FROM
+	|	tmp_Ledgertype AS tmp
+	|		LEFT JOIN ChartOfAccounts.Basic AS BasicOwner
+	|		ON BasicOwner.Code = tmp.OwnerNo
+	|		LEFT JOIN ChartOfAccounts.Basic AS BasicAccount
+	|		ON BasicAccount.Code = tmp.AccountNo";
+	
+	StringType = New TypeDescription("String", New StringQualifiers(100));
+	
+	ValueTableRefs = New ValueTable();
+	ValueTableRefs.Columns.Add("AccountNo" , StringType);
+	ValueTableRefs.Columns.Add("OwnerNo"   , StringType);
 	
 	For Each Row In ValueTable Do
 		FillPropertyValues(ValueTableRefs.Add(), Row);
@@ -217,6 +279,116 @@ Procedure CheckIsFilled(ColumnName, QueryTable, ArrayOfColumns, Cancel)
 		Area.BackColor = WebColors.Pink;
 		Area.Comment.Text = StrTemplate("%1 [%2] is required field", ColumnName, ErrorRow[ColumnName]);
 		Cancel = True;
+	EndDo;
+EndProcedure
+	
+&AtServer
+Procedure CreateUpdateAccounts(QueryTable, ValueTable)
+	AccountNoMap = New Map();
+	LedgerTypeMap = New Map();
+	Sub1TypeMap = New Map();
+	Sub2TypeMap = New Map();
+	Sub3TypeMap = New Map();
+	
+	For Each Row In QueryTable Do
+		AccountNoMap.Insert(Row.AccountNo, Row.AccountNoRef);
+		LedgerTypeMap.Insert(Row.LedgerType, Row.LedgerTypeRef);
+		Sub1TypeMap.Insert(Row.Sub1Type, Row.Sub1TypeRef);
+		Sub2TypeMap.Insert(Row.Sub2Type, Row.Sub2TypeRef);
+		Sub3TypeMap.Insert(Row.Sub3Type, Row.Sub3TypeRef);
+	EndDo;
+	
+	Descriptions = New Array();
+	For Each Item In ThisObject.Languages Do
+		If Item.Check Then
+			Descriptions.Add("Description_" + Item.Value);
+		EndIf;
+	EndDo;
+		
+	For Each Row In ValueTable Do
+		AccountNoRef = AccountNoMap[Row.AccountNo];
+		If ValueIsFilled(AccountNoRef) Then
+			NewChart = AccountNoRef.GetObject();
+		Else
+			NewChart = ChartsOfAccounts.Basic.CreateAccount();
+		EndIf;
+		
+		For Each Desc In Descriptions Do
+			NewChart[Desc] = Row.Description;
+		EndDo;
+		
+		NewChart.LedgerTypeVariant = LedgerTypeMap[Row.LedgerType];
+		NewChart.NotUsedForRecords = Row.ForbidRecord;
+		NewChart.Code = Row.AccountNo;
+	
+		NewChart.Currency = Row.Currency;
+		NewChart.Quantity = Row.Quantity;
+		NewChart.OffBalance = Row.OffBalance;
+	
+		If Upper(Row.A_P) = "P" Then
+			NewChart.Type = AccountType.Passive;
+		ElsIf Upper(Row.A_P) = "AP" Then
+			NewChart.Type = AccountType.ActivePassive;
+		Else
+			NewChart.Type = AccountType.Active;
+		EndIf;
+	
+		NewChart.ExtDimensionTypes.Clear();
+		
+		Sub1TypeRef = Sub1TypeMap[Row.Sub1Type];
+		If ValueIsFilled(Sub1TypeRef) Then
+			Sub1Type = NewChart.ExtDimensionTypes.Add();
+			Sub1Type.ExtDimensionType = Sub1TypeMap[Row.Sub1Type];
+			Sub1Type.TurnoversOnly    = Row.Sub1Turnover;
+			Sub1Type.Quantity         = Row.Sub1Quantity;
+			Sub1Type.Currency         = Row.Sub1Currency;
+			Sub1Type.Amount = Row.Sub1Amount;
+		EndIf;
+	
+		Sub2TypeRef = Sub2TypeMap[Row.Sub2Type];
+		If ValueIsFilled(Sub2TypeRef) Then
+			Sub2Type = NewChart.ExtDimensionTypes.Add();
+			Sub2Type.ExtDimensionType = Sub2TypeMap[Row.Sub2Type];
+			Sub2Type.TurnoversOnly    = Row.Sub2Turnover;
+			Sub2Type.Quantity         = Row.Sub2Quantity;
+			Sub2Type.Currency         = Row.Sub2Currency;
+			Sub2Type.Amount = Row.Sub2Amount;
+		EndIf;
+		
+		Sub3TypeRef = Sub3TypeMap[Row.Sub3Type];
+		If ValueIsFilled(Sub3TypeRef) Then
+			Sub3Type = NewChart.ExtDimensionTypes.Add();
+			Sub3Type.ExtDimensionType = Sub3TypeMap[Row.Sub3Type];
+			Sub3Type.TurnoversOnly    = Row.Sub3Turnover;
+			Sub3Type.Quantity         = Row.Sub3Quantity;
+			Sub3Type.Currency         = Row.Sub3Currency;
+			Sub3Type.Amount = Row.Sub3Amount;
+		EndIf;
+		NewChart.Write();
+	EndDo;
+EndProcedure
+
+&AtServer
+Procedure SetOwners(QueryTable, ValueTable)
+	AccountNoMap = New Map();
+	OwnerNoMap = New Map();
+	
+	For Each Row In QueryTable Do
+		AccountNoMap.Insert(Row.AccountNo, Row.AccountNoRef);
+		OwnerNoMap.Insert(Row.OwnerNo, Row.OwnerNoRef);
+	EndDo;
+		
+	For Each Row In ValueTable Do
+		OwnerNoRef = OwnerNoMap[Row.OwnerNo];
+		If Not ValueIsFilled(OwnerNoRef) Then
+			Continue;
+		EndIf;
+		
+		AccountNoRef = AccountNoMap[Row.AccountNo];
+		NewChart = AccountNoRef.GetObject();
+		
+		NewChart.Parent = OwnerNoRef;
+		NewChart.Write();
 	EndDo;
 EndProcedure
 	

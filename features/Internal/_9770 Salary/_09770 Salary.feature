@@ -62,22 +62,35 @@ Scenario: _097700 preparation (Сheck payroll)
 		When Create catalog CashAccounts objects (POS)
 	* Data for salary
 		When Create catalog EmployeePositions objects
+		When Create catalog Partners objects (Employee for salary)
 		When Create catalog AccrualAndDeductionTypes objects
 		When Create information register T9500S_AccrualAndDeductionValues records
 		When Create information register Taxes records (VAT)
 		When Create catalog EmployeeSchedule objects
+		When create Payroll and Time Sheet for Second Company
 		When Create document EmployeeHiring objects
 		And I execute 1C:Enterprise script at server
-			| "Documents.EmployeeHiring.FindByNumber(2).GetObject().Write(DocumentWriteMode.Write);"   |
+			| "Documents.EmployeeHiring.FindByNumber(2).GetObject().Write(DocumentWriteMode.Posting);"   |
 			| "Documents.EmployeeHiring.FindByNumber(3).GetObject().Write(DocumentWriteMode.Posting);" |
 			| "Documents.EmployeeHiring.FindByNumber(4).GetObject().Write(DocumentWriteMode.Posting);" |
-	* Companies settings for company
-		Given I open hyperlink "e1cib/data/Catalog.Companies?ref=aa78120ed92fbced11eaf113ba6c185c"
-		And I select from "Vacation" drop-down list by "vacation" string
-		And I select from "Sick leave" drop-down list by "sick leave" string
-		And I select from "Salary basic payroll" drop-down list by "salary" string
-		And I click "Save and close" button
-		And I wait "Main Company (Company) *" window closing in 20 seconds
+	* Salary settings for company
+		* Main Company
+			Given I open hyperlink "e1cib/data/Catalog.Companies?ref=aa78120ed92fbced11eaf113ba6c185c"
+			And I select from "Vacation" drop-down list by "vacation" string
+			And I select from "Sick leave" drop-down list by "sick leave" string
+			And I select from "Salary basic payroll" drop-down list by "salary" string
+			And I click "Save and close" button
+			And I wait "Main Company (Company) *" window closing in 20 seconds
+		* Second Company
+			Given I open hyperlink "e1cib/data/Catalog.Companies?ref=aa78120ed92fbced11eaf128cde918b4"
+			And I select from "Vacation" drop-down list by "vacation" string
+			And I input "4" text in "Maximum days (year)" field		
+			And I select from "Sick leave" drop-down list by "sick leave" string
+			And I input "3" text in "Maximum days (month)" field
+			And I select from "Salary basic payroll" drop-down list by "salary" string
+			And I click "Save and close" button
+			And I wait "Second Company (Company) *" window closing in 20 seconds
+
 
 	
 Scenario: _097701 check preparation
@@ -280,9 +293,42 @@ Scenario: _097708 check Employee transfer
 			| 'Number'                   |
 			| '$NumberEmployeeTransfer$' |
 			
-				
-
-
+Scenario: _097711 check copy info in Employee transfer
+	And I close all client application windows
+	* Create EmployeeTransfer (Anna Petrova)
+		Given I open hyperlink "e1cib/list/Document.EmployeeTransfer"
+		And I click the button named "FormCreate" 
+	* Check copy info
+		And I select from the drop-down list named "Company" by "Main Company" string
+		And I click Choice button of the field named "Employee"
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Anna Petrova' |
+		And I select current line in "List" table
+		And I click the button named "FillAsFrom"
+		And I change the radio button named "ToSalaryType" value to "Personal"
+		And I move to "To personal salary" tab
+		And I change the radio button named "ToSalaryType" value to "By position"
+		And I move to "To salary by position" tab
+		Then the form attribute named "FromAccrualType" became equal to "Salary"
+		Then the form attribute named "FromEmployeeSchedule" became equal to "1 working day / 2 days off (day)"
+		Then the form attribute named "FromPosition" became equal to "Sales person"
+		Then the form attribute named "FromProfitLossCenter" became equal to "Shop 01"
+		And the editing text of form attribute named "FromSalary" became equal to "7 000,00"
+		Then the form attribute named "FromSalaryType" became equal to "ByPosition"
+		Then the form attribute named "ToAccrualType" became equal to "Salary"
+		Then the form attribute named "ToBranch" became equal to "Shop 01"
+		Then the form attribute named "ToEmployeeSchedule" became equal to "1 working day / 2 days off (day)"
+		Then the form attribute named "ToPosition" became equal to "Sales person"
+		Then the form attribute named "ToProfitLossCenter" became equal to "Shop 01"
+		And the editing text of form attribute named "ToSalary" became equal to "7 000,00"
+		Then the form attribute named "ToSalaryType" became equal to "ByPosition"
+	* Change salary
+		And I change the radio button named "ToSalaryType" value to "Personal"
+		And I input "7 500,00" text in the field named "ToPersonalSalary"
+		And the editing text of form attribute named "ToPersonalSalary" became equal to "7 500,00"
+	And I close all client application windows
+	
 
 Scenario: _097709 create Accrual and deduction values records (T9500)
 	And I close all client application windows
@@ -797,5 +843,407 @@ Scenario: _097716 create payroll
 			| 'Number'            |
 			| '$$NumberPayroll$$' |	
 		
+
+				
+Scenario: _097721 check of payroll calculation (position and salary change in the middle of the calculation period + vacation)
+	And I close all client application windows
+	* Preparation
+		When test data for payroll calculation (position and salary change in the middle of the calculation period + vacation + truancy)
+		And I execute 1C:Enterprise script at server
+			| "Documents.EmployeeHiring.FindByNumber(6).GetObject().Write(DocumentWriteMode.Posting);"   |
+		And I execute 1C:Enterprise script at server
+			| "Documents.EmployeeTransfer.FindByNumber(2).GetObject().Write(DocumentWriteMode.Posting);"   |
+		And I execute 1C:Enterprise script at server
+			| "Documents.EmployeeVacation.FindByNumber(3).GetObject().Write(DocumentWriteMode.Posting);"   |
+	* Check Time Sheet
+		Given I open hyperlink "e1cib/list/Document.TimeSheet"		
+		And I go to line in "List" table
+			| 'Number' |
+			| '11'     |
+		And I select current line in "List" table
+		And in the table "Workers" I click "Fill all" button
+		And "Workers" table contains lines
+			| 'Employee'                                        | 'Schedule'                          | 'Begin date' | 'End date'   | 'Position'   | 'Profit loss center' |
+			| 'Employee 1 (change salary + vacation + truancy)' | '5 working days / 2 days off (day)' | '01.11.2023' | '09.11.2023' | 'Manager'    | 'Front office'       |
+			| 'Employee 1 (change salary + vacation + truancy)' | '5 working days / 2 days off (day)' | '10.11.2023' | '30.11.2023' | 'Accountant' | 'Front office'       |
+		Then the number of "Workers" table lines is "равно" "2"
+		And I click "Post and close" button
+		And I wait "Time sheet * dated * *" window closing in 20 seconds
+	* Check Payroll
+		Given I open hyperlink "e1cib/list/Document.Payroll"		
+		And I go to line in "List" table
+			| 'Number' |
+			| '11'     |
+		And I select current line in "List" table
+		And in the table "AccrualList" I click "Calculate" button
+		And "AccrualList" table contains lines
+			| 'Amount'   | 'Employee'                                        | 'Position'   | 'Accrual type' | 'Expense type' | 'Profit loss center' |
+			| '7 636,36' | 'Employee 1 (change salary + vacation + truancy)' | 'Accountant' | 'Salary'       | 'Expense'      | 'Front office'       |
+			| '3 181,82' | 'Employee 1 (change salary + vacation + truancy)' | 'Manager'    | 'Salary'       | 'Expense'      | 'Front office'       |
+		Then the number of "AccrualList" table lines is "равно" "2"
+		And I click "Post and close" button
+		And I wait "Payroll * dated * *" window closing in 20 seconds
+	And I close all client application windows				
 				
 				
+Scenario: _097722 check of payroll calculation (work schedule change (days) + vacation + sick leave)
+	And I close all client application windows	
+	* Preparation
+		When test data for check of payroll calculation (work schedule change (days) + vacation + sick leave)
+		And I execute 1C:Enterprise script at server
+			| "Documents.EmployeeHiring.FindByNumber(7).GetObject().Write(DocumentWriteMode.Posting);"   |
+		And I execute 1C:Enterprise script at server
+			| "Documents.EmployeeTransfer.FindByNumber(3).GetObject().Write(DocumentWriteMode.Posting);"   |
+		And I execute 1C:Enterprise script at server
+			| "Documents.EmployeeVacation.FindByNumber(4).GetObject().Write(DocumentWriteMode.Posting);"   |
+		And I execute 1C:Enterprise script at server
+			| "Documents.EmployeeSickLeave.FindByNumber(11).GetObject().Write(DocumentWriteMode.Posting);"   |
+	* Check Time Sheet
+		Given I open hyperlink "e1cib/list/Document.TimeSheet"		
+		And I go to line in "List" table
+			| 'Number' |
+			| '11'     |
+		And I select current line in "List" table
+		And in the table "Workers" I click "Fill all" button
+		Then "1C:Enterprise" window is opened
+		And I click "OK" button		
+		And "Workers" table contains lines
+			| 'Employee'                                                   | 'Schedule'                          | 'Begin date' | 'End date'   | 'Position'     | 'Profit loss center' |
+			| 'Employee 2 (change shedule (days) + vacation + sick leave)' | '1 working day / 2 days off (day)'  | '01.11.2023' | '09.11.2023' | 'Sales person' | 'Front office'       |
+			| 'Employee 2 (change shedule (days) + vacation + sick leave)' | '2 working day / 2 days off (day)'  | '10.11.2023' | '30.11.2023' | 'Sales person' | 'Front office'       |	
+		Then the number of "Workers" table lines is "равно" "4"
+		And I click "Post and close" button
+		And I wait "Time sheet * dated * *" window closing in 20 seconds
+	* Check Payroll
+		Given I open hyperlink "e1cib/list/Document.Payroll"		
+		And I go to line in "List" table
+			| 'Number' |
+			| '11'     |
+		And I select current line in "List" table
+		And in the table "AccrualList" I click "Calculate" button
+		Then "1C:Enterprise" window is opened
+		And I click "OK" button	
+		And "AccrualList" table contains lines
+			| 'Amount'   | 'Employee'                                                   | 'Position'     | 'Accrual type' | 'Expense type' | 'Profit loss center' |
+			| '6 912,50' | 'Employee 2 (change shedule (days) + vacation + sick leave)' | 'Sales person' | 'Salary'       | 'Expense'      | 'Front office'       |	
+		Then the number of "AccrualList" table lines is "равно" "3"
+		And I click "Post and close" button
+		And I wait "Payroll * dated * *" window closing in 20 seconds
+	And I close all client application windows
+
+
+Scenario: _097723 check of payroll calculation (vacation + truancy)
+	And I close all client application windows	
+	* Preparation
+		When test data for check of payroll calculation (vacation + truancy)
+		And I execute 1C:Enterprise script at server
+			| "Documents.EmployeeHiring.FindByNumber(8).GetObject().Write(DocumentWriteMode.Posting);"   |
+		And I execute 1C:Enterprise script at server
+			| "Documents.EmployeeVacation.FindByNumber(5).GetObject().Write(DocumentWriteMode.Posting);"   |
+	* Check Time Sheet
+		Given I open hyperlink "e1cib/list/Document.TimeSheet"		
+		And I go to line in "List" table
+			| 'Number' |
+			| '11'     |
+		And I select current line in "List" table
+		And in the table "Workers" I click "Fill all" button
+		Then "1C:Enterprise" window is opened
+		And I click "OK" button		
+		And "Workers" table contains lines
+			| 'Employee'                                                   | 'Schedule'                          | 'Begin date' | 'End date'   | 'Position'     | 'Profit loss center' |
+			| 'Employee 3  (vacation + truancy)'                           | '2 working day / 2 days off (day)'  | '01.11.2023' | '30.11.2023' | 'Sales person' | 'Front office'       |	
+		Then the number of "Workers" table lines is "равно" "5"
+		* Add truancy
+			And I go to line in "Workers" table
+				| 'Employee'                         |
+				| 'Employee 3  (vacation + truancy)' |
+			And I go to the 25.11.2023 date in "Calendar" field
+			And I go to the 25.11.2023 date in "Calendar" field
+			And I click Choice button of the field named "Calendar"
+			And I input "0" text in "Actually days/hours" field
+			And I click "Ok" button
+		And I click "Post and close" button
+		And I wait "Time sheet * dated * *" window closing in 20 seconds
+	* Check Payroll
+		Given I open hyperlink "e1cib/list/Document.Payroll"		
+		And I go to line in "List" table
+			| 'Number' |
+			| '11'     |
+		And I select current line in "List" table
+		And in the table "AccrualList" I click "Calculate" button
+		Then "1C:Enterprise" window is opened
+		And I click "OK" button	
+		And "AccrualList" table contains lines
+			| 'Amount'   | 'Employee'                         | 'Position'     | 'Accrual type' | 'Expense type' | 'Profit loss center' |
+			| '6 562,50' | 'Employee 3  (vacation + truancy)' | 'Sales person' | 'Salary'       | 'Expense'      | 'Front office'       |		
+		Then the number of "AccrualList" table lines is "равно" "4"
+		And I click "Post and close" button
+		And I wait "Payroll * dated * *" window closing in 20 seconds
+	And I close all client application windows				
+
+				
+
+Scenario: _097724 check of payroll calculation (change of work schedule (from hours to days) + sick leave)
+	And I close all client application windows	
+	* Preparation
+		When test data for check of payroll calculation (change of work schedule (from hours to days) + sick leave)
+		And I execute 1C:Enterprise script at server
+			| "Documents.EmployeeHiring.FindByNumber(9).GetObject().Write(DocumentWriteMode.Posting);"   |
+		And I execute 1C:Enterprise script at server
+			| "Documents.EmployeeSickLeave.FindByNumber(12).GetObject().Write(DocumentWriteMode.Posting);"   |
+		And I execute 1C:Enterprise script at server
+			| "Documents.EmployeeTransfer.FindByNumber(4).GetObject().Write(DocumentWriteMode.Posting);"   |
+	* Check Time Sheet
+		Given I open hyperlink "e1cib/list/Document.TimeSheet"		
+		And I go to line in "List" table
+			| 'Number' |
+			| '11'     |
+		And I select current line in "List" table
+		And in the table "Workers" I click "Fill all" button
+		Then "1C:Enterprise" window is opened
+		And I click "OK" button		
+		And "Workers" table contains lines
+			| 'Employee'                                                   | 'Schedule'                            | 'Begin date' | 'End date'   | 'Position'     | 'Profit loss center' |
+			| 'Employee 4 (change shedule (days - hours) + sick leave)'    | '5 working days / 2 days off (hours)' | '10.11.2023' | '30.11.2023' | 'Sales person' | 'Front office'       |
+			| 'Employee 4 (change shedule (days - hours) + sick leave)'    | '2 working day / 2 days off (day)'    | '01.11.2023' | '09.11.2023' | 'Sales person' | 'Front office'       |	
+		Then the number of "Workers" table lines is "равно" "7"
+		And I click "Post and close" button
+		And I wait "Time sheet * dated * *" window closing in 20 seconds
+	* Check Payroll
+		Given I open hyperlink "e1cib/list/Document.Payroll"		
+		And I go to line in "List" table
+			| 'Number' |
+			| '11'     |
+		And I select current line in "List" table
+		And in the table "AccrualList" I click "Calculate" button
+		Then "1C:Enterprise" window is opened
+		And I click "OK" button	
+		And "AccrualList" table contains lines
+			| 'Amount'   | 'Employee'                                                   | 'Position'     | 'Accrual type' | 'Expense type' | 'Profit loss center' |
+			| '9 262,97' | 'Employee 4 (change shedule (days - hours) + sick leave)'    | 'Sales person' | 'Salary'       | 'Expense'      | 'Front office'       |	
+		Then the number of "AccrualList" table lines is "равно" "5"
+		And I click "Post and close" button
+		And I wait "Payroll * dated * *" window closing in 20 seconds
+	And I close all client application windows	
+
+
+Scenario: _097725 check of payroll calculation (several vacations)
+	And I close all client application windows	
+	* Preparation
+		When test data for check of payroll calculation (several vacations)
+		And I execute 1C:Enterprise script at server
+			| "Documents.EmployeeHiring.FindByNumber(10).GetObject().Write(DocumentWriteMode.Posting);"   |
+		And I execute 1C:Enterprise script at server
+			| "Documents.EmployeeVacation.FindByNumber(6).GetObject().Write(DocumentWriteMode.Posting);"   |
+		And I execute 1C:Enterprise script at server
+			| "Documents.EmployeeVacation.FindByNumber(7).GetObject().Write(DocumentWriteMode.Posting);"   |
+	* Check Time Sheet
+		Given I open hyperlink "e1cib/list/Document.TimeSheet"		
+		And I go to line in "List" table
+			| 'Number' |
+			| '11'     |
+		And I select current line in "List" table
+		And in the table "Workers" I click "Fill all" button
+		Then "1C:Enterprise" window is opened
+		And I click "OK" button		
+		And "Workers" table contains lines
+			| 'Employee'                       | 'Schedule'                         | 'Begin date' | 'End date'   | 'Position'     | 'Profit loss center' |
+			| 'Employee 5 (several vacations)' | '3 working day / 3 days off (day)' | '01.11.2023' | '30.11.2023' | 'Sales person' | 'Front office'       |
+		Then the number of "Workers" table lines is "равно" "8"
+		And I click "Post and close" button
+		And I wait "Time sheet * dated * *" window closing in 20 seconds
+	* Check Payroll
+		Given I open hyperlink "e1cib/list/Document.Payroll"		
+		And I go to line in "List" table
+			| 'Number' |
+			| '11'     |
+		And I select current line in "List" table
+		And in the table "AccrualList" I click "Calculate" button
+		Then "1C:Enterprise" window is opened
+		And I click "OK" button	
+		And "AccrualList" table contains lines
+			| 'Amount'   | 'Employee'                       | 'Position'     | 'Accrual type' | 'Expense type' | 'Profit loss center' |
+			| '6 533,33' | 'Employee 5 (several vacations)' | 'Sales person' | 'Salary'       | 'Expense'      | 'Front office'       |
+		Then the number of "AccrualList" table lines is "равно" "6"
+		And I click "Post and close" button
+		And I wait "Payroll * dated * *" window closing in 20 seconds
+	And I close all client application windows	
+
+Scenario: _097726 check of payroll calculation (hours shedule + truancy)
+	And I close all client application windows	
+	* Preparation
+		When test data for check of payroll calculation (hours shedule + truancy)
+		And I execute 1C:Enterprise script at server
+			| "Documents.EmployeeHiring.FindByNumber(11).GetObject().Write(DocumentWriteMode.Posting);"   |
+	* Check Time Sheet
+		Given I open hyperlink "e1cib/list/Document.TimeSheet"		
+		And I go to line in "List" table
+			| 'Number' |
+			| '11'     |
+		And I select current line in "List" table
+		And in the table "Workers" I click "Fill all" button
+		Then "1C:Enterprise" window is opened
+		And I click "OK" button		
+		And "Workers" table contains lines
+			| 'Employee'                             | 'Schedule'                            | 'Begin date' | 'End date'   | 'Position'     | 'Profit loss center' |
+			| 'Employee 6 (hours shedule + truancy)' | '5 working days / 2 days off (hours)' | '01.11.2023' | '30.11.2023' | 'Sales person' | 'Front office'       |
+		Then the number of "Workers" table lines is "равно" "9"
+		* Add truancy
+			And I go to line in "Workers" table
+				| 'Employee'                             |
+				| 'Employee 6 (hours shedule + truancy)' |
+			And I go to the 23.11.2023 date in "Calendar" field
+			And I click Choice button of the field named "Calendar"
+			And I input "0" text in "Actually days/hours" field
+			And I click "Ok" button
+			And I go to the 21.11.2023 date in "Calendar" field
+			And I click Choice button of the field named "Calendar"
+			And I input "4" text in "Actually days/hours" field
+			And I click "Ok" button
+		And I click "Post and close" button
+		And I wait "Time sheet * dated * *" window closing in 20 seconds
+	* Check Payroll
+		Given I open hyperlink "e1cib/list/Document.Payroll"		
+		And I go to line in "List" table
+			| 'Number' |
+			| '11'     |
+		And I select current line in "List" table
+		And in the table "AccrualList" I click "Calculate" button
+		Then "1C:Enterprise" window is opened
+		And I click "OK" button	
+		And "AccrualList" table contains lines
+			| 'Amount'   | 'Employee'                             | 'Position'     | 'Accrual type' | 'Expense type' | 'Profit loss center' |
+			| '9 433,96' | 'Employee 6 (hours shedule + truancy)' | 'Sales person' | 'Salary'       | 'Expense'      | 'Front office'       |
+		Then the number of "AccrualList" table lines is "равно" "7"
+		And I click "Post and close" button
+		And I wait "Payroll * dated * *" window closing in 20 seconds
+	And I close all client application windows	
+
+
+Scenario: _097727 check of payroll calculation (several work schedule changes)
+	And I close all client application windows	
+	* Preparation
+		When test data for check of payroll calculation (several work schedule changes)
+		And I execute 1C:Enterprise script at server
+			| "Documents.EmployeeHiring.FindByNumber(12).GetObject().Write(DocumentWriteMode.Posting);"   |
+		And I execute 1C:Enterprise script at server
+			| "Documents.EmployeeTransfer.FindByNumber(5).GetObject().Write(DocumentWriteMode.Posting);"   |
+		And I execute 1C:Enterprise script at server
+			| "Documents.EmployeeTransfer.FindByNumber(6).GetObject().Write(DocumentWriteMode.Posting);"   |
+	* Check Time Sheet
+		Given I open hyperlink "e1cib/list/Document.TimeSheet"		
+		And I go to line in "List" table
+			| 'Number' |
+			| '11'     |
+		And I select current line in "List" table
+		And in the table "Workers" I click "Fill all" button
+		Then "1C:Enterprise" window is opened
+		And I click "OK" button		
+		And "Workers" table contains lines
+			| 'Employee'                                                   | 'Schedule'                            | 'Begin date' | 'End date'   | 'Position'     | 'Profit loss center' |
+			| 'Employee 7 (several schedule changes)'                      | '5 working days / 2 days off (hours)' | '01.11.2023' | '16.11.2023' | 'Sales person' | 'Front office'       |
+			| 'Employee 7 (several schedule changes)'                      | '1 working day / 2 days off (day)'    | '08.11.2023' | '12.11.2023' | 'Sales person' | 'Front office'       |
+			| 'Employee 7 (several schedule changes)'                      | '2 working day / 2 days off (day)'    | '17.11.2023' | '30.11.2023' | 'Sales person' | 'Front office'       |	
+		Then the number of "Workers" table lines is "равно" "12"
+		And I click "Post and close" button
+		And I wait "Time sheet * dated * *" window closing in 20 seconds
+	* Check Payroll
+		Given I open hyperlink "e1cib/list/Document.Payroll"		
+		And I go to line in "List" table
+			| 'Number' |
+			| '11'     |
+		And I select current line in "List" table
+		And in the table "AccrualList" I click "Calculate" button
+		Then "1C:Enterprise" window is opened
+		And I click "OK" button	
+		And "AccrualList" table contains lines
+			| 'Amount'   | 'Employee'                              | 'Position'     | 'Accrual type' | 'Expense type' | 'Profit loss center' |
+			| '7 277,36' | 'Employee 7 (several schedule changes)' | 'Sales person' | 'Salary'       | 'Expense'      | 'Front office'       |
+		Then the number of "AccrualList" table lines is "равно" "8"
+		And I click "Post and close" button
+		And I wait "Payroll * dated * *" window closing in 20 seconds
+	And I close all client application windows
+
+Scenario: _097728 check of payroll calculation (several vacation and sick leaves)
+	And I close all client application windows	
+	* Preparation
+		When test data for check of payroll calculation (several vacation and sick leaves)
+		And I execute 1C:Enterprise script at server
+			| "Documents.EmployeeHiring.FindByNumber(13).GetObject().Write(DocumentWriteMode.Posting);"   |
+		And I execute 1C:Enterprise script at server
+			| "Documents.EmployeeSickLeave.FindByNumber(13).GetObject().Write(DocumentWriteMode.Posting);"   |
+		And I execute 1C:Enterprise script at server
+			| "Documents.EmployeeVacation.FindByNumber(8).GetObject().Write(DocumentWriteMode.Posting);"   |
+		And I execute 1C:Enterprise script at server
+			| "Documents.EmployeeVacation.FindByNumber(9).GetObject().Write(DocumentWriteMode.Posting);"   |
+	* Check Time Sheet
+		Given I open hyperlink "e1cib/list/Document.TimeSheet"		
+		And I go to line in "List" table
+			| 'Number' |
+			| '11'     |
+		And I select current line in "List" table
+		And in the table "Workers" I click "Fill all" button
+		Then "1C:Enterprise" window is opened
+		And I click "OK" button		
+		And "Workers" table contains lines
+			| 'Employee'                                                   | 'Schedule'                            | 'Begin date' | 'End date'   | 'Position'     | 'Profit loss center' |
+			| 'Employee 8 (several vacation + several sick leave)'         | '2 working day / 2 days off (day)'    | '01.11.2023' | '30.11.2023' | 'Sales person' | 'Front office'       |		
+		Then the number of "Workers" table lines is "равно" "13"
+		And I click "Post and close" button
+		And I wait "Time sheet * dated * *" window closing in 20 seconds
+	* Check Payroll
+		Given I open hyperlink "e1cib/list/Document.Payroll"		
+		And I go to line in "List" table
+			| 'Number' |
+			| '11'     |
+		And I select current line in "List" table
+		And in the table "AccrualList" I click "Calculate" button
+		Then "1C:Enterprise" window is opened
+		And I click "OK" button	
+		And "AccrualList" table contains lines
+			| 'Amount'   | 'Employee'                                           | 'Position'     | 'Accrual type' | 'Expense type' | 'Profit loss center' |
+			| '6 562,50' | 'Employee 8 (several vacation + several sick leave)' | 'Sales person' | 'Salary'       | 'Expense'      | 'Front office'       |
+		Then the number of "AccrualList" table lines is "равно" "9"
+		And I click "Post and close" button
+		And I wait "Payroll * dated * *" window closing in 20 seconds
+	And I close all client application windows
+
+Scenario: _097729 check of payroll calculation (hours shedule + several sick leave)
+	And I close all client application windows	
+	* Preparation
+		When test data for check of payroll calculation (hours shedule + several sick leave)
+		And I execute 1C:Enterprise script at server
+			| "Documents.EmployeeHiring.FindByNumber(14).GetObject().Write(DocumentWriteMode.Posting);"   |
+		And I execute 1C:Enterprise script at server
+			| "Documents.EmployeeSickLeave.FindByNumber(14).GetObject().Write(DocumentWriteMode.Posting);"   |
+	* Check Time Sheet
+		Given I open hyperlink "e1cib/list/Document.TimeSheet"		
+		And I go to line in "List" table
+			| 'Number' |
+			| '11'     |
+		And I select current line in "List" table
+		And in the table "Workers" I click "Fill all" button
+		Then "1C:Enterprise" window is opened
+		And I click "OK" button		
+		And "Workers" table contains lines
+			| 'Employee'                                                | 'Schedule'                               | 'Begin date' | 'End date'   | 'Position'     | 'Profit loss center' |
+			| 'Employee 9 (hours shedule + several sick leave)'         | '5 working days / 2 days off (hours)'    | '01.11.2023' | '30.11.2023' | 'Manager'      | 'Front office'       |		
+		Then the number of "Workers" table lines is "равно" "14"
+		And I click "Post and close" button
+		And I wait "Time sheet * dated * *" window closing in 20 seconds
+	* Check Payroll
+		Given I open hyperlink "e1cib/list/Document.Payroll"		
+		And I go to line in "List" table
+			| 'Number' |
+			| '11'     |
+		And I select current line in "List" table
+		And in the table "AccrualList" I click "Calculate" button
+		Then "1C:Enterprise" window is opened
+		And I click "OK" button	
+		And "AccrualList" table contains lines
+			| 'Amount'    | 'Employee'                                        | 'Position' | 'Accrual type' | 'Expense type' | 'Profit loss center' |
+			| '10 000,00' | 'Employee 9 (hours shedule + several sick leave)' | 'Manager'  | 'Salary'       | 'Expense'      | 'Front office'       |
+		Then the number of "AccrualList" table lines is "равно" "10"
+		And I click "Post and close" button
+		And I wait "Payroll * dated * *" window closing in 20 seconds
+	And I close all client application windows

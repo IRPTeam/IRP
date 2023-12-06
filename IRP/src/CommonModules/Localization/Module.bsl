@@ -1405,7 +1405,9 @@ Strings.Insert("AccountingError_03", NStr("en = 'Credit - is a required field.'"
 Strings.Insert("AccountingError_04", NStr("en = 'Record period - is a required field.'", Lang));
 
 Strings.Insert("AccountingQuestion_01", NStr("en = 'Change [Quantity] mark in analytics'", Lang));
-Strings.Insert("Accountingquestion_02", NStr("en = 'Change [Currency] mark in analytics'", Lang));
+Strings.Insert("AccountingQuestion_02", NStr("en = 'Change [Currency] mark in analytics'", Lang));
+
+Strings.Insert("AccountingJE_prefix_01", NStr("en = 'JE '", Lang));
 
 Strings.Insert("BankPayment_DR_R1020B_AdvancesToVendors_R1021B_VendorsTransactions_CR_R3010B_CashOnHand", 
 	NStr("en = 'BankPayment DR (R1020B_AdvancesToVendors R1021B_VendorsTransactions) CR (R3010B_CashOnHand)'", Lang)); 

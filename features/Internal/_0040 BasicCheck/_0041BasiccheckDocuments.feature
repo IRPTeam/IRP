@@ -389,10 +389,6 @@ Scenario: Open object form "PhysicalCountByLocation"
 		Then I raise "Failed to open document form PhysicalCountByLocation" exception
 	And I close current window
 
-
-
-
-	
 	
 Scenario: Open list form "PriceList" 
 	And I close all client application windows
@@ -409,10 +405,6 @@ Scenario: Open object form "PriceList"
 	And I close current window
 
 
-
-
-	
-	
 Scenario: Open list form "PurchaseInvoice" 
 	And I close all client application windows
 	Given I open "PurchaseInvoice" document default form
@@ -1495,9 +1487,24 @@ Scenario: Open object form "RetailGoodsReceipt"
 		Then I raise "Failed to open document form RetailGoodsReceipt" exception
 	And I close current window
 
-Scenario: Open object form "RetailGoodsReceipt"
-
-	Given I open "RetailGoodsReceipt" document main form
+Scenario: Open list form "VisitorCounter" 
+	And I close all client application windows
+	Given I open "VisitorCounter" document default form
 	If the warning is displayed then
-		Then I raise "Failed to open document form RetailGoodsReceipt" exception
+		Then I raise "Failed to open document form VisitorCounter" exception
+	And I close current window
+
+Scenario: Open object form "VisitorCounter"
+	And I close all client application windows
+	Given I open "VisitorCounter" document main form
+	If the warning is displayed then
+		Then I raise "Failed to open document form VisitorCounter" exception
+	And I close current window
+
+Scenario: Open choise form "VisitorCounter"
+	And I close all client application windows
+	And I execute the built-in language code (Extension)
+		| 'OpenForm("Document.VisitorCounter.ChoiceForm", , Undefined, , , , , FormWindowOpeningMode.Independent)'   |
+	If the warning is displayed then
+		Then I raise "Failed to open document choise form VisitorCounter" exception
 	And I close current window

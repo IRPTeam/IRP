@@ -73,7 +73,7 @@
     <fillFromFillingValue>true</fillFromFillingValue>
     <fillValue xsi:type="core:UndefinedValue"/>
     <choiceParameterLinks>
-      <name>Filter.Variant</name>
+      <name>Filter.LedgerTypeVariant</name>
       <field>ChartOfAccounts.Basic.Attribute.LedgerTypeVariant</field>
     </choiceParameterLinks>
     <fullTextSearch>Use</fullTextSearch>

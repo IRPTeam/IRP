@@ -7016,7 +7016,7 @@
 		</right>
 	</object>
 	<object>
-		<name>InformationRegister.T9013S_AccountsTax.Resource.Account</name>
+		<name>InformationRegister.T9013S_AccountsTax.Resource.IncomingAccount</name>
 		<right>
 			<name>Edit</name>
 			<value>false</value>

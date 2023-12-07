@@ -539,57 +539,85 @@ Function __GetT9012S_AccountsPartner(Period, Company, LedgerTypeVariant, Partner
 	Return Result;
 EndFunction
 
-Function GetT9013S_AccountsTax(AccountParameters, Tax) Export
+Function GetT9013S_AccountsTax(AccountParameters, TaxInfo) Export
 	Return AccountingServerReuse.GetT9013S_AccountsTax_Reuse(AccountParameters.Period,
 		AccountParameters.Company,
 		AccountParameters.LedgerTypeVariant,
-		Tax);	
+		TaxInfo.Tax, TaxInfo.VatRate);	
 EndFunction
 
-Function __GetT9013S_AccountsTax(Period, Company, LedgerTypeVariant, Tax) Export
+Function __GetT9013S_AccountsTax(Period, Company, LedgerTypeVariant, Tax, VatRate) Export
 	Query = New Query();
 	Query.Text = 
 	"SELECT
-	|	ByTax.Company,
-	|	ByTax.Tax,
-	|	ByTax.Account,
-	|	1 AS Priority
+	|	ByVatRate.Company,
+	|	ByVatRate.Tax,
+	|	ByVatRate.VatRate,
+	|	ByVatRate.IncomingAccount,
+	|	ByVatRate.OutgoingAccount,
+	|	0 AS Priority
 	|INTO Accounts
 	|FROM
-	|	InformationRegister.T9013S_AccountsTax.SliceLast(&Period, Company = &Company AND LedgerTypeVariant = &LedgerTypeVariant
-	|	AND Tax = &Tax) AS ByTax
+	|	InformationRegister.T9013S_AccountsTax.SliceLast(&Period, Company = &Company
+	|	AND LedgerTypeVariant = &LedgerTypeVariant
+	|	AND Tax = &Tax
+	|	AND VatRate = &VatRate) AS ByVatRate
+	|
+	|UNION ALL
+	|
+	|SELECT
+	|	ByTax.Company,
+	|	ByTax.Tax,
+	|	ByTax.VatRate,
+	|	ByTax.IncomingAccount,
+	|	ByTax.OutgoingAccount,
+	|	1
+	|FROM
+	|	InformationRegister.T9013S_AccountsTax.SliceLast(&Period, Company = &Company
+	|	AND LedgerTypeVariant = &LedgerTypeVariant
+	|	AND Tax = &Tax
+	|	AND VatRate.Ref IS NULL) AS ByTax
 	|
 	|UNION ALL
 	|
 	|SELECT
 	|	ByCompany.Company,
 	|	ByCompany.Tax,
-	|	ByCompany.Account,
+	|	ByCompany.VatRate,
+	|	ByCompany.IncomingAccount,
+	|	ByCompany.OutgoingAccount,
 	|	2
 	|FROM
-	|	InformationRegister.T9013S_AccountsTax.SliceLast(&Period, Company = &Company AND LedgerTypeVariant = &LedgerTypeVariant
-	|	AND Tax.Ref IS NULL) AS ByCompany
+	|	InformationRegister.T9013S_AccountsTax.SliceLast(&Period, Company = &Company
+	|	AND LedgerTypeVariant = &LedgerTypeVariant
+	|	AND Tax.Ref IS NULL
+	|	AND VatRate.Ref IS NULL) AS ByCompany
 	|;
 	|
 	|////////////////////////////////////////////////////////////////////////////////
-	|SELECT
+	|SELECT TOP 1
 	|	Accounts.Company,
 	|	Accounts.Tax,
-	|	Accounts.Account,
+	|	Accounts.VatRate,
+	|	Accounts.IncomingAccount,
+	|	Accounts.OutgoingAccount,
 	|	Accounts.Priority AS Priority
 	|FROM
 	|	Accounts AS Accounts
+	|
 	|ORDER BY
 	|	Priority";
 	Query.SetParameter("Period"  , Period);
 	Query.SetParameter("Company" , Company);
 	Query.SetParameter("LedgerTypeVariant" , LedgerTypeVariant);
 	Query.SetParameter("Tax"     , Tax);
+	Query.SetParameter("VatRate" , VatRate);
 	QueryResult = Query.Execute();
 	QuerySelection = QueryResult.Select();
-	Result = New Structure("Account", Undefined);
+	Result = New Structure("IncomingAccount, OutgoingAccount", Undefined, Undefined);
 	If QuerySelection.Next() Then
-		Result.Account = QuerySelection.Account;
+		Result.IncomingAccount = QuerySelection.IncomingAccount;
+		Result.OutgoingAccount = QuerySelection.OutgoingAccount;
 	EndIf;
 	Return Result;
 EndFunction
@@ -756,6 +784,7 @@ Function GetDocumentData(Object, TableRow, MainTableName)
 			TaxInfo = New Structure();
 			TaxInfo.Insert("Key", TableRow.Key);
 			TaxInfo.Insert("Tax", TaxesServer.GetVatRef());
+			TaxInfo.Insert("VatRate", TableRow.VatRate);
 			Result.RowData.Insert("TaxInfo", TaxInfo);
 		EndIf;
 		

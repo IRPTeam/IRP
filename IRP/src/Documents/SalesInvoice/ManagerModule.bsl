@@ -1385,9 +1385,9 @@ Function GetAnalytics_VATOutgoing(Parameters)
 	AccountingServer.SetDebitExtDimensions(Parameters, AccountingAnalytics);
 	
 	// Credit
-	Credit = AccountingServer.GetT9013S_AccountsTax(AccountParameters, Parameters.RowData.TaxInfo.Tax);
-	If ValueIsFilled(Credit.Account) Then
-		AccountingAnalytics.Credit = Credit.Account;
+	Credit = AccountingServer.GetT9013S_AccountsTax(AccountParameters, Parameters.RowData.TaxInfo);
+	If ValueIsFilled(Credit.IncomingAccount) Then
+		AccountingAnalytics.Credit = Credit.IncomingAccount;
 	EndIf;
 	AccountingServer.SetCreditExtDimensions(Parameters, AccountingAnalytics, Parameters.RowData.TaxInfo);
 	

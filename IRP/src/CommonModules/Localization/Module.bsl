@@ -1408,6 +1408,8 @@ Strings.Insert("AccountingError_05", NStr("en = 'Not set any ledger types'", Lan
 Strings.Insert("AccountingQuestion_01", NStr("en = 'Change [Quantity] mark in analytics'", Lang));
 Strings.Insert("AccountingQuestion_02", NStr("en = 'Change [Currency] mark in analytics'", Lang));
 
+Strings.Insert("AccountingInfo_01", NStr("en = 'Load complete'", Lang));
+
 Strings.Insert("AccountingJE_prefix_01", NStr("en = 'JE '", Lang));
 
 Strings.Insert("BankPayment_DR_R1020B_AdvancesToVendors_R1021B_VendorsTransactions_CR_R3010B_CashOnHand", 

@@ -12,11 +12,13 @@ EndProcedure
 
 &AtClient
 Procedure Load(Command)
-	LoadAtServer();
+	If LoadAtServer() Then
+		ShowMessageBox(, R().AccountingInfo_01);
+	EndIf;
 EndProcedure
 
 &AtServer
-Procedure LoadAtServer()
+Function LoadAtServer()
 	ArrayOfColumns = New Array();
 	For Each Column In StrSplit(ThisObject.Columns, ",") Do
 		ArrayOfColumns.Add(TrimAll(StrReplace(Column, Chars.LF, "")));
@@ -84,7 +86,7 @@ Procedure LoadAtServer()
 	CheckIsFilled("Description" , QueryTableRefs, ArrayOfColumns, Cancel);
 		
 	If Cancel Then
-		Return;
+		Return False;
 	EndIf;
 	
 	Try
@@ -100,7 +102,8 @@ Procedure LoadAtServer()
 	EndTry;
 	
 	CommitTransaction();
-EndProcedure
+	Return True;
+EndFunction
 
 &AtClient
 Procedure LanguagesBeforeAddRow(Item, Cancel, Clone, Parent, IsFolder, Parameter)

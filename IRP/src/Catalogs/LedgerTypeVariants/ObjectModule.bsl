@@ -20,3 +20,7 @@ Procedure BeforeDelete(Cancel)
 		Return;
 	EndIf;
 EndProcedure
+
+Procedure OnCopy(CopiedObject)
+	ThisObject.UniqueID = Undefined;
+EndProcedure

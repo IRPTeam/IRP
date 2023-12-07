@@ -8,3 +8,7 @@ Procedure BeforeWrite(Cancel)
 		ThisObject.UniqueID = "_" + String(New UUID());
 	EndIf;
 EndProcedure
+
+Procedure OnCopy(CopiedObject)
+	ThisObject.UniqueID = Undefined;
+EndProcedure

@@ -7,26 +7,39 @@ Procedure OnWrite(Cancel, Replacing)
 EndProcedure
 
 Procedure FillCheckProcessing(Cancel, CheckedAttributes)
+	
 	For Each Record In ThisObject Do
 		
-		If ValueIsFilled(Record.AccountAdvancesVendor) And Record.AccountAdvancesVendor.NotUsedForRecords Then
-			Cancel = True;
-			CommonFunctionsClientServer.ShowUsersMessage(StrTemplate(R().AccountingError_01, Record.AccountAdvancesVendor.Code), "Account", ThisObject);
+		If Record.Vendor Then
+			CheckedAttributes.Add("AccountAdvancesVendor");
+			CheckedAttributes.Add("AccountTransactionsVendor");
 		EndIf;
 		
-		If ValueIsFilled(Record.AccountTransactionsVendor) And Record.AccountTransactionsVendor.NotUsedForRecords Then
-			Cancel = True;
-			CommonFunctionsClientServer.ShowUsersMessage(StrTemplate(R().AccountingError_01, Record.AccountTransactionsVendor.Code), "Account", ThisObject);
+		If Record.Customer Then
+			CheckedAttributes.Add("AccountAdvancesCustomer");
+			CheckedAttributes.Add("AccountTransactionsCustomer");
 		EndIf;
 		
-		If ValueIsFilled(Record.AccountAdvancesCustomer) And Record.AccountAdvancesCustomer.NotUsedForRecords Then
-			Cancel = True;
-			CommonFunctionsClientServer.ShowUsersMessage(StrTemplate(R().AccountingError_01, Record.AccountAdvancesCustomer.Code), "Account", ThisObject);
+		If Record.Other Then
+			CheckedAttributes.Add("AccountAdvancesOther");
+			CheckedAttributes.Add("AccountTransactionsOther");
 		EndIf;
 		
-		If ValueIsFilled(Record.AccountTransactionsCustomer) And Record.AccountTransactionsCustomer.NotUsedForRecords Then
-			Cancel = True;
-			CommonFunctionsClientServer.ShowUsersMessage(StrTemplate(R().AccountingError_01, Record.AccountTransactionsCustomer.Code), "Account", ThisObject);
-		EndIf;
+		CheckAccountNotUseForRecords("AccountAdvancesVendor"       , Record, Cancel);
+		CheckAccountNotUseForRecords("AccountTransactionsVendor"   , Record, Cancel);
+		CheckAccountNotUseForRecords("AccountAdvancesCustomer"     , Record, Cancel);
+		CheckAccountNotUseForRecords("AccountTransactionsCustomer" , Record, Cancel);
+		CheckAccountNotUseForRecords("AccountAdvancesOther"        , Record, Cancel);
+		CheckAccountNotUseForRecords("AccountTransactionsOther"    , Record, Cancel);
+				
 	EndDo;
 EndProcedure
+
+Procedure CheckAccountNotUseForRecords(ResourceName, Record, Cancel)
+	If ValueIsFilled(Record[ResourceName]) And Record[ResourceName].NotUsedForRecords Then
+		Cancel = True;
+		CommonFunctionsClientServer.ShowUsersMessage(StrTemplate(R().AccountingError_01, Record[ResourceName].Code), 
+			ResourceName, ThisObject);
+	EndIf;
+EndProcedure
+

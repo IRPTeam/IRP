@@ -474,12 +474,12 @@ Function __GetT9012S_AccountsPartner(Period, Company, LedgerTypeVariant, Partner
 	"SELECT
 	|	ByAgreement.AccountAdvancesVendor,
 	|	ByAgreement.AccountTransactionsVendor,
-	|	ByAgreement.AccountAdvancesCustomer,
-	|	ByAgreement.AccountTransactionsCustomer,
 	|	1 AS Priority
-	|INTO Accounts
+	|INTO Accounts_Vendor
 	|FROM
-	|	InformationRegister.T9012S_AccountsPartner.SliceLast(&Period, Company = &Company AND LedgerTypeVariant = &LedgerTypeVariant
+	|	InformationRegister.T9012S_AccountsPartner.SliceLast(&Period, Vendor
+	|	AND Company = &Company
+	|	AND LedgerTypeVariant = &LedgerTypeVariant
 	|	AND Agreement = &Agreement
 	|	AND Partner.Ref IS NULL) AS ByAgreement
 	|
@@ -488,11 +488,11 @@ Function __GetT9012S_AccountsPartner(Period, Company, LedgerTypeVariant, Partner
 	|SELECT
 	|	ByPartner.AccountAdvancesVendor,
 	|	ByPartner.AccountTransactionsVendor,
-	|	ByPartner.AccountAdvancesCustomer,
-	|	ByPartner.AccountTransactionsCustomer,
 	|	2
 	|FROM
-	|	InformationRegister.T9012S_AccountsPartner.SliceLast(&Period, Company = &Company AND LedgerTypeVariant = &LedgerTypeVariant
+	|	InformationRegister.T9012S_AccountsPartner.SliceLast(&Period, Vendor
+	|	AND Company = &Company
+	|	AND LedgerTypeVariant = &LedgerTypeVariant
 	|	AND Partner = &Partner
 	|	AND Agreement.Ref IS NULL) AS ByPartner
 	|
@@ -501,42 +501,166 @@ Function __GetT9012S_AccountsPartner(Period, Company, LedgerTypeVariant, Partner
 	|SELECT
 	|	ByCompany.AccountAdvancesVendor,
 	|	ByCompany.AccountTransactionsVendor,
+	|	3
+	|FROM
+	|	InformationRegister.T9012S_AccountsPartner.SliceLast(&Period, Vendor
+	|	AND Company = &Company
+	|	AND LedgerTypeVariant = &LedgerTypeVariant
+	|	AND Partner.Ref IS NULL
+	|	AND Agreement.Ref IS NULL) AS ByCompany
+	|;
+	|
+	|///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	|SELECT
+	|	ByAgreement.AccountAdvancesCustomer,
+	|	ByAgreement.AccountTransactionsCustomer,
+	|	1 AS Priority
+	|INTO Accounts_Customer
+	|FROM
+	|	InformationRegister.T9012S_AccountsPartner.SliceLast(&Period, Customer
+	|	AND Company = &Company
+	|	AND LedgerTypeVariant = &LedgerTypeVariant
+	|	AND Agreement = &Agreement
+	|	AND Partner.Ref IS NULL) AS ByAgreement
+	|
+	|UNION ALL
+	|
+	|SELECT
+	|	ByPartner.AccountAdvancesCustomer,
+	|	ByPartner.AccountTransactionsCustomer,
+	|	2
+	|FROM
+	|	InformationRegister.T9012S_AccountsPartner.SliceLast(&Period, Customer
+	|	AND Company = &Company
+	|	AND LedgerTypeVariant = &LedgerTypeVariant
+	|	AND Partner = &Partner
+	|	AND Agreement.Ref IS NULL) AS ByPartner
+	|
+	|UNION ALL
+	|
+	|SELECT
 	|	ByCompany.AccountAdvancesCustomer,
 	|	ByCompany.AccountTransactionsCustomer,
 	|	3
 	|FROM
-	|	InformationRegister.T9012S_AccountsPartner.SliceLast(&Period, Company = &Company AND LedgerTypeVariant = &LedgerTypeVariant
+	|	InformationRegister.T9012S_AccountsPartner.SliceLast(&Period, Customer
+	|	AND Company = &Company
+	|	AND LedgerTypeVariant = &LedgerTypeVariant
+	|	AND Partner.Ref IS NULL
+	|	AND Agreement.Ref IS NULL) AS ByCompany
+	|;
+	|
+	|/////////////////////////////////////////////////////////////////////////////////////////////////////
+	|SELECT
+	|	ByAgreement.AccountAdvancesOther,
+	|	ByAgreement.AccountTransactionsOther,
+	|	1 AS Priority
+	|INTO Accounts_Other
+	|FROM
+	|	InformationRegister.T9012S_AccountsPartner.SliceLast(&Period, Other
+	|	AND Company = &Company
+	|	AND LedgerTypeVariant = &LedgerTypeVariant
+	|	AND Agreement = &Agreement
+	|	AND Partner.Ref IS NULL) AS ByAgreement
+	|
+	|UNION ALL
+	|
+	|SELECT
+	|	ByPartner.AccountAdvancesOther,
+	|	ByPartner.AccountTransactionsOther,
+	|	2
+	|FROM
+	|	InformationRegister.T9012S_AccountsPartner.SliceLast(&Period, Other
+	|	AND Company = &Company
+	|	AND LedgerTypeVariant = &LedgerTypeVariant
+	|	AND Partner = &Partner
+	|	AND Agreement.Ref IS NULL) AS ByPartner
+	|
+	|UNION ALL
+	|
+	|SELECT
+	|	ByCompany.AccountAdvancesOther,
+	|	ByCompany.AccountTransactionsOther,
+	|	3
+	|FROM
+	|	InformationRegister.T9012S_AccountsPartner.SliceLast(&Period, Other
+	|	AND Company = &Company
+	|	AND LedgerTypeVariant = &LedgerTypeVariant
 	|	AND Partner.Ref IS NULL
 	|	AND Agreement.Ref IS NULL) AS ByCompany
 	|;
 	|
 	|////////////////////////////////////////////////////////////////////////////////
-	|SELECT
+	|SELECT TOP 1
 	|	Accounts.AccountAdvancesVendor,
 	|	Accounts.AccountTransactionsVendor,
+	|	Accounts.Priority AS Priority
+	|FROM
+	|	Accounts_Vendor AS Accounts
+	|
+	|ORDER BY
+	|	Priority
+	|;
+	|
+	|////////////////////////////////////////////////////////////////////////////////
+	|SELECT TOP 1
 	|	Accounts.AccountAdvancesCustomer,
 	|	Accounts.AccountTransactionsCustomer,
 	|	Accounts.Priority AS Priority
 	|FROM
-	|	Accounts AS Accounts
+	|	Accounts_Customer AS Accounts
+	|
+	|ORDER BY
+	|	Priority
+	|;
+	|
+	|////////////////////////////////////////////////////////////////////////////////
+	|SELECT TOP 1
+	|	Accounts.AccountAdvancesOther,
+	|	Accounts.AccountTransactionsOther,
+	|	Accounts.Priority AS Priority
+	|FROM
+	|	Accounts_Other AS Accounts
+	|
 	|ORDER BY
 	|	Priority";
+
 	Query.SetParameter("Period"    , Period);
 	Query.SetParameter("Company"   , Company);
 	Query.SetParameter("LedgerTypeVariant"   , LedgerTypeVariant);
 	Query.SetParameter("Partner"   , Partner);
 	Query.SetParameter("Agreement" , Agreement);
-	QueryResult = Query.Execute();
-	QuerySelection = QueryResult.Select();
+	
+	QueryResults = Query.ExecuteBatch();
+	
+
+	
 	Result = New Structure();
 	Result.Insert("AccountAdvancesVendor"        , Undefined);
 	Result.Insert("AccountTransactionsVendor"    , Undefined);
 	Result.Insert("AccountAdvancesCustomer"      , Undefined);
-	Result.Insert("AccountTransactionsCustomer" , Undefined);
+	Result.Insert("AccountTransactionsCustomer"  , Undefined);
+	Result.Insert("AccountAdvancesOther"         , Undefined);
+	Result.Insert("AccountTransactionsOther"     , Undefined);
 
-	If QuerySelection.Next() Then
-		FillPropertyValues(Result, QuerySelection);
+	QuerySelection_Vendor = QueryResults[3].Select();
+	If QuerySelection_Vendor.Next() Then
+		Result.AccountAdvancesVendor = QuerySelection_Vendor.AccountAdvancesVendor;
+		Result.AccountTransactionsVendor = QuerySelection_Vendor.AccountTransactionsVendor;
 	EndIf;
+	
+	QuerySelection_Customer = QueryResults[4].Select();
+	If QuerySelection_Customer.Next() Then
+		Result.AccountAdvancesCustomer = QuerySelection_Customer.AccountAdvancesCustomer;
+		Result.AccountTransactionsCustomer = QuerySelection_Customer.AccountTransactionsCustomer;
+	EndIf;
+	
+	QuerySelection_Other = QueryResults[5].Select();
+	If QuerySelection_Other.Next() Then
+		Result.AccountAdvancesOther = QuerySelection_Other.AccountAdvancesOther;
+		Result.AccountTransactionsOther = QuerySelection_Other.AccountTransactionsOther;
+	EndIf;
+	
 	Return Result;
 EndFunction
 

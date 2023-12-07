@@ -53,6 +53,7 @@ Function GetSupportedDocuments() Export
 	ArrayOfDocuments.Add(Docs.PurchaseInvoice);	
 	ArrayOfDocuments.Add(Docs.RetailSalesReceipt);
 	ArrayOfDocuments.Add(Docs.SalesInvoice);
+	ArrayOfDocuments.Add(Docs.ForeignCurrencyRevaluation);
 	Return ArrayOfDocuments;
 EndFunction
 

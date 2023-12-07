@@ -1966,51 +1966,6 @@ Scenario: Create catalog IntegrationSettings objects (db connection)
 
 
 
-
-Scenario: Create catalog AccountingOperations objects
-
-	And I check or create catalog "AccountingOperations" objects:
-		| 'Ref'                                                                                         | 'DeletionMark'  | 'Parent'                                                                       | 'IsFolder'  | 'Code'  | 'Order'  | 'Description_en'                                                                                       | 'Description_hash'  | 'Description_ru'  | 'Description_tr'   |
-		| 'e1cib/data/Catalog.AccountingOperations?refName=Document_BankPayment'                        | 'False'         | ''                                                                             | 'True'      | 1       | ''       | 'Bank payment'                                                                                         | ''                  | ''                | ''                 |
-		| 'e1cib/data/Catalog.AccountingOperations?refName=Document_BankReceipt'                        | 'False'         | ''                                                                             | 'True'      | 2       | ''       | 'Bank receipt'                                                                                         | ''                  | ''                | ''                 |
-		| 'e1cib/data/Catalog.AccountingOperations?refName=Document_PurchaseInvoice'                    | 'False'         | ''                                                                             | 'True'      | 5       | ''       | 'Purchase invoice'                                                                                     | ''                  | ''                | ''                 |
-		| 'e1cib/data/Catalog.AccountingOperations?refName=Document_RetailSalesReceipt'                 | 'False'         | ''                                                                             | 'True'      | 11      | ''       | 'Retail sales receipt'                                                                                 | ''                  | ''                | ''                 |
-		| 'e1cib/data/Catalog.AccountingOperations?refName=BankPayment_DR_R1020B_R1021B_CR_R3010B'      | 'False'         | 'e1cib/data/Catalog.AccountingOperations?refName=Document_BankPayment'         | 'False'     | 3       |          | 'BankPayment_DR_R1020B (Advances to vendors) _R1021B (Vendors transaction) _CR_R3010B (Cash on hand)'  | ''                  | ''                | ''                 |
-		| 'e1cib/data/Catalog.AccountingOperations?refName=BankPayment_DR_R5022T_CR_R3010B'             | 'False'         | 'e1cib/data/Catalog.AccountingOperations?refName=Document_BankPayment'         | 'False'     | 9       |          | 'BankPayment_DR_R5022T (Expenses)_CR_R3010B (cash on hand)'                                            | ''                  | ''                | ''                 |
-		| 'e1cib/data/Catalog.AccountingOperations?refName=BankPayment_DR_R1021B_CR_R1020B'             | 'False'         | 'e1cib/data/Catalog.AccountingOperations?refName=Document_BankPayment'         | 'False'     | 10      |          | 'BankPayment_DR_R1021B (Vendors transaction) _CR_R1020B (Advances to vendors)'                         | ''                  | ''                | ''                 |
-		| 'e1cib/data/Catalog.AccountingOperations?refName=BankReceipt_DR_R3010B_CR_R2021B'             | 'False'         | 'e1cib/data/Catalog.AccountingOperations?refName=Document_BankReceipt'         | 'False'     | 4       |          | 'BankReceipt_DR_R3010B (Cash on hand) _CR_R2021B (Customer transaction)'                               | ''                  | ''                | ''                 |
-		| 'e1cib/data/Catalog.AccountingOperations?refName=PurchaseInvoice_DR_R4050B_R5022T_CR_R1021B'  | 'False'         | 'e1cib/data/Catalog.AccountingOperations?refName=Document_PurchaseInvoice'     | 'False'     | 6       |          | 'PurchaseInvoice_DR_R4050B (Stock inventory)_R5022T(Expenses)_CR_R1021B (Vendors transaction)'         | ''                  | ''                | ''                 |
-		| 'e1cib/data/Catalog.AccountingOperations?refName=PurchaseInvoice_DR_R1021B_CR_R1020B'         | 'False'         | 'e1cib/data/Catalog.AccountingOperations?refName=Document_PurchaseInvoice'     | 'False'     | 7       |          | 'PurchaseInvoice_DR_R1021B (Vendors transaction)_CR_R1020B (Advances to vendors)'                      | ''                  | ''                | ''                 |
-		| 'e1cib/data/Catalog.AccountingOperations?refName=PurchaseInvoice_DR_R1040B_CR_R1021B'         | 'False'         | 'e1cib/data/Catalog.AccountingOperations?refName=Document_PurchaseInvoice'     | 'False'     | 8       |          | 'PurchaseInvoice_DR_R1040B (Taxes outgoing) _CR_R1021B (Vendors transaction)'                          | ''                  | ''                | ''                 |
-		| 'e1cib/data/Catalog.AccountingOperations?refName=RetailSalesReceipt_DR_R5022T_CR_R4050B'      | 'False'         | 'e1cib/data/Catalog.AccountingOperations?refName=Document_RetailSalesReceipt'  | 'False'     | 12      |          | 'RetailSalesReceipt_DR_R5022T (Expenses) _CR_R4050B (Stock inventory)'                                 | ''                  | ''                | ''                 |
-
-Scenario: Create catalog LedgerTypes objects
-
-	And I check or create catalog "LedgerTypes" objects:
-		| 'Ref'                                                                  | 'DeletionMark'  | 'Code'  | 'CurrencyMovementType'                                                                             | 'Variant'                                                                     | 'Description_en'  | 'Description_hash'  | 'Description_ru'  | 'Description_tr'   |
-		| 'e1cib/data/Catalog.LedgerTypes?ref=b78386a1ced23f4711ed01ef43a5af0d'  | 'False'         | 1       | 'e1cib/data/ChartOfCharacteristicTypes.CurrencyMovementType?ref=aa78120ed92fbced11eaf113ba6c185d'  | 'e1cib/data/Catalog.LedgerTypeVariants?ref=b78386a1ced23f4711ed01ef43a5af0c'  | 'Management'      | ''                  | ''                | ''                 |
-
-
-Scenario: Create catalog LedgerTypeVariants objects
-
-	And I check or create catalog "LedgerTypeVariants" objects:
-		| 'Ref'                                                                         | 'DeletionMark'  | 'Code'  | 'Description_en'        | 'Description_hash'  | 'Description_ru'  | 'Description_tr'   |
-		| 'e1cib/data/Catalog.LedgerTypeVariants?ref=b78386a1ced23f4711ed01ef43a5af0c'  | 'False'         | 1       | 'Management analitics'  | ''                  | ''                | ''                 |
-
-Scenario: Create information register LedgerTypeOperations records
-
-	And I check or create information register "LedgerTypeOperations" records:
-		| 'Period'              | 'LedgerType'                                                           | 'AccountingOperation'                                                                         | 'Use'    |
-		| '01.01.2021 0:00:00'  | 'e1cib/data/Catalog.LedgerTypes?ref=b78386a1ced23f4711ed01ef43a5af0d'  | 'e1cib/data/Catalog.AccountingOperations?refName=BankPayment_DR_R1020B_R1021B_CR_R3010B'      | 'True'   |
-		| '01.01.2021 0:00:00'  | 'e1cib/data/Catalog.LedgerTypes?ref=b78386a1ced23f4711ed01ef43a5af0d'  | 'e1cib/data/Catalog.AccountingOperations?refName=BankPayment_DR_R5022T_CR_R3010B'             | 'True'   |
-		| '01.01.2021 0:00:00'  | 'e1cib/data/Catalog.LedgerTypes?ref=b78386a1ced23f4711ed01ef43a5af0d'  | 'e1cib/data/Catalog.AccountingOperations?refName=BankPayment_DR_R1021B_CR_R1020B'             | 'True'   |
-		| '01.01.2021 0:00:00'  | 'e1cib/data/Catalog.LedgerTypes?ref=b78386a1ced23f4711ed01ef43a5af0d'  | 'e1cib/data/Catalog.AccountingOperations?refName=BankReceipt_DR_R3010B_CR_R2021B'             | 'True'   |
-		| '01.01.2021 0:00:00'  | 'e1cib/data/Catalog.LedgerTypes?ref=b78386a1ced23f4711ed01ef43a5af0d'  | 'e1cib/data/Catalog.AccountingOperations?refName=PurchaseInvoice_DR_R4050B_R5022T_CR_R1021B'  | 'True'   |
-		| '01.01.2021 0:00:00'  | 'e1cib/data/Catalog.LedgerTypes?ref=b78386a1ced23f4711ed01ef43a5af0d'  | 'e1cib/data/Catalog.AccountingOperations?refName=PurchaseInvoice_DR_R1021B_CR_R1020B'         | 'True'   |
-		| '01.01.2021 0:00:00'  | 'e1cib/data/Catalog.LedgerTypes?ref=b78386a1ced23f4711ed01ef43a5af0d'  | 'e1cib/data/Catalog.AccountingOperations?refName=PurchaseInvoice_DR_R1040B_CR_R1021B'         | 'True'   |
-		| '01.01.2021 0:00:00'  | 'e1cib/data/Catalog.LedgerTypes?ref=b78386a1ced23f4711ed01ef43a5af0d'  | 'e1cib/data/Catalog.AccountingOperations?refName=RetailSalesReceipt_DR_R5022T_CR_R4050B'      | 'True'   |
-
-
 Scenario: Create information register CurrencyRates records
 
 	And I check or create information register "CurrencyRates" records:
@@ -2834,35 +2789,6 @@ Scenario: Create information register ExpenseRevenueTypeSettings records (item k
 		| 'Company'                                                            | 'ItemType'  | 'Item'                                                           | 'ItemKey'                                                           | 'ExpenseType'                                                                     | 'RevenueType'                                                                      |
 		| 'e1cib/data/Catalog.Companies?ref=aa78120ed92fbced11eaf113ba6c185c'  | ''          | 'e1cib/data/Catalog.Items?ref=aa78120ed92fbced11eaf115bcc9c5f3'  | 'e1cib/data/Catalog.ItemKeys?ref=aa78120ed92fbced11eaf115bcc9c5fb'  | 'e1cib/data/Catalog.ExpenseAndRevenueTypes?ref=aa78120ed92fbced11eaf114c59ef02b'  | 'e1cib/data/Catalog.ExpenseAndRevenueTypes?ref=aa78120ed92fbced11eaf114c59ef02b'   |
 		| 'e1cib/data/Catalog.Companies?ref=aa78120ed92fbced11eaf113ba6c185c'  | ''          | 'e1cib/data/Catalog.Items?ref=aa78120ed92fbced11eaf115bcc9c5f6'  | 'e1cib/data/Catalog.ItemKeys?ref=aa78120ed92fbced11eaf115bcc9c5fc'  | 'e1cib/data/Catalog.ExpenseAndRevenueTypes?ref=aa78120ed92fbced11eaf114c59ef02a'  | 'e1cib/data/Catalog.ExpenseAndRevenueTypes?ref=aa78120ed92fbced11eaf114c59ef02a'   |
-
-
-Scenario: Create chart of characteristic types AccountingExtraDimensionTypes objects
-
-	And I check or create chart of characteristic types "AccountingExtraDimensionTypes" objects:
-		| 'Ref'                                                                                                       | 'DeletionMark'  | 'Description_en'     | 'Description_hash'  | 'Description_ru'  | 'Description_tr'  | 'ValueType'                                                     |
-		| 'e1cib/data/ChartOfCharacteristicTypes.AccountingExtraDimensionTypes?ref=b782df363ef64fb511ecebce91aa6032'  | 'False'         | 'Item'               | ''                  | ''                | ''                | '<Type xmlns:d2p1="http://v8.1c.ru/8.1/data/enterprise/current-config">d2p1:CatalogRef.Items</Type>'                    |
-		| 'e1cib/data/ChartOfCharacteristicTypes.AccountingExtraDimensionTypes?ref=b782df363ef64fb511ecebce91aa6033'  | 'False'         | 'Item key'           | ''                  | ''                | ''                | '<Type xmlns:d2p1="http://v8.1c.ru/8.1/data/enterprise/current-config">d2p1:CatalogRef.ItemKeys</Type>'                 |
-		| 'e1cib/data/ChartOfCharacteristicTypes.AccountingExtraDimensionTypes?ref=b782df363ef64fb511ecebce91aa6034'  | 'False'         | 'Legal name'         | ''                  | ''                | ''                | '<Type xmlns:d2p1="http://v8.1c.ru/8.1/data/enterprise/current-config">d2p1:CatalogRef.Companies</Type>'                |
-		| 'e1cib/data/ChartOfCharacteristicTypes.AccountingExtraDimensionTypes?ref=b782df363ef64fb511ecebce91aa6035'  | 'False'         | 'Partner'            | ''                  | ''                | ''                | '<Type xmlns:d2p1="http://v8.1c.ru/8.1/data/enterprise/current-config">d2p1:CatalogRef.Partners</Type>'                 |
-		| 'e1cib/data/ChartOfCharacteristicTypes.AccountingExtraDimensionTypes?ref=b782df363ef64fb511ecebce91aa6036'  | 'False'         | 'Store'              | ''                  | ''                | ''                | '<Type xmlns:d2p1="http://v8.1c.ru/8.1/data/enterprise/current-config">d2p1:CatalogRef.Stores</Type>'                   |
-		| 'e1cib/data/ChartOfCharacteristicTypes.AccountingExtraDimensionTypes?ref=b782df363ef64fb511ecebce91aa6037'  | 'False'         | 'Business unit'      | ''                  | ''                | ''                | '<Type xmlns:d2p1="http://v8.1c.ru/8.1/data/enterprise/current-config">d2p1:CatalogRef.BusinessUnits</Type>'            |
-		| 'e1cib/data/ChartOfCharacteristicTypes.AccountingExtraDimensionTypes?ref=b782df363ef64fb511ecebce91aa6038'  | 'False'         | 'Cash/Bank account'  | ''                  | ''                | ''                | '<Type xmlns:d2p1="http://v8.1c.ru/8.1/data/enterprise/current-config">d2p1:CatalogRef.CashAccounts</Type>'             |
-		| 'e1cib/data/ChartOfCharacteristicTypes.AccountingExtraDimensionTypes?ref=b782df363ef64fb511ecebce91aa6039'  | 'False'         | 'Expense type'       | ''                  | ''                | ''                | '<Type xmlns:d2p1="http://v8.1c.ru/8.1/data/enterprise/current-config">d2p1:CatalogRef.ExpenseAndRevenueTypes</Type>'   |
-		| 'e1cib/data/ChartOfCharacteristicTypes.AccountingExtraDimensionTypes?ref=b782df363ef64fb511ecebce91aa603a'  | 'False'         | 'Partner term'       | ''                  | ''                | ''                | '<Type xmlns:d2p1="http://v8.1c.ru/8.1/data/enterprise/current-config">d2p1:CatalogRef.Agreements</Type>'               |
-		| 'e1cib/data/ChartOfCharacteristicTypes.AccountingExtraDimensionTypes?ref=b782df363ef64fb511ecebce91aa603b'  | 'False'         | 'Tax type'           | ''                  | ''                | ''                | '<Type xmlns:d2p1="http://v8.1c.ru/8.1/data/enterprise/current-config">d2p1:CatalogRef.Taxes</Type>'                    |
-		| 'e1cib/data/ChartOfCharacteristicTypes.AccountingExtraDimensionTypes?ref=b782df363ef64fb511ecebce91aa603c'  | 'False'         | 'Revenue type'       | ''                  | ''                | ''                | '<Type xmlns:d2p1="http://v8.1c.ru/8.1/data/enterprise/current-config">d2p1:CatalogRef.ExpenseAndRevenueTypes</Type>'   |
-
-Scenario: Create information register T9011S_AccountsCashAccount records
-
-	And I check or create information register "T9011S_AccountsCashAccount" records:
-		| 'Period'              | 'Company'                                                            | 'Variant'                                                                     | 'CashAccount'  | 'Account'                                                                 |
-		| '01.07.2022 0:00:00'  | 'e1cib/data/Catalog.Companies?ref=aa78120ed92fbced11eaf113ba6c185c'  | 'e1cib/data/Catalog.LedgerTypeVariants?ref=b78386a1ced23f4711ed01ef43a5af0c'  | ''             | 'e1cib/data/ChartOfAccounts.Basic?ref=b78386a1ced23f4711ed01e9dc954ffe'   |
-
-Scenario: Create information register T9014S_AccountsExpenseRevenue records
-
-	And I check or create information register "T9014S_AccountsExpenseRevenue" records:
-		| 'Period'              | 'Company'                                                            | 'Variant'                                                                     | 'ExpenseRevenue'                                                                  | 'Account'                                                                 |
-		| '01.07.2022 0:00:00'  | 'e1cib/data/Catalog.Companies?ref=aa78120ed92fbced11eaf113ba6c185c'  | 'e1cib/data/Catalog.LedgerTypeVariants?ref=b78386a1ced23f4711ed01ef43a5af0c'  | 'e1cib/data/Catalog.ExpenseAndRevenueTypes?ref=aa78120ed95fbced11eaf114c59ef02b'  | 'e1cib/data/ChartOfAccounts.Basic?ref=b78386a1ced23f4711ed01e9dc954ffe'   |
 
 
 Scenario: Create information register UserSettings records (for workstation)

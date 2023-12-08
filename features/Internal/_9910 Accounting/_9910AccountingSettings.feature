@@ -34,6 +34,7 @@ Scenario: _099100 preparation
 		When Create catalog Companies objects (Main company)
 		When Create catalog Stores objects
 		When Create catalog Partners objects (Ferron BP)
+		When Create catalog Partners objects
 		When Create catalog Companies objects (partners company)
 		When Create catalog Countries objects
 		When Create catalog CancelReturnReasons objects
@@ -555,7 +556,7 @@ Scenario: _0991015 check load charts of accounts (correct data)
 			And in "SpreadsheetDocument" spreadsheet document I input text "$$UniqueID$$"
 			And in "SpreadsheetDocument" spreadsheet document I move to "R3C4" cell
 			And in "SpreadsheetDocument" spreadsheet document I double-click the current cell
-			And in "SpreadsheetDocument" spreadsheet document I input text "908786997"
+			And in "SpreadsheetDocument" spreadsheet document I input text "90878699"
 			And in "SpreadsheetDocument" spreadsheet document I move to "R3C5" cell
 			And in "SpreadsheetDocument" spreadsheet document I double-click the current cell
 			And in "SpreadsheetDocument" spreadsheet document I input text "Test assets account"
@@ -640,17 +641,17 @@ Scenario: _0991015 check load charts of accounts (correct data)
 			And I click "Refresh" button
 	* Check
 		And "List" table contains lines
-			| 'Code'                   | 'Order'     | 'Description'         | 'Type' | 'Ext. Dim 2'       | 'Q.'  | 'Ext. Dim 3'       | 'C.'  | 'Ledger type variant'               | 'Ext. Dim 1' | 'Off-balance' |
-			| 'Account charts (Basic)' | ''          | ''                    | ''     | ''                 | ''    | ''                 | ''    | ''                                  | ''           | ''            |
-			| '90878699'               | '90878699'  | 'Test assets account' | 'A'    | 'Item key (turn.)' | 'Yes' | 'Tax type (turn.)' | 'No'  | 'LTV with account charts code mask' | 'Item'       | 'No'          |
-			| '908990'                 | '908990'    | 'Test group'          | 'P'    | ''                 | 'No'  | ''                 | 'Yes' | 'LTV with account charts code mask' | 'Partner'    | 'No'          |
+			| 'Code'                   | 'Order'    | 'Description'         | 'Type' | 'Ext. Dim 2'       | 'Q.'  | 'Ext. Dim 3'       | 'C.'  | 'Ledger type variant'               | 'Ext. Dim 1' | 'Off-balance' |
+			| 'Account charts (Basic)' | ''         | ''                    | ''     | ''                 | ''    | ''                 | ''    | ''                                  | ''           | ''            |
+			| '90878699'               | '90878699' | 'Test assets account' | 'A'    | 'Item key (turn.)' | 'Yes' | 'Tax type (turn.)' | 'No'  | 'LTV with account charts code mask' | 'Item'       | 'No'          |
+			| '908990'                 | '908990'   | 'Test group'          | 'P'    | ''                 | 'No'  | ''                 | 'Yes' | 'LTV with account charts code mask' | 'Partner'    | 'No'          |
 		And I expand a line in "List" table
 			| 'C.'  | 'Code'   | 'Description' | 'Ext. Dim 1' | 'Ledger type variant'               | 'Off-balance' | 'Order'  | 'Q.' | 'Type' |
 			| 'Yes' | '908990' | 'Test group'  | 'Partner'    | 'LTV with account charts code mask' | 'No'          | '908990' | 'No' | 'P'    |
 		* Liabilities account
 			And I go to line in "List" table
 				| 'C.' | 'Code'      | 'Description'              | 'Ext. Dim 1' | 'Ext. Dim 2'       | 'Ext. Dim 3'       | 'Ledger type variant'               | 'Off-balance' | 'Order'     | 'Q.'  | 'Type' |
-				| 'No' | '10878699'  | 'Test liabilities account' | 'Item'       | 'Item key (turn.)' | 'Tax type (turn.)' | 'LTV with account charts code mask' | 'No'          | '108786997' | 'Yes' | 'P'    |
+				| 'No' | '10878699'  | 'Test liabilities account' | 'Item'       | 'Item key (turn.)' | 'Tax type (turn.)' | 'LTV with account charts code mask' | 'No'          | '10878699'  | 'Yes' | 'P'    |
 			And I select current line in "List" table
 			And the editing text of form attribute named "Code" became equal to "108.78.699"
 			Then the form attribute named "Currency" became equal to "No"
@@ -673,9 +674,8 @@ Scenario: _0991015 check load charts of accounts (correct data)
 		* Assets account
 			And I go to line in "List" table
 				| 'C.' | 'Code'      | 'Description'         | 'Ext. Dim 1' | 'Ext. Dim 2'       | 'Ext. Dim 3'       | 'Ledger type variant'               | 'Off-balance' | 'Order'     | 'Q.'  | 'Type' |
-				| 'No' | '90878699'  | 'Test assets account' | 'Item'       | 'Item key (turn.)' | 'Tax type (turn.)' | 'LTV with account charts code mask' | 'No'          | '908786997' | 'Yes' | 'A'    |
+				| 'No' | '90878699'  | 'Test assets account' | 'Item'       | 'Item key (turn.)' | 'Tax type (turn.)' | 'LTV with account charts code mask' | 'No'          | '90878699'  | 'Yes' | 'A'    |
 			And I select current line in "List" table
-			Then the form attribute named "Code" became equal to "90878699"
 			And the editing text of form attribute named "Code" became equal to "908.78.699"
 			Then the form attribute named "Currency" became equal to "No"
 			Then the form attribute named "Description_en" became equal to "Test assets account"
@@ -697,16 +697,14 @@ Scenario: _0991015 check load charts of accounts (correct data)
 		* Group
 			And I go to line in "List" table
 				| 'C.'  | 'Code'   | 'Description' | 'Ext. Dim 1' | 'Ledger type variant'               | 'Off-balance' | 'Order'  | 'Q.' | 'Type' |
-				| 'Yes' | '908990' | 'Test group'  | 'Partner'    | 'LTV with account charts code mask' | 'No'          | '908990' | 'No' | 'A'    |
+				| 'Yes' | '908990' | 'Test group'  | 'Partner'    | 'LTV with account charts code mask' | 'No'          | '908990' | 'No' | 'P'    |
 			And I select current line in "List" table
-			Then the form attribute named "Code" became equal to "908990"
 			And the editing text of form attribute named "Code" became equal to "908.99.0  "
 			Then the form attribute named "Currency" became equal to "Yes"
 			Then the form attribute named "Description_en" became equal to "Test group"
 			And "ExtDimensionTypes" table became equal
 				| 'Extra dimension type' | 'Currency' | 'Turnovers only' | 'Quantity' | 'Amount' |
 				| 'Partner'              | 'Yes'      | 'No'             | 'No'       | 'Yes'    |
-			
 			Then the form attribute named "LedgerTypeVariant" became equal to "LTV with account charts code mask"
 			Then the form attribute named "NotUsedForRecords" became equal to "Yes"
 			Then the form attribute named "OffBalance" became equal to "No"
@@ -716,31 +714,7 @@ Scenario: _0991015 check load charts of accounts (correct data)
 			Then the form attribute named "SearchCode" became equal to "908990"
 			Then the form attribute named "Type" became equal to "Liabilities"
 	
-		
-								
-								
-							
-								
-						
-									
-						
-
-						
-	
 				
-
-				
-
-// Scenario: _0991016 create accounts (cash account) - for Company
-// 	And I close all client application windows
-// 	* Open T9011S_AccountsCashAccount
-// 		Given I open hyperlink "e1cib/list/InformationRegister.T9011S_AccountsCashAccount"
-// 		And I click "Create" button
-// 		And I input "01.12.2023" text in the field named "Period"
-// 		And I select from the drop-down list named "Company" by "main" string
-// 		And I select from "Ledger type variant" drop-down list by "manager" string
-// 		And I click Choice button of the field named "Account"
-	And I close all client application windows
 	
 Scenario: _0991016 check load charts of accounts (incorrect data)	
 	And I close all client application windows					
@@ -925,8 +899,7 @@ Scenario: _0991017 retrying to upload the same account
 			And I move to "Description" tab
 		And in "SpreadsheetDocument" spreadsheet document I move to "R2C5" cell
 		And in "SpreadsheetDocument" spreadsheet document I double-click the current cell
-		And in "SpreadsheetDocument" spreadsheet document I input text "Тестовый счет (manager analytics)"
-		Then the form attribute named "Description_en" became equal to "Test account (manager analytics)"		
+		And in "SpreadsheetDocument" spreadsheet document I input text "Тестовый счет (manager analytics)"		
 		And I click "Load" button					
 		Then "1C:Enterprise" window is opened
 		And I click "OK" button
@@ -938,6 +911,7 @@ Scenario: _0991017 retrying to upload the same account
 		And I select current line in "List" table
 		And I click Open button of "ENG" field
 		Then the form attribute named "Description_ru" became equal to "Тестовый счет (manager analytics)"
+		Then the form attribute named "Description_en" became equal to "Test account (manager analytics)"
 		And I close all client application windows
 
 Scenario: _0991021 accounts settings for Cash account (general for company)
@@ -992,6 +966,515 @@ Scenario: _0991022 accounts settings for Cash account (for Cash account)
 	* Check
 		And "List" table contains lines
 			| 'Period'     | 'Company'      | 'Ledger type variant'               | 'Cash account' | 'Account' |
-			| '01.01.2022' | 'Main Company' | 'LTV with account charts code mask' | ''             | '405.01'  |
 			| '01.02.2022' | 'Main Company' | 'LTV with account charts code mask' | 'Cash desk №4' | '405.01'  |
 	And I close all client application windows			
+
+Scenario: _0991023 accounts settings for Cash account (general for company)
+	And I close all client application windows
+	* Open list form
+		Given I open hyperlink "e1cib/list/InformationRegister.T9011S_AccountsCashAccount"	
+	* Create new element for product			 
+		And I click the button named "FormCreate"
+		And I input "01.01.2022" text in the field named "Period"
+		And I click Choice button of the field named "Company"
+		And I go to line in "List" table
+			| 'Description'     |
+			| 'Main Company'    |
+		And I select current line in "List" table
+		And I select from "Ledger type variant" drop-down list by "ltv" string
+		And I select from the drop-down list named "Account" by "40501" string
+		Then the form attribute named "Account" became equal to "405.01"
+		Then the form attribute named "Company" became equal to "Main Company"
+		Then the form attribute named "LedgerTypeVariant" became equal to "LTV with account charts code mask"
+		And the editing text of form attribute named "Period" became equal to "01.01.2022"
+		Then the form attribute named "RecordType" became equal to "All"
+		And I click "Save and close" button
+	* Check
+		And "List" table contains lines
+			| 'Period'     | 'Company'      | 'Ledger type variant'               | 'Cash account' | 'Account' |
+			| '01.01.2022' | 'Main Company' | 'LTV with account charts code mask' | ''             | '405.01'  |
+	And I close all client application windows
+	
+		
+Scenario: _0991024 accounts settings for Bank account (for Cash account)
+	And I close all client application windows
+	* Open list form
+		Given I open hyperlink "e1cib/list/InformationRegister.T9011S_AccountsCashAccount"	
+	* Create new element for product			 
+		And I click the button named "FormCreate"
+		And I change the radio button named "RecordType" value to "Cash/Bank account"
+		And I click Select button of "Cash account" field
+		And I go to line in "List" table
+			| 'Description'  |
+			| 'Cash desk №4' |
+		And I select current line in "List" table		
+		And I input "01.02.2022" text in the field named "Period"
+		And I select from the drop-down list named "Company" by "main" string
+		And I select from "Ledger type variant" drop-down list by "ltv" string
+		And I select from the drop-down list named "Account" by "40501" string
+		Then the form attribute named "Account" became equal to "405.01"
+		Then the form attribute named "Company" became equal to "Main Company"
+		Then the form attribute named "LedgerTypeVariant" became equal to "LTV with account charts code mask"
+		And the editing text of form attribute named "Period" became equal to "01.02.2022"
+		Then the form attribute named "CashAccount" became equal to "Cash desk №4"		
+		And I click "Save and close" button
+	* Check
+		And "List" table contains lines
+			| 'Period'     | 'Company'      | 'Ledger type variant'               | 'Cash account' | 'Account' |
+			| '01.02.2022' | 'Main Company' | 'LTV with account charts code mask' | 'Cash desk №4' | '405.01'  |
+	And I close all client application windows
+
+Scenario: _0991025 accounts settings for Bank account (for Cash account)
+	And I close all client application windows
+	* Open list form
+		Given I open hyperlink "e1cib/list/InformationRegister.T9011S_AccountsCashAccount"	
+	* Create new element for product			 
+		And I click the button named "FormCreate"
+		And I change the radio button named "RecordType" value to "Cash/Bank account"
+		And I click Select button of "Cash account" field
+		And I go to line in "List" table
+			| 'Description'  |
+			| 'Cash desk №4' |
+		And I select current line in "List" table		
+		And I input "01.02.2022" text in the field named "Period"
+		And I select from the drop-down list named "Company" by "main" string
+		And I select from "Ledger type variant" drop-down list by "ltv" string
+		And I select from the drop-down list named "Account" by "40501" string
+		Then the form attribute named "Account" became equal to "405.01"
+		Then the form attribute named "Company" became equal to "Main Company"
+		Then the form attribute named "LedgerTypeVariant" became equal to "LTV with account charts code mask"
+		And the editing text of form attribute named "Period" became equal to "01.02.2022"
+		Then the form attribute named "CashAccount" became equal to "Cash desk №4"		
+		And I click "Save and close" button
+	* Check
+		And "List" table contains lines
+			| 'Period'     | 'Company'      | 'Ledger type variant'               | 'Cash account' | 'Account' |
+			| '01.02.2022' | 'Main Company' | 'LTV with account charts code mask' | 'Cash desk №4' | '405.01'  |
+	And I close all client application windows
+
+Scenario: _0991026 accounts settings for Bank account (for Bank account)
+	And I close all client application windows
+	* Open list form
+		Given I open hyperlink "e1cib/list/InformationRegister.T9011S_AccountsCashAccount"	
+	* Create new element for product			 
+		And I click the button named "FormCreate"
+		And I change the radio button named "RecordType" value to "Cash/Bank account"
+		And I click Select button of "Cash account" field
+		And I go to line in "List" table
+			| 'Description'       |
+			| 'Bank account, TRY' |
+		And I select current line in "List" table		
+		And I input "01.02.2022" text in the field named "Period"
+		And I select from the drop-down list named "Company" by "main" string
+		And I select from "Ledger type variant" drop-down list by "ltv" string
+		And I select from the drop-down list named "Account" by "40501" string
+		Then the form attribute named "Account" became equal to "405.01"
+		Then the form attribute named "Company" became equal to "Main Company"
+		Then the form attribute named "LedgerTypeVariant" became equal to "LTV with account charts code mask"
+		And the editing text of form attribute named "Period" became equal to "01.02.2022"
+		Then the form attribute named "CashAccount" became equal to "Bank account, TRY"		
+		And I click "Save and close" button
+	* Check
+		And "List" table contains lines
+			| 'Period'     | 'Company'      | 'Ledger type variant'               | 'Cash account'      | 'Account' |
+			| '01.02.2022' | 'Main Company' | 'LTV with account charts code mask' | 'Bank account, TRY' | '405.01'  |
+	And I close all client application windows
+
+Scenario: _0991027 accounts settings for Expense/Revenue (general for company)
+	And I close all client application windows
+	* Open list form
+		Given I open hyperlink "e1cib/list/InformationRegister.T9014S_AccountsExpenseRevenue"	
+	* Create new element for product			 
+		And I click the button named "FormCreate"
+		And I input "01.01.2022" text in the field named "Period"
+		And I click Choice button of the field named "Company"
+		And I go to line in "List" table
+			| 'Description'     |
+			| 'Main Company'    |
+		And I select current line in "List" table
+		And I select from "Ledger type variant" drop-down list by "ltv" string
+		And I select from the drop-down list named "Account" by "40501" string
+		Then the form attribute named "Account" became equal to "405.01"
+		Then the form attribute named "Company" became equal to "Main Company"
+		Then the form attribute named "LedgerTypeVariant" became equal to "LTV with account charts code mask"
+		And the editing text of form attribute named "Period" became equal to "01.01.2022"
+		Then the form attribute named "RecordType" became equal to "All"
+		And I click "Save and close" button
+	* Check
+		And "List" table contains lines
+			| 'Period'     | 'Company'      | 'Ledger type variant'               | 'Expense / Revenue' | 'Account' |
+			| '01.01.2022' | 'Main Company' | 'LTV with account charts code mask' | ''                  | '405.01'  |
+	And I close all client application windows
+
+Scenario: _0991028 accounts settings for Expense/Revenue (general for company)
+	And I close all client application windows
+	* Open list form
+		Given I open hyperlink "e1cib/list/InformationRegister.T9014S_AccountsExpenseRevenue"	
+	* Create new element for product			 
+		And I click the button named "FormCreate"
+		And I input "01.01.2022" text in the field named "Period"
+		And I click Choice button of the field named "Company"
+		And I go to line in "List" table
+			| 'Description'     |
+			| 'Main Company'    |
+		And I select current line in "List" table
+		And I change the radio button named "RecordType" value to "Expense and revenue type"
+		And I click Select button of "Expense / Revenue" field
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Expense'     |
+		And I select current line in "List" table
+		And I select from "Expense / Revenue" drop-down list by "Revenue" string	
+		And I select from "Ledger type variant" drop-down list by "ltv" string
+		And I select from the drop-down list named "Account" by "90878699" string
+		Then the form attribute named "Account" became equal to "90878699"
+		Then the form attribute named "Company" became equal to "Main Company"
+		Then the form attribute named "LedgerTypeVariant" became equal to "LTV with account charts code mask"
+		And the editing text of form attribute named "Period" became equal to "01.01.2022"
+		Then the form attribute named "ExpenseRevenue" became equal to "Revenue"		
+		And I click "Save and close" button
+	* Check
+		And "List" table contains lines
+			| 'Period'     | 'Company'      | 'Ledger type variant'               | 'Expense / Revenue' | 'Account'  |
+			| '01.01.2022' | 'Main Company' | 'LTV with account charts code mask' | 'Revenue'           | '90878699' |
+	And I close all client application windows
+
+Scenario: _0991029 accounts settings for item key (general for company)
+	And I close all client application windows
+	* Open list form
+		Given I open hyperlink "e1cib/list/InformationRegister.T9010S_AccountsItemKey"	
+	* Create new element for product			 
+		And I click the button named "FormCreate"
+		And I input "01.01.2022" text in the field named "Period"
+		And I click Choice button of the field named "Company"
+		And I go to line in "List" table
+			| 'Description'     |
+			| 'Main Company'    |
+		And I select current line in "List" table
+		And I select from "Ledger type variant" drop-down list by "ltv" string
+		And I select from the drop-down list named "Account" by "40501" string
+		Then the form attribute named "Account" became equal to "405.01"
+		Then the form attribute named "Company" became equal to "Main Company"
+		Then the form attribute named "LedgerTypeVariant" became equal to "LTV with account charts code mask"
+		And the editing text of form attribute named "Period" became equal to "01.01.2022"
+		Then the form attribute named "RecordType" became equal to "All"
+		And I click "Save and close" button
+	* Check
+		And "List" table contains lines
+			| 'Period'     | 'Company'      | 'Ledger type variant'               | 'Item key' | 'Item' | 'Item type' | 'Type of item type' | 'Account' |
+			| '01.01.2022' | 'Main Company' | 'LTV with account charts code mask' | ''         | ''     | ''          | ''                  | '405.01'  |		
+	And I close all client application windows
+
+Scenario: _0991030 accounts settings for item key
+	And I close all client application windows
+	* Open list form
+		Given I open hyperlink "e1cib/list/InformationRegister.T9010S_AccountsItemKey"	
+	* Create new element for product			 
+		And I click the button named "FormCreate"
+		And I input "01.01.2022" text in the field named "Period"
+		And I click Choice button of the field named "Company"
+		And I go to line in "List" table
+			| 'Description'     |
+			| 'Main Company'    |
+		And I select current line in "List" table
+		And I change the radio button named "RecordType" value to "Item key"	
+		And I click Select button of "Item key" field
+		And I go to line in "List" table
+			| 'Item'  | 'Item key' |
+			| 'Dress' | 'M/White'  |
+		And I select current line in "List" table
+		And I select from "Item key" drop-down list by "xs/blue" string	
+		And I select from "Ledger type variant" drop-down list by "ltv" string
+		And I select from the drop-down list named "Account" by "40501" string
+		Then the form attribute named "Account" became equal to "405.01"
+		Then the form attribute named "Company" became equal to "Main Company"
+		Then the form attribute named "LedgerTypeVariant" became equal to "LTV with account charts code mask"
+		And the editing text of form attribute named "Period" became equal to "01.01.2022"
+		Then the form attribute named "ItemKey" became equal to "XS/Blue"		
+		And I click "Save and close" button
+	* Check
+		And "List" table contains lines
+			| 'Period'     | 'Company'      | 'Ledger type variant'               | 'Item key' | 'Item' | 'Item type' | 'Type of item type' | 'Account' |
+			| '01.01.2022' | 'Main Company' | 'LTV with account charts code mask' | 'XS/Blue'  | ''     | ''          | ''                  | '405.01'  |
+	And I close all client application windows
+
+Scenario: _0991031 accounts settings for item
+	And I close all client application windows
+	* Open list form
+		Given I open hyperlink "e1cib/list/InformationRegister.T9010S_AccountsItemKey"	
+	* Create new element for product			 
+		And I click the button named "FormCreate"
+		And I input "01.01.2022" text in the field named "Period"
+		And I click Choice button of the field named "Company"
+		And I go to line in "List" table
+			| 'Description'     |
+			| 'Main Company'    |
+		And I select current line in "List" table
+		And I change the radio button named "RecordType" value to "Item"	
+		And I click Select button of "Item" field
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Dress'       |
+		And I select current line in "List" table
+		And I select from "Item" drop-down list by "Boots" string	
+		And I select from "Ledger type variant" drop-down list by "ltv" string
+		And I select from the drop-down list named "Account" by "40501" string
+		Then the form attribute named "Account" became equal to "405.01"
+		Then the form attribute named "Company" became equal to "Main Company"
+		Then the form attribute named "LedgerTypeVariant" became equal to "LTV with account charts code mask"
+		And the editing text of form attribute named "Period" became equal to "01.01.2022"
+		Then the form attribute named "Item" became equal to "Boots"		
+		And I click "Save and close" button
+	* Check
+		And "List" table contains lines
+			| 'Period'     | 'Company'      | 'Ledger type variant'               | 'Item key' | 'Item'      | 'Item type' | 'Type of item type' | 'Account' |
+			| '01.01.2022' | 'Main Company' | 'LTV with account charts code mask' | ''         | 'Boots'     | ''          | ''                  | '405.01'  |
+	And I close all client application windows
+
+Scenario: _0991032 accounts settings for item type
+	And I close all client application windows
+	* Open list form
+		Given I open hyperlink "e1cib/list/InformationRegister.T9010S_AccountsItemKey"	
+	* Create new element for product			 
+		And I click the button named "FormCreate"
+		And I input "01.01.2022" text in the field named "Period"
+		And I click Choice button of the field named "Company"
+		And I go to line in "List" table
+			| 'Description'     |
+			| 'Main Company'    |
+		And I select current line in "List" table
+		And I change the radio button named "RecordType" value to "Item type"	
+		And I click Select button of "Item type" field
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Clothes'     |
+		And I select current line in "List" table
+		And I select from "Item type" drop-down list by "Shoes" string	
+		And I select from "Ledger type variant" drop-down list by "ltv" string
+		And I select from the drop-down list named "Account" by "40501" string
+		Then the form attribute named "Account" became equal to "405.01"
+		Then the form attribute named "Company" became equal to "Main Company"
+		Then the form attribute named "LedgerTypeVariant" became equal to "LTV with account charts code mask"
+		And the editing text of form attribute named "Period" became equal to "01.01.2022"
+		Then the form attribute named "ItemType" became equal to "Shoes"		
+		And I click "Save and close" button
+	* Check
+		And "List" table contains lines
+			| 'Period'     | 'Company'      | 'Ledger type variant'               | 'Item key' | 'Item' | 'Item type' | 'Type of item type' | 'Account' |
+			| '01.01.2022' | 'Main Company' | 'LTV with account charts code mask' | ''         | ''     | 'Shoes'          | ''                  | '405.01'  |
+	And I close all client application windows
+
+Scenario: _0991033 accounts settings for item type
+	And I close all client application windows
+	* Open list form
+		Given I open hyperlink "e1cib/list/InformationRegister.T9010S_AccountsItemKey"	
+	* Create new element for product			 
+		And I click the button named "FormCreate"
+		And I input "01.01.2022" text in the field named "Period"
+		And I click Choice button of the field named "Company"
+		And I go to line in "List" table
+			| 'Description'     |
+			| 'Main Company'    |
+		And I select current line in "List" table
+		And I change the radio button named "RecordType" value to "Item types"	
+		And I select "Certificate" exact value from "Type of item type" drop-down list		
+		And I select from "Ledger type variant" drop-down list by "ltv" string
+		And I select from the drop-down list named "Account" by "90878699" string
+		Then the form attribute named "Account" became equal to "90878699"
+		Then the form attribute named "Company" became equal to "Main Company"
+		Then the form attribute named "LedgerTypeVariant" became equal to "LTV with account charts code mask"
+		And the editing text of form attribute named "Period" became equal to "01.01.2022"
+		Then the form attribute named "TypeOfItemType" became equal to "Certificate"			
+		And I click "Save and close" button
+	* Check
+		And "List" table contains lines
+			| 'Period'     | 'Company'      | 'Ledger type variant'               | 'Item key' | 'Item' | 'Item type' | 'Type of item type' | 'Account'  |
+			| '01.01.2022' | 'Main Company' | 'LTV with account charts code mask' | ''         | ''     | ''          | 'Certificate'       | '90878699' |
+	And I close all client application windows
+
+Scenario: _0991034 accounts settings for partner (general for company)
+	And I close all client application windows
+	* Open list form
+		Given I open hyperlink "e1cib/list/InformationRegister.T9012S_AccountsPartner"	
+	* Create new element for product			 
+		And I click the button named "FormCreate"
+		And I input "01.01.2022" text in the field named "Period"
+		And I click Choice button of the field named "Company"
+		And I go to line in "List" table
+			| 'Description'     |
+			| 'Main Company'    |
+		And I select current line in "List" table
+		And I select from "Ledger type variant" drop-down list by "ltv" string
+		And I set checkbox named "Vendor"
+		And I set checkbox named "Customer"
+		And I set checkbox named "Other"
+		Then "Accounts (Partner) (create) *" window is opened
+		And I select from the drop-down list named "AccountAdvancesVendor" by "40501" string
+		And I select from the drop-down list named "AccountTransactionsVendor" by "9087" string
+		And I select from the drop-down list named "AccountAdvancesCustomer" by "40501" string
+		And I select from the drop-down list named "AccountTransactionsCustomer" by "9087" string
+		And I select from the drop-down list named "AccountAdvancesOther" by "40501" string
+		And I select from the drop-down list named "AccountTransactionsOther" by "9087" string
+		And I click "Save and close" button
+	* Check
+		And "List" table contains lines
+			| 'Period'     | 'Company'      | 'Partner' | 'Ledger type variant'               | 'Agreement' | 'Vendor' | 'Customer' | 'Transactions' | 'Other' | 'Advances' |
+			| '01.01.2022' | 'Main Company' | ''        | 'LTV with account charts code mask' | ''          | 'Yes'    | 'Yes'      | '90878699'     | 'Yes'   | '405.01'   |	
+	And I close all client application windows
+
+Scenario: _0991035 accounts settings for partner (vendor)
+	And I close all client application windows
+	* Open list form
+		Given I open hyperlink "e1cib/list/InformationRegister.T9012S_AccountsPartner"	
+	* Create new element for product			 
+		And I click the button named "FormCreate"
+		And I input "01.01.2022" text in the field named "Period"
+		And I click Choice button of the field named "Company"
+		And I go to line in "List" table
+			| 'Description'     |
+			| 'Main Company'    |
+		And I select current line in "List" table
+		And I select from "Ledger type variant" drop-down list by "ltv" string
+		And I set checkbox named "Vendor"
+		And field "AccountAdvancesCustomer" is not present on the form
+		And field "AccountTransactionsCustomer" is not present on the form
+		And field "AccountAdvancesOther" is not present on the form
+		And field "AccountTransactionsOther" is not present on the form
+		And I select from the drop-down list named "AccountAdvancesVendor" by "40501" string
+		And I select from the drop-down list named "AccountTransactionsVendor" by "9087" string
+		And I change the radio button named "RecordType" value to "Partner"
+		And I select from the drop-down list named "Partner" by "ferron" string
+		Then the form attribute named "AccountAdvancesVendor" became equal to "405.01"
+		Then the form attribute named "AccountTransactionsVendor" became equal to "90878699"
+		Then the form attribute named "Company" became equal to "Main Company"
+		Then the form attribute named "Customer" became equal to "No"
+		Then the form attribute named "LedgerTypeVariant" became equal to "LTV with account charts code mask"
+		Then the form attribute named "Other" became equal to "No"
+		Then the form attribute named "Partner" became equal to "Ferron BP"
+		Then the form attribute named "RecordType" became equal to "Partner"
+		Then the form attribute named "Vendor" became equal to "Yes"
+		And I click "Save and close" button
+	* Check
+		And "List" table contains lines
+			| 'Period'     | 'Company'      | 'Partner'   | 'Ledger type variant'               | 'Agreement' | 'Vendor' | 'Customer' | 'Transactions' | 'Other' | 'Advances' |
+			| '01.01.2022' | 'Main Company' | 'Ferron BP' | 'LTV with account charts code mask' | ''          | 'Yes'    | 'No'       | ''             | 'No'    | ''         |
+	And I close all client application windows
+
+Scenario: _0991036 accounts settings for partner (customer)
+	And I close all client application windows
+	* Open list form
+		Given I open hyperlink "e1cib/list/InformationRegister.T9012S_AccountsPartner"	
+	* Create new element for product			 
+		And I click the button named "FormCreate"
+		And I input "01.01.2022" text in the field named "Period"
+		And I click Choice button of the field named "Company"
+		And I go to line in "List" table
+			| 'Description'     |
+			| 'Main Company'    |
+		And I select current line in "List" table
+		And I select from "Ledger type variant" drop-down list by "ltv" string
+		And I set checkbox named "Customer"
+		And field "AccountAdvancesVendor" is not present on the form
+		And field "AccountTransactionsVendor" is not present on the form
+		And field "AccountAdvancesOther" is not present on the form
+		And field "AccountTransactionsOther" is not present on the form
+		And I select from the drop-down list named "AccountAdvancesCustomer" by "40501" string
+		And I select from the drop-down list named "AccountTransactionsCustomer" by "9087" string
+		And I change the radio button named "RecordType" value to "Partner"
+		And I select from the drop-down list named "Partner" by "Maxim" string
+		Then the form attribute named "AccountAdvancesCustomer" became equal to "405.01"
+		Then the form attribute named "AccountTransactionsCustomer" became equal to "90878699"
+		Then the form attribute named "Company" became equal to "Main Company"
+		Then the form attribute named "Customer" became equal to "Yes"
+		Then the form attribute named "LedgerTypeVariant" became equal to "LTV with account charts code mask"
+		Then the form attribute named "Other" became equal to "No"
+		Then the form attribute named "Partner" became equal to "Maxim"
+		Then the form attribute named "RecordType" became equal to "Partner"
+		Then the form attribute named "Vendor" became equal to "No"
+		And I click "Save and close" button
+	* Check
+		And "List" table contains lines
+			| 'Period'     | 'Company'      | 'Partner' | 'Ledger type variant'               | 'Agreement' | 'Vendor' | 'Customer' | 'Transactions' | 'Other' | 'Advances' |
+			| '01.01.2022' | 'Main Company' | 'Maxim'   | 'LTV with account charts code mask' | ''          | 'No'     | 'Yes'      | ''             | 'No'    | ''         |
+	And I close all client application windows
+				
+
+Scenario: _0991037 accounts settings for partner (partner term)
+	And I close all client application windows
+	* Open list form
+		Given I open hyperlink "e1cib/list/InformationRegister.T9012S_AccountsPartner"	
+	* Create new element for product			 
+		And I click the button named "FormCreate"
+		And I input "01.01.2022" text in the field named "Period"
+		And I click Choice button of the field named "Company"
+		And I go to line in "List" table
+			| 'Description'     |
+			| 'Main Company'    |
+		And I select current line in "List" table
+		And I select from "Ledger type variant" drop-down list by "ltv" string
+		And I change the radio button named "RecordType" value to "Partner term"	
+		And I set checkbox named "Customer"
+		And I select from the drop-down list named "Agreement" by "Basic Partner terms, TRY" string
+		And I select from the drop-down list named "AccountAdvancesCustomer" by "40501" string
+		And I select from the drop-down list named "AccountTransactionsCustomer" by "9087" string		
+		Then the form attribute named "AccountAdvancesCustomer" became equal to "405.01"
+		Then the form attribute named "AccountTransactionsCustomer" became equal to "90878699"
+		Then the form attribute named "Company" became equal to "Main Company"
+		Then the form attribute named "LedgerTypeVariant" became equal to "LTV with account charts code mask"
+		Then the form attribute named "Agreement" became equal to "Basic Partner terms, TRY"
+		Then the form attribute named "RecordType" became equal to "Agreement"
+		Then the form attribute named "AccountAdvancesCustomer" became equal to "405.01"
+		Then the form attribute named "AccountTransactionsCustomer" became equal to "90878699"
+		And I click "Save and close" button
+	* Check
+		And "List" table contains lines
+			| 'Period'     | 'Company'      | 'Partner'   | 'Ledger type variant'               | 'Agreement'                | 'Vendor' | 'Customer' | 'Transactions' | 'Other' | 'Advances' |
+			| '01.01.2022' | 'Main Company' | ''          | 'LTV with account charts code mask' | 'Basic Partner terms, TRY' | 'No'     | 'Yes'      | ''             | 'No'    | ''         |
+	And I close all client application windows	
+
+Scenario: _0991038 accounts settings for tax (general for company)
+	And I close all client application windows
+	* Open list form
+		Given I open hyperlink "e1cib/list/InformationRegister.T9013S_AccountsTax"	
+	* Create new element for product			 
+		And I click the button named "FormCreate"
+		And I input "01.01.2022" text in the field named "Period"
+		And I click Choice button of the field named "Company"
+		And I go to line in "List" table
+			| 'Description'     |
+			| 'Main Company'    |
+		And I select current line in "List" table
+		And I select from "Ledger type variant" drop-down list by "ltv" string
+		And I select from "Incoming account" drop-down list by "4050" string
+		And I select from "Outgoing account" drop-down list by "9087" string		
+		And I click "Save and close" button
+	* Check
+		And "List" table contains lines
+			| 'Period'     | 'Company'      | 'Ledger type variant'               | 'Tax' | 'Vat rate' | 'Incoming account' | 'Outgoing account' |
+			| '01.01.2022' | 'Main Company' | 'LTV with account charts code mask' | ''    | ''         | '405.01'           | '90878699'         |		
+	And I close all client application windows			
+
+Scenario: _0991038 accounts settings for tax type and rate
+	And I close all client application windows
+	* Open list form
+		Given I open hyperlink "e1cib/list/InformationRegister.T9013S_AccountsTax"	
+	* Create new element for product			 
+		And I click the button named "FormCreate"
+		And I input "01.01.2022" text in the field named "Period"
+		And I click Choice button of the field named "Company"
+		And I go to line in "List" table
+			| 'Description'     |
+			| 'Main Company'    |
+		And I select current line in "List" table
+		And I select from "Ledger type variant" drop-down list by "ltv" string
+		And I change the radio button named "RecordType" value to "Tax type"
+		And I select from the drop-down list named "Tax" by "vat" string
+		And I select from "Vat rate" drop-down list by "18" string
+		And I select from "Incoming account" drop-down list by "4050" string
+		And I select from "Outgoing account" drop-down list by "9087" string		
+		And I click "Save and close" button
+	* Check
+		And "List" table contains lines
+			| 'Period'     | 'Company'      | 'Ledger type variant'               | 'Tax' | 'Vat rate' | 'Incoming account' | 'Outgoing account' |
+			| '01.01.2022' | 'Main Company' | 'LTV with account charts code mask' | 'VAT' | '18%'      | '405.01'           | '90878699'         |	
+	And I close all client application windows

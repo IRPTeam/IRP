@@ -120,6 +120,8 @@ Function QuerySearchInputByString(Settings) Export
 	ElsIf Settings.MetadataObject = Metadata.Catalogs.Users Then
 		IDSearch = "Table.Description LIKE &SearchString + ""%%""";
 		UseDescriptionSearch = False;
+	ElsIf Settings.MetadataObject = Metadata.ChartsOfAccounts.Basic Then
+		IDSearch = "Table.Ref.SearchCode LIKE &SearchString + ""%%""";
 	EndIf;
 	
 	If Settings.Property("UseSearchByCode") And Settings.UseSearchByCode Then
@@ -203,6 +205,8 @@ Function QueryTableToChoiceData(QueryTable) Export
 				ChoiceData.Add(Row.Ref, "(" + Row.Ref.ItemID + ") " + Row.Presentation, False, PictureLib.Price);
 			ElsIf TypeOf(Row.Ref) = Type("CatalogRef.Users") Then
 				ChoiceData.Add(Row.Ref, Row.Presentation + " (" + Row.Ref.Description + ")", False, PictureLib.AddToFavorites);
+			ElsIf TypeOf(Row.Ref) = Type("ChartOfAccountsRef.Basic") And Not IsBlankString(Row.Ref.SearchCode) Then
+				ChoiceData.Add(Row.Ref, "(" + Row.Ref.SearchCode + ") " + Row.Presentation, False, PictureLib.ChartOfAccounts);
 			Else
 				ChoiceData.Add(Row.Ref, Row.Presentation, False, PictureLib.Price);
 			EndIf;

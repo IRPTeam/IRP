@@ -969,89 +969,6 @@ Scenario: _0991022 accounts settings for Cash account (for Cash account)
 			| '01.02.2022' | 'Main Company' | 'LTV with account charts code mask' | 'Cash desk №4' | '405.01'  |
 	And I close all client application windows			
 
-Scenario: _0991023 accounts settings for Cash account (general for company)
-	And I close all client application windows
-	* Open list form
-		Given I open hyperlink "e1cib/list/InformationRegister.T9011S_AccountsCashAccount"	
-	* Create new element for product			 
-		And I click the button named "FormCreate"
-		And I input "01.01.2022" text in the field named "Period"
-		And I click Choice button of the field named "Company"
-		And I go to line in "List" table
-			| 'Description'     |
-			| 'Main Company'    |
-		And I select current line in "List" table
-		And I select from "Ledger type variant" drop-down list by "ltv" string
-		And I select from the drop-down list named "Account" by "40501" string
-		Then the form attribute named "Account" became equal to "405.01"
-		Then the form attribute named "Company" became equal to "Main Company"
-		Then the form attribute named "LedgerTypeVariant" became equal to "LTV with account charts code mask"
-		And the editing text of form attribute named "Period" became equal to "01.01.2022"
-		Then the form attribute named "RecordType" became equal to "All"
-		And I click "Save and close" button
-	* Check
-		And "List" table contains lines
-			| 'Period'     | 'Company'      | 'Ledger type variant'               | 'Cash account' | 'Account' |
-			| '01.01.2022' | 'Main Company' | 'LTV with account charts code mask' | ''             | '405.01'  |
-	And I close all client application windows
-	
-		
-Scenario: _0991024 accounts settings for Bank account (for Cash account)
-	And I close all client application windows
-	* Open list form
-		Given I open hyperlink "e1cib/list/InformationRegister.T9011S_AccountsCashAccount"	
-	* Create new element for product			 
-		And I click the button named "FormCreate"
-		And I change the radio button named "RecordType" value to "Cash/Bank account"
-		And I click Select button of "Cash account" field
-		And I go to line in "List" table
-			| 'Description'  |
-			| 'Cash desk №4' |
-		And I select current line in "List" table		
-		And I input "01.02.2022" text in the field named "Period"
-		And I select from the drop-down list named "Company" by "main" string
-		And I select from "Ledger type variant" drop-down list by "ltv" string
-		And I select from the drop-down list named "Account" by "40501" string
-		Then the form attribute named "Account" became equal to "405.01"
-		Then the form attribute named "Company" became equal to "Main Company"
-		Then the form attribute named "LedgerTypeVariant" became equal to "LTV with account charts code mask"
-		And the editing text of form attribute named "Period" became equal to "01.02.2022"
-		Then the form attribute named "CashAccount" became equal to "Cash desk №4"		
-		And I click "Save and close" button
-	* Check
-		And "List" table contains lines
-			| 'Period'     | 'Company'      | 'Ledger type variant'               | 'Cash account' | 'Account' |
-			| '01.02.2022' | 'Main Company' | 'LTV with account charts code mask' | 'Cash desk №4' | '405.01'  |
-	And I close all client application windows
-
-Scenario: _0991025 accounts settings for Bank account (for Cash account)
-	And I close all client application windows
-	* Open list form
-		Given I open hyperlink "e1cib/list/InformationRegister.T9011S_AccountsCashAccount"	
-	* Create new element for product			 
-		And I click the button named "FormCreate"
-		And I change the radio button named "RecordType" value to "Cash/Bank account"
-		And I click Select button of "Cash account" field
-		And I go to line in "List" table
-			| 'Description'  |
-			| 'Cash desk №4' |
-		And I select current line in "List" table		
-		And I input "01.02.2022" text in the field named "Period"
-		And I select from the drop-down list named "Company" by "main" string
-		And I select from "Ledger type variant" drop-down list by "ltv" string
-		And I select from the drop-down list named "Account" by "40501" string
-		Then the form attribute named "Account" became equal to "405.01"
-		Then the form attribute named "Company" became equal to "Main Company"
-		Then the form attribute named "LedgerTypeVariant" became equal to "LTV with account charts code mask"
-		And the editing text of form attribute named "Period" became equal to "01.02.2022"
-		Then the form attribute named "CashAccount" became equal to "Cash desk №4"		
-		And I click "Save and close" button
-	* Check
-		And "List" table contains lines
-			| 'Period'     | 'Company'      | 'Ledger type variant'               | 'Cash account' | 'Account' |
-			| '01.02.2022' | 'Main Company' | 'LTV with account charts code mask' | 'Cash desk №4' | '405.01'  |
-	And I close all client application windows
-
 Scenario: _0991026 accounts settings for Bank account (for Bank account)
 	And I close all client application windows
 	* Open list form
@@ -1106,7 +1023,7 @@ Scenario: _0991027 accounts settings for Expense/Revenue (general for company)
 			| '01.01.2022' | 'Main Company' | 'LTV with account charts code mask' | ''                  | '405.01'  |
 	And I close all client application windows
 
-Scenario: _0991028 accounts settings for Expense/Revenue (general for company)
+Scenario: _0991028 accounts settings for Expense/Revenue
 	And I close all client application windows
 	* Open list form
 		Given I open hyperlink "e1cib/list/InformationRegister.T9014S_AccountsExpenseRevenue"	

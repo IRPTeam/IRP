@@ -560,8 +560,3 @@ Scenario: _299904 check filling in and refilling Purchase return
 		And I input "1,000" text in "Quantity" field of "ItemList" table
 		And I finish line editing in "ItemList" table
 		And I close all client application windows
-
-
-Scenario: _999999 close TestClient session
-	And I close TestClient session
-	

@@ -16,8 +16,6 @@ Background:
 
 Scenario: _005018 filling in the "Cash/Bank accounts" catalog
 	When set True value to the constant
-	And I close TestClient session
-	Given I open new TestClient session or connect the existing one
 	* Preparation
 		When Create catalog Currencies objects
 		When Create catalog Companies objects (Main company)

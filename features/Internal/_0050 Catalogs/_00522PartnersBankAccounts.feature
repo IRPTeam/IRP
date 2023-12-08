@@ -18,8 +18,6 @@ Background:
 
 Scenario: _005022 filling in the "Partners bank account" catalog
 	When set True value to the constant
-	And I close TestClient session
-	Given I open new TestClient session or connect the existing one
 	When Create catalog Partners objects (Kalipso)
 	When Create catalog Currencies objects
 	When Create catalog BusinessUnits objects

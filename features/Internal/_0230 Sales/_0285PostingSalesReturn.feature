@@ -20,8 +20,6 @@ Background:
 
 Scenario: _028500 preparation (create document Sales return)
 	When set True value to the constant
-	And I close TestClient session
-	Given I open new TestClient session or connect the existing one
 	* Load info
 		When Create catalog ObjectStatuses objects
 		When Create catalog ItemKeys objects
@@ -838,7 +836,3 @@ Scenario: _300512 check Use GR filling from store when create SR based on SI
 			| 'Boots'   | '36/18SD'    | 'Yes'                  |
 			| 'Boots'   | '37/18SD'    | 'Yes'                  |
 			| 'Dress'   | 'S/Yellow'   | 'Yes'                  |
-		
-
-Scenario: _999999 close TestClient session
-	And I close TestClient session

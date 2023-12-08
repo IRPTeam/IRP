@@ -920,6 +920,12 @@ Scenario: _0991021 accounts settings for Cash account (general for company)
 		Given I open hyperlink "e1cib/list/InformationRegister.T9011S_AccountsCashAccount"	
 	* Create new element for product			 
 		And I click the button named "FormCreate"
+		* Try saving without filling main fields
+			And I click "Save and close" button
+			Then there are lines in TestClient message log
+				|'"Company" is a required field.'|
+				|'"Ledger type variant" is a required field.'|
+				|'"Account" is a required field.'|			
 		And I input "01.01.2022" text in the field named "Period"
 		And I click Choice button of the field named "Company"
 		And I go to line in "List" table
@@ -1003,6 +1009,12 @@ Scenario: _0991027 accounts settings for Expense/Revenue (general for company)
 		Given I open hyperlink "e1cib/list/InformationRegister.T9014S_AccountsExpenseRevenue"	
 	* Create new element for product			 
 		And I click the button named "FormCreate"
+		* Try saving without filling main fields
+			And I click "Save and close" button
+			Then there are lines in TestClient message log
+				|'"Company" is a required field.'|
+				|'"Ledger type variant" is a required field.'|
+				|'"Account" is a required field.'|
 		And I input "01.01.2022" text in the field named "Period"
 		And I click Choice button of the field named "Company"
 		And I go to line in "List" table
@@ -1062,6 +1074,12 @@ Scenario: _0991029 accounts settings for item key (general for company)
 		Given I open hyperlink "e1cib/list/InformationRegister.T9010S_AccountsItemKey"	
 	* Create new element for product			 
 		And I click the button named "FormCreate"
+		* Try saving without filling main fields
+			And I click "Save and close" button
+			Then there are lines in TestClient message log
+				|'"Company" is a required field.'|
+				|'"Ledger type variant" is a required field.'|
+				|'"Account" is a required field.'|
 		And I input "01.01.2022" text in the field named "Period"
 		And I click Choice button of the field named "Company"
 		And I go to line in "List" table
@@ -1181,7 +1199,7 @@ Scenario: _0991032 accounts settings for item type
 			| '01.01.2022' | 'Main Company' | 'LTV with account charts code mask' | ''         | ''     | 'Shoes'          | ''                  | '405.01'  |
 	And I close all client application windows
 
-Scenario: _0991033 accounts settings for item type
+Scenario: _0991033 accounts settings for item types
 	And I close all client application windows
 	* Open list form
 		Given I open hyperlink "e1cib/list/InformationRegister.T9010S_AccountsItemKey"	
@@ -1215,6 +1233,11 @@ Scenario: _0991034 accounts settings for partner (general for company)
 		Given I open hyperlink "e1cib/list/InformationRegister.T9012S_AccountsPartner"	
 	* Create new element for product			 
 		And I click the button named "FormCreate"
+		* Try saving without filling main fields
+			And I click "Save and close" button
+			Then there are lines in TestClient message log
+				|'"Company" is a required field.'|
+				|'"Ledger type variant" is a required field.'|
 		And I input "01.01.2022" text in the field named "Period"
 		And I click Choice button of the field named "Company"
 		And I go to line in "List" table
@@ -1225,7 +1248,15 @@ Scenario: _0991034 accounts settings for partner (general for company)
 		And I set checkbox named "Vendor"
 		And I set checkbox named "Customer"
 		And I set checkbox named "Other"
-		Then "Accounts (Partner) (create) *" window is opened
+		* Try saving without filling accounts
+			And I click "Save" button
+			Then there are lines in TestClient message log
+				|'"Advances" is a required field.'|
+				|'"Transactions" is a required field.'|
+				|'"Advances" is a required field.'|
+				|'"Transactions" is a required field.'|
+				|'"Advances" is a required field.'|
+				|'"Transactions" is a required field.'|				
 		And I select from the drop-down list named "AccountAdvancesVendor" by "40501" string
 		And I select from the drop-down list named "AccountTransactionsVendor" by "9087" string
 		And I select from the drop-down list named "AccountAdvancesCustomer" by "40501" string
@@ -1355,6 +1386,11 @@ Scenario: _0991038 accounts settings for tax (general for company)
 		Given I open hyperlink "e1cib/list/InformationRegister.T9013S_AccountsTax"	
 	* Create new element for product			 
 		And I click the button named "FormCreate"
+		* Try saving without filling main fields
+			And I click "Save and close" button
+			Then there are lines in TestClient message log
+				|'"Company" is a required field.'|
+				|'"Ledger type variant" is a required field.'|
 		And I input "01.01.2022" text in the field named "Period"
 		And I click Choice button of the field named "Company"
 		And I go to line in "List" table
@@ -1395,3 +1431,4 @@ Scenario: _0991038 accounts settings for tax type and rate
 			| 'Period'     | 'Company'      | 'Ledger type variant'               | 'Tax' | 'Vat rate' | 'Incoming account' | 'Outgoing account' |
 			| '01.01.2022' | 'Main Company' | 'LTV with account charts code mask' | 'VAT' | '18%'      | '405.01'           | '90878699'         |	
 	And I close all client application windows
+

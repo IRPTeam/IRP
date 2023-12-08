@@ -381,6 +381,3 @@ Scenario: _060008 create Bank payment with the type of settlements under standar
 			| ''                                         | 'Expense'       | '*'        | '11 000'      | 'Main Company'   | '*'        | 'TRY'                            | 'TRY'        | 'TRY'                    | 'Company Veritas '   | 'Veritas'   | 'Standard (Vendor)'   | ''        | ''        | 'No'                     | ''                            |
 			| ''                                         | 'Expense'       | '*'        | '11 000'      | 'Main Company'   | '*'        | 'en description is empty'        | 'TRY'        | 'TRY'                    | 'Company Veritas '   | 'Veritas'   | 'Standard (Vendor)'   | ''        | ''        | 'No'                     | ''                            |
 		And I close all client application windows
-
-Scenario: _999999 close TestClient session
-	And I close TestClient session

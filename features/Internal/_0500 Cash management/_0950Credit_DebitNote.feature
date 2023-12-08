@@ -717,6 +717,3 @@ Scenario: _095009 create CreditNote (OtherPartnersTransactions)
 			| 'Number'                       | 'Date'                        |
 			| '$$CreditNoteNumber095009$$'   | '$$CreditNoteDate095009$$'    |
 		And I close all client application windows
-
-Scenario: _999999 close TestClient session
-	And I close TestClient session

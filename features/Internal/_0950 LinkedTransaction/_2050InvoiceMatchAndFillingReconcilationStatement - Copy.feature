@@ -338,9 +338,3 @@ Scenario: 2050002 check filling in Reconcilation statement
 	* Clear movements
 		And I click "Cancel posting" button
 		And I close all client application windows
-
-
-
-Scenario: _999999 close TestClient session
-	And I close TestClient session
-

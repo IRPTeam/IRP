@@ -16,8 +16,6 @@ Background:
 
 Scenario: _043500 preparation (Cash payment)
 	When set True value to the constant
-	And I close TestClient session
-	Given I open new TestClient session or connect the existing one
 	* Load info
 		When Create information register Barcodes records
 		When Create catalog Companies objects (own Second company)

@@ -1186,9 +1186,3 @@ Scenario: _090225 check tax deactivation
 		And I select current line in "List" table
 		And the field named "ItemListTotalTaxAmount" does not exist on the form
 		And I close all client application windows
-		
-		
-				
-
-Scenario: _999999 close TestClient session
-	And I close TestClient session

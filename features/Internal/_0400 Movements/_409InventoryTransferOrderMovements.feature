@@ -16,8 +16,6 @@ Background:
 
 Scenario: _04027 preparation (Inventory transfer order)
 	When set True value to the constant
-	And I close TestClient session
-	Given I open new TestClient session or connect the existing one
 	* Load info
 		When Create information register Barcodes records
 		When Create catalog Companies objects (own Second company)

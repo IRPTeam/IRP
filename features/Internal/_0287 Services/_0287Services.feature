@@ -19,8 +19,6 @@ Background:
 
 Scenario: _029100 preparation
 	When set True value to the constant
-	And I close TestClient session
-	Given I open new TestClient session or connect the existing one
 	* Load info
 		When Create catalog ItemTypes objects (Furniture)	
 		When Create catalog Items objects (Table)
@@ -763,9 +761,3 @@ Scenario: _029150 create Retail return receipt for service and product
 				| 'Number'                                  |
 				| '$$NumberRetailReturnReceipt029150$$'     |
 			And I close all client application windows
-		
-
-
-
-Scenario: _999999 close TestClient session
-	And I close TestClient session

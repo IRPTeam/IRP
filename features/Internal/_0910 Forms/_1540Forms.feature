@@ -1433,8 +1433,3 @@ Scenario: _012029 search for item key in the selection form
 			| 'Item key'   | 'Item'     |
 			| 'XS/Blue'    | 'Dress'    |
 		And I close all client application windows
-				
-
-
-Scenario: _999999 close TestClient session
-	And I close TestClient session

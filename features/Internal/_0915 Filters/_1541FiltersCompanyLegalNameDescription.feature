@@ -705,10 +705,3 @@ Scenario: _028076 check filter by own companies in the document Consolidated ret
 		Given I open hyperlink "e1cib/list/Document.ConsolidatedRetailSales"
 	* Check the filter for Own Company
 		When check the filter by my own company in Opening entry/Item stock adjustment
-
-
-Scenario: _999999 close TestClient session
-	And I close TestClient session
-
-
-

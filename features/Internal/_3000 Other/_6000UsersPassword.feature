@@ -115,8 +115,3 @@ Scenario: _351003 add launching as another user
 		When in sections panel I select "Sales - A/R"
 		And I close TestClient session
 		Then I connect launched Test client "Этот клиент"
-
-
-	
-Scenario: _999999 close TestClient session
-		And I close TestClient session

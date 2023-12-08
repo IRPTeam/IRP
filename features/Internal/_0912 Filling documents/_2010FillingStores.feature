@@ -2509,7 +2509,3 @@ Scenario: _201033 сheck filling of the bundle of store and company in the Work 
 		Then there are lines in TestClient message log
 			| 'Store [Store 07] in row [1] does not match company [Second Company]'    |
 		And I close all client application windows
-
-
-Scenario: _999999 close TestClient session
-	And I close TestClient session

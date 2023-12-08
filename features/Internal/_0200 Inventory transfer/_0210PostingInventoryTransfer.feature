@@ -20,8 +20,6 @@ Background:
 
 Scenario: _0201000 preparation
 	When set True value to the constant
-	And I close TestClient session
-	Given I open new TestClient session or connect the existing one
 	* Load info
 		When Create catalog ObjectStatuses objects
 		When Create catalog ItemKeys objects
@@ -635,7 +633,3 @@ Scenario: _02104810 check IT list form statuses
 			| '3'        | 'Main Company'   | 'Store 01'       | 'Closed'            | 'Store 02'         | 'Closed'             |
 			| '4'        | 'Main Company'   | 'Store 02'       | 'Awaiting'          | 'Store 03'         | 'Awaiting'             |
 		And I close all client application windows
-
-
-Scenario: _999999 close TestClient session
-	And I close TestClient session

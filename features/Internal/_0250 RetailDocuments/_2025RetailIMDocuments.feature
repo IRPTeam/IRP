@@ -17,8 +17,6 @@ Background:
 		
 Scenario: _0155100 preparation (Retail SO - Retail SC - Retail GR)
 	When set True value to the constant
-	And I close TestClient session
-	Given I open new TestClient session or connect the existing one
 	* Load info
 		When Create catalog BusinessUnits objects
 		When Create information register Barcodes records

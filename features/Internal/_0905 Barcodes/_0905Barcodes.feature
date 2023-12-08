@@ -183,11 +183,3 @@ Scenario: _090503 copy barcode
 		Then the form attribute named "Unit" became equal to "pcs"
 		Then the form attribute named "Presentation" became equal to "2202283713"
 		And I close all client application windows
-				
-				
-	
-
-Scenario: _999999 close TestClient session
-	And I close TestClient session
-
-

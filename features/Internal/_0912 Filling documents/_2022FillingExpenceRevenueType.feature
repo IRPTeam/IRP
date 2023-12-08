@@ -284,7 +284,3 @@ Scenario: _0202125 filling expence type in the PR (from item key)
 	* Check in tne PR
 		When check filling expense type (from item key)
 	And I close all client application windows
-
-
-Scenario: _999999 close TestClient session
-	And I close TestClient session

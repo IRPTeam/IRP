@@ -268,7 +268,3 @@ Scenario: _206000 create a specification double
 		And I click "OK" button
 		Then I wait that in user messages the "Specification is not unique." substring will appear in 10 seconds
 		And I close all client application windows
-
-
-Scenario: _999999 close TestClient session
-	And I close TestClient session

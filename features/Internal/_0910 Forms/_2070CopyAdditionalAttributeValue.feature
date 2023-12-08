@@ -416,28 +416,3 @@ Scenario: _207003 copy additional atribute row in sets (isConditionSet)
 		And field "Additional attribute 02" is present on the form
 		And field "Additional attribute 01" is present on the form
 		And I close all client application windows
-		
-		
-
-Scenario: _999999 close TestClient session
-	And I close TestClient session
-				
-	
-		
-				
-
-		
-				
-
-
-		
-		
-
-
-
-
-
-
-
-
-

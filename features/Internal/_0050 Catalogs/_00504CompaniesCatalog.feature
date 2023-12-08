@@ -17,8 +17,6 @@ Background:
 
 Scenario: _005013 filling in the "Companies" catalog
 	When set True value to the constant
-	And I close TestClient session
-	Given I open new TestClient session or connect the existing one
 	* Preparation
 		And I close all client application windows
 		When Create catalog IntegrationSettings objects

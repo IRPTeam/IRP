@@ -16,8 +16,6 @@ Background:
 		
 Scenario: _0154100 preparation ( filling documents)
 	When set True value to the constant
-	And I close TestClient session
-	Given I open new TestClient session or connect the existing one
 	* Load info
 		When Create catalog BusinessUnits objects
 		When Create information register Barcodes records

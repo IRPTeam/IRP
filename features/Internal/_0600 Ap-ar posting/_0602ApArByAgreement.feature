@@ -433,6 +433,3 @@ Scenario: _060208 create Bank payment (partner term with Ap details by partner t
 			| ''                                         | 'Expense'       | '*'        | '11 000'      | 'Main Company'   | '*'        | 'TRY'                            | 'TRY'        | 'TRY'                    | 'Company Ferron BP'   | 'Partner Ferron 1'   | 'Vendor Ferron 1'   | ''        | ''        | 'No'                     | ''                            |
 			| ''                                         | 'Expense'       | '*'        | '11 000'      | 'Main Company'   | '*'        | 'en description is empty'        | 'TRY'        | 'TRY'                    | 'Company Ferron BP'   | 'Partner Ferron 1'   | 'Vendor Ferron 1'   | ''        | ''        | 'No'                     | ''                            |
 		And I close all client application windows
-
-Scenario: _999999 close TestClient session
-	And I close TestClient session

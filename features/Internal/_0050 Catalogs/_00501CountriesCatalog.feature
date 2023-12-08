@@ -17,8 +17,6 @@ Background:
 
 Scenario: _005010 filling in the "Countries" catalog
 	When set True value to the constant
-	And I close TestClient session
-	Given I open new TestClient session or connect the existing one
 	* Clearing the Countries catalog
 		And I close all client application windows
 	* Open Country creation form

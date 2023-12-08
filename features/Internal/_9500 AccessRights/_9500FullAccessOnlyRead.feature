@@ -1142,7 +1142,3 @@ Scenario: 950089 check role Full access only read (Production planning closing)
 		If the warning is displayed then 
 			Then I raise "Failed to open" exception
 		And I close all client application windows
-
-Scenario: _999999 close TestClient session
-		And I close TestClient session
-		Then I connect launched Test client "Этот клиент"

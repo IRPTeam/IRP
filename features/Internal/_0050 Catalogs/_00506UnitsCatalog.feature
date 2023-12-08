@@ -17,8 +17,6 @@ Background:
 
 Scenario: _00506 filling in the "Units" catalog
 	When set True value to the constant
-	And I close TestClient session
-	Given I open new TestClient session or connect the existing one
 	When Create catalog ItemTypes objects (Clothes, Shoes)
 	When Create catalog Units objects (pcs)
 	When Create catalog Items objects (Boots)

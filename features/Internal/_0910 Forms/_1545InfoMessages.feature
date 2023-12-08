@@ -1426,8 +1426,3 @@ Scenario: __015457 message when trying to create Price list without unit
 	And I click "Post" button
 	Then I wait that in user messages the 'The "Unit" is required on line 1 of the "Item list" list.' substring will appear in 10 seconds
 	And I close all client application windows
-		
-
-
-Scenario: _999999 close TestClient session
-	And I close TestClient session

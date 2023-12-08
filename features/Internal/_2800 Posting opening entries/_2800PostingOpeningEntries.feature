@@ -1551,9 +1551,3 @@ Scenario: _400020 create OpeningEntry (account payble other and account receivab
 		And "List" table contains lines
 			| 'Number'                          |
 			| '$$NumberOpeningEntry400020$$'    |				
-
-
-
-
-Scenario: _999999 close TestClient session
-	And I close TestClient session

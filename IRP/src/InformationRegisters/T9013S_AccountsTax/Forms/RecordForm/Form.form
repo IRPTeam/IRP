@@ -159,7 +159,7 @@
     </extInfo>
   </items>
   <items xsi:type="form:FormField">
-    <name>Variant</name>
+    <name>LedgerTypeVariant</name>
     <id>16</id>
     <visible>true</visible>
     <enabled>true</enabled>
@@ -167,10 +167,10 @@
       <common>true</common>
     </userVisible>
     <dataPath xsi:type="form:DataPath">
-      <segments>Record.Variant</segments>
+      <segments>Record.LedgerTypeVariant</segments>
     </dataPath>
     <extendedTooltip>
-      <name>VariantExtendedTooltip</name>
+      <name>LedgerTypeVariantExtendedTooltip</name>
       <id>18</id>
       <visible>true</visible>
       <enabled>true</enabled>
@@ -185,7 +185,7 @@
       </extInfo>
     </extendedTooltip>
     <contextMenu>
-      <name>VariantContextMenu</name>
+      <name>LedgerTypeVariantContextMenu</name>
       <id>17</id>
       <visible>true</visible>
       <enabled>true</enabled>
@@ -259,7 +259,57 @@
     </extInfo>
   </items>
   <items xsi:type="form:FormField">
-    <name>Account</name>
+    <name>VatRate</name>
+    <id>22</id>
+    <visible>true</visible>
+    <enabled>true</enabled>
+    <userVisible>
+      <common>true</common>
+    </userVisible>
+    <dataPath xsi:type="form:DataPath">
+      <segments>Record.VatRate</segments>
+    </dataPath>
+    <extendedTooltip>
+      <name>VatRateExtendedTooltip</name>
+      <id>24</id>
+      <visible>true</visible>
+      <enabled>true</enabled>
+      <userVisible>
+        <common>true</common>
+      </userVisible>
+      <type>Label</type>
+      <autoMaxWidth>true</autoMaxWidth>
+      <autoMaxHeight>true</autoMaxHeight>
+      <extInfo xsi:type="form:LabelDecorationExtInfo">
+        <horizontalAlign>Left</horizontalAlign>
+      </extInfo>
+    </extendedTooltip>
+    <contextMenu>
+      <name>VatRateContextMenu</name>
+      <id>23</id>
+      <visible>true</visible>
+      <enabled>true</enabled>
+      <userVisible>
+        <common>true</common>
+      </userVisible>
+      <autoFill>true</autoFill>
+    </contextMenu>
+    <type>InputField</type>
+    <editMode>Enter</editMode>
+    <showInHeader>true</showInHeader>
+    <headerHorizontalAlign>Left</headerHorizontalAlign>
+    <showInFooter>true</showInFooter>
+    <extInfo xsi:type="form:InputFieldExtInfo">
+      <autoMaxWidth>true</autoMaxWidth>
+      <autoMaxHeight>true</autoMaxHeight>
+      <wrap>true</wrap>
+      <chooseType>true</chooseType>
+      <typeDomainEnabled>true</typeDomainEnabled>
+      <textEdit>true</textEdit>
+    </extInfo>
+  </items>
+  <items xsi:type="form:FormField">
+    <name>IncomingAccount</name>
     <id>10</id>
     <visible>true</visible>
     <enabled>true</enabled>
@@ -267,10 +317,10 @@
       <common>true</common>
     </userVisible>
     <dataPath xsi:type="form:DataPath">
-      <segments>Record.Account</segments>
+      <segments>Record.IncomingAccount</segments>
     </dataPath>
     <extendedTooltip>
-      <name>AccountExtendedTooltip</name>
+      <name>IncomingAccountExtendedTooltip</name>
       <id>12</id>
       <visible>true</visible>
       <enabled>true</enabled>
@@ -285,8 +335,58 @@
       </extInfo>
     </extendedTooltip>
     <contextMenu>
-      <name>AccountContextMenu</name>
+      <name>IncomingAccountContextMenu</name>
       <id>11</id>
+      <visible>true</visible>
+      <enabled>true</enabled>
+      <userVisible>
+        <common>true</common>
+      </userVisible>
+      <autoFill>true</autoFill>
+    </contextMenu>
+    <type>InputField</type>
+    <editMode>Enter</editMode>
+    <showInHeader>true</showInHeader>
+    <headerHorizontalAlign>Left</headerHorizontalAlign>
+    <showInFooter>true</showInFooter>
+    <extInfo xsi:type="form:InputFieldExtInfo">
+      <autoMaxWidth>true</autoMaxWidth>
+      <autoMaxHeight>true</autoMaxHeight>
+      <wrap>true</wrap>
+      <chooseType>true</chooseType>
+      <typeDomainEnabled>true</typeDomainEnabled>
+      <textEdit>true</textEdit>
+    </extInfo>
+  </items>
+  <items xsi:type="form:FormField">
+    <name>OutgoingAccount</name>
+    <id>19</id>
+    <visible>true</visible>
+    <enabled>true</enabled>
+    <userVisible>
+      <common>true</common>
+    </userVisible>
+    <dataPath xsi:type="form:DataPath">
+      <segments>Record.OutgoingAccount</segments>
+    </dataPath>
+    <extendedTooltip>
+      <name>OutgoingAccountExtendedTooltip</name>
+      <id>21</id>
+      <visible>true</visible>
+      <enabled>true</enabled>
+      <userVisible>
+        <common>true</common>
+      </userVisible>
+      <type>Label</type>
+      <autoMaxWidth>true</autoMaxWidth>
+      <autoMaxHeight>true</autoMaxHeight>
+      <extInfo xsi:type="form:LabelDecorationExtInfo">
+        <horizontalAlign>Left</horizontalAlign>
+      </extInfo>
+    </extendedTooltip>
+    <contextMenu>
+      <name>OutgoingAccountContextMenu</name>
+      <id>20</id>
       <visible>true</visible>
       <enabled>true</enabled>
       <userVisible>

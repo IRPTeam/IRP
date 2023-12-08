@@ -84,10 +84,10 @@
     <dataHistory>Use</dataHistory>
   </attributes>
   <attributes uuid="b447373e-e36a-496a-beef-fd2c21f0f21c">
-    <name>Variant</name>
+    <name>LedgerTypeVariant</name>
     <synonym>
       <key>en</key>
-      <value>Variant</value>
+      <value>Ledger type variant</value>
     </synonym>
     <type>
       <types>CatalogRef.LedgerTypeVariants</types>

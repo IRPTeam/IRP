@@ -1,9 +1,8 @@
-
 #Region FormEvents
 
 &AtServer
 Procedure OnCreateAtServer(Cancel, StandardProcessing)
-	DocPurchaseInvoiceServer.OnCreateAtServerListForm(ThisObject, Cancel, StandardProcessing);
+	DocSalesInvoiceServer.OnCreateAtServerListForm(ThisObject, Cancel, StandardProcessing);
 	Items.IsHaveJE.Visible = FOServer.IsUseAccounting();
 EndProcedure
 

@@ -269,6 +269,10 @@
     <dataPath xsi:type="form:DataPath">
       <segments>Record.Agreement</segments>
     </dataPath>
+    <handlers>
+      <event>OnChange</event>
+      <name>AgreementOnChange</name>
+    </handlers>
     <extendedTooltip>
       <name>AgreementExtendedTooltip</name>
       <id>12</id>

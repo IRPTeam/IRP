@@ -18,6 +18,7 @@ EndProcedure
 &AtServer
 Procedure BeforeWriteAtServer(Cancel, CurrentObject, WriteParameters)
 	AddAttributesAndPropertiesServer.BeforeWriteAtServer(ThisObject, Cancel, CurrentObject, WriteParameters);
+	AccountingServer.BeforeWriteAtServer(Object, ThisObject, Cancel, CurrentObject, WriteParameters);
 EndProcedure
 
 &AtServer
@@ -46,6 +47,7 @@ EndProcedure
 &AtClientAtServerNoContext
 Procedure SetVisibilityAvailability(Object, Form)
 	Form.Items.EditCurrencies.Enabled = Not Form.ReadOnly;
+	Form.Items.EditAccounting.Enabled = Not Form.ReadOnly;
 EndProcedure
 
 &AtClient
@@ -268,6 +270,27 @@ Procedure EditCurrencies(Command)
 	NotifyParameters.Insert("Form"  , ThisObject);
 	Notify = New NotifyDescription("EditCurrenciesContinue", CurrenciesClient, NotifyParameters);
 	OpenForm("CommonForm.EditCurrencies", FormParameters, , , , , Notify, FormWindowOpeningMode.LockOwnerWindow);
+EndProcedure
+
+&AtClient
+Procedure EditAccounting(Command)
+	CurrentData = ThisObject.Items.Transactions.CurrentData;
+	If CurrentData = Undefined Then
+		Return;
+	EndIf;
+	UpdateAccountingData();
+	AccountingClient.OpenFormEditAccounting(Object, ThisObject, CurrentData, "Transactions");
+EndProcedure
+
+&AtServer
+Procedure UpdateAccountingData()
+	_AccountingRowAnalytics = ThisObject.AccountingRowAnalytics.Unload();
+	_AccountingExtDimensions = ThisObject.AccountingExtDimensions.Unload();
+	AccountingClientServer.UpdateAccountingTables(Object, 
+			                                      _AccountingRowAnalytics, 
+		                                          _AccountingExtDimensions, "Transactions");
+	ThisObject.AccountingRowAnalytics.Load(_AccountingRowAnalytics);
+	ThisObject.AccountingExtDimensions.Load(_AccountingExtDimensions);
 EndProcedure
 
 &AtClient

@@ -1664,4 +1664,26 @@
 			<value>true</value>
 		</right>
 	</object>
+	<object>
+		<name>InformationRegister.T9051S_AccountingExtDimensions</name>
+		<right>
+			<name>View</name>
+			<value>true</value>
+		</right>
+		<right>
+			<name>Read</name>
+			<value>true</value>
+		</right>
+	</object>
+	<object>
+		<name>InformationRegister.T9050S_AccountingRowAnalytics</name>
+		<right>
+			<name>View</name>
+			<value>true</value>
+		</right>
+		<right>
+			<name>Read</name>
+			<value>true</value>
+		</right>
+	</object>
 </Rights>

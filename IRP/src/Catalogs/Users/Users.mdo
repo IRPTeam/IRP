@@ -358,7 +358,7 @@
       <key>en</key>
       <value>Run session</value>
     </synonym>
-    <group>CommandGroup.Service</group>
+    <group>FormNavigationPanelSeeAlso</group>
     <commandParameterType>
       <types>CatalogRef.Users</types>
     </commandParameterType>

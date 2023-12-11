@@ -47,6 +47,8 @@ Scenario: _602700 preparation (data history)
 		When Create information register Barcodes records
 		When Create information register Taxes records (VAT)
 	When Create document PurchaseOrder objects (check movements, GR before PI, not Use receipt sheduling)
+	And I close TestClient session
+	Given I open new TestClient session or connect the existing one
 
 Scenario: _6027001 check preparation
 	When check preparation 

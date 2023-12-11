@@ -54,6 +54,8 @@ Scenario: _2065001 preparation (locking linked strings)
 		When Create information register Taxes records (VAT)
 		When Create catalog BusinessUnits objects
 		When Create catalog ExpenseAndRevenueTypes objects
+	And I close TestClient session
+	Given I open new TestClient session or connect the existing one
 	* Add Document discount
 		When Create Document discount
 		* Add plugin for discount

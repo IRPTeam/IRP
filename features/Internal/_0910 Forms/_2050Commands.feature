@@ -196,6 +196,8 @@ Scenario: _0205001 preparation (commands)
 				| "Description"     |
 				| "VAExtension"     |
 			When add VAExtension
+	And I close TestClient session
+	Given I open new TestClient session or connect the existing one
 
 Scenario: _02050011 check preparation
 	When check preparation

@@ -64,6 +64,8 @@ Scenario: _2060001 preparation
 		When Create catalog BusinessUnits objects
 		When Create catalog ExpenseAndRevenueTypes objects
 	When Create Item with SerialLotNumbers (Phone)
+	And I close TestClient session
+	Given I open new TestClient session or connect the existing one
 	When Create document Purchase order objects (with SerialLotNumber)
 	When Create document PurchaseInvoice objects (linked)
 	And I execute 1C:Enterprise script at server
@@ -215,6 +217,7 @@ Scenario: _2060001 preparation
 			| "Documents.StockAdjustmentAsWriteOff.FindByNumber(152).GetObject().Write(DocumentWriteMode.Write);" |
 			| "Documents.StockAdjustmentAsWriteOff.FindByNumber(152).GetObject().Write(DocumentWriteMode.Posting);" |
 	When Create catalog CancelReturnReasons objects
+
 		
 Scenario: _20600011 check preparation
 	When check preparation

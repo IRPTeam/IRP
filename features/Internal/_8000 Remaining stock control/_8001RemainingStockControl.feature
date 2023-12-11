@@ -62,7 +62,6 @@ Scenario:_800000 preparation (remaining stock control)
 		When Create information register Barcodes records (serial lot numbers)
 		When create items for work order
 		When Create catalog BillOfMaterials objects
-		When update ItemKeys
 		When Create information register Taxes records (VAT)	
 	* Stock remaining settings
 		When Create information register UserSettings records (remaining stock control)

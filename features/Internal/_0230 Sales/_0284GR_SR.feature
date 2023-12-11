@@ -40,7 +40,6 @@ Scenario: _028400 preparation (GR-SR)
 		When Create information register PricesByItemKeys records
 		When Create catalog IntegrationSettings objects
 		When Create information register CurrencyRates records
-		When update ItemKeys
 		When Create information register Taxes records (VAT)
 		When Create catalog Partners objects (Kalipso)
 		When Create catalog BusinessUnits objects

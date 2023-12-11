@@ -16,8 +16,6 @@ Background:
 
 Scenario: _092001 preparation (PrintFormSalesOrder)
 	When set True value to the constant
-	And I close TestClient session
-	Given I open new TestClient session or connect the existing one
 	* Load info
 		When Create catalog Agreements objects
 		When Create catalog ObjectStatuses objects
@@ -45,7 +43,6 @@ Scenario: _092001 preparation (PrintFormSalesOrder)
 		When Create information register PricesByItemKeys records
 		When Create catalog IntegrationSettings objects
 		When Create information register CurrencyRates records
-		When update ItemKeys
 		When Create information register Taxes records (VAT)
 	* Load SO
 		When auto filling Configuration metadata catalog

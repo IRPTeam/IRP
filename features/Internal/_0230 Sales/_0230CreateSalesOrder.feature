@@ -1,4 +1,4 @@
-#language: en
+﻿#language: en
 @tree
 @Positive
 @Sales
@@ -53,7 +53,6 @@ Scenario: _023000 preparation (Sales order)
 		When Create information register CurrencyRates records
 		When Create catalog BusinessUnits objects
 		When Create catalog ExpenseAndRevenueTypes objects
-		When update ItemKeys
 		When Create catalog Partners objects
 		When Create information register Taxes records (VAT)
 		When Create catalog Partners objects (Kalipso)

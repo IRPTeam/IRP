@@ -25,7 +25,6 @@ Scenario: _005210 filling in the "Partner Items" catalog
 		When Create catalog Partners objects (Ferron BP)
 		When Create catalog Units objects (box (8 pcs))
 		When Create catalog Units objects (pcs)
-		When update ItemKeys
 	* Create Partner Items
 		Given I open hyperlink "e1cib/list/Catalog.PartnerItems"
 		And I click the button named "FormCreate"

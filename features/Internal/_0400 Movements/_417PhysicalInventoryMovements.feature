@@ -58,7 +58,6 @@ Scenario: _041700 preparation (Physical inventory)
 		When Create catalog SerialLotNumbers objects (serial lot numbers)
 		When Create information register Barcodes records (serial lot numbers)
 		When Create document ShipmentConfirmation (stock control serial lot numbers)
-		When update ItemKeys
 		When Create information register Taxes records (VAT)
 	* Load Physical inventory
 		When Create document PhysicalInventory objects with StockAdjustmentAsWriteOff and StockAdjustmentAsSurplus (check movements)

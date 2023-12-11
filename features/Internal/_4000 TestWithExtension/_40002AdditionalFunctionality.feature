@@ -34,7 +34,6 @@ Scenario: _4000200 preparation
 		When Create catalog AccessGroups objects
 		When Create catalog AccessProfiles objects
 		When Create catalog CashAccounts objects
-		When update ItemKeys
 	When create Workstation				
 
 Scenario: _40002001 check preparation

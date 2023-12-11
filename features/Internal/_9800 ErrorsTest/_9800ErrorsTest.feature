@@ -10,8 +10,6 @@ Background:
 
 Scenario: _9800 preparation (errors test)
 	When set True value to the constant
-	And I close TestClient session
-	Given I open new TestClient session or connect the existing one
 	* Load info
 		When Create information register Barcodes records
 		When Create catalog Companies objects (own Second company)
@@ -45,7 +43,7 @@ Scenario: _9800 preparation (errors test)
 		When Create catalog ExpenseAndRevenueTypes objects
 		When Create catalog Companies objects (second company Ferron BP)
 		When Create catalog PartnersBankAccounts objects
-		When update ItemKeys
+
 		
 Scenario: _9801 filling user settings for Sales order
 	Given I open hyperlink "e1cib/list/Catalog.Users"

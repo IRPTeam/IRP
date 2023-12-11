@@ -14,8 +14,6 @@ Background:
 
 Scenario: _1001 preparation
 	When set True value to the constant
-	And I close TestClient session
-	Given I open new TestClient session or connect the existing one
 	When change interface localization code for CI
 	And I close TestClient session
 	Given I open new TestClient session or connect the existing one
@@ -36,7 +34,6 @@ Scenario: _1001 preparation
 	When Create catalog Countries objects
 	When Create catalog IntegrationSettings objects
 	When Create information register CurrencyRates records
-	When update ItemKeys
 	When Create catalog MFBillOfMaterials objects
 
 

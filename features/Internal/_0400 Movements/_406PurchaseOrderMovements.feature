@@ -50,7 +50,6 @@ Scenario: _040115 preparation (Purchase order)
 		When Create catalog ExpenseAndRevenueTypes objects
 		When Create catalog Companies objects (second company Ferron BP)
 		When Create catalog PartnersBankAccounts objects
-		When update ItemKeys
 		When Create information register Taxes records (VAT)
 	When Create Document discount
 	* Add plugin for discount

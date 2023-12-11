@@ -64,7 +64,6 @@ Scenario: _05702 preparation (landed cost commission trade)
 		When Create catalog BusinessUnits objects
 		When Create catalog ExpenseAndRevenueTypes objects
 		When Create catalog SerialLotNumbers objects
-		When update ItemKeys
 		When Create catalog Partners objects
 		When Data preparation (comission stock)
 		* Setting for Company

@@ -22,8 +22,6 @@ Background:
 	
 Scenario: _2990000 preparation (product inventory)
 	When set True value to the constant
-	And I close TestClient session
-	Given I open new TestClient session or connect the existing one
 	* Load info
 		When Create catalog ExpenseAndRevenueTypes objects
 		When Create catalog BusinessUnits objects
@@ -64,7 +62,6 @@ Scenario: _2990000 preparation (product inventory)
 		When Create information register CurrencyRates records
 		When Create catalog SerialLotNumbers objects (serial lot numbers)
 		When Create information register Barcodes records (serial lot numbers)
-		When update ItemKeys
 		When Create information register Taxes records (VAT)
 		When Create document PurchaseInvoice objects (serial lot numbers)
 		And I execute 1C:Enterprise script at server

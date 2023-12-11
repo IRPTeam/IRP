@@ -20,8 +20,6 @@ Scenario: _020200 preparation
 	When set True value to the constant Use consolidated retail sales
 	When set True value to the constant Use commission trading
 	When set True value to the constant Use salary
-	And I close TestClient session
-	Given I open new TestClient session or connect the existing one
 	* Load info
 		When Create catalog Countries objects
 		When Create catalog Companies objects (second company Ferron BP)
@@ -59,7 +57,6 @@ Scenario: _020200 preparation
 		When Create catalog IntegrationSettings objects
 		When Create information register CurrencyRates records
 		When Create catalog CashAccounts objects
-		When update ItemKeys
 		When Create information register Taxes records (VAT)	
 	* Check or create create SalesInvoice024016 (Shipment confirmation does not used)
 		Given I open hyperlink "e1cib/list/Document.SalesInvoice"

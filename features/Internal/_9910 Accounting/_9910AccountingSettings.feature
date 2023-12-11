@@ -16,8 +16,6 @@ Background:
 Scenario: _099100 preparation
 	When set True value to the constant
 	When set True value to the constant Use accounting
-	And I close TestClient session
-	Given I open new TestClient session or connect the existing one
 	* Load info
 		When Create catalog ObjectStatuses objects
 		When Create catalog ItemKeys objects
@@ -49,7 +47,6 @@ Scenario: _099100 preparation
 		When Create information register CurrencyRates records
 		When Create catalog CashAccounts objects
 		When Create catalog ExpenseAndRevenueTypes objects
-		When update ItemKeys
 		When Create information register Taxes records (VAT)
 	* Load data for Accounting system
 		When Create chart of characteristic types AccountingExtraDimensionTypes objects

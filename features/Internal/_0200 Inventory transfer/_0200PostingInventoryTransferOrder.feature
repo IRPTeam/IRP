@@ -36,7 +36,6 @@ Scenario: _020000 preparation
 		When Create chart of characteristic types CurrencyMovementType objects
 		When Create catalog TaxRates objects
 		When Create catalog Taxes objects	
-		When update ItemKeys
 		When Create information register TaxSettings records
 		When Create document InternalSupplyRequest objects (check movements)
 		And I execute 1C:Enterprise script at server

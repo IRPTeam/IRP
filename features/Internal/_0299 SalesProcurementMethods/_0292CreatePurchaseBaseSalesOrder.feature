@@ -48,7 +48,6 @@ Scenario: _029200 preparation (create Purchase order based on a Sales order)
 		When Create information register PricesByItemKeys records
 		When Create catalog IntegrationSettings objects
 		When Create information register CurrencyRates records
-		When update ItemKeys
 		When Create information register Taxes records (VAT)
 	When Create document SalesOrder objects (check SalesOrderProcurement)
 	And I execute 1C:Enterprise script at server

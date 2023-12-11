@@ -43,7 +43,6 @@ Scenario: _0201000 preparation
 		When Create catalog Taxes objects	
 		When Create information register TaxSettings records
 		When Create catalog Vehicles objects
-		When update ItemKeys
 		When Create information register Taxes records (VAT)
 	* Load InventoryTransferOrder
 		When Create document InventoryTransferOrder objects (creation based on)

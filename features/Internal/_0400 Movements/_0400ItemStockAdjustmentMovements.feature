@@ -1,4 +1,4 @@
-#language: en
+﻿#language: en
 @tree
 @Positive
 @Movements
@@ -56,7 +56,6 @@ Scenario: _040001 preparation (item stock adjustment movements)
 		When Create information register Barcodes records (serial lot numbers)
 		When Create catalog SerialLotNumbers objects (serial lot numbers)
 		When Create information register Barcodes records (serial lot numbers)
-		When update ItemKeys
 		When Create information register Taxes records (VAT)
 	* Load item stock adjustment document
 		When Create document item stock adjustment (check movements)

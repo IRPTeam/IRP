@@ -43,7 +43,6 @@ Scenario: _300100 preparation (image setting)
 		When Create information register PricesByItemKeys records
 		When Create catalog IntegrationSettings objects
 		When Create information register CurrencyRates records
-		When update ItemKeys
 		When Create catalog InterfaceGroups objects
 		When Create catalog Currencies objects
 

@@ -48,7 +48,6 @@ Scenario: _024000 preparation (Sales invoice)
 		When Create information register PricesByItemKeys records
 		When Create catalog IntegrationSettings objects
 		When Create information register CurrencyRates records
-		When update ItemKeys
 		When Create catalog BusinessUnits objects
 		When Create catalog CancelReturnReasons objects
 		When Create catalog ExpenseAndRevenueTypes objects

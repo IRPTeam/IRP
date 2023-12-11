@@ -16,8 +16,6 @@ Background:
 	
 Scenario: _090500 preparation (create PI and SI based on Goods receipt and Shipment confirmation)
 	When set True value to the constant
-	And I close TestClient session
-	Given I open new TestClient session or connect the existing one
 	* Load info
 		When Create information register Barcodes records
 		When Create catalog Companies objects (own Second company)
@@ -50,7 +48,6 @@ Scenario: _090500 preparation (create PI and SI based on Goods receipt and Shipm
 		When Create information register PricesByItemKeys records
 		When Create catalog IntegrationSettings objects
 		When Create information register CurrencyRates records
-		When update ItemKeys
 		When Create information register Taxes records (VAT)
 	* Create first Internal supply request from Store 02
 		* Open a creation form Internal Supply Request

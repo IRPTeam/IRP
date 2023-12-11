@@ -52,7 +52,6 @@ Scenario: _602700 preparation (external function)
 		When Create catalog IntegrationSettings objects (db connection)
 		When Create information register CurrencyRates records
 		When Create information register Barcodes records
-		When update ItemKeys
 		When Create catalog ExternalFunctions objects
 		When Create information register Taxes records (VAT)
 	When Create document PurchaseOrder objects (check movements, GR before PI, not Use receipt sheduling)

@@ -50,7 +50,6 @@ Scenario: _045100 preparation (Incoming payment order)
 		When Create catalog Companies objects (second company Ferron BP)
 		When Create catalog Countries objects
 		When Create catalog PartnersBankAccounts objects
-		When update ItemKeys
 		When Create catalog SerialLotNumbers objects
 		When Create catalog CashAccounts objects
 		When Create information register Taxes records (VAT)

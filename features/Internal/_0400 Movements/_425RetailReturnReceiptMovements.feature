@@ -60,7 +60,6 @@ Scenario: _042500 preparation (RetailReturnReceipt)
 		When Create information register Barcodes records (serial lot numbers)
 		When Create catalog CashAccounts objects (POS)
 		When Create catalog CashAccounts objects
-		When update ItemKeys
 		When Create Document discount
 		When Create catalog Items objects (commission trade)
 	* Add plugin for discount

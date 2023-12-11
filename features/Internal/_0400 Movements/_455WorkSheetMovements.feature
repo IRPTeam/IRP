@@ -53,7 +53,6 @@ Scenario: _045501 preparation (work sheet movements)
 		When create items for work order
 		And Delay 5
 		When Create catalog BillOfMaterials objects
-		When update ItemKeys
 		When Create information register Taxes records (VAT)
 	When Create Document discount
 	* Add plugin for discount

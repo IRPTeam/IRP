@@ -26,7 +26,6 @@ Scenario: _0297000 preparation
 		When Create catalog Stores objects
 		When Create catalog Companies objects (own Second company)
 		When Create catalog Countries objects
-		When update ItemKeys
 
 Scenario: _02970001 check preparation
 	When check preparation

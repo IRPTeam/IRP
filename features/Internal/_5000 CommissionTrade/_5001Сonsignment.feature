@@ -64,8 +64,6 @@ Scenario: _05002 preparation (consignment)
 		When Create information register CurrencyRates records
 		When Create catalog BusinessUnits objects
 		When Create catalog ExpenseAndRevenueTypes objects
-		When update ItemKeys
-		When update ItemKeys
 		When Create catalog Partners objects
 		When Data preparation (comission stock)
 		When Create information register Taxes records (VAT)

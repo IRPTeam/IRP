@@ -17,8 +17,6 @@ Background:
 
 Scenario: _0202200 preparation (label processing)
 	When set True value to the constant
-	And I close TestClient session
-	Given I open new TestClient session or connect the existing one
 	* Load info
 		When Create catalog ItemKeys objects
 		When Create catalog ItemTypes objects
@@ -31,7 +29,6 @@ Scenario: _0202200 preparation (label processing)
 		When Create catalog PriceTypes objects
 		When Create information register PricesByItemKeys records
 		When Create information register Barcodes records
-		When update ItemKeys
 		When add Plugin for print label
 
 Scenario: _02022001 check preparation

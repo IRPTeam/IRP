@@ -52,7 +52,6 @@ Scenario: _043100 preparation (Credit note)
 		When Create OtherPartners objects
 		When Create catalog Companies objects (second company Ferron BP)
 		When Create catalog PartnersBankAccounts objects
-		When update ItemKeys
 		When Create catalog SerialLotNumbers objects
 		When Create catalog CashAccounts objects
 		When Create information register Taxes records (VAT)

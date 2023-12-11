@@ -41,7 +41,6 @@ Scenario: _022500 preparation (SC-PR)
 		When Create information register TaxSettings records
 		When Create catalog IntegrationSettings objects
 		When Create information register CurrencyRates records
-		When update ItemKeys
 		When Create information register Taxes records (VAT)
 		When Create document PurchaseInvoice objects
 		When Create catalog PriceTypes objects

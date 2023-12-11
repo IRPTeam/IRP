@@ -41,7 +41,6 @@ Scenario: _0242000 preparation (planned receipt reservation)
 		When Create information register PricesByItemKeys records
 		When Create catalog IntegrationSettings objects
 		When Create information register CurrencyRates records
-		When update ItemKeys
 		When Create information register Taxes records (VAT)
 		When Create catalog Partners objects (Kalipso)
 		When Create document SalesOrder objects (SI before SC, not Use shipment sheduling)

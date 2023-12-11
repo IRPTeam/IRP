@@ -50,7 +50,6 @@ Scenario: _042700 preparation (Unbundling)
 		When Create catalog ExpenseAndRevenueTypes objects
 		When Create catalog Companies objects (second company Ferron BP)
 		When Create catalog PartnersBankAccounts objects
-		When update ItemKeys
 		When Create information register Taxes records (VAT)
 		When Create document Unbundling objects
 		And I execute 1C:Enterprise script at server

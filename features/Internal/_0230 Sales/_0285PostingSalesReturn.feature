@@ -51,7 +51,6 @@ Scenario: _028500 preparation (create document Sales return)
 		When Create catalog ExpenseAndRevenueTypes objects 
 		When Create information register CurrencyRates records
 		When Create catalog Companies objects (own Second company)
-		When update ItemKeys
 		When Create information register Taxes records (VAT)
 		When Create catalog BusinessUnits objects
 	* Add plugin for discount

@@ -77,7 +77,6 @@ Scenario: _05802 preparation (commission own companies, different tax systems)
 			| 'Workstation 01'    |
 		And I click "Set current workstation" button		
 		When Create information register TaxSettings records (Concignor 1)
-		When update ItemKeys
 		When Create catalog Partners objects
 		When Data preparation (comission stock)
 		When Create information register Taxes records (VAT)

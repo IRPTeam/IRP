@@ -77,8 +77,7 @@ Scenario: _001 test data
 		When Create information register UserSettings records (LC)
 		When create items for work order (LC)
 		When Create catalog BillOfMaterials objects (LC)
-		And Delay 10
-		When update ItemKeys (LC)
+		And Delay 5
 	* Landed cost currency movement type for company
 		
 		Given I open hyperlink "e1cib/list/Catalog.Companies"

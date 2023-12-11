@@ -59,7 +59,6 @@ Scenario: _041800 preparation (StockAdjustmentAsSurplus)
 		When Create catalog SerialLotNumbers objects (serial lot numbers)
 		When Create information register Barcodes records (serial lot numbers)
 		When Create document StockAdjustmentAsSurplus objects (stock control serial lot numbers)
-		When update ItemKeys
 		When Create information register Taxes records (VAT)
 	* Load StockAdjustmentAsSurplus
 		When Create document StockAdjustmentAsSurplus objects (check movements)

@@ -19,8 +19,6 @@ Background:
 
 Scenario: _029600 preparation (Unbundling)
 	When set True value to the constant
-	And I close TestClient session
-	Given I open new TestClient session or connect the existing one
 	* Load info
 		When Create catalog ItemKeys objects
 		When Create catalog ItemTypes objects
@@ -45,7 +43,6 @@ Scenario: _029600 preparation (Unbundling)
 		When Create information register TaxSettings records
 		When Create catalog IntegrationSettings objects
 		When Create information register CurrencyRates records
-		When update ItemKeys
 		When Create information register Taxes records (VAT)
 
 Scenario: _0296001 check preparation

@@ -12,8 +12,6 @@ Background:
 
 Scenario: 950100 Basic role
 	When set True value to the constant
-	And I close TestClient session
-	Given I open new TestClient session or connect the existing one
 	Then I connect launched Test client "Этот клиент"
 	When Create catalog AccessGroups objects
 	When Create catalog AccessProfiles objects
@@ -74,7 +72,6 @@ Scenario: 950100 Basic role
 	When Create information register CurrencyRates records
 	When Create information register Barcodes records
 	When Create information register UserSettings records (Retail document)
-	When update ItemKeys
 	When Create catalog ItemKeys objects (Table)
 	When Create catalog Items objects (Table)
 	When Create information register UserSettings records

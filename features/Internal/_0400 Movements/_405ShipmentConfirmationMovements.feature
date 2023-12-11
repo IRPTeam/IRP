@@ -66,7 +66,6 @@ Scenario: _040170 preparation (Shipment confirmation)
 		When Create catalog SerialLotNumbers objects (serial lot numbers)
 		When Create information register Barcodes records (serial lot numbers)
 		When Create document ShipmentConfirmation (stock control serial lot numbers)
-		When update ItemKeys
 		When Create information register Taxes records (VAT)
 	When Create Document discount
 	* Add plugin for discount

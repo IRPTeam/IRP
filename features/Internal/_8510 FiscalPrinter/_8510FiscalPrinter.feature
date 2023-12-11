@@ -451,7 +451,6 @@ Scenario: _0850000 preparation (fiscal printer)
 		When Create catalog SerialLotNumbers objects (serial lot numbers)
 		When create consignors Items with SLN
 		When create consignors Items with control code string type (Good code data)
-		When update ItemKeys
 		When Create catalog Partners objects and Companies objects (Customer)
 		When Create catalog Agreements objects (Customer)
 		When Create POS cash account objects

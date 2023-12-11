@@ -15,8 +15,6 @@ Background:
 
 Scenario: _2000 preparation (landed cost)
 	When set True value to the constant
-	And I close TestClient session
-	Given I open new TestClient session or connect the existing one
 	When Create catalog AddAttributeAndPropertySets objects
 	When Create catalog AddAttributeAndPropertyValues objects
 	When Create chart of characteristic types AddAttributeAndProperty objects
@@ -46,7 +44,6 @@ Scenario: _2000 preparation (landed cost)
 	When Create catalog ItemKeys objects (MF)
 	When Create catalog ItemTypes objects (MF)
 	When Create Items and item keys (semiproducts) (MF)
-	When update ItemKeys
 	When Create information register CurrencyRates records
 	When Create catalog PriceTypes objects
 	When Create catalog Companies objects (own Second company)	

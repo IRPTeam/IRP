@@ -51,7 +51,6 @@ Scenario: _03000 preparation (Discount)
 		When Create information register ItemSegments records (discount)
 		When Create information register CurrencyRates records
 		When Create catalog CashAccounts objects
-		When update ItemKeys
 		When Create information register Taxes records (VAT)
 		When Create catalog Partners objects
 	

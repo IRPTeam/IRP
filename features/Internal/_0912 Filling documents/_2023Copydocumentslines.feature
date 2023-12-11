@@ -15,8 +15,6 @@ Background:
 	
 Scenario: _0155100 preparation ( filling documents)
 	When set True value to the constant
-	And I close TestClient session
-	Given I open new TestClient session or connect the existing one
 	* Load info
 		When Create information register Barcodes records
 		When Create catalog Companies objects (own Second company)
@@ -59,7 +57,6 @@ Scenario: _0155100 preparation ( filling documents)
 		When Create catalog ItemTypes objects (serial lot numbers)
 		When Create catalog Items objects (serial lot numbers)
 		When Create catalog SerialLotNumbers objects
-		When update ItemKeys
 		When Create catalog PartnerItems objects
 		When Create information register Taxes records (VAT)
 		When Create catalog CancelReturnReasons objects

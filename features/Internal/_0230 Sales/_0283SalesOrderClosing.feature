@@ -41,7 +41,6 @@ Scenario: _0230000 preparation (Sales order closing)
 		When Create information register PricesByItemKeys records
 		When Create catalog IntegrationSettings objects
 		When Create information register CurrencyRates records
-		When update ItemKeys
 		When Create catalog ExpenseAndRevenueTypes objects
 		When Create catalog CancelReturnReasons objects
 		When Create catalog Partners objects

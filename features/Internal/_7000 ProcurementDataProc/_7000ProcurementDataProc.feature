@@ -52,7 +52,6 @@ Scenario:_700000 preparation (procurement data proccessor)
 		When Create catalog BusinessUnits objects
 		When Create catalog ExpenseAndRevenueTypes objects
 		When Create catalog Companies objects (second company Ferron BP)
-		When update ItemKeys
 		When Create information register Taxes records (VAT)	
 	When Create document InternalSupplyRequest objects (for procurement)
 	When create an order for Ferron BP Basic Partner term, TRY (Dress -10 and Trousers - 5)

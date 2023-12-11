@@ -51,7 +51,6 @@ Scenario: _0154100 preparation ( filling documents)
 		When Create catalog IntegrationSettings objects
 		When Create information register CurrencyRates records
 		When Create catalog Users objects
-		When update ItemKeys
 		When Create catalog Partners objects and Companies objects (Customer)
 		When Create catalog Agreements objects (Customer)
 		When Create information register Taxes records (VAT)

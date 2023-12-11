@@ -58,7 +58,6 @@ Scenario: _041900 preparation (StockAdjustmentAsWriteOff)
 		When Create information register Barcodes records (serial lot numbers)
 		When Create catalog SerialLotNumbers objects (serial lot numbers)
 		When Create information register Barcodes records (serial lot numbers)
-		When update ItemKeys
 		When Create information register Taxes records (VAT)
 	* Load StockAdjustmentAsWriteOff
 		When Create document StockAdjustmentAsWriteOff objects (check movements)

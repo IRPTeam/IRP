@@ -69,8 +69,6 @@ Scenario: _041 test data
 		When Create information register PricesByProperties records (LC)
 		When Create information register TaxSettings records (LC)
 		When Create information register UserSettings records (LC)
-		And Delay 10
-		When update ItemKeys (LC)
 	* Landed cost currency movement type for company
 		
 		Given I open hyperlink "e1cib/list/Catalog.Companies"

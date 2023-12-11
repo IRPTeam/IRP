@@ -48,7 +48,6 @@ Scenario: _029200 preparation (work order)
 		When Create catalog PaymentTypes objects 
 		When create items for work order
 		When Create catalog BillOfMaterials objects
-		When update ItemKeys
 		When Create information register Taxes records (VAT)
 	* Add work order in tax settings
 		Given I open hyperlink "e1cib/list/Catalog.Taxes"

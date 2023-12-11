@@ -75,7 +75,6 @@ Scenario: _0156000 preparation
 		When Create information register Barcodes records (serial lot numbers)
 		When Create catalog SerialLotNumbers objects (serial lot numbers)
 		When Create information register Barcodes records (serial lot numbers)
-		When update ItemKeys
 		When Create information register Taxes records (VAT)
 		And Delay 10
 	* Import documents

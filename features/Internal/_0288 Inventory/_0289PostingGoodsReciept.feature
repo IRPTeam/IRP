@@ -20,8 +20,6 @@ Background:
 
 Scenario: _028900 preparation (Goods receipt)
 	When set True value to the constant
-	And I close TestClient session
-	Given I open new TestClient session or connect the existing one
 	* Load info
 		When Create catalog ObjectStatuses objects
 		When Create catalog ItemKeys objects
@@ -52,7 +50,6 @@ Scenario: _028900 preparation (Goods receipt)
 		When Create catalog TaxRates objects
 		When Create catalog Partners objects
 		When Create catalog Taxes objects
-		When update ItemKeys
 		When Create information register Taxes records (VAT)
 	* Document Discount 
 		When Create Document discount (for row)

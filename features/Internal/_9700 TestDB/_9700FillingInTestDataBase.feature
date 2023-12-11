@@ -103,7 +103,6 @@ When Create catalog UserGroups objects (test data base)
 When Create catalog Users objects (test data base)
 When Create catalog Workstations objects (test data base)
 When Create catalog PlanningPeriods objects (test data base)
-When update ItemKeys
 When Create document BankPayment objects (test data base)
 When Create document BankReceipt objects (test data base)
 When Create document Bundling objects (test data base)

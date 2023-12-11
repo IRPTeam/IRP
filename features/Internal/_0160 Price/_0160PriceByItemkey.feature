@@ -38,7 +38,6 @@ Scenario: _016000 preparation
 		When Create catalog Stores objects
 		When Create catalog IntegrationSettings objects
 		When Create information register Barcodes records
-		When update ItemKeys
 		When Create catalog Partners objects (Ferron BP)
 		When Create catalog Companies objects (partners company)
 		When Create information register PartnerSegments records
@@ -52,7 +51,6 @@ Scenario: _016000 preparation
 		When Create information register CurrencyRates records
 		When Create catalog BusinessUnits objects
 		When Create catalog ExpenseAndRevenueTypes objects
-		When update ItemKeys
 		When Create catalog Partners objects
 		When Create information register Taxes records (VAT)
 		When Create catalog Partners objects (Kalipso)

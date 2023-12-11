@@ -17,8 +17,6 @@ Background:
 		
 Scenario: _050000 preparation (Retail shipment confirmation movements)
 	When set True value to the constant
-	And I close TestClient session
-	Given I open new TestClient session or connect the existing one
 	* Load info
 		When Create catalog BusinessUnits objects
 		When Create information register Barcodes records
@@ -60,7 +58,6 @@ Scenario: _050000 preparation (Retail shipment confirmation movements)
 		When Create information register Barcodes records (serial lot numbers)
 		When Create catalog SerialLotNumbers objects (serial lot numbers, with batch balance details)
 		When Create catalog SerialLotNumbers objects (serial lot numbers)
-		When update ItemKeys
 		When Create catalog Partners objects and Companies objects (Customer)
 		When Create catalog Agreements objects (Customer)
 		When Create information register Taxes records (VAT)

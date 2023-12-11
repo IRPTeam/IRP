@@ -47,7 +47,6 @@ Scenario: _602700 preparation (data history)
 		When Create catalog IntegrationSettings objects
 		When Create information register CurrencyRates records
 		When Create information register Barcodes records
-		When update ItemKeys
 		When Create information register Taxes records (VAT)
 	When Create document PurchaseOrder objects (check movements, GR before PI, not Use receipt sheduling)
 

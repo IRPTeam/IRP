@@ -44,7 +44,6 @@ Scenario: _029900 preparation (create Sales order without reserve)
 		When Create information register PricesByItemKeys records
 		When Create catalog IntegrationSettings objects
 		When Create information register CurrencyRates records
-		When update ItemKeys
 		When Create information register Taxes records (VAT)
 
 

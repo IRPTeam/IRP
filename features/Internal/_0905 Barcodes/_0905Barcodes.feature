@@ -17,8 +17,6 @@ Background:
 
 Scenario: _090500 preparation (Barcodes)
 	When set True value to the constant
-	And I close TestClient session
-	Given I open new TestClient session or connect the existing one
 	* Load info
 		When Create catalog ItemKeys objects
 		When Create catalog ItemTypes objects
@@ -28,7 +26,7 @@ Scenario: _090500 preparation (Barcodes)
 		When Create chart of characteristic types AddAttributeAndProperty objects
 		When Create catalog AddAttributeAndPropertySets objects
 		When Create catalog AddAttributeAndPropertyValues objects
-		When update ItemKeys
+
 	
 Scenario: _0905001 check preparation
 	When check preparation

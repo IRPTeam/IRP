@@ -63,7 +63,6 @@ Scenario: _05602 preparation (consignment landed cost)
 		When Create catalog BusinessUnits objects
 		When Create catalog ExpenseAndRevenueTypes objects
 		When Create catalog Items objects (commission trade)
-		When update ItemKeys
 		When Create catalog Partners objects
 		When Data preparation (comission stock)
 		* Setting for Company

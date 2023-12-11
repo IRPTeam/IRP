@@ -45,7 +45,6 @@ Scenario: _029100 preparation
 		When Create information register CurrencyRates records
 		When Create catalog CashAccounts objects
 		When Create catalog PaymentTypes objects 
-		When update ItemKeys
 		When Create information register Taxes records (VAT)
 
 Scenario: _0291001 check preparation

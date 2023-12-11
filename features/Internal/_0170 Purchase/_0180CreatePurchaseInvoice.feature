@@ -46,7 +46,6 @@ Scenario: _018000 preparation
 		When Create information register TaxSettings records
 		When Create catalog IntegrationSettings objects
 		When Create information register CurrencyRates records
-		When update ItemKeys
 		When Create information register Taxes records (VAT)
 	* Load documents
 		When Create document PurchaseOrder objects (creation based on)

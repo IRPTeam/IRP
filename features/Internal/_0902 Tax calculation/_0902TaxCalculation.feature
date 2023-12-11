@@ -21,8 +21,6 @@ Background:
 Scenario: _0902000 preparation
 	When set True value to the constant
 	When set True value to the constant Use commission trading
-	And I close TestClient session
-	Given I open new TestClient session or connect the existing one
 	* Load info
 		When Create catalog ObjectStatuses objects
 		When Create catalog ItemKeys objects
@@ -51,7 +49,6 @@ Scenario: _0902000 preparation
 		When Create information register PricesByItemKeys records
 		When Create catalog IntegrationSettings objects
 		When Create information register CurrencyRates records
-		When update ItemKeys
 		When Create information register Taxes records (VAT)
 		When Create catalog ExpenseAndRevenueTypes objects
 		When Create catalog Countries objects

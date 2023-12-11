@@ -18,8 +18,6 @@ Background:
 Scenario: _040130 preparation (Sales invoice)
 	When set True value to the constant
 	When set True value to the constant Use commission trading
-	And I close TestClient session
-	Given I open new TestClient session or connect the existing one
 	* Unpost SO closing
 		Given I open hyperlink "e1cib/list/Document.SalesOrderClosing"
 		If "List" table contains lines Then
@@ -63,7 +61,6 @@ Scenario: _040130 preparation (Sales invoice)
 		When Create catalog Stores (trade agent)
 		When Create catalog Companies objects (second company Ferron BP)
 		When Create catalog PartnersBankAccounts objects
-		When update ItemKeys
 		When Create catalog SerialLotNumbers objects
 		When Create catalog CashAccounts objects
 		When Create catalog ItemKeys objects (serial lot numbers)

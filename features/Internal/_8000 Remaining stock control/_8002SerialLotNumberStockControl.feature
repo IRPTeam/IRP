@@ -52,7 +52,6 @@ Scenario:_800020 preparation (remaining stock control)
 		When Create catalog BusinessUnits objects
 		When Create catalog ExpenseAndRevenueTypes objects
 		When Create catalog Companies objects (second company Ferron BP)
-		When update ItemKeys
 		When Create information register Taxes records (VAT)	
 	* Stock remaining settings
 		When Create CustomUserSettings objects (CheckSerialLotNumber balance)

@@ -4,7 +4,7 @@
 @Accounting
 
 
-Feature: accounting
+Feature: accounting setings
 
 Variables:
 import "Variables.feature"
@@ -34,6 +34,7 @@ Scenario: _099100 preparation
 		When Create catalog Companies objects (Main company)
 		When Create catalog Stores objects
 		When Create catalog Partners objects (Ferron BP)
+		When Create catalog Partners objects
 		When Create catalog Companies objects (partners company)
 		When Create catalog Countries objects
 		When Create catalog CancelReturnReasons objects
@@ -48,101 +49,324 @@ Scenario: _099100 preparation
 		When Create information register CurrencyRates records
 		When Create catalog CashAccounts objects
 		When Create catalog ExpenseAndRevenueTypes objects
-		When Create information register T9011S_AccountsCashAccount records
-		When Create information register T9014S_AccountsExpenseRevenue records
-		When Create document BankPayment objects (Accounting)
-		When Create document VendorsAdvancesClosing objects (Accounting)
-		When Create catalog AccountingOperations objects
-		When Create catalog LedgerTypes objects
-		When Create catalog LedgerTypeVariants objects
-		When Create information register LedgerTypeOperations records
 		When update ItemKeys
 		When Create information register Taxes records (VAT)
-	When Create chart of characteristic types AccountingExtraDimensionTypes objects
+	* Load data for Accounting system
+		When Create chart of characteristic types AccountingExtraDimensionTypes objects
+
+							
 	
 Scenario: _0991001 check preparation
 	When check preparation
 
-Scenario: _099101 filling accounting operation
-		And I close all client application windows
-	* Open accounting operations catalog
-		Given I open hyperlink "e1cib/list/Catalog.AccountingOperations"
-	* Filling
-		* Purchase invoice
-			And I go to line in "List" table
-				| 'Code'    | 'Predefined data item name'     |
-				| '5'       | 'Document_PurchaseInvoice'      |
-			And I select current line in "List" table
-			And I input "Purchase invoice" text in "ENG" field
-			And I click "Save and close" button
-			And I expand a line in "List" table
-				| 'Code'    | 'Description'         | 'Predefined data item name'     |
-				| '5'       | 'Purchase invoice'    | 'Document_PurchaseInvoice'      |
-			And I wait "en description is empty (Accounting operations) *" window closing in 20 seconds
-			Then "Accounting operations" window is opened
-			And I go to line in "List" table
-				| 'Code'    | 'Predefined data item name'                      |
-				| '6'       | 'PurchaseInvoice_DR_R4050B_R5022T_CR_R1021B'     |
-			And I select current line in "List" table
-			And I input "PurchaseInvoice_DR_R4050B (Stock inventory)_R5022T(Expenses)_CR_R1021B (Vendors transaction)" text in "ENG" field
-			And I click "Save and close" button
-	* Check 
-		And "List" table contains lines
-			| 'Code'   | 'Order'   | 'Predefined data item name'                    | 'Description'                                                                                    |
-			| '6'      | ''        | 'PurchaseInvoice_DR_R4050B_R5022T_CR_R1021B'   | 'PurchaseInvoice_DR_R4050B (Stock inventory)_R5022T(Expenses)_CR_R1021B (Vendors transaction)'   |
-		And I close all client application windows
+Scenario: _0991002 filling accounting operation
+	And I close all client application windows
+	Given I open hyperlink "e1cib/list/Catalog.AccountingOperations"
+	And I click "Fill default descriptions" button
+	And I click "Refresh" button
+	And I click "List" button		
+	And "List" table became equal
+		| 'Order' | 'Predefined data item name'                                                                                  | 'Description'                                                                                                    |
+		| ''      | 'Document_BankPayment'                                                                                       | 'Bank payment'                                                                                                   |
+		| ''      | 'Document_BankReceipt'                                                                                       | 'Bank receipt'                                                                                                   |
+		| ''      | 'Document_PurchaseInvoice'                                                                                   | 'Purchase invoice'                                                                                               |
+		| ''      | 'Document_RetailSalesReceipt'                                                                                | 'Retail sales receipt'                                                                                           |
+		| ''      | 'Document_SalesInvoice'                                                                                      | 'Sales invoice'                                                                                                  |
+		| ''      | 'Document_ForeignCurrencyRevaluation'                                                                        | 'Foreign currency revaluation'                                                                                   |
+		| ''      | 'BankPayment_DR_R1020B_AdvancesToVendors_R1021B_VendorsTransactions_CR_R3010B_CashOnHand'                    | 'BankPayment DR (R1020B_AdvancesToVendors R1021B_VendorsTransactions) CR (R3010B_CashOnHand)'                    |
+		| ''      | 'BankPayment_DR_R5022T_Expenses_CR_R3010B_CashOnHand'                                                        | 'BankPayment DR (R5022T_Expenses) CR (R3010B_CashOnHand)'                                                        |
+		| ''      | 'BankPayment_DR_R1021B_VendorsTransactions_CR_R1020B_AdvancesToVendors'                                      | 'BankPayment DR (R1021B_VendorsTransactions) CR (R1020B_AdvancesToVendors)'                                      |
+		| ''      | 'BankReceipt_DR_R3010B_CashOnHand_CR_R2020B_AdvancesFromCustomers_R2021B_CustomersTransactions'              | 'BankReceipt DR (R3010B_CashOnHand) CR (R2020B_AdvancesFromCustomers_R2021B_CustomersTransactions)'              |
+		| ''      | 'BankReceipt_DR_R2021B_CustomersTransactions_CR_R2020B_AdvancesFromCustomers'                                | 'BankReceipt DR (R2021B_CustomersTransactions) CR (R2020B_AdvancesFromCustomers)'                                |
+		| ''      | 'PurchaseInvoice_DR_R4050B_StockInventory_R5022T_Expenses_CR_R1021B_VendorsTransactions'                     | 'PurchaseInvoice DR (R4050B_StockInventory_R5022T_Expenses) CR (R1021B_VendorsTransactions)'                     |
+		| ''      | 'PurchaseInvoice_DR_R1021B_VendorsTransactions_CR_R1020B_AdvancesToVendors'                                  | 'PurchaseInvoice DR (R1021B_VendorsTransactions) CR (R1020B_AdvancesToVendors)'                                  |
+		| ''      | 'PurchaseInvoice_DR_R1040B_TaxesOutgoing_CR_R1021B_VendorsTransactions'                                      | 'PurchaseInvoice DR (R1040B_TaxesOutgoing) CR (R1021B_VendorsTransactions)'                                      |
+		| ''      | 'PurchaseInvoice_DR_R1021B_VendorsTransactions_CR_R1020B_AdvancesToVendors_CurrencyRevaluation'              | 'PurchaseInvoice DR (R1021B_VendorsTransactions) CR (R1020B_AdvancesToVendors_CurrencyRevaluation)'              |
+		| ''      | 'PurchaseInvoice_DR_R4050B_StockInventory_R5022T_Expenses_CR_R1021B_VendorsTransactions_CurrencyRevaluation' | 'PurchaseInvoice DR (R4050B_StockInventory_R5022T_Expenses) CR (R1021B_VendorsTransactions_CurrencyRevaluation)' |
+		| ''      | 'RetailSalesReceipt_DR_R5022T_Expenses_CR_R4050B_StockInventory'                                             | 'RetailSalesReceipt DR (R5022T_Expenses) CR (R4050B_StockInventory)'                                             |
+		| ''      | 'SalesInvoice_DR_R2021B_CustomersTransactions_CR_R5021T_Revenues'                                            | 'SalesInvoice DR (R2021B_CustomersTransactions) CR (R5021T_Revenues)'                                            |
+		| ''      | 'SalesInvoice_DR_R5021T_Revenues_CR_R2040B_TaxesIncoming'                                                    | 'SalesInvoice DR (R5021T_Revenues) CR (R2040B_TaxesIncoming)'                                                    |
+		| ''      | 'SalesInvoice_DR_R5022T_Expenses_CR_R4050B_StockInventory'                                                   | 'SalesInvoice DR (R5022T_Expenses) CR (R4050B_StockInventory)'                                                   |
+		| ''      | 'SalesInvoice_DR_R2020B_AdvancesFromCustomers_CR_R2021B_CustomersTransactions'                               | 'SalesInvoice DR (R2020B_AdvancesFromCustomers) CR (R2021B_CustomersTransactions)'                               |
+		| ''      | 'SalesInvoice_DR_R2020B_AdvancesFromCustomers_CR_R2021B_CustomersTransactions_CurrencyRevaluation'           | 'SalesInvoice DR (R2020B_AdvancesFromCustomers) CR (R2021B_CustomersTransactions_CurrencyRevaluation)'           |
+		| ''      | 'SalesInvoice_DR_R2021B_CustomersTransactions_CR_R5021T_Revenues_CurrencyRevaluation'                        | 'SalesInvoice DR (R2021B_CustomersTransactions) CR (R5021T_Revenues_CurrencyRevaluation)'                        |
+		| ''      | 'ForeignCurrencyRevaluation_DR_R2020B_AdvancesFromCustomers_CR_R5021T_Revenues'                              | 'ForeignCurrencyRevaluation DR (R2020B_AdvancesFromCustomers) CR (R5021T_Revenues)'                              |
+		| ''      | 'ForeignCurrencyRevaluation_DR_R5022T_Expenses_CR_R2020B_AdvancesFromCustomers'                              | 'ForeignCurrencyRevaluation DR (R5022T_Expenses) CR (R2020B_AdvancesFromCustomers)'                              |
+	And I close all client application windows
 		
 		
-Scenario: _099102 create ledger type
+Scenario: _0991003 create ledger type
 	And I close all client application windows
 	* Open accounting operations catalog
 		Given I open hyperlink "e1cib/list/Catalog.LedgerTypes"	
 	* Create new element			
 		And I click the button named "FormCreate"
-		And I input "Test" text in "ENG" field
+		And I input "Manager analitics" text in "ENG" field
 		And I click Select button of "Currency movement type" field
 		Then "Multi currency movement types" window is opened
 		And I go to line in "List" table
 			| 'Currency'   | 'Deferred calculation'   | 'Description'      | 'Source'         | 'Type'     |
 			| 'TRY'        | 'No'                     | 'Local currency'   | 'Forex Seling'   | 'Legal'    |
 		And I select current line in "List" table
-		And I click Choice button of the field named "Variant"
+		And I click Choice button of the field named "LedgerTypeVariant"
 		And I click "Create" button
-		And I input "Test analitics" text in "ENG" field
+		And I input "Manager analitics" text in "ENG" field
+		And I click "Save" button
+		And I delete "$$UniqueIDManagerLT$$" variable
+		And I save the value of the field named "UniqueID" as "$$UniqueIDManagerLT$$"
 		And I click "Save and close" button
 		And I wait "Ledger type variants (create) *" window closing in 20 seconds
 		Then "Ledger type variants" window is opened
 		And I click "Select" button
 		* Filling dates
 			And I go to line in "OperationsTree" table
-				| 'Presentation'                                                                                           | 'Use'     |
-				| 'BankPayment_DR_R1020B (Advances to vendors) _R1021B (Vendors transaction) _CR_R3010B (Cash on hand)'    | 'No'      |
+				| 'Presentation'                                                                                | 'Use' |
+				| 'BankPayment DR (R1020B_AdvancesToVendors R1021B_VendorsTransactions) CR (R3010B_CashOnHand)' | 'No'  |
 			And I activate "Period" field in "OperationsTree" table
 			And I select current line in "OperationsTree" table
 			And I input "01.01.2021" text in "Period" field of "OperationsTree" table
+			And I go to line in "OperationsTree" table
+				| 'Presentation'                                            | 'Use' |
+				| 'BankPayment DR (R5022T_Expenses) CR (R3010B_CashOnHand)' | 'No'  |
+			And I activate "Period" field in "OperationsTree" table
+			And I select current line in "OperationsTree" table
+			And I input "01.01.2021" text in "Period" field of "OperationsTree" table
+			And I go to line in "OperationsTree" table
+				| 'Presentation'                                                              | 'Use' |
+				| 'BankPayment DR (R1021B_VendorsTransactions) CR (R1020B_AdvancesToVendors)' | 'No'  |
+			And I activate "Period" field in "OperationsTree" table
+			And I select current line in "OperationsTree" table
+			And I input "01.01.2021" text in "Period" field of "OperationsTree" table
+			And I go to line in "OperationsTree" table
+				| 'Presentation'                                                                                      | 'Use' |
+				| 'BankReceipt DR (R3010B_CashOnHand) CR (R2020B_AdvancesFromCustomers_R2021B_CustomersTransactions)' | 'No'  |
+			And I activate "Period" field in "OperationsTree" table
+			And I select current line in "OperationsTree" table
+			And I input "01.01.2021" text in "Period" field of "OperationsTree" table
+			And I go to line in "OperationsTree" table
+				| 'Presentation'                                                                    | 'Use' |
+				| 'BankReceipt DR (R2021B_CustomersTransactions) CR (R2020B_AdvancesFromCustomers)' | 'No'  |
+			And I activate "Period" field in "OperationsTree" table
+			And I select current line in "OperationsTree" table
+			And I input "01.01.2021" text in "Period" field of "OperationsTree" table
+			And I go to line in "OperationsTree" table
+				| 'Presentation'                                                                               | 'Use' |
+				| 'PurchaseInvoice DR (R4050B_StockInventory_R5022T_Expenses) CR (R1021B_VendorsTransactions)' | 'No'  |
+			And I activate "Period" field in "OperationsTree" table
+			And I select current line in "OperationsTree" table
+			And I input "01.01.2021" text in "Period" field of "OperationsTree" table
+			And I go to line in "OperationsTree" table
+				| 'Presentation'                                                                                      | 'Use' |
+				| 'PurchaseInvoice DR (R1021B_VendorsTransactions) CR (R1020B_AdvancesToVendors)' | 'No'  |
+			And I activate "Period" field in "OperationsTree" table
+			And I select current line in "OperationsTree" table
+			And I input "01.01.2021" text in "Period" field of "OperationsTree" table
+			And I go to line in "OperationsTree" table
+				| 'Presentation'                                                              | 'Use' |
+				| 'PurchaseInvoice DR (R1040B_TaxesOutgoing) CR (R1021B_VendorsTransactions)' | 'No'  |
+			And I activate "Period" field in "OperationsTree" table
+			And I select current line in "OperationsTree" table
+			And I input "01.01.2021" text in "Period" field of "OperationsTree" table
+			And I go to line in "OperationsTree" table
+				| 'Presentation'                                                                                      | 'Use' |
+				| 'PurchaseInvoice DR (R1021B_VendorsTransactions) CR (R1020B_AdvancesToVendors_CurrencyRevaluation)' | 'No'  |
+			And I activate "Period" field in "OperationsTree" table
+			And I select current line in "OperationsTree" table
+			And I input "01.01.2021" text in "Period" field of "OperationsTree" table
+			And I go to line in "OperationsTree" table
+				| 'Presentation'                                                                                                   | 'Use' |
+				| 'PurchaseInvoice DR (R4050B_StockInventory_R5022T_Expenses) CR (R1021B_VendorsTransactions_CurrencyRevaluation)' | 'No'  |
+			And I activate "Period" field in "OperationsTree" table
+			And I select current line in "OperationsTree" table
+			And I input "01.01.2021" text in "Period" field of "OperationsTree" table
+			And I go to line in "OperationsTree" table
+				| 'Presentation'                                                       | 'Use' |
+				| 'RetailSalesReceipt DR (R5022T_Expenses) CR (R4050B_StockInventory)' | 'No'  |
+			And I activate "Period" field in "OperationsTree" table
+			And I select current line in "OperationsTree" table
+			And I input "01.01.2021" text in "Period" field of "OperationsTree" table
+			And I go to line in "OperationsTree" table
+				| 'Presentation'                                                        | 'Use' |
+				| 'SalesInvoice DR (R2021B_CustomersTransactions) CR (R5021T_Revenues)' | 'No'  |
+			And I activate "Period" field in "OperationsTree" table
+			And I select current line in "OperationsTree" table
+			And I input "01.01.2021" text in "Period" field of "OperationsTree" table
+			And I go to line in "OperationsTree" table
+				| 'Presentation'                                                | 'Use' |
+				| 'SalesInvoice DR (R5021T_Revenues) CR (R2040B_TaxesIncoming)' | 'No'  |
+			And I activate "Period" field in "OperationsTree" table
+			And I select current line in "OperationsTree" table
+			And I input "01.01.2021" text in "Period" field of "OperationsTree" table
+			And I go to line in "OperationsTree" table
+				| 'Presentation'                                                 | 'Use' |
+				| 'SalesInvoice DR (R5022T_Expenses) CR (R4050B_StockInventory)' | 'No'  |
+			And I activate "Period" field in "OperationsTree" table
+			And I select current line in "OperationsTree" table
+			And I input "01.01.2021" text in "Period" field of "OperationsTree" table
+			And I go to line in "OperationsTree" table
+				| 'Presentation'                                                                     | 'Use' |
+				| 'SalesInvoice DR (R2020B_AdvancesFromCustomers) CR (R2021B_CustomersTransactions)' | 'No'  |
+			And I activate "Period" field in "OperationsTree" table
+			And I select current line in "OperationsTree" table
+			And I input "01.01.2021" text in "Period" field of "OperationsTree" table
+			And I go to line in "OperationsTree" table
+				| 'Presentation'                                                                                         | 'Use' |
+				| 'SalesInvoice DR (R2020B_AdvancesFromCustomers) CR (R2021B_CustomersTransactions_CurrencyRevaluation)' | 'No'  |
+			And I activate "Period" field in "OperationsTree" table
+			And I select current line in "OperationsTree" table
+			And I input "01.01.2021" text in "Period" field of "OperationsTree" table
+			And I go to line in "OperationsTree" table
+				| 'Presentation'                                                                            | 'Use' |
+				| 'SalesInvoice DR (R2021B_CustomersTransactions) CR (R5021T_Revenues_CurrencyRevaluation)' | 'No'  |
+			And I activate "Period" field in "OperationsTree" table
+			And I select current line in "OperationsTree" table
+			And I input "01.01.2021" text in "Period" field of "OperationsTree" table
+			And I go to line in "OperationsTree" table
+				| 'Presentation'                                                                      | 'Use' |
+				| 'ForeignCurrencyRevaluation DR (R2020B_AdvancesFromCustomers) CR (R5021T_Revenues)' | 'No'  |
+			And I activate "Period" field in "OperationsTree" table
+			And I select current line in "OperationsTree" table
+			And I input "01.01.2021" text in "Period" field of "OperationsTree" table
+			And I go to line in "OperationsTree" table
+				| 'Presentation'                                                                      | 'Use' |
+				| 'ForeignCurrencyRevaluation DR (R5022T_Expenses) CR (R2020B_AdvancesFromCustomers)' | 'No'  |
+			And I activate "Period" field in "OperationsTree" table
+			And I select current line in "OperationsTree" table
+			And I input "01.01.2021" text in "Period" field of "OperationsTree" table
+			And I finish line editing in "OperationsTree" table
+			And I click "Save" button
+		* Check
+			And "OperationsTree" table contains lines
+				| 'Presentation'                                                                                                   | 'Use' | 'Period'     |
+				| 'Bank payment'                                                                                                   | 'No'  | ''           |
+				| 'BankPayment DR (R1020B_AdvancesToVendors R1021B_VendorsTransactions) CR (R3010B_CashOnHand)'                    | 'Yes' | '01.01.2021' |
+				| 'BankPayment DR (R5022T_Expenses) CR (R3010B_CashOnHand)'                                                        | 'Yes' | '01.01.2021' |
+				| 'BankPayment DR (R1021B_VendorsTransactions) CR (R1020B_AdvancesToVendors)'                                      | 'Yes' | '01.01.2021' |
+				| 'Bank receipt'                                                                                                   | 'No'  | ''           |
+				| 'BankReceipt DR (R3010B_CashOnHand) CR (R2020B_AdvancesFromCustomers_R2021B_CustomersTransactions)'              | 'Yes' | '01.01.2021' |
+				| 'BankReceipt DR (R2021B_CustomersTransactions) CR (R2020B_AdvancesFromCustomers)'                                | 'Yes' | '01.01.2021' |
+				| 'Purchase invoice'                                                                                               | 'No'  | ''           |
+				| 'PurchaseInvoice DR (R4050B_StockInventory_R5022T_Expenses) CR (R1021B_VendorsTransactions)'                     | 'Yes' | '01.01.2021' |
+				| 'PurchaseInvoice DR (R1021B_VendorsTransactions) CR (R1020B_AdvancesToVendors)'                                  | 'Yes' | '01.01.2021' |
+				| 'PurchaseInvoice DR (R1040B_TaxesOutgoing) CR (R1021B_VendorsTransactions)'                                      | 'Yes' | '01.01.2021' |
+				| 'PurchaseInvoice DR (R1021B_VendorsTransactions) CR (R1020B_AdvancesToVendors_CurrencyRevaluation)'              | 'Yes' | '01.01.2021' |
+				| 'PurchaseInvoice DR (R4050B_StockInventory_R5022T_Expenses) CR (R1021B_VendorsTransactions_CurrencyRevaluation)' | 'Yes' | '01.01.2021' |
+				| 'Retail sales receipt'                                                                                           | 'No'  | ''           |
+				| 'RetailSalesReceipt DR (R5022T_Expenses) CR (R4050B_StockInventory)'                                             | 'Yes' | '01.01.2021' |
+				| 'Sales invoice'                                                                                                  | 'No'  | ''           |
+				| 'SalesInvoice DR (R2021B_CustomersTransactions) CR (R5021T_Revenues)'                                            | 'Yes' | '01.01.2021' |
+				| 'SalesInvoice DR (R5021T_Revenues) CR (R2040B_TaxesIncoming)'                                                    | 'Yes' | '01.01.2021' |
+				| 'SalesInvoice DR (R5022T_Expenses) CR (R4050B_StockInventory)'                                                   | 'Yes' | '01.01.2021' |
+				| 'SalesInvoice DR (R2020B_AdvancesFromCustomers) CR (R2021B_CustomersTransactions)'                               | 'Yes' | '01.01.2021' |
+				| 'SalesInvoice DR (R2020B_AdvancesFromCustomers) CR (R2021B_CustomersTransactions_CurrencyRevaluation)'           | 'Yes' | '01.01.2021' |
+				| 'SalesInvoice DR (R2021B_CustomersTransactions) CR (R5021T_Revenues_CurrencyRevaluation)'                        | 'Yes' | '01.01.2021' |
+				| 'Foreign currency revaluation'                                                                                   | 'No'  | ''           |
+				| 'ForeignCurrencyRevaluation DR (R2020B_AdvancesFromCustomers) CR (R5021T_Revenues)'                              | 'Yes' | '01.01.2021' |
+				| 'ForeignCurrencyRevaluation DR (R5022T_Expenses) CR (R2020B_AdvancesFromCustomers)'                              | 'Yes' | '01.01.2021' |		
 			And I click "Save and close" button
 		* Check creation
 			And "List" table contains lines
-				| 'Description'    | 'Currency movement type'    | 'Currency'    | 'Type'     | 'Variant'           |
-				| 'Test'           | 'Local currency'            | 'TRY'         | 'Legal'    | 'Test analitics'    |
+				| 'Description'       | 'Currency movement type' | 'Currency' | 'Type'  | 'Ledger type variant' |
+				| 'Manager analitics' | 'Local currency'         | 'TRY'      | 'Legal' | 'Manager analitics'   |
 			And I close all client application windows
 			
-Scenario: _099103 create account charts
+
+Scenario: _0991004 create ledger type variant with account charts code mask
 	And I close all client application windows
-	* Open list form
-		Given I open hyperlink "e1cib/list/ChartOfAccounts.Basic"	
-	* Create new element (4050)			 
+	* Open Ledger type variants
+		Given I open hyperlink "e1cib/list/Catalog.LedgerTypeVariants"
+	* Create Ledger type variant
 		And I click the button named "FormCreate"
-		Then "Account chart (Basic) (create)" window is opened
-		And I input "4050" text in the field named "Code"
-		And I input "10" text in the field named "Order"
-		And I input "Stock inventory" text in "ENG" field
-		And I select "Assets" exact value from the drop-down list named "Type"
-		And I click Choice button of the field named "Variant"
+		And I input "LTV with account charts code mask" text in "ENG" field
+		And I input "@@@.@@.@@@" text in "Account charts code mask" field
+		And I click "Save" button	
+		Then the field named "UniqueID" is filled
+		And I delete "$$UniqueID$$" variable
+		And I save the value of the field named "UniqueID" as "$$UniqueID$$"
+		And I click "Save and close" button
+		And I wait "Ledger type variants (create) *" window closing in 20 seconds	
+	* Check
+		And "List" table contains lines
+			| 'Description'                       |
+			| 'LTV with account charts code mask' |
+	And I close all client application windows
+
+Scenario: _0991005 change ledger type variant for ledger type
+	And I close all client application windows
+	* Open ledger type list
+		Given I open hyperlink "e1cib/list/Catalog.LedgerTypes"
 		And I go to line in "List" table
-				| 'Description'              |
-				| 'Management analitics'     |
-		And I select current line in "List" table
+			| 'Description'       |
+			| 'Manager analitics' |
+		ANd I select current line in "List" table
+	* Change ledger type variant 
+		And I select from "Ledger type variant" drop-down list by "LTV" string
+		Then the form attribute named "LedgerTypeVariant" became equal to "LTV with account charts code mask"
+		And I click "Save and close" button
+		And I wait "Manager analitics (Ledger type) *" window closing in 20 seconds
+
+Scenario: _0991006 create AccountingExtraDimensionTypes - test element 
+	And I close all client application windows
+	* Open AccountingExtraDimensionTypes
+		Given I open hyperlink "e1cib/list/ChartOfCharacteristicTypes.AccountingExtraDimensionTypes"		
+	* Create AccountingExtraDimensionType
+		And I click the button named "FormCreate"
+		And I input "Test element" text in "ENG" field
+		And I click Select button of "Value type" field
+		Then "Edit data type" window is opened
+		And I go to line in "" table
+			| ''              |
+			| 'Business unit' |
+		And I click "OK" button
+		And I click "Save" button
+	* Check filling
+		Then the form attribute named "Description_en" became equal to "Test element"
+		Then the field named "UniqueID" is filled
+	* Change UniqueID
+		And I click "Edit unique ID" button
+		And I input "1111" text in "Unique ID" field
+		And I click "Save" button
+		Then the form attribute named "UniqueID" became equal to "1111"
+		And I click "Save and close" button	
+	* Check
+		And "List" table contains lines
+			| 'Description'  |
+			| 'Test element' |
+	And I close all client application windows	
+				
+
+Scenario: _0991008 create Account charts (Basic) - group and assets account
+	And I close all client application windows
+	* Open 	Account charts
+		Given I open hyperlink "e1cib/list/ChartOfAccounts.Basic"
+		And I change the radio button named "LedgerTypeVariantFilter" value to "LTV with account charts code mask"			
+	* Create Group
+		And I click the button named "FormCreate"
+		And I input "405" text in the field named "Code"
+		And I input "10" text in the field named "Order"
+		Then the form attribute named "LedgerTypeVariant" became equal to "LTV with account charts code mask"
+		And I input "Group Assets acccount" text in "ENG" field
+		And I set checkbox "Not used for records"
+		And I set checkbox named "Quantity"
+		And I click "Save" button
+		Then the form attribute named "SearchCode" became equal to "405"
+		Then the form attribute named "Order" became equal to "405"				
+		And I click "Save and close" button
+		* Check creation
+			And "List" table contains lines
+				| 'Code'                   | 'Order' | 'Description'           | 'Type' | 'Ext. Dim 2' | 'Q.'  | 'Ext. Dim 3' | 'C.' | 'Ledger type variant'               | 'Ext. Dim 1' | 'Off-balance' |
+				| 'Account charts (Basic)' | ''      | ''                      | ''     | ''           | ''    | ''           | ''   | ''                                  | ''           | ''            |
+				| '405'                    | '405'   | 'Group Assets acccount' | 'AP'   | ''           | 'Yes' | ''           | 'No' | 'LTV with account charts code mask' | ''           | 'No'          |
+	* Create first account (assets)	
+		And I click the button named "FormCreate"
+		And I input "40501" text in the field named "Code"
+		And the editing text of form attribute named "Code" became equal to "405.01.   "
+		And I click "Save" button
+		Then the form attribute named "Order" became equal to "40501"				
+		And the editing text of form attribute named "SearchCode" became equal to "40501"		
+		And I input "Assets acccount" text in "ENG" field
+		And I select "Assets" exact value from the drop-down list named "Type"
+		And I select from "Ledger type variant" drop-down list by "ltv" string	
 		And I set checkbox named "Quantity"
 		And in the table "ExtDimensionTypes" I click the button named "ExtDimensionTypesAdd"
 		And I select current line in "ExtDimensionTypes" table
@@ -168,50 +392,31 @@ Scenario: _099103 create account charts
 		And I select current line in "List" table
 		And I finish line editing in "ExtDimensionTypes" table
 		And I click "Save and close" button
-		And I wait "Account chart (Basic) (create) *" window closing in 20 seconds
-	* Create new element (5022)	
-		And I go to line in "List" table
-			| 'Code'                      |
-			| 'Account charts (Basic)'    |
-		And I change "Variant" radio button value to "Management analitics"
-		And I click "Create" button
-		Then the form attribute named "Variant" became equal to "Management analitics"		
-		And I input "5022" text in the field named "Code"
-		And I input "70" text in the field named "Order"
-		And I input "Service (expense)" text in "ENG" field
-		And I select "Liabilities" exact value from the drop-down list named "Type"
-		And I set checkbox named "Currency"
-		And in the table "ExtDimensionTypes" I click the button named "ExtDimensionTypesAdd"
-		And I click choice button of "Extra dimension type" attribute in "ExtDimensionTypes" table
-		And I go to line in "List" table
-			| 'Description'   | 'Value type'    |
-			| 'Item'          | 'Item'          |
-		And I select current line in "List" table
-		And I finish line editing in "ExtDimensionTypes" table
-		And in the table "ExtDimensionTypes" I click the button named "ExtDimensionTypesAdd"
-		And I click choice button of "Extra dimension type" attribute in "ExtDimensionTypes" table
-		And I go to line in "List" table
-			| 'Description'    |  'Value type'                  |
-			| 'Expense type'   |  'Expense and revenue type'    |
-		And I select current line in "List" table
-		Then "Account chart (Basic) (create) *" window is opened
-		And I finish line editing in "ExtDimensionTypes" table
-		And in the table "ExtDimensionTypes" I click the button named "ExtDimensionTypesAdd"
-		And I click choice button of "Extra dimension type" attribute in "ExtDimensionTypes" table
-		And I go to line in "List" table
-			| 'Description'     | 'Value type'       |
-			| 'Business unit'   | 'Business unit'    |
-		And I select current line in "List" table
-		And I click "Save and close" button
-	* Create new element (1021)	
+		And I wait "Account chart (Basic) (create) *" window closing in 20 seconds	
+		* Check 
+			And "List" table contains lines
+				| 'Code'                   | 'Order' | 'Description'           | 'Type' | 'Ext. Dim 2' | 'Q.'  | 'Ext. Dim 3' | 'C.' | 'Ledger type variant'               | 'Ext. Dim 1' | 'Off-balance' |
+				| 'Account charts (Basic)' | ''      | ''                      | ''     | ''           | ''    | ''           | ''   | ''                                  | ''           | ''            |
+				| '405'                    | '405'   | 'Group Assets acccount' | 'AP'   | ''           | 'Yes' | ''           | 'No' | 'LTV with account charts code mask' | ''           | 'No'          |
+				| '405.01'                 | '40501' | 'Assets acccount'       | 'A'    | 'Item key'   | 'Yes' | 'Store'      | 'No' | 'LTV with account charts code mask' | 'Item'       | 'No'          |					
+
+Scenario: _0991009 create Account charts (Basic) - liabilities account without group
+	And I close all client application windows
+	* Open 	Account charts
+		Given I open hyperlink "e1cib/list/ChartOfAccounts.Basic"
+		And I change the radio button named "LedgerTypeVariantFilter" value to "LTV with account charts code mask"
+	* Create liabilities account
 		And I go to line in "List" table
 			| 'Code'                      |
 			| 'Account charts (Basic)'    |
 		And I click "Create" button
-		Then the form attribute named "Variant" became equal to "Management analitics"		
-		And I input "1021" text in the field named "Code"
-		And I input "30" text in the field named "Order"
-		And I input "Due to vendors" text in "ENG" field
+		Then the form attribute named "LedgerTypeVariant" became equal to "LTV with account charts code mask"			
+		And I input "1021311" text in the field named "Code"
+		And I click "Save" button
+		And the editing text of form attribute named "Code" became equal to "102.13.11 "
+		Then the form attribute named "SearchCode" became equal to "1021311"
+		Then the form attribute named "Order" became equal to "1021311"						
+		And I input "Liabilities account" text in "ENG" field
 		And I select "Liabilities" exact value from the drop-down list named "Type"
 		And I set checkbox named "Currency"
 		And in the table "ExtDimensionTypes" I click the button named "ExtDimensionTypesAdd"
@@ -227,463 +432,966 @@ Scenario: _099103 create account charts
 			| 'Description'     |
 			| 'Partner term'    |
 		And I select current line in "List" table
-		Then "Account chart (Basic) (create) *" window is opened
 		And I finish line editing in "ExtDimensionTypes" table
 		And in the table "ExtDimensionTypes" I click the button named "ExtDimensionTypesAdd"
 		And I click choice button of "Extra dimension type" attribute in "ExtDimensionTypes" table
 		And I go to line in "List" table
 			| 'Description'    |
-			| 'Legal name'     |
+			| 'Legal name contract'     |
 		And I select current line in "List" table
 		And I click "Save and close" button
-	* Create new element (1020)	
-		And I go to line in "List" table
-			| 'Code'                      |
-			| 'Account charts (Basic)'    |
-		And I click "Create" button
-		Then the form attribute named "Variant" became equal to "Management analitics"		
-		And I input "1020" text in the field named "Code"
-		And I input "31" text in the field named "Order"
-		And I input "Vendors advances" text in "ENG" field
-		And I select "Liabilities" exact value from the drop-down list named "Type"
-		And I set checkbox named "Currency"
-		And in the table "ExtDimensionTypes" I click the button named "ExtDimensionTypesAdd"
-		And I click choice button of "Extra dimension type" attribute in "ExtDimensionTypes" table
-		And I go to line in "List" table
-			| 'Description'    |
-			| 'Partner'        |
-		And I select current line in "List" table
-		And I finish line editing in "ExtDimensionTypes" table
-		And in the table "ExtDimensionTypes" I click the button named "ExtDimensionTypesAdd"
-		And I click choice button of "Extra dimension type" attribute in "ExtDimensionTypes" table
-		And I go to line in "List" table
-			| 'Description'     |
-			| 'Partner term'    |
-		And I select current line in "List" table
-		And I click "Save and close" button
-	* Create new element (2021)	
-		And I go to line in "List" table
-			| 'Code'                      |
-			| 'Account charts (Basic)'    |
-		And I click "Create" button
-		Then the form attribute named "Variant" became equal to "Management analitics"		
-		And I input "2021" text in the field named "Code"
-		And I input "40" text in the field named "Order"
-		And I input "Customers due" text in "ENG" field
-		And I select "Liabilities" exact value from the drop-down list named "Type"
-		And I set checkbox named "Currency"
-		And in the table "ExtDimensionTypes" I click the button named "ExtDimensionTypesAdd"
-		And I click choice button of "Extra dimension type" attribute in "ExtDimensionTypes" table
-		And I go to line in "List" table
-			| 'Description'    |
-			| 'Partner'        |
-		And I select current line in "List" table
-		And I finish line editing in "ExtDimensionTypes" table
-		And in the table "ExtDimensionTypes" I click the button named "ExtDimensionTypesAdd"
-		And I click choice button of "Extra dimension type" attribute in "ExtDimensionTypes" table
-		And I go to line in "List" table
-			| 'Description'     |
-			| 'Partner term'    |
-		And I select current line in "List" table
-		Then "Account chart (Basic) (create) *" window is opened
-		And I finish line editing in "ExtDimensionTypes" table
-		And in the table "ExtDimensionTypes" I click the button named "ExtDimensionTypesAdd"
-		And I click choice button of "Extra dimension type" attribute in "ExtDimensionTypes" table
-		And I go to line in "List" table
-			| 'Description'    |
-			| 'Legal name'     |
-		And I select current line in "List" table
-		And I click "Save and close" button
-	* Create new element (2020)	
-		And I go to line in "List" table
-			| 'Code'                      |
-			| 'Account charts (Basic)'    |
-		And I click "Create" button
-		Then the form attribute named "Variant" became equal to "Management analitics"		
-		And I input "2020" text in the field named "Code"
-		And I input "41" text in the field named "Order"
-		And I input "Customers advances" text in "ENG" field
-		And I select "Liabilities" exact value from the drop-down list named "Type"
-		And I set checkbox named "Currency"
-		And in the table "ExtDimensionTypes" I click the button named "ExtDimensionTypesAdd"
-		And I click choice button of "Extra dimension type" attribute in "ExtDimensionTypes" table
-		And I go to line in "List" table
-			| 'Description'    |
-			| 'Partner'        |
-		And I select current line in "List" table
-		And I finish line editing in "ExtDimensionTypes" table
-		And in the table "ExtDimensionTypes" I click the button named "ExtDimensionTypesAdd"
-		And I click choice button of "Extra dimension type" attribute in "ExtDimensionTypes" table
-		And I go to line in "List" table
-			| 'Description'    |
-			| 'Legal name'     |
-		And I select current line in "List" table
-		And I click "Save and close" button
-	* Create new element (1040)	
-		And I go to line in "List" table
-			| 'Code'                      |
-			| 'Account charts (Basic)'    |
-		And I click "Create" button
-		Then the form attribute named "Variant" became equal to "Management analitics"		
-		And I input "1040" text in the field named "Code"
-		And I input "50" text in the field named "Order"
-		And I input "Tax outgoing" text in "ENG" field
-		And I select "Liabilities" exact value from the drop-down list named "Type"
-		And I set checkbox named "Currency"
-		And in the table "ExtDimensionTypes" I click the button named "ExtDimensionTypesAdd"
-		And I click choice button of "Extra dimension type" attribute in "ExtDimensionTypes" table
-		And I go to line in "List" table
-			| 'Description'    |
-			| 'Tax type'       |
-		And I select current line in "List" table
-		And I finish line editing in "ExtDimensionTypes" table
-		And I click "Save and close" button
+	* Check 
+		And "List" table contains lines
+			| 'Code'                   | 'Order'   | 'Description'         | 'Type' | 'Ext. Dim 2'   | 'Q.' | 'Ext. Dim 3'          | 'C.'  | 'Ledger type variant'               | 'Ext. Dim 1' | 'Off-balance' |
+			| 'Account charts (Basic)' | ''        | ''                    | ''     | ''             | ''   | ''                    | ''    | ''                                  | ''           | ''            |
+			| '102.13.11'              | '1021311' | 'Liabilities account' | 'P'    | 'Partner term' | 'No' | 'Legal name contract' | 'Yes' | 'LTV with account charts code mask' | 'Partner'    | 'No'          |
 		
+Scenario: _0991010 create Account charts (Basic) - Assets/Liabilities account, Off-balance
+	And I close all client application windows
+	* Open 	Account charts
+		Given I open hyperlink "e1cib/list/ChartOfAccounts.Basic"
+		And I change the radio button named "LedgerTypeVariantFilter" value to "LTV with account charts code mask"
+	* Create liabilities account
+		And I go to line in "List" table
+			| 'Code'                      |
+			| 'Account charts (Basic)'    |
+		And I click "Create" button
+		Then the form attribute named "LedgerTypeVariant" became equal to "LTV with account charts code mask"			
+		And I input "7021311" text in the field named "Code"
+		And I click "Save" button
+		And the editing text of form attribute named "Code" became equal to "702.13.11 "
+		Then the form attribute named "SearchCode" became equal to "7021311"
+		Then the form attribute named "Order" became equal to "7021311"						
+		And I input "Assets/Liabilities account (Off-balance)" text in "ENG" field
+		And I select "Assets/Liabilities" exact value from the drop-down list named "Type"
+		And I set checkbox named "OffBalance"
+		And in the table "ExtDimensionTypes" I click the button named "ExtDimensionTypesAdd"
+		And I select "revenue" from "Extra dimension type" drop-down list by string in "ExtDimensionTypes" table
+		And I set "Turnovers only" checkbox in "ExtDimensionTypes" table
+		And I finish line editing in "ExtDimensionTypes" table	
+		And in the table "ExtDimensionTypes" I click the button named "ExtDimensionTypesAdd"
+		And I select "store" from "Extra dimension type" drop-down list by string in "ExtDimensionTypes" table
+		And I finish line editing in "ExtDimensionTypes" table
+		And I click "Save" button
+		And "ExtDimensionTypes" table became equal
+			| 'Extra dimension type'     | 'Turnovers only' | 'Quantity' | 'Currency' | 'Amount' |
+			| 'Expense and revenue type' | 'Yes'            | 'No'       | 'No'       | 'Yes'    |
+			| 'Store'                    | 'No'             | 'No'       | 'No'       | 'Yes'    |				
+		And I click "Save and close" button
+	* Check 
+		And "List" table contains lines
+			| 'Code'                   | 'Order'   | 'Description'                              | 'Type' | 'Ext. Dim 2'   | 'Q.'  | 'Ext. Dim 3'          | 'C.'  | 'Ledger type variant'               | 'Ext. Dim 1'                       | 'Off-balance' |
+			| '702.13.11'              | '7021311' | 'Assets/Liabilities account (Off-balance)' | 'AP'   | 'Store'        | 'No'  | ''                    | 'No'  | 'LTV with account charts code mask' | 'Expense and revenue type (turn.)' | 'Yes'         |
+		And I close all client application windows
+		
+Scenario: _0991013 check account charts code mask
+	And I close all client application windows
+	* Open 	Account charts
+		Given I open hyperlink "e1cib/list/ChartOfAccounts.Basic"
+		And I change the radio button named "LedgerTypeVariantFilter" value to "LTV with account charts code mask"
+	* Create liabilities account
+		And I go to line in "List" table
+			| 'Code'                      |
+			| 'Account charts (Basic)'    |
+		And I click "Create" button 
+	* Check charts code mask (@@@.@@.@@@)
+		And I input "898.99.008" text in the field named "Code"
+		And the editing text of form attribute named "Code" became equal to "898.99.008"
+		And I input "89899008" text in the field named "Code"		
+		And the editing text of form attribute named "Code" became equal to "898.99.008"
+		And I input "898990089" text in the field named "Code"
+		And the editing text of form attribute named "Code" became equal to "898.99.008"
+		And I input "898*90089" text in the field named "Code"
+		And the editing text of form attribute named "Code" became equal to "898.  .   "
+		And I input "898 90089" text in the field named "Code"		
+		And the editing text of form attribute named "Code" became equal to "898.9 .008"
+	And I close all client application windows
+	
+Scenario: _0991015 check load charts of accounts (correct data)
+	And I close all client application windows
+	* Open form load charts of accounts 
+		Given I open hyperlink "e1cib/list/ChartOfAccounts.Basic"
+		And I click "Load charts of accounts" button
+	* Select Descraption language
+		And I move to "Description" tab
+		And I go to line in "Languages" table
+			| 'Value' |
+			| 'EN'    |	
+		And I set "Check" checkbox in "Languages" table
+		And I finish line editing in "Languages" table
+		And I move to "Description" tab
+	* Filling load data table
+		* Group
+			And in "SpreadsheetDocument" spreadsheet document I move to "R2C1" cell
+			And in "SpreadsheetDocument" spreadsheet document I double-click the current cell
+			And in "SpreadsheetDocument" spreadsheet document I input text "$$UniqueID$$"
+			And in "SpreadsheetDocument" spreadsheet document I move to "R2C2" cell
+			And in "SpreadsheetDocument" spreadsheet document I double-click the current cell
+			And in "SpreadsheetDocument" spreadsheet document I input text "True"
+			And in "SpreadsheetDocument" spreadsheet document I move to "R2C4" cell
+			And in "SpreadsheetDocument" spreadsheet document I double-click the current cell
+			And in "SpreadsheetDocument" spreadsheet document I input text "908990"
+			And in "SpreadsheetDocument" spreadsheet document I move to "R2C5" cell
+			And in "SpreadsheetDocument" spreadsheet document I double-click the current cell
+			And in "SpreadsheetDocument" spreadsheet document I input text "Test group"
+			And in "SpreadsheetDocument" spreadsheet document I move to "R2C6" cell
+			And in "SpreadsheetDocument" spreadsheet document I double-click the current cell
+			And in "SpreadsheetDocument" spreadsheet document I input text "True"
+			And in "SpreadsheetDocument" spreadsheet document I move to "R2C7" cell
+			And in "SpreadsheetDocument" spreadsheet document I double-click the current cell
+			And in "SpreadsheetDocument" spreadsheet document I input text "P"
+			And in "SpreadsheetDocument" spreadsheet document I move to "R2C8" cell
+			And in "SpreadsheetDocument" spreadsheet document I move to "R2C10" cell
+			And in "SpreadsheetDocument" spreadsheet document I double-click the current cell
+			And in "SpreadsheetDocument" spreadsheet document I input text "130"
+			And in "SpreadsheetDocument" spreadsheet document I move to "R2C13" cell
+			And in "SpreadsheetDocument" spreadsheet document I double-click the current cell
+			And in "SpreadsheetDocument" spreadsheet document I input text "True"
+			And in "SpreadsheetDocument" spreadsheet document I move to "R2C14" cell
+			And in "SpreadsheetDocument" spreadsheet document I double-click the current cell
+			And in "SpreadsheetDocument" spreadsheet document I input text "True"
+		* Assets account
+			And in "SpreadsheetDocument" spreadsheet document I move to "R3C1" cell
+			And in "SpreadsheetDocument" spreadsheet document I double-click the current cell
+			And in "SpreadsheetDocument" spreadsheet document I input text "$$UniqueID$$"
+			And in "SpreadsheetDocument" spreadsheet document I move to "R3C4" cell
+			And in "SpreadsheetDocument" spreadsheet document I double-click the current cell
+			And in "SpreadsheetDocument" spreadsheet document I input text "90878699"
+			And in "SpreadsheetDocument" spreadsheet document I move to "R3C5" cell
+			And in "SpreadsheetDocument" spreadsheet document I double-click the current cell
+			And in "SpreadsheetDocument" spreadsheet document I input text "Test assets account"
+			And in "SpreadsheetDocument" spreadsheet document I move to "R3C7" cell
+			And in "SpreadsheetDocument" spreadsheet document I double-click the current cell
+			And in "SpreadsheetDocument" spreadsheet document I input text "A"
+			And in "SpreadsheetDocument" spreadsheet document I move to "R3C8" cell
+			And in "SpreadsheetDocument" spreadsheet document I double-click the current cell
+			And in "SpreadsheetDocument" spreadsheet document I input text "True"
+			And in "SpreadsheetDocument" spreadsheet document I move to "R3C10" cell
+			And in "SpreadsheetDocument" spreadsheet document I double-click the current cell
+			And in "SpreadsheetDocument" spreadsheet document I input text "127"
+			And in "SpreadsheetDocument" spreadsheet document I move to "R3C13" cell
+			And in "SpreadsheetDocument" spreadsheet document I double-click the current cell
+			And in "SpreadsheetDocument" spreadsheet document I input text "True"
+			And in "SpreadsheetDocument" spreadsheet document I move to "R3C14" cell
+			And in "SpreadsheetDocument" spreadsheet document I double-click the current cell
+			And in "SpreadsheetDocument" spreadsheet document I input text "True"
+			And in "SpreadsheetDocument" spreadsheet document I move to "R3C15" cell
+			And in "SpreadsheetDocument" spreadsheet document I double-click the current cell
+			And in "SpreadsheetDocument" spreadsheet document I input text "128"
+			And in "SpreadsheetDocument" spreadsheet document I move to "R3C16" cell
+			And in "SpreadsheetDocument" spreadsheet document I double-click the current cell
+			And in "SpreadsheetDocument" spreadsheet document I input text "True"
+			And in "SpreadsheetDocument" spreadsheet document I move to "R3C17" cell
+			And in "SpreadsheetDocument" spreadsheet document I double-click the current cell
+			And in "SpreadsheetDocument" spreadsheet document I input text "True"
+			And in "SpreadsheetDocument" spreadsheet document I move to "R3C20" cell
+			And in "SpreadsheetDocument" spreadsheet document I double-click the current cell
+			And in "SpreadsheetDocument" spreadsheet document I input text "127"
+			And in "SpreadsheetDocument" spreadsheet document I move to "R3C21" cell
+			And in "SpreadsheetDocument" spreadsheet document I double-click the current cell
+			And in "SpreadsheetDocument" spreadsheet document I input text "True"
+		* Liabilities account with owner
+			And in "SpreadsheetDocument" spreadsheet document I move to "R4C1" cell
+			And in "SpreadsheetDocument" spreadsheet document I double-click the current cell
+			And in "SpreadsheetDocument" spreadsheet document I input text "$$UniqueID$$"
+			And in "SpreadsheetDocument" spreadsheet document I move to "R4C3" cell
+			And in "SpreadsheetDocument" spreadsheet document I double-click the current cell
+			And in "SpreadsheetDocument" spreadsheet document I input text "908990"
+			And in "SpreadsheetDocument" spreadsheet document I move to "R4C4" cell
+			And in "SpreadsheetDocument" spreadsheet document I double-click the current cell
+			And in "SpreadsheetDocument" spreadsheet document I input text "10878699"
+			And in "SpreadsheetDocument" spreadsheet document I move to "R4C5" cell
+			And in "SpreadsheetDocument" spreadsheet document I double-click the current cell
+			And in "SpreadsheetDocument" spreadsheet document I input text "Test liabilities account"
+			And in "SpreadsheetDocument" spreadsheet document I move to "R4C7" cell
+			And in "SpreadsheetDocument" spreadsheet document I double-click the current cell
+			And in "SpreadsheetDocument" spreadsheet document I input text "P"
+			And in "SpreadsheetDocument" spreadsheet document I move to "R4C8" cell
+			And in "SpreadsheetDocument" spreadsheet document I double-click the current cell
+			And in "SpreadsheetDocument" spreadsheet document I input text "True"
+			And in "SpreadsheetDocument" spreadsheet document I move to "R4C10" cell
+			And in "SpreadsheetDocument" spreadsheet document I double-click the current cell
+			And in "SpreadsheetDocument" spreadsheet document I input text "127"
+			And in "SpreadsheetDocument" spreadsheet document I move to "R4C13" cell
+			And in "SpreadsheetDocument" spreadsheet document I double-click the current cell
+			And in "SpreadsheetDocument" spreadsheet document I input text "True"
+			And in "SpreadsheetDocument" spreadsheet document I move to "R4C14" cell
+			And in "SpreadsheetDocument" spreadsheet document I double-click the current cell
+			And in "SpreadsheetDocument" spreadsheet document I input text "True"
+			And in "SpreadsheetDocument" spreadsheet document I move to "R4C15" cell
+			And in "SpreadsheetDocument" spreadsheet document I double-click the current cell
+			And in "SpreadsheetDocument" spreadsheet document I input text "128"
+			And in "SpreadsheetDocument" spreadsheet document I move to "R4C16" cell
+			And in "SpreadsheetDocument" spreadsheet document I double-click the current cell
+			And in "SpreadsheetDocument" spreadsheet document I input text "True"
+			And in "SpreadsheetDocument" spreadsheet document I move to "R4C17" cell
+			And in "SpreadsheetDocument" spreadsheet document I double-click the current cell
+			And in "SpreadsheetDocument" spreadsheet document I input text "True"
+			And in "SpreadsheetDocument" spreadsheet document I move to "R4C20" cell
+			And in "SpreadsheetDocument" spreadsheet document I double-click the current cell
+			And in "SpreadsheetDocument" spreadsheet document I input text "127"
+			And in "SpreadsheetDocument" spreadsheet document I move to "R4C21" cell
+			And in "SpreadsheetDocument" spreadsheet document I double-click the current cell
+			And in "SpreadsheetDocument" spreadsheet document I input text "True"
+			And I click "Load" button
+			Then "1C:Enterprise" window is opened
+			And I click "OK" button
+			When in opened panel I select "Account charts (Basic)"
+			Then "Account charts (Basic)" window is opened
+			And I click "Refresh" button
+	* Check
+		And "List" table contains lines
+			| 'Code'                   | 'Order'    | 'Description'         | 'Type' | 'Ext. Dim 2'       | 'Q.'  | 'Ext. Dim 3'       | 'C.'  | 'Ledger type variant'               | 'Ext. Dim 1' | 'Off-balance' |
+			| 'Account charts (Basic)' | ''         | ''                    | ''     | ''                 | ''    | ''                 | ''    | ''                                  | ''           | ''            |
+			| '90878699'               | '90878699' | 'Test assets account' | 'A'    | 'Item key (turn.)' | 'Yes' | 'Tax type (turn.)' | 'No'  | 'LTV with account charts code mask' | 'Item'       | 'No'          |
+			| '908990'                 | '908990'   | 'Test group'          | 'P'    | ''                 | 'No'  | ''                 | 'Yes' | 'LTV with account charts code mask' | 'Partner'    | 'No'          |
+		And I expand a line in "List" table
+			| 'C.'  | 'Code'   | 'Description' | 'Ext. Dim 1' | 'Ledger type variant'               | 'Off-balance' | 'Order'  | 'Q.' | 'Type' |
+			| 'Yes' | '908990' | 'Test group'  | 'Partner'    | 'LTV with account charts code mask' | 'No'          | '908990' | 'No' | 'P'    |
+		* Liabilities account
+			And I go to line in "List" table
+				| 'C.' | 'Code'      | 'Description'              | 'Ext. Dim 1' | 'Ext. Dim 2'       | 'Ext. Dim 3'       | 'Ledger type variant'               | 'Off-balance' | 'Order'     | 'Q.'  | 'Type' |
+				| 'No' | '10878699'  | 'Test liabilities account' | 'Item'       | 'Item key (turn.)' | 'Tax type (turn.)' | 'LTV with account charts code mask' | 'No'          | '10878699'  | 'Yes' | 'P'    |
+			And I select current line in "List" table
+			And the editing text of form attribute named "Code" became equal to "108.78.699"
+			Then the form attribute named "Currency" became equal to "No"
+			Then the form attribute named "Description_en" became equal to "Test liabilities account"
+			And "ExtDimensionTypes" table became equal
+				| 'Extra dimension type' | 'Currency' | 'Turnovers only' | 'Quantity' | 'Amount' |
+				| 'Item'                 | 'Yes'      | 'No'             | 'No'       | 'Yes'    |
+				| 'Item key'             | 'No'       | 'Yes'            | 'Yes'      | 'No'     |
+				| 'Tax type'             | 'No'       | 'Yes'            | 'No'       | 'No'     |
+			
+			Then the form attribute named "LedgerTypeVariant" became equal to "LTV with account charts code mask"
+			Then the form attribute named "NotUsedForRecords" became equal to "No"
+			Then the form attribute named "OffBalance" became equal to "No"
+			Then the form attribute named "Order" became equal to "10878699"
+			Then the form attribute named "Parent" became equal to "908990"
+			Then the form attribute named "Quantity" became equal to "Yes"
+			Then the form attribute named "SearchCode" became equal to "10878699"
+			Then the form attribute named "Type" became equal to "Liabilities"
+			And I close current window
+		* Assets account
+			And I go to line in "List" table
+				| 'C.' | 'Code'      | 'Description'         | 'Ext. Dim 1' | 'Ext. Dim 2'       | 'Ext. Dim 3'       | 'Ledger type variant'               | 'Off-balance' | 'Order'     | 'Q.'  | 'Type' |
+				| 'No' | '90878699'  | 'Test assets account' | 'Item'       | 'Item key (turn.)' | 'Tax type (turn.)' | 'LTV with account charts code mask' | 'No'          | '90878699'  | 'Yes' | 'A'    |
+			And I select current line in "List" table
+			And the editing text of form attribute named "Code" became equal to "908.78.699"
+			Then the form attribute named "Currency" became equal to "No"
+			Then the form attribute named "Description_en" became equal to "Test assets account"
+			And "ExtDimensionTypes" table became equal
+				| 'Extra dimension type' | 'Currency' | 'Turnovers only' | 'Quantity' | 'Amount' |
+				| 'Item'                 | 'Yes'      | 'No'             | 'No'       | 'Yes'    |
+				| 'Item key'             | 'No'       | 'Yes'            | 'Yes'      | 'No'     |
+				| 'Tax type'             | 'No'       | 'Yes'            | 'No'       | 'No'     |
+			
+			Then the form attribute named "LedgerTypeVariant" became equal to "LTV with account charts code mask"
+			Then the form attribute named "NotUsedForRecords" became equal to "No"
+			Then the form attribute named "OffBalance" became equal to "No"
+			Then the form attribute named "Order" became equal to "90878699"
+			Then the form attribute named "Parent" became equal to ""
+			Then the form attribute named "Quantity" became equal to "Yes"
+			Then the form attribute named "SearchCode" became equal to "90878699"
+			Then the form attribute named "Type" became equal to "Assets"
+			And I close current window
+		* Group
+			And I go to line in "List" table
+				| 'C.'  | 'Code'   | 'Description' | 'Ext. Dim 1' | 'Ledger type variant'               | 'Off-balance' | 'Order'  | 'Q.' | 'Type' |
+				| 'Yes' | '908990' | 'Test group'  | 'Partner'    | 'LTV with account charts code mask' | 'No'          | '908990' | 'No' | 'P'    |
+			And I select current line in "List" table
+			And the editing text of form attribute named "Code" became equal to "908.99.0  "
+			Then the form attribute named "Currency" became equal to "Yes"
+			Then the form attribute named "Description_en" became equal to "Test group"
+			And "ExtDimensionTypes" table became equal
+				| 'Extra dimension type' | 'Currency' | 'Turnovers only' | 'Quantity' | 'Amount' |
+				| 'Partner'              | 'Yes'      | 'No'             | 'No'       | 'Yes'    |
+			Then the form attribute named "LedgerTypeVariant" became equal to "LTV with account charts code mask"
+			Then the form attribute named "NotUsedForRecords" became equal to "Yes"
+			Then the form attribute named "OffBalance" became equal to "No"
+			Then the form attribute named "Order" became equal to "908990"
+			Then the form attribute named "Parent" became equal to ""
+			Then the form attribute named "Quantity" became equal to "No"
+			Then the form attribute named "SearchCode" became equal to "908990"
+			Then the form attribute named "Type" became equal to "Liabilities"
+	
 				
-Scenario: _099104 create account for item key
+	
+Scenario: _0991016 check load charts of accounts (incorrect data)	
+	And I close all client application windows					
+	* Open form load charts of accounts 
+		Given I open hyperlink "e1cib/list/ChartOfAccounts.Basic"
+		And I click "Load charts of accounts" button
+	* Select Descraption language
+		And I move to "Description" tab
+		And I go to line in "Languages" table
+			| 'Value' |
+			| 'EN'    |	
+		And I set "Check" checkbox in "Languages" table
+		And I finish line editing in "Languages" table
+		And I move to "Description" tab
+	* Try load account without ledger type variant
+		And in "SpreadsheetDocument" spreadsheet document I move to "R2C1" cell
+		And in "SpreadsheetDocument" spreadsheet document I double-click the current cell
+		And in "SpreadsheetDocument" spreadsheet document I input text " "
+		And in "SpreadsheetDocument" spreadsheet document I move to "R2C4" cell
+		And in "SpreadsheetDocument" spreadsheet document I double-click the current cell
+		And in "SpreadsheetDocument" spreadsheet document I input text "50878997"
+		And in "SpreadsheetDocument" spreadsheet document I move to "R2C5" cell
+		And in "SpreadsheetDocument" spreadsheet document I double-click the current cell
+		And in "SpreadsheetDocument" spreadsheet document I input text "Test account (manager analytics)"
+		And in "SpreadsheetDocument" spreadsheet document I move to "R2C7" cell
+		And in "SpreadsheetDocument" spreadsheet document I double-click the current cell
+		And in "SpreadsheetDocument" spreadsheet document I input text "A"
+		And in "SpreadsheetDocument" spreadsheet document I move to "R2C8" cell
+		And in "SpreadsheetDocument" spreadsheet document I double-click the current cell
+		And in "SpreadsheetDocument" spreadsheet document I input text "True"
+		And in "SpreadsheetDocument" spreadsheet document I move to "R2C10" cell
+		And in "SpreadsheetDocument" spreadsheet document I double-click the current cell
+		And in "SpreadsheetDocument" spreadsheet document I input text "127"
+		And in "SpreadsheetDocument" spreadsheet document I move to "R2C13" cell
+		And in "SpreadsheetDocument" spreadsheet document I double-click the current cell
+		And in "SpreadsheetDocument" spreadsheet document I input text "True"
+		And in "SpreadsheetDocument" spreadsheet document I move to "R2C14" cell
+		And in "SpreadsheetDocument" spreadsheet document I double-click the current cell
+		And in "SpreadsheetDocument" spreadsheet document I input text "True"
+		And in "SpreadsheetDocument" spreadsheet document I move to "R2C15" cell
+		And in "SpreadsheetDocument" spreadsheet document I double-click the current cell
+		And in "SpreadsheetDocument" spreadsheet document I input text "128"
+		And in "SpreadsheetDocument" spreadsheet document I move to "R2C16" cell
+		And in "SpreadsheetDocument" spreadsheet document I double-click the current cell
+		And in "SpreadsheetDocument" spreadsheet document I input text "True"
+		And in "SpreadsheetDocument" spreadsheet document I move to "R2C17" cell
+		And in "SpreadsheetDocument" spreadsheet document I double-click the current cell
+		And in "SpreadsheetDocument" spreadsheet document I input text "True"
+		And in "SpreadsheetDocument" spreadsheet document I move to "R2C20" cell
+		And in "SpreadsheetDocument" spreadsheet document I double-click the current cell
+		And in "SpreadsheetDocument" spreadsheet document I input text "127"
+		And in "SpreadsheetDocument" spreadsheet document I move to "R2C21" cell
+		And in "SpreadsheetDocument" spreadsheet document I double-click the current cell
+		And in "SpreadsheetDocument" spreadsheet document I input text "True"
+	* Try load
+		And I click "Load" button
+		When in opened panel I select "Account charts (Basic)"
+		And "List" table does not contain lines	
+			| 'Description'                      |
+			| 'Test account (manager analytics)' |
+		When in opened panel I select "Load chart of accounts"
+	* Fill ledger type, delete account number
+		And in "SpreadsheetDocument" spreadsheet document I move to "R2C1" cell
+		And in "SpreadsheetDocument" spreadsheet document I double-click the current cell
+		And in "SpreadsheetDocument" spreadsheet document I input text "$$UniqueIDManagerLT$$"
+		And in "SpreadsheetDocument" spreadsheet document I move to "R2C4" cell
+		And in "SpreadsheetDocument" spreadsheet document I double-click the current cell
+		And in "SpreadsheetDocument" spreadsheet document I input text " "
+	* Try load
+		And I click "Load" button
+		When in opened panel I select "Account charts (Basic)"
+		And "List" table does not contain lines	
+			| 'Description'                      |
+			| 'Test account (manager analytics)' |
+		When in opened panel I select "Load chart of accounts"
+	* Fill account, delete description
+		And in "SpreadsheetDocument" spreadsheet document I move to "R2C4" cell
+		And in "SpreadsheetDocument" spreadsheet document I double-click the current cell
+		And in "SpreadsheetDocument" spreadsheet document I input text "50878997"
+		And in "SpreadsheetDocument" spreadsheet document I move to "R2C5" cell
+		And in "SpreadsheetDocument" spreadsheet document I double-click the current cell
+		And in "SpreadsheetDocument" spreadsheet document I input text " "
+	* Try load
+		And I click "Load" button
+		When in opened panel I select "Account charts (Basic)"
+		And "List" table does not contain lines	
+			| 'Description'                      |
+			| 'Test account (manager analytics)' |
+		When in opened panel I select "Load chart of accounts"
+	* Fill description and load sccount
+		And in "SpreadsheetDocument" spreadsheet document I move to "R2C5" cell
+		And in "SpreadsheetDocument" spreadsheet document I double-click the current cell
+		And in "SpreadsheetDocument" spreadsheet document I input text "Test account (manager analytics)"	
+		And I click "Load" button					
+		Then "1C:Enterprise" window is opened
+		And I click "OK" button
+	* Check
+		When in opened panel I select "Account charts (Basic)"	
+		And I click "Refresh" button
+		And "List" table contains lines	
+			| 'Description'                      |
+			| 'Test account (manager analytics)' |
+		And I close all client application windows
+
+Scenario: _0991017 retrying to upload the same account
+	And I close all client application windows					
+	* Open form load charts of accounts 
+		Given I open hyperlink "e1cib/list/ChartOfAccounts.Basic"
+		And I click "Load charts of accounts" button
+	* Select Description language
+		And I move to "Description" tab
+		And I go to line in "Languages" table
+			| 'Value' |
+			| 'EN'    |	
+		And I set "Check" checkbox in "Languages" table
+		And I finish line editing in "Languages" table
+		And I move to "Description" tab
+	* Try load account without ledger type variant
+		And in "SpreadsheetDocument" spreadsheet document I move to "R2C1" cell
+		And in "SpreadsheetDocument" spreadsheet document I double-click the current cell
+		And in "SpreadsheetDocument" spreadsheet document I input text "$$UniqueIDManagerLT$$"
+		And in "SpreadsheetDocument" spreadsheet document I move to "R2C4" cell
+		And in "SpreadsheetDocument" spreadsheet document I double-click the current cell
+		And in "SpreadsheetDocument" spreadsheet document I input text "50878997"
+		And in "SpreadsheetDocument" spreadsheet document I move to "R2C5" cell
+		And in "SpreadsheetDocument" spreadsheet document I double-click the current cell
+		And in "SpreadsheetDocument" spreadsheet document I input text "Test account (manager analytics)"
+		And in "SpreadsheetDocument" spreadsheet document I move to "R2C7" cell
+		And in "SpreadsheetDocument" spreadsheet document I double-click the current cell
+		And in "SpreadsheetDocument" spreadsheet document I input text "A"
+		And in "SpreadsheetDocument" spreadsheet document I move to "R2C8" cell
+		And in "SpreadsheetDocument" spreadsheet document I double-click the current cell
+		And in "SpreadsheetDocument" spreadsheet document I input text "True"
+		And in "SpreadsheetDocument" spreadsheet document I move to "R2C10" cell
+		And in "SpreadsheetDocument" spreadsheet document I double-click the current cell
+		And in "SpreadsheetDocument" spreadsheet document I input text "127"
+		And in "SpreadsheetDocument" spreadsheet document I move to "R2C13" cell
+		And in "SpreadsheetDocument" spreadsheet document I double-click the current cell
+		And in "SpreadsheetDocument" spreadsheet document I input text "True"
+		And in "SpreadsheetDocument" spreadsheet document I move to "R2C14" cell
+		And in "SpreadsheetDocument" spreadsheet document I double-click the current cell
+		And in "SpreadsheetDocument" spreadsheet document I input text "True"
+		And in "SpreadsheetDocument" spreadsheet document I move to "R2C15" cell
+		And in "SpreadsheetDocument" spreadsheet document I double-click the current cell
+		And in "SpreadsheetDocument" spreadsheet document I input text "128"
+		And in "SpreadsheetDocument" spreadsheet document I move to "R2C16" cell
+		And in "SpreadsheetDocument" spreadsheet document I double-click the current cell
+		And in "SpreadsheetDocument" spreadsheet document I input text "True"
+		And in "SpreadsheetDocument" spreadsheet document I move to "R2C17" cell
+		And in "SpreadsheetDocument" spreadsheet document I double-click the current cell
+		And in "SpreadsheetDocument" spreadsheet document I input text "True"
+		And in "SpreadsheetDocument" spreadsheet document I move to "R2C20" cell
+		And in "SpreadsheetDocument" spreadsheet document I double-click the current cell
+		And in "SpreadsheetDocument" spreadsheet document I input text "127"
+		And in "SpreadsheetDocument" spreadsheet document I move to "R2C21" cell
+		And in "SpreadsheetDocument" spreadsheet document I double-click the current cell
+		And in "SpreadsheetDocument" spreadsheet document I input text "True"
+		And I click "Load" button					
+		Then "1C:Enterprise" window is opened
+		And I click "OK" button
+	* Check
+		When in opened panel I select "Account charts (Basic)"	
+		And I click "Refresh" button
+		And I change the radio button named "LedgerTypeVariantFilter" value to "Manager analitics"
+		Then the number of "List" table lines is "меньше или равно" "2"		
+		And "List" table contains lines	
+			| 'Description'                      |
+			| 'Test account (manager analytics)' |
+	* Load description for RU Language
+		When in opened panel I select "Load chart of accounts"
+		* Select Description language
+			And I move to "Description" tab
+			And I go to line in "Languages" table
+				| 'Value' |
+				| 'EN'    |	
+			And I remove "Check" checkbox in "Languages" table
+			And I go to line in "Languages" table
+				| 'Value' |
+				| 'RU'    |	
+			And I set "Check" checkbox in "Languages" table
+			And I finish line editing in "Languages" table
+			And I move to "Description" tab
+		And in "SpreadsheetDocument" spreadsheet document I move to "R2C5" cell
+		And in "SpreadsheetDocument" spreadsheet document I double-click the current cell
+		And in "SpreadsheetDocument" spreadsheet document I input text "Тестовый счет (manager analytics)"		
+		And I click "Load" button					
+		Then "1C:Enterprise" window is opened
+		And I click "OK" button
+	* Check
+		When in opened panel I select "Account charts (Basic)"	
+		And I go to line in "List" table
+			| 'Description'                      |
+			| 'Test account (manager analytics)' |
+		And I select current line in "List" table
+		And I click Open button of "ENG" field
+		Then the form attribute named "Description_ru" became equal to "Тестовый счет (manager analytics)"
+		Then the form attribute named "Description_en" became equal to "Test account (manager analytics)"
+		And I close all client application windows
+
+Scenario: _0991021 accounts settings for Cash account (general for company)
+	And I close all client application windows
+	* Open list form
+		Given I open hyperlink "e1cib/list/InformationRegister.T9011S_AccountsCashAccount"	
+	* Create new element for product			 
+		And I click the button named "FormCreate"
+		And I input "01.01.2022" text in the field named "Period"
+		And I click Choice button of the field named "Company"
+		And I go to line in "List" table
+			| 'Description'     |
+			| 'Main Company'    |
+		And I select current line in "List" table
+		And I select from "Ledger type variant" drop-down list by "ltv" string
+		And I select from the drop-down list named "Account" by "40501" string
+		Then the form attribute named "Account" became equal to "405.01"
+		Then the form attribute named "Company" became equal to "Main Company"
+		Then the form attribute named "LedgerTypeVariant" became equal to "LTV with account charts code mask"
+		And the editing text of form attribute named "Period" became equal to "01.01.2022"
+		Then the form attribute named "RecordType" became equal to "All"
+		And I click "Save and close" button
+	* Check
+		And "List" table contains lines
+			| 'Period'     | 'Company'      | 'Ledger type variant'               | 'Cash account' | 'Account' |
+			| '01.01.2022' | 'Main Company' | 'LTV with account charts code mask' | ''             | '405.01'  |
+	And I close all client application windows
+	
+		
+Scenario: _0991022 accounts settings for Cash account (for Cash account)
+	And I close all client application windows
+	* Open list form
+		Given I open hyperlink "e1cib/list/InformationRegister.T9011S_AccountsCashAccount"	
+	* Create new element for product			 
+		And I click the button named "FormCreate"
+		And I change the radio button named "RecordType" value to "Cash/Bank account"
+		And I click Select button of "Cash account" field
+		And I go to line in "List" table
+			| 'Description'  |
+			| 'Cash desk №4' |
+		And I select current line in "List" table		
+		And I input "01.02.2022" text in the field named "Period"
+		And I select from the drop-down list named "Company" by "main" string
+		And I select from "Ledger type variant" drop-down list by "ltv" string
+		And I select from the drop-down list named "Account" by "40501" string
+		Then the form attribute named "Account" became equal to "405.01"
+		Then the form attribute named "Company" became equal to "Main Company"
+		Then the form attribute named "LedgerTypeVariant" became equal to "LTV with account charts code mask"
+		And the editing text of form attribute named "Period" became equal to "01.02.2022"
+		Then the form attribute named "CashAccount" became equal to "Cash desk №4"		
+		And I click "Save and close" button
+	* Check
+		And "List" table contains lines
+			| 'Period'     | 'Company'      | 'Ledger type variant'               | 'Cash account' | 'Account' |
+			| '01.02.2022' | 'Main Company' | 'LTV with account charts code mask' | 'Cash desk №4' | '405.01'  |
+	And I close all client application windows			
+
+Scenario: _0991026 accounts settings for Bank account (for Bank account)
+	And I close all client application windows
+	* Open list form
+		Given I open hyperlink "e1cib/list/InformationRegister.T9011S_AccountsCashAccount"	
+	* Create new element for product			 
+		And I click the button named "FormCreate"
+		And I change the radio button named "RecordType" value to "Cash/Bank account"
+		And I click Select button of "Cash account" field
+		And I go to line in "List" table
+			| 'Description'       |
+			| 'Bank account, TRY' |
+		And I select current line in "List" table		
+		And I input "01.02.2022" text in the field named "Period"
+		And I select from the drop-down list named "Company" by "main" string
+		And I select from "Ledger type variant" drop-down list by "ltv" string
+		And I select from the drop-down list named "Account" by "40501" string
+		Then the form attribute named "Account" became equal to "405.01"
+		Then the form attribute named "Company" became equal to "Main Company"
+		Then the form attribute named "LedgerTypeVariant" became equal to "LTV with account charts code mask"
+		And the editing text of form attribute named "Period" became equal to "01.02.2022"
+		Then the form attribute named "CashAccount" became equal to "Bank account, TRY"		
+		And I click "Save and close" button
+	* Check
+		And "List" table contains lines
+			| 'Period'     | 'Company'      | 'Ledger type variant'               | 'Cash account'      | 'Account' |
+			| '01.02.2022' | 'Main Company' | 'LTV with account charts code mask' | 'Bank account, TRY' | '405.01'  |
+	And I close all client application windows
+
+Scenario: _0991027 accounts settings for Expense/Revenue (general for company)
+	And I close all client application windows
+	* Open list form
+		Given I open hyperlink "e1cib/list/InformationRegister.T9014S_AccountsExpenseRevenue"	
+	* Create new element for product			 
+		And I click the button named "FormCreate"
+		And I input "01.01.2022" text in the field named "Period"
+		And I click Choice button of the field named "Company"
+		And I go to line in "List" table
+			| 'Description'     |
+			| 'Main Company'    |
+		And I select current line in "List" table
+		And I select from "Ledger type variant" drop-down list by "ltv" string
+		And I select from the drop-down list named "Account" by "40501" string
+		Then the form attribute named "Account" became equal to "405.01"
+		Then the form attribute named "Company" became equal to "Main Company"
+		Then the form attribute named "LedgerTypeVariant" became equal to "LTV with account charts code mask"
+		And the editing text of form attribute named "Period" became equal to "01.01.2022"
+		Then the form attribute named "RecordType" became equal to "All"
+		And I click "Save and close" button
+	* Check
+		And "List" table contains lines
+			| 'Period'     | 'Company'      | 'Ledger type variant'               | 'Expense / Revenue' | 'Account' |
+			| '01.01.2022' | 'Main Company' | 'LTV with account charts code mask' | ''                  | '405.01'  |
+	And I close all client application windows
+
+Scenario: _0991028 accounts settings for Expense/Revenue
+	And I close all client application windows
+	* Open list form
+		Given I open hyperlink "e1cib/list/InformationRegister.T9014S_AccountsExpenseRevenue"	
+	* Create new element for product			 
+		And I click the button named "FormCreate"
+		And I input "01.01.2022" text in the field named "Period"
+		And I click Choice button of the field named "Company"
+		And I go to line in "List" table
+			| 'Description'     |
+			| 'Main Company'    |
+		And I select current line in "List" table
+		And I change the radio button named "RecordType" value to "Expense and revenue type"
+		And I click Select button of "Expense / Revenue" field
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Expense'     |
+		And I select current line in "List" table
+		And I select from "Expense / Revenue" drop-down list by "Revenue" string	
+		And I select from "Ledger type variant" drop-down list by "ltv" string
+		And I select from the drop-down list named "Account" by "90878699" string
+		Then the form attribute named "Account" became equal to "90878699"
+		Then the form attribute named "Company" became equal to "Main Company"
+		Then the form attribute named "LedgerTypeVariant" became equal to "LTV with account charts code mask"
+		And the editing text of form attribute named "Period" became equal to "01.01.2022"
+		Then the form attribute named "ExpenseRevenue" became equal to "Revenue"		
+		And I click "Save and close" button
+	* Check
+		And "List" table contains lines
+			| 'Period'     | 'Company'      | 'Ledger type variant'               | 'Expense / Revenue' | 'Account'  |
+			| '01.01.2022' | 'Main Company' | 'LTV with account charts code mask' | 'Revenue'           | '90878699' |
+	And I close all client application windows
+
+Scenario: _0991029 accounts settings for item key (general for company)
 	And I close all client application windows
 	* Open list form
 		Given I open hyperlink "e1cib/list/InformationRegister.T9010S_AccountsItemKey"	
 	* Create new element for product			 
 		And I click the button named "FormCreate"
-		And I input "01.01.2021" text in the field named "Period"
-		And I change the radio button named "RecordType" value to "Item types"
+		And I input "01.01.2022" text in the field named "Period"
 		And I click Choice button of the field named "Company"
 		And I go to line in "List" table
 			| 'Description'     |
 			| 'Main Company'    |
 		And I select current line in "List" table
-		And I click Choice button of the field named "Variant"
-		And I go to line in "List" table
-			| 'Description'             |
-			| 'Management analitics'    |
-		And I select current line in "List" table
-		And I select "Product" exact value from "Type of item type" drop-down list
-		And I click Choice button of the field named "Account"
-		And I go to line in "List" table
-			| 'Code'   | 'Description'        |
-			| '4050'   | 'Stock inventory'    |
-		And I select current line in "List" table
-		And I click "Save and close" button
-	* Create new element for service			 
-		And I click the button named "FormCreate"
-		And I input "01.01.2021" text in the field named "Period"	
-		And I change the radio button named "RecordType" value to "Item types"
-		And I click Choice button of the field named "Company"
-		And I go to line in "List" table
-			| 'Description'     |
-			| 'Main Company'    |
-		And I select current line in "List" table
-		And I click Choice button of the field named "Variant"
-		And I go to line in "List" table
-			| 'Description'             |
-			| 'Management analitics'    |
-		And I select current line in "List" table
-		And I select "Service" exact value from "Type of item type" drop-down list
-		And I click Choice button of the field named "Account"
-		And I go to line in "List" table
-			| 'Code'   | 'Description'          |
-			| '5022'   | 'Service (expense)'    |
-		And I select current line in "List" table
+		And I select from "Ledger type variant" drop-down list by "ltv" string
+		And I select from the drop-down list named "Account" by "40501" string
+		Then the form attribute named "Account" became equal to "405.01"
+		Then the form attribute named "Company" became equal to "Main Company"
+		Then the form attribute named "LedgerTypeVariant" became equal to "LTV with account charts code mask"
+		And the editing text of form attribute named "Period" became equal to "01.01.2022"
+		Then the form attribute named "RecordType" became equal to "All"
 		And I click "Save and close" button
 	* Check
-		And "List" table became equal
-			| 'Period'       | 'Company'        | 'Variant'                | 'Item'   | 'Item key'   | 'Item type'   | 'Type of item type'   | 'Account'    |
-			| '01.01.2021'   | 'Main Company'   | 'Management analitics'   | ''       | ''           | ''            | 'Service'             | '5022'       |
-			| '01.01.2021'   | 'Main Company'   | 'Management analitics'   | ''       | ''           | ''            | 'Product'             | '4050'       |
-		
+		And "List" table contains lines
+			| 'Period'     | 'Company'      | 'Ledger type variant'               | 'Item key' | 'Item' | 'Item type' | 'Type of item type' | 'Account' |
+			| '01.01.2022' | 'Main Company' | 'LTV with account charts code mask' | ''         | ''     | ''          | ''                  | '405.01'  |		
+	And I close all client application windows
 
-Scenario: _099105 create account for partner
+Scenario: _0991030 accounts settings for item key
+	And I close all client application windows
+	* Open list form
+		Given I open hyperlink "e1cib/list/InformationRegister.T9010S_AccountsItemKey"	
+	* Create new element for product			 
+		And I click the button named "FormCreate"
+		And I input "01.01.2022" text in the field named "Period"
+		And I click Choice button of the field named "Company"
+		And I go to line in "List" table
+			| 'Description'     |
+			| 'Main Company'    |
+		And I select current line in "List" table
+		And I change the radio button named "RecordType" value to "Item key"	
+		And I click Select button of "Item key" field
+		And I go to line in "List" table
+			| 'Item'  | 'Item key' |
+			| 'Dress' | 'M/White'  |
+		And I select current line in "List" table
+		And I select from "Item key" drop-down list by "xs/blue" string	
+		And I select from "Ledger type variant" drop-down list by "ltv" string
+		And I select from the drop-down list named "Account" by "40501" string
+		Then the form attribute named "Account" became equal to "405.01"
+		Then the form attribute named "Company" became equal to "Main Company"
+		Then the form attribute named "LedgerTypeVariant" became equal to "LTV with account charts code mask"
+		And the editing text of form attribute named "Period" became equal to "01.01.2022"
+		Then the form attribute named "ItemKey" became equal to "XS/Blue"		
+		And I click "Save and close" button
+	* Check
+		And "List" table contains lines
+			| 'Period'     | 'Company'      | 'Ledger type variant'               | 'Item key' | 'Item' | 'Item type' | 'Type of item type' | 'Account' |
+			| '01.01.2022' | 'Main Company' | 'LTV with account charts code mask' | 'XS/Blue'  | ''     | ''          | ''                  | '405.01'  |
+	And I close all client application windows
+
+Scenario: _0991031 accounts settings for item
+	And I close all client application windows
+	* Open list form
+		Given I open hyperlink "e1cib/list/InformationRegister.T9010S_AccountsItemKey"	
+	* Create new element for product			 
+		And I click the button named "FormCreate"
+		And I input "01.01.2022" text in the field named "Period"
+		And I click Choice button of the field named "Company"
+		And I go to line in "List" table
+			| 'Description'     |
+			| 'Main Company'    |
+		And I select current line in "List" table
+		And I change the radio button named "RecordType" value to "Item"	
+		And I click Select button of "Item" field
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Dress'       |
+		And I select current line in "List" table
+		And I select from "Item" drop-down list by "Boots" string	
+		And I select from "Ledger type variant" drop-down list by "ltv" string
+		And I select from the drop-down list named "Account" by "40501" string
+		Then the form attribute named "Account" became equal to "405.01"
+		Then the form attribute named "Company" became equal to "Main Company"
+		Then the form attribute named "LedgerTypeVariant" became equal to "LTV with account charts code mask"
+		And the editing text of form attribute named "Period" became equal to "01.01.2022"
+		Then the form attribute named "Item" became equal to "Boots"		
+		And I click "Save and close" button
+	* Check
+		And "List" table contains lines
+			| 'Period'     | 'Company'      | 'Ledger type variant'               | 'Item key' | 'Item'      | 'Item type' | 'Type of item type' | 'Account' |
+			| '01.01.2022' | 'Main Company' | 'LTV with account charts code mask' | ''         | 'Boots'     | ''          | ''                  | '405.01'  |
+	And I close all client application windows
+
+Scenario: _0991032 accounts settings for item type
+	And I close all client application windows
+	* Open list form
+		Given I open hyperlink "e1cib/list/InformationRegister.T9010S_AccountsItemKey"	
+	* Create new element for product			 
+		And I click the button named "FormCreate"
+		And I input "01.01.2022" text in the field named "Period"
+		And I click Choice button of the field named "Company"
+		And I go to line in "List" table
+			| 'Description'     |
+			| 'Main Company'    |
+		And I select current line in "List" table
+		And I change the radio button named "RecordType" value to "Item type"	
+		And I click Select button of "Item type" field
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Clothes'     |
+		And I select current line in "List" table
+		And I select from "Item type" drop-down list by "Shoes" string	
+		And I select from "Ledger type variant" drop-down list by "ltv" string
+		And I select from the drop-down list named "Account" by "40501" string
+		Then the form attribute named "Account" became equal to "405.01"
+		Then the form attribute named "Company" became equal to "Main Company"
+		Then the form attribute named "LedgerTypeVariant" became equal to "LTV with account charts code mask"
+		And the editing text of form attribute named "Period" became equal to "01.01.2022"
+		Then the form attribute named "ItemType" became equal to "Shoes"		
+		And I click "Save and close" button
+	* Check
+		And "List" table contains lines
+			| 'Period'     | 'Company'      | 'Ledger type variant'               | 'Item key' | 'Item' | 'Item type' | 'Type of item type' | 'Account' |
+			| '01.01.2022' | 'Main Company' | 'LTV with account charts code mask' | ''         | ''     | 'Shoes'          | ''                  | '405.01'  |
+	And I close all client application windows
+
+Scenario: _0991033 accounts settings for item type
+	And I close all client application windows
+	* Open list form
+		Given I open hyperlink "e1cib/list/InformationRegister.T9010S_AccountsItemKey"	
+	* Create new element for product			 
+		And I click the button named "FormCreate"
+		And I input "01.01.2022" text in the field named "Period"
+		And I click Choice button of the field named "Company"
+		And I go to line in "List" table
+			| 'Description'     |
+			| 'Main Company'    |
+		And I select current line in "List" table
+		And I change the radio button named "RecordType" value to "Item types"	
+		And I select "Certificate" exact value from "Type of item type" drop-down list		
+		And I select from "Ledger type variant" drop-down list by "ltv" string
+		And I select from the drop-down list named "Account" by "90878699" string
+		Then the form attribute named "Account" became equal to "90878699"
+		Then the form attribute named "Company" became equal to "Main Company"
+		Then the form attribute named "LedgerTypeVariant" became equal to "LTV with account charts code mask"
+		And the editing text of form attribute named "Period" became equal to "01.01.2022"
+		Then the form attribute named "TypeOfItemType" became equal to "Certificate"			
+		And I click "Save and close" button
+	* Check
+		And "List" table contains lines
+			| 'Period'     | 'Company'      | 'Ledger type variant'               | 'Item key' | 'Item' | 'Item type' | 'Type of item type' | 'Account'  |
+			| '01.01.2022' | 'Main Company' | 'LTV with account charts code mask' | ''         | ''     | ''          | 'Certificate'       | '90878699' |
+	And I close all client application windows
+
+Scenario: _0991034 accounts settings for partner (general for company)
 	And I close all client application windows
 	* Open list form
 		Given I open hyperlink "e1cib/list/InformationRegister.T9012S_AccountsPartner"	
 	* Create new element for product			 
 		And I click the button named "FormCreate"
-		And I input "01.01.2021" text in the field named "Period"
+		And I input "01.01.2022" text in the field named "Period"
 		And I click Choice button of the field named "Company"
 		And I go to line in "List" table
 			| 'Description'     |
 			| 'Main Company'    |
 		And I select current line in "List" table
-		And I click Choice button of the field named "Variant"
-		And I go to line in "List" table
-			| 'Description'             |
-			| 'Management analitics'    |
-		And I select current line in "List" table
-		And I click Select button of "Account Vendor (advances)" field
-		And I go to line in "List" table
-			| 'Code'   | 'Currency'   | 'Description'        | 'Off-balance'   | 'Order'   | 'Quantity'   | 'Type'   | 'Variant'                 |
-			| '1020'   | 'Yes'        | 'Vendors advances'   | 'No'            | '31'      | 'No'         | 'P'      | 'Management analitics'    |
-		And I activate field named "Description" in "List" table
-		And I select current line in "List" table
-		And I click Select button of "Account Vendor (transactions)" field
-		And I go to line in "List" table
-			| 'Code'   | 'Currency'   | 'Description'      | 'Off-balance'   | 'Order'   | 'Quantity'   | 'Type'   | 'Variant'                 |
-			| '1021'   | 'Yes'        | 'Due to vendors'   | 'No'            | '30'      | 'No'         | 'P'      | 'Management analitics'    |
-		And I activate field named "Description" in "List" table
-		And I select current line in "List" table
-		And I click Select button of "Account Customer (advances)" field
-		And I go to line in "List" table
-			| 'Code'   | 'Currency'   | 'Description'          | 'Off-balance'   | 'Order'   | 'Quantity'   | 'Type'   | 'Variant'                 |
-			| '2020'   | 'Yes'        | 'Customers advances'   | 'No'            | '41'      | 'No'         | 'P'      | 'Management analitics'    |
-		And I activate field named "Description" in "List" table
-		And I select current line in "List" table
-		And I click Select button of "Account Customer (transactions)" field
-		And I go to line in "List" table
-			| 'Code'   | 'Currency'   | 'Description'     | 'Off-balance'   | 'Order'   | 'Quantity'   |  'Type'   | 'Variant'                 |
-			| '2021'   | 'Yes'        | 'Customers due'   | 'No'            | '40'      | 'No'         |  'P'      | 'Management analitics'    |
-		And I activate field named "Description" in "List" table
-		And I select current line in "List" table
+		And I select from "Ledger type variant" drop-down list by "ltv" string
+		And I set checkbox named "Vendor"
+		And I set checkbox named "Customer"
+		And I set checkbox named "Other"
+		Then "Accounts (Partner) (create) *" window is opened
+		And I select from the drop-down list named "AccountAdvancesVendor" by "40501" string
+		And I select from the drop-down list named "AccountTransactionsVendor" by "9087" string
+		And I select from the drop-down list named "AccountAdvancesCustomer" by "40501" string
+		And I select from the drop-down list named "AccountTransactionsCustomer" by "9087" string
+		And I select from the drop-down list named "AccountAdvancesOther" by "40501" string
+		And I select from the drop-down list named "AccountTransactionsOther" by "9087" string
 		And I click "Save and close" button
 	* Check
 		And "List" table contains lines
-			| 'Period'       | 'Company'        | 'Partner'   | 'Variant'                | 'Agreement'   | 'Account Vendor (transactions)'   | 'Account Customer (advances)'   | 'Account Vendor (advances)'   | 'Account Customer (transactions)'    |
-			| '01.01.2021'   | 'Main Company'   | ''          | 'Management analitics'   | ''            | '1021'                            | '2020'                          | '1020'                        | '2021'                               |
-		And I close all client application windows
-		
-		
-Scenario: _099106 create account for tax
+			| 'Period'     | 'Company'      | 'Partner' | 'Ledger type variant'               | 'Agreement' | 'Vendor' | 'Customer' | 'Transactions' | 'Other' | 'Advances' |
+			| '01.01.2022' | 'Main Company' | ''        | 'LTV with account charts code mask' | ''          | 'Yes'    | 'Yes'      | '90878699'     | 'Yes'   | '405.01'   |	
+	And I close all client application windows
+
+Scenario: _0991035 accounts settings for partner (vendor)
+	And I close all client application windows
+	* Open list form
+		Given I open hyperlink "e1cib/list/InformationRegister.T9012S_AccountsPartner"	
+	* Create new element for product			 
+		And I click the button named "FormCreate"
+		And I input "01.01.2022" text in the field named "Period"
+		And I click Choice button of the field named "Company"
+		And I go to line in "List" table
+			| 'Description'     |
+			| 'Main Company'    |
+		And I select current line in "List" table
+		And I select from "Ledger type variant" drop-down list by "ltv" string
+		And I set checkbox named "Vendor"
+		And field "AccountAdvancesCustomer" is not present on the form
+		And field "AccountTransactionsCustomer" is not present on the form
+		And field "AccountAdvancesOther" is not present on the form
+		And field "AccountTransactionsOther" is not present on the form
+		And I select from the drop-down list named "AccountAdvancesVendor" by "40501" string
+		And I select from the drop-down list named "AccountTransactionsVendor" by "9087" string
+		And I change the radio button named "RecordType" value to "Partner"
+		And I select from the drop-down list named "Partner" by "ferron" string
+		Then the form attribute named "AccountAdvancesVendor" became equal to "405.01"
+		Then the form attribute named "AccountTransactionsVendor" became equal to "90878699"
+		Then the form attribute named "Company" became equal to "Main Company"
+		Then the form attribute named "Customer" became equal to "No"
+		Then the form attribute named "LedgerTypeVariant" became equal to "LTV with account charts code mask"
+		Then the form attribute named "Other" became equal to "No"
+		Then the form attribute named "Partner" became equal to "Ferron BP"
+		Then the form attribute named "RecordType" became equal to "Partner"
+		Then the form attribute named "Vendor" became equal to "Yes"
+		And I click "Save and close" button
+	* Check
+		And "List" table contains lines
+			| 'Period'     | 'Company'      | 'Partner'   | 'Ledger type variant'               | 'Agreement' | 'Vendor' | 'Customer' | 'Transactions' | 'Other' | 'Advances' |
+			| '01.01.2022' | 'Main Company' | 'Ferron BP' | 'LTV with account charts code mask' | ''          | 'Yes'    | 'No'       | ''             | 'No'    | ''         |
+	And I close all client application windows
+
+Scenario: _0991036 accounts settings for partner (customer)
+	And I close all client application windows
+	* Open list form
+		Given I open hyperlink "e1cib/list/InformationRegister.T9012S_AccountsPartner"	
+	* Create new element for product			 
+		And I click the button named "FormCreate"
+		And I input "01.01.2022" text in the field named "Period"
+		And I click Choice button of the field named "Company"
+		And I go to line in "List" table
+			| 'Description'     |
+			| 'Main Company'    |
+		And I select current line in "List" table
+		And I select from "Ledger type variant" drop-down list by "ltv" string
+		And I set checkbox named "Customer"
+		And field "AccountAdvancesVendor" is not present on the form
+		And field "AccountTransactionsVendor" is not present on the form
+		And field "AccountAdvancesOther" is not present on the form
+		And field "AccountTransactionsOther" is not present on the form
+		And I select from the drop-down list named "AccountAdvancesCustomer" by "40501" string
+		And I select from the drop-down list named "AccountTransactionsCustomer" by "9087" string
+		And I change the radio button named "RecordType" value to "Partner"
+		And I select from the drop-down list named "Partner" by "Maxim" string
+		Then the form attribute named "AccountAdvancesCustomer" became equal to "405.01"
+		Then the form attribute named "AccountTransactionsCustomer" became equal to "90878699"
+		Then the form attribute named "Company" became equal to "Main Company"
+		Then the form attribute named "Customer" became equal to "Yes"
+		Then the form attribute named "LedgerTypeVariant" became equal to "LTV with account charts code mask"
+		Then the form attribute named "Other" became equal to "No"
+		Then the form attribute named "Partner" became equal to "Maxim"
+		Then the form attribute named "RecordType" became equal to "Partner"
+		Then the form attribute named "Vendor" became equal to "No"
+		And I click "Save and close" button
+	* Check
+		And "List" table contains lines
+			| 'Period'     | 'Company'      | 'Partner' | 'Ledger type variant'               | 'Agreement' | 'Vendor' | 'Customer' | 'Transactions' | 'Other' | 'Advances' |
+			| '01.01.2022' | 'Main Company' | 'Maxim'   | 'LTV with account charts code mask' | ''          | 'No'     | 'Yes'      | ''             | 'No'    | ''         |
+	And I close all client application windows
+				
+
+Scenario: _0991037 accounts settings for partner (partner term)
+	And I close all client application windows
+	* Open list form
+		Given I open hyperlink "e1cib/list/InformationRegister.T9012S_AccountsPartner"	
+	* Create new element for product			 
+		And I click the button named "FormCreate"
+		And I input "01.01.2022" text in the field named "Period"
+		And I click Choice button of the field named "Company"
+		And I go to line in "List" table
+			| 'Description'     |
+			| 'Main Company'    |
+		And I select current line in "List" table
+		And I select from "Ledger type variant" drop-down list by "ltv" string
+		And I change the radio button named "RecordType" value to "Partner term"	
+		And I set checkbox named "Customer"
+		And I select from the drop-down list named "Agreement" by "Basic Partner terms, TRY" string
+		And I select from the drop-down list named "AccountAdvancesCustomer" by "40501" string
+		And I select from the drop-down list named "AccountTransactionsCustomer" by "9087" string		
+		Then the form attribute named "AccountAdvancesCustomer" became equal to "405.01"
+		Then the form attribute named "AccountTransactionsCustomer" became equal to "90878699"
+		Then the form attribute named "Company" became equal to "Main Company"
+		Then the form attribute named "LedgerTypeVariant" became equal to "LTV with account charts code mask"
+		Then the form attribute named "Agreement" became equal to "Basic Partner terms, TRY"
+		Then the form attribute named "RecordType" became equal to "Agreement"
+		Then the form attribute named "AccountAdvancesCustomer" became equal to "405.01"
+		Then the form attribute named "AccountTransactionsCustomer" became equal to "90878699"
+		And I click "Save and close" button
+	* Check
+		And "List" table contains lines
+			| 'Period'     | 'Company'      | 'Partner'   | 'Ledger type variant'               | 'Agreement'                | 'Vendor' | 'Customer' | 'Transactions' | 'Other' | 'Advances' |
+			| '01.01.2022' | 'Main Company' | ''          | 'LTV with account charts code mask' | 'Basic Partner terms, TRY' | 'No'     | 'Yes'      | ''             | 'No'    | ''         |
+	And I close all client application windows	
+
+Scenario: _0991038 accounts settings for tax (general for company)
 	And I close all client application windows
 	* Open list form
 		Given I open hyperlink "e1cib/list/InformationRegister.T9013S_AccountsTax"	
 	* Create new element for product			 
 		And I click the button named "FormCreate"
-		And I change the radio button named "RecordType" value to "Tax type"	
-		And I input "01.01.2021" text in the field named "Period"
+		And I input "01.01.2022" text in the field named "Period"
 		And I click Choice button of the field named "Company"
 		And I go to line in "List" table
 			| 'Description'     |
 			| 'Main Company'    |
 		And I select current line in "List" table
-		And I click Choice button of the field named "Variant"
-		And I go to line in "List" table
-			| 'Description'             |
-			| 'Management analitics'    |
-		And I select current line in "List" table	
-		And I click Choice button of the field named "Tax"
-		And I go to line in "List" table
-			| 'Description'    |
-			| 'VAT'            |
-		And I select current line in "List" table
-		And I click Choice button of the field named "Account"
-		And I go to line in "List" table
-			| 'Code'   | 'Description'     |
-			| '1040'   | 'Tax outgoing'    |
-		And I select current line in "List" table
-		And I click "Save and close" button	
+		And I select from "Ledger type variant" drop-down list by "ltv" string
+		And I select from "Incoming account" drop-down list by "4050" string
+		And I select from "Outgoing account" drop-down list by "9087" string		
+		And I click "Save and close" button
 	* Check
 		And "List" table contains lines
-			| 'Period'       | 'Company'        | 'Variant'                | 'Tax'   | 'Account'    |
-			| '01.01.2021'   | 'Main Company'   | 'Management analitics'   | 'VAT'   | '1040'       |
-		And I close all client application windows
-		
-Scenario: _099115 select ledger type for Company
+			| 'Period'     | 'Company'      | 'Ledger type variant'               | 'Tax' | 'Vat rate' | 'Incoming account' | 'Outgoing account' |
+			| '01.01.2022' | 'Main Company' | 'LTV with account charts code mask' | ''    | ''         | '405.01'           | '90878699'         |		
+	And I close all client application windows			
+
+Scenario: _0991038 accounts settings for tax type and rate
 	And I close all client application windows
 	* Open list form
-		Given I open hyperlink "e1cib/list/Catalog.Companies"
-	* Select Company
-		And I go to line in "List" table
-			| 'Description'     |
-			| 'Main Company'    |
-		And I select current line in "List" table
-	* Ledger types settings
-		And I move to "Ledger types" tab
-		And in the table "CompanyLedgerTypes" I click the button named "CompanyLedgerTypesAdd"
-		And I input "01.01.2021" text in the field named "CompanyLedgerTypesPeriod" of "CompanyLedgerTypes" table
-		And I activate "Ledger type" field in "CompanyLedgerTypes" table
-		And I click choice button of "Ledger type" attribute in "CompanyLedgerTypes" table
-		And I go to line in "List" table
-			| 'Description'    |
-			| 'Management'     |
-		And I select current line in "List" table
-		And I click "Save and close" button	
-	* Check
-		And I go to line in "List" table
-			| 'Description'     |
-			| 'Main Company'    |
-		And I select current line in "List" table
-		And "CompanyLedgerTypes" table became equal
-			| 'Period'       | 'Use'   | 'Ledger type'    |
-			| '01.01.2021'   | 'Yes'   | 'Management'     |
-		And I close all client application windows
-		
-					
-
-Scenario: _0991020 check Purchase invoice accounting movements
-		And I close all client application windows
-	* Create PI
-		Given I open hyperlink "e1cib/list/Document.PurchaseInvoice"	
+		Given I open hyperlink "e1cib/list/InformationRegister.T9013S_AccountsTax"	
+	* Create new element for product			 
 		And I click the button named "FormCreate"
-		And I click Choice button of the field named "Partner"
-		And I go to line in "List" table
-			| 'Description'    |
-			| 'Ferron BP'      |
-		And I select current line in "List" table
-		And I activate field named "ItemListLineNumber" in "ItemList" table
-		And I click Select button of "Partner term" field
-		And I go to line in "List" table
-			| 'AP/AR posting detail'   | 'Description'          | 'Kind'       |
-			| 'By documents'           | 'Vendor Ferron, TRY'   | 'Regular'    |
-		And I select current line in "List" table
-		And I activate field named "ItemListLineNumber" in "ItemList" table
-		And in the table "ItemList" I click the button named "ItemListAdd"
-		And I activate field named "ItemListItem" in "ItemList" table
-		And I select current line in "ItemList" table
-		And I click choice button of the attribute named "ItemListItem" in "ItemList" table
-		Then "Items" window is opened
-		And I go to line in "List" table
-			| 'Description'    |
-			| 'Dress'          |
-		And I select current line in "List" table
-		And I activate field named "ItemListItemKey" in "ItemList" table
-		And I click choice button of the attribute named "ItemListItemKey" in "ItemList" table
-		And I go to line in "List" table
-			| 'Item'    | 'Item key'    |
-			| 'Dress'   | 'XS/Blue'     |
-		And I select current line in "List" table
-		And I activate "Price" field in "ItemList" table
-		And I input "500,00" text in "Price" field of "ItemList" table
-		And I finish line editing in "ItemList" table
-		And I click choice button of the attribute named "ItemListStore" in "ItemList" table
-		And I go to line in "List" table
-			| 'Description'    |
-			| 'Store 02'       |
-		And I select current line in "List" table
-		And I finish line editing in "ItemList" table
-		And I click "Post" button
-	* Chack accounting transaction
-		And in the table "ItemList" I click "Edit accounting" button
-		Then the form attribute named "LedgerType" became equal to "Management"
-		And "AccountingAnalytics" table became equal
-			| 'Debit'   | 'Partner'     | 'Partner term'         | 'Legal name'          | 'Credit'   | ' '                   | 'Operation'                                                                                       |
-			| '1021'    | 'Ferron BP'   | 'Vendor Ferron, TRY'   | 'Company Ferron BP'   | '1020'     | ''                    | 'PurchaseInvoice_DR_R1021B (Vendors transaction)_CR_R1020B (Advances to vendors)'                 |
-			| '4050'    | 'Ferron BP'   | 'Vendor Ferron, TRY'   | 'Store 02'            | '1021'     | 'Company Ferron BP'   | 'PurchaseInvoice_DR_R4050B (Stock inventory)_R5022T(Expenses)_CR_R1021B (Vendors transaction)'    |
-			| '1040'    | 'Ferron BP'   | 'Vendor Ferron, TRY'   | ''                    | '1021'     | 'Company Ferron BP'   | 'PurchaseInvoice_DR_R1040B (Taxes outgoing) _CR_R1021B (Vendors transaction)'                     |
-		And I close all client application windows
-		
-		
-Scenario: _0991025 create JournalEntry for PI (with advance)
-		And I close all client application windows
-		And I execute 1C:Enterprise script at server
-			| "Documents.BankPayment.FindByNumber(133).GetObject().Write(DocumentWriteMode.Posting);"    |
-		And I execute 1C:Enterprise script at server
-			| "Documents.VendorsAdvancesClosing.FindByNumber(1).GetObject().Write(DocumentWriteMode.Posting);"    |
-	* Create JournalEntry
-		Given I open hyperlink "e1cib/list/Document.JournalEntry"	
-		And I click "Create documents" button
-		And I click Choice button of the field named "Period"
-		Then "Select period" window is opened
-		And I input begin of the current month date in "DateBegin" field
-		And I input end of the current month date in "DateEnd" field
-		And I click the button named "Select"	
+		And I input "01.01.2022" text in the field named "Period"
 		And I click Choice button of the field named "Company"
 		And I go to line in "List" table
 			| 'Description'     |
 			| 'Main Company'    |
 		And I select current line in "List" table
-		And I click Select button of "Ledger type" field
-		And I go to line in "List" table
-			| 'Description'    |
-			| 'Management'     |
-		And I select current line in "List" table
-		And I activate "Presentation" field in "TableDocuments" table
-		And I go to line in "TableDocuments" table
-			| 'Presentation'        |
-			| 'Purchase invoice'    |
-		And I set "Use" checkbox in "TableDocuments" table
-		And I finish line editing in "TableDocuments" table		
-		And I click "Create documents" button
-		And I close "Create documents" window
+		And I select from "Ledger type variant" drop-down list by "ltv" string
+		And I change the radio button named "RecordType" value to "Tax type"
+		And I select from the drop-down list named "Tax" by "vat" string
+		And I select from "Vat rate" drop-down list by "18" string
+		And I select from "Incoming account" drop-down list by "4050" string
+		And I select from "Outgoing account" drop-down list by "9087" string		
+		And I click "Save and close" button
 	* Check
-		And I click "Refresh" button
-		And I go to line in "List" table
-			| 'Number'    |
-			| '1'         |
-		And I select current line in "List" table
-		And "RegisterRecords" table became equal
-			| 'Period'   | 'Account Dr'   | 'Amount'   | 'DebitQuantity'   | 'Activity'   | 'Credit currency'   | 'Ext. Dim. Debit'   | 'Debit amount'   | 'Extra dimension2 Dr'   | 'Credit quantity'   | 'Extra dimension3 Dr'   | 'Debit currency'   | 'Account Cr'   | 'Ext. Dim. Credit'   | 'Operation'                                                                                      | 'Extra dimension2 Cr'   | 'Credit amount'   | 'Extra dimension3 Cr'    |
-			| '*'        | '4050'         | '423,73'   | '1'               | 'Yes'        | 'TRY'               | 'Dress'             | ''               | 'XS/Blue'               | ''                  | 'Store 02'              | ''                 | '1021'         | 'Ferron BP'          | 'PurchaseInvoice_DR_R4050B (Stock inventory)_R5022T(Expenses)_CR_R1021B (Vendors transaction)'   | 'Vendor Ferron, TRY'    | '423,73'          | 'Company Ferron BP'      |
-			| '*'        | '1040'         | '76,27'    | ''                | 'Yes'        | 'TRY'               | 'VAT'               | '76,27'          | ''                      | ''                  | ''                      | 'TRY'              | '1021'         | 'Ferron BP'          | 'PurchaseInvoice_DR_R1040B (Taxes outgoing) _CR_R1021B (Vendors transaction)'                    | 'Vendor Ferron, TRY'    | '76,27'           | 'Company Ferron BP'      |
-		And I close all client application windows
-		
-Scenario: _0991025 create JournalEntry for BP (advance)
+		And "List" table contains lines
+			| 'Period'     | 'Company'      | 'Ledger type variant'               | 'Tax' | 'Vat rate' | 'Incoming account' | 'Outgoing account' |
+			| '01.01.2022' | 'Main Company' | 'LTV with account charts code mask' | 'VAT' | '18%'      | '405.01'           | '90878699'         |	
 	And I close all client application windows
-	* Preparation (temporarily)
-		Given I open hyperlink "e1cib/list/InformationRegister.T9011S_AccountsCashAccount"
-		And I go to line in "List" table
-			| 'Variant'                 |
-			| 'Management analitics'    |
-		And I select current line in "List" table
-		And I click Choice button of the field named "Account"
-		And I go to line in "List" table
-			| 'Code'   | 'Currency'   | 'Description'          | 'Off-balance'   | 'Order'   | 'Quantity'   | 'Type'   | 'Variant'                 |
-			| '2020'   | 'Yes'        | 'Customers advances'   | 'No'            | '41'      | 'No'         | 'P'      | 'Management analitics'    |
-		And I select current line in "List" table
-		And I click "Save and close" button
-		Given I open hyperlink "e1cib/list/InformationRegister.T9014S_AccountsExpenseRevenue"
-		And I go to line in "List" table
-			| 'Variant'                 |
-			| 'Management analitics'    |
-		And I select current line in "List" table
-		And I click Choice button of the field named "Account"
-		And I go to line in "List" table
-			| 'Code'   | 'Currency'   | 'Description'         | 'Off-balance'   | 'Order'   | 'Quantity'   | 'Type'   | 'Variant'                 |
-			| '5022'   | 'Yes'        | 'Service (expense)'   | 'No'            | '70'      | 'No'         | 'P'      | 'Management analitics'    |
-		And I select current line in "List" table
-		And I click "Save and close" button
-	* Select BP
-		Given I open hyperlink "e1cib/list/Document.BankPayment"
-		And I go to line in "List" table
-			| 'Number'    |
-			| '133'       |
-		And in the table "List" I click the button named "ListContextMenuPost"		
-	* Create JournalEntry
-		And I click "Journal entry" button
-		Then "Journal entry (create)" window is opened
-		And I click "Save" button
-		And "RegisterRecords" table became equal
-			| 'Period'                | 'Account Dr'   | '#'   | 'Amount'   | 'DebitQuantity'   | 'Activity'   | 'Credit currency'   | 'Ext. Dim. Debit'   | 'Debit amount'   | 'Extra dimension2 Dr'   | 'Credit quantity'   | 'Extra dimension3 Dr'   | 'Debit currency'   | 'Account Cr'   | 'Ext. Dim. Credit'   | 'Operation'                                                                                             | 'Extra dimension2 Cr'   | 'Credit amount'   | 'Extra dimension3 Cr'    |
-			| '12.07.2022 17:01:09'   | '1020'         | '1'   | '100,00'   | ''                | 'Yes'        | 'TRY'               | 'Ferron BP'         | '100'            | ''                      | ''                  | ''                      | 'TRY'              | '2020'         | 'Ferron BP'          | 'BankPayment_DR_R1020B (Advances to vendors) _R1021B (Vendors transaction) _CR_R3010B (Cash on hand)'   | 'Company Ferron BP'     | '100'             | ''                       |
-			| '12.07.2022 17:01:09'   | '5022'         | '2'   | '10,00'    | ''                | 'Yes'        | 'TRY'               | ''                  | '10'             | 'Expense'               | ''                  | 'Front office'          | 'TRY'              | '2020'         | 'Ferron BP'          | 'BankPayment_DR_R5022T (Expenses)_CR_R3010B (cash on hand)'                                             | 'Company Ferron BP'     | '10'              | ''                       |
-		And I close all client application windows
-		
-		
-				
-		
-				
-
-				
-				
-		
-				
-		
-				
-		
-					
-		
-				
-		
-				
-		
-				
-
-							
-
-
-		
-				
-		
-				
-		
-				
-		
-		
-				
-		
-						
-
-						
-		
-				
-		
-				

@@ -47,7 +47,7 @@
   </extInfo>
  </items>
  <items xsi:type="form:FormField">
-  <name>VariantFilter</name>
+  <name>LedgerTypeVariantFilter</name>
   <id>55</id>
   <visible>true</visible>
   <enabled>true</enabled>
@@ -55,14 +55,14 @@
    <common>true</common>
   </userVisible>
   <dataPath xsi:type="form:DataPath">
-   <segments>Variant</segments>
+   <segments>LedgerTypeVariant</segments>
   </dataPath>
   <handlers>
    <event>OnChange</event>
-   <name>VariantFilterOnChange</name>
+   <name>LedgerTypeVariantFilterOnChange</name>
   </handlers>
   <extendedTooltip>
-   <name>VariantFilterExtendedTooltip</name>
+   <name>LedgerTypeVariantFilterExtendedTooltip</name>
    <id>57</id>
    <visible>true</visible>
    <enabled>true</enabled>
@@ -77,7 +77,7 @@
    </extInfo>
   </extendedTooltip>
   <contextMenu>
-   <name>VariantFilterContextMenu</name>
+   <name>LedgerTypeVariantFilterContextMenu</name>
    <id>56</id>
    <visible>true</visible>
    <enabled>true</enabled>
@@ -412,7 +412,7 @@
    <extInfo xsi:type="form:CheckBoxFieldExtInfo"/>
   </items>
   <items xsi:type="form:FormField">
-   <name>Variant</name>
+   <name>LedgerTypeVariant</name>
    <id>43</id>
    <visible>true</visible>
    <enabled>true</enabled>
@@ -420,10 +420,10 @@
     <common>true</common>
    </userVisible>
    <dataPath xsi:type="form:DataPath">
-    <segments>List.Variant</segments>
+    <segments>List.LedgerTypeVariant</segments>
    </dataPath>
    <extendedTooltip>
-    <name>VariantExtendedTooltip</name>
+    <name>LedgerTypeVariantExtendedTooltip</name>
     <id>45</id>
     <visible>true</visible>
     <enabled>true</enabled>
@@ -438,7 +438,7 @@
     </extInfo>
    </extendedTooltip>
    <contextMenu>
-    <name>VariantContextMenu</name>
+    <name>LedgerTypeVariantContextMenu</name>
     <id>44</id>
     <visible>true</visible>
     <enabled>true</enabled>
@@ -931,6 +931,37 @@
  <autoCommandBar>
   <name>FormCommandBar</name>
   <id>-1</id>
+  <items xsi:type="form:Button">
+   <name>FormLoadChartsOfAccounts</name>
+   <id>58</id>
+   <visible>true</visible>
+   <enabled>true</enabled>
+   <userVisible>
+    <common>true</common>
+   </userVisible>
+   <extendedTooltip>
+    <name>FormLoadChartsOfAccountsExtendedTooltip</name>
+    <id>59</id>
+    <visible>true</visible>
+    <enabled>true</enabled>
+    <userVisible>
+     <common>true</common>
+    </userVisible>
+    <type>Label</type>
+    <autoMaxWidth>true</autoMaxWidth>
+    <autoMaxHeight>true</autoMaxHeight>
+    <extInfo xsi:type="form:LabelDecorationExtInfo">
+     <horizontalAlign>Left</horizontalAlign>
+    </extInfo>
+   </extendedTooltip>
+   <commandName>Form.Command.LoadChartsOfAccounts</commandName>
+   <representation>Auto</representation>
+   <autoMaxWidth>true</autoMaxWidth>
+   <autoMaxHeight>true</autoMaxHeight>
+   <placementArea>UserCmds</placementArea>
+   <representationInContextMenu>Auto</representationInContextMenu>
+   <locationInCommandBar>InAdditionalSubmenu</locationInCommandBar>
+  </items>
   <visible>true</visible>
   <enabled>true</enabled>
   <userVisible>
@@ -971,7 +1002,7 @@
    <queryText>SELECT
 	Table.Ref AS Ref,
 	Table.Code AS Code,
-	Table.Variant,
+	Table.LedgerTypeVariant,
 	Table.Description_en AS Description,
 	CASE
 		WHEN Table.Type = VALUE(AccountType.Active)
@@ -989,7 +1020,8 @@
 	Table.Order AS Order,
 	ExtraDimension1.ExtraDimension AS ExtraDimension1,
 	ExtraDimension2.ExtraDimension AS ExtraDimension2,
-	ExtraDimension3.ExtraDimension AS ExtraDimension3
+	ExtraDimension3.ExtraDimension AS ExtraDimension3,
+	Table.NotUsedForRecords
 FROM
 	ChartOfAccounts.Basic AS Table
 		LEFT JOIN (SELECT
@@ -1073,21 +1105,173 @@ FROM
      </localValue>
     </title>
    </fields>
+   <fields xsi:type="schema:DataCompositionSchemaDataSetField">
+    <dataPath>LedgerTypeVariant</dataPath>
+    <field>LedgerTypeVariant</field>
+   </fields>
+   <fields xsi:type="schema:DataCompositionSchemaDataSetField">
+    <dataPath>Ref</dataPath>
+    <field>Ref</field>
+   </fields>
+   <fields xsi:type="schema:DataCompositionSchemaDataSetField">
+    <dataPath>Code</dataPath>
+    <field>Code</field>
+   </fields>
+   <fields xsi:type="schema:DataCompositionSchemaDataSetField">
+    <dataPath>OffBalance</dataPath>
+    <field>OffBalance</field>
+   </fields>
+   <fields xsi:type="schema:DataCompositionSchemaDataSetField">
+    <dataPath>Currency</dataPath>
+    <field>Currency</field>
+   </fields>
+   <fields xsi:type="schema:DataCompositionSchemaDataSetField">
+    <dataPath>Quantity</dataPath>
+    <field>Quantity</field>
+   </fields>
+   <fields xsi:type="schema:DataCompositionSchemaDataSetField">
+    <dataPath>Parent</dataPath>
+    <field>Parent</field>
+   </fields>
+   <fields xsi:type="schema:DataCompositionSchemaDataSetField">
+    <dataPath>Order</dataPath>
+    <field>Order</field>
+   </fields>
+   <fields xsi:type="schema:DataCompositionSchemaDataSetField">
+    <dataPath>ExtraDimension1</dataPath>
+    <field>ExtraDimension1</field>
+    <title>
+     <localValue>
+      <content>
+       <key>en</key>
+       <value>Extra dimension1</value>
+      </content>
+      <content>
+       <key>ru</key>
+       <value>Extra dimension1</value>
+      </content>
+      <content>
+       <key>tr</key>
+       <value>Extra dimension1</value>
+      </content>
+     </localValue>
+    </title>
+   </fields>
+   <fields xsi:type="schema:DataCompositionSchemaDataSetField">
+    <dataPath>ExtraDimension2</dataPath>
+    <field>ExtraDimension2</field>
+    <title>
+     <localValue>
+      <content>
+       <key>en</key>
+       <value>Extra dimension2</value>
+      </content>
+      <content>
+       <key>ru</key>
+       <value>Extra dimension2</value>
+      </content>
+      <content>
+       <key>tr</key>
+       <value>Extra dimension2</value>
+      </content>
+     </localValue>
+    </title>
+   </fields>
+   <fields xsi:type="schema:DataCompositionSchemaDataSetField">
+    <dataPath>ExtraDimension3</dataPath>
+    <field>ExtraDimension3</field>
+    <title>
+     <localValue>
+      <content>
+       <key>en</key>
+       <value>Extra dimension3</value>
+      </content>
+      <content>
+       <key>ru</key>
+       <value>Extra dimension3</value>
+      </content>
+      <content>
+       <key>tr</key>
+       <value>Extra dimension3</value>
+      </content>
+     </localValue>
+    </title>
+   </fields>
+   <fields xsi:type="schema:DataCompositionSchemaDataSetField">
+    <dataPath>ExtraDimension</dataPath>
+    <field>ExtraDimension</field>
+    <title>
+     <localValue>
+      <content>
+       <key>en</key>
+       <value>Extra dimension</value>
+      </content>
+      <content>
+       <key>ru</key>
+       <value>Extra dimension</value>
+      </content>
+      <content>
+       <key>tr</key>
+       <value>Extra dimension</value>
+      </content>
+     </localValue>
+    </title>
+   </fields>
+   <fields xsi:type="schema:DataCompositionSchemaDataSetField">
+    <dataPath>NotUsedForRecords</dataPath>
+    <field>NotUsedForRecords</field>
+   </fields>
+   <fields xsi:type="schema:DataCompositionSchemaDataSetField">
+    <dataPath>Predefined</dataPath>
+    <field>Predefined</field>
+   </fields>
+   <fields xsi:type="schema:DataCompositionSchemaDataSetField">
+    <dataPath>SearchCode</dataPath>
+    <field>SearchCode</field>
+   </fields>
+   <fields xsi:type="schema:DataCompositionSchemaDataSetField">
+    <dataPath>ExtDimensionTypes</dataPath>
+    <field>ExtDimensionTypes</field>
+   </fields>
+   <fields xsi:type="schema:DataCompositionSchemaDataSetField">
+    <dataPath>Description_hash</dataPath>
+    <field>Description_hash</field>
+   </fields>
+   <fields xsi:type="schema:DataCompositionSchemaDataSetField">
+    <dataPath>Description_ru</dataPath>
+    <field>Description_ru</field>
+   </fields>
+   <fields xsi:type="schema:DataCompositionSchemaDataSetField">
+    <dataPath>Description_tr</dataPath>
+    <field>Description_tr</field>
+   </fields>
+   <fields xsi:type="schema:DataCompositionSchemaDataSetField">
+    <dataPath>SourceNodeID</dataPath>
+    <field>SourceNodeID</field>
+   </fields>
+   <fields xsi:type="schema:DataCompositionSchemaDataSetField">
+    <dataPath>PredefinedDataName</dataPath>
+    <field>PredefinedDataName</field>
+   </fields>
+   <fields xsi:type="schema:DataCompositionSchemaDataSetField">
+    <dataPath>DeletionMark</dataPath>
+    <field>DeletionMark</field>
+   </fields>
   </extInfo>
  </attributes>
  <attributes>
-  <name>Variant</name>
+  <name>LedgerTypeVariant</name>
   <title>
    <key>en</key>
-   <value>Variant</value>
+   <value>Ledger type variant</value>
   </title>
   <title>
    <key>ru</key>
-   <value>Характеристика</value>
+   <value>Вариант типа учета</value>
   </title>
   <title>
    <key>tr</key>
-   <value>Varyant</value>
+   <value>Defter tip seçeneği</value>
   </title>
   <id>2</id>
   <valueType>
@@ -1100,6 +1284,35 @@ FROM
    <common>true</common>
   </edit>
  </attributes>
+ <formCommands>
+  <name>LoadChartsOfAccounts</name>
+  <title>
+   <key>en</key>
+   <value>Load charts of accounts</value>
+  </title>
+  <title>
+   <key>ru</key>
+   <value>Load charts of accounts</value>
+  </title>
+  <title>
+   <key>tr</key>
+   <value>Load charts of accounts</value>
+  </title>
+  <id>1</id>
+  <use>
+   <common>true</common>
+  </use>
+  <picture xsi:type="core:PictureRef">
+   <picture>StdPicture.DataCompositionNewTable</picture>
+  </picture>
+  <action xsi:type="form:FormCommandHandlerContainer">
+   <handler>
+    <name>LoadChartsOfAccounts</name>
+   </handler>
+  </action>
+  <representation>TextPicture</representation>
+  <currentRowUse>Auto</currentRowUse>
+ </formCommands>
  <commandInterface>
   <navigationPanel/>
   <commandBar/>

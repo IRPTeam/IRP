@@ -1579,9 +1579,9 @@ Function GetAnalytics_VATIncoming(Parameters)
 	AccountParameters   = AccountingServer.GetAccountParameters(Parameters);
 		
 	// Debit
-	Debit = AccountingServer.GetT9013S_AccountsTax(AccountParameters, Parameters.RowData.TaxInfo.Tax);
-	If ValueIsFilled(Debit.Account) Then
-		AccountingAnalytics.Debit = Debit.Account;
+	Debit = AccountingServer.GetT9013S_AccountsTax(AccountParameters, Parameters.RowData.TaxInfo);
+	If ValueIsFilled(Debit.OutgoingAccount) Then
+		AccountingAnalytics.Debit = Debit.OutgoingAccount;
 	EndIf;
 	AccountingServer.SetDebitExtDimensions(Parameters, AccountingAnalytics, Parameters.RowData.TaxInfo);
 	

@@ -83,6 +83,32 @@
  <defaultListForm>Catalog.LedgerTypeVariants.Form.ListForm</defaultListForm>
  <defaultChoiceForm>Catalog.LedgerTypeVariants.Form.ChoiceForm</defaultChoiceForm>
  <choiceHistoryOnInput>DontUse</choiceHistoryOnInput>
+ <attributes uuid="48c0a253-3e2c-4d5d-a8da-99b7f543498b">
+  <name>AccountChartsCodeMask</name>
+  <synonym>
+   <key>en</key>
+   <value>Account charts code mask</value>
+  </synonym>
+  <synonym>
+   <key>ru</key>
+   <value>Account charts code mask</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Account charts code mask</value>
+  </synonym>
+  <type>
+   <types>String</types>
+   <stringQualifiers>
+    <length>12</length>
+   </stringQualifiers>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fillValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <dataHistory>Use</dataHistory>
+ </attributes>
  <tabularSections uuid="72d46856-3994-45b1-90c1-065776127b47">
   <producedTypes>
    <objectType typeId="56d3436e-b84c-4d51-922f-c6106c6c0a7e" valueTypeId="cb4ab512-d24e-4bbc-b300-977405b7c4c5"/>

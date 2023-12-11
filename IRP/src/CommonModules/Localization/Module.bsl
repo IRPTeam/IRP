@@ -2329,7 +2329,6 @@ Function Strings(Lang) Export
 #EndRegion	
 	
 #Region Salary
-
 	Strings.Insert("Salary_Err_001",   NStr("en='Wrong period';
 		|ru='Неправильный период';
 		|tr='Wrong period'", Lang));
@@ -2361,6 +2360,135 @@ Function Strings(Lang) Export
 	Strings.Insert("Salary_WeekDays_7",   NStr("en='Sunday';
 		|ru='Воскресенье';
 		|tr='Sunday'", Lang));
+#EndRegion
+
+#Region Accounting
+
+Strings.Insert("AccountingError_01", NStr("en='Account [%1] not used for records';
+	|ru='Account [%1] not used for records';
+	|tr='Account [%1] not used for records'", Lang));
+Strings.Insert("AccountingError_02", NStr("en='Debit - is a required field.';
+	|ru='Debit - is a required field.';
+	|tr='Debit - is a required field.'", Lang));
+Strings.Insert("AccountingError_03", NStr("en='Credit - is a required field.';
+	|ru='Credit - is a required field.';
+	|tr='Credit - is a required field.'", Lang));
+Strings.Insert("AccountingError_04", NStr("en='Record period - is a required field.';
+	|ru='Record period - is a required field.';
+	|tr='Record period - is a required field.'", Lang));
+Strings.Insert("AccountingError_05", NStr("en='Not set any ledger types';
+	|ru='Not set any ledger types';
+	|tr='Not set any ledger types'", Lang));
+
+Strings.Insert("AccountingQuestion_01", NStr("en='Change [Quantity] mark in analytics';
+	|ru='Change [Quantity] mark in analytics';
+	|tr='Change [Quantity] mark in analytics'", Lang));
+Strings.Insert("AccountingQuestion_02", NStr("en='Change [Currency] mark in analytics';
+	|ru='Change [Currency] mark in analytics';
+	|tr='Change [Currency] mark in analytics'", Lang));
+
+Strings.Insert("AccountingInfo_01", NStr("en='Load complete';
+	|ru='Load complete';
+	|tr='Load complete'", Lang));
+
+Strings.Insert("AccountingJE_prefix_01", NStr("en='JE ';
+	|ru='JE ';
+	|tr='JE '", Lang));
+
+Strings.Insert("BankPayment_DR_R1020B_AdvancesToVendors_R1021B_VendorsTransactions_CR_R3010B_CashOnHand", 
+	NStr("en='BankPayment DR (R1020B_AdvancesToVendors R1021B_VendorsTransactions) CR (R3010B_CashOnHand)';
+		|ru='BankPayment DR (R1020B_AdvancesToVendors R1021B_VendorsTransactions) CR (R3010B_CashOnHand)';
+		|tr='BankPayment DR (R1020B_AdvancesToVendors R1021B_VendorsTransactions) CR (R3010B_CashOnHand)'", Lang)); 
+
+Strings.Insert("BankPayment_DR_R5022T_Expenses_CR_R3010B_CashOnHand",
+	NStr("en='BankPayment DR (R5022T_Expenses) CR (R3010B_CashOnHand)';
+		|ru='BankPayment DR (R5022T_Expenses) CR (R3010B_CashOnHand)';
+		|tr='BankPayment DR (R5022T_Expenses) CR (R3010B_CashOnHand)'", Lang));
+
+Strings.Insert("BankPayment_DR_R1021B_VendorsTransactions_CR_R1020B_AdvancesToVendors",
+	NStr("en='BankPayment DR (R1021B_VendorsTransactions) CR (R1020B_AdvancesToVendors)';
+		|ru='BankPayment DR (R1021B_VendorsTransactions) CR (R1020B_AdvancesToVendors)';
+		|tr='BankPayment DR (R1021B_VendorsTransactions) CR (R1020B_AdvancesToVendors)'", Lang));
+
+Strings.Insert("BankReceipt_DR_R3010B_CashOnHand_CR_R2020B_AdvancesFromCustomers_R2021B_CustomersTransactions",
+	NStr("en='BankReceipt DR (R3010B_CashOnHand) CR (R2020B_AdvancesFromCustomers_R2021B_CustomersTransactions)';
+		|ru='BankReceipt DR (R3010B_CashOnHand) CR (R2020B_AdvancesFromCustomers_R2021B_CustomersTransactions)';
+		|tr='BankReceipt DR (R3010B_CashOnHand) CR (R2020B_AdvancesFromCustomers_R2021B_CustomersTransactions)'", Lang));
+
+Strings.Insert("PurchaseInvoice_DR_R4050B_StockInventory_R5022T_Expenses_CR_R1021B_VendorsTransactions",
+	NStr("en='PurchaseInvoice DR (R4050B_StockInventory_R5022T_Expenses) CR (R1021B_VendorsTransactions)';
+		|ru='PurchaseInvoice DR (R4050B_StockInventory_R5022T_Expenses) CR (R1021B_VendorsTransactions)';
+		|tr='PurchaseInvoice DR (R4050B_StockInventory_R5022T_Expenses) CR (R1021B_VendorsTransactions)'", Lang));
+
+Strings.Insert("PurchaseInvoice_DR_R1021B_VendorsTransactions_CR_R1020B_AdvancesToVendors",
+	NStr("en='PurchaseInvoice DR (R1021B_VendorsTransactions) CR (R1020B_AdvancesToVendors)';
+		|ru='PurchaseInvoice DR (R1021B_VendorsTransactions) CR (R1020B_AdvancesToVendors)';
+		|tr='PurchaseInvoice DR (R1021B_VendorsTransactions) CR (R1020B_AdvancesToVendors)'", Lang));
+
+Strings.Insert("PurchaseInvoice_DR_R1040B_TaxesOutgoing_CR_R1021B_VendorsTransactions",
+	NStr("en='PurchaseInvoice DR (R1040B_TaxesOutgoing) CR (R1021B_VendorsTransactions)';
+		|ru='PurchaseInvoice DR (R1040B_TaxesOutgoing) CR (R1021B_VendorsTransactions)';
+		|tr='PurchaseInvoice DR (R1040B_TaxesOutgoing) CR (R1021B_VendorsTransactions)'", Lang));
+
+Strings.Insert("RetailSalesReceipt_DR_R5022T_Expenses_CR_R4050B_StockInventory",
+	NStr("en='RetailSalesReceipt DR (R5022T_Expenses) CR (R4050B_StockInventory)';
+		|ru='RetailSalesReceipt DR (R5022T_Expenses) CR (R4050B_StockInventory)';
+		|tr='RetailSalesReceipt DR (R5022T_Expenses) CR (R4050B_StockInventory)'", Lang));
+
+Strings.Insert("SalesInvoice_DR_R5022T_Expenses_CR_R4050B_StockInventory",
+	NStr("en='SalesInvoice DR (R5022T_Expenses) CR (R4050B_StockInventory)';
+		|ru='SalesInvoice DR (R5022T_Expenses) CR (R4050B_StockInventory)';
+		|tr='SalesInvoice DR (R5022T_Expenses) CR (R4050B_StockInventory)'", Lang));
+
+Strings.Insert("SalesInvoice_DR_R2021B_CustomersTransactions_CR_R5021T_Revenues",
+	NStr("en='SalesInvoice DR (R2021B_CustomersTransactions) CR (R5021T_Revenues)';
+		|ru='SalesInvoice DR (R2021B_CustomersTransactions) CR (R5021T_Revenues)';
+		|tr='SalesInvoice DR (R2021B_CustomersTransactions) CR (R5021T_Revenues)'", Lang));
+
+Strings.Insert("SalesInvoice_DR_R5021T_Revenues_CR_R2040B_TaxesIncoming",
+	NStr("en='SalesInvoice DR (R5021T_Revenues) CR (R2040B_TaxesIncoming)';
+		|ru='SalesInvoice DR (R5021T_Revenues) CR (R2040B_TaxesIncoming)';
+		|tr='SalesInvoice DR (R5021T_Revenues) CR (R2040B_TaxesIncoming)'", Lang));
+
+Strings.Insert("SalesInvoice_DR_R2020B_AdvancesFromCustomers_CR_R2021B_CustomersTransactions",
+	NStr("en='SalesInvoice DR (R2020B_AdvancesFromCustomers) CR (R2021B_CustomersTransactions)';
+		|ru='SalesInvoice DR (R2020B_AdvancesFromCustomers) CR (R2021B_CustomersTransactions)';
+		|tr='SalesInvoice DR (R2020B_AdvancesFromCustomers) CR (R2021B_CustomersTransactions)'", Lang));
+
+Strings.Insert("PurchaseInvoice_DR_R1021B_VendorsTransactions_CR_R1020B_AdvancesToVendors_CurrencyRevaluation",
+	NStr("en='PurchaseInvoice DR (R1021B_VendorsTransactions) CR (R1020B_AdvancesToVendors_CurrencyRevaluation)';
+		|ru='PurchaseInvoice DR (R1021B_VendorsTransactions) CR (R1020B_AdvancesToVendors_CurrencyRevaluation)';
+		|tr='PurchaseInvoice DR (R1021B_VendorsTransactions) CR (R1020B_AdvancesToVendors_CurrencyRevaluation)'", Lang));
+
+Strings.Insert("ForeignCurrencyRevaluation_DR_R5022T_Expenses_CR_R2020B_AdvancesFromCustomers",
+	NStr("en='ForeignCurrencyRevaluation DR (R5022T_Expenses) CR (R2020B_AdvancesFromCustomers)';
+		|ru='ForeignCurrencyRevaluation DR (R5022T_Expenses) CR (R2020B_AdvancesFromCustomers)';
+		|tr='ForeignCurrencyRevaluation DR (R5022T_Expenses) CR (R2020B_AdvancesFromCustomers)'", Lang));
+
+Strings.Insert("SalesInvoice_DR_R2020B_AdvancesFromCustomers_CR_R2021B_CustomersTransactions_CurrencyRevaluation",
+	NStr("en='SalesInvoice DR (R2020B_AdvancesFromCustomers) CR (R2021B_CustomersTransactions_CurrencyRevaluation)';
+		|ru='SalesInvoice DR (R2020B_AdvancesFromCustomers) CR (R2021B_CustomersTransactions_CurrencyRevaluation)';
+		|tr='SalesInvoice DR (R2020B_AdvancesFromCustomers) CR (R2021B_CustomersTransactions_CurrencyRevaluation)'", Lang));
+
+Strings.Insert("SalesInvoice_DR_R2021B_CustomersTransactions_CR_R5021T_Revenues_CurrencyRevaluation",
+	NStr("en='SalesInvoice DR (R2021B_CustomersTransactions) CR (R5021T_Revenues_CurrencyRevaluation)';
+		|ru='SalesInvoice DR (R2021B_CustomersTransactions) CR (R5021T_Revenues_CurrencyRevaluation)';
+		|tr='SalesInvoice DR (R2021B_CustomersTransactions) CR (R5021T_Revenues_CurrencyRevaluation)'", Lang));
+
+Strings.Insert("PurchaseInvoice_DR_R4050B_StockInventory_R5022T_Expenses_CR_R1021B_VendorsTransactions_CurrencyRevaluation",
+	NStr("en='PurchaseInvoice DR (R4050B_StockInventory_R5022T_Expenses) CR (R1021B_VendorsTransactions_CurrencyRevaluation)';
+		|ru='PurchaseInvoice DR (R4050B_StockInventory_R5022T_Expenses) CR (R1021B_VendorsTransactions_CurrencyRevaluation)';
+		|tr='PurchaseInvoice DR (R4050B_StockInventory_R5022T_Expenses) CR (R1021B_VendorsTransactions_CurrencyRevaluation)'", Lang));
+
+Strings.Insert("ForeignCurrencyRevaluation_DR_R2020B_AdvancesFromCustomers_CR_R5021T_Revenues",
+	NStr("en='ForeignCurrencyRevaluation DR (R2020B_AdvancesFromCustomers) CR (R5021T_Revenues)';
+		|ru='ForeignCurrencyRevaluation DR (R2020B_AdvancesFromCustomers) CR (R5021T_Revenues)';
+		|tr='ForeignCurrencyRevaluation DR (R2020B_AdvancesFromCustomers) CR (R5021T_Revenues)'", Lang));
+
+Strings.Insert("BankReceipt_DR_R2021B_CustomersTransactions_CR_R2020B_AdvancesFromCustomers",
+	NStr("en='BankReceipt DR (R2021B_CustomersTransactions) CR (R2020B_AdvancesFromCustomers)';
+		|ru='BankReceipt DR (R2021B_CustomersTransactions) CR (R2020B_AdvancesFromCustomers)';
+		|tr='BankReceipt DR (R2021B_CustomersTransactions) CR (R2020B_AdvancesFromCustomers)'", Lang));
 	
 #EndRegion
 	

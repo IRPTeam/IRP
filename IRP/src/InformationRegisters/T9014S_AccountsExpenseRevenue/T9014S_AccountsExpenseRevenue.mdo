@@ -60,8 +60,8 @@
   <maxValue xsi:type="core:UndefinedValue"/>
   <fillChecking>ShowError</fillChecking>
   <choiceParameterLinks>
-   <name>Filter.Variant</name>
-   <field>InformationRegister.T9014S_AccountsExpenseRevenue.Dimension.Variant</field>
+   <name>Filter.LedgerTypeVariant</name>
+   <field>InformationRegister.T9014S_AccountsExpenseRevenue.Dimension.LedgerTypeVariant</field>
   </choiceParameterLinks>
   <fullTextSearch>Use</fullTextSearch>
   <dataHistory>Use</dataHistory>
@@ -94,18 +94,18 @@
   <mainFilter>true</mainFilter>
  </dimensions>
  <dimensions uuid="45f6fdd1-6108-41a1-9c2f-d679491bc594">
-  <name>Variant</name>
+  <name>LedgerTypeVariant</name>
   <synonym>
    <key>en</key>
-   <value>Variant</value>
+   <value>Ledger type variant</value>
   </synonym>
   <synonym>
    <key>ru</key>
-   <value>Характеристика</value>
+   <value>Вариант типа учета</value>
   </synonym>
   <synonym>
    <key>tr</key>
-   <value>Varyant</value>
+   <value>Defter tip seçeneği</value>
   </synonym>
   <type>
    <types>CatalogRef.LedgerTypeVariants</types>

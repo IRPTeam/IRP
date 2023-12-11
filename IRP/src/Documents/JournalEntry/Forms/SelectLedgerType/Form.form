@@ -16,6 +16,50 @@
    <name>JournalEntriesGroupIcon</name>
    <id>27</id>
    <items xsi:type="form:FormField">
+    <name>JournalEntriesUse</name>
+    <id>29</id>
+    <visible>true</visible>
+    <enabled>true</enabled>
+    <userVisible>
+     <common>true</common>
+    </userVisible>
+    <dataPath xsi:type="form:DataPath">
+     <segments>JournalEntries.Use</segments>
+    </dataPath>
+    <titleLocation>None</titleLocation>
+    <extendedTooltip>
+     <name>JournalEntriesUseExtendedTooltip</name>
+     <id>31</id>
+     <visible>true</visible>
+     <enabled>true</enabled>
+     <userVisible>
+      <common>true</common>
+     </userVisible>
+     <type>Label</type>
+     <autoMaxWidth>true</autoMaxWidth>
+     <autoMaxHeight>true</autoMaxHeight>
+     <extInfo xsi:type="form:LabelDecorationExtInfo">
+      <horizontalAlign>Left</horizontalAlign>
+     </extInfo>
+    </extendedTooltip>
+    <contextMenu>
+     <name>JournalEntriesUseContextMenu</name>
+     <id>30</id>
+     <visible>true</visible>
+     <enabled>true</enabled>
+     <userVisible>
+      <common>true</common>
+     </userVisible>
+     <autoFill>true</autoFill>
+    </contextMenu>
+    <type>CheckBoxField</type>
+    <editMode>Enter</editMode>
+    <showInHeader>true</showInHeader>
+    <headerHorizontalAlign>Left</headerHorizontalAlign>
+    <showInFooter>true</showInFooter>
+    <extInfo xsi:type="form:CheckBoxFieldExtInfo"/>
+   </items>
+   <items xsi:type="form:FormField">
     <name>JournalEntriesIcon</name>
     <id>18</id>
     <visible>true</visible>
@@ -572,6 +616,56 @@
     <common>true</common>
    </edit>
   </columns>
+  <columns>
+   <name>Use</name>
+   <title>
+    <key>en</key>
+    <value>Use</value>
+   </title>
+   <title>
+    <key>ru</key>
+    <value>Использование</value>
+   </title>
+   <title>
+    <key>tr</key>
+    <value>Kullan</value>
+   </title>
+   <id>6</id>
+   <valueType>
+    <types>Boolean</types>
+   </valueType>
+   <view>
+    <common>true</common>
+   </view>
+   <edit>
+    <common>true</common>
+   </edit>
+  </columns>
+ </attributes>
+ <attributes>
+  <name>IsMultipleDocuments</name>
+  <title>
+   <key>en</key>
+   <value>Is multiple documents</value>
+  </title>
+  <title>
+   <key>ru</key>
+   <value>Is multiple documents</value>
+  </title>
+  <title>
+   <key>tr</key>
+   <value>Is multiple documents</value>
+  </title>
+  <id>5</id>
+  <valueType>
+   <types>Boolean</types>
+  </valueType>
+  <view>
+   <common>true</common>
+  </view>
+  <edit>
+   <common>true</common>
+  </edit>
  </attributes>
  <formCommands>
   <name>Ok</name>

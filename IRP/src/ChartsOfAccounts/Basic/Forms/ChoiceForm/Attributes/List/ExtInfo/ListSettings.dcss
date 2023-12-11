@@ -13,6 +13,22 @@
 		<userSettingID>ed4122a1-cf7e-4df8-a344-440f1477b4a6</userSettingID>
 	</order>
 	<conditionalAppearance>
+		<item>
+			<selection/>
+			<filter>
+				<item xsi:type="FilterItemComparison">
+					<left xsi:type="dcscor:Field">NotUsedForRecords</left>
+					<comparisonType>Equal</comparisonType>
+					<right xsi:type="xs:boolean">true</right>
+				</item>
+			</filter>
+			<appearance>
+				<dcscor:item xsi:type="SettingsParameterValue">
+					<dcscor:parameter>BackColor</dcscor:parameter>
+					<dcscor:value xsi:type="v8ui:Color">#CCFFFF</dcscor:value>
+				</dcscor:item>
+			</appearance>
+		</item>
 		<viewMode>Normal</viewMode>
 		<userSettingID>f1ad92b3-8642-45f4-b01d-fe3d29cf06cd</userSettingID>
 	</conditionalAppearance>

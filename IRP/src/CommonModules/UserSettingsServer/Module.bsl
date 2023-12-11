@@ -275,14 +275,67 @@ EndProcedure
 
 Function GeneratePassword() Export
 
-	Alphabet = "1234567890ABCDEFGHKLMNPRSTUVWXYZ!@#$%&";
+	NeedLow = False;
+	NeedUpper = False;
+	NeedNumber = False;
+	NeedChars = False;
+	
+	AlphabetLow = "abcdefghklmnprstuvwxyz";
+	AlphabetUpper = "ABCDEFGHKLMNPRSTUVWXYZ";
+	AlphabetChars = "!@#$%&";
+	AlphabetNumber = "1234567890";
+	
+	Alphabet = AlphabetUpper + AlphabetNumber + AlphabetChars;
+	If GetUserPasswordStrengthCheck() Then
+		Alphabet = Alphabet + AlphabetLow;
+		NeedLow = True;
+		NeedUpper = True;
+		NeedChars = True;
+		NeedNumber = True;
+	EndIf;	   
 
 	RNG = New RandomNumberGenerator();
 	NewPass = "";
-	For I = 1 To 10 Do
+	
+	PassLen = Max(10, GetUserPasswordMinLength());
+	For I = 1 To PassLen Do
 		Index = RNG.RandomNumber(1, (StrLen(Alphabet)));
-		NewPass = NewPass + Mid(Alphabet, Index, 1);
+		NewChar = Mid(Alphabet, Index, 1);
+		NewPass = NewPass + NewChar;
+		
+		If NeedLow And StrFind(AlphabetLow, NewChar) > 0 Then
+			NeedLow = False;
+		EndIf;
+		If NeedUpper And StrFind(AlphabetUpper, NewChar) > 0 Then
+			NeedUpper = False;
+		EndIf;
+		If NeedChars And StrFind(AlphabetChars, NewChar) > 0 Then
+			NeedChars = False;
+		EndIf;
+		If NeedNumber And StrFind(AlphabetNumber, NewChar) > 0 Then
+			NeedNumber = False;
+		EndIf;
 	EndDo;
+	
+	If GetUserPasswordStrengthCheck() Then
+		If NeedLow Then
+			Index = RNG.RandomNumber(1, (StrLen(AlphabetLow)));
+			NewPass = NewPass + Mid(AlphabetLow, Index, 1);
+		EndIf;
+		If NeedUpper Then
+			Index = RNG.RandomNumber(1, (StrLen(AlphabetUpper)));
+			NewPass = NewPass + Mid(AlphabetUpper, Index, 1);
+		EndIf;
+		If NeedChars Then
+			Index = RNG.RandomNumber(1, (StrLen(AlphabetChars)));
+			NewPass = NewPass + Mid(AlphabetChars, Index, 1);
+		EndIf;
+		If NeedNumber Then
+			Index = RNG.RandomNumber(1, (StrLen(AlphabetNumber)));
+			NewPass = NewPass + Mid(AlphabetNumber, Index, 1);
+		EndIf;
+	EndIf;
+	
 	Return NewPass;
 
 EndFunction

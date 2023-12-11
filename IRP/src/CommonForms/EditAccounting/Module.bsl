@@ -49,8 +49,44 @@ Procedure Refresh(Command)
 	SetCurrentRowAtAccountingAnalytics();
 EndProcedure
 
+&AtServer
+Procedure FillCheckProcessingAtServer(Cancel, CheckedAttributes)
+	Index = 0;
+	For Each Row In ThisObject.AccountingAnalytics Do
+		If Not ValueIsFilled(Row.AccountDebit) Then
+			Cancel = True;
+			CommonFunctionsClientServer.ShowUsersMessage(
+				R().AccountingError_02, "AccountingAnalytics["+ Index +"].AccountDebit", ThisObject);
+		Else
+			If Row.AccountDebit.NotUsedForRecords Then
+				Cancel = True;
+				CommonFunctionsClientServer.ShowUsersMessage(
+					StrTemplate(R().AccountingError_01, Row.AccountDebit), "AccountingAnalytics["+ Index +"].AccountDebit", ThisObject);
+			EndIf;
+		EndIf;
+		
+		If Not ValueIsFilled(Row.AccountCredit) Then
+			Cancel = True;
+			CommonFunctionsClientServer.ShowUsersMessage(
+				R().AccountingError_03, "AccountingAnalytics["+ Index +"].AccountCredit", ThisObject);
+		Else
+			If Row.AccountCredit.NotUsedForRecords Then
+				Cancel = True;
+				CommonFunctionsClientServer.ShowUsersMessage(
+					StrTemplate(R().AccountingError_01, Row.AccountCredit), "AccountingAnalytics["+ Index +"].AccountCredit", ThisObject);
+			EndIf;
+		EndIf;
+		
+		Index = Index + 1;
+	EndDo;
+EndProcedure
+
 &AtClient
 Procedure Ok(Command)
+	If Not ThisObject.CheckFilling() Then
+		Return;
+	EndIf;
+	
 	Result = New Structure();
 	Result.Insert("AccountingAnalytics" , New Array());
 	Result.Insert("DocumentRef"         , ThisObject.DocumentRef);
@@ -182,11 +218,18 @@ Procedure AccountingAnalyticsAccountDebitOnChange(Item)
 		ArrayOfExtDimensions = GetExtDimensionTypes(CurrentData.AccountDebit);
 		For Each ExtDim In ArrayOfExtDimensions Do
 			CurrentData["ExtDimensionTypeDr" + Counter] = ExtDim.ExtDimensionType;
+			CurrentData["ExtDimensionReadOnlyDr" + Counter] = False;
 			If ExtDim.ArrayOfTypes.Find(TypeOf(CurrentData["ExtDimensionDr" + Counter])) = Undefined Then
 				CurrentData["ExtDimensionDr" + Counter] = Undefined;
 			EndIf;
 			Counter = Counter + 1;
 		EndDo;
+		
+		For i = ArrayOfExtDimensions.Count() + 1 To 3 Do
+			CurrentData["ExtDimensionDr" + i] = Undefined;
+			CurrentData["ExtDimensionReadOnlyDr" + i] = True;
+		EndDo;
+		
 	EndIf;
 	SetColumnTitle(CurrentData);
 EndProcedure
@@ -207,12 +250,19 @@ Procedure AccountingAnalyticsAccountCreditOnChange(Item)
 		ArrayOfExtDimensions = GetExtDimensionTypes(CurrentData.AccountCredit);
 		For Each ExtDim In ArrayOfExtDimensions Do
 			CurrentData["ExtDimensionTypeCr" + Counter] = ExtDim.ExtDimensionType;
+			CurrentData["ExtDimensionReadOnlyCr" + Counter] = False;
 			If ExtDim.ArrayOfTypes.Find(TypeOf(CurrentData["ExtDimensionCr" + Counter])) = Undefined Then
 				CurrentData["ExtDimensionCr" + Counter] = Undefined;
 			EndIf;
 			Counter = Counter + 1;
 		EndDo;
+		
+		For i = ArrayOfExtDimensions.Count() + 1 To 3 Do
+			CurrentData["ExtDimensionCr" + i] = Undefined;
+			CurrentData["ExtDimensionReadOnlyCr" + i] = True;
+		EndDo;
 	EndIf;
+
 	SetColumnTitle(CurrentData);
 EndProcedure
 

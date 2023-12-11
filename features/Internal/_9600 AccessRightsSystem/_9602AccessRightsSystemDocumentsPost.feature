@@ -2152,4 +2152,3 @@ Scenario: 964077 deletion mark ModernizationOfFixedAsset (LimitedAccess)
 		| "EndTry"                                                  |
 	And 1C:Enterprise language expression "{!Documents.ModernizationOfFixedAsset.FindByNumber(2).DeletionMark=False}" is true
 	And 1C:Enterprise language expression "{!Documents.ModernizationOfFixedAsset.FindByNumber(26).DeletionMark=True}" is true
-

@@ -65,12 +65,14 @@ EndFunction
 Procedure PresentationFieldsGetProcessing(Fields, StandardProcessing)
 	StandardProcessing = False;
 	Fields.Add("Basis");
+	Fields.Add("Number");
+	Fields.Add("Date");
 EndProcedure
 
 Procedure PresentationGetProcessing(Data, Presentation, StandardProcessing)	
 	If ValueIsFilled(Data.Basis) Then
 		StandardProcessing = False;
-		Presentation = Data.Basis;
+		Presentation = ""+R().AccountingJE_prefix_01 + Data.Basis;
 	EndIf;
 EndProcedure
 

@@ -105,8 +105,9 @@ Scenario: _351003 add launching as another user
 		And I go to line in "List" table
 			| 'Description'                               |
 			| 'Arina Brown (Financier 3)'                 | 
+		And I select current line in "List" table
 	* Run session
-		And I click "Run session" button
+		And In this window I click command interface button "Run session"
 		And Delay 10
 	* Check original password restoration
 		And I connect "Test" TestClient using "ABrown" login and "$$password$$" password

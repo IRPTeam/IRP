@@ -159,7 +159,7 @@
   </extInfo>
  </items>
  <items xsi:type="form:FormField">
-  <name>Variant</name>
+  <name>LedgerTypeVariant</name>
   <id>16</id>
   <visible>true</visible>
   <enabled>true</enabled>
@@ -167,10 +167,10 @@
    <common>true</common>
   </userVisible>
   <dataPath xsi:type="form:DataPath">
-   <segments>Record.Variant</segments>
+   <segments>Record.LedgerTypeVariant</segments>
   </dataPath>
   <extendedTooltip>
-   <name>VariantExtendedTooltip</name>
+   <name>LedgerTypeVariantExtendedTooltip</name>
    <id>18</id>
    <visible>true</visible>
    <enabled>true</enabled>
@@ -185,7 +185,7 @@
    </extInfo>
   </extendedTooltip>
   <contextMenu>
-   <name>VariantContextMenu</name>
+   <name>LedgerTypeVariantContextMenu</name>
    <id>17</id>
    <visible>true</visible>
    <enabled>true</enabled>

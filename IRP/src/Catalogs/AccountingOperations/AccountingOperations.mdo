@@ -176,7 +176,7 @@
    </code>
    <isFolder>true</isFolder>
    <content id="0a5ed6e5-a6f6-4167-b3d9-198842f906e6">
-    <name>BankPayment_DR_R1020B_AdvancesToVendors_R1021B_VendorsTransactions_CR_R3010B</name>
+    <name>BankPayment_DR_R1020B_AdvancesToVendors_R1021B_VendorsTransactions_CR_R3010B_CashOnHand</name>
     <description>Dr Partner account - Cr Cash account</description>
     <code xsi:type="core:NumberValue">
      <value>3</value>
@@ -189,7 +189,7 @@
     </code>
    </content>
    <content id="74335ed0-2922-43c2-85c5-27c87eb943ba">
-    <name>BankPayment_R1021B_VendorsTransactions_CR_R1020B_AdvancesToVendors</name>
+    <name>BankPayment_DR_R1021B_VendorsTransactions_CR_R1020B_AdvancesToVendors</name>
     <code xsi:type="core:NumberValue">
      <value>10</value>
     </code>

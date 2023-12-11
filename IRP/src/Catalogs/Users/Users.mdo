@@ -534,7 +534,7 @@
    <key>tr</key>
    <value>Oturumu çalıştır</value>
   </synonym>
-  <group>CommandGroup.Service</group>
+  <group>FormNavigationPanelSeeAlso</group>
   <commandParameterType>
    <types>CatalogRef.Users</types>
   </commandParameterType>

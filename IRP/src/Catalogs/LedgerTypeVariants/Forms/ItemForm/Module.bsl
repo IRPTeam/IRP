@@ -23,6 +23,11 @@ Procedure NotificationProcessing(EventName, Parameter, Source)
 	EndIf;
 EndProcedure
 
+&AtClient
+Procedure EditUniqueID(Command)
+	Items.UniqueID.ReadOnly = Not Items.UniqueID.ReadOnly;
+EndProcedure
+
 #Region AddAttributes
 
 &AtClient

@@ -265,6 +265,13 @@ Procedure OnChainComplete(Parameters) Export
 			Return;
 	EndIf;
 	
+	// RetailReceiptCorrection
+	If Parameters.ObjectMetadataInfo.MetadataName = "RetailReceiptCorrection"
+		And Upper(Parameters.Form.FormName) = Upper("Document.RetailReceiptCorrection.Form.DocumentForm") Then
+			__tmp_CommonDocuments_OnChainComplete(Parameters, True);
+			Return;
+	EndIf;
+	
 	If Parameters.ObjectMetadataInfo.MetadataName = "BankPayment"
 		Or Parameters.ObjectMetadataInfo.MetadataName = "BankReceipt"
 		Or Parameters.ObjectMetadataInfo.MetadataName = "CashPayment"
@@ -2429,6 +2436,7 @@ Procedure OnSetItemListQuantityInBaseUnitNotify(Parameters) Export
 		Or Parameters.ObjectMetadataInfo.MetadataName = "StockAdjustmentAsSurplus"
 		Or Parameters.ObjectMetadataInfo.MetadataName = "StockAdjustmentAsWriteOff"
 		Or Parameters.ObjectMetadataInfo.MetadataName = "RetailSalesReceipt"
+		Or Parameters.ObjectMetadataInfo.MetadataName = "RetailReceiptCorrection"
 		Or Parameters.ObjectMetadataInfo.MetadataName = "RetailReturnReceipt"
 		Or Parameters.ObjectMetadataInfo.MetadataName = "PurchaseReturn"
 		Or Parameters.ObjectMetadataInfo.MetadataName = "SalesReturn"
@@ -3530,6 +3538,7 @@ Procedure OnSetPartnerNotify(Parameters) Export
 		Or Parameters.ObjectMetadataInfo.MetadataName = "RetailGoodsReceipt"
 		Or Parameters.ObjectMetadataInfo.MetadataName = "ShipmentConfirmation"
 		Or Parameters.ObjectMetadataInfo.MetadataName = "RetailSalesReceipt"
+		Or Parameters.ObjectMetadataInfo.MetadataName = "RetailReceiptCorrection"
 		Or Parameters.ObjectMetadataInfo.MetadataName = "RetailReturnReceipt"
 		Or Parameters.ObjectMetadataInfo.MetadataName = "PurchaseReturn"
 		Or Parameters.ObjectMetadataInfo.MetadataName = "SalesReturn"
@@ -3707,6 +3716,7 @@ EndProcedure
 
 Procedure OnSetConsolidatedRetailSalesNotify(Parameters) Export
 	If Parameters.ObjectMetadataInfo.MetadataName = "RetailSalesReceipt"
+		Or Parameters.ObjectMetadataInfo.MetadataName = "RetailReceiptCorrection"
 		Or Parameters.ObjectMetadataInfo.MetadataName = "RetailReturnReceipt" Then
 		Parameters.Form.FormSetVisibilityAvailability();
 	EndIf;
@@ -3736,6 +3746,7 @@ EndProcedure
 
 Procedure OnSetBranchNotify(Parameters) Export
 	If Parameters.ObjectMetadataInfo.MetadataName = "RetailSalesReceipt"
+		Or Parameters.ObjectMetadataInfo.MetadataName = "RetailReceiptCorrection"
 		Or Parameters.ObjectMetadataInfo.MetadataName = "RetailReturnReceipt" Then
 		Parameters.Form.FormSetVisibilityAvailability();
 	EndIf;

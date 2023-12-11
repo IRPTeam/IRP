@@ -984,6 +984,13 @@
         <value>144</value>
       </code>
     </items>
+    <items id="cfa7cf33-c2d2-4a5b-ab3f-0ed169fc2113">
+      <name>Document_RetailReceiptCorrection</name>
+      <description></description>
+      <code xsi:type="core:NumberValue">
+        <value>145</value>
+      </code>
+    </items>
   </predefined>
   <editType>InDialog</editType>
   <choiceMode>BothWays</choiceMode>

@@ -6,6 +6,42 @@ EndFunction
 
 #EndRegion
 
+#Region Posting_Info
+
+Function GetInformationAboutMovements(Ref) Export
+	Str = New Structure;
+	Str.Insert("QueryParameters", GetAdditionalQueryParameters(Ref));
+	Str.Insert("QueryTextsMasterTables", GetQueryTextsMasterTables());
+	Str.Insert("QueryTextsSecondaryTables", GetQueryTextsSecondaryTables());
+	Return Str;
+EndFunction
+
+Function GetAdditionalQueryParameters(Ref)
+	StrParams = New Structure;
+	StrParams.Insert("Ref", Ref);
+	Return StrParams;
+EndFunction
+
+#EndRegion
+
+#Region Posting_SourceTable
+
+Function GetQueryTextsSecondaryTables()
+	QueryArray = New Array;
+	Return QueryArray;
+EndFunction
+
+#EndRegion
+
+#Region Posting_MainTables
+
+Function GetQueryTextsMasterTables()
+	QueryArray = New Array;
+	Return QueryArray;
+EndFunction
+
+#EndRegion
+
 #Region AccessObject
 
 // Get access key.

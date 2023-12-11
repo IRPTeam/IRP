@@ -991,6 +991,13 @@
         <value>145</value>
       </code>
     </items>
+    <items id="2efe17c0-f865-4750-b9d7-80b009a3d60d">
+      <name>Catalog_Projects</name>
+      <description></description>
+      <code xsi:type="core:NumberValue">
+        <value>146</value>
+      </code>
+    </items>
   </predefined>
   <editType>InDialog</editType>
   <choiceMode>BothWays</choiceMode>

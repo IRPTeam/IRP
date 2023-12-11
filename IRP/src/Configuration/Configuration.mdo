@@ -957,6 +957,7 @@
   <catalogs>Catalog.VehicleTypes</catalogs>
   <catalogs>Catalog.Workstations</catalogs>
   <catalogs>Catalog.EmployeeSchedule</catalogs>
+  <catalogs>Catalog.Projects</catalogs>
   <documents>Document.AdditionalCostAllocation</documents>
   <documents>Document.AdditionalRevenueAllocation</documents>
   <documents>Document.BankPayment</documents>

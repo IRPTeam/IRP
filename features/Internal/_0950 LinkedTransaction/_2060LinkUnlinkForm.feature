@@ -185,6 +185,7 @@ Scenario: _2060001 preparation
 	And I execute 1C:Enterprise script at server
 			| "Documents.ShipmentConfirmation.FindByNumber(1052).GetObject().Write(DocumentWriteMode.Write);" |
 			| "Documents.ShipmentConfirmation.FindByNumber(1052).GetObject().Write(DocumentWriteMode.Posting);" |
+	And Delay 5
 	When Create SO and SC for link
 	And I execute 1C:Enterprise script at server
 			| "Documents.SalesOrder.FindByNumber(1053).GetObject().Write(DocumentWriteMode.Write);"|

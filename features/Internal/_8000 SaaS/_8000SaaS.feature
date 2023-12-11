@@ -13,8 +13,6 @@ Background:
 	
 Scenario:_800001 create SaaS area
 	When set True value to the constant SaasMode
-	And I close TestClient session
-	Given I open new TestClient session or connect the existing one
 	* Create area Discount
 		Given I open hyperlink "e1cib/list/Catalog.DataAreas"
 		And I click the button named "FormCreate"

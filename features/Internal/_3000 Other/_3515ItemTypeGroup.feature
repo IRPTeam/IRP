@@ -14,8 +14,6 @@ Background:
 
 Scenario: _351501 create a group of item types
     When set True value to the constant
-    And I close TestClient session
-    Given I open new TestClient session or connect the existing one
     * Open catalog Item Type
         Given I open hyperlink "e1cib/list/Catalog.ItemTypes"
     * Create Item Type group

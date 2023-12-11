@@ -12,8 +12,6 @@ Background:
 
 Scenario: 950000 preparation (role Full access only read)
 	When set True value to the constant
-	And I close TestClient session
-	Given I open new TestClient session or connect the existing one
 	When Create catalog AccessGroups objects
 	When Create catalog AccessProfiles objects
 	When Create catalog Agreements objects
@@ -1141,3 +1139,7 @@ Scenario: 950089 check role Full access only read (Production planning closing)
 		If the warning is displayed then 
 			Then I raise "Failed to open" exception
 		And I close all client application windows
+
+Scenario: _999999 close TestClient session
+		And I close TestClient session
+		Then I connect launched Test client "Этот клиент"

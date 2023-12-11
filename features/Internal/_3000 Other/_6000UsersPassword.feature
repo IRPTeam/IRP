@@ -13,8 +13,6 @@ Background:
 
 Scenario: _351000 preparation
 	When set True value to the constant
-	And I close TestClient session
-	Given I open new TestClient session or connect the existing one
 	When Create catalog Users objects
 	When Create catalog AccessProfiles objects
 	When Create catalog AccessGroups objects

@@ -10,5 +10,6 @@
   <content>Document.ConsolidatedRetailSales</content>
   <content>Document.RetailReturnReceipt</content>
   <content>Document.RetailSalesReceipt</content>
+  <content>Document.RetailReceiptCorrection</content>
   <parentSubsystem>Subsystem.Retail</parentSubsystem>
 </mdclass:Subsystem>

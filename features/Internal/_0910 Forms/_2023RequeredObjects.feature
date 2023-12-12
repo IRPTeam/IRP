@@ -98,3 +98,6 @@ Scenario: _0202301 check of the sign of required filling at the additional attri
 		And I remove "Required" checkbox in "AvailableAttributes" table
 		And I finish line editing in "AvailableAttributes" table
 		And I click "Save and close" button
+
+Scenario: _999999 close TestClient session
+	And I close TestClient session

@@ -292,7 +292,26 @@ When Create catalog PartnerItems objects (test data base)
 			| 'Description'           |
 			| 'Acquiring terminal'    |
 		And I select current line in "List" table
-		And I click "Save and close" button	
+		And I click "Save and close" button
+* Open session
+	And I close all client application windows
+	And In the command interface I select "Retail" "Point of sale"
+	And I click "Open session" button
+	If Recent TestClient message contains "Shift already opened." string Then
+	* Temporally
+		Given I open hyperlink "e1cib/list/Document.ConsolidatedRetailSales"
+		And I select current line in "List" table
+		And I click the hyperlink named "DecorationGroupTitleCollapsedPicture"
+		And I select "Open" exact value from the drop-down list named "Status"
+		And I activate "Icon" field in "Documents" table
+		And I click "Post and close" button
+		And I close all client application windows
+		And In the command interface I select "Retail" "Point of sale"
+		And I click "Close session" button
+		Then "Finish: Session closing" window is opened
+		And I click "Close session" button		
+		And Delay 2
+		And I click "Open session" button
 * Posting first documents
 	And I execute 1C:Enterprise script at server
 			| "Documents.GoodsReceipt.FindByNumber(4).GetObject().Write(DocumentWriteMode.Posting);"    |
@@ -514,12 +533,3 @@ When Create catalog PartnerItems objects (test data base)
 		And in the table "List" I click the button named "ListContextMenuPost"
 		And Delay "3"
 And I close all client application windows
-
-
-	
-		
-	
-		
-	
-		
-

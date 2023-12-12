@@ -897,7 +897,7 @@ Scenario: Create catalog Workstations objects (test data base)
 
 	And I check or create for catalog "Workstations" objects with Data Exchange Load parameter set to true:
 		| 'Ref'                                                                  | 'DeletionMark' | 'Code' | 'Description'    | 'CashAccount'                                                          | 'PrintTemplate' | 'UserGroup'                                                          | 'UseCashInAndCashOut' | 'AutoCreateMoneyTransferAtSessionClosing' | 'AutoCalculateDiscount' | 'IgnoreCodeStringControl' | 'PrintBarcodeWithDocumentUUID' | 'PostponeWithReserve' | 'PostponeWithoutReserve' | 'UniqueID' |
-		| 'e1cib/data/Catalog.Workstations?ref=b762b13668d0905011eb766bf96b2775' | 'False'        | 1      | 'Workstation 01' | 'e1cib/data/Catalog.CashAccounts?ref=b762b13668d0905011eb76684b9f685c' | ''              | 'e1cib/data/Catalog.UserGroups?ref=b762b13668d0905011eb767f10805e2c' | 'True'                | 'True'                                    | 'True'                  | 'False'                   | 'True'                         | 'True'                | 'False'                  | ''         |
+		| 'e1cib/data/Catalog.Workstations?ref=b762b13668d0905011eb766bf96b2775' | 'False'        | 1      | 'Workstation 01' | 'e1cib/data/Catalog.CashAccounts?ref=b762b13668d0905011eb76684b9f685c' | ''              | 'e1cib/data/Catalog.UserGroups?ref=b762b13668d0905011eb767f10805e2c' | 'True'                | 'True'                                    | 'True'                  | 'False'                   | 'False'                        | 'True'                | 'False'                  | ''         |
 
 Scenario: Create document BankPayment objects (test data base)
 

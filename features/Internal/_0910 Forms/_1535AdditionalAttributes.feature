@@ -5914,10 +5914,4 @@ Scenario: _015400670 check AddAttribute with type hyperlink
 		And I click "123" hyperlink
 		Then "1C:Enterprise" window is opened
 		And I click the button named "OK"
-				
-				
-						
-				
-
-				
-				
+		And I close all client application windows

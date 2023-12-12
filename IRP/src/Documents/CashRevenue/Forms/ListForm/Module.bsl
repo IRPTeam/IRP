@@ -3,6 +3,7 @@
 &AtServer
 Procedure OnCreateAtServer(Cancel, StandardProcessing)
 	DocCashExpenseRevenueServer.OnCreateAtServerListForm(ThisObject, Cancel, StandardProcessing);
+	Items.IsHaveJE.Visible = FOServer.IsUseAccounting();
 EndProcedure
 
 #EndRegion

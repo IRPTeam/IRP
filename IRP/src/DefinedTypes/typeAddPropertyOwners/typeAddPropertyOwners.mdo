@@ -159,5 +159,7 @@
   <types>DocumentRef.AdditionalAccrual</types>
   <types>CatalogRef.EmployeeSchedule</types>
   <types>DocumentRef.VisitorCounter</types>
+  <types>DocumentRef.RetailReceiptCorrection</types>
+  <types>CatalogRef.Projects</types>
  </type>
 </mdclass:DefinedType>

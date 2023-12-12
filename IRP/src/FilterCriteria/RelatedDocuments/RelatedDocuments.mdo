@@ -125,6 +125,7 @@
  <content>Document.MoneyTransfer.Attribute.ConsolidatedRetailSales</content>
  <content>Document.RetailGoodsReceipt.TabularSection.ItemList.Attribute.RetailSalesReceipt</content>
  <content>Document.RetailReturnReceipt.TabularSection.GoodsReceipts.Attribute.GoodsReceipt</content>
+ <content>Document.RetailReceiptCorrection.Attribute.BasisDocument</content>
  <commands uuid="ae9005af-5826-4505-998a-846b2783e3de">
   <name>RelatedDocuments</name>
   <synonym>
@@ -208,6 +209,7 @@
    <types>DocumentRef.EmployeeSickLeave</types>
    <types>DocumentRef.EmployeeTransfer</types>
    <types>DocumentRef.EmployeeVacation</types>
+   <types>DocumentRef.RetailReceiptCorrection</types>
   </commandParameterType>
   <representation>Auto</representation>
  </commands>

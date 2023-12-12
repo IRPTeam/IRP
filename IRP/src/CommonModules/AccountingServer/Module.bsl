@@ -11,6 +11,30 @@ Function GetOperationsDefinition()
 	Map.Insert(AO.BankReceipt_DR_R3010B_CashOnHand_CR_R2020B_AdvancesFromCustomers_R2021B_CustomersTransactions , New Structure("ByRow", True));
 	Map.Insert(AO.BankReceipt_DR_R2021B_CustomersTransactions_CR_R2020B_AdvancesFromCustomers , New Structure("ByRow", True));
 	
+	// Cash payment
+	Map.Insert(AO.CashPayment_DR_R1020B_AdvancesToVendors_R1021B_VendorsTransactions_CR_R3010B_CashOnHand , New Structure("ByRow", True));
+	Map.Insert(AO.CashPayment_DR_R1021B_VendorsTransactions_CR_R1020B_AdvancesToVendors , New Structure("ByRow", True));
+	
+	// Cash receipt
+	Map.Insert(AO.CashReceipt_DR_R3010B_CashOnHand_CR_R2020B_AdvancesFromCustomers_R2021B_CustomersTransactions , New Structure("ByRow", True));
+	Map.Insert(AO.CashReceipt_DR_R2021B_CustomersTransactions_CR_R2020B_AdvancesFromCustomers , New Structure("ByRow", True));
+	
+	// Cash expense
+	Map.Insert(AO.CashExpense_DR_R5022T_Expenses_CR_R3010B_CashOnHand , New Structure("ByRow", True));
+	
+	// Cash revenue
+	Map.Insert(AO.CashRevenue_DR_R3010B_CashOnHand_CR_R5021_Revenues , New Structure("ByRow", True));
+		
+	// Debit note
+	Map.Insert(AO.DebitNote_DR_R1020B_AdvancesToVendors_CR_R5021_Revenues , New Structure("ByRow", True));
+	Map.Insert(AO.DebitNote_DR_R1021B_VendorsTransactions_CR_R1020B_AdvancesToVendors , New Structure("ByRow", True));
+	Map.Insert(AO.DebitNote_DR_R2021B_CustomersTransactions_CR_R5021_Revenues , New Structure("ByRow", True));
+		
+	// Credit note
+	Map.Insert(AO.CreditNote_DR_R2020B_AdvancesFromCustomers_CR_R5022T_Expenses , New Structure("ByRow", True));
+	Map.Insert(AO.CreditNote_DR_R2021B_CustomersTransactions_CR_R2020B_AdvancesFromCustomers , New Structure("ByRow", True));
+	Map.Insert(AO.CreditNote_DR_R1021B_VendorsTransactions_CR_R5022T_Expenses , New Structure("ByRow", True));
+				
 	// Purchase invoice
 	//
 	// receipt inventory
@@ -50,6 +74,12 @@ Function GetSupportedDocuments() Export
 	Docs = Metadata.Documents;
 	ArrayOfDocuments.Add(Docs.BankPayment);	
 	ArrayOfDocuments.Add(Docs.BankReceipt);	
+	ArrayOfDocuments.Add(Docs.CashPayment);	
+	ArrayOfDocuments.Add(Docs.CashReceipt);	
+	ArrayOfDocuments.Add(Docs.CashExpense);	
+	ArrayOfDocuments.Add(Docs.CashRevenue);	
+	ArrayOfDocuments.Add(Docs.DebitNote);	
+	ArrayOfDocuments.Add(Docs.CreditNote);	
 	ArrayOfDocuments.Add(Docs.PurchaseInvoice);	
 	ArrayOfDocuments.Add(Docs.RetailSalesReceipt);
 	ArrayOfDocuments.Add(Docs.SalesInvoice);
@@ -462,6 +492,7 @@ EndFunction
 
 Function GetT9012S_AccountsPartner(AccountParameters, Partner, Agreement) Export
 	Return AccountingServerReuse.GetT9012S_AccountsPartner_Reuse(
+//	Return __GetT9012S_AccountsPartner(
 		AccountParameters.Period, 
 		AccountParameters.Company, 
 		AccountParameters.LedgerTypeVariant,

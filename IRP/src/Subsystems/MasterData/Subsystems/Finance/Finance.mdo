@@ -23,5 +23,6 @@
  <content>Catalog.PaymentTypes</content>
  <content>Catalog.PlanningPeriods</content>
  <content>Catalog.BankTerms</content>
+ <content>Catalog.Projects</content>
  <parentSubsystem>Subsystem.MasterData</parentSubsystem>
 </mdclass:Subsystem>

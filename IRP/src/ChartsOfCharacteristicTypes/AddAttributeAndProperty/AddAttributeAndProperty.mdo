@@ -55,6 +55,7 @@
   <types>CatalogRef.Stores</types>
   <types>CatalogRef.BusinessUnits</types>
   <types>CatalogRef.Agreements</types>
+  <types>CatalogRef.Projects</types>
   <numberQualifiers>
    <precision>15</precision>
    <scale>4</scale>

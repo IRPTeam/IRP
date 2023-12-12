@@ -12,6 +12,9 @@ Function PostingGetDocumentDataTables(Ref, Cancel, PostingMode, Parameters, AddI
 	Tables = New Structure;
 	QueryArray = GetQueryTextsSecondaryTables();
 	PostingServer.ExecuteQuery(Ref, QueryArray, Parameters);
+	
+	AccountingServer.CreateAccountingDataTables(Ref, Cancel, PostingMode, Parameters, AddInfo);
+	
 	Return Tables;
 EndFunction
 
@@ -28,6 +31,7 @@ Procedure PostingCheckBeforeWrite(Ref, Cancel, PostingMode, Parameters, AddInfo 
 	Tables.R5021T_Revenues.Columns.Add("Key", Metadata.DefinedTypes.typeRowID.Type);
 	Tables.R3027B_EmployeeCashAdvance.Columns.Add("Key", Metadata.DefinedTypes.typeRowID.Type);
 	Tables.R3011T_CashFlow.Columns.Add("Key", Metadata.DefinedTypes.typeRowID.Type);
+	Tables.T1040T_AccountingAmounts.Columns.Add("Key", Metadata.DefinedTypes.typeRowID.Type);
 
 	PostingServer.FillPostingTables(Tables, Ref, QueryArray, Parameters);
 EndProcedure
@@ -80,15 +84,25 @@ Function GetAdditionalQueryParameters(Ref)
 	Return StrParams;
 EndFunction
 
-#EndRegion
-
-#Region Posting_SourceTable
-
 Function GetQueryTextsSecondaryTables()
 	QueryArray = New Array;
 	QueryArray.Add(PaymentList());
 	Return QueryArray;
 EndFunction
+
+Function GetQueryTextsMasterTables()
+	QueryArray = New Array;
+	QueryArray.Add(R3010B_CashOnHand());
+	QueryArray.Add(R3011T_CashFlow());
+	QueryArray.Add(R3027B_EmployeeCashAdvance());
+	QueryArray.Add(R5021T_Revenues());
+	QueryArray.Add(T1040T_AccountingAmounts());
+	Return QueryArray;
+EndFunction
+
+#EndRegion
+
+#Region Posting_SourceTable
 
 Function PaymentList()
 	Return "SELECT
@@ -119,15 +133,6 @@ EndFunction
 #EndRegion
 
 #Region Posting_MainTables
-
-Function GetQueryTextsMasterTables()
-	QueryArray = New Array;
-	QueryArray.Add(R3010B_CashOnHand());
-	QueryArray.Add(R3011T_CashFlow());
-	QueryArray.Add(R3027B_EmployeeCashAdvance());
-	QueryArray.Add(R5021T_Revenues());
-	Return QueryArray;
-EndFunction
 
 Function R3010B_CashOnHand()
 	Return "SELECT
@@ -280,5 +285,80 @@ Function GetAccessKey(Obj) Export
 	AccessKeyMap.Insert("Branch", Obj.Branch);
 	Return AccessKeyMap;
 EndFunction
+
+#EndRegion
+
+#Region Accounting
+
+Function T1040T_AccountingAmounts()
+	Return 
+		"SELECT
+		|	PaymentList.Period,
+		|	PaymentList.Key AS RowKey,
+		|	PaymentList.Key AS Key,
+		|	PaymentList.Currency,
+		|	PaymentList.TotalAmount AS Amount,
+		|	VALUE(Catalog.AccountingOperations.CashRevenue_DR_R3010B_CashOnHand_CR_R5021_Revenues) AS Operation
+		|INTO T1040T_AccountingAmounts
+		|FROM
+		|	PaymentList AS PaymentList
+		|WHERE
+		|	TRUE";
+EndFunction
+
+Function GetAccountingAnalytics(Parameters) Export
+	If Parameters.Operation = Catalogs.AccountingOperations.CashRevenue_DR_R3010B_CashOnHand_CR_R5021_Revenues Then
+		Return GetAnalytics_Revenues(Parameters); // Cash on hand - Revenues
+	EndIf;
+	Return Undefined;
+EndFunction
+
+#Region Accounting_Analytics
+
+// Cash on hand - Revenues
+Function GetAnalytics_Revenues(Parameters)
+	AccountingAnalytics = AccountingServer.GetAccountingAnalyticsResult(Parameters);
+	AccountParameters   = AccountingServer.GetAccountParameters(Parameters);
+
+	Debit = AccountingServer.GetT9011S_AccountsCashAccount(AccountParameters, Parameters.ObjectData.Account);
+	If ValueIsFilled(Debit.Account) Then
+		AccountingAnalytics.Debit = Debit.Account;
+	EndIf;
+	// Debit - Analytics
+	AdditionalAnalytics = New Structure();
+	AdditionalAnalytics.Insert("Account", Parameters.ObjectData.Account);
+	AccountingServer.SetDebitExtDimensions(Parameters, AccountingAnalytics, AdditionalAnalytics);
+
+	Credit = AccountingServer.GetT9014S_AccountsExpenseRevenue(AccountParameters, Parameters.RowData.RevenueType);
+	If ValueIsFilled(Credit.Account) Then
+		AccountingAnalytics.Credit = Credit.Account;
+	EndIf;
+	// Credit - Analytics
+	AccountingServer.SetCreditExtDimensions(Parameters, AccountingAnalytics);
+	
+	Return AccountingAnalytics;
+EndFunction
+
+Function GetHintDebitExtDimension(Parameters, ExtDimensionType, Value) Export
+	If Parameters.Operation = Catalogs.AccountingOperations.CashRevenue_DR_R3010B_CashOnHand_CR_R5021_Revenues
+		And ExtDimensionType.ValueType.Types().Find(Type("CatalogRef.ExpenseAndRevenueTypes")) <> Undefined Then
+		Return Parameters.RowData.FinancialMovementType;
+	EndIf;
+	Return Value;
+EndFunction
+
+Function GetHintCreditExtDimension(Parameters, ExtDimensionType, Value) Export
+	If Parameters.Operation = Catalogs.AccountingOperations.CashRevenue_DR_R3010B_CashOnHand_CR_R5021_Revenues 
+		And ExtDimensionType.ValueType.Types().Find(Type("CatalogRef.ExpenseAndRevenueTypes")) <> Undefined Then
+		Return Parameters.RowData.RevenueType;
+	EndIf;
+	If Parameters.Operation = Catalogs.AccountingOperations.CashRevenue_DR_R3010B_CashOnHand_CR_R5021_Revenues 
+		And ExtDimensionType.ValueType.Types().Find(Type("CatalogRef.BusinessUnits")) <> Undefined Then
+		Return Parameters.RowData.ProfitLossCenter;
+	EndIf;
+	Return Value;
+EndFunction
+
+#EndRegion
 
 #EndRegion

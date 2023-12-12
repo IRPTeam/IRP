@@ -34,4 +34,5 @@
  <content>Subsystem.Retail</content>
  <content>Subsystem.Retail.Subsystem.VisitorCounter</content>
  <content>Document.VisitorCounter</content>
+ <content>Document.RetailReceiptCorrection</content>
 </mdclass:FunctionalOption>

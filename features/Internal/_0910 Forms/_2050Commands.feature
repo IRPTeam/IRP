@@ -20,8 +20,6 @@ Scenario: _0205001 preparation (commands)
 	When set True value to the constant Use accounting
 	When set True value to the constant Use salary
 	When set True value to the constant Use commission trading
-	And I close TestClient session
-	Given I open new TestClient session or connect the existing one
 	* Load info
 		When Create information register Barcodes records
 		When Create catalog Companies objects (own Second company)

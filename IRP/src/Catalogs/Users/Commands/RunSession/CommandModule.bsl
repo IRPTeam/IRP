@@ -37,8 +37,7 @@ Function GetUserConnectionProperty(UserRef)
 	
 	ConnectionTime = CurrentDate();
 	
-	Generator = New RandomNumberGenerator(Second(ConnectionTime));
-	NewPassword = Format(Generator.RandomNumber(), "NZ=; NG=;");
+	NewPassword = UserSettingsServer.GeneratePassword();
 	
 	Result = New Structure;
 	

@@ -1384,7 +1384,6 @@ Function Strings(Lang) Export
 #EndRegion	
 	
 #Region Salary
-
 	Strings.Insert("Salary_Err_001",   NStr("en = 'Wrong period'", Lang));
 	Strings.Insert("Salary_Err_002",   NStr("en = 'Employee schedule not selected'", Lang));
 	Strings.Insert("Salary_Err_003",   NStr("en = 'Begin Date less than End Date'", Lang));
@@ -1396,6 +1395,115 @@ Function Strings(Lang) Export
 	Strings.Insert("Salary_WeekDays_5",   NStr("en = 'Friday'", Lang));
 	Strings.Insert("Salary_WeekDays_6",   NStr("en = 'Saturday'", Lang));
 	Strings.Insert("Salary_WeekDays_7",   NStr("en = 'Sunday'", Lang));
+#EndRegion
+
+#Region Accounting
+
+Strings.Insert("AccountingError_01", NStr("en = 'Account [%1] not used for records'", Lang));
+Strings.Insert("AccountingError_02", NStr("en = 'Debit - is a required field.'", Lang));
+Strings.Insert("AccountingError_03", NStr("en = 'Credit - is a required field.'", Lang));
+Strings.Insert("AccountingError_04", NStr("en = 'Record period - is a required field.'", Lang));
+Strings.Insert("AccountingError_05", NStr("en = 'Not set any ledger types'", Lang));
+
+Strings.Insert("AccountingQuestion_01", NStr("en = 'Change [Quantity] mark in analytics'", Lang));
+Strings.Insert("AccountingQuestion_02", NStr("en = 'Change [Currency] mark in analytics'", Lang));
+
+Strings.Insert("AccountingInfo_01", NStr("en = 'Load complete'", Lang));
+
+Strings.Insert("AccountingJE_prefix_01", NStr("en = 'JE '", Lang));
+
+Strings.Insert("BankPayment_DR_R1020B_AdvancesToVendors_R1021B_VendorsTransactions_CR_R3010B_CashOnHand", 
+	NStr("en = 'BankPayment DR (R1020B_AdvancesToVendors R1021B_VendorsTransactions) CR (R3010B_CashOnHand)'", Lang)); 
+
+Strings.Insert("BankPayment_DR_R5022T_Expenses_CR_R3010B_CashOnHand",
+	NStr("en = 'BankPayment DR (R5022T_Expenses) CR (R3010B_CashOnHand)'", Lang));
+
+Strings.Insert("BankPayment_DR_R1021B_VendorsTransactions_CR_R1020B_AdvancesToVendors",
+	NStr("en = 'BankPayment DR (R1021B_VendorsTransactions) CR (R1020B_AdvancesToVendors)'", Lang));
+
+Strings.Insert("BankReceipt_DR_R3010B_CashOnHand_CR_R2020B_AdvancesFromCustomers_R2021B_CustomersTransactions",
+	NStr("en = 'BankReceipt DR (R3010B_CashOnHand) CR (R2020B_AdvancesFromCustomers_R2021B_CustomersTransactions)'", Lang));
+
+Strings.Insert("PurchaseInvoice_DR_R4050B_StockInventory_R5022T_Expenses_CR_R1021B_VendorsTransactions",
+	NStr("en = 'PurchaseInvoice DR (R4050B_StockInventory_R5022T_Expenses) CR (R1021B_VendorsTransactions)'", Lang));
+
+Strings.Insert("PurchaseInvoice_DR_R1021B_VendorsTransactions_CR_R1020B_AdvancesToVendors",
+	NStr("en = 'PurchaseInvoice DR (R1021B_VendorsTransactions) CR (R1020B_AdvancesToVendors)'", Lang));
+
+Strings.Insert("PurchaseInvoice_DR_R1040B_TaxesOutgoing_CR_R1021B_VendorsTransactions",
+	NStr("en = 'PurchaseInvoice DR (R1040B_TaxesOutgoing) CR (R1021B_VendorsTransactions)'", Lang));
+
+Strings.Insert("RetailSalesReceipt_DR_R5022T_Expenses_CR_R4050B_StockInventory",
+	NStr("en = 'RetailSalesReceipt DR (R5022T_Expenses) CR (R4050B_StockInventory)'", Lang));
+
+Strings.Insert("SalesInvoice_DR_R5022T_Expenses_CR_R4050B_StockInventory",
+	NStr("en = 'SalesInvoice DR (R5022T_Expenses) CR (R4050B_StockInventory)'", Lang));
+
+Strings.Insert("SalesInvoice_DR_R2021B_CustomersTransactions_CR_R5021T_Revenues",
+	NStr("en = 'SalesInvoice DR (R2021B_CustomersTransactions) CR (R5021T_Revenues)'", Lang));
+
+Strings.Insert("SalesInvoice_DR_R5021T_Revenues_CR_R2040B_TaxesIncoming",
+	NStr("en = 'SalesInvoice DR (R5021T_Revenues) CR (R2040B_TaxesIncoming)'", Lang));
+
+Strings.Insert("SalesInvoice_DR_R2020B_AdvancesFromCustomers_CR_R2021B_CustomersTransactions",
+	NStr("en = 'SalesInvoice DR (R2020B_AdvancesFromCustomers) CR (R2021B_CustomersTransactions)'", Lang));
+
+Strings.Insert("PurchaseInvoice_DR_R1021B_VendorsTransactions_CR_R1020B_AdvancesToVendors_CurrencyRevaluation",
+	NStr("en = 'PurchaseInvoice DR (R1021B_VendorsTransactions) CR (R1020B_AdvancesToVendors_CurrencyRevaluation)'", Lang));
+
+Strings.Insert("ForeignCurrencyRevaluation_DR_R5022T_Expenses_CR_R2020B_AdvancesFromCustomers",
+	NStr("en = 'ForeignCurrencyRevaluation DR (R5022T_Expenses) CR (R2020B_AdvancesFromCustomers)'", Lang));
+
+Strings.Insert("SalesInvoice_DR_R2020B_AdvancesFromCustomers_CR_R2021B_CustomersTransactions_CurrencyRevaluation",
+	NStr("en = 'SalesInvoice DR (R2020B_AdvancesFromCustomers) CR (R2021B_CustomersTransactions_CurrencyRevaluation)'", Lang));
+
+Strings.Insert("SalesInvoice_DR_R2021B_CustomersTransactions_CR_R5021T_Revenues_CurrencyRevaluation",
+	NStr("en = 'SalesInvoice DR (R2021B_CustomersTransactions) CR (R5021T_Revenues_CurrencyRevaluation)'", Lang));
+
+Strings.Insert("PurchaseInvoice_DR_R4050B_StockInventory_R5022T_Expenses_CR_R1021B_VendorsTransactions_CurrencyRevaluation",
+	NStr("en = 'PurchaseInvoice DR (R4050B_StockInventory_R5022T_Expenses) CR (R1021B_VendorsTransactions_CurrencyRevaluation)'", Lang));
+
+Strings.Insert("ForeignCurrencyRevaluation_DR_R2020B_AdvancesFromCustomers_CR_R5021T_Revenues",
+	NStr("en = 'ForeignCurrencyRevaluation DR (R2020B_AdvancesFromCustomers) CR (R5021T_Revenues)'", Lang));
+
+Strings.Insert("BankReceipt_DR_R2021B_CustomersTransactions_CR_R2020B_AdvancesFromCustomers",
+	NStr("en = 'BankReceipt DR (R2021B_CustomersTransactions) CR (R2020B_AdvancesFromCustomers)'", Lang));
+	
+Strings.Insert("CashPayment_DR_R1020B_AdvancesToVendors_R1021B_VendorsTransactions_CR_R3010B_CashOnHand",
+	NStr("en = 'CashPayment DR (R1020B_AdvancesToVendors_R1021B_VendorsTransactions) CR (R3010B_CashOnHand)'", Lang));
+
+Strings.Insert("CashPayment_DR_R1021B_VendorsTransactions_CR_R1020B_AdvancesToVendors",
+	NStr("en = 'CashPayment DR (R1021B_VendorsTransactions) CR (R1020B_AdvancesToVendors)'", Lang));
+	
+Strings.Insert("CashReceipt_DR_R3010B_CashOnHand_CR_R2020B_AdvancesFromCustomers_R2021B_CustomersTransactions",
+	NStr("en = 'CashReceipt DR (R3010B_CashOnHand) CR (R2020B_AdvancesFromCustomers_R2021B_CustomersTransactions)'", Lang)); 
+	
+Strings.Insert("CashReceipt_DR_R2021B_CustomersTransactions_CR_R2020B_AdvancesFromCustomers",
+	NStr("en = 'CashReceipt DR (R2021B_CustomersTransactions) CR (R2020B_AdvancesFromCustomers)'", Lang));
+	
+Strings.Insert("CashExpense_DR_R5022T_Expenses_CR_R3010B_CashOnHand",
+	NStr("en = 'CashExpense DR (R5022T_Expenses) CR (R3010B_CashOnHand)'", Lang));
+	
+Strings.Insert("CashRevenue_DR_R3010B_CashOnHand_CR_R5021_Revenues",
+	NStr("en = 'CashRevenue DR (R3010B_CashOnHand) CR (R5021_Revenues)'", Lang));
+	
+Strings.Insert("DebitNote_DR_R1020B_AdvancesToVendors_CR_R5021_Revenues",
+	NStr("en = 'DebitNote DR (R1020B_AdvancesToVendors) CR (R5021_Revenues)'", Lang));
+
+Strings.Insert("DebitNote_DR_R1021B_VendorsTransactions_CR_R1020B_AdvancesToVendors",
+	NStr("en = 'DebitNote DR (R1021B_VendorsTransactions) CR (R1020B_AdvancesToVendors)'", Lang));
+
+Strings.Insert("DebitNote_DR_R2021B_CustomersTransactions_CR_R5021_Revenues",
+	NStr("en = 'DebitNote DR (R2021B_CustomersTransactions) CR (R5021_Revenues)'", Lang));
+	
+Strings.Insert("CreditNote_DR_R2020B_AdvancesFromCustomers_CR_R5022T_Expenses",
+	NStr("en = 'CreditNote DR (R2020B_AdvancesFromCustomers) CR (R5022T_Expenses)'", Lang));
+	
+Strings.Insert("CreditNote_DR_R2021B_CustomersTransactions_CR_R2020B_AdvancesFromCustomers",
+	NStr("en = 'CreditNote DR (R2021B_CustomersTransactions) CR (R2020B_AdvancesFromCustomers)'", Lang));
+	
+Strings.Insert("CreditNote_DR_R1021B_VendorsTransactions_CR_R5022T_Expenses",
+	NStr("en = 'CreditNote DR (R1021B_VendorsTransactions CR (R5022T_Expenses)'", Lang));
 	
 #EndRegion
 	

@@ -928,7 +928,7 @@ Function T1040T_AccountingAmounts()
 		   |	PaymentList.Key AS Key,
 		   |	PaymentList.Currency,
 		   |	PaymentList.Amount,
-		   |	VALUE(Catalog.AccountingOperations.BankPayment_DR_R1020B_AdvancesToVendors_R1021B_VendorsTransactions_CR_R3010B) AS Operation,
+		   |	VALUE(Catalog.AccountingOperations.BankPayment_DR_R1020B_AdvancesToVendors_R1021B_VendorsTransactions_CR_R3010B_CashOnHand) AS Operation,
 		   |	UNDEFINED AS AdvancesClosing
 		   |INTO T1040T_AccountingAmounts
 		   |FROM
@@ -959,7 +959,7 @@ Function T1040T_AccountingAmounts()
 		   |	OffsetOfAdvances.Key,
 		   |	OffsetOfAdvances.Currency,
 		   |	OffsetOfAdvances.Amount,
-		   |	VALUE(Catalog.AccountingOperations.BankPayment_R1021B_VendorsTransactions_CR_R1020B_AdvancesToVendors),
+		   |	VALUE(Catalog.AccountingOperations.BankPayment_DR_R1021B_VendorsTransactions_CR_R1020B_AdvancesToVendors),
 		   |	OffsetOfAdvances.Recorder
 		   |FROM
 		   |	InformationRegister.T2010S_OffsetOfAdvances AS OffsetOfAdvances
@@ -968,9 +968,9 @@ Function T1040T_AccountingAmounts()
 EndFunction
 
 Function GetAccountingAnalytics(Parameters) Export
-	If Parameters.Operation = Catalogs.AccountingOperations.BankPayment_DR_R1020B_AdvancesToVendors_R1021B_VendorsTransactions_CR_R3010B Then
+	If Parameters.Operation = Catalogs.AccountingOperations.BankPayment_DR_R1020B_AdvancesToVendors_R1021B_VendorsTransactions_CR_R3010B_CashOnHand Then
 		Return GetAnalytics_PaymentToVendor(Parameters); // Vendors transactions - Cash on hand
-	ElsIf Parameters.Operation = Catalogs.AccountingOperations.BankPayment_R1021B_VendorsTransactions_CR_R1020B_AdvancesToVendors Then
+	ElsIf Parameters.Operation = Catalogs.AccountingOperations.BankPayment_DR_R1021B_VendorsTransactions_CR_R1020B_AdvancesToVendors Then
 		Return GetAnalytics_OffsetOfAdvances(Parameters); // Vendors transactions - Advances to vendors 
 	ElsIf Parameters.Operation = Catalogs.AccountingOperations.BankPayment_DR_R5022T_Expenses_CR_R3010B_CashOnHand Then
 		Return GetAnalytics_BankCommission(Parameters); // Expenses - Cash on hand
@@ -1065,7 +1065,7 @@ Function GetHintDebitExtDimension(Parameters, ExtDimensionType, Value) Export
 EndFunction
 
 Function GetHintCreditExtDimension(Parameters, ExtDimensionType, Value) Export
-	If (Parameters.Operation = Catalogs.AccountingOperations.BankPayment_DR_R1020B_AdvancesToVendors_R1021B_VendorsTransactions_CR_R3010B Or Parameters.Operation = Catalogs.AccountingOperations.BankPayment_DR_R5022T_Expenses_CR_R3010B_CashOnHand)
+	If (Parameters.Operation = Catalogs.AccountingOperations.BankPayment_DR_R1020B_AdvancesToVendors_R1021B_VendorsTransactions_CR_R3010B_CashOnHand Or Parameters.Operation = Catalogs.AccountingOperations.BankPayment_DR_R5022T_Expenses_CR_R3010B_CashOnHand)
 		And ExtDimensionType.ValueType.Types().Find(Type("CatalogRef.ExpenseAndRevenueTypes")) <> Undefined Then
 		Return Parameters.RowData.FinancialMovementType;
 	EndIf;

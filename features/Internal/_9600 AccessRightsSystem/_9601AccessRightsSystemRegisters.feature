@@ -716,6 +716,26 @@ Scenario: 961137 check T8515S_FixedAssetsLocation register access (admin)
 	Given I open hyperlink "e1cib/list/InformationRegister.T8515S_FixedAssetsLocation"
 	Then the number of "List" table lines is "равно" "9"
 
+Scenario: 961138 check R9555T_PaidSickLeaves register access (admin)
+	And I close all client application windows
+	Given I open hyperlink "e1cib/list/AccumulationRegister.R9555T_PaidSickLeaves"
+	Then the number of "List" table lines is "равно" "3"
+
+Scenario: 961139 check R9545T_PaidVacations register access (admin)
+	And I close all client application windows
+	Given I open hyperlink "e1cib/list/AccumulationRegister.R9545T_PaidVacations"
+	Then the number of "List" table lines is "равно" "3"
+
+Scenario: 961141 check R9560T_AdditionalAccrual register access (admin)
+	And I close all client application windows
+	Given I open hyperlink "e1cib/list/AccumulationRegister.R9560T_AdditionalAccrual"
+	Then the number of "List" table lines is "равно" "9"
+
+Scenario: 961142 check R9570T_AdditionalDeduction register access (admin)
+	And I close all client application windows
+	Given I open hyperlink "e1cib/list/AccumulationRegister.R9570T_AdditionalDeduction"
+	Then the number of "List" table lines is "равно" "9"
+
 Scenario: 962003 check CashInTransit creation (LimitedAccess)
 	And I close all client application windows
 	And I connect "TestAdmin" TestClient using "LimitedAccess" login and "" password
@@ -1361,4 +1381,24 @@ Scenario: 962136 check T8510S_FixedAssetsInfo register access (LimitedAccess)
 Scenario: 962137 check T8515S_FixedAssetsLocation register access (LimitedAccess)
 	And I close all client application windows
 	Given I open hyperlink "e1cib/list/InformationRegister.T8515S_FixedAssetsLocation"
+	Then the number of "List" table lines is "равно" "4"
+
+Scenario: 962138 check R9555T_PaidSickLeaves register access (LimitedAccess)
+	And I close all client application windows
+	Given I open hyperlink "e1cib/list/AccumulationRegister.R9555T_PaidSickLeaves"
+	Then the number of "List" table lines is "равно" "2"
+
+Scenario: 962139 check R9545T_PaidVacations register access (LimitedAccess)
+	And I close all client application windows
+	Given I open hyperlink "e1cib/list/AccumulationRegister.R9545T_PaidVacations"
+	Then the number of "List" table lines is "равно" "2"
+
+Scenario: 962141 check R9560T_AdditionalAccrual register access (LimitedAccess)
+	And I close all client application windows
+	Given I open hyperlink "e1cib/list/AccumulationRegister.R9560T_AdditionalAccrual"
+	Then the number of "List" table lines is "равно" "4"
+
+Scenario: 962142 check R9570T_AdditionalDeduction register access (LimitedAccess)
+	And I close all client application windows
+	Given I open hyperlink "e1cib/list/AccumulationRegister.R9570T_AdditionalDeduction"
 	Then the number of "List" table lines is "равно" "4"

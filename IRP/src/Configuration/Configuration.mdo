@@ -17,7 +17,7 @@
   <usePurposes>PersonalComputer</usePurposes>
   <defaultRoles>Role.FullAccess</defaultRoles>
   <vendor>IRP Team</vendor>
-  <version>2023.49.3299</version>
+  <version>2023.50.3336</version>
   <updateCatalogAddress>https://github.com/IRPTeam/IRP</updateCatalogAddress>
   <useManagedFormInOrdinaryApplication>true</useManagedFormInOrdinaryApplication>
   <useOrdinaryFormInManagedApplication>true</useOrdinaryFormInManagedApplication>
@@ -319,6 +319,7 @@
   <roles>Role.Document_EmployeeSickLeave</roles>
   <roles>Role.Document_AdditionalAccrual</roles>
   <roles>Role.Document_AdditionalDeduction</roles>
+  <roles>Role.Document_RetailReceiptCorrection</roles>
   <commonTemplates>CommonTemplate.HTMLPictureSlider</commonTemplates>
   <commonTemplates>CommonTemplate.HTMLAddAttributes</commonTemplates>
   <commonTemplates>CommonTemplate.HTMLGallery</commonTemplates>
@@ -624,6 +625,8 @@
   <commonModules>CommonModule.ControlCodeStringClient</commonModules>
   <commonModules>CommonModule.DocVisitorCounterClient</commonModules>
   <commonModules>CommonModule.DocVisitorCounterServer</commonModules>
+  <commonModules>CommonModule.DocRetailReceiptCorrectionClient</commonModules>
+  <commonModules>CommonModule.DocRetailReceiptCorrectionServer</commonModules>
   <commonAttributes>CommonAttribute.Author</commonAttributes>
   <commonAttributes>CommonAttribute.Branch</commonAttributes>
   <commonAttributes>CommonAttribute.Description</commonAttributes>
@@ -954,6 +957,7 @@
   <catalogs>Catalog.VehicleTypes</catalogs>
   <catalogs>Catalog.Workstations</catalogs>
   <catalogs>Catalog.EmployeeSchedule</catalogs>
+  <catalogs>Catalog.Projects</catalogs>
   <documents>Document.AdditionalCostAllocation</documents>
   <documents>Document.AdditionalRevenueAllocation</documents>
   <documents>Document.BankPayment</documents>
@@ -1037,6 +1041,7 @@
   <documents>Document.EmployeeSickLeave</documents>
   <documents>Document.AdditionalAccrual</documents>
   <documents>Document.AdditionalDeduction</documents>
+  <documents>Document.RetailReceiptCorrection</documents>
   <documentJournals>DocumentJournal.DocumentsForIncomingPayment</documentJournals>
   <documentJournals>DocumentJournal.DocumentsForOutgoingPayment</documentJournals>
   <enums>Enum.AccountingAnalyticTypes</enums>

@@ -2512,7 +2512,7 @@
 		</right>
 	</object>
 	<object>
-		<name>InformationRegister.T9012S_AccountsPartner.Dimension.Variant</name>
+		<name>InformationRegister.T9012S_AccountsPartner.Dimension.LedgerTypeVariant</name>
 		<right>
 			<name>Edit</name>
 			<value>false</value>
@@ -2638,7 +2638,7 @@
 		</right>
 	</object>
 	<object>
-		<name>InformationRegister.T9010S_AccountsItemKey.Dimension.Variant</name>
+		<name>InformationRegister.T9010S_AccountsItemKey.Dimension.LedgerTypeVariant</name>
 		<right>
 			<name>Edit</name>
 			<value>false</value>
@@ -3885,7 +3885,7 @@
 		</right>
 	</object>
 	<object>
-		<name>InformationRegister.T9014S_AccountsExpenseRevenue.Dimension.Variant</name>
+		<name>InformationRegister.T9014S_AccountsExpenseRevenue.Dimension.LedgerTypeVariant</name>
 		<right>
 			<name>Edit</name>
 			<value>false</value>
@@ -7016,7 +7016,7 @@
 		</right>
 	</object>
 	<object>
-		<name>InformationRegister.T9013S_AccountsTax.Resource.Account</name>
+		<name>InformationRegister.T9013S_AccountsTax.Resource.IncomingAccount</name>
 		<right>
 			<name>Edit</name>
 			<value>false</value>
@@ -7162,7 +7162,7 @@
 		</right>
 	</object>
 	<object>
-		<name>InformationRegister.T9011S_AccountsCashAccount.Dimension.Variant</name>
+		<name>InformationRegister.T9011S_AccountsCashAccount.Dimension.LedgerTypeVariant</name>
 		<right>
 			<name>Edit</name>
 			<value>false</value>
@@ -12406,7 +12406,7 @@
 		</right>
 	</object>
 	<object>
-		<name>InformationRegister.T9013S_AccountsTax.Dimension.Variant</name>
+		<name>InformationRegister.T9013S_AccountsTax.Dimension.LedgerTypeVariant</name>
 		<right>
 			<name>Edit</name>
 			<value>false</value>
@@ -16640,6 +16640,36 @@
 		</right>
 		<right>
 			<name>View</name>
+			<value>true</value>
+		</right>
+	</object>
+	<object>
+		<name>Document.RetailReceiptCorrection</name>
+		<right>
+			<name>View</name>
+			<value>true</value>
+		</right>
+		<right>
+			<name>Read</name>
+			<value>true</value>
+		</right>
+		<right>
+			<name>InputByString</name>
+			<value>true</value>
+		</right>
+	</object>
+	<object>
+		<name>Catalog.Projects</name>
+		<right>
+			<name>View</name>
+			<value>true</value>
+		</right>
+		<right>
+			<name>Read</name>
+			<value>true</value>
+		</right>
+		<right>
+			<name>InputByString</name>
 			<value>true</value>
 		</right>
 	</object>

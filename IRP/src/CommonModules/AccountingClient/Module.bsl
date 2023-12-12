@@ -22,6 +22,18 @@ Procedure OpenFormSelectLedgerType(FormOwner, BasisRef, ArrayOfJournalEntries) E
 	OpenForm("Document.JournalEntry.Form.SelectLedgerType", FormParameters, FormOwner, , , , Notify, FormWindowOpeningMode.LockOwnerWindow);
 EndProcedure
 
+Procedure OpenFormSelectLedgerType_MultipleDocuments(FormOwner, ArrayOfDocuments, ArrayOfLedgerTypes) Export
+	FormParameters = New Structure();
+	FormParameters.Insert("MultipleDocuments", True);
+	FormParameters.Insert("ArrayOfLedgerTypes", ArrayOfLedgerTypes);
+	FormParameters.Insert("ArrayOfDocuments", ArrayOfDocuments);
+	NotifyParameters = New Structure();
+	NotifyParameters.Insert("FormOwner" , FormOwner);
+	NotifyParameters.Insert("ArrayOfDocuments"  , ArrayOfDocuments);
+	Notify = New NotifyDescription("SelectLedgerType_MultipleDocuments", ThisObject, NotifyParameters);
+	OpenForm("Document.JournalEntry.Form.SelectLedgerType", FormParameters, FormOwner, , , , Notify, FormWindowOpeningMode.LockOwnerWindow);
+EndProcedure
+
 Procedure OpenFormJournalEntry(FormOwner, BasisRef, JournalEntryRef, LedgerTypeRef) Export
 	FormParameters = New Structure();
 	FormParameters.Insert("Key", JournalEntryRef);
@@ -76,6 +88,16 @@ Procedure SelectLedgerType(Result, AdditionalParameters) Export
 		Result.JournalEntryRef, 
 		Result.LedgerTypeRef);
 EndProcedure
+
+Procedure SelectLedgerType_MultipleDocuments(Result, AdditionalParameters) Export
+	If Result = Undefined Then
+		Return;
+	EndIf;
+	
+	AccountingServer.CreateJE_ByArrayRefs(AdditionalParameters.ArrayOfDocuments, Result.ArrayOfLedgerTypes);
+EndProcedure
+
+
 
 Procedure AddExtDimensionRow(Object, Form, AnalyticRow, AnalyticType, ExtDimType, ExtDim)
 	If Not ValueIsFilled(ExtDim) Then

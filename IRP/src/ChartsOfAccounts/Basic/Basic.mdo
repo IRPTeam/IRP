@@ -73,8 +73,8 @@
     <fillFromFillingValue>true</fillFromFillingValue>
     <fillValue xsi:type="core:UndefinedValue"/>
     <choiceParameterLinks>
-      <name>Filter.Variant</name>
-      <field>ChartOfAccounts.Basic.Attribute.Variant</field>
+      <name>Filter.LedgerTypeVariant</name>
+      <field>ChartOfAccounts.Basic.Attribute.LedgerTypeVariant</field>
     </choiceParameterLinks>
     <fullTextSearch>Use</fullTextSearch>
     <minValue xsi:type="core:UndefinedValue"/>
@@ -112,8 +112,7 @@
   </objectPresentation>
   <extDimensionTypes>ChartOfCharacteristicTypes.AccountingExtraDimensionTypes</extDimensionTypes>
   <maxExtDimensionCount>3</maxExtDimensionCount>
-  <codeMask>@@.@@</codeMask>
-  <codeLength>9</codeLength>
+  <codeLength>12</codeLength>
   <checkUnique>true</checkUnique>
   <editType>InDialog</editType>
   <choiceMode>BothWays</choiceMode>
@@ -121,12 +120,12 @@
   <defaultObjectForm>ChartOfAccounts.Basic.Form.ItemForm</defaultObjectForm>
   <defaultListForm>ChartOfAccounts.Basic.Form.ListForm</defaultListForm>
   <defaultChoiceForm>ChartOfAccounts.Basic.Form.ChoiceForm</defaultChoiceForm>
-  <orderLength>3</orderLength>
+  <orderLength>12</orderLength>
   <attributes uuid="b37dad27-9ea5-4c9d-8d6d-bb9d13f202d7">
-    <name>Variant</name>
+    <name>LedgerTypeVariant</name>
     <synonym>
       <key>en</key>
-      <value>Variant</value>
+      <value>Ledger type variant</value>
     </synonym>
     <type>
       <types>CatalogRef.LedgerTypeVariants</types>
@@ -135,6 +134,40 @@
     <maxValue xsi:type="core:UndefinedValue"/>
     <fillChecking>ShowError</fillChecking>
     <fillFromFillingValue>true</fillFromFillingValue>
+    <fillValue xsi:type="core:UndefinedValue"/>
+    <fullTextSearch>Use</fullTextSearch>
+    <dataHistory>Use</dataHistory>
+  </attributes>
+  <attributes uuid="2ad7938c-03c0-4956-9162-02d1e6897fde">
+    <name>SearchCode</name>
+    <synonym>
+      <key>en</key>
+      <value>Search code</value>
+    </synonym>
+    <type>
+      <types>String</types>
+      <stringQualifiers>
+        <length>12</length>
+      </stringQualifiers>
+    </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <fillValue xsi:type="core:UndefinedValue"/>
+    <indexing>Index</indexing>
+    <fullTextSearch>Use</fullTextSearch>
+    <dataHistory>Use</dataHistory>
+  </attributes>
+  <attributes uuid="9ae11d33-8fe3-4357-955f-bdd7e4d1a3a4">
+    <name>NotUsedForRecords</name>
+    <synonym>
+      <key>en</key>
+      <value>Not used for records</value>
+    </synonym>
+    <type>
+      <types>Boolean</types>
+    </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
     <fillValue xsi:type="core:UndefinedValue"/>
     <fullTextSearch>Use</fullTextSearch>
     <dataHistory>Use</dataHistory>
@@ -236,4 +269,20 @@
     <usePurposes>PersonalComputer</usePurposes>
     <usePurposes>MobileDevice</usePurposes>
   </forms>
+  <forms uuid="63de84ca-e180-403b-9c90-267964693080">
+    <name>LoadForm</name>
+    <synonym>
+      <key>en</key>
+      <value>Load chart of accounts</value>
+    </synonym>
+    <usePurposes>PersonalComputer</usePurposes>
+    <usePurposes>MobileDevice</usePurposes>
+  </forms>
+  <templates uuid="77d18a0d-bcd6-43b3-ae0b-ad4cdbfa4fed">
+    <name>LoadTemplate</name>
+    <synonym>
+      <key>en</key>
+      <value>Load template</value>
+    </synonym>
+  </templates>
 </mdclass:ChartOfAccounts>

@@ -21,10 +21,13 @@ EndProcedure
 Procedure BeforeWriteAtServer(Cancel, CurrentObject, WriteParameters)
 	If ThisObject.RecordType <> "Tax" Then
 		CurrentObject.Tax = Undefined;
+		CurrentObject.VatRate = Undefined;
 	EndIf;
 EndProcedure
 
 &AtServer
 Procedure SetVisible()
-	Items.Tax.Visible   = ThisObject.RecordType = "Tax";
+	IsRecordByTax = (ThisObject.RecordType = "Tax");
+	Items.Tax.Visible = IsRecordByTax;
+	Items.VatRate.Visible = IsRecordByTax;
 EndProcedure

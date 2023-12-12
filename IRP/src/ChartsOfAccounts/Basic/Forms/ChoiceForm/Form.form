@@ -39,7 +39,7 @@
     </extInfo>
   </items>
   <items xsi:type="form:FormField">
-    <name>VariantFilter</name>
+    <name>LedgerTypeVariantFilter</name>
     <id>43</id>
     <visible>true</visible>
     <enabled>true</enabled>
@@ -47,14 +47,14 @@
       <common>true</common>
     </userVisible>
     <dataPath xsi:type="form:DataPath">
-      <segments>Variant</segments>
+      <segments>LedgerTypeVariant</segments>
     </dataPath>
     <handlers>
       <event>OnChange</event>
-      <name>VariantFilterOnChange</name>
+      <name>LedgerTypeVariantFilterOnChange</name>
     </handlers>
     <extendedTooltip>
-      <name>VariantFilterExtendedTooltip</name>
+      <name>LedgerTypeVariantFilterExtendedTooltip</name>
       <id>45</id>
       <visible>true</visible>
       <enabled>true</enabled>
@@ -69,7 +69,7 @@
       </extInfo>
     </extendedTooltip>
     <contextMenu>
-      <name>VariantFilterContextMenu</name>
+      <name>LedgerTypeVariantFilterContextMenu</name>
       <id>44</id>
       <visible>true</visible>
       <enabled>true</enabled>
@@ -761,7 +761,7 @@
 	Table.Predefined,
 	Table.Quantity,
 	Table.Currency,
-	Table.Variant,
+	Table.LedgerTypeVariant,
 	CASE
 		WHEN Table.Type = VALUE(AccountType.Active)
 			THEN &quot;A&quot;
@@ -772,7 +772,8 @@
 		END
 	END AS Type,
 	Table.Description_en AS Description,
-	Table.Order AS Order
+	Table.Order AS Order,
+	Table.NotUsedForRecords
 FROM
 	ChartOfAccounts.Basic AS Table</queryText>
       <mainTable>ChartOfAccounts.Basic</mainTable>
@@ -805,13 +806,85 @@ FROM
           </localValue>
         </title>
       </fields>
+      <fields xsi:type="schema:DataCompositionSchemaDataSetField">
+        <dataPath>LedgerTypeVariant</dataPath>
+        <field>LedgerTypeVariant</field>
+      </fields>
+      <fields xsi:type="schema:DataCompositionSchemaDataSetField">
+        <dataPath>Ref</dataPath>
+        <field>Ref</field>
+      </fields>
+      <fields xsi:type="schema:DataCompositionSchemaDataSetField">
+        <dataPath>DeletionMark</dataPath>
+        <field>DeletionMark</field>
+      </fields>
+      <fields xsi:type="schema:DataCompositionSchemaDataSetField">
+        <dataPath>Parent</dataPath>
+        <field>Parent</field>
+      </fields>
+      <fields xsi:type="schema:DataCompositionSchemaDataSetField">
+        <dataPath>Code</dataPath>
+        <field>Code</field>
+      </fields>
+      <fields xsi:type="schema:DataCompositionSchemaDataSetField">
+        <dataPath>OffBalance</dataPath>
+        <field>OffBalance</field>
+      </fields>
+      <fields xsi:type="schema:DataCompositionSchemaDataSetField">
+        <dataPath>Predefined</dataPath>
+        <field>Predefined</field>
+      </fields>
+      <fields xsi:type="schema:DataCompositionSchemaDataSetField">
+        <dataPath>Quantity</dataPath>
+        <field>Quantity</field>
+      </fields>
+      <fields xsi:type="schema:DataCompositionSchemaDataSetField">
+        <dataPath>Currency</dataPath>
+        <field>Currency</field>
+      </fields>
+      <fields xsi:type="schema:DataCompositionSchemaDataSetField">
+        <dataPath>Order</dataPath>
+        <field>Order</field>
+      </fields>
+      <fields xsi:type="schema:DataCompositionSchemaDataSetField">
+        <dataPath>NotUsedForRecords</dataPath>
+        <field>NotUsedForRecords</field>
+      </fields>
+      <fields xsi:type="schema:DataCompositionSchemaDataSetField">
+        <dataPath>SearchCode</dataPath>
+        <field>SearchCode</field>
+      </fields>
+      <fields xsi:type="schema:DataCompositionSchemaDataSetField">
+        <dataPath>ExtDimensionTypes</dataPath>
+        <field>ExtDimensionTypes</field>
+      </fields>
+      <fields xsi:type="schema:DataCompositionSchemaDataSetField">
+        <dataPath>Description_hash</dataPath>
+        <field>Description_hash</field>
+      </fields>
+      <fields xsi:type="schema:DataCompositionSchemaDataSetField">
+        <dataPath>Description_ru</dataPath>
+        <field>Description_ru</field>
+      </fields>
+      <fields xsi:type="schema:DataCompositionSchemaDataSetField">
+        <dataPath>Description_tr</dataPath>
+        <field>Description_tr</field>
+      </fields>
+      <fields xsi:type="schema:DataCompositionSchemaDataSetField">
+        <dataPath>SourceNodeID</dataPath>
+        <field>SourceNodeID</field>
+      </fields>
+      <fields xsi:type="schema:DataCompositionSchemaDataSetField">
+        <dataPath>PredefinedDataName</dataPath>
+        <field>PredefinedDataName</field>
+      </fields>
     </extInfo>
   </attributes>
   <attributes>
-    <name>Variant</name>
+    <name>LedgerTypeVariant</name>
     <title>
       <key>en</key>
-      <value>Variant</value>
+      <value>Ledger type variant</value>
     </title>
     <id>2</id>
     <valueType>

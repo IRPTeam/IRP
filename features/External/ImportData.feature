@@ -470,6 +470,20 @@ Scenario: Create catalog Partners objects (Employee)
 		| 'e1cib/data/Catalog.Partners?ref=aa6b120ed92fbced11eacd8e2a104d12'  | 'False'         | ''        | 'False'     | 'False'   | 'True'      | 'False'     | ''                                                                         | 'False'                                    | 'False'                              | 'Emily Jones'      | ''                  | ''                | 'Emily Jones TR'       |
 		| 'e1cib/data/Catalog.Partners?ref=aa6b120ed92fbced11eacd8e2a104d15'  | 'False'         | ''        | 'False'     | 'False'   | 'True'      | 'False'     | ''                                                                         | 'False'                                    | 'False'                              | 'Sofia Borisova'   | ''                  | ''                | 'Sofia Borisova TR'    |
 
+Scenario: Create catalog Partners objects (Employee for salary)
+
+	And I check or create for catalog "Partners" objects with Data Exchange Load parameter set to true:	
+		| 'Ref'                                                              | 'DeletionMark' | 'Parent' | 'Customer' | 'Vendor' | 'Employee' | 'Opponent'  | 'Description_en'   |
+		| 'e1cib/data/Catalog.Partners?ref=b7b18e1cb2a9e83611ee92afd0d5002b' | 'False'        | ''       | 'False'    | 'False'  | 'True'     | 'False'     | 'Employee 1 (change salary + vacation + truancy)'            |
+		| 'e1cib/data/Catalog.Partners?ref=b7b18e1cb2a9e83611ee92afd0d5002c' | 'False'        | ''       | 'False'    | 'False'  | 'True'     | 'False'     | 'Employee 2 (change shedule (days) + vacation + sick leave)' |
+		| 'e1cib/data/Catalog.Partners?ref=b7b18e1cb2a9e83611ee92afd0d5002d' | 'False'        | ''       | 'False'    | 'False'  | 'True'     | 'False'     | 'Employee 3  (vacation + truancy)'                           |
+		| 'e1cib/data/Catalog.Partners?ref=b7b18e1cb2a9e83611ee92afd0d5002e' | 'False'        | ''       | 'False'    | 'False'  | 'True'     | 'False'     | 'Employee 4 (change shedule (days - hours) + sick leave)'    |
+		| 'e1cib/data/Catalog.Partners?ref=b7b18e1cb2a9e83611ee92afd0d5002f' | 'False'        | ''       | 'False'    | 'False'  | 'True'     | 'False'     | 'Employee 5 (several vacations)'                             |
+		| 'e1cib/data/Catalog.Partners?ref=b7b18e1cb2a9e83611ee92afd0d50030' | 'False'        | ''       | 'False'    | 'False'  | 'True'     | 'False'     | 'Employee 6 (hours shedule + truancy)'                       |
+		| 'e1cib/data/Catalog.Partners?ref=b7b18e1cb2a9e83611ee92afd0d50031' | 'False'        | ''       | 'False'    | 'False'  | 'True'     | 'False'     | 'Employee 7 (several schedule changes)'                      |
+		| 'e1cib/data/Catalog.Partners?ref=b7b18e1cb2a9e83611ee92afd0d50032' | 'False'        | ''       | 'False'    | 'False'  | 'True'     | 'False'     | 'Employee 8 (several vacation + several sick leave)'         |
+		| 'e1cib/data/Catalog.Partners?ref=b7b18e1cb2a9e83611ee92afd0d50033' | 'False'        | ''       | 'False'    | 'False'  | 'True'     | 'False'     | 'Employee 9 (hours shedule + several sick leave)'            |
+
 
 Scenario: Create catalog BankTerms objects (for Shop 02)
 
@@ -1866,6 +1880,7 @@ Scenario: Create catalog AccrualAndDeductionTypes objects
 		| 'e1cib/data/Catalog.AccrualAndDeductionTypes?ref=b79a9cd967c8e1f011ede59baefef14b' | 'False'        | 2      | 'Enum.AccrualAndDeductionPeriodicity.ByPeriod' | 'e1cib/data/Catalog.ExpenseAndRevenueTypes?ref=aa78120ed95fbced11eaf114c59ef02b' | 'Enum.PayrollTypes.Deduction' | 'Deduction'      | ''                 | ''               | ''               | ''             |
 		| 'e1cib/data/Catalog.AccrualAndDeductionTypes?ref=b7b0f4345ecbeede11ee8ddbb37fa1ab' | 'False'        | 3      | 'Enum.AccrualAndDeductionPeriodicity.ByPeriod' | ''                                                                               | 'Enum.PayrollTypes.Accrual'   | 'Vacation'       | ''                 | ''               | ''               | ''             |
 		| 'e1cib/data/Catalog.AccrualAndDeductionTypes?ref=b7b0f4345ecbeede11ee8ddbb37fa1ac' | 'False'        | 4      | 'Enum.AccrualAndDeductionPeriodicity.ByPeriod' | ''                                                                               | 'Enum.PayrollTypes.Accrual'   | 'Sick leave'     | ''                 | ''               | ''               | ''             |
+		| 'e1cib/data/Catalog.AccrualAndDeductionTypes?ref=b7b18e1cb2a9e83611ee934dac9fec70' | 'False'        | 5      | 'Enum.AccrualAndDeductionPeriodicity.ByDay'    | 'e1cib/data/Catalog.ExpenseAndRevenueTypes?ref=aa78120ed95fbced11eaf114c59ef02b' | 'Enum.PayrollTypes.Accrual'   | 'Salary by day'  | ''                 | ''               | ''               | ''             |
 
 
 Scenario: Create catalog IntegrationSettings objects
@@ -1949,51 +1964,6 @@ Scenario: Create catalog IntegrationSettings objects (db connection)
 		| 'e1cib/data/Catalog.IntegrationSettings?ref=b785989306affb7a11ed2ea3af3b3aa1'  | 'TimeOut'                 | 60                            |
 		| 'e1cib/data/Catalog.IntegrationSettings?ref=b785989306affb7a11ed2ea3af3b3aa1'  | 'SecureConnection'        | 'False'                       |
 
-
-
-
-Scenario: Create catalog AccountingOperations objects
-
-	And I check or create catalog "AccountingOperations" objects:
-		| 'Ref'                                                                                         | 'DeletionMark'  | 'Parent'                                                                       | 'IsFolder'  | 'Code'  | 'Order'  | 'Description_en'                                                                                       | 'Description_hash'  | 'Description_ru'  | 'Description_tr'   |
-		| 'e1cib/data/Catalog.AccountingOperations?refName=Document_BankPayment'                        | 'False'         | ''                                                                             | 'True'      | 1       | ''       | 'Bank payment'                                                                                         | ''                  | ''                | ''                 |
-		| 'e1cib/data/Catalog.AccountingOperations?refName=Document_BankReceipt'                        | 'False'         | ''                                                                             | 'True'      | 2       | ''       | 'Bank receipt'                                                                                         | ''                  | ''                | ''                 |
-		| 'e1cib/data/Catalog.AccountingOperations?refName=Document_PurchaseInvoice'                    | 'False'         | ''                                                                             | 'True'      | 5       | ''       | 'Purchase invoice'                                                                                     | ''                  | ''                | ''                 |
-		| 'e1cib/data/Catalog.AccountingOperations?refName=Document_RetailSalesReceipt'                 | 'False'         | ''                                                                             | 'True'      | 11      | ''       | 'Retail sales receipt'                                                                                 | ''                  | ''                | ''                 |
-		| 'e1cib/data/Catalog.AccountingOperations?refName=BankPayment_DR_R1020B_R1021B_CR_R3010B'      | 'False'         | 'e1cib/data/Catalog.AccountingOperations?refName=Document_BankPayment'         | 'False'     | 3       |          | 'BankPayment_DR_R1020B (Advances to vendors) _R1021B (Vendors transaction) _CR_R3010B (Cash on hand)'  | ''                  | ''                | ''                 |
-		| 'e1cib/data/Catalog.AccountingOperations?refName=BankPayment_DR_R5022T_CR_R3010B'             | 'False'         | 'e1cib/data/Catalog.AccountingOperations?refName=Document_BankPayment'         | 'False'     | 9       |          | 'BankPayment_DR_R5022T (Expenses)_CR_R3010B (cash on hand)'                                            | ''                  | ''                | ''                 |
-		| 'e1cib/data/Catalog.AccountingOperations?refName=BankPayment_DR_R1021B_CR_R1020B'             | 'False'         | 'e1cib/data/Catalog.AccountingOperations?refName=Document_BankPayment'         | 'False'     | 10      |          | 'BankPayment_DR_R1021B (Vendors transaction) _CR_R1020B (Advances to vendors)'                         | ''                  | ''                | ''                 |
-		| 'e1cib/data/Catalog.AccountingOperations?refName=BankReceipt_DR_R3010B_CR_R2021B'             | 'False'         | 'e1cib/data/Catalog.AccountingOperations?refName=Document_BankReceipt'         | 'False'     | 4       |          | 'BankReceipt_DR_R3010B (Cash on hand) _CR_R2021B (Customer transaction)'                               | ''                  | ''                | ''                 |
-		| 'e1cib/data/Catalog.AccountingOperations?refName=PurchaseInvoice_DR_R4050B_R5022T_CR_R1021B'  | 'False'         | 'e1cib/data/Catalog.AccountingOperations?refName=Document_PurchaseInvoice'     | 'False'     | 6       |          | 'PurchaseInvoice_DR_R4050B (Stock inventory)_R5022T(Expenses)_CR_R1021B (Vendors transaction)'         | ''                  | ''                | ''                 |
-		| 'e1cib/data/Catalog.AccountingOperations?refName=PurchaseInvoice_DR_R1021B_CR_R1020B'         | 'False'         | 'e1cib/data/Catalog.AccountingOperations?refName=Document_PurchaseInvoice'     | 'False'     | 7       |          | 'PurchaseInvoice_DR_R1021B (Vendors transaction)_CR_R1020B (Advances to vendors)'                      | ''                  | ''                | ''                 |
-		| 'e1cib/data/Catalog.AccountingOperations?refName=PurchaseInvoice_DR_R1040B_CR_R1021B'         | 'False'         | 'e1cib/data/Catalog.AccountingOperations?refName=Document_PurchaseInvoice'     | 'False'     | 8       |          | 'PurchaseInvoice_DR_R1040B (Taxes outgoing) _CR_R1021B (Vendors transaction)'                          | ''                  | ''                | ''                 |
-		| 'e1cib/data/Catalog.AccountingOperations?refName=RetailSalesReceipt_DR_R5022T_CR_R4050B'      | 'False'         | 'e1cib/data/Catalog.AccountingOperations?refName=Document_RetailSalesReceipt'  | 'False'     | 12      |          | 'RetailSalesReceipt_DR_R5022T (Expenses) _CR_R4050B (Stock inventory)'                                 | ''                  | ''                | ''                 |
-
-Scenario: Create catalog LedgerTypes objects
-
-	And I check or create catalog "LedgerTypes" objects:
-		| 'Ref'                                                                  | 'DeletionMark'  | 'Code'  | 'CurrencyMovementType'                                                                             | 'Variant'                                                                     | 'Description_en'  | 'Description_hash'  | 'Description_ru'  | 'Description_tr'   |
-		| 'e1cib/data/Catalog.LedgerTypes?ref=b78386a1ced23f4711ed01ef43a5af0d'  | 'False'         | 1       | 'e1cib/data/ChartOfCharacteristicTypes.CurrencyMovementType?ref=aa78120ed92fbced11eaf113ba6c185d'  | 'e1cib/data/Catalog.LedgerTypeVariants?ref=b78386a1ced23f4711ed01ef43a5af0c'  | 'Management'      | ''                  | ''                | ''                 |
-
-
-Scenario: Create catalog LedgerTypeVariants objects
-
-	And I check or create catalog "LedgerTypeVariants" objects:
-		| 'Ref'                                                                         | 'DeletionMark'  | 'Code'  | 'Description_en'        | 'Description_hash'  | 'Description_ru'  | 'Description_tr'   |
-		| 'e1cib/data/Catalog.LedgerTypeVariants?ref=b78386a1ced23f4711ed01ef43a5af0c'  | 'False'         | 1       | 'Management analitics'  | ''                  | ''                | ''                 |
-
-Scenario: Create information register LedgerTypeOperations records
-
-	And I check or create information register "LedgerTypeOperations" records:
-		| 'Period'              | 'LedgerType'                                                           | 'AccountingOperation'                                                                         | 'Use'    |
-		| '01.01.2021 0:00:00'  | 'e1cib/data/Catalog.LedgerTypes?ref=b78386a1ced23f4711ed01ef43a5af0d'  | 'e1cib/data/Catalog.AccountingOperations?refName=BankPayment_DR_R1020B_R1021B_CR_R3010B'      | 'True'   |
-		| '01.01.2021 0:00:00'  | 'e1cib/data/Catalog.LedgerTypes?ref=b78386a1ced23f4711ed01ef43a5af0d'  | 'e1cib/data/Catalog.AccountingOperations?refName=BankPayment_DR_R5022T_CR_R3010B'             | 'True'   |
-		| '01.01.2021 0:00:00'  | 'e1cib/data/Catalog.LedgerTypes?ref=b78386a1ced23f4711ed01ef43a5af0d'  | 'e1cib/data/Catalog.AccountingOperations?refName=BankPayment_DR_R1021B_CR_R1020B'             | 'True'   |
-		| '01.01.2021 0:00:00'  | 'e1cib/data/Catalog.LedgerTypes?ref=b78386a1ced23f4711ed01ef43a5af0d'  | 'e1cib/data/Catalog.AccountingOperations?refName=BankReceipt_DR_R3010B_CR_R2021B'             | 'True'   |
-		| '01.01.2021 0:00:00'  | 'e1cib/data/Catalog.LedgerTypes?ref=b78386a1ced23f4711ed01ef43a5af0d'  | 'e1cib/data/Catalog.AccountingOperations?refName=PurchaseInvoice_DR_R4050B_R5022T_CR_R1021B'  | 'True'   |
-		| '01.01.2021 0:00:00'  | 'e1cib/data/Catalog.LedgerTypes?ref=b78386a1ced23f4711ed01ef43a5af0d'  | 'e1cib/data/Catalog.AccountingOperations?refName=PurchaseInvoice_DR_R1021B_CR_R1020B'         | 'True'   |
-		| '01.01.2021 0:00:00'  | 'e1cib/data/Catalog.LedgerTypes?ref=b78386a1ced23f4711ed01ef43a5af0d'  | 'e1cib/data/Catalog.AccountingOperations?refName=PurchaseInvoice_DR_R1040B_CR_R1021B'         | 'True'   |
-		| '01.01.2021 0:00:00'  | 'e1cib/data/Catalog.LedgerTypes?ref=b78386a1ced23f4711ed01ef43a5af0d'  | 'e1cib/data/Catalog.AccountingOperations?refName=RetailSalesReceipt_DR_R5022T_CR_R4050B'      | 'True'   |
 
 
 Scenario: Create information register CurrencyRates records
@@ -2821,35 +2791,6 @@ Scenario: Create information register ExpenseRevenueTypeSettings records (item k
 		| 'e1cib/data/Catalog.Companies?ref=aa78120ed92fbced11eaf113ba6c185c'  | ''          | 'e1cib/data/Catalog.Items?ref=aa78120ed92fbced11eaf115bcc9c5f6'  | 'e1cib/data/Catalog.ItemKeys?ref=aa78120ed92fbced11eaf115bcc9c5fc'  | 'e1cib/data/Catalog.ExpenseAndRevenueTypes?ref=aa78120ed92fbced11eaf114c59ef02a'  | 'e1cib/data/Catalog.ExpenseAndRevenueTypes?ref=aa78120ed92fbced11eaf114c59ef02a'   |
 
 
-Scenario: Create chart of characteristic types AccountingExtraDimensionTypes objects
-
-	And I check or create chart of characteristic types "AccountingExtraDimensionTypes" objects:
-		| 'Ref'                                                                                                       | 'DeletionMark'  | 'Description_en'     | 'Description_hash'  | 'Description_ru'  | 'Description_tr'  | 'ValueType'                                                     |
-		| 'e1cib/data/ChartOfCharacteristicTypes.AccountingExtraDimensionTypes?ref=b782df363ef64fb511ecebce91aa6032'  | 'False'         | 'Item'               | ''                  | ''                | ''                | '<Type xmlns:d2p1="http://v8.1c.ru/8.1/data/enterprise/current-config">d2p1:CatalogRef.Items</Type>'                    |
-		| 'e1cib/data/ChartOfCharacteristicTypes.AccountingExtraDimensionTypes?ref=b782df363ef64fb511ecebce91aa6033'  | 'False'         | 'Item key'           | ''                  | ''                | ''                | '<Type xmlns:d2p1="http://v8.1c.ru/8.1/data/enterprise/current-config">d2p1:CatalogRef.ItemKeys</Type>'                 |
-		| 'e1cib/data/ChartOfCharacteristicTypes.AccountingExtraDimensionTypes?ref=b782df363ef64fb511ecebce91aa6034'  | 'False'         | 'Legal name'         | ''                  | ''                | ''                | '<Type xmlns:d2p1="http://v8.1c.ru/8.1/data/enterprise/current-config">d2p1:CatalogRef.Companies</Type>'                |
-		| 'e1cib/data/ChartOfCharacteristicTypes.AccountingExtraDimensionTypes?ref=b782df363ef64fb511ecebce91aa6035'  | 'False'         | 'Partner'            | ''                  | ''                | ''                | '<Type xmlns:d2p1="http://v8.1c.ru/8.1/data/enterprise/current-config">d2p1:CatalogRef.Partners</Type>'                 |
-		| 'e1cib/data/ChartOfCharacteristicTypes.AccountingExtraDimensionTypes?ref=b782df363ef64fb511ecebce91aa6036'  | 'False'         | 'Store'              | ''                  | ''                | ''                | '<Type xmlns:d2p1="http://v8.1c.ru/8.1/data/enterprise/current-config">d2p1:CatalogRef.Stores</Type>'                   |
-		| 'e1cib/data/ChartOfCharacteristicTypes.AccountingExtraDimensionTypes?ref=b782df363ef64fb511ecebce91aa6037'  | 'False'         | 'Business unit'      | ''                  | ''                | ''                | '<Type xmlns:d2p1="http://v8.1c.ru/8.1/data/enterprise/current-config">d2p1:CatalogRef.BusinessUnits</Type>'            |
-		| 'e1cib/data/ChartOfCharacteristicTypes.AccountingExtraDimensionTypes?ref=b782df363ef64fb511ecebce91aa6038'  | 'False'         | 'Cash/Bank account'  | ''                  | ''                | ''                | '<Type xmlns:d2p1="http://v8.1c.ru/8.1/data/enterprise/current-config">d2p1:CatalogRef.CashAccounts</Type>'             |
-		| 'e1cib/data/ChartOfCharacteristicTypes.AccountingExtraDimensionTypes?ref=b782df363ef64fb511ecebce91aa6039'  | 'False'         | 'Expense type'       | ''                  | ''                | ''                | '<Type xmlns:d2p1="http://v8.1c.ru/8.1/data/enterprise/current-config">d2p1:CatalogRef.ExpenseAndRevenueTypes</Type>'   |
-		| 'e1cib/data/ChartOfCharacteristicTypes.AccountingExtraDimensionTypes?ref=b782df363ef64fb511ecebce91aa603a'  | 'False'         | 'Partner term'       | ''                  | ''                | ''                | '<Type xmlns:d2p1="http://v8.1c.ru/8.1/data/enterprise/current-config">d2p1:CatalogRef.Agreements</Type>'               |
-		| 'e1cib/data/ChartOfCharacteristicTypes.AccountingExtraDimensionTypes?ref=b782df363ef64fb511ecebce91aa603b'  | 'False'         | 'Tax type'           | ''                  | ''                | ''                | '<Type xmlns:d2p1="http://v8.1c.ru/8.1/data/enterprise/current-config">d2p1:CatalogRef.Taxes</Type>'                    |
-		| 'e1cib/data/ChartOfCharacteristicTypes.AccountingExtraDimensionTypes?ref=b782df363ef64fb511ecebce91aa603c'  | 'False'         | 'Revenue type'       | ''                  | ''                | ''                | '<Type xmlns:d2p1="http://v8.1c.ru/8.1/data/enterprise/current-config">d2p1:CatalogRef.ExpenseAndRevenueTypes</Type>'   |
-
-Scenario: Create information register T9011S_AccountsCashAccount records
-
-	And I check or create information register "T9011S_AccountsCashAccount" records:
-		| 'Period'              | 'Company'                                                            | 'Variant'                                                                     | 'CashAccount'  | 'Account'                                                                 |
-		| '01.07.2022 0:00:00'  | 'e1cib/data/Catalog.Companies?ref=aa78120ed92fbced11eaf113ba6c185c'  | 'e1cib/data/Catalog.LedgerTypeVariants?ref=b78386a1ced23f4711ed01ef43a5af0c'  | ''             | 'e1cib/data/ChartOfAccounts.Basic?ref=b78386a1ced23f4711ed01e9dc954ffe'   |
-
-Scenario: Create information register T9014S_AccountsExpenseRevenue records
-
-	And I check or create information register "T9014S_AccountsExpenseRevenue" records:
-		| 'Period'              | 'Company'                                                            | 'Variant'                                                                     | 'ExpenseRevenue'                                                                  | 'Account'                                                                 |
-		| '01.07.2022 0:00:00'  | 'e1cib/data/Catalog.Companies?ref=aa78120ed92fbced11eaf113ba6c185c'  | 'e1cib/data/Catalog.LedgerTypeVariants?ref=b78386a1ced23f4711ed01ef43a5af0c'  | 'e1cib/data/Catalog.ExpenseAndRevenueTypes?ref=aa78120ed95fbced11eaf114c59ef02b'  | 'e1cib/data/ChartOfAccounts.Basic?ref=b78386a1ced23f4711ed01e9dc954ffe'   |
-
-
 Scenario: Create information register UserSettings records (for workstation)
 
 	And I check or create information register "UserSettings" records:
@@ -3212,4 +3153,214 @@ Scenario: create Test unit
 	And I check or create catalog "Units" objects:
 		| 'Ref'                                                           | 'DeletionMark' | 'Code' | 'Item' | 'Quantity' | 'BasisUnit' | 'UOM' | 'Description_en' | 'Description_hash' | 'Description_ru' | 'Description_tr' | 'Height' | 'Length' | 'Volume' | 'Weight' | 'Width' | 'SourceNodeID' |
 		| 'e1cib/data/Catalog.Units?ref=b7af813f69b829cc11ee8231a4cbaff0' | 'False'        | 29     | ''     | 1          | ''          | ''    | 'Test unit'      | ''                 | ''               | 'adet'           |          |          |          |          |         | ''             |
+
+
+Scenario: create Payroll and Time Sheet for Second Company
+
+	// Document.Payroll
+
+	And I check or create document "Payroll" objects:
+		| 'Ref'                                                              | 'DeletionMark' | 'Number' | 'Date'                | 'Posted' | 'Company'                                                           | 'Currency'                                                           | 'BeginDate'           | 'EndDate'             | 'PaymentPeriod'                                                           | 'Author'                                                        | 'Branch'                                                                | 'Description' | 'DocumentAmount' | 'SourceNodeID' |
+		| 'e1cib/data/Document.Payroll?ref=b7b18e1cb2a9e83611ee934dac9fec63' | 'False'        | 11       | '05.12.2023 11:15:09' | 'False'  | 'e1cib/data/Catalog.Companies?ref=aa78120ed92fbced11eaf128cde918b4' | 'e1cib/data/Catalog.Currencies?ref=aa78120ed92fbced11eaf113ba6c1855' | '01.11.2023 00:00:00' | '30.11.2023 00:00:00' | 'e1cib/data/Catalog.PlanningPeriods?ref=b7b0f4345ecbeede11ee8ddbb37fa1a7' | 'e1cib/data/Catalog.Users?ref=aa7f120ed92fbced11eb13d7279770c0' | 'e1cib/data/Catalog.BusinessUnits?ref=aa78120ed92fbced11eaf114c59ef023' | ''            |                  | ''             |
+
+	// Document.TimeSheet
+
+	And I check or create document "TimeSheet" objects:
+		| 'Ref'                                                                | 'DeletionMark' | 'Number' | 'Date'                | 'Posted' | 'Company'                                                           | 'BeginDate'           | 'EndDate'             | 'Author'                                                        | 'Branch'                                                                | 'Description' | 'SourceNodeID' |
+		| 'e1cib/data/Document.TimeSheet?ref=b7b18e1cb2a9e83611ee934dac9fec62' | 'False'        | 11       | '05.12.2023 11:12:48' | 'False'  | 'e1cib/data/Catalog.Companies?ref=aa78120ed92fbced11eaf128cde918b4' | '01.11.2023 00:00:00' | '30.11.2023 00:00:00' | 'e1cib/data/Catalog.Users?ref=aa7f120ed92fbced11eb13d7279770c0' | 'e1cib/data/Catalog.BusinessUnits?ref=aa78120ed92fbced11eaf114c59ef023' | ''            | ''             |
+
+
+Scenario: test data for payroll calculation (position and salary change in the middle of the calculation period + vacation + truancy) 
+
+// Document.EmployeeHiring
+
+	And I check or create document "EmployeeHiring" objects:
+		| 'Ref'                                                                     | 'DeletionMark' | 'Number' | 'Date'                | 'Posted' | 'Company'                                                           | 'Employee'                                                         | 'Position'                                                                  | 'EmployeeSchedule'                                                         | 'ProfitLossCenter'                                                      | 'Salary' | 'PersonalSalary' | 'AccrualType'                                                                      | 'Author'                                                        | 'Branch'                                                                | 'Description' |
+		| 'e1cib/data/Document.EmployeeHiring?ref=b7b18e1cb2a9e83611ee934dac9fec5f' | 'False'        | 6        | '01.11.2023 00:00:01' | 'True'   | 'e1cib/data/Catalog.Companies?ref=aa78120ed92fbced11eaf128cde918b4' | 'e1cib/data/Catalog.Partners?ref=b7b18e1cb2a9e83611ee92afd0d5002b' | 'e1cib/data/Catalog.EmployeePositions?ref=b794e3cbd36876e811eda861f577c0ab' | 'e1cib/data/Catalog.EmployeeSchedule?ref=b7b0f4345ecbeede11ee89f924f68887' | 'e1cib/data/Catalog.BusinessUnits?ref=aa78120ed92fbced11eaf114c59ef023' | 10000    |                  | 'e1cib/data/Catalog.AccrualAndDeductionTypes?ref=b794e3cbd36876e811eda864ba51300b' | 'e1cib/data/Catalog.Users?ref=aa7f120ed92fbced11eb13d7279770c0' | 'e1cib/data/Catalog.BusinessUnits?ref=aa78120ed92fbced11eaf114c59ef023' | ''            |
+
+	// Document.EmployeeTransfer
+
+	And I check or create document "EmployeeTransfer" objects:
+		| 'Ref'                                                                       | 'DeletionMark' | 'Number' | 'Date'                | 'Posted' | 'Company'                                                           | 'Employee'                                                         | 'FromPosition'                                                              | 'FromEmployeeSchedule'                                                     | 'FromProfitLossCenter'                                                  | 'ToPosition'                                                                | 'ToEmployeeSchedule'                                                       | 'ToProfitLossCenter'                                                    | 'ToBranch'                                                              | 'EndOfDate'           | 'FromSalary' | 'FromPersonalSalary' | 'FromAccrualType'                                                                  | 'ToSalary' | 'ToPersonalSalary' | 'ToAccrualType'                                                                    | 'Author'                                                        | 'Branch'                                                                | 'Description' |
+		| 'e1cib/data/Document.EmployeeTransfer?ref=b7b18e1cb2a9e83611ee934dac9fec60' | 'False'        | 2        | '10.11.2023 00:00:01' | 'True'   | 'e1cib/data/Catalog.Companies?ref=aa78120ed92fbced11eaf128cde918b4' | 'e1cib/data/Catalog.Partners?ref=b7b18e1cb2a9e83611ee92afd0d5002b' | 'e1cib/data/Catalog.EmployeePositions?ref=b794e3cbd36876e811eda861f577c0ab' | 'e1cib/data/Catalog.EmployeeSchedule?ref=b7b0f4345ecbeede11ee89f924f68887' | 'e1cib/data/Catalog.BusinessUnits?ref=aa78120ed92fbced11eaf114c59ef023' | 'e1cib/data/Catalog.EmployeePositions?ref=b794e3cbd36876e811eda861f577c0ad' | 'e1cib/data/Catalog.EmployeeSchedule?ref=b7b0f4345ecbeede11ee89f924f68887' | 'e1cib/data/Catalog.BusinessUnits?ref=aa78120ed92fbced11eaf114c59ef023' | 'e1cib/data/Catalog.BusinessUnits?ref=aa78120ed92fbced11eaf114c59ef023' | '01.01.0001 00:00:00' | 10000        |                      | 'e1cib/data/Catalog.AccrualAndDeductionTypes?ref=b794e3cbd36876e811eda864ba51300b' |            | 12000              | 'e1cib/data/Catalog.AccrualAndDeductionTypes?ref=b794e3cbd36876e811eda864ba51300b' | 'e1cib/data/Catalog.Users?ref=aa7f120ed92fbced11eb13d7279770c0' | 'e1cib/data/Catalog.BusinessUnits?ref=aa78120ed92fbced11eaf114c59ef023' | ''            |
+
+	// Document.EmployeeVacation
+
+	And I check or create document "EmployeeVacation" objects:
+		| 'Ref'                                                                       | 'DeletionMark' | 'Number' | 'Date'                | 'Posted' | 'Company'                                                           | 'Author'                                                        | 'Branch'                                                                | 'Description' |
+		| 'e1cib/data/Document.EmployeeVacation?ref=b7b18e1cb2a9e83611ee934dac9fec61' | 'False'        | 3        | '13.11.2023 11:11:00' | 'False'  | 'e1cib/data/Catalog.Companies?ref=aa78120ed92fbced11eaf128cde918b4' | 'e1cib/data/Catalog.Users?ref=aa7f120ed92fbced11eb13d7279770c0' | 'e1cib/data/Catalog.BusinessUnits?ref=aa78120ed92fbced11eaf114c59ef023' | ''            |
+
+	And I refill object tabular section "EmployeeList":
+		| 'Ref'                                                                       | 'Employee'                                                         | 'BeginDate'           | 'EndDate'             |
+		| 'e1cib/data/Document.EmployeeVacation?ref=b7b18e1cb2a9e83611ee934dac9fec61' | 'e1cib/data/Catalog.Partners?ref=b7b18e1cb2a9e83611ee92afd0d5002b' | '13.11.2023 00:00:00' | '18.11.2023 00:00:00' |
+
+
+Scenario: test data for check of payroll calculation (work schedule change (days) + vacation + sick leave)
+
+	// Document.EmployeeHiring
+
+	And I check or create document "EmployeeHiring" objects:
+		| 'Ref'                                                                     | 'DeletionMark' | 'Number' | 'Date'                | 'Posted'  | 'Company'                                                           | 'Employee'                                                         | 'Position'                                                                  | 'EmployeeSchedule'                                                         | 'ProfitLossCenter'                                                      | 'Salary' | 'PersonalSalary' | 'AccrualType'                                                                      | 'Author'                                                        | 'Branch'                                                                | 'Description' |
+		| 'e1cib/data/Document.EmployeeHiring?ref=b7b18e1cb2a9e83611ee934dac9fec64' | 'False'        | 7        | '01.11.2023 11:47:54' | 'False'   | 'e1cib/data/Catalog.Companies?ref=aa78120ed92fbced11eaf128cde918b4' | 'e1cib/data/Catalog.Partners?ref=b7b18e1cb2a9e83611ee92afd0d5002c' | 'e1cib/data/Catalog.EmployeePositions?ref=b794e3cbd36876e811eda861f577c0ac' | 'e1cib/data/Catalog.EmployeeSchedule?ref=b7b0f4345ecbeede11ee89f924f68889' | 'e1cib/data/Catalog.BusinessUnits?ref=aa78120ed92fbced11eaf114c59ef023' | 7000     |                  | 'e1cib/data/Catalog.AccrualAndDeductionTypes?ref=b794e3cbd36876e811eda864ba51300b' | 'e1cib/data/Catalog.Users?ref=aa7f120ed92fbced11eb13d7279770c0' | 'e1cib/data/Catalog.BusinessUnits?ref=aa78120ed92fbced11eaf114c59ef023' | ''            |
+
+	// Document.EmployeeSickLeave
+
+	And I check or create document "EmployeeSickLeave" objects:
+		| 'Ref'                                                                        | 'DeletionMark' | 'Number' | 'Date'                | 'Posted'  | 'Company'                                                           | 'Author'                                                        | 'Branch'                                                                | 'Description' |
+		| 'e1cib/data/Document.EmployeeSickLeave?ref=b7b18e1cb2a9e83611ee934dac9fec66' | 'False'        | 11       | '16.11.2023 12:00:00' | 'False'   | 'e1cib/data/Catalog.Companies?ref=aa78120ed92fbced11eaf128cde918b4' | 'e1cib/data/Catalog.Users?ref=aa7f120ed92fbced11eb13d7279770c0' | 'e1cib/data/Catalog.BusinessUnits?ref=aa78120ed92fbced11eaf114c59ef023' | ''            |
+
+	And I refill object tabular section "EmployeeList":
+		| 'Ref'                                                                        | 'Employee'                                                         | 'BeginDate'           | 'EndDate'             |
+		| 'e1cib/data/Document.EmployeeSickLeave?ref=b7b18e1cb2a9e83611ee934dac9fec66' | 'e1cib/data/Catalog.Partners?ref=b7b18e1cb2a9e83611ee92afd0d5002c' | '16.11.2023 00:00:00' | '18.11.2023 00:00:00' |
+
+	// Document.EmployeeTransfer
+
+	And I check or create document "EmployeeTransfer" objects:
+		| 'Ref'                                                                       | 'DeletionMark' | 'Number' | 'Date'                | 'Posted'  | 'Company'                                                           | 'Employee'                                                         | 'FromPosition'                                                              | 'FromEmployeeSchedule'                                                     | 'FromProfitLossCenter'                                                  | 'ToPosition'                                                                | 'ToEmployeeSchedule'                                                       | 'ToProfitLossCenter'                                                    | 'ToBranch'                                                              | 'EndOfDate'           | 'FromSalary' | 'FromPersonalSalary' | 'FromAccrualType'                                                                  | 'ToSalary' | 'ToPersonalSalary' | 'ToAccrualType'                                                                    | 'Author'                                                        | 'Branch'                                                                | 'Description' |
+		| 'e1cib/data/Document.EmployeeTransfer?ref=b7b18e1cb2a9e83611ee934dac9fec65' | 'False'        | 3        | '10.11.2023 11:53:41' | 'False'   | 'e1cib/data/Catalog.Companies?ref=aa78120ed92fbced11eaf128cde918b4' | 'e1cib/data/Catalog.Partners?ref=b7b18e1cb2a9e83611ee92afd0d5002c' | 'e1cib/data/Catalog.EmployeePositions?ref=b794e3cbd36876e811eda861f577c0ac' | 'e1cib/data/Catalog.EmployeeSchedule?ref=b7b0f4345ecbeede11ee89f924f68889' | 'e1cib/data/Catalog.BusinessUnits?ref=aa78120ed92fbced11eaf114c59ef023' | 'e1cib/data/Catalog.EmployeePositions?ref=b794e3cbd36876e811eda861f577c0ac' | 'e1cib/data/Catalog.EmployeeSchedule?ref=b7b0f4345ecbeede11ee8ddbb37fa1a0' | 'e1cib/data/Catalog.BusinessUnits?ref=aa78120ed92fbced11eaf114c59ef023' | 'e1cib/data/Catalog.BusinessUnits?ref=aa78120ed92fbced11eaf114c59ef023' | '01.01.0001 00:00:00' | 7000         |                      | 'e1cib/data/Catalog.AccrualAndDeductionTypes?ref=b794e3cbd36876e811eda864ba51300b' | 7000       |                    | 'e1cib/data/Catalog.AccrualAndDeductionTypes?ref=b794e3cbd36876e811eda864ba51300b' | 'e1cib/data/Catalog.Users?ref=aa7f120ed92fbced11eb13d7279770c0' | 'e1cib/data/Catalog.BusinessUnits?ref=aa78120ed92fbced11eaf114c59ef023' | ''            |
+
+	// Document.EmployeeVacation
+
+	And I check or create document "EmployeeVacation" objects:
+		| 'Ref'                                                                       | 'DeletionMark' | 'Number' | 'Date'                | 'Posted' | 'Company'                                                           | 'Author'                                                        | 'Branch'                                                                | 'Description' |
+		| 'e1cib/data/Document.EmployeeVacation?ref=b7b18e1cb2a9e83611ee934dac9fec67' | 'False'        | 4        | '20.11.2023 11:57:45' | 'False'  | 'e1cib/data/Catalog.Companies?ref=aa78120ed92fbced11eaf128cde918b4' | 'e1cib/data/Catalog.Users?ref=aa7f120ed92fbced11eb13d7279770c0' | 'e1cib/data/Catalog.BusinessUnits?ref=aa78120ed92fbced11eaf114c59ef023' | ''            |
+
+	And I refill object tabular section "EmployeeList":
+		| 'Ref'                                                                       | 'Employee'                                                         | 'BeginDate'           | 'EndDate'             |
+		| 'e1cib/data/Document.EmployeeVacation?ref=b7b18e1cb2a9e83611ee934dac9fec67' | 'e1cib/data/Catalog.Partners?ref=b7b18e1cb2a9e83611ee92afd0d5002c' | '23.11.2023 00:00:00' | '26.11.2023 00:00:00' |
+
+Scenario: test data for check of payroll calculation (vacation + truancy)
+
+	// Document.EmployeeHiring
+
+	And I check or create document "EmployeeHiring" objects:
+		| 'Ref'                                                                     | 'DeletionMark' | 'Number' | 'Date'                | 'Posted'  | 'Company'                                                           | 'Employee'                                                         | 'Position'                                                                  | 'EmployeeSchedule'                                                         | 'ProfitLossCenter'                                                      | 'Salary' | 'PersonalSalary' | 'AccrualType'                                                                      | 'Author'                                                        | 'Branch'                                                                | 'Description' |
+		| 'e1cib/data/Document.EmployeeHiring?ref=b7b18e1cb2a9e83611ee934dac9fec68' | 'False'        | 8        | '31.10.2023 12:00:00' | 'False'   | 'e1cib/data/Catalog.Companies?ref=aa78120ed92fbced11eaf128cde918b4' | 'e1cib/data/Catalog.Partners?ref=b7b18e1cb2a9e83611ee92afd0d5002d' | 'e1cib/data/Catalog.EmployeePositions?ref=b794e3cbd36876e811eda861f577c0ac' | 'e1cib/data/Catalog.EmployeeSchedule?ref=b7b0f4345ecbeede11ee8ddbb37fa1a0' | 'e1cib/data/Catalog.BusinessUnits?ref=aa78120ed92fbced11eaf114c59ef023' | 7000     |                  | 'e1cib/data/Catalog.AccrualAndDeductionTypes?ref=b794e3cbd36876e811eda864ba51300b' | 'e1cib/data/Catalog.Users?ref=aa7f120ed92fbced11eb13d7279770c0' | 'e1cib/data/Catalog.BusinessUnits?ref=aa78120ed92fbced11eaf114c59ef023' | ''            |
+
+	// Document.EmployeeVacation
+
+	And I check or create document "EmployeeVacation" objects:
+		| 'Ref'                                                                       | 'DeletionMark' | 'Number' | 'Date'                | 'Posted'  | 'Company'                                                           | 'Author'                                                        | 'Branch'                                                                | 'Description' |
+		| 'e1cib/data/Document.EmployeeVacation?ref=b7b18e1cb2a9e83611ee934dac9fec69' | 'False'        | 5        | '09.11.2023 12:00:00' | 'False'   | 'e1cib/data/Catalog.Companies?ref=aa78120ed92fbced11eaf128cde918b4' | 'e1cib/data/Catalog.Users?ref=aa7f120ed92fbced11eb13d7279770c0' | 'e1cib/data/Catalog.BusinessUnits?ref=aa78120ed92fbced11eaf114c59ef023' | ''            |
+
+	And I refill object tabular section "EmployeeList":
+		| 'Ref'                                                                       | 'Employee'                                                         | 'BeginDate'           | 'EndDate'             |
+		| 'e1cib/data/Document.EmployeeVacation?ref=b7b18e1cb2a9e83611ee934dac9fec69' | 'e1cib/data/Catalog.Partners?ref=b7b18e1cb2a9e83611ee92afd0d5002d' | '09.11.2023 00:00:00' | '10.11.2023 00:00:00' |
+
+Scenario: test data for check of payroll calculation (change of work schedule (from hours to days) + sick leave)
+
+	// Document.EmployeeHiring
+
+	And I check or create document "EmployeeHiring" objects:
+		| 'Ref'                                                                     | 'DeletionMark' | 'Number' | 'Date'                | 'Posted'  | 'Company'                                                           | 'Employee'                                                         | 'Position'                                                                  | 'EmployeeSchedule'                                                         | 'ProfitLossCenter'                                                      | 'Salary' | 'PersonalSalary' | 'AccrualType'                                                                      | 'Author'                                                        | 'Branch'                                                                | 'Description' |
+		| 'e1cib/data/Document.EmployeeHiring?ref=b7b18e1cb2a9e83611ee934dac9fec6a' | 'False'        | 9        | '31.10.2023 11:00:00' | 'False'   | 'e1cib/data/Catalog.Companies?ref=aa78120ed92fbced11eaf128cde918b4' | 'e1cib/data/Catalog.Partners?ref=b7b18e1cb2a9e83611ee92afd0d5002e' | 'e1cib/data/Catalog.EmployeePositions?ref=b794e3cbd36876e811eda861f577c0ac' | 'e1cib/data/Catalog.EmployeeSchedule?ref=b7b0f4345ecbeede11ee8ddbb37fa1a0' | 'e1cib/data/Catalog.BusinessUnits?ref=aa78120ed92fbced11eaf114c59ef023' | 7000     |                  | 'e1cib/data/Catalog.AccrualAndDeductionTypes?ref=b794e3cbd36876e811eda864ba51300b' | 'e1cib/data/Catalog.Users?ref=aa7f120ed92fbced11eb13d7279770c0' | 'e1cib/data/Catalog.BusinessUnits?ref=aa78120ed92fbced11eaf114c59ef023' | ''            |
+
+	// Document.EmployeeSickLeave
+
+	And I check or create document "EmployeeSickLeave" objects:
+		| 'Ref'                                                                        | 'DeletionMark' | 'Number' | 'Date'                | 'Posted'  | 'Company'                                                           | 'Author'                                                        | 'Branch'                                                                | 'Description' |
+		| 'e1cib/data/Document.EmployeeSickLeave?ref=b7b18e1cb2a9e83611ee934dac9fec6c' | 'False'        | 12       | '22.11.2023 12:00:00' | 'False'   | 'e1cib/data/Catalog.Companies?ref=aa78120ed92fbced11eaf128cde918b4' | 'e1cib/data/Catalog.Users?ref=aa7f120ed92fbced11eb13d7279770c0' | 'e1cib/data/Catalog.BusinessUnits?ref=aa78120ed92fbced11eaf114c59ef023' | ''            |
+
+	And I refill object tabular section "EmployeeList":
+		| 'Ref'                                                                        | 'Employee'                                                         | 'BeginDate'           | 'EndDate'             |
+		| 'e1cib/data/Document.EmployeeSickLeave?ref=b7b18e1cb2a9e83611ee934dac9fec6c' | 'e1cib/data/Catalog.Partners?ref=b7b18e1cb2a9e83611ee92afd0d5002e' | '22.11.2023 00:00:00' | '23.11.2023 00:00:00' |
+
+	// Document.EmployeeTransfer
+
+	And I check or create document "EmployeeTransfer" objects:
+		| 'Ref'                                                                       | 'DeletionMark' | 'Number' | 'Date'                | 'Posted'  | 'Company'                                                           | 'Employee'                                                         | 'FromPosition'                                                              | 'FromEmployeeSchedule'                                                     | 'FromProfitLossCenter'                                                  | 'ToPosition'                                                                | 'ToEmployeeSchedule'                                                       | 'ToProfitLossCenter'                                                    | 'ToBranch'                                                              | 'EndOfDate'           | 'FromSalary' | 'FromPersonalSalary' | 'FromAccrualType'                                                                  | 'ToSalary' | 'ToPersonalSalary' | 'ToAccrualType'                                                                    | 'Author'                                                        | 'Branch'                                                                | 'Description' |
+		| 'e1cib/data/Document.EmployeeTransfer?ref=b7b18e1cb2a9e83611ee934dac9fec6b' | 'False'        | 4        | '10.11.2023 13:00:00' | 'False'   | 'e1cib/data/Catalog.Companies?ref=aa78120ed92fbced11eaf128cde918b4' | 'e1cib/data/Catalog.Partners?ref=b7b18e1cb2a9e83611ee92afd0d5002e' | 'e1cib/data/Catalog.EmployeePositions?ref=b794e3cbd36876e811eda861f577c0ac' | 'e1cib/data/Catalog.EmployeeSchedule?ref=b7b0f4345ecbeede11ee8ddbb37fa1a0' | 'e1cib/data/Catalog.BusinessUnits?ref=aa78120ed92fbced11eaf114c59ef023' | 'e1cib/data/Catalog.EmployeePositions?ref=b794e3cbd36876e811eda861f577c0ac' | 'e1cib/data/Catalog.EmployeeSchedule?ref=b7b0f4345ecbeede11ee89f924f68888' | 'e1cib/data/Catalog.BusinessUnits?ref=aa78120ed92fbced11eaf114c59ef023' | 'e1cib/data/Catalog.BusinessUnits?ref=aa78120ed92fbced11eaf114c59ef023' | '01.01.0001 00:00:00' | 7000         |                      | 'e1cib/data/Catalog.AccrualAndDeductionTypes?ref=b794e3cbd36876e811eda864ba51300b' | 7000       | 10000              | 'e1cib/data/Catalog.AccrualAndDeductionTypes?ref=b794e3cbd36876e811eda864ba51300b' | 'e1cib/data/Catalog.Users?ref=aa7f120ed92fbced11eb13d7279770c0' | 'e1cib/data/Catalog.BusinessUnits?ref=aa78120ed92fbced11eaf114c59ef023' | ''            |
+
+Scenario: test data for check of payroll calculation (several vacations)
+
+	// Document.EmployeeHiring
+
+	And I check or create document "EmployeeHiring" objects:
+		| 'Ref'                                                                     | 'DeletionMark' | 'Number' | 'Date'                | 'Posted'  | 'Company'                                                           | 'Employee'                                                         | 'Position'                                                                  | 'EmployeeSchedule'                                                         | 'ProfitLossCenter'                                                      | 'Salary' | 'PersonalSalary' | 'AccrualType'                                                                      | 'Author'                                                        | 'Branch'                                                                | 'Description' |
+		| 'e1cib/data/Document.EmployeeHiring?ref=b7b18e1cb2a9e83611ee934dac9fec6d' | 'False'        | 10       | '31.10.2023 11:10:00' | 'False'   | 'e1cib/data/Catalog.Companies?ref=aa78120ed92fbced11eaf128cde918b4' | 'e1cib/data/Catalog.Partners?ref=b7b18e1cb2a9e83611ee92afd0d5002f' | 'e1cib/data/Catalog.EmployeePositions?ref=b794e3cbd36876e811eda861f577c0ac' | 'e1cib/data/Catalog.EmployeeSchedule?ref=b7b0f4345ecbeede11ee8ddbb37fa1a1' | 'e1cib/data/Catalog.BusinessUnits?ref=aa78120ed92fbced11eaf114c59ef023' | 7000     |                  | 'e1cib/data/Catalog.AccrualAndDeductionTypes?ref=b794e3cbd36876e811eda864ba51300b' | 'e1cib/data/Catalog.Users?ref=aa7f120ed92fbced11eb13d7279770c0' | 'e1cib/data/Catalog.BusinessUnits?ref=aa78120ed92fbced11eaf114c59ef023' | ''            |
+
+	// Document.EmployeeVacation
+
+	And I check or create document "EmployeeVacation" objects:
+		| 'Ref'                                                                       | 'DeletionMark' | 'Number' | 'Date'                | 'Posted'  | 'Company'                                                           | 'Author'                                                        | 'Branch'                                                                | 'Description' |
+		| 'e1cib/data/Document.EmployeeVacation?ref=b7b18e1cb2a9e83611ee934dac9fec6e' | 'False'        | 6        | '09.11.2023 12:00:01' | 'False'   | 'e1cib/data/Catalog.Companies?ref=aa78120ed92fbced11eaf128cde918b4' | 'e1cib/data/Catalog.Users?ref=aa7f120ed92fbced11eb13d7279770c0' | 'e1cib/data/Catalog.BusinessUnits?ref=aa78120ed92fbced11eaf114c59ef023' | ''            |
+		| 'e1cib/data/Document.EmployeeVacation?ref=b7b18e1cb2a9e83611ee934dac9fec6f' | 'False'        | 7        | '15.11.2023 12:00:00' | 'False'   | 'e1cib/data/Catalog.Companies?ref=aa78120ed92fbced11eaf128cde918b4' | 'e1cib/data/Catalog.Users?ref=aa7f120ed92fbced11eb13d7279770c0' | 'e1cib/data/Catalog.BusinessUnits?ref=aa78120ed92fbced11eaf114c59ef023' | ''            |
+
+	And I refill object tabular section "EmployeeList":
+		| 'Ref'                                                                       | 'Employee'                                                         | 'BeginDate'           | 'EndDate'             |
+		| 'e1cib/data/Document.EmployeeVacation?ref=b7b18e1cb2a9e83611ee934dac9fec6e' | 'e1cib/data/Catalog.Partners?ref=b7b18e1cb2a9e83611ee92afd0d5002f' | '09.11.2023 00:00:00' | '10.11.2023 00:00:00' |
+		| 'e1cib/data/Document.EmployeeVacation?ref=b7b18e1cb2a9e83611ee934dac9fec6f' | 'e1cib/data/Catalog.Partners?ref=b7b18e1cb2a9e83611ee92afd0d5002f' | '15.11.2023 00:00:00' | '17.11.2023 00:00:00' |
+
+Scenario: test data for check of payroll calculation (hours shedule + truancy)
+
+	// Document.EmployeeHiring
+
+	And I check or create document "EmployeeHiring" objects:
+		| 'Ref'                                                                     | 'DeletionMark' | 'Number' | 'Date'                | 'Posted'  | 'Company'                                                           | 'Employee'                                                         | 'Position'                                                                  | 'EmployeeSchedule'                                                         | 'ProfitLossCenter'                                                      | 'Salary' | 'PersonalSalary' | 'AccrualType'                                                                      | 'Author'                                                        | 'Branch'                                                                | 'Description' |
+		| 'e1cib/data/Document.EmployeeHiring?ref=b7b18e1cb2a9e83611ee934dac9fec71' | 'False'        | 11       | '31.10.2023 12:00:01' | 'False'   | 'e1cib/data/Catalog.Companies?ref=aa78120ed92fbced11eaf128cde918b4' | 'e1cib/data/Catalog.Partners?ref=b7b18e1cb2a9e83611ee92afd0d50030' | 'e1cib/data/Catalog.EmployeePositions?ref=b794e3cbd36876e811eda861f577c0ac' | 'e1cib/data/Catalog.EmployeeSchedule?ref=b7b0f4345ecbeede11ee89f924f68888' | 'e1cib/data/Catalog.BusinessUnits?ref=aa78120ed92fbced11eaf114c59ef023' | 7000     | 10000            | 'e1cib/data/Catalog.AccrualAndDeductionTypes?ref=b794e3cbd36876e811eda864ba51300b' | 'e1cib/data/Catalog.Users?ref=aa7f120ed92fbced11eb13d7279770c0' | 'e1cib/data/Catalog.BusinessUnits?ref=aa78120ed92fbced11eaf114c59ef023' | ''            |
+
+Scenario: test data for check of payroll calculation (several work schedule changes)
+// Document.EmployeeHiring
+
+	And I check or create document "EmployeeHiring" objects:
+		| 'Ref'                                                                     | 'DeletionMark' | 'Number' | 'Date'                | 'Posted'  | 'Company'                                                           | 'Employee'                                                         | 'Position'                                                                  | 'EmployeeSchedule'                                                         | 'ProfitLossCenter'                                                      | 'Salary' | 'PersonalSalary' | 'AccrualType'                                                                      | 'Author'                                                        | 'Branch'                                                                | 'Description' |
+		| 'e1cib/data/Document.EmployeeHiring?ref=b7b18e1cb2a9e83611ee934dac9fec72' | 'False'        | 12       | '31.10.2023 12:00:02' | 'False'   | 'e1cib/data/Catalog.Companies?ref=aa78120ed92fbced11eaf128cde918b4' | 'e1cib/data/Catalog.Partners?ref=b7b18e1cb2a9e83611ee92afd0d50031' | 'e1cib/data/Catalog.EmployeePositions?ref=b794e3cbd36876e811eda861f577c0ac' | 'e1cib/data/Catalog.EmployeeSchedule?ref=b7b0f4345ecbeede11ee89f924f68888' | 'e1cib/data/Catalog.BusinessUnits?ref=aa78120ed92fbced11eaf114c59ef023' | 7000     |                  | 'e1cib/data/Catalog.AccrualAndDeductionTypes?ref=b794e3cbd36876e811eda864ba51300b' | 'e1cib/data/Catalog.Users?ref=aa7f120ed92fbced11eb13d7279770c0' | 'e1cib/data/Catalog.BusinessUnits?ref=aa78120ed92fbced11eaf114c59ef023' | ''            |
+
+	// Document.EmployeeTransfer
+
+	And I check or create document "EmployeeTransfer" objects:
+		| 'Ref'                                                                       | 'DeletionMark' | 'Number' | 'Date'                | 'Posted'  | 'Company'                                                           | 'Employee'                                                         | 'FromPosition'                                                              | 'FromEmployeeSchedule'                                                     | 'FromProfitLossCenter'                                                  | 'ToPosition'                                                                | 'ToEmployeeSchedule'                                                       | 'ToProfitLossCenter'                                                    | 'ToBranch'                                                              | 'EndOfDate'           | 'FromSalary' | 'FromPersonalSalary' | 'FromAccrualType'                                                                  | 'ToSalary' | 'ToPersonalSalary' | 'ToAccrualType'                                                                    | 'Author'                                                        | 'Branch'                                                                | 'Description' |
+		| 'e1cib/data/Document.EmployeeTransfer?ref=b7b18e1cb2a9e83611ee934dac9fec73' | 'False'        | 5        | '08.11.2023 12:00:00' | 'False'   | 'e1cib/data/Catalog.Companies?ref=aa78120ed92fbced11eaf128cde918b4' | 'e1cib/data/Catalog.Partners?ref=b7b18e1cb2a9e83611ee92afd0d50031' | 'e1cib/data/Catalog.EmployeePositions?ref=b794e3cbd36876e811eda861f577c0ac' | 'e1cib/data/Catalog.EmployeeSchedule?ref=b7b0f4345ecbeede11ee89f924f68888' | 'e1cib/data/Catalog.BusinessUnits?ref=aa78120ed92fbced11eaf114c59ef023' | 'e1cib/data/Catalog.EmployeePositions?ref=b794e3cbd36876e811eda861f577c0ac' | 'e1cib/data/Catalog.EmployeeSchedule?ref=b7b0f4345ecbeede11ee89f924f68889' | 'e1cib/data/Catalog.BusinessUnits?ref=aa78120ed92fbced11eaf114c59ef023' | 'e1cib/data/Catalog.BusinessUnits?ref=aa78120ed92fbced11eaf114c59ef023' | '13.11.2023 00:00:00' | 7000         |                      | 'e1cib/data/Catalog.AccrualAndDeductionTypes?ref=b794e3cbd36876e811eda864ba51300b' | 7000       |                    | 'e1cib/data/Catalog.AccrualAndDeductionTypes?ref=b794e3cbd36876e811eda864ba51300b' | 'e1cib/data/Catalog.Users?ref=aa7f120ed92fbced11eb13d7279770c0' | 'e1cib/data/Catalog.BusinessUnits?ref=aa78120ed92fbced11eaf114c59ef023' | ''            |
+		| 'e1cib/data/Document.EmployeeTransfer?ref=b7b18e1cb2a9e83611ee934dac9fec74' | 'False'        | 6        | '17.11.2023 14:34:57' | 'False'   | 'e1cib/data/Catalog.Companies?ref=aa78120ed92fbced11eaf128cde918b4' | 'e1cib/data/Catalog.Partners?ref=b7b18e1cb2a9e83611ee92afd0d50031' | 'e1cib/data/Catalog.EmployeePositions?ref=b794e3cbd36876e811eda861f577c0ac' | 'e1cib/data/Catalog.EmployeeSchedule?ref=b7b0f4345ecbeede11ee89f924f68888' | 'e1cib/data/Catalog.BusinessUnits?ref=aa78120ed92fbced11eaf114c59ef023' | 'e1cib/data/Catalog.EmployeePositions?ref=b794e3cbd36876e811eda861f577c0ac' | 'e1cib/data/Catalog.EmployeeSchedule?ref=b7b0f4345ecbeede11ee8ddbb37fa1a0' | 'e1cib/data/Catalog.BusinessUnits?ref=aa78120ed92fbced11eaf114c59ef023' | 'e1cib/data/Catalog.BusinessUnits?ref=aa78120ed92fbced11eaf114c59ef023' | '01.01.0001 00:00:00' | 7000         |                      | 'e1cib/data/Catalog.AccrualAndDeductionTypes?ref=b794e3cbd36876e811eda864ba51300b' | 7000       |                    | 'e1cib/data/Catalog.AccrualAndDeductionTypes?ref=b794e3cbd36876e811eda864ba51300b' | 'e1cib/data/Catalog.Users?ref=aa7f120ed92fbced11eb13d7279770c0' | 'e1cib/data/Catalog.BusinessUnits?ref=aa78120ed92fbced11eaf114c59ef023' | ''            |
+
+Scenario: test data for check of payroll calculation (several vacation and sick leaves)
+	
+	// Document.EmployeeHiring
+
+	And I check or create document "EmployeeHiring" objects:
+		| 'Ref'                                                                     | 'DeletionMark' | 'Number' | 'Date'                | 'Posted'  | 'Company'                                                           | 'Employee'                                                         | 'Position'                                                                  | 'EmployeeSchedule'                                                         | 'ProfitLossCenter'                                                      | 'Salary' | 'PersonalSalary' | 'AccrualType'                                                                      | 'Author'                                                        | 'Branch'                                                                | 'Description' |
+		| 'e1cib/data/Document.EmployeeHiring?ref=b7b18e1cb2a9e83611ee934dac9fec75' | 'False'        | 13       | '31.10.2023 12:00:03' | 'False'   | 'e1cib/data/Catalog.Companies?ref=aa78120ed92fbced11eaf128cde918b4' | 'e1cib/data/Catalog.Partners?ref=b7b18e1cb2a9e83611ee92afd0d50032' | 'e1cib/data/Catalog.EmployeePositions?ref=b794e3cbd36876e811eda861f577c0ac' | 'e1cib/data/Catalog.EmployeeSchedule?ref=b7b0f4345ecbeede11ee8ddbb37fa1a0' | 'e1cib/data/Catalog.BusinessUnits?ref=aa78120ed92fbced11eaf114c59ef023' | 7000     |                  | 'e1cib/data/Catalog.AccrualAndDeductionTypes?ref=b794e3cbd36876e811eda864ba51300b' | 'e1cib/data/Catalog.Users?ref=aa7f120ed92fbced11eb13d7279770c0' | 'e1cib/data/Catalog.BusinessUnits?ref=aa78120ed92fbced11eaf114c59ef023' | ''            |
+
+	// Document.EmployeeSickLeave
+
+	And I check or create document "EmployeeSickLeave" objects:
+		| 'Ref'                                                                        | 'DeletionMark' | 'Number' | 'Date'                | 'Posted'  | 'Company'                                                           | 'Author'                                                        | 'Branch'                                                                | 'Description' |
+		| 'e1cib/data/Document.EmployeeSickLeave?ref=b7b18e1cb2a9e83611ee934dac9fec76' | 'False'        | 13       | '13.11.2023 12:00:00' | 'False'   | 'e1cib/data/Catalog.Companies?ref=aa78120ed92fbced11eaf128cde918b4' | 'e1cib/data/Catalog.Users?ref=aa7f120ed92fbced11eb13d7279770c0' | 'e1cib/data/Catalog.BusinessUnits?ref=aa78120ed92fbced11eaf114c59ef023' | ''            |
+
+	And I refill object tabular section "EmployeeList":
+		| 'Ref'                                                                        | 'Employee'                                                         | 'BeginDate'           | 'EndDate'             |
+		| 'e1cib/data/Document.EmployeeSickLeave?ref=b7b18e1cb2a9e83611ee934dac9fec76' | 'e1cib/data/Catalog.Partners?ref=b7b18e1cb2a9e83611ee92afd0d50032' | '09.11.2023 00:00:00' | '10.11.2023 00:00:00' |
+		| 'e1cib/data/Document.EmployeeSickLeave?ref=b7b18e1cb2a9e83611ee934dac9fec76' | 'e1cib/data/Catalog.Partners?ref=b7b18e1cb2a9e83611ee92afd0d50032' | '13.11.2023 00:00:00' | '13.11.2023 00:00:00' |
+
+	// Document.EmployeeVacation
+
+	And I check or create document "EmployeeVacation" objects:
+		| 'Ref'                                                                       | 'DeletionMark' | 'Number' | 'Date'                | 'Posted'  | 'Company'                                                           | 'Author'                                                        | 'Branch'                                                                | 'Description' |
+		| 'e1cib/data/Document.EmployeeVacation?ref=b7b18e1cb2a9e83611ee934dac9fec77' | 'False'        | 8        | '05.12.2023 14:54:03' | 'False'   | 'e1cib/data/Catalog.Companies?ref=aa78120ed92fbced11eaf128cde918b4' | 'e1cib/data/Catalog.Users?ref=aa7f120ed92fbced11eb13d7279770c0' | 'e1cib/data/Catalog.BusinessUnits?ref=aa78120ed92fbced11eaf114c59ef023' | ''            |
+		| 'e1cib/data/Document.EmployeeVacation?ref=b7b18e1cb2a9e83611ee934dac9fec78' | 'False'        | 9        | '25.11.2023 12:00:00' | 'False'   | 'e1cib/data/Catalog.Companies?ref=aa78120ed92fbced11eaf128cde918b4' | 'e1cib/data/Catalog.Users?ref=aa7f120ed92fbced11eb13d7279770c0' | 'e1cib/data/Catalog.BusinessUnits?ref=aa78120ed92fbced11eaf114c59ef023' | ''            |
+
+	And I refill object tabular section "EmployeeList":
+		| 'Ref'                                                                       | 'Employee'                                                         | 'BeginDate'           | 'EndDate'             |
+		| 'e1cib/data/Document.EmployeeVacation?ref=b7b18e1cb2a9e83611ee934dac9fec77' | 'e1cib/data/Catalog.Partners?ref=b7b18e1cb2a9e83611ee92afd0d50032' | '21.11.2023 00:00:00' | '22.11.2023 00:00:00' |
+		| 'e1cib/data/Document.EmployeeVacation?ref=b7b18e1cb2a9e83611ee934dac9fec78' | 'e1cib/data/Catalog.Partners?ref=b7b18e1cb2a9e83611ee92afd0d50032' | '25.11.2023 00:00:00' | '29.11.2023 00:00:00' |
+
+
+Scenario: test data for check of payroll calculation (hours shedule + several sick leave)
+
+	// Document.EmployeeHiring
+
+	And I check or create document "EmployeeHiring" objects:
+		| 'Ref'                                                                     | 'DeletionMark' | 'Number' | 'Date'                | 'Posted'  | 'Company'                                                           | 'Employee'                                                         | 'Position'                                                                  | 'EmployeeSchedule'                                                         | 'ProfitLossCenter'                                                      | 'Salary' | 'PersonalSalary' | 'AccrualType'                                                                      | 'Author'                                                        | 'Branch'                                                                | 'Description' |
+		| 'e1cib/data/Document.EmployeeHiring?ref=b7b18e1cb2a9e83611ee934dac9fec79' | 'False'        | 14       | '31.10.2023 12:00:04' | 'False'   | 'e1cib/data/Catalog.Companies?ref=aa78120ed92fbced11eaf128cde918b4' | 'e1cib/data/Catalog.Partners?ref=b7b18e1cb2a9e83611ee92afd0d50033' | 'e1cib/data/Catalog.EmployeePositions?ref=b794e3cbd36876e811eda861f577c0ab' | 'e1cib/data/Catalog.EmployeeSchedule?ref=b7b0f4345ecbeede11ee89f924f68888' | 'e1cib/data/Catalog.BusinessUnits?ref=aa78120ed92fbced11eaf114c59ef023' | 10000    |                  | 'e1cib/data/Catalog.AccrualAndDeductionTypes?ref=b794e3cbd36876e811eda864ba51300b' | 'e1cib/data/Catalog.Users?ref=aa7f120ed92fbced11eb13d7279770c0' | 'e1cib/data/Catalog.BusinessUnits?ref=aa78120ed92fbced11eaf114c59ef023' | ''            |
+
+	// Document.EmployeeSickLeave
+
+	And I check or create document "EmployeeSickLeave" objects:
+		| 'Ref'                                                                        | 'DeletionMark' | 'Number' | 'Date'                | 'Posted'  | 'Company'                                                           | 'Author'                                                        | 'Branch'                                                                | 'Description' |
+		| 'e1cib/data/Document.EmployeeSickLeave?ref=b7b18e1cb2a9e83611ee934dac9fec7a' | 'False'        | 14       | '30.11.2023 12:00:00' | 'False'   | 'e1cib/data/Catalog.Companies?ref=aa78120ed92fbced11eaf128cde918b4' | 'e1cib/data/Catalog.Users?ref=aa7f120ed92fbced11eb13d7279770c0' | 'e1cib/data/Catalog.BusinessUnits?ref=aa78120ed92fbced11eaf114c59ef023' | ''            |
+
+	And I refill object tabular section "EmployeeList":
+		| 'Ref'                                                                        | 'Employee'                                                         | 'BeginDate'           | 'EndDate'             |
+		| 'e1cib/data/Document.EmployeeSickLeave?ref=b7b18e1cb2a9e83611ee934dac9fec7a' | 'e1cib/data/Catalog.Partners?ref=b7b18e1cb2a9e83611ee92afd0d50033' | '09.11.2023 00:00:00' | '10.11.2023 00:00:00' |
+		| 'e1cib/data/Document.EmployeeSickLeave?ref=b7b18e1cb2a9e83611ee934dac9fec7a' | 'e1cib/data/Catalog.Partners?ref=b7b18e1cb2a9e83611ee92afd0d50033' | '14.11.2023 00:00:00' | '14.11.2023 00:00:00' |
 

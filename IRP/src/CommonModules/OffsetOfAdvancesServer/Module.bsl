@@ -800,7 +800,7 @@ Procedure Write_SelfRecords(Parameters,
 
 	Op = Catalogs.AccountingOperations;
 	AccountingOperations = New Map();
-	AccountingOperations.Insert(Type("DocumentRef.BankPayment")     , Op.BankPayment_R1021B_VendorsTransactions_CR_R1020B_AdvancesToVendors);
+	AccountingOperations.Insert(Type("DocumentRef.BankPayment")     , Op.BankPayment_DR_R1021B_VendorsTransactions_CR_R1020B_AdvancesToVendors);
 	AccountingOperations.Insert(Type("DocumentRef.BankReceipt")     , Op.BankReceipt_DR_R2021B_CustomersTransactions_CR_R2020B_AdvancesFromCustomers);
 	AccountingOperations.Insert(Type("DocumentRef.SalesInvoice")    , Op.SalesInvoice_DR_R2020B_AdvancesFromCustomers_CR_R2021B_CustomersTransactions);
 	AccountingOperations.Insert(Type("DocumentRef.PurchaseInvoice") , Op.PurchaseInvoice_DR_R1021B_VendorsTransactions_CR_R1020B_AdvancesToVendors);

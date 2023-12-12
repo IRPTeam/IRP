@@ -22,6 +22,7 @@ Background:
 Scenario: _200000 preparation (user settings)
 	When set True value to the constant
 	When set True value to the constant Use commission trading
+	When set True value to the constant Use salary
 	And I close TestClient session
 	Given I open new TestClient session or connect the existing one
 	* Load info
@@ -964,6 +965,214 @@ Scenario: _200001 customize the CI user settings
 			| 'Description'     |
 			| 'Front office'    |
 		And I select current line in "List" table
+	* Fill in custom settings for Employee firing
+		And I go to line in "MetadataTree" table
+			| 'Group name'         |
+			| 'Employee firing'    |
+		And I activate "Group name" field in "MetadataTree" table
+		And I go to line in "MetadataTree" table
+			| 'Group name'   | 'Use'    |
+			| 'Company'      | 'No'     |
+		And I select current line in "MetadataTree" table
+		And I activate "Value" field in "MetadataTree" table
+		And I select current line in "MetadataTree" table
+		And I click choice button of "Value" attribute in "MetadataTree" table
+		And I go to line in "List" table
+			| 'Description'     |
+			| 'Main Company'    |
+		And I select current line in "List" table
+		And I finish line editing in "MetadataTree" table
+		And I go to line in "MetadataTree" table
+			| 'Group name'   | 'Use'    |
+			| 'Branch'       | 'No'     |
+		And I activate "Group name" field in "MetadataTree" table
+		And I activate "Value" field in "MetadataTree" table
+		And I select current line in "MetadataTree" table
+		And I click choice button of "Value" attribute in "MetadataTree" table
+		And I go to line in "List" table
+			| 'Description'     |
+			| 'Front office'    |
+		And I select current line in "List" table
+	* Fill in custom settings for Employee hiring
+		And I go to line in "MetadataTree" table
+			| 'Group name'         |
+			| 'Employee hiring'    |
+		And I activate "Group name" field in "MetadataTree" table
+		And I go to line in "MetadataTree" table
+			| 'Group name'   | 'Use'    |
+			| 'Company'      | 'No'     |
+		And I select current line in "MetadataTree" table
+		And I activate "Value" field in "MetadataTree" table
+		And I select current line in "MetadataTree" table
+		And I click choice button of "Value" attribute in "MetadataTree" table
+		And I go to line in "List" table
+			| 'Description'     |
+			| 'Main Company'    |
+		And I select current line in "List" table
+		And I finish line editing in "MetadataTree" table
+		And I go to line in "MetadataTree" table
+			| 'Group name'   | 'Use'    |
+			| 'Branch'       | 'No'     |
+		And I activate "Group name" field in "MetadataTree" table
+		And I activate "Value" field in "MetadataTree" table
+		And I select current line in "MetadataTree" table
+		And I click choice button of "Value" attribute in "MetadataTree" table
+		And I go to line in "List" table
+			| 'Description'     |
+			| 'Front office'    |
+		And I select current line in "List" table
+	* Fill in custom settings for Employee sick leave
+		And I go to line in "MetadataTree" table
+			| 'Group name'         |
+			| 'Employee sick leave'    |
+		And I activate "Group name" field in "MetadataTree" table
+		And I go to line in "MetadataTree" table
+			| 'Group name'   | 'Use'    |
+			| 'Company'      | 'No'     |
+		And I select current line in "MetadataTree" table
+		And I activate "Value" field in "MetadataTree" table
+		And I select current line in "MetadataTree" table
+		And I click choice button of "Value" attribute in "MetadataTree" table
+		And I go to line in "List" table
+			| 'Description'     |
+			| 'Main Company'    |
+		And I select current line in "List" table
+		And I finish line editing in "MetadataTree" table
+		And I go to line in "MetadataTree" table
+			| 'Group name'   | 'Use'    |
+			| 'Branch'       | 'No'     |
+		And I activate "Group name" field in "MetadataTree" table
+		And I activate "Value" field in "MetadataTree" table
+		And I select current line in "MetadataTree" table
+		And I click choice button of "Value" attribute in "MetadataTree" table
+		And I go to line in "List" table
+			| 'Description'     |
+			| 'Front office'    |
+		And I select current line in "List" table
+	* Fill in custom settings for Employee vacation
+		And I go to line in "MetadataTree" table
+			| 'Group name'           |
+			| 'Employee vacation'    |
+		And I activate "Group name" field in "MetadataTree" table
+		And I go to line in "MetadataTree" table
+			| 'Group name'   | 'Use'    |
+			| 'Company'      | 'No'     |
+		And I select current line in "MetadataTree" table
+		And I activate "Value" field in "MetadataTree" table
+		And I select current line in "MetadataTree" table
+		And I click choice button of "Value" attribute in "MetadataTree" table
+		And I go to line in "List" table
+			| 'Description'     |
+			| 'Main Company'    |
+		And I select current line in "List" table
+		And I finish line editing in "MetadataTree" table
+		And I go to line in "MetadataTree" table
+			| 'Group name'   | 'Use'    |
+			| 'Branch'       | 'No'     |
+		And I activate "Group name" field in "MetadataTree" table
+		And I activate "Value" field in "MetadataTree" table
+		And I select current line in "MetadataTree" table
+		And I click choice button of "Value" attribute in "MetadataTree" table
+		And I go to line in "List" table
+			| 'Description'     |
+			| 'Front office'    |
+		And I select current line in "List" table
+	* Fill in custom settings for Employee transfer
+		And I go to line in "MetadataTree" table
+			| 'Group name'           |
+			| 'Employee transfer'    |
+		And I activate "Group name" field in "MetadataTree" table
+		And I go to line in "MetadataTree" table
+			| 'Group name'   | 'Use'    |
+			| 'Company'      | 'No'     |
+		And I select current line in "MetadataTree" table
+		And I activate "Value" field in "MetadataTree" table
+		And I select current line in "MetadataTree" table
+		And I click choice button of "Value" attribute in "MetadataTree" table
+		And I go to line in "List" table
+			| 'Description'     |
+			| 'Main Company'    |
+		And I select current line in "List" table
+		And I finish line editing in "MetadataTree" table
+		And I go to line in "MetadataTree" table
+			| 'Group name'   | 'Use'    |
+			| 'Branch'       | 'No'     |
+		And I activate "Group name" field in "MetadataTree" table
+		And I activate "Value" field in "MetadataTree" table
+		And I select current line in "MetadataTree" table
+		And I click choice button of "Value" attribute in "MetadataTree" table
+		And I go to line in "List" table
+			| 'Description'     |
+			| 'Front office'    |
+		And I select current line in "List" table
+	* Fill in custom settings for Payroll
+		And I go to line in "MetadataTree" table
+			| 'Group name' |
+			| 'Payroll'    |
+		And I activate "Group name" field in "MetadataTree" table
+		And I go to line in "MetadataTree" table
+			| 'Group name'   | 'Use'    |
+			| 'Company'      | 'No'     |
+		And I select current line in "MetadataTree" table
+		And I activate "Value" field in "MetadataTree" table
+		And I select current line in "MetadataTree" table
+		And I click choice button of "Value" attribute in "MetadataTree" table
+		And I go to line in "List" table
+			| 'Description'     |
+			| 'Main Company'    |
+		And I select current line in "List" table
+		And I finish line editing in "MetadataTree" table
+		And I go to line in "MetadataTree" table
+			| 'Group name'   | 'Use'    |
+			| 'Currency'     | 'No'     |
+		And I activate "Group name" field in "MetadataTree" table
+		And I activate "Value" field in "MetadataTree" table
+		And I select current line in "MetadataTree" table
+		And I click choice button of "Value" attribute in "MetadataTree" table
+		And I go to line in "List" table
+			| 'Description'     |
+			| 'Turkish lira'    |
+		And I select current line in "List" table
+		And I finish line editing in "MetadataTree" table
+		And I go to line in "MetadataTree" table
+			| 'Group name'   | 'Use'    |
+			| 'Branch'       | 'No'     |
+		And I activate "Group name" field in "MetadataTree" table
+		And I activate "Value" field in "MetadataTree" table
+		And I select current line in "MetadataTree" table
+		And I click choice button of "Value" attribute in "MetadataTree" table
+		And I go to line in "List" table
+			| 'Description'     |
+			| 'Front office'    |
+		And I select current line in "List" table
+	* Fill in custom settings for Time sheet
+		And I go to line in "MetadataTree" table
+			| 'Group name'           |
+			| 'Time sheet'    |
+		And I activate "Group name" field in "MetadataTree" table
+		And I go to line in "MetadataTree" table
+			| 'Group name'   | 'Use'    |
+			| 'Company'      | 'No'     |
+		And I select current line in "MetadataTree" table
+		And I activate "Value" field in "MetadataTree" table
+		And I select current line in "MetadataTree" table
+		And I click choice button of "Value" attribute in "MetadataTree" table
+		And I go to line in "List" table
+			| 'Description'     |
+			| 'Main Company'    |
+		And I select current line in "List" table
+		And I finish line editing in "MetadataTree" table
+		And I go to line in "MetadataTree" table
+			| 'Group name'   | 'Use'    |
+			| 'Branch'       | 'No'     |
+		And I activate "Group name" field in "MetadataTree" table
+		And I activate "Value" field in "MetadataTree" table
+		And I select current line in "MetadataTree" table
+		And I click choice button of "Value" attribute in "MetadataTree" table
+		And I go to line in "List" table
+			| 'Description'     |
+			| 'Front office'    |
+		And I select current line in "List" table
 	And I click "Ok" button
 	* Open user settings
 		And I click "Settings" button
@@ -1513,6 +1722,62 @@ Scenario: _200040 check filling in field from custom user settings in Retail goo
 		Then the form attribute named "Branch" became equal to "Front office"
 	And I close all client application windows
 
+Scenario: _200041 check filling in field from custom user settings in Employee firing
+	Given I open hyperlink "e1cib/list/Document.EmployeeFiring"
+	And I click the button named "FormCreate"
+	* Check that fields are filled in from user settings
+		Then the form attribute named "Branch" became equal to "Front office"
+		Then the form attribute named "Company" became equal to "Main Company"
+	And I close all client application windows
+
+Scenario: _200042 check filling in field from custom user settings in Employee hiring
+	Given I open hyperlink "e1cib/list/Document.EmployeeHiring"
+	And I click the button named "FormCreate"
+	* Check that fields are filled in from user settings
+		Then the form attribute named "Branch" became equal to "Front office"
+		Then the form attribute named "Company" became equal to "Main Company"
+	And I close all client application windows
+
+Scenario: _200043 check filling in field from custom user settings in EmployeeSickLeave
+	Given I open hyperlink "e1cib/list/Document.EmployeeSickLeave"
+	And I click the button named "FormCreate"
+	* Check that fields are filled in from user settings
+		Then the form attribute named "Branch" became equal to "Front office"
+		Then the form attribute named "Company" became equal to "Main Company"
+	And I close all client application windows
+
+Scenario: _200044 check filling in field from custom user settings in EmployeeTransfer
+	Given I open hyperlink "e1cib/list/Document.EmployeeTransfer"
+	And I click the button named "FormCreate"
+	* Check that fields are filled in from user settings
+		Then the form attribute named "Branch" became equal to "Front office"
+		Then the form attribute named "Company" became equal to "Main Company"
+	And I close all client application windows
+
+Scenario: _2000455 check filling in field from custom user settings in EmployeeVacation
+	Given I open hyperlink "e1cib/list/Document.EmployeeVacation"
+	And I click the button named "FormCreate"
+	* Check that fields are filled in from user settings
+		Then the form attribute named "Branch" became equal to "Front office"
+		Then the form attribute named "Company" became equal to "Main Company"
+	And I close all client application windows
+
+Scenario: _2000456 check filling in field from custom user settings in Payroll
+	Given I open hyperlink "e1cib/list/Document.Payroll"
+	And I click the button named "FormCreate"
+	* Check that fields are filled in from user settings
+		Then the form attribute named "Branch" became equal to "Front office"
+		Then the form attribute named "Company" became equal to "Main Company"
+		Then the form attribute named "Currency" became equal to "TRY"
+	And I close all client application windows
+
+Scenario: _2000457 check filling in field from custom user settings in TimeSheet
+	Given I open hyperlink "e1cib/list/Document.TimeSheet"
+	And I click the button named "FormCreate"
+	* Check that fields are filled in from user settings
+		Then the form attribute named "Branch" became equal to "Front office"
+		Then the form attribute named "Company" became equal to "Main Company"
+	And I close all client application windows
 
 Scenario: _0154200 check user settings priority
 		When Create information register UserSettings records (for workstation)

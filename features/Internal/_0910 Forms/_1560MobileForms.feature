@@ -1,4 +1,4 @@
-#language: en
+﻿#language: en
 @tree
 @Positive
 @Forms
@@ -416,8 +416,8 @@ Scenario: _0156052 check items in the document by scan barcode (document without
 			| 'PZU'        | 'Product 1 with SLN'   | '2,000'      | 'pcs'    | ''         | '18%'   | ''             | ''                |
 		And I close all client application windows
 		
-		
-				
+Scenario: _999999 close TestClient session
+	And I close TestClient session		
 		
 						
 				

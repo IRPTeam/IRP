@@ -18,8 +18,6 @@ Background:
 
 Scenario: _042400 preparation (RetailSalesReceipt)
 	When set True value to the constant
-	And I close TestClient session
-	Given I open new TestClient session or connect the existing one
 	* Load info
 		When Create information register Barcodes records
 		When Create catalog Companies objects (own Second company)
@@ -67,7 +65,6 @@ Scenario: _042400 preparation (RetailSalesReceipt)
 		When Create information register Barcodes records (serial lot numbers)
 		When Create catalog SerialLotNumbers objects (serial lot numbers)
 		When Create information register Barcodes records (serial lot numbers)
-		When update ItemKeys
 		When Create catalog BankTerms objects
 		When Create catalog PaymentTerminals objects
 		When Create catalog PaymentTypes objects
@@ -619,15 +616,15 @@ Scenario: _042427 check Retail sales receipt movements by the Register  "R3011 C
 		And I select "R3011 Cash flow" exact value from "Register" drop-down list
 		And I click "Generate report" button
 		Then "ResultTable" spreadsheet document is equal
-			| 'Retail sales receipt 314 dated 09.01.2023 13:34:51'   | ''                      | ''            | ''               | ''          | ''               | ''            | ''                          | ''                  | ''           | ''                               | ''                        |
-			| 'Document registrations records'                       | ''                      | ''            | ''               | ''          | ''               | ''            | ''                          | ''                  | ''           | ''                               | ''                        |
-			| 'Register  "R3011 Cash flow"'                          | ''                      | ''            | ''               | ''          | ''               | ''            | ''                          | ''                  | ''           | ''                               | ''                        |
-			| ''                                                     | 'Period'                | 'Resources'   | 'Dimensions'     | ''          | ''               | ''            | ''                          | ''                  | ''           | ''                               | 'Attributes'              |
-			| ''                                                     | ''                      | 'Amount'      | 'Company'        | 'Branch'    | 'Account'        | 'Direction'   | 'Financial movement type'   | 'Planning period'   | 'Currency'   | 'Multi currency movement type'   | 'Deferred calculation'    |
-			| ''                                                     | '09.01.2023 13:34:51'   | '157,5'       | 'Main Company'   | 'Shop 01'   | 'Cash desk №2'   | 'Incoming'    | ''                          | ''                  | 'USD'        | 'Reporting currency'             | 'No'                      |
-			| ''                                                     | '09.01.2023 13:34:51'   | '920'         | 'Main Company'   | 'Shop 01'   | 'Cash desk №2'   | 'Incoming'    | ''                          | ''                  | 'TRY'        | 'Local currency'                 | 'No'                      |
-			| ''                                                     | '09.01.2023 13:34:51'   | '920'         | 'Main Company'   | 'Shop 01'   | 'Cash desk №2'   | 'Incoming'    | ''                          | ''                  | 'TRY'        | 'TRY'                            | 'No'                      |
-			| ''                                                     | '09.01.2023 13:34:51'   | '920'         | 'Main Company'   | 'Shop 01'   | 'Cash desk №2'   | 'Incoming'    | ''                          | ''                  | 'TRY'        | 'en description is empty'        | 'No'                      |
+			| 'Retail sales receipt 314 dated 09.01.2023 13:34:51' | ''                    | ''          | ''             | ''        | ''             | ''          | ''                        | ''                 | ''                | ''         | ''                             | ''                     |
+			| 'Document registrations records'                     | ''                    | ''          | ''             | ''        | ''             | ''          | ''                        | ''                 | ''                | ''         | ''                             | ''                     |
+			| 'Register  "R3011 Cash flow"'                        | ''                    | ''          | ''             | ''        | ''             | ''          | ''                        | ''                 | ''                | ''         | ''                             | ''                     |
+			| ''                                                   | 'Period'              | 'Resources' | 'Dimensions'   | ''        | ''             | ''          | ''                        | ''                 | ''                | ''         | ''                             | 'Attributes'           |
+			| ''                                                   | ''                    | 'Amount'    | 'Company'      | 'Branch'  | 'Account'      | 'Direction' | 'Financial movement type' | 'Cash flow center' | 'Planning period' | 'Currency' | 'Multi currency movement type' | 'Deferred calculation' |
+			| ''                                                   | '09.01.2023 13:34:51' | '157,5'     | 'Main Company' | 'Shop 01' | 'Cash desk №2' | 'Incoming'  | 'Movement type 1'         | 'Shop 01'          | ''                | 'USD'      | 'Reporting currency'           | 'No'                   |
+			| ''                                                   | '09.01.2023 13:34:51' | '920'       | 'Main Company' | 'Shop 01' | 'Cash desk №2' | 'Incoming'  | 'Movement type 1'         | 'Shop 01'          | ''                | 'TRY'      | 'Local currency'               | 'No'                   |
+			| ''                                                   | '09.01.2023 13:34:51' | '920'       | 'Main Company' | 'Shop 01' | 'Cash desk №2' | 'Incoming'  | 'Movement type 1'         | 'Shop 01'          | ''                | 'TRY'      | 'TRY'                          | 'No'                   |
+			| ''                                                   | '09.01.2023 13:34:51' | '920'       | 'Main Company' | 'Shop 01' | 'Cash desk №2' | 'Incoming'  | 'Movement type 1'         | 'Shop 01'          | ''                | 'TRY'      | 'en description is empty'      | 'No'                   |		
 		And I close all client application windows
 
 Scenario: _042428 check Retail sales receipt movements by the Register  "R3011 Cash flow" (without advance)
@@ -642,15 +639,15 @@ Scenario: _042428 check Retail sales receipt movements by the Register  "R3011 C
 		And I select "R3011 Cash flow" exact value from "Register" drop-down list
 		And I click "Generate report" button
 		Then "ResultTable" spreadsheet document is equal
-			| 'Retail sales receipt 201 dated 15.03.2021 16:01:04'   | ''                      | ''            | ''               | ''          | ''               | ''            | ''                          | ''                  | ''           | ''                               | ''                        |
-			| 'Document registrations records'                       | ''                      | ''            | ''               | ''          | ''               | ''            | ''                          | ''                  | ''           | ''                               | ''                        |
-			| 'Register  "R3011 Cash flow"'                          | ''                      | ''            | ''               | ''          | ''               | ''            | ''                          | ''                  | ''           | ''                               | ''                        |
-			| ''                                                     | 'Period'                | 'Resources'   | 'Dimensions'     | ''          | ''               | ''            | ''                          | ''                  | ''           | ''                               | 'Attributes'              |
-			| ''                                                     | ''                      | 'Amount'      | 'Company'        | 'Branch'    | 'Account'        | 'Direction'   | 'Financial movement type'   | 'Planning period'   | 'Currency'   | 'Multi currency movement type'   | 'Deferred calculation'    |
-			| ''                                                     | '15.03.2021 16:01:04'   | '1 664,06'    | 'Main Company'   | 'Shop 01'   | 'Cash desk №4'   | 'Incoming'    | ''                          | ''                  | 'USD'        | 'Reporting currency'             | 'No'                      |
-			| ''                                                     | '15.03.2021 16:01:04'   | '9 720'       | 'Main Company'   | 'Shop 01'   | 'Cash desk №4'   | 'Incoming'    | ''                          | ''                  | 'TRY'        | 'Local currency'                 | 'No'                      |
-			| ''                                                     | '15.03.2021 16:01:04'   | '9 720'       | 'Main Company'   | 'Shop 01'   | 'Cash desk №4'   | 'Incoming'    | ''                          | ''                  | 'TRY'        | 'TRY'                            | 'No'                      |
-			| ''                                                     | '15.03.2021 16:01:04'   | '9 720'       | 'Main Company'   | 'Shop 01'   | 'Cash desk №4'   | 'Incoming'    | ''                          | ''                  | 'TRY'        | 'en description is empty'        | 'No'                      |
+			| 'Retail sales receipt 201 dated 15.03.2021 16:01:04' | ''                    | ''          | ''             | ''        | ''             | ''          | ''                        | ''                 | ''                | ''         | ''                             | ''                     |
+			| 'Document registrations records'                     | ''                    | ''          | ''             | ''        | ''             | ''          | ''                        | ''                 | ''                | ''         | ''                             | ''                     |
+			| 'Register  "R3011 Cash flow"'                        | ''                    | ''          | ''             | ''        | ''             | ''          | ''                        | ''                 | ''                | ''         | ''                             | ''                     |
+			| ''                                                   | 'Period'              | 'Resources' | 'Dimensions'   | ''        | ''             | ''          | ''                        | ''                 | ''                | ''         | ''                             | 'Attributes'           |
+			| ''                                                   | ''                    | 'Amount'    | 'Company'      | 'Branch'  | 'Account'      | 'Direction' | 'Financial movement type' | 'Cash flow center' | 'Planning period' | 'Currency' | 'Multi currency movement type' | 'Deferred calculation' |
+			| ''                                                   | '15.03.2021 16:01:04' | '1 664,06'  | 'Main Company' | 'Shop 01' | 'Cash desk №4' | 'Incoming'  | 'Movement type 1'         | 'Shop 01'          | ''                | 'USD'      | 'Reporting currency'           | 'No'                   |
+			| ''                                                   | '15.03.2021 16:01:04' | '9 720'     | 'Main Company' | 'Shop 01' | 'Cash desk №4' | 'Incoming'  | 'Movement type 1'         | 'Shop 01'          | ''                | 'TRY'      | 'Local currency'               | 'No'                   |
+			| ''                                                   | '15.03.2021 16:01:04' | '9 720'     | 'Main Company' | 'Shop 01' | 'Cash desk №4' | 'Incoming'  | 'Movement type 1'         | 'Shop 01'          | ''                | 'TRY'      | 'TRY'                          | 'No'                   |
+			| ''                                                   | '15.03.2021 16:01:04' | '9 720'     | 'Main Company' | 'Shop 01' | 'Cash desk №4' | 'Incoming'  | 'Movement type 1'         | 'Shop 01'          | ''                | 'TRY'      | 'en description is empty'      | 'No'                   |		
 		And I close all client application windows
 
 Scenario: _0424281 check Retail sales receipt movements by the Register  "R2006 Certificates" (Selling certificate)

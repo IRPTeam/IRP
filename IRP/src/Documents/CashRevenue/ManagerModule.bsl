@@ -122,7 +122,8 @@ Function PaymentList()
 		   |	PaymentList.AdditionalAnalytic,
 		   |	PaymentList.Ref.Branch AS Branch,
 		   |	PaymentList.Ref.TransactionType = VALUE(Enum.CashRevenueTransactionTypes.OtherCompanyRevenue) AS
-		   |		IsOtherCompanyRevenue
+		   |		IsOtherCompanyRevenue,
+		   |	PaymentList.CashFlowCenter
 		   |INTO PaymentList
 		   |FROM
 		   |	Document.CashRevenue.PaymentList AS PaymentList
@@ -179,6 +180,7 @@ Function R3011T_CashFlow()
 		   |	PaymentList.Account,
 		   |	VALUE(Enum.CashFlowDirections.Incoming) AS Direction,
 		   |	PaymentList.FinancialMovementType,
+		   |	PaymentList.CashFlowCenter,
 		   |	UNDEFINED AS PlanningPeriod,
 		   |	PaymentList.Currency,
 		   |	PaymentList.Key,
@@ -198,6 +200,7 @@ Function R3011T_CashFlow()
 		   |	PaymentList.Account,
 		   |	VALUE(Enum.CashFlowDirections.Outgoing),
 		   |	PaymentList.FinancialMovementType,
+		   |	PaymentList.CashFlowCenter,
 		   |	UNDEFINED AS PlanningPeriod,
 		   |	PaymentList.Currency,
 		   |	PaymentList.Key,
@@ -216,6 +219,7 @@ Function R3011T_CashFlow()
 		   |	PaymentList.Account,
 		   |	VALUE(Enum.CashFlowDirections.Incoming),
 		   |	PaymentList.FinancialMovementType,
+		   |	PaymentList.CashFlowCenter,
 		   |	UNDEFINED AS PlanningPeriod,
 		   |	PaymentList.Currency,
 		   |	PaymentList.Key,

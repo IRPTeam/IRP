@@ -59,6 +59,7 @@ Procedure SetVisibilityAvailability(Object, Form)
 	Form.Items.PaymentListPaymentPeriod.Visible = IsSalaryPayment;
 	
 	Form.Items.PaymentListFinancialMovementTypeOtherCompany.Visible = IsOtherCompanyExpense;
+	Form.Items.PaymentListCashFlowCenterOtherCompany.Visible = IsOtherCompanyExpense;
 	
 	Form.Items.PaymentListCurrency.ReadOnly = ValueIsFilled(Form.Currency);
 	Form.Items.EditCurrencies.Enabled       = Not Form.ReadOnly;

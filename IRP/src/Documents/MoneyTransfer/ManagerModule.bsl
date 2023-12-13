@@ -81,16 +81,25 @@ Function GetAdditionalQueryParameters(Ref)
 	Return StrParams;
 EndFunction
 
-#EndRegion
-
-#Region Posting_SourceTable
-
 Function GetQueryTextsSecondaryTables()
 	QueryArray = New Array;
 	QueryArray.Add(MoneySender());
 	QueryArray.Add(MoneyReceiver());
 	Return QueryArray;
 EndFunction
+
+Function GetQueryTextsMasterTables()
+	QueryArray = New Array;
+	QueryArray.Add(R3010B_CashOnHand());
+	QueryArray.Add(R3011T_CashFlow());
+	QueryArray.Add(R3021B_CashInTransitIncoming());
+	QueryArray.Add(R3035T_CashPlanning());
+	Return QueryArray;
+EndFunction
+
+#EndRegion
+
+#Region Posting_SourceTable
 
 Function MoneySender()
 	Return "SELECT
@@ -108,6 +117,7 @@ Function MoneySender()
 		   |	MoneyTransfer.CashTransferOrder AS BasisDocument,
 		   |	MoneyTransfer.CashTransferOrder.SendPeriod AS PlanningPeriod,
 		   |	MoneyTransfer.SendFinancialMovementType AS FinancialMovementType,
+		   |	MoneyTransfer.SendCashFlowCenter AS CashFlowCenter,
 		   |	MoneyTransfer.Sender.Type = VALUE(Enum.CashAccountTypes.POSCashAccount) AS IsPOSCashAccount
 		   |INTO MoneySender
 		   |FROM
@@ -133,6 +143,7 @@ Function MoneyReceiver()
 		   |	MoneyTransfer.CashTransferOrder AS BasisDocument,
 		   |	MoneyTransfer.CashTransferOrder.SendPeriod AS PlanningPeriod,
 		   |	MoneyTransfer.ReceiveFinancialMovementType AS FinancialMovementType,
+		   |	MoneyTransfer.ReceiveCashFlowCenter AS CashFlowCenter,
 		   |	MoneyTransfer.Receiver.Type = VALUE(Enum.CashAccountTypes.POSCashAccount) AS IsPOSCashAccount,
 		   |
 		   |	MoneyTransfer.Receiver.Type = VALUE(Enum.CashAccountTypes.POSCashAccount)
@@ -147,15 +158,6 @@ EndFunction
 #EndRegion
 
 #Region Posting_MainTables
-
-Function GetQueryTextsMasterTables()
-	QueryArray = New Array;
-	QueryArray.Add(R3010B_CashOnHand());
-	QueryArray.Add(R3011T_CashFlow());
-	QueryArray.Add(R3021B_CashInTransitIncoming());
-	QueryArray.Add(R3035T_CashPlanning());
-	Return QueryArray;
-EndFunction
 
 Function R3021B_CashInTransitIncoming()
 	Return "SELECT
@@ -231,6 +233,7 @@ Function R3011T_CashFlow()
 		   |	MoneySender.Account,
 		   |	VALUE(Enum.CashFlowDirections.Outgoing) AS Direction,
 		   |	MoneySender.FinancialMovementType,
+		   |	MoneySender.CashFlowCenter,
 		   |	MoneySender.Amount,
 		   |	MoneySender.Currency,
 		   |	MoneySender.Key
@@ -247,6 +250,7 @@ Function R3011T_CashFlow()
 		   |	MoneyReceiver.Account,
 		   |	VALUE(Enum.CashFlowDirections.Incoming),
 		   |	MoneyReceiver.FinancialMovementType,
+		   |	MoneyReceiver.CashFlowCenter,
 		   |	MoneyReceiver.Amount,
 		   |	MoneyReceiver.Currency,
 		   |	MoneyReceiver.Key

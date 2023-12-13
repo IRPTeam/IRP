@@ -27,7 +27,9 @@ Procedure ChoiceDataGetProcessing(ChoiceData, Parameters, StandardProcessing)
 		
 	If IsBankPayment Then
 		ChoiceData.Add(ReturnToCustomerByPOS);
-		ChoiceData.Add(PaymentByCheque);
+		If FOServer.IsUseChequeBonds() Then
+			ChoiceData.Add(PaymentByCheque);
+		EndIf;
 		ChoiceData.Add(OtherExpense);
 	EndIf;
 			

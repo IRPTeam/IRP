@@ -20,6 +20,7 @@ Procedure OnCreateAtServer(Cancel, StandardProcessing)
 	EndIf;
 	ExtensionServer.AddAttributesFromExtensions(ThisObject, Object.Ref);
 	RestoreSettings();
+	Items.ConsignorsInfo.Visible = FOServer.IsUseCommissionTrading();
 EndProcedure
 
 &AtClient

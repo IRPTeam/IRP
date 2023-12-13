@@ -117,15 +117,24 @@ Function GetAdditionalQueryParameters(Ref)
 	Return StrParams;
 EndFunction
 
-#EndRegion
-
-#Region Posting_SourceTable
-
 Function GetQueryTextsSecondaryTables()
 	QueryArray = New Array;
 	QueryArray.Add(PaymentList());
 	Return QueryArray;
 EndFunction
+
+Function GetQueryTextsMasterTables()
+	QueryArray = New Array;
+	QueryArray.Add(R3010B_CashOnHand());
+	QueryArray.Add(R3011T_CashFlow());
+	QueryArray.Add(R3021B_CashInTransitIncoming());
+	QueryArray.Add(R3035T_CashPlanning());
+	Return QueryArray;
+EndFunction
+
+#EndRegion
+
+#Region Posting_SourceTable
 
 Function PaymentList()
 	Return "SELECT
@@ -144,7 +153,8 @@ Function PaymentList()
 		   |	PaymentList.PaymentType,
 		   |	PaymentList.PaymentTerminal,
 		   |	PaymentList.ReceiptingAccount,
-		   |	PaymentList.UseBasisDocument
+		   |	PaymentList.UseBasisDocument,
+		   |	PaymentList.CashFlowCenter
 		   |INTO PaymentList
 		   |FROM
 		   |	Document.CashStatement.PaymentList AS PaymentList
@@ -155,15 +165,6 @@ EndFunction
 #EndRegion
 
 #Region Posting_MainTables
-
-Function GetQueryTextsMasterTables()
-	QueryArray = New Array;
-	QueryArray.Add(R3010B_CashOnHand());
-	QueryArray.Add(R3011T_CashFlow());
-	QueryArray.Add(R3021B_CashInTransitIncoming());
-	QueryArray.Add(R3035T_CashPlanning());
-	Return QueryArray;
-EndFunction
 
 Function R3010B_CashOnHand()
 	Return "SELECT
@@ -190,6 +191,7 @@ Function R3011T_CashFlow()
 		   |	PaymentList.Account,
 		   |	VALUE(Enum.CashFlowDirections.Outgoing) AS Direction,
 		   |	PaymentList.FinancialMovementType,
+		   |	PaymentList.CashFlowCenter,
 		   |	PaymentList.Currency,
 		   |	PaymentList.Key,
 		   |	PaymentList.Amount

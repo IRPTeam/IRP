@@ -112,13 +112,13 @@
   <subsystems>Subsystem.Inventory</subsystems>
   <subsystems>Subsystem.Treasury</subsystems>
   <subsystems>Subsystem.Manufacturing</subsystems>
-  <subsystems>Subsystem.Accounting</subsystems>
+  <subsystems>Subsystem.FixedAssets</subsystems>
   <subsystems>Subsystem.Salary</subsystems>
+  <subsystems>Subsystem.Accounting</subsystems>
   <subsystems>Subsystem.MasterData</subsystems>
   <subsystems>Subsystem.Reports</subsystems>
   <subsystems>Subsystem.Settings</subsystems>
   <subsystems>Subsystem.Technical</subsystems>
-  <subsystems>Subsystem.FixedAssets</subsystems>
   <styles>Style.TestDataBase</styles>
   <commonPictures>CommonPicture.AccountingFlags</commonPictures>
   <commonPictures>CommonPicture.AddDataProc</commonPictures>

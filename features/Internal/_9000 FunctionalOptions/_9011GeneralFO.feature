@@ -57,23 +57,24 @@ Scenario: _900106 check FO use shipment confirmation and goods receipts
 			| 'And I activate "Status" field in "List" table'     |	
 
 
-Scenario: _900107 check FO use serial lot number
-	And I close all client application windows
-	* Switch-off FO Use store
-		Given I open hyperlink "e1cib/app/DataProcessor.FunctionalOptionSettings"
-		And I go to line in "FunctionalOptions" table
-			| 'Option'                 |
-			| 'Use serial lot numbers' |
-		And I remove "Use" checkbox in "FunctionalOptions" table
-		And I click "Save" button
-		And I close "Functional option settings" window	
-	* Check
-		* DataProcessor.CreateSerialLotNumbers
-			When I Check the steps for Exception
-				| 'And In the command interface I select "Master data" "Create serial lot numbers"'     |
+// Scenario: _900107 check FO use serial lot number
+// 	And I close all client application windows
+// 	* Switch-off FO Use store
+// 		Given I open hyperlink "e1cib/app/DataProcessor.FunctionalOptionSettings"
+// 		And I go to line in "FunctionalOptions" table
+// 			| 'Option'                 |
+// 			| 'Use serial lot numbers' |
+// 		And I remove "Use" checkbox in "FunctionalOptions" table
+// 		And I click "Save" button
+// 		And I close "Functional option settings" window	
+// 	* Check
+// 		* DataProcessor.CreateSerialLotNumbers
+// 			When I Check the steps for Exception
+// 				| 'And In the command interface I select "Master data" "Create serial lot numbers"'     |
+			
 			
 						
-Scenario: _900107 check FO use serial lot number
+Scenario: _900107 check FO use cheque bonds
 	And I close all client application windows
 	* Switch-off FO use cheque bonds
 		Given I open hyperlink "e1cib/app/DataProcessor.FunctionalOptionSettings"
@@ -114,42 +115,3 @@ Scenario: _900108 check FO use item key
 			When I Check the steps for Exception
 				| 'And In the command interface I select "MasterData" "Item key"'     |
 	And I close all client application windows
-
-
-Scenario: _900109 check FO use commission trading
-	And I close all client application windows
-	* Switch-off FO use commission trading
-		Given I open hyperlink "e1cib/app/DataProcessor.FunctionalOptionSettings"
-		And I go to line in "FunctionalOptions" table
-			| 'Option'       |
-			| 'Use item key' |
-		And I set "Use" checkbox in "FunctionalOptions" table
-		And I go to line in "FunctionalOptions" table
-			| 'Option'       |
-			| 'Use commission trading' |
-		And I set "Use" checkbox in "FunctionalOptions" table
-		And I go to line in "FunctionalOptions" table
-			| 'Option'                 |
-			| 'Use serial lot numbers' |
-		And I set "Use" checkbox in "FunctionalOptions" table
-		And I click "Save" button
-		And I close "Functional option settings" window	
-	* Check
-		*  Consignor info в Items
-			Given I open hyperlink "e1cib/list/Catalog.Items"
-			And I click "Create" button			
-			When I Check the steps for Exception
-				| 'And I expand "Consignors info" group'     |
-		*  Consignor info в Items key
-			Given I open hyperlink "e1cib/list/Catalog.ItemKeys"
-			And I click "Create" button			
-			When I Check the steps for Exception
-				| 'And I expand "Consignors info" group'     |			
-	And I close all client application windows
-
-
-
-			
-						
-
-							

@@ -26,7 +26,9 @@ Procedure ChoiceDataGetProcessing(ChoiceData, Parameters, StandardProcessing)
 	If IsBankReceipt Then
 		ChoiceData.Add(PaymentFromCustomerByPOS);
 		ChoiceData.Add(TransferFromPOS);
-		ChoiceData.Add(ReceiptByCheque);
+		If FOServer.IsUseChequeBonds() Then
+			ChoiceData.Add(ReceiptByCheque);
+		EndIf;
 		ChoiceData.Add(OtherIncome);
 	EndIf;
 	

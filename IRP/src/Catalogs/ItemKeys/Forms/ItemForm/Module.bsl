@@ -24,7 +24,12 @@ Procedure OnCreateAtServer(Cancel, StandardProcessing)
 	ThisObject.SpecificationMode = ValueIsFilled(Object.Specification);
 	SetVisible();
 	ExtensionServer.AddAttributesFromExtensions(ThisObject, Object.Ref);
-	FillInheritConsignorsInfo();	
+	FillInheritConsignorsInfo();
+	
+	IsUseCommissionTrading = FOServer.IsUseCommissionTrading();
+	Items.ConsignorInfoMode.Visible = Items.ConsignorInfoMode.Visible And IsUseCommissionTrading;
+	Items.InheritConsignorsInfo.Visible = Items.InheritConsignorsInfo.Visible And IsUseCommissionTrading;
+	Items.ConsignorsInfo.Visible = Items.ConsignorsInfo.Visible And IsUseCommissionTrading;
 EndProcedure
 
 &AtClient

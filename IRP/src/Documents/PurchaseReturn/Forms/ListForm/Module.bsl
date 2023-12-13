@@ -3,6 +3,7 @@
 &AtServer
 Procedure OnCreateAtServer(Cancel, StandardProcessing)
 	DocPurchaseReturnServer.OnCreateAtServerListForm(ThisObject, Cancel, StandardProcessing);
+	Items.Status.Visible = FOServer.IsUseShipmentConfirmationAndGoodsReceipts();
 EndProcedure
 
 #EndRegion

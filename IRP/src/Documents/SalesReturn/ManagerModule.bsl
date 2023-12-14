@@ -661,14 +661,29 @@ Function R2001T_Sales()
 EndFunction
 
 Function R2002T_SalesReturns()
-	Return "SELECT
-		   |	ItemList.SalesInvoice AS Invoice,
-		   |	*
-		   |INTO R2002T_SalesReturns
-		   |FROM
-		   |	ItemList AS ItemList
-		   |WHERE
-		   |	ItemList.IsReturnFromCustomer";
+	Return 
+		"SELECT
+		|	ItemList.Period,
+		|	ItemList.Company,
+		|	ItemList.Branch,
+		|	ItemList.Currency,
+		|	ItemList.SalesInvoice AS Invoice,
+		|	ItemList.ItemKey,
+		|	ItemList.RowKey,
+		|	ItemList.ReturnReason,
+		|	ItemList.SalesPerson,
+		|	SalesBySerialLotNumbers.SerialLotNumber,
+		|	-SalesBySerialLotNumbers.Quantity AS Quantity,
+		|	-SalesBySerialLotNumbers.Amount AS Amount,
+		|	-SalesBySerialLotNumbers.NetAmount AS NetAmount,
+		|	-SalesBySerialLotNumbers.OffersAmount AS OffersAmount
+		|INTO R2002T_SalesReturns
+		|FROM
+		|	ItemList AS ItemList
+		|		LEFT JOIN SalesBySerialLotNumbers
+		|		ON ItemList.Key = SalesBySerialLotNumbers.Key
+		|WHERE
+		|	ItemList.IsReturnFromCustomer";
 EndFunction
 
 Function R2005T_SalesSpecialOffers()

@@ -972,15 +972,30 @@ Function R5021T_Revenues()
 EndFunction
 
 Function R2002T_SalesReturns()
-	Return "SELECT
-		   |	*,
-		   |	ItemList.TotalAmount AS Amount
-		   |INTO R2002T_SalesReturns
-		   |FROM
-		   |	ItemList AS ItemList
-		   |WHERE
-		   |	TRUE
-		   |	AND ItemList.StatusType = VALUE(ENUM.RetailReceiptStatusTypes.Completed)";
+	Return 
+		"SELECT
+		|	ItemList.Period,
+		|	ItemList.Company,
+		|	ItemList.Branch,
+		|	ItemList.Currency,
+		|	ItemList.RetailSalesReceipt AS Invoice,
+		|	ItemList.ItemKey,
+		|	ItemList.RowKey,
+		|	ItemList.ReturnReason,
+		|	ItemList.SalesPerson,
+		|	SalesBySerialLotNumbers.SerialLotNumber,
+		|	-SalesBySerialLotNumbers.Quantity AS Quantity,
+		|	-SalesBySerialLotNumbers.Amount AS Amount,
+		|	-SalesBySerialLotNumbers.NetAmount AS NetAmount,
+		|	-SalesBySerialLotNumbers.OffersAmount AS OffersAmount
+		|INTO R2002T_SalesReturns
+		|FROM
+		|	ItemList AS ItemList
+		|		LEFT JOIN SalesBySerialLotNumbers
+		|		ON ItemList.Key = SalesBySerialLotNumbers.Key
+		|WHERE
+		|	TRUE
+		|	AND ItemList.StatusType = VALUE(ENUM.RetailReceiptStatusTypes.Completed)";
 EndFunction
 
 Function R2021B_CustomersTransactions()

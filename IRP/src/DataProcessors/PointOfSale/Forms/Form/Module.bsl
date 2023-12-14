@@ -110,8 +110,10 @@ Procedure SetVisibilityAvailability(Object, Form)
 	Form.Items.Return.Enabled = UserSettingsServer.PointOfSale_AdditionalSettings_DisableCreateReturn(Form.UserAdmin);
 
 	ChangePrice = UserSettingsServer.PointOfSale_AdditionalSettings_DisableChangePrice(Form.UserAdmin);
+	ChangePriceType = UserSettingsServer.PointOfSale_AdditionalSettings_EnableChangePriceType(Form.UserAdmin);
 	Form.Items.ItemListPrice.Enabled = ChangePrice;
 	Form.Items.ItemListTotalAmount.Enabled = ChangePrice;
+	Form.Items.ItemListPriceType.Visible = ChangePriceType;
 EndProcedure
 
 &AtClient
@@ -352,6 +354,11 @@ Procedure ItemListQuantityOnChange(Item)
 		CheckByRetailBasis();
 	EndIf;
 	DocRetailSalesReceiptClient.ItemListQuantityOnChange(Object, ThisObject, Item);
+EndProcedure
+
+&AtClient
+Procedure ItemListPriceTypeOnChange(Item)
+	DocRetailSalesReceiptClient.ItemListPriceTypeOnChange(Object, ThisObject, Item);
 EndProcedure
 
 &AtClient

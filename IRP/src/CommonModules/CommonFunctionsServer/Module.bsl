@@ -381,7 +381,7 @@ Function ValidateEmail(Val Address, RaiseOnFalse = True) Export
 	
 	LatinCharacters = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ";
     Digits = "0123456789";
-    ValidSymbols = "-._@";
+    ValidSymbols = "-._@+";
     
     ErrorArray = New Array; // Array Of String
 

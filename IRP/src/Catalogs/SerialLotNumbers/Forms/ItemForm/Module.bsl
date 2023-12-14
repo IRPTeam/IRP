@@ -30,6 +30,11 @@ Procedure OnCreateAtServer(Cancel, StandardProcessing)
 		FillInheritConsignorsInfo();
 		SetVisibilityAvailability(Object, ThisObject);
 	EndIf;
+	
+	IsUseCommissionTrading = FOServer.IsUseCommissionTrading();
+	Items.ConsignorInfoMode.Visible = Items.ConsignorInfoMode.Visible And IsUseCommissionTrading;
+	Items.InheritConsignorsInfo.Visible = Items.InheritConsignorsInfo.Visible And IsUseCommissionTrading;
+	Items.ConsignorsInfo.Visible = Items.ConsignorsInfo.Visible And IsUseCommissionTrading;
 EndProcedure
 
 &AtClientAtServerNoContext

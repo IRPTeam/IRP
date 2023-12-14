@@ -74,4 +74,5 @@
   <content>Document.SalesOrder.TabularSection.ItemList.Attribute.Store</content>
   <content>Document.PurchaseInvoice.TabularSection.ItemList.Attribute.Store</content>
   <content>InformationRegister.T6030S_BatchRelevance.Dimension.Store</content>
+  <content>Subsystem.Inventory</content>
 </mdclass:FunctionalOption>

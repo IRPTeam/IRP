@@ -112,13 +112,13 @@
   <subsystems>Subsystem.Inventory</subsystems>
   <subsystems>Subsystem.Treasury</subsystems>
   <subsystems>Subsystem.Manufacturing</subsystems>
-  <subsystems>Subsystem.Accounting</subsystems>
+  <subsystems>Subsystem.FixedAssets</subsystems>
   <subsystems>Subsystem.Salary</subsystems>
+  <subsystems>Subsystem.Accounting</subsystems>
   <subsystems>Subsystem.MasterData</subsystems>
   <subsystems>Subsystem.Reports</subsystems>
   <subsystems>Subsystem.Settings</subsystems>
   <subsystems>Subsystem.Technical</subsystems>
-  <subsystems>Subsystem.FixedAssets</subsystems>
   <styles>Style.TestDataBase</styles>
   <commonPictures>CommonPicture.AccountingFlags</commonPictures>
   <commonPictures>CommonPicture.AddDataProc</commonPictures>
@@ -319,6 +319,7 @@
   <roles>Role.Document_EmployeeSickLeave</roles>
   <roles>Role.Document_AdditionalAccrual</roles>
   <roles>Role.Document_AdditionalDeduction</roles>
+  <roles>Role.Document_RetailReceiptCorrection</roles>
   <commonTemplates>CommonTemplate.HTMLPictureSlider</commonTemplates>
   <commonTemplates>CommonTemplate.HTMLAddAttributes</commonTemplates>
   <commonTemplates>CommonTemplate.HTMLGallery</commonTemplates>
@@ -624,6 +625,8 @@
   <commonModules>CommonModule.ControlCodeStringClient</commonModules>
   <commonModules>CommonModule.DocVisitorCounterClient</commonModules>
   <commonModules>CommonModule.DocVisitorCounterServer</commonModules>
+  <commonModules>CommonModule.DocRetailReceiptCorrectionClient</commonModules>
+  <commonModules>CommonModule.DocRetailReceiptCorrectionServer</commonModules>
   <commonAttributes>CommonAttribute.Author</commonAttributes>
   <commonAttributes>CommonAttribute.Branch</commonAttributes>
   <commonAttributes>CommonAttribute.Description</commonAttributes>
@@ -954,6 +957,7 @@
   <catalogs>Catalog.VehicleTypes</catalogs>
   <catalogs>Catalog.Workstations</catalogs>
   <catalogs>Catalog.EmployeeSchedule</catalogs>
+  <catalogs>Catalog.Projects</catalogs>
   <documents>Document.AdditionalCostAllocation</documents>
   <documents>Document.AdditionalRevenueAllocation</documents>
   <documents>Document.BankPayment</documents>
@@ -1037,6 +1041,7 @@
   <documents>Document.EmployeeSickLeave</documents>
   <documents>Document.AdditionalAccrual</documents>
   <documents>Document.AdditionalDeduction</documents>
+  <documents>Document.RetailReceiptCorrection</documents>
   <documentJournals>DocumentJournal.DocumentsForIncomingPayment</documentJournals>
   <documentJournals>DocumentJournal.DocumentsForOutgoingPayment</documentJournals>
   <enums>Enum.AccountingAnalyticTypes</enums>

@@ -1,4 +1,5 @@
 
+
 &AtServer
 Procedure OnCreateAtServer(Cancel, StandardProcessing)
 	ThisObject.Items.RecordType.ChoiceList.Add("All"     , R().CLV_1);
@@ -32,6 +33,17 @@ EndProcedure
 
 &AtClient
 Procedure OtherOnChange(Item)
+	SetVisible();
+EndProcedure
+
+&AtClient
+Procedure AgreementOnChange(Item)
+	If ValueIsFilled(Record.Agreement) Then
+		AgreementType = CommonFunctionsServer.GetRefAttribute(Record.Agreement, "Type");
+		Record.Customer = (AgreementType = PredefinedValue("Enum.AgreementTypes.Customer"));
+		Record.Vendor = (AgreementType = PredefinedValue("Enum.AgreementTypes.Vendor"));
+		Record.Other = (AgreementType = PredefinedValue("Enum.AgreementTypes.Other"));
+	EndIf;	
 	SetVisible();
 EndProcedure
 

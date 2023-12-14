@@ -20,8 +20,6 @@ Background:
 
 Scenario: _024000 preparation (Sales invoice)
 	When set True value to the constant
-	And I close TestClient session
-	Given I open new TestClient session or connect the existing one
 	* Load info
 		When Create catalog ObjectStatuses objects
 		When Create catalog ItemKeys objects
@@ -50,7 +48,6 @@ Scenario: _024000 preparation (Sales invoice)
 		When Create information register PricesByItemKeys records
 		When Create catalog IntegrationSettings objects
 		When Create information register CurrencyRates records
-		When update ItemKeys
 		When Create catalog BusinessUnits objects
 		When Create catalog CancelReturnReasons objects
 		When Create catalog ExpenseAndRevenueTypes objects

@@ -17,8 +17,6 @@ Background:
 Scenario: _0154000 preparation
 	When set True value to the constant
 	When set True value to the constant Use consolidated retail sales
-	And I close TestClient session
-	Given I open new TestClient session or connect the existing one
 	* Load info
 		When Create catalog Countries objects
 		When Create catalog Companies objects (second company Ferron BP)
@@ -55,7 +53,7 @@ Scenario: _0154000 preparation
 		When Create catalog IntegrationSettings objects
 		When Create information register CurrencyRates records
 		When Create catalog CashAccounts objects
-		When update ItemKeys
+
 	
 Scenario: _01540001 check preparation
 	When check preparation
@@ -705,10 +703,3 @@ Scenario: _028076 check filter by own companies in the document Consolidated ret
 		Given I open hyperlink "e1cib/list/Document.ConsolidatedRetailSales"
 	* Check the filter for Own Company
 		When check the filter by my own company in Opening entry/Item stock adjustment
-
-
-Scenario: _999999 close TestClient session
-	And I close TestClient session
-
-
-

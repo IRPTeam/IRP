@@ -20,8 +20,6 @@ Background:
 		
 Scenario: _050000 preparation (Cash receipt)
 	When set True value to the constant
-	And I close TestClient session
-	Given I open new TestClient session or connect the existing one
 	* Load info
 		When Create catalog ObjectStatuses objects
 		When Create catalog ItemKeys objects
@@ -54,7 +52,6 @@ Scenario: _050000 preparation (Cash receipt)
 		When Create catalog ExpenseAndRevenueTypes objects
 		When Create catalog BusinessUnits objects
 		When Create catalog Partners objects
-		When update ItemKeys
 		When Create information register Taxes records (VAT)
 	* Check or create SalesOrder023001
 		Given I open hyperlink "e1cib/list/Document.SalesOrder"

@@ -13,8 +13,6 @@ Background:
 	
 Scenario: _206000 preparation (specification)
 	When set True value to the constant
-	And I close TestClient session
-	Given I open new TestClient session or connect the existing one
 	* Load info
 		When Create information register Barcodes records
 		When Create catalog Companies objects (own Second company)
@@ -45,7 +43,6 @@ Scenario: _206000 preparation (specification)
 		When Create information register PricesByItemKeys records
 		When Create catalog IntegrationSettings objects
 		When Create information register CurrencyRates records
-		When update ItemKeys
 		When Create information register Taxes records (VAT)
 
 
@@ -268,7 +265,3 @@ Scenario: _206000 create a specification double
 		And I click "OK" button
 		Then I wait that in user messages the "Specification is not unique." substring will appear in 10 seconds
 		And I close all client application windows
-
-
-Scenario: _999999 close TestClient session
-	And I close TestClient session

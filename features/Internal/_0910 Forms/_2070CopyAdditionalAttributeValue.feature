@@ -16,8 +16,6 @@ Background:
 
 Scenario: _207001 copy additional attribute values when create catalog element
 	When set True value to the constant
-	And I close TestClient session
-	Given I open new TestClient session or connect the existing one
 	* Add additional attribute 
 		* Additional attribute 01
 			Given I open hyperlink 'e1cib/list/ChartOfCharacteristicTypes.AddAttributeAndProperty'
@@ -416,28 +414,3 @@ Scenario: _207003 copy additional atribute row in sets (isConditionSet)
 		And field "Additional attribute 02" is present on the form
 		And field "Additional attribute 01" is present on the form
 		And I close all client application windows
-		
-		
-
-Scenario: _999999 close TestClient session
-	And I close TestClient session
-				
-	
-		
-				
-
-		
-				
-
-
-		
-		
-
-
-
-
-
-
-
-
-

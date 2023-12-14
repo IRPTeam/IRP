@@ -13,8 +13,6 @@ Background:
 
 Scenario: _351000 preparation
 	When set True value to the constant
-	And I close TestClient session
-	Given I open new TestClient session or connect the existing one
 	When Create catalog Users objects
 	When Create catalog AccessProfiles objects
 	When Create catalog AccessGroups objects
@@ -115,8 +113,3 @@ Scenario: _351003 add launching as another user
 		When in sections panel I select "Sales - A/R"
 		And I close TestClient session
 		Then I connect launched Test client "Этот клиент"
-
-
-	
-Scenario: _999999 close TestClient session
-		And I close TestClient session

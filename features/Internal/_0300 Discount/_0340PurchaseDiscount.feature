@@ -399,9 +399,3 @@ Scenario: _034031 check discount recalculation when change quantity in the Purch
 				| '210,00'    | 'Dress'       | '18%'    | 'No'                    | 'L/Green'      | '1,000'       | '21,00'            | 'pcs'     | '28,83'         | '160,17'        | '189,00'          | 'Store 01'     |
 				| '250,00'    | 'Trousers'    | '18%'    | 'No'                    | '36/Yellow'    | '5,000'       | '125,00'           | 'pcs'     | '171,61'        | '953,39'        | '1 125,00'        | 'Store 01'     |
 			And I click the button named "FormPostAndClose"		
-
-
-			
-
-Scenario: _999999 close TestClient session
-	And I close TestClient session

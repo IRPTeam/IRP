@@ -372,10 +372,6 @@ Function GetAdditionalQueryParameters(Ref)
 	Return StrParams;
 EndFunction
 
-#EndRegion
-
-#Region Posting_SourceTable
-
 Function GetQueryTextsSecondaryTables()
 	QueryArray = New Array;
 	QueryArray.Add(ItemList());
@@ -389,6 +385,36 @@ Function GetQueryTextsSecondaryTables()
 	QueryArray.Add(PostingServer.Exists_R4014B_SerialLotNumber());
 	Return QueryArray;
 EndFunction
+
+Function GetQueryTextsMasterTables()
+	QueryArray = New Array;
+	QueryArray.Add(R2001T_Sales());
+	QueryArray.Add(R2002T_SalesReturns());
+	QueryArray.Add(R2005T_SalesSpecialOffers());
+	QueryArray.Add(R2006T_Certificates());
+	QueryArray.Add(R2021B_CustomersTransactions());
+	QueryArray.Add(R2050T_RetailSales());
+	QueryArray.Add(R3010B_CashOnHand());
+	QueryArray.Add(R3011T_CashFlow());
+	QueryArray.Add(R3022B_CashInTransitOutgoing());
+	QueryArray.Add(R3050T_PosCashBalances());
+	QueryArray.Add(R4010B_ActualStocks());
+	QueryArray.Add(R4011B_FreeStocks());
+	QueryArray.Add(R4014B_SerialLotNumber());
+	QueryArray.Add(R5010B_ReconciliationStatement());
+	QueryArray.Add(R5021T_Revenues());
+	QueryArray.Add(R8014T_ConsignorSales());
+	QueryArray.Add(R9010B_SourceOfOriginStock());
+	QueryArray.Add(T3010S_RowIDInfo());
+	QueryArray.Add(T6010S_BatchesInfo());
+	QueryArray.Add(T6020S_BatchKeysInfo());
+	QueryArray.Add(R5015B_OtherPartnersTransactions());
+	Return QueryArray;
+EndFunction
+
+#EndRegion
+
+#Region Posting_SourceTable
 
 Function ItemList()
 	Return "SELECT
@@ -512,7 +538,8 @@ Function Payments()
 	|	Payments.PaymentAgentLegalName AS LegalName,
 	|	Payments.PaymentAgentPartnerTerms AS Agreement,
 	|	Payments.PaymentAgentLegalNameContract AS LegalNameContract,
-	|	Payments.Certificate
+	|	Payments.Certificate,
+	|	Payments.CashFlowCenter
 	|INTO Payments
 	|FROM
 	|	Document.RetailReturnReceipt.Payments AS Payments
@@ -706,32 +733,6 @@ EndFunction
 
 #Region Posting_MainTables
 
-Function GetQueryTextsMasterTables()
-	QueryArray = New Array;
-	QueryArray.Add(R2001T_Sales());
-	QueryArray.Add(R2002T_SalesReturns());
-	QueryArray.Add(R2005T_SalesSpecialOffers());
-	QueryArray.Add(R2006T_Certificates());
-	QueryArray.Add(R2021B_CustomersTransactions());
-	QueryArray.Add(R2050T_RetailSales());
-	QueryArray.Add(R3010B_CashOnHand());
-	QueryArray.Add(R3011T_CashFlow());
-	QueryArray.Add(R3022B_CashInTransitOutgoing());
-	QueryArray.Add(R3050T_PosCashBalances());
-	QueryArray.Add(R4010B_ActualStocks());
-	QueryArray.Add(R4011B_FreeStocks());
-	QueryArray.Add(R4014B_SerialLotNumber());
-	QueryArray.Add(R5010B_ReconciliationStatement());
-	QueryArray.Add(R5021T_Revenues());
-	QueryArray.Add(R8014T_ConsignorSales());
-	QueryArray.Add(R9010B_SourceOfOriginStock());
-	QueryArray.Add(T3010S_RowIDInfo());
-	QueryArray.Add(T6010S_BatchesInfo());
-	QueryArray.Add(T6020S_BatchKeysInfo());
-	QueryArray.Add(R5015B_OtherPartnersTransactions());
-	Return QueryArray;
-EndFunction
-
 Function R9010B_SourceOfOriginStock()
 	Return "SELECT
 		   |	VALUE(AccumulationRecordType.Receipt) AS RecordType,
@@ -858,6 +859,7 @@ Function R3011T_CashFlow()
 		   |	Payments.Account,
 		   |	VALUE(Enum.CashFlowDirections.Outgoing) AS Direction,
 		   |	Payments.FinancialMovementType,
+		   |	Payments.CashFlowCenter,
 		   |	Payments.Currency,
 		   |	Payments.Amount
 		   |INTO R3011T_CashFlow

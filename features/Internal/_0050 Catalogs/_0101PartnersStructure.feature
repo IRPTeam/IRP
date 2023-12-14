@@ -1,4 +1,4 @@
-#language: en
+﻿#language: en
 @tree
 @Positive
 @PartnerCatalogs
@@ -19,8 +19,6 @@ Background:
 
 Scenario: _010005 create company for Partners (Ferron, Kalipso, Lomaniti)
 	When set True value to the constant
-	And I close TestClient session
-	Given I open new TestClient session or connect the existing one
 	* Preparation
 		When Create catalog Partners objects (Ferron BP)
 		When Create catalog Partners objects (Kalipso)
@@ -62,6 +60,8 @@ Scenario: _010005 create company for Partners (Ferron, Kalipso, Lomaniti)
 		And I click "Save and close" button
 		Then I check for the "Companies" catalog element with the "Description_en" "Company Kalipso" 
 		Then I check for the "Companies" catalog element with the "Description_tr" "Company Kalipso TR" 
+	And I close TestClient session
+	Given I open new TestClient session or connect the existing one 
 	
 
 

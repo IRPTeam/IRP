@@ -16,8 +16,6 @@ Background:
 
 Scenario: _012000 preparation (partners term)
 		When set True value to the constant
-		And I close TestClient session
-		Given I open new TestClient session or connect the existing one
 		When Create catalog Partners objects (Ferron BP)
 		When Create catalog Partners objects (Kalipso)
 		When Create catalog Companies objects (partners company)

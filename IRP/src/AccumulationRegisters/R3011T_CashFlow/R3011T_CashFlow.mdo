@@ -113,6 +113,20 @@
     <fullTextSearch>Use</fullTextSearch>
     <useInTotals>true</useInTotals>
   </dimensions>
+  <dimensions uuid="c05eea1f-4241-4649-ba30-6fe26cef22ed">
+    <name>CashFlowCenter</name>
+    <synonym>
+      <key>en</key>
+      <value>Cash flow center</value>
+    </synonym>
+    <type>
+      <types>CatalogRef.BusinessUnits</types>
+    </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <fullTextSearch>Use</fullTextSearch>
+    <useInTotals>true</useInTotals>
+  </dimensions>
   <dimensions uuid="ac5f5d10-6d1f-42d2-ae3c-e913e217f4fb">
     <name>PlanningPeriod</name>
     <synonym>

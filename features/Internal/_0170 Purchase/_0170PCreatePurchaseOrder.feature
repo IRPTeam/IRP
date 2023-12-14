@@ -18,8 +18,6 @@ Background:
 
 Scenario: _017000 preparation
 	When set True value to the constant
-	And I close TestClient session
-	Given I open new TestClient session or connect the existing one
 	* Load info
 		When Create catalog ObjectStatuses objects
 		When Create catalog ItemKeys objects
@@ -46,7 +44,6 @@ Scenario: _017000 preparation
 		When Create information register TaxSettings records
 		When Create catalog IntegrationSettings objects
 		When Create information register CurrencyRates records
-		When update ItemKeys
 		When Create document InternalSupplyRequest objects (check movements)
 		And I execute 1C:Enterprise script at server
 			| "Documents.InternalSupplyRequest.FindByNumber(117).GetObject().Write(DocumentWriteMode.Posting);"    |

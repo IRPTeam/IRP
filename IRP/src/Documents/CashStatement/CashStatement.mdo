@@ -491,6 +491,20 @@
       <dataHistory>Use</dataHistory>
       <fullTextSearch>Use</fullTextSearch>
     </attributes>
+    <attributes uuid="f2c39605-f927-4886-8218-3fc8eb4ae2fc">
+      <name>CashFlowCenter</name>
+      <synonym>
+        <key>en</key>
+        <value>Cash flow center</value>
+      </synonym>
+      <type>
+        <types>CatalogRef.BusinessUnits</types>
+      </type>
+      <minValue xsi:type="core:UndefinedValue"/>
+      <maxValue xsi:type="core:UndefinedValue"/>
+      <dataHistory>Use</dataHistory>
+      <fullTextSearch>Use</fullTextSearch>
+    </attributes>
     <attributes uuid="b0a1dbf6-8e0d-4d21-8117-4c48528b9a4c">
       <name>UseBasisDocument</name>
       <synonym>

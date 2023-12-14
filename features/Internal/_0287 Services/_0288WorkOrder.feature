@@ -20,8 +20,6 @@ Background:
 
 Scenario: _029200 preparation (work order)
 	When set True value to the constant
-	And I close TestClient session
-	Given I open new TestClient session or connect the existing one
 	* Load info
 		When Create catalog ItemTypes objects (Furniture)	
 		When Create catalog Items objects (Table)
@@ -50,7 +48,6 @@ Scenario: _029200 preparation (work order)
 		When Create catalog PaymentTypes objects 
 		When create items for work order
 		When Create catalog BillOfMaterials objects
-		When update ItemKeys
 		When Create information register Taxes records (VAT)
 	* Add work order in tax settings
 		Given I open hyperlink "e1cib/list/Catalog.Taxes"

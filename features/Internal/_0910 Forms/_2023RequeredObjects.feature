@@ -1,4 +1,4 @@
-#language: en
+﻿#language: en
 @tree
 @Positive
 @NotCritical
@@ -69,9 +69,12 @@ Scenario: _0202301 check of the sign of required filling at the additional attri
 			| '36/18SD'     |
 		And I select current line in "List" table
 		And I input "" text in "Season" field
+		And I move to the next attribute
 		And I click "Save" button
 		Then I wait that in user messages the "Field [Season] is empty." substring will appear in 30 seconds
-		And I close all client application windows
+		And I close current window
+		If "1C:Enterprise" window is opened Then
+			And I click "No" button		
 	* Putt in an optional filling in the details
 		* Open add attribute settings
 		Given I open hyperlink "e1cib/list/Catalog.AddAttributeAndPropertySets"
@@ -101,11 +104,5 @@ Scenario: _0202301 check of the sign of required filling at the additional attri
 		And I finish line editing in "AvailableAttributes" table
 		And I click "Save and close" button
 
-
-
 Scenario: _999999 close TestClient session
 	And I close TestClient session
-
-
-
-

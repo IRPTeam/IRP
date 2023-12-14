@@ -402,8 +402,6 @@ Scenario: _0850000 preparation (fiscal printer)
 	When set True value to the constant
 	When set True value to the constant Use consolidated retail sales
 	When set True value to the constant Use commission trading
-	And I close TestClient session
-	Given I open new TestClient session or connect the existing one
 	* Load info
 		When Create catalog BusinessUnits objects
 		When Create catalog BusinessUnits objects (Shop 02, use consolidated retail sales)
@@ -451,7 +449,6 @@ Scenario: _0850000 preparation (fiscal printer)
 		When Create catalog SerialLotNumbers objects (serial lot numbers)
 		When create consignors Items with SLN
 		When create consignors Items with control code string type (Good code data)
-		When update ItemKeys
 		When Create catalog Partners objects and Companies objects (Customer)
 		When Create catalog Agreements objects (Customer)
 		When Create POS cash account objects

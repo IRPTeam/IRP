@@ -13,8 +13,6 @@ Background:
 
 Scenario: _5001 preparation
 	When set True value to the constant
-	And I close TestClient session
-	Given I open new TestClient session or connect the existing one
 	When Create catalog AddAttributeAndPropertySets objects
 	When Create catalog AddAttributeAndPropertyValues objects
 	When Create catalog Partners objects (Ferron BP)
@@ -37,7 +35,6 @@ Scenario: _5001 preparation
 	When Create catalog Units objects (MF)
 	When Create catalog ItemKeys objects (MF)
 	When Create chart of characteristic types AddAttributeAndProperty objects
-	When update ItemKeys
 	When Create information register CurrencyRates records
 	When Create information register UserSettings records (store receiver in IT)
 	When Create information register Taxes records (VAT)

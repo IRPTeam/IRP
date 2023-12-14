@@ -18,8 +18,6 @@ Scenario: _042900 preparation (Opening entry)
 	When set True value to the constant
 	When set True value to the constant Use commission trading
 	When set True value to the constant Use salary 
-	And I close TestClient session
-	Given I open new TestClient session or connect the existing one
 	* Load info
 		When Create information register Barcodes records
 		When Create catalog Companies objects (own Second company)
@@ -69,7 +67,6 @@ Scenario: _042900 preparation (Opening entry)
 		When Create information register Barcodes records (serial lot numbers)
 		When Create information register Barcodes records (serial lot numbers)
 		When Create information register TaxSettings records (Concignor 1)
-		When update ItemKeys
 		When Create catalog SerialLotNumbers objects
 		When Create catalog CashAccounts objects
 		When Create OtherPartners objects

@@ -21,8 +21,6 @@ Background:
 
 Scenario: _028800 preparation (Shipment confirmation)
 	When set True value to the constant
-	And I close TestClient session
-	Given I open new TestClient session or connect the existing one
 	* Load info
 		When Create catalog ObjectStatuses objects
 		When Create catalog ItemKeys objects
@@ -53,7 +51,6 @@ Scenario: _028800 preparation (Shipment confirmation)
 		When Create information register CurrencyRates records
 		When Create catalog TaxRates objects
 		When Create catalog Taxes objects
-		When update ItemKeys
 		When Create catalog Partners objects
 		When Create catalog BusinessUnits objects
 		When Create catalog ExpenseAndRevenueTypes objects

@@ -334,7 +334,8 @@ Function PaymentList()
 		|		when PaymentList.PlaningTransactionBasis REFS Document.CashTransferOrder
 		|			then PaymentList.PlaningTransactionBasis.Ref
 		|	end as CashTransferOrder,
-		|	PaymentList.Ref.TransactionType = VALUE(Enum.OutgoingPaymentTransactionTypes.OtherPartner) AS IsOtherPartner
+		|	PaymentList.Ref.TransactionType = VALUE(Enum.OutgoingPaymentTransactionTypes.OtherPartner) AS IsOtherPartner,
+		|	PaymentList.CashFlowCenter
 		|INTO PaymentList
 		|FROM
 		|	Document.CashPayment.PaymentList AS PaymentList
@@ -634,6 +635,7 @@ Function R3011T_CashFlow()
 		   |	PaymentList.CashAccount AS Account,
 		   |	VALUE(Enum.CashFlowDirections.Outgoing) AS Direction,
 		   |	PaymentList.FinancialMovementType,
+		   |	PaymentList.CashFlowCenter,
 		   |	PaymentList.PlanningPeriod,
 		   |	PaymentList.Currency,
 		   |	PaymentList.Key AS Key,

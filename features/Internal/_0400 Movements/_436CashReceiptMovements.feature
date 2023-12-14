@@ -16,8 +16,6 @@ Background:
 
 Scenario: _043600 preparation (Cash receipt)
 	When set True value to the constant
-	And I close TestClient session
-	Given I open new TestClient session or connect the existing one
 	* Load info
 		When Create information register Barcodes records
 		When Create catalog Companies objects (own Second company)
@@ -52,7 +50,6 @@ Scenario: _043600 preparation (Cash receipt)
 		When Create catalog ExpenseAndRevenueTypes objects
 		When Create catalog Companies objects (second company Ferron BP)
 		When Create catalog PartnersBankAccounts objects
-		When update ItemKeys
 		When Create catalog SerialLotNumbers objects
 		When Create catalog CashAccounts objects
 		When Create catalog PlanningPeriods objects
@@ -845,17 +842,17 @@ Scenario: _043635 check Cash receipt movements by the Register  "R3011 Cash flow
 		And I select "R3011 Cash flow" exact value from "Register" drop-down list
 		And I click "Generate report" button
 		Then "ResultTable" spreadsheet document is equal
-			| 'Cash receipt 513 dated 04.06.2021 12:50:14'   | ''                      | ''            | ''               | ''               | ''               | ''            | ''                          | ''                  | ''           | ''                               | ''                        |
-			| 'Document registrations records'               | ''                      | ''            | ''               | ''               | ''               | ''            | ''                          | ''                  | ''           | ''                               | ''                        |
-			| 'Register  "R3011 Cash flow"'                  | ''                      | ''            | ''               | ''               | ''               | ''            | ''                          | ''                  | ''           | ''                               | ''                        |
-			| ''                                             | 'Period'                | 'Resources'   | 'Dimensions'     | ''               | ''               | ''            | ''                          | ''                  | ''           | ''                               | 'Attributes'              |
-			| ''                                             | ''                      | 'Amount'      | 'Company'        | 'Branch'         | 'Account'        | 'Direction'   | 'Financial movement type'   | 'Planning period'   | 'Currency'   | 'Multi currency movement type'   | 'Deferred calculation'    |
-			| ''                                             | '04.06.2021 12:50:14'   | '77,04'       | 'Main Company'   | 'Front office'   | 'Cash desk №1'   | 'Incoming'    | 'Movement type 1'           | 'Second'            | 'USD'        | 'Reporting currency'             | 'No'                      |
-			| ''                                             | '04.06.2021 12:50:14'   | '154,08'      | 'Main Company'   | 'Front office'   | 'Cash desk №1'   | 'Incoming'    | 'Movement type 1'           | 'Second'            | 'USD'        | 'Reporting currency'             | 'No'                      |
-			| ''                                             | '04.06.2021 12:50:14'   | '450'         | 'Main Company'   | 'Front office'   | 'Cash desk №1'   | 'Incoming'    | 'Movement type 1'           | 'Second'            | 'TRY'        | 'Local currency'                 | 'No'                      |
-			| ''                                             | '04.06.2021 12:50:14'   | '450'         | 'Main Company'   | 'Front office'   | 'Cash desk №1'   | 'Incoming'    | 'Movement type 1'           | 'Second'            | 'TRY'        | 'en description is empty'        | 'No'                      |
-			| ''                                             | '04.06.2021 12:50:14'   | '900'         | 'Main Company'   | 'Front office'   | 'Cash desk №1'   | 'Incoming'    | 'Movement type 1'           | 'Second'            | 'TRY'        | 'Local currency'                 | 'No'                      |
-			| ''                                             | '04.06.2021 12:50:14'   | '900'         | 'Main Company'   | 'Front office'   | 'Cash desk №1'   | 'Incoming'    | 'Movement type 1'           | 'Second'            | 'TRY'        | 'en description is empty'        | 'No'                      |
+			| 'Cash receipt 513 dated 04.06.2021 12:50:14' | ''                    | ''          | ''             | ''             | ''             | ''          | ''                        | ''                 | ''                | ''         | ''                             | ''                     |
+			| 'Document registrations records'             | ''                    | ''          | ''             | ''             | ''             | ''          | ''                        | ''                 | ''                | ''         | ''                             | ''                     |
+			| 'Register  "R3011 Cash flow"'                | ''                    | ''          | ''             | ''             | ''             | ''          | ''                        | ''                 | ''                | ''         | ''                             | ''                     |
+			| ''                                           | 'Period'              | 'Resources' | 'Dimensions'   | ''             | ''             | ''          | ''                        | ''                 | ''                | ''         | ''                             | 'Attributes'           |
+			| ''                                           | ''                    | 'Amount'    | 'Company'      | 'Branch'       | 'Account'      | 'Direction' | 'Financial movement type' | 'Cash flow center' | 'Planning period' | 'Currency' | 'Multi currency movement type' | 'Deferred calculation' |
+			| ''                                           | '04.06.2021 12:50:14' | '77,04'     | 'Main Company' | 'Front office' | 'Cash desk №1' | 'Incoming'  | 'Movement type 1'         | 'Front office'     | 'Second'          | 'USD'      | 'Reporting currency'           | 'No'                   |
+			| ''                                           | '04.06.2021 12:50:14' | '154,08'    | 'Main Company' | 'Front office' | 'Cash desk №1' | 'Incoming'  | 'Movement type 1'         | 'Front office'     | 'Second'          | 'USD'      | 'Reporting currency'           | 'No'                   |
+			| ''                                           | '04.06.2021 12:50:14' | '450'       | 'Main Company' | 'Front office' | 'Cash desk №1' | 'Incoming'  | 'Movement type 1'         | 'Front office'     | 'Second'          | 'TRY'      | 'Local currency'               | 'No'                   |
+			| ''                                           | '04.06.2021 12:50:14' | '450'       | 'Main Company' | 'Front office' | 'Cash desk №1' | 'Incoming'  | 'Movement type 1'         | 'Front office'     | 'Second'          | 'TRY'      | 'en description is empty'      | 'No'                   |
+			| ''                                           | '04.06.2021 12:50:14' | '900'       | 'Main Company' | 'Front office' | 'Cash desk №1' | 'Incoming'  | 'Movement type 1'         | 'Front office'     | 'Second'          | 'TRY'      | 'Local currency'               | 'No'                   |
+			| ''                                           | '04.06.2021 12:50:14' | '900'       | 'Main Company' | 'Front office' | 'Cash desk №1' | 'Incoming'  | 'Movement type 1'         | 'Front office'     | 'Second'          | 'TRY'      | 'en description is empty'      | 'No'                   |		
 	And I close all client application windows
 
 Scenario: _043638 check Cash receipt movements by the Register  "R3011 Cash flow" (Other partner)
@@ -870,15 +867,15 @@ Scenario: _043638 check Cash receipt movements by the Register  "R3011 Cash flow
 		And I select "R3011 Cash flow" exact value from "Register" drop-down list
 		And I click "Generate report" button
 		Then "ResultTable" spreadsheet document is equal
-			| 'Cash receipt 81 dated 12.06.2023 15:26:30'   | ''                      | ''            | ''               | ''               | ''               | ''            | ''                          | ''                  | ''           | ''                               | ''                        |
-			| 'Document registrations records'              | ''                      | ''            | ''               | ''               | ''               | ''            | ''                          | ''                  | ''           | ''                               | ''                        |
-			| 'Register  "R3011 Cash flow"'                 | ''                      | ''            | ''               | ''               | ''               | ''            | ''                          | ''                  | ''           | ''                               | ''                        |
-			| ''                                            | 'Period'                | 'Resources'   | 'Dimensions'     | ''               | ''               | ''            | ''                          | ''                  | ''           | ''                               | 'Attributes'              |
-			| ''                                            | ''                      | 'Amount'      | 'Company'        | 'Branch'         | 'Account'        | 'Direction'   | 'Financial movement type'   | 'Planning period'   | 'Currency'   | 'Multi currency movement type'   | 'Deferred calculation'    |
-			| ''                                            | '12.06.2023 15:26:30'   | '8,56'        | 'Main Company'   | 'Front office'   | 'Cash desk №4'   | 'Incoming'    | 'Movement type 1'           | ''                  | 'USD'        | 'Reporting currency'             | 'No'                      |
-			| ''                                            | '12.06.2023 15:26:30'   | '50'          | 'Main Company'   | 'Front office'   | 'Cash desk №4'   | 'Incoming'    | 'Movement type 1'           | ''                  | 'TRY'        | 'Local currency'                 | 'No'                      |
-			| ''                                            | '12.06.2023 15:26:30'   | '50'          | 'Main Company'   | 'Front office'   | 'Cash desk №4'   | 'Incoming'    | 'Movement type 1'           | ''                  | 'TRY'        | 'TRY'                            | 'No'                      |
-			| ''                                            | '12.06.2023 15:26:30'   | '50'          | 'Main Company'   | 'Front office'   | 'Cash desk №4'   | 'Incoming'    | 'Movement type 1'           | ''                  | 'TRY'        | 'en description is empty'        | 'No'                      |
+			| 'Cash receipt 81 dated 12.06.2023 15:26:30' | ''                    | ''          | ''             | ''             | ''             | ''          | ''                        | ''                 | ''                | ''         | ''                             | ''                     |
+			| 'Document registrations records'            | ''                    | ''          | ''             | ''             | ''             | ''          | ''                        | ''                 | ''                | ''         | ''                             | ''                     |
+			| 'Register  "R3011 Cash flow"'               | ''                    | ''          | ''             | ''             | ''             | ''          | ''                        | ''                 | ''                | ''         | ''                             | ''                     |
+			| ''                                          | 'Period'              | 'Resources' | 'Dimensions'   | ''             | ''             | ''          | ''                        | ''                 | ''                | ''         | ''                             | 'Attributes'           |
+			| ''                                          | ''                    | 'Amount'    | 'Company'      | 'Branch'       | 'Account'      | 'Direction' | 'Financial movement type' | 'Cash flow center' | 'Planning period' | 'Currency' | 'Multi currency movement type' | 'Deferred calculation' |
+			| ''                                          | '12.06.2023 15:26:30' | '8,56'      | 'Main Company' | 'Front office' | 'Cash desk №4' | 'Incoming'  | 'Movement type 1'         | 'Front office'     | ''                | 'USD'      | 'Reporting currency'           | 'No'                   |
+			| ''                                          | '12.06.2023 15:26:30' | '50'        | 'Main Company' | 'Front office' | 'Cash desk №4' | 'Incoming'  | 'Movement type 1'         | 'Front office'     | ''                | 'TRY'      | 'Local currency'               | 'No'                   |
+			| ''                                          | '12.06.2023 15:26:30' | '50'        | 'Main Company' | 'Front office' | 'Cash desk №4' | 'Incoming'  | 'Movement type 1'         | 'Front office'     | ''                | 'TRY'      | 'TRY'                          | 'No'                   |
+			| ''                                          | '12.06.2023 15:26:30' | '50'        | 'Main Company' | 'Front office' | 'Cash desk №4' | 'Incoming'  | 'Movement type 1'         | 'Front office'     | ''                | 'TRY'      | 'en description is empty'      | 'No'                   |		
 	And I close all client application windows
 
 Scenario: _043639 check Cash receipt movements by the Register  "R5010 Reconciliation statement" (Other partner)
@@ -981,14 +978,14 @@ Scenario: _043643 check Cash receipt movements by the Register "R3011 Cash flow"
 		And I select "R3011 Cash flow" exact value from "Register" drop-down list
 		And I click "Generate report" button
 		Then "ResultTable" spreadsheet document is equal
-			| 'Cash receipt 331 dated 03.07.2023 14:21:54' | ''                    | ''          | ''             | ''             | ''             | ''          | ''                        | ''                | ''         | ''                             | ''                     |
-			| 'Document registrations records'             | ''                    | ''          | ''             | ''             | ''             | ''          | ''                        | ''                | ''         | ''                             | ''                     |
-			| 'Register  "R3011 Cash flow"'                | ''                    | ''          | ''             | ''             | ''             | ''          | ''                        | ''                | ''         | ''                             | ''                     |
-			| ''                                           | 'Period'              | 'Resources' | 'Dimensions'   | ''             | ''             | ''          | ''                        | ''                | ''         | ''                             | 'Attributes'           |
-			| ''                                           | ''                    | 'Amount'    | 'Company'      | 'Branch'       | 'Account'      | 'Direction' | 'Financial movement type' | 'Planning period' | 'Currency' | 'Multi currency movement type' | 'Deferred calculation' |
-			| ''                                           | '03.07.2023 14:21:54' | '171,2'     | 'Main Company' | 'Front office' | 'Cash desk №1' | 'Incoming'  | 'Movement type 1'         | ''                | 'USD'      | 'Reporting currency'           | 'No'                   |
-			| ''                                           | '03.07.2023 14:21:54' | '1 000'     | 'Main Company' | 'Front office' | 'Cash desk №1' | 'Incoming'  | 'Movement type 1'         | ''                | 'TRY'      | 'Local currency'               | 'No'                   |
-			| ''                                           | '03.07.2023 14:21:54' | '1 000'     | 'Main Company' | 'Front office' | 'Cash desk №1' | 'Incoming'  | 'Movement type 1'         | ''                | 'TRY'      | 'en description is empty'      | 'No'                   |		
+			| 'Cash receipt 331 dated 03.07.2023 14:21:54' | ''                    | ''          | ''             | ''             | ''             | ''          | ''                        | ''                 | ''                | ''         | ''                             | ''                     |
+			| 'Document registrations records'             | ''                    | ''          | ''             | ''             | ''             | ''          | ''                        | ''                 | ''                | ''         | ''                             | ''                     |
+			| 'Register  "R3011 Cash flow"'                | ''                    | ''          | ''             | ''             | ''             | ''          | ''                        | ''                 | ''                | ''         | ''                             | ''                     |
+			| ''                                           | 'Period'              | 'Resources' | 'Dimensions'   | ''             | ''             | ''          | ''                        | ''                 | ''                | ''         | ''                             | 'Attributes'           |
+			| ''                                           | ''                    | 'Amount'    | 'Company'      | 'Branch'       | 'Account'      | 'Direction' | 'Financial movement type' | 'Cash flow center' | 'Planning period' | 'Currency' | 'Multi currency movement type' | 'Deferred calculation' |
+			| ''                                           | '03.07.2023 14:21:54' | '171,2'     | 'Main Company' | 'Front office' | 'Cash desk №1' | 'Incoming'  | 'Movement type 1'         | 'Front office'     | ''                | 'USD'      | 'Reporting currency'           | 'No'                   |
+			| ''                                           | '03.07.2023 14:21:54' | '1 000'     | 'Main Company' | 'Front office' | 'Cash desk №1' | 'Incoming'  | 'Movement type 1'         | 'Front office'     | ''                | 'TRY'      | 'Local currency'               | 'No'                   |
+			| ''                                           | '03.07.2023 14:21:54' | '1 000'     | 'Main Company' | 'Front office' | 'Cash desk №1' | 'Incoming'  | 'Movement type 1'         | 'Front office'     | ''                | 'TRY'      | 'en description is empty'      | 'No'                   |		
 	And I close all client application windows
 
 Scenario: _043644 check Cash receipt movements by the Register "R3021 Cash in transit (incoming)" (cash transfer without CTO)

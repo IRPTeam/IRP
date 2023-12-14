@@ -18,8 +18,6 @@ Background:
 
 Scenario: _005028 filling in the "Price types" catalog  
 	When set True value to the constant
-	And I close TestClient session
-	Given I open new TestClient session or connect the existing one
 	* Preparation
 		When Create catalog Currencies objects
 		When Create catalog IntegrationSettings objects

@@ -1261,3 +1261,25 @@ Scenario: Open choise form "VehicleTypes"
 		Then I raise "Failed to open catalog choise form VehicleTypes" exception
 	And I close current window
 
+Scenario: Open list form "Projects" 
+	And I close all client application windows
+	Given I open "Projects" catalog default form
+	If the warning is displayed then
+		Then I raise "Failed to open catalog form Projects" exception
+	And I close current window
+
+Scenario: Open object form "Projects"
+	And I close all client application windows
+	Given I open "Projects" reference main form
+	If the warning is displayed then
+		Then I raise "Failed to open catalog form Projects" exception
+	And I close current window
+
+Scenario: Open choise form "Projects"
+	And I close all client application windows
+	And I execute the built-in language code (Extension)
+		| 'OpenForm("Catalog.Projects.ChoiceForm", , Undefined, , , , , FormWindowOpeningMode.Independent)'   |
+	If the warning is displayed then
+		Then I raise "Failed to open catalog choise form Projects" exception
+	And I close current window
+

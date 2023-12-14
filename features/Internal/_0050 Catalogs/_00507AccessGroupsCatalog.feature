@@ -17,8 +17,6 @@ Background:
 
 Scenario: _005015 filling in the "AccessGroups" catalog
 	When set True value to the constant
-	And I close TestClient session
-	Given I open new TestClient session or connect the existing one
 	* Opening the form for filling in AccessGroups
 		Given I open hyperlink "e1cib/list/Catalog.AccessGroups"
 		And I click the button named "FormCreate"

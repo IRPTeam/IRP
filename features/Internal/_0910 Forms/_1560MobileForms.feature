@@ -1,4 +1,4 @@
-#language: en
+﻿#language: en
 @tree
 @Positive
 @Forms
@@ -75,7 +75,6 @@ Scenario: _0156000 preparation
 		When Create information register Barcodes records (serial lot numbers)
 		When Create catalog SerialLotNumbers objects (serial lot numbers)
 		When Create information register Barcodes records (serial lot numbers)
-		When update ItemKeys
 		When Create information register Taxes records (VAT)
 		And Delay 10
 	* Import documents
@@ -417,8 +416,8 @@ Scenario: _0156052 check items in the document by scan barcode (document without
 			| 'PZU'        | 'Product 1 with SLN'   | '2,000'      | 'pcs'    | ''         | '18%'   | ''             | ''                |
 		And I close all client application windows
 		
-		
-				
+Scenario: _999999 close TestClient session
+	And I close TestClient session		
 		
 						
 				

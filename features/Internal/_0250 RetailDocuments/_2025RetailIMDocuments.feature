@@ -17,8 +17,6 @@ Background:
 		
 Scenario: _0155100 preparation (Retail SO - Retail SC - Retail GR)
 	When set True value to the constant
-	And I close TestClient session
-	Given I open new TestClient session or connect the existing one
 	* Load info
 		When Create catalog BusinessUnits objects
 		When Create information register Barcodes records
@@ -60,7 +58,6 @@ Scenario: _0155100 preparation (Retail SO - Retail SC - Retail GR)
 		When Create information register Barcodes records (serial lot numbers)
 		When Create catalog SerialLotNumbers objects (serial lot numbers, with batch balance details)
 		When Create catalog SerialLotNumbers objects (serial lot numbers)
-		When update ItemKeys
 		When Create catalog Partners objects and Companies objects (Customer)
 		When Create catalog Agreements objects (Customer)
 		When Create information register Taxes records (VAT)
@@ -114,8 +111,6 @@ Scenario: _01551001 check preparation
 Scenario: _0155250 create retail sales order
 	* Preparation
 		When set True value to the constant Use retail orders
-		And I close TestClient session
-		Given I open new TestClient session or connect the existing one
 	* Create retail sales receipt (with pre-payment)
 		Given I open hyperlink "e1cib/list/Document.SalesOrder"
 		And I click the button named "FormCreate"

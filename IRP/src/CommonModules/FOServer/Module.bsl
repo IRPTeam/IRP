@@ -85,6 +85,14 @@ Function IsUseFixedAssets() Export
 	Return GetFunctionalOption("UseFixedAsstes");
 EndFunction
 
+Function IsUseShipmentConfirmationAndGoodsReceipts() Export
+	Return GetFunctionalOption("UseShipmentConfirmationAndGoodsReceipts");
+EndFunction
+
+Function IsUseChequeBonds() Export
+	Return GetFunctionalOption("UseChequeBonds");
+EndFunction
+
 #EndRegion
 
 Procedure UpdateDefaults() Export

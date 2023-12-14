@@ -22,8 +22,6 @@ Scenario: _0153500 preparation
 	When set True value to the constant Use salary
 	And Delay 1
 	When set True value to the constant Use commission trading
-	And I close TestClient session
-	Given I open new TestClient session or connect the existing one
 	* Load info
 		When Create catalog Countries objects
 		When Create catalog Companies objects (second company Ferron BP)
@@ -77,7 +75,6 @@ Scenario: _0153500 preparation
 		When Create catalog Workstations objects  (Test)
 		When Create catalog ItemSegments objects
 		When Create catalog PaymentTypes objects
-		When update ItemKeys
 		When Create information register Taxes records (VAT)
 	* Load additional attribute hyperlink
 		When Create catalog AddAttributeAndProperty (hyperlink)
@@ -5917,10 +5914,4 @@ Scenario: _015400670 check AddAttribute with type hyperlink
 		And I click "123" hyperlink
 		Then "1C:Enterprise" window is opened
 		And I click the button named "OK"
-				
-				
-						
-				
-
-				
-				
+		And I close all client application windows

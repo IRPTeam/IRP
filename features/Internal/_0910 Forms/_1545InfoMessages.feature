@@ -17,8 +17,6 @@ Background:
 
 Scenario: _154500 preparation (information messages)
 	When set True value to the constant
-	And I close TestClient session
-	Given I open new TestClient session or connect the existing one
 	* Load info
 		When Create catalog ObjectStatuses objects
 		When Create catalog ItemKeys objects
@@ -46,7 +44,6 @@ Scenario: _154500 preparation (information messages)
 		When Create information register PricesByItemKeys records
 		When Create catalog IntegrationSettings objects
 		When Create information register CurrencyRates records
-		When update ItemKeys
 		When Create information register Taxes records (VAT)
 
 	
@@ -1426,8 +1423,3 @@ Scenario: __015457 message when trying to create Price list without unit
 	And I click "Post" button
 	Then I wait that in user messages the 'The "Unit" is required on line 1 of the "Item list" list.' substring will appear in 10 seconds
 	And I close all client application windows
-		
-
-
-Scenario: _999999 close TestClient session
-	And I close TestClient session

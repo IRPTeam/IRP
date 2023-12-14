@@ -37,4 +37,5 @@
   <content>Document.InventoryTransfer.TabularSection.ItemList.Attribute.ItemKey</content>
   <content>Catalog.ItemTypes.TabularSection.AvailableAttributes</content>
   <content>Catalog.ItemTypes.TabularSection.AddAttributes</content>
+  <content>Catalog.ItemKeys</content>
 </mdclass:FunctionalOption>

@@ -17,8 +17,6 @@ Background:
 
 Scenario: _045300 preparation (Cash transfer order)
 	When set True value to the constant
-	And I close TestClient session
-	Given I open new TestClient session or connect the existing one
 	* Load info
 		When Create information register Barcodes records
 		When Create catalog Companies objects (own Second company)
@@ -54,7 +52,6 @@ Scenario: _045300 preparation (Cash transfer order)
 		When Create catalog ExpenseAndRevenueTypes objects
 		When Create catalog Companies objects (second company Ferron BP)
 		When Create catalog PartnersBankAccounts objects
-		When update ItemKeys
 		When Create catalog SerialLotNumbers objects
 		When Create catalog CashAccounts objects
 		When Create catalog CancelReturnReasons objects
@@ -342,14 +339,14 @@ Scenario: _045310 check Money transfer movements by the Register "R3011 Cash flo
 		And I select "R3011 Cash flow" exact value from "Register" drop-down list
 		And I click "Generate report" button
 		Then "ResultTable" spreadsheet document is equal
-			| 'Money transfer 13 dated 25.08.2022 16:46:25'   | ''                      | ''            | ''               | ''          | ''                     | ''            | ''                          | ''                  | ''           | ''                               | ''                        |
-			| 'Document registrations records'                | ''                      | ''            | ''               | ''          | ''                     | ''            | ''                          | ''                  | ''           | ''                               | ''                        |
-			| 'Register  "R3011 Cash flow"'                   | ''                      | ''            | ''               | ''          | ''                     | ''            | ''                          | ''                  | ''           | ''                               | ''                        |
-			| ''                                              | 'Period'                | 'Resources'   | 'Dimensions'     | ''          | ''                     | ''            | ''                          | ''                  | ''           | ''                               | 'Attributes'              |
-			| ''                                              | ''                      | 'Amount'      | 'Company'        | 'Branch'    | 'Account'              | 'Direction'   | 'Financial movement type'   | 'Planning period'   | 'Currency'   | 'Multi currency movement type'   | 'Deferred calculation'    |
-			| ''                                              | '25.08.2022 16:46:25'   | '171,2'       | 'Main Company'   | 'Shop 02'   | 'Pos cash account 1'   | 'Outgoing'    | 'Movement type 1'           | ''                  | 'USD'        | 'Reporting currency'             | 'No'                      |
-			| ''                                              | '25.08.2022 16:46:25'   | '1 000'       | 'Main Company'   | 'Shop 02'   | 'Pos cash account 1'   | 'Outgoing'    | 'Movement type 1'           | ''                  | 'TRY'        | 'Local currency'                 | 'No'                      |
-			| ''                                              | '25.08.2022 16:46:25'   | '1 000'       | 'Main Company'   | 'Shop 02'   | 'Pos cash account 1'   | 'Outgoing'    | 'Movement type 1'           | ''                  | 'TRY'        | 'en description is empty'        | 'No'                      |
+			| 'Money transfer 13 dated 25.08.2022 16:46:25' | ''                    | ''          | ''             | ''        | ''                   | ''          | ''                        | ''                 | ''                | ''         | ''                             | ''                     |
+			| 'Document registrations records'              | ''                    | ''          | ''             | ''        | ''                   | ''          | ''                        | ''                 | ''                | ''         | ''                             | ''                     |
+			| 'Register  "R3011 Cash flow"'                 | ''                    | ''          | ''             | ''        | ''                   | ''          | ''                        | ''                 | ''                | ''         | ''                             | ''                     |
+			| ''                                            | 'Period'              | 'Resources' | 'Dimensions'   | ''        | ''                   | ''          | ''                        | ''                 | ''                | ''         | ''                             | 'Attributes'           |
+			| ''                                            | ''                    | 'Amount'    | 'Company'      | 'Branch'  | 'Account'            | 'Direction' | 'Financial movement type' | 'Cash flow center' | 'Planning period' | 'Currency' | 'Multi currency movement type' | 'Deferred calculation' |
+			| ''                                            | '25.08.2022 16:46:25' | '171,2'     | 'Main Company' | 'Shop 02' | 'Pos cash account 1' | 'Outgoing'  | 'Movement type 1'         | 'Shop 02'          | ''                | 'USD'      | 'Reporting currency'           | 'No'                   |
+			| ''                                            | '25.08.2022 16:46:25' | '1 000'     | 'Main Company' | 'Shop 02' | 'Pos cash account 1' | 'Outgoing'  | 'Movement type 1'         | 'Shop 02'          | ''                | 'TRY'      | 'Local currency'               | 'No'                   |
+			| ''                                            | '25.08.2022 16:46:25' | '1 000'     | 'Main Company' | 'Shop 02' | 'Pos cash account 1' | 'Outgoing'  | 'Movement type 1'         | 'Shop 02'          | ''                | 'TRY'      | 'en description is empty'      | 'No'                   |		
 		And I close all client application windows
 
 Scenario: _045311 check Money transfer movements by the Register "R3011 Cash flow" (currency exchange)
@@ -364,15 +361,15 @@ Scenario: _045311 check Money transfer movements by the Register "R3011 Cash flo
 		And I select "R3011 Cash flow" exact value from "Register" drop-down list
 		And I click "Generate report" button
 		Then "ResultTable" spreadsheet document is equal
-			| 'Money transfer 4 dated 19.02.2022 11:18:33'   | ''                      | ''            | ''               | ''               | ''                    | ''            | ''                          | ''                  | ''           | ''                               | ''                        |
-			| 'Document registrations records'               | ''                      | ''            | ''               | ''               | ''                    | ''            | ''                          | ''                  | ''           | ''                               | ''                        |
-			| 'Register  "R3011 Cash flow"'                  | ''                      | ''            | ''               | ''               | ''                    | ''            | ''                          | ''                  | ''           | ''                               | ''                        |
-			| ''                                             | 'Period'                | 'Resources'   | 'Dimensions'     | ''               | ''                    | ''            | ''                          | ''                  | ''           | ''                               | 'Attributes'              |
-			| ''                                             | ''                      | 'Amount'      | 'Company'        | 'Branch'         | 'Account'             | 'Direction'   | 'Financial movement type'   | 'Planning period'   | 'Currency'   | 'Multi currency movement type'   | 'Deferred calculation'    |
-			| ''                                             | '19.02.2022 11:18:33'   | '154,08'      | 'Main Company'   | 'Front office'   | 'Bank account, TRY'   | 'Outgoing'    | 'Movement type 1'           | ''                  | 'USD'        | 'Reporting currency'             | 'No'                      |
-			| ''                                             | '19.02.2022 11:18:33'   | '170'         | 'Main Company'   | 'Front office'   | 'Bank account, EUR'   | 'Incoming'    | 'Movement type 1'           | ''                  | 'EUR'        | 'en description is empty'        | 'No'                      |
-			| ''                                             | '19.02.2022 11:18:33'   | '178,5'       | 'Main Company'   | 'Front office'   | 'Bank account, EUR'   | 'Incoming'    | 'Movement type 1'           | ''                  | 'USD'        | 'Reporting currency'             | 'No'                      |
-			| ''                                             | '19.02.2022 11:18:33'   | '900'         | 'Main Company'   | 'Front office'   | 'Bank account, TRY'   | 'Outgoing'    | 'Movement type 1'           | ''                  | 'TRY'        | 'Local currency'                 | 'No'                      |
-			| ''                                             | '19.02.2022 11:18:33'   | '900'         | 'Main Company'   | 'Front office'   | 'Bank account, TRY'   | 'Outgoing'    | 'Movement type 1'           | ''                  | 'TRY'        | 'en description is empty'        | 'No'                      |
-			| ''                                             | '19.02.2022 11:18:33'   | '900'         | 'Main Company'   | 'Front office'   | 'Bank account, EUR'   | 'Incoming'    | 'Movement type 1'           | ''                  | 'TRY'        | 'Local currency'                 | 'No'                      |
+			| 'Money transfer 4 dated 19.02.2022 11:18:33' | ''                    | ''          | ''             | ''             | ''                  | ''          | ''                        | ''                 | ''                | ''         | ''                             | ''                     |
+			| 'Document registrations records'             | ''                    | ''          | ''             | ''             | ''                  | ''          | ''                        | ''                 | ''                | ''         | ''                             | ''                     |
+			| 'Register  "R3011 Cash flow"'                | ''                    | ''          | ''             | ''             | ''                  | ''          | ''                        | ''                 | ''                | ''         | ''                             | ''                     |
+			| ''                                           | 'Period'              | 'Resources' | 'Dimensions'   | ''             | ''                  | ''          | ''                        | ''                 | ''                | ''         | ''                             | 'Attributes'           |
+			| ''                                           | ''                    | 'Amount'    | 'Company'      | 'Branch'       | 'Account'           | 'Direction' | 'Financial movement type' | 'Cash flow center' | 'Planning period' | 'Currency' | 'Multi currency movement type' | 'Deferred calculation' |
+			| ''                                           | '19.02.2022 11:18:33' | '154,08'    | 'Main Company' | 'Front office' | 'Bank account, TRY' | 'Outgoing'  | 'Movement type 1'         | 'Front office'     | ''                | 'USD'      | 'Reporting currency'           | 'No'                   |
+			| ''                                           | '19.02.2022 11:18:33' | '170'       | 'Main Company' | 'Front office' | 'Bank account, EUR' | 'Incoming'  | 'Movement type 1'         | 'Front office'     | ''                | 'EUR'      | 'en description is empty'      | 'No'                   |
+			| ''                                           | '19.02.2022 11:18:33' | '178,5'     | 'Main Company' | 'Front office' | 'Bank account, EUR' | 'Incoming'  | 'Movement type 1'         | 'Front office'     | ''                | 'USD'      | 'Reporting currency'           | 'No'                   |
+			| ''                                           | '19.02.2022 11:18:33' | '900'       | 'Main Company' | 'Front office' | 'Bank account, TRY' | 'Outgoing'  | 'Movement type 1'         | 'Front office'     | ''                | 'TRY'      | 'Local currency'               | 'No'                   |
+			| ''                                           | '19.02.2022 11:18:33' | '900'       | 'Main Company' | 'Front office' | 'Bank account, TRY' | 'Outgoing'  | 'Movement type 1'         | 'Front office'     | ''                | 'TRY'      | 'en description is empty'      | 'No'                   |
+			| ''                                           | '19.02.2022 11:18:33' | '900'       | 'Main Company' | 'Front office' | 'Bank account, EUR' | 'Incoming'  | 'Movement type 1'         | 'Front office'     | ''                | 'TRY'      | 'Local currency'               | 'No'                   |		
 		And I close all client application windows

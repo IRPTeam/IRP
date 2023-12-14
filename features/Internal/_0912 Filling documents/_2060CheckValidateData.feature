@@ -16,8 +16,6 @@ Background:
 	
 Scenario: _0206000 preparation (checks data)
 	When set True value to the constant
-	And I close TestClient session
-	Given I open new TestClient session or connect the existing one
 	* Load info
 		When Create information register Barcodes records
 		When Create catalog Companies objects (own Second company)
@@ -57,7 +55,6 @@ Scenario: _0206000 preparation (checks data)
 		When Create catalog PlanningPeriods objects
 		When create items for work order
 		When Create catalog BillOfMaterials objects
-		When update ItemKeys
 		When Create catalog ItemKeys objects (serial lot numbers)
 		When Create catalog ItemTypes objects (serial lot numbers)
 		When Create catalog Items objects (serial lot numbers)

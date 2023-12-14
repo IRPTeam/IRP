@@ -20,8 +20,6 @@ Scenario: _0205001 preparation (commands)
 	When set True value to the constant Use accounting
 	When set True value to the constant Use salary
 	When set True value to the constant Use commission trading
-	And I close TestClient session
-	Given I open new TestClient session or connect the existing one
 	* Load info
 		When Create information register Barcodes records
 		When Create catalog Companies objects (own Second company)
@@ -53,7 +51,6 @@ Scenario: _0205001 preparation (commands)
 		When Create information register PricesByItemKeys records
 		When Create catalog IntegrationSettings objects
 		When Create information register CurrencyRates records
-		When update ItemKeys
 		When Create information register Taxes records (VAT)
 	* Add test plugin
 		* Open form to add plugin
@@ -197,6 +194,7 @@ Scenario: _0205001 preparation (commands)
 				| "Description"     |
 				| "VAExtension"     |
 			When add VAExtension
+
 
 Scenario: _02050011 check preparation
 	When check preparation
@@ -5380,6 +5378,3 @@ Scenario: _010054 add test command to the list of documents EmployeeSickLeave
 			Then I wait that in user messages the "Success client" substring will appear in 10 seconds
 			Then I wait that in user messages the "Success server" substring will appear in 10 seconds
 		And I close all client application windows
-
-Scenario: _999999 close TestClient session
-	And I close TestClient session

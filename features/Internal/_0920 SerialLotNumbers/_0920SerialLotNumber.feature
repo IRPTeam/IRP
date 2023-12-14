@@ -21,8 +21,6 @@ Background:
 
 Scenario: _092000 preparation (SerialLotNumbers)
 	When set True value to the constant
-	And I close TestClient session
-	Given I open new TestClient session or connect the existing one
 	* Load info
 		When Create catalog PaymentTypes objects
 		When Create catalog BusinessUnits objects
@@ -60,7 +58,6 @@ Scenario: _092000 preparation (SerialLotNumbers)
 		When Create information register Barcodes records (serial lot numbers)
 		When Create catalog SerialLotNumbers objects (serial lot numbers)
 		When Create catalog Items objects (serial lot numbers)
-		When update ItemKeys
 		When Create document PurchaseInvoice objects (for stock remaining control)
 		When Create catalog SerialLotNumbers objects
 		When Create catalog ExpenseAndRevenueTypes objects

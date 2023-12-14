@@ -16,8 +16,6 @@ Background:
 
 Scenario: _2060001 preparation
 	When set True value to the constant
-	And I close TestClient session
-	Given I open new TestClient session or connect the existing one
 	* Load info
 		When Create information register Barcodes records
 		When Create catalog Companies objects (own Second company)
@@ -62,11 +60,12 @@ Scenario: _2060001 preparation
 		When Create information register Barcodes records (serial lot numbers)
 		When Create catalog SerialLotNumbers objects (serial lot numbers)
 		When Create catalog Items objects (serial lot numbers)
-		When update ItemKeys
 		When Create information register Taxes records (VAT)
 		When Create catalog BusinessUnits objects
 		When Create catalog ExpenseAndRevenueTypes objects
 	When Create Item with SerialLotNumbers (Phone)
+	And I close TestClient session
+	Given I open new TestClient session or connect the existing one
 	When Create document Purchase order objects (with SerialLotNumber)
 	When Create document PurchaseInvoice objects (linked)
 	And I execute 1C:Enterprise script at server
@@ -188,6 +187,7 @@ Scenario: _2060001 preparation
 	And I execute 1C:Enterprise script at server
 			| "Documents.ShipmentConfirmation.FindByNumber(1052).GetObject().Write(DocumentWriteMode.Write);" |
 			| "Documents.ShipmentConfirmation.FindByNumber(1052).GetObject().Write(DocumentWriteMode.Posting);" |
+	And Delay 5
 	When Create SO and SC for link
 	And I execute 1C:Enterprise script at server
 			| "Documents.SalesOrder.FindByNumber(1053).GetObject().Write(DocumentWriteMode.Write);"|
@@ -217,6 +217,7 @@ Scenario: _2060001 preparation
 			| "Documents.StockAdjustmentAsWriteOff.FindByNumber(152).GetObject().Write(DocumentWriteMode.Write);" |
 			| "Documents.StockAdjustmentAsWriteOff.FindByNumber(152).GetObject().Write(DocumentWriteMode.Posting);" |
 	When Create catalog CancelReturnReasons objects
+
 		
 Scenario: _20600011 check preparation
 	When check preparation

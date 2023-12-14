@@ -1,4 +1,4 @@
-#language: en
+﻿#language: en
 @tree
 @Positive
 @Forms
@@ -31,7 +31,6 @@ Scenario: _0202200 preparation (label processing)
 		When Create catalog PriceTypes objects
 		When Create information register PricesByItemKeys records
 		When Create information register Barcodes records
-		When update ItemKeys
 		When add Plugin for print label
 
 Scenario: _02022001 check preparation
@@ -384,8 +383,3 @@ Scenario: _0202204 check price type change in the label printing processing
 			| 'No'      | '2202283713'   | 'Dress'      | 'Basic Price Types'         | 'S/Yellow'    | 'pcs'    | 'Auto'           | '2'          | '550,00'   | 'Label 1'     |
 			| 'No'      | ''             | 'Trousers'   | 'Basic Price without VAT'   | '36/Yellow'   | 'pcs'    | ''               | '1'          | '338,98'   | 'Label 2'     |
 		And I close all client application windows
-		
-	
-
-Scenario: _999999 close TestClient session
-	And I close TestClient session

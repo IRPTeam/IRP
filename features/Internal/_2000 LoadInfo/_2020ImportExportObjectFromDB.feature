@@ -16,8 +16,6 @@ Background:
 Scenario: _020200 preparation (Import/Export object from DB)
 	When set True value to the constant
 	When set True value to the constant Use commission trading 
-	And I close TestClient session
-	Given I open new TestClient session or connect the existing one
 	* Load info
 		When Create catalog ExpenseAndRevenueTypes objects
 		When Create catalog BusinessUnits objects
@@ -60,7 +58,6 @@ Scenario: _020200 preparation (Import/Export object from DB)
 		When Create information register Barcodes records (serial lot numbers)
 		When Create catalog FileStorageVolumes objects
 		When Create catalog Files objects
-		When update ItemKeys
 		When Create information register Taxes records (VAT)
 	* Load SI
 		When Create document SalesInvoice objects (import and export)

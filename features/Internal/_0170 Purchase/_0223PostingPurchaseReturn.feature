@@ -18,8 +18,6 @@ Background:
 
 Scenario: _022300 preparation
 	When set True value to the constant
-	And I close TestClient session
-	Given I open new TestClient session or connect the existing one
 	* Load info
 		When Create catalog ObjectStatuses objects
 		When Create catalog ItemKeys objects
@@ -46,7 +44,6 @@ Scenario: _022300 preparation
 		When Create information register TaxSettings records
 		When Create catalog IntegrationSettings objects
 		When Create information register CurrencyRates records
-		When update ItemKeys
 		When Create information register Taxes records (VAT)
 	* Check or create PurchaseOrder017001
 		Given I open hyperlink "e1cib/list/Document.PurchaseOrder"
@@ -544,6 +541,3 @@ Scenario: _300512 check Use GR filling from store when create PR based on PI
 			| 'Dress'   | 'L/Green'    | 'Yes'                          |
 		And I close all client application windows
 		
-
-Scenario: _999999 close TestClient session
-	And I close TestClient session

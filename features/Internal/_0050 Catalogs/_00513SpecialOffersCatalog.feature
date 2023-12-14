@@ -16,8 +16,6 @@ Background:
 
 Scenario: _005031 filling in the "Special offers" catalog
 	When set True value to the constant
-	And I close TestClient session
-	Given I open new TestClient session or connect the existing one
 	* Opening a form and creating Special offers: Special Price
 		Given I open hyperlink "e1cib/list/Catalog.SpecialOffers"
 		And Delay 2

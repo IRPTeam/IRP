@@ -348,10 +348,3 @@ Scenario: _034510 check discount recalculation when change quantity in Retail re
 			And I input "4 950,00" text in "Amount" field of "Payments" table
 			And I finish line editing in "Payments" table
 		And I click the button named "FormPostAndClose"				
-			
-						
-			
-
-
-Scenario: _999999 close TestClient session
-	And I close TestClient session

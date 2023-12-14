@@ -17,8 +17,6 @@ Background:
 
 Scenario: _005016 filling in the "AccessProfiles" catalog
 	When set True value to the constant
-	And I close TestClient session
-	Given I open new TestClient session or connect the existing one
 	* Opening the form for filling in AccessProfiles
 		Given I open hyperlink "e1cib/list/Catalog.AccessProfiles"
 		And Delay 2

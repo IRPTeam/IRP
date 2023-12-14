@@ -15,8 +15,6 @@ Background:
 	
 Scenario: _0202100 preparation (filling expence, revenue)
 	When set True value to the constant
-	And I close TestClient session
-	Given I open new TestClient session or connect the existing one
 	* Load info
 		When Create information register Barcodes records
 		When Create catalog Companies objects (own Second company)
@@ -52,7 +50,6 @@ Scenario: _0202100 preparation (filling expence, revenue)
 		When Create catalog Companies objects (second company Ferron BP)
 		When Create catalog PartnersBankAccounts objects
 		When Create catalog PlanningPeriods objects
-		When update ItemKeys
 		When Create catalog PartnerItems objects
 		When Create information register Taxes records (VAT)
 		When Create catalog CancelReturnReasons objects
@@ -284,7 +281,3 @@ Scenario: _0202125 filling expence type in the PR (from item key)
 	* Check in tne PR
 		When check filling expense type (from item key)
 	And I close all client application windows
-
-
-Scenario: _999999 close TestClient session
-	And I close TestClient session

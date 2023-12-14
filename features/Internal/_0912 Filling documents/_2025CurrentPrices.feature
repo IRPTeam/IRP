@@ -15,8 +15,6 @@ Background:
 
 Scenario: _01202501 preparation
 	When set True value to the constant
-	And I close TestClient session
-	Given I open new TestClient session or connect the existing one
 	* Create Price List (current date)
 		Given I open hyperlink "e1cib/list/Document.PriceList"
 		And I click the button named "FormCreate"
@@ -185,7 +183,3 @@ Scenario: _01202504 check current price in the Purchase invoice
 		| 'Item'        | 'Price'  | 'Item key'  | 'Price type'     | 'Quantity'   |
 		| 'High shoes'  | '50,00'  | '37/19SD'   | 'Current Price'  | '1,000'      |
 		And I close all client application windows
-
-
-Scenario: _999999 close TestClient session
-	And I close TestClient session

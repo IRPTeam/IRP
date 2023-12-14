@@ -16,8 +16,6 @@ Background:
 
 Scenario: _602700 preparation (data history)
 	When set True value to the constant
-	And I close TestClient session
-	Given I open new TestClient session or connect the existing one
 	* Load info
 		When Create catalog ObjectStatuses objects
 		When Create catalog ItemKeys objects
@@ -47,9 +45,10 @@ Scenario: _602700 preparation (data history)
 		When Create catalog IntegrationSettings objects
 		When Create information register CurrencyRates records
 		When Create information register Barcodes records
-		When update ItemKeys
 		When Create information register Taxes records (VAT)
 	When Create document PurchaseOrder objects (check movements, GR before PI, not Use receipt sheduling)
+	And I close TestClient session
+	Given I open new TestClient session or connect the existing one
 
 Scenario: _6027001 check preparation
 	When check preparation 

@@ -13,8 +13,6 @@ Background:
 
 Scenario: _350000 preparation for check a bunch of additional details in item type and their display in the set for item key / price key
     When set True value to the constant
-    And I close TestClient session
-    Given I open new TestClient session or connect the existing one
     When Create catalog InterfaceGroups objects
     * Open Add attribute and property sets for item key
         Given I open hyperlink "e1cib/list/Catalog.AddAttributeAndPropertySets"

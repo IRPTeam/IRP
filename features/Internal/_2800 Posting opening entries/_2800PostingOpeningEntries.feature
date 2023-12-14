@@ -21,8 +21,6 @@ Background:
 Scenario: _400000 preparation (Opening entries)
 	When set True value to the constant
 	When set True value to the constant Use salary 
-	And I close TestClient session
-	Given I open new TestClient session or connect the existing one
 	* Load info
 		When Create information register Barcodes records
 		When Create catalog Companies objects (own Second company)
@@ -57,7 +55,6 @@ Scenario: _400000 preparation (Opening entries)
 		When Create information register CurrencyRates records
 		When Create catalog ExpenseAndRevenueTypes objects
 		When Create catalog RetailCustomers objects (check POS)
-		When update ItemKeys
 		When Create information register Taxes records (VAT)
 
 	
@@ -1551,9 +1548,3 @@ Scenario: _400020 create OpeningEntry (account payble other and account receivab
 		And "List" table contains lines
 			| 'Number'                          |
 			| '$$NumberOpeningEntry400020$$'    |				
-
-
-
-
-Scenario: _999999 close TestClient session
-	And I close TestClient session

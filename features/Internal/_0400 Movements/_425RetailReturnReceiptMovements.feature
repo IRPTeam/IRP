@@ -18,8 +18,6 @@ Background:
 
 Scenario: _042500 preparation (RetailReturnReceipt)
 	When set True value to the constant
-	And I close TestClient session
-	Given I open new TestClient session or connect the existing one
 	* Load info
 		When Create information register Barcodes records
 		When Create catalog Companies objects (own Second company)
@@ -62,7 +60,6 @@ Scenario: _042500 preparation (RetailReturnReceipt)
 		When Create information register Barcodes records (serial lot numbers)
 		When Create catalog CashAccounts objects (POS)
 		When Create catalog CashAccounts objects
-		When update ItemKeys
 		When Create Document discount
 		When Create catalog Items objects (commission trade)
 	* Add plugin for discount

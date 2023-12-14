@@ -18,8 +18,6 @@ Background:
 
 Scenario: _090200 preparation (display of items marked for deletion)
 	When set True value to the constant
-	And I close TestClient session
-	Given I open new TestClient session or connect the existing one
 	* Load info
 		When Create catalog ItemKeys objects
 		When Create catalog ItemTypes objects
@@ -29,7 +27,7 @@ Scenario: _090200 preparation (display of items marked for deletion)
 		When Create chart of characteristic types AddAttributeAndProperty objects
 		When Create catalog AddAttributeAndPropertySets objects
 		When Create catalog AddAttributeAndPropertyValues objects
-		When update ItemKeys
+
 
 Scenario: _0902001 check preparation
 	When check preparation	

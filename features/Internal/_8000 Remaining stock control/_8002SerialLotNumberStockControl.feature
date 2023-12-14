@@ -16,8 +16,6 @@ Background:
 
 Scenario:_800020 preparation (remaining stock control)
 	When set True value to the constant
-	And I close TestClient session
-	Given I open new TestClient session or connect the existing one
 	* Load info
 		When Create catalog CancelReturnReasons objects
 		When Create information register Barcodes records
@@ -52,7 +50,6 @@ Scenario:_800020 preparation (remaining stock control)
 		When Create catalog BusinessUnits objects
 		When Create catalog ExpenseAndRevenueTypes objects
 		When Create catalog Companies objects (second company Ferron BP)
-		When update ItemKeys
 		When Create information register Taxes records (VAT)	
 	* Stock remaining settings
 		When Create CustomUserSettings objects (CheckSerialLotNumber balance)

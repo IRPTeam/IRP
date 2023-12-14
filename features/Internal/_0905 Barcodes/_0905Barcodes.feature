@@ -17,8 +17,6 @@ Background:
 
 Scenario: _090500 preparation (Barcodes)
 	When set True value to the constant
-	And I close TestClient session
-	Given I open new TestClient session or connect the existing one
 	* Load info
 		When Create catalog ItemKeys objects
 		When Create catalog ItemTypes objects
@@ -28,7 +26,7 @@ Scenario: _090500 preparation (Barcodes)
 		When Create chart of characteristic types AddAttributeAndProperty objects
 		When Create catalog AddAttributeAndPropertySets objects
 		When Create catalog AddAttributeAndPropertyValues objects
-		When update ItemKeys
+
 	
 Scenario: _0905001 check preparation
 	When check preparation
@@ -183,11 +181,3 @@ Scenario: _090503 copy barcode
 		Then the form attribute named "Unit" became equal to "pcs"
 		Then the form attribute named "Presentation" became equal to "2202283713"
 		And I close all client application windows
-				
-				
-	
-
-Scenario: _999999 close TestClient session
-	And I close TestClient session
-
-

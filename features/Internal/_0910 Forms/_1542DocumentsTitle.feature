@@ -1,4 +1,4 @@
-#language: en
+﻿#language: en
 @tree
 @Positive
 @Forms
@@ -59,7 +59,6 @@ Scenario: _020200 preparation
 		When Create catalog IntegrationSettings objects
 		When Create information register CurrencyRates records
 		When Create catalog CashAccounts objects
-		When update ItemKeys
 		When Create information register Taxes records (VAT)	
 	* Check or create create SalesInvoice024016 (Shipment confirmation does not used)
 		Given I open hyperlink "e1cib/list/Document.SalesInvoice"
@@ -552,6 +551,3 @@ Scenario: _023131 check the display of the header of the collapsible group in Re
 								| 'And I click Select button of  "Store" field'         |
 	And I click the hyperlink named "DecorationGroupTitleCollapsedPicture"
 	And I close all client application windows
-
-Scenario: _999999 close TestClient session
-	And I close TestClient session

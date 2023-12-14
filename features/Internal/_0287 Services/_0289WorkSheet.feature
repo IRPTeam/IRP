@@ -19,8 +19,6 @@ Background:
 
 Scenario: _029300 preparation (work sheet)
 	When set True value to the constant
-	And I close TestClient session
-	Given I open new TestClient session or connect the existing one
 	* Load info
 		When Create catalog ItemTypes objects (Furniture)	
 		When Create catalog Items objects (Table)
@@ -49,7 +47,6 @@ Scenario: _029300 preparation (work sheet)
 		When Create catalog PaymentTypes objects 
 		When create items for work order
 		When Create catalog BillOfMaterials objects
-		When update ItemKeys
 		When Create information register Taxes records (VAT)
 	* Price list
 		When Create document PriceList objects (for works)

@@ -18,8 +18,6 @@ Background:
 
 Scenario: _005032 filling in the "Stores" catalog
 	When set True value to the constant
-	And I close TestClient session
-	Given I open new TestClient session or connect the existing one
 	* Opening a form for creating Stores
 		Given I open hyperlink "e1cib/list/Catalog.Stores"
 	* Create Store 01

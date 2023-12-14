@@ -19,8 +19,6 @@ Background:
 	
 Scenario: _060200 preparation
 	When set True value to the constant
-	And I close TestClient session
-	Given I open new TestClient session or connect the existing one
 	* Load info
 		When Create catalog ObjectStatuses objects
 		When Create catalog ItemKeys objects
@@ -49,7 +47,6 @@ Scenario: _060200 preparation
 		When Create catalog IntegrationSettings objects
 		When Create information register CurrencyRates records
 		When Create catalog CashAccounts objects
-		When update ItemKeys
 		When Create information register Taxes records (VAT)
 		When Create catalog ExpenseAndRevenueTypes objects
 		When Create catalog Countries objects
@@ -433,6 +430,3 @@ Scenario: _060208 create Bank payment (partner term with Ap details by partner t
 			| ''                                         | 'Expense'       | '*'        | '11 000'      | 'Main Company'   | '*'        | 'TRY'                            | 'TRY'        | 'TRY'                    | 'Company Ferron BP'   | 'Partner Ferron 1'   | 'Vendor Ferron 1'   | ''        | ''        | 'No'                     | ''                            |
 			| ''                                         | 'Expense'       | '*'        | '11 000'      | 'Main Company'   | '*'        | 'en description is empty'        | 'TRY'        | 'TRY'                    | 'Company Ferron BP'   | 'Partner Ferron 1'   | 'Vendor Ferron 1'   | ''        | ''        | 'No'                     | ''                            |
 		And I close all client application windows
-
-Scenario: _999999 close TestClient session
-	And I close TestClient session

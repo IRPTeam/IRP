@@ -13,8 +13,6 @@ Background:
 
 Scenario: _3001000 preparation
 	When set True value to the constant
-	And I close TestClient session
-	Given I open new TestClient session or connect the existing one
 	* Load info
 		When Create catalog ObjectStatuses objects
 		When Create catalog ItemKeys objects
@@ -40,7 +38,6 @@ Scenario: _3001000 preparation
 		When Create information register PricesByItemKeys records
 		When Create catalog IntegrationSettings objects
 		When Create information register CurrencyRates records
-		When update ItemKeys
 	* Check or create Purchase invoice 30010001
 		Given I open hyperlink "e1cib/list/Document.PurchaseInvoice"
 		If "List" table does not contain lines Then

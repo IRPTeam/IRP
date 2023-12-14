@@ -12,8 +12,6 @@ Background:
 
 Scenario: 950000 preparation (role Full access only read)
 	When set True value to the constant
-	And I close TestClient session
-	Given I open new TestClient session or connect the existing one
 	When Create catalog AccessGroups objects
 	When Create catalog AccessProfiles objects
 	When Create catalog Agreements objects
@@ -78,7 +76,6 @@ Scenario: 950000 preparation (role Full access only read)
 	When Create information register UserSettings records (Retail document)
 	When Create catalog ItemKeys objects (Table)
 	When Create catalog Items objects (Table)
-	When update ItemKeys
 	When Create information register UserSettings records
 	When Create catalog SpecialOfferRules objects
 	When Create catalog SpecialOfferTypes objects

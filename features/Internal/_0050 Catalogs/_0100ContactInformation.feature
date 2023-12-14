@@ -22,8 +22,6 @@ Background:
 
 Scenario: _010004 create Contact info Type - Addresses
 	When set True value to the constant
-	And I close TestClient session
-	Given I open new TestClient session or connect the existing one
 	* Preparation
 		When Create catalog Countries objects
 	* Add Plugin sessing for entering addresses

@@ -17,8 +17,6 @@ Background:
 
 Scenario: _150000 preparation
 	When set True value to the constant
-	And I close TestClient session
-	Given I open new TestClient session or connect the existing one
 	* Load info
 		When Create catalog ItemKeys objects
 		When Create catalog ItemTypes objects
@@ -30,7 +28,6 @@ Scenario: _150000 preparation
 		When Create catalog AddAttributeAndPropertySets objects
 		When Create catalog AddAttributeAndPropertyValues objects
 		When  Create catalog Currencies objects
-		When update ItemKeys
 	* Select in Item type properties that will affect the price
 		* For item type Clothes
 			Given I open hyperlink "e1cib/list/Catalog.ItemTypes"

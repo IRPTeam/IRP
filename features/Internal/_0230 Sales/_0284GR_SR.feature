@@ -13,8 +13,6 @@ Background:
 
 Scenario: _028400 preparation (GR-SR)
 	When set True value to the constant
-	And I close TestClient session
-	Given I open new TestClient session or connect the existing one
 	* Load info
 		When Create catalog ObjectStatuses objects
 		When Create catalog ItemKeys objects
@@ -42,7 +40,6 @@ Scenario: _028400 preparation (GR-SR)
 		When Create information register PricesByItemKeys records
 		When Create catalog IntegrationSettings objects
 		When Create information register CurrencyRates records
-		When update ItemKeys
 		When Create information register Taxes records (VAT)
 		When Create catalog Partners objects (Kalipso)
 		When Create catalog BusinessUnits objects

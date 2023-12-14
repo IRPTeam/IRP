@@ -15,8 +15,6 @@ Background:
 
 Scenario: _1003000 preparation (customers advances closing)
 	When set True value to the constant
-	And I close TestClient session
-	Given I open new TestClient session or connect the existing one
 	* Load info
 		When Create information register Barcodes records
 		When Create catalog Companies objects (own Second company)
@@ -49,7 +47,6 @@ Scenario: _1003000 preparation (customers advances closing)
 		When Create catalog ExpenseAndRevenueTypes objects
 		When Create catalog IntegrationSettings objects
 		When Create information register CurrencyRates records
-		When update ItemKeys
 		When Create information register Taxes records (VAT)
 	* Load documents
 		When Create document BankReceipt objects (advance)

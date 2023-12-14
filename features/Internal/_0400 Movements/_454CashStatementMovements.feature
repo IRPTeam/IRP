@@ -17,8 +17,6 @@ Background:
 
 Scenario: _045400 preparation (CashStatement)
 	When set True value to the constant
-	And I close TestClient session
-	Given I open new TestClient session or connect the existing one
 	* Load info
 		When Create information register Barcodes records
 		When Create catalog Companies objects (own Second company)
@@ -60,7 +58,6 @@ Scenario: _045400 preparation (CashStatement)
 		When Create information register Barcodes records (serial lot numbers)
 		When Create catalog SerialLotNumbers objects (serial lot numbers)
 		When Create information register Barcodes records (serial lot numbers)
-		When update ItemKeys
 		When Create catalog BankTerms objects
 		When Create catalog PaymentTerminals objects
 		When Create catalog PaymentTypes objects

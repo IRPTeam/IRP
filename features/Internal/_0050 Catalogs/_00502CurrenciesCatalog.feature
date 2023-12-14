@@ -18,8 +18,6 @@ Background:
 
 Scenario: _005011 filling in the "Currencies" catalog
 	When set True value to the constant
-	And I close TestClient session
-	Given I open new TestClient session or connect the existing one
 	* Open Currency creation form
 		Given I open hyperlink "e1cib/list/Catalog.Currencies"
 		And I click the button named "FormCreate"

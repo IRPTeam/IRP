@@ -5,7 +5,7 @@ Function PointOfSale_AdditionalSettings_DisableChangePrice(val User) Export
 	Value = GetUserSettings(User, New Structure("MetadataObject",
 		"DataProcessor.PointOfSale.AdditionalSettings.DisableChangePrice"));
 	If Value.Count() Then
-		Return Value[0].Value;
+		Return Not Value[0].Value;
 	EndIf;
 	Return True;
 EndFunction

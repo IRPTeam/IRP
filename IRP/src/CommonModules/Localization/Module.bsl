@@ -1347,6 +1347,7 @@ Function Strings(Lang) Export
 	Strings.Insert("Add_Setiings_009", NStr("en = 'Use reverse basises tree'", Lang));
 	Strings.Insert("Add_Setiings_010", NStr("en = 'Linked documents'", Lang));
 	Strings.Insert("Add_Setiings_011", NStr("en = 'Use reverse tree'", Lang));
+	Strings.Insert("Add_Setiings_012", NStr("en = 'Enable - Change price type'", Lang));
 #EndRegion
 
 #Region Mobile

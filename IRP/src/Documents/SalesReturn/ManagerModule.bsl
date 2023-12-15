@@ -14,7 +14,9 @@ Function PostingGetDocumentDataTables(Ref, Cancel, PostingMode, Parameters, AddI
 	QueryArray = GetQueryTextsSecondaryTables();
 	Parameters.Insert("QueryParameters", GetAdditionalQueryParameters(Ref));
 	PostingServer.ExecuteQuery(Ref, QueryArray, Parameters);
-
+	
+	DocumentsServer.SalesBySerialLotNumbers(Parameters);
+	
 	Query = New Query;
 	Query.Text =
 	"SELECT
@@ -634,29 +636,54 @@ Function R9010B_SourceOfOriginStock()
 EndFunction
 
 Function R2001T_Sales()
-	Return "SELECT
-		   |	-ItemList.Quantity AS Quantity,
-		   |	-ItemList.Amount AS Amount,
-		   |	-ItemList.NetAmount AS NetAmount,
-		   |	-ItemList.OffersAmount AS OffersAmount,
-		   |	ItemList.SalesInvoice AS Invoice,
-		   |	*
-		   |INTO R2001T_Sales
-		   |FROM
-		   |	ItemList AS ItemList
-		   |WHERE
-		   |	ItemList.IsReturnFromCustomer";
+	Return 
+		"SELECT
+		|	ItemList.Period,
+		|	ItemList.Company,
+		|	ItemList.Branch,
+		|	ItemList.Currency,
+		|	ItemList.SalesInvoice AS Invoice,
+		|	ItemList.ItemKey,
+		|	ItemList.RowKey,
+		|	ItemList.SalesPerson,
+		|	SalesBySerialLotNumbers.SerialLotNumber,
+		|	-SalesBySerialLotNumbers.Quantity AS Quantity,
+		|	-SalesBySerialLotNumbers.Amount AS Amount,
+		|	-SalesBySerialLotNumbers.NetAmount AS NetAmount,
+		|	-SalesBySerialLotNumbers.OffersAmount AS OffersAmount
+		|INTO R2001T_Sales
+		|FROM
+		|	ItemList AS ItemList
+		|		LEFT JOIN SalesBySerialLotNumbers
+		|		ON ItemList.Key = SalesBySerialLotNumbers.Key
+		|WHERE
+		|	ItemList.IsReturnFromCustomer";
 EndFunction
 
 Function R2002T_SalesReturns()
-	Return "SELECT
-		   |	ItemList.SalesInvoice AS Invoice,
-		   |	*
-		   |INTO R2002T_SalesReturns
-		   |FROM
-		   |	ItemList AS ItemList
-		   |WHERE
-		   |	ItemList.IsReturnFromCustomer";
+	Return 
+		"SELECT
+		|	ItemList.Period,
+		|	ItemList.Company,
+		|	ItemList.Branch,
+		|	ItemList.Currency,
+		|	ItemList.SalesInvoice AS Invoice,
+		|	ItemList.ItemKey,
+		|	ItemList.RowKey,
+		|	ItemList.ReturnReason,
+		|	ItemList.SalesPerson,
+		|	SalesBySerialLotNumbers.SerialLotNumber,
+		|	-SalesBySerialLotNumbers.Quantity AS Quantity,
+		|	-SalesBySerialLotNumbers.Amount AS Amount,
+		|	-SalesBySerialLotNumbers.NetAmount AS NetAmount,
+		|	-SalesBySerialLotNumbers.OffersAmount AS OffersAmount
+		|INTO R2002T_SalesReturns
+		|FROM
+		|	ItemList AS ItemList
+		|		LEFT JOIN SalesBySerialLotNumbers
+		|		ON ItemList.Key = SalesBySerialLotNumbers.Key
+		|WHERE
+		|	ItemList.IsReturnFromCustomer";
 EndFunction
 
 Function R2005T_SalesSpecialOffers()

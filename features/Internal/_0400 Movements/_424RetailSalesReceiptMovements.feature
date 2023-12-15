@@ -808,7 +808,7 @@ Scenario: _0424286 check Retail sales receipt movements by the Register  "R2001 
 		Given I open hyperlink "e1cib/list/Document.RetailSalesReceipt"
 		And I go to line in "List" table
 			| 'Number'    |
-			| '1315'       |
+			| '1 315'     |
 	* Check movements by the Register  "R2001 Sales"
 		And I click "Registrations report" button
 		And I select "R2001 Sales" exact value from "Register" drop-down list

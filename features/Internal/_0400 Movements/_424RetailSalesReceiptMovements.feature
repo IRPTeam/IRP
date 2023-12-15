@@ -61,6 +61,7 @@ Scenario: _042400 preparation (RetailSalesReceipt)
 		When Create catalog ItemTypes objects (serial lot numbers)
 		When Create catalog Items objects (serial lot numbers)
 		When Create catalog SerialLotNumbers objects (serial lot numbers)
+		When Create catalog SerialLotNumbers objects
 		When Create PaymentType (advance)
 		When Create information register Barcodes records (serial lot numbers)
 		When Create catalog SerialLotNumbers objects (serial lot numbers)

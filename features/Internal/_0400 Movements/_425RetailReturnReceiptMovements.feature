@@ -58,6 +58,7 @@ Scenario: _042500 preparation (RetailReturnReceipt)
 		When Create catalog Items objects (serial lot numbers)
 		When Create catalog SerialLotNumbers objects (serial lot numbers)
 		When Create information register Barcodes records (serial lot numbers)
+		When Create catalog SerialLotNumbers objects
 		When Create catalog SerialLotNumbers objects (serial lot numbers)
 		When Create information register Barcodes records (serial lot numbers)
 		When Create catalog CashAccounts objects (POS)
@@ -876,7 +877,7 @@ Scenario: _042540 check Retail return receipt movements by the Register  "R2001 
 		And I close all client application windows
 
 
-Scenario: _042540 check Retail return receipt movements by the Register  "R2002 Sales returns" (serial lot numbers)
+Scenario: _042541 check Retail return receipt movements by the Register  "R2002 Sales returns" (serial lot numbers)
 		And I close all client application windows
 	* Select Retail return receipt
 		Given I open hyperlink "e1cib/list/Document.RetailReturnReceipt"

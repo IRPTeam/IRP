@@ -116,6 +116,69 @@ Async Function PrintXReport(ConsolidatedRetailSales) Export
 	Return PrintXReportSettings;
 EndFunction
 
+// Process correction check.
+//
+// Parameters:
+//  ConsolidatedRetailSales - DocumentRef.ConsolidatedRetailSales -
+//  DataSource - DocumentRef.RetailReceiptCorrection -
+//
+// Returns:
+//  See EquipmentFiscalPrinterAPIClient.ProcessCheckSettings
+Async Function ProcessCorrectionCheck(ConsolidatedRetailSales, DataSource) Export
+	ValidateProcessCheck(DataSource);
+	
+	ProcessCheckSettings = EquipmentFiscalPrinterAPIClient.ProcessCheckSettings();
+	ProcessCheckSettings.Info.Document = DataSource;
+	CRS = CommonFunctionsServer.GetAttributesFromRef(ConsolidatedRetailSales, "FiscalPrinter, Author, Ref, Status");
+	If CRS.FiscalPrinter.isEmpty() Then
+		ProcessCheckSettings.Info.Success = True;
+		Return ProcessCheckSettings;
+	EndIf;
+
+	InputParameters = EquipmentFiscalPrinterAPIClient.InputParameters();
+	EquipmentFiscalPrinterServer.FillInputParameters(ConsolidatedRetailSales, InputParameters);
+
+	CurrentStatus = Await GetCurrentStatus(CRS, InputParameters, 2);
+	If Not CurrentStatus.Info.Success Then
+		Return CurrentStatus;
+	EndIf;
+
+	CheckPackage = EquipmentFiscalPrinterAPIClient.CheckPackage();
+	EquipmentFiscalPrinterServer.FillData(DataSource, CheckPackage);
+	
+	If TypeOf(DataSource) = Type("DocumentRef.RetailReceiptCorrection") Then
+		BasisDocument = CommonFunctionsServer.GetRefAttribute(DataSource,"BasisDocument");
+		
+		isReverse = Not TypeOf(BasisDocument) = Type("DocumentRef.RetailReceiptCorrection");
+		If isReverse Then
+			isReturn = Not TypeOf(BasisDocument) = Type("DocumentRef.RetailReturnReceipt");
+		Else
+			isReturn = TypeOf(CommonFunctionsServer.GetRefAttribute(BasisDocument,"BasisDocument")) = Type("DocumentRef.RetailReturnReceipt");
+		EndIf;
+		
+		
+		CodeStringList = EquipmentFiscalPrinterServer.GetMarkingCode(DataSource);
+	
+		If Not CodeStringList.Count() = 0 Then
+			CheckControlStrings = Await CheckControlStrings(DataSource, CRS, isReturn, CodeStringList);
+	
+			If Not CheckControlStrings.Info.Success Then
+				Return CheckControlStrings;
+			EndIf;
+		EndIf;
+	EndIf;			
+			
+	ProcessCheckSettings.In.CheckPackage = CheckPackage;
+	If Await EquipmentFiscalPrinterAPIClient.ProcessCorrectionCheck(CRS.FiscalPrinter, ProcessCheckSettings) Then
+		DataPresentation = String(ProcessCheckSettings.Out.DocumentOutputParameters.ShiftNumber) + " " + ProcessCheckSettings.Out.DocumentOutputParameters.DateTime;
+		EquipmentFiscalPrinterServer.SetFiscalStatus(DataSource, PredefinedValue("Enum.DocumentFiscalStatuses.Printed"), ProcessCheckSettings, DataPresentation);
+	Else
+		EquipmentFiscalPrinterServer.SetFiscalStatus(DataSource, PredefinedValue("Enum.DocumentFiscalStatuses.FiscalReturnedError"), ProcessCheckSettings);
+	EndIf;
+
+	Return ProcessCheckSettings;
+EndFunction
+
 // Process check.
 //
 // Parameters:
@@ -179,13 +242,20 @@ Procedure ValidateProcessCheck(DataSource)
 	EndIf;
 	
 	If TypeOf(DataSource) = Type("DocumentRef.RetailSalesReceipt")
-		OR TypeOf(DataSource) = Type("DocumentRef.RetailReturnReceipt") Then
+		OR TypeOf(DataSource) = Type("DocumentRef.RetailReturnReceipt")
+		OR TypeOf(DataSource) = Type("DocumentRef.RetailReceiptCorrection")
+		 Then
 	
-		StatusData = CommonFunctionsServer.GetAttributesFromRef(DataSource, "StatusType, Posted");
+		StatusData = CommonFunctionsServer.GetAttributesFromRef(DataSource, "StatusType, Posted, DeletionMark");
 		
 		If Not StatusData.StatusType = PredefinedValue("Enum.RetailReceiptStatusTypes.Completed") Then
 			Raise R().EqFP_CanPrintOnlyComplete;
 		EndIf;
+		
+		If TypeOf(DataSource) = Type("DocumentRef.RetailReceiptCorrection") Then
+			StatusData.Posted = Not StatusData.DeletionMark;
+		EndIf;
+		
 	Else
 		StatusData = CommonFunctionsServer.GetAttributesFromRef(DataSource, "Posted");
 	EndIf;

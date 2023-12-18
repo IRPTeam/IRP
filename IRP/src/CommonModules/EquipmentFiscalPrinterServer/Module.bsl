@@ -31,20 +31,48 @@ Procedure FillCheckPackageByRetailReceipt(Val SourceData, CheckPackage) Export
 	isCorrection = TypeOf(SourceData.Ref) = Type("DocumentRef.RetailReceiptCorrection");
 	
 	If isCorrection Then
-		CorrectionRef = SourceData;
-		SourceData = CorrectionRef.BasisDocument;
+		
+		isReverse = Not TypeOf(SourceData.BasisDocument) = Type("DocumentRef.RetailReceiptCorrection");
+		DocumentWithCorrectionInfo = SourceData;
+		If isReverse Then
+			If TypeOf(SourceData.BasisDocument) = Type("DocumentRef.RetailSalesReceipt") Then
+				CheckPackage.Parameters.OperationType = 2;
+			Else
+				CheckPackage.Parameters.OperationType = 1;
+			EndIf;
+		Else
+			If TypeOf(SourceData.BasisDocument.BasisDocument) = Type("DocumentRef.RetailSalesReceipt") Then
+				CheckPackage.Parameters.OperationType = 1;
+			Else
+				CheckPackage.Parameters.OperationType = 2;
+			EndIf;
+			DocumentWithCorrectionInfo = SourceData.BasisDocument;
+		EndIf;
+		
+		CheckPackage.Parameters.CorrectionData.Type = DocumentWithCorrectionInfo.CorrectionType;
+		CheckPackage.Parameters.CorrectionData.Description = DocumentWithCorrectionInfo.CorrectionDescription;
+		CheckPackage.Parameters.CorrectionData.Date = DocumentWithCorrectionInfo.Date;
+		CheckPackage.Parameters.CorrectionData.Number = DocumentWithCorrectionInfo.NumberTaxAuthorityPrescription;
+		
+		If IsBlankString(CheckPackage.Parameters.CorrectionData.Number) Then
+			CheckPackage.Parameters.CorrectionData.Number = "0";
+		EndIf;
+		
+		If IsBlankString(CheckPackage.Parameters.CorrectionData.Description) Then
+			Raise "CorrectionDescription has to be filled.";
+		EndIf;
+		
 	Else
-		CheckPackage.CorrectionData = New Structure();		
+		CheckPackage.Parameters.CorrectionData = New Structure();
+		If TypeOf(SourceData.Ref) = Type("DocumentRef.RetailSalesReceipt") Then
+			CheckPackage.Parameters.OperationType = 1;
+		Else
+			CheckPackage.Parameters.OperationType = 2;
+		EndIf;		
 	EndIf;
-	
-	
-	FillInputParameters(SourceData, CheckPackage.Parameters);
 
-	If TypeOf(SourceData.Ref) = Type("DocumentRef.RetailSalesReceipt") Then
-		CheckPackage.Parameters.OperationType = 1;
-	Else
-		CheckPackage.Parameters.OperationType = 2;
-	EndIf;
+	FillInputParameters(SourceData, CheckPackage.Parameters);
+	
 	CheckPackage.Parameters.TaxationSystem = 0;	//TODO: TaxSystem choice
 
 	If Not SourceData.RetailCustomer.IsEmpty() Then

@@ -85,6 +85,7 @@
     <type>
       <types>DocumentRef.RetailSalesReceipt</types>
       <types>DocumentRef.RetailReturnReceipt</types>
+      <types>DocumentRef.RetailReceiptCorrection</types>
     </type>
     <minValue xsi:type="core:UndefinedValue"/>
     <maxValue xsi:type="core:UndefinedValue"/>
@@ -1613,6 +1614,7 @@
     <commandParameterType>
       <types>DocumentRef.RetailSalesReceipt</types>
       <types>DocumentRef.RetailReturnReceipt</types>
+      <types>DocumentRef.RetailReceiptCorrection</types>
     </commandParameterType>
     <representation>Auto</representation>
   </commands>

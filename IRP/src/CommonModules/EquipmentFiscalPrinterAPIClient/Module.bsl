@@ -871,7 +871,7 @@ Function CheckPackage() Export
 	CorrectionData = New Structure;
     CorrectionData.Insert("Type", 0);
     CorrectionData.Insert("Description", "");
-    CorrectionData.Insert("Datе", Date(1, 1, 1));
+    CorrectionData.Insert("Date", Date(1, 1, 1));
     CorrectionData.Insert("Number", "");
     Str.Parameters.Insert("CorrectionData", CorrectionData);
 

@@ -131,7 +131,7 @@ Scenario: _080005 create Bank receipt based on Incoming payment order
 		| 'Number'                                 |
 		| '$$NumberIncomingPaymentOrder080001$$'   |
 	* Create Bank receipt from Incoming Payment Order
-		And I click the button named "FormDocumentBankReceiptBankReceipt"
+		And I click the button named "FormDocumentBankReceiptGenerateBankReceipt"
 		And I activate "Total amount" field in "PaymentList" table
 		And I select current line in "PaymentList" table
 		And I input "250,00" text in "Total amount" field of "PaymentList" table
@@ -148,7 +148,7 @@ Scenario: _080005 create Bank receipt based on Incoming payment order
 		And I go to line in "List" table
 			| 'Number'                                  |
 			| '$$NumberIncomingPaymentOrder080001$$'    |
-		And I click the button named "FormDocumentBankReceiptBankReceipt"
+		And I click the button named "FormDocumentBankReceiptGenerateBankReceipt"
 		And I activate "Total amount" field in "PaymentList" table
 		And I select current line in "PaymentList" table
 		And I input "250,00" text in "Total amount" field of "PaymentList" table
@@ -240,7 +240,7 @@ Scenario: _080010 create Bank payment based on Outgoing payment order
 		| 'Number'                                 |
 		| '$$NumberOutgoingPaymentOrder080006$$'   |
 	* Create Bank payment from Outgoing payment order
-		And I click the button named "FormDocumentBankPaymentBankPayment"
+		And I click the button named "FormDocumentBankPaymentGenerateBankPayment"
 		And I activate "Total amount" field in "PaymentList" table
 		And I select current line in "PaymentList" table
 		And I input "250,00" text in "Total amount" field of "PaymentList" table
@@ -257,7 +257,7 @@ Scenario: _080010 create Bank payment based on Outgoing payment order
 		And I go to line in "List" table
 			| 'Number'                                  |
 			| '$$NumberOutgoingPaymentOrder080006$$'    |
-		And I click the button named "FormDocumentBankPaymentBankPayment"
+		And I click the button named "FormDocumentBankPaymentGenerateBankPayment"
 		And I activate "Total amount" field in "PaymentList" table
 		And I select current line in "PaymentList" table
 		And I input "250,00" text in "Total amount" field of "PaymentList" table

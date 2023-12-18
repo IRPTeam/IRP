@@ -176,7 +176,7 @@ Scenario: _054003 create Cash payment and Cash receipt based on Cash transfer or
 		And I go to line in "List" table
 			| Number                              | Sender         | Receiver       | Company         |
 			| $$NumberCashTransferOrder054001$$   | Cash desk №1   | Cash desk №2   | Main Company    |
-		And I click the button named "FormDocumentCashReceiptCashReceipt"
+		And I click the button named "FormDocumentCashReceiptGenerateCashReceipt"
 		And I activate "Total amount" field in "PaymentList" table
 		And I select current line in "PaymentList" table
 		And I input "400,00" text in "Total amount" field of "PaymentList" table
@@ -193,7 +193,7 @@ Scenario: _054003 create Cash payment and Cash receipt based on Cash transfer or
 		And I go to line in "List" table
 			| Number                              | Sender         | Receiver       | Company         |
 			| $$NumberCashTransferOrder054001$$   | Cash desk №1   | Cash desk №2   | Main Company    |
-		And I click the button named "FormDocumentCashReceiptCashReceipt"
+		And I click the button named "FormDocumentCashReceiptGenerateCashReceipt"
 	* Check that the tabular part shows the rest of the amount
 		And I move to "Payments" tab
 		And "PaymentList" table contains lines
@@ -325,7 +325,7 @@ Scenario: _054005 create Cash receipt and Cash payment based on Cash transfer or
 		And I go to line in "List" table
 			| Number                              | Sender         | Receiver       | Company         |
 			| $$NumberCashTransferOrder054004$$   | Cash desk №2   | Cash desk №1   | Main Company    |
-		And I click the button named "FormDocumentCashReceiptCashReceipt"
+		And I click the button named "FormDocumentCashReceiptGenerateCashReceipt"
 	* Check that the correct receipt amount is indicated in the tabular part
 		And I move to "Payments" tab
 		And Delay 5
@@ -434,7 +434,7 @@ Scenario: _054006 create Cash transfer order (from Cash/Bank accounts to bank ac
 		And I go to line in "List" table
 			| Number                              | Sender         | Receiver            | Company         |
 			| $$NumberCashTransferOrder054006$$   | Cash desk №1   | Bank account, USD   | Main Company    |
-		And I click the button named "FormDocumentBankReceiptBankReceipt"
+		And I click the button named "FormDocumentBankReceiptGenerateBankReceipt"
 		And Delay 5
 	* Check the filling of the tabular part
 		And I move to "Payments" tab
@@ -446,7 +446,7 @@ Scenario: _054006 create Cash transfer order (from Cash/Bank accounts to bank ac
 			And I go to line in "List" table
 				| Number                               | Sender          | Receiver             | Company          |
 				| $$NumberCashTransferOrder054006$$    | Cash desk №1    | Bank account, USD    | Main Company     |
-			And I click the button named "FormDocumentBankReceiptBankReceipt"
+			And I click the button named "FormDocumentBankReceiptGenerateBankReceipt"
 		And "PaymentList" table contains lines
 			| 'Total amount'   | 'Planning transaction basis'     |
 			| '500,00'         | '$$CashTransferOrder054006$$'    |
@@ -554,7 +554,7 @@ Scenario: _054007 create Cash transfer order from bank account to Cash account (
 		And I go to line in "List" table
 			| Number                              | Sender              | Receiver       | Company         |
 			| $$NumberCashTransferOrder054007$$   | Bank account, USD   | Cash desk №1   | Main Company    |
-		And I click the button named "FormDocumentBankPaymentBankPayment"
+		And I click the button named "FormDocumentBankPaymentGenerateBankPayment"
 		* Check the filling of the tabular part
 			And "PaymentList" table contains lines
 			| 'Planning transaction basis'    | 'Total amount'    |
@@ -572,7 +572,7 @@ Scenario: _054007 create Cash transfer order from bank account to Cash account (
 		And I go to line in "List" table
 			| Number                              | Sender              | Receiver       | Company         |
 			| $$NumberCashTransferOrder054007$$   | Bank account, USD   | Cash desk №1   | Main Company    |
-		And I click the button named "FormDocumentCashReceiptCashReceipt"
+		And I click the button named "FormDocumentCashReceiptGenerateCashReceipt"
 		* Check the filling of the tabular part
 			And "PaymentList" table contains lines
 			| Planning transaction basis    | Total amount    |
@@ -699,7 +699,7 @@ Scenario: _054008 currency exchange within one Cash/Bank accounts with exchange 
 		And I go to line in "List" table
 			| 'Number'                              | 'Receive amount'    |
 			| '$$NumberCashTransferOrder054008$$'   | '175,00'            |
-		And I click the button named "FormDocumentCashReceiptCashReceipt"
+		And I click the button named "FormDocumentCashReceiptGenerateCashReceipt"
 		And I activate "Amount exchange" field in "PaymentList" table
 		And I input "600,00" text in "Amount exchange" field of "PaymentList" table
 		And I input "100,00" text in "Total amount" field of "PaymentList" table
@@ -736,7 +736,7 @@ Scenario: _054008 currency exchange within one Cash/Bank accounts with exchange 
 		And I go to line in "List" table
 			| 'Number'                              | 'Receive amount'    |
 			| '$$NumberCashTransferOrder054008$$'   | '175,00'            |
-		And I click the button named "FormDocumentCashReceiptCashReceipt"
+		And I click the button named "FormDocumentCashReceiptGenerateCashReceipt"
 		And I input "560,00" text in "Amount exchange" field of "PaymentList" table
 		And Delay 5
 		And "PaymentList" table contains lines
@@ -859,7 +859,7 @@ Scenario: _054009 currency exchange within one Cash/Bank accounts with exchange 
 			| '$$NumberCashTransferOrder054009$$'   | '200,00'            |
 		And I select current line in "List" table
 		And Delay 10
-		And I click the button named "FormDocumentCashReceiptCashReceipt"
+		And I click the button named "FormDocumentCashReceiptGenerateCashReceipt"
 		And I click choice button of "Partner" attribute in "PaymentList" table
 		And I go to line in "List" table
 			| 'Description'     |
@@ -960,7 +960,7 @@ Scenario: _054012 exchange currency from bank account (Cash Transfer Order)
 		And I go to line in "List" table
 			| 'Number'                              | 'Receive amount'    |
 			| '$$NumberCashTransferOrder054012$$'   | '175,00'            |
-		And I click the button named "FormDocumentBankPaymentBankPayment"
+		And I click the button named "FormDocumentBankPaymentGenerateBankPayment"
 		And I input "1150,00" text in "Total amount" field of "PaymentList" table
 		And I finish line editing in "PaymentList" table
 		And I click the button named "FormPost"
@@ -975,7 +975,7 @@ Scenario: _054012 exchange currency from bank account (Cash Transfer Order)
 		And I go to line in "List" table
 			| 'Number'                              | 'Receive amount'    |
 			| '$$NumberCashTransferOrder054012$$'   | '175,00'            |
-		And I click the button named "FormDocumentBankReceiptBankReceipt"
+		And I click the button named "FormDocumentBankReceiptGenerateBankReceipt"
 		And I activate "Amount exchange" field in "PaymentList" table
 		And I input "1150,00" text in "Amount exchange" field of "PaymentList" table
 		And I input "175,00" text in "Total amount" field of "PaymentList" table
@@ -1097,7 +1097,7 @@ Scenario: _054015 check message output in case the user tries to create a Bank p
 		| 'Company'       | 'Number'                             | 'Receiver'           | 'Sender'         |
 		| 'Main Company'  | '$$NumberCashTransferOrder054006$$'  | 'Bank account, USD'  | 'Cash desk №1'   |
 	* Trying to create Bank payment and check message output
-		And I click the button named "FormDocumentBankPaymentBankPayment"
+		And I click the button named "FormDocumentBankPaymentGenerateBankPayment"
 		Then I wait that in user messages the 'You do not need to create a "Bank payment" document for the selected "Cash transfer order" document(s).' substring will appear in 30 seconds
 		And I close all client application windows
 
@@ -1109,7 +1109,7 @@ Scenario: _054016 check message output in case the user tries to create a Cash r
 		| 'Company'       | 'Number'                             | 'Receiver'           | 'Sender'         |
 		| 'Main Company'  | '$$NumberCashTransferOrder054006$$'  | 'Bank account, USD'  | 'Cash desk №1'   |
 	* Trying to create Cash receipt and check message output
-		And I click the button named "FormDocumentCashReceiptCashReceipt"
+		And I click the button named "FormDocumentCashReceiptGenerateCashReceipt"
 		Then I wait that in user messages the 'You do not need to create a "Cash receipt" document for the selected "Cash transfer order" document(s).' substring will appear in 30 seconds
 		And I close all client application windows
 
@@ -1121,7 +1121,7 @@ Scenario: _054017 check message output in case the user tries to create Bank rec
 		| 'Company'       | 'Number'                             | 'Receiver'           | 'Sender'         |
 		| 'Main Company'  | '$$NumberCashTransferOrder054006$$'  | 'Bank account, USD'  | 'Cash desk №1'   |
 	* Trying to create Bank receipt and check message output
-		And I click the button named "FormDocumentBankReceiptBankReceipt"
+		And I click the button named "FormDocumentBankReceiptGenerateBankReceipt"
 		Then I wait that in user messages the 'The total amount of the "Cash transfer order" document(s) is already received on the basis of the "Bank receipt" document(s).' substring will appear in 30 seconds
 		And I close all client application windows
 
@@ -1145,7 +1145,7 @@ Scenario: _054019 check message output in case the user tries to create a Bank r
 		| 'Company'       | 'Number'                             | 'Sender'             | 'Receiver'       |
 		| 'Main Company'  | '$$NumberCashTransferOrder054007$$'  | 'Bank account, USD'  | 'Cash desk №1'   |
 	* Trying to create Bank receipt and check message output
-		And I click the button named "FormDocumentBankReceiptBankReceipt"
+		And I click the button named "FormDocumentBankReceiptGenerateBankReceipt"
 		Then I wait that in user messages the 'You do not need to create a "Bank receipt" document for the selected "Cash transfer order" document(s).' substring will appear in 30 seconds
 		And I close all client application windows
 
@@ -1169,7 +1169,7 @@ Scenario: _054021 check message output in case the user tries to create Bank pay
 		| 'Company'       | 'Number'                             | 'Sender'             | 'Receiver'       |
 		| 'Main Company'  | '$$NumberCashTransferOrder054007$$'  | 'Bank account, USD'  | 'Cash desk №1'   |
 	* Trying to create Bank payment and check message output
-		And I click the button named "FormDocumentBankPaymentBankPayment"
+		And I click the button named "FormDocumentBankPaymentGenerateBankPayment"
 		Then I wait that in user messages the 'The total amount of the "Cash transfer order" document(s) is already paid on the basis of the "Bank payment" document(s).' substring will appear in 30 seconds
 		And I close all client application windows
 
@@ -1181,7 +1181,7 @@ Scenario: _054022 check message output in case the user tries to create Cash rec
 		| 'Company'       | 'Number'                             | 'Sender'             | 'Receiver'       |
 		| 'Main Company'  | '$$NumberCashTransferOrder054007$$'  | 'Bank account, USD'  | 'Cash desk №1'   |
 	* Trying to create Cash receipt and check message output
-		And I click the button named "FormDocumentCashReceiptCashReceipt"
+		And I click the button named "FormDocumentCashReceiptGenerateCashReceipt"
 		Then I wait that in user messages the 'The total amount of the "Cash transfer order" document(s) is already received on the basis of the "Cash receipt" document(s).' substring will appear in 30 seconds
 		And I close all client application windows
 

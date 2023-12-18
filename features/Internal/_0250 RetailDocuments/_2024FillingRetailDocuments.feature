@@ -305,7 +305,7 @@ Scenario: _0154136 create document Retail Return Receipt based on RetailSalesRec
 			| 'Number'                                 |
 			| '$$NumberRetailSalesReceipt0154135$$'    |
 	* Create Retail Return Receipt
-		And I click the button named "FormDocumentRetailReturnReceipt"
+		And I click the button named "FormDocumentRetailReturnReceiptGenerate"
 		And I click "Ok" button		
 	* Check filling in
 		Then the form attribute named "DecorationGroupTitleCollapsedPicture" became equal to "Decoration group title collapsed picture"
@@ -375,7 +375,7 @@ Scenario: _01541361 check filling in Row Id info table in the RRR (RSR-RRR)
 			| 'Number'    |
 			| '201'       |
 	* Create Retail Return Receipt
-		And I click the button named "FormDocumentRetailReturnReceipt"
+		And I click the button named "FormDocumentRetailReturnReceiptGenerate"
 		Then "Add linked document rows" window is opened
 		And I expand current line in "BasisesTree" table
 		And "BasisesTree" table became equal
@@ -2171,7 +2171,7 @@ Scenario:  _0154149 create Cash statement
 			| 'Number'                                  |
 			| '$$NumberRetailSalesReceipt01541494$$'    |
 		And I activate "Date" field in "List" table
-		And I click the button named "FormDocumentRetailReturnReceipt"
+		And I click the button named "FormDocumentRetailReturnReceiptGenerate"
 		And I click "Ok" button		
 		And I activate "Quantity" field in "ItemList" table
 		And I select current line in "ItemList" table
@@ -2196,7 +2196,7 @@ Scenario:  _0154149 create Cash statement
 		And I go to line in "List" table
 			| 'Number'                                  |
 			| '$$NumberRetailSalesReceipt01541493$$'    |
-		And I click the button named "FormDocumentRetailReturnReceipt"
+		And I click the button named "FormDocumentRetailReturnReceiptGenerate"
 		And I click "Ok" button	
 		Then "Retail return receipt (create)" window is opened
 		And I activate "Quantity" field in "ItemList" table
@@ -2222,7 +2222,7 @@ Scenario:  _0154149 create Cash statement
 		And I go to line in "List" table
 			| 'Number'                                  |
 			| '$$NumberRetailSalesReceipt01541491$$'    |
-		And I click the button named "FormDocumentRetailReturnReceipt"
+		And I click the button named "FormDocumentRetailReturnReceiptGenerate"
 		And I click "Ok" button	
 		And I input "01.09.2020 16:55:04" text in "Date" field
 		And I click the button named "FormPost"

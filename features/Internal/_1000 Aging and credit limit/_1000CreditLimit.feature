@@ -400,7 +400,7 @@ Scenario: _1000002 check credit limit when post Sales invoice based on Sales ord
 		And I go to line in "List" table
 			| 'Number'                            |
 			| '$$NumberSalesInvoice20400011$$'    |
-		And I click the button named "FormDocumentBankReceiptBankReceipt"
+		And I click the button named "FormDocumentBankReceiptGenerateBankReceipt"
 		And I click Select button of "Account" field
 		And I go to line in "List" table
 			| 'Description'          |

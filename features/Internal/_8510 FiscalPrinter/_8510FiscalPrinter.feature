@@ -1709,7 +1709,7 @@ Scenario: _08500251 sales return (bank credit)
 		And I go to line in "List" table
 			| 'Σ'         |
 			| '118,00'    |
-		And I click the button named "FormDocumentRetailReturnReceipt"
+		And I click the button named "FormDocumentRetailReturnReceiptGenerate"
 		And I expand current line in "BasisesTree" table
 		And I click "Ok" button
 		And I click "Post" button
@@ -1728,7 +1728,7 @@ Scenario: _0850026 sales return (card)
 		And I go to line in "List" table
 			| 'Σ'         |
 			| '620,00'    |
-		And I click the button named "FormDocumentRetailReturnReceipt"
+		And I click the button named "FormDocumentRetailReturnReceiptGenerate"
 		And I expand current line in "BasisesTree" table
 		And I go to line in "BasisesTree" table
 			| 'Row presentation'            |

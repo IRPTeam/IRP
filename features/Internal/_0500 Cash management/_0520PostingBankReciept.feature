@@ -107,7 +107,7 @@ Scenario: _052001 create Bank receipt based on Sales invoice
 		And I go to line in "List" table
 			| 'Number'                          |
 			| '$$NumberSalesInvoice024001$$'    |
-		And I click the button named "FormDocumentBankReceiptBankReceipt"
+		And I click the button named "FormDocumentBankReceiptGenerateBankReceipt"
 	* Create and filling in Bank receipt
 		Then the form attribute named "Company" became equal to "Main Company"
 		Then the form attribute named "TransactionType" became equal to "Payment from customer"

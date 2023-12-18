@@ -50,6 +50,12 @@ Scenario: _099100 preparation
 		When Create information register Taxes records (VAT)
 	* Load data for Accounting system
 		When Create chart of characteristic types AccountingExtraDimensionTypes objects
+		When Create chart of accounts Basic objects with LedgerTypeVariants (Basic LTV)
+		When Create information register T9011S_AccountsCashAccount records (Basic LTV)
+		When Create information register T9014S_AccountsExpenseRevenue records (Basic LTV)
+		When Create information register T9010S_AccountsItemKey records (Basic LTV)
+		When Create information register T9012S_AccountsPartner records (Basic LTV)
+		When Create information register T9013S_AccountsTax records (Basic LTV)
 
 							
 	

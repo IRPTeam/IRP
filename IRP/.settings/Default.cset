@@ -67,10 +67,10 @@
     "module-structure-event-regions": {
       "enabled": false
     },
-    "right-start-thick-client": {
+    "right-update-database-configuration": {
       "enabled": false
     },
-    "right-update-database-configuration": {
+    "right-start-thick-client": {
       "enabled": false
     },
     "module-structure-var-in-region": {
@@ -82,16 +82,19 @@
     "right-interactive-open-external-data-processors": {
       "enabled": false
     },
-    "ql-constants-in-binary-operation": {
+    "new-color": {
       "enabled": false
     },
-    "new-color": {
+    "ql-constants-in-binary-operation": {
       "enabled": false
     },
     "data-exchange-load": {
       "enabled": false
     },
     "common-module-type": {
+      "enabled": false
+    },
+    "bsl-variable-name-invalid": {
       "enabled": false
     },
     "doc-comment-collection-item-type": {
@@ -169,10 +172,10 @@
     "form-list-ref-use-always-flag-disabled": {
       "enabled": false
     },
-    "subsystem-synonym-too-long": {
+    "ql-temp-table-index": {
       "enabled": false
     },
-    "ql-temp-table-index": {
+    "subsystem-synonym-too-long": {
       "enabled": false
     },
     "lock-out-of-try": {
@@ -196,10 +199,10 @@
     "doc-comment-parameter-in-description-suggestion": {
       "enabled": false
     },
-    "doc-comment-export-function-return-section": {
+    "doc-comment-complex-type-with-link": {
       "enabled": false
     },
-    "doc-comment-complex-type-with-link": {
+    "doc-comment-export-function-return-section": {
       "enabled": false
     },
     "ql-like-expression-with-field": {
@@ -217,10 +220,10 @@
     "empty-except-statement": {
       "enabled": false
     },
-    "form-module-missing-pragma": {
+    "doc-comment-field-name": {
       "enabled": false
     },
-    "doc-comment-field-name": {
+    "form-module-missing-pragma": {
       "enabled": false
     },
     "doc-comment-field-in-description-suggestion": {
@@ -275,6 +278,9 @@
       "enabled": false
     },
     "form-dynamic-list-item-title": {
+      "enabled": false
+    },
+    "reading-attribute-from-database": {
       "enabled": false
     },
     "invocation-form-event-handler": {

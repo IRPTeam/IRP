@@ -9,8 +9,9 @@
 //  CheckPackage - See EquipmentFiscalPrinterAPIClient.CheckPackage
 Procedure FillData(SourceData, CheckPackage) Export
 	If TypeOf(SourceData.Ref) = Type("DocumentRef.RetailSalesReceipt")
-		OR TypeOf(SourceData.Ref) = Type("DocumentRef.RetailReturnReceipt") Then
-		FillCheckPackageByRetailSalesReceipt(SourceData, CheckPackage);
+		OR TypeOf(SourceData.Ref) = Type("DocumentRef.RetailReturnReceipt") 
+		OR TypeOf(SourceData.Ref) = Type("DocumentRef.RetailReceiptCorrection") Then
+		FillCheckPackageByRetailReceipt(SourceData, CheckPackage);
 	ElsIf TypeOf(SourceData.Ref) = Type("DocumentRef.CashReceipt")
 		OR TypeOf(SourceData.Ref) = Type("DocumentRef.CashPayment") Then
 		FillCheckPackageByPayment(SourceData, CheckPackage, True);
@@ -20,12 +21,23 @@ Procedure FillData(SourceData, CheckPackage) Export
 	EndIf;
 EndProcedure
 
-// Prepare receipt data by retail sales receipt.
+// Prepare receipt data by retail receipt.
 //
 // Parameters:
-//  SourceData - DocumentRef.RetailSalesReceipt -
+//  SourceData - DocumentRef.RetailSalesReceipt, DocumentRef.RetailReceiptCorrection -
 //  CheckPackage - See EquipmentFiscalPrinterAPIClient.CheckPackage
-Procedure FillCheckPackageByRetailSalesReceipt(SourceData, CheckPackage) Export
+Procedure FillCheckPackageByRetailReceipt(Val SourceData, CheckPackage) Export
+	
+	isCorrection = TypeOf(SourceData.Ref) = Type("DocumentRef.RetailReceiptCorrection");
+	
+	If isCorrection Then
+		CorrectionRef = SourceData;
+		SourceData = CorrectionRef.BasisDocument;
+	Else
+		CheckPackage.CorrectionData = New Structure();		
+	EndIf;
+	
+	
 	FillInputParameters(SourceData, CheckPackage.Parameters);
 
 	If TypeOf(SourceData.Ref) = Type("DocumentRef.RetailSalesReceipt") Then

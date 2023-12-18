@@ -90,7 +90,7 @@ Scenario: _053001 create Bank payment based on Purchase invoice
 		And I go to line in "List" table
 			| 'Number'                             |
 			| '$$NumberPurchaseInvoice018001$$'    |
-		And I click the button named "FormDocumentBankPaymentGenarateBankPayment"
+		And I click the button named "FormDocumentBankPaymentBankPayment"
 	* Create and filling in Purchase invoice
 		Then the form attribute named "Company" became equal to "Main Company"
 		Then the form attribute named "TransactionType" became equal to "Payment to the vendor"

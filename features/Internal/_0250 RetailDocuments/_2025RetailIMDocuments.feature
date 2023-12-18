@@ -209,7 +209,7 @@ Scenario: _0155255 create Bank receipt based on retail sales order
 			| 'Number'    |
 			| '314'       |
 	* Create bank receipt
-		And I click the button named "FormDocumentBankReceiptGenarateBankReceipt"
+		And I click the button named "FormDocumentBankReceiptBankReceipt"
 		And I click Choice button of the field named "Account"
 		And I go to line in "List" table
 			| 'Description'          |
@@ -250,7 +250,7 @@ Scenario: _0155260 create Cash receipt based on retail sales order
 			| 'Number'    |
 			| '315'       |
 	* Create cash receipt
-		And I click the button named "FormDocumentCashReceiptGenarateCashReceipt"
+		And I click the button named "FormDocumentCashReceiptCashReceipt"
 	* Check filling
 		Then the form attribute named "Company" became equal to "Main Company"
 		Then the form attribute named "CashAccount" became equal to "Cash desk №2"
@@ -280,7 +280,7 @@ Scenario: _0155265 create retail sales receipt based on retail sales order
 			| 'Number'    |
 			| '314'       |
 	* Create retail sales receipt
-		And I click the button named "FormDocumentRetailSalesReceiptGenarate"
+		And I click the button named "FormDocumentRetailSalesReceipt"
 		And I click "Ok" button
 		Then the form attribute named "Partner" became equal to "Retail customer"
 		Then the form attribute named "LegalName" became equal to "Company Retail customer"

@@ -830,7 +830,7 @@
     </attributes>
   </tabularSections>
   <commands uuid="f5bca530-b6c7-41b8-b9a7-4049f501b775">
-    <name>GenarateCashReceipt</name>
+    <name>GenerateCashReceipt</name>
     <synonym>
       <key>en</key>
       <value>Cash receipt</value>

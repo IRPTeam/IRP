@@ -8104,14 +8104,14 @@
 		</right>
 	</object>
 	<object>
-		<name>Document.BankPayment.Command.GenarateBankPayment</name>
+		<name>Document.BankPayment.Command.GenerateBankPayment</name>
 		<right>
 			<name>View</name>
 			<value>true</value>
 		</right>
 	</object>
 	<object>
-		<name>Document.BankReceipt.Command.GenarateBankReceipt</name>
+		<name>Document.BankReceipt.Command.GenerateBankReceipt</name>
 		<right>
 			<name>View</name>
 			<value>true</value>
@@ -8139,7 +8139,7 @@
 		</right>
 	</object>
 	<object>
-		<name>Document.CashReceipt.Command.GenarateCashReceipt</name>
+		<name>Document.CashReceipt.Command.GenerateCashReceipt</name>
 		<right>
 			<name>View</name>
 			<value>true</value>
@@ -8307,7 +8307,7 @@
 		</right>
 	</object>
 	<object>
-		<name>Document.RetailReturnReceipt.Command.Genarate</name>
+		<name>Document.RetailReturnReceipt.Command.Generate</name>
 		<right>
 			<name>View</name>
 			<value>true</value>
@@ -8328,7 +8328,7 @@
 		</right>
 	</object>
 	<object>
-		<name>Document.RetailSalesReceipt.Command.Genarate</name>
+		<name>Document.RetailSalesReceipt.Command.Generate</name>
 		<right>
 			<name>View</name>
 			<value>true</value>

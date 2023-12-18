@@ -664,7 +664,7 @@ Scenario: _029150 create Retail return receipt for service and product
 		And I go to line in "List" table
 			| 'Number'                                |
 			| '$$NumberRetailSalesReceipt029130$$'    |
-		And I click the button named "FormDocumentRetailReturnReceiptGenarate"
+		And I click the button named "FormDocumentRetailReturnReceipt"
 		And I click "Ok" button	
 		And I click the button named "FormPost"
 		And I delete "$$NumberRetailReturnReceipt029150$$" variable

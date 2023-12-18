@@ -1550,7 +1550,7 @@
     </attributes>
   </tabularSections>
   <commands uuid="a81fb73a-3fd2-4feb-9b2d-c25dae3b17cf">
-    <name>Genarate</name>
+    <name>Generate</name>
     <synonym>
       <key>en</key>
       <value>Retail receipt correction</value>

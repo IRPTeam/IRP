@@ -16,38 +16,123 @@ Background:
 Scenario: _099100 preparation
 	When set True value to the constant
 	When set True value to the constant Use accounting
-	* Load info
-		When Create catalog ObjectStatuses objects
-		When Create catalog ItemKeys objects
-		When Create catalog ItemTypes objects
-		When Create catalog Units objects
-		When Create catalog Items objects
-		When Create catalog PriceTypes objects
-		When Create catalog Specifications objects
-		When Create chart of characteristic types AddAttributeAndProperty objects
-		When Create catalog AddAttributeAndPropertySets objects
-		When Create catalog AddAttributeAndPropertyValues objects
-		When Create catalog BusinessUnits objects
-		When Create catalog Currencies objects
-		When Create catalog Companies objects (Main company)
-		When Create catalog Stores objects
-		When Create catalog Partners objects (Ferron BP)
-		When Create catalog Partners objects
-		When Create catalog Companies objects (partners company)
-		When Create catalog Countries objects
-		When Create catalog CancelReturnReasons objects
-		When Create information register PartnerSegments records
-		When Create catalog PartnerSegments objects
-		When Create catalog Agreements objects
-		When Create chart of characteristic types CurrencyMovementType objects
-		When Create catalog TaxRates objects
-		When Create catalog Taxes objects	
-		When Create information register TaxSettings records
-		When Create catalog IntegrationSettings objects
-		When Create information register CurrencyRates records
-		When Create catalog CashAccounts objects
-		When Create catalog ExpenseAndRevenueTypes objects
-		When Create information register Taxes records (VAT)
+	* Load info (TestDB)
+		When Create catalog AddAttributeAndPropertySets objects (test data base)
+		When Create catalog AddAttributeAndPropertyValues objects (test data base)
+		When Create catalog IDInfoAddresses objects (test data base)
+		When Create catalog RowIDs objects (test data base)
+		When Create catalog BankTerms objects (test data base)
+		When Create catalog BusinessUnits objects (test data base)
+		When Create catalog CancelReturnReasons objects (test data base)
+		When Create catalog CashStatementStatuses objects (test data base)
+		When Create catalog CashAccounts objects (test data base)
+		When Create catalog BillOfMaterials objects (test data base)
+		When Create catalog Companies objects (test data base)
+		When Create catalog ConfigurationMetadata objects (test data base)
+		When Create catalog IDInfoSets objects (test data base)
+		When Create catalog Countries objects (test data base)
+		When Create catalog Currencies objects (test data base)
+		When Create catalog DataBaseStatus objects (test data base)
+		When Create catalog ExpenseAndRevenueTypes objects (test data base)
+		When Create catalog IntegrationSettings objects (test data base)
+		When Create catalog ItemKeys objects (test data base)
+		When Create catalog ItemTypes objects (test data base)
+		When Create catalog Units objects (test data base)
+		When Create catalog Items objects (test data base)
+		When Create catalog CurrencyMovementSets objects (test data base)
+		When Create catalog ObjectStatuses objects (test data base)
+		When Create catalog PartnerSegments objects (test data base)
+		When Create catalog Agreements objects (test data base)
+		When Create catalog Partners objects (test data base)
+		When Create catalog PartnersBankAccounts objects (test data base)
+		When Create catalog PaymentTerminals objects (test data base)
+		When Create catalog PaymentSchedules objects (test data base)
+		When Create catalog PaymentTypes objects (test data base)
+		When Create catalog PriceTypes objects (test data base)
+		When Create catalog RetailCustomers objects (test data base)	
+		When Create catalog SpecialOfferTypes objects (test data base)
+		When Create catalog SpecialOffers objects (test data base)
+		When Create catalog Specifications objects (test data base)
+		When Create catalog Stores objects (test data base)
+		When Create catalog TaxRates objects (test data base)
+		When Create catalog Taxes objects (test data base)
+		When Create catalog SerialLotNumbers objects (test data base)
+		When Create information register Taxes records (test data base)
+		* Tax settings
+			Given I open hyperlink "e1cib/list/Catalog.Companies"
+			And I go to line in "List" table
+							| 'Description'         |
+							| 'Own company 1'       |
+			And I select current line in "List" table
+			And I move to "Tax types" tab
+			And I go to line in "CompanyTaxes" table
+							| 'Tax'       |
+							| 'VAT'       |
+			And I select current line in "CompanyTaxes" table
+			And I click Open button of "Tax" field
+			And I select "VAT" exact value from the drop-down list named "Kind"
+			And I click "Save and close" button
+			And I close all client application windows
+		When Create catalog InterfaceGroups objects (test data base)
+		When Create catalog AccessGroups objects (test data base)
+		When Create catalog AccessProfiles objects (test data base)
+		When Create catalog UserGroups objects (test data base)
+		When Create catalog Users objects (test data base)
+		When Create catalog Workstations objects (test data base)
+		When Create catalog PlanningPeriods objects (test data base)
+		When Create document BankPayment objects (test data base)
+		When Create document BankReceipt objects (test data base)
+		When Create document Bundling objects (test data base)
+		When Create document CashExpense objects (test data base)
+		When Create document CashPayment objects (test data base)
+		When Create document CashReceipt objects (test data base)
+		When Create document CashRevenue objects (test data base)
+		When Create document CashTransferOrder objects (test data base)
+		When Create document CreditNote objects (test data base)
+		When Create document DebitNote objects (test data base)
+		When Create document GoodsReceipt objects (test data base)
+		When Create document IncomingPaymentOrder objects (test data base)
+		When Create document InternalSupplyRequest objects (test data base)
+		When Create document InventoryTransfer objects (test data base)
+		When Create document InventoryTransferOrder objects (test data base)
+		When Create document OpeningEntry objects (test data base)
+		When Create document OutgoingPaymentOrder objects (test data base)
+		When Create document PhysicalCountByLocation objects (test data base)
+		When Create document PhysicalInventory objects (test data base)
+		When Create document PlannedReceiptReservation objects (test data base)
+		When Create document PriceList objects (test data base)
+		When Create document PurchaseInvoice objects (test data base)
+		When Create document PurchaseOrder objects (test data base)
+		When Create document PurchaseOrderClosing objects (test data base)
+		When Create document PurchaseReturn objects (test data base)
+		When Create document ReconciliationStatement objects (test data base)
+		When Create document RetailReturnReceipt objects (test data base)
+		When Create document RetailSalesReceipt objects (test data base)
+		When Create document SalesInvoice objects (test data base)
+		When Create document SalesOrder objects (test data base)
+		When Create document WorkOrder objects (test data base)
+		When Create document WorkSheet objects (test data base)
+		When Create document SalesReturn objects (test data base)
+		When Create document SalesReturnOrder objects (test data base)
+		When Create document ShipmentConfirmation objects (test data base)
+		When Create document StockAdjustmentAsSurplus objects (test data base)
+		When Create document StockAdjustmentAsWriteOff objects (test data base)
+		When Create document Unbundling objects (test data base)
+		When Create document ItemStockAdjustment objects  (test data base)
+		When Create document PurchaseReturnOrder objects (test data base)
+		When Create chart of characteristic types AddAttributeAndProperty objects (test data base)
+		When Create chart of characteristic types IDInfoTypes objects (test data base)
+		When Create chart of characteristic types CustomUserSettings objects (test data base)
+		When Create chart of characteristic types CurrencyMovementType objects (test data base)
+		When Create information register BundleContents records (test data base)
+		When Create information register BranchBankTerms records (test data base)
+		When Create information register CurrencyRates records (test data base)
+		When Create information register Barcodes records (test data base)
+		When Create information register PartnerSegments records (test data base)
+		When Create information register TaxSettings records (test data base)
+		When Create information register UserSettings records (test data base)
+		When Create document CashStatement objects  (test data base)
+		When Create catalog PartnerItems objects (test data base)
 	* Load data for Accounting system
 		When Create chart of characteristic types AccountingExtraDimensionTypes objects
 		When Create chart of accounts Basic objects with LedgerTypeVariants (Basic LTV)
@@ -126,8 +211,8 @@ Scenario: _0991003 create ledger type
 		And I click Select button of "Currency movement type" field
 		Then "Multi currency movement types" window is opened
 		And I go to line in "List" table
-			| 'Currency'   | 'Deferred calculation'   | 'Description'      | 'Source'         | 'Type'     |
-			| 'TRY'        | 'No'                     | 'Local currency'   | 'Forex Seling'   | 'Legal'    |
+			| 'Currency' | 'Deferred calculation' | 'Description'    | 'Source'          | 'Type'  |
+			| 'EUR'      | 'No'                   | 'Legal currency' | 'Currency rate 1' | 'Legal' |
 		And I select current line in "List" table
 		And I click Choice button of the field named "LedgerTypeVariant"
 		And I click "Create" button
@@ -288,7 +373,7 @@ Scenario: _0991003 create ledger type
 		* Check creation
 			And "List" table contains lines
 				| 'Description'       | 'Currency movement type' | 'Currency' | 'Type'  | 'Ledger type variant' |
-				| 'Manager analitics' | 'Local currency'         | 'TRY'      | 'Legal' | 'Manager analitics'   |
+				| 'Manager analitics' | 'Legal currency'         | 'EUR'      | 'Legal' | 'Manager analitics'   |
 			And I close all client application windows
 			
 
@@ -951,20 +1036,20 @@ Scenario: _0991021 accounts settings for Cash account (general for company)
 		And I click Choice button of the field named "Company"
 		And I go to line in "List" table
 			| 'Description'     |
-			| 'Main Company'    |
+			| 'Own company 1'   |
 		And I select current line in "List" table
 		And I select from "Ledger type variant" drop-down list by "ltv" string
 		And I select from the drop-down list named "Account" by "40501" string
 		Then the form attribute named "Account" became equal to "405.01"
-		Then the form attribute named "Company" became equal to "Main Company"
+		Then the form attribute named "Company" became equal to "Own company 1"
 		Then the form attribute named "LedgerTypeVariant" became equal to "LTV with account charts code mask"
 		And the editing text of form attribute named "Period" became equal to "01.01.2022"
 		Then the form attribute named "RecordType" became equal to "All"
 		And I click "Save and close" button
 	* Check
 		And "List" table contains lines
-			| 'Period'     | 'Company'      | 'Ledger type variant'               | 'Cash account' | 'Account' |
-			| '01.01.2022' | 'Main Company' | 'LTV with account charts code mask' | ''             | '405.01'  |
+			| 'Period'     | 'Company'       | 'Ledger type variant'               | 'Cash account' | 'Account' |
+			| '01.01.2022' | 'Own company 1' | 'LTV with account charts code mask' | ''             | '405.01'  |
 	And I close all client application windows
 	
 		
@@ -978,22 +1063,22 @@ Scenario: _0991022 accounts settings for Cash account (for Cash account)
 		And I click Select button of "Cash account" field
 		And I go to line in "List" table
 			| 'Description'  |
-			| 'Cash desk №4' |
+			| 'Cash, USD' |
 		And I select current line in "List" table		
 		And I input "01.02.2022" text in the field named "Period"
-		And I select from the drop-down list named "Company" by "main" string
+		And I select from the drop-down list named "Company" by "Own company 1" string
 		And I select from "Ledger type variant" drop-down list by "ltv" string
 		And I select from the drop-down list named "Account" by "40501" string
 		Then the form attribute named "Account" became equal to "405.01"
-		Then the form attribute named "Company" became equal to "Main Company"
+		Then the form attribute named "Company" became equal to "Own company 1"
 		Then the form attribute named "LedgerTypeVariant" became equal to "LTV with account charts code mask"
 		And the editing text of form attribute named "Period" became equal to "01.02.2022"
-		Then the form attribute named "CashAccount" became equal to "Cash desk №4"		
+		Then the form attribute named "CashAccount" became equal to "Cash, USD"		
 		And I click "Save and close" button
 	* Check
 		And "List" table contains lines
 			| 'Period'     | 'Company'      | 'Ledger type variant'               | 'Cash account' | 'Account' |
-			| '01.02.2022' | 'Main Company' | 'LTV with account charts code mask' | 'Cash desk №4' | '405.01'  |
+			| '01.02.2022' | 'Own company 1' | 'LTV with account charts code mask' | 'Cash, USD' | '405.01'  |
 	And I close all client application windows			
 
 Scenario: _0991026 accounts settings for Bank account (for Bank account)
@@ -1006,22 +1091,22 @@ Scenario: _0991026 accounts settings for Bank account (for Bank account)
 		And I click Select button of "Cash account" field
 		And I go to line in "List" table
 			| 'Description'       |
-			| 'Bank account, TRY' |
+			| 'Bank account, EUR' |
 		And I select current line in "List" table		
 		And I input "01.02.2022" text in the field named "Period"
-		And I select from the drop-down list named "Company" by "main" string
+		And I select from the drop-down list named "Company" by "Own company 1" string
 		And I select from "Ledger type variant" drop-down list by "ltv" string
 		And I select from the drop-down list named "Account" by "40501" string
 		Then the form attribute named "Account" became equal to "405.01"
-		Then the form attribute named "Company" became equal to "Main Company"
+		Then the form attribute named "Company" became equal to "Own company 1"
 		Then the form attribute named "LedgerTypeVariant" became equal to "LTV with account charts code mask"
 		And the editing text of form attribute named "Period" became equal to "01.02.2022"
-		Then the form attribute named "CashAccount" became equal to "Bank account, TRY"		
+		Then the form attribute named "CashAccount" became equal to "Bank account, EUR"		
 		And I click "Save and close" button
 	* Check
 		And "List" table contains lines
 			| 'Period'     | 'Company'      | 'Ledger type variant'               | 'Cash account'      | 'Account' |
-			| '01.02.2022' | 'Main Company' | 'LTV with account charts code mask' | 'Bank account, TRY' | '405.01'  |
+			| '01.02.2022' | 'Own company 1' | 'LTV with account charts code mask' | 'Bank account, EUR' | '405.01'  |
 	And I close all client application windows
 
 Scenario: _0991027 accounts settings for Expense/Revenue (general for company)
@@ -1040,12 +1125,12 @@ Scenario: _0991027 accounts settings for Expense/Revenue (general for company)
 		And I click Choice button of the field named "Company"
 		And I go to line in "List" table
 			| 'Description'     |
-			| 'Main Company'    |
+			| 'Own company 1'    |
 		And I select current line in "List" table
 		And I select from "Ledger type variant" drop-down list by "ltv" string
 		And I select from the drop-down list named "Account" by "40501" string
 		Then the form attribute named "Account" became equal to "405.01"
-		Then the form attribute named "Company" became equal to "Main Company"
+		Then the form attribute named "Company" became equal to "Own company 1"
 		Then the form attribute named "LedgerTypeVariant" became equal to "LTV with account charts code mask"
 		And the editing text of form attribute named "Period" became equal to "01.01.2022"
 		Then the form attribute named "RecordType" became equal to "All"
@@ -1053,7 +1138,7 @@ Scenario: _0991027 accounts settings for Expense/Revenue (general for company)
 	* Check
 		And "List" table contains lines
 			| 'Period'     | 'Company'      | 'Ledger type variant'               | 'Expense / Revenue' | 'Account' |
-			| '01.01.2022' | 'Main Company' | 'LTV with account charts code mask' | ''                  | '405.01'  |
+			| '01.01.2022' | 'Own company 1' | 'LTV with account charts code mask' | ''                  | '405.01'  |
 	And I close all client application windows
 
 Scenario: _0991028 accounts settings for Expense/Revenue
@@ -1066,27 +1151,27 @@ Scenario: _0991028 accounts settings for Expense/Revenue
 		And I click Choice button of the field named "Company"
 		And I go to line in "List" table
 			| 'Description'     |
-			| 'Main Company'    |
+			| 'Own company 1'    |
 		And I select current line in "List" table
 		And I change the radio button named "RecordType" value to "Expense and revenue type"
 		And I click Select button of "Expense / Revenue" field
 		And I go to line in "List" table
-			| 'Description' |
-			| 'Expense'     |
+			| 'Description'   |
+			| 'Expence 1'     |
 		And I select current line in "List" table
-		And I select from "Expense / Revenue" drop-down list by "Revenue" string	
+		And I select from "Expense / Revenue" drop-down list by "Revenue 1" string	
 		And I select from "Ledger type variant" drop-down list by "ltv" string
 		And I select from the drop-down list named "Account" by "90878699" string
 		Then the form attribute named "Account" became equal to "90878699"
-		Then the form attribute named "Company" became equal to "Main Company"
+		Then the form attribute named "Company" became equal to "Own company 1"
 		Then the form attribute named "LedgerTypeVariant" became equal to "LTV with account charts code mask"
 		And the editing text of form attribute named "Period" became equal to "01.01.2022"
-		Then the form attribute named "ExpenseRevenue" became equal to "Revenue"		
+		Then the form attribute named "ExpenseRevenue" became equal to "Revenue 1"		
 		And I click "Save and close" button
 	* Check
 		And "List" table contains lines
-			| 'Period'     | 'Company'      | 'Ledger type variant'               | 'Expense / Revenue' | 'Account'  |
-			| '01.01.2022' | 'Main Company' | 'LTV with account charts code mask' | 'Revenue'           | '90878699' |
+			| 'Period'     | 'Company'       | 'Ledger type variant'               | 'Expense / Revenue' | 'Account'  |
+			| '01.01.2022' | 'Own company 1' | 'LTV with account charts code mask' | 'Revenue 1'         | '90878699' |
 	And I close all client application windows
 
 Scenario: _0991029 accounts settings for item key (general for company)
@@ -1105,12 +1190,12 @@ Scenario: _0991029 accounts settings for item key (general for company)
 		And I click Choice button of the field named "Company"
 		And I go to line in "List" table
 			| 'Description'     |
-			| 'Main Company'    |
+			| 'Own company 1'    |
 		And I select current line in "List" table
 		And I select from "Ledger type variant" drop-down list by "ltv" string
 		And I select from the drop-down list named "Account" by "40501" string
 		Then the form attribute named "Account" became equal to "405.01"
-		Then the form attribute named "Company" became equal to "Main Company"
+		Then the form attribute named "Company" became equal to "Own company 1"
 		Then the form attribute named "LedgerTypeVariant" became equal to "LTV with account charts code mask"
 		And the editing text of form attribute named "Period" became equal to "01.01.2022"
 		Then the form attribute named "RecordType" became equal to "All"
@@ -1118,7 +1203,7 @@ Scenario: _0991029 accounts settings for item key (general for company)
 	* Check
 		And "List" table contains lines
 			| 'Period'     | 'Company'      | 'Ledger type variant'               | 'Item key' | 'Item' | 'Item type' | 'Type of item type' | 'Account' |
-			| '01.01.2022' | 'Main Company' | 'LTV with account charts code mask' | ''         | ''     | ''          | ''                  | '405.01'  |		
+			| '01.01.2022' | 'Own company 1' | 'LTV with account charts code mask' | ''         | ''     | ''          | ''                  | '405.01'  |		
 	And I close all client application windows
 
 Scenario: _0991030 accounts settings for item key
@@ -1131,27 +1216,27 @@ Scenario: _0991030 accounts settings for item key
 		And I click Choice button of the field named "Company"
 		And I go to line in "List" table
 			| 'Description'     |
-			| 'Main Company'    |
+			| 'Own company 1'    |
 		And I select current line in "List" table
 		And I change the radio button named "RecordType" value to "Item key"	
 		And I click Select button of "Item key" field
 		And I go to line in "List" table
-			| 'Item'  | 'Item key' |
-			| 'Dress' | 'M/White'  |
+			| 'Item'               | 'Item key'  |
+			| 'Item with item key' | 'S/Color 1' |
 		And I select current line in "List" table
-		And I select from "Item key" drop-down list by "xs/blue" string	
+		And I select from "Item key" drop-down list by "XS/Color 2" string	
 		And I select from "Ledger type variant" drop-down list by "ltv" string
 		And I select from the drop-down list named "Account" by "40501" string
 		Then the form attribute named "Account" became equal to "405.01"
-		Then the form attribute named "Company" became equal to "Main Company"
+		Then the form attribute named "Company" became equal to "Own company 1"
 		Then the form attribute named "LedgerTypeVariant" became equal to "LTV with account charts code mask"
 		And the editing text of form attribute named "Period" became equal to "01.01.2022"
-		Then the form attribute named "ItemKey" became equal to "XS/Blue"		
+		Then the form attribute named "ItemKey" became equal to "XS/Color 2"		
 		And I click "Save and close" button
 	* Check
 		And "List" table contains lines
 			| 'Period'     | 'Company'      | 'Ledger type variant'               | 'Item key' | 'Item' | 'Item type' | 'Type of item type' | 'Account' |
-			| '01.01.2022' | 'Main Company' | 'LTV with account charts code mask' | 'XS/Blue'  | ''     | ''          | ''                  | '405.01'  |
+			| '01.01.2022' | 'Own company 1' | 'LTV with account charts code mask' | 'XS/Color 2'  | ''     | ''          | ''                  | '405.01'  |
 	And I close all client application windows
 
 Scenario: _0991031 accounts settings for item
@@ -1164,27 +1249,27 @@ Scenario: _0991031 accounts settings for item
 		And I click Choice button of the field named "Company"
 		And I go to line in "List" table
 			| 'Description'     |
-			| 'Main Company'    |
+			| 'Own company 1'    |
 		And I select current line in "List" table
 		And I change the radio button named "RecordType" value to "Item"	
 		And I click Select button of "Item" field
 		And I go to line in "List" table
 			| 'Description' |
-			| 'Dress'       |
+			| 'Item with item key'       |
 		And I select current line in "List" table
-		And I select from "Item" drop-down list by "Boots" string	
+		And I select from "Item" drop-down list by "Item without item key (pcs)" string	
 		And I select from "Ledger type variant" drop-down list by "ltv" string
 		And I select from the drop-down list named "Account" by "40501" string
 		Then the form attribute named "Account" became equal to "405.01"
-		Then the form attribute named "Company" became equal to "Main Company"
+		Then the form attribute named "Company" became equal to "Own company 1"
 		Then the form attribute named "LedgerTypeVariant" became equal to "LTV with account charts code mask"
 		And the editing text of form attribute named "Period" became equal to "01.01.2022"
-		Then the form attribute named "Item" became equal to "Boots"		
+		Then the form attribute named "Item" became equal to "Item without item key (pcs)"		
 		And I click "Save and close" button
 	* Check
 		And "List" table contains lines
 			| 'Period'     | 'Company'      | 'Ledger type variant'               | 'Item key' | 'Item'      | 'Item type' | 'Type of item type' | 'Account' |
-			| '01.01.2022' | 'Main Company' | 'LTV with account charts code mask' | ''         | 'Boots'     | ''          | ''                  | '405.01'  |
+			| '01.01.2022' | 'Own company 1' | 'LTV with account charts code mask' | ''         | 'Item without item key (pcs)'     | ''          | ''                  | '405.01'  |
 	And I close all client application windows
 
 Scenario: _0991032 accounts settings for item type
@@ -1197,27 +1282,27 @@ Scenario: _0991032 accounts settings for item type
 		And I click Choice button of the field named "Company"
 		And I go to line in "List" table
 			| 'Description'     |
-			| 'Main Company'    |
+			| 'Own company 1'    |
 		And I select current line in "List" table
 		And I change the radio button named "RecordType" value to "Item type"	
 		And I click Select button of "Item type" field
 		And I go to line in "List" table
 			| 'Description' |
-			| 'Clothes'     |
+			| 'Item (with size and color)'     |
 		And I select current line in "List" table
-		And I select from "Item type" drop-down list by "Shoes" string	
+		And I select from "Item type" drop-down list by "Item (without item key)" string	
 		And I select from "Ledger type variant" drop-down list by "ltv" string
 		And I select from the drop-down list named "Account" by "40501" string
 		Then the form attribute named "Account" became equal to "405.01"
-		Then the form attribute named "Company" became equal to "Main Company"
+		Then the form attribute named "Company" became equal to "Own company 1"
 		Then the form attribute named "LedgerTypeVariant" became equal to "LTV with account charts code mask"
 		And the editing text of form attribute named "Period" became equal to "01.01.2022"
-		Then the form attribute named "ItemType" became equal to "Shoes"		
+		Then the form attribute named "ItemType" became equal to "Item (without item key)"		
 		And I click "Save and close" button
 	* Check
 		And "List" table contains lines
-			| 'Period'     | 'Company'      | 'Ledger type variant'               | 'Item key' | 'Item' | 'Item type' | 'Type of item type' | 'Account' |
-			| '01.01.2022' | 'Main Company' | 'LTV with account charts code mask' | ''         | ''     | 'Shoes'          | ''                  | '405.01'  |
+			| 'Period'     | 'Company'       | 'Ledger type variant'               | 'Item key' | 'Item' | 'Item type' | 'Type of item type' | 'Account' |
+			| '01.01.2022' | 'Own company 1' | 'LTV with account charts code mask' | ''         | ''     | 'Item (without item key)'     | ''                  | '405.01'  |
 	And I close all client application windows
 
 Scenario: _0991033 accounts settings for item types
@@ -1230,14 +1315,14 @@ Scenario: _0991033 accounts settings for item types
 		And I click Choice button of the field named "Company"
 		And I go to line in "List" table
 			| 'Description'     |
-			| 'Main Company'    |
+			| 'Own company 1'    |
 		And I select current line in "List" table
 		And I change the radio button named "RecordType" value to "Item types"	
 		And I select "Certificate" exact value from "Type of item type" drop-down list		
 		And I select from "Ledger type variant" drop-down list by "ltv" string
 		And I select from the drop-down list named "Account" by "90878699" string
 		Then the form attribute named "Account" became equal to "90878699"
-		Then the form attribute named "Company" became equal to "Main Company"
+		Then the form attribute named "Company" became equal to "Own company 1"
 		Then the form attribute named "LedgerTypeVariant" became equal to "LTV with account charts code mask"
 		And the editing text of form attribute named "Period" became equal to "01.01.2022"
 		Then the form attribute named "TypeOfItemType" became equal to "Certificate"			
@@ -1245,7 +1330,7 @@ Scenario: _0991033 accounts settings for item types
 	* Check
 		And "List" table contains lines
 			| 'Period'     | 'Company'      | 'Ledger type variant'               | 'Item key' | 'Item' | 'Item type' | 'Type of item type' | 'Account'  |
-			| '01.01.2022' | 'Main Company' | 'LTV with account charts code mask' | ''         | ''     | ''          | 'Certificate'       | '90878699' |
+			| '01.01.2022' | 'Own company 1' | 'LTV with account charts code mask' | ''         | ''     | ''          | 'Certificate'       | '90878699' |
 	And I close all client application windows
 
 Scenario: _0991034 accounts settings for partner (general for company)
@@ -1263,7 +1348,7 @@ Scenario: _0991034 accounts settings for partner (general for company)
 		And I click Choice button of the field named "Company"
 		And I go to line in "List" table
 			| 'Description'     |
-			| 'Main Company'    |
+			| 'Own company 1'    |
 		And I select current line in "List" table
 		And I select from "Ledger type variant" drop-down list by "ltv" string
 		And I set checkbox named "Vendor"
@@ -1288,7 +1373,7 @@ Scenario: _0991034 accounts settings for partner (general for company)
 	* Check
 		And "List" table contains lines
 			| 'Period'     | 'Company'      | 'Partner' | 'Ledger type variant'               | 'Agreement' | 'Vendor' | 'Customer' | 'Transactions' | 'Other' | 'Advances' |
-			| '01.01.2022' | 'Main Company' | ''        | 'LTV with account charts code mask' | ''          | 'Yes'    | 'Yes'      | '90878699'     | 'Yes'   | '405.01'   |	
+			| '01.01.2022' | 'Own company 1' | ''        | 'LTV with account charts code mask' | ''          | 'Yes'    | 'Yes'      | '90878699'     | 'Yes'   | '405.01'   |	
 	And I close all client application windows
 
 Scenario: _0991035 accounts settings for partner (vendor)
@@ -1301,7 +1386,7 @@ Scenario: _0991035 accounts settings for partner (vendor)
 		And I click Choice button of the field named "Company"
 		And I go to line in "List" table
 			| 'Description'     |
-			| 'Main Company'    |
+			| 'Own company 1'    |
 		And I select current line in "List" table
 		And I select from "Ledger type variant" drop-down list by "ltv" string
 		And I set checkbox named "Vendor"
@@ -1312,21 +1397,21 @@ Scenario: _0991035 accounts settings for partner (vendor)
 		And I select from the drop-down list named "AccountAdvancesVendor" by "40501" string
 		And I select from the drop-down list named "AccountTransactionsVendor" by "9087" string
 		And I change the radio button named "RecordType" value to "Partner"
-		And I select from the drop-down list named "Partner" by "ferron" string
+		And I select from the drop-down list named "Partner" by "Customer 1 (1 partner term)" string
 		Then the form attribute named "AccountAdvancesVendor" became equal to "405.01"
 		Then the form attribute named "AccountTransactionsVendor" became equal to "90878699"
-		Then the form attribute named "Company" became equal to "Main Company"
+		Then the form attribute named "Company" became equal to "Own company 1"
 		Then the form attribute named "Customer" became equal to "No"
 		Then the form attribute named "LedgerTypeVariant" became equal to "LTV with account charts code mask"
 		Then the form attribute named "Other" became equal to "No"
-		Then the form attribute named "Partner" became equal to "Ferron BP"
+		Then the form attribute named "Partner" became equal to "Customer 1 (1 partner term)"
 		Then the form attribute named "RecordType" became equal to "Partner"
 		Then the form attribute named "Vendor" became equal to "Yes"
 		And I click "Save and close" button
 	* Check
 		And "List" table contains lines
-			| 'Period'     | 'Company'      | 'Partner'   | 'Ledger type variant'               | 'Agreement' | 'Vendor' | 'Customer' | 'Transactions' | 'Other' | 'Advances' |
-			| '01.01.2022' | 'Main Company' | 'Ferron BP' | 'LTV with account charts code mask' | ''          | 'Yes'    | 'No'       | ''             | 'No'    | ''         |
+			| 'Period'     | 'Company'       | 'Partner'                     | 'Ledger type variant'               | 'Agreement' | 'Vendor' | 'Customer' | 'Transactions' | 'Other' | 'Advances' |
+			| '01.01.2022' | 'Own company 1' | 'Customer 1 (1 partner term)' | 'LTV with account charts code mask' | ''          | 'Yes'    | 'No'       | ''             | 'No'    | ''         |
 	And I close all client application windows
 
 Scenario: _0991036 accounts settings for partner (customer)
@@ -1339,7 +1424,7 @@ Scenario: _0991036 accounts settings for partner (customer)
 		And I click Choice button of the field named "Company"
 		And I go to line in "List" table
 			| 'Description'     |
-			| 'Main Company'    |
+			| 'Own company 1'    |
 		And I select current line in "List" table
 		And I select from "Ledger type variant" drop-down list by "ltv" string
 		And I set checkbox named "Customer"
@@ -1350,21 +1435,21 @@ Scenario: _0991036 accounts settings for partner (customer)
 		And I select from the drop-down list named "AccountAdvancesCustomer" by "40501" string
 		And I select from the drop-down list named "AccountTransactionsCustomer" by "9087" string
 		And I change the radio button named "RecordType" value to "Partner"
-		And I select from the drop-down list named "Partner" by "Maxim" string
+		And I select from the drop-down list named "Partner" by "Customer 2 (2 partner term)" string
 		Then the form attribute named "AccountAdvancesCustomer" became equal to "405.01"
 		Then the form attribute named "AccountTransactionsCustomer" became equal to "90878699"
-		Then the form attribute named "Company" became equal to "Main Company"
+		Then the form attribute named "Company" became equal to "Own company 1"
 		Then the form attribute named "Customer" became equal to "Yes"
 		Then the form attribute named "LedgerTypeVariant" became equal to "LTV with account charts code mask"
 		Then the form attribute named "Other" became equal to "No"
-		Then the form attribute named "Partner" became equal to "Maxim"
+		Then the form attribute named "Partner" became equal to "Customer 2 (2 partner term)"
 		Then the form attribute named "RecordType" became equal to "Partner"
 		Then the form attribute named "Vendor" became equal to "No"
 		And I click "Save and close" button
 	* Check
 		And "List" table contains lines
-			| 'Period'     | 'Company'      | 'Partner' | 'Ledger type variant'               | 'Agreement' | 'Vendor' | 'Customer' | 'Transactions' | 'Other' | 'Advances' |
-			| '01.01.2022' | 'Main Company' | 'Maxim'   | 'LTV with account charts code mask' | ''          | 'No'     | 'Yes'      | ''             | 'No'    | ''         |
+			| 'Period'     | 'Company'       | 'Partner' | 'Ledger type variant'               | 'Agreement' | 'Vendor' | 'Customer' | 'Transactions' | 'Other' | 'Advances' |
+			| '01.01.2022' | 'Own company 1' | 'Customer 2 (2 partner term)'   | 'LTV with account charts code mask' | ''          | 'No'     | 'Yes'      | ''             | 'No'    | ''         |
 	And I close all client application windows
 				
 
@@ -1378,27 +1463,27 @@ Scenario: _0991037 accounts settings for partner (partner term)
 		And I click Choice button of the field named "Company"
 		And I go to line in "List" table
 			| 'Description'     |
-			| 'Main Company'    |
+			| 'Own company 1'    |
 		And I select current line in "List" table
 		And I select from "Ledger type variant" drop-down list by "ltv" string
 		And I change the radio button named "RecordType" value to "Partner term"	
 		And I set checkbox named "Customer"
-		And I select from the drop-down list named "Agreement" by "Basic Partner terms, TRY" string
+		And I select from the drop-down list named "Agreement" by "Partner term with customer (by document + credit limit)" string
 		And I select from the drop-down list named "AccountAdvancesCustomer" by "40501" string
 		And I select from the drop-down list named "AccountTransactionsCustomer" by "9087" string		
 		Then the form attribute named "AccountAdvancesCustomer" became equal to "405.01"
 		Then the form attribute named "AccountTransactionsCustomer" became equal to "90878699"
-		Then the form attribute named "Company" became equal to "Main Company"
+		Then the form attribute named "Company" became equal to "Own company 1"
 		Then the form attribute named "LedgerTypeVariant" became equal to "LTV with account charts code mask"
-		Then the form attribute named "Agreement" became equal to "Basic Partner terms, TRY"
+		Then the form attribute named "Agreement" became equal to "Partner term with customer (by document + credit limit)"
 		Then the form attribute named "RecordType" became equal to "Agreement"
 		Then the form attribute named "AccountAdvancesCustomer" became equal to "405.01"
 		Then the form attribute named "AccountTransactionsCustomer" became equal to "90878699"
 		And I click "Save and close" button
 	* Check
 		And "List" table contains lines
-			| 'Period'     | 'Company'      | 'Partner'   | 'Ledger type variant'               | 'Agreement'                | 'Vendor' | 'Customer' | 'Transactions' | 'Other' | 'Advances' |
-			| '01.01.2022' | 'Main Company' | ''          | 'LTV with account charts code mask' | 'Basic Partner terms, TRY' | 'No'     | 'Yes'      | ''             | 'No'    | ''         |
+			| 'Period'     | 'Company'       | 'Partner' | 'Ledger type variant'               | 'Agreement'                                               | 'Vendor' | 'Customer' | 'Transactions' | 'Other' | 'Advances' |
+			| '01.01.2022' | 'Own company 1' | ''        | 'LTV with account charts code mask' | 'Partner term with customer (by document + credit limit)' | 'No'     | 'Yes'      | ''             | 'No'    | ''         |
 	And I close all client application windows	
 
 Scenario: _0991038 accounts settings for tax (general for company)
@@ -1416,7 +1501,7 @@ Scenario: _0991038 accounts settings for tax (general for company)
 		And I click Choice button of the field named "Company"
 		And I go to line in "List" table
 			| 'Description'     |
-			| 'Main Company'    |
+			| 'Own company 1'    |
 		And I select current line in "List" table
 		And I select from "Ledger type variant" drop-down list by "ltv" string
 		And I select from "Incoming account" drop-down list by "4050" string
@@ -1425,7 +1510,7 @@ Scenario: _0991038 accounts settings for tax (general for company)
 	* Check
 		And "List" table contains lines
 			| 'Period'     | 'Company'      | 'Ledger type variant'               | 'Tax' | 'Vat rate' | 'Incoming account' | 'Outgoing account' |
-			| '01.01.2022' | 'Main Company' | 'LTV with account charts code mask' | ''    | ''         | '405.01'           | '90878699'         |		
+			| '01.01.2022' | 'Own company 1' | 'LTV with account charts code mask' | ''    | ''         | '405.01'           | '90878699'         |		
 	And I close all client application windows			
 
 Scenario: _0991038 accounts settings for tax type and rate
@@ -1438,18 +1523,18 @@ Scenario: _0991038 accounts settings for tax type and rate
 		And I click Choice button of the field named "Company"
 		And I go to line in "List" table
 			| 'Description'     |
-			| 'Main Company'    |
+			| 'Own company 1'    |
 		And I select current line in "List" table
 		And I select from "Ledger type variant" drop-down list by "ltv" string
 		And I change the radio button named "RecordType" value to "Tax type"
 		And I select from the drop-down list named "Tax" by "vat" string
-		And I select from "Vat rate" drop-down list by "18" string
+		And I select from "Vat rate" drop-down list by "20" string
 		And I select from "Incoming account" drop-down list by "4050" string
 		And I select from "Outgoing account" drop-down list by "9087" string		
 		And I click "Save and close" button
 	* Check
 		And "List" table contains lines
-			| 'Period'     | 'Company'      | 'Ledger type variant'               | 'Tax' | 'Vat rate' | 'Incoming account' | 'Outgoing account' |
-			| '01.01.2022' | 'Main Company' | 'LTV with account charts code mask' | 'VAT' | '18%'      | '405.01'           | '90878699'         |	
+			| 'Period'     | 'Company'       | 'Ledger type variant'               | 'Tax' | 'Vat rate' | 'Incoming account' | 'Outgoing account' |
+			| '01.01.2022' | 'Own company 1' | 'LTV with account charts code mask' | 'VAT' | '20%'      | '405.01'           | '90878699'         |
 	And I close all client application windows
 

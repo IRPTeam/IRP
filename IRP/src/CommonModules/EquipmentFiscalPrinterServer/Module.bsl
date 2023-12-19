@@ -32,6 +32,8 @@ Procedure FillCheckPackageByRetailReceipt(Val SourceData, CheckPackage) Export
 	
 	If isCorrection Then
 		
+		CheckPackage.Parameters.AdditionalAttribute = SourceData.BasisDocumentFiscalNumber;
+		
 		isReverse = Not TypeOf(SourceData.BasisDocument) = Type("DocumentRef.RetailReceiptCorrection");
 		DocumentWithCorrectionInfo = SourceData;
 		If isReverse Then
@@ -97,7 +99,7 @@ Procedure FillCheckPackageByRetailReceipt(Val SourceData, CheckPackage) Export
 		FiscalStringData.DiscountAmount = ItemRow.OffersAmount;
 		
 		// TODO: Get from ItemType (or Item) CalculationSubject
-		If ItemRow.isControlCodeString Then
+		If ItemRow.isControlCodeString And Not isCorrection Then
 			FillControlString(CCSRows, ItemRow, FiscalStringData);
 		Else
 			If ItemRow.Item.ItemType.Type = Enums.ItemTypes.Certificate Then

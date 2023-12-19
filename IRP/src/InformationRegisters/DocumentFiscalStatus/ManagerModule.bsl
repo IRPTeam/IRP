@@ -35,7 +35,7 @@ EndProcedure
 // * Status - EnumRef.DocumentFiscalStatuses -
 // * FiscalResponse - String -
 // * DataPresentation - String -
-// * CheckNumber - Number -
+// * CheckNumber - String -
 // * IsPrinted - Boolean -
 Function GetStatusData(Document) Export
 	StatusData = New Structure();

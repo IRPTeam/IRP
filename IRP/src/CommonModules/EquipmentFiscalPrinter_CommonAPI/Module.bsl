@@ -897,6 +897,7 @@ Function CheckPackage_ToXML(CheckPackage)
 	XMLWriter.WriteAttribute("SaleLocation" , ToXMLString(CheckPackage.Parameters.SaleLocation));
 	XMLWriter.WriteAttribute("OperationType" , ToXMLString(CheckPackage.Parameters.OperationType));
 	XMLWriter.WriteAttribute("TaxationSystem" , ToXMLString(CheckPackage.Parameters.TaxationSystem));
+	XMLWriter.WriteAttribute("AdditionalAttribute" , ToXMLString(CheckPackage.Parameters.AdditionalAttribute));
 	
 	If CheckPackage.Parameters.CorrectionData.Property("Description") 
 		AND Not IsBlankString(CheckPackage.Parameters.CorrectionData.Description) Then

@@ -146,17 +146,17 @@ Async Function ProcessCorrectionCheck(ConsolidatedRetailSales, DataSource) Expor
 	CheckPackage = EquipmentFiscalPrinterAPIClient.CheckPackage();
 	EquipmentFiscalPrinterServer.FillData(DataSource, CheckPackage);
 	
-	If TypeOf(DataSource) = Type("DocumentRef.RetailReceiptCorrection") Then
-		BasisDocument = CommonFunctionsServer.GetRefAttribute(DataSource,"BasisDocument");
-		
-		isReverse = Not TypeOf(BasisDocument) = Type("DocumentRef.RetailReceiptCorrection");
-		If isReverse Then
-			isReturn = Not TypeOf(BasisDocument) = Type("DocumentRef.RetailReturnReceipt");
-		Else
-			isReturn = TypeOf(CommonFunctionsServer.GetRefAttribute(BasisDocument,"BasisDocument")) = Type("DocumentRef.RetailReturnReceipt");
-		EndIf;
-		
-		
+	BasisDocument = CommonFunctionsServer.GetRefAttribute(DataSource,"BasisDocument");
+	
+	isReverse = Not TypeOf(BasisDocument) = Type("DocumentRef.RetailReceiptCorrection");
+	If isReverse Then
+		isReturn = Not TypeOf(BasisDocument) = Type("DocumentRef.RetailReturnReceipt");
+	Else
+		isReturn = TypeOf(CommonFunctionsServer.GetRefAttribute(BasisDocument,"BasisDocument")) = Type("DocumentRef.RetailReturnReceipt");
+	EndIf;
+	
+	ControlOnCorresction = False;
+	If ControlOnCorresction Then
 		CodeStringList = EquipmentFiscalPrinterServer.GetMarkingCode(DataSource);
 	
 		If Not CodeStringList.Count() = 0 Then
@@ -166,7 +166,7 @@ Async Function ProcessCorrectionCheck(ConsolidatedRetailSales, DataSource) Expor
 				Return CheckControlStrings;
 			EndIf;
 		EndIf;
-	EndIf;			
+	EndIf;
 			
 	ProcessCheckSettings.In.CheckPackage = CheckPackage;
 	If Await EquipmentFiscalPrinterAPIClient.ProcessCorrectionCheck(CRS.FiscalPrinter, ProcessCheckSettings) Then

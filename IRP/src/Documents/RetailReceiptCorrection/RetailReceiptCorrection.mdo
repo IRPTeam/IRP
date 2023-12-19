@@ -399,6 +399,24 @@
     <fullTextSearch>Use</fullTextSearch>
     <dataHistory>Use</dataHistory>
   </attributes>
+  <attributes uuid="148bff3e-b8ec-440f-b2c9-415714af07e8">
+    <name>BasisDocumentFiscalNumber</name>
+    <synonym>
+      <key>en</key>
+      <value>Basis document fiscal number</value>
+    </synonym>
+    <type>
+      <types>String</types>
+      <stringQualifiers>
+        <length>20</length>
+      </stringQualifiers>
+    </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <fillValue xsi:type="core:UndefinedValue"/>
+    <fullTextSearch>Use</fullTextSearch>
+    <dataHistory>Use</dataHistory>
+  </attributes>
   <forms uuid="25f5eabb-f4ad-4a36-b595-cf68b50bc18b">
     <name>DocumentForm</name>
     <synonym>

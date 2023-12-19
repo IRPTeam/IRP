@@ -206,7 +206,9 @@
   <sessionParameters>SessionParameter.Workstation</sessionParameters>
   <roles>Role.BasicRole</roles>
   <roles>Role.CreateOrModifyUsers</roles>
+  <roles>Role.Document_AdditionalAccrual</roles>
   <roles>Role.Document_AdditionalCostAllocation</roles>
+  <roles>Role.Document_AdditionalDeduction</roles>
   <roles>Role.Document_AdditionalRevenueAllocation</roles>
   <roles>Role.Document_BankPayment</roles>
   <roles>Role.Document_BankReceipt</roles>
@@ -230,6 +232,11 @@
   <roles>Role.Document_DecommissioningOfFixedAsset</roles>
   <roles>Role.Document_DepreciationCalculation</roles>
   <roles>Role.Document_EmployeeCashAdvance</roles>
+  <roles>Role.Document_EmployeeFiring</roles>
+  <roles>Role.Document_EmployeeHiring</roles>
+  <roles>Role.Document_EmployeeSickLeave</roles>
+  <roles>Role.Document_EmployeeTransfer</roles>
+  <roles>Role.Document_EmployeeVacation</roles>
   <roles>Role.Document_FixedAssetTransfer</roles>
   <roles>Role.Document_ForeignCurrencyRevaluation</roles>
   <roles>Role.Document_GoodsReceipt</roles>
@@ -262,6 +269,7 @@
   <roles>Role.Document_PurchaseReturnOrder</roles>
   <roles>Role.Document_ReconciliationStatement</roles>
   <roles>Role.Document_RetailGoodsReceipt</roles>
+  <roles>Role.Document_RetailReceiptCorrection</roles>
   <roles>Role.Document_RetailReturnReceipt</roles>
   <roles>Role.Document_RetailSalesReceipt</roles>
   <roles>Role.Document_RetailShipmentConfirmation</roles>
@@ -312,14 +320,6 @@
   <roles>Role.UseExternalReports</roles>
   <roles>Role.UseGroupEditingProperties</roles>
   <roles>Role.UseOutput</roles>
-  <roles>Role.Document_EmployeeHiring</roles>
-  <roles>Role.Document_EmployeeTransfer</roles>
-  <roles>Role.Document_EmployeeFiring</roles>
-  <roles>Role.Document_EmployeeVacation</roles>
-  <roles>Role.Document_EmployeeSickLeave</roles>
-  <roles>Role.Document_AdditionalAccrual</roles>
-  <roles>Role.Document_AdditionalDeduction</roles>
-  <roles>Role.Document_RetailReceiptCorrection</roles>
   <commonTemplates>CommonTemplate.HTMLPictureSlider</commonTemplates>
   <commonTemplates>CommonTemplate.HTMLAddAttributes</commonTemplates>
   <commonTemplates>CommonTemplate.HTMLGallery</commonTemplates>
@@ -958,7 +958,9 @@
   <catalogs>Catalog.Workstations</catalogs>
   <catalogs>Catalog.EmployeeSchedule</catalogs>
   <catalogs>Catalog.Projects</catalogs>
+  <documents>Document.AdditionalAccrual</documents>
   <documents>Document.AdditionalCostAllocation</documents>
+  <documents>Document.AdditionalDeduction</documents>
   <documents>Document.AdditionalRevenueAllocation</documents>
   <documents>Document.BankPayment</documents>
   <documents>Document.BankReceipt</documents>
@@ -974,11 +976,20 @@
   <documents>Document.CashTransferOrder</documents>
   <documents>Document.ChequeBondTransaction</documents>
   <documents>Document.ChequeBondTransactionItem</documents>
+  <documents>Document.CommissioningOfFixedAsset</documents>
   <documents>Document.ConsolidatedRetailSales</documents>
   <documents>Document.CreditNote</documents>
   <documents>Document.CustomersAdvancesClosing</documents>
   <documents>Document.DebitNote</documents>
+  <documents>Document.DecommissioningOfFixedAsset</documents>
+  <documents>Document.DepreciationCalculation</documents>
   <documents>Document.EmployeeCashAdvance</documents>
+  <documents>Document.EmployeeFiring</documents>
+  <documents>Document.EmployeeHiring</documents>
+  <documents>Document.EmployeeSickLeave</documents>
+  <documents>Document.EmployeeTransfer</documents>
+  <documents>Document.EmployeeVacation</documents>
+  <documents>Document.FixedAssetTransfer</documents>
   <documents>Document.ForeignCurrencyRevaluation</documents>
   <documents>Document.GoodsReceipt</documents>
   <documents>Document.IncomingPaymentOrder</documents>
@@ -989,6 +1000,7 @@
   <documents>Document.JournalEntry</documents>
   <documents>Document.Labeling</documents>
   <documents>Document.ManualRegisterEntry</documents>
+  <documents>Document.ModernizationOfFixedAsset</documents>
   <documents>Document.MoneyTransfer</documents>
   <documents>Document.OpeningEntry</documents>
   <documents>Document.OutgoingPaymentOrder</documents>
@@ -1009,6 +1021,7 @@
   <documents>Document.PurchaseReturnOrder</documents>
   <documents>Document.ReconciliationStatement</documents>
   <documents>Document.RetailGoodsReceipt</documents>
+  <documents>Document.RetailReceiptCorrection</documents>
   <documents>Document.RetailReturnReceipt</documents>
   <documents>Document.RetailSalesReceipt</documents>
   <documents>Document.RetailShipmentConfirmation</documents>
@@ -1029,19 +1042,6 @@
   <documents>Document.WorkOrder</documents>
   <documents>Document.WorkOrderClosing</documents>
   <documents>Document.WorkSheet</documents>
-  <documents>Document.CommissioningOfFixedAsset</documents>
-  <documents>Document.DecommissioningOfFixedAsset</documents>
-  <documents>Document.DepreciationCalculation</documents>
-  <documents>Document.FixedAssetTransfer</documents>
-  <documents>Document.ModernizationOfFixedAsset</documents>
-  <documents>Document.EmployeeHiring</documents>
-  <documents>Document.EmployeeTransfer</documents>
-  <documents>Document.EmployeeFiring</documents>
-  <documents>Document.EmployeeVacation</documents>
-  <documents>Document.EmployeeSickLeave</documents>
-  <documents>Document.AdditionalAccrual</documents>
-  <documents>Document.AdditionalDeduction</documents>
-  <documents>Document.RetailReceiptCorrection</documents>
   <documentJournals>DocumentJournal.DocumentsForIncomingPayment</documentJournals>
   <documentJournals>DocumentJournal.DocumentsForOutgoingPayment</documentJournals>
   <enums>Enum.AccountingAnalyticTypes</enums>

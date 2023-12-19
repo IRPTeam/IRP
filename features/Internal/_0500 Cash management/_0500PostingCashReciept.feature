@@ -90,7 +90,7 @@ Scenario: _050001 create Cash receipt based on Sales invoice
 		And I go to line in "List" table
 			| 'Number'                          |
 			| '$$NumberSalesInvoice024001$$'    |
-		And I click the button named "FormDocumentCashReceiptGenarateCashReceipt"
+		And I click the button named "FormDocumentCashReceiptGenerateCashReceipt"
 	* Create and filling in Cash receipt
 		Then the form attribute named "Company" became equal to "Main Company"
 		Then the form attribute named "TransactionType" became equal to "Payment from customer"

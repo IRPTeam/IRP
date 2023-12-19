@@ -367,7 +367,9 @@
   <commonModules>CommonModule.CommonFunctionsClient</commonModules>
   <commonModules>CommonModule.CommonFunctionsClientServer</commonModules>
   <commonModules>CommonModule.CommonFunctionsServer</commonModules>
+  <commonModules>CommonModule.ControlCodeStringClient</commonModules>
   <commonModules>CommonModule.ControlCodeStringsClient</commonModules>
+  <commonModules>CommonModule.ControlCodeStringServer</commonModules>
   <commonModules>CommonModule.ControllerClientServer_V2</commonModules>
   <commonModules>CommonModule.ControllerServer_V2</commonModules>
   <commonModules>CommonModule.ConvertXDTO</commonModules>
@@ -378,8 +380,12 @@
   <commonModules>CommonModule.CurrenciesClientServer</commonModules>
   <commonModules>CommonModule.CurrenciesServer</commonModules>
   <commonModules>CommonModule.DataVersioningServer</commonModules>
+  <commonModules>CommonModule.DocAdditionalAccrualClient</commonModules>
+  <commonModules>CommonModule.DocAdditionalAccrualServer</commonModules>
   <commonModules>CommonModule.DocAdditionalCostAllocationClient</commonModules>
   <commonModules>CommonModule.DocAdditionalCostAllocationServer</commonModules>
+  <commonModules>CommonModule.DocAdditionalDeductionClient</commonModules>
+  <commonModules>CommonModule.DocAdditionalDeductionServer</commonModules>
   <commonModules>CommonModule.DocAdditionalRevenueAllocationClient</commonModules>
   <commonModules>CommonModule.DocAdditionalRevenueAllocationServer</commonModules>
   <commonModules>CommonModule.DocBankPaymentClient</commonModules>
@@ -410,6 +416,16 @@
   <commonModules>CommonModule.DocDecommissioningOfFixedAssetServer</commonModules>
   <commonModules>CommonModule.DocEmployeeCashAdvanceClient</commonModules>
   <commonModules>CommonModule.DocEmployeeCashAdvanceServer</commonModules>
+  <commonModules>CommonModule.DocEmployeeFiringClient</commonModules>
+  <commonModules>CommonModule.DocEmployeeFiringServer</commonModules>
+  <commonModules>CommonModule.DocEmployeeHiringClient</commonModules>
+  <commonModules>CommonModule.DocEmployeeHiringServer</commonModules>
+  <commonModules>CommonModule.DocEmployeeSickLeaveClient</commonModules>
+  <commonModules>CommonModule.DocEmployeeSickLeaveServer</commonModules>
+  <commonModules>CommonModule.DocEmployeeTransferClient</commonModules>
+  <commonModules>CommonModule.DocEmployeeTransferServer</commonModules>
+  <commonModules>CommonModule.DocEmployeeVacationClient</commonModules>
+  <commonModules>CommonModule.DocEmployeeVacationServer</commonModules>
   <commonModules>CommonModule.DocFixedAssetTransferClient</commonModules>
   <commonModules>CommonModule.DocFixedAssetTransferServer</commonModules>
   <commonModules>CommonModule.DocGoodsReceiptClient</commonModules>
@@ -470,6 +486,8 @@
   <commonModules>CommonModule.DocReconciliationStatementServer</commonModules>
   <commonModules>CommonModule.DocRetailGoodsReceiptClient</commonModules>
   <commonModules>CommonModule.DocRetailGoodsReceiptServer</commonModules>
+  <commonModules>CommonModule.DocRetailReceiptCorrectionClient</commonModules>
+  <commonModules>CommonModule.DocRetailReceiptCorrectionServer</commonModules>
   <commonModules>CommonModule.DocRetailReturnReceiptClient</commonModules>
   <commonModules>CommonModule.DocRetailReturnReceiptServer</commonModules>
   <commonModules>CommonModule.DocRetailSalesReceiptClient</commonModules>
@@ -503,6 +521,8 @@
   <commonModules>CommonModule.DocumentsServerMobile</commonModules>
   <commonModules>CommonModule.DocUnbundlingClient</commonModules>
   <commonModules>CommonModule.DocUnbundlingServer</commonModules>
+  <commonModules>CommonModule.DocVisitorCounterClient</commonModules>
+  <commonModules>CommonModule.DocVisitorCounterServer</commonModules>
   <commonModules>CommonModule.DocWorkOrderClient</commonModules>
   <commonModules>CommonModule.DocWorkOrderClosingServer</commonModules>
   <commonModules>CommonModule.DocWorkOrderServer</commonModules>
@@ -578,6 +598,8 @@
   <commonModules>CommonModule.RowIDInfoServerReuse</commonModules>
   <commonModules>CommonModule.Saas</commonModules>
   <commonModules>CommonModule.SaasClient</commonModules>
+  <commonModules>CommonModule.SalaryPrivileged</commonModules>
+  <commonModules>CommonModule.SalaryServer</commonModules>
   <commonModules>CommonModule.ScheduledJobsForExtentions</commonModules>
   <commonModules>CommonModule.SerialLotNumberClient</commonModules>
   <commonModules>CommonModule.SerialLotNumberClientServer</commonModules>
@@ -605,28 +627,6 @@
   <commonModules>CommonModule.ViewServer_V2</commonModules>
   <commonModules>CommonModule.WorkstationClient</commonModules>
   <commonModules>CommonModule.WorkstationServer</commonModules>
-  <commonModules>CommonModule.DocEmployeeHiringClient</commonModules>
-  <commonModules>CommonModule.DocEmployeeHiringServer</commonModules>
-  <commonModules>CommonModule.DocEmployeeTransferClient</commonModules>
-  <commonModules>CommonModule.DocEmployeeTransferServer</commonModules>
-  <commonModules>CommonModule.DocEmployeeFiringClient</commonModules>
-  <commonModules>CommonModule.DocEmployeeFiringServer</commonModules>
-  <commonModules>CommonModule.DocEmployeeVacationClient</commonModules>
-  <commonModules>CommonModule.DocEmployeeVacationServer</commonModules>
-  <commonModules>CommonModule.DocEmployeeSickLeaveClient</commonModules>
-  <commonModules>CommonModule.DocEmployeeSickLeaveServer</commonModules>
-  <commonModules>CommonModule.DocAdditionalAccrualClient</commonModules>
-  <commonModules>CommonModule.DocAdditionalAccrualServer</commonModules>
-  <commonModules>CommonModule.DocAdditionalDeductionClient</commonModules>
-  <commonModules>CommonModule.DocAdditionalDeductionServer</commonModules>
-  <commonModules>CommonModule.SalaryServer</commonModules>
-  <commonModules>CommonModule.SalaryPrivileged</commonModules>
-  <commonModules>CommonModule.ControlCodeStringServer</commonModules>
-  <commonModules>CommonModule.ControlCodeStringClient</commonModules>
-  <commonModules>CommonModule.DocVisitorCounterClient</commonModules>
-  <commonModules>CommonModule.DocVisitorCounterServer</commonModules>
-  <commonModules>CommonModule.DocRetailReceiptCorrectionClient</commonModules>
-  <commonModules>CommonModule.DocRetailReceiptCorrectionServer</commonModules>
   <commonAttributes>CommonAttribute.Author</commonAttributes>
   <commonAttributes>CommonAttribute.Branch</commonAttributes>
   <commonAttributes>CommonAttribute.Description</commonAttributes>

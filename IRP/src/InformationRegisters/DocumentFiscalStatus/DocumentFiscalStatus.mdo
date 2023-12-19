@@ -103,6 +103,7 @@
       <types>DocumentRef.CashPayment</types>
       <types>DocumentRef.BankPayment</types>
       <types>DocumentRef.BankReceipt</types>
+      <types>DocumentRef.RetailReceiptCorrection</types>
     </type>
     <minValue xsi:type="core:UndefinedValue"/>
     <maxValue xsi:type="core:UndefinedValue"/>

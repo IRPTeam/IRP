@@ -278,7 +278,7 @@ Async Function ProcessCorrectionCheck(Hardware, Settings) Export
 	//@skip-check dynamic-access-method-not-found
 	Result = ConnectParameters.DriverObject.ProcessCorrectionCheck(
 		ConnectParameters.ID,
-		Settings.In.CheckPackage,
+		CheckPackage_ToXML(Settings.In.CheckPackage),
 		DocumentOutputParameters
 	); // Boolean
 
@@ -897,6 +897,18 @@ Function CheckPackage_ToXML(CheckPackage)
 	XMLWriter.WriteAttribute("SaleLocation" , ToXMLString(CheckPackage.Parameters.SaleLocation));
 	XMLWriter.WriteAttribute("OperationType" , ToXMLString(CheckPackage.Parameters.OperationType));
 	XMLWriter.WriteAttribute("TaxationSystem" , ToXMLString(CheckPackage.Parameters.TaxationSystem));
+	XMLWriter.WriteAttribute("AdditionalAttribute" , ToXMLString(CheckPackage.Parameters.AdditionalAttribute));
+	
+	If CheckPackage.Parameters.CorrectionData.Property("Description") 
+		AND Not IsBlankString(CheckPackage.Parameters.CorrectionData.Description) Then
+		XMLWriter.WriteStartElement("CorrectionData");
+		XMLWriter.WriteAttribute("Type", ToXMLString(CheckPackage.Parameters.CorrectionData.Type));
+		XMLWriter.WriteAttribute("Number" , ToXMLString(CheckPackage.Parameters.CorrectionData.Number));
+		XMLWriter.WriteAttribute("Description" , ToXMLString(CheckPackage.Parameters.CorrectionData.Description));
+		XMLWriter.WriteAttribute("Date" , ToXMLString(Format(CheckPackage.Parameters.CorrectionData.Date, "DF=yyyy-MM-ddTHH:mm:ss;")));
+		XMLWriter.WriteEndElement();
+	EndIf;
+	
 	XMLWriter.WriteEndElement();
 
 	XMLWriter.WriteStartElement("Positions");

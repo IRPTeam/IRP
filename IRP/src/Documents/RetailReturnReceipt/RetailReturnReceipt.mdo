@@ -2010,7 +2010,7 @@
     </attributes>
   </tabularSections>
   <commands uuid="da583033-ea5c-4fa1-8143-846671611e1a">
-    <name>Genarate</name>
+    <name>Generate</name>
     <synonym>
       <key>en</key>
       <value>Sales return</value>

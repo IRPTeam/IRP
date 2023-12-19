@@ -2036,7 +2036,7 @@
     </attributes>
   </tabularSections>
   <commands uuid="fac0f0ce-cdcd-4e1f-ae4e-961fb1021bce">
-    <name>Genarate</name>
+    <name>Generate</name>
     <synonym>
       <key>en</key>
       <value>Retail sales receipt</value>

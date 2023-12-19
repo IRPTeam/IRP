@@ -820,21 +820,22 @@ Scenario: Create catalog Taxes objects (test data base)
 		| 'e1cib/data/Catalog.Taxes?ref=b762b13668d0905011eb7663e35d7970'  | 'e1cib/data/Catalog.TaxRates?ref=b762b13668d0905011eb7663e35d796e'   |
 
 	And I refill object tabular section "UseDocuments":
-		| 'Ref'                                                            | 'DocumentName'          |
-		| 'e1cib/data/Catalog.Taxes?ref=b762b13668d0905011eb7663e35d7970'  | 'SalesOrder'            |
-		| 'e1cib/data/Catalog.Taxes?ref=b762b13668d0905011eb7663e35d7970'  | 'SalesOrderClosing'     |
-		| 'e1cib/data/Catalog.Taxes?ref=b762b13668d0905011eb7663e35d7970'  | 'SalesInvoice'          |
-		| 'e1cib/data/Catalog.Taxes?ref=b762b13668d0905011eb7663e35d7970'  | 'SalesReturnOrder'      |
-		| 'e1cib/data/Catalog.Taxes?ref=b762b13668d0905011eb7663e35d7970'  | 'SalesReturn'           |
-		| 'e1cib/data/Catalog.Taxes?ref=b762b13668d0905011eb7663e35d7970'  | 'PurchaseOrder'         |
-		| 'e1cib/data/Catalog.Taxes?ref=b762b13668d0905011eb7663e35d7970'  | 'PurchaseInvoice'       |
-		| 'e1cib/data/Catalog.Taxes?ref=b762b13668d0905011eb7663e35d7970'  | 'PurchaseReturnOrder'   |
-		| 'e1cib/data/Catalog.Taxes?ref=b762b13668d0905011eb7663e35d7970'  | 'PurchaseReturn'        |
-		| 'e1cib/data/Catalog.Taxes?ref=b762b13668d0905011eb7663e35d7970'  | 'CashExpense'           |
-		| 'e1cib/data/Catalog.Taxes?ref=b762b13668d0905011eb7663e35d7970'  | 'CashRevenue'           |
-		| 'e1cib/data/Catalog.Taxes?ref=b762b13668d0905011eb7663e35d7970'  | 'RetailSalesReceipt'    |
-		| 'e1cib/data/Catalog.Taxes?ref=b762b13668d0905011eb7663e35d7970'  | 'RetailReturnReceipt'   |
-		| 'e1cib/data/Catalog.Taxes?ref=b762b13668d0905011eb7663e35d7970'  | 'WorkOrder'             |
+		| 'Ref'                                                            | 'DocumentName'           |
+		| 'e1cib/data/Catalog.Taxes?ref=b762b13668d0905011eb7663e35d7970'  | 'SalesOrder'             |
+		| 'e1cib/data/Catalog.Taxes?ref=b762b13668d0905011eb7663e35d7970'  | 'SalesOrderClosing'      |
+		| 'e1cib/data/Catalog.Taxes?ref=b762b13668d0905011eb7663e35d7970'  | 'SalesInvoice'           |
+		| 'e1cib/data/Catalog.Taxes?ref=b762b13668d0905011eb7663e35d7970'  | 'SalesReturnOrder'       |
+		| 'e1cib/data/Catalog.Taxes?ref=b762b13668d0905011eb7663e35d7970'  | 'SalesReturn'            |
+		| 'e1cib/data/Catalog.Taxes?ref=b762b13668d0905011eb7663e35d7970'  | 'PurchaseOrder'          |
+		| 'e1cib/data/Catalog.Taxes?ref=b762b13668d0905011eb7663e35d7970'  | 'PurchaseInvoice'        |
+		| 'e1cib/data/Catalog.Taxes?ref=b762b13668d0905011eb7663e35d7970'  | 'PurchaseReturnOrder'    |
+		| 'e1cib/data/Catalog.Taxes?ref=b762b13668d0905011eb7663e35d7970'  | 'PurchaseReturn'         |
+		| 'e1cib/data/Catalog.Taxes?ref=b762b13668d0905011eb7663e35d7970'  | 'CashExpense'            |
+		| 'e1cib/data/Catalog.Taxes?ref=b762b13668d0905011eb7663e35d7970'  | 'CashRevenue'            |
+		| 'e1cib/data/Catalog.Taxes?ref=b762b13668d0905011eb7663e35d7970'  | 'RetailSalesReceipt'     |
+		| 'e1cib/data/Catalog.Taxes?ref=b762b13668d0905011eb7663e35d7970'  | 'RetailReturnReceipt'    |
+		| 'e1cib/data/Catalog.Taxes?ref=b762b13668d0905011eb7663e35d7970'  | 'WorkOrder'              |
+		| 'e1cib/data/Catalog.Taxes?ref=b762b13668d0905011eb7663e35d7970'  | 'RetailReceiptCorrection'|
 
 Scenario: Create catalog InterfaceGroups objects (test data base)
 

@@ -2012,7 +2012,121 @@ Scenario: _200052 check Disable - Change author
 		And I select current line in "List" table
 		Then the form attribute named "Author" became equal to "Arina Brown (Financier 3)"
 		And I close all client application windows
-		
+
+Scenario: _200053 check Enable - Change price type
+	And I close all client application windows
+	* Enable - Change price type in POS
+		Given I open hyperlink "e1cib/list/Catalog.Users"
+		And I go to line in "List" table
+			| 'Login'   |
+			| 'CI'      |
+		And I click "Settings" button
+		And I go to line in "MetadataTree" table
+			| 'Group name'             |
+			| 'Enable - Change price type' |
+		And I select current line in "MetadataTree" table
+		And I select "Yes" exact value from "Value" drop-down list in "MetadataTree" table
+		And I finish line editing in "MetadataTree" table
+		And I click "Ok" button
+	* Check
+		And In the command interface I select "Retail" "Point of sale"
+		And I expand a line in "ItemsPickup" table
+			| 'Item'          |
+			| '(10004) Boots' |
+		And I go to line in "ItemsPickup" table
+			| 'Item'                   |
+			| '(10004) Boots, 37/18SD' |
+		And I select current line in "ItemsPickup" table
+		And "ItemList" table contains lines
+			| 'Item'  | 'Sales person' | 'Item key' | 'Serials' | 'Price'  | 'Quantity' | 'Offers' | 'Total'  |
+			| 'Boots' | ''             | '37/18SD'  | ''        | '700,00' | '1,000'    | ''       | '700,00' |
+		And I select current line in "ItemList" table
+		* Change price type
+			And I select current line in "ItemList" table
+			And I click choice button of "Price type" attribute in "ItemList" table
+			And I go to line in "List" table
+				| 'Description'             |
+				| 'Basic Price without VAT' |
+			And I select current line in "List" table
+			And "ItemList" table became equal
+				| 'Item'  | 'Price type'              | 'Sales person' | 'Item key' | 'Serials' | 'Price'  | 'Quantity' | 'Offers' | 'Total'  |
+				| 'Boots' | 'Basic Price without VAT' | ''             | '37/18SD'  | ''        | '648,15' | '1,000'    | ''       | '648,15' |
+			And I finish line editing in "ItemList" table
+			And in the table "ItemList" I click "Delete" button
+			And I close all client application windows
+	* Enable - Change price type in POS, Disable - Change price in POS
+		Given I open hyperlink "e1cib/list/Catalog.Users"
+		And I go to line in "List" table
+			| 'Login'   |
+			| 'CI'      |
+		And I click "Settings" button
+		And I go to line in "MetadataTree" table
+			| 'Group name'             |
+			| 'Disable - Change price' |
+		And I select current line in "MetadataTree" table
+		And I select "Yes" exact value from "Value" drop-down list in "MetadataTree" table
+		And I finish line editing in "MetadataTree" table
+		And I click "Ok" button
+	* Check
+		And In the command interface I select "Retail" "Point of sale"
+		And I expand a line in "ItemsPickup" table
+			| 'Item'          |
+			| '(10004) Boots' |
+		And I go to line in "ItemsPickup" table
+			| 'Item'                   |
+			| '(10004) Boots, 37/18SD' |
+		And I select current line in "ItemsPickup" table
+		And "ItemList" table contains lines
+			| 'Item'  | 'Sales person' | 'Item key' | 'Serials' | 'Price'  | 'Quantity' | 'Offers' | 'Total'  |
+			| 'Boots' | ''             | '37/18SD'  | ''        | '700,00' | '1,000'    | ''       | '700,00' |
+		And I select current line in "ItemList" table
+		When I Check the steps for Exception
+			| 'And I input "100,00" text in "Price" field of "ItemList" table'    |
+		And I select current line in "ItemList" table
+		And I click choice button of "Price type" attribute in "ItemList" table
+		And I go to line in "List" table
+			| 'Description'             |
+			| 'Basic Price without VAT' |
+		And I select current line in "List" table
+		And "ItemList" table became equal
+			| 'Item'  | 'Price type'              | 'Sales person' | 'Item key' | 'Serials' | 'Price'  | 'Quantity' | 'Offers' | 'Total'  |
+			| 'Boots' | 'Basic Price without VAT' | ''             | '37/18SD'  | ''        | '648,15' | '1,000'    | ''       | '648,15' |
+		And I finish line editing in "ItemList" table
+		And in the table "ItemList" I click "Delete" button
+		And I close all client application windows
+	* Disable - Change price type in POS	
+		Given I open hyperlink "e1cib/list/Catalog.Users"
+		And I go to line in "List" table
+			| 'Login'   |
+			| 'CI'      |
+		And I click "Settings" button
+		And I go to line in "MetadataTree" table
+			| 'Group name'             |
+			| 'Disable - Change price' |
+		And I select current line in "MetadataTree" table
+		And I select "No" exact value from "Value" drop-down list in "MetadataTree" table
+		And I remove "Use" checkbox in "MetadataTree" table
+		And I finish line editing in "MetadataTree" table
+		And I go to line in "MetadataTree" table
+			| 'Group name'             |
+			| 'Enable - Change price type' |
+		And I select current line in "MetadataTree" table
+		And I select "No" exact value from "Value" drop-down list in "MetadataTree" table
+		And I finish line editing in "MetadataTree" table
+		And I click "Ok" button
+	* Check	
+		And In the command interface I select "Retail" "Point of sale"
+		And I expand a line in "ItemsPickup" table
+			| 'Item'          |
+			| '(10004) Boots' |
+		And I go to line in "ItemsPickup" table
+			| 'Item'                   |
+			| '(10004) Boots, 37/18SD' |
+		And I select current line in "ItemsPickup" table
+		And I select current line in "ItemList" table
+		When I Check the steps for Exception
+			| 'And I click choice button of "Price type" attribute in "ItemList" table'    |
+		And in the table "ItemList" I click "Delete" button		
 								
 Scenario: _200054 check filling store from user settings when delete row from document (RSR)
 	And I close all client application windows

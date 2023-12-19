@@ -1047,6 +1047,7 @@ Function Strings(Lang) Export
 	Strings.Insert("Error_136", NStr("en = 'Serial lot number is not unique, duplicate codes:[%1]'", Lang));	
 	Strings.Insert("Error_137", NStr("en = 'Not filled [Key] in tabular section [%1] line number[%2]'", Lang));	
 	Strings.Insert("Error_138", NStr("en = 'Cannot change the unit from [%1] to [%2], used in document [%3]'", Lang));	
+	Strings.Insert("Error_139", NStr("en = 'Description not unique [%1]'", Lang));	
 	
 	
 	Strings.Insert("Error_FillTotalAmount", NStr("en = 'Fill total amount. Row: [%1]'", Lang));

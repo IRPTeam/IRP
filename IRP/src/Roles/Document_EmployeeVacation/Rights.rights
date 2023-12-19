@@ -111,4 +111,36 @@
 			<value>true</value>
 		</right>
 	</object>
+	<restrictionTemplate>
+		<name>CheckDocumentAccess</name>
+		<condition>
+#If Not &amp;UseObjectAccess #Then
+	// Access restiction not using. Set UseObjectAccess functional option TRUE
+	WHERE TRUE
+#Else
+Table
+WHERE NOT (FALSE) IN (
+	SELECT
+		MIN((ObjectAccessKeysFilterDataList.Key = "" OR NOT AG.Key IS NULL))
+		
+	FROM InformationRegister.T9100A_ObjectAccessMap AS T9100A_ObjectAccessMap
+		LEFT JOIN Catalog.ObjectAccessKeys.FilterDataList AS ObjectAccessKeysFilterDataList
+			LEFT JOIN Catalog.AccessGroups.ObjectAccess AS AG
+				ON AG.Ref IN (&amp;CurrentUserAccessGroupList)
+					AND AG.Key = ObjectAccessKeysFilterDataList.Key
+					AND (AG.ValueRef = ObjectAccessKeysFilterDataList.ValueRef1 
+					 	OR AG.ValueRef = ObjectAccessKeysFilterDataList.ValueRef2 
+					 	OR AG.ValueRef = ObjectAccessKeysFilterDataList.ValueRef3
+					 	OR AG.ValueRef = ObjectAccessKeysFilterDataList.ValueRef4
+					 	OR AG.ValueRef = ObjectAccessKeysFilterDataList.ValueRef5
+					 	OR  AG.DoNotControl)
+					#If #CurrentAccessRightName = "Insert" OR #CurrentAccessRightName = "Update" #Then
+					AND (AG.Modify)
+					#EndIf
+			ON ObjectAccessKeysFilterDataList.Ref = T9100A_ObjectAccessMap.ObjectAccessKeys
+		
+	WHERE
+		T9100A_ObjectAccessMap.ObjectRef = Table.Ref
+)#EndIf</condition>
+	</restrictionTemplate>
 </Rights>

@@ -396,7 +396,7 @@ SalesReceiptXML28 =
 """xml
 <?xml version="1.0" encoding="UTF-8"?>
 <CheckPackage>
-	<Parameters CashierName="Арина Браун" CashierINN="1111111111" SaleAddress="Sale address" SaleLocation="Sale location" OperationType="2" TaxationSystem="0">
+	<Parameters CashierName="Арина Браун" CashierINN="1111111111" SaleAddress="Sale address" SaleLocation="Sale location" OperationType="2" TaxationSystem="0" AdditionalAttribute="715">
 		<CorrectionData Type="0" Number="0" Description="wrong VAT rate" Date="2023-12-19T13:24:48"/>
 	</Parameters>
 	<Positions>
@@ -413,12 +413,11 @@ SalesReceiptXML28 =
 			<VendorData VendorINN="2" VendorName="Consignor 2" VendorPhone=""/>
 		</FiscalString>
 		<FiscalString AmountWithDiscount="100" DiscountAmount="0" MeasureOfQuantity="255" CalculationSubject="1" Name="Dress S/Yellow" Quantity="1" PaymentMethod="4" PriceWithDiscount="100" VATRate="18" VATAmount="15.25"/>
-		<FiscalString AmountWithDiscount="100" DiscountAmount="0" MarkingCode="11111111111111111111" MeasureOfQuantity="255" CalculationSubject="1" Name="Product 15 with SLN and code control (Main Company - Consignor 1) ODS [900999000009]" Quantity="1" PaymentMethod="4" PriceWithDiscount="100" VATRate="18" VATAmount="15.25" CalculationAgent="5">
+		<FiscalString AmountWithDiscount="100" DiscountAmount="0" MeasureOfQuantity="255" CalculationSubject="1" Name="Product 15 with SLN and code control (Main Company - Consignor 1) ODS [900999000009]" Quantity="1" PaymentMethod="4" PriceWithDiscount="100" VATRate="18" VATAmount="15.25" CalculationAgent="5">
 			<VendorData VendorINN="1" VendorName="Consignor 1" VendorPhone=""/>
 		</FiscalString>
 		<FiscalString AmountWithDiscount="100" DiscountAmount="0" MeasureOfQuantity="255" CalculationSubject="1" Name="Product 16 with SLN and Good code data (Main Company - Consignor 1) PZU [89000008999]" Quantity="1" PaymentMethod="4" PriceWithDiscount="100" VATRate="18" VATAmount="15.25" CalculationAgent="5">
 			<VendorData VendorINN="1" VendorName="Consignor 1" VendorPhone=""/>
-			<GoodCodeData NotIdentified="Q3VycmVudCByb3cgd2lsbCBkZWNvZGUgdG8gYmFzZTY2"/>
 		</FiscalString>
 	</Positions>
 	<Payments Cash="700" ElectronicPayment="0" PrePayment="0" PostPayment="0" Barter="0"/>
@@ -429,7 +428,7 @@ SalesReceiptXML29 =
 """xml
 <?xml version="1.0" encoding="UTF-8"?>
 <CheckPackage>
-	<Parameters CashierName="Арина Браун" CashierINN="1111111111" SaleAddress="Sale address" SaleLocation="Sale location" OperationType="1" TaxationSystem="0">
+	<Parameters CashierName="Арина Браун" CashierINN="1111111111" SaleAddress="Sale address" SaleLocation="Sale location" OperationType="1" TaxationSystem="0" AdditionalAttribute="716">
 		<CorrectionData Type="0" Number="0" Description="wrong VAT rate" Date="2023-12-19T13:24:48"/>
 	</Parameters>
 	<Positions>
@@ -446,12 +445,11 @@ SalesReceiptXML29 =
 			<VendorData VendorINN="2" VendorName="Consignor 2" VendorPhone=""/>
 		</FiscalString>
 		<FiscalString AmountWithDiscount="100" DiscountAmount="0" MeasureOfQuantity="255" CalculationSubject="1" Name="Dress S/Yellow" Quantity="1" PaymentMethod="4" PriceWithDiscount="100" VATRate="18" VATAmount="15.25"/>
-		<FiscalString AmountWithDiscount="100" DiscountAmount="0" MarkingCode="11111111111111111111" MeasureOfQuantity="255" CalculationSubject="1" Name="Product 15 with SLN and code control (Main Company - Consignor 1) ODS [900999000009]" Quantity="1" PaymentMethod="4" PriceWithDiscount="100" VATRate="18" VATAmount="15.25" CalculationAgent="5">
+		<FiscalString AmountWithDiscount="100" DiscountAmount="0" MeasureOfQuantity="255" CalculationSubject="1" Name="Product 15 with SLN and code control (Main Company - Consignor 1) ODS [900999000009]" Quantity="1" PaymentMethod="4" PriceWithDiscount="100" VATRate="18" VATAmount="15.25" CalculationAgent="5">
 			<VendorData VendorINN="1" VendorName="Consignor 1" VendorPhone=""/>
 		</FiscalString>
 		<FiscalString AmountWithDiscount="100" DiscountAmount="0" MeasureOfQuantity="255" CalculationSubject="1" Name="Product 16 with SLN and Good code data (Main Company - Consignor 1) PZU [89000008999]" Quantity="1" PaymentMethod="4" PriceWithDiscount="100" VATRate="18" VATAmount="15.25" CalculationAgent="5">
 			<VendorData VendorINN="1" VendorName="Consignor 1" VendorPhone=""/>
-			<GoodCodeData NotIdentified="Q3VycmVudCByb3cgd2lsbCBkZWNvZGUgdG8gYmFzZTY2"/>
 		</FiscalString>
 	</Positions>
 	<Payments Cash="700" ElectronicPayment="0" PrePayment="0" PostPayment="0" Barter="0"/>
@@ -462,7 +460,7 @@ SalesReceiptXML30 =
 """xml
 <?xml version="1.0" encoding="UTF-8"?>
 <CheckPackage>
-	<Parameters CashierName="Арина Браун" CashierINN="1111111111" SaleAddress="Sale address" SaleLocation="Sale location" OperationType="2" TaxationSystem="0">
+	<Parameters CashierName="Арина Браун" CashierINN="1111111111" SaleAddress="Sale address" SaleLocation="Sale location" OperationType="2" TaxationSystem="0" AdditionalAttribute="717">
 		<CorrectionData Type="0" Number="0" Description="wrong VAT rate" Date="2023-12-19T14:15:51"/>
 	</Parameters>
 	<Positions>
@@ -479,12 +477,11 @@ SalesReceiptXML30 =
 			<VendorData VendorINN="2" VendorName="Consignor 2" VendorPhone=""/>
 		</FiscalString>
 		<FiscalString AmountWithDiscount="100" DiscountAmount="0" MeasureOfQuantity="255" CalculationSubject="1" Name="Dress S/Yellow" Quantity="1" PaymentMethod="4" PriceWithDiscount="100" VATRate="18" VATAmount="15.25"/>
-		<FiscalString AmountWithDiscount="100" DiscountAmount="0" MarkingCode="11111111111111111111" MeasureOfQuantity="255" CalculationSubject="1" Name="Product 15 with SLN and code control (Main Company - Consignor 1) ODS [900999000009]" Quantity="1" PaymentMethod="4" PriceWithDiscount="100" VATRate="18" VATAmount="15.25" CalculationAgent="5">
+		<FiscalString AmountWithDiscount="100" DiscountAmount="0" MeasureOfQuantity="255" CalculationSubject="1" Name="Product 15 with SLN and code control (Main Company - Consignor 1) ODS [900999000009]" Quantity="1" PaymentMethod="4" PriceWithDiscount="100" VATRate="18" VATAmount="15.25" CalculationAgent="5">
 			<VendorData VendorINN="1" VendorName="Consignor 1" VendorPhone=""/>
 		</FiscalString>
 		<FiscalString AmountWithDiscount="100" DiscountAmount="0" MeasureOfQuantity="255" CalculationSubject="1" Name="Product 16 with SLN and Good code data (Main Company - Consignor 1) PZU [89000008999]" Quantity="1" PaymentMethod="4" PriceWithDiscount="100" VATRate="18" VATAmount="15.25" CalculationAgent="5">
 			<VendorData VendorINN="1" VendorName="Consignor 1" VendorPhone=""/>
-			<GoodCodeData NotIdentified="Q3VycmVudCByb3cgd2lsbCBkZWNvZGUgdG8gYmFzZTY2"/>
 		</FiscalString>
 	</Positions>
 	<Payments Cash="0" ElectronicPayment="700" PrePayment="0" PostPayment="0" Barter="0"/>
@@ -495,7 +492,7 @@ SalesReceiptXML31 =
 """xml
 <?xml version="1.0" encoding="UTF-8"?>
 <CheckPackage>
-	<Parameters CashierName="Арина Браун" CashierINN="1111111111" SaleAddress="Sale address" SaleLocation="Sale location" OperationType="1" TaxationSystem="0">
+	<Parameters CashierName="Арина Браун" CashierINN="1111111111" SaleAddress="Sale address" SaleLocation="Sale location" OperationType="1" TaxationSystem="0" AdditionalAttribute="718">
 		<CorrectionData Type="0" Number="0" Description="wrong VAT rate" Date="2023-12-19T14:15:51"/>
 	</Parameters>
 	<Positions>
@@ -512,12 +509,11 @@ SalesReceiptXML31 =
 			<VendorData VendorINN="2" VendorName="Consignor 2" VendorPhone=""/>
 		</FiscalString>
 		<FiscalString AmountWithDiscount="100" DiscountAmount="0" MeasureOfQuantity="255" CalculationSubject="1" Name="Dress S/Yellow" Quantity="1" PaymentMethod="4" PriceWithDiscount="100" VATRate="18" VATAmount="15.25"/>
-		<FiscalString AmountWithDiscount="100" DiscountAmount="0" MarkingCode="11111111111111111111" MeasureOfQuantity="255" CalculationSubject="1" Name="Product 15 with SLN and code control (Main Company - Consignor 1) ODS [900999000009]" Quantity="1" PaymentMethod="4" PriceWithDiscount="100" VATRate="18" VATAmount="15.25" CalculationAgent="5">
+		<FiscalString AmountWithDiscount="100" DiscountAmount="0" MeasureOfQuantity="255" CalculationSubject="1" Name="Product 15 with SLN and code control (Main Company - Consignor 1) ODS [900999000009]" Quantity="1" PaymentMethod="4" PriceWithDiscount="100" VATRate="18" VATAmount="15.25" CalculationAgent="5">
 			<VendorData VendorINN="1" VendorName="Consignor 1" VendorPhone=""/>
 		</FiscalString>
 		<FiscalString AmountWithDiscount="100" DiscountAmount="0" MeasureOfQuantity="255" CalculationSubject="1" Name="Product 16 with SLN and Good code data (Main Company - Consignor 1) PZU [89000008999]" Quantity="1" PaymentMethod="4" PriceWithDiscount="100" VATRate="18" VATAmount="15.25" CalculationAgent="5">
 			<VendorData VendorINN="1" VendorName="Consignor 1" VendorPhone=""/>
-			<GoodCodeData NotIdentified="Q3VycmVudCByb3cgd2lsbCBkZWNvZGUgdG8gYmFzZTY2"/>
 		</FiscalString>
 	</Positions>
 	<Payments Cash="0" ElectronicPayment="700" PrePayment="0" PostPayment="0" Barter="0"/>
@@ -528,7 +524,7 @@ SalesReceiptXML32 =
 """xml
 <?xml version="1.0" encoding="UTF-8"?>
 <CheckPackage>
-	<Parameters CashierName="Арина Браун" CashierINN="1111111111" SaleAddress="Sale address" SaleLocation="Sale location" OperationType="1" TaxationSystem="0">
+	<Parameters CashierName="Арина Браун" CashierINN="1111111111" SaleAddress="Sale address" SaleLocation="Sale location" OperationType="1" TaxationSystem="0" AdditionalAttribute="719">
 		<CorrectionData Type="0" Number="0" Description="wrong VAT rate" Date="2023-12-19T14:50:09"/>
 	</Parameters>
 	<Positions>
@@ -545,12 +541,11 @@ SalesReceiptXML32 =
 			<VendorData VendorINN="2" VendorName="Consignor 2" VendorPhone=""/>
 		</FiscalString>
 		<FiscalString AmountWithDiscount="100" DiscountAmount="0" MeasureOfQuantity="255" CalculationSubject="1" Name="Dress S/Yellow" Quantity="1" PaymentMethod="4" PriceWithDiscount="100" VATRate="18" VATAmount="15.25"/>
-		<FiscalString AmountWithDiscount="100" DiscountAmount="0" MarkingCode="11111111111111111111" MeasureOfQuantity="255" CalculationSubject="1" Name="Product 15 with SLN and code control (Main Company - Consignor 1) ODS [900999000009]" Quantity="1" PaymentMethod="4" PriceWithDiscount="100" VATRate="18" VATAmount="15.25" CalculationAgent="5">
+		<FiscalString AmountWithDiscount="100" DiscountAmount="0" MeasureOfQuantity="255" CalculationSubject="1" Name="Product 15 with SLN and code control (Main Company - Consignor 1) ODS [900999000009]" Quantity="1" PaymentMethod="4" PriceWithDiscount="100" VATRate="18" VATAmount="15.25" CalculationAgent="5">
 			<VendorData VendorINN="1" VendorName="Consignor 1" VendorPhone=""/>
 		</FiscalString>
 		<FiscalString AmountWithDiscount="100" DiscountAmount="0" MeasureOfQuantity="255" CalculationSubject="1" Name="Product 16 with SLN and Good code data (Main Company - Consignor 1) PZU [89000008999]" Quantity="1" PaymentMethod="4" PriceWithDiscount="100" VATRate="18" VATAmount="15.25" CalculationAgent="5">
 			<VendorData VendorINN="1" VendorName="Consignor 1" VendorPhone=""/>
-			<GoodCodeData NotIdentified="Q3VycmVudCByb3cgd2lsbCBkZWNvZGUgdG8gYmFzZTY2"/>
 		</FiscalString>
 	</Positions>
 	<Payments Cash="700" ElectronicPayment="0" PrePayment="0" PostPayment="0" Barter="0"/>
@@ -561,7 +556,7 @@ SalesReceiptXML33 =
 """xml
 <?xml version="1.0" encoding="UTF-8"?>
 <CheckPackage>
-	<Parameters CashierName="Арина Браун" CashierINN="1111111111" SaleAddress="Sale address" SaleLocation="Sale location" OperationType="2" TaxationSystem="0">
+	<Parameters CashierName="Арина Браун" CashierINN="1111111111" SaleAddress="Sale address" SaleLocation="Sale location" OperationType="2" TaxationSystem="0" AdditionalAttribute="720">
 		<CorrectionData Type="0" Number="0" Description="wrong VAT rate" Date="2023-12-19T14:50:09"/>
 	</Parameters>
 	<Positions>
@@ -578,12 +573,11 @@ SalesReceiptXML33 =
 			<VendorData VendorINN="2" VendorName="Consignor 2" VendorPhone=""/>
 		</FiscalString>
 		<FiscalString AmountWithDiscount="100" DiscountAmount="0" MeasureOfQuantity="255" CalculationSubject="1" Name="Dress S/Yellow" Quantity="1" PaymentMethod="4" PriceWithDiscount="100" VATRate="18" VATAmount="15.25"/>
-		<FiscalString AmountWithDiscount="100" DiscountAmount="0" MarkingCode="11111111111111111111" MeasureOfQuantity="255" CalculationSubject="1" Name="Product 15 with SLN and code control (Main Company - Consignor 1) ODS [900999000009]" Quantity="1" PaymentMethod="4" PriceWithDiscount="100" VATRate="18" VATAmount="15.25" CalculationAgent="5">
+		<FiscalString AmountWithDiscount="100" DiscountAmount="0" MeasureOfQuantity="255" CalculationSubject="1" Name="Product 15 with SLN and code control (Main Company - Consignor 1) ODS [900999000009]" Quantity="1" PaymentMethod="4" PriceWithDiscount="100" VATRate="18" VATAmount="15.25" CalculationAgent="5">
 			<VendorData VendorINN="1" VendorName="Consignor 1" VendorPhone=""/>
 		</FiscalString>
 		<FiscalString AmountWithDiscount="100" DiscountAmount="0" MeasureOfQuantity="255" CalculationSubject="1" Name="Product 16 with SLN and Good code data (Main Company - Consignor 1) PZU [89000008999]" Quantity="1" PaymentMethod="4" PriceWithDiscount="100" VATRate="18" VATAmount="15.25" CalculationAgent="5">
 			<VendorData VendorINN="1" VendorName="Consignor 1" VendorPhone=""/>
-			<GoodCodeData NotIdentified="Q3VycmVudCByb3cgd2lsbCBkZWNvZGUgdG8gYmFzZTY2"/>
 		</FiscalString>
 	</Positions>
 	<Payments Cash="700" ElectronicPayment="0" PrePayment="0" PostPayment="0" Barter="0"/>
@@ -594,7 +588,7 @@ SalesReceiptXML34 =
 """xml
 <?xml version="1.0" encoding="UTF-8"?>
 <CheckPackage>
-	<Parameters CashierName="Арина Браун" CashierINN="1111111111" SaleAddress="Sale address" SaleLocation="Sale location" OperationType="1" TaxationSystem="0">
+	<Parameters CashierName="Арина Браун" CashierINN="1111111111" SaleAddress="Sale address" SaleLocation="Sale location" OperationType="1" TaxationSystem="0" AdditionalAttribute="721">
 		<CorrectionData Type="0" Number="0" Description="wrong VAT rate" Date="2023-12-20T12:00:00"/>
 	</Parameters>
 	<Positions>
@@ -611,12 +605,11 @@ SalesReceiptXML34 =
 			<VendorData VendorINN="2" VendorName="Consignor 2" VendorPhone=""/>
 		</FiscalString>
 		<FiscalString AmountWithDiscount="100" DiscountAmount="0" MeasureOfQuantity="255" CalculationSubject="1" Name="Dress S/Yellow" Quantity="1" PaymentMethod="4" PriceWithDiscount="100" VATRate="18" VATAmount="15.25"/>
-		<FiscalString AmountWithDiscount="100" DiscountAmount="0" MarkingCode="11111111111111111111" MeasureOfQuantity="255" CalculationSubject="1" Name="Product 15 with SLN and code control (Main Company - Consignor 1) ODS [900999000009]" Quantity="1" PaymentMethod="4" PriceWithDiscount="100" VATRate="18" VATAmount="15.25" CalculationAgent="5">
+		<FiscalString AmountWithDiscount="100" DiscountAmount="0" MeasureOfQuantity="255" CalculationSubject="1" Name="Product 15 with SLN and code control (Main Company - Consignor 1) ODS [900999000009]" Quantity="1" PaymentMethod="4" PriceWithDiscount="100" VATRate="18" VATAmount="15.25" CalculationAgent="5">
 			<VendorData VendorINN="1" VendorName="Consignor 1" VendorPhone=""/>
 		</FiscalString>
 		<FiscalString AmountWithDiscount="100" DiscountAmount="0" MeasureOfQuantity="255" CalculationSubject="1" Name="Product 16 with SLN and Good code data (Main Company - Consignor 1) PZU [89000008999]" Quantity="1" PaymentMethod="4" PriceWithDiscount="100" VATRate="18" VATAmount="15.25" CalculationAgent="5">
 			<VendorData VendorINN="1" VendorName="Consignor 1" VendorPhone=""/>
-			<GoodCodeData NotIdentified="Q3VycmVudCByb3cgd2lsbCBkZWNvZGUgdG8gYmFzZTY2"/>
 		</FiscalString>
 	</Positions>
 	<Payments Cash="0" ElectronicPayment="700" PrePayment="0" PostPayment="0" Barter="0"/>
@@ -626,7 +619,7 @@ SalesReceiptXML35 =
 """xml
 <?xml version="1.0" encoding="UTF-8"?>
 <CheckPackage>
-	<Parameters CashierName="Арина Браун" CashierINN="1111111111" SaleAddress="Sale address" SaleLocation="Sale location" OperationType="2" TaxationSystem="0">
+	<Parameters CashierName="Арина Браун" CashierINN="1111111111" SaleAddress="Sale address" SaleLocation="Sale location" OperationType="2" TaxationSystem="0" AdditionalAttribute="722">
 		<CorrectionData Type="0" Number="0" Description="wrong VAT rate" Date="2023-12-20T12:00:00"/>
 	</Parameters>
 	<Positions>
@@ -643,12 +636,11 @@ SalesReceiptXML35 =
 			<VendorData VendorINN="2" VendorName="Consignor 2" VendorPhone=""/>
 		</FiscalString>
 		<FiscalString AmountWithDiscount="100" DiscountAmount="0" MeasureOfQuantity="255" CalculationSubject="1" Name="Dress S/Yellow" Quantity="1" PaymentMethod="4" PriceWithDiscount="100" VATRate="18" VATAmount="15.25"/>
-		<FiscalString AmountWithDiscount="100" DiscountAmount="0" MarkingCode="11111111111111111111" MeasureOfQuantity="255" CalculationSubject="1" Name="Product 15 with SLN and code control (Main Company - Consignor 1) ODS [900999000009]" Quantity="1" PaymentMethod="4" PriceWithDiscount="100" VATRate="18" VATAmount="15.25" CalculationAgent="5">
+		<FiscalString AmountWithDiscount="100" DiscountAmount="0" MeasureOfQuantity="255" CalculationSubject="1" Name="Product 15 with SLN and code control (Main Company - Consignor 1) ODS [900999000009]" Quantity="1" PaymentMethod="4" PriceWithDiscount="100" VATRate="18" VATAmount="15.25" CalculationAgent="5">
 			<VendorData VendorINN="1" VendorName="Consignor 1" VendorPhone=""/>
 		</FiscalString>
 		<FiscalString AmountWithDiscount="100" DiscountAmount="0" MeasureOfQuantity="255" CalculationSubject="1" Name="Product 16 with SLN and Good code data (Main Company - Consignor 1) PZU [89000008999]" Quantity="1" PaymentMethod="4" PriceWithDiscount="100" VATRate="18" VATAmount="15.25" CalculationAgent="5">
 			<VendorData VendorINN="1" VendorName="Consignor 1" VendorPhone=""/>
-			<GoodCodeData NotIdentified="Q3VycmVudCByb3cgd2lsbCBkZWNvZGUgdG8gYmFzZTY2"/>
 		</FiscalString>
 	</Positions>
 	<Payments Cash="0" ElectronicPayment="700" PrePayment="0" PostPayment="0" Barter="0"/>
@@ -4061,7 +4053,8 @@ Scenario: _02602102 Retail receipt correction for RSR (cash, VAT rate correction
 			And I input "19.12.2023 13:24:48" text in the field named "Date"
 			And I move to the next attribute
 			And I click "Uncheck all" button
-			And I click "OK" button			
+			And I click "OK" button	
+			And I input "715" text in "Basis document fiscal number" field					
 			And I click "Save" button
 			And I save the window as "RRC1"
 		* Fiscalize
@@ -4095,7 +4088,6 @@ Scenario: _02602102 Retail receipt correction for RSR (cash, VAT rate correction
 		Then the form attribute named "Company" became equal to "Main Company"
 		Then the field named "ConsolidatedRetailSales" is filled
 		Then the form attribute named "CorrectionDescription" became equal to "wrong VAT rate"
-		And the editing text of form attribute named "CorrectionType" became equal to "Independent"
 		Then the form attribute named "Currency" became equal to "TRY"
 		And "ItemList" table became equal
 			| '#' | 'Inventory origin' | 'Sales person' | 'Price type'              | 'Item'                                                                | 'Item key' | 'Profit loss center' | 'Dont calculate row' | 'Serial lot numbers'  | 'Unit' | 'Tax amount' | 'Source of origins'  | 'Quantity' | 'Price'  | 'VAT'         | 'Offers amount' | 'Net amount' | 'Total amount' | 'Additional analytic' | 'Store'    | 'Detail' | 'Sales order' | 'Revenue type' |
@@ -4123,6 +4115,7 @@ Scenario: _02602102 Retail receipt correction for RSR (cash, VAT rate correction
 		And I move to the next attribute
 		And I click "Uncheck all" button
 		And I click "OK" button	
+		And I input "716" text in "Basis document fiscal number" field	
 		And I click "Save" button
 		And I save the window as "RRC2"
 	* Fiscalize
@@ -4229,7 +4222,8 @@ Scenario: _02602103 Retail receipt correction for RSR (card, VAT rate correction
 			And I input "19.12.2023 14:15:51" text in the field named "Date"
 			And I move to the next attribute
 			And I click "Uncheck all" button
-			And I click "OK" button	
+			And I click "OK" button
+			And I input "717" text in "Basis document fiscal number" field		
 			And I click "Save" button
 			And I save the window as "RRC1"
 		* Fiscalize
@@ -4263,7 +4257,6 @@ Scenario: _02602103 Retail receipt correction for RSR (card, VAT rate correction
 		Then the form attribute named "Company" became equal to "Main Company"
 		Then the field named "ConsolidatedRetailSales" is filled
 		Then the form attribute named "CorrectionDescription" became equal to "wrong VAT rate"
-		And the editing text of form attribute named "CorrectionType" became equal to "Independent"
 		Then the form attribute named "Currency" became equal to "TRY"
 		And "ItemList" table became equal
 			| '#' | 'Inventory origin' | 'Sales person' | 'Price type'              | 'Item'                                                                | 'Item key' | 'Profit loss center' | 'Dont calculate row' | 'Serial lot numbers'  | 'Unit' | 'Tax amount' | 'Source of origins'  | 'Quantity' | 'Price'  | 'VAT'         | 'Offers amount' | 'Net amount' | 'Total amount' | 'Additional analytic' | 'Store'    | 'Detail' | 'Sales order' | 'Revenue type' |
@@ -4291,6 +4284,7 @@ Scenario: _02602103 Retail receipt correction for RSR (card, VAT rate correction
 		And I move to the next attribute
 		And I click "Uncheck all" button
 		And I click "OK" button	
+		And I input "718" text in "Basis document fiscal number" field	
 		And I click "Save" button
 		And I save the window as "RRC2"
 	* Fiscalize
@@ -4397,6 +4391,7 @@ Scenario: _02602104 Retail receipt correction for RRR (cash, VAT rate correction
 			And I move to the next attribute
 			And I click "Uncheck all" button
 			And I click "OK" button	
+			And I input "719" text in "Basis document fiscal number" field	
 			And I click "Save" button
 			And I save the window as "RRC1"
 		* Fiscalize
@@ -4430,7 +4425,6 @@ Scenario: _02602104 Retail receipt correction for RRR (cash, VAT rate correction
 		Then the form attribute named "Company" became equal to "Main Company"
 		Then the field named "ConsolidatedRetailSales" is filled
 		Then the form attribute named "CorrectionDescription" became equal to "wrong VAT rate"
-		And the editing text of form attribute named "CorrectionType" became equal to "Independent"
 		Then the form attribute named "Currency" became equal to "TRY"
 		And "ItemList" table became equal
 			| '#' | 'Inventory origin' | 'Sales person' | 'Price type'              | 'Item'                                                                | 'Item key' | 'Profit loss center' | 'Dont calculate row' | 'Serial lot numbers'  | 'Unit' | 'Tax amount' | 'Source of origins'  | 'Quantity' | 'Price'  | 'VAT'         | 'Offers amount' | 'Net amount' | 'Total amount' | 'Additional analytic' | 'Store'    | 'Detail' | 'Sales order' | 'Revenue type' |
@@ -4458,6 +4452,7 @@ Scenario: _02602104 Retail receipt correction for RRR (cash, VAT rate correction
 		And I move to the next attribute
 		And I click "Uncheck all" button
 		And I click "OK" button
+		And I input "720" text in "Basis document fiscal number" field	
 		And I click "Save" button
 		And I save the window as "RRC2"
 	* Fiscalize
@@ -4565,6 +4560,7 @@ Scenario: _02602105 Retail receipt correction for RRR (card, VAT rate correction
 			And I move to the next attribute
 			And I click "Uncheck all" button
 			And I click "OK" button
+			And I input "721" text in "Basis document fiscal number" field	
 			And I click "Save" button
 			And I save the window as "RRC1"
 		* Fiscalize
@@ -4598,7 +4594,6 @@ Scenario: _02602105 Retail receipt correction for RRR (card, VAT rate correction
 		Then the form attribute named "Company" became equal to "Main Company"
 		Then the field named "ConsolidatedRetailSales" is filled
 		Then the form attribute named "CorrectionDescription" became equal to "wrong VAT rate"
-		And the editing text of form attribute named "CorrectionType" became equal to "Independent"
 		Then the form attribute named "Currency" became equal to "TRY"
 		And "ItemList" table became equal
 			| '#' | 'Inventory origin' | 'Sales person' | 'Price type'              | 'Item'                                                                | 'Item key' | 'Profit loss center' | 'Dont calculate row' | 'Serial lot numbers'  | 'Unit' | 'Tax amount' | 'Source of origins'  | 'Quantity' | 'Price'  | 'VAT'         | 'Offers amount' | 'Net amount' | 'Total amount' | 'Additional analytic' | 'Store'    | 'Detail' | 'Sales order' | 'Revenue type' |
@@ -4626,6 +4621,7 @@ Scenario: _02602105 Retail receipt correction for RRR (card, VAT rate correction
 		And I move to the next attribute
 		And I click "Uncheck all" button
 		And I click "OK" button
+		And I input "722" text in "Basis document fiscal number" field	
 		And I click "Save" button
 		And I save the window as "RRC2"
 	* Fiscalize

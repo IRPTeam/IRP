@@ -1612,12 +1612,12 @@ Scenario: _200031 line entry check of objects marked for deletion (AddAttributeA
 	* create a Partner and marking it for deletion
 		Given I open hyperlink "e1cib/list/Catalog.Partners"
 		And I click the button named "FormCreate"
-		And I input "Delete" text in the field named "Description_en"
+		And I input "Delete1" text in the field named "Description_en"
 		And I set checkbox "Customer"
 		And I click "Save and close" button
 		And I go to line in "List" table
 			| 'Description'    |
-			| 'Delete'         |
+			| 'Delete1'         |
 		And in the table "List" I click the button named "ListContextMenuSetDeletionMark"
 		Then "1C:Enterprise" window is opened
 		And I click "Yes" button

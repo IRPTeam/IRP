@@ -136,6 +136,7 @@ Scenario: _005015 create Projects
 		And I input "Проект 01" text in "RU" field
 		And I click "Ok" button
 		And I click the button named "FormWriteAndClose"
+		And Delay 3
 	* Check creation
 		Then I check for the "Projects" catalog element with the "Description_en" "Project 01"
 		Then I check for the "Projects" catalog element with the "Description_tr" "Project 01 TR"

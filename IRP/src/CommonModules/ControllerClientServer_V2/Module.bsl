@@ -12702,7 +12702,8 @@ Function BindPaymentsPaymentType(Parameters)
 		|StepChangePaymentAgentLegalNameByBankTermAndPaymentType,
 		|StepChangePaymentAgentPartnerTermsByBankTermAndPaymentType,
 		|StepChangePaymentAgentLegalNameContractByBankTermAndPaymentType,
-		|StepChangeFinancialMovementTypeByPaymentType");
+		|StepChangeFinancialMovementTypeByPaymentType,
+		|StepChangeAccountByPaymentType");
 	
 	Binding.Insert("RetailReceiptCorrection", 
 		"StepChangeBankTermByPaymentType,
@@ -12711,7 +12712,8 @@ Function BindPaymentsPaymentType(Parameters)
 		|StepChangePaymentAgentLegalNameByBankTermAndPaymentType,
 		|StepChangePaymentAgentPartnerTermsByBankTermAndPaymentType,
 		|StepChangePaymentAgentLegalNameContractByBankTermAndPaymentType,
-		|StepChangeFinancialMovementTypeByPaymentType");
+		|StepChangeFinancialMovementTypeByPaymentType,
+		|StepChangeAccountByPaymentType");
 	
 	Binding.Insert("RetailReturnReceipt", 
 		"StepChangeBankTermByPaymentType,
@@ -12720,7 +12722,8 @@ Function BindPaymentsPaymentType(Parameters)
 		|StepChangePaymentAgentLegalNameByBankTermAndPaymentType,
 		|StepChangePaymentAgentPartnerTermsByBankTermAndPaymentType,
 		|StepChangePaymentAgentLegalNameContractByBankTermAndPaymentType,
-		|StepChangeFinancialMovementTypeByPaymentType");
+		|StepChangeFinancialMovementTypeByPaymentType,
+		|StepChangeAccountByPaymentType");
 	
 	Binding.Insert("SalesOrder", 
 		"StepChangePercentByBankTermAndPaymentType");
@@ -12869,12 +12872,35 @@ Procedure SetPaymentsAccount(Parameters, Results) Export
 	SetterObject(Binding.StepsEnabler, Binding.DataPath, Parameters, Results);
 EndProcedure
 
+// Payments.Account.Get
+Function GetPaymentsAccount(Parameters, _Key)
+	Return GetPropertyObject(Parameters, BindPaymentsAccount(Parameters).DataPath, _Key);
+EndFunction
+
 // Payments.Account.Bind
 Function BindPaymentsAccount(Parameters)
 	DataPath = "Payments.Account";
 	Binding = New Structure();
 	Return BindSteps("BindVoid", DataPath, Binding, Parameters, "BindPaymentsAccount");
 EndFunction
+
+// Payments.Account.ChangeAccountByPaymentType.Step
+Procedure StepChangeAccountByPaymentType(Parameters, Chain) Export
+	Chain.ChangeAccountByPaymentType.Enable = True;
+	If Chain.Idle Then
+		Return;
+	EndIf;
+	Chain.ChangeAccountByPaymentType.Setter = "SetPaymentsAccount";
+	For Each Row In GetRows(Parameters, "Payments") Do
+		Options     = ModelClientServer_V2.ChangeAccountByPaymentTypeOptions();
+		Options.PaymentType = GetPaymentsPaymentType(Parameters, Row.Key);
+		Options.Workstation = GetWorkstation(Parameters);
+		Options.CurrentAccount = GetPaymentsAccount(Parameters, Row.Key);
+		Options.Key = Row.Key;
+		Options.StepName = "StepChangeAccountByPaymentType";
+		Chain.ChangeAccountByPaymentType.Options.Add(Options);
+	EndDo;	
+EndProcedure
 
 #EndRegion
 

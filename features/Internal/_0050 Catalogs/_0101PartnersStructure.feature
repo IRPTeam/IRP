@@ -64,7 +64,7 @@ Scenario: _010005 create company for Partners (Ferron, Kalipso, Lomaniti)
 		And I click Select button of "Partner" field
 		And I go to line in "List" table
 			| 'Description'    |
-			| 'Kalipso'        |
+			| 'Kalipso1'        |
 		And I select current line in "List" table
 		And I select "Company" exact value from the drop-down list named "Type"
 		And I click "Save" button
@@ -259,13 +259,3 @@ Scenario: _010009 check filling legal name in the partner term (complex partner 
 		And I select current line in "List" table
 		Then the form attribute named "LegalName" became equal to "Company Kalipso1"
 		And I close all client application windows
-		
-
-				
-		
-				
-				
-				
-		
-								
-				

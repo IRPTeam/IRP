@@ -72,4 +72,31 @@ Procedure CreateUser(UserObject) Export
 	UserObject.InfobaseUserID = User.UUID;
 EndProcedure
 
+Procedure CommonDataFillingBeforeWrite_Catalogs(Source, Cancel) Export
+	
+	CommonAttributes = "Author, Editor, CreateDate, ModifyDate";
+	CurrentData = New Structure(CommonAttributes, Undefined, Undefined, Date(1,1,1), Date(1,1,1));
+	FillPropertyValues(CurrentData, Source);
+	
+	If Source.Ref.IsEmpty() Then
+		CurrentData.Author = SessionParameters.CurrentUser;
+		CurrentData.CreateDate = CurrentSessionDate();
+	Else
+		CurrentData.Editor = SessionParameters.CurrentUser;
+		CurrentData.ModifyDate = CurrentSessionDate();
+	EndIf;
+	
+	If Not ValueIsFilled(CurrentData.Author) Then
+		CurrentData.Author = SessionParameters.CurrentUser;
+		CurrentData.CreateDate = CurrentSessionDate();
+	EndIf;
+	
+	FillPropertyValues(Source, CurrentData);
+	
+EndProcedure
+
+Procedure CommonDataFilling1BeforeWrite_Documents(Source, Cancel, WriteMode, PostingMode) Export
+	CommonDataFillingBeforeWrite_Catalogs(Source, Cancel);
+EndProcedure
+
 #EndRegion

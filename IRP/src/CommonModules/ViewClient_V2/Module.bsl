@@ -4065,10 +4065,6 @@ Procedure PaymentsPaymentTypeOnChange(Object, Form, CurrentData = Undefined) Exp
 	
 	Parameters = GetParameters(ServerParameters, FormParameters);
 	ControllerClientServer_V2.PaymentsPaymentTypeOnChange(Parameters);
-
-//	Rows = GetRowsByCurrentData(Form, "Payments", CurrentData);
-//	Parameters = GetSimpleParameters(Object, Form, "Payments", Rows);
-//	ControllerClientServer_V2.PaymentsPaymentTypeOnChange(Parameters);
 EndProcedure
 
 // Payments.PaymentType.Set

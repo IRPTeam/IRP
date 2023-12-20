@@ -1604,8 +1604,8 @@ Scenario: _0850023 check return payment by card and cash (sales by card)
 			| '50,00'    | '⚪'              | 'Card 04'        | '$$RRN1$$'    |
 		And I activate "Payment type" field in "Payments" table
 		When I Check the steps for Exception
-			| 'And I click "Return" button'    |
-		And I click "Cancel" button
+			| 'And I click "Revert" button'    |
+		And I click "Return (in day)" button
 		Then "1C:Enterprise" window is opened
 		And I click "OK" button
 		And I click the button named "Enter"
@@ -1615,7 +1615,7 @@ Scenario: _0850023 check return payment by card and cash (sales by card)
 			| 'Amount' | 'Payment done' | 'Payment type' |
 			| '40,00'  | '⚪'            | 'Card 03'      |
 		And I activate "Payment type" field in "Payments" table
-		And I click "Cancel" button
+		And I click "Return (in day)" button
 		Then "1C:Enterprise" window is opened
 		And I click "OK" button
 		And I move to the next attribute		
@@ -1672,7 +1672,9 @@ Scenario: _0850024 return by card without basis document (without RRN)
 			| '⚪'              | 'Card 03'        | '200,00'   | ''           |
 		Then "Payment" window is opened
 		When I Check the steps for Exception
-			| 'And I click "Cancel" button'    |
+			| 'And I click "Revert" button'    |
+		When I Check the steps for Exception
+			| 'And I click "Return (in day)" button'    |
 		And I click "Return" button
 		Then "1C:Enterprise" window is opened
 		And I click "OK" button
@@ -1686,7 +1688,7 @@ Scenario: _0850024 return by card without basis document (without RRN)
 		And I move to "Payments" tab
 		And "Payments" table became equal
 			| '#'   | 'Amount'   | 'Commission'   | 'Payment type'   | 'Payment terminal'   | 'Postponed payment'   | 'Bank term'      | 'Account'        | 'Percent'   | 'RRN Code'    |
-			| '1'   | '200,00'   | ''             | 'Card 03'        | ''                   | 'No'                  | 'Bank term 03'   | 'POS Terminal'   | '1,00'      | ''            |
+			| '1'   | '200,00'   | ''             | 'Card 03'        | ''                   | 'No'                  | 'Bank term 03'   | 'POS Terminal'   | '1,00'      | '*'           |
 		And I click "Show hidden tables" button
 		Then "Edit hidden tables" window is opened
 		And I expand "ControlCodeStrings [1]" group
@@ -1740,6 +1742,10 @@ Scenario: _08500241 return by card without basis document (with RRN)
 		And I click the button named "Enter"
 		Then there are lines in TestClient message log
 			|'Not all payment done.'|
+		When I Check the steps for Exception
+			| 'And I click "Revert" button'    |
+		When I Check the steps for Exception
+			| 'And I click "Return (in day)" button'    |
 		And I go to line in "Payments" table
 			| 'Amount' | 'Payment done' | 'Payment type' |
 			| '111,00'  | '⚪'            | 'Card 03'      |
@@ -1757,7 +1763,7 @@ Scenario: _08500241 return by card without basis document (with RRN)
 		And I move to "Payments" tab
 		And "Payments" table became equal
 			| '#'   | 'Amount'   | 'Commission'   | 'Payment type'   | 'Payment terminal'   | 'Postponed payment'   | 'Bank term'      | 'Account'        | 'Percent'   | 'RRN Code'    |
-			| '1'   | '111,00'   | ''             | 'Card 03'        | ''                   | 'No'                  | 'Bank term 03'   | 'POS Terminal'   | '1,00'      | '23457'       |
+			| '1'   | '111,00'   | ''             | 'Card 03'        | ''                   | 'No'                  | 'Bank term 03'   | 'POS Terminal'   | '1,00'      | '*'           |
 		And I close all client application windows
 		And Delay 5
 		And I parsed the log of the fiscal emulator by the path '$$LogPathAcquiring$$' into the variable "ParsingResult1"
@@ -2938,7 +2944,7 @@ Scenario: _0260165 Return of a product paid for with a certificate
 		And I click "1" button
 		And I click "0" button
 		And I click "0" button
-		And I click "Cancel" button
+		And I click "Return (in day)" button
 		Then "1C:Enterprise" window is opened
 		And I click "OK" button
 		And I move to the next attribute
@@ -3284,6 +3290,134 @@ Scenario: _0260174 RSR and RRR for item with marking code, scan good code
 		And I parsed the log of the fiscal emulator by the path '$$LogPath$$' into the variable "ParsingResult"
 		And I check "$ParsingResult$" with "0" and method is "ProcessCheck"
 		And I check "$ParsingResult$" with "0" and data in "In.Parameter3" the same as "SalesReceiptXML27"
+
+Scenario: _0260175 check revert card payment for sales (POS)
+	And I close all client application windows
+	* Preparation 
+		If "Point of sales" window is opened Then
+			And I delete all lines of "ItemList" table
+		And In the command interface I select "Retail" "Point of sale"
+	* Add item
+		And I click "Search by barcode (F7)" button
+		And I input "57897909799" text in the field named "Barcode"
+		And I move to the next attribute
+		Then the form attribute named "ControlCodeStringType" became equal to "Marking code"
+		And I change "Control code string type" radio button value to "Good code"
+		And I click "Search by barcode" button
+		And I input "Q3VycmVudCByb3cgd2lsbCBkZWNvZGUgdG8gYmFzZTY8" text in the field named "Barcode"
+		And I move to the next attribute		
+		And I input "401,11" text in "Price" field of "ItemList" table
+		And I finish line editing in "ItemList" table
+	* Payment by card
+		And I click "Payment (+)" button
+		And I click "Card (*)" button
+		And I go to line in "BankPaymentTypeList" table
+			| 'Reference' |
+			| 'Card 03'   |
+		And I select current line in "BankPaymentTypeList" table
+		When I Check the steps for Exception
+			| 'And I click "Revert" button'    |
+		And I click "Pay" button
+		Then "1C:Enterprise" window is opened
+		And I click "OK" button
+	* Check log
+		And Delay 5
+		And I parsed the log of the fiscal emulator by the path '$$LogPathAcquiring$$' into the variable "ParsingResult1"
+		And I check "$ParsingResult1$" with "1" and method is "PayByPaymentCard"
+		And I check "$ParsingResult1$" with "1" and data in "Out.Parameter8" contains 'ОПЛАТА'
+		And I check "$ParsingResult1$" with "1" and data in "Out.Parameter8" contains '401.11'
+		When I Check the steps for Exception
+			| 'And I click "Pay" button'    |
+	* Revert payment
+		And I click "Revert" button
+		And I click "OK" button
+		And Delay 5
+		And I parsed the log of the fiscal emulator by the path '$$LogPathAcquiring$$' into the variable "ParsingResult1"
+		And I check "$ParsingResult1$" with "1" and method is "CancelPaymentByPaymentCard"
+		And I check "$ParsingResult1$" with "1" and data in "Out.Parameter8" contains 'ОТМЕНА ПЛАТЕЖА'
+		And I check "$ParsingResult1$" with "1" and data in "Out.Parameter8" contains '401.11'
+		When I Check the steps for Exception
+			| 'And I click "Revert" button'    |
+	* Try close receipt
+		And I click "OK" button
+		Then there are lines in TestClient message log
+			|'Not all payment done.'|
+	* Payment
+		And I click "Pay" button
+		And I click "OK" button
+		And I click "OK" button
+		And I wait that in "ItemList" table number of lines will be "равно" 0 for 5 seconds
+	* Check log
+		And Delay 5
+		And I parsed the log of the fiscal emulator by the path '$$LogPathAcquiring$$' into the variable "ParsingResult1"
+		And I check "$ParsingResult1$" with "1" and method is "PayByPaymentCard"
+		And I check "$ParsingResult1$" with "1" and data in "Out.Parameter8" contains 'ОПЛАТА'
+		And I check "$ParsingResult1$" with "1" and data in "Out.Parameter8" contains '401.11'
+		
+Scenario: _0260176 check revert card payment for return (POS)
+	And I close all client application windows
+	* Preparation 
+		If "Point of sales" window is opened Then
+			And I delete all lines of "ItemList" table
+		And In the command interface I select "Retail" "Point of sale"
+	* Add item
+		And I click the button named "Return"
+		And I click "Search by barcode (F7)" button
+		And I input "57897909799" text in the field named "Barcode"
+		And I move to the next attribute
+		Then the form attribute named "ControlCodeStringType" became equal to "Marking code"
+		And I change "Control code string type" radio button value to "Good code"
+		And I click "Search by barcode" button
+		And I input "Q3VycmVudCByb3cgd2lsbCBkZWNvZGUgdG8gYmFzZTY8" text in the field named "Barcode"
+		And I move to the next attribute		
+		And I input "401,11" text in "Price" field of "ItemList" table
+		And I finish line editing in "ItemList" table
+	* Payment by card
+		And I click "Payment Return" button
+		And I click "Card (*)" button
+		And I go to line in "BankPaymentTypeList" table
+			| 'Reference' |
+			| 'Card 03'   |
+		And I select current line in "BankPaymentTypeList" table
+		When I Check the steps for Exception
+			| 'And I click "Revert" button'    |
+		And I click "Return" button
+		Then "1C:Enterprise" window is opened
+		And I click "OK" button
+	* Check log
+		And Delay 5
+		And I parsed the log of the fiscal emulator by the path '$$LogPathAcquiring$$' into the variable "ParsingResult1"
+		And I check "$ParsingResult1$" with "1" and method is "ReturnPaymentByPaymentCard"
+		And I check "$ParsingResult1$" with "1" and data in "Out.Parameter8" contains 'ВОЗВРАТ'
+		And I check "$ParsingResult1$" with "1" and data in "Out.Parameter8" contains '401.11'
+		When I Check the steps for Exception
+			| 'And I click "Return" button'    |
+	* Revert payment
+		And I click "Revert" button
+		And I click "OK" button
+		And Delay 5
+		And I parsed the log of the fiscal emulator by the path '$$LogPathAcquiring$$' into the variable "ParsingResult1"
+		And I check "$ParsingResult1$" with "1" and method is "CancelPaymentByPaymentCard"
+		And I check "$ParsingResult1$" with "1" and data in "Out.Parameter8" contains 'ОТМЕНА ПЛАТЕЖА'
+		And I check "$ParsingResult1$" with "1" and data in "Out.Parameter8" contains '401.11'
+		When I Check the steps for Exception
+			| 'And I click "Revert" button'    |
+	* Try close receipt
+		And I click "OK" button
+		Then there are lines in TestClient message log
+			|'Not all payment done.'|
+	* Payment
+		And I click "Return" button
+		And I click "OK" button
+		And I click "OK" button
+		And I wait that in "ItemList" table number of lines will be "равно" 0 for 5 seconds
+	* Check log
+		And Delay 5
+		And I parsed the log of the fiscal emulator by the path '$$LogPathAcquiring$$' into the variable "ParsingResult1"
+		And I check "$ParsingResult1$" with "1" and method is "ReturnPaymentByPaymentCard"
+		And I check "$ParsingResult1$" with "1" and data in "Out.Parameter8" contains 'ВОЗВРАТ'
+		And I check "$ParsingResult1$" with "1" and data in "Out.Parameter8" contains '401.11'	
+
 
 Scenario: _0260152 close session
 	And I close all client application windows

@@ -1,4 +1,4 @@
-#language: en
+﻿#language: en
 @ExportScenarios
 @IgnoreOnCIMainBuild
 @tree
@@ -1449,7 +1449,7 @@ Scenario: create a test partner with one vendor partner term and one customer pa
 	* Create Partner Kalipso
 		Given I open hyperlink "e1cib/list/Catalog.Partners"
 		And I click the button named "FormCreate"
-		And I input "Partner Kalipso" text in the field named "Description_en"
+		And I input "Partner Kalipso New" text in the field named "Description_en"
 		And I click Select button of "Main partner" field
 		And I go to line in "List" table
 			| Description    |

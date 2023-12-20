@@ -4209,7 +4209,86 @@ Scenario: 960083 check VisitorCounter creation
 		| 'Company access deny'           | 'Store Only read access'      | 'Branch access deny'           |
 		| 'Company access deny'           | 'Store access deny'           | 'Branch access deny'           |
 	
-		
+
+Scenario: 960089 check RetailReceiptCorrection creation
+	And I close all client application windows
+	Given I open hyperlink "e1cib/list/Document.RetailReceiptCorrection"	
+	And "List" table became equal
+		| 'Description'                                                                                                                                                                              |
+		| 'Document.RetailReceiptCorrection Branch: Branch Read and Write Access;Company: Company Read and Write Access;'                                                                            |
+		| 'Document.RetailReceiptCorrection Branch: Branch Read and Write Access;Company: Company Read and Write Access;Store: Store Read and Write Access'                                          |
+		| 'Document.RetailReceiptCorrection Branch: Branch Read and Write Access;Company: Company Read and Write Access;Store: Store Only read access'                                               |
+		| 'Document.RetailReceiptCorrection Branch: Branch Read and Write Access;Company: Company Read and Write Access;Store: Store access deny'                                                    |
+		| 'Document.RetailReceiptCorrection Branch: Branch Read and Write Access;Company: Company Read and Write Access;Store: Store Read and Write Access&Store Only read access'                   |
+		| 'Document.RetailReceiptCorrection Branch: Branch Read and Write Access;Company: Company Read and Write Access;Store: Store Only read access&Store access deny'                             |
+		| 'Document.RetailReceiptCorrection Branch: Branch Read and Write Access;Company: Company Read and Write Access;Store: Store Read and Write Access&Store access deny'                        |
+		| 'Document.RetailReceiptCorrection Branch: Branch Read and Write Access;Company: Company Read and Write Access;Store: Store Read and Write Access&Store Only read access&Store access deny' |
+		| 'Document.RetailReceiptCorrection Branch: Branch Only read access;Company: Company Read and Write Access;'                                                                                 |
+		| 'Document.RetailReceiptCorrection Branch: Branch Only read access;Company: Company Read and Write Access;Store: Store Read and Write Access'                                               |
+		| 'Document.RetailReceiptCorrection Branch: Branch Only read access;Company: Company Read and Write Access;Store: Store Only read access'                                                    |
+		| 'Document.RetailReceiptCorrection Branch: Branch Only read access;Company: Company Read and Write Access;Store: Store access deny'                                                         |
+		| 'Document.RetailReceiptCorrection Branch: Branch Only read access;Company: Company Read and Write Access;Store: Store Read and Write Access&Store Only read access'                        |
+		| 'Document.RetailReceiptCorrection Branch: Branch Only read access;Company: Company Read and Write Access;Store: Store Only read access&Store access deny'                                  |
+		| 'Document.RetailReceiptCorrection Branch: Branch Only read access;Company: Company Read and Write Access;Store: Store Read and Write Access&Store access deny'                             |
+		| 'Document.RetailReceiptCorrection Branch: Branch Only read access;Company: Company Read and Write Access;Store: Store Read and Write Access&Store Only read access&Store access deny'      |
+		| 'Document.RetailReceiptCorrection Branch: Branch access deny;Company: Company Read and Write Access;'                                                                                      |
+		| 'Document.RetailReceiptCorrection Branch: Branch access deny;Company: Company Read and Write Access;Store: Store Read and Write Access'                                                    |
+		| 'Document.RetailReceiptCorrection Branch: Branch access deny;Company: Company Read and Write Access;Store: Store Only read access'                                                         |
+		| 'Document.RetailReceiptCorrection Branch: Branch access deny;Company: Company Read and Write Access;Store: Store access deny'                                                              |
+		| 'Document.RetailReceiptCorrection Branch: Branch access deny;Company: Company Read and Write Access;Store: Store Read and Write Access&Store Only read access'                             |
+		| 'Document.RetailReceiptCorrection Branch: Branch access deny;Company: Company Read and Write Access;Store: Store Only read access&Store access deny'                                       |
+		| 'Document.RetailReceiptCorrection Branch: Branch access deny;Company: Company Read and Write Access;Store: Store Read and Write Access&Store access deny'                                  |
+		| 'Document.RetailReceiptCorrection Branch: Branch access deny;Company: Company Read and Write Access;Store: Store Read and Write Access&Store Only read access&Store access deny'           |
+		| 'Document.RetailReceiptCorrection Branch: Branch Read and Write Access;Company: Company Only read access;'                                                                                 |
+		| 'Document.RetailReceiptCorrection Branch: Branch Read and Write Access;Company: Company Only read access;Store: Store Read and Write Access'                                               |
+		| 'Document.RetailReceiptCorrection Branch: Branch Read and Write Access;Company: Company Only read access;Store: Store Only read access'                                                    |
+		| 'Document.RetailReceiptCorrection Branch: Branch Read and Write Access;Company: Company Only read access;Store: Store access deny'                                                         |
+		| 'Document.RetailReceiptCorrection Branch: Branch Read and Write Access;Company: Company Only read access;Store: Store Read and Write Access&Store Only read access'                        |
+		| 'Document.RetailReceiptCorrection Branch: Branch Read and Write Access;Company: Company Only read access;Store: Store Only read access&Store access deny'                                  |
+		| 'Document.RetailReceiptCorrection Branch: Branch Read and Write Access;Company: Company Only read access;Store: Store Read and Write Access&Store access deny'                             |
+		| 'Document.RetailReceiptCorrection Branch: Branch Read and Write Access;Company: Company Only read access;Store: Store Read and Write Access&Store Only read access&Store access deny'      |
+		| 'Document.RetailReceiptCorrection Branch: Branch Only read access;Company: Company Only read access;'                                                                                      |
+		| 'Document.RetailReceiptCorrection Branch: Branch Only read access;Company: Company Only read access;Store: Store Read and Write Access'                                                    |
+		| 'Document.RetailReceiptCorrection Branch: Branch Only read access;Company: Company Only read access;Store: Store Only read access'                                                         |
+		| 'Document.RetailReceiptCorrection Branch: Branch Only read access;Company: Company Only read access;Store: Store access deny'                                                              |
+		| 'Document.RetailReceiptCorrection Branch: Branch Only read access;Company: Company Only read access;Store: Store Read and Write Access&Store Only read access'                             |
+		| 'Document.RetailReceiptCorrection Branch: Branch Only read access;Company: Company Only read access;Store: Store Only read access&Store access deny'                                       |
+		| 'Document.RetailReceiptCorrection Branch: Branch Only read access;Company: Company Only read access;Store: Store Read and Write Access&Store access deny'                                  |
+		| 'Document.RetailReceiptCorrection Branch: Branch Only read access;Company: Company Only read access;Store: Store Read and Write Access&Store Only read access&Store access deny'           |
+		| 'Document.RetailReceiptCorrection Branch: Branch access deny;Company: Company Only read access;'                                                                                           |
+		| 'Document.RetailReceiptCorrection Branch: Branch access deny;Company: Company Only read access;Store: Store Read and Write Access'                                                         |
+		| 'Document.RetailReceiptCorrection Branch: Branch access deny;Company: Company Only read access;Store: Store Only read access'                                                              |
+		| 'Document.RetailReceiptCorrection Branch: Branch access deny;Company: Company Only read access;Store: Store access deny'                                                                   |
+		| 'Document.RetailReceiptCorrection Branch: Branch access deny;Company: Company Only read access;Store: Store Read and Write Access&Store Only read access'                                  |
+		| 'Document.RetailReceiptCorrection Branch: Branch access deny;Company: Company Only read access;Store: Store Only read access&Store access deny'                                            |
+		| 'Document.RetailReceiptCorrection Branch: Branch access deny;Company: Company Only read access;Store: Store Read and Write Access&Store access deny'                                       |
+		| 'Document.RetailReceiptCorrection Branch: Branch access deny;Company: Company Only read access;Store: Store Read and Write Access&Store Only read access&Store access deny'                |
+		| 'Document.RetailReceiptCorrection Branch: Branch Read and Write Access;Company: Company access deny;'                                                                                      |
+		| 'Document.RetailReceiptCorrection Branch: Branch Read and Write Access;Company: Company access deny;Store: Store Read and Write Access'                                                    |
+		| 'Document.RetailReceiptCorrection Branch: Branch Read and Write Access;Company: Company access deny;Store: Store Only read access'                                                         |
+		| 'Document.RetailReceiptCorrection Branch: Branch Read and Write Access;Company: Company access deny;Store: Store access deny'                                                              |
+		| 'Document.RetailReceiptCorrection Branch: Branch Read and Write Access;Company: Company access deny;Store: Store Read and Write Access&Store Only read access'                             |
+		| 'Document.RetailReceiptCorrection Branch: Branch Read and Write Access;Company: Company access deny;Store: Store Only read access&Store access deny'                                       |
+		| 'Document.RetailReceiptCorrection Branch: Branch Read and Write Access;Company: Company access deny;Store: Store Read and Write Access&Store access deny'                                  |
+		| 'Document.RetailReceiptCorrection Branch: Branch Read and Write Access;Company: Company access deny;Store: Store Read and Write Access&Store Only read access&Store access deny'           |
+		| 'Document.RetailReceiptCorrection Branch: Branch Only read access;Company: Company access deny;'                                                                                           |
+		| 'Document.RetailReceiptCorrection Branch: Branch Only read access;Company: Company access deny;Store: Store Read and Write Access'                                                         |
+		| 'Document.RetailReceiptCorrection Branch: Branch Only read access;Company: Company access deny;Store: Store Only read access'                                                              |
+		| 'Document.RetailReceiptCorrection Branch: Branch Only read access;Company: Company access deny;Store: Store access deny'                                                                   |
+		| 'Document.RetailReceiptCorrection Branch: Branch Only read access;Company: Company access deny;Store: Store Read and Write Access&Store Only read access'                                  |
+		| 'Document.RetailReceiptCorrection Branch: Branch Only read access;Company: Company access deny;Store: Store Only read access&Store access deny'                                            |
+		| 'Document.RetailReceiptCorrection Branch: Branch Only read access;Company: Company access deny;Store: Store Read and Write Access&Store access deny'                                       |
+		| 'Document.RetailReceiptCorrection Branch: Branch Only read access;Company: Company access deny;Store: Store Read and Write Access&Store Only read access&Store access deny'                |
+		| 'Document.RetailReceiptCorrection Branch: Branch access deny;Company: Company access deny;'                                                                                                |
+		| 'Document.RetailReceiptCorrection Branch: Branch access deny;Company: Company access deny;Store: Store Read and Write Access'                                                              |
+		| 'Document.RetailReceiptCorrection Branch: Branch access deny;Company: Company access deny;Store: Store Only read access'                                                                   |
+		| 'Document.RetailReceiptCorrection Branch: Branch access deny;Company: Company access deny;Store: Store access deny'                                                                        |
+		| 'Document.RetailReceiptCorrection Branch: Branch access deny;Company: Company access deny;Store: Store Read and Write Access&Store Only read access'                                       |
+		| 'Document.RetailReceiptCorrection Branch: Branch access deny;Company: Company access deny;Store: Store Only read access&Store access deny'                                                 |
+		| 'Document.RetailReceiptCorrection Branch: Branch access deny;Company: Company access deny;Store: Store Read and Write Access&Store access deny'                                            |
+		| 'Document.RetailReceiptCorrection Branch: Branch access deny;Company: Company access deny;Store: Store Read and Write Access&Store Only read access&Store access deny'                     |
+	
+					
 
 Scenario: 960090 check sales order access rights (LimitedAccess)
 	And I close all client application windows
@@ -6103,7 +6182,88 @@ Scenario: 960166 check VisitorCounter rights (LimitedAccess)
 		| 'Company Only read access'      | 'Store Only read access'      | 'Branch Read and Write Access' |
 		| 'Company Only read access'      | 'Store Read and Write Access' | 'Branch Only read access'      |
 		| 'Company Only read access'      | 'Store Only read access'      | 'Branch Only read access'      |
+
+Scenario: 960167 check EmployeeFiring rights (LimitedAccess)	
+	And I close all client application windows
+	Given I open hyperlink "e1cib/list/Document.EmployeeFiring"	
+	And "List" table became equal
+		| 'Description'                                                                                          |
+		| 'Document.EmployeeFiring Branch: Branch Read and Write Access;Company: Company Read and Write Access;' |
+		| 'Document.EmployeeFiring Branch: Branch Only read access;Company: Company Read and Write Access;'      |
+		| 'Document.EmployeeFiring Branch: Branch Read and Write Access;Company: Company Only read access;'      |
+		| 'Document.EmployeeFiring Branch: Branch Only read access;Company: Company Only read access;'           |
 	
+Scenario: 960168 check EmployeeHiring rights (LimitedAccess)	
+	And I close all client application windows
+	Given I open hyperlink "e1cib/list/Document.EmployeeHiring"	
+	And "List" table became equal
+		| 'Description'                                                                                          |
+		| 'Document.EmployeeHiring Branch: Branch Read and Write Access;Company: Company Read and Write Access;' |
+		| 'Document.EmployeeHiring Branch: Branch Only read access;Company: Company Read and Write Access;'      |
+		| 'Document.EmployeeHiring Branch: Branch Read and Write Access;Company: Company Only read access;'      |
+		| 'Document.EmployeeHiring Branch: Branch Only read access;Company: Company Only read access;'           |
+	
+Scenario: 960169 check EmployeeSickLeave rights (LimitedAccess)	
+	And I close all client application windows
+	Given I open hyperlink "e1cib/list/Document.EmployeeSickLeave"	
+	And "List" table became equal
+		| 'Description'                                                                                             |
+		| 'Document.EmployeeSickLeave Branch: Branch Read and Write Access;Company: Company Read and Write Access;' |
+		| 'Document.EmployeeSickLeave Branch: Branch Only read access;Company: Company Read and Write Access;'      |
+		| 'Document.EmployeeSickLeave Branch: Branch Read and Write Access;Company: Company Only read access;'      |
+		| 'Document.EmployeeSickLeave Branch: Branch Only read access;Company: Company Only read access;'           |
+	
+Scenario: 960170 check EmployeeTransfer rights (LimitedAccess)	
+	And I close all client application windows
+	Given I open hyperlink "e1cib/list/Document.EmployeeTransfer"	
+	And "List" table became equal
+		| 'Description'                                                                                            |
+		| 'Document.EmployeeTransfer Branch: Branch Read and Write Access;Company: Company Read and Write Access;' |
+		| 'Document.EmployeeTransfer Branch: Branch Only read access;Company: Company Read and Write Access;'      |
+		| 'Document.EmployeeTransfer Branch: Branch Read and Write Access;Company: Company Only read access;'      |
+		| 'Document.EmployeeTransfer Branch: Branch Only read access;Company: Company Only read access;'           |
+	
+Scenario: 960171 check EmployeeVacation rights (LimitedAccess)	
+	And I close all client application windows
+	Given I open hyperlink "e1cib/list/Document.EmployeeVacation"	
+	And "List" table became equal
+		| 'Description'                                                                                            |
+		| 'Document.EmployeeVacation Branch: Branch Read and Write Access;Company: Company Read and Write Access;' |
+		| 'Document.EmployeeVacation Branch: Branch Only read access;Company: Company Read and Write Access;'      |
+		| 'Document.EmployeeVacation Branch: Branch Read and Write Access;Company: Company Only read access;'      |
+		| 'Document.EmployeeVacation Branch: Branch Only read access;Company: Company Only read access;'           |
+	
+Scenario: 960172 check RetailReceiptCorrection rights (LimitedAccess)	
+	And I close all client application windows
+	Given I open hyperlink "e1cib/list/Document.RetailReceiptCorrection"	
+	And "List" table became equal
+		| 'Description'                                                                                                                                                                              |
+		| 'Document.RetailReceiptCorrection Branch: Branch Read and Write Access;Company: Company Read and Write Access;Store: Store Read and Write Access'                                          |
+		| 'Document.RetailReceiptCorrection Branch: Branch Read and Write Access;Company: Company Read and Write Access;Store: Store Only read access'                                               |
+		| 'Document.RetailReceiptCorrection Branch: Branch Read and Write Access;Company: Company Read and Write Access;Store: Store Read and Write Access&Store Only read access'                   |
+		| 'Document.RetailReceiptCorrection Branch: Branch Read and Write Access;Company: Company Read and Write Access;Store: Store Only read access&Store access deny'                             |
+		| 'Document.RetailReceiptCorrection Branch: Branch Read and Write Access;Company: Company Read and Write Access;Store: Store Read and Write Access&Store access deny'                        |
+		| 'Document.RetailReceiptCorrection Branch: Branch Read and Write Access;Company: Company Read and Write Access;Store: Store Read and Write Access&Store Only read access&Store access deny' |
+		| 'Document.RetailReceiptCorrection Branch: Branch Only read access;Company: Company Read and Write Access;Store: Store Read and Write Access'                                               |
+		| 'Document.RetailReceiptCorrection Branch: Branch Only read access;Company: Company Read and Write Access;Store: Store Only read access'                                                    |
+		| 'Document.RetailReceiptCorrection Branch: Branch Only read access;Company: Company Read and Write Access;Store: Store Read and Write Access&Store Only read access'                        |
+		| 'Document.RetailReceiptCorrection Branch: Branch Only read access;Company: Company Read and Write Access;Store: Store Only read access&Store access deny'                                  |
+		| 'Document.RetailReceiptCorrection Branch: Branch Only read access;Company: Company Read and Write Access;Store: Store Read and Write Access&Store access deny'                             |
+		| 'Document.RetailReceiptCorrection Branch: Branch Only read access;Company: Company Read and Write Access;Store: Store Read and Write Access&Store Only read access&Store access deny'      |
+		| 'Document.RetailReceiptCorrection Branch: Branch Read and Write Access;Company: Company Only read access;Store: Store Read and Write Access'                                               |
+		| 'Document.RetailReceiptCorrection Branch: Branch Read and Write Access;Company: Company Only read access;Store: Store Only read access'                                                    |
+		| 'Document.RetailReceiptCorrection Branch: Branch Read and Write Access;Company: Company Only read access;Store: Store Read and Write Access&Store Only read access'                        |
+		| 'Document.RetailReceiptCorrection Branch: Branch Read and Write Access;Company: Company Only read access;Store: Store Only read access&Store access deny'                                  |
+		| 'Document.RetailReceiptCorrection Branch: Branch Read and Write Access;Company: Company Only read access;Store: Store Read and Write Access&Store access deny'                             |
+		| 'Document.RetailReceiptCorrection Branch: Branch Read and Write Access;Company: Company Only read access;Store: Store Read and Write Access&Store Only read access&Store access deny'      |
+		| 'Document.RetailReceiptCorrection Branch: Branch Only read access;Company: Company Only read access;Store: Store Read and Write Access'                                                    |
+		| 'Document.RetailReceiptCorrection Branch: Branch Only read access;Company: Company Only read access;Store: Store Only read access'                                                         |
+		| 'Document.RetailReceiptCorrection Branch: Branch Only read access;Company: Company Only read access;Store: Store Read and Write Access&Store Only read access'                             |
+		| 'Document.RetailReceiptCorrection Branch: Branch Only read access;Company: Company Only read access;Store: Store Only read access&Store access deny'                                       |
+		| 'Document.RetailReceiptCorrection Branch: Branch Only read access;Company: Company Only read access;Store: Store Read and Write Access&Store access deny'                                  |
+		| 'Document.RetailReceiptCorrection Branch: Branch Only read access;Company: Company Only read access;Store: Store Read and Write Access&Store Only read access&Store access deny'           |
+	
+								
 
 Scenario: 960190 check Company catalog rights (LimitedAccess)	
 	And I close all client application windows

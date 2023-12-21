@@ -66,7 +66,6 @@ Procedure UndoPosting(Cancel)
 EndProcedure
 
 Procedure Filling(FillingData, FillingText, StandardProcessing)
-	//ThisObject.Status = ObjectStatusesServer.GetDefaultStatus(ThisObject.Ref);
 	
 	If TypeOf(FillingData) = Type("Structure") Then
 		If FillingData.Property("BasedOn") And FillingData.BasedOn = "ProductionPlanning" Then
@@ -86,17 +85,6 @@ Procedure Filling(FillingData, FillingText, StandardProcessing)
 				NewRow.CurrentQuantity = Row.CurrentQuantity;
 				NewRow.Quantity        = Row.CurrentQuantity;
 				NewRow.BillOfMaterials = Row.BillOfMaterials;
-				
-				//Parameters = New Structure("Key, Company, BillOfMaterials, PlanningPeriod, ItemKey, Unit, Quantity, CurrentQuantity");
-				//FillPropertyValues(Parameters, NewRow);
-				//Parameters.PlanningPeriod = FillingData.PlanningPeriod;
-				//Parameters.Company        = FillingData.Company;
-				//BillOfMaterialRows = MF_BillOfMaterialsCalculationsServer.FillBillOfMaterialsTableCorrection(Parameters);
-				//For Each RowBOM In BillOfMaterialRows Do
-				//	NewRowBOM = ThisObject.BillOfMaterials.Add();
-				//	FillPropertyValues(NewRowBOM, RowBOM);
-				//EndDo;
-				
 			EndDo;
 		EndIf;
 	EndIf;

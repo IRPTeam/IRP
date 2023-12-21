@@ -757,38 +757,16 @@ Function PickupItemEnd(Val Parameters, Val ScanData) Export
 			If ValueIsFilled(ScanDataItem.SerialLotNumber) Then
 				SerialLotNumberInfo = AddNewSerialLotNumber(Object, RowKey, ScanDataItem);
 				
+				// TODO: Refact
 				If SerialLotNumberInfo.Cache <> Undefined And SerialLotNumberInfo.Cache.Property("ItemList") Then
 					For Each InfoRow In SerialLotNumberInfo.Cache.ItemList Do
 						For Each ResultRow In Result.NewRows Do
 							If ResultRow.Cache.Property("ItemList") Then
 								For Each ItemListRow In ResultRow.Cache.ItemList Do
 									If ItemListRow.Key = InfoRow.Key Then
-										
-										
 										For Each KeyValue In InfoRow Do
 											ItemListRow.Insert(KeyValue.Key, InfoRow[KeyValue.Key])
 										EndDo;
-										
-										//If InfoRow.Property("InventoryOrigin") Then
-										//	ItemListRow.Insert("InventoryOrigin", InfoRow.InventoryOrigin);
-										//EndIf;
-										
-										//If InfoRow.Property("Consignor") Then
-										//	ItemListRow.Insert("Consignor", InfoRow.Consignor);
-										//EndIf;
-										
-										//If InfoRow.Property("VatRate") Then
-										//	ItemListRow.Insert("VatRate", InfoRow.VatRate);
-										//EndIf;	
-																			
-										//If InfoRow.Property("TaxAmount") Then
-										//	ItemListRow.Insert("TaxAmount", InfoRow.TaxAmount);
-										//EndIf;	
-										
-										//If InfoRow.Property("TotalAmount") Then
-										//	ItemListRow.Insert("TotalAmount", InfoRow.TotalAmount);
-										//EndIf;
-											
 									EndIf;
 								EndDo;
 							EndIf;

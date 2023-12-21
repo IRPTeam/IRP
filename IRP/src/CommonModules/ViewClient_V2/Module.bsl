@@ -4115,9 +4115,6 @@ Procedure PaymentsBankTermOnChange(Object, Form, CurrentData = Undefined) Export
 	Parameters = GetParameters(ServerParameters, FormParameters);
 	ControllerClientServer_V2.PaymentsBankTermOnChange(Parameters);
 	
-//	Rows = GetRowsByCurrentData(Form, "Payments", CurrentData);
-//	Parameters = GetSimpleParameters(Object, Form, "Payments", Rows);
-//	ControllerClientServer_V2.PaymentsBankTermOnChange(Parameters);
 EndProcedure
 
 // Payments.BankTerm.Set

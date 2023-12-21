@@ -465,8 +465,6 @@ Function SetRowTaxRate(Wrapper, Row, Tax, TaxRate, TableName) Export
 	//@skip-check property-return-type
 	Parameters.Rows[0].TaxRates[TaxInfo.Name] = TaxRate;
 
-	//Parameters.FormTaxColumnsExists = True;
-	
 	ControllerClientServer_V2.API_SetProperty(Parameters, Property, Undefined, True);
 	Result = New Structure();
 	Result.Insert("Context", Wrapper);

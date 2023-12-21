@@ -7173,19 +7173,11 @@ Procedure StepChangeVatRate_AgreementInList(Parameters, Chain) Export
 	Options_Date            = GetDate(Parameters);
 	Options_Company         = GetCompany(Parameters);
 	Options_TransactionType = GetTransactionType(Parameters);
-	//Options_Agreement       = GetAgreement(Parameters);
 	
 	TableRows = GetRows(Parameters, Parameters.TableName);
 		
 	For Each Row In TableRows Do
 		Options = ModelClientServer_V2.ChangeVatRateOptions();
-		
-//		If Row.Property("InventoryOrigin") Then
-//			Options.InventoryOrigin  = GetItemListInventoryOrigin(Parameters, Row.Key);
-//			Options.Consignor = GetItemListConsignor(Parameters, Row.Key);
-//		EndIf;
-//		
-//		Options.ItemKey = GetItemListItemKey(Parameters, Row.Key);
 		
 		Options.Date            = Options_Date;
 		Options.Company         = Options_Company;

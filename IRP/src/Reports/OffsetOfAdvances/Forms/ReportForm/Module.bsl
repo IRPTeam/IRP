@@ -290,7 +290,6 @@ Function GetTRN_KEY(Company, Branch, Currency, Partner, LegalName, Agreement, Or
 	|	AND TransactionsKeys.LegalName = &LegalName
 	|	AND CASE WHEN &Filter_Order THEN TransactionsKeys.Order = &Order ELSE TransactionsKeys.Order.Ref IS NULL END 
 	|	AND NOT TransactionsKeys.DeletionMark
-//	|	AND TransactionsKeys.TransactionBasis = &TransactionBasis
 	|	AND TransactionsKeys.Agreement = &Agreement
 	|	AND TransactionsKeys.IsVendorTransaction";
 	

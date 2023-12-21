@@ -1128,7 +1128,6 @@ Function T6020S_BatchKeysInfo()
 		   |	SUM(BatchKeysInfo.Quantity) AS Quantity,
 		   |	SUM(BatchKeysInfo.Amount) AS InvoiceAmount,
 		   |	SUM(BatchKeysInfo.AmountTax) AS InvoiceTaxAmount,
-		   //|	BatchKeysInfo.BatchConsignor,
 		   |	BatchKeysInfo.SerialLotNumber,
 		   |	BatchKeysInfo.SourceOfOrigin
 		   |INTO T6020S_BatchKeysInfo
@@ -1145,7 +1144,6 @@ Function T6020S_BatchKeysInfo()
 		   |	BatchKeysInfo.SalesInvoice,
 		   |	BatchKeysInfo.ItemKey,
 		   |	BatchKeysInfo.Store,
-		   //|	BatchKeysInfo.BatchConsignor,
 		   |	BatchKeysInfo.SerialLotNumber,
 		   |	BatchKeysInfo.SourceOfOrigin
 		   |

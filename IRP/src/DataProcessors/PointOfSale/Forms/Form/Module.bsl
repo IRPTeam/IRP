@@ -1487,7 +1487,7 @@ EndProcedure
 &AtServer
 Procedure ClearRetailCustomerAtServer()
 	ObjectValue = FormAttributeToValue("Object");
-	FillingWithDefaultDataEvent.FillingWithDefaultDataFilling(ObjectValue, Undefined, Undefined, True, True);
+	FillingWithDefaultDataEvent.FillingDocumentsWithDefaultData(ObjectValue, Undefined, Undefined, True, True);
 	ObjectValue.Date = CommonFunctionsServer.GetCurrentSessionDate();
 	ValueToFormAttribute(ObjectValue, "Object");
 	For Each Row In Object.ItemList Do

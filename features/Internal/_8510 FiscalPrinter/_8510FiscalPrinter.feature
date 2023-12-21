@@ -2308,7 +2308,7 @@ Scenario: _050055 check filling consignor in the RetailReturnReceipt from POS (s
 
 
 
-Scenario: return from previous Consolidated retail sales
+Scenario: _050056 return from previous Consolidated retail sales
 	And I close all client application windows
 	And In the command interface I select "Retail" "Point of sale"
 	* Select basis document
@@ -3418,6 +3418,678 @@ Scenario: _0260176 check revert card payment for return (POS)
 		And I check "$ParsingResult1$" with "1" and data in "Out.Parameter8" contains 'ВОЗВРАТ'
 		And I check "$ParsingResult1$" with "1" and data in "Out.Parameter8" contains '401.11'	
 
+Scenario: _02602102 Retail receipt correction for RSR (cash, VAT rate correction)
+	And I close all client application windows
+	* Create RSR
+		Given I open hyperlink "e1cib/list/Document.RetailSalesReceipt"
+		And I click "Create" button
+		* Consignor 1
+			And in the table "ItemList" I click the button named "SearchByBarcode"
+			And I input "0909088998998898789" text in the field named "Barcode"
+			And I move to the next attribute
+			And in the table "ItemList" I click the button named "SearchByBarcode"
+			And I input "0909088998998898791" text in the field named "Barcode"
+			And I move to the next attribute
+		* Consignor 2
+			And in the table "ItemList" I click the button named "SearchByBarcode"
+			And I input "9000008" text in the field named "Barcode"
+			And I move to the next attribute
+			And in the table "ItemList" I click the button named "SearchByBarcode"
+			And I input "900889900900778" text in the field named "Barcode"
+			And I move to the next attribute
+		* Own stock, without SLN
+			And in the table "ItemList" I click the button named "SearchByBarcode"
+			And I input "2202283713" text in the field named "Barcode"
+			And I move to the next attribute
+		* Item with marking code
+			And in the table "ItemList" I click the button named "SearchByBarcode"
+			And I input "900999000009" text in the field named "Barcode"
+			And I move to the next attribute
+			And I click "Search by barcode" button
+			Then "Barcode" window is opened
+			And I input "11111111111111111111" text in the field named "Barcode"
+			And I move to the next attribute
+		* Item with good code data
+			And in the table "ItemList" I click the button named "SearchByBarcode"
+			And I input "89000008999" text in the field named "Barcode"
+			And I move to the next attribute
+			And I click "Search by barcode" button
+			And I input "Q3VycmVudCByb3cgd2lsbCBkZWNvZGUgdG8gYmFzZTY2" text in the field named "Barcode"
+			And I move to the next attribute
+		And for each line of "ItemList" table I do
+			And I input "100,00" text in "Price" field of "ItemList" table
+		* Payment
+			And I move to "Payments" tab
+			And in the table "Payments" I click the button named "PaymentsAdd"
+			And I activate "Payment type" field in "Payments" table
+			And I select current line in "Payments" table
+			And I select "cash" from "Payment type" drop-down list by string in "Payments" table
+			And I activate "Account" field in "Payments" table
+			And I select "Cash desk №4" from "Account" drop-down list by string in "Payments" table
+			And I activate field named "PaymentsAmount" in "Payments" table
+			And I input "700,00" text in the field named "PaymentsAmount" of "Payments" table
+			And I finish line editing in "Payments" table
+			And I click "Post" button
+			And I save the window as "RSR02602102"
+		* Fiscalize
+			And I click "Print receipt" button
+			Then there are lines in TestClient message log
+				|'Done'|
+	* Generate first Retail receipt correction (storno)
+		And I click "Retail receipt correction" button
+		* Check
+			Then the form attribute named "Agreement" became equal to "Retail partner term"
+			Then the form attribute named "Author" became equal to "CI"
+			Then the form attribute named "BasisDocument" became equal to "$RSR02602102$"
+			Then the form attribute named "Company" became equal to "Main Company"
+			Then the field named "ConsolidatedRetailSales" is filled
+			Then the form attribute named "CorrectionDescription" became equal to ""
+			And the editing text of form attribute named "CorrectionType" became equal to "Independent"
+			And "ItemList" table became equal
+				| 'Inventory origin' | 'Sales person' | 'Price type'              | 'Item'                                                                | 'Item key' | 'Profit loss center' | 'Dont calculate row' | 'Serial lot numbers'  | 'Unit' | 'Tax amount' | 'Source of origins'  | 'Quantity' | 'Price'  | 'VAT'         | 'Offers amount' | 'Net amount' | 'Total amount' | 'Additional analytic' | 'Store'    | 'Detail' | 'Sales order' | 'Revenue type' |
+				| 'Consignor stocks' | ''             | 'en description is empty' | 'Product with Unique SLN'                                             | 'ODS'      | 'Shop 02'            | 'No'                 | '0909088998998898789' | 'pcs'  | '15,25'      | ''                   | '1,000'    | '100,00' | '18%'         | ''              | '84,75'      | '100,00'       | ''                    | 'Store 01' | ''       | ''            | ''             |
+				| 'Consignor stocks' | ''             | 'en description is empty' | 'Product with Unique SLN'                                             | 'PZU'      | 'Shop 02'            | 'No'                 | '0909088998998898791' | 'pcs'  | '15,25'      | ''                   | '1,000'    | '100,00' | '18%'         | ''              | '84,75'      | '100,00'       | ''                    | 'Store 01' | ''       | ''            | ''             |
+				| 'Consignor stocks' | ''             | 'en description is empty' | 'Product 16 with SLN (Main Company - Consignor 2)'                    | 'UNIQ'     | 'Shop 02'            | 'No'                 | '9000008'             | 'pcs'  | ''           | 'Source of origin 8' | '1,000'    | '100,00' | 'Without VAT' | ''              | '100,00'     | '100,00'       | ''                    | 'Store 01' | ''       | ''            | ''             |
+				| 'Consignor stocks' | ''             | 'en description is empty' | 'Product 16 with SLN (Main Company - Consignor 2)'                    | 'PZU'      | 'Shop 02'            | 'No'                 | '900889900900778'     | 'pcs'  | ''           | 'Source of origin 9' | '1,000'    | '100,00' | 'Without VAT' | ''              | '100,00'     | '100,00'       | ''                    | 'Store 01' | ''       | ''            | ''             |
+				| 'Own stocks'       | ''             | 'en description is empty' | 'Dress'                                                               | 'S/Yellow' | 'Shop 02'            | 'No'                 | ''                    | 'pcs'  | '15,25'      | ''                   | '1,000'    | '100,00' | '18%'         | ''              | '84,75'      | '100,00'       | ''                    | 'Store 01' | ''       | ''            | ''             |
+				| 'Consignor stocks' | ''             | 'en description is empty' | 'Product 15 with SLN and code control (Main Company - Consignor 1)'   | 'ODS'      | 'Shop 02'            | 'No'                 | '900999000009'        | 'pcs'  | '15,25'      | ''                   | '1,000'    | '100,00' | '18%'         | ''              | '84,75'      | '100,00'       | ''                    | 'Store 01' | ''       | ''            | ''             |
+				| 'Consignor stocks' | ''             | 'en description is empty' | 'Product 16 with SLN and Good code data (Main Company - Consignor 1)' | 'PZU'      | 'Shop 02'            | 'No'                 | '89000008999'         | 'pcs'  | '15,25'      | ''                   | '1,000'    | '100,00' | '18%'         | ''              | '84,75'      | '100,00'       | ''                    | 'Store 01' | ''       | ''            | ''             |
+			Then the form attribute named "LegalName" became equal to "Company Retail customer"
+			Then the form attribute named "Partner" became equal to "Retail customer"
+			Then the form attribute named "PaymentMethod" became equal to "Full calculation"
+			And "Payments" table became equal
+				| '#' | 'Amount' | 'Commission' | 'Certificate' | 'Payment type' | 'Financial movement type' | 'Payment agent legal name contract' | 'Payment terminal' | 'Bank term' | 'Account'      | 'Percent' | 'RRN Code' | 'Payment agent partner' | 'Payment agent legal name' | 'Payment agent partner terms' |
+				| '1' | '700,00' | ''           | ''            | 'Cash'         | ''                        | ''                                  | ''                 | ''          | 'Cash desk №4' | ''        | ''         | ''                      | ''                         | ''                            |
+			Then the form attribute named "PriceIncludeTax" became equal to "Yes"
+			Then the form attribute named "StatusType" became equal to "Completed"
+			Then the form attribute named "Store" became equal to "Store 01"
+			Then the form attribute named "Workstation" became equal to "Workstation 01"
+		* Fill correction description
+			And I input "wrong VAT rate" text in "Correction description" field
+			And I input "19.12.2023 13:24:48" text in the field named "Date"
+			And I move to the next attribute
+			And I click "Uncheck all" button
+			And I click "OK" button	
+			And I input "715" text in "Basis document fiscal number" field					
+			And I click "Save" button
+			And I save the window as "RRC1"
+		* Fiscalize
+			And I click "Print receipt" button
+			Then there are lines in TestClient message log
+				|'Done'| 
+		* Check fiscal log
+			And Delay 5
+			And I parsed the log of the fiscal emulator by the path '$$LogPath$$' into the variable "ParsingResult"
+			And Delay 5
+			And I check "$ParsingResult$" with "0" and method is "ProcessCorrectionCheck"
+			And I check "$ParsingResult$" with "0" and data in "In.Parameter2" the same as "SalesReceiptXML28"
+	* Generate second Retail receipt correction (change tax rate for two lines)
+		And I click "Retail receipt correction" button
+		And I go to line in "ItemList" table
+			| 'Inventory origin' | 'Item'                    | 'Item key' | 'Tax amount' | 'Total amount' | 'VAT' |
+			| 'Consignor stocks' | 'Product with Unique SLN' | 'PZU'      | '15,25'      | '100,00'       | '18%' |
+		And I select current line in "ItemList" table
+		And I select "Without VAT" exact value from "VAT" drop-down list in "ItemList" table
+		And I finish line editing in "ItemList" table
+		And I go to line in "ItemList" table
+			| 'Item'                                             | 'Item key' | 'Net amount' | 'Unit' | 'VAT'         |
+			| 'Product 16 with SLN (Main Company - Consignor 2)' | 'PZU'      | '100,00'     | 'pcs'  | 'Without VAT' |
+		And I select current line in "ItemList" table
+		And I select "18%" exact value from "VAT" drop-down list in "ItemList" table
+		And I finish line editing in "ItemList" table
+	* Check second Retail receipt correction
+		Then the form attribute named "Agreement" became equal to "Retail partner term"
+		Then the form attribute named "Author" became equal to "CI"
+		Then the form attribute named "BasisDocument" became equal to "$RRC1$"
+		Then the form attribute named "Company" became equal to "Main Company"
+		Then the field named "ConsolidatedRetailSales" is filled
+		Then the form attribute named "CorrectionDescription" became equal to "wrong VAT rate"
+		Then the form attribute named "Currency" became equal to "TRY"
+		And "ItemList" table became equal
+			| '#' | 'Inventory origin' | 'Sales person' | 'Price type'              | 'Item'                                                                | 'Item key' | 'Profit loss center' | 'Dont calculate row' | 'Serial lot numbers'  | 'Unit' | 'Tax amount' | 'Source of origins'  | 'Quantity' | 'Price'  | 'VAT'         | 'Offers amount' | 'Net amount' | 'Total amount' | 'Additional analytic' | 'Store'    | 'Detail' | 'Sales order' | 'Revenue type' |
+			| '1' | 'Consignor stocks' | ''             | 'en description is empty' | 'Product with Unique SLN'                                             | 'ODS'      | 'Shop 02'            | 'No'                 | '0909088998998898789' | 'pcs'  | '15,25'      | ''                   | '1,000'    | '100,00' | '18%'         | ''              | '84,75'      | '100,00'       | ''                    | 'Store 01' | ''       | ''            | ''             |
+			| '2' | 'Consignor stocks' | ''             | 'en description is empty' | 'Product with Unique SLN'                                             | 'PZU'      | 'Shop 02'            | 'No'                 | '0909088998998898791' | 'pcs'  | ''           | ''                   | '1,000'    | '100,00' | 'Without VAT' | ''              | '100,00'     | '100,00'       | ''                    | 'Store 01' | ''       | ''            | ''             |
+			| '3' | 'Consignor stocks' | ''             | 'en description is empty' | 'Product 16 with SLN (Main Company - Consignor 2)'                    | 'UNIQ'     | 'Shop 02'            | 'No'                 | '9000008'             | 'pcs'  | ''           | 'Source of origin 8' | '1,000'    | '100,00' | 'Without VAT' | ''              | '100,00'     | '100,00'       | ''                    | 'Store 01' | ''       | ''            | ''             |
+			| '4' | 'Consignor stocks' | ''             | 'en description is empty' | 'Product 16 with SLN (Main Company - Consignor 2)'                    | 'PZU'      | 'Shop 02'            | 'No'                 | '900889900900778'     | 'pcs'  | '15,25'      | 'Source of origin 9' | '1,000'    | '100,00' | '18%'         | ''              | '84,75'      | '100,00'       | ''                    | 'Store 01' | ''       | ''            | ''             |
+			| '5' | 'Own stocks'       | ''             | 'en description is empty' | 'Dress'                                                               | 'S/Yellow' | 'Shop 02'            | 'No'                 | ''                    | 'pcs'  | '15,25'      | ''                   | '1,000'    | '100,00' | '18%'         | ''              | '84,75'      | '100,00'       | ''                    | 'Store 01' | ''       | ''            | ''             |
+			| '6' | 'Consignor stocks' | ''             | 'en description is empty' | 'Product 15 with SLN and code control (Main Company - Consignor 1)'   | 'ODS'      | 'Shop 02'            | 'No'                 | '900999000009'        | 'pcs'  | '15,25'      | ''                   | '1,000'    | '100,00' | '18%'         | ''              | '84,75'      | '100,00'       | ''                    | 'Store 01' | ''       | ''            | ''             |
+			| '7' | 'Consignor stocks' | ''             | 'en description is empty' | 'Product 16 with SLN and Good code data (Main Company - Consignor 1)' | 'PZU'      | 'Shop 02'            | 'No'                 | '89000008999'         | 'pcs'  | '15,25'      | ''                   | '1,000'    | '100,00' | '18%'         | ''              | '84,75'      | '100,00'       | ''                    | 'Store 01' | ''       | ''            | ''             |
+		
+		Then the form attribute named "LegalName" became equal to "Company Retail customer"
+		Then the form attribute named "Partner" became equal to "Retail customer"
+		Then the form attribute named "PaymentMethod" became equal to "Full calculation"
+		And "Payments" table became equal
+			| '#' | 'Amount' | 'Commission' | 'Certificate' | 'Payment type' | 'Financial movement type' | 'Payment agent legal name contract' | 'Payment terminal' | 'Bank term' | 'Account'      | 'Percent' | 'RRN Code' | 'Payment agent partner' | 'Payment agent legal name' | 'Payment agent partner terms' |
+			| '1' | '700,00' | ''           | ''            | 'Cash'         | ''                        | ''                                  | ''                 | ''          | 'Cash desk №4' | ''        | ''         | ''                      | ''                         | ''                            |
+		
+		Then the form attribute named "PriceIncludeTax" became equal to "Yes"
+		Then the form attribute named "StatusType" became equal to "Completed"
+		Then the form attribute named "Store" became equal to "Store 01"
+		Then the form attribute named "UsePartnerTransactions" became equal to "No"
+		Then the form attribute named "Workstation" became equal to "Workstation 01"
+		And I input "19.12.2023 13:24:48" text in the field named "Date"
+		And I move to the next attribute
+		And I click "Uncheck all" button
+		And I click "OK" button	
+		And I input "716" text in "Basis document fiscal number" field	
+		And I click "Save" button
+		And I save the window as "RRC2"
+	* Fiscalize
+		And I click "Print receipt" button
+		Then there are lines in TestClient message log
+			|'Done'|
+	* Check fiscal log
+		And Delay 5
+		And I parsed the log of the fiscal emulator by the path '$$LogPath$$' into the variable "ParsingResult"
+		And Delay 5
+		And I check "$ParsingResult$" with "0" and method is "ProcessCorrectionCheck"
+		And I check "$ParsingResult$" with "0" and data in "In.Parameter2" the same as "SalesReceiptXML29"
+
+				
+Scenario: _02602103 Retail receipt correction for RSR (card, VAT rate correction)
+	And I close all client application windows
+	* Create RSR
+		Given I open hyperlink "e1cib/list/Document.RetailSalesReceipt"
+		And I click "Create" button
+		* Consignor 1
+			And in the table "ItemList" I click the button named "SearchByBarcode"
+			And I input "0909088998998898789" text in the field named "Barcode"
+			And I move to the next attribute
+			And in the table "ItemList" I click the button named "SearchByBarcode"
+			And I input "0909088998998898791" text in the field named "Barcode"
+			And I move to the next attribute
+		* Consignor 2
+			And in the table "ItemList" I click the button named "SearchByBarcode"
+			And I input "9000008" text in the field named "Barcode"
+			And I move to the next attribute
+			And in the table "ItemList" I click the button named "SearchByBarcode"
+			And I input "900889900900778" text in the field named "Barcode"
+			And I move to the next attribute
+		* Own stock, without SLN
+			And in the table "ItemList" I click the button named "SearchByBarcode"
+			And I input "2202283713" text in the field named "Barcode"
+			And I move to the next attribute
+		* Item with marking code
+			And in the table "ItemList" I click the button named "SearchByBarcode"
+			And I input "900999000009" text in the field named "Barcode"
+			And I move to the next attribute
+			And I click "Search by barcode" button
+			Then "Barcode" window is opened
+			And I input "11111111111111111111" text in the field named "Barcode"
+			And I move to the next attribute
+		* Item with good code data
+			And in the table "ItemList" I click the button named "SearchByBarcode"
+			And I input "89000008999" text in the field named "Barcode"
+			And I move to the next attribute
+			And I click "Search by barcode" button
+			And I input "Q3VycmVudCByb3cgd2lsbCBkZWNvZGUgdG8gYmFzZTY2" text in the field named "Barcode"
+			And I move to the next attribute
+		And for each line of "ItemList" table I do
+			And I input "100,00" text in "Price" field of "ItemList" table
+		* Payment
+			And I move to "Payments" tab
+			And in the table "Payments" I click the button named "PaymentsAdd"
+			And I activate "Payment type" field in "Payments" table
+			And I select current line in "Payments" table
+			And I select "Card 02" from "Payment type" drop-down list by string in "Payments" table
+			And I select "Bank term 02" from "Bank term" drop-down list by string in "Payments" table
+			And I activate "Account" field in "Payments" table
+			And I select "Transit Second" from "Account" drop-down list by string in "Payments" table
+			And I activate field named "PaymentsAmount" in "Payments" table
+			And I input "700,00" text in the field named "PaymentsAmount" of "Payments" table
+			And I finish line editing in "Payments" table
+			And I click "Post" button
+			And I save the window as "RSR02602103"
+		* Fiscalize
+			And I click "Print receipt" button
+			Then there are lines in TestClient message log
+				|'Done'|
+	* Generate first Retail receipt correction (storno)
+		And I click "Retail receipt correction" button
+		* Check
+			Then the form attribute named "Agreement" became equal to "Retail partner term"
+			Then the form attribute named "Author" became equal to "CI"
+			Then the form attribute named "BasisDocument" became equal to "$RSR02602103$"
+			Then the form attribute named "Company" became equal to "Main Company"
+			Then the field named "ConsolidatedRetailSales" is filled
+			Then the form attribute named "CorrectionDescription" became equal to ""
+			And the editing text of form attribute named "CorrectionType" became equal to "Independent"
+			And "ItemList" table became equal
+				| 'Inventory origin' | 'Sales person' | 'Price type'              | 'Item'                                                                | 'Item key' | 'Profit loss center' | 'Dont calculate row' | 'Serial lot numbers'  | 'Unit' | 'Tax amount' | 'Source of origins'  | 'Quantity' | 'Price'  | 'VAT'         | 'Offers amount' | 'Net amount' | 'Total amount' | 'Additional analytic' | 'Store'    | 'Detail' | 'Sales order' | 'Revenue type' |
+				| 'Consignor stocks' | ''             | 'en description is empty' | 'Product with Unique SLN'                                             | 'ODS'      | 'Shop 02'            | 'No'                 | '0909088998998898789' | 'pcs'  | '15,25'      | ''                   | '1,000'    | '100,00' | '18%'         | ''              | '84,75'      | '100,00'       | ''                    | 'Store 01' | ''       | ''            | ''             |
+				| 'Consignor stocks' | ''             | 'en description is empty' | 'Product with Unique SLN'                                             | 'PZU'      | 'Shop 02'            | 'No'                 | '0909088998998898791' | 'pcs'  | '15,25'      | ''                   | '1,000'    | '100,00' | '18%'         | ''              | '84,75'      | '100,00'       | ''                    | 'Store 01' | ''       | ''            | ''             |
+				| 'Consignor stocks' | ''             | 'en description is empty' | 'Product 16 with SLN (Main Company - Consignor 2)'                    | 'UNIQ'     | 'Shop 02'            | 'No'                 | '9000008'             | 'pcs'  | ''           | 'Source of origin 8' | '1,000'    | '100,00' | 'Without VAT' | ''              | '100,00'     | '100,00'       | ''                    | 'Store 01' | ''       | ''            | ''             |
+				| 'Consignor stocks' | ''             | 'en description is empty' | 'Product 16 with SLN (Main Company - Consignor 2)'                    | 'PZU'      | 'Shop 02'            | 'No'                 | '900889900900778'     | 'pcs'  | ''           | 'Source of origin 9' | '1,000'    | '100,00' | 'Without VAT' | ''              | '100,00'     | '100,00'       | ''                    | 'Store 01' | ''       | ''            | ''             |
+				| 'Own stocks'       | ''             | 'en description is empty' | 'Dress'                                                               | 'S/Yellow' | 'Shop 02'            | 'No'                 | ''                    | 'pcs'  | '15,25'      | ''                   | '1,000'    | '100,00' | '18%'         | ''              | '84,75'      | '100,00'       | ''                    | 'Store 01' | ''       | ''            | ''             |
+				| 'Consignor stocks' | ''             | 'en description is empty' | 'Product 15 with SLN and code control (Main Company - Consignor 1)'   | 'ODS'      | 'Shop 02'            | 'No'                 | '900999000009'        | 'pcs'  | '15,25'      | ''                   | '1,000'    | '100,00' | '18%'         | ''              | '84,75'      | '100,00'       | ''                    | 'Store 01' | ''       | ''            | ''             |
+				| 'Consignor stocks' | ''             | 'en description is empty' | 'Product 16 with SLN and Good code data (Main Company - Consignor 1)' | 'PZU'      | 'Shop 02'            | 'No'                 | '89000008999'         | 'pcs'  | '15,25'      | ''                   | '1,000'    | '100,00' | '18%'         | ''              | '84,75'      | '100,00'       | ''                    | 'Store 01' | ''       | ''            | ''             |
+			Then the form attribute named "LegalName" became equal to "Company Retail customer"
+			Then the form attribute named "Partner" became equal to "Retail customer"
+			Then the form attribute named "PaymentMethod" became equal to "Full calculation"
+			And "Payments" table became equal
+				| '#' | 'Amount' | 'Commission' | 'Certificate' | 'Payment type' | 'Financial movement type' | 'Payment agent legal name contract' | 'Payment terminal' | 'Bank term'    | 'Account'        | 'Percent' | 'RRN Code' | 'Payment agent partner' | 'Payment agent legal name' | 'Payment agent partner terms' |
+				| '1' | '700,00' | '14,00'      | ''            | 'Card 02'      | ''                        | ''                                  | ''                 | 'Bank term 02' | 'Transit Second' | '2,00'    | ''         | ''                      | ''                         | ''                            |
+			Then the form attribute named "PriceIncludeTax" became equal to "Yes"
+			Then the form attribute named "StatusType" became equal to "Completed"
+			Then the form attribute named "Store" became equal to "Store 01"
+			Then the form attribute named "Workstation" became equal to "Workstation 01"
+		* Fill correction description
+			And I input "wrong VAT rate" text in "Correction description" field
+			And I input "19.12.2023 14:15:51" text in the field named "Date"
+			And I move to the next attribute
+			And I click "Uncheck all" button
+			And I click "OK" button
+			And I input "717" text in "Basis document fiscal number" field		
+			And I click "Save" button
+			And I save the window as "RRC1"
+		* Fiscalize
+			And I click "Print receipt" button
+			Then there are lines in TestClient message log
+				|'Done'| 
+		* Check fiscal log
+			And Delay 5
+			And I parsed the log of the fiscal emulator by the path '$$LogPath$$' into the variable "ParsingResult"
+			And Delay 5
+			And I check "$ParsingResult$" with "0" and method is "ProcessCorrectionCheck"
+			And I check "$ParsingResult$" with "0" and data in "In.Parameter2" the same as "SalesReceiptXML30"
+	* Generate second Retail receipt correction (change tax rate for two lines)
+		And I click "Retail receipt correction" button
+		And I go to line in "ItemList" table
+			| 'Inventory origin' | 'Item'                    | 'Item key' | 'Tax amount' | 'Total amount' | 'VAT' |
+			| 'Consignor stocks' | 'Product with Unique SLN' | 'PZU'      | '15,25'      | '100,00'       | '18%' |
+		And I select current line in "ItemList" table
+		And I select "Without VAT" exact value from "VAT" drop-down list in "ItemList" table
+		And I finish line editing in "ItemList" table
+		And I go to line in "ItemList" table
+			| 'Item'                                             | 'Item key' | 'Net amount' | 'Unit' | 'VAT'         |
+			| 'Product 16 with SLN (Main Company - Consignor 2)' | 'PZU'      | '100,00'     | 'pcs'  | 'Without VAT' |
+		And I select current line in "ItemList" table
+		And I select "18%" exact value from "VAT" drop-down list in "ItemList" table
+		And I finish line editing in "ItemList" table
+	* Check second Retail receipt correction
+		Then the form attribute named "Agreement" became equal to "Retail partner term"
+		Then the form attribute named "Author" became equal to "CI"
+		Then the form attribute named "BasisDocument" became equal to "$RRC1$"
+		Then the form attribute named "Company" became equal to "Main Company"
+		Then the field named "ConsolidatedRetailSales" is filled
+		Then the form attribute named "CorrectionDescription" became equal to "wrong VAT rate"
+		Then the form attribute named "Currency" became equal to "TRY"
+		And "ItemList" table became equal
+			| '#' | 'Inventory origin' | 'Sales person' | 'Price type'              | 'Item'                                                                | 'Item key' | 'Profit loss center' | 'Dont calculate row' | 'Serial lot numbers'  | 'Unit' | 'Tax amount' | 'Source of origins'  | 'Quantity' | 'Price'  | 'VAT'         | 'Offers amount' | 'Net amount' | 'Total amount' | 'Additional analytic' | 'Store'    | 'Detail' | 'Sales order' | 'Revenue type' |
+			| '1' | 'Consignor stocks' | ''             | 'en description is empty' | 'Product with Unique SLN'                                             | 'ODS'      | 'Shop 02'            | 'No'                 | '0909088998998898789' | 'pcs'  | '15,25'      | ''                   | '1,000'    | '100,00' | '18%'         | ''              | '84,75'      | '100,00'       | ''                    | 'Store 01' | ''       | ''            | ''             |
+			| '2' | 'Consignor stocks' | ''             | 'en description is empty' | 'Product with Unique SLN'                                             | 'PZU'      | 'Shop 02'            | 'No'                 | '0909088998998898791' | 'pcs'  | ''           | ''                   | '1,000'    | '100,00' | 'Without VAT' | ''              | '100,00'     | '100,00'       | ''                    | 'Store 01' | ''       | ''            | ''             |
+			| '3' | 'Consignor stocks' | ''             | 'en description is empty' | 'Product 16 with SLN (Main Company - Consignor 2)'                    | 'UNIQ'     | 'Shop 02'            | 'No'                 | '9000008'             | 'pcs'  | ''           | 'Source of origin 8' | '1,000'    | '100,00' | 'Without VAT' | ''              | '100,00'     | '100,00'       | ''                    | 'Store 01' | ''       | ''            | ''             |
+			| '4' | 'Consignor stocks' | ''             | 'en description is empty' | 'Product 16 with SLN (Main Company - Consignor 2)'                    | 'PZU'      | 'Shop 02'            | 'No'                 | '900889900900778'     | 'pcs'  | '15,25'      | 'Source of origin 9' | '1,000'    | '100,00' | '18%'         | ''              | '84,75'      | '100,00'       | ''                    | 'Store 01' | ''       | ''            | ''             |
+			| '5' | 'Own stocks'       | ''             | 'en description is empty' | 'Dress'                                                               | 'S/Yellow' | 'Shop 02'            | 'No'                 | ''                    | 'pcs'  | '15,25'      | ''                   | '1,000'    | '100,00' | '18%'         | ''              | '84,75'      | '100,00'       | ''                    | 'Store 01' | ''       | ''            | ''             |
+			| '6' | 'Consignor stocks' | ''             | 'en description is empty' | 'Product 15 with SLN and code control (Main Company - Consignor 1)'   | 'ODS'      | 'Shop 02'            | 'No'                 | '900999000009'        | 'pcs'  | '15,25'      | ''                   | '1,000'    | '100,00' | '18%'         | ''              | '84,75'      | '100,00'       | ''                    | 'Store 01' | ''       | ''            | ''             |
+			| '7' | 'Consignor stocks' | ''             | 'en description is empty' | 'Product 16 with SLN and Good code data (Main Company - Consignor 1)' | 'PZU'      | 'Shop 02'            | 'No'                 | '89000008999'         | 'pcs'  | '15,25'      | ''                   | '1,000'    | '100,00' | '18%'         | ''              | '84,75'      | '100,00'       | ''                    | 'Store 01' | ''       | ''            | ''             |
+		
+		Then the form attribute named "LegalName" became equal to "Company Retail customer"
+		Then the form attribute named "Partner" became equal to "Retail customer"
+		Then the form attribute named "PaymentMethod" became equal to "Full calculation"
+		And "Payments" table became equal
+			| '#' | 'Amount' | 'Commission' | 'Certificate' | 'Payment type' | 'Financial movement type' | 'Payment agent legal name contract' | 'Payment terminal' | 'Bank term'    | 'Account'        | 'Percent' | 'RRN Code' | 'Payment agent partner' | 'Payment agent legal name' | 'Payment agent partner terms' |
+			| '1' | '700,00' | '14,00'      | ''            | 'Card 02'      | ''                        | ''                                  | ''                 | 'Bank term 02' | 'Transit Second' | '2,00'    | ''         | ''                      | ''                         | ''                            |
+		
+		Then the form attribute named "PriceIncludeTax" became equal to "Yes"
+		Then the form attribute named "StatusType" became equal to "Completed"
+		Then the form attribute named "Store" became equal to "Store 01"
+		Then the form attribute named "UsePartnerTransactions" became equal to "No"
+		Then the form attribute named "Workstation" became equal to "Workstation 01"
+		And I input "19.12.2023 14:15:51" text in the field named "Date"
+		And I move to the next attribute
+		And I click "Uncheck all" button
+		And I click "OK" button	
+		And I input "718" text in "Basis document fiscal number" field	
+		And I click "Save" button
+		And I save the window as "RRC2"
+	* Fiscalize
+		And I click "Print receipt" button
+		Then there are lines in TestClient message log
+			|'Done'|
+	* Check fiscal log
+		And Delay 5
+		And I parsed the log of the fiscal emulator by the path '$$LogPath$$' into the variable "ParsingResult"
+		And Delay 5
+		And I check "$ParsingResult$" with "0" and method is "ProcessCorrectionCheck"
+		And I check "$ParsingResult$" with "0" and data in "In.Parameter2" the same as "SalesReceiptXML31"					
+
+
+Scenario: _02602104 Retail receipt correction for RRR (cash, VAT rate correction)
+	And I close all client application windows
+	* Create RRR
+		Given I open hyperlink "e1cib/list/Document.RetailReturnReceipt"
+		And I click "Create" button
+		* Consignor 1
+			And in the table "ItemList" I click the button named "SearchByBarcode"
+			And I input "0909088998998898789" text in the field named "Barcode"
+			And I move to the next attribute
+			And in the table "ItemList" I click the button named "SearchByBarcode"
+			And I input "0909088998998898791" text in the field named "Barcode"
+			And I move to the next attribute
+		* Consignor 2
+			And in the table "ItemList" I click the button named "SearchByBarcode"
+			And I input "9000008" text in the field named "Barcode"
+			And I move to the next attribute
+			And in the table "ItemList" I click the button named "SearchByBarcode"
+			And I input "900889900900778" text in the field named "Barcode"
+			And I move to the next attribute
+		* Own stock, without SLN
+			And in the table "ItemList" I click the button named "SearchByBarcode"
+			And I input "2202283713" text in the field named "Barcode"
+			And I move to the next attribute
+		* Item with marking code
+			And in the table "ItemList" I click the button named "SearchByBarcode"
+			And I input "900999000009" text in the field named "Barcode"
+			And I move to the next attribute
+			And I click "Search by barcode" button
+			Then "Barcode" window is opened
+			And I input "11111111111111111111" text in the field named "Barcode"
+			And I move to the next attribute
+		* Item with good code data
+			And in the table "ItemList" I click the button named "SearchByBarcode"
+			And I input "89000008999" text in the field named "Barcode"
+			And I move to the next attribute
+			And I click "Search by barcode" button
+			And I input "Q3VycmVudCByb3cgd2lsbCBkZWNvZGUgdG8gYmFzZTY2" text in the field named "Barcode"
+			And I move to the next attribute
+		And for each line of "ItemList" table I do
+			And I input "100,00" text in "Price" field of "ItemList" table
+		And for each line of "ItemList" table I do
+			And I input "10,00" text in "Landed cost" field of "ItemList" table
+		* Payment
+			And I move to "Payments" tab
+			And in the table "Payments" I click the button named "PaymentsAdd"
+			And I activate "Payment type" field in "Payments" table
+			And I select current line in "Payments" table
+			And I select "cash" from "Payment type" drop-down list by string in "Payments" table
+			And I activate "Account" field in "Payments" table
+			And I select "Cash desk №4" from "Account" drop-down list by string in "Payments" table
+			And I activate field named "PaymentsAmount" in "Payments" table
+			And I input "700,00" text in the field named "PaymentsAmount" of "Payments" table
+			And I finish line editing in "Payments" table
+			And I click "Post" button
+			And I save the window as "RRR02602104"
+		* Fiscalize
+			And I click "Print receipt" button
+	* Generate first Retail receipt correction (storno)
+		And I click "Retail receipt correction" button
+		* Check
+			Then the form attribute named "Agreement" became equal to "Retail partner term"
+			Then the form attribute named "Author" became equal to "CI"
+			Then the form attribute named "BasisDocument" became equal to "$RRR02602104$"
+			Then the form attribute named "Company" became equal to "Main Company"
+			Then the field named "ConsolidatedRetailSales" is filled
+			Then the form attribute named "CorrectionDescription" became equal to ""
+			And the editing text of form attribute named "CorrectionType" became equal to "Independent"
+			And "ItemList" table became equal
+				| 'Inventory origin' | 'Sales person' | 'Price type'              | 'Item'                                                                | 'Item key' | 'Profit loss center' | 'Dont calculate row' | 'Serial lot numbers'  | 'Unit' | 'Tax amount' | 'Source of origins'  | 'Quantity' | 'Price'  | 'VAT'         | 'Offers amount' | 'Net amount' | 'Total amount' | 'Additional analytic' | 'Store'    | 'Detail' | 'Sales order' | 'Revenue type' |
+				| 'Consignor stocks' | ''             | 'en description is empty' | 'Product with Unique SLN'                                             | 'ODS'      | 'Shop 02'            | 'No'                 | '0909088998998898789' | 'pcs'  | '15,25'      | ''                   | '1,000'    | '100,00' | '18%'         | ''              | '84,75'      | '100,00'       | ''                    | 'Store 01' | ''       | ''            | ''             |
+				| 'Consignor stocks' | ''             | 'en description is empty' | 'Product with Unique SLN'                                             | 'PZU'      | 'Shop 02'            | 'No'                 | '0909088998998898791' | 'pcs'  | '15,25'      | ''                   | '1,000'    | '100,00' | '18%'         | ''              | '84,75'      | '100,00'       | ''                    | 'Store 01' | ''       | ''            | ''             |
+				| 'Consignor stocks' | ''             | 'en description is empty' | 'Product 16 with SLN (Main Company - Consignor 2)'                    | 'UNIQ'     | 'Shop 02'            | 'No'                 | '9000008'             | 'pcs'  | ''           | 'Source of origin 8' | '1,000'    | '100,00' | 'Without VAT' | ''              | '100,00'     | '100,00'       | ''                    | 'Store 01' | ''       | ''            | ''             |
+				| 'Consignor stocks' | ''             | 'en description is empty' | 'Product 16 with SLN (Main Company - Consignor 2)'                    | 'PZU'      | 'Shop 02'            | 'No'                 | '900889900900778'     | 'pcs'  | ''           | 'Source of origin 9' | '1,000'    | '100,00' | 'Without VAT' | ''              | '100,00'     | '100,00'       | ''                    | 'Store 01' | ''       | ''            | ''             |
+				| 'Own stocks'       | ''             | 'en description is empty' | 'Dress'                                                               | 'S/Yellow' | 'Shop 02'            | 'No'                 | ''                    | 'pcs'  | '15,25'      | ''                   | '1,000'    | '100,00' | '18%'         | ''              | '84,75'      | '100,00'       | ''                    | 'Store 01' | ''       | ''            | ''             |
+				| 'Consignor stocks' | ''             | 'en description is empty' | 'Product 15 with SLN and code control (Main Company - Consignor 1)'   | 'ODS'      | 'Shop 02'            | 'No'                 | '900999000009'        | 'pcs'  | '15,25'      | ''                   | '1,000'    | '100,00' | '18%'         | ''              | '84,75'      | '100,00'       | ''                    | 'Store 01' | ''       | ''            | ''             |
+				| 'Consignor stocks' | ''             | 'en description is empty' | 'Product 16 with SLN and Good code data (Main Company - Consignor 1)' | 'PZU'      | 'Shop 02'            | 'No'                 | '89000008999'         | 'pcs'  | '15,25'      | ''                   | '1,000'    | '100,00' | '18%'         | ''              | '84,75'      | '100,00'       | ''                    | 'Store 01' | ''       | ''            | ''             |
+			Then the form attribute named "LegalName" became equal to "Company Retail customer"
+			Then the form attribute named "Partner" became equal to "Retail customer"
+			Then the form attribute named "PaymentMethod" became equal to "Full calculation"
+			And "Payments" table became equal
+				| '#' | 'Amount' | 'Commission' | 'Certificate' | 'Payment type' | 'Financial movement type' | 'Payment agent legal name contract' | 'Payment terminal' | 'Bank term' | 'Account'      | 'Percent' | 'RRN Code' | 'Payment agent partner' | 'Payment agent legal name' | 'Payment agent partner terms' |
+				| '1' | '700,00' | ''           | ''            | 'Cash'         | ''                        | ''                                  | ''                 | ''          | 'Cash desk №4' | ''        | ''         | ''                      | ''                         | ''                            |
+			Then the form attribute named "PriceIncludeTax" became equal to "Yes"
+			Then the form attribute named "StatusType" became equal to "Completed"
+			Then the form attribute named "Store" became equal to "Store 01"
+			Then the form attribute named "Workstation" became equal to "Workstation 01"
+		* Fill correction description
+			And I input "wrong VAT rate" text in "Correction description" field
+			And I input "19.12.2023 14:50:09" text in the field named "Date"
+			And I move to the next attribute
+			And I click "Uncheck all" button
+			And I click "OK" button	
+			And I input "719" text in "Basis document fiscal number" field	
+			And I click "Save" button
+			And I save the window as "RRC1"
+		* Fiscalize
+			And I click "Print receipt" button
+			Then there are lines in TestClient message log
+				|'Done'| 
+		* Check fiscal log
+			And Delay 5
+			And I parsed the log of the fiscal emulator by the path '$$LogPath$$' into the variable "ParsingResult"
+			And Delay 5
+			And I check "$ParsingResult$" with "0" and method is "ProcessCorrectionCheck"
+			And I check "$ParsingResult$" with "0" and data in "In.Parameter2" the same as "SalesReceiptXML32"
+	* Generate second Retail receipt correction (change tax rate for two lines)
+		And I click "Retail receipt correction" button
+		And I go to line in "ItemList" table
+			| 'Inventory origin' | 'Item'                    | 'Item key' | 'Tax amount' | 'Total amount' | 'VAT' |
+			| 'Consignor stocks' | 'Product with Unique SLN' | 'PZU'      | '15,25'      | '100,00'       | '18%' |
+		And I select current line in "ItemList" table
+		And I select "Without VAT" exact value from "VAT" drop-down list in "ItemList" table
+		And I finish line editing in "ItemList" table
+		And I go to line in "ItemList" table
+			| 'Item'                                             | 'Item key' | 'Net amount' | 'Unit' | 'VAT'         |
+			| 'Product 16 with SLN (Main Company - Consignor 2)' | 'PZU'      | '100,00'     | 'pcs'  | 'Without VAT' |
+		And I select current line in "ItemList" table
+		And I select "18%" exact value from "VAT" drop-down list in "ItemList" table
+		And I finish line editing in "ItemList" table
+	* Check second Retail receipt correction
+		Then the form attribute named "Agreement" became equal to "Retail partner term"
+		Then the form attribute named "Author" became equal to "CI"
+		Then the form attribute named "BasisDocument" became equal to "$RRC1$"
+		Then the form attribute named "Company" became equal to "Main Company"
+		Then the field named "ConsolidatedRetailSales" is filled
+		Then the form attribute named "CorrectionDescription" became equal to "wrong VAT rate"
+		Then the form attribute named "Currency" became equal to "TRY"
+		And "ItemList" table became equal
+			| '#' | 'Inventory origin' | 'Sales person' | 'Price type'              | 'Item'                                                                | 'Item key' | 'Profit loss center' | 'Dont calculate row' | 'Serial lot numbers'  | 'Unit' | 'Tax amount' | 'Source of origins'  | 'Quantity' | 'Price'  | 'VAT'         | 'Offers amount' | 'Net amount' | 'Total amount' | 'Additional analytic' | 'Store'    | 'Detail' | 'Sales order' | 'Revenue type' |
+			| '1' | 'Consignor stocks' | ''             | 'en description is empty' | 'Product with Unique SLN'                                             | 'ODS'      | 'Shop 02'            | 'No'                 | '0909088998998898789' | 'pcs'  | '15,25'      | ''                   | '1,000'    | '100,00' | '18%'         | ''              | '84,75'      | '100,00'       | ''                    | 'Store 01' | ''       | ''            | ''             |
+			| '2' | 'Consignor stocks' | ''             | 'en description is empty' | 'Product with Unique SLN'                                             | 'PZU'      | 'Shop 02'            | 'No'                 | '0909088998998898791' | 'pcs'  | ''           | ''                   | '1,000'    | '100,00' | 'Without VAT' | ''              | '100,00'     | '100,00'       | ''                    | 'Store 01' | ''       | ''            | ''             |
+			| '3' | 'Consignor stocks' | ''             | 'en description is empty' | 'Product 16 with SLN (Main Company - Consignor 2)'                    | 'UNIQ'     | 'Shop 02'            | 'No'                 | '9000008'             | 'pcs'  | ''           | 'Source of origin 8' | '1,000'    | '100,00' | 'Without VAT' | ''              | '100,00'     | '100,00'       | ''                    | 'Store 01' | ''       | ''            | ''             |
+			| '4' | 'Consignor stocks' | ''             | 'en description is empty' | 'Product 16 with SLN (Main Company - Consignor 2)'                    | 'PZU'      | 'Shop 02'            | 'No'                 | '900889900900778'     | 'pcs'  | '15,25'      | 'Source of origin 9' | '1,000'    | '100,00' | '18%'         | ''              | '84,75'      | '100,00'       | ''                    | 'Store 01' | ''       | ''            | ''             |
+			| '5' | 'Own stocks'       | ''             | 'en description is empty' | 'Dress'                                                               | 'S/Yellow' | 'Shop 02'            | 'No'                 | ''                    | 'pcs'  | '15,25'      | ''                   | '1,000'    | '100,00' | '18%'         | ''              | '84,75'      | '100,00'       | ''                    | 'Store 01' | ''       | ''            | ''             |
+			| '6' | 'Consignor stocks' | ''             | 'en description is empty' | 'Product 15 with SLN and code control (Main Company - Consignor 1)'   | 'ODS'      | 'Shop 02'            | 'No'                 | '900999000009'        | 'pcs'  | '15,25'      | ''                   | '1,000'    | '100,00' | '18%'         | ''              | '84,75'      | '100,00'       | ''                    | 'Store 01' | ''       | ''            | ''             |
+			| '7' | 'Consignor stocks' | ''             | 'en description is empty' | 'Product 16 with SLN and Good code data (Main Company - Consignor 1)' | 'PZU'      | 'Shop 02'            | 'No'                 | '89000008999'         | 'pcs'  | '15,25'      | ''                   | '1,000'    | '100,00' | '18%'         | ''              | '84,75'      | '100,00'       | ''                    | 'Store 01' | ''       | ''            | ''             |
+		
+		Then the form attribute named "LegalName" became equal to "Company Retail customer"
+		Then the form attribute named "Partner" became equal to "Retail customer"
+		Then the form attribute named "PaymentMethod" became equal to "Full calculation"
+		And "Payments" table became equal
+			| '#' | 'Amount' | 'Commission' | 'Certificate' | 'Payment type' | 'Financial movement type' | 'Payment agent legal name contract' | 'Payment terminal' | 'Bank term' | 'Account'      | 'Percent' | 'RRN Code' | 'Payment agent partner' | 'Payment agent legal name' | 'Payment agent partner terms' |
+			| '1' | '700,00' | ''           | ''            | 'Cash'         | ''                        | ''                                  | ''                 | ''          | 'Cash desk №4' | ''        | ''         | ''                      | ''                         | ''                            |
+		
+		Then the form attribute named "PriceIncludeTax" became equal to "Yes"
+		Then the form attribute named "StatusType" became equal to "Completed"
+		Then the form attribute named "Store" became equal to "Store 01"
+		Then the form attribute named "UsePartnerTransactions" became equal to "No"
+		Then the form attribute named "Workstation" became equal to "Workstation 01"
+		And I input "19.12.2023 14:50:09" text in the field named "Date"
+		And I move to the next attribute
+		And I click "Uncheck all" button
+		And I click "OK" button
+		And I input "720" text in "Basis document fiscal number" field	
+		And I click "Save" button
+		And I save the window as "RRC2"
+	* Fiscalize
+		And I click "Print receipt" button
+		Then there are lines in TestClient message log
+			|'Done'|
+	* Check fiscal log
+		And Delay 5
+		And I parsed the log of the fiscal emulator by the path '$$LogPath$$' into the variable "ParsingResult"
+		And Delay 5
+		And I check "$ParsingResult$" with "0" and method is "ProcessCorrectionCheck"
+		And I check "$ParsingResult$" with "0" and data in "In.Parameter2" the same as "SalesReceiptXML33"
+
+				
+Scenario: _02602105 Retail receipt correction for RRR (card, VAT rate correction)
+	And I close all client application windows
+	* Create RSR
+		Given I open hyperlink "e1cib/list/Document.RetailReturnReceipt"
+		And I click "Create" button
+		* Consignor 1
+			And in the table "ItemList" I click the button named "SearchByBarcode"
+			And I input "0909088998998898789" text in the field named "Barcode"
+			And I move to the next attribute
+			And in the table "ItemList" I click the button named "SearchByBarcode"
+			And I input "0909088998998898791" text in the field named "Barcode"
+			And I move to the next attribute
+		* Consignor 2
+			And in the table "ItemList" I click the button named "SearchByBarcode"
+			And I input "9000008" text in the field named "Barcode"
+			And I move to the next attribute
+			And in the table "ItemList" I click the button named "SearchByBarcode"
+			And I input "900889900900778" text in the field named "Barcode"
+			And I move to the next attribute
+		* Own stock, without SLN
+			And in the table "ItemList" I click the button named "SearchByBarcode"
+			And I input "2202283713" text in the field named "Barcode"
+			And I move to the next attribute
+		* Item with marking code
+			And in the table "ItemList" I click the button named "SearchByBarcode"
+			And I input "900999000009" text in the field named "Barcode"
+			And I move to the next attribute
+			And I click "Search by barcode" button
+			Then "Barcode" window is opened
+			And I input "11111111111111111111" text in the field named "Barcode"
+			And I move to the next attribute
+		* Item with good code data
+			And in the table "ItemList" I click the button named "SearchByBarcode"
+			And I input "89000008999" text in the field named "Barcode"
+			And I move to the next attribute
+			And I click "Search by barcode" button
+			And I input "Q3VycmVudCByb3cgd2lsbCBkZWNvZGUgdG8gYmFzZTY2" text in the field named "Barcode"
+			And I move to the next attribute
+		And for each line of "ItemList" table I do
+			And I input "100,00" text in "Price" field of "ItemList" table
+		And for each line of "ItemList" table I do
+			And I input "10,00" text in "Landed cost" field of "ItemList" table
+		* Payment
+			And I move to "Payments" tab
+			And in the table "Payments" I click the button named "PaymentsAdd"
+			And I activate "Payment type" field in "Payments" table
+			And I select current line in "Payments" table
+			And I select "Card 02" from "Payment type" drop-down list by string in "Payments" table
+			And I select "Bank term 02" from "Bank term" drop-down list by string in "Payments" table
+			And I activate "Account" field in "Payments" table
+			And I select "Transit Second" from "Account" drop-down list by string in "Payments" table
+			And I activate field named "PaymentsAmount" in "Payments" table
+			And I input "700,00" text in the field named "PaymentsAmount" of "Payments" table
+			And I finish line editing in "Payments" table
+			And I click "Post" button
+			And I save the window as "RSR02602105"
+		* Fiscalize
+			And I click "Print receipt" button
+	* Generate first Retail receipt correction (storno)
+		And I click "Retail receipt correction" button
+		* Check
+			Then the form attribute named "Agreement" became equal to "Retail partner term"
+			Then the form attribute named "Author" became equal to "CI"
+			Then the form attribute named "BasisDocument" became equal to "$RSR02602105$"
+			Then the form attribute named "Company" became equal to "Main Company"
+			Then the field named "ConsolidatedRetailSales" is filled
+			Then the form attribute named "CorrectionDescription" became equal to ""
+			And the editing text of form attribute named "CorrectionType" became equal to "Independent"
+			And "ItemList" table became equal
+				| 'Inventory origin' | 'Sales person' | 'Price type'              | 'Item'                                                                | 'Item key' | 'Profit loss center' | 'Dont calculate row' | 'Serial lot numbers'  | 'Unit' | 'Tax amount' | 'Source of origins'  | 'Quantity' | 'Price'  | 'VAT'         | 'Offers amount' | 'Net amount' | 'Total amount' | 'Additional analytic' | 'Store'    | 'Detail' | 'Sales order' | 'Revenue type' |
+				| 'Consignor stocks' | ''             | 'en description is empty' | 'Product with Unique SLN'                                             | 'ODS'      | 'Shop 02'            | 'No'                 | '0909088998998898789' | 'pcs'  | '15,25'      | ''                   | '1,000'    | '100,00' | '18%'         | ''              | '84,75'      | '100,00'       | ''                    | 'Store 01' | ''       | ''            | ''             |
+				| 'Consignor stocks' | ''             | 'en description is empty' | 'Product with Unique SLN'                                             | 'PZU'      | 'Shop 02'            | 'No'                 | '0909088998998898791' | 'pcs'  | '15,25'      | ''                   | '1,000'    | '100,00' | '18%'         | ''              | '84,75'      | '100,00'       | ''                    | 'Store 01' | ''       | ''            | ''             |
+				| 'Consignor stocks' | ''             | 'en description is empty' | 'Product 16 with SLN (Main Company - Consignor 2)'                    | 'UNIQ'     | 'Shop 02'            | 'No'                 | '9000008'             | 'pcs'  | ''           | 'Source of origin 8' | '1,000'    | '100,00' | 'Without VAT' | ''              | '100,00'     | '100,00'       | ''                    | 'Store 01' | ''       | ''            | ''             |
+				| 'Consignor stocks' | ''             | 'en description is empty' | 'Product 16 with SLN (Main Company - Consignor 2)'                    | 'PZU'      | 'Shop 02'            | 'No'                 | '900889900900778'     | 'pcs'  | ''           | 'Source of origin 9' | '1,000'    | '100,00' | 'Without VAT' | ''              | '100,00'     | '100,00'       | ''                    | 'Store 01' | ''       | ''            | ''             |
+				| 'Own stocks'       | ''             | 'en description is empty' | 'Dress'                                                               | 'S/Yellow' | 'Shop 02'            | 'No'                 | ''                    | 'pcs'  | '15,25'      | ''                   | '1,000'    | '100,00' | '18%'         | ''              | '84,75'      | '100,00'       | ''                    | 'Store 01' | ''       | ''            | ''             |
+				| 'Consignor stocks' | ''             | 'en description is empty' | 'Product 15 with SLN and code control (Main Company - Consignor 1)'   | 'ODS'      | 'Shop 02'            | 'No'                 | '900999000009'        | 'pcs'  | '15,25'      | ''                   | '1,000'    | '100,00' | '18%'         | ''              | '84,75'      | '100,00'       | ''                    | 'Store 01' | ''       | ''            | ''             |
+				| 'Consignor stocks' | ''             | 'en description is empty' | 'Product 16 with SLN and Good code data (Main Company - Consignor 1)' | 'PZU'      | 'Shop 02'            | 'No'                 | '89000008999'         | 'pcs'  | '15,25'      | ''                   | '1,000'    | '100,00' | '18%'         | ''              | '84,75'      | '100,00'       | ''                    | 'Store 01' | ''       | ''            | ''             |
+			Then the form attribute named "LegalName" became equal to "Company Retail customer"
+			Then the form attribute named "Partner" became equal to "Retail customer"
+			Then the form attribute named "PaymentMethod" became equal to "Full calculation"
+			And "Payments" table became equal
+				| '#' | 'Amount' | 'Commission' | 'Certificate' | 'Payment type' | 'Financial movement type' | 'Payment agent legal name contract' | 'Payment terminal' | 'Bank term'    | 'Account'        | 'Percent' | 'RRN Code' | 'Payment agent partner' | 'Payment agent legal name' | 'Payment agent partner terms' |
+				| '1' | '700,00' | '14,00'      | ''            | 'Card 02'      | ''                        | ''                                  | ''                 | 'Bank term 02' | 'Transit Second' | '2,00'    | ''         | ''                      | ''                         | ''                            |
+			Then the form attribute named "PriceIncludeTax" became equal to "Yes"
+			Then the form attribute named "StatusType" became equal to "Completed"
+			Then the form attribute named "Store" became equal to "Store 01"
+			Then the form attribute named "Workstation" became equal to "Workstation 01"
+		* Fill correction description
+			And I input "wrong VAT rate" text in "Correction description" field
+			And I input "20.12.2023 12:00:00" text in the field named "Date"
+			And I move to the next attribute
+			And I click "Uncheck all" button
+			And I click "OK" button
+			And I input "721" text in "Basis document fiscal number" field	
+			And I click "Save" button
+			And I save the window as "RRC1"
+		* Fiscalize
+			And I click "Print receipt" button
+			Then there are lines in TestClient message log
+				|'Done'| 
+		* Check fiscal log
+			And Delay 5
+			And I parsed the log of the fiscal emulator by the path '$$LogPath$$' into the variable "ParsingResult"
+			And Delay 5
+			And I check "$ParsingResult$" with "0" and method is "ProcessCorrectionCheck"
+			And I check "$ParsingResult$" with "0" and data in "In.Parameter2" the same as "SalesReceiptXML34"
+	* Generate second Retail receipt correction (change tax rate for two lines)
+		And I click "Retail receipt correction" button
+		And I go to line in "ItemList" table
+			| 'Inventory origin' | 'Item'                    | 'Item key' | 'Tax amount' | 'Total amount' | 'VAT' |
+			| 'Consignor stocks' | 'Product with Unique SLN' | 'PZU'      | '15,25'      | '100,00'       | '18%' |
+		And I select current line in "ItemList" table
+		And I select "Without VAT" exact value from "VAT" drop-down list in "ItemList" table
+		And I finish line editing in "ItemList" table
+		And I go to line in "ItemList" table
+			| 'Item'                                             | 'Item key' | 'Net amount' | 'Unit' | 'VAT'         |
+			| 'Product 16 with SLN (Main Company - Consignor 2)' | 'PZU'      | '100,00'     | 'pcs'  | 'Without VAT' |
+		And I select current line in "ItemList" table
+		And I select "18%" exact value from "VAT" drop-down list in "ItemList" table
+		And I finish line editing in "ItemList" table
+	* Check second Retail receipt correction
+		Then the form attribute named "Agreement" became equal to "Retail partner term"
+		Then the form attribute named "Author" became equal to "CI"
+		Then the form attribute named "BasisDocument" became equal to "$RRC1$"
+		Then the form attribute named "Company" became equal to "Main Company"
+		Then the field named "ConsolidatedRetailSales" is filled
+		Then the form attribute named "CorrectionDescription" became equal to "wrong VAT rate"
+		Then the form attribute named "Currency" became equal to "TRY"
+		And "ItemList" table became equal
+			| '#' | 'Inventory origin' | 'Sales person' | 'Price type'              | 'Item'                                                                | 'Item key' | 'Profit loss center' | 'Dont calculate row' | 'Serial lot numbers'  | 'Unit' | 'Tax amount' | 'Source of origins'  | 'Quantity' | 'Price'  | 'VAT'         | 'Offers amount' | 'Net amount' | 'Total amount' | 'Additional analytic' | 'Store'    | 'Detail' | 'Sales order' | 'Revenue type' |
+			| '1' | 'Consignor stocks' | ''             | 'en description is empty' | 'Product with Unique SLN'                                             | 'ODS'      | 'Shop 02'            | 'No'                 | '0909088998998898789' | 'pcs'  | '15,25'      | ''                   | '1,000'    | '100,00' | '18%'         | ''              | '84,75'      | '100,00'       | ''                    | 'Store 01' | ''       | ''            | ''             |
+			| '2' | 'Consignor stocks' | ''             | 'en description is empty' | 'Product with Unique SLN'                                             | 'PZU'      | 'Shop 02'            | 'No'                 | '0909088998998898791' | 'pcs'  | ''           | ''                   | '1,000'    | '100,00' | 'Without VAT' | ''              | '100,00'     | '100,00'       | ''                    | 'Store 01' | ''       | ''            | ''             |
+			| '3' | 'Consignor stocks' | ''             | 'en description is empty' | 'Product 16 with SLN (Main Company - Consignor 2)'                    | 'UNIQ'     | 'Shop 02'            | 'No'                 | '9000008'             | 'pcs'  | ''           | 'Source of origin 8' | '1,000'    | '100,00' | 'Without VAT' | ''              | '100,00'     | '100,00'       | ''                    | 'Store 01' | ''       | ''            | ''             |
+			| '4' | 'Consignor stocks' | ''             | 'en description is empty' | 'Product 16 with SLN (Main Company - Consignor 2)'                    | 'PZU'      | 'Shop 02'            | 'No'                 | '900889900900778'     | 'pcs'  | '15,25'      | 'Source of origin 9' | '1,000'    | '100,00' | '18%'         | ''              | '84,75'      | '100,00'       | ''                    | 'Store 01' | ''       | ''            | ''             |
+			| '5' | 'Own stocks'       | ''             | 'en description is empty' | 'Dress'                                                               | 'S/Yellow' | 'Shop 02'            | 'No'                 | ''                    | 'pcs'  | '15,25'      | ''                   | '1,000'    | '100,00' | '18%'         | ''              | '84,75'      | '100,00'       | ''                    | 'Store 01' | ''       | ''            | ''             |
+			| '6' | 'Consignor stocks' | ''             | 'en description is empty' | 'Product 15 with SLN and code control (Main Company - Consignor 1)'   | 'ODS'      | 'Shop 02'            | 'No'                 | '900999000009'        | 'pcs'  | '15,25'      | ''                   | '1,000'    | '100,00' | '18%'         | ''              | '84,75'      | '100,00'       | ''                    | 'Store 01' | ''       | ''            | ''             |
+			| '7' | 'Consignor stocks' | ''             | 'en description is empty' | 'Product 16 with SLN and Good code data (Main Company - Consignor 1)' | 'PZU'      | 'Shop 02'            | 'No'                 | '89000008999'         | 'pcs'  | '15,25'      | ''                   | '1,000'    | '100,00' | '18%'         | ''              | '84,75'      | '100,00'       | ''                    | 'Store 01' | ''       | ''            | ''             |
+		
+		Then the form attribute named "LegalName" became equal to "Company Retail customer"
+		Then the form attribute named "Partner" became equal to "Retail customer"
+		Then the form attribute named "PaymentMethod" became equal to "Full calculation"
+		And "Payments" table became equal
+			| '#' | 'Amount' | 'Commission' | 'Certificate' | 'Payment type' | 'Financial movement type' | 'Payment agent legal name contract' | 'Payment terminal' | 'Bank term'    | 'Account'        | 'Percent' | 'RRN Code' | 'Payment agent partner' | 'Payment agent legal name' | 'Payment agent partner terms' |
+			| '1' | '700,00' | '14,00'      | ''            | 'Card 02'      | ''                        | ''                                  | ''                 | 'Bank term 02' | 'Transit Second' | '2,00'    | ''         | ''                      | ''                         | ''                            |
+		
+		Then the form attribute named "PriceIncludeTax" became equal to "Yes"
+		Then the form attribute named "StatusType" became equal to "Completed"
+		Then the form attribute named "Store" became equal to "Store 01"
+		Then the form attribute named "UsePartnerTransactions" became equal to "No"
+		Then the form attribute named "Workstation" became equal to "Workstation 01"
+		And I input "20.12.2023 12:00:00" text in the field named "Date"
+		And I move to the next attribute
+		And I click "Uncheck all" button
+		And I click "OK" button
+		And I input "722" text in "Basis document fiscal number" field	
+		And I click "Save" button
+		And I save the window as "RRC2"
+	* Fiscalize
+		And I click "Print receipt" button
+		Then there are lines in TestClient message log
+			|'Done'|
+	* Check fiscal log
+		And Delay 5
+		And I parsed the log of the fiscal emulator by the path '$$LogPath$$' into the variable "ParsingResult"
+		And Delay 5
+		And I check "$ParsingResult$" with "0" and method is "ProcessCorrectionCheck"
+		And I check "$ParsingResult$" with "0" and data in "In.Parameter2" the same as "SalesReceiptXML35"
 
 Scenario: _0260152 close session
 	And I close all client application windows
@@ -4096,1356 +4768,4 @@ Scenario: _0260210 on double click in CRS
 		Then system warning window does not appear
 		And I close all client application windows	
 
-Scenario: _02602102 Retail receipt correction for RSR (cash, VAT rate correction)
-	And I close all client application windows
-	* Create RSR
-		Given I open hyperlink "e1cib/list/Document.RetailSalesReceipt"
-		And I click "Create" button
-		* Consignor 1
-			And in the table "ItemList" I click the button named "SearchByBarcode"
-			And I input "0909088998998898789" text in the field named "Barcode"
-			And I move to the next attribute
-			And in the table "ItemList" I click the button named "SearchByBarcode"
-			And I input "0909088998998898791" text in the field named "Barcode"
-			And I move to the next attribute
-		* Consignor 2
-			And in the table "ItemList" I click the button named "SearchByBarcode"
-			And I input "9000008" text in the field named "Barcode"
-			And I move to the next attribute
-			And in the table "ItemList" I click the button named "SearchByBarcode"
-			And I input "900889900900778" text in the field named "Barcode"
-			And I move to the next attribute
-		* Own stock, without SLN
-			And in the table "ItemList" I click the button named "SearchByBarcode"
-			And I input "2202283713" text in the field named "Barcode"
-			And I move to the next attribute
-		* Item with marking code
-			And in the table "ItemList" I click the button named "SearchByBarcode"
-			And I input "900999000009" text in the field named "Barcode"
-			And I move to the next attribute
-			And I click "Search by barcode" button
-			Then "Barcode" window is opened
-			And I input "11111111111111111111" text in the field named "Barcode"
-			And I move to the next attribute
-		* Item with good code data
-			And in the table "ItemList" I click the button named "SearchByBarcode"
-			And I input "89000008999" text in the field named "Barcode"
-			And I move to the next attribute
-			And I click "Search by barcode" button
-			And I input "Q3VycmVudCByb3cgd2lsbCBkZWNvZGUgdG8gYmFzZTY2" text in the field named "Barcode"
-			And I move to the next attribute
-		And for each line of "ItemList" table I do
-			And I input "100,00" text in "Price" field of "ItemList" table
-		* Payment
-			And I move to "Payments" tab
-			And in the table "Payments" I click the button named "PaymentsAdd"
-			And I activate "Payment type" field in "Payments" table
-			And I select current line in "Payments" table
-			And I select "cash" from "Payment type" drop-down list by string in "Payments" table
-			And I activate "Account" field in "Payments" table
-			And I select "Cash desk №4" from "Account" drop-down list by string in "Payments" table
-			And I activate field named "PaymentsAmount" in "Payments" table
-			And I input "700,00" text in the field named "PaymentsAmount" of "Payments" table
-			And I finish line editing in "Payments" table
-			And I click "Post" button
-			And I save the window as "RSR02602102"
-		* Fiscalize
-			And I click "Print receipt" button
-			Then there are lines in TestClient message log
-				|'Done'|
-	* Generate first Retail receipt correction (storno)
-		And I click "Retail receipt correction" button
-		* Check
-			Then the form attribute named "Agreement" became equal to "Retail partner term"
-			Then the form attribute named "Author" became equal to "CI"
-			Then the form attribute named "BasisDocument" became equal to "$RSR02602102$"
-			Then the form attribute named "Company" became equal to "Main Company"
-			Then the field named "ConsolidatedRetailSales" is filled
-			Then the form attribute named "CorrectionDescription" became equal to ""
-			And the editing text of form attribute named "CorrectionType" became equal to "Independent"
-			And "ItemList" table became equal
-				| 'Inventory origin' | 'Sales person' | 'Price type'              | 'Item'                                                                | 'Item key' | 'Profit loss center' | 'Dont calculate row' | 'Serial lot numbers'  | 'Unit' | 'Tax amount' | 'Source of origins'  | 'Quantity' | 'Price'  | 'VAT'         | 'Offers amount' | 'Net amount' | 'Total amount' | 'Additional analytic' | 'Store'    | 'Detail' | 'Sales order' | 'Revenue type' |
-				| 'Consignor stocks' | ''             | 'en description is empty' | 'Product with Unique SLN'                                             | 'ODS'      | 'Shop 02'            | 'No'                 | '0909088998998898789' | 'pcs'  | '15,25'      | ''                   | '1,000'    | '100,00' | '18%'         | ''              | '84,75'      | '100,00'       | ''                    | 'Store 01' | ''       | ''            | ''             |
-				| 'Consignor stocks' | ''             | 'en description is empty' | 'Product with Unique SLN'                                             | 'PZU'      | 'Shop 02'            | 'No'                 | '0909088998998898791' | 'pcs'  | '15,25'      | ''                   | '1,000'    | '100,00' | '18%'         | ''              | '84,75'      | '100,00'       | ''                    | 'Store 01' | ''       | ''            | ''             |
-				| 'Consignor stocks' | ''             | 'en description is empty' | 'Product 16 with SLN (Main Company - Consignor 2)'                    | 'UNIQ'     | 'Shop 02'            | 'No'                 | '9000008'             | 'pcs'  | ''           | 'Source of origin 8' | '1,000'    | '100,00' | 'Without VAT' | ''              | '100,00'     | '100,00'       | ''                    | 'Store 01' | ''       | ''            | ''             |
-				| 'Consignor stocks' | ''             | 'en description is empty' | 'Product 16 with SLN (Main Company - Consignor 2)'                    | 'PZU'      | 'Shop 02'            | 'No'                 | '900889900900778'     | 'pcs'  | ''           | 'Source of origin 9' | '1,000'    | '100,00' | 'Without VAT' | ''              | '100,00'     | '100,00'       | ''                    | 'Store 01' | ''       | ''            | ''             |
-				| 'Own stocks'       | ''             | 'en description is empty' | 'Dress'                                                               | 'S/Yellow' | 'Shop 02'            | 'No'                 | ''                    | 'pcs'  | '15,25'      | ''                   | '1,000'    | '100,00' | '18%'         | ''              | '84,75'      | '100,00'       | ''                    | 'Store 01' | ''       | ''            | ''             |
-				| 'Consignor stocks' | ''             | 'en description is empty' | 'Product 15 with SLN and code control (Main Company - Consignor 1)'   | 'ODS'      | 'Shop 02'            | 'No'                 | '900999000009'        | 'pcs'  | '15,25'      | ''                   | '1,000'    | '100,00' | '18%'         | ''              | '84,75'      | '100,00'       | ''                    | 'Store 01' | ''       | ''            | ''             |
-				| 'Consignor stocks' | ''             | 'en description is empty' | 'Product 16 with SLN and Good code data (Main Company - Consignor 1)' | 'PZU'      | 'Shop 02'            | 'No'                 | '89000008999'         | 'pcs'  | '15,25'      | ''                   | '1,000'    | '100,00' | '18%'         | ''              | '84,75'      | '100,00'       | ''                    | 'Store 01' | ''       | ''            | ''             |
-			Then the form attribute named "LegalName" became equal to "Company Retail customer"
-			Then the form attribute named "Partner" became equal to "Retail customer"
-			Then the form attribute named "PaymentMethod" became equal to "Full calculation"
-			And "Payments" table became equal
-				| '#' | 'Amount' | 'Commission' | 'Certificate' | 'Payment type' | 'Financial movement type' | 'Payment agent legal name contract' | 'Payment terminal' | 'Bank term' | 'Account'      | 'Percent' | 'RRN Code' | 'Payment agent partner' | 'Payment agent legal name' | 'Payment agent partner terms' |
-				| '1' | '700,00' | ''           | ''            | 'Cash'         | ''                        | ''                                  | ''                 | ''          | 'Cash desk №4' | ''        | ''         | ''                      | ''                         | ''                            |
-			Then the form attribute named "PriceIncludeTax" became equal to "Yes"
-			Then the form attribute named "StatusType" became equal to "Completed"
-			Then the form attribute named "Store" became equal to "Store 01"
-			Then the form attribute named "Workstation" became equal to "Workstation 01"
-		* Fill correction description
-			And I input "wrong VAT rate" text in "Correction description" field
-			And I input "19.12.2023 13:24:48" text in the field named "Date"
-			And I move to the next attribute
-			And I click "Uncheck all" button
-			And I click "OK" button	
-			And I input "715" text in "Basis document fiscal number" field					
-			And I click "Save" button
-			And I save the window as "RRC1"
-		* Fiscalize
-			And I click "Print receipt" button
-			Then there are lines in TestClient message log
-				|'Done'| 
-		* Check fiscal log
-			And Delay 5
-			And I parsed the log of the fiscal emulator by the path '$$LogPath$$' into the variable "ParsingResult"
-			And Delay 5
-			And I check "$ParsingResult$" with "0" and method is "ProcessCorrectionCheck"
-			And I check "$ParsingResult$" with "0" and data in "In.Parameter2" the same as "SalesReceiptXML28"
-	* Generate second Retail receipt correction (change tax rate for two lines)
-		And I click "Retail receipt correction" button
-		And I go to line in "ItemList" table
-			| 'Inventory origin' | 'Item'                    | 'Item key' | 'Tax amount' | 'Total amount' | 'VAT' |
-			| 'Consignor stocks' | 'Product with Unique SLN' | 'PZU'      | '15,25'      | '100,00'       | '18%' |
-		And I select current line in "ItemList" table
-		And I select "Without VAT" exact value from "VAT" drop-down list in "ItemList" table
-		And I finish line editing in "ItemList" table
-		And I go to line in "ItemList" table
-			| 'Item'                                             | 'Item key' | 'Net amount' | 'Unit' | 'VAT'         |
-			| 'Product 16 with SLN (Main Company - Consignor 2)' | 'PZU'      | '100,00'     | 'pcs'  | 'Without VAT' |
-		And I select current line in "ItemList" table
-		And I select "18%" exact value from "VAT" drop-down list in "ItemList" table
-		And I finish line editing in "ItemList" table
-	* Check second Retail receipt correction
-		Then the form attribute named "Agreement" became equal to "Retail partner term"
-		Then the form attribute named "Author" became equal to "CI"
-		Then the form attribute named "BasisDocument" became equal to "$RRC1$"
-		Then the form attribute named "Company" became equal to "Main Company"
-		Then the field named "ConsolidatedRetailSales" is filled
-		Then the form attribute named "CorrectionDescription" became equal to "wrong VAT rate"
-		Then the form attribute named "Currency" became equal to "TRY"
-		And "ItemList" table became equal
-			| '#' | 'Inventory origin' | 'Sales person' | 'Price type'              | 'Item'                                                                | 'Item key' | 'Profit loss center' | 'Dont calculate row' | 'Serial lot numbers'  | 'Unit' | 'Tax amount' | 'Source of origins'  | 'Quantity' | 'Price'  | 'VAT'         | 'Offers amount' | 'Net amount' | 'Total amount' | 'Additional analytic' | 'Store'    | 'Detail' | 'Sales order' | 'Revenue type' |
-			| '1' | 'Consignor stocks' | ''             | 'en description is empty' | 'Product with Unique SLN'                                             | 'ODS'      | 'Shop 02'            | 'No'                 | '0909088998998898789' | 'pcs'  | '15,25'      | ''                   | '1,000'    | '100,00' | '18%'         | ''              | '84,75'      | '100,00'       | ''                    | 'Store 01' | ''       | ''            | ''             |
-			| '2' | 'Consignor stocks' | ''             | 'en description is empty' | 'Product with Unique SLN'                                             | 'PZU'      | 'Shop 02'            | 'No'                 | '0909088998998898791' | 'pcs'  | ''           | ''                   | '1,000'    | '100,00' | 'Without VAT' | ''              | '100,00'     | '100,00'       | ''                    | 'Store 01' | ''       | ''            | ''             |
-			| '3' | 'Consignor stocks' | ''             | 'en description is empty' | 'Product 16 with SLN (Main Company - Consignor 2)'                    | 'UNIQ'     | 'Shop 02'            | 'No'                 | '9000008'             | 'pcs'  | ''           | 'Source of origin 8' | '1,000'    | '100,00' | 'Without VAT' | ''              | '100,00'     | '100,00'       | ''                    | 'Store 01' | ''       | ''            | ''             |
-			| '4' | 'Consignor stocks' | ''             | 'en description is empty' | 'Product 16 with SLN (Main Company - Consignor 2)'                    | 'PZU'      | 'Shop 02'            | 'No'                 | '900889900900778'     | 'pcs'  | '15,25'      | 'Source of origin 9' | '1,000'    | '100,00' | '18%'         | ''              | '84,75'      | '100,00'       | ''                    | 'Store 01' | ''       | ''            | ''             |
-			| '5' | 'Own stocks'       | ''             | 'en description is empty' | 'Dress'                                                               | 'S/Yellow' | 'Shop 02'            | 'No'                 | ''                    | 'pcs'  | '15,25'      | ''                   | '1,000'    | '100,00' | '18%'         | ''              | '84,75'      | '100,00'       | ''                    | 'Store 01' | ''       | ''            | ''             |
-			| '6' | 'Consignor stocks' | ''             | 'en description is empty' | 'Product 15 with SLN and code control (Main Company - Consignor 1)'   | 'ODS'      | 'Shop 02'            | 'No'                 | '900999000009'        | 'pcs'  | '15,25'      | ''                   | '1,000'    | '100,00' | '18%'         | ''              | '84,75'      | '100,00'       | ''                    | 'Store 01' | ''       | ''            | ''             |
-			| '7' | 'Consignor stocks' | ''             | 'en description is empty' | 'Product 16 with SLN and Good code data (Main Company - Consignor 1)' | 'PZU'      | 'Shop 02'            | 'No'                 | '89000008999'         | 'pcs'  | '15,25'      | ''                   | '1,000'    | '100,00' | '18%'         | ''              | '84,75'      | '100,00'       | ''                    | 'Store 01' | ''       | ''            | ''             |
-		
-		Then the form attribute named "LegalName" became equal to "Company Retail customer"
-		Then the form attribute named "Partner" became equal to "Retail customer"
-		Then the form attribute named "PaymentMethod" became equal to "Full calculation"
-		And "Payments" table became equal
-			| '#' | 'Amount' | 'Commission' | 'Certificate' | 'Payment type' | 'Financial movement type' | 'Payment agent legal name contract' | 'Payment terminal' | 'Bank term' | 'Account'      | 'Percent' | 'RRN Code' | 'Payment agent partner' | 'Payment agent legal name' | 'Payment agent partner terms' |
-			| '1' | '700,00' | ''           | ''            | 'Cash'         | ''                        | ''                                  | ''                 | ''          | 'Cash desk №4' | ''        | ''         | ''                      | ''                         | ''                            |
-		
-		Then the form attribute named "PriceIncludeTax" became equal to "Yes"
-		Then the form attribute named "StatusType" became equal to "Completed"
-		Then the form attribute named "Store" became equal to "Store 01"
-		Then the form attribute named "UsePartnerTransactions" became equal to "No"
-		Then the form attribute named "Workstation" became equal to "Workstation 01"
-		And I input "19.12.2023 13:24:48" text in the field named "Date"
-		And I move to the next attribute
-		And I click "Uncheck all" button
-		And I click "OK" button	
-		And I input "716" text in "Basis document fiscal number" field	
-		And I click "Save" button
-		And I save the window as "RRC2"
-	* Fiscalize
-		And I click "Print receipt" button
-		Then there are lines in TestClient message log
-			|'Done'|
-	* Check fiscal log
-		And Delay 5
-		And I parsed the log of the fiscal emulator by the path '$$LogPath$$' into the variable "ParsingResult"
-		And Delay 5
-		And I check "$ParsingResult$" with "0" and method is "ProcessCorrectionCheck"
-		And I check "$ParsingResult$" with "0" and data in "In.Parameter2" the same as "SalesReceiptXML29"
-
-				
-Scenario: _02602103 Retail receipt correction for RSR (card, VAT rate correction)
-	And I close all client application windows
-	* Create RSR
-		Given I open hyperlink "e1cib/list/Document.RetailSalesReceipt"
-		And I click "Create" button
-		* Consignor 1
-			And in the table "ItemList" I click the button named "SearchByBarcode"
-			And I input "0909088998998898789" text in the field named "Barcode"
-			And I move to the next attribute
-			And in the table "ItemList" I click the button named "SearchByBarcode"
-			And I input "0909088998998898791" text in the field named "Barcode"
-			And I move to the next attribute
-		* Consignor 2
-			And in the table "ItemList" I click the button named "SearchByBarcode"
-			And I input "9000008" text in the field named "Barcode"
-			And I move to the next attribute
-			And in the table "ItemList" I click the button named "SearchByBarcode"
-			And I input "900889900900778" text in the field named "Barcode"
-			And I move to the next attribute
-		* Own stock, without SLN
-			And in the table "ItemList" I click the button named "SearchByBarcode"
-			And I input "2202283713" text in the field named "Barcode"
-			And I move to the next attribute
-		* Item with marking code
-			And in the table "ItemList" I click the button named "SearchByBarcode"
-			And I input "900999000009" text in the field named "Barcode"
-			And I move to the next attribute
-			And I click "Search by barcode" button
-			Then "Barcode" window is opened
-			And I input "11111111111111111111" text in the field named "Barcode"
-			And I move to the next attribute
-		* Item with good code data
-			And in the table "ItemList" I click the button named "SearchByBarcode"
-			And I input "89000008999" text in the field named "Barcode"
-			And I move to the next attribute
-			And I click "Search by barcode" button
-			And I input "Q3VycmVudCByb3cgd2lsbCBkZWNvZGUgdG8gYmFzZTY2" text in the field named "Barcode"
-			And I move to the next attribute
-		And for each line of "ItemList" table I do
-			And I input "100,00" text in "Price" field of "ItemList" table
-		* Payment
-			And I move to "Payments" tab
-			And in the table "Payments" I click the button named "PaymentsAdd"
-			And I activate "Payment type" field in "Payments" table
-			And I select current line in "Payments" table
-			And I select "Card 02" from "Payment type" drop-down list by string in "Payments" table
-			And I select "Bank term 02" from "Bank term" drop-down list by string in "Payments" table
-			And I activate "Account" field in "Payments" table
-			And I select "Transit Second" from "Account" drop-down list by string in "Payments" table
-			And I activate field named "PaymentsAmount" in "Payments" table
-			And I input "700,00" text in the field named "PaymentsAmount" of "Payments" table
-			And I finish line editing in "Payments" table
-			And I click "Post" button
-			And I save the window as "RSR02602103"
-		* Fiscalize
-			And I click "Print receipt" button
-			Then there are lines in TestClient message log
-				|'Done'|
-	* Generate first Retail receipt correction (storno)
-		And I click "Retail receipt correction" button
-		* Check
-			Then the form attribute named "Agreement" became equal to "Retail partner term"
-			Then the form attribute named "Author" became equal to "CI"
-			Then the form attribute named "BasisDocument" became equal to "$RSR02602103$"
-			Then the form attribute named "Company" became equal to "Main Company"
-			Then the field named "ConsolidatedRetailSales" is filled
-			Then the form attribute named "CorrectionDescription" became equal to ""
-			And the editing text of form attribute named "CorrectionType" became equal to "Independent"
-			And "ItemList" table became equal
-				| 'Inventory origin' | 'Sales person' | 'Price type'              | 'Item'                                                                | 'Item key' | 'Profit loss center' | 'Dont calculate row' | 'Serial lot numbers'  | 'Unit' | 'Tax amount' | 'Source of origins'  | 'Quantity' | 'Price'  | 'VAT'         | 'Offers amount' | 'Net amount' | 'Total amount' | 'Additional analytic' | 'Store'    | 'Detail' | 'Sales order' | 'Revenue type' |
-				| 'Consignor stocks' | ''             | 'en description is empty' | 'Product with Unique SLN'                                             | 'ODS'      | 'Shop 02'            | 'No'                 | '0909088998998898789' | 'pcs'  | '15,25'      | ''                   | '1,000'    | '100,00' | '18%'         | ''              | '84,75'      | '100,00'       | ''                    | 'Store 01' | ''       | ''            | ''             |
-				| 'Consignor stocks' | ''             | 'en description is empty' | 'Product with Unique SLN'                                             | 'PZU'      | 'Shop 02'            | 'No'                 | '0909088998998898791' | 'pcs'  | '15,25'      | ''                   | '1,000'    | '100,00' | '18%'         | ''              | '84,75'      | '100,00'       | ''                    | 'Store 01' | ''       | ''            | ''             |
-				| 'Consignor stocks' | ''             | 'en description is empty' | 'Product 16 with SLN (Main Company - Consignor 2)'                    | 'UNIQ'     | 'Shop 02'            | 'No'                 | '9000008'             | 'pcs'  | ''           | 'Source of origin 8' | '1,000'    | '100,00' | 'Without VAT' | ''              | '100,00'     | '100,00'       | ''                    | 'Store 01' | ''       | ''            | ''             |
-				| 'Consignor stocks' | ''             | 'en description is empty' | 'Product 16 with SLN (Main Company - Consignor 2)'                    | 'PZU'      | 'Shop 02'            | 'No'                 | '900889900900778'     | 'pcs'  | ''           | 'Source of origin 9' | '1,000'    | '100,00' | 'Without VAT' | ''              | '100,00'     | '100,00'       | ''                    | 'Store 01' | ''       | ''            | ''             |
-				| 'Own stocks'       | ''             | 'en description is empty' | 'Dress'                                                               | 'S/Yellow' | 'Shop 02'            | 'No'                 | ''                    | 'pcs'  | '15,25'      | ''                   | '1,000'    | '100,00' | '18%'         | ''              | '84,75'      | '100,00'       | ''                    | 'Store 01' | ''       | ''            | ''             |
-				| 'Consignor stocks' | ''             | 'en description is empty' | 'Product 15 with SLN and code control (Main Company - Consignor 1)'   | 'ODS'      | 'Shop 02'            | 'No'                 | '900999000009'        | 'pcs'  | '15,25'      | ''                   | '1,000'    | '100,00' | '18%'         | ''              | '84,75'      | '100,00'       | ''                    | 'Store 01' | ''       | ''            | ''             |
-				| 'Consignor stocks' | ''             | 'en description is empty' | 'Product 16 with SLN and Good code data (Main Company - Consignor 1)' | 'PZU'      | 'Shop 02'            | 'No'                 | '89000008999'         | 'pcs'  | '15,25'      | ''                   | '1,000'    | '100,00' | '18%'         | ''              | '84,75'      | '100,00'       | ''                    | 'Store 01' | ''       | ''            | ''             |
-			Then the form attribute named "LegalName" became equal to "Company Retail customer"
-			Then the form attribute named "Partner" became equal to "Retail customer"
-			Then the form attribute named "PaymentMethod" became equal to "Full calculation"
-			And "Payments" table became equal
-				| '#' | 'Amount' | 'Commission' | 'Certificate' | 'Payment type' | 'Financial movement type' | 'Payment agent legal name contract' | 'Payment terminal' | 'Bank term'    | 'Account'        | 'Percent' | 'RRN Code' | 'Payment agent partner' | 'Payment agent legal name' | 'Payment agent partner terms' |
-				| '1' | '700,00' | '14,00'      | ''            | 'Card 02'      | ''                        | ''                                  | ''                 | 'Bank term 02' | 'Transit Second' | '2,00'    | ''         | ''                      | ''                         | ''                            |
-			Then the form attribute named "PriceIncludeTax" became equal to "Yes"
-			Then the form attribute named "StatusType" became equal to "Completed"
-			Then the form attribute named "Store" became equal to "Store 01"
-			Then the form attribute named "Workstation" became equal to "Workstation 01"
-		* Fill correction description
-			And I input "wrong VAT rate" text in "Correction description" field
-			And I input "19.12.2023 14:15:51" text in the field named "Date"
-			And I move to the next attribute
-			And I click "Uncheck all" button
-			And I click "OK" button
-			And I input "717" text in "Basis document fiscal number" field		
-			And I click "Save" button
-			And I save the window as "RRC1"
-		* Fiscalize
-			And I click "Print receipt" button
-			Then there are lines in TestClient message log
-				|'Done'| 
-		* Check fiscal log
-			And Delay 5
-			And I parsed the log of the fiscal emulator by the path '$$LogPath$$' into the variable "ParsingResult"
-			And Delay 5
-			And I check "$ParsingResult$" with "0" and method is "ProcessCorrectionCheck"
-			And I check "$ParsingResult$" with "0" and data in "In.Parameter2" the same as "SalesReceiptXML30"
-	* Generate second Retail receipt correction (change tax rate for two lines)
-		And I click "Retail receipt correction" button
-		And I go to line in "ItemList" table
-			| 'Inventory origin' | 'Item'                    | 'Item key' | 'Tax amount' | 'Total amount' | 'VAT' |
-			| 'Consignor stocks' | 'Product with Unique SLN' | 'PZU'      | '15,25'      | '100,00'       | '18%' |
-		And I select current line in "ItemList" table
-		And I select "Without VAT" exact value from "VAT" drop-down list in "ItemList" table
-		And I finish line editing in "ItemList" table
-		And I go to line in "ItemList" table
-			| 'Item'                                             | 'Item key' | 'Net amount' | 'Unit' | 'VAT'         |
-			| 'Product 16 with SLN (Main Company - Consignor 2)' | 'PZU'      | '100,00'     | 'pcs'  | 'Without VAT' |
-		And I select current line in "ItemList" table
-		And I select "18%" exact value from "VAT" drop-down list in "ItemList" table
-		And I finish line editing in "ItemList" table
-	* Check second Retail receipt correction
-		Then the form attribute named "Agreement" became equal to "Retail partner term"
-		Then the form attribute named "Author" became equal to "CI"
-		Then the form attribute named "BasisDocument" became equal to "$RRC1$"
-		Then the form attribute named "Company" became equal to "Main Company"
-		Then the field named "ConsolidatedRetailSales" is filled
-		Then the form attribute named "CorrectionDescription" became equal to "wrong VAT rate"
-		Then the form attribute named "Currency" became equal to "TRY"
-		And "ItemList" table became equal
-			| '#' | 'Inventory origin' | 'Sales person' | 'Price type'              | 'Item'                                                                | 'Item key' | 'Profit loss center' | 'Dont calculate row' | 'Serial lot numbers'  | 'Unit' | 'Tax amount' | 'Source of origins'  | 'Quantity' | 'Price'  | 'VAT'         | 'Offers amount' | 'Net amount' | 'Total amount' | 'Additional analytic' | 'Store'    | 'Detail' | 'Sales order' | 'Revenue type' |
-			| '1' | 'Consignor stocks' | ''             | 'en description is empty' | 'Product with Unique SLN'                                             | 'ODS'      | 'Shop 02'            | 'No'                 | '0909088998998898789' | 'pcs'  | '15,25'      | ''                   | '1,000'    | '100,00' | '18%'         | ''              | '84,75'      | '100,00'       | ''                    | 'Store 01' | ''       | ''            | ''             |
-			| '2' | 'Consignor stocks' | ''             | 'en description is empty' | 'Product with Unique SLN'                                             | 'PZU'      | 'Shop 02'            | 'No'                 | '0909088998998898791' | 'pcs'  | ''           | ''                   | '1,000'    | '100,00' | 'Without VAT' | ''              | '100,00'     | '100,00'       | ''                    | 'Store 01' | ''       | ''            | ''             |
-			| '3' | 'Consignor stocks' | ''             | 'en description is empty' | 'Product 16 with SLN (Main Company - Consignor 2)'                    | 'UNIQ'     | 'Shop 02'            | 'No'                 | '9000008'             | 'pcs'  | ''           | 'Source of origin 8' | '1,000'    | '100,00' | 'Without VAT' | ''              | '100,00'     | '100,00'       | ''                    | 'Store 01' | ''       | ''            | ''             |
-			| '4' | 'Consignor stocks' | ''             | 'en description is empty' | 'Product 16 with SLN (Main Company - Consignor 2)'                    | 'PZU'      | 'Shop 02'            | 'No'                 | '900889900900778'     | 'pcs'  | '15,25'      | 'Source of origin 9' | '1,000'    | '100,00' | '18%'         | ''              | '84,75'      | '100,00'       | ''                    | 'Store 01' | ''       | ''            | ''             |
-			| '5' | 'Own stocks'       | ''             | 'en description is empty' | 'Dress'                                                               | 'S/Yellow' | 'Shop 02'            | 'No'                 | ''                    | 'pcs'  | '15,25'      | ''                   | '1,000'    | '100,00' | '18%'         | ''              | '84,75'      | '100,00'       | ''                    | 'Store 01' | ''       | ''            | ''             |
-			| '6' | 'Consignor stocks' | ''             | 'en description is empty' | 'Product 15 with SLN and code control (Main Company - Consignor 1)'   | 'ODS'      | 'Shop 02'            | 'No'                 | '900999000009'        | 'pcs'  | '15,25'      | ''                   | '1,000'    | '100,00' | '18%'         | ''              | '84,75'      | '100,00'       | ''                    | 'Store 01' | ''       | ''            | ''             |
-			| '7' | 'Consignor stocks' | ''             | 'en description is empty' | 'Product 16 with SLN and Good code data (Main Company - Consignor 1)' | 'PZU'      | 'Shop 02'            | 'No'                 | '89000008999'         | 'pcs'  | '15,25'      | ''                   | '1,000'    | '100,00' | '18%'         | ''              | '84,75'      | '100,00'       | ''                    | 'Store 01' | ''       | ''            | ''             |
-		
-		Then the form attribute named "LegalName" became equal to "Company Retail customer"
-		Then the form attribute named "Partner" became equal to "Retail customer"
-		Then the form attribute named "PaymentMethod" became equal to "Full calculation"
-		And "Payments" table became equal
-			| '#' | 'Amount' | 'Commission' | 'Certificate' | 'Payment type' | 'Financial movement type' | 'Payment agent legal name contract' | 'Payment terminal' | 'Bank term'    | 'Account'        | 'Percent' | 'RRN Code' | 'Payment agent partner' | 'Payment agent legal name' | 'Payment agent partner terms' |
-			| '1' | '700,00' | '14,00'      | ''            | 'Card 02'      | ''                        | ''                                  | ''                 | 'Bank term 02' | 'Transit Second' | '2,00'    | ''         | ''                      | ''                         | ''                            |
-		
-		Then the form attribute named "PriceIncludeTax" became equal to "Yes"
-		Then the form attribute named "StatusType" became equal to "Completed"
-		Then the form attribute named "Store" became equal to "Store 01"
-		Then the form attribute named "UsePartnerTransactions" became equal to "No"
-		Then the form attribute named "Workstation" became equal to "Workstation 01"
-		And I input "19.12.2023 14:15:51" text in the field named "Date"
-		And I move to the next attribute
-		And I click "Uncheck all" button
-		And I click "OK" button	
-		And I input "718" text in "Basis document fiscal number" field	
-		And I click "Save" button
-		And I save the window as "RRC2"
-	* Fiscalize
-		And I click "Print receipt" button
-		Then there are lines in TestClient message log
-			|'Done'|
-	* Check fiscal log
-		And Delay 5
-		And I parsed the log of the fiscal emulator by the path '$$LogPath$$' into the variable "ParsingResult"
-		And Delay 5
-		And I check "$ParsingResult$" with "0" and method is "ProcessCorrectionCheck"
-		And I check "$ParsingResult$" with "0" and data in "In.Parameter2" the same as "SalesReceiptXML31"					
-
-
-Scenario: _02602104 Retail receipt correction for RRR (cash, VAT rate correction)
-	And I close all client application windows
-	* Create RRR
-		Given I open hyperlink "e1cib/list/Document.RetailReturnReceipt"
-		And I click "Create" button
-		* Consignor 1
-			And in the table "ItemList" I click the button named "SearchByBarcode"
-			And I input "0909088998998898789" text in the field named "Barcode"
-			And I move to the next attribute
-			And in the table "ItemList" I click the button named "SearchByBarcode"
-			And I input "0909088998998898791" text in the field named "Barcode"
-			And I move to the next attribute
-		* Consignor 2
-			And in the table "ItemList" I click the button named "SearchByBarcode"
-			And I input "9000008" text in the field named "Barcode"
-			And I move to the next attribute
-			And in the table "ItemList" I click the button named "SearchByBarcode"
-			And I input "900889900900778" text in the field named "Barcode"
-			And I move to the next attribute
-		* Own stock, without SLN
-			And in the table "ItemList" I click the button named "SearchByBarcode"
-			And I input "2202283713" text in the field named "Barcode"
-			And I move to the next attribute
-		* Item with marking code
-			And in the table "ItemList" I click the button named "SearchByBarcode"
-			And I input "900999000009" text in the field named "Barcode"
-			And I move to the next attribute
-			And I click "Search by barcode" button
-			Then "Barcode" window is opened
-			And I input "11111111111111111111" text in the field named "Barcode"
-			And I move to the next attribute
-		* Item with good code data
-			And in the table "ItemList" I click the button named "SearchByBarcode"
-			And I input "89000008999" text in the field named "Barcode"
-			And I move to the next attribute
-			And I click "Search by barcode" button
-			And I input "Q3VycmVudCByb3cgd2lsbCBkZWNvZGUgdG8gYmFzZTY2" text in the field named "Barcode"
-			And I move to the next attribute
-		And for each line of "ItemList" table I do
-			And I input "100,00" text in "Price" field of "ItemList" table
-		And for each line of "ItemList" table I do
-			And I input "10,00" text in "Landed cost" field of "ItemList" table
-		* Payment
-			And I move to "Payments" tab
-			And in the table "Payments" I click the button named "PaymentsAdd"
-			And I activate "Payment type" field in "Payments" table
-			And I select current line in "Payments" table
-			And I select "cash" from "Payment type" drop-down list by string in "Payments" table
-			And I activate "Account" field in "Payments" table
-			And I select "Cash desk №4" from "Account" drop-down list by string in "Payments" table
-			And I activate field named "PaymentsAmount" in "Payments" table
-			And I input "700,00" text in the field named "PaymentsAmount" of "Payments" table
-			And I finish line editing in "Payments" table
-			And I click "Post" button
-			And I save the window as "RRR02602104"
-		* Fiscalize
-			And I click "Print receipt" button
-	* Generate first Retail receipt correction (storno)
-		And I click "Retail receipt correction" button
-		* Check
-			Then the form attribute named "Agreement" became equal to "Retail partner term"
-			Then the form attribute named "Author" became equal to "CI"
-			Then the form attribute named "BasisDocument" became equal to "$RRR02602104$"
-			Then the form attribute named "Company" became equal to "Main Company"
-			Then the field named "ConsolidatedRetailSales" is filled
-			Then the form attribute named "CorrectionDescription" became equal to ""
-			And the editing text of form attribute named "CorrectionType" became equal to "Independent"
-			And "ItemList" table became equal
-				| 'Inventory origin' | 'Sales person' | 'Price type'              | 'Item'                                                                | 'Item key' | 'Profit loss center' | 'Dont calculate row' | 'Serial lot numbers'  | 'Unit' | 'Tax amount' | 'Source of origins'  | 'Quantity' | 'Price'  | 'VAT'         | 'Offers amount' | 'Net amount' | 'Total amount' | 'Additional analytic' | 'Store'    | 'Detail' | 'Sales order' | 'Revenue type' |
-				| 'Consignor stocks' | ''             | 'en description is empty' | 'Product with Unique SLN'                                             | 'ODS'      | 'Shop 02'            | 'No'                 | '0909088998998898789' | 'pcs'  | '15,25'      | ''                   | '1,000'    | '100,00' | '18%'         | ''              | '84,75'      | '100,00'       | ''                    | 'Store 01' | ''       | ''            | ''             |
-				| 'Consignor stocks' | ''             | 'en description is empty' | 'Product with Unique SLN'                                             | 'PZU'      | 'Shop 02'            | 'No'                 | '0909088998998898791' | 'pcs'  | '15,25'      | ''                   | '1,000'    | '100,00' | '18%'         | ''              | '84,75'      | '100,00'       | ''                    | 'Store 01' | ''       | ''            | ''             |
-				| 'Consignor stocks' | ''             | 'en description is empty' | 'Product 16 with SLN (Main Company - Consignor 2)'                    | 'UNIQ'     | 'Shop 02'            | 'No'                 | '9000008'             | 'pcs'  | ''           | 'Source of origin 8' | '1,000'    | '100,00' | 'Without VAT' | ''              | '100,00'     | '100,00'       | ''                    | 'Store 01' | ''       | ''            | ''             |
-				| 'Consignor stocks' | ''             | 'en description is empty' | 'Product 16 with SLN (Main Company - Consignor 2)'                    | 'PZU'      | 'Shop 02'            | 'No'                 | '900889900900778'     | 'pcs'  | ''           | 'Source of origin 9' | '1,000'    | '100,00' | 'Without VAT' | ''              | '100,00'     | '100,00'       | ''                    | 'Store 01' | ''       | ''            | ''             |
-				| 'Own stocks'       | ''             | 'en description is empty' | 'Dress'                                                               | 'S/Yellow' | 'Shop 02'            | 'No'                 | ''                    | 'pcs'  | '15,25'      | ''                   | '1,000'    | '100,00' | '18%'         | ''              | '84,75'      | '100,00'       | ''                    | 'Store 01' | ''       | ''            | ''             |
-				| 'Consignor stocks' | ''             | 'en description is empty' | 'Product 15 with SLN and code control (Main Company - Consignor 1)'   | 'ODS'      | 'Shop 02'            | 'No'                 | '900999000009'        | 'pcs'  | '15,25'      | ''                   | '1,000'    | '100,00' | '18%'         | ''              | '84,75'      | '100,00'       | ''                    | 'Store 01' | ''       | ''            | ''             |
-				| 'Consignor stocks' | ''             | 'en description is empty' | 'Product 16 with SLN and Good code data (Main Company - Consignor 1)' | 'PZU'      | 'Shop 02'            | 'No'                 | '89000008999'         | 'pcs'  | '15,25'      | ''                   | '1,000'    | '100,00' | '18%'         | ''              | '84,75'      | '100,00'       | ''                    | 'Store 01' | ''       | ''            | ''             |
-			Then the form attribute named "LegalName" became equal to "Company Retail customer"
-			Then the form attribute named "Partner" became equal to "Retail customer"
-			Then the form attribute named "PaymentMethod" became equal to "Full calculation"
-			And "Payments" table became equal
-				| '#' | 'Amount' | 'Commission' | 'Certificate' | 'Payment type' | 'Financial movement type' | 'Payment agent legal name contract' | 'Payment terminal' | 'Bank term' | 'Account'      | 'Percent' | 'RRN Code' | 'Payment agent partner' | 'Payment agent legal name' | 'Payment agent partner terms' |
-				| '1' | '700,00' | ''           | ''            | 'Cash'         | ''                        | ''                                  | ''                 | ''          | 'Cash desk №4' | ''        | ''         | ''                      | ''                         | ''                            |
-			Then the form attribute named "PriceIncludeTax" became equal to "Yes"
-			Then the form attribute named "StatusType" became equal to "Completed"
-			Then the form attribute named "Store" became equal to "Store 01"
-			Then the form attribute named "Workstation" became equal to "Workstation 01"
-		* Fill correction description
-			And I input "wrong VAT rate" text in "Correction description" field
-			And I input "19.12.2023 14:50:09" text in the field named "Date"
-			And I move to the next attribute
-			And I click "Uncheck all" button
-			And I click "OK" button	
-			And I input "719" text in "Basis document fiscal number" field	
-			And I click "Save" button
-			And I save the window as "RRC1"
-		* Fiscalize
-			And I click "Print receipt" button
-			Then there are lines in TestClient message log
-				|'Done'| 
-		* Check fiscal log
-			And Delay 5
-			And I parsed the log of the fiscal emulator by the path '$$LogPath$$' into the variable "ParsingResult"
-			And Delay 5
-			And I check "$ParsingResult$" with "0" and method is "ProcessCorrectionCheck"
-			And I check "$ParsingResult$" with "0" and data in "In.Parameter2" the same as "SalesReceiptXML32"
-	* Generate second Retail receipt correction (change tax rate for two lines)
-		And I click "Retail receipt correction" button
-		And I go to line in "ItemList" table
-			| 'Inventory origin' | 'Item'                    | 'Item key' | 'Tax amount' | 'Total amount' | 'VAT' |
-			| 'Consignor stocks' | 'Product with Unique SLN' | 'PZU'      | '15,25'      | '100,00'       | '18%' |
-		And I select current line in "ItemList" table
-		And I select "Without VAT" exact value from "VAT" drop-down list in "ItemList" table
-		And I finish line editing in "ItemList" table
-		And I go to line in "ItemList" table
-			| 'Item'                                             | 'Item key' | 'Net amount' | 'Unit' | 'VAT'         |
-			| 'Product 16 with SLN (Main Company - Consignor 2)' | 'PZU'      | '100,00'     | 'pcs'  | 'Without VAT' |
-		And I select current line in "ItemList" table
-		And I select "18%" exact value from "VAT" drop-down list in "ItemList" table
-		And I finish line editing in "ItemList" table
-	* Check second Retail receipt correction
-		Then the form attribute named "Agreement" became equal to "Retail partner term"
-		Then the form attribute named "Author" became equal to "CI"
-		Then the form attribute named "BasisDocument" became equal to "$RRC1$"
-		Then the form attribute named "Company" became equal to "Main Company"
-		Then the field named "ConsolidatedRetailSales" is filled
-		Then the form attribute named "CorrectionDescription" became equal to "wrong VAT rate"
-		Then the form attribute named "Currency" became equal to "TRY"
-		And "ItemList" table became equal
-			| '#' | 'Inventory origin' | 'Sales person' | 'Price type'              | 'Item'                                                                | 'Item key' | 'Profit loss center' | 'Dont calculate row' | 'Serial lot numbers'  | 'Unit' | 'Tax amount' | 'Source of origins'  | 'Quantity' | 'Price'  | 'VAT'         | 'Offers amount' | 'Net amount' | 'Total amount' | 'Additional analytic' | 'Store'    | 'Detail' | 'Sales order' | 'Revenue type' |
-			| '1' | 'Consignor stocks' | ''             | 'en description is empty' | 'Product with Unique SLN'                                             | 'ODS'      | 'Shop 02'            | 'No'                 | '0909088998998898789' | 'pcs'  | '15,25'      | ''                   | '1,000'    | '100,00' | '18%'         | ''              | '84,75'      | '100,00'       | ''                    | 'Store 01' | ''       | ''            | ''             |
-			| '2' | 'Consignor stocks' | ''             | 'en description is empty' | 'Product with Unique SLN'                                             | 'PZU'      | 'Shop 02'            | 'No'                 | '0909088998998898791' | 'pcs'  | ''           | ''                   | '1,000'    | '100,00' | 'Without VAT' | ''              | '100,00'     | '100,00'       | ''                    | 'Store 01' | ''       | ''            | ''             |
-			| '3' | 'Consignor stocks' | ''             | 'en description is empty' | 'Product 16 with SLN (Main Company - Consignor 2)'                    | 'UNIQ'     | 'Shop 02'            | 'No'                 | '9000008'             | 'pcs'  | ''           | 'Source of origin 8' | '1,000'    | '100,00' | 'Without VAT' | ''              | '100,00'     | '100,00'       | ''                    | 'Store 01' | ''       | ''            | ''             |
-			| '4' | 'Consignor stocks' | ''             | 'en description is empty' | 'Product 16 with SLN (Main Company - Consignor 2)'                    | 'PZU'      | 'Shop 02'            | 'No'                 | '900889900900778'     | 'pcs'  | '15,25'      | 'Source of origin 9' | '1,000'    | '100,00' | '18%'         | ''              | '84,75'      | '100,00'       | ''                    | 'Store 01' | ''       | ''            | ''             |
-			| '5' | 'Own stocks'       | ''             | 'en description is empty' | 'Dress'                                                               | 'S/Yellow' | 'Shop 02'            | 'No'                 | ''                    | 'pcs'  | '15,25'      | ''                   | '1,000'    | '100,00' | '18%'         | ''              | '84,75'      | '100,00'       | ''                    | 'Store 01' | ''       | ''            | ''             |
-			| '6' | 'Consignor stocks' | ''             | 'en description is empty' | 'Product 15 with SLN and code control (Main Company - Consignor 1)'   | 'ODS'      | 'Shop 02'            | 'No'                 | '900999000009'        | 'pcs'  | '15,25'      | ''                   | '1,000'    | '100,00' | '18%'         | ''              | '84,75'      | '100,00'       | ''                    | 'Store 01' | ''       | ''            | ''             |
-			| '7' | 'Consignor stocks' | ''             | 'en description is empty' | 'Product 16 with SLN and Good code data (Main Company - Consignor 1)' | 'PZU'      | 'Shop 02'            | 'No'                 | '89000008999'         | 'pcs'  | '15,25'      | ''                   | '1,000'    | '100,00' | '18%'         | ''              | '84,75'      | '100,00'       | ''                    | 'Store 01' | ''       | ''            | ''             |
-		
-		Then the form attribute named "LegalName" became equal to "Company Retail customer"
-		Then the form attribute named "Partner" became equal to "Retail customer"
-		Then the form attribute named "PaymentMethod" became equal to "Full calculation"
-		And "Payments" table became equal
-			| '#' | 'Amount' | 'Commission' | 'Certificate' | 'Payment type' | 'Financial movement type' | 'Payment agent legal name contract' | 'Payment terminal' | 'Bank term' | 'Account'      | 'Percent' | 'RRN Code' | 'Payment agent partner' | 'Payment agent legal name' | 'Payment agent partner terms' |
-			| '1' | '700,00' | ''           | ''            | 'Cash'         | ''                        | ''                                  | ''                 | ''          | 'Cash desk №4' | ''        | ''         | ''                      | ''                         | ''                            |
-		
-		Then the form attribute named "PriceIncludeTax" became equal to "Yes"
-		Then the form attribute named "StatusType" became equal to "Completed"
-		Then the form attribute named "Store" became equal to "Store 01"
-		Then the form attribute named "UsePartnerTransactions" became equal to "No"
-		Then the form attribute named "Workstation" became equal to "Workstation 01"
-		And I input "19.12.2023 14:50:09" text in the field named "Date"
-		And I move to the next attribute
-		And I click "Uncheck all" button
-		And I click "OK" button
-		And I input "720" text in "Basis document fiscal number" field	
-		And I click "Save" button
-		And I save the window as "RRC2"
-	* Fiscalize
-		And I click "Print receipt" button
-		Then there are lines in TestClient message log
-			|'Done'|
-	* Check fiscal log
-		And Delay 5
-		And I parsed the log of the fiscal emulator by the path '$$LogPath$$' into the variable "ParsingResult"
-		And Delay 5
-		And I check "$ParsingResult$" with "0" and method is "ProcessCorrectionCheck"
-		And I check "$ParsingResult$" with "0" and data in "In.Parameter2" the same as "SalesReceiptXML33"
-
-				
-Scenario: _02602105 Retail receipt correction for RRR (card, VAT rate correction)
-	And I close all client application windows
-	* Create RSR
-		Given I open hyperlink "e1cib/list/Document.RetailReturnReceipt"
-		And I click "Create" button
-		* Consignor 1
-			And in the table "ItemList" I click the button named "SearchByBarcode"
-			And I input "0909088998998898789" text in the field named "Barcode"
-			And I move to the next attribute
-			And in the table "ItemList" I click the button named "SearchByBarcode"
-			And I input "0909088998998898791" text in the field named "Barcode"
-			And I move to the next attribute
-		* Consignor 2
-			And in the table "ItemList" I click the button named "SearchByBarcode"
-			And I input "9000008" text in the field named "Barcode"
-			And I move to the next attribute
-			And in the table "ItemList" I click the button named "SearchByBarcode"
-			And I input "900889900900778" text in the field named "Barcode"
-			And I move to the next attribute
-		* Own stock, without SLN
-			And in the table "ItemList" I click the button named "SearchByBarcode"
-			And I input "2202283713" text in the field named "Barcode"
-			And I move to the next attribute
-		* Item with marking code
-			And in the table "ItemList" I click the button named "SearchByBarcode"
-			And I input "900999000009" text in the field named "Barcode"
-			And I move to the next attribute
-			And I click "Search by barcode" button
-			Then "Barcode" window is opened
-			And I input "11111111111111111111" text in the field named "Barcode"
-			And I move to the next attribute
-		* Item with good code data
-			And in the table "ItemList" I click the button named "SearchByBarcode"
-			And I input "89000008999" text in the field named "Barcode"
-			And I move to the next attribute
-			And I click "Search by barcode" button
-			And I input "Q3VycmVudCByb3cgd2lsbCBkZWNvZGUgdG8gYmFzZTY2" text in the field named "Barcode"
-			And I move to the next attribute
-		And for each line of "ItemList" table I do
-			And I input "100,00" text in "Price" field of "ItemList" table
-		And for each line of "ItemList" table I do
-			And I input "10,00" text in "Landed cost" field of "ItemList" table
-		* Payment
-			And I move to "Payments" tab
-			And in the table "Payments" I click the button named "PaymentsAdd"
-			And I activate "Payment type" field in "Payments" table
-			And I select current line in "Payments" table
-			And I select "Card 02" from "Payment type" drop-down list by string in "Payments" table
-			And I select "Bank term 02" from "Bank term" drop-down list by string in "Payments" table
-			And I activate "Account" field in "Payments" table
-			And I select "Transit Second" from "Account" drop-down list by string in "Payments" table
-			And I activate field named "PaymentsAmount" in "Payments" table
-			And I input "700,00" text in the field named "PaymentsAmount" of "Payments" table
-			And I finish line editing in "Payments" table
-			And I click "Post" button
-			And I save the window as "RSR02602105"
-		* Fiscalize
-			And I click "Print receipt" button
-	* Generate first Retail receipt correction (storno)
-		And I click "Retail receipt correction" button
-		* Check
-			Then the form attribute named "Agreement" became equal to "Retail partner term"
-			Then the form attribute named "Author" became equal to "CI"
-			Then the form attribute named "BasisDocument" became equal to "$RSR02602105$"
-			Then the form attribute named "Company" became equal to "Main Company"
-			Then the field named "ConsolidatedRetailSales" is filled
-			Then the form attribute named "CorrectionDescription" became equal to ""
-			And the editing text of form attribute named "CorrectionType" became equal to "Independent"
-			And "ItemList" table became equal
-				| 'Inventory origin' | 'Sales person' | 'Price type'              | 'Item'                                                                | 'Item key' | 'Profit loss center' | 'Dont calculate row' | 'Serial lot numbers'  | 'Unit' | 'Tax amount' | 'Source of origins'  | 'Quantity' | 'Price'  | 'VAT'         | 'Offers amount' | 'Net amount' | 'Total amount' | 'Additional analytic' | 'Store'    | 'Detail' | 'Sales order' | 'Revenue type' |
-				| 'Consignor stocks' | ''             | 'en description is empty' | 'Product with Unique SLN'                                             | 'ODS'      | 'Shop 02'            | 'No'                 | '0909088998998898789' | 'pcs'  | '15,25'      | ''                   | '1,000'    | '100,00' | '18%'         | ''              | '84,75'      | '100,00'       | ''                    | 'Store 01' | ''       | ''            | ''             |
-				| 'Consignor stocks' | ''             | 'en description is empty' | 'Product with Unique SLN'                                             | 'PZU'      | 'Shop 02'            | 'No'                 | '0909088998998898791' | 'pcs'  | '15,25'      | ''                   | '1,000'    | '100,00' | '18%'         | ''              | '84,75'      | '100,00'       | ''                    | 'Store 01' | ''       | ''            | ''             |
-				| 'Consignor stocks' | ''             | 'en description is empty' | 'Product 16 with SLN (Main Company - Consignor 2)'                    | 'UNIQ'     | 'Shop 02'            | 'No'                 | '9000008'             | 'pcs'  | ''           | 'Source of origin 8' | '1,000'    | '100,00' | 'Without VAT' | ''              | '100,00'     | '100,00'       | ''                    | 'Store 01' | ''       | ''            | ''             |
-				| 'Consignor stocks' | ''             | 'en description is empty' | 'Product 16 with SLN (Main Company - Consignor 2)'                    | 'PZU'      | 'Shop 02'            | 'No'                 | '900889900900778'     | 'pcs'  | ''           | 'Source of origin 9' | '1,000'    | '100,00' | 'Without VAT' | ''              | '100,00'     | '100,00'       | ''                    | 'Store 01' | ''       | ''            | ''             |
-				| 'Own stocks'       | ''             | 'en description is empty' | 'Dress'                                                               | 'S/Yellow' | 'Shop 02'            | 'No'                 | ''                    | 'pcs'  | '15,25'      | ''                   | '1,000'    | '100,00' | '18%'         | ''              | '84,75'      | '100,00'       | ''                    | 'Store 01' | ''       | ''            | ''             |
-				| 'Consignor stocks' | ''             | 'en description is empty' | 'Product 15 with SLN and code control (Main Company - Consignor 1)'   | 'ODS'      | 'Shop 02'            | 'No'                 | '900999000009'        | 'pcs'  | '15,25'      | ''                   | '1,000'    | '100,00' | '18%'         | ''              | '84,75'      | '100,00'       | ''                    | 'Store 01' | ''       | ''            | ''             |
-				| 'Consignor stocks' | ''             | 'en description is empty' | 'Product 16 with SLN and Good code data (Main Company - Consignor 1)' | 'PZU'      | 'Shop 02'            | 'No'                 | '89000008999'         | 'pcs'  | '15,25'      | ''                   | '1,000'    | '100,00' | '18%'         | ''              | '84,75'      | '100,00'       | ''                    | 'Store 01' | ''       | ''            | ''             |
-			Then the form attribute named "LegalName" became equal to "Company Retail customer"
-			Then the form attribute named "Partner" became equal to "Retail customer"
-			Then the form attribute named "PaymentMethod" became equal to "Full calculation"
-			And "Payments" table became equal
-				| '#' | 'Amount' | 'Commission' | 'Certificate' | 'Payment type' | 'Financial movement type' | 'Payment agent legal name contract' | 'Payment terminal' | 'Bank term'    | 'Account'        | 'Percent' | 'RRN Code' | 'Payment agent partner' | 'Payment agent legal name' | 'Payment agent partner terms' |
-				| '1' | '700,00' | '14,00'      | ''            | 'Card 02'      | ''                        | ''                                  | ''                 | 'Bank term 02' | 'Transit Second' | '2,00'    | ''         | ''                      | ''                         | ''                            |
-			Then the form attribute named "PriceIncludeTax" became equal to "Yes"
-			Then the form attribute named "StatusType" became equal to "Completed"
-			Then the form attribute named "Store" became equal to "Store 01"
-			Then the form attribute named "Workstation" became equal to "Workstation 01"
-		* Fill correction description
-			And I input "wrong VAT rate" text in "Correction description" field
-			And I input "20.12.2023 12:00:00" text in the field named "Date"
-			And I move to the next attribute
-			And I click "Uncheck all" button
-			And I click "OK" button
-			And I input "721" text in "Basis document fiscal number" field	
-			And I click "Save" button
-			And I save the window as "RRC1"
-		* Fiscalize
-			And I click "Print receipt" button
-			Then there are lines in TestClient message log
-				|'Done'| 
-		* Check fiscal log
-			And Delay 5
-			And I parsed the log of the fiscal emulator by the path '$$LogPath$$' into the variable "ParsingResult"
-			And Delay 5
-			And I check "$ParsingResult$" with "0" and method is "ProcessCorrectionCheck"
-			And I check "$ParsingResult$" with "0" and data in "In.Parameter2" the same as "SalesReceiptXML34"
-	* Generate second Retail receipt correction (change tax rate for two lines)
-		And I click "Retail receipt correction" button
-		And I go to line in "ItemList" table
-			| 'Inventory origin' | 'Item'                    | 'Item key' | 'Tax amount' | 'Total amount' | 'VAT' |
-			| 'Consignor stocks' | 'Product with Unique SLN' | 'PZU'      | '15,25'      | '100,00'       | '18%' |
-		And I select current line in "ItemList" table
-		And I select "Without VAT" exact value from "VAT" drop-down list in "ItemList" table
-		And I finish line editing in "ItemList" table
-		And I go to line in "ItemList" table
-			| 'Item'                                             | 'Item key' | 'Net amount' | 'Unit' | 'VAT'         |
-			| 'Product 16 with SLN (Main Company - Consignor 2)' | 'PZU'      | '100,00'     | 'pcs'  | 'Without VAT' |
-		And I select current line in "ItemList" table
-		And I select "18%" exact value from "VAT" drop-down list in "ItemList" table
-		And I finish line editing in "ItemList" table
-	* Check second Retail receipt correction
-		Then the form attribute named "Agreement" became equal to "Retail partner term"
-		Then the form attribute named "Author" became equal to "CI"
-		Then the form attribute named "BasisDocument" became equal to "$RRC1$"
-		Then the form attribute named "Company" became equal to "Main Company"
-		Then the field named "ConsolidatedRetailSales" is filled
-		Then the form attribute named "CorrectionDescription" became equal to "wrong VAT rate"
-		Then the form attribute named "Currency" became equal to "TRY"
-		And "ItemList" table became equal
-			| '#' | 'Inventory origin' | 'Sales person' | 'Price type'              | 'Item'                                                                | 'Item key' | 'Profit loss center' | 'Dont calculate row' | 'Serial lot numbers'  | 'Unit' | 'Tax amount' | 'Source of origins'  | 'Quantity' | 'Price'  | 'VAT'         | 'Offers amount' | 'Net amount' | 'Total amount' | 'Additional analytic' | 'Store'    | 'Detail' | 'Sales order' | 'Revenue type' |
-			| '1' | 'Consignor stocks' | ''             | 'en description is empty' | 'Product with Unique SLN'                                             | 'ODS'      | 'Shop 02'            | 'No'                 | '0909088998998898789' | 'pcs'  | '15,25'      | ''                   | '1,000'    | '100,00' | '18%'         | ''              | '84,75'      | '100,00'       | ''                    | 'Store 01' | ''       | ''            | ''             |
-			| '2' | 'Consignor stocks' | ''             | 'en description is empty' | 'Product with Unique SLN'                                             | 'PZU'      | 'Shop 02'            | 'No'                 | '0909088998998898791' | 'pcs'  | ''           | ''                   | '1,000'    | '100,00' | 'Without VAT' | ''              | '100,00'     | '100,00'       | ''                    | 'Store 01' | ''       | ''            | ''             |
-			| '3' | 'Consignor stocks' | ''             | 'en description is empty' | 'Product 16 with SLN (Main Company - Consignor 2)'                    | 'UNIQ'     | 'Shop 02'            | 'No'                 | '9000008'             | 'pcs'  | ''           | 'Source of origin 8' | '1,000'    | '100,00' | 'Without VAT' | ''              | '100,00'     | '100,00'       | ''                    | 'Store 01' | ''       | ''            | ''             |
-			| '4' | 'Consignor stocks' | ''             | 'en description is empty' | 'Product 16 with SLN (Main Company - Consignor 2)'                    | 'PZU'      | 'Shop 02'            | 'No'                 | '900889900900778'     | 'pcs'  | '15,25'      | 'Source of origin 9' | '1,000'    | '100,00' | '18%'         | ''              | '84,75'      | '100,00'       | ''                    | 'Store 01' | ''       | ''            | ''             |
-			| '5' | 'Own stocks'       | ''             | 'en description is empty' | 'Dress'                                                               | 'S/Yellow' | 'Shop 02'            | 'No'                 | ''                    | 'pcs'  | '15,25'      | ''                   | '1,000'    | '100,00' | '18%'         | ''              | '84,75'      | '100,00'       | ''                    | 'Store 01' | ''       | ''            | ''             |
-			| '6' | 'Consignor stocks' | ''             | 'en description is empty' | 'Product 15 with SLN and code control (Main Company - Consignor 1)'   | 'ODS'      | 'Shop 02'            | 'No'                 | '900999000009'        | 'pcs'  | '15,25'      | ''                   | '1,000'    | '100,00' | '18%'         | ''              | '84,75'      | '100,00'       | ''                    | 'Store 01' | ''       | ''            | ''             |
-			| '7' | 'Consignor stocks' | ''             | 'en description is empty' | 'Product 16 with SLN and Good code data (Main Company - Consignor 1)' | 'PZU'      | 'Shop 02'            | 'No'                 | '89000008999'         | 'pcs'  | '15,25'      | ''                   | '1,000'    | '100,00' | '18%'         | ''              | '84,75'      | '100,00'       | ''                    | 'Store 01' | ''       | ''            | ''             |
-		
-		Then the form attribute named "LegalName" became equal to "Company Retail customer"
-		Then the form attribute named "Partner" became equal to "Retail customer"
-		Then the form attribute named "PaymentMethod" became equal to "Full calculation"
-		And "Payments" table became equal
-			| '#' | 'Amount' | 'Commission' | 'Certificate' | 'Payment type' | 'Financial movement type' | 'Payment agent legal name contract' | 'Payment terminal' | 'Bank term'    | 'Account'        | 'Percent' | 'RRN Code' | 'Payment agent partner' | 'Payment agent legal name' | 'Payment agent partner terms' |
-			| '1' | '700,00' | '14,00'      | ''            | 'Card 02'      | ''                        | ''                                  | ''                 | 'Bank term 02' | 'Transit Second' | '2,00'    | ''         | ''                      | ''                         | ''                            |
-		
-		Then the form attribute named "PriceIncludeTax" became equal to "Yes"
-		Then the form attribute named "StatusType" became equal to "Completed"
-		Then the form attribute named "Store" became equal to "Store 01"
-		Then the form attribute named "UsePartnerTransactions" became equal to "No"
-		Then the form attribute named "Workstation" became equal to "Workstation 01"
-		And I input "20.12.2023 12:00:00" text in the field named "Date"
-		And I move to the next attribute
-		And I click "Uncheck all" button
-		And I click "OK" button
-		And I input "722" text in "Basis document fiscal number" field	
-		And I click "Save" button
-		And I save the window as "RRC2"
-	* Fiscalize
-		And I click "Print receipt" button
-		Then there are lines in TestClient message log
-			|'Done'|
-	* Check fiscal log
-		And Delay 5
-		And I parsed the log of the fiscal emulator by the path '$$LogPath$$' into the variable "ParsingResult"
-		And Delay 5
-		And I check "$ParsingResult$" with "0" and method is "ProcessCorrectionCheck"
-		And I check "$ParsingResult$" with "0" and data in "In.Parameter2" the same as "SalesReceiptXML35"
-						
-Scenario: _0260152 close session
-	And I close all client application windows
-	* Open POS		
-		And In the command interface I select "Retail" "Point of sale"	
-	* Close session
-		And I click "Close session" button
-		And I set checkbox named "CashConfirm"
-		And I set checkbox named "TerminalConfirm"
-		And I set checkbox named "CashConfirm"
-		And I move to the next attribute		
-		And I click "Close session" button
-		And Delay 5
-	* Check fiscal log
-		And I parsed the log of the fiscal emulator by the path '$$LogPath$$' into the variable "ParsingResult"
-		And I check "$ParsingResult$" with "0" and method is "CloseShift"	
-				
-Scenario: _02601521 open and close session without sales
-	And I close all client application windows
-	* Open POS		
-		And In the command interface I select "Retail" "Point of sale"	
-	* Open and close session
-		And I click "Open session" button
-		And I click "Close session" button
-		And Delay 5
-		And I set checkbox named "CashConfirm"
-		And I set checkbox named "TerminalConfirm"
-		And I set checkbox named "CashConfirm"
-		And I move to the next attribute		
-		And I click "Close session" button
-	* Сheck that Money transfer is not created 
-		Given I open hyperlink "e1cib/list/Document.MoneyTransfer"
-		And "List" table does not contain lines
-			| 'Send amount' | 'Receive amount' |
-			| ''            | ''               |
-		And I close all client application windows
-		
-		
-
-Scenario: _0260153 check hardware parameter saving
-		And I close all client application windows
-		Given I open hyperlink "e1cib/list/Catalog.Hardware"
-		* Create hardware
-			And I click "Create" button
-			And I input "Test" text in the field named "Description"
-			And I select "Fiscal printer" exact value from "Types of Equipment" drop-down list
-			And I click Choice button of the field named "Driver"
-			And I go to line in "List" table
-				| 'Description'     |
-				| 'KKT_3004'        |
-			And I select current line in "List" table
-			And I expand "Additional info" group
-			And I input "Sale address" text in "Sale address" field
-			And I input "Sale location" text in "Sale location" field		
-			And I click "Save" button
-			And I move to "Driver settings" tab
-			And in the table "DriverParameter" I click "Reload settings" button
-			And I move to "Predefined settings" tab
-			And in the table "ConnectParameters" I click "Load settings" button
-			And "ConnectParameters" table became equal
-				| '#'    | 'Name'    | 'Value'     |
-				| '1'    | 'Show'    | 'Yes'       |
-		* Check parameter saving
-			And I activate field named "ConnectParametersValue" in "ConnectParameters" table
-			And I select current line in "ConnectParameters" table
-			And I go to line in "" table
-				| ''            |
-				| 'Boolean'     |
-			And I select current line in "" table
-			And I click choice button of the attribute named "ConnectParametersValue" in "ConnectParameters" table
-			And I select current line in "" table
-			And I select "No" exact value from the drop-down list named "ConnectParametersValue" in "ConnectParameters" table
-			And I activate field named "ConnectParametersName" in "ConnectParameters" table
-			And I finish line editing in "ConnectParameters" table
-			And I click "Save" button
-			And in the table "ConnectParameters" I click "Write settings" button
-			And I click "Save and close" button
-			And I go to line in "List" table
-				| 'Description'     |
-				| 'Test'            |
-			And I select current line in "List" table
-			And "ConnectParameters" table became equal
-				| '#'    | 'Name'    | 'Value'     |
-				| '1'    | 'Show'    | 'No'        |
-			And I close all client application windows
-				
 					
-Scenario: _0260160 check Get Last Error button
-	And I close all client application windows
-	* Open hardware
-		Given I open hyperlink "e1cib/list/Catalog.Hardware"
-		And I go to line in "List" table
-			| 'Description'    |
-			| 'Fiscal printer' |
-		And I select current line in "List" table
-	* Check button Get Last Error	
-		And I click "Get last error" button
-		Then there are lines in TestClient message log
-			|'Fiscal printer: '|
-		And I close all client application windows
-												
-
-
-Scenario: _0260180 check fiscal logs
-	And I close all client application windows
-	Given I open hyperlink "e1cib/list/InformationRegister.HardwareLog"
-	Then the number of "List" table lines is "равно" "846"	
-	* Check log records form
-		And I go to the first line in "List" table
-		And I select current line in "List" table
-		Then the form attribute named "User" became equal to "CI"
-		Then the form attribute named "Hardware" became equal to "Fiscal printer"
-	And I close all client application windows
-
-Scenario: _0260182 check print X report when session closed
-	And I close all client application windows
-	* Open POS		
-		And In the command interface I select "Retail" "Point of sale"
-	* Check X report
-		Then "Point of sales" window is opened
-		And I click "Print X Report" button
-	* Check fiscal log
-		And Delay 3
-		And I parsed the log of the fiscal emulator by the path '$$LogPath$$' into the variable "ParsingResult"
-		And I check "$ParsingResult$" with "0" and method is "PrintXReport"	
-	And I close all client application windows				 
-
-Scenario: _0260185 print settlement from the terminal
-	And I close all client application windows
-	* Open POS		
-		And In the command interface I select "Retail" "Point of sale"
-	* Check settlement
-		And I click "Settlement (without shift close)" button
-		And I click "Get settlement" button
-		And I click "Print last settlement" button
-	* Check log
-		And Delay 3
-		And I parsed the log of the fiscal emulator by the path '$$LogPath$$' into the variable "ParsingResult"
-		And I check "$ParsingResult$" with "0" and method is "PrintTextDocument"	
-		And I parsed the log of the fiscal emulator by the path '$$LogPathAcquiring$$' into the variable "ParsingResultAcquiring"	
-		And I check "$ParsingResultAcquiring$" with "1" and method is "Settlement"
-
-
-Scenario: _0260186 check show fiscal transaction from POS
-	And I close all client application windows
-	* Open POS		
-		And In the command interface I select "Retail" "Point of sale"
-	* Show transaction
-		And I click "Show transactions" button
-		Then the form attribute named "Period" became equal to "Today"
-		Then the form attribute named "TimeZone" became equal to "2"
-		Then the form attribute named "Hardware" became equal to "Acquiring terminal"
-		Then the form attribute named "FiscalPrinter" became equal to "Fiscal printer"
-		Then the number of "TransactionList" table lines is "больше" "0"
-	And I close all client application windows
-
-
-
-				
-Scenario: _0260190 check numbers and fiscal status in the RSR and RRR list forms
-	And I close all client application windows
-	* Open RSR list form
-		Given I open hyperlink "e1cib/list/Document.RetailSalesReceipt"
-		And "List" table contains lines 
-			| 'Σ'      | 'Company'      | 'Check number' | 'Status'  | 'Store'    | 'Consolidated retail sales' |
-			| '300,00' | 'Main Company' | '*'            | 'Printed' | 'Store 01' | '*'                         |
-			| '720,00' | 'Main Company' | '*'            | 'Printed' | 'Store 01' | '*'                         |
-			| '840,00' | 'Main Company' | '*'            | 'Printed' | 'Store 01' | '*'                         |
-			| '118,00' | 'Main Company' | '*'            | 'Printed' | 'Store 01' | '*'                         |
-			| '210,00' | 'Main Company' | '*'            | 'Printed' | 'Store 01' | '*'                         |
-			| '620,00' | 'Main Company' | '*'            | 'Printed' | 'Store 01' | '*'                         |
-			| '100,00' | 'Main Company' | '*'            | 'Printed' | 'Store 01' | '*'                         |
-			| '100,00' | 'Main Company' | '*'            | 'Printed' | 'Store 01' | '*'                         |
-			| '112,00' | 'Main Company' | '*'            | 'Printed' | 'Store 01' | '*'                         |
-			| '113,00' | 'Main Company' | '*'            | 'Printed' | 'Store 01' | '*'                         |
-			| '500,00' | 'Main Company' | '*'            | 'Printed' | 'Store 01' | '*'                         |
-			| '720,00' | 'Main Company' | '*'            | 'Printed' | 'Store 01' | '*'                         |
-			| '300,00' | 'Main Company' | '*'            | 'Printed' | 'Store 01' | '*'                         |
-	* Open RRR list form
-		Given I open hyperlink "e1cib/list/Document.RetailReturnReceipt"
-		And "List" table contains lines
-			| 'Partner'         | 'Amount' | 'Company'      | 'Check number' | 'Status'  | 'Legal name'              | 'Currency' | 'Store'    | 'Author' |
-			| 'Retail customer' | '100,00' | 'Main Company' | '*'            | 'Printed' | 'Company Retail customer' | 'TRY'      | 'Store 01' | 'CI'     |
-			| 'Retail customer' | '200,00' | 'Main Company' | '*'            | 'Printed' | 'Company Retail customer' | 'TRY'      | 'Store 01' | 'CI'     |
-			| 'Retail customer' | '111,00' | 'Main Company' | '*'            | 'Printed' | 'Company Retail customer' | 'TRY'      | 'Store 01' | 'CI'     |
-			| 'Retail customer' | '210,00' | 'Main Company' | '*'            | 'Printed' | 'Company Retail customer' | 'TRY'      | 'Store 01' | 'CI'     |
-			| 'Customer'        | '118,00' | 'Main Company' | '*'            | 'Printed' | 'Customer'                | 'TRY'      | 'Store 01' | 'CI'     |
-			| 'Retail customer' | '520,00' | 'Main Company' | '*'            | 'Printed' | 'Company Retail customer' | 'TRY'      | 'Store 01' | 'CI'     |
-			| 'Retail customer' | '543,00' | 'Main Company' | '*'            | 'Printed' | 'Company Retail customer' | 'TRY'      | 'Store 01' | 'CI'     |
-			| 'Retail customer' | '520,00' | 'Main Company' | '*'            | 'Printed' | 'Company Retail customer' | 'TRY'      | 'Store 01' | 'CI'     |
-			| 'Retail customer' | '112,00' | 'Main Company' | '*'            | 'Printed' | 'Company Retail customer' | 'TRY'      | 'Store 01' | 'CI'     |
-			| 'Retail customer' | '113,00' | 'Main Company' | '*'            | 'Printed' | 'Company Retail customer' | 'TRY'      | 'Store 01' | 'CI'     |
-			| 'Retail customer' | '720,00' | 'Main Company' | '*'            | 'Printed' | 'Company Retail customer' | 'TRY'      | 'Store 01' | 'CI'     |
-			| 'Retail customer' | '300,00' | 'Main Company' | '*'            | 'Printed' | 'Company Retail customer' | 'TRY'      | 'Store 01' | 'CI'     |
-		And I close all client application windows
-		
-				
-Scenario: _0260191 check session open and close from CRS
-	And I close all client application windows
-	* Create CRS
-		Given I open hyperlink "e1cib/list/Document.ConsolidatedRetailSales"
-		And I click the button named "FormCreate"
-		And I select from the drop-down list named "Company" by "Main Company" string
-		And I select from "Cash account" drop-down list by "Pos cash account 1" string
-		And I select from the drop-down list named "Status" by "new" string
-		And I input current date in "Opening date" field
-		And I select from "Fiscal printer" drop-down list by "fiscal" string
-		And I select from the drop-down list named "Branch" by "Shop 02" string
-		And I click the button named "FormWrite"	
-	* Try open session (CRS unpost)
-		And I click "Open session" button
-		Then "1C:Enterprise" window is opened
-		And I click the button named "OK"	
-		* Check log
-			And Delay 3
-			And I parsed the log of the fiscal emulator by the path '$$LogPath$$' into the variable "ParsingResult"
-			When I Check the steps for Exception
-			| 'And I check "$ParsingResult$" with "0" and method is "OpenShift"'    |
-	* Post CRS
-		And I click the button named "FormPost"
-	* Try Close session
-		And I click "Close session" button
-		Then there are lines in TestClient message log
-			|'Cash shift can only be closed for a document with the status "Open".'|
-		And I select from the drop-down list named "Status" by "open" string
-		And I click "Close session" button
-		Then there are lines in TestClient message log
-			|'Shift already closed.'|		
-		* Check log
-			And Delay 3
-			And I parsed the log of the fiscal emulator by the path '$$LogPath$$' into the variable "ParsingResult"
-			// And I check "$ParsingResult$" with "0" and data in "In.Parameter3" contains 'ShiftState="1"'
-	* Try open session (status open)
-		And I select from the drop-down list named "Status" by "open" string
-		And I click "Open session" button
-		Then there are lines in TestClient message log
-			|'Cash shift can only be opened for a document with the status "New".'|
-		* Check log
-			And Delay 3
-			And I parsed the log of the fiscal emulator by the path '$$LogPath$$' into the variable "ParsingResult"
-			And I check "$ParsingResult$" with "0" and method is "GetCurrentStatus"
-	* Try open session (status cancel)
-		And I select from the drop-down list named "Status" by "cancel" string
-		And I click "Open session" button
-		Then there are lines in TestClient message log
-			|'Cash shift can only be opened for a document with the status "New".'|
-		* Check log
-			And Delay 3
-			And I parsed the log of the fiscal emulator by the path '$$LogPath$$' into the variable "ParsingResult"
-			And I check "$ParsingResult$" with "0" and method is "GetCurrentStatus"
-	* Try open session (status close)
-		And I select from the drop-down list named "Status" by "close" string
-		And I click "Open session" button
-		Then there are lines in TestClient message log
-			|'Cash shift can only be opened for a document with the status "New".'|
-		* Check log
-			And Delay 3
-			And I parsed the log of the fiscal emulator by the path '$$LogPath$$' into the variable "ParsingResult"
-			And I check "$ParsingResult$" with "0" and method is "GetCurrentStatus"
-	* Try open session (CRS with deletion mark)
-		And I select from the drop-down list named "Status" by "new" string
-		And I click the button named "FormPost"
-		And I click "Mark for deletion / Unmark for deletion" button
-		Then "1C:Enterprise" window is opened
-		And I click "Yes" button
-		And I click "Open session" button
-		Then "1C:Enterprise" window is opened
-		And I click the button named "OK"	
-		* Check log
-			And Delay 3
-			And I parsed the log of the fiscal emulator by the path '$$LogPath$$' into the variable "ParsingResult"
-			And I check "$ParsingResult$" with "0" and method is "GetCurrentStatus"			
-	* Try open session (CRS without deletion mark, status new)
-		And I click "Mark for deletion / Unmark for deletion" button
-		Then "1C:Enterprise" window is opened
-		And I click "Yes" button
-		And I click the button named "FormPost"
-		And I select from the drop-down list named "Status" by "new" string
-		And I click "Open session" button	
-		And I click "Reread" button
-		Then the form attribute named "Status" became equal to "Open"
-	* Check log
-		And Delay 3
-		And I parsed the log of the fiscal emulator by the path '$$LogPath$$' into the variable "ParsingResult"
-		And I check "$ParsingResult$" with "0" and method is "OpenShift"			
-	* Close session
-		And I click "Close session" button	
-		And I set checkbox named "CashConfirm"
-		And I set checkbox named "TerminalConfirm"
-		And I set checkbox named "CashConfirm"
-		And I move to the next attribute
-		And I click "Close session" button
-	* Check log
-		And Delay 3
-		And I parsed the log of the fiscal emulator by the path '$$LogPath$$' into the variable "ParsingResult"
-		And I check "$ParsingResult$" with "0" and method is "CloseShift"
-	And I close all client application windows
-	
-// Scenario: _0260188 check of retrieving the previous consolidated sales receipt when opening a cash session
-// 	And I close all client application windows
-// 	* Create Consolidated retail sales with status New
-// 		Given I open hyperlink "e1cib/list/Document.ConsolidatedRetailSales"
-// 		And I click the button named "FormCreate"	
-// 		And I select from the drop-down list named "Company" by "Main Company" string
-// 		And I select from "Cash account" drop-down list by "Pos cash account 1" string
-// 		And I select "New" exact value from the drop-down list named "Status"
-// 		And I input current date in "Opening date" field
-// 		And I select "Fiscal printer" exact value from "Fiscal printer" drop-down list
-// 		And I move to "Other" tab
-// 		And I click Choice button of the field named "Branch"
-// 		And I go to line in "List" table
-// 			| 'Description' |
-// 			| 'Shop 01'     |
-// 		And I select current line in "List" table
-// 		And I click the button named "FormPost"
-// 		And I delete "$$NumberNumberCSR88$$" variable
-// 		And I save the value of "Number" field as "$$NumberCSR88$$"
-// 		And I click "Post and close" button
-// 		And I close all client application windows
-// 	* Try open cash session and check retrieving the previous consolidated sales
-// 		And In the command interface I select "Retail" "Point of sale"
-// 		And I click "Open session" button
-// 	* Check 
-// 		Given I open hyperlink "e1cib/list/Document.ConsolidatedRetailSales"
-// 		And "List" table contains lines
-// 			| 'Number'          | 'Status' |
-// 			| '$$NumberCSR88$$' | 'Open'   |
-		
-
-
-Scenario: _0260187 add one more Acquiring terminal and check open and close session
-	And I close all client application windows
-	* Create one more Acquiring terminal
-		Given I open hyperlink "e1cib/list/Catalog.Hardware"
-		And I go to line in "List" table
-			| 'Description'        | 'Equipment API module' | 'Types of Equipment' |
-			| 'Acquiring terminal' | 'Acquiring Common API' | 'Acquiring'          |
-		And in the table "List" I click the button named "ListContextMenuCopy"
-		And I input "Acquiring terminal 2" text in the field named "Description"
-		And I click "Save and close" button
-		And "List" table contains lines
-			| 'Description'          |
-			| 'Acquiring terminal 2' |
-	* Add one more Acquiring terminal to the workstation 1
-		Given I open hyperlink "e1cib/list/Catalog.Workstations"        
-		And I go to line in "List" table
-			| 'Description'    |
-			| 'Workstation 01' |
-		And I select current line in "List" table
-		And in the table "HardwareList" I click "Add" button
-		And I click choice button of "Hardware" attribute in "HardwareList" table
-		And I go to line in "List" table
-			| 'Description'          |
-			| 'Acquiring terminal 2' |
-		And I select current line in "List" table
-		And I set "Enable" checkbox in "HardwareList" table
-		And I finish line editing in "HardwareList" table
-		And I click "Save and close" button
-		And I wait "Workstation * (Workstation) *" window closing in 5 seconds
-	* Open session
-		And In the command interface I select "Retail" "Point of sale"
-		And I click "Open session" button
-	* Close session
-		And I click "Close session" button
-		And Delay 2
-		And I set checkbox named "CashConfirm"
-		And I set checkbox named "TerminalConfirm"
-		And I set checkbox named "CashConfirm"
-		And I move to the next attribute		
-		And I click "Close session" button
-	* Check log
-		Given I open hyperlink "e1cib/list/Catalog.Hardware"
-		And I go to line in "List" table
-			| 'Description'        |
-			| 'Acquiring terminal' |
-		And I go to line in "List" table and invert selection:
-			|"Description"|
-			| "Acquiring terminal 2" | 
-		And I click "Analyze log" button
-		And "TransactionList" table contains lines
-			| 'Period' | 'Hardware'             | 'Method'     | 'Result' |
-			| '*'      | 'Acquiring terminal'   | 'Settlement' | 'Yes'    |
-			| '*'      | 'Acquiring terminal 2' | 'Settlement' | 'Yes'    |
-			| '*'      | 'Acquiring terminal'   | 'Settlement' | 'Yes'    |
-			| '*'      | 'Acquiring terminal 2' | 'Settlement' | 'Yes'    |
-	And I close all client application windows
-
-
-Scenario: _0260189 print X report from CRS
-	And I close all client application windows
-	* Create CRS and open session
-		Given I open hyperlink "e1cib/list/Document.ConsolidatedRetailSales"
-		And I click the button named "FormCreate"
-		And I select from the drop-down list named "Company" by "Main Company" string
-		And I select from "Cash account" drop-down list by "Pos cash account 1" string
-		And I select from the drop-down list named "Status" by "new" string
-		And I input current date in "Opening date" field
-		And I select from "Fiscal printer" drop-down list by "fiscal" string
-		And I select from the drop-down list named "Branch" by "Shop 02" string
-		And I click the button named "FormPost"
-		And I click "Open session" button
-	* Print X report
-		And I click "X report" button
-	* Check log
-		And Delay 3
-		And I parsed the log of the fiscal emulator by the path '$$LogPath$$' into the variable "ParsingResult"
-		And I check "$ParsingResult$" with "0" and method is "PrintXReport"	
-	* Print X report
-		And I click "X report" button
-	* Check log
-		And Delay 3
-		And I parsed the log of the fiscal emulator by the path '$$LogPath$$' into the variable "ParsingResult"
-		And I check "$ParsingResult$" with "0" and method is "PrintXReport"	
-		And I check "$ParsingResult$" with "1" and method is "PrintXReport"
-	* Close session and check print X report
-		And I click "Close session" button
-		And Delay 2
-		And I set checkbox named "CashConfirm"
-		And I set checkbox named "TerminalConfirm"
-		And I set checkbox named "CashConfirm"
-		And I move to the next attribute		
-		And I click "Close session" button
-		And I click "X report" button
-	* Check log
-		And Delay 3
-		And I parsed the log of the fiscal emulator by the path '$$LogPath$$' into the variable "ParsingResult"
-		And I check "$ParsingResult$" with "0" and method is "PrintXReport"	
-	And I close all client application windows
-	
-
-Scenario: _0260190 check reconnect fiscal printer from payment form
-	And I close all client application windows
-	* Open POS
-		And In the command interface I select "Retail" "Point of sale"	
-		And I click "Open session" button
-	* Add items and open payment form
-		And I click "Search by barcode (F7)" button
-		And I input "2202283705" text in the field named "Barcode"
-		And I move to the next attribute
-	* Payment
-		And I click "Payment (+)" button
-		Then "Payment" window is opened
-	* Reconnect fiscal printer
-		Then "Payment" window is opened
-		And I click "Reconnect fiscal printer" button
-		Then there are lines in TestClient message log
-			|'Done'|
-		Given I open hyperlink "e1cib/list/InformationRegister.HardwareLog"
-		And I go to the last line in "List" table
-		And the current line of "List" table is equal to
-			| 'Method' |
-			| 'Open' |
-		And I go to the previous line in "List" table
-		And the current line of "List" table is equal to
-			| 'Method' |
-			| 'Open' |
-		And I go to the previous line in "List" table
-		And the current line of "List" table is equal to
-			| 'Method' |
-			| 'SetParameter' |
-		And I go to the previous line in "List" table
-		And the current line of "List" table is equal to
-			| 'Method' |
-			| 'SetParameter' |
-		And I go to the previous line in "List" table
-		And the current line of "List" table is equal to
-			| 'Method' |
-			| 'Close' |
-		And I go to the previous line in "List" table
-		And the current line of "List" table is equal to
-			| 'Method' |
-			| 'Close' |
-		And I close current window
-		And I close "Payment" window
-		And I click "Clear current receipt" button
-
-Scenario: _0260193 check timeout
-	And I close all client application windows
-	* Add timeout
-		Given I open hyperlink "e1cib/list/Catalog.Hardware"		
-		And I go to line in "List" table
-			| 'Description'    |
-			| 'Fiscal printer' |
-		And I select current line in "List" table
-		And I click Open button of the field named "Driver"
-		And I input "5" text in "Sleep after (sec)" field
-		And I click "Save and close" button
-		And I click "Save" button
-		And I click the button named "Disconnect"
-		And I click the button named "Connect"
-		And I click the button named "UpdateStatus"
-		And I save the value of the field named "CommandResult" as "CommandResult1"
-		And Delay 7
-	* Create RSR
-		And I close all client application windows
-		And In the command interface I select "Retail" "Point of sale"		
-		And I click "Search by barcode (F7)" button
-		And I input "2202283705" text in the field named "Barcode"
-		And I move to the next attribute	
-		And I click "Payment (+)" button
-		And I click "Cash (/)" button
-		And I click "OK" button	
-	* Check info about timeout in the fiscal printer
-		Given I open hyperlink "e1cib/list/Catalog.Hardware"		
-		And I go to line in "List" table
-			| 'Description'    |
-			| 'Fiscal printer' |
-		And I select current line in "List" table
-		And I click the button named "UpdateStatus"
-		And I save the value of the field named "CommandResult" as "CommandResult2"
-		And 1C:Enterprise language expression "not $CommandResult1$ = $CommandResult2$" is true
-
-Scenario: _0260195 check consignor from SLN
-	And I close all client application windows
-	* Open POS
-		And In the command interface I select "Retail" "Point of sale"	
-	* Add items and open payment form
-		And I click "Search by barcode (F7)" button
-		And I input "0909088998998898789" text in the field named "Barcode"
-		And I move to the next attribute
-		And I click "Search by barcode (F7)" button
-		And I input "0909088998998898790" text in the field named "Barcode"
-		And I move to the next attribute
-		And I click "Search by barcode (F7)" button
-		And I input "0909088998998898791" text in the field named "Barcode"
-		And I move to the next attribute
-		And for each line of "ItemList" table I do
-			And I input "100,00" text in "Price" field of "ItemList" table
-	* Payment
-		And I click "Payment (+)" button
-		And I click "Cash (/)" button
-		And I click "OK" button
-	* Check 
-		And Delay 5
-		And I parsed the log of the fiscal emulator by the path '$$LogPath$$' into the variable "ParsingResult"
-		And I check "$ParsingResult$" with "0" and method is "ProcessCheck"
-		And I check "$ParsingResult$" with "0" and data in "In.Parameter3" the same as "SalesReceiptXML21"
-			
-Scenario: _0260200 click reconect hardware without fiscal printer
-	And I close all client application windows
-	* Select Workstation 02
-		Given I open hyperlink "e1cib/list/Catalog.Workstations"
-		And I go to line in "List" table
-			| 'Description'       |
-			| 'Workstation 02'    |	
-		And I click "Set current workstation" button
-	* Open POS
-		And In the command interface I select "Retail" "Point of sale"
-		And I click "Open session" button
-		And I expand a line in "ItemsPickup" table
-			| 'Item'          |
-			| '(10004) Boots' |
-		And I go to line in "ItemsPickup" table
-			| 'Item'                   |
-			| '(10004) Boots, 37/18SD' |
-		And I select current line in "ItemsPickup" table
-		And I click "Payment (+)" button
-		Then "Payment" window is opened
-	* Check button reconnect fiscal printer
-		And I click "Reconnect fiscal printer" button
-		Then there are lines in TestClient message log
-			|'Hardware not found'|
-		And I close "Payment" window
-		And I click "Clear current receipt" button		
-	And I close all client application windows
-
-Scenario: _0260210 on double click in CRS
-	And I close all client application windows
-	* Preparation
-		* Create CR (without fiscalization)
-			Given I open hyperlink "e1cib/list/Document.CashReceipt"
-			And I go to line in "List" table
-				| 'Amount'   |
-				| '1 000,00' |	
-			And in the table "List" I click the button named "ListContextMenuCopy"
-			And I click Select button of "Consolidated retail sales" field
-			And I go to line in "List" table
-				| 'Number'          |
-				| '$$NumberCRS11$$' |
-			And I select current line in "List" table
-			And I click "Post" button
-			And I delete "$$CR11$$" variable
-			And I save the window as "$$CR11$$" 
-			And I click "Post and close" button
-		* Create BR (without fiscalization)
-			Given I open hyperlink "e1cib/list/Document.BankReceipt"
-			And I go to line in "List" table
-				| 'Amount' |
-				| '10,00'  |
-			And in the table "List" I click the button named "ListContextMenuCopy"
-			And I click Select button of "Consolidated retail sales" field
-			And I go to line in "List" table
-				| 'Number'          |
-				| '$$NumberCRS11$$' |
-			And I select current line in "List" table
-			And I click "Post" button
-			And I delete "$$BR11$$" variable
-			And I save the window as "$$BR11$$" 
-			And I click "Post and close" button	
-		* Create CP (without fiscalization)
-			Given I open hyperlink "e1cib/list/Document.CashPayment"
-			And I go to line in "List" table
-				| 'Amount' |
-				| '200,00' |	
-			And in the table "List" I click the button named "ListContextMenuCopy"
-			And I click Select button of "Consolidated retail sales" field
-			And I go to line in "List" table
-				| 'Number'          |
-				| '$$NumberCRS11$$' |
-			And I select current line in "List" table
-			And I click "Post" button
-			And I delete "$$CP11$$" variable
-			And I save the window as "$$CP11$$" 
-			And I click "Post and close" button
-		* Create BP (without fiscalization)
-			Given I open hyperlink "e1cib/list/Document.BankPayment"
-			And I go to line in "List" table
-				| 'Amount' |
-				| '200,00' |
-			And in the table "List" I click the button named "ListContextMenuCopy"
-			And I click Select button of "Consolidated retail sales" field
-			And I go to line in "List" table
-				| 'Number'          |
-				| '$$NumberCRS11$$' |
-			And I select current line in "List" table
-			And I click "Post" button
-			And I delete "$$BP11$$" variable
-			And I save the window as "$$BP11$$" 
-			And I click "Post and close" button
-		* Create MT (without fiscalization)
-			Given I open hyperlink "e1cib/list/Document.MoneyTransfer"
-			And I go to line in "List" table
-				| 'Send amount' |
-				| '11,00'       |
-			And in the table "List" I click the button named "ListContextMenuCopy"
-			And I click Select button of "Consolidated retail sales" field
-			And I go to line in "List" table
-				| 'Number'          |
-				| '$$NumberCRS11$$' |
-			And I select current line in "List" table
-			And I click "Post" button
-			And I delete "$$MT11$$" variable
-			And I save the window as "$$MT11$$" 
-			And I click "Post and close" button
-	* Select CRS
-		Given I open hyperlink "e1cib/list/Document.ConsolidatedRetailSales"
-		And I go to line in "List" table
-			| 'Number'          |
-			| '$$NumberCRS11$$' |
-		And I select current line in "List" table
-	* Check filling documents with fiscalization
-		And "Documents" table contains lines
-			| 'Document'                 | 'Company'      | 'Amount' | 'Branch'  | 'Currency' | 'Author' | 'Receipt' | 'Send' |
-			| 'Cash receipt*'            | 'Main Company' | '1 000'  | 'Shop 02' | 'TRY'      | 'CI'     | '1 000'   | ''     |
-			| 'Retail sales receipt*'    | 'Main Company' | '300'    | 'Shop 02' | 'TRY'      | 'CI'     | '300'     | ''     |
-			| 'Bank receipt*'            | 'Main Company' | '10'     | 'Shop 02' | 'TRY'      | 'CI'     | '10'      | ''     |
-			| 'Retail return receipt 1*' | 'Main Company' | '-100'   | 'Shop 02' | 'TRY'      | 'CI'     | ''        | '100'  |
-			| 'Bank payment 1*'          | 'Main Company' | '-200'   | 'Shop 02' | 'TRY'      | 'CI'     | ''        | '200'  |
-			| 'Cash payment 1*'          | 'Main Company' | '-200'   | 'Shop 02' | 'TRY'      | 'CI'     | ''        | '200'  |
-			| 'Retail return receipt 4*' | 'Main Company' | '-210'   | 'Shop 02' | 'TRY'      | 'CI'     | ''        | '210'  |
-			| 'Retail return receipt 5*' | 'Main Company' | '-118'   | 'Shop 02' | 'TRY'      | 'CI'     | ''        | '118'  |
-			| 'Retail return receipt 6*' | 'Main Company' | '-520'   | 'Shop 02' | 'TRY'      | 'CI'     | ''        | '520'  |
-			| 'Money transfer 13*'       | 'Main Company' | '1 000'  | ''        | 'TRY'      | 'CI'     | '1 000'   | ''     |
-		And "Documents" table contains lines
-			| 'Document'                                          |
-			| '$$MT11$$'                                          |
-			| '$$CR11$$'                                          |
-			| '$$CP11$$'                                          |
-			| '$$BP11$$'                                          |
-			| '$$BR11$$'                                          |
-	* Double click RSR
-		And I go to line in "Documents" table
-			| 'Amount' | 'Author' | 'Branch'  | 'Company'      | 'Currency' | 'Receipt' |
-			| '720'    | 'CI'     | 'Shop 02' | 'Main Company' | 'TRY'      | '720'     |
-		And I select current line in "Documents" table
-		Then system warning window does not appear
-		And I close all client application windows	
-				
-				
-				
-				

@@ -13,6 +13,9 @@ Var AmountFractionDigitsMaxCount; // Number
 &AtClient
 Var FormCanBeClosed; // Boolean
 
+&AtServer
+Var EnableRRNCode; // Boolean
+
 #EndRegion
 
 #Region FormEventHandlers
@@ -41,6 +44,7 @@ Procedure OnCreateAtServer(Cancel, StandardProcessing)
 
 	Items.Payment_ReturnPaymentByPaymentCard.Visible = isReturn;
 	Items.Payment_PayByPaymentCard.Visible = Not isReturn;
+	Items.Payment_CancelPaymentByPaymentCard.Visible = isReturn;
 
 	Items.Cashback.Visible = Not (ThisObject.IsAdvance And isReturn);
 	Items.Advance.Visible = ThisObject.IsAdvance And isReturn;
@@ -220,7 +224,7 @@ Procedure PaymentsOnChange(Item)
 
 	CalculatePaymentsAmountTotal();
 	FormatPaymentsAmountStringRows();
-
+	PaymentsOnActivateRow(Undefined);
 EndProcedure
 
 &AtClient
@@ -238,16 +242,19 @@ Procedure PaymentsOnActivateRow(Item)
 
 	Items.Payment_PayByPaymentCard.Enabled = Not CurrentData.PaymentDone;
 
-	If ReturnInTheSameConsolidateSales Then
-		Items.Payment_ReturnPaymentByPaymentCard.Enabled = False;
-	Else
+	If isReturn Then
 		Items.Payment_ReturnPaymentByPaymentCard.Enabled = Not CurrentData.PaymentDone;
+	Else
+		Items.Payment_ReturnPaymentByPaymentCard.Enabled = False;
 	EndIf;
-	If ReturnInTheSameConsolidateSales Then
+	
+	If ReturnInTheSameConsolidateSales AND Not IsBlankString(CurrentData.RRNCode) Then
 		Items.Payment_CancelPaymentByPaymentCard.Enabled = Not CurrentData.PaymentDone;
 	Else
-		Items.Payment_CancelPaymentByPaymentCard.Enabled = CurrentData.PaymentDone;
+		Items.Payment_CancelPaymentByPaymentCard.Enabled = False;
 	EndIf;
+
+	Items.Payment_RevertLastPayment.Enabled = Not IsBlankString(CurrentData.RRNCodeCurrentOperation);
 
 EndProcedure
 
@@ -797,6 +804,16 @@ EndProcedure
 #Region Acquiring
 
 &AtClient
+Async Procedure Payment_PayByPaymentCardManual(Command)
+	PaymentRow = Items.Payments.CurrentData;
+	If PaymentRow = Undefined Then
+		Return;
+	EndIf;
+	Await Payment_PayByPaymentCard(PaymentRow);
+	PaymentsOnActivateRow(Undefined);
+EndProcedure
+
+&AtClient
 Async Function Payment_PayByPaymentCard(PaymentRow)
 	PaymentSettings = EquipmentAcquiringAPIClient.PayByPaymentCardSettings();
 	PaymentSettings.In.Amount = PaymentRow.Amount;
@@ -806,6 +823,7 @@ Async Function Payment_PayByPaymentCard(PaymentRow)
 	PaymentRow.PaymentInfo = CommonFunctionsServer.SerializeJSON(PaymentSettings);
 	If Result Then
 		PaymentRow.RRNCode = PaymentSettings.Out.RRNCode;
+		PaymentRow.RRNCodeCurrentOperation = PaymentSettings.Out.RRNCode;
 		PaymentRow.PaymentDone = True;
 		PrintSlip(PaymentRow.Hardware, PaymentSettings);
 	Else
@@ -816,12 +834,12 @@ Async Function Payment_PayByPaymentCard(PaymentRow)
 EndFunction
 
 &AtClient
-Async Procedure Payment_PayByPaymentCardManual(Command)
+Async Procedure Payment_ReturnPaymentByPaymentCardManual(Command)
 	PaymentRow = Items.Payments.CurrentData;
 	If PaymentRow = Undefined Then
 		Return;
 	EndIf;
-	Await Payment_PayByPaymentCard(PaymentRow);
+	Await Payment_ReturnPaymentByPaymentCard(PaymentRow);
 	PaymentsOnActivateRow(Undefined);
 EndProcedure
 
@@ -838,6 +856,9 @@ Async Function Payment_ReturnPaymentByPaymentCard(PaymentRow)
 	If Result Then
 		PaymentRow.PaymentInfo = CommonFunctionsServer.SerializeJSON(PaymentSettings);
 		PaymentRow.PaymentDone = True;
+		PaymentRow.RRNCode = PaymentSettings.InOut.RRNCode;
+		PaymentRow.RRNCodeCurrentOperation = PaymentSettings.InOut.RRNCode;
+		
 		PrintSlip(PaymentRow.Hardware, PaymentSettings);
 	Else
 		CommonFunctionsClientServer.ShowUsersMessage(PaymentSettings.Info.Error);
@@ -846,12 +867,12 @@ Async Function Payment_ReturnPaymentByPaymentCard(PaymentRow)
 EndFunction
 
 &AtClient
-Async Procedure Payment_ReturnPaymentByPaymentCardManual(Command)
+Async Procedure Payment_CancelPaymentByPaymentCardManual(Command)
 	PaymentRow = Items.Payments.CurrentData;
 	If PaymentRow = Undefined Then
 		Return;
 	EndIf;
-	Await Payment_ReturnPaymentByPaymentCard(PaymentRow);
+	Await Payment_CancelPaymentByPaymentCard(PaymentRow);
 	PaymentsOnActivateRow(Undefined);
 EndProcedure
 
@@ -859,19 +880,9 @@ EndProcedure
 Async Function Payment_CancelPaymentByPaymentCard(PaymentRow)
 
 	PaymentSettings = EquipmentAcquiringAPIClient.CancelPaymentByPaymentCardSettings();
-    If PaymentRow.PaymentDone Then
-		PaymentInfo = CommonFunctionsServer.DeserializeJSON(PaymentRow.PaymentInfo); // Structure
-
-		PaymentSettings.In.Amount = PaymentInfo.In.Amount;
-		If isReturn Then
-			PaymentSettings.In.RRNCode = PaymentInfo.InOut.RRNCode; // String
-		Else
-			PaymentSettings.In.RRNCode = PaymentInfo.Out.RRNCode; // String
-		EndIf;
-	Else
-		PaymentSettings.In.Amount = PaymentRow.Amount;
-	   	PaymentSettings.In.RRNCode = PaymentRow.RRNCode; // String
-	EndIf;
+	PaymentSettings.In.Amount = PaymentRow.Amount;
+	PaymentSettings.In.RRNCode = PaymentRow.RRNCode; // String
+		
 	Result = Await EquipmentAcquiringAPIClient.CancelPaymentByPaymentCard(PaymentRow.Hardware, PaymentSettings);
 	If Result Then
 		If ReturnInTheSameConsolidateSales Then
@@ -891,14 +902,39 @@ Async Function Payment_CancelPaymentByPaymentCard(PaymentRow)
 EndFunction
 
 &AtClient
-Async Procedure Payment_CancelPaymentByPaymentCardManual(Command)
+Async Procedure Payment_RevertLastPaymentManual(Command)
 	PaymentRow = Items.Payments.CurrentData;
 	If PaymentRow = Undefined Then
 		Return;
 	EndIf;
-	Await Payment_CancelPaymentByPaymentCard(PaymentRow);
+	Await Payment_RevertLastPayment(PaymentRow);
 	PaymentsOnActivateRow(Undefined);
 EndProcedure
+
+&AtClient
+Async Function Payment_RevertLastPayment(PaymentRow)
+
+	PaymentSettings = EquipmentAcquiringAPIClient.CancelPaymentByPaymentCardSettings();
+
+	PaymentInfo = CommonFunctionsServer.DeserializeJSON(PaymentRow.PaymentInfo); // Structure
+
+	PaymentSettings.In.Amount = PaymentInfo.In.Amount;
+	PaymentSettings.In.RRNCode = PaymentRow.RRNCodeCurrentOperation; // String
+		
+	Result = Await EquipmentAcquiringAPIClient.CancelPaymentByPaymentCard(PaymentRow.Hardware, PaymentSettings);
+	If Result Then
+		PaymentRow.PaymentDone = False;
+		PaymentRow.RRNCodeCurrentOperation = "";
+	EndIf;
+	
+	If Not Result Then
+		CommonFunctionsClientServer.ShowUsersMessage(PaymentSettings.Info.Error);
+	EndIf;
+	
+	PrintSlip(PaymentRow.Hardware, PaymentSettings);
+
+	Return Result;
+EndFunction
 
 &AtClient
 Async Procedure PrintSlip(Hardware, PaymentSettings)
@@ -933,10 +969,12 @@ EndProcedure
 //  String - Get RRNCode
 &AtServer
 Function GetRRNCode(PaymentType)
-	Rows = RetailBasis.Payments.FindRows(New Structure("PaymentType", PaymentType));
-	For Each Row In Rows Do
-		Return Row.RRNCode;
-	EndDo;
+	If EnableRRNCode Then
+		Rows = RetailBasis.Payments.FindRows(New Structure("PaymentType", PaymentType));
+		For Each Row In Rows Do
+			Return Row.RRNCode;
+		EndDo;
+	EndIf;
 	Return "";
 EndFunction
 
@@ -964,3 +1002,4 @@ AmountFractionDigitsCount = 0;
 AmountDotIsActive = False;
 AmountFractionDigitsMaxCount = GetFractionDigitsMaxCount();
 FormCanBeClosed = False;
+EnableRRNCode = True;

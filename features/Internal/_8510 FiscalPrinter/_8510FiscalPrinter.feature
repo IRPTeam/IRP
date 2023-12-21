@@ -1604,8 +1604,8 @@ Scenario: _0850023 check return payment by card and cash (sales by card)
 			| '50,00'    | '⚪'              | 'Card 04'        | '$$RRN1$$'    |
 		And I activate "Payment type" field in "Payments" table
 		When I Check the steps for Exception
-			| 'And I click "Return" button'    |
-		And I click "Cancel" button
+			| 'And I click "Revert" button'    |
+		And I click "Return (in day)" button
 		Then "1C:Enterprise" window is opened
 		And I click "OK" button
 		And I click the button named "Enter"
@@ -1615,7 +1615,7 @@ Scenario: _0850023 check return payment by card and cash (sales by card)
 			| 'Amount' | 'Payment done' | 'Payment type' |
 			| '40,00'  | '⚪'            | 'Card 03'      |
 		And I activate "Payment type" field in "Payments" table
-		And I click "Cancel" button
+		And I click "Return (in day)" button
 		Then "1C:Enterprise" window is opened
 		And I click "OK" button
 		And I move to the next attribute		
@@ -1672,7 +1672,9 @@ Scenario: _0850024 return by card without basis document (without RRN)
 			| '⚪'              | 'Card 03'        | '200,00'   | ''           |
 		Then "Payment" window is opened
 		When I Check the steps for Exception
-			| 'And I click "Cancel" button'    |
+			| 'And I click "Revert" button'    |
+		When I Check the steps for Exception
+			| 'And I click "Return (in day)" button'    |
 		And I click "Return" button
 		Then "1C:Enterprise" window is opened
 		And I click "OK" button
@@ -1686,7 +1688,7 @@ Scenario: _0850024 return by card without basis document (without RRN)
 		And I move to "Payments" tab
 		And "Payments" table became equal
 			| '#'   | 'Amount'   | 'Commission'   | 'Payment type'   | 'Payment terminal'   | 'Postponed payment'   | 'Bank term'      | 'Account'        | 'Percent'   | 'RRN Code'    |
-			| '1'   | '200,00'   | ''             | 'Card 03'        | ''                   | 'No'                  | 'Bank term 03'   | 'POS Terminal'   | '1,00'      | ''            |
+			| '1'   | '200,00'   | ''             | 'Card 03'        | ''                   | 'No'                  | 'Bank term 03'   | 'POS Terminal'   | '1,00'      | '*'           |
 		And I click "Show hidden tables" button
 		Then "Edit hidden tables" window is opened
 		And I expand "ControlCodeStrings [1]" group
@@ -1740,6 +1742,10 @@ Scenario: _08500241 return by card without basis document (with RRN)
 		And I click the button named "Enter"
 		Then there are lines in TestClient message log
 			|'Not all payment done.'|
+		When I Check the steps for Exception
+			| 'And I click "Revert" button'    |
+		When I Check the steps for Exception
+			| 'And I click "Return (in day)" button'    |
 		And I go to line in "Payments" table
 			| 'Amount' | 'Payment done' | 'Payment type' |
 			| '111,00'  | '⚪'            | 'Card 03'      |
@@ -1757,7 +1763,7 @@ Scenario: _08500241 return by card without basis document (with RRN)
 		And I move to "Payments" tab
 		And "Payments" table became equal
 			| '#'   | 'Amount'   | 'Commission'   | 'Payment type'   | 'Payment terminal'   | 'Postponed payment'   | 'Bank term'      | 'Account'        | 'Percent'   | 'RRN Code'    |
-			| '1'   | '111,00'   | ''             | 'Card 03'        | ''                   | 'No'                  | 'Bank term 03'   | 'POS Terminal'   | '1,00'      | '23457'       |
+			| '1'   | '111,00'   | ''             | 'Card 03'        | ''                   | 'No'                  | 'Bank term 03'   | 'POS Terminal'   | '1,00'      | '*'           |
 		And I close all client application windows
 		And Delay 5
 		And I parsed the log of the fiscal emulator by the path '$$LogPathAcquiring$$' into the variable "ParsingResult1"
@@ -2938,7 +2944,7 @@ Scenario: _0260165 Return of a product paid for with a certificate
 		And I click "1" button
 		And I click "0" button
 		And I click "0" button
-		And I click "Cancel" button
+		And I click "Return (in day)" button
 		Then "1C:Enterprise" window is opened
 		And I click "OK" button
 		And I move to the next attribute
@@ -3285,6 +3291,810 @@ Scenario: _0260174 RSR and RRR for item with marking code, scan good code
 		And I check "$ParsingResult$" with "0" and method is "ProcessCheck"
 		And I check "$ParsingResult$" with "0" and data in "In.Parameter3" the same as "SalesReceiptXML27"
 
+Scenario: _0260175 check revert card payment for sales (POS)
+	And I close all client application windows
+	* Preparation 
+		If "Point of sales" window is opened Then
+			And I delete all lines of "ItemList" table
+		And In the command interface I select "Retail" "Point of sale"
+	* Add item
+		And I click "Search by barcode (F7)" button
+		And I input "57897909799" text in the field named "Barcode"
+		And I move to the next attribute
+		Then the form attribute named "ControlCodeStringType" became equal to "Marking code"
+		And I change "Control code string type" radio button value to "Good code"
+		And I click "Search by barcode" button
+		And I input "Q3VycmVudCByb3cgd2lsbCBkZWNvZGUgdG8gYmFzZTY8" text in the field named "Barcode"
+		And I move to the next attribute		
+		And I input "401,11" text in "Price" field of "ItemList" table
+		And I finish line editing in "ItemList" table
+	* Payment by card
+		And I click "Payment (+)" button
+		And I click "Card (*)" button
+		And I go to line in "BankPaymentTypeList" table
+			| 'Reference' |
+			| 'Card 03'   |
+		And I select current line in "BankPaymentTypeList" table
+		When I Check the steps for Exception
+			| 'And I click "Revert" button'    |
+		And I click "Pay" button
+		Then "1C:Enterprise" window is opened
+		And I click "OK" button
+	* Check log
+		And Delay 5
+		And I parsed the log of the fiscal emulator by the path '$$LogPathAcquiring$$' into the variable "ParsingResult1"
+		And I check "$ParsingResult1$" with "1" and method is "PayByPaymentCard"
+		And I check "$ParsingResult1$" with "1" and data in "Out.Parameter8" contains 'ОПЛАТА'
+		And I check "$ParsingResult1$" with "1" and data in "Out.Parameter8" contains '401.11'
+		When I Check the steps for Exception
+			| 'And I click "Pay" button'    |
+	* Revert payment
+		And I click "Revert" button
+		And I click "OK" button
+		And Delay 5
+		And I parsed the log of the fiscal emulator by the path '$$LogPathAcquiring$$' into the variable "ParsingResult1"
+		And I check "$ParsingResult1$" with "1" and method is "CancelPaymentByPaymentCard"
+		And I check "$ParsingResult1$" with "1" and data in "Out.Parameter8" contains 'ОТМЕНА ПЛАТЕЖА'
+		And I check "$ParsingResult1$" with "1" and data in "Out.Parameter8" contains '401.11'
+		When I Check the steps for Exception
+			| 'And I click "Revert" button'    |
+	* Try close receipt
+		And I click "OK" button
+		Then there are lines in TestClient message log
+			|'Not all payment done.'|
+	* Payment
+		And I click "Pay" button
+		And I click "OK" button
+		And I click "OK" button
+		And I wait that in "ItemList" table number of lines will be "равно" 0 for 5 seconds
+	* Check log
+		And Delay 5
+		And I parsed the log of the fiscal emulator by the path '$$LogPathAcquiring$$' into the variable "ParsingResult1"
+		And I check "$ParsingResult1$" with "1" and method is "PayByPaymentCard"
+		And I check "$ParsingResult1$" with "1" and data in "Out.Parameter8" contains 'ОПЛАТА'
+		And I check "$ParsingResult1$" with "1" and data in "Out.Parameter8" contains '401.11'
+		
+Scenario: _0260176 check revert card payment for return (POS)
+	And I close all client application windows
+	* Preparation 
+		If "Point of sales" window is opened Then
+			And I delete all lines of "ItemList" table
+		And In the command interface I select "Retail" "Point of sale"
+	* Add item
+		And I click the button named "Return"
+		And I click "Search by barcode (F7)" button
+		And I input "57897909799" text in the field named "Barcode"
+		And I move to the next attribute
+		Then the form attribute named "ControlCodeStringType" became equal to "Marking code"
+		And I change "Control code string type" radio button value to "Good code"
+		And I click "Search by barcode" button
+		And I input "Q3VycmVudCByb3cgd2lsbCBkZWNvZGUgdG8gYmFzZTY8" text in the field named "Barcode"
+		And I move to the next attribute		
+		And I input "401,11" text in "Price" field of "ItemList" table
+		And I finish line editing in "ItemList" table
+	* Payment by card
+		And I click "Payment Return" button
+		And I click "Card (*)" button
+		And I go to line in "BankPaymentTypeList" table
+			| 'Reference' |
+			| 'Card 03'   |
+		And I select current line in "BankPaymentTypeList" table
+		When I Check the steps for Exception
+			| 'And I click "Revert" button'    |
+		And I click "Return" button
+		Then "1C:Enterprise" window is opened
+		And I click "OK" button
+	* Check log
+		And Delay 5
+		And I parsed the log of the fiscal emulator by the path '$$LogPathAcquiring$$' into the variable "ParsingResult1"
+		And I check "$ParsingResult1$" with "1" and method is "ReturnPaymentByPaymentCard"
+		And I check "$ParsingResult1$" with "1" and data in "Out.Parameter8" contains 'ВОЗВРАТ'
+		And I check "$ParsingResult1$" with "1" and data in "Out.Parameter8" contains '401.11'
+		When I Check the steps for Exception
+			| 'And I click "Return" button'    |
+	* Revert payment
+		And I click "Revert" button
+		And I click "OK" button
+		And Delay 5
+		And I parsed the log of the fiscal emulator by the path '$$LogPathAcquiring$$' into the variable "ParsingResult1"
+		And I check "$ParsingResult1$" with "1" and method is "CancelPaymentByPaymentCard"
+		And I check "$ParsingResult1$" with "1" and data in "Out.Parameter8" contains 'ОТМЕНА ПЛАТЕЖА'
+		And I check "$ParsingResult1$" with "1" and data in "Out.Parameter8" contains '401.11'
+		When I Check the steps for Exception
+			| 'And I click "Revert" button'    |
+	* Try close receipt
+		And I click "OK" button
+		Then there are lines in TestClient message log
+			|'Not all payment done.'|
+	* Payment
+		And I click "Return" button
+		And I click "OK" button
+		And I click "OK" button
+		And I wait that in "ItemList" table number of lines will be "равно" 0 for 5 seconds
+	* Check log
+		And Delay 5
+		And I parsed the log of the fiscal emulator by the path '$$LogPathAcquiring$$' into the variable "ParsingResult1"
+		And I check "$ParsingResult1$" with "1" and method is "ReturnPaymentByPaymentCard"
+		And I check "$ParsingResult1$" with "1" and data in "Out.Parameter8" contains 'ВОЗВРАТ'
+		And I check "$ParsingResult1$" with "1" and data in "Out.Parameter8" contains '401.11'	
+
+
+Scenario: _0260152 close session
+	And I close all client application windows
+	* Open POS		
+		And In the command interface I select "Retail" "Point of sale"	
+	* Close session
+		And I click "Close session" button
+		And I set checkbox named "CashConfirm"
+		And I set checkbox named "TerminalConfirm"
+		And I set checkbox named "CashConfirm"
+		And I move to the next attribute		
+		And I click "Close session" button
+		And Delay 5
+	* Check fiscal log
+		And I parsed the log of the fiscal emulator by the path '$$LogPath$$' into the variable "ParsingResult"
+		And I check "$ParsingResult$" with "0" and method is "CloseShift"	
+				
+Scenario: _02601521 open and close session without sales
+	And I close all client application windows
+	* Open POS		
+		And In the command interface I select "Retail" "Point of sale"	
+	* Open and close session
+		And I click "Open session" button
+		And I click "Close session" button
+		And Delay 5
+		And I set checkbox named "CashConfirm"
+		And I set checkbox named "TerminalConfirm"
+		And I set checkbox named "CashConfirm"
+		And I move to the next attribute		
+		And I click "Close session" button
+	* Сheck that Money transfer is not created 
+		Given I open hyperlink "e1cib/list/Document.MoneyTransfer"
+		And "List" table does not contain lines
+			| 'Send amount' | 'Receive amount' |
+			| ''            | ''               |
+		And I close all client application windows
+		
+		
+
+Scenario: _0260153 check hardware parameter saving
+		And I close all client application windows
+		Given I open hyperlink "e1cib/list/Catalog.Hardware"
+		* Create hardware
+			And I click "Create" button
+			And I input "Test" text in the field named "Description"
+			And I select "Fiscal printer" exact value from "Types of Equipment" drop-down list
+			And I click Choice button of the field named "Driver"
+			And I go to line in "List" table
+				| 'Description'     |
+				| 'KKT_3004'        |
+			And I select current line in "List" table
+			And I expand "Additional info" group
+			And I input "Sale address" text in "Sale address" field
+			And I input "Sale location" text in "Sale location" field		
+			And I click "Save" button
+			And I move to "Driver settings" tab
+			And in the table "DriverParameter" I click "Reload settings" button
+			And I move to "Predefined settings" tab
+			And in the table "ConnectParameters" I click "Load settings" button
+			And "ConnectParameters" table became equal
+				| '#'    | 'Name'    | 'Value'     |
+				| '1'    | 'Show'    | 'Yes'       |
+		* Check parameter saving
+			And I activate field named "ConnectParametersValue" in "ConnectParameters" table
+			And I select current line in "ConnectParameters" table
+			And I go to line in "" table
+				| ''            |
+				| 'Boolean'     |
+			And I select current line in "" table
+			And I click choice button of the attribute named "ConnectParametersValue" in "ConnectParameters" table
+			And I select current line in "" table
+			And I select "No" exact value from the drop-down list named "ConnectParametersValue" in "ConnectParameters" table
+			And I activate field named "ConnectParametersName" in "ConnectParameters" table
+			And I finish line editing in "ConnectParameters" table
+			And I click "Save" button
+			And in the table "ConnectParameters" I click "Write settings" button
+			And I click "Save and close" button
+			And I go to line in "List" table
+				| 'Description'     |
+				| 'Test'            |
+			And I select current line in "List" table
+			And "ConnectParameters" table became equal
+				| '#'    | 'Name'    | 'Value'     |
+				| '1'    | 'Show'    | 'No'        |
+			And I close all client application windows
+				
+					
+Scenario: _0260160 check Get Last Error button
+	And I close all client application windows
+	* Open hardware
+		Given I open hyperlink "e1cib/list/Catalog.Hardware"
+		And I go to line in "List" table
+			| 'Description'    |
+			| 'Fiscal printer' |
+		And I select current line in "List" table
+	* Check button Get Last Error	
+		And I click "Get last error" button
+		Then there are lines in TestClient message log
+			|'Fiscal printer: '|
+		And I close all client application windows
+												
+
+
+Scenario: _0260180 check fiscal logs
+	And I close all client application windows
+	Given I open hyperlink "e1cib/list/InformationRegister.HardwareLog"
+	Then the number of "List" table lines is "равно" "734"	
+	* Check log records form
+		And I go to the first line in "List" table
+		And I select current line in "List" table
+		Then the form attribute named "User" became equal to "CI"
+		Then the form attribute named "Hardware" became equal to "Fiscal printer"
+	And I close all client application windows
+
+Scenario: _0260182 check print X report when session closed
+	And I close all client application windows
+	* Open POS		
+		And In the command interface I select "Retail" "Point of sale"
+	* Check X report
+		Then "Point of sales" window is opened
+		And I click "Print X Report" button
+	* Check fiscal log
+		And Delay 3
+		And I parsed the log of the fiscal emulator by the path '$$LogPath$$' into the variable "ParsingResult"
+		And I check "$ParsingResult$" with "0" and method is "PrintXReport"	
+	And I close all client application windows				 
+
+Scenario: _0260185 print settlement from the terminal
+	And I close all client application windows
+	* Open POS		
+		And In the command interface I select "Retail" "Point of sale"
+	* Check settlement
+		And I click "Settlement (without shift close)" button
+		And I click "Get settlement" button
+		And I click "Print last settlement" button
+	* Check log
+		And Delay 3
+		And I parsed the log of the fiscal emulator by the path '$$LogPath$$' into the variable "ParsingResult"
+		And I check "$ParsingResult$" with "0" and method is "PrintTextDocument"	
+		And I parsed the log of the fiscal emulator by the path '$$LogPathAcquiring$$' into the variable "ParsingResultAcquiring"	
+		And I check "$ParsingResultAcquiring$" with "1" and method is "Settlement"
+
+
+Scenario: _0260186 check show fiscal transaction from POS
+	And I close all client application windows
+	* Open POS		
+		And In the command interface I select "Retail" "Point of sale"
+	* Show transaction
+		And I click "Show transactions" button
+		Then the form attribute named "Period" became equal to "Today"
+		Then the form attribute named "TimeZone" became equal to "2"
+		Then the form attribute named "Hardware" became equal to "Acquiring terminal"
+		Then the form attribute named "FiscalPrinter" became equal to "Fiscal printer"
+		Then the number of "TransactionList" table lines is "больше" "0"
+	And I close all client application windows
+
+
+
+				
+Scenario: _0260190 check numbers and fiscal status in the RSR and RRR list forms
+	And I close all client application windows
+	* Open RSR list form
+		Given I open hyperlink "e1cib/list/Document.RetailSalesReceipt"
+		And "List" table contains lines 
+			| 'Σ'      | 'Company'      | 'Check number' | 'Status'  | 'Store'    | 'Consolidated retail sales' |
+			| '300,00' | 'Main Company' | '*'            | 'Printed' | 'Store 01' | '*'                         |
+			| '720,00' | 'Main Company' | '*'            | 'Printed' | 'Store 01' | '*'                         |
+			| '840,00' | 'Main Company' | '*'            | 'Printed' | 'Store 01' | '*'                         |
+			| '118,00' | 'Main Company' | '*'            | 'Printed' | 'Store 01' | '*'                         |
+			| '210,00' | 'Main Company' | '*'            | 'Printed' | 'Store 01' | '*'                         |
+			| '620,00' | 'Main Company' | '*'            | 'Printed' | 'Store 01' | '*'                         |
+			| '100,00' | 'Main Company' | '*'            | 'Printed' | 'Store 01' | '*'                         |
+			| '100,00' | 'Main Company' | '*'            | 'Printed' | 'Store 01' | '*'                         |
+			| '112,00' | 'Main Company' | '*'            | 'Printed' | 'Store 01' | '*'                         |
+			| '113,00' | 'Main Company' | '*'            | 'Printed' | 'Store 01' | '*'                         |
+			| '500,00' | 'Main Company' | '*'            | 'Printed' | 'Store 01' | '*'                         |
+			| '720,00' | 'Main Company' | '*'            | 'Printed' | 'Store 01' | '*'                         |
+			| '300,00' | 'Main Company' | '*'            | 'Printed' | 'Store 01' | '*'                         |
+	* Open RRR list form
+		Given I open hyperlink "e1cib/list/Document.RetailReturnReceipt"
+		And "List" table contains lines
+			| 'Partner'         | 'Amount' | 'Company'      | 'Check number' | 'Status'  | 'Legal name'              | 'Currency' | 'Store'    | 'Author' |
+			| 'Retail customer' | '100,00' | 'Main Company' | '*'            | 'Printed' | 'Company Retail customer' | 'TRY'      | 'Store 01' | 'CI'     |
+			| 'Retail customer' | '200,00' | 'Main Company' | '*'            | 'Printed' | 'Company Retail customer' | 'TRY'      | 'Store 01' | 'CI'     |
+			| 'Retail customer' | '111,00' | 'Main Company' | '*'            | 'Printed' | 'Company Retail customer' | 'TRY'      | 'Store 01' | 'CI'     |
+			| 'Retail customer' | '210,00' | 'Main Company' | '*'            | 'Printed' | 'Company Retail customer' | 'TRY'      | 'Store 01' | 'CI'     |
+			| 'Customer'        | '118,00' | 'Main Company' | '*'            | 'Printed' | 'Customer'                | 'TRY'      | 'Store 01' | 'CI'     |
+			| 'Retail customer' | '520,00' | 'Main Company' | '*'            | 'Printed' | 'Company Retail customer' | 'TRY'      | 'Store 01' | 'CI'     |
+			| 'Retail customer' | '543,00' | 'Main Company' | '*'            | 'Printed' | 'Company Retail customer' | 'TRY'      | 'Store 01' | 'CI'     |
+			| 'Retail customer' | '520,00' | 'Main Company' | '*'            | 'Printed' | 'Company Retail customer' | 'TRY'      | 'Store 01' | 'CI'     |
+			| 'Retail customer' | '112,00' | 'Main Company' | '*'            | 'Printed' | 'Company Retail customer' | 'TRY'      | 'Store 01' | 'CI'     |
+			| 'Retail customer' | '113,00' | 'Main Company' | '*'            | 'Printed' | 'Company Retail customer' | 'TRY'      | 'Store 01' | 'CI'     |
+			| 'Retail customer' | '720,00' | 'Main Company' | '*'            | 'Printed' | 'Company Retail customer' | 'TRY'      | 'Store 01' | 'CI'     |
+			| 'Retail customer' | '300,00' | 'Main Company' | '*'            | 'Printed' | 'Company Retail customer' | 'TRY'      | 'Store 01' | 'CI'     |
+		And I close all client application windows
+		
+				
+Scenario: _0260191 check session open and close from CRS
+	And I close all client application windows
+	* Create CRS
+		Given I open hyperlink "e1cib/list/Document.ConsolidatedRetailSales"
+		And I click the button named "FormCreate"
+		And I select from the drop-down list named "Company" by "Main Company" string
+		And I select from "Cash account" drop-down list by "Pos cash account 1" string
+		And I select from the drop-down list named "Status" by "new" string
+		And I input current date in "Opening date" field
+		And I select from "Fiscal printer" drop-down list by "fiscal" string
+		And I select from the drop-down list named "Branch" by "Shop 02" string
+		And I click the button named "FormWrite"	
+	* Try open session (CRS unpost)
+		And I click "Open session" button
+		Then "1C:Enterprise" window is opened
+		And I click the button named "OK"	
+		* Check log
+			And Delay 3
+			And I parsed the log of the fiscal emulator by the path '$$LogPath$$' into the variable "ParsingResult"
+			When I Check the steps for Exception
+			| 'And I check "$ParsingResult$" with "0" and method is "OpenShift"'    |
+	* Post CRS
+		And I click the button named "FormPost"
+	* Try Close session
+		And I click "Close session" button
+		Then there are lines in TestClient message log
+			|'Cash shift can only be closed for a document with the status "Open".'|
+		And I select from the drop-down list named "Status" by "open" string
+		And I click "Close session" button
+		Then there are lines in TestClient message log
+			|'Shift already closed.'|		
+		* Check log
+			And Delay 3
+			And I parsed the log of the fiscal emulator by the path '$$LogPath$$' into the variable "ParsingResult"
+			// And I check "$ParsingResult$" with "0" and data in "In.Parameter3" contains 'ShiftState="1"'
+	* Try open session (status open)
+		And I select from the drop-down list named "Status" by "open" string
+		And I click "Open session" button
+		Then there are lines in TestClient message log
+			|'Cash shift can only be opened for a document with the status "New".'|
+		* Check log
+			And Delay 3
+			And I parsed the log of the fiscal emulator by the path '$$LogPath$$' into the variable "ParsingResult"
+			And I check "$ParsingResult$" with "0" and method is "GetCurrentStatus"
+	* Try open session (status cancel)
+		And I select from the drop-down list named "Status" by "cancel" string
+		And I click "Open session" button
+		Then there are lines in TestClient message log
+			|'Cash shift can only be opened for a document with the status "New".'|
+		* Check log
+			And Delay 3
+			And I parsed the log of the fiscal emulator by the path '$$LogPath$$' into the variable "ParsingResult"
+			And I check "$ParsingResult$" with "0" and method is "GetCurrentStatus"
+	* Try open session (status close)
+		And I select from the drop-down list named "Status" by "close" string
+		And I click "Open session" button
+		Then there are lines in TestClient message log
+			|'Cash shift can only be opened for a document with the status "New".'|
+		* Check log
+			And Delay 3
+			And I parsed the log of the fiscal emulator by the path '$$LogPath$$' into the variable "ParsingResult"
+			And I check "$ParsingResult$" with "0" and method is "GetCurrentStatus"
+	* Try open session (CRS with deletion mark)
+		And I select from the drop-down list named "Status" by "new" string
+		And I click the button named "FormPost"
+		And I click "Mark for deletion / Unmark for deletion" button
+		Then "1C:Enterprise" window is opened
+		And I click "Yes" button
+		And I click "Open session" button
+		Then "1C:Enterprise" window is opened
+		And I click the button named "OK"	
+		* Check log
+			And Delay 3
+			And I parsed the log of the fiscal emulator by the path '$$LogPath$$' into the variable "ParsingResult"
+			And I check "$ParsingResult$" with "0" and method is "GetCurrentStatus"			
+	* Try open session (CRS without deletion mark, status new)
+		And I click "Mark for deletion / Unmark for deletion" button
+		Then "1C:Enterprise" window is opened
+		And I click "Yes" button
+		And I click the button named "FormPost"
+		And I select from the drop-down list named "Status" by "new" string
+		And I click "Open session" button	
+		And I click "Reread" button
+		Then the form attribute named "Status" became equal to "Open"
+	* Check log
+		And Delay 3
+		And I parsed the log of the fiscal emulator by the path '$$LogPath$$' into the variable "ParsingResult"
+		And I check "$ParsingResult$" with "0" and method is "OpenShift"			
+	* Close session
+		And I click "Close session" button	
+		And I set checkbox named "CashConfirm"
+		And I set checkbox named "TerminalConfirm"
+		And I set checkbox named "CashConfirm"
+		And I move to the next attribute
+		And I click "Close session" button
+	* Check log
+		And Delay 3
+		And I parsed the log of the fiscal emulator by the path '$$LogPath$$' into the variable "ParsingResult"
+		And I check "$ParsingResult$" with "0" and method is "CloseShift"
+	And I close all client application windows
+	
+// Scenario: _0260188 check of retrieving the previous consolidated sales receipt when opening a cash session
+// 	And I close all client application windows
+// 	* Create Consolidated retail sales with status New
+// 		Given I open hyperlink "e1cib/list/Document.ConsolidatedRetailSales"
+// 		And I click the button named "FormCreate"	
+// 		And I select from the drop-down list named "Company" by "Main Company" string
+// 		And I select from "Cash account" drop-down list by "Pos cash account 1" string
+// 		And I select "New" exact value from the drop-down list named "Status"
+// 		And I input current date in "Opening date" field
+// 		And I select "Fiscal printer" exact value from "Fiscal printer" drop-down list
+// 		And I move to "Other" tab
+// 		And I click Choice button of the field named "Branch"
+// 		And I go to line in "List" table
+// 			| 'Description' |
+// 			| 'Shop 01'     |
+// 		And I select current line in "List" table
+// 		And I click the button named "FormPost"
+// 		And I delete "$$NumberNumberCSR88$$" variable
+// 		And I save the value of "Number" field as "$$NumberCSR88$$"
+// 		And I click "Post and close" button
+// 		And I close all client application windows
+// 	* Try open cash session and check retrieving the previous consolidated sales
+// 		And In the command interface I select "Retail" "Point of sale"
+// 		And I click "Open session" button
+// 	* Check 
+// 		Given I open hyperlink "e1cib/list/Document.ConsolidatedRetailSales"
+// 		And "List" table contains lines
+// 			| 'Number'          | 'Status' |
+// 			| '$$NumberCSR88$$' | 'Open'   |
+		
+
+
+Scenario: _0260187 add one more Acquiring terminal and check open and close session
+	And I close all client application windows
+	* Create one more Acquiring terminal
+		Given I open hyperlink "e1cib/list/Catalog.Hardware"
+		And I go to line in "List" table
+			| 'Description'        | 'Equipment API module' | 'Types of Equipment' |
+			| 'Acquiring terminal' | 'Acquiring Common API' | 'Acquiring'          |
+		And in the table "List" I click the button named "ListContextMenuCopy"
+		And I input "Acquiring terminal 2" text in the field named "Description"
+		And I click "Save and close" button
+		And "List" table contains lines
+			| 'Description'          |
+			| 'Acquiring terminal 2' |
+	* Add one more Acquiring terminal to the workstation 1
+		Given I open hyperlink "e1cib/list/Catalog.Workstations"        
+		And I go to line in "List" table
+			| 'Description'    |
+			| 'Workstation 01' |
+		And I select current line in "List" table
+		And in the table "HardwareList" I click "Add" button
+		And I click choice button of "Hardware" attribute in "HardwareList" table
+		And I go to line in "List" table
+			| 'Description'          |
+			| 'Acquiring terminal 2' |
+		And I select current line in "List" table
+		And I set "Enable" checkbox in "HardwareList" table
+		And I finish line editing in "HardwareList" table
+		And I click "Save and close" button
+		And I wait "Workstation * (Workstation) *" window closing in 5 seconds
+	* Open session
+		And In the command interface I select "Retail" "Point of sale"
+		And I click "Open session" button
+	* Close session
+		And I click "Close session" button
+		And Delay 2
+		And I set checkbox named "CashConfirm"
+		And I set checkbox named "TerminalConfirm"
+		And I set checkbox named "CashConfirm"
+		And I move to the next attribute		
+		And I click "Close session" button
+	* Check log
+		Given I open hyperlink "e1cib/list/Catalog.Hardware"
+		And I go to line in "List" table
+			| 'Description'        |
+			| 'Acquiring terminal' |
+		And I go to line in "List" table and invert selection:
+			|"Description"|
+			| "Acquiring terminal 2" | 
+		And I click "Analyze log" button
+		And "TransactionList" table contains lines
+			| 'Period' | 'Hardware'             | 'Method'     | 'Result' |
+			| '*'      | 'Acquiring terminal'   | 'Settlement' | 'Yes'    |
+			| '*'      | 'Acquiring terminal 2' | 'Settlement' | 'Yes'    |
+			| '*'      | 'Acquiring terminal'   | 'Settlement' | 'Yes'    |
+			| '*'      | 'Acquiring terminal 2' | 'Settlement' | 'Yes'    |
+	And I close all client application windows
+
+
+Scenario: _0260189 print X report from CRS
+	And I close all client application windows
+	* Create CRS and open session
+		Given I open hyperlink "e1cib/list/Document.ConsolidatedRetailSales"
+		And I click the button named "FormCreate"
+		And I select from the drop-down list named "Company" by "Main Company" string
+		And I select from "Cash account" drop-down list by "Pos cash account 1" string
+		And I select from the drop-down list named "Status" by "new" string
+		And I input current date in "Opening date" field
+		And I select from "Fiscal printer" drop-down list by "fiscal" string
+		And I select from the drop-down list named "Branch" by "Shop 02" string
+		And I click the button named "FormPost"
+		And I click "Open session" button
+	* Print X report
+		And I click "X report" button
+	* Check log
+		And Delay 3
+		And I parsed the log of the fiscal emulator by the path '$$LogPath$$' into the variable "ParsingResult"
+		And I check "$ParsingResult$" with "0" and method is "PrintXReport"	
+	* Print X report
+		And I click "X report" button
+	* Check log
+		And Delay 3
+		And I parsed the log of the fiscal emulator by the path '$$LogPath$$' into the variable "ParsingResult"
+		And I check "$ParsingResult$" with "0" and method is "PrintXReport"	
+		And I check "$ParsingResult$" with "1" and method is "PrintXReport"
+	* Close session and check print X report
+		And I click "Close session" button
+		And Delay 2
+		And I set checkbox named "CashConfirm"
+		And I set checkbox named "TerminalConfirm"
+		And I set checkbox named "CashConfirm"
+		And I move to the next attribute		
+		And I click "Close session" button
+		And I click "X report" button
+	* Check log
+		And Delay 3
+		And I parsed the log of the fiscal emulator by the path '$$LogPath$$' into the variable "ParsingResult"
+		And I check "$ParsingResult$" with "0" and method is "PrintXReport"	
+	And I close all client application windows
+	
+
+Scenario: _0260190 check reconnect fiscal printer from payment form
+	And I close all client application windows
+	* Open POS
+		And In the command interface I select "Retail" "Point of sale"	
+		And I click "Open session" button
+	* Add items and open payment form
+		And I click "Search by barcode (F7)" button
+		And I input "2202283705" text in the field named "Barcode"
+		And I move to the next attribute
+	* Payment
+		And I click "Payment (+)" button
+		Then "Payment" window is opened
+	* Reconnect fiscal printer
+		Then "Payment" window is opened
+		And I click "Reconnect fiscal printer" button
+		Then there are lines in TestClient message log
+			|'Done'|
+		Given I open hyperlink "e1cib/list/InformationRegister.HardwareLog"
+		And I go to the last line in "List" table
+		And the current line of "List" table is equal to
+			| 'Method' |
+			| 'Open' |
+		And I go to the previous line in "List" table
+		And the current line of "List" table is equal to
+			| 'Method' |
+			| 'Open' |
+		And I go to the previous line in "List" table
+		And the current line of "List" table is equal to
+			| 'Method' |
+			| 'SetParameter' |
+		And I go to the previous line in "List" table
+		And the current line of "List" table is equal to
+			| 'Method' |
+			| 'SetParameter' |
+		And I go to the previous line in "List" table
+		And the current line of "List" table is equal to
+			| 'Method' |
+			| 'Close' |
+		And I go to the previous line in "List" table
+		And the current line of "List" table is equal to
+			| 'Method' |
+			| 'Close' |
+		And I close current window
+		And I close "Payment" window
+		And I click "Clear current receipt" button
+
+Scenario: _0260193 check timeout
+	And I close all client application windows
+	* Add timeout
+		Given I open hyperlink "e1cib/list/Catalog.Hardware"		
+		And I go to line in "List" table
+			| 'Description'    |
+			| 'Fiscal printer' |
+		And I select current line in "List" table
+		And I click Open button of the field named "Driver"
+		And I input "5" text in "Sleep after (sec)" field
+		And I click "Save and close" button
+		And I click "Save" button
+		And I click the button named "Disconnect"
+		And I click the button named "Connect"
+		And I click the button named "UpdateStatus"
+		And I save the value of the field named "CommandResult" as "CommandResult1"
+		And Delay 7
+	* Create RSR
+		And I close all client application windows
+		And In the command interface I select "Retail" "Point of sale"		
+		And I click "Search by barcode (F7)" button
+		And I input "2202283705" text in the field named "Barcode"
+		And I move to the next attribute	
+		And I click "Payment (+)" button
+		And I click "Cash (/)" button
+		And I click "OK" button	
+	* Check info about timeout in the fiscal printer
+		Given I open hyperlink "e1cib/list/Catalog.Hardware"		
+		And I go to line in "List" table
+			| 'Description'    |
+			| 'Fiscal printer' |
+		And I select current line in "List" table
+		And I click the button named "UpdateStatus"
+		And I save the value of the field named "CommandResult" as "CommandResult2"
+		And 1C:Enterprise language expression "not $CommandResult1$ = $CommandResult2$" is true
+
+Scenario: _0260195 check consignor from SLN
+	And I close all client application windows
+	* Open POS
+		And In the command interface I select "Retail" "Point of sale"	
+	* Add items and open payment form
+		And I click "Search by barcode (F7)" button
+		And I input "0909088998998898789" text in the field named "Barcode"
+		And I move to the next attribute
+		And I click "Search by barcode (F7)" button
+		And I input "0909088998998898790" text in the field named "Barcode"
+		And I move to the next attribute
+		And I click "Search by barcode (F7)" button
+		And I input "0909088998998898791" text in the field named "Barcode"
+		And I move to the next attribute
+		And for each line of "ItemList" table I do
+			And I input "100,00" text in "Price" field of "ItemList" table
+	* Payment
+		And I click "Payment (+)" button
+		And I click "Cash (/)" button
+		And I click "OK" button
+	* Check 
+		And Delay 5
+		And I parsed the log of the fiscal emulator by the path '$$LogPath$$' into the variable "ParsingResult"
+		And I check "$ParsingResult$" with "0" and method is "ProcessCheck"
+		And I check "$ParsingResult$" with "0" and data in "In.Parameter3" the same as "SalesReceiptXML21"
+			
+Scenario: _0260200 click reconect hardware without fiscal printer
+	And I close all client application windows
+	* Select Workstation 02
+		Given I open hyperlink "e1cib/list/Catalog.Workstations"
+		And I go to line in "List" table
+			| 'Description'       |
+			| 'Workstation 02'    |	
+		And I click "Set current workstation" button
+	* Open POS
+		And In the command interface I select "Retail" "Point of sale"
+		And I click "Open session" button
+		And I expand a line in "ItemsPickup" table
+			| 'Item'          |
+			| '(10004) Boots' |
+		And I go to line in "ItemsPickup" table
+			| 'Item'                   |
+			| '(10004) Boots, 37/18SD' |
+		And I select current line in "ItemsPickup" table
+		And I click "Payment (+)" button
+		Then "Payment" window is opened
+	* Check button reconnect fiscal printer
+		And I click "Reconnect fiscal printer" button
+		Then there are lines in TestClient message log
+			|'Hardware not found'|
+		And I close "Payment" window
+		And I click "Clear current receipt" button		
+	And I close all client application windows
+
+Scenario: _0260210 on double click in CRS
+	And I close all client application windows
+	* Preparation
+		* Create CR (without fiscalization)
+			Given I open hyperlink "e1cib/list/Document.CashReceipt"
+			And I go to line in "List" table
+				| 'Amount'   |
+				| '1 000,00' |	
+			And in the table "List" I click the button named "ListContextMenuCopy"
+			And I click Select button of "Consolidated retail sales" field
+			And I go to line in "List" table
+				| 'Number'          |
+				| '$$NumberCRS11$$' |
+			And I select current line in "List" table
+			And I click "Post" button
+			And I delete "$$CR11$$" variable
+			And I save the window as "$$CR11$$" 
+			And I click "Post and close" button
+		* Create BR (without fiscalization)
+			Given I open hyperlink "e1cib/list/Document.BankReceipt"
+			And I go to line in "List" table
+				| 'Amount' |
+				| '10,00'  |
+			And in the table "List" I click the button named "ListContextMenuCopy"
+			And I click Select button of "Consolidated retail sales" field
+			And I go to line in "List" table
+				| 'Number'          |
+				| '$$NumberCRS11$$' |
+			And I select current line in "List" table
+			And I click "Post" button
+			And I delete "$$BR11$$" variable
+			And I save the window as "$$BR11$$" 
+			And I click "Post and close" button	
+		* Create CP (without fiscalization)
+			Given I open hyperlink "e1cib/list/Document.CashPayment"
+			And I go to line in "List" table
+				| 'Amount' |
+				| '200,00' |	
+			And in the table "List" I click the button named "ListContextMenuCopy"
+			And I click Select button of "Consolidated retail sales" field
+			And I go to line in "List" table
+				| 'Number'          |
+				| '$$NumberCRS11$$' |
+			And I select current line in "List" table
+			And I click "Post" button
+			And I delete "$$CP11$$" variable
+			And I save the window as "$$CP11$$" 
+			And I click "Post and close" button
+		* Create BP (without fiscalization)
+			Given I open hyperlink "e1cib/list/Document.BankPayment"
+			And I go to line in "List" table
+				| 'Amount' |
+				| '200,00' |
+			And in the table "List" I click the button named "ListContextMenuCopy"
+			And I click Select button of "Consolidated retail sales" field
+			And I go to line in "List" table
+				| 'Number'          |
+				| '$$NumberCRS11$$' |
+			And I select current line in "List" table
+			And I click "Post" button
+			And I delete "$$BP11$$" variable
+			And I save the window as "$$BP11$$" 
+			And I click "Post and close" button
+		* Create MT (without fiscalization)
+			Given I open hyperlink "e1cib/list/Document.MoneyTransfer"
+			And I go to line in "List" table
+				| 'Send amount' |
+				| '11,00'       |
+			And in the table "List" I click the button named "ListContextMenuCopy"
+			And I click Select button of "Consolidated retail sales" field
+			And I go to line in "List" table
+				| 'Number'          |
+				| '$$NumberCRS11$$' |
+			And I select current line in "List" table
+			And I click "Post" button
+			And I delete "$$MT11$$" variable
+			And I save the window as "$$MT11$$" 
+			And I click "Post and close" button
+	* Select CRS
+		Given I open hyperlink "e1cib/list/Document.ConsolidatedRetailSales"
+		And I go to line in "List" table
+			| 'Number'          |
+			| '$$NumberCRS11$$' |
+		And I select current line in "List" table
+	* Check filling documents with fiscalization
+		And "Documents" table contains lines
+			| 'Document'                 | 'Company'      | 'Amount' | 'Branch'  | 'Currency' | 'Author' | 'Receipt' | 'Send' |
+			| 'Cash receipt*'            | 'Main Company' | '1 000'  | 'Shop 02' | 'TRY'      | 'CI'     | '1 000'   | ''     |
+			| 'Retail sales receipt*'    | 'Main Company' | '300'    | 'Shop 02' | 'TRY'      | 'CI'     | '300'     | ''     |
+			| 'Bank receipt*'            | 'Main Company' | '10'     | 'Shop 02' | 'TRY'      | 'CI'     | '10'      | ''     |
+			| 'Retail return receipt 1*' | 'Main Company' | '-100'   | 'Shop 02' | 'TRY'      | 'CI'     | ''        | '100'  |
+			| 'Bank payment 1*'          | 'Main Company' | '-200'   | 'Shop 02' | 'TRY'      | 'CI'     | ''        | '200'  |
+			| 'Cash payment 1*'          | 'Main Company' | '-200'   | 'Shop 02' | 'TRY'      | 'CI'     | ''        | '200'  |
+			| 'Retail return receipt 4*' | 'Main Company' | '-210'   | 'Shop 02' | 'TRY'      | 'CI'     | ''        | '210'  |
+			| 'Retail return receipt 5*' | 'Main Company' | '-118'   | 'Shop 02' | 'TRY'      | 'CI'     | ''        | '118'  |
+			| 'Retail return receipt 6*' | 'Main Company' | '-520'   | 'Shop 02' | 'TRY'      | 'CI'     | ''        | '520'  |
+			| 'Money transfer 13*'       | 'Main Company' | '1 000'  | ''        | 'TRY'      | 'CI'     | '1 000'   | ''     |
+		And "Documents" table contains lines
+			| 'Document'                                          |
+			| '$$MT11$$'                                          |
+			| '$$CR11$$'                                          |
+			| '$$CP11$$'                                          |
+			| '$$BP11$$'                                          |
+			| '$$BR11$$'                                          |
+	* Double click RSR
+		And I go to line in "Documents" table
+			| 'Amount' | 'Author' | 'Branch'  | 'Company'      | 'Currency' | 'Receipt' |
+			| '720'    | 'CI'     | 'Shop 02' | 'Main Company' | 'TRY'      | '720'     |
+		And I select current line in "Documents" table
+		Then system warning window does not appear
+		And I close all client application windows	
 
 Scenario: _02602102 Retail receipt correction for RSR (cash, VAT rate correction)
 	And I close all client application windows

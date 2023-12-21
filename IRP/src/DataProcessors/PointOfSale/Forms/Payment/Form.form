@@ -836,6 +836,38 @@
               <representationInContextMenu>Auto</representationInContextMenu>
               <shapeRepresentation>WhenActive</shapeRepresentation>
             </items>
+            <items xsi:type="form:Button">
+              <name>Payment_RevertLastPayment</name>
+              <id>318</id>
+              <visible>true</visible>
+              <enabled>true</enabled>
+              <userVisible>
+                <common>true</common>
+              </userVisible>
+              <extendedTooltip>
+                <name>Payment_RevertLastPaymentExtendedTooltip</name>
+                <id>319</id>
+                <visible>true</visible>
+                <enabled>true</enabled>
+                <userVisible>
+                  <common>true</common>
+                </userVisible>
+                <type>Label</type>
+                <autoMaxWidth>true</autoMaxWidth>
+                <autoMaxHeight>true</autoMaxHeight>
+                <extInfo xsi:type="form:LabelDecorationExtInfo">
+                  <horizontalAlign>Left</horizontalAlign>
+                </extInfo>
+              </extendedTooltip>
+              <type>UsualButton</type>
+              <commandName>Form.Command.Payment_RevertLastPayment</commandName>
+              <representation>Auto</representation>
+              <autoMaxWidth>true</autoMaxWidth>
+              <autoMaxHeight>true</autoMaxHeight>
+              <placementArea>UserCmds</placementArea>
+              <representationInContextMenu>Auto</representationInContextMenu>
+              <shapeRepresentation>None</shapeRepresentation>
+            </items>
             <visible>true</visible>
             <enabled>true</enabled>
             <userVisible>
@@ -3442,6 +3474,26 @@
         <common>true</common>
       </edit>
     </columns>
+    <columns>
+      <name>RRNCodeCurrentOperation</name>
+      <title>
+        <key>en</key>
+        <value>RRNCode current operation</value>
+      </title>
+      <id>65</id>
+      <valueType>
+        <types>String</types>
+        <stringQualifiers>
+          <length>100</length>
+        </stringQualifiers>
+      </valueType>
+      <view>
+        <common>true</common>
+      </view>
+      <edit>
+        <common>true</common>
+      </edit>
+    </columns>
   </attributes>
   <attributes>
     <name>PaymentsAmountTotal</name>
@@ -4600,7 +4652,7 @@ WHERE
     <name>Payment_CancelPaymentByPaymentCard</name>
     <title>
       <key>en</key>
-      <value>Cancel</value>
+      <value>Return (in day)</value>
     </title>
     <id>29</id>
     <use>
@@ -4706,6 +4758,27 @@ barcode (F7)</value>
         <name>ActivateOKButton</name>
       </handler>
     </action>
+    <currentRowUse>Auto</currentRowUse>
+  </formCommands>
+  <formCommands>
+    <name>Payment_RevertLastPayment</name>
+    <title>
+      <key>en</key>
+      <value>Revert</value>
+    </title>
+    <id>37</id>
+    <use>
+      <common>true</common>
+    </use>
+    <picture xsi:type="core:PictureRef">
+      <picture>CommonPicture.Payment_EmergencyReversal</picture>
+    </picture>
+    <action xsi:type="form:FormCommandHandlerContainer">
+      <handler>
+        <name>Payment_RevertLastPaymentManual</name>
+      </handler>
+    </action>
+    <representation>TextPicture</representation>
     <currentRowUse>Auto</currentRowUse>
   </formCommands>
   <parameters>

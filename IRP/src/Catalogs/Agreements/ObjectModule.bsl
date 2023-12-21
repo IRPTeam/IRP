@@ -65,6 +65,7 @@ Procedure FillByPartner()
 			Type = Enums.AgreementTypes.EmptyRef();
 		EndIf;
 	EndIf;
+	ThisObject.LegalName = DocumentsServer.GetLegalNameByPartner(ThisObject.Partner, ThisObject.LegalName);
 EndProcedure
 
 Procedure FillCheckProcessing(Cancel, CheckedAttributes)

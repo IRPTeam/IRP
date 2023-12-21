@@ -1236,11 +1236,6 @@
       </type>
       <minValue xsi:type="core:UndefinedValue"/>
       <maxValue xsi:type="core:UndefinedValue"/>
-      <choiceParameterLinks>
-        <name>Filter.BankTerm</name>
-        <changeMode>DontChange</changeMode>
-        <field>Document.RetailSalesReceipt.TabularSection.Payments.Attribute.BankTerm</field>
-      </choiceParameterLinks>
       <dataHistory>Use</dataHistory>
       <fullTextSearch>Use</fullTextSearch>
     </attributes>

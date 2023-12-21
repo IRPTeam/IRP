@@ -21,3 +21,7 @@ Procedure Filling(FillingData, FillingText, StandardProcessing)
 		FillPropertyValues(ThisObject, FillingData);
 	EndIf;
 EndProcedure
+
+Procedure FillCheckProcessing(Cancel, CheckedAttributes)
+	CommonFunctionsServer.CheckUniqueDescriptions(Cancel, ThisObject);
+EndProcedure

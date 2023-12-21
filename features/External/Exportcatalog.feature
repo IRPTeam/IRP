@@ -64,12 +64,7 @@ Scenario: Create catalog Users and AccessProfiles objects (LimitedAccess)
 		| 'e1cib/data/Catalog.AccessProfiles?ref=b7a0d8de1a1c04c611ee1a4d84e42191' | 'TemplateInformationRegisters'       | 'IRP'           |
 		| 'e1cib/data/Catalog.AccessProfiles?ref=b7a0d8de1a1c04c611ee1a4d84e42191' | 'UseAllFunctionsMode'                | 'IRP'           |
 		| 'e1cib/data/Catalog.AccessProfiles?ref=b7a0d8de1a1c04c611ee1a4d84e42191' | 'TemplateChartOfCharacteristicTypes' | 'IRP'           |
-		| 'e1cib/data/Catalog.AccessProfiles?ref=b7a0d8de1a1c04c611ee1a4d84e42191' | 'Document_EmployeeHiring'            | 'IRP'           |
-		| 'e1cib/data/Catalog.AccessProfiles?ref=b7a0d8de1a1c04c611ee1a4d84e42191' | 'Document_EmployeeTransfer'          | 'IRP'           |
-		| 'e1cib/data/Catalog.AccessProfiles?ref=b7a0d8de1a1c04c611ee1a4d84e42191' | 'Document_EmployeeFiring'            | 'IRP'           |
-		| 'e1cib/data/Catalog.AccessProfiles?ref=b7a0d8de1a1c04c611ee1a4d84e42191' | 'Document_EmployeeVacation'          | 'IRP'           |
-		| 'e1cib/data/Catalog.AccessProfiles?ref=b7a0d8de1a1c04c611ee1a4d84e42191' | 'Document_EmployeeSickLeave'         | 'IRP'           |
-
+		
 
 	Given I open hyperlink "e1cib/list/Catalog.Users"	
 	If "List" table does not contain lines Then

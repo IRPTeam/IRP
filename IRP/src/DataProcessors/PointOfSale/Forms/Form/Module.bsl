@@ -1062,6 +1062,10 @@ Async Procedure PaymentFormClose(Result, AdditionalData) Export
 	Result.PaymentForm = Undefined;
 
 	TransactionResult = WriteTransaction(Result);
+	If TransactionResult.Refs.Count() = 0 Then
+		PaymentForm.Items.Enter.Enabled = True;
+		Return;
+	EndIf;
 	
 	ResultPrint = True;
 	For Each DocRef In TransactionResult.Refs Do
@@ -1380,7 +1384,11 @@ Function WriteTransaction(PaymentResult)
 		ObjectValue.PaymentMethod = PaymentResult.ReceiptPaymentMethod;
 		DPPointOfSaleServer.BeforePostingDocument(ObjectValue);
 
-		ObjectValue.Write(DocumentWriteMode.Posting);
+		Try
+			ObjectValue.Write(DocumentWriteMode.Posting);
+		Except
+			Return Result;
+		EndTry;
 
 		DocRef = ObjectValue.Ref;
 		DPPointOfSaleServer.AfterPostingDocument(DocRef);

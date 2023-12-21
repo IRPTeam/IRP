@@ -27,3 +27,6 @@ Procedure BeforeDelete(Cancel)
 	EndIf;
 EndProcedure
 
+Procedure FillCheckProcessing(Cancel, CheckedAttributes)
+	CommonFunctionsServer.CheckUniqueDescriptions(Cancel, ThisObject);
+EndProcedure

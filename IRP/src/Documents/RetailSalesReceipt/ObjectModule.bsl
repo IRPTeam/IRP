@@ -3,6 +3,15 @@ Procedure BeforeWrite(Cancel, WriteMode, PostingMode)
 		Return;
 	EndIf;
 
+	If Not Ref.IsEmpty() Then
+		PrintInfo = EquipmentFiscalPrinterServer.GetStatusData(Ref);
+		If PrintInfo.IsPrinted And DeletionMark Then
+			Cancel = True;
+			CommonFunctionsClientServer.ShowUsersMessage(
+				StrTemplate(R().POS_ERROR_NoDeletingPrintedReceipt, Ref));
+		EndIf; 
+	EndIf;
+
 	If ThisObject.StatusType = Enums.RetailReceiptStatusTypes.Completed Then
 		Payments_Amount = ThisObject.Payments.Total("Amount");
 		ItemList_Amount = ThisObject.ItemList.Total("TotalAmount");
@@ -70,6 +79,13 @@ Procedure BeforeDelete(Cancel)
 	If DataExchange.Load Then
 		Return;
 	EndIf;
+	
+	PrintInfo = EquipmentFiscalPrinterServer.GetStatusData(Ref);
+	If PrintInfo.IsPrinted Then
+		Cancel = True;
+		CommonFunctionsClientServer.ShowUsersMessage(
+			StrTemplate(R().POS_ERROR_NoDeletingPrintedReceipt, Ref));
+	EndIf; 
 EndProcedure
 
 Procedure Posting(Cancel, PostingMode)

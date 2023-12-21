@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<mdclass:CommonAttribute xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:core="http://g5.1c.ru/v8/dt/mcore" xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="95e1dea9-ce13-4aa5-8df6-a67fb0588ec5">
-  <name>Author</name>
+<mdclass:CommonAttribute xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:core="http://g5.1c.ru/v8/dt/mcore" xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="842bca3d-0ea9-4f31-ab0e-77e743eab369">
+  <name>Editor</name>
   <synonym>
     <key>en</key>
-    <value>Author</value>
+    <value>Editor</value>
   </synonym>
   <type>
     <types>CatalogRef.Users</types>

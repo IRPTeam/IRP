@@ -1,12 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<mdclass:CommonAttribute xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:core="http://g5.1c.ru/v8/dt/mcore" xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="95e1dea9-ce13-4aa5-8df6-a67fb0588ec5">
-  <name>Author</name>
+<mdclass:CommonAttribute xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:core="http://g5.1c.ru/v8/dt/mcore" xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="55438a72-442d-4abb-8ea5-fe813a237651">
+  <name>CreateDate</name>
   <synonym>
     <key>en</key>
-    <value>Author</value>
+    <value>Create date</value>
   </synonym>
   <type>
-    <types>CatalogRef.Users</types>
+    <types>Date</types>
+    <dateQualifiers/>
   </type>
   <minValue xsi:type="core:UndefinedValue"/>
   <maxValue xsi:type="core:UndefinedValue"/>

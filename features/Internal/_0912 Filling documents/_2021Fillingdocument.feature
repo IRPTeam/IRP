@@ -3710,7 +3710,7 @@ Scenario: _0154116 check filling in and refilling Cash expence
 			And "CurrenciesTable" table became equal
 				| 'Movement type'         | 'Type'         | 'To'     | 'From'    | 'Multiplicity'    | 'Rate'      | 'Amount'     |
 				| 'Local currency'        | 'Legal'        | 'TRY'    | 'TRY'     | '1'               | '1'         | '236'        |
-				| 'Reporting currency'    | 'Reporting'    | 'USD'    | 'TRY'     | '1'               | '0,211900'    | '50,00'      |
+				| 'Reporting currency'    | 'Reporting'    | 'USD'    | 'TRY'     | '1'               | '0,211864'  | '50,00'      |
 			And I close current window	
 	* Add one more line with different cureency
 		And I click Select button of "Account" field

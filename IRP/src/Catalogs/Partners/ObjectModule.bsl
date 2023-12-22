@@ -29,4 +29,25 @@ EndProcedure
 
 Procedure FillCheckProcessing(Cancel, CheckedAttributes)
 	CommonFunctionsServer.CheckUniqueDescriptions(Cancel, ThisObject);
+	
+	ArrayOfPartnerTypes = New Array();
+	ArrayOfPartnerTypes.Add("Customer");
+	ArrayOfPartnerTypes.Add("Vendor");
+	ArrayOfPartnerTypes.Add("Employee");
+	ArrayOfPartnerTypes.Add("Consignor");
+	ArrayOfPartnerTypes.Add("TradeAgent");
+	ArrayOfPartnerTypes.Add("Other");
+	
+	For Each PartnerType In ArrayOfPartnerTypes Do
+		AllIsFalse = True;
+		If ThisObject[PartnerType] Then
+			AllIsFalse = False;
+			Break;
+		EndIf;
+	EndDo;
+	
+	If AllIsFalse Then
+		Cancel = True;
+		CommonFunctionsClientServer.ShowUsersMessage(R().Error_140, ArrayOfPartnerTypes[0], ThisObject);
+	EndIf;
 EndProcedure

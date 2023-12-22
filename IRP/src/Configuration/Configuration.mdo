@@ -674,6 +674,7 @@
   <eventSubscriptions>EventSubscription.BeforeWrite_CheckFillingRowKey</eventSubscriptions>
   <eventSubscriptions>EventSubscription.BeforeWrite_Catalogs_CommonDataFilling</eventSubscriptions>
   <eventSubscriptions>EventSubscription.BeforeWrite_Documents_CommonDataFilling</eventSubscriptions>
+  <eventSubscriptions>EventSubscription.Filling_CatalogsWithDefaultData</eventSubscriptions>
   <scheduledJobs>ScheduledJob.AddExternalFunctionsToJobQueue</scheduledJobs>
   <scheduledJobs>ScheduledJob.AreaUpdate</scheduledJobs>
   <scheduledJobs>ScheduledJob.ExportData</scheduledJobs>

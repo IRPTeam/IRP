@@ -14,7 +14,6 @@
     <key>en</key>
     <value>T9051 Accounting ext dimensions</value>
   </synonym>
-  <useStandardCommands>true</useStandardCommands>
   <editType>InDialog</editType>
   <dataLockControlMode>Managed</dataLockControlMode>
   <dimensions uuid="c5ed342b-b856-4b42-a710-f4ca4d89a3fe">
@@ -42,6 +41,7 @@
     <fullTextSearch>Use</fullTextSearch>
     <dataHistory>Use</dataHistory>
     <fillValue xsi:type="core:UndefinedValue"/>
+    <master>true</master>
     <mainFilter>true</mainFilter>
   </dimensions>
   <dimensions uuid="3d4cfdc0-45d9-44fb-b562-f90319e0f9d1">

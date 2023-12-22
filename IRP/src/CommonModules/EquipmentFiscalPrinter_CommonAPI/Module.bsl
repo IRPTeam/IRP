@@ -797,8 +797,6 @@ Function RequestXML_ToXML(RequestKMSettings)
 	XMLWriter.WriteAttribute("GUID" , ToXMLString(RequestKMSettings.GUID));
 	XMLWriter.WriteAttribute("MarkingCode" , ToXMLString(CodeString));
 	XMLWriter.WriteAttribute("PlannedStatus" , ToXMLString(RequestKMSettings.PlannedStatus));
-	//XMLWriter.WriteAttribute("WaitForResult" , ToXMLString(RequestKMSettingsInfo.WaitForResult));
-	//XMLWriter.WriteAttribute("Quantity" , ToXMLString(RequestKMSettingsInfo.Quantity));
 	XMLWriter.WriteEndElement();
 
 	RequestXML = XMLWriter.Close();

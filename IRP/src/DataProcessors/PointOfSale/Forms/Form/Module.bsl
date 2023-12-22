@@ -1994,7 +1994,6 @@ Function CreateReturnOnBase(PaymentData, StatusType)
 		PredefinedValue("Document.RetailReturnReceipt.EmptyRef").Metadata(), ExtractedData);
 
 	DocRefs = New Array;
-//	NewDoc = Undefined;
 	For Each FillingValues In ArrayOfFillingValues Do
 		If TypeOf(ThisObject.PostponedReceipt) = Type("DocumentRef.RetailReturnReceipt") Then
 			NewDoc = GetClearPostponedObject();
@@ -2009,11 +2008,6 @@ Function CreateReturnOnBase(PaymentData, StatusType)
 		DPPointOfSaleServer.AfterPostingDocument(NewDoc.Ref);
 		DocRefs.Add(NewDoc.Ref);
 	EndDo;
-//	If Not NewDoc = Undefined Then
-//		NewDoc.Write(DocumentWriteMode.Posting);
-//		DocRef = NewDoc.Ref;
-//		DPPointOfSaleServer.AfterPostingDocument(DocRef);
-//	EndIf;
 	
 	Return DocRefs;
 

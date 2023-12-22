@@ -1306,11 +1306,6 @@
       </type>
       <minValue xsi:type="core:UndefinedValue"/>
       <maxValue xsi:type="core:UndefinedValue"/>
-      <choiceParameterLinks>
-        <name>Filter.BankTerm</name>
-        <changeMode>DontChange</changeMode>
-        <field>Document.RetailReturnReceipt.TabularSection.Payments.Attribute.BankTerm</field>
-      </choiceParameterLinks>
       <dataHistory>Use</dataHistory>
       <fullTextSearch>Use</fullTextSearch>
     </attributes>
@@ -2010,7 +2005,7 @@
     </attributes>
   </tabularSections>
   <commands uuid="da583033-ea5c-4fa1-8143-846671611e1a">
-    <name>Genarate</name>
+    <name>Generate</name>
     <synonym>
       <key>en</key>
       <value>Sales return</value>

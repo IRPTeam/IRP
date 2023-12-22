@@ -119,7 +119,7 @@
 		</right>
 	</object>
 	<object>
-		<name>Document.CashReceipt.Command.GenarateCashReceipt</name>
+		<name>Document.CashReceipt.Command.GenerateCashReceipt</name>
 		<right>
 			<name>View</name>
 			<value>true</value>

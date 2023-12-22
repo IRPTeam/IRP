@@ -119,7 +119,7 @@
 		</right>
 	</object>
 	<object>
-		<name>Document.RetailReturnReceipt.Command.Genarate</name>
+		<name>Document.RetailReturnReceipt.Command.Generate</name>
 		<right>
 			<name>View</name>
 			<value>true</value>

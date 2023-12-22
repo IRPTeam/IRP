@@ -366,6 +366,7 @@ Function GetChain()
 	Chain.Insert("ChangeLegalNameContractByBankTermAndPaymentType" , GetChainLink("ChangeLegalNameContractByBankTermAndPaymentTypeExecute"));
 	Chain.Insert("ChangeBankTermByPaymentType" , GetChainLink("ChangeBankTermByPaymentTypeExecute"));
 	Chain.Insert("ChangePaymentTypeByBankTerm" , GetChainLink("ChangePaymentTypeByBankTermExecute"));
+	Chain.Insert("ChangeAccountByPaymentType"  , GetChainLink("ChangeAccountByPaymentTypeExecute"));
 		
 	Chain.Insert("CalculateCommission"   , GetChainLink("CalculateCommissionExecute"));
 	Chain.Insert("ChangePercentByAmount" , GetChainLink("CalculatePercentByAmountExecute"));
@@ -3957,6 +3958,30 @@ Function ChangePaymentTypeByBankTermExecute(Options) Export
 		Return Options.CurrentPaymentType;
 	EndIf;
 	Return Undefined;
+EndFunction
+
+#EndRegion
+
+#Region CHANGE_ACCOUNT_BY_PAYMENT_TYPE
+
+Function ChangeAccountByPaymentTypeOptions() Export
+	Return GetChainLinkOptions("PaymentType, Workstation, CurrentAccount");
+EndFunction
+
+Function ChangeAccountByPaymentTypeExecute(Options) Export
+	If Not ValueIsFilled(Options.PaymentType) Then
+		Return Undefined;
+	EndIf;
+	
+	_Type = CommonFunctionsServer.GetRefAttribute(Options.PaymentType, "Type");
+	If _Type = PredefinedValue("Enum.PaymentTypes.Cash") Then
+		Account = CommonFunctionsServer.GetRefAttribute(Options.Workstation, "CashAccount");
+		If ValueIsFilled(Account) Then
+			Return Account;
+		EndIf; 
+	EndIf;
+	
+	Return Options.CurrentAccount;
 EndFunction
 
 #EndRegion

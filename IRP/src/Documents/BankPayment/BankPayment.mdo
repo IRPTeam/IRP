@@ -983,7 +983,7 @@
     </attributes>
   </tabularSections>
   <commands uuid="652eb8c0-9773-4733-818c-e405dc646823">
-    <name>GenarateBankPayment</name>
+    <name>GenerateBankPayment</name>
     <synonym>
       <key>en</key>
       <value>Bank payment</value>

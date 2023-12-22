@@ -9,8 +9,9 @@
 //  CheckPackage - See EquipmentFiscalPrinterAPIClient.CheckPackage
 Procedure FillData(SourceData, CheckPackage) Export
 	If TypeOf(SourceData.Ref) = Type("DocumentRef.RetailSalesReceipt")
-		OR TypeOf(SourceData.Ref) = Type("DocumentRef.RetailReturnReceipt") Then
-		FillCheckPackageByRetailSalesReceipt(SourceData, CheckPackage);
+		OR TypeOf(SourceData.Ref) = Type("DocumentRef.RetailReturnReceipt") 
+		OR TypeOf(SourceData.Ref) = Type("DocumentRef.RetailReceiptCorrection") Then
+		FillCheckPackageByRetailReceipt(SourceData, CheckPackage);
 	ElsIf TypeOf(SourceData.Ref) = Type("DocumentRef.CashReceipt")
 		OR TypeOf(SourceData.Ref) = Type("DocumentRef.CashPayment") Then
 		FillCheckPackageByPayment(SourceData, CheckPackage, True);
@@ -20,19 +21,60 @@ Procedure FillData(SourceData, CheckPackage) Export
 	EndIf;
 EndProcedure
 
-// Prepare receipt data by retail sales receipt.
+// Prepare receipt data by retail receipt.
 //
 // Parameters:
-//  SourceData - DocumentRef.RetailSalesReceipt -
+//  SourceData - DocumentRef.RetailSalesReceipt, DocumentRef.RetailReceiptCorrection -
 //  CheckPackage - See EquipmentFiscalPrinterAPIClient.CheckPackage
-Procedure FillCheckPackageByRetailSalesReceipt(SourceData, CheckPackage) Export
-	FillInputParameters(SourceData, CheckPackage.Parameters);
-
-	If TypeOf(SourceData.Ref) = Type("DocumentRef.RetailSalesReceipt") Then
-		CheckPackage.Parameters.OperationType = 1;
+Procedure FillCheckPackageByRetailReceipt(Val SourceData, CheckPackage) Export
+	
+	isCorrection = TypeOf(SourceData.Ref) = Type("DocumentRef.RetailReceiptCorrection");
+	
+	If isCorrection Then
+		
+		CheckPackage.Parameters.AdditionalAttribute = SourceData.BasisDocumentFiscalNumber;
+		
+		isReverse = Not TypeOf(SourceData.BasisDocument) = Type("DocumentRef.RetailReceiptCorrection");
+		DocumentWithCorrectionInfo = SourceData;
+		If isReverse Then
+			If TypeOf(SourceData.BasisDocument) = Type("DocumentRef.RetailSalesReceipt") Then
+				CheckPackage.Parameters.OperationType = 2;
+			Else
+				CheckPackage.Parameters.OperationType = 1;
+			EndIf;
+		Else
+			If TypeOf(SourceData.BasisDocument.BasisDocument) = Type("DocumentRef.RetailSalesReceipt") Then
+				CheckPackage.Parameters.OperationType = 1;
+			Else
+				CheckPackage.Parameters.OperationType = 2;
+			EndIf;
+			DocumentWithCorrectionInfo = SourceData.BasisDocument;
+		EndIf;
+		
+		CheckPackage.Parameters.CorrectionData.Type = DocumentWithCorrectionInfo.CorrectionType;
+		CheckPackage.Parameters.CorrectionData.Description = DocumentWithCorrectionInfo.CorrectionDescription;
+		CheckPackage.Parameters.CorrectionData.Date = DocumentWithCorrectionInfo.Date;
+		CheckPackage.Parameters.CorrectionData.Number = DocumentWithCorrectionInfo.NumberTaxAuthorityPrescription;
+		
+		If IsBlankString(CheckPackage.Parameters.CorrectionData.Number) Then
+			CheckPackage.Parameters.CorrectionData.Number = "0";
+		EndIf;
+		
+		If IsBlankString(CheckPackage.Parameters.CorrectionData.Description) Then
+			Raise "CorrectionDescription has to be filled.";
+		EndIf;
+		
 	Else
-		CheckPackage.Parameters.OperationType = 2;
+		CheckPackage.Parameters.CorrectionData = New Structure();
+		If TypeOf(SourceData.Ref) = Type("DocumentRef.RetailSalesReceipt") Then
+			CheckPackage.Parameters.OperationType = 1;
+		Else
+			CheckPackage.Parameters.OperationType = 2;
+		EndIf;		
 	EndIf;
+
+	FillInputParameters(SourceData, CheckPackage.Parameters);
+	
 	CheckPackage.Parameters.TaxationSystem = 0;	//TODO: TaxSystem choice
 
 	If Not SourceData.RetailCustomer.IsEmpty() Then
@@ -57,7 +99,7 @@ Procedure FillCheckPackageByRetailSalesReceipt(SourceData, CheckPackage) Export
 		FiscalStringData.DiscountAmount = ItemRow.OffersAmount;
 		
 		// TODO: Get from ItemType (or Item) CalculationSubject
-		If ItemRow.isControlCodeString Then
+		If ItemRow.isControlCodeString And Not isCorrection Then
 			FillControlString(CCSRows, ItemRow, FiscalStringData);
 		Else
 			If ItemRow.Item.ItemType.Type = Enums.ItemTypes.Certificate Then

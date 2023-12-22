@@ -632,6 +632,18 @@ Function GetAdditionalSettings(RowOwner, TableOfSettings)
 	NewRow_PointOfSales.Rows.Add(NewSetting);
 	AddRowToTableOfSettings(TableOfSettings, NewSetting.FullName, NewSetting.Name, NewSetting.SettingID);
 	
+	// change price type
+	NewSetting = New Structure();
+	NewSetting.Insert("Name", "EnableChangePriceType");
+	NewSetting.Insert("FullName", FullName + ".EnableChangePriceType");
+	NewSetting.Insert("Synonym" , R().Add_Setiings_012);
+	NewSetting.Insert("KindOfAttribute", Enums.KindsOfAttributes.AdditionalSetting);
+	NewSetting.Insert("TypeRestriction", New TypeDescription("Boolean"));
+	NewSetting.Insert("SettingID"      , New UUID());
+	NewSetting.Insert("PictureIndex"   , 12);
+	NewRow_PointOfSales.Rows.Add(NewSetting);
+	AddRowToTableOfSettings(TableOfSettings, NewSetting.FullName, NewSetting.Name, NewSetting.SettingID);
+	
 	// create return
 	NewSetting = New Structure();
 	NewSetting.Insert("Name", "DisableCreateReturn");

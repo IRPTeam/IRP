@@ -36,6 +36,8 @@ Function PostingGetDocumentDataTables(Ref, Cancel, PostingMode, Parameters, AddI
 	Parameters.Insert("QueryParameters", GetAdditionalQueryParameters(Ref));
 	PostingServer.ExecuteQuery(Ref, QueryArray, Parameters);
 
+	DocumentsServer.SalesBySerialLotNumbers(Parameters);
+	
 	Query = New Query;
 	Query.Text =
 	"SELECT
@@ -452,6 +454,7 @@ Function ItemList()
 		   |	ItemList.Ref AS SalesReturn,
 		   |	ItemList.QuantityInBaseUnit AS Quantity,
 		   |	ItemList.TotalAmount AS TotalAmount,
+		   |	ItemList.TotalAmount AS Amount,
 		   |	ItemList.Ref.Partner AS Partner,
 		   |	ItemList.Ref.LegalName AS LegalName,
 		   |	CASE
@@ -777,19 +780,29 @@ Function R4014B_SerialLotNumber()
 EndFunction
 
 Function R2001T_Sales()
-	Return "SELECT
-		   |	ItemList.RetailSalesReceipt AS Invoice,
-		   |	- ItemList.Quantity AS Quantity,
-		   |	- ItemList.TotalAmount AS Amount,
-		   |	- ItemList.NetAmount AS NetAmount,
-		   |	- ItemList.OffersAmount AS OffersAmount,
-		   |	*
-		   |INTO R2001T_Sales
-		   |FROM
-		   |	ItemList AS ItemList
-		   |WHERE
-		   |	TRUE
-		   |	AND ItemList.StatusType = VALUE(ENUM.RetailReceiptStatusTypes.Completed)";
+	Return 
+		"SELECT
+		|	ItemList.Period,
+		|	ItemList.Company,
+		|	ItemList.Branch,
+		|	ItemList.Currency,
+		|	ItemList.RetailSalesReceipt AS Invoice,
+		|	ItemList.ItemKey,
+		|	ItemList.RowKey,
+		|	ItemList.SalesPerson,
+		|	SalesBySerialLotNumbers.SerialLotNumber,
+		|	-SalesBySerialLotNumbers.Quantity AS Quantity,
+		|	-SalesBySerialLotNumbers.Amount AS Amount,
+		|	-SalesBySerialLotNumbers.NetAmount AS NetAmount,
+		|	-SalesBySerialLotNumbers.OffersAmount AS OffersAmount
+		|INTO R2001T_Sales
+		|FROM
+		|	ItemList AS ItemList
+		|		LEFT JOIN SalesBySerialLotNumbers
+		|		ON ItemList.Key = SalesBySerialLotNumbers.Key
+		|WHERE
+		|	TRUE
+		|	AND ItemList.StatusType = VALUE(ENUM.RetailReceiptStatusTypes.Completed)";
 EndFunction
 
 Function R2005T_SalesSpecialOffers()
@@ -959,15 +972,30 @@ Function R5021T_Revenues()
 EndFunction
 
 Function R2002T_SalesReturns()
-	Return "SELECT
-		   |	*,
-		   |	ItemList.TotalAmount AS Amount
-		   |INTO R2002T_SalesReturns
-		   |FROM
-		   |	ItemList AS ItemList
-		   |WHERE
-		   |	TRUE
-		   |	AND ItemList.StatusType = VALUE(ENUM.RetailReceiptStatusTypes.Completed)";
+	Return 
+		"SELECT
+		|	ItemList.Period,
+		|	ItemList.Company,
+		|	ItemList.Branch,
+		|	ItemList.Currency,
+		|	ItemList.RetailSalesReceipt AS Invoice,
+		|	ItemList.ItemKey,
+		|	ItemList.RowKey,
+		|	ItemList.ReturnReason,
+		|	ItemList.SalesPerson,
+		|	SalesBySerialLotNumbers.SerialLotNumber,
+		|	-SalesBySerialLotNumbers.Quantity AS Quantity,
+		|	-SalesBySerialLotNumbers.Amount AS Amount,
+		|	-SalesBySerialLotNumbers.NetAmount AS NetAmount,
+		|	-SalesBySerialLotNumbers.OffersAmount AS OffersAmount
+		|INTO R2002T_SalesReturns
+		|FROM
+		|	ItemList AS ItemList
+		|		LEFT JOIN SalesBySerialLotNumbers
+		|		ON ItemList.Key = SalesBySerialLotNumbers.Key
+		|WHERE
+		|	TRUE
+		|	AND ItemList.StatusType = VALUE(ENUM.RetailReceiptStatusTypes.Completed)";
 EndFunction
 
 Function R2021B_CustomersTransactions()

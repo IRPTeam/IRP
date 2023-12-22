@@ -381,7 +381,7 @@ Function ValidateEmail(Val Address, RaiseOnFalse = True) Export
 	
 	LatinCharacters = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ";
     Digits = "0123456789";
-    ValidSymbols = "-._@";
+    ValidSymbols = "-._@+";
     
     ErrorArray = New Array; // Array Of String
 
@@ -1327,3 +1327,63 @@ Function GetFromCache(ID, Delete = True) Export
 	Return Data;
 EndFunction
 #EndRegion
+
+#Region UniqueDescriptions
+
+Procedure CheckUniqueDescriptions(Cancel, Object) Export
+	CheckDataPrivileged.CheckUniqueDescriptions(Cancel, Object);
+EndProcedure
+
+Procedure __CheckUniqueDescriptions(Cancel, Object) Export
+	FullName = Object.Metadata().FullName();
+	
+	BeginTransaction(DataLockControlMode.Managed);
+	DataLock = New DataLock();
+	ItemLock = DataLock.Add(FullName);
+	ItemLock.Mode = DataLockMode.Exclusive;
+	DataLock.Lock();
+	
+	QueryParameters = New Structure();
+	For Each Attr In Metadata.CommonAttributes Do
+		If StrStartsWith(Attr.Name, "Description_") 
+			And CommonFunctionsClientServer.ObjectHasProperty(Object, Attr.Name)
+			And ValueIsFilled(Object[Attr.Name]) Then
+				QueryParameters.Insert(Attr.Name, Object[Attr.Name]);
+		EndIf;
+	EndDo;
+	
+	If QueryParameters.Count() = 0 Then
+		Return;
+	EndIf;
+		
+	Query = New Query();
+	Query.Text = 
+	"SELECT
+	|	Table.Ref
+	|FROM
+	|	%1 AS Table
+	|WHERE
+	|	Table.Ref <> &Ref
+	|	AND (%2)";
+	
+	Query.SetParameter("Ref", Object.Ref);
+	
+	Array_where = New Array();
+	
+	For Each KeyValue In QueryParameters Do
+		Array_where.Add(StrTemplate("Table.%1 = &%1", KeyValue.Key));
+		Query.SetParameter(KeyValue.Key, KeyValue.Value);
+	EndDo;
+	
+	Query.Text = StrTemplate(Query.Text, FullName, StrConcat(Array_where, " OR "));
+	QueryResult = Query.Execute();
+	QuerySelection = QueryResult.Select();
+	
+	While QuerySelection.Next() Do
+		Cancel = True;
+		CommonFunctionsClientServer.ShowUsersMessage(StrTemplate(R().Error_139, QuerySelection.Ref));
+	EndDo;
+EndProcedure
+
+#EndRegion
+

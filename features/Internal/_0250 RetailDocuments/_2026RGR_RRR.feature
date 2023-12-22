@@ -341,7 +341,7 @@ Scenario: _0202603 create RRR based on RGR (without RSR)
 		And I go to line in "List" table
 			| 'Date'                | 'Number' | 'Retail customer' | 'Transaction type'     |
 			| '03.08.2023 10:54:07' | '1 204'  | 'Sam Jons'        | 'Return from customer' |
-		And I click the button named "FormDocumentRetailReturnReceiptGenarate"
+		And I click the button named "FormDocumentRetailReturnReceiptGenerate"
 		And I click "Ok" button
 	* Filling branch
 		And I click Choice button of the field named "Branch"

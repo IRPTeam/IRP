@@ -20,3 +20,7 @@ EndProcedure
 Procedure Filling(FillingData, FillingText, StandardProcessing)
 	Return;
 EndProcedure
+
+Procedure FillCheckProcessing(Cancel, CheckedAttributes)
+	CommonFunctionsServer.CheckUniqueDescriptions(Cancel, ThisObject);
+EndProcedure

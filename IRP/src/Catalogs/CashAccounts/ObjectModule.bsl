@@ -50,3 +50,8 @@ EndProcedure
 Procedure OnCopy(CopiedObject)
 	Acquiring = Catalogs.Hardware.EmptyRef();
 EndProcedure
+
+Procedure FillCheckProcessing(Cancel, CheckedAttributes)
+	CommonFunctionsServer.CheckUniqueDescriptions(Cancel, ThisObject);
+EndProcedure
+

@@ -141,6 +141,18 @@ Scenario: _099100 preparation
 		When Create information register T9010S_AccountsItemKey records (Basic LTV)
 		When Create information register T9012S_AccountsPartner records (Basic LTV)
 		When Create information register T9013S_AccountsTax records (Basic LTV)
+	* Post PI
+		Given I open hyperlink "e1cib/list/Document.PurchaseInvoice"
+		Then I select all lines of "List" table
+		And in the table "List" I click the button named "ListContextMenuPost"
+		And Delay "3"
+	* Post SI
+		Given I open hyperlink "e1cib/list/Document.SalesInvoice"
+		Then I select all lines of "List" table
+		And in the table "List" I click the button named "ListContextMenuPost"
+		And Delay "3"
+	And I close all client application windows
+	
 
 							
 	
@@ -1538,3 +1550,96 @@ Scenario: _0991038 accounts settings for tax type and rate
 			| '01.01.2022' | 'Own company 1' | 'LTV with account charts code mask' | 'VAT' | '20%'      | '405.01'           | '90878699'         |
 	And I close all client application windows
 
+Scenario: _0991058 create journal entry for one PI
+	And I close all client application windows
+	* Open PI list
+		Given I open hyperlink "e1cib/list/Document.PurchaseInvoice"
+	* Select PI and create journal entry
+		And I go to line in "List" table
+			| 'Amount'    | 'Company'       | 'Partner'                   |
+			| '10 700,05' | 'Own company 1' | 'Vendor 1 (1 partner term)' |		
+		And I click "Journal entry" button
+		And I click "Save" button
+	* Check journal entry
+		Then the form attribute named "Author" became equal to "CI"
+		Then the form attribute named "Basis" became equal to "Purchase invoice 1 dated 24.02.2022 10:04:33"
+		Then the form attribute named "Company" became equal to "Own company 1"
+		Then the form attribute named "Date" became equal to "24.02.2022 10:04:33"
+		Then the form attribute named "LedgerType" became equal to "Basic LTV"
+		Then the form attribute named "LedgerTypeCurrencyMovementTypeCurrency" became equal to "EUR"
+		Then the form attribute named "Number" became equal to "1"
+		And "RegisterRecords" table became equal
+			| 'Period'              | 'Account Dr' | '#' | 'Amount'   | 'DebitQuantity' | 'Activity' | 'Credit currency' | 'Ext. Dim. Debit'                                   | 'Debit amount' | 'Extra dimension2 Dr'   | 'Credit quantity' | 'Extra dimension3 Dr' | 'Debit currency' | 'Account Cr' | 'Ext. Dim. Credit'          | 'Operation'                                                                                  | 'Extra dimension2 Cr'        | 'Credit amount' | 'Extra dimension3 Cr' |
+			| '24.02.2022 10:04:33' | '3540'       | '1' | '544,03'   | '4'             | 'Yes'      | 'USD'             | 'Item 1 with serial lot number (use line grouping)' | '633,33'       | 'XS/Color 2'            | ''                | ''                    | 'USD'            | '5201'       | 'Vendor 1 (1 partner term)' | 'PurchaseInvoice DR (R4050B_StockInventory_R5022T_Expenses) CR (R1021B_VendorsTransactions)' | 'Partner term with vendor 1' | '633,33'        | ''                    |
+			| '24.02.2022 10:04:33' | '5301'       | '2' | '108,81'   | ''              | 'Yes'      | 'USD'             | 'VAT'                                               | '126,67'       | ''                      | ''                | ''                    | 'USD'            | '5201'       | 'Vendor 1 (1 partner term)' | 'PurchaseInvoice DR (R1040B_TaxesOutgoing) CR (R1021B_VendorsTransactions)'                  | 'Partner term with vendor 1' | '126,67'        | ''                    |
+			| '24.02.2022 10:04:33' | '3540'       | '3' | '2 147,50' | '20'            | 'Yes'      | 'USD'             | 'Item without item key (pcs)'                       | '2 500'        | 'Item without item key' | ''                | ''                    | 'USD'            | '5201'       | 'Vendor 1 (1 partner term)' | 'PurchaseInvoice DR (R4050B_StockInventory_R5022T_Expenses) CR (R1021B_VendorsTransactions)' | 'Partner term with vendor 1' | '2 500'         | ''                    |
+			| '24.02.2022 10:04:33' | '5301'       | '4' | '429,50'   | ''              | 'Yes'      | 'USD'             | 'VAT'                                               | '500'          | ''                      | ''                | ''                    | 'USD'            | '5201'       | 'Vendor 1 (1 partner term)' | 'PurchaseInvoice DR (R1040B_TaxesOutgoing) CR (R1021B_VendorsTransactions)'                  | 'Partner term with vendor 1' | '500'           | ''                    |
+			| '24.02.2022 10:04:33' | '3540'       | '5' | '1 030,80' | '8'             | 'Yes'      | 'USD'             | 'Item 1 with serial lot number (use line grouping)' | '1 200'        | 'S/Color 2'             | ''                | ''                    | 'USD'            | '5201'       | 'Vendor 1 (1 partner term)' | 'PurchaseInvoice DR (R4050B_StockInventory_R5022T_Expenses) CR (R1021B_VendorsTransactions)' | 'Partner term with vendor 1' | '1 200'         | ''                    |
+			| '24.02.2022 10:04:33' | '5301'       | '6' | '206,16'   | ''              | 'Yes'      | 'USD'             | 'VAT'                                               | '240'          | ''                      | ''                | ''                    | 'USD'            | '5201'       | 'Vendor 1 (1 partner term)' | 'PurchaseInvoice DR (R1040B_TaxesOutgoing) CR (R1021B_VendorsTransactions)'                  | 'Partner term with vendor 1' | '240'           | ''                    |
+			| '24.02.2022 10:04:33' | '3540'       | '7' | '3 937,08' | '50'            | 'Yes'      | 'USD'             | 'Item with item key'                                | '4 583,33'     | 'S/Color 1'             | ''                | ''                    | 'USD'            | '5201'       | 'Vendor 1 (1 partner term)' | 'PurchaseInvoice DR (R4050B_StockInventory_R5022T_Expenses) CR (R1021B_VendorsTransactions)' | 'Partner term with vendor 1' | '4 583,33'      | ''                    |
+			| '24.02.2022 10:04:33' | '5301'       | '8' | '787,42'   | ''              | 'Yes'      | 'USD'             | 'VAT'                                               | '916,67'       | ''                      | ''                | ''                    | 'USD'            | '5201'       | 'Vendor 1 (1 partner term)' | 'PurchaseInvoice DR (R1040B_TaxesOutgoing) CR (R1021B_VendorsTransactions)'                  | 'Partner term with vendor 1' | '916,67'        | ''                    |
+		And "Totals" table became equal
+			| '#' | 'Chart of account' | 'Amount Debit' | 'Amount Credit' |
+			| '1' | '3540'             | '7 659,41'     | ''              |
+			| '2' | '5201'             | ''             | '9 191,30'      |
+			| '3' | '5301'             | '1 531,89'     | ''              |
+		Then the form attribute named "UserDefined" became equal to "No"
+		And I click "Save and close" button	
+	* Check Journal entry creation
+		Given I open hyperlink "e1cib/list/Document.JournalEntry"
+		And "List" table contains lines
+			| 'User defined' | 'Date'                | 'Company'       | 'Ledger type' | 'Basis'                                        | 'Description' |
+			| 'No'           | '24.02.2022 10:04:33' | 'Own company 1' | 'Basic LTV'   | 'Purchase invoice 1 dated 24.02.2022 10:04:33' | ''            |
+		
+							
+Scenario: _0991059 create journal entry for two PI
+	And I close all client application windows
+	* Open PI list
+		Given I open hyperlink "e1cib/list/Document.PurchaseInvoice"
+	* Select PI and create journal entry
+		And I go to line in "List" table
+			| 'Amount'    | 'Company'       | 'Partner'                   |
+			| '2 200,00'  | 'Own company 1' | 'Vendor 2 (1 partner term)' |	
+		And I move one line down in "List" table and select line	
+		And I click "Journal entry (multiple documents)" button
+	* Check journal entry
+		Given I open hyperlink "e1cib/list/Document.JournalEntry"
+		And "List" table contains lines
+			| 'User defined' | 'Date'                | 'Company'       | 'Ledger type' | 'Basis'                                        | 'Description' |
+			| 'No'           | '22.07.2022 09:38:02' | 'Own company 1' | 'Basic LTV'   | 'Purchase invoice 2 dated 22.07.2022 09:38:02' | ''            |
+			| 'No'           | '30.11.2022 16:01:04' | 'Own company 1' | 'Basic LTV'   | 'Purchase invoice 3 dated 30.11.2022 16:01:04' | ''            |
+			
+						
+Scenario: _0991059 create journal entry for two PI
+	And I close all client application windows
+	* Open journal entry list
+		Given I open hyperlink "e1cib/list/Document.JournalEntry"
+		Then "Journal entry" window is opened
+		And I click "Create documents" button
+		And I go to line in "TableDocuments" table
+			| 'Presentation'     | 'Use' |
+			| 'Purchase invoice' | 'No'  |
+		And I change "Use" checkbox in "TableDocuments" table
+		And I finish line editing in "TableDocuments" table
+		And I go to line in "TableDocuments" table
+			| 'Presentation'  | 'Use' |
+			| 'Sales invoice' | 'No'  |
+		And I change "Use" checkbox in "TableDocuments" table
+		And I finish line editing in "TableDocuments" table
+		And I click Choice button of the field named "Company"
+		And I go to line in "List" table
+			| 'Description'   |
+			| 'Own company 1' |
+		And I select current line in "List" table
+		And I click Select button of "Ledger type" field
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Basic LTV'   |
+		And I select current line in "List" table
+		And I click "Create documents" button
+	* Check journal entry
+		Given I open hyperlink "e1cib/list/Document.JournalEntry"
+						
+				
+
+						

@@ -111,8 +111,8 @@ Procedure SetVisibilityAvailability(Object, Form)
 
 	ChangePrice = UserSettingsServer.PointOfSale_AdditionalSettings_DisableChangePrice(Form.UserAdmin);
 	ChangePriceType = UserSettingsServer.PointOfSale_AdditionalSettings_EnableChangePriceType(Form.UserAdmin);
-	Form.Items.ItemListPrice.Enabled = ChangePrice;
-	Form.Items.ItemListTotalAmount.Enabled = ChangePrice;
+	Form.Items.ItemListPrice.ReadOnly = Not ChangePrice;
+	Form.Items.ItemListTotalAmount.ReadOnly = Not ChangePrice;
 	Form.Items.ItemListPriceType.Visible = ChangePriceType;
 EndProcedure
 

@@ -69,8 +69,7 @@ Scenario: _061 test data
 		When Create information register PricesByProperties records (LC)
 		When Create information register TaxSettings records (LC)
 		When Create information register UserSettings records (LC)
-		And Delay 10
-		When update ItemKeys (LC)
+		And Delay 5
 	* Landed cost settings for company	
 		Given I open hyperlink "e1cib/list/Catalog.Companies"
 		And I go to line in "List" table

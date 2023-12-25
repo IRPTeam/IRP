@@ -218,7 +218,7 @@
     </presentation>
     <presentation>
      <key>tr</key>
-     <value>Week with days off</value>
+     <value>İzinli günlerle hafta</value>
     </presentation>
     <value xsi:type="core:StringValue">
      <value>WeekWithDaysOff</value>
@@ -235,7 +235,7 @@
     </presentation>
     <presentation>
      <key>tr</key>
-     <value>In two days</value>
+     <value>İki gün içinde</value>
     </presentation>
     <value xsi:type="core:StringValue">
      <value>InTwoDays</value>
@@ -252,7 +252,7 @@
     </presentation>
     <presentation>
      <key>tr</key>
-     <value>Two in two days</value>
+     <value>İki günde bir</value>
     </presentation>
     <value xsi:type="core:StringValue">
      <value>TwoInTwoDays</value>
@@ -269,7 +269,7 @@
     </presentation>
     <presentation>
      <key>tr</key>
-     <value>Three in Three days</value>
+     <value>Üç günde Üç gün</value>
     </presentation>
     <value xsi:type="core:StringValue">
      <value>ThreeInThreeDays</value>
@@ -624,7 +624,7 @@
   </title>
   <title>
    <key>tr</key>
-   <value>Weekends</value>
+   <value>Hafta sonları</value>
   </title>
   <extendedTooltip>
    <name>GroupWeekendsExtendedTooltip</name>
@@ -753,7 +753,7 @@
   </title>
   <title>
    <key>tr</key>
-   <value>Employee schedule</value>
+   <value>Çalışan programı</value>
   </title>
   <id>1</id>
   <valueType>
@@ -805,7 +805,7 @@
   </title>
   <title>
    <key>tr</key>
-   <value>Weekends</value>
+   <value>Hafta sonları</value>
   </title>
   <id>5</id>
   <valueType>
@@ -838,7 +838,7 @@
   </title>
   <title>
    <key>tr</key>
-   <value>Schedule variant</value>
+   <value>Program çeşidi</value>
   </title>
   <id>6</id>
   <valueType>
@@ -867,7 +867,7 @@
   </title>
   <title>
    <key>tr</key>
-   <value>Start working day</value>
+   <value>İşe başlama günü</value>
   </title>
   <id>7</id>
   <valueType>
@@ -896,7 +896,7 @@
   </title>
   <title>
    <key>tr</key>
-   <value>Count hours</value>
+   <value>Saat say</value>
   </title>
   <id>8</id>
   <valueType>

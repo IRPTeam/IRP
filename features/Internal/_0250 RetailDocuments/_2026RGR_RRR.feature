@@ -15,8 +15,6 @@ Background:
 
 Scenario: _0202600 preparation (RGR-RRR)
 	When set True value to the constant
-	And I close TestClient session
-	Given I open new TestClient session or connect the existing one
 	* Load info
 		When Create catalog BusinessUnits objects
 		When Create information register Barcodes records
@@ -58,7 +56,6 @@ Scenario: _0202600 preparation (RGR-RRR)
 		When Create information register Barcodes records (serial lot numbers)
 		When Create catalog SerialLotNumbers objects (serial lot numbers, with batch balance details)
 		When Create catalog SerialLotNumbers objects (serial lot numbers)
-		When update ItemKeys
 		When Create catalog Partners objects and Companies objects (Customer)
 		When Create catalog Agreements objects (Customer)
 		When Create information register Taxes records (VAT)
@@ -344,7 +341,7 @@ Scenario: _0202603 create RRR based on RGR (without RSR)
 		And I go to line in "List" table
 			| 'Date'                | 'Number' | 'Retail customer' | 'Transaction type'     |
 			| '03.08.2023 10:54:07' | '1 204'  | 'Sam Jons'        | 'Return from customer' |
-		And I click the button named "FormDocumentRetailReturnReceiptGenarate"
+		And I click the button named "FormDocumentRetailReturnReceiptGenerate"
 		And I click "Ok" button
 	* Filling branch
 		And I click Choice button of the field named "Branch"

@@ -16,7 +16,7 @@ Async Procedure PrintReceipt(CommandParameter)
 		Return;
 	EndIf;
 	
-	EquipmentPrintFiscalReceiptResult = Await EquipmentFiscalPrinterClient.ProcessCheck(ConsolidatedRetailSales, CommandParameter); //  See EquipmentFiscalPrinterClient.ReceiptResultStructure
+	EquipmentPrintFiscalReceiptResult = Await EquipmentFiscalPrinterClient.ProcessCorrectionCheck(ConsolidatedRetailSales, CommandParameter); //  See EquipmentFiscalPrinterClient.ReceiptResultStructure
 	
 	If EquipmentPrintFiscalReceiptResult.Info.Success Then
 		CommonFunctionsClientServer.ShowUsersMessage(R().InfoMessage_005);

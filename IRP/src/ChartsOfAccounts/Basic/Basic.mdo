@@ -170,11 +170,11 @@
   </synonym>
   <synonym>
    <key>ru</key>
-   <value>Search code</value>
+   <value>Код поиска</value>
   </synonym>
   <synonym>
    <key>tr</key>
-   <value>Search code</value>
+   <value>Arama kodu</value>
   </synonym>
   <type>
    <types>String</types>
@@ -197,11 +197,11 @@
   </synonym>
   <synonym>
    <key>ru</key>
-   <value>Not used for records</value>
+   <value>Не используется для записей</value>
   </synonym>
   <synonym>
    <key>tr</key>
-   <value>Not used for records</value>
+   <value>Kayıtlar için kullanılmaz</value>
   </synonym>
   <type>
    <types>Boolean</types>
@@ -381,11 +381,11 @@
   </synonym>
   <synonym>
    <key>ru</key>
-   <value>Load chart of accounts</value>
+   <value>Загрузить план счетов</value>
   </synonym>
   <synonym>
    <key>tr</key>
-   <value>Load chart of accounts</value>
+   <value>Hesap planını yükle</value>
   </synonym>
   <usePurposes>PersonalComputer</usePurposes>
   <usePurposes>MobileDevice</usePurposes>
@@ -398,11 +398,11 @@
   </synonym>
   <synonym>
    <key>ru</key>
-   <value>Load template</value>
+   <value>Загрузить шаблон</value>
   </synonym>
   <synonym>
    <key>tr</key>
-   <value>Load template</value>
+   <value>Şablon yükle</value>
   </synonym>
  </templates>
 </mdclass:ChartOfAccounts>

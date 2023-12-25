@@ -1,4 +1,4 @@
-#language: en
+﻿#language: en
 @tree
 @Positive
 @SettingsCatalogs
@@ -19,8 +19,6 @@ Background:
 
 Scenario: _005046 filling in Business units
 	When set True value to the constant
-	And I close TestClient session
-	Given I open new TestClient session or connect the existing one
 	* Open a creation form Business units
 		Given I open hyperlink "e1cib/list/Catalog.BusinessUnits"
 	* Create business unit 'Front office 01'

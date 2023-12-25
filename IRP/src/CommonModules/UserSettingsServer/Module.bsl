@@ -19,6 +19,15 @@ Function PointOfSale_AdditionalSettings_DisableCreateReturn(val User) Export
 	Return True;	
 EndFunction
 
+Function PointOfSale_AdditionalSettings_EnableChangePriceType(val User) Export
+	Value = GetUserSettings(User, New Structure("MetadataObject",
+		"DataProcessor.PointOfSale.AdditionalSettings.EnableChangePriceType"));
+	If Value.Count() Then
+		Return Value[0].Value;
+	EndIf;
+	Return False;
+EndFunction
+
 Function AllDocuments_AdditionalSettings_DisableChangeAuthor(val User = Undefined) Export
 	Value = GetUserSettings(User, New Structure("MetadataObject",
 		"Documents.AllDocuments.AdditionalSettings.DisableChangeAuthor"));

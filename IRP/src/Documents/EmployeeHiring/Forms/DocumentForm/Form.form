@@ -882,7 +882,7 @@
         </presentation>
         <presentation>
          <key>tr</key>
-         <value>By position</value>
+         <value>Pozisyona göre</value>
         </presentation>
         <value xsi:type="core:StringValue">
          <value>ByPosition</value>
@@ -899,7 +899,7 @@
         </presentation>
         <presentation>
          <key>tr</key>
-         <value>Personal</value>
+         <value>Kişisel</value>
         </presentation>
         <value xsi:type="core:StringValue">
          <value>Personal</value>
@@ -980,7 +980,7 @@
        </title>
        <title>
         <key>tr</key>
-        <value>Salary by position</value>
+        <value>Pozisyona göre maaş</value>
        </title>
        <extendedTooltip>
         <name>GroupSalaryByPositionExtendedTooltip</name>
@@ -1072,7 +1072,7 @@
        </title>
        <title>
         <key>tr</key>
-        <value>Personal salary</value>
+        <value>Kişisel maaş</value>
        </title>
        <extendedTooltip>
         <name>GroupPerosnalSalaryExtendedTooltip</name>
@@ -1110,7 +1110,7 @@
       </title>
       <title>
        <key>tr</key>
-       <value>Salary amount</value>
+       <value>Maaş miktarı</value>
       </title>
       <extendedTooltip>
        <name>GroupSalaryAmountExtendedTooltip</name>
@@ -1147,7 +1147,7 @@
      </title>
      <title>
       <key>tr</key>
-      <value>Salary type</value>
+      <value>Maaş tipi</value>
      </title>
      <extendedTooltip>
       <name>GroupSalaryTypeExtendedTooltip</name>
@@ -1232,7 +1232,7 @@
    </title>
    <title>
     <key>tr</key>
-    <value>Employee hiring</value>
+    <value>Çalışan işe alım</value>
    </title>
    <extendedTooltip>
     <name>GroupEmployeeHiringExtendedTooltip</name>
@@ -1869,7 +1869,7 @@
   </title>
   <title>
    <key>tr</key>
-   <value>Salary type</value>
+   <value>Maaş tipi</value>
   </title>
   <id>11</id>
   <valueType>

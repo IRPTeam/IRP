@@ -91,11 +91,11 @@
   </synonym>
   <synonym>
    <key>ru</key>
-   <value>Account charts code mask</value>
+   <value>Маска кода схемы счетов</value>
   </synonym>
   <synonym>
    <key>tr</key>
-   <value>Account charts code mask</value>
+   <value>Hesap planları kod maskesi</value>
   </synonym>
   <type>
    <types>String</types>

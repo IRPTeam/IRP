@@ -18,8 +18,6 @@ Background:
 Scenario: _410010 preparation (Opening entries)
 	When set True value to the constant
 	When set True value to the constant Use commission trading
-	And I close TestClient session
-	Given I open new TestClient session or connect the existing one
 	* Load info
 		When Create information register Barcodes records
 		When Create catalog Companies objects (own Second company)
@@ -61,7 +59,6 @@ Scenario: _410010 preparation (Opening entries)
 		When Create catalog Partners objects (trade agent and consignor)
 		When Create catalog Agreements objects (commision trade, own companies)
 		When Create information register TaxSettings records (Concignor 1)
-		When update ItemKeys
 		When Create information register Taxes records (VAT)
 	* Company settings
 		Given I open hyperlink "e1cib/list/Catalog.Companies"	

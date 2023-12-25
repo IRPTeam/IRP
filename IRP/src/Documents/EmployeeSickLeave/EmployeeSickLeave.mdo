@@ -14,11 +14,11 @@
  </synonym>
  <synonym>
   <key>ru</key>
-  <value>Больничный лист сотрудника</value>
+  <value>Больничный сотрудника</value>
  </synonym>
  <synonym>
   <key>tr</key>
-  <value>Employee sick leave</value>
+  <value>Çalışan hasta izni</value>
  </synonym>
  <useStandardCommands>true</useStandardCommands>
  <inputByString>Document.EmployeeSickLeave.StandardAttribute.Number</inputByString>
@@ -62,7 +62,7 @@
  </listPresentation>
  <listPresentation>
   <key>tr</key>
-  <value>Employee sick leaves</value>
+  <value>Çalışanın hasta izinleri</value>
  </listPresentation>
  <numberLength>12</numberLength>
  <numberAllowedLength>Variable</numberAllowedLength>
@@ -177,7 +177,7 @@
   </synonym>
   <synonym>
    <key>tr</key>
-   <value>Employee list</value>
+   <value>Çalışan listesi</value>
   </synonym>
   <attributes uuid="133efd88-d11d-431c-b2d4-46f21a5bc53f">
    <name>Employee</name>

@@ -11,7 +11,7 @@
  </synonym>
  <synonym>
   <key>tr</key>
-  <value>Doc employee vacation server</value>
+  <value>Belge çalışan tatil sunucusu</value>
  </synonym>
  <server>true</server>
  <serverCall>true</serverCall>

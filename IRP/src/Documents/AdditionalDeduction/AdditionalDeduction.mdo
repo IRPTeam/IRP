@@ -18,7 +18,7 @@
  </synonym>
  <synonym>
   <key>tr</key>
-  <value>Additional deduction</value>
+  <value>Ek kesinti</value>
  </synonym>
  <useStandardCommands>true</useStandardCommands>
  <inputByString>Document.AdditionalDeduction.StandardAttribute.Number</inputByString>
@@ -62,7 +62,7 @@
  </listPresentation>
  <listPresentation>
   <key>tr</key>
-  <value>Aditionals deductions</value>
+  <value>Ek kesintiler</value>
  </listPresentation>
  <numberLength>12</numberLength>
  <numberAllowedLength>Variable</numberAllowedLength>

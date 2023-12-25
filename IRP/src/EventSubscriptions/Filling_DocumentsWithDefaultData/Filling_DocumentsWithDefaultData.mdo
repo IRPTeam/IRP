@@ -17,5 +17,5 @@
   <types>DocumentObject</types>
  </source>
  <event>Filling</event>
- <handler>CommonModule.FillingWithDefaultDataEvent.FillingWithDefaultDataFilling</handler>
+ <handler>CommonModule.FillingWithDefaultDataEvent.FillingDocumentsWithDefaultData</handler>
 </mdclass:EventSubscription>

@@ -14,11 +14,11 @@
  </synonym>
  <synonym>
   <key>ru</key>
-  <value>Retail receipt correction</value>
+  <value>Корректировка розничного чека</value>
  </synonym>
  <synonym>
   <key>tr</key>
-  <value>Retail receipt correction</value>
+  <value>Perakende fiş düzeltmesi</value>
  </synonym>
  <useStandardCommands>true</useStandardCommands>
  <inputByString>Document.RetailReceiptCorrection.StandardAttribute.Number</inputByString>
@@ -58,11 +58,11 @@
  </listPresentation>
  <listPresentation>
   <key>ru</key>
-  <value>Retail receipt corrections</value>
+  <value>Корректировки розничных чеков</value>
  </listPresentation>
  <listPresentation>
   <key>tr</key>
-  <value>Retail receipt corrections</value>
+  <value>Perakende fiş düzeltmeleri</value>
  </listPresentation>
  <numberLength>12</numberLength>
  <numberAllowedLength>Variable</numberAllowedLength>
@@ -117,6 +117,7 @@
   <type>
    <types>DocumentRef.RetailSalesReceipt</types>
    <types>DocumentRef.RetailReturnReceipt</types>
+   <types>DocumentRef.RetailReceiptCorrection</types>
   </type>
   <minValue xsi:type="core:UndefinedValue"/>
   <maxValue xsi:type="core:UndefinedValue"/>
@@ -501,6 +502,110 @@
   <fillValue xsi:type="core:ReferenceValue">
    <value>Enum.RetailReceiptStatusTypes.EnumValue.Completed</value>
   </fillValue>
+  <fullTextSearch>Use</fullTextSearch>
+  <dataHistory>Use</dataHistory>
+ </attributes>
+ <attributes uuid="1bff1584-66dd-4382-bb91-7318768cb9ef">
+  <name>CorrectionDescription</name>
+  <synonym>
+   <key>en</key>
+   <value>Correction description</value>
+  </synonym>
+  <synonym>
+   <key>ru</key>
+   <value>Наименование корректировки</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Düzeltme tanımı</value>
+  </synonym>
+  <type>
+   <types>String</types>
+   <stringQualifiers>
+    <length>512</length>
+   </stringQualifiers>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fillValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <dataHistory>Use</dataHistory>
+ </attributes>
+ <attributes uuid="bf660462-9bba-4b01-ab2a-4506a2fd954d">
+  <name>CorrectionType</name>
+  <synonym>
+   <key>en</key>
+   <value>Correction type</value>
+  </synonym>
+  <synonym>
+   <key>ru</key>
+   <value>Тип коррекции</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Düzeltme tipi</value>
+  </synonym>
+  <type>
+   <types>Number</types>
+   <numberQualifiers>
+    <precision>1</precision>
+   </numberQualifiers>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fillValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <dataHistory>Use</dataHistory>
+ </attributes>
+ <attributes uuid="73394feb-4183-40c4-8aa6-ce4cd5d56e5d">
+  <name>NumberTaxAuthorityPrescription</name>
+  <synonym>
+   <key>en</key>
+   <value>Number tax authority prescription</value>
+  </synonym>
+  <synonym>
+   <key>ru</key>
+   <value>Номер предписание налоговой</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Vergi dairesi reçete numarası</value>
+  </synonym>
+  <type>
+   <types>String</types>
+   <stringQualifiers>
+    <length>20</length>
+   </stringQualifiers>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fillValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <dataHistory>Use</dataHistory>
+ </attributes>
+ <attributes uuid="148bff3e-b8ec-440f-b2c9-415714af07e8">
+  <name>BasisDocumentFiscalNumber</name>
+  <synonym>
+   <key>en</key>
+   <value>Basis document fiscal number</value>
+  </synonym>
+  <synonym>
+   <key>ru</key>
+   <value>Основание документа фискальный номер</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Temel belge mali numara</value>
+  </synonym>
+  <type>
+   <types>String</types>
+   <stringQualifiers>
+    <length>20</length>
+   </stringQualifiers>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fillValue xsi:type="core:UndefinedValue"/>
   <fullTextSearch>Use</fullTextSearch>
   <dataHistory>Use</dataHistory>
  </attributes>
@@ -2382,23 +2487,24 @@
   </attributes>
  </tabularSections>
  <commands uuid="a81fb73a-3fd2-4feb-9b2d-c25dae3b17cf">
-  <name>Genarate</name>
+  <name>Generate</name>
   <synonym>
    <key>en</key>
    <value>Retail receipt correction</value>
   </synonym>
   <synonym>
    <key>ru</key>
-   <value>Retail receipt correction</value>
+   <value>Корректировка розничного чека</value>
   </synonym>
   <synonym>
    <key>tr</key>
-   <value>Retail receipt correction</value>
+   <value>Perakende fiş düzeltmesi</value>
   </synonym>
   <group>FormCommandBarCreateBasedOn</group>
   <commandParameterType>
    <types>DocumentRef.RetailSalesReceipt</types>
    <types>DocumentRef.RetailReturnReceipt</types>
+   <types>DocumentRef.RetailReceiptCorrection</types>
   </commandParameterType>
   <representation>Auto</representation>
  </commands>

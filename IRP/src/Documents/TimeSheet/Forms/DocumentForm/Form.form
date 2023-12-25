@@ -1454,7 +1454,7 @@
        </presentation>
        <presentation>
         <key>tr</key>
-        <value>Calendar</value>
+        <value>Takvim</value>
        </presentation>
        <value xsi:type="core:StringValue">
         <value>Calendar</value>
@@ -2279,7 +2279,7 @@
       </title>
       <title>
        <key>tr</key>
-       <value>Time sheet page table</value>
+       <value>Zaman çizelgesi sayfa tablosu</value>
       </title>
       <extendedTooltip>
        <name>GroupTimeSheetPageTableExtendedTooltip</name>
@@ -2383,7 +2383,7 @@
       </title>
       <title>
        <key>tr</key>
-       <value>Time sheet page calendar</value>
+       <value>Zaman çizelgesi sayfa takvimi</value>
       </title>
       <extendedTooltip>
        <name>GroupTimeSheetPageCalendarExtendedTooltip</name>
@@ -2421,7 +2421,7 @@
      </title>
      <title>
       <key>tr</key>
-      <value>Time sheet pages</value>
+      <value>Zaman çizelgesi sayfaları</value>
      </title>
      <extendedTooltip>
       <name>GroupTimeSheetPagesExtendedTooltip</name>
@@ -2518,7 +2518,7 @@
        </title>
        <title>
         <key>tr</key>
-        <value>Group8</value>
+        <value>Grup8</value>
        </title>
        <extendedTooltip>
         <name>Group8ExtendedTooltip</name>
@@ -2761,7 +2761,7 @@
       </title>
       <title>
        <key>tr</key>
-       <value>Group6</value>
+       <value>Grup6</value>
       </title>
       <extendedTooltip>
        <name>Group6ExtendedTooltip</name>
@@ -3058,7 +3058,7 @@
        </title>
        <title>
         <key>tr</key>
-        <value>Group5</value>
+        <value>Grup5</value>
        </title>
        <extendedTooltip>
         <name>Group5ExtendedTooltip</name>
@@ -3103,7 +3103,7 @@
       </title>
       <title>
        <key>tr</key>
-       <value>Group7</value>
+       <value>Grup7</value>
       </title>
       <extendedTooltip>
        <name>Group7ExtendedTooltip</name>
@@ -3145,7 +3145,7 @@
      </title>
      <title>
       <key>tr</key>
-      <value>GroupTotals</value>
+      <value>GrupToplamları</value>
      </title>
      <extendedTooltip>
       <name>GroupTotalsExtendedTooltip</name>
@@ -4133,7 +4133,7 @@
   </title>
   <title>
    <key>tr</key>
-   <value>List mode</value>
+   <value>Liste modu</value>
   </title>
   <id>21</id>
   <valueType>
@@ -4159,7 +4159,7 @@
   </title>
   <title>
    <key>tr</key>
-   <value>Calendar</value>
+   <value>Takvim</value>
   </title>
   <id>22</id>
   <valueType>
@@ -4212,7 +4212,7 @@
   </title>
   <title>
    <key>tr</key>
-   <value>Total days</value>
+   <value>Toplam günler</value>
   </title>
   <id>24</id>
   <valueType>
@@ -4240,7 +4240,7 @@
   </title>
   <title>
    <key>tr</key>
-   <value>Total weekend</value>
+   <value>Toplam hafta sonu</value>
   </title>
   <id>25</id>
   <valueType>
@@ -4268,7 +4268,7 @@
   </title>
   <title>
    <key>tr</key>
-   <value>Total vacation</value>
+   <value>Toplam tatil</value>
   </title>
   <id>26</id>
   <valueType>
@@ -4296,7 +4296,7 @@
   </title>
   <title>
    <key>tr</key>
-   <value>Total sick leave</value>
+   <value>Toplam hasta izni</value>
   </title>
   <id>27</id>
   <valueType>
@@ -4324,7 +4324,7 @@
   </title>
   <title>
    <key>tr</key>
-   <value>Total not working days</value>
+   <value>Toplam çalışılmayan günler</value>
   </title>
   <id>28</id>
   <valueType>
@@ -4352,7 +4352,7 @@
   </title>
   <title>
    <key>tr</key>
-   <value>Total working days</value>
+   <value>Toplam çalışma günleri</value>
   </title>
   <id>29</id>
   <valueType>
@@ -4436,7 +4436,7 @@
   </title>
   <title>
    <key>tr</key>
-   <value>Fill all</value>
+   <value>Hepsini doldur</value>
   </title>
   <id>16</id>
   <use>
@@ -4462,7 +4462,7 @@
   </title>
   <title>
    <key>tr</key>
-   <value>Refill by current employee</value>
+   <value>Mevcut çalışan tarafından doldur</value>
   </title>
   <id>17</id>
   <use>

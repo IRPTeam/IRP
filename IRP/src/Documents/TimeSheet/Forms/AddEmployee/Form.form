@@ -487,7 +487,7 @@
    </title>
    <title>
     <key>tr</key>
-    <value>Search control</value>
+    <value>Arama kontrolü</value>
    </title>
    <visible>true</visible>
    <enabled>true</enabled>
@@ -559,7 +559,7 @@
   </title>
   <title>
    <key>tr</key>
-   <value>Employee table</value>
+   <value>Çalışan tablosu</value>
   </title>
   <id>2</id>
   <valueType>

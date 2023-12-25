@@ -14,6 +14,8 @@ Function PostingGetDocumentDataTables(Ref, Cancel, PostingMode, Parameters, AddI
 	Parameters.Insert("QueryParameters", GetAdditionalQueryParameters(Ref));
 	PostingServer.ExecuteQuery(Ref, QueryArray, Parameters);
 
+	DocumentsServer.SalesBySerialLotNumbers(Parameters);
+
 	Tables.Insert("CustomersTransactions", PostingServer.GetQueryTableByName("CustomersTransactions", Parameters));
 
 	CurrenciesServer.ExcludePostingDataTable(Parameters, Parameters.Object.RegisterRecords.T6020S_BatchKeysInfo.Metadata());
@@ -428,13 +430,28 @@ Function R9010B_SourceOfOriginStock()
 EndFunction
 
 Function R2001T_Sales()
-	Return "SELECT
-		   |	*
-		   |INTO R2001T_Sales
-		   |FROM
-		   |	ItemList AS ItemList
-		   |WHERE
-		   |	ItemList.IsSales";
+	Return 
+		"SELECT
+		|	ItemList.Period,
+		|	ItemList.Company,
+		|	ItemList.Branch,
+		|	ItemList.Currency,
+		|	ItemList.Invoice,
+		|	ItemList.ItemKey,
+		|	ItemList.RowKey,
+		|	ItemList.SalesPerson,
+		|	SalesBySerialLotNumbers.SerialLotNumber,
+		|	SalesBySerialLotNumbers.Quantity,
+		|	SalesBySerialLotNumbers.Amount,
+		|	SalesBySerialLotNumbers.NetAmount,
+		|	SalesBySerialLotNumbers.OffersAmount
+		|INTO R2001T_Sales
+		|FROM
+		|	ItemList AS ItemList
+		|		LEFT JOIN SalesBySerialLotNumbers
+		|		ON ItemList.Key = SalesBySerialLotNumbers.Key
+		|WHERE
+		|	ItemList.IsSales";
 EndFunction
 
 Function R2005T_SalesSpecialOffers()
@@ -1362,10 +1379,8 @@ Function GetAnalytics_RevenueFromSales(Parameters)
 	AccountingServer.SetDebitExtDimensions(Parameters, AccountingAnalytics, AdditionalAnalytics);
 	
 	// Credit
-	//Credit = AccountingServer.GetT9014S_AccountsExpenseRevenue(AccountParameters, Parameters.RowData.RevenueType);
-	//If ValueIsFilled(Credit.Account) Then
-		AccountingAnalytics.Credit = ChartsOfAccounts.Basic.FindByCode("REV-SALES");//Credit.Account;
-	//EndIf;
+	AccountingAnalytics.Credit = ChartsOfAccounts.Basic.FindByCode("REV-SALES"); //Credit.Account;
+
 	// Credit - Analytics
 	AccountingServer.SetCreditExtDimensions(Parameters, AccountingAnalytics);
 	Return AccountingAnalytics;

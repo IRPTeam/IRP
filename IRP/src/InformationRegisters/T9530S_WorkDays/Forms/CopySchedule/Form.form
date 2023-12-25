@@ -250,7 +250,7 @@
   </title>
   <title>
    <key>tr</key>
-   <value>From schedule</value>
+   <value>Programdan</value>
   </title>
   <id>1</id>
   <valueType>
@@ -276,7 +276,7 @@
   </title>
   <title>
    <key>tr</key>
-   <value>To schedule</value>
+   <value>Programa</value>
   </title>
   <id>2</id>
   <valueType>

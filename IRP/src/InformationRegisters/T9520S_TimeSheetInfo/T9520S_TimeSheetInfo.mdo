@@ -38,7 +38,7 @@
   </synonym>
   <synonym>
    <key>tr</key>
-   <value>Count days hours</value>
+   <value>Günler saatler say</value>
   </synonym>
   <type>
    <types>Number</types>
@@ -64,7 +64,7 @@
   </synonym>
   <synonym>
    <key>tr</key>
-   <value>Actually days hours</value>
+   <value>Gerçek günler saatler</value>
   </synonym>
   <type>
    <types>Number</types>
@@ -90,7 +90,7 @@
   </synonym>
   <synonym>
    <key>tr</key>
-   <value>Is vacation</value>
+   <value>Tatilde mi</value>
   </synonym>
   <type>
    <types>Boolean</types>
@@ -113,7 +113,7 @@
   </synonym>
   <synonym>
    <key>tr</key>
-   <value>Is sick leave</value>
+   <value>Raporlu izin</value>
   </synonym>
   <type>
    <types>Boolean</types>
@@ -259,7 +259,7 @@
   </synonym>
   <synonym>
    <key>tr</key>
-   <value>Employee schedule</value>
+   <value>Çalışan programı</value>
   </synonym>
   <type>
    <types>CatalogRef.EmployeeSchedule</types>

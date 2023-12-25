@@ -22,7 +22,6 @@
   <key>tr</key>
   <value>Perakende çalışanları</value>
  </synonym>
- <useStandardCommands>true</useStandardCommands>
  <editType>InDialog</editType>
  <dataLockControlMode>Managed</dataLockControlMode>
  <recordPresentation>

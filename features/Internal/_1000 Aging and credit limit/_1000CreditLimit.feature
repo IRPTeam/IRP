@@ -15,8 +15,6 @@ Background:
 
 Scenario: _1000000 preparation (credit limit)
 	When set True value to the constant
-	And I close TestClient session
-	Given I open new TestClient session or connect the existing one
 	* Load info
 		When Create information register Barcodes records
 		When Create catalog Companies objects (own Second company)
@@ -47,7 +45,6 @@ Scenario: _1000000 preparation (credit limit)
 		When Create information register PricesByItemKeys records
 		When Create catalog IntegrationSettings objects
 		When Create information register CurrencyRates records
-		When update ItemKeys
 		When Create information register Taxes records (VAT)
 	* Creation of a Sales order on Crystal, Basic Partner terms, TRY, Sales invoice before Shipment confirmation
 		Given I open hyperlink "e1cib/list/Document.SalesOrder"
@@ -403,7 +400,7 @@ Scenario: _1000002 check credit limit when post Sales invoice based on Sales ord
 		And I go to line in "List" table
 			| 'Number'                            |
 			| '$$NumberSalesInvoice20400011$$'    |
-		And I click the button named "FormDocumentBankReceiptGenarateBankReceipt"
+		And I click the button named "FormDocumentBankReceiptGenerateBankReceipt"
 		And I click Select button of "Account" field
 		And I go to line in "List" table
 			| 'Description'          |

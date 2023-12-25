@@ -407,7 +407,7 @@
   </synonym>
   <synonym>
    <key>tr</key>
-   <value>Vacation</value>
+   <value>Tatil</value>
   </synonym>
   <type>
    <types>CatalogRef.AccrualAndDeductionTypes</types>
@@ -436,7 +436,7 @@
   </synonym>
   <synonym>
    <key>tr</key>
-   <value>Maximum days (year)</value>
+   <value>Maksimum gün (yıl)</value>
   </synonym>
   <type>
    <types>Number</types>
@@ -462,7 +462,7 @@
   </synonym>
   <synonym>
    <key>tr</key>
-   <value>Sick leave</value>
+   <value>Hasta izni</value>
   </synonym>
   <type>
    <types>CatalogRef.AccrualAndDeductionTypes</types>
@@ -491,7 +491,7 @@
   </synonym>
   <synonym>
    <key>tr</key>
-   <value>Maximum days (month)</value>
+   <value>Maksimum gün (ay)</value>
   </synonym>
   <type>
    <types>Number</types>
@@ -517,7 +517,7 @@
   </synonym>
   <synonym>
    <key>tr</key>
-   <value>Salary basic payroll</value>
+   <value>Maaş temel bordrosu</value>
   </synonym>
   <type>
    <types>CatalogRef.AccrualAndDeductionTypes</types>

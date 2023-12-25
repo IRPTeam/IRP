@@ -122,7 +122,7 @@
   </synonym>
   <synonym>
    <key>tr</key>
-   <value>Employee schedule</value>
+   <value>Çalışan programı</value>
   </synonym>
   <type>
    <types>CatalogRef.EmployeeSchedule</types>

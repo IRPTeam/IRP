@@ -51,7 +51,7 @@
   </synonym>
   <synonym>
    <key>tr</key>
-   <value>Count days/hours</value>
+   <value>Gün/saat say</value>
   </synonym>
   <type>
    <types>Number</types>
@@ -105,7 +105,7 @@
   </synonym>
   <synonym>
    <key>tr</key>
-   <value>Employee schedule</value>
+   <value>Çalışan programı</value>
   </synonym>
   <type>
    <types>CatalogRef.EmployeeSchedule</types>
@@ -147,7 +147,7 @@
   </synonym>
   <synonym>
    <key>tr</key>
-   <value>Create schedule</value>
+   <value>Program oluştur</value>
   </synonym>
   <usePurposes>PersonalComputer</usePurposes>
   <usePurposes>MobileDevice</usePurposes>
@@ -164,7 +164,7 @@
   </synonym>
   <synonym>
    <key>tr</key>
-   <value>Copy schedule</value>
+   <value>Programı kopyala</value>
   </synonym>
   <usePurposes>PersonalComputer</usePurposes>
   <usePurposes>MobileDevice</usePurposes>

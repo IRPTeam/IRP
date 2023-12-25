@@ -19,7 +19,7 @@
  </synonym>
  <synonym>
   <key>tr</key>
-  <value>R9545 Paid vacations</value>
+  <value>R9545 Ücretli tatiller</value>
  </synonym>
  <useStandardCommands>true</useStandardCommands>
  <registerType>Turnovers</registerType>
@@ -37,7 +37,7 @@
   </synonym>
   <synonym>
    <key>tr</key>
-   <value>Paid</value>
+   <value>Ödendi</value>
   </synonym>
   <type>
    <types>Number</types>

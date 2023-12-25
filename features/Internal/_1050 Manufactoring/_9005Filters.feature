@@ -17,8 +17,6 @@ Background:
 Scenario: _9001 preparation
 	// 01.01-07.01 for Склад производства 04, 08.01-15.01 for Склад производства 04 и Склад производства 05
 	When set True value to the constant
-	And I close TestClient session
-	Given I open new TestClient session or connect the existing one
 	When Create catalog BusinessUnits objects (MF)
 	When Create catalog ItemTypes objects (MF)
 	When Create catalog Items objects (MF)
@@ -26,7 +24,6 @@ Scenario: _9001 preparation
 	When Create catalog ItemKeys objects (MF)
 	When Create catalog Units objects
 	When Create chart of characteristic types AddAttributeAndProperty objects
-	When update ItemKeys
 	When Create catalog MFBillOfMaterials objects
 	Given I open hyperlink 'e1cib/list/Catalog.PlanningPeriods'
 	If "List" table does not contain lines Then

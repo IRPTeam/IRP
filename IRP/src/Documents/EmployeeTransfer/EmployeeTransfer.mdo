@@ -18,7 +18,7 @@
  </synonym>
  <synonym>
   <key>tr</key>
-  <value>Employee transfer</value>
+  <value>Çalışan transferi</value>
  </synonym>
  <useStandardCommands>true</useStandardCommands>
  <inputByString>Document.EmployeeTransfer.StandardAttribute.Number</inputByString>
@@ -62,7 +62,7 @@
  </listPresentation>
  <listPresentation>
   <key>tr</key>
-  <value>Employee transfers</value>
+  <value>Çalışan transferleri</value>
  </listPresentation>
  <numberLength>12</numberLength>
  <numberAllowedLength>Variable</numberAllowedLength>
@@ -151,7 +151,7 @@
   </synonym>
   <synonym>
    <key>tr</key>
-   <value>From position</value>
+   <value>Pozisyondan</value>
   </synonym>
   <type>
    <types>CatalogRef.EmployeePositions</types>
@@ -174,7 +174,7 @@
   </synonym>
   <synonym>
    <key>tr</key>
-   <value>From employee schedule</value>
+   <value>Çalışan programından</value>
   </synonym>
   <type>
    <types>CatalogRef.EmployeeSchedule</types>
@@ -198,7 +198,7 @@
   </synonym>
   <synonym>
    <key>tr</key>
-   <value>From profit loss center</value>
+   <value>Kâr zarar merkezinden</value>
   </synonym>
   <type>
    <types>CatalogRef.BusinessUnits</types>
@@ -220,7 +220,7 @@
   </synonym>
   <synonym>
    <key>tr</key>
-   <value>To position</value>
+   <value>Pozisyona</value>
   </synonym>
   <type>
    <types>CatalogRef.EmployeePositions</types>
@@ -243,7 +243,7 @@
   </synonym>
   <synonym>
    <key>tr</key>
-   <value>To employee schedule</value>
+   <value>Çalışan programına</value>
   </synonym>
   <type>
    <types>CatalogRef.EmployeeSchedule</types>
@@ -267,7 +267,7 @@
   </synonym>
   <synonym>
    <key>tr</key>
-   <value>To profit loss center</value>
+   <value>Kar zarar merkezine</value>
   </synonym>
   <type>
    <types>CatalogRef.BusinessUnits</types>
@@ -289,7 +289,7 @@
   </synonym>
   <synonym>
    <key>tr</key>
-   <value>To branch</value>
+   <value>Şubeye</value>
   </synonym>
   <type>
    <types>CatalogRef.BusinessUnits</types>
@@ -312,7 +312,7 @@
   </synonym>
   <synonym>
    <key>tr</key>
-   <value>End of date</value>
+   <value>Tarih sonu</value>
   </synonym>
   <type>
    <types>Date</types>
@@ -338,7 +338,7 @@
   </synonym>
   <synonym>
    <key>tr</key>
-   <value>From salary</value>
+   <value>Maaştan kes</value>
   </synonym>
   <type>
    <types>DefinedType.typeAmount</types>
@@ -361,7 +361,7 @@
   </synonym>
   <synonym>
    <key>tr</key>
-   <value>From personal salary</value>
+   <value>Kişisel maaştan</value>
   </synonym>
   <type>
    <types>DefinedType.typeAmount</types>
@@ -384,7 +384,7 @@
   </synonym>
   <synonym>
    <key>tr</key>
-   <value>From accrual type</value>
+   <value>Birikim türünden</value>
   </synonym>
   <type>
    <types>CatalogRef.AccrualAndDeductionTypes</types>
@@ -414,7 +414,7 @@
   </synonym>
   <synonym>
    <key>tr</key>
-   <value>To salary</value>
+   <value>Maaşa</value>
   </synonym>
   <type>
    <types>DefinedType.typeAmount</types>
@@ -433,11 +433,11 @@
   </synonym>
   <synonym>
    <key>ru</key>
-   <value>В личную зарплату</value>
+   <value>На личную зарплату</value>
   </synonym>
   <synonym>
    <key>tr</key>
-   <value>To personal salary</value>
+   <value>Kişisel maaşa</value>
   </synonym>
   <type>
    <types>DefinedType.typeAmount</types>
@@ -460,7 +460,7 @@
   </synonym>
   <synonym>
    <key>tr</key>
-   <value>To accrual type</value>
+   <value>Tahakkuk tipine</value>
   </synonym>
   <type>
    <types>CatalogRef.AccrualAndDeductionTypes</types>

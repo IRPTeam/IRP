@@ -16,7 +16,7 @@
  </synonym>
  <synonym>
   <key>tr</key>
-  <value>Employee schedule types</value>
+  <value>Çalışan program türleri</value>
  </synonym>
  <quickChoice>true</quickChoice>
  <choiceMode>BothWays</choiceMode>
@@ -47,7 +47,7 @@
   </synonym>
   <synonym>
    <key>tr</key>
-   <value>Hour</value>
+   <value>Saat</value>
   </synonym>
  </enumValues>
 </mdclass:Enum>

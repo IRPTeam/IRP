@@ -279,15 +279,41 @@ Function GetAdditionalQueryParameters(Ref)
 	Return StrParams;
 EndFunction
 
-#EndRegion
-
-#Region Posting_SourceTable
-
 Function GetQueryTextsSecondaryTables()
 	QueryArray = New Array;
 	QueryArray.Add(PaymentList());
 	Return QueryArray;
 EndFunction
+
+Function GetQueryTextsMasterTables()
+	QueryArray = New Array;
+	QueryArray.Add(R1020B_AdvancesToVendors());
+	QueryArray.Add(R1021B_VendorsTransactions());
+	QueryArray.Add(R2020B_AdvancesFromCustomers());
+	QueryArray.Add(R2021B_CustomersTransactions());
+	QueryArray.Add(R2023B_AdvancesFromRetailCustomers());
+	QueryArray.Add(R3010B_CashOnHand());
+	QueryArray.Add(R3011T_CashFlow());
+	QueryArray.Add(R3021B_CashInTransitIncoming());
+	QueryArray.Add(R3024B_SalesOrdersToBePaid());
+	QueryArray.Add(R3026B_SalesOrdersCustomerAdvance());
+	QueryArray.Add(R3027B_EmployeeCashAdvance());
+	QueryArray.Add(R3035T_CashPlanning());
+	QueryArray.Add(R3050T_PosCashBalances());
+	QueryArray.Add(R5010B_ReconciliationStatement());
+	QueryArray.Add(R5011B_CustomersAging());
+	QueryArray.Add(R5015B_OtherPartnersTransactions());
+	QueryArray.Add(R5021T_Revenues());
+	QueryArray.Add(R5022T_Expenses());
+	QueryArray.Add(T2014S_AdvancesInfo());
+	QueryArray.Add(T2015S_TransactionsInfo());
+	QueryArray.Add(T1040T_AccountingAmounts());
+	Return QueryArray;
+EndFunction
+
+#EndRegion
+
+#Region Posting_SourceTable
 
 Function PaymentList()
 	Return 
@@ -390,7 +416,8 @@ Function PaymentList()
 		|		ELSE NULL
 		|	END AS CashTransferOrder,
 		|	PaymentList.Ref.TransactionType = VALUE(Enum.IncomingPaymentTransactionType.OtherPartner) AS IsOtherPartner,
-		|	PaymentList.RevenueType AS RevenueType
+		|	PaymentList.RevenueType AS RevenueType,
+		|	PaymentList.CashFlowCenter
 		|INTO PaymentList
 		|FROM
 		|	Document.BankReceipt.PaymentList AS PaymentList
@@ -401,32 +428,6 @@ EndFunction
 #EndRegion
 
 #Region Posting_MainTables
-
-Function GetQueryTextsMasterTables()
-	QueryArray = New Array;
-	QueryArray.Add(R1020B_AdvancesToVendors());
-	QueryArray.Add(R1021B_VendorsTransactions());
-	QueryArray.Add(R2020B_AdvancesFromCustomers());
-	QueryArray.Add(R2021B_CustomersTransactions());
-	QueryArray.Add(R2023B_AdvancesFromRetailCustomers());
-	QueryArray.Add(R3010B_CashOnHand());
-	QueryArray.Add(R3011T_CashFlow());
-	QueryArray.Add(R3021B_CashInTransitIncoming());
-	QueryArray.Add(R3024B_SalesOrdersToBePaid());
-	QueryArray.Add(R3026B_SalesOrdersCustomerAdvance());
-	QueryArray.Add(R3027B_EmployeeCashAdvance());
-	QueryArray.Add(R3035T_CashPlanning());
-	QueryArray.Add(R3050T_PosCashBalances());
-	QueryArray.Add(R5010B_ReconciliationStatement());
-	QueryArray.Add(R5011B_CustomersAging());
-	QueryArray.Add(R5015B_OtherPartnersTransactions());
-	QueryArray.Add(R5021T_Revenues());
-	QueryArray.Add(R5022T_Expenses());
-	QueryArray.Add(T2014S_AdvancesInfo());
-	QueryArray.Add(T2015S_TransactionsInfo());
-	QueryArray.Add(T1040T_AccountingAmounts());
-	Return QueryArray;
-EndFunction
 
 Function R3027B_EmployeeCashAdvance()
 	Return "SELECT
@@ -715,6 +716,7 @@ Function R3011T_CashFlow()
 		|	PaymentList.Account,
 		|	VALUE(Enum.CashFlowDirections.Incoming) AS Direction,
 		|	PaymentList.FinancialMovementType,
+		|	PaymentList.CashFlowCenter,
 		|	PaymentList.PlanningPeriod,
 		|	PaymentList.Currency,
 		|	PaymentList.Key,
@@ -734,6 +736,7 @@ Function R3011T_CashFlow()
 		|	PaymentList.Account,
 		|	VALUE(Enum.CashFlowDirections.Outgoing) AS Direction,
 		|	PaymentList.FinancialMovementType,
+		|	PaymentList.CashFlowCenter,
 		|	PaymentList.PlanningPeriod,
 		|	PaymentList.Currency,
 		|	PaymentList.Key,

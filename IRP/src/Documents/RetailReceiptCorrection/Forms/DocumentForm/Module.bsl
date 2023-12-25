@@ -99,6 +99,7 @@ Procedure SetVisibilityAvailability(Object, Form)
 	Form.Items.ItemListQuantityIsFixed.Visible = _QuantityIsFixed;
 	Form.Items.ItemListQuantityInBaseUnit.Visible = _QuantityIsFixed;
 	Form.Items.EditQuantityInBaseUnit.Enabled = Not _QuantityIsFixed;
+	Form.Items.GroupCorrectionData.Visible = Not TypeOf(Object.BasisDocument) = Type("DocumentRef.RetailReceiptCorrection");
 EndProcedure
 
 &AtClient
@@ -279,6 +280,19 @@ Procedure BranchOnChange(Item)
 	DocRetailReceiptCorrectionClient.BranchOnChange(Object, ThisObject, Item);
 EndProcedure
 
+#EndRegion
+
+#Region BASIS_DOCUMENT
+&AtClient
+Procedure BasisDocumentOnChange(Item)
+	SetVisibilityAvailability(Object, ThisObject);
+	If TypeOf(Object.BasisDocument) = Type("DocumentRef.RetailReceiptCorrection") Then
+		Object.CorrectionDescription = "";
+		Object.CorrectionType = 0;
+		Object.NumberTaxAuthorityPrescription = "";
+		Object.BasisDocumentFiscalNumber = "";
+	EndIf; 
+EndProcedure
 #EndRegion
 
 #Region ITEM_LIST

@@ -569,11 +569,11 @@
   </synonym>
   <synonym>
    <key>ru</key>
-   <value>Journal entry (multiple documents)</value>
+   <value>Бухгалтерская операция (несколько документов)</value>
   </synonym>
   <synonym>
    <key>tr</key>
-   <value>Journal entry (multiple documents)</value>
+   <value>Muhasebe kaydı (çoklu belgeler)</value>
   </synonym>
   <group>CommandGroup.Service</group>
   <commandParameterType>

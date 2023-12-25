@@ -1892,11 +1892,6 @@
    </type>
    <minValue xsi:type="core:UndefinedValue"/>
    <maxValue xsi:type="core:UndefinedValue"/>
-   <choiceParameterLinks>
-    <name>Filter.BankTerm</name>
-    <changeMode>DontChange</changeMode>
-    <field>Document.RetailSalesReceipt.TabularSection.Payments.Attribute.BankTerm</field>
-   </choiceParameterLinks>
    <dataHistory>Use</dataHistory>
    <fullTextSearch>Use</fullTextSearch>
   </attributes>
@@ -2116,6 +2111,28 @@
      <value>true</value>
     </value>
    </choiceParameters>
+   <dataHistory>Use</dataHistory>
+   <fullTextSearch>Use</fullTextSearch>
+  </attributes>
+  <attributes uuid="d9371c17-8d3b-4c83-9cdd-22271931d3c2">
+   <name>CashFlowCenter</name>
+   <synonym>
+    <key>en</key>
+    <value>Cash flow center</value>
+   </synonym>
+   <synonym>
+    <key>ru</key>
+    <value>Центр движения денежных средств</value>
+   </synonym>
+   <synonym>
+    <key>tr</key>
+    <value>Nakit akış merkezi</value>
+   </synonym>
+   <type>
+    <types>CatalogRef.BusinessUnits</types>
+   </type>
+   <minValue xsi:type="core:UndefinedValue"/>
+   <maxValue xsi:type="core:UndefinedValue"/>
    <dataHistory>Use</dataHistory>
    <fullTextSearch>Use</fullTextSearch>
   </attributes>
@@ -2549,7 +2566,7 @@
   </synonym>
   <synonym>
    <key>ru</key>
-   <value>УДАЛИТЬ партии комитента</value>
+   <value>DELETE партии комитента</value>
   </synonym>
   <synonym>
    <key>tr</key>
@@ -3102,14 +3119,14 @@
   </attributes>
  </tabularSections>
  <commands uuid="fac0f0ce-cdcd-4e1f-ae4e-961fb1021bce">
-  <name>Genarate</name>
+  <name>Generate</name>
   <synonym>
    <key>en</key>
    <value>Retail sales receipt</value>
   </synonym>
   <synonym>
    <key>ru</key>
-   <value>Розничные чеки - Продажа</value>
+   <value>Розничные чеки - Продажа</value>
   </synonym>
   <synonym>
    <key>tr</key>

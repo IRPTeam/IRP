@@ -1510,7 +1510,8 @@ Procedure CreateJE_ByDocumentName(DocumentName, Company, LedgerType, StartDate, 
 	|////////////////////////////////////////////////////////////////////////////////
 	|SELECT
 	|	Documents.Ref AS Basis,
-	|	JournalEntry.Ref AS JournalEntry
+	|	JournalEntry.Ref AS JournalEntry,
+	|	&LedgerType AS LedgerType
 	|FROM
 	|	Documents AS Documents
 	|		LEFT JOIN Document.JournalEntry AS JournalEntry
@@ -1582,9 +1583,11 @@ Procedure CreateJE(QueryTable)
 	For Each Row In QueryTable Do
 		If ValueIsFilled(Row.JournalEntry) Then
 			DocObject = Row.JournalEntry.GetObject();
+			CommonFunctionsClientServer.PutToAddInfo(DocObject.AdditionalProperties, "WriteOnForm", True);
 			DocObject.Write(DocumentWriteMode.Write);
 		Else
 			DocObject = Documents.JournalEntry.CreateDocument();
+			CommonFunctionsClientServer.PutToAddInfo(DocObject.AdditionalProperties, "WriteOnForm", True);
 			DocObject.Fill(New Structure("Basis, LedgerType", Row.Basis, Row.LedgerType));
 			DocObject.Date = Row.Basis.Date;
 			DocObject.Write(DocumentWriteMode.Write);

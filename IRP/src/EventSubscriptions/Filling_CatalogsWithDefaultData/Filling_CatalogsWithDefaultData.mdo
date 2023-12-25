@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mdclass:EventSubscription xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="13efe471-25f8-4cab-9321-ac45cdd27e4c">
+ <name>Filling_CatalogsWithDefaultData</name>
+ <synonym>
+  <key>en</key>
+  <value>Filling catalogs with default data</value>
+ </synonym>
+ <synonym>
+  <key>ru</key>
+  <value>Заполнение каталогов стандартными данными</value>
+ </synonym>
+ <synonym>
+  <key>tr</key>
+  <value>Katalogları varsayılan verilerle doldurma</value>
+ </synonym>
+ <source>
+  <types>CatalogObject</types>
+ </source>
+ <event>Filling</event>
+ <handler>CommonModule.FillingWithDefaultDataEvent.FillingCatalogsWithDefaultData</handler>
+</mdclass:EventSubscription>

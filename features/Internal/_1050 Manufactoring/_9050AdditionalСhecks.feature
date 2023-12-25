@@ -40,7 +40,6 @@ Scenario: _9050 preparation
 	When Create catalog Units objects (MF)
 	When Create catalog ItemKeys objects (MF)
 	When Create chart of characteristic types AddAttributeAndProperty objects
-	When update ItemKeys
 	When Create information register CurrencyRates records
 	When Create information register Taxes records (VAT)
 	When Create catalog MFBillOfMaterials objects

@@ -18,7 +18,7 @@
  </synonym>
  <synonym>
   <key>tr</key>
-  <value>Additional accrual</value>
+  <value>Ek tahakkuk</value>
  </synonym>
  <useStandardCommands>true</useStandardCommands>
  <inputByString>Document.AdditionalAccrual.StandardAttribute.Number</inputByString>
@@ -62,7 +62,7 @@
  </listPresentation>
  <listPresentation>
   <key>tr</key>
-  <value>Additional accruals</value>
+  <value>Ek kesintiler</value>
  </listPresentation>
  <numberLength>12</numberLength>
  <numberAllowedLength>Variable</numberAllowedLength>

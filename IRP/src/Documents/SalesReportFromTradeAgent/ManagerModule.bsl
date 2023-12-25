@@ -14,6 +14,8 @@ Function PostingGetDocumentDataTables(Ref, Cancel, PostingMode, Parameters, AddI
 	Parameters.Insert("QueryParameters", GetAdditionalQueryParameters(Ref));
 	PostingServer.ExecuteQuery(Ref, QueryArray, Parameters);
 
+	DocumentsServer.SalesBySerialLotNumbers(Parameters);
+	
 	Tables.Insert("CustomersTransactions", PostingServer.GetQueryTableByName("CustomersTransactions", Parameters));
 
 	CurrenciesServer.ExcludePostingDataTable(Parameters, Parameters.Object.RegisterRecords.T6020S_BatchKeysInfo.Metadata());
@@ -146,7 +148,9 @@ Function ItemList()
 		   |	DocItemList.PriceType,
 		   |	DocItemList.Ref.Company.TradeAgentStore AS TradeAgentStore,
 		   |	DocItemList.VatRate AS VatRate,
-		   |	DocItemList.TaxAmount AS TaxAmount
+		   |	DocItemList.TaxAmount AS TaxAmount,
+		   |	VALUE(Catalog.Partners.EmptyRef) AS SalesPerson,
+		   |	0 AS OffersAmount
 		   |INTO ItemList
 		   |FROM
 		   |	Document.SalesReportFromTradeAgent.ItemList AS DocItemList
@@ -260,13 +264,27 @@ Function R9010B_SourceOfOriginStock()
 EndFunction
 
 Function R2001T_Sales()
-	Return "SELECT
-		   |	*
-		   |INTO R2001T_Sales
-		   |FROM
-		   |	ItemList AS ItemList
-		   |WHERE
-		   |	TRUE";
+	Return 
+		"SELECT
+		|	ItemList.Period,
+		|	ItemList.Company,
+		|	ItemList.Branch,
+		|	ItemList.Currency,
+		|	ItemList.Invoice,
+		|	ItemList.ItemKey,
+		|	ItemList.RowKey,
+		|	SalesBySerialLotNumbers.SerialLotNumber,
+		|	SalesBySerialLotNumbers.Quantity,
+		|	SalesBySerialLotNumbers.Amount,
+		|	SalesBySerialLotNumbers.NetAmount,
+		|	SalesBySerialLotNumbers.OffersAmount
+		|INTO R2001T_Sales
+		|FROM
+		|	ItemList AS ItemList
+		|		LEFT JOIN SalesBySerialLotNumbers
+		|		ON ItemList.Key = SalesBySerialLotNumbers.Key
+		|WHERE
+		|	TRUE";
 EndFunction
 
 Function R2040B_TaxesIncoming()

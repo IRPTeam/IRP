@@ -25,4 +25,5 @@
  <content>Catalog.ItemTypes.Attribute.UseSerialLotNumber</content>
  <content>Catalog.ItemTypes.TabularSection.RegExpSerialLotNumbersRules</content>
  <content>Catalog.ItemTypes.Attribute.StockBalanceDetail</content>
+ <content>DataProcessor.CreateSerialLotNumbers</content>
 </mdclass:FunctionalOption>

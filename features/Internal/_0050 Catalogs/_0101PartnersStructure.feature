@@ -1,4 +1,4 @@
-#language: en
+﻿#language: en
 @tree
 @Positive
 @PartnerCatalogs
@@ -19,8 +19,6 @@ Background:
 
 Scenario: _010005 create company for Partners (Ferron, Kalipso, Lomaniti)
 	When set True value to the constant
-	And I close TestClient session
-	Given I open new TestClient session or connect the existing one
 	* Preparation
 		When Create catalog Partners objects (Ferron BP)
 		When Create catalog Partners objects (Kalipso)
@@ -38,30 +36,45 @@ Scenario: _010005 create company for Partners (Ferron, Kalipso, Lomaniti)
 		And I input "Ferron BP" text in "Partner" field
 		And I select "Company" exact value from the drop-down list named "Type"
 		And I click "Save" button
-		* Check data save
+		* Check data save (dublicate desctiprion)
 		And I click "Save and close" button
+		Then there are lines in TestClient message log
+			|'Description not unique [Company Ferron BP]'|
+		* Change Description_en and try save
+			And I input "Company Ferron BP1" text in "ENG" field
+			And I click "Save and close" button
+			Then there are lines in TestClient message log
+				|'Description not unique [Company Ferron BP]'|
+		* Change Description_tr and try save
+			And I click Open button of the field named "Description_en"
+			And I input "Company Ferron BP1 TR" text in the field named "Description_tr"
+			And I click "Ok" button
+			And I click "Save and close" button
+			And Delay 2
 	* Check the availability of the created company  "Company Ferron BP"
-		Then I check for the "Companies" catalog element with the "Description_en" "Company Ferron BP" 
-		Then I check for the "Companies" catalog element with the "Description_tr" "Company Ferron BP TR"
+		Then I check for the "Companies" catalog element with the "Description_en" "Company Ferron BP1" 
+		Then I check for the "Companies" catalog element with the "Description_tr" "Company Ferron BP1 TR"
 	* Creating "Company Kalipso"
 		And I click the button named "FormCreate"
 		And Delay 2
 		And I click Open button of the field named "Description_en"
-		And I input "Company Kalipso" text in the field named "Description_en"
-		And I input "Company Kalipso TR" text in the field named "Description_tr"
+		And I input "Company Kalipso1" text in the field named "Description_en"
+		And I input "Company Kalipso1 TR" text in the field named "Description_tr"
 		And I click "Ok" button
 		And I input "Ukraine" text in "Country" field
 		And I click Select button of "Partner" field
 		And I go to line in "List" table
 			| 'Description'    |
-			| 'Kalipso'        |
+			| 'Kalipso1'        |
 		And I select current line in "List" table
 		And I select "Company" exact value from the drop-down list named "Type"
 		And I click "Save" button
 		* Check data save
 		And I click "Save and close" button
-		Then I check for the "Companies" catalog element with the "Description_en" "Company Kalipso" 
-		Then I check for the "Companies" catalog element with the "Description_tr" "Company Kalipso TR" 
+		Then I check for the "Companies" catalog element with the "Description_en" "Company Kalipso1" 
+		Then I check for the "Companies" catalog element with the "Description_tr" "Company Kalipso1 TR" 
+	And I close TestClient session
+	Given I open new TestClient session or connect the existing one 
 	
 
 
@@ -115,13 +128,13 @@ Scenario: _010006 create a structure of partners (partners), 1 main partner and 
 		And Delay 5
 		Then "Partners" window is opened
 		And I go to line in "List" table
-			| 'Description'    |
-			| 'MIO'            |
+			| 'Description'     |
+			| 'MIO'             |
 		And I select current line in "List" table
 		And I click Select button of "Main partner" field
 		And I go to line in "List" table
-			| 'Description'    |
-			| 'Seven Brand'    |
+			| 'Description'     |
+			| 'Seven Brand'     |
 		And I select current line in "List" table
 		Then the form attribute named "Parent" became equal to "Seven Brand"
 		And I click "Save and close" button
@@ -157,9 +170,9 @@ Scenario: _010008 create of a partner structure (Partners), 1 main partner, unde
 		And I click Select button of "Main partner" field
 		And I go to line in "List" table
 			| 'Description'    |
-			| 'Kalipso'        |
+			| 'Kalipso1'        |
 		And I select current line in "List" table
-		Then the form attribute named "Parent" became equal to "Kalipso"
+		Then the form attribute named "Parent" became equal to "Kalipso1"
 		And I click "Save and close" button
 		And Delay 5
 	* Check the subordination of "Seven Brand" (together with the "Alians" and "MIO" subordinates) to Kalipso partner
@@ -168,15 +181,15 @@ Scenario: _010008 create of a partner structure (Partners), 1 main partner, unde
 		And I click "Hierarchical list" button
 		And "List" table contains lines
 			| 'Description'    |
-			| 'Kalipso'        |
+			| 'Kalipso1'        |
 		And I go to line in "List" table
 			| 'Description'    |
-			| 'Kalipso'        |
+			| 'Kalipso1'        |
 		And I move one level down in "List" table
 		And I move one level down in "List" table
 		And "List" table contains lines
 			| 'Description'    |
-			| 'Kalipso'        |
+			| 'Kalipso1'        |
 			| 'Alians'         |
 			| 'MIO'            |
 		Then the number of "List" table lines is "равно" "3"
@@ -223,23 +236,13 @@ Scenario: _010009 check filling legal name in the partner term (complex partner 
 		And I click Select button of "Legal name" field
 		And "List" table contains lines
 			| 'Description'        |
-			| 'Company Kalipso'    |
+			| 'Company Kalipso1'   |
 		And "List" table does not contain lines
 			| 'Description'    |
 			| 'MIO'            |
 		And I go to line in "List" table
 			| 'Description'        |
-			| 'Company Kalipso'    |
+			| 'Company Kalipso1'   |
 		And I select current line in "List" table
-		Then the form attribute named "LegalName" became equal to "Company Kalipso"
+		Then the form attribute named "LegalName" became equal to "Company Kalipso1"
 		And I close all client application windows
-		
-
-				
-		
-				
-				
-				
-		
-								
-				

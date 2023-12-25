@@ -11,7 +11,7 @@
  </synonym>
  <synonym>
   <key>tr</key>
-  <value>Doc employee firing server</value>
+  <value>Belge çalışan işten çıkarma sunucusu</value>
  </synonym>
  <server>true</server>
  <serverCall>true</serverCall>

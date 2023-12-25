@@ -1,4 +1,4 @@
-#language: en
+﻿#language: en
 @tree
 @Positive
 @Sales
@@ -24,8 +24,6 @@ Background:
 
 Scenario: _023000 preparation (Sales order)
 	When set True value to the constant
-	And I close TestClient session
-	Given I open new TestClient session or connect the existing one
 	* Load info
 		When Create catalog ObjectStatuses objects
 		When Create catalog ItemKeys objects
@@ -55,7 +53,6 @@ Scenario: _023000 preparation (Sales order)
 		When Create information register CurrencyRates records
 		When Create catalog BusinessUnits objects
 		When Create catalog ExpenseAndRevenueTypes objects
-		When update ItemKeys
 		When Create catalog Partners objects
 		When Create information register Taxes records (VAT)
 		When Create catalog Partners objects (Kalipso)
@@ -187,7 +184,7 @@ Scenario: _023003 copy SO and check filling in Row Id info table
 		And in the table "ItemList" I click "Edit currencies" button
 		And "CurrenciesTable" table became equal
 			| 'Movement type'        | 'Type'           | 'To'    | 'From'   | 'Multiplicity'   | 'Rate'     | 'Amount'    |
-			| 'Reporting currency'   | 'Reporting'      | 'USD'   | 'TRY'    | '1'              | '0,1712'   | '744,72'    |
+			| 'Reporting currency'   | 'Reporting'      | 'USD'   | 'TRY'    | '1'              | '0,171200' | '744,72'    |
 			| 'Local currency'       | 'Legal'          | 'TRY'   | 'TRY'    | '1'              | '1'        | '4 350'     |
 			| 'TRY'                  | 'Partner term'   | 'TRY'   | 'TRY'    | '1'              | '1'        | '4 350'     |
 		And I close current window		

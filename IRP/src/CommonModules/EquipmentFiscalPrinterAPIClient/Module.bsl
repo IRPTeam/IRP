@@ -808,7 +808,11 @@ EndFunction
 // ** CashierName - String - Full name and position of the authorized person for the operation
 // ** CashierINN - String - Taxpayer Identification Number of the authorized person
 // ** OperationType - Number - Type of operation
-// ** CorrectionData - Structure - Data for correction operation
+// ** CorrectionData - Structure - Data for correction operation:
+// *** Type - Number - Type of correction: 0 - Independent, 1 - By prescription
+// *** Description - String - Description of the correction
+// *** Date - Date - Date of the corrected transaction
+// *** Number - String - Number of the tax authority's prescription
 // ** TaxationSystem - Number - Taxation system code
 // ** CustomerDetail - Structure - Customer (client) details:
 // *** Info - String - Name of the organization or surname, name, patronymic (if available)
@@ -862,8 +866,14 @@ Function CheckPackage() Export
     Str.Parameters.Insert("CashierName", "");
     Str.Parameters.Insert("CashierINN", "");
     Str.Parameters.Insert("OperationType", 0);
-    Str.Parameters.Insert("CorrectionData", New Structure);
     Str.Parameters.Insert("TaxationSystem", 0);
+
+	CorrectionData = New Structure;
+    CorrectionData.Insert("Type", 0);
+    CorrectionData.Insert("Description", "");
+    CorrectionData.Insert("Date", Date(1, 1, 1));
+    CorrectionData.Insert("Number", "");
+    Str.Parameters.Insert("CorrectionData", CorrectionData);
 
     CustomerDetail = New Structure;
     CustomerDetail.Insert("Info", "");

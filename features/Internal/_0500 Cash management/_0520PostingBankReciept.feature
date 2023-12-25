@@ -23,8 +23,6 @@ Background:
 	
 Scenario:  _052001 preparation (Bank receipt)
 	When set True value to the constant
-	And I close TestClient session
-	Given I open new TestClient session or connect the existing one
 	* Load info
 		When Create catalog ObjectStatuses objects
 		When Create catalog ItemKeys objects
@@ -55,7 +53,6 @@ Scenario:  _052001 preparation (Bank receipt)
 		When Create information register CurrencyRates records
 		When Create catalog CashAccounts objects
 		When Create catalog ExpenseAndRevenueTypes objects
-		When update ItemKeys
 		When Create catalog BankTerms objects
 		When Create catalog PaymentTerminals objects
 		When Create catalog PaymentTypes objects
@@ -110,7 +107,7 @@ Scenario: _052001 create Bank receipt based on Sales invoice
 		And I go to line in "List" table
 			| 'Number'                          |
 			| '$$NumberSalesInvoice024001$$'    |
-		And I click the button named "FormDocumentBankReceiptGenarateBankReceipt"
+		And I click the button named "FormDocumentBankReceiptGenerateBankReceipt"
 	* Create and filling in Bank receipt
 		Then the form attribute named "Company" became equal to "Main Company"
 		Then the form attribute named "TransactionType" became equal to "Payment from customer"
@@ -121,7 +118,7 @@ Scenario: _052001 create Bank receipt based on Sales invoice
 		And in the table "PaymentList" I click "Edit currencies" button
 		And "CurrenciesTable" table became equal
 			| 'Movement type'        | 'Type'           | 'To'    | 'From'   | 'Multiplicity'   | 'Rate'     | 'Amount'    |
-			| 'Reporting currency'   | 'Reporting'      | 'USD'   | 'TRY'    | '1'              | '0,1712'   | '727,60'    |
+			| 'Reporting currency'   | 'Reporting'      | 'USD'   | 'TRY'    | '1'              | '0,171200'   | '727,60'    |
 			| 'Local currency'       | 'Legal'          | 'TRY'   | 'TRY'    | '1'              | '1'        | '4 250'     |
 			| 'TRY'                  | 'Partner term'   | 'TRY'   | 'TRY'    | '1'              | '1'        | '4 250'     |
 		And I close current window		
@@ -139,10 +136,10 @@ Scenario: _052001 create Bank receipt based on Sales invoice
 			| 'Ferron BP'   | 'Basic Partner terms, TRY'   | '4 250,00'       | 'Company Ferron BP'   | '$$SalesInvoice024001$$'   | ''                              |
 		And in the table "PaymentList" I click "Edit currencies" button
 		And "CurrenciesTable" table became equal
-			| 'Movement type'        | 'Type'           | 'To'    | 'From'   | 'Multiplicity'   | 'Rate'     | 'Amount'       |
-			| 'Local currency'       | 'Legal'          | 'TRY'   | 'USD'    | '1'              | '5,6275'   | '23 916,88'    |
-			| 'Reporting currency'   | 'Reporting'      | 'USD'   | 'USD'    | '1'              | '1'        | '4 250'        |
-			| 'TRY'                  | 'Partner term'   | 'TRY'   | 'USD'    | '1'              | '5,6275'   | '23 916,88'    |
+			| 'Movement type'        | 'Type'           | 'To'    | 'From'   | 'Multiplicity'   | 'Rate'       | 'Amount'       |
+			| 'Local currency'       | 'Legal'          | 'TRY'   | 'USD'    | '1'              | '5,627500'   | '23 916,88'    |
+			| 'Reporting currency'   | 'Reporting'      | 'USD'   | 'USD'    | '1'              | '1'          | '4 250'        |
+			| 'TRY'                  | 'Partner term'   | 'TRY'   | 'USD'    | '1'              | '5,627500'   | '23 916,88'    |
 		And I close current window	
 		Then the form attribute named "PaymentListTotalTotalAmount" became equal to "4 250,00"
 	* Change of Partner term and basis document

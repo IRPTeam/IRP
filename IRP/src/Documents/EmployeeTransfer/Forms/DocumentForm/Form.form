@@ -778,7 +778,7 @@
      </title>
      <title>
       <key>tr</key>
-      <value>From branch</value>
+      <value>Şubeden</value>
      </title>
      <visible>true</visible>
      <enabled>true</enabled>
@@ -991,7 +991,7 @@
          </presentation>
          <presentation>
           <key>tr</key>
-          <value>By position</value>
+          <value>Pozisyona göre</value>
          </presentation>
          <value xsi:type="core:StringValue">
           <value>ByPosition</value>
@@ -1004,11 +1004,11 @@
          </presentation>
          <presentation>
           <key>ru</key>
-          <value>Личное</value>
+          <value>Личный</value>
          </presentation>
          <presentation>
           <key>tr</key>
-          <value>Personal</value>
+          <value>Kişisel</value>
          </presentation>
          <value xsi:type="core:StringValue">
           <value>Personal</value>
@@ -1089,7 +1089,7 @@
         </title>
         <title>
          <key>tr</key>
-         <value>From salary by position</value>
+         <value>Pozisyona göre maaştan</value>
         </title>
         <extendedTooltip>
          <name>GroupFromSalaryByPositionExtendedTooltip</name>
@@ -1182,7 +1182,7 @@
         </title>
         <title>
          <key>tr</key>
-         <value>From personal salary</value>
+         <value>Kişisel maaştan</value>
         </title>
         <extendedTooltip>
          <name>GroupFromPerosnalSalaryExtendedTooltip</name>
@@ -1220,7 +1220,7 @@
        </title>
        <title>
         <key>tr</key>
-        <value>From salary amount</value>
+        <value>Maaş miktarından</value>
        </title>
        <extendedTooltip>
         <name>GroupFromSalaryAmountExtendedTooltip</name>
@@ -1257,7 +1257,7 @@
       </title>
       <title>
        <key>tr</key>
-       <value>From salary type</value>
+       <value>Maaş tipinden</value>
       </title>
       <extendedTooltip>
        <name>GroupFromSalaryTypeExtendedTooltip</name>
@@ -1299,7 +1299,7 @@
      </title>
      <title>
       <key>tr</key>
-      <value>Form salary</value>
+      <value>Maaş formu</value>
      </title>
      <extendedTooltip>
       <name>GroupFromSalaryValueExtendedTooltip</name>
@@ -1727,7 +1727,7 @@
          </presentation>
          <presentation>
           <key>tr</key>
-          <value>By position</value>
+          <value>Pozisyona göre</value>
          </presentation>
          <value xsi:type="core:StringValue">
           <value>ByPosition</value>
@@ -1744,7 +1744,7 @@
          </presentation>
          <presentation>
           <key>tr</key>
-          <value>Personal</value>
+          <value>Kişisel</value>
          </presentation>
          <value xsi:type="core:StringValue">
           <value>Personal</value>
@@ -1825,7 +1825,7 @@
         </title>
         <title>
          <key>tr</key>
-         <value>To salary by position</value>
+         <value>Pozisyona göre maaş</value>
         </title>
         <extendedTooltip>
          <name>GroupToSalaryByPositionExtendedTooltip</name>
@@ -1917,7 +1917,7 @@
         </title>
         <title>
          <key>tr</key>
-         <value>To personal salary</value>
+         <value>Kişisel maaşa</value>
         </title>
         <extendedTooltip>
          <name>GroupToPerosnalSalaryExtendedTooltip</name>
@@ -1955,7 +1955,7 @@
        </title>
        <title>
         <key>tr</key>
-        <value>To salary amount</value>
+        <value>Maaş miktarına</value>
        </title>
        <extendedTooltip>
         <name>GroupToSalaryAmountExtendedTooltip</name>
@@ -1992,7 +1992,7 @@
       </title>
       <title>
        <key>tr</key>
-       <value>To salary type</value>
+       <value>Maaş tipine</value>
       </title>
       <extendedTooltip>
        <name>GroupToSalaryTypeExtendedTooltip</name>
@@ -2034,7 +2034,7 @@
      </title>
      <title>
       <key>tr</key>
-      <value>To salary</value>
+      <value>Maaşa</value>
      </title>
      <extendedTooltip>
       <name>GroupToSalaryValueExtendedTooltip</name>
@@ -2121,7 +2121,7 @@
    </title>
    <title>
     <key>tr</key>
-    <value>Employee transfer</value>
+    <value>Çalışan transferi</value>
    </title>
    <extendedTooltip>
     <name>GroupEmployeeTransferExtendedTooltip</name>
@@ -2708,7 +2708,7 @@
   </title>
   <title>
    <key>tr</key>
-   <value>From salary type</value>
+   <value>Maaş tipinden</value>
   </title>
   <id>11</id>
   <valueType>
@@ -2734,7 +2734,7 @@
   </title>
   <title>
    <key>tr</key>
-   <value>To salary type</value>
+   <value>Maaş tipine</value>
   </title>
   <id>12</id>
   <valueType>
@@ -2816,7 +2816,7 @@
   </title>
   <title>
    <key>tr</key>
-   <value>Fill as from</value>
+   <value>Şu tarihten doldur</value>
   </title>
   <id>16</id>
   <use>

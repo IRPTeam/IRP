@@ -21,8 +21,6 @@ Background:
 		
 Scenario: _080000 preparation (Incoming payment order and Outgoing payment order)
 	When set True value to the constant
-	And I close TestClient session
-	Given I open new TestClient session or connect the existing one
 	* Load info
 		When Create catalog ObjectStatuses objects
 		When Create catalog Currencies objects
@@ -133,7 +131,7 @@ Scenario: _080005 create Bank receipt based on Incoming payment order
 		| 'Number'                                 |
 		| '$$NumberIncomingPaymentOrder080001$$'   |
 	* Create Bank receipt from Incoming Payment Order
-		And I click the button named "FormDocumentBankReceiptGenarateBankReceipt"
+		And I click the button named "FormDocumentBankReceiptGenerateBankReceipt"
 		And I activate "Total amount" field in "PaymentList" table
 		And I select current line in "PaymentList" table
 		And I input "250,00" text in "Total amount" field of "PaymentList" table
@@ -150,7 +148,7 @@ Scenario: _080005 create Bank receipt based on Incoming payment order
 		And I go to line in "List" table
 			| 'Number'                                  |
 			| '$$NumberIncomingPaymentOrder080001$$'    |
-		And I click the button named "FormDocumentBankReceiptGenarateBankReceipt"
+		And I click the button named "FormDocumentBankReceiptGenerateBankReceipt"
 		And I activate "Total amount" field in "PaymentList" table
 		And I select current line in "PaymentList" table
 		And I input "250,00" text in "Total amount" field of "PaymentList" table
@@ -242,7 +240,7 @@ Scenario: _080010 create Bank payment based on Outgoing payment order
 		| 'Number'                                 |
 		| '$$NumberOutgoingPaymentOrder080006$$'   |
 	* Create Bank payment from Outgoing payment order
-		And I click the button named "FormDocumentBankPaymentGenarateBankPayment"
+		And I click the button named "FormDocumentBankPaymentGenerateBankPayment"
 		And I activate "Total amount" field in "PaymentList" table
 		And I select current line in "PaymentList" table
 		And I input "250,00" text in "Total amount" field of "PaymentList" table
@@ -259,7 +257,7 @@ Scenario: _080010 create Bank payment based on Outgoing payment order
 		And I go to line in "List" table
 			| 'Number'                                  |
 			| '$$NumberOutgoingPaymentOrder080006$$'    |
-		And I click the button named "FormDocumentBankPaymentGenarateBankPayment"
+		And I click the button named "FormDocumentBankPaymentGenerateBankPayment"
 		And I activate "Total amount" field in "PaymentList" table
 		And I select current line in "PaymentList" table
 		And I input "250,00" text in "Total amount" field of "PaymentList" table

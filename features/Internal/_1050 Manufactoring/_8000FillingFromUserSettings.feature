@@ -16,8 +16,6 @@ Background:
 
 Scenario: _8000 preparation (filling in from user settings)
 	When set True value to the constant
-	And I close TestClient session
-	Given I open new TestClient session or connect the existing one
 	When change interface localization code for CI
 	And I close TestClient session
 	Given I open new TestClient session or connect the existing one

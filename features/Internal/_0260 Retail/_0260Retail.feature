@@ -17,8 +17,6 @@ Background:
 Scenario: _0260100 preparation (retail)
 	When set True value to the constant
 	When set True value to the constant Use consolidated retail sales
-	And I close TestClient session
-	Given I open new TestClient session or connect the existing one
 	* Load info
 		When Create catalog BusinessUnits objects
 		When Create catalog BusinessUnits objects (Shop 02, use consolidated retail sales)
@@ -61,7 +59,6 @@ Scenario: _0260100 preparation (retail)
 		When Create information register Barcodes records (serial lot numbers)
 		When Create catalog SerialLotNumbers objects (serial lot numbers, with batch balance details)
 		When Create catalog SerialLotNumbers objects (serial lot numbers)
-		When update ItemKeys
 		When Create catalog Partners objects and Companies objects (Customer)
 		When Create catalog Agreements objects (Customer)
 		When Create POS cash account objects
@@ -1675,42 +1672,32 @@ Scenario: _0260170 check filling payment agent in RSR
 	* Open RSR
 		Given I open hyperlink "e1cib/list/Document.RetailSalesReceipt"
 		And I click the button named "FormCreate"
-	* Filling bank term (payment agent)
+	* Check filling bank term (payment agent)
 		And I move to "Payments" tab
 		And in the table "Payments" I click "Add" button
-		And I activate "Bank term" field in "Payments" table
-		And I select current line in "Payments" table
-		And I click choice button of "Bank term" attribute in "Payments" table
+		And I click choice button of "Payment type" attribute in "Payments" table
 		And I go to line in "List" table
-			| 'Description'   |
-			| 'Payment agent' |
+			| 'Description' |
+			| 'Bank credit' |
 		And I select current line in "List" table
-		And I click "OK" button
+		Then "Update item list info" window is opened
+		And I click "OK" button		
 		And "Payments" table became equal
 			| '#' | 'Amount' | 'Commission' | 'Payment type' | 'Financial movement type' | 'Payment agent legal name contract' | 'Payment terminal' | 'Bank term'     | 'Account' | 'Percent' | 'RRN Code' | 'Payment agent partner' | 'Payment agent legal name' | 'Payment agent partner terms' |
 			| '1' | ''       | ''           | 'Bank credit'  | ''                        | ''                                  | ''                 | 'Payment agent' | ''        | '10,00'   | ''         | 'Bank 1'                | 'Bank 1'                   | 'Bank 1'                      |
-	* Check filter payment type
-		And I click choice button of "Payment type" attribute in "Payments" table
-		And "List" table became equal
-			| 'Description' |
-			| 'Bank credit' |
-		And I close current window
-	* Check filter by bank term
-		And I delete all lines of "Payments" table
-		And in the table "Payments" I click the button named "PaymentsAdd"
+	* Change payment type - card 01
 		And I click choice button of "Payment type" attribute in "Payments" table
 		And I go to line in "List" table
 			| 'Description' |
 			| 'Card 01'     |
 		And I select current line in "List" table
+		Then "Update item list info" window is opened
+		And I click "OK" button		
 		And I finish line editing in "Payments" table
 		And "Payments" table became equal
 			| '#' | 'Amount' | 'Commission' | 'Payment type' | 'Financial movement type' | 'Payment agent legal name contract' | 'Payment terminal' | 'Bank term'    | 'Account' | 'Percent' | 'RRN Code' | 'Payment agent partner' | 'Payment agent legal name' | 'Payment agent partner terms' |
 			| '1' | ''       | ''           | 'Card 01'      | ''                        | ''                                  | ''                 | 'Bank term 02' | ''        | '1,00'    | ''         | ''                      | ''                         | ''                            |
-		And I click choice button of "Bank term" attribute in "Payments" table
-		And "List" table became equal
-			| 'Description' |
-			| 'Bank term 02' |
+	// * Change payment type - cash
 	And I close all client application windows
 		
 				
@@ -1723,39 +1710,28 @@ Scenario: _0260171 check filling payment agent in RRR
 	* Filling bank term (payment agent)
 		And I move to "Payments" tab
 		And in the table "Payments" I click "Add" button
-		And I activate "Bank term" field in "Payments" table
-		And I select current line in "Payments" table
-		And I click choice button of "Bank term" attribute in "Payments" table
+		And I click choice button of "Payment type" attribute in "Payments" table
 		And I go to line in "List" table
-			| 'Description'   |
-			| 'Payment agent' |
+			| 'Description' |
+			| 'Bank credit' |
 		And I select current line in "List" table
-		And I click "OK" button
+		Then "Update item list info" window is opened
+		And I click "OK" button	
 		And "Payments" table became equal
 			| '#' | 'Amount' | 'Commission' | 'Payment type' | 'Financial movement type' | 'Payment agent legal name contract' | 'Payment terminal' | 'Bank term'     | 'Account' | 'Percent' | 'RRN Code' | 'Payment agent partner' | 'Payment agent legal name' | 'Payment agent partner terms' |
 			| '1' | ''       | ''           | 'Bank credit'  | ''                        | ''                                  | ''                 | 'Payment agent' | ''        | '10,00'   | ''         | 'Bank 1'                | 'Bank 1'                   | 'Bank 1'                      |
-	* Check filter payment type
-		And I click choice button of "Payment type" attribute in "Payments" table
-		And "List" table became equal
-			| 'Description' |
-			| 'Bank credit' |
-		And I close current window
 	* Check filter by bank term
-		And I delete all lines of "Payments" table
-		And in the table "Payments" I click the button named "PaymentsAdd"
 		And I click choice button of "Payment type" attribute in "Payments" table
 		And I go to line in "List" table
 			| 'Description' |
 			| 'Card 01'     |
 		And I select current line in "List" table
+		Then "Update item list info" window is opened
+		And I click "OK" button		
 		And I finish line editing in "Payments" table
 		And "Payments" table became equal
 			| '#' | 'Amount' | 'Commission' | 'Payment type' | 'Financial movement type' | 'Payment agent legal name contract' | 'Payment terminal' | 'Bank term'    | 'Account' | 'Percent' | 'RRN Code' | 'Payment agent partner' | 'Payment agent legal name' | 'Payment agent partner terms' |
 			| '1' | ''       | ''           | 'Card 01'      | ''                        | ''                                  | ''                 | 'Bank term 02' | ''        | '1,00'    | ''         | ''                      | ''                         | ''                            |
-		And I click choice button of "Bank term" attribute in "Payments" table
-		And "List" table became equal
-			| 'Description' |
-			| 'Bank term 02' |
 	And I close all client application windows					
 		
 	

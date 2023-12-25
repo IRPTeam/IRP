@@ -18,7 +18,7 @@
  </synonym>
  <synonym>
   <key>tr</key>
-  <value>Employee firing</value>
+  <value>Çalışan çıkışı</value>
  </synonym>
  <useStandardCommands>true</useStandardCommands>
  <inputByString>Document.EmployeeFiring.StandardAttribute.Number</inputByString>
@@ -62,7 +62,7 @@
  </listPresentation>
  <listPresentation>
   <key>tr</key>
-  <value>Employee firings</value>
+  <value>Çalışan çıkışları</value>
  </listPresentation>
  <numberLength>12</numberLength>
  <numberAllowedLength>Variable</numberAllowedLength>
@@ -174,7 +174,7 @@
   </synonym>
   <synonym>
    <key>tr</key>
-   <value>Employee schedule</value>
+   <value>Çalışan programı</value>
   </synonym>
   <type>
    <types>CatalogRef.EmployeeSchedule</types>

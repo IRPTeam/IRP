@@ -20,7 +20,7 @@
   <types>Number</types>
   <numberQualifiers>
    <precision>14</precision>
-   <scale>4</scale>
+   <scale>6</scale>
   </numberQualifiers>
  </type>
 </mdclass:DefinedType>

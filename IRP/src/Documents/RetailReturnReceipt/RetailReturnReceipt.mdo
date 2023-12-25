@@ -1962,11 +1962,6 @@
    </type>
    <minValue xsi:type="core:UndefinedValue"/>
    <maxValue xsi:type="core:UndefinedValue"/>
-   <choiceParameterLinks>
-    <name>Filter.BankTerm</name>
-    <changeMode>DontChange</changeMode>
-    <field>Document.RetailReturnReceipt.TabularSection.Payments.Attribute.BankTerm</field>
-   </choiceParameterLinks>
    <dataHistory>Use</dataHistory>
    <fullTextSearch>Use</fullTextSearch>
   </attributes>
@@ -2208,6 +2203,28 @@
      <value>true</value>
     </value>
    </choiceParameters>
+   <dataHistory>Use</dataHistory>
+   <fullTextSearch>Use</fullTextSearch>
+  </attributes>
+  <attributes uuid="b1e8aa4e-35e1-4107-8e33-6c477bd131fc">
+   <name>CashFlowCenter</name>
+   <synonym>
+    <key>en</key>
+    <value>Cash flow center</value>
+   </synonym>
+   <synonym>
+    <key>ru</key>
+    <value>Центр движения денежных средств</value>
+   </synonym>
+   <synonym>
+    <key>tr</key>
+    <value>Nakit akış merkezi</value>
+   </synonym>
+   <type>
+    <types>CatalogRef.BusinessUnits</types>
+   </type>
+   <minValue xsi:type="core:UndefinedValue"/>
+   <maxValue xsi:type="core:UndefinedValue"/>
    <dataHistory>Use</dataHistory>
    <fullTextSearch>Use</fullTextSearch>
   </attributes>
@@ -3020,7 +3037,7 @@
   </attributes>
  </tabularSections>
  <commands uuid="da583033-ea5c-4fa1-8143-846671611e1a">
-  <name>Genarate</name>
+  <name>Generate</name>
   <synonym>
    <key>en</key>
    <value>Sales return</value>

@@ -480,11 +480,11 @@
   </title>
   <title>
    <key>ru</key>
-   <value>Columns</value>
+   <value>Столбцы</value>
   </title>
   <title>
    <key>tr</key>
-   <value>Columns</value>
+   <value>Sütunlar</value>
   </title>
   <id>2</id>
   <valueType>
@@ -506,11 +506,11 @@
   </title>
   <title>
    <key>ru</key>
-   <value>Languages</value>
+   <value>Языки</value>
   </title>
   <title>
    <key>tr</key>
-   <value>Languages</value>
+   <value>Diller</value>
   </title>
   <id>3</id>
   <valueType>

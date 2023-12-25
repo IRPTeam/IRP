@@ -14,11 +14,11 @@
  </synonym>
  <synonym>
   <key>ru</key>
-  <value>Найм сотрудника</value>
+  <value>Прием на работу</value>
  </synonym>
  <synonym>
   <key>tr</key>
-  <value>Employee hiring</value>
+  <value>Çalışan işe alım</value>
  </synonym>
  <useStandardCommands>true</useStandardCommands>
  <inputByString>Document.EmployeeHiring.StandardAttribute.Number</inputByString>
@@ -62,7 +62,7 @@
  </listPresentation>
  <listPresentation>
   <key>tr</key>
-  <value>Employee hirings</value>
+  <value>Çalışan işe alımları</value>
  </listPresentation>
  <numberLength>12</numberLength>
  <numberAllowedLength>Variable</numberAllowedLength>
@@ -174,7 +174,7 @@
   </synonym>
   <synonym>
    <key>tr</key>
-   <value>Employee schedule</value>
+   <value>Çalışan programı</value>
   </synonym>
   <type>
    <types>CatalogRef.EmployeeSchedule</types>
@@ -243,7 +243,7 @@
   </synonym>
   <synonym>
    <key>tr</key>
-   <value>Personal salary</value>
+   <value>Kişisel maaş</value>
   </synonym>
   <type>
    <types>DefinedType.typeAmount</types>

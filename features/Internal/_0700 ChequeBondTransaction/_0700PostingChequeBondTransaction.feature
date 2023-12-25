@@ -15,8 +15,6 @@ Background:
 		
 Scenario: _070000 preparation (Cheque bond transaction)
 	When set True value to the constant
-	And I close TestClient session
-	Given I open new TestClient session or connect the existing one
 	* Load info
 		When Create catalog ObjectStatuses objects
 		When Create catalog ItemKeys objects
@@ -52,7 +50,6 @@ Scenario: _070000 preparation (Cheque bond transaction)
 		When Create catalog ObjectStatuses objects (cheque bond)
 		When Create catalog ChequeBonds objects
 		When Create catalog PlanningPeriods objects
-		When update ItemKeys
 		When Create information register Taxes records (VAT)
 	* Check or create SalesOrder023001
 		Given I open hyperlink "e1cib/list/Document.SalesOrder"

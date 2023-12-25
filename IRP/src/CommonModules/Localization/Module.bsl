@@ -839,6 +839,10 @@ Function Strings(Lang) Export
 		|ru='%1 отложенных чеков отменено';
 		|tr='%1 ertelenmiş alımlar iptal edildi'", Lang));
 	
+	Strings.Insert("POS_ERROR_NoDeletingPrintedReceipt", NStr("en='Error! Receipt is already printed: %1';
+		|ru='Ошибка! Чек уже напечатан: %1';
+		|tr='Hata! Makbuz zaten basıldı: %1'", Lang));
+	
 #EndRegion
 
 #Region Service
@@ -1602,6 +1606,12 @@ Function Strings(Lang) Export
 	Strings.Insert("Error_138", NStr("en='Cannot change the unit from [%1] to [%2], used in document [%3]';
 		|ru='Невозможно изменить единицу измерения с [%1] на [%2], используется в документе [%3]';
 		|tr='Birimi [%1]''den [%2]''ye değiştiremezsiniz, [%3] belgesinde kullanılmıştır'", Lang));	
+	Strings.Insert("Error_139", NStr("en='Description not unique [%1]';
+		|ru='Наименование не уникально [%1]';
+		|tr='Tanım benzersiz değil [%1]'", Lang));	
+	Strings.Insert("Error_140", NStr("en='Partner type is required';
+		|ru='Требуется тип партнера';
+		|tr='Ortak tipi gerekli'", Lang));	
 	
 	
 	Strings.Insert("Error_FillTotalAmount", NStr("en='Fill total amount. Row: [%1]';
@@ -1949,7 +1959,7 @@ Function Strings(Lang) Export
 		|tr='Ödeme acentesini güncellemek istiyor musunuz?'", Lang));
 	Strings.Insert("QuestionToUser_027", NStr("en='Filled data by employee [%1] will be cleared. Continue?';
 		|ru='Заполненные данные сотрудником [%1] будут очищены. Продолжить?';
-		|tr='Filled data by employee [%1] will be cleared. Continue?'", Lang));
+		|tr='Çalışan [%1] tarafından doldurulan veriler silinecek. Devam edilsin mi?'", Lang));
 #EndRegion
 
 #Region SuggestionToUser
@@ -2258,6 +2268,9 @@ Function Strings(Lang) Export
 	Strings.Insert("Add_Setiings_011", NStr("en='Use reverse tree';
 		|ru='Перевернуть дерево';
 		|tr='Ters ağacı kullan'", Lang));
+	Strings.Insert("Add_Setiings_012", NStr("en='Enable - Change price type';
+		|ru='Включить - Изменить тип цены';
+		|tr='Etkinleştir - Fiyat tipi değiştir'", Lang));
 #EndRegion
 
 #Region Mobile
@@ -2331,65 +2344,65 @@ Function Strings(Lang) Export
 #Region Salary
 	Strings.Insert("Salary_Err_001",   NStr("en='Wrong period';
 		|ru='Неправильный период';
-		|tr='Wrong period'", Lang));
+		|tr='Yanlış dönem'", Lang));
 	Strings.Insert("Salary_Err_002",   NStr("en='Employee schedule not selected';
 		|ru='Расписание сотрудника не выбрано';
-		|tr='Employee schedule not selected'", Lang));
+		|tr='Çalışan programı seçilmedi'", Lang));
 	Strings.Insert("Salary_Err_003",   NStr("en='Begin Date less than End Date';
 		|ru='Дата начала меньше даты окончания';
-		|tr='Begin Date less than End Date'", Lang));
+		|tr='Başlangıç Tarihi bitiş tarihinden küçük'", Lang));
 	
 	Strings.Insert("Salary_WeekDays_1",   NStr("en='Monday';
 		|ru='Понедельник';
-		|tr='Monday'", Lang));
+		|tr='Pazartesi'", Lang));
 	Strings.Insert("Salary_WeekDays_2",   NStr("en='Tuesday';
 		|ru='Вторник';
-		|tr='Tuesday'", Lang));
+		|tr='Salı'", Lang));
 	Strings.Insert("Salary_WeekDays_3",   NStr("en='Wednesday';
 		|ru='Среда';
-		|tr='Wednesday'", Lang));
+		|tr='Çarşamba'", Lang));
 	Strings.Insert("Salary_WeekDays_4",   NStr("en='Thursday';
 		|ru='Четверг';
-		|tr='Thursday'", Lang));
+		|tr='Perşembe'", Lang));
 	Strings.Insert("Salary_WeekDays_5",   NStr("en='Friday';
 		|ru='Пятница';
-		|tr='Friday'", Lang));
+		|tr='Cuma'", Lang));
 	Strings.Insert("Salary_WeekDays_6",   NStr("en='Saturday';
 		|ru='Суббота';
-		|tr='Saturday'", Lang));
+		|tr='Cumartesi'", Lang));
 	Strings.Insert("Salary_WeekDays_7",   NStr("en='Sunday';
 		|ru='Воскресенье';
-		|tr='Sunday'", Lang));
+		|tr='Pazar'", Lang));
 #EndRegion
 
 #Region Accounting
 
 Strings.Insert("AccountingError_01", NStr("en='Account [%1] not used for records';
-	|ru='Account [%1] not used for records';
-	|tr='Account [%1] not used for records'", Lang));
+	|ru='Счет [%1] не используется для записей';
+	|tr='Hesap [%1] kayıtlar için kullanılmıyor'", Lang));
 Strings.Insert("AccountingError_02", NStr("en='Debit - is a required field.';
-	|ru='Debit - is a required field.';
-	|tr='Debit - is a required field.'", Lang));
+	|ru='Дебет - обязательное поле.';
+	|tr='Borç - gerekli bir alandır.'", Lang));
 Strings.Insert("AccountingError_03", NStr("en='Credit - is a required field.';
-	|ru='Credit - is a required field.';
-	|tr='Credit - is a required field.'", Lang));
+	|ru='Кредит - обязательное поле.';
+	|tr='Kredi - zorunlu bir alandır.'", Lang));
 Strings.Insert("AccountingError_04", NStr("en='Record period - is a required field.';
-	|ru='Record period - is a required field.';
-	|tr='Record period - is a required field.'", Lang));
+	|ru='Период записи - это обязательное поле.';
+	|tr='Kayıt dönemi - zorunlu bir alandır.'", Lang));
 Strings.Insert("AccountingError_05", NStr("en='Not set any ledger types';
-	|ru='Not set any ledger types';
-	|tr='Not set any ledger types'", Lang));
+	|ru='Не установлены типы счетов';
+	|tr='Hiçbir defter türü ayarlanmadı'", Lang));
 
 Strings.Insert("AccountingQuestion_01", NStr("en='Change [Quantity] mark in analytics';
-	|ru='Change [Quantity] mark in analytics';
-	|tr='Change [Quantity] mark in analytics'", Lang));
+	|ru='Изменить [Количество] метку в аналитике';
+	|tr='Analitiklerde [Miktar] işaretini değiştir'", Lang));
 Strings.Insert("AccountingQuestion_02", NStr("en='Change [Currency] mark in analytics';
-	|ru='Change [Currency] mark in analytics';
-	|tr='Change [Currency] mark in analytics'", Lang));
+	|ru='Изменить [Валюта] отметку в аналитике';
+	|tr='Analitiklerde [Currency] işaretini değiştir'", Lang));
 
 Strings.Insert("AccountingInfo_01", NStr("en='Load complete';
-	|ru='Load complete';
-	|tr='Load complete'", Lang));
+	|ru='Загрузка завершена';
+	|tr='Yükleme tamam'", Lang));
 
 Strings.Insert("AccountingJE_prefix_01", NStr("en='JE ';
 	|ru='JE ';
@@ -2398,157 +2411,157 @@ Strings.Insert("AccountingJE_prefix_01", NStr("en='JE ';
 Strings.Insert("BankPayment_DR_R1020B_AdvancesToVendors_R1021B_VendorsTransactions_CR_R3010B_CashOnHand", 
 	NStr("en='BankPayment DR (R1020B_AdvancesToVendors R1021B_VendorsTransactions) CR (R3010B_CashOnHand)';
 		|ru='BankPayment DR (R1020B_AdvancesToVendors R1021B_VendorsTransactions) CR (R3010B_CashOnHand)';
-		|tr='BankPayment DR (R1020B_AdvancesToVendors R1021B_VendorsTransactions) CR (R3010B_CashOnHand)'", Lang)); 
+		|tr='BankaÖdeme DR (R1020B_TedarikçiAvansları R1021B_Tedarikçiİşlemleri) CR (R3010B_EldekiNakit)'", Lang)); 
 
 Strings.Insert("BankPayment_DR_R5022T_Expenses_CR_R3010B_CashOnHand",
 	NStr("en='BankPayment DR (R5022T_Expenses) CR (R3010B_CashOnHand)';
 		|ru='BankPayment DR (R5022T_Expenses) CR (R3010B_CashOnHand)';
-		|tr='BankPayment DR (R5022T_Expenses) CR (R3010B_CashOnHand)'", Lang));
+		|tr='BankPayment DR (R5022T_Giderler) CR (R3010B_EldekiNakit)'", Lang));
 
 Strings.Insert("BankPayment_DR_R1021B_VendorsTransactions_CR_R1020B_AdvancesToVendors",
 	NStr("en='BankPayment DR (R1021B_VendorsTransactions) CR (R1020B_AdvancesToVendors)';
-		|ru='BankPayment DR (R1021B_VendorsTransactions) CR (R1020B_AdvancesToVendors)';
-		|tr='BankPayment DR (R1021B_VendorsTransactions) CR (R1020B_AdvancesToVendors)'", Lang));
+		|ru='BankPayment Дебет (R1021B_VendorsTransactions) Кредит (R1020B_AdvancesToVendors)';
+		|tr='BankaÖdeme DR (R1021B_Tedarikçiİşlemleri) CR (R1020B_TedarikçilereAvanslar)'", Lang));
 
 Strings.Insert("BankReceipt_DR_R3010B_CashOnHand_CR_R2020B_AdvancesFromCustomers_R2021B_CustomersTransactions",
 	NStr("en='BankReceipt DR (R3010B_CashOnHand) CR (R2020B_AdvancesFromCustomers_R2021B_CustomersTransactions)';
 		|ru='BankReceipt DR (R3010B_CashOnHand) CR (R2020B_AdvancesFromCustomers_R2021B_CustomersTransactions)';
-		|tr='BankReceipt DR (R3010B_CashOnHand) CR (R2020B_AdvancesFromCustomers_R2021B_CustomersTransactions)'", Lang));
+		|tr='BankReceipt DR (R3010B_EldekiNakit) CR (R2020B_MüşteridenAvanslar_R2021B_Müşteriİşlemleri)'", Lang));
 
 Strings.Insert("PurchaseInvoice_DR_R4050B_StockInventory_R5022T_Expenses_CR_R1021B_VendorsTransactions",
 	NStr("en='PurchaseInvoice DR (R4050B_StockInventory_R5022T_Expenses) CR (R1021B_VendorsTransactions)';
 		|ru='PurchaseInvoice DR (R4050B_StockInventory_R5022T_Expenses) CR (R1021B_VendorsTransactions)';
-		|tr='PurchaseInvoice DR (R4050B_StockInventory_R5022T_Expenses) CR (R1021B_VendorsTransactions)'", Lang));
+		|tr='PurchaseInvoice DR (R4050B_StokEnvanter_R5022T_Giderler) CR (R1021B_Tedarikçiİşlemleri)'", Lang));
 
 Strings.Insert("PurchaseInvoice_DR_R1021B_VendorsTransactions_CR_R1020B_AdvancesToVendors",
 	NStr("en='PurchaseInvoice DR (R1021B_VendorsTransactions) CR (R1020B_AdvancesToVendors)';
 		|ru='PurchaseInvoice DR (R1021B_VendorsTransactions) CR (R1020B_AdvancesToVendors)';
-		|tr='PurchaseInvoice DR (R1021B_VendorsTransactions) CR (R1020B_AdvancesToVendors)'", Lang));
+		|tr='PurchaseInvoice DR (R1021B_Tedarikçiİşlemleri) CR (R1020B_TedarikçilereAvanslar)'", Lang));
 
 Strings.Insert("PurchaseInvoice_DR_R1040B_TaxesOutgoing_CR_R1021B_VendorsTransactions",
 	NStr("en='PurchaseInvoice DR (R1040B_TaxesOutgoing) CR (R1021B_VendorsTransactions)';
-		|ru='PurchaseInvoice DR (R1040B_TaxesOutgoing) CR (R1021B_VendorsTransactions)';
-		|tr='PurchaseInvoice DR (R1040B_TaxesOutgoing) CR (R1021B_VendorsTransactions)'", Lang));
+		|ru='ПокупкаInvoice Дебет (R1040B_TaxesOutgoing) Кредит (R1021B_VendorsTransactions)';
+		|tr='SatınalmaFaturası DR (R1040B_GidenVergiler) CR (R1021B_Tedarikçiİşlemleri)'", Lang));
 
 Strings.Insert("RetailSalesReceipt_DR_R5022T_Expenses_CR_R4050B_StockInventory",
 	NStr("en='RetailSalesReceipt DR (R5022T_Expenses) CR (R4050B_StockInventory)';
-		|ru='RetailSalesReceipt DR (R5022T_Expenses) CR (R4050B_StockInventory)';
-		|tr='RetailSalesReceipt DR (R5022T_Expenses) CR (R4050B_StockInventory)'", Lang));
+		|ru='RetailSalesReceipt Дебет (R5022T_Expenses) Кредит (R4050B_StockInventory)';
+		|tr='PerakendeSatışFişi DR (R5022T_Giderler) CR (R4050B_StokEnvanteri)'", Lang));
 
 Strings.Insert("SalesInvoice_DR_R5022T_Expenses_CR_R4050B_StockInventory",
 	NStr("en='SalesInvoice DR (R5022T_Expenses) CR (R4050B_StockInventory)';
 		|ru='SalesInvoice DR (R5022T_Expenses) CR (R4050B_StockInventory)';
-		|tr='SalesInvoice DR (R5022T_Expenses) CR (R4050B_StockInventory)'", Lang));
+		|tr='SatışFaturası DR (R5022T_Giderler) CR (R4050B_StokEnvanteri)'", Lang));
 
 Strings.Insert("SalesInvoice_DR_R2021B_CustomersTransactions_CR_R5021T_Revenues",
 	NStr("en='SalesInvoice DR (R2021B_CustomersTransactions) CR (R5021T_Revenues)';
-		|ru='SalesInvoice DR (R2021B_CustomersTransactions) CR (R5021T_Revenues)';
-		|tr='SalesInvoice DR (R2021B_CustomersTransactions) CR (R5021T_Revenues)'", Lang));
+		|ru='SalesInvoice Дт (R2021B_CustomersTransactions) Кт (R5021T_Revenues)';
+		|tr='SatışFaturası DR (R2021B_Müşteriİşlemleri) CR (R5021T_Gelirler)'", Lang));
 
 Strings.Insert("SalesInvoice_DR_R5021T_Revenues_CR_R2040B_TaxesIncoming",
 	NStr("en='SalesInvoice DR (R5021T_Revenues) CR (R2040B_TaxesIncoming)';
-		|ru='SalesInvoice DR (R5021T_Revenues) CR (R2040B_TaxesIncoming)';
-		|tr='SalesInvoice DR (R5021T_Revenues) CR (R2040B_TaxesIncoming)'", Lang));
+		|ru='SalesInvoice Дебет (R5021T_Revenues) Кредит (R2040B_TaxesIncoming)';
+		|tr='SatışFaturası DR (R5021T_Gelirler) CR (R2040B_VergilerGelen)'", Lang));
 
 Strings.Insert("SalesInvoice_DR_R2020B_AdvancesFromCustomers_CR_R2021B_CustomersTransactions",
 	NStr("en='SalesInvoice DR (R2020B_AdvancesFromCustomers) CR (R2021B_CustomersTransactions)';
-		|ru='SalesInvoice DR (R2020B_AdvancesFromCustomers) CR (R2021B_CustomersTransactions)';
-		|tr='SalesInvoice DR (R2020B_AdvancesFromCustomers) CR (R2021B_CustomersTransactions)'", Lang));
+		|ru='SalesInvoice Дт (R2020B_AdvancesFromCustomers) Кт (R2021B_CustomersTransactions)';
+		|tr='SalesInvoice DR (R2020B_MüşterilerdenAvanslar) CR (R2021B_Müşteriİşlemleri)'", Lang));
 
 Strings.Insert("PurchaseInvoice_DR_R1021B_VendorsTransactions_CR_R1020B_AdvancesToVendors_CurrencyRevaluation",
 	NStr("en='PurchaseInvoice DR (R1021B_VendorsTransactions) CR (R1020B_AdvancesToVendors_CurrencyRevaluation)';
-		|ru='PurchaseInvoice DR (R1021B_VendorsTransactions) CR (R1020B_AdvancesToVendors_CurrencyRevaluation)';
-		|tr='PurchaseInvoice DR (R1021B_VendorsTransactions) CR (R1020B_AdvancesToVendors_CurrencyRevaluation)'", Lang));
+		|ru='PurchaseInvoice Дт (R1021B_VendorsTransactions) Кт (R1020B_AdvancesToVendors_CurrencyRevaluation)';
+		|tr='AlımFaturası DR (R1021B_Tedarikçiİşlemleri) CR (R1020B_TedarikçilereAvanslar_DövizKıymetlenmesi)'", Lang));
 
 Strings.Insert("ForeignCurrencyRevaluation_DR_R5022T_Expenses_CR_R2020B_AdvancesFromCustomers",
 	NStr("en='ForeignCurrencyRevaluation DR (R5022T_Expenses) CR (R2020B_AdvancesFromCustomers)';
-		|ru='ForeignCurrencyRevaluation DR (R5022T_Expenses) CR (R2020B_AdvancesFromCustomers)';
-		|tr='ForeignCurrencyRevaluation DR (R5022T_Expenses) CR (R2020B_AdvancesFromCustomers)'", Lang));
+		|ru='ForeignCurrencyRevaluation Дт (R5022T_Expenses) Кт (R2020B_AdvancesFromCustomers)';
+		|tr='YabancıParaDeğerleme DR (R5022T_Giderler) CR (R2020B_MüşterilerdenAvanslar)'", Lang));
 
 Strings.Insert("SalesInvoice_DR_R2020B_AdvancesFromCustomers_CR_R2021B_CustomersTransactions_CurrencyRevaluation",
 	NStr("en='SalesInvoice DR (R2020B_AdvancesFromCustomers) CR (R2021B_CustomersTransactions_CurrencyRevaluation)';
-		|ru='SalesInvoice DR (R2020B_AdvancesFromCustomers) CR (R2021B_CustomersTransactions_CurrencyRevaluation)';
-		|tr='SalesInvoice DR (R2020B_AdvancesFromCustomers) CR (R2021B_CustomersTransactions_CurrencyRevaluation)'", Lang));
+		|ru='Счет-фактура Дебет (R2020B_AdvancesFromCustomers) Кредит (R2021B_CustomersTransactions_CurrencyRevaluation)';
+		|tr='SatışFaturası DR (R2020B_MüşteridenAvanslar) CR (R2021B_Müşteriİşlemleri_DövizKıymetlenmesi)'", Lang));
 
 Strings.Insert("SalesInvoice_DR_R2021B_CustomersTransactions_CR_R5021T_Revenues_CurrencyRevaluation",
 	NStr("en='SalesInvoice DR (R2021B_CustomersTransactions) CR (R5021T_Revenues_CurrencyRevaluation)';
-		|ru='SalesInvoice DR (R2021B_CustomersTransactions) CR (R5021T_Revenues_CurrencyRevaluation)';
-		|tr='SalesInvoice DR (R2021B_CustomersTransactions) CR (R5021T_Revenues_CurrencyRevaluation)'", Lang));
+		|ru='SalesInvoice ДР (R2021B_ТранзакцииКлиентов) КР (R5021T_Доходы_ПереоценкаВалюты)';
+		|tr='SatışFaturası DR (R2021B_Müşteriİşlemleri) CR (R5021T_Gelirler_DövizKıymetlenmesi)'", Lang));
 
 Strings.Insert("PurchaseInvoice_DR_R4050B_StockInventory_R5022T_Expenses_CR_R1021B_VendorsTransactions_CurrencyRevaluation",
 	NStr("en='PurchaseInvoice DR (R4050B_StockInventory_R5022T_Expenses) CR (R1021B_VendorsTransactions_CurrencyRevaluation)';
 		|ru='PurchaseInvoice DR (R4050B_StockInventory_R5022T_Expenses) CR (R1021B_VendorsTransactions_CurrencyRevaluation)';
-		|tr='PurchaseInvoice DR (R4050B_StockInventory_R5022T_Expenses) CR (R1021B_VendorsTransactions_CurrencyRevaluation)'", Lang));
+		|tr='PurchaseInvoice DR (R4050B_StokEnvanter_R5022T_Giderler) CR (R1021B_Tedarikçiİşlemleri_DövizKıymetlendirme)'", Lang));
 
 Strings.Insert("ForeignCurrencyRevaluation_DR_R2020B_AdvancesFromCustomers_CR_R5021T_Revenues",
 	NStr("en='ForeignCurrencyRevaluation DR (R2020B_AdvancesFromCustomers) CR (R5021T_Revenues)';
-		|ru='ForeignCurrencyRevaluation DR (R2020B_AdvancesFromCustomers) CR (R5021T_Revenues)';
-		|tr='ForeignCurrencyRevaluation DR (R2020B_AdvancesFromCustomers) CR (R5021T_Revenues)'", Lang));
+		|ru='ForeignCurrencyRevaluation Дт (R2020B_AdvancesFromCustomers) Кт (R5021T_Revenues)';
+		|tr='ForeignCurrencyRevaluation DR (R2020B_MüşterilerdenAvanslar) CR (R5021T_Gelirler)'", Lang));
 
 Strings.Insert("BankReceipt_DR_R2021B_CustomersTransactions_CR_R2020B_AdvancesFromCustomers",
 	NStr("en='BankReceipt DR (R2021B_CustomersTransactions) CR (R2020B_AdvancesFromCustomers)';
 		|ru='BankReceipt DR (R2021B_CustomersTransactions) CR (R2020B_AdvancesFromCustomers)';
-		|tr='BankReceipt DR (R2021B_CustomersTransactions) CR (R2020B_AdvancesFromCustomers)'", Lang));
+		|tr='BankaMakbuzu DR (R2021B_Müşteriİşlemleri) CR (R2020B_MüşteridenAvanslar)'", Lang));
 	
 Strings.Insert("CashPayment_DR_R1020B_AdvancesToVendors_R1021B_VendorsTransactions_CR_R3010B_CashOnHand",
 	NStr("en='CashPayment DR (R1020B_AdvancesToVendors_R1021B_VendorsTransactions) CR (R3010B_CashOnHand)';
-		|ru='CashPayment DR (R1020B_AdvancesToVendors_R1021B_VendorsTransactions) CR (R3010B_CashOnHand)';
-		|tr='CashPayment DR (R1020B_AdvancesToVendors_R1021B_VendorsTransactions) CR (R3010B_CashOnHand)'", Lang));
+		|ru='Денежный платеж Дебет (R1020B_AdvancesToVendors_R1021B_VendorsTransactions) Кредит (R3010B_CashOnHand)';
+		|tr='NakitÖdeme DR (R1020B_TedarikçilereAvanslar_R1021B_Tedarikçiİşlemleri) CR (R3010B_EldekiNakit)'", Lang));
 
 Strings.Insert("CashPayment_DR_R1021B_VendorsTransactions_CR_R1020B_AdvancesToVendors",
 	NStr("en='CashPayment DR (R1021B_VendorsTransactions) CR (R1020B_AdvancesToVendors)';
-		|ru='CashPayment DR (R1021B_VendorsTransactions) CR (R1020B_AdvancesToVendors)';
-		|tr='CashPayment DR (R1021B_VendorsTransactions) CR (R1020B_AdvancesToVendors)'", Lang));
+		|ru='CashPayment Дебет (R1021B_VendorsTransactions) Кредит (R1020B_AdvancesToVendors)';
+		|tr='NakitÖdeme DR (R1021B_Tedarikçiİşlemleri) CR (R1020B_TedarikçilereAvanslar)'", Lang));
 	
 Strings.Insert("CashReceipt_DR_R3010B_CashOnHand_CR_R2020B_AdvancesFromCustomers_R2021B_CustomersTransactions",
 	NStr("en='CashReceipt DR (R3010B_CashOnHand) CR (R2020B_AdvancesFromCustomers_R2021B_CustomersTransactions)';
 		|ru='CashReceipt DR (R3010B_CashOnHand) CR (R2020B_AdvancesFromCustomers_R2021B_CustomersTransactions)';
-		|tr='CashReceipt DR (R3010B_CashOnHand) CR (R2020B_AdvancesFromCustomers_R2021B_CustomersTransactions)'", Lang)); 
+		|tr='CashReceipt DR (R3010B_EldekiNakit) CR (R2020B_MüşteridenAvanslar_R2021B_Müşteriİşlemleri)'", Lang)); 
 	
 Strings.Insert("CashReceipt_DR_R2021B_CustomersTransactions_CR_R2020B_AdvancesFromCustomers",
 	NStr("en='CashReceipt DR (R2021B_CustomersTransactions) CR (R2020B_AdvancesFromCustomers)';
-		|ru='CashReceipt DR (R2021B_CustomersTransactions) CR (R2020B_AdvancesFromCustomers)';
-		|tr='CashReceipt DR (R2021B_CustomersTransactions) CR (R2020B_AdvancesFromCustomers)'", Lang));
+		|ru='CashReceipt Дебет (R2021B_CustomersTransactions) Кредит (R2020B_AdvancesFromCustomers)';
+		|tr='NakitMakbuzu DR (R2021B_Müşteriİşlemleri) CR (R2020B_MüşteridenAvanslar)'", Lang));
 	
 Strings.Insert("CashExpense_DR_R5022T_Expenses_CR_R3010B_CashOnHand",
 	NStr("en='CashExpense DR (R5022T_Expenses) CR (R3010B_CashOnHand)';
 		|ru='CashExpense DR (R5022T_Expenses) CR (R3010B_CashOnHand)';
-		|tr='CashExpense DR (R5022T_Expenses) CR (R3010B_CashOnHand)'", Lang));
+		|tr='CashExpense DR (R5022T_Giderler) CR (R3010B_EldekiNakit)'", Lang));
 	
 Strings.Insert("CashRevenue_DR_R3010B_CashOnHand_CR_R5021_Revenues",
 	NStr("en='CashRevenue DR (R3010B_CashOnHand) CR (R5021_Revenues)';
 		|ru='CashRevenue DR (R3010B_CashOnHand) CR (R5021_Revenues)';
-		|tr='CashRevenue DR (R3010B_CashOnHand) CR (R5021_Revenues)'", Lang));
+		|tr='CashRevenue DR (R3010B_EldekiNakit) CR (R5021_Gelirler)'", Lang));
 	
 Strings.Insert("DebitNote_DR_R1020B_AdvancesToVendors_CR_R5021_Revenues",
 	NStr("en='DebitNote DR (R1020B_AdvancesToVendors) CR (R5021_Revenues)';
 		|ru='DebitNote DR (R1020B_AdvancesToVendors) CR (R5021_Revenues)';
-		|tr='DebitNote DR (R1020B_AdvancesToVendors) CR (R5021_Revenues)'", Lang));
+		|tr='DebitNote DR (R1020B_TedarikçilereAvanslar) CR (R5021_Gelirler)'", Lang));
 
 Strings.Insert("DebitNote_DR_R1021B_VendorsTransactions_CR_R1020B_AdvancesToVendors",
 	NStr("en='DebitNote DR (R1021B_VendorsTransactions) CR (R1020B_AdvancesToVendors)';
-		|ru='DebitNote DR (R1021B_VendorsTransactions) CR (R1020B_AdvancesToVendors)';
-		|tr='DebitNote DR (R1021B_VendorsTransactions) CR (R1020B_AdvancesToVendors)'", Lang));
+		|ru='DebitNote Дт (R1021B_VendorsTransactions) Кт (R1020B_AdvancesToVendors)';
+		|tr='DebitNote DR (R1021B_Tedarikçiİşlemleri) CR (R1020B_TedarikçilereAvanslar)'", Lang));
 
 Strings.Insert("DebitNote_DR_R2021B_CustomersTransactions_CR_R5021_Revenues",
 	NStr("en='DebitNote DR (R2021B_CustomersTransactions) CR (R5021_Revenues)';
 		|ru='DebitNote DR (R2021B_CustomersTransactions) CR (R5021_Revenues)';
-		|tr='DebitNote DR (R2021B_CustomersTransactions) CR (R5021_Revenues)'", Lang));
+		|tr='DebitNote DR (R2021B_Müşteriİşlemleri) CR (R5021_Gelirler)'", Lang));
 	
 Strings.Insert("CreditNote_DR_R2020B_AdvancesFromCustomers_CR_R5022T_Expenses",
 	NStr("en='CreditNote DR (R2020B_AdvancesFromCustomers) CR (R5022T_Expenses)';
-		|ru='CreditNote DR (R2020B_AdvancesFromCustomers) CR (R5022T_Expenses)';
-		|tr='CreditNote DR (R2020B_AdvancesFromCustomers) CR (R5022T_Expenses)'", Lang));
+		|ru='CreditNote Дт (R2020B_AdvancesFromCustomers) Кт (R5022T_Expenses)';
+		|tr='Alacak Dekontu DR (R2020B_MüşterilerdenAvanslar) CR (R5022T_Giderler)'", Lang));
 	
 Strings.Insert("CreditNote_DR_R2021B_CustomersTransactions_CR_R2020B_AdvancesFromCustomers",
 	NStr("en='CreditNote DR (R2021B_CustomersTransactions) CR (R2020B_AdvancesFromCustomers)';
 		|ru='CreditNote DR (R2021B_CustomersTransactions) CR (R2020B_AdvancesFromCustomers)';
-		|tr='CreditNote DR (R2021B_CustomersTransactions) CR (R2020B_AdvancesFromCustomers)'", Lang));
+		|tr='AlacakMakbuzu DR (R2021B_Müşteriİşlemleri) CR (R2020B_MüşteridenAvanslar)'", Lang));
 	
 Strings.Insert("CreditNote_DR_R1021B_VendorsTransactions_CR_R5022T_Expenses",
 	NStr("en='CreditNote DR (R1021B_VendorsTransactions CR (R5022T_Expenses)';
-		|ru='CreditNote DR (R1021B_VendorsTransactions CR (R5022T_Expenses)';
-		|tr='CreditNote DR (R1021B_VendorsTransactions CR (R5022T_Expenses)'", Lang));
+		|ru='CreditNote Дебет (R1021B_VendorsTransactions Кредит (R5022T_Expenses)';
+		|tr='KrediNotu DR (R1021B_Tedarikçiİşlemleri CR (R5022T_Giderler)'", Lang));
 	
 #EndRegion
 	

@@ -214,7 +214,7 @@
     </presentation>
     <presentation>
      <key>tr</key>
-     <value>Calendar</value>
+     <value>Takvim</value>
     </presentation>
     <value xsi:type="core:StringValue">
      <value>Calendar</value>
@@ -601,7 +601,7 @@
    </title>
    <title>
     <key>tr</key>
-    <value>Page List</value>
+    <value>Sayfa Listesi</value>
    </title>
    <extendedTooltip>
     <name>GroupListExtendedTooltip</name>
@@ -705,7 +705,7 @@
    </title>
    <title>
     <key>tr</key>
-    <value>Page Calendar</value>
+    <value>Sayfa Takvimi</value>
    </title>
    <extendedTooltip>
     <name>GroupCalendarExtendedTooltip</name>
@@ -743,7 +743,7 @@
   </title>
   <title>
    <key>tr</key>
-   <value>GroupPages</value>
+   <value>GrupSayfaları</value>
   </title>
   <extendedTooltip>
    <name>GroupPagesExtendedTooltip</name>
@@ -903,7 +903,7 @@ WHERE
       </content>
       <content>
        <key>tr</key>
-       <value>Employee schedule</value>
+       <value>Çalışan programı</value>
       </content>
      </localValue>
     </title>
@@ -974,7 +974,7 @@ WHERE
   </title>
   <title>
    <key>tr</key>
-   <value>Employee schedule</value>
+   <value>Çalışan programı</value>
   </title>
   <id>2</id>
   <valueType>
@@ -999,7 +999,7 @@ WHERE
   </title>
   <title>
    <key>tr</key>
-   <value>List mode</value>
+   <value>Liste modu</value>
   </title>
   <id>3</id>
   <valueType>
@@ -1025,7 +1025,7 @@ WHERE
   </title>
   <title>
    <key>tr</key>
-   <value>Calendar</value>
+   <value>Takvim</value>
   </title>
   <id>5</id>
   <valueType>
@@ -1074,11 +1074,11 @@ WHERE
   </title>
   <title>
    <key>ru</key>
-   <value>Создать расписание</value>
+   <value>Создать график</value>
   </title>
   <title>
    <key>tr</key>
-   <value>Create schedule</value>
+   <value>Program oluştur</value>
   </title>
   <id>1</id>
   <use>
@@ -1107,7 +1107,7 @@ WHERE
   </title>
   <title>
    <key>tr</key>
-   <value>Copy schedule</value>
+   <value>Programı kopyala</value>
   </title>
   <id>2</id>
   <use>

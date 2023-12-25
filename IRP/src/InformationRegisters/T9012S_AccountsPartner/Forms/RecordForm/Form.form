@@ -470,11 +470,11 @@
   </title>
   <title>
    <key>ru</key>
-   <value>Partner type</value>
+   <value>Тип партнера</value>
   </title>
   <title>
    <key>tr</key>
-   <value>Partner type</value>
+   <value>Ortak tipi</value>
   </title>
   <extendedTooltip>
    <name>GroupPartnerTypeExtendedTooltip</name>

@@ -46,7 +46,6 @@ Scenario: _2068001 preparation (locking linked strings)
 		When Create catalog IntegrationSettings objects
 		When Create information register CurrencyRates records
 		When Create catalog CancelReturnReasons objects
-		When update ItemKeys
 		When Create information register Taxes records (VAT)
 		When Create catalog BusinessUnits objects
 		When Create catalog ExpenseAndRevenueTypes objects

@@ -11,7 +11,7 @@
  </synonym>
  <synonym>
   <key>tr</key>
-  <value>Doc employee transfer server</value>
+  <value>Belge çalışan transfer sunucu</value>
  </synonym>
  <server>true</server>
  <serverCall>true</serverCall>

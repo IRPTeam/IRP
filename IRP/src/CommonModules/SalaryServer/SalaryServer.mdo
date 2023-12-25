@@ -11,7 +11,7 @@
  </synonym>
  <synonym>
   <key>tr</key>
-  <value>Salary server</value>
+  <value>Maaş sunucusu</value>
  </synonym>
  <server>true</server>
  <externalConnection>true</externalConnection>

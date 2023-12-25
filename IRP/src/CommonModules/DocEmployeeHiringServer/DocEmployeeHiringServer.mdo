@@ -11,7 +11,7 @@
  </synonym>
  <synonym>
   <key>tr</key>
-  <value>Doc employee hiring server</value>
+  <value>Çalışan işe alma sunucusu</value>
  </synonym>
  <server>true</server>
  <serverCall>true</serverCall>

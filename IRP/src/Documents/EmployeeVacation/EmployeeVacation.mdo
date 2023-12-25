@@ -18,7 +18,7 @@
  </synonym>
  <synonym>
   <key>tr</key>
-  <value>Employee vacation</value>
+  <value>Çalışan tatili</value>
  </synonym>
  <useStandardCommands>true</useStandardCommands>
  <inputByString>Document.EmployeeVacation.StandardAttribute.Number</inputByString>
@@ -62,7 +62,7 @@
  </listPresentation>
  <listPresentation>
   <key>tr</key>
-  <value>Employee vacations</value>
+  <value>Çalışan tatilleri</value>
  </listPresentation>
  <numberLength>12</numberLength>
  <numberAllowedLength>Variable</numberAllowedLength>
@@ -177,7 +177,7 @@
   </synonym>
   <synonym>
    <key>tr</key>
-   <value>Employee list</value>
+   <value>Çalışan listesi</value>
   </synonym>
   <attributes uuid="6c55f633-4877-4220-a91c-aa0b80af52a1">
    <name>Employee</name>

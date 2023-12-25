@@ -19,7 +19,6 @@ Background:
 
 Scenario: _005049 filling in the "Retail customers" catalog
 	When set True value to the constant
-	And I close TestClient session
 	When Create catalog Companies objects (Main company)
 	When Create catalog Countries objects
 	When Create catalog Stores objects
@@ -27,7 +26,6 @@ Scenario: _005049 filling in the "Retail customers" catalog
 	When Create chart of characteristic types CurrencyMovementType objects
 	When Create catalog Partners objects and Companies objects (Customer)
 	When Create catalog Agreements objects (Customer)
-	Given I open new TestClient session or connect the existing one
 	* Open and filling in Retail customer with Partner and Legal name
 		Given I open hyperlink "e1cib/list/Catalog.RetailCustomers"
 		And I click the button named "FormCreate"

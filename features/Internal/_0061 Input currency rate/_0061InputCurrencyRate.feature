@@ -21,8 +21,6 @@ Background:
 
 Scenario: _006100 preparation (filling in currency rates)
 	When set True value to the constant
-	And I close TestClient session
-	Given I open new TestClient session or connect the existing one
 	* Add Plugin ExternalBankUa
 		Given I open hyperlink "e1cib/list/Catalog.ExternalDataProc"
 		And I click the button named "FormCreate"
@@ -172,5 +170,3 @@ Scenario: _006101 filling in exchange rates in registers
 		And I input "21.06.2019 17:40:13" text in "Period" field
 		And I click "Save and close" button
 		
-Scenario: _999999 close TestClient session
-	And I close TestClient session

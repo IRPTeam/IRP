@@ -14,11 +14,11 @@
  </synonym>
  <synonym>
   <key>ru</key>
-  <value>Projects</value>
+  <value>Проекты</value>
  </synonym>
  <synonym>
   <key>tr</key>
-  <value>Projects</value>
+  <value>Projeler</value>
  </synonym>
  <useStandardCommands>true</useStandardCommands>
  <fullTextSearchOnInputByString>DontUse</fullTextSearchOnInputByString>

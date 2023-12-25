@@ -1148,11 +1148,11 @@ FROM
       </content>
       <content>
        <key>ru</key>
-       <value>Extra dimension1</value>
+       <value>Дополнительное измерение1</value>
       </content>
       <content>
        <key>tr</key>
-       <value>Extra dimension1</value>
+       <value>Ekstra boyut1</value>
       </content>
      </localValue>
     </title>
@@ -1168,11 +1168,11 @@ FROM
       </content>
       <content>
        <key>ru</key>
-       <value>Extra dimension2</value>
+       <value>Дополнительный размер2</value>
       </content>
       <content>
        <key>tr</key>
-       <value>Extra dimension2</value>
+       <value>Ek boyut2</value>
       </content>
      </localValue>
     </title>
@@ -1188,11 +1188,11 @@ FROM
       </content>
       <content>
        <key>ru</key>
-       <value>Extra dimension3</value>
+       <value>Дополнительный размер3</value>
       </content>
       <content>
        <key>tr</key>
-       <value>Extra dimension3</value>
+       <value>Ek boyut3</value>
       </content>
      </localValue>
     </title>
@@ -1208,11 +1208,11 @@ FROM
       </content>
       <content>
        <key>ru</key>
-       <value>Extra dimension</value>
+       <value>Доп. измерение</value>
       </content>
       <content>
        <key>tr</key>
-       <value>Extra dimension</value>
+       <value>Ekstra boyut</value>
       </content>
      </localValue>
     </title>
@@ -1292,11 +1292,11 @@ FROM
   </title>
   <title>
    <key>ru</key>
-   <value>Load charts of accounts</value>
+   <value>Загрузка планов счетов</value>
   </title>
   <title>
    <key>tr</key>
-   <value>Load charts of accounts</value>
+   <value>Hesap planlarını yükle</value>
   </title>
   <id>1</id>
   <use>

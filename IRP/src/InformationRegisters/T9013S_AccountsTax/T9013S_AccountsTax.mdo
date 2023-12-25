@@ -47,11 +47,11 @@
   </synonym>
   <synonym>
    <key>ru</key>
-   <value>Incoming account</value>
+   <value>Входящий счет</value>
   </synonym>
   <synonym>
    <key>tr</key>
-   <value>Incoming account</value>
+   <value>Gelen hesap</value>
   </synonym>
   <type>
    <types>ChartOfAccountsRef.Basic</types>
@@ -74,11 +74,11 @@
   </synonym>
   <synonym>
    <key>ru</key>
-   <value>Outgoing account</value>
+   <value>Исходящий счет</value>
   </synonym>
   <synonym>
    <key>tr</key>
-   <value>Outgoing account</value>
+   <value>Giden hesap</value>
   </synonym>
   <type>
    <types>ChartOfAccountsRef.Basic</types>

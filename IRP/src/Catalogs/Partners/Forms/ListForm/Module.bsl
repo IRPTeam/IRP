@@ -47,8 +47,6 @@ Procedure OnCreateAtServer(Cancel, StandardProcessing)
 	Items.FilterConsignor.TitleTextColor  = ?(ThisObject.FilterConsignor  , New Color(), WebColors.LightGray);
 	Items.FilterTradeAgent.TitleTextColor = ?(ThisObject.FilterTradeAgent , New Color(), WebColors.LightGray);
 	Items.FilterOther.TitleTextColor      = ?(ThisObject.FilterTradeAgent , New Color(), WebColors.LightGray);
-	
-	ThisObject.CommandBar.ChildItems.FormInformationRegisterRetailWorkersRetailWorkers.Visible = False;
 EndProcedure
 
 &AtClient

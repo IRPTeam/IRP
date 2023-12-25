@@ -15,8 +15,6 @@ Background:
 		
 Scenario: _096000 preparation (Employee cash advance)
 	When set True value to the constant
-	And I close TestClient session
-	Given I open new TestClient session or connect the existing one
 	* Load info
 		When Create catalog ObjectStatuses objects
 		When Create catalog Units objects
@@ -190,7 +188,7 @@ Scenario: _0960010 create Bank payment with transaction type Employee cash advan
 			| 'Number'    |
 			| '16'        |
 	* Create BP
-		And I click the button named "FormDocumentBankPaymentGenarateBankPayment"
+		And I click the button named "FormDocumentBankPaymentGenerateBankPayment"
 		Then the form attribute named "Company" became equal to "Main Company"
 		Then the form attribute named "Account" became equal to "Bank account, TRY"
 		Then the form attribute named "TransactionType" became equal to "Employee cash advance"

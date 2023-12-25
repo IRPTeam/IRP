@@ -128,7 +128,9 @@ Function PaymentList()
 		   |	PaymentList.Ref.Branch AS Branch,
 		   |	PaymentList.Ref.TransactionType = VALUE(Enum.CashExpenseTransactionTypes.CurrentCompanyExpense) AS IsCurrentCompanyExpense,
 		   |	PaymentList.Ref.TransactionType = VALUE(Enum.CashExpenseTransactionTypes.OtherCompanyExpense) AS IsOtherCompanyExpense,
-		   |	PaymentList.Ref.TransactionType = VALUE(Enum.CashExpenseTransactionTypes.SalaryPayment) AS IsSalaryPayment
+		   |	PaymentList.Ref.TransactionType = VALUE(Enum.CashExpenseTransactionTypes.SalaryPayment) AS IsSalaryPayment,
+		   |	PaymentList.CashFlowCenter,
+		   |	PaymentList.CashFlowCenterOtherCompany
 		   |INTO PaymentList
 		   |FROM
 		   |	Document.CashExpense.PaymentList AS PaymentList
@@ -193,6 +195,12 @@ Function R3011T_CashFlow()
 		|			Then PaymentList.FinancialMovementTypeOtherCompany
 		|		Else PaymentList.FinancialMovementType
 		|	End As FinancialMovementType,
+		|	Case
+		|		When PaymentList.IsOtherCompanyExpense
+		|		OR PaymentList.IsSalaryPayment
+		|			Then PaymentList.CashFlowCenterOtherCompany
+		|		Else PaymentList.CashFlowCenter
+		|	End As CashFlowCenter,
 		|	UNDEFINED AS PlanningPeriod,
 		|	PaymentList.Currency,
 		|	PaymentList.Key,
@@ -212,6 +220,7 @@ Function R3011T_CashFlow()
 		|	PaymentList.Account,
 		|	VALUE(Enum.CashFlowDirections.Incoming),
 		|	PaymentList.FinancialMovementTypeOtherCompany AS FinancialMovementType,
+		|	PaymentList.CashFlowCenterOtherCompany AS CashFlowCenter,
 		|	UNDEFINED AS PlanningPeriod,
 		|	PaymentList.Currency,
 		|	PaymentList.Key,
@@ -231,6 +240,7 @@ Function R3011T_CashFlow()
 		|	PaymentList.Account,
 		|	VALUE(Enum.CashFlowDirections.Outgoing),
 		|	PaymentList.FinancialMovementType,
+		|	PaymentList.CashFlowCenter,
 		|	UNDEFINED AS PlanningPeriod,
 		|	PaymentList.Currency,
 		|	PaymentList.Key,

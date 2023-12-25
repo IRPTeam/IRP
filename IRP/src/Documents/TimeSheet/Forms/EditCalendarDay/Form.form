@@ -176,7 +176,7 @@
   </title>
   <title>
    <key>tr</key>
-   <value>Group actually</value>
+   <value>Grup gerçekte</value>
   </title>
   <extendedTooltip>
    <name>GroupActuallyExtendedTooltip</name>
@@ -350,11 +350,11 @@
   </title>
   <title>
    <key>ru</key>
-   <value>Фактически дней/часов</value>
+   <value>Фактические дни/часы</value>
   </title>
   <title>
    <key>tr</key>
-   <value>Actually days/hours</value>
+   <value>Gerçek günler/saatler</value>
   </title>
   <id>3</id>
   <valueType>
@@ -378,11 +378,11 @@
   </title>
   <title>
    <key>ru</key>
-   <value>Подсчитать дни/часы</value>
+   <value>Подсчет дней/часов</value>
   </title>
   <title>
    <key>tr</key>
-   <value>Count days/hours</value>
+   <value>Gün/saat say</value>
   </title>
   <id>4</id>
   <valueType>
@@ -410,7 +410,7 @@
   </title>
   <title>
    <key>tr</key>
-   <value>Is sick leave</value>
+   <value>Raporlu izin</value>
   </title>
   <id>5</id>
   <valueType>
@@ -431,11 +431,11 @@
   </title>
   <title>
    <key>ru</key>
-   <value>Отпуск</value>
+   <value>Это отпуск</value>
   </title>
   <title>
    <key>tr</key>
-   <value>Is vacation</value>
+   <value>Tatilde mi</value>
   </title>
   <id>6</id>
   <valueType>

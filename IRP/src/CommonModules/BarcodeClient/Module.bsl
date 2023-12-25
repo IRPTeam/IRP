@@ -79,7 +79,6 @@ Procedure SearchByBarcode(Barcode, Settings) Export
 		EndIf;
 #Else
 		OpenForm("CommonForm.InputBarcode", , , , , , NotifyDescription, FormWindowOpeningMode.LockOwnerWindow);
-//		ShowInputString(NotifyDescription, "", DescriptionField);
 #EndIf
 	Else
 #If MobileClient Then

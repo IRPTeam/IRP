@@ -16,10 +16,6 @@ Background:
 
 Scenario: _7001 Production planning closing
 	When set True value to the constant
-	And I close TestClient session
-	Given I open new TestClient session or connect the existing one
-	And I close TestClient session
-	Given I open new TestClient session or connect the existing one
 	When Create catalog Partners objects (Ferron BP)
 	When Create catalog Companies objects (partners company)
 	When Create information register PartnerSegments records
@@ -31,9 +27,6 @@ Scenario: _7001 Production planning closing
 	When Create catalog Companies objects (Main company)
 	When Create information register CurrencyRates records
 	When Create information register Taxes records (VAT)
-	When set True value to the constant
-	And I close TestClient session
-	Given I open new TestClient session or connect the existing one
 	When Create catalog AddAttributeAndPropertySets objects
 	When Create catalog AddAttributeAndPropertyValues objects
 	When Create catalog ItemKeys objects (MF)
@@ -50,7 +43,6 @@ Scenario: _7001 Production planning closing
 	When Create catalog Countries objects
 	When Create catalog IntegrationSettings objects
 	When Create information register CurrencyRates records
-	When update ItemKeys
 	When Create catalog MFBillOfMaterials objects
 	When Create catalog PlanningPeriods objects (MF)
 	When Create catalog ObjectStatuses objects

@@ -491,7 +491,7 @@
    </synonym>
    <synonym>
     <key>tr</key>
-    <value>Total vacation days</value>
+    <value>Toplam tatil günleri</value>
    </synonym>
    <type>
     <types>Number</types>
@@ -516,7 +516,7 @@
    </synonym>
    <synonym>
     <key>tr</key>
-    <value>Paid vacation days</value>
+    <value>Ücretli izin günleri</value>
    </synonym>
    <type>
     <types>Number</types>
@@ -541,7 +541,7 @@
    </synonym>
    <synonym>
     <key>tr</key>
-    <value>Total sick leave days</value>
+    <value>Toplam raporlu izin günleri</value>
    </synonym>
    <type>
     <types>Number</types>
@@ -566,7 +566,7 @@
    </synonym>
    <synonym>
     <key>tr</key>
-    <value>Paid sick leave days</value>
+    <value>Ücretli hastalık izni günleri</value>
    </synonym>
    <type>
     <types>Number</types>

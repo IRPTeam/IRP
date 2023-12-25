@@ -20,8 +20,6 @@ Background:
 
 Scenario: _016500 preparation
 	When set True value to the constant
-	And I close TestClient session
-	Given I open new TestClient session or connect the existing one
 	* Load info
 		When Create catalog ObjectStatuses objects
 		When Create catalog ItemKeys objects
@@ -49,7 +47,6 @@ Scenario: _016500 preparation
 		When Create catalog TaxRates objects
 		When Create information register CurrencyRates records
 		When Create catalog IntegrationSettings objects
-		When update ItemKeys
 		And I close all client application windows
 
 Scenario: _0165001 check preparation

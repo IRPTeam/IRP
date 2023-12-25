@@ -16,8 +16,6 @@ Background:
 
 Scenario: _201000 preparation ( filling stores)
 	When set True value to the constant
-	And I close TestClient session
-	Given I open new TestClient session or connect the existing one
 	* Load info
 		When Create catalog ObjectStatuses objects
 		When Create catalog ItemKeys objects
@@ -48,7 +46,6 @@ Scenario: _201000 preparation ( filling stores)
 		When Create catalog IntegrationSettings objects
 		When Create information register CurrencyRates records
 		When Create information register UserSettings records
-		When update ItemKeys
 		When Create information register Taxes records (VAT)
 
 	
@@ -2509,7 +2506,3 @@ Scenario: _201033 сheck filling of the bundle of store and company in the Work 
 		Then there are lines in TestClient message log
 			| 'Store [Store 07] in row [1] does not match company [Second Company]'    |
 		And I close all client application windows
-
-
-Scenario: _999999 close TestClient session
-	And I close TestClient session

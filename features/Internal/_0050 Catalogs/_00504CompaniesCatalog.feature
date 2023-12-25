@@ -1,4 +1,4 @@
-#language: en
+﻿#language: en
 @tree
 @Positive
 @CompanyCatalogs
@@ -17,8 +17,6 @@ Background:
 
 Scenario: _005013 filling in the "Companies" catalog
 	When set True value to the constant
-	And I close TestClient session
-	Given I open new TestClient session or connect the existing one
 	* Preparation
 		And I close all client application windows
 		When Create catalog IntegrationSettings objects
@@ -127,3 +125,21 @@ Scenario: _005013 filling in the "Companies" catalog
 	# * Clean catalog Companies
 	# 	And I delete "Companies" catalog element with the Description_en "Main Company"
 
+Scenario: _005015 create Projects
+	* Open a creation form Projects
+		Given I open hyperlink "e1cib/list/Catalog.Projects"
+	* Create 
+		And I click the button named "FormCreate"
+		And I click Open button of the field named "Description_en"
+		And I input "Project 01" text in the field named "Description_en"
+		And I input "Project 01 TR" text in the field named "Description_tr"
+		And I input "Проект 01" text in "RU" field
+		And I click "Ok" button
+		And I click the button named "FormWriteAndClose"
+		And Delay 3
+	* Check creation
+		Then I check for the "Projects" catalog element with the "Description_en" "Project 01"
+		Then I check for the "Projects" catalog element with the "Description_tr" "Project 01 TR"
+		Then I check for the "Projects" catalog element with the "Description_ru" "Проект 01"
+
+	

@@ -17,8 +17,6 @@ Background:
 
 Scenario: _005023 filling in the "Partner segments content" catalog
 	When set True value to the constant
-	And I close TestClient session
-	Given I open new TestClient session or connect the existing one
 	* Opening the form for filling in Partner segments content
 		Given I open hyperlink "e1cib/list/Catalog.PartnerSegments"
 	* Create segments: Distribution

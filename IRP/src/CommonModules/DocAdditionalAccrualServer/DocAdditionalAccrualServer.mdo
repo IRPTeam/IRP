@@ -11,7 +11,7 @@
  </synonym>
  <synonym>
   <key>tr</key>
-  <value>Doc additional accrual server</value>
+  <value>Belge ek tahakkuk sunucu</value>
  </synonym>
  <server>true</server>
  <serverCall>true</serverCall>

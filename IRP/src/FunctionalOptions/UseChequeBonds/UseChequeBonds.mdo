@@ -16,4 +16,6 @@
  <location>Constant.UseChequeBonds</location>
  <privilegedGetMode>true</privilegedGetMode>
  <content>Catalog.ChequeBonds</content>
+ <content>Document.ChequeBondTransaction</content>
+ <content>Document.ChequeBondTransactionItem</content>
 </mdclass:FunctionalOption>

@@ -188,7 +188,7 @@ Scenario: _0960010 create Bank payment with transaction type Employee cash advan
 			| 'Number'    |
 			| '16'        |
 	* Create BP
-		And I click the button named "FormDocumentBankPaymentGenarateBankPayment"
+		And I click the button named "FormDocumentBankPaymentGenerateBankPayment"
 		Then the form attribute named "Company" became equal to "Main Company"
 		Then the form attribute named "Account" became equal to "Bank account, TRY"
 		Then the form attribute named "TransactionType" became equal to "Employee cash advance"

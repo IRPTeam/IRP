@@ -967,7 +967,7 @@ Scenario: _05818 create Bank payment based on Sales report to consignors
 			| 'Number'            |
 			| '$$NumberSRC3$$'    |
 	* Create Bank payment
-		And I click the button named "FormDocumentBankPaymentGenarateBankPayment"
+		And I click the button named "FormDocumentBankPaymentGenerateBankPayment"
 		And I click Choice button of the field named "Account"
 		And I go to line in "List" table
 			| 'Description'          |
@@ -1110,7 +1110,7 @@ Scenario: _05820 create Bank receipt based on Sales report from trade agent
 			| 'Number'                         |
 			| '$$NumberSRFromTradeAgent3$$'    |
 	* Create Bank payment
-		And I click the button named "FormDocumentBankReceiptGenarateBankReceipt"
+		And I click the button named "FormDocumentBankReceiptGenerateBankReceipt"
 		And I click Choice button of the field named "Account"
 		And I go to line in "List" table
 			| 'Description'                           |
@@ -1182,7 +1182,7 @@ Scenario: _05821 create Cash receipt based on Sales report from trade agent
 			| 'Number'                         |
 			| '$$NumberSRFromTradeAgent3$$'    |
 	* Create Bank payment
-		And I click the button named "FormDocumentCashReceiptGenarateCashReceipt"
+		And I click the button named "FormDocumentCashReceiptGenerateCashReceipt"
 		And I click Choice button of the field named "CashAccount"
 		And I go to line in "List" table
 			| 'Description'                      |

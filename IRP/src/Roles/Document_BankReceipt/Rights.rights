@@ -112,7 +112,7 @@
 		</right>
 	</object>
 	<object>
-		<name>Document.BankReceipt.Command.GenarateBankReceipt</name>
+		<name>Document.BankReceipt.Command.GenerateBankReceipt</name>
 		<right>
 			<name>View</name>
 			<value>true</value>

@@ -126,7 +126,7 @@
 		</right>
 	</object>
 	<object>
-		<name>Document.RetailSalesReceipt.Command.Genarate</name>
+		<name>Document.RetailSalesReceipt.Command.Generate</name>
 		<right>
 			<name>View</name>
 			<value>true</value>

@@ -172,7 +172,7 @@ Scenario: _400001 opening entry account balance
 				| 'From'    | 'Movement type'         | 'Multiplicity'    | 'To'     | 'Type'          |
 				| 'EUR'     | 'Reporting currency'    | '1'               | 'USD'    | 'Reporting'     |
 			And I select current line in "CurrenciesTable" table
-			And I input "1,1000" text in "Rate" field of "CurrenciesTable" table
+			And I input "1,100000" text in "Rate" field of "CurrenciesTable" table
 			And I finish line editing in "CurrenciesTable" table
 			And I click "Ok" button		
 	* Post document
@@ -576,7 +576,7 @@ Scenario: _400004 opening entry Vendors transaction by partner terms (vendors)
 			And in the table "AccountPayableByAgreements" I click "Edit currencies account payable by agreements" button
 			And "CurrenciesTable" table became equal
 				| 'Movement type'         | 'Type'            | 'To'     | 'From'    | 'Multiplicity'    | 'Rate'      | 'Amount'     |
-				| 'Reporting currency'    | 'Reporting'       | 'USD'    | 'TRY'     | '1'               | '0,1712'    | '17,12'      |
+				| 'Reporting currency'    | 'Reporting'       | 'USD'    | 'TRY'     | '1'               | '0,171200'    | '17,12'      |
 				| 'Local currency'        | 'Legal'           | 'TRY'    | 'TRY'     | '1'               | '1'         | '100'        |
 				| 'TRY'                   | 'Partner term'    | 'TRY'    | 'TRY'     | '1'               | '1'         | '100'        |
 			And I click "Ok" button		
@@ -662,7 +662,7 @@ Scenario: _400005 opening entry Customers transactions by partner terms (custome
 			And in the table "AccountReceivableByAgreements" I click "Edit currencies account receivable by agreements" button
 			And "CurrenciesTable" table became equal
 				| 'Movement type'         | 'Type'            | 'To'     | 'From'    | 'Multiplicity'    | 'Rate'      | 'Amount'     |
-				| 'Reporting currency'    | 'Reporting'       | 'USD'    | 'TRY'     | '1'               | '0,1712'    | '17,12'      |
+				| 'Reporting currency'    | 'Reporting'       | 'USD'    | 'TRY'     | '1'               | '0,171200'    | '17,12'      |
 				| 'Local currency'        | 'Legal'           | 'TRY'    | 'TRY'     | '1'               | '1'         | '100'        |
 				| 'TRY'                   | 'Partner term'    | 'TRY'    | 'TRY'     | '1'               | '1'         | '100'        |
 			And I click "Ok" button	
@@ -840,7 +840,7 @@ Scenario: _400008 check the entry of the account balance, inventory balance, cus
 			And in the table "AccountReceivableByAgreements" I click "Edit currencies account receivable by agreements" button
 			And "CurrenciesTable" table became equal
 				| 'Movement type'         | 'Type'            | 'To'     | 'From'    | 'Multiplicity'    | 'Rate'      | 'Amount'     |
-				| 'Reporting currency'    | 'Reporting'       | 'USD'    | 'TRY'     | '1'               | '0,1712'    | '25,85'      |
+				| 'Reporting currency'    | 'Reporting'       | 'USD'    | 'TRY'     | '1'               | '0,171200'    | '25,85'      |
 				| 'Local currency'        | 'Legal'           | 'TRY'    | 'TRY'     | '1'               | '1'         | '151'        |
 				| 'TRY'                   | 'Partner term'    | 'TRY'    | 'TRY'     | '1'               | '1'         | '151'        |
 			And I close current window			

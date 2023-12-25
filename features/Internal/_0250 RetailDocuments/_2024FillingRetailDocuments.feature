@@ -254,7 +254,7 @@ Scenario: _0154135 create document Retail Sales Receipt
 			And in the table "ItemList" I click "Edit currencies" button
 			And "CurrenciesTable" table became equal
 				| 'Movement type'         | 'Type'            | 'To'     | 'From'    | 'Multiplicity'    | 'Rate'      | 'Amount'     |
-				| 'Reporting currency'    | 'Reporting'       | 'USD'    | 'TRY'     | '1'               | '0,1712'    | '303,02'     |
+				| 'Reporting currency'    | 'Reporting'       | 'USD'    | 'TRY'     | '1'               | '0,171200'    | '303,02'     |
 				| 'Local currency'        | 'Legal'           | 'TRY'    | 'TRY'     | '1'               | '1'         | '1 770'      |
 				| 'TRY'                   | 'Partner term'    | 'TRY'    | 'TRY'     | '1'               | '1'         | '1 770'      |
 			And I close current window
@@ -305,7 +305,7 @@ Scenario: _0154136 create document Retail Return Receipt based on RetailSalesRec
 			| 'Number'                                 |
 			| '$$NumberRetailSalesReceipt0154135$$'    |
 	* Create Retail Return Receipt
-		And I click the button named "FormDocumentRetailReturnReceiptGenarate"
+		And I click the button named "FormDocumentRetailReturnReceiptGenerate"
 		And I click "Ok" button		
 	* Check filling in
 		Then the form attribute named "DecorationGroupTitleCollapsedPicture" became equal to "Decoration group title collapsed picture"
@@ -375,7 +375,7 @@ Scenario: _01541361 check filling in Row Id info table in the RRR (RSR-RRR)
 			| 'Number'    |
 			| '201'       |
 	* Create Retail Return Receipt
-		And I click the button named "FormDocumentRetailReturnReceiptGenarate"
+		And I click the button named "FormDocumentRetailReturnReceiptGenerate"
 		Then "Add linked document rows" window is opened
 		And I expand current line in "BasisesTree" table
 		And "BasisesTree" table became equal
@@ -2171,7 +2171,7 @@ Scenario:  _0154149 create Cash statement
 			| 'Number'                                  |
 			| '$$NumberRetailSalesReceipt01541494$$'    |
 		And I activate "Date" field in "List" table
-		And I click the button named "FormDocumentRetailReturnReceiptGenarate"
+		And I click the button named "FormDocumentRetailReturnReceiptGenerate"
 		And I click "Ok" button		
 		And I activate "Quantity" field in "ItemList" table
 		And I select current line in "ItemList" table
@@ -2196,7 +2196,7 @@ Scenario:  _0154149 create Cash statement
 		And I go to line in "List" table
 			| 'Number'                                  |
 			| '$$NumberRetailSalesReceipt01541493$$'    |
-		And I click the button named "FormDocumentRetailReturnReceiptGenarate"
+		And I click the button named "FormDocumentRetailReturnReceiptGenerate"
 		And I click "Ok" button	
 		Then "Retail return receipt (create)" window is opened
 		And I activate "Quantity" field in "ItemList" table
@@ -2222,7 +2222,7 @@ Scenario:  _0154149 create Cash statement
 		And I go to line in "List" table
 			| 'Number'                                  |
 			| '$$NumberRetailSalesReceipt01541491$$'    |
-		And I click the button named "FormDocumentRetailReturnReceiptGenarate"
+		And I click the button named "FormDocumentRetailReturnReceiptGenerate"
 		And I click "Ok" button	
 		And I input "01.09.2020 16:55:04" text in "Date" field
 		And I click the button named "FormPost"
@@ -2619,7 +2619,7 @@ Scenario: _0154154 check filling in and refilling Retail return receipt
 			And in the table "ItemList" I click "Edit currencies" button
 			And "CurrenciesTable" table became equal
 				| 'Movement type'         | 'Type'            | 'To'     | 'From'    | 'Multiplicity'    | 'Rate'      | 'Amount'     |
-				| 'Reporting currency'    | 'Reporting'       | 'USD'    | 'TRY'     | '1'               | '0,1712'    | '303,02'     |
+				| 'Reporting currency'    | 'Reporting'       | 'USD'    | 'TRY'     | '1'               | '0,171200'    | '303,02'     |
 				| 'Local currency'        | 'Legal'           | 'TRY'    | 'TRY'     | '1'               | '1'         | '1 770'      |
 				| 'TRY'                   | 'Partner term'    | 'TRY'    | 'TRY'     | '1'               | '1'         | '1 770'      |
 			And I close current window
@@ -2964,7 +2964,7 @@ Scenario: _0154155 check filling in and refilling Retail sales receipt
 			And in the table "ItemList" I click "Edit currencies" button
 			And "CurrenciesTable" table became equal
 				| 'Movement type'         | 'Type'            | 'To'     | 'From'    | 'Multiplicity'    | 'Rate'      | 'Amount'     |
-				| 'Reporting currency'    | 'Reporting'       | 'USD'    | 'TRY'     | '1'               | '0,1712'    | '303,02'     |
+				| 'Reporting currency'    | 'Reporting'       | 'USD'    | 'TRY'     | '1'               | '0,171200'    | '303,02'     |
 				| 'Local currency'        | 'Legal'           | 'TRY'    | 'TRY'     | '1'               | '1'         | '1 770'      |
 				| 'TRY'                   | 'Partner term'    | 'TRY'    | 'TRY'     | '1'               | '1'         | '1 770'      |
 			And I close current window
@@ -3118,7 +3118,7 @@ Scenario: _0154156 check Retail sales receipt when changing date
 		And in the table "ItemList" I click "Edit currencies" button
 		And "CurrenciesTable" table became equal
 			| 'Movement type'        | 'Type'           | 'To'    | 'From'   | 'Multiplicity'   | 'Rate'     | 'Amount'    |
-			| 'Reporting currency'   | 'Reporting'      | 'USD'   | 'TRY'    | '1'              | '0,2000'   | '200,00'    |
+			| 'Reporting currency'   | 'Reporting'      | 'USD'   | 'TRY'    | '1'              | '0,200000' | '200,00'    |
 			| 'Local currency'       | 'Legal'          | 'TRY'   | 'TRY'    | '1'              | '1'        | '1 000'     |
 			| 'TRY'                  | 'Partner term'   | 'TRY'   | 'TRY'    | '1'              | '1'        | '1 000'     |
 		And I close all client application windows
@@ -3876,7 +3876,7 @@ Scenario: _0154190 check filling in Retail sales receipt when copying
 		And in the table "ItemList" I click "Edit currencies" button
 		And "CurrenciesTable" table became equal
 			| 'Movement type'        | 'Type'           | 'To'    | 'From'   | 'Multiplicity'   | 'Rate'     | 'Amount'    |
-			| 'Reporting currency'   | 'Reporting'      | 'USD'   | 'TRY'    | '1'              | '0,1712'   | '89,02'     |
+			| 'Reporting currency'   | 'Reporting'      | 'USD'   | 'TRY'    | '1'              | '0,171200'   | '89,02'     |
 			| 'Local currency'       | 'Legal'          | 'TRY'   | 'TRY'    | '1'              | '1'        | '520'       |
 			| 'TRY'                  | 'Partner term'   | 'TRY'   | 'TRY'    | '1'              | '1'        | '520'       |
 		And I close current window

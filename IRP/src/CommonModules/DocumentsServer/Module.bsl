@@ -757,38 +757,16 @@ Function PickupItemEnd(Val Parameters, Val ScanData) Export
 			If ValueIsFilled(ScanDataItem.SerialLotNumber) Then
 				SerialLotNumberInfo = AddNewSerialLotNumber(Object, RowKey, ScanDataItem);
 				
+				// TODO: Refact
 				If SerialLotNumberInfo.Cache <> Undefined And SerialLotNumberInfo.Cache.Property("ItemList") Then
 					For Each InfoRow In SerialLotNumberInfo.Cache.ItemList Do
 						For Each ResultRow In Result.NewRows Do
 							If ResultRow.Cache.Property("ItemList") Then
 								For Each ItemListRow In ResultRow.Cache.ItemList Do
 									If ItemListRow.Key = InfoRow.Key Then
-										
-										
 										For Each KeyValue In InfoRow Do
 											ItemListRow.Insert(KeyValue.Key, InfoRow[KeyValue.Key])
 										EndDo;
-										
-										//If InfoRow.Property("InventoryOrigin") Then
-										//	ItemListRow.Insert("InventoryOrigin", InfoRow.InventoryOrigin);
-										//EndIf;
-										
-										//If InfoRow.Property("Consignor") Then
-										//	ItemListRow.Insert("Consignor", InfoRow.Consignor);
-										//EndIf;
-										
-										//If InfoRow.Property("VatRate") Then
-										//	ItemListRow.Insert("VatRate", InfoRow.VatRate);
-										//EndIf;	
-																			
-										//If InfoRow.Property("TaxAmount") Then
-										//	ItemListRow.Insert("TaxAmount", InfoRow.TaxAmount);
-										//EndIf;	
-										
-										//If InfoRow.Property("TotalAmount") Then
-										//	ItemListRow.Insert("TotalAmount", InfoRow.TotalAmount);
-										//EndIf;
-											
 									EndIf;
 								EndDo;
 							EndIf;
@@ -957,5 +935,101 @@ Procedure BeforeWrite_CheckFillingRowKeyBeforeWrite(Source, Cancel, WriteMode, P
 	EndDo;
 EndProcedure
 
-
+Procedure SalesBySerialLotNumbers(Parameters) Export
+	Query = New Query();
+	Query.TempTablesManager = Parameters.TempTablesManager;
+	Query.Text = 
+		"SELECT
+		|	ItemList.Key AS Key,
+		|	ItemList.Quantity,
+		|	ItemList.Amount AS Amount,
+		|	ItemList.NetAmount AS NetAmount,
+		|	ItemList.OffersAmount AS OffersAmount,
+		|	SerialLotNumbers.SerialLotNumber,
+		|	SerialLotNumbers.Quantity AS SLNQuantity
+		|FROM
+		|	ItemList AS ItemList
+		|		LEFT JOIN SerialLotNumbers as SerialLotNumbers
+		|		ON ItemList.Key = SerialLotNumbers.Key
+		|TOTALS
+		|	MAX(Amount) AS Amount,
+		|	MAX(NetAmount) AS NetAmount,
+		|	MAX(OffersAmount) AS OffersAmount
+		|BY
+		|	Key";
+	
+	QueryResult = Query.Execute();
+	Tree = QueryResult.Unload(QueryResultIteration.ByGroups);	
+	
+	AccMetadata = Metadata.AccumulationRegisters.R2001T_Sales;
+	ResultTable = New ValueTable();
+	ResultTable.Columns.Add("Key"          , AccMetadata.Dimensions.RowKey.Type);
+	ResultTable.Columns.Add("SerialLotNumber" , AccMetadata.Dimensions.SerialLotNumber.Type);
+	ResultTable.Columns.Add("Quantity"     , AccMetadata.Resources.Quantity.Type);
+	ResultTable.Columns.Add("Amount"       , AccMetadata.Resources.Amount.Type);
+	ResultTable.Columns.Add("NetAmount"    , AccMetadata.Resources.NetAmount.Type);
+	ResultTable.Columns.Add("OffersAmount" , AccMetadata.Resources.OffersAmount.Type);
+	
+	
+	For Each Row In Tree.Rows Do
+		If Row.Rows.Count() = 1 Then
+			FillPropertyValues(ResultTable.Add(), Row.Rows[0]);
+			Continue;
+		EndIf;
+		
+		Total_Amount = Row.Amount;
+		Total_NetAmount = Row.NetAmount;
+		Total_OffersAmount = Row.OffersAmount;
+		
+		MaxRow = Undefined;
+		
+		For Each Row2 In Row.Rows Do
+			If Not ValueIsFilled(Row2.SLNQuantity) Then
+				Continue;
+			EndIf;
+			
+			NewRow = ResultTable.Add();
+			FillPropertyValues(NewRow, Row2);
+			NewRow.Quantity	= Row2.SLNQuantity;
+			
+			If MaxRow = Undefined Then
+				MaxRow = NewRow;
+			Else
+				If MaxRow.Quantity < NewRow.Quantity Then
+					MaxRow = NewRow;
+				EndIf;
+			EndIf;
+			proportion = Row2.Quantity / Row2.SLNQuantity;
+			If proportion <> 0 Then
+				NewRow.Amount = Round(Row2.Amount / proportion, 2);
+				Total_Amount = Total_Amount - NewRow.Amount;
+			
+				NewRow.NetAmount = Round(Row2.NetAmount / proportion, 2);
+				Total_NetAmount = Total_NetAmount - NewRow.NetAmount;
+				
+				NewRow.OffersAmount = Round(Row2.OffersAmount / proportion, 2);
+				Total_OffersAmount = Total_OffersAmount - NewRow.OffersAmount;
+			EndIf;
+		EndDo;
+		
+		If MaxRow <> Undefined Then
+			If Total_Amount <> 0 Then
+				MaxRow.Amount = MaxRow.Amount + Total_Amount;
+			EndIf;
+				
+			If Total_NetAmount <> 0 Then
+				MaxRow.NetAmount = MaxRow.NetAmount + Total_NetAmount;
+			EndIf;
+				
+			If Total_OffersAmount <> 0 Then
+				MaxRow.OffersAmount = MaxRow.OffersAmount + Total_OffersAmount;
+			EndIf;
+		EndIf;
+		
+	EndDo;
+			
+	Query.Text = "SELECT * INTO SalesBySerialLotNumbers  FROM &ResultTable AS SalesBySerialLotNumbers";
+	Query.SetParameter("ResultTable", ResultTable);
+	Query.Execute();	
+EndProcedure
 

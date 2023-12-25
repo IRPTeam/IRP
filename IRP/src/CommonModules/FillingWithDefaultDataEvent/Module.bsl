@@ -1,4 +1,4 @@
-Procedure FillingWithDefaultDataFilling(Source, FillingData, FillingText, StandardProcessing, Force = False) Export
+Procedure FillingDocumentsWithDefaultData(Source, FillingData, FillingText, StandardProcessing, Force = False) Export
 	If Force = Undefined Then
 		Force = False;
 	EndIf;
@@ -351,3 +351,31 @@ Function UsedNewFunctionality(Source)
 	
 	Return IsUsedNewFunctionality;
 EndFunction
+
+Procedure FillingCatalogsWithDefaultData(Source, FillingData, FillingText, StandardProcessing) Export
+	Data = New Structure();
+
+	FilterParameters = New Structure();
+	FilterParameters.Insert("MetadataObject", Source.Metadata());
+	UserSettings = UserSettingsServer.GetUserSettings(SessionParameters.CurrentUser, FilterParameters);
+
+	Data = New Structure();
+	
+	For Each Row In UserSettings Do
+		If Row.KindOfAttribute = Enums.KindsOfAttributes.Regular 
+			Or Row.KindOfAttribute = Enums.KindsOfAttributes.Common Then
+			Data.Insert(Row.AttributeName, Row.Value);
+		EndIf;
+	EndDo;
+	
+	For Each KeyValue In Data Do
+		If CommonFunctionsClientServer.ObjectHasProperty(Source, KeyValue.Key) Then
+			If TypeOf(Source[KeyValue.Key]) = Type("Boolean") And Not Source[KeyValue.Key] Then
+				Source[KeyValue.Key] = KeyValue.Value;
+			ElsIf Not ValueIsFilled(Source[KeyValue.Key]) Then
+				Source[KeyValue.Key] = KeyValue.Value;
+			EndIf;
+		EndIf;
+	EndDo;
+EndProcedure
+

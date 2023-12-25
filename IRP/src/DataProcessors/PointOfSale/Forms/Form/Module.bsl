@@ -110,8 +110,10 @@ Procedure SetVisibilityAvailability(Object, Form)
 	Form.Items.Return.Enabled = UserSettingsServer.PointOfSale_AdditionalSettings_DisableCreateReturn(Form.UserAdmin);
 
 	ChangePrice = UserSettingsServer.PointOfSale_AdditionalSettings_DisableChangePrice(Form.UserAdmin);
-	Form.Items.ItemListPrice.Enabled = ChangePrice;
-	Form.Items.ItemListTotalAmount.Enabled = ChangePrice;
+	ChangePriceType = UserSettingsServer.PointOfSale_AdditionalSettings_EnableChangePriceType(Form.UserAdmin);
+	Form.Items.ItemListPrice.ReadOnly = Not ChangePrice;
+	Form.Items.ItemListTotalAmount.ReadOnly = Not ChangePrice;
+	Form.Items.ItemListPriceType.Visible = ChangePriceType;
 EndProcedure
 
 &AtClient
@@ -352,6 +354,11 @@ Procedure ItemListQuantityOnChange(Item)
 		CheckByRetailBasis();
 	EndIf;
 	DocRetailSalesReceiptClient.ItemListQuantityOnChange(Object, ThisObject, Item);
+EndProcedure
+
+&AtClient
+Procedure ItemListPriceTypeOnChange(Item)
+	DocRetailSalesReceiptClient.ItemListPriceTypeOnChange(Object, ThisObject, Item);
 EndProcedure
 
 &AtClient
@@ -1055,6 +1062,10 @@ Async Procedure PaymentFormClose(Result, AdditionalData) Export
 	Result.PaymentForm = Undefined;
 
 	TransactionResult = WriteTransaction(Result);
+	If TransactionResult.Refs.Count() = 0 Then
+		PaymentForm.Items.Enter.Enabled = True;
+		Return;
+	EndIf;
 	
 	ResultPrint = True;
 	For Each DocRef In TransactionResult.Refs Do
@@ -1373,7 +1384,11 @@ Function WriteTransaction(PaymentResult)
 		ObjectValue.PaymentMethod = PaymentResult.ReceiptPaymentMethod;
 		DPPointOfSaleServer.BeforePostingDocument(ObjectValue);
 
-		ObjectValue.Write(DocumentWriteMode.Posting);
+		Try
+			ObjectValue.Write(DocumentWriteMode.Posting);
+		Except
+			Return Result;
+		EndTry;
 
 		DocRef = ObjectValue.Ref;
 		DPPointOfSaleServer.AfterPostingDocument(DocRef);
@@ -1472,7 +1487,7 @@ EndProcedure
 &AtServer
 Procedure ClearRetailCustomerAtServer()
 	ObjectValue = FormAttributeToValue("Object");
-	FillingWithDefaultDataEvent.FillingWithDefaultDataFilling(ObjectValue, Undefined, Undefined, True, True);
+	FillingWithDefaultDataEvent.FillingDocumentsWithDefaultData(ObjectValue, Undefined, Undefined, True, True);
 	ObjectValue.Date = CommonFunctionsServer.GetCurrentSessionDate();
 	ValueToFormAttribute(ObjectValue, "Object");
 	For Each Row In Object.ItemList Do
@@ -1979,7 +1994,6 @@ Function CreateReturnOnBase(PaymentData, StatusType)
 		PredefinedValue("Document.RetailReturnReceipt.EmptyRef").Metadata(), ExtractedData);
 
 	DocRefs = New Array;
-//	NewDoc = Undefined;
 	For Each FillingValues In ArrayOfFillingValues Do
 		If TypeOf(ThisObject.PostponedReceipt) = Type("DocumentRef.RetailReturnReceipt") Then
 			NewDoc = GetClearPostponedObject();
@@ -1994,11 +2008,6 @@ Function CreateReturnOnBase(PaymentData, StatusType)
 		DPPointOfSaleServer.AfterPostingDocument(NewDoc.Ref);
 		DocRefs.Add(NewDoc.Ref);
 	EndDo;
-//	If Not NewDoc = Undefined Then
-//		NewDoc.Write(DocumentWriteMode.Posting);
-//		DocRef = NewDoc.Ref;
-//		DPPointOfSaleServer.AfterPostingDocument(DocRef);
-//	EndIf;
 	
 	Return DocRefs;
 

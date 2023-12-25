@@ -36,32 +36,26 @@
     <keyField>Catalog.AddAttributeAndPropertySets.TabularSection.Properties.Attribute.Property</keyField>
     <typesFilterField>Catalog.AddAttributeAndPropertySets.TabularSection.Properties.StandardAttribute.Ref</typesFilterField>
     <typesFilterValue xsi:type="core:ReferenceValue">
-      <value>Catalog.AddAttributeAndPropertySets.Document_CashTransferOrder</value>
+      <value>Catalog.AddAttributeAndPropertySets.Document_MoneyTransfer</value>
     </typesFilterValue>
-    <dataPathField>-1</dataPathField>
-    <multipleValuesUseField>-1</multipleValuesUseField>
+    <dataPathField>Catalog.AddAttributeAndPropertySets.TabularSection.Properties.StandardAttribute.Ref</dataPathField>
     <characteristicValues>InformationRegister.AddProperties</characteristicValues>
     <objectField>InformationRegister.AddProperties.Dimension.Object</objectField>
     <typeField>InformationRegister.AddProperties.Dimension.Property</typeField>
     <valueField>InformationRegister.AddProperties.Resource.Value</valueField>
-    <multipleValuesKeyField>-1</multipleValuesKeyField>
-    <multipleValuesOrderField>-1</multipleValuesOrderField>
   </characteristics>
   <characteristics>
     <characteristicTypes>Catalog.AddAttributeAndPropertySets.TabularSection.Attributes</characteristicTypes>
     <keyField>Catalog.AddAttributeAndPropertySets.TabularSection.Attributes.Attribute.Attribute</keyField>
     <typesFilterField>Catalog.AddAttributeAndPropertySets.TabularSection.Attributes.StandardAttribute.Ref</typesFilterField>
     <typesFilterValue xsi:type="core:ReferenceValue">
-      <value>Catalog.AddAttributeAndPropertySets.Document_CashTransferOrder</value>
+      <value>Catalog.AddAttributeAndPropertySets.Document_MoneyTransfer</value>
     </typesFilterValue>
-    <dataPathField>-1</dataPathField>
-    <multipleValuesUseField>-1</multipleValuesUseField>
+    <dataPathField>Catalog.AddAttributeAndPropertySets.TabularSection.Attributes.StandardAttribute.Ref</dataPathField>
     <characteristicValues>Document.MoneyTransfer.TabularSection.AddAttributes</characteristicValues>
     <objectField>Document.MoneyTransfer.TabularSection.AddAttributes.StandardAttribute.Ref</objectField>
     <typeField>Document.MoneyTransfer.TabularSection.AddAttributes.Attribute.Property</typeField>
     <valueField>Document.MoneyTransfer.TabularSection.AddAttributes.Attribute.Value</valueField>
-    <multipleValuesKeyField>-1</multipleValuesKeyField>
-    <multipleValuesOrderField>-1</multipleValuesOrderField>
   </characteristics>
   <createOnInput>DontUse</createOnInput>
   <dataLockControlMode>Managed</dataLockControlMode>

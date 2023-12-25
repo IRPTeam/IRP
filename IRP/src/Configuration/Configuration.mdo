@@ -17,7 +17,7 @@
   <usePurposes>PersonalComputer</usePurposes>
   <defaultRoles>Role.FullAccess</defaultRoles>
   <vendor>IRP Team</vendor>
-  <version>2023.50.3360</version>
+  <version>2023.52.3424</version>
   <updateCatalogAddress>https://github.com/IRPTeam/IRP</updateCatalogAddress>
   <useManagedFormInOrdinaryApplication>true</useManagedFormInOrdinaryApplication>
   <useOrdinaryFormInManagedApplication>true</useOrdinaryFormInManagedApplication>
@@ -206,7 +206,9 @@
   <sessionParameters>SessionParameter.Workstation</sessionParameters>
   <roles>Role.BasicRole</roles>
   <roles>Role.CreateOrModifyUsers</roles>
+  <roles>Role.Document_AdditionalAccrual</roles>
   <roles>Role.Document_AdditionalCostAllocation</roles>
+  <roles>Role.Document_AdditionalDeduction</roles>
   <roles>Role.Document_AdditionalRevenueAllocation</roles>
   <roles>Role.Document_BankPayment</roles>
   <roles>Role.Document_BankReceipt</roles>
@@ -230,6 +232,11 @@
   <roles>Role.Document_DecommissioningOfFixedAsset</roles>
   <roles>Role.Document_DepreciationCalculation</roles>
   <roles>Role.Document_EmployeeCashAdvance</roles>
+  <roles>Role.Document_EmployeeFiring</roles>
+  <roles>Role.Document_EmployeeHiring</roles>
+  <roles>Role.Document_EmployeeSickLeave</roles>
+  <roles>Role.Document_EmployeeTransfer</roles>
+  <roles>Role.Document_EmployeeVacation</roles>
   <roles>Role.Document_FixedAssetTransfer</roles>
   <roles>Role.Document_ForeignCurrencyRevaluation</roles>
   <roles>Role.Document_GoodsReceipt</roles>
@@ -262,6 +269,7 @@
   <roles>Role.Document_PurchaseReturnOrder</roles>
   <roles>Role.Document_ReconciliationStatement</roles>
   <roles>Role.Document_RetailGoodsReceipt</roles>
+  <roles>Role.Document_RetailReceiptCorrection</roles>
   <roles>Role.Document_RetailReturnReceipt</roles>
   <roles>Role.Document_RetailSalesReceipt</roles>
   <roles>Role.Document_RetailShipmentConfirmation</roles>
@@ -312,14 +320,6 @@
   <roles>Role.UseExternalReports</roles>
   <roles>Role.UseGroupEditingProperties</roles>
   <roles>Role.UseOutput</roles>
-  <roles>Role.Document_EmployeeHiring</roles>
-  <roles>Role.Document_EmployeeTransfer</roles>
-  <roles>Role.Document_EmployeeFiring</roles>
-  <roles>Role.Document_EmployeeVacation</roles>
-  <roles>Role.Document_EmployeeSickLeave</roles>
-  <roles>Role.Document_AdditionalAccrual</roles>
-  <roles>Role.Document_AdditionalDeduction</roles>
-  <roles>Role.Document_RetailReceiptCorrection</roles>
   <commonTemplates>CommonTemplate.HTMLPictureSlider</commonTemplates>
   <commonTemplates>CommonTemplate.HTMLAddAttributes</commonTemplates>
   <commonTemplates>CommonTemplate.HTMLGallery</commonTemplates>
@@ -367,7 +367,9 @@
   <commonModules>CommonModule.CommonFunctionsClient</commonModules>
   <commonModules>CommonModule.CommonFunctionsClientServer</commonModules>
   <commonModules>CommonModule.CommonFunctionsServer</commonModules>
+  <commonModules>CommonModule.ControlCodeStringClient</commonModules>
   <commonModules>CommonModule.ControlCodeStringsClient</commonModules>
+  <commonModules>CommonModule.ControlCodeStringServer</commonModules>
   <commonModules>CommonModule.ControllerClientServer_V2</commonModules>
   <commonModules>CommonModule.ControllerServer_V2</commonModules>
   <commonModules>CommonModule.ConvertXDTO</commonModules>
@@ -378,8 +380,12 @@
   <commonModules>CommonModule.CurrenciesClientServer</commonModules>
   <commonModules>CommonModule.CurrenciesServer</commonModules>
   <commonModules>CommonModule.DataVersioningServer</commonModules>
+  <commonModules>CommonModule.DocAdditionalAccrualClient</commonModules>
+  <commonModules>CommonModule.DocAdditionalAccrualServer</commonModules>
   <commonModules>CommonModule.DocAdditionalCostAllocationClient</commonModules>
   <commonModules>CommonModule.DocAdditionalCostAllocationServer</commonModules>
+  <commonModules>CommonModule.DocAdditionalDeductionClient</commonModules>
+  <commonModules>CommonModule.DocAdditionalDeductionServer</commonModules>
   <commonModules>CommonModule.DocAdditionalRevenueAllocationClient</commonModules>
   <commonModules>CommonModule.DocAdditionalRevenueAllocationServer</commonModules>
   <commonModules>CommonModule.DocBankPaymentClient</commonModules>
@@ -410,6 +416,16 @@
   <commonModules>CommonModule.DocDecommissioningOfFixedAssetServer</commonModules>
   <commonModules>CommonModule.DocEmployeeCashAdvanceClient</commonModules>
   <commonModules>CommonModule.DocEmployeeCashAdvanceServer</commonModules>
+  <commonModules>CommonModule.DocEmployeeFiringClient</commonModules>
+  <commonModules>CommonModule.DocEmployeeFiringServer</commonModules>
+  <commonModules>CommonModule.DocEmployeeHiringClient</commonModules>
+  <commonModules>CommonModule.DocEmployeeHiringServer</commonModules>
+  <commonModules>CommonModule.DocEmployeeSickLeaveClient</commonModules>
+  <commonModules>CommonModule.DocEmployeeSickLeaveServer</commonModules>
+  <commonModules>CommonModule.DocEmployeeTransferClient</commonModules>
+  <commonModules>CommonModule.DocEmployeeTransferServer</commonModules>
+  <commonModules>CommonModule.DocEmployeeVacationClient</commonModules>
+  <commonModules>CommonModule.DocEmployeeVacationServer</commonModules>
   <commonModules>CommonModule.DocFixedAssetTransferClient</commonModules>
   <commonModules>CommonModule.DocFixedAssetTransferServer</commonModules>
   <commonModules>CommonModule.DocGoodsReceiptClient</commonModules>
@@ -470,6 +486,8 @@
   <commonModules>CommonModule.DocReconciliationStatementServer</commonModules>
   <commonModules>CommonModule.DocRetailGoodsReceiptClient</commonModules>
   <commonModules>CommonModule.DocRetailGoodsReceiptServer</commonModules>
+  <commonModules>CommonModule.DocRetailReceiptCorrectionClient</commonModules>
+  <commonModules>CommonModule.DocRetailReceiptCorrectionServer</commonModules>
   <commonModules>CommonModule.DocRetailReturnReceiptClient</commonModules>
   <commonModules>CommonModule.DocRetailReturnReceiptServer</commonModules>
   <commonModules>CommonModule.DocRetailSalesReceiptClient</commonModules>
@@ -503,6 +521,8 @@
   <commonModules>CommonModule.DocumentsServerMobile</commonModules>
   <commonModules>CommonModule.DocUnbundlingClient</commonModules>
   <commonModules>CommonModule.DocUnbundlingServer</commonModules>
+  <commonModules>CommonModule.DocVisitorCounterClient</commonModules>
+  <commonModules>CommonModule.DocVisitorCounterServer</commonModules>
   <commonModules>CommonModule.DocWorkOrderClient</commonModules>
   <commonModules>CommonModule.DocWorkOrderClosingServer</commonModules>
   <commonModules>CommonModule.DocWorkOrderServer</commonModules>
@@ -578,6 +598,8 @@
   <commonModules>CommonModule.RowIDInfoServerReuse</commonModules>
   <commonModules>CommonModule.Saas</commonModules>
   <commonModules>CommonModule.SaasClient</commonModules>
+  <commonModules>CommonModule.SalaryPrivileged</commonModules>
+  <commonModules>CommonModule.SalaryServer</commonModules>
   <commonModules>CommonModule.ScheduledJobsForExtentions</commonModules>
   <commonModules>CommonModule.SerialLotNumberClient</commonModules>
   <commonModules>CommonModule.SerialLotNumberClientServer</commonModules>
@@ -605,28 +627,6 @@
   <commonModules>CommonModule.ViewServer_V2</commonModules>
   <commonModules>CommonModule.WorkstationClient</commonModules>
   <commonModules>CommonModule.WorkstationServer</commonModules>
-  <commonModules>CommonModule.DocEmployeeHiringClient</commonModules>
-  <commonModules>CommonModule.DocEmployeeHiringServer</commonModules>
-  <commonModules>CommonModule.DocEmployeeTransferClient</commonModules>
-  <commonModules>CommonModule.DocEmployeeTransferServer</commonModules>
-  <commonModules>CommonModule.DocEmployeeFiringClient</commonModules>
-  <commonModules>CommonModule.DocEmployeeFiringServer</commonModules>
-  <commonModules>CommonModule.DocEmployeeVacationClient</commonModules>
-  <commonModules>CommonModule.DocEmployeeVacationServer</commonModules>
-  <commonModules>CommonModule.DocEmployeeSickLeaveClient</commonModules>
-  <commonModules>CommonModule.DocEmployeeSickLeaveServer</commonModules>
-  <commonModules>CommonModule.DocAdditionalAccrualClient</commonModules>
-  <commonModules>CommonModule.DocAdditionalAccrualServer</commonModules>
-  <commonModules>CommonModule.DocAdditionalDeductionClient</commonModules>
-  <commonModules>CommonModule.DocAdditionalDeductionServer</commonModules>
-  <commonModules>CommonModule.SalaryServer</commonModules>
-  <commonModules>CommonModule.SalaryPrivileged</commonModules>
-  <commonModules>CommonModule.ControlCodeStringServer</commonModules>
-  <commonModules>CommonModule.ControlCodeStringClient</commonModules>
-  <commonModules>CommonModule.DocVisitorCounterClient</commonModules>
-  <commonModules>CommonModule.DocVisitorCounterServer</commonModules>
-  <commonModules>CommonModule.DocRetailReceiptCorrectionClient</commonModules>
-  <commonModules>CommonModule.DocRetailReceiptCorrectionServer</commonModules>
   <commonAttributes>CommonAttribute.Author</commonAttributes>
   <commonAttributes>CommonAttribute.Branch</commonAttributes>
   <commonAttributes>CommonAttribute.Description</commonAttributes>
@@ -645,6 +645,9 @@
   <commonAttributes>CommonAttribute.LocalFullDescription</commonAttributes>
   <commonAttributes>CommonAttribute.ForeignFullDescription</commonAttributes>
   <commonAttributes>CommonAttribute.SourceNodeID</commonAttributes>
+  <commonAttributes>CommonAttribute.Editor</commonAttributes>
+  <commonAttributes>CommonAttribute.CreateDate</commonAttributes>
+  <commonAttributes>CommonAttribute.ModifyDate</commonAttributes>
   <exchangePlans>ExchangePlan.ED_ExchangePlan</exchangePlans>
   <exchangePlans>ExchangePlan.FullExchange</exchangePlans>
   <httpServices>HTTPService.TestConnection</httpServices>
@@ -669,6 +672,9 @@
   <eventSubscriptions>EventSubscription.PresentationGetProcessing_GetCatalogPresentation</eventSubscriptions>
   <eventSubscriptions>EventSubscription.BeforeWrite_ObjectAccessDocument</eventSubscriptions>
   <eventSubscriptions>EventSubscription.BeforeWrite_CheckFillingRowKey</eventSubscriptions>
+  <eventSubscriptions>EventSubscription.BeforeWrite_Catalogs_CommonDataFilling</eventSubscriptions>
+  <eventSubscriptions>EventSubscription.BeforeWrite_Documents_CommonDataFilling</eventSubscriptions>
+  <eventSubscriptions>EventSubscription.Filling_CatalogsWithDefaultData</eventSubscriptions>
   <scheduledJobs>ScheduledJob.AddExternalFunctionsToJobQueue</scheduledJobs>
   <scheduledJobs>ScheduledJob.AreaUpdate</scheduledJobs>
   <scheduledJobs>ScheduledJob.ExportData</scheduledJobs>
@@ -958,7 +964,9 @@
   <catalogs>Catalog.Workstations</catalogs>
   <catalogs>Catalog.EmployeeSchedule</catalogs>
   <catalogs>Catalog.Projects</catalogs>
+  <documents>Document.AdditionalAccrual</documents>
   <documents>Document.AdditionalCostAllocation</documents>
+  <documents>Document.AdditionalDeduction</documents>
   <documents>Document.AdditionalRevenueAllocation</documents>
   <documents>Document.BankPayment</documents>
   <documents>Document.BankReceipt</documents>
@@ -974,11 +982,20 @@
   <documents>Document.CashTransferOrder</documents>
   <documents>Document.ChequeBondTransaction</documents>
   <documents>Document.ChequeBondTransactionItem</documents>
+  <documents>Document.CommissioningOfFixedAsset</documents>
   <documents>Document.ConsolidatedRetailSales</documents>
   <documents>Document.CreditNote</documents>
   <documents>Document.CustomersAdvancesClosing</documents>
   <documents>Document.DebitNote</documents>
+  <documents>Document.DecommissioningOfFixedAsset</documents>
+  <documents>Document.DepreciationCalculation</documents>
   <documents>Document.EmployeeCashAdvance</documents>
+  <documents>Document.EmployeeFiring</documents>
+  <documents>Document.EmployeeHiring</documents>
+  <documents>Document.EmployeeSickLeave</documents>
+  <documents>Document.EmployeeTransfer</documents>
+  <documents>Document.EmployeeVacation</documents>
+  <documents>Document.FixedAssetTransfer</documents>
   <documents>Document.ForeignCurrencyRevaluation</documents>
   <documents>Document.GoodsReceipt</documents>
   <documents>Document.IncomingPaymentOrder</documents>
@@ -989,6 +1006,7 @@
   <documents>Document.JournalEntry</documents>
   <documents>Document.Labeling</documents>
   <documents>Document.ManualRegisterEntry</documents>
+  <documents>Document.ModernizationOfFixedAsset</documents>
   <documents>Document.MoneyTransfer</documents>
   <documents>Document.OpeningEntry</documents>
   <documents>Document.OutgoingPaymentOrder</documents>
@@ -1009,6 +1027,7 @@
   <documents>Document.PurchaseReturnOrder</documents>
   <documents>Document.ReconciliationStatement</documents>
   <documents>Document.RetailGoodsReceipt</documents>
+  <documents>Document.RetailReceiptCorrection</documents>
   <documents>Document.RetailReturnReceipt</documents>
   <documents>Document.RetailSalesReceipt</documents>
   <documents>Document.RetailShipmentConfirmation</documents>
@@ -1029,19 +1048,6 @@
   <documents>Document.WorkOrder</documents>
   <documents>Document.WorkOrderClosing</documents>
   <documents>Document.WorkSheet</documents>
-  <documents>Document.CommissioningOfFixedAsset</documents>
-  <documents>Document.DecommissioningOfFixedAsset</documents>
-  <documents>Document.DepreciationCalculation</documents>
-  <documents>Document.FixedAssetTransfer</documents>
-  <documents>Document.ModernizationOfFixedAsset</documents>
-  <documents>Document.EmployeeHiring</documents>
-  <documents>Document.EmployeeTransfer</documents>
-  <documents>Document.EmployeeFiring</documents>
-  <documents>Document.EmployeeVacation</documents>
-  <documents>Document.EmployeeSickLeave</documents>
-  <documents>Document.AdditionalAccrual</documents>
-  <documents>Document.AdditionalDeduction</documents>
-  <documents>Document.RetailReceiptCorrection</documents>
   <documentJournals>DocumentJournal.DocumentsForIncomingPayment</documentJournals>
   <documentJournals>DocumentJournal.DocumentsForOutgoingPayment</documentJournals>
   <enums>Enum.AccountingAnalyticTypes</enums>

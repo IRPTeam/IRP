@@ -9707,22 +9707,6 @@ Procedure ApplyFilterSet_RSR_ForRGR(Query)
 	|					THEN RowRef.TransactionTypeRGR = &TransactionTypeRGR
 	|				ELSE FALSE
 	|			END
-	
-//	|			AND CASE
-//	|				WHEN &Filter_AgreementSales
-//	|					THEN RowRef.AgreementSales = &AgreementSales
-//	|				ELSE FALSE
-//	|			END
-//	|			AND CASE
-//	|				WHEN &Filter_CurrencySales
-//	|					THEN RowRef.CurrencySales = &CurrencySales
-//	|				ELSE FALSE
-//	|			END
-//	|			AND CASE
-//	|				WHEN &Filter_PriceIncludeTaxSales
-//	|					THEN RowRef.PriceIncludeTaxSales = &PriceIncludeTaxSales
-//	|				ELSE FALSE
-//	|			END
 	|			AND CASE
 	|				WHEN &Filter_ItemKey
 	|					THEN RowRef.ItemKey = &ItemKey
@@ -10362,7 +10346,6 @@ Function GetBasisesTable(StepArray, FilterValues, FilterSets)
 	|	AllData.Item,
 	|	AllData.Store,
 	|	AllData.Basis AS Basis,
-//	|	UNDEFINED AS ParentBasis,
 	|	AllData.Key,
 	|	AllData.BasisKey,
 	|	AllData.BasisUnit,

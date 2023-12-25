@@ -17,8 +17,6 @@ EndProcedure
 Procedure NotificationProcessing(EventName, Parameter, Source)
 	If EventName = "NewBarcode" And IsInputAvailable() Then
 		SearchByBarcode(Undefined, Parameter);
-//	ElsIf EventName = "NewBarcode" And Not IsInputAvailable() Then 
-//		MobileSubsystem.Play(Sound.Error);
 	EndIf;
 EndProcedure
 

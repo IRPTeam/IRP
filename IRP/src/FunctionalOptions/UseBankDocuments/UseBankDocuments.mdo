@@ -14,5 +14,5 @@
   <content>Document.BankReceipt</content>
   <content>Document.BankPayment</content>
   <content>Catalog.CashAccounts.Attribute.BankName</content>
-  <content>Document.BankPayment.Command.GenarateBankPayment</content>
+  <content>Document.BankPayment.Command.GenerateBankPayment</content>
 </mdclass:FunctionalOption>

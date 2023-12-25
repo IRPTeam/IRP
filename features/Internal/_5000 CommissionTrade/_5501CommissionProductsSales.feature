@@ -828,7 +828,7 @@ Scenario: _050025 create Sales report co consignor
 			And in the table "ItemList" I click "Edit currencies" button
 			And "CurrenciesTable" table became equal
 				| 'Movement type'      | 'Type'         | 'To'  | 'From' | 'Multiplicity' | 'Rate'   | 'Amount' |
-				| 'Reporting currency' | 'Reporting'    | 'USD' | 'TRY'  | '1'            | '0,1712' | '345,14' |
+				| 'Reporting currency' | 'Reporting'    | 'USD' | 'TRY'  | '1'            | '0,171200' | '345,14' |
 				| 'Local currency'     | 'Legal'        | 'TRY' | 'TRY'  | '1'            | '1'      | '2 016'  |
 				| 'TRY'                | 'Partner term' | 'TRY' | 'TRY'  | '1'            | '1'      | '2 016'  |			
 			And I click "Ok" button	

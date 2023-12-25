@@ -90,7 +90,7 @@ Scenario: _053001 create Bank payment based on Purchase invoice
 		And I go to line in "List" table
 			| 'Number'                             |
 			| '$$NumberPurchaseInvoice018001$$'    |
-		And I click the button named "FormDocumentBankPaymentGenarateBankPayment"
+		And I click the button named "FormDocumentBankPaymentGenerateBankPayment"
 	* Create and filling in Purchase invoice
 		Then the form attribute named "Company" became equal to "Main Company"
 		Then the form attribute named "TransactionType" became equal to "Payment to the vendor"
@@ -101,7 +101,7 @@ Scenario: _053001 create Bank payment based on Purchase invoice
 		And in the table "PaymentList" I click "Edit currencies" button
 		And "CurrenciesTable" table became equal
 			| 'Movement type'        | 'Type'           | 'To'    | 'From'   | 'Multiplicity'   | 'Rate'     | 'Amount'       |
-			| 'Reporting currency'   | 'Reporting'      | 'USD'   | 'TRY'    | '1'              | '0,1712'   | '23 283,20'    |
+			| 'Reporting currency'   | 'Reporting'      | 'USD'   | 'TRY'    | '1'              | '0,171200'   | '23 283,20'    |
 			| 'Local currency'       | 'Legal'          | 'TRY'   | 'TRY'    | '1'              | '1'        | '136 000'      |
 			| 'TRY'                  | 'Partner term'   | 'TRY'   | 'TRY'    | '1'              | '1'        | '136 000'      |
 		And I close current window
@@ -120,7 +120,7 @@ Scenario: _053001 create Bank payment based on Purchase invoice
 		And in the table "PaymentList" I click "Edit currencies" button
 		And "CurrenciesTable" table became equal
 			| 'Movement type'        | 'Type'           | 'To'    | 'From'   | 'Multiplicity'   | 'Rate'     | 'Amount'       |
-			| 'Reporting currency'   | 'Reporting'      | 'USD'   | 'TRY'    | '1'              | '0,1712'   | '23 283,20'    |
+			| 'Reporting currency'   | 'Reporting'      | 'USD'   | 'TRY'    | '1'              | '0,171200'   | '23 283,20'    |
 			| 'Local currency'       | 'Legal'          | 'TRY'   | 'TRY'    | '1'              | '1'        | '136 000'      |
 			| 'TRY'                  | 'Partner term'   | 'TRY'   | 'TRY'    | '1'              | '1'        | '136 000'      |
 		And I close current window

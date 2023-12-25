@@ -1015,7 +1015,7 @@
     </attributes>
   </tabularSections>
   <commands uuid="0df3afaf-0448-450f-a0c1-566622a59038">
-    <name>GenarateBankReceipt</name>
+    <name>GenerateBankReceipt</name>
     <synonym>
       <key>en</key>
       <value>Bank receipt</value>

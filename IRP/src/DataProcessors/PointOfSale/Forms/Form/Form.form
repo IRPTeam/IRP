@@ -1058,6 +1058,69 @@
                       </extInfo>
                     </items>
                     <items xsi:type="form:FormField">
+                      <name>ItemListPriceType</name>
+                      <id>1351</id>
+                      <titleFont xsi:type="core:FontRef">
+                        <font>Style.LargeTextFont</font>
+                      </titleFont>
+                      <visible>true</visible>
+                      <enabled>true</enabled>
+                      <userVisible>
+                        <common>true</common>
+                      </userVisible>
+                      <dataPath xsi:type="form:DataPath">
+                        <segments>Object.ItemList.PriceType</segments>
+                      </dataPath>
+                      <titleBackColor xsi:type="core:ColorRef">
+                        <color>Style.FormBackColor</color>
+                      </titleBackColor>
+                      <handlers>
+                        <event>OnChange</event>
+                        <name>ItemListPriceTypeOnChange</name>
+                      </handlers>
+                      <extendedTooltip>
+                        <name>ItemListPriceTypeExtendedTooltip</name>
+                        <id>1353</id>
+                        <visible>true</visible>
+                        <enabled>true</enabled>
+                        <userVisible>
+                          <common>true</common>
+                        </userVisible>
+                        <type>Label</type>
+                        <autoMaxWidth>true</autoMaxWidth>
+                        <autoMaxHeight>true</autoMaxHeight>
+                        <extInfo xsi:type="form:LabelDecorationExtInfo">
+                          <horizontalAlign>Left</horizontalAlign>
+                        </extInfo>
+                      </extendedTooltip>
+                      <contextMenu>
+                        <name>ItemListPriceTypeContextMenu</name>
+                        <id>1352</id>
+                        <visible>true</visible>
+                        <enabled>true</enabled>
+                        <userVisible>
+                          <common>true</common>
+                        </userVisible>
+                        <autoFill>true</autoFill>
+                      </contextMenu>
+                      <type>InputField</type>
+                      <editMode>Enter</editMode>
+                      <showInHeader>true</showInHeader>
+                      <headerHorizontalAlign>Left</headerHorizontalAlign>
+                      <showInFooter>true</showInFooter>
+                      <extInfo xsi:type="form:InputFieldExtInfo">
+                        <autoMaxWidth>true</autoMaxWidth>
+                        <autoMaxHeight>true</autoMaxHeight>
+                        <wrap>true</wrap>
+                        <chooseType>true</chooseType>
+                        <typeDomainEnabled>true</typeDomainEnabled>
+                        <textEdit>true</textEdit>
+                        <font xsi:type="core:FontRef">
+                          <font>Style.LargeTextFont</font>
+                        </font>
+                      </extInfo>
+                    </items>
+                    <items xsi:type="form:FormField">
                       <name>ItemListPrice</name>
                       <id>791</id>
                       <titleFont xsi:type="core:FontRef">

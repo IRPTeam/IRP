@@ -6,7 +6,7 @@
     <value>Fill check processing additional table control document</value>
   </synonym>
   <source>
-    <types>DefinedType.AdditionalTableControlDocumentObject</types>
+    <types>DocumentObject</types>
   </source>
   <event>FillCheckProcessing</event>
   <handler>CommonModule.AdditionalDocumentTableControl.FillCheckProcessing_AdditionalTableControlDocumentFillCheckProcessing</handler>

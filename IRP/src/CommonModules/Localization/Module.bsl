@@ -1509,6 +1509,9 @@ Strings.Insert("CreditNote_DR_R2021B_CustomersTransactions_CR_R2020B_AdvancesFro
 	
 Strings.Insert("CreditNote_DR_R1021B_VendorsTransactions_CR_R5022T_Expenses",
 	NStr("en = 'CreditNote DR (R1021B_VendorsTransactions CR (R5022T_Expenses)'", Lang));
+
+Strings.Insert("MoneyTransfer_DR_R3010B_CashOnHand_CR_R3010B_CashOnHand",
+	NStr("en = 'MoneyTransfer DR (R3010B_CashOnHand) CR (R3010B_CashOnHand)'", Lang));
 	
 #EndRegion
 	

@@ -12,6 +12,7 @@ Function PostingGetDocumentDataTables(Ref, Cancel, PostingMode, Parameters, AddI
 	Tables = New Structure;
 	QueryArray = GetQueryTextsSecondaryTables();
 	PostingServer.ExecuteQuery(Ref, QueryArray, Parameters);
+	AccountingServer.CreateAccountingDataTables(Ref, Cancel, PostingMode, Parameters, AddInfo);
 	Return Tables;
 EndFunction
 
@@ -29,6 +30,7 @@ Procedure PostingCheckBeforeWrite(Ref, Cancel, PostingMode, Parameters, AddInfo 
 	Tables.R3035T_CashPlanning.Columns.Add("Key", Metadata.DefinedTypes.typeRowID.Type);
 	Tables.R3021B_CashInTransitIncoming.Columns.Add("Key", Metadata.DefinedTypes.typeRowID.Type);
 	Tables.R3011T_CashFlow.Columns.Add("Key", Metadata.DefinedTypes.typeRowID.Type);
+	Tables.T1040T_AccountingAmounts.Columns.Add("Key", Metadata.DefinedTypes.typeRowID.Type);
 
 	PostingServer.FillPostingTables(Tables, Ref, QueryArray, Parameters);
 EndProcedure
@@ -94,6 +96,7 @@ Function GetQueryTextsMasterTables()
 	QueryArray.Add(R3011T_CashFlow());
 	QueryArray.Add(R3021B_CashInTransitIncoming());
 	QueryArray.Add(R3035T_CashPlanning());
+	QueryArray.Add(T1040T_AccountingAmounts());
 	Return QueryArray;
 EndFunction
 
@@ -324,5 +327,85 @@ Function GetAccessKey(Obj) Export
 	AccessKeyMap.Insert("Account", AccountArray);
 	Return AccessKeyMap;
 EndFunction
+
+#EndRegion
+
+
+#Region Accounting
+
+Function T1040T_AccountingAmounts()
+	Return 
+		"SELECT
+		|	MoneySender.Period,
+		|	MoneySender.Currency,
+		|	MoneySender.Key,
+		|	MoneySender.Amount,
+		|	VALUE(Catalog.AccountingOperations.MoneyTransfer_DR_R3010B_CashOnHand_CR_R3010B_CashOnHand) AS Operation
+		|INTO T1040T_AccountingAmounts
+		|FROM
+		|	MoneySender AS MoneySender
+		|WHERE
+		|	TRUE";
+EndFunction
+
+Function GetAccountingAnalytics(Parameters) Export
+	If Parameters.Operation = Catalogs.AccountingOperations.MoneyTransfer_DR_R3010B_CashOnHand_CR_R3010B_CashOnHand Then
+		Return GetAnalytics_MoneyTransfer(Parameters); // Cash on hand - Cash on hand
+	EndIf;
+	Return Undefined;
+EndFunction
+
+#Region Accounting_Analytics
+
+// Cash on hand - Cash on hand
+Function GetAnalytics_MoneyTransfer(Parameters)
+	AccountingAnalytics = AccountingServer.GetAccountingAnalyticsResult(Parameters);
+	AccountParameters   = AccountingServer.GetAccountParameters(Parameters);
+
+	AccountingAnalytics.Debit = AccountingServer.GetT9011S_AccountsCashAccount(AccountParameters, Parameters.ObjectData.Receiver).Account;	
+	// Debit - Analytics
+	AdditionalAnalytics = New Structure();
+	AdditionalAnalytics.Insert("Receiver", Parameters.ObjectData.Receiver);
+	AccountingServer.SetDebitExtDimensions(Parameters, AccountingAnalytics, AdditionalAnalytics);
+
+	AccountingAnalytics.Credit = AccountingServer.GetT9011S_AccountsCashAccount(AccountParameters, Parameters.ObjectData.Sender).Account;
+	// Credit - Analytics
+	AdditionalAnalytics = New Structure();
+	AdditionalAnalytics.Insert("Sender", Parameters.ObjectData.Sender);
+	AccountingServer.SetCreditExtDimensions(Parameters, AccountingAnalytics, AdditionalAnalytics);
+	Return AccountingAnalytics;
+EndFunction
+
+Function GetHintDebitExtDimension(Parameters, ExtDimensionType, Value) Export
+	If Parameters.Operation = Catalogs.AccountingOperations.MoneyTransfer_DR_R3010B_CashOnHand_CR_R3010B_CashOnHand Then
+		
+		If ExtDimensionType.ValueType.Types().Find(Type("CatalogRef.ExpenseAndRevenueTypes")) <> Undefined Then
+			Return Parameters.ObjectData.ReceiveFinancialMovementType;
+		EndIf;
+		
+		If ExtDimensionType.ValueType.Types().Find(Type("CatalogRef.BusinessUnits")) <> Undefined Then
+			Return Parameters.ObjectData.ReceiveCashFlowCenter;
+		EndIf;
+		
+	EndIf;
+	Return Value;
+EndFunction
+
+Function GetHintCreditExtDimension(Parameters, ExtDimensionType, Value) Export
+	If Parameters.Operation = Catalogs.AccountingOperations.MoneyTransfer_DR_R3010B_CashOnHand_CR_R3010B_CashOnHand Then
+		
+		If ExtDimensionType.ValueType.Types().Find(Type("CatalogRef.ExpenseAndRevenueTypes")) <> Undefined Then
+			Return Parameters.ObjectData.SendFinancialMovementType;
+		EndIf;
+		
+		If ExtDimensionType.ValueType.Types().Find(Type("CatalogRef.BusinessUnits")) <> Undefined Then
+			Return Parameters.ObjectData.SendCashFlowCenter;
+		EndIf;
+		
+	EndIf;
+	Return Value;
+EndFunction
+
+#EndRegion
 
 #EndRegion

@@ -453,6 +453,21 @@
         </code>
       </content>
     </items>
+    <items id="249b66fa-33bd-4d0a-b148-66d6d90ce904">
+      <name>Document_MoneyTransfer</name>
+      <description></description>
+      <code xsi:type="core:NumberValue">
+        <value>44</value>
+      </code>
+      <isFolder>true</isFolder>
+      <content id="369606fc-a9d6-42e2-abea-d3d5d0d98153">
+        <name>MoneyTransfer_DR_R3010B_CashOnHand_CR_R3010B_CashOnHand</name>
+        <description></description>
+        <code xsi:type="core:NumberValue">
+          <value>45</value>
+        </code>
+      </content>
+    </items>
   </predefined>
   <editType>InDialog</editType>
   <choiceMode>BothWays</choiceMode>

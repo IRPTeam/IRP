@@ -548,17 +548,83 @@
         <items xsi:type="form:FormGroup">
           <name>GroupInfoTitleLeft</name>
           <id>33</id>
-          <items xsi:type="form:Button">
-            <name>EditCurrenciesSender</name>
-            <id>213</id>
+          <items xsi:type="form:FormGroup">
+            <name>GroupCommandBarLeft</name>
+            <id>293</id>
+            <items xsi:type="form:Button">
+              <name>EditCurrenciesSender</name>
+              <id>213</id>
+              <visible>true</visible>
+              <enabled>true</enabled>
+              <userVisible>
+                <common>true</common>
+              </userVisible>
+              <extendedTooltip>
+                <name>EditCurrenciesSenderExtendedTooltip</name>
+                <id>214</id>
+                <visible>true</visible>
+                <enabled>true</enabled>
+                <userVisible>
+                  <common>true</common>
+                </userVisible>
+                <type>Label</type>
+                <autoMaxWidth>true</autoMaxWidth>
+                <autoMaxHeight>true</autoMaxHeight>
+                <extInfo xsi:type="form:LabelDecorationExtInfo">
+                  <horizontalAlign>Left</horizontalAlign>
+                </extInfo>
+              </extendedTooltip>
+              <type>UsualButton</type>
+              <commandName>Form.Command.EditCurrenciesSender</commandName>
+              <representation>Auto</representation>
+              <autoMaxWidth>true</autoMaxWidth>
+              <autoMaxHeight>true</autoMaxHeight>
+              <placementArea>UserCmds</placementArea>
+              <representationInContextMenu>Auto</representationInContextMenu>
+            </items>
+            <items xsi:type="form:Button">
+              <name>EditAccounting</name>
+              <id>291</id>
+              <visible>true</visible>
+              <enabled>true</enabled>
+              <userVisible>
+                <common>true</common>
+              </userVisible>
+              <extendedTooltip>
+                <name>EditAccountingExtendedTooltip</name>
+                <id>292</id>
+                <visible>true</visible>
+                <enabled>true</enabled>
+                <userVisible>
+                  <common>true</common>
+                </userVisible>
+                <type>Label</type>
+                <autoMaxWidth>true</autoMaxWidth>
+                <autoMaxHeight>true</autoMaxHeight>
+                <extInfo xsi:type="form:LabelDecorationExtInfo">
+                  <horizontalAlign>Left</horizontalAlign>
+                </extInfo>
+              </extendedTooltip>
+              <type>UsualButton</type>
+              <commandName>Form.Command.EditAccounting</commandName>
+              <representation>Auto</representation>
+              <autoMaxWidth>true</autoMaxWidth>
+              <autoMaxHeight>true</autoMaxHeight>
+              <placementArea>UserCmds</placementArea>
+              <representationInContextMenu>Auto</representationInContextMenu>
+            </items>
             <visible>true</visible>
             <enabled>true</enabled>
             <userVisible>
               <common>true</common>
             </userVisible>
+            <title>
+              <key>en</key>
+              <value>Command bar (left)</value>
+            </title>
             <extendedTooltip>
-              <name>EditCurrenciesSenderExtendedTooltip</name>
-              <id>214</id>
+              <name>GroupCommandBarLeftExtendedTooltip</name>
+              <id>294</id>
               <visible>true</visible>
               <enabled>true</enabled>
               <userVisible>
@@ -571,13 +637,15 @@
                 <horizontalAlign>Left</horizontalAlign>
               </extInfo>
             </extendedTooltip>
-            <type>UsualButton</type>
-            <commandName>Form.Command.EditCurrenciesSender</commandName>
-            <representation>Auto</representation>
-            <autoMaxWidth>true</autoMaxWidth>
-            <autoMaxHeight>true</autoMaxHeight>
-            <placementArea>UserCmds</placementArea>
-            <representationInContextMenu>Auto</representationInContextMenu>
+            <type>UsualGroup</type>
+            <extInfo xsi:type="form:UsualGroupExtInfo">
+              <group>AlwaysHorizontal</group>
+              <behavior>Auto</behavior>
+              <showLeftMargin>true</showLeftMargin>
+              <united>true</united>
+              <throughAlign>Auto</throughAlign>
+              <currentRowUse>Auto</currentRowUse>
+            </extInfo>
           </items>
           <items xsi:type="form:FormField">
             <name>SendUUID</name>
@@ -998,17 +1066,52 @@
         <items xsi:type="form:FormGroup">
           <name>GroupInfoTitleRight</name>
           <id>35</id>
-          <items xsi:type="form:Button">
-            <name>EditCurrenciesReceiver</name>
-            <id>215</id>
+          <items xsi:type="form:FormGroup">
+            <name>GroupCommandBarRight</name>
+            <id>295</id>
+            <items xsi:type="form:Button">
+              <name>EditCurrenciesReceiver</name>
+              <id>215</id>
+              <visible>true</visible>
+              <enabled>true</enabled>
+              <userVisible>
+                <common>true</common>
+              </userVisible>
+              <extendedTooltip>
+                <name>EditCurrenciesReceiverExtendedTooltip</name>
+                <id>216</id>
+                <visible>true</visible>
+                <enabled>true</enabled>
+                <userVisible>
+                  <common>true</common>
+                </userVisible>
+                <type>Label</type>
+                <autoMaxWidth>true</autoMaxWidth>
+                <autoMaxHeight>true</autoMaxHeight>
+                <extInfo xsi:type="form:LabelDecorationExtInfo">
+                  <horizontalAlign>Left</horizontalAlign>
+                </extInfo>
+              </extendedTooltip>
+              <type>UsualButton</type>
+              <commandName>Form.Command.EditCurrenciesReceiver</commandName>
+              <representation>Auto</representation>
+              <autoMaxWidth>true</autoMaxWidth>
+              <autoMaxHeight>true</autoMaxHeight>
+              <placementArea>UserCmds</placementArea>
+              <representationInContextMenu>Auto</representationInContextMenu>
+            </items>
             <visible>true</visible>
             <enabled>true</enabled>
             <userVisible>
               <common>true</common>
             </userVisible>
+            <title>
+              <key>en</key>
+              <value>Command bar (right)</value>
+            </title>
             <extendedTooltip>
-              <name>EditCurrenciesReceiverExtendedTooltip</name>
-              <id>216</id>
+              <name>GroupCommandBarRightExtendedTooltip</name>
+              <id>296</id>
               <visible>true</visible>
               <enabled>true</enabled>
               <userVisible>
@@ -1021,13 +1124,15 @@
                 <horizontalAlign>Left</horizontalAlign>
               </extInfo>
             </extendedTooltip>
-            <type>UsualButton</type>
-            <commandName>Form.Command.EditCurrenciesReceiver</commandName>
-            <representation>Auto</representation>
-            <autoMaxWidth>true</autoMaxWidth>
-            <autoMaxHeight>true</autoMaxHeight>
-            <placementArea>UserCmds</placementArea>
-            <representationInContextMenu>Auto</representationInContextMenu>
+            <type>UsualGroup</type>
+            <extInfo xsi:type="form:UsualGroupExtInfo">
+              <group>AlwaysHorizontal</group>
+              <behavior>Auto</behavior>
+              <showLeftMargin>true</showLeftMargin>
+              <united>true</united>
+              <throughAlign>Auto</throughAlign>
+              <currentRowUse>Auto</currentRowUse>
+            </extInfo>
           </items>
           <items xsi:type="form:FormField">
             <name>ReceiveUUID</name>
@@ -2171,6 +2276,40 @@
       </edit>
     </columns>
   </attributes>
+  <attributes>
+    <name>AccountingExtDimensions</name>
+    <title>
+      <key>en</key>
+      <value>Accounting ext dimensions</value>
+    </title>
+    <id>10</id>
+    <valueType>
+      <types>InformationRegisterRecordSet.T9051S_AccountingExtDimensions</types>
+    </valueType>
+    <view>
+      <common>true</common>
+    </view>
+    <edit>
+      <common>true</common>
+    </edit>
+  </attributes>
+  <attributes>
+    <name>AccountingRowAnalytics</name>
+    <title>
+      <key>en</key>
+      <value>Accounting row analytics</value>
+    </title>
+    <id>11</id>
+    <valueType>
+      <types>InformationRegisterRecordSet.T9050S_AccountingRowAnalytics</types>
+    </valueType>
+    <view>
+      <common>true</common>
+    </view>
+    <edit>
+      <common>true</common>
+    </edit>
+  </attributes>
   <formCommands>
     <name>ShowRowKey</name>
     <title>
@@ -2251,6 +2390,28 @@
         <name>ShowHiddenTables</name>
       </handler>
     </action>
+    <currentRowUse>Auto</currentRowUse>
+  </formCommands>
+  <formCommands>
+    <name>EditAccounting</name>
+    <title>
+      <key>en</key>
+      <value>Edit accounting</value>
+    </title>
+    <id>5</id>
+    <use>
+      <common>true</common>
+    </use>
+    <picture xsi:type="core:PictureRef">
+      <picture>StdPicture.ChartOfAccounts</picture>
+    </picture>
+    <action xsi:type="form:FormCommandHandlerContainer">
+      <handler>
+        <name>EditAccounting</name>
+      </handler>
+    </action>
+    <functionalOptions>FunctionalOption.UseAccounting</functionalOptions>
+    <representation>Picture</representation>
     <currentRowUse>Auto</currentRowUse>
   </formCommands>
   <commandInterface>

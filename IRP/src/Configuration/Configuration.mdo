@@ -766,6 +766,7 @@
   <definedTypes>DefinedType.typeStockAdjustmentAsSurplusBasises</definedTypes>
   <definedTypes>DefinedType.typeStockAdjustmentAsWriteOffBasises</definedTypes>
   <definedTypes>DefinedType.UseUniqueID</definedTypes>
+  <definedTypes>DefinedType.typeAccountingDocuments</definedTypes>
   <commonCommands>CommonCommand.AddProperties</commonCommands>
   <commonCommands>CommonCommand.AttachedFiles</commonCommands>
   <commonCommands>CommonCommand.EditConstants</commonCommands>

@@ -26,7 +26,6 @@ Procedure CalculateAndUpdateAccessKey_AccumulationRegisters(PostingTable, Metada
 			Return;
 		EndIf;
 		
-//		Row.ObjectAccessKey = AccessKeyRef;
 	EndDo;
 	
 EndProcedure

@@ -2327,4 +2327,29 @@
 			<value>true</value>
 		</right>
 	</object>
+	<object>
+		<name>Catalog.Agreements</name>
+		<right>
+			<name>View</name>
+			<value>true</value>
+		</right>
+		<right>
+			<name>Read</name>
+			<value>true</value>
+		</right>
+	</object>
+	<object>
+		<name>Catalog.Agreements.Attribute.PriceType</name>
+		<right>
+			<name>View</name>
+			<value>true</value>
+		</right>
+	</object>
+	<object>
+		<name>Catalog.Agreements.Attribute.PriceIncludeTax</name>
+		<right>
+			<name>View</name>
+			<value>true</value>
+		</right>
+	</object>
 </Rights>

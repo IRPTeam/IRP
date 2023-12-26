@@ -43,11 +43,6 @@ Procedure OnCreateAtServer(Cancel, StandardProcessing)
 	Items.FilterConsignor.TitleTextColor  = ?(ThisObject.FilterConsignor  , New Color(), WebColors.LightGray);
 	Items.FilterTradeAgent.TitleTextColor = ?(ThisObject.FilterTradeAgent , New Color(), WebColors.LightGray);
 	Items.FilterOther.TitleTextColor      = ?(ThisObject.FilterOther      , New Color(), WebColors.LightGray);
-
-	RetailWorkersNavigation = ThisObject.CommandBar.ChildItems.Find("FormInformationRegisterRetailWorkersRetailWorkers");
-	If Not RetailWorkersNavigation = Undefined Then
-		RetailWorkersNavigation.Visible = False;
-	EndIf;
 EndProcedure
 
 &AtClient

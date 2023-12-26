@@ -75,7 +75,6 @@ Procedure RetailSalesReceiptsSelection(Item, RowSelected, Field, StandardProcess
 		Return;
 	EndIf;
 	ShowValue(, CurrentData.Document);
-//	OpenForm("Document.RetailSalesReceipt.ObjectForm", New Structure("Key", CurrentData.Document));
 EndProcedure
 
 #EndRegion

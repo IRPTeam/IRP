@@ -111,8 +111,8 @@ Procedure SetVisibilityAvailability(Object, Form)
 
 	ChangePrice = UserSettingsServer.PointOfSale_AdditionalSettings_DisableChangePrice(Form.UserAdmin);
 	ChangePriceType = UserSettingsServer.PointOfSale_AdditionalSettings_EnableChangePriceType(Form.UserAdmin);
-	Form.Items.ItemListPrice.Enabled = ChangePrice;
-	Form.Items.ItemListTotalAmount.Enabled = ChangePrice;
+	Form.Items.ItemListPrice.ReadOnly = Not ChangePrice;
+	Form.Items.ItemListTotalAmount.ReadOnly = Not ChangePrice;
 	Form.Items.ItemListPriceType.Visible = ChangePriceType;
 EndProcedure
 
@@ -1487,7 +1487,7 @@ EndProcedure
 &AtServer
 Procedure ClearRetailCustomerAtServer()
 	ObjectValue = FormAttributeToValue("Object");
-	FillingWithDefaultDataEvent.FillingWithDefaultDataFilling(ObjectValue, Undefined, Undefined, True, True);
+	FillingWithDefaultDataEvent.FillingDocumentsWithDefaultData(ObjectValue, Undefined, Undefined, True, True);
 	ObjectValue.Date = CommonFunctionsServer.GetCurrentSessionDate();
 	ValueToFormAttribute(ObjectValue, "Object");
 	For Each Row In Object.ItemList Do
@@ -1994,7 +1994,6 @@ Function CreateReturnOnBase(PaymentData, StatusType)
 		PredefinedValue("Document.RetailReturnReceipt.EmptyRef").Metadata(), ExtractedData);
 
 	DocRefs = New Array;
-//	NewDoc = Undefined;
 	For Each FillingValues In ArrayOfFillingValues Do
 		If TypeOf(ThisObject.PostponedReceipt) = Type("DocumentRef.RetailReturnReceipt") Then
 			NewDoc = GetClearPostponedObject();
@@ -2009,11 +2008,6 @@ Function CreateReturnOnBase(PaymentData, StatusType)
 		DPPointOfSaleServer.AfterPostingDocument(NewDoc.Ref);
 		DocRefs.Add(NewDoc.Ref);
 	EndDo;
-//	If Not NewDoc = Undefined Then
-//		NewDoc.Write(DocumentWriteMode.Posting);
-//		DocRef = NewDoc.Ref;
-//		DPPointOfSaleServer.AfterPostingDocument(DocRef);
-//	EndIf;
 	
 	Return DocRefs;
 

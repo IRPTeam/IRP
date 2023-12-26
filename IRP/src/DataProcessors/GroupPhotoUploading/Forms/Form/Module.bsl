@@ -177,7 +177,6 @@ EndProcedure
 //  String - Calculate m d5
 &AtClient
 Function CalculateMD5(FilePath)
-	//Return ""; // calculation by component in extension
 	Return CalculateMD5_AtServer(New BinaryData(FilePath)); 
 EndFunction
 

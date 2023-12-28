@@ -440,12 +440,16 @@ Function GetQueryForDocumentArray(MetaDocName) Export
 
 	QueryTextArray = New Array; // Array Of String
 
-	Exists_ItemList = MetaDoc.TabularSections.Find("ItemList") <> Undefined;
-	Exists_RowIDInfo = MetaDoc.TabularSections.Find("RowIDInfo") <> Undefined;
-	Exists_SpecialOffers = MetaDoc.TabularSections.Find("SpecialOffers") <> Undefined;
-	Exists_SerialLotNumbers = MetaDoc.TabularSections.Find("SerialLotNumbers") <> Undefined;
-	Exists_SourceOfOrigins = MetaDoc.TabularSections.Find("SourceOfOrigins") <> Undefined;
-	Exists_Payments = MetaDoc.TabularSections.Find("Payments") <> Undefined;
+	Exists_ItemList 		= MetaDoc.TabularSections.Find("ItemList") 			<> Undefined;
+	If Exists_ItemList Then // ignore price list
+		Exists_ItemList = MetaDoc.TabularSections.ItemList.Attributes.Find("Key") <> Undefined;
+	EndIf;
+	
+	Exists_RowIDInfo 		= MetaDoc.TabularSections.Find("RowIDInfo") 		<> Undefined;
+	Exists_SpecialOffers 	= MetaDoc.TabularSections.Find("SpecialOffers") 	<> Undefined;
+	Exists_SerialLotNumbers = MetaDoc.TabularSections.Find("SerialLotNumbers") 	<> Undefined;
+	Exists_SourceOfOrigins 	= MetaDoc.TabularSections.Find("SourceOfOrigins") 	<> Undefined;
+	Exists_Payments 		= MetaDoc.TabularSections.Find("Payments") 			<> Undefined;
 
 	If Exists_ItemList Then	
 		QueryTextArray.Add(GetQuery_ItemList());

@@ -7,21 +7,21 @@ Procedure OnCreateAtServer(Cancel, StandardProcessing)
 	CallbackFunction = JobDataSettings.CallbackFunction;
 	CallbackModule = JobDataSettings.CallbackModule;
 	
-	BackgroundJobAPIServer.RunJobs(JobDataSettings, JobList);
+	BackgroundJobAPIServer.FillJobList(JobDataSettings, JobList);
 	
 	RunBackgroundJobInDebugMode = SessionParameters.RunBackgroundJobInDebugMode;
+	
+	DontContinueOnError = JobDataSettings.StopOnErrorAnyJob;
+	MaxJobStream = JobDataSettings.JobLimitCount;
 EndProcedure
 
 &AtClient
 Procedure OnOpen(Cancel)
+	UpdateLabels();
 	If UpdatePause = 0 Then
-		UpdatePause = 10;
+		UpdatePause = 2;
 	EndIf;
-	If RunBackgroundJobInDebugMode Then
-		CheckJobStatus();
-	Else
-		AttachIdleHandler("CheckJobStatus", UpdatePause, True);
-	EndIf;
+	CheckJobStatus();
 	
 	Title = FormOwner.Title + " [ Jobs: " + JobList.Count() + " ]";
 EndProcedure
@@ -40,6 +40,13 @@ Procedure CheckJobStatus() Export
 		Items.FormUpdateStatuses.Visible = False;
 		If Not IsBlankString(CallbackFunction) Then
 			JobsResult = GetJobsResult();
+			If DontContinueOnError Then
+				For Each JobData In JobsResult Do
+					If Not JobData.Result Then
+						Return;
+					EndIf;
+				EndDo;
+			EndIf;
 			If IsBlankString(CallbackModule) Then
 				Execute "FormOwner." + CallbackFunction + "(JobsResult)";
 				Close();
@@ -48,6 +55,15 @@ Procedure CheckJobStatus() Export
 			EndIf;		
 		EndIf;
 	EndIf;
+	UpdateLabels();
+EndProcedure
+
+&AtClient
+Procedure UpdateLabels()
+	ActiveJob = JobList.FindRows(New Structure("Status", PredefinedValue("Enum.JobStatus.Active"))).Count();
+	FailedJob = JobList.FindRows(New Structure("Status", PredefinedValue("Enum.JobStatus.Failed"))).Count();
+	ComplitedJob = JobList.FindRows(New Structure("Status", PredefinedValue("Enum.JobStatus.Completed"))).Count();
+	WaitJob = JobList.FindRows(New Structure("Status", PredefinedValue("Enum.JobStatus.Wait"))).Count();
 EndProcedure
 
 &AtServer
@@ -64,9 +80,9 @@ EndFunction
 Function CheckJobStatusAtServer()
 	
 	BackgroundJobAPIServer.CheckJobs(JobList);
-	
+	BackgroundJobAPIServer.RunJobs(JobList, MaxJobStream);
 	For Each Row In JobList Do
-		If Row.Status = Enums.JobStatus.Active Then
+		If Row.Status = Enums.JobStatus.Active OR Row.Status = Enums.JobStatus.Wait Then
 			Return True;
 		EndIf;
 	EndDo;

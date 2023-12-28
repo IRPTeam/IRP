@@ -95,6 +95,11 @@ Procedure GetJobsForCheckDocuments_Callback(Result) Export
 	ErrorsDescriptions = AdditionalDocumentTableControlReuse.GetAllErrorsDescription();	
 	ErrorsGroupsTable = ThisObject.ErrorsGroups.Unload();
 	For Each Row In Result Do
+		
+		If Not Row.Result Then
+			Continue;
+		EndIf;
+		
 		ErrorsTree = CommonFunctionsServer.GetFromCache(Row.CacheKey);
 		For Each DocRow In ErrorsTree.Rows Do
 			ParentRow = CheckListTree.Rows.Add();

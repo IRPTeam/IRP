@@ -22,12 +22,16 @@ EndFunction
 // * CallbackModule - String - 
 // * CallbackFunction - String - 
 // * ProcedurePath - String - 
+// * JobLimitCount - Number - If = 0 then all tasks are launched simultaneously.
+// * StopOnErrorAnyJob - Boolean -
 // * JobSettings - Array Of See JobSettings 
 Function JobDataSettings() Export
 	Settings = New Structure;
 	Settings.Insert("CallbackModule", "");
 	Settings.Insert("CallbackFunction", "");
 	Settings.Insert("ProcedurePath", "");
+	Settings.Insert("JobLimitCount", 5);
+	Settings.Insert("StopOnErrorAnyJob", True);
 	Settings.Insert("JobSettings", New Array);
 	Return Settings;
 EndFunction
@@ -55,20 +59,12 @@ Procedure NotifyStream(NotifySettings) Export
 	CommonFunctionsClientServer.ShowUsersMessage(Settings);
 EndProcedure
 
-// Run job.
-// 
-// Parameters:
-//  JobSettings - See JobSettings
-//  ProcedurePath - String -
-// 
-// Returns:
-//  BackgroundJob
-Function RunJob(JobSettings, ProcedurePath)
+Function RunJob(JobRow)
 	
-	If TypeOf(JobSettings.ProcedureParams) = Type("String") Then
-		Params = CommonFunctionsServer.GetFromCache(JobSettings.ProcedureParams);
+	If TypeOf(JobRow.JobParameters) = Type("String") Then
+		Params = CommonFunctionsServer.GetFromCache(JobRow.JobParameters);
 	Else
-		Params = JobSettings.ProcedureParams;
+		Params = JobRow.JobParameters;
 	EndIf;
 	
 	If SessionParameters.RunBackgroundJobInDebugMode Then
@@ -76,16 +72,16 @@ Function RunJob(JobSettings, ProcedurePath)
 		Job = New Structure;
 		Job.Insert("UUID", "Not job - " + New UUID);
 		Job.Insert("Begin", CommonFunctionsServer.GetCurrentSessionDate());
-		Job.Insert("Description", JobSettings.Description);
-		Job.Insert("Key", JobSettings.Key);
+		Job.Insert("Description", JobRow.Title);
+		Job.Insert("Key", JobRow.Key);
 		Job.Insert("UUID", New UUID);
 		Job.Insert("ErrorInfo", ErrorInfo());
 		Try
 			ParamsText = New Array; // Array Of String
 			For Index = 0 To Params.UBound() Do
 				ParamsText.Add("Params[" + Index + "]");
-			EndDo;
-			Execute ProcedurePath + "(" + StrConcat(ParamsText, ",") + ")";
+			EndDo; 
+			Execute JobRow.ProcedurePath + "(" + StrConcat(ParamsText, ",") + ")";
 			Job.Insert("State", Enums.JobStatus.Completed);
 		Except
 			Job.Insert("State", Enums.JobStatus.Failed);
@@ -93,7 +89,7 @@ Function RunJob(JobSettings, ProcedurePath)
 		EndTry;
 		Job.Insert("End", CommonFunctionsServer.GetCurrentSessionDate());
 	Else
-		Job = BackgroundJobs.Execute(ProcedurePath, Params, JobSettings.Key, JobSettings.Description);
+		Job = BackgroundJobs.Execute(JobRow.ProcedurePath, Params, JobRow.Key, JobRow.Title);
 	EndIf;
 	
 	Return Job;
@@ -102,21 +98,74 @@ EndFunction
 // Run jobs.
 // 
 // Parameters:
-//  JobDataSettings - See JobDataSettings
 //  JobList - See CommonForm.BackgroundMultiJob.JobList
-Procedure RunJobs(JobDataSettings, JobList) Export
-	For Each JobSetting In JobDataSettings.JobSettings Do
-		Job = RunJob(JobSetting, JobDataSettings.ProcedurePath);
-		JobRow = JobList.Add();
+//  MaxJobStream - Number - 
+Procedure RunJobs(JobList, MaxJobStream) Export
+	
+	If MaxJobStream = 0 Then
+		MaxJobStream = 20; // Set limit
+	EndIf;
+	
+	CurrentJobRunning = JobList.FindRows(New Structure("Status", Enums.JobStatus.Active)).Count();
+	
+	CanRun = MaxJobStream - CurrentJobRunning;
+	
+	If CanRun <= 0 Then // Max job count already running
+		Return;
+	EndIf;
+	
+	For Each JobRow In JobList Do
+		
+		If Not JobRow.Status = Enums.JobStatus.Wait Then
+			Continue;
+		EndIf;			
+		
+		Job = RunJob(JobRow);
 		If TypeOf(Job) = Type("Structure") Then
 			JobRow.NonJobData = Job;
 		EndIf;
 		FillJobInfo(Job, JobRow);
+		
+		CanRun = CanRun - 1;
+		
+		If CanRun <= 0 Then // Max job count already running
+			Break;
+		EndIf;
 	EndDo;
 EndProcedure
 
+// Fill job list.
+// 
+// Parameters:
+//  JobDataSettings - See JobDataSettings
+//  JobList - See CommonForm.BackgroundMultiJob.JobList
+Procedure FillJobList(JobDataSettings, JobList) Export
+	For Each JobSetting In JobDataSettings.JobSettings Do
+		JobRow = JobList.Add();
+		JobRow.Title = JobSetting.Description;
+		JobRow.Key = JobSetting.Key;
+		If TypeOf(JobSetting.ProcedureParams) = Type("String") Then
+			JobRow.JobParameters = JobSetting.ProcedureParams;
+		Else
+			JobRow.JobParameters = CommonFunctionsServer.PutToCache(JobSetting.ProcedureParams);
+		EndIf;
+		JobRow.Icon = PictureLib.AppearanceCircleYellow;
+		JobRow.Status = Enums.JobStatus.Wait;
+		JobRow.ProcedurePath = JobDataSettings.ProcedurePath;
+	EndDo;
+EndProcedure
+
+// Check jobs.
+// 
+// Parameters:
+//  JobList - See CommonForm.BackgroundMultiJob.JobList
 Procedure CheckJobs(JobList) Export
 	For Each JobRow In JobList Do
+		
+		If Not JobRow.Status = Enums.JobStatus.Active Then
+			Continue;
+		EndIf;
+		
 		If Not JobRow.NonJobData = Undefined Then
 			Job = JobRow.NonJobData;
 		Else
@@ -167,6 +216,8 @@ Procedure FillJobInfo(Job, JobRow)
 		JobRow.Icon = PictureLib.AppearanceCheckIcon;
 	ElsIf JobRow.Status = Enums.JobStatus.Failed Then
 		JobRow.Icon = PictureLib.AppearanceCrossIcon;
+	ElsIf JobRow.Status = Enums.JobStatus.Wait Then
+		JobRow.Icon = PictureLib.AppearanceCircleYellow;
 	Else
 		JobRow.Icon = PictureLib.FormHelp;
 	EndIf;

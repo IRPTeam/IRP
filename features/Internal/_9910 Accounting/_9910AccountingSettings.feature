@@ -1602,6 +1602,12 @@ Scenario: _0991059 create journal entry for two PI
 			| '2 200,00'  | 'Own company 1' | 'Vendor 2 (1 partner term)' |	
 		And I move one line down in "List" table and select line	
 		And I click "Journal entry (multiple documents)" button
+		And I go to line in "JournalEntries" table
+			| 'Ledger type' | 'Use' |
+			| 'Basic LTV'   | 'No'  |	
+		And I set "Use" checkbox in "JournalEntries" table
+		And I finish line editing in "JournalEntries" table
+		And I click "Ok" button	
 	* Check journal entry
 		Given I open hyperlink "e1cib/list/Document.JournalEntry"
 		And "List" table contains lines

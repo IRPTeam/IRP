@@ -198,59 +198,70 @@ Function RecordSetIsEqual(DocObject, RecordSet, TableForLoad)
 	Return Result;
 EndFunction
 
-Function TablesIsEqual(Table1, Table2) Export
+// Tables is equal.
+// 
+// Parameters:
+//  Table1 - ValueTable - Table1
+//  Table2 - ValueTable - Table2
+// 
+// Returns:
+//  Boolean - Tables is equal
+Function TablesIsEqual(Table1, Table2, DeleteColumns = "Recorder,LineNumber,PointInTime,UniqueID") Export
 	If Table1.Count() <> Table2.Count() Then
 		Return False;
 	EndIf;
-
-	DeleteColumn(Table1, "Recorder");
-	DeleteColumn(Table1, "LineNumber");
-	DeleteColumn(Table1, "PointInTime");
-	DeleteColumn(Table1, "UniqueID");
-
-	DeleteColumn(Table2, "Recorder");
-	DeleteColumn(Table2, "LineNumber");
-	DeleteColumn(Table2, "PointInTime");
-	DeleteColumn(Table2, "UniqueID");
-
-	Text = "SELECT
-		   |	*
-		   |INTO VTSort1
-		   |FROM
-		   |	&VT1 AS VT1
-		   |;
-		   |////////////////////////////////////////////////////////////////////////////////
-		   |SELECT
-		   |	*
-		   |INTO VTSort2
-		   |FROM
-		   |	&VT2 AS VT2
-		   |;
-		   |
-		   |////////////////////////////////////////////////////////////////////////////////
-		   |SELECT
-		   |	*
-		   |FROM
-		   |	VTSort1 AS VTSort1
-		   |AUTOORDER
-		   |;
-		   |
-		   |////////////////////////////////////////////////////////////////////////////////
-		   |SELECT
-		   |	*
-		   |FROM
-		   |	VTSort2 AS VTSort2
-		   |AUTOORDER";
-
-	Query = New Query();
-	Query.Text = Text;
-	Query.SetParameter("VT1", Table1);
-	Query.SetParameter("VT2", Table2);
-	QueryResult = Query.ExecuteBatch();
-
-	MD5_1 = CommonFunctionsServer.GetMD5(QueryResult[2].Unload());
-	MD5_2 = CommonFunctionsServer.GetMD5(QueryResult[3].Unload());
 	
+	If Table1.Count() = 0 Then
+		Return True;
+	EndIf;
+	
+	For Each Column In StrSplit(DeleteColumns, ",") Do
+		DeleteColumn(Table1, Column);
+		DeleteColumn(Table2, Column);
+	EndDo;
+		
+	If Table1.Count() = 1 Then
+		MD5_1 = CommonFunctionsServer.GetMD5(Table1);
+		MD5_2 = CommonFunctionsServer.GetMD5(Table2);
+	Else
+		Text = "SELECT
+			   |	*
+			   |INTO VTSort1
+			   |FROM
+			   |	&VT1 AS VT1
+			   |;
+			   |////////////////////////////////////////////////////////////////////////////////
+			   |SELECT
+			   |	*
+			   |INTO VTSort2
+			   |FROM
+			   |	&VT2 AS VT2
+			   |;
+			   |
+			   |////////////////////////////////////////////////////////////////////////////////
+			   |SELECT
+			   |	*
+			   |FROM
+			   |	VTSort1 AS VTSort1
+			   |AUTOORDER
+			   |;
+			   |
+			   |////////////////////////////////////////////////////////////////////////////////
+			   |SELECT
+			   |	*
+			   |FROM
+			   |	VTSort2 AS VTSort2
+			   |AUTOORDER";
+	
+		Query = New Query();
+		Query.Text = Text;
+		Query.SetParameter("VT1", Table1);
+		Query.SetParameter("VT2", Table2);
+		QueryResult = Query.ExecuteBatch();
+	
+		MD5_1 = CommonFunctionsServer.GetMD5(QueryResult[2].Unload());
+		MD5_2 = CommonFunctionsServer.GetMD5(QueryResult[3].Unload());
+	EndIf;
 	Return MD5_1 = MD5_2;
 
 EndFunction

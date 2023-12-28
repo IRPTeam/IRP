@@ -358,6 +358,7 @@ EndProcedure
 
 &AtClient
 Procedure CheckPosting(Command)
+	PostingInfo.GetItems().Clear();
 	JobSettingsArray = GetJobsForCheckPostingDocuments();
 	BackgroundJobAPIClient.OpenJobForm(JobSettingsArray, ThisObject);
 	Items.PagesDocuments.CurrentPage = Items.PagePosting;

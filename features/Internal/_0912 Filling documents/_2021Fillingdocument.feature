@@ -480,6 +480,7 @@ Scenario: _0154101 check filling in and refilling Sales order
 			And I select current line in "List" table
 			Then the form attribute named "Company" became equal to "Second Company"
 			And I click Select button of "Partner term" field
+			And I remove checkbox named "FilterCompanyUse"
 			And I select current line in "List" table
 		* Check the refill when selecting a partner term
 			Then the form attribute named "Company" became equal to "Main Company"
@@ -599,6 +600,7 @@ Scenario: _0154101 check filling in and refilling Sales order
 	* Tax calculation check when filling in the company at reselection of the partner term
 		* Re-select partner term
 			And I click Select button of "Partner term" field
+			And I remove checkbox named "FilterCompanyUse"
 			And I go to line in "List" table
 				| 'Description'                  |
 				| 'Basic Partner terms, TRY'     |
@@ -923,6 +925,7 @@ Scenario: _0154102 check filling in and refilling Sales invoice
 			And I select current line in "List" table
 			Then the form attribute named "Company" became equal to "Second Company"
 			And I click Select button of "Partner term" field
+			And I remove checkbox named "FilterCompanyUse"
 			And I select current line in "List" table
 		* Check the refill when selecting a partner term
 			Then the form attribute named "Company" became equal to "Main Company"
@@ -1038,6 +1041,7 @@ Scenario: _0154102 check filling in and refilling Sales invoice
 	* Tax calculation check when filling in the company at reselection of the partner term
 		* Re-select partner term
 			And I click Select button of "Partner term" field
+			And I remove checkbox named "FilterCompanyUse"
 			And I go to line in "List" table
 				| 'Description'                  |
 				| 'Basic Partner terms, TRY'     |
@@ -1391,6 +1395,11 @@ Scenario: _0154105 check filling in and refilling Purchase order
 			| 'NDB'            |
 		And I select current line in "List" table
 		Then the form attribute named "LegalName" became equal to "Company NDB"
+		And I click Select button of "Company" field
+		And I go to line in "List" table
+			| 'Description'    |
+			| 'Main Company'            |
+		And I select current line in "List" table
 	* Check filling in Partner term if the partner has only one
 		And I click Select button of "Partner" field
 		And I go to line in "List" table
@@ -5907,6 +5916,11 @@ Scenario: _0154154 check function DontCalculateRow in the Sales order
 		Given I open hyperlink "e1cib/list/Document.SalesOrder"
 		And I click the button named "FormCreate"
 	* Check filling in legal name if the partner has only one
+		And I click Select button of "Company" field
+		And I go to line in "List" table
+			| 'Description'    |
+			| 'Main Company'            |
+		And I select current line in "List" table
 		And I click Select button of "Partner" field
 		And I go to line in "List" table
 			| 'Description'    |

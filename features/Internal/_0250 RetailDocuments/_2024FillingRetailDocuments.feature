@@ -2373,6 +2373,11 @@ Scenario: _0154154 check filling in and refilling Retail return receipt
 		Given I open hyperlink "e1cib/list/Document.RetailReturnReceipt"
 		And I click the button named "FormCreate"
 	* Check filling in legal name if the partner has only one
+		And I click Select button of "Company" field
+		And I go to line in "List" table
+			| 'Description'    |
+			| 'Main Company'            |
+		And I select current line in "List" table
 		And I click Select button of "Partner" field
 		And I go to line in "List" table
 			| 'Description'    |

@@ -17,7 +17,23 @@ Procedure Post(DocObject, Cancel, PostingMode, AddInfo = Undefined) Export
 	CurrenciesServer.PreparePostingDataTables(Parameters, CurrencyTable, AddInfo);
 
 	RegisteredRecords = RegisterRecords(DocObject, Parameters.PostingDataTables, Parameters.Object.RegisterRecords);
-	Parameters.Insert("RegisteredRecords", RegisteredRecords);
+	
+	RegisteredRecordsArray = New Array;
+	For Each Record In RegisteredRecords Do
+		If Record.Value.WriteInTransaction Then
+			// write when transaction will be commited or rollback
+			If Metadata.AccumulationRegisters.Contains(Record.Key) Then
+				Record.Value.RecordSet.LockForUpdate = True;
+			EndIf;
+			Record.Value.RecordSet.Write();
+			WriteInTransaction = True;
+		Else // write only when transaction will be commited	
+			Record.Value.RecordSet.Write = True;
+		EndIf;
+		
+		RegisteredRecordsArray.Add(Record.Value.RecordSet);
+	EndDo;
+	Parameters.Insert("RegisteredRecords", RegisteredRecordsArray);
 
 	Parameters.Module.PostingCheckAfterWrite(DocObject.Ref, Cancel, PostingMode, Parameters, AddInfo);
 EndProcedure
@@ -31,8 +47,9 @@ Function GetPostingParameters(DocObject, PostingMode, AddInfo = Undefined)
 	Parameters.Insert("IsReposting", False);
 	Parameters.Insert("PointInTime", DocObject.PointInTime());
 	Parameters.Insert("TempTablesManager", New TempTablesManager());
+	Parameters.Insert("Metadata", DocObject.Ref.Metadata());
 
-	Module = Documents[DocObject.Ref.Metadata().Name];
+	Module = Documents[Parameters.Metadata.Name];
 	Parameters.Insert("Module", Module);
 	
 	DocumentDataTables = Module.PostingGetDocumentDataTables(DocObject.Ref, Cancel, PostingMode, Parameters, AddInfo);
@@ -102,7 +119,7 @@ Function RegisterRecords(DocObject, PostingDataTables, AllRegisterRecords)
 		EndIf;
 	EndDo;
 
-	RegisteredRecords = New Array();
+	RegisteredRecords = New Map();
 	For Each Row In PostingDataTables Do
 		If Not Row.Value.Property("RecordSet") Then
 			Continue;
@@ -131,17 +148,12 @@ Function RegisterRecords(DocObject, PostingDataTables, AllRegisterRecords)
 		EndIf;
 		
 		// Set write
+		WriteInTransaction = False;
 		If Row.Value.Property("WriteInTransaction") And Row.Value.WriteInTransaction Then
-			// write when transaction will be commited or rollback
-			If Metadata.AccumulationRegisters.Contains(RecordSet.Metadata()) Then
-				RecordSet.LockForUpdate = True;
-			EndIf;
-			RecordSet.Write();
-		Else // write oly when transaction will be commited	
-			RecordSet.Write = True;
+			WriteInTransaction = True;
 		EndIf;
 
-		RegisteredRecords.Add(RecordSet);
+		RegisteredRecords.Insert(RecordSet.Metadata(), New Structure("RecordSet, WriteInTransaction", RecordSet, WriteInTransaction));
 	EndDo;
 	Return RegisteredRecords;
 EndFunction
@@ -194,10 +206,12 @@ Function TablesIsEqual(Table1, Table2) Export
 	DeleteColumn(Table1, "Recorder");
 	DeleteColumn(Table1, "LineNumber");
 	DeleteColumn(Table1, "PointInTime");
+	DeleteColumn(Table1, "UniqueID");
 
 	DeleteColumn(Table2, "Recorder");
 	DeleteColumn(Table2, "LineNumber");
 	DeleteColumn(Table2, "PointInTime");
+	DeleteColumn(Table2, "UniqueID");
 
 	Text = "SELECT
 		   |	*
@@ -236,7 +250,7 @@ Function TablesIsEqual(Table1, Table2) Export
 
 	MD5_1 = CommonFunctionsServer.GetMD5(QueryResult[2].Unload());
 	MD5_2 = CommonFunctionsServer.GetMD5(QueryResult[3].Unload());
-
+	
 	Return MD5_1 = MD5_2;
 
 EndFunction
@@ -1228,3 +1242,83 @@ Function Exists_R2001T_Sales() Export
 		|WHERE
 		|	R2001T_Sales.Recorder = &Ref";
 EndFunction
+
+#Region CheckDocumentPosting
+
+// Check document array.
+// 
+// Parameters:
+//  DocumentArray - Array of DocumentRefDocumentName - Document array
+//  isJob - Boolean -
+// 
+// Returns:
+//  Array Of Structure - Check document array:
+// * Ref - DocumentRefDocumentName -
+// * RegInfo - Array Of Structure:
+// ** RegName - String -
+Function CheckDocumentArray(DocumentArray, isJob = False) Export
+
+	AddInfo = New Structure;
+	PostingMode = DocumentPostingMode.Regular;
+	Errors = New Array;
+	
+	If isJob And DocumentArray.Count() = 0 Then
+		Msg = BackgroundJobAPIServer.NotifySettings();
+		Msg.Log = "Empty doc list: " + DocumentArray.Count();
+		Msg.End = True;
+		Msg.DataAddress = CommonFunctionsServer.PutToCache(Errors);
+		BackgroundJobAPIServer.NotifyStream(Msg);
+		Return Errors;
+	EndIf;
+
+	If DocumentArray[0].GetObject().RegisterRecords.Count() = 0 Then
+		Msg = BackgroundJobAPIServer.NotifySettings();
+		Msg.Log = "Document type: " + DocumentArray[0].Metadata().Name + " can not be posted.";
+		Msg.End = True;
+		Msg.DataAddress = CommonFunctionsServer.PutToCache(Errors);
+		BackgroundJobAPIServer.NotifyStream(Msg);
+		Return Errors;
+	EndIf;
+
+	If isJob Then
+		Msg = BackgroundJobAPIServer.NotifySettings();
+		Msg.Log = "Start check: " + DocumentArray.Count();
+		BackgroundJobAPIServer.NotifyStream(Msg);
+	EndIf;
+
+	
+	For Each Doc In DocumentArray Do
+		DocObject = Doc.GetObject();
+		Parameters = GetPostingParameters(DocObject, PostingMode, AddInfo);
+
+		// Multi currency integration
+		CurrencyTable = CommonFunctionsClientServer.GetFromAddInfo(AddInfo, "CurrencyTable");	
+		CurrenciesServer.PreparePostingDataTables(Parameters, CurrencyTable, AddInfo);
+	
+		RegisteredRecords = RegisterRecords(DocObject, Parameters.PostingDataTables, Parameters.Object.RegisterRecords);
+		
+		If RegisteredRecords.Count() > 0 Then
+			Result = New Structure;
+			Result.Insert("Ref", Doc);
+			Result.Insert("RegInfo", New Array);
+			For Each Reg In RegisteredRecords Do
+				RegInfo = New Structure;
+				RegInfo.Insert("RegName", Reg.Key.FullName());
+				Result.RegInfo.Add(RegInfo);
+			EndDo;
+			
+			Errors.Add(Result);
+		EndIf;
+	EndDo;
+	
+	If isJob Then
+		Msg = BackgroundJobAPIServer.NotifySettings();
+		Msg.End = True;
+		Msg.DataAddress = CommonFunctionsServer.PutToCache(Errors);
+		BackgroundJobAPIServer.NotifyStream(Msg);
+	EndIf;
+	
+	Return Errors;
+EndFunction
+
+#EndRegion

@@ -354,13 +354,72 @@ Procedure RestoreOriginCheckList()
 	EndDo;
 EndProcedure
 
+#Region Posting
+
 &AtClient
-Procedure CheckDocumentPosting(Command)
-	CheckDocumentPostingAtServer();
+Procedure CheckPosting(Command)
+	JobSettingsArray = GetJobsForCheckPostingDocuments();
+	BackgroundJobAPIClient.OpenJobForm(JobSettingsArray, ThisObject);
+	Items.PagesDocuments.CurrentPage = Items.PagePosting;
 EndProcedure
 
 &AtServer
-Procedure CheckDocumentPostingAtServer()
-	//TODO: Insert the handler content
+Function GetJobsForCheckPostingDocuments()
+	
+	TypesTable = ThisObject.DocumentList.Unload(, "DocumentType");
+	TypesTable.GroupBy("DocumentType");
+	
+	JobDataSettings = BackgroundJobAPIServer.JobDataSettings();
+	JobDataSettings.CallbackFunction = "GetJobsForCheckPostingDocuments_Callback";
+	JobDataSettings.ProcedurePath = "PostingServer.CheckDocumentArray";
+	
+	For Each TypeItem In TypesTable Do
+		 DocumentsRows = DocumentList.FindRows(New Structure("DocumentType", TypeItem.DocumentType));
+		 DocumentTable = DocumentList.Unload(DocumentsRows, "Ref, Date, Picture");
+		 
+		 JobSettings = BackgroundJobAPIServer.JobSettings();
+
+		 JobSettings.ProcedureParams.Add(DocumentTable.UnloadColumn("Ref"));
+		 JobSettings.ProcedureParams.Add(True);
+
+		 JobSettings.Description = String(TypeItem.DocumentType) + ": " + DocumentTable.Count();
+		 JobDataSettings.JobSettings.Add(JobSettings);
+	EndDo;
+
+	Return JobDataSettings;
+EndFunction
+
+// Get jobs for check posting documents callback.
+// 
+// Parameters:
+//  Result - See BackgroundJobAPIServer.GetJobsResult
+&AtServer
+Procedure GetJobsForCheckPostingDocuments_Callback(Result) Export
+	PostingInfoTree = FormAttributeToValue("PostingInfo");
+	DocumentErrors = New Array;
+	For Each Row In Result Do
+		
+		If Not Row.Result Then
+			Continue;
+		EndIf;
+		
+		RegInfoArray = CommonFunctionsServer.GetFromCache(Row.CacheKey);
+		For Each DocRow In RegInfoArray Do
+			ParentRow = PostingInfoTree.Rows.Add();
+			ParentRow.Ref = DocRow.Ref;
+			ParentRow.Date = DocRow.Ref.Date;
+			
+			For Each RegInfoData In DocRow.RegInfo Do
+				NewRow = ParentRow.Rows.Add();
+				FillPropertyValues(NewRow, RegInfoData);
+				NewRow.Date = ParentRow.Date;
+				NewRow.Ref = ParentRow.Ref;
+			EndDo;
+		 EndDo;
+	EndDo;
+	
+	PostingInfoTree.Rows.Sort("Date, Ref, RegName", True);
+	ValueToFormAttribute(PostingInfoTree, "PostingInfo");
 EndProcedure
 
+#EndRegion

@@ -1645,6 +1645,17 @@ Scenario: _0991059 create journal entry for two PI
 		And I click "Create documents" button
 	* Check journal entry
 		Given I open hyperlink "e1cib/list/Document.JournalEntry"
+		And I click "Create documents" button		
+		And I click Choice button of the field named "Period"
+		And I input "01.01.2021" text in the field named "DateBegin"
+		And I input "01.01.2024" text in the field named "DateEnd"
+		And I click the button named "Select"
+		Then "Create documents" window is opened
+		And I click "Create documents" button
+		And I close "Create documents" window
+		Then "Journal entry" window is opened
+		And I click "Refresh" button
+				
 						
 				
 

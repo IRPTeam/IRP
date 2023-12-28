@@ -1,7 +1,7 @@
 ﻿#language: en
 @tree
 @Positive
-@AccessRightsSystem
+
 
 Feature: access rights system roles for documents
 

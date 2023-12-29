@@ -2394,10 +2394,10 @@ Strings.Insert("AccountingError_05", NStr("en='Not set any ledger types';
 	|tr='Hiçbir defter türü ayarlanmadı'", Lang));
 
 Strings.Insert("AccountingQuestion_01", NStr("en='Change [Quantity] mark in analytics';
-	|ru='Изменить [Количество] метку в аналитике';
-	|tr='Analitiklerde [Miktar] işaretini değiştir'", Lang));
+	|ru='Изменить [Quantity] метку в аналитике';
+	|tr='Analitiklerde [Quantity] işaretini değiştir'", Lang));
 Strings.Insert("AccountingQuestion_02", NStr("en='Change [Currency] mark in analytics';
-	|ru='Изменить [Валюта] отметку в аналитике';
+	|ru='Изменить [Currency] отметку в аналитике';
 	|tr='Analitiklerde [Currency] işaretini değiştir'", Lang));
 
 Strings.Insert("AccountingInfo_01", NStr("en='Load complete';

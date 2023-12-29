@@ -806,6 +806,7 @@
  <functionalOptions>FunctionalOption.UseSimpleMode</functionalOptions>
  <functionalOptions>FunctionalOption.UseSourceOfOrigin</functionalOptions>
  <functionalOptions>FunctionalOption.UseFixedAssets</functionalOptions>
+ <functionalOptions>FunctionalOption.UseLegalNameContract</functionalOptions>
  <definedTypes>DefinedType.AdditionalTableControlDocument</definedTypes>
  <definedTypes>DefinedType.AdditionalTableControlDocumentObject</definedTypes>
  <definedTypes>DefinedType.typeAccessDocument</definedTypes>
@@ -914,6 +915,7 @@
  <constants>Constant.UseSourceOfOrigin</constants>
  <constants>Constant.AdditionalTableControlExceptions</constants>
  <constants>Constant.UseFixedAssets</constants>
+ <constants>Constant.UseLegalNameContract</constants>
  <commonForms>CommonForm.AdditionalTableControlSettings</commonForms>
  <commonForms>CommonForm.AddLinkedDocumentRows</commonForms>
  <commonForms>CommonForm.AttachFile</commonForms>

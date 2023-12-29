@@ -1416,6 +1416,7 @@ Scenario: _0154105 check filling in and refilling Purchase order
 			And I select current line in "List" table
 			Then the form attribute named "Company" became equal to "Second Company"
 			And I click Select button of "Partner term" field
+			And I remove checkbox named "FilterCompanyUse"			
 			And I select current line in "List" table
 		* Check the refill when selecting a partner term
 			Then the form attribute named "Company" became equal to "Main Company"
@@ -1542,6 +1543,7 @@ Scenario: _0154105 check filling in and refilling Purchase order
 	* Tax calculation check when filling in the company at reselection of the partner term
 		* Re-select partner term
 			And I click Select button of "Partner term" field
+			And I remove checkbox named "FilterCompanyUse"
 			And I go to line in "List" table
 				| 'Description'              |
 				| Partner Kalipso Vendor     |
@@ -1809,6 +1811,7 @@ Scenario: _0154106 check filling in and refilling Purchase invoice
 			And I select current line in "List" table
 			Then the form attribute named "Company" became equal to "Second Company"
 			And I click Select button of "Partner term" field
+			And I remove checkbox named "FilterCompanyUse"
 			And I select current line in "List" table
 		* Check the refill when selecting a partner term
 			Then the form attribute named "Company" became equal to "Main Company"
@@ -1932,6 +1935,7 @@ Scenario: _0154106 check filling in and refilling Purchase invoice
 	* Tax calculation check when filling in the company at reselection of the partner term
 		* Re-select partner term
 			And I click Select button of "Partner term" field
+			And I remove checkbox named "FilterCompanyUse"
 			And I go to line in "List" table
 				| 'Description'              |
 				| Partner Kalipso Vendor     |

@@ -4,7 +4,7 @@
 // Check document.
 // 
 // Parameters:
-//  Document - DefinedType.AdditionalTableControlDocument -
+//  Document - DocumentRefDocumentName -
 //  ListOfErrors - Array of String, String, Undefined - 
 //  DetailResult - Array of String -
 // 
@@ -13,10 +13,6 @@
 Function CheckDocument(Document, ListOfErrors = Undefined, DetailResult = False) Export
 	DocType = TypeOf(Document);
 	DocName = Document.Metadata().Name;
-	If Not Metadata.DefinedTypes.AdditionalTableControlDocument.Type.ContainsType(DocType) Then
-		//@skip-check invocation-parameter-type-intersect, property-return-type
-		Raise StrTemplate(R().ATC_001, DocType); // Unknown document type
-	EndIf;
 	
 	If ListOfErrors = Undefined Then
 		ArrayOfErrors = New Array;
@@ -39,16 +35,23 @@ EndFunction
 // Check document array.
 // 
 // Parameters:
-//  DocumentArray - Array of DefinedType.AdditionalTableControlDocument - Document array
+//  DocumentArray - Array of DocumentRefDocumentName - Document array
+//  isJob - Boolean -
 // 
 // Returns:
 //  ValueTree - Check document array:
-// * Ref - DefinedType.AdditionalTableControlDocument
+// * Ref - DocumentRefDocumentName
 // * Error - See DetailResult
-Function CheckDocumentArray(DocumentArray) Export
+Function CheckDocumentArray(DocumentArray, isJob = False) Export
+	
+	If isJob Then
+		Msg = BackgroundJobAPIServer.NotifySettings();
+		Msg.Log = "Start check: " + DocumentArray.Count();
+		BackgroundJobAPIServer.NotifyStream(Msg);
+	EndIf;
 	
 	Result = New ValueTree();
-	Result.Columns.Add("Ref", Metadata.DefinedTypes.AdditionalTableControlDocument.Type);
+	Result.Columns.Add("Ref", Documents.AllRefsType());
 	Result.Columns.Add("Error");
 	
 	If DocumentArray.Count() = 0 Then
@@ -56,12 +59,15 @@ Function CheckDocumentArray(DocumentArray) Export
 	EndIf;
 	
 	DocType = TypeOf(DocumentArray[0]);
-	If Not Metadata.DefinedTypes.AdditionalTableControlDocument.Type.ContainsType(DocType) Then
-		//@skip-check invocation-parameter-type-intersect, property-return-type
-		Raise StrTemplate(R().ATC_001, DocType); // Unknown document type
-	EndIf;
 	
 	AdditionalTableControlForDocumentArray(DocumentArray, Result);
+	
+	If isJob Then
+		Msg = BackgroundJobAPIServer.NotifySettings();
+		Msg.End = True;
+		Msg.DataAddress = CommonFunctionsServer.PutToCache(Result);
+		BackgroundJobAPIServer.NotifyStream(Msg);
+	EndIf;
 	
 	Return Result;
 	
@@ -78,7 +84,7 @@ EndFunction
 // Additional table control.
 // 
 // Parameters:
-//  Document - DefinedType.AdditionalTableControlDocument - Document
+//  Document - DocumentRefDocumentName - Document
 //  DocName - String - Doc name
 //  ArrayOfErrors - Array of String - Array of errors
 // 
@@ -137,7 +143,7 @@ EndFunction
 // Additional table control for document array.
 // 
 // Parameters:
-//  DocumentArray - Array of DefinedType.AdditionalTableControlDocument - Document array
+//  DocumentArray - Array of DocumentRefDocumentName - Document array
 //  DocName - String - Doc name
 //  Result - See CheckDocumentArray
 Procedure AdditionalTableControlForDocumentArray(DocumentArray, Result)
@@ -195,7 +201,7 @@ EndFunction
 // Check documents result.
 // 
 // Parameters:
-//  Document - DefinedType.AdditionalTableControlDocument -
+//  Document - DocumentRefDocumentName -
 //  DocName - String -
 //
 // Returns:
@@ -205,7 +211,12 @@ Function CheckDocumentsResult(Document, DocName)
 	
 	Query = New Query(Result.Query);
 	Query.SetParameter("Headers", GetHeaderTable(Document));
-	Query.SetParameter("ItemList", Document.ItemList.Unload());
+	
+	If Result.Tables.ItemList = Undefined Then
+		Query.SetParameter("ItemList", Document.ItemList.Unload());
+	Else
+		Query.SetParameter("ItemList", Result.Tables.ItemList);
+	EndIf;
 	
 	If Result.Tables.RowIDInfo = Undefined Then
 		Query.SetParameter("RowIDInfo", Document.RowIDInfo.Unload());
@@ -250,7 +261,7 @@ EndFunction
 // Get header table.
 // 
 // Parameters:
-//  Document - DefinedType.AdditionalTableControlDocument -  Document
+//  Document - DocumentRefDocumentName -  Document
 // 
 // Returns:
 //  ValueTable -  Get header table
@@ -284,7 +295,7 @@ EndFunction
 // Fill check processing additional table control document fill check processing.
 // 
 // Parameters:
-//  Source - DefinedType.AdditionalTableControlDocument - Source
+//  Source - DocumentRefDocumentName - Source
 //  Cancel - Boolean -  Cancel
 //  CheckedAttributes - Array of String -  Checked attributes
 Procedure FillCheckProcessing_AdditionalTableControlDocumentFillCheckProcessing(Source, Cancel, CheckedAttributes) Export

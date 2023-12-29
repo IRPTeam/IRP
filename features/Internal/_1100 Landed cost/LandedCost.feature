@@ -334,6 +334,7 @@ Scenario: _003 creating Purchase invoice and checking close Batch wise over bala
 				| 'DFC'             |
 			And I select current line in "List" table
 			And I click Select button of "Partner term" field
+			And I remove checkbox named "FilterCompanyUse"
 			And I go to line in "List" table
 				| 'Description'                  |
 				| 'DFC Vendor by agreements'     |

@@ -189,8 +189,12 @@ Function PostingGetPostingDataTables(Ref, Cancel, PostingMode, Parameters, AddIn
 	PostingDataTables = New Map;
 	
 	// CashInIransit
-	PostingDataTables.Insert(Parameters.Object.RegisterRecords.CashInTransit, New Structure("RecordType, RecordSet", AccumulationRecordType.Receipt, Parameters.DocumentDataTables.CashInTransit));
-
+	CashInIransitInfo = New Structure;
+	CashInIransitInfo.Insert("RecordType", AccumulationRecordType.Receipt);
+	CashInIransitInfo.Insert("RecordSet", Parameters.DocumentDataTables.RegCashInTransit);
+	CashInIransitInfo.Insert("Metadata", Metadata.AccumulationRegisters.CashInTransit);
+	PostingDataTables.Insert(Parameters.Object.RegisterRecords.CashInTransit, CashInIransitInfo);
+	
 	PostingServer.SetPostingDataTables(PostingDataTables, Parameters);
 
 	Return PostingDataTables;

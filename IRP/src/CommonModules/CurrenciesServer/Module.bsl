@@ -4,26 +4,25 @@ Procedure PreparePostingDataTables(Parameters, CurrencyTable, AddInfo = Undefine
 		ArrayOfPostingInfo = Parameters.ArrayOfPostingInfo;
 	Else
 		For Each PostingInfo In Parameters.PostingDataTables Do
-			RecordSetMetadata = PostingInfo.Key.Metadata();
 			If Parameters.Property("MultiCurrencyExcludePostingDataTables")
-				And Parameters.MultiCurrencyExcludePostingDataTables.Find(RecordSetMetadata) <> Undefined Then
+				And Parameters.MultiCurrencyExcludePostingDataTables.Find(PostingInfo.Value.Metadata) <> Undefined Then
 				Continue;
 			EndIf;
 
-			If Metadata.AccumulationRegisters.Contains(RecordSetMetadata) 
-				Or Metadata.InformationRegisters.Contains(RecordSetMetadata) Then
+			If Metadata.AccumulationRegisters.Contains(PostingInfo.Value.Metadata) 
+				Or Metadata.InformationRegisters.Contains(PostingInfo.Value.Metadata) Then
 					
-				Dimension = RecordSetMetadata.Dimensions.Find("CurrencyMovementType");
+				Dimension = PostingInfo.Value.Metadata.Dimensions.Find("CurrencyMovementType");
 				// Register supported multicurrency
 				If Dimension <> Undefined Then
-					ArrayOfPostingInfo.Add(PostingInfo);
+					ArrayOfPostingInfo.Add(PostingInfo.Value);
 				EndIf;
 			EndIf;
 		EndDo;
 	EndIf;
 
 	If ArrayOfPostingInfo.Count() And
-	 (Parameters.Object.Metadata().TabularSections.Find("Currencies") <> Undefined Or CurrencyTable <> Undefined) Then
+	 (Parameters.Metadata.TabularSections.Find("Currencies") <> Undefined Or CurrencyTable <> Undefined) Then
 		TempTableManager = New TempTablesManager();
 		Query = New Query();
 		Query.TempTablesManager = TempTableManager;
@@ -47,7 +46,7 @@ Procedure PreparePostingDataTables(Parameters, CurrencyTable, AddInfo = Undefine
 			
 			If TypeOf(Parameters.Object.Ref) = Type("DocumentRef.CashReceipt") Or TypeOf(Parameters.Object.Ref) = Type("DocumentRef.BankReceipt") Then
 				DocumentCondition = True;
-				RegisterType = Type("AccumulationRegisterRecordSet.R2021B_CustomersTransactions");
+				RegisterType = Metadata.AccumulationRegisters.R2021B_CustomersTransactions;
 				For Each RowPaymentList In Parameters.Object.PaymentList Do
 					NewRowPaymentList = _PaymentList.Add();
 					FillPropertyValues(NewRowPaymentList, RowPaymentList);
@@ -56,7 +55,7 @@ Procedure PreparePostingDataTables(Parameters, CurrencyTable, AddInfo = Undefine
 			EndIf;
 			If TypeOf(Parameters.Object.Ref) = Type("DocumentRef.CashPayment") Or TypeOf(Parameters.Object.Ref) = Type("DocumentRef.BankPayment") Then
 				DocumentCondition = True;
-				RegisterType = Type("AccumulationRegisterRecordSet.R1021B_VendorsTransactions");
+				RegisterType = Metadata.AccumulationRegisters.R1021B_VendorsTransactions;
 				For Each RowPaymentList In Parameters.Object.PaymentList Do
 					NewRowPaymentList = _PaymentList.Add();
 					FillPropertyValues(NewRowPaymentList, RowPaymentList);
@@ -65,7 +64,7 @@ Procedure PreparePostingDataTables(Parameters, CurrencyTable, AddInfo = Undefine
 			EndIf;
 			If TypeOf(Parameters.Object.Ref) = Type("DocumentRef.EmployeeCashAdvance") Then
 				DocumentCondition = True;
-				RegisterType = Type("AccumulationRegisterRecordSet.R1021B_VendorsTransactions");
+				RegisterType = Metadata.AccumulationRegisters.R1021B_VendorsTransactions;
 				For Each RowPaymentList In Parameters.Object.PaymentList Do
 					If Not ValueIsFilled(RowPaymentList.Invoice) Then
 						Continue;
@@ -90,11 +89,11 @@ Procedure PreparePostingDataTables(Parameters, CurrencyTable, AddInfo = Undefine
 				TableOfAgreementMovementTypes.Columns.Add("Amount");
 				TableOfAgreementMovementTypes.Columns.Add("Key");
 				For Each ItemOfPostingInfo In ArrayOfPostingInfo Do
-					If TypeOf(ItemOfPostingInfo.Key) = RegisterType Then
-						If ItemOfPostingInfo.Value.Recordset.Columns.Find("Key") = Undefined Then
-							ItemOfPostingInfo.Value.Recordset.Columns.Add("Key", New TypeDescription(Metadata.DefinedTypes.typeRowID.Type));
+					If ItemOfPostingInfo.Metadata = RegisterType Then
+						If ItemOfPostingInfo.Recordset.Columns.Find("Key") = Undefined Then
+							ItemOfPostingInfo.Recordset.Columns.Add("Key", New TypeDescription(Metadata.DefinedTypes.typeRowID.Type));
 						EndIf;
-						For Each RowRecordSet In ItemOfPostingInfo.Value.Recordset Do
+						For Each RowRecordSet In ItemOfPostingInfo.Recordset Do
 							NewRow = TableOfAgreementMovementTypes.Add();
 							NewRow.MovementType = RowRecordSet.Agreement.CurrencyMovementType;
 							NewRow.Partner      = RowRecordSet.Partner;
@@ -158,10 +157,10 @@ Procedure PreparePostingDataTables(Parameters, CurrencyTable, AddInfo = Undefine
 		EndIf;
 		Query.Execute();
 		For Each ItemOfPostingInfo In ArrayOfPostingInfo Do
-			If ItemOfPostingInfo.Value.RecordSet.Count() Then
-				UseAgreementMovementType = IsUseAgreementMovementType(ItemOfPostingInfo);
-				UseCurrencyJoin = IsUseCurrencyJoin(Parameters, ItemOfPostingInfo);
-				ItemOfPostingInfo.Value.RecordSet = ExpandTable(TempTableManager, ItemOfPostingInfo.Value.RecordSet, UseAgreementMovementType, UseCurrencyJoin);
+			If ItemOfPostingInfo.RecordSet.Count() Then
+				UseAgreementMovementType = IsUseAgreementMovementType(ItemOfPostingInfo.Metadata);
+				UseCurrencyJoin = IsUseCurrencyJoin(Parameters, ItemOfPostingInfo.Metadata);
+				ItemOfPostingInfo.RecordSet = ExpandTable(TempTableManager, ItemOfPostingInfo.RecordSet, UseAgreementMovementType, UseCurrencyJoin);
 				
 				
 				IsOffsetOfAdvances = CommonFunctionsClientServer.GetFromAddInfo(Parameters, "IsOffsetOfAdvances", False);
@@ -170,29 +169,29 @@ Procedure PreparePostingDataTables(Parameters, CurrencyTable, AddInfo = Undefine
 				If Not IsOffsetOfAdvances And Not IsLandedCost Then
 				
 					// Advances
-					If TypeOf(ItemOfPostingInfo.Key) = Type("AccumulationRegisterRecordSet.R1020B_AdvancesToVendors")
-						Or TypeOf(ItemOfPostingInfo.Key) = Type("AccumulationRegisterRecordSet.R2020B_AdvancesFromCustomers") Then
+					If TypeOf(ItemOfPostingInfo.Metadata) = Metadata.AccumulationRegisters.R1020B_AdvancesToVendors
+						Or TypeOf(ItemOfPostingInfo.Metadata) = Metadata.AccumulationRegisters.R2020B_AdvancesFromCustomers Then
 					
 						AdvancesCurrencyRevaluation = GetAdvancesCurrencyRevaluation(Parameters.Object.Ref);
 						For Each Row In AdvancesCurrencyRevaluation Do
-							FillPropertyValues(ItemOfPostingInfo.Value.RecordSet.Add(), Row);
+							FillPropertyValues(ItemOfPostingInfo.RecordSet.Add(), Row);
 						EndDo;	
 					
 					EndIf;
 			
 					// Transactions
-					If TypeOf(ItemOfPostingInfo.Key) = Type("AccumulationRegisterRecordSet.R1021B_VendorsTransactions")
-						Or TypeOf(ItemOfPostingInfo.Key) = Type("AccumulationRegisterRecordSet.R2021B_CustomersTransactions") Then
+					If TypeOf(ItemOfPostingInfo.Metadata) = Metadata.AccumulationRegisters.R1021B_VendorsTransactions
+						Or TypeOf(ItemOfPostingInfo.Metadata) = Metadata.AccumulationRegisters.R2021B_CustomersTransactions Then
 					
 						TransactionsCurrencyRevaluation = GetTransactionsCurrencyRevaluation(Parameters.Object.Ref);
 						For Each Row In TransactionsCurrencyRevaluation Do
-							FillPropertyValues(ItemOfPostingInfo.Value.RecordSet.Add(), Row);
+							FillPropertyValues(ItemOfPostingInfo.RecordSet.Add(), Row);
 						EndDo;	
 					
 					EndIf;
 			
 					// Accounting amounts
-					If TypeOf(ItemOfPostingInfo.Key) = Type("AccumulationRegisterRecordSet.T1040T_AccountingAmounts") Then
+					If TypeOf(ItemOfPostingInfo.Metadata) = Metadata.AccumulationRegisters.T1040T_AccountingAmounts Then
 						Op = Catalogs.AccountingOperations;
 						
 						AccountingOperations = New ValueTable();
@@ -226,7 +225,7 @@ Procedure PreparePostingDataTables(Parameters, CurrencyTable, AddInfo = Undefine
 						For Each RowAmounts In AccountingAmounts Do
 							For Each RowOperation In AccountingOperations.FindRows(New Structure("DocType, AmountType", TypeOf(Parameters.Object.Ref), RowAmounts.AmountType)) Do
 								For Each OperationItem In RowOperation.Operations Do
-									NewRow = ItemOfPostingInfo.Value.RecordSet.Add();
+									NewRow = ItemOfPostingInfo.RecordSet.Add();
 									FillPropertyValues(NewRow, RowAmounts);
 									NewRow.Operation = OperationItem;
 								EndDo;
@@ -332,25 +331,26 @@ Function GetAccountingAmounts(DocRef)
 	Return QueryTable;
 EndFunction
 
-Function IsUseAgreementMovementType(ItemOfPostingInfo)
-	UseAgreementMovementType = True;
-	If TypeOf(ItemOfPostingInfo.Key) = Type("AccumulationRegisterRecordSet.R3010B_CashOnHand") Or TypeOf(
-		ItemOfPostingInfo.Key) = Type("AccumulationRegisterRecordSet.R2020B_AdvancesFromCustomers") Or TypeOf(
-		ItemOfPostingInfo.Key) = Type("AccumulationRegisterRecordSet.R1020B_AdvancesToVendors") Then
-		UseAgreementMovementType = False;
-	EndIf;
-	Return UseAgreementMovementType;
+Function IsUseAgreementMovementType(RecMetadata)
+	
+	TypeOfRecordSetsArray = New Array();
+	TypeOfRecordSetsArray.Add(Metadata.AccumulationRegisters.R3010B_CashOnHand);
+	TypeOfRecordSetsArray.Add(Metadata.AccumulationRegisters.R2020B_AdvancesFromCustomers);
+	TypeOfRecordSetsArray.Add(Metadata.AccumulationRegisters.R1020B_AdvancesToVendors);
+	
+	Return TypeOfRecordSetsArray.Find(RecMetadata) = Undefined;
+	
 EndFunction
 
-Function IsUseCurrencyJoin(Parameters, ItemOfPostingInfo)
+Function IsUseCurrencyJoin(Parameters, RecMetadata)
 	UseCurrencyJoin = False;
 
 	TypeOfRecordSetsArray = New Array();
-	TypeOfRecordSetsArray.Add(Type("AccumulationRegisterRecordSet.R3035T_CashPlanning"));
-	TypeOfRecordSetsArray.Add(Type("AccumulationRegisterRecordSet.R3010B_CashOnHand"));
-	TypeOfRecordSetsArray.Add(Type("AccumulationRegisterRecordSet.R3015B_CashAdvance"));
-	TypeOfRecordSetsArray.Add(Type("AccumulationRegisterRecordSet.R2021B_CustomersTransactions"));
-	TypeOfRecordSetsArray.Add(Type("AccumulationRegisterRecordSet.R1021B_VendorsTransactions"));
+	TypeOfRecordSetsArray.Add(Metadata.AccumulationRegisters.R3035T_CashPlanning);
+	TypeOfRecordSetsArray.Add(Metadata.AccumulationRegisters.R3010B_CashOnHand);
+	TypeOfRecordSetsArray.Add(Metadata.AccumulationRegisters.R3015B_CashAdvance);
+	TypeOfRecordSetsArray.Add(Metadata.AccumulationRegisters.R2021B_CustomersTransactions);
+	TypeOfRecordSetsArray.Add(Metadata.AccumulationRegisters.R1021B_VendorsTransactions);
 
 	FilterByDocument = False;
 
@@ -364,7 +364,7 @@ Function IsUseCurrencyJoin(Parameters, ItemOfPostingInfo)
 		FilterByDocument = True;
 	EndIf;
 
-	If FilterByDocument And TypeOfRecordSetsArray.Find(TypeOf(ItemOfPostingInfo.Key)) <> Undefined Then
+	If FilterByDocument And TypeOfRecordSetsArray.Find(RecMetadata) <> Undefined Then
 		UseCurrencyJoin = True;
 	EndIf;
 

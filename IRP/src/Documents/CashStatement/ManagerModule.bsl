@@ -66,9 +66,12 @@ EndProcedure
 Function PostingGetPostingDataTables(Ref, Cancel, PostingMode, Parameters, AddInfo = Undefined) Export
 	PostingDataTables = New Map;
 						
-	// CashInTransit
-	PostingDataTables.Insert(Parameters.Object.RegisterRecords.CashInTransit,
-		New Structure("RecordType, RecordSet", AccumulationRecordType.Receipt, Parameters.DocumentDataTables.CashInTransit));
+	// CashInIransit
+	CashInIransitInfo = New Structure;
+	CashInIransitInfo.Insert("RecordType", AccumulationRecordType.Receipt);
+	CashInIransitInfo.Insert("RecordSet", Parameters.DocumentDataTables.RegCashInTransit);
+	CashInIransitInfo.Insert("Metadata", Metadata.AccumulationRegisters.CashInTransit);
+	PostingDataTables.Insert(Parameters.Object.RegisterRecords.CashInTransit, CashInIransitInfo);
 
 	PostingServer.SetPostingDataTables(PostingDataTables, Parameters);
 

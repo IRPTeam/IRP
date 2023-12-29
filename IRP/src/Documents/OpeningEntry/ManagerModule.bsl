@@ -12,97 +12,7 @@ Function PostingGetDocumentDataTables(Ref, Cancel, PostingMode, Parameters, AddI
 	QueryArray = GetQueryTextsSecondaryTables();
 	PostingServer.ExecuteQuery(Ref, QueryArray, Parameters);
 
-	Query = New Query;
-	Query.Text =
-	"SELECT
-	|	ReceiptFromConsignor.ItemKey,
-	|	ReceiptFromConsignor.Store,
-	|	ReceiptFromConsignor.Ref.Company AS Company,
-	|	SUM(ReceiptFromConsignor.Quantity) AS Quantity,
-	|	ReceiptFromConsignor.Ref.Date AS Period,
-	|	VALUE(Enum.BatchDirection.Receipt) AS Direction,
-	|	ReceiptFromConsignor.Key AS Key,
-	|	SUM(ReceiptFromConsignor.Amount) AS Amount,
-	|	ReceiptFromConsignor.Currency AS Currency,
-	|	Value(ChartOfCharacteristicTypes.CurrencyMovementType.EmptyRef) AS CurrencyMovementType,
-	|	SUM(ReceiptFromConsignor.AmountTax) AS AmountTax,
-	|	CASE
-	|		WHEN ReceiptFromConsignor.SerialLotNumber.BatchBalanceDetail
-	|			THEN ReceiptFromConsignor.SerialLotNumber
-	|		ELSE VALUE(Catalog.SerialLotNumbers.EmptyRef)
-	|	END AS SerialLotNumber,
-	|	CASE
-	|		WHEN ReceiptFromConsignor.SourceOfOrigin.BatchBalanceDetail
-	|			THEN ReceiptFromConsignor.SourceOfOrigin
-	|		ELSE VALUE(Catalog.SourceOfOrigins.EmptyRef)
-	|	END AS SourceOfOrigin
-	|FROM
-	|	Document.OpeningEntry.ReceiptFromConsignor AS ReceiptFromConsignor
-	|WHERE
-	|	ReceiptFromConsignor.Ref = &Ref
-	|GROUP BY
-	|	ReceiptFromConsignor.ItemKey,
-	|	ReceiptFromConsignor.Store,
-	|	ReceiptFromConsignor.Ref.Company,
-	|	ReceiptFromConsignor.Ref.Date,
-	|	VALUE(Enum.BatchDirection.Receipt),
-	|	ReceiptFromConsignor.Key,
-	|	ReceiptFromConsignor.Currency,
-	|	Value(ChartOfCharacteristicTypes.CurrencyMovementType.EmptyRef),
-	|	CASE
-	|		WHEN ReceiptFromConsignor.SerialLotNumber.BatchBalanceDetail
-	|			THEN ReceiptFromConsignor.SerialLotNumber
-	|		ELSE VALUE(Catalog.SerialLotNumbers.EmptyRef)
-	|	END,
-	|	CASE
-	|		WHEN ReceiptFromConsignor.SourceOfOrigin.BatchBalanceDetail
-	|			THEN ReceiptFromConsignor.SourceOfOrigin
-	|		ELSE VALUE(Catalog.SourceOfOrigins.EmptyRef)
-	|	END";
-	Query.SetParameter("Ref", Ref);
-
-	QueryResult = Query.Execute();
-	BatchKeysInfo = QueryResult.Unload();
-
-	CurrencyTable = Ref.Currencies.UnloadColumns();
-	CurrencyMovementType = Ref.Company.LandedCostCurrencyMovementType;
-	For Each Row In BatchKeysInfo Do
-		CurrenciesServer.AddRowToCurrencyTable(Ref.Date, CurrencyTable, Row.Key, Row.Currency, CurrencyMovementType);
-	EndDo;
-
-	PostingDataTables = New Map;
-	PostingDataTables.Insert(Parameters.Object.RegisterRecords.T6020S_BatchKeysInfo,
-		New Structure("RecordSet, WriteInTransaction", BatchKeysInfo, Parameters.IsReposting));
-	Parameters.Insert("PostingDataTables", PostingDataTables);
-	CurrenciesServer.PreparePostingDataTables(Parameters, CurrencyTable, AddInfo);
-
-	CurrenciesServer.ExcludePostingDataTable(Parameters, Parameters.Object.RegisterRecords.T6020S_BatchKeysInfo.Metadata());
-	
-	BatchKeysInfo_DataTable = Parameters.PostingDataTables.Get(
-		Parameters.Object.RegisterRecords.T6020S_BatchKeysInfo).RecordSet;
-	BatchKeysInfo_DataTableGrouped = BatchKeysInfo_DataTable.CopyColumns();
-	If BatchKeysInfo_DataTable.Count() Then
-		BatchKeysInfo_DataTableGrouped = BatchKeysInfo_DataTable.Copy(
-			New Structure("CurrencyMovementType", CurrencyMovementType));
-		BatchKeysInfo_DataTableGrouped.GroupBy(
-			"Period, Direction, Company, Store, ItemKey, Currency, CurrencyMovementType, SerialLotNumber, SourceOfOrigin",
-			"Quantity, Amount, AmountTax");
-	EndIf;
-
-	Query = New Query;
-	Query.TempTablesManager = Parameters.TempTablesManager;
-	Query.Text =
-	"SELECT
-	|	*
-	|INTO BatchKeysInfo
-	|FROM
-	|	&T1 AS T1";
-	Query.SetParameter("T1", BatchKeysInfo_DataTableGrouped);
-	Query.Execute();
-
-	AccReg = Metadata.AccumulationRegisters;
-	Tables = New Structure;
-	Tables.Insert("RegCashInTransit", PostingServer.CreateTable(AccReg.CashInTransit));
+	Calculate_BatchKeysInfo(Ref, Parameters, AddInfo);
 
 	Query = New Query();
 	Query.Text = 
@@ -122,8 +32,9 @@ Function PostingGetDocumentDataTables(Ref, Cancel, PostingMode, Parameters, AddI
 	Query.SetParameter("Ref", Ref);
 	QueryResult = Query.Execute();
 	QueryTable = QueryResult.Unload();
-	Tables.RegCashInTransit = QueryTable;
-
+	
+	Tables = New Structure;
+	Tables.Insert("RegCashInTransit", QueryTable);
 	Return Tables;
 EndFunction
 
@@ -156,8 +67,11 @@ Function PostingGetPostingDataTables(Ref, Cancel, PostingMode, Parameters, AddIn
 	PostingDataTables = New Map;
 	
 	// CashInIransit
-	PostingDataTables.Insert(Parameters.Object.RegisterRecords.CashInTransit, 
-		New Structure("RecordType, RecordSet", AccumulationRecordType.Receipt, Parameters.DocumentDataTables.RegCashInTransit));
+	CashInIransitInfo = New Structure;
+	CashInIransitInfo.Insert("RecordType", AccumulationRecordType.Receipt);
+	CashInIransitInfo.Insert("RecordSet", Parameters.DocumentDataTables.RegCashInTransit);
+	CashInIransitInfo.Insert("Metadata", Metadata.AccumulationRegisters.CashInTransit);
+	PostingDataTables.Insert(Parameters.Object.RegisterRecords.CashInTransit, CashInIransitInfo);
 	
 	PostingServer.SetPostingDataTables(PostingDataTables, Parameters);
 	Return PostingDataTables;
@@ -166,6 +80,82 @@ EndFunction
 Procedure PostingCheckAfterWrite(Ref, Cancel, PostingMode, Parameters, AddInfo = Undefined) Export
 	CheckAfterWrite(Ref, Cancel, Parameters, AddInfo);
 EndProcedure
+
+Procedure Calculate_BatchKeysInfo(Ref, Parameters, AddInfo)
+	BatchKeysInfo = Parameters.TempTablesManager.Tables.Find("BatchKeysInfo").GetData().Unload();
+	CurrencyTable = Ref.Currencies.UnloadColumns();
+	CurrencyMovementType = Ref.Company.LandedCostCurrencyMovementType;
+	For Each Row In BatchKeysInfo Do
+		CurrenciesServer.AddRowToCurrencyTable(Ref.Date, CurrencyTable, Row.Key, Row.Currency, CurrencyMovementType);
+	EndDo;
+
+	PostingDataTables = New Map;
+	T6020S_BatchKeysInfo = Metadata.InformationRegisters.T6020S_BatchKeysInfo;
+	PostingDataTables.Insert(T6020S_BatchKeysInfo,
+		New Structure("RecordSet, WriteInTransaction, Metadata", BatchKeysInfo, Parameters.IsReposting, T6020S_BatchKeysInfo));
+	Parameters.Insert("PostingDataTables", PostingDataTables);
+	CurrenciesServer.PreparePostingDataTables(Parameters, CurrencyTable, AddInfo);
+	CurrenciesServer.ExcludePostingDataTable(Parameters, T6020S_BatchKeysInfo);
+	BatchKeysInfo_DataTable = Parameters.PostingDataTables.Get(T6020S_BatchKeysInfo).RecordSet;
+	
+	Query = New Query;
+	Query.TempTablesManager = Parameters.TempTablesManager;
+	Query.Text =
+	"DROP BatchKeysInfo
+	|;"
+	+
+	"SELECT
+	|	Period,
+	|	Direction,
+	|	Company,
+	|	Store,
+	|	ItemKey,
+	|	Currency,
+	|	CurrencyMovementType,
+	|	SerialLotNumber,
+	|	SourceOfOrigin,
+	|	Quantity AS Quantity,
+	|	Amount AS Amount,
+	|	AmountTax AS AmountTax
+	|INTO tmp_BatchKeysInfo
+	|FROM
+	|	&T1 AS T1
+	|;
+	|
+	|////////////////////////////////////////////////////////////////////////////////
+	|SELECT
+	|	Period,
+	|	Direction,
+	|	Company,
+	|	Store,
+	|	ItemKey,
+	|	Currency,
+	|	CurrencyMovementType,
+	|	SerialLotNumber,
+	|	SourceOfOrigin,
+	|	SUM(Quantity) AS Quantity,
+	|	SUM(Amount) AS Amount,
+	|	SUM(AmountTax) AS AmountTax
+	|INTO BatchKeysInfo
+	|FROM
+	|	tmp_BatchKeysInfo AS T1
+	|WHERE
+	|	T1.CurrencyMovementType = &CurrencyMovementType
+	|GROUP BY
+	|	Period,
+	|	Direction,
+	|	Company,
+	|	Store,
+	|	ItemKey,
+	|	Currency,
+	|	CurrencyMovementType,
+	|	SerialLotNumber,
+	|	SourceOfOrigin";
+	Query.SetParameter("T1", BatchKeysInfo_DataTable);
+	Query.SetParameter("CurrencyMovementType", CurrencyMovementType);
+	Query.Execute();
+EndProcedure
+
 
 #EndRegion
 
@@ -202,9 +192,16 @@ Procedure CheckAfterWrite(Ref, Cancel, Parameters, AddInfo = Undefined)
 
 	CheckAfterWrite_R4010B_R4011B(Ref, Cancel, Parameters, AddInfo);
 
-	If Not Cancel And Not AccReg.R4014B_SerialLotNumber.CheckBalance(Ref, LineNumberAndItemKeyFromItemList,
-		PostingServer.GetQueryTableByName("R4014B_SerialLotNumber", Parameters), PostingServer.GetQueryTableByName(
-		"Exists_R4014B_SerialLotNumber", Parameters), AccumulationRecordType.Receipt, Unposting, AddInfo) Then
+	If Not Cancel 
+		And Not AccReg.R4014B_SerialLotNumber.CheckBalance(
+				Ref,
+				LineNumberAndItemKeyFromItemList,
+				PostingServer.GetQueryTableByName("R4014B_SerialLotNumber", Parameters),
+				PostingServer.GetQueryTableByName("Exists_R4014B_SerialLotNumber", Parameters),
+				AccumulationRecordType.Receipt,
+				Unposting,
+				AddInfo
+			) Then
 		Cancel = True;
 	EndIf;
 EndProcedure
@@ -251,6 +248,7 @@ Function GetQueryTextsSecondaryTables()
 	QueryArray.Add(OtherCustomersTransactions());
 	QueryArray.Add(CashInTransit());
 	QueryArray.Add(FixedAssets());
+	QueryArray.Add(BatchKeysInfo());
 	QueryArray.Add(PostingServer.Exists_R4010B_ActualStocks());
 	QueryArray.Add(PostingServer.Exists_R4011B_FreeStocks());
 	QueryArray.Add(PostingServer.Exists_R4014B_SerialLotNumber());
@@ -698,6 +696,56 @@ Function FixedAssets()
 		|	Document.OpeningEntry.FixedAssets AS OpeningEntryFixedAssets
 		|WHERE
 		|	OpeningEntryFixedAssets.Ref = &Ref";
+EndFunction
+
+Function BatchKeysInfo()
+	Return
+		"SELECT
+		|	ReceiptFromConsignor.ItemKey,
+		|	ReceiptFromConsignor.Store,
+		|	ReceiptFromConsignor.Ref.Company AS Company,
+		|	SUM(ReceiptFromConsignor.Quantity) AS Quantity,
+		|	ReceiptFromConsignor.Ref.Date AS Period,
+		|	VALUE(Enum.BatchDirection.Receipt) AS Direction,
+		|	ReceiptFromConsignor.Key AS Key,
+		|	SUM(ReceiptFromConsignor.Amount) AS Amount,
+		|	ReceiptFromConsignor.Currency AS Currency,
+		|	Value(ChartOfCharacteristicTypes.CurrencyMovementType.EmptyRef) AS CurrencyMovementType,
+		|	SUM(ReceiptFromConsignor.AmountTax) AS AmountTax,
+		|	CASE
+		|		WHEN ReceiptFromConsignor.SerialLotNumber.BatchBalanceDetail
+		|			THEN ReceiptFromConsignor.SerialLotNumber
+		|		ELSE VALUE(Catalog.SerialLotNumbers.EmptyRef)
+		|	END AS SerialLotNumber,
+		|	CASE
+		|		WHEN ReceiptFromConsignor.SourceOfOrigin.BatchBalanceDetail
+		|			THEN ReceiptFromConsignor.SourceOfOrigin
+		|		ELSE VALUE(Catalog.SourceOfOrigins.EmptyRef)
+		|	END AS SourceOfOrigin
+		|INTO BatchKeysInfo
+		|FROM
+		|	Document.OpeningEntry.ReceiptFromConsignor AS ReceiptFromConsignor
+		|WHERE
+		|	ReceiptFromConsignor.Ref = &Ref
+		|GROUP BY
+		|	ReceiptFromConsignor.ItemKey,
+		|	ReceiptFromConsignor.Store,
+		|	ReceiptFromConsignor.Ref.Company,
+		|	ReceiptFromConsignor.Ref.Date,
+		|	VALUE(Enum.BatchDirection.Receipt),
+		|	ReceiptFromConsignor.Key,
+		|	ReceiptFromConsignor.Currency,
+		|	Value(ChartOfCharacteristicTypes.CurrencyMovementType.EmptyRef),
+		|	CASE
+		|		WHEN ReceiptFromConsignor.SerialLotNumber.BatchBalanceDetail
+		|			THEN ReceiptFromConsignor.SerialLotNumber
+		|		ELSE VALUE(Catalog.SerialLotNumbers.EmptyRef)
+		|	END,
+		|	CASE
+		|		WHEN ReceiptFromConsignor.SourceOfOrigin.BatchBalanceDetail
+		|			THEN ReceiptFromConsignor.SourceOfOrigin
+		|		ELSE VALUE(Catalog.SourceOfOrigins.EmptyRef)
+		|	END";
 EndFunction
 
 #EndRegion

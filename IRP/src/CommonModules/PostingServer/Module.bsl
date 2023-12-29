@@ -16,7 +16,7 @@ Procedure Post(DocObject, Cancel, PostingMode, AddInfo = Undefined) Export
 	CurrencyTable = CommonFunctionsClientServer.GetFromAddInfo(AddInfo, "CurrencyTable");	
 	CurrenciesServer.PreparePostingDataTables(Parameters, CurrencyTable, AddInfo);
 
-	RegisteredRecords = RegisterRecords(DocObject, Parameters.PostingDataTables, Parameters.Object.RegisterRecords);
+	RegisteredRecords = RegisterRecords(DocObject, Parameters.PostingDataTables);
 	
 	RegisteredRecordsArray = New Array;
 	For Each Record In RegisteredRecords Do
@@ -44,6 +44,7 @@ Function GetPostingParameters(DocObject, PostingMode, AddInfo = Undefined)
 	Parameters = New Structure();
 	Parameters.Insert("Cancel", Cancel);
 	Parameters.Insert("Object", DocObject);
+	Parameters.Insert("PostingByRef", DocObject.Ref = DocObject);
 	Parameters.Insert("IsReposting", False);
 	Parameters.Insert("PointInTime", DocObject.PointInTime());
 	Parameters.Insert("TempTablesManager", New TempTablesManager());
@@ -112,13 +113,7 @@ Function SetLock(LockDataSources)
 	Return DataLock;
 EndFunction
 
-Function RegisterRecords(DocObject, PostingDataTables, AllRegisterRecords)
-	For Each RecordSet In AllRegisterRecords Do
-		If PostingDataTables.Get(RecordSet) = Undefined Then
-			RecordSet.Write = True;
-		EndIf;
-	EndDo;
-
+Function RegisterRecords(DocObject, PostingDataTables)
 	RegisteredRecords = New Map();
 	For Each Row In PostingDataTables Do
 		If Not Row.Value.Property("RecordSet") Then
@@ -152,8 +147,11 @@ Function RegisterRecords(DocObject, PostingDataTables, AllRegisterRecords)
 		If Row.Value.Property("WriteInTransaction") And Row.Value.WriteInTransaction Then
 			WriteInTransaction = True;
 		EndIf;
-
-		RegisteredRecords.Insert(RecordSet.Metadata(), New Structure("RecordSet, WriteInTransaction", RecordSet, WriteInTransaction));
+		Data = New Structure;
+		Data.Insert("RecordSet", RecordSet);
+		Data.Insert("WriteInTransaction", WriteInTransaction);
+		Data.Insert("Metadata", RecordSet.Metadata());
+		RegisteredRecords.Insert(RecordSet.Metadata(), Data);
 	EndDo;
 	Return RegisteredRecords;
 EndFunction
@@ -1209,9 +1207,18 @@ EndProcedure
 Procedure SetPostingDataTables(PostingDataTables, Parameters, UseOldRegisters = False) Export
 	For Each Table In Parameters.DocumentDataTables Do
 		If UseOldRegisters Or UseRegister(Table.Key) Then
-			Settings = New Structure("RegisterName", Table.Key);
+			Settings = New Structure;
+			Settings.Insert("RegisterName", Table.Key);
 			Settings.Insert("RecordSet", Table.Value);
 			Settings.Insert("WriteInTransaction", True);
+			If Parameters.PostingByRef Then
+				TmpDoc = Documents[Parameters.Metadata.Name].CreateDocument();
+				TmpDoc.SetNewObjectRef(Parameters.Object);
+				RecSetData = TmpDoc.RegisterRecords[Table.Key];
+			Else
+				RecSetData = Parameters.Object.RegisterRecords[Table.Key];
+			EndIf;
+			Settings.Insert("Metadata", RecSetData.Metadata());
 			PostingDataTables.Insert(Parameters.Object.RegisterRecords[Table.Key], Settings);
 		EndIf;
 	EndDo;
@@ -1299,14 +1306,14 @@ Function CheckDocumentArray(DocumentArray, isJob = False) Export
 
 	
 	For Each Doc In DocumentArray Do
-		DocObject = Doc.GetObject();
+		DocObject = Doc;
 		Parameters = GetPostingParameters(DocObject, PostingMode, AddInfo);
 
 		// Multi currency integration
 		CurrencyTable = CommonFunctionsClientServer.GetFromAddInfo(AddInfo, "CurrencyTable");	
 		CurrenciesServer.PreparePostingDataTables(Parameters, CurrencyTable, AddInfo);
 	
-		RegisteredRecords = RegisterRecords(DocObject, Parameters.PostingDataTables, Parameters.Object.RegisterRecords);
+		RegisteredRecords = RegisterRecords(DocObject, Parameters.PostingDataTables);
 		
 		If RegisteredRecords.Count() > 0 Then
 			Result = New Structure;

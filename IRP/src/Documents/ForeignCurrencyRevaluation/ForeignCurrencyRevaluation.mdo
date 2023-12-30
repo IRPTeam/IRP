@@ -47,7 +47,6 @@
   <registerRecords>AccumulationRegister.R3016B_ChequeAndBonds</registerRecords>
   <registerRecords>AccumulationRegister.R6070T_OtherPeriodsExpenses</registerRecords>
   <registerRecords>AccumulationRegister.R6080T_OtherPeriodsRevenues</registerRecords>
-  <registerRecords>AccumulationRegister.CashInTransit</registerRecords>
   <registerRecords>AccumulationRegister.R5022T_Expenses</registerRecords>
   <registerRecords>AccumulationRegister.R5021T_Revenues</registerRecords>
   <registerRecords>AccumulationRegister.R5015B_OtherPartnersTransactions</registerRecords>

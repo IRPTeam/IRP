@@ -10520,17 +10520,6 @@
 		</right>
 	</object>
 	<object>
-		<name>AccumulationRegister.CashInTransit</name>
-		<right>
-			<name>Read</name>
-			<value>true</value>
-		</right>
-		<right>
-			<name>View</name>
-			<value>true</value>
-		</right>
-	</object>
-	<object>
 		<name>Document.RetailSalesReceipt</name>
 		<right>
 			<name>Read</name>

@@ -65,14 +65,6 @@ EndProcedure
 
 Function PostingGetPostingDataTables(Ref, Cancel, PostingMode, Parameters, AddInfo = Undefined) Export
 	PostingDataTables = New Map;
-	
-	// CashInIransit
-	CashInIransitInfo = New Structure;
-	CashInIransitInfo.Insert("RecordType", AccumulationRecordType.Receipt);
-	CashInIransitInfo.Insert("RecordSet", Parameters.DocumentDataTables.RegCashInTransit);
-	CashInIransitInfo.Insert("Metadata", Metadata.AccumulationRegisters.CashInTransit);
-	PostingDataTables.Insert(Parameters.Object.RegisterRecords.CashInTransit, CashInIransitInfo);
-	
 	PostingServer.SetPostingDataTables(PostingDataTables, Parameters);
 	Return PostingDataTables;
 EndFunction
@@ -88,15 +80,13 @@ Procedure Calculate_BatchKeysInfo(Ref, Parameters, AddInfo)
 	For Each Row In BatchKeysInfo Do
 		CurrenciesServer.AddRowToCurrencyTable(Ref.Date, CurrencyTable, Row.Key, Row.Currency, CurrencyMovementType);
 	EndDo;
-
-	PostingDataTables = New Map;
+	
 	T6020S_BatchKeysInfo = Metadata.InformationRegisters.T6020S_BatchKeysInfo;
-	PostingDataTables.Insert(T6020S_BatchKeysInfo,
-		New Structure("RecordSet, WriteInTransaction, Metadata", BatchKeysInfo, Parameters.IsReposting, T6020S_BatchKeysInfo));
-	Parameters.Insert("PostingDataTables", PostingDataTables);
+	Parameters.DocumentDataTables.Insert(T6020S_BatchKeysInfo.Name, BatchKeysInfo);
+	
 	CurrenciesServer.PreparePostingDataTables(Parameters, CurrencyTable, AddInfo);
 	CurrenciesServer.ExcludePostingDataTable(Parameters, T6020S_BatchKeysInfo);
-	BatchKeysInfo_DataTable = Parameters.PostingDataTables.Get(T6020S_BatchKeysInfo).RecordSet;
+	BatchKeysInfo_DataTable = Parameters.DocumentDataTables[T6020S_BatchKeysInfo.Name];
 	
 	Query = New Query;
 	Query.TempTablesManager = Parameters.TempTablesManager;
@@ -155,7 +145,6 @@ Procedure Calculate_BatchKeysInfo(Ref, Parameters, AddInfo)
 	Query.SetParameter("CurrencyMovementType", CurrencyMovementType);
 	Query.Execute();
 EndProcedure
-
 
 #EndRegion
 

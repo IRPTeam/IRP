@@ -11,8 +11,8 @@ EndFunction
 Function PostingGetDocumentDataTables(Ref, Cancel, PostingMode, Parameters, AddInfo = Undefined) Export
 	AccReg = Metadata.AccumulationRegisters;
 	Tables = New Structure;
-	Tables.Insert("CashInTransit", PostingServer.CreateTable(AccReg.CashInTransit));
-	Tables.Insert("CashInTransit_POS", PostingServer.CreateTable(AccReg.CashInTransit));
+	Tables.Insert("CashInTransit", CommonFunctionsServer.CreateTable(AccReg.CashInTransit));
+	Tables.Insert("CashInTransit_POS", CommonFunctionsServer.CreateTable(AccReg.CashInTransit));
 
 	QueryPaymentList = New Query;
 	QueryPaymentList.Text = GetQueryTextBankReceiptPaymentList();
@@ -216,24 +216,7 @@ EndProcedure
 
 Function PostingGetPostingDataTables(Ref, Cancel, PostingMode, Parameters, AddInfo = Undefined) Export
 	PostingDataTables = New Map;
-	
-	// CashInIransit
-	ArrayOfTables = New Array;
-	Table1 = Parameters.DocumentDataTables.CashInTransit.Copy();
-	Table1.Columns.Add("RecordType", New TypeDescription("AccumulationRecordType"));
-	Table1.FillValues(AccumulationRecordType.Expense, "RecordType");
-	ArrayOfTables.Add(Table1);
-
-	Table2 = Parameters.DocumentDataTables.CashInTransit_POS.Copy();
-	Table2.Columns.Add("RecordType", New TypeDescription("AccumulationRecordType"));
-	Table2.FillValues(AccumulationRecordType.Expense, "RecordType");
-	ArrayOfTables.Add(Table2);
-
-	PostingDataTables.Insert(Parameters.Object.RegisterRecords.CashInTransit, New Structure("RecordSet, WriteInTransaction", PostingServer.JoinTables(ArrayOfTables,
-		"RecordType, Period, Company, BasisDocument, FromAccount, ToAccount, Currency, Amount, Key"), Parameters.IsReposting));
-
 	PostingServer.SetPostingDataTables(PostingDataTables, Parameters);
-
 	Return PostingDataTables;
 EndFunction
 

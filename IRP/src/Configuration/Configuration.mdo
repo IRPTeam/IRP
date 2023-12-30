@@ -354,8 +354,8 @@
   <commonModules>CommonModule.CatCashAccountsServer</commonModules>
   <commonModules>CommonModule.CatCompaniesClient</commonModules>
   <commonModules>CommonModule.CatCompaniesServer</commonModules>
-  <commonModules>CommonModule.CatConfigurationMetadataServer</commonModules>
   <commonModules>CommonModule.CatExpenseAndRevenueTypesServer</commonModules>
+  <commonModules>CommonModule.CatConfigurationMetadataServer</commonModules>
   <commonModules>CommonModule.CatItemsServer</commonModules>
   <commonModules>CommonModule.CatPartnersServer</commonModules>
   <commonModules>CommonModule.CatRetailCustomersClient</commonModules>
@@ -1251,7 +1251,6 @@
   <informationRegisters>InformationRegister.T2012S_AdvancesCurrencyRevaluation</informationRegisters>
   <informationRegisters>InformationRegister.T9540S_EmployeeVacations</informationRegisters>
   <informationRegisters>InformationRegister.T9550S_EmployeeSickLeave</informationRegisters>
-  <accumulationRegisters>AccumulationRegister.CashInTransit</accumulationRegisters>
   <accumulationRegisters>AccumulationRegister.R1001T_Purchases</accumulationRegisters>
   <accumulationRegisters>AccumulationRegister.R1002T_PurchaseReturns</accumulationRegisters>
   <accumulationRegisters>AccumulationRegister.R1005T_PurchaseSpecialOffers</accumulationRegisters>

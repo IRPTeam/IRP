@@ -862,9 +862,6 @@
     <mdObject>InformationRegister.T9500S_AccrualAndDeductionValues</mdObject>
   </content>
   <content>
-    <mdObject>AccumulationRegister.CashInTransit</mdObject>
-  </content>
-  <content>
     <mdObject>Document.RetailSalesReceipt</mdObject>
   </content>
   <content>

@@ -12,7 +12,7 @@ Function PostingGetDocumentDataTables(Ref, Cancel, PostingMode, Parameters, AddI
 
 	AccReg = Metadata.AccumulationRegisters;
 	Tables = New Structure;
-	Tables.Insert("CashInTransit", PostingServer.CreateTable(AccReg.CashInTransit));
+	Tables.Insert("CashInTransit", CommonFunctionsServer.CreateTable(AccReg.CashInTransit));
 
 	QueryPaymentList = New Query;
 	QueryPaymentList.Text = GetQueryTextBankPaymentPaymentList();
@@ -187,16 +187,7 @@ EndProcedure
 
 Function PostingGetPostingDataTables(Ref, Cancel, PostingMode, Parameters, AddInfo = Undefined) Export
 	PostingDataTables = New Map;
-	
-	// CashInIransit
-	CashInIransitInfo = New Structure;
-	CashInIransitInfo.Insert("RecordType", AccumulationRecordType.Receipt);
-	CashInIransitInfo.Insert("RecordSet", Parameters.DocumentDataTables.RegCashInTransit);
-	CashInIransitInfo.Insert("Metadata", Metadata.AccumulationRegisters.CashInTransit);
-	PostingDataTables.Insert(Parameters.Object.RegisterRecords.CashInTransit, CashInIransitInfo);
-	
 	PostingServer.SetPostingDataTables(PostingDataTables, Parameters);
-
 	Return PostingDataTables;
 EndFunction
 

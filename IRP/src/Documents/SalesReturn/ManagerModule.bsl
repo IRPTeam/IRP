@@ -139,17 +139,6 @@ Procedure Calculate_BatchKeysInfo(Ref, Parameters, AddInfo)
 	|
 	|////////////////////////////////////////////////////////////////////////////////
 	|SELECT
-	|	SalesReturn.Ref AS Document,
-	|	SalesReturn.Company AS Company,
-	|	SalesReturn.Ref.Date AS Period
-	|FROM
-	|	Document.SalesReturn AS SalesReturn
-	|WHERE
-	|	SalesReturn.Ref = &Ref
-	|;
-	|
-	|////////////////////////////////////////////////////////////////////////////////
-	|SELECT
 	|	tmpItemList.ItemKey,
 	|	tmpItemList.Store,
 	|	tmpItemList.Company,
@@ -189,58 +178,44 @@ Procedure Calculate_BatchKeysInfo(Ref, Parameters, AddInfo)
 	|	ISNULL(tmpSourceOfOrigins.SourceOfOrigin, VALUE(Catalog.SourceOfOrigins.EmptyRef)) AS SourceOfOrigin,
 	|	ISNULL(tmpSourceOfOrigins.SerialLotNumber, VALUE(Catalog.SerialLotNumbers.EmptyRef)) AS SerialLotNumber,
 	|	ISNULL(tmpSourceOfOrigins.SourceOfOriginStock, VALUE(Catalog.SourceOfOrigins.EmptyRef)) AS SourceOfOriginStock,
-	|	ISNULL(tmpSourceOfOrigins.SerialLotNumberStock, VALUE(Catalog.SerialLotNumbers.EmptyRef)) AS SerialLotNumberStock
+	|	ISNULL(tmpSourceOfOrigins.SerialLotNumberStock, VALUE(Catalog.SerialLotNumbers.EmptyRef)) AS SerialLotNumberStock,
+	|	tmpItemList.SalesInvoiceIsFilled
+	|	OR tmpItemList.Company = tmpItemList.SalesInvoice_Company AS CreateBatch
+	|INTO BatchKeysInfo
 	|FROM
 	|	tmpItemList AS tmpItemList
 	|		LEFT JOIN tmpSourceOfOrigins AS tmpSourceOfOrigins
-	|		ON tmpItemList.Key = tmpSourceOfOrigins.Key";
-
-	Query.SetParameter("Ref", Ref);
-	QueryResults = Query.ExecuteBatch();
-
-	BatchesInfo   = QueryResults[2].Unload();
-	BatchKeysInfo = QueryResults[3].Unload();
-
-	DontCreateBatch = True;
-	For Each BatchKey In BatchKeysInfo Do
-		If Not BatchKey.SalesInvoiceIsFilled Then
-			DontCreateBatch = False; // need create batch, invoice is empty
-			Break;
-		EndIf;
-		If BatchKey.Company <> BatchKey.SalesInvoice_Company Then
-			DontCreateBatch = False; // need create batch, company in invoice and in return not match
-			Break;
-		EndIf;
-	EndDo;
-	If DontCreateBatch Then
-		BatchesInfo.Clear();
-	EndIf;
-	
-	// AmountTax to T6020S_BatchKeysInfo
-	Query = New Query;
-	Query.Text =
-	"SELECT
-	|	BatchKeysInfo.Key,
-	|	BatchKeysInfo.TotalQuantity,
-	|	BatchKeysInfo.Quantity,
-	|	*
-	|INTO BatchKeysInfo
-	|FROM
-	|	&BatchKeysInfo AS BatchKeysInfo
+	|		ON tmpItemList.Key = tmpSourceOfOrigins.Key
 	|;
 	|
 	|////////////////////////////////////////////////////////////////////////////////
 	|SELECT
 	|	BatchKeysInfo.Key,
-	|	CASE WHEN NOT BatchKeysInfo.SalesInvoiceIsFilled THEN BatchKeysInfo.LandedCostTax ELSE 0 END AS AmountTax,
+	|	CASE
+	|		WHEN NOT BatchKeysInfo.SalesInvoiceIsFilled
+	|			THEN BatchKeysInfo.LandedCostTax
+	|		ELSE 0
+	|	END AS AmountTax,
 	|	BatchKeysInfo.*
 	|FROM
-	|	BatchKeysInfo AS BatchKeysInfo";
+	|	BatchKeysInfo AS BatchKeysInfo
+	|;
+	|
+	|////////////////////////////////////////////////////////////////////////////////
+	|SELECT
+	|	SalesReturn.Ref AS Document,
+	|	SalesReturn.Company AS Company,
+	|	SalesReturn.Ref.Date AS Period
+	|FROM
+	|	Document.SalesReturn AS SalesReturn
+	|WHERE
+	|	SalesReturn.Ref = &Ref";
 	Query.SetParameter("Ref", Ref);
 	Query.SetParameter("Period", Ref.Date);
-	Query.SetParameter("BatchKeysInfo", BatchKeysInfo);
-	QueryResult = Query.Execute();
-	BatchKeysInfo = QueryResult.Unload();
+	
+	QueryResult = Query.ExecuteBatch();
+	BatchesInfo = QueryResult[4].Unload();
+	BatchKeysInfo = QueryResult[3].Unload();
 
 	CurrencyTable = Ref.Currencies.UnloadColumns();
 	CurrencyMovementType = Ref.Company.LandedCostCurrencyMovementType;
@@ -262,6 +237,18 @@ Procedure Calculate_BatchKeysInfo(Ref, Parameters, AddInfo)
 	BatchKeysInfoSettings.CurrencyMovementType = CurrencyMovementType;
 	
 	PostingServer.SetBatchKeyInfoTable(Parameters, BatchKeysInfoSettings);
+	
+	Query = New Query;
+	Query.TempTablesManager = Parameters.TempTablesManager;
+	Query.Text =
+	"SELECT
+	|	BatchesInfo.*
+	|INTO BatchesInfo
+	|FROM
+	|	&BatchesInfo AS BatchesInfo";
+	
+	Query.SetParameter("BatchesInfo", BatchesInfo);
+ 	Query.Execute();
 EndProcedure
 
 #EndRegion

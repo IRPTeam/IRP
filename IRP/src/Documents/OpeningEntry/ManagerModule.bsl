@@ -74,7 +74,58 @@ Procedure PostingCheckAfterWrite(Ref, Cancel, PostingMode, Parameters, AddInfo =
 EndProcedure
 
 Procedure Calculate_BatchKeysInfo(Ref, Parameters, AddInfo)
-	BatchKeysInfo = Parameters.TempTablesManager.Tables.Find("BatchKeysInfo").GetData().Unload();
+	
+	Query = New Query;
+	Query.Text =
+	"SELECT
+	|	ReceiptFromConsignor.ItemKey,
+	|	ReceiptFromConsignor.Store,
+	|	ReceiptFromConsignor.Ref.Company AS Company,
+	|	SUM(ReceiptFromConsignor.Quantity) AS Quantity,
+	|	ReceiptFromConsignor.Ref.Date AS Period,
+	|	VALUE(Enum.BatchDirection.Receipt) AS Direction,
+	|	ReceiptFromConsignor.Key AS Key,
+	|	SUM(ReceiptFromConsignor.Amount) AS Amount,
+	|	ReceiptFromConsignor.Currency AS Currency,
+	|	Value(ChartOfCharacteristicTypes.CurrencyMovementType.EmptyRef) AS CurrencyMovementType,
+	|	SUM(ReceiptFromConsignor.AmountTax) AS AmountTax,
+	|	CASE
+	|		WHEN ReceiptFromConsignor.SerialLotNumber.BatchBalanceDetail
+	|			THEN ReceiptFromConsignor.SerialLotNumber
+	|		ELSE VALUE(Catalog.SerialLotNumbers.EmptyRef)
+	|	END AS SerialLotNumber,
+	|	CASE
+	|		WHEN ReceiptFromConsignor.SourceOfOrigin.BatchBalanceDetail
+	|			THEN ReceiptFromConsignor.SourceOfOrigin
+	|		ELSE VALUE(Catalog.SourceOfOrigins.EmptyRef)
+	|	END AS SourceOfOrigin
+	|FROM
+	|	Document.OpeningEntry.ReceiptFromConsignor AS ReceiptFromConsignor
+	|WHERE
+	|	ReceiptFromConsignor.Ref = &Ref
+	|GROUP BY
+	|	ReceiptFromConsignor.ItemKey,
+	|	ReceiptFromConsignor.Store,
+	|	ReceiptFromConsignor.Ref.Company,
+	|	ReceiptFromConsignor.Ref.Date,
+	|	VALUE(Enum.BatchDirection.Receipt),
+	|	ReceiptFromConsignor.Key,
+	|	ReceiptFromConsignor.Currency,
+	|	Value(ChartOfCharacteristicTypes.CurrencyMovementType.EmptyRef),
+	|	CASE
+	|		WHEN ReceiptFromConsignor.SerialLotNumber.BatchBalanceDetail
+	|			THEN ReceiptFromConsignor.SerialLotNumber
+	|		ELSE VALUE(Catalog.SerialLotNumbers.EmptyRef)
+	|	END,
+	|	CASE
+	|		WHEN ReceiptFromConsignor.SourceOfOrigin.BatchBalanceDetail
+	|			THEN ReceiptFromConsignor.SourceOfOrigin
+	|		ELSE VALUE(Catalog.SourceOfOrigins.EmptyRef)
+	|	END";
+	Query.SetParameter("Ref", Ref);
+
+	QueryResult = Query.Execute();
+	BatchKeysInfo = QueryResult.Unload();
 	CurrencyTable = Ref.Currencies.UnloadColumns();
 	CurrencyMovementType = Ref.Company.LandedCostCurrencyMovementType;
 	For Each Row In BatchKeysInfo Do
@@ -188,7 +239,6 @@ Function GetQueryTextsSecondaryTables()
 	QueryArray.Add(OtherCustomersTransactions());
 	QueryArray.Add(CashInTransit());
 	QueryArray.Add(FixedAssets());
-	QueryArray.Add(BatchKeysInfo());
 	QueryArray.Add(PostingServer.Exists_R4010B_ActualStocks());
 	QueryArray.Add(PostingServer.Exists_R4011B_FreeStocks());
 	QueryArray.Add(PostingServer.Exists_R4014B_SerialLotNumber());
@@ -636,56 +686,6 @@ Function FixedAssets()
 		|	Document.OpeningEntry.FixedAssets AS OpeningEntryFixedAssets
 		|WHERE
 		|	OpeningEntryFixedAssets.Ref = &Ref";
-EndFunction
-
-Function BatchKeysInfo()
-	Return
-		"SELECT
-		|	ReceiptFromConsignor.ItemKey,
-		|	ReceiptFromConsignor.Store,
-		|	ReceiptFromConsignor.Ref.Company AS Company,
-		|	SUM(ReceiptFromConsignor.Quantity) AS Quantity,
-		|	ReceiptFromConsignor.Ref.Date AS Period,
-		|	VALUE(Enum.BatchDirection.Receipt) AS Direction,
-		|	ReceiptFromConsignor.Key AS Key,
-		|	SUM(ReceiptFromConsignor.Amount) AS Amount,
-		|	ReceiptFromConsignor.Currency AS Currency,
-		|	Value(ChartOfCharacteristicTypes.CurrencyMovementType.EmptyRef) AS CurrencyMovementType,
-		|	SUM(ReceiptFromConsignor.AmountTax) AS AmountTax,
-		|	CASE
-		|		WHEN ReceiptFromConsignor.SerialLotNumber.BatchBalanceDetail
-		|			THEN ReceiptFromConsignor.SerialLotNumber
-		|		ELSE VALUE(Catalog.SerialLotNumbers.EmptyRef)
-		|	END AS SerialLotNumber,
-		|	CASE
-		|		WHEN ReceiptFromConsignor.SourceOfOrigin.BatchBalanceDetail
-		|			THEN ReceiptFromConsignor.SourceOfOrigin
-		|		ELSE VALUE(Catalog.SourceOfOrigins.EmptyRef)
-		|	END AS SourceOfOrigin
-		|INTO BatchKeysInfo
-		|FROM
-		|	Document.OpeningEntry.ReceiptFromConsignor AS ReceiptFromConsignor
-		|WHERE
-		|	ReceiptFromConsignor.Ref = &Ref
-		|GROUP BY
-		|	ReceiptFromConsignor.ItemKey,
-		|	ReceiptFromConsignor.Store,
-		|	ReceiptFromConsignor.Ref.Company,
-		|	ReceiptFromConsignor.Ref.Date,
-		|	VALUE(Enum.BatchDirection.Receipt),
-		|	ReceiptFromConsignor.Key,
-		|	ReceiptFromConsignor.Currency,
-		|	Value(ChartOfCharacteristicTypes.CurrencyMovementType.EmptyRef),
-		|	CASE
-		|		WHEN ReceiptFromConsignor.SerialLotNumber.BatchBalanceDetail
-		|			THEN ReceiptFromConsignor.SerialLotNumber
-		|		ELSE VALUE(Catalog.SerialLotNumbers.EmptyRef)
-		|	END,
-		|	CASE
-		|		WHEN ReceiptFromConsignor.SourceOfOrigin.BatchBalanceDetail
-		|			THEN ReceiptFromConsignor.SourceOfOrigin
-		|		ELSE VALUE(Catalog.SourceOfOrigins.EmptyRef)
-		|	END";
 EndFunction
 
 #EndRegion
@@ -1197,8 +1197,7 @@ Function T6010S_BatchesInfo()
 EndFunction
 
 Function T6020S_BatchKeysInfo()
-	Return 
-		"SELECT
+	Return "SELECT
 		|	ItemList.Period,
 		|	ItemList.Company,
 		|	ItemList.Store,
@@ -1385,6 +1384,7 @@ Function T6020S_BatchKeysInfo()
 		|	tmp_T6020S_BatchKeysInfo AS Table
 		|WHERE
 		|	Table.Quantity > 0"
+
 EndFunction
 
 Function R4050B_StockInventory()

@@ -63,21 +63,9 @@ Procedure Calculate_BatchKeysInfo(Ref, Parameters, AddInfo)
 	|	Document.PurchaseInvoice.RowIDInfo AS RowIDInfo
 	|WHERE
 	|	RowIDInfo.Ref = &Ref
-	|
 	|GROUP BY
 	|	RowIDInfo.Ref,
 	|	RowIDInfo.Key
-	|;
-	|
-	|////////////////////////////////////////////////////////////////////////////////
-	|SELECT
-	|	PurchaseInvoice.Ref AS Document,
-	|	PurchaseInvoice.Company AS Company,
-	|	PurchaseInvoice.Ref.Date AS Period
-	|FROM
-	|	Document.PurchaseInvoice AS PurchaseInvoice
-	|WHERE
-	|	PurchaseInvoice.Ref = &Ref
 	|;
 	|
 	|////////////////////////////////////////////////////////////////////////////////
@@ -99,7 +87,6 @@ Procedure Calculate_BatchKeysInfo(Ref, Parameters, AddInfo)
 	|	Document.PurchaseInvoice.SourceOfOrigins AS SourceOfOrigins
 	|WHERE
 	|	SourceOfOrigins.Ref = &Ref
-	|
 	|GROUP BY
 	|	SourceOfOrigins.Key,
 	|	CASE
@@ -132,12 +119,11 @@ Procedure Calculate_BatchKeysInfo(Ref, Parameters, AddInfo)
 	|	Document.PurchaseInvoice.ItemList AS ItemList
 	|		INNER JOIN tmpRowIDInfo AS RowIDInfo
 	|		ON ItemList.Key = RowIDInfo.Key
-	|			AND (RowIDInfo.Ref = &Ref)
+	|		AND RowIDInfo.Ref = &Ref
 	|WHERE
 	|	ItemList.Ref = &Ref
 	|	AND ItemList.ItemKey.Item.ItemType.Type = VALUE(Enum.ItemTypes.Product)
 	|	AND NOT ItemList.IsAdditionalItemCost
-	|
 	|GROUP BY
 	|	ItemList.ItemKey,
 	|	ItemList.Store,
@@ -146,7 +132,8 @@ Procedure Calculate_BatchKeysInfo(Ref, Parameters, AddInfo)
 	|	ItemList.Key,
 	|	ItemList.Ref.Currency,
 	|	ItemList.IsAdditionalItemCost,
-	|	RowIDInfo.RowID
+	|	RowIDInfo.RowID,
+	|	VALUE(Enum.BatchDirection.Receipt)
 	|;
 	|
 	|////////////////////////////////////////////////////////////////////////////////
@@ -171,33 +158,24 @@ Procedure Calculate_BatchKeysInfo(Ref, Parameters, AddInfo)
 	|	CASE
 	|		WHEN tmpItemList.Quantity <> 0
 	|			THEN CASE
-	|					WHEN ISNULL(tmpSourceOfOrigins.Quantity, 0) <> 0
-	|						THEN tmpItemList.Amount / tmpItemList.Quantity * ISNULL(tmpSourceOfOrigins.Quantity, 0)
-	|					ELSE tmpItemList.Amount
-	|				END
+	|				WHEN ISNULL(tmpSourceOfOrigins.Quantity, 0) <> 0
+	|					THEN tmpItemList.Amount / tmpItemList.Quantity * ISNULL(tmpSourceOfOrigins.Quantity, 0)
+	|				ELSE tmpItemList.Amount
+	|			END
 	|		ELSE 0
 	|	END AS Amount,
 	|	ISNULL(tmpSourceOfOrigins.SourceOfOrigin, VALUE(Catalog.SourceOfOrigins.EmptyRef)) AS SourceOfOrigin,
-	|	ISNULL(tmpSourceOfOrigins.SerialLotNumber, VALUE(Catalog.SerialLotNumbers.EmptyRef)) AS SerialLotNumber
+	|	ISNULL(tmpSourceOfOrigins.SerialLotNumber, VALUE(Catalog.SerialLotNumbers.EmptyRef)) AS SerialLotNumber,
+	|	TRUE AS CreateBatch
+	|INTO BatchKeysInfo
 	|FROM
 	|	tmpItemList AS tmpItemList
 	|		LEFT JOIN tmpSourceOfOrigins AS tmpSourceOfOrigins
-	|		ON tmpItemList.Key = tmpSourceOfOrigins.Key";
-	Query.SetParameter("Ref", Ref);
-
-	QueryResults = Query.ExecuteBatch();
-
-	BatchesInfo   = QueryResults[1].Unload();
-	BatchKeysInfo = QueryResults[4].Unload();
-
-	If Not BatchKeysInfo.Count() Then
-		BatchesInfo.Clear();
-	EndIf;
-	
-	// AmountTax to T6020S_BatchKeysInfo
-	Query = New Query;	
-	Query.Text =
-	"SELECT
+	|		ON tmpItemList.Key = tmpSourceOfOrigins.Key
+	|;
+	|
+	|////////////////////////////////////////////////////////////////////////////////
+	|SELECT
 	|	Taxes.Key,
 	|	Taxes.Ref.Company AS Company,
 	|	&Vat AS Tax,
@@ -235,17 +213,6 @@ Procedure Calculate_BatchKeysInfo(Ref, Parameters, AddInfo)
 	|////////////////////////////////////////////////////////////////////////////////
 	|SELECT
 	|	BatchKeysInfo.Key,
-	|	BatchKeysInfo.TotalQuantity,
-	|	BatchKeysInfo.Quantity,
-	|	*
-	|INTO BatchKeysInfo
-	|FROM
-	|	&BatchKeysInfo AS BatchKeysInfo
-	|;
-	|
-	|////////////////////////////////////////////////////////////////////////////////
-	|SELECT
-	|	BatchKeysInfo.Key,
 	|	case
 	|		when BatchKeysInfo.TotalQuantity <> 0
 	|			then (isnull(TaxesAmounts.AmountTax, 0) / BatchKeysInfo.TotalQuantity) * BatchKeysInfo.Quantity
@@ -255,14 +222,31 @@ Procedure Calculate_BatchKeysInfo(Ref, Parameters, AddInfo)
 	|FROM
 	|	BatchKeysInfo AS BatchKeysInfo
 	|		LEFT JOIN TaxesAmounts AS TaxesAmounts
-	|		ON BatchKeysInfo.Key = TaxesAmounts.Key";
+	|		ON BatchKeysInfo.Key = TaxesAmounts.Key
+	|;
+	|
+	|////////////////////////////////////////////////////////////////////////////////
+	|SELECT
+	|	PurchaseInvoice.Ref AS Document,
+	|	PurchaseInvoice.Company AS Company,
+	|	PurchaseInvoice.Ref.Date AS Period
+	|FROM
+	|	Document.PurchaseInvoice AS PurchaseInvoice
+	|WHERE
+	|	PurchaseInvoice.Ref = &Ref
+	|	AND TRUE IN
+	|		(SELECT
+	|			CreateBatch
+	|		FROM
+	|			BatchKeysInfo)";
 	
 	Query.SetParameter("Ref", Ref);
 	Query.SetParameter("Period", Ref.Date);
-	Query.SetParameter("BatchKeysInfo", BatchKeysInfo);
 	Query.SetParameter("Vat", TaxesServer.GetVatRef());
-	QueryResult = Query.Execute();
-	BatchKeysInfo = QueryResult.Unload();
+
+	QueryResults = Query.ExecuteBatch();
+	BatchKeysInfo = QueryResults[6].Unload();
+	BatchesInfo   = QueryResults[7].Unload();
 
 	CurrencyTable = Ref.Currencies.UnloadColumns();
 	CurrencyMovementType = Ref.Company.LandedCostCurrencyMovementType;
@@ -295,6 +279,18 @@ Procedure Calculate_BatchKeysInfo(Ref, Parameters, AddInfo)
 	BatchKeysInfoSettings.CurrencyMovementType = CurrencyMovementType;
 	
 	PostingServer.SetBatchKeyInfoTable(Parameters, BatchKeysInfoSettings);
+	
+	Query = New Query;
+	Query.TempTablesManager = Parameters.TempTablesManager;
+	Query.Text =
+	"SELECT
+	|	BatchesInfo.*
+	|INTO BatchesInfo
+	|FROM
+	|	&BatchesInfo AS BatchesInfo";
+	
+	Query.SetParameter("BatchesInfo", BatchesInfo);
+ 	Query.Execute();
 EndProcedure
 
 #EndRegion

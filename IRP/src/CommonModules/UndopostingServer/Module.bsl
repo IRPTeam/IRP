@@ -1,3 +1,9 @@
+// Undopost.
+// 
+// Parameters:
+//  DocObject  - DocumentObjectDocumentName - Doc object
+//  Cancel - Boolean - Cancel
+//  AddInfo - Undefined - Add info
 Procedure Undopost(DocObject, Cancel, AddInfo = Undefined) Export
 	If Cancel Then
 		Return;
@@ -5,9 +11,9 @@ Procedure Undopost(DocObject, Cancel, AddInfo = Undefined) Export
 	
 	For Each RecordSet In DocObject.RegisterRecords Do
 		TableForLoad = New ValueTable();
-		PostingServer.WriteAdvances(DocObject, RecordSet, TableForLoad);
+		PostingServer.WriteAdvances(DocObject, RecordSet.Metadata(), TableForLoad);
 		
-		If TypeOf(RecordSet) = Type("InformationRegisterRecordSet.T6020S_BatchKeysInfo") Then
+		If RecordSet.Metadata() = Metadata.InformationRegisters.T6020S_BatchKeysInfo Then
 			InformationRegisters.T6030S_BatchRelevance.BatchRelevance_SetBound(DocObject,
 				CommonFunctionsServer.CreateTable(Metadata.InformationRegisters.T6020S_BatchKeysInfo));
 		EndIf;

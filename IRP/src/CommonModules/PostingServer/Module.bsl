@@ -184,17 +184,17 @@ Function RegisterRecords(Parameters)
 			Or Row.Value.Metadata = AccumulationRegisters.R6060T_CostOfGoodsSold Then
 				Continue; //Never rewrite
 		EndIf;
-		
+
 		// MD5
-		If RecordSetIsEqual(Parameters.Object, RecordSet, TableForLoad) Then
+		If RecordSetIsEqual(RecordSet, TableForLoad) Then
 			Continue;
 		EndIf;
 			
-		If Not Parameters.PostingByRef Then
-			WriteAdvances(Parameters.Object, RecordSet, TableForLoad);
+		//If Not Parameters.PostingByRef Then
+			WriteAdvances(Parameters.Object, Row.Value.Metadata, TableForLoad);
 			
-			UpdateCosts(Parameters.Object, RecordSet, TableForLoad, RegisteredRecords);
-		EndIf;
+			UpdateCosts(Parameters.Object, Row.Value.Metadata, TableForLoad, RegisteredRecords);
+		//EndIf;
 		// Set write
 		WriteInTransaction = False;
 		If Row.Value.Property("WriteInTransaction") And Row.Value.WriteInTransaction Then
@@ -209,37 +209,37 @@ Function RegisterRecords(Parameters)
 	Return RegisteredRecords;
 EndFunction
 
-Function RecordSetIsEqual(DocObject, RecordSet, TableForLoad)
+Function RecordSetIsEqual(RecordSet, TableForLoad)
 	RecordSet.Read();
 	TableOldRecords = RecordSet.Unload();
 
 	RecordSet.Load(TableForLoad);
 	
 	Result = CommonFunctionsServer.TablesIsEqual(RecordSet.Unload(), TableOldRecords, "Recorder,LineNumber,PointInTime,UniqueID");
+	
 	Return Result;
 EndFunction
 
 #EndRegion
 
-Procedure WriteAdvances(DocObject, RecordSet, TableForLoad) Export
-	AccReg = Metadata.AccumulationRegisters;
-	If TypeOf(RecordSet) = Type("AccumulationRegisterRecordSet.R1020B_AdvancesToVendors") Then
-		AdvancesRelevanceServer.SetBound_Advances(DocObject, TableForLoad, AccReg.R1020B_AdvancesToVendors);
-	ElsIf TypeOf(RecordSet) = Type("AccumulationRegisterRecordSet.R2020B_AdvancesFromCustomers") Then
-		AdvancesRelevanceServer.SetBound_Advances(DocObject, TableForLoad, AccReg.R2020B_AdvancesFromCustomers);
-	ElsIf TypeOf(RecordSet) = Type("AccumulationRegisterRecordSet.R1021B_VendorsTransactions") Then
-		AdvancesRelevanceServer.SetBound_Transactions(DocObject, TableForLoad, AccReg.R1021B_VendorsTransactions);
-	ElsIf TypeOf(RecordSet) = Type("AccumulationRegisterRecordSet.R2021B_CustomersTransactions") Then
-		AdvancesRelevanceServer.SetBound_Transactions(DocObject, TableForLoad, AccReg.R2021B_CustomersTransactions);
-	ElsIf TypeOf(RecordSet) = Type("AccumulationRegisterRecordSet.R5012B_VendorsAging") Then
-		AdvancesRelevanceServer.SetBound_Aging(DocObject, TableForLoad, AccReg.R5012B_VendorsAging);
-	ElsIf TypeOf(RecordSet) = Type("AccumulationRegisterRecordSet.R5011B_CustomersAging") Then
-		AdvancesRelevanceServer.SetBound_Aging(DocObject, TableForLoad, AccReg.R5011B_CustomersAging);
+Procedure WriteAdvances(DocObject, RecordMeta, TableForLoad) Export
+	If RecordMeta = Metadata.AccumulationRegisters.R1020B_AdvancesToVendors Then
+		AdvancesRelevanceServer.SetBound_Advances(DocObject, TableForLoad, Metadata.AccumulationRegisters.R1020B_AdvancesToVendors);
+	ElsIf RecordMeta = Metadata.AccumulationRegisters.R2020B_AdvancesFromCustomers Then
+		AdvancesRelevanceServer.SetBound_Advances(DocObject, TableForLoad, Metadata.AccumulationRegisters.R2020B_AdvancesFromCustomers);
+	ElsIf RecordMeta = Metadata.AccumulationRegisters.R1021B_VendorsTransactions Then
+		AdvancesRelevanceServer.SetBound_Transactions(DocObject, TableForLoad, Metadata.AccumulationRegisters.R1021B_VendorsTransactions);
+	ElsIf RecordMeta = Metadata.AccumulationRegisters.R2021B_CustomersTransactions Then
+		AdvancesRelevanceServer.SetBound_Transactions(DocObject, TableForLoad, Metadata.AccumulationRegisters.R2021B_CustomersTransactions);
+	ElsIf RecordMeta = Metadata.AccumulationRegisters.R5012B_VendorsAging Then
+		AdvancesRelevanceServer.SetBound_Aging(DocObject, TableForLoad, Metadata.AccumulationRegisters.R5012B_VendorsAging);
+	ElsIf RecordMeta = Metadata.AccumulationRegisters.R5011B_CustomersAging Then
+		AdvancesRelevanceServer.SetBound_Aging(DocObject, TableForLoad, Metadata.AccumulationRegisters.R5011B_CustomersAging);
 	EndIf;
 EndProcedure
 
-Procedure UpdateCosts(DocObject, RecordSet, TableForLoad, RegisteredRecords)
-	If TypeOf(RecordSet) = Type("InformationRegisterRecordSet.T6020S_BatchKeysInfo") Then
+Procedure UpdateCosts(DocObject, RecordMeta, TableForLoad, RegisteredRecords)
+	If RecordMeta = Metadata.InformationRegisters.T6020S_BatchKeysInfo Then
 		
 		R6020B_BatchBalance_RecordSet = AccumulationRegisters.R6020B_BatchBalance.CreateRecordSet();
 		R6020B_BatchBalance_RecordSet.Filter.Recorder.Set(DocObject.Ref);
@@ -1231,40 +1231,40 @@ EndFunction
 //  BatchKeysInfoSettings - See GetBatchKeysInfoSettings
 Procedure SetBatchKeyInfoTable(Parameters, BatchKeysInfoSettings) Export
 	
+	If BatchKeysInfoSettings.DataTable.Columns.Find("CurrencyMovementType") = Undefined Then
+		BatchKeysInfoSettings.DataTable.Columns.Add("CurrencyMovementType", New TypeDescription("ChartOfCharacteristicTypesRef.CurrencyMovementType"));
+	EndIf;
+	
 	TotalsArray = New Array;
-	For Each Row In StrSplit(BatchKeysInfoSettings.Totals, ",") Do
+	For Each Row In StrSplit(BatchKeysInfoSettings.Totals, ", ", False) Do
 		TotalsArray.Add("SUM(" + Row + ") AS " + Row);
 	EndDo;
 	
 	Query = New Query;
 	Query.TempTablesManager = Parameters.TempTablesManager;
 	Query.Text =
-	"DROP BatchKeysInfo
-	|;"
-	+
 	"SELECT
-	|	*
+	|	DataTable.*
 	|INTO tmp_BatchKeysInfo
 	|FROM
-	|	&T1 AS T1
+	|	&DataTable AS DataTable
 	|;
 	|
-	|////////////////////////////////////////////////////////////////////////////////
 	|SELECT
 	|	%1 %2 %3
 	|INTO BatchKeysInfo
 	|FROM
-	|	tmp_BatchKeysInfo AS T1
+	|	tmp_BatchKeysInfo
 	|WHERE
-	|	T1.CurrencyMovementType = &CurrencyMovementType
+	|	CurrencyMovementType = &CurrencyMovementType
 	|GROUP BY
 	|	%1";
 	
 	Query.Text = StrTemplate(Query.Text, BatchKeysInfoSettings.Dimensions, ?(TotalsArray.Count() > 0, ",", ""),StrConcat(TotalsArray, ", "));
 	
-	Query.SetParameter("T1", BatchKeysInfoSettings.DataTable);
+	Query.SetParameter("DataTable", BatchKeysInfoSettings.DataTable);
 	Query.SetParameter("CurrencyMovementType", BatchKeysInfoSettings.CurrencyMovementType);
-	Query.Execute();
+ 	Query.Execute();
 EndProcedure
 
 #EndRegion

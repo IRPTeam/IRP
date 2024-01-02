@@ -1546,7 +1546,11 @@ Function TablesIsEqual(Table1, Table2, DeleteColumns = "") Export
 		MD5_1 = GetMD5(QueryResult[2].Unload());
 		MD5_2 = GetMD5(QueryResult[3].Unload());
 	EndIf;
-	Return MD5_1 = MD5_2;
+	If MD5_1 = MD5_2 Then
+		Return True;
+	Else
+		Return False;
+	EndIf;
 
 EndFunction
 

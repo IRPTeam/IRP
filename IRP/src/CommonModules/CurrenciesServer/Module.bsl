@@ -44,9 +44,9 @@ Procedure PreparePostingDataTables(Parameters, CurrencyTable, AddInfo = Undefine
 			_PaymentList.Columns.Add("Key");
 			_PaymentList.Columns.Add("BasisDocument");
 
-			ObjectRef = TypeOf(Parameters.Object.Ref);
+
 			
-			If ObjectRef = Type("DocumentRef.CashReceipt") Or ObjectRef = Type("DocumentRef.BankReceipt") Then
+			If Parameters.Metadata = Metadata.Documents.CashReceipt Or Parameters.Metadata = Metadata.Documents.BankReceipt Then
 				DocumentCondition = True;
 				RegisterType = Metadata.AccumulationRegisters.R2021B_CustomersTransactions;
 				For Each RowPaymentList In Parameters.Object.PaymentList Do
@@ -55,7 +55,7 @@ Procedure PreparePostingDataTables(Parameters, CurrencyTable, AddInfo = Undefine
 					NewRowPaymentList.LegalName = RowPaymentList.Payer;
 				EndDo;
 			EndIf;
-			If ObjectRef = Type("DocumentRef.CashPayment") Or ObjectRef = Type("DocumentRef.BankPayment") Then
+			If Parameters.Metadata = Metadata.Documents.CashPayment Or Parameters.Metadata = Metadata.Documents.BankPayment Then
 				DocumentCondition = True;
 				RegisterType = Metadata.AccumulationRegisters.R1021B_VendorsTransactions;
 				For Each RowPaymentList In Parameters.Object.PaymentList Do
@@ -64,7 +64,7 @@ Procedure PreparePostingDataTables(Parameters, CurrencyTable, AddInfo = Undefine
 					NewRowPaymentList.LegalName = RowPaymentList.Payee;
 				EndDo;
 			EndIf;
-			If ObjectRef = Type("DocumentRef.EmployeeCashAdvance") Then
+			If Parameters.Metadata = Metadata.Documents.EmployeeCashAdvance Then
 				DocumentCondition = True;
 				RegisterType = Metadata.AccumulationRegisters.R1021B_VendorsTransactions;
 				For Each RowPaymentList In Parameters.Object.PaymentList Do
@@ -340,9 +340,9 @@ Function IsUseAgreementMovementType(RecMetadata)
 	TypeOfRecordSetsArray.Add(Metadata.AccumulationRegisters.R1020B_AdvancesToVendors);
 	
 	If TypeOfRecordSetsArray.Find(RecMetadata) = Undefined Then
-		Return False;
-	Else
 		Return True;
+	Else
+		Return False;
 	EndIf;
 	
 EndFunction

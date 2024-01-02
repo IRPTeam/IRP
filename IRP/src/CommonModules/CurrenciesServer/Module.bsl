@@ -92,10 +92,10 @@ Procedure PreparePostingDataTables(Parameters, CurrencyTable, AddInfo = Undefine
 				TableOfAgreementMovementTypes.Columns.Add("Key");
 				For Each ItemOfPostingInfo In ArrayOfPostingInfo Do
 					If ItemOfPostingInfo.Metadata = RegisterType Then
-						If ItemOfPostingInfo.Recordset.Columns.Find("Key") = Undefined Then
-							ItemOfPostingInfo.Recordset.Columns.Add("Key", New TypeDescription(Metadata.DefinedTypes.typeRowID.Type));
+						If ItemOfPostingInfo.RecordSet_NewTable.Columns.Find("Key") = Undefined Then
+							ItemOfPostingInfo.RecordSet_NewTable.Columns.Add("Key", New TypeDescription(Metadata.DefinedTypes.typeRowID.Type));
 						EndIf;
-						For Each RowRecordSet In ItemOfPostingInfo.Recordset Do
+						For Each RowRecordSet In ItemOfPostingInfo.RecordSet_NewTable Do
 							NewRow = TableOfAgreementMovementTypes.Add();
 							NewRow.MovementType = RowRecordSet.Agreement.CurrencyMovementType;
 							NewRow.Partner      = RowRecordSet.Partner;

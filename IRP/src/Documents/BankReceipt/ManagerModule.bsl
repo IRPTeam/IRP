@@ -229,8 +229,10 @@ Function PostingGetPostingDataTables(Ref, Cancel, PostingMode, Parameters, AddIn
 	Table2.FillValues(AccumulationRecordType.Expense, "RecordType");
 	ArrayOfTables.Add(Table2);
 
-	PostingDataTables.Insert(Parameters.Object.RegisterRecords.CashInTransit, New Structure("RecordSet, WriteInTransaction", PostingServer.JoinTables(ArrayOfTables,
-		"RecordType, Period, Company, BasisDocument, FromAccount, ToAccount, Currency, Amount, Key"), Parameters.IsReposting));
+	CashInTransitTable = CommonFunctionsServer.JoinTables(ArrayOfTables,
+		"RecordType, Period, Company, BasisDocument, FromAccount, ToAccount, Currency, Amount, Key");
+		
+	Parameters.DocumentDataTables.Insert("CashInTransit", CashInTransitTable);
 
 	PostingServer.SetPostingDataTables(PostingDataTables, Parameters);
 	Return PostingDataTables;

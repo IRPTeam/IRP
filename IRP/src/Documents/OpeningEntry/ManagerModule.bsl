@@ -88,62 +88,13 @@ Procedure Calculate_BatchKeysInfo(Ref, Parameters, AddInfo)
 	CurrenciesServer.ExcludePostingDataTable(Parameters, T6020S_BatchKeysInfo);
 	BatchKeysInfo_DataTable = Parameters.DocumentDataTables[T6020S_BatchKeysInfo.Name];
 	
-	Query = New Query;
-	Query.TempTablesManager = Parameters.TempTablesManager;
-	Query.Text =
-	"DROP BatchKeysInfo
-	|;"
-	+
-	"SELECT
-	|	Period,
-	|	Direction,
-	|	Company,
-	|	Store,
-	|	ItemKey,
-	|	Currency,
-	|	CurrencyMovementType,
-	|	SerialLotNumber,
-	|	SourceOfOrigin,
-	|	Quantity AS Quantity,
-	|	Amount AS Amount,
-	|	AmountTax AS AmountTax
-	|INTO tmp_BatchKeysInfo
-	|FROM
-	|	&T1 AS T1
-	|;
-	|
-	|////////////////////////////////////////////////////////////////////////////////
-	|SELECT
-	|	Period,
-	|	Direction,
-	|	Company,
-	|	Store,
-	|	ItemKey,
-	|	Currency,
-	|	CurrencyMovementType,
-	|	SerialLotNumber,
-	|	SourceOfOrigin,
-	|	SUM(Quantity) AS Quantity,
-	|	SUM(Amount) AS Amount,
-	|	SUM(AmountTax) AS AmountTax
-	|INTO BatchKeysInfo
-	|FROM
-	|	tmp_BatchKeysInfo AS T1
-	|WHERE
-	|	T1.CurrencyMovementType = &CurrencyMovementType
-	|GROUP BY
-	|	Period,
-	|	Direction,
-	|	Company,
-	|	Store,
-	|	ItemKey,
-	|	Currency,
-	|	CurrencyMovementType,
-	|	SerialLotNumber,
-	|	SourceOfOrigin";
-	Query.SetParameter("T1", BatchKeysInfo_DataTable);
-	Query.SetParameter("CurrencyMovementType", CurrencyMovementType);
-	Query.Execute();
+	BatchKeysInfoSettings = PostingServer.GetBatchKeysInfoSettings();
+	BatchKeysInfoSettings.DataTable = BatchKeysInfo_DataTable;
+	BatchKeysInfoSettings.Dimensions = "Period, Direction, Company, Store, ItemKey, Currency, CurrencyMovementType, SerialLotNumber, SourceOfOrigin";
+	BatchKeysInfoSettings.Totals = "Quantity, Amount, AmountTax";
+	BatchKeysInfoSettings.CurrencyMovementType = CurrencyMovementType;
+	
+	PostingServer.SetBatchKeyInfoTable(Parameters, BatchKeysInfoSettings);
 EndProcedure
 
 #EndRegion

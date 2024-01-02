@@ -1205,6 +1205,70 @@ Function Exists_R2001T_Sales() Export
 		|	R2001T_Sales.Recorder = &Ref";
 EndFunction
 
+#Region BatchInfo
+
+// Get batch keys info settings.
+// 
+// Returns:
+//  Structure - Get batch keys info settings:
+// * Dimensions - String - 
+// * Totals - String - 
+// * DataTable - ValueTable - 
+// * CurrencyMovementType - ChartOfCharacteristicTypesRef.CurrencyMovementType - 
+Function GetBatchKeysInfoSettings() Export
+	BatchKeysInfoSettings = New Structure;
+	BatchKeysInfoSettings.Insert("Dimensions", "");
+	BatchKeysInfoSettings.Insert("Totals", "");
+	BatchKeysInfoSettings.Insert("DataTable", New ValueTable());
+	BatchKeysInfoSettings.Insert("CurrencyMovementType", ChartsOfCharacteristicTypes.CurrencyMovementType.EmptyRef());
+	Return BatchKeysInfoSettings;
+EndFunction
+
+// Set batch key info table.
+// 
+// Parameters:
+//  Parameters - See GetPostingParameters
+//  BatchKeysInfoSettings - See GetBatchKeysInfoSettings
+Procedure SetBatchKeyInfoTable(Parameters, BatchKeysInfoSettings) Export
+	
+	TotalsArray = New Array;
+	For Each Row In StrSplit(BatchKeysInfoSettings.Totals, ",") Do
+		TotalsArray.Add("SUM(" + Row + ") AS " + Row);
+	EndDo;
+	
+	Query = New Query;
+	Query.TempTablesManager = Parameters.TempTablesManager;
+	Query.Text =
+	"DROP BatchKeysInfo
+	|;"
+	+
+	"SELECT
+	|	*
+	|INTO tmp_BatchKeysInfo
+	|FROM
+	|	&T1 AS T1
+	|;
+	|
+	|////////////////////////////////////////////////////////////////////////////////
+	|SELECT
+	|	%1 %2 %3
+	|INTO BatchKeysInfo
+	|FROM
+	|	tmp_BatchKeysInfo AS T1
+	|WHERE
+	|	T1.CurrencyMovementType = &CurrencyMovementType
+	|GROUP BY
+	|	%1";
+	
+	Query.Text = StrTemplate(Query.Text, BatchKeysInfoSettings.Dimensions, ?(TotalsArray.Count() > 0, ",", ""),StrConcat(TotalsArray, ", "));
+	
+	Query.SetParameter("T1", BatchKeysInfoSettings.DataTable);
+	Query.SetParameter("CurrencyMovementType", BatchKeysInfoSettings.CurrencyMovementType);
+	Query.Execute();
+EndProcedure
+
+#EndRegion
+
 #Region CheckDocumentPosting
 
 // Check document array.

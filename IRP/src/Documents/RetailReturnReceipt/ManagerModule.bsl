@@ -38,6 +38,34 @@ Function PostingGetDocumentDataTables(Ref, Cancel, PostingMode, Parameters, AddI
 
 	DocumentsServer.SalesBySerialLotNumbers(Parameters);
 	
+	Calculate_BatchKeysInfo(Ref, Parameters, AddInfo);
+
+	Return Tables;
+EndFunction
+
+Function PostingGetLockDataSource(Ref, Cancel, PostingMode, Parameters, AddInfo = Undefined) Export
+	DataMapWithLockFields = New Map;
+	Return DataMapWithLockFields;
+EndFunction
+
+Procedure PostingCheckBeforeWrite(Ref, Cancel, PostingMode, Parameters, AddInfo = Undefined) Export
+	Tables = Parameters.DocumentDataTables;
+	QueryArray = GetQueryTextsMasterTables();
+	PostingServer.SetRegisters(Tables, Ref);
+	PostingServer.FillPostingTables(Tables, Ref, QueryArray, Parameters);
+EndProcedure
+
+Function PostingGetPostingDataTables(Ref, Cancel, PostingMode, Parameters, AddInfo = Undefined) Export
+	PostingDataTables = New Map;
+	PostingServer.SetPostingDataTables(PostingDataTables, Parameters);
+	Return PostingDataTables;
+EndFunction
+
+Procedure PostingCheckAfterWrite(Ref, Cancel, PostingMode, Parameters, AddInfo = Undefined) Export
+	CheckAfterWrite(Ref, Cancel, Parameters, AddInfo);
+EndProcedure
+
+Procedure Calculate_BatchKeysInfo(Ref, Parameters, AddInfo)
 	Query = New Query;
 	Query.Text =
 	"SELECT
@@ -238,69 +266,20 @@ Function PostingGetDocumentDataTables(Ref, Cancel, PostingMode, Parameters, AddI
 		CurrenciesServer.AddRowToCurrencyTable(Ref.Date, CurrencyTable, Row.Key, Row.Currency, CurrencyMovementType);
 	EndDo;
 
-	PostingDataTables = New Map;
-	PostingDataTables.Insert(Parameters.Object.RegisterRecords.T6020S_BatchKeysInfo,
-		New Structure("RecordSet, WriteInTransaction", BatchKeysInfo, Parameters.IsReposting));
-	Parameters.Insert("PostingDataTables", PostingDataTables);
-	CurrenciesServer.PreparePostingDataTables(Parameters, CurrencyTable, AddInfo);
-
-	CurrenciesServer.ExcludePostingDataTable(Parameters, Parameters.Object.RegisterRecords.T6020S_BatchKeysInfo.Metadata());
+	T6020S_BatchKeysInfo = Metadata.InformationRegisters.T6020S_BatchKeysInfo;
+	Parameters.DocumentDataTables.Insert(T6020S_BatchKeysInfo.Name, BatchKeysInfo);
 	
-	BatchKeysInfo_DataTable = Parameters.PostingDataTables.Get(
-		Parameters.Object.RegisterRecords.T6020S_BatchKeysInfo).RecordSet;
-	BatchKeysInfo_DataTableGrouped = BatchKeysInfo_DataTable.CopyColumns();
-	If BatchKeysInfo_DataTable.Count() Then
-		BatchKeysInfo_DataTableGrouped = BatchKeysInfo_DataTable.Copy(
-			New Structure("CurrencyMovementType", CurrencyMovementType));
-		BatchKeysInfo_DataTableGrouped.GroupBy("Period, Direction, Company, Store, ItemKey, Currency, CurrencyMovementType, SalesInvoice, SourceOfOrigin, SerialLotNumber, SourceOfOriginStock, SerialLotNumberStock,
-											   |Quantity, Amount, AmountTax");
-	Else
-		BatchKeysInfo_DataTableGrouped.Columns.Add("CurrencyMovementType", New TypeDescription("ChartOfCharacteristicTypesRef.CurrencyMovementType"));
-	EndIf;
-
-	Query = New Query;
-	Query.TempTablesManager = Parameters.TempTablesManager;
-	Query.Text =
-	"SELECT
-	|	*
-	|INTO BatchesInfo
-	|FROM
-	|	&T1 AS T1
-	|;
-	|
-	|////////////////////////////////////////////////////////////////////////////////
-	|SELECT
-	|	*
-	|INTO BatchKeysInfo
-	|FROM
-	|	&T2 AS T2";
-	Query.SetParameter("T1", BatchesInfo);
-	Query.SetParameter("T2", BatchKeysInfo_DataTableGrouped);
-	Query.Execute();
-
-	Return Tables;
-EndFunction
-
-Function PostingGetLockDataSource(Ref, Cancel, PostingMode, Parameters, AddInfo = Undefined) Export
-	DataMapWithLockFields = New Map;
-	Return DataMapWithLockFields;
-EndFunction
-
-Procedure PostingCheckBeforeWrite(Ref, Cancel, PostingMode, Parameters, AddInfo = Undefined) Export
-	Tables = Parameters.DocumentDataTables;
-	QueryArray = GetQueryTextsMasterTables();
-	PostingServer.SetRegisters(Tables, Ref);
-	PostingServer.FillPostingTables(Tables, Ref, QueryArray, Parameters);
-EndProcedure
-
-Function PostingGetPostingDataTables(Ref, Cancel, PostingMode, Parameters, AddInfo = Undefined) Export
-	PostingDataTables = New Map;
-	PostingServer.SetPostingDataTables(PostingDataTables, Parameters);
-	Return PostingDataTables;
-EndFunction
-
-Procedure PostingCheckAfterWrite(Ref, Cancel, PostingMode, Parameters, AddInfo = Undefined) Export
-	CheckAfterWrite(Ref, Cancel, Parameters, AddInfo);
+	CurrenciesServer.PreparePostingDataTables(Parameters, CurrencyTable, AddInfo);
+	CurrenciesServer.ExcludePostingDataTable(Parameters, T6020S_BatchKeysInfo);
+	BatchKeysInfo_DataTable = Parameters.DocumentDataTables[T6020S_BatchKeysInfo.Name];
+	
+	BatchKeysInfoSettings = PostingServer.GetBatchKeysInfoSettings();
+	BatchKeysInfoSettings.DataTable = BatchKeysInfo_DataTable;
+	BatchKeysInfoSettings.Dimensions = "Period, Direction, Company, Store, ItemKey, Currency, CurrencyMovementType, SalesInvoice, SourceOfOrigin, SerialLotNumber, SourceOfOriginStock, SerialLotNumberStock, Quantity, Amount, AmountTax";
+	BatchKeysInfoSettings.Totals = "";
+	BatchKeysInfoSettings.CurrencyMovementType = CurrencyMovementType;
+	
+	PostingServer.SetBatchKeyInfoTable(Parameters, BatchKeysInfoSettings);
 EndProcedure
 
 #EndRegion

@@ -11,8 +11,8 @@ EndFunction
 Function PostingGetDocumentDataTables(Ref, Cancel, PostingMode, Parameters, AddInfo = Undefined) Export
 	AccReg = Metadata.AccumulationRegisters;
 	Tables = New Structure;
-	Tables.Insert("CashInTransit", PostingServer.CreateTable(AccReg.CashInTransit));
-	Tables.Insert("CashInTransit_POS", PostingServer.CreateTable(AccReg.CashInTransit));
+	Tables.Insert("CashInTransit", CommonFunctionsServer.CreateTable(AccReg.CashInTransit));
+	Tables.Insert("CashInTransit_POS", CommonFunctionsServer.CreateTable(AccReg.CashInTransit));
 
 	QueryPaymentList = New Query;
 	QueryPaymentList.Text = GetQueryTextBankReceiptPaymentList();
@@ -233,7 +233,6 @@ Function PostingGetPostingDataTables(Ref, Cancel, PostingMode, Parameters, AddIn
 		"RecordType, Period, Company, BasisDocument, FromAccount, ToAccount, Currency, Amount, Key"), Parameters.IsReposting));
 
 	PostingServer.SetPostingDataTables(PostingDataTables, Parameters);
-
 	Return PostingDataTables;
 EndFunction
 

@@ -1,4 +1,13 @@
 
+#Region API
+
+// Post.
+// 
+// Parameters:
+//  DocObject - DocumentObjectDocumentName, DocumentRefDocumentName - Doc object
+//  Cancel - Boolean - Cancel
+//  PostingMode - DocumentPostingMode - Posting mode
+//  AddInfo - Undefined - Add info
 Procedure Post(DocObject, Cancel, PostingMode, AddInfo = Undefined) Export
 
 	If Cancel Then
@@ -16,7 +25,7 @@ Procedure Post(DocObject, Cancel, PostingMode, AddInfo = Undefined) Export
 	CurrencyTable = CommonFunctionsClientServer.GetFromAddInfo(AddInfo, "CurrencyTable");	
 	CurrenciesServer.PreparePostingDataTables(Parameters, CurrencyTable, AddInfo);
 
-	RegisteredRecords = RegisterRecords(DocObject, Parameters.PostingDataTables);
+	RegisteredRecords = RegisterRecords(Parameters);
 	
 	RegisteredRecordsArray = New Array;
 	For Each Record In RegisteredRecords Do
@@ -26,7 +35,6 @@ Procedure Post(DocObject, Cancel, PostingMode, AddInfo = Undefined) Export
 				Record.Value.RecordSet.LockForUpdate = True;
 			EndIf;
 			Record.Value.RecordSet.Write();
-			WriteInTransaction = True;
 		Else // write only when transaction will be commited	
 			Record.Value.RecordSet.Write = True;
 		EndIf;
@@ -38,6 +46,29 @@ Procedure Post(DocObject, Cancel, PostingMode, AddInfo = Undefined) Export
 	Parameters.Module.PostingCheckAfterWrite(DocObject.Ref, Cancel, PostingMode, Parameters, AddInfo);
 EndProcedure
 
+// Get posting parameters.
+// 
+// Parameters:
+//  DocObject - DocumentRefDocumentName - Doc object
+//  PostingMode - DocumentPostingMode - Posting mode
+//  AddInfo - Undefined, Structure - Add info
+// 
+// Returns:
+//  Structure - Get posting parameters:
+// * Cancel - Boolean - 
+// * Object - DocumentRefDocumentName - 
+// * PostingByRef - Boolean - 
+// * IsReposting - Boolean - 
+// * PointInTime - PointInTime - 
+// * TempTablesManager - TempTablesManager - 
+// * Metadata - MetadataObjectDocument - 
+// * Module - DocumentManagerDocumentName, DocumentManager.SalesOrder - 
+// * DocumentDataTables - Structure - 
+// * DocumentDataTables - Map -
+// * LockDataSources - Map -
+// * PostingDataTables - Array Of KeyAndValue:
+// ** Key - MetadataObject -
+// ** Value - See PostingTableSettings
 Function GetPostingParameters(DocObject, PostingMode, AddInfo = Undefined)
 	Cancel = False;
 	
@@ -49,19 +80,21 @@ Function GetPostingParameters(DocObject, PostingMode, AddInfo = Undefined)
 	Parameters.Insert("PointInTime", DocObject.PointInTime());
 	Parameters.Insert("TempTablesManager", New TempTablesManager());
 	Parameters.Insert("Metadata", DocObject.Ref.Metadata());
+	Parameters.Insert("DocumentDataTables", New Structure);
+	Parameters.Insert("LockDataSources", New Map);
+	Parameters.Insert("PostingDataTables", New Map);
 
-	Module = Documents[Parameters.Metadata.Name];
+	Module = Documents[Parameters.Metadata.Name]; // DocumentManager.SalesOrder, DocumentManagerDocumentName
 	Parameters.Insert("Module", Module);
 	
-	DocumentDataTables = Module.PostingGetDocumentDataTables(DocObject.Ref, Cancel, PostingMode, Parameters, AddInfo);
-	Parameters.Insert("DocumentDataTables", DocumentDataTables);
+	Parameters.DocumentDataTables = Module.PostingGetDocumentDataTables(DocObject.Ref, Cancel, PostingMode, Parameters, AddInfo);
+	
 	If Cancel Then
 		Parameters.Cancel = True;
 		Return Parameters;
 	EndIf;
 
-	LockDataSources = Module.PostingGetLockDataSource(DocObject.Ref, Cancel, PostingMode, Parameters, AddInfo);
-	Parameters.Insert("LockDataSources", LockDataSources);
+	Parameters.LockDataSources = Module.PostingGetLockDataSource(DocObject.Ref, Cancel, PostingMode, Parameters, AddInfo);
 	If Cancel Then
 		Parameters.Cancel = True;
 		Return Parameters;
@@ -69,8 +102,8 @@ Function GetPostingParameters(DocObject, PostingMode, AddInfo = Undefined)
 	
 	// Save pointers to locks
 	DataLock = Undefined;
-	If LockDataSources <> Undefined Then
-		DataLock = SetLock(LockDataSources);
+	If Parameters.LockDataSources <> Undefined Then
+		DataLock = SetLock(Parameters.LockDataSources);
 	EndIf;
 	If TypeOf(AddInfo) = Type("Structure") Then
 		AddInfo.Insert("DataLock", DataLock);
@@ -82,15 +115,21 @@ Function GetPostingParameters(DocObject, PostingMode, AddInfo = Undefined)
 		Return Parameters;
 	EndIf;
 
-	PostingDataTables = Module.PostingGetPostingDataTables(DocObject.Ref, Cancel, PostingMode, Parameters, AddInfo);
-	If Parameters.Property("PostingDataTables") Then
-		Parameters.PostingDataTables = PostingDataTables;
-	Else
-		Parameters.Insert("PostingDataTables", PostingDataTables);
-	EndIf;
+	Parameters.PostingDataTables = Module.PostingGetPostingDataTables(DocObject.Ref, Cancel, PostingMode, Parameters, AddInfo);
 	Return Parameters;
 EndFunction
 
+// Set lock.
+// @skip-check property-return-type, dynamic-access-method-not-found, invocation-parameter-type-intersect, statement-type-change, variable-value-type
+// 
+// Parameters:
+//  LockDataSources - Map - Lock data sources:
+//  * Key - Undefined -
+//  * Value - Structure:
+//  ** Fields - Array Of String -
+// 
+// Returns:
+//  DataLock - Set lock
 Function SetLock(LockDataSources)
 	DataLock = New DataLock();
 
@@ -108,20 +147,24 @@ Function SetLock(LockDataSources)
 		EndDo;
 	EndDo;
 	If LockDataSources.Count() Then
+		//@skip-check lock-out-of-try
 		DataLock.Lock();
 	EndIf;
 	Return DataLock;
 EndFunction
 
-Function RegisterRecords(DocObject, PostingDataTables)
+// Register records.
+// 
+// Parameters:
+//  Parameters - See GetPostingParameters
+// 
+// Returns:
+//  Map - Register records
+Function RegisterRecords(Parameters)
 	RegisteredRecords = New Map();
-	For Each Row In PostingDataTables Do
-		If Not Row.Value.Property("RecordSet") Then
-			Continue;
-		EndIf;
-
-		RecordSet = Row.Key;
-		TableForLoad = Row.Value.RecordSet.Copy();
+	For Each Row In Parameters.PostingDataTables Do
+		RecordSet = Row.Value.RecordSet_Document;
+		TableForLoad = Row.Value.RecordSet_NewTable.Copy();
 			
 		// Set record type
 		If Row.Value.Property("RecordType") Then
@@ -136,12 +179,22 @@ Function RegisterRecords(DocObject, PostingDataTables)
 			TableForLoad.Columns.Add("Active");
 			TableForLoad.FillValues(True, "Active");
 		EndIf;
-			
-		// MD5
-		If RecordSetIsEqual(DocObject, RecordSet, TableForLoad) Then
-			Continue;
+		
+		If Row.Value.Metadata = Metadata.AccumulationRegisters.R6020B_BatchBalance 
+			Or Row.Value.Metadata = AccumulationRegisters.R6060T_CostOfGoodsSold Then
+				Continue; //Never rewrite
 		EndIf;
 		
+		// MD5
+		If RecordSetIsEqual(Parameters.Object, RecordSet, TableForLoad) Then
+			Continue;
+		EndIf;
+			
+		If Not Parameters.PostingByRef Then
+			WriteAdvances(Parameters.Object, RecordSet, TableForLoad);
+			
+			UpdateCosts(Parameters.Object, RecordSet, TableForLoad, RegisteredRecords);
+		EndIf;
 		// Set write
 		WriteInTransaction = False;
 		If Row.Value.Property("WriteInTransaction") And Row.Value.WriteInTransaction Then
@@ -157,17 +210,18 @@ Function RegisterRecords(DocObject, PostingDataTables)
 EndFunction
 
 Function RecordSetIsEqual(DocObject, RecordSet, TableForLoad)
-	If TypeOf(RecordSet) = Type("AccumulationRegisterRecordSet.R6020B_BatchBalance") 
-		Or TypeOf(RecordSet) = Type("AccumulationRegisterRecordSet.R6060T_CostOfGoodsSold") Then
-		Return True; //Never rewrite
-	EndIf;
-	
 	RecordSet.Read();
 	TableOldRecords = RecordSet.Unload();
 
 	RecordSet.Load(TableForLoad);
-	Result = TablesIsEqual(RecordSet.Unload(), TableOldRecords);
 	
+	Result = CommonFunctionsServer.TablesIsEqual(RecordSet.Unload(), TableOldRecords, "Recorder,LineNumber,PointInTime,UniqueID");
+	Return Result;
+EndFunction
+
+#EndRegion
+
+Procedure WriteAdvances(DocObject, RecordSet, TableForLoad) Export
 	AccReg = Metadata.AccumulationRegisters;
 	If TypeOf(RecordSet) = Type("AccumulationRegisterRecordSet.R1020B_AdvancesToVendors") Then
 		AdvancesRelevanceServer.SetBound_Advances(DocObject, TableForLoad, AccReg.R1020B_AdvancesToVendors);
@@ -182,91 +236,38 @@ Function RecordSetIsEqual(DocObject, RecordSet, TableForLoad)
 	ElsIf TypeOf(RecordSet) = Type("AccumulationRegisterRecordSet.R5011B_CustomersAging") Then
 		AdvancesRelevanceServer.SetBound_Aging(DocObject, TableForLoad, AccReg.R5011B_CustomersAging);
 	EndIf;
-	
+EndProcedure
+
+Procedure UpdateCosts(DocObject, RecordSet, TableForLoad, RegisteredRecords)
 	If TypeOf(RecordSet) = Type("InformationRegisterRecordSet.T6020S_BatchKeysInfo") Then
-		AccumulationRegisters.R6020B_BatchBalance.BatchBalance_CollectRecords(DocObject);
-		AccumulationRegisters.R6060T_CostOfGoodsSold.CostOfGoodsSold_CollectRecords(DocObject);
-		TableForLoadEmpty = CreateTable(Metadata.InformationRegisters.T6020S_BatchKeysInfo);
+		
+		R6020B_BatchBalance_RecordSet = AccumulationRegisters.R6020B_BatchBalance.CreateRecordSet();
+		R6020B_BatchBalance_RecordSet.Filter.Recorder.Set(DocObject.Ref);
+		R6020B_BatchBalance = AccumulationRegisters.R6020B_BatchBalance.BatchBalance_CollectRecords(DocObject);
+		R6020B_BatchBalance_RecordSet.Load(R6020B_BatchBalance);
+				
+		Data = New Structure;
+		Data.Insert("RecordSet", R6020B_BatchBalance_RecordSet);
+		Data.Insert("WriteInTransaction", True);
+		Data.Insert("Metadata", R6020B_BatchBalance_RecordSet.Metadata());
+		RegisteredRecords.Insert(R6020B_BatchBalance_RecordSet.Metadata(), Data);
+		
+		R6060T_CostOfGoodsSold_RecordSet = AccumulationRegisters.R6060T_CostOfGoodsSold.CreateRecordSet();
+		R6060T_CostOfGoodsSold_RecordSet.Filter.Recorder.Set(DocObject.Ref);
+		R6060T_CostOfGoodsSold = AccumulationRegisters.R6060T_CostOfGoodsSold.CostOfGoodsSold_CollectRecords(DocObject);
+		R6060T_CostOfGoodsSold_RecordSet.Load(R6060T_CostOfGoodsSold);
+		
+		Data = New Structure;
+		Data.Insert("RecordSet", R6060T_CostOfGoodsSold_RecordSet);
+		Data.Insert("WriteInTransaction", True);
+		Data.Insert("Metadata", R6060T_CostOfGoodsSold_RecordSet.Metadata());
+		RegisteredRecords.Insert(R6060T_CostOfGoodsSold_RecordSet.Metadata(), Data);
+		
+		TableForLoadEmpty = CommonFunctionsServer.CreateTable(Metadata.InformationRegisters.T6020S_BatchKeysInfo);
 		For Each Row In TableForLoad Do
 			FillPropertyValues(TableForLoadEmpty.Add(), Row);
 		EndDo;
 		InformationRegisters.T6030S_BatchRelevance.BatchRelevance_SetBound(DocObject, TableForLoadEmpty);
-	EndIf;
-		
-	Return Result;
-EndFunction
-
-// Tables is equal.
-// 
-// Parameters:
-//  Table1 - ValueTable - Table1
-//  Table2 - ValueTable - Table2
-// 
-// Returns:
-//  Boolean - Tables is equal
-Function TablesIsEqual(Table1, Table2, DeleteColumns = "Recorder,LineNumber,PointInTime,UniqueID") Export
-	If Table1.Count() <> Table2.Count() Then
-		Return False;
-	EndIf;
-	
-	If Table1.Count() = 0 Then
-		Return True;
-	EndIf;
-	
-	For Each Column In StrSplit(DeleteColumns, ",") Do
-		DeleteColumn(Table1, Column);
-		DeleteColumn(Table2, Column);
-	EndDo;
-		
-	If Table1.Count() = 1 Then
-		MD5_1 = CommonFunctionsServer.GetMD5(Table1);
-		MD5_2 = CommonFunctionsServer.GetMD5(Table2);
-	Else
-		Text = "SELECT
-			   |	*
-			   |INTO VTSort1
-			   |FROM
-			   |	&VT1 AS VT1
-			   |;
-			   |////////////////////////////////////////////////////////////////////////////////
-			   |SELECT
-			   |	*
-			   |INTO VTSort2
-			   |FROM
-			   |	&VT2 AS VT2
-			   |;
-			   |
-			   |////////////////////////////////////////////////////////////////////////////////
-			   |SELECT
-			   |	*
-			   |FROM
-			   |	VTSort1 AS VTSort1
-			   |AUTOORDER
-			   |;
-			   |
-			   |////////////////////////////////////////////////////////////////////////////////
-			   |SELECT
-			   |	*
-			   |FROM
-			   |	VTSort2 AS VTSort2
-			   |AUTOORDER";
-	
-		Query = New Query();
-		Query.Text = Text;
-		Query.SetParameter("VT1", Table1);
-		Query.SetParameter("VT2", Table2);
-		QueryResult = Query.ExecuteBatch();
-	
-		MD5_1 = CommonFunctionsServer.GetMD5(QueryResult[2].Unload());
-		MD5_2 = CommonFunctionsServer.GetMD5(QueryResult[3].Unload());
-	EndIf;
-	Return MD5_1 = MD5_2;
-
-EndFunction
-
-Procedure DeleteColumn(Table, ColumnName)
-	If Table.Columns.Find(ColumnName) <> Undefined Then
-		Table.Columns.Delete(ColumnName);
 	EndIf;
 EndProcedure
 
@@ -307,99 +308,6 @@ Procedure CalculateQuantityByUnit(DataTable) Export
 		EndIf;
 	EndDo;
 EndProcedure
-
-Function JoinTables(ArrayOfJoiningTables, Fields) Export
-
-	If Not ArrayOfJoiningTables.Count() Then
-		Return New ValueTable();
-	EndIf;
-
-	ArrayOfFieldsPut = New Array();
-	ArrayOfFieldsSelect = New Array();
-
-	Counter = 1;
-	For Each Field In StrSplit(Fields, ",") Do
-		ArrayOfFieldsPut.Add(StrTemplate(" tmp.%1 AS %1 ", TrimAll(Field)));
-		ArrayOfFieldsSelect.Add(StrTemplate(" _tmp_.%1 AS %1 ", TrimAll(Field)));
-		Counter = Counter + 1;
-	EndDo;
-	PutText = StrConcat(ArrayOfFieldsPut, ",");
-	SelectText = StrConcat(ArrayOfFieldsSelect, ",");
-
-	ArrayOfPutText = New Array();
-	ArrayOfSelectText = New Array();
-
-	Counter = 1;
-	Query = New Query();
-
-	DoExecuteQuery = False;
-	For Each Table In ArrayOfJoiningTables Do
-		If Not Table.Count() Then
-			Continue;
-		EndIf;
-		DoExecuteQuery = True;
-
-		ArrayOfPutText.Add(
-			StrTemplate(
-				"select %1
-				|into tmp%2
-				|from
-				|	&Table%2 as tmp
-				|", PutText, String(Counter)));
-
-		ArrayOfSelectText.Add(
-			StrReplace(
-				StrTemplate(
-					"select %1
-					|from tmp%2 as tmp%2
-					|", SelectText, String(Counter)), "_tmp_", "tmp" + String(Counter)));
-
-		Query.SetParameter("Table" + String(Counter), Table);
-		Counter = Counter + 1;
-	EndDo;
-
-	If DoExecuteQuery Then
-		Query.Text = StrConcat(ArrayOfPutText, " ; ") + " ; " + StrConcat(ArrayOfSelectText, " union all ");
-		QueryResult = Query.Execute();
-		QueryTable = QueryResult.Unload();
-		Return QueryTable;
-	Else
-		Return New ValueTable();
-	EndIf;
-EndFunction
-
-Procedure MergeTables(MasterTable, SourceTable, AddColumnFromSourceTable = "") Export
-	If Not IsBlankString(AddColumnFromSourceTable) Then
-		Column = SourceTable.Columns.Find(AddColumnFromSourceTable);
-		If Not Column = Undefined And MasterTable.Columns.Find(AddColumnFromSourceTable) = Undefined Then
-			MasterTable.Columns.Add(AddColumnFromSourceTable, Column.ValueType);
-		EndIf;
-	EndIf;
-	For Each Row In SourceTable Do
-		FillPropertyValues(MasterTable.Add(), Row);
-	EndDo;
-EndProcedure
-
-Function CreateTable(RegisterMetadata) Export
-	Table = New ValueTable();
-	For Each Item In RegisterMetadata.Dimensions Do
-		Table.Columns.Add(Item.Name, Item.Type);
-	EndDo;
-
-	For Each Item In RegisterMetadata.Resources Do
-		Table.Columns.Add(Item.Name, Item.Type);
-	EndDo;
-	For Each Item In RegisterMetadata.Attributes Do
-		Table.Columns.Add(Item.Name, Item.Type);
-	EndDo;
-
-	For Each Item In RegisterMetadata.StandardAttributes Do
-		If Upper(Item.Name) = Upper("Period") Then
-			Table.Columns.Add(Item.Name, Item.Type);
-		EndIf;
-	EndDo;
-	Return Table;
-EndFunction
 
 Procedure ShowPostingErrorMessage(QueryTable, Parameters, AddInfo = Undefined) Export
 	If QueryTable.Columns.Find("Unposting") = Undefined Then
@@ -612,7 +520,7 @@ Function PrepareRecordsTables(Dimensions, LineNumberJoinConditionField, ItemList
 
 	ArrayOfDimensions = StrSplit(Dimensions, ",");
 	JoinCondition = "";
-	ArrayOfSelectedFields = New Array();
+	ArrayOfSelectedFields = New Array(); // Array Of String
 	For Each ItemOfDimension In ArrayOfDimensions Do
 		If Upper(TrimAll(ItemOfDimension)) = Upper(TrimAll(LineNumberJoinConditionField)) Then
 			Continue;
@@ -749,7 +657,7 @@ Procedure CheckBalance_AfterWrite(Ref, Cancel, Parameters, TableNameWithItemKeys
 		EndIf;
 
 		If Not Records_InDocument.Columns.Count() Then
-			Records_InDocument = CreateTable(Metadata.AccumulationRegisters.R4011B_FreeStocks);
+			Records_InDocument = CommonFunctionsServer.CreateTable(Metadata.AccumulationRegisters.R4011B_FreeStocks);
 		EndIf;
 
 		Exists_R4011B_FreeStocks = CommonFunctionsClientServer.GetFromAddInfo(AddInfo, "Exists_R4011B_FreeStocks");
@@ -776,7 +684,7 @@ Procedure CheckBalance_AfterWrite(Ref, Cancel, Parameters, TableNameWithItemKeys
 		EndIf;
 
 		If Not Records_InDocument.Columns.Count() Then
-			Records_InDocument = CreateTable(Metadata.AccumulationRegisters.R4010B_ActualStocks);
+			Records_InDocument = CommonFunctionsServer.CreateTable(Metadata.AccumulationRegisters.R4010B_ActualStocks);
 		EndIf;
 
 		Exists_R4010B_ActualStocks = CommonFunctionsClientServer.GetFromAddInfo(AddInfo, "Exists_R4010B_ActualStocks");
@@ -1157,7 +1065,8 @@ Function CheckBalance_ExecuteQuery(Ref, Parameters, Tables, RecordType, Unpostin
 EndFunction
 
 Function UseRegister(Name) Export
-	Return Mid(Name, 7, 1) = "_" Or Mid(Name, 4, 1) = "_" Or Mid(Name, 3, 1) = "_";
+	// Delete CashInTransit
+	Return Mid(Name, 7, 1) = "_" Or Mid(Name, 4, 1) = "_" Or Mid(Name, 3, 1) = "_" Or Name = "CashInTransit";
 EndFunction
 
 Procedure ExecuteQuery(Ref, QueryArray, Parameters) Export
@@ -1199,30 +1108,65 @@ Procedure FillPostingTables(Tables, Ref, QueryArray, Parameters) Export
 	For Each VT In Tables Do
 		QueryTable = GetQueryTableByName(VT.Key, Parameters);
 		If QueryTable.Count() Then
-			MergeTables(Tables[VT.Key], QueryTable, "RecordType");
+			CommonFunctionsServer.MergeTables(Tables[VT.Key], QueryTable, "RecordType");
 		EndIf;
 	EndDo;
 EndProcedure
 
+// Set posting data tables.
+// 
+// Parameters:
+//  PostingDataTables - Map:
+//  * Key - MetadataObject
+//  * Value - See PostingTableSettings
+//  Parameters - See GetPostingParameters
+//  UseOldRegisters - Boolean - Use old registers
 Procedure SetPostingDataTables(PostingDataTables, Parameters, UseOldRegisters = False) Export
+	
+	If Parameters.PostingByRef Then
+		TmpDoc = Documents[Parameters.Metadata.Name].CreateDocument();
+		RegisterRecords = TmpDoc.RegisterRecords;
+	Else
+		//@skip-check property-return-type
+		RegisterRecords = Parameters.Object.RegisterRecords; // RegisterRecordsCollection
+	EndIf;
+	
 	For Each Table In Parameters.DocumentDataTables Do
 		If UseOldRegisters Or UseRegister(Table.Key) Then
-			Settings = New Structure;
-			Settings.Insert("RegisterName", Table.Key);
-			Settings.Insert("RecordSet", Table.Value);
-			Settings.Insert("WriteInTransaction", True);
+			RecSetData = RegisterRecords[Table.Key];
 			If Parameters.PostingByRef Then
-				TmpDoc = Documents[Parameters.Metadata.Name].CreateDocument();
-				TmpDoc.SetNewObjectRef(Parameters.Object);
-				RecSetData = TmpDoc.RegisterRecords[Table.Key];
-			Else
-				RecSetData = Parameters.Object.RegisterRecords[Table.Key];
+				RecSetData.Filter.Recorder.Set(Parameters.Object);
 			EndIf;
-			Settings.Insert("Metadata", RecSetData.Metadata());
-			PostingDataTables.Insert(Parameters.Object.RegisterRecords[Table.Key], Settings);
+			Settings = PostingTableSettings(Table.Key, Table.Value, RecSetData);
+			PostingDataTables.Insert(RecSetData.Metadata(), Settings);
 		EndIf;
 	EndDo;
 EndProcedure
+
+// Posting table settings.
+// 
+// Parameters:
+//  RegisterName - String -
+//  Table - ValueTable -
+//  RecSetData - InformationRegisterRecordSetInformationRegisterName, AccountingRegisterRecordSetAccountingRegisterName, CalculationRegisterRecordSetCalculationRegisterName, AccumulationRegisterRecordSetAccumulationRegisterName - Rec set data
+// 
+// Returns:
+//  Structure - Posting table settings:
+// * RegisterName - String -
+// * RecordSet_NewTable - ValueTable - 
+// * WriteInTransaction - Boolean - 
+// * Metadata - MetadataObjectInformationRegister, MetadataObjectAccountingRegister, MetadataObjectCalculationRegister, MetadataObjectAccumulationRegister - 
+// * RecordSet_Document - AccumulationRegisterRecordSet, InformationRegisterRecordSet - 
+// * RecordType - Undefined, AccumulationRecordType - 
+Function PostingTableSettings(RegisterName, Table, RecSetData) Export
+	Settings = New Structure;
+	Settings.Insert("RegisterName", RegisterName);
+	Settings.Insert("RecordSet_NewTable", Table);
+	Settings.Insert("WriteInTransaction", True);
+	Settings.Insert("Metadata", RecSetData.Metadata());
+	Settings.Insert("RecordSet_Document", RecSetData);
+	Return Settings;
+EndFunction
 
 Procedure GetLockDataSource(DataMapWithLockFields, DocumentDataTables, UseOldRegisters = False) Export
 	For Each Register In DocumentDataTables Do
@@ -1236,7 +1180,7 @@ EndProcedure
 Procedure SetRegisters(Tables, DocumentRef, UseOldRegisters = False) Export
 	For Each Register In DocumentRef.Metadata().RegisterRecords Do
 		If UseOldRegisters Or UseRegister(Register.Name) Then
-			Tables.Insert(Register.Name, CreateTable(Register));
+			Tables.Insert(Register.Name, CommonFunctionsServer.CreateTable(Register));
 		EndIf;
 	EndDo;
 EndProcedure
@@ -1304,7 +1248,6 @@ Function CheckDocumentArray(DocumentArray, isJob = False) Export
 		BackgroundJobAPIServer.NotifyStream(Msg);
 	EndIf;
 
-	
 	For Each Doc In DocumentArray Do
 		DocObject = Doc;
 		Parameters = GetPostingParameters(DocObject, PostingMode, AddInfo);
@@ -1313,7 +1256,7 @@ Function CheckDocumentArray(DocumentArray, isJob = False) Export
 		CurrencyTable = CommonFunctionsClientServer.GetFromAddInfo(AddInfo, "CurrencyTable");	
 		CurrenciesServer.PreparePostingDataTables(Parameters, CurrencyTable, AddInfo);
 	
-		RegisteredRecords = RegisterRecords(DocObject, Parameters.PostingDataTables);
+		RegisteredRecords = RegisterRecords(Parameters);
 		
 		If RegisteredRecords.Count() > 0 Then
 			Result = New Structure;

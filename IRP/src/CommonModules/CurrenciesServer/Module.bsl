@@ -43,8 +43,10 @@ Procedure PreparePostingDataTables(Parameters, CurrencyTable, AddInfo = Undefine
 			_PaymentList.Columns.Add("LegalName");
 			_PaymentList.Columns.Add("Key");
 			_PaymentList.Columns.Add("BasisDocument");
+
+			ObjectRef = TypeOf(Parameters.Object.Ref);
 			
-			If TypeOf(Parameters.Object.Ref) = Type("DocumentRef.CashReceipt") Or TypeOf(Parameters.Object.Ref) = Type("DocumentRef.BankReceipt") Then
+			If ObjectRef = Type("DocumentRef.CashReceipt") Or ObjectRef = Type("DocumentRef.BankReceipt") Then
 				DocumentCondition = True;
 				RegisterType = Metadata.AccumulationRegisters.R2021B_CustomersTransactions;
 				For Each RowPaymentList In Parameters.Object.PaymentList Do
@@ -53,7 +55,7 @@ Procedure PreparePostingDataTables(Parameters, CurrencyTable, AddInfo = Undefine
 					NewRowPaymentList.LegalName = RowPaymentList.Payer;
 				EndDo;
 			EndIf;
-			If TypeOf(Parameters.Object.Ref) = Type("DocumentRef.CashPayment") Or TypeOf(Parameters.Object.Ref) = Type("DocumentRef.BankPayment") Then
+			If ObjectRef = Type("DocumentRef.CashPayment") Or ObjectRef = Type("DocumentRef.BankPayment") Then
 				DocumentCondition = True;
 				RegisterType = Metadata.AccumulationRegisters.R1021B_VendorsTransactions;
 				For Each RowPaymentList In Parameters.Object.PaymentList Do
@@ -62,7 +64,7 @@ Procedure PreparePostingDataTables(Parameters, CurrencyTable, AddInfo = Undefine
 					NewRowPaymentList.LegalName = RowPaymentList.Payee;
 				EndDo;
 			EndIf;
-			If TypeOf(Parameters.Object.Ref) = Type("DocumentRef.EmployeeCashAdvance") Then
+			If ObjectRef = Type("DocumentRef.EmployeeCashAdvance") Then
 				DocumentCondition = True;
 				RegisterType = Metadata.AccumulationRegisters.R1021B_VendorsTransactions;
 				For Each RowPaymentList In Parameters.Object.PaymentList Do
@@ -157,11 +159,10 @@ Procedure PreparePostingDataTables(Parameters, CurrencyTable, AddInfo = Undefine
 		EndIf;
 		Query.Execute();
 		For Each ItemOfPostingInfo In ArrayOfPostingInfo Do
-			If ItemOfPostingInfo.RecordSet.Count() Then
+			If ItemOfPostingInfo.RecordSet_NewTable.Count() Then
 				UseAgreementMovementType = IsUseAgreementMovementType(ItemOfPostingInfo.Metadata);
 				UseCurrencyJoin = IsUseCurrencyJoin(Parameters, ItemOfPostingInfo.Metadata);
-				ItemOfPostingInfo.RecordSet = ExpandTable(TempTableManager, ItemOfPostingInfo.RecordSet, UseAgreementMovementType, UseCurrencyJoin);
-				
+				ItemOfPostingInfo.RecordSet_NewTable = ExpandTable(TempTableManager, ItemOfPostingInfo.RecordSet_NewTable, UseAgreementMovementType, UseCurrencyJoin);
 				
 				IsOffsetOfAdvances = CommonFunctionsClientServer.GetFromAddInfo(Parameters, "IsOffsetOfAdvances", False);
 				IsLandedCost = CommonFunctionsClientServer.GetFromAddInfo(Parameters, "IsLandedCost", False);
@@ -174,7 +175,7 @@ Procedure PreparePostingDataTables(Parameters, CurrencyTable, AddInfo = Undefine
 					
 						AdvancesCurrencyRevaluation = GetAdvancesCurrencyRevaluation(Parameters.Object.Ref);
 						For Each Row In AdvancesCurrencyRevaluation Do
-							FillPropertyValues(ItemOfPostingInfo.RecordSet.Add(), Row);
+							FillPropertyValues(ItemOfPostingInfo.RecordSet_NewTable.Add(), Row);
 						EndDo;	
 					
 					EndIf;
@@ -185,7 +186,7 @@ Procedure PreparePostingDataTables(Parameters, CurrencyTable, AddInfo = Undefine
 					
 						TransactionsCurrencyRevaluation = GetTransactionsCurrencyRevaluation(Parameters.Object.Ref);
 						For Each Row In TransactionsCurrencyRevaluation Do
-							FillPropertyValues(ItemOfPostingInfo.RecordSet.Add(), Row);
+							FillPropertyValues(ItemOfPostingInfo.RecordSet_NewTable.Add(), Row);
 						EndDo;	
 					
 					EndIf;
@@ -225,7 +226,7 @@ Procedure PreparePostingDataTables(Parameters, CurrencyTable, AddInfo = Undefine
 						For Each RowAmounts In AccountingAmounts Do
 							For Each RowOperation In AccountingOperations.FindRows(New Structure("DocType, AmountType", TypeOf(Parameters.Object.Ref), RowAmounts.AmountType)) Do
 								For Each OperationItem In RowOperation.Operations Do
-									NewRow = ItemOfPostingInfo.RecordSet.Add();
+									NewRow = ItemOfPostingInfo.RecordSet_NewTable.Add();
 									FillPropertyValues(NewRow, RowAmounts);
 									NewRow.Operation = OperationItem;
 								EndDo;
@@ -338,7 +339,11 @@ Function IsUseAgreementMovementType(RecMetadata)
 	TypeOfRecordSetsArray.Add(Metadata.AccumulationRegisters.R2020B_AdvancesFromCustomers);
 	TypeOfRecordSetsArray.Add(Metadata.AccumulationRegisters.R1020B_AdvancesToVendors);
 	
-	Return TypeOfRecordSetsArray.Find(RecMetadata) = Undefined;
+	If TypeOfRecordSetsArray.Find(RecMetadata) = Undefined Then
+		Return False;
+	Else
+		Return True;
+	EndIf;
 	
 EndFunction
 

@@ -120,10 +120,23 @@ Procedure CalculateAndUpdateAccessKey_Document(Source)
 		Source.SetNewObjectRef(Ref);
 	EndIf;
 
-	Reg = InformationRegisters.T9100A_ObjectAccessMap.CreateRecordManager();
-	Reg.ObjectAccessKeys = AccessKeyRef;
-	Reg.ObjectRef = Ref;
-	Reg.Write();
+	Query = New Query;
+	Query.Text =
+		"SELECT TRUE FROM InformationRegister.T9100A_ObjectAccessMap AS T9100A_ObjectAccessMap
+		|WHERE
+		|	T9100A_ObjectAccessMap.ObjectRef = &ObjectRef
+		|	AND T9100A_ObjectAccessMap.ObjectAccessKeys = &ObjectAccessKeys";
+	
+	Query.SetParameter("ObjectRef", Ref);
+	Query.SetParameter("ObjectAccessKeys", AccessKeyRef);
+	QueryResult = Query.Execute();
+	
+	If QueryResult.IsEmpty() Then
+		Reg = InformationRegisters.T9100A_ObjectAccessMap.CreateRecordManager();
+		Reg.ObjectAccessKeys = AccessKeyRef;
+		Reg.ObjectRef = Ref;
+		Reg.Write();
+	EndIf;
 EndProcedure
 
 // Update access keys Document.

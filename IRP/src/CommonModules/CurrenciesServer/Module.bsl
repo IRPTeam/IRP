@@ -15,7 +15,7 @@ Procedure PreparePostingDataTables(Parameters, CurrencyTable, AddInfo = Undefine
 				Dimension = PostingInfo.Value.Metadata.Dimensions.Find("CurrencyMovementType");
 				// Register supported multicurrency
 				If Dimension <> Undefined Then
-					ArrayOfPostingInfo.Add(PostingInfo.Value);
+					ArrayOfPostingInfo.Add(PostingInfo);
 				EndIf;
 			EndIf;
 		EndDo;

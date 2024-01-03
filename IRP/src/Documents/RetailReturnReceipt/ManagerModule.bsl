@@ -9,37 +9,21 @@ EndFunction
 #Region Posting
 
 Function PostingGetDocumentDataTables(Ref, Cancel, PostingMode, Parameters, AddInfo = Undefined) Export
-	AccReg = Metadata.AccumulationRegisters;
-	Tables = New Structure;
-	Tables.Insert("CashInTransit", CommonFunctionsServer.CreateTable(AccReg.CashInTransit));
-	QueryPayments = New Query;
-	QueryPayments.Text =
-	"SELECT
-	|	Payments.Ref.Date AS Period,
-	|	Payments.Ref.Company AS Company,
-	|	Payments.Ref.Currency AS Currency,
-	|	Payments.Account AS FromAccount,
-	|	Payments.Ref AS BasisDocument,
-	|	Payments.Amount,
-	|	Payments.Commission
-	|
-	|FROM
-	|	Document.RetailReturnReceipt.Payments AS Payments
-	|WHERE
-	|	Payments.Ref = &Ref AND Payments.PostponedPayment";
-	QueryPayments.SetParameter("Ref", Ref);
-	Tables.CashInTransit = QueryPayments.Execute().Unload();
-
-	Parameters.IsReposting = False;
-
 	QueryArray = GetQueryTextsSecondaryTables();
 	Parameters.Insert("QueryParameters", GetAdditionalQueryParameters(Ref));
 	PostingServer.ExecuteQuery(Ref, QueryArray, Parameters);
+
+	Parameters.IsReposting = False;
 
 	DocumentsServer.SalesBySerialLotNumbers(Parameters);
 	
 	Calculate_BatchKeysInfo(Ref, Parameters, AddInfo);
 
+	Tables = New Structure;
+
+	CashInTransit = Metadata.AccumulationRegisters.CashInTransit;
+	Tables.Insert(CashInTransit.Name, CommonFunctionsServer.CreateTable(CashInTransit));
+	
 	Return Tables;
 EndFunction
 
@@ -58,6 +42,10 @@ EndProcedure
 Function PostingGetPostingDataTables(Ref, Cancel, PostingMode, Parameters, AddInfo = Undefined) Export
 	PostingDataTables = New Map;
 	PostingServer.SetPostingDataTables(PostingDataTables, Parameters);
+	
+	CashInTransit = Metadata.AccumulationRegisters.CashInTransit;
+	PostingServer.SetPostingDataTable(PostingDataTables, Parameters, CashInTransit.Name, Parameters.DocumentDataTables[CashInTransit.Name]);
+	
 	Return PostingDataTables;
 EndFunction
 
@@ -354,6 +342,7 @@ EndFunction
 
 Function GetQueryTextsMasterTables()
 	QueryArray = New Array;
+	QueryArray.Add(CashInTransit());
 	QueryArray.Add(R2001T_Sales());
 	QueryArray.Add(R2002T_SalesReturns());
 	QueryArray.Add(R2005T_SalesSpecialOffers());
@@ -699,6 +688,23 @@ EndFunction
 #EndRegion
 
 #Region Posting_MainTables
+
+Function CashInTransit()
+	Return 	"SELECT
+	|	VALUE(AccumulationRecordType.Expense) AS RecordType,
+	|	Payments.Ref.Date AS Period,
+	|	Payments.Ref.Company AS Company,
+	|	Payments.Ref.Currency AS Currency,
+	|	Payments.Account AS FromAccount,
+	|	Payments.Ref AS BasisDocument,
+	|	Payments.Amount,
+	|	Payments.Commission
+	|FROM
+	|	Document.RetailReturnReceipt.Payments AS Payments
+	|WHERE
+	|	Payments.Ref = &Ref
+	|	AND Payments.PostponedPayment";
+EndFunction
 
 Function R9010B_SourceOfOriginStock()
 	Return "SELECT

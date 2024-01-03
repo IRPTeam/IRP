@@ -1066,7 +1066,7 @@ EndFunction
 
 Function UseRegister(Name) Export
 	// Delete CashInTransit
-	Return Mid(Name, 7, 1) = "_" Or Mid(Name, 4, 1) = "_" Or Mid(Name, 3, 1) = "_" Or Name = "CashInTransit";
+	Return Mid(Name, 7, 1) = "_" Or Mid(Name, 4, 1) = "_" Or Mid(Name, 3, 1) = "_";
 EndFunction
 
 Procedure ExecuteQuery(Ref, QueryArray, Parameters) Export
@@ -1123,6 +1123,16 @@ EndProcedure
 //  UseOldRegisters - Boolean - Use old registers
 Procedure SetPostingDataTables(PostingDataTables, Parameters, UseOldRegisters = False) Export
 	
+	RegisterRecords = GetRegisterRecords(Parameters);
+	
+	For Each Table In Parameters.DocumentDataTables Do
+		If UseOldRegisters Or UseRegister(Table.Key) Then
+			SetPostingDataTable(PostingDataTables, Parameters, Table.Key, Table.Value, RegisterRecords);
+		EndIf;
+	EndDo;
+EndProcedure
+
+Function GetRegisterRecords(Parameters)
 	If Parameters.PostingByRef Then
 		TmpDoc = Documents[Parameters.Metadata.Name].CreateDocument();
 		RegisterRecords = TmpDoc.RegisterRecords;
@@ -1131,16 +1141,21 @@ Procedure SetPostingDataTables(PostingDataTables, Parameters, UseOldRegisters = 
 		RegisterRecords = Parameters.Object.RegisterRecords; // RegisterRecordsCollection
 	EndIf;
 	
-	For Each Table In Parameters.DocumentDataTables Do
-		If UseOldRegisters Or UseRegister(Table.Key) Then
-			RecSetData = RegisterRecords[Table.Key];
-			If Parameters.PostingByRef Then
-				RecSetData.Filter.Recorder.Set(Parameters.Object);
-			EndIf;
-			Settings = PostingTableSettings(Table.Key, Table.Value, RecSetData);
-			PostingDataTables.Insert(RecSetData.Metadata(), Settings);
-		EndIf;
-	EndDo;
+	Return RegisterRecords;
+EndFunction
+
+Procedure SetPostingDataTable(PostingDataTables, Parameters, Name, VT, RegisterRecords = Undefined) Export
+	
+	If RegisterRecords = Undefined Then
+		RegisterRecords = GetRegisterRecords(Parameters);
+	EndIf;
+	
+	RecSetData = RegisterRecords[Name];
+	If Parameters.PostingByRef Then
+		RecSetData.Filter.Recorder.Set(Parameters.Object);
+	EndIf;
+	Settings = PostingTableSettings(Name, VT, RecSetData);
+	PostingDataTables.Insert(RecSetData.Metadata(), Settings);
 EndProcedure
 
 // Posting table settings.

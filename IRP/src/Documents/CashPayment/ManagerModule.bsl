@@ -9,151 +9,17 @@ EndFunction
 #Region Posting
 
 Function PostingGetDocumentDataTables(Ref, Cancel, PostingMode, Parameters, AddInfo = Undefined) Export
-	AccReg = Metadata.AccumulationRegisters;
-	Tables = New Structure;
-	Tables.Insert("CashInTransit", CommonFunctionsServer.CreateTable(AccReg.CashInTransit));
-
-	QueryPaymentList = New Query;
-	QueryPaymentList.Text = GetQueryTextCashPaymentPaymentList();
-	QueryPaymentList.SetParameter("Ref", Ref);
-	QueryResultsPaymentList = QueryPaymentList.Execute();
-	QueryTablePaymentList = QueryResultsPaymentList.Unload();
-
-	Query = New Query;
-	Query.Text = GetQueryTextQueryTable();
-	Query.SetParameter("QueryTable", QueryTablePaymentList);
-	QueryResults = Query.ExecuteBatch();
-
-	Tables.CashInTransit = QueryResults[1].Unload();
-
 	QueryArray = GetQueryTextsSecondaryTables();
 	PostingServer.ExecuteQuery(Ref, QueryArray, Parameters);
 	
 	AccountingServer.CreateAccountingDataTables(Ref, Cancel, PostingMode, Parameters, AddInfo);
+
+	Tables = New Structure;
+
+	CashInTransit = Metadata.AccumulationRegisters.CashInTransit;
+	Tables.Insert(CashInTransit.Name, CommonFunctionsServer.CreateTable(CashInTransit));
 	
 	Return Tables;
-EndFunction
-
-Function GetQueryTextCashPaymentPaymentList()
-	Return "SELECT
-		   |	CashPaymentPaymentList.Ref.Company AS Company,
-		   |	CashPaymentPaymentList.Ref.Currency AS Currency,
-		   |	CashPaymentPaymentList.Ref.CashAccount AS CashAccount,
-		   |	CASE
-		   |		WHEN CashPaymentPaymentList.Agreement.ApArPostingDetail = VALUE(Enum.ApArPostingDetail.ByDocuments)
-		   |			THEN CASE
-		   |				WHEN VALUETYPE(CashPaymentPaymentList.PlaningTransactionBasis) = TYPE(Document.CashTransferOrder)
-		   |				AND
-		   |				NOT CashPaymentPaymentList.PlaningTransactionBasis.Date IS NULL
-		   |				AND
-		   |					CashPaymentPaymentList.PlaningTransactionBasis.SendCurrency <> CashPaymentPaymentList.PlaningTransactionBasis.ReceiveCurrency
-		   |					THEN CashPaymentPaymentList.PlaningTransactionBasis
-		   |				ELSE CashPaymentPaymentList.BasisDocument
-		   |			END
-		   |		ELSE UNDEFINED
-		   |	END AS BasisDocument,
-		   |	CASE
-		   |		WHEN CashPaymentPaymentList.Agreement = VALUE(Catalog.Agreements.EmptyRef)
-		   |			THEN TRUE
-		   |		ELSE FALSE
-		   |	END
-		   |	AND
-		   |	NOT CASE
-		   |		WHEN VALUETYPE(CashPaymentPaymentList.PlaningTransactionBasis) = TYPE(Document.CashTransferOrder)
-		   |		AND
-		   |		NOT CashPaymentPaymentList.PlaningTransactionBasis.Date IS NULL
-		   |		AND
-		   |			CashPaymentPaymentList.PlaningTransactionBasis.SendCurrency <> CashPaymentPaymentList.PlaningTransactionBasis.ReceiveCurrency
-		   |			THEN TRUE
-		   |		ELSE FALSE
-		   |	END AS IsAdvance,
-		   |	CashPaymentPaymentList.PlaningTransactionBasis AS PlaningTransactionBasis,
-		   |	CASE
-		   |		WHEN CashPaymentPaymentList.Agreement.Kind = VALUE(Enum.AgreementKinds.Regular)
-		   |		AND CashPaymentPaymentList.Agreement.ApArPostingDetail = VALUE(Enum.ApArPostingDetail.ByStandardAgreement)
-		   |			THEN CashPaymentPaymentList.Agreement.StandardAgreement
-		   |		ELSE CashPaymentPaymentList.Agreement
-		   |	END AS Agreement,
-		   |	CashPaymentPaymentList.Partner AS Partner,
-		   |	CashPaymentPaymentList.Payee AS Payee,
-		   |	CashPaymentPaymentList.Ref.Date AS Period,
-		   |	CashPaymentPaymentList.TotalAmount AS Amount,
-		   |	CASE
-		   |		WHEN VALUETYPE(CashPaymentPaymentList.PlaningTransactionBasis) = TYPE(Document.CashTransferOrder)
-		   |		AND
-		   |		NOT CashPaymentPaymentList.PlaningTransactionBasis.Date IS NULL
-		   |		AND
-		   |			CashPaymentPaymentList.PlaningTransactionBasis.SendCurrency = CashPaymentPaymentList.PlaningTransactionBasis.ReceiveCurrency
-		   |			THEN TRUE
-		   |		ELSE FALSE
-		   |	END AS IsMoneyTransfer,
-		   |	CASE
-		   |		WHEN VALUETYPE(CashPaymentPaymentList.PlaningTransactionBasis) = TYPE(Document.CashTransferOrder)
-		   |		AND
-		   |		NOT CashPaymentPaymentList.PlaningTransactionBasis.Date IS NULL
-		   |		AND
-		   |			CashPaymentPaymentList.PlaningTransactionBasis.SendCurrency <> CashPaymentPaymentList.PlaningTransactionBasis.ReceiveCurrency
-		   |			THEN TRUE
-		   |		ELSE FALSE
-		   |	END AS IsMoneyExchange,
-		   |	CashPaymentPaymentList.PlaningTransactionBasis.Sender AS FromAccount,
-		   |	CashPaymentPaymentList.PlaningTransactionBasis.Receiver AS ToAccount,
-		   |	CashPaymentPaymentList.Ref AS PaymentDocument,
-		   |	CashPaymentPaymentList.Key AS Key,
-		   |	CashPaymentPaymentList.Ref.Branch AS Branch
-		   |FROM
-		   |	Document.CashPayment.PaymentList AS CashPaymentPaymentList
-		   |WHERE
-		   |	CashPaymentPaymentList.Ref = &Ref";
-EndFunction
-
-Function GetQueryTextQueryTable()
-	Return "SELECT
-		   |	QueryTable.Company AS Company,
-		   |	QueryTable.Currency AS Currency,
-		   |	QueryTable.CashAccount AS CashAccount,
-		   |	QueryTable.BasisDocument AS BasisDocument,
-		   |	QueryTable.IsAdvance AS IsAdvance,
-		   |	QueryTable.PlaningTransactionBasis AS PlaningTransactionBasis,
-		   |	QueryTable.Agreement AS Agreement,
-		   |	QueryTable.Partner AS Partner,
-		   |	QueryTable.Payee AS Payee,
-		   |	QueryTable.Period AS Period,
-		   |	QueryTable.Amount AS Amount,
-		   |	QueryTable.IsMoneyTransfer AS IsMoneyTransfer,
-		   |	QueryTable.IsMoneyExchange AS IsMoneyExchange,
-		   |	QueryTable.FromAccount AS FromAccount,
-		   |	QueryTable.ToAccount AS ToAccount,
-		   |	QueryTable.PaymentDocument AS PaymentDocument,
-		   |	QueryTable.Key AS Key,
-		   |	QueryTable.Branch AS Branch
-		   |INTO tmp
-		   |FROM
-		   |	&QueryTable AS QueryTable
-		   |;
-		   |
-		   |//[1]//////////////////////////////////////////////////////////////////////////////
-		   |SELECT
-		   |	tmp.Company AS Company,
-		   |	tmp.PlaningTransactionBasis AS BasisDocument,
-		   |	tmp.FromAccount AS FromAccount,
-		   |	tmp.ToAccount AS ToAccount,
-		   |	tmp.Currency AS Currency,
-		   |	SUM(tmp.Amount) AS Amount,
-		   |	tmp.Period,
-		   |	tmp.Key
-		   |FROM
-		   |	tmp AS tmp
-		   |WHERE
-		   |	tmp.IsMoneyTransfer
-		   |GROUP BY
-		   |	tmp.Company,
-		   |	tmp.PlaningTransactionBasis,
-		   |	tmp.FromAccount,
-		   |	tmp.ToAccount,
-		   |	tmp.Currency,
-		   |	tmp.Period,
-		   |	tmp.Key";
 EndFunction
 
 Function PostingGetLockDataSource(Ref, Cancel, PostingMode, Parameters, AddInfo = Undefined) Export
@@ -186,6 +52,10 @@ EndProcedure
 Function PostingGetPostingDataTables(Ref, Cancel, PostingMode, Parameters, AddInfo = Undefined) Export
 	PostingDataTables = New Map;
 	PostingServer.SetPostingDataTables(PostingDataTables, Parameters);
+	
+	CashInTransit = Metadata.AccumulationRegisters.CashInTransit;
+	PostingServer.SetPostingDataTable(PostingDataTables, Parameters, CashInTransit.Name, Parameters.DocumentDataTables[CashInTransit.Name]);
+	
 	Return PostingDataTables;
 EndFunction
 
@@ -239,6 +109,7 @@ EndFunction
 
 Function GetQueryTextsMasterTables()
 	QueryArray = New Array;
+	QueryArray.Add(CashInTransit());
 	QueryArray.Add(R1020B_AdvancesToVendors());
 	QueryArray.Add(R1021B_VendorsTransactions());
 	QueryArray.Add(R2020B_AdvancesFromCustomers());
@@ -342,6 +213,101 @@ EndFunction
 #EndRegion
 
 #Region Posting_MainTables
+
+Function CashInTransit()
+	Return "SELECT
+	|	CashPaymentPaymentList.Ref.Company AS Company,
+	|	CashPaymentPaymentList.Ref.Currency AS Currency,
+	|	CashPaymentPaymentList.Ref.CashAccount AS CashAccount,
+	|	CASE
+	|		WHEN CashPaymentPaymentList.Agreement.ApArPostingDetail = VALUE(Enum.ApArPostingDetail.ByDocuments)
+	|			THEN CASE
+	|				WHEN VALUETYPE(CashPaymentPaymentList.PlaningTransactionBasis) = TYPE(Document.CashTransferOrder)
+	|				AND NOT CashPaymentPaymentList.PlaningTransactionBasis.Date IS NULL
+	|				AND
+	|					CashPaymentPaymentList.PlaningTransactionBasis.SendCurrency <> CashPaymentPaymentList.PlaningTransactionBasis.ReceiveCurrency
+	|					THEN CashPaymentPaymentList.PlaningTransactionBasis
+	|				ELSE CashPaymentPaymentList.BasisDocument
+	|			END
+	|		ELSE UNDEFINED
+	|	END AS BasisDocument,
+	|	CASE
+	|		WHEN CashPaymentPaymentList.Agreement = VALUE(Catalog.Agreements.EmptyRef)
+	|			THEN TRUE
+	|		ELSE FALSE
+	|	END
+	|	AND NOT CASE
+	|		WHEN VALUETYPE(CashPaymentPaymentList.PlaningTransactionBasis) = TYPE(Document.CashTransferOrder)
+	|		AND NOT CashPaymentPaymentList.PlaningTransactionBasis.Date IS NULL
+	|		AND
+	|			CashPaymentPaymentList.PlaningTransactionBasis.SendCurrency <> CashPaymentPaymentList.PlaningTransactionBasis.ReceiveCurrency
+	|			THEN TRUE
+	|		ELSE FALSE
+	|	END AS IsAdvance,
+	|	CashPaymentPaymentList.PlaningTransactionBasis AS PlaningTransactionBasis,
+	|	CASE
+	|		WHEN CashPaymentPaymentList.Agreement.Kind = VALUE(Enum.AgreementKinds.Regular)
+	|		AND CashPaymentPaymentList.Agreement.ApArPostingDetail = VALUE(Enum.ApArPostingDetail.ByStandardAgreement)
+	|			THEN CashPaymentPaymentList.Agreement.StandardAgreement
+	|		ELSE CashPaymentPaymentList.Agreement
+	|	END AS Agreement,
+	|	CashPaymentPaymentList.Partner AS Partner,
+	|	CashPaymentPaymentList.Payee AS Payee,
+	|	CashPaymentPaymentList.Ref.Date AS Period,
+	|	CashPaymentPaymentList.TotalAmount AS Amount,
+	|	CASE
+	|		WHEN VALUETYPE(CashPaymentPaymentList.PlaningTransactionBasis) = TYPE(Document.CashTransferOrder)
+	|		AND NOT CashPaymentPaymentList.PlaningTransactionBasis.Date IS NULL
+	|		AND
+	|			CashPaymentPaymentList.PlaningTransactionBasis.SendCurrency = CashPaymentPaymentList.PlaningTransactionBasis.ReceiveCurrency
+	|			THEN TRUE
+	|		ELSE FALSE
+	|	END AS IsMoneyTransfer,
+	|	CASE
+	|		WHEN VALUETYPE(CashPaymentPaymentList.PlaningTransactionBasis) = TYPE(Document.CashTransferOrder)
+	|		AND NOT CashPaymentPaymentList.PlaningTransactionBasis.Date IS NULL
+	|		AND
+	|			CashPaymentPaymentList.PlaningTransactionBasis.SendCurrency <> CashPaymentPaymentList.PlaningTransactionBasis.ReceiveCurrency
+	|			THEN TRUE
+	|		ELSE FALSE
+	|	END AS IsMoneyExchange,
+	|	CashPaymentPaymentList.PlaningTransactionBasis.Sender AS FromAccount,
+	|	CashPaymentPaymentList.PlaningTransactionBasis.Receiver AS ToAccount,
+	|	CashPaymentPaymentList.Ref AS PaymentDocument,
+	|	CashPaymentPaymentList.Key AS Key,
+	|	CashPaymentPaymentList.Ref.Branch AS Branch
+	|INTO TablePaymentList
+	|FROM
+	|	Document.CashPayment.PaymentList AS CashPaymentPaymentList
+	|WHERE
+	|	CashPaymentPaymentList.Ref = &Ref
+	|;
+	|
+	|////////////////////////////////////////////////////////////////////////////////
+	|SELECT
+	|	VALUE(AccumulationRecordType.Receipt) AS RecordType,
+	|	tmp.Company AS Company,
+	|	tmp.PlaningTransactionBasis AS BasisDocument,
+	|	tmp.FromAccount AS FromAccount,
+	|	tmp.ToAccount AS ToAccount,
+	|	tmp.Currency AS Currency,
+	|	SUM(tmp.Amount) AS Amount,
+	|	tmp.Period,
+	|	tmp.Key
+	|INTO CashInTransit
+	|FROM
+	|	TablePaymentList AS tmp
+	|WHERE
+	|	tmp.IsMoneyTransfer
+	|GROUP BY
+	|	tmp.Company,
+	|	tmp.PlaningTransactionBasis,
+	|	tmp.FromAccount,
+	|	tmp.ToAccount,
+	|	tmp.Currency,
+	|	tmp.Period,
+	|	tmp.Key";
+EndFunction
 
 Function R3021B_CashInTransitIncoming()
 	Return 

@@ -9,40 +9,15 @@ EndFunction
 #Region Posting
 
 Function PostingGetDocumentDataTables(Ref, Cancel, PostingMode, Parameters, AddInfo = Undefined) Export
-
-	AccReg = Metadata.AccumulationRegisters;
-	Tables = New Structure;
-	Tables.Insert("CashInTransit", CommonFunctionsServer.CreateTable(AccReg.CashInTransit));
-
-	Query_CashInTransit = New Query;
-	Query_CashInTransit.Text = GetQueryText_CashStatement_CashInTransit();
-	Query_CashInTransit.SetParameter("Ref", Ref);
-	QueryResult_CashInTransit = Query_CashInTransit.Execute();
-	CashInTransit = QueryResult_CashInTransit.Unload();
-
-	Tables.CashInTransit = CashInTransit;
-
 	QueryArray = GetQueryTextsSecondaryTables();
 	PostingServer.ExecuteQuery(Ref, QueryArray, Parameters);
 
-	Return Tables;
-EndFunction
+	Tables = New Structure;
 
-Function GetQueryText_CashStatement_CashInTransit()
-	Return "SELECT
-		   |	Table.Ref.Company AS Company,
-		   |	Table.Ref AS BasisDocument,
-		   |	Table.Account AS FromAccount,
-		   |	Table.ReceiptingAccount AS ToAccount,
-		   |	Table.Currency AS Currency,
-		   |	Table.Amount AS Amount,
-		   |	Table.Ref.Date AS Period,
-		   |	Table.Key
-		   |FROM
-		   |	Document.CashStatement.PaymentList AS Table
-		   |WHERE
-		   |	Table.Ref = &Ref
-		   |	AND Table.Account.Type = VALUE(Enum.CashAccountTypes.POS)";
+	CashInTransit = Metadata.AccumulationRegisters.CashInTransit;
+	Tables.Insert(CashInTransit.Name, CommonFunctionsServer.CreateTable(CashInTransit));
+
+	Return Tables;
 EndFunction
 
 Function PostingGetLockDataSource(Ref, Cancel, PostingMode, Parameters, AddInfo = Undefined) Export
@@ -66,6 +41,10 @@ EndProcedure
 Function PostingGetPostingDataTables(Ref, Cancel, PostingMode, Parameters, AddInfo = Undefined) Export
 	PostingDataTables = New Map;
 	PostingServer.SetPostingDataTables(PostingDataTables, Parameters);
+	
+	CashInTransit = Metadata.AccumulationRegisters.CashInTransit;
+	PostingServer.SetPostingDataTable(PostingDataTables, Parameters, CashInTransit.Name, Parameters.DocumentDataTables[CashInTransit.Name]);
+	
 	Return PostingDataTables;
 EndFunction
 
@@ -119,6 +98,7 @@ EndFunction
 
 Function GetQueryTextsMasterTables()
 	QueryArray = New Array;
+	QueryArray.Add(CashInTransit());
 	QueryArray.Add(R3010B_CashOnHand());
 	QueryArray.Add(R3011T_CashFlow());
 	QueryArray.Add(R3021B_CashInTransitIncoming());
@@ -159,6 +139,25 @@ EndFunction
 #EndRegion
 
 #Region Posting_MainTables
+
+Function CashInTransit()
+	Return "SELECT
+	|	VALUE(AccumulationRecordType.Receipt) AS RecordType,
+	|	Table.Ref.Company AS Company,
+	|	Table.Ref AS BasisDocument,
+	|	Table.Account AS FromAccount,
+	|	Table.ReceiptingAccount AS ToAccount,
+	|	Table.Currency AS Currency,
+	|	Table.Amount AS Amount,
+	|	Table.Ref.Date AS Period,
+	|	Table.Key
+	|INTO CashInTransit
+	|FROM
+	|	Document.CashStatement.PaymentList AS Table
+	|WHERE
+	|	Table.Ref = &Ref
+	|	AND Table.Account.Type = VALUE(Enum.CashAccountTypes.POS)";
+EndFunction
 
 Function R3010B_CashOnHand()
 	Return "SELECT

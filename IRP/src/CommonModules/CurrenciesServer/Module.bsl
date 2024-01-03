@@ -21,8 +21,7 @@ Procedure PreparePostingDataTables(Parameters, CurrencyTable, AddInfo = Undefine
 		EndDo;
 	EndIf;
 
-	If ArrayOfPostingInfo.Count() And
-	 (Parameters.Metadata.TabularSections.Find("Currencies") <> Undefined Or CurrencyTable <> Undefined) Then
+	If ArrayOfPostingInfo.Count() And (Parameters.Metadata.TabularSections.Find("Currencies") <> Undefined Or CurrencyTable <> Undefined) Then
 		TempTableManager = New TempTablesManager();
 		Query = New Query();
 		Query.TempTablesManager = TempTableManager;
@@ -90,7 +89,8 @@ Procedure PreparePostingDataTables(Parameters, CurrencyTable, AddInfo = Undefine
 				TableOfAgreementMovementTypes.Columns.Add("LegalName");
 				TableOfAgreementMovementTypes.Columns.Add("Amount");
 				TableOfAgreementMovementTypes.Columns.Add("Key");
-				For Each ItemOfPostingInfo In ArrayOfPostingInfo Do
+				For Each ItemOfPostingInfoRow In ArrayOfPostingInfo Do
+					ItemOfPostingInfo = ItemOfPostingInfoRow.Value;
 					If ItemOfPostingInfo.Metadata = RegisterType Then
 						If ItemOfPostingInfo.RecordSet_NewTable.Columns.Find("Key") = Undefined Then
 							ItemOfPostingInfo.RecordSet_NewTable.Columns.Add("Key", New TypeDescription(Metadata.DefinedTypes.typeRowID.Type));
@@ -158,7 +158,8 @@ Procedure PreparePostingDataTables(Parameters, CurrencyTable, AddInfo = Undefine
 			
 		EndIf;
 		Query.Execute();
-		For Each ItemOfPostingInfo In ArrayOfPostingInfo Do
+		For Each ItemOfPostingInfoRow In ArrayOfPostingInfo Do
+			ItemOfPostingInfo = ItemOfPostingInfoRow.Value;
 			If ItemOfPostingInfo.RecordSet_NewTable.Count() Then
 				UseAgreementMovementType = IsUseAgreementMovementType(ItemOfPostingInfo.Metadata);
 				UseCurrencyJoin = IsUseCurrencyJoin(Parameters, ItemOfPostingInfo.Metadata);

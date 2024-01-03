@@ -1207,19 +1207,23 @@ Function GetAccountingData_LandedCost(Parameters)
 	
 	CurrenciesParameters = New Structure();
 	PostingDataTables = New Map();
-	PostingDataTables.Insert(RecordSet_AccountingAmounts, New Structure("RecordSet", TableAccountingAmounts));
+	
+	TableAccountingAmountsSettings = PostingServer.PostingTableSettings(RecordSet_AccountingAmounts.Metadata().Name, TableAccountingAmounts, RecordSet_AccountingAmounts);
+	PostingDataTables.Insert(RecordSet_AccountingAmounts.Metadata(), TableAccountingAmountsSettings);
+		
 	ArrayOfPostingInfo = New Array();
 	For Each DataTable In PostingDataTables Do
 		ArrayOfPostingInfo.Add(DataTable);
 	EndDo;
 	CurrenciesParameters.Insert("Object", Parameters.Recorder);
+	CurrenciesParameters.Insert("Metadata", Parameters.Recorder.Metadata());
 	CurrenciesParameters.Insert("ArrayOfPostingInfo", ArrayOfPostingInfo);
 	CurrenciesParameters.Insert("IsLandedCost", True);
 	CurrenciesServer.PreparePostingDataTables(CurrenciesParameters, CurrenciesTable);
 	
 	For Each ItemOfPostingInfo In ArrayOfPostingInfo Do
-		If TypeOf(ItemOfPostingInfo.Key) = Type("AccumulationRegisterRecordSet.T1040T_AccountingAmounts") Then
-			For Each RowPostingInfo In ItemOfPostingInfo.Value.RecordSet Do
+		If ItemOfPostingInfo.Key = Metadata.AccumulationRegisters.T1040T_AccountingAmounts Then
+			For Each RowPostingInfo In ItemOfPostingInfo.Value.RecordSet_Document Do
 				FillPropertyValues(CalculatedTableAccountingAmounts.Add(), RowPostingInfo);
 			EndDo;
 		EndIf;

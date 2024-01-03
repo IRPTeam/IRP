@@ -14,27 +14,7 @@ Function PostingGetDocumentDataTables(Ref, Cancel, PostingMode, Parameters, AddI
 
 	Calculate_BatchKeysInfo(Ref, Parameters, AddInfo);
 
-	Query = New Query();
-	Query.Text = 
-	"SELECT
-	|	VALUE(AccumulationRecordType.Receipt) AS RecordType,
-	|	OpeningEntryCashInTransit.Ref.Date AS Period,
-	|	OpeningEntryCashInTransit.Ref.Company,
-	|	OpeningEntryCashInTransit.Account AS FromAccount,
-	|	OpeningEntryCashInTransit.ReceiptingAccount AS ToAccount,
-	|	OpeningEntryCashInTransit.Currency,
-	|	OpeningEntryCashInTransit.Amount,
-	|	OpeningEntryCashInTransit.Key
-	|FROM
-	|	Document.OpeningEntry.CashInTransit AS OpeningEntryCashInTransit
-	|WHERE
-	|	OpeningEntryCashInTransit.Ref = &Ref";
-	Query.SetParameter("Ref", Ref);
-	QueryResult = Query.Execute();
-	QueryTable = QueryResult.Unload();
-	
 	Tables = New Structure;
-	Tables.Insert("RegCashInTransit", QueryTable);
 	Return Tables;
 EndFunction
 
@@ -59,6 +39,7 @@ Procedure PostingCheckBeforeWrite(Ref, Cancel, PostingMode, Parameters, AddInfo 
 	Tables.R5015B_OtherPartnersTransactions.Columns.Add("Key", Metadata.DefinedTypes.typeRowID.Type);
 	Tables.R3021B_CashInTransitIncoming.Columns.Add("Key", Metadata.DefinedTypes.typeRowID.Type);
 	Tables.R8510B_BookValueOfFixedAsset.Columns.Add("Key", Metadata.DefinedTypes.typeRowID.Type);
+	Tables.CashInTransit.Columns.Add("Key", Metadata.DefinedTypes.typeRowID.Type);
 
 	PostingServer.FillPostingTables(Tables, Ref, QueryArray, Parameters);
 EndProcedure
@@ -237,7 +218,7 @@ Function GetQueryTextsSecondaryTables()
 	QueryArray.Add(SalaryPayment());
 	QueryArray.Add(OtherVendorsTransactions());
 	QueryArray.Add(OtherCustomersTransactions());
-	QueryArray.Add(CashInTransit());
+	QueryArray.Add(CashInTransitDoc());
 	QueryArray.Add(FixedAssets());
 	QueryArray.Add(PostingServer.Exists_R4010B_ActualStocks());
 	QueryArray.Add(PostingServer.Exists_R4011B_FreeStocks());
@@ -273,6 +254,7 @@ Function GetQueryTextsMasterTables()
 	QueryArray.Add(T8515S_FixedAssetsLocation());
 	QueryArray.Add(R8515T_CostOfFixedAsset());
 	QueryArray.Add(R8510B_BookValueOfFixedAsset());
+	QueryArray.Add(CashInTransit());
 	Return QueryArray;
 EndFunction
 
@@ -650,21 +632,21 @@ Function SalaryPayment()
 		   |	SalaryPayment.Ref = &Ref";
 EndFunction
 
-Function CashInTransit()
+Function CashInTransitDoc()
 	Return
 		"SELECT
-		|	CashInTransit.Key,
-		|	CashInTransit.Ref.Date AS Period,
-		|	CashInTransit.Ref.Company AS Company,
-		|	CashInTransit.ReceiptingBranch AS Branch,
-		|	CashInTransit.ReceiptingAccount,
-		|	CashInTransit.Currency,
-		|	CashInTransit.Amount
-		|INTO CashInTransit
+		|	CashInTransitDoc.Key,
+		|	CashInTransitDoc.Ref.Date AS Period,
+		|	CashInTransitDoc.Ref.Company AS Company,
+		|	CashInTransitDoc.ReceiptingBranch AS Branch,
+		|	CashInTransitDoc.ReceiptingAccount,
+		|	CashInTransitDoc.Currency,
+		|	CashInTransitDoc.Amount
+		|INTO CashInTransitDoc
 		|FROM
-		|	Document.OpeningEntry.CashInTransit AS CashInTransit
+		|	Document.OpeningEntry.CashInTransit AS CashInTransitDoc
 		|WHERE
-		|	CashInTransit.Ref = &Ref";
+		|	CashInTransitDoc.Ref = &Ref";
 EndFunction
 
 Function FixedAssets()
@@ -691,6 +673,24 @@ EndFunction
 #EndRegion
 
 #Region Posting_MainTables
+
+Function CashInTransit()
+	Return
+		"SELECT
+		|	VALUE(AccumulationRecordType.Receipt) AS RecordType,
+		|	OpeningEntryCashInTransit.Ref.Date AS Period,
+		|	OpeningEntryCashInTransit.Ref.Company,
+		|	OpeningEntryCashInTransit.Account AS FromAccount,
+		|	OpeningEntryCashInTransit.ReceiptingAccount AS ToAccount,
+		|	OpeningEntryCashInTransit.Currency,
+		|	OpeningEntryCashInTransit.Amount,
+		|	OpeningEntryCashInTransit.Key
+		|INTO CashInTransit
+		|FROM
+		|	Document.OpeningEntry.CashInTransit AS OpeningEntryCashInTransit
+		|WHERE
+		|	OpeningEntryCashInTransit.Ref = &Ref";
+EndFunction
 
 Function R1020B_AdvancesToVendors()
 	Return "SELECT 
@@ -937,16 +937,16 @@ Function R3021B_CashInTransitIncoming()
 	Return
 		"SELECT
 		|	VALUE(AccumulationRecordType.Receipt) AS RecordType,
-		|	CashInTransit.Key,
-		|	CashInTransit.Period,
-		|	CashInTransit.Company,
-		|	CashInTransit.Branch,
-		|	CashInTransit.ReceiptingAccount AS Account,
-		|	CashInTransit.Currency,
-		|	CashInTransit.Amount
+		|	CashInTransitDoc.Key,
+		|	CashInTransitDoc.Period,
+		|	CashInTransitDoc.Company,
+		|	CashInTransitDoc.Branch,
+		|	CashInTransitDoc.ReceiptingAccount AS Account,
+		|	CashInTransitDoc.Currency,
+		|	CashInTransitDoc.Amount
 		|INTO R3021B_CashInTransitIncoming
 		|FROM
-		|	CashInTransit AS CashInTransit
+		|	CashInTransitDoc AS CashInTransitDoc
 		|WHERE
 		|	TRUE";
 EndFunction

@@ -170,8 +170,8 @@ Procedure PreparePostingDataTables(Parameters, CurrencyTable, AddInfo = Undefine
 				If Not IsOffsetOfAdvances And Not IsLandedCost Then
 				
 					// Advances
-					If TypeOf(ItemOfPostingInfo.Metadata) = Metadata.AccumulationRegisters.R1020B_AdvancesToVendors
-						Or TypeOf(ItemOfPostingInfo.Metadata) = Metadata.AccumulationRegisters.R2020B_AdvancesFromCustomers Then
+					If ItemOfPostingInfo.Metadata = Metadata.AccumulationRegisters.R1020B_AdvancesToVendors
+						Or ItemOfPostingInfo.Metadata = Metadata.AccumulationRegisters.R2020B_AdvancesFromCustomers Then
 					
 						AdvancesCurrencyRevaluation = GetAdvancesCurrencyRevaluation(Parameters.Object.Ref);
 						For Each Row In AdvancesCurrencyRevaluation Do
@@ -181,8 +181,8 @@ Procedure PreparePostingDataTables(Parameters, CurrencyTable, AddInfo = Undefine
 					EndIf;
 			
 					// Transactions
-					If TypeOf(ItemOfPostingInfo.Metadata) = Metadata.AccumulationRegisters.R1021B_VendorsTransactions
-						Or TypeOf(ItemOfPostingInfo.Metadata) = Metadata.AccumulationRegisters.R2021B_CustomersTransactions Then
+					If ItemOfPostingInfo.Metadata = Metadata.AccumulationRegisters.R1021B_VendorsTransactions
+						Or ItemOfPostingInfo.Metadata = Metadata.AccumulationRegisters.R2021B_CustomersTransactions Then
 					
 						TransactionsCurrencyRevaluation = GetTransactionsCurrencyRevaluation(Parameters.Object.Ref);
 						For Each Row In TransactionsCurrencyRevaluation Do
@@ -192,7 +192,7 @@ Procedure PreparePostingDataTables(Parameters, CurrencyTable, AddInfo = Undefine
 					EndIf;
 			
 					// Accounting amounts
-					If TypeOf(ItemOfPostingInfo.Metadata) = Metadata.AccumulationRegisters.T1040T_AccountingAmounts Then
+					If ItemOfPostingInfo.Metadata = Metadata.AccumulationRegisters.T1040T_AccountingAmounts Then
 						Op = Catalogs.AccountingOperations;
 						
 						AccountingOperations = New ValueTable();

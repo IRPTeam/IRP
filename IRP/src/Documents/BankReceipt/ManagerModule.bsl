@@ -351,7 +351,7 @@ Function CashInTransit()
 	|	tmp.Key
 	|INTO CashInTransit
 	|FROM
-	|	tmp AS tmp
+	|	TablePaymentList AS tmp
 	|WHERE
 	|	tmp.IsMoneyTransfer
 	|

@@ -368,7 +368,7 @@ Function CashInTransit()
 	|	tmp.Period,
 	|	tmp.Key
 	|FROM
-	|	tmp AS tmp
+	|	TablePaymentList AS tmp
 	|WHERE
 	|	tmp.TransferFromPOS";
 EndFunction

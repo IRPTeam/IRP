@@ -627,3 +627,20 @@ Scenario: _012012 create Partner term for other partners
 		And I click "Save and close" button
 		And Delay 5
 		Then I check for the "Agreements" catalog element with the "Description_en" "Other"
+
+Scenario: _012013 check of automatic filling of Legal name in the partner term
+	And I close all client application windows
+	* Select partner
+		Given I open hyperlink "e1cib/list/Catalog.Partners"
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Kalipso'     |
+		And I select current line in "List" table	
+	* Create partner term
+		And In this window I click command interface button "Partner terms"
+		And I click "Create" button
+	* Check Legal name
+		Then the form attribute named "LegalName" became equal to "Company Kalipso"
+		Then the form attribute named "Partner" became equal to "Kalipso"
+	And I close all client application windows
+				

@@ -7,7 +7,6 @@
   </synonym>
   <includeHelpInContents>true</includeHelpInContents>
   <includeInCommandInterface>true</includeInCommandInterface>
-  <content>DefinedType.AdditionalTableControlDocument</content>
   <content>CommonModule.AdditionalDocumentTableControl</content>
   <content>Report.AdditionalDocumentTablesCheck</content>
   <content>DataProcessor.FixDocumentProblems</content>

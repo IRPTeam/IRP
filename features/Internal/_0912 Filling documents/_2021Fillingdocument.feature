@@ -6285,6 +6285,7 @@ Scenario: _0154156 check function DontCalculateRow in the Sales return
 			| 'Company Kalipso'    |
 		And I select current line in "List" table
 		And I click Select button of "Partner term" field
+		And I remove checkbox named "FilterCompanyUse"	
 		And I go to line in "List" table
 			| 'Description'                 |
 			| 'Basic Partner terms, TRY'    |
@@ -6454,6 +6455,7 @@ Scenario: _0154157 check function DontCalculateRow in the Sales return order
 			| 'Company Kalipso'    |
 		And I select current line in "List" table
 		And I click Select button of "Partner term" field
+		And I remove checkbox named "FilterCompanyUse"
 		And I go to line in "List" table
 			| 'Description'                 |
 			| 'Basic Partner terms, TRY'    |
@@ -7198,6 +7200,7 @@ Scenario: _0154164 check tax and net amount calculation when change total amount
 			| 'Company Kalipso'    |
 		And I select current line in "List" table
 		And I click Select button of "Partner term" field
+		And I remove checkbox named "FilterCompanyUse"
 		And I go to line in "List" table
 			| 'Description'                 |
 			| 'Basic Partner terms, TRY'    |
@@ -7323,6 +7326,7 @@ Scenario: _0154165 check tax and net amount calculation when change total amount
 			| 'Company Kalipso'    |
 		And I select current line in "List" table
 		And I click Select button of "Partner term" field
+		And I remove checkbox named "FilterCompanyUse"
 		And I go to line in "List" table
 			| 'Description'                 |
 			| 'Basic Partner terms, TRY'    |
@@ -7447,6 +7451,7 @@ Scenario: _0154167 check tax rate recalculation when change partner term (Purcha
 			| 'Company Adel'    |
 		And I select current line in "List" table
 		And I click Select button of "Partner term" field
+		And I remove checkbox named "FilterCompanyUse"
 		And I go to line in "List" table
 			| 'Description'    |
 			| 'Vendor, USD'    |
@@ -7517,6 +7522,7 @@ Scenario: _0154168 check tax rate recalculation when change partner term (Purcha
 			| 'Company Adel'    |
 		And I select current line in "List" table
 		And I click Select button of "Partner term" field
+		And I remove checkbox named "FilterCompanyUse"
 		And I go to line in "List" table
 			| 'Description'    |
 			| 'Vendor, USD'    |
@@ -7588,6 +7594,7 @@ Scenario: _0154170 select Partner items in the PO
 			| 'Company Ferron BP'    |
 		And I select current line in "List" table
 		And I click Select button of "Partner term" field
+		And I remove checkbox named "FilterCompanyUse"
 		And I go to line in "List" table
 			| 'Description'           |
 			| 'Vendor Ferron, TRY'    |
@@ -7722,6 +7729,7 @@ Scenario: _0154182 check price recalculaton in the PO (depend of currency)
 			| 'DFC'            |
 		And I select current line in "List" table
 		And I click Select button of "Partner term" field
+		And I remove checkbox named "FilterCompanyUse"
 		And I go to line in "List" table
 			| 'Description'                |
 			| 'Partner term vendor DFC'    |
@@ -7804,6 +7812,7 @@ Scenario: _0154183 check price recalculaton in the PI (depend of currency)
 			| 'DFC'            |
 		And I select current line in "List" table
 		And I click Select button of "Partner term" field
+		And I remove checkbox named "FilterCompanyUse"
 		And I go to line in "List" table
 			| 'Description'                |
 			| 'Partner term vendor DFC'    |
@@ -8308,6 +8317,7 @@ Scenario: _0154189 check filling in and refilling Work order
 			And I select current line in "List" table
 			Then the form attribute named "Company" became equal to "Second Company"
 			And I click Select button of "Partner term" field
+			And I remove checkbox named "FilterCompanyUse"
 			And I select current line in "List" table
 		* Check the refill when selecting a partner term
 			Then the form attribute named "Company" became equal to "Main Company"
@@ -8403,6 +8413,7 @@ Scenario: _0154189 check filling in and refilling Work order
 	* Tax calculation check when filling in the company at reselection of the partner term
 		* Re-select partner term
 			And I click Select button of "Partner term" field
+			And I remove checkbox named "FilterCompanyUse"
 			And I go to line in "List" table
 				| 'Description'                  |
 				| 'Basic Partner terms, TRY'     |
@@ -8699,16 +8710,27 @@ Scenario: _0154190 check filling in and refilling Work sheet
 		And I close all client application windows
 		
 				
-				
-				
-
-		
-						
-			
-						
-			
-						
-						
-						
-
-	
+Scenario: _0154191 check filter by Company when select partner term
+	And I close all client application windows
+	* Open the Sales order creation form
+		Given I open hyperlink "e1cib/list/Document.SalesOrder"
+		And I click the button named "FormCreate"
+		And I click Select button of "Partner" field
+		And I go to line in "List" table
+			| 'Description'    |
+			| 'Kalipso'        |
+		And I select current line in "List" table
+		And I click Select button of "Company" field
+		And I go to line in "List" table
+			| 'Description'        |
+			| 'Second Company'     |
+		And I select current line in "List" table	
+	* Check filter by company for partner term
+		And I click Select button of "Partner term" field
+		Then the number of "List" table lines is "равно" 0
+		Then the form attribute named "FilterCompany" became equal to "Second Company"
+		And I select from "Company" drop-down list by "main" string
+		Then the number of "List" table lines is "больше или равно" 3
+		And I select from "Company" drop-down list by "second" string
+		Then the number of "List" table lines is "равно" 0
+		And I close all client application windows

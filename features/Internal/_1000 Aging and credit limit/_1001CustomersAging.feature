@@ -1,4 +1,4 @@
-#language: en
+﻿#language: en
 @tree
 @Positive
 @AgingAndCreditLimit
@@ -80,6 +80,8 @@ Scenario: _1000000 preparation (payment terms)
 		When Create document OpeningEntry objects (aging)
 		When Create document BankReceipt objects (aging, Opening entry)
 		And I close all client application windows
+	* Load SO (aging)
+		When Create document SalesOrder objects (aging)
 		
 Scenario: _10000001 check preparation
 	When check preparation
@@ -916,10 +918,43 @@ Scenario: _1000056 check aging  date in the SI (created based on SC)
 				| '1'    | '{Format(CurrentDate() + 14 * 24 * 60 * 60, "DLF=D")}'    | '1 612,00'    | 'Post-shipment credit'    | '14'                  | '100,00'                    |
 			And I close all client application windows
 			
-						
-						
-		
-
-
-			
-						
+Scenario: _1000057 create BR based on SO (Prepaid)
+	And I close all client application windows
+	* Prepaid
+		And I execute 1C:Enterprise script at server
+			| "Documents.SalesOrder.FindByNumber(1115).GetObject().Write(DocumentWriteMode.Posting);"    |
+	* Select SO
+		Given I open hyperlink "e1cib/list/Document.SalesOrder" 
+		And I go to line in "List" table
+			| 'Number'    |
+			| '1 115'     |
+	* Create BR based on SO
+		Then "Sales orders" window is opened
+		And I click the button named "FormDocumentBankReceiptGenerateBankReceipt"
+		And "PaymentList" table became equal
+			| 'Partner' | '#' | 'Commission' | 'Payer'           | 'Partner term' | 'Legal name contract' | 'Commission is separate' | 'Basis document' | 'Order'                                       | 'Total amount' | 'Financial movement type' | 'Profit loss center' | 'Cash flow center' | 'Planning transaction basis' | 'Additional analytic' | 'Commission percent' | 'Expense type' |
+			| 'Kalipso' | '1' | ''           | 'Company Kalipso' | ''             | ''                    | 'No'                     | ''               | 'Sales order 1 115 dated 04.01.2024 11:43:06' | '864,41'       | ''                        | ''                   | ''                 | ''                           | ''                    | ''                   | ''             |
+		Then the form attribute named "Branch" became equal to "Front office"
+		Then the form attribute named "Company" became equal to "Main Company"
+		Then the form attribute named "TransactionType" became equal to "Payment from customer"
+		Then the form attribute named "Currency" became equal to "TRY"
+	* Try select SO in BR
+		And I activate "Partner term" field in "PaymentList" table
+		And I delete a line in "PaymentList" table
+		And in the table "PaymentList" I click the button named "PaymentListAdd"
+		And I select current line in "PaymentList" table
+		And I click choice button of "Partner" attribute in "PaymentList" table
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Kalipso'     |
+		And I select current line in "List" table		
+		And I activate "Order" field in "PaymentList" table
+		And I click choice button of "Order" attribute in "PaymentList" table
+		And I go to line in "List" table
+			| 'Document'                                    | 'Company'      | 'Partner' | 'Legal name'      | 'Partner term'                     | 'Currency' | 'Amount' |
+			| 'Sales order 1 115 dated 04.01.2024 11:43:06' | 'Main Company' | 'Kalipso' | 'Company Kalipso' | 'Basic Partner terms, without VAT' | 'TRY'      | '864,41' |
+		And I click "Select" button
+		And "PaymentList" table became equal
+			| 'Partner' | '#' | 'Commission' | 'Payer'           | 'Partner term' | 'Legal name contract' | 'Commission is separate' | 'Basis document' | 'Order'                                       | 'Total amount' | 'Financial movement type' | 'Profit loss center' | 'Cash flow center' | 'Planning transaction basis' | 'Additional analytic' | 'Commission percent' | 'Expense type' |
+			| 'Kalipso' | '1' | ''           | 'Company Kalipso' | ''             | ''                    | 'No'                     | ''               | 'Sales order 1 115 dated 04.01.2024 11:43:06' | '864,41'       | ''                        | ''                   | ''                 | ''                           | ''                    | ''                   | ''             |
+	And I close all client application windows

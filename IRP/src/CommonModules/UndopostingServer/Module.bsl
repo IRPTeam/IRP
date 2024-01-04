@@ -27,7 +27,8 @@ Procedure Undopost(DocObject, Cancel, AddInfo = Undefined) Export
 	Parameters.Insert("DocumentDataTables", New Structure);
 	Parameters.Insert("LockDataSources", New Map);
 	Parameters.Insert("PostingDataTables", New Map);
-	
+	Parameters.Insert("Metadata", DocObject.Ref.Metadata());
+		
 	Module = Documents[DocObject.Ref.Metadata().Name]; // DocumentManager.SalesOrder
 
 	Parameters.DocumentDataTables = Module.UndopostingGetDocumentDataTables(DocObject.Ref, Cancel, Parameters, AddInfo);

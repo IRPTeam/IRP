@@ -7,8 +7,8 @@ Function GetT9011S_AccountsCashAccount_Reuse(Period, Company, LedgerTypeVariant,
 	Return AccountingServer.__GetT9011S_AccountsCashAccount(Period, Company, LedgerTypeVariant, CashAccount);
 EndFunction
 
-Function GetT9012S_AccountsPartner_Reuse(Period, Company, LedgerTypeVariant, Partner, Agreement) Export
-	Return AccountingServer.__GetT9012S_AccountsPartner(Period, Company, LedgerTypeVariant, Partner, Agreement);
+Function GetT9012S_AccountsPartner_Reuse(Period, Company, LedgerTypeVariant, Partner, Agreement, Currency) Export
+	Return AccountingServer.__GetT9012S_AccountsPartner(Period, Company, LedgerTypeVariant, Partner, Agreement, Currency);
 EndFunction
 	
 Function GetT9013S_AccountsTax_Reuse(Period, Company, LedgerTypeVariant, Tax, VatRate) Export

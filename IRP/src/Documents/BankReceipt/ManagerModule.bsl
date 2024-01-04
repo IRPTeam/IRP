@@ -1092,7 +1092,11 @@ Function GetAnalytics_DR_R3010B_CR_R2020B_R2021B(Parameters)
 	AdditionalAnalytics.Insert("Account", Parameters.ObjectData.Account);
 	AccountingServer.SetDebitExtDimensions(Parameters, AccountingAnalytics, AdditionalAnalytics);
 	
-	Credit = AccountingServer.GetT9012S_AccountsPartner(AccountParameters, Parameters.RowData.Partner, Parameters.RowData.Agreement);
+	Credit = AccountingServer.GetT9012S_AccountsPartner(AccountParameters, 
+	                                                    Parameters.RowData.Partner, 
+	                                                    Parameters.RowData.Agreement,
+	                                                    Parameters.ObjectData.Currency);
+	                                                    
 	IsAdvance = AccountingServer.IsAdvance(Parameters.RowData);
 	If IsAdvance Then
 		If ValueIsFilled(Credit.AccountAdvancesCustomer) Then
@@ -1114,7 +1118,11 @@ Function GetAnalytics_DR_R2021B_CR_R2020B(Parameters)
 	AccountingAnalytics = AccountingServer.GetAccountingAnalyticsResult(Parameters);
 	AccountParameters   = AccountingServer.GetAccountParameters(Parameters);
 
-	Accounts = AccountingServer.GetT9012S_AccountsPartner(AccountParameters, Parameters.RowData.Partner, Parameters.RowData.Agreement);
+	Accounts = AccountingServer.GetT9012S_AccountsPartner(AccountParameters, 
+	                                                      Parameters.RowData.Partner, 
+	                                                      Parameters.RowData.Agreement,
+	                                                      Parameters.ObjectData.Currency);
+	                                                      
 	If ValueIsFilled(Accounts.AccountTransactionsCustomer) Then
 		AccountingAnalytics.Debit = Accounts.AccountTransactionsCustomer;
 	EndIf;

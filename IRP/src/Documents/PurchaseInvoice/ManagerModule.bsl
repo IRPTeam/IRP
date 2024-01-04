@@ -1541,8 +1541,11 @@ Function GetAnalytics_ReceiptInventory(Parameters)
 	AccountingServer.SetDebitExtDimensions(Parameters, AccountingAnalytics, AdditionalAnalytics);
 	
 	// Credit
-	Credit = AccountingServer.GetT9012S_AccountsPartner(AccountParameters, Parameters.ObjectData.Partner,
-		Parameters.ObjectData.Agreement);
+	Credit = AccountingServer.GetT9012S_AccountsPartner(AccountParameters, 
+	                                                    Parameters.ObjectData.Partner,
+	                                                    Parameters.ObjectData.Agreement,
+	                                                    Parameters.ObjectData.Currency);
+	                                                    
 	If ValueIsFilled(Credit.AccountTransactionsVendor) Then
 		AccountingAnalytics.Credit = Credit.AccountTransactionsVendor;
 	EndIf;
@@ -1557,8 +1560,11 @@ Function GetAnalytics_OffsetOfAdvances(Parameters)
 	AccountParameters   = AccountingServer.GetAccountParameters(Parameters);
 
 	// Debit
-	Accounts = AccountingServer.GetT9012S_AccountsPartner(AccountParameters, Parameters.ObjectData.Partner,
-		Parameters.ObjectData.Agreement);
+	Accounts = AccountingServer.GetT9012S_AccountsPartner(AccountParameters, 
+														  Parameters.ObjectData.Partner,
+														  Parameters.ObjectData.Agreement,
+														  Parameters.ObjectData.Currency);
+														  
 	If ValueIsFilled(Accounts.AccountTransactionsVendor) Then
 		AccountingAnalytics.Debit = Accounts.AccountTransactionsVendor;
 	EndIf;
@@ -1586,8 +1592,11 @@ Function GetAnalytics_VATIncoming(Parameters)
 	AccountingServer.SetDebitExtDimensions(Parameters, AccountingAnalytics, Parameters.RowData.TaxInfo);
 	
 	// Credit
-	Credit = AccountingServer.GetT9012S_AccountsPartner(AccountParameters, Parameters.ObjectData.Partner,
-		Parameters.ObjectData.Agreement);
+	Credit = AccountingServer.GetT9012S_AccountsPartner(AccountParameters, 
+	                                                    Parameters.ObjectData.Partner,
+	                                                    Parameters.ObjectData.Agreement,
+	                                                    Parameters.ObjectData.Currency);
+	                                                    
 	If ValueIsFilled(Credit.AccountTransactionsVendor) Then
 		AccountingAnalytics.Credit = Credit.AccountTransactionsVendor;
 	EndIf;

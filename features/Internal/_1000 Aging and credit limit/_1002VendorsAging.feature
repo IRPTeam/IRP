@@ -1,4 +1,4 @@
-#language: en
+﻿#language: en
 @tree
 @Positive
 @IgnoreOnCIMainBuild
@@ -57,6 +57,7 @@ Scenario: _1002000 preparation (vendors aging)
 		And Delay 5
 		Then user message window does not contain messages
 		And I close all client application windows
+	When Create document PurchaseOrder objects (aging)
 
 Scenario: _10020001 check preparation
 	When check preparation
@@ -815,3 +816,43 @@ Scenario: _1000056 check aging  date in the PI (created based on GR)
 				| '#'    | 'Date'                                                   | 'Amount'    | 'Calculation type'        | 'Due period, days'    | 'Proportion of payment'     |
 				| '1'    | '{Format(CurrentDate() + 7 * 24 * 60 * 60, "DLF=D")}'    | '900,00'    | 'Post-shipment credit'    | '7'                   | '100,00'                    |
 			And I close all client application windows
+
+Scenario: _1200057 create BP based on PO (Prepaid)
+	And I close all client application windows
+	* Prepaid
+		And I execute 1C:Enterprise script at server
+			| "Documents.PurchaseOrder.FindByNumber(1115).GetObject().Write(DocumentWriteMode.Posting);"    |
+	* Select PO
+		Given I open hyperlink "e1cib/list/Document.PurchaseOrder" 
+		And I go to line in "List" table
+			| 'Number'    |
+			| '1 115'     |
+	* Create BP based on PO
+		And I click the button named "FormDocumentBankPaymentGenerateBankPayment"
+		And "PaymentList" table became equal
+			| '#' | 'Partner'   | 'Commission' | 'Payee'             | 'Partner term' | 'Legal name contract' | 'Basis document' | 'Order'                                          | 'Total amount' | 'Financial movement type' | 'Profit loss center' | 'Cash flow center' | 'Planning transaction basis' | 'Commission percent' | 'Additional analytic' | 'Expense type' |
+			| '1' | 'Ferron BP' | ''           | 'Company Ferron BP' | ''             | ''                    | ''               | 'Purchase order 1 115 dated 04.01.2024 12:09:17' | '1 000,00'     | ''                        | ''                   | ''                 | ''                           | ''                   | ''                    | ''             |		
+		Then the form attribute named "Branch" became equal to "Front office"
+		Then the form attribute named "Company" became equal to "Main Company"
+		Then the form attribute named "TransactionType" became equal to "Payment to the vendor"
+		Then the form attribute named "Currency" became equal to "TRY"
+	* Try select PO in BP
+		And I activate "Partner term" field in "PaymentList" table
+		And I delete a line in "PaymentList" table
+		And in the table "PaymentList" I click the button named "PaymentListAdd"
+		And I select current line in "PaymentList" table
+		And I click choice button of "Partner" attribute in "PaymentList" table
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Ferron BP'     |
+		And I select current line in "List" table		
+		And I activate "Order" field in "PaymentList" table
+		And I click choice button of "Order" attribute in "PaymentList" table
+		And "List" table became equal
+			| 'Document'                                       | 'Company'      | 'Partner'   | 'Legal name'        | 'Partner term'       | 'Currency' | 'Amount'   |
+			| 'Purchase order 1 115 dated 04.01.2024 12:09:17' | 'Main Company' | 'Ferron BP' | 'Company Ferron BP' | 'Vendor Ferron, TRY' | 'TRY'      | '1 000,00' |		
+		And I click "Select" button
+		And "PaymentList" table became equal
+			| '#' | 'Partner'   | 'Commission' | 'Payee'             | 'Partner term' | 'Legal name contract' | 'Basis document' | 'Order'                                          | 'Total amount' | 'Financial movement type' | 'Profit loss center' | 'Cash flow center' | 'Planning transaction basis' | 'Commission percent' | 'Additional analytic' | 'Expense type' |
+			| '1' | 'Ferron BP' | ''           | 'Company Ferron BP' | ''             | ''                    | ''               | 'Purchase order 1 115 dated 04.01.2024 12:09:17' | '1 000,00'     | ''                        | ''                   | ''                 | ''                           | ''                   | ''                    | ''             |		
+	And I close all client application windows

@@ -179,8 +179,7 @@ Procedure Calculate_BatchKeysInfo(Ref, Parameters, AddInfo)
 	|	ISNULL(tmpSourceOfOrigins.SerialLotNumber, VALUE(Catalog.SerialLotNumbers.EmptyRef)) AS SerialLotNumber,
 	|	ISNULL(tmpSourceOfOrigins.SourceOfOriginStock, VALUE(Catalog.SourceOfOrigins.EmptyRef)) AS SourceOfOriginStock,
 	|	ISNULL(tmpSourceOfOrigins.SerialLotNumberStock, VALUE(Catalog.SerialLotNumbers.EmptyRef)) AS SerialLotNumberStock,
-	|	tmpItemList.SalesInvoiceIsFilled
-	|	OR tmpItemList.Company = tmpItemList.SalesInvoice_Company AS CreateBatch
+	|	Not tmpItemList.SalesInvoiceIsFilled OR tmpItemList.Company <> tmpItemList.SalesInvoice_Company AS CreateBatch
 	|INTO BatchKeysInfo
 	|FROM
 	|	tmpItemList AS tmpItemList
@@ -209,7 +208,7 @@ Procedure Calculate_BatchKeysInfo(Ref, Parameters, AddInfo)
 	|FROM
 	|	Document.SalesReturn AS SalesReturn
 	|WHERE
-	|	SalesReturn.Ref = &Ref";
+	|	SalesReturn.Ref = &Ref AND TRUE IN (SELECT CreateBatch FROM BatchKeysInfo)";
 	Query.SetParameter("Ref", Ref);
 	Query.SetParameter("Period", Ref.Date);
 	
@@ -224,11 +223,14 @@ Procedure Calculate_BatchKeysInfo(Ref, Parameters, AddInfo)
 	EndDo;
 
 	T6020S_BatchKeysInfo = Metadata.InformationRegisters.T6020S_BatchKeysInfo;
-	Parameters.DocumentDataTables.Insert(T6020S_BatchKeysInfo.Name, BatchKeysInfo);
+	T6020SSettings = PostingServer.PostingTableSettings(T6020S_BatchKeysInfo.Name, BatchKeysInfo, Parameters.Object.RegisterRecords.T6020S_BatchKeysInfo);
+	T6020SSettings.WriteInTransaction = Parameters.IsReposting;
+	Parameters.PostingDataTables.Insert(T6020S_BatchKeysInfo, T6020SSettings);
 	
 	CurrenciesServer.PreparePostingDataTables(Parameters, CurrencyTable, AddInfo);
 	CurrenciesServer.ExcludePostingDataTable(Parameters, T6020S_BatchKeysInfo);
-	BatchKeysInfo_DataTable = Parameters.DocumentDataTables[T6020S_BatchKeysInfo.Name];
+	
+	BatchKeysInfo_DataTable = Parameters.PostingDataTables[T6020S_BatchKeysInfo].PrepareTable;
 	
 	BatchKeysInfoSettings = PostingServer.GetBatchKeysInfoSettings();
 	BatchKeysInfoSettings.DataTable = BatchKeysInfo_DataTable;

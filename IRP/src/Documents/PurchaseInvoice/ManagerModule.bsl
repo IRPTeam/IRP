@@ -266,11 +266,14 @@ Procedure Calculate_BatchKeysInfo(Ref, Parameters, AddInfo)
 	EndDo;
 
 	T6020S_BatchKeysInfo = Metadata.InformationRegisters.T6020S_BatchKeysInfo;
-	Parameters.DocumentDataTables.Insert(T6020S_BatchKeysInfo.Name, BatchKeysInfo);
+	T6020SSettings = PostingServer.PostingTableSettings(T6020S_BatchKeysInfo.Name, BatchKeysInfo, Parameters.Object.RegisterRecords.T6020S_BatchKeysInfo);
+	T6020SSettings.WriteInTransaction = Parameters.IsReposting;
+	Parameters.PostingDataTables.Insert(T6020S_BatchKeysInfo, T6020SSettings);
 	
 	CurrenciesServer.PreparePostingDataTables(Parameters, CurrencyTable, AddInfo);
 	CurrenciesServer.ExcludePostingDataTable(Parameters, T6020S_BatchKeysInfo);
-	BatchKeysInfo_DataTable = Parameters.DocumentDataTables[T6020S_BatchKeysInfo.Name];
+	
+	BatchKeysInfo_DataTable = Parameters.PostingDataTables[T6020S_BatchKeysInfo].PrepareTable;
 	
 	BatchKeysInfoSettings = PostingServer.GetBatchKeysInfoSettings();
 	BatchKeysInfoSettings.DataTable = BatchKeysInfo_DataTable;

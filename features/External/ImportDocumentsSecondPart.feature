@@ -4496,9 +4496,3 @@ Scenario: Create document PurchaseOrder objects (aging)
 	And I refill object tabular section "PaymentTerms":
 		| 'Ref'                                                                    | 'Date'                | 'ProportionOfPayment' | 'DuePeriod' | 'Amount' | 'CalculationType'               | 'CanBePaid' |
 		| 'e1cib/data/Document.PurchaseOrder?ref=b7b3f42485a6975311eeaae5bfde35b4' | '11.01.2024 00:00:00' | 100                   | 7           | 1000     | 'Enum.CalculationTypes.Prepaid' | 'True'      |
-
-	And I refill object tabular section "RowIDInfo":
-		| 'Ref'                                                                    | 'Key'                                  | 'RowID'                                | 'Quantity' | 'Basis' | 'CurrentStep' | 'NextStep'                                       | 'RowRef'                                                         | 'BasisKey'                             |
-		| 'e1cib/data/Document.PurchaseOrder?ref=b7b3f42485a6975311eeaae5bfde35b4' | '28ed086c-70c8-49b4-89cf-109d8593dfb2' | '28ed086c-70c8-49b4-89cf-109d8593dfb2' | 1          | ''      | ''            | 'e1cib/data/Catalog.MovementRules?refName=PI_GR' | 'e1cib/data/Catalog.RowIDs?ref=b7b3f42485a6975311eeaae5bfde35b2' | '                                    ' |
-		| 'e1cib/data/Document.PurchaseOrder?ref=b7b3f42485a6975311eeaae5bfde35b4' | '8fa1d6ae-f421-496a-8902-790605438679' | '8fa1d6ae-f421-496a-8902-790605438679' | 1          | ''      | ''            | 'e1cib/data/Catalog.MovementRules?refName=PI_GR' | 'e1cib/data/Catalog.RowIDs?ref=b7b3f42485a6975311eeaae5bfde35b3' | '                                    ' |
-

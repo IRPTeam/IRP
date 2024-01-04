@@ -7,202 +7,21 @@ EndProcedure
 
 &AtServer
 Procedure FillDocumentsAtServer()
-	QueryTxt =  
-	"SELECT
-	|	Doc.Ref,
-	|	VALUETYPE(Doc.Ref) AS DocumentType
-	|INTO AllDocuments
-	|FROM
-	|	Document.RetailSalesReceipt AS Doc
-	|
-	|UNION
-	|
-	|SELECT
-	|	Doc.Ref,
-	|	VALUETYPE(Doc.Ref)
-	|FROM
-	|	Document.GoodsReceipt AS Doc
-	|
-	|UNION
-	|
-	|SELECT
-	|	Doc.Ref,
-	|	VALUETYPE(Doc.Ref)
-	|FROM
-	|	Document.Bundling AS Doc
-	|
-	|UNION
-	|
-	|SELECT
-	|	Doc.Ref,
-	|	VALUETYPE(Doc.Ref)
-	|FROM
-	|	Document.InternalSupplyRequest AS Doc
-	|
-	|UNION
-	|
-	|SELECT
-	|	Doc.Ref,
-	|	VALUETYPE(Doc.Ref)
-	|FROM
-	|	Document.InventoryTransfer AS Doc
-	|
-	|UNION
-	|
-	|SELECT
-	|	Doc.Ref,
-	|	VALUETYPE(Doc.Ref)
-	|FROM
-	|	Document.InventoryTransferOrder AS Doc
-	|
-	|UNION
-	|
-	|SELECT
-	|	Doc.Ref,
-	|	VALUETYPE(Doc.Ref)
-	|FROM
-	|	Document.ItemStockAdjustment AS Doc
-	|
-	|UNION
-	|
-	|SELECT
-	|	Doc.Ref,
-	|	VALUETYPE(Doc.Ref)
-	|FROM
-	|	Document.PhysicalCountByLocation AS Doc
-	|
-	|UNION
-	|
-	|SELECT
-	|	Doc.Ref,
-	|	VALUETYPE(Doc.Ref)
-	|FROM
-	|	Document.PhysicalInventory AS Doc
-	|
-	|UNION
-	|
-	|SELECT
-	|	Doc.Ref,
-	|	VALUETYPE(Doc.Ref)
-	|FROM
-	|	Document.PurchaseInvoice AS Doc
-	|
-	|UNION
-	|
-	|SELECT
-	|	Doc.Ref,
-	|	VALUETYPE(Doc.Ref)
-	|FROM
-	|	Document.PurchaseOrder AS Doc
-	|
-	|UNION
-	|
-	|SELECT
-	|	Doc.Ref,
-	|	VALUETYPE(Doc.Ref)
-	|FROM
-	|	Document.PurchaseReturn AS Doc
-	|
-	|UNION
-	|
-	|SELECT
-	|	Doc.Ref,
-	|	VALUETYPE(Doc.Ref)
-	|FROM
-	|	Document.PurchaseReturnOrder AS Doc
-	|
-	|UNION
-	|
-	|SELECT
-	|	Doc.Ref,
-	|	VALUETYPE(Doc.Ref)
-	|FROM
-	|	Document.RetailReturnReceipt AS Doc
-	|
-	|UNION
-	|
-	|SELECT
-	|	Doc.Ref,
-	|	VALUETYPE(Doc.Ref)
-	|FROM
-	|	Document.SalesInvoice AS Doc
-	|
-	|UNION
-	|
-	|SELECT
-	|	Doc.Ref,
-	|	VALUETYPE(Doc.Ref)
-	|FROM
-	|	Document.SalesOrder AS Doc
-	|
-	|UNION
-	|
-	|SELECT
-	|	Doc.Ref,
-	|	VALUETYPE(Doc.Ref)
-	|FROM
-	|	Document.SalesReportFromTradeAgent AS Doc
-	|
-	|UNION
-	|
-	|SELECT
-	|	Doc.Ref,
-	|	VALUETYPE(Doc.Ref)
-	|FROM
-	|	Document.SalesReportToConsignor AS Doc
-	|
-	|UNION
-	|
-	|SELECT
-	|	Doc.Ref,
-	|	VALUETYPE(Doc.Ref)
-	|FROM
-	|	Document.SalesReturn AS Doc
-	|
-	|UNION
-	|
-	|SELECT
-	|	Doc.Ref,
-	|	VALUETYPE(Doc.Ref)
-	|FROM
-	|	Document.SalesReturnOrder AS Doc
-	|
-	|UNION
-	|
-	|SELECT
-	|	Doc.Ref,
-	|	VALUETYPE(Doc.Ref)
-	|FROM
-	|	Document.ShipmentConfirmation AS Doc
-	|
-	|UNION
-	|
-	|SELECT
-	|	Doc.Ref,
-	|	VALUETYPE(Doc.Ref)
-	|FROM
-	|	Document.StockAdjustmentAsSurplus AS Doc
-	|
-	|UNION
-	|
-	|SELECT
-	|	Doc.Ref,
-	|	VALUETYPE(Doc.Ref)
-	|FROM
-	|	Document.StockAdjustmentAsWriteOff AS Doc
-	|
-	|UNION
-	|
-	|SELECT
-	|	Doc.Ref,
-	|	VALUETYPE(Doc.Ref)
-	|FROM
-	|	Document.Unbundling AS Doc
+	
+	Template = "SELECT Doc.Ref, Doc.Date, VALUETYPE(Doc.Ref) %1 %2 FROM Document.%3 AS Doc WHERE Doc.Date BETWEEN &StartDate AND &EndDate";
+	Array  = New Array;
+	For Each Doc In Metadata.Documents Do
+		Array.Add(StrTemplate(Template, ?(Array.Count(), "", "AS DocumentType"), ?(Array.Count(), "", "INTO AllDocuments"), Doc.Name));
+	EndDo;	
+	
+	
+	
+	QueryTxt = StrConcat(Array, Chars.LF + "UNION ALL" + Chars.LF) +	"
 	|;
 	|
 	|////////////////////////////////////////////////////////////////////////////////
 	|SELECT
-	|	AllDocuments.Ref.Date AS Date,
+	|	AllDocuments.Date AS Date,
 	|	AllDocuments.Ref,
 	|	AllDocuments.DocumentType,
 	|	CASE
@@ -216,13 +35,15 @@ Procedure FillDocumentsAtServer()
 	|	AllDocuments AS AllDocuments
 	|WHERE
 	|	AllDocuments.Ref.Date BETWEEN &StartDate AND &EndDate
+	|	AND CASE WHEN &OnlyPosted THEN AllDocuments.Ref.Posted ELSE TRUE END
 	|
 	|ORDER BY
-	|	AllDocuments.Ref.Date";
+	|	AllDocuments.Date";
 	
 	Query = New Query(QueryTxt);
 	Query.SetParameter("StartDate", Period.StartDate);
 	Query.SetParameter("EndDate", Period.EndDate);
+	Query.SetParameter("OnlyPosted", OnlyPosted);
 	Result = Query.Execute().Unload();
 	
 	DocumentList.Load(Result);
@@ -232,33 +53,59 @@ EndProcedure
 Procedure CheckDocuments(Command)
 	ThisObject.ErrorsGroups.Clear();
 	CheckList.GetItems().Clear();
-	CheckDocumentsAtServer();
+	JobSettingsArray = GetJobsForCheckDocuments();
+	BackgroundJobAPIClient.OpenJobForm(JobSettingsArray, ThisObject);
 	Items.PagesDocuments.CurrentPage = Items.PageCheck;
 EndProcedure
 
 &AtServer
-Procedure CheckDocumentsAtServer()
-	
-	DocumentErrors = New Array;
-	ErrorsDescriptions = AdditionalDocumentTableControlReuse.GetAllErrorsDescription();
-	
-	ErrorsGroupsTable = ThisObject.ErrorsGroups.Unload();
-	CheckListTree = FormAttributeToValue("CheckList");
+Function GetJobsForCheckDocuments()
 	
 	TypesTable = ThisObject.DocumentList.Unload(, "DocumentType");
 	TypesTable.GroupBy("DocumentType");
+	
+	JobDataSettings = BackgroundJobAPIServer.JobDataSettings();
+	JobDataSettings.CallbackFunction = "GetJobsForCheckDocuments_Callback";
+	JobDataSettings.ProcedurePath = "AdditionalDocumentTableControl.CheckDocumentArray";
+	
 	For Each TypeItem In TypesTable Do
 		 DocumentsRows = DocumentList.FindRows(New Structure("DocumentType", TypeItem.DocumentType));
 		 DocumentTable = DocumentList.Unload(DocumentsRows, "Ref, Date, Picture");
-		 ErrorsTree = AdditionalDocumentTableControl.CheckDocumentArray(DocumentTable.UnloadColumn("Ref"));
 		 
-		 For Each DocRow In ErrorsTree.Rows Do
+		 JobSettings = BackgroundJobAPIServer.JobSettings();
+
+		 JobSettings.ProcedureParams.Add(DocumentTable.UnloadColumn("Ref"));
+		 JobSettings.ProcedureParams.Add(True);
+
+		 JobSettings.Description = String(TypeItem.DocumentType) + ": " + DocumentTable.Count();
+		 JobDataSettings.JobSettings.Add(JobSettings);
+	EndDo;
+
+	Return JobDataSettings;
+EndFunction
+
+// Get jobs for check documents callback.
+// 
+// Parameters:
+//  Result - See BackgroundJobAPIServer.GetJobsResult
+&AtServer
+Procedure GetJobsForCheckDocuments_Callback(Result) Export
+	CheckListTree = FormAttributeToValue("CheckList");
+	DocumentErrors = New Array;
+	ErrorsDescriptions = AdditionalDocumentTableControlReuse.GetAllErrorsDescription();	
+	ErrorsGroupsTable = ThisObject.ErrorsGroups.Unload();
+	For Each Row In Result Do
+		
+		If Not Row.Result Then
+			Continue;
+		EndIf;
+		
+		ErrorsTree = CommonFunctionsServer.GetFromCache(Row.CacheKey);
+		For Each DocRow In ErrorsTree.Rows Do
 			ParentRow = CheckListTree.Rows.Add();
 			ParentRow.Ref = DocRow.Ref;
 			ParentRow.LineNumber = DocRow.Rows.Count();
-			DocumentRow = DocumentTable.Find(DocRow.Ref);
-			ParentRow.Date = DocumentRow.Date;
-			ParentRow.Picture = DocumentRow.Picture;
+			ParentRow.Date = DocRow.Ref.Date;
 			DocumentErrors.Clear();
 			
 			For Each ErrorRow In DocRow.Rows Do
@@ -284,7 +131,6 @@ Procedure CheckDocumentsAtServer()
 			EndDo;
 		 EndDo;
 	EndDo;
-	
 	ThisObject.ErrorsGroups.Load(ErrorsGroupsTable);
 	
 	CheckListTree.Rows.Sort("Date, Ref, ErrorID, LineNumber", True);
@@ -507,3 +353,74 @@ Procedure RestoreOriginCheckList()
 		Items.CheckList.Collapse(HightRow.GetID());
 	EndDo;
 EndProcedure
+
+#Region Posting
+
+&AtClient
+Procedure CheckPosting(Command)
+	PostingInfo.GetItems().Clear();
+	JobSettingsArray = GetJobsForCheckPostingDocuments();
+	BackgroundJobAPIClient.OpenJobForm(JobSettingsArray, ThisObject);
+	Items.PagesDocuments.CurrentPage = Items.PagePosting;
+EndProcedure
+
+&AtServer
+Function GetJobsForCheckPostingDocuments()
+	
+	TypesTable = ThisObject.DocumentList.Unload(, "DocumentType");
+	TypesTable.GroupBy("DocumentType");
+	
+	JobDataSettings = BackgroundJobAPIServer.JobDataSettings();
+	JobDataSettings.CallbackFunction = "GetJobsForCheckPostingDocuments_Callback";
+	JobDataSettings.ProcedurePath = "PostingServer.CheckDocumentArray";
+	
+	For Each TypeItem In TypesTable Do
+		 DocumentsRows = DocumentList.FindRows(New Structure("DocumentType", TypeItem.DocumentType));
+		 DocumentTable = DocumentList.Unload(DocumentsRows, "Ref, Date, Picture");
+		 
+		 JobSettings = BackgroundJobAPIServer.JobSettings();
+
+		 JobSettings.ProcedureParams.Add(DocumentTable.UnloadColumn("Ref"));
+		 JobSettings.ProcedureParams.Add(True);
+
+		 JobSettings.Description = String(TypeItem.DocumentType) + ": " + DocumentTable.Count();
+		 JobDataSettings.JobSettings.Add(JobSettings);
+	EndDo;
+
+	Return JobDataSettings;
+EndFunction
+
+// Get jobs for check posting documents callback.
+// 
+// Parameters:
+//  Result - See BackgroundJobAPIServer.GetJobsResult
+&AtServer
+Procedure GetJobsForCheckPostingDocuments_Callback(Result) Export
+	PostingInfoTree = FormAttributeToValue("PostingInfo");
+	DocumentErrors = New Array;
+	For Each Row In Result Do
+		
+		If Not Row.Result Then
+			Continue;
+		EndIf;
+		
+		RegInfoArray = CommonFunctionsServer.GetFromCache(Row.CacheKey);
+		For Each DocRow In RegInfoArray Do
+			ParentRow = PostingInfoTree.Rows.Add();
+			ParentRow.Ref = DocRow.Ref;
+			ParentRow.Date = DocRow.Ref.Date;
+			
+			For Each RegInfoData In DocRow.RegInfo Do
+				NewRow = ParentRow.Rows.Add();
+				FillPropertyValues(NewRow, RegInfoData);
+				NewRow.Date = ParentRow.Date;
+				NewRow.Ref = ParentRow.Ref;
+			EndDo;
+		 EndDo;
+	EndDo;
+	
+	PostingInfoTree.Rows.Sort("Date, Ref, RegName", True);
+	ValueToFormAttribute(PostingInfoTree, "PostingInfo");
+EndProcedure
+
+#EndRegion

@@ -14,7 +14,7 @@
   <value>Kontrol belgesi ek tablo doldurma işlemini kontrol et</value>
  </synonym>
  <source>
-  <types>DefinedType.AdditionalTableControlDocumentObject</types>
+  <types>DocumentObject</types>
  </source>
  <event>FillCheckProcessing</event>
  <handler>CommonModule.AdditionalDocumentTableControl.FillCheckProcessing_AdditionalTableControlDocumentFillCheckProcessing</handler>

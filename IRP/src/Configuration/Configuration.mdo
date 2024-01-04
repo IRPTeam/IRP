@@ -421,6 +421,8 @@
  <commonModules>CommonModule.AdditionalDocumentTableControlReuse</commonModules>
  <commonModules>CommonModule.AdminFunctionsPrivileged</commonModules>
  <commonModules>CommonModule.AdvancesRelevanceServer</commonModules>
+ <commonModules>CommonModule.BackgroundJobAPIClient</commonModules>
+ <commonModules>CommonModule.BackgroundJobAPIServer</commonModules>
  <commonModules>CommonModule.BarcodeClient</commonModules>
  <commonModules>CommonModule.BarcodeReuse</commonModules>
  <commonModules>CommonModule.BarcodeServer</commonModules>
@@ -807,8 +809,6 @@
  <functionalOptions>FunctionalOption.UseSourceOfOrigin</functionalOptions>
  <functionalOptions>FunctionalOption.UseFixedAssets</functionalOptions>
  <functionalOptions>FunctionalOption.UseLegalNameContract</functionalOptions>
- <definedTypes>DefinedType.AdditionalTableControlDocument</definedTypes>
- <definedTypes>DefinedType.AdditionalTableControlDocumentObject</definedTypes>
  <definedTypes>DefinedType.typeAccessDocument</definedTypes>
  <definedTypes>DefinedType.typeAccountStatementBasises</definedTypes>
  <definedTypes>DefinedType.typeAddPropertyOwners</definedTypes>
@@ -956,6 +956,7 @@
  <commonForms>CommonForm.SerialLotNumbersTree</commonForms>
  <commonForms>CommonForm.ShareToUsers</commonForms>
  <commonForms>CommonForm.UpdateItemListInfo</commonForms>
+ <commonForms>CommonForm.BackgroundMultiJob</commonForms>
  <catalogs>Catalog.AccessGroups</catalogs>
  <catalogs>Catalog.AccessKey</catalogs>
  <catalogs>Catalog.AccessProfiles</catalogs>

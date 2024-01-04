@@ -4091,6 +4091,39 @@ Scenario: _02602105 Retail receipt correction for RRR (card, VAT rate correction
 		And I check "$ParsingResult$" with "0" and method is "ProcessCorrectionCheck"
 		And I check "$ParsingResult$" with "0" and data in "In.Parameter2" the same as "SalesReceiptXML35"
 
+Scenario: _0260211 try mark for deletion printed RSR
+	And I close all client application windows
+	* Select RSR
+		Given I open hyperlink "e1cib/list/Document.RetailSalesReceipt"
+		And I go to line in "List" table
+			| 'Status'  |
+			| 'Printed' |
+	* Try mark for deletion printed RSR
+		And in the table "List" I click the button named "ListContextMenuSetDeletionMark"
+		Then "1C:Enterprise" window is opened
+		And I click "Yes" button
+		Then "1C:Enterprise" window is opened
+		And I click the button named "OK"
+		Then in the TestClient message log contains lines by template:
+			|'Error! Receipt is already printed:*'|
+
+				
+Scenario: _0260212 try mark for deletion printed RRR
+	And I close all client application windows
+	* Select RSR
+		Given I open hyperlink "e1cib/list/Document.RetailReturnReceipt"
+		And I go to line in "List" table
+			| 'Status'  |
+			| 'Printed' |
+	* Try mark for deletion printed RSR
+		And in the table "List" I click the button named "ListContextMenuSetDeletionMark"
+		Then "1C:Enterprise" window is opened
+		And I click "Yes" button
+		Then "1C:Enterprise" window is opened
+		And I click the button named "OK"
+		Then in the TestClient message log contains lines by template:
+			|'Error! Receipt is already printed:*'|
+
 Scenario: _0260152 close session
 	And I close all client application windows
 	* Open POS		
@@ -4768,4 +4801,5 @@ Scenario: _0260210 on double click in CRS
 		Then system warning window does not appear
 		And I close all client application windows	
 
-					
+
+						

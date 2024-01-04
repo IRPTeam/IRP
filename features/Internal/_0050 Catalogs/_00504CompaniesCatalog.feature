@@ -142,4 +142,36 @@ Scenario: _005015 create Projects
 		Then I check for the "Projects" catalog element with the "Description_tr" "Project 01 TR"
 		Then I check for the "Projects" catalog element with the "Description_ru" "Проект 01"
 
-	
+Scenario: _005016 name uniqueness control (Projects)
+	And I close all client application windows
+	* Preparation
+		Given I open hyperlink "e1cib/list/Catalog.Projects"
+		If "List" table does not contain lines Then
+			| 'Description' |
+			| 'Project 01'       |
+			Then I stop script execution "Skipped"
+	* Create project
+		And I click the button named "FormCreate"
+		And Delay 2
+		And I click Open button of the field named "Description_en"
+		And I input "Project 01" text in the field named "Description_en"
+		And I input "Project 01 TR" text in the field named "Description_tr"
+		And I input "Проект 01" text in the field named "Description_ru"
+		And I click "Ok" button
+		And I click the button named "FormWriteAndClose"
+	* Check uniqueness control
+		Then there are lines in TestClient message log
+			|'Description not unique [Project 01]'|
+		And I click Open button of the field named "Description_en"
+		And I input "1" text in the field named "Description_en"	
+		And I click "Ok" button
+		And I click the button named "FormWriteAndClose"
+		Then there are lines in TestClient message log
+			|'Description not unique [Project 01]'|	
+		And I click Open button of the field named "Description_en"
+		And I input "1" text in the field named "Description_tr"	
+		And I click "Ok" button
+		And I click the button named "FormWriteAndClose"
+		Then there are lines in TestClient message log
+			|'Description not unique [Project 01]'|	
+		And I close all client application windows	

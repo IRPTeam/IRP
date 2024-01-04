@@ -44,6 +44,7 @@ Procedure PostingCheckBeforeWrite(Ref, Cancel, PostingMode, Parameters, AddInfo 
 	Tables.R5015B_OtherPartnersTransactions.Columns.Add("Key", Metadata.DefinedTypes.typeRowID.Type);
 	Tables.R3021B_CashInTransitIncoming.Columns.Add("Key", Metadata.DefinedTypes.typeRowID.Type);
 	Tables.R8510B_BookValueOfFixedAsset.Columns.Add("Key", Metadata.DefinedTypes.typeRowID.Type);
+	Tables.CashInTransit.Columns.Add("Key", Metadata.DefinedTypes.typeRowID.Type);
 
 	PostingServer.FillPostingTables(Tables, Ref, QueryArray, Parameters);
 EndProcedure
@@ -236,6 +237,7 @@ EndFunction
 
 Function GetQueryTextsMasterTables()
 	QueryArray = New Array;
+	QueryArray.Add(CashInTransit());
 	QueryArray.Add(R1020B_AdvancesToVendors());
 	QueryArray.Add(R1021B_VendorsTransactions());
 	QueryArray.Add(R2020B_AdvancesFromCustomers());
@@ -262,7 +264,6 @@ Function GetQueryTextsMasterTables()
 	QueryArray.Add(T8515S_FixedAssetsLocation());
 	QueryArray.Add(R8515T_CostOfFixedAsset());
 	QueryArray.Add(R8510B_BookValueOfFixedAsset());
-	QueryArray.Add(CashInTransit());
 	Return QueryArray;
 EndFunction
 

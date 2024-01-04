@@ -92,10 +92,10 @@ Procedure PreparePostingDataTables(Parameters, CurrencyTable, AddInfo = Undefine
 				For Each ItemOfPostingInfoRow In ArrayOfPostingInfo Do
 					ItemOfPostingInfo = ItemOfPostingInfoRow.Value;
 					If ItemOfPostingInfo.Metadata = RegisterType Then
-						If ItemOfPostingInfo.RecordSet_NewTable.Columns.Find("Key") = Undefined Then
-							ItemOfPostingInfo.RecordSet_NewTable.Columns.Add("Key", New TypeDescription(Metadata.DefinedTypes.typeRowID.Type));
+						If ItemOfPostingInfo.PrepareTable.Columns.Find("Key") = Undefined Then
+							ItemOfPostingInfo.PrepareTable.Columns.Add("Key", New TypeDescription(Metadata.DefinedTypes.typeRowID.Type));
 						EndIf;
-						For Each RowRecordSet In ItemOfPostingInfo.RecordSet_NewTable Do
+						For Each RowRecordSet In ItemOfPostingInfo.PrepareTable Do
 							NewRow = TableOfAgreementMovementTypes.Add();
 							NewRow.MovementType = RowRecordSet.Agreement.CurrencyMovementType;
 							NewRow.Partner      = RowRecordSet.Partner;
@@ -160,10 +160,10 @@ Procedure PreparePostingDataTables(Parameters, CurrencyTable, AddInfo = Undefine
 		Query.Execute();
 		For Each ItemOfPostingInfoRow In ArrayOfPostingInfo Do
 			ItemOfPostingInfo = ItemOfPostingInfoRow.Value;
-			If ItemOfPostingInfo.RecordSet_NewTable.Count() Then
+			If ItemOfPostingInfo.PrepareTable.Count() Then
 				UseAgreementMovementType = IsUseAgreementMovementType(ItemOfPostingInfo.Metadata);
 				UseCurrencyJoin = IsUseCurrencyJoin(Parameters, ItemOfPostingInfo.Metadata);
-				ItemOfPostingInfo.RecordSet_NewTable = ExpandTable(TempTableManager, ItemOfPostingInfo.RecordSet_NewTable, UseAgreementMovementType, UseCurrencyJoin);
+				ItemOfPostingInfo.PrepareTable = ExpandTable(TempTableManager, ItemOfPostingInfo.PrepareTable, UseAgreementMovementType, UseCurrencyJoin);
 				
 				IsOffsetOfAdvances = CommonFunctionsClientServer.GetFromAddInfo(Parameters, "IsOffsetOfAdvances", False);
 				IsLandedCost = CommonFunctionsClientServer.GetFromAddInfo(Parameters, "IsLandedCost", False);
@@ -176,7 +176,7 @@ Procedure PreparePostingDataTables(Parameters, CurrencyTable, AddInfo = Undefine
 					
 						AdvancesCurrencyRevaluation = GetAdvancesCurrencyRevaluation(Parameters.Object.Ref);
 						For Each Row In AdvancesCurrencyRevaluation Do
-							FillPropertyValues(ItemOfPostingInfo.RecordSet_NewTable.Add(), Row);
+							FillPropertyValues(ItemOfPostingInfo.PrepareTable.Add(), Row);
 						EndDo;	
 					
 					EndIf;
@@ -187,7 +187,7 @@ Procedure PreparePostingDataTables(Parameters, CurrencyTable, AddInfo = Undefine
 					
 						TransactionsCurrencyRevaluation = GetTransactionsCurrencyRevaluation(Parameters.Object.Ref);
 						For Each Row In TransactionsCurrencyRevaluation Do
-							FillPropertyValues(ItemOfPostingInfo.RecordSet_NewTable.Add(), Row);
+							FillPropertyValues(ItemOfPostingInfo.PrepareTable.Add(), Row);
 						EndDo;	
 					
 					EndIf;
@@ -227,7 +227,7 @@ Procedure PreparePostingDataTables(Parameters, CurrencyTable, AddInfo = Undefine
 						For Each RowAmounts In AccountingAmounts Do
 							For Each RowOperation In AccountingOperations.FindRows(New Structure("DocType, AmountType", TypeOf(Parameters.Object.Ref), RowAmounts.AmountType)) Do
 								For Each OperationItem In RowOperation.Operations Do
-									NewRow = ItemOfPostingInfo.RecordSet_NewTable.Add();
+									NewRow = ItemOfPostingInfo.PrepareTable.Add();
 									FillPropertyValues(NewRow, RowAmounts);
 									NewRow.Operation = OperationItem;
 								EndDo;

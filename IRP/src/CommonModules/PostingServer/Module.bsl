@@ -164,7 +164,7 @@ Function RegisterRecords(Parameters)
 	RegisteredRecords = New Map();
 	For Each Row In Parameters.PostingDataTables Do
 		RecordSet = Row.Value.RecordSet_Document;
-		TableForLoad = Row.Value.RecordSet_NewTable.Copy();
+		TableForLoad = Row.Value.PrepareTable.Copy();
 			
 		// Set record type
 		If Row.Value.Property("RecordType") Then
@@ -1168,7 +1168,7 @@ EndProcedure
 // Returns:
 //  Structure - Posting table settings:
 // * RegisterName - String -
-// * RecordSet_NewTable - ValueTable - 
+// * PrepareTable - ValueTable - 
 // * WriteInTransaction - Boolean - 
 // * Metadata - MetadataObjectInformationRegister, MetadataObjectAccountingRegister, MetadataObjectCalculationRegister, MetadataObjectAccumulationRegister - 
 // * RecordSet_Document - AccumulationRegisterRecordSet, InformationRegisterRecordSet - 
@@ -1176,7 +1176,7 @@ EndProcedure
 Function PostingTableSettings(RegisterName, Table, RecSetData) Export
 	Settings = New Structure;
 	Settings.Insert("RegisterName", RegisterName);
-	Settings.Insert("RecordSet_NewTable", Table);
+	Settings.Insert("PrepareTable", Table);
 	Settings.Insert("WriteInTransaction", True);
 	Settings.Insert("Metadata", RecSetData.Metadata());
 	Settings.Insert("RecordSet_Document", RecSetData);

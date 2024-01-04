@@ -911,7 +911,7 @@ Procedure Write_SelfRecords(Parameters,
 		ItemOfPostingInfo = GetFromPostingInfo(ArrayOfPostingInfo, Metadata.AccumulationRegisters[Parameters.RegisterName_Advances]);
 
 		RecordSet_Advances.Read();
-		For Each RowPostingInfo In ItemOfPostingInfo.Value.RecordSet_NewTable Do
+		For Each RowPostingInfo In ItemOfPostingInfo.Value.PrepareTable Do
 			FillPropertyValues(RecordSet_Advances.Add(), RowPostingInfo);
 		EndDo;
 		RecordSet_Advances.SetActive(True);
@@ -930,7 +930,7 @@ Procedure Write_SelfRecords(Parameters,
 		ItemOfPostingInfo = GetFromPostingInfo(ArrayOfPostingInfo, Metadata.AccumulationRegisters[Parameters.RegisterName_Transactions]);
 			
 		RecordSet_Transactions.Read();
-		For Each RowPostingInfo In ItemOfPostingInfo.Value.RecordSet_NewTable Do
+		For Each RowPostingInfo In ItemOfPostingInfo.Value.PrepareTable Do
 			FillPropertyValues(RecordSet_Transactions.Add(), RowPostingInfo);
 		EndDo;
 		RecordSet_Transactions.SetActive(True);
@@ -958,7 +958,7 @@ Procedure Write_SelfRecords(Parameters,
 			
 		// Accounting amounts (advances)
 		RecordSet_AccountingAmounts.Read();
-		For Each RowPostingInfo In ItemOfPostingInfo.Value.RecordSet_NewTable Do
+		For Each RowPostingInfo In ItemOfPostingInfo.Value.PrepareTable Do
 			FillPropertyValues(RecordSet_AccountingAmounts.Add(), RowPostingInfo);
 		EndDo;
 		RecordSet_AccountingAmounts.SetActive(True);

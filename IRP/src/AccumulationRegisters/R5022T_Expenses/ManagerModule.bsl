@@ -114,7 +114,7 @@ Procedure Expenses_LoadRecords(CalculationMovementCostRef) Export
 		For Each ItemOfPostingInfo In ArrayOfPostingInfo Do
 			If ItemOfPostingInfo.Key = Metadata.AccumulationRegisters.R5022T_Expenses Then
 				RecordSet.Read();
-				For Each RowPostingInfo In ItemOfPostingInfo.Value.RecordSet_Document Do
+				For Each RowPostingInfo In ItemOfPostingInfo.Value.PrepareTable Do
 					FillPropertyValues(RecordSet.Add(), RowPostingInfo);
 				EndDo;
 				RecordSet.SetActive(True);

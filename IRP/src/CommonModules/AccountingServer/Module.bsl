@@ -1223,7 +1223,7 @@ Function GetAccountingData_LandedCost(Parameters)
 	
 	For Each ItemOfPostingInfo In ArrayOfPostingInfo Do
 		If ItemOfPostingInfo.Key = Metadata.AccumulationRegisters.T1040T_AccountingAmounts Then
-			For Each RowPostingInfo In ItemOfPostingInfo.Value.RecordSet_Document Do
+			For Each RowPostingInfo In ItemOfPostingInfo.Value.PrepareTable Do
 				FillPropertyValues(CalculatedTableAccountingAmounts.Add(), RowPostingInfo);
 			EndDo;
 		EndIf;

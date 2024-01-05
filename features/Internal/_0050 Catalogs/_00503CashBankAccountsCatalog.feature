@@ -175,8 +175,39 @@ Scenario: _005018 filling in the "Cash/Bank accounts" catalog
 		Then the form attribute named "Company" became equal to "Main Company"
 		Then the form attribute named "Number" became equal to "1120000000"
 		And I click the button named "FormWriteAndClose"
-	# * Clean catalog CashAccounts
-	# 	And I delete "CashAccounts" catalog element with the Description_en "Cash desk №1"
-	# 	And I delete "CashAccounts" catalog element with the Description_en "Cash desk №2"
-	# 	And I delete "CashAccounts" catalog element with the Description_en "Bank account, TRY"
-	# 	And I delete "CashAccounts" catalog element with the Description_en "Transit Main"
+
+
+Scenario: _005019 name uniqueness control (Cash/Bank accounts)
+	And I close all client application windows
+	* Preparation
+		Given I open hyperlink "e1cib/list/Catalog.CashAccounts"
+		If "List" table does not contain lines Then
+			| 'Description' |
+			| 'Cash desk №1'       |
+			Then I stop script execution "Skipped"
+	* Create Cash/Bank accounts
+		And I click the button named "FormCreate"
+		And Delay 2
+		And I click Open button of the field named "Description_en"
+		And I input "Cash desk №1" text in the field named "Description_en"
+		And I input "Cash desk №1 TR" text in the field named "Description_tr"
+		And I input "Касса №1" text in the field named "Description_ru"
+		And I click "Ok" button
+		And I click the button named "FormWriteAndClose"
+	* Check uniqueness control
+		Then there are lines in TestClient message log
+			|'Description not unique [Cash desk №1]'|
+		And I click Open button of the field named "Description_en"
+		And I input "1" text in the field named "Description_en"	
+		And I click "Ok" button
+		And I click the button named "FormWriteAndClose"
+		Then there are lines in TestClient message log
+			|'Description not unique [Cash desk №1]'|	
+		And I click Open button of the field named "Description_en"
+		And I input "1" text in the field named "Description_tr"	
+		And I click "Ok" button
+		And I click the button named "FormWriteAndClose"
+		Then there are lines in TestClient message log
+			|'Description not unique [Cash desk №1]'|	
+		And I close all client application windows
+

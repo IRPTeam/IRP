@@ -13,7 +13,7 @@ Function PostingGetDocumentDataTables(Ref, Cancel, PostingMode, Parameters, AddI
 	Tables = New Structure;
 
 	BillOfMaterialsTable       = GetBillOfMaterials(Ref);
-	MaterialPlanningEmptyTable = PostingServer.CreateTable(AccReg.R7020T_MaterialPlanning);
+	MaterialPlanningEmptyTable = CommonFunctionsServer.CreateTable(AccReg.R7020T_MaterialPlanning);
 	MaterialPlanningEmptyTable.Columns.Add("IsProduct", New TypeDescription("Boolean"));
 	MaterialPlanningEmptyTable.Columns.Add("IsSemiproduct", New TypeDescription("Boolean"));
 	MaterialPlanningEmptyTable.Columns.Add("IsMaterial", New TypeDescription("Boolean"));

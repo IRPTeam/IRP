@@ -790,7 +790,7 @@ Procedure SetBound(DocObject, BoundParameters, RelevanceRegisterName)
 EndProcedure
 
 Function CopyRecords(Records, RegisterMetadata, FilterAttribute, FilterByCurrencyMovementType)
-	RecordsCopy = PostingServer.CreateTable(RegisterMetadata);
+	RecordsCopy = CommonFunctionsServer.CreateTable(RegisterMetadata);
 	For Each Record In Records Do
 		If ValueIsFilled(Record[FilterAttribute]) Then
 			Continue;

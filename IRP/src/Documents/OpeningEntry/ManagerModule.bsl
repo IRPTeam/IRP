@@ -12,6 +12,59 @@ Function PostingGetDocumentDataTables(Ref, Cancel, PostingMode, Parameters, AddI
 	QueryArray = GetQueryTextsSecondaryTables();
 	PostingServer.ExecuteQuery(Ref, QueryArray, Parameters);
 
+	Calculate_BatchKeysInfo(Ref, Parameters, AddInfo);
+
+	Tables = New Structure;
+	
+	CashInTransit = Metadata.AccumulationRegisters.CashInTransit;
+	Tables.Insert(CashInTransit.Name, CommonFunctionsServer.CreateTable(CashInTransit));
+	
+	Return Tables;
+EndFunction
+
+Function PostingGetLockDataSource(Ref, Cancel, PostingMode, Parameters, AddInfo = Undefined) Export
+	DataMapWithLockFields = New Map;
+	Return DataMapWithLockFields;
+EndFunction
+
+Procedure PostingCheckBeforeWrite(Ref, Cancel, PostingMode, Parameters, AddInfo = Undefined) Export
+	Tables = Parameters.DocumentDataTables;
+	QueryArray = GetQueryTextsMasterTables();
+	PostingServer.SetRegisters(Tables, Ref);
+	
+	
+	Tables.R3010B_CashOnHand.Columns.Add("Key", Metadata.DefinedTypes.typeRowID.Type);
+	Tables.R1020B_AdvancesToVendors.Columns.Add("Key", Metadata.DefinedTypes.typeRowID.Type);
+	Tables.R1021B_VendorsTransactions.Columns.Add("Key", Metadata.DefinedTypes.typeRowID.Type);
+	Tables.R2020B_AdvancesFromCustomers.Columns.Add("Key", Metadata.DefinedTypes.typeRowID.Type);
+	Tables.R2021B_CustomersTransactions.Columns.Add("Key", Metadata.DefinedTypes.typeRowID.Type);
+	Tables.R8015T_ConsignorPrices.Columns.Add("Key", Metadata.DefinedTypes.typeRowID.Type);
+	Tables.R3027B_EmployeeCashAdvance.Columns.Add("Key", Metadata.DefinedTypes.typeRowID.Type);
+	Tables.R9510B_SalaryPayment.Columns.Add("Key", Metadata.DefinedTypes.typeRowID.Type);
+	Tables.R5015B_OtherPartnersTransactions.Columns.Add("Key", Metadata.DefinedTypes.typeRowID.Type);
+	Tables.R3021B_CashInTransitIncoming.Columns.Add("Key", Metadata.DefinedTypes.typeRowID.Type);
+	Tables.R8510B_BookValueOfFixedAsset.Columns.Add("Key", Metadata.DefinedTypes.typeRowID.Type);
+	Tables.CashInTransit.Columns.Add("Key", Metadata.DefinedTypes.typeRowID.Type);
+
+	PostingServer.FillPostingTables(Tables, Ref, QueryArray, Parameters);
+EndProcedure
+
+Function PostingGetPostingDataTables(Ref, Cancel, PostingMode, Parameters, AddInfo = Undefined) Export
+	PostingDataTables = New Map;
+	PostingServer.SetPostingDataTables(PostingDataTables, Parameters);
+	
+	CashInTransit = Metadata.AccumulationRegisters.CashInTransit;
+	PostingServer.SetPostingDataTable(PostingDataTables, Parameters, CashInTransit.Name, Parameters.DocumentDataTables[CashInTransit.Name]);
+	
+	Return PostingDataTables;
+EndFunction
+
+Procedure PostingCheckAfterWrite(Ref, Cancel, PostingMode, Parameters, AddInfo = Undefined) Export
+	CheckAfterWrite(Ref, Cancel, Parameters, AddInfo);
+EndProcedure
+
+Procedure Calculate_BatchKeysInfo(Ref, Parameters, AddInfo)
+	
 	Query = New Query;
 	Query.Text =
 	"SELECT
@@ -63,108 +116,29 @@ Function PostingGetDocumentDataTables(Ref, Cancel, PostingMode, Parameters, AddI
 
 	QueryResult = Query.Execute();
 	BatchKeysInfo = QueryResult.Unload();
-
 	CurrencyTable = Ref.Currencies.UnloadColumns();
 	CurrencyMovementType = Ref.Company.LandedCostCurrencyMovementType;
 	For Each Row In BatchKeysInfo Do
 		CurrenciesServer.AddRowToCurrencyTable(Ref.Date, CurrencyTable, Row.Key, Row.Currency, CurrencyMovementType);
 	EndDo;
-
-	PostingDataTables = New Map;
-	PostingDataTables.Insert(Parameters.Object.RegisterRecords.T6020S_BatchKeysInfo,
-		New Structure("RecordSet, WriteInTransaction", BatchKeysInfo, Parameters.IsReposting));
-	Parameters.Insert("PostingDataTables", PostingDataTables);
+	
+	T6020S_BatchKeysInfo = Metadata.InformationRegisters.T6020S_BatchKeysInfo;
+	T6020SSettings = PostingServer.PostingTableSettings(T6020S_BatchKeysInfo.Name, BatchKeysInfo, Parameters.Object.RegisterRecords.T6020S_BatchKeysInfo);
+	T6020SSettings.WriteInTransaction = Parameters.IsReposting;
+	Parameters.PostingDataTables.Insert(T6020S_BatchKeysInfo, T6020SSettings);
+	
 	CurrenciesServer.PreparePostingDataTables(Parameters, CurrencyTable, AddInfo);
-
-	CurrenciesServer.ExcludePostingDataTable(Parameters, Parameters.Object.RegisterRecords.T6020S_BatchKeysInfo.Metadata());
+	CurrenciesServer.ExcludePostingDataTable(Parameters, T6020S_BatchKeysInfo);
 	
-	BatchKeysInfo_DataTable = Parameters.PostingDataTables.Get(
-		Parameters.Object.RegisterRecords.T6020S_BatchKeysInfo).RecordSet;
-	BatchKeysInfo_DataTableGrouped = BatchKeysInfo_DataTable.CopyColumns();
-	If BatchKeysInfo_DataTable.Count() Then
-		BatchKeysInfo_DataTableGrouped = BatchKeysInfo_DataTable.Copy(
-			New Structure("CurrencyMovementType", CurrencyMovementType));
-		BatchKeysInfo_DataTableGrouped.GroupBy(
-			"Period, Direction, Company, Store, ItemKey, Currency, CurrencyMovementType, SerialLotNumber, SourceOfOrigin",
-			"Quantity, Amount, AmountTax");
-	EndIf;
-
-	Query = New Query;
-	Query.TempTablesManager = Parameters.TempTablesManager;
-	Query.Text =
-	"SELECT
-	|	*
-	|INTO BatchKeysInfo
-	|FROM
-	|	&T1 AS T1";
-	Query.SetParameter("T1", BatchKeysInfo_DataTableGrouped);
-	Query.Execute();
-
-	AccReg = Metadata.AccumulationRegisters;
-	Tables = New Structure;
-	Tables.Insert("RegCashInTransit", PostingServer.CreateTable(AccReg.CashInTransit));
-
-	Query = New Query();
-	Query.Text = 
-	"SELECT
-	|	VALUE(AccumulationRecordType.Receipt) AS RecordType,
-	|	OpeningEntryCashInTransit.Ref.Date AS Period,
-	|	OpeningEntryCashInTransit.Ref.Company,
-	|	OpeningEntryCashInTransit.Account AS FromAccount,
-	|	OpeningEntryCashInTransit.ReceiptingAccount AS ToAccount,
-	|	OpeningEntryCashInTransit.Currency,
-	|	OpeningEntryCashInTransit.Amount,
-	|	OpeningEntryCashInTransit.Key
-	|FROM
-	|	Document.OpeningEntry.CashInTransit AS OpeningEntryCashInTransit
-	|WHERE
-	|	OpeningEntryCashInTransit.Ref = &Ref";
-	Query.SetParameter("Ref", Ref);
-	QueryResult = Query.Execute();
-	QueryTable = QueryResult.Unload();
-	Tables.RegCashInTransit = QueryTable;
-
-	Return Tables;
-EndFunction
-
-Function PostingGetLockDataSource(Ref, Cancel, PostingMode, Parameters, AddInfo = Undefined) Export
-	DataMapWithLockFields = New Map;
-	Return DataMapWithLockFields;
-EndFunction
-
-Procedure PostingCheckBeforeWrite(Ref, Cancel, PostingMode, Parameters, AddInfo = Undefined) Export
-	Tables = Parameters.DocumentDataTables;
-	QueryArray = GetQueryTextsMasterTables();
-	PostingServer.SetRegisters(Tables, Ref);
-
-	Tables.R3010B_CashOnHand.Columns.Add("Key", Metadata.DefinedTypes.typeRowID.Type);
-	Tables.R1020B_AdvancesToVendors.Columns.Add("Key", Metadata.DefinedTypes.typeRowID.Type);
-	Tables.R1021B_VendorsTransactions.Columns.Add("Key", Metadata.DefinedTypes.typeRowID.Type);
-	Tables.R2020B_AdvancesFromCustomers.Columns.Add("Key", Metadata.DefinedTypes.typeRowID.Type);
-	Tables.R2021B_CustomersTransactions.Columns.Add("Key", Metadata.DefinedTypes.typeRowID.Type);
-	Tables.R8015T_ConsignorPrices.Columns.Add("Key", Metadata.DefinedTypes.typeRowID.Type);
-	Tables.R3027B_EmployeeCashAdvance.Columns.Add("Key", Metadata.DefinedTypes.typeRowID.Type);
-	Tables.R9510B_SalaryPayment.Columns.Add("Key", Metadata.DefinedTypes.typeRowID.Type);
-	Tables.R5015B_OtherPartnersTransactions.Columns.Add("Key", Metadata.DefinedTypes.typeRowID.Type);
-	Tables.R3021B_CashInTransitIncoming.Columns.Add("Key", Metadata.DefinedTypes.typeRowID.Type);
-	Tables.R8510B_BookValueOfFixedAsset.Columns.Add("Key", Metadata.DefinedTypes.typeRowID.Type);
-
-	PostingServer.FillPostingTables(Tables, Ref, QueryArray, Parameters);
-EndProcedure
-
-Function PostingGetPostingDataTables(Ref, Cancel, PostingMode, Parameters, AddInfo = Undefined) Export
-	PostingDataTables = New Map;
+	BatchKeysInfo_DataTable = Parameters.PostingDataTables[T6020S_BatchKeysInfo].PrepareTable;
 	
-	// CashInIransit
-	PostingDataTables.Insert(Parameters.Object.RegisterRecords.CashInTransit, 
-		New Structure("RecordType, RecordSet", AccumulationRecordType.Receipt, Parameters.DocumentDataTables.RegCashInTransit));
+	BatchKeysInfoSettings = PostingServer.GetBatchKeysInfoSettings();
+	BatchKeysInfoSettings.DataTable = BatchKeysInfo_DataTable;
+	BatchKeysInfoSettings.Dimensions = "Period, Direction, Company, Store, ItemKey, Currency, CurrencyMovementType, SerialLotNumber, SourceOfOrigin";
+	BatchKeysInfoSettings.Totals = "Quantity, Amount, AmountTax";
+	BatchKeysInfoSettings.CurrencyMovementType = CurrencyMovementType;
 	
-	PostingServer.SetPostingDataTables(PostingDataTables, Parameters);
-	Return PostingDataTables;
-EndFunction
-
-Procedure PostingCheckAfterWrite(Ref, Cancel, PostingMode, Parameters, AddInfo = Undefined) Export
-	CheckAfterWrite(Ref, Cancel, Parameters, AddInfo);
+	PostingServer.SetBatchKeyInfoTable(Parameters, BatchKeysInfoSettings);
 EndProcedure
 
 #EndRegion
@@ -202,9 +176,16 @@ Procedure CheckAfterWrite(Ref, Cancel, Parameters, AddInfo = Undefined)
 
 	CheckAfterWrite_R4010B_R4011B(Ref, Cancel, Parameters, AddInfo);
 
-	If Not Cancel And Not AccReg.R4014B_SerialLotNumber.CheckBalance(Ref, LineNumberAndItemKeyFromItemList,
-		PostingServer.GetQueryTableByName("R4014B_SerialLotNumber", Parameters), PostingServer.GetQueryTableByName(
-		"Exists_R4014B_SerialLotNumber", Parameters), AccumulationRecordType.Receipt, Unposting, AddInfo) Then
+	If Not Cancel 
+		And Not AccReg.R4014B_SerialLotNumber.CheckBalance(
+				Ref,
+				LineNumberAndItemKeyFromItemList,
+				PostingServer.GetQueryTableByName("R4014B_SerialLotNumber", Parameters),
+				PostingServer.GetQueryTableByName("Exists_R4014B_SerialLotNumber", Parameters),
+				AccumulationRecordType.Receipt,
+				Unposting,
+				AddInfo
+			) Then
 		Cancel = True;
 	EndIf;
 EndProcedure
@@ -249,7 +230,7 @@ Function GetQueryTextsSecondaryTables()
 	QueryArray.Add(SalaryPayment());
 	QueryArray.Add(OtherVendorsTransactions());
 	QueryArray.Add(OtherCustomersTransactions());
-	QueryArray.Add(CashInTransit());
+	QueryArray.Add(CashInTransitDoc());
 	QueryArray.Add(FixedAssets());
 	QueryArray.Add(PostingServer.Exists_R4010B_ActualStocks());
 	QueryArray.Add(PostingServer.Exists_R4011B_FreeStocks());
@@ -259,6 +240,7 @@ EndFunction
 
 Function GetQueryTextsMasterTables()
 	QueryArray = New Array;
+	QueryArray.Add(CashInTransit());
 	QueryArray.Add(R1020B_AdvancesToVendors());
 	QueryArray.Add(R1021B_VendorsTransactions());
 	QueryArray.Add(R2020B_AdvancesFromCustomers());
@@ -662,21 +644,21 @@ Function SalaryPayment()
 		   |	SalaryPayment.Ref = &Ref";
 EndFunction
 
-Function CashInTransit()
+Function CashInTransitDoc()
 	Return
 		"SELECT
-		|	CashInTransit.Key,
-		|	CashInTransit.Ref.Date AS Period,
-		|	CashInTransit.Ref.Company AS Company,
-		|	CashInTransit.ReceiptingBranch AS Branch,
-		|	CashInTransit.ReceiptingAccount,
-		|	CashInTransit.Currency,
-		|	CashInTransit.Amount
-		|INTO CashInTransit
+		|	CashInTransitDoc.Key,
+		|	CashInTransitDoc.Ref.Date AS Period,
+		|	CashInTransitDoc.Ref.Company AS Company,
+		|	CashInTransitDoc.ReceiptingBranch AS Branch,
+		|	CashInTransitDoc.ReceiptingAccount,
+		|	CashInTransitDoc.Currency,
+		|	CashInTransitDoc.Amount
+		|INTO CashInTransitDoc
 		|FROM
-		|	Document.OpeningEntry.CashInTransit AS CashInTransit
+		|	Document.OpeningEntry.CashInTransit AS CashInTransitDoc
 		|WHERE
-		|	CashInTransit.Ref = &Ref";
+		|	CashInTransitDoc.Ref = &Ref";
 EndFunction
 
 Function FixedAssets()
@@ -703,6 +685,24 @@ EndFunction
 #EndRegion
 
 #Region Posting_MainTables
+
+Function CashInTransit()
+	Return
+		"SELECT
+		|	VALUE(AccumulationRecordType.Receipt) AS RecordType,
+		|	OpeningEntryCashInTransit.Ref.Date AS Period,
+		|	OpeningEntryCashInTransit.Ref.Company,
+		|	OpeningEntryCashInTransit.Account AS FromAccount,
+		|	OpeningEntryCashInTransit.ReceiptingAccount AS ToAccount,
+		|	OpeningEntryCashInTransit.Currency,
+		|	OpeningEntryCashInTransit.Amount,
+		|	OpeningEntryCashInTransit.Key
+		|INTO CashInTransit
+		|FROM
+		|	Document.OpeningEntry.CashInTransit AS OpeningEntryCashInTransit
+		|WHERE
+		|	OpeningEntryCashInTransit.Ref = &Ref";
+EndFunction
 
 Function R1020B_AdvancesToVendors()
 	Return "SELECT 
@@ -949,16 +949,16 @@ Function R3021B_CashInTransitIncoming()
 	Return
 		"SELECT
 		|	VALUE(AccumulationRecordType.Receipt) AS RecordType,
-		|	CashInTransit.Key,
-		|	CashInTransit.Period,
-		|	CashInTransit.Company,
-		|	CashInTransit.Branch,
-		|	CashInTransit.ReceiptingAccount AS Account,
-		|	CashInTransit.Currency,
-		|	CashInTransit.Amount
+		|	CashInTransitDoc.Key,
+		|	CashInTransitDoc.Period,
+		|	CashInTransitDoc.Company,
+		|	CashInTransitDoc.Branch,
+		|	CashInTransitDoc.ReceiptingAccount AS Account,
+		|	CashInTransitDoc.Currency,
+		|	CashInTransitDoc.Amount
 		|INTO R3021B_CashInTransitIncoming
 		|FROM
-		|	CashInTransit AS CashInTransit
+		|	CashInTransitDoc AS CashInTransitDoc
 		|WHERE
 		|	TRUE";
 EndFunction
@@ -1209,8 +1209,7 @@ Function T6010S_BatchesInfo()
 EndFunction
 
 Function T6020S_BatchKeysInfo()
-	Return 
-		"SELECT
+	Return "SELECT
 		|	ItemList.Period,
 		|	ItemList.Company,
 		|	ItemList.Store,
@@ -1397,6 +1396,7 @@ Function T6020S_BatchKeysInfo()
 		|	tmp_T6020S_BatchKeysInfo AS Table
 		|WHERE
 		|	Table.Quantity > 0"
+
 EndFunction
 
 Function R4050B_StockInventory()

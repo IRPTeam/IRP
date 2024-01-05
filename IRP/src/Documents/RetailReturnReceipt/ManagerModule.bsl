@@ -9,35 +9,51 @@ EndFunction
 #Region Posting
 
 Function PostingGetDocumentDataTables(Ref, Cancel, PostingMode, Parameters, AddInfo = Undefined) Export
-	AccReg = Metadata.AccumulationRegisters;
-	Tables = New Structure;
-	Tables.Insert("CashInTransit", PostingServer.CreateTable(AccReg.CashInTransit));
-	QueryPayments = New Query;
-	QueryPayments.Text =
-	"SELECT
-	|	Payments.Ref.Date AS Period,
-	|	Payments.Ref.Company AS Company,
-	|	Payments.Ref.Currency AS Currency,
-	|	Payments.Account AS FromAccount,
-	|	Payments.Ref AS BasisDocument,
-	|	Payments.Amount,
-	|	Payments.Commission
-	|
-	|FROM
-	|	Document.RetailReturnReceipt.Payments AS Payments
-	|WHERE
-	|	Payments.Ref = &Ref AND Payments.PostponedPayment";
-	QueryPayments.SetParameter("Ref", Ref);
-	Tables.CashInTransit = QueryPayments.Execute().Unload();
-
-	Parameters.IsReposting = False;
-
 	QueryArray = GetQueryTextsSecondaryTables();
 	Parameters.Insert("QueryParameters", GetAdditionalQueryParameters(Ref));
 	PostingServer.ExecuteQuery(Ref, QueryArray, Parameters);
 
+	Parameters.IsReposting = False;
+
 	DocumentsServer.SalesBySerialLotNumbers(Parameters);
 	
+	Calculate_BatchKeysInfo(Ref, Parameters, AddInfo);
+
+	Tables = New Structure;
+
+	CashInTransit = Metadata.AccumulationRegisters.CashInTransit;
+	Tables.Insert(CashInTransit.Name, CommonFunctionsServer.CreateTable(CashInTransit));
+	
+	Return Tables;
+EndFunction
+
+Function PostingGetLockDataSource(Ref, Cancel, PostingMode, Parameters, AddInfo = Undefined) Export
+	DataMapWithLockFields = New Map;
+	Return DataMapWithLockFields;
+EndFunction
+
+Procedure PostingCheckBeforeWrite(Ref, Cancel, PostingMode, Parameters, AddInfo = Undefined) Export
+	Tables = Parameters.DocumentDataTables;
+	QueryArray = GetQueryTextsMasterTables();
+	PostingServer.SetRegisters(Tables, Ref);
+	PostingServer.FillPostingTables(Tables, Ref, QueryArray, Parameters);
+EndProcedure
+
+Function PostingGetPostingDataTables(Ref, Cancel, PostingMode, Parameters, AddInfo = Undefined) Export
+	PostingDataTables = New Map;
+	PostingServer.SetPostingDataTables(PostingDataTables, Parameters);
+	
+	CashInTransit = Metadata.AccumulationRegisters.CashInTransit;
+	PostingServer.SetPostingDataTable(PostingDataTables, Parameters, CashInTransit.Name, Parameters.DocumentDataTables[CashInTransit.Name]);
+	
+	Return PostingDataTables;
+EndFunction
+
+Procedure PostingCheckAfterWrite(Ref, Cancel, PostingMode, Parameters, AddInfo = Undefined) Export
+	CheckAfterWrite(Ref, Cancel, Parameters, AddInfo);
+EndProcedure
+
+Procedure Calculate_BatchKeysInfo(Ref, Parameters, AddInfo)
 	Query = New Query;
 	Query.Text =
 	"SELECT
@@ -77,7 +93,7 @@ Function PostingGetDocumentDataTables(Ref, Cancel, PostingMode, Parameters, AddI
 	|;
 	|
 	|////////////////////////////////////////////////////////////////////////////////
-	|SELECT // --[1]
+	|SELECT
 	|	RetailReturnReceiptItemList.ItemKey AS ItemKey,
 	|	RetailReturnReceiptItemList.Store AS Store,
 	|	RetailReturnReceiptItemList.Ref.Company AS Company,
@@ -127,17 +143,6 @@ Function PostingGetDocumentDataTables(Ref, Cancel, PostingMode, Parameters, AddI
 	|;
 	|
 	|////////////////////////////////////////////////////////////////////////////////
-	|SELECT // --[0]
-	|	RetailReturnReceipt.Ref AS Document,
-	|	RetailReturnReceipt.Company AS Company,
-	|	RetailReturnReceipt.Ref.Date AS Period
-	|FROM
-	|	Document.RetailReturnReceipt AS RetailReturnReceipt
-	|WHERE
-	|	RetailReturnReceipt.Ref = &Ref
-	|;
-	|
-	|////////////////////////////////////////////////////////////////////////////////
 	|SELECT
 	|	tmpItemList.ItemKey,
 	|	tmpItemList.Store,
@@ -178,59 +183,48 @@ Function PostingGetDocumentDataTables(Ref, Cancel, PostingMode, Parameters, AddI
 	|	ISNULL(tmpSourceOfOrigins.SourceOfOrigin, VALUE(Catalog.SourceOfOrigins.EmptyRef)) AS SourceOfOrigin,
 	|	ISNULL(tmpSourceOfOrigins.SerialLotNumber, VALUE(Catalog.SerialLotNumbers.EmptyRef)) AS SerialLotNumber,
 	|	ISNULL(tmpSourceOfOrigins.SourceOfOriginStock, VALUE(Catalog.SourceOfOrigins.EmptyRef)) AS SourceOfOriginStock,
-	|	ISNULL(tmpSourceOfOrigins.SerialLotNumberStock, VALUE(Catalog.SerialLotNumbers.EmptyRef)) AS SerialLotNumberStock
+	|	ISNULL(tmpSourceOfOrigins.SerialLotNumberStock, VALUE(Catalog.SerialLotNumbers.EmptyRef)) AS SerialLotNumberStock,
+	|	Not tmpItemList.SalesInvoiceIsFilled OR tmpItemList.Company <> tmpItemList.SalesInvoice_Company AS CreateBatch
+	|INTO tmpBatchKeysInfo
 	|FROM
 	|	tmpItemList AS tmpItemList
 	|		LEFT JOIN tmpSourceOfOrigins AS tmpSourceOfOrigins
-	|		ON tmpItemList.Key = tmpSourceOfOrigins.Key";
-
-	Query.SetParameter("Ref", Ref);
-	QueryResults = Query.ExecuteBatch();
-
-	BatchesInfo   = QueryResults[2].Unload();
-	BatchKeysInfo = QueryResults[3].Unload();
-
-	DontCreateBatch = True;
-	For Each BatchKey In BatchKeysInfo Do
-		If Not BatchKey.SalesInvoiceIsFilled Then
-			DontCreateBatch = False; // need create batch, invoice is empty
-			Break;
-		EndIf;
-		If BatchKey.Company <> BatchKey.SalesInvoice_Company Then
-			DontCreateBatch = False; // need create batch, company in invoice and in return not match
-			Break;
-		EndIf;
-	EndDo;
-	If DontCreateBatch Then
-		BatchesInfo.Clear();
-	EndIf;
-	
-	// AmountTax to T6020S_BatchKeysInfo
-	Query = New Query;
-	Query.Text =
-	"SELECT
-	|	BatchKeysInfo.Key,
-	|	BatchKeysInfo.TotalQuantity,
-	|	BatchKeysInfo.Quantity,
-	|	*
-	|INTO BatchKeysInfo
+	|		ON tmpItemList.Key = tmpSourceOfOrigins.Key
+	|;
+	|
+	|////////////////////////////////////////////////////////////////////////////////
+	|SELECT
+	|	Ref AS Document,
+	|	Company AS Company,
+	|	Ref.Date AS Period
 	|FROM
-	|	&BatchKeysInfo AS BatchKeysInfo
+	|	Document.RetailReturnReceipt
+	|WHERE
+	|	Ref = &Ref
+	|	AND TRUE IN
+	|		(SELECT
+	|			BatchKeys.CreateBatch
+	|		FROM
+	|			tmpBatchKeysInfo AS BatchKeys)
 	|;
 	|
 	|////////////////////////////////////////////////////////////////////////////////
 	|SELECT
 	|	BatchKeysInfo.Key,
-	|	CASE WHEN NOT BatchKeysInfo.SalesInvoiceIsFilled THEN BatchKeysInfo.LandedCostTax ELSE 0 END AS AmountTax,
-	|
+	|	CASE
+	|		WHEN NOT BatchKeysInfo.SalesInvoiceIsFilled
+	|			THEN BatchKeysInfo.LandedCostTax
+	|		ELSE 0
+	|	END AS AmountTax,
 	|	BatchKeysInfo.*
 	|FROM
-	|	BatchKeysInfo AS BatchKeysInfo";
+	|	tmpBatchKeysInfo AS BatchKeysInfo";
 	Query.SetParameter("Ref", Ref);
 	Query.SetParameter("Period", Ref.Date);
-	Query.SetParameter("BatchKeysInfo", BatchKeysInfo);
-	QueryResult = Query.Execute();
-	BatchKeysInfo = QueryResult.Unload();
+	
+	QueryResult = Query.ExecuteBatch();
+	BatchesInfo = QueryResult[3].Unload();
+	BatchKeysInfo = QueryResult[4].Unload();
 
 	CurrencyTable = Ref.Currencies.UnloadColumns();
 	CurrencyMovementType = Ref.Company.LandedCostCurrencyMovementType;
@@ -238,75 +232,36 @@ Function PostingGetDocumentDataTables(Ref, Cancel, PostingMode, Parameters, AddI
 		CurrenciesServer.AddRowToCurrencyTable(Ref.Date, CurrencyTable, Row.Key, Row.Currency, CurrencyMovementType);
 	EndDo;
 
-	PostingDataTables = New Map;
-	PostingDataTables.Insert(Parameters.Object.RegisterRecords.T6020S_BatchKeysInfo,
-		New Structure("RecordSet, WriteInTransaction", BatchKeysInfo, Parameters.IsReposting));
-	Parameters.Insert("PostingDataTables", PostingDataTables);
-	CurrenciesServer.PreparePostingDataTables(Parameters, CurrencyTable, AddInfo);
-
-	CurrenciesServer.ExcludePostingDataTable(Parameters, Parameters.Object.RegisterRecords.T6020S_BatchKeysInfo.Metadata());
+	T6020S_BatchKeysInfo = Metadata.InformationRegisters.T6020S_BatchKeysInfo;
+	T6020SSettings = PostingServer.PostingTableSettings(T6020S_BatchKeysInfo.Name, BatchKeysInfo, Parameters.Object.RegisterRecords.T6020S_BatchKeysInfo);
+	T6020SSettings.WriteInTransaction = Parameters.IsReposting;
+	Parameters.PostingDataTables.Insert(T6020S_BatchKeysInfo, T6020SSettings);
 	
-	BatchKeysInfo_DataTable = Parameters.PostingDataTables.Get(
-		Parameters.Object.RegisterRecords.T6020S_BatchKeysInfo).RecordSet;
-	BatchKeysInfo_DataTableGrouped = BatchKeysInfo_DataTable.CopyColumns();
-	If BatchKeysInfo_DataTable.Count() Then
-		BatchKeysInfo_DataTableGrouped = BatchKeysInfo_DataTable.Copy(
-			New Structure("CurrencyMovementType", CurrencyMovementType));
-		BatchKeysInfo_DataTableGrouped.GroupBy("Period, Direction, Company, Store, ItemKey, Currency, CurrencyMovementType, SalesInvoice, SourceOfOrigin, SerialLotNumber, SourceOfOriginStock, SerialLotNumberStock,
-											   |Quantity, Amount, AmountTax");
-	Else
-		BatchKeysInfo_DataTableGrouped.Columns.Add("CurrencyMovementType", New TypeDescription("ChartOfCharacteristicTypesRef.CurrencyMovementType"));
-	EndIf;
-
+	CurrenciesServer.PreparePostingDataTables(Parameters, CurrencyTable, AddInfo);
+	CurrenciesServer.ExcludePostingDataTable(Parameters, T6020S_BatchKeysInfo);
+	
+	BatchKeysInfo_DataTable = Parameters.PostingDataTables[T6020S_BatchKeysInfo].PrepareTable;
+	
+	BatchKeysInfoSettings = PostingServer.GetBatchKeysInfoSettings();
+	BatchKeysInfoSettings.DataTable = BatchKeysInfo_DataTable;
+	BatchKeysInfoSettings.Dimensions = "Period, Direction, Company, Store, ItemKey, Currency, CurrencyMovementType, SalesInvoice, SourceOfOrigin, SerialLotNumber, SourceOfOriginStock, SerialLotNumberStock, Quantity, Amount, AmountTax";
+	BatchKeysInfoSettings.Totals = "";
+	BatchKeysInfoSettings.CurrencyMovementType = CurrencyMovementType;
+	
+	PostingServer.SetBatchKeyInfoTable(Parameters, BatchKeysInfoSettings);
+	
 	Query = New Query;
 	Query.TempTablesManager = Parameters.TempTablesManager;
 	Query.Text =
 	"SELECT
-	|	*
+	|	BatchesInfo.*
 	|INTO BatchesInfo
 	|FROM
-	|	&T1 AS T1
-	|;
-	|
-	|////////////////////////////////////////////////////////////////////////////////
-	|SELECT
-	|	*
-	|INTO BatchKeysInfo
-	|FROM
-	|	&T2 AS T2";
-	Query.SetParameter("T1", BatchesInfo);
-	Query.SetParameter("T2", BatchKeysInfo_DataTableGrouped);
-	Query.Execute();
-
-	Return Tables;
-EndFunction
-
-Function PostingGetLockDataSource(Ref, Cancel, PostingMode, Parameters, AddInfo = Undefined) Export
-	DataMapWithLockFields = New Map;
-	Return DataMapWithLockFields;
-EndFunction
-
-Procedure PostingCheckBeforeWrite(Ref, Cancel, PostingMode, Parameters, AddInfo = Undefined) Export
-	Tables = Parameters.DocumentDataTables;
-	QueryArray = GetQueryTextsMasterTables();
-	PostingServer.SetRegisters(Tables, Ref);
-	PostingServer.FillPostingTables(Tables, Ref, QueryArray, Parameters);
-EndProcedure
-
-Function PostingGetPostingDataTables(Ref, Cancel, PostingMode, Parameters, AddInfo = Undefined) Export
-	PostingDataTables = New Map;
+	|	&BatchesInfo AS BatchesInfo";
 	
-	// CashInTransit
-	PostingDataTables.Insert(Parameters.Object.RegisterRecords.CashInTransit,
-		New Structure("RecordType, RecordSet", AccumulationRecordType.Expense, Parameters.DocumentDataTables.CashInTransit));
-
-	PostingServer.SetPostingDataTables(PostingDataTables, Parameters);
-
-	Return PostingDataTables;
-EndFunction
-
-Procedure PostingCheckAfterWrite(Ref, Cancel, PostingMode, Parameters, AddInfo = Undefined) Export
-	CheckAfterWrite(Ref, Cancel, Parameters, AddInfo);
+	Query.SetParameter("BatchesInfo", BatchesInfo);
+ 	Query.Execute();
+	
 EndProcedure
 
 #EndRegion
@@ -390,6 +345,7 @@ EndFunction
 
 Function GetQueryTextsMasterTables()
 	QueryArray = New Array;
+	QueryArray.Add(CashInTransit());
 	QueryArray.Add(R2001T_Sales());
 	QueryArray.Add(R2002T_SalesReturns());
 	QueryArray.Add(R2005T_SalesSpecialOffers());
@@ -735,6 +691,23 @@ EndFunction
 #EndRegion
 
 #Region Posting_MainTables
+
+Function CashInTransit()
+	Return 	"SELECT
+	|	VALUE(AccumulationRecordType.Expense) AS RecordType,
+	|	Payments.Ref.Date AS Period,
+	|	Payments.Ref.Company AS Company,
+	|	Payments.Ref.Currency AS Currency,
+	|	Payments.Account AS FromAccount,
+	|	Payments.Ref AS BasisDocument,
+	|	Payments.Amount,
+	|	Payments.Commission
+	|FROM
+	|	Document.RetailReturnReceipt.Payments AS Payments
+	|WHERE
+	|	Payments.Ref = &Ref
+	|	AND Payments.PostponedPayment";
+EndFunction
 
 Function R9010B_SourceOfOriginStock()
 	Return "SELECT

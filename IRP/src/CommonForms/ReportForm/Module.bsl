@@ -132,7 +132,7 @@ Procedure DoDetailProcess(SelectedAction, ApplyingSettings, NotifyParams) Экс
 	Else
 		
 		OtherReportFormName = NotifyParams.DetailsInfo.AdditionalDetailsActions.OtherReportMapping[SelectedAction];
-		OtherReportForm = GetForm(OtherReportFormName, New Structure("IsDetailProcessing", True));
+		OtherReportForm = GetForm(OtherReportFormName, New Structure("IsDetailProcessing", True), ThisObject, New UUID());
 		
 		SettingsComposer1 = ThisObject.Report.SettingsComposer;
 		SettingsComposer2 = OtherReportForm.Report.SettingsComposer;
@@ -166,6 +166,21 @@ Procedure DoDetailProcess(SelectedAction, ApplyingSettings, NotifyParams) Экс
 				SetSettingsComposerFilter(SettingsComposer2, _Name, _Value, _ComparisonType);
 			EndDo;
 		EndIf;
+		
+		If ApplyingFilters.Property("DetailsFiltersGroupOR") Then
+			For Each GroupItem In ApplyingFilters.DetailsFiltersGroupOR Do
+				GroupOr = CreateSettingsComposerFilterGroup(SettingsComposer2, "OR");
+				For Each FilterItem In GroupItem Do
+					For Each DetailFilter In FilterItem Do
+						_Name = DetailFilter.Value.FieldName;
+						_Value = DetailFilter.Key;
+						_ComparisonType = DetailFilter.Value.ComparisonType;
+						AddSettingsComposerFilterToGroup(SettingsComposer2, GroupOr, _Name, _Value, _ComparisonType);
+					EndDo;
+				EndDo;
+			EndDo;
+		EndIf;
+		
 		OtherReportForm.Open();
 	EndIf;
 EndProcedure
@@ -174,6 +189,9 @@ EndProcedure
 Function ExtractDetailsInfo(_ReportName, Details)
 	DetailsDataPaths = Reports[_ReportName].GetDetailsDataPaths();
 	ArrayOfDetailsDataPaths = StrSplit(DetailsDataPaths, ",");
+	For i=0 To ArrayOfDetailsDataPaths.Count() -1 Do
+		ArrayOfDetailsDataPaths[i] = TrimAll(ArrayOfDetailsDataPaths[i]);
+	EndDo;
 	
 	Data = GetFromTempStorage(ThisObject.DetailsData);
 	DetailValuesMap = Новый Map();
@@ -284,8 +302,34 @@ Procedure SetSettingsComposerFilter(SettingsComposer, Name, Value, ComparisonTyp
 EndProcedure
 
 &AtClient
+Function CreateSettingsComposerFilterGroup(SettingsComposer, GroupType)
+	FilterGroup = SettingsComposer.Settings.Filter.Items.Add(Type("DataCompositionFilterItemGroup"));
+	If Upper(GroupType) = "OR" Then
+		FilterGroup.GroupType = DataCompositionFilterItemsGroupType.OrGroup;
+	ElsIf Upper(GroupType) = "NOT" Then
+		FilterGroup.GroupType = DataCompositionFilterItemsGroupType.NotGroup;
+	ElsIf Upper(GroupType) = "AND" Then
+		FilterGroup.GroupType = DataCompositionFilterItemsGroupType.AndGroup;
+	EndIf;
+	Return FilterGroup;
+EndFunction
+
+&AtClient
+Procedure AddSettingsComposerFilterToGroup(SettingsComposer, FilterGroup, Name, Value, ComparisonType)
+	If SettingsComposer.Settings.Filter.FilterAvailableFields.Items.Find(Name) <> Undefined Then
+		UserFilterItem = FilterGroup.Items.Add(Type("DataCompositionFilterItem"));
+		UserFilterItem.LeftValue = New DataCompositionField(Name);
+		UserFilterItem.ComparisonType = ComparisonType;
+		UserFilterItem.Use = True;
+		UserFilterItem.RightValue = Value;
+//		UserFilterItem.UserSettingID = New UUID();
+	EndIf;
+EndProcedure
+
+&AtClient
 Function GetReportsWithDetailProcesing()
 	ReportsWithDetails = New Array();
 	ReportsWithDetails.Add("TrialBalance");
+	ReportsWithDetails.Add("TrialBalanceByAccount");
 	Return ReportsWithDetails;
 EndFunction

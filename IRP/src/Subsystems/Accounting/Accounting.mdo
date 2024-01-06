@@ -20,6 +20,7 @@
   <content>CommonCommand.OpenAccountingRecords</content>
   <content>Report.TrialBalance</content>
   <content>Report.TrialBalanceByAccount</content>
+  <content>Report.AccountCard</content>
   <subsystems>Accounts</subsystems>
   <subsystems>LedgerTypes</subsystems>
   <subsystems>Other</subsystems>

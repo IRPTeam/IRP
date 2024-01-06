@@ -29,4 +29,5 @@
   <content>Catalog.Companies.Attribute.LandedCostExpenseType</content>
   <content>Report.TrialBalance</content>
   <content>Report.TrialBalanceByAccount</content>
+  <content>Report.AccountCard</content>
 </mdclass:FunctionalOption>

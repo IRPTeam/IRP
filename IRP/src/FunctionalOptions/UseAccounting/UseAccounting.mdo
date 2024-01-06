@@ -30,4 +30,5 @@
   <content>Report.TrialBalance</content>
   <content>Report.TrialBalanceByAccount</content>
   <content>Report.AccountCard</content>
+  <content>Report.AccountAnalysis</content>
 </mdclass:FunctionalOption>

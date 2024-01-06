@@ -331,5 +331,6 @@ Function GetReportsWithDetailProcesing()
 	ReportsWithDetails = New Array();
 	ReportsWithDetails.Add("TrialBalance");
 	ReportsWithDetails.Add("TrialBalanceByAccount");
+	ReportsWithDetails.Add("AccountAnalysis");
 	Return ReportsWithDetails;
 EndFunction

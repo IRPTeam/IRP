@@ -1,6 +1,6 @@
 
 Function GetDetailsDataPaths() Export
-	Return "Account, ExtDimension1, ExtDimension2, ExtDimension3";
+	Return "BalancedAccount, BalancedExtDimension1, BalancedExtDimension2, BalancedExtDimension3";
 EndFunction
 
 Function GetAdditionalDetailsActions(DetailValuesMap) Export
@@ -8,18 +8,18 @@ Function GetAdditionalDetailsActions(DetailValuesMap) Export
 	Result.Insert("MenuList", New ValueList());
 	Result.Insert("OtherReportMapping", New Map());
 	
-	Account = DetailValuesMap["Account"];
+	Account = DetailValuesMap["BalancedAccount"];
 	If Not ValueIsFilled(Account) Then
 		Return Result;
 	EndIf;
 		
-	Result.MenuList.Add(1, StrTemplate("%1: %2 = %3", Metadata.Reports.AccountAnalysis.Synonym,  
+	Result.MenuList.Add(1, StrTemplate("%1: %2 = %3", Metadata.Reports.TrialBalanceByAccount.Synonym,  
 		String(TypeOf(Account)), Account),, PictureLib.Report);
 	
-	Result.MenuList.Add(2, StrTemplate("%1: %2 = %3", Metadata.Reports.AccountCard.Synonym,  
+	Result.MenuList.Add(1, StrTemplate("%1: %2 = %3", Metadata.Reports.AccountCard.Synonym,  
 		String(TypeOf(Account)), Account),, PictureLib.DebitCredit);
 	
-	Result.OtherReportMapping.Insert(1, "Report.AccountAnalysis.ObjectForm");
+	Result.OtherReportMapping.Insert(1, "Report.TrialBalanceByAccount.ObjectForm");
 	Result.OtherReportMapping.Insert(2, "Report.AccountCard.ObjectForm");
 	
 	Return Result;
@@ -44,7 +44,7 @@ Function Details_AccountAnalisys(DetailValuesMap)
 	Result.UserFilters.Insert("Company", "Company");
 	Result.UserFilters.Insert("LedgerType", "LedgerType");
 	
-	Result.DetailsFilters.Insert(DetailValuesMap["Account"], 
+	Result.DetailsFilters.Insert(DetailValuesMap["BalancedAccount"], 
 		New Structure("FieldName, ComparisonType", "Account", DataCompositionComparisonType.InHierarchy));
 	
 	Return Result;
@@ -58,15 +58,12 @@ Function Details_AccountCard(DetailValuesMap)
 	Result.Insert("DetailsFilters", New Map());
 	Result.Insert("DetailsFiltersGroupOR", New Array()); 
 	
-	// Parameter [Period] from this report to parameter [Period] other report (trial balance by account)  
 	Result.DataParameters.Insert("Period", "Period");
 	
-	// Copying filter [Company] from this repot to other report
 	Result.UserFilters.Insert("Company", "Company");
 	Result.UserFilters.Insert("LedgerType", "LedgerType");
 	
-	// New filter to other report Key=Value, FiledName= fild name in other report  	
-	Result.DetailsFilters.Insert(DetailValuesMap["Account"], 
+	Result.DetailsFilters.Insert(DetailValuesMap["BalancedAccount"], 
 		New Structure("FieldName, ComparisonType", "Account", DataCompositionComparisonType.InHierarchy));
 	
 	
@@ -79,14 +76,14 @@ EndFunction
 
 Procedure FilterByExtDimension(Number, DetailValuesMap, DetailsFiltersGroupOR)
 	ArrayOfFilters_ExtDimension = New Array();
-	If ValueIsFilled(DetailValuesMap["ExtDimension"+Number]) Then 
+	If ValueIsFilled(DetailValuesMap["BalancedExtDimension"+Number]) Then 
 		Filter_ExtDimensionDr = New Map();
-		Filter_ExtDimensionDr.Insert(DetailValuesMap["ExtDimension"+Number], 
+		Filter_ExtDimensionDr.Insert(DetailValuesMap["BalancedExtDimension"+Number], 
 			New Structure("FieldName, ComparisonType", "ExtDimensionDr"+Number, DataCompositionComparisonType.Equal));
 		ArrayOfFilters_ExtDimension.Add(Filter_ExtDimensionDr);
 			
 		Filter_ExtDimensionCr = New Map();
-		Filter_ExtDimensionCr.Insert(DetailValuesMap["ExtDimension"+Number], 
+		Filter_ExtDimensionCr.Insert(DetailValuesMap["BalancedExtDimension"+Number], 
 			New Structure("FieldName, ComparisonType", "ExtDimensionCr"+Number, DataCompositionComparisonType.Equal));
 		ArrayOfFilters_ExtDimension.Add(Filter_ExtDimensionCr);
 	EndIf;

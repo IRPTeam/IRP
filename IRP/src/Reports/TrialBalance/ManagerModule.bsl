@@ -16,11 +16,15 @@ Function GetAdditionalDetailsActions(DetailValuesMap) Export
 	Result.MenuList.Add(1, StrTemplate("%1: %2 = %3", Metadata.Reports.TrialBalanceByAccount.Synonym,  
 		String(TypeOf(Account)), Account),, PictureLib.Report);
 	
-	Result.MenuList.Add(2, StrTemplate("%1: %2 = %3", Metadata.Reports.AccountCard.Synonym,  
+	Result.MenuList.Add(2, StrTemplate("%1: %2 = %3", Metadata.Reports.AccountAnalysis.Synonym,  
+		String(TypeOf(Account)), Account),, PictureLib.Report);
+	
+	Result.MenuList.Add(3, StrTemplate("%1: %2 = %3", Metadata.Reports.AccountCard.Synonym,  
 		String(TypeOf(Account)), Account),, PictureLib.DebitCredit);
 	
 	Result.OtherReportMapping.Insert(1, "Report.TrialBalanceByAccount.ObjectForm");
-	Result.OtherReportMapping.Insert(2, "Report.AccountCard.ObjectForm");
+	Result.OtherReportMapping.Insert(2, "Report.AccountAnalysis.ObjectForm");
+	Result.OtherReportMapping.Insert(3, "Report.AccountCard.ObjectForm");
 	
 	Return Result;
 EndFunction

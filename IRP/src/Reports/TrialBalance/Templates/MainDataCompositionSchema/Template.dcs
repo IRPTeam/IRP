@@ -1523,7 +1523,6 @@ FROM
 				<dcsset:item xsi:type="dcsset:FilterItemComparison">
 					<dcsset:left xsi:type="dcscor:Field">LedgerType</dcsset:left>
 					<dcsset:comparisonType>Equal</dcsset:comparisonType>
-					<dcsset:right xsi:nil="true"/>
 					<dcsset:userSettingID>c7ca5587-f03b-4884-98e4-6f8c1a71ef73</dcsset:userSettingID>
 				</dcsset:item>
 				<dcsset:item xsi:type="dcsset:FilterItemComparison">
@@ -1552,7 +1551,6 @@ FROM
 					<dcscor:value xsi:nil="true"/>
 				</dcscor:item>
 				<dcscor:item xsi:type="dcsset:SettingsParameterValue">
-					<dcscor:use>false</dcscor:use>
 					<dcscor:parameter>AttributePlacement</dcscor:parameter>
 					<dcscor:value xsi:nil="true"/>
 				</dcscor:item>

@@ -1573,8 +1573,9 @@ FROM
 				</dcsset:item>
 				<dcsset:item xsi:type="dcsset:FilterItemComparison">
 					<dcsset:left xsi:type="dcscor:Field">Account</dcsset:left>
-					<dcsset:comparisonType>Equal</dcsset:comparisonType>
-					<dcsset:userSettingID>6965375d-14ca-4dee-871c-5a37d4ada200</dcsset:userSettingID>
+					<dcsset:comparisonType>InHierarchy</dcsset:comparisonType>
+					<dcsset:right xsi:type="dcscor:DesignTimeValue">ChartOfAccounts.Basic.EmptyRef</dcsset:right>
+					<dcsset:userSettingID>7dc6dcc1-43a6-4353-8a2f-fde50945fb63</dcsset:userSettingID>
 				</dcsset:item>
 			</dcsset:filter>
 			<dcsset:dataParameters>

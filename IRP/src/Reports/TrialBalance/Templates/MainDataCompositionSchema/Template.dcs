@@ -743,7 +743,7 @@ FROM
 	AccountingRegister.Basic.BalanceAndTurnovers({(&amp;BeginOfPeriod)}, {(&amp;EndOfPeriod)}, Auto,
 		RegisterRecordsAndPeriodBoundaries, {(Account).* AS Account},,
 	NOT LedgerType.DeletionMark
-	AND LedgerType = &amp;LedgerType {(Company).* AS Company, (Currency).* AS Currency, (ExtDimension1).* AS ExtDimension1,
+	{(LedgerType).* AS LedgerType, (Company).* AS Company, (Currency).* AS Currency, (ExtDimension1).* AS ExtDimension1,
 		(ExtDimension2).* AS ExtDimension2, (ExtDimension3).* AS ExtDimension3}) AS BalanceAndTurnovers</query>
 	</dataSet>
 	<calculatedField>
@@ -885,25 +885,6 @@ FROM
 		</valueType>
 		<value xsi:nil="true"/>
 		<useRestriction>false</useRestriction>
-	</parameter>
-	<parameter>
-		<name>LedgerType</name>
-		<title xsi:type="v8:LocalStringType">
-			<v8:item>
-				<v8:lang>en</v8:lang>
-				<v8:content>Ledger type</v8:content>
-			</v8:item>
-		</title>
-		<valueType>
-			<v8:Type xmlns:d4p1="http://v8.1c.ru/8.1/data/enterprise/current-config">d4p1:CatalogRef.LedgerTypes</v8:Type>
-		</valueType>
-		<useRestriction>false</useRestriction>
-		<inputParameters>
-			<dcscor:item xsi:type="dcsset:SettingsParameterValue">
-				<dcscor:parameter>ChoiceParameters</dcscor:parameter>
-			</dcscor:item>
-		</inputParameters>
-		<denyIncompleteValues>true</denyIncompleteValues>
 	</parameter>
 	<parameter>
 		<name>BeginOfPeriod</name>
@@ -1540,6 +1521,12 @@ FROM
 			</dcsset:selection>
 			<dcsset:filter>
 				<dcsset:item xsi:type="dcsset:FilterItemComparison">
+					<dcsset:left xsi:type="dcscor:Field">LedgerType</dcsset:left>
+					<dcsset:comparisonType>Equal</dcsset:comparisonType>
+					<dcsset:right xsi:nil="true"/>
+					<dcsset:userSettingID>c7ca5587-f03b-4884-98e4-6f8c1a71ef73</dcsset:userSettingID>
+				</dcsset:item>
+				<dcsset:item xsi:type="dcsset:FilterItemComparison">
 					<dcsset:left xsi:type="dcscor:Field">Company</dcsset:left>
 					<dcsset:comparisonType>Equal</dcsset:comparisonType>
 					<dcsset:userSettingID>4397b60c-1023-4ede-8bf5-e8a7a40c102c</dcsset:userSettingID>
@@ -1552,13 +1539,6 @@ FROM
 					<dcscor:value xsi:nil="true"/>
 					<dcsset:userSettingID>eeaa5d18-5f96-486f-bd0c-6809263c9b58</dcsset:userSettingID>
 					<dcsset:userSettingPresentation xsi:type="xs:string">Period</dcsset:userSettingPresentation>
-				</dcscor:item>
-				<dcscor:item xsi:type="dcsset:SettingsParameterValue">
-					<dcscor:use>false</dcscor:use>
-					<dcscor:parameter>LedgerType</dcscor:parameter>
-					<dcscor:value xsi:nil="true"/>
-					<dcsset:userSettingID>89ff9523-6c57-4487-8998-7c0ca8387677</dcsset:userSettingID>
-					<dcsset:userSettingPresentation xsi:type="xs:string">Ledger type</dcsset:userSettingPresentation>
 				</dcscor:item>
 			</dcsset:dataParameters>
 			<dcsset:outputParameters>

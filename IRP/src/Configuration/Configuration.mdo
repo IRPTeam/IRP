@@ -354,8 +354,8 @@
   <commonModules>CommonModule.CatCashAccountsServer</commonModules>
   <commonModules>CommonModule.CatCompaniesClient</commonModules>
   <commonModules>CommonModule.CatCompaniesServer</commonModules>
-  <commonModules>CommonModule.CatConfigurationMetadataServer</commonModules>
   <commonModules>CommonModule.CatExpenseAndRevenueTypesServer</commonModules>
+  <commonModules>CommonModule.CatConfigurationMetadataServer</commonModules>
   <commonModules>CommonModule.CatItemsServer</commonModules>
   <commonModules>CommonModule.CatPartnersServer</commonModules>
   <commonModules>CommonModule.CatRetailCustomersClient</commonModules>

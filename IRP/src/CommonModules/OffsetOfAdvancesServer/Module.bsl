@@ -888,10 +888,12 @@ Procedure Write_SelfRecords(Parameters,
 	
 		// Currency calculation
 		PostingDataTables = New Map();
-
-		PostingDataTables.Insert(RecordSet_Advances         , New Structure("RecordSet", TableAdvances));
-		PostingDataTables.Insert(RecordSet_Transactions     , New Structure("RecordSet", TableTransactions));
-		PostingDataTables.Insert(RecordSet_AccountingAmounts, New Structure("RecordSet", TableAccountingAmounts));
+		RecordSet_AdvancesSettings = PostingServer.PostingTableSettings(RecordSet_Advances.Metadata().Name, TableAdvances, RecordSet_Advances);
+		PostingDataTables.Insert(RecordSet_Advances.Metadata()         , RecordSet_AdvancesSettings);
+		RecordSet_TransactionsSettings = PostingServer.PostingTableSettings(RecordSet_Transactions.Metadata().Name, TableTransactions, RecordSet_Transactions);
+		PostingDataTables.Insert(RecordSet_Transactions.Metadata()     , RecordSet_TransactionsSettings);
+		RecordSet_AccountingAmountsSettings = PostingServer.PostingTableSettings(RecordSet_AccountingAmounts.Metadata().Name, TableAccountingAmounts, RecordSet_AccountingAmounts);
+		PostingDataTables.Insert(RecordSet_AccountingAmounts.Metadata(), RecordSet_AccountingAmountsSettings);
 		
 		ArrayOfPostingInfo = New Array();
 		For Each DataTable In PostingDataTables Do
@@ -900,16 +902,16 @@ Procedure Write_SelfRecords(Parameters,
 		
 		CurrenciesParameters = New Structure();
 		CurrenciesParameters.Insert("Object", Row.Document);
+		CurrenciesParameters.Insert("Metadata", Row.Document.Metadata());
 		CurrenciesParameters.Insert("ArrayOfPostingInfo", ArrayOfPostingInfo);
-		CurrenciesParameters.Insert("IsOffsetOfAdvances", 
-			CommonFunctionsClientServer.GetFromAddInfo(Parameters, "IsOffsetOfAdvances", False));
+		CurrenciesParameters.Insert("IsOffsetOfAdvances", CommonFunctionsClientServer.GetFromAddInfo(Parameters, "IsOffsetOfAdvances", False));
 		CurrenciesServer.PreparePostingDataTables(CurrenciesParameters, Undefined);
 
 		// Advances
-		ItemOfPostingInfo = GetFromPostingInfo(ArrayOfPostingInfo, Type("AccumulationRegisterRecordSet." + Parameters.RegisterName_Advances));
+		ItemOfPostingInfo = GetFromPostingInfo(ArrayOfPostingInfo, Metadata.AccumulationRegisters[Parameters.RegisterName_Advances]);
 
 		RecordSet_Advances.Read();
-		For Each RowPostingInfo In ItemOfPostingInfo.Value.RecordSet Do
+		For Each RowPostingInfo In ItemOfPostingInfo.Value.PrepareTable Do
 			FillPropertyValues(RecordSet_Advances.Add(), RowPostingInfo);
 		EndDo;
 		RecordSet_Advances.SetActive(True);
@@ -925,10 +927,10 @@ Procedure Write_SelfRecords(Parameters,
 		RecordSet_Advances.Write();
 					
 		// Transactions					
-		ItemOfPostingInfo = GetFromPostingInfo(ArrayOfPostingInfo, Type("AccumulationRegisterRecordSet." + Parameters.RegisterName_Transactions));
+		ItemOfPostingInfo = GetFromPostingInfo(ArrayOfPostingInfo, Metadata.AccumulationRegisters[Parameters.RegisterName_Transactions]);
 			
 		RecordSet_Transactions.Read();
-		For Each RowPostingInfo In ItemOfPostingInfo.Value.RecordSet Do
+		For Each RowPostingInfo In ItemOfPostingInfo.Value.PrepareTable Do
 			FillPropertyValues(RecordSet_Transactions.Add(), RowPostingInfo);
 		EndDo;
 		RecordSet_Transactions.SetActive(True);
@@ -943,11 +945,11 @@ Procedure Write_SelfRecords(Parameters,
 		RecordSet_Transactions.SetActive(True);
 		RecordSet_Transactions.Write();
 					
-		ItemOfPostingInfo = GetFromPostingInfo(ArrayOfPostingInfo, Type("AccumulationRegisterRecordSet.T1040T_AccountingAmounts"));
+		ItemOfPostingInfo = GetFromPostingInfo(ArrayOfPostingInfo, Metadata.AccumulationRegisters.T1040T_AccountingAmounts);
 			
 		// Accounting amounts (advances)
 		RecordSet_AccountingAmounts.Read();
-		For Each RowPostingInfo In ItemOfPostingInfo.Value.RecordSet Do
+		For Each RowPostingInfo In ItemOfPostingInfo.Value.PrepareTable Do
 			FillPropertyValues(RecordSet_AccountingAmounts.Add(), RowPostingInfo);
 		EndDo;
 		RecordSet_AccountingAmounts.SetActive(True);
@@ -968,11 +970,11 @@ EndProcedure
 
 Function GetFromPostingInfo(ArrayOfPostingInfo, RecordSetType)
 	For Each ItemOfPostingInfo In ArrayOfPostingInfo Do
-		If TypeOf(ItemOfPostingInfo.Key) = RecordSetType Then
+		If ItemOfPostingInfo.Key = RecordSetType Then
 			Return ItemOfPostingInfo;
 		EndIf;
 	EndDo;
-	Raise StrTemplate("Not found [%1] in arrayf of posting info", RecordSetType);
+	Raise StrTemplate("Not found [%1] in array of posting info", RecordSetType);
 EndFunction
 
 Procedure WriteTablesToTempTables(Parameters, 

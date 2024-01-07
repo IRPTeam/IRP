@@ -570,6 +570,7 @@ Scenario: Create document SalesInvoice objects (for copy lines)
 				| Company Ferron BP     |
 			And I select current line in "List" table
 			And I click Select button of "Partner term" field
+			And I remove checkbox named "FilterCompanyUse"				
 			And I go to line in "List" table
 				| Description            |
 				| Vendor Ferron, USD     |

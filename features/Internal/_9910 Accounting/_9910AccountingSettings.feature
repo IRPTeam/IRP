@@ -468,13 +468,13 @@ Scenario: _0991008 create Account charts (Basic) - group and assets account
 		And I set checkbox named "Quantity"
 		And I click "Save" button
 		Then the form attribute named "SearchCode" became equal to "405"
-		Then the form attribute named "Order" became equal to "405"				
+		Then the form attribute named "Order" became equal to "10"				
 		And I click "Save and close" button
 		* Check creation
 			And "List" table contains lines
 				| 'Code'                   | 'Order' | 'Description'           | 'Type' | 'Ext. Dim 2' | 'Q.'  | 'Ext. Dim 3' | 'C.' | 'Ledger type variant'               | 'Ext. Dim 1' | 'Off-balance' |
 				| 'Account charts (Basic)' | ''      | ''                      | ''     | ''           | ''    | ''           | ''   | ''                                  | ''           | ''            |
-				| '405'                    | '405'   | 'Group Assets acccount' | 'AP'   | ''           | 'Yes' | ''           | 'No' | 'LTV with account charts code mask' | ''           | 'No'          |
+				| '405'                    | '10'    | 'Group Assets acccount' | 'AP'   | ''           | 'Yes' | ''           | 'No' | 'LTV with account charts code mask' | ''           | 'No'          |
 	* Create first account (assets)	
 		And I click the button named "FormCreate"
 		And I input "40501" text in the field named "Code"
@@ -515,7 +515,7 @@ Scenario: _0991008 create Account charts (Basic) - group and assets account
 			And "List" table contains lines
 				| 'Code'                   | 'Order' | 'Description'           | 'Type' | 'Ext. Dim 2' | 'Q.'  | 'Ext. Dim 3' | 'C.' | 'Ledger type variant'               | 'Ext. Dim 1' | 'Off-balance' |
 				| 'Account charts (Basic)' | ''      | ''                      | ''     | ''           | ''    | ''           | ''   | ''                                  | ''           | ''            |
-				| '405'                    | '405'   | 'Group Assets acccount' | 'AP'   | ''           | 'Yes' | ''           | 'No' | 'LTV with account charts code mask' | ''           | 'No'          |
+				| '405'                    | '10'    | 'Group Assets acccount' | 'AP'   | ''           | 'Yes' | ''           | 'No' | 'LTV with account charts code mask' | ''           | 'No'          |
 				| '405.01'                 | '40501' | 'Assets acccount'       | 'A'    | 'Item key'   | 'Yes' | 'Store'      | 'No' | 'LTV with account charts code mask' | 'Item'       | 'No'          |					
 
 Scenario: _0991009 create Account charts (Basic) - liabilities account without group
@@ -1658,5 +1658,179 @@ Scenario: _0991059 create journal entry for two PI
 				
 						
 				
+Scenario: _0991070 check Bank receipt accounting movements (Payment from customer)
+	And I close all client application windows
+	* Select BR
+		Given I open hyperlink "e1cib/list/Document.BankReceipt"
+		And I go to line in "List" table
+			| 'Number' |
+			| '1'      |
+		And in the table "List" I click the button named "ListContextMenuPost"		
+		And I select current line in "List" table
+	* Check accounting movements
+		And in the table "PaymentList" I click "Edit accounting" button
+		And "AccountingAnalytics" table became equal
+			| 'Debit' | 'Cash/Bank account'           | 'Company'                                     | 'Business unit'   | 'Partner'                     | 'Credit' | 'Partner term'                                | 'Operation'                                                                                         |
+			| '3250'  | 'Bank account, USD'           | 'Client 2'                                    | 'Business unit 1' | 'Customer 2 (2 partner term)' | '4010'   | 'Individual partner term 1 (by partner term)' | 'BankReceipt DR (R3010B_CashOnHand) CR (R2020B_AdvancesFromCustomers_R2021B_CustomersTransactions)' |
+			| '4010'  | 'Customer 2 (2 partner term)' | 'Individual partner term 1 (by partner term)' | 'Business unit 1' | 'Customer 2 (2 partner term)' | '4020'   | 'Individual partner term 1 (by partner term)' | 'BankReceipt DR (R2021B_CustomersTransactions) CR (R2020B_AdvancesFromCustomers)'                   |
+	And I close all client application windows
 
+Scenario: _0991071 check Bank payment accounting movements (Payment to the vendor)
+	And I close all client application windows
+	* Select BP
+		Given I open hyperlink "e1cib/list/Document.BankPayment"
+		And I go to line in "List" table
+			| 'Number' |
+			| '1'      |
+		And in the table "List" I click the button named "ListContextMenuPost"		
+		And I select current line in "List" table
+	* Check accounting movements
+		And in the table "PaymentList" I click "Edit accounting" button
+		And "AccountingAnalytics" table became equal
+			| 'Debit' | 'Partner'                   | 'Business unit'   | 'Company'                    | 'Partner term'               | 'Credit' | 'Cash/Bank account'         | 'Operation'                                                                                   |
+			| '5201'  | 'Vendor 2 (1 partner term)' | 'Business unit 1' | 'Vendor 2'                   | 'Partner term with vendor 2' | '3250'   | 'Bank account, USD'         | 'BankPayment DR (R1020B_AdvancesToVendors R1021B_VendorsTransactions) CR (R3010B_CashOnHand)' |
+			| '420.2' | 'Vendor 2 (1 partner term)' | 'Business unit 1' | 'Vendor 2'                   | 'Business unit 1'            | '3250'   | 'Bank account, USD'         | 'BankPayment DR (R5022T_Expenses) CR (R3010B_CashOnHand)'                                     |
+			| '5201'  | 'Vendor 2 (1 partner term)' | 'Business unit 1' | 'Partner term with vendor 2' | 'Partner term with vendor 2' | '5202'   | 'Vendor 2 (1 partner term)' | 'BankPayment DR (R1021B_VendorsTransactions) CR (R1020B_AdvancesToVendors)'                   |		
+	And I close all client application windows
+
+				
+Scenario: _0991072 check Bank payment accounting movements (Payment to the vendor)
+	And I close all client application windows
+	* Select BP
+		Given I open hyperlink "e1cib/list/Document.BankPayment"
+		And I go to line in "List" table
+			| 'Number' |
+			| '1'      |
+		And in the table "List" I click the button named "ListContextMenuPost"		
+		And I select current line in "List" table
+	* Check accounting movements
+		And in the table "PaymentList" I click "Edit accounting" button
+		And "AccountingAnalytics" table became equal
+			| 'Debit' | 'Partner'                   | 'Business unit'   | 'Company'                    | 'Partner term'               | 'Credit' | 'Cash/Bank account'         | 'Operation'                                                                                   |
+			| '5201'  | 'Vendor 2 (1 partner term)' | 'Business unit 1' | 'Vendor 2'                   | 'Partner term with vendor 2' | '3250'   | 'Bank account, USD'         | 'BankPayment DR (R1020B_AdvancesToVendors R1021B_VendorsTransactions) CR (R3010B_CashOnHand)' |
+			| '420.2' | 'Vendor 2 (1 partner term)' | 'Business unit 1' | 'Vendor 2'                   | 'Business unit 1'            | '3250'   | 'Bank account, USD'         | 'BankPayment DR (R5022T_Expenses) CR (R3010B_CashOnHand)'                                     |
+			| '5201'  | 'Vendor 2 (1 partner term)' | 'Business unit 1' | 'Partner term with vendor 2' | 'Partner term with vendor 2' | '5202'   | 'Vendor 2 (1 partner term)' | 'BankPayment DR (R1021B_VendorsTransactions) CR (R1020B_AdvancesToVendors)'                   |		
+	And I close all client application windows				
+				
+Scenario: _0991080 check Purchase invoice accounting movements
+	And I close all client application windows
+	* Select PI
+		Given I open hyperlink "e1cib/list/Document.PurchaseInvoice"
+		And I go to line in "List" table
+			| 'Number' |
+			| '1'      |
+		And in the table "List" I click the button named "ListContextMenuPost"		
+		And I select current line in "List" table
+	* Check accounting movements
+		And in the table "ItemList" I click "Edit accounting" button
+		And "AccountingAnalytics" table became equal
+			| 'Debit' | 'Partner'                   | 'Business unit' | 'Partner term'               | 'Credit' | 'Operation'                                                                                                      |
+			| '5201'  | 'Vendor 1 (1 partner term)' | ''              | 'Partner term with vendor 1' | '5202'   | 'PurchaseInvoice DR (R1021B_VendorsTransactions) CR (R1020B_AdvancesToVendors)'                                  |
+			| '5201'  | 'Vendor 1 (1 partner term)' | ''              | 'Partner term with vendor 1' | '5202'   | 'PurchaseInvoice DR (R1021B_VendorsTransactions) CR (R1020B_AdvancesToVendors_CurrencyRevaluation)'              |
+			| '3540'  | 'Vendor 1 (1 partner term)' | ''              | 'Partner term with vendor 1' | '5201'   | 'PurchaseInvoice DR (R4050B_StockInventory_R5022T_Expenses) CR (R1021B_VendorsTransactions)'                     |
+			| '5301'  | 'Vendor 1 (1 partner term)' | ''              | 'Partner term with vendor 1' | '5201'   | 'PurchaseInvoice DR (R1040B_TaxesOutgoing) CR (R1021B_VendorsTransactions)'                                      |
+			| '3540'  | 'Vendor 1 (1 partner term)' | ''              | 'Partner term with vendor 1' | '5201'   | 'PurchaseInvoice DR (R4050B_StockInventory_R5022T_Expenses) CR (R1021B_VendorsTransactions_CurrencyRevaluation)' |		
+	And I close all client application windows	
+
+			
+Scenario: _0991100 check Cash payment accounting movements
+	And I close all client application windows
+	* Select CP
+		Given I open hyperlink "e1cib/list/Document.CashPayment"
+		And I go to line in "List" table
+			| 'Number' |
+			| '1'      |
+		And in the table "List" I click the button named "ListContextMenuPost"		
+		And I select current line in "List" table
+	* Check accounting movements
+		And in the table "PaymentList" I click "Edit accounting" button
+		And "AccountingAnalytics" table became equal
+			| 'Debit' | 'Partner'                   | 'Business unit' | 'Company'                    | 'Partner term'               | 'Credit' | 'Cash/Bank account'         | 'Operation'                                                                                   |
+			| '5201'  | 'Vendor 1 (1 partner term)' | ''              | 'Vendor 1'                   | 'Partner term with vendor 1' | '3240'   | 'Cash, USD'                 | 'CashPayment DR (R1020B_AdvancesToVendors_R1021B_VendorsTransactions) CR (R3010B_CashOnHand)' |
+			| '5201'  | ''                          | ''              | 'Partner term with vendor 1' | 'Partner term with vendor 1' | '5202'   | 'Vendor 1 (1 partner term)' | 'CashPayment DR (R1021B_VendorsTransactions) CR (R1020B_AdvancesToVendors)'                   |		
+	And I close all client application windows	
 						
+Scenario: _0991110 check Cash receipt accounting movements
+	And I close all client application windows
+	* Select CR
+		Given I open hyperlink "e1cib/list/Document.CashReceipt"
+		And I go to line in "List" table
+			| 'Number' |
+			| '1'      |
+		And in the table "List" I click the button named "ListContextMenuPost"		
+		And I select current line in "List" table
+	* Check accounting movements
+		And in the table "PaymentList" I click "Edit accounting" button
+		And "AccountingAnalytics" table became equal
+			| 'Debit' | 'Cash/Bank account'           | 'Company'                                                 | 'Partner'                     | 'Business unit' | 'Credit' | 'Partner term'                                            | 'Operation'                                                                                         |
+			| '3240'  | 'Cash, USD'                   | 'Client 1'                                                | 'Customer 1 (1 partner term)' | ''              | '4010'   | 'Partner term with customer (by document + credit limit)' | 'CashReceipt DR (R3010B_CashOnHand) CR (R2020B_AdvancesFromCustomers_R2021B_CustomersTransactions)' |
+			| '4010'  | 'Customer 1 (1 partner term)' | 'Partner term with customer (by document + credit limit)' | 'Customer 1 (1 partner term)' | ''              | '4020'   | 'Partner term with customer (by document + credit limit)' | 'CashReceipt DR (R2021B_CustomersTransactions) CR (R2020B_AdvancesFromCustomers)'                   |	
+	And I close all client application windows
+
+Scenario: _0991120 check Cash expense accounting movements
+	And I close all client application windows
+	* Select CE
+		Given I open hyperlink "e1cib/list/Document.CashExpense"
+		And I go to line in "List" table
+			| 'Number' |
+			| '1'      |
+		And in the table "List" I click the button named "ListContextMenuPost"		
+		And I select current line in "List" table
+	* Check accounting movements
+		And in the table "PaymentList" I click "Edit accounting" button
+		And "AccountingAnalytics" table became equal
+			| 'Debit' | 'Partner' | 'Business unit'   | 'Company'       | 'Expense and revenue type' | 'Credit' | 'Cash/Bank account' | 'Operation'                                               |
+			| '420.2' | ''        | 'Business unit 1' | 'Own company 1' | 'Expence 1'                | '3240'   | 'Cash, USD'         | 'CashExpense DR (R5022T_Expenses) CR (R3010B_CashOnHand)' |		
+	And I close all client application windows
+
+Scenario: _0991130 check Cash revenue accounting movements
+	And I close all client application windows
+	* Select CR
+		Given I open hyperlink "e1cib/list/Document.CashRevenue"
+		And I go to line in "List" table
+			| 'Number' |
+			| '1'      |
+		And in the table "List" I click the button named "ListContextMenuPost"		
+		And I select current line in "List" table
+	* Check accounting movements
+		And in the table "PaymentList" I click "Edit accounting" button
+		And "AccountingAnalytics" table became equal
+			| 'Debit' | 'Cash/Bank account' | 'Company'       | 'Partner' | 'Business unit'   | 'Credit' | ' ' | 'Operation'                                              |
+			| '3240'  | 'Cash, USD'         | 'Own company 1' | ''        | 'Business unit 1' | '650'    | ''  | 'CashRevenue DR (R3010B_CashOnHand) CR (R5021_Revenues)' |		
+	And I close all client application windows
+
+Scenario: _0991140 check Debit note accounting movements
+	And I close all client application windows
+	* Select Debit note
+		Given I open hyperlink "e1cib/list/Document.DebitNote"
+		And I go to line in "List" table
+			| 'Number' |
+			| '1'      |
+		And in the table "List" I click the button named "ListContextMenuPost"		
+		And I select current line in "List" table
+	* Check accounting movements
+		And in the table "Transactions" I click "Edit accounting" button	
+		And "AccountingAnalytics" table became equal
+			| 'Debit' | 'Partner'                   | 'Business unit'             | 'Company'                    | 'Partner term'               | 'Credit' | ' '               | 'Operation'                                                               |
+			| '5202'  | 'Vendor 1 (1 partner term)' | 'Business unit 1'           | 'Vendor 1'                   | 'Partner term with vendor 1' | '650'    | ''                | 'DebitNote DR (R1020B_AdvancesToVendors) CR (R5021_Revenues)'             |
+			| '5201'  | 'Vendor 1 (1 partner term)' | 'Vendor 1 (1 partner term)' | 'Partner term with vendor 1' | 'Partner term with vendor 1' | '5202'   | 'Business unit 1' | 'DebitNote DR (R1021B_VendorsTransactions) CR (R1020B_AdvancesToVendors)' |
+			| '4010'  | 'Vendor 1 (1 partner term)' | 'Business unit 1'           | 'Vendor 1'                   | 'Partner term with vendor 1' | '650'    | ''                | 'DebitNote DR (R2021B_CustomersTransactions) CR (R5021_Revenues)'         |		
+	And I close all client application windows
+
+Scenario: _0991145 check Credit note accounting movements
+	And I close all client application windows
+	* Select Credit note
+		Given I open hyperlink "e1cib/list/Document.CreditNote"
+		And I go to line in "List" table
+			| 'Number' |
+			| '1'      |
+		And in the table "List" I click the button named "ListContextMenuPost"		
+		And I select current line in "List" table
+	* Check accounting movements
+		And in the table "Transactions" I click "Edit accounting" button	
+		And "AccountingAnalytics" table became equal
+			| 'Debit' | 'Partner'                     | 'Business unit'                               | 'Partner term'                                | 'Expense and revenue type' | 'Credit' | 'Operation'                                                                      |
+			| '4020'  | 'Customer 2 (2 partner term)' | 'Business unit 1'                             | 'Individual partner term 1 (by partner term)' | 'Expence 1'                | '420.2'  | 'CreditNote DR (R2020B_AdvancesFromCustomers) CR (R5022T_Expenses)'              |
+			| '4010'  | 'Customer 2 (2 partner term)' | 'Individual partner term 1 (by partner term)' | 'Individual partner term 1 (by partner term)' | 'Business unit 1'          | '4020'   | 'CreditNote DR (R2021B_CustomersTransactions) CR (R2020B_AdvancesFromCustomers)' |
+			| '5201'  | 'Customer 2 (2 partner term)' | 'Business unit 1'                             | 'Individual partner term 1 (by partner term)' | 'Expence 1'                | '420.2'  | 'CreditNote DR (R1021B_VendorsTransactions CR (R5022T_Expenses)'                 |		
+	And I close all client application windows

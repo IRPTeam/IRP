@@ -1,15 +1,17 @@
 
-
 &AtServer
 Procedure OnCreateAtServer(Cancel, StandardProcessing)
 	ThisObject.Items.RecordType.ChoiceList.Add("All"     , R().CLV_1);
 	ThisObject.Items.RecordType.ChoiceList.Add("Partner"   , Metadata.Catalogs.Partners.ObjectPresentation);
 	ThisObject.Items.RecordType.ChoiceList.Add("Agreement" , Metadata.Catalogs.Agreements.ObjectPresentation);
+	ThisObject.Items.RecordType.ChoiceList.Add("Currency"  , Metadata.Catalogs.Currencies.ObjectPresentation);
 	
 	If ValueIsFilled(Record.Partner) Then
 		ThisObject.RecordType = "Partner";
 	ElsIf ValueIsFilled(Record.Agreement) Then
 		ThisObject.RecordType = "Agreement";
+	ElsIf ValueIsFilled(Record.Currency) Then
+		ThisObject.RecordType = "Currency";
 	Else
 		ThisObject.RecordType = "All";
 	EndIf;
@@ -57,6 +59,10 @@ Procedure BeforeWriteAtServer(Cancel, CurrentObject, WriteParameters)
 		CurrentObject.Agreement = Undefined;
 	EndIf;
 	
+	If ThisObject.RecordType <> "Currency" Then
+		CurrentObject.Currency = Undefined;
+	EndIf;
+	
 	If Not CurrentObject.Vendor Then
 		CurrentObject.AccountAdvancesVendor = Undefined;
 		CurrentObject.AccountTransactionsVendor = Undefined;
@@ -77,6 +83,7 @@ EndProcedure
 Procedure SetVisible()
 	Items.Partner.Visible   = ThisObject.RecordType = "Partner";
 	Items.Agreement.Visible = ThisObject.RecordType = "Agreement";
+	Items.Currency.Visible  = ThisObject.RecordType = "Currency";
 	
 	Items.GroupVendor.Visible                 = Record.Vendor;
 	Items.AccountAdvancesVendor.Visible       = Record.Vendor;

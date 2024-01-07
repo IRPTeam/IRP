@@ -1154,6 +1154,10 @@
   <reports>Report.DetailingSupplies</reports>
   <reports>Report.ProductionPlanning</reports>
   <reports>Report.AdditionalDocumentTablesCheck</reports>
+  <reports>Report.TrialBalance</reports>
+  <reports>Report.TrialBalanceByAccount</reports>
+  <reports>Report.AccountCard</reports>
+  <reports>Report.AccountAnalysis</reports>
   <dataProcessors>DataProcessor.AnaliseDocumentMovements</dataProcessors>
   <dataProcessors>DataProcessor.AnalyseXDTO</dataProcessors>
   <dataProcessors>DataProcessor.BuilderExample</dataProcessors>

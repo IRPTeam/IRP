@@ -64,7 +64,6 @@
   <content>Document.OpeningEntry.TabularSection.AccountReceivableByAgreements.Attribute.LegalNameContract</content>
   <content>Document.PurchaseReturn.Attribute.LegalNameContract</content>
   <content>Document.OpeningEntry.TabularSection.AdvanceToSuppliers.Attribute.LegalNameContract</content>
-  <content>Catalog.LegalNameContracts</content>
   <content>Catalog.PartnerSegments</content>
   <content>InformationRegister.PartnerSegments</content>
   <content>Document.BankPayment.TabularSection.PaymentList.Attribute.BasisDocument</content>

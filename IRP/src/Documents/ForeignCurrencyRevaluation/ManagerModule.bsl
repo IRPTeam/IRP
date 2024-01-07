@@ -409,8 +409,8 @@ Function PostingGetDocumentDataTables(Ref, Cancel, PostingMode, Parameters, AddI
 	Query.SetParameter("ExpensesTable", ExpenseRevenueInfo.ExpensesTable);
 	Query.Execute();
 
-	CurrenciesServer.ExcludePostingDataTable(Parameters, Parameters.Object.RegisterRecords.R5022T_Expenses.Metadata());
-	CurrenciesServer.ExcludePostingDataTable(Parameters, Parameters.Object.RegisterRecords.R5021T_Revenues.Metadata());
+	CurrenciesServer.ExcludePostingDataTable(Parameters, Metadata.AccumulationRegisters.R5022T_Expenses);
+	CurrenciesServer.ExcludePostingDataTable(Parameters, Metadata.AccumulationRegisters.R5021T_Revenues);
 	
 	// Accounting
 	

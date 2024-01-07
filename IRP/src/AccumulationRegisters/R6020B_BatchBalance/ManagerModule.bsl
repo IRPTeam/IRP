@@ -30,7 +30,7 @@ Procedure BatchBalance_Clear(DocObjectRef, Cancel) Export
 	EndDo;
 EndProcedure
 
-Procedure BatchBalance_CollectRecords(DocObject) Export
+Function BatchBalance_CollectRecords(DocObject) Export
 	Query = New Query;
 	Query.Text =
 	"SELECT
@@ -198,9 +198,8 @@ Procedure BatchBalance_CollectRecords(DocObject) Export
 	|WHERE
 	|	R6040T_BatchShortageIncoming.Document = &Document";
 	Query.SetParameter("Document", DocObject.Ref);
-	QueryResult = Query.Execute();
-	DocObject.RegisterRecords.R6020B_BatchBalance.Load(QueryResult.Unload());
-EndProcedure
+	Return Query.Execute().Unload();
+EndFunction
 
 Procedure BatchBalance_LoadRecords(CalculationMovementCostRef) Export
 	Query = New Query;

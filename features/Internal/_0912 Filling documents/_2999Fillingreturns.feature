@@ -83,6 +83,7 @@ Scenario: _299901 check filling in and refilling Sales return order
 			And I select current line in "List" table
 			Then the form attribute named "Company" became equal to "Second Company"
 			And I click Select button of "Partner term" field
+			And I remove checkbox named "FilterCompanyUse"			
 			And I select current line in "List" table
 		* Check the refill when selecting a partner term
 			Then the form attribute named "Company" became equal to "Main Company"
@@ -203,6 +204,7 @@ Scenario: _299902 check filling in and refilling Sales return
 			And I select current line in "List" table
 			Then the form attribute named "Company" became equal to "Second Company"
 			And I click Select button of "Partner term" field
+			And I remove checkbox named "FilterCompanyUse"
 			And I select current line in "List" table
 		* Check the refill when selecting a partner term
 			Then the form attribute named "Company" became equal to "Main Company"
@@ -330,6 +332,7 @@ Scenario: _299903 check filling in and refilling Purchase return order
 			And I select current line in "List" table
 			Then the form attribute named "Company" became equal to "Second Company"
 			And I click Select button of "Partner term" field
+			And I remove checkbox named "FilterCompanyUse"
 			And I select current line in "List" table
 		* Check the refill when selecting a partner term
 			Then the form attribute named "Company" became equal to "Main Company"
@@ -458,6 +461,7 @@ Scenario: _299904 check filling in and refilling Purchase return
 			And I select current line in "List" table
 			Then the form attribute named "Company" became equal to "Second Company"
 			And I click Select button of "Partner term" field
+			And I remove checkbox named "FilterCompanyUse"
 			And I select current line in "List" table
 		* Check the refill when selecting a partner term
 			Then the form attribute named "Company" became equal to "Main Company"

@@ -1734,7 +1734,38 @@ Scenario: _0260171 check filling payment agent in RRR
 			| '1' | ''       | ''           | 'Card 01'      | ''                        | ''                                  | ''                 | 'Bank term 02' | ''        | '1,00'    | ''         | ''                      | ''                         | ''                            |
 	And I close all client application windows					
 		
-	
+Scenario: _0260172 check filling Account from Workstation when select payment type - cash (RSR)
+	And I close all client application windows
+	* Open RSR
+		Given I open hyperlink "e1cib/list/Document.RetailSalesReceipt"
+		And I click the button named "FormCreate"
+	* Filling payment type
+		And I move to "Payments" tab
+		And in the table "Payments" I click "Add" button
+		And I activate "Payment type" field in "Payments" table
+		And I select current line in "Payments" table
+		And I select "cash" from "Payment type" drop-down list by string in "Payments" table
+	* Check
+		And "Payments" table contains lines
+			| 'Payment type' | 'Account'            |
+			| 'Cash'         | 'Pos cash account 1' |
+		
+Scenario: _0260173 check filling Account from Workstation when select payment type - cash (RRR)
+	And I close all client application windows
+	* Open RRR
+		Given I open hyperlink "e1cib/list/Document.RetailReturnReceipt"
+		And I click the button named "FormCreate"
+	* Filling payment type
+		And I move to "Payments" tab
+		And in the table "Payments" I click "Add" button
+		And I activate "Payment type" field in "Payments" table
+		And I select current line in "Payments" table
+		And I select "cash" from "Payment type" drop-down list by string in "Payments" table
+	* Check
+		And "Payments" table contains lines
+			| 'Payment type' | 'Account'            |
+			| 'Cash'         | 'Pos cash account 1' |				
+						
 
 Scenario: _0260180 create document Visitor counter	
 	And I close all client application windows

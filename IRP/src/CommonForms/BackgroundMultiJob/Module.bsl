@@ -1,6 +1,12 @@
 
 // @strict-types
 
+&AtClient
+Procedure DoNotCloseForm(Command)
+	DoNotCloseForm = Not DoNotCloseForm;
+	Items.DoNotCloseForm.Check = DoNotCloseForm;
+EndProcedure
+
 &AtServer
 Procedure OnCreateAtServer(Cancel, StandardProcessing)
 	JobDataSettings = Parameters.JobDataSettings; // See BackgroundJobAPIServer.JobDataSettings
@@ -13,6 +19,7 @@ Procedure OnCreateAtServer(Cancel, StandardProcessing)
 	
 	DontContinueOnError = JobDataSettings.StopOnErrorAnyJob;
 	MaxJobStream = JobDataSettings.JobLimitCount;
+	CallbackWhenAllJobsDone = JobDataSettings.CallbackWhenAllJobsDone;
 EndProcedure
 
 &AtClient
@@ -33,29 +40,46 @@ EndProcedure
 
 &AtClient
 Procedure CheckJobStatus() Export
-	If CheckJobStatusAtServer() Then
-		AttachIdleHandler("CheckJobStatus", UpdatePause, True);
-	Else
+	AllJobDone = CheckJobStatusAtServer();
+	If AllJobDone Then
 		DetachIdleHandler("CheckJobStatus");
-		Items.FormUpdateStatuses.Visible = False;
-		If Not IsBlankString(CallbackFunction) Then
-			JobsResult = GetJobsResult();
-			If DontContinueOnError Then
-				For Each JobData In JobsResult Do
-					If Not JobData.Result Then
-						Return;
-					EndIf;
-				EndDo;
-			EndIf;
-			If IsBlankString(CallbackModule) Then
-				Execute "FormOwner." + CallbackFunction + "(JobsResult)";
-				Close();
-			Else
-				Callback(JobsResult);
-			EndIf;		
-		EndIf;
+	Else
+		AttachIdleHandler("CheckJobStatus", UpdatePause, True);
 	EndIf;
 	UpdateLabels();
+	RunCallbackForOwner(AllJobDone);
+EndProcedure
+
+&AtClient
+Procedure RunCallbackForOwner(AllJobDone)
+	Items.FormUpdateStatuses.Enabled = False;
+	If IsBlankString(CallbackFunction) Then
+		Return;
+	EndIf;
+		
+	JobsResult = GetJobsResult();
+	If JobsResult.Count() = 0 Then
+		Return;
+	EndIf;
+	
+	If DontContinueOnError And CallbackWhenAllJobsDone Then
+		For Each JobData In JobsResult Do
+			If Not JobData.Result Then
+				MaxJobStream = 0;
+				Return;
+			EndIf;
+		EndDo;
+	EndIf;
+	If IsBlankString(CallbackModule) Then
+		Execute "FormOwner." + CallbackFunction + "(JobsResult, AllJobDone)";
+	Else
+		Callback(JobsResult);
+	EndIf;
+			
+	If Not DoNotCloseForm And AllJobDone Then
+		Close();
+	EndIf;
+	Items.FormUpdateStatuses.Enabled = True;
 EndProcedure
 
 &AtClient
@@ -68,7 +92,7 @@ EndProcedure
 
 &AtServer
 Procedure Callback(JobsResult)
-	Execute "CallbackModule" + "." + CallbackFunction + "(JobsResult)";
+	Execute "CallbackModule" + "." + CallbackFunction + "(JobsResult, AllJobDone)";
 EndProcedure
 
 &AtServer
@@ -83,10 +107,10 @@ Function CheckJobStatusAtServer()
 	BackgroundJobAPIServer.RunJobs(JobList, MaxJobStream);
 	For Each Row In JobList Do
 		If Row.Status = Enums.JobStatus.Active OR Row.Status = Enums.JobStatus.Wait Then
-			Return True;
+			Return False;
 		EndIf;
 	EndDo;
-	Return False;
+	Return True;
 	
 EndFunction
 

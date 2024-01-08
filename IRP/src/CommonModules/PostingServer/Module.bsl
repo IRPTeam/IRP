@@ -1306,9 +1306,10 @@ Function CheckDocumentArray(DocumentArray, isJob = False) Export
 		Return Errors;
 	EndIf;
 
-	If DocumentArray[0].GetObject().RegisterRecords.Count() = 0 Then
+	If DocumentArray[0].GetObject().RegisterRecords.Count() = 0
+		OR SkipOnCheckPosting(DocumentArray[0].Metadata()) Then
 		Msg = BackgroundJobAPIServer.NotifySettings();
-		Msg.Log = "Document type: " + DocumentArray[0].Metadata().Name + " can not be posted.";
+		Msg.Log = "Document type: " + DocumentArray[0].Metadata().Name + " not supported document type.";
 		Msg.End = True;
 		Msg.DataAddress = CommonFunctionsServer.PutToCache(Errors);
 		BackgroundJobAPIServer.NotifyStream(Msg);
@@ -1320,9 +1321,10 @@ Function CheckDocumentArray(DocumentArray, isJob = False) Export
 		Msg.Log = "Start check: " + DocumentArray.Count();
 		BackgroundJobAPIServer.NotifyStream(Msg);
 	EndIf;
-
+	Count = 0; 
+	LastPercentLogged = 0;
+	StartDate = CurrentUniversalDateInMilliseconds();
 	For Each Doc In DocumentArray Do
-		
 		BeginTransaction();
 		
 		DocObject = Doc;
@@ -1347,7 +1349,20 @@ Function CheckDocumentArray(DocumentArray, isJob = False) Export
 			EndDo;
 			
 			Errors.Add(Result);
+		EndIf;    
+		Count = Count + 1;
+		
+		Percent = 100 * Count / DocumentArray.Count();
+		If isJob And (Percent - LastPercentLogged >= 1) Then  
+			LastPercentLogged = Int(Percent);
+			Msg = BackgroundJobAPIServer.NotifySettings();
+			DateDiff = CurrentUniversalDateInMilliseconds() - StartDate;
+			Msg.Speed = Format(1000 * Count / DateDiff, "NFD=2; NG=") + " doc/sec";
+			Msg.Percent = Percent;
+			Msg.Log = "Current: " + Count + " / " + DocumentArray.Count();
+			BackgroundJobAPIServer.NotifyStream(Msg);
 		EndIf;
+
 	EndDo;
 	
 	If isJob Then
@@ -1359,5 +1374,14 @@ Function CheckDocumentArray(DocumentArray, isJob = False) Export
 	
 	Return Errors;
 EndFunction
+
+Function SkipOnCheckPosting(Doc)
+
+	Array = New Array;
+	Array.Add(Metadata.Documents.CalculationMovementCosts);
+	
+	Return Not Array.Find(Doc) = Undefined;
+EndFunction
+
 
 #EndRegion

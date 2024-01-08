@@ -88,8 +88,9 @@ EndFunction
 // 
 // Parameters:
 //  Result - See BackgroundJobAPIServer.GetJobsResult
+//  AllJobDone - Boolean
 &AtServer
-Procedure GetJobsForCheckDocuments_Callback(Result) Export
+Procedure GetJobsForCheckDocuments_Callback(Result, AllJobDone) Export
 	CheckListTree = FormAttributeToValue("CheckList");
 	DocumentErrors = New Array;
 	ErrorsDescriptions = AdditionalDocumentTableControlReuse.GetAllErrorsDescription();	
@@ -373,18 +374,39 @@ Function GetJobsForCheckPostingDocuments()
 	JobDataSettings = BackgroundJobAPIServer.JobDataSettings();
 	JobDataSettings.CallbackFunction = "GetJobsForCheckPostingDocuments_Callback";
 	JobDataSettings.ProcedurePath = "PostingServer.CheckDocumentArray";
-	
+	JobDataSettings.CallbackWhenAllJobsDone = False;
+					
+	DocsInPack = 100;
 	For Each TypeItem In TypesTable Do
 		 DocumentsRows = DocumentList.FindRows(New Structure("DocumentType", TypeItem.DocumentType));
-		 DocumentTable = DocumentList.Unload(DocumentsRows, "Ref, Date, Picture");
 		 
-		 JobSettings = BackgroundJobAPIServer.JobSettings();
-
-		 JobSettings.ProcedureParams.Add(DocumentTable.UnloadColumn("Ref"));
-		 JobSettings.ProcedureParams.Add(True);
-
-		 JobSettings.Description = String(TypeItem.DocumentType) + ": " + DocumentTable.Count();
-		 JobDataSettings.JobSettings.Add(JobSettings);
+		 StreamArray = New Array;
+		 Pack = 1;
+		 TotalDocs = DocumentsRows.Count();
+		 For Each Row In DocumentsRows Do
+		 	StreamArray.Add(Row.Ref);
+		 	
+		 	If StreamArray.Count() = DocsInPack Then
+		 		JobSettings = BackgroundJobAPIServer.JobSettings();
+				JobSettings.ProcedureParams.Add(StreamArray);
+				JobSettings.ProcedureParams.Add(True);
+				JobSettings.Description = String(TypeItem.DocumentType) + ": " + Pack + " * (" + DocsInPack + ") / " + TotalDocs;
+				JobDataSettings.JobSettings.Add(JobSettings);
+				
+				StreamArray = New Array;
+		 		Pack = Pack + 1;
+		 	EndIf;
+		 EndDo;
+		 If StreamArray.Count() > 0 Then
+	 		JobSettings = BackgroundJobAPIServer.JobSettings();
+			JobSettings.ProcedureParams.Add(StreamArray);
+			JobSettings.ProcedureParams.Add(True);
+			JobSettings.Description = String(TypeItem.DocumentType) + ": " + Pack + " * (" + DocsInPack + ") / " + TotalDocs;
+			JobDataSettings.JobSettings.Add(JobSettings);
+			
+			StreamArray = New Array;
+	 		Pack = Pack;
+	 	EndIf;
 	EndDo;
 
 	Return JobDataSettings;
@@ -394,8 +416,9 @@ EndFunction
 // 
 // Parameters:
 //  Result - See BackgroundJobAPIServer.GetJobsResult
+//  AllJobDone - Boolean - 
 &AtServer
-Procedure GetJobsForCheckPostingDocuments_Callback(Result) Export
+Procedure GetJobsForCheckPostingDocuments_Callback(Result, AllJobDone) Export
 	PostingInfoTree = FormAttributeToValue("PostingInfo");
 	DocumentErrors = New Array;
 	For Each Row In Result Do

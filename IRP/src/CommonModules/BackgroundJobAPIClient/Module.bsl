@@ -5,6 +5,12 @@
 //  JobDataSettings - See JobDataSettings
 Procedure OpenJobForm(JobDataSettings, OwnerForm) Export
 	
-	OpenForm("CommonForm.BackgroundMultiJob", New Structure("JobDataSettings", JobDataSettings), OwnerForm, , , , , FormWindowOpeningMode.LockOwnerWindow);
+	If JobDataSettings.CallbackWhenAllJobsDone Then
+		OpenMode = FormWindowOpeningMode.LockOwnerWindow;
+	Else
+		OpenMode = FormWindowOpeningMode.Independent;
+	EndIf;
+	
+	OpenForm("CommonForm.BackgroundMultiJob", New Structure("JobDataSettings", JobDataSettings), OwnerForm, , , , , OpenMode);
 	
 EndProcedure

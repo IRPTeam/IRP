@@ -735,7 +735,7 @@ EndFunction
 
 Function CheckBalance(Ref, Parameters, Tables, RecordType, Unposting, AddInfo = Undefined)
 	
-	IsFreeStock = Upper(Parameters.RegisterName) = Upper("R4011B_FreeStocks");
+	IsFreeStock = Parameters.Metadata = Metadata.AccumulationRegisters.R4011B_FreeStocks;
 	
 	If RecordType = AccumulationRecordType.Expense Then
 		If IsFreeStock Then
@@ -892,8 +892,8 @@ Function CheckBalance_ExecuteQuery(Ref, Parameters, Tables, RecordType, Unpostin
 	|;";
 	
 	BalanceRegisterTable = 
-		?(Upper(Parameters.RegisterName) = Upper("R4010B_ActualStocks"),
-		QueryText_R4010B_ActualStocks, QueryText_R4011B_FreeStocks);
+		?(Parameters.Metadata = Metadata.AccumulationRegisters.R4010B_ActualStocks,
+			QueryText_R4010B_ActualStocks, QueryText_R4011B_FreeStocks);
 	
 	Query = New Query();
 	Query.TempTablesManager = Parameters.TempTablesManager;
@@ -1018,7 +1018,7 @@ Function CheckBalance_ExecuteQuery(Ref, Parameters, Tables, RecordType, Unpostin
 	|	Lack.LackOfBalance,
 	|	Lack.Unposting";
 	
-	Query.Text = StrTemplate(Query.Text, Parameters.RegisterName);
+	Query.Text = StrTemplate(Query.Text, Parameters.Metadata.Name);
 
 	If Tables.Records_Exists.Columns.Find("SerialLotNumber") = Undefined Then
 		Tables.Records_Exists.Columns.Add("SerialLotNumber", New TypeDescription("CatalogRef.SerialLotNumbers"));
@@ -1145,7 +1145,6 @@ Function GetRegisterRecords(Parameters)
 EndFunction
 
 Procedure SetPostingDataTable(PostingDataTables, Parameters, Name, VT, RegisterRecords = Undefined) Export
-	
 	If RegisterRecords = Undefined Then
 		RegisterRecords = GetRegisterRecords(Parameters);
 	EndIf;
@@ -1154,28 +1153,25 @@ Procedure SetPostingDataTable(PostingDataTables, Parameters, Name, VT, RegisterR
 	If Parameters.PostingByRef Then
 		RecSetData.Filter.Recorder.Set(Parameters.Object);
 	EndIf;
-	Settings = PostingTableSettings(Name, VT, RecSetData);
+	Settings = PostingTableSettings(VT, RecSetData);
 	PostingDataTables.Insert(RecSetData.Metadata(), Settings);
 EndProcedure
 
 // Posting table settings.
 // 
 // Parameters:
-//  RegisterName - String -
 //  Table - ValueTable -
 //  RecSetData - InformationRegisterRecordSetInformationRegisterName, AccountingRegisterRecordSetAccountingRegisterName, CalculationRegisterRecordSetCalculationRegisterName, AccumulationRegisterRecordSetAccumulationRegisterName - Rec set data
 // 
 // Returns:
 //  Structure - Posting table settings:
-// * RegisterName - String -
 // * PrepareTable - ValueTable - 
 // * WriteInTransaction - Boolean - 
 // * Metadata - MetadataObjectInformationRegister, MetadataObjectAccountingRegister, MetadataObjectCalculationRegister, MetadataObjectAccumulationRegister - 
 // * RecordSet_Document - AccumulationRegisterRecordSet, InformationRegisterRecordSet - 
 // * RecordType - Undefined, AccumulationRecordType - 
-Function PostingTableSettings(RegisterName, Table, RecSetData) Export
+Function PostingTableSettings(Table, RecSetData) Export
 	Settings = New Structure;
-	Settings.Insert("RegisterName", RegisterName);
 	Settings.Insert("PrepareTable", Table);
 	Settings.Insert("WriteInTransaction", True);
 	Settings.Insert("Metadata", RecSetData.Metadata());

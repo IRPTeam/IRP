@@ -51,14 +51,9 @@ Procedure PostingCheckBeforeWrite(Ref, Cancel, PostingMode, Parameters, AddInfo 
 			EndIf;
 		EndIf;
 
-		PostingDataTables = New Map;
-
 		R6070T_OtherPeriodsExpenses = Metadata.AccumulationRegisters.R6070T_OtherPeriodsExpenses;
-		R6070TSettings = PostingServer.PostingTableSettings(R6070T_OtherPeriodsExpenses.Name, OtherPeriodsExpensesByBasis, Parameters.Object.RegisterRecords.R6070T_OtherPeriodsExpenses);
-		R6070TSettings.WriteInTransaction = Parameters.IsReposting;
-		PostingDataTables.Insert(R6070T_OtherPeriodsExpenses, R6070TSettings);
-
-		Parameters.Insert("PostingDataTables", PostingDataTables);
+		PostingServer.SetPostingDataTable(Parameters.PostingDataTables, Parameters, R6070T_OtherPeriodsExpenses.Name, OtherPeriodsExpensesByBasis);
+		Parameters.PostingDataTables[R6070T_OtherPeriodsExpenses].WriteInTransaction = Parameters.IsReposting;
 
 		CostAllocationObject = Parameters.Object;
 		Parameters.Object = Basis;
@@ -84,15 +79,10 @@ Procedure PostingCheckBeforeWrite(Ref, Cancel, PostingMode, Parameters, AddInfo 
 			EndIf;
 		EndIf;
 
-		PostingDataTables = New Map;
-			
 		T6060S_BatchCostAllocationInfo = Metadata.InformationRegisters.T6060S_BatchCostAllocationInfo;
-		T6060SSettings = PostingServer.PostingTableSettings(T6060S_BatchCostAllocationInfo.Name, BatchCostAllocationInfoByBasis, Parameters.Object.RegisterRecords.T6060S_BatchCostAllocationInfo);
-		T6060SSettings.WriteInTransaction = Parameters.IsReposting;
-		PostingDataTables.Insert(T6060S_BatchCostAllocationInfo, T6060SSettings);			
+		PostingServer.SetPostingDataTable(Parameters.PostingDataTables, Parameters, T6060S_BatchCostAllocationInfo.Name, BatchCostAllocationInfoByBasis);
+		Parameters.PostingDataTables[T6060S_BatchCostAllocationInfo].WriteInTransaction = Parameters.IsReposting;			
 			
-		Parameters.Insert("PostingDataTables", PostingDataTables);
-
 		CostAllocationObject = Parameters.Object;
 		Parameters.Object = Row.Basis;
 		CurrenciesServer.PreparePostingDataTables(Parameters, CurrencyTable, AddInfo);

@@ -1262,7 +1262,7 @@ Function GetAccountingData_LandedCost(Parameters)
 	CurrenciesParameters = New Structure();
 	PostingDataTables = New Map();
 	
-	TableAccountingAmountsSettings = PostingServer.PostingTableSettings(RecordSet_AccountingAmounts.Metadata().Name, TableAccountingAmounts, RecordSet_AccountingAmounts);
+	TableAccountingAmountsSettings = PostingServer.PostingTableSettings(TableAccountingAmounts, RecordSet_AccountingAmounts);
 	PostingDataTables.Insert(RecordSet_AccountingAmounts.Metadata(), TableAccountingAmountsSettings);
 		
 	ArrayOfPostingInfo = New Array();

@@ -935,16 +935,7 @@ Procedure Write_SelfRecords(Parameters,
 		EndDo;
 		RecordSet_Transactions.SetActive(True);
 		RecordSet_Transactions.Write();
-				
-/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////				
-//		CurrenciesServer.RevaluateCurrency_CustomersTransactions(Parameters, 
-//						                                         RecordSet_Transactions, 
-//						                                         TableAccountingAmounts_CurrencyRevaluation);
-//						                                                 
-//		RecordSet_Transactions.SetActive(True);
-//		RecordSet_Transactions.Write();
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////				
-		
+						
 		CurrenciesServer.RevaluateCurrency_Transactions(Parameters, 
 						                                RecordSet_Transactions,
 						                                TableTransactions_CurrencyRevaluation, 

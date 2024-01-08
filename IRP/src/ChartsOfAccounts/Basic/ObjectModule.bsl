@@ -6,7 +6,9 @@ Procedure BeforeWrite(Cancel)
 	
 	Result = GetSearchCodeAndOrder(ThisObject.Code);
 	ThisObject.SearchCode = Result.SearchCode;
-	ThisObject.Order = Result.Order;
+	If Not ValueIsFilled(ThisObject.Order) Then
+		ThisObject.Order = Result.Order;
+	EndIf;
 EndProcedure
 
 Function GetSearchCodeAndOrder(_Code)

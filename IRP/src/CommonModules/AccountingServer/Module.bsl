@@ -490,16 +490,16 @@ Function __GetT9011S_AccountsCashAccount(Period, Company, LedgerTypeVariant, Cas
 	Return Result;
 EndFunction
 
-Function GetT9012S_AccountsPartner(AccountParameters, Partner, Agreement) Export
+Function GetT9012S_AccountsPartner(AccountParameters, Partner, Agreement, Currency) Export
 	Return AccountingServerReuse.GetT9012S_AccountsPartner_Reuse(
 //	Return __GetT9012S_AccountsPartner(
 		AccountParameters.Period, 
 		AccountParameters.Company, 
 		AccountParameters.LedgerTypeVariant,
-		Partner, Agreement);
+		Partner, Agreement, Currency);
 EndFunction
 
-Function __GetT9012S_AccountsPartner(Period, Company, LedgerTypeVariant, Partner, Agreement) Export
+Function __GetT9012S_AccountsPartner(Period, Company, LedgerTypeVariant, Partner, Agreement, Currency) Export
 	Query = New Query();
 	Query.Text = 
 	"SELECT
@@ -512,7 +512,8 @@ Function __GetT9012S_AccountsPartner(Period, Company, LedgerTypeVariant, Partner
 	|	AND Company = &Company
 	|	AND LedgerTypeVariant = &LedgerTypeVariant
 	|	AND Agreement = &Agreement
-	|	AND Partner.Ref IS NULL) AS ByAgreement
+	|	AND Partner.Ref IS NULL
+	|	AND Currency.Ref IS NULL) AS ByAgreement
 	|
 	|UNION ALL
 	|
@@ -525,20 +526,36 @@ Function __GetT9012S_AccountsPartner(Period, Company, LedgerTypeVariant, Partner
 	|	AND Company = &Company
 	|	AND LedgerTypeVariant = &LedgerTypeVariant
 	|	AND Partner = &Partner
-	|	AND Agreement.Ref IS NULL) AS ByPartner
+	|	AND Agreement.Ref IS NULL
+	|	AND Currency.Ref IS NULL) AS ByPartner
+	|
+	|UNION ALL
+	|
+	|SELECT
+	|	ByCurrency.AccountAdvancesVendor,
+	|	ByCurrency.AccountTransactionsVendor,
+	|	3
+	|FROM
+	|	InformationRegister.T9012S_AccountsPartner.SliceLast(&Period, Vendor
+	|	AND Company = &Company
+	|	AND LedgerTypeVariant = &LedgerTypeVariant
+	|	AND Currency = &Currency
+	|	AND Agreement.Ref IS NULL
+	|	AND Partner.Ref IS NULL) AS ByCurrency
 	|
 	|UNION ALL
 	|
 	|SELECT
 	|	ByCompany.AccountAdvancesVendor,
 	|	ByCompany.AccountTransactionsVendor,
-	|	3
+	|	4
 	|FROM
 	|	InformationRegister.T9012S_AccountsPartner.SliceLast(&Period, Vendor
 	|	AND Company = &Company
 	|	AND LedgerTypeVariant = &LedgerTypeVariant
 	|	AND Partner.Ref IS NULL
-	|	AND Agreement.Ref IS NULL) AS ByCompany
+	|	AND Agreement.Ref IS NULL
+	|	AND Currency.Ref IS NULL) AS ByCompany
 	|;
 	|
 	|///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -552,7 +569,8 @@ Function __GetT9012S_AccountsPartner(Period, Company, LedgerTypeVariant, Partner
 	|	AND Company = &Company
 	|	AND LedgerTypeVariant = &LedgerTypeVariant
 	|	AND Agreement = &Agreement
-	|	AND Partner.Ref IS NULL) AS ByAgreement
+	|	AND Partner.Ref IS NULL
+	|	AND Currency.Ref IS NULL) AS ByAgreement
 	|
 	|UNION ALL
 	|
@@ -565,20 +583,36 @@ Function __GetT9012S_AccountsPartner(Period, Company, LedgerTypeVariant, Partner
 	|	AND Company = &Company
 	|	AND LedgerTypeVariant = &LedgerTypeVariant
 	|	AND Partner = &Partner
-	|	AND Agreement.Ref IS NULL) AS ByPartner
+	|	AND Agreement.Ref IS NULL
+	|	AND Currency.Ref IS NULL) AS ByPartner
+	|
+	|UNION ALL
+	|
+	|SELECT
+	|	ByCurrency.AccountAdvancesCustomer,
+	|	ByCurrency.AccountTransactionsCustomer,
+	|	3
+	|FROM
+	|	InformationRegister.T9012S_AccountsPartner.SliceLast(&Period, Customer
+	|	AND Company = &Company
+	|	AND LedgerTypeVariant = &LedgerTypeVariant
+	|	AND Currency = &Currency
+	|	AND Agreement.Ref IS NULL
+	|	AND Partner.Ref IS NULL) AS ByCurrency
 	|
 	|UNION ALL
 	|
 	|SELECT
 	|	ByCompany.AccountAdvancesCustomer,
 	|	ByCompany.AccountTransactionsCustomer,
-	|	3
+	|	4
 	|FROM
 	|	InformationRegister.T9012S_AccountsPartner.SliceLast(&Period, Customer
 	|	AND Company = &Company
 	|	AND LedgerTypeVariant = &LedgerTypeVariant
 	|	AND Partner.Ref IS NULL
-	|	AND Agreement.Ref IS NULL) AS ByCompany
+	|	AND Agreement.Ref IS NULL
+	|	AND Currency.Ref IS NULL) AS ByCompany
 	|;
 	|
 	|/////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -592,7 +626,8 @@ Function __GetT9012S_AccountsPartner(Period, Company, LedgerTypeVariant, Partner
 	|	AND Company = &Company
 	|	AND LedgerTypeVariant = &LedgerTypeVariant
 	|	AND Agreement = &Agreement
-	|	AND Partner.Ref IS NULL) AS ByAgreement
+	|	AND Partner.Ref IS NULL
+	|	AND Currency.Ref IS NULL) AS ByAgreement
 	|
 	|UNION ALL
 	|
@@ -605,14 +640,29 @@ Function __GetT9012S_AccountsPartner(Period, Company, LedgerTypeVariant, Partner
 	|	AND Company = &Company
 	|	AND LedgerTypeVariant = &LedgerTypeVariant
 	|	AND Partner = &Partner
-	|	AND Agreement.Ref IS NULL) AS ByPartner
+	|	AND Agreement.Ref IS NULL
+	|	AND Currency.Ref IS NULL) AS ByPartner
+	|
+	|UNION ALL
+	|
+	|SELECT
+	|	ByCurrency.AccountAdvancesOther,
+	|	ByCurrency.AccountTransactionsOther,
+	|	3
+	|FROM
+	|	InformationRegister.T9012S_AccountsPartner.SliceLast(&Period, Other
+	|	AND Company = &Company
+	|	AND LedgerTypeVariant = &LedgerTypeVariant
+	|	AND Currency = &Currency
+	|	AND Agreement.Ref IS NULL
+	|	AND Partner.Ref IS NULL) AS ByCurrency
 	|
 	|UNION ALL
 	|
 	|SELECT
 	|	ByCompany.AccountAdvancesOther,
 	|	ByCompany.AccountTransactionsOther,
-	|	3
+	|	4
 	|FROM
 	|	InformationRegister.T9012S_AccountsPartner.SliceLast(&Period, Other
 	|	AND Company = &Company
@@ -661,6 +711,7 @@ Function __GetT9012S_AccountsPartner(Period, Company, LedgerTypeVariant, Partner
 	Query.SetParameter("LedgerTypeVariant"   , LedgerTypeVariant);
 	Query.SetParameter("Partner"   , Partner);
 	Query.SetParameter("Agreement" , Agreement);
+	Query.SetParameter("Currency"  , Currency);
 	
 	QueryResults = Query.ExecuteBatch();
 	
@@ -925,6 +976,9 @@ Procedure UpdateAccountingTables(Object,
 			EndDo;
 		EndDo;
 	EndIf;
+	
+	AccountingRowAnalytics.FillValues(Object.Ref, "Document");
+	AccountingExtDimensions.FillValues(Object.Ref, "Document");
 EndProcedure
 
 Function GetDocumentData(Object, TableRow, MainTableName)
@@ -1651,8 +1705,8 @@ Procedure UpdateAnalyticsJE(QueryTable)
 													  _AccountingExtDimensions, 
 													  AccountingClientServer.GetDocumentMainTable(Row.Ref));
 													  
-		_AccountingRowAnalytics.FillValues(True, "Active");
-		_AccountingExtDimensions.FillValues(True, "Active");
+		//_AccountingRowAnalytics.FillValues(True, "Active");
+		//_AccountingExtDimensions.FillValues(True, "Active");
 		
 		RecordSet_T9050S.Load(_AccountingRowAnalytics);
 		RecordSet_T9050S.Write();

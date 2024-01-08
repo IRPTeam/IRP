@@ -943,7 +943,11 @@ Function GetAnalytics_PaymentToVendor(Parameters)
 	AccountingAnalytics = AccountingServer.GetAccountingAnalyticsResult(Parameters);
 	AccountParameters   = AccountingServer.GetAccountParameters(Parameters);
 
-	Debit = AccountingServer.GetT9012S_AccountsPartner(AccountParameters, Parameters.RowData.Partner, Parameters.RowData.Agreement);
+	Debit = AccountingServer.GetT9012S_AccountsPartner(AccountParameters, 
+		                                               Parameters.RowData.Partner, 
+		                                               Parameters.RowData.Agreement,
+		                                               Parameters.ObjectData.Currency);
+		                                               
 	IsAdvance = AccountingServer.IsAdvance(Parameters.RowData);
 	If IsAdvance Then
 		If ValueIsFilled(Debit.AccountAdvancesVendor) Then
@@ -973,7 +977,11 @@ Function GetAnalytics_OffsetOfAdvances(Parameters)
 	AccountingAnalytics = AccountingServer.GetAccountingAnalyticsResult(Parameters);
 	AccountParameters   = AccountingServer.GetAccountParameters(Parameters);
 
-	Accounts = AccountingServer.GetT9012S_AccountsPartner(AccountParameters, Parameters.RowData.Partner, Parameters.RowData.Agreement);
+	Accounts = AccountingServer.GetT9012S_AccountsPartner(AccountParameters, 
+	                                                      Parameters.RowData.Partner, 
+	                                                      Parameters.RowData.Agreement,
+	                                                      Parameters.ObjectData.Currency);
+	                                                      
 	If ValueIsFilled(Accounts.AccountTransactionsVendor) Then
 		AccountingAnalytics.Debit = Accounts.AccountTransactionsVendor;
 	EndIf;

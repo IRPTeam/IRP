@@ -701,9 +701,10 @@ EndProcedure
 
 Function CheckBalance_R4011B_FreeStocks(Ref, Tables, RecordType, Unposting, AddInfo = Undefined) Export
 	Parameters = New Structure();
-	Parameters.Insert("RegisterName"         , "R4011B_FreeStocks");
-	Parameters.Insert("Operation"            , "R4011B_FreeStocks");
+	Parameters.Insert("Metadata"         	 , Metadata.AccumulationRegisters.R4011B_FreeStocks);
+	Parameters.Insert("Operation"            , Metadata.AccumulationRegisters.R4011B_FreeStocks.Synonym);
 	Parameters.Insert("TempTablesManager"    , New TempTablesManager());
+	Parameters.Insert("BalancePeriod", Undefined);
 	Return CheckBalance(Ref, Parameters, Tables, RecordType, Unposting, AddInfo);
 EndFunction
 
@@ -718,9 +719,10 @@ EndFunction
 
 Function CheckBalance_R4010B_ActualStocks(Ref, Tables, RecordType, Unposting, AddInfo = Undefined) Export
 	Parameters = New Structure();
-	Parameters.Insert("RegisterName"         , "R4010B_ActualStocks");
-	Parameters.Insert("Operation"            , "R4010B_ActualStocks");
+	Parameters.Insert("Metadata"         	 , Metadata.AccumulationRegisters.R4010B_ActualStocks);
+	Parameters.Insert("Operation"            , Metadata.AccumulationRegisters.R4010B_ActualStocks.Synonym);
 	Parameters.Insert("TempTablesManager"    , New TempTablesManager());
+	Parameters.Insert("BalancePeriod", Undefined);
 	Return CheckBalance(Ref, Parameters, Tables, RecordType, Unposting, AddInfo);
 EndFunction
 
@@ -738,11 +740,9 @@ Function CheckBalance(Ref, Parameters, Tables, RecordType, Unposting, AddInfo = 
 	IsFreeStock = Parameters.Metadata = Metadata.AccumulationRegisters.R4011B_FreeStocks;
 	
 	If RecordType = AccumulationRecordType.Expense Then
-		If IsFreeStock Then
-			Parameters.Insert("BalancePeriod", Undefined);
-		Else	
-			Parameters.Insert("BalancePeriod", 
-				CommonFunctionsClientServer.GetFromAddInfo(AddInfo, "BalancePeriod", New Boundary(Ref.PointInTime(), BoundaryType.Including)));
+		If Not IsFreeStock Then
+			Parameters.BalancePeriod = 
+				CommonFunctionsClientServer.GetFromAddInfo(AddInfo, "BalancePeriod", New Boundary(Ref.PointInTime(), BoundaryType.Including));
 		EndIf;
 		
 		CheckResult = CheckBalance_ExecuteQuery(Ref, Parameters, Tables, RecordType, Unposting, AddInfo);
@@ -754,8 +754,6 @@ Function CheckBalance(Ref, Parameters, Tables, RecordType, Unposting, AddInfo = 
 			Return True;
 		EndIf;
 		
-		Parameters.Insert("BalancePeriod"     , Undefined);
-		Parameters.Insert("TempTablesManager" , New TempTablesManager());
 		CheckResult = CheckBalance_ExecuteQuery(Ref, Parameters, Tables, RecordType, Unposting, AddInfo);
 		
 		If IsFreeStock Then
@@ -1324,6 +1322,9 @@ Function CheckDocumentArray(DocumentArray, isJob = False) Export
 	EndIf;
 
 	For Each Doc In DocumentArray Do
+		
+		BeginTransaction();
+		
 		DocObject = Doc;
 		Parameters = GetPostingParameters(DocObject, PostingMode, AddInfo);
 
@@ -1332,6 +1333,8 @@ Function CheckDocumentArray(DocumentArray, isJob = False) Export
 		CurrenciesServer.PreparePostingDataTables(Parameters, CurrencyTable, AddInfo);
 	
 		RegisteredRecords = RegisterRecords(Parameters);
+		
+		RollbackTransaction();
 		
 		If RegisteredRecords.Count() > 0 Then
 			Result = New Structure;

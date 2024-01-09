@@ -380,7 +380,7 @@ Function GetJobsForCheckPostingDocuments()
 	For Each TypeItem In TypesTable Do
 		 DocumentsRows = DocumentList.FindRows(New Structure("DocumentType", TypeItem.DocumentType));
 		 
-		 StreamArray = New Array;
+		StreamArray = New Array;
 		 Pack = 1;
 		 TotalDocs = DocumentsRows.Count();
 		 For Each Row In DocumentsRows Do
@@ -401,11 +401,8 @@ Function GetJobsForCheckPostingDocuments()
 	 		JobSettings = BackgroundJobAPIServer.JobSettings();
 			JobSettings.ProcedureParams.Add(StreamArray);
 			JobSettings.ProcedureParams.Add(True);
-			JobSettings.Description = String(TypeItem.DocumentType) + ": " + Pack + " * (" + DocsInPack + ") / " + TotalDocs;
+			JobSettings.Description = String(TypeItem.DocumentType) + ": " + Pack + " * (" + StreamArray.Count() + ") / " + TotalDocs;
 			JobDataSettings.JobSettings.Add(JobSettings);
-			
-			StreamArray = New Array;
-	 		Pack = Pack;
 	 	EndIf;
 	EndDo;
 
@@ -418,8 +415,7 @@ EndFunction
 //  Result - See BackgroundJobAPIServer.GetJobsResult
 //  AllJobDone - Boolean - 
 &AtServer
-Procedure GetJobsForCheckPostingDocuments_Callback(Result, AllJobDone) Export
-	PostingInfoTree = FormAttributeToValue("PostingInfo");
+Procedure GetJobsForCheckPostingDocuments_Callback(Result, AllJobDone) Export  
 	DocumentErrors = New Array;
 	For Each Row In Result Do
 		
@@ -429,21 +425,345 @@ Procedure GetJobsForCheckPostingDocuments_Callback(Result, AllJobDone) Export
 		
 		RegInfoArray = CommonFunctionsServer.GetFromCache(Row.CacheKey);
 		For Each DocRow In RegInfoArray Do
-			ParentRow = PostingInfoTree.Rows.Add();
+			ParentRow = PostingInfo.GetItems().Add();
 			ParentRow.Ref = DocRow.Ref;
+			ParentRow.DocumentType = TypeOf(DocRow.Ref);
 			ParentRow.Date = DocRow.Ref.Date;
+			ParentRow.Errors = DocRow.Error;
 			
 			For Each RegInfoData In DocRow.RegInfo Do
-				NewRow = ParentRow.Rows.Add();
+				NewRow = ParentRow.GetItems().Add();
 				FillPropertyValues(NewRow, RegInfoData);
 				NewRow.Date = ParentRow.Date;
 				NewRow.Ref = ParentRow.Ref;
+				NewRow.DocumentType = ParentRow.DocumentType;
+				NewRow.NewMovement = New ValueStorage(RegInfoData.NewPostingData, New Deflation(9));
 			EndDo;
 		 EndDo;
 	EndDo;
+EndProcedure
+
+&AtClient
+Procedure CheckAllPostInfo(Command)
+	For Each Row In Items.PostingInfo.SelectedRows Do
+		RowData = PostingInfo.FindByID(Row);
+		RowData.Select = True;
+	EndDo;
+EndProcedure
+
+&AtClient
+Procedure UncheckAllPostInfo(Command)
+	For Each Row In Items.PostingInfo.SelectedRows Do
+		RowData = PostingInfo.FindByID(Row);
+		RowData.Select = False;
+	EndDo;
+EndProcedure
+
+&AtClient
+Procedure PostingInfoPostSelectedDocument(Command)
+	JobSettingsArray = GetJobsForPostSelectedDocument();
+	BackgroundJobAPIClient.OpenJobForm(JobSettingsArray, ThisObject);
+EndProcedure
+
+&AtServer
+Function GetJobsForPostSelectedDocument()
+	JobDataSettings = BackgroundJobAPIServer.JobDataSettings();
+	JobDataSettings.CallbackFunction = "GetJobsForPostSelectedDocument_Callback";
+	JobDataSettings.ProcedurePath = "PostingServer.PostingDocumentArray";
+	JobDataSettings.CallbackWhenAllJobsDone = False;
+					
+	DocsInPack = 100;
+	StreamArray = New Array;
+	For Each Row In PostingInfo.GetItems() Do
+		If Not Row.Select OR Row.Processed Then
+			Continue;
+		EndIf;
+		
+		Pack = 1;
+		StreamArray.Add(Row.Ref);
+		
+		If StreamArray.Count() = DocsInPack Then
+			JobSettings = BackgroundJobAPIServer.JobSettings();
+			JobSettings.ProcedureParams.Add(StreamArray);
+			JobSettings.ProcedureParams.Add(True);
+			JobSettings.Description = "Posting: " + Pack + " * (" + DocsInPack + ")";
+			JobDataSettings.JobSettings.Add(JobSettings);
+			
+			StreamArray = New Array;
+			Pack = Pack + 1;
+		EndIf;
+	EndDo;
+	If StreamArray.Count() > 0 Then
+		JobSettings = BackgroundJobAPIServer.JobSettings();
+		JobSettings.ProcedureParams.Add(StreamArray);
+		JobSettings.ProcedureParams.Add(True);
+		JobSettings.Description = "Posting: " + Pack + " * (" + StreamArray.Count() + ")";
+		JobDataSettings.JobSettings.Add(JobSettings);
+	EndIf;
+
+	Return JobDataSettings;
+EndFunction
+
+// Get jobs for check posting documents callback.
+// 
+// Parameters:
+//  Result - See BackgroundJobAPIServer.GetJobsResult
+//  AllJobDone - Boolean - 
+&AtServer
+Procedure GetJobsForPostSelectedDocument_Callback(Result, AllJobDone) Export  
+	DocumentErrors = New Array;
+	For Each Row In Result Do
+		
+		If Not Row.Result Then
+			Continue;
+		EndIf;
+		
+		RegInfoArray = CommonFunctionsServer.GetFromCache(Row.CacheKey);
+		For Each DocRow In RegInfoArray Do
+			ParentRow = Undefined;
+			For Each Row In PostingInfo.GetItems() Do
+				If Row.Ref = DocRow.Ref Then
+					ParentRow = Row;
+					Break;
+				EndIf;
+			EndDo;
+			
+			If ParentRow = Undefined Then
+				Continue;
+			EndIf;
+			ParentRow.Errors = DocRow.Error;
+			ParentRow.Processed = True;
+		 EndDo;
+	EndDo;
+EndProcedure
+
+&AtClient
+Procedure ShowPosingDiff(Command)
+	Items.PostingInfoShowPosingDiff.Check = Not Items.PostingInfoShowPosingDiff.Check;
+	Items.GroupDiff.Visible = Items.PostingInfoShowPosingDiff.Check;
 	
-	PostingInfoTree.Rows.Sort("Date, Ref, RegName", True);
-	ValueToFormAttribute(PostingInfoTree, "PostingInfo");
+	If Not Items.GroupDiff.Visible Then
+		PostingInfo_ClearTables();
+	EndIf;
+EndProcedure
+
+&AtClient
+Procedure PostingInfoBeforeRowChange(Item, Cancel)
+	
+	If Not Item.CurrentItem = Items.PostingInfoRegName Then
+		Return;
+	EndIf;
+	
+	Cancel = True;
+	
+	CurrentMovement.Clear();
+	NewMovement.Clear();
+	
+	If Not Items.GroupDiff.Visible Then
+		Return;
+	EndIf;
+	
+	CurrentRow = Items.PostingInfo.CurrentData;
+	
+	If CurrentRow = Undefined Then
+		Return;
+	EndIf;
+	
+	If IsBlankString(CurrentRow.RegName) Then
+		Return;
+	EndIf;
+	
+	If Not CurrentRegName = CurrentRow.RegName Then
+		PostingInfo_ClearTables();
+		CurrentRegName = CurrentRow.RegName;
+		PostingInfo_CreateTable(CurrentRow.NewMovement);
+	EndIf;
+
+	PostingInfo_UpdateTable(CurrentRow.Ref, CurrentRow.NewMovement);
+EndProcedure
+
+&AtServer
+Procedure PostingInfo_UpdateTable(Ref, NewMovementStorage)
+	Query = New Query("SELECT * FROM " + CurrentRegName + " WHERE Recorder = &Ref");
+	Query.SetParameter("Ref", Ref);
+	CurrentMovement.Load(Query.Execute().Unload());
+	NewMovement.Load(NewMovementStorage.Get());
+EndProcedure
+
+&AtServer
+Procedure PostingInfo_CreateTable(NewMovementStorage)
+	
+	Table = NewMovementStorage.Get(); // ValueTable
+	
+	ArrayAddedAttributes = New Array; // Array Of FormAttribute
+	
+	For Each Column In Table.Columns Do 
+		If Column.ValueType.ContainsType(Type("PointInTime")) Then
+			TypeDescription = New TypeDescription("String");
+		Else
+			TypeDescription = New TypeDescription(Column.ValueType);
+		EndIf;
+		
+	    AttributeDescription = New FormAttribute(Column.Name, TypeDescription, "CurrentMovement"); 
+	    ArrayAddedAttributes.Add(AttributeDescription); 
+	    AttributeDescription = New FormAttribute(Column.Name, TypeDescription, "NewMovement"); 
+	    ArrayAddedAttributes.Add(AttributeDescription); 
+	EndDo; 
+	
+	ChangeAttributes(ArrayAddedAttributes);
+	
+	For Each Column In Table.Columns Do 
+	    NewColumn = Items.Add("CurrentMovement" + Column.Name, Type("FormField"), Items.CurrentMovement); // FormField 
+	    NewColumn.Title = Column.Name; 
+	    NewColumn.DataPath = "CurrentMovement." + Column.Name;
+	    NewColumn.Type = FormFieldType.InputField; 
+	    
+		NewColumn = Items.Add("NewMovement" + Column.Name, Type("FormField"), Items.NewMovement); // FormField 
+	    NewColumn.Title = Column.Name; 
+	    NewColumn.DataPath = "NewMovement." + Column.Name;
+	    NewColumn.Type = FormFieldType.InputField; 
+	EndDo;
+	
+EndProcedure
+
+&AtServer
+Procedure PostingInfo_ClearTables()
+	ArrayRemovedAttributes = New Array; // Array Of String
+	
+	For Each Column In CurrentMovement.Unload().Columns Do // ValueTableColumn
+	    ArrayRemovedAttributes.Add("CurrentMovement." + Column.Name);
+	    Items.Delete(Items.Find("CurrentMovement" + Column.Name));
+	EndDo;
+	
+	For Each Column In NewMovement.Unload().Columns Do // ValueTableColumn
+	    ArrayRemovedAttributes.Add("NewMovement." + Column.Name);
+	    Items.Delete(Items.Find("NewMovement" + Column.Name));
+	EndDo;
+	
+	ChangeAttributes(, ArrayRemovedAttributes);
+	
+	CurrentRegName = "";
+EndProcedure
+
+&AtClient
+Procedure PostingInfoWriteRecordSet(Command)
+	JobSettingsArray = GetJobsForWriteRecordSet();
+	BackgroundJobAPIClient.OpenJobForm(JobSettingsArray, ThisObject);
+EndProcedure
+
+&AtServer
+Function GetJobsForWriteRecordSet()
+	JobDataSettings = BackgroundJobAPIServer.JobDataSettings();
+	JobDataSettings.CallbackFunction = "GetJobsForWriteRecordSet_Callback";
+	JobDataSettings.ProcedurePath = "PostingServer.WriteDocumentsRecords";
+	JobDataSettings.CallbackWhenAllJobsDone = False;
+					
+	DocsInPack = 100;
+	StreamArray = New Array;
+	For Each Doc In PostingInfo.GetItems() Do
+		
+		For Each Row In Doc.GetItems() Do
+		
+			If Not Row.Select OR Row.Processed Then
+				Continue;
+			EndIf;
+			
+			Pack = 1;
+			Str = New Structure;
+			Str.Insert("Ref", Row.Ref);
+			Str.Insert("NewMovement", Row.NewMovement);
+			Str.Insert("RegName", Row.RegName);
+			StreamArray.Add(Str);
+			
+			If StreamArray.Count() = DocsInPack Then
+				JobSettings = BackgroundJobAPIServer.JobSettings();
+				JobSettings.ProcedureParams.Add(StreamArray);
+				JobSettings.ProcedureParams.Add(True);
+				JobSettings.Description = "Write records: " + Pack + " * (" + DocsInPack + ")";
+				JobDataSettings.JobSettings.Add(JobSettings);
+				
+				StreamArray = New Array;
+				Pack = Pack + 1;
+			EndIf;
+		EndDo;
+	EndDo;
+	If StreamArray.Count() > 0 Then
+		JobSettings = BackgroundJobAPIServer.JobSettings();
+		JobSettings.ProcedureParams.Add(StreamArray);
+		JobSettings.ProcedureParams.Add(True);
+		JobSettings.Description = "Write records: " + Pack + " * (" + StreamArray.Count() + ")";
+		JobDataSettings.JobSettings.Add(JobSettings);
+	EndIf;
+
+	Return JobDataSettings;
+EndFunction
+
+// Get jobs for check posting documents callback.
+// 
+// Parameters:
+//  Result - See BackgroundJobAPIServer.GetJobsResult
+//  AllJobDone - Boolean - 
+&AtServer
+Procedure GetJobsForWriteRecordSet_Callback(Result, AllJobDone) Export  
+	DocumentErrors = New Array;
+	For Each Row In Result Do
+		
+		If Not Row.Result Then
+			Continue;
+		EndIf;
+		
+		RegInfoArray = CommonFunctionsServer.GetFromCache(Row.CacheKey);
+		For Each DocRow In RegInfoArray Do
+			RegRow = Undefined;
+			For Each ParentRow In PostingInfo.GetItems() Do
+				For Each Row In ParentRow.GetItems() Do
+					If Row.Ref = DocRow.Ref And Row.RegName = DocRow.RegName Then
+						RegRow = Row;
+						Break;
+					EndIf;
+				EndDo;
+			EndDo;
+			
+			If RegRow = Undefined Then
+				Continue;
+			EndIf;
+			RegRow.Errors = DocRow.Error;
+			RegRow.Processed = True;
+		 EndDo;
+	EndDo;
+EndProcedure
+
+&AtClient
+Async Procedure PostingInfoExportData(Command)
+	DialogParameters = New GetFilesDialogParameters();
+	GetFileFromServerAsync(PostingInfoExportDataAtServer(), "Data.zip", DialogParameters);
+EndProcedure
+
+&AtServer
+Function PostingInfoExportDataAtServer()
+	Tree = FormAttributeToValue("PostingInfo");
+	Data = CommonFunctionsServer.SerializeXMLUseXDTO(Tree);
+	BD = CommonFunctionsServer.StringToBase64ZIP(Data, "Data", True);
+	Return PutToTempStorage(BD, UUID);
+EndFunction
+
+&AtClient
+Async Procedure PostingInfoImportData(Command)
+	DialogParameters = New PutFilesDialogParameters(, False, "Data file|*.zip;");
+	PlacedFileDescription = Await PutFileToServerAsync(, , , DialogParameters); // PlacedFileDescription
+	If PlacedFileDescription.PutFileCanceled Then
+		Return;
+	EndIf;
+	PostingInfoImportDataAtServer(PlacedFileDescription.Address);
+EndProcedure
+
+&AtServer
+Procedure PostingInfoImportDataAtServer(Address)
+	File = GetFromTempStorage(Address);
+	BD = CommonFunctionsServer.StringFromBase64ZIP(File);
+	Data = GetStringFromBinaryData(BD);
+	Tree = CommonFunctionsServer.DeserializeXMLUseXDTO(Data);
+	ValueToFormAttribute(Tree, "PostingInfo");
 EndProcedure
 
 #EndRegion

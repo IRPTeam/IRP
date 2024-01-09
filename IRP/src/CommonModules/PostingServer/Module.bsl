@@ -1289,6 +1289,7 @@ EndProcedure
 // Returns:
 //  Array Of Structure - Check document array:
 // * Ref - DocumentRefDocumentName -
+// * Error - String -
 // * RegInfo - Array Of Structure:
 // ** RegName - String -
 Function CheckDocumentArray(DocumentArray, isJob = False) Export
@@ -1328,28 +1329,43 @@ Function CheckDocumentArray(DocumentArray, isJob = False) Export
 		BeginTransaction();
 		
 		DocObject = Doc;
-		Parameters = GetPostingParameters(DocObject, PostingMode, AddInfo);
-
-		// Multi currency integration
-		CurrencyTable = CommonFunctionsClientServer.GetFromAddInfo(AddInfo, "CurrencyTable");	
-		CurrenciesServer.PreparePostingDataTables(Parameters, CurrencyTable, AddInfo);
+		Try
+			Parameters = GetPostingParameters(DocObject, PostingMode, AddInfo);
 	
-		RegisteredRecords = RegisterRecords(Parameters);
+			// Multi currency integration
+			CurrencyTable = CommonFunctionsClientServer.GetFromAddInfo(AddInfo, "CurrencyTable");	
+			CurrenciesServer.PreparePostingDataTables(Parameters, CurrencyTable, AddInfo);
 		
-		RollbackTransaction();
-		
-		If RegisteredRecords.Count() > 0 Then
+			RegisteredRecords = RegisterRecords(Parameters);
+			
+			If RegisteredRecords.Count() > 0 Then
+				Result = New Structure;
+				Result.Insert("Ref", Doc);
+				Result.Insert("RegInfo", New Array);
+				Result.Insert("Error", "");
+				For Each Reg In RegisteredRecords Do
+					RegInfo = New Structure;
+					RegInfo.Insert("RegName", Reg.Key.FullName());
+					RegInfo.Insert("NewPostingData", Reg.Value.RecordSet.Unload());
+					Result.RegInfo.Add(RegInfo);
+				EndDo;
+				
+				Errors.Add(Result);
+			EndIf;
+		Except
+			Msg = BackgroundJobAPIServer.NotifySettings();
+			Msg.Log = "Error: " + DocObject + ":" + Chars.LF + ErrorProcessing.DetailErrorDescription(ErrorInfo());
+			BackgroundJobAPIServer.NotifyStream(Msg);
+			
 			Result = New Structure;
 			Result.Insert("Ref", Doc);
 			Result.Insert("RegInfo", New Array);
-			For Each Reg In RegisteredRecords Do
-				RegInfo = New Structure;
-				RegInfo.Insert("RegName", Reg.Key.FullName());
-				Result.RegInfo.Add(RegInfo);
-			EndDo;
-			
+			Result.Insert("Error", Msg.Log);
 			Errors.Add(Result);
-		EndIf;    
+		EndTry;
+		
+		RollbackTransaction();
+		
 		Count = Count + 1;
 		
 		Percent = 100 * Count / DocumentArray.Count();
@@ -1359,7 +1375,6 @@ Function CheckDocumentArray(DocumentArray, isJob = False) Export
 			DateDiff = CurrentUniversalDateInMilliseconds() - StartDate;
 			Msg.Speed = Format(1000 * Count / DateDiff, "NFD=2; NG=") + " doc/sec";
 			Msg.Percent = Percent;
-			Msg.Log = "Current: " + Count + " / " + DocumentArray.Count();
 			BackgroundJobAPIServer.NotifyStream(Msg);
 		EndIf;
 
@@ -1383,5 +1398,169 @@ Function SkipOnCheckPosting(Doc)
 	Return Not Array.Find(Doc) = Undefined;
 EndFunction
 
+// Posting document array.
+// 
+// Parameters:
+//  DocumentArray - Array of DocumentRefDocumentName - Document array
+//  isJob - Boolean -
+// 
+// Returns:
+//  Array Of Structure - Check document array:
+// * Ref - DocumentRefDocumentName -
+// * Error - String -
+Function PostingDocumentArray(DocumentArray, isJob = False) Export
+
+
+	AddInfo = New Structure;
+	PostingMode = DocumentPostingMode.Regular;
+	Errors = New Array;
+	
+	If isJob And DocumentArray.Count() = 0 Then
+		Msg = BackgroundJobAPIServer.NotifySettings();
+		Msg.Log = "Empty doc list: " + DocumentArray.Count();
+		Msg.End = True;
+		Msg.DataAddress = CommonFunctionsServer.PutToCache(Errors);
+		BackgroundJobAPIServer.NotifyStream(Msg);
+		Return Errors;
+	EndIf;
+
+	Count = 0; 
+	LastPercentLogged = 0;
+	StartDate = CurrentUniversalDateInMilliseconds();
+	For Each Doc In DocumentArray Do
+		Try
+			Result = New Structure;
+			Result.Insert("Ref", Doc);
+			Result.Insert("Error", "");
+			If Doc.Posted Then
+				Doc.GetObject().Write(DocumentWriteMode.Posting);
+			Else
+				Result.Error = String(Doc) + " - Not posted";
+			EndIf;
+			Errors.Add(Result);
+		Except
+			Msg = BackgroundJobAPIServer.NotifySettings();
+			Msg.Log = "Error: " + Doc + ":" + Chars.LF + ErrorProcessing.DetailErrorDescription(ErrorInfo());
+			BackgroundJobAPIServer.NotifyStream(Msg);
+			
+			Result = New Structure;
+			Result.Insert("Ref", Doc);
+			Result.Insert("Error", Msg.Log);
+			Errors.Add(Result);
+		EndTry;
+		
+		Count = Count + 1;
+		
+		Percent = 100 * Count / DocumentArray.Count();
+		If isJob And (Percent - LastPercentLogged >= 1) Then  
+			LastPercentLogged = Int(Percent);
+			Msg = BackgroundJobAPIServer.NotifySettings();
+			DateDiff = CurrentUniversalDateInMilliseconds() - StartDate;
+			Msg.Speed = Format(1000 * Count / DateDiff, "NFD=2; NG=") + " doc/sec";
+			Msg.Percent = Percent;
+			BackgroundJobAPIServer.NotifyStream(Msg);
+		EndIf;
+
+	EndDo;
+	
+	If isJob Then
+		Msg = BackgroundJobAPIServer.NotifySettings();
+		Msg.End = True;
+		Msg.DataAddress = CommonFunctionsServer.PutToCache(Errors);
+		BackgroundJobAPIServer.NotifyStream(Msg);
+	EndIf;
+	
+	Return Errors;
+	
+EndFunction
+
+// Posting document array.
+// 
+// Parameters:
+//  DocumentArray - Array of Structure:
+//  * Ref - DocumentRefDocumentName - 
+//  * NewMovement - ValueStorage -
+//  * RegName - String -
+//  isJob - Boolean -
+// 
+// Returns:
+//  Array Of Structure - Check document array:
+// * Ref - DocumentRefDocumentName -
+// * Error - String -
+Function WriteDocumentsRecords(DocumentArray, isJob = False) Export
+
+
+	AddInfo = New Structure;
+	PostingMode = DocumentPostingMode.Regular;
+	Errors = New Array;
+	
+	If isJob And DocumentArray.Count() = 0 Then
+		Msg = BackgroundJobAPIServer.NotifySettings();
+		Msg.Log = "Empty doc list: " + DocumentArray.Count();
+		Msg.End = True;
+		Msg.DataAddress = CommonFunctionsServer.PutToCache(Errors);
+		BackgroundJobAPIServer.NotifyStream(Msg);
+		Return Errors;
+	EndIf;
+
+	Count = 0; 
+	LastPercentLogged = 0;
+	StartDate = CurrentUniversalDateInMilliseconds();
+	For Each Doc In DocumentArray Do
+		
+		Try
+			Result = New Structure;
+			Result.Insert("Ref", Doc.Ref);
+			Result.Insert("RegName", Doc.RegName);
+			Result.Insert("Error", "");
+			NewMovement = Doc.NewMovement.Get(); // ValueTable
+			If Not Doc.Ref.Posted And NewMovement.Count() > 0 Then
+				Result.Error = String(Doc.Ref) + " - Not posted. Can not update records";
+			Else
+				
+				Parts = StrSplit(Doc.RegName, ".");
+				CreateRecordSet = Eval(Parts[0] + "s." + Parts[1] + ".CreateRecordSet()"); // AccumulationRegisterRecordSet
+				CreateRecordSet.Filter.Recorder.Set(Doc.Ref);
+				NewMovement.FillValues(Doc.Ref, "Recorder");
+				CreateRecordSet.Load(NewMovement);
+				CreateRecordSet.Write(True);
+			EndIf;
+			Errors.Add(Result);
+		Except
+			Msg = BackgroundJobAPIServer.NotifySettings();
+			Msg.Log = "Error: " + Doc + ":" + Chars.LF + ErrorProcessing.DetailErrorDescription(ErrorInfo());
+			BackgroundJobAPIServer.NotifyStream(Msg);
+			
+			Result = New Structure;
+			Result.Insert("Ref", Doc);
+			Result.Insert("Error", Msg.Log);
+			Result.Insert("RegName", Doc.RegName);
+			Errors.Add(Result);
+		EndTry;
+		
+		Count = Count + 1;
+		
+		Percent = 100 * Count / DocumentArray.Count();
+		If isJob And (Percent - LastPercentLogged >= 1) Then  
+			LastPercentLogged = Int(Percent);
+			Msg = BackgroundJobAPIServer.NotifySettings();
+			DateDiff = CurrentUniversalDateInMilliseconds() - StartDate;
+			Msg.Speed = Format(1000 * Count / DateDiff, "NFD=2; NG=") + " doc/sec";
+			Msg.Percent = Percent;
+			BackgroundJobAPIServer.NotifyStream(Msg);
+		EndIf;
+
+	EndDo;
+	
+	If isJob Then
+		Msg = BackgroundJobAPIServer.NotifySettings();
+		Msg.End = True;
+		Msg.DataAddress = CommonFunctionsServer.PutToCache(Errors);
+		BackgroundJobAPIServer.NotifyStream(Msg);
+	EndIf;
+	
+	Return Errors;
+	
+EndFunction
 
 #EndRegion

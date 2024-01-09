@@ -30,7 +30,7 @@ Procedure OnOpen(Cancel)
 	EndIf;
 	CheckJobStatus();
 	
-	Title = FormOwner.Title + " [ Jobs: " + JobList.Count() + " ]";
+	Title = FormOwner.Title + " [Jobs: " + JobList.Count() + "]";
 EndProcedure
 
 &AtClient

@@ -18,6 +18,10 @@
   <content>Catalog.AccountingOperations</content>
   <content>AccountingRegister.Basic</content>
   <content>CommonCommand.OpenAccountingRecords</content>
+  <content>Report.TrialBalance</content>
+  <content>Report.TrialBalanceByAccount</content>
+  <content>Report.AccountCard</content>
+  <content>Report.AccountAnalysis</content>
   <subsystems>Accounts</subsystems>
   <subsystems>LedgerTypes</subsystems>
   <subsystems>Other</subsystems>

@@ -12,10 +12,10 @@ Function PostingGetDocumentDataTables(Ref, Cancel, PostingMode, Parameters, AddI
 	InfoReg = Metadata.InformationRegisters;
 	AccReg  = Metadata.AccumulationRegisters;
 	Tables = New Structure;
-	Tables.Insert("BillOfMaterials", PostingServer.CreateTable(InfoReg.T7010S_BillOfMaterials));
-	Tables.Insert("ProductionPlanning", PostingServer.CreateTable(AccReg.R7030T_ProductionPlanning));
-	Tables.Insert("MaterialPlanning", PostingServer.CreateTable(AccReg.R7020T_MaterialPlanning));
-	Tables.Insert("DetailingSupplies", PostingServer.CreateTable(AccReg.R7010T_DetailingSupplies));
+	Tables.Insert("BillOfMaterials", CommonFunctionsServer.CreateTable(InfoReg.T7010S_BillOfMaterials));
+	Tables.Insert("ProductionPlanning", CommonFunctionsServer.CreateTable(AccReg.R7030T_ProductionPlanning));
+	Tables.Insert("MaterialPlanning", CommonFunctionsServer.CreateTable(AccReg.R7020T_MaterialPlanning));
+	Tables.Insert("DetailingSupplies", CommonFunctionsServer.CreateTable(AccReg.R7010T_DetailingSupplies));
 
 	ObjectStatusesServer.WriteStatusToRegister(Ref, Ref.Status, CurrentUniversalDate());
 	StatusInfo = ObjectStatusesServer.GetLastStatusInfo(Ref);

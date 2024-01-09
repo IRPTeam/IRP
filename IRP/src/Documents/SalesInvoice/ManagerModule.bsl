@@ -18,7 +18,7 @@ Function PostingGetDocumentDataTables(Ref, Cancel, PostingMode, Parameters, AddI
 
 	Tables.Insert("CustomersTransactions", PostingServer.GetQueryTableByName("CustomersTransactions", Parameters));
 
-	CurrenciesServer.ExcludePostingDataTable(Parameters, Parameters.Object.RegisterRecords.T6020S_BatchKeysInfo.Metadata());
+	CurrenciesServer.ExcludePostingDataTable(Parameters, Metadata.InformationRegisters.T6020S_BatchKeysInfo);
 	
 	AccountingServer.CreateAccountingDataTables(Ref, Cancel, PostingMode, Parameters, AddInfo);
 	Return Tables;
@@ -1371,7 +1371,11 @@ Function GetAnalytics_RevenueFromSales(Parameters)
 	AccountParameters   = AccountingServer.GetAccountParameters(Parameters);
 
 	// Debit
-	Debit = AccountingServer.GetT9012S_AccountsPartner(AccountParameters, Parameters.ObjectData.Partner, Parameters.ObjectData.Agreement);
+	Debit = AccountingServer.GetT9012S_AccountsPartner(AccountParameters, 
+	                                                   Parameters.ObjectData.Partner, 
+	                                                   Parameters.ObjectData.Agreement,
+	                                                   Parameters.ObjectData.Currency);
+	                                                   
 	AccountingAnalytics.Debit = Debit.AccountTransactionsCustomer;
 	// Debit - Analytics
 	AdditionalAnalytics = New Structure();
@@ -1413,7 +1417,11 @@ EndFunction
 Function GetAnalytics_OffsetOfAdvances(Parameters)
 	AccountingAnalytics = AccountingServer.GetAccountingAnalyticsResult(Parameters);
 	AccountParameters   = AccountingServer.GetAccountParameters(Parameters);
-	Accounts = AccountingServer.GetT9012S_AccountsPartner(AccountParameters, Parameters.ObjectData.Partner, Parameters.ObjectData.Agreement);
+	
+	Accounts = AccountingServer.GetT9012S_AccountsPartner(AccountParameters, 
+	                                                      Parameters.ObjectData.Partner, 
+	                                                      Parameters.ObjectData.Agreement,
+	                                                      Parameters.ObjectData.Currency);
 
 	// Debit
 	If ValueIsFilled(Accounts.AccountAdvancesCustomer) Then

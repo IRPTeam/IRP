@@ -52,7 +52,12 @@ Procedure PostingCheckBeforeWrite(Ref, Cancel, PostingMode, Parameters, AddInfo 
 		EndIf;
 
 		PostingDataTables = New Map;
-		PostingDataTables.Insert(Parameters.Object.RegisterRecords.R6070T_OtherPeriodsExpenses, New Structure("RecordSet, WriteInTransaction", OtherPeriodsExpensesByBasis, Parameters.IsReposting));
+
+		R6070T_OtherPeriodsExpenses = Metadata.AccumulationRegisters.R6070T_OtherPeriodsExpenses;
+		R6070TSettings = PostingServer.PostingTableSettings(R6070T_OtherPeriodsExpenses.Name, OtherPeriodsExpensesByBasis, Parameters.Object.RegisterRecords.R6070T_OtherPeriodsExpenses);
+		R6070TSettings.WriteInTransaction = Parameters.IsReposting;
+		PostingDataTables.Insert(R6070T_OtherPeriodsExpenses, R6070TSettings);
+
 		Parameters.Insert("PostingDataTables", PostingDataTables);
 
 		CostAllocationObject = Parameters.Object;
@@ -60,8 +65,7 @@ Procedure PostingCheckBeforeWrite(Ref, Cancel, PostingMode, Parameters, AddInfo 
 		CurrenciesServer.PreparePostingDataTables(Parameters, CurrencyTable, AddInfo);
 		Parameters.Object = CostAllocationObject;
 
-		For Each RowRecordSet In Parameters.PostingDataTables.Get(
-			Parameters.Object.RegisterRecords.R6070T_OtherPeriodsExpenses).RecordSet Do
+		For Each RowRecordSet In Parameters.PostingDataTables.Get(R6070T_OtherPeriodsExpenses).PrepareTable Do
 			FillPropertyValues(TableOtherPeriodsExpensesRecalculated.Add(), RowRecordSet);
 		EndDo;
 	EndDo;
@@ -81,8 +85,12 @@ Procedure PostingCheckBeforeWrite(Ref, Cancel, PostingMode, Parameters, AddInfo 
 		EndIf;
 
 		PostingDataTables = New Map;
-		PostingDataTables.Insert(Parameters.Object.RegisterRecords.T6060S_BatchCostAllocationInfo,
-			New Structure("RecordSet, WriteInTransaction", BatchCostAllocationInfoByBasis, Parameters.IsReposting));
+			
+		T6060S_BatchCostAllocationInfo = Metadata.InformationRegisters.T6060S_BatchCostAllocationInfo;
+		T6060SSettings = PostingServer.PostingTableSettings(T6060S_BatchCostAllocationInfo.Name, BatchCostAllocationInfoByBasis, Parameters.Object.RegisterRecords.T6060S_BatchCostAllocationInfo);
+		T6060SSettings.WriteInTransaction = Parameters.IsReposting;
+		PostingDataTables.Insert(T6060S_BatchCostAllocationInfo, T6060SSettings);			
+			
 		Parameters.Insert("PostingDataTables", PostingDataTables);
 
 		CostAllocationObject = Parameters.Object;
@@ -90,8 +98,7 @@ Procedure PostingCheckBeforeWrite(Ref, Cancel, PostingMode, Parameters, AddInfo 
 		CurrenciesServer.PreparePostingDataTables(Parameters, CurrencyTable, AddInfo);
 		Parameters.Object = CostAllocationObject;
 
-		For Each RowRecordSet In Parameters.PostingDataTables.Get(
-			Parameters.Object.RegisterRecords.T6060S_BatchCostAllocationInfo).RecordSet Do
+		For Each RowRecordSet In Parameters.PostingDataTables.Get(T6060S_BatchCostAllocationInfo).PrepareTable Do
 			FillPropertyValues(BatchCostAllocationInfoRecalculated.Add(), RowRecordSet);
 		EndDo;
 	EndDo;
@@ -111,8 +118,8 @@ Procedure PostingCheckBeforeWrite(Ref, Cancel, PostingMode, Parameters, AddInfo 
 	BatchKeysInfo.FillValues(Enums.BatchDirection.Receipt, "Direction");
 	Tables.T6020S_BatchKeysInfo = BatchKeysInfo;
 
-	CurrenciesServer.ExcludePostingDataTable(Parameters, Parameters.Object.RegisterRecords.R6070T_OtherPeriodsExpenses.Metadata());
-	CurrenciesServer.ExcludePostingDataTable(Parameters, Parameters.Object.RegisterRecords.T6060S_BatchCostAllocationInfo.Metadata());	
+	CurrenciesServer.ExcludePostingDataTable(Parameters, Metadata.AccumulationRegisters.R6070T_OtherPeriodsExpenses);
+	CurrenciesServer.ExcludePostingDataTable(Parameters, Metadata.InformationRegisters.T6060S_BatchCostAllocationInfo);	
 EndProcedure
 
 Function PostingGetPostingDataTables(Ref, Cancel, PostingMode, Parameters, AddInfo = Undefined) Export

@@ -61,13 +61,13 @@ Scenario: _099100 preparation
 		* Tax settings
 			Given I open hyperlink "e1cib/list/Catalog.Companies"
 			And I go to line in "List" table
-							| 'Description'         |
-							| 'Own company 1'       |
+				| 'Description'         |
+				| 'Own company 2'       |
 			And I select current line in "List" table
 			And I move to "Tax types" tab
 			And I go to line in "CompanyTaxes" table
-							| 'Tax'       |
-							| 'VAT'       |
+				| 'Tax'       |
+				| 'VAT'       |
 			And I select current line in "CompanyTaxes" table
 			And I click Open button of "Tax" field
 			And I select "VAT" exact value from the drop-down list named "Kind"

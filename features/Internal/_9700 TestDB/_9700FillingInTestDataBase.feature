@@ -86,7 +86,7 @@ When Create information register Taxes records (test data base)
 		Given I open hyperlink "e1cib/list/Catalog.Companies"
 		And I go to line in "List" table
 						| 'Description'         |
-						| 'Own company 1'       |
+						| 'Own company 2'       |
 		And I select current line in "List" table
 		And I move to "Tax types" tab
 		And I go to line in "CompanyTaxes" table

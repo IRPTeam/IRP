@@ -43,25 +43,6 @@
     <dataHistory>Use</dataHistory>
     <fillValue xsi:type="core:UndefinedValue"/>
   </resources>
-  <resources uuid="fee11896-6ee8-40b4-ad42-d509707ad3f0">
-    <name>TransitAccount</name>
-    <synonym>
-      <key>en</key>
-      <value>Transit account</value>
-    </synonym>
-    <type>
-      <types>ChartOfAccountsRef.Basic</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <choiceParameterLinks>
-      <name>Filter.LedgerTypeVariant</name>
-      <field>InformationRegister.T9011S_AccountsCashAccount.Dimension.LedgerTypeVariant</field>
-    </choiceParameterLinks>
-    <fullTextSearch>Use</fullTextSearch>
-    <dataHistory>Use</dataHistory>
-    <fillValue xsi:type="core:UndefinedValue"/>
-  </resources>
   <dimensions uuid="1fc33369-7b9e-4cbb-8312-ffebc2bd32cd">
     <name>Company</name>
     <synonym>

@@ -443,7 +443,6 @@ Function __GetT9011S_AccountsCashAccount(Period, Company, LedgerTypeVariant, Cas
 	|	ByCashAccount.Company,
 	|	ByCashAccount.CashAccount,
 	|	ByCashAccount.Account,
-	|	ByCashAccount.TransitAccount,
 	|	1 AS Priority
 	|INTO Accounts
 	|FROM
@@ -457,7 +456,6 @@ Function __GetT9011S_AccountsCashAccount(Period, Company, LedgerTypeVariant, Cas
 	|	ByCompany.Company,
 	|	ByCompany.CashAccount,
 	|	ByCompany.Account,
-	|	ByCompany.TransitAccount,
 	|	2
 	|FROM
 	|	InformationRegister.T9011S_AccountsCashAccount.SliceLast(&Period, Company = &Company
@@ -470,7 +468,6 @@ Function __GetT9011S_AccountsCashAccount(Period, Company, LedgerTypeVariant, Cas
 	|	Accounts.Company,
 	|	Accounts.CashAccount,
 	|	Accounts.Account,
-	|	Accounts.TransitAccount,
 	|	Accounts.Priority AS Priority
 	|FROM
 	|	Accounts AS Accounts
@@ -484,10 +481,9 @@ Function __GetT9011S_AccountsCashAccount(Period, Company, LedgerTypeVariant, Cas
 	Query.SetParameter("Currency"    , Currency);
 	QueryResult = Query.Execute();
 	QuerySelection = QueryResult.Select();
-	Result = New Structure("Account, TransitAccount");
+	Result = New Structure("Account");
 	If QuerySelection.Next() Then
 		Result.Account = QuerySelection.Account;
-		Result.TransitAccount = QuerySelection.TransitAccount;
 	EndIf;
 	Return Result;
 EndFunction

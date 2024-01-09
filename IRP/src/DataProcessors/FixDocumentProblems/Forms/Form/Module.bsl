@@ -1,5 +1,10 @@
 
 &AtClient
+Procedure OnOpen(Cancel)
+	OnlyPosted = True;
+EndProcedure
+
+&AtClient
 Procedure FillDocuments(Command)
 	DocumentList.Clear();
 	FillDocumentsAtServer();
@@ -417,6 +422,8 @@ EndFunction
 &AtServer
 Procedure GetJobsForCheckPostingDocuments_Callback(Result, AllJobDone) Export  
 	DocumentErrors = New Array;
+	SkipRegFilled = SkipCheckRegisters.Count() > 0;
+	TreeRow = PostingInfo.GetItems();
 	For Each Row In Result Do
 		
 		If Not Row.Result Then
@@ -425,20 +432,31 @@ Procedure GetJobsForCheckPostingDocuments_Callback(Result, AllJobDone) Export
 		
 		RegInfoArray = CommonFunctionsServer.GetFromCache(Row.CacheKey);
 		For Each DocRow In RegInfoArray Do
-			ParentRow = PostingInfo.GetItems().Add();
+			ParentRow = TreeRow.Add();
 			ParentRow.Ref = DocRow.Ref;
 			ParentRow.DocumentType = TypeOf(DocRow.Ref);
 			ParentRow.Date = DocRow.Ref.Date;
 			ParentRow.Errors = DocRow.Error;
 			
 			For Each RegInfoData In DocRow.RegInfo Do
+				
+				If SkipRegFilled And Not SkipCheckRegisters.FindByValue(RegInfoData.RegName) = Undefined Then
+					Continue;
+				EndIf;
+				
 				NewRow = ParentRow.GetItems().Add();
 				FillPropertyValues(NewRow, RegInfoData);
 				NewRow.Date = ParentRow.Date;
 				NewRow.Ref = ParentRow.Ref;
 				NewRow.DocumentType = ParentRow.DocumentType;
 				NewRow.NewMovement = New ValueStorage(RegInfoData.NewPostingData, New Deflation(9));
+					
 			EndDo;
+			
+			If SkipRegFilled And ParentRow.GetItems().Count() = 0 Then
+				TreeRow.Delete(ParentRow);
+			EndIf;
+			
 		 EndDo;
 	EndDo;
 EndProcedure
@@ -511,6 +529,7 @@ EndFunction
 //  AllJobDone - Boolean - 
 &AtServer
 Procedure GetJobsForPostSelectedDocument_Callback(Result, AllJobDone) Export  
+	Tree = FormAttributeToValue("PostingInfo");
 	DocumentErrors = New Array;
 	For Each Row In Result Do
 		
@@ -520,21 +539,12 @@ Procedure GetJobsForPostSelectedDocument_Callback(Result, AllJobDone) Export
 		
 		RegInfoArray = CommonFunctionsServer.GetFromCache(Row.CacheKey);
 		For Each DocRow In RegInfoArray Do
-			ParentRow = Undefined;
-			For Each Row In PostingInfo.GetItems() Do
-				If Row.Ref = DocRow.Ref Then
-					ParentRow = Row;
-					Break;
-				EndIf;
-			EndDo;
-			
-			If ParentRow = Undefined Then
-				Continue;
-			EndIf;
-			ParentRow.Errors = DocRow.Error;
-			ParentRow.Processed = True;
+			Found = Tree.Rows.FindRows(New Structure("Ref, RegName", DocRow.Ref, ""), True);
+			Found[0].Errors = DocRow.Error;
+			Found[0].Processed = True;
 		 EndDo;
 	EndDo;
+	ValueToFormAttribute(Tree, "PostingInfo");
 EndProcedure
 
 &AtClient
@@ -598,12 +608,11 @@ Procedure PostingInfo_CreateTable(NewMovementStorage)
 	ArrayAddedAttributes = New Array; // Array Of FormAttribute
 	
 	For Each Column In Table.Columns Do 
-		If Column.ValueType.ContainsType(Type("PointInTime")) Then
-			TypeDescription = New TypeDescription("String");
-		Else
-			TypeDescription = New TypeDescription(Column.ValueType);
+		If Column.Name = "PointInTime" Or Column.Name = "Recorder" Then
+			Continue;
 		EndIf;
 		
+		TypeDescription = New TypeDescription(Column.ValueType);
 	    AttributeDescription = New FormAttribute(Column.Name, TypeDescription, "CurrentMovement"); 
 	    ArrayAddedAttributes.Add(AttributeDescription); 
 	    AttributeDescription = New FormAttribute(Column.Name, TypeDescription, "NewMovement"); 
@@ -705,7 +714,9 @@ EndFunction
 //  AllJobDone - Boolean - 
 &AtServer
 Procedure GetJobsForWriteRecordSet_Callback(Result, AllJobDone) Export  
+	Tree = FormAttributeToValue("PostingInfo");
 	DocumentErrors = New Array;
+	
 	For Each Row In Result Do
 		
 		If Not Row.Result Then
@@ -714,29 +725,20 @@ Procedure GetJobsForWriteRecordSet_Callback(Result, AllJobDone) Export
 		
 		RegInfoArray = CommonFunctionsServer.GetFromCache(Row.CacheKey);
 		For Each DocRow In RegInfoArray Do
-			RegRow = Undefined;
-			For Each ParentRow In PostingInfo.GetItems() Do
-				For Each Row In ParentRow.GetItems() Do
-					If Row.Ref = DocRow.Ref And Row.RegName = DocRow.RegName Then
-						RegRow = Row;
-						Break;
-					EndIf;
-				EndDo;
-			EndDo;
-			
-			If RegRow = Undefined Then
-				Continue;
-			EndIf;
-			RegRow.Errors = DocRow.Error;
-			RegRow.Processed = True;
+			Found = Tree.Rows.FindRows(New Structure("Ref, RegName", DocRow.Ref, DocRow.RegName), True);
+			Found[0].Errors = DocRow.Error;
+			Found[0].Processed = True;
 		 EndDo;
 	EndDo;
+	ValueToFormAttribute(Tree, "PostingInfo");
 EndProcedure
 
 &AtClient
 Async Procedure PostingInfoExportData(Command)
 	DialogParameters = New GetFilesDialogParameters();
-	GetFileFromServerAsync(PostingInfoExportDataAtServer(), "Data.zip", DialogParameters);
+	BD = PostingInfoExportDataAtServer();
+	Address = PutToTempStorage(BD, UUID);
+	GetFileFromServerAsync(Address, "Data.zip", DialogParameters);
 EndProcedure
 
 &AtServer
@@ -744,7 +746,7 @@ Function PostingInfoExportDataAtServer()
 	Tree = FormAttributeToValue("PostingInfo");
 	Data = CommonFunctionsServer.SerializeXMLUseXDTO(Tree);
 	BD = CommonFunctionsServer.StringToBase64ZIP(Data, "Data", True);
-	Return PutToTempStorage(BD, UUID);
+	Return BD;
 EndFunction
 
 &AtClient
@@ -763,6 +765,35 @@ Procedure PostingInfoImportDataAtServer(Address)
 	BD = CommonFunctionsServer.StringFromBase64ZIP(File);
 	Data = GetStringFromBinaryData(BD);
 	Tree = CommonFunctionsServer.DeserializeXMLUseXDTO(Data);
+	ValueToFormAttribute(Tree, "PostingInfo");
+EndProcedure
+
+&AtClient
+Procedure PostingInfoClearSkipRows(Command)
+	If SkipCheckRegisters.Count() = 0 Then
+		Return;
+	EndIf;
+	
+	ClearRows();
+EndProcedure
+
+&AtServer
+Procedure ClearRows()
+	Tree = FormAttributeToValue("PostingInfo");
+	
+	For Each Reg In SkipCheckRegisters Do
+		Found = Tree.Rows.FindRows(New Structure("RegName", Reg.Value), True);
+		For Each DelRow In Found Do
+			ParentRow = DelRow.Parent;
+			ParentRow.Rows.Delete(DelRow);
+			If ParentRow.Rows.Count() = 0 Then
+				Tree.Rows.Delete(ParentRow);
+			EndIf;
+		EndDo;
+	EndDo;
+	
+	
+	
 	ValueToFormAttribute(Tree, "PostingInfo");
 EndProcedure
 

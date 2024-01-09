@@ -425,26 +425,27 @@ Function __GetT9010S_AccountsItemKey(Period, Company, LedgerTypeVariant, ItemKey
 	Return Result;
 EndFunction
 
-Function GetT9011S_AccountsCashAccount(AccountParameters, CashAccount) Export
+Function GetT9011S_AccountsCashAccount(AccountParameters, CashAccount, Currency) Export
 	Return AccountingServerReuse.GetT9011S_AccountsCashAccount_Reuse(AccountParameters.Period,
 		AccountParameters.Company,
 		AccountParameters.LedgerTypeVariant,
-		CashAccount);
+		CashAccount, Currency);
 EndFunction
 
-Function __GetT9011S_AccountsCashAccount(Period, Company, LedgerTypeVariant, CashAccount) Export
+Function __GetT9011S_AccountsCashAccount(Period, Company, LedgerTypeVariant, CashAccount, Currency) Export
 	Query = New Query();
 	Query.Text = 
 	"SELECT
 	|	ByCashAccount.Company,
 	|	ByCashAccount.CashAccount,
 	|	ByCashAccount.Account,
+	|	ByCashAccount.TransitAccount,
 	|	1 AS Priority
 	|INTO Accounts
 	|FROM
 	|	InformationRegister.T9011S_AccountsCashAccount.SliceLast(&Period, Company = &Company
 	|	AND LedgerTypeVariant = &LedgerTypeVariant
-	|	AND CashAccount = &CashAccount) AS ByCashAccount
+	|	AND CashAccount = &CashAccount AND Currency = &Currency) AS ByCashAccount
 	|
 	|UNION ALL
 	|
@@ -452,11 +453,12 @@ Function __GetT9011S_AccountsCashAccount(Period, Company, LedgerTypeVariant, Cas
 	|	ByCompany.Company,
 	|	ByCompany.CashAccount,
 	|	ByCompany.Account,
+	|	ByCompany.TransitAccount,
 	|	2
 	|FROM
 	|	InformationRegister.T9011S_AccountsCashAccount.SliceLast(&Period, Company = &Company
 	|	AND LedgerTypeVariant = &LedgerTypeVariant
-	|	AND CashAccount.Ref IS NULL) AS ByCompany
+	|	AND CashAccount.Ref IS NULL AND Currency.Ref IS NULL) AS ByCompany
 	|;
 	|
 	|////////////////////////////////////////////////////////////////////////////////
@@ -464,6 +466,7 @@ Function __GetT9011S_AccountsCashAccount(Period, Company, LedgerTypeVariant, Cas
 	|	Accounts.Company,
 	|	Accounts.CashAccount,
 	|	Accounts.Account,
+	|	Accounts.TransitAccount,
 	|	Accounts.Priority AS Priority
 	|FROM
 	|	Accounts AS Accounts
@@ -474,11 +477,13 @@ Function __GetT9011S_AccountsCashAccount(Period, Company, LedgerTypeVariant, Cas
 	Query.SetParameter("Company"     , Company);
 	Query.SetParameter("LedgerTypeVariant"     , LedgerTypeVariant);
 	Query.SetParameter("CashAccount" , CashAccount);
+	Query.SetParameter("Currency"    , Currency);
 	QueryResult = Query.Execute();
 	QuerySelection = QueryResult.Select();
-	Result = New Structure("Account", Undefined);
+	Result = New Structure("Account, TransitAccount");
 	If QuerySelection.Next() Then
 		Result.Account = QuerySelection.Account;
+		Result.TransitAccount = QuerySelection.TransitAccount;
 	EndIf;
 	Return Result;
 EndFunction

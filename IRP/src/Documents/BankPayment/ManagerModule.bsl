@@ -961,7 +961,9 @@ Function GetAnalytics_PaymentToVendor(Parameters)
 	// Debit - Analytics
 	AccountingServer.SetDebitExtDimensions(Parameters, AccountingAnalytics);
 
-	Credit = AccountingServer.GetT9011S_AccountsCashAccount(AccountParameters, Parameters.ObjectData.Account);
+	Credit = AccountingServer.GetT9011S_AccountsCashAccount(AccountParameters, 
+															Parameters.ObjectData.Account,
+															Parameters.ObjectData.Currency);
 	If ValueIsFilled(Credit.Account) Then
 		AccountingAnalytics.Credit = Credit.Account;
 	EndIf;
@@ -1009,7 +1011,9 @@ Function GetAnalytics_BankCommission(Parameters)
 	// Debit - Analytics
 	AccountingServer.SetDebitExtDimensions(Parameters, AccountingAnalytics);
 
-	Credit = AccountingServer.GetT9011S_AccountsCashAccount(AccountParameters, Parameters.ObjectData.Account);
+	Credit = AccountingServer.GetT9011S_AccountsCashAccount(AccountParameters, 
+	                                                        Parameters.ObjectData.Account,
+	                                                        Parameters.ObjectData.Currency);
 	If ValueIsFilled(Credit.Account) Then
 		AccountingAnalytics.Credit = Credit.Account;
 	EndIf;

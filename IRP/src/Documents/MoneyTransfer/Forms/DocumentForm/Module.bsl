@@ -57,6 +57,7 @@ Procedure SetVisibilityAvailability(Object, Form)
 	Form.Items.ReceiveCurrency.ReadOnly = CashTransferOrderIsFilled;
 	Form.Items.ReceiveFinancialMovementType.ReadOnly = CashTransferOrderIsFilled;
 	Form.Items.SendFinancialMovementType.ReadOnly    = CashTransferOrderIsFilled;
+	Form.Items.TransitAccount.Visible = Object.SendCurrency <> Object.ReceiveCurrency;
 EndProcedure
 
 &AtClient

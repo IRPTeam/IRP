@@ -43,6 +43,25 @@
     <dataHistory>Use</dataHistory>
     <fillValue xsi:type="core:UndefinedValue"/>
   </resources>
+  <resources uuid="fee11896-6ee8-40b4-ad42-d509707ad3f0">
+    <name>TransitAccount</name>
+    <synonym>
+      <key>en</key>
+      <value>Transit account</value>
+    </synonym>
+    <type>
+      <types>ChartOfAccountsRef.Basic</types>
+    </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <choiceParameterLinks>
+      <name>Filter.LedgerTypeVariant</name>
+      <field>InformationRegister.T9011S_AccountsCashAccount.Dimension.LedgerTypeVariant</field>
+    </choiceParameterLinks>
+    <fullTextSearch>Use</fullTextSearch>
+    <dataHistory>Use</dataHistory>
+    <fillValue xsi:type="core:UndefinedValue"/>
+  </resources>
   <dimensions uuid="1fc33369-7b9e-4cbb-8312-ffebc2bd32cd">
     <name>Company</name>
     <synonym>
@@ -95,6 +114,22 @@
     <fillFromFillingValue>true</fillFromFillingValue>
     <fillValue xsi:type="core:UndefinedValue"/>
     <master>true</master>
+    <mainFilter>true</mainFilter>
+  </dimensions>
+  <dimensions uuid="f6d9996a-c1a8-4964-95ea-89b185c219e7">
+    <name>Currency</name>
+    <synonym>
+      <key>en</key>
+      <value>Currency</value>
+    </synonym>
+    <type>
+      <types>CatalogRef.Currencies</types>
+    </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <fullTextSearch>Use</fullTextSearch>
+    <dataHistory>Use</dataHistory>
+    <fillValue xsi:type="core:UndefinedValue"/>
     <mainFilter>true</mainFilter>
   </dimensions>
   <forms uuid="cb91ffb9-301e-497b-9c22-eeb0fcd48ff6">

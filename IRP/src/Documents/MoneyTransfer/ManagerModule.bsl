@@ -11,7 +11,7 @@ EndFunction
 Function PostingGetDocumentDataTables(Ref, Cancel, PostingMode, Parameters, AddInfo = Undefined) Export
 	Tables = New Structure;
 	QueryArray = GetQueryTextsSecondaryTables();
-	PostingServer.ExecuteQuery(Ref, QueryArray, Parameters);
+	PostingServer.ExecuteQuery(Ref, QueryArray, Parameters);	
 	AccountingServer.CreateAccountingDataTables(Ref, Cancel, PostingMode, Parameters, AddInfo);
 	Return Tables;
 EndFunction
@@ -87,6 +87,7 @@ Function GetQueryTextsSecondaryTables()
 	QueryArray = New Array;
 	QueryArray.Add(MoneySender());
 	QueryArray.Add(MoneyReceiver());
+	QueryArray.Add(MoneyTransit());
 	Return QueryArray;
 EndFunction
 
@@ -105,57 +106,87 @@ EndFunction
 #Region Posting_SourceTable
 
 Function MoneySender()
-	Return "SELECT
-		   |	MoneyTransfer.Ref,
-		   |	MoneyTransfer.Company AS Company,
-		   |	MoneyTransfer.Ref.Branch AS Branch,
-		   |	MoneyTransfer.Ref AS Ref,
-		   |	MoneyTransfer.Sender AS Account,
-		   |	MoneyTransfer.Sender AS AccountFrom,
-		   |	MoneyTransfer.Receiver AS AccountTo,
-		   |	MoneyTransfer.SendAmount AS Amount,
-		   |	MoneyTransfer.SendCurrency AS Currency,
-		   |	MoneyTransfer.SendUUID AS Key,
-		   |	MoneyTransfer.Date AS Period,
-		   |	MoneyTransfer.CashTransferOrder AS BasisDocument,
-		   |	MoneyTransfer.CashTransferOrder.SendPeriod AS PlanningPeriod,
-		   |	MoneyTransfer.SendFinancialMovementType AS FinancialMovementType,
-		   |	MoneyTransfer.SendCashFlowCenter AS CashFlowCenter,
-		   |	MoneyTransfer.Sender.Type = VALUE(Enum.CashAccountTypes.POSCashAccount) AS IsPOSCashAccount
-		   |INTO MoneySender
-		   |FROM
-		   |	Document.MoneyTransfer AS MoneyTransfer
-		   |WHERE
-		   |	MoneyTransfer.Ref = &Ref";
+	Return 
+		"SELECT
+		|	MoneySender.Ref,
+		|	MoneySender.Company AS Company,
+		|	MoneySender.Branch AS Branch,
+		|	MoneySender.Ref AS Ref,
+		|	MoneySender.Sender AS Account,
+		|	MoneySender.Sender AS AccountFrom,
+		|	MoneySender.Receiver AS AccountTo,
+		|	MoneySender.SendAmount AS Amount,
+		|	MoneySender.SendCurrency AS Currency,
+		|	MoneySender.SendUUID AS Key,
+		|	MoneySender.Date AS Period,
+		|	MoneySender.CashTransferOrder AS BasisDocument,
+		|	MoneySender.CashTransferOrder.SendPeriod AS PlanningPeriod,
+		|	MoneySender.SendFinancialMovementType AS FinancialMovementType,
+		|	MoneySender.SendCashFlowCenter AS CashFlowCenter,
+		|	MoneySender.TransitAccount,
+		|	MoneySender.TransitAccount.Currency AS TransitCurrency,
+		|	MoneySender.Sender.Type = VALUE(Enum.CashAccountTypes.POSCashAccount) AS IsPOSCashAccount,
+		|	MoneySender.SendCurrency <> MoneySender.ReceiveCurrency AS IsCurrencyExchange,
+		|	MoneySender.SendCurrency = MoneySender.ReceiveCurrency AS IsMoneyTransfer
+		|INTO MoneySender
+		|FROM
+		|	Document.MoneyTransfer AS MoneySender
+		|WHERE
+		|	MoneySender.Ref = &Ref";
 EndFunction
 
 Function MoneyReceiver()
-	Return "SELECT
-		   |	MoneyTransfer.Ref,
-		   |	MoneyTransfer.Company AS Company,
-		   |	MoneyTransfer.Ref.ReceiveBranch AS Branch,
-		   |	MoneyTransfer.Ref.ReceiveBranch AS ReceiveBranch,
-		   |	MoneyTransfer.Ref AS Ref,
-		   |	MoneyTransfer.Receiver AS Account,
-		   |	MoneyTransfer.Sender AS AccountFrom,
-		   |	MoneyTransfer.Receiver AS AccountTo,
-		   |	MoneyTransfer.ReceiveAmount AS Amount,
-		   |	MoneyTransfer.ReceiveCurrency AS Currency,
-		   |	MoneyTransfer.ReceiveUUID AS Key,
-		   |	MoneyTransfer.Date AS Period,
-		   |	MoneyTransfer.CashTransferOrder AS BasisDocument,
-		   |	MoneyTransfer.CashTransferOrder.SendPeriod AS PlanningPeriod,
-		   |	MoneyTransfer.ReceiveFinancialMovementType AS FinancialMovementType,
-		   |	MoneyTransfer.ReceiveCashFlowCenter AS CashFlowCenter,
-		   |	MoneyTransfer.Receiver.Type = VALUE(Enum.CashAccountTypes.POSCashAccount) AS IsPOSCashAccount,
-		   |
-		   |	MoneyTransfer.Receiver.Type = VALUE(Enum.CashAccountTypes.POSCashAccount)
-		   |	OR MoneyTransfer.Sender.Type = VALUE(Enum.CashAccountTypes.POSCashAccount) AS UseCashInTransit
-		   |INTO MoneyReceiver
-		   |FROM
-		   |	Document.MoneyTransfer AS MoneyTransfer
-		   |WHERE
-		   |	MoneyTransfer.Ref = &Ref";
+	Return 
+		"SELECT
+		|	MoneyReceiver.Ref,
+		|	MoneyReceiver.Company AS Company,
+		|	MoneyReceiver.ReceiveBranch AS Branch,
+		|	MoneyReceiver.ReceiveBranch AS ReceiveBranch,
+		|	MoneyReceiver.Branch AS BranchSender,
+		|	MoneyReceiver.Ref AS Ref,
+		|	MoneyReceiver.Receiver AS Account,
+		|	MoneyReceiver.Sender AS AccountFrom,
+		|	MoneyReceiver.Receiver AS AccountTo,
+		|	MoneyReceiver.ReceiveAmount AS Amount,
+		|	MoneyReceiver.ReceiveCurrency AS Currency,
+		|	MoneyReceiver.ReceiveUUID AS Key,
+		|	MoneyReceiver.Date AS Period,
+		|	MoneyReceiver.CashTransferOrder AS BasisDocument,
+		|	MoneyReceiver.CashTransferOrder.SendPeriod AS PlanningPeriod,
+		|	MoneyReceiver.ReceiveFinancialMovementType AS FinancialMovementType,
+		|	MoneyReceiver.ReceiveCashFlowCenter AS CashFlowCenter,
+		|	MoneyReceiver.Receiver.Type = VALUE(Enum.CashAccountTypes.POSCashAccount) AS IsPOSCashAccount,
+		|	MoneyReceiver.Receiver.Type = VALUE(Enum.CashAccountTypes.POSCashAccount)
+		|	OR MoneyReceiver.Sender.Type = VALUE(Enum.CashAccountTypes.POSCashAccount) AS UseCashInTransit,
+		|	MoneyReceiver.SendCurrency <> MoneyReceiver.ReceiveCurrency AS IsCurrencyExchange,
+		|	MoneyReceiver.SendCurrency = MoneyReceiver.ReceiveCurrency AS IsMoneyTransfer
+		|INTO MoneyReceiver
+		|FROM
+		|	Document.MoneyTransfer AS MoneyReceiver
+		|WHERE
+		|	MoneyReceiver.Ref = &Ref";
+EndFunction
+
+Function MoneyTransit()
+	Return
+		"SELECT
+		|	Currencies.Ref AS Ref,
+		|	Currencies.Ref.Date AS Period,
+		|	Currencies.Ref.Company AS Company,
+		|	Currencies.Ref.Branch AS Branch,
+		|	Currencies.Ref.TransitAccount AS TransitAccount,
+		|	Currencies.Amount AS Amount,
+		|	Currencies.Ref.TransitAccount.Currency AS TransitCurrency,
+		|	Currencies.Ref.TransitUUID AS TransitUUID
+		|INTO MoneyTransit
+		|FROM
+		|	Document.MoneyTransfer.Currencies AS Currencies
+		|WHERE
+		|	Currencies.Ref = &Ref
+		|	AND Currencies.CurrencyFrom = Currencies.Ref.ReceiveCurrency
+		|	AND Currencies.MovementType.Currency = Currencies.Ref.TransitAccount.Currency
+		|	AND Currencies.Ref.SendCurrency <> Currencies.Ref.ReceiveCurrency
+		|	AND Currencies.Key <> Currencies.Ref.TransitUUID";
 EndFunction
 
 #EndRegion
@@ -194,38 +225,76 @@ Function R3021B_CashInTransitIncoming()
 		   |FROM
 		   |	MoneySender AS MoneySender
 		   |WHERE
-		   |	MoneySender.IsPOSCashAccount";
-EndFunction
-
-Function R3010B_CashOnHand()
-	Return "SELECT
-		   |	VALUE(AccumulationRecordType.Expense) AS RecordType,
-		   |	MoneySender.Period,
-		   |	MoneySender.Company,
-		   |	MoneySender.Branch,
-		   |	MoneySender.Account,
-		   |	MoneySender.Amount,
-		   |	MoneySender.Currency,
-		   |	MoneySender.Key
-		   |INTO R3010B_CashOnHand
-		   |FROM
-		   |	MoneySender AS MoneySender
+		   |	MoneySender.IsPOSCashAccount
+		   |
 		   |
 		   |UNION ALL
 		   |
 		   |SELECT
 		   |	VALUE(AccumulationRecordType.Receipt),
-		   |	MoneyReceiver.Period,
-		   |	MoneyReceiver.Company,
-		   |	MoneyReceiver.Branch,
-		   |	MoneyReceiver.Account,
-		   |	MoneyReceiver.Amount,
-		   |	MoneyReceiver.Currency,
-		   |	MoneyReceiver.Key
+		   |	MoneySender.Period,
+		   |	MoneySender.Company,
+		   |	MoneySender.Branch,
+		   |	MoneySender.Ref,
+		   |	MoneySender.TransitAccount,
+		   |	MoneySender.Amount,
+		   |	MoneySender.TransitCurrency,
+		   |	MoneySender.Key
 		   |FROM
-		   |	MoneyReceiver AS MoneyReceiver
+		   |	MoneySender AS MoneySender
 		   |WHERE
-		   |	NOT MoneyReceiver.UseCashInTransit";
+		   |	MoneySender.IsCurrencyExchange
+		   |
+		   |UNION ALL
+		   |
+		   |SELECT
+		   |	VALUE(AccumulationRecordType.Expense),
+		   |	MoneyTransit.Period,
+		   |	MoneyTransit.Company,
+		   |	MoneyTransit.Branch,
+		   |	MoneyTransit.Ref,
+		   |	MoneyTransit.TransitAccount,
+		   |	MoneyTransit.Amount,
+		   |	MoneyTransit.TransitCurrency,
+		   |	MoneyTransit.TransitUUID
+		   |FROM
+		   |	MoneyTransit AS MoneyTransit
+		   |WHERE
+		   |	TRUE
+		   |
+		   |";
+EndFunction
+
+Function R3010B_CashOnHand()
+	Return 
+		"SELECT
+		|	VALUE(AccumulationRecordType.Expense) AS RecordType,
+		|	MoneySender.Period,
+		|	MoneySender.Company,
+		|	MoneySender.Branch,
+		|	MoneySender.Account,
+		|	MoneySender.Amount,
+		|	MoneySender.Currency,
+		|	MoneySender.Key
+		|INTO R3010B_CashOnHand
+		|FROM
+		|	MoneySender AS MoneySender
+		|
+		|UNION ALL
+		|
+		|SELECT
+		|	VALUE(AccumulationRecordType.Receipt),
+		|	MoneyReceiver.Period,
+		|	MoneyReceiver.Company,
+		|	MoneyReceiver.Branch,
+		|	MoneyReceiver.Account,
+		|	MoneyReceiver.Amount,
+		|	MoneyReceiver.Currency,
+		|	MoneyReceiver.Key
+		|FROM
+		|	MoneyReceiver AS MoneyReceiver
+		|WHERE
+		|	MoneyReceiver.IsMoneyTransfer OR MoneyReceiver.IsCurrencyExchange";
 EndFunction
 
 Function R3011T_CashFlow()
@@ -260,7 +329,7 @@ Function R3011T_CashFlow()
 		   |FROM
 		   |	MoneyReceiver AS MoneyReceiver
 		   |WHERE
-		   |	NOT MoneyReceiver.UseCashInTransit";
+		   |	MoneyReceiver.IsMoneyTransfer";
 EndFunction
 
 Function R3035T_CashPlanning()
@@ -330,7 +399,6 @@ EndFunction
 
 #EndRegion
 
-
 #Region Accounting
 
 Function T1040T_AccountingAmounts()
@@ -345,7 +413,7 @@ Function T1040T_AccountingAmounts()
 		|FROM
 		|	MoneySender AS MoneySender
 		|WHERE
-		|	TRUE";
+		|	MoneySender.IsMoneyTransfer";
 EndFunction
 
 Function GetAccountingAnalytics(Parameters) Export
@@ -362,13 +430,17 @@ Function GetAnalytics_MoneyTransfer(Parameters)
 	AccountingAnalytics = AccountingServer.GetAccountingAnalyticsResult(Parameters);
 	AccountParameters   = AccountingServer.GetAccountParameters(Parameters);
 
-	AccountingAnalytics.Debit = AccountingServer.GetT9011S_AccountsCashAccount(AccountParameters, Parameters.ObjectData.Receiver).Account;	
+	AccountingAnalytics.Debit = AccountingServer.GetT9011S_AccountsCashAccount(AccountParameters, 
+	                                                                           Parameters.ObjectData.Receiver,
+	                                                                           Parameters.ObjectData.ReceiveCurrency).Account;	
 	// Debit - Analytics
 	AdditionalAnalytics = New Structure();
 	AdditionalAnalytics.Insert("Receiver", Parameters.ObjectData.Receiver);
 	AccountingServer.SetDebitExtDimensions(Parameters, AccountingAnalytics, AdditionalAnalytics);
 
-	AccountingAnalytics.Credit = AccountingServer.GetT9011S_AccountsCashAccount(AccountParameters, Parameters.ObjectData.Sender).Account;
+	AccountingAnalytics.Credit = AccountingServer.GetT9011S_AccountsCashAccount(AccountParameters, 
+	                                                                            Parameters.ObjectData.Sender,
+	                                                                            Parameters.ObjectData.SendCurrency).Account;
 	// Credit - Analytics
 	AdditionalAnalytics = New Structure();
 	AdditionalAnalytics.Insert("Sender", Parameters.ObjectData.Sender);

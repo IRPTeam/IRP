@@ -80,15 +80,13 @@ Function GetParametersEditAccounting(Object,
 EndFunction
 
 Function GetDocumentMainTable(Doc) Export
-	MainTable = "";
+	MainTable = Undefined;
 	If CommonFunctionsClientServer.ObjectHasProperty(Doc, "ItemList") Then
 		MainTable = "ItemList";
 	ElsIf CommonFunctionsClientServer.ObjectHasProperty(Doc, "PaymentList") Then
 		MainTable = "PaymentList";		
 	ElsIf CommonFunctionsClientServer.ObjectHasProperty(Doc, "Transactions") Then
 		MainTable = "Transactions";
-	Else
-		Raise StrTemplate("Main table is not defined [%1]", Doc);
 	EndIf;
 	Return MainTable;
 EndFunction

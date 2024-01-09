@@ -3,33 +3,60 @@ Procedure BeforeWrite(Cancel, WriteMode, PostingMode)
 		Return;
 	EndIf;
 	
+	IsMoneyExchange = ThisObject.SendCurrency <> ThisObject.ReceiveCurrency;
+	
 	If Not ValueIsFilled(ThisObject.SendUUID) Then
 		ThisObject.SendUUID = New UUID();
 	EndIf;
+	
 	If Not ValueIsFilled(ThisObject.ReceiveUUID) Then
 		ThisObject.ReceiveUUID = New UUID();
+	EndIf;
+
+	If Not ValueIsFilled(ThisObject.TransitUUID) And IsMoneyExchange Then
+		ThisObject.TransitUUID = New UUID();
 	EndIf;
 	
 	TotalTable = New ValueTable();
 	TotalTable.Columns.Add("Key");
 	TotalTable.Add().Key = ThisObject.SendUUID;
 	TotalTable.Add().Key = ThisObject.ReceiveUUID;
+	
+	If IsMoneyExchange Then
+		TotalTable.Add().Key = ThisObject.TransitUUID;
+	EndIf;
+	
 	CurrenciesClientServer.DeleteUnusedRowsFromCurrenciesTable(ThisObject.Currencies, TotalTable);
 	
-	Parameters = CurrenciesClientServer.GetParameters_V7(ThisObject, ThisObject.SendUUID, ThisObject.SendCurrency,
-		ThisObject.SendAmount);
+	Parameters = CurrenciesClientServer.GetParameters_V7(ThisObject, ThisObject.SendUUID, ThisObject.SendCurrency, ThisObject.SendAmount);
 	CurrenciesClientServer.DeleteRowsByKeyFromCurrenciesTable(ThisObject.Currencies, ThisObject.SendUUID);
 	CurrenciesServer.UpdateCurrencyTable(Parameters, ThisObject.Currencies);
 	
-	Parameters = CurrenciesClientServer.GetParameters_V7(ThisObject, ThisObject.ReceiveUUID, ThisObject.ReceiveCurrency,
-		ThisObject.ReceiveAmount);
+	Parameters = CurrenciesClientServer.GetParameters_V7(ThisObject, ThisObject.ReceiveUUID, ThisObject.ReceiveCurrency, ThisObject.ReceiveAmount);
 	CurrenciesClientServer.DeleteRowsByKeyFromCurrenciesTable(ThisObject.Currencies, ThisObject.ReceiveUUID);
 	CurrenciesServer.UpdateCurrencyTable(Parameters, ThisObject.Currencies);
+	
+	If IsMoneyExchange Then
+		
+		TransitCurrency = ThisObject.TransitAccount.Currency;
+		
+		Parameters = CurrenciesClientServer.GetParameters_V7(ThisObject, ThisObject.TransitUUID, TransitCurrency, ThisObject.SendAmount);
+		CurrenciesClientServer.DeleteRowsByKeyFromCurrenciesTable(ThisObject.Currencies, ThisObject.TransitUUID);
+		CurrenciesServer.UpdateCurrencyTable(Parameters, ThisObject.Currencies);
+		
+	EndIf;
+	
+	ThisObject.AdditionalProperties.Insert("WriteMode", WriteMode);
 EndProcedure
 
 Procedure OnWrite(Cancel)
 	If DataExchange.Load Then
 		Return;
+	EndIf;
+
+	WriteMode = CommonFunctionsClientServer.GetFromAddInfo(ThisObject.AdditionalProperties, "WriteMode");
+	If FOServer.IsUseAccounting() And WriteMode = DocumentWriteMode.Posting Then
+		AccountingServer.OnWrite(ThisObject, Cancel);
 	EndIf;
 EndProcedure
 

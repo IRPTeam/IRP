@@ -349,6 +349,36 @@
     <fullTextSearch>Use</fullTextSearch>
     <dataHistory>Use</dataHistory>
   </attributes>
+  <attributes uuid="6dddda06-62bc-4a7b-ad06-04e7e0a67825">
+    <name>TransitAccount</name>
+    <synonym>
+      <key>en</key>
+      <value>Transit account</value>
+    </synonym>
+    <type>
+      <types>CatalogRef.CashAccounts</types>
+    </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <fillValue xsi:type="core:UndefinedValue"/>
+    <fullTextSearch>Use</fullTextSearch>
+    <dataHistory>Use</dataHistory>
+  </attributes>
+  <attributes uuid="0c8c708a-952a-4435-8753-6d5734434795">
+    <name>TransitUUID</name>
+    <synonym>
+      <key>en</key>
+      <value>Transit UUID</value>
+    </synonym>
+    <type>
+      <types>DefinedType.typeRowID</types>
+    </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <fillValue xsi:type="core:UndefinedValue"/>
+    <fullTextSearch>Use</fullTextSearch>
+    <dataHistory>Use</dataHistory>
+  </attributes>
   <forms uuid="9199dc05-6aa4-4c94-99b2-08023fc5cb21">
     <name>DocumentForm</name>
     <synonym>

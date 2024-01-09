@@ -27,9 +27,9 @@ EndProcedure
 
 &AtClient
 Procedure Refresh(Command)
-	 
+	_MainTableName = ?(ValueIsFilled(ThisObject.MainTableName), ThisObject.MainTableName, Undefined); 
 	DefaultAnalytics = GetDefaultAccountingAnalytics(ThisObject.FormOwner.Object,
-									  				 ThisObject.MainTableName,
+									  				 _MainTableName,
 									  				 ThisObject.RowKey,
 									  				 ThisObject.LedgerType, True);
 	

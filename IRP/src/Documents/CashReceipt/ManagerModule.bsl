@@ -845,7 +845,9 @@ Function GetAnalytics_DR_R3010B_CR_R2020B_R2021B(Parameters)
 	AccountingAnalytics = AccountingServer.GetAccountingAnalyticsResult(Parameters);
 	AccountParameters   = AccountingServer.GetAccountParameters(Parameters);
 	
-	Debit = AccountingServer.GetT9011S_AccountsCashAccount(AccountParameters, Parameters.ObjectData.CashAccount);
+	Debit = AccountingServer.GetT9011S_AccountsCashAccount(AccountParameters, 
+	                                                       Parameters.ObjectData.CashAccount,
+	                                                       Parameters.ObjectData.Currency);
 	If ValueIsFilled(Debit.Account) Then
 		AccountingAnalytics.Debit = Debit.Account;
 	EndIf;

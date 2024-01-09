@@ -120,6 +120,7 @@ Scenario: _099100 preparation
 		When Create document Unbundling objects (test data base)
 		When Create document ItemStockAdjustment objects  (test data base)
 		When Create document PurchaseReturnOrder objects (test data base)
+		When Create document CalculationMovementCosts objects (test data base)
 		When Create chart of characteristic types AddAttributeAndProperty objects (test data base)
 		When Create chart of characteristic types IDInfoTypes objects (test data base)
 		When Create chart of characteristic types CustomUserSettings objects (test data base)
@@ -141,6 +142,11 @@ Scenario: _099100 preparation
 		When Create information register T9010S_AccountsItemKey records (Basic LTV)
 		When Create information register T9012S_AccountsPartner records (Basic LTV)
 		When Create information register T9013S_AccountsTax records (Basic LTV)
+	* Post OE
+		Given I open hyperlink "e1cib/list/Document.OpeningEntry"
+		Then I select all lines of "List" table
+		And in the table "List" I click the button named "ListContextMenuPost"
+		And Delay "3"
 	* Post PI
 		Given I open hyperlink "e1cib/list/Document.PurchaseInvoice"
 		Then I select all lines of "List" table
@@ -151,9 +157,22 @@ Scenario: _099100 preparation
 		Then I select all lines of "List" table
 		And in the table "List" I click the button named "ListContextMenuPost"
 		And Delay "3"
+	* Post RSR
+		Given I open hyperlink "e1cib/list/Document.RetailSalesReceipt"
+		Then I select all lines of "List" table
+		And in the table "List" I click the button named "ListContextMenuPost"
+		And Delay "3"
+	* Post RRR
+		Given I open hyperlink "e1cib/list/Document.RetailReturnReceipt"
+		Then I select all lines of "List" table
+		And in the table "List" I click the button named "ListContextMenuPost"
+		And Delay "3"
+	* Post CalculationMovementCosts
+		Given I open hyperlink "e1cib/list/Document.CalculationMovementCosts"
+		Then I select all lines of "List" table
+		And in the table "List" I click the button named "ListContextMenuPost"
+		And Delay "3"
 	And I close all client application windows
-	
-
 							
 	
 Scenario: _0991001 check preparation
@@ -1833,4 +1852,19 @@ Scenario: _0991145 check Credit note accounting movements
 			| '4020'  | 'Customer 2 (2 partner term)' | 'Business unit 1'                             | 'Individual partner term 1 (by partner term)' | 'Expence 1'                | '420.2'  | 'CreditNote DR (R2020B_AdvancesFromCustomers) CR (R5022T_Expenses)'              |
 			| '4010'  | 'Customer 2 (2 partner term)' | 'Individual partner term 1 (by partner term)' | 'Individual partner term 1 (by partner term)' | 'Business unit 1'          | '4020'   | 'CreditNote DR (R2021B_CustomersTransactions) CR (R2020B_AdvancesFromCustomers)' |
 			| '5201'  | 'Customer 2 (2 partner term)' | 'Business unit 1'                             | 'Individual partner term 1 (by partner term)' | 'Expence 1'                | '420.2'  | 'CreditNote DR (R1021B_VendorsTransactions CR (R5022T_Expenses)'                 |		
+	And I close all client application windows
+
+Scenario: _0991150 check Retail sales receipt accounting movements
+	And I close all client application windows
+	* Select RSR
+		Given I open hyperlink "e1cib/list/Document.RetailSalesReceipt"
+		And I go to line in "List" table
+			| 'Number' |
+			| '1'      |	
+		And I select current line in "List" table
+	* Check accounting movements
+		And in the table "ItemList" I click "Edit accounting" button	
+		And "AccountingAnalytics" table became equal
+			| 'Debit' | 'Partner' | 'Business unit'   | 'Expense and revenue type' | 'Credit' | 'Item'               | 'Item key'   | 'Operation'                                                          |
+			| '420.2' | ''        | 'Business unit 3' | 'Expence 1'                | '3540'   | 'Item with item key' | 'XS/Color 2' | 'RetailSalesReceipt DR (R5022T_Expenses) CR (R4050B_StockInventory)' |		
 	And I close all client application windows

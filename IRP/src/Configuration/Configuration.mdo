@@ -434,8 +434,8 @@
  <commonModules>CommonModule.CatCashAccountsServer</commonModules>
  <commonModules>CommonModule.CatCompaniesClient</commonModules>
  <commonModules>CommonModule.CatCompaniesServer</commonModules>
- <commonModules>CommonModule.CatConfigurationMetadataServer</commonModules>
  <commonModules>CommonModule.CatExpenseAndRevenueTypesServer</commonModules>
+ <commonModules>CommonModule.CatConfigurationMetadataServer</commonModules>
  <commonModules>CommonModule.CatItemsServer</commonModules>
  <commonModules>CommonModule.CatPartnersServer</commonModules>
  <commonModules>CommonModule.CatRetailCustomersClient</commonModules>
@@ -1233,6 +1233,10 @@
  <reports>Report.DetailingSupplies</reports>
  <reports>Report.ProductionPlanning</reports>
  <reports>Report.AdditionalDocumentTablesCheck</reports>
+ <reports>Report.TrialBalance</reports>
+ <reports>Report.TrialBalanceByAccount</reports>
+ <reports>Report.AccountCard</reports>
+ <reports>Report.AccountAnalysis</reports>
  <dataProcessors>DataProcessor.AnaliseDocumentMovements</dataProcessors>
  <dataProcessors>DataProcessor.AnalyseXDTO</dataProcessors>
  <dataProcessors>DataProcessor.BuilderExample</dataProcessors>

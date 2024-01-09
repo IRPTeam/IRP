@@ -377,6 +377,30 @@
   <fillValue xsi:type="core:UndefinedValue"/>
   <mainFilter>true</mainFilter>
  </dimensions>
+ <dimensions uuid="b97a3c39-cde2-4613-8ed8-cb492a34f131">
+  <name>Currency</name>
+  <synonym>
+   <key>en</key>
+   <value>Currency</value>
+  </synonym>
+  <synonym>
+   <key>ru</key>
+   <value>Валюта</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Döviz</value>
+  </synonym>
+  <type>
+   <types>CatalogRef.Currencies</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <dataHistory>Use</dataHistory>
+  <fillValue xsi:type="core:UndefinedValue"/>
+  <mainFilter>true</mainFilter>
+ </dimensions>
  <forms uuid="f4d9c850-72e5-46e2-86fc-207034084f82">
   <name>RecordForm</name>
   <synonym>

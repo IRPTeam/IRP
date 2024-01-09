@@ -32,7 +32,7 @@ Procedure CostOfGoodsSold_Clear(DocObjectRef, Cancel) Export
 	EndDo;
 EndProcedure
 
-Procedure CostOfGoodsSold_CollectRecords(DocObject) Export
+Function CostOfGoodsSold_CollectRecords(DocObject) Export
 	Query = New Query;
 	Query.Text =
 	"SELECT
@@ -249,9 +249,8 @@ Procedure CostOfGoodsSold_CollectRecords(DocObject) Export
 	|	OR BatchWiseBalance.AllocatedRevenueTaxAmount <> 0)";
 	
 	Query.SetParameter("Document", DocObject.Ref);
-	QueryResult = Query.Execute();
-	DocObject.RegisterRecords.R6060T_CostOfGoodsSold.Load(QueryResult.Unload());
-EndProcedure
+	Return Query.Execute().Unload();
+EndFunction
 
 Procedure CostOfGoodsSold_LoadRecords(CalculationMovementCostRef) Export
 	Query = New Query;

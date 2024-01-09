@@ -1061,6 +1061,10 @@
   <headerHorizontalAlign>Left</headerHorizontalAlign>
   <showInFooter>true</showInFooter>
   <extInfo xsi:type="form:SpreadSheetDocFieldExtInfo">
+   <handlers>
+    <event>DetailProcessing</event>
+    <name>ResultDetailProcessing</name>
+   </handlers>
    <width>100</width>
    <autoMaxWidth>true</autoMaxWidth>
    <height>10</height>
@@ -1517,6 +1521,31 @@
    <itemValueType/>
   </extInfo>
  </attributes>
+ <attributes>
+  <name>IsDetailProcessing</name>
+  <title>
+   <key>en</key>
+   <value>Is detail processing</value>
+  </title>
+  <title>
+   <key>ru</key>
+   <value>Обрабатывается детализация</value>
+  </title>
+  <title>
+   <key>tr</key>
+   <value>Detal işleniyor</value>
+  </title>
+  <id>5</id>
+  <valueType>
+   <types>Boolean</types>
+  </valueType>
+  <view>
+   <common>true</common>
+  </view>
+  <edit>
+   <common>true</common>
+  </edit>
+ </attributes>
  <formCommands>
   <name>CustomParameters</name>
   <title>
@@ -1567,6 +1596,12 @@
   </action>
   <currentRowUse>Auto</currentRowUse>
  </formCommands>
+ <parameters>
+  <name>IsDetailProcessing</name>
+  <valueType>
+   <types>Boolean</types>
+  </valueType>
+ </parameters>
  <commandInterface>
   <navigationPanel/>
   <commandBar/>

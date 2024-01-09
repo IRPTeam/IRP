@@ -778,11 +778,13 @@ Procedure ExchangeDifference(Parameters)
 		Return; // is not currency exchange
 	EndIf;
 	
-	TempTablesManager = New TempTablesManager();
 	TransitIncoming = Parameters.PostingDataTables[Metadata.AccumulationRegisters.R3021B_CashInTransitIncoming].PrepareTable;
+	Expenes = Parameters.PostingDataTables[Metadata.AccumulationRegisters.R5022T_Expenses].PrepareTable;	
+	Revenues = Parameters.PostingDataTables[Metadata.AccumulationRegisters.R5021T_Revenues].PrepareTable;	
+	Accounting = Parameters.PostingDataTables[Metadata.AccumulationRegisters.T1040T_AccountingAmounts].PrepareTable;
 	
 	Query = New Query();
-	Query.TempTablesManager = TempTablesManager;
+	Query.TempTablesManager = Parameters.TempTablesManager;
 	Query.Text = 
 	"SELECT *
 	|INTO TransitIncoming
@@ -790,8 +792,8 @@ Procedure ExchangeDifference(Parameters)
 	Query.SetParameter("TransitIncoming", TransitIncoming);
 	Query.Execute();
 	
-	ReplaceAmountInTransactionCurrency(TempTablesManager, AccumulationRecordType.Receipt, TransitIncoming);
-	ReplaceAmountInTransactionCurrency(TempTablesManager, AccumulationRecordType.Expense, TransitIncoming);
+	ReplaceAmountInTransactionCurrency(Parameters.TempTablesManager, AccumulationRecordType.Receipt, TransitIncoming);
+	ReplaceAmountInTransactionCurrency(Parameters.TempTablesManager, AccumulationRecordType.Expense, TransitIncoming);
 	
 	Query.Text = 
 	"SELECT
@@ -814,16 +816,16 @@ Procedure ExchangeDifference(Parameters)
 	|	TransitIncomingReplaced AS TransitIncomingReceipt
 	|		INNER JOIN TransitIncomingReplaced AS TransitIncomingExpense
 	|		ON TransitIncomingReceipt.Company = TransitIncomingExpense.Company
-	|			AND TransitIncomingReceipt.Branch = TransitIncomingExpense.Branch
-	|			AND TransitIncomingReceipt.Account = TransitIncomingExpense.Account
-	|			AND TransitIncomingReceipt.CurrencyMovementType = TransitIncomingExpense.CurrencyMovementType
-	|			AND TransitIncomingReceipt.Currency = TransitIncomingExpense.Currency
-	|			AND TransitIncomingReceipt.TransactionCurrency = TransitIncomingExpense.TransactionCurrency
-	|			AND TransitIncomingReceipt.Basis = TransitIncomingExpense.Basis
-	|			AND (TransitIncomingReceipt.RecordType = VALUE(AccumulationRecordType.Receipt))
-	|			AND (TransitIncomingExpense.RecordType = VALUE(AccumulationRecordType.Expense))
-	|			AND (NOT TransitIncomingReceipt.Period IS NULL)
-	|			AND (NOT TransitIncomingExpense.Period IS NULL)
+	|		AND TransitIncomingReceipt.Branch = TransitIncomingExpense.Branch
+	|		AND TransitIncomingReceipt.Account = TransitIncomingExpense.Account
+	|		AND TransitIncomingReceipt.CurrencyMovementType = TransitIncomingExpense.CurrencyMovementType
+	|		AND TransitIncomingReceipt.Currency = TransitIncomingExpense.Currency
+	|		AND TransitIncomingReceipt.TransactionCurrency = TransitIncomingExpense.TransactionCurrency
+	|		AND TransitIncomingReceipt.Basis = TransitIncomingExpense.Basis
+	|		AND (TransitIncomingReceipt.RecordType = VALUE(AccumulationRecordType.Receipt))
+	|		AND (TransitIncomingExpense.RecordType = VALUE(AccumulationRecordType.Expense))
+	|		AND (NOT TransitIncomingReceipt.Period IS NULL)
+	|		AND (NOT TransitIncomingExpense.Period IS NULL)
 	|;
 	|
 	|////////////////////////////////////////////////////////////////////////////////
@@ -843,15 +845,32 @@ Procedure ExchangeDifference(Parameters)
 	|			THEN -Diff.Commission
 	|		ELSE Diff.Commission
 	|	END AS Comission,
-	|	Diff.*
+	|	Diff.*,
+	|	ExpenseRevenueAnalytics.*
 	|FROM
-	|	Diff AS Diff";
+	|	Diff AS Diff
+	|		LEFT JOIN ExpenseRevenueAnalytics AS ExpenseRevenueAnalytics
+	|		On Diff.Key = ExpenseRevenueAnalytics.Key";
 		
 	Query.SetParameter("TransitIncoming", TransitIncoming);
 	QueryResult = Query.Execute();
 	QueryTable = QueryResult.Unload();
 	For Each Row In QueryTable Do
+		If Not ValueIsFilled(Row.Amount) And Not ValueIsFilled(Row.Commission) Then
+			Continue; // not currency difference
+		EndIf;
+		
 		FillPropertyValues(TransitIncoming.Add(), Row);
+		
+		If Row.RecordType = AccumulationRecordType.Receipt Then
+			NewRow = Revenues.Add();
+			FillPropertyValues(NewRow, Row);
+			NewRow.ProfitLossCenter = Row.ProfitCenter;
+		Else
+			NewRow = Expenes.Add();
+			FillPropertyValues(NewRow, Row);
+			NewRow.ProfitLossCenter = Row.LossCenter;
+		EndIf;
 	EndDo;
 	
 EndProcedure

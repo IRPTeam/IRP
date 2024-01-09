@@ -675,13 +675,14 @@ EndFunction
 #Region CHANGE_TRANSIT_ACCOUNT_BY_ACCOUNT
 
 Function ChangeTransitAccountByAccountOptions() Export
-	Return GetChainLinkOptions("TransactionType, Account, CurrentTransitAccount");
+	Return GetChainLinkOptions("TransactionType, Account, CurrentTransitAccount, SendCurrency, ReceiveCurrency");
 EndFunction
 
 Function ChangeTransitAccountByAccountExecute(Options) Export
 	IsCurrencyExchange = 
 	Options.TransactionType = PredefinedValue("Enum.OutgoingPaymentTransactionTypes.CurrencyExchange")
-	Or Options.TransactionType = PredefinedValue("Enum.IncomingPaymentTransactionType.CurrencyExchange");
+	Or Options.TransactionType = PredefinedValue("Enum.IncomingPaymentTransactionType.CurrencyExchange")
+	Or Options.SendCurrency <> Options.ReceiveCurrency;
 	
 	If Not IsCurrencyExchange Then
 		Return Undefined;

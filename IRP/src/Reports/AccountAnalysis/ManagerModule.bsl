@@ -16,7 +16,7 @@ Function GetAdditionalDetailsActions(DetailValuesMap) Export
 	Result.MenuList.Add(1, StrTemplate("%1: %2 = %3", Metadata.Reports.TrialBalanceByAccount.Synonym,  
 		String(TypeOf(Account)), Account),, PictureLib.Report);
 	
-	Result.MenuList.Add(1, StrTemplate("%1: %2 = %3", Metadata.Reports.AccountCard.Synonym,  
+	Result.MenuList.Add(2, StrTemplate("%1: %2 = %3", Metadata.Reports.AccountCard.Synonym,  
 		String(TypeOf(Account)), Account),, PictureLib.DebitCredit);
 	
 	Result.OtherReportMapping.Insert(1, "Report.TrialBalanceByAccount.ObjectForm");

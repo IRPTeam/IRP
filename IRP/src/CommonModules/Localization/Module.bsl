@@ -1513,6 +1513,18 @@ Strings.Insert("CreditNote_DR_R1021B_VendorsTransactions_CR_R5022T_Expenses",
 Strings.Insert("MoneyTransfer_DR_R3010B_CashOnHand_CR_R3010B_CashOnHand",
 	NStr("en = 'MoneyTransfer DR (R3010B_CashOnHand) CR (R3010B_CashOnHand)'", Lang));
 	
+Strings.Insert("MoneyTransfer_DR_R3010B_CashOnHand_CR_R3021B_CashInTransit",
+	NStr("en = 'MoneyTransfer DR (R3010B_CashOnHand) CR (R3021B_CashInTransit)'", Lang));
+
+Strings.Insert("MoneyTransfer_DR_R3021B_CashInTransit_CR_R3010B_CashOnHand",
+	NStr("en = 'MoneyTransfer DR (R3021B_CashInTransit) CR (R3010B_CashOnHand)'", Lang));
+
+Strings.Insert("MoneyTransfer_DR_R3021B_CashInTransit_CR_R5021T_Revenues",
+	NStr("en = 'MoneyTransfer DR (R3021B_CashInTransit) CR (R5021T_Revenues)'", Lang));
+
+Strings.Insert("MoneyTransfer_DR_R5022T_Expenses_CR_R3021B_CashInTransit",
+	NStr("en = 'MoneyTransfer DR (R5022T_Expenses) CR (R3021B_CashInTransit)'", Lang));
+	
 #EndRegion
 	
 	Return Strings;

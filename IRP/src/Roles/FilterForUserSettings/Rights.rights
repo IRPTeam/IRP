@@ -2352,4 +2352,32 @@
 			<value>true</value>
 		</right>
 	</object>
+	<object>
+		<name>Document.MoneyTransfer.Attribute.ExpenseType</name>
+		<right>
+			<name>View</name>
+			<value>true</value>
+		</right>
+	</object>
+	<object>
+		<name>Document.MoneyTransfer.Attribute.LossCenter</name>
+		<right>
+			<name>View</name>
+			<value>true</value>
+		</right>
+	</object>
+	<object>
+		<name>Document.MoneyTransfer.Attribute.RevenueType</name>
+		<right>
+			<name>View</name>
+			<value>true</value>
+		</right>
+	</object>
+	<object>
+		<name>Document.MoneyTransfer.Attribute.ProfitCenter</name>
+		<right>
+			<name>View</name>
+			<value>true</value>
+		</right>
+	</object>
 </Rights>

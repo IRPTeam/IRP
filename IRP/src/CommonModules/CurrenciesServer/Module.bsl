@@ -862,14 +862,19 @@ Procedure ExchangeDifference(Parameters)
 		
 		FillPropertyValues(TransitIncoming.Add(), Row);
 		
+		Accounting_NewRow = Accounting.Add();
+		FillPropertyValues(Accounting_NewRow, Row);
+		
 		If Row.RecordType = AccumulationRecordType.Receipt Then
-			NewRow = Revenues.Add();
-			FillPropertyValues(NewRow, Row);
-			NewRow.ProfitLossCenter = Row.ProfitCenter;
+			Revenues_NewRow = Revenues.Add();
+			FillPropertyValues(Revenues_NewRow, Row);
+			Revenues_NewRow.ProfitLossCenter = Row.ProfitCenter;
+			Accounting_NewRow.Operation = Catalogs.AccountingOperations.MoneyTransfer_DR_R3021B_CashInTransit_CR_R5021T_Revenues;
 		Else
-			NewRow = Expenes.Add();
-			FillPropertyValues(NewRow, Row);
-			NewRow.ProfitLossCenter = Row.LossCenter;
+			Expenses_NewRow = Expenes.Add();
+			FillPropertyValues(Expenses_NewRow, Row);
+			Expenses_NewRow.ProfitLossCenter = Row.LossCenter;
+			Accounting_NewRow.Operation = Catalogs.AccountingOperations.MoneyTransfer_DR_R5022T_Expenses_CR_R3021B_CashInTransit;
 		EndIf;
 	EndDo;
 	

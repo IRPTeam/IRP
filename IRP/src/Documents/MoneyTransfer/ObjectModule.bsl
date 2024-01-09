@@ -75,10 +75,16 @@ Procedure UndoPosting(Cancel)
 EndProcedure
 
 Procedure FillCheckProcessing(Cancel, CheckedAttributes)
-	DataFilled = ValueIsFilled(SendCurrency) 
-				And ValueIsFilled(ReceiveCurrency) 
-				And ValueIsFilled(Sender)
-				And ValueIsFilled(Receiver);
+	If ValueIsFilled(ThisObject.SendCurrency) 
+		And ValueIsFilled(ThisObject.ReceiveCurrency)
+	 	And ThisObject.SendCurrency <> ThisObject.ReceiveCurrency Then
+		CheckedAttributes.Add("TransitAccount");
+	EndIf;
+	
+	DataFilled = ValueIsFilled(ThisObject.SendCurrency) 
+				And ValueIsFilled(ThisObject.ReceiveCurrency) 
+				And ValueIsFilled(ThisObject.Sender)
+				And ValueIsFilled(ThisObject.Receiver);
 	If DataFilled 
 		And ThisObject.SendCurrency = ThisObject.ReceiveCurrency
 		And ThisObject.SendAmount <> ThisObject.ReceiveAmount Then

@@ -94,6 +94,7 @@ Scenario: _0206003 сheck data verification in Goods receipt
 		And I input "10.03.2023" text in the field named "DateBegin"
 		And I input "10.03.2023" text in the field named "DateEnd"
 		And I click the button named "Select"
+		And I remove checkbox "Only posted"		
 		And in the table "DocumentList" I click "Fill documents" button
 		And in the table "DocumentList" I click "Check documents" button	
 	* Check report
@@ -115,6 +116,7 @@ Scenario: _0206004 сheck data verification in Inventory transfer
 		And I input "10.03.2023" text in the field named "DateBegin"
 		And I input "10.03.2023" text in the field named "DateEnd"
 		And I click the button named "Select"
+		And I remove checkbox "Only posted"	
 		And in the table "DocumentList" I click "Fill documents" button
 		And in the table "DocumentList" I click "Check documents" button
 	* Check report
@@ -142,6 +144,7 @@ Scenario: _0206005 сheck data verification in Inventory transfer order
 		And I input "10.03.2023" text in the field named "DateBegin"
 		And I input "10.03.2023" text in the field named "DateEnd"
 		And I click the button named "Select"
+		And I remove checkbox "Only posted"	
 		And in the table "DocumentList" I click "Fill documents" button
 		And in the table "DocumentList" I click "Check documents" button
 	* Check report
@@ -167,6 +170,7 @@ Scenario: _0206006 сheck data verification in Internal supply request
 		And I input "10.03.2023" text in the field named "DateBegin"
 		And I input "10.03.2023" text in the field named "DateEnd"
 		And I click the button named "Select"
+		And I remove checkbox "Only posted"	
 		And in the table "DocumentList" I click "Fill documents" button
 		And in the table "DocumentList" I click "Check documents" button
 	* Check report
@@ -191,6 +195,7 @@ Scenario: _0206007 сheck data verification in Sales order
 		And I input "10.03.2023" text in the field named "DateBegin"
 		And I input "10.03.2023" text in the field named "DateEnd"
 		And I click the button named "Select"
+		And I remove checkbox "Only posted"	
 		And in the table "DocumentList" I click "Fill documents" button
 		And in the table "DocumentList" I click "Check documents" button
 	* Check report

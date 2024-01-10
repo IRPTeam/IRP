@@ -1,2 +1,2 @@
-IRP/.settings/*.*
-IRP/.settings/Default.cset
+*.cset
+*.prefs

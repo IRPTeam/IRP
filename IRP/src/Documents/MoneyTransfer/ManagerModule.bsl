@@ -224,7 +224,8 @@ Function R3021B_CashInTransitIncoming()
 		   |FROM
 		   |	MoneyReceiver AS MoneyReceiver
 		   |WHERE
-		   |	MoneyReceiver.IsPOSCashAccount
+		   |	MoneyReceiver.IsPOSCashAccount 
+		   |	AND NOT MoneyReceiver.IsCurrencyExchange
 		   |
 		   |UNION ALL
 		   |
@@ -242,6 +243,7 @@ Function R3021B_CashInTransitIncoming()
 		   |	MoneySender AS MoneySender
 		   |WHERE
 		   |	MoneySender.IsPOSCashAccount
+		   |	AND NOT MoneySender.IsCurrencyExchange
 		   |
 		   |
 		   |UNION ALL
@@ -260,6 +262,7 @@ Function R3021B_CashInTransitIncoming()
 		   |	MoneySender AS MoneySender
 		   |WHERE
 		   |	MoneySender.IsCurrencyExchange
+		   |	AND NOT MoneySender.IsPOSCashAccount
 		   |
 		   |UNION ALL
 		   |
@@ -276,9 +279,7 @@ Function R3021B_CashInTransitIncoming()
 		   |FROM
 		   |	MoneyTransit AS MoneyTransit
 		   |WHERE
-		   |	TRUE
-		   |
-		   |";
+		   |	TRUE";
 EndFunction
 
 Function R3010B_CashOnHand()
@@ -310,7 +311,8 @@ Function R3010B_CashOnHand()
 		|FROM
 		|	MoneyReceiver AS MoneyReceiver
 		|WHERE
-		|	MoneyReceiver.IsMoneyTransfer OR MoneyReceiver.IsCurrencyExchange";
+		|	(MoneyReceiver.IsMoneyTransfer OR MoneyReceiver.IsCurrencyExchange) 
+		|	AND NOT MoneyReceiver.UseCashInTransit";
 EndFunction
 
 Function R3011T_CashFlow()
@@ -346,8 +348,8 @@ Function R3011T_CashFlow()
 		|FROM
 		|	MoneyReceiver AS MoneyReceiver
 		|WHERE
-		|	MoneyReceiver.IsMoneyTransfer
-		|	OR MoneyReceiver.IsCurrencyExchange";
+		|	(MoneyReceiver.IsMoneyTransfer OR MoneyReceiver.IsCurrencyExchange)
+		|	AND NOT MoneyReceiver.UseCashInTransit";
 EndFunction
 
 Function R3035T_CashPlanning()

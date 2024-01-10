@@ -4,14 +4,52 @@
     "constructor-function-return-section": {
       "enabled": false
     },
+    "module-structure-method-in-regions": {
+      "enabled": false
+    },
     "typed-value-adding-to-untyped-collection": {
+      "enabled": false
+    },
+    "form-ql-hub": {
+      "enabled": false
+    },
+    "doc-comment-parameter-section": {
+      "enabled": false
+    },
+    "property-return-type": {
+      "properties": {
+        "excludeTopMdObjectNamePattern": "R()"
+      }
+    },
+    "ql-temp-table-index": {
+      "enabled": false
+    },
+    "reading-attribute-from-database": {
+      "enabled": false
+    },
+    "bsl-variable-name-invalid": {
+      "enabled": false
+    },
+    "module-structure-form-event-regions": {
+      "enabled": false
+    },
+    "invocation-form-event-handler": {
+      "enabled": false
+    },
+    "query-in-loop": {
+      "enabled": false
+    },
+    "module-structure-top-region": {
       "enabled": false
     },
     "module-consecutive-blank-lines": {
       "enabled": true
     },
-    "bsl-ql-hub": {
-      "enabled": true
+    "module-self-reference": {
+      "enabled": false
+    },
+    "dcs-ql-hub": {
+      "enabled": false
     }
   }
 }

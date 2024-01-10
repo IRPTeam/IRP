@@ -136,7 +136,6 @@ Procedure FillRegisterRecords()
 			NewRowError.ErrorDescription = "empty Credit";
 		EndIf;
 		
-		
 		DataByAnalytics = AccountingServer.GetDataByAccountingAnalytics(ThisObject.Basis, Row);
 		
 		If Not ValueIsFilled(DataByAnalytics.Amount) Then

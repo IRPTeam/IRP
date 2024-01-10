@@ -49,7 +49,6 @@ Procedure FillCheckProcessing(Cancel, CheckedAttributes)
 		Cancel = True;
 	EndIf;
 	
-	
 	If Not Cancel = True Then
 		LinkedFilter = RowIDInfoClientServer.GetLinkedDocumentsFilter_RSC(ThisObject);
 		RowIDInfoTable = ThisObject.RowIDInfo.Unload();

@@ -65,7 +65,6 @@ Function GetOperationsDefinition()
 	Map.Insert(AO.ForeignCurrencyRevaluation_DR_R2020B_AdvancesFromCustomers_CR_R5021T_Revenues , New Structure("ByRow, RequestTable", True, True));
 	Map.Insert(AO.ForeignCurrencyRevaluation_DR_R5022T_Expenses_CR_R2020B_AdvancesFromCustomers , New Structure("ByRow, RequestTable", True, True));
 	
-
 	Return Map;
 EndFunction
 
@@ -197,7 +196,6 @@ Function ExtractValueByType(ObjectData, RowData, ArrayOfTypes, AdditionalAnalyti
 			Return ObjectData[KeyValue.Key];
 		EndIf;
 	EndDo;
-	
 	
 	Return Undefined;
 EndFunction
@@ -714,8 +712,6 @@ Function __GetT9012S_AccountsPartner(Period, Company, LedgerTypeVariant, Partner
 	Query.SetParameter("Currency"  , Currency);
 	
 	QueryResults = Query.ExecuteBatch();
-	
-
 	
 	Result = New Structure();
 	Result.Insert("AccountAdvancesVendor"        , Undefined);
@@ -1258,7 +1254,6 @@ Function GetAccountingData_LandedCost(Parameters)
 	CurrenciesTable = Parameters.Recorder.Currencies.UnloadColumns();
 	CurrenciesServer.UpdateCurrencyTable(CurrenciesTableParams, CurrenciesTable);
 	
-	
 	CurrenciesParameters = New Structure();
 	PostingDataTables = New Map();
 	
@@ -1616,7 +1611,6 @@ Procedure CreateJE_ByArrayRefs(ArrayOfRefs, ArrayOfLedgerTypes) Export
 	DocumentTable.Columns.Add("Document", Metadata.Documents.JournalEntry.Attributes.Basis.Type);
 	DocumentTable.Columns.Add("LedgerType", New TypeDescription("CatalogRef.LedgerTypes"));
 	
-	
 		For Each Ref In ArrayOfRefs Do
 			AvailableLedgerTypes = GetLedgerTypesByCompany(Ref, Ref.Date, Ref.Company);
 			For Each LedgerTpe In ArrayOfLedgerTypes Do
@@ -1717,10 +1711,5 @@ Procedure UpdateAnalyticsJE(QueryTable)
 EndProcedure
 
 #EndRegion
-
-
-
-
-
 
 

@@ -182,7 +182,6 @@ Procedure SetVisibilityAvailability(Object, Form)
 		Form.Items.Company.ReadOnly = BasedOnCashTransferOrder And ValueIsFilled(Object.Company);
 		Form.Items.Currency.ReadOnly = BasedOnCashTransferOrder And ValueIsFilled(Object.Currency);
 
-		
 		If IsTransferFromPOS Then
 			ArrayTypes.Add(Type("DocumentRef.CashStatement"));
 		Else

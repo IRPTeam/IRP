@@ -159,6 +159,7 @@ Procedure SetSettings()
 EndProcedure
 
 &AtClient
+// @skip-check unknown-method-property
 Procedure ChangingFormBySettings()
 	If Items.ViewPictures.Check Then
 		Items.GroupMainLeft.Group = ChildFormItemsGroup.Vertical;

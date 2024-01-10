@@ -682,7 +682,6 @@ Function GetAdditionalSettings(RowOwner, TableOfSettings)
 	
 	RowOwner.Rows.Add(NewRow_Documents);
 	
-	
 	// Link \ Unlink document rows
 	FullName = "Documents.LinkUnlinkDocumentRows.Settings";
 	

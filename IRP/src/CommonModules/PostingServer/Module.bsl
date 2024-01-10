@@ -1520,6 +1520,7 @@ Function WriteDocumentsRecords(DocumentArray, isJob = False) Export
 				
 				Parts = StrSplit(Doc.RegName, ".");
 				CreateRecordSet = Eval(Parts[0] + "s." + Parts[1] + ".CreateRecordSet()"); // AccumulationRegisterRecordSet
+				//@skip-check unknown-method-property
 				CreateRecordSet.Filter.Recorder.Set(Doc.Ref);
 				NewMovement.FillValues(Doc.Ref, "Recorder");
 				CreateRecordSet.Load(NewMovement);

@@ -601,7 +601,6 @@ Function GetAnalytics_VendorTransactionExpenses(Parameters)
 	// Debit - Analytics
 	AccountingServer.SetDebitExtDimensions(Parameters, AccountingAnalytics);
 
-
 	Credit = AccountingServer.GetT9014S_AccountsExpenseRevenue(AccountParameters, Parameters.RowData.ExpenseType);
 	If ValueIsFilled(Credit.Account) Then
 		AccountingAnalytics.Credit = Credit.Account;

@@ -36,4 +36,3 @@ Procedure SetCompanyFilter()
 EndProcedure
 
 
-

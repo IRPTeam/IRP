@@ -13,6 +13,11 @@ Function PostingGetDocumentDataTables(Ref, Cancel, PostingMode, Parameters, AddI
 	QueryArray = GetQueryTextsSecondaryTables();
 	Parameters.Insert("QueryParameters", GetAdditionalQueryParameters(Ref));
 	PostingServer.ExecuteQuery(Ref, QueryArray, Parameters);
+	
+	If ValueIsFilled(Ref.PurchaseOrder) Then
+		Tables.Insert("CurrencyTable", Ref.PurchaseOrder.Currencies.Unload());
+	EndIf;
+	
 	Return Tables;
 EndFunction
 

@@ -22,9 +22,6 @@ Procedure BeforeDelete(Cancel)
 EndProcedure
 
 Procedure Posting(Cancel, PostingMode)
-	If ValueIsFilled(ThisObject.SalesOrder) Then
-		ThisObject.AdditionalProperties.Insert("CurrencyTable", ThisObject.SalesOrder.Currencies.Unload());
-	EndIf;
 	PostingServer.Post(ThisObject, Cancel, PostingMode, ThisObject.AdditionalProperties);
 EndProcedure
 

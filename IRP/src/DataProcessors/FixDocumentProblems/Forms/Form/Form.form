@@ -2437,7 +2437,7 @@
             </extInfo>
           </items>
           <items xsi:type="form:Button">
-            <name>PostingInfoShowPosingDiff</name>
+            <name>PostingInfoShowPostingDiff</name>
             <id>187</id>
             <visible>true</visible>
             <enabled>true</enabled>
@@ -2445,7 +2445,7 @@
               <common>true</common>
             </userVisible>
             <extendedTooltip>
-              <name>PostingInfoShowPosingDiffExtendedTooltip</name>
+              <name>PostingInfoShowPostingDiffExtendedTooltip</name>
               <id>188</id>
               <visible>true</visible>
               <enabled>true</enabled>
@@ -2459,7 +2459,7 @@
                 <horizontalAlign>Left</horizontalAlign>
               </extInfo>
             </extendedTooltip>
-            <commandName>Form.Command.ShowPosingDiff</commandName>
+            <commandName>Form.Command.ShowPostingDiff</commandName>
             <representation>Auto</representation>
             <autoMaxWidth>true</autoMaxWidth>
             <autoMaxHeight>true</autoMaxHeight>
@@ -4432,10 +4432,10 @@
     <currentRowUse>Auto</currentRowUse>
   </formCommands>
   <formCommands>
-    <name>ShowPosingDiff</name>
+    <name>ShowPostingDiff</name>
     <title>
       <key>en</key>
-      <value>Show posing diff</value>
+      <value>Show posting diff</value>
     </title>
     <id>10</id>
     <use>

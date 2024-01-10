@@ -549,8 +549,8 @@ EndProcedure
 
 &AtClient
 Procedure ShowPosingDiff(Command)
-	Items.PostingInfoShowPosingDiff.Check = Not Items.PostingInfoShowPosingDiff.Check;
-	Items.GroupDiff.Visible = Items.PostingInfoShowPosingDiff.Check;
+	Items.PostingInfoShowPostingDiff.Check = Not Items.PostingInfoShowPostingDiff.Check;
+	Items.GroupDiff.Visible = Items.PostingInfoShowPostingDiff.Check;
 	
 	If Not Items.GroupDiff.Visible Then
 		PostingInfo_ClearTables();
@@ -622,6 +622,10 @@ Procedure PostingInfo_CreateTable(NewMovementStorage)
 	ChangeAttributes(ArrayAddedAttributes);
 	
 	For Each Column In Table.Columns Do 
+		If Column.Name = "PointInTime" Or Column.Name = "Recorder" Then
+			Continue;
+		EndIf;
+		
 	    NewColumn = Items.Add("CurrentMovement" + Column.Name, Type("FormField"), Items.CurrentMovement); // FormField 
 	    NewColumn.Title = Column.Name; 
 	    NewColumn.DataPath = "CurrentMovement." + Column.Name;
@@ -641,11 +645,19 @@ Procedure PostingInfo_ClearTables()
 	
 	For Each Column In CurrentMovement.Unload().Columns Do // ValueTableColumn
 	    ArrayRemovedAttributes.Add("CurrentMovement." + Column.Name);
+		ItemElement = Items.Find("CurrentMovement" + Column.Name);  
+		If ItemElement = Undefined Then
+			Continue;
+		EndIf;
 	    Items.Delete(Items.Find("CurrentMovement" + Column.Name));
 	EndDo;
 	
 	For Each Column In NewMovement.Unload().Columns Do // ValueTableColumn
-	    ArrayRemovedAttributes.Add("NewMovement." + Column.Name);
+	    ArrayRemovedAttributes.Add("NewMovement." + Column.Name); 
+		ItemElement = Items.Find("CurrentMovement" + Column.Name);
+		If ItemElement = Undefined Then
+			Continue;
+		EndIf;
 	    Items.Delete(Items.Find("NewMovement" + Column.Name));
 	EndDo;
 	

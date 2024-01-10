@@ -10,6 +10,11 @@ EndProcedure
 &AtServer
 Procedure OnCreateAtServer(Cancel, StandardProcessing)
 	JobDataSettings = Parameters.JobDataSettings; // See BackgroundJobAPIServer.JobDataSettings
+	If JobDataSettings.JobSettings.Count() = 0 Then
+		Cancel = True;
+		Return;
+	EndIf;
+	
 	CallbackFunction = JobDataSettings.CallbackFunction;
 	CallbackModule = JobDataSettings.CallbackModule;
 	

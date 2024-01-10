@@ -22,7 +22,11 @@ Procedure Post(DocObject, Cancel, PostingMode, AddInfo = Undefined) Export
 	EndIf;
 	
 	// Multi currency integration
-	CurrencyTable = CommonFunctionsClientServer.GetFromAddInfo(AddInfo, "CurrencyTable");	
+	CurrencyTable = Undefined;
+	If Parameters.DocumentDataTables.Property("CurrencyTable") Then
+		CurrencyTable = Parameters.DocumentDataTables.CurrencyTable;
+	EndIf;
+		
 	CurrenciesServer.PreparePostingDataTables(Parameters, CurrencyTable, AddInfo);
 
 	RegisteredRecords = RegisterRecords(Parameters);
@@ -1332,8 +1336,10 @@ Function CheckDocumentArray(DocumentArray, isJob = False) Export
 		Try
 			Parameters = GetPostingParameters(DocObject, PostingMode, AddInfo);
 	
-			// Multi currency integration
-			CurrencyTable = CommonFunctionsClientServer.GetFromAddInfo(AddInfo, "CurrencyTable");	
+			CurrencyTable = Undefined;
+			If Parameters.DocumentDataTables.Property("CurrencyTable") Then
+				CurrencyTable = Parameters.DocumentDataTables.CurrencyTable;
+			EndIf;
 			CurrenciesServer.PreparePostingDataTables(Parameters, CurrencyTable, AddInfo);
 		
 			RegisteredRecords = RegisterRecords(Parameters);
@@ -1410,9 +1416,6 @@ EndFunction
 // * Error - String -
 Function PostingDocumentArray(DocumentArray, isJob = False) Export
 
-
-	AddInfo = New Structure;
-	PostingMode = DocumentPostingMode.Regular;
 	Errors = New Array;
 	
 	If isJob And DocumentArray.Count() = 0 Then
@@ -1489,9 +1492,7 @@ EndFunction
 // * Error - String -
 Function WriteDocumentsRecords(DocumentArray, isJob = False) Export
 
-
-	AddInfo = New Structure;
-	PostingMode = DocumentPostingMode.Regular;
+	SetSafeMode(True);
 	Errors = New Array;
 	
 	If isJob And DocumentArray.Count() = 0 Then
@@ -1506,6 +1507,7 @@ Function WriteDocumentsRecords(DocumentArray, isJob = False) Export
 	Count = 0; 
 	LastPercentLogged = 0;
 	StartDate = CurrentUniversalDateInMilliseconds();
+	
 	For Each Doc In DocumentArray Do
 		
 		Try

@@ -198,6 +198,7 @@ Scenario: _054102 filling Money transfer (different currency and account type)
 			| 'Description'           |
 			| 'Accountants office'    |
 		And I select current line in "List" table
+		And I select from "Transit account" drop-down list by "Transit Main" string			
 	* Post
 		And I click "Post" button
 	* Check filling in

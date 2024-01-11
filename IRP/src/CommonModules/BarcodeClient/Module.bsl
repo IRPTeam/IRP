@@ -175,6 +175,8 @@ Function ProcessBarcodes(Barcodes, Settings)
 	
 	BarcodeResult = BarcodeServer.SearchByBarcodes(Barcodes, ServerSettings);
 
+	// TODO: is error?
+	//@skip-check wrong-type-expression
 	Settings.Result.FoundedItems = BarcodeResult.FoundedItems;
 	Settings.Result.Barcodes = BarcodeResult.Barcodes;
 

@@ -98,7 +98,6 @@ Procedure SelectLedgerType_MultipleDocuments(Result, AdditionalParameters) Expor
 EndProcedure
 
 
-
 Procedure AddExtDimensionRow(Object, Form, AnalyticRow, AnalyticType, ExtDimType, ExtDim)
 	If Not ValueIsFilled(ExtDim) Then
 		Return;

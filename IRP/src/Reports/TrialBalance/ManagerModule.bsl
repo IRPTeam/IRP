@@ -35,7 +35,6 @@ Function GetApplyingFilters(SelectedAction, DetailValuesMap) Export
 	Result.Insert("UserFilters", New Map());
 	Result.Insert("DetailsFilters", New Map());
 	
-	
 	// Parameter [Period] from this report to parameter [Period] other report (trial balance by account)  
 	Result.DataParameters.Insert("Period", "Period");
 	

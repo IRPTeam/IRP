@@ -116,7 +116,6 @@ Function SalesOrderPrint(Ref, Param)
 		AreaListHeaderTAX.Parameters.NameTAX = LocalizationEvents.DescriptionRefLocalization(TaxVat, Spreadsheet.LanguageCode);
 		Spreadsheet.Join(AreaListHeaderTAX);
 		
-		
 		Choice	= New Structure("Ref", SelectionHeader.Ref);
 		FindRow = SelectionItems.FindRows(Choice);
 

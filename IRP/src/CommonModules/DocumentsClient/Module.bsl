@@ -1429,6 +1429,7 @@ Function GetParametersPickupItems(Object, Form, AddInfo)
 		
 	ServerParameters = ControllerClientServer_V2.GetServerParameters(Object);
 	ServerParameters.TableName = "ItemList";
+	//@skip-check transfer-object-between-client-server
 	FormParameters   = ControllerClientServer_V2.GetFormParameters(Form);
 	ServerSideParameters = New Structure();
 	ServerSideParameters.Insert("ServerParameters", ServerParameters);

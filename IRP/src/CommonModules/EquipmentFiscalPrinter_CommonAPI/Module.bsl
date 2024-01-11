@@ -1030,7 +1030,7 @@ Function TransformToTypeBySource(Data, Source)
 EndFunction
 
 Function ToXMLString(Data)
-	// @skip-check Undefined function
+	// @skip-check undefined-function
 	Return XMLString(Data);
 EndFunction
 

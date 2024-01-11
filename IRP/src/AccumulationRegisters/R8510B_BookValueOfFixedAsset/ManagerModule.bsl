@@ -73,7 +73,7 @@ Procedure BookValueOfFixedAsset_LoadRecords(CalculationMovementCostRef) Export
 
 		PostingDataTables = New Map();
 		
-		BookValueTableSettings = PostingServer.PostingTableSettings(RecordSet.Metadata().Name, BookValueTable, RecordSet);
+		BookValueTableSettings = PostingServer.PostingTableSettings(BookValueTable, RecordSet);
 		PostingDataTables.Insert(RecordSet.Metadata(), BookValueTableSettings);
 		
 		ArrayOfPostingInfo = New Array();

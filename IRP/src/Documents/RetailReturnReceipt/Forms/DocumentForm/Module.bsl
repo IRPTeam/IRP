@@ -886,6 +886,7 @@ Procedure ItemListControlCodeStringStateClick() Export
 	Params.Insert("RowKey", CurrentData.Key);
 	Params.Insert("Item", CurrentData.Item);
 	Params.Insert("ItemKey", CurrentData.ItemKey);
+	//@skip-check unknown-method-property
 	Params.Insert("LineNumber", CurrentData.LineNumber);
 	Params.Insert("isReturn", True);
 	Notify = New NotifyDescription("ItemListControlCodeStringStateOpeningEnd", ThisObject, Params);

@@ -225,7 +225,6 @@ Function FillBillOfMaterialsTableCorrection(Parameters) Export
 					Row.BasisQuantity, Row.CurrentBasisQuantity, Row.BusinessUnit, Parameters);
 	EndDo;
 	
-	
 	For Each Row In ExpandedTable Do
 		FillPropertyValues(QueryTable.Add(), Row);
 	EndDo;

@@ -72,7 +72,7 @@ Function GetOperationsDefinition()
 	Map.Insert(AO.MoneyTransfer_DR_R3021B_CashInTransit_CR_R5021T_Revenues   , New Structure("ByRow", False));
 	Map.Insert(AO.MoneyTransfer_DR_R5022T_Expenses_CR_R3021B_CashInTransit   , New Structure("ByRow", False));
 
-	Return Map;
+Return Map;
 EndFunction
 
 Function GetSupportedDocuments() Export
@@ -194,7 +194,6 @@ Function ExtractValueByType(ObjectData, RowData, ArrayOfTypes, AdditionalAnalyti
 			Return ObjectData[KeyValue.Key];
 		EndIf;
 	EndDo;
-	
 	
 	Return Undefined;
 EndFunction
@@ -712,8 +711,6 @@ Function __GetT9012S_AccountsPartner(Period, Company, LedgerTypeVariant, Partner
 	Query.SetParameter("Currency"  , Currency);
 	
 	QueryResults = Query.ExecuteBatch();
-	
-
 	
 	Result = New Structure();
 	Result.Insert("AccountAdvancesVendor"        , Undefined);
@@ -1256,11 +1253,10 @@ Function GetAccountingData_LandedCost(Parameters)
 	CurrenciesTable = Parameters.Recorder.Currencies.UnloadColumns();
 	CurrenciesServer.UpdateCurrencyTable(CurrenciesTableParams, CurrenciesTable);
 	
-	
 	CurrenciesParameters = New Structure();
 	PostingDataTables = New Map();
 	
-	TableAccountingAmountsSettings = PostingServer.PostingTableSettings(RecordSet_AccountingAmounts.Metadata().Name, TableAccountingAmounts, RecordSet_AccountingAmounts);
+	TableAccountingAmountsSettings = PostingServer.PostingTableSettings(TableAccountingAmounts, RecordSet_AccountingAmounts);
 	PostingDataTables.Insert(RecordSet_AccountingAmounts.Metadata(), TableAccountingAmountsSettings);
 		
 	ArrayOfPostingInfo = New Array();
@@ -1614,7 +1610,6 @@ Procedure CreateJE_ByArrayRefs(ArrayOfRefs, ArrayOfLedgerTypes) Export
 	DocumentTable.Columns.Add("Document", Metadata.Documents.JournalEntry.Attributes.Basis.Type);
 	DocumentTable.Columns.Add("LedgerType", New TypeDescription("CatalogRef.LedgerTypes"));
 	
-	
 		For Each Ref In ArrayOfRefs Do
 			AvailableLedgerTypes = GetLedgerTypesByCompany(Ref, Ref.Date, Ref.Company);
 			For Each LedgerTpe In ArrayOfLedgerTypes Do
@@ -1715,10 +1710,5 @@ Procedure UpdateAnalyticsJE(QueryTable)
 EndProcedure
 
 #EndRegion
-
-
-
-
-
 
 

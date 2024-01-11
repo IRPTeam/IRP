@@ -42,8 +42,6 @@ Procedure PreparePostingDataTables(Parameters, CurrencyTable, AddInfo = Undefine
 			_PaymentList.Columns.Add("LegalName");
 			_PaymentList.Columns.Add("Key");
 			_PaymentList.Columns.Add("BasisDocument");
-
-
 			
 			If Parameters.Metadata = Metadata.Documents.CashReceipt Or Parameters.Metadata = Metadata.Documents.BankReceipt Then
 				DocumentCondition = True;

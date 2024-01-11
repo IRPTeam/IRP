@@ -96,6 +96,81 @@
     <dataHistory>Use</dataHistory>
     <fillValue xsi:type="core:UndefinedValue"/>
   </resources>
+  <resources uuid="f7082997-866f-42e4-b4dd-3adfea3cd18c">
+    <name>DoNotControl1</name>
+    <synonym>
+      <key>en</key>
+      <value>Do not control1</value>
+    </synonym>
+    <type>
+      <types>Boolean</types>
+    </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <fullTextSearch>Use</fullTextSearch>
+    <dataHistory>Use</dataHistory>
+    <fillValue xsi:type="core:UndefinedValue"/>
+  </resources>
+  <resources uuid="ac27ce26-f604-43f2-af56-0cda5758a8ae">
+    <name>DoNotControl2</name>
+    <synonym>
+      <key>en</key>
+      <value>Do not control2</value>
+    </synonym>
+    <type>
+      <types>Boolean</types>
+    </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <fullTextSearch>Use</fullTextSearch>
+    <dataHistory>Use</dataHistory>
+    <fillValue xsi:type="core:UndefinedValue"/>
+  </resources>
+  <resources uuid="6e3eabe7-fdc8-4aeb-ac72-c27917bc99c4">
+    <name>DoNotControl3</name>
+    <synonym>
+      <key>en</key>
+      <value>Do not control3</value>
+    </synonym>
+    <type>
+      <types>Boolean</types>
+    </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <fullTextSearch>Use</fullTextSearch>
+    <dataHistory>Use</dataHistory>
+    <fillValue xsi:type="core:UndefinedValue"/>
+  </resources>
+  <resources uuid="e7648c7f-b3d6-4492-b3ef-ae2a0ce654b2">
+    <name>DoNotControl4</name>
+    <synonym>
+      <key>en</key>
+      <value>Do not control4</value>
+    </synonym>
+    <type>
+      <types>Boolean</types>
+    </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <fullTextSearch>Use</fullTextSearch>
+    <dataHistory>Use</dataHistory>
+    <fillValue xsi:type="core:UndefinedValue"/>
+  </resources>
+  <resources uuid="9b98c3a0-a402-45e4-b3fb-616aa9075b9b">
+    <name>DoNotControl5</name>
+    <synonym>
+      <key>en</key>
+      <value>Do not control5</value>
+    </synonym>
+    <type>
+      <types>Boolean</types>
+    </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <fullTextSearch>Use</fullTextSearch>
+    <dataHistory>Use</dataHistory>
+    <fillValue xsi:type="core:UndefinedValue"/>
+  </resources>
   <dimensions uuid="386855bf-3c8f-4ea7-8070-1a2c3fc224bc">
     <name>AccessGroup</name>
     <synonym>

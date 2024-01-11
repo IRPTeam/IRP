@@ -272,7 +272,7 @@ Scenario: Create catalog ExpenseAndRevenueTypes objects (test data base)
 		| 'e1cib/data/Catalog.ExpenseAndRevenueTypes?ref=b762b13668d0905011eb76684b9f6863'  | 'False'         | ''        | '7'     | 'True'       | 'True'       | 'False'                    | 'Затраты и доходы 3'  | ''                  | 'Expence and revenue 3'  | 'Gider ve gelir 3'        |
 		| 'e1cib/data/Catalog.ExpenseAndRevenueTypes?ref=b762b13668d0905011eb76684b9f6864'  | 'False'         | ''        | '8'     | 'True'       | 'True'       | 'False'                    | 'Затраты и доходы 4'  | ''                  | 'Expence and revenue 4'  | 'Gider ve gelir 4'        |
 		| 'e1cib/data/Catalog.ExpenseAndRevenueTypes?ref=b762b13668d0905011eb76684b9f687f'  | 'False'         | ''        | '9'     | 'False'      | 'True'       | 'False'                    | 'Продажа товаров'     | ''                  | 'Sale of products'       | 'Mal satışı'              |
-		| 'e1cib/data/Catalog.ExpenseAndRevenueTypes?ref=b762b13668d0905011eb76684b9f6860'  | 'False'         | ''        | '10'    | 'True'       | 'False'      | 'False'                    | 'Аренда помещения'    | ''                  | 'Rent'                   | 'Mekan Kiralama'          |
+		| 'e1cib/data/Catalog.ExpenseAndRevenueTypes?ref=b762b13668d0905011eb76684b9f6865'  | 'False'         | ''        | '10'    | 'True'       | 'False'      | 'False'                    | 'Аренда помещения'    | ''                  | 'Rent'                   | 'Mekan Kiralama'          |
 
 Scenario: Create catalog IntegrationSettings objects (test data base)
 

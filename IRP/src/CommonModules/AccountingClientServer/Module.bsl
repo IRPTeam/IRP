@@ -24,15 +24,20 @@ Function GetParametersEditAccounting(Object,
 		                             Filter_LedgerType = Undefined) Export
 	Parameters = New Structure();
 	Parameters.Insert("DocumentRef"       , Object.Ref);
-	Parameters.Insert("MainTableName"     , MainTableName);
 	Parameters.Insert("ArrayOfLedgerTypes", AccountingServer.GetLedgerTypesByCompany(Object.Ref, Object.Date, Object.Company));
-	Parameters.Insert("RowKey"            , CurrentData.Key);
 	Parameters.Insert("AccountingRowAnalytics"  , AccountingRowAnalytics);
 	Parameters.Insert("AccountingExtDimensions" , AccountingExtDimensions);
+	If ValueIsFilled(MainTableName) Then
+		Parameters.Insert("MainTableName"     , MainTableName);
+		Parameters.Insert("RowKey"            , CurrentData.Key);
+	Else
+		Parameters.Insert("MainTableName"     , Undefined);
+		Parameters.Insert("RowKey"            , "");		
+	EndIf;			
 	
 	Parameters.Insert("AccountingAnalytics", New Array());
 	For Each RowAnalytics In AccountingRowAnalytics Do
-		If Not (RowAnalytics.Key = CurrentData.Key Or Not ValueIsFilled(RowAnalytics.Key)) Then
+		If Not (RowAnalytics.Key = Parameters.RowKey Or Not ValueIsFilled(RowAnalytics.Key)) Then
 			Continue;
 		EndIf;
 		
@@ -75,15 +80,13 @@ Function GetParametersEditAccounting(Object,
 EndFunction
 
 Function GetDocumentMainTable(Doc) Export
-	MainTable = "";
+	MainTable = Undefined;
 	If CommonFunctionsClientServer.ObjectHasProperty(Doc, "ItemList") Then
 		MainTable = "ItemList";
 	ElsIf CommonFunctionsClientServer.ObjectHasProperty(Doc, "PaymentList") Then
 		MainTable = "PaymentList";		
 	ElsIf CommonFunctionsClientServer.ObjectHasProperty(Doc, "Transactions") Then
 		MainTable = "Transactions";
-	Else
-		Raise StrTemplate("Main table is not defined [%1]", Doc);
 	EndIf;
 	Return MainTable;
 EndFunction

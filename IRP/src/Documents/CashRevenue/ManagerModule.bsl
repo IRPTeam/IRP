@@ -324,7 +324,9 @@ Function GetAnalytics_Revenues(Parameters)
 	AccountingAnalytics = AccountingServer.GetAccountingAnalyticsResult(Parameters);
 	AccountParameters   = AccountingServer.GetAccountParameters(Parameters);
 
-	Debit = AccountingServer.GetT9011S_AccountsCashAccount(AccountParameters, Parameters.ObjectData.Account);
+	Debit = AccountingServer.GetT9011S_AccountsCashAccount(AccountParameters, 
+	                                                       Parameters.ObjectData.Account,
+	                                                       Parameters.RowData.Currency);
 	If ValueIsFilled(Debit.Account) Then
 		AccountingAnalytics.Debit = Debit.Account;
 	EndIf;

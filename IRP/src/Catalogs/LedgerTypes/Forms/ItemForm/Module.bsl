@@ -128,6 +128,7 @@ Function GetAccountingOperations(LedgerTypeRef)
 	|		ON AccountingOperations.Ref = tmp.AccountingOperation
 	|WHERE
 	|	NOT AccountingOperations.Parent.Ref IS NULL
+	|	AND NOT AccountingOperations.DeletionMark
 	|
 	|ORDER BY
 	|	AccountingOperations.Order

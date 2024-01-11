@@ -37,7 +37,7 @@ Procedure FillDefaultDescriptionsAtServer()
 		ArrayOfPrefix.Add("tr");
 	
 		For Each Prefix In ArrayOfPrefix Do
-			If R(CurrentUserLang).Property(Obj.PredefinedDataName) Then
+			If ValueIsFilled(Obj.PredefinedDataName) And R(CurrentUserLang).Property(Obj.PredefinedDataName) Then
 				Obj["Description_" + CurrentUserLang] = R(CurrentUserLang)[Obj.PredefinedDataName];
 				Obj.Write();
 			EndIf;

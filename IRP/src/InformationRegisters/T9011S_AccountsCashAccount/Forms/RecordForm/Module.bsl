@@ -21,10 +21,22 @@ EndProcedure
 Procedure BeforeWriteAtServer(Cancel, CurrentObject, WriteParameters)
 	If ThisObject.RecordType <> "CashAccount" Then
 		CurrentObject.CashAccount = Undefined;
+		CurrentObject.Currency = Undefined;
 	EndIf;
 EndProcedure
 
 &AtServer
 Procedure SetVisible()
 	Items.CashAccount.Visible = ThisObject.RecordType = "CashAccount";
+	Items.Currency.Visible = ThisObject.RecordType = "CashAccount";
 EndProcedure
+
+&AtClient
+Procedure CashAccountOnChange(Item)
+	If ValueIsFilled(Record.CashAccount) Then
+		Record.Currency = CommonFunctionsServer.GetRefAttribute(Record.CashAccount, "Currency");
+	Else
+		Record.Currency = Undefined;
+	EndIf;
+EndProcedure
+

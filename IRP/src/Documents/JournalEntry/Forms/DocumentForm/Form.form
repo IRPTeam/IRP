@@ -1253,6 +1253,12 @@
             <chooseType>true</chooseType>
             <typeDomainEnabled>true</typeDomainEnabled>
             <textEdit>true</textEdit>
+            <choiceParameterLinks>
+              <name>Filter.LedgerType</name>
+              <datapath xsi:type="form:DataPath">
+                <segments>Object.LedgerType</segments>
+              </datapath>
+            </choiceParameterLinks>
           </extInfo>
         </items>
         <items xsi:type="form:FormGroup">
@@ -1688,6 +1694,12 @@
             <chooseType>true</chooseType>
             <typeDomainEnabled>true</typeDomainEnabled>
             <textEdit>true</textEdit>
+            <choiceParameterLinks>
+              <name>Filter.LedgerType</name>
+              <datapath xsi:type="form:DataPath">
+                <segments>Object.LedgerType</segments>
+              </datapath>
+            </choiceParameterLinks>
           </extInfo>
         </items>
         <items xsi:type="form:FormGroup">
@@ -2215,6 +2227,10 @@
           <horizontalAlign>Left</horizontalAlign>
           <autoFill>true</autoFill>
         </autoCommandBar>
+        <handlers>
+          <event>OnStartEdit</event>
+          <name>RegisterRecordsOnStartEdit</name>
+        </handlers>
         <searchStringAddition>
           <visible>true</visible>
           <enabled>true</enabled>

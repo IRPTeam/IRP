@@ -11,6 +11,7 @@ EndProcedure
 
 Procedure AfterWriteAtServer(Object, Form, CurrentObject, WriteParameters) Export
 	DocumentsClientServer.ChangeTitleGroupTitle(CurrentObject, Form);
+	AccountingServer.AfterWriteAtServer(Object, Form, CurrentObject, WriteParameters);
 EndProcedure
 
 Procedure OnReadAtServer(Object, Form, CurrentObject) Export
@@ -19,6 +20,7 @@ Procedure OnReadAtServer(Object, Form, CurrentObject) Export
 	EndIf;
 	DocumentsClientServer.ChangeTitleGroupTitle(CurrentObject, Form);
 	LockDataModificationPrivileged.LockFormIfObjectIsLocked(Form, CurrentObject);
+	AccountingServer.OnReadAtServer(Object, Form, CurrentObject);
 EndProcedure
 
 #EndRegion

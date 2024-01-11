@@ -238,6 +238,9 @@ Procedure PreparePostingDataTables(Parameters, CurrencyTable, AddInfo = Undefine
 			EndIf;
 		EndDo;
 	EndIf;
+	
+	ExchangeDifference(Parameters);
+	
 EndProcedure
 
 Function GetAdvancesCurrencyRevaluation(DocRef)
@@ -412,72 +415,72 @@ Function ExpandTable(TempTableManager, RecordSet, UseAgreementMovementType, UseC
 	|SELECT
 	|	RecordSet.*,
 	|	CurrencyTable.MovementType AS CurrencyMovementType,
-	|	CASE
+	|	CAST(CASE
 	|		WHEN CurrencyTable.Rate = 0
 	|		OR CurrencyTable.Multiplicity = 0
 	|			THEN 0
 	|		ELSE (RecordSet.NetOfferAmount * CurrencyTable.Rate) / CurrencyTable.Multiplicity
-	|	END AS NetOfferAmount,
-	|	CASE
+	|	END AS Number(15,2)) AS NetOfferAmount,
+	|	CAST(CASE
 	|		WHEN CurrencyTable.Rate = 0
 	|		OR CurrencyTable.Multiplicity = 0
 	|			THEN 0
 	|		ELSE (RecordSet.SalesAmount * CurrencyTable.Rate) / CurrencyTable.Multiplicity
-	|	END AS SalesAmount,
-	|	CASE
+	|	END AS Number(15,2)) AS SalesAmount,
+	|	CAST(CASE
 	|		WHEN CurrencyTable.Rate = 0
 	|		OR CurrencyTable.Multiplicity = 0
 	|			THEN 0
 	|		ELSE (RecordSet.Amount * CurrencyTable.Rate) / CurrencyTable.Multiplicity
-	|	END AS Amount,
-	|	CASE
+	|	END AS Number(15,2)) AS Amount,
+	|	CAST(CASE
 	|		WHEN CurrencyTable.Rate = 0
 	|		OR CurrencyTable.Multiplicity = 0
 	|			THEN 0
 	|		ELSE (RecordSet.ManualAmount * CurrencyTable.Rate) / CurrencyTable.Multiplicity
-	|	END AS ManualAmount,
-	|	CASE
+	|	END AS Number(15,2)) AS ManualAmount,
+	|	CAST(CASE
 	|		WHEN CurrencyTable.Rate = 0
 	|		OR CurrencyTable.Multiplicity = 0
 	|			THEN 0
 	|		ELSE (RecordSet.NetAmount * CurrencyTable.Rate) / CurrencyTable.Multiplicity
-	|	END AS NetAmount,
-	|	CASE
+	|	END AS Number(15,2)) AS NetAmount,
+	|	CAST(CASE
 	|		WHEN CurrencyTable.Rate = 0
 	|		OR CurrencyTable.Multiplicity = 0
 	|			THEN 0
 	|		ELSE (RecordSet.OffersAmount * CurrencyTable.Rate )/ CurrencyTable.Multiplicity
-	|	END AS OffersAmount,
-	|	CASE
+	|	END AS Number(15,2)) AS OffersAmount,
+	|	CAST(CASE
 	|		WHEN CurrencyTable.Rate = 0
 	|		OR CurrencyTable.Multiplicity = 0
 	|			THEN 0
 	|		ELSE (RecordSet.AmountWithTaxes * CurrencyTable.Rate )/ CurrencyTable.Multiplicity
-	|	END AS AmountWithTaxes,
-	|	CASE
+	|	END AS Number(15,2)) AS AmountWithTaxes,
+	|	CAST(CASE
 	|		WHEN CurrencyTable.Rate = 0
 	|		OR CurrencyTable.Multiplicity = 0
 	|			THEN 0
 	|		ELSE (RecordSet.Commission * CurrencyTable.Rate )/ CurrencyTable.Multiplicity
-	|	END AS Commission,
-	|	CASE
+	|	END AS Number(15,2)) AS Commission,
+	|	CAST(CASE
 	|		WHEN CurrencyTable.Rate = 0
 	|		OR CurrencyTable.Multiplicity = 0
 	|			THEN 0
 	|		ELSE (RecordSet.AmountTax * CurrencyTable.Rate )/ CurrencyTable.Multiplicity
-	|	END AS AmountTax,
-	|	CASE
+	|	END AS Number(15,2)) AS AmountTax,
+	|	CAST(CASE
 	|		WHEN CurrencyTable.Rate = 0
 	|		OR CurrencyTable.Multiplicity = 0
 	|			THEN 0
 	|		ELSE (RecordSet.Price * CurrencyTable.Rate )/ CurrencyTable.Multiplicity
-	|	END AS Price,
-	|	CASE
+	|	END AS Number(15,2)) AS Price,
+	|	CAST(CASE
 	|		WHEN CurrencyTable.Rate = 0
 	|		OR CurrencyTable.Multiplicity = 0
 	|			THEN 0
 	|		ELSE (RecordSet.ConsignorPrice * CurrencyTable.Rate )/ CurrencyTable.Multiplicity
-	|	END AS ConsignorPrice,
+	|	END AS Number(15,2)) AS ConsignorPrice,
 	|	CurrencyTable.MovementType.DeferredCalculation AS DeferredCalculation,
 	|	CurrencyTable.MovementType.Currency AS Currency
 	|FROM
@@ -503,17 +506,17 @@ Function ExpandTable(TempTableManager, RecordSet, UseAgreementMovementType, UseC
 	|SELECT
 	|	RecordSet.*,
 	|	VALUE(ChartOfCharacteristicTypes.CurrencyMovementType.SettlementCurrency),
-	|	RecordSet.NetOfferAmount,
-	|	RecordSet.SalesAmount,
-	|	RecordSet.Amount,
-	|	RecordSet.ManualAmount,
-	|	RecordSet.NetAmount,
-	|	RecordSet.OffersAmount,
-	|	RecordSet.AmountWithTaxes,
-	|	RecordSet.Commission,
-	|	RecordSet.AmountTax,
-	|	RecordSet.Price,
-	|	RecordSet.ConsignorPrice,
+	|	CAST(RecordSet.NetOfferAmount AS Number(15,2)) AS NetOfferAmount,
+	|	CAST(RecordSet.SalesAmount AS Number(15,2)) AS SalesAmount,
+	|	CAST(RecordSet.Amount AS Number(15,2)) AS Amount,
+	|	CAST(RecordSet.ManualAmount AS Number(15,2)) AS ManualAmount,
+	|	CAST(RecordSet.NetAmount AS Number(15,2)) AS NetAmount,
+	|	CAST(RecordSet.OffersAmount AS Number(15,2)) AS OffersAmount,
+	|	CAST(RecordSet.AmountWithTaxes AS Number(15,2)) AS AmountWithTaxes,
+	|	CAST(RecordSet.Commission AS Number(15,2)) AS Commission,
+	|	CAST(RecordSet.AmountTax AS Number(15,2)) AS AmountTax,
+	|	CAST(RecordSet.Price AS Number(15,2)) AS Price,
+	|	CAST(RecordSet.ConsignorPrice AS Number(15,2)) AS ConsignorPrice,
 	|	FALSE,
 	|	RecordSet.Currency
 	|FROM
@@ -761,6 +764,157 @@ Procedure ExcludePostingDataTable(Parameters, RegMetadata) Export
 		Parameters.Insert("MultiCurrencyExcludePostingDataTables", Array);
 	EndIf;
 EndProcedure
+
+#Region EXCHANGE_DIFFERENCE
+
+Procedure ExchangeDifference(Parameters)
+	If Parameters.Metadata <> Metadata.Documents.MoneyTransfer Then
+		Return;
+	EndIf;
+	
+	If Parameters.Object.SendCurrency = Parameters.Object.ReceiveCurrency Then
+		Return; // is not currency exchange
+	EndIf;
+	
+	TransitIncoming = Parameters.PostingDataTables[Metadata.AccumulationRegisters.R3021B_CashInTransitIncoming].PrepareTable;
+	Expenes = Parameters.PostingDataTables[Metadata.AccumulationRegisters.R5022T_Expenses].PrepareTable;	
+	Revenues = Parameters.PostingDataTables[Metadata.AccumulationRegisters.R5021T_Revenues].PrepareTable;	
+	Accounting = Parameters.PostingDataTables[Metadata.AccumulationRegisters.T1040T_AccountingAmounts].PrepareTable;
+	
+	Query = New Query();
+	Query.TempTablesManager = Parameters.TempTablesManager;
+	Query.Text = 
+	"SELECT *
+	|INTO TransitIncoming
+	|FROM &TransitIncoming AS TransitIncoming";
+	Query.SetParameter("TransitIncoming", TransitIncoming);
+	Query.Execute();
+	
+	ReplaceAmountInTransactionCurrency(Parameters.TempTablesManager, AccumulationRecordType.Receipt, TransitIncoming);
+	ReplaceAmountInTransactionCurrency(Parameters.TempTablesManager, AccumulationRecordType.Expense, TransitIncoming);
+	
+	Query.Text = 
+	"SELECT
+	|	*
+	|INTO TransitIncomingReplaced
+	|FROM
+	|	&TransitIncoming AS TransitIncoming
+	|;
+	|
+	|////////////////////////////////////////////////////////////////////////////////
+	|SELECT
+	|	TransitIncomingExpense.RecordType AS ExpenseRecordType,
+	|	TransitIncomingReceipt.RecordType AS ReceiptRecordType,
+	|	TransitIncomingExpense.Period AS Period,
+	|	TransitIncomingReceipt.Amount - TransitIncomingExpense.Amount AS Amount,
+	|	TransitIncomingReceipt.Commission - TransitIncomingExpense.Commission AS Commission,
+	|	TransitIncomingReceipt.*
+	|INTO Diff
+	|FROM
+	|	TransitIncomingReplaced AS TransitIncomingReceipt
+	|		INNER JOIN TransitIncomingReplaced AS TransitIncomingExpense
+	|		ON TransitIncomingReceipt.Company = TransitIncomingExpense.Company
+	|		AND TransitIncomingReceipt.Branch = TransitIncomingExpense.Branch
+	|		AND TransitIncomingReceipt.Account = TransitIncomingExpense.Account
+	|		AND TransitIncomingReceipt.CurrencyMovementType = TransitIncomingExpense.CurrencyMovementType
+	|		AND TransitIncomingReceipt.Currency = TransitIncomingExpense.Currency
+	|		AND TransitIncomingReceipt.TransactionCurrency = TransitIncomingExpense.TransactionCurrency
+	|		AND TransitIncomingReceipt.Basis = TransitIncomingExpense.Basis
+	|		AND (TransitIncomingReceipt.RecordType = VALUE(AccumulationRecordType.Receipt))
+	|		AND (TransitIncomingExpense.RecordType = VALUE(AccumulationRecordType.Expense))
+	|		AND (NOT TransitIncomingReceipt.Period IS NULL)
+	|		AND (NOT TransitIncomingExpense.Period IS NULL)
+	|;
+	|
+	|////////////////////////////////////////////////////////////////////////////////
+	|SELECT
+	|	CASE
+	|		WHEN Diff.Amount < 0
+	|			THEN Diff.ReceiptRecordType
+	|		ELSE Diff.ExpenseRecordType
+	|	END AS RecordType,
+	|	CASE
+	|		WHEN Diff.Amount < 0
+	|			THEN -Diff.Amount
+	|		ELSE Diff.Amount
+	|	END AS Amount,
+	|	CASE
+	|		WHEN Diff.Commission < 0
+	|			THEN -Diff.Commission
+	|		ELSE Diff.Commission
+	|	END AS Comission,
+	|	Diff.*,
+	|	ExpenseRevenueAnalytics.*
+	|FROM
+	|	Diff AS Diff
+	|		LEFT JOIN ExpenseRevenueAnalytics AS ExpenseRevenueAnalytics
+	|		On Diff.Key = ExpenseRevenueAnalytics.Key";
+		
+	Query.SetParameter("TransitIncoming", TransitIncoming);
+	QueryResult = Query.Execute();
+	QueryTable = QueryResult.Unload();
+	For Each Row In QueryTable Do
+		If Not ValueIsFilled(Row.Amount) And Not ValueIsFilled(Row.Commission) Then
+			Continue; // not currency difference
+		EndIf;
+		
+		FillPropertyValues(TransitIncoming.Add(), Row);
+		
+		Accounting_NewRow = Accounting.Add();
+		FillPropertyValues(Accounting_NewRow, Row);
+		
+		If Row.RecordType = AccumulationRecordType.Receipt Then
+			Revenues_NewRow = Revenues.Add();
+			FillPropertyValues(Revenues_NewRow, Row);
+			Revenues_NewRow.ProfitLossCenter = Row.ProfitCenter;
+			Accounting_NewRow.Operation = Catalogs.AccountingOperations.MoneyTransfer_DR_R3021B_CashInTransit_CR_R5021T_Revenues;
+		Else
+			Expenses_NewRow = Expenes.Add();
+			FillPropertyValues(Expenses_NewRow, Row);
+			Expenses_NewRow.ProfitLossCenter = Row.LossCenter;
+			Accounting_NewRow.Operation = Catalogs.AccountingOperations.MoneyTransfer_DR_R5022T_Expenses_CR_R3021B_CashInTransit;
+		EndIf;
+	EndDo;
+	
+EndProcedure
+
+Procedure ReplaceAmountInTransactionCurrency(TempTablesManager, RecordType, TransitIncoming)
+	Query = New Query();
+	Query.TempTablesManager = TempTablesManager;
+	Query.Text = 
+	"SELECT *
+	|FROM TransitIncoming AS TransitIncoming
+	|WHERE
+	|	TransitIncoming.RecordType = &RecordType
+	|	AND (TransitIncoming.CurrencyMovementType = VALUE(ChartOfCharacteristicTypes.CurrencyMovementType.SettlementCurrency)
+	|		OR TransitIncoming.TransactionCurrency = TransitIncoming.Currency)";
+	Query.SetParameter("RecordType", RecordType);
+	QueryResult = Query.Execute();
+	QueryTable = QueryResult.Unload();
+	
+	TransactionCurrencyType = ChartsOfCharacteristicTypes.CurrencyMovementType.SettlementCurrency;
+	
+	TransactionRow = QueryTable.FindRows(New Structure("CurrencyMovementType", TransactionCurrencyType))[0];
+	
+	For Each Row In QueryTable Do
+		If Row.CurrencyMovementType <> TransactionCurrencyType Then
+			Filter = New Structure();
+			Filter.Insert("CurrencyMovementType", TransactionCurrencyType);
+			Filter.Insert("RecordType", RecordType);
+			TransitIncomingRows = TransitIncoming.FindRows(Filter);
+			If TransitIncomingRows.Count() <> 1 Then
+				Raise StrTemplate("Found [%1] rows in transit incoming", TransitIncomingRows.Count());
+			EndIf;
+			
+			TransitIncomingRows[0].Amount = Row.Amount;
+			TransitIncomingRows[0].Commission = Row.Commission;
+			
+			Break;
+		EndIf;
+	EndDo;
+EndProcedure
+
+#EndRegion
 
 #Region CURRENCY_REVALUATION
 

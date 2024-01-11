@@ -21,6 +21,7 @@ Scenario: 960001 preparation (access rights system registers)
 	And I close TestClient session
 	Given I open new TestClient session or connect the existing one
 	When Create catalog Users and AccessProfiles objects (LimitedAccess)
+	When Create catalog AccessGroups objects (LimitedAccessRegisters)
 	* Create registers for tests
 		Given I open hyperlink "e1cib/app/DataProcessor.Unit_RunTest"
 		And I go to line in "TestList" table
@@ -58,6 +59,34 @@ Scenario: 960001 preparation (access rights system registers)
 		And I finish line editing in "Users" table
 	* Check ObjectAccess table
 		When filling Access key in the AccessGroups
+	And I click "Save and close" button
+* Add new users in the Unit profile profile
+	Given I open hyperlink "e1cib/list/Catalog.AccessGroups"
+	And I go to line in "List" table
+		| 'Description'          |
+		| 'Unit access group'    |
+	And I select current line in "List" table
+	And I move to "Users" tab
+	And I finish line editing in "Profiles" table
+	And in the table "Users" I click the button named "UsersAdd"
+	And I click choice button of "User" attribute in "Users" table
+	And I go to line in "List" table
+		| 'Description'   |
+		| 'LimitedAccessRegisters' |
+	And I select current line in "List" table
+	And I finish line editing in "Users" table
+	And in the table "Users" I click the button named "UsersAdd"
+	And I click choice button of "User" attribute in "Users" table
+	And I go to line in "List" table
+		| 'Description'   |
+		| 'LARegAccessDeny' |
+	And I select current line in "List" table
+	And I finish line editing in "Users" table
+	And I click "Save and close" button
+* Save user access group
+	Given I open hyperlink "e1cib/data/Catalog.AccessGroups?ref=b7b4b80c227e00a211eeb0635de1ba68"
+	And I click "Save and close" button
+	Given I open hyperlink "e1cib/data/Catalog.AccessGroups?ref=b7b4b80c227e00a211eeb070971c2f4d"
 	And I click "Save and close" button
 	// * Check ObjectAccess register
 	// 	Given I open hyperlink "e1cib/list/InformationRegister.T9101A_ObjectAccessRegisters"
@@ -1402,3 +1431,33 @@ Scenario: 962142 check R9570T_AdditionalDeduction register access (LimitedAccess
 	And I close all client application windows
 	Given I open hyperlink "e1cib/list/AccumulationRegister.R9570T_AdditionalDeduction"
 	Then the number of "List" table lines is "равно" "4"
+
+Scenario: 962080 LimitedAccessRegisters - AccumulationRegisters R2001T Sales, Do not control Company and Store
+	And I close all client application windows
+	And I connect "TestAdmin" TestClient using "LimitedAccessRegisters" login and "" password
+	Given I open hyperlink "e1cib/list/AccumulationRegister.R2001T_Sales"
+	And "List" table contains lines
+		| 'Company'                       | 'Branch'                       |
+		| 'Company Read and Write Access' | 'Branch Read and Write Access' |
+		| 'Company Only read access'      | 'Branch Read and Write Access' |
+		| 'Company Read and Write Access' | 'Branch Only read access'      |
+		| 'Company Only read access'      | 'Branch Only read access'      |
+		| 'Company Read and Write Access' | 'Branch access deny'           |
+		| 'Company Only read access'      | 'Branch access deny'           |
+		| 'Company access deny'           | 'Branch access deny'           |
+	Then the number of "List" table lines is "равно" "7"
+	And I close "TestAdmin" TestClient
+
+Scenario: 962081 LimitedAccessRegisters - AccumulationRegisters R2001T Sales, Company and Branch access deny
+	And I close all client application windows
+	And I connect "TestAdmin1" TestClient using "LARegAccessDeny" login and "" password
+	Given I open hyperlink "e1cib/list/AccumulationRegister.R2001T_Sales"
+	Then "List" table contains lines
+		| 'Company'                       | 'Branch'                       |
+		| 'Company Read and Write Access' | 'Branch Read and Write Access' |
+		| 'Company Only read access'      | 'Branch Read and Write Access' |
+		| 'Company Read and Write Access' | 'Branch Only read access'      |
+		| 'Company Only read access'      | 'Branch Only read access'      |
+		| 'Company access deny'           | 'Branch access deny'           |
+	Then the number of "List" table lines is "равно" "5"
+	And I close "TestAdmin1" TestClient

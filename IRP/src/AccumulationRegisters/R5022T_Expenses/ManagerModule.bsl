@@ -99,7 +99,7 @@ Procedure Expenses_LoadRecords(CalculationMovementCostRef) Export
 
 		PostingDataTables = New Map();
 		
-		ExpenseTableSettings = PostingServer.PostingTableSettings(RecordSet.Metadata().Name, ExpenseTable, RecordSet);
+		ExpenseTableSettings = PostingServer.PostingTableSettings(ExpenseTable, RecordSet);
 		PostingDataTables.Insert(RecordSet.Metadata(), ExpenseTableSettings);
 		
 		ArrayOfPostingInfo = New Array();

@@ -339,8 +339,8 @@ EndProcedure
 Procedure FillConsignor(FiscalStringData, ItemRow)
 	If ValueIsFilled(ItemRow.Consignor) Then
 		FiscalStringData.VendorData.VendorINN = ItemRow.Consignor.TaxID;
-		FiscalStringData.VendorData.VendorName = String(ItemRow.Consignor);
-		FiscalStringData.VendorData.VendorPhone = "";
+		FiscalStringData.VendorData.VendorName = ItemRow.Consignor.LocalFullDescription;
+		FiscalStringData.VendorData.VendorPhone = ItemRow.Consignor.MainPhoneNumber;
 		FiscalStringData.CalculationAgent = 5;
 	EndIf;
 	

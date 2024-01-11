@@ -248,6 +248,7 @@ Procedure RowDragCheck(Item, DragParameters, StandardProcessing)
 	If FindStartElement.LineNumber < FindEndElement.LineNumber Then
 		Return;
 	Else
+		//@skip-check unknown-method-property
 		For Index = FindEndElement.LineNumber To FindStartElement.LineNumber - 2 Do
 			If Not Object.RowParts[Index].isWhitespace Then
 				Return;

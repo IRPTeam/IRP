@@ -69,11 +69,6 @@ Procedure BeforeDelete(Cancel)
 EndProcedure
 
 Procedure Posting(Cancel, PostingMode)
-	If ThisObject.StatusType <> Enums.RetailReceiptStatusTypes.Completed Then
-		UndopostingServer.Undopost(ThisObject, Cancel, ThisObject.AdditionalProperties);
-		RowIDInfoPrivileged.UndoPosting_RowIDUndoPosting(ThisObject, Cancel);
-		Return;
-	EndIf;
 	PostingServer.Post(ThisObject, Cancel, PostingMode, ThisObject.AdditionalProperties);
 	RowIDInfoPrivileged.Posting_RowID(ThisObject, Cancel, PostingMode);
 EndProcedure

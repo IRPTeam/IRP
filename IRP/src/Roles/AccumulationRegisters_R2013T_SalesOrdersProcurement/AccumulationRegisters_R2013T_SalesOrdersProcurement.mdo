@@ -1,0 +1,8 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<mdclass:Role xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="dbaf9b52-7055-479c-b9e0-2cd1b64b3dd8">
+  <name>AccumulationRegisters_R2013T_SalesOrdersProcurement</name>
+  <synonym>
+    <key>en</key>
+    <value>AccumulationRegisters R2013T SalesOrdersProcurement</value>
+  </synonym>
+</mdclass:Role>

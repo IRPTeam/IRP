@@ -42,7 +42,6 @@ EndProcedure
 Function PostingGetPostingDataTables(Ref, Cancel, PostingMode, Parameters, AddInfo = Undefined) Export
 	PostingDataTables = New Map;
 	PostingServer.SetPostingDataTables(PostingDataTables, Parameters);
-	
 	CashInTransit = Metadata.AccumulationRegisters.CashInTransit;
 	PostingServer.SetPostingDataTable(PostingDataTables, Parameters, CashInTransit.Name, Parameters.DocumentDataTables[CashInTransit.Name]);
 	
@@ -125,6 +124,7 @@ Procedure Calculate_BatchKeysInfo(Ref, Parameters, AddInfo)
 	|WHERE
 	|	RetailReturnReceiptItemList.Ref = &Ref
 	|	AND NOT RetailReturnReceiptItemList.IsService
+	|	AND	RetailReturnReceiptItemList.Ref.StatusType = VALUE(ENUM.RetailReceiptStatusTypes.Completed)
 	|GROUP BY
 	|	RetailReturnReceiptItemList.ItemKey,
 	|	RetailReturnReceiptItemList.Store,
@@ -190,6 +190,7 @@ Procedure Calculate_BatchKeysInfo(Ref, Parameters, AddInfo)
 	|	tmpItemList AS tmpItemList
 	|		LEFT JOIN tmpSourceOfOrigins AS tmpSourceOfOrigins
 	|		ON tmpItemList.Key = tmpSourceOfOrigins.Key
+	|
 	|;
 	|
 	|////////////////////////////////////////////////////////////////////////////////
@@ -206,6 +207,7 @@ Procedure Calculate_BatchKeysInfo(Ref, Parameters, AddInfo)
 	|			BatchKeys.CreateBatch
 	|		FROM
 	|			tmpBatchKeysInfo AS BatchKeys)
+	|	AND StatusType = VALUE(ENUM.RetailReceiptStatusTypes.Completed)
 	|;
 	|
 	|////////////////////////////////////////////////////////////////////////////////
@@ -233,9 +235,8 @@ Procedure Calculate_BatchKeysInfo(Ref, Parameters, AddInfo)
 	EndDo;
 
 	T6020S_BatchKeysInfo = Metadata.InformationRegisters.T6020S_BatchKeysInfo;
-	T6020SSettings = PostingServer.PostingTableSettings(T6020S_BatchKeysInfo.Name, BatchKeysInfo, Parameters.Object.RegisterRecords.T6020S_BatchKeysInfo);
-	T6020SSettings.WriteInTransaction = Parameters.IsReposting;
-	Parameters.PostingDataTables.Insert(T6020S_BatchKeysInfo, T6020SSettings);
+	PostingServer.SetPostingDataTable(Parameters.PostingDataTables, Parameters, T6020S_BatchKeysInfo.Name, BatchKeysInfo);
+	Parameters.PostingDataTables[T6020S_BatchKeysInfo].WriteInTransaction = Parameters.IsReposting;
 	
 	CurrenciesServer.PreparePostingDataTables(Parameters, CurrencyTable, AddInfo);
 	CurrenciesServer.ExcludePostingDataTable(Parameters, T6020S_BatchKeysInfo);
@@ -706,7 +707,9 @@ Function CashInTransit()
 	|	Document.RetailReturnReceipt.Payments AS Payments
 	|WHERE
 	|	Payments.Ref = &Ref
-	|	AND Payments.PostponedPayment";
+	|	AND Payments.PostponedPayment
+	|	AND Payments.Ref.StatusType = VALUE(ENUM.RetailReceiptStatusTypes.Completed)";
+	
 EndFunction
 
 Function R9010B_SourceOfOriginStock()
@@ -1155,7 +1158,9 @@ Function T3010S_RowIDInfo()
 		   |		ON RowIDInfo.Ref = &Ref
 		   |		AND ItemList.Ref = &Ref
 		   |		AND RowIDInfo.Key = ItemList.Key
-		   |		AND RowIDInfo.Ref = ItemList.Ref";
+		   |		AND RowIDInfo.Ref = ItemList.Ref
+		   |WHERE
+		   |	ItemList.Ref.StatusType = VALUE(ENUM.RetailReceiptStatusTypes.Completed)		";
 EndFunction
 
 Function T6010S_BatchesInfo()
@@ -1245,7 +1250,8 @@ Function R8014T_ConsignorSales()
 		|		LEFT JOIN SourceOfOrigins AS SourceOfOrigins
 		|		ON ItemList.Key = SourceOfOrigins.Key
 		|WHERE
-		|	ItemList.IsConsignorStocks";
+		|	ItemList.IsConsignorStocks
+		|	AND ItemList.StatusType = VALUE(ENUM.RetailReceiptStatusTypes.Completed)";
 EndFunction
 
 #EndRegion

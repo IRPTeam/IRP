@@ -24,6 +24,7 @@ EndFunction
 // * ProcedurePath - String - 
 // * JobLimitCount - Number - If = 0 then all tasks are launched simultaneously.
 // * StopOnErrorAnyJob - Boolean -
+// * CallbackWhenAllJobsDone - Boolean -
 // * JobSettings - Array Of See JobSettings 
 Function JobDataSettings() Export
 	Settings = New Structure;
@@ -33,6 +34,7 @@ Function JobDataSettings() Export
 	Settings.Insert("JobLimitCount", 5);
 	Settings.Insert("StopOnErrorAnyJob", True);
 	Settings.Insert("JobSettings", New Array);
+	Settings.Insert("CallbackWhenAllJobsDone", True);
 	Return Settings;
 EndFunction
 
@@ -43,6 +45,7 @@ EndFunction
 // * Percent - Number - 
 // * Log - String - 
 // * Data - String - 
+// * Speed - String - 
 // * End - Boolean - 
 Function NotifySettings() Export
 	Settings = New Structure;
@@ -50,6 +53,7 @@ Function NotifySettings() Export
 	Settings.Insert("Log", "");
 	Settings.Insert("DataAddress", Undefined);
 	Settings.Insert("End", False);
+	Settings.Insert("Speed", "");
 	Return Settings;
 EndFunction
 
@@ -191,7 +195,7 @@ Procedure FillJobInfo(Job, JobRow)
 	MsgArray = New Array; // Array Of String
 	
 	If JobRow.NonJobData = Undefined Then
-		UsrMsg = Job.GetUserMessages();
+		UsrMsg = Job.GetUserMessages(True);
 		If Job.State = BackgroundJobState.Active Then
 			JobRow.Status = Enums.JobStatus.Active;
 		ElsIf Job.State = BackgroundJobState.Canceled Then
@@ -204,7 +208,7 @@ Procedure FillJobInfo(Job, JobRow)
 			JobRow.Status = Enums.JobStatus.EmptyRef();
 		EndIf;
 	Else
-		UsrMsg = GetUserMessages();
+		UsrMsg = GetUserMessages(True);
 		JobRow.Status = Job.State;
 	EndIf;
 	
@@ -228,9 +232,16 @@ Procedure FillJobInfo(Job, JobRow)
 			If Not IsBlankString(NotifySettings.Log) Then
 				LogData.Insert(0, NotifySettings.Log);
 			EndIf;
-			
+			If Not IsBlankString(NotifySettings.Speed) Then
+				JobRow.Speed = NotifySettings.Speed;
+			EndIf;
 			If NotifySettings.End Then
 				JobRow.DataAddress = NotifySettings.DataAddress;
+				NotifySettings.Percent = 100;
+			EndIf;
+			If NotifySettings.Percent > 0 Then
+				JobRow.Percent = NotifySettings.Percent;
+				JobRow.PercentIndicator = Left("|||||||||||||||||||||||||||||||||||||||||||||||||", Int(NotifySettings.Percent / 2));
 			EndIf;
 		Else
 			MsgArray.Insert(0, Message.Text);
@@ -255,7 +266,7 @@ EndProcedure
 // Get jobs result.
 // 
 // Parameters:
-//  JobList Job list
+//  JobList - See CommonForm.BackgroundMultiJob.JobList
 // 
 // Returns:
 //  Array Of Structure:
@@ -265,10 +276,21 @@ Function GetJobsResult(JobList) Export
 	
 	Array = New Array; // Array Of Structure
 	For Each Row In JobList Do
-		Str = New Structure;
-		Str.Insert("Result", Row.Status = Enums.JobStatus.Completed);
-		Str.Insert("CacheKey", Row.DataAddress);
-		Array.Add(Str);
+		
+		If Row.CallbackDone Then
+			Continue;
+		EndIf;
+		
+		If Row.Status = Enums.JobStatus.Completed 
+			OR Row.Status = Enums.JobStatus.Failed Then
+			Str = New Structure;
+			Str.Insert("Result", Row.Status = Enums.JobStatus.Completed);
+			Str.Insert("CacheKey", Row.DataAddress);
+			Array.Add(Str);
+		
+			Row.CallbackDone = True;
+		EndIf;
+		
 	EndDo;
 	
 	Return Array;

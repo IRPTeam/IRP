@@ -241,7 +241,6 @@ Function GetLinkedDocumentsFilter_RRR(Object) Export
 	Filter.Insert("TransactionTypeRGR" , PredefinedValue("Enum.RetailGoodsReceiptTransactionTypes.ReturnFromCustomer"));
 	Filter.Insert("RetailCustomer"     , Object.RetailCustomer);
 	
-	
 	Filter.Insert("Ref"                  , Object.Ref);
 
 	VisibleFields = New Structure();

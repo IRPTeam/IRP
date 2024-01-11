@@ -97,8 +97,6 @@ Function UploadPicture(File, Volume) Export
 		IntegrationSettings = PictureViewerServer.GetIntegrationSettingsFile();
 	EndIf;
 
-	
-
 	FileID = String(New UUID());
 	FileInfo.FileID = FileID;
 	FileInfo.FileName = File.FileRef.Name;

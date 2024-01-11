@@ -3291,7 +3291,7 @@
       </title>
       <id>25</id>
       <valueType>
-        <types>DefinedType.typePercent</types>
+        <types>DefinedType.typeAmount</types>
       </valueType>
       <view>
         <common>true</common>

@@ -17,6 +17,9 @@ Scenario: _970001 filling in test data base
 When set True value to the constant
 When set True value to the constant Use consolidated retail sales
 When set True value to the constant Use commission trading
+When set True value to the constant Use accounting
+When set True value to the constant Use salary
+When set True value to the constant Use retail orders
 When Create catalog ExternalDataProc objects (test data base)
 * Add ExternalDataProc
 		* Discount
@@ -86,7 +89,7 @@ When Create information register Taxes records (test data base)
 		Given I open hyperlink "e1cib/list/Catalog.Companies"
 		And I go to line in "List" table
 						| 'Description'         |
-						| 'Own company 1'       |
+						| 'Own company 2'       |
 		And I select current line in "List" table
 		And I move to "Tax types" tab
 		And I go to line in "CompanyTaxes" table
@@ -122,6 +125,7 @@ When Create document InventoryTransferOrder objects (test data base)
 When Create document OpeningEntry objects (test data base)
 When Create document OutgoingPaymentOrder objects (test data base)
 When Create document PhysicalCountByLocation objects (test data base)
+When Create document CalculationMovementCosts objects (test data base)
 When Create document PhysicalInventory objects (test data base)
 When Create document PlannedReceiptReservation objects (test data base)
 When Create document PriceList objects (test data base)
@@ -156,6 +160,8 @@ When Create information register PartnerSegments records (test data base)
 When Create information register TaxSettings records (test data base)
 When Create information register UserSettings records (test data base)
 When Create document CashStatement objects  (test data base)
+When Create document ForeignCurrencyRevaluation objects (test data base)
+When Create document MoneyTransfer objects (test data base)
 When Create catalog PartnerItems objects (test data base)
 * Hardware
 	* Instal fiscal driver
@@ -336,6 +342,21 @@ When Create catalog PartnerItems objects (test data base)
 		Then I select all lines of "List" table
 		And in the table "List" I click the button named "ListContextMenuPost"
 		And Delay "3"
+* Posting WorkOrder
+		Given I open hyperlink "e1cib/list/Document.WorkOrder"
+		Then I select all lines of "List" table
+		And in the table "List" I click the button named "ListContextMenuPost"
+ 		And Delay "3"
+* Posting WorkSheet
+		Given I open hyperlink "e1cib/list/Document.WorkSheet"
+		Then I select all lines of "List" table
+		And in the table "List" I click the button named "ListContextMenuPost"
+ 		And Delay "3"
+* Posting Shipment confirmation
+		Given I open hyperlink "e1cib/list/Document.ShipmentConfirmation"
+		Then I select all lines of "List" table
+		And in the table "List" I click the button named "ListContextMenuPost"
+ 		And Delay "3"
 * Posting Sales invoice
 		And I execute 1C:Enterprise script at server
 			| "Documents.ShipmentConfirmation.FindByNumber(3).GetObject().Write(DocumentWriteMode.Posting);"    |
@@ -383,11 +404,6 @@ When Create catalog PartnerItems objects (test data base)
  		And Delay "3"
 * Posting Goods receipt
 		Given I open hyperlink "e1cib/list/Document.GoodsReceipt"
-		Then I select all lines of "List" table
-		And in the table "List" I click the button named "ListContextMenuPost"
- 		And Delay "3"
-* Posting Shipment confirmation
-		Given I open hyperlink "e1cib/list/Document.ShipmentConfirmation"
 		Then I select all lines of "List" table
 		And in the table "List" I click the button named "ListContextMenuPost"
  		And Delay "3"
@@ -457,16 +473,6 @@ When Create catalog PartnerItems objects (test data base)
 		Then I select all lines of "List" table
 		And in the table "List" I click the button named "ListContextMenuPost"
  		And Delay "3"
-* Posting WorkOrder
-		Given I open hyperlink "e1cib/list/Document.WorkOrder"
-		Then I select all lines of "List" table
-		And in the table "List" I click the button named "ListContextMenuPost"
- 		And Delay "3"
-* Posting WorkSheet
-		Given I open hyperlink "e1cib/list/Document.WorkSheet"
-		Then I select all lines of "List" table
-		And in the table "List" I click the button named "ListContextMenuPost"
- 		And Delay "3"
 * Posting CashRevenue
 		Given I open hyperlink "e1cib/list/Document.CashRevenue"
 		Then I select all lines of "List" table
@@ -532,4 +538,22 @@ When Create catalog PartnerItems objects (test data base)
 		Then I select all lines of "List" table
 		And in the table "List" I click the button named "ListContextMenuPost"
 		And Delay "3"
+* Posting MoneyTransfer
+		Given I open hyperlink "e1cib/list/Document.MoneyTransfer"
+		Then I select all lines of "List" table
+		And in the table "List" I click the button named "ListContextMenuPost"
+		And Delay "3"
+* Posting CalculationMovementCosts
+		Given I open hyperlink "e1cib/list/Document.CalculationMovementCosts"
+		Then I select all lines of "List" table
+		And in the table "List" I click the button named "ListContextMenuPost"
+		And Delay "3"
+* Posting ForeignCurrencyRevaluation
+		Given I open hyperlink "e1cib/list/Document.ForeignCurrencyRevaluation"
+		Then I select all lines of "List" table
+		And in the table "List" I click the button named "ListContextMenuPost"
+		And Delay "3"
+When set False value to the constant DisableLinkedRowsIntegrity
 And I close all client application windows
+
+

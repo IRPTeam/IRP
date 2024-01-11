@@ -888,11 +888,11 @@ Procedure Write_SelfRecords(Parameters,
 	
 		// Currency calculation
 		PostingDataTables = New Map();
-		RecordSet_AdvancesSettings = PostingServer.PostingTableSettings(RecordSet_Advances.Metadata().Name, TableAdvances, RecordSet_Advances);
+		RecordSet_AdvancesSettings = PostingServer.PostingTableSettings(TableAdvances, RecordSet_Advances);
 		PostingDataTables.Insert(RecordSet_Advances.Metadata()         , RecordSet_AdvancesSettings);
-		RecordSet_TransactionsSettings = PostingServer.PostingTableSettings(RecordSet_Transactions.Metadata().Name, TableTransactions, RecordSet_Transactions);
+		RecordSet_TransactionsSettings = PostingServer.PostingTableSettings(TableTransactions, RecordSet_Transactions);
 		PostingDataTables.Insert(RecordSet_Transactions.Metadata()     , RecordSet_TransactionsSettings);
-		RecordSet_AccountingAmountsSettings = PostingServer.PostingTableSettings(RecordSet_AccountingAmounts.Metadata().Name, TableAccountingAmounts, RecordSet_AccountingAmounts);
+		RecordSet_AccountingAmountsSettings = PostingServer.PostingTableSettings(TableAccountingAmounts, RecordSet_AccountingAmounts);
 		PostingDataTables.Insert(RecordSet_AccountingAmounts.Metadata(), RecordSet_AccountingAmountsSettings);
 		
 		ArrayOfPostingInfo = New Array();

@@ -11,8 +11,19 @@ Procedure OnCreateAtServer(Cancel, StandardProcessing)
 	
 	FilterIsSet = False;
 	For Each FilterItem In Parameters.Filter Do
-		If FilterItem.Key = "LedgerTypeVariant" Then
-			ThisObject.LedgerTypeVariant = FilterItem.Value;
+		If FilterItem.Key = "LedgerTypeVariant" Or FilterItem.Key = "LedgerType" Then
+			
+			FilterValueType = TypeOf(FilterItem.Value);
+			
+			If FilterValueType = Type("CatalogRef.LedgerTypeVariants") Then
+				_LedgerTypeVariant = FilterItem.Value;
+			ElsIf FilterValueType = Type("CatalogRef.LedgerTypes") Then
+				_LedgerTypeVariant = FilterItem.Value.LedgerTypeVariant;
+			Else
+				Raise StrTemplate("Unknown filter type [%1]", FilterValueType);
+			EndIf;
+			
+			ThisObject.LedgerTypeVariant = _LedgerTypeVariant;
 			Items.LedgerTypeVariantFilter.Enabled = False;
 			FilterIsSet = True;
 		EndIf;

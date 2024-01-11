@@ -5,6 +5,7 @@ Function RECOGNIZE_SPEECH() Export
 	If AppRun = Undefined Then
 		Return Undefined;
 	Else
+		//@skip-check unknown-method-property
 		Return AppRun.AdditionalData.Get("query").Value;
 	EndIf;
 EndFunction

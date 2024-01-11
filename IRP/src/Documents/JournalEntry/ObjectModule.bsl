@@ -118,8 +118,15 @@ Procedure FillRegisterRecords()
 	ThisObject.Errors.Clear();
 	
 	ThisObject.RegisterRecords.Basic.Clear();
+		
 	For Each Row In _AccountingRowAnalytics Do
 		If Row.LedgerType <> ThisObject.LedgerType Then
+			Continue;
+		EndIf;
+		
+		DataByAnalytics = AccountingServer.GetDataByAccountingAnalytics(ThisObject.Basis, Row);
+		
+		If Not ValueIsFilled(DataByAnalytics.Amount) Then
 			Continue;
 		EndIf;
 		
@@ -136,13 +143,12 @@ Procedure FillRegisterRecords()
 			NewRowError.ErrorDescription = "empty Credit";
 		EndIf;
 		
-		
 		DataByAnalytics = AccountingServer.GetDataByAccountingAnalytics(ThisObject.Basis, Row);
 		
 		If Not ValueIsFilled(DataByAnalytics.Amount) Then
 			Continue;
 		EndIf;
-		
+
 		Record = ThisObject.RegisterRecords.Basic.Add();
 		Record.Period     = ThisObject.Date;
 		Record.Company    = ThisObject.Company;
@@ -160,6 +166,7 @@ Procedure FillRegisterRecords()
 		
 		// Debit analytics
 		Record.AccountDr = Row.AccountDebit;
+		
 		Filter.AnalyticType = Enums.AccountingAnalyticTypes.Debit;
 		AccountingExtDimensionRows = _AccountingExtDimensions.FindRows(Filter);
 		For Each ExtDim In AccountingExtDimensionRows Do
@@ -168,6 +175,7 @@ Procedure FillRegisterRecords()
 		
 		// Credit analytics
 		Record.AccountCr = Row.AccountCredit;
+		
 		Filter.AnalyticType = Enums.AccountingAnalyticTypes.Credit;
 		AccountingExtDimensionRows = _AccountingExtDimensions.FindRows(Filter);
 		For Each ExtDim In AccountingExtDimensionRows Do
@@ -216,7 +224,7 @@ Procedure FillRegisterRecords()
 		EndIf;
 		
 	EndDo;	
-	
+		
 	ThisObject.Totals.Clear();
 	For Each Chart In ArrayOfCharts Do
 		RowsDr = TotalsTable.FindRows(New Structure("ChartOfAccountDr", Chart));

@@ -82,7 +82,7 @@ Function IsUseSimpleMode() Export
 EndFunction
 
 Function IsUseFixedAssets() Export
-	Return GetFunctionalOption("UseFixedAsstes");
+	Return GetFunctionalOption("UseFixedAssets");
 EndFunction
 
 Function IsUseShipmentConfirmationAndGoodsReceipts() Export

@@ -75,7 +75,7 @@ Procedure FillRegistersAccessKeys(RegInfo, RoleList)
 	
 	KeyValueArray = New Array;
 	For Each AccessKey In AccessKeys Do
-		KeyValueArray.Add(ThisObject.ObjectAccess.Unload(New Structure("Key", AccessKey.Key)).UnloadColumn("ValueRef"));
+		KeyValueArray.Add(ThisObject.ObjectAccess.Unload(New Structure("Key", AccessKey.Key)));
 	EndDo;
 	
 	Query = New Query("SELECT * FROM InformationRegister.T9101A_ObjectAccessRegisters WHERE FALSE");
@@ -92,11 +92,13 @@ Procedure FillRegistersAccessKeys(RegInfo, RoleList)
 				For Each ResRow In TmpTable Do
 					NewRow = ResultTable.Add();
 					FillPropertyValues(NewRow, ResRow);
-					NewRow["Value" + (i + 1)] = Value;
+					NewRow["Value" + (i + 1)] = Value.ValueRef;
+					NewRow["DoNotControl" + (i + 1)] = Value.DoNotControl;
 				EndDo;
 			Else
 				NewRow = ResultTable.Add();
-				NewRow["Value" + (i + 1)] = Value;
+				NewRow["Value" + (i + 1)] = Value.ValueRef;
+				NewRow["DoNotControl" + (i + 1)] = Value.DoNotControl;
 			EndIf;
 		EndDo;
 	EndDo;

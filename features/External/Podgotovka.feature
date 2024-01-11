@@ -1525,7 +1525,17 @@ Scenario: set True value to the constant Use salary
 			| 'Use salary'    |
 		And I set "Use" checkbox in "FunctionalOptions" table
 		And I click "Save" button
-		And I close current window				
+		And I close current window		
+
+Scenario: set True value to the constant Use additional table control document
+		Given I open hyperlink "e1cib/app/DataProcessor.FunctionalOptionSettings"
+		Then "Functional option settings" window is opened
+		And I go to line in "FunctionalOptions" table
+			| 'Option'        |
+			| 'Use additional table control document'    |
+		And I set "Use" checkbox in "FunctionalOptions" table
+		And I click "Save" button
+		And I close current window		
 				
 
 Scenario: set True value to the constant Use consolidated retail sales

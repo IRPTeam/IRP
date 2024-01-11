@@ -60,9 +60,10 @@ Procedure PostingCheckBeforeWrite(Ref, Cancel, PostingMode, Parameters, AddInfo 
 		CurrenciesServer.PreparePostingDataTables(Parameters, CurrencyTable, AddInfo);
 		Parameters.Object = CostAllocationObject;
 
-		For Each RowRecordSet In Parameters.PostingDataTables.Get(R6070T_OtherPeriodsExpenses).PrepareTable Do
+		For Each RowRecordSet In Parameters.PostingDataTables[R6070T_OtherPeriodsExpenses].PrepareTable Do
 			FillPropertyValues(TableOtherPeriodsExpensesRecalculated.Add(), RowRecordSet);
 		EndDo;
+		Parameters.PostingDataTables.Delete(R6070T_OtherPeriodsExpenses);
 	EndDo;
 	Tables.R6070T_OtherPeriodsExpenses = TableOtherPeriodsExpensesRecalculated;
 	
@@ -88,15 +89,15 @@ Procedure PostingCheckBeforeWrite(Ref, Cancel, PostingMode, Parameters, AddInfo 
 		CurrenciesServer.PreparePostingDataTables(Parameters, CurrencyTable, AddInfo);
 		Parameters.Object = CostAllocationObject;
 
-		For Each RowRecordSet In Parameters.PostingDataTables.Get(T6060S_BatchCostAllocationInfo).PrepareTable Do
+		For Each RowRecordSet In Parameters.PostingDataTables[T6060S_BatchCostAllocationInfo].PrepareTable Do
 			FillPropertyValues(BatchCostAllocationInfoRecalculated.Add(), RowRecordSet);
 		EndDo;
+		Parameters.PostingDataTables.Delete(T6060S_BatchCostAllocationInfo);
 	EndDo;
 
 	BatchCostAllocationInfoRecalculated = BatchCostAllocationInfoRecalculated.Copy(
 		New Structure("CurrencyMovementType", CurrencyMovementType));
-	BatchCostAllocationInfoRecalculated.GroupBy(
-		"Period, Company, Document, Store, ItemKey, Currency, CurrencyMovementType", "Amount, AmountTax");
+	BatchCostAllocationInfoRecalculated.GroupBy("Period, Company, Document, Store, ItemKey, Currency, CurrencyMovementType", "Amount, AmountTax");
 	Tables.T6060S_BatchCostAllocationInfo = BatchCostAllocationInfoRecalculated;
 
 	BatchKeysInfo = BatchCostAllocationInfoRecalculated.Copy();

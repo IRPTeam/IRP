@@ -1432,9 +1432,9 @@ Scenario: 962142 check R9570T_AdditionalDeduction register access (LimitedAccess
 	Given I open hyperlink "e1cib/list/AccumulationRegister.R9570T_AdditionalDeduction"
 	Then the number of "List" table lines is "равно" "4"
 
-Scenario: 962080 LimitedAccessRegisters - AccumulationRegisters R2001T Sales, Do not control Company and Store
+Scenario: 962180 LimitedAccessRegisters - AccumulationRegisters R2001T Sales, Do not control Company and Store
 	And I close all client application windows
-	And I connect "TestAdmin" TestClient using "LimitedAccessRegisters" login and "" password
+	And I connect "TestAdmin2" TestClient using "LimitedAccessRegisters" login and "" password
 	Given I open hyperlink "e1cib/list/AccumulationRegister.R2001T_Sales"
 	And "List" table contains lines
 		| 'Company'                       | 'Branch'                       |
@@ -1448,7 +1448,7 @@ Scenario: 962080 LimitedAccessRegisters - AccumulationRegisters R2001T Sales, Do
 	Then the number of "List" table lines is "равно" "7"
 	And I close "TestAdmin" TestClient
 
-Scenario: 962081 LimitedAccessRegisters - AccumulationRegisters R2001T Sales, Company and Branch access deny
+Scenario: 962181 LimitedAccessRegisters - AccumulationRegisters R2001T Sales, Company and Branch access deny
 	And I close all client application windows
 	And I connect "TestAdmin1" TestClient using "LARegAccessDeny" login and "" password
 	Given I open hyperlink "e1cib/list/AccumulationRegister.R2001T_Sales"

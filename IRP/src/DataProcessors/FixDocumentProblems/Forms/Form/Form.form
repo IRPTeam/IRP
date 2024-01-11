@@ -64,7 +64,9 @@
           <id>130</id>
           <visible>true</visible>
           <enabled>true</enabled>
-          <userVisible/>
+          <userVisible>
+            <common>true</common>
+          </userVisible>
           <dataPath xsi:type="form:DataPath">
             <segments>OnlyPosted</segments>
           </dataPath>

@@ -980,7 +980,6 @@ Function GetBatchWiseBalance(CalculationSettings)
 	TableOfReturnedBatches.Columns.Add("AllocatedRevenueAmount"     , RegMetadata.Resources.AllocatedRevenueAmount.Type);
 	TableOfReturnedBatches.Columns.Add("AllocatedRevenueTaxAmount"  , RegMetadata.Resources.AllocatedRevenueTaxAmount.Type);
 	
-	
 	TableOfReturnedBatches.Columns.Add("InvoiceAmountBalance"             , RegMetadata.Resources.InvoiceAmount.Type);
 	TableOfReturnedBatches.Columns.Add("InvoiceTaxAmountBalance"          , RegMetadata.Resources.InvoiceTaxAmount.Type);
 	

@@ -262,6 +262,7 @@ Procedure OrderOrderAvailableFieldsSelection(Item, RowSelected, Field, StandardP
 		EndIf;
 	ElsIf TypeOf(SelectedAreas[0]) = Type("SpreadsheetDocumentRange") Then
 		If SelectedAreas.Count() Then
+			//@skip-check unknown-method-property
 			SelectedAreas[0].Merge();
 		EndIf;
 		If RowSelectedString = "BarcodePicture" Or RowSelectedString = "QRPicture" Or RowSelectedString = "ItemPicture"

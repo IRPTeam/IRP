@@ -180,6 +180,14 @@ Procedure Posting_RowID(Source, Cancel, PostingMode) Export
 		Posting_TM1010B_RowIDMovements_POC(Source, Cancel, PostingMode);
 	EndIf;
 	
+	If Is(Source).RSR OR Is(Source).RRR Then
+	 	If Source.StatusType = Enums.RetailReceiptStatusTypes.Canceled
+	 		OR Source.StatusType = Enums.RetailReceiptStatusTypes.Postponed Then
+			UndoPosting_RowIDUndoPosting(Source, Cancel);
+			Return;
+		EndIf;
+	EndIf;
+		
 	If Source.Metadata().TabularSections.Find("RowIDInfo") = Undefined Then
 		Return;
 	EndIf;

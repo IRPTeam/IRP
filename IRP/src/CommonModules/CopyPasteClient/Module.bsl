@@ -12,6 +12,7 @@ Procedure CopyToClipboard(Object, Form) Export
 	Notify = New NotifyDescription("CopyToClipboardAfterSetSettings", Form);
 	OpenSettings = New Structure;
 	If Not Object = Undefined Then
+		//@skip-check unknown-method-property
 		OpenSettings.Insert("Ref", Object.Ref);
 	EndIf;
 	OpenSettings.Insert("CopySettings", CopySettings());
@@ -62,6 +63,7 @@ Procedure PasteFromClipboard(Object, Form) Export
 	Notify = New NotifyDescription("PasteFromClipboardAfterSetSettings", Form);
 	OpenSettings = New Structure;
 	If Not Object = Undefined Then
+		//@skip-check unknown-method-property
 		OpenSettings.Insert("Ref", Object.Ref);
 	EndIf;
 	OpenSettings.Insert("PasteSettings", PasteSettings());

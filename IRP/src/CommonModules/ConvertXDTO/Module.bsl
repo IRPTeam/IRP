@@ -13,7 +13,6 @@ Procedure FillStructureDataByObject(StructureData, Val Object, Val Attr, Val Val
 		Return;
 	EndIf;
 
-	
 	LastStructure = StructureData;
 	For Index = 1 To NameList.UBound() Do
 		

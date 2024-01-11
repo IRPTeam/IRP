@@ -1027,7 +1027,8 @@ Function R2021B_CustomersTransactions()
 		   |FROM
 		   |	InformationRegister.T2010S_OffsetOfAdvances AS OffsetOfAdvances
 		   |WHERE
-		   |	OffsetOfAdvances.Document = &Ref";
+		   |	OffsetOfAdvances.Document = &Ref
+		   |	AND NOT OffsetOfAdvances.Document = VALUE(ENUM.RetailReceiptStatusTypes.Canceled)";
 EndFunction
 
 Function R5015B_OtherPartnersTransactions()
@@ -1189,7 +1190,9 @@ Function T3010S_RowIDInfo()
 		   |		ON RowIDInfo.Ref = &Ref
 		   |		AND ItemList.Ref = &Ref
 		   |		AND RowIDInfo.Key = ItemList.Key
-		   |		AND RowIDInfo.Ref = ItemList.Ref";
+		   |		AND RowIDInfo.Ref = ItemList.Ref
+		   |WHERE
+		   |	ItemList.Ref.StatusType = VALUE(ENUM.RetailReceiptStatusTypes.Completed)";
 EndFunction
 
 Function T6020S_BatchKeysInfo()
@@ -1338,7 +1341,9 @@ Function T1050T_AccountingQuantities()
 		   |	ItemList.Quantity
 		   |INTO T1050T_AccountingQuantities
 		   |FROM
-		   |	ItemList AS ItemList";
+		   |	ItemList AS ItemList
+		   |WHERE
+		   |	ItemList.StatusType = VALUE(ENUM.RetailReceiptStatusTypes.Completed)";
 EndFunction
 
 Function GetAccountingAnalytics(Parameters) Export

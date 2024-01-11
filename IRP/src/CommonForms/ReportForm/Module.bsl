@@ -231,6 +231,7 @@ Function GetSettingsComposerFilter(SettingsComposer, Name)
 	FindField = New DataCompositionField(Name);
 	For Each Item In SettingsComposer.Settings.Filter.Items Do
 		If Item.LeftValue = FindField Then
+			//@skip-check unknown-method-property
 			UserFilterItem = SettingsComposer.UserSettings.Items.Find(Item.UserSettingID);
 			Filter = New Structure();
 			Filter.Insert("Value", UserFilterItem.RightValue);

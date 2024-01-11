@@ -18,21 +18,48 @@ Procedure OnWrite(Cancel)
 		Return;
 	EndIf;
 	
+	Query = New Query;
+	Query.Text =
+		"SELECT
+		|	AccessProfilesRoles.Role
+		|FROM
+		|	Catalog.AccessProfiles.Roles AS AccessProfilesRoles
+		|WHERE
+		|	AccessProfilesRoles.Ref IN (&Ref)
+		|GROUP BY
+		|	AccessProfilesRoles.Role";
+	
+	Query.SetParameter("Ref", Profiles.UnloadColumn("Profile"));
+	
+	RoleList = Query.Execute().Unload().UnloadColumn("Role");
+
 	RegRule = InformationRegisters.T9101A_ObjectAccessRegisters.CreateRecordSet();
 	RegRule.Filter.AccessGroup.Set(ThisObject.Ref);
 	RegRule.Write();
 
 	If Not ThisObject.DeletionMark Then
 		For Each RegInfo In Metadata.AccumulationRegisters Do
-			FillRegistersAccessKeys(RegInfo);
+			FillRegistersAccessKeys(RegInfo, RoleList);
 		EndDo;
 		For Each RegInfo In Metadata.InformationRegisters Do
-			FillRegistersAccessKeys(RegInfo);
+			FillRegistersAccessKeys(RegInfo, RoleList);
 		EndDo;
 	EndIf;
 EndProcedure
 
-Procedure FillRegistersAccessKeys(RegInfo)
+Procedure FillRegistersAccessKeys(RegInfo, RoleList)
+	
+	Skip = True;
+	For Each Role In RoleList Do
+		If AccessRight("Read", RegInfo, Metadata.Roles[Role]) Then
+			Skip = False;
+		EndIf;
+	EndDo;
+	
+	If Skip Then
+		Return;
+	EndIf;
+	
 	Module = MetadataInfo.GetManager(RegInfo.FullName()); // AccumulationRegistersManager
 	Try
 		AccessKeys = Module.GetAccessKey();
@@ -48,7 +75,7 @@ Procedure FillRegistersAccessKeys(RegInfo)
 	
 	KeyValueArray = New Array;
 	For Each AccessKey In AccessKeys Do
-		KeyValueArray.Add(ThisObject.ObjectAccess.Unload(New Structure("Key", AccessKey.Key)).UnloadColumn("ValueRef"));
+		KeyValueArray.Add(ThisObject.ObjectAccess.Unload(New Structure("Key", AccessKey.Key)));
 	EndDo;
 	
 	Query = New Query("SELECT * FROM InformationRegister.T9101A_ObjectAccessRegisters WHERE FALSE");
@@ -65,11 +92,13 @@ Procedure FillRegistersAccessKeys(RegInfo)
 				For Each ResRow In TmpTable Do
 					NewRow = ResultTable.Add();
 					FillPropertyValues(NewRow, ResRow);
-					NewRow["Value" + (i + 1)] = Value;
+					NewRow["Value" + (i + 1)] = Value.ValueRef;
+					NewRow["DoNotControl" + (i + 1)] = Value.DoNotControl;
 				EndDo;
 			Else
 				NewRow = ResultTable.Add();
-				NewRow["Value" + (i + 1)] = Value;
+				NewRow["Value" + (i + 1)] = Value.ValueRef;
+				NewRow["DoNotControl" + (i + 1)] = Value.DoNotControl;
 			EndIf;
 		EndDo;
 	EndDo;

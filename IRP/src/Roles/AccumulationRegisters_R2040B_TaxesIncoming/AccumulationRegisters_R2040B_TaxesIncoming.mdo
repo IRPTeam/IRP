@@ -1,0 +1,16 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<mdclass:Role xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="37df6424-2477-4a4d-b4d7-a16285e81c5b">
+ <name>AccumulationRegisters_R2040B_TaxesIncoming</name>
+ <synonym>
+  <key>en</key>
+  <value>AccumulationRegisters R2040B TaxesIncoming</value>
+ </synonym>
+ <synonym>
+  <key>ru</key>
+  <value>РегистрыНакопления R2040B НалогиПоступающие</value>
+ </synonym>
+ <synonym>
+  <key>tr</key>
+  <value>BirikimKayıtları R2040B GelenVergiler</value>
+ </synonym>
+</mdclass:Role>

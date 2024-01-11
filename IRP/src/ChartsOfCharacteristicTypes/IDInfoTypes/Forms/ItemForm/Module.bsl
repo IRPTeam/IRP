@@ -54,6 +54,7 @@ Procedure ExternalDataProcessorOnActivateRow(Item)
 	If CurrentRow = Undefined Then
 		Return;
 	EndIf;
+	//@skip-check unknown-method-property
 	PutSettingsToTempStorage(CurrentRow.LineNumber);
 EndProcedure
 

@@ -1,0 +1,16 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<mdclass:Role xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="4498f272-ca2a-4190-a2c4-53258ec5f293">
+ <name>AccumulationRegisters_R2023B_AdvancesFromRetailCustomers</name>
+ <synonym>
+  <key>en</key>
+  <value>AccumulationRegisters R2023B AdvancesFromRetailCustomers</value>
+ </synonym>
+ <synonym>
+  <key>ru</key>
+  <value>РегистрыНакопления R2023B АвансыОтРозничныхПокупателей</value>
+ </synonym>
+ <synonym>
+  <key>tr</key>
+  <value>BirikimKayıtları R2023B PerakendeMüşterilerdenAvanslar</value>
+ </synonym>
+</mdclass:Role>

@@ -1,0 +1,16 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<mdclass:Role xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="0757ad30-dad2-4f0a-8f00-62f36e7c9d3f">
+ <name>AccumulationRegisters_R1040B_TaxesOutgoing</name>
+ <synonym>
+  <key>en</key>
+  <value>AccumulationRegisters R1040B TaxesOutgoing</value>
+ </synonym>
+ <synonym>
+  <key>ru</key>
+  <value>РегистрыНакопления R1040B НалогиИсходящие</value>
+ </synonym>
+ <synonym>
+  <key>tr</key>
+  <value>BirikimKayıtları R1040B GidenVergiler</value>
+ </synonym>
+</mdclass:Role>

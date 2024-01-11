@@ -1,0 +1,16 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<mdclass:Role xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="615e05b3-9e0e-4122-9e62-332cdfff9977">
+ <name>AccumulationRegisters_R3024B_SalesOrdersToBePaid</name>
+ <synonym>
+  <key>en</key>
+  <value>AccumulationRegisters R3024B SalesOrdersToBePaid</value>
+ </synonym>
+ <synonym>
+  <key>ru</key>
+  <value>РегистрыНакопления R3024B ЗаказыНаПродажуКОплате</value>
+ </synonym>
+ <synonym>
+  <key>tr</key>
+  <value>BirikimKayıtları R3024B ÖdenecekSatışSiparişleri</value>
+ </synonym>
+</mdclass:Role>

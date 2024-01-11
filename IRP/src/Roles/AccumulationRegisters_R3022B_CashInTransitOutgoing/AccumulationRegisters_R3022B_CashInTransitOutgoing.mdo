@@ -1,0 +1,16 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<mdclass:Role xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="8c06fe20-033a-47c5-8c30-d9df785a3bc3">
+ <name>AccumulationRegisters_R3022B_CashInTransitOutgoing</name>
+ <synonym>
+  <key>en</key>
+  <value>AccumulationRegisters R3022B CashInTransitOutgoing</value>
+ </synonym>
+ <synonym>
+  <key>ru</key>
+  <value>РегистрыНакопления R3022B ДеньгиВПутиИсходящие</value>
+ </synonym>
+ <synonym>
+  <key>tr</key>
+  <value>BirikimKayıtları R3022B NakitYoldaGiden</value>
+ </synonym>
+</mdclass:Role>

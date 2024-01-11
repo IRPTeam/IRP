@@ -1,0 +1,16 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<mdclass:Role xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="f5241fac-33f4-405a-9a3f-b184156c4091">
+ <name>AccumulationRegisters_R5022T_Expenses</name>
+ <synonym>
+  <key>en</key>
+  <value>AccumulationRegisters R5022T Expenses</value>
+ </synonym>
+ <synonym>
+  <key>ru</key>
+  <value>РегистрыНакопления R5022T Расходы</value>
+ </synonym>
+ <synonym>
+  <key>tr</key>
+  <value>BirikimKayıtları R5022T Giderler</value>
+ </synonym>
+</mdclass:Role>

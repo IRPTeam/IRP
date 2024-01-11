@@ -1,0 +1,16 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<mdclass:Role xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="d3a8096d-0859-4efa-ac47-1346316939da">
+ <name>AccumulationRegisters_R8014T_ConsignorSales</name>
+ <synonym>
+  <key>en</key>
+  <value>AccumulationRegisters R8014T ConsignorSales</value>
+ </synonym>
+ <synonym>
+  <key>ru</key>
+  <value>РегистрыНакопления R8014T ПродажиКомитента</value>
+ </synonym>
+ <synonym>
+  <key>tr</key>
+  <value>BirikimKayıtları R8014T KomitentSatışları</value>
+ </synonym>
+</mdclass:Role>

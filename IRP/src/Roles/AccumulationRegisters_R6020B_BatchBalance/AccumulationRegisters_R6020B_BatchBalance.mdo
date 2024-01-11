@@ -1,0 +1,16 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<mdclass:Role xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="4f9e45fc-1164-4d3e-b80a-85e27c72bdbe">
+ <name>AccumulationRegisters_R6020B_BatchBalance</name>
+ <synonym>
+  <key>en</key>
+  <value>AccumulationRegisters R6020B BatchBalance</value>
+ </synonym>
+ <synonym>
+  <key>ru</key>
+  <value>РегистрыНакопления R6020B БалансПартий</value>
+ </synonym>
+ <synonym>
+  <key>tr</key>
+  <value>BirikimKayıtları R6020B PartiBakiyesi</value>
+ </synonym>
+</mdclass:Role>

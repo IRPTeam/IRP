@@ -1,0 +1,16 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<mdclass:Role xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="5d6b2de1-ea88-4a1d-ae6c-3fc71b727e1d">
+ <name>AccumulationRegisters_R1020B_AdvancesToVendors</name>
+ <synonym>
+  <key>en</key>
+  <value>AccumulationRegisters R1020B AdvancesToVendors</value>
+ </synonym>
+ <synonym>
+  <key>ru</key>
+  <value>РегистрыНакопления R1020B АвансыПоставщикам</value>
+ </synonym>
+ <synonym>
+  <key>tr</key>
+  <value>BirikimKayıtları R1020B SatıcılaraAvanslar</value>
+ </synonym>
+</mdclass:Role>

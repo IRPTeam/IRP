@@ -1,0 +1,16 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<mdclass:Role xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="df206663-69ba-49a9-9667-42a7b2b2500f">
+ <name>AccumulationRegisters_R1005T_PurchaseSpecialOffers</name>
+ <synonym>
+  <key>en</key>
+  <value>AccumulationRegisters R1005T PurchaseSpecialOffers</value>
+ </synonym>
+ <synonym>
+  <key>ru</key>
+  <value>РегистрыНакопления R1005T СпецПредложенияПокупок</value>
+ </synonym>
+ <synonym>
+  <key>tr</key>
+  <value>BirikimKayıtları R1005T SatınalmaÖzelTeklifler</value>
+ </synonym>
+</mdclass:Role>

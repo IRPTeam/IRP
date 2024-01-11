@@ -15,7 +15,7 @@
  </synonym>
  <synonym>
   <key>tr</key>
-  <value>Account card</value>
+  <value>Hesap kartı</value>
  </synonym>
  <useStandardCommands>true</useStandardCommands>
  <mainDataCompositionSchema>Report.AccountCard.Template.MainDataCompositionSchema</mainDataCompositionSchema>

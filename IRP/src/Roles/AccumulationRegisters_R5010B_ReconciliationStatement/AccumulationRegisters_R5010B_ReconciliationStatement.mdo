@@ -1,0 +1,16 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<mdclass:Role xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="98539dbf-1d76-4cdf-aa0f-6ad71939911e">
+ <name>AccumulationRegisters_R5010B_ReconciliationStatement</name>
+ <synonym>
+  <key>en</key>
+  <value>AccumulationRegisters R5010B ReconciliationStatement</value>
+ </synonym>
+ <synonym>
+  <key>ru</key>
+  <value>РегистрыНакопления R5010B СверкаВыписок</value>
+ </synonym>
+ <synonym>
+  <key>tr</key>
+  <value>BirikimKayıtları R5010B MutabakatBeyanı</value>
+ </synonym>
+</mdclass:Role>

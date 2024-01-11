@@ -15,7 +15,7 @@
  </synonym>
  <synonym>
   <key>tr</key>
-  <value>Trial balance (by account)</value>
+  <value>Hesap bazında denge denemesi</value>
  </synonym>
  <useStandardCommands>true</useStandardCommands>
  <mainDataCompositionSchema>Report.TrialBalanceByAccount.Template.MainDataCompositionSchema</mainDataCompositionSchema>

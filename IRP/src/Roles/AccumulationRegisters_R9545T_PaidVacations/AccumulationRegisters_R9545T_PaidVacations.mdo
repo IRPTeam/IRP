@@ -1,0 +1,16 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<mdclass:Role xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="7a5bbad3-2655-4f2b-9700-aa98488d99dd">
+ <name>AccumulationRegisters_R9545T_PaidVacations</name>
+ <synonym>
+  <key>en</key>
+  <value>AccumulationRegisters R9545T PaidVacations</value>
+ </synonym>
+ <synonym>
+  <key>ru</key>
+  <value>РегистрыНакопления R9545T ОплаченныеОтпуска</value>
+ </synonym>
+ <synonym>
+  <key>tr</key>
+  <value>BirikimKayıtları R9545T ÖdenmişTatiller</value>
+ </synonym>
+</mdclass:Role>

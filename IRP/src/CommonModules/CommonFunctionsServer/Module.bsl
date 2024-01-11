@@ -1004,7 +1004,11 @@ EndFunction
 // Returns:
 //  BinaryData - String from base64 ZIP
 Function StringFromBase64ZIP(Base64Zip, FileName = Undefined) Export
-	MStream = New MemoryStream(GetBinaryDataBufferFromBase64String(Base64Zip));
+	If TypeOf(Base64Zip) = Type("BinaryData") Then
+		MStream = New MemoryStream(GetBinaryDataBufferFromBinaryData(Base64Zip));
+	Else 
+		MStream = New MemoryStream(GetBinaryDataBufferFromBase64String(Base64Zip));
+	EndIf;
 	ZIP = New ZipFileReader(MStream);
 	TmpFileName = TempFilesDir();
 	ZIP.Extract(ZIP.Items[0], TmpFileName);

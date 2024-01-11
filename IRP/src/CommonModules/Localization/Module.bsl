@@ -1613,7 +1613,6 @@ Function Strings(Lang) Export
 		|ru='Требуется тип партнера';
 		|tr='Ortak tipi gerekli'", Lang));	
 	
-	
 	Strings.Insert("Error_FillTotalAmount", NStr("en='Fill total amount. Row: [%1]';
 		|ru='Необходимо заполнить сумму итого. Строка: [%1]';
 		|tr='Toplam tutarı doldur. Satır: [%1]'", Lang));
@@ -2562,6 +2561,31 @@ Strings.Insert("CreditNote_DR_R1021B_VendorsTransactions_CR_R5022T_Expenses",
 	NStr("en='CreditNote DR (R1021B_VendorsTransactions CR (R5022T_Expenses)';
 		|ru='CreditNote Дебет (R1021B_VendorsTransactions Кредит (R5022T_Expenses)';
 		|tr='KrediNotu DR (R1021B_Tedarikçiİşlemleri CR (R5022T_Giderler)'", Lang));
+
+Strings.Insert("MoneyTransfer_DR_R3010B_CashOnHand_CR_R3010B_CashOnHand",
+	NStr("en='MoneyTransfer DR (R3010B_CashOnHand) CR (R3010B_CashOnHand)';
+		|ru='ПереводДС ДР (R3010B_НаличныеВКассе) КР (R3010B_НаличныеВКассе)';
+		|tr='ParaTransferi DR (R3010B_NakitElde) CR (R3010B_NakitElde)'", Lang));
+	
+Strings.Insert("MoneyTransfer_DR_R3010B_CashOnHand_CR_R3021B_CashInTransit",
+	NStr("en='MoneyTransfer DR (R3010B_CashOnHand) CR (R3021B_CashInTransit)';
+		|ru='ПереводДС ДР (R3010B_НаличныеВКассе) КР (R3021B_ДеньгиВПути)';
+		|tr='ParaTransferi DR (R3010B_NakitElde) CR (R3021B_NakitYolda)'", Lang));
+
+Strings.Insert("MoneyTransfer_DR_R3021B_CashInTransit_CR_R3010B_CashOnHand",
+	NStr("en='MoneyTransfer DR (R3021B_CashInTransit) CR (R3010B_CashOnHand)';
+		|ru='ПереводДС ДР (R3021B_ДеньгиВПути) КР (R3010B_НаличныеВКассе)';
+		|tr='ParaTransferi DR (R3021B_NakitYolda) CR (R3010B_ElindekiNakit)'", Lang));
+
+Strings.Insert("MoneyTransfer_DR_R3021B_CashInTransit_CR_R5021T_Revenues",
+	NStr("en='MoneyTransfer DR (R3021B_CashInTransit) CR (R5021T_Revenues)';
+		|ru='ПереводДенег ДР (R3021B_ДеньгиВПути) КР (R5021T_Доходы)';
+		|tr='ParaTransferi DR (R3021B_NakitYolda) CR (R5021T_Gelirler)'", Lang));
+
+Strings.Insert("MoneyTransfer_DR_R5022T_Expenses_CR_R3021B_CashInTransit",
+	NStr("en='MoneyTransfer DR (R5022T_Expenses) CR (R3021B_CashInTransit)';
+		|ru='ПереводДС ДР (R5022T_Расходы) КР (R3021B_ДеньгиВПути)';
+		|tr='ParaTransferi DR (R5022T_Giderler) CR (R3021B_NakitYolda)'", Lang));
 	
 #EndRegion
 	

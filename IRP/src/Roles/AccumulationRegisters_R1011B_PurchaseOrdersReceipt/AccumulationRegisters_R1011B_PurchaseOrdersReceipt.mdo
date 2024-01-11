@@ -1,0 +1,16 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<mdclass:Role xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="55b01f11-d124-44e3-b584-778c84ea5c7c">
+ <name>AccumulationRegisters_R1011B_PurchaseOrdersReceipt</name>
+ <synonym>
+  <key>en</key>
+  <value>AccumulationRegisters R1011B PurchaseOrdersReceipt</value>
+ </synonym>
+ <synonym>
+  <key>ru</key>
+  <value>РегистрыНакопления R1011B ПриемкаЗаказовНаПокупку</value>
+ </synonym>
+ <synonym>
+  <key>tr</key>
+  <value>BirikimKayıtları R1011B SatınalmaSiparişleriAlımı</value>
+ </synonym>
+</mdclass:Role>

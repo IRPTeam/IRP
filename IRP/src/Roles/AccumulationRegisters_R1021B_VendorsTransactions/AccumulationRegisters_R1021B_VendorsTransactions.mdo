@@ -1,0 +1,16 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<mdclass:Role xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="e3cda092-9dda-4dfd-b304-2148f5f0da58">
+ <name>AccumulationRegisters_R1021B_VendorsTransactions</name>
+ <synonym>
+  <key>en</key>
+  <value>AccumulationRegisters R1021B VendorsTransactions</value>
+ </synonym>
+ <synonym>
+  <key>ru</key>
+  <value>РегистрыНакопления R1021B ТранзакцииПоставщиков</value>
+ </synonym>
+ <synonym>
+  <key>tr</key>
+  <value>BirikimKayıtları R1021B Tedarikçiİşlemleri</value>
+ </synonym>
+</mdclass:Role>

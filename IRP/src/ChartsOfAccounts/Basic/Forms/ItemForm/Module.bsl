@@ -24,6 +24,7 @@ EndProcedure
 
 &AtClient
 Async Procedure QuantityOnChange(Item)
+	//@skip-check unknown-method-property
 	TableIsFilled = Object.ExtDimensionTypes.Count() > 0;
 	
 	If TableIsFilled Then
@@ -32,6 +33,7 @@ Async Procedure QuantityOnChange(Item)
 	
 	If TableIsFilled And Answer = DialogReturnCode.OK Then
 		For Each Row In Object.ExtDimensionTypes Do
+			//@skip-check unknown-method-property
 			Row.Quantity = Object.Quantity;
 		EndDo;
 	EndIf;
@@ -39,6 +41,7 @@ EndProcedure
 
 &AtClient
 Async Procedure CurrencyOnChange(Item)
+	//@skip-check unknown-method-property
 	TableIsFilled = Object.ExtDimensionTypes.Count() > 0;
 	
 	If TableIsFilled Then
@@ -47,6 +50,7 @@ Async Procedure CurrencyOnChange(Item)
 	
 	If TableIsFilled And Answer = DialogReturnCode.OK Then
 		For Each Row In Object.ExtDimensionTypes Do
+			//@skip-check unknown-method-property
 			Row.Currency = Object.Currency;
 		EndDo;
 	EndIf;

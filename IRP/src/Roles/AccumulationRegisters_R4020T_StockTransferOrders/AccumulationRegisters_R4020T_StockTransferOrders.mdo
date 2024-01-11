@@ -1,0 +1,16 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<mdclass:Role xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="4d4915bf-5fa0-4182-86c5-247a0b21ec73">
+ <name>AccumulationRegisters_R4020T_StockTransferOrders</name>
+ <synonym>
+  <key>en</key>
+  <value>AccumulationRegisters R4020T StockTransferOrders</value>
+ </synonym>
+ <synonym>
+  <key>ru</key>
+  <value>РегистрыНакопления R4020T ЗаказыНаПеремещениеСклада</value>
+ </synonym>
+ <synonym>
+  <key>tr</key>
+  <value>BirikimKayıtları R4020T StokTransferEmirleri</value>
+ </synonym>
+</mdclass:Role>

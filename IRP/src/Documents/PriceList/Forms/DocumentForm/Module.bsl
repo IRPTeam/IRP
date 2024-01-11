@@ -579,7 +579,6 @@ Procedure DrawFormTablePriceKeyList()
 			New Structure("Name, DataPath, OwnerName, FormName", NewColumn_Price.Name, Table.Name + "."
 		+ NewColumn_Price.Name, Undefined, ""));
 
-	
 	ThisObject.ChangeAttributes(ArrayOfAttributes);
 		
 		// Form columns	

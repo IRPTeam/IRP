@@ -1,0 +1,16 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<mdclass:Role xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="0a5e813f-0444-428c-be97-e79f94584808">
+ <name>AccumulationRegisters_R2005T_SalesSpecialOffers</name>
+ <synonym>
+  <key>en</key>
+  <value>AccumulationRegisters R2005T SalesSpecialOffers</value>
+ </synonym>
+ <synonym>
+  <key>ru</key>
+  <value>РегистрыНакопления R2005T СпецПредложенияПродаж</value>
+ </synonym>
+ <synonym>
+  <key>tr</key>
+  <value>BirikimKayıtları R2005T SatışÖzelTeklifleri</value>
+ </synonym>
+</mdclass:Role>

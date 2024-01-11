@@ -1,0 +1,16 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<mdclass:Role xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="ae954ee6-6bf2-46a8-b688-46a9c5edc3f0">
+ <name>AccumulationRegisters_R7030T_ProductionPlanning</name>
+ <synonym>
+  <key>en</key>
+  <value>AccumulationRegisters R7030T ProductionPlanning</value>
+ </synonym>
+ <synonym>
+  <key>ru</key>
+  <value>РегистрыНакопления R7030T ПланированиеПроизводства</value>
+ </synonym>
+ <synonym>
+  <key>tr</key>
+  <value>BirikimKayıtları R7030T ÜretimPlanlama</value>
+ </synonym>
+</mdclass:Role>

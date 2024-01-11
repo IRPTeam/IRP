@@ -1,0 +1,16 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<mdclass:Role xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="e5d9bd2d-c683-4981-9d67-2235fcd97109">
+ <name>AccumulationRegisters_R1012B_PurchaseOrdersInvoiceClosing</name>
+ <synonym>
+  <key>en</key>
+  <value>AccumulationRegisters R1012B PurchaseOrdersInvoiceClosing</value>
+ </synonym>
+ <synonym>
+  <key>ru</key>
+  <value>РегистрыНакопления R1012B ЗакрытиеСчетовПокупок</value>
+ </synonym>
+ <synonym>
+  <key>tr</key>
+  <value>BirikimKayıtları R1012B SatınalmaSiparişleriFaturaKapanış</value>
+ </synonym>
+</mdclass:Role>

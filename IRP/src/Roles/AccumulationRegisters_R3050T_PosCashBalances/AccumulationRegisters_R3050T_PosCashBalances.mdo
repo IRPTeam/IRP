@@ -1,0 +1,16 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<mdclass:Role xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="4e1af73c-33f7-4d4f-b4d9-8bcd35a48dfa">
+ <name>AccumulationRegisters_R3050T_PosCashBalances</name>
+ <synonym>
+  <key>en</key>
+  <value>AccumulationRegisters R3050T PosCashBalances</value>
+ </synonym>
+ <synonym>
+  <key>ru</key>
+  <value>РегистрыНакопления R3050T БалансыКассPOS</value>
+ </synonym>
+ <synonym>
+  <key>tr</key>
+  <value>BirikimKayıtları R3050T PosNakitBakiyeleri</value>
+ </synonym>
+</mdclass:Role>

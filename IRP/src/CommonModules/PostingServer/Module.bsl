@@ -22,7 +22,11 @@ Procedure Post(DocObject, Cancel, PostingMode, AddInfo = Undefined) Export
 	EndIf;
 	
 	// Multi currency integration
-	CurrencyTable = CommonFunctionsClientServer.GetFromAddInfo(AddInfo, "CurrencyTable");	
+	CurrencyTable = Undefined;
+	If Parameters.DocumentDataTables.Property("CurrencyTable") Then
+		CurrencyTable = Parameters.DocumentDataTables.CurrencyTable;
+	EndIf;
+		
 	CurrenciesServer.PreparePostingDataTables(Parameters, CurrencyTable, AddInfo);
 
 	RegisteredRecords = RegisterRecords(Parameters);
@@ -701,9 +705,10 @@ EndProcedure
 
 Function CheckBalance_R4011B_FreeStocks(Ref, Tables, RecordType, Unposting, AddInfo = Undefined) Export
 	Parameters = New Structure();
-	Parameters.Insert("RegisterName"         , "R4011B_FreeStocks");
-	Parameters.Insert("Operation"            , "R4011B_FreeStocks");
+	Parameters.Insert("Metadata"         	 , Metadata.AccumulationRegisters.R4011B_FreeStocks);
+	Parameters.Insert("Operation"            , Metadata.AccumulationRegisters.R4011B_FreeStocks.Synonym);
 	Parameters.Insert("TempTablesManager"    , New TempTablesManager());
+	Parameters.Insert("BalancePeriod", Undefined);
 	Return CheckBalance(Ref, Parameters, Tables, RecordType, Unposting, AddInfo);
 EndFunction
 
@@ -718,9 +723,10 @@ EndFunction
 
 Function CheckBalance_R4010B_ActualStocks(Ref, Tables, RecordType, Unposting, AddInfo = Undefined) Export
 	Parameters = New Structure();
-	Parameters.Insert("RegisterName"         , "R4010B_ActualStocks");
-	Parameters.Insert("Operation"            , "R4010B_ActualStocks");
+	Parameters.Insert("Metadata"         	 , Metadata.AccumulationRegisters.R4010B_ActualStocks);
+	Parameters.Insert("Operation"            , Metadata.AccumulationRegisters.R4010B_ActualStocks.Synonym);
 	Parameters.Insert("TempTablesManager"    , New TempTablesManager());
+	Parameters.Insert("BalancePeriod", Undefined);
 	Return CheckBalance(Ref, Parameters, Tables, RecordType, Unposting, AddInfo);
 EndFunction
 
@@ -735,14 +741,12 @@ EndFunction
 
 Function CheckBalance(Ref, Parameters, Tables, RecordType, Unposting, AddInfo = Undefined)
 	
-	IsFreeStock = Upper(Parameters.RegisterName) = Upper("R4011B_FreeStocks");
+	IsFreeStock = Parameters.Metadata = Metadata.AccumulationRegisters.R4011B_FreeStocks;
 	
 	If RecordType = AccumulationRecordType.Expense Then
-		If IsFreeStock Then
-			Parameters.Insert("BalancePeriod", Undefined);
-		Else	
-			Parameters.Insert("BalancePeriod", 
-				CommonFunctionsClientServer.GetFromAddInfo(AddInfo, "BalancePeriod", New Boundary(Ref.PointInTime(), BoundaryType.Including)));
+		If Not IsFreeStock Then
+			Parameters.BalancePeriod = 
+				CommonFunctionsClientServer.GetFromAddInfo(AddInfo, "BalancePeriod", New Boundary(Ref.PointInTime(), BoundaryType.Including));
 		EndIf;
 		
 		CheckResult = CheckBalance_ExecuteQuery(Ref, Parameters, Tables, RecordType, Unposting, AddInfo);
@@ -754,8 +758,6 @@ Function CheckBalance(Ref, Parameters, Tables, RecordType, Unposting, AddInfo = 
 			Return True;
 		EndIf;
 		
-		Parameters.Insert("BalancePeriod"     , Undefined);
-		Parameters.Insert("TempTablesManager" , New TempTablesManager());
 		CheckResult = CheckBalance_ExecuteQuery(Ref, Parameters, Tables, RecordType, Unposting, AddInfo);
 		
 		If IsFreeStock Then
@@ -892,8 +894,8 @@ Function CheckBalance_ExecuteQuery(Ref, Parameters, Tables, RecordType, Unpostin
 	|;";
 	
 	BalanceRegisterTable = 
-		?(Upper(Parameters.RegisterName) = Upper("R4010B_ActualStocks"),
-		QueryText_R4010B_ActualStocks, QueryText_R4011B_FreeStocks);
+		?(Parameters.Metadata = Metadata.AccumulationRegisters.R4010B_ActualStocks,
+			QueryText_R4010B_ActualStocks, QueryText_R4011B_FreeStocks);
 	
 	Query = New Query();
 	Query.TempTablesManager = Parameters.TempTablesManager;
@@ -1018,7 +1020,7 @@ Function CheckBalance_ExecuteQuery(Ref, Parameters, Tables, RecordType, Unpostin
 	|	Lack.LackOfBalance,
 	|	Lack.Unposting";
 	
-	Query.Text = StrTemplate(Query.Text, Parameters.RegisterName);
+	Query.Text = StrTemplate(Query.Text, Parameters.Metadata.Name);
 
 	If Tables.Records_Exists.Columns.Find("SerialLotNumber") = Undefined Then
 		Tables.Records_Exists.Columns.Add("SerialLotNumber", New TypeDescription("CatalogRef.SerialLotNumbers"));
@@ -1145,7 +1147,6 @@ Function GetRegisterRecords(Parameters)
 EndFunction
 
 Procedure SetPostingDataTable(PostingDataTables, Parameters, Name, VT, RegisterRecords = Undefined) Export
-	
 	If RegisterRecords = Undefined Then
 		RegisterRecords = GetRegisterRecords(Parameters);
 	EndIf;
@@ -1154,28 +1155,25 @@ Procedure SetPostingDataTable(PostingDataTables, Parameters, Name, VT, RegisterR
 	If Parameters.PostingByRef Then
 		RecSetData.Filter.Recorder.Set(Parameters.Object);
 	EndIf;
-	Settings = PostingTableSettings(Name, VT, RecSetData);
+	Settings = PostingTableSettings(VT, RecSetData);
 	PostingDataTables.Insert(RecSetData.Metadata(), Settings);
 EndProcedure
 
 // Posting table settings.
 // 
 // Parameters:
-//  RegisterName - String -
 //  Table - ValueTable -
 //  RecSetData - InformationRegisterRecordSetInformationRegisterName, AccountingRegisterRecordSetAccountingRegisterName, CalculationRegisterRecordSetCalculationRegisterName, AccumulationRegisterRecordSetAccumulationRegisterName - Rec set data
 // 
 // Returns:
 //  Structure - Posting table settings:
-// * RegisterName - String -
 // * PrepareTable - ValueTable - 
 // * WriteInTransaction - Boolean - 
 // * Metadata - MetadataObjectInformationRegister, MetadataObjectAccountingRegister, MetadataObjectCalculationRegister, MetadataObjectAccumulationRegister - 
 // * RecordSet_Document - AccumulationRegisterRecordSet, InformationRegisterRecordSet - 
 // * RecordType - Undefined, AccumulationRecordType - 
-Function PostingTableSettings(RegisterName, Table, RecSetData) Export
+Function PostingTableSettings(Table, RecSetData) Export
 	Settings = New Structure;
-	Settings.Insert("RegisterName", RegisterName);
 	Settings.Insert("PrepareTable", Table);
 	Settings.Insert("WriteInTransaction", True);
 	Settings.Insert("Metadata", RecSetData.Metadata());
@@ -1295,6 +1293,7 @@ EndProcedure
 // Returns:
 //  Array Of Structure - Check document array:
 // * Ref - DocumentRefDocumentName -
+// * Error - String -
 // * RegInfo - Array Of Structure:
 // ** RegName - String -
 Function CheckDocumentArray(DocumentArray, isJob = False) Export
@@ -1312,9 +1311,10 @@ Function CheckDocumentArray(DocumentArray, isJob = False) Export
 		Return Errors;
 	EndIf;
 
-	If DocumentArray[0].GetObject().RegisterRecords.Count() = 0 Then
+	If DocumentArray[0].GetObject().RegisterRecords.Count() = 0
+		OR SkipOnCheckPosting(DocumentArray[0].Metadata()) Then
 		Msg = BackgroundJobAPIServer.NotifySettings();
-		Msg.Log = "Document type: " + DocumentArray[0].Metadata().Name + " can not be posted.";
+		Msg.Log = "Document type: " + DocumentArray[0].Metadata().Name + " not supported document type.";
 		Msg.End = True;
 		Msg.DataAddress = CommonFunctionsServer.PutToCache(Errors);
 		BackgroundJobAPIServer.NotifyStream(Msg);
@@ -1326,29 +1326,64 @@ Function CheckDocumentArray(DocumentArray, isJob = False) Export
 		Msg.Log = "Start check: " + DocumentArray.Count();
 		BackgroundJobAPIServer.NotifyStream(Msg);
 	EndIf;
-
+	Count = 0; 
+	LastPercentLogged = 0;
+	StartDate = CurrentUniversalDateInMilliseconds();
 	For Each Doc In DocumentArray Do
-		DocObject = Doc;
-		Parameters = GetPostingParameters(DocObject, PostingMode, AddInfo);
-
-		// Multi currency integration
-		CurrencyTable = CommonFunctionsClientServer.GetFromAddInfo(AddInfo, "CurrencyTable");	
-		CurrenciesServer.PreparePostingDataTables(Parameters, CurrencyTable, AddInfo);
-	
-		RegisteredRecords = RegisterRecords(Parameters);
+		BeginTransaction();
 		
-		If RegisteredRecords.Count() > 0 Then
+		DocObject = Doc;
+		Try
+			Parameters = GetPostingParameters(DocObject, PostingMode, AddInfo);
+	
+			CurrencyTable = Undefined;
+			If Parameters.DocumentDataTables.Property("CurrencyTable") Then
+				CurrencyTable = Parameters.DocumentDataTables.CurrencyTable;
+			EndIf;
+			CurrenciesServer.PreparePostingDataTables(Parameters, CurrencyTable, AddInfo);
+		
+			RegisteredRecords = RegisterRecords(Parameters);
+			
+			If RegisteredRecords.Count() > 0 Then
+				Result = New Structure;
+				Result.Insert("Ref", Doc);
+				Result.Insert("RegInfo", New Array);
+				Result.Insert("Error", "");
+				For Each Reg In RegisteredRecords Do
+					RegInfo = New Structure;
+					RegInfo.Insert("RegName", Reg.Key.FullName());
+					RegInfo.Insert("NewPostingData", Reg.Value.RecordSet.Unload());
+					Result.RegInfo.Add(RegInfo);
+				EndDo;
+				
+				Errors.Add(Result);
+			EndIf;
+		Except
+			Msg = BackgroundJobAPIServer.NotifySettings();
+			Msg.Log = "Error: " + DocObject + ":" + Chars.LF + ErrorProcessing.DetailErrorDescription(ErrorInfo());
+			BackgroundJobAPIServer.NotifyStream(Msg);
+			
 			Result = New Structure;
 			Result.Insert("Ref", Doc);
 			Result.Insert("RegInfo", New Array);
-			For Each Reg In RegisteredRecords Do
-				RegInfo = New Structure;
-				RegInfo.Insert("RegName", Reg.Key.FullName());
-				Result.RegInfo.Add(RegInfo);
-			EndDo;
-			
+			Result.Insert("Error", Msg.Log);
 			Errors.Add(Result);
+		EndTry;
+		
+		RollbackTransaction();
+		
+		Count = Count + 1;
+		
+		Percent = 100 * Count / DocumentArray.Count();
+		If isJob And (Percent - LastPercentLogged >= 1) Then  
+			LastPercentLogged = Int(Percent);
+			Msg = BackgroundJobAPIServer.NotifySettings();
+			DateDiff = CurrentUniversalDateInMilliseconds() - StartDate;
+			Msg.Speed = Format(1000 * Count / DateDiff, "NFD=2; NG=") + " doc/sec";
+			Msg.Percent = Percent;
+			BackgroundJobAPIServer.NotifyStream(Msg);
 		EndIf;
+
 	EndDo;
 	
 	If isJob Then
@@ -1359,6 +1394,176 @@ Function CheckDocumentArray(DocumentArray, isJob = False) Export
 	EndIf;
 	
 	Return Errors;
+EndFunction
+
+Function SkipOnCheckPosting(Doc)
+
+	Array = New Array;
+	Array.Add(Metadata.Documents.CalculationMovementCosts);
+	
+	Return Not Array.Find(Doc) = Undefined;
+EndFunction
+
+// Posting document array.
+// 
+// Parameters:
+//  DocumentArray - Array of DocumentRefDocumentName - Document array
+//  isJob - Boolean -
+// 
+// Returns:
+//  Array Of Structure - Check document array:
+// * Ref - DocumentRefDocumentName -
+// * Error - String -
+Function PostingDocumentArray(DocumentArray, isJob = False) Export
+
+	Errors = New Array;
+	
+	If isJob And DocumentArray.Count() = 0 Then
+		Msg = BackgroundJobAPIServer.NotifySettings();
+		Msg.Log = "Empty doc list: " + DocumentArray.Count();
+		Msg.End = True;
+		Msg.DataAddress = CommonFunctionsServer.PutToCache(Errors);
+		BackgroundJobAPIServer.NotifyStream(Msg);
+		Return Errors;
+	EndIf;
+
+	Count = 0; 
+	LastPercentLogged = 0;
+	StartDate = CurrentUniversalDateInMilliseconds();
+	For Each Doc In DocumentArray Do
+		Try
+			Result = New Structure;
+			Result.Insert("Ref", Doc);
+			Result.Insert("Error", "");
+			If Doc.Posted Then
+				Doc.GetObject().Write(DocumentWriteMode.Posting);
+			Else
+				Result.Error = String(Doc) + " - Not posted";
+			EndIf;
+			Errors.Add(Result);
+		Except
+			Msg = BackgroundJobAPIServer.NotifySettings();
+			Msg.Log = "Error: " + Doc + ":" + Chars.LF + ErrorProcessing.DetailErrorDescription(ErrorInfo());
+			BackgroundJobAPIServer.NotifyStream(Msg);
+			
+			Result = New Structure;
+			Result.Insert("Ref", Doc);
+			Result.Insert("Error", Msg.Log);
+			Errors.Add(Result);
+		EndTry;
+		
+		Count = Count + 1;
+		
+		Percent = 100 * Count / DocumentArray.Count();
+		If isJob And (Percent - LastPercentLogged >= 1) Then  
+			LastPercentLogged = Int(Percent);
+			Msg = BackgroundJobAPIServer.NotifySettings();
+			DateDiff = CurrentUniversalDateInMilliseconds() - StartDate;
+			Msg.Speed = Format(1000 * Count / DateDiff, "NFD=2; NG=") + " doc/sec";
+			Msg.Percent = Percent;
+			BackgroundJobAPIServer.NotifyStream(Msg);
+		EndIf;
+
+	EndDo;
+	
+	If isJob Then
+		Msg = BackgroundJobAPIServer.NotifySettings();
+		Msg.End = True;
+		Msg.DataAddress = CommonFunctionsServer.PutToCache(Errors);
+		BackgroundJobAPIServer.NotifyStream(Msg);
+	EndIf;
+	
+	Return Errors;
+	
+EndFunction
+
+// Posting document array.
+// 
+// Parameters:
+//  DocumentArray - Array of Structure:
+//  * Ref - DocumentRefDocumentName - 
+//  * NewMovement - ValueStorage -
+//  * RegName - String -
+//  isJob - Boolean -
+// 
+// Returns:
+//  Array Of Structure - Check document array:
+// * Ref - DocumentRefDocumentName -
+// * Error - String -
+Function WriteDocumentsRecords(DocumentArray, isJob = False) Export
+
+	SetSafeMode(True);
+	Errors = New Array;
+	
+	If isJob And DocumentArray.Count() = 0 Then
+		Msg = BackgroundJobAPIServer.NotifySettings();
+		Msg.Log = "Empty doc list: " + DocumentArray.Count();
+		Msg.End = True;
+		Msg.DataAddress = CommonFunctionsServer.PutToCache(Errors);
+		BackgroundJobAPIServer.NotifyStream(Msg);
+		Return Errors;
+	EndIf;
+
+	Count = 0; 
+	LastPercentLogged = 0;
+	StartDate = CurrentUniversalDateInMilliseconds();
+	
+	For Each Doc In DocumentArray Do
+		
+		Try
+			Result = New Structure;
+			Result.Insert("Ref", Doc.Ref);
+			Result.Insert("RegName", Doc.RegName);
+			Result.Insert("Error", "");
+			NewMovement = Doc.NewMovement.Get(); // ValueTable
+			If Not Doc.Ref.Posted And NewMovement.Count() > 0 Then
+				Result.Error = String(Doc.Ref) + " - Not posted. Can not update records";
+			Else
+				
+				Parts = StrSplit(Doc.RegName, ".");
+				CreateRecordSet = Eval(Parts[0] + "s." + Parts[1] + ".CreateRecordSet()"); // AccumulationRegisterRecordSet
+				//@skip-check unknown-method-property
+				CreateRecordSet.Filter.Recorder.Set(Doc.Ref);
+				NewMovement.FillValues(Doc.Ref, "Recorder");
+				CreateRecordSet.Load(NewMovement);
+				CreateRecordSet.Write(True);
+			EndIf;
+			Errors.Add(Result);
+		Except
+			Msg = BackgroundJobAPIServer.NotifySettings();
+			Msg.Log = "Error: " + Doc + ":" + Chars.LF + ErrorProcessing.DetailErrorDescription(ErrorInfo());
+			BackgroundJobAPIServer.NotifyStream(Msg);
+			
+			Result = New Structure;
+			Result.Insert("Ref", Doc);
+			Result.Insert("Error", Msg.Log);
+			Result.Insert("RegName", Doc.RegName);
+			Errors.Add(Result);
+		EndTry;
+		
+		Count = Count + 1;
+		
+		Percent = 100 * Count / DocumentArray.Count();
+		If isJob And (Percent - LastPercentLogged >= 1) Then  
+			LastPercentLogged = Int(Percent);
+			Msg = BackgroundJobAPIServer.NotifySettings();
+			DateDiff = CurrentUniversalDateInMilliseconds() - StartDate;
+			Msg.Speed = Format(1000 * Count / DateDiff, "NFD=2; NG=") + " doc/sec";
+			Msg.Percent = Percent;
+			BackgroundJobAPIServer.NotifyStream(Msg);
+		EndIf;
+
+	EndDo;
+	
+	If isJob Then
+		Msg = BackgroundJobAPIServer.NotifySettings();
+		Msg.End = True;
+		Msg.DataAddress = CommonFunctionsServer.PutToCache(Errors);
+		BackgroundJobAPIServer.NotifyStream(Msg);
+	EndIf;
+	
+	Return Errors;
+	
 EndFunction
 
 #EndRegion

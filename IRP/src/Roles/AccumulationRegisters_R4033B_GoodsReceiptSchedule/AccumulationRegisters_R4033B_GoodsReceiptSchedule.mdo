@@ -1,0 +1,16 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<mdclass:Role xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="a11b4e7a-5bfd-4e1d-9b85-9cf13ff39549">
+ <name>AccumulationRegisters_R4033B_GoodsReceiptSchedule</name>
+ <synonym>
+  <key>en</key>
+  <value>AccumulationRegisters R4033B GoodsReceiptSchedule</value>
+ </synonym>
+ <synonym>
+  <key>ru</key>
+  <value>РегистрыНакопления R4033B ГрафикПоступленияТоваров</value>
+ </synonym>
+ <synonym>
+  <key>tr</key>
+  <value>BirikimKayıtları R4033B MalAlımProgramı</value>
+ </synonym>
+</mdclass:Role>

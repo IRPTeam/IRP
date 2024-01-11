@@ -143,6 +143,16 @@ EndProcedure
 
 #EndRegion
 
+&AtClient
+Procedure RegisterRecordsOnStartEdit(Item, NewRow, Clone)
+	If NewRow Then
+		CurrentData = Items.RegisterRecords.CurrentData;
+		If CurrentData <> Undefined Then
+			CurrentData.Period = Object.Date;
+		EndIf;
+	EndIf;
+EndProcedure
+
 #Region GroupTitleDecorations
 
 &AtClient

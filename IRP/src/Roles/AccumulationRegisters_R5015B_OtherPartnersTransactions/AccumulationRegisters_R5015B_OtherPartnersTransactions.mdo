@@ -1,0 +1,16 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<mdclass:Role xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="1bc55fc1-8b94-42be-9122-e61964d45935">
+ <name>AccumulationRegisters_R5015B_OtherPartnersTransactions</name>
+ <synonym>
+  <key>en</key>
+  <value>AccumulationRegisters R5015B OtherPartnersTransactions</value>
+ </synonym>
+ <synonym>
+  <key>ru</key>
+  <value>РегистрыНакопления R5015B ТранзакцииДругихПартнеров</value>
+ </synonym>
+ <synonym>
+  <key>tr</key>
+  <value>BirikimKayıtları R5015B DiğerOrtaklarİşlemleri</value>
+ </synonym>
+</mdclass:Role>

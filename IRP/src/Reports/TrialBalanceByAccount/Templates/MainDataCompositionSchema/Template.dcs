@@ -99,7 +99,7 @@
 				</v8:item>
 				<v8:item>
 					<v8:lang>tr</v8:lang>
-					<v8:content>Ext dim.1</v8:content>
+					<v8:content>Gen. ölç.1</v8:content>
 				</v8:item>
 			</title>
 			<role>
@@ -121,7 +121,7 @@
 				</v8:item>
 				<v8:item>
 					<v8:lang>tr</v8:lang>
-					<v8:content>Ext dim.2</v8:content>
+					<v8:content>Ek boyut.2</v8:content>
 				</v8:item>
 			</title>
 			<role>
@@ -143,7 +143,7 @@
 				</v8:item>
 				<v8:item>
 					<v8:lang>tr</v8:lang>
-					<v8:content>Ext dim.3</v8:content>
+					<v8:content>Ek boyut.3</v8:content>
 				</v8:item>
 			</title>
 			<role>
@@ -203,7 +203,7 @@
 				</v8:item>
 				<v8:item>
 					<v8:lang>tr</v8:lang>
-					<v8:content>Amount Dr (opening balance)</v8:content>
+					<v8:content>Tutar Dr (açılış bakiyesi)</v8:content>
 				</v8:item>
 			</title>
 			<role>
@@ -249,7 +249,7 @@
 				</v8:item>
 				<v8:item>
 					<v8:lang>tr</v8:lang>
-					<v8:content>Amount Cr (opening balance)</v8:content>
+					<v8:content>Tutar Cr (açılış bakiyesi)</v8:content>
 				</v8:item>
 			</title>
 			<role>
@@ -295,7 +295,7 @@
 				</v8:item>
 				<v8:item>
 					<v8:lang>tr</v8:lang>
-					<v8:content>Amount Dr (closing balance</v8:content>
+					<v8:content>Tutar Dr (kapanış bakiyesi</v8:content>
 				</v8:item>
 			</title>
 			<role>
@@ -341,7 +341,7 @@
 				</v8:item>
 				<v8:item>
 					<v8:lang>tr</v8:lang>
-					<v8:content>Amount Cr (closing balance)</v8:content>
+					<v8:content>Tutar Alacak (kapanış bakiyesi)</v8:content>
 				</v8:item>
 			</title>
 			<role>
@@ -387,7 +387,7 @@
 				</v8:item>
 				<v8:item>
 					<v8:lang>tr</v8:lang>
-					<v8:content>Currency amt. Dr (opening balance)</v8:content>
+					<v8:content>Para birimi tut. Dr (açılış bakiyesi)</v8:content>
 				</v8:item>
 			</title>
 			<role>
@@ -433,7 +433,7 @@
 				</v8:item>
 				<v8:item>
 					<v8:lang>tr</v8:lang>
-					<v8:content>Currency amt. Cr (opening balance)</v8:content>
+					<v8:content>Döviz Tutarı Alacak (açılış bakiyesi)</v8:content>
 				</v8:item>
 			</title>
 			<role>
@@ -479,7 +479,7 @@
 				</v8:item>
 				<v8:item>
 					<v8:lang>tr</v8:lang>
-					<v8:content>Currency amt. Dr (closing balance)</v8:content>
+					<v8:content>Döviz tut. Dr (kapanış bakiyesi)</v8:content>
 				</v8:item>
 			</title>
 			<role>
@@ -525,7 +525,7 @@
 				</v8:item>
 				<v8:item>
 					<v8:lang>tr</v8:lang>
-					<v8:content>Currency amt. Cr (closing balance)</v8:content>
+					<v8:content>Döviz tut. Cr (kapanış bakiyesi)</v8:content>
 				</v8:item>
 			</title>
 			<role>
@@ -571,7 +571,7 @@
 				</v8:item>
 				<v8:item>
 					<v8:lang>tr</v8:lang>
-					<v8:content>Quantity Dr (closing balance)</v8:content>
+					<v8:content>Miktar Dr (kapanış bakiyesi)</v8:content>
 				</v8:item>
 			</title>
 			<role>
@@ -617,7 +617,7 @@
 				</v8:item>
 				<v8:item>
 					<v8:lang>tr</v8:lang>
-					<v8:content>Quantity Cr (closing balance)</v8:content>
+					<v8:content>Miktar Cr (kapanış bakiyesi)</v8:content>
 				</v8:item>
 			</title>
 			<role>
@@ -663,7 +663,7 @@
 				</v8:item>
 				<v8:item>
 					<v8:lang>tr</v8:lang>
-					<v8:content>Quantity Dr (opening balance)</v8:content>
+					<v8:content>Miktar Borç (açılış bakiyesi)</v8:content>
 				</v8:item>
 			</title>
 			<role>
@@ -709,7 +709,7 @@
 				</v8:item>
 				<v8:item>
 					<v8:lang>tr</v8:lang>
-					<v8:content>Quantity Cr (opening balance)</v8:content>
+					<v8:content>Miktar Alacak (açılış bakiyesi)</v8:content>
 				</v8:item>
 			</title>
 			<role>
@@ -755,7 +755,7 @@
 				</v8:item>
 				<v8:item>
 					<v8:lang>tr</v8:lang>
-					<v8:content>Amount Cr (turnover)</v8:content>
+					<v8:content>Tutar Cr (ciro)</v8:content>
 				</v8:item>
 			</title>
 			<appearance>
@@ -796,7 +796,7 @@
 				</v8:item>
 				<v8:item>
 					<v8:lang>tr</v8:lang>
-					<v8:content>Amount Dr (turnover)</v8:content>
+					<v8:content>Tutar Dr (ciro)</v8:content>
 				</v8:item>
 			</title>
 			<appearance>
@@ -870,7 +870,7 @@
 				</v8:item>
 				<v8:item>
 					<v8:lang>tr</v8:lang>
-					<v8:content>Turnovers</v8:content>
+					<v8:content>Dönüşümler</v8:content>
 				</v8:item>
 			</title>
 		</field>
@@ -888,7 +888,7 @@
 				</v8:item>
 				<v8:item>
 					<v8:lang>tr</v8:lang>
-					<v8:content>Quantity Dr (turnover)</v8:content>
+					<v8:content>Miktar Dr (ciro)</v8:content>
 				</v8:item>
 			</title>
 			<appearance>
@@ -929,7 +929,7 @@
 				</v8:item>
 				<v8:item>
 					<v8:lang>tr</v8:lang>
-					<v8:content>Quantity Cr (turnover)</v8:content>
+					<v8:content>Miktar Alacak (ciro)</v8:content>
 				</v8:item>
 			</title>
 			<appearance>
@@ -970,7 +970,7 @@
 				</v8:item>
 				<v8:item>
 					<v8:lang>tr</v8:lang>
-					<v8:content>Currency amt. Dr (turnover)</v8:content>
+					<v8:content>Döviz tut. Dr (ciro)</v8:content>
 				</v8:item>
 			</title>
 			<appearance>
@@ -1011,7 +1011,7 @@
 				</v8:item>
 				<v8:item>
 					<v8:lang>tr</v8:lang>
-					<v8:content>Currency amt. Cr (turnover)</v8:content>
+					<v8:content>Döviz Tutarı Alacak (ciro)</v8:content>
 				</v8:item>
 			</title>
 			<appearance>
@@ -1051,7 +1051,7 @@
 				</v8:item>
 				<v8:item>
 					<v8:lang>tr</v8:lang>
-					<v8:content>Indicators</v8:content>
+					<v8:content>Göstergeler</v8:content>
 				</v8:item>
 			</title>
 		</field>
@@ -1112,7 +1112,7 @@ FROM
 			</v8:item>
 			<v8:item>
 				<v8:lang>tr</v8:lang>
-				<v8:content>IndicatorAmt</v8:content>
+				<v8:content>GöstergesiTut</v8:content>
 			</v8:item>
 		</title>
 	</calculatedField>
@@ -1130,7 +1130,7 @@ FROM
 			</v8:item>
 			<v8:item>
 				<v8:lang>tr</v8:lang>
-				<v8:content>IndicatorCurr</v8:content>
+				<v8:content>GöstergesiDöv</v8:content>
 			</v8:item>
 		</title>
 	</calculatedField>
@@ -1148,7 +1148,7 @@ FROM
 			</v8:item>
 			<v8:item>
 				<v8:lang>tr</v8:lang>
-				<v8:content>IndicatorQty</v8:content>
+				<v8:content>GöstergeMik.</v8:content>
 			</v8:item>
 		</title>
 	</calculatedField>
@@ -1341,7 +1341,7 @@ FROM
 							</v8:item>
 							<v8:item>
 								<v8:lang>tr</v8:lang>
-								<v8:content>Amt.</v8:content>
+								<v8:content>Tut.</v8:content>
 							</v8:item>
 						</dcsat:value>
 					</dcsat:item>
@@ -1366,7 +1366,7 @@ FROM
 							</v8:item>
 							<v8:item>
 								<v8:lang>tr</v8:lang>
-								<v8:content>Qty.</v8:content>
+								<v8:content>Mik.</v8:content>
 							</v8:item>
 						</dcsat:value>
 					</dcsat:item>
@@ -1416,7 +1416,7 @@ FROM
 							</v8:item>
 							<v8:item>
 								<v8:lang>tr</v8:lang>
-								<v8:content>Opening balance Dr</v8:content>
+								<v8:content>Açılış bakiyesi Dr</v8:content>
 							</v8:item>
 						</dcsat:value>
 					</dcsat:item>
@@ -1447,7 +1447,7 @@ FROM
 							</v8:item>
 							<v8:item>
 								<v8:lang>tr</v8:lang>
-								<v8:content>Dr turnovers</v8:content>
+								<v8:content>Dr ciroları</v8:content>
 							</v8:item>
 						</dcsat:value>
 					</dcsat:item>
@@ -1478,7 +1478,7 @@ FROM
 							</v8:item>
 							<v8:item>
 								<v8:lang>tr</v8:lang>
-								<v8:content>Cr turnovers</v8:content>
+								<v8:content>Cr dönüşümleri</v8:content>
 							</v8:item>
 						</dcsat:value>
 					</dcsat:item>
@@ -1509,7 +1509,7 @@ FROM
 							</v8:item>
 							<v8:item>
 								<v8:lang>tr</v8:lang>
-								<v8:content>Closing balance Dr</v8:content>
+								<v8:content>Kapanış bakiyesi Dr</v8:content>
 							</v8:item>
 						</dcsat:value>
 					</dcsat:item>
@@ -1540,7 +1540,7 @@ FROM
 							</v8:item>
 							<v8:item>
 								<v8:lang>tr</v8:lang>
-								<v8:content>Closing balance Cr</v8:content>
+								<v8:content>Kapanış bakiyesi Cr</v8:content>
 							</v8:item>
 						</dcsat:value>
 					</dcsat:item>
@@ -1571,7 +1571,7 @@ FROM
 							</v8:item>
 							<v8:item>
 								<v8:lang>tr</v8:lang>
-								<v8:content>Indicators</v8:content>
+								<v8:content>Göstergeler</v8:content>
 							</v8:item>
 						</dcsat:value>
 					</dcsat:item>
@@ -1622,7 +1622,7 @@ FROM
 							</v8:item>
 							<v8:item>
 								<v8:lang>tr</v8:lang>
-								<v8:content>Opening balance Cr</v8:content>
+								<v8:content>Açılış Bakiyesi Alacak</v8:content>
 							</v8:item>
 						</dcsat:value>
 					</dcsat:item>
@@ -1669,7 +1669,7 @@ FROM
 							</v8:item>
 							<v8:item>
 								<v8:lang>tr</v8:lang>
-								<v8:content>Qty</v8:content>
+								<v8:content>Mik</v8:content>
 							</v8:item>
 						</dcsat:value>
 					</dcsat:item>
@@ -1702,7 +1702,7 @@ FROM
 							</v8:item>
 							<v8:item>
 								<v8:lang>tr</v8:lang>
-								<v8:content>Amt.</v8:content>
+								<v8:content>Tut.</v8:content>
 							</v8:item>
 						</dcsat:value>
 					</dcsat:item>
@@ -1735,7 +1735,7 @@ FROM
 							</v8:item>
 							<v8:item>
 								<v8:lang>tr</v8:lang>
-								<v8:content>Curr.</v8:content>
+								<v8:content>Döv.</v8:content>
 							</v8:item>
 						</dcsat:value>
 					</dcsat:item>
@@ -1760,7 +1760,7 @@ FROM
 							</v8:item>
 							<v8:item>
 								<v8:lang>tr</v8:lang>
-								<v8:content>Qty.</v8:content>
+								<v8:content>Mik.</v8:content>
 							</v8:item>
 						</dcsat:value>
 					</dcsat:item>
@@ -1797,7 +1797,7 @@ FROM
 			</v8:item>
 			<v8:item>
 				<v8:lang>tr</v8:lang>
-				<v8:content>Trial balance by account</v8:content>
+				<v8:content>Hesaba göre denge denemesi</v8:content>
 			</v8:item>
 		</dcsset:presentation>
 		<dcsset:settings xmlns:style="http://v8.1c.ru/8.1/data/ui/style" xmlns:sys="http://v8.1c.ru/8.1/data/ui/fonts/system" xmlns:web="http://v8.1c.ru/8.1/data/ui/colors/web" xmlns:win="http://v8.1c.ru/8.1/data/ui/colors/windows">

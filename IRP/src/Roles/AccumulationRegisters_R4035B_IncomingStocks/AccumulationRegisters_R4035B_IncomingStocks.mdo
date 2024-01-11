@@ -1,0 +1,16 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<mdclass:Role xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="3de4a199-93ce-4fb9-b820-844557c7f8c3">
+ <name>AccumulationRegisters_R4035B_IncomingStocks</name>
+ <synonym>
+  <key>en</key>
+  <value>AccumulationRegisters R4035B IncomingStocks</value>
+ </synonym>
+ <synonym>
+  <key>ru</key>
+  <value>РегистрыНакопления R4035B ПоступлениеНаСклад</value>
+ </synonym>
+ <synonym>
+  <key>tr</key>
+  <value>BirikimKayıtları R4035B GelenStoklar</value>
+ </synonym>
+</mdclass:Role>

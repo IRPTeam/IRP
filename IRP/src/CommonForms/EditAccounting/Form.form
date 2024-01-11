@@ -261,6 +261,12 @@
     <chooseType>true</chooseType>
     <typeDomainEnabled>true</typeDomainEnabled>
     <textEdit>true</textEdit>
+    <choiceParameterLinks>
+     <name>Filter.LedgerType</name>
+     <datapath xsi:type="form:DataPath">
+      <segments>LedgerType</segments>
+     </datapath>
+    </choiceParameterLinks>
    </extInfo>
   </items>
   <items xsi:type="form:FormGroup">
@@ -522,6 +528,12 @@
     <chooseType>true</chooseType>
     <typeDomainEnabled>true</typeDomainEnabled>
     <textEdit>true</textEdit>
+    <choiceParameterLinks>
+     <name>Filter.LedgerType</name>
+     <datapath xsi:type="form:DataPath">
+      <segments>LedgerType</segments>
+     </datapath>
+    </choiceParameterLinks>
    </extInfo>
   </items>
   <items xsi:type="form:FormGroup">

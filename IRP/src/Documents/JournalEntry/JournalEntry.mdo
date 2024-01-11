@@ -144,18 +144,7 @@
    <value>Kaynak evrak</value>
   </synonym>
   <type>
-   <types>DocumentRef.PurchaseInvoice</types>
-   <types>DocumentRef.BankPayment</types>
-   <types>DocumentRef.RetailSalesReceipt</types>
-   <types>DocumentRef.BankReceipt</types>
-   <types>DocumentRef.SalesInvoice</types>
-   <types>DocumentRef.ForeignCurrencyRevaluation</types>
-   <types>DocumentRef.CashExpense</types>
-   <types>DocumentRef.CashPayment</types>
-   <types>DocumentRef.CashReceipt</types>
-   <types>DocumentRef.CashRevenue</types>
-   <types>DocumentRef.CreditNote</types>
-   <types>DocumentRef.DebitNote</types>
+   <types>DefinedType.typeAccountingDocuments</types>
   </type>
   <minValue xsi:type="core:UndefinedValue"/>
   <maxValue xsi:type="core:UndefinedValue"/>
@@ -543,18 +532,7 @@
   </synonym>
   <group>CommandGroup.Service</group>
   <commandParameterType>
-   <types>DocumentRef.PurchaseInvoice</types>
-   <types>DocumentRef.BankPayment</types>
-   <types>DocumentRef.RetailSalesReceipt</types>
-   <types>DocumentRef.BankReceipt</types>
-   <types>DocumentRef.SalesInvoice</types>
-   <types>DocumentRef.ForeignCurrencyRevaluation</types>
-   <types>DocumentRef.CashExpense</types>
-   <types>DocumentRef.CashPayment</types>
-   <types>DocumentRef.CashReceipt</types>
-   <types>DocumentRef.CashRevenue</types>
-   <types>DocumentRef.CreditNote</types>
-   <types>DocumentRef.DebitNote</types>
+   <types>DefinedType.typeAccountingDocuments</types>
   </commandParameterType>
   <representation>PictureAndText</representation>
   <picture xsi:type="core:PictureRef">
@@ -577,18 +555,7 @@
   </synonym>
   <group>CommandGroup.Service</group>
   <commandParameterType>
-   <types>DocumentRef.BankReceipt</types>
-   <types>DocumentRef.BankPayment</types>
-   <types>DocumentRef.PurchaseInvoice</types>
-   <types>DocumentRef.SalesInvoice</types>
-   <types>DocumentRef.RetailSalesReceipt</types>
-   <types>DocumentRef.ForeignCurrencyRevaluation</types>
-   <types>DocumentRef.CashExpense</types>
-   <types>DocumentRef.CashPayment</types>
-   <types>DocumentRef.CashReceipt</types>
-   <types>DocumentRef.CashRevenue</types>
-   <types>DocumentRef.CreditNote</types>
-   <types>DocumentRef.DebitNote</types>
+   <types>DefinedType.typeAccountingDocuments</types>
   </commandParameterType>
   <parameterUseMode>Multiple</parameterUseMode>
   <representation>PictureAndText</representation>

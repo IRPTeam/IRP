@@ -1,0 +1,16 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<mdclass:Role xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="311c4d50-3086-4047-b4e4-321bfdac2b9b">
+ <name>AccumulationRegisters_R1014T_CanceledPurchaseOrders</name>
+ <synonym>
+  <key>en</key>
+  <value>AccumulationRegisters R1014T CanceledPurchaseOrders</value>
+ </synonym>
+ <synonym>
+  <key>ru</key>
+  <value>РегистрыНакопления R1014T ОтмененныеЗаказыНаПокупку</value>
+ </synonym>
+ <synonym>
+  <key>tr</key>
+  <value>BirikimKayıtları R1014T İptalEdilenSatınalmaSiparişleri</value>
+ </synonym>
+</mdclass:Role>

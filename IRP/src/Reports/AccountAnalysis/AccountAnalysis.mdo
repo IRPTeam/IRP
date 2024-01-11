@@ -15,7 +15,7 @@
  </synonym>
  <synonym>
   <key>tr</key>
-  <value>Account analysis</value>
+  <value>Hesap analizi</value>
  </synonym>
  <useStandardCommands>true</useStandardCommands>
  <mainDataCompositionSchema>Report.AccountAnalysis.Template.MainDataCompositionSchema</mainDataCompositionSchema>

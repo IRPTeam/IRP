@@ -34,7 +34,7 @@
 				</v8:item>
 				<v8:item>
 					<v8:lang>tr</v8:lang>
-					<v8:content>Account (balanced)</v8:content>
+					<v8:content>Hesap (dengeli)</v8:content>
 				</v8:item>
 			</title>
 			<role>
@@ -62,7 +62,7 @@
 				</v8:item>
 				<v8:item>
 					<v8:lang>tr</v8:lang>
-					<v8:content>Extra dim.1</v8:content>
+					<v8:content>Ek boyut.1</v8:content>
 				</v8:item>
 			</title>
 			<role>
@@ -85,7 +85,7 @@
 				</v8:item>
 				<v8:item>
 					<v8:lang>tr</v8:lang>
-					<v8:content>Extra dim.2</v8:content>
+					<v8:content>Ekstra ölç.2</v8:content>
 				</v8:item>
 			</title>
 			<role>
@@ -108,7 +108,7 @@
 				</v8:item>
 				<v8:item>
 					<v8:lang>tr</v8:lang>
-					<v8:content>Extra dim.3</v8:content>
+					<v8:content>Ekstra boyut.3</v8:content>
 				</v8:item>
 			</title>
 			<role>
@@ -131,7 +131,7 @@
 				</v8:item>
 				<v8:item>
 					<v8:lang>tr</v8:lang>
-					<v8:content>Extra dim.1 (balanced)</v8:content>
+					<v8:content>Ek boyut.1 (dengeli)</v8:content>
 				</v8:item>
 			</title>
 			<role>
@@ -154,7 +154,7 @@
 				</v8:item>
 				<v8:item>
 					<v8:lang>tr</v8:lang>
-					<v8:content>Extra dim.2 (balanced)</v8:content>
+					<v8:content>Ekstra ölç.2 (dengeli)</v8:content>
 				</v8:item>
 			</title>
 			<role>
@@ -177,7 +177,7 @@
 				</v8:item>
 				<v8:item>
 					<v8:lang>tr</v8:lang>
-					<v8:content>Extra dim3 (balanced)</v8:content>
+					<v8:content>Ekstra boyut3 (dengeli)</v8:content>
 				</v8:item>
 			</title>
 			<role>
@@ -200,7 +200,7 @@
 				</v8:item>
 				<v8:item>
 					<v8:lang>tr</v8:lang>
-					<v8:content>From Cr (Amt.)</v8:content>
+					<v8:content>Cr'den (Tut.)</v8:content>
 				</v8:item>
 			</title>
 			<appearance>
@@ -242,7 +242,7 @@
 				</v8:item>
 				<v8:item>
 					<v8:lang>tr</v8:lang>
-					<v8:content>To Dr (Amt.)</v8:content>
+					<v8:content>Borç Tarafına (Tutar)</v8:content>
 				</v8:item>
 			</title>
 			<appearance>
@@ -284,7 +284,7 @@
 				</v8:item>
 				<v8:item>
 					<v8:lang>tr</v8:lang>
-					<v8:content>From Cr (Qty.)</v8:content>
+					<v8:content>Cr'den (Mik.)</v8:content>
 				</v8:item>
 			</title>
 			<appearance>
@@ -326,7 +326,7 @@
 				</v8:item>
 				<v8:item>
 					<v8:lang>tr</v8:lang>
-					<v8:content>To Dr (Qty.)</v8:content>
+					<v8:content>Dr'ye (Mik.)</v8:content>
 				</v8:item>
 			</title>
 			<appearance>
@@ -368,7 +368,7 @@
 				</v8:item>
 				<v8:item>
 					<v8:lang>tr</v8:lang>
-					<v8:content>From Cr (Curr.)</v8:content>
+					<v8:content>Cr'den (Döv.)</v8:content>
 				</v8:item>
 			</title>
 			<appearance>
@@ -410,7 +410,7 @@
 				</v8:item>
 				<v8:item>
 					<v8:lang>tr</v8:lang>
-					<v8:content>To Dr (Curr.)</v8:content>
+					<v8:content>Dr'ye (Döv.)</v8:content>
 				</v8:item>
 			</title>
 			<appearance>
@@ -497,7 +497,7 @@
 				</v8:item>
 				<v8:item>
 					<v8:lang>tr</v8:lang>
-					<v8:content>Indicators</v8:content>
+					<v8:content>Göstergeler</v8:content>
 				</v8:item>
 			</title>
 		</field>
@@ -538,7 +538,7 @@ FROM
 			</v8:item>
 			<v8:item>
 				<v8:lang>tr</v8:lang>
-				<v8:content>Indicator Amt</v8:content>
+				<v8:content>GöstergesiTut</v8:content>
 			</v8:item>
 		</title>
 		<appearance/>
@@ -558,7 +558,7 @@ FROM
 			</v8:item>
 			<v8:item>
 				<v8:lang>tr</v8:lang>
-				<v8:content>Indicator Curr</v8:content>
+				<v8:content>Gösterge Curr</v8:content>
 			</v8:item>
 		</title>
 		<appearance/>
@@ -578,7 +578,7 @@ FROM
 			</v8:item>
 			<v8:item>
 				<v8:lang>tr</v8:lang>
-				<v8:content>Indicator Qty</v8:content>
+				<v8:content>Gösterge Mik.</v8:content>
 			</v8:item>
 		</title>
 		<appearance/>
@@ -704,7 +704,7 @@ FROM
 			</v8:item>
 			<v8:item>
 				<v8:lang>tr</v8:lang>
-				<v8:content>Account analysis</v8:content>
+				<v8:content>Hesap analizi</v8:content>
 			</v8:item>
 		</dcsset:presentation>
 		<dcsset:settings xmlns:style="http://v8.1c.ru/8.1/data/ui/style" xmlns:sys="http://v8.1c.ru/8.1/data/ui/fonts/system" xmlns:web="http://v8.1c.ru/8.1/data/ui/colors/web" xmlns:win="http://v8.1c.ru/8.1/data/ui/colors/windows">

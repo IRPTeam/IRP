@@ -1,0 +1,16 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<mdclass:Role xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="6b1c1963-7620-4b6d-8f61-37848437437c">
+ <name>AccumulationRegisters_R1031B_ReceiptInvoicing</name>
+ <synonym>
+  <key>en</key>
+  <value>AccumulationRegisters R1031B ReceiptInvoicing</value>
+ </synonym>
+ <synonym>
+  <key>ru</key>
+  <value>РегистрыНакопления R1031B ОприходованиеСчетов</value>
+ </synonym>
+ <synonym>
+  <key>tr</key>
+  <value>BirikimKayıtları R1031B AlımFaturalandırma</value>
+ </synonym>
+</mdclass:Role>

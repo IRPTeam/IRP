@@ -1,0 +1,16 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<mdclass:Role xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="7c56fb65-ed71-4101-8ddb-dc8921019697">
+ <name>AccumulationRegisters_R6050T_SalesBatches</name>
+ <synonym>
+  <key>en</key>
+  <value>AccumulationRegisters R6050T SalesBatches</value>
+ </synonym>
+ <synonym>
+  <key>ru</key>
+  <value>РегистрыНакопления R6050T ПартииПродаж</value>
+ </synonym>
+ <synonym>
+  <key>tr</key>
+  <value>BirikimKayıtları R6050T SatışPartileri</value>
+ </synonym>
+</mdclass:Role>

@@ -1,0 +1,16 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<mdclass:Role xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="a9d8641a-2900-4107-9b6e-e466120df36c">
+ <name>AccumulationRegisters_R4011B_FreeStocks</name>
+ <synonym>
+  <key>en</key>
+  <value>AccumulationRegisters R4011B FreeStocks</value>
+ </synonym>
+ <synonym>
+  <key>ru</key>
+  <value>РегистрыНакопления R4011B СвободныеТовары</value>
+ </synonym>
+ <synonym>
+  <key>tr</key>
+  <value>BirikimKayıtları R4011B SerbestStoklar</value>
+ </synonym>
+</mdclass:Role>

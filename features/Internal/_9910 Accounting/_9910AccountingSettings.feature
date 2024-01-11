@@ -61,13 +61,13 @@ Scenario: _099100 preparation
 		* Tax settings
 			Given I open hyperlink "e1cib/list/Catalog.Companies"
 			And I go to line in "List" table
-							| 'Description'         |
-							| 'Own company 1'       |
+				| 'Description'         |
+				| 'Own company 2'       |
 			And I select current line in "List" table
 			And I move to "Tax types" tab
 			And I go to line in "CompanyTaxes" table
-							| 'Tax'       |
-							| 'VAT'       |
+				| 'Tax'       |
+				| 'VAT'       |
 			And I select current line in "CompanyTaxes" table
 			And I click Open button of "Tax" field
 			And I select "VAT" exact value from the drop-down list named "Kind"
@@ -1094,7 +1094,7 @@ Scenario: _0991022 accounts settings for Cash account (for Cash account)
 		And I click Select button of "Cash account" field
 		And I go to line in "List" table
 			| 'Description'  |
-			| 'Cash, USD' |
+			| 'Cash, TRY' |
 		And I select current line in "List" table		
 		And I input "01.02.2022" text in the field named "Period"
 		And I select from the drop-down list named "Company" by "Own company 1" string
@@ -1104,12 +1104,12 @@ Scenario: _0991022 accounts settings for Cash account (for Cash account)
 		Then the form attribute named "Company" became equal to "Own company 1"
 		Then the form attribute named "LedgerTypeVariant" became equal to "LTV with account charts code mask"
 		And the editing text of form attribute named "Period" became equal to "01.02.2022"
-		Then the form attribute named "CashAccount" became equal to "Cash, USD"		
+		Then the form attribute named "CashAccount" became equal to "Cash, TRY"		
 		And I click "Save and close" button
 	* Check
 		And "List" table contains lines
-			| 'Period'     | 'Company'      | 'Ledger type variant'               | 'Cash account' | 'Account' |
-			| '01.02.2022' | 'Own company 1' | 'LTV with account charts code mask' | 'Cash, USD' | '405.01'  |
+			| 'Period'     | 'Company'       | 'Ledger type variant'               | 'Cash account' | 'Account' |
+			| '01.02.2022' | 'Own company 1' | 'LTV with account charts code mask' | 'Cash, TRY'    | '405.01'  |
 	And I close all client application windows			
 
 Scenario: _0991026 accounts settings for Bank account (for Bank account)
@@ -1576,39 +1576,39 @@ Scenario: _0991058 create journal entry for one PI
 	* Select PI and create journal entry
 		And I go to line in "List" table
 			| 'Amount'    | 'Company'       | 'Partner'                   |
-			| '10 700,05' | 'Own company 1' | 'Vendor 1 (1 partner term)' |		
+			| '10 700,05' | 'Own company 2' | 'Vendor 1 (1 partner term)' |		
 		And I click "Journal entry" button
 		And I click "Save" button
 	* Check journal entry
 		Then the form attribute named "Author" became equal to "CI"
-		Then the form attribute named "Basis" became equal to "Purchase invoice 1 dated 24.02.2022 10:04:33"
-		Then the form attribute named "Company" became equal to "Own company 1"
-		Then the form attribute named "Date" became equal to "24.02.2022 10:04:33"
+		Then the form attribute named "Basis" became equal to "Purchase invoice 1 dated 24.02.2023 10:04:33"
+		Then the form attribute named "Company" became equal to "Own company 2"
+		Then the form attribute named "Date" became equal to "24.02.2023 10:04:33"
 		Then the form attribute named "LedgerType" became equal to "Basic LTV"
 		Then the form attribute named "LedgerTypeCurrencyMovementTypeCurrency" became equal to "EUR"
 		Then the form attribute named "Number" became equal to "1"
 		And "RegisterRecords" table became equal
-			| 'Period'              | 'Account Dr' | '#' | 'Amount'   | 'DebitQuantity' | 'Activity' | 'Credit currency' | 'Ext. Dim. Debit'                                   | 'Debit amount' | 'Extra dimension2 Dr'   | 'Credit quantity' | 'Extra dimension3 Dr' | 'Debit currency' | 'Account Cr' | 'Ext. Dim. Credit'          | 'Operation'                                                                                  | 'Extra dimension2 Cr'        | 'Credit amount' | 'Extra dimension3 Cr' |
-			| '24.02.2022 10:04:33' | '3540'       | '1' | '544,03'   | '4'             | 'Yes'      | 'USD'             | 'Item 1 with serial lot number (use line grouping)' | '633,33'       | 'XS/Color 2'            | ''                | ''                    | 'USD'            | '5201'       | 'Vendor 1 (1 partner term)' | 'PurchaseInvoice DR (R4050B_StockInventory_R5022T_Expenses) CR (R1021B_VendorsTransactions)' | 'Partner term with vendor 1' | '633,33'        | ''                    |
-			| '24.02.2022 10:04:33' | '5301'       | '2' | '108,81'   | ''              | 'Yes'      | 'USD'             | 'VAT'                                               | '126,67'       | ''                      | ''                | ''                    | 'USD'            | '5201'       | 'Vendor 1 (1 partner term)' | 'PurchaseInvoice DR (R1040B_TaxesOutgoing) CR (R1021B_VendorsTransactions)'                  | 'Partner term with vendor 1' | '126,67'        | ''                    |
-			| '24.02.2022 10:04:33' | '3540'       | '3' | '2 147,50' | '20'            | 'Yes'      | 'USD'             | 'Item without item key (pcs)'                       | '2 500'        | 'Item without item key' | ''                | ''                    | 'USD'            | '5201'       | 'Vendor 1 (1 partner term)' | 'PurchaseInvoice DR (R4050B_StockInventory_R5022T_Expenses) CR (R1021B_VendorsTransactions)' | 'Partner term with vendor 1' | '2 500'         | ''                    |
-			| '24.02.2022 10:04:33' | '5301'       | '4' | '429,50'   | ''              | 'Yes'      | 'USD'             | 'VAT'                                               | '500'          | ''                      | ''                | ''                    | 'USD'            | '5201'       | 'Vendor 1 (1 partner term)' | 'PurchaseInvoice DR (R1040B_TaxesOutgoing) CR (R1021B_VendorsTransactions)'                  | 'Partner term with vendor 1' | '500'           | ''                    |
-			| '24.02.2022 10:04:33' | '3540'       | '5' | '1 030,80' | '8'             | 'Yes'      | 'USD'             | 'Item 1 with serial lot number (use line grouping)' | '1 200'        | 'S/Color 2'             | ''                | ''                    | 'USD'            | '5201'       | 'Vendor 1 (1 partner term)' | 'PurchaseInvoice DR (R4050B_StockInventory_R5022T_Expenses) CR (R1021B_VendorsTransactions)' | 'Partner term with vendor 1' | '1 200'         | ''                    |
-			| '24.02.2022 10:04:33' | '5301'       | '6' | '206,16'   | ''              | 'Yes'      | 'USD'             | 'VAT'                                               | '240'          | ''                      | ''                | ''                    | 'USD'            | '5201'       | 'Vendor 1 (1 partner term)' | 'PurchaseInvoice DR (R1040B_TaxesOutgoing) CR (R1021B_VendorsTransactions)'                  | 'Partner term with vendor 1' | '240'           | ''                    |
-			| '24.02.2022 10:04:33' | '3540'       | '7' | '3 937,08' | '50'            | 'Yes'      | 'USD'             | 'Item with item key'                                | '4 583,33'     | 'S/Color 1'             | ''                | ''                    | 'USD'            | '5201'       | 'Vendor 1 (1 partner term)' | 'PurchaseInvoice DR (R4050B_StockInventory_R5022T_Expenses) CR (R1021B_VendorsTransactions)' | 'Partner term with vendor 1' | '4 583,33'      | ''                    |
-			| '24.02.2022 10:04:33' | '5301'       | '8' | '787,42'   | ''              | 'Yes'      | 'USD'             | 'VAT'                                               | '916,67'       | ''                      | ''                | ''                    | 'USD'            | '5201'       | 'Vendor 1 (1 partner term)' | 'PurchaseInvoice DR (R1040B_TaxesOutgoing) CR (R1021B_VendorsTransactions)'                  | 'Partner term with vendor 1' | '916,67'        | ''                    |
+			| 'Period'              | 'Account Dr' | '#' | 'Amount' | 'DebitQuantity' | 'Activity' | 'Credit currency' | 'Ext. Dim. Debit'                                   | 'Debit amount' | 'Extra dimension2 Dr'   | 'Credit quantity' | 'Extra dimension3 Dr' | 'Debit currency' | 'Account Cr' | 'Ext. Dim. Credit'          | 'Operation'                                                                                  | 'Extra dimension2 Cr'        | 'Credit amount' | 'Extra dimension3 Cr' |
+			| '24.02.2023 10:04:33' | '3540'       | '1' | '31,61'  | '4'             | 'Yes'      | 'TRY'             | 'Item 1 with serial lot number (use line grouping)' | '633,33'       | 'XS/Color 2'            | ''                | ''                    | 'TRY'            | '5201'       | 'Vendor 1 (1 partner term)' | 'PurchaseInvoice DR (R4050B_StockInventory_R5022T_Expenses) CR (R1021B_VendorsTransactions)' | 'Partner term with vendor 1' | '633,33'        | ''                    |
+			| '24.02.2023 10:04:33' | '5301'       | '2' | '6,32'   | ''              | 'Yes'      | 'TRY'             | 'VAT'                                               | '126,67'       | ''                      | ''                | ''                    | 'TRY'            | '5201'       | 'Vendor 1 (1 partner term)' | 'PurchaseInvoice DR (R1040B_TaxesOutgoing) CR (R1021B_VendorsTransactions)'                  | 'Partner term with vendor 1' | '126,67'        | ''                    |
+			| '24.02.2023 10:04:33' | '3540'       | '3' | '124,77' | '20'            | 'Yes'      | 'TRY'             | 'Item without item key (pcs)'                       | '2 500'        | 'Item without item key' | ''                | ''                    | 'TRY'            | '5201'       | 'Vendor 1 (1 partner term)' | 'PurchaseInvoice DR (R4050B_StockInventory_R5022T_Expenses) CR (R1021B_VendorsTransactions)' | 'Partner term with vendor 1' | '2 500'         | ''                    |
+			| '24.02.2023 10:04:33' | '5301'       | '4' | '24,95'  | ''              | 'Yes'      | 'TRY'             | 'VAT'                                               | '500'          | ''                      | ''                | ''                    | 'TRY'            | '5201'       | 'Vendor 1 (1 partner term)' | 'PurchaseInvoice DR (R1040B_TaxesOutgoing) CR (R1021B_VendorsTransactions)'                  | 'Partner term with vendor 1' | '500'           | ''                    |
+			| '24.02.2023 10:04:33' | '3540'       | '5' | '59,89'  | '8'             | 'Yes'      | 'TRY'             | 'Item 1 with serial lot number (use line grouping)' | '1 200'        | 'S/Color 2'             | ''                | ''                    | 'TRY'            | '5201'       | 'Vendor 1 (1 partner term)' | 'PurchaseInvoice DR (R4050B_StockInventory_R5022T_Expenses) CR (R1021B_VendorsTransactions)' | 'Partner term with vendor 1' | '1 200'         | ''                    |
+			| '24.02.2023 10:04:33' | '5301'       | '6' | '11,98'  | ''              | 'Yes'      | 'TRY'             | 'VAT'                                               | '240'          | ''                      | ''                | ''                    | 'TRY'            | '5201'       | 'Vendor 1 (1 partner term)' | 'PurchaseInvoice DR (R1040B_TaxesOutgoing) CR (R1021B_VendorsTransactions)'                  | 'Partner term with vendor 1' | '240'           | ''                    |
+			| '24.02.2023 10:04:33' | '3540'       | '7' | '228,74' | '50'            | 'Yes'      | 'TRY'             | 'Item with item key'                                | '4 583,33'     | 'S/Color 1'             | ''                | ''                    | 'TRY'            | '5201'       | 'Vendor 1 (1 partner term)' | 'PurchaseInvoice DR (R4050B_StockInventory_R5022T_Expenses) CR (R1021B_VendorsTransactions)' | 'Partner term with vendor 1' | '4 583,33'      | ''                    |
+			| '24.02.2023 10:04:33' | '5301'       | '8' | '45,75'  | ''              | 'Yes'      | 'TRY'             | 'VAT'                                               | '916,67'       | ''                      | ''                | ''                    | 'TRY'            | '5201'       | 'Vendor 1 (1 partner term)' | 'PurchaseInvoice DR (R1040B_TaxesOutgoing) CR (R1021B_VendorsTransactions)'                  | 'Partner term with vendor 1' | '916,67'        | ''                    |
 		And "Totals" table became equal
 			| '#' | 'Chart of account' | 'Amount Debit' | 'Amount Credit' |
-			| '1' | '3540'             | '7 659,41'     | ''              |
-			| '2' | '5201'             | ''             | '9 191,30'      |
-			| '3' | '5301'             | '1 531,89'     | ''              |
+			| '1' | '3540'             | '445,01'       | ''              |
+			| '2' | '5201'             | ''             | '534,01'        |
+			| '3' | '5301'             | '89,00'        | ''              |
 		Then the form attribute named "UserDefined" became equal to "No"
 		And I click "Save and close" button	
 	* Check Journal entry creation
 		Given I open hyperlink "e1cib/list/Document.JournalEntry"
 		And "List" table contains lines
 			| 'User defined' | 'Date'                | 'Company'       | 'Ledger type' | 'Basis'                                        | 'Description' |
-			| 'No'           | '24.02.2022 10:04:33' | 'Own company 1' | 'Basic LTV'   | 'Purchase invoice 1 dated 24.02.2022 10:04:33' | ''            |
+			| 'No'           | '24.02.2023 10:04:33' | 'Own company 2' | 'Basic LTV'   | 'Purchase invoice 1 dated 24.02.2023 10:04:33' | ''            |
 		
 							
 Scenario: _0991059 create journal entry for two PI
@@ -1618,7 +1618,7 @@ Scenario: _0991059 create journal entry for two PI
 	* Select PI and create journal entry
 		And I go to line in "List" table
 			| 'Amount'    | 'Company'       | 'Partner'                   |
-			| '2 200,00'  | 'Own company 1' | 'Vendor 2 (1 partner term)' |	
+			| '2 200,00'  | 'Own company 2' | 'Vendor 2 (1 partner term)' |	
 		And I move one line down in "List" table and select line	
 		And I click "Journal entry (multiple documents)" button
 		And I go to line in "JournalEntries" table
@@ -1631,8 +1631,8 @@ Scenario: _0991059 create journal entry for two PI
 		Given I open hyperlink "e1cib/list/Document.JournalEntry"
 		And "List" table contains lines
 			| 'User defined' | 'Date'                | 'Company'       | 'Ledger type' | 'Basis'                                        | 'Description' |
-			| 'No'           | '22.07.2022 09:38:02' | 'Own company 1' | 'Basic LTV'   | 'Purchase invoice 2 dated 22.07.2022 09:38:02' | ''            |
-			| 'No'           | '30.11.2022 16:01:04' | 'Own company 1' | 'Basic LTV'   | 'Purchase invoice 3 dated 30.11.2022 16:01:04' | ''            |
+			| 'No'           | '22.07.2023 09:38:02' | 'Own company 2' | 'Basic LTV'   | 'Purchase invoice 2 dated 22.07.2023 09:38:02' | ''            |
+			| 'No'           | '30.11.2023 16:01:04' | 'Own company 2' | 'Basic LTV'   | 'Purchase invoice 3 dated 30.11.2023 16:01:04' | ''            |
 			
 						
 Scenario: _0991059 create journal entry for two PI
@@ -1654,7 +1654,7 @@ Scenario: _0991059 create journal entry for two PI
 		And I click Choice button of the field named "Company"
 		And I go to line in "List" table
 			| 'Description'   |
-			| 'Own company 1' |
+			| 'Own company 2' |
 		And I select current line in "List" table
 		And I click Select button of "Ledger type" field
 		And I go to line in "List" table
@@ -1690,7 +1690,7 @@ Scenario: _0991070 check Bank receipt accounting movements (Payment from custome
 		And in the table "PaymentList" I click "Edit accounting" button
 		And "AccountingAnalytics" table became equal
 			| 'Debit' | 'Cash/Bank account'           | 'Company'                                     | 'Business unit'   | 'Partner'                     | 'Credit' | 'Partner term'                                | 'Operation'                                                                                         |
-			| '3250'  | 'Bank account, USD'           | 'Client 2'                                    | 'Business unit 1' | 'Customer 2 (2 partner term)' | '4010'   | 'Individual partner term 1 (by partner term)' | 'BankReceipt DR (R3010B_CashOnHand) CR (R2020B_AdvancesFromCustomers_R2021B_CustomersTransactions)' |
+			| '3250'  | 'Bank account, TRY'           | 'Client 2'                                    | 'Business unit 1' | 'Customer 2 (2 partner term)' | '4010'   | 'Individual partner term 1 (by partner term)' | 'BankReceipt DR (R3010B_CashOnHand) CR (R2020B_AdvancesFromCustomers_R2021B_CustomersTransactions)' |
 			| '4010'  | 'Customer 2 (2 partner term)' | 'Individual partner term 1 (by partner term)' | 'Business unit 1' | 'Customer 2 (2 partner term)' | '4020'   | 'Individual partner term 1 (by partner term)' | 'BankReceipt DR (R2021B_CustomersTransactions) CR (R2020B_AdvancesFromCustomers)'                   |
 	And I close all client application windows
 
@@ -1707,8 +1707,8 @@ Scenario: _0991071 check Bank payment accounting movements (Payment to the vendo
 		And in the table "PaymentList" I click "Edit accounting" button
 		And "AccountingAnalytics" table became equal
 			| 'Debit' | 'Partner'                   | 'Business unit'   | 'Company'                    | 'Partner term'               | 'Credit' | 'Cash/Bank account'         | 'Operation'                                                                                   |
-			| '5201'  | 'Vendor 2 (1 partner term)' | 'Business unit 1' | 'Vendor 2'                   | 'Partner term with vendor 2' | '3250'   | 'Bank account, USD'         | 'BankPayment DR (R1020B_AdvancesToVendors R1021B_VendorsTransactions) CR (R3010B_CashOnHand)' |
-			| '420.2' | 'Vendor 2 (1 partner term)' | 'Business unit 1' | 'Vendor 2'                   | 'Business unit 1'            | '3250'   | 'Bank account, USD'         | 'BankPayment DR (R5022T_Expenses) CR (R3010B_CashOnHand)'                                     |
+			| '5201'  | 'Vendor 2 (1 partner term)' | 'Business unit 1' | 'Vendor 2'                   | 'Partner term with vendor 2' | '3250'   | 'Bank account, TRY'         | 'BankPayment DR (R1020B_AdvancesToVendors R1021B_VendorsTransactions) CR (R3010B_CashOnHand)' |
+			| '420.2' | 'Vendor 2 (1 partner term)' | 'Business unit 1' | 'Vendor 2'                   | 'Business unit 1'            | '3250'   | 'Bank account, TRY'         | 'BankPayment DR (R5022T_Expenses) CR (R3010B_CashOnHand)'                                     |
 			| '5201'  | 'Vendor 2 (1 partner term)' | 'Business unit 1' | 'Partner term with vendor 2' | 'Partner term with vendor 2' | '5202'   | 'Vendor 2 (1 partner term)' | 'BankPayment DR (R1021B_VendorsTransactions) CR (R1020B_AdvancesToVendors)'                   |		
 	And I close all client application windows
 
@@ -1726,8 +1726,8 @@ Scenario: _0991072 check Bank payment accounting movements (Payment to the vendo
 		And in the table "PaymentList" I click "Edit accounting" button
 		And "AccountingAnalytics" table became equal
 			| 'Debit' | 'Partner'                   | 'Business unit'   | 'Company'                    | 'Partner term'               | 'Credit' | 'Cash/Bank account'         | 'Operation'                                                                                   |
-			| '5201'  | 'Vendor 2 (1 partner term)' | 'Business unit 1' | 'Vendor 2'                   | 'Partner term with vendor 2' | '3250'   | 'Bank account, USD'         | 'BankPayment DR (R1020B_AdvancesToVendors R1021B_VendorsTransactions) CR (R3010B_CashOnHand)' |
-			| '420.2' | 'Vendor 2 (1 partner term)' | 'Business unit 1' | 'Vendor 2'                   | 'Business unit 1'            | '3250'   | 'Bank account, USD'         | 'BankPayment DR (R5022T_Expenses) CR (R3010B_CashOnHand)'                                     |
+			| '5201'  | 'Vendor 2 (1 partner term)' | 'Business unit 1' | 'Vendor 2'                   | 'Partner term with vendor 2' | '3250'   | 'Bank account, TRY'         | 'BankPayment DR (R1020B_AdvancesToVendors R1021B_VendorsTransactions) CR (R3010B_CashOnHand)' |
+			| '420.2' | 'Vendor 2 (1 partner term)' | 'Business unit 1' | 'Vendor 2'                   | 'Business unit 1'            | '3250'   | 'Bank account, TRY'         | 'BankPayment DR (R5022T_Expenses) CR (R3010B_CashOnHand)'                                     |
 			| '5201'  | 'Vendor 2 (1 partner term)' | 'Business unit 1' | 'Partner term with vendor 2' | 'Partner term with vendor 2' | '5202'   | 'Vendor 2 (1 partner term)' | 'BankPayment DR (R1021B_VendorsTransactions) CR (R1020B_AdvancesToVendors)'                   |		
 	And I close all client application windows				
 				
@@ -1765,7 +1765,7 @@ Scenario: _0991100 check Cash payment accounting movements
 		And in the table "PaymentList" I click "Edit accounting" button
 		And "AccountingAnalytics" table became equal
 			| 'Debit' | 'Partner'                   | 'Business unit' | 'Company'                    | 'Partner term'               | 'Credit' | 'Cash/Bank account'         | 'Operation'                                                                                   |
-			| '5201'  | 'Vendor 1 (1 partner term)' | ''              | 'Vendor 1'                   | 'Partner term with vendor 1' | '3240'   | 'Cash, USD'                 | 'CashPayment DR (R1020B_AdvancesToVendors_R1021B_VendorsTransactions) CR (R3010B_CashOnHand)' |
+			| '5201'  | 'Vendor 1 (1 partner term)' | ''              | 'Vendor 1'                   | 'Partner term with vendor 1' | '3240'   | 'Cash, TRY'                 | 'CashPayment DR (R1020B_AdvancesToVendors_R1021B_VendorsTransactions) CR (R3010B_CashOnHand)' |
 			| '5201'  | ''                          | ''              | 'Partner term with vendor 1' | 'Partner term with vendor 1' | '5202'   | 'Vendor 1 (1 partner term)' | 'CashPayment DR (R1021B_VendorsTransactions) CR (R1020B_AdvancesToVendors)'                   |		
 	And I close all client application windows	
 						
@@ -1782,7 +1782,7 @@ Scenario: _0991110 check Cash receipt accounting movements
 		And in the table "PaymentList" I click "Edit accounting" button
 		And "AccountingAnalytics" table became equal
 			| 'Debit' | 'Cash/Bank account'           | 'Company'                                                 | 'Partner'                     | 'Business unit' | 'Credit' | 'Partner term'                                            | 'Operation'                                                                                         |
-			| '3240'  | 'Cash, USD'                   | 'Client 1'                                                | 'Customer 1 (1 partner term)' | ''              | '4010'   | 'Partner term with customer (by document + credit limit)' | 'CashReceipt DR (R3010B_CashOnHand) CR (R2020B_AdvancesFromCustomers_R2021B_CustomersTransactions)' |
+			| '3240'  | 'Cash, TRY'                   | 'Client 1'                                                | 'Customer 1 (1 partner term)' | ''              | '4010'   | 'Partner term with customer (by document + credit limit)' | 'CashReceipt DR (R3010B_CashOnHand) CR (R2020B_AdvancesFromCustomers_R2021B_CustomersTransactions)' |
 			| '4010'  | 'Customer 1 (1 partner term)' | 'Partner term with customer (by document + credit limit)' | 'Customer 1 (1 partner term)' | ''              | '4020'   | 'Partner term with customer (by document + credit limit)' | 'CashReceipt DR (R2021B_CustomersTransactions) CR (R2020B_AdvancesFromCustomers)'                   |	
 	And I close all client application windows
 
@@ -1799,7 +1799,7 @@ Scenario: _0991120 check Cash expense accounting movements
 		And in the table "PaymentList" I click "Edit accounting" button
 		And "AccountingAnalytics" table became equal
 			| 'Debit' | 'Partner' | 'Business unit'   | 'Company'       | 'Expense and revenue type' | 'Credit' | 'Cash/Bank account' | 'Operation'                                               |
-			| '420.2' | ''        | 'Business unit 1' | 'Own company 1' | 'Expence 1'                | '3240'   | 'Cash, USD'         | 'CashExpense DR (R5022T_Expenses) CR (R3010B_CashOnHand)' |		
+			| '420.2' | ''        | 'Business unit 1' | 'Own company 2' | 'Expence 1'                | '3240'   | 'Cash, TRY'         | 'CashExpense DR (R5022T_Expenses) CR (R3010B_CashOnHand)' |		
 	And I close all client application windows
 
 Scenario: _0991130 check Cash revenue accounting movements
@@ -1815,7 +1815,7 @@ Scenario: _0991130 check Cash revenue accounting movements
 		And in the table "PaymentList" I click "Edit accounting" button
 		And "AccountingAnalytics" table became equal
 			| 'Debit' | 'Cash/Bank account' | 'Company'       | 'Partner' | 'Business unit'   | 'Credit' | ' ' | 'Operation'                                              |
-			| '3240'  | 'Cash, USD'         | 'Own company 1' | ''        | 'Business unit 1' | '650'    | ''  | 'CashRevenue DR (R3010B_CashOnHand) CR (R5021_Revenues)' |		
+			| '3240'  | 'Cash, TRY'         | 'Own company 2' | ''        | 'Business unit 1' | '650'    | ''  | 'CashRevenue DR (R3010B_CashOnHand) CR (R5021_Revenues)' |		
 	And I close all client application windows
 
 Scenario: _0991140 check Debit note accounting movements

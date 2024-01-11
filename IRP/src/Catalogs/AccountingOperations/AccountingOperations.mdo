@@ -477,6 +477,49 @@
     </code>
    </content>
   </items>
+  <items id="249b66fa-33bd-4d0a-b148-66d6d90ce904">
+   <name>Document_MoneyTransfer</name>
+   <description/>
+   <code xsi:type="core:NumberValue">
+    <value>44</value>
+   </code>
+   <isFolder>true</isFolder>
+   <content id="369606fc-a9d6-42e2-abea-d3d5d0d98153">
+    <name>MoneyTransfer_DR_R3010B_CashOnHand_CR_R3010B_CashOnHand</name>
+    <description/>
+    <code xsi:type="core:NumberValue">
+     <value>45</value>
+    </code>
+   </content>
+   <content id="d3d817dc-b0c3-4f52-a7b3-d175127786fd">
+    <name>MoneyTransfer_DR_R3021B_CashInTransit_CR_R3010B_CashOnHand</name>
+    <description/>
+    <code xsi:type="core:NumberValue">
+     <value>46</value>
+    </code>
+   </content>
+   <content id="e9a428bb-a932-4286-a180-50ba528ae89b">
+    <name>MoneyTransfer_DR_R3010B_CashOnHand_CR_R3021B_CashInTransit</name>
+    <description/>
+    <code xsi:type="core:NumberValue">
+     <value>47</value>
+    </code>
+   </content>
+   <content id="fa0f40e8-32f5-48b5-b9ce-cd0485dc715f">
+    <name>MoneyTransfer_DR_R3021B_CashInTransit_CR_R5021T_Revenues</name>
+    <description/>
+    <code xsi:type="core:NumberValue">
+     <value>48</value>
+    </code>
+   </content>
+   <content id="64a3ab9e-e061-40f5-9ffe-973ee1f3408f">
+    <name>MoneyTransfer_DR_R5022T_Expenses_CR_R3021B_CashInTransit</name>
+    <description/>
+    <code xsi:type="core:NumberValue">
+     <value>49</value>
+    </code>
+   </content>
+  </items>
  </predefined>
  <editType>InDialog</editType>
  <choiceMode>BothWays</choiceMode>

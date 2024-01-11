@@ -1,0 +1,16 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<mdclass:Role xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="74bde683-eb78-46e7-acbb-21e7de8b259e">
+ <name>AccumulationRegisters_DELETE_R8011B_TradeAgentSerialLotNumber</name>
+ <synonym>
+  <key>en</key>
+  <value>AccumulationRegisters DELETE R8011B TradeAgentSerialLotNumber</value>
+ </synonym>
+ <synonym>
+  <key>ru</key>
+  <value>РегистрыНакопления УДАЛИТЬ R8011B СерийныеНомераТоргПредставителя</value>
+ </synonym>
+ <synonym>
+  <key>tr</key>
+  <value>BirikimKayıtları SİL R8011B TicaretAjanıSeriLotNumarası</value>
+ </synonym>
+</mdclass:Role>

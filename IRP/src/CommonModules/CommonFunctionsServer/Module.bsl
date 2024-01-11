@@ -1512,34 +1512,41 @@ Function TablesIsEqual(Table1, Table2, DeleteColumns = "") Export
 		MD5_1 = GetMD5(Table1);
 		MD5_2 = GetMD5(Table2);
 	Else
+		Array = New Array; // Array Of String
+		For Each Column In Table1.Columns Do
+			Array.Add(Column.Name);
+		EndDo;   
+		
 		Text = "SELECT
-			   |	*
-			   |INTO VTSort1
-			   |FROM
-			   |	&VT1 AS VT1
-			   |;
-			   |////////////////////////////////////////////////////////////////////////////////
-			   |SELECT
-			   |	*
-			   |INTO VTSort2
-			   |FROM
-			   |	&VT2 AS VT2
-			   |;
-			   |
-			   |////////////////////////////////////////////////////////////////////////////////
-			   |SELECT
-			   |	*
-			   |FROM
-			   |	VTSort1 AS VTSort1
-			   |AUTOORDER
-			   |;
-			   |
-			   |////////////////////////////////////////////////////////////////////////////////
-			   |SELECT
-			   |	*
-			   |FROM
-			   |	VTSort2 AS VTSort2
-			   |AUTOORDER";
+		|	*
+		|INTO VTSort1
+		|FROM
+		|	&VT1 AS VT1
+		|;
+		|////////////////////////////////////////////////////////////////////////////////
+		|SELECT
+		|	*
+		|INTO VTSort2
+		|FROM
+		|	&VT2 AS VT2
+		|;
+		|
+		|////////////////////////////////////////////////////////////////////////////////
+		|SELECT
+		|	*
+		|FROM
+		|	VTSort1
+		|ORDER BY
+		|" + StrConcat(Array, ",") + "
+		|;
+		|
+		|////////////////////////////////////////////////////////////////////////////////
+		|SELECT
+		|	*
+		|FROM
+		|	VTSort2
+		|ORDER BY
+		|" + StrConcat(Array, ",");
 	
 		Query = New Query();
 		Query.Text = Text;

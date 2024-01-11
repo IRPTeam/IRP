@@ -421,7 +421,6 @@ EndFunction
 //  AllJobDone - Boolean - 
 &AtServer
 Procedure GetJobsForCheckPostingDocuments_Callback(Result, AllJobDone) Export  
-	DocumentErrors = New Array;
 	SkipRegFilled = SkipCheckRegisters.Count() > 0;
 	TreeRow = PostingInfo.GetItems();
 	For Each Row In Result Do
@@ -435,7 +434,6 @@ Procedure GetJobsForCheckPostingDocuments_Callback(Result, AllJobDone) Export
 			ParentRow = TreeRow.Add();
 			ParentRow.Ref = DocRow.Ref;
 			ParentRow.DocumentType = TypeOf(DocRow.Ref);
-			ParentRow.Date = DocRow.Ref.Date;
 			ParentRow.Errors = DocRow.Error;
 			
 			For Each RegInfoData In DocRow.RegInfo Do
@@ -455,6 +453,8 @@ Procedure GetJobsForCheckPostingDocuments_Callback(Result, AllJobDone) Export
 			
 			If SkipRegFilled And ParentRow.GetItems().Count() = 0 Then
 				TreeRow.Delete(ParentRow);
+			Else
+				ParentRow.Date = DocRow.Ref.Date;
 			EndIf;
 			
 		 EndDo;
@@ -530,7 +530,6 @@ EndFunction
 &AtServer
 Procedure GetJobsForPostSelectedDocument_Callback(Result, AllJobDone) Export  
 	Tree = FormAttributeToValue("PostingInfo");
-	DocumentErrors = New Array;
 	For Each Row In Result Do
 		
 		If Not Row.Result Then
@@ -677,7 +676,6 @@ Function GetJobsForWriteRecordSet()
 	JobDataSettings = BackgroundJobAPIServer.JobDataSettings();
 	JobDataSettings.CallbackFunction = "GetJobsForWriteRecordSet_Callback";
 	JobDataSettings.ProcedurePath = "PostingServer.WriteDocumentsRecords";
-	JobDataSettings.CallbackWhenAllJobsDone = False;
 					
 	DocsInPack = 100;
 	StreamArray = New Array;
@@ -727,8 +725,6 @@ EndFunction
 &AtServer
 Procedure GetJobsForWriteRecordSet_Callback(Result, AllJobDone) Export  
 	Tree = FormAttributeToValue("PostingInfo");
-	DocumentErrors = New Array;
-	
 	For Each Row In Result Do
 		
 		If Not Row.Result Then

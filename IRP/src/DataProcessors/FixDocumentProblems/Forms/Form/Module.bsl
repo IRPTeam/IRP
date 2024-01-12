@@ -19,8 +19,6 @@ Procedure FillDocumentsAtServer()
 		Array.Add(StrTemplate(Template, ?(Array.Count(), "", "AS DocumentType"), ?(Array.Count(), "", "INTO AllDocuments"), Doc.Name));
 	EndDo;	
 	
-	
-	
 	QueryTxt = StrConcat(Array, Chars.LF + "UNION ALL" + Chars.LF) +	"
 	|;
 	|

@@ -998,7 +998,7 @@ EndFunction
 // String from base64 ZIP.
 // 
 // Parameters:
-//  Base64Zip - String - Base64 zip
+//  Base64Zip - String, BinaryData - Base64 zip
 //  FileName - String - File name. If empty - return first file
 // 
 // Returns:

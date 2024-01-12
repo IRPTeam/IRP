@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mdclass:CommonModule xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="ff5116b1-fe08-48c8-83bb-112f038bee75">
+  <name>InternalCommand_ShowNotActive_Server</name>
+  <synonym>
+    <key>en</key>
+    <value>Internal commands Show not active items server</value>
+  </synonym>
+  <server>true</server>
+  <serverCall>true</serverCall>
+</mdclass:CommonModule>

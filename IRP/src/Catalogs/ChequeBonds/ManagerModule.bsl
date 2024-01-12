@@ -27,12 +27,18 @@ Procedure ChoiceDataGetProcessing(ChoiceData, Parameters, StandardProcessing)
 
 	StandardProcessing = False;
 	CommonFormActionsServer.CutLastSymbolsIfCameFromExcel(Parameters);
+	CatalogsServer.SetParametersForDataChoicing(Catalogs.ChequeBonds, Parameters);
 	QueryTable = GetChoiceDataTable(Parameters);
 	ChoiceData = CommonFormActionsServer.QueryTableToChoiceData(QueryTable);	
 EndProcedure
 
 Function GetChoiceDataTable(Parameters) Export
 	Filter = "";
+	For Each FilterItem In Parameters.Filter Do
+		Filter = Filter
+			+ "
+		|	AND Table." + FilterItem.Key + " = &" + FilterItem.Key;
+	EndDo;			 
 	
 	Settings = New Structure();
 	Settings.Insert("MetadataObject", Metadata.Catalogs.ChequeBonds);
@@ -48,6 +54,9 @@ Function GetChoiceDataTable(Parameters) Export
 	Query = QueryBuilder.GetQuery();
 
 	Query.SetParameter("SearchString", Parameters.SearchString);
+	For Each Filter In Parameters.Filter Do
+		Query.SetParameter(Filter.Key, Filter.Value);
+	EndDo;
 	
 	// parameters search by code
 	SearchStringNumber = CommonFunctionsClientServer.GetSearchStringNumber(Parameters.SearchString);

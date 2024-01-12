@@ -204,6 +204,8 @@
   <sessionParameters>SessionParameter.OurCompanies</sessionParameters>
   <sessionParameters>SessionParameter.RunBackgroundJobInDebugMode</sessionParameters>
   <sessionParameters>SessionParameter.Workstation</sessionParameters>
+  <sessionParameters>SessionParameter.InternalCommands</sessionParameters>
+  <sessionParameters>SessionParameter.NotActiveCatalogsShowing</sessionParameters>
   <roles>Role.BasicRole</roles>
   <roles>Role.CreateOrModifyUsers</roles>
   <roles>Role.Document_AdditionalAccrual</roles>
@@ -627,6 +629,13 @@
   <commonModules>CommonModule.ViewServer_V2</commonModules>
   <commonModules>CommonModule.WorkstationClient</commonModules>
   <commonModules>CommonModule.WorkstationServer</commonModules>
+  <commonModules>CommonModule.CatalogsServer</commonModules>
+  <commonModules>CommonModule.InternalCommandsClient</commonModules>
+  <commonModules>CommonModule.InternalCommandsServer</commonModules>
+  <commonModules>CommonModule.InternalCommand_SetNotActive_Client</commonModules>
+  <commonModules>CommonModule.InternalCommand_SetNotActive_Server</commonModules>
+  <commonModules>CommonModule.InternalCommand_ShowNotActive_Client</commonModules>
+  <commonModules>CommonModule.InternalCommand_ShowNotActive_Server</commonModules>
   <commonAttributes>CommonAttribute.Author</commonAttributes>
   <commonAttributes>CommonAttribute.Branch</commonAttributes>
   <commonAttributes>CommonAttribute.Description</commonAttributes>
@@ -648,6 +657,7 @@
   <commonAttributes>CommonAttribute.Editor</commonAttributes>
   <commonAttributes>CommonAttribute.CreateDate</commonAttributes>
   <commonAttributes>CommonAttribute.ModifyDate</commonAttributes>
+  <commonAttributes>CommonAttribute.NotActive</commonAttributes>
   <exchangePlans>ExchangePlan.ED_ExchangePlan</exchangePlans>
   <exchangePlans>ExchangePlan.FullExchange</exchangePlans>
   <httpServices>HTTPService.TestConnection</httpServices>

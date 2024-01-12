@@ -6,6 +6,7 @@ Procedure ChoiceDataGetProcessing(ChoiceData, Parameters, StandardProcessing)
 
 	StandardProcessing = False;
 	CommonFormActionsServer.CutLastSymbolsIfCameFromExcel(Parameters);
+	CatalogsServer.SetParametersForDataChoicing(Catalogs.Partners, Parameters);
 	QueryTable = GetChoiceDataTable(Parameters);
 	ChoiceData = CommonFormActionsServer.QueryTableToChoiceData(QueryTable);
 EndProcedure
@@ -91,6 +92,11 @@ Function GetChoiceDataTable(Parameters) Export
 			 |		ELSE TRUE
 			 |	END
 			 |";
+	For Each FilterItem In Parameters.Filter Do
+		Filter = Filter
+			+ "
+		|	AND Table." + FilterItem.Key + " = &" + FilterItem.Key;
+	EndDo;			 
 	Settings = New Structure();
 	Settings.Insert("MetadataObject", Metadata.Catalogs.Partners);
 	Settings.Insert("Filter", Filter);
@@ -105,6 +111,9 @@ Function GetChoiceDataTable(Parameters) Export
 	Query = QueryBuilder.GetQuery();
 
 	Query.SetParameter("SearchString", Parameters.SearchString);
+	For Each Filter In Parameters.Filter Do
+		Query.SetParameter(Filter.Key, Filter.Value);
+	EndDo;
 
 	AdditionalParameters = CommonFunctionsServer.DeserializeXMLUseXDTO(Parameters.Filter.AdditionalParameters);
 	QueryParametersStr = New Structure("FilterPartnersByCompanies,

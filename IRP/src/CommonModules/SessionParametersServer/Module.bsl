@@ -5,7 +5,7 @@ Procedure SessionParametersSetting(RequiredParameters) Export
 		If Not Metadata.Styles.Find(StyleName) = Undefined Then
 			MainStyle = StyleLib[StyleName];
 		EndIf;
-
+		InternalCommandsServer.SetSessionParameters();
 		Return;
 	EndIf;
 

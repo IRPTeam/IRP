@@ -1510,6 +1510,14 @@ Strings.Insert("CreditNote_DR_R1021B_VendorsTransactions_CR_R5022T_Expenses",
 	NStr("en = 'CreditNote DR (R1021B_VendorsTransactions CR (R5022T_Expenses)'", Lang));
 	
 #EndRegion
+
+#Region InternalCommands
+    // Do not modify "en" strings
+	Strings.Insert("InternalCommands_SetNotActive", NStr("en = 'Set Not active'", Lang));
+	Strings.Insert("InternalCommands_SetNotActive_Check", NStr("en = 'Unset Not active'", Lang));
+	Strings.Insert("InternalCommands_ShowNotActive", NStr("en = 'Show all items'", Lang));
+	Strings.Insert("InternalCommands_ShowNotActive_Check", NStr("en = 'Hide Not active items'", Lang));
+#EndRegion
 	
 	Return Strings;
 EndFunction

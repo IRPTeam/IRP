@@ -11,6 +11,7 @@ Procedure ChoiceDataGetProcessing(ChoiceData, Parameters, StandardProcessing)
 	
 	StandardProcessing = False;
 	CommonFormActionsServer.CutLastSymbolsIfCameFromExcel(Parameters);
+	CatalogsServer.SetParametersForDataChoicing(Catalogs.BankTerms, Parameters);
 	
 	Query = New Query;
 	If ValueIsFilled(Parameters.Filter.PaymentType) And ValueIsFilled(Parameters.Filter.Branch) Then
@@ -21,6 +22,9 @@ Procedure ChoiceDataGetProcessing(ChoiceData, Parameters, StandardProcessing)
 
 	Query.Text = LocalizationEvents.ReplaceDescriptionLocalizationPrefix(Query.Text);
 	
+	For Each Filter In Parameters.Filter Do
+		Query.SetParameter(Filter.Key, Filter.Value);
+	EndDo;
 	Query.SetParameter("PaymentType", Parameters.Filter.PaymentType);
 	Query.SetParameter("Branch", Parameters.Filter.Branch);
 	Query.SetParameter("SearchString", Parameters.SearchString);

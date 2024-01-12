@@ -431,6 +431,11 @@ Procedure GetJobsForCheckPostingDocuments_Callback(Result, AllJobDone) Export
 		
 		RegInfoArray = CommonFunctionsServer.GetFromCache(Row.CacheKey);
 		For Each DocRow In RegInfoArray Do
+			
+			If DocRow.RegInfo.Count() = 0 Then
+				Continue;
+			EndIf;
+			
 			ParentRow = TreeRow.Add();
 			ParentRow.Ref = DocRow.Ref;
 			ParentRow.DocumentType = TypeOf(DocRow.Ref);

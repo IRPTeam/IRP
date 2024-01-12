@@ -79,7 +79,6 @@ Procedure SearchByBarcode(Barcode, Settings) Export
 		EndIf;
 #Else
 		OpenForm("CommonForm.InputBarcode", , , , , , NotifyDescription, FormWindowOpeningMode.LockOwnerWindow);
-//		ShowInputString(NotifyDescription, "", DescriptionField);
 #EndIf
 	Else
 #If MobileClient Then
@@ -176,6 +175,8 @@ Function ProcessBarcodes(Barcodes, Settings)
 	
 	BarcodeResult = BarcodeServer.SearchByBarcodes(Barcodes, ServerSettings);
 
+	// TODO: is error?
+	//@skip-check wrong-type-expression
 	Settings.Result.FoundedItems = BarcodeResult.FoundedItems;
 	Settings.Result.Barcodes = BarcodeResult.Barcodes;
 

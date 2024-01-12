@@ -5,6 +5,8 @@ Procedure BeforeWrite(Cancel, Replacing)
 	EndIf;
 	
 	For Each Record In ThisObject Do
-		Record.UniqueID = String(New UUID());
+		If IsBlankString(Record.UniqueID) Then
+			Record.UniqueID = String(New UUID());
+		EndIf;
 	EndDo;
 EndProcedure

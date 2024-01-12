@@ -72,19 +72,23 @@ Procedure BookValueOfFixedAsset_LoadRecords(CalculationMovementCostRef) Export
 		CurrenciesParameters = New Structure();
 
 		PostingDataTables = New Map();
-		PostingDataTables.Insert(RecordSet, New Structure("RecordSet", BookValueTable));
+		
+		BookValueTableSettings = PostingServer.PostingTableSettings(BookValueTable, RecordSet);
+		PostingDataTables.Insert(RecordSet.Metadata(), BookValueTableSettings);
+		
 		ArrayOfPostingInfo = New Array();
 		For Each DataTable In PostingDataTables Do
 			ArrayOfPostingInfo.Add(DataTable);
 		EndDo;
 		CurrenciesParameters.Insert("Object", QuerySelection.Document);
+		CurrenciesParameters.Insert("Metadata", QuerySelection.Document.Metadata());
 		CurrenciesParameters.Insert("ArrayOfPostingInfo", ArrayOfPostingInfo);
 		CurrenciesServer.PreparePostingDataTables(CurrenciesParameters, Undefined);
 
 		For Each ItemOfPostingInfo In ArrayOfPostingInfo Do
-			If TypeOf(ItemOfPostingInfo.Key) = Type("AccumulationRegisterRecordSet.R8510B_BookValueOfFixedAsset") Then
+			If ItemOfPostingInfo.Key = Metadata.AccumulationRegisters.R8510B_BookValueOfFixedAsset Then
 				RecordSet.Read();
-				For Each RowPostingInfo In ItemOfPostingInfo.Value.RecordSet Do
+				For Each RowPostingInfo In ItemOfPostingInfo.Value.PrepareTable Do
 					FillPropertyValues(RecordSet.Add(), RowPostingInfo);
 				EndDo;
 				RecordSet.SetActive(True);

@@ -1,4 +1,4 @@
-#language: en
+﻿#language: en
 @tree
 @Positive
 @PartnerCatalogs
@@ -103,3 +103,49 @@ Scenario: _005022 filling in the "Partners" catalog
 		Then I check for the "Partners" catalog element with the "Description_en" "Lomaniti1"
 		Then I check for the "Partners" catalog element with the "Description_en" "Other partner"
 	
+Scenario: _005023 name uniqueness control (Partners)
+	And I close all client application windows
+	* Preparation
+		Given I open hyperlink "e1cib/list/Catalog.Partners"
+		If "List" table does not contain lines Then
+			| 'Description' |
+			| 'Ferron1 BP'       |
+			Then I stop script execution "Skipped"
+	* Create partner
+		And I click the button named "FormCreate"
+		And Delay 2
+		And I click Open button of the field named "Description_en"
+		And I input "Ferron1 BP" text in the field named "Description_en"
+		And I input "Ferron1 BP TR" text in the field named "Description_tr"
+		And I input "Феррон BP" text in the field named "Description_ru"
+		And I click "Ok" button
+		And I set checkbox named "Vendor"
+		And I click the button named "FormWriteAndClose"
+	* Check uniqueness control
+		Then there are lines in TestClient message log
+			|'Description not unique [Ferron1 BP]'|
+		And I click Open button of the field named "Description_en"
+		And I input "1" text in the field named "Description_en"	
+		And I click "Ok" button
+		And I click the button named "FormWriteAndClose"
+		Then there are lines in TestClient message log
+			|'Description not unique [Ferron1 BP]'|	
+		And I click Open button of the field named "Description_en"
+		And I input "1" text in the field named "Description_tr"	
+		And I click "Ok" button
+		And I click the button named "FormWriteAndClose"
+		Then there are lines in TestClient message log
+			|'Description not unique [Ferron1 BP]'|	
+		And I close all client application windows
+
+Scenario: _0050234 required partner type checkbox 
+	And I close all client application windows
+	Given I open hyperlink "e1cib/list/Catalog.Partners"
+	And I click the button named "FormCreate"
+	And Delay 2
+	And I input "Test partner" text in "ENG" field
+	And I click the button named "FormWriteAndClose"
+	Then there are lines in TestClient message log
+		|'Partner type is required'|
+	
+		

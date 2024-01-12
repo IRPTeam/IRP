@@ -13,7 +13,6 @@ Procedure FillStructureDataByObject(StructureData, Val Object, Val Attr, Val Val
 		Return;
 	EndIf;
 
-	
 	LastStructure = StructureData;
 	For Index = 1 To NameList.UBound() Do
 		
@@ -268,7 +267,6 @@ EndProcedure
 
 Function ObjectXDTOStructure(XDTOType, Val ArrayList, WSName = Undefined, FillEmptyValues = True) Export
 	
-//	XDTOType = CommonFunctionsServer.XDTOFactoryObject(WSName).Type(URI, TypeName);
 	XDTOStructure = New Structure;
 	ArrayList.Add(XDTOType);
 	

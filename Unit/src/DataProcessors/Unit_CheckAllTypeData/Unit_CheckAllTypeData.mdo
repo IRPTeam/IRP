@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mdclass:DataProcessor xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="c64d2c8b-e42d-4dc7-b820-6ce9b1d452d5">
+  <producedTypes>
+    <objectType typeId="fcf7ec31-6ae5-4d55-bd43-5e6d092f881a" valueTypeId="b4a964ba-90b1-4c87-83be-6cf10c7ef43c"/>
+    <managerType typeId="781a4252-b904-484a-aad9-621fac95580e" valueTypeId="d5cbada2-4ab1-408d-869e-df8f6027d7e6"/>
+  </producedTypes>
+  <name>Unit_CheckAllTypeData</name>
+  <synonym>
+    <key>en</key>
+    <value>(Unit) Check all type data</value>
+  </synonym>
+  <useStandardCommands>true</useStandardCommands>
+  <defaultForm>DataProcessor.Unit_CheckAllTypeData.Form.Form</defaultForm>
+  <forms uuid="7cdeb923-66e0-4b54-afa0-f3834bc6a563">
+    <name>Form</name>
+    <synonym>
+      <key>en</key>
+      <value>Form</value>
+    </synonym>
+    <usePurposes>PersonalComputer</usePurposes>
+    <usePurposes>MobileDevice</usePurposes>
+  </forms>
+</mdclass:DataProcessor>

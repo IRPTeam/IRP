@@ -98,19 +98,23 @@ Procedure Expenses_LoadRecords(CalculationMovementCostRef) Export
 		CurrenciesParameters = New Structure();
 
 		PostingDataTables = New Map();
-		PostingDataTables.Insert(RecordSet, New Structure("RecordSet", ExpenseTable));
+		
+		ExpenseTableSettings = PostingServer.PostingTableSettings(ExpenseTable, RecordSet);
+		PostingDataTables.Insert(RecordSet.Metadata(), ExpenseTableSettings);
+		
 		ArrayOfPostingInfo = New Array();
 		For Each DataTable In PostingDataTables Do
 			ArrayOfPostingInfo.Add(DataTable);
 		EndDo;
 		CurrenciesParameters.Insert("Object", QuerySelection.Document);
+		CurrenciesParameters.Insert("Metadata", QuerySelection.Document.Metadata());
 		CurrenciesParameters.Insert("ArrayOfPostingInfo", ArrayOfPostingInfo);
 		CurrenciesServer.PreparePostingDataTables(CurrenciesParameters, Undefined);
 
 		For Each ItemOfPostingInfo In ArrayOfPostingInfo Do
-			If TypeOf(ItemOfPostingInfo.Key) = Type("AccumulationRegisterRecordSet.R5022T_Expenses") Then
+			If ItemOfPostingInfo.Key = Metadata.AccumulationRegisters.R5022T_Expenses Then
 				RecordSet.Read();
-				For Each RowPostingInfo In ItemOfPostingInfo.Value.RecordSet Do
+				For Each RowPostingInfo In ItemOfPostingInfo.Value.PrepareTable Do
 					FillPropertyValues(RecordSet.Add(), RowPostingInfo);
 				EndDo;
 				RecordSet.SetActive(True);

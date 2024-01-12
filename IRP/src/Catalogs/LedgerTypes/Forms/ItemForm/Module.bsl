@@ -34,7 +34,6 @@ Procedure AfterWriteAtServer(CurrentObject, WriteParameters)
 				Continue;
 			EndIf;
 			RecordSet = InformationRegisters.LedgerTypeOperations.CreateRecordSet();
-			//RecordSet.Filter.Period.Set(Level2.Period);
 			RecordSet.Filter.LedgerType.Set(Object.Ref);
 			RecordSet.Filter.AccountingOperation.Set(Level2.AccountingOperation);
 			NewRecord = RecordSet.Add();
@@ -129,6 +128,7 @@ Function GetAccountingOperations(LedgerTypeRef)
 	|		ON AccountingOperations.Ref = tmp.AccountingOperation
 	|WHERE
 	|	NOT AccountingOperations.Parent.Ref IS NULL
+	|	AND NOT AccountingOperations.DeletionMark
 	|
 	|ORDER BY
 	|	AccountingOperations.Order

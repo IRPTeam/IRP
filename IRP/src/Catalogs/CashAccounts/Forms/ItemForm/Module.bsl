@@ -22,7 +22,8 @@ Procedure OnCreateAtServer(Cancel, StandardProcessing)
 	ElsIf ValueIsFilled(Object.Currency) 
 		Or Object.Type = Enums.CashAccountTypes.Bank
 		Or Object.Type = Enums.CashAccountTypes.POS 
-		Or Object.Type = Enums.CashAccountTypes.POSCashAccount Then
+		Or Object.Type = Enums.CashAccountTypes.POSCashAccount 
+		Or Object.Type = Enums.CashAccountTypes.Transit Then
 		ThisObject.CurrencyType = "Fixed";
 	Else
 		ThisObject.CurrencyType = "Multi";

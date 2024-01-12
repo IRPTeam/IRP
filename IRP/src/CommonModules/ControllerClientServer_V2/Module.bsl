@@ -1197,7 +1197,11 @@ EndFunction
 Function BindAccountSender(Parameters)
 	DataPath = "Sender";
 	Binding = New Structure();
-	Return BindSteps("StepChangeSendCurrencyByAccount", DataPath, Binding, Parameters, "BindAccountSender");
+	Binding.Insert("CashTransferOrder", "StepChangeSendCurrencyByAccount");
+	Binding.Insert("MoneyTransfer", "StepChangeSendCurrencyByAccount,
+		|StepChangeTransitAccountBySendAccount");
+		
+	Return BindSteps("BindVoid", DataPath, Binding, Parameters, "BindAccountSender");
 EndFunction
 
 // AccountSender.ChangeAccountSenderByCompany.Step
@@ -1242,8 +1246,18 @@ EndFunction
 Function BindAccountReceiver(Parameters)
 	DataPath = "Receiver";
 	Binding = New Structure();
-	Return BindSteps("StepChangeReceiveCurrencyByAccount,
-	|StepChangeReceiveBranchByAccount", DataPath, Binding, Parameters, "BindAccountReceiver");
+	
+	Binding.Insert("CashTransferOrder", 
+		"StepChangeReceiveCurrencyByAccount,
+		|StepChangeReceiveBranchByAccount");
+		
+	Binding.Insert("MoneyTransfer", 
+		"StepChangeReceiveCurrencyByAccount,
+		|StepChangeReceiveBranchByAccount,
+		|StepChangeTransitAccountBySendAccount");
+		
+	
+	Return BindSteps("BindVoid", DataPath, Binding, Parameters, "BindAccountReceiver");
 EndFunction
 
 // AccountReceiver.ChangeAccountReceiverByCompany.Step
@@ -1301,6 +1315,22 @@ Procedure StepChangeTransitAccountByAccount(Parameters, Chain) Export
 	Options.Account               = GetAccount(Parameters);
 	Options.CurrentTransitAccount = GetTransitAccount(Parameters);
 	Options.StepName = "StepChangeTransitAccountByAccount";
+	Chain.ChangeTransitAccountByAccount.Options.Add(Options);
+EndProcedure
+
+// TransitAccount.ChangeTransitAccountBySendAccount.Set
+Procedure StepChangeTransitAccountBySendAccount(Parameters, Chain) Export
+	Chain.ChangeTransitAccountByAccount.Enable = True;
+	If Chain.Idle Then
+		Return;
+	EndIf;
+	Chain.ChangeTransitAccountByAccount.Setter = "SetTransitAccount";
+	Options = ModelClientServer_V2.ChangeTransitAccountByAccountOptions();
+	Options.Account            = GetAccountSender(Parameters);
+	Options.SendCurrency       = GetSendCurrency(Parameters);
+	Options.ReceiveCurrency    = GetReceiveCurrency(Parameters);
+	Options.CurrentTransitAccount = GetTransitAccount(Parameters);
+	Options.StepName = "ChangeTransitAccountBySendAccount";
 	Chain.ChangeTransitAccountByAccount.Options.Add(Options);
 EndProcedure
 
@@ -2043,7 +2073,13 @@ EndFunction
 Function BindReceiveCurrency(Parameters)
 	DataPath = "ReceiveCurrency";
 	Binding = New Structure();
+	
 	Binding.Insert("CashTransferOrder", "StepChangeReceiveAmountBySendAmount");
+	
+	Binding.Insert("MoneyTransfer", 
+		"StepChangeReceiveAmountBySendAmount,
+		|StepChangeTransitAccountBySendAccount");
+	
 	Return BindSteps("BindVoid", DataPath, Binding, Parameters, "BindReceiveCurrency");
 EndFunction
 
@@ -2087,7 +2123,13 @@ EndFunction
 Function BindSendCurrency(Parameters)
 	DataPath = "SendCurrency";
 	Binding = New Structure();
+	
 	Binding.Insert("CashTransferOrder", "StepChangeReceiveAmountBySendAmount");
+	
+	Binding.Insert("MoneyTransfer", 
+		"StepChangeReceiveAmountBySendAmount,
+		|StepChangeTransitAccountBySendAccount");
+		
 	Return BindSteps("BindVoid", DataPath, Binding, Parameters, "BindSendCurrency");
 EndFunction
 
@@ -7173,19 +7215,11 @@ Procedure StepChangeVatRate_AgreementInList(Parameters, Chain) Export
 	Options_Date            = GetDate(Parameters);
 	Options_Company         = GetCompany(Parameters);
 	Options_TransactionType = GetTransactionType(Parameters);
-	//Options_Agreement       = GetAgreement(Parameters);
 	
 	TableRows = GetRows(Parameters, Parameters.TableName);
 		
 	For Each Row In TableRows Do
 		Options = ModelClientServer_V2.ChangeVatRateOptions();
-		
-//		If Row.Property("InventoryOrigin") Then
-//			Options.InventoryOrigin  = GetItemListInventoryOrigin(Parameters, Row.Key);
-//			Options.Consignor = GetItemListConsignor(Parameters, Row.Key);
-//		EndIf;
-//		
-//		Options.ItemKey = GetItemListItemKey(Parameters, Row.Key);
 		
 		Options.Date            = Options_Date;
 		Options.Company         = Options_Company;

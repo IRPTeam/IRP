@@ -254,7 +254,7 @@ Scenario: _0154135 create document Retail Sales Receipt
 			And in the table "ItemList" I click "Edit currencies" button
 			And "CurrenciesTable" table became equal
 				| 'Movement type'         | 'Type'            | 'To'     | 'From'    | 'Multiplicity'    | 'Rate'      | 'Amount'     |
-				| 'Reporting currency'    | 'Reporting'       | 'USD'    | 'TRY'     | '1'               | '0,1712'    | '303,02'     |
+				| 'Reporting currency'    | 'Reporting'       | 'USD'    | 'TRY'     | '1'               | '0,171200'    | '303,02'     |
 				| 'Local currency'        | 'Legal'           | 'TRY'    | 'TRY'     | '1'               | '1'         | '1 770'      |
 				| 'TRY'                   | 'Partner term'    | 'TRY'    | 'TRY'     | '1'               | '1'         | '1 770'      |
 			And I close current window
@@ -2373,6 +2373,11 @@ Scenario: _0154154 check filling in and refilling Retail return receipt
 		Given I open hyperlink "e1cib/list/Document.RetailReturnReceipt"
 		And I click the button named "FormCreate"
 	* Check filling in legal name if the partner has only one
+		And I click Select button of "Company" field
+		And I go to line in "List" table
+			| 'Description'    |
+			| 'Main Company'            |
+		And I select current line in "List" table
 		And I click Select button of "Partner" field
 		And I go to line in "List" table
 			| 'Description'    |
@@ -2395,6 +2400,7 @@ Scenario: _0154154 check filling in and refilling Retail return receipt
 			And I select current line in "List" table
 			Then the form attribute named "Company" became equal to "Second Company"
 			And I click Select button of "Partner term" field
+			And I remove checkbox named "FilterCompanyUse"
 			And I select current line in "List" table
 		* Check the refill when selecting a partner term
 			Then the form attribute named "Company" became equal to "Main Company"
@@ -2512,6 +2518,7 @@ Scenario: _0154154 check filling in and refilling Retail return receipt
 	* Tax calculation check when filling in the company at reselection of the partner term
 		* Re-select partner term
 			And I click Select button of "Partner term" field
+			And I remove checkbox named "FilterCompanyUse"
 			And I go to line in "List" table
 				| 'Description'                  |
 				| 'Basic Partner terms, TRY'     |
@@ -2619,7 +2626,7 @@ Scenario: _0154154 check filling in and refilling Retail return receipt
 			And in the table "ItemList" I click "Edit currencies" button
 			And "CurrenciesTable" table became equal
 				| 'Movement type'         | 'Type'            | 'To'     | 'From'    | 'Multiplicity'    | 'Rate'      | 'Amount'     |
-				| 'Reporting currency'    | 'Reporting'       | 'USD'    | 'TRY'     | '1'               | '0,1712'    | '303,02'     |
+				| 'Reporting currency'    | 'Reporting'       | 'USD'    | 'TRY'     | '1'               | '0,171200'    | '303,02'     |
 				| 'Local currency'        | 'Legal'           | 'TRY'    | 'TRY'     | '1'               | '1'         | '1 770'      |
 				| 'TRY'                   | 'Partner term'    | 'TRY'    | 'TRY'     | '1'               | '1'         | '1 770'      |
 			And I close current window
@@ -2720,6 +2727,7 @@ Scenario: _0154155 check filling in and refilling Retail sales receipt
 			And I select current line in "List" table
 			Then the form attribute named "Company" became equal to "Second Company"
 			And I click Select button of "Partner term" field
+			And I remove checkbox named "FilterCompanyUse"
 			And I select current line in "List" table
 		* Check the refill when selecting a partner term
 			Then the form attribute named "Company" became equal to "Main Company"
@@ -2837,6 +2845,7 @@ Scenario: _0154155 check filling in and refilling Retail sales receipt
 	* Tax calculation check when filling in the company at reselection of the partner term
 		* Re-select partner term
 			And I click Select button of "Partner term" field
+			And I remove checkbox named "FilterCompanyUse"
 			And I go to line in "List" table
 				| 'Description'                  |
 				| 'Basic Partner terms, TRY'     |
@@ -2964,7 +2973,7 @@ Scenario: _0154155 check filling in and refilling Retail sales receipt
 			And in the table "ItemList" I click "Edit currencies" button
 			And "CurrenciesTable" table became equal
 				| 'Movement type'         | 'Type'            | 'To'     | 'From'    | 'Multiplicity'    | 'Rate'      | 'Amount'     |
-				| 'Reporting currency'    | 'Reporting'       | 'USD'    | 'TRY'     | '1'               | '0,1712'    | '303,02'     |
+				| 'Reporting currency'    | 'Reporting'       | 'USD'    | 'TRY'     | '1'               | '0,171200'    | '303,02'     |
 				| 'Local currency'        | 'Legal'           | 'TRY'    | 'TRY'     | '1'               | '1'         | '1 770'      |
 				| 'TRY'                   | 'Partner term'    | 'TRY'    | 'TRY'     | '1'               | '1'         | '1 770'      |
 			And I close current window
@@ -3118,7 +3127,7 @@ Scenario: _0154156 check Retail sales receipt when changing date
 		And in the table "ItemList" I click "Edit currencies" button
 		And "CurrenciesTable" table became equal
 			| 'Movement type'        | 'Type'           | 'To'    | 'From'   | 'Multiplicity'   | 'Rate'     | 'Amount'    |
-			| 'Reporting currency'   | 'Reporting'      | 'USD'   | 'TRY'    | '1'              | '0,2000'   | '200,00'    |
+			| 'Reporting currency'   | 'Reporting'      | 'USD'   | 'TRY'    | '1'              | '0,200000' | '200,00'    |
 			| 'Local currency'       | 'Legal'          | 'TRY'   | 'TRY'    | '1'              | '1'        | '1 000'     |
 			| 'TRY'                  | 'Partner term'   | 'TRY'   | 'TRY'    | '1'              | '1'        | '1 000'     |
 		And I close all client application windows
@@ -3876,7 +3885,7 @@ Scenario: _0154190 check filling in Retail sales receipt when copying
 		And in the table "ItemList" I click "Edit currencies" button
 		And "CurrenciesTable" table became equal
 			| 'Movement type'        | 'Type'           | 'To'    | 'From'   | 'Multiplicity'   | 'Rate'     | 'Amount'    |
-			| 'Reporting currency'   | 'Reporting'      | 'USD'   | 'TRY'    | '1'              | '0,1712'   | '89,02'     |
+			| 'Reporting currency'   | 'Reporting'      | 'USD'   | 'TRY'    | '1'              | '0,171200'   | '89,02'     |
 			| 'Local currency'       | 'Legal'          | 'TRY'   | 'TRY'    | '1'              | '1'        | '520'       |
 			| 'TRY'                  | 'Partner term'   | 'TRY'   | 'TRY'    | '1'              | '1'        | '520'       |
 		And I close current window

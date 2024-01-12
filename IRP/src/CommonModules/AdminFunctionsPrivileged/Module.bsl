@@ -38,7 +38,6 @@ Procedure CreateUser(UserObject) Export
 				User.Roles.Add(Metadata.Roles[Row.Name]);
 			EndDo;
 		Else
-			User.Roles.Add(Metadata.Roles.FullAccessInArea);
 			User.Roles.Add(Metadata.Roles.RunThinClient);
 			User.Roles.Add(Metadata.Roles.RunWebClient);
 		EndIf;

@@ -1,7 +1,6 @@
 
 Function GetEmployeeInfo(Ref, Date,  Company, Employee) Export
 	Return ServerReuse.GetEmployeeInfo(Ref, Date, Company, Employee);
-//	Return _GetEmployeeInfo(Ref, Date, Company, Employee);	
 EndFunction
 
 Function _GetEmployeeInfo(Ref, Date,  Company, Employee) Export
@@ -32,7 +31,6 @@ EndFunction
 
 Function GetSalaryValue(Ref, Date, Position, AccrualType) Export
 	Return ServerReuse.GetSalaryValue(Ref, Date, Position, AccrualType);
-//	Return _GetSalaryValue(Ref, Date, Position, AccrualType);
 EndFunction
 
 Function _GetSalaryValue(Ref, Date, Position, AccrualType) Export
@@ -60,7 +58,6 @@ EndFunction
 	
 Function GetSalaryByPositionOrEmployee(Ref, Date, Employee, Position, AccrualType) Export
 	Return ServerReuse.GetSalaryByPositionOrEmployee(Ref, Date, Employee, Position, AccrualType);
-//	Return _GetSalaryByPositionOrEmployee(Ref, Date, Employee, Position, AccrualType);
 EndFunction
 
 Function _GetSalaryByPositionOrEmployee(Ref, Date, Employee, Position, AccrualType) Export
@@ -107,7 +104,6 @@ EndFunction
 
 Function GetAccrualTypeByPositionOrEmployee(Ref, Date, Employee, Position) Export
 	Return ServerReuse.GetAccrualTypeByPositionOrEmployee(Ref, Date, Employee, Position);
-//	Return _GetAccrualTypeByPositionOrEmployee(Ref, Date, Employee, Position);
 EndFunction
 
 Function _GetAccrualTypeByPositionOrEmployee(Ref, Date, Employee, Position) Export

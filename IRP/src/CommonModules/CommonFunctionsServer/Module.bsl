@@ -1004,7 +1004,11 @@ EndFunction
 // Returns:
 //  BinaryData - String from base64 ZIP
 Function StringFromBase64ZIP(Base64Zip, FileName = Undefined) Export
-	MStream = New MemoryStream(GetBinaryDataBufferFromBase64String(Base64Zip));
+	If TypeOf(Base64Zip) = Type("BinaryData") Then
+		MStream = New MemoryStream(GetBinaryDataBufferFromBinaryData(Base64Zip));
+	Else 
+		MStream = New MemoryStream(GetBinaryDataBufferFromBase64String(Base64Zip));
+	EndIf;
 	ZIP = New ZipFileReader(MStream);
 	TmpFileName = TempFilesDir();
 	ZIP.Extract(ZIP.Items[0], TmpFileName);
@@ -1368,7 +1372,7 @@ Procedure __CheckUniqueDescriptions(Cancel, Object) Export
 	
 	Query.SetParameter("Ref", Object.Ref);
 	
-	Array_where = New Array();
+	Array_where = New Array(); // Array Of String
 	
 	For Each KeyValue In QueryParameters Do
 		Array_where.Add(StrTemplate("Table.%1 = &%1", KeyValue.Key));
@@ -1387,3 +1391,185 @@ EndProcedure
 
 #EndRegion
 
+#Region Tables
+
+Function JoinTables(ArrayOfJoiningTables, Fields) Export
+
+	If Not ArrayOfJoiningTables.Count() Then
+		Return New ValueTable();
+	EndIf;
+
+	ArrayOfFieldsPut = New Array(); // Array Of String
+	ArrayOfFieldsSelect = New Array(); // Array Of String
+
+	Counter = 1;
+	For Each Field In StrSplit(Fields, ",") Do
+		ArrayOfFieldsPut.Add(StrTemplate(" tmp.%1 AS %1 ", TrimAll(Field)));
+		ArrayOfFieldsSelect.Add(StrTemplate(" _tmp_.%1 AS %1 ", TrimAll(Field)));
+		Counter = Counter + 1;
+	EndDo;
+	PutText = StrConcat(ArrayOfFieldsPut, ",");
+	SelectText = StrConcat(ArrayOfFieldsSelect, ",");
+
+	ArrayOfPutText = New Array(); // Array Of String
+	ArrayOfSelectText = New Array(); // Array Of String
+
+	Counter = 1;
+	Query = New Query();
+
+	DoExecuteQuery = False;
+	For Each Table In ArrayOfJoiningTables Do
+		If Not Table.Count() Then
+			Continue;
+		EndIf;
+		DoExecuteQuery = True;
+
+		ArrayOfPutText.Add(
+			StrTemplate(
+				"select %1
+				|into tmp%2
+				|from
+				|	&Table%2 as tmp
+				|", PutText, String(Counter)));
+
+		ArrayOfSelectText.Add(
+			StrReplace(
+				StrTemplate(
+					"select %1
+					|from tmp%2 as tmp%2
+					|", SelectText, String(Counter)), "_tmp_", "tmp" + String(Counter)));
+
+		Query.SetParameter("Table" + String(Counter), Table);
+		Counter = Counter + 1;
+	EndDo;
+
+	If DoExecuteQuery Then
+		Query.Text = StrConcat(ArrayOfPutText, " ; ") + " ; " + StrConcat(ArrayOfSelectText, " union all ");
+		QueryResult = Query.Execute();
+		QueryTable = QueryResult.Unload();
+		Return QueryTable;
+	Else
+		Return New ValueTable();
+	EndIf;
+EndFunction
+
+Procedure MergeTables(MasterTable, SourceTable, AddColumnFromSourceTable = "") Export
+	If Not IsBlankString(AddColumnFromSourceTable) Then
+		Column = SourceTable.Columns.Find(AddColumnFromSourceTable);
+		If Not Column = Undefined And MasterTable.Columns.Find(AddColumnFromSourceTable) = Undefined Then
+			MasterTable.Columns.Add(AddColumnFromSourceTable, Column.ValueType);
+		EndIf;
+	EndIf;
+	For Each Row In SourceTable Do
+		FillPropertyValues(MasterTable.Add(), Row);
+	EndDo;
+EndProcedure
+
+Function CreateTable(RegisterMetadata) Export
+	Table = New ValueTable();
+	For Each Item In RegisterMetadata.Dimensions Do
+		Table.Columns.Add(Item.Name, Item.Type);
+	EndDo;
+
+	For Each Item In RegisterMetadata.Resources Do
+		Table.Columns.Add(Item.Name, Item.Type);
+	EndDo;
+	For Each Item In RegisterMetadata.Attributes Do
+		Table.Columns.Add(Item.Name, Item.Type);
+	EndDo;
+
+	For Each Item In RegisterMetadata.StandardAttributes Do
+		If Upper(Item.Name) = Upper("Period") Then
+			Table.Columns.Add(Item.Name, Item.Type);
+		EndIf;
+	EndDo;
+	Return Table;
+EndFunction
+
+// Tables is equal.
+// 
+// Parameters:
+//  Table1 - ValueTable - Table1
+//  Table2 - ValueTable - Table2
+// 
+// Returns:
+//  Boolean - Tables is equal
+Function TablesIsEqual(Table1, Table2, DeleteColumns = "") Export
+	If Table1.Count() <> Table2.Count() Then
+		Return False;
+	EndIf;
+	
+	If Table1.Count() = 0 Then
+		Return True;
+	EndIf;
+	
+	For Each Column In StrSplit(DeleteColumns, ",") Do
+		DeleteColumn(Table1, Column);
+		DeleteColumn(Table2, Column);
+	EndDo;
+		
+	If Table1.Count() = 1 Then
+		MD5_1 = GetMD5(Table1);
+		MD5_2 = GetMD5(Table2);
+	Else
+		Array = New Array; // Array Of String
+		For Each Column In Table1.Columns Do
+			Array.Add(Column.Name);
+		EndDo;   
+		
+		Text = "SELECT
+		|	*
+		|INTO VTSort1
+		|FROM
+		|	&VT1 AS VT1
+		|;
+		|////////////////////////////////////////////////////////////////////////////////
+		|SELECT
+		|	*
+		|INTO VTSort2
+		|FROM
+		|	&VT2 AS VT2
+		|;
+		|
+		|////////////////////////////////////////////////////////////////////////////////
+		|SELECT
+		|	*
+		|FROM
+		|	VTSort1
+		|ORDER BY
+		|" + StrConcat(Array, ",") + "
+		|;
+		|
+		|////////////////////////////////////////////////////////////////////////////////
+		|SELECT
+		|	*
+		|FROM
+		|	VTSort2
+		|ORDER BY
+		|" + StrConcat(Array, ",");
+	
+		Query = New Query();
+		Query.Text = Text;
+		Query.SetParameter("VT1", Table1);
+		Query.SetParameter("VT2", Table2);
+		QueryResult = Query.ExecuteBatch();
+	
+		MD5_1 = GetMD5(QueryResult[2].Unload());
+		MD5_2 = GetMD5(QueryResult[3].Unload());
+	EndIf;
+	If MD5_1 = MD5_2 Then
+		Return True;
+	Else
+		Return False;
+	EndIf;
+
+EndFunction
+
+Procedure DeleteColumn(Table, ColumnName) Export
+	If Table.Columns.Find(ColumnName) <> Undefined Then
+		Table.Columns.Delete(ColumnName);
+	EndIf;
+EndProcedure
+
+
+#EndRegion

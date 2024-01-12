@@ -1,4 +1,4 @@
-#language: en
+﻿#language: en
 @tree
 @Positive
 @FillingDocuments
@@ -214,6 +214,7 @@ Scenario: _201003 check filling in Store field in the document Purchase order
 			| 'Company Ferron BP'    |
 		And I select current line in "List" table
 		And I click Select button of "Partner term" field
+		And I remove checkbox named "FilterCompanyUse"		
 		And I go to line in "List" table
 			| 'Description'           |
 			| 'Vendor Ferron, TRY'    |
@@ -292,6 +293,7 @@ Scenario: _201004 check filling in Store field in the document Purchase invoice
 			| 'Company Ferron BP'    |
 		And I select current line in "List" table
 		And I click Select button of "Partner term" field
+		And I remove checkbox named "FilterCompanyUse"
 		And I go to line in "List" table
 			| 'Description'           |
 			| 'Vendor Ferron, TRY'    |
@@ -734,6 +736,7 @@ Scenario: _201012 сheck filling of the bundle of store and company in the PO
 			| 'Company Ferron BP'    |
 		And I select current line in "List" table
 		And I click Select button of "Partner term" field
+		And I remove checkbox named "FilterCompanyUse"
 		And I go to line in "List" table
 			| 'Description'           |
 			| 'Vendor Ferron, TRY'    |
@@ -741,8 +744,8 @@ Scenario: _201012 сheck filling of the bundle of store and company in the PO
 	* Select company
 		And I click Choice button of the field named "Company"
 		And I go to line in "List" table
-			| 'Code'   | 'Description'     |
-			| '2'      | 'Main Company'    |
+			| 'Description'  |
+			| 'Main Company' |
 		And I select current line in "List" table
 	* Check stores choise form
 		And I click Choice button of the field named "Store"
@@ -826,6 +829,7 @@ Scenario: _201013 сheck filling of the bundle of store and company in the PI
 			| 'Company Ferron BP'    |
 		And I select current line in "List" table
 		And I click Select button of "Partner term" field
+		And I remove checkbox named "FilterCompanyUse"
 		And I go to line in "List" table
 			| 'Description'           |
 			| 'Vendor Ferron, TRY'    |
@@ -833,8 +837,8 @@ Scenario: _201013 сheck filling of the bundle of store and company in the PI
 	* Select company
 		And I click Choice button of the field named "Company"
 		And I go to line in "List" table
-			| 'Code'   | 'Description'     |
-			| '2'      | 'Main Company'    |
+			| 'Description'  |
+			| 'Main Company' |
 		And I select current line in "List" table
 	* Check stores choise form
 		And I click Choice button of the field named "Store"
@@ -1190,6 +1194,7 @@ Scenario: _201018 сheck filling of the bundle of store and company in the SRO
 			| 'Company Ferron BP'    |
 		And I select current line in "List" table
 		And I click Select button of "Partner term" field
+		And I remove checkbox named "FilterCompanyUse"
 		And I go to line in "List" table
 			| 'Description'                 |
 			| 'Basic Partner terms, TRY'    |
@@ -1197,8 +1202,8 @@ Scenario: _201018 сheck filling of the bundle of store and company in the SRO
 	* Select company
 		And I click Choice button of the field named "Company"
 		And I go to line in "List" table
-			| 'Code'   | 'Description'     |
-			| '2'      | 'Main Company'    |
+			| 'Description'  |
+			| 'Main Company' |
 		And I select current line in "List" table
 	* Check stores choise form
 		And I click Choice button of the field named "Store"
@@ -1282,6 +1287,7 @@ Scenario: _201019 сheck filling of the bundle of store and company in the SR
 			| 'Company Ferron BP'    |
 		And I select current line in "List" table
 		And I click Select button of "Partner term" field
+		And I remove checkbox named "FilterCompanyUse"
 		And I go to line in "List" table
 			| 'Description'                 |
 			| 'Basic Partner terms, TRY'    |
@@ -1289,8 +1295,8 @@ Scenario: _201019 сheck filling of the bundle of store and company in the SR
 	* Select company
 		And I click Choice button of the field named "Company"
 		And I go to line in "List" table
-			| 'Code'   | 'Description'     |
-			| '2'      | 'Main Company'    |
+			| 'Description'  |
+			| 'Main Company' |
 		And I select current line in "List" table
 	* Check stores choise form
 		And I click Choice button of the field named "Store"
@@ -1374,6 +1380,7 @@ Scenario: _201020 сheck filling of the bundle of store and company in the PRO
 			| 'Company Ferron BP'    |
 		And I select current line in "List" table
 		And I click Select button of "Partner term" field
+		And I remove checkbox named "FilterCompanyUse"
 		And I go to line in "List" table
 			| 'Description'           |
 			| 'Vendor Ferron, TRY'    |
@@ -1381,8 +1388,8 @@ Scenario: _201020 сheck filling of the bundle of store and company in the PRO
 	* Select company
 		And I click Choice button of the field named "Company"
 		And I go to line in "List" table
-			| 'Code'   | 'Description'     |
-			| '2'      | 'Main Company'    |
+			| 'Description'  |
+			| 'Main Company' |
 		And I select current line in "List" table
 	* Check stores choise form
 		And I click Choice button of the field named "Store"
@@ -1467,6 +1474,7 @@ Scenario: _201021 сheck filling of the bundle of store and company in the PR
 			| 'Company Ferron BP'    |
 		And I select current line in "List" table
 		And I click Select button of "Partner term" field
+		And I remove checkbox named "FilterCompanyUse"
 		And I go to line in "List" table
 			| 'Description'           |
 			| 'Vendor Ferron, TRY'    |
@@ -1474,8 +1482,8 @@ Scenario: _201021 сheck filling of the bundle of store and company in the PR
 	* Select company
 		And I click Choice button of the field named "Company"
 		And I go to line in "List" table
-			| 'Code'   | 'Description'     |
-			| '2'      | 'Main Company'    |
+			| 'Description'  |
+			| 'Main Company' |
 		And I select current line in "List" table
 	* Check stores choise form
 		And I click Choice button of the field named "Store"
@@ -1552,8 +1560,8 @@ Scenario: _201022 сheck filling of the bundle of store and company in the ISR
 	* Select company
 		And I click Choice button of the field named "Company"
 		And I go to line in "List" table
-			| 'Code'   | 'Description'     |
-			| '2'      | 'Main Company'    |
+			| 'Description'  |
+			| 'Main Company' |
 		And I select current line in "List" table
 	* Check stores choise form
 		And I click Choice button of the field named "Store"

@@ -2226,3 +2226,35 @@ Scenario: _200053 check Disable - Calculate rows on link rows
 		Then the form attribute named "CalculateRows" became equal to "Yes"
 		And I close all client application windows
 
+Scenario: _200054 check user settings for catalog Partner term
+	And I close all client application windows
+	* Settings
+		Given I open hyperlink "e1cib/list/Catalog.Users"
+		And I go to line in "List" table
+			| 'Login'   |
+			| 'CI'      |
+		And I click "Settings" button
+		And I go to line in "MetadataTree" table
+			| 'Group name'    |
+			| 'Partner terms' |
+		And I go to line in "MetadataTree" table
+			| 'Group name' |
+			| 'Price type' |
+		And I activate "Value" field in "MetadataTree" table
+		And I select "Basic Price Types" from "Value" drop-down list by string in "MetadataTree" table
+		And I finish line editing in "MetadataTree" table
+		And I go to line in "MetadataTree" table
+			| 'Group name'         | 
+			| 'Price includes tax' |
+		And I select current line in "MetadataTree" table
+		And I select "Yes" exact value from "Value" drop-down list in "MetadataTree" table
+		And I click "Ok" button	
+	* Check	
+		Given I open hyperlink "e1cib/list/Catalog.Agreements"
+		And I click the button named "FormCreate" 
+		Then the form attribute named "PriceType" became equal to "Basic Price Types"
+		And checkbox named "PriceIncludeTax" is equal to "Yes"
+	And I close all client application windows
+			
+				
+		

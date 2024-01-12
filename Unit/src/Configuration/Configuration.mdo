@@ -106,6 +106,7 @@
   <enums>Enum.ItemTypes</enums>
   <enums>Enum.REP_ReportParametrTypes</enums>
   <reports>Report.REP_Barcodes</reports>
+  <dataProcessors>DataProcessor.Unit_CheckAllTypeData</dataProcessors>
   <dataProcessors>DataProcessor.Unit_RunTest</dataProcessors>
   <informationRegisters>InformationRegister.AttachedFiles</informationRegisters>
   <informationRegisters>InformationRegister.ExpenseRevenueTypeSettings</informationRegisters>

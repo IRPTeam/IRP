@@ -549,6 +549,47 @@ Scenario: _005116 filling in the "Items" catalog
 		| 'Bodie'        | 'Coat'        |
 		| 'Jeans'        | 'Jeans'       |
 
+Scenario: _0051171 name uniqueness control (Items)
+	And I close all client application windows
+	* Preparation
+		Given I open hyperlink "e1cib/list/Catalog.Items"
+		If "List" table does not contain lines Then
+			| 'Description' |
+			| 'Bodie'       |
+			Then I stop script execution "Skipped"
+	* Create item
+		And I click the button named "FormCreate"
+		And Delay 2
+		And I click Open button of the field named "Description_en"
+		And I input "Bodie" text in the field named "Description_en"
+		And I input "Bodie TR" text in the field named "Description_tr"
+		And I input "Боди" text in the field named "Description_ru"
+		And I click "Ok" button
+		And I select from "Item type" drop-down list by "coat" string
+		And I click Select button of "Unit" field
+		And I go to line in "List" table
+			| 'Description'    |
+			| 'pcs'            |
+		And I select current line in "List" table
+		And I click the button named "FormWriteAndClose"
+	* Check uniqueness control
+		Then there are lines in TestClient message log
+			|'Description not unique [Bodie]'|
+		And I click Open button of the field named "Description_en"
+		And I input "1" text in the field named "Description_en"	
+		And I click "Ok" button
+		And I click the button named "FormWriteAndClose"
+		Then there are lines in TestClient message log
+			|'Description not unique [Bodie]'|	
+		And I click Open button of the field named "Description_en"
+		And I input "1" text in the field named "Description_tr"	
+		And I click "Ok" button
+		And I click the button named "FormWriteAndClose"
+		Then there are lines in TestClient message log
+			|'Description not unique [Bodie]'|	
+		ANd I close all client application windows
+			
+
 Scenario: _005118 check filling in additional property for item
 	And I close all client application windows
 	* Opening the Item form

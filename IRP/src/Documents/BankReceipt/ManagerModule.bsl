@@ -9,182 +9,17 @@ EndFunction
 #Region Posting
 
 Function PostingGetDocumentDataTables(Ref, Cancel, PostingMode, Parameters, AddInfo = Undefined) Export
-	AccReg = Metadata.AccumulationRegisters;
-	Tables = New Structure;
-	Tables.Insert("CashInTransit", PostingServer.CreateTable(AccReg.CashInTransit));
-	Tables.Insert("CashInTransit_POS", PostingServer.CreateTable(AccReg.CashInTransit));
-
-	QueryPaymentList = New Query;
-	QueryPaymentList.Text = GetQueryTextBankReceiptPaymentList();
-	QueryPaymentList.SetParameter("Ref", Ref);
-	QueryResultsPaymentList = QueryPaymentList.Execute();
-	QueryTablePaymentList = QueryResultsPaymentList.Unload();
-
-	Query = New Query;
-	Query.Text = GetQueryTextQueryTable();
-	Query.SetParameter("QueryTable", QueryTablePaymentList);
-	QueryResults = Query.ExecuteBatch();
-
-	Tables.CashInTransit              = QueryResults[1].Unload();
-	Tables.CashInTransit_POS          = QueryResults[2].Unload();
-
 	QueryArray = GetQueryTextsSecondaryTables();
 	PostingServer.ExecuteQuery(Ref, QueryArray, Parameters);
 
 	AccountingServer.CreateAccountingDataTables(Ref, Cancel, PostingMode, Parameters, AddInfo);
+	
+	Tables = New Structure;
+
+	CashInTransit = Metadata.AccumulationRegisters.CashInTransit;
+	Tables.Insert(CashInTransit.Name, CommonFunctionsServer.CreateTable(CashInTransit));
+	
 	Return Tables;
-EndFunction
-
-Function GetQueryTextBankReceiptPaymentList()
-	Return "SELECT
-		   |	BankReceiptPaymentList.Ref.Company AS Company,
-		   |	BankReceiptPaymentList.Ref.Currency AS Currency,
-		   |	BankReceiptPaymentList.Ref.CurrencyExchange AS CurrencyExchange,
-		   |	BankReceiptPaymentList.Ref.Account AS Account,
-		   |	BankReceiptPaymentList.Ref.TransitAccount AS TransitAccount,
-		   |	CASE
-		   |		WHEN BankReceiptPaymentList.Agreement.ApArPostingDetail = VALUE(Enum.ApArPostingDetail.ByDocuments)
-		   |			THEN CASE
-		   |				WHEN (VALUETYPE(BankReceiptPaymentList.PlaningTransactionBasis) = TYPE(Document.CashTransferOrder)
-		   |				OR VALUETYPE(BankReceiptPaymentList.PlaningTransactionBasis) = TYPE(Document.CashStatement))
-		   |				AND NOT BankReceiptPaymentList.PlaningTransactionBasis.Date IS NULL
-		   |				AND
-		   |					BankReceiptPaymentList.PlaningTransactionBasis.SendCurrency <> BankReceiptPaymentList.PlaningTransactionBasis.ReceiveCurrency
-		   |					THEN BankReceiptPaymentList.PlaningTransactionBasis
-		   |				ELSE BankReceiptPaymentList.BasisDocument
-		   |			END
-		   |		ELSE UNDEFINED
-		   |	END AS BasisDocument,
-		   |	CASE
-		   |		WHEN BankReceiptPaymentList.Agreement = VALUE(Catalog.Agreements.EmptyRef)
-		   |			THEN TRUE
-		   |		ELSE FALSE
-		   |	END
-		   |	AND NOT CASE
-		   |		WHEN (VALUETYPE(BankReceiptPaymentList.PlaningTransactionBasis) = TYPE(Document.CashTransferOrder)
-		   |		OR VALUETYPE(BankReceiptPaymentList.PlaningTransactionBasis) = TYPE(Document.CashStatement))
-		   |		AND NOT BankReceiptPaymentList.PlaningTransactionBasis.Date IS NULL
-		   |		AND
-		   |			BankReceiptPaymentList.PlaningTransactionBasis.SendCurrency <> BankReceiptPaymentList.PlaningTransactionBasis.ReceiveCurrency
-		   |			THEN TRUE
-		   |		ELSE FALSE
-		   |	END AS IsAdvance,
-		   |	BankReceiptPaymentList.PlaningTransactionBasis AS PlaningTransactionBasis,
-		   |	CASE
-		   |		WHEN BankReceiptPaymentList.Agreement.Kind = VALUE(Enum.AgreementKinds.Regular)
-		   |		AND BankReceiptPaymentList.Agreement.ApArPostingDetail = VALUE(Enum.ApArPostingDetail.ByStandardAgreement)
-		   |			THEN BankReceiptPaymentList.Agreement.StandardAgreement
-		   |		ELSE BankReceiptPaymentList.Agreement
-		   |	END AS Agreement,
-		   |	BankReceiptPaymentList.Partner AS Partner,
-		   |	BankReceiptPaymentList.Payer AS Payer,
-		   |	BankReceiptPaymentList.Ref.Date AS Period,
-		   |	BankReceiptPaymentList.TotalAmount AS Amount,
-		   |	BankReceiptPaymentList.AmountExchange AS AmountExchange,
-		   |	CASE
-		   |		WHEN VALUETYPE(BankReceiptPaymentList.PlaningTransactionBasis) = TYPE(Document.CashTransferOrder)
-		   |		AND NOT BankReceiptPaymentList.PlaningTransactionBasis.Date IS NULL
-		   |		AND
-		   |			BankReceiptPaymentList.PlaningTransactionBasis.SendCurrency = BankReceiptPaymentList.PlaningTransactionBasis.ReceiveCurrency
-		   |			THEN TRUE
-		   |		ELSE FALSE
-		   |	END AS IsMoneyTransfer,
-		   |	CASE
-		   |		WHEN VALUETYPE(BankReceiptPaymentList.PlaningTransactionBasis) = TYPE(Document.CashTransferOrder)
-		   |		AND NOT BankReceiptPaymentList.PlaningTransactionBasis.Date IS NULL
-		   |		AND
-		   |			BankReceiptPaymentList.PlaningTransactionBasis.SendCurrency <> BankReceiptPaymentList.PlaningTransactionBasis.ReceiveCurrency
-		   |			THEN TRUE
-		   |		ELSE FALSE
-		   |	END AS IsMoneyExchange,
-		   |	CASE
-		   |		WHEN VALUETYPE(BankReceiptPaymentList.PlaningTransactionBasis) = TYPE(Document.CashStatement)
-		   |		AND NOT BankReceiptPaymentList.PlaningTransactionBasis.Date IS NULL
-		   |			THEN TRUE
-		   |		ELSE FALSE
-		   |	END AS TransferFromPOS,
-		   |	BankReceiptPaymentList.Ref.Account AS ToAccount_POS,
-		   |	BankReceiptPaymentList.POSAccount AS FromAccount_POS,
-		   |	BankReceiptPaymentList.PlaningTransactionBasis.Sender AS FromAccount,
-		   |	BankReceiptPaymentList.PlaningTransactionBasis.Receiver AS ToAccount,
-		   |	BankReceiptPaymentList.Ref AS ReceiptDocument,
-		   |	BankReceiptPaymentList.Key,
-		   |	BankReceiptPaymentList.ProfitLossCenter AS ProfitLossCenter,
-		   |	BankReceiptPaymentList.ExpenseType AS ExpenseType,
-		   |	BankReceiptPaymentList.AdditionalAnalytic AS AdditionalAnalytic,
-		   |	BankReceiptPaymentList.Commission AS Commission,
-		   |	BankReceiptPaymentList.Ref.Branch AS Branch
-		   |FROM
-		   |	Document.BankReceipt.PaymentList AS BankReceiptPaymentList
-		   |WHERE
-		   |	BankReceiptPaymentList.Ref = &Ref";
-EndFunction
-
-Function GetQueryTextQueryTable()
-	Return "SELECT
-		   |	QueryTable.Company AS Company,
-		   |	QueryTable.Currency AS Currency,
-		   |	QueryTable.CurrencyExchange AS CurrencyExchange,
-		   |	QueryTable.Account AS Account,
-		   |	QueryTable.TransitAccount AS TransitAccount,
-		   |	QueryTable.PlaningTransactionBasis AS PlaningTransactionBasis,
-		   |	QueryTable.BasisDocument AS BasisDocument,
-		   |	QueryTable.IsAdvance AS IsAdvance,
-		   |	QueryTable.Agreement AS Agreement,
-		   |	QueryTable.Partner AS Partner,
-		   |	QueryTable.Payer AS Payer,
-		   |	QueryTable.Period AS Period,
-		   |	QueryTable.Amount AS Amount,
-		   |	QueryTable.AmountExchange AS AmountExchange,
-		   |	QueryTable.IsMoneyTransfer AS IsMoneyTransfer,
-		   |	QueryTable.IsMoneyExchange AS IsMoneyExchange,
-		   |	QueryTable.FromAccount AS FromAccount,
-		   |	QueryTable.ToAccount AS ToAccount,
-		   |	QueryTable.ReceiptDocument AS ReceiptDocument,
-		   |	QueryTable.Key AS Key,
-		   |	QueryTable.TransferFromPOS AS TransferFromPOS,
-		   |	QueryTable.ToAccount_POS AS ToAccount_POS,
-		   |	QueryTable.FromAccount_POS AS FromAccount_POS,
-		   |	QueryTable.ProfitLossCenter AS ProfitLossCenter,
-		   |	QueryTable.ExpenseType AS ExpenseType,
-		   |	QueryTable.AdditionalAnalytic AS AdditionalAnalytic,
-		   |	QueryTable.Commission AS Commission,
-		   |	QueryTable.Branch AS Branch
-		   |INTO tmp
-		   |FROM
-		   |	&QueryTable AS QueryTable
-		   |;
-		   |
-		   |//[1]//////////////////////////////////////////////////////////////////////////////
-		   |SELECT
-		   |	tmp.Company AS Company,
-		   |	tmp.PlaningTransactionBasis AS BasisDocument,
-		   |	tmp.FromAccount AS FromAccount,
-		   |	tmp.ToAccount AS ToAccount,
-		   |	tmp.Currency AS Currency,
-		   |	tmp.Amount AS Amount,
-		   |	tmp.Period,
-		   |	tmp.Key
-		   |FROM
-		   |	tmp AS tmp
-		   |WHERE
-		   |	tmp.IsMoneyTransfer
-		   |;
-		   |
-		   |//[2]//////////////////////////////////////////////////////////////////////////////
-		   |SELECT
-		   |	tmp.Company AS Company,
-		   |	tmp.PlaningTransactionBasis AS BasisDocument,
-		   |	tmp.FromAccount_POS AS FromAccount,
-		   |	tmp.ToAccount_POS AS ToAccount,
-		   |	tmp.Currency AS Currency,
-		   |	tmp.Amount AS Amount,
-		   |	tmp.Period,
-		   |	tmp.Key
-		   |FROM
-		   |	tmp AS tmp
-		   |WHERE
-		   |	tmp.TransferFromPOS";
 EndFunction
 
 Function PostingGetLockDataSource(Ref, Cancel, PostingMode, Parameters, AddInfo = Undefined) Export
@@ -216,24 +51,11 @@ EndProcedure
 
 Function PostingGetPostingDataTables(Ref, Cancel, PostingMode, Parameters, AddInfo = Undefined) Export
 	PostingDataTables = New Map;
-	
-	// CashInIransit
-	ArrayOfTables = New Array;
-	Table1 = Parameters.DocumentDataTables.CashInTransit.Copy();
-	Table1.Columns.Add("RecordType", New TypeDescription("AccumulationRecordType"));
-	Table1.FillValues(AccumulationRecordType.Expense, "RecordType");
-	ArrayOfTables.Add(Table1);
-
-	Table2 = Parameters.DocumentDataTables.CashInTransit_POS.Copy();
-	Table2.Columns.Add("RecordType", New TypeDescription("AccumulationRecordType"));
-	Table2.FillValues(AccumulationRecordType.Expense, "RecordType");
-	ArrayOfTables.Add(Table2);
-
-	PostingDataTables.Insert(Parameters.Object.RegisterRecords.CashInTransit, New Structure("RecordSet, WriteInTransaction", PostingServer.JoinTables(ArrayOfTables,
-		"RecordType, Period, Company, BasisDocument, FromAccount, ToAccount, Currency, Amount, Key"), Parameters.IsReposting));
-
 	PostingServer.SetPostingDataTables(PostingDataTables, Parameters);
-
+	
+	CashInTransit = Metadata.AccumulationRegisters.CashInTransit;
+	PostingServer.SetPostingDataTable(PostingDataTables, Parameters, CashInTransit.Name, Parameters.DocumentDataTables[CashInTransit.Name]);
+	
 	Return PostingDataTables;
 EndFunction
 
@@ -287,6 +109,7 @@ EndFunction
 
 Function GetQueryTextsMasterTables()
 	QueryArray = New Array;
+	QueryArray.Add(CashInTransit());
 	QueryArray.Add(R1020B_AdvancesToVendors());
 	QueryArray.Add(R1021B_VendorsTransactions());
 	QueryArray.Add(R2020B_AdvancesFromCustomers());
@@ -428,6 +251,127 @@ EndFunction
 #EndRegion
 
 #Region Posting_MainTables
+
+Function CashInTransit()
+	Return "SELECT
+	|	BankReceiptPaymentList.Ref.Company AS Company,
+	|	BankReceiptPaymentList.Ref.Currency AS Currency,
+	|	BankReceiptPaymentList.Ref.CurrencyExchange AS CurrencyExchange,
+	|	BankReceiptPaymentList.Ref.Account AS Account,
+	|	BankReceiptPaymentList.Ref.TransitAccount AS TransitAccount,
+	|	CASE
+	|		WHEN BankReceiptPaymentList.Agreement.ApArPostingDetail = VALUE(Enum.ApArPostingDetail.ByDocuments)
+	|			THEN CASE
+	|				WHEN (VALUETYPE(BankReceiptPaymentList.PlaningTransactionBasis) = TYPE(Document.CashTransferOrder)
+	|				OR VALUETYPE(BankReceiptPaymentList.PlaningTransactionBasis) = TYPE(Document.CashStatement))
+	|				AND NOT BankReceiptPaymentList.PlaningTransactionBasis.Date IS NULL
+	|				AND
+	|					BankReceiptPaymentList.PlaningTransactionBasis.SendCurrency <> BankReceiptPaymentList.PlaningTransactionBasis.ReceiveCurrency
+	|					THEN BankReceiptPaymentList.PlaningTransactionBasis
+	|				ELSE BankReceiptPaymentList.BasisDocument
+	|			END
+	|		ELSE UNDEFINED
+	|	END AS BasisDocument,
+	|	CASE
+	|		WHEN BankReceiptPaymentList.Agreement = VALUE(Catalog.Agreements.EmptyRef)
+	|			THEN TRUE
+	|		ELSE FALSE
+	|	END
+	|	AND NOT CASE
+	|		WHEN (VALUETYPE(BankReceiptPaymentList.PlaningTransactionBasis) = TYPE(Document.CashTransferOrder)
+	|		OR VALUETYPE(BankReceiptPaymentList.PlaningTransactionBasis) = TYPE(Document.CashStatement))
+	|		AND NOT BankReceiptPaymentList.PlaningTransactionBasis.Date IS NULL
+	|		AND
+	|			BankReceiptPaymentList.PlaningTransactionBasis.SendCurrency <> BankReceiptPaymentList.PlaningTransactionBasis.ReceiveCurrency
+	|			THEN TRUE
+	|		ELSE FALSE
+	|	END AS IsAdvance,
+	|	BankReceiptPaymentList.PlaningTransactionBasis AS PlaningTransactionBasis,
+	|	CASE
+	|		WHEN BankReceiptPaymentList.Agreement.Kind = VALUE(Enum.AgreementKinds.Regular)
+	|		AND BankReceiptPaymentList.Agreement.ApArPostingDetail = VALUE(Enum.ApArPostingDetail.ByStandardAgreement)
+	|			THEN BankReceiptPaymentList.Agreement.StandardAgreement
+	|		ELSE BankReceiptPaymentList.Agreement
+	|	END AS Agreement,
+	|	BankReceiptPaymentList.Partner AS Partner,
+	|	BankReceiptPaymentList.Payer AS Payer,
+	|	BankReceiptPaymentList.Ref.Date AS Period,
+	|	BankReceiptPaymentList.TotalAmount AS Amount,
+	|	BankReceiptPaymentList.AmountExchange AS AmountExchange,
+	|	CASE
+	|		WHEN VALUETYPE(BankReceiptPaymentList.PlaningTransactionBasis) = TYPE(Document.CashTransferOrder)
+	|		AND NOT BankReceiptPaymentList.PlaningTransactionBasis.Date IS NULL
+	|		AND
+	|			BankReceiptPaymentList.PlaningTransactionBasis.SendCurrency = BankReceiptPaymentList.PlaningTransactionBasis.ReceiveCurrency
+	|			THEN TRUE
+	|		ELSE FALSE
+	|	END AS IsMoneyTransfer,
+	|	CASE
+	|		WHEN VALUETYPE(BankReceiptPaymentList.PlaningTransactionBasis) = TYPE(Document.CashTransferOrder)
+	|		AND NOT BankReceiptPaymentList.PlaningTransactionBasis.Date IS NULL
+	|		AND
+	|			BankReceiptPaymentList.PlaningTransactionBasis.SendCurrency <> BankReceiptPaymentList.PlaningTransactionBasis.ReceiveCurrency
+	|			THEN TRUE
+	|		ELSE FALSE
+	|	END AS IsMoneyExchange,
+	|	CASE
+	|		WHEN VALUETYPE(BankReceiptPaymentList.PlaningTransactionBasis) = TYPE(Document.CashStatement)
+	|		AND NOT BankReceiptPaymentList.PlaningTransactionBasis.Date IS NULL
+	|			THEN TRUE
+	|		ELSE FALSE
+	|	END AS TransferFromPOS,
+	|	BankReceiptPaymentList.Ref.Account AS ToAccount_POS,
+	|	BankReceiptPaymentList.POSAccount AS FromAccount_POS,
+	|	BankReceiptPaymentList.PlaningTransactionBasis.Sender AS FromAccount,
+	|	BankReceiptPaymentList.PlaningTransactionBasis.Receiver AS ToAccount,
+	|	BankReceiptPaymentList.Ref AS ReceiptDocument,
+	|	BankReceiptPaymentList.Key,
+	|	BankReceiptPaymentList.ProfitLossCenter AS ProfitLossCenter,
+	|	BankReceiptPaymentList.ExpenseType AS ExpenseType,
+	|	BankReceiptPaymentList.AdditionalAnalytic AS AdditionalAnalytic,
+	|	BankReceiptPaymentList.Commission AS Commission,
+	|	BankReceiptPaymentList.Ref.Branch AS Branch
+	|INTO TablePaymentList
+	|FROM
+	|	Document.BankReceipt.PaymentList AS BankReceiptPaymentList
+	|WHERE
+	|	BankReceiptPaymentList.Ref = &Ref
+	|;
+	|
+	|////////////////////////////////////////////////////////////////////////////////
+	|SELECT
+	|	VALUE(AccumulationRecordType.Expense) AS RecordType,
+	|	tmp.Company AS Company,
+	|	tmp.PlaningTransactionBasis AS BasisDocument,
+	|	tmp.FromAccount AS FromAccount,
+	|	tmp.ToAccount AS ToAccount,
+	|	tmp.Currency AS Currency,
+	|	tmp.Amount AS Amount,
+	|	tmp.Period,
+	|	tmp.Key
+	|INTO CashInTransit
+	|FROM
+	|	TablePaymentList AS tmp
+	|WHERE
+	|	tmp.IsMoneyTransfer
+	|
+	|UNION ALL
+	|
+	|SELECT
+	|	VALUE(AccumulationRecordType.Expense),
+	|	tmp.Company AS Company,
+	|	tmp.PlaningTransactionBasis AS BasisDocument,
+	|	tmp.FromAccount_POS AS FromAccount,
+	|	tmp.ToAccount_POS AS ToAccount,
+	|	tmp.Currency AS Currency,
+	|	tmp.Amount AS Amount,
+	|	tmp.Period,
+	|	tmp.Key
+	|FROM
+	|	TablePaymentList AS tmp
+	|WHERE
+	|	tmp.TransferFromPOS";
+EndFunction
 
 Function R3027B_EmployeeCashAdvance()
 	Return "SELECT
@@ -1083,7 +1027,9 @@ Function GetAnalytics_DR_R3010B_CR_R2020B_R2021B(Parameters)
 	AccountingAnalytics = AccountingServer.GetAccountingAnalyticsResult(Parameters);
 	AccountParameters   = AccountingServer.GetAccountParameters(Parameters);
 	
-	Debit = AccountingServer.GetT9011S_AccountsCashAccount(AccountParameters, Parameters.ObjectData.Account);
+	Debit = AccountingServer.GetT9011S_AccountsCashAccount(AccountParameters, 
+	                                                       Parameters.ObjectData.Account,
+	                                                       Parameters.ObjectData.Currency);
 	If ValueIsFilled(Debit.Account) Then
 		AccountingAnalytics.Debit = Debit.Account;
 	EndIf;
@@ -1092,7 +1038,11 @@ Function GetAnalytics_DR_R3010B_CR_R2020B_R2021B(Parameters)
 	AdditionalAnalytics.Insert("Account", Parameters.ObjectData.Account);
 	AccountingServer.SetDebitExtDimensions(Parameters, AccountingAnalytics, AdditionalAnalytics);
 	
-	Credit = AccountingServer.GetT9012S_AccountsPartner(AccountParameters, Parameters.RowData.Partner, Parameters.RowData.Agreement);
+	Credit = AccountingServer.GetT9012S_AccountsPartner(AccountParameters, 
+	                                                    Parameters.RowData.Partner, 
+	                                                    Parameters.RowData.Agreement,
+	                                                    Parameters.ObjectData.Currency);
+	                                                    
 	IsAdvance = AccountingServer.IsAdvance(Parameters.RowData);
 	If IsAdvance Then
 		If ValueIsFilled(Credit.AccountAdvancesCustomer) Then
@@ -1114,7 +1064,11 @@ Function GetAnalytics_DR_R2021B_CR_R2020B(Parameters)
 	AccountingAnalytics = AccountingServer.GetAccountingAnalyticsResult(Parameters);
 	AccountParameters   = AccountingServer.GetAccountParameters(Parameters);
 
-	Accounts = AccountingServer.GetT9012S_AccountsPartner(AccountParameters, Parameters.RowData.Partner, Parameters.RowData.Agreement);
+	Accounts = AccountingServer.GetT9012S_AccountsPartner(AccountParameters, 
+	                                                      Parameters.RowData.Partner, 
+	                                                      Parameters.RowData.Agreement,
+	                                                      Parameters.ObjectData.Currency);
+	                                                      
 	If ValueIsFilled(Accounts.AccountTransactionsCustomer) Then
 		AccountingAnalytics.Debit = Accounts.AccountTransactionsCustomer;
 	EndIf;

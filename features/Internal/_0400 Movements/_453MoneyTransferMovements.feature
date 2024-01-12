@@ -5,7 +5,7 @@
 @MovementsMoneyTransfer
 
 
-Feature: check Cash transfer order movements
+Feature: check Money Transfer movements
 
 Variables:
 import "Variables.feature"
@@ -15,7 +15,7 @@ Background:
 
 
 
-Scenario: _045300 preparation (Cash transfer order)
+Scenario: _045300 preparation (Money transfer movements)
 	When set True value to the constant
 	* Load info
 		When Create information register Barcodes records

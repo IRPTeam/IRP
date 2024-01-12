@@ -409,8 +409,8 @@ Function PostingGetDocumentDataTables(Ref, Cancel, PostingMode, Parameters, AddI
 	Query.SetParameter("ExpensesTable", ExpenseRevenueInfo.ExpensesTable);
 	Query.Execute();
 
-	CurrenciesServer.ExcludePostingDataTable(Parameters, Parameters.Object.RegisterRecords.R5022T_Expenses.Metadata());
-	CurrenciesServer.ExcludePostingDataTable(Parameters, Parameters.Object.RegisterRecords.R5021T_Revenues.Metadata());
+	CurrenciesServer.ExcludePostingDataTable(Parameters, Metadata.AccumulationRegisters.R5022T_Expenses);
+	CurrenciesServer.ExcludePostingDataTable(Parameters, Metadata.AccumulationRegisters.R5021T_Revenues);
 	
 	// Accounting
 	
@@ -488,7 +488,11 @@ Function GetAnalytics_DR_R5022T_Expenses_CR_R2020B_AdvancesFromCustomers(Paramet
 	AccountingServer.SetDebitExtDimensions(Parameters, AccountingAnalytics, AdditionalAnalytics);
 
 	// Credit
-	Credit = AccountingServer.GetT9012S_AccountsPartner(AccountParameters, Parameters.RowData.Partner, Undefined);
+	Credit = AccountingServer.GetT9012S_AccountsPartner(AccountParameters, 
+	                                                    Parameters.RowData.Partner, 
+	                                                    Undefined,
+	                                                    Parameters.RowData.Currency);
+	                                                    
 	If ValueIsFilled(Credit.AccountAdvancesCustomer) Then
 		AccountingAnalytics.Credit = Credit.AccountAdvancesCustomer;
 	EndIf;

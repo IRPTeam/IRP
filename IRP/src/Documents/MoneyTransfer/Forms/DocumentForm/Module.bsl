@@ -17,6 +17,7 @@ EndProcedure
 &AtServer
 Procedure BeforeWriteAtServer(Cancel, CurrentObject, WriteParameters)
 	AddAttributesAndPropertiesServer.BeforeWriteAtServer(ThisObject, Cancel, CurrentObject, WriteParameters);
+	AccountingServer.BeforeWriteAtServer(Object, ThisObject, Cancel, CurrentObject, WriteParameters);
 EndProcedure
 
 &AtServer
@@ -46,6 +47,7 @@ EndProcedure
 Procedure SetVisibilityAvailability(Object, Form)
 	Form.Items.EditCurrenciesSender.Enabled = Not Form.ReadOnly;
 	Form.Items.EditCurrenciesReceiver.Enabled = Not Form.ReadOnly;
+	Form.Items.EditAccounting.Enabled = Not Form.ReadOnly;
 	
 	CashTransferOrderIsFilled = ValueIsFilled(Object.CashTransferOrder);
 	
@@ -55,6 +57,9 @@ Procedure SetVisibilityAvailability(Object, Form)
 	Form.Items.ReceiveCurrency.ReadOnly = CashTransferOrderIsFilled;
 	Form.Items.ReceiveFinancialMovementType.ReadOnly = CashTransferOrderIsFilled;
 	Form.Items.SendFinancialMovementType.ReadOnly    = CashTransferOrderIsFilled;
+	Form.Items.TransitAccount.Visible = ValueIsFilled(Object.SendCurrency) 
+		And ValueIsFilled(Object.ReceiveCurrency)
+		And Object.SendCurrency <> Object.ReceiveCurrency;
 EndProcedure
 
 &AtClient
@@ -288,6 +293,23 @@ Procedure GeneratedFormCommandActionByNameServer(CommandName) Export
 EndProcedure
 
 #EndRegion
+
+&AtClient
+Procedure EditAccounting(Command)
+	UpdateAccountingData();
+	AccountingClient.OpenFormEditAccounting(Object, ThisObject, Undefined, Undefined);
+EndProcedure
+
+&AtServer
+Procedure UpdateAccountingData()
+	_AccountingRowAnalytics = ThisObject.AccountingRowAnalytics.Unload();
+	_AccountingExtDimensions = ThisObject.AccountingExtDimensions.Unload();
+	AccountingClientServer.UpdateAccountingTables(Object, 
+			                                      _AccountingRowAnalytics, 
+		                                          _AccountingExtDimensions, Undefined);
+	ThisObject.AccountingRowAnalytics.Load(_AccountingRowAnalytics);
+	ThisObject.AccountingExtDimensions.Load(_AccountingExtDimensions);
+EndProcedure
 
 &AtClient
 Procedure ShowRowKey(Command)

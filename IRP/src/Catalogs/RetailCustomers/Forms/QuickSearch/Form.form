@@ -918,6 +918,13 @@
     </valueType>
     <keyParameter>true</keyParameter>
   </parameters>
+  <parameters>
+    <name>Company</name>
+    <valueType>
+      <types>CatalogRef.Companies</types>
+    </valueType>
+    <keyParameter>true</keyParameter>
+  </parameters>
   <commandInterface>
     <navigationPanel/>
     <commandBar/>

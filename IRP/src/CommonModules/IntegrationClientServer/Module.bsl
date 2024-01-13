@@ -129,6 +129,7 @@ Function isBinaryData(type)
 	Array = New Array;
 	Array.Add("image");
 	Array.Add("zip");
+	Array.Add("pdf");
 	
 	Return Not Array.Find(type) = Undefined;
 EndFunction

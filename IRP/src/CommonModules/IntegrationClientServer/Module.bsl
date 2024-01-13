@@ -112,7 +112,7 @@ Function SendRequestClientServer(ConnectionSetting, ResourceParameters, RequestP
 	ContentTypeNotDefined = True;
 	If ContentType <> Undefined Then
 		ArrayOfSegments = StrSplit(ContentType, "/");
-		If ArrayOfSegments.Count() >= 1 And Upper(TrimAll(ArrayOfSegments[0])) = "IMAGE" Then
+		If ArrayOfSegments.Count() >= 1 And (isBinaryData(ArrayOfSegments[0]) Or isBinaryData(ArrayOfSegments[1])) Then
 			ContentTypeNotDefined = False;
 			ServerResponse.ResponseBody = HTTPResponse.GetBodyAsBinaryData();
 		EndIf;
@@ -123,6 +123,14 @@ Function SendRequestClientServer(ConnectionSetting, ResourceParameters, RequestP
 	EndIf;
 	Return ServerResponse;
 
+EndFunction
+
+Function isBinaryData(type)
+	Array = New Array;
+	Array.Add("image");
+	Array.Add("zip");
+	
+	Return Not Array.Find(type) = Undefined;
 EndFunction
 
 #EndIf

@@ -69,6 +69,21 @@
   <defaultListForm>Catalog.AccessGroups.Form.ListForm</defaultListForm>
   <defaultChoiceForm>Catalog.AccessGroups.Form.ChoiceForm</defaultChoiceForm>
   <choiceHistoryOnInput>DontUse</choiceHistoryOnInput>
+  <attributes uuid="09491d2d-e665-4cb2-841f-605b10d6c571">
+    <name>OnlyRegisters</name>
+    <synonym>
+      <key>en</key>
+      <value>Only registers</value>
+    </synonym>
+    <type>
+      <types>Boolean</types>
+    </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <fillValue xsi:type="core:UndefinedValue"/>
+    <fullTextSearch>Use</fullTextSearch>
+    <dataHistory>Use</dataHistory>
+  </attributes>
   <tabularSections uuid="6bb388da-7c65-4db7-8e65-0bbba090a078">
     <producedTypes>
       <objectType typeId="2caa41b3-4d90-404b-8c01-62fa60f85b6d" valueTypeId="1793b811-3036-47fe-bae8-fe904333dd5a"/>

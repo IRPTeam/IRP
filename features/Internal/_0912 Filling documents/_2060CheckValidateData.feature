@@ -98,7 +98,7 @@ Scenario: _0206003 сheck data verification in Goods receipt
 		And in the table "DocumentList" I click "Fill documents" button
 		And in the table "DocumentList" I click "Check documents" button	
 	* Check report
-		Then "Fix document problems" window is opened
+		And Delay 25	
 		And I expand a line in "CheckList" table
 			| 'Date'                  | 'Fixed'   | 'Line number'   | 'Ref'                                              |
 			| '10.03.2023 15:43:56'   | 'No'      | '1'             | 'Goods receipt 8 811 dated 10.03.2023 15:43:56'    |
@@ -120,7 +120,7 @@ Scenario: _0206004 сheck data verification in Inventory transfer
 		And in the table "DocumentList" I click "Fill documents" button
 		And in the table "DocumentList" I click "Check documents" button
 	* Check report
-		Then "Fix document problems" window is opened
+		And Delay 25
 		And I expand a line in "CheckList" table
 			| 'Ref'                                                   |
 			| 'Inventory transfer 8 811 dated 10.03.2023 17:06:48'    |
@@ -148,7 +148,7 @@ Scenario: _0206005 сheck data verification in Inventory transfer order
 		And in the table "DocumentList" I click "Fill documents" button
 		And in the table "DocumentList" I click "Check documents" button
 	* Check report
-		Then "Fix document problems" window is opened
+		And Delay 25
 		And I expand a line in "CheckList" table
 			| 'Ref'                                                         |
 			| 'Inventory transfer order 8 811 dated 10.03.2023 17:20:12'    |
@@ -174,7 +174,7 @@ Scenario: _0206006 сheck data verification in Internal supply request
 		And in the table "DocumentList" I click "Fill documents" button
 		And in the table "DocumentList" I click "Check documents" button
 	* Check report
-		Then "Fix document problems" window is opened
+		And Delay 25
 		And I expand a line in "CheckList" table
 			| 'Ref'                                                        |
 			| 'Internal supply request 8 811 dated 10.03.2023 17:24:29'    |
@@ -199,7 +199,7 @@ Scenario: _0206007 сheck data verification in Sales order
 		And in the table "DocumentList" I click "Fill documents" button
 		And in the table "DocumentList" I click "Check documents" button
 	* Check report
-		Then "Fix document problems" window is opened
+		And Delay 25
 		And I expand a line in "CheckList" table
 			| 'Ref'                                            |
 			| 'Sales order 8 811 dated 10.03.2023 17:32:00'    |

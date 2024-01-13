@@ -168,6 +168,10 @@ Function PaymentList()
 		|			ELSE FALSE
 		|		END
 		|	END AS IsAdvance,
+		|
+		|	case when PaymentList.Agreement.ApArPostingDetail = VALUE(Enum.ApArPostingDetail.ByDocuments) Then
+		|	PaymentList.Agreement else Undefined end AS AdvanceAgreement,
+		|		
 		|	PaymentList.PlaningTransactionBasis AS PlaningTransactionBasis,
 		|	PaymentList.PlaningTransactionBasis.PlanningPeriod AS PlanningPeriod,
 		|	PaymentList.Partner.Employee AS IsEmployee,
@@ -530,6 +534,7 @@ Function R2020B_AdvancesFromCustomers()
 		   |	PaymentList.Partner,
 		   |	PaymentList.LegalName,
 		   |	PaymentList.Currency,
+		   |	PaymentList.AdvanceAgreement AS Agreement,
 		   |	PaymentList.Order,
 		   |	PaymentList.Amount,
 		   |	PaymentList.Key,
@@ -551,6 +556,7 @@ Function R2020B_AdvancesFromCustomers()
 		   |	OffsetOfAdvances.Partner,
 		   |	OffsetOfAdvances.LegalName,
 		   |	OffsetOfAdvances.Currency,
+		   |	OffsetOfAdvances.AdvanceAgreement,
 		   |	OffsetOfAdvances.AdvancesOrder,
 		   |	OffsetOfAdvances.Amount,
 		   |	OffsetOfAdvances.Key,
@@ -586,6 +592,7 @@ Function R1020B_AdvancesToVendors()
 		   |	PaymentList.Partner,
 		   |	PaymentList.LegalName,
 		   |	PaymentList.Currency,
+		   |	PaymentList.AdvanceAgreement AS Agreement,
 		   |	-PaymentList.Amount AS Amount,
 		   |	PaymentList.Key
 		   |INTO R1020B_AdvancesToVendors
@@ -694,6 +701,7 @@ Function T2014S_AdvancesInfo()
 		   |	PaymentList.Currency,
 		   |	PaymentList.Partner,
 		   |	PaymentList.LegalName,
+		   |	PaymentList.AdvanceAgreement AS Agreement,
 		   |	PaymentList.Order,
 		   |	TRUE AS IsCustomerAdvance,
 		   |	FALSE AS IsVendorAdvance,
@@ -715,6 +723,7 @@ Function T2014S_AdvancesInfo()
 		   |	PaymentList.Currency,
 		   |	PaymentList.Partner,
 		   |	PaymentList.LegalName,
+		   |	PaymentList.AdvanceAgreement,
 		   |	UNDEFINED,
 		   |	FALSE,
 		   |	TRUE,

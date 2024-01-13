@@ -736,6 +736,7 @@ Function R2020B_AdvancesFromCustomers()
 		   |	OffsetOfAdvances.Partner,
 		   |	OffsetOfAdvances.LegalName,
 		   |	OffsetOfAdvances.Currency,
+		   |	OffsetOfAdvances.AdvanceAgreement AS Agreement,
 		   |	OffsetOfAdvances.Amount,
 		   |	UNDEFINED AS Key,
 		   |	OffsetOfAdvances.Recorder AS CustomersAdvancesClosing

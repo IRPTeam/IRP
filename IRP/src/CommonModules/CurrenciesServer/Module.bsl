@@ -1233,11 +1233,11 @@ Procedure RevaluateCurrency_Advances(Parameters,
 	|	tmp2.LegalName,
 	|	tmp2.Partner,
 	|	tmp2.Order,
-	|	CASE
+	|	CAST(CASE
 	|		WHEN tmp3.AmountBalance = tmp3.Amount
 	|			THEN tmp2.AmountBalance - tmp2.Amount
 	|		ELSE tmp2.AmountBalance / tmp3.AmountBalance * tmp3.Amount - tmp2.Amount
-	|	END AS Amount
+	|	END AS Number(15,2)) AS Amount
 	|INTO tmp3
 	|FROM
 	|	tmp2 AS tmp2

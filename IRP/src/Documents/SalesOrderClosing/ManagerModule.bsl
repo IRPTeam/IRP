@@ -367,6 +367,8 @@ Function T2014S_AdvancesInfo()
 		   |	Doc.Currency,
 		   |	Doc.Partner,
 		   |	Doc.LegalName,
+		   |	case when Doc.Agreement.ApArPostingDetail = VALUE(Enum.ApArPostingDetail.ByDocuments) Then
+		   |	Doc.Agreement else Undefined end AS Agreement,
 		   |	Doc.Ref AS Order,
 		   |	TRUE AS IsCustomerAdvance,
 		   |	TRUE AS IsSalesOrderClose
@@ -386,6 +388,7 @@ Function R2020B_AdvancesFromCustomers()
 		   |	OffsetOfAdvances.Partner,
 		   |	OffsetOfAdvances.LegalName,
 		   |	OffsetOfAdvances.Currency,
+		   |	OffsetOfAdvances.AdvanceAgreement AS Agreement,
 		   |	OffsetOfAdvances.AdvancesOrder AS Order,
 		   |	OffsetOfAdvances.Amount,
 		   |	OffsetOfAdvances.Recorder AS VendorsAdvancesClosing

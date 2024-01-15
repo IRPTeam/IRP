@@ -1,13 +1,7 @@
+
 &AtServer
 Procedure OnCreateAtServer(Cancel, StandardProcessing)
-	ThisObject.List.QueryText = LocalizationEvents.ReplaceDescriptionLocalizationPrefix(ThisObject.List.QueryText);
-	CatalogsServer.OnCreateAtServerChoiceForm(ThisObject, List, Cancel, StandardProcessing);
-	
-	CompanyFilter = Undefined;
-	isCompanyFilter = Parameters.Filter.Property("Company", CompanyFilter) And ValueIsFilled(CompanyFilter);
-	List.Parameters.SetParameterValue("NotCompanyFilter", Not isCompanyFilter);
-	List.Parameters.SetParameterValue("CompanyFilter", CompanyFilter);
-	Parameters.Filter.Delete("Company");
+	CatalogsServer.OnCreateAtServerListForm(ThisObject, List, Cancel, StandardProcessing);
 EndProcedure
 
 #Region COMMANDS

@@ -403,8 +403,8 @@
     <autoFill>true</autoFill>
   </autoCommandBar>
   <handlers>
-    <event>NewWriteProcessing</event>
-    <name>NewWriteProcessing</name>
+    <event>OnCreateAtServer</event>
+    <name>OnCreateAtServer</name>
   </handlers>
   <autoTitle>true</autoTitle>
   <autoUrl>true</autoUrl>

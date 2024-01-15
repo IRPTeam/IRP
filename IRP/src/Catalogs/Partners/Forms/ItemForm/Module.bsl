@@ -1,6 +1,23 @@
 
 #Region FormEvents
 
+&AtServer
+Procedure OnCreateAtServer(Cancel, StandardProcessing)
+	If Parameters.Key.IsEmpty() Then
+		SetVisibilityAvailability(Object, ThisObject);
+	EndIf;
+	
+	LocalizationEvents.CreateMainFormItemDescription(ThisObject, "GroupDescriptions");
+	AddAttributesAndPropertiesServer.OnCreateAtServer(ThisObject);
+	IDInfoServer.OnCreateAtServer(ThisObject, "GroupContactInformation");
+	ExtensionServer.AddAttributesFromExtensions(ThisObject, Object.Ref, Items.GroupMainPages);
+	CatalogsServer.OnCreateAtServerObject(ThisObject, Object, Cancel, StandardProcessing);
+	
+	If Not FOServer.IsUsePartnersHierarchy() Then
+		Items.Parent.Visible = False;
+	EndIf;
+EndProcedure
+
 &AtClient
 Procedure AfterWrite(WriteParameters)
 	If ThisIsNew Then
@@ -27,22 +44,6 @@ Procedure NotificationProcessing(EventName, Parameter, Source, AddInfo = Undefin
 	EndIf;
 	If EventName = "UpdateIDInfo" Then
 		IDInfoCreateFormControl();
-	EndIf;
-EndProcedure
-
-&AtServer
-Procedure OnCreateAtServer(Cancel, StandardProcessing)
-	If Parameters.Key.IsEmpty() Then
-		SetVisibilityAvailability(Object, ThisObject);
-	EndIf;
-	
-	LocalizationEvents.CreateMainFormItemDescription(ThisObject, "GroupDescriptions");
-	AddAttributesAndPropertiesServer.OnCreateAtServer(ThisObject);
-	IDInfoServer.OnCreateAtServer(ThisObject, "GroupContactInformation");
-	ExtensionServer.AddAttributesFromExtensions(ThisObject, Object.Ref, Items.GroupMainPages);
-	
-	If Not FOServer.IsUsePartnersHierarchy() Then
-		Items.Parent.Visible = False;
 	EndIf;
 EndProcedure
 
@@ -154,3 +155,23 @@ EndProcedure
 Procedure IDInfoCreateFormControl()
 	IDInfoServer.CreateFormControls(ThisObject);
 EndProcedure
+
+#Region COMMANDS
+
+&AtClient
+Procedure GeneratedFormCommandActionByName(Command) Export
+	ExternalCommandsClient.GeneratedFormCommandActionByName(Object, ThisObject, Command.Name);
+	GeneratedFormCommandActionByNameServer(Command.Name);
+EndProcedure
+
+&AtServer
+Procedure GeneratedFormCommandActionByNameServer(CommandName) Export
+	ExternalCommandsServer.GeneratedFormCommandActionByName(Object, ThisObject, CommandName);
+EndProcedure
+
+&AtClient
+Procedure InternalCommandAction(Command) Export
+	InternalCommandsClient.RunCommandAction(Command, ThisObject, Object, Object.Ref);
+EndProcedure
+
+#EndRegion

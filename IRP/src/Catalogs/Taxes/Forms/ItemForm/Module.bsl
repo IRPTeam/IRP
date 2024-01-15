@@ -19,6 +19,7 @@ EndProcedure
 Procedure OnCreateAtServer(Cancel, StandardProcessing)
 	LocalizationEvents.CreateMainFormItemDescription(ThisObject, "GroupDescriptions");
 	ExtensionServer.AddAttributesFromExtensions(ThisObject, Object.Ref, Items.GroupMainPages);
+	CatalogsServer.OnCreateAtServerObject(ThisObject, Object, Cancel, StandardProcessing);
 	If Parameters.Key.IsEmpty() Then
 		SetVisibilityAvailability(Object, ThisObject);
 	EndIf;
@@ -162,6 +163,26 @@ EndProcedure
 &AtClient
 Procedure AddAttributeButtonClick(Item) Export
 	AddAttributesAndPropertiesClient.AddAttributeButtonClick(ThisObject, Item);
+EndProcedure
+
+#EndRegion
+
+#Region COMMANDS
+
+&AtClient
+Procedure GeneratedFormCommandActionByName(Command) Export
+	ExternalCommandsClient.GeneratedFormCommandActionByName(Object, ThisObject, Command.Name);
+	GeneratedFormCommandActionByNameServer(Command.Name);
+EndProcedure
+
+&AtServer
+Procedure GeneratedFormCommandActionByNameServer(CommandName) Export
+	ExternalCommandsServer.GeneratedFormCommandActionByName(Object, ThisObject, CommandName);
+EndProcedure
+
+&AtClient
+Procedure InternalCommandAction(Command) Export
+	InternalCommandsClient.RunCommandAction(Command, ThisObject, Object, Object.Ref);
 EndProcedure
 
 #EndRegion

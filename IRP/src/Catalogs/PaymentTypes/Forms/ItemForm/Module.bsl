@@ -1,15 +1,11 @@
 #Region FormEventHandlers
 
 &AtServer
-Procedure OnReadAtServer(CurrentObject)
-	SetVisibilityAvailability(CurrentObject, ThisObject);
-EndProcedure
-
-&AtServer
 Procedure OnCreateAtServer(Cancel, StandardProcessing)
 	AddAttributesAndPropertiesServer.OnCreateAtServer(ThisObject);
 	LocalizationEvents.CreateMainFormItemDescription(ThisObject, "GroupDescriptions");
 	ExtensionServer.AddAttributesFromExtensions(ThisObject, Object.Ref);
+	CatalogsServer.OnCreateAtServerObject(ThisObject, Object, Cancel, StandardProcessing);
 	
 	If Object.isIconSet Then
 		CurrentObject = FormAttributeToValue("Object");
@@ -18,6 +14,11 @@ Procedure OnCreateAtServer(Cancel, StandardProcessing)
 	If Parameters.Key.IsEmpty() Then
 		SetVisibilityAvailability(Object, ThisObject);
 	EndIf;
+EndProcedure
+
+&AtServer
+Procedure OnReadAtServer(CurrentObject)
+	SetVisibilityAvailability(CurrentObject, ThisObject);
 EndProcedure
 
 &AtServer
@@ -133,6 +134,26 @@ Procedure SelectFileEnd(Files, AdditionalParameters) Export
 	BD = New BinaryData(Files[0].FullName);
 	Icon = PutToTempStorage(BD, UUID);
 	Object.isIconSet = True;
+EndProcedure
+
+#EndRegion
+
+#Region COMMANDS
+
+&AtClient
+Procedure GeneratedFormCommandActionByName(Command) Export
+	ExternalCommandsClient.GeneratedFormCommandActionByName(Object, ThisObject, Command.Name);
+	GeneratedFormCommandActionByNameServer(Command.Name);
+EndProcedure
+
+&AtServer
+Procedure GeneratedFormCommandActionByNameServer(CommandName) Export
+	ExternalCommandsServer.GeneratedFormCommandActionByName(Object, ThisObject, CommandName);
+EndProcedure
+
+&AtClient
+Procedure InternalCommandAction(Command) Export
+	InternalCommandsClient.RunCommandAction(Command, ThisObject, Object, Object.Ref);
 EndProcedure
 
 #EndRegion

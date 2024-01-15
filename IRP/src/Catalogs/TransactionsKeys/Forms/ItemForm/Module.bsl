@@ -1,6 +1,6 @@
+
 &AtServer
 Procedure OnCreateAtServer(Cancel, StandardProcessing)
-	ExtensionServer.AddAttributesFromExtensions(ThisObject, Object.Ref);
 	CatalogsServer.OnCreateAtServerObject(ThisObject, Object, Cancel, StandardProcessing);
 EndProcedure
 

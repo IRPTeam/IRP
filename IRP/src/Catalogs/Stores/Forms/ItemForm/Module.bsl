@@ -27,6 +27,7 @@ Procedure OnCreateAtServer(Cancel, StandardProcessing)
 	AddAttributesAndPropertiesServer.OnCreateAtServer(ThisObject);
 	IDInfoServer.OnCreateAtServer(ThisObject, "GroupContactInformation");
 	ExtensionServer.AddAttributesFromExtensions(ThisObject, Object.Ref, Items.GroupPages);
+	CatalogsServer.OnCreateAtServerObject(ThisObject, Object, Cancel, StandardProcessing);
 EndProcedure
 
 #EndRegion
@@ -88,3 +89,23 @@ EndProcedure
 Procedure IDInfoCreateFormControl()
 	IDInfoServer.CreateFormControls(ThisObject);
 EndProcedure
+
+#Region COMMANDS
+
+&AtClient
+Procedure GeneratedFormCommandActionByName(Command) Export
+	ExternalCommandsClient.GeneratedFormCommandActionByName(Object, ThisObject, Command.Name);
+	GeneratedFormCommandActionByNameServer(Command.Name);
+EndProcedure
+
+&AtServer
+Procedure GeneratedFormCommandActionByNameServer(CommandName) Export
+	ExternalCommandsServer.GeneratedFormCommandActionByName(Object, ThisObject, CommandName);
+EndProcedure
+
+&AtClient
+Procedure InternalCommandAction(Command) Export
+	InternalCommandsClient.RunCommandAction(Command, ThisObject, Object, Object.Ref);
+EndProcedure
+
+#EndRegion

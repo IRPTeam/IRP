@@ -2,20 +2,19 @@
 
 #Region Public
 
-// Get command description.
-// 
-// Returns:
-//  FixedStructure, See InternalCommandsServer.GetCommandDescription 
+// See InternalCommandsServer.GetCommandDescription 
+//@skip-check statement-type-change, property-return-type
 Function GetCommandDescription() Export
 	
 	CommandDescription = InternalCommandsServer.GetCommandDescription();
-	
-	ModuleMetadata = Metadata.CommonModules.InternalCommand_SetNotActive_Server;
 	
 	CommandDescription.Name = "SetNotActive";
 	CommandDescription.Title = R().InternalCommands_SetNotActive;
 	CommandDescription.TitleCheck = R().InternalCommands_SetNotActive_Check;
 	CommandDescription.ToolTip = CommandDescription.Title; 
+	CommandDescription.Picture = "IconSetNotActive";
+	CommandDescription.PictureCheck = "IconSetActive";
+	
 	CommandDescription.LocationInCommandBar = "InAdditionalSubmenu"; //ButtonLocationInCommandBar.InAdditionalSubmenu
 	CommandDescription.ModifiesStoredData = True;
 	
@@ -50,6 +49,7 @@ EndFunction
 //  ObjectFullName - String - Object full name
 //  FormType - EnumRef.FormTypes - Form type
 //  AddInfo - Undefined - Add info
+//@skip-check statement-type-change, property-return-type
 Procedure OnCommandCreate(CommandButton, CommandDescription, Form, MainAttribute, ObjectFullName, FormType, AddInfo = Undefined) Export
 	
 	CommandButton.Check = MainAttribute.NotActive;

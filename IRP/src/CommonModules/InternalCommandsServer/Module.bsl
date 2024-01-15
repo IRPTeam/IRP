@@ -106,7 +106,7 @@ Procedure CreateCommands(Form, MainAttribute, ObjectFullName, FormType, AddInfo 
 		ElsIf FormType = Enums.FormTypes.ChoiceForm And Not ContentItem.UsingChoiceForm Then
 			Continue;
 		EndIf;
-		If ContentItem.Targets.Find(ObjectFullName) Then
+		If ContentItem.Targets.Find(ObjectFullName) <> Undefined Then
 			CommandArray.Add(ContentItem);
 		EndIf;
 	EndDo;

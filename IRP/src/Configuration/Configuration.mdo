@@ -188,6 +188,10 @@
   <commonPictures>CommonPicture.PasteRowsFromClipboard</commonPictures>
   <commonPictures>CommonPicture.ControlCodeString</commonPictures>
   <commonPictures>CommonPicture.FixedAssets</commonPictures>
+  <commonPictures>CommonPicture.IconSetActive</commonPictures>
+  <commonPictures>CommonPicture.IconSetNotActive</commonPictures>
+  <commonPictures>CommonPicture.IconShowOnlyActive</commonPictures>
+  <commonPictures>CommonPicture.IconShowAnyActive</commonPictures>
   <sessionParameters>SessionParameter.Buffer</sessionParameters>
   <sessionParameters>SessionParameter.ClientType</sessionParameters>
   <sessionParameters>SessionParameter.ConnectedAddDataProc</sessionParameters>

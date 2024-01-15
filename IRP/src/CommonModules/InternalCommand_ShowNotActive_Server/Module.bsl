@@ -2,20 +2,19 @@
 
 #Region Public
 
-// Get command description.
-// 
-// Returns:
-//  FixedStructure, See InternalCommandsServer.GetCommandDescription 
+// See InternalCommandsServer.GetCommandDescription 
+//@skip-check statement-type-change, property-return-type
 Function GetCommandDescription() Export
 	
 	CommandDescription = InternalCommandsServer.GetCommandDescription();
-	
-	ModuleMetadata = Metadata.CommonModules.InternalCommand_SetNotActive_Server;
 	
 	CommandDescription.Name = "ShowNotActive";
 	CommandDescription.Title = R().InternalCommands_ShowNotActive;
 	CommandDescription.TitleCheck = R().InternalCommands_ShowNotActive_Check;
 	CommandDescription.ToolTip = CommandDescription.Title;
+	CommandDescription.Picture = "IconShowAnyActive";
+	CommandDescription.PictureCheck = "IconShowOnlyActive";
+	
 	CommandDescription.LocationInCommandBar = "InAdditionalSubmenu"; //ButtonLocationInCommandBar.InAdditionalSubmenu
 	CommandDescription.ModifiesStoredData = True;
 	
@@ -67,18 +66,27 @@ EndProcedure
 //  AddInfo - Undefined - Add info
 Procedure OnCommandCreate(CommandButton, CommandDescription, Form, MainAttribute, ObjectFullName, FormType, AddInfo = Undefined) Export
 	
-	NotActiveShowing = SessionParameters.NotActiveCatalogsShowing[ObjectFullName];
+	NotActiveShowing = SessionParameters.NotActiveCatalogsShowing[ObjectFullName]; // Boolean
 	CommandButton.Check = NotActiveShowing;
 	
-	QueryBuilder = New QueryBuilder(MainAttribute.QueryText);
+	OriginalQuery = True;
+	FormQueryText = MainAttribute.QueryText;
+	If Not MainAttribute.CustomQuery Then
+		FormQueryText = "Select * From " + MainAttribute.MainTable;
+		OriginalQuery = False;
+	EndIf;
+	
+	QueryBuilder = New QueryBuilder(FormQueryText);
 	QueryBuilder.FillSettings();
 	OldParameters = New Array; // Array of String
 	For Each BuilderParameter In QueryBuilder.Parameters Do
 		OldParameters.Add(BuilderParameter.Key);
 	EndDo; 
 	
-	QueryBuilder.AvailableFields.Add("NotActive", "NotActive");
-	QueryBuilder.SelectedFields.Add("Ref.NotActive", "NotActive");
+	If OriginalQuery Then
+		QueryBuilder.AvailableFields.Add("NotActive", "NotActive");
+		QueryBuilder.SelectedFields.Add("Ref.NotActive", "NotActive");
+	EndIf;
 	
 	NewFilter = QueryBuilder.Filter.Add("Ref.NotActive");
 	NewFilter.Set(False, True);
@@ -105,12 +113,19 @@ Procedure OnCommandCreate(CommandButton, CommandDescription, Form, MainAttribute
 	
 EndProcedure
 
+// Change showing status.
+// 
+// Parameters:
+//  ObjectFullName - String - Object full name
+// 
+// Returns:
+//  Boolean - Change showing status
 Function ChangeShowingStatus(ObjectFullName) Export
 	
 	NotActiveCatalogsShowingMap = New Map(SessionParameters.NotActiveCatalogsShowing);
 	NotActiveCatalogsShowingMap[ObjectFullName] = Not NotActiveCatalogsShowingMap[ObjectFullName];
 	
-	Result = NotActiveCatalogsShowingMap[ObjectFullName];
+	Result = NotActiveCatalogsShowingMap[ObjectFullName]; // Boolean
 	
 	SessionParameters.NotActiveCatalogsShowing = New FixedMap(NotActiveCatalogsShowingMap);
 	

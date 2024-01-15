@@ -1528,10 +1528,10 @@ Strings.Insert("MoneyTransfer_DR_R5022T_Expenses_CR_R3021B_CashInTransit",
 
 #Region InternalCommands
     // Do not modify "en" strings
-	Strings.Insert("InternalCommands_SetNotActive", NStr("en = 'Set Not active'", Lang));
-	Strings.Insert("InternalCommands_SetNotActive_Check", NStr("en = 'Unset Not active'", Lang));
+	Strings.Insert("InternalCommands_SetNotActive", NStr("en = 'Set ""Not active""'", Lang));
+	Strings.Insert("InternalCommands_SetNotActive_Check", NStr("en = 'Set ""Active""'", Lang));
 	Strings.Insert("InternalCommands_ShowNotActive", NStr("en = 'Show all items'", Lang));
-	Strings.Insert("InternalCommands_ShowNotActive_Check", NStr("en = 'Hide Not active items'", Lang));
+	Strings.Insert("InternalCommands_ShowNotActive_Check", NStr("en = 'Show only active items'", Lang));
 #EndRegion
 	
 	Return Strings;

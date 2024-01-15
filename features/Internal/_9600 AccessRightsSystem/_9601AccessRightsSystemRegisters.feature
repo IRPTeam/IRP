@@ -1446,6 +1446,23 @@ Scenario: 962180 LimitedAccessRegisters - AccumulationRegisters R2001T Sales, Do
 		| 'Company Only read access'      | 'Branch access deny'           |
 		| 'Company access deny'           | 'Branch access deny'           |
 	Then the number of "List" table lines is "равно" "7"
+	Given I open hyperlink "e1cib/list/Document.SalesInvoice"
+	And "List" table does not contain lines
+		| 'Description'                                                                                                                                                         |
+		| 'Document.SalesInvoice Branch: Branch Read and Write Access;Company: Company access deny;Store: Store access deny'                                                    |
+		| 'Document.SalesInvoice Branch: Branch Read and Write Access;Company: Company access deny;Store: Store Only read access&Store access deny'                             |
+		| 'Document.SalesInvoice Branch: Branch Read and Write Access;Company: Company access deny;Store: Store Read and Write Access&Store access deny'                        |
+		| 'Document.SalesInvoice Branch: Branch Read and Write Access;Company: Company access deny;Store: Store Read and Write Access&Store Only read access&Store access deny' |
+		| 'Document.SalesInvoice Branch: Branch Only read access;Company: Company access deny;Store: Store Read and Write Access'                                               |
+		| 'Document.SalesInvoice Branch: Branch Only read access;Company: Company access deny;Store: Store Only read access'                                                    |
+		| 'Document.SalesInvoice Branch: Branch Only read access;Company: Company access deny;Store: Store access deny'                                                         |
+		| 'Document.SalesInvoice Branch: Branch Only read access;Company: Company access deny;Store: Store Only read access&Store access deny'                                  |
+		| 'Document.SalesInvoice Branch: Branch Only read access;Company: Company access deny;Store: Store Read and Write Access&Store access deny'                             |
+		| 'Document.SalesInvoice Branch: Branch Only read access;Company: Company access deny;Store: Store Read and Write Access&Store Only read access&Store access deny'      |
+		| 'Document.SalesInvoice Branch: Branch access deny;Company: Company access deny;Store: Store access deny'                                                              |
+		| 'Document.SalesInvoice Branch: Branch access deny;Company: Company access deny;Store: Store Only read access&Store access deny'                                       |
+		| 'Document.SalesInvoice Branch: Branch access deny;Company: Company access deny;Store: Store Read and Write Access&Store access deny'                                  |
+		| 'Document.SalesInvoice Branch: Branch access deny;Company: Company access deny;Store: Store Read and Write Access&Store Only read access&Store access deny'           |
 	And I close "TestAdmin" TestClient
 
 Scenario: 962181 LimitedAccessRegisters - AccumulationRegisters R2001T Sales, Company and Branch access deny
@@ -1460,4 +1477,21 @@ Scenario: 962181 LimitedAccessRegisters - AccumulationRegisters R2001T Sales, Co
 		| 'Company Only read access'      | 'Branch Only read access'      |
 		| 'Company access deny'           | 'Branch access deny'           |
 	Then the number of "List" table lines is "равно" "5"
+	Given I open hyperlink "e1cib/list/Document.SalesInvoice"
+	And "List" table does not contain lines
+		| 'Description'                                                                                                                                                         |
+		| 'Document.SalesInvoice Branch: Branch Read and Write Access;Company: Company access deny;Store: Store access deny'                                                    |
+		| 'Document.SalesInvoice Branch: Branch Read and Write Access;Company: Company access deny;Store: Store Only read access&Store access deny'                             |
+		| 'Document.SalesInvoice Branch: Branch Read and Write Access;Company: Company access deny;Store: Store Read and Write Access&Store access deny'                        |
+		| 'Document.SalesInvoice Branch: Branch Read and Write Access;Company: Company access deny;Store: Store Read and Write Access&Store Only read access&Store access deny' |
+		| 'Document.SalesInvoice Branch: Branch Only read access;Company: Company access deny;Store: Store Read and Write Access'                                               |
+		| 'Document.SalesInvoice Branch: Branch Only read access;Company: Company access deny;Store: Store Only read access'                                                    |
+		| 'Document.SalesInvoice Branch: Branch Only read access;Company: Company access deny;Store: Store access deny'                                                         |
+		| 'Document.SalesInvoice Branch: Branch Only read access;Company: Company access deny;Store: Store Only read access&Store access deny'                                  |
+		| 'Document.SalesInvoice Branch: Branch Only read access;Company: Company access deny;Store: Store Read and Write Access&Store access deny'                             |
+		| 'Document.SalesInvoice Branch: Branch Only read access;Company: Company access deny;Store: Store Read and Write Access&Store Only read access&Store access deny'      |
+		| 'Document.SalesInvoice Branch: Branch access deny;Company: Company access deny;Store: Store access deny'                                                              |
+		| 'Document.SalesInvoice Branch: Branch access deny;Company: Company access deny;Store: Store Only read access&Store access deny'                                       |
+		| 'Document.SalesInvoice Branch: Branch access deny;Company: Company access deny;Store: Store Read and Write Access&Store access deny'                                  |
+		| 'Document.SalesInvoice Branch: Branch access deny;Company: Company access deny;Store: Store Read and Write Access&Store Only read access&Store access deny'           |
 	And I close "TestAdmin1" TestClient

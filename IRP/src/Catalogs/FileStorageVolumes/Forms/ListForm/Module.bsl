@@ -1,7 +1,3 @@
-&AtClient
-Procedure DeleteUnusedFiles(Command)
-	OpenForm("Catalog.Files.Form.DeleteFiles", , ThisObject);
-EndProcedure
 
 &AtServer
 Procedure OnCreateAtServer(Cancel, StandardProcessing)

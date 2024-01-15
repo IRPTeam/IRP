@@ -5,6 +5,7 @@ Var HTMLWindowPictures, HTMLWindowAddAttributes Export;
 Procedure OnCreateAtServer(Cancel, StandardProcessing)
 
 	ThisObject.List.QueryText = LocalizationEvents.ReplaceDescriptionLocalizationPrefix(ThisObject.List.QueryText);
+	CatalogsServer.OnCreateAtServerListForm(ThisObject, List, Cancel, StandardProcessing);
 
 	If Parameters.Property("CustomFilter") Then
 		For Each KeyValue In Parameters.CustomFilter Do
@@ -87,4 +88,25 @@ Procedure NotificationProcessing(EventName, Parameter, Source)
 		UpdateHTMLPictures();
 	EndIf;
 EndProcedure
+#EndRegion
+
+#Region COMMANDS
+
+&AtClient
+Procedure GeneratedFormCommandActionByName(Command) Export
+	SelectedRows = Items.List.SelectedRows;
+	ExternalCommandsClient.GeneratedListChoiceFormCommandActionByName(SelectedRows, ThisObject, Command.Name);
+	GeneratedFormCommandActionByNameServer(Command.Name, SelectedRows);
+EndProcedure
+
+&AtServer
+Procedure GeneratedFormCommandActionByNameServer(CommandName, SelectedRows) Export
+	ExternalCommandsServer.GeneratedListChoiceFormCommandActionByName(SelectedRows, ThisObject, CommandName);
+EndProcedure
+
+&AtClient
+Procedure InternalCommandAction(Command) Export
+	InternalCommandsClient.RunCommandAction(Command, ThisObject, List, Items.List.SelectedRows);
+EndProcedure
+
 #EndRegion

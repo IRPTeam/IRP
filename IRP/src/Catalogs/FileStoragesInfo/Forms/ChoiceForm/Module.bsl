@@ -1,11 +1,7 @@
-&AtClient
-Procedure DeleteUnusedFiles(Command)
-	OpenForm("Catalog.Files.Form.DeleteFiles", , ThisObject);
-EndProcedure
 
 &AtServer
 Procedure OnCreateAtServer(Cancel, StandardProcessing)
-	CatalogsServer.OnCreateAtServerListForm(ThisObject, List, Cancel, StandardProcessing);
+	CatalogsServer.OnCreateAtServerChoiceForm(ThisObject, List, Cancel, StandardProcessing);
 EndProcedure
 
 #Region COMMANDS

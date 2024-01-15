@@ -6,13 +6,9 @@ Var HTMLRegExpTestRowsAnalyzeDocument Export; // Structure - HTML document
 
 #Region FormEventHandlers
 
-&AtClient
-Procedure OnOpen(Cancel)
-	SetVisible();
-EndProcedure
-
 &AtServer
 Procedure OnCreateAtServer(Cancel, StandardProcessing)
+	CatalogsServer.OnCreateAtServerObject(ThisObject, Object, Cancel, StandardProcessing);
 	HTMLRegExpTestRowsAnalyze = Catalogs.ExternalFunctions.GetTemplate("RegExpAnalyse").GetText();
 	
 	TypeList = FillTypes();
@@ -20,6 +16,11 @@ Procedure OnCreateAtServer(Cancel, StandardProcessing)
 		//@skip-check typed-value-adding-to-untyped-collection
 		Items.ResultType.ChoiceList.Add(Row.Value, Row.Presentation, , Row.Picture);
 	EndDo;
+EndProcedure
+
+&AtClient
+Procedure OnOpen(Cancel)
+	SetVisible();
 EndProcedure
 
 &AtServer
@@ -303,5 +304,25 @@ Function FillTypes()
 	
 	Return ValueList;
 EndFunction
+
+#EndRegion
+
+#Region COMMANDS
+
+&AtClient
+Procedure GeneratedFormCommandActionByName(Command) Export
+	ExternalCommandsClient.GeneratedFormCommandActionByName(Object, ThisObject, Command.Name);
+	GeneratedFormCommandActionByNameServer(Command.Name);
+EndProcedure
+
+&AtServer
+Procedure GeneratedFormCommandActionByNameServer(CommandName) Export
+	ExternalCommandsServer.GeneratedFormCommandActionByName(Object, ThisObject, CommandName);
+EndProcedure
+
+&AtClient
+Procedure InternalCommandAction(Command) Export
+	InternalCommandsClient.RunCommandAction(Command, ThisObject, Object, Object.Ref);
+EndProcedure
 
 #EndRegion

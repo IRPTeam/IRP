@@ -148,6 +148,7 @@ WHERE NOT (FALSE) IN (
 		LEFT JOIN Catalog.ObjectAccessKeys.FilterDataList AS ObjectAccessKeysFilterDataList
 			LEFT JOIN Catalog.AccessGroups.ObjectAccess AS AG
 				ON AG.Ref IN (&amp;CurrentUserAccessGroupList)
+					AND NOT AG.Ref.OnlyRegisters
 					AND AG.Key = ObjectAccessKeysFilterDataList.Key
 					AND (AG.ValueRef = ObjectAccessKeysFilterDataList.ValueRef1 
 					 	OR AG.ValueRef = ObjectAccessKeysFilterDataList.ValueRef2 

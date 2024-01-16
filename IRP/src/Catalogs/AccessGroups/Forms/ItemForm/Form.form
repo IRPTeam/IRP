@@ -82,6 +82,62 @@
    <currentRowUse>Auto</currentRowUse>
   </extInfo>
  </items>
+ <items xsi:type="form:FormField">
+  <name>OnlyRegisters</name>
+  <id>90</id>
+  <visible>true</visible>
+  <enabled>true</enabled>
+  <userVisible>
+   <common>true</common>
+  </userVisible>
+  <dataPath xsi:type="form:DataPath">
+   <segments>Object.OnlyRegisters</segments>
+  </dataPath>
+  <toolTip>
+   <key>en</key>
+   <value>Current setting using only by registers. Document skip current profile.</value>
+  </toolTip>
+  <toolTip>
+   <key>ru</key>
+   <value>Текущие настройки используются только регистрами. Документ пропускает текущий профиль.</value>
+  </toolTip>
+  <toolTip>
+   <key>tr</key>
+   <value>Bu ayarlar sadece kayıt tablolar içindir. Evrak mevcut profili atlar.</value>
+  </toolTip>
+  <toolTipRepresentation>Button</toolTipRepresentation>
+  <extendedTooltip>
+   <name>OnlyRegistersExtendedTooltip</name>
+   <id>92</id>
+   <visible>true</visible>
+   <enabled>true</enabled>
+   <userVisible>
+    <common>true</common>
+   </userVisible>
+   <type>Label</type>
+   <autoMaxWidth>true</autoMaxWidth>
+   <autoMaxHeight>true</autoMaxHeight>
+   <extInfo xsi:type="form:LabelDecorationExtInfo">
+    <horizontalAlign>Left</horizontalAlign>
+   </extInfo>
+  </extendedTooltip>
+  <contextMenu>
+   <name>OnlyRegistersContextMenu</name>
+   <id>91</id>
+   <visible>true</visible>
+   <enabled>true</enabled>
+   <userVisible>
+    <common>true</common>
+   </userVisible>
+   <autoFill>true</autoFill>
+  </contextMenu>
+  <type>CheckBoxField</type>
+  <editMode>Enter</editMode>
+  <showInHeader>true</showInHeader>
+  <headerHorizontalAlign>Left</headerHorizontalAlign>
+  <showInFooter>true</showInFooter>
+  <extInfo xsi:type="form:CheckBoxFieldExtInfo"/>
+ </items>
  <items xsi:type="form:FormGroup">
   <name>GroupMainPages</name>
   <id>1</id>

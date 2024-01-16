@@ -1,6 +1,48 @@
 
 // @strict-types
 
+#Region HTTP
+
+// Get multipart form data.
+// 
+// Parameters:
+//  Structure - Structure -
+//  Separator - String -
+// 
+// Returns:
+//  BinaryData
+Function GetMultipartFormData(Structure, Separator = "AAAAAAAAAAAAA") Export
+	
+	DataTXT = New Array; // Array Of String
+	
+	For Each Prop In Structure Do
+		DataTXT.Add("--" + Separator);
+		If TypeOf(Prop.Value) = Type("Structure") Then
+			//@skip-check property-return-type
+			DataTXT.Add("Content-Disposition: form-data; name=" + Prop.key + "; filename=" + Prop.Value.FileName);
+			//@skip-check property-return-type
+			DataTXT.Add("Content-Type: " + Prop.Value.ContentType);
+			DataTXT.Add("");
+			//@skip-check invocation-parameter-type-intersect, property-return-type
+			DataTXT.Add(Prop.Value.Content);
+		Else
+			DataTXT.Add("Content-Disposition: form-data; name=" + Prop.Key);
+			DataTXT.Add("");
+			DataTXT.Add(String(Prop.Value));
+		EndIf; 
+	EndDo;
+	DataTXT.Add("--" + Separator + "--");
+	
+	DataToSend = StrConcat(DataTXT, Chars.LF);
+	Body = New MemoryStream();
+	DataWriter = New DataWriter(Body, TextEncoding.UTF8);
+	DataWriter.WriteLine(DataToSend, TextEncoding.UTF8);
+	DataWriter.Close();
+	Return Body.CloseAndGetBinaryData();
+EndFunction
+
+#EndRegion
+
 #Region RegExp
 
 // Regex.
@@ -998,7 +1040,7 @@ EndFunction
 // String from base64 ZIP.
 // 
 // Parameters:
-//  Base64Zip - String - Base64 zip
+//  Base64Zip - String, BinaryData - Base64 zip
 //  FileName - String - File name. If empty - return first file
 // 
 // Returns:
@@ -1512,34 +1554,41 @@ Function TablesIsEqual(Table1, Table2, DeleteColumns = "") Export
 		MD5_1 = GetMD5(Table1);
 		MD5_2 = GetMD5(Table2);
 	Else
+		Array = New Array; // Array Of String
+		For Each Column In Table1.Columns Do
+			Array.Add(Column.Name);
+		EndDo;   
+		
 		Text = "SELECT
-			   |	*
-			   |INTO VTSort1
-			   |FROM
-			   |	&VT1 AS VT1
-			   |;
-			   |////////////////////////////////////////////////////////////////////////////////
-			   |SELECT
-			   |	*
-			   |INTO VTSort2
-			   |FROM
-			   |	&VT2 AS VT2
-			   |;
-			   |
-			   |////////////////////////////////////////////////////////////////////////////////
-			   |SELECT
-			   |	*
-			   |FROM
-			   |	VTSort1 AS VTSort1
-			   |AUTOORDER
-			   |;
-			   |
-			   |////////////////////////////////////////////////////////////////////////////////
-			   |SELECT
-			   |	*
-			   |FROM
-			   |	VTSort2 AS VTSort2
-			   |AUTOORDER";
+		|	*
+		|INTO VTSort1
+		|FROM
+		|	&VT1 AS VT1
+		|;
+		|////////////////////////////////////////////////////////////////////////////////
+		|SELECT
+		|	*
+		|INTO VTSort2
+		|FROM
+		|	&VT2 AS VT2
+		|;
+		|
+		|////////////////////////////////////////////////////////////////////////////////
+		|SELECT
+		|	*
+		|FROM
+		|	VTSort1
+		|ORDER BY
+		|" + StrConcat(Array, ",") + "
+		|;
+		|
+		|////////////////////////////////////////////////////////////////////////////////
+		|SELECT
+		|	*
+		|FROM
+		|	VTSort2
+		|ORDER BY
+		|" + StrConcat(Array, ",");
 	
 		Query = New Query();
 		Query.Text = Text;

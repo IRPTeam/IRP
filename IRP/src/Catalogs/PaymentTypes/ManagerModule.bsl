@@ -14,6 +14,12 @@ Procedure ChoiceDataGetProcessing(ChoiceData, Parameters, StandardProcessing)
 	
 	Filter = "";
 	For Each FilterItem In Parameters.Filter Do
+		If FilterItem.Key = "CustomSearchFilter" OR FilterItem.Key = "AdditionalParameters" Then
+			Continue; // Service properties
+		EndIf;
+		If FilterItem.Key = "BankTerm" Then
+			Continue; // Additional parameters
+		EndIf;
 		Filter = Filter
 			+ "
 		|	AND Table." + FilterItem.Key + " = &" + FilterItem.Key;

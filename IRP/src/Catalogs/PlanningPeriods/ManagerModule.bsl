@@ -8,8 +8,11 @@ Procedure ChoiceDataGetProcessing(ChoiceData, Parameters, StandardProcessing)
 		
 		Filter = "";
 		For Each FilterItem In Parameters.Filter Do
+			If FilterItem.Key = "CustomSearchFilter" OR FilterItem.Key = "AdditionalParameters" Then
+				Continue; // Service properties
+			EndIf;
 			If FilterItem.Key = "BusinessUnit" Then
-				Continue;
+				Continue; // Additional parameters
 			EndIf;
 			Filter = Filter
 				+ "

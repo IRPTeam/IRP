@@ -19,6 +19,12 @@ Function GetChoiceDataTable(Parameters) Export
 			 |		ELSE TRUE
 			 |	END";
 	For Each FilterItem In Parameters.Filter Do
+		If FilterItem.Key = "CustomSearchFilter" OR FilterItem.Key = "AdditionalParameters" Then
+			Continue; // Service properties
+		EndIf;
+		If FilterItem.Key = "LegalName" Then
+			Continue; // Additional parameters
+		EndIf;
 		Filter = Filter
 			+ "
 		|	AND Table." + FilterItem.Key + " = &" + FilterItem.Key;

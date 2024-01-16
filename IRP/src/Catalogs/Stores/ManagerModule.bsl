@@ -41,6 +41,9 @@ Function GetChoiceDataTable(Parameters)
 	
 	Filter = "";
 	For Each FilterItem In Parameters.Filter Do
+		If FilterItem.Key = "CustomSearchFilter" OR FilterItem.Key = "AdditionalParameters" Then
+			Continue; // Service properties
+		EndIf;
 		Filter = Filter
 			+ ?(FilterItem.Key = "Company",
 		"
@@ -64,6 +67,9 @@ Function GetChoiceDataTable(Parameters)
 
 	Query.SetParameter("SearchString", Parameters.SearchString);
 	For Each FilterItem In Parameters.Filter Do
+		If FilterItem.Key = "CustomSearchFilter" OR FilterItem.Key = "AdditionalParameters" Then
+			Continue; // Service properties
+		EndIf;
 		Query.SetParameter(FilterItem.Key, FilterItem.Value);
 	EndDo;
 	

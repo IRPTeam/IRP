@@ -16,6 +16,9 @@ Function GetChoiceDataTable(Parameters)
 			 |	AND (Table.Item = &Item or Table.Ref = &Unit)
 			 |";
 	For Each FilterItem In Parameters.Filter Do
+		If FilterItem.Key = "CustomSearchFilter" OR FilterItem.Key = "AdditionalParameters" Then
+			Continue; // Service properties
+		EndIf;
 		Filter = Filter
 			+ "
 		|	AND Table." + FilterItem.Key + " = &" + FilterItem.Key;

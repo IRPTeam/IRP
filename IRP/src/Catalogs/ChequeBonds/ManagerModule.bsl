@@ -35,6 +35,9 @@ EndProcedure
 Function GetChoiceDataTable(Parameters) Export
 	Filter = "";
 	For Each FilterItem In Parameters.Filter Do
+		If FilterItem.Key = "CustomSearchFilter" OR FilterItem.Key = "AdditionalParameters" Then
+			Continue; // Service properties
+		EndIf;
 		Filter = Filter
 			+ "
 		|	AND Table." + FilterItem.Key + " = &" + FilterItem.Key;

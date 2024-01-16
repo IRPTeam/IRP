@@ -408,7 +408,7 @@ Function R2021B_CustomersTransactions()
 		   |	OffsetOfAdvances.Partner,
 		   |	OffsetOfAdvances.LegalName,
 		   |	OffsetOfAdvances.Currency,
-		   |	OffsetOfAdvances.Agreement,
+		   |	OffsetOfAdvances.TransactionAgreement AS Agreement,
 		   |	OffsetOfAdvances.TransactionDocument AS Basis,
 		   |	OffsetOfAdvances.TransactionOrder AS Order,
 		   |	OffsetOfAdvances.Amount,

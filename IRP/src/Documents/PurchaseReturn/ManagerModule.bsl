@@ -459,7 +459,7 @@ Function R1021B_VendorsTransactions()
 		   |	OffsetOfAdvances.Currency,
 		   |	OffsetOfAdvances.LegalName,
 		   |	OffsetOfAdvances.Partner,
-		   |	OffsetOfAdvances.Agreement,
+		   |	OffsetOfAdvances.TransactionAgreement,
 		   |	OffsetOfAdvances.TransactionDocument,
 		   |	OffsetOfAdvances.Key,
 		   |	OffsetOfAdvances.Recorder,

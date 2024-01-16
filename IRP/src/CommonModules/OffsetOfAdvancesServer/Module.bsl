@@ -364,7 +364,7 @@ Procedure DistributeAdvanceToTransaction(Parameters,
 			NewOffsetInfo.Partner             = AdvanceKey.Partner;
 			NewOffsetInfo.LegalName           = AdvanceKey.LegalName;
 			NewOffsetInfo.TransactionDocument = QuerySelection.TransactionKey.TransactionBasis;
-			NewOffsetInfo.Agreement           = QuerySelection.TransactionKey.Agreement;
+			NewOffsetInfo.TransactionAgreement= QuerySelection.TransactionKey.Agreement;
 			NewOffsetInfo.AdvanceAgreement    = AdvanceKey.AdvanceAgreement;
 			NewOffsetInfo.AdvancesOrder       = AdvanceKey.Order;
 			NewOffsetInfo.TransactionOrder    = QuerySelection.TransactionKey.Order;
@@ -425,7 +425,7 @@ Procedure DistributeAdvanceToTransaction(Parameters,
 		NewOffsetInfo.Partner             = AdvanceKey.Partner;
 		NewOffsetInfo.LegalName           = AdvanceKey.LegalName;
 		NewOffsetInfo.TransactionDocument = QuerySelection.TransactionKey.TransactionBasis;
-		NewOffsetInfo.Agreement           = QuerySelection.TransactionKey.Agreement;
+		NewOffsetInfo.TransactionAgreement= QuerySelection.TransactionKey.Agreement;
 		NewOffsetInfo.AdvanceAgreement    = AdvanceKey.AdvanceAgreement;
 		NewOffsetInfo.AdvancesOrder       = AdvanceKey.Order;
 		NewOffsetInfo.TransactionOrder    = QuerySelection.TransactionKey.Order;
@@ -510,7 +510,7 @@ Procedure OffsetTransactionsToAdvances(Parameters,
 			NewOffsetInfo.Partner             = AdvanceKey.Partner;
 			NewOffsetInfo.LegalName           = AdvanceKey.LegalName;
 			NewOffsetInfo.TransactionDocument = TransactionKey.TransactionBasis;
-			NewOffsetInfo.Agreement           = TransactionKey.Agreement;
+			NewOffsetInfo.TransactionAgreement= TransactionKey.Agreement;
 			NewOffsetInfo.AdvanceAgreement    = AdvanceKey.AdvanceAgreement;
 			NewOffsetInfo.AdvancesOrder       = AdvanceKey.Order;
 			NewOffsetInfo.TransactionOrder    = TransactionKey.Order;
@@ -782,7 +782,7 @@ Procedure DistributeTransactionToAdvance(Parameters,
 		NewOffsetInfo.Partner             = TransactionKey.Partner;
 		NewOffsetInfo.LegalName           = TransactionKey.LegalName;
 		NewOffsetInfo.TransactionDocument = TransactionKey.TransactionBasis;
-		NewOffsetInfo.Agreement           = TransactionKey.Agreement;
+		NewOffsetInfo.TransactionAgreement= TransactionKey.Agreement;
 		NewOffsetInfo.AdvanceAgreement    = QuerySelection.AdvanceKey.AdvanceAgreement;
 		NewOffsetInfo.AdvancesOrder       = QuerySelection.AdvanceKey.Order;
 		NewOffsetInfo.TransactionOrder    = TransactionKey.Order;
@@ -849,7 +849,7 @@ Procedure Write_SelfRecords(Parameters,
 		TableAdvances = RecordSet_Advances.UnloadColumns();
 		TableAdvances.Columns.Delete(TableAdvances.Columns.PointInTime);
 
-		// Customers
+		// Transactions
 		RecordSet_Transactions = AccumulationRegisters[Parameters.RegisterName_Transactions].CreateRecordSet();
 		RecordSet_Transactions.Filter.Recorder.Set(Row.Document);
 		TableTransactions = RecordSet_Transactions.UnloadColumns();
@@ -875,6 +875,7 @@ Procedure Write_SelfRecords(Parameters,
 			NewRow_Advances.RecordType = AccumulationRecordType.Expense;
 			NewRow_Advances[Parameters.DocumentName] = Parameters.Object.Ref;
 			NewRow_Advances.Order = RowOffset.AdvancesOrder;
+			NewRow_Advances.Agreement = RowOffset.AdvanceAgreement;
 			If UseKeyForCurrency Then
 				NewRow_Advances.Key = RowOffset.Key;
 			EndIf;
@@ -890,6 +891,7 @@ Procedure Write_SelfRecords(Parameters,
 			NewRow_Transactions.Basis = RowOffset.TransactionDocument;
 			NewRow_Transactions[Parameters.DocumentName] = Parameters.Object.Ref;
 			NewRow_Transactions.Order = RowOffset.TransactionOrder;
+			NewRow_Transactions.Agreement = RowOffset.TransactionAgreement;
 			If UseKeyForCurrency Then
 				NewRow_Transactions.Key = RowOffset.Key;
 			EndIf;
@@ -937,7 +939,9 @@ Procedure Write_SelfRecords(Parameters,
 
 		RecordSet_Advances.Read();
 		For Each RowPostingInfo In ItemOfPostingInfo.Value.PrepareTable Do
-			FillPropertyValues(RecordSet_Advances.Add(), RowPostingInfo);
+			_NewRecord = RecordSet_Advances.Add();
+			FillPropertyValues(_NewRecord, RowPostingInfo);
+			//_NewRecord.Agreement = RowPostingInfo.AdvanceAgreement;
 		EndDo;
 		RecordSet_Advances.SetActive(True);
 		RecordSet_Advances.Write();
@@ -956,7 +960,9 @@ Procedure Write_SelfRecords(Parameters,
 			
 		RecordSet_Transactions.Read();
 		For Each RowPostingInfo In ItemOfPostingInfo.Value.PrepareTable Do
-			FillPropertyValues(RecordSet_Transactions.Add(), RowPostingInfo);
+			_NewRecord = RecordSet_Transactions.Add();
+			FillPropertyValues(_NewRecord, RowPostingInfo);
+			//_NewRecord.Agreement = RowPostingInfo.TransactionAgreement;
 		EndDo;
 		RecordSet_Transactions.SetActive(True);
 		RecordSet_Transactions.Write();
@@ -1021,7 +1027,8 @@ Procedure WriteTablesToTempTables(Parameters,
 	|	Records_OffsetOfAdvances.Partner,
 	|	Records_OffsetOfAdvances.LegalName,
 	|	Records_OffsetOfAdvances.TransactionDocument,
-	|	Records_OffsetOfAdvances.Agreement,
+	|	Records_OffsetOfAdvances.TransactionAgreement,
+	|	Records_OffsetOfAdvances.AdvanceAgreement,
 	|	Records_OffsetOfAdvances.AdvancesOrder,
 	|	Records_OffsetOfAdvances.TransactionOrder,
 	|	Records_OffsetOfAdvances.FromAdvanceKey,
@@ -1101,7 +1108,8 @@ Procedure WriteTablesToTempTables(Parameters,
 	|	tmpRecords_OffsetOfAdvances.Partner,
 	|	tmpRecords_OffsetOfAdvances.LegalName,
 	|	tmpRecords_OffsetOfAdvances.TransactionDocument,
-	|	tmpRecords_OffsetOfAdvances.Agreement,
+	|	tmpRecords_OffsetOfAdvances.TransactionAgreement,
+	|	tmpRecords_OffsetOfAdvances.AdvanceAgreement,
 	|	tmpRecords_OffsetOfAdvances.AdvancesOrder,
 	|	tmpRecords_OffsetOfAdvances.TransactionOrder,
 	|	tmpRecords_OffsetOfAdvances.FromAdvanceKey,
@@ -1123,7 +1131,8 @@ Procedure WriteTablesToTempTables(Parameters,
 	|	tmpRecords_OffsetOfAdvances.Partner,
 	|	tmpRecords_OffsetOfAdvances.LegalName,
 	|	tmpRecords_OffsetOfAdvances.TransactionDocument,
-	|	tmpRecords_OffsetOfAdvances.Agreement,
+	|	tmpRecords_OffsetOfAdvances.TransactionAgreement,
+	|	tmpRecords_OffsetOfAdvances.AdvanceAgreement,
 	|	tmpRecords_OffsetOfAdvances.AdvancesOrder,
 	|	tmpRecords_OffsetOfAdvances.TransactionOrder,
 	|	tmpRecords_OffsetOfAdvances.FromAdvanceKey,

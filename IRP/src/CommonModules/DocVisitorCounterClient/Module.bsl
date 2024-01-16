@@ -1,7 +1,7 @@
 #Region FORM
 
 Procedure OnOpen(Object, Form, Cancel) Export
-	Return;
+	ViewClient_V2.OnOpen(Object, Form, "CounterData");
 EndProcedure
 
 #EndRegion

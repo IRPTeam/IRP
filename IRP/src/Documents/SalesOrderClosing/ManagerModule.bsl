@@ -360,23 +360,27 @@ Function R3026B_SalesOrdersCustomerAdvance()
 EndFunction
 
 Function T2014S_AdvancesInfo()
-	Return "SELECT
-		   |	&Period AS Date,
-		   |	Doc.Company,
-		   |	Doc.Branch,
-		   |	Doc.Currency,
-		   |	Doc.Partner,
-		   |	Doc.LegalName,
-		   |	case when Doc.Agreement.ApArPostingDetail = VALUE(Enum.ApArPostingDetail.ByDocuments) Then
-		   |	Doc.Agreement else Undefined end AS Agreement,
-		   |	Doc.Ref AS Order,
-		   |	TRUE AS IsCustomerAdvance,
-		   |	TRUE AS IsSalesOrderClose
-		   |INTO T2014S_AdvancesInfo
-		   |FROM
-		   |	Document.SalesOrder AS Doc
-		   |WHERE
-		   |	Doc.Ref = &SalesOrder";
+	Return 
+		"SELECT
+		|	&Period AS Date,
+		|	Doc.Company,
+		|	Doc.Branch,
+		|	Doc.Currency,
+		|	Doc.Partner,
+		|	Doc.LegalName,
+		|	case
+		|		when Doc.Agreement.ApArPostingDetail = VALUE(Enum.ApArPostingDetail.ByDocuments)
+		|			Then Doc.Agreement
+		|		else Undefined
+		|	end AS AdvanceAgreement,
+		|	Doc.Ref AS Order,
+		|	TRUE AS IsCustomerAdvance,
+		|	TRUE AS IsSalesOrderClose
+		|INTO T2014S_AdvancesInfo
+		|FROM
+		|	Document.SalesOrder AS Doc
+		|WHERE
+		|	Doc.Ref = &SalesOrder";
 EndFunction
 
 Function R2020B_AdvancesFromCustomers()

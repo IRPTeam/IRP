@@ -701,7 +701,7 @@ Function T2014S_AdvancesInfo()
 		   |	PaymentList.Currency,
 		   |	PaymentList.Partner,
 		   |	PaymentList.LegalName,
-		   |	PaymentList.AdvanceAgreement AS Agreement,
+		   |	PaymentList.AdvanceAgreement,
 		   |	PaymentList.Order,
 		   |	TRUE AS IsCustomerAdvance,
 		   |	FALSE AS IsVendorAdvance,

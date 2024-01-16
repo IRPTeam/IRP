@@ -858,8 +858,6 @@ Procedure Write_SelfRecords(Parameters,
 		// Transactions (currency revaluation)
 		TableTransactions_CurrencyRevaluation = TableTransactions.CopyColumns();
 
-		OffsetInfoByDocument = Records_OffsetOfAdvances.Copy(New Structure("Document", Row.Document));
-
 		If UseKeyForCurrency Then
 			TableAdvances.Columns.Add("Key", Metadata.DefinedTypes.typeRowID.Type);
 			TableTransactions.Columns.Add("Key", Metadata.DefinedTypes.typeRowID.Type);
@@ -939,9 +937,7 @@ Procedure Write_SelfRecords(Parameters,
 
 		RecordSet_Advances.Read();
 		For Each RowPostingInfo In ItemOfPostingInfo.Value.PrepareTable Do
-			_NewRecord = RecordSet_Advances.Add();
-			FillPropertyValues(_NewRecord, RowPostingInfo);
-			//_NewRecord.Agreement = RowPostingInfo.AdvanceAgreement;
+			FillPropertyValues(RecordSet_Advances.Add(), RowPostingInfo);
 		EndDo;
 		RecordSet_Advances.SetActive(True);
 		RecordSet_Advances.Write();
@@ -960,9 +956,7 @@ Procedure Write_SelfRecords(Parameters,
 			
 		RecordSet_Transactions.Read();
 		For Each RowPostingInfo In ItemOfPostingInfo.Value.PrepareTable Do
-			_NewRecord = RecordSet_Transactions.Add();
-			FillPropertyValues(_NewRecord, RowPostingInfo);
-			//_NewRecord.Agreement = RowPostingInfo.TransactionAgreement;
+			FillPropertyValues(RecordSet_Transactions.Add(), RowPostingInfo);
 		EndDo;
 		RecordSet_Transactions.SetActive(True);
 		RecordSet_Transactions.Write();

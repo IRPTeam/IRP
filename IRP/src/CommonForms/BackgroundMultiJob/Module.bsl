@@ -9,6 +9,7 @@ EndProcedure
 
 &AtServer
 Procedure OnCreateAtServer(Cancel, StandardProcessing)
+	//@skip-check property-return-type
 	JobDataSettings = Parameters.JobDataSettings; // See BackgroundJobAPIServer.JobDataSettings
 	If JobDataSettings.JobSettings.Count() = 0 Then
 		Cancel = True;
@@ -31,7 +32,7 @@ EndProcedure
 Procedure OnOpen(Cancel)
 	UpdateLabels();
 	If UpdatePause = 0 Then
-		UpdatePause = 2;
+		UpdatePause = 20;
 	EndIf;
 	CheckJobStatus();
 	
@@ -59,11 +60,13 @@ EndProcedure
 Procedure RunCallbackForOwner(AllJobDone)
 	Items.FormUpdateStatuses.Enabled = False;
 	If IsBlankString(CallbackFunction) Then
+		Items.FormUpdateStatuses.Enabled = True;
 		Return;
 	EndIf;
 		
 	JobsResult = GetJobsResult();
 	If JobsResult.Count() = 0 Then
+		Items.FormUpdateStatuses.Enabled = True;
 		Return;
 	EndIf;
 	
@@ -71,6 +74,7 @@ Procedure RunCallbackForOwner(AllJobDone)
 		For Each JobData In JobsResult Do
 			If Not JobData.Result Then
 				MaxJobStream = 0;
+				Items.FormUpdateStatuses.Enabled = True;
 				Return;
 			EndIf;
 		EndDo;
@@ -89,14 +93,17 @@ EndProcedure
 
 &AtClient
 Procedure UpdateLabels()
-	ActiveJob = JobList.FindRows(New Structure("Status", PredefinedValue("Enum.JobStatus.Active"))).Count();
-	FailedJob = JobList.FindRows(New Structure("Status", PredefinedValue("Enum.JobStatus.Failed"))).Count();
-	ComplitedJob = JobList.FindRows(New Structure("Status", PredefinedValue("Enum.JobStatus.Completed"))).Count();
-	WaitJob = JobList.FindRows(New Structure("Status", PredefinedValue("Enum.JobStatus.Wait"))).Count();
+	ActiveJob = String(JobList.FindRows(New Structure("Status", PredefinedValue("Enum.JobStatus.Active"))).Count());
+	FailedJob = String(JobList.FindRows(New Structure("Status", PredefinedValue("Enum.JobStatus.Failed"))).Count());
+	ComplitedJob = String(JobList.FindRows(New Structure("Status", PredefinedValue("Enum.JobStatus.Completed"))).Count());
+	WaitJob = String(JobList.FindRows(New Structure("Status", PredefinedValue("Enum.JobStatus.Wait"))).Count());
+	
+	Title = FormOwner.Title + " [Jobs: " + JobList.Count() + "]";
 EndProcedure
 
 &AtServer
 Procedure Callback(JobsResult)
+	//@skip-check server-execution-safe-mode
 	Execute "CallbackModule" + "." + CallbackFunction + "(JobsResult, AllJobDone)";
 EndProcedure
 

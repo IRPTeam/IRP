@@ -245,8 +245,8 @@ Procedure Calculate_BatchKeysInfo(Ref, Parameters, AddInfo)
 	
 	BatchKeysInfoSettings = PostingServer.GetBatchKeysInfoSettings();
 	BatchKeysInfoSettings.DataTable = BatchKeysInfo_DataTable;
-	BatchKeysInfoSettings.Dimensions = "Period, Direction, Company, Store, ItemKey, Currency, CurrencyMovementType, SalesInvoice, SourceOfOrigin, SerialLotNumber, SourceOfOriginStock, SerialLotNumberStock, Quantity, Amount, AmountTax";
-	BatchKeysInfoSettings.Totals = "";
+	BatchKeysInfoSettings.Dimensions = "Period, Direction, Company, Store, ItemKey, Currency, CurrencyMovementType, SalesInvoice, SourceOfOrigin, SerialLotNumber, SourceOfOriginStock, SerialLotNumberStock";
+	BatchKeysInfoSettings.Totals = "Quantity, Amount, AmountTax";
 	BatchKeysInfoSettings.CurrencyMovementType = CurrencyMovementType;
 	
 	PostingServer.SetBatchKeyInfoTable(Parameters, BatchKeysInfoSettings);

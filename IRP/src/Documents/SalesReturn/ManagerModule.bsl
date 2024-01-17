@@ -112,7 +112,9 @@ Procedure Calculate_BatchKeysInfo(Ref, Parameters, AddInfo)
 	|		ELSE FALSE
 	|	END AS SalesInvoiceIsFilled,
 	|	SalesReturnItemList.SalesInvoice AS SalesInvoice,
-	|	SalesReturnItemList.SalesInvoice.Company AS SalesInvoice_Company
+	|	SalesReturnItemList.SalesInvoice.Company AS SalesInvoice_Company,
+	|	SalesReturnItemList.InventoryOrigin,
+	|	SalesReturnItemList.Consignor
 	|INTO tmpItemList
 	|FROM
 	|	Document.SalesReturn.ItemList AS SalesReturnItemList
@@ -134,7 +136,9 @@ Procedure Calculate_BatchKeysInfo(Ref, Parameters, AddInfo)
 	|			THEN TRUE
 	|		ELSE FALSE
 	|	END,
-	|	VALUE(Enum.BatchDirection.Receipt)
+	|	VALUE(Enum.BatchDirection.Receipt),
+	|	SalesReturnItemList.InventoryOrigin,
+	|	SalesReturnItemList.Consignor
 	|;
 	|
 	|////////////////////////////////////////////////////////////////////////////////
@@ -179,7 +183,9 @@ Procedure Calculate_BatchKeysInfo(Ref, Parameters, AddInfo)
 	|	ISNULL(tmpSourceOfOrigins.SerialLotNumber, VALUE(Catalog.SerialLotNumbers.EmptyRef)) AS SerialLotNumber,
 	|	ISNULL(tmpSourceOfOrigins.SourceOfOriginStock, VALUE(Catalog.SourceOfOrigins.EmptyRef)) AS SourceOfOriginStock,
 	|	ISNULL(tmpSourceOfOrigins.SerialLotNumberStock, VALUE(Catalog.SerialLotNumbers.EmptyRef)) AS SerialLotNumberStock,
-	|	Not tmpItemList.SalesInvoiceIsFilled OR tmpItemList.Company <> tmpItemList.SalesInvoice_Company AS CreateBatch
+	|	Not tmpItemList.SalesInvoiceIsFilled OR tmpItemList.Company <> tmpItemList.SalesInvoice_Company AS CreateBatch,
+	|	tmpItemList.InventoryOrigin,
+	|	tmpItemList.Consignor
 	|INTO BatchKeysInfo
 	|FROM
 	|	tmpItemList AS tmpItemList
@@ -233,8 +239,8 @@ Procedure Calculate_BatchKeysInfo(Ref, Parameters, AddInfo)
 	
 	BatchKeysInfoSettings = PostingServer.GetBatchKeysInfoSettings();
 	BatchKeysInfoSettings.DataTable = BatchKeysInfo_DataTable;
-	BatchKeysInfoSettings.Dimensions = "Period, Direction, Company, Store, ItemKey, Currency, CurrencyMovementType, SalesInvoice, SourceOfOrigin, SerialLotNumber, SourceOfOriginStock, SerialLotNumberStock, Quantity, Amount, AmountTax";
-	BatchKeysInfoSettings.Totals = "";
+	BatchKeysInfoSettings.Dimensions = "Period, Direction, Company, Store, ItemKey, Currency, CurrencyMovementType, SalesInvoice, SourceOfOrigin, SerialLotNumber, SourceOfOriginStock, SerialLotNumberStock, InventoryOrigin, Consignor";
+	BatchKeysInfoSettings.Totals = "Quantity, Amount, AmountTax";
 	BatchKeysInfoSettings.CurrencyMovementType = CurrencyMovementType;
 	
 	PostingServer.SetBatchKeyInfoTable(Parameters, BatchKeysInfoSettings);

@@ -47,7 +47,8 @@ EndProcedure
 
 Function AddAttributeInfoForHTML(ItemRef, UUID, FileRef = Undefined) Export
 	Filter = New Structure("ShowInHTML", True);
-	Return AddAttributesAndPropertiesServer.PrepareDataForHTML(ItemRef, Filter);
+	Prefix = "";
+	Return AddAttributesAndPropertiesServer.PrepareDataForHTML(ItemRef, Prefix, Filter);
 EndFunction
 
 #EndRegion

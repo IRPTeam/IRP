@@ -237,6 +237,9 @@ Procedure Calculate_BatchKeysInfo(Ref, Parameters, AddInfo)
 	CurrencyTable = Ref.Currencies.UnloadColumns();
 	CurrencyMovementType = Ref.Company.LandedCostCurrencyMovementType;
 	For Each Row In BatchKeysInfo Do
+		If CurrencyTable.FindRows(New Structure("Key, MovementType", Row.Key, CurrencyMovementType)).Count() Then
+			Continue;
+		EndIf;
 		CurrenciesServer.AddRowToCurrencyTable(Ref.Date, CurrencyTable, Row.Key, Row.Currency, CurrencyMovementType);
 	EndDo;
 

@@ -716,7 +716,7 @@ Function R2021B_CustomersTransactions()
 		   |	OffsetOfAdvances.Currency,
 		   |	OffsetOfAdvances.LegalName,
 		   |	OffsetOfAdvances.Partner,
-		   |	OffsetOfAdvances.Agreement,
+		   |	OffsetOfAdvances.TransactionAgreement,
 		   |	OffsetOfAdvances.TransactionDocument,
 		   |	OffsetOfAdvances.Key,
 		   |	OffsetOfAdvances.Recorder,
@@ -736,6 +736,7 @@ Function R2020B_AdvancesFromCustomers()
 		   |	OffsetOfAdvances.Partner,
 		   |	OffsetOfAdvances.LegalName,
 		   |	OffsetOfAdvances.Currency,
+		   |	OffsetOfAdvances.AdvanceAgreement AS Agreement,
 		   |	OffsetOfAdvances.Amount,
 		   |	UNDEFINED AS Key,
 		   |	OffsetOfAdvances.Recorder AS CustomersAdvancesClosing

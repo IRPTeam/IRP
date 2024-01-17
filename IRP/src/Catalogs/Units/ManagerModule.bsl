@@ -19,6 +19,9 @@ Function GetChoiceDataTable(Parameters)
 		If FilterItem.Key = "CustomSearchFilter" OR FilterItem.Key = "AdditionalParameters" Then
 			Continue; // Service properties
 		EndIf;
+		If FilterItem.Key = "Item" Then
+			Continue; // Additional parameters
+		EndIf;
 		Filter = Filter
 			+ "
 		|	AND Table." + FilterItem.Key + " = &" + FilterItem.Key;

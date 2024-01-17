@@ -118,8 +118,7 @@ Procedure CreateFormControls(Form, GroupNameForPlacement = "", Prefix = "", AddI
 		Form[Row.Name_owner] = Row.Ref;
 	EndDo;
 
-	CreatedFormItemFields = CreateFormItemFields(Form, GroupNameForPlacement, FormAttributes.FormAttributesInfo,
-		AddInfo);
+	CreatedFormItemFields = CreateFormItemFields(Form, GroupNameForPlacement, FormAttributes.FormAttributesInfo, AddInfo);
 	SavedData.FormItemFields = ExtractProperty(CreatedFormItemFields, "Name");
 	//@skip-check property-return-type
 	Form.SavedData = CommonFunctionsServer.SerializeXMLUseXDTO(SavedData);
@@ -205,6 +204,7 @@ Function CreateFormItemFields(Form, GroupNameForPlacement, FormAttributesInfo, A
 
 			//@skip-check module-attachable-event-handler-name
 			NewFormElement.SetAction("StartChoice", "AddAttributeStartChoice");
+			NewFormElement.MultiLine = AttrInfo.Multiline;
 		EndIf;
 
 		ArrayOfFormElements.Add(NewFormElement);
@@ -358,6 +358,7 @@ EndProcedure
 // * Path_owner - String - 
 // * Title_owner - String - 
 // * StoredData_owner - Boolean - 
+// * Multiline - Boolean -
 Function AttributeAndPropertyInfo(AttributePropertyRow, AddInfo = Undefined) Export
 	Result = New Structure();
 
@@ -366,6 +367,7 @@ Function AttributeAndPropertyInfo(AttributePropertyRow, AddInfo = Undefined) Exp
 	Result.Insert("Name", Name);
 	Result.Insert("Type", AttributePropertyRow.Attribute.ValueType);
 	Result.Insert("isURL", AttributePropertyRow.Attribute.isURL);
+	Result.Insert("Multiline", AttributePropertyRow.Attribute.Multiline);
 	Result.Insert("Path", Name);
 	Result.Insert("Title", String(AttributePropertyRow.Attribute));
 	Result.Insert("StoredData", True);

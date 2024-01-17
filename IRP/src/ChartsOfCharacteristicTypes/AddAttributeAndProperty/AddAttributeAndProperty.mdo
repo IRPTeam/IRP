@@ -106,6 +106,21 @@
     <fullTextSearch>Use</fullTextSearch>
     <dataHistory>Use</dataHistory>
   </attributes>
+  <attributes uuid="beca8175-48f6-4019-9c59-eeaeb03b5990">
+    <name>Multiline</name>
+    <synonym>
+      <key>en</key>
+      <value>Multiline</value>
+    </synonym>
+    <type>
+      <types>Boolean</types>
+    </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <fillValue xsi:type="core:UndefinedValue"/>
+    <fullTextSearch>Use</fullTextSearch>
+    <dataHistory>Use</dataHistory>
+  </attributes>
   <forms uuid="c33e15bc-2f64-4500-8ca5-c9789a8dc330">
     <name>ItemForm</name>
     <synonym>

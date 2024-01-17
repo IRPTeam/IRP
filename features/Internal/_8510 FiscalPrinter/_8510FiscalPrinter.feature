@@ -3091,11 +3091,16 @@ Scenario: _02601691 check Good code data from RSR in the RRR (POS)
 		And I save message text as "NumberRRR"
 		And I execute 1C:Enterprise script
         	| "Контекст.Insert("NumberRRR", TrimR(Контекст["NumberRRR"]))" |
-		Given I open hyperlink "e1cib/list/Document.RetailReturnReceipt"
-		And I go to line in "List" table
-			| 'Number'      |
-			| '$NumberRRR$' |
-		And in the table "List" I click the button named "ListContextMenuUndoPosting"
+		* Cancel RRR
+			Given I open hyperlink "e1cib/list/Document.RetailReturnReceipt"
+			And I go to line in "List" table
+				| 'Number'      |
+				| '$NumberRRR$' |
+			And I select current line in "List" table
+			And I move to "Other" tab
+			And I select "Canceled" exact value from "Status type" drop-down list
+			And I click "Post and close" button
+							
 				
 
 Scenario: _0260170 Good code data control return (POS)
@@ -4115,10 +4120,38 @@ Scenario: _0260212 try mark for deletion printed RRR
 		And I go to line in "List" table
 			| 'Status'  |
 			| 'Printed' |
-	* Try mark for deletion printed RSR
+	* Try mark for deletion printed RRR
 		And in the table "List" I click the button named "ListContextMenuSetDeletionMark"
 		Then "1C:Enterprise" window is opened
 		And I click "Yes" button
+		Then "1C:Enterprise" window is opened
+		And I click the button named "OK"
+		Then in the TestClient message log contains lines by template:
+			|'Error! Receipt is already printed:*'|
+
+Scenario: _0260213 try unpost printed RSR
+	And I close all client application windows
+	* Select RSR
+		Given I open hyperlink "e1cib/list/Document.RetailSalesReceipt"
+		And I go to line in "List" table
+			| 'Status'  |
+			| 'Printed' |
+	* Try unpost printed RSR
+		And in the table "List" I click the button named "ListContextMenuUndoPosting"
+		Then "1C:Enterprise" window is opened
+		And I click the button named "OK"
+		Then in the TestClient message log contains lines by template:
+			|'Error! Receipt is already printed:*'|
+
+Scenario: _0260214 try unpost printed RRR
+	And I close all client application windows
+	* Select RSR
+		Given I open hyperlink "e1cib/list/Document.RetailReturnReceipt"
+		And I go to line in "List" table
+			| 'Status'  | 'Status type' |
+			| 'Printed' | 'Completed'   |
+	* Try mark for deletion printed RRR
+		And in the table "List" I click the button named "ListContextMenuUndoPosting"
 		Then "1C:Enterprise" window is opened
 		And I click the button named "OK"
 		Then in the TestClient message log contains lines by template:
@@ -4800,6 +4833,7 @@ Scenario: _0260210 on double click in CRS
 		And I select current line in "Documents" table
 		Then system warning window does not appear
 		And I close all client application windows	
+
 
 
 						

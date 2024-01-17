@@ -117,7 +117,9 @@ Procedure Calculate_BatchKeysInfo(Ref, Parameters, AddInfo)
 	|		ELSE FALSE
 	|	END AS SalesInvoiceIsFilled,
 	|	RetailReturnReceiptItemList.RetailSalesReceipt AS SalesInvoice,
-	|	RetailReturnReceiptItemList.RetailSalesReceipt.Company AS SalesInvoice_Company
+	|	RetailReturnReceiptItemList.RetailSalesReceipt.Company AS SalesInvoice_Company,
+	|	RetailReturnReceiptItemList.InventoryOrigin,
+	|	RetailReturnReceiptItemList.Consignor
 	|INTO tmpItemList
 	|FROM
 	|	Document.RetailReturnReceipt.ItemList AS RetailReturnReceiptItemList
@@ -139,7 +141,9 @@ Procedure Calculate_BatchKeysInfo(Ref, Parameters, AddInfo)
 	|	END,
 	|	RetailReturnReceiptItemList.RetailSalesReceipt,
 	|	RetailReturnReceiptItemList.RetailSalesReceipt.Company,
-	|	VALUE(Enum.BatchDirection.Receipt)
+	|	VALUE(Enum.BatchDirection.Receipt),
+	|	RetailReturnReceiptItemList.InventoryOrigin,
+	|	RetailReturnReceiptItemList.Consignor
 	|;
 	|
 	|////////////////////////////////////////////////////////////////////////////////
@@ -184,7 +188,9 @@ Procedure Calculate_BatchKeysInfo(Ref, Parameters, AddInfo)
 	|	ISNULL(tmpSourceOfOrigins.SerialLotNumber, VALUE(Catalog.SerialLotNumbers.EmptyRef)) AS SerialLotNumber,
 	|	ISNULL(tmpSourceOfOrigins.SourceOfOriginStock, VALUE(Catalog.SourceOfOrigins.EmptyRef)) AS SourceOfOriginStock,
 	|	ISNULL(tmpSourceOfOrigins.SerialLotNumberStock, VALUE(Catalog.SerialLotNumbers.EmptyRef)) AS SerialLotNumberStock,
-	|	Not tmpItemList.SalesInvoiceIsFilled OR tmpItemList.Company <> tmpItemList.SalesInvoice_Company AS CreateBatch
+	|	Not tmpItemList.SalesInvoiceIsFilled OR tmpItemList.Company <> tmpItemList.SalesInvoice_Company AS CreateBatch,
+	|	tmpItemList.InventoryOrigin,
+	|	tmpItemList.Consignor
 	|INTO tmpBatchKeysInfo
 	|FROM
 	|	tmpItemList AS tmpItemList
@@ -231,6 +237,9 @@ Procedure Calculate_BatchKeysInfo(Ref, Parameters, AddInfo)
 	CurrencyTable = Ref.Currencies.UnloadColumns();
 	CurrencyMovementType = Ref.Company.LandedCostCurrencyMovementType;
 	For Each Row In BatchKeysInfo Do
+		If CurrencyTable.FindRows(New Structure("Key, MovementType", Row.Key, CurrencyMovementType)).Count() Then
+			Continue;
+		EndIf;
 		CurrenciesServer.AddRowToCurrencyTable(Ref.Date, CurrencyTable, Row.Key, Row.Currency, CurrencyMovementType);
 	EndDo;
 
@@ -245,8 +254,8 @@ Procedure Calculate_BatchKeysInfo(Ref, Parameters, AddInfo)
 	
 	BatchKeysInfoSettings = PostingServer.GetBatchKeysInfoSettings();
 	BatchKeysInfoSettings.DataTable = BatchKeysInfo_DataTable;
-	BatchKeysInfoSettings.Dimensions = "Period, Direction, Company, Store, ItemKey, Currency, CurrencyMovementType, SalesInvoice, SourceOfOrigin, SerialLotNumber, SourceOfOriginStock, SerialLotNumberStock, Quantity, Amount, AmountTax";
-	BatchKeysInfoSettings.Totals = "";
+	BatchKeysInfoSettings.Dimensions = "Period, Direction, Company, Store, ItemKey, Currency, CurrencyMovementType, SalesInvoice, SourceOfOrigin, SerialLotNumber, SourceOfOriginStock, SerialLotNumberStock, InventoryOrigin, Consignor";
+	BatchKeysInfoSettings.Totals = "Quantity, Amount, AmountTax";
 	BatchKeysInfoSettings.CurrencyMovementType = CurrencyMovementType;
 	
 	PostingServer.SetBatchKeyInfoTable(Parameters, BatchKeysInfoSettings);

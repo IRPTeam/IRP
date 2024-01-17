@@ -71,8 +71,9 @@ Procedure OnCommandCreate(CommandButton, CommandDescription, Form, MainAttribute
 	
 	OriginalQuery = True;
 	FormQueryText = MainAttribute.QueryText;
+	MainAttributeTable = MainAttribute.MainTable;
 	If Not MainAttribute.CustomQuery Then
-		FormQueryText = "Select * From " + MainAttribute.MainTable;
+		FormQueryText = "Select * From " + MainAttributeTable;
 		OriginalQuery = False;
 	EndIf;
 	
@@ -101,6 +102,7 @@ Procedure OnCommandCreate(CommandButton, CommandDescription, Form, MainAttribute
 	EndDo;
 	MainAttribute.QueryText = QueryText;
 	MainAttribute.Parameters.SetParameterValue("ShowNotActive", NotActiveShowing); 
+	MainAttribute.MainTable = MainAttributeTable;
 	
 	ConditionalAppearanceItem = MainAttribute.ConditionalAppearance.Items.Add();
 	//@skip-check new-font

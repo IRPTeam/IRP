@@ -44,7 +44,16 @@ Procedure BeforeWriteAtServer(Form, Cancel, CurrentObject, WriteParameters, Pref
 	For Each Row In ObjectAttributes Do
 		AttributeInfo = AttributeAndPropertyInfo(Row, AddInfo);
 		RequiredAttributeResult = RequiredAttributesArray.Find(Row.Attribute);
-		If ValueIsFilled(Form[AttributeInfo.Name]) Then
+		//@skip-check dynamic-access-method-not-found
+		If AttributeInfo.Collection And Form[AttributeInfo.Name].Count() Then
+			//@skip-check dynamic-access-method-not-found
+			For Each Attr In Form[AttributeInfo.Name].UnloadValues() Do // Characteristic.AddAttributeAndProperty
+				AddAttributes = CurrentObject[Prefix + "AddAttributes"]; // See Catalog.ItemKeys.AddAttributes
+				NewAttribute = AddAttributes.Add(); 
+				NewAttribute.Property = AttributeInfo.Ref;
+				NewAttribute.Value = Attr;
+			EndDo;
+		ElsIf Not AttributeInfo.Collection AND ValueIsFilled(Form[AttributeInfo.Name]) Then
 			NewAttribute = CurrentObject.AddAttributes.Add();
 			NewAttribute.Property = AttributeInfo.Ref;
 			//@skip-check statement-type-change
@@ -103,7 +112,14 @@ Procedure CreateFormControls(Form, GroupNameForPlacement = "", Prefix = "", AddI
 		ArrayOfExistAttributes = FormInfo.AddAttributes.FindRows(New Structure("Property", Row.Attribute));
 		If ArrayOfExistAttributes.Count() Then
 			AttributeInfo = AttributeAndPropertyInfo(Row, AddInfo);
-			Form[AttributeInfo.Name] = ArrayOfExistAttributes[0].Value;
+			If Row.Collection Then
+				For Each RowAttr In ArrayOfExistAttributes Do
+					//@skip-check dynamic-access-method-not-found
+					Form[AttributeInfo.Name].Add(RowAttr.Value);
+				EndDo;
+			Else
+				Form[AttributeInfo.Name] = ArrayOfExistAttributes[0].Value;
+			EndIf;
 
 		ElsIf FormInfo.IsNew Then
 			ArrayOfDefaultAttributes = DefaultAttributeValues.FindRows(New Structure("AttributeRef", Row.Attribute));
@@ -204,6 +220,10 @@ Function CreateFormItemFields(Form, GroupNameForPlacement, FormAttributesInfo, A
 
 			//@skip-check module-attachable-event-handler-name
 			NewFormElement.SetAction("StartChoice", "AddAttributeStartChoice");
+			If AttrInfo.Collection Then
+				//@skip-check property-return-type
+				Form[AttrInfo.Name].ValueType = AttrInfo.Type;
+			EndIf; 
 			NewFormElement.MultiLine = AttrInfo.Multiline;
 		EndIf;
 
@@ -242,22 +262,20 @@ Function FormAttributes(ObjectAttributes, AddInfo = Undefined) Export
 	Attributes = New Array();
 	FormAttributesInfo = New Array();
 	For Each Row In ObjectAttributes Do
-
 		AttributeInfo = AttributeAndPropertyInfo(Row, AddInfo);
-
-		Attributes.Add(New FormAttribute(AttributeInfo.Name, AttributeInfo.Type, , AttributeInfo.Title,
-			AttributeInfo.StoredData));
-
-		Attributes.Add(New FormAttribute(AttributeInfo.Name_owner, AttributeInfo.Type_owner, , AttributeInfo.Title_owner,
-			AttributeInfo.StoredData_owner));
-
+		
+		If AttributeInfo.Collection Then
+			Type = New TypeDescription("ValueList");
+		Else	
+			Type = AttributeInfo.Type;
+		EndIf;
+		
+		Attributes.Add(New FormAttribute(AttributeInfo.Name, Type, , AttributeInfo.Title,	AttributeInfo.StoredData));
+		Attributes.Add(New FormAttribute(AttributeInfo.Name_owner, AttributeInfo.Type_owner, , AttributeInfo.Title_owner, AttributeInfo.StoredData_owner));
 		FormAttributesInfo.Add(AttributeInfo);
-
 	EndDo;
 
-	Attributes.Add(New FormAttribute("SavedData", New TypeDescription("String"), ,
-		// FIXIT: Localize?
-		"SavedData", False));
+	Attributes.Add(New FormAttribute("SavedData", New TypeDescription("String"), , "SavedData", False));
 		
 	Result = New Structure;
 	Result.Insert("Attributes", Attributes);
@@ -359,6 +377,7 @@ EndProcedure
 // * Title_owner - String - 
 // * StoredData_owner - Boolean - 
 // * Multiline - Boolean -
+// * Collection - Boolean -
 Function AttributeAndPropertyInfo(AttributePropertyRow, AddInfo = Undefined) Export
 	Result = New Structure();
 
@@ -368,6 +387,7 @@ Function AttributeAndPropertyInfo(AttributePropertyRow, AddInfo = Undefined) Exp
 	Result.Insert("Type", AttributePropertyRow.Attribute.ValueType);
 	Result.Insert("isURL", AttributePropertyRow.Attribute.isURL);
 	Result.Insert("Multiline", AttributePropertyRow.Attribute.Multiline);
+	Result.Insert("Collection", AttributePropertyRow.Collection);
 	Result.Insert("Path", Name);
 	Result.Insert("Title", String(AttributePropertyRow.Attribute));
 	Result.Insert("StoredData", True);

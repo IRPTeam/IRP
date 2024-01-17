@@ -211,6 +211,7 @@
           <dataPath xsi:type="form:DataPath">
             <segments>Object.Multiline</segments>
           </dataPath>
+          <titleLocation>Right</titleLocation>
           <extendedTooltip>
             <name>MultilineExtendedTooltip</name>
             <id>28</id>

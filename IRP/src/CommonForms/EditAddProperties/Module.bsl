@@ -7,7 +7,8 @@ Procedure OnCreateAtServer(Cancel, StandardProcessing)
 	Query = New Query();
 	Query.Text =
 	"SELECT
-	|	AddAttributeAndPropertySetsProperties.Property
+	|	AddAttributeAndPropertySetsProperties.Property,
+	|	AddAttributeAndPropertySetsProperties.Collection
 	|INTO Properties
 	|FROM
 	|	Catalog.AddAttributeAndPropertySets.Properties AS AddAttributeAndPropertySetsProperties
@@ -18,7 +19,8 @@ Procedure OnCreateAtServer(Cancel, StandardProcessing)
 	|////////////////////////////////////////////////////////////////////////////////
 	|SELECT
 	|	AddProperties.Value,
-	|	Properties.Property
+	|	Properties.Property,
+	|	Properties.Collection
 	|FROM
 	|	Properties AS Properties
 	|		LEFT JOIN InformationRegister.AddProperties AS AddProperties
@@ -32,7 +34,10 @@ Procedure OnCreateAtServer(Cancel, StandardProcessing)
 	ThisObject.Properties.Load(QueryTable);
 
 	For Each Row In ThisObject.Properties Do
-		AttributeStructure = New Structure("Attribute, InterfaceGroup", Row.Property, Undefined);
+		AttributeStructure = New Structure;
+		AttributeStructure.Insert("Attribute", Row.Property);
+		AttributeStructure.Insert("InterfaceGroup", Undefined);
+		AttributeStructure.Insert("Collection", Row.Collection);
 		PropertyInfo = AddAttributesAndPropertiesServer.AttributeAndPropertyInfo(AttributeStructure);
 		Row.TypeDef = PropertyInfo.Type;
 	EndDo;
@@ -57,6 +62,7 @@ EndProcedure
 Procedure PropertiesOnStartEdit(Item, NewRow, Clone)
 	If Item.CurrentData.Value = Undefined Then
 		Item.ChildItems.PropertiesValue.TypeRestriction = Item.CurrentData.TypeDef;
+//		Item.ChildItems.PropertiesValue.Li
 	EndIf;
 EndProcedure
 

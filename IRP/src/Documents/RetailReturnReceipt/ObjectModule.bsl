@@ -5,7 +5,7 @@ Procedure BeforeWrite(Cancel, WriteMode, PostingMode)
 
 	If Not Ref.IsEmpty() Then
 		PrintInfo = EquipmentFiscalPrinterServer.GetStatusData(Ref);
-		If PrintInfo.IsPrinted And DeletionMark Then
+		If PrintInfo.IsPrinted And (DeletionMark OR WriteMode = DocumentWriteMode.UndoPosting) Then
 			Cancel = True;
 			CommonFunctionsClientServer.ShowUsersMessage(
 				StrTemplate(R().POS_ERROR_NoDeletingPrintedReceipt, Ref));

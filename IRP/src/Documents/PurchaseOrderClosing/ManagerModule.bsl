@@ -295,21 +295,27 @@ Function R3025B_PurchaseOrdersToBePaid()
 EndFunction
 
 Function T2014S_AdvancesInfo()
-	Return "SELECT
-		   |	Doc.Date,
-		   |	Doc.Company,
-		   |	Doc.Branch,
-		   |	Doc.Currency,
-		   |	Doc.Partner,
-		   |	Doc.LegalName,
-		   |	Doc.Ref AS Order,
-		   |	TRUE AS IsVendorAdvance,
-		   |	TRUE AS IsPurchaseOrderClose
-		   |INTO T2014S_AdvancesInfo
-		   |FROM
-		   |	Document.PurchaseOrder AS Doc
-		   |WHERE
-		   |	Doc.Ref = &PurchaseOrder";
+	Return 
+		"SELECT
+		|	Doc.Date,
+		|	Doc.Company,
+		|	Doc.Branch,
+		|	Doc.Currency,
+		|	Doc.Partner,
+		|	Doc.LegalName,
+		|	case
+		|		when Doc.Agreement.ApArPostingDetail = VALUE(Enum.ApArPostingDetail.ByDocuments)
+		|			Then Doc.Agreement
+		|		else Undefined
+		|	end AS AdvanceAgreement,
+		|	Doc.Ref AS Order,
+		|	TRUE AS IsVendorAdvance,
+		|	TRUE AS IsPurchaseOrderClose
+		|INTO T2014S_AdvancesInfo
+		|FROM
+		|	Document.PurchaseOrder AS Doc
+		|WHERE
+		|	Doc.Ref = &PurchaseOrder";
 EndFunction
 
 Function R1020B_AdvancesToVendors()
@@ -321,6 +327,7 @@ Function R1020B_AdvancesToVendors()
 		   |	OffsetOfAdvances.Partner,
 		   |	OffsetOfAdvances.LegalName,
 		   |	OffsetOfAdvances.Currency,
+		   |	OffsetOfAdvances.AdvanceAgreement AS Agreement,
 		   |	OffsetOfAdvances.AdvancesOrder AS Order,
 		   |	OffsetOfAdvances.Amount,
 		   |	OffsetOfAdvances.Recorder AS VendorsAdvancesClosing
@@ -340,7 +347,7 @@ Function R1021B_VendorsTransactions()
 		   |	OffsetOfAdvances.Partner,
 		   |	OffsetOfAdvances.LegalName,
 		   |	OffsetOfAdvances.Currency,
-		   |	OffsetOfAdvances.Agreement,
+		   |	OffsetOfAdvances.TransactionAgreement AS Agreement,
 		   |	OffsetOfAdvances.TransactionDocument AS Basis,
 		   |	OffsetOfAdvances.TransactionOrder AS Order,
 		   |	OffsetOfAdvances.Amount,

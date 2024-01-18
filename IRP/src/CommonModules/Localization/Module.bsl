@@ -509,6 +509,12 @@ Function Strings(Lang) Export
 	Strings.Insert("InvalidCharacterInAddress", NStr("en='Invalid character: ""%1""';
 		|ru='Не корректный символ: ""%1""';
 		|tr='Geçersiz karakter: ""%1""'", Lang));
+	Strings.Insert("AddAttributeCannotUseWithProperty", NStr("en='Can not use the same type as attribute and property. Type: %1';
+		|ru='Нельзя использовать один и тот же тип в качестве доп. реквизита и доп. свойства. Тип: %1';
+		|tr='Ek alan ve ek özellik olarak aynı türü kullanamazsınız. Tür: %1'", Lang));
+	Strings.Insert("AddAttributeTagPathHasNotTwoPart", NStr("en='Wrong path for tag: [%1]. It has to conrains two parts - table and attribute names, ex. ItemsList.Store';
+		|ru='Неверный путь для тега: [%1]. Он должен содержать две части - наименование таблицы и атрибута, например, ItemsList.Store';
+		|tr='Etiket için yanlış yol: [%1]. İki parça içermeli - tablo ve öznitelik isimleri, örn. ItemsList.Store'", Lang));
 
 #EndRegion
 

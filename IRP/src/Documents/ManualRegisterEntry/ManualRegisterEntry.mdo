@@ -31,13 +31,13 @@
    <value>Catalog.AddAttributeAndPropertySets.Document_ManualRegisterEntry</value>
   </typesFilterValue>
   <dataPathField>-1</dataPathField>
-  <multipleValuesUseField>-1</multipleValuesUseField>
+  <multipleValuesUseField>Catalog.AddAttributeAndPropertySets.TabularSection.Properties.Attribute.Collection</multipleValuesUseField>
   <characteristicValues>InformationRegister.AddProperties</characteristicValues>
   <objectField>InformationRegister.AddProperties.Dimension.Object</objectField>
   <typeField>InformationRegister.AddProperties.Dimension.Property</typeField>
   <valueField>InformationRegister.AddProperties.Resource.Value</valueField>
-  <multipleValuesKeyField>-1</multipleValuesKeyField>
-  <multipleValuesOrderField>-1</multipleValuesOrderField>
+  <multipleValuesKeyField>InformationRegister.AddProperties.Dimension.Key</multipleValuesKeyField>
+  <multipleValuesOrderField>InformationRegister.AddProperties.Dimension.Key</multipleValuesOrderField>
  </characteristics>
  <characteristics>
   <characteristicTypes>Catalog.AddAttributeAndPropertySets.TabularSection.Attributes</characteristicTypes>
@@ -47,13 +47,13 @@
    <value>Catalog.AddAttributeAndPropertySets.Document_ManualRegisterEntry</value>
   </typesFilterValue>
   <dataPathField>-1</dataPathField>
-  <multipleValuesUseField>-1</multipleValuesUseField>
+  <multipleValuesUseField>Catalog.AddAttributeAndPropertySets.TabularSection.Attributes.Attribute.Collection</multipleValuesUseField>
   <characteristicValues>Document.ManualRegisterEntry.TabularSection.AddAttributes</characteristicValues>
   <objectField>Document.ManualRegisterEntry.TabularSection.AddAttributes.StandardAttribute.Ref</objectField>
   <typeField>Document.ManualRegisterEntry.TabularSection.AddAttributes.Attribute.Property</typeField>
   <valueField>Document.ManualRegisterEntry.TabularSection.AddAttributes.Attribute.Value</valueField>
-  <multipleValuesKeyField>-1</multipleValuesKeyField>
-  <multipleValuesOrderField>-1</multipleValuesOrderField>
+  <multipleValuesKeyField>Document.ManualRegisterEntry.TabularSection.AddAttributes.StandardAttribute.LineNumber</multipleValuesKeyField>
+  <multipleValuesOrderField>Document.ManualRegisterEntry.TabularSection.AddAttributes.StandardAttribute.LineNumber</multipleValuesOrderField>
  </characteristics>
  <createOnInput>DontUse</createOnInput>
  <dataLockControlMode>Managed</dataLockControlMode>

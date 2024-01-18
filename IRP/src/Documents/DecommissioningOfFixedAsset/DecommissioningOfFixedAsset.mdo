@@ -30,10 +30,14 @@
   <typesFilterValue xsi:type="core:ReferenceValue">
    <value>Catalog.AddAttributeAndPropertySets.Document_DecommissioningOfFixedAsset</value>
   </typesFilterValue>
+  <dataPathField>0</dataPathField>
+  <multipleValuesUseField>Catalog.AddAttributeAndPropertySets.TabularSection.Properties.Attribute.Collection</multipleValuesUseField>
   <characteristicValues>InformationRegister.AddProperties</characteristicValues>
   <objectField>InformationRegister.AddProperties.Dimension.Object</objectField>
   <typeField>InformationRegister.AddProperties.Dimension.Property</typeField>
   <valueField>InformationRegister.AddProperties.Resource.Value</valueField>
+  <multipleValuesKeyField>InformationRegister.AddProperties.Dimension.Key</multipleValuesKeyField>
+  <multipleValuesOrderField>InformationRegister.AddProperties.Dimension.Key</multipleValuesOrderField>
  </characteristics>
  <characteristics>
   <characteristicTypes>Catalog.AddAttributeAndPropertySets.TabularSection.Attributes</characteristicTypes>
@@ -42,10 +46,14 @@
   <typesFilterValue xsi:type="core:ReferenceValue">
    <value>Catalog.AddAttributeAndPropertySets.Document_DecommissioningOfFixedAsset</value>
   </typesFilterValue>
+  <dataPathField>0</dataPathField>
+  <multipleValuesUseField>Catalog.AddAttributeAndPropertySets.TabularSection.Attributes.Attribute.Collection</multipleValuesUseField>
   <characteristicValues>Document.DecommissioningOfFixedAsset.TabularSection.AddAttributes</characteristicValues>
   <objectField>Document.DecommissioningOfFixedAsset.TabularSection.AddAttributes.StandardAttribute.Ref</objectField>
   <typeField>Document.DecommissioningOfFixedAsset.TabularSection.AddAttributes.Attribute.Property</typeField>
   <valueField>Document.DecommissioningOfFixedAsset.TabularSection.AddAttributes.Attribute.Value</valueField>
+  <multipleValuesKeyField>Document.DecommissioningOfFixedAsset.TabularSection.AddAttributes.StandardAttribute.LineNumber</multipleValuesKeyField>
+  <multipleValuesOrderField>Document.DecommissioningOfFixedAsset.TabularSection.AddAttributes.StandardAttribute.LineNumber</multipleValuesOrderField>
  </characteristics>
  <createOnInput>DontUse</createOnInput>
  <dataLockControlMode>Managed</dataLockControlMode>
@@ -70,17 +78,17 @@
  <defaultListForm>Document.DecommissioningOfFixedAsset.Form.ListForm</defaultListForm>
  <defaultChoiceForm>Document.DecommissioningOfFixedAsset.Form.ChoiceForm</defaultChoiceForm>
  <realTimePosting>Deny</realTimePosting>
- <registerRecords>AccumulationRegister.R4010B_ActualStocks</registerRecords>
- <registerRecords>AccumulationRegister.R4011B_FreeStocks</registerRecords>
- <registerRecords>AccumulationRegister.R4014B_SerialLotNumber</registerRecords>
- <registerRecords>AccumulationRegister.R4050B_StockInventory</registerRecords>
- <registerRecords>AccumulationRegister.R9010B_SourceOfOriginStock</registerRecords>
  <registerRecords>InformationRegister.T6020S_BatchKeysInfo</registerRecords>
- <registerRecords>AccumulationRegister.R6020B_BatchBalance</registerRecords>
  <registerRecords>AccumulationRegister.R6060T_CostOfGoodsSold</registerRecords>
  <registerRecords>AccumulationRegister.R8510B_BookValueOfFixedAsset</registerRecords>
- <registerRecords>InformationRegister.T6010S_BatchesInfo</registerRecords>
+ <registerRecords>AccumulationRegister.R4010B_ActualStocks</registerRecords>
  <registerRecords>InformationRegister.T8515S_FixedAssetsLocation</registerRecords>
+ <registerRecords>AccumulationRegister.R4050B_StockInventory</registerRecords>
+ <registerRecords>AccumulationRegister.R9010B_SourceOfOriginStock</registerRecords>
+ <registerRecords>AccumulationRegister.R4011B_FreeStocks</registerRecords>
+ <registerRecords>InformationRegister.T6010S_BatchesInfo</registerRecords>
+ <registerRecords>AccumulationRegister.R6020B_BatchBalance</registerRecords>
+ <registerRecords>AccumulationRegister.R4014B_SerialLotNumber</registerRecords>
  <postInPrivilegedMode>true</postInPrivilegedMode>
  <unpostInPrivilegedMode>true</unpostInPrivilegedMode>
  <choiceHistoryOnInput>DontUse</choiceHistoryOnInput>

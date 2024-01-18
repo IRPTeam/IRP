@@ -30,11 +30,14 @@
   <typesFilterValue xsi:type="core:ReferenceValue">
    <value>Catalog.AddAttributeAndPropertySets.Document_EmployeeCashAdvance</value>
   </typesFilterValue>
-  <dataPathField>Catalog.AddAttributeAndPropertySets.TabularSection.Properties.StandardAttribute.Ref</dataPathField>
+  <dataPathField>-1</dataPathField>
+  <multipleValuesUseField>Catalog.AddAttributeAndPropertySets.TabularSection.Properties.Attribute.Collection</multipleValuesUseField>
   <characteristicValues>InformationRegister.AddProperties</characteristicValues>
   <objectField>InformationRegister.AddProperties.Dimension.Object</objectField>
   <typeField>InformationRegister.AddProperties.Dimension.Property</typeField>
   <valueField>InformationRegister.AddProperties.Resource.Value</valueField>
+  <multipleValuesKeyField>InformationRegister.AddProperties.Dimension.Key</multipleValuesKeyField>
+  <multipleValuesOrderField>InformationRegister.AddProperties.Dimension.Key</multipleValuesOrderField>
  </characteristics>
  <characteristics>
   <characteristicTypes>Catalog.AddAttributeAndPropertySets.TabularSection.Attributes</characteristicTypes>
@@ -43,11 +46,14 @@
   <typesFilterValue xsi:type="core:ReferenceValue">
    <value>Catalog.AddAttributeAndPropertySets.Document_EmployeeCashAdvance</value>
   </typesFilterValue>
-  <dataPathField>Catalog.AddAttributeAndPropertySets.TabularSection.Attributes.StandardAttribute.Ref</dataPathField>
+  <dataPathField>-1</dataPathField>
+  <multipleValuesUseField>Catalog.AddAttributeAndPropertySets.TabularSection.Attributes.Attribute.Collection</multipleValuesUseField>
   <characteristicValues>Document.EmployeeCashAdvance.TabularSection.AddAttributes</characteristicValues>
   <objectField>Document.EmployeeCashAdvance.TabularSection.AddAttributes.StandardAttribute.Ref</objectField>
   <typeField>Document.EmployeeCashAdvance.TabularSection.AddAttributes.Attribute.Property</typeField>
   <valueField>Document.EmployeeCashAdvance.TabularSection.AddAttributes.Attribute.Value</valueField>
+  <multipleValuesKeyField>Document.EmployeeCashAdvance.TabularSection.AddAttributes.StandardAttribute.LineNumber</multipleValuesKeyField>
+  <multipleValuesOrderField>Document.EmployeeCashAdvance.TabularSection.AddAttributes.StandardAttribute.LineNumber</multipleValuesOrderField>
  </characteristics>
  <createOnInput>DontUse</createOnInput>
  <dataLockControlMode>Managed</dataLockControlMode>
@@ -72,14 +78,14 @@
  <defaultListForm>Document.EmployeeCashAdvance.Form.ListForm</defaultListForm>
  <defaultChoiceForm>Document.EmployeeCashAdvance.Form.ChoiceForm</defaultChoiceForm>
  <realTimePosting>Deny</realTimePosting>
- <registerRecords>AccumulationRegister.R3027B_EmployeeCashAdvance</registerRecords>
+ <registerRecords>InformationRegister.T2015S_TransactionsInfo</registerRecords>
  <registerRecords>AccumulationRegister.R5022T_Expenses</registerRecords>
  <registerRecords>AccumulationRegister.R1021B_VendorsTransactions</registerRecords>
+ <registerRecords>AccumulationRegister.R3027B_EmployeeCashAdvance</registerRecords>
  <registerRecords>AccumulationRegister.R5010B_ReconciliationStatement</registerRecords>
- <registerRecords>InformationRegister.T2015S_TransactionsInfo</registerRecords>
+ <registerRecords>AccumulationRegister.R1020B_AdvancesToVendors</registerRecords>
  <registerRecords>AccumulationRegister.R5012B_VendorsAging</registerRecords>
  <registerRecords>AccumulationRegister.T1040T_AccountingAmounts</registerRecords>
- <registerRecords>AccumulationRegister.R1020B_AdvancesToVendors</registerRecords>
  <postInPrivilegedMode>true</postInPrivilegedMode>
  <unpostInPrivilegedMode>true</unpostInPrivilegedMode>
  <choiceHistoryOnInput>DontUse</choiceHistoryOnInput>

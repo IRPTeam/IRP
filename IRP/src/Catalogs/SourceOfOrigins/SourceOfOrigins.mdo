@@ -26,6 +26,62 @@
  <fullTextSearchOnInputByString>DontUse</fullTextSearchOnInputByString>
  <standardAttributes>
   <dataHistory>Use</dataHistory>
+  <name>PredefinedDataName</name>
+  <fillValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+ </standardAttributes>
+ <standardAttributes>
+  <dataHistory>Use</dataHistory>
+  <name>Predefined</name>
+  <fillValue xsi:type="core:UndefinedValue"/>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+ </standardAttributes>
+ <standardAttributes>
+  <dataHistory>Use</dataHistory>
+  <name>Ref</name>
+  <fillValue xsi:type="core:UndefinedValue"/>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+ </standardAttributes>
+ <standardAttributes>
+  <dataHistory>Use</dataHistory>
+  <name>DeletionMark</name>
+  <fillValue xsi:type="core:BooleanValue"/>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+ </standardAttributes>
+ <standardAttributes>
+  <dataHistory>Use</dataHistory>
+  <name>IsFolder</name>
+  <fillValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+ </standardAttributes>
+ <standardAttributes>
+  <dataHistory>Use</dataHistory>
+  <name>Owner</name>
+  <fillFromFillingValue>true</fillFromFillingValue>
+  <fillValue xsi:type="core:UndefinedValue"/>
+  <fillChecking>ShowError</fillChecking>
+  <fullTextSearch>Use</fullTextSearch>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+ </standardAttributes>
+ <standardAttributes>
+  <dataHistory>Use</dataHistory>
+  <name>Parent</name>
+  <fillFromFillingValue>true</fillFromFillingValue>
+  <fillValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+ </standardAttributes>
+ <standardAttributes>
+  <dataHistory>Use</dataHistory>
   <name>Description</name>
   <synonym>
    <key>en</key>
@@ -39,8 +95,19 @@
    <key>tr</key>
    <value>Envanter menşei</value>
   </synonym>
+  <fillValue xsi:type="core:UndefinedValue"/>
   <fillChecking>ShowError</fillChecking>
   <fullTextSearch>Use</fullTextSearch>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+ </standardAttributes>
+ <standardAttributes>
+  <dataHistory>Use</dataHistory>
+  <name>Code</name>
+  <fillValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
  </standardAttributes>
  <characteristics>
   <characteristicTypes>Catalog.AddAttributeAndPropertySets.TabularSection.Attributes</characteristicTypes>
@@ -49,11 +116,14 @@
   <typesFilterValue xsi:type="core:ReferenceValue">
    <value>Catalog.AddAttributeAndPropertySets.Catalog_SourceOfOrigins</value>
   </typesFilterValue>
-  <dataPathField>Catalog.AddAttributeAndPropertySets.TabularSection.Attributes.StandardAttribute.Ref</dataPathField>
+  <dataPathField>-1</dataPathField>
+  <multipleValuesUseField>Catalog.AddAttributeAndPropertySets.TabularSection.Attributes.Attribute.Collection</multipleValuesUseField>
   <characteristicValues>Catalog.SourceOfOrigins.TabularSection.AddAttributes</characteristicValues>
   <objectField>Catalog.SourceOfOrigins.TabularSection.AddAttributes.StandardAttribute.Ref</objectField>
   <typeField>Catalog.SourceOfOrigins.TabularSection.AddAttributes.Attribute.Property</typeField>
   <valueField>Catalog.SourceOfOrigins.TabularSection.AddAttributes.Attribute.Value</valueField>
+  <multipleValuesKeyField>Catalog.SourceOfOrigins.TabularSection.AddAttributes.StandardAttribute.LineNumber</multipleValuesKeyField>
+  <multipleValuesOrderField>Catalog.SourceOfOrigins.TabularSection.AddAttributes.StandardAttribute.LineNumber</multipleValuesOrderField>
  </characteristics>
  <characteristics>
   <characteristicTypes>Catalog.AddAttributeAndPropertySets.TabularSection.Properties</characteristicTypes>
@@ -62,11 +132,14 @@
   <typesFilterValue xsi:type="core:ReferenceValue">
    <value>Catalog.AddAttributeAndPropertySets.Catalog_SourceOfOrigins</value>
   </typesFilterValue>
-  <dataPathField>Catalog.AddAttributeAndPropertySets.TabularSection.Properties.StandardAttribute.Ref</dataPathField>
+  <dataPathField>-1</dataPathField>
+  <multipleValuesUseField>Catalog.AddAttributeAndPropertySets.TabularSection.Properties.Attribute.Collection</multipleValuesUseField>
   <characteristicValues>InformationRegister.AddProperties</characteristicValues>
   <objectField>InformationRegister.AddProperties.Dimension.Object</objectField>
   <typeField>InformationRegister.AddProperties.Dimension.Property</typeField>
   <valueField>InformationRegister.AddProperties.Resource.Value</valueField>
+  <multipleValuesKeyField>InformationRegister.AddProperties.Dimension.Key</multipleValuesKeyField>
+  <multipleValuesOrderField>InformationRegister.AddProperties.Dimension.Key</multipleValuesOrderField>
  </characteristics>
  <createOnInput>Use</createOnInput>
  <dataLockControlMode>Managed</dataLockControlMode>

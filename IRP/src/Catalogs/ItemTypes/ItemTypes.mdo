@@ -118,13 +118,13 @@
    <value>Catalog.AddAttributeAndPropertySets.Catalog_ItemTypes</value>
   </typesFilterValue>
   <dataPathField>-1</dataPathField>
-  <multipleValuesUseField>-1</multipleValuesUseField>
+  <multipleValuesUseField>Catalog.AddAttributeAndPropertySets.TabularSection.Properties.Attribute.Collection</multipleValuesUseField>
   <characteristicValues>InformationRegister.AddProperties</characteristicValues>
   <objectField>InformationRegister.AddProperties.Dimension.Object</objectField>
   <typeField>InformationRegister.AddProperties.Dimension.Property</typeField>
   <valueField>InformationRegister.AddProperties.Resource.Value</valueField>
-  <multipleValuesKeyField>-1</multipleValuesKeyField>
-  <multipleValuesOrderField>-1</multipleValuesOrderField>
+  <multipleValuesKeyField>InformationRegister.AddProperties.Dimension.Key</multipleValuesKeyField>
+  <multipleValuesOrderField>InformationRegister.AddProperties.Dimension.Key</multipleValuesOrderField>
  </characteristics>
  <characteristics>
   <characteristicTypes>Catalog.AddAttributeAndPropertySets.TabularSection.Attributes</characteristicTypes>
@@ -134,13 +134,13 @@
    <value>Catalog.AddAttributeAndPropertySets.Catalog_ItemTypes</value>
   </typesFilterValue>
   <dataPathField>-1</dataPathField>
-  <multipleValuesUseField>-1</multipleValuesUseField>
+  <multipleValuesUseField>Catalog.AddAttributeAndPropertySets.TabularSection.Attributes.Attribute.Collection</multipleValuesUseField>
   <characteristicValues>Catalog.ItemTypes.TabularSection.AddAttributes</characteristicValues>
   <objectField>Catalog.ItemTypes.TabularSection.AddAttributes.StandardAttribute.Ref</objectField>
   <typeField>Catalog.ItemTypes.TabularSection.AddAttributes.Attribute.Property</typeField>
   <valueField>Catalog.ItemTypes.TabularSection.AddAttributes.Attribute.Value</valueField>
-  <multipleValuesKeyField>-1</multipleValuesKeyField>
-  <multipleValuesOrderField>-1</multipleValuesOrderField>
+  <multipleValuesKeyField>Catalog.ItemTypes.TabularSection.AddAttributes.StandardAttribute.LineNumber</multipleValuesKeyField>
+  <multipleValuesOrderField>Catalog.ItemTypes.TabularSection.AddAttributes.StandardAttribute.LineNumber</multipleValuesOrderField>
  </characteristics>
  <createOnInput>DontUse</createOnInput>
  <dataLockControlMode>Managed</dataLockControlMode>
@@ -431,6 +431,28 @@
    <synonym>
     <key>tr</key>
     <value>HTML olarak göster</value>
+   </synonym>
+   <type>
+    <types>Boolean</types>
+   </type>
+   <minValue xsi:type="core:UndefinedValue"/>
+   <maxValue xsi:type="core:UndefinedValue"/>
+   <dataHistory>Use</dataHistory>
+   <fullTextSearch>Use</fullTextSearch>
+  </attributes>
+  <attributes uuid="acee8c85-cfc0-48db-a420-7ae2a5ddf67d">
+   <name>Collection</name>
+   <synonym>
+    <key>en</key>
+    <value>Collection</value>
+   </synonym>
+   <synonym>
+    <key>ru</key>
+    <value>Коллекция</value>
+   </synonym>
+   <synonym>
+    <key>tr</key>
+    <value>Koleksiyon  </value>
    </synonym>
    <type>
     <types>Boolean</types>

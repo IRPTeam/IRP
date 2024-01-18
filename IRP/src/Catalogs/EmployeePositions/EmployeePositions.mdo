@@ -117,11 +117,14 @@
   <typesFilterValue xsi:type="core:ReferenceValue">
    <value>Catalog.AddAttributeAndPropertySets.Catalog_EmployeePositions</value>
   </typesFilterValue>
-  <dataPathField>Catalog.AddAttributeAndPropertySets.TabularSection.Attributes.StandardAttribute.Ref</dataPathField>
+  <dataPathField>-1</dataPathField>
+  <multipleValuesUseField>Catalog.AddAttributeAndPropertySets.TabularSection.Attributes.Attribute.Collection</multipleValuesUseField>
   <characteristicValues>Catalog.EmployeePositions.TabularSection.AddAttributes</characteristicValues>
   <objectField>Catalog.EmployeePositions.TabularSection.AddAttributes.StandardAttribute.Ref</objectField>
   <typeField>Catalog.EmployeePositions.TabularSection.AddAttributes.Attribute.Property</typeField>
   <valueField>Catalog.EmployeePositions.TabularSection.AddAttributes.Attribute.Value</valueField>
+  <multipleValuesKeyField>Catalog.EmployeePositions.TabularSection.AddAttributes.StandardAttribute.LineNumber</multipleValuesKeyField>
+  <multipleValuesOrderField>Catalog.EmployeePositions.TabularSection.AddAttributes.StandardAttribute.LineNumber</multipleValuesOrderField>
  </characteristics>
  <characteristics>
   <characteristicTypes>Catalog.AddAttributeAndPropertySets.TabularSection.Properties</characteristicTypes>
@@ -130,11 +133,14 @@
   <typesFilterValue xsi:type="core:ReferenceValue">
    <value>Catalog.AddAttributeAndPropertySets.Catalog_EmployeePositions</value>
   </typesFilterValue>
-  <dataPathField>Catalog.AddAttributeAndPropertySets.TabularSection.Properties.StandardAttribute.Ref</dataPathField>
+  <dataPathField>-1</dataPathField>
+  <multipleValuesUseField>Catalog.AddAttributeAndPropertySets.TabularSection.Properties.Attribute.Collection</multipleValuesUseField>
   <characteristicValues>InformationRegister.AddProperties</characteristicValues>
   <objectField>InformationRegister.AddProperties.Dimension.Object</objectField>
   <typeField>InformationRegister.AddProperties.Dimension.Property</typeField>
   <valueField>InformationRegister.AddProperties.Resource.Value</valueField>
+  <multipleValuesKeyField>InformationRegister.AddProperties.Dimension.Key</multipleValuesKeyField>
+  <multipleValuesOrderField>InformationRegister.AddProperties.Dimension.Key</multipleValuesOrderField>
  </characteristics>
  <createOnInput>DontUse</createOnInput>
  <dataLockControlMode>Managed</dataLockControlMode>

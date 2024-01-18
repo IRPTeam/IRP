@@ -30,11 +30,14 @@
   <typesFilterValue xsi:type="core:ReferenceValue">
    <value>Catalog.AddAttributeAndPropertySets.Document_ProductionCostsAllocation</value>
   </typesFilterValue>
-  <dataPathField>Catalog.AddAttributeAndPropertySets.TabularSection.Properties.StandardAttribute.Ref</dataPathField>
+  <dataPathField>-1</dataPathField>
+  <multipleValuesUseField>Catalog.AddAttributeAndPropertySets.TabularSection.Properties.Attribute.Collection</multipleValuesUseField>
   <characteristicValues>InformationRegister.AddProperties</characteristicValues>
   <objectField>InformationRegister.AddProperties.Dimension.Object</objectField>
   <typeField>InformationRegister.AddProperties.Dimension.Property</typeField>
   <valueField>InformationRegister.AddProperties.Resource.Value</valueField>
+  <multipleValuesKeyField>InformationRegister.AddProperties.Dimension.Key</multipleValuesKeyField>
+  <multipleValuesOrderField>InformationRegister.AddProperties.Dimension.Key</multipleValuesOrderField>
  </characteristics>
  <characteristics>
   <characteristicTypes>Catalog.AddAttributeAndPropertySets.TabularSection.Attributes</characteristicTypes>
@@ -43,11 +46,14 @@
   <typesFilterValue xsi:type="core:ReferenceValue">
    <value>Catalog.AddAttributeAndPropertySets.Document_ProductionCostsAllocation</value>
   </typesFilterValue>
-  <dataPathField>Catalog.AddAttributeAndPropertySets.TabularSection.Attributes.StandardAttribute.Ref</dataPathField>
+  <dataPathField>-1</dataPathField>
+  <multipleValuesUseField>Catalog.AddAttributeAndPropertySets.TabularSection.Attributes.Attribute.Collection</multipleValuesUseField>
   <characteristicValues>Document.ProductionCostsAllocation.TabularSection.AddAttributes</characteristicValues>
   <objectField>Document.ProductionCostsAllocation.TabularSection.AddAttributes.StandardAttribute.Ref</objectField>
   <typeField>Document.ProductionCostsAllocation.TabularSection.AddAttributes.Attribute.Property</typeField>
   <valueField>Document.ProductionCostsAllocation.TabularSection.AddAttributes.Attribute.Value</valueField>
+  <multipleValuesKeyField>Document.ProductionCostsAllocation.TabularSection.AddAttributes.StandardAttribute.LineNumber</multipleValuesKeyField>
+  <multipleValuesOrderField>Document.ProductionCostsAllocation.TabularSection.AddAttributes.StandardAttribute.LineNumber</multipleValuesOrderField>
  </characteristics>
  <createOnInput>DontUse</createOnInput>
  <dataLockControlMode>Managed</dataLockControlMode>
@@ -73,8 +79,8 @@
  <defaultChoiceForm>Document.ProductionCostsAllocation.Form.ChoiceForm</defaultChoiceForm>
  <realTimePosting>Deny</realTimePosting>
  <registerRecords>InformationRegister.T6020S_BatchKeysInfo</registerRecords>
- <registerRecords>AccumulationRegister.R6020B_BatchBalance</registerRecords>
  <registerRecords>AccumulationRegister.R6060T_CostOfGoodsSold</registerRecords>
+ <registerRecords>AccumulationRegister.R6020B_BatchBalance</registerRecords>
  <postInPrivilegedMode>true</postInPrivilegedMode>
  <unpostInPrivilegedMode>true</unpostInPrivilegedMode>
  <choiceHistoryOnInput>DontUse</choiceHistoryOnInput>

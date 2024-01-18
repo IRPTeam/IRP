@@ -30,13 +30,13 @@
    <value>Catalog.AddAttributeAndPropertySets.Catalog_TaxAnalytics</value>
   </typesFilterValue>
   <dataPathField>-1</dataPathField>
-  <multipleValuesUseField>-1</multipleValuesUseField>
+  <multipleValuesUseField>Catalog.AddAttributeAndPropertySets.TabularSection.Properties.Attribute.Collection</multipleValuesUseField>
   <characteristicValues>InformationRegister.AddProperties</characteristicValues>
   <objectField>InformationRegister.AddProperties.Dimension.Object</objectField>
   <typeField>InformationRegister.AddProperties.Dimension.Property</typeField>
   <valueField>InformationRegister.AddProperties.Resource.Value</valueField>
-  <multipleValuesKeyField>-1</multipleValuesKeyField>
-  <multipleValuesOrderField>-1</multipleValuesOrderField>
+  <multipleValuesKeyField>InformationRegister.AddProperties.Dimension.Key</multipleValuesKeyField>
+  <multipleValuesOrderField>InformationRegister.AddProperties.Dimension.Key</multipleValuesOrderField>
  </characteristics>
  <characteristics>
   <characteristicTypes>Catalog.AddAttributeAndPropertySets.TabularSection.Attributes</characteristicTypes>
@@ -46,13 +46,13 @@
    <value>Catalog.AddAttributeAndPropertySets.Catalog_TaxAnalytics</value>
   </typesFilterValue>
   <dataPathField>-1</dataPathField>
-  <multipleValuesUseField>-1</multipleValuesUseField>
+  <multipleValuesUseField>Catalog.AddAttributeAndPropertySets.TabularSection.Attributes.Attribute.Collection</multipleValuesUseField>
   <characteristicValues>Catalog.TaxAnalytics.TabularSection.AddAttributes</characteristicValues>
   <objectField>Catalog.TaxAnalytics.TabularSection.AddAttributes.StandardAttribute.Ref</objectField>
   <typeField>Catalog.TaxAnalytics.TabularSection.AddAttributes.Attribute.Property</typeField>
   <valueField>Catalog.TaxAnalytics.TabularSection.AddAttributes.Attribute.Value</valueField>
-  <multipleValuesKeyField>-1</multipleValuesKeyField>
-  <multipleValuesOrderField>-1</multipleValuesOrderField>
+  <multipleValuesKeyField>Catalog.TaxAnalytics.TabularSection.AddAttributes.StandardAttribute.LineNumber</multipleValuesKeyField>
+  <multipleValuesOrderField>Catalog.TaxAnalytics.TabularSection.AddAttributes.StandardAttribute.LineNumber</multipleValuesOrderField>
  </characteristics>
  <createOnInput>Use</createOnInput>
  <dataLockControlMode>Managed</dataLockControlMode>

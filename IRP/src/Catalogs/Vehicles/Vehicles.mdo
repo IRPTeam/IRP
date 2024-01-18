@@ -31,10 +31,14 @@
   <typesFilterValue xsi:type="core:ReferenceValue">
    <value>Catalog.AddAttributeAndPropertySets.Catalog_Vehicles</value>
   </typesFilterValue>
+  <dataPathField>0</dataPathField>
+  <multipleValuesUseField>Catalog.AddAttributeAndPropertySets.TabularSection.Properties.Attribute.Collection</multipleValuesUseField>
   <characteristicValues>InformationRegister.AddProperties</characteristicValues>
   <objectField>InformationRegister.AddProperties.Dimension.Object</objectField>
   <typeField>InformationRegister.AddProperties.Dimension.Property</typeField>
   <valueField>InformationRegister.AddProperties.Resource.Value</valueField>
+  <multipleValuesKeyField>InformationRegister.AddProperties.Dimension.Key</multipleValuesKeyField>
+  <multipleValuesOrderField>InformationRegister.AddProperties.Dimension.Key</multipleValuesOrderField>
  </characteristics>
  <characteristics>
   <characteristicTypes>Catalog.AddAttributeAndPropertySets.TabularSection.Attributes</characteristicTypes>
@@ -43,10 +47,14 @@
   <typesFilterValue xsi:type="core:ReferenceValue">
    <value>Catalog.AddAttributeAndPropertySets.Catalog_Vehicles</value>
   </typesFilterValue>
+  <dataPathField>0</dataPathField>
+  <multipleValuesUseField>Catalog.AddAttributeAndPropertySets.TabularSection.Attributes.Attribute.Collection</multipleValuesUseField>
   <characteristicValues>Catalog.Vehicles.TabularSection.AddAttributes</characteristicValues>
   <objectField>Catalog.Vehicles.TabularSection.AddAttributes.StandardAttribute.Ref</objectField>
   <typeField>Catalog.Vehicles.TabularSection.AddAttributes.Attribute.Property</typeField>
   <valueField>Catalog.Vehicles.TabularSection.AddAttributes.Attribute.Value</valueField>
+  <multipleValuesKeyField>Catalog.Vehicles.TabularSection.AddAttributes.StandardAttribute.LineNumber</multipleValuesKeyField>
+  <multipleValuesOrderField>Catalog.Vehicles.TabularSection.AddAttributes.StandardAttribute.LineNumber</multipleValuesOrderField>
  </characteristics>
  <createOnInput>Use</createOnInput>
  <dataLockControlMode>Managed</dataLockControlMode>

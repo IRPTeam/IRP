@@ -360,21 +360,27 @@ Function R3026B_SalesOrdersCustomerAdvance()
 EndFunction
 
 Function T2014S_AdvancesInfo()
-	Return "SELECT
-		   |	&Period AS Date,
-		   |	Doc.Company,
-		   |	Doc.Branch,
-		   |	Doc.Currency,
-		   |	Doc.Partner,
-		   |	Doc.LegalName,
-		   |	Doc.Ref AS Order,
-		   |	TRUE AS IsCustomerAdvance,
-		   |	TRUE AS IsSalesOrderClose
-		   |INTO T2014S_AdvancesInfo
-		   |FROM
-		   |	Document.SalesOrder AS Doc
-		   |WHERE
-		   |	Doc.Ref = &SalesOrder";
+	Return 
+		"SELECT
+		|	&Period AS Date,
+		|	Doc.Company,
+		|	Doc.Branch,
+		|	Doc.Currency,
+		|	Doc.Partner,
+		|	Doc.LegalName,
+		|	case
+		|		when Doc.Agreement.ApArPostingDetail = VALUE(Enum.ApArPostingDetail.ByDocuments)
+		|			Then Doc.Agreement
+		|		else Undefined
+		|	end AS AdvanceAgreement,
+		|	Doc.Ref AS Order,
+		|	TRUE AS IsCustomerAdvance,
+		|	TRUE AS IsSalesOrderClose
+		|INTO T2014S_AdvancesInfo
+		|FROM
+		|	Document.SalesOrder AS Doc
+		|WHERE
+		|	Doc.Ref = &SalesOrder";
 EndFunction
 
 Function R2020B_AdvancesFromCustomers()
@@ -386,6 +392,7 @@ Function R2020B_AdvancesFromCustomers()
 		   |	OffsetOfAdvances.Partner,
 		   |	OffsetOfAdvances.LegalName,
 		   |	OffsetOfAdvances.Currency,
+		   |	OffsetOfAdvances.AdvanceAgreement AS Agreement,
 		   |	OffsetOfAdvances.AdvancesOrder AS Order,
 		   |	OffsetOfAdvances.Amount,
 		   |	OffsetOfAdvances.Recorder AS VendorsAdvancesClosing
@@ -405,7 +412,7 @@ Function R2021B_CustomersTransactions()
 		   |	OffsetOfAdvances.Partner,
 		   |	OffsetOfAdvances.LegalName,
 		   |	OffsetOfAdvances.Currency,
-		   |	OffsetOfAdvances.Agreement,
+		   |	OffsetOfAdvances.TransactionAgreement AS Agreement,
 		   |	OffsetOfAdvances.TransactionDocument AS Basis,
 		   |	OffsetOfAdvances.TransactionOrder AS Order,
 		   |	OffsetOfAdvances.Amount,

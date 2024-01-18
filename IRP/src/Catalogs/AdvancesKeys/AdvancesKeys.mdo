@@ -242,6 +242,29 @@
   <fullTextSearch>Use</fullTextSearch>
   <dataHistory>Use</dataHistory>
  </attributes>
+ <attributes uuid="3b542a14-5bb6-4c08-a36a-4bbe1f238e11">
+  <name>AdvanceAgreement</name>
+  <synonym>
+   <key>en</key>
+   <value>Advance agreement</value>
+  </synonym>
+  <synonym>
+   <key>ru</key>
+   <value>Advance agreement</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Advance agreement</value>
+  </synonym>
+  <type>
+   <types>CatalogRef.Agreements</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fillValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <dataHistory>Use</dataHistory>
+ </attributes>
  <forms uuid="3a3a98d5-4e8c-4c4b-bfae-2cc9aa07242a">
   <name>ItemForm</name>
   <synonym>

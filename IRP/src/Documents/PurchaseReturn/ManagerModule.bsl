@@ -459,7 +459,7 @@ Function R1021B_VendorsTransactions()
 		   |	OffsetOfAdvances.Currency,
 		   |	OffsetOfAdvances.LegalName,
 		   |	OffsetOfAdvances.Partner,
-		   |	OffsetOfAdvances.Agreement,
+		   |	OffsetOfAdvances.TransactionAgreement,
 		   |	OffsetOfAdvances.TransactionDocument,
 		   |	OffsetOfAdvances.Key,
 		   |	OffsetOfAdvances.Recorder,
@@ -479,6 +479,7 @@ Function R1020B_AdvancesToVendors()
 		   |	OffsetOfAdvances.Partner,
 		   |	OffsetOfAdvances.LegalName,
 		   |	OffsetOfAdvances.Currency,
+		   |	OffsetOfAdvances.AdvanceAgreement AS Agreement,
 		   |	OffsetOfAdvances.Amount,
 		   |	UNDEFINED AS Key,
 		   |	OffsetOfAdvances.Recorder AS VendorsAdvancesClosing

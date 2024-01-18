@@ -45,7 +45,23 @@ Procedure BeforeWriteAtServer(Form, Cancel, CurrentObject, WriteParameters, Pref
 		AttributeInfo = AttributeAndPropertyInfo(Row, AddInfo);
 		RequiredAttributeResult = RequiredAttributesArray.Find(Row.Attribute);
 		//@skip-check dynamic-access-method-not-found
-		If AttributeInfo.Collection And Form[AttributeInfo.Name].Count() Then
+		If AttributeInfo.Collection And AttributeInfo.isTag Then
+			//@skip-check dynamic-access-method-not-found
+			Parts = StrSplit(AttributeInfo.PathForTag, ".");
+			CopyTable = CurrentObject[Parts[0]].Unload(); // See Document.SalesOrder.ItemList
+			CopyTable.GroupBy(Parts[1]);
+			For Each Attr In CopyTable.UnloadColumn(Parts[1]) Do
+				If Not ValueIsFilled(Attr) Then
+					Continue;
+				EndIf;
+				AddAttributes = CurrentObject[Prefix + "AddAttributes"]; // See Catalog.ItemKeys.AddAttributes
+				NewAttribute = AddAttributes.Add(); 
+				NewAttribute.Property = AttributeInfo.Ref;
+				//@skip-check statement-type-change
+				NewAttribute.Value = Attr;
+			EndDo;
+			
+		ElsIf AttributeInfo.Collection And Form[AttributeInfo.Name].Count() Then
 			//@skip-check dynamic-access-method-not-found
 			For Each Attr In Form[AttributeInfo.Name].UnloadValues() Do // Characteristic.AddAttributeAndProperty
 				AddAttributes = CurrentObject[Prefix + "AddAttributes"]; // See Catalog.ItemKeys.AddAttributes
@@ -108,10 +124,13 @@ Procedure CreateFormControls(Form, GroupNameForPlacement = "", Prefix = "", AddI
 	DefaultAttributeValues = GetDefaultAttributeValues(FormInfo);
 
 	For Each Row In ObjectAttributes Do
-
+		
 		ArrayOfExistAttributes = FormInfo.AddAttributes.FindRows(New Structure("Property", Row.Attribute));
 		If ArrayOfExistAttributes.Count() Then
 			AttributeInfo = AttributeAndPropertyInfo(Row, AddInfo);
+			If AttributeInfo.isTag Then
+				Continue;
+			EndIf;
 			If Row.Collection Then
 				For Each RowAttr In ArrayOfExistAttributes Do
 					//@skip-check dynamic-access-method-not-found
@@ -262,6 +281,11 @@ Function FormAttributes(ObjectAttributes, AddInfo = Undefined) Export
 	Attributes = New Array();
 	FormAttributesInfo = New Array();
 	For Each Row In ObjectAttributes Do
+		
+		If Not IsBlankString(Row.PathForTag) Then
+			Continue; // Do now show on form tag attributes
+		EndIf;
+		
 		AttributeInfo = AttributeAndPropertyInfo(Row, AddInfo);
 		
 		If AttributeInfo.Collection Then
@@ -329,6 +353,7 @@ Procedure FillTableOfAvailableAttributesBy_AllItems(TableOfAvailableAttributes, 
 			If RefsByConditions.Count() Then
 				ArrayOfCollection.Add(Row);
 			EndIf;
+			
 		Else
 			If FormInfo.Metadata = Metadata.Catalogs.ItemKeys Then
 				// get add attributes from ItemType (tabular section AvailableAttributes)
@@ -368,6 +393,8 @@ EndProcedure
 // * Type - TypeDescription - 
 // * isURL - Boolean - 
 // * Path - String - 
+// * isTag - Boolean - 
+// * PathForTag - String - 
 // * Title - String - 
 // * StoredData - Boolean - 
 // * ParentName - String - 
@@ -391,6 +418,8 @@ Function AttributeAndPropertyInfo(AttributePropertyRow, AddInfo = Undefined) Exp
 	Result.Insert("Path", Name);
 	Result.Insert("Title", String(AttributePropertyRow.Attribute));
 	Result.Insert("StoredData", True);
+	Result.Insert("isTag", Not IsBlankString(AttributePropertyRow.PathForTag));
+	Result.Insert("PathForTag", AttributePropertyRow.PathForTag);
 	If ValueIsFilled(AttributePropertyRow.InterfaceGroup) Then
 		ParentName = "_" + StrReplace(String(AttributePropertyRow.InterfaceGroup.UUID()), "-", "");
 	Else
@@ -531,6 +560,23 @@ EndFunction
 //  Array Of CatalogTabularSectionRow.AddAttributeAndPropertySets.Attributes
 Function ObjectProperties(AddAttributeAndPropertySetName, AddInfo = Undefined) Export
 	Return Catalogs.AddAttributeAndPropertySets[AddAttributeAndPropertySetName].Properties;
+EndFunction
+
+// Get attribute info.
+// 
+// Returns:
+//  Structure - Get attribute info:
+// * Attribute - ChartOfCharacteristicTypesRef.AddAttributeAndProperty - 
+// * InterfaceGroup - Undefined - 
+// * Collection - Boolean - 
+// * PathForTag - String - 
+Function GetAttributeInfo() Export
+	AttributeStructure = New Structure;
+	AttributeStructure.Insert("Attribute", ChartsOfCharacteristicTypes.AddAttributeAndProperty.EmptyRef());
+	AttributeStructure.Insert("InterfaceGroup", Undefined);
+	AttributeStructure.Insert("Collection", False);
+	AttributeStructure.Insert("PathForTag", "");
+Return AttributeStructure;
 EndFunction
 
 #EndRegion

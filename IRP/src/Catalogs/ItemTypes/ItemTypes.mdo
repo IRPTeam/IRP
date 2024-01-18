@@ -320,6 +320,20 @@
       <dataHistory>Use</dataHistory>
       <fullTextSearch>Use</fullTextSearch>
     </attributes>
+    <attributes uuid="acee8c85-cfc0-48db-a420-7ae2a5ddf67d">
+      <name>Collection</name>
+      <synonym>
+        <key>en</key>
+        <value>Collection</value>
+      </synonym>
+      <type>
+        <types>Boolean</types>
+      </type>
+      <minValue xsi:type="core:UndefinedValue"/>
+      <maxValue xsi:type="core:UndefinedValue"/>
+      <dataHistory>Use</dataHistory>
+      <fullTextSearch>Use</fullTextSearch>
+    </attributes>
   </tabularSections>
   <tabularSections uuid="453b1c75-5b97-4f50-a38a-5c858f89dde9">
     <producedTypes>

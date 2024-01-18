@@ -34,10 +34,9 @@ Procedure OnCreateAtServer(Cancel, StandardProcessing)
 	ThisObject.Properties.Load(QueryTable);
 
 	For Each Row In ThisObject.Properties Do
-		AttributeStructure = New Structure;
-		AttributeStructure.Insert("Attribute", Row.Property);
-		AttributeStructure.Insert("InterfaceGroup", Undefined);
-		AttributeStructure.Insert("Collection", Row.Collection);
+		AttributeStructure = AddAttributesAndPropertiesServer.GetAttributeInfo();
+		AttributeStructure.Attribute = Row.Property;
+		AttributeStructure.Collection = Row.Collection;
 		PropertyInfo = AddAttributesAndPropertiesServer.AttributeAndPropertyInfo(AttributeStructure);
 		Row.TypeDef = PropertyInfo.Type;
 	EndDo;

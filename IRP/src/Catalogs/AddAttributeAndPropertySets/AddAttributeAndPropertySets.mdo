@@ -1131,6 +1131,23 @@
       <dataHistory>Use</dataHistory>
       <fullTextSearch>Use</fullTextSearch>
     </attributes>
+    <attributes uuid="8af52854-38b0-450f-a2dd-fa57bc4f7391">
+      <name>PathForTag</name>
+      <synonym>
+        <key>en</key>
+        <value>Path for tag</value>
+      </synonym>
+      <type>
+        <types>String</types>
+        <stringQualifiers>
+          <length>150</length>
+        </stringQualifiers>
+      </type>
+      <minValue xsi:type="core:UndefinedValue"/>
+      <maxValue xsi:type="core:UndefinedValue"/>
+      <dataHistory>Use</dataHistory>
+      <fullTextSearch>Use</fullTextSearch>
+    </attributes>
   </tabularSections>
   <tabularSections uuid="63d25f08-66d6-4386-bb3e-221989d0bc8e">
     <producedTypes>

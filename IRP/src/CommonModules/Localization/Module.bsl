@@ -477,6 +477,8 @@ Function Strings(Lang) Export
 	Strings.Insert("DomainPartMin1Dot", NStr("en = 'Domain part has to contain at least 1 dot.'", Lang));
 	Strings.Insert("DomainIdentifierExceedsLength", NStr("en = 'Domain identifier exceeds the allowed length.'", Lang));
 	Strings.Insert("InvalidCharacterInAddress", NStr("en = 'Invalid character: ""%1""'", Lang));
+	Strings.Insert("AddAttributeCannotUseWithProperty", NStr("en = 'Can not use the same type as attribute and property. Type: %1'", Lang));
+	Strings.Insert("AddAttributeTagPathHasNotTwoPart", NStr("en = 'Wrong path for tag: [%1]. It has to conrains two parts - table and attribute names, ex. ItemsList.Store'", Lang));
 
 #EndRegion
 

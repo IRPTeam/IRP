@@ -250,11 +250,11 @@
   </synonym>
   <synonym>
    <key>ru</key>
-   <value>Advance agreement</value>
+   <value>Соглашение аванса</value>
   </synonym>
   <synonym>
    <key>tr</key>
-   <value>Advance agreement</value>
+   <value>Avans sözleşmesi</value>
   </synonym>
   <type>
    <types>CatalogRef.Agreements</types>

@@ -33,10 +33,5 @@ Procedure FillCheckProcessing(Cancel, CheckedAttributes)
 		EndIf;
 	EndIf;
 	
-	If Not IsNew() And Ref.StockBalanceDetail And Not ThisObject.StockBalanceDetail Then
-		If SerialLotNumbersServer.isAnyMovementBySerial(Ref) Then
-			Cancel = True;
-			CommonFunctionsClientServer.ShowUsersMessage(R().Error_110, "StockBalanceDetail");
-		EndIf;
-	EndIf;
+	CheckDataPrivileged.FillCheckProcessing_Catalog_SerialLotNumbers(Cancel, ThisObject);
 EndProcedure

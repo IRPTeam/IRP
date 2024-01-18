@@ -49,4 +49,5 @@ Procedure FillCheckProcessing(Cancel, CheckedAttributes)
 			Cancel = True;
 		EndIf;
 	EndDo;
+	CheckDataPrivileged.FillCheckProcessing_Catalog_ItemTypes(Cancel, ThisObject);
 EndProcedure

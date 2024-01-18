@@ -1612,6 +1612,9 @@ Function Strings(Lang) Export
 	Strings.Insert("Error_140", NStr("en='Partner type is required';
 		|ru='Требуется тип партнера';
 		|tr='Ortak tipi gerekli'", Lang));	
+	Strings.Insert("Error_141", NStr("en='[%1] cannot be changed, has posted documents';
+		|ru='[%1] изменить нельзя, есть проведенные документы';
+		|tr='[%1] değiştirilemez, kaydedilmiş evraklar mevcut'", Lang));	
 	
 	Strings.Insert("Error_FillTotalAmount", NStr("en='Fill total amount. Row: [%1]';
 		|ru='Необходимо заполнить сумму итого. Строка: [%1]';

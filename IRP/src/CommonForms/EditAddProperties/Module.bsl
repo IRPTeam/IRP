@@ -62,7 +62,6 @@ EndProcedure
 Procedure PropertiesOnStartEdit(Item, NewRow, Clone)
 	If Item.CurrentData.Value = Undefined Then
 		Item.ChildItems.PropertiesValue.TypeRestriction = Item.CurrentData.TypeDef;
-//		Item.ChildItems.PropertiesValue.Li
 	EndIf;
 EndProcedure
 

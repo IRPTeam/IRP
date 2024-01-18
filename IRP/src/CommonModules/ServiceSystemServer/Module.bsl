@@ -61,7 +61,7 @@ EndFunction
 // 
 // Parameters:
 //  AttributeName - String - Attribute name
-//  Object - AnyRef - Object
+//  Object - AnyRef, Arbitrary - Object
 // 
 // Returns:
 //  Boolean - Object has attribute

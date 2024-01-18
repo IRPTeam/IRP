@@ -459,15 +459,13 @@ Procedure SynchronizeAffectPricingMD5(QuerySelection)
 				FillPropertyValues(ExistTableOfAffectPricingMD5.Add(), Row);
 			EndDo;
 
-			If TableOfAffectPricingMD5 <> Undefined And AddAttributesAndPropertiesServer.GetMD5ForValueTable(
-				TableOfAffectPricingMD5) <> AddAttributesAndPropertiesServer.GetMD5ForValueTable(
-				ExistTableOfAffectPricingMD5) Then
+			If TableOfAffectPricingMD5 <> Undefined 
+				And CommonFunctionsServer.GetMD5(TableOfAffectPricingMD5) <> CommonFunctionsServer.GetMD5(ExistTableOfAffectPricingMD5) Then
 				NeedWrite = True;
 			EndIf;
 
 		Else
-			AffectPricingMD5
-			= AddAttributesAndPropertiesServer.GetAffectPricingMD5(QuerySelection.Item, QuerySelection.ItemType,
+			AffectPricingMD5 = AddAttributesAndPropertiesServer.GetAffectPricingMD5(QuerySelection.Item, QuerySelection.ItemType,
 				QuerySelection.ItemKey.AddAttributes.Unload());
 			If AffectPricingMD5 <> QuerySelection.AffectPricingMD5 Then
 				NeedWrite = True;

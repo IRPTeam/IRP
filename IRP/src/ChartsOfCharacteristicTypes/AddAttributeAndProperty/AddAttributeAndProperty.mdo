@@ -40,6 +40,30 @@
     <types>CatalogRef.BusinessUnits</types>
     <types>CatalogRef.Agreements</types>
     <types>CatalogRef.Projects</types>
+    <types>CatalogRef.AccountingOperations</types>
+    <types>CatalogRef.AccrualAndDeductionTypes</types>
+    <types>CatalogRef.BankTerms</types>
+    <types>CatalogRef.CancelReturnReasons</types>
+    <types>CatalogRef.CashAccounts</types>
+    <types>CatalogRef.CurrencyMovementSets</types>
+    <types>CatalogRef.DepreciationSchedules</types>
+    <types>CatalogRef.EmployeePositions</types>
+    <types>CatalogRef.EmployeeSchedule</types>
+    <types>CatalogRef.ExpenseAndRevenueTypes</types>
+    <types>CatalogRef.Items</types>
+    <types>CatalogRef.ItemKeys</types>
+    <types>CatalogRef.LedgerTypeVariants</types>
+    <types>CatalogRef.LedgerTypes</types>
+    <types>CatalogRef.PaymentTerminals</types>
+    <types>CatalogRef.PaymentSchedules</types>
+    <types>CatalogRef.PartnersBankAccounts</types>
+    <types>CatalogRef.PaymentTypes</types>
+    <types>CatalogRef.SerialLotNumbers</types>
+    <types>CatalogRef.TaxAnalytics</types>
+    <types>CatalogRef.TaxRates</types>
+    <types>CatalogRef.Taxes</types>
+    <types>CatalogRef.Units</types>
+    <types>CatalogRef.UnitsOfMeasurement</types>
     <numberQualifiers>
       <precision>15</precision>
       <scale>4</scale>
@@ -96,6 +120,21 @@
     <synonym>
       <key>en</key>
       <value>Is URL</value>
+    </synonym>
+    <type>
+      <types>Boolean</types>
+    </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <fillValue xsi:type="core:UndefinedValue"/>
+    <fullTextSearch>Use</fullTextSearch>
+    <dataHistory>Use</dataHistory>
+  </attributes>
+  <attributes uuid="beca8175-48f6-4019-9c59-eeaeb03b5990">
+    <name>Multiline</name>
+    <synonym>
+      <key>en</key>
+      <value>Multiline</value>
     </synonym>
     <type>
       <types>Boolean</types>

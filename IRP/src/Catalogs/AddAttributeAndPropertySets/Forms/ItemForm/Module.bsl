@@ -1,3 +1,4 @@
+
 #Region FormEventHandlers
 
 &AtServer
@@ -31,8 +32,8 @@ EndProcedure
 
 &AtServer
 Procedure BeforeWriteAtServer(Cancel, CurrentObject, WriteParameters)
-	If Not (CurrentObject.Ref = PredefinedValue("Catalog.AddAttributeAndPropertySets.Catalog_Items")
-		Or CurrentObject.Ref = PredefinedValue("Catalog.AddAttributeAndPropertySets.Catalog_Partners")) Then
+	If Not (CurrentObject.Ref = Catalogs.AddAttributeAndPropertySets.Catalog_Items
+		Or CurrentObject.Ref = Catalogs.AddAttributeAndPropertySets.Catalog_Partners) Then
 		For Each Row In CurrentObject.Attributes Do
 			Row.InterfaceGroup = Undefined;
 		EndDo;
@@ -111,6 +112,11 @@ Procedure BeforeAddRowIsClone(TableName, ColumnName, AttachIdleHandler)
 	Items[TableName].CurrentRow = NewRow.GetID();
 	AttachIdleHandler(AttachIdleHandler, 0.1, True);
 	Items[TableName].ChangeRow();
+EndProcedure
+
+&AtClient
+Procedure AttributesCollectionOnChange(Item)
+	Items.Attributes.CurrentData.PathForTag = "";
 EndProcedure
 
 #EndRegion

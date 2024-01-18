@@ -437,7 +437,9 @@ Function GetItemAttributes(Item)
 			If Not Row.AffectPricing Then
 				Continue;
 			EndIf;
-			AttributeStructure = New Structure("Attribute, InterfaceGroup", Row.Attribute, Undefined);
+			AttributeStructure = AddAttributesAndPropertiesServer.GetAttributeInfo();
+			AttributeStructure.Attribute = Row.Attribute;
+			AttributeStructure.Collection = Row.Collection;
 			ArrayOfAttributes.Add(AttributeStructure);
 		EndDo;
 		Return AddAttributesAndPropertiesServer.FormAttributes(ArrayOfAttributes);

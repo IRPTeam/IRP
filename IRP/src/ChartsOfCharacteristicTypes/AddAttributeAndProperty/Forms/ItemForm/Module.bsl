@@ -91,4 +91,5 @@ EndProcedure
 &AtClientAtServerNoContext
 Procedure ShowFormItems(Items, Object)
 	Items.isURL.Visible = Object.ValueType.ContainsType(Type("String"));
+	Items.Multiline.Visible = Object.ValueType.ContainsType(Type("String"));
 EndProcedure

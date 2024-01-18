@@ -127,6 +127,10 @@ Function Transactions()
 		   |			THEN Transactions.Ref
 		   |		ELSE UNDEFINED
 		   |	END AS BasisDocument,
+		   |
+		   |	case when Transactions.Agreement.ApArPostingDetail = VALUE(Enum.ApArPostingDetail.ByDocuments) Then
+		   |	Transactions.Agreement else Undefined end AS AdvanceAgreement,
+		   |
 		   |	Transactions.Ref AS AdvancesOrTransactionDocument,
 		   |	Transactions.Ref AS Ref,
 		   |	Transactions.Agreement.Type = VALUE(Enum.AgreementTypes.Vendor) AS IsVendor,
@@ -201,7 +205,7 @@ Function R1021B_VendorsTransactions()
 		   |	OffsetOfAdvances.Currency,
 		   |	OffsetOfAdvances.LegalName,
 		   |	OffsetOfAdvances.Partner,
-		   |	OffsetOfAdvances.Agreement,
+		   |	OffsetOfAdvances.TransactionAgreement,
 		   |	OffsetOfAdvances.TransactionDocument,
 		   |	OffsetOfAdvances.Key,
 		   |	OffsetOfAdvances.Amount,
@@ -222,7 +226,7 @@ Function R2021B_CustomersTransactions()
 		   |	OffsetOfAdvances.Currency,
 		   |	OffsetOfAdvances.LegalName,
 		   |	OffsetOfAdvances.Partner,
-		   |	OffsetOfAdvances.Agreement,
+		   |	OffsetOfAdvances.TransactionAgreement AS Agreement,
 		   |	OffsetOfAdvances.TransactionDocument AS Basis,
 		   |	OffsetOfAdvances.Key,
 		   |	OffsetOfAdvances.Amount,
@@ -258,6 +262,7 @@ Function R1020B_AdvancesToVendors()
 	Return "SELECT
 		   |	VALUE(AccumulationRecordType.Expense) AS RecordType,
 		   |	OffsetOfAdvances.Recorder AS CustomersAdvancesClosing,
+		   |	OffsetOfAdvances.AdvanceAgreement AS Agreement,
 		   |	*
 		   |INTO R1020B_AdvancesToVendors
 		   |FROM
@@ -276,6 +281,7 @@ Function R2020B_AdvancesFromCustomers()
 		   |	Transactions.Partner,
 		   |	Transactions.LegalName,
 		   |	Transactions.Currency,
+		   |	Transactions.AdvanceAgreement AS Agreement,
 		   |	Transactions.Amount,
 		   |	Transactions.Key,
 		   |	UNDEFINED AS CustomersAdvancesClosing
@@ -295,6 +301,7 @@ Function R2020B_AdvancesFromCustomers()
 		   |	OffsetOfAdvances.Partner,
 		   |	OffsetOfAdvances.LegalName,
 		   |	OffsetOfAdvances.Currency,
+		   |	OffsetOfAdvances.AdvanceAgreement,
 		   |	OffsetOfAdvances.Amount,
 		   |	OffsetOfAdvances.Key,
 		   |	OffsetOfAdvances.Recorder
@@ -412,6 +419,7 @@ Function T2014S_AdvancesInfo()
 		   |	Transactions.Partner,
 		   |	Transactions.LegalName,
 		   |	Transactions.Currency,
+		   |	Transactions.AdvanceAgreement,
 		   |	TRUE AS IsCustomerAdvance,
 		   |	Transactions.Key,
 		   |	Transactions.Amount

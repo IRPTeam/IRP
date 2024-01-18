@@ -62,6 +62,16 @@ Scenario: _092000 preparation (SerialLotNumbers)
 		When Create catalog SerialLotNumbers objects
 		When Create catalog ExpenseAndRevenueTypes objects
 		When Create information register Taxes records (VAT)
+	* Checkbox Use serial lot number in the Item type
+		When checkbox Use serial lot number in the Item type Clothes
+		* Check saving
+			And I go to line in "List" table
+				| 'Description'    |
+				| 'Clothes'        |
+			And I select current line in "List" table
+			Then the form attribute named "Parent" became equal to ""
+			Then the form attribute named "UseSerialLotNumber" became equal to "Yes"
+		And I close all client application windows
 	* Load documents
 		When Create Physical inventory and Stock adjustment as write-off for link
 		And I execute 1C:Enterprise script at server
@@ -85,16 +95,6 @@ Scenario: _092000 preparation (SerialLotNumbers)
 				| "Documents.ShipmentConfirmation.FindByNumber(2054).GetObject().Write(DocumentWriteMode.Posting);"     |
 		And I execute 1C:Enterprise script at server
 				| "Documents.ShipmentConfirmation.FindByNumber(2055).GetObject().Write(DocumentWriteMode.Posting);"     |
-	* Checkbox Use serial lot number in the Item type
-		When checkbox Use serial lot number in the Item type Clothes
-		* Check saving
-			And I go to line in "List" table
-				| 'Description'    |
-				| 'Clothes'        |
-			And I select current line in "List" table
-			Then the form attribute named "Parent" became equal to ""
-			Then the form attribute named "UseSerialLotNumber" became equal to "Yes"
-		And I close all client application windows
 		When Create document PurchaseInvoice objects (use serial lot number)
 		And I execute 1C:Enterprise script at server
 			| "Documents.PurchaseInvoice.FindByNumber(29).GetObject().Write(DocumentWriteMode.Posting);"    |
@@ -2856,11 +2856,11 @@ Scenario: _092020 check choice form Serial Lot number
 			And I select current line in "List" table
 			And I set checkbox "Inactive"
 			And I click "Save and close" button
-	* Check box Use serial lot number for shoes
+	* Check box Use serial lot number for Bags
 		Given I open hyperlink "e1cib/list/Catalog.ItemTypes"
 		And I go to line in "List" table
 			| 'Description'    |
-			| 'Shoes'          |
+			| 'Bags'          |
 		And I select current line in "List" table
 		And I set checkbox "Use serial lot number"
 		And I click "Save and close" button	
@@ -2885,13 +2885,13 @@ Scenario: _092020 check choice form Serial Lot number
 			And in the table "ItemList" I click the button named "ItemListAdd"
 			And I click choice button of the attribute named "ItemListItem" in "ItemList" table
 			And I go to line in "List" table
-				| 'Description'     |
-				| 'Boots'           |
+				| 'Description'   |
+				| 'Bag'           |
 			And I select current line in "List" table
 			And I click choice button of the attribute named "ItemListItemKey" in "ItemList" table
 			And I go to line in "List" table
-				| 'Item'     | 'Item key'     |
-				| 'Boots'    | '38/18SD'      |
+				| 'Item'   | 'Item key' |
+				| 'Bag'    | 'ODS'      |
 			And I select current line in "List" table
 			And in the table "ItemList" I click the button named "ItemListAdd"
 			And I click choice button of the attribute named "ItemListItem" in "ItemList" table
@@ -2949,8 +2949,8 @@ Scenario: _092020 check choice form Serial Lot number
 			And I close current window
 			And I close "Select serial lot numbers *" window
 			And I go to line in "ItemList" table
-				| 'Item'     | 'Item key'     |
-				| 'Boots'    | '38/18SD'      |
+				| 'Item'   | 'Item key' |
+				| 'Bag'    | 'ODS'      |
 			And I select current line in "ItemList" table
 			And I click choice button of the attribute named "ItemListSerialLotNumbersPresentation" in "ItemList" table	
 			And in the table "SerialLotNumbers" I click the button named "SerialLotNumbersAdd"
@@ -2963,10 +2963,9 @@ Scenario: _092020 check choice form Serial Lot number
 			| '8999'            | 'M/White'    |
 			| '8999'            | 'M/Brown'    |
 			And "List" table contains lines
-			| 'Serial number'   | 'Owner'    |
-			| '10'              | ''         |
-			| '08'              | 'Shoes'    |
-			| '06'              | 'Boots'    |
+			| 'Serial number' | 'Owner' |
+			| '10'            | ''      |
+			| '12345456'      | 'Bags'  |
 			And I close "Item serial/lot numbers" window
 			And I close "Select serial lot numbers *" window
 			And I go to line in "ItemList" table
@@ -4141,7 +4140,7 @@ Scenario: _092090 uncheck checkbox Use serial lot number in the Item type
 	* Check box Use serial lot number
 		And I go to line in "List" table
 			| 'Description'    |
-			| 'Clothes'        |
+			| 'Bags'        |
 		And I select current line in "List" table
 		And I remove checkbox "Use serial lot number"
 		And I click "Save and close" button	
@@ -4153,15 +4152,15 @@ Scenario: _092090 uncheck checkbox Use serial lot number in the Item type
 		And I click "Save and close" button	
 	* Check saving
 		And I go to line in "List" table
-			| 'Description'    |
-			| 'Clothes'        |
+			| 'Description' |
+			| 'Bags'        |
 		And I select current line in "List" table
 		Then the form attribute named "Parent" became equal to ""
 		Then the form attribute named "UseSerialLotNumber" became equal to "No"
 		And I close current window
 		And I go to line in "List" table
-			| 'Description'    |
-			| 'Shoes'          |
+			| 'Description'   |
+			| 'Bags'          |
 		And I select current line in "List" table
 		Then the form attribute named "Parent" became equal to ""
 		Then the form attribute named "UseSerialLotNumber" became equal to "No"

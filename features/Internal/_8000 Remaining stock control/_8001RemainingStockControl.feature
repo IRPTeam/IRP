@@ -2778,7 +2778,7 @@ Scenario:_800062 checkmark removal control Stock balance detail in the Serial lo
 	And I select current line in "List" table
 	And I remove checkbox "Stock balance detail"
 	And I click "Save and close" button
-	Then I wait that in user messages the "Current serial lot number already has movements, it can not disable stock detail option" substring will appear in 10 seconds
+	Then I wait that in user messages the "[Stock balance detail] cannot be changed, has posted documents" substring will appear in 10 seconds
 	And I close all client application windows
 	
 

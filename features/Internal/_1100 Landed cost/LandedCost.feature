@@ -2493,5 +2493,41 @@ Scenario: _030 check landed cost (double return)
 		And I close all client application windows
 				
 	
-				
-				
+Scenario: _032 check landed cost SR and RRR with the same items in different lines
+	And I close all client application windows
+	* Load documents for double return
+		When Data preparation for landed cost SR and RRR with the same items in different lines
+		And I execute 1C:Enterprise script at server
+			| "Documents.PurchaseInvoice.FindByNumber(9013).GetObject().Write(DocumentWriteMode.Posting);"    |
+		And I execute 1C:Enterprise script at server
+			| "Documents.SalesInvoice.FindByNumber(9013).GetObject().Write(DocumentWriteMode.Posting);"    |
+		And I execute 1C:Enterprise script at server
+			| "Documents.SalesReturn.FindByNumber(9013).GetObject().Write(DocumentWriteMode.Posting);"    |
+		And I execute 1C:Enterprise script at server
+			| "Documents.RetailSalesReceipt.FindByNumber(9013).GetObject().Write(DocumentWriteMode.Posting);"    |
+		And I execute 1C:Enterprise script at server
+			| "Documents.RetailReturnReceipt.FindByNumber(9013).GetObject().Write(DocumentWriteMode.Posting);"    |
+		And I execute 1C:Enterprise script at server
+			| "Documents.CalculationMovementCosts.FindByNumber(3).GetObject().Write(DocumentWriteMode.Posting);"    |
+	* Check movement cost calculation
+		Given I open hyperlink "e1cib/app/Report.BatchBalance"
+		And I click "Select option..." button
+		And I move to "Custom" tab
+		And I go to line in "OptionsList" table
+			| 'Report option'    |
+			| 'Test'             |
+		And I click "Load setting" button
+		And I click "Generate" button	
+		And I click Choice button of the field named "SettingsComposerUserSettingsItem2Value"
+		And I go to line in "List" table
+			| 'Description'    |
+			| 'Store 06'       |
+		And I select current line in "List" table
+		And I click Choice button of the field named "SettingsComposerUserSettingsItem0Value"
+		Then "Select period" window is opened
+		And I input "18.08.2021" text in the field named "DateBegin"
+		And I input "19.08.2021" text in the field named "DateEnd"
+		And I click the button named "Select"
+		And I click "Generate" button
+		And "Result" spreadsheet document contains "BathBalance_073_2" template lines by template
+		And I close all client application windows				

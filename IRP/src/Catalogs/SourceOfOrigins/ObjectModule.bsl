@@ -15,3 +15,7 @@ Procedure BeforeDelete(Cancel)
 		Return;
 	EndIf;
 EndProcedure
+
+Procedure FillCheckProcessing(Cancel, CheckedAttributes)
+	CheckDataPrivileged.FillCheckProcessing_Catalog_SourceOfOrigins(Cancel, ThisObject);
+EndProcedure

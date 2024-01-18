@@ -28,7 +28,7 @@
   <content>Document.CashReceipt.TabularSection.PaymentList.Attribute.Agreement</content>
   <content>Document.SalesReturnOrder.Attribute.Agreement</content>
   <content>Document.OpeningEntry.TabularSection.AccountPayableByDocuments.Attribute.Agreement</content>
-  <content>InformationRegister.T2010S_OffsetOfAdvances.Dimension.Agreement</content>
+  <content>InformationRegister.T2010S_OffsetOfAdvances.Dimension.TransactionAgreement</content>
   <content>InformationRegister.TaxSettings.Dimension.Agreement</content>
   <content>Document.RetailSalesReceipt.Attribute.Agreement</content>
   <content>Catalog.Agreements.Command.OpenAgreementsList</content>

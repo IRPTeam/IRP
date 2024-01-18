@@ -41,6 +41,7 @@ EndProcedure
 Procedure FillCheckProcessing(Cancel, CheckedAttributes)
 	CommissionTradeServer.FillCheckProcessing_ConsignorsInfo(Cancel, ThisObject);
 	CommonFunctionsServer.CheckUniqueDescriptions(Cancel, ThisObject);
+	CheckDataPrivileged.FillCheckProcessing_Catalog_Items(Cancel, ThisObject);
 EndProcedure
 
 #EndRegion

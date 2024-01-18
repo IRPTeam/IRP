@@ -774,6 +774,7 @@ Function R1020B_AdvancesToVendors()
 		|	OffsetOfAdvances.Currency,
 		|	OffsetOfAdvances.LegalName,
 		|	OffsetOfAdvances.Partner,
+		|	OffsetOfAdvances.AdvanceAgreement AS Agreement,
 		|	OffsetOfAdvances.Amount
 		|INTO R1020B_AdvancesToVendors
 		|FROM
@@ -823,7 +824,7 @@ Function R1021B_VendorsTransactions()
 		   |	OffsetOfAdvances.Currency,
 		   |	OffsetOfAdvances.LegalName,
 		   |	OffsetOfAdvances.Partner,
-		   |	OffsetOfAdvances.Agreement,
+		   |	OffsetOfAdvances.TransactionAgreement,
 		   |	OffsetOfAdvances.TransactionDocument,
 		   |	OffsetOfAdvances.TransactionOrder,
 		   |	OffsetOfAdvances.Amount,

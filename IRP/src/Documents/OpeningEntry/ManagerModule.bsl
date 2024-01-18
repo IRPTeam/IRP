@@ -313,21 +313,27 @@ Function AccountBalance()
 EndFunction
 
 Function AdvancesToVendors()
-	Return "SELECT
-		   |	OpeningEntryAdvanceToSuppliers.Ref.Company AS Company,
-		   |	OpeningEntryAdvanceToSuppliers.Ref.Branch AS Branch,
-		   |	OpeningEntryAdvanceToSuppliers.Currency,
-		   |	OpeningEntryAdvanceToSuppliers.Partner,
-		   |	OpeningEntryAdvanceToSuppliers.LegalName,
-		   |	OpeningEntryAdvanceToSuppliers.LegalNameContract,
-		   |	OpeningEntryAdvanceToSuppliers.Amount AS Amount,
-		   |	OpeningEntryAdvanceToSuppliers.Ref.Date AS Period,
-		   |	OpeningEntryAdvanceToSuppliers.Key
-		   |INTO AdvancesToVendors
-		   |FROM
-		   |	Document.OpeningEntry.AdvanceToSuppliers AS OpeningEntryAdvanceToSuppliers
-		   |WHERE
-		   |	OpeningEntryAdvanceToSuppliers.Ref = &Ref";
+	Return 
+		"SELECT
+		|	OpeningEntryAdvanceToSuppliers.Ref.Company AS Company,
+		|	OpeningEntryAdvanceToSuppliers.Ref.Branch AS Branch,
+		|	OpeningEntryAdvanceToSuppliers.Currency,
+		|	OpeningEntryAdvanceToSuppliers.Partner,
+		|	OpeningEntryAdvanceToSuppliers.LegalName,
+		|	OpeningEntryAdvanceToSuppliers.LegalNameContract,
+		|	case
+		|		when OpeningEntryAdvanceToSuppliers.Agreement.ApArPostingDetail = VALUE(Enum.ApArPostingDetail.ByDocuments)
+		|			Then OpeningEntryAdvanceToSuppliers.Agreement
+		|		else Undefined
+		|	end AS Agreement,
+		|	OpeningEntryAdvanceToSuppliers.Amount AS Amount,
+		|	OpeningEntryAdvanceToSuppliers.Ref.Date AS Period,
+		|	OpeningEntryAdvanceToSuppliers.Key
+		|INTO AdvancesToVendors
+		|FROM
+		|	Document.OpeningEntry.AdvanceToSuppliers AS OpeningEntryAdvanceToSuppliers
+		|WHERE
+		|	OpeningEntryAdvanceToSuppliers.Ref = &Ref";
 EndFunction
 
 Function VendorsTransactions()
@@ -402,21 +408,27 @@ Function OtherVendorsTransactions()
 EndFunction
 
 Function AdvancesFromCustomers()
-	Return "SELECT
-		   |	OpeningEntryAdvanceFromCustomers.Ref.Company AS Company,
-		   |	OpeningEntryAdvanceFromCustomers.Ref.Branch AS Branch,
-		   |	OpeningEntryAdvanceFromCustomers.Currency,
-		   |	OpeningEntryAdvanceFromCustomers.Partner,
-		   |	OpeningEntryAdvanceFromCustomers.LegalName,
-		   |	OpeningEntryAdvanceFromCustomers.LegalNameContract,
-		   |	OpeningEntryAdvanceFromCustomers.Amount AS Amount,
-		   |	OpeningEntryAdvanceFromCustomers.Ref.Date AS Period,
-		   |	OpeningEntryAdvanceFromCustomers.Key
-		   |INTO AdvancesFromCustomers
-		   |FROM
-		   |	Document.OpeningEntry.AdvanceFromCustomers AS OpeningEntryAdvanceFromCustomers
-		   |WHERE
-		   |	OpeningEntryAdvanceFromCustomers.Ref = &Ref";
+	Return 
+		"SELECT
+		|	OpeningEntryAdvanceFromCustomers.Ref.Company AS Company,
+		|	OpeningEntryAdvanceFromCustomers.Ref.Branch AS Branch,
+		|	OpeningEntryAdvanceFromCustomers.Currency,
+		|	OpeningEntryAdvanceFromCustomers.Partner,
+		|	OpeningEntryAdvanceFromCustomers.LegalName,
+		|	OpeningEntryAdvanceFromCustomers.LegalNameContract,
+		|	case
+		|		when OpeningEntryAdvanceFromCustomers.Agreement.ApArPostingDetail = VALUE(Enum.ApArPostingDetail.ByDocuments)
+		|			Then OpeningEntryAdvanceFromCustomers.Agreement
+		|		else Undefined
+		|	end AS Agreement,
+		|	OpeningEntryAdvanceFromCustomers.Amount AS Amount,
+		|	OpeningEntryAdvanceFromCustomers.Ref.Date AS Period,
+		|	OpeningEntryAdvanceFromCustomers.Key
+		|INTO AdvancesFromCustomers
+		|FROM
+		|	Document.OpeningEntry.AdvanceFromCustomers AS OpeningEntryAdvanceFromCustomers
+		|WHERE
+		|	OpeningEntryAdvanceFromCustomers.Ref = &Ref";
 EndFunction
 
 Function CustomersTransactions()
@@ -1088,6 +1100,7 @@ Function T2014S_AdvancesInfo()
 		   |	AdvancesToVendors.Company,
 		   |	AdvancesToVendors.Branch,
 		   |	AdvancesToVendors.Currency,
+		   |	AdvancesToVendors.Agreement AS AdvanceAgreement,
 		   |	AdvancesToVendors.Partner,
 		   |	AdvancesToVendors.LegalName,
 		   |	TRUE AS IsVendorAdvance,
@@ -1107,6 +1120,7 @@ Function T2014S_AdvancesInfo()
 		   |	AdvancesFromCustomers.Company,
 		   |	AdvancesFromCustomers.Branch,
 		   |	AdvancesFromCustomers.Currency,
+		   |	AdvancesFromCustomers.Agreement,
 		   |	AdvancesFromCustomers.Partner,
 		   |	AdvancesFromCustomers.LegalName,
 		   |	FALSE,

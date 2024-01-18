@@ -6,7 +6,7 @@ Procedure ChoiceDataGetProcessing(ChoiceData, Parameters, StandardProcessing)
 
 	StandardProcessing = False;
 	CommonFormActionsServer.CutLastSymbolsIfCameFromExcel(Parameters);
-	CatalogsServer.SetParametersForDataChoicing(Catalogs.Specifications, Parameters);
+	CatalogsServer.SetParametersForDataChoosing(Catalogs.Specifications, Parameters);
 	QueryTable = GetChoiceDataTable(Parameters);
 	ChoiceData = CommonFormActionsServer.QueryTableToChoiceData(QueryTable);	
 EndProcedure

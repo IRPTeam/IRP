@@ -2,18 +2,18 @@
 
 #Region Public
 
-// Add not active filter for data choicing.
+// Add not active filter for data choosing.
 // 
 // Parameters:
 //  Source - CatalogManager - Source
 //  Parameters - Structure - Parameters
-Procedure SetParametersForDataChoicing(Source, Parameters) Export
+Procedure SetParametersForDataChoosing(Source, Parameters) Export
 	SourceMetadata = Source.EmptyRef().Metadata();
 	If Not Metadata.Catalogs.Contains(SourceMetadata) Then
 		Return;
 	EndIf;
 	
-	SetParameterFilterForHiddingNotActive(Parameters, SourceMetadata);
+	SetParameterFilterForHidingNotActive(Parameters, SourceMetadata);
 EndProcedure
 
 // On create at server object.
@@ -71,7 +71,7 @@ EndProcedure
 
 #Region Private
 
-Procedure SetParameterFilterForHiddingNotActive(Parameters, SourceMetadata)
+Procedure SetParameterFilterForHidingNotActive(Parameters, SourceMetadata)
 	ShowNotActive = SessionParameters.NotActiveCatalogsShowing.Get(SourceMetadata.FullName());
 	If ShowNotActive = False Then
 		If Not Parameters.Property("Filter") Then

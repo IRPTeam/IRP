@@ -10,7 +10,7 @@ Procedure ChoiceDataGetProcessing(ChoiceData, Parameters, StandardProcessing)
 	
 	StandardProcessing = False;
 	CommonFormActionsServer.CutLastSymbolsIfCameFromExcel(Parameters);
-	CatalogsServer.SetParametersForDataChoicing(Catalogs.PaymentTypes, Parameters);
+	CatalogsServer.SetParametersForDataChoosing(Catalogs.PaymentTypes, Parameters);
 	
 	Filter = "";
 	For Each FilterItem In Parameters.Filter Do

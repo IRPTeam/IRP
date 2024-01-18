@@ -4,7 +4,7 @@ Procedure ChoiceDataGetProcessing(ChoiceData, Parameters, StandardProcessing)
 		
 		StandardProcessing = False;
 		
-		CatalogsServer.SetParametersForDataChoicing(Catalogs.PlanningPeriods, Parameters);
+		CatalogsServer.SetParametersForDataChoosing(Catalogs.PlanningPeriods, Parameters);
 		
 		Filter = "";
 		For Each FilterItem In Parameters.Filter Do

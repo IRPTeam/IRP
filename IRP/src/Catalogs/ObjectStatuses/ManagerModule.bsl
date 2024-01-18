@@ -1,5 +1,5 @@
 Procedure ChoiceDataGetProcessing(ChoiceData, Parameters, StandardProcessing)
-	CatalogsServer.SetParametersForDataChoicing(Catalogs.ObjectStatuses, Parameters);
+	CatalogsServer.SetParametersForDataChoosing(Catalogs.ObjectStatuses, Parameters);
 	
 	If Parameters.Property("Filter") And Parameters.Filter.Property("Ref") Then
 		StandardProcessing = False;

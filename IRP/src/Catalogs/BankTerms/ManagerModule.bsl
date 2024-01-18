@@ -11,7 +11,7 @@ Procedure ChoiceDataGetProcessing(ChoiceData, Parameters, StandardProcessing)
 	
 	StandardProcessing = False;
 	CommonFormActionsServer.CutLastSymbolsIfCameFromExcel(Parameters);
-	CatalogsServer.SetParametersForDataChoicing(Catalogs.BankTerms, Parameters);
+	CatalogsServer.SetParametersForDataChoosing(Catalogs.BankTerms, Parameters);
 	
 	Query = New Query;
 	If ValueIsFilled(Parameters.Filter.PaymentType) And ValueIsFilled(Parameters.Filter.Branch) Then

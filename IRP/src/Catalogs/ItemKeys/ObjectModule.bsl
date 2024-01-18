@@ -1,3 +1,4 @@
+
 Procedure BeforeWrite(Cancel)
 	If DataExchange.Load Then
 		Return;
@@ -109,6 +110,7 @@ Procedure BeforeWrite(Cancel)
 	Catalogs.ItemKeys.UpdateDescriptions(ThisObject);
 
 EndProcedure
+
 Procedure OnWrite(Cancel)
 	If DataExchange.Load Then
 		Return;
@@ -133,4 +135,5 @@ EndProcedure
 
 Procedure FillCheckProcessing(Cancel, CheckedAttributes)
 	CommissionTradeServer.FillCheckProcessing_ConsignorsInfo(Cancel, ThisObject);
+	CheckDataPrivileged.FillCheckProcessing_Catalog_ItemKeys(Cancel, ThisObject);
 EndProcedure

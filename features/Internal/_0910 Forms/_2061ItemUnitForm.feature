@@ -153,3 +153,32 @@ Scenario: _206105 try to change unit in item with actual/inventory movements
 		And I click "Save" button
 		Then the form attribute named "InheritUnit" became equal to "pcs"
 		And I close all client application windows
+
+Scenario: _206106 try to change item type in item that used in the documents
+	And I close all client application windows
+	* Select item
+		Given I open hyperlink "e1cib/list/Catalog.Items"
+		And I go to line in "List" table
+			| 'Description'   |
+			| 'Dress'         |
+		And I select current line in "List" table
+	* Try change item type
+		And I select from "Item type" drop-down list by "service" string
+		And I click "Save and close" button
+		Then I wait that in user messages the "[Item type] cannot be changed, has posted documents" substring will appear in 10 seconds
+
+Scenario: _206107 try to change type in item type that used in the documents
+	And I close all client application windows
+	* Select item
+		Given I open hyperlink "e1cib/list/Catalog.ItemTypes"
+		And I go to line in "List" table
+			| 'Description'   |
+			| 'Clothes'       |
+		And I select current line in "List" table
+	* Try change item type
+		And I change the radio button named "Type" value to "Service"		
+		And I click "Save and close" button
+		Then I wait that in user messages the "[Stock balance detail] cannot be changed, has posted documents" substring will appear in 10 seconds
+				
+		
+				

@@ -425,7 +425,8 @@ Function GetItemAttributes(Item)
 	If AvailableAttributes <> Undefined Then
 		ArrayOfAttributes = New Array();
 		For Each Row In AvailableAttributes Do
-			AttributeStructure = New Structure("Attribute, InterfaceGroup", Row.Attribute, Undefined);
+			AttributeStructure = AddAttributesAndPropertiesServer.GetAttributeInfo();
+			AttributeStructure.Attribute = Row.Attribute;
 			ArrayOfAttributes.Add(AttributeStructure);
 		EndDo;
 

@@ -175,7 +175,7 @@ Scenario: _0154002 check that additional attributes and properties and propertie
 		And I click choice button of "Property" attribute in "Properties" table
 		And I go to line in "List" table
 			| 'Description'    |
-			| 'Test'           |
+			| 'Test 1'         |
 		And I select current line in "List" table
 		And I finish line editing in "Properties" table
 		And I click "Save and close" button
@@ -185,7 +185,7 @@ Scenario: _0154002 check that additional attributes and properties and propertie
 		And I click "Add properties" button
 		And "Properties" table became equal
 			| 'Property'   | 'Value'    |
-			| 'Test'       | ''         |
+			| 'Test 1'     | ''         |
 	And I close all client application windows
 
 Scenario: _0154003 check that additional attributes and properties are displayed on the form without reopening (catalog Item type)
@@ -216,7 +216,7 @@ Scenario: _0154003 check that additional attributes and properties are displayed
 		And I click choice button of "Property" attribute in "Properties" table
 		And I go to line in "List" table
 			| 'Description'    |
-			| 'Test'           |
+			| 'Test 1'         |
 		And I select current line in "List" table
 		And I finish line editing in "Properties" table
 		And I input "Item types" text in the field named "Description_en"
@@ -227,7 +227,7 @@ Scenario: _0154003 check that additional attributes and properties are displayed
 		And I click "Add properties" button
 		And "Properties" table became equal
 			| 'Property'   | 'Value'    |
-			| 'Test'       | ''         |
+			| 'Test 1'     | ''         |
 	And I close all client application windows
 		
 
@@ -270,7 +270,7 @@ Scenario: _0154004 check that additional attributes and properties are displayed
 		And I click choice button of "Property" attribute in "Properties" table
 		And I go to line in "List" table
 			| 'Description'    |
-			| 'Test'           |
+			| 'Test 1'           |
 		And I select current line in "List" table
 		And I finish line editing in "Properties" table
 		And I click "Save and close" button
@@ -280,7 +280,7 @@ Scenario: _0154004 check that additional attributes and properties are displayed
 		And I click "Add properties" button
 		And "Properties" table became equal
 			| 'Property'   | 'Value'    |
-			| 'Test'       | ''         |
+			| 'Test 1'       | ''         |
 	And I close all client application windows
 
 
@@ -308,7 +308,7 @@ Scenario: _01540050 check that additional attributes and properties are displaye
 		And I click choice button of "Property" attribute in "Properties" table
 		And I go to line in "List" table
 			| 'Description'    |
-			| 'Test'           |
+			| 'Test 1'           |
 		And I select current line in "List" table
 		And I finish line editing in "Properties" table
 		And I input "UserGroups" text in the field named "Description_en"
@@ -327,7 +327,7 @@ Scenario: _01540051 check that additional attributes and properties are displaye
 		And I click the button named "FormCreate"
 		And I move to "Other" tab
 		And field "Test" is not present on the form
-	* Adding by selected Sales invoice additional Test attribute without closing the form
+	* Adding by selected additional Test attribute without closing the form
 		Given I open hyperlink "e1cib/list/Catalog.AddAttributeAndPropertySets"
 		And I go to line in "List" table
 			| Predefined data name              |
@@ -345,7 +345,7 @@ Scenario: _01540051 check that additional attributes and properties are displaye
 		And I click choice button of "Property" attribute in "Properties" table
 		And I go to line in "List" table
 			| 'Description'    |
-			| 'Test'           |
+			| 'Test 1'           |
 		And I select current line in "List" table
 		And I finish line editing in "Properties" table
 		And I input "InternalSupplyRequest" text in the field named "Description_en"
@@ -363,7 +363,7 @@ Scenario: _01540051 check that additional attributes and properties are displaye
 		And I click "Add properties" button
 		And "Properties" table became equal
 			| 'Property'   | 'Value'    |
-			| 'Test'       | ''         |
+			| 'Test 1'     | ''         |
 		And I activate "Value" field in "Properties" table
 		And I select current line in "Properties" table
 		And I click choice button of "Value" attribute in "Properties" table
@@ -377,7 +377,7 @@ Scenario: _01540051 check that additional attributes and properties are displaye
 		And I click "Add properties" button
 		And "Properties" table became equal
 			| 'Property'   | 'Value'     |
-			| 'Test'       | 'Test 1'    |
+			| 'Test 1'       | 'Test 1'    |
 	And I close all client application windows
 
 Scenario: _01540052 check that additional attributes and properties are displayed on the form without reopening (document DebitNote)
@@ -405,7 +405,7 @@ Scenario: _01540052 check that additional attributes and properties are displaye
 		And I click choice button of "Property" attribute in "Properties" table
 		And I go to line in "List" table
 			| 'Description'    |
-			| 'Test'           |
+			| 'Test 1'           |
 		And I select current line in "List" table
 		And I finish line editing in "Properties" table
 		And I input "DebitNote" text in the field named "Description_en"
@@ -423,7 +423,7 @@ Scenario: _01540052 check that additional attributes and properties are displaye
 		And I click "Add properties" button
 		And "Properties" table became equal
 			| 'Property'   | 'Value'    |
-			| 'Test'       | ''         |
+			| 'Test 1'       | ''         |
 		And I activate "Value" field in "Properties" table
 		And I select current line in "Properties" table
 		And I click choice button of "Value" attribute in "Properties" table
@@ -437,7 +437,7 @@ Scenario: _01540052 check that additional attributes and properties are displaye
 		And I click "Add properties" button
 		And "Properties" table became equal
 			| 'Property'   | 'Value'     |
-			| 'Test'       | 'Test 1'    |
+			| 'Test 1'       | 'Test 1'    |
 	And I close all client application windows
 
 Scenario: _01540053 check that additional attributes and properties are displayed on the form without reopening (document CreditNote)
@@ -465,7 +465,7 @@ Scenario: _01540053 check that additional attributes and properties are displaye
 		And I click choice button of "Property" attribute in "Properties" table
 		And I go to line in "List" table
 			| 'Description'    |
-			| 'Test'           |
+			| 'Test 1'           |
 		And I select current line in "List" table
 		And I finish line editing in "Properties" table
 		And I input "CreditNote" text in the field named "Description_en"
@@ -483,7 +483,7 @@ Scenario: _01540053 check that additional attributes and properties are displaye
 		And I click "Add properties" button
 		And "Properties" table became equal
 			| 'Property'   | 'Value'    |
-			| 'Test'       | ''         |
+			| 'Test 1'       | ''         |
 		And I activate "Value" field in "Properties" table
 		And I select current line in "Properties" table
 		And I click choice button of "Value" attribute in "Properties" table
@@ -497,7 +497,7 @@ Scenario: _01540053 check that additional attributes and properties are displaye
 		And I click "Add properties" button
 		And "Properties" table became equal
 			| 'Property'   | 'Value'     |
-			| 'Test'       | 'Test 1'    |
+			| 'Test 1'       | 'Test 1'    |
 	And I close all client application windows
 
 Scenario: _01540054 check that additional attributes and properties are displayed on the form without reopening (Catalog_Workstations)
@@ -524,7 +524,7 @@ Scenario: _01540054 check that additional attributes and properties are displaye
 		And I click choice button of "Property" attribute in "Properties" table
 		And I go to line in "List" table
 			| 'Description'    |
-			| 'Test'           |
+			| 'Test 1'           |
 		And I select current line in "List" table
 		And I finish line editing in "Properties" table
 		And I input "Workstations" text in the field named "Description_en"
@@ -540,7 +540,7 @@ Scenario: _01540054 check that additional attributes and properties are displaye
 		And I click "Add properties" button
 		And "Properties" table became equal
 			| 'Property'   | 'Value'    |
-			| 'Test'       | ''         |
+			| 'Test 1'       | ''         |
 	And I close all client application windows
 
 
@@ -567,7 +567,7 @@ Scenario: _01540055 check that additional attributes and properties are displaye
 		And I click choice button of "Property" attribute in "Properties" table
 		And I go to line in "List" table
 			| 'Description'    |
-			| 'Test'           |
+			| 'Test 1'           |
 		And I select current line in "List" table
 		And I finish line editing in "Properties" table
 		And I input "Hardware" text in the field named "Description_en"
@@ -584,7 +584,7 @@ Scenario: _01540055 check that additional attributes and properties are displaye
 		And I click "Add properties" button
 		And "Properties" table became equal
 			| 'Property'   | 'Value'    |
-			| 'Test'       | ''         |
+			| 'Test 1'     | ''         |
 	And I close all client application windows
 
 
@@ -612,7 +612,7 @@ Scenario: _01540056 check that additional attributes and properties are displaye
 		And I click choice button of "Property" attribute in "Properties" table
 		And I go to line in "List" table
 			| 'Description'    |
-			| 'Test'           |
+			| 'Test 1'           |
 		And I select current line in "List" table
 		And I finish line editing in "Properties" table
 		And I input "CashStatementStatuses" text in the field named "Description_en"
@@ -622,13 +622,13 @@ Scenario: _01540056 check that additional attributes and properties are displaye
 		And field "Test" is present on the form
 		And I close current window
 		And I go to line in "List" table
-			| 'Description'    |
-			| 'Test'           |
+			| 'Description' |
+			| 'Test'        |	
 		And I select current line in "List" table
 		And I click "Add properties" button
 		And "Properties" table became equal
 			| 'Property'   | 'Value'    |
-			| 'Test'       | ''         |
+			| 'Test 1'       | ''         |
 	And I close all client application windows
 
 Scenario: _0154006 check that additional attributes and properties are displayed on the form without reopening (document Sales invoice)
@@ -656,7 +656,7 @@ Scenario: _0154006 check that additional attributes and properties are displayed
 		And I click choice button of "Property" attribute in "Properties" table
 		And I go to line in "List" table
 			| 'Description'    |
-			| 'Test'           |
+			| 'Test 1'           |
 		And I select current line in "List" table
 		And I finish line editing in "Properties" table
 		And I input "Sales invoice" text in the field named "Description_en"
@@ -674,7 +674,7 @@ Scenario: _0154006 check that additional attributes and properties are displayed
 		And I click "Add properties" button
 		And "Properties" table became equal
 			| 'Property'   | 'Value'    |
-			| 'Test'       | ''         |
+			| 'Test 1'       | ''         |
 		And I activate "Value" field in "Properties" table
 		And I select current line in "Properties" table
 		And I click choice button of "Value" attribute in "Properties" table
@@ -688,7 +688,7 @@ Scenario: _0154006 check that additional attributes and properties are displayed
 		And I click "Add properties" button
 		And "Properties" table became equal
 			| 'Property'   | 'Value'     |
-			| 'Test'       | 'Test 1'    |
+			| 'Test 1'     | 'Test 1'    |
 	And I close all client application windows
 
 Scenario: _01540060 check that additional attributes and properties are displayed on the form without reopening (document PurchaseInvoice)
@@ -716,7 +716,7 @@ Scenario: _01540060 check that additional attributes and properties are displaye
 		And I click choice button of "Property" attribute in "Properties" table
 		And I go to line in "List" table
 			| 'Description'    |
-			| 'Test'           |
+			| 'Test 1'           |
 		And I select current line in "List" table
 		And I finish line editing in "Properties" table
 		And I input "Purchase Invoice" text in the field named "Description_en"
@@ -734,7 +734,7 @@ Scenario: _01540060 check that additional attributes and properties are displaye
 		And I click "Add properties" button
 		And "Properties" table became equal
 			| 'Property'   | 'Value'    |
-			| 'Test'       | ''         |
+			| 'Test 1'     | ''         |
 		And I activate "Value" field in "Properties" table
 		And I select current line in "Properties" table
 		And I click choice button of "Value" attribute in "Properties" table
@@ -748,7 +748,7 @@ Scenario: _01540060 check that additional attributes and properties are displaye
 		And I click "Add properties" button
 		And "Properties" table became equal
 			| 'Property'   | 'Value'     |
-			| 'Test'       | 'Test 1'    |
+			| 'Test 1'     | 'Test 1'    |
 	And I close all client application windows
 
 Scenario: _01540061 check that additional attributes and properties are displayed on the form without reopening (document SalesOrder)
@@ -776,7 +776,7 @@ Scenario: _01540061 check that additional attributes and properties are displaye
 		And I click choice button of "Property" attribute in "Properties" table
 		And I go to line in "List" table
 			| 'Description'    |
-			| 'Test'           |
+			| 'Test 1'           |
 		And I select current line in "List" table
 		And I finish line editing in "Properties" table
 		And I input "Sales Order" text in the field named "Description_en"
@@ -794,7 +794,7 @@ Scenario: _01540061 check that additional attributes and properties are displaye
 		And I click "Add properties" button
 		And "Properties" table became equal
 			| 'Property'   | 'Value'    |
-			| 'Test'       | ''         |
+			| 'Test 1'       | ''         |
 		And I activate "Value" field in "Properties" table
 		And I select current line in "Properties" table
 		And I click choice button of "Value" attribute in "Properties" table
@@ -808,7 +808,7 @@ Scenario: _01540061 check that additional attributes and properties are displaye
 		And I click "Add properties" button
 		And "Properties" table became equal
 			| 'Property'   | 'Value'     |
-			| 'Test'       | 'Test 1'    |
+			| 'Test 1'       | 'Test 1'    |
 	And I close all client application windows
 
 Scenario: _01540062 check that additional attributes and properties are displayed on the form without reopening (document Purchase Order)
@@ -836,7 +836,7 @@ Scenario: _01540062 check that additional attributes and properties are displaye
 		And I click choice button of "Property" attribute in "Properties" table
 		And I go to line in "List" table
 			| 'Description'    |
-			| 'Test'           |
+			| 'Test 1'           |
 		And I select current line in "List" table
 		And I finish line editing in "Properties" table
 		And I input "Purchase Order" text in the field named "Description_en"
@@ -854,7 +854,7 @@ Scenario: _01540062 check that additional attributes and properties are displaye
 		And I click "Add properties" button
 		And "Properties" table became equal
 			| 'Property'   | 'Value'    |
-			| 'Test'       | ''         |
+			| 'Test 1'       | ''         |
 		And I activate "Value" field in "Properties" table
 		And I select current line in "Properties" table
 		And I click choice button of "Value" attribute in "Properties" table
@@ -868,7 +868,7 @@ Scenario: _01540062 check that additional attributes and properties are displaye
 		And I click "Add properties" button
 		And "Properties" table became equal
 			| 'Property'   | 'Value'     |
-			| 'Test'       | 'Test 1'    |
+			| 'Test 1'       | 'Test 1'    |
 	And I close all client application windows
 
 
@@ -896,7 +896,7 @@ Scenario: _01540057 check that additional attributes and properties are displaye
 		And I click choice button of "Property" attribute in "Properties" table
 		And I go to line in "List" table
 			| 'Description'    |
-			| 'Test'           |
+			| 'Test 1'           |
 		And I select current line in "List" table
 		And I finish line editing in "Properties" table
 		And I input "Expense and revenue types" text in the field named "Description_en"
@@ -912,7 +912,7 @@ Scenario: _01540057 check that additional attributes and properties are displaye
 		And I click "Add properties" button
 		And "Properties" table became equal
 			| 'Property'   | 'Value'    |
-			| 'Test'       | ''         |
+			| 'Test 1'     | ''         |
 	And I close all client application windows
 
 Scenario: _01540063 check that additional attributes and properties are displayed on the form without reopening (Catalog_BusinessUnits)
@@ -939,7 +939,7 @@ Scenario: _01540063 check that additional attributes and properties are displaye
 		And I click choice button of "Property" attribute in "Properties" table
 		And I go to line in "List" table
 			| 'Description'    |
-			| 'Test'           |
+			| 'Test 1'         |
 		And I select current line in "List" table
 		And I finish line editing in "Properties" table
 		And I input "Business units" text in the field named "Description_en"
@@ -955,7 +955,7 @@ Scenario: _01540063 check that additional attributes and properties are displaye
 		And I click "Add properties" button
 		And "Properties" table became equal
 			| 'Property'   | 'Value'    |
-			| 'Test'       | ''         |
+			| 'Test 1'     | ''         |
 	And I close all client application windows
 
 Scenario: _01540058 check adding additional properties for Specifications (Catalog_Specifications)
@@ -971,7 +971,7 @@ Scenario: _01540058 check adding additional properties for Specifications (Catal
 		And I click choice button of "Property" attribute in "Properties" table
 		And I go to line in "List" table
 			| Description    |
-			| Test           |
+			| Test 1         |
 		And I select current line in "List" table
 		And I finish line editing in "Properties" table
 		And I input "Specifications" text in the field named "Description_en"
@@ -982,7 +982,7 @@ Scenario: _01540058 check adding additional properties for Specifications (Catal
 		And I click "Add properties" button
 		And "Properties" table contains lines
 		| 'Property'  | 'Value'   |
-		| 'Test'      | ''        |
+		| 'Test 1'    | ''        |
 	And I close all client application windows
 
 
@@ -1010,7 +1010,7 @@ Scenario: _015400640 check that additional attributes and properties are display
 		And I click choice button of "Property" attribute in "Properties" table
 		And I go to line in "List" table
 			| 'Description'    |
-			| 'Test'           |
+			| 'Test 1'         |
 		And I select current line in "List" table
 		And I finish line editing in "Properties" table
 		And I input "Partner terms" text in the field named "Description_en"
@@ -1026,7 +1026,7 @@ Scenario: _015400640 check that additional attributes and properties are display
 		And I click "Add properties" button
 		And "Properties" table became equal
 			| 'Property'   | 'Value'    |
-			| 'Test'       | ''         |
+			| 'Test 1'     | ''         |
 	And I close all client application windows
 
 
@@ -1055,7 +1055,7 @@ Then I check for the "AddAttributeAndPropertyValues" charts of characteristic ty
 		And I click choice button of "Property" attribute in "Properties" table
 		And I go to line in "List" table
 			| 'Description'    |
-			| 'Test'           |
+			| 'Test 1'         |
 		And I select current line in "List" table
 		And I finish line editing in "Properties" table
 		And I input "Cash/Bank accounts" text in the field named "Description_en"
@@ -1071,7 +1071,7 @@ Then I check for the "AddAttributeAndPropertyValues" charts of characteristic ty
 		And I click "Add properties" button
 		And "Properties" table became equal
 			| 'Property'   | 'Value'    |
-			| 'Test'       | ''         |
+			| 'Test 1'     | ''         |
 	And I close all client application windows
 
 Scenario: _015400642 check that additional attributes and properties are displayed on the form without reopening (Catalog_Companies)
@@ -1098,7 +1098,7 @@ Scenario: _015400642 check that additional attributes and properties are display
 		And I click choice button of "Property" attribute in "Properties" table
 		And I go to line in "List" table
 			| 'Description'    |
-			| 'Test'           |
+			| 'Test 1'         |
 		And I select current line in "List" table
 		And I finish line editing in "Properties" table
 		And I input "Companies" text in the field named "Description_en"
@@ -1114,7 +1114,7 @@ Scenario: _015400642 check that additional attributes and properties are display
 		And I click "Add properties" button
 		And "Properties" table became equal
 			| 'Property'   | 'Value'    |
-			| 'Test'       | ''         |
+			| 'Test 1'     | ''         |
 	And I close all client application windows
 
 
@@ -1142,7 +1142,7 @@ Scenario: _015400644 check that additional attributes and properties are display
 		And I click choice button of "Property" attribute in "Properties" table
 		And I go to line in "List" table
 			| 'Description'    |
-			| 'Test'           |
+			| 'Test 1'         |
 		And I select current line in "List" table
 		And I finish line editing in "Properties" table
 		And I input "Countries" text in the field named "Description_en"
@@ -1158,7 +1158,7 @@ Scenario: _015400644 check that additional attributes and properties are display
 		And I click "Add properties" button
 		And "Properties" table became equal
 			| 'Property'   | 'Value'    |
-			| 'Test'       | ''         |
+			| 'Test 1'     | ''         |
 	And I close all client application windows
 
 
@@ -1186,7 +1186,7 @@ Scenario: _015400645 check that additional attributes and properties are display
 		And I click choice button of "Property" attribute in "Properties" table
 		And I go to line in "List" table
 			| 'Description'    |
-			| 'Test'           |
+			| 'Test 1'         |
 		And I select current line in "List" table
 		And I finish line editing in "Properties" table
 		And I input "Currencies" text in the field named "Description_en"
@@ -1202,7 +1202,7 @@ Scenario: _015400645 check that additional attributes and properties are display
 		And I click "Add properties" button
 		And "Properties" table became equal
 			| 'Property'   | 'Value'    |
-			| 'Test'       | ''         |
+			| 'Test 1'     | ''         |
 	And I close all client application windows
 
 Scenario: _015400646 check that additional attributes and properties are displayed on the form without reopening (Catalog_Price types)
@@ -1229,7 +1229,7 @@ Scenario: _015400646 check that additional attributes and properties are display
 		And I click choice button of "Property" attribute in "Properties" table
 		And I go to line in "List" table
 			| 'Description'    |
-			| 'Test'           |
+			| 'Test 1'         |
 		And I select current line in "List" table
 		And I finish line editing in "Properties" table
 		And I input "Price types" text in the field named "Description_en"
@@ -1245,7 +1245,7 @@ Scenario: _015400646 check that additional attributes and properties are display
 		And I click "Add properties" button
 		And "Properties" table became equal
 			| 'Property'   | 'Value'    |
-			| 'Test'       | ''         |
+			| 'Test 1'     | ''         |
 	And I close all client application windows
 
 
@@ -1273,7 +1273,7 @@ Scenario: _015400647 check that additional attributes and properties are display
 		And I click choice button of "Property" attribute in "Properties" table
 		And I go to line in "List" table
 			| 'Description'    |
-			| 'Test'           |
+			| 'Test 1'         |
 		And I select current line in "List" table
 		And I finish line editing in "Properties" table
 		And I input "Item serial/lot number" text in the field named "Description_en"
@@ -1289,7 +1289,7 @@ Scenario: _015400647 check that additional attributes and properties are display
 		And I click "Add properties" button
 		And "Properties" table became equal
 			| 'Property'   | 'Value'    |
-			| 'Test'       | ''         |
+			| 'Test 1'     | ''         |
 	And I close all client application windows
 
 Scenario: _015400648 check that additional attributes and properties are displayed on the form without reopening (Catalog_Stores)
@@ -1316,7 +1316,7 @@ Scenario: _015400648 check that additional attributes and properties are display
 		And I click choice button of "Property" attribute in "Properties" table
 		And I go to line in "List" table
 			| 'Description'    |
-			| 'Test'           |
+			| 'Test 1'         |
 		And I select current line in "List" table
 		And I finish line editing in "Properties" table
 		And I input "Stores" text in the field named "Description_en"
@@ -1332,7 +1332,7 @@ Scenario: _015400648 check that additional attributes and properties are display
 		And I click "Add properties" button
 		And "Properties" table became equal
 			| 'Property'   | 'Value'    |
-			| 'Test'       | ''         |
+			| 'Test 1'     | ''         |
 	And I close all client application windows
 
 
@@ -1360,7 +1360,7 @@ Scenario: _015400649 check that additional attributes and properties are display
 		And I click choice button of "Property" attribute in "Properties" table
 		And I go to line in "List" table
 			| 'Description'    |
-			| 'Test'           |
+			| 'Test 1'         |
 		And I select current line in "List" table
 		And I finish line editing in "Properties" table
 		And I input "Tax types" text in the field named "Description_en"
@@ -1376,7 +1376,7 @@ Scenario: _015400649 check that additional attributes and properties are display
 		And I click "Add properties" button
 		And "Properties" table became equal
 			| 'Property'   | 'Value'    |
-			| 'Test'       | ''         |
+			| 'Test 1'     | ''         |
 	And I close all client application windows
 
 Scenario: _015400650 check that additional attributes and properties are displayed on the form without reopening (Catalog_Units)
@@ -1403,7 +1403,7 @@ Scenario: _015400650 check that additional attributes and properties are display
 		And I click choice button of "Property" attribute in "Properties" table
 		And I go to line in "List" table
 			| 'Description'    |
-			| 'Test'           |
+			| 'Test 1'         |
 		And I select current line in "List" table
 		And I finish line editing in "Properties" table
 		And I input "Units" text in the field named "Description_en"
@@ -1419,7 +1419,7 @@ Scenario: _015400650 check that additional attributes and properties are display
 		And I click "Add properties" button
 		And "Properties" table became equal
 			| 'Property'   | 'Value'    |
-			| 'Test'       | ''         |
+			| 'Test 1'     | ''         |
 	And I close all client application windows
 
 
@@ -1448,7 +1448,7 @@ Scenario: _015400651 check that additional attributes and properties are display
 		And I click choice button of "Property" attribute in "Properties" table
 		And I go to line in "List" table
 			| 'Description'    |
-			| 'Test'           |
+			| 'Test 1'         |
 		And I select current line in "List" table
 		And I finish line editing in "Properties" table
 		And I input "Users" text in the field named "Description_en"
@@ -1464,7 +1464,7 @@ Scenario: _015400651 check that additional attributes and properties are display
 		And I click "Add properties" button
 		And "Properties" table became equal
 			| 'Property'   | 'Value'    |
-			| 'Test'       | ''         |
+			| 'Test 1'     | ''         |
 	And I close all client application windows
 
 Scenario: _015400652 check that additional attributes and properties are displayed on the form without reopening (document Bank payment)
@@ -1492,7 +1492,7 @@ Scenario: _015400652 check that additional attributes and properties are display
 		And I click choice button of "Property" attribute in "Properties" table
 		And I go to line in "List" table
 			| 'Description'    |
-			| 'Test'           |
+			| 'Test 1'         |
 		And I select current line in "List" table
 		And I finish line editing in "Properties" table
 		And I input "Bank payment" text in the field named "Description_en"
@@ -1510,7 +1510,7 @@ Scenario: _015400652 check that additional attributes and properties are display
 		And I click "Add properties" button
 		And "Properties" table became equal
 			| 'Property'   | 'Value'    |
-			| 'Test'       | ''         |
+			| 'Test 1'     | ''         |
 		And I activate "Value" field in "Properties" table
 		And I select current line in "Properties" table
 		And I click choice button of "Value" attribute in "Properties" table
@@ -1524,7 +1524,7 @@ Scenario: _015400652 check that additional attributes and properties are display
 		And I click "Add properties" button
 		And "Properties" table became equal
 			| 'Property'   | 'Value'     |
-			| 'Test'       | 'Test 1'    |
+			| 'Test 1'     | 'Test 1'    |
 	And I close all client application windows
 
 
@@ -1553,7 +1553,7 @@ Scenario: _015400653 check that additional attributes and properties are display
 		And I click choice button of "Property" attribute in "Properties" table
 		And I go to line in "List" table
 			| 'Description'    |
-			| 'Test'           |
+			| 'Test 1'         |
 		And I select current line in "List" table
 		And I finish line editing in "Properties" table
 		And I input "Bank receipt" text in the field named "Description_en"
@@ -1563,7 +1563,7 @@ Scenario: _015400653 check that additional attributes and properties are display
 		And field "Test" is present on the form
 		And I click Select button of "Test" field
 		And I go to line in "List" table
-			| 'Description'    |
+			| 'Description'  |
 			| 'Test 1'         |
 		And I select current line in "List" table
 		Then "Test" form attribute became equal to "Test 1"
@@ -1571,7 +1571,7 @@ Scenario: _015400653 check that additional attributes and properties are display
 		And I click "Add properties" button
 		And "Properties" table became equal
 			| 'Property'   | 'Value'    |
-			| 'Test'       | ''         |
+			| 'Test 1'       | ''         |
 		And I activate "Value" field in "Properties" table
 		And I select current line in "Properties" table
 		And I click choice button of "Value" attribute in "Properties" table
@@ -1585,7 +1585,7 @@ Scenario: _015400653 check that additional attributes and properties are display
 		And I click "Add properties" button
 		And "Properties" table became equal
 			| 'Property'   | 'Value'     |
-			| 'Test'       | 'Test 1'    |
+			| 'Test 1'     | 'Test 1'    |
 	And I close all client application windows
 
 
@@ -1614,7 +1614,7 @@ Scenario: _015400655 check that additional attributes and properties are display
 		And I click choice button of "Property" attribute in "Properties" table
 		And I go to line in "List" table
 			| 'Description'    |
-			| 'Test'           |
+			| 'Test 1'         |
 		And I select current line in "List" table
 		And I finish line editing in "Properties" table
 		And I input "Bundling" text in the field named "Description_en"
@@ -1632,7 +1632,7 @@ Scenario: _015400655 check that additional attributes and properties are display
 		And I click "Add properties" button
 		And "Properties" table became equal
 			| 'Property'   | 'Value'    |
-			| 'Test'       | ''         |
+			| 'Test 1'     | ''         |
 		And I activate "Value" field in "Properties" table
 		And I select current line in "Properties" table
 		And I click choice button of "Value" attribute in "Properties" table
@@ -1646,7 +1646,7 @@ Scenario: _015400655 check that additional attributes and properties are display
 		And I click "Add properties" button
 		And "Properties" table became equal
 			| 'Property'   | 'Value'     |
-			| 'Test'       | 'Test 1'    |
+			| 'Test 1'     | 'Test 1'    |
 	And I close all client application windows
 
 
@@ -1675,7 +1675,7 @@ Scenario: _015400656 check that additional attributes and properties are display
 		And I click choice button of "Property" attribute in "Properties" table
 		And I go to line in "List" table
 			| 'Description'    |
-			| 'Test'           |
+			| 'Test 1'         |
 		And I select current line in "List" table
 		And I finish line editing in "Properties" table
 		And I input "Cash expense" text in the field named "Description_en"
@@ -1693,7 +1693,7 @@ Scenario: _015400656 check that additional attributes and properties are display
 		And I click "Add properties" button
 		And "Properties" table became equal
 			| 'Property'   | 'Value'    |
-			| 'Test'       | ''         |
+			| 'Test 1'     | ''         |
 		And I activate "Value" field in "Properties" table
 		And I select current line in "Properties" table
 		And I click choice button of "Value" attribute in "Properties" table
@@ -1707,7 +1707,7 @@ Scenario: _015400656 check that additional attributes and properties are display
 		And I click "Add properties" button
 		And "Properties" table became equal
 			| 'Property'   | 'Value'     |
-			| 'Test'       | 'Test 1'    |
+			| 'Test 1'     | 'Test 1'    |
 	And I close all client application windows
 
 
@@ -1736,7 +1736,7 @@ Scenario: _015400657 check that additional attributes and properties are display
 		And I click choice button of "Property" attribute in "Properties" table
 		And I go to line in "List" table
 			| 'Description'    |
-			| 'Test'           |
+			| 'Test 1'         |
 		And I select current line in "List" table
 		And I finish line editing in "Properties" table
 		And I input "Cash payment" text in the field named "Description_en"
@@ -1754,7 +1754,7 @@ Scenario: _015400657 check that additional attributes and properties are display
 		And I click "Add properties" button
 		And "Properties" table became equal
 			| 'Property'   | 'Value'    |
-			| 'Test'       | ''         |
+			| 'Test 1'     | ''         |
 		And I activate "Value" field in "Properties" table
 		And I select current line in "Properties" table
 		And I click choice button of "Value" attribute in "Properties" table
@@ -1768,7 +1768,7 @@ Scenario: _015400657 check that additional attributes and properties are display
 		And I click "Add properties" button
 		And "Properties" table became equal
 			| 'Property'   | 'Value'     |
-			| 'Test'       | 'Test 1'    |
+			| 'Test 1'     | 'Test 1'    |
 	And I close all client application windows
 
 
@@ -1798,7 +1798,7 @@ Scenario: _015400658 check that additional attributes and properties are display
 		And I click choice button of "Property" attribute in "Properties" table
 		And I go to line in "List" table
 			| 'Description'    |
-			| 'Test'           |
+			| 'Test 1'         |
 		And I select current line in "List" table
 		And I finish line editing in "Properties" table
 		And I input "Cash receipt" text in the field named "Description_en"
@@ -1816,7 +1816,7 @@ Scenario: _015400658 check that additional attributes and properties are display
 		And I click "Add properties" button
 		And "Properties" table became equal
 			| 'Property'   | 'Value'    |
-			| 'Test'       | ''         |
+			| 'Test 1'     | ''         |
 		And I activate "Value" field in "Properties" table
 		And I select current line in "Properties" table
 		And I click choice button of "Value" attribute in "Properties" table
@@ -1830,7 +1830,7 @@ Scenario: _015400658 check that additional attributes and properties are display
 		And I click "Add properties" button
 		And "Properties" table became equal
 			| 'Property'   | 'Value'     |
-			| 'Test'       | 'Test 1'    |
+			| 'Test 1'     | 'Test 1'    |
 	And I close all client application windows
 
 
@@ -1861,7 +1861,7 @@ Scenario: _015400659 check that additional attributes and properties are display
 		And I click choice button of "Property" attribute in "Properties" table
 		And I go to line in "List" table
 			| 'Description'    |
-			| 'Test'           |
+			| 'Test 1'         |
 		And I select current line in "List" table
 		And I finish line editing in "Properties" table
 		And I input "Cash revenue" text in the field named "Description_en"
@@ -1879,7 +1879,7 @@ Scenario: _015400659 check that additional attributes and properties are display
 		And I click "Add properties" button
 		And "Properties" table became equal
 			| 'Property'   | 'Value'    |
-			| 'Test'       | ''         |
+			| 'Test 1'     | ''         |
 		And I activate "Value" field in "Properties" table
 		And I select current line in "Properties" table
 		And I click choice button of "Value" attribute in "Properties" table
@@ -1893,7 +1893,7 @@ Scenario: _015400659 check that additional attributes and properties are display
 		And I click "Add properties" button
 		And "Properties" table became equal
 			| 'Property'   | 'Value'     |
-			| 'Test'       | 'Test 1'    |
+			| 'Test 1'     | 'Test 1'    |
 	And I close all client application windows
 
 
@@ -1922,7 +1922,7 @@ Scenario: _015400660 check that additional attributes and properties are display
 		And I click choice button of "Property" attribute in "Properties" table
 		And I go to line in "List" table
 			| 'Description'    |
-			| 'Test'           |
+			| 'Test 1'         |
 		And I select current line in "List" table
 		And I finish line editing in "Properties" table
 		And I input "Cash transfer order" text in the field named "Description_en"
@@ -1940,7 +1940,7 @@ Scenario: _015400660 check that additional attributes and properties are display
 		And I click "Add properties" button
 		And "Properties" table became equal
 			| 'Property'   | 'Value'    |
-			| 'Test'       | ''         |
+			| 'Test 1'     | ''         |
 		And I activate "Value" field in "Properties" table
 		And I select current line in "Properties" table
 		And I click choice button of "Value" attribute in "Properties" table
@@ -1954,7 +1954,7 @@ Scenario: _015400660 check that additional attributes and properties are display
 		And I click "Add properties" button
 		And "Properties" table became equal
 			| 'Property'   | 'Value'     |
-			| 'Test'       | 'Test 1'    |
+			| 'Test 1'     | 'Test 1'    |
 	And I close all client application windows
 
 
@@ -1983,7 +1983,7 @@ Scenario: _015400662 check that additional attributes and properties are display
 		And I click choice button of "Property" attribute in "Properties" table
 		And I go to line in "List" table
 			| 'Description'    |
-			| 'Test'           |
+			| 'Test 1'         |
 		And I select current line in "List" table
 		And I finish line editing in "Properties" table
 		And I input "Goods receipt" text in the field named "Description_en"
@@ -2001,7 +2001,7 @@ Scenario: _015400662 check that additional attributes and properties are display
 		And I click "Add properties" button
 		And "Properties" table became equal
 			| 'Property'   | 'Value'    |
-			| 'Test'       | ''         |
+			| 'Test 1'     | ''         |
 		And I activate "Value" field in "Properties" table
 		And I select current line in "Properties" table
 		And I click choice button of "Value" attribute in "Properties" table
@@ -2015,7 +2015,7 @@ Scenario: _015400662 check that additional attributes and properties are display
 		And I click "Add properties" button
 		And "Properties" table became equal
 			| 'Property'   | 'Value'     |
-			| 'Test'       | 'Test 1'    |
+			| 'Test 1'     | 'Test 1'    |
 	And I close all client application windows
 
 
@@ -2045,7 +2045,7 @@ Scenario: _015400663 check that additional attributes and properties are display
 		And I click choice button of "Property" attribute in "Properties" table
 		And I go to line in "List" table
 			| 'Description'    |
-			| 'Test'           |
+			| 'Test 1'         |
 		And I select current line in "List" table
 		And I finish line editing in "Properties" table
 		And I input "Incoming payment order" text in the field named "Description_en"
@@ -2063,7 +2063,7 @@ Scenario: _015400663 check that additional attributes and properties are display
 		And I click "Add properties" button
 		And "Properties" table became equal
 			| 'Property'   | 'Value'    |
-			| 'Test'       | ''         |
+			| 'Test 1'     | ''         |
 		And I activate "Value" field in "Properties" table
 		And I select current line in "Properties" table
 		And I click choice button of "Value" attribute in "Properties" table
@@ -2077,7 +2077,7 @@ Scenario: _015400663 check that additional attributes and properties are display
 		And I click "Add properties" button
 		And "Properties" table became equal
 			| 'Property'   | 'Value'     |
-			| 'Test'       | 'Test 1'    |
+			| 'Test 1'     | 'Test 1'    |
 	And I close all client application windows
 
 
@@ -2106,7 +2106,7 @@ Scenario: _015400664 check that additional attributes and properties are display
 		And I click choice button of "Property" attribute in "Properties" table
 		And I go to line in "List" table
 			| 'Description'    |
-			| 'Test'           |
+			| 'Test 1'         |
 		And I select current line in "List" table
 		And I finish line editing in "Properties" table
 		And I input "Inventory transfer" text in the field named "Description_en"
@@ -2124,7 +2124,7 @@ Scenario: _015400664 check that additional attributes and properties are display
 		And I click "Add properties" button
 		And "Properties" table became equal
 			| 'Property'   | 'Value'    |
-			| 'Test'       | ''         |
+			| 'Test 1'     | ''         |
 		And I activate "Value" field in "Properties" table
 		And I select current line in "Properties" table
 		And I click choice button of "Value" attribute in "Properties" table
@@ -2138,7 +2138,7 @@ Scenario: _015400664 check that additional attributes and properties are display
 		And I click "Add properties" button
 		And "Properties" table became equal
 			| 'Property'   | 'Value'     |
-			| 'Test'       | 'Test 1'    |
+			| 'Test 1'     | 'Test 1'    |
 	And I close all client application windows
 
 
@@ -2167,7 +2167,7 @@ Scenario: _015400665 check that additional attributes and properties are display
 		And I click choice button of "Property" attribute in "Properties" table
 		And I go to line in "List" table
 			| 'Description'    |
-			| 'Test'           |
+			| 'Test 1'         |
 		And I select current line in "List" table
 		And I finish line editing in "Properties" table
 		And I input "Inventory transfer order" text in the field named "Description_en"
@@ -2185,7 +2185,7 @@ Scenario: _015400665 check that additional attributes and properties are display
 		And I click "Add properties" button
 		And "Properties" table became equal
 			| 'Property'   | 'Value'    |
-			| 'Test'       | ''         |
+			| 'Test 1'     | ''         |
 		And I activate "Value" field in "Properties" table
 		And I select current line in "Properties" table
 		And I click choice button of "Value" attribute in "Properties" table
@@ -2199,7 +2199,7 @@ Scenario: _015400665 check that additional attributes and properties are display
 		And I click "Add properties" button
 		And "Properties" table became equal
 			| 'Property'   | 'Value'     |
-			| 'Test'       | 'Test 1'    |
+			| 'Test 1'     | 'Test 1'    |
 	And I close all client application windows
 
 
@@ -2230,7 +2230,7 @@ Scenario: _015400668 check that additional attributes and properties are display
 		And I click choice button of "Property" attribute in "Properties" table
 		And I go to line in "List" table
 			| 'Description'    |
-			| 'Test'           |
+			| 'Test 1'         |
 		And I select current line in "List" table
 		And I finish line editing in "Properties" table
 		And I input "Labeling" text in the field named "Description_en"
@@ -2248,7 +2248,7 @@ Scenario: _015400668 check that additional attributes and properties are display
 		And I click "Add properties" button
 		And "Properties" table became equal
 			| 'Property'   | 'Value'    |
-			| 'Test'       | ''         |
+			| 'Test 1'     | ''         |
 		And I activate "Value" field in "Properties" table
 		And I select current line in "Properties" table
 		And I click choice button of "Value" attribute in "Properties" table
@@ -2262,7 +2262,7 @@ Scenario: _015400668 check that additional attributes and properties are display
 		And I click "Add properties" button
 		And "Properties" table became equal
 			| 'Property'   | 'Value'     |
-			| 'Test'       | 'Test 1'    |
+			| 'Test 1'     | 'Test 1'    |
 	And I close all client application windows
 
 
@@ -2291,7 +2291,7 @@ Scenario: _015400669 check that additional attributes and properties are display
 		And I click choice button of "Property" attribute in "Properties" table
 		And I go to line in "List" table
 			| 'Description'    |
-			| 'Test'           |
+			| 'Test 1'         |
 		And I select current line in "List" table
 		And I finish line editing in "Properties" table
 		And I input "Opening entry" text in the field named "Description_en"
@@ -2309,7 +2309,7 @@ Scenario: _015400669 check that additional attributes and properties are display
 		And I click "Add properties" button
 		And "Properties" table became equal
 			| 'Property'   | 'Value'    |
-			| 'Test'       | ''         |
+			| 'Test 1'     | ''         |
 		And I activate "Value" field in "Properties" table
 		And I select current line in "Properties" table
 		And I click choice button of "Value" attribute in "Properties" table
@@ -2323,7 +2323,7 @@ Scenario: _015400669 check that additional attributes and properties are display
 		And I click "Add properties" button
 		And "Properties" table became equal
 			| 'Property'   | 'Value'     |
-			| 'Test'       | 'Test 1'    |
+			| 'Test 1'     | 'Test 1'    |
 	And I close all client application windows
 
 Scenario: _015400670 check that additional attributes and properties are displayed on the form without reopening (document Outgoing payment order)
@@ -2351,7 +2351,7 @@ Scenario: _015400670 check that additional attributes and properties are display
 		And I click choice button of "Property" attribute in "Properties" table
 		And I go to line in "List" table
 			| 'Description'    |
-			| 'Test'           |
+			| 'Test 1'         |
 		And I select current line in "List" table
 		And I finish line editing in "Properties" table
 		And I input "Outgoing payment order" text in the field named "Description_en"
@@ -2369,7 +2369,7 @@ Scenario: _015400670 check that additional attributes and properties are display
 		And I click "Add properties" button
 		And "Properties" table became equal
 			| 'Property'   | 'Value'    |
-			| 'Test'       | ''         |
+			| 'Test 1'     | ''         |
 		And I activate "Value" field in "Properties" table
 		And I select current line in "Properties" table
 		And I click choice button of "Value" attribute in "Properties" table
@@ -2383,7 +2383,7 @@ Scenario: _015400670 check that additional attributes and properties are display
 		And I click "Add properties" button
 		And "Properties" table became equal
 			| 'Property'   | 'Value'     |
-			| 'Test'       | 'Test 1'    |
+			| 'Test 1'     | 'Test 1'    |
 	And I close all client application windows
 
 
@@ -2412,7 +2412,7 @@ Scenario: _015400671 check that additional attributes and properties are display
 		And I click choice button of "Property" attribute in "Properties" table
 		And I go to line in "List" table
 			| 'Description'    |
-			| 'Test'           |
+			| 'Test 1'         |
 		And I select current line in "List" table
 		And I finish line editing in "Properties" table
 		And I input "Physical count by location" text in the field named "Description_en"
@@ -2460,7 +2460,7 @@ Scenario: _015400672 check that additional attributes and properties are display
 		And I click choice button of "Property" attribute in "Properties" table
 		And I go to line in "List" table
 			| 'Description'    |
-			| 'Test'           |
+			| 'Test 1'         |
 		And I select current line in "List" table
 		And I finish line editing in "Properties" table
 		And I input "Physical inventory" text in the field named "Description_en"
@@ -2478,7 +2478,7 @@ Scenario: _015400672 check that additional attributes and properties are display
 		And I click "Add properties" button
 		And "Properties" table became equal
 			| 'Property'   | 'Value'    |
-			| 'Test'       | ''         |
+			| 'Test 1'     | ''         |
 	And I close all client application windows
 
 Scenario: _015400673 check that additional attributes and properties are displayed on the form without reopening (document Price list)
@@ -2506,7 +2506,7 @@ Scenario: _015400673 check that additional attributes and properties are display
 		And I click choice button of "Property" attribute in "Properties" table
 		And I go to line in "List" table
 			| 'Description'    |
-			| 'Test'           |
+			| 'Test 1'         |
 		And I select current line in "List" table
 		And I finish line editing in "Properties" table
 		And I input "Price list" text in the field named "Description_en"
@@ -2524,7 +2524,7 @@ Scenario: _015400673 check that additional attributes and properties are display
 		And I click "Add properties" button
 		And "Properties" table became equal
 			| 'Property'   | 'Value'    |
-			| 'Test'       | ''         |
+			| 'Test 1'     | ''         |
 		And I activate "Value" field in "Properties" table
 		And I select current line in "Properties" table
 		And I click choice button of "Value" attribute in "Properties" table
@@ -2538,7 +2538,7 @@ Scenario: _015400673 check that additional attributes and properties are display
 		And I click "Add properties" button
 		And "Properties" table became equal
 			| 'Property'   | 'Value'     |
-			| 'Test'       | 'Test 1'    |
+			| 'Test 1'     | 'Test 1'    |
 	And I close all client application windows
 
 
@@ -2568,7 +2568,7 @@ Scenario: _015400674 check that additional attributes and properties are display
 		And I click choice button of "Property" attribute in "Properties" table
 		And I go to line in "List" table
 			| 'Description'    |
-			| 'Test'           |
+			| 'Test 1'         |
 		And I select current line in "List" table
 		And I finish line editing in "Properties" table
 		And I input "Purchase return" text in the field named "Description_en"
@@ -2586,7 +2586,7 @@ Scenario: _015400674 check that additional attributes and properties are display
 		And I click "Add properties" button
 		And "Properties" table became equal
 			| 'Property'   | 'Value'    |
-			| 'Test'       | ''         |
+			| 'Test 1'     | ''         |
 		And I activate "Value" field in "Properties" table
 		And I select current line in "Properties" table
 		And I click choice button of "Value" attribute in "Properties" table
@@ -2600,7 +2600,7 @@ Scenario: _015400674 check that additional attributes and properties are display
 		And I click "Add properties" button
 		And "Properties" table became equal
 			| 'Property'   | 'Value'     |
-			| 'Test'       | 'Test 1'    |
+			| 'Test 1'     | 'Test 1'    |
 	And I close all client application windows
 
 
@@ -2630,7 +2630,7 @@ Scenario: _015400675 check that additional attributes and properties are display
 		And I click choice button of "Property" attribute in "Properties" table
 		And I go to line in "List" table
 			| 'Description'    |
-			| 'Test'           |
+			| 'Test 1'         |
 		And I select current line in "List" table
 		And I finish line editing in "Properties" table
 		And I input "Purchase return order" text in the field named "Description_en"
@@ -2648,7 +2648,7 @@ Scenario: _015400675 check that additional attributes and properties are display
 		And I click "Add properties" button
 		And "Properties" table became equal
 			| 'Property'   | 'Value'    |
-			| 'Test'       | ''         |
+			| 'Test 1'     | ''         |
 		And I activate "Value" field in "Properties" table
 		And I select current line in "Properties" table
 		And I click choice button of "Value" attribute in "Properties" table
@@ -2662,7 +2662,7 @@ Scenario: _015400675 check that additional attributes and properties are display
 		And I click "Add properties" button
 		And "Properties" table became equal
 			| 'Property'   | 'Value'     |
-			| 'Test'       | 'Test 1'    |
+			| 'Test 1'     | 'Test 1'    |
 	And I close all client application windows
 
 
@@ -2693,7 +2693,7 @@ Scenario: _015400676 check that additional attributes and properties are display
 		And I click choice button of "Property" attribute in "Properties" table
 		And I go to line in "List" table
 			| 'Description'    |
-			| 'Test'           |
+			| 'Test 1'         |
 		And I select current line in "List" table
 		And I finish line editing in "Properties" table
 		And I input "Reconciliation statement" text in the field named "Description_en"
@@ -2711,7 +2711,7 @@ Scenario: _015400676 check that additional attributes and properties are display
 		And I click "Add properties" button
 		And "Properties" table became equal
 			| 'Property'   | 'Value'    |
-			| 'Test'       | ''         |
+			| 'Test 1'     | ''         |
 		And I activate "Value" field in "Properties" table
 		And I select current line in "Properties" table
 		And I click choice button of "Value" attribute in "Properties" table
@@ -2725,7 +2725,7 @@ Scenario: _015400676 check that additional attributes and properties are display
 		And I click "Add properties" button
 		And "Properties" table became equal
 			| 'Property'   | 'Value'     |
-			| 'Test'       | 'Test 1'    |
+			| 'Test 1'     | 'Test 1'    |
 	And I close all client application windows
 
 
@@ -2755,7 +2755,7 @@ Scenario: _015400677 check that additional attributes and properties are display
 		And I click choice button of "Property" attribute in "Properties" table
 		And I go to line in "List" table
 			| 'Description'    |
-			| 'Test'           |
+			| 'Test 1'         |
 		And I select current line in "List" table
 		And I finish line editing in "Properties" table
 		And I input "Sales return" text in the field named "Description_en"
@@ -2773,7 +2773,7 @@ Scenario: _015400677 check that additional attributes and properties are display
 		And I click "Add properties" button
 		And "Properties" table became equal
 			| 'Property'   | 'Value'    |
-			| 'Test'       | ''         |
+			| 'Test 1'     | ''         |
 		And I activate "Value" field in "Properties" table
 		And I select current line in "Properties" table
 		And I click choice button of "Value" attribute in "Properties" table
@@ -2787,7 +2787,7 @@ Scenario: _015400677 check that additional attributes and properties are display
 		And I click "Add properties" button
 		And "Properties" table became equal
 			| 'Property'   | 'Value'     |
-			| 'Test'       | 'Test 1'    |
+			| 'Test 1'     | 'Test 1'    |
 	And I close all client application windows
 
 
@@ -2816,7 +2816,7 @@ Scenario: _015400678 check that additional attributes and properties are display
 		And I click choice button of "Property" attribute in "Properties" table
 		And I go to line in "List" table
 			| 'Description'    |
-			| 'Test'           |
+			| 'Test 1'         |
 		And I select current line in "List" table
 		And I finish line editing in "Properties" table
 		And I input "Sales return order" text in the field named "Description_en"
@@ -2834,7 +2834,7 @@ Scenario: _015400678 check that additional attributes and properties are display
 		And I click "Add properties" button
 		And "Properties" table became equal
 			| 'Property'   | 'Value'    |
-			| 'Test'       | ''         |
+			| 'Test 1'     | ''         |
 		And I activate "Value" field in "Properties" table
 		And I select current line in "Properties" table
 		And I click choice button of "Value" attribute in "Properties" table
@@ -2848,7 +2848,7 @@ Scenario: _015400678 check that additional attributes and properties are display
 		And I click "Add properties" button
 		And "Properties" table became equal
 			| 'Property'   | 'Value'     |
-			| 'Test'       | 'Test 1'    |
+			| 'Test 1'     | 'Test 1'    |
 	And I close all client application windows
 
 
@@ -2878,7 +2878,7 @@ Scenario: _015400679 check that additional attributes and properties are display
 		And I click choice button of "Property" attribute in "Properties" table
 		And I go to line in "List" table
 			| 'Description'    |
-			| 'Test'           |
+			| 'Test 1'         |
 		And I select current line in "List" table
 		And I finish line editing in "Properties" table
 		And I input "Shipment confirmation" text in the field named "Description_en"
@@ -2896,7 +2896,7 @@ Scenario: _015400679 check that additional attributes and properties are display
 		And I click "Add properties" button
 		And "Properties" table became equal
 			| 'Property'   | 'Value'    |
-			| 'Test'       | ''         |
+			| 'Test 1'     | ''         |
 		And I activate "Value" field in "Properties" table
 		And I select current line in "Properties" table
 		And I click choice button of "Value" attribute in "Properties" table
@@ -2910,7 +2910,7 @@ Scenario: _015400679 check that additional attributes and properties are display
 		And I click "Add properties" button
 		And "Properties" table became equal
 			| 'Property'   | 'Value'     |
-			| 'Test'       | 'Test 1'    |
+			| 'Test 1'     | 'Test 1'    |
 	And I close all client application windows
 
 
@@ -2939,7 +2939,7 @@ Scenario: _015400680 check that additional attributes and properties are display
 		And I click choice button of "Property" attribute in "Properties" table
 		And I go to line in "List" table
 			| 'Description'    |
-			| 'Test'           |
+			| 'Test 1'         |
 		And I select current line in "List" table
 		And I finish line editing in "Properties" table
 		And I input "Stock adjustment as surplus" text in the field named "Description_en"
@@ -2957,7 +2957,7 @@ Scenario: _015400680 check that additional attributes and properties are display
 		And I click "Add properties" button
 		And "Properties" table became equal
 			| 'Property'   | 'Value'    |
-			| 'Test'       | ''         |
+			| 'Test 1'     | ''         |
 		And I activate "Value" field in "Properties" table
 		And I select current line in "Properties" table
 		And I click choice button of "Value" attribute in "Properties" table
@@ -2971,7 +2971,7 @@ Scenario: _015400680 check that additional attributes and properties are display
 		And I click "Add properties" button
 		And "Properties" table became equal
 			| 'Property'   | 'Value'     |
-			| 'Test'       | 'Test 1'    |
+			| 'Test 1'     | 'Test 1'    |
 	And I close all client application windows
 
 Scenario: _015400681 check that additional attributes and properties are displayed on the form without reopening (document Stock adjustment as write-off)
@@ -2999,7 +2999,7 @@ Scenario: _015400681 check that additional attributes and properties are display
 		And I click choice button of "Property" attribute in "Properties" table
 		And I go to line in "List" table
 			| 'Description'    |
-			| 'Test'           |
+			| 'Test 1'         |
 		And I select current line in "List" table
 		And I finish line editing in "Properties" table
 		And I input "Stock adjustment as write off" text in the field named "Description_en"
@@ -3017,7 +3017,7 @@ Scenario: _015400681 check that additional attributes and properties are display
 		And I click "Add properties" button
 		And "Properties" table became equal
 			| 'Property'   | 'Value'    |
-			| 'Test'       | ''         |
+			| 'Test 1'     | ''         |
 		And I activate "Value" field in "Properties" table
 		And I select current line in "Properties" table
 		And I click choice button of "Value" attribute in "Properties" table
@@ -3031,7 +3031,7 @@ Scenario: _015400681 check that additional attributes and properties are display
 		And I click "Add properties" button
 		And "Properties" table became equal
 			| 'Property'   | 'Value'     |
-			| 'Test'       | 'Test 1'    |
+			| 'Test 1'     | 'Test 1'    |
 	And I close all client application windows
 
 
@@ -3060,7 +3060,7 @@ Scenario: _015400683 check that additional attributes and properties are display
 		And I click choice button of "Property" attribute in "Properties" table
 		And I go to line in "List" table
 			| 'Description'    |
-			| 'Test'           |
+			| 'Test 1'         |
 		And I select current line in "List" table
 		And I finish line editing in "Properties" table
 		And I input "Unbundling" text in the field named "Description_en"
@@ -3078,7 +3078,7 @@ Scenario: _015400683 check that additional attributes and properties are display
 		And I click "Add properties" button
 		And "Properties" table became equal
 			| 'Property'   | 'Value'    |
-			| 'Test'       | ''         |
+			| 'Test 1'     | ''         |
 		And I activate "Value" field in "Properties" table
 		And I select current line in "Properties" table
 		And I click choice button of "Value" attribute in "Properties" table
@@ -3092,7 +3092,7 @@ Scenario: _015400683 check that additional attributes and properties are display
 		And I click "Add properties" button
 		And "Properties" table became equal
 			| 'Property'   | 'Value'     |
-			| 'Test'       | 'Test 1'    |
+			| 'Test 1'     | 'Test 1'    |
 	And I close all client application windows
 
 Scenario: _015400684 check that additional attributes and properties are displayed on the form without reopening (document Retail sales receipt)
@@ -3120,7 +3120,7 @@ Scenario: _015400684 check that additional attributes and properties are display
 		And I click choice button of "Property" attribute in "Properties" table
 		And I go to line in "List" table
 			| 'Description'    |
-			| 'Test'           |
+			| 'Test 1'         |
 		And I select current line in "List" table
 		And I finish line editing in "Properties" table
 		And I input "RetailSalesReceipt" text in the field named "Description_en"
@@ -3138,7 +3138,7 @@ Scenario: _015400684 check that additional attributes and properties are display
 		And I click "Add properties" button
 		And "Properties" table became equal
 			| 'Property'   | 'Value'    |
-			| 'Test'       | ''         |
+			| 'Test 1'     | ''         |
 		And I activate "Value" field in "Properties" table
 		And I select current line in "Properties" table
 		And I click choice button of "Value" attribute in "Properties" table
@@ -3152,7 +3152,7 @@ Scenario: _015400684 check that additional attributes and properties are display
 		And I click "Add properties" button
 		And "Properties" table became equal
 			| 'Property'   | 'Value'     |
-			| 'Test'       | 'Test 1'    |
+			| 'Test 1'     | 'Test 1'    |
 	And I close all client application windows
 
 
@@ -3181,7 +3181,7 @@ Scenario: _015400685 check that additional attributes and properties are display
 		And I click choice button of "Property" attribute in "Properties" table
 		And I go to line in "List" table
 			| 'Description'    |
-			| 'Test'           |
+			| 'Test 1'         |
 		And I select current line in "List" table
 		And I finish line editing in "Properties" table
 		And I input "RetailReturnReceipt" text in the field named "Description_en"
@@ -3199,7 +3199,7 @@ Scenario: _015400685 check that additional attributes and properties are display
 		And I click "Add properties" button
 		And "Properties" table became equal
 			| 'Property'   | 'Value'    |
-			| 'Test'       | ''         |
+			| 'Test 1'     | ''         |
 		And I activate "Value" field in "Properties" table
 		And I select current line in "Properties" table
 		And I click choice button of "Value" attribute in "Properties" table
@@ -3213,7 +3213,7 @@ Scenario: _015400685 check that additional attributes and properties are display
 		And I click "Add properties" button
 		And "Properties" table became equal
 			| 'Property'   | 'Value'     |
-			| 'Test'       | 'Test 1'    |
+			| 'Test 1'     | 'Test 1'    |
 	And I close all client application windows
 
 Scenario: _015400687 check that additional attributes and properties are displayed on the form without reopening (document Cash statement)
@@ -3241,7 +3241,7 @@ Scenario: _015400687 check that additional attributes and properties are display
 		And I click choice button of "Property" attribute in "Properties" table
 		And I go to line in "List" table
 			| 'Description'    |
-			| 'Test'           |
+			| 'Test 1'         |
 		And I select current line in "List" table
 		And I finish line editing in "Properties" table
 		And I input "Cash statement" text in the field named "Description_en"
@@ -3259,7 +3259,7 @@ Scenario: _015400687 check that additional attributes and properties are display
 		And I click "Add properties" button
 		And "Properties" table became equal
 			| 'Property'   | 'Value'    |
-			| 'Test'       | ''         |
+			| 'Test 1'     | ''         |
 		And I activate "Value" field in "Properties" table
 		And I select current line in "Properties" table
 		And I click choice button of "Value" attribute in "Properties" table
@@ -3273,7 +3273,7 @@ Scenario: _015400687 check that additional attributes and properties are display
 		And I click "Add properties" button
 		And "Properties" table became equal
 			| 'Property'   | 'Value'     |
-			| 'Test'       | 'Test 1'    |
+			| 'Test 1'     | 'Test 1'    |
 	And I close all client application windows
 
 Scenario: _015400688 check that additional attributes and properties are displayed on the form without reopening (Catalog_PaymentTerminals)
@@ -3300,7 +3300,7 @@ Scenario: _015400688 check that additional attributes and properties are display
 		And I click choice button of "Property" attribute in "Properties" table
 		And I go to line in "List" table
 			| 'Description'    |
-			| 'Test'           |
+			| 'Test 1'         |
 		And I select current line in "List" table
 		And I finish line editing in "Properties" table
 		And I input "PaymentTerminals" text in the field named "Description_en"
@@ -3318,7 +3318,7 @@ Scenario: _015400688 check that additional attributes and properties are display
 		And I click "Add properties" button	
 		And "Properties" table became equal
 			| 'Property'   | 'Value'    |
-			| 'Test'       | ''         |
+			| 'Test 1'     | ''         |
 	And I close all client application windows
 
 Scenario: _015400689 check that additional attributes and properties are displayed on the form without reopening (Catalog_RetailCustomers)
@@ -3345,7 +3345,7 @@ Scenario: _015400689 check that additional attributes and properties are display
 		And I click choice button of "Property" attribute in "Properties" table
 		And I go to line in "List" table
 			| 'Description'    |
-			| 'Test'           |
+			| 'Test 1'         |
 		And I select current line in "List" table
 		And I finish line editing in "Properties" table
 		And I input "RetailCustomers" text in the field named "Description_en"
@@ -3361,7 +3361,7 @@ Scenario: _015400689 check that additional attributes and properties are display
 		And I click "Add properties" button
 		And "Properties" table became equal
 			| 'Property'   | 'Value'    |
-			| 'Test'       | ''         |
+			| 'Test 1'     | ''         |
 	And I close all client application windows
 
 Scenario: _015400690 check that additional attributes and properties are displayed on the form without reopening (Catalog_BankTerms)
@@ -3388,7 +3388,7 @@ Scenario: _015400690 check that additional attributes and properties are display
 		And I click choice button of "Property" attribute in "Properties" table
 		And I go to line in "List" table
 			| 'Description'    |
-			| 'Test'           |
+			| 'Test 1'         |
 		And I select current line in "List" table
 		And I finish line editing in "Properties" table
 		And I input "BankTerms" text in the field named "Description_en"
@@ -3404,7 +3404,7 @@ Scenario: _015400690 check that additional attributes and properties are display
 		And I click "Add properties" button
 		And "Properties" table became equal
 			| 'Property'   | 'Value'    |
-			| 'Test'       | ''         |
+			| 'Test 1'     | ''         |
 	And I close all client application windows
 
 Scenario: _015400691 check that additional attributes and properties are displayed on the form without reopening (Catalog_SpecialOffers)
@@ -3431,7 +3431,7 @@ Scenario: _015400691 check that additional attributes and properties are display
 		And I click choice button of "Property" attribute in "Properties" table
 		And I go to line in "List" table
 			| 'Description'    |
-			| 'Test'           |
+			| 'Test 1'         |
 		And I select current line in "List" table
 		And I finish line editing in "Properties" table
 		And I input "SpecialOffers" text in the field named "Description_en"
@@ -3447,7 +3447,7 @@ Scenario: _015400691 check that additional attributes and properties are display
 		And I click "Add properties" button
 		And "Properties" table became equal
 			| 'Property'   | 'Value'    |
-			| 'Test'       | ''         |
+			| 'Test 1'     | ''         |
 	And I close all client application windows
 
 Scenario: _015400692 check that additional attributes and properties are displayed on the form without reopening (Catalog_SpecialOfferRules)
@@ -3475,7 +3475,7 @@ Scenario: _015400692 check that additional attributes and properties are display
 		And I click choice button of "Property" attribute in "Properties" table
 		And I go to line in "List" table
 			| 'Description'    |
-			| 'Test'           |
+			| 'Test 1'         |
 		And I select current line in "List" table
 		And I finish line editing in "Properties" table
 		And I input "SpecialOfferRules" text in the field named "Description_en"
@@ -3491,7 +3491,7 @@ Scenario: _015400692 check that additional attributes and properties are display
 		And I click "Add properties" button
 		And "Properties" table became equal
 			| 'Property'   | 'Value'    |
-			| 'Test'       | ''         |
+			| 'Test 1'     | ''         |
 	And I close all client application windows
 
 Scenario: _015400693 check that additional attributes and properties are displayed on the form without reopening (Catalog_SpecialOfferType)
@@ -3518,7 +3518,7 @@ Scenario: _015400693 check that additional attributes and properties are display
 		And I click choice button of "Property" attribute in "Properties" table
 		And I go to line in "List" table
 			| 'Description'    |
-			| 'Test'           |
+			| 'Test 1'         |
 		And I select current line in "List" table
 		And I finish line editing in "Properties" table
 		And I input "SpecialOfferType" text in the field named "Description_en"
@@ -3534,7 +3534,7 @@ Scenario: _015400693 check that additional attributes and properties are display
 		And I click "Add properties" button
 		And "Properties" table became equal
 			| 'Property'   | 'Value'    |
-			| 'Test'       | ''         |
+			| 'Test 1'     | ''         |
 	And I close all client application windows
 
 
@@ -3562,7 +3562,7 @@ Scenario: _015400694 check that additional attributes and properties are display
 		And I click choice button of "Property" attribute in "Properties" table
 		And I go to line in "List" table
 			| 'Description'    |
-			| 'Test'           |
+			| 'Test 1'         |
 		And I select current line in "List" table
 		And I finish line editing in "Properties" table
 		And I input "ItemSegments" text in the field named "Description_en"
@@ -3578,7 +3578,7 @@ Scenario: _015400694 check that additional attributes and properties are display
 		And I click "Add properties" button
 		And "Properties" table became equal
 			| 'Property'   | 'Value'    |
-			| 'Test'       | ''         |
+			| 'Test 1'     | ''         |
 	And I close all client application windows
 
 
@@ -3606,7 +3606,7 @@ Scenario: _015400695 check that additional attributes and properties are display
 		And I click choice button of "Property" attribute in "Properties" table
 		And I go to line in "List" table
 			| 'Description'    |
-			| 'Test'           |
+			| 'Test 1'         |
 		And I select current line in "List" table
 		And I finish line editing in "Properties" table
 		And I input "TaxRates" text in the field named "Description_en"
@@ -3622,7 +3622,7 @@ Scenario: _015400695 check that additional attributes and properties are display
 		And I click "Add properties" button
 		And "Properties" table became equal
 			| 'Property'   | 'Value'    |
-			| 'Test'       | ''         |
+			| 'Test 1'     | ''         |
 	And I close all client application windows
 
 
@@ -3650,7 +3650,7 @@ Scenario: _015400696 check that additional attributes and properties are display
 		And I click choice button of "Property" attribute in "Properties" table
 		And I go to line in "List" table
 			| 'Description'    |
-			| 'Test'           |
+			| 'Test 1'         |
 		And I select current line in "List" table
 		And I finish line editing in "Properties" table
 		And I input "PaymentTypes" text in the field named "Description_en"
@@ -3666,7 +3666,7 @@ Scenario: _015400696 check that additional attributes and properties are display
 		And I click "Add properties" button
 		And "Properties" table became equal
 			| 'Property'   | 'Value'    |
-			| 'Test'       | ''         |
+			| 'Test 1'     | ''         |
 	And I close all client application windows
 
 
@@ -3694,7 +3694,7 @@ Scenario: _015400698 check that additional attributes and properties are display
 		And I click choice button of "Property" attribute in "Properties" table
 		And I go to line in "List" table
 			| 'Description'    |
-			| 'Test'           |
+			| 'Test 1'         |
 		And I select current line in "List" table
 		And I finish line editing in "Properties" table
 		And I input "PartnerSegments" text in the field named "Description_en"
@@ -3710,7 +3710,7 @@ Scenario: _015400698 check that additional attributes and properties are display
 		And I click "Add properties" button
 		And "Properties" table became equal
 			| 'Property'   | 'Value'    |
-			| 'Test'       | ''         |
+			| 'Test 1'     | ''         |
 	And I close all client application windows
 
 Scenario: _015400699 check that additional attributes and properties are displayed on the form without reopening (document PlannedReceiptReservation)
@@ -3738,7 +3738,7 @@ Scenario: _015400699 check that additional attributes and properties are display
 		And I click choice button of "Property" attribute in "Properties" table
 		And I go to line in "List" table
 			| 'Description'    |
-			| 'Test'           |
+			| 'Test 1'         |
 		And I select current line in "List" table
 		And I finish line editing in "Properties" table
 		And I input "Planned receipt reservation" text in the field named "Description_en"
@@ -3756,7 +3756,7 @@ Scenario: _015400699 check that additional attributes and properties are display
 		And I click "Add properties" button
 		And "Properties" table became equal
 			| 'Property'   | 'Value'    |
-			| 'Test'       | ''         |
+			| 'Test 1'     | ''         |
 		And I activate "Value" field in "Properties" table
 		And I select current line in "Properties" table
 		And I click choice button of "Value" attribute in "Properties" table
@@ -3770,7 +3770,7 @@ Scenario: _015400699 check that additional attributes and properties are display
 		And I click "Add properties" button
 		And "Properties" table became equal
 			| 'Property'   | 'Value'     |
-			| 'Test'       | 'Test 1'    |
+			| 'Test 1'     | 'Test 1'    |
 	And I close all client application windows
 
 
@@ -3799,7 +3799,7 @@ Scenario: _015400700 check that additional attributes and properties are display
 		And I click choice button of "Property" attribute in "Properties" table
 		And I go to line in "List" table
 			| 'Description'    |
-			| 'Test'           |
+			| 'Test 1'         |
 		And I select current line in "List" table
 		And I finish line editing in "Properties" table
 		And I input "Sales order closing" text in the field named "Description_en"
@@ -3817,7 +3817,7 @@ Scenario: _015400700 check that additional attributes and properties are display
 		And I click "Add properties" button
 		And "Properties" table became equal
 			| 'Property'   | 'Value'    |
-			| 'Test'       | ''         |
+			| 'Test 1'     | ''         |
 		And I activate "Value" field in "Properties" table
 		And I select current line in "Properties" table
 		And I click choice button of "Value" attribute in "Properties" table
@@ -3831,7 +3831,7 @@ Scenario: _015400700 check that additional attributes and properties are display
 		And I click "Add properties" button
 		And "Properties" table became equal
 			| 'Property'   | 'Value'     |
-			| 'Test'       | 'Test 1'    |
+			| 'Test 1'     | 'Test 1'    |
 	And I close all client application windows
 
 
@@ -3860,7 +3860,7 @@ Scenario: _015400701 check that additional attributes and properties are display
 		And I click choice button of "Property" attribute in "Properties" table
 		And I go to line in "List" table
 			| 'Description'    |
-			| 'Test'           |
+			| 'Test 1'         |
 		And I select current line in "List" table
 		And I finish line editing in "Properties" table
 		And I input "Item stock adjustment" text in the field named "Description_en"
@@ -3878,7 +3878,7 @@ Scenario: _015400701 check that additional attributes and properties are display
 		And I click "Add properties" button
 		And "Properties" table became equal
 			| 'Property'   | 'Value'    |
-			| 'Test'       | ''         |
+			| 'Test 1'     | ''         |
 		And I activate "Value" field in "Properties" table
 		And I select current line in "Properties" table
 		And I click choice button of "Value" attribute in "Properties" table
@@ -3892,7 +3892,7 @@ Scenario: _015400701 check that additional attributes and properties are display
 		And I click "Add properties" button
 		And "Properties" table became equal
 			| 'Property'   | 'Value'     |
-			| 'Test'       | 'Test 1'    |
+			| 'Test 1'     | 'Test 1'    |
 	And I close all client application windows
 
 
@@ -3921,7 +3921,7 @@ Scenario: _015400702 check that additional attributes and properties are display
 		And I click choice button of "Property" attribute in "Properties" table
 		And I go to line in "List" table
 			| 'Description'    |
-			| 'Test'           |
+			| 'Test 1'         |
 		And I select current line in "List" table
 		And I finish line editing in "Properties" table
 		And I input "Money transfer" text in the field named "Description_en"
@@ -3964,7 +3964,7 @@ Scenario: _015400703 check that additional attributes and properties are display
 		And I click choice button of "Property" attribute in "Properties" table
 		And I go to line in "List" table
 			| 'Description'    |
-			| 'Test'           |
+			| 'Test 1'         |
 		And I select current line in "List" table
 		And I finish line editing in "Properties" table
 		And I input "Manual register entry" text in the field named "Description_en"
@@ -4013,7 +4013,7 @@ Scenario: _015400704 check that additional attributes and properties are display
 		And I click choice button of "Property" attribute in "Properties" table
 		And I go to line in "List" table
 			| 'Description'    |
-			| 'Test'           |
+			| 'Test 1'         |
 		And I select current line in "List" table
 		And I finish line editing in "Properties" table
 		And I click "Save and close" button
@@ -4029,7 +4029,7 @@ Scenario: _015400704 check that additional attributes and properties are display
 		And I click "Add properties" button
 		And "Properties" table became equal
 			| 'Property'   | 'Value'    |
-			| 'Test'       | ''         |
+			| 'Test 1'     | ''         |
 	And I close all client application windows
 
 
@@ -4065,7 +4065,7 @@ Scenario: _015400705 check that additional attributes and properties are display
 		And I click choice button of "Property" attribute in "Properties" table
 		And I go to line in "List" table
 			| 'Description'    |
-			| 'Test'           |
+			| 'Test 1'         |
 		And I select current line in "List" table
 		And I finish line editing in "Properties" table
 		And I click "Save and close" button
@@ -4081,7 +4081,7 @@ Scenario: _015400705 check that additional attributes and properties are display
 		And I click "Add properties" button
 		And "Properties" table became equal
 			| 'Property'   | 'Value'    |
-			| 'Test'       | ''         |
+			| 'Test 1'     | ''         |
 	And I close all client application windows
 
 
@@ -4118,7 +4118,7 @@ Scenario: _015400706 check that additional attributes and properties are display
 		And I click choice button of "Property" attribute in "Properties" table
 		And I go to line in "List" table
 			| 'Description'    |
-			| 'Test'           |
+			| 'Test 1'         |
 		And I select current line in "List" table
 		And I finish line editing in "Properties" table
 		And I click "Save and close" button
@@ -4134,7 +4134,7 @@ Scenario: _015400706 check that additional attributes and properties are display
 		And I click "Add properties" button
 		And "Properties" table became equal
 			| 'Property'   | 'Value'    |
-			| 'Test'       | ''         |
+			| 'Test 1'     | ''         |
 	And I close all client application windows
 
 
@@ -4170,7 +4170,7 @@ Scenario: _015400707 check that additional attributes and properties are display
 		And I click choice button of "Property" attribute in "Properties" table
 		And I go to line in "List" table
 			| 'Description'    |
-			| 'Test'           |
+			| 'Test 1'         |
 		And I select current line in "List" table
 		And I finish line editing in "Properties" table
 		And I click "Save and close" button
@@ -4186,7 +4186,7 @@ Scenario: _015400707 check that additional attributes and properties are display
 		And I click "Add properties" button
 		And "Properties" table became equal
 			| 'Property'   | 'Value'    |
-			| 'Test'       | ''         |
+			| 'Test 1'     | ''         |
 	And I close all client application windows
 
 
@@ -4222,7 +4222,7 @@ Scenario: _015400708 check that additional attributes and properties are display
 		And I click choice button of "Property" attribute in "Properties" table
 		And I go to line in "List" table
 			| 'Description'    |
-			| 'Test'           |
+			| 'Test 1'         |
 		And I select current line in "List" table
 		And I finish line editing in "Properties" table
 		And I click "Save and close" button
@@ -4238,7 +4238,7 @@ Scenario: _015400708 check that additional attributes and properties are display
 		And I click "Add properties" button
 		And "Properties" table became equal
 			| 'Property'   | 'Value'    |
-			| 'Test'       | ''         |
+			| 'Test 1'     | ''         |
 	And I close all client application windows
 
 
@@ -4274,7 +4274,7 @@ Scenario: _015400709 check that additional attributes and properties are display
 		And I click choice button of "Property" attribute in "Properties" table
 		And I go to line in "List" table
 			| 'Description'    |
-			| 'Test'           |
+			| 'Test 1'         |
 		And I select current line in "List" table
 		And I finish line editing in "Properties" table
 		And I click "Save and close" button
@@ -4290,7 +4290,7 @@ Scenario: _015400709 check that additional attributes and properties are display
 		And I click "Add properties" button
 		And "Properties" table became equal
 			| 'Property'   | 'Value'    |
-			| 'Test'       | ''         |
+			| 'Test 1'     | ''         |
 	And I close all client application windows
 
 
@@ -4326,7 +4326,7 @@ Scenario: _015400710 check that additional attributes and properties are display
 		And I click choice button of "Property" attribute in "Properties" table
 		And I go to line in "List" table
 			| 'Description'    |
-			| 'Test'           |
+			| 'Test 1'         |
 		And I select current line in "List" table
 		And I finish line editing in "Properties" table
 		And I click "Save and close" button
@@ -4342,7 +4342,7 @@ Scenario: _015400710 check that additional attributes and properties are display
 		And I click "Add properties" button
 		And "Properties" table became equal
 			| 'Property'   | 'Value'    |
-			| 'Test'       | ''         |
+			| 'Test 1'     | ''         |
 	And I close all client application windows
 
 
@@ -4377,7 +4377,7 @@ Scenario: _015400711 check that additional attributes and properties are display
 		And I click choice button of "Property" attribute in "Properties" table
 		And I go to line in "List" table
 			| 'Description'    |
-			| 'Test'           |
+			| 'Test 1'         |
 		And I select current line in "List" table
 		And I finish line editing in "Properties" table
 		And I click "Save and close" button
@@ -4392,7 +4392,7 @@ Scenario: _015400711 check that additional attributes and properties are display
 		And I click "Add properties" button
 		And "Properties" table became equal
 			| 'Property'   | 'Value'    |
-			| 'Test'       | ''         |
+			| 'Test 1'     | ''         |
 	And I close all client application windows
 
 
@@ -4429,7 +4429,7 @@ Scenario: _015400712 check that additional attributes and properties are display
 		And I click choice button of "Property" attribute in "Properties" table
 		And I go to line in "List" table
 			| 'Description'    |
-			| 'Test'           |
+			| 'Test 1'         |
 		And I select current line in "List" table
 		And I finish line editing in "Properties" table
 		And I click "Save and close" button
@@ -4445,7 +4445,7 @@ Scenario: _015400712 check that additional attributes and properties are display
 		And I click "Add properties" button
 		And "Properties" table became equal
 			| 'Property'   | 'Value'    |
-			| 'Test'       | ''         |
+			| 'Test 1'     | ''         |
 	And I close all client application windows
 
 
@@ -4481,7 +4481,7 @@ Scenario: _015400713 check that additional attributes and properties are display
 		And I click choice button of "Property" attribute in "Properties" table
 		And I go to line in "List" table
 			| 'Description'    |
-			| 'Test'           |
+			| 'Test 1'         |
 		And I select current line in "List" table
 		And I finish line editing in "Properties" table
 		And I click "Save and close" button
@@ -4497,7 +4497,7 @@ Scenario: _015400713 check that additional attributes and properties are display
 		And I click "Add properties" button
 		And "Properties" table became equal
 			| 'Property'   | 'Value'    |
-			| 'Test'       | ''         |
+			| 'Test 1'     | ''         |
 	And I close all client application windows
 
 
@@ -4533,7 +4533,7 @@ Scenario: _015400714 check that additional attributes and properties are display
 		And I click choice button of "Property" attribute in "Properties" table
 		And I go to line in "List" table
 			| 'Description'    |
-			| 'Test'           |
+			| 'Test 1'         |
 		And I select current line in "List" table
 		And I finish line editing in "Properties" table
 		And I click "Save and close" button
@@ -4549,7 +4549,7 @@ Scenario: _015400714 check that additional attributes and properties are display
 		And I click "Add properties" button
 		And "Properties" table became equal
 			| 'Property'   | 'Value'    |
-			| 'Test'       | ''         |
+			| 'Test 1'     | ''         |
 	And I close all client application windows
 
 
@@ -4589,7 +4589,7 @@ Scenario: _015400715 check that additional attributes and properties are display
 		And I click choice button of "Property" attribute in "Properties" table
 		And I go to line in "List" table
 			| 'Description'    |
-			| 'Test'           |
+			| 'Test 1'         |
 		And I select current line in "List" table
 		And I finish line editing in "Properties" table
 		And I click "Save and close" button
@@ -4605,7 +4605,7 @@ Scenario: _015400715 check that additional attributes and properties are display
 		And I click "Add properties" button
 		And "Properties" table became equal
 			| 'Property'   | 'Value'    |
-			| 'Test'       | ''         |
+			| 'Test 1'     | ''         |
 	And I close all client application windows
 
 
@@ -4641,7 +4641,7 @@ Scenario: _015400717 check that additional attributes and properties are display
 		And I click choice button of "Property" attribute in "Properties" table
 		And I go to line in "List" table
 			| 'Description'    |
-			| 'Test'           |
+			| 'Test 1'         |
 		And I select current line in "List" table
 		And I finish line editing in "Properties" table
 		And I click "Save and close" button
@@ -4657,7 +4657,7 @@ Scenario: _015400717 check that additional attributes and properties are display
 		And I click "Add properties" button
 		And "Properties" table became equal
 			| 'Property'   | 'Value'    |
-			| 'Test'       | ''         |
+			| 'Test 1'       | ''         |
 	And I close all client application windows
 
 Scenario: _015400718 check that additional attributes and properties are displayed on the form without reopening (catalog TaxAnalytics)
@@ -4692,7 +4692,7 @@ Scenario: _015400718 check that additional attributes and properties are display
 		And I click choice button of "Property" attribute in "Properties" table
 		And I go to line in "List" table
 			| 'Description'    |
-			| 'Test'           |
+			| 'Test 1'         |
 		And I select current line in "List" table
 		And I finish line editing in "Properties" table
 		And I click "Save and close" button
@@ -4708,7 +4708,7 @@ Scenario: _015400718 check that additional attributes and properties are display
 		And I click "Add properties" button
 		And "Properties" table became equal
 			| 'Property'   | 'Value'    |
-			| 'Test'       | ''         |
+			| 'Test 1'     | ''         |
 	And I close all client application windows
 
 Scenario: _015400719 check that additional attributes and properties are displayed on the form without reopening (catalog UnitsOfMeasurement)
@@ -4743,7 +4743,7 @@ Scenario: _015400719 check that additional attributes and properties are display
 		And I click choice button of "Property" attribute in "Properties" table
 		And I go to line in "List" table
 			| 'Description'    |
-			| 'Test'           |
+			| 'Test 1'         |
 		And I select current line in "List" table
 		And I finish line editing in "Properties" table
 		And I click "Save and close" button
@@ -4759,7 +4759,7 @@ Scenario: _015400719 check that additional attributes and properties are display
 		And I click "Add properties" button
 		And "Properties" table became equal
 			| 'Property'   | 'Value'    |
-			| 'Test'       | ''         |
+			| 'Test 1'     | ''         |
 	And I close all client application windows
 
 Scenario: _015400720 check that additional attributes and properties are displayed on the form without reopening (catalog AccountingOperations)
@@ -4794,7 +4794,7 @@ Scenario: _015400720 check that additional attributes and properties are display
 		And I click choice button of "Property" attribute in "Properties" table
 		And I go to line in "List" table
 			| 'Description'    |
-			| 'Test'           |
+			| 'Test 1'         |
 		And I select current line in "List" table
 		And I finish line editing in "Properties" table
 		And I click "Save and close" button
@@ -4810,7 +4810,7 @@ Scenario: _015400720 check that additional attributes and properties are display
 		And I click "Add properties" button
 		And "Properties" table became equal
 			| 'Property'   | 'Value'    |
-			| 'Test'       | ''         |
+			| 'Test 1'     | ''         |
 	And I close all client application windows
 
 
@@ -4846,7 +4846,7 @@ Scenario: _015400721 check that additional attributes and properties are display
 		And I click choice button of "Property" attribute in "Properties" table
 		And I go to line in "List" table
 			| 'Description'    |
-			| 'Test'           |
+			| 'Test 1'         |
 		And I select current line in "List" table
 		And I finish line editing in "Properties" table
 		And I click "Save and close" button
@@ -4862,7 +4862,7 @@ Scenario: _015400721 check that additional attributes and properties are display
 		And I click "Add properties" button
 		And "Properties" table became equal
 			| 'Property'   | 'Value'    |
-			| 'Test'       | ''         |
+			| 'Test 1'     | ''         |
 	And I close all client application windows
 
 Scenario: _015400722 check that additional attributes and properties are displayed on the form without reopening (catalog EmployeeSchedule)
@@ -4898,7 +4898,7 @@ Scenario: _015400722 check that additional attributes and properties are display
 		And I click choice button of "Property" attribute in "Properties" table
 		And I go to line in "List" table
 			| 'Description'    |
-			| 'Test'           |
+			| 'Test 1'         |
 		And I select current line in "List" table
 		And I finish line editing in "Properties" table
 		And I click "Save and close" button
@@ -4915,7 +4915,7 @@ Scenario: _015400722 check that additional attributes and properties are display
 		And I click "Add properties" button
 		And "Properties" table became equal
 			| 'Property'   | 'Value'    |
-			| 'Test'       | ''         |
+			| 'Test 1'     | ''         |
 	And I close all client application windows
 
 Scenario: _015400723 check that additional attributes and properties are displayed on the form without reopening (catalog EmployeePositions)
@@ -4950,7 +4950,7 @@ Scenario: _015400723 check that additional attributes and properties are display
 		And I click choice button of "Property" attribute in "Properties" table
 		And I go to line in "List" table
 			| 'Description'    |
-			| 'Test'           |
+			| 'Test 1'         |
 		And I select current line in "List" table
 		And I finish line editing in "Properties" table
 		And I click "Save and close" button
@@ -4967,7 +4967,7 @@ Scenario: _015400723 check that additional attributes and properties are display
 		And I click "Add properties" button
 		And "Properties" table became equal
 			| 'Property'   | 'Value'    |
-			| 'Test'       | ''         |
+			| 'Test 1'     | ''         |
 	And I close all client application windows
 
 Scenario: _015400724 check that additional attributes and properties are displayed on the form without reopening (catalog AccrualAndDeductionTypes)
@@ -5003,7 +5003,7 @@ Scenario: _015400724 check that additional attributes and properties are display
 		And I click choice button of "Property" attribute in "Properties" table
 		And I go to line in "List" table
 			| 'Description'    |
-			| 'Test'           |
+			| 'Test 1'         |
 		And I select current line in "List" table
 		And I finish line editing in "Properties" table
 		And I click "Save and close" button
@@ -5020,7 +5020,7 @@ Scenario: _015400724 check that additional attributes and properties are display
 		And I click "Add properties" button
 		And "Properties" table became equal
 			| 'Property'   | 'Value'    |
-			| 'Test'       | ''         |
+			| 'Test 1'     | ''         |
 	And I close all client application windows
 
 Scenario: _01540064 check that additional attributes and properties are displayed on the form without reopening (Catalog_ChequeBonds)
@@ -5047,7 +5047,7 @@ Scenario: _01540064 check that additional attributes and properties are displaye
 		And I click choice button of "Property" attribute in "Properties" table
 		And I go to line in "List" table
 			| 'Description'    |
-			| 'Test'           |
+			| 'Test 1'         |
 		And I select current line in "List" table
 		And I finish line editing in "Properties" table
 		And I input "Cheque Bonds" text in the field named "Description_en"
@@ -5071,7 +5071,7 @@ Scenario: _01540064 check that additional attributes and properties are displaye
 		And I click "Add properties" button
 		And "Properties" table became equal
 			| 'Property'   | 'Value'    |
-			| 'Test'       | ''         |
+			| 'Test 1'     | ''         |
 	And I close all client application windows
 
 
@@ -5100,7 +5100,7 @@ Scenario: _015400661 check that additional attributes and properties are display
 		And I click choice button of "Property" attribute in "Properties" table
 		And I go to line in "List" table
 			| 'Description'    |
-			| 'Test'           |
+			| 'Test 1'         |
 		And I select current line in "List" table
 		And I finish line editing in "Properties" table
 		And I input "Cheque bond transaction" text in the field named "Description_en"
@@ -5118,7 +5118,7 @@ Scenario: _015400661 check that additional attributes and properties are display
 		And I click "Add properties" button
 		And "Properties" table became equal
 			| 'Property'   | 'Value'    |
-			| 'Test'       | ''         |
+			| 'Test 1'     | ''         |
 	And I close all client application windows
 
 
@@ -5147,7 +5147,7 @@ Scenario: _015400662 check that additional attributes and properties are display
 		And I click choice button of "Property" attribute in "Properties" table
 		And I go to line in "List" table
 			| 'Description'    |
-			| 'Test'           |
+			| 'Test 1'         |
 		And I select current line in "List" table
 		And I finish line editing in "Properties" table
 		And I input "Work order" text in the field named "Description_en"
@@ -5165,7 +5165,7 @@ Scenario: _015400662 check that additional attributes and properties are display
 		And I click "Add properties" button
 		And "Properties" table became equal
 			| 'Property'   | 'Value'    |
-			| 'Test'       | ''         |
+			| 'Test 1'     | ''         |
 	And I close all client application windows
 
 
@@ -5194,7 +5194,7 @@ Scenario: _015400663 check that additional attributes and properties are display
 		And I click choice button of "Property" attribute in "Properties" table
 		And I go to line in "List" table
 			| 'Description'    |
-			| 'Test'           |
+			| 'Test 1'         |
 		And I select current line in "List" table
 		And I finish line editing in "Properties" table
 		And I input "Work sheet" text in the field named "Description_en"
@@ -5212,7 +5212,7 @@ Scenario: _015400663 check that additional attributes and properties are display
 		And I click "Add properties" button
 		And "Properties" table became equal
 			| 'Property'   | 'Value'    |
-			| 'Test'       | ''         |
+			| 'Test 1'     | ''         |
 	And I close all client application windows
 
 
@@ -5263,7 +5263,7 @@ Scenario: _015400664 check that additional attributes and properties are display
 		And I click choice button of "Property" attribute in "Properties" table
 		And I go to line in "List" table
 			| 'Description'    |
-			| 'Test'           |
+			| 'Test 1'         |
 		And I select current line in "List" table
 		And I finish line editing in "Properties" table
 		And I click "Save and close" button
@@ -5279,7 +5279,7 @@ Scenario: _015400664 check that additional attributes and properties are display
 		And I click "Add properties" button
 		And "Properties" table became equal
 			| 'Property'   | 'Value'    |
-			| 'Test'       | ''         |
+			| 'Test 1'     | ''         |
 	And I close all client application windows
 
 Scenario: _015400665 check that additional attributes and properties are displayed on the form without reopening (document SalesReportFromTradeAgent)
@@ -5307,7 +5307,7 @@ Scenario: _015400665 check that additional attributes and properties are display
 		And I click choice button of "Property" attribute in "Properties" table
 		And I go to line in "List" table
 			| 'Description'    |
-			| 'Test'           |
+			| 'Test 1'         |
 		And I select current line in "List" table
 		And I finish line editing in "Properties" table
 		And I input "Sales report from trade agent" text in the field named "Description_en"
@@ -5325,7 +5325,7 @@ Scenario: _015400665 check that additional attributes and properties are display
 		And I click "Add properties" button
 		And "Properties" table became equal
 			| 'Property'   | 'Value'    |
-			| 'Test'       | ''         |
+			| 'Test 1'     | ''         |
 	And I close all client application windows
 
 
@@ -5354,7 +5354,7 @@ Scenario: _015400666 check that additional attributes and properties are display
 		And I click choice button of "Property" attribute in "Properties" table
 		And I go to line in "List" table
 			| 'Description'    |
-			| 'Test'           |
+			| 'Test 1'         |
 		And I select current line in "List" table
 		And I finish line editing in "Properties" table
 		And I input "Sales report to consignor" text in the field named "Description_en"
@@ -5372,7 +5372,7 @@ Scenario: _015400666 check that additional attributes and properties are display
 		And I click "Add properties" button
 		And "Properties" table became equal
 			| 'Property'   | 'Value'    |
-			| 'Test'       | ''         |
+			| 'Test 1'     | ''         |
 	And I close all client application windows
 
 
@@ -5402,7 +5402,7 @@ Scenario: _015400667 check that additional attributes and properties are display
 		And I click choice button of "Property" attribute in "Properties" table
 		And I go to line in "List" table
 			| 'Description'    |
-			| 'Test'           |
+			| 'Test 1'         |
 		And I select current line in "List" table
 		And I finish line editing in "Properties" table
 		And I input "Retail shipment confirmation" text in the field named "Description_en"
@@ -5420,7 +5420,7 @@ Scenario: _015400667 check that additional attributes and properties are display
 		And I click "Add properties" button
 		And "Properties" table became equal
 			| 'Property'   | 'Value'    |
-			| 'Test'       | ''         |
+			| 'Test 1'     | ''         |
 	And I close all client application windows
 
 
@@ -5449,7 +5449,7 @@ Scenario: _015400668 check that additional attributes and properties are display
 		And I click choice button of "Property" attribute in "Properties" table
 		And I go to line in "List" table
 			| 'Description'    |
-			| 'Test'           |
+			| 'Test 1'         |
 		And I select current line in "List" table
 		And I finish line editing in "Properties" table
 		And I input "Retail goods receipt" text in the field named "Description_en"
@@ -5467,7 +5467,7 @@ Scenario: _015400668 check that additional attributes and properties are display
 		And I click "Add properties" button
 		And "Properties" table became equal
 			| 'Property'   | 'Value'    |
-			| 'Test'       | ''         |
+			| 'Test 1'     | ''         |
 	And I close all client application windows
 
 Scenario: _015400671 check that additional attributes and properties are displayed on the form without reopening (document Employee firing)
@@ -5495,7 +5495,7 @@ Scenario: _015400671 check that additional attributes and properties are display
 		And I click choice button of "Property" attribute in "Properties" table
 		And I go to line in "List" table
 			| 'Description'    |
-			| 'Test'           |
+			| 'Test 1'         |
 		And I select current line in "List" table
 		And I finish line editing in "Properties" table
 		And I input "Employee firing" text in the field named "Description_en"
@@ -5513,7 +5513,7 @@ Scenario: _015400671 check that additional attributes and properties are display
 		And I click "Add properties" button
 		And "Properties" table became equal
 			| 'Property'   | 'Value'    |
-			| 'Test'       | ''         |
+			| 'Test 1'     | ''         |
 	And I close all client application windows
 
 Scenario: _015400672 check that additional attributes and properties are displayed on the form without reopening (document Employee hiring)
@@ -5541,7 +5541,7 @@ Scenario: _015400672 check that additional attributes and properties are display
 		And I click choice button of "Property" attribute in "Properties" table
 		And I go to line in "List" table
 			| 'Description'    |
-			| 'Test'           |
+			| 'Test 1'         |
 		And I select current line in "List" table
 		And I finish line editing in "Properties" table
 		And I input "Employee hiring" text in the field named "Description_en"
@@ -5559,7 +5559,7 @@ Scenario: _015400672 check that additional attributes and properties are display
 		And I click "Add properties" button
 		And "Properties" table became equal
 			| 'Property'   | 'Value'    |
-			| 'Test'       | ''         |
+			| 'Test 1'     | ''         |
 	And I close all client application windows
 
 Scenario: _015400673 check that additional attributes and properties are displayed on the form without reopening (document Employee sick leave)
@@ -5587,7 +5587,7 @@ Scenario: _015400673 check that additional attributes and properties are display
 		And I click choice button of "Property" attribute in "Properties" table
 		And I go to line in "List" table
 			| 'Description'    |
-			| 'Test'           |
+			| 'Test 1'         |
 		And I select current line in "List" table
 		And I finish line editing in "Properties" table
 		And I input "Employee sick leave" text in the field named "Description_en"
@@ -5605,7 +5605,7 @@ Scenario: _015400673 check that additional attributes and properties are display
 		And I click "Add properties" button
 		And "Properties" table became equal
 			| 'Property'   | 'Value'    |
-			| 'Test'       | ''         |
+			| 'Test 1'     | ''         |
 	And I close all client application windows
 
 Scenario: _015400674 check that additional attributes and properties are displayed on the form without reopening (document Employee transfer)
@@ -5633,7 +5633,7 @@ Scenario: _015400674 check that additional attributes and properties are display
 		And I click choice button of "Property" attribute in "Properties" table
 		And I go to line in "List" table
 			| 'Description'    |
-			| 'Test'           |
+			| 'Test 1'         |
 		And I select current line in "List" table
 		And I finish line editing in "Properties" table
 		And I input "Employee transfer" text in the field named "Description_en"
@@ -5651,7 +5651,7 @@ Scenario: _015400674 check that additional attributes and properties are display
 		And I click "Add properties" button
 		And "Properties" table became equal
 			| 'Property'   | 'Value'    |
-			| 'Test'       | ''         |
+			| 'Test 1'     | ''         |
 	And I close all client application windows
 
 Scenario: _015400675 check that additional attributes and properties are displayed on the form without reopening (document Employee vacation)
@@ -5679,7 +5679,7 @@ Scenario: _015400675 check that additional attributes and properties are display
 		And I click choice button of "Property" attribute in "Properties" table
 		And I go to line in "List" table
 			| 'Description'    |
-			| 'Test'           |
+			| 'Test 1'         |
 		And I select current line in "List" table
 		And I finish line editing in "Properties" table
 		And I input "Employee vacation" text in the field named "Description_en"
@@ -5697,7 +5697,7 @@ Scenario: _015400675 check that additional attributes and properties are display
 		And I click "Add properties" button
 		And "Properties" table became equal
 			| 'Property'   | 'Value'    |
-			| 'Test'       | ''         |
+			| 'Test 1'     | ''         |
 	And I close all client application windows
 	
 Scenario: _015400676 check that additional attributes and properties are displayed on the form without reopening (document Time sheet)
@@ -5725,7 +5725,7 @@ Scenario: _015400676 check that additional attributes and properties are display
 		And I click choice button of "Property" attribute in "Properties" table
 		And I go to line in "List" table
 			| 'Description'    |
-			| 'Test'           |
+			| 'Test 1'         |
 		And I select current line in "List" table
 		And I finish line editing in "Properties" table
 		And I input "Time sheet" text in the field named "Description_en"
@@ -5743,7 +5743,7 @@ Scenario: _015400676 check that additional attributes and properties are display
 		And I click "Add properties" button
 		And "Properties" table became equal
 			| 'Property'   | 'Value'    |
-			| 'Test'       | ''         |
+			| 'Test 1'     | ''         |
 	And I close all client application windows
 
 Scenario: _015400676 check that additional attributes and properties are displayed on the form without reopening (document Additional deduction)
@@ -5771,7 +5771,7 @@ Scenario: _015400676 check that additional attributes and properties are display
 		And I click choice button of "Property" attribute in "Properties" table
 		And I go to line in "List" table
 			| 'Description'    |
-			| 'Test'           |
+			| 'Test 1'         |
 		And I select current line in "List" table
 		And I finish line editing in "Properties" table
 		And I input "Additional deduction" text in the field named "Description_en"
@@ -5789,7 +5789,7 @@ Scenario: _015400676 check that additional attributes and properties are display
 		And I click "Add properties" button
 		And "Properties" table became equal
 			| 'Property'   | 'Value'    |
-			| 'Test'       | ''         |
+			| 'Test 1'     | ''         |
 	And I close all client application windows
 
 Scenario: _015400677 check that additional attributes and properties are displayed on the form without reopening (document Additional accrual)
@@ -5817,7 +5817,7 @@ Scenario: _015400677 check that additional attributes and properties are display
 		And I click choice button of "Property" attribute in "Properties" table
 		And I go to line in "List" table
 			| 'Description'    |
-			| 'Test'           |
+			| 'Test 1'         |
 		And I select current line in "List" table
 		And I finish line editing in "Properties" table
 		And I input "Additional accrual" text in the field named "Description_en"
@@ -5835,7 +5835,7 @@ Scenario: _015400677 check that additional attributes and properties are display
 		And I click "Add properties" button
 		And "Properties" table became equal
 			| 'Property'   | 'Value'    |
-			| 'Test'       | ''         |
+			| 'Test 1'     | ''         |
 	And I close all client application windows
 
 Scenario: _015400678 check that additional attributes and properties are displayed on the form without reopening (document Payroll)
@@ -5863,7 +5863,7 @@ Scenario: _015400678 check that additional attributes and properties are display
 		And I click choice button of "Property" attribute in "Properties" table
 		And I go to line in "List" table
 			| 'Description'    |
-			| 'Test'           |
+			| 'Test 1'         |
 		And I select current line in "List" table
 		And I finish line editing in "Properties" table
 		And I input "Payroll" text in the field named "Description_en"
@@ -5881,7 +5881,7 @@ Scenario: _015400678 check that additional attributes and properties are display
 		And I click "Add properties" button
 		And "Properties" table became equal
 			| 'Property'   | 'Value'    |
-			| 'Test'       | ''         |
+			| 'Test 1'     | ''         |
 	And I close all client application windows
 	
 Scenario: _015400670 check AddAttribute with type hyperlink

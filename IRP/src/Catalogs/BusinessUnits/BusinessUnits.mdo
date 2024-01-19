@@ -65,7 +65,6 @@
   <defaultObjectForm>Catalog.BusinessUnits.Form.ItemForm</defaultObjectForm>
   <defaultListForm>Catalog.BusinessUnits.Form.ListForm</defaultListForm>
   <defaultChoiceForm>Catalog.BusinessUnits.Form.ChoiceForm</defaultChoiceForm>
-  <choiceHistoryOnInput>DontUse</choiceHistoryOnInput>
   <attributes uuid="f9a37c70-5521-431b-bfc5-fc177e0f9d33">
     <name>Department</name>
     <synonym>

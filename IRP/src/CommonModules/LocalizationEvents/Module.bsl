@@ -1,3 +1,4 @@
+// @strict-types
 
 #Region Public
 
@@ -5,7 +6,7 @@
 //
 // Parameters:
 //  Source - CatalogManagerCatalogName, ChartOfCharacteristicTypesManagerChartOfCharacteristicTypesName - Source
-//  ChoiceData - ValueList - Choice data
+//  ChoiceData - ValueList Of AnyRef - Choice data
 //  Parameters - Structure - Parameters:
 //  * SearchString - String - Search string
 //  * Filter - Structure - Filter:
@@ -46,7 +47,7 @@ Procedure FindDataForInputStringChoiceDataGetProcessing(Source, ChoiceData, Para
 
 	UseObjectWithDeletionMark = True;
 	If UserSettings.Count() Then
-		// @skip-check invocation-parameter-type-intersect
+		// @skip-check invocation-parameter-type-intersect, property-return-type
 		UseObjectWithDeletionMark = Boolean(UserSettings[0].Value);
 	EndIf;
 
@@ -174,7 +175,7 @@ EndProcedure
 // Create main form item description.
 //
 // Parameters:
-//  Form - ClientApplicationForm - Form
+//  Form - See Catalog.Items.Form.ItemForm
 //  GroupName - String - Group name
 //  AddInfo - Undefined, Structure - Add info
 Procedure CreateMainFormItemDescription(Form, GroupName, AddInfo = Undefined) Export
@@ -191,6 +192,7 @@ Procedure CreateMainFormItemDescription(Form, GroupName, AddInfo = Undefined) Ex
 		NewAttribute.Type = FormFieldType.LabelField;
 		NewAttribute.Hyperlink = True;
 		NewAttribute.DataPath = "Object.Description_en";
+		//@skip-check module-attachable-event-handler-name
 		NewAttribute.SetAction("Click", "DescriptionOpening");
 	EndIf;
 
@@ -205,6 +207,7 @@ Procedure CreateMainFormItemDescription(Form, GroupName, AddInfo = Undefined) Ex
 			NewAttribute.DataPath = "Object." + Attribute;
 			NewAttribute.OpenButton = True;
 			NewAttribute.AutoMarkIncomplete = True;
+			//@skip-check module-attachable-event-handler-name
 			NewAttribute.SetAction("Opening", "DescriptionOpening");
 		EndIf;
 	EndDo;
@@ -268,7 +271,7 @@ EndProcedure
 //
 // Parameters:
 //  Source - CatalogManagerCatalogName, ChartOfCharacteristicTypesManagerChartOfCharacteristicTypesName - Source
-//  Fields - Array - Fields
+//  Fields - Array Of String - Fields
 //  StandardProcessing - Boolean - Standard processing
 Procedure GetCatalogPresentationFieldsPresentationFieldsGetProcessing(Source, Fields, StandardProcessing) Export
 	If Not StandardProcessing Then
@@ -296,12 +299,28 @@ EndProcedure
 // Parameters:
 //  Source - CatalogObjectCatalogName, ChartOfCharacteristicTypesObjectChartOfCharacteristicTypesName, ExchangePlanObjectExchangePlanName - Source
 //  Cancel - Boolean - Cancel
-//  CheckedAttributes - Array - Checked attributes
+//  CheckedAttributes - Array Of String - Checked attributes
 Procedure FillCheckProcessing_DescriptionCheckFilling(Source, Cancel, CheckedAttributes) Export
 	CheckDescriptionFilling(Source, Cancel);
 	CheckDescriptionDuplicate(Source, Cancel);
 EndProcedure
 
+// Fill description.
+// 
+// Parameters:
+//  Text - String - Text
+//  Object - CatalogObjectCatalogName - Object
+Procedure FillDescription(Text, Object) Export
+	
+	If Object.Ref.IsEmpty() Then
+		Lang = SessionParameters.LocalizationCode;
+		//@skip-check invocation-parameter-type-intersect
+		If IsBlankString(Object["Description_" + Lang]) Then
+			Object["Description_" + Lang] = Text;
+		EndIf;
+	EndIf;
+	
+EndProcedure
 #EndRegion
 
 #Region Private

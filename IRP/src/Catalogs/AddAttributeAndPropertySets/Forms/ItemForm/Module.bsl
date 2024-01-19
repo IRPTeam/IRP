@@ -4,6 +4,7 @@
 &AtServer
 Procedure OnCreateAtServer(Cancel, StandardProcessing)
 	LocalizationEvents.CreateMainFormItemDescription(ThisObject, "GroupDescriptions");
+	LocalizationEvents.FillDescription(Parameters.FillingText, Object);
 
 	Items.AttributesInterfaceGroup.Visible = Object.Ref = PredefinedValue(
 		"Catalog.AddAttributeAndPropertySets.Catalog_Items") Or Object.Ref = PredefinedValue(

@@ -27,6 +27,7 @@ EndProcedure
 &AtServer
 Procedure OnCreateAtServer(Cancel, StandardProcessing)
 	LocalizationEvents.CreateMainFormItemDescription(ThisObject, "GroupDescriptions");
+	LocalizationEvents.FillDescription(Parameters.FillingText, Object);
 	AddAttributesAndPropertiesServer.OnCreateAtServer(ThisObject);
 	ExtensionServer.AddAttributesFromExtensions(ThisObject, Object.Ref);
 

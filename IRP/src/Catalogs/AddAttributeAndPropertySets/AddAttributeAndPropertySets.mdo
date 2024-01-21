@@ -998,6 +998,13 @@
         <value>146</value>
       </code>
     </items>
+    <items id="94c63b77-4cce-4f62-8604-eeb57ec2d590">
+      <name>Document_DebitCreditNote</name>
+      <description></description>
+      <code xsi:type="core:NumberValue">
+        <value>147</value>
+      </code>
+    </items>
   </predefined>
   <editType>InDialog</editType>
   <choiceMode>BothWays</choiceMode>

@@ -421,6 +421,7 @@
   <roles>Role.AccumulationRegisters_TM1010T_RowIDMovements</roles>
   <roles>Role.AccumulationRegisters_TM1020B_AdvancesKey</roles>
   <roles>Role.AccumulationRegisters_TM1030B_TransactionsKey</roles>
+  <roles>Role.Document_DebitCreditNote</roles>
   <commonTemplates>CommonTemplate.HTMLPictureSlider</commonTemplates>
   <commonTemplates>CommonTemplate.HTMLAddAttributes</commonTemplates>
   <commonTemplates>CommonTemplate.HTMLGallery</commonTemplates>
@@ -730,6 +731,8 @@
   <commonModules>CommonModule.ViewServer_V2</commonModules>
   <commonModules>CommonModule.WorkstationClient</commonModules>
   <commonModules>CommonModule.WorkstationServer</commonModules>
+  <commonModules>CommonModule.DocDebitCreditNoteClient</commonModules>
+  <commonModules>CommonModule.DocDebitCreditNoteServer</commonModules>
   <commonAttributes>CommonAttribute.Author</commonAttributes>
   <commonAttributes>CommonAttribute.Branch</commonAttributes>
   <commonAttributes>CommonAttribute.Description</commonAttributes>
@@ -1153,6 +1156,7 @@
   <documents>Document.WorkOrder</documents>
   <documents>Document.WorkOrderClosing</documents>
   <documents>Document.WorkSheet</documents>
+  <documents>Document.DebitCreditNote</documents>
   <documentJournals>DocumentJournal.DocumentsForIncomingPayment</documentJournals>
   <documentJournals>DocumentJournal.DocumentsForOutgoingPayment</documentJournals>
   <enums>Enum.AccountingAnalyticTypes</enums>
@@ -1240,6 +1244,7 @@
   <enums>Enum.TypeEquipment</enums>
   <enums>Enum.TypeExternalObject</enums>
   <enums>Enum.EmployeeScheduleTypes</enums>
+  <enums>Enum.DebitCreditNoteTransactionTpes</enums>
   <reports>Report.AllRegistersMovement</reports>
   <reports>Report.BatchBalance</reports>
   <reports>Report.BatchBalanceSimple</reports>

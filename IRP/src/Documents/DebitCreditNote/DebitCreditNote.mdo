@@ -329,6 +329,15 @@
     <usePurposes>PersonalComputer</usePurposes>
     <usePurposes>MobileDevice</usePurposes>
   </forms>
+  <forms uuid="95a8ccbb-198f-403b-a55f-b564545913f2">
+    <name>ChoiceInvoiceForm</name>
+    <synonym>
+      <key>en</key>
+      <value>Choice invoice form</value>
+    </synonym>
+    <usePurposes>PersonalComputer</usePurposes>
+    <usePurposes>MobileDevice</usePurposes>
+  </forms>
   <tabularSections uuid="4be4892b-5303-4a4d-a551-bc387298668f">
     <producedTypes>
       <objectType typeId="7f1a03bf-f073-462c-935f-5bbde8b5f66f" valueTypeId="b3eb8c69-19f9-456c-a33c-7500ca8ce3ea"/>
@@ -651,6 +660,23 @@
       <type>
         <types>DocumentRef.PurchaseInvoice</types>
         <types>DocumentRef.SalesInvoice</types>
+        <types>DocumentRef.SalesReturn</types>
+        <types>DocumentRef.PurchaseReturn</types>
+      </type>
+      <minValue xsi:type="core:UndefinedValue"/>
+      <maxValue xsi:type="core:UndefinedValue"/>
+      <dataHistory>Use</dataHistory>
+      <fullTextSearch>Use</fullTextSearch>
+    </attributes>
+    <attributes uuid="66550df8-4900-4df6-a2eb-7cf4691571e4">
+      <name>Order</name>
+      <synonym>
+        <key>en</key>
+        <value>Order</value>
+      </synonym>
+      <type>
+        <types>DocumentRef.SalesOrder</types>
+        <types>DocumentRef.PurchaseOrder</types>
       </type>
       <minValue xsi:type="core:UndefinedValue"/>
       <maxValue xsi:type="core:UndefinedValue"/>

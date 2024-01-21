@@ -175,6 +175,18 @@ Procedure TransactionTypeOnChange(Item)
 	DocDebitCreditNoteClient.TransactionTypeOnChange(Object, ThisObject, Item);	
 EndProcedure
 
+&AtClient
+Procedure OffsetOfAdvancesInvoicesInvoiceStartChoice(Item, ChoiceData, StandardProcessing)
+	DocDebitCreditNoteClient.OffsetOfAdvancesInvoicesInvoiceStartChoice(Object, ThisObject, Item, ChoiceData, StandardProcessing);
+EndProcedure
+
+&AtClient
+Procedure OffsetOfAdvancesInvoicesInvoiceOnChange(Item)
+	DocDebitCreditNoteClient.OffsetOfAdvancesInvoicesInvoiceOnChange(Object, ThisObject, Item);
+EndProcedure
+
+
+
 #EndRegion
 
 #Region PARTNER

@@ -191,6 +191,40 @@ Procedure OffsetOfAdvancesInvoicesAfterDeleteRow(Object, Form, Item) Export
 	ViewClient_V2.OffsetOfAdvancesInvoicesAfterDeleteRow(Object, Form);
 EndProcedure
 
+#Region INVOICE
+
+Procedure OffsetOfAdvancesInvoicesInvoiceOnChange(Object, Form, Item, CurrentData = Undefined) Export
+	//ViewClient_V2.OffsetOfAdvancesInvoicesInvoiceOnChange(Object, Form, CurrentData);
+EndProcedure
+
+Procedure OffsetOfAdvancesInvoicesInvoiceStartChoice(Object, Form, Item, ChoiceData, StandardProcessing) Export
+	StandardProcessing = False;
+		
+	Parameters = New Structure("Filter", New Structure());
+	Parameters.Filter.Insert("Partner", Object.Partner);
+	
+	Parameters.Insert("Ref", Object.Ref);
+	
+	Notify = New NotifyDescription("OffsetOfAdvancesInvoicesInvoiceStartChoiceEnd", 
+		ThisObject, New Structure("Form, Object", Form, Object));
+	OpenForm("Document.DebitCreditNote.Form.ChoiceInvoiceForm", 
+		Parameters, Item, , , , Notify, FormWindowOpeningMode.LockOwnerWindow);	
+EndProcedure
+
+Procedure OffsetOfAdvancesInvoicesInvoiceStartChoiceEnd(Result, NotifyParameters) Export
+//	If Result = Undefined Then
+//		Return;
+//	EndIf;
+//	Form = NotifyParameters.Form;
+//	Object = NotifyParameters.Object;
+//	CurrentData = Form.Items.OffsetOfAdvancesInvoices.CurrentData;
+//	If CurrentData <> Undefined Then
+//		ViewClient_V2.SetOffsetOfAdvancesInvoicesInvoice(Object, Form, CurrentData, Result.Invoice);
+//	EndIf;
+EndProcedure
+
+#EndRegion
+
 #EndRegion
 
 #Region OFFSET_OF_ADVANCES_PAYMANTS

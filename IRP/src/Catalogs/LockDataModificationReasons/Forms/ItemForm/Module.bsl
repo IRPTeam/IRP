@@ -9,6 +9,7 @@ Procedure OnCreateAtServer(Cancel, StandardProcessing)
 	SetOnlyReadModeByResponsibleUser();
 	
 	LocalizationEvents.CreateMainFormItemDescription(ThisObject, "GroupDescriptions");
+	LocalizationEvents.FillDescription(Parameters.FillingText, Object);
 	ExtensionServer.AddAttributesFromExtensions(ThisObject, Object.Ref);
 	AddAttributesAndPropertiesServer.OnCreateAtServer(ThisObject);
 

@@ -259,14 +259,20 @@ EndProcedure
 
 &AtClient
 Procedure CompleteLocation()
-	NotifyDescription = New NotifyDescription("InputQuantityEnd", ThisObject);
-	If Not SecondTryToInputQuantity Then
-		Write();
-		Text = R().QuestionToUser_018;
+	If RuleEditQuantity Then
+		SecondTryToInputQuantity = False;
+		CommonFunctionsClientServer.ShowUsersMessage(R().InfoMessage_011);
+		SaveAndUpdateDocument();
 	Else
-		Text = R().InfoMessage_009;
+		NotifyDescription = New NotifyDescription("InputQuantityEnd", ThisObject);
+		If Not SecondTryToInputQuantity Then
+			Write();
+			Text = R().QuestionToUser_018;
+		Else
+			Text = R().InfoMessage_009;
+		EndIf;
+		ShowInputNumber(NotifyDescription, "", Text);
 	EndIf;
-	ShowInputNumber(NotifyDescription, "", Text);
 EndProcedure
 
 &AtClient

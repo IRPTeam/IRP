@@ -1,4 +1,4 @@
-#language: en
+﻿#language: en
 @tree
 @Positive
 @ItemCatalogs
@@ -25,6 +25,18 @@ Scenario: _005210 filling in the "Partner Items" catalog
 		When Create catalog Partners objects (Ferron BP)
 		When Create catalog Units objects (box (8 pcs))
 		When Create catalog Units objects (pcs)
+	* Check user language	
+		Given I open hyperlink "e1cib/list/Catalog.Users"
+		And I go to line in "List" table
+			| 'Login'    |
+			| 'CI'       |
+		And I select current line in "List" table
+		If "Data localization" field value does not contain "English" text Then
+			And I select "English" exact value from "Data localization" drop-down list
+			And I click "Save and close" button
+			And I close TestClient session
+			Given I open new TestClient session or connect the existing one	
+		And I close all client application windows	
 	* Create Partner Items
 		Given I open hyperlink "e1cib/list/Catalog.PartnerItems"
 		And I click the button named "FormCreate"

@@ -42,6 +42,7 @@ Scenario: _0153500 preparation
 		When Create chart of characteristic types AddAttributeAndProperty objects
 		When Create catalog AddAttributeAndPropertySets objects
 		When Create catalog AddAttributeAndPropertyValues objects
+		When Create chart of characteristic types AddAttributeAndProperty objects (collection)
 		When Create catalog Currencies objects
 		When Create catalog Companies objects (Main company)
 		When Create catalog Stores objects
@@ -54,6 +55,7 @@ Scenario: _0153500 preparation
 		When Create chart of characteristic types CurrencyMovementType objects
 		When Create catalog TaxRates objects
 		When Create catalog Taxes objects	
+		When Create catalog Projects objects
 		When Create information register TaxSettings records
 		When Create information register PricesByItemKeys records
 		When Create catalog IntegrationSettings objects
@@ -5915,3 +5917,161 @@ Scenario: _015400670 check AddAttribute with type hyperlink
 		Then "1C:Enterprise" window is opened
 		And I click the button named "OK"
 		And I close all client application windows
+
+Scenario: _015400680 check add attributes (collection, Projects and Stores)
+	And I close all client application windows
+	* Setting additional attributes collection for SI
+		Given I open hyperlink "e1cib/list/Catalog.AddAttributeAndPropertySets"
+		And I go to line in "List" table
+			| 'Description'   |
+			| 'Sales invoice' |
+		And I select current line in "List" table
+		* Projects collection
+			And in the table "Attributes" I click "Add" button
+			And I click choice button of the attribute named "AttributesAttribute" in "Attributes" table
+			And I go to line in "List" table
+				| 'Description'                      |
+				| 'Add atribute Projects collection' |
+			And I select current line in "List" table
+			And I activate field named "AttributesCollection" in "Attributes" table
+			And I finish line editing in "Attributes" table
+			And I set checkbox named "AttributesCollection" in "Attributes" table
+			And I finish line editing in "Attributes" table
+			And I activate "Path for tag" field in "Attributes" table
+			And I select current line in "Attributes" table
+			And I input "ItemList.AdditionalAnalytic" text in "Path for tag" field of "Attributes" table
+			And I finish line editing in "Attributes" table
+		* Stores collection
+			And in the table "Attributes" I click "Add" button
+			And I click choice button of the attribute named "AttributesAttribute" in "Attributes" table
+			And I go to line in "List" table
+				| 'Description'                      |
+				| 'Add atribute Stores collection' |
+			And I select current line in "List" table
+			And I activate field named "AttributesCollection" in "Attributes" table
+			And I finish line editing in "Attributes" table
+			And I set checkbox named "AttributesCollection" in "Attributes" table
+			And I finish line editing in "Attributes" table
+			And I activate "Path for tag" field in "Attributes" table
+			And I select current line in "Attributes" table
+			And I input "ItemList.Store" text in "Path for tag" field of "Attributes" table
+			And I finish line editing in "Attributes" table
+		And I click "Save and close" button
+	* Create SI
+		Given I open hyperlink "e1cib/list/Document.SalesInvoice"
+		And I click the button named "FormCreate"
+		And I select from the drop-down list named "Partner" by "Ferron BP" string
+		And I activate field named "ItemListLineNumber" in "ItemList" table
+		And I select from "Legal name" drop-down list by "Company Ferron BP" string
+		And I activate field named "ItemListLineNumber" in "ItemList" table
+		And I select from "Partner term" drop-down list by "Basic Partner terms, TRY" string
+		And I activate field named "ItemListLineNumber" in "ItemList" table
+		And in the table "ItemList" I click the button named "ItemListAdd"
+		And I activate "Item" field in "ItemList" table
+		And I select current line in "ItemList" table
+		And I select "dress" from "Item" drop-down list by string in "ItemList" table
+		And I activate field named "ItemListItemKey" in "ItemList" table
+		And I select "XS/Blue" by string from the drop-down list named "ItemListItemKey" in "ItemList" table
+		And I finish line editing in "ItemList" table
+		And I select current line in "ItemList" table
+		And I click choice button of "Additional analytic" attribute in "ItemList" table
+		And I go to line in "" table
+			| ''         |
+			| 'Projects' |
+		And I select current line in "" table
+		And I go to line in "List" table
+			| 'Description'|
+			| 'Project 02' |
+		And I select current line in "List" table
+		And in the table "ItemList" I click the button named "ItemListAdd"
+		And I activate "Item" field in "ItemList" table
+		And I select "boots" from "Item" drop-down list by string in "ItemList" table
+		And I activate field named "ItemListItemKey" in "ItemList" table
+		And I select "39/18SD" by string from the drop-down list named "ItemListItemKey" in "ItemList" table
+		And I finish line editing in "ItemList" table
+		And I activate field named "ItemListStore" in "ItemList" table
+		And I select current line in "ItemList" table
+		And I select "Store 02" by string from the drop-down list named "ItemListStore" in "ItemList" table
+		And I finish line editing in "ItemList" table
+		And I select current line in "ItemList" table
+		And I click choice button of "Additional analytic" attribute in "ItemList" table
+		And I go to line in "" table
+			| ''         |
+			| 'Projects' |
+		And I select current line in "" table
+		And I go to line in "List" table
+			| 'Description'|
+			| 'Project 01' |
+		And I select current line in "List" table	
+		And I click "Save" button
+		And I save the value of the field named "Number" as "Number"
+		And I close current window			
+	* Check additional attributes collection
+		Given I open hyperlink "e1cib/list/Catalog.AddAttributeAndPropertySets"
+		And I go to line in "List" table
+			| 'Description'   |
+			| 'Sales invoice' |
+		And I select current line in "List" table
+		And I go to line in "Attributes" table
+			| 'Attribute'                        |
+			| 'Add atribute Projects collection' |
+		And I activate "Path for tag" field in "Attributes" table
+		And I select current line in "Attributes" table
+		And I input "" text in "Path for tag" field of "Attributes" table
+		And I finish line editing in "Attributes" table
+		And I go to line in "Attributes" table
+			| 'Attribute'                      |
+			| 'Add atribute Stores collection' |
+		And I select current line in "Attributes" table
+		And I input "" text in "Path for tag" field of "Attributes" table
+		And I finish line editing in "Attributes" table
+		And I click "Save and close" button
+		And I wait "Sales invoice (Additional attribute set) *" window closing in 20 seconds
+		Given I open hyperlink "e1cib/list/Document.SalesInvoice"
+		And I go to line in "List" table
+			| 'Number'   |
+			| '$Number$' |
+		And I select current line in "List" table
+		Then the form attribute named "__151d5bf741df34c5c81b30e019f7cbb69" became equal to "Project 02; Project 01"
+		Then the form attribute named "__151d5bf742df34c5c81b30e019f7cbb67" became equal to "Store 01; Store 02"
+	And I close all client application windows
+	
+Scenario: _015400681 check multistring additional attributes
+	And I close all client application windows
+	* Setting additional attributes collection for SI
+		Given I open hyperlink "e1cib/list/Catalog.AddAttributeAndPropertySets"
+		And I go to line in "List" table
+			| 'Description'   |
+			| 'Sales invoice' |
+		And I select current line in "List" table
+		And in the table "Attributes" I click "Add" button
+		And I click choice button of the attribute named "AttributesAttribute" in "Attributes" table
+		And I go to line in "List" table
+			| 'Description'     |
+			| 'Country of consignment' |
+		And I select current line in "List" table	
+		And I set checkbox named "AttributesCollection" in "Attributes" table	
+		And I click "Save and close" button
+	* Check
+		Given I open hyperlink "e1cib/list/Document.SalesInvoice"
+		And I click the button named "FormCreate"
+		And I click Select button of "Country of consignment" field
+		And I click the button named "Add"
+		And I click choice button of the attribute named "Value" in "ValueList" table
+		And I go to line in "List" table
+			| 'Additional attribute'   | 'Description'    |
+			| 'Country of consignment' |  'Turkey'        |
+		And I select current line in "List" table
+		And I finish line editing in "ValueList" table
+		And I click the button named "Add"
+		And I click choice button of the attribute named "Value" in "ValueList" table
+		And I go to line in "List" table
+			| 'Additional attribute'   | 'Description'    |
+			| 'Country of consignment' |  'Poland'        |
+		And I select current line in "List" table
+		And I finish line editing in "ValueList" table
+		And I click the button named "OK"
+		Then the form attribute named "_V123449" became equal to "Turkey; Poland"
+		And I click "Save" button	
+		Then the form attribute named "_V123449" became equal to "Turkey; Poland"	
+	And I close all client application windows

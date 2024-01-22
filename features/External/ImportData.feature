@@ -1277,7 +1277,13 @@ Scenario: Create chart of characteristic types AddAttributeAndProperty objects (
 		| 'e1cib/data/ChartOfCharacteristicTypes.AddAttributeAndProperty?ref=aa78120ed92fbced11eaf13dc8cb48e9'  | 'False'         | 'ValueStorage'  | 'False'      | 'Add atribute Boolean'  | ''                  | ''                | 'Add atribute Boolean TR'  | '_14a1c7551a8d2430e9bbd08a786fc9c31'  | '<Type>xs:boolean</Type>'   |
 		| 'e1cib/data/ChartOfCharacteristicTypes.AddAttributeAndProperty?ref=aa78120ed92fbced11eaf13dc8cb48e8'  | 'False'         | 'ValueStorage'  | 'False'      | 'Add atribute String'   | ''                  | ''                | 'Add atribute String TR'   | '_151d5bf741df34c5c81b30e019f7cbb68'  | '<Type>xs:string</Type>'    |
 		
+		
+Scenario: Create chart of characteristic types AddAttributeAndProperty objects (collection)
 
+	And I check or create chart of characteristic types "AddAttributeAndProperty" objects:
+		| 'Ref'                                                                                                | 'DeletionMark' | 'Icon'         | 'isIconSet' | 'Description_en'                   | 'Description_hash' | 'Description_ru' | 'Description_tr'                      | 'UniqueID'                           | 'ValueType'                                                                                             |
+		| 'e1cib/data/ChartOfCharacteristicTypes.AddAttributeAndProperty?ref=aa78120ed92fbced11eaf13dc8cb49e8' | 'False'        | 'ValueStorage' | 'False'     | 'Add atribute Projects collection' | ''                 | ''               | 'Add atribute Projects collection TR' | '_151d5bf741df34c5c81b30e019f7cbb69' | '<Type xmlns:d4p1="http://v8.1c.ru/8.1/data/enterprise/current-config">d4p1:CatalogRef.Projects</Type>' |
+		| 'e1cib/data/ChartOfCharacteristicTypes.AddAttributeAndProperty?ref=aa78120ed93fbced11eaf13dc8cb49e8' | 'False'        | 'ValueStorage' | 'False'     | 'Add atribute Stores collection'   | ''                 | ''               | 'Add atribute Stores collection TR'   | '_151d5bf742df34c5c81b30e019f7cbb67' | '<Type xmlns:d4p1="http://v8.1c.ru/8.1/data/enterprise/current-config">d4p1:CatalogRef.Stores</Type>'   |	
 
 Scenario: Create catalog AddAttributeAndPropertyValues objects
 
@@ -3369,4 +3375,11 @@ Scenario: test data for check of payroll calculation (hours shedule + several si
 		| 'Ref'                                                                        | 'Employee'                                                         | 'BeginDate'           | 'EndDate'             |
 		| 'e1cib/data/Document.EmployeeSickLeave?ref=b7b18e1cb2a9e83611ee934dac9fec7a' | 'e1cib/data/Catalog.Partners?ref=b7b18e1cb2a9e83611ee92afd0d50033' | '09.11.2023 00:00:00' | '10.11.2023 00:00:00' |
 		| 'e1cib/data/Document.EmployeeSickLeave?ref=b7b18e1cb2a9e83611ee934dac9fec7a' | 'e1cib/data/Catalog.Partners?ref=b7b18e1cb2a9e83611ee92afd0d50033' | '14.11.2023 00:00:00' | '14.11.2023 00:00:00' |
+
+Scenario: Create catalog Projects objects
+
+	And I check or create catalog "Projects" objects:
+		| 'Ref'                                                              | 'DeletionMark' | 'Code' | 'Author'                                                        | 'Description_en' | 'Description_hash' | 'Description_ru' | 'Description_tr' | 'Editor' | 'CreateDate'          | 'ModifyDate'          |
+		| 'e1cib/data/Catalog.Projects?ref=b7b4b80c227e00a211eeb6ca3018dc7d' | 'False'        | 1      | 'e1cib/data/Catalog.Users?ref=aa7f120ed92fbced11eb13d7279770c0' | 'Project 01'     | ''                 | ''               | ''               | ''       | '19.01.2024 14:56:48' | '01.01.0001 00:00:00' |
+		| 'e1cib/data/Catalog.Projects?ref=b7b4b80c227e00a211eeb6ca3018dc7e' | 'False'        | 2      | 'e1cib/data/Catalog.Users?ref=aa7f120ed92fbced11eb13d7279770c0' | 'Project 02'     | ''                 | ''               | ''               | ''       | '19.01.2024 14:56:53' | '01.01.0001 00:00:00' |
 

@@ -107,7 +107,7 @@
     <objectField>Catalog.EmployeePositions.TabularSection.AddAttributes.StandardAttribute.Ref</objectField>
     <typeField>Catalog.EmployeePositions.TabularSection.AddAttributes.Attribute.Property</typeField>
     <valueField>Catalog.EmployeePositions.TabularSection.AddAttributes.Attribute.Value</valueField>
-    <multipleValuesKeyField>Catalog.EmployeePositions.TabularSection.AddAttributes.StandardAttribute.LineNumber</multipleValuesKeyField>
+    <multipleValuesKeyField>-1</multipleValuesKeyField>
     <multipleValuesOrderField>Catalog.EmployeePositions.TabularSection.AddAttributes.StandardAttribute.LineNumber</multipleValuesOrderField>
   </characteristics>
   <characteristics>

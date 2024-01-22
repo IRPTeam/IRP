@@ -123,7 +123,7 @@
     <objectField>Catalog.SpecialOffers.TabularSection.AddAttributes.StandardAttribute.Ref</objectField>
     <typeField>Catalog.SpecialOffers.TabularSection.AddAttributes.Attribute.Property</typeField>
     <valueField>Catalog.SpecialOffers.TabularSection.AddAttributes.Attribute.Value</valueField>
-    <multipleValuesKeyField>Catalog.SpecialOffers.TabularSection.AddAttributes.StandardAttribute.LineNumber</multipleValuesKeyField>
+    <multipleValuesKeyField>-1</multipleValuesKeyField>
     <multipleValuesOrderField>Catalog.SpecialOffers.TabularSection.AddAttributes.StandardAttribute.LineNumber</multipleValuesOrderField>
   </characteristics>
   <createOnInput>DontUse</createOnInput>

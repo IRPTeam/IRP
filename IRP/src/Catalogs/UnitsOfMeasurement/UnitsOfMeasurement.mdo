@@ -44,7 +44,7 @@
     <objectField>Catalog.UnitsOfMeasurement.TabularSection.AddAttributes.StandardAttribute.Ref</objectField>
     <typeField>Catalog.UnitsOfMeasurement.TabularSection.AddAttributes.Attribute.Property</typeField>
     <valueField>Catalog.UnitsOfMeasurement.TabularSection.AddAttributes.Attribute.Value</valueField>
-    <multipleValuesKeyField>Catalog.UnitsOfMeasurement.TabularSection.AddAttributes.StandardAttribute.LineNumber</multipleValuesKeyField>
+    <multipleValuesKeyField>-1</multipleValuesKeyField>
     <multipleValuesOrderField>Catalog.UnitsOfMeasurement.TabularSection.AddAttributes.StandardAttribute.LineNumber</multipleValuesOrderField>
   </characteristics>
   <createOnInput>Use</createOnInput>

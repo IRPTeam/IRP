@@ -43,7 +43,7 @@
     <objectField>Catalog.BankTerms.TabularSection.AddAttributes.StandardAttribute.Ref</objectField>
     <typeField>Catalog.BankTerms.TabularSection.AddAttributes.Attribute.Property</typeField>
     <valueField>Catalog.BankTerms.TabularSection.AddAttributes.Attribute.Value</valueField>
-    <multipleValuesKeyField>Catalog.BankTerms.TabularSection.AddAttributes.StandardAttribute.LineNumber</multipleValuesKeyField>
+    <multipleValuesKeyField>-1</multipleValuesKeyField>
     <multipleValuesOrderField>Catalog.BankTerms.TabularSection.AddAttributes.StandardAttribute.LineNumber</multipleValuesOrderField>
   </characteristics>
   <createOnInput>Use</createOnInput>

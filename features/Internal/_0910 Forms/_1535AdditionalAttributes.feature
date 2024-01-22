@@ -6075,3 +6075,88 @@ Scenario: _015400681 check multistring additional attributes
 		And I click "Save" button	
 		Then the form attribute named "_V123449" became equal to "Turkey; Poland"	
 	And I close all client application windows
+
+Scenario: _015400685 check filter for additional sttributes
+	And I close all client application windows
+	* Add additional attributes for partner
+		Given I open hyperlink "e1cib/list/Catalog.AddAttributeAndPropertySets"
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Partners'    |
+		And I select current line in "List" table
+		* Business region
+			And in the table "Attributes" I click "Add" button
+			And I click choice button of the attribute named "AttributesAttribute" in "Attributes" table
+			And I go to line in "List" table
+				| 'Description'     |
+				| 'Business region' |
+			And I select current line in "List" table
+			And I finish line editing in "Attributes" table
+		* Country of consignment (with filter)
+			And in the table "Attributes" I click the button named "AttributesAdd"
+			And I click choice button of the attribute named "AttributesAttribute" in "Attributes" table
+			Then "Additional attribute types" window is opened
+			And I go to line in "List" table
+				| 'Description'            |
+				| 'Country of consignment' |
+			And I select current line in "List" table
+			And I finish line editing in "Attributes" table
+			And in the table "Attributes" I click the button named "AttributesSetCondition"
+			Then "1C:Enterprise" window is opened
+			And I click "Yes" button
+			Then "Edit condition" window is opened
+			And in the table "SettingsFilter" I click the button named "SettingsFilterAddFilterItem"
+			And I select "Ref.Business region" by string from the drop-down list named "SettingsFilterLeftValue" in "SettingsFilter" table
+			And I activate field named "SettingsFilterRightValue" in "SettingsFilter" table
+			And I select "Turkey" by string from the drop-down list named "SettingsFilterRightValue" in "SettingsFilter" table
+			And I finish line editing in "SettingsFilter" table
+			And I click "Ok" button
+			And I click "Save and close" button
+		* Check filter
+			And I go to line in "List" table
+				| 'Description' |
+				| 'Big foot'    |
+			And I select current line in "List" table
+			And I click Select button of "Business region" field
+			And I go to line in "List" table
+				| 'Additional attribute' | 'Description'   |
+				| 'Business region'      | 'Region Turkey' |
+			And I select current line in "List" table
+			And I click "Save and close" button
+			And I go to line in "List" table
+				| 'Description' |
+				| 'Big foot'    |
+			And I select current line in "List" table
+			Then the form attribute named "_V123449" became equal to ""
+			And I select from "Country of consignment" drop-down list by "turkey" string
+			Then the form attribute named "_V123449" became equal to "Turkey"			
+			And I click "Save and close" button			
+		* Check button verify
+			Given I open hyperlink "e1cib/list/Catalog.AddAttributeAndPropertySets"
+			And I go to line in "List" table
+				| 'Description' |
+				| 'Partners'    |
+			And I select current line in "List" table
+			And I go to line in "Attributes" table
+				| 'Attribute'              |
+				| 'Country of consignment' |
+			And I activate "Path for tag" field in "Attributes" table
+			And in the table "Attributes" I click "Set condition" button
+			And in the table "ResultTable" I click "Verify" button
+			And "ResultTable" table contains lines
+				| 'Ref'      |
+				| 'Big foot' |
+			Then the number of "List" table lines is "меньше или равно" "3"
+	And I close all client application windows
+	
+			
+						
+						
+
+
+						
+		
+						
+		
+				
+	

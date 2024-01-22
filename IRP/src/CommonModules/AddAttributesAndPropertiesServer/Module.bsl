@@ -1288,6 +1288,20 @@ Function GetRefsByCondition(DCSTemplate, Settings, ExternalDataSet, AddInfo = Un
 	Composer = New DataCompositionTemplateComposer();
 	Template = Composer.Execute(DCSTemplate, Settings, , , Type("DataCompositionValueCollectionTemplateGenerator"));
 
+	// TODO: Additional attribute can be collection, so composer add LineNumber as Key for unique record, and do it always = 0
+	For Each DataSet In Template.DataSets Do
+		If TypeOf(DataSet) = Type("DataCompositionTemplateDataSetQuery") Then
+			DataSet.Query = StrReplace(DataSet.Query, "LineNumber = &P", "LineNumber <> &P");
+		Else
+			For Each DataSetItem In DataSet.Items Do
+				If Not TypeOf(DataSetItem) = Type("DataCompositionTemplateDataSetQuery") Then
+					Continue;
+				EndIf; 
+				DataSetItem.Query = StrReplace(DataSetItem.Query, "LineNumber = &P", "LineNumber <> &P");
+			EndDo;
+		EndIf;
+	EndDo;
+	
 	Processor = New DataCompositionProcessor();
 	Processor.Initialize(Template, New Structure("ExternalDataSet", ExternalDataSet));
 

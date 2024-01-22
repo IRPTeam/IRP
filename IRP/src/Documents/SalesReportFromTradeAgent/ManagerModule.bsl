@@ -367,6 +367,7 @@ Function R2020B_AdvancesFromCustomers()
 		   |	VALUE(AccumulationRecordType.Expense) AS RecordType,
 		   |	OffsetOfAdvances.Recorder AS CustomersAdvancesClosing,
 		   |	OffsetOfAdvances.AdvanceAgreement AS Agreement,
+		   |	OffsetOfAdvances.AdvanceDocument AS Basis,
 		   |	OffsetOfAdvances.AdvancesOrder AS Order,
 		   |	*
 		   |INTO R2020B_AdvancesFromCustomers

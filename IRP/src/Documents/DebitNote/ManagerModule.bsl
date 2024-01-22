@@ -180,6 +180,7 @@ Function R2020B_AdvancesFromCustomers()
 		   |	VALUE(AccumulationRecordType.Expense) AS RecordType,
 		   |	OffsetOfAdvances.Recorder AS CustomersAdvancesClosing,
 		   |	OffsetOfAdvances.AdvanceAgreement AS Agreement,
+		   |	OffsetOfAdvances.AdvanceDocument AS Basis,
 		   |	*
 		   |INTO R2020B_AdvancesFromCustomers
 		   |FROM
@@ -338,6 +339,7 @@ Function R1020B_AdvancesToVendors()
 		   |	Transactions.LegalName,
 		   |	Transactions.Currency,
 		   |	Transactions.AdvanceAgreement AS Agreement,
+		   |	Transactions.Ref AS Basis,
 		   |	Transactions.Amount,
 		   |	Transactions.Key,
 		   |	UNDEFINED AS VendorsAdvancesClosing
@@ -358,6 +360,7 @@ Function R1020B_AdvancesToVendors()
 		   |	OffsetOfAdvances.LegalName,
 		   |	OffsetOfAdvances.Currency,
 		   |	OffsetOfAdvances.AdvanceAgreement,
+		   |	OffsetOfAdvances.AdvanceDocument,
 		   |	OffsetOfAdvances.Amount,
 		   |	OffsetOfAdvances.Key,
 		   |	OffsetOfAdvances.Recorder
@@ -419,6 +422,7 @@ Function T2014S_AdvancesInfo()
 		   |	Transactions.LegalName,
 		   |	Transactions.Currency,
 		   |	Transactions.AdvanceAgreement,
+		   |	Transactions.Ref AS AdvanceDocument,
 		   |	Transactions.Key,
 		   |	Transactions.Amount,
 		   |	TRUE AS IsVendorAdvance

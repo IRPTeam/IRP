@@ -58,3 +58,7 @@ Procedure BeforeDelete(Cancel)
 		Return;
 	EndIf;
 EndProcedure
+
+Procedure OnCopy(CopiedObject)
+	UniqueMD5 = "";
+EndProcedure

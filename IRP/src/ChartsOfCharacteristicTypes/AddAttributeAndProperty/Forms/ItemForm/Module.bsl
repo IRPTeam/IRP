@@ -1,6 +1,7 @@
 &AtServer
 Procedure OnCreateAtServer(Cancel, StandardProcessing)
 	LocalizationEvents.CreateMainFormItemDescription(ThisObject, "GroupDescriptions");
+	LocalizationEvents.FillDescription(Parameters.FillingText, Object);
 	If Object.isIconSet Then
 		CurrentObject = FormAttributeToValue("Object");
 		Icon = PutToTempStorage(CurrentObject.Icon.Get());

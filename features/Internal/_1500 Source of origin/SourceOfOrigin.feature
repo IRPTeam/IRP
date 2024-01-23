@@ -1394,6 +1394,14 @@ Scenario: _150057 check filling source of origin in the SR
 				| '3'    | '*'      | '09987897977895'       | 'Source of origin 4'    | '1,000'        |
 			And I close all client application windows							
 								
-				
-	
-			
+Scenario: _150077 try to remove mark Batch balance details in the Source of origin that used in the documents
+	And I close all client application windows
+	Given I open hyperlink "e1cib/list/Catalog.SourceOfOrigins"
+	And I go to line in "List" table
+		| 'Source of origin'   |
+		| 'Source of origin 5' |
+	And I select current line in "List" table
+	And I remove checkbox "Batch balance detail"
+	And I click "Save and close" button
+	Then I wait that in user messages the "[Batch balance detail] cannot be changed, has posted documents" substring will appear in 10 seconds
+	And I close all client application windows				

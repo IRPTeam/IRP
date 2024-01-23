@@ -25,7 +25,7 @@ Procedure BeforeWrite(Cancel)
 		NewRow.SpecificationUniqueMD5 = ThisObject.Specification.UniqueMD5;
 		NewRow.Item = String(ThisObject.Item.UUID());
 
-		ThisObject.UniqueMD5 = AddAttributesAndPropertiesServer.GetMD5ForValueTable(ValueTable);
+		ThisObject.UniqueMD5 = CommonFunctionsServer.GetMD5(ValueTable);
 		If ValueIsFilled(UniqueID.FindRefByUniqueMD5(ThisObject, ThisObject.UniqueMD5)) Then
 			Cancel = True;
 			CommonFunctionsClientServer.ShowUsersMessage(R().Error_065);

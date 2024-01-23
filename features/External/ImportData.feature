@@ -1268,6 +1268,7 @@ Scenario: Create chart of characteristic types AddAttributeAndProperty objects
 		| 'e1cib/data/ChartOfCharacteristicTypes.AddAttributeAndProperty?ref=aa78120ed92fbced11eaf114c59ef035'  | 'False'         | 'ValueStorage'  | 'False'      | 'Article'                 | ''                  | ''                | 'Article TR'                 | 'V123448'                             |
 		| 'e1cib/data/ChartOfCharacteristicTypes.AddAttributeAndProperty?ref=aa78120ed92fbced11eaf114c59ef036'  | 'False'         | 'ValueStorage'  | 'False'      | 'Country of consignment'  | ''                  | ''                | 'Country of consignment TR'  | 'V123449'                             |
 		| 'e1cib/data/ChartOfCharacteristicTypes.AddAttributeAndProperty?ref=aa78120ed92fbced11eaf114c59ef037'  | 'False'         | 'ValueStorage'  | 'False'      | 'Season'                  | ''                  | ''                | 'Season TR'                  | 'V123450'                             |
+		| 'e1cib/data/ChartOfCharacteristicTypes.AddAttributeAndProperty?ref=aa78120ed92fbced11eaf128cde919b7'  | 'False'         | 'ValueStorage'  | 'False'      | 'Test 1'                  | ''                  | ''                | 'Test 1 TR'                  | '_a155'                               |
 
 Scenario: Create chart of characteristic types AddAttributeAndProperty objects (boolean and string)
 
@@ -1275,6 +1276,7 @@ Scenario: Create chart of characteristic types AddAttributeAndProperty objects (
 		| 'Ref'                                                                                                 | 'DeletionMark'  | 'Icon'          | 'isIconSet'  | 'Description_en'        | 'Description_hash'  | 'Description_ru'  | 'Description_tr'           | 'UniqueID'                            | 'ValueType'                 |
 		| 'e1cib/data/ChartOfCharacteristicTypes.AddAttributeAndProperty?ref=aa78120ed92fbced11eaf13dc8cb48e9'  | 'False'         | 'ValueStorage'  | 'False'      | 'Add atribute Boolean'  | ''                  | ''                | 'Add atribute Boolean TR'  | '_14a1c7551a8d2430e9bbd08a786fc9c31'  | '<Type>xs:boolean</Type>'   |
 		| 'e1cib/data/ChartOfCharacteristicTypes.AddAttributeAndProperty?ref=aa78120ed92fbced11eaf13dc8cb48e8'  | 'False'         | 'ValueStorage'  | 'False'      | 'Add atribute String'   | ''                  | ''                | 'Add atribute String TR'   | '_151d5bf741df34c5c81b30e019f7cbb68'  | '<Type>xs:string</Type>'    |
+		
 
 
 Scenario: Create catalog AddAttributeAndPropertyValues objects
@@ -1323,6 +1325,8 @@ Scenario: Create catalog AddAttributeAndPropertyValues objects
 		| 'e1cib/data/Catalog.AddAttributeAndPropertyValues?ref=aa79120ed92fbced11eafcb72c775d77'  | 'False'         | 'e1cib/data/ChartOfCharacteristicTypes.AddAttributeAndProperty?ref=aa78120ed92fbced11eaf13dc8cb47de'  | ''              | 'Fruit'           | ''                  | ''                | ''                | '_7ad0648a2f6e46cfa6f3f7d2d0440bd9'   |
 		| 'e1cib/data/Catalog.AddAttributeAndPropertyValues?ref=aa79120ed92fbced11eafcb72c775d78'  | 'False'         | 'e1cib/data/ChartOfCharacteristicTypes.AddAttributeAndProperty?ref=aa78120ed92fbced11eaf128cde918b7'  | ''              | 'Test 1'          | ''                  | ''                | ''                | '_8ad0648a2f6e46cfa6f3f7d2d0440bd9'   |
 		| 'e1cib/data/Catalog.AddAttributeAndPropertyValues?ref=b788b483d858e32911ed60063aae4ba4'  | 'False'         | 'e1cib/data/ChartOfCharacteristicTypes.AddAttributeAndProperty?ref=aa78120ed92fbced11eaf11c17ff4363'  |                 | 'Fee'             | ''                  | ''                | 'Fee TR'          | '_4d81f7b40a534895a3e67ce7a1f55ac7'   |
+		| 'e1cib/data/Catalog.AddAttributeAndPropertyValues?ref=b7b4b80c227e00a211eeb61a35cd094c' | 'False'        | 'e1cib/data/ChartOfCharacteristicTypes.AddAttributeAndProperty?ref=aa78120ed92fbced11eaf128cde919b7'    |  ''             | 'Test 1'          | ''                  | ''                | 'Test 1 TR'       | '_997274b8dd084e9f8202ce9ed25b872e'   |
+
 
 
 Scenario: Create catalog AddAttributeAndPropertySets objects

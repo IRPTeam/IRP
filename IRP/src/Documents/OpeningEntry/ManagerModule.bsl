@@ -317,6 +317,7 @@ Function AdvancesToVendors()
 		"SELECT
 		|	OpeningEntryAdvanceToSuppliers.Ref.Company AS Company,
 		|	OpeningEntryAdvanceToSuppliers.Ref.Branch AS Branch,
+		|	OpeningEntryAdvanceToSuppliers.Ref AS Basis,
 		|	OpeningEntryAdvanceToSuppliers.Currency,
 		|	OpeningEntryAdvanceToSuppliers.Partner,
 		|	OpeningEntryAdvanceToSuppliers.LegalName,
@@ -412,6 +413,7 @@ Function AdvancesFromCustomers()
 		"SELECT
 		|	OpeningEntryAdvanceFromCustomers.Ref.Company AS Company,
 		|	OpeningEntryAdvanceFromCustomers.Ref.Branch AS Branch,
+		|	OpeningEntryAdvanceFromCustomers.Ref AS Basis,
 		|	OpeningEntryAdvanceFromCustomers.Currency,
 		|	OpeningEntryAdvanceFromCustomers.Partner,
 		|	OpeningEntryAdvanceFromCustomers.LegalName,
@@ -1101,6 +1103,7 @@ Function T2014S_AdvancesInfo()
 		   |	AdvancesToVendors.Branch,
 		   |	AdvancesToVendors.Currency,
 		   |	AdvancesToVendors.Agreement AS AdvanceAgreement,
+		   |	AdvancesToVendors.Basis AS AdvanceDocument,
 		   |	AdvancesToVendors.Partner,
 		   |	AdvancesToVendors.LegalName,
 		   |	TRUE AS IsVendorAdvance,
@@ -1121,6 +1124,7 @@ Function T2014S_AdvancesInfo()
 		   |	AdvancesFromCustomers.Branch,
 		   |	AdvancesFromCustomers.Currency,
 		   |	AdvancesFromCustomers.Agreement,
+		   |	AdvancesFromCustomers.Basis,
 		   |	AdvancesFromCustomers.Partner,
 		   |	AdvancesFromCustomers.LegalName,
 		   |	FALSE,

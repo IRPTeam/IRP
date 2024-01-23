@@ -177,6 +177,37 @@
     <fullTextSearch>Use</fullTextSearch>
     <dataHistory>Use</dataHistory>
   </attributes>
+  <attributes uuid="d38c0b66-983a-4f31-b036-cb9f977338d4">
+    <name>AdvanceDocument</name>
+    <synonym>
+      <key>en</key>
+      <value>Advance document</value>
+    </synonym>
+    <type>
+      <types>DocumentRef.PurchaseReturn</types>
+      <types>DocumentRef.CreditNote</types>
+      <types>DocumentRef.DebitNote</types>
+      <types>DocumentRef.CashPayment</types>
+      <types>DocumentRef.CashReceipt</types>
+      <types>DocumentRef.BankPayment</types>
+      <types>DocumentRef.BankReceipt</types>
+      <types>DocumentRef.PurchaseInvoice</types>
+      <types>DocumentRef.PurchaseOrderClosing</types>
+      <types>DocumentRef.SalesReportToConsignor</types>
+      <types>DocumentRef.ChequeBondTransactionItem</types>
+      <types>DocumentRef.ForeignCurrencyRevaluation</types>
+      <types>DocumentRef.OpeningEntry</types>
+      <types>DocumentRef.EmployeeCashAdvance</types>
+      <types>DocumentRef.SalesReportFromTradeAgent</types>
+      <types>DocumentRef.SalesReturn</types>
+      <types>DocumentRef.SalesInvoice</types>
+      <types>DocumentRef.SalesOrderClosing</types>
+    </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <fillValue xsi:type="core:UndefinedValue"/>
+    <fullTextSearch>Use</fullTextSearch>
+  </attributes>
   <forms uuid="3a3a98d5-4e8c-4c4b-bfae-2cc9aa07242a">
     <name>ItemForm</name>
     <synonym>

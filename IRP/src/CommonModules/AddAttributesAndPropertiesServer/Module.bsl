@@ -1,33 +1,78 @@
-#Region EventHandlers
+// @strict-types
 
-Procedure OnCreateAtServer(Form, GroupNameForPlacement = "", AddInfo = Undefined) Export
-	CreateFormControls(Form, GroupNameForPlacement, AddInfo);
+#Region Events
+
+// On create at server.
+// 
+// Parameters:
+//  Form - See Catalog.ItemKeys.Form.ItemForm
+//  GroupNameForPlacement - String - Group name for placement
+//  Prefix - String -
+//  AddInfo - Undefined - Add info
+Procedure OnCreateAtServer(Form, GroupNameForPlacement = "", Prefix= "", AddInfo = Undefined) Export
+	CreateFormControls(Form, GroupNameForPlacement, Prefix, AddInfo);
 EndProcedure
 
-Procedure BeforeWriteAtServer(Form, Cancel, CurrentObject, WriteParameters, AddInfo = Undefined) Export
+// Before write at server.
+// 
+// Parameters:
+//  Form - See Catalog.ItemKeys.Form.ItemForm
+//  Cancel - Boolean - Cancel
+//  CurrentObject - CatalogObject.ItemKeys - Current object
+//  WriteParameters - Structure - Write parameters
+//  Prefix - String -
+//  AddInfo - Undefined - Add info
+Procedure BeforeWriteAtServer(Form, Cancel, CurrentObject, WriteParameters, Prefix = "", AddInfo = Undefined) Export
 
-	If CurrentObject.Metadata().TabularSections.Find("AddAttributes") = Undefined Then
+	If CurrentObject.Metadata().TabularSections.Find(Prefix + "AddAttributes") = Undefined Then
 		Return;
 	EndIf;
 
 	CurrentObject.AddAttributes.Clear();
-	FormInfo = GetFormInfo(Form);
+	//@skip-check invocation-parameter-type-intersect
+	FormInfo = GetObjectInfo(Form.Object, Prefix);
 	If Not FormInfo.Property("Form") Then
 		FormInfo.Insert("Form", Form);
 	EndIf;
 
-	AddAttributeAndPropertySetName = AddAttributeAndPropertySetName(FormInfo, AddInfo);
+	AddAttributeAndPropertySetName = AddAttributeAndPropertySetName(FormInfo.Ref, AddInfo);
 	ObjectAttributes = ObjectAttributes(FormInfo, AddAttributeAndPropertySetName, AddInfo);
 	RequiredFiler = New Structure("Required", True);
-	RequiredAttributesArray = AllAttributesArrayByFilter(CurrentObject, RequiredFiler);
+	RequiredAttributesArray = AllAttributesArrayByFilter(CurrentObject, Prefix, RequiredFiler);
 	CancelValue = False;
 
 	For Each Row In ObjectAttributes Do
 		AttributeInfo = AttributeAndPropertyInfo(Row, AddInfo);
 		RequiredAttributeResult = RequiredAttributesArray.Find(Row.Attribute);
-		If ValueIsFilled(Form[AttributeInfo.Name]) Then
+		//@skip-check dynamic-access-method-not-found
+		If AttributeInfo.Collection And AttributeInfo.isTag Then
+			//@skip-check dynamic-access-method-not-found
+			Parts = StrSplit(AttributeInfo.PathForTag, ".");
+			CopyTable = CurrentObject[Parts[0]].Unload(); // See Document.SalesOrder.ItemList
+			CopyTable.GroupBy(Parts[1]);
+			For Each Attr In CopyTable.UnloadColumn(Parts[1]) Do
+				If Not ValueIsFilled(Attr) Then
+					Continue;
+				EndIf;
+				AddAttributes = CurrentObject[Prefix + "AddAttributes"]; // See Catalog.ItemKeys.AddAttributes
+				NewAttribute = AddAttributes.Add(); 
+				NewAttribute.Property = AttributeInfo.Ref;
+				//@skip-check statement-type-change
+				NewAttribute.Value = Attr;
+			EndDo;
+			
+		ElsIf AttributeInfo.Collection And Form[AttributeInfo.Name].Count() Then
+			//@skip-check dynamic-access-method-not-found
+			For Each Attr In Form[AttributeInfo.Name].UnloadValues() Do // Characteristic.AddAttributeAndProperty
+				AddAttributes = CurrentObject[Prefix + "AddAttributes"]; // See Catalog.ItemKeys.AddAttributes
+				NewAttribute = AddAttributes.Add(); 
+				NewAttribute.Property = AttributeInfo.Ref;
+				NewAttribute.Value = Attr;
+			EndDo;
+		ElsIf Not AttributeInfo.Collection AND ValueIsFilled(Form[AttributeInfo.Name]) Then
 			NewAttribute = CurrentObject.AddAttributes.Add();
 			NewAttribute.Property = AttributeInfo.Ref;
+			//@skip-check statement-type-change
 			NewAttribute.Value = Form[AttributeInfo.Name];
 		Else
 			If RequiredAttributeResult <> Undefined Then
@@ -54,25 +99,16 @@ EndProcedure
 
 #EndRegion
 
-Procedure CreateFormControls(Form, GroupNameForPlacement = "", AddInfo = Undefined) Export
-	FormInfo = Undefined;
-	If TypeOf(AddInfo) = Type("Structure") Then
-		If AddInfo.Property("FormInfo") Then
-			FormInfo = AddInfo.FormInfo;
-		EndIf;
-	EndIf;
+#Region WorkWithForm
 
-	If FormInfo = Undefined Then
-		FormInfo = GetFormInfo(Form);
-	EndIf;
-	If Not FormInfo.Property("Form") Then
-		FormInfo.Insert("Form", Form);
-	EndIf;
+Procedure CreateFormControls(Form, GroupNameForPlacement = "", Prefix = "", AddInfo = Undefined) Export
+	//@skip-check invocation-parameter-type-intersect
+	FormInfo = GetObjectInfo(Form.Object, Prefix);
 	ClearForm(Form);
 
-	SavedData = New Structure("FormGroups, FormAttributes, FormItemFields, ArrayOfAttributesInfo");
+	SavedData = GetSavedData();
 
-	AddAttributeAndPropertySetName = AddAttributeAndPropertySetName(FormInfo, AddInfo);
+	AddAttributeAndPropertySetName = AddAttributeAndPropertySetName(FormInfo.Ref, AddInfo);
 	ObjectAttributes = ObjectAttributes(FormInfo, AddAttributeAndPropertySetName, AddInfo);
 
 	FormGroups = FormGroups(ObjectAttributes, AddInfo);
@@ -81,59 +117,30 @@ Procedure CreateFormControls(Form, GroupNameForPlacement = "", AddInfo = Undefin
 
 	FormAttributes = FormAttributes(ObjectAttributes, AddInfo);
 	SavedData.FormAttributes = ExtractProperty(FormAttributes.Attributes, "Name");
-
-	ArrayOfAttributesInfo = New Array();
-	For Each Row In FormAttributes.FormAttributesInfo Do
-		ArrayOfAttributesInfo.Add(New Structure("Name, Name_owner", Row.Name, Row.Name_owner));
-	EndDo;
-
-	SavedData.ArrayOfAttributesInfo = ArrayOfAttributesInfo;
+	SavedData.ArrayOfAttributesInfo = FillArrayOfAttributesInfo(FormAttributes);
 
 	Form.ChangeAttributes(FormAttributes.Attributes);
 
-	IsNewObject = Not ValueIsFilled(Form.Object.Ref);
-	DefaultAttributeValues = Undefined;
-	If IsNewObject Then
-		Query = New Query();
-		Query.Text =
-		"SELECT
-		|	tmp.UserOrGroup AS UserOrGroup,
-		|	tmp.MetadataObject AS MetadataObject,
-		|	tmp.AttributeName AS AttributeName,
-		|	tmp.KindOfAttribute AS KindOfAttribute,
-		|	tmp.Value AS Value
-		|INTO tmp
-		|FROM
-		|	&UserSettings AS tmp
-		|;
-		|////////////////////////////////////////////////////////////////////////////////
-		|SELECT
-		|	AddAttributeAndProperty.Ref AS AttributeRef,
-		|	tmp.UserOrGroup,
-		|	tmp.MetadataObject,
-		|	tmp.AttributeName,
-		|	tmp.KindOfAttribute,
-		|	tmp.Value
-		|FROM
-		|	ChartOfCharacteristicTypes.AddAttributeAndProperty AS AddAttributeAndProperty
-		|		INNER JOIN tmp AS tmp
-		|		ON AddAttributeAndProperty.UniqueID = tmp.AttributeName
-		|		AND tmp.KindOfAttribute = VALUE(Enum.KindsOfAttributes.Additional)";
-		FilterParameters = New Structure();
-		FilterParameters.Insert("MetadataObject", Form.Object.Ref.Metadata());
-		UserSettings = UserSettingsServer.GetUserSettings(SessionParameters.CurrentUser, FilterParameters);
-		Query.SetParameter("UserSettings", UserSettings);
-		DefaultAttributeValues = Query.Execute().Unload();
-	EndIf;
+	DefaultAttributeValues = GetDefaultAttributeValues(FormInfo);
 
 	For Each Row In ObjectAttributes Do
-
+		
 		ArrayOfExistAttributes = FormInfo.AddAttributes.FindRows(New Structure("Property", Row.Attribute));
 		If ArrayOfExistAttributes.Count() Then
 			AttributeInfo = AttributeAndPropertyInfo(Row, AddInfo);
-			Form[AttributeInfo.Name] = ArrayOfExistAttributes[0].Value;
+			If AttributeInfo.isTag Then
+				Continue;
+			EndIf;
+			If Row.Collection Then
+				For Each RowAttr In ArrayOfExistAttributes Do
+					//@skip-check dynamic-access-method-not-found
+					Form[AttributeInfo.Name].Add(RowAttr.Value);
+				EndDo;
+			Else
+				Form[AttributeInfo.Name] = ArrayOfExistAttributes[0].Value;
+			EndIf;
 
-		ElsIf IsNewObject And DefaultAttributeValues <> Undefined Then
+		ElsIf FormInfo.IsNew Then
 			ArrayOfDefaultAttributes = DefaultAttributeValues.FindRows(New Structure("AttributeRef", Row.Attribute));
 			If ArrayOfDefaultAttributes.Count() Then
 				AttributeInfo = AttributeAndPropertyInfo(Row, AddInfo);
@@ -146,25 +153,23 @@ Procedure CreateFormControls(Form, GroupNameForPlacement = "", AddInfo = Undefin
 		Form[Row.Name_owner] = Row.Ref;
 	EndDo;
 
-	CreatedFormItemFields = CreateFormItemFields(Form, GroupNameForPlacement, FormAttributes.FormAttributesInfo,
-		AddInfo);
+	CreatedFormItemFields = CreateFormItemFields(Form, GroupNameForPlacement, FormAttributes.FormAttributesInfo, AddInfo);
 	SavedData.FormItemFields = ExtractProperty(CreatedFormItemFields, "Name");
+	//@skip-check property-return-type
 	Form.SavedData = CommonFunctionsServer.SerializeXMLUseXDTO(SavedData);
 EndProcedure
 
+// Clear form.
+// 
+// Parameters:
+//  Form - See Catalog.ItemKeys.Form.ItemForm
 Procedure ClearForm(Form)
-	SavedData = Undefined;
-	For Each FormAttribute In Form.GetAttributes() Do
-		If FormAttribute.Name = "SavedData" Then
-			SavedData = Form["SavedData"];
-			Break;
-		EndIf;
-	EndDo;
-	If SavedData = Undefined Then
+	If Not ServiceSystemServer.ObjectHasAttribute("SavedData", Form) Then
 		Return;
 	EndIf;
-
-	SavedData = CommonFunctionsServer.DeserializeXMLUseXDTO(SavedData);
+	
+	//@skip-check property-return-type, invocation-parameter-type-intersect
+	SavedData = CommonFunctionsServer.DeserializeXMLUseXDTO(Form.SavedData); // See GetSavedData
 	
 	// Fields
 	For Each Name In SavedData.FormItemFields Do
@@ -177,17 +182,8 @@ Procedure ClearForm(Form)
 	EndDo;
 	
 	// Attributes
-
 	Form.ChangeAttributes( , SavedData.FormAttributes);
 EndProcedure
-
-Function ExtractProperty(ArrayOfValues, Name)
-	Result = New Array();
-	For Each Row In ArrayOfValues Do
-		Result.Add(Row[Name]);
-	EndDo;
-	Return Result;
-EndFunction
 
 Function CreateFormGroups(Form, FormGroupsInfo, AddInfo = Undefined) Export
 	ArrayOfFormGroups = New Array();
@@ -241,7 +237,13 @@ Function CreateFormItemFields(Form, GroupNameForPlacement, FormAttributesInfo, A
 			ArrayOfChoiceParameters.Add(New ChoiceParameter("Filter.Owner", AttrInfo.Ref));
 			NewFormElement.ChoiceParameters = New FixedArray(ArrayOfChoiceParameters);
 
+			//@skip-check module-attachable-event-handler-name
 			NewFormElement.SetAction("StartChoice", "AddAttributeStartChoice");
+			If AttrInfo.Collection Then
+				//@skip-check property-return-type
+				Form[AttrInfo.Name].ValueType = AttrInfo.Type;
+			EndIf; 
+			NewFormElement.MultiLine = AttrInfo.Multiline;
 		EndIf;
 
 		ArrayOfFormElements.Add(NewFormElement);
@@ -265,88 +267,54 @@ Function GetFormItemParent(Form, GroupNameForPlacement, AttrInfo)
 	Return FoundedParent;
 EndFunction
 
-Function GetFormInfo(Form)
-	FormInfo = New Structure();
-	FormInfo.Insert("Ref", Form.Object.Ref);
-
-	FormInfo.Insert("AddAttributes", Form.Object.AddAttributes);
-
-	If TypeOf(Form.Object.Ref) = Type("CatalogRef.ItemKeys") Or TypeOf(Form.Object.Ref) = Type("CatalogRef.PriceKeys") Then
-		FormInfo.Insert("Item", Form.Object.Item);
-		FormInfo.Insert("ItemType", ?(Form.Object.Item = Undefined, Undefined, Form.Object.Item.ItemType));
-	EndIf;
-
-	ExternalDataSet = New ValueTable();
-	If TypeOf(Form.Object.Ref) = Type("CatalogRef.Items") Then
-		ExternalDataSet.Columns.Add("ItemType", New TypeDescription("CatalogRef.ItemTypes"));
-		ExternalDataSet.Columns.Add("Ref", New TypeDescription("CatalogRef.Items"));
-		NewRow = ExternalDataSet.Add();
-		NewRow.ItemType = Form.Object.ItemType;
-		NewRow.Ref = Form.Object.Ref;
-	EndIf;
-	FormInfo.Insert("ExternalDataSet", ExternalDataSet);
-
-	Return FormInfo;
-EndFunction
-
-Function GetObjectInfo(Object)
-	FormInfo = New Structure();
-	FormInfo.Insert("Ref", Object.Ref);
-
-	FormInfo.Insert("AddAttributes", Object.AddAttributes);
-
-	If TypeOf(Object.Ref) = Type("CatalogRef.ItemKeys") Or TypeOf(Object.Ref) = Type("CatalogRef.PriceKeys") Then
-		FormInfo.Insert("Item", Object.Item);
-		FormInfo.Insert("ItemType", ?(Object.Item = Undefined, Undefined, Object.Item.ItemType));
-	EndIf;
-
-	ExternalDataSet = New ValueTable();
-	If TypeOf(Object.Ref) = Type("CatalogRef.Items") Then
-		ExternalDataSet.Columns.Add("ItemType", New TypeDescription("CatalogRef.ItemTypes"));
-		ExternalDataSet.Columns.Add("Ref", New TypeDescription("CatalogRef.Items"));
-		NewRow = ExternalDataSet.Add();
-		NewRow.ItemType = Object.ItemType;
-		NewRow.Ref = Object.Ref;
-	EndIf;
-	FormInfo.Insert("ExternalDataSet", ExternalDataSet);
-
-	Return FormInfo;
-EndFunction
-
-Function AddAttributeAndPropertySetRef(Ref, AddInfo = Undefined) Export
-	SetName = AddAttributeAndPropertySetName(Ref, AddInfo);
-	Return Catalogs.AddAttributeAndPropertySets[SetName];
-EndFunction
-
-Function AddAttributeAndPropertySetName(FormInfo, AddInfo = Undefined) Export
-	Return StrReplace(FormInfo.Ref.Metadata().FullName(), ".", "_");
-EndFunction
-
+// Form attributes.
+// 
+// Parameters:
+//  ObjectAttributes - See ReduceObjectAttributes
+//  AddInfo - Undefined - Add info
+// 
+// Returns:
+//  Structure - Form attributes:
+// * Attributes - Array Of FormAttribute - 
+// * FormAttributesInfo - Array Of See AttributeAndPropertyInfo - 
 Function FormAttributes(ObjectAttributes, AddInfo = Undefined) Export
 	Attributes = New Array();
 	FormAttributesInfo = New Array();
 	For Each Row In ObjectAttributes Do
-
+		
+		If Not IsBlankString(Row.PathForTag) Then
+			Continue; // Do now show on form tag attributes
+		EndIf;
+		
 		AttributeInfo = AttributeAndPropertyInfo(Row, AddInfo);
-
-		Attributes.Add(New FormAttribute(AttributeInfo.Name, AttributeInfo.Type, , AttributeInfo.Title,
-			AttributeInfo.StoredData));
-
-		Attributes.Add(New FormAttribute(AttributeInfo.Name_owner, AttributeInfo.Type_owner, , AttributeInfo.Title_owner,
-			AttributeInfo.StoredData_owner));
-
+		
+		If AttributeInfo.Collection Then
+			Type = New TypeDescription("ValueList");
+		Else	
+			Type = AttributeInfo.Type;
+		EndIf;
+		
+		Attributes.Add(New FormAttribute(AttributeInfo.Name, Type, , AttributeInfo.Title,	AttributeInfo.StoredData));
+		Attributes.Add(New FormAttribute(AttributeInfo.Name_owner, AttributeInfo.Type_owner, , AttributeInfo.Title_owner, AttributeInfo.StoredData_owner));
 		FormAttributesInfo.Add(AttributeInfo);
-
 	EndDo;
 
-	Attributes.Add(New FormAttribute("SavedData", New TypeDescription("String"), ,
-			// FIXIT: Localize?
-
-		"SavedData", False));
-
-	Return New Structure("Attributes, FormAttributesInfo", Attributes, FormAttributesInfo);
+	Attributes.Add(New FormAttribute("SavedData", New TypeDescription("String"), , "SavedData", False));
+		
+	Result = New Structure;
+	Result.Insert("Attributes", Attributes);
+	Result.Insert("FormAttributesInfo", FormAttributesInfo);
+	Return Result;
 EndFunction
 
+// Form groups.
+// 
+// Parameters:
+//  ObjectAttributes - See ReduceObjectAttributes
+//  AddInfo - Undefined - Add info
+// 
+// Returns:
+//  Array Of See GroupInfo
 Function FormGroups(ObjectAttributes, AddInfo = Undefined) Export
 	Groups = New Array();
 	InterfaceGroups = New Array();
@@ -363,50 +331,16 @@ Function FormGroups(ObjectAttributes, AddInfo = Undefined) Export
 	Return Groups;
 EndFunction
 
-Function ObjectAttributes(FormInfo, AddAttributeAndPropertySetName, AddInfo = Undefined) Export
-	AllItems = Catalogs.AddAttributeAndPropertySets[AddAttributeAndPropertySetName].Attributes;
-	Return ReduceObjectAttributes(FormInfo, AllItems, AddAttributeAndPropertySetName, AddInfo);
-EndFunction
+#EndRegion
 
-Function ObjectProperties(AddAttributeAndPropertySetName, AddInfo = Undefined) Export
-	Return Catalogs.AddAttributeAndPropertySets[AddAttributeAndPropertySetName].Properties;
-EndFunction
+#Region Filters
 
-Function ReduceObjectAttributes(FormInfo, AllItems, AddAttributeAndPropertySetName, AddInfo = Undefined)
-	TableOfAvailableAttributes = New ValueTable();
-	TableOfAvailableAttributes.Columns.Add("RowOfAllItems");
-	TableOfAvailableAttributes.Columns.Add("LineNumber");
-
-	ArrayOfCollection = New Array();
-
-	If TypeOf(FormInfo.Ref) = Type("CatalogRef.PriceKeys") Then
-		FixedExistItems = AllItems.UnloadColumns();
-		For Each Row In FormInfo.Ref.AddAttributes Do
-			NewRow = FixedExistItems.Add();
-			NewRow.Attribute = Row.Property;
-			ArrayOfCollection.Add(NewRow);
-		EndDo;
-
-	Else
-		FillTableOfAvailableAttributesBy_AllItems(TableOfAvailableAttributes, ArrayOfCollection, FormInfo,
-			AddAttributeAndPropertySetName, AllItems, AddInfo);
-	EndIf;
-
-	If TableOfAvailableAttributes.Count() Then
-		TableOfAvailableAttributes.Sort("LineNumber");
-		ArrayOfCollection = TableOfAvailableAttributes.UnloadColumn("RowOfAllItems");
-	EndIf;
-
-	Return ArrayOfCollection;
-EndFunction
-
-Procedure FillTableOfAvailableAttributesBy_AllItems(TableOfAvailableAttributes, ArrayOfCollection, FormInfo,
-	AddAttributeAndPropertySetName, AllItems, AddInfo = Undefined)
+Procedure FillTableOfAvailableAttributesBy_AllItems(TableOfAvailableAttributes, ArrayOfCollection, FormInfo, AddAttributeAndPropertySetName, AllItems, AddInfo = Undefined)
 	Template = GetDCSTemplate(AddAttributeAndPropertySetName, AddInfo);
 	ExternalDataSet = FormInfo.ExternalDataSet;
 	For Each Row In AllItems Do
 		If Row.IsConditionSet Then
-			Settings = Row.Condition.Get();
+			Settings = Row.Condition.Get(); // DataCompositionSettings
 			NewFilter = Settings.Filter.Items.Add(Type("DataCompositionFilterItem"));
 			LeftValue = New DataCompositionField("Ref");
 			NewFilter.LeftValue = LeftValue;
@@ -419,15 +353,18 @@ Procedure FillTableOfAvailableAttributesBy_AllItems(TableOfAvailableAttributes, 
 			If RefsByConditions.Count() Then
 				ArrayOfCollection.Add(Row);
 			EndIf;
+			
 		Else
-			If TypeOf(FormInfo.Ref) = Type("CatalogRef.ItemKeys") Then
+			If FormInfo.Metadata = Metadata.Catalogs.ItemKeys Then
 				// get add attributes from ItemType (tabular section AvailableAttributes)
 				If ValueIsFilled(FormInfo.Item) And ValueIsFilled(FormInfo.ItemType) Then
 					Filter = New Structure("Attribute", Row.Attribute);
 					FoundedRows = FormInfo.ItemType.AvailableAttributes.FindRows(Filter);
 					If FoundedRows.Count() Then
 						NewRowOfAvailableAttributes = TableOfAvailableAttributes.Add();
+						//@skip-check property-return-type
 						NewRowOfAvailableAttributes.RowOfAllItems = Row;
+						//@skip-check property-return-type
 						NewRowOfAvailableAttributes.LineNumber = FoundedRows[0].LineNumber;
 					EndIf;
 				EndIf;
@@ -439,6 +376,35 @@ Procedure FillTableOfAvailableAttributesBy_AllItems(TableOfAvailableAttributes, 
 
 EndProcedure
 
+#EndRegion
+
+#Region Contruct
+
+// Attribute and property info.
+// 
+// Parameters:
+//  AttributePropertyRow - CatalogTabularSectionRow.AddAttributeAndPropertySets.Attributes - Attribute property row
+//  AddInfo - Undefined - Add info
+// 
+// Returns:
+//  Structure - Attribute and property info:
+// * Ref - ChartOfCharacteristicTypesRef.AddAttributeAndProperty - 
+// * Name - String - 
+// * Type - TypeDescription - 
+// * isURL - Boolean - 
+// * Path - String - 
+// * isTag - Boolean - 
+// * PathForTag - String - 
+// * Title - String - 
+// * StoredData - Boolean - 
+// * ParentName - String - 
+// * Name_owner - String - 
+// * Type_owner - TypeDescription - 
+// * Path_owner - String - 
+// * Title_owner - String - 
+// * StoredData_owner - Boolean - 
+// * Multiline - Boolean -
+// * Collection - Boolean -
 Function AttributeAndPropertyInfo(AttributePropertyRow, AddInfo = Undefined) Export
 	Result = New Structure();
 
@@ -447,11 +413,15 @@ Function AttributeAndPropertyInfo(AttributePropertyRow, AddInfo = Undefined) Exp
 	Result.Insert("Name", Name);
 	Result.Insert("Type", AttributePropertyRow.Attribute.ValueType);
 	Result.Insert("isURL", AttributePropertyRow.Attribute.isURL);
+	Result.Insert("Multiline", AttributePropertyRow.Attribute.Multiline);
+	Result.Insert("Collection", AttributePropertyRow.Collection);
 	Result.Insert("Path", Name);
 	Result.Insert("Title", String(AttributePropertyRow.Attribute));
 	Result.Insert("StoredData", True);
+	Result.Insert("isTag", Not IsBlankString(AttributePropertyRow.PathForTag));
+	Result.Insert("PathForTag", AttributePropertyRow.PathForTag);
 	If ValueIsFilled(AttributePropertyRow.InterfaceGroup) Then
-		ParentName = "_" + StrReplace(AttributePropertyRow.InterfaceGroup.UUID(), "-", "");
+		ParentName = "_" + StrReplace(String(AttributePropertyRow.InterfaceGroup.UUID()), "-", "");
 	Else
 		ParentName = "GroupMainAttributes";
 	EndIf;
@@ -471,9 +441,23 @@ Function AttributeAndPropertyInfo(AttributePropertyRow, AddInfo = Undefined) Exp
 	Return Result;
 EndFunction
 
+// Group info.
+// 
+// Parameters:
+//  Group - CatalogRef.InterfaceGroups - Group
+//  AddInfo - Undefined - Add info
+// 
+// Returns:
+//  Structure - Group info:
+// * Name - String - 
+// * ParentName - String - 
+// * Title - String - 
+// * Behavior - UsualGroupBehavior -
+// * ChildFormItemsGroup - ChildFormItemsGroup - 
+// * Collapsed - Boolean - 
 Function GroupInfo(Group, AddInfo = Undefined) Export
 	Result = New Structure();
-	Name = "_" + StrReplace(Group.UUID(), "-", "");
+	Name = "_" + StrReplace(String(Group.UUID()), "-", "");
 	Result.Insert("Name", Name);
 	Result.Insert("ParentName", "Group" + Group.FormPosition);
 	Result.Insert("Title", String(Group));
@@ -483,46 +467,131 @@ Function GroupInfo(Group, AddInfo = Undefined) Export
 	Return Result;
 EndFunction
 
-Function AttributeName(Attribute, AddInfo = Undefined)
-	Return "_" + StrReplace(Attribute.UniqueID, " ", "");
-EndFunction
+// Get form info.
+// 
+// Parameters:
+//  Object - CatalogObject.ItemKeys
+//  Prefix - String -
+// 
+// Returns:
+//  Structure - Get form info:
+// * Ref - DocumentRefDocumentName -
+// * AddAttributes - See Document.SalesInvoice.AddAttributes
+// * Item - CatalogRef.Items -
+// * ItemType - CatalogRef.ItemTypes - 
+// * IsNew - Boolean - 
+// * ExternalDataSet - ValueTable - :
+// ** ItemType - CatalogRef.ItemTypes - 
+// ** Ref - CatalogRef.Items - 
+Function GetObjectInfo(Object, Prefix)
+	FormInfo = New Structure();
+	FormInfo.Insert("Ref", Object.Ref);
+	FormInfo.Insert("Metadata", Object.Ref.Metadata());
+	FormInfo.Insert("IsNew", FormInfo.Ref.IsEmpty());
+	FormInfo.Insert("AddAttributes", Object[Prefix + "AddAttributes"]);
 
-Function AttributeOwnerName(Attribute, AddInfo = Undefined)
-	Return "_" + StrReplace(Attribute.UniqueID, " ", "") + "_owner";
-EndFunction
-
-Function GetDCSTemplate(PredefinedDataName, AddInfo = Undefined) Export
-	TableName = StrReplace(PredefinedDataName, "_", ".");
-	ObjectName = StrSplit(PredefinedDataName, "_");
-	If StrStartsWith(PredefinedDataName, "Catalog") Then
-		Template = Catalogs.AddAttributeAndPropertySets.GetTemplate("DCS_Catalog");
-		Template.DataSets[0].Items[0].Query = StrReplace(Template.DataSets[0].Items[0].Query, "&TableName", TableName);
-		Template.DataSets[0].Items.DataSet2.Fields.Find("Ref").ValueType = New TypeDescription("CatalogRef." + ObjectName[1]);
-	ElsIf StrStartsWith(PredefinedDataName, "Document") Then
-		Template = Catalogs.AddAttributeAndPropertySets.GetTemplate("DCS_Document");
-		Template.DataSets[0].Query = StrReplace(Template.DataSets[0].Query, "&TableName", TableName);
-		Template.DataSets[0].Fields.Find("Ref").ValueType = New TypeDescription("DocumentRef." + ObjectName[1]);
-	Else
-		Raise R().Error_004;
+	If FormInfo.Metadata = Metadata.Catalogs.ItemKeys 
+		Or FormInfo.Metadata = Metadata.Catalogs.PriceKeys Then
+		FormInfo.Insert("Item", Object.Item);
+		FormInfo.Insert("ItemType", ?(Object.Item = Undefined, Undefined, Object.Item.ItemType));
 	EndIf;
-	Return Template;
+
+	ExternalDataSet = New ValueTable();
+	If FormInfo.Metadata = Metadata.Catalogs.Items Then
+		ExternalDataSet.Columns.Add("ItemType", New TypeDescription("CatalogRef.ItemTypes"));
+		ExternalDataSet.Columns.Add("Ref", New TypeDescription("CatalogRef.Items"));
+		NewRow = ExternalDataSet.Add();
+		//@skip-check statement-type-change, property-return-type
+		NewRow.ItemType = Object.ItemType;
+		//@skip-check statement-type-change
+		NewRow.Ref = FormInfo.Ref;
+	EndIf;
+	FormInfo.Insert("ExternalDataSet", ExternalDataSet);
+
+	Return FormInfo;
 EndFunction
 
-Function GetRefsByCondition(DCSTemplate, Settings, ExternalDataSet, AddInfo = Undefined) Export
-	Composer = New DataCompositionTemplateComposer();
-	Template = Composer.Execute(DCSTemplate, Settings, , , Type("DataCompositionValueCollectionTemplateGenerator"));
-
-	Processor = New DataCompositionProcessor();
-	Processor.Initialize(Template, New Structure("ExternalDataSet", ExternalDataSet));
-
-	Output = New DataCompositionResultValueCollectionOutputProcessor();
-	Result = New ValueTable();
-	Output.SetObject(Result);
-	Output.Output(Processor);
-
-	Return Result;
+// Add attribute and property set ref.
+// 
+// Parameters:
+//  Ref - AnyRef - Ref
+//  AddInfo - Undefined - Add info
+// 
+// Returns:
+//  CatalogRef.AddAttributeAndPropertySets - Add attribute and property set ref
+Function AddAttributeAndPropertySetRef(Ref, AddInfo = Undefined) Export
+	SetName = AddAttributeAndPropertySetName(Ref, AddInfo);
+	Return Catalogs.AddAttributeAndPropertySets[SetName];
 EndFunction
 
+// Add attribute and property set name.
+// 
+// Parameters:
+//  Ref - AnyRef - Ref 
+//  AddInfo - Undefined - Add info
+// 
+// Returns:
+//  String - Add attribute and property set name
+Function AddAttributeAndPropertySetName(Ref, AddInfo = Undefined) Export
+	Return StrReplace(Ref.Metadata().FullName(), ".", "_");
+EndFunction
+
+// Object attributes.
+// 
+// Parameters:
+//  FormInfo - See GetObjectInfo
+//  AddAttributeAndPropertySetName - String - Add attribute and property set name
+//  AddInfo - Undefined - Add info
+// 
+// Returns:
+//  See ReduceObjectAttributes
+Function ObjectAttributes(FormInfo, AddAttributeAndPropertySetName, AddInfo = Undefined) Export
+	AllItems = Catalogs.AddAttributeAndPropertySets[AddAttributeAndPropertySetName].Attributes;
+	Return ReduceObjectAttributes(FormInfo, AllItems, AddAttributeAndPropertySetName, AddInfo);
+EndFunction
+
+// Object properties.
+// 
+// Parameters:
+//  AddAttributeAndPropertySetName - String - Add attribute and property set name
+//  AddInfo - Undefined - Add info
+// 
+// Returns:
+//  Array Of CatalogTabularSectionRow.AddAttributeAndPropertySets.Attributes
+Function ObjectProperties(AddAttributeAndPropertySetName, AddInfo = Undefined) Export
+	Return Catalogs.AddAttributeAndPropertySets[AddAttributeAndPropertySetName].Properties;
+EndFunction
+
+// Get attribute info.
+// 
+// Returns:
+//  Structure - Get attribute info:
+// * Attribute - ChartOfCharacteristicTypesRef.AddAttributeAndProperty - 
+// * InterfaceGroup - Undefined - 
+// * Collection - Boolean - 
+// * PathForTag - String - 
+Function GetAttributeInfo() Export
+	AttributeStructure = New Structure;
+	AttributeStructure.Insert("Attribute", ChartsOfCharacteristicTypes.AddAttributeAndProperty.EmptyRef());
+	AttributeStructure.Insert("InterfaceGroup", Undefined);
+	AttributeStructure.Insert("Collection", False);
+	AttributeStructure.Insert("PathForTag", "");
+Return AttributeStructure;
+EndFunction
+
+#EndRegion
+
+#Region CalculateMD5
+
+// Get affect pricing MD5.
+// 
+// Parameters:
+//  Item - CatalogRef.Items - Item
+//  ItemType - CatalogRef.ItemTypes - Item type
+//  AddAttributes - ValueTable - Add attributes
+// 
+// Returns:
+//  String - Get affect pricing MD5
 Function GetAffectPricingMD5(Item, ItemType, AddAttributes) Export
 	Query = New Query();
 	Query.Text =
@@ -552,66 +621,153 @@ Function GetAffectPricingMD5(Item, ItemType, AddAttributes) Export
 	Return GetMD5ByAddAttributes(QueryResult.Unload());
 EndFunction
 
+// Get MD5 by add attributes.
+// 
+// Parameters:
+//  AddAttributes - ValueTable - Add attributes:
+//  * Property - ChartOfCharacteristicTypesRef.AddAttributeAndProperty -
+//  * Value - AnyRef, String -
+//  * Item - CatalogRef.Items
+// 
+// Returns:
+//  String - Get m d5 by add attributes
 Function GetMD5ByAddAttributes(AddAttributes) Export
 	If Not AddAttributes.Count() Then
 		Return "";
 	EndIf;
 
 	ValueTable = New ValueTable();
-	ValueTable.Columns.Add("Property");
+	ValueTable.Columns.Add("Property", New TypeDescription("UUID"));
 	ValueTable.Columns.Add("Value");
-	ValueTable.Columns.Add("Item");
+	ValueTable.Columns.Add("Item", New TypeDescription("UUID"));
 
 	For Each Row In AddAttributes Do
 		NewRow = ValueTable.Add();
-		NewRow.Property = String(Row.Property.UUID());
-		NewRow.Item = String(Row.Item.UUID());
+		NewRow.Property = Row.Property.UUID();
+		NewRow.Item = Row.Item.UUID();
 		If CommonFunctionsServer.IsPrimitiveValue(Row.Value) Then
-			NewRow.Value = String(Row.Value);
+			//@skip-check property-return-type
+			NewRow.Value = Row.Value;
 		Else
-			NewRow.Value = String(Row.Value.UUID());
+			//@skip-check property-return-type
+			NewRow.Value = Row.Value.UUID();
 		EndIf;
 	EndDo;
 	ValueTable.Sort("Property, Value, Item");
 
-	Return GetMD5ForValueTable(ValueTable);
+	Return CommonFunctionsServer.GetMD5(ValueTable);
 EndFunction
 
+// Get MD5 by specification.
+// 
+// Parameters:
+//  AddAttributes - ValueTable - Add attributes:
+//  * Property - ChartOfCharacteristicTypesRef.AddAttributeAndProperty -
+//  * Value - AnyRef, String -
+//  * Item - CatalogRef.Items - 
+//  * Quantity - Number -
+// 
+// Returns:
+//  String - Get m d5 by specification
 Function GetMD5BySpecification(AddAttributes) Export
 	If Not AddAttributes.Count() Then
 		Return "";
 	EndIf;
 
 	ValueTable = New ValueTable();
-	ValueTable.Columns.Add("Property");
+	ValueTable.Columns.Add("Property", New TypeDescription("UUID"));
 	ValueTable.Columns.Add("Value");
-	ValueTable.Columns.Add("Item");
-	ValueTable.Columns.Add("Quantity");
+	ValueTable.Columns.Add("Item", New TypeDescription("UUID"));
+	ValueTable.Columns.Add("Quantity", New TypeDescription("Number"));
 
 	For Each Row In AddAttributes Do
 		NewRow = ValueTable.Add();
-		NewRow.Property = String(Row.Property.UUID());
-		NewRow.Item = String(Row.Item.UUID());
-		NewRow.Quantity = String(Row.Quantity);
+		NewRow.Property = Row.Property.UUID();
+		NewRow.Item = Row.Item.UUID();
+		NewRow.Quantity = Row.Quantity;
 		If CommonFunctionsServer.IsPrimitiveValue(Row.Value) Then
-			NewRow.Value = String(Row.Value);
+			//@skip-check property-return-type
+			NewRow.Value = Row.Value;
 		Else
-			NewRow.Value = String(Row.Value.UUID());
+			//@skip-check property-return-type
+			NewRow.Value = Row.Value.UUID();
 		EndIf;
 	EndDo;
 	ValueTable.Sort("Property, Value, Quantity");
 
-	Return GetMD5ForValueTable(ValueTable);
+	Return CommonFunctionsServer.GetMD5(ValueTable);
 EndFunction
 
-Function GetMD5ForValueTable(ValueTable) Export
-	xml = CommonFunctionsServer.SerializeXMLUseXDTO(ValueTable);
+#EndRegion
 
-	DataHashing = New DataHashing(HashFunction.MD5);
-	DataHashing.Append(xml);
-	Return Upper(DataHashing.HashSum);
+#Region Getter
+
+// Get saved data.
+// 
+// Returns:
+//  Structure - Get saved data:
+// * FormGroups - See ExtractProperty 
+// * FormAttributes - See ExtractProperty
+// * FormItemFields - See ExtractProperty
+// * ArrayOfAttributesInfo - See FillArrayOfAttributesInfo 
+Function GetSavedData()
+	SavedData = New Structure;
+	SavedData.Insert("FormGroups", New Array);
+	SavedData.Insert("FormAttributes", New Array); 
+	SavedData.Insert("FormItemFields", New Array); 
+	SavedData.Insert("ArrayOfAttributesInfo", New Array);
+	Return SavedData
 EndFunction
 
+// Get default attribute values.
+// 
+// Parameters:
+//  FormInfo - See GetObjectInfo
+// 
+// Returns:
+//  ValueTable - Get default attribute values:
+//  * Value - Arbitrary -
+Function GetDefaultAttributeValues(FormInfo)
+	Query = New Query();
+	Query.Text =
+	"SELECT
+	|	tmp.UserOrGroup AS UserOrGroup,
+	|	tmp.MetadataObject AS MetadataObject,
+	|	tmp.AttributeName AS AttributeName,
+	|	tmp.KindOfAttribute AS KindOfAttribute,
+	|	tmp.Value AS Value
+	|INTO tmp
+	|FROM
+	|	&UserSettings AS tmp
+	|;
+	|////////////////////////////////////////////////////////////////////////////////
+	|SELECT
+	|	AddAttributeAndProperty.Ref AS AttributeRef,
+	|	tmp.UserOrGroup,
+	|	tmp.MetadataObject,
+	|	tmp.AttributeName,
+	|	tmp.KindOfAttribute,
+	|	tmp.Value
+	|FROM
+	|	ChartOfCharacteristicTypes.AddAttributeAndProperty AS AddAttributeAndProperty
+	|		INNER JOIN tmp AS tmp
+	|		ON AddAttributeAndProperty.UniqueID = tmp.AttributeName
+	|		AND tmp.KindOfAttribute = VALUE(Enum.KindsOfAttributes.Additional)";
+	FilterParameters = New Structure();
+	FilterParameters.Insert("MetadataObject", FormInfo.Metadata);
+	UserSettings = UserSettingsServer.GetUserSettings(SessionParameters.CurrentUser, FilterParameters);
+	Query.SetParameter("UserSettings", UserSettings);
+	Return Query.Execute().Unload();
+EndFunction
+
+// Get add attribute value of ref by ID.
+// 
+// Parameters:
+//  UniqueID - String - Unique ID
+//  ObjectRef - AnyRef -  Object ref
+// 
+// Returns:
+//  Undefined - Get add attribute value of ref by ID
 Function GetAddAttributeValueOfRefByID(UniqueID, ObjectRef) Export
 
 	ReturnValue = Undefined;
@@ -633,6 +789,14 @@ Function GetAddAttributeValueOfRefByID(UniqueID, ObjectRef) Export
 
 EndFunction
 
+// Get add property value of ref by ID.
+// 
+// Parameters:
+//  UniqueID - String - Unique ID
+//  ObjectRef - AnyRef -  Object ref
+// 
+// Returns:
+//  Undefined - Get add property value of ref by ID
 Function GetAddPropertyValueOfRefByID(UniqueID, ObjectRef) Export
 
 	ReturnValue = Undefined;
@@ -657,6 +821,7 @@ Function GetAddPropertyValueOfRefByID(UniqueID, ObjectRef) Export
 
 			QuerySelection = QueryExecution.Select();
 			QuerySelection.Next();
+			//@skip-check property-return-type, statement-type-change
 			ReturnValue = QuerySelection.Value;
 
 		EndIf;
@@ -667,26 +832,34 @@ Function GetAddPropertyValueOfRefByID(UniqueID, ObjectRef) Export
 
 EndFunction
 
-Function AllAttributesArrayByFilter(CurrentObject, Filter = Undefined) Export
+// All attributes array by filter.
+// 
+// Parameters:
+//  CurrentObject - CatalogObject.ItemKeys, AnyRef - Current object
+//  Prefix - String -
+//  Filter - Structure - Filter:
+//  * Required - Boolean - 
+// 
+// Returns:
+//  Array Of ChartOfCharacteristicTypesRef.AddAttributeAndProperty - All attributes array by filter
+Function AllAttributesArrayByFilter(CurrentObject, Prefix, Filter = Undefined)
 	ReturnValue = New Array();
 
-	FormInfo = GetObjectInfo(CurrentObject);
+	FormInfo = GetObjectInfo(CurrentObject, Prefix);
 	Form = New Structure("Object", CurrentObject);
 	FormInfo.Insert("Form", Form);
 
 	ObjectPredefinedName = StrReplace(CurrentObject.Metadata().FullName(), ".", "_");
-	If ObjectPredefinedName = "Catalog_ItemKeys" Then
+	If CurrentObject.Metadata() = Metadata.Catalogs.ItemKeys Then
 		If ValueIsFilled(CurrentObject.Item) Then
 			AddAttributeAndPropertySetsAttributes = CurrentObject.Item.ItemType.AvailableAttributes;
-			AddAttributeAndPropertySetsAttributesByFilter = AddAttributeAndPropertySetsAttributes.Unload(Filter,
-				"Attribute");
+			AddAttributeAndPropertySetsAttributesByFilter = AddAttributeAndPropertySetsAttributes.Unload(Filter, "Attribute");
 			ReturnValue = AddAttributeAndPropertySetsAttributesByFilter.UnloadColumn("Attribute");
 		EndIf;
 	Else
-		AddAttributeAndPropertySetsAttributes = Catalogs.AddAttributeAndPropertySets[ObjectPredefinedName].Attributes;
+		AddAttributeAndPropertySetsAttributes = Catalogs.AddAttributeAndPropertySets[ObjectPredefinedName].Attributes; // CatalogTabularSection.ItemTypes.AvailableAttributes
 		AddAttributeAndPropertySetsAttributesByFilter = AddAttributeAndPropertySetsAttributes.Unload(Filter);
-		ReducedObjectAttributes = ReduceObjectAttributes(FormInfo, AddAttributeAndPropertySetsAttributesByFilter,
-			ObjectPredefinedName);
+		ReducedObjectAttributes = ReduceObjectAttributes(FormInfo, AddAttributeAndPropertySetsAttributesByFilter, ObjectPredefinedName);
 		ReturnValue = New Array();
 		For Each ReducedObjectAttribute In ReducedObjectAttributes Do
 			ReturnValue.Add(ReducedObjectAttribute.Attribute);
@@ -696,61 +869,37 @@ Function AllAttributesArrayByFilter(CurrentObject, Filter = Undefined) Export
 	Return ReturnValue;
 EndFunction
 
-Function AllPropertiesArrayByFilter(CurrentObject, Filter = Undefined) Export
+// All properties array by filter.
+// 
+// Parameters:
+//  CurrentObject - CatalogObject.ItemKeys, AnyRef - Current object
+//  Prefix - String -
+//  Filter - Structure - Filter
+// 
+// Returns:
+//  Array Of ChartOfCharacteristicTypesRef.AddAttributeAndProperty - All properties array by filter
+Function AllPropertiesArrayByFilter(CurrentObject, Prefix, Filter = Undefined) Export
 	ReturnValue = New Array();
-	ObjectPredefinedName = StrReplace(CurrentObject.Metadata().FullName(), ".", "_");
+	FullName = CurrentObject.Metadata().FullName();
+	ObjectPredefinedName = StrReplace(FullName, ".", "_");
 	AddAttributeAndPropertySetsAttributes = Catalogs.AddAttributeAndPropertySets[ObjectPredefinedName].Properties;
 	AddAttributeAndPropertySetsAttributesByFilter = AddAttributeAndPropertySetsAttributes.Unload(Filter, "Property");
 	ReturnValue = AddAttributeAndPropertySetsAttributesByFilter.UnloadColumn("Property");
 	Return ReturnValue;
 EndFunction
 
-Procedure SetRequiredAtAllSets(AddAttribute, Required) Export
-	Query = New Query();
-	Query.Text = "SELECT ALLOWED
-				 |	AddAttributeAndPropertySetsAttributes.Ref AS Ref
-				 |FROM
-				 |	Catalog.AddAttributeAndPropertySets.Attributes AS AddAttributeAndPropertySetsAttributes
-				 |WHERE
-				 |	AddAttributeAndPropertySetsAttributes.Attribute = &Attribute
-				 |	AND AddAttributeAndPropertySetsAttributes.Required <> &Required
-				 |	AND (AddAttributeAndPropertySetsAttributes.Ref <> VALUE(Catalog.AddAttributeAndPropertySets.Catalog_ItemKeys)
-				 |	AND AddAttributeAndPropertySetsAttributes.Ref <> VALUE(Catalog.AddAttributeAndPropertySets.Catalog_PriceKeys))
-				 |;
-				 |SELECT ALLOWED
-				 |	ItemTypesAvailableAttributes.Ref
-				 |FROM
-				 |	Catalog.ItemTypes.AvailableAttributes AS ItemTypesAvailableAttributes
-				 |WHERE
-				 |	ItemTypesAvailableAttributes.Attribute = &Attribute
-				 |	AND ItemTypesAvailableAttributes.Required <> &Required";
-	Query.SetParameter("Attribute", AddAttribute);
-	Query.SetParameter("Required", Required);
-	QueryExecuteBatch = Query.ExecuteBatch();
-
-	QuerySelection = QueryExecuteBatch[0].Select();
-	While QuerySelection.Next() Do
-		CatObj = QuerySelection.Ref.GetObject();
-		AttributeFilter = New Structure("Attribute", AddAttribute);
-		AttributeFoundedRows = CatObj.Attributes.FindRows(AttributeFilter);
-		For Each AttributeFoundedRow In AttributeFoundedRows Do
-			AttributeFoundedRow.Required = Required;
-		EndDo;
-		CatObj.Write();
-	EndDo;
-
-	QuerySelection = QueryExecuteBatch[1].Select();
-	While QuerySelection.Next() Do
-		CatObj = QuerySelection.Ref.GetObject();
-		AttributeFilter = New Structure("Attribute", AddAttribute);
-		AttributeFoundedRows = CatObj.AvailableAttributes.FindRows(AttributeFilter);
-		For Each AttributeFoundedRow In AttributeFoundedRows Do
-			AttributeFoundedRow.Required = Required;
-		EndDo;
-		CatObj.Write();
-	EndDo;
-EndProcedure
-
+// Addition attribute value by ref.
+// 
+// Parameters:
+//  Ref - AnyRef - Ref
+//  ArrayAttributes - Array Of ChartOfCharacteristicTypesRef.AddAttributeAndProperty - Array attributes
+// 
+// Returns:
+//  Array Of Structure:
+//  * Attribute - ChartOfCharacteristicTypesRef.AddAttributeAndProperty -
+//  * Value - AnyRef -
+//  * ValueType - Type -
+//  * ID - String -
 Function AdditionAttributeValueByRef(Ref, ArrayAttributes) Export
 
 	If ArrayAttributes = Undefined Then
@@ -802,14 +951,33 @@ Function AdditionAttributeValueByRef(Ref, ArrayAttributes) Export
 
 	AttributeArray = New Array();
 	For Each Row In QueryResult Do
-		Str = New Structure("Attribute, Value, ValueType, ID");
-		FillPropertyValues(Str, Row);
+		Str = New Structure;
+		//@skip-check property-return-type
+		Str.Insert("Attribute", Row.Attribute);
+		//@skip-check property-return-type
+		Str.Insert("Value", Row.Value);
+		//@skip-check property-return-type
+		Str.Insert("ValueType", Row.ValueType);
+		//@skip-check property-return-type
+		Str.Insert("ID", Row.ID);
 		AttributeArray.Add(Str);
 	EndDo;
 
 	Return AttributeArray;
 EndFunction
 
+// Addition property value by ref.
+// 
+// Parameters:
+//  Ref - AnyRef - Ref
+//  ArrayProperties - Array Of ChartOfCharacteristicTypesRef.AddAttributeAndProperty - Array properties
+// 
+// Returns:
+//  Array Of Structure:
+//  * Attribute - ChartOfCharacteristicTypesRef.AddAttributeAndProperty -
+//  * Value - AnyRef -
+//  * ValueType - Type -
+//  * ID - String -
 Function AdditionPropertyValueByRef(Ref, ArrayProperties) Export
 
 	If ArrayProperties = Undefined Then
@@ -859,12 +1027,156 @@ Function AdditionPropertyValueByRef(Ref, ArrayProperties) Export
 
 	PropertyArray = New Array();
 	For Each Row In QueryResult Do
-		Str = New Structure("Attribute, Value, ValueType, ID");
-		FillPropertyValues(Str, Row);
+		Str = New Structure;
+		//@skip-check property-return-type
+		Str.Insert("Attribute", Row.Attribute);
+		//@skip-check property-return-type
+		Str.Insert("Value", Row.Value);
+		//@skip-check property-return-type
+		Str.Insert("ValueType", Row.ValueType);
+		//@skip-check property-return-type
+		Str.Insert("ID", Row.ID);
 		PropertyArray.Add(Str);
 	EndDo;
 
 	Return PropertyArray;
+EndFunction
+
+#EndRegion
+
+#Region Setter
+
+// Set required at all sets.
+// 
+// Parameters:
+//  AddAttribute - ChartOfCharacteristicTypesRef.AddAttributeAndProperty - Add attribute
+//  Required - Boolean - Required
+Procedure SetRequiredAtAllSets(AddAttribute, Required) Export
+	Query = New Query();
+	Query.Text = "SELECT ALLOWED
+				 |	AddAttributeAndPropertySetsAttributes.Ref AS Ref
+				 |FROM
+				 |	Catalog.AddAttributeAndPropertySets.Attributes AS AddAttributeAndPropertySetsAttributes
+				 |WHERE
+				 |	AddAttributeAndPropertySetsAttributes.Attribute = &Attribute
+				 |	AND AddAttributeAndPropertySetsAttributes.Required <> &Required
+				 |	AND (AddAttributeAndPropertySetsAttributes.Ref <> VALUE(Catalog.AddAttributeAndPropertySets.Catalog_ItemKeys)
+				 |	AND AddAttributeAndPropertySetsAttributes.Ref <> VALUE(Catalog.AddAttributeAndPropertySets.Catalog_PriceKeys))
+				 |;
+				 |SELECT ALLOWED
+				 |	ItemTypesAvailableAttributes.Ref
+				 |FROM
+				 |	Catalog.ItemTypes.AvailableAttributes AS ItemTypesAvailableAttributes
+				 |WHERE
+				 |	ItemTypesAvailableAttributes.Attribute = &Attribute
+				 |	AND ItemTypesAvailableAttributes.Required <> &Required";
+	Query.SetParameter("Attribute", AddAttribute);
+	Query.SetParameter("Required", Required);
+	QueryExecuteBatch = Query.ExecuteBatch();
+
+	QuerySelection = QueryExecuteBatch[0].Select();
+	While QuerySelection.Next() Do
+		//@skip-check dynamic-access-method-not-found, property-return-type
+		CatObjSets = QuerySelection.Ref.GetObject(); // CatalogObject.AddAttributeAndPropertySets
+		AttributeFilter = New Structure("Attribute", AddAttribute);
+		AttributeFoundedRows = CatObjSets.Attributes.FindRows(AttributeFilter);
+		For Each AttributeFoundedRow In AttributeFoundedRows Do
+			AttributeFoundedRow.Required = Required;
+		EndDo;
+		CatObjSets.Write();
+	EndDo;
+
+	QuerySelection = QueryExecuteBatch[1].Select();
+	While QuerySelection.Next() Do
+		//@skip-check dynamic-access-method-not-found, property-return-type
+		CatObj = QuerySelection.Ref.GetObject(); // CatalogObject.ItemTypes
+		AttributeFilter = New Structure("Attribute", AddAttribute);
+		AttributeFoundedRows = CatObj.AvailableAttributes.FindRows(AttributeFilter);
+		For Each AttributeFoundedRow In AttributeFoundedRows Do
+			AttributeFoundedRow.Required = Required;
+		EndDo;
+		CatObj.Write();
+	EndDo;
+EndProcedure
+
+#EndRegion
+
+#Region HTML
+
+Function HTMLAddAttributes() Export
+	HTMLAddAttributes = GetCommonTemplate("HTMLAddAttributes");
+	HTMLAddAttributesText = HTMLAddAttributes.GetText();
+	Return HTMLAddAttributesText;
+EndFunction
+
+// Prepare data for HTML.
+// 
+// Parameters:
+//  ItemRef - AnyRef -
+//  Prefix - String - Prefix
+//  Filter - Structure - Filter
+// 
+// Returns:
+//  String - Prepare data for HTML
+Function PrepareDataForHTML(ItemRef, Prefix, Filter = Undefined) Export
+	ArrayProperties = AllPropertiesArrayByFilter(ItemRef, Prefix, Filter);
+	ArrayAttributes = AllAttributesArrayByFilter(ItemRef, Prefix, Filter);
+
+	ArrayAttributesValue = AdditionAttributeValueByRef(ItemRef, ArrayAttributes);
+	ArrayPropertiesValue = AdditionPropertyValueByRef(ItemRef, ArrayProperties);
+
+	ReadyArrayAttributes = New Array();
+	For Each AttributeRow In ArrayAttributesValue Do
+		Str = New Structure;
+		Str.Insert("Name", String(AttributeRow.Attribute));
+		Str.Insert("Type", String(AttributeRow.ValueType));
+		Str.Insert("Value", String(AttributeRow.Value));
+		Str.Insert("Icon", GetURL(AttributeRow.Attribute, "Icon"));
+		ReadyArrayAttributes.Add(Str);
+	EndDo;
+
+	ReadyArrayProperties = New Array();
+	For Each PropertyRow In ArrayPropertiesValue Do
+		Str = New Structure;
+		Str.Insert("Name", String(PropertyRow.Attribute));
+		Str.Insert("Type", String(PropertyRow.ValueType));
+		Str.Insert("Value", String(PropertyRow.Value));
+		Str.Insert("Icon", GetURL(PropertyRow.Attribute, "Icon"));
+		ReadyArrayProperties.Add(Str);
+	EndDo;
+
+	Map = New Map();
+	Map.Insert("Properties", ReadyArrayProperties);
+	Map.Insert("Attributes", ReadyArrayAttributes);
+	
+	JSON = CommonFunctionsServer.SerializeJSON(Map);
+	Return JSON;
+EndFunction
+
+Procedure EventSubscriptionOnCopy(Source, CopiedObject) Export
+	If Not Source.Metadata().TabularSections.Find("AddAttributes") = Undefined Then
+		Source.AddAttributes.Load(CopiedObject.AddAttributes.Unload());
+	EndIf;
+EndProcedure
+
+#EndRegion
+
+#Region Service
+
+// Extract property.
+// 
+// Parameters:
+//  ArrayOfValues - Array Of See GroupInfo
+//  Name - String - Name
+// 
+// Returns:
+//  Array Of See GroupInfo
+Function ExtractProperty(ArrayOfValues, Name)
+	Result = New Array();
+	For Each Row In ArrayOfValues Do
+		Result.Add(Row[Name]);
+	EndDo;
+	Return Result;
 EndFunction
 
 Procedure CreateItemsForURL(Form, GroupNameForPlacement, AttrInfo, ArrayOfFormElements)
@@ -872,7 +1184,8 @@ Procedure CreateItemsForURL(Form, GroupNameForPlacement, AttrInfo, ArrayOfFormEl
 	ElementPages = Form.Items.Add(
 		AttrInfo.Name + "Pages", 
 		Type("FormGroup"), 
-		GetFormItemParent(Form, GroupNameForPlacement, AttrInfo));	
+		GetFormItemParent(Form, GroupNameForPlacement, AttrInfo)
+	);	
 	ElementPages.Type = FormGroupType.Pages;
 	ElementPages.PagesRepresentation = FormPagesRepresentation.None;
 	ElementPages.HorizontalStretch = True;
@@ -895,21 +1208,24 @@ Procedure CreateItemsForURL(Form, GroupNameForPlacement, AttrInfo, ArrayOfFormEl
 	FormButtonSave.Type = FormDecorationType.Picture;
 	FormButtonSave.Hyperlink = True;
 	FormButtonSave.Picture = PictureLib.SaveFile;
+	//@skip-check module-attachable-event-handler-name
 	FormButtonSave.SetAction("Click", "AddAttributeButtonClick");
 	
 	FormElementURL = Form.Items.Add(AttrInfo.Name + "_URL", Type("FormDecoration"), ElementPageURL);
 	FormElementURL.Hyperlink = True;
-	FormElementURL.Title = Form[AttrInfo.Path];
+	FormElementURL.Title = String(Form[AttrInfo.Path]);
 	FormElementURL.ToolTip = AttrInfo.Title;
 	FormElementURL.ToolTipRepresentation = ToolTipRepresentation.ShowLeft;
 	FormElementURL.BackColor = StyleColors.ToolTipBackColor;
 	FormElementURL.HorizontalStretch = True;
+	//@skip-check module-attachable-event-handler-name
 	FormElementURL.SetAction("Click", "AddAttributeButtonClick");
 	
 	FormButtonEditURL = Form.Items.Add(AttrInfo.Name + "_EditURL", Type("FormDecoration"), ElementPageURL);
 	FormButtonEditURL.Type = FormDecorationType.Picture;
 	FormButtonEditURL.Hyperlink = True;
 	FormButtonEditURL.Picture = PictureLib.Change;
+	//@skip-check module-attachable-event-handler-name
 	FormButtonEditURL.SetAction("Click", "AddAttributeButtonClick");
 	
 	ArrayOfFormElements.Add(FormElementURL);
@@ -922,53 +1238,103 @@ Procedure CreateItemsForURL(Form, GroupNameForPlacement, AttrInfo, ArrayOfFormEl
 	
 EndProcedure
 
-#Region HTML
-
-Function HTMLAddAttributes() Export
-	HTMLAddAttributes = GetCommonTemplate("HTMLAddAttributes");
-	HTMLAddAttributes = HTMLAddAttributes.GetText();
-	Return HTMLAddAttributes;
+// Fill array of attributes info.
+// 
+// Parameters:
+//  FormAttributes - See FormAttributes
+// 
+// Returns:
+//  Array Of Structure:
+//  * Name - String -
+//  * Name_owner - String -
+Function FillArrayOfAttributesInfo(FormAttributes)
+	ArrayOfAttributesInfo = New Array();
+	For Each Row In FormAttributes.FormAttributesInfo Do
+		Str = New Structure;
+		Str.Insert("Name", Row.Name);
+		Str.Insert("Name_owner", Row.Name_owner);
+		ArrayOfAttributesInfo.Add(Str);
+	EndDo;
+	Return ArrayOfAttributesInfo;
 EndFunction
 
-Function PrepareDataForHTML(ItemRef, Filter = Undefined) Export
-	ArrayProperties = AllPropertiesArrayByFilter(ItemRef, Filter);
-	ArrayAttributes = AllAttributesArrayByFilter(ItemRef, Filter);
-
-	ArrayAttributesValue = AdditionAttributeValueByRef(ItemRef, ArrayAttributes);
-	ArrayPropertiesValue = AdditionPropertyValueByRef(ItemRef, ArrayProperties);
-
-	ReadyArrayAttributes = New Array();
-	For Each AttributeRow In ArrayAttributesValue Do
-		Str = New Structure("Icon, Name, Value, Type, Attribute");
-		Str.Name = String(AttributeRow.Attribute);
-		Str.Type = String(AttributeRow.ValueType);
-		Str.Value = String(AttributeRow.Value);
-		Str.Icon = GetURL(AttributeRow.Attribute, "Icon");
-		ReadyArrayAttributes.Add(Str);
-	EndDo;
-
-	ReadyArrayProperties = New Array();
-	For Each PropertyRow In ArrayPropertiesValue Do
-		Str = New Structure("Icon, Name, Value, Type, Attribute");
-		Str.Name = String(PropertyRow.Attribute);
-		Str.Type = String(PropertyRow.ValueType);
-		Str.Value = String(PropertyRow.Value);
-		Str.Icon = GetURL(PropertyRow.Attribute, "Icon");
-		ReadyArrayProperties.Add(Str);
-	EndDo;
-
-	Str = New Map();
-	Str.Insert("Properties", ReadyArrayProperties);
-	Str.Insert("Attributes", ReadyArrayAttributes);
-	
-	JSON = CommonFunctionsServer.SerializeJSON(Str);
-	Return JSON;
+Function AttributeName(Attribute, AddInfo = Undefined)
+	Return "_" + StrReplace(Attribute.UniqueID, " ", "");
 EndFunction
 
-Procedure EventSubscriptionOnCopy(Source, CopiedObject) Export
-	If Not Metadata.FindByType(TypeOf(Source)).TabularSections.Find("AddAttributes") = Undefined Then
-		Source.AddAttributes.Load(CopiedObject.AddAttributes.Unload());
+Function AttributeOwnerName(Attribute, AddInfo = Undefined)
+	Return "_" + StrReplace(Attribute.UniqueID, " ", "") + "_owner";
+EndFunction
+
+Function GetDCSTemplate(PredefinedDataName, AddInfo = Undefined) Export
+	TableName = StrReplace(PredefinedDataName, "_", ".");
+	ObjectName = StrSplit(PredefinedDataName, "_");
+	If StrStartsWith(PredefinedDataName, "Catalog") Then
+		Template = Catalogs.AddAttributeAndPropertySets.GetTemplate("DCS_Catalog");
+		Template.DataSets[0].Items[0].Query = StrReplace(Template.DataSets[0].Items[0].Query, "&TableName", TableName);
+		//@skip-check property-return-type, dynamic-access-method-not-found
+		Template.DataSets[0].Items.DataSet2.Fields.Find("Ref").ValueType = New TypeDescription("CatalogRef." + ObjectName[1]);
+	ElsIf StrStartsWith(PredefinedDataName, "Document") Then
+		Template = Catalogs.AddAttributeAndPropertySets.GetTemplate("DCS_Document");
+		Template.DataSets[0].Query = StrReplace(Template.DataSets[0].Query, "&TableName", TableName);
+		Template.DataSets[0].Fields.Find("Ref").ValueType = New TypeDescription("DocumentRef." + ObjectName[1]);
+	Else
+		Raise R().Error_004;
 	EndIf;
-EndProcedure
+	Return Template;
+EndFunction
+
+Function GetRefsByCondition(DCSTemplate, Settings, ExternalDataSet, AddInfo = Undefined) Export
+	Composer = New DataCompositionTemplateComposer();
+	Template = Composer.Execute(DCSTemplate, Settings, , , Type("DataCompositionValueCollectionTemplateGenerator"));
+
+	Processor = New DataCompositionProcessor();
+	Processor.Initialize(Template, New Structure("ExternalDataSet", ExternalDataSet));
+
+	Output = New DataCompositionResultValueCollectionOutputProcessor();
+	Result = New ValueTable();
+	Output.SetObject(Result);
+	Output.Output(Processor);
+
+	Return Result;
+EndFunction
+
+// Reduce object attributes.
+// 
+// Parameters:
+//  FormInfo - See GetObjectInfo
+//  AllItems - ValueTable, CatalogTabularSection.AddAttributeAndPropertySets.Attributes - All items
+//  AddAttributeAndPropertySetName - String - Add attribute and property set name
+//  AddInfo - Undefined - Add info
+// 
+// Returns:
+//  Array Of CatalogTabularSectionRow.AddAttributeAndPropertySets.Attributes
+Function ReduceObjectAttributes(FormInfo, AllItems, AddAttributeAndPropertySetName, AddInfo = Undefined)
+	TableOfAvailableAttributes = New ValueTable();
+	TableOfAvailableAttributes.Columns.Add("RowOfAllItems");
+	TableOfAvailableAttributes.Columns.Add("LineNumber");
+
+	ArrayOfCollection = New Array();
+
+	If FormInfo.Metadata = Metadata.Catalogs.PriceKeys Then
+		FixedExistItems = AllItems.UnloadColumns();
+		For Each Row In FormInfo.Ref.AddAttributes Do
+			NewRow = FixedExistItems.Add();
+			NewRow.Attribute = Row.Property;
+			ArrayOfCollection.Add(NewRow);
+		EndDo;
+
+	Else
+		FillTableOfAvailableAttributesBy_AllItems(TableOfAvailableAttributes, ArrayOfCollection, FormInfo,
+			AddAttributeAndPropertySetName, AllItems, AddInfo);
+	EndIf;
+
+	If TableOfAvailableAttributes.Count() Then
+		TableOfAvailableAttributes.Sort("LineNumber");
+		ArrayOfCollection = TableOfAvailableAttributes.UnloadColumn("RowOfAllItems");
+	EndIf;
+
+	Return ArrayOfCollection;
+EndFunction
 
 #EndRegion

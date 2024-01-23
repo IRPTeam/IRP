@@ -182,4 +182,30 @@
     <fullTextSearch>Use</fullTextSearch>
     <useInTotals>true</useInTotals>
   </dimensions>
+  <dimensions uuid="0d404170-a099-4e60-b68f-8525978ec5d0">
+    <name>Basis</name>
+    <synonym>
+      <key>en</key>
+      <value>Basis</value>
+    </synonym>
+    <type>
+      <types>DocumentRef.CreditNote</types>
+      <types>DocumentRef.DebitNote</types>
+      <types>DocumentRef.CashPayment</types>
+      <types>DocumentRef.CashReceipt</types>
+      <types>DocumentRef.BankPayment</types>
+      <types>DocumentRef.BankReceipt</types>
+      <types>DocumentRef.ChequeBondTransactionItem</types>
+      <types>DocumentRef.ForeignCurrencyRevaluation</types>
+      <types>DocumentRef.OpeningEntry</types>
+      <types>DocumentRef.EmployeeCashAdvance</types>
+      <types>DocumentRef.SalesReportFromTradeAgent</types>
+      <types>DocumentRef.SalesReturn</types>
+      <types>DocumentRef.SalesInvoice</types>
+      <types>DocumentRef.SalesOrderClosing</types>
+    </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <fullTextSearch>Use</fullTextSearch>
+  </dimensions>
 </mdclass:AccumulationRegister>

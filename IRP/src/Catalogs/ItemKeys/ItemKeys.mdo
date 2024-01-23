@@ -122,7 +122,7 @@
     <objectField>Catalog.ItemKeys.TabularSection.AddAttributes.StandardAttribute.Ref</objectField>
     <typeField>Catalog.ItemKeys.TabularSection.AddAttributes.Attribute.Property</typeField>
     <valueField>Catalog.ItemKeys.TabularSection.AddAttributes.Attribute.Value</valueField>
-    <multipleValuesKeyField>Catalog.ItemKeys.TabularSection.AddAttributes.StandardAttribute.LineNumber</multipleValuesKeyField>
+    <multipleValuesKeyField>-1</multipleValuesKeyField>
     <multipleValuesOrderField>Catalog.ItemKeys.TabularSection.AddAttributes.StandardAttribute.LineNumber</multipleValuesOrderField>
   </characteristics>
   <createOnInput>DontUse</createOnInput>

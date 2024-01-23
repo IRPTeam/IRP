@@ -2,6 +2,7 @@
 Procedure OnCreateAtServer(Cancel, StandardProcessing)
 	SetVisible();
 	LocalizationEvents.CreateMainFormItemDescription(ThisObject, "GroupDescriptions");
+	LocalizationEvents.FillDescription(Parameters.FillingText, Object);
 EndProcedure
 
 &AtClient

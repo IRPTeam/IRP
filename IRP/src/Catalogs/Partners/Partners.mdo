@@ -139,7 +139,7 @@
     <objectField>Catalog.Partners.TabularSection.AddAttributes.StandardAttribute.Ref</objectField>
     <typeField>Catalog.Partners.TabularSection.AddAttributes.Attribute.Property</typeField>
     <valueField>Catalog.Partners.TabularSection.AddAttributes.Attribute.Value</valueField>
-    <multipleValuesKeyField>Catalog.Partners.TabularSection.AddAttributes.StandardAttribute.LineNumber</multipleValuesKeyField>
+    <multipleValuesKeyField>-1</multipleValuesKeyField>
     <multipleValuesOrderField>Catalog.Partners.TabularSection.AddAttributes.StandardAttribute.LineNumber</multipleValuesOrderField>
   </characteristics>
   <createOnInput>DontUse</createOnInput>
@@ -162,7 +162,6 @@
   <defaultObjectForm>Catalog.Partners.Form.ItemForm</defaultObjectForm>
   <defaultListForm>Catalog.Partners.Form.ListForm</defaultListForm>
   <defaultChoiceForm>Catalog.Partners.Form.ChoiceForm</defaultChoiceForm>
-  <choiceHistoryOnInput>DontUse</choiceHistoryOnInput>
   <attributes uuid="1c3b57f9-ea57-4188-851d-7c785df051de">
     <name>Customer</name>
     <synonym>

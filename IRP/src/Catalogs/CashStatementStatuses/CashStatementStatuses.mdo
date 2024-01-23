@@ -43,7 +43,7 @@
     <objectField>Catalog.CashStatementStatuses.TabularSection.AddAttributes.StandardAttribute.Ref</objectField>
     <typeField>Catalog.CashStatementStatuses.TabularSection.AddAttributes.Attribute.Property</typeField>
     <valueField>Catalog.CashStatementStatuses.TabularSection.AddAttributes.Attribute.Value</valueField>
-    <multipleValuesKeyField>Catalog.CashStatementStatuses.TabularSection.AddAttributes.StandardAttribute.LineNumber</multipleValuesKeyField>
+    <multipleValuesKeyField>-1</multipleValuesKeyField>
     <multipleValuesOrderField>Catalog.CashStatementStatuses.TabularSection.AddAttributes.StandardAttribute.LineNumber</multipleValuesOrderField>
   </characteristics>
   <createOnInput>Use</createOnInput>

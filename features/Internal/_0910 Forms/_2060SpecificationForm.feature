@@ -265,3 +265,17 @@ Scenario: _206000 create a specification double
 		And I click "OK" button
 		Then I wait that in user messages the "Specification is not unique." substring will appear in 10 seconds
 		And I close all client application windows
+
+Scenario: _206001 copy specification and check MD5
+		And I close all client application windows
+	* Open specification catalog
+		Given I open hyperlink "e1cib/list/Catalog.Specifications"
+		And I go to line in "List" table
+			| 'Description' |
+			| 'A-8'         |
+	* Copy specification and check MD 5
+		And in the table "List" I click the button named "ListContextMenuCopy"
+		And I move to the tab named "GroupUniqueMD5"
+		And I expand "Unique MD5" group
+		Then the form attribute named "UniqueMD5" became equal to ""
+		And I close all client application windows

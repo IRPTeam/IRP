@@ -28,7 +28,7 @@
     <objectField>Catalog.PartnerItems.TabularSection.AddAttributes.StandardAttribute.Ref</objectField>
     <typeField>Catalog.PartnerItems.TabularSection.AddAttributes.Attribute.Property</typeField>
     <valueField>Catalog.PartnerItems.TabularSection.AddAttributes.Attribute.Value</valueField>
-    <multipleValuesKeyField>Catalog.PartnerItems.TabularSection.AddAttributes.StandardAttribute.LineNumber</multipleValuesKeyField>
+    <multipleValuesKeyField>-1</multipleValuesKeyField>
     <multipleValuesOrderField>Catalog.PartnerItems.TabularSection.AddAttributes.StandardAttribute.LineNumber</multipleValuesOrderField>
   </characteristics>
   <characteristics>

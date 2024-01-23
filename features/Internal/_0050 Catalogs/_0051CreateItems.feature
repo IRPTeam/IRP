@@ -1314,6 +1314,9 @@ Scenario: _005131 create specification with primitive type
 		And I activate "Quantity" field in "FormTable*" table
 		And I input "2,000" text in "Quantity" field of "FormTable*" table
 		And I finish line editing in "FormTable*" table
+		And I click "Save" button
+		When I Check the steps for Exception
+			| 'Then the form attribute named "UniqueMD5" became equal to ""'    |
 		And I click "Save and close" button
 		And table "List" contains lines:
 			| 'Description'    |

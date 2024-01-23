@@ -124,7 +124,7 @@
     <objectField>Catalog.ChequeBonds.TabularSection.AddAttributes.StandardAttribute.Ref</objectField>
     <typeField>Catalog.ChequeBonds.TabularSection.AddAttributes.Attribute.Property</typeField>
     <valueField>Catalog.ChequeBonds.TabularSection.AddAttributes.Attribute.Value</valueField>
-    <multipleValuesKeyField>Catalog.ChequeBonds.TabularSection.AddAttributes.StandardAttribute.LineNumber</multipleValuesKeyField>
+    <multipleValuesKeyField>-1</multipleValuesKeyField>
     <multipleValuesOrderField>Catalog.ChequeBonds.TabularSection.AddAttributes.StandardAttribute.LineNumber</multipleValuesOrderField>
   </characteristics>
   <createOnInput>Use</createOnInput>

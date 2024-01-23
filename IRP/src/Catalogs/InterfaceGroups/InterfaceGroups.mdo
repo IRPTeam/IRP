@@ -120,7 +120,7 @@
     <objectField>Catalog.InterfaceGroups.TabularSection.AddAttributes.StandardAttribute.Ref</objectField>
     <typeField>Catalog.InterfaceGroups.TabularSection.AddAttributes.Attribute.Property</typeField>
     <valueField>Catalog.InterfaceGroups.TabularSection.AddAttributes.Attribute.Value</valueField>
-    <multipleValuesKeyField>Catalog.InterfaceGroups.TabularSection.AddAttributes.StandardAttribute.LineNumber</multipleValuesKeyField>
+    <multipleValuesKeyField>-1</multipleValuesKeyField>
     <multipleValuesOrderField>Catalog.InterfaceGroups.TabularSection.AddAttributes.StandardAttribute.LineNumber</multipleValuesOrderField>
   </characteristics>
   <createOnInput>Use</createOnInput>

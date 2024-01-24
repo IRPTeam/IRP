@@ -1,4 +1,4 @@
-#language: en
+﻿#language: en
 @tree
 @Positive
 @PrintForm
@@ -38,6 +38,7 @@ Scenario: _092001 preparation (PrintFormSalesOrder)
 		When Create catalog PartnerSegments objects
 		When Create chart of characteristic types CurrencyMovementType objects
 		When Create catalog TaxRates objects
+		When Create catalog BusinessUnits objects
 		When Create catalog Taxes objects	
 		When Create information register TaxSettings records
 		When Create information register PricesByItemKeys records
@@ -62,6 +63,70 @@ Scenario: _092001 preparation (PrintFormSalesOrder)
 
 Scenario: _0920011 check preparation
 	When check preparation
+
+Scenario: _25002 print settings for company, store, business unit
+	And I close all client application windows
+	* Open PrintInfo catalog
+		Given I open hyperlink "e1cib/list/Catalog.PrintInfo"
+		And I click "Create" button
+	* Print settings
+		And I input "Print settings" text in the field named "Description"
+		And I click Select button of "Default color" field
+		And I go to line in "" table
+			| 'Column2'            |
+			| 'Tooltip background' |
+		And I click "OK" button
+		// And I select external file "$Path$/features/External/step_definitions/Logo.png"
+		And I select external file "C:\Users\Severnity\Documents\GitHub\IRP\features\External\step_definitions\Logo.png"
+		And I click the hyperlink named "Logo"
+		// And I select external file "$Path$/features/External/step_definitions/Seal.png"
+		And I select external file "C:\Users\Severnity\Documents\GitHub\IRP\features\External\step_definitions\Seal.png"
+		And I click the hyperlink named "Seal"
+		And I input "Test" text in "Additional print info" field
+		And I click "Save" button
+		Then the form attribute named "AdditionalPrintInfo" became equal to "Test"
+		Then the form attribute named "DefaultColor" became equal to "style: Tooltip background"
+		Then the form attribute named "Description" became equal to "Print settings"
+		Then the field named "Logo" is filled
+		Then the field named "Seal" is filled
+		And I click "Save and close" button
+	* Check creation
+		And "List" table contains lines
+			| 'Description'    |
+			| 'Print settings' |
+	* Add print settings for Main company
+		Given I open hyperlink "e1cib/data/Catalog.Companies?ref=aa78120ed92fbced11eaf113ba6c185c"
+		And I click Select button of "Print info" field
+		And I go to line in "List" table
+			| 'Description'    |
+			| 'Print settings' |
+		And I select current line in "List" table
+		And I select from "Print info" drop-down list by "Print settings" string
+		And I click "Save" button
+		Then the form attribute named "PrintInfo" became equal to "Print settings"
+	* Add print settings for Store 02
+		Given I open hyperlink "e1cib/data/Catalog.Stores?ref=aa78120ed92fbced11eaf114c59ef00c"
+		And I click Select button of "Print info" field
+		And I go to line in "List" table
+			| 'Description'    |
+			| 'Print settings' |
+		And I select current line in "List" table
+		And I select from "Print info" drop-down list by "Print settings" string
+		And I click "Save" button
+		Then the form attribute named "PrintInfo" became equal to "Print settings"
+	* Add print settings for Front office
+		Given I open hyperlink "e1cib/data/Catalog.BusinessUnits?ref=aa78120ed92fbced11eaf114c59ef023"
+		And I click Select button of "Print info" field
+		And I go to line in "List" table
+			| 'Description'    |
+			| 'Print settings' |
+		And I select current line in "List" table
+		And I select from "Print info" drop-down list by "Print settings" string
+		And I click "Save" button
+		Then the form attribute named "PrintInfo" became equal to "Print settings"		
+		And I close all client application windows
+				
+				
 
 
 Scenario: _25003 check Sales order printing (different language)

@@ -85,6 +85,12 @@ When Create catalog TaxRates objects (test data base)
 When Create catalog Taxes objects (test data base)
 When Create catalog SerialLotNumbers objects (test data base)
 When Create information register Taxes records (test data base)
+When Create catalog AccrualAndDeductionTypes objects (test data base)
+When Create catalog EmployeePositions objects (test data base)
+When Create catalog FixedAssetsLedgerTypes objects (test data base)
+When Create catalog DepreciationSchedules objects (test data base)
+When Create catalog FixedAssets objects (test data base)
+When Create catalog ItemSegments objects (test data base)
 * Tax settings
 		Given I open hyperlink "e1cib/list/Catalog.Companies"
 		And I go to line in "List" table

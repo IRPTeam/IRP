@@ -3,7 +3,8 @@ Procedure BeforeWrite(Cancel, WriteMode, PostingMode)
 		Return;
 	EndIf;
 	
-	isIconSet = ValueIsFilled(Icon.Get());
+	isLogoSet = ValueIsFilled(Logo.Get());
+	isSealSet = ValueIsFilled(Seal.Get());
 EndProcedure
 
 Procedure OnWrite(Cancel)

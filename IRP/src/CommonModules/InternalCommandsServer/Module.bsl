@@ -2,6 +2,84 @@
 
 #Region Public
 
+// Set session parameters.
+Procedure SetSessionParameters() Export
+	
+	InternalCommandsArray = New Array; // Array of FixedStructure
+	
+	For Each CommandFormDescription In Metadata.DataProcessors.InternalCommands.Forms Do
+		If CommandFormDescription = Metadata.DataProcessors.InternalCommands.Forms.CommandTemplate Then
+			Continue;
+		EndIf;
+		
+		CommandName = CommandFormDescription.Name;
+		CommandDescription = New FixedStructure(
+			DataProcessors.InternalCommands.GetCommandDescription(CommandName));
+		
+		InternalCommandsArray.Add(CommandDescription);
+	EndDo;
+	
+	SessionParameters.InternalCommands = New FixedArray(InternalCommandsArray);
+	
+EndProcedure
+
+// Create commands.
+// 
+// Parameters:
+//  Form - ClientApplicationForm - Form
+//  MainAttribute - FormAttribute, DynamicList - Main attribute
+//  ObjectFullName - String - Object full name
+//  FormType - EnumRef.FormTypes - Form type
+//  AddInfo - Undefined - Add info
+Procedure CreateCommands(Form, MainAttribute, ObjectFullName, FormType, AddInfo = Undefined) Export
+	
+	CommandArray = New Array; // Array of See GetCommandDescription
+	For Each ContentItem In SessionParameters.InternalCommands Do // See GetCommandDescription
+		If FormType = Enums.FormTypes.ObjectForm And Not ContentItem.UsingObjectForm Then
+			Continue;
+		ElsIf FormType = Enums.FormTypes.ListForm And Not ContentItem.UsingListForm Then
+			Continue;
+		ElsIf FormType = Enums.FormTypes.ChoiceForm And Not ContentItem.UsingChoiceForm Then
+			Continue;
+		EndIf;
+		If ContentItem.Targets.Find(ObjectFullName) <> Undefined Then
+			CommandArray.Add(ContentItem);
+		EndIf;
+	EndDo;
+	
+	For Each Command In CommandArray Do
+		CommandName = "InternalCommand_" + Command.Name;
+		CommandForm = Form.Commands.Add(CommandName); // FormCommand
+		CommandForm.Action = "InternalCommandAction";
+		CommandForm.Title = Command.Title;
+		CommandForm.ToolTip = Command.ToolTip;
+		If Not IsBlankString(Command.Picture) Then
+			CommandPicture = PictureLib[Command.Picture]; // Picture
+			CommandForm.Picture = CommandPicture;
+		EndIf;
+		CommandRepresentation = ButtonRepresentation[Command.Representation]; // ButtonRepresentation
+		CommandForm.Representation = CommandRepresentation;
+		
+		CommandButton = Form.Items.Add(CommandName, Type("FormButton"), Form.CommandBar); // FormButton
+		CommandButton.CommandName = CommandName;
+		CommandLocationInCommandBar = ButtonLocationInCommandBar[Command.LocationInCommandBar]; // ButtonLocationInCommandBar 
+		CommandButton.LocationInCommandBar = CommandLocationInCommandBar;
+		
+		//@skip-check structure-consructor-too-many-keys
+		DataProcessors.InternalCommands.OnCommandCreate(
+			Command.Name,
+			New Structure(
+				"CommandButton, CommandDescription, Form, MainAttribute, ObjectFullName, FormType",
+				CommandButton, Command, Form, MainAttribute, ObjectFullName, FormType), 
+			AddInfo);
+	EndDo;
+	
+EndProcedure
+
+#EndRegion
+
+#Region Internal
+
 // Get command description.
 // 
 // Returns:
@@ -22,11 +100,11 @@
 // * HasActionOnCommandCreate - Boolean - 
 // * HasActionBeforeRunning - Boolean - 
 // * HasActionAfterRunning - Boolean - 
-// * HasOwnSessionParameters - Boolean - 
 // * UsingObjectForm - Boolean - 
 // * UsingListForm - Boolean - 
 // * UsingChoiceForm - Boolean - 
-// * Targets - Array, FixedArray - 
+// * Targets - Array of String
+//           - FixedArray of String 
 Function GetCommandDescription() Export
 	
 	CommandDescription = New Structure;
@@ -65,84 +143,20 @@ Function GetCommandDescription() Export
 	
 EndFunction
 
-#EndRegion
-
-#Region Internal
-
-Procedure SetSessionParameters() Export
-	
-	InternalCommandsArray = New Array; // Array of FixedStructure
-	
-	CommandPrefix = "InternalCommand_";
-	CommandSuffix = "_Server";
-	
-	For Each CommonModuleDescription In Metadata.CommonModules Do
-		CommandName = CommonModuleDescription.Name;
-		If Not StrStartsWith(CommandName, CommandPrefix) Or Not StrEndsWith(CommandName, CommandSuffix) Then
-			Continue;
-		EndIf;
-		
-		CommonModule = Eval(CommandName);
-		CommandDescription = CommonModule.GetCommandDescription(); //  See GetCommandDescription
-		InternalCommandsArray.Add(CommandDescription);
-		
-		If CommandDescription.HasActionInitialization Then
-			CommonModule.Initialization();
-		EndIf;
-	EndDo;
-	
-	SessionParameters.InternalCommands = New FixedArray(InternalCommandsArray);
-	
-EndProcedure
-
-Procedure CreateCommands(Form, MainAttribute, ObjectFullName, FormType, AddInfo = Undefined) Export
-	
-	CommandArray = New Array; // Array of See GetCommandDescription
-	For Each ContentItem In SessionParameters.InternalCommands Do // See GetCommandDescription
-		If FormType = Enums.FormTypes.ObjectForm And Not ContentItem.UsingObjectForm Then
-			Continue;
-		ElsIf FormType = Enums.FormTypes.ListForm And Not ContentItem.UsingListForm Then
-			Continue;
-		ElsIf FormType = Enums.FormTypes.ChoiceForm And Not ContentItem.UsingChoiceForm Then
-			Continue;
-		EndIf;
-		If ContentItem.Targets.Find(ObjectFullName) <> Undefined Then
-			CommandArray.Add(ContentItem);
-		EndIf;
-	EndDo;
-	
-	CommandMap = New Map;
-	For Each Command In CommandArray Do
-		CommandName = "InternalCommand_" + Command.Name;
-		CommandForm = Form.Commands.Add(CommandName); // FormCommand
-		CommandForm.Action = "InternalCommandAction";
-		CommandForm.Title = Command.Title;
-		CommandForm.ToolTip = Command.ToolTip;
-		If Not IsBlankString(Command.Picture) Then
-			CommandForm.Picture = PictureLib[Command.Picture];
-		EndIf;
-		CommandForm.Representation = ButtonRepresentation[Command.Representation];
-		
-		CommandButton = Form.Items.Add(CommandName, Type("FormButton"), Form.CommandBar); // FormButton
-		CommandButton.CommandName = CommandName;
-		CommandButton.LocationInCommandBar = ButtonLocationInCommandBar[Command.LocationInCommandBar];
-		
-		If Command.HasActionOnCommandCreate Then
-			InternalCommandModule = Eval(CommandName + "_Server");
-			InternalCommandModule.OnCommandCreate(CommandButton, Command, Form, MainAttribute, ObjectFullName, FormType, AddInfo);
-		EndIf;
-		
-		CommandMap.Insert(CommandName, Command);
-	EndDo;
-	
-	If CommandMap.Count() > 0 Then
-		NewAttribute = New FormAttribute("InternalCommands", New TypeDescription(""));
-		NewAttributes = New Array; // Array of FormAttribute 
-		NewAttributes.Add(NewAttribute);
-		Form.ChangeAttributes(NewAttributes);
-		Form.InternalCommands = New FixedMap(CommandMap);
-	EndIf;
-	
+// On command create.
+// 
+// Parameters:
+// 	CommandName - String - Command name
+// 	CommandParameters - Structure - Command parameters:
+//  * CommandButton - FormButton - Command button
+//  * CommandDescription - See InternalCommandsServer.GetCommandDescription
+//  * Form - ClientApplicationForm - Form
+//  * MainAttribute - FormAttribute, DynamicList - Main attribute
+//  * ObjectFullName - String - Object full name
+//  * FormType - EnumRef.FormTypes - Form type
+//  AddInfo - Undefined - Add info
+Procedure OnCommandCreate(CommandName, CommandParameters, AddInfo = Undefined) Export
+	Return;
 EndProcedure
 
 #EndRegion

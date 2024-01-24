@@ -69,6 +69,22 @@ EndProcedure
 
 #EndRegion
 
+#Region Internal
+
+Procedure SetSessionParameters() Export
+
+	Data = New Map;
+	For Each ContentItem In Metadata.CommonAttributes.NotActive.Content Do
+		If ContentItem.Use = Metadata.ObjectProperties.CommonAttributeUse.Use  Then
+			Data.Insert(ContentItem.Metadata.FullName(), False);
+		EndIf;
+	EndDo;
+	SessionParameters.NotActiveCatalogsShowing = New FixedMap(Data);
+	
+EndProcedure
+
+#EndRegion
+
 #Region Private
 
 Procedure SetParameterFilterForHidingNotActive(Parameters, SourceMetadata)

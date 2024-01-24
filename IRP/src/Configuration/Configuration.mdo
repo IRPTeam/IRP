@@ -739,10 +739,6 @@
   <commonModules>CommonModule.CatalogsServer</commonModules>
   <commonModules>CommonModule.InternalCommandsClient</commonModules>
   <commonModules>CommonModule.InternalCommandsServer</commonModules>
-  <commonModules>CommonModule.InternalCommand_SetNotActive_Client</commonModules>
-  <commonModules>CommonModule.InternalCommand_SetNotActive_Server</commonModules>
-  <commonModules>CommonModule.InternalCommand_ShowNotActive_Client</commonModules>
-  <commonModules>CommonModule.InternalCommand_ShowNotActive_Server</commonModules>
   <commonAttributes>CommonAttribute.Author</commonAttributes>
   <commonAttributes>CommonAttribute.Branch</commonAttributes>
   <commonAttributes>CommonAttribute.Description</commonAttributes>
@@ -1294,6 +1290,7 @@
   <dataProcessors>DataProcessor.LoadAndUnloadData</dataProcessors>
   <dataProcessors>DataProcessor.FixDocumentProblems</dataProcessors>
   <dataProcessors>DataProcessor.GroupPhotoUploading</dataProcessors>
+  <dataProcessors>DataProcessor.InternalCommands</dataProcessors>
   <informationRegisters>InformationRegister.AddProperties</informationRegisters>
   <informationRegisters>InformationRegister.AttachedFiles</informationRegisters>
   <informationRegisters>InformationRegister.Barcodes</informationRegisters>

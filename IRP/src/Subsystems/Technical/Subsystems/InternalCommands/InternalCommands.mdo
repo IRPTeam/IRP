@@ -7,9 +7,5 @@
   </synonym>
   <content>CommonModule.InternalCommandsClient</content>
   <content>CommonModule.InternalCommandsServer</content>
-  <content>CommonModule.InternalCommand_SetNotActive_Client</content>
-  <content>CommonModule.InternalCommand_SetNotActive_Server</content>
-  <content>CommonModule.InternalCommand_ShowNotActive_Client</content>
-  <content>CommonModule.InternalCommand_ShowNotActive_Server</content>
   <parentSubsystem>Subsystem.Technical</parentSubsystem>
 </mdclass:Subsystem>

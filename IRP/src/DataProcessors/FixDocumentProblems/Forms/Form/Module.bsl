@@ -763,11 +763,11 @@ EndFunction
 &AtClient
 Async Procedure PostingInfoImportData(Command)
 	DialogParameters = New PutFilesDialogParameters(, False, "Data file|*.zip;");
-	PlacedFileDescription = Await PutFileToServerAsync(, , , DialogParameters); // PlacedFileDescription
-	If PlacedFileDescription.PutFileCanceled Then
+	StoredFileDescription = Await PutFileToServerAsync(, , , DialogParameters); // StoredFileDescription
+	If StoredFileDescription.PutFileCanceled Then
 		Return;
 	EndIf;
-	PostingInfoImportDataAtServer(PlacedFileDescription.Address);
+	PostingInfoImportDataAtServer(StoredFileDescription.Address);
 EndProcedure
 
 &AtServer

@@ -76,11 +76,9 @@ Scenario: _25002 print settings for company, store, business unit
 			| 'Column2'            |
 			| 'Tooltip background' |
 		And I click "OK" button
-		// And I select external file "$Path$/features/External/step_definitions/Logo.png"
-		And I select external file "C:\Users\Severnity\Documents\GitHub\IRP\features\External\step_definitions\Logo.png"
+		And I select external file "$Path$/features/External/step_definitions/Logo.png"
 		And I click the hyperlink named "Logo"
-		// And I select external file "$Path$/features/External/step_definitions/Seal.png"
-		And I select external file "C:\Users\Severnity\Documents\GitHub\IRP\features\External\step_definitions\Seal.png"
+		And I select external file "$Path$/features/External/step_definitions/Seal.png"
 		And I click the hyperlink named "Seal"
 		And I input "Test" text in "Additional print info" field
 		And I click "Save" button

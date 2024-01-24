@@ -1,6 +1,7 @@
 &AtServer
 Procedure OnCreateAtServer(Cancel, StandardProcessing)
 	LocalizationEvents.CreateMainFormItemDescription(ThisObject, "GroupDescriptions");
+	LocalizationEvents.FillDescription(Parameters.FillingText, Object);
 	If Object.Ref = ChartsOfCharacteristicTypes.CurrencyMovementType.SettlementCurrency Then
 		Items.DeferredCalculation.Visible = False;
 		Items.Currency.Visible = False;

@@ -2,6 +2,7 @@
 Procedure OnCreateAtServer(Cancel, StandardProcessing)
 	LocalizationEvents.CreateMainFormItemDescription(ThisObject, "GroupDescriptions");
 	CatalogsServer.OnCreateAtServerObject(ThisObject, Object, Cancel, StandardProcessing);
+	LocalizationEvents.FillDescription(Parameters.FillingText, Object);
 EndProcedure
 
 &AtClient

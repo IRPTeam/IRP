@@ -4,6 +4,7 @@
 Procedure OnCreateAtServer(Cancel, StandardProcessing)
 	AddAttributesAndPropertiesServer.OnCreateAtServer(ThisObject);
 	LocalizationEvents.CreateMainFormItemDescription(ThisObject, "GroupDescriptions");
+	LocalizationEvents.FillDescription(Parameters.FillingText, Object);
 	Obj = FormAttributeToValue("Object");
 	AddressResult = PutToTempStorage(Obj.Settings.Get(), ThisObject.UUID);
 	ExtensionServer.AddAttributesFromExtensions(ThisObject, Object.Ref);

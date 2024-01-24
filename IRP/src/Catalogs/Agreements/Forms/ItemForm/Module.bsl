@@ -5,6 +5,7 @@
 Procedure OnCreateAtServer(Cancel, StandardProcessing)
 	LocalizationEvents.CreateMainFormItemDescription(ThisObject, "GroupDescriptions");
 	CatalogsServer.OnCreateAtServerObject(ThisObject, Object, Cancel, StandardProcessing);
+	LocalizationEvents.FillDescription(Parameters.FillingText, Object);
 	AddAttributesAndPropertiesServer.OnCreateAtServer(ThisObject);
 	ExtensionServer.AddAttributesFromExtensions(ThisObject, Object.Ref);
 	CatAgreementsServer.OnCreateAtServer(Cancel, StandardProcessing, ThisObject, Parameters);

@@ -139,7 +139,7 @@ Function GetCollectionOfIDInfo(Ref, AllItems, SetName, AddInfo = Undefined)
 			NewFilter.Use = True;
 			NewFilter.ComparisonType = DataCompositionComparisonType.Equal;
 			NewFilter.RightValue = Ref;
-			RefsByConditions = GetRefsByCondition(Template, StructureOfCondition.Settings, AddInfo);
+			RefsByConditions = AddAttributesAndPropertiesServer.GetRefsByCondition(Template, StructureOfCondition.Settings, AddInfo);
 			If RefsByConditions.Count() Then
 				ArrayOfCollection.Add(Row);
 			EndIf;
@@ -201,20 +201,6 @@ Function NameToUniqueId(Name, AddInfo = Undefined)
 	Return Mid(Name, 2);
 EndFunction
 
-Function GetRefsByCondition(DCSTemplate, Settings, AddInfo = Undefined) Export
-	Composer = New DataCompositionTemplateComposer();
-	Template = Composer.Execute(DCSTemplate, Settings, , , Type("DataCompositionValueCollectionTemplateGenerator"));
-
-	Processor = New DataCompositionProcessor();
-	Processor.Initialize(Template);
-
-	Output = New DataCompositionResultValueCollectionOutputProcessor();
-	Result = New ValueTable();
-	Output.SetObject(Result);
-	Output.Output(Processor);
-
-	Return Result;
-EndFunction
 
 Function GetCountryByIDInfoType(IDInfoTypeRef, Country, UUIDForSettings, AddInfo = Undefined) Export
 	ArrayOfCountry = New Array();

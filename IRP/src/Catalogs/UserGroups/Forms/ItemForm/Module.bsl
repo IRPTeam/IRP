@@ -4,6 +4,7 @@
 Procedure OnCreateAtServer(Cancel, StandardProcessing)
 	AddAttributesAndPropertiesServer.OnCreateAtServer(ThisObject);
 	LocalizationEvents.CreateMainFormItemDescription(ThisObject, "GroupDescriptions");
+	LocalizationEvents.FillDescription(Parameters.FillingText, Object);
 	ThisObject.Users.QueryText = LocalizationEvents.ReplaceDescriptionLocalizationPrefix(ThisObject.Users.QueryText);
 	ThisObject.Users.Parameters.SetParameterValue("UserGroup", ?(ValueIsFilled(Object.Ref), Object.Ref, Undefined));
 	ExtensionServer.AddAttributesFromExtensions(ThisObject, Object.Ref);

@@ -96,6 +96,7 @@ EndProcedure
 &AtServer
 Procedure OnCreateAtServer(Cancel, StandardProcessing)
 	LocalizationEvents.CreateMainFormItemDescription(ThisObject, "GroupDescriptions");
+	LocalizationEvents.FillDescription(Parameters.FillingText, Object);
 	AddAttributesAndPropertiesServer.OnCreateAtServer(ThisObject);
 	CatalogsServer.OnCreateAtServerObject(ThisObject, Object, Cancel, StandardProcessing);
 
@@ -426,7 +427,8 @@ Function GetItemAttributes(Item)
 	If AvailableAttributes <> Undefined Then
 		ArrayOfAttributes = New Array();
 		For Each Row In AvailableAttributes Do
-			AttributeStructure = New Structure("Attribute, InterfaceGroup", Row.Attribute, Undefined);
+			AttributeStructure = AddAttributesAndPropertiesServer.GetAttributeInfo();
+			AttributeStructure.Attribute = Row.Attribute;
 			ArrayOfAttributes.Add(AttributeStructure);
 		EndDo;
 

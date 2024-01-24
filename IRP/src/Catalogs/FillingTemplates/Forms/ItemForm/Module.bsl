@@ -4,6 +4,7 @@
 &AtServer
 Procedure OnCreateAtServer(Cancel, StandardProcessing)
 	LocalizationEvents.CreateMainFormItemDescription(ThisObject, "GroupDescriptions");
+	LocalizationEvents.FillDescription(Parameters.FillingText, Object);
 	ExtensionServer.AddAttributesFromExtensions(ThisObject, Object.Ref);
 	CatalogsServer.OnCreateAtServerObject(ThisObject, Object, Cancel, StandardProcessing);
 	TemplateActions.SettingsComposer.Settings.Filter.Items[0].RightValue = Object.Ref;

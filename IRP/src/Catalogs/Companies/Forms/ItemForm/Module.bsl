@@ -3,6 +3,7 @@
 &AtServer
 Procedure OnCreateAtServer(Cancel, StandardProcessing)
 	LocalizationEvents.CreateMainFormItemDescription(ThisObject, "GroupDescriptions");
+	LocalizationEvents.FillDescription(Parameters.FillingText, Object);
 	IDInfoServer.OnCreateAtServer(ThisObject, "GroupContactInformation");
 	AddAttributesAndPropertiesServer.OnCreateAtServer(ThisObject);
 

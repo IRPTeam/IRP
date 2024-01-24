@@ -22,13 +22,13 @@
       <value>Catalog.AddAttributeAndPropertySets.Catalog_Items</value>
     </typesFilterValue>
     <dataPathField>-1</dataPathField>
-    <multipleValuesUseField>-1</multipleValuesUseField>
+    <multipleValuesUseField>Catalog.AddAttributeAndPropertySets.TabularSection.Properties.Attribute.Collection</multipleValuesUseField>
     <characteristicValues>InformationRegister.AddProperties</characteristicValues>
     <objectField>InformationRegister.AddProperties.Dimension.Object</objectField>
     <typeField>InformationRegister.AddProperties.Dimension.Property</typeField>
     <valueField>InformationRegister.AddProperties.Resource.Value</valueField>
-    <multipleValuesKeyField>-1</multipleValuesKeyField>
-    <multipleValuesOrderField>-1</multipleValuesOrderField>
+    <multipleValuesKeyField>InformationRegister.AddProperties.Dimension.Key</multipleValuesKeyField>
+    <multipleValuesOrderField>InformationRegister.AddProperties.Dimension.Key</multipleValuesOrderField>
   </characteristics>
   <characteristics>
     <characteristicTypes>Catalog.AddAttributeAndPropertySets.TabularSection.Attributes</characteristicTypes>
@@ -38,16 +38,17 @@
       <value>Catalog.AddAttributeAndPropertySets.Catalog_Items</value>
     </typesFilterValue>
     <dataPathField>-1</dataPathField>
-    <multipleValuesUseField>-1</multipleValuesUseField>
+    <multipleValuesUseField>Catalog.AddAttributeAndPropertySets.TabularSection.Attributes.Attribute.Collection</multipleValuesUseField>
     <characteristicValues>Catalog.Items.TabularSection.AddAttributes</characteristicValues>
     <objectField>Catalog.Items.TabularSection.AddAttributes.StandardAttribute.Ref</objectField>
     <typeField>Catalog.Items.TabularSection.AddAttributes.Attribute.Property</typeField>
     <valueField>Catalog.Items.TabularSection.AddAttributes.Attribute.Value</valueField>
     <multipleValuesKeyField>-1</multipleValuesKeyField>
-    <multipleValuesOrderField>-1</multipleValuesOrderField>
+    <multipleValuesOrderField>Catalog.Items.TabularSection.AddAttributes.StandardAttribute.LineNumber</multipleValuesOrderField>
   </characteristics>
   <createOnInput>Use</createOnInput>
   <dataLockControlMode>Managed</dataLockControlMode>
+  <fullTextSearch>Use</fullTextSearch>
   <objectPresentation>
     <key>en</key>
     <value>Item</value>
@@ -64,7 +65,6 @@
   <defaultObjectForm>Catalog.Items.Form.ItemForm</defaultObjectForm>
   <defaultListForm>Catalog.Items.Form.ListForm</defaultListForm>
   <defaultChoiceForm>Catalog.Items.Form.ChoiceForm</defaultChoiceForm>
-  <choiceHistoryOnInput>DontUse</choiceHistoryOnInput>
   <attributes uuid="b07b2729-1f36-468a-bbac-ece3a3ebb4d4">
     <name>ItemType</name>
     <synonym>

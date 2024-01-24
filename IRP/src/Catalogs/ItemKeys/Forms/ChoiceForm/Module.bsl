@@ -9,7 +9,8 @@ Procedure OnCreateAtServer(Cancel, StandardProcessing)
 
 		ArrayOfAttributes = New Array();
 		For Each Row In ThisObject.Item.ItemType.AvailableAttributes Do
-			AttributeStructure = New Structure("Attribute, InterfaceGroup", Row.Attribute, Undefined);
+			AttributeStructure = AddAttributesAndPropertiesServer.GetAttributeInfo();
+			AttributeStructure.Attribute = Row.Attribute;
 			ArrayOfAttributes.Add(AttributeStructure);
 		EndDo;
 

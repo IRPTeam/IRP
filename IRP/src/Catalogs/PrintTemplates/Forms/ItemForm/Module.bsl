@@ -4,6 +4,7 @@
 Procedure OnCreateAtServer(Cancel, StandardProcessing)
 
 	LocalizationEvents.CreateMainFormItemDescription(ThisObject, "GroupDescriptions");
+	LocalizationEvents.FillDescription(Parameters.FillingText, Object);
 
 	CatalogObject = ThisObject.FormAttributeToValue("Object");
 	TemplateStructure = CatalogObject.ValueOfTemplate.Get();

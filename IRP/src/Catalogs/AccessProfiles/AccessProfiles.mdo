@@ -51,7 +51,7 @@
   <objectField>Catalog.AccessProfiles.TabularSection.AddAttributes.StandardAttribute.Ref</objectField>
   <typeField>Catalog.AccessProfiles.TabularSection.AddAttributes.Attribute.Property</typeField>
   <valueField>Catalog.AccessProfiles.TabularSection.AddAttributes.Attribute.Value</valueField>
-  <multipleValuesKeyField>Catalog.AccessProfiles.TabularSection.AddAttributes.StandardAttribute.LineNumber</multipleValuesKeyField>
+  <multipleValuesKeyField>-1</multipleValuesKeyField>
   <multipleValuesOrderField>Catalog.AccessProfiles.TabularSection.AddAttributes.StandardAttribute.LineNumber</multipleValuesOrderField>
  </characteristics>
  <createOnInput>DontUse</createOnInput>

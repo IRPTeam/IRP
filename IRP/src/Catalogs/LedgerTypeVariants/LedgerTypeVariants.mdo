@@ -52,7 +52,7 @@
   <objectField>Catalog.LedgerTypeVariants.TabularSection.AddAttributes.StandardAttribute.Ref</objectField>
   <typeField>Catalog.LedgerTypeVariants.TabularSection.AddAttributes.Attribute.Property</typeField>
   <valueField>Catalog.LedgerTypeVariants.TabularSection.AddAttributes.Attribute.Value</valueField>
-  <multipleValuesKeyField>Catalog.LedgerTypeVariants.TabularSection.AddAttributes.StandardAttribute.LineNumber</multipleValuesKeyField>
+  <multipleValuesKeyField>-1</multipleValuesKeyField>
   <multipleValuesOrderField>Catalog.LedgerTypeVariants.TabularSection.AddAttributes.StandardAttribute.LineNumber</multipleValuesOrderField>
  </characteristics>
  <createOnInput>Use</createOnInput>

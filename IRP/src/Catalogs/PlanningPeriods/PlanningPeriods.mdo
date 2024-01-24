@@ -53,7 +53,7 @@
   <objectField>Catalog.PlanningPeriods.TabularSection.AddAttributes.StandardAttribute.Ref</objectField>
   <typeField>Catalog.PlanningPeriods.TabularSection.AddAttributes.Attribute.Property</typeField>
   <valueField>Catalog.PlanningPeriods.TabularSection.AddAttributes.Attribute.Value</valueField>
-  <multipleValuesKeyField>Catalog.PlanningPeriods.TabularSection.AddAttributes.StandardAttribute.LineNumber</multipleValuesKeyField>
+  <multipleValuesKeyField>-1</multipleValuesKeyField>
   <multipleValuesOrderField>Catalog.PlanningPeriods.TabularSection.AddAttributes.StandardAttribute.LineNumber</multipleValuesOrderField>
  </characteristics>
  <createOnInput>Use</createOnInput>

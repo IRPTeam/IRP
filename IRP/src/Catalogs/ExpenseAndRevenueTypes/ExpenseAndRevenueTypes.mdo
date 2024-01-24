@@ -139,7 +139,7 @@
   <objectField>Catalog.ExpenseAndRevenueTypes.TabularSection.AddAttributes.StandardAttribute.Ref</objectField>
   <typeField>Catalog.ExpenseAndRevenueTypes.TabularSection.AddAttributes.Attribute.Property</typeField>
   <valueField>Catalog.ExpenseAndRevenueTypes.TabularSection.AddAttributes.Attribute.Value</valueField>
-  <multipleValuesKeyField>Catalog.ExpenseAndRevenueTypes.TabularSection.AddAttributes.StandardAttribute.LineNumber</multipleValuesKeyField>
+  <multipleValuesKeyField>-1</multipleValuesKeyField>
   <multipleValuesOrderField>Catalog.ExpenseAndRevenueTypes.TabularSection.AddAttributes.StandardAttribute.LineNumber</multipleValuesOrderField>
  </characteristics>
  <createOnInput>DontUse</createOnInput>

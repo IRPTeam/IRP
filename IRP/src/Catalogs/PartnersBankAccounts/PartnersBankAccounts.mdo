@@ -36,7 +36,7 @@
   <objectField>Catalog.PartnersBankAccounts.TabularSection.AddAttributes.StandardAttribute.Ref</objectField>
   <typeField>Catalog.PartnersBankAccounts.TabularSection.AddAttributes.Attribute.Property</typeField>
   <valueField>Catalog.PartnersBankAccounts.TabularSection.AddAttributes.Attribute.Value</valueField>
-  <multipleValuesKeyField>Catalog.PartnersBankAccounts.TabularSection.AddAttributes.StandardAttribute.LineNumber</multipleValuesKeyField>
+  <multipleValuesKeyField>-1</multipleValuesKeyField>
   <multipleValuesOrderField>Catalog.PartnersBankAccounts.TabularSection.AddAttributes.StandardAttribute.LineNumber</multipleValuesOrderField>
  </characteristics>
  <characteristics>

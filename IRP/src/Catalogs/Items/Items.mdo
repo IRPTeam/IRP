@@ -51,11 +51,12 @@
   <objectField>Catalog.Items.TabularSection.AddAttributes.StandardAttribute.Ref</objectField>
   <typeField>Catalog.Items.TabularSection.AddAttributes.Attribute.Property</typeField>
   <valueField>Catalog.Items.TabularSection.AddAttributes.Attribute.Value</valueField>
-  <multipleValuesKeyField>Catalog.Items.TabularSection.AddAttributes.StandardAttribute.LineNumber</multipleValuesKeyField>
+  <multipleValuesKeyField>-1</multipleValuesKeyField>
   <multipleValuesOrderField>Catalog.Items.TabularSection.AddAttributes.StandardAttribute.LineNumber</multipleValuesOrderField>
  </characteristics>
  <createOnInput>Use</createOnInput>
  <dataLockControlMode>Managed</dataLockControlMode>
+ <fullTextSearch>Use</fullTextSearch>
  <objectPresentation>
   <key>en</key>
   <value>Item</value>
@@ -80,7 +81,6 @@
  <defaultObjectForm>Catalog.Items.Form.ItemForm</defaultObjectForm>
  <defaultListForm>Catalog.Items.Form.ListForm</defaultListForm>
  <defaultChoiceForm>Catalog.Items.Form.ChoiceForm</defaultChoiceForm>
- <choiceHistoryOnInput>DontUse</choiceHistoryOnInput>
  <attributes uuid="b07b2729-1f36-468a-bbac-ece3a3ebb4d4">
   <name>ItemType</name>
   <synonym>

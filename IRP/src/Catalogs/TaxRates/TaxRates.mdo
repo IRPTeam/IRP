@@ -52,7 +52,7 @@
   <objectField>Catalog.TaxRates.TabularSection.AddAttributes.StandardAttribute.Ref</objectField>
   <typeField>Catalog.TaxRates.TabularSection.AddAttributes.Attribute.Property</typeField>
   <valueField>Catalog.TaxRates.TabularSection.AddAttributes.Attribute.Value</valueField>
-  <multipleValuesKeyField>Catalog.TaxRates.TabularSection.AddAttributes.StandardAttribute.LineNumber</multipleValuesKeyField>
+  <multipleValuesKeyField>-1</multipleValuesKeyField>
   <multipleValuesOrderField>Catalog.TaxRates.TabularSection.AddAttributes.StandardAttribute.LineNumber</multipleValuesOrderField>
  </characteristics>
  <createOnInput>DontUse</createOnInput>

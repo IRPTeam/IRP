@@ -1,4 +1,4 @@
-#language: en
+﻿#language: en
 @tree
 @Positive
 @LoadInfo
@@ -72,7 +72,7 @@ Scenario: _0202002 check import item
 		Given I open hyperlink "e1cib/list/Catalog.Items"
 		And I go to line in "List" table
 			| 'Description'      |
-			| 'Scarf + Dress'    |
+			| 'Product 5 with SLN'    |
 	* Open Import/Export object from DB
 		Given I open hyperlink "e1cib/app/DataProcessor.LoadAndUnloadData"
 		And in the table "FormItems" I click "Update" button
@@ -83,30 +83,28 @@ Scenario: _0202002 check import item
 	* Check import item
 		And I save the value of the field named "SerializedInfo" as "SerializedInfo"
 		And I execute 1C:Enterprise script
-			| "Контекст.SerializedInfo=StrReplace(Контекст.SerializedInfo, "bcc9c5f9-f114-11ea-aa78-120ed92fbced", "bcc9c5f9-f114-11ea-aa78-120ed93fbced");"    |
-			| "Контекст.SerializedInfo=StrReplace(Контекст.SerializedInfo, "Scarf + Dress", "Scarf + Dress New");"                                              |
-			| "Контекст.SerializedInfo=StrReplace(Контекст.SerializedInfo, "16", "178")"                                                                        |
+			| "Контекст.SerializedInfo=StrReplace(Контекст.SerializedInfo, "992046ec-7f8d-11ed-b78d-b8d3fd6dff8b", "992046ec-7f8d-11ed-b78d-b8d3fd6dff9b");" |
+			| "Контекст.SerializedInfo=StrReplace(Контекст.SerializedInfo, "Product 5 with SLN", "Product 5 with SLN New");"                                 |
+			| "Контекст.SerializedInfo=StrReplace(Контекст.SerializedInfo, "165", "180")"                                                                    |
 		And I input "$SerializedInfo$" variable value in "Deserialized info" field
 		And I click the button named "Import"
-		Then the form attribute named "Log" became equal to "Scarf + Dress New"
+		Then the form attribute named "Log" became equal to "Product 5 with SLN New"
 		Given I open hyperlink "e1cib/list/Catalog.Items"
 		And I click "Refresh" button
 		And I go to line in "List" table
 			| 'Description'          |
-			| 'Scarf + Dress New'    |
+			| 'Product 5 with SLN New'    |
 		And I select current line in "List" table
-		Then the form attribute named "ItemID" became equal to "D20001"
-		Then the form attribute named "ItemType" became equal to "Clothes"
+		Then the form attribute named "ItemType" became equal to "With serial lot numbers (without stock control)"
 		Then the form attribute named "Unit" became equal to "pcs"
 		Then the form attribute named "Vendor" became equal to ""
-		Then the form attribute named "Code" became equal to "178"
-		Then the form attribute named "Description_en" became equal to "Scarf + Dress New"
+		Then the form attribute named "Code" became equal to "180"
+		Then the form attribute named "Description_en" became equal to "Product 5 with SLN New"
 		Then the form attribute named "Length" became equal to "0"
 		Then the form attribute named "Width" became equal to "0"
 		Then the form attribute named "Height" became equal to "0"
 		Then the form attribute named "Volume" became equal to "0"
 		Then the form attribute named "Weight" became equal to "0"
-		And I close all client application windows
 
 
 Scenario: _0202003 check import SI

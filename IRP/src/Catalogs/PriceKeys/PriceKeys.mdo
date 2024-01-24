@@ -138,7 +138,7 @@
   <objectField>Catalog.PriceKeys.TabularSection.AddAttributes.StandardAttribute.Ref</objectField>
   <typeField>Catalog.PriceKeys.TabularSection.AddAttributes.Attribute.Property</typeField>
   <valueField>Catalog.PriceKeys.TabularSection.AddAttributes.Attribute.Value</valueField>
-  <multipleValuesKeyField>Catalog.PriceKeys.TabularSection.AddAttributes.StandardAttribute.LineNumber</multipleValuesKeyField>
+  <multipleValuesKeyField>-1</multipleValuesKeyField>
   <multipleValuesOrderField>Catalog.PriceKeys.TabularSection.AddAttributes.StandardAttribute.LineNumber</multipleValuesOrderField>
  </characteristics>
  <createOnInput>DontUse</createOnInput>

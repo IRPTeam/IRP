@@ -51,7 +51,7 @@
   <objectField>Catalog.DepreciationSchedules.TabularSection.AddAttributes.StandardAttribute.Ref</objectField>
   <typeField>Catalog.DepreciationSchedules.TabularSection.AddAttributes.Attribute.Property</typeField>
   <valueField>Catalog.DepreciationSchedules.TabularSection.AddAttributes.Attribute.Value</valueField>
-  <multipleValuesKeyField>Catalog.DepreciationSchedules.TabularSection.AddAttributes.StandardAttribute.LineNumber</multipleValuesKeyField>
+  <multipleValuesKeyField>-1</multipleValuesKeyField>
   <multipleValuesOrderField>Catalog.DepreciationSchedules.TabularSection.AddAttributes.StandardAttribute.LineNumber</multipleValuesOrderField>
  </characteristics>
  <createOnInput>Use</createOnInput>

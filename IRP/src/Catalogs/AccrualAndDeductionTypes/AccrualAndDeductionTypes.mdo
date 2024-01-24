@@ -123,7 +123,7 @@
   <objectField>Catalog.AccrualAndDeductionTypes.TabularSection.AddAttributes.StandardAttribute.Ref</objectField>
   <typeField>Catalog.AccrualAndDeductionTypes.TabularSection.AddAttributes.Attribute.Property</typeField>
   <valueField>Catalog.AccrualAndDeductionTypes.TabularSection.AddAttributes.Attribute.Value</valueField>
-  <multipleValuesKeyField>Catalog.AccrualAndDeductionTypes.TabularSection.AddAttributes.StandardAttribute.LineNumber</multipleValuesKeyField>
+  <multipleValuesKeyField>-1</multipleValuesKeyField>
   <multipleValuesOrderField>Catalog.AccrualAndDeductionTypes.TabularSection.AddAttributes.StandardAttribute.LineNumber</multipleValuesOrderField>
  </characteristics>
  <characteristics>

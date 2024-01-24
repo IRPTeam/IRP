@@ -1628,95 +1628,56 @@ Scenario: _2990055 check filling price and sum in the Stock adjustment as surplu
 		And I close all client application windows					
 
 		
-				
-		
-				
-		
-						
-
-				
-		
-				
-		
-						
-		
-				
-		
-				
-		
-		
-				
-
-				
-
-		
-				
-				
-		
-				
-				
-				
-		
-				
-				
-
-		
-				
-		
-		
-					
-				
-
-		
-		
-				
-				
-		
-				
-
-		
-				
-
-		
-					
-		
-				
-			
-						
-		
-				
-		
-					
-		
-		
-				
-		
-		
-				
-
-
-		
-		
-				
-
-			
-						
-			
-						
-			
-						
-
-		
-				
-		
-				
-			
-			
-						
-		
-				
-		
-		
-				
-
-
+	Scenario: _2990056 If finish location in mobile invent with manual input - not ask count
+	And I close all client application windows
+	* Create location count
+		Given I open hyperlink "e1cib/list/Document.PhysicalCountByLocation"
+		And I click "Create" button
+		And I select from the drop-down list named "Store" by "Store 02" string
+		And I select "Physical inventory" exact value from "Transaction type" drop-down list
+		And I click "Save" button
+		And I save the value of the field named "Number" as "Number"
+		And I close current window
+		And I click "Create" button
+		And I select from the drop-down list named "Store" by "Store 02" string
+		And I select "Physical inventory" exact value from "Transaction type" drop-down list
+		And I click "Save" button
+		And I save the value of the field named "Number" as "Number1"
+		And I close current window
+	* Open mobile invent
+		And In the command interface I select "Inventory" "Mobile invent"
+		And I select from the drop-down list named "DocumentRef" by "$Number$" string
+	* Scan barcode with serial lot number (without scan emulator)
+		And I remove checkbox "Scan emulator"
+		And I remove checkbox "Edit quantity"
+		And I click the button named "SearchByBarcode"
+		And I input "23455677788976667" text in the field named "Barcode"
+		And I move to the next attribute
+		And "ItemList" table became equal
+			| 'Item'               | 'Item key' | 'Phys. count' | 'Date'     |
+			| 'Product 1 with SLN' | 'PZU'      | '1,000'       | '*' |		
+	* Complete location (not manual input)
+		And I click "Complete location" button
+		And I input "1" text in the field named "InputFld"
+		And I click the button named "OK"
+		Then there are lines in TestClient message log
+			|'Total quantity is ok. Please scan and count next location.'|
+	* Select second PhysicalCountByLocation
+		And I close all client application windows
+		And In the command interface I select "Inventory" "Mobile invent"
+		And I select from the drop-down list named "DocumentRef" by "$Number1$" string	
+	* Scan barcode with serial lot number (without scan emulator)
+		And I remove checkbox "Scan emulator"
+		And I set checkbox "Edit quantity"
+		And I click the button named "SearchByBarcode"
+		And I input "23455677788976667" text in the field named "Barcode"
+		And I move to the next attribute
+		And I click the button named "OK"	
+		And "ItemList" table became equal
+			| 'Item'               | 'Item key' | 'Phys. count' | 'Date'     |
+			| 'Product 1 with SLN' | 'PZU'      | '1,000'       | '*' |		
+	* Complete location (not manual input)
+		And I click "Complete location" button
+		Then there are lines in TestClient message log
+			|'Total quantity is ok. Please scan and count next location.'|
+		Then the number of "ItemList" table lines is "равно" "0"

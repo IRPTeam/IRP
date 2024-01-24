@@ -139,7 +139,7 @@
   <objectField>Catalog.ExternalDataProc.TabularSection.AddAttributes.StandardAttribute.Ref</objectField>
   <typeField>Catalog.ExternalDataProc.TabularSection.AddAttributes.Attribute.Property</typeField>
   <valueField>Catalog.ExternalDataProc.TabularSection.AddAttributes.Attribute.Value</valueField>
-  <multipleValuesKeyField>Catalog.ExternalDataProc.TabularSection.AddAttributes.StandardAttribute.LineNumber</multipleValuesKeyField>
+  <multipleValuesKeyField>-1</multipleValuesKeyField>
   <multipleValuesOrderField>Catalog.ExternalDataProc.TabularSection.AddAttributes.StandardAttribute.LineNumber</multipleValuesOrderField>
  </characteristics>
  <createOnInput>Use</createOnInput>

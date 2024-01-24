@@ -180,5 +180,47 @@ Scenario: _206107 try to change type in item type that used in the documents
 		And I click "Save and close" button
 		Then I wait that in user messages the "[Stock balance detail] cannot be changed, has posted documents" substring will appear in 10 seconds
 				
-		
+Scenario: _206108 try to change Use item type marker and stock balance details in item type that used in the documents
+	And I close all client application windows
+	* Select item
+		Given I open hyperlink "e1cib/list/Catalog.ItemTypes"
+		And I go to line in "List" table
+			| 'Description'   |
+			| 'Clothes'       |
+		And I select current line in "List" table
+	* Try change item type
+		And I set checkbox "Use serial lot number"
+		And I select "By item key" exact value from "Stock balance detail" drop-down list
+		And I click "Save" button
+		Then there are lines in TestClient message log
+			|'[Use serial lot number] cannot be changed, has posted documents'|
+			|'[Stock balance detail] cannot be changed, has posted documents'|
+		And I close "Clothes (Item type) *" window
+		Then "1C:Enterprise" window is opened
+		And I click "No" button
+
+Scenario: _206109 try to change Specification marker in item key that used in the documents	
+	And I close all client application windows
+	* Select item key
+		Given I open hyperlink "e1cib/list/Catalog.ItemKeys"
+		And I go to line in "List" table
+			| 'Item key' |
+			| 'S/Yellow' |
+		And I select current line in "List" table	
+	* Try to change item key
+		And I set checkbox named "SpecificationMode"
+		And I click Choice button of the field named "Specification"
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Dress'       |
+		And I select current line in "List" table
+		And I click "Save" button
+		Then there are lines in TestClient message log
+			|'[Specification] cannot be changed, has posted documents'|
+		And I close "S/Yellow (Item key) *" window
+		Then "1C:Enterprise" window is opened
+		And I click "No" button		
+				
+
+				
 				

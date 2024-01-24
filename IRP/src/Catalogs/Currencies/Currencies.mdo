@@ -129,7 +129,7 @@
   <objectField>Catalog.Currencies.TabularSection.AddAttributes.StandardAttribute.Ref</objectField>
   <typeField>Catalog.Currencies.TabularSection.AddAttributes.Attribute.Property</typeField>
   <valueField>Catalog.Currencies.TabularSection.AddAttributes.Attribute.Value</valueField>
-  <multipleValuesKeyField>Catalog.Currencies.TabularSection.AddAttributes.StandardAttribute.LineNumber</multipleValuesKeyField>
+  <multipleValuesKeyField>-1</multipleValuesKeyField>
   <multipleValuesOrderField>Catalog.Currencies.TabularSection.AddAttributes.StandardAttribute.LineNumber</multipleValuesOrderField>
  </characteristics>
  <createOnInput>DontUse</createOnInput>

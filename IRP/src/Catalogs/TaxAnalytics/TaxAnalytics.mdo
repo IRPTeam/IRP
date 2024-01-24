@@ -51,7 +51,7 @@
   <objectField>Catalog.TaxAnalytics.TabularSection.AddAttributes.StandardAttribute.Ref</objectField>
   <typeField>Catalog.TaxAnalytics.TabularSection.AddAttributes.Attribute.Property</typeField>
   <valueField>Catalog.TaxAnalytics.TabularSection.AddAttributes.Attribute.Value</valueField>
-  <multipleValuesKeyField>Catalog.TaxAnalytics.TabularSection.AddAttributes.StandardAttribute.LineNumber</multipleValuesKeyField>
+  <multipleValuesKeyField>-1</multipleValuesKeyField>
   <multipleValuesOrderField>Catalog.TaxAnalytics.TabularSection.AddAttributes.StandardAttribute.LineNumber</multipleValuesOrderField>
  </characteristics>
  <createOnInput>Use</createOnInput>

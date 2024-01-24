@@ -51,7 +51,7 @@
   <objectField>Catalog.CashAccounts.TabularSection.AddAttributes.StandardAttribute.Ref</objectField>
   <typeField>Catalog.CashAccounts.TabularSection.AddAttributes.Attribute.Property</typeField>
   <valueField>Catalog.CashAccounts.TabularSection.AddAttributes.Attribute.Value</valueField>
-  <multipleValuesKeyField>Catalog.CashAccounts.TabularSection.AddAttributes.StandardAttribute.LineNumber</multipleValuesKeyField>
+  <multipleValuesKeyField>-1</multipleValuesKeyField>
   <multipleValuesOrderField>Catalog.CashAccounts.TabularSection.AddAttributes.StandardAttribute.LineNumber</multipleValuesOrderField>
  </characteristics>
  <createOnInput>DontUse</createOnInput>

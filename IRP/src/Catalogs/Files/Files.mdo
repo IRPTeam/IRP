@@ -140,7 +140,7 @@
   <objectField>Catalog.Files.TabularSection.AddAttributes.StandardAttribute.Ref</objectField>
   <typeField>Catalog.Files.TabularSection.AddAttributes.Attribute.Property</typeField>
   <valueField>Catalog.Files.TabularSection.AddAttributes.Attribute.Value</valueField>
-  <multipleValuesKeyField>Catalog.Files.TabularSection.AddAttributes.StandardAttribute.LineNumber</multipleValuesKeyField>
+  <multipleValuesKeyField>-1</multipleValuesKeyField>
   <multipleValuesOrderField>Catalog.Files.TabularSection.AddAttributes.StandardAttribute.LineNumber</multipleValuesOrderField>
  </characteristics>
  <createOnInput>Use</createOnInput>

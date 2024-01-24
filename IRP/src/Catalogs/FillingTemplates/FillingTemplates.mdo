@@ -36,7 +36,7 @@
   <objectField>Catalog.FillingTemplates.TabularSection.AddAttributes.StandardAttribute.Ref</objectField>
   <typeField>Catalog.FillingTemplates.TabularSection.AddAttributes.Attribute.Property</typeField>
   <valueField>Catalog.FillingTemplates.TabularSection.AddAttributes.Attribute.Value</valueField>
-  <multipleValuesKeyField>Catalog.FillingTemplates.TabularSection.AddAttributes.StandardAttribute.LineNumber</multipleValuesKeyField>
+  <multipleValuesKeyField>-1</multipleValuesKeyField>
   <multipleValuesOrderField>Catalog.FillingTemplates.TabularSection.AddAttributes.StandardAttribute.LineNumber</multipleValuesOrderField>
  </characteristics>
  <characteristics>

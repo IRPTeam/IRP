@@ -52,7 +52,7 @@
   <objectField>Catalog.EquipmentDrivers.TabularSection.AddAttributes.StandardAttribute.Ref</objectField>
   <typeField>Catalog.EquipmentDrivers.TabularSection.AddAttributes.Attribute.Property</typeField>
   <valueField>Catalog.EquipmentDrivers.TabularSection.AddAttributes.Attribute.Value</valueField>
-  <multipleValuesKeyField>Catalog.EquipmentDrivers.TabularSection.AddAttributes.StandardAttribute.LineNumber</multipleValuesKeyField>
+  <multipleValuesKeyField>-1</multipleValuesKeyField>
   <multipleValuesOrderField>Catalog.EquipmentDrivers.TabularSection.AddAttributes.StandardAttribute.LineNumber</multipleValuesOrderField>
  </characteristics>
  <createOnInput>Use</createOnInput>

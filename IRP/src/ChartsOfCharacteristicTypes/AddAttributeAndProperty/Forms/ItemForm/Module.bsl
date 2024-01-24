@@ -17,7 +17,10 @@ EndProcedure
 
 &AtServer
 Procedure BeforeWriteAtServer(Cancel, CurrentObject, WriteParameters)
-	CurrentObject.Icon = New ValueStorage(GetFromTempStorage(Icon), New Deflation(9));
+	//@skip-check invocation-parameter-type-intersect
+	If Not IsBlankString(Icon) Then
+		CurrentObject.Icon = New ValueStorage(GetFromTempStorage(Icon), New Deflation(9));
+	EndIf;
 EndProcedure
 
 &AtClient

@@ -39,6 +39,7 @@ Procedure FillDocumentsAtServer()
 	|WHERE
 	|	AllDocuments.Ref.Date BETWEEN &StartDate AND &EndDate
 	|	AND CASE WHEN &OnlyPosted THEN AllDocuments.Ref.Posted ELSE TRUE END
+	|	AND CASE WHEN &CompanySet THEN AllDocuments.Ref.Company IN (&CompanyList) ELSE TRUE END
 	|
 	|ORDER BY
 	|	AllDocuments.Date";
@@ -47,6 +48,8 @@ Procedure FillDocumentsAtServer()
 	Query.SetParameter("StartDate", Period.StartDate);
 	Query.SetParameter("EndDate", Period.EndDate);
 	Query.SetParameter("OnlyPosted", OnlyPosted);
+	Query.SetParameter("CompanySet", Company.Count() > 0);
+	Query.SetParameter("CompanyList", Company.UnloadValues());
 	Result = Query.Execute().Unload();
 	
 	DocumentList.Load(Result);

@@ -28,7 +28,7 @@
     <objectField>Catalog.LockDataModificationReasons.TabularSection.AddAttributes.StandardAttribute.Ref</objectField>
     <typeField>Catalog.LockDataModificationReasons.TabularSection.AddAttributes.Attribute.Property</typeField>
     <valueField>Catalog.LockDataModificationReasons.TabularSection.AddAttributes.Attribute.Value</valueField>
-    <multipleValuesKeyField>Catalog.LockDataModificationReasons.TabularSection.AddAttributes.StandardAttribute.LineNumber</multipleValuesKeyField>
+    <multipleValuesKeyField>-1</multipleValuesKeyField>
     <multipleValuesOrderField>Catalog.LockDataModificationReasons.TabularSection.AddAttributes.StandardAttribute.LineNumber</multipleValuesOrderField>
   </characteristics>
   <characteristics>

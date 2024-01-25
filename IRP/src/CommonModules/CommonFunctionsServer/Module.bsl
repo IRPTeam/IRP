@@ -141,7 +141,7 @@ EndFunction
 //  AddInfo - Undefined - Add info
 // 
 // Returns:
-//  String - Serialize JSONUse XDTO
+//  String - Serialize JSON use XDTO
 Function SerializeJSONUseXDTO(Value, AddInfo = Undefined) Export
 	Settings = New JSONWriterSettings(, Chars.Tab);
 	Writer = New JSONWriter();

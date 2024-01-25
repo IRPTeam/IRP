@@ -43,7 +43,7 @@
     <objectField>Catalog.Taxes.TabularSection.AddAttributes.StandardAttribute.Ref</objectField>
     <typeField>Catalog.Taxes.TabularSection.AddAttributes.Attribute.Property</typeField>
     <valueField>Catalog.Taxes.TabularSection.AddAttributes.Attribute.Value</valueField>
-    <multipleValuesKeyField>Catalog.Taxes.TabularSection.AddAttributes.StandardAttribute.LineNumber</multipleValuesKeyField>
+    <multipleValuesKeyField>-1</multipleValuesKeyField>
     <multipleValuesOrderField>Catalog.Taxes.TabularSection.AddAttributes.StandardAttribute.LineNumber</multipleValuesOrderField>
   </characteristics>
   <createOnInput>Use</createOnInput>

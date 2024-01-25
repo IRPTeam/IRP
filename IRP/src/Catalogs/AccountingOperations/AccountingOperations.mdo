@@ -124,7 +124,7 @@
     <objectField>Catalog.AccountingOperations.TabularSection.AddAttributes.StandardAttribute.Ref</objectField>
     <typeField>Catalog.AccountingOperations.TabularSection.AddAttributes.Attribute.Property</typeField>
     <valueField>Catalog.AccountingOperations.TabularSection.AddAttributes.Attribute.Value</valueField>
-    <multipleValuesKeyField>Catalog.AccountingOperations.TabularSection.AddAttributes.StandardAttribute.LineNumber</multipleValuesKeyField>
+    <multipleValuesKeyField>-1</multipleValuesKeyField>
     <multipleValuesOrderField>Catalog.AccountingOperations.TabularSection.AddAttributes.StandardAttribute.LineNumber</multipleValuesOrderField>
   </characteristics>
   <createOnInput>Use</createOnInput>

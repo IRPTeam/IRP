@@ -45,7 +45,7 @@
     <objectField>Catalog.Vehicles.TabularSection.AddAttributes.StandardAttribute.Ref</objectField>
     <typeField>Catalog.Vehicles.TabularSection.AddAttributes.Attribute.Property</typeField>
     <valueField>Catalog.Vehicles.TabularSection.AddAttributes.Attribute.Value</valueField>
-    <multipleValuesKeyField>Catalog.Vehicles.TabularSection.AddAttributes.StandardAttribute.LineNumber</multipleValuesKeyField>
+    <multipleValuesKeyField>-1</multipleValuesKeyField>
     <multipleValuesOrderField>Catalog.Vehicles.TabularSection.AddAttributes.StandardAttribute.LineNumber</multipleValuesOrderField>
   </characteristics>
   <createOnInput>Use</createOnInput>

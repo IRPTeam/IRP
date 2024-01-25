@@ -43,7 +43,7 @@
     <objectField>Catalog.PaymentTerminals.TabularSection.AddAttributes.StandardAttribute.Ref</objectField>
     <typeField>Catalog.PaymentTerminals.TabularSection.AddAttributes.Attribute.Property</typeField>
     <valueField>Catalog.PaymentTerminals.TabularSection.AddAttributes.Attribute.Value</valueField>
-    <multipleValuesKeyField>Catalog.PaymentTerminals.TabularSection.AddAttributes.StandardAttribute.LineNumber</multipleValuesKeyField>
+    <multipleValuesKeyField>-1</multipleValuesKeyField>
     <multipleValuesOrderField>Catalog.PaymentTerminals.TabularSection.AddAttributes.StandardAttribute.LineNumber</multipleValuesOrderField>
   </characteristics>
   <createOnInput>DontUse</createOnInput>

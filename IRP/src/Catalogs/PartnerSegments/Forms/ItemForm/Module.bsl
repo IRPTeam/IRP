@@ -4,6 +4,7 @@
 Procedure OnCreateAtServer(Cancel, StandardProcessing)
 	AddAttributesAndPropertiesServer.OnCreateAtServer(ThisObject);
 	LocalizationEvents.CreateMainFormItemDescription(ThisObject, "GroupDescriptions");
+	LocalizationEvents.FillDescription(Parameters.FillingText, Object);
 	If Parameters.Key.IsEmpty() Then
 		If Parameters.FillingValues.Property("Managers") Then
 			Items.Managers.Visible = False;

@@ -59,7 +59,7 @@
     <objectField>Catalog.Companies.TabularSection.AddAttributes.StandardAttribute.Ref</objectField>
     <typeField>Catalog.Companies.TabularSection.AddAttributes.Attribute.Property</typeField>
     <valueField>Catalog.Companies.TabularSection.AddAttributes.Attribute.Value</valueField>
-    <multipleValuesKeyField>Catalog.Companies.TabularSection.AddAttributes.StandardAttribute.LineNumber</multipleValuesKeyField>
+    <multipleValuesKeyField>-1</multipleValuesKeyField>
     <multipleValuesOrderField>Catalog.Companies.TabularSection.AddAttributes.StandardAttribute.LineNumber</multipleValuesOrderField>
   </characteristics>
   <createOnInput>DontUse</createOnInput>
@@ -381,6 +381,18 @@
     <fillValue xsi:type="core:UndefinedValue"/>
     <fullTextSearch>Use</fullTextSearch>
     <dataHistory>Use</dataHistory>
+  </attributes>
+  <attributes uuid="50d1c817-a4ca-4ec6-8f73-1caf781dcad4">
+    <name>PrintInfo</name>
+    <synonym>
+      <key>en</key>
+      <value>Print info</value>
+    </synonym>
+    <type>
+      <types>CatalogRef.PrintInfo</types>
+    </type>
+    <createOnInput>Use</createOnInput>
+    <fullTextSearch>Use</fullTextSearch>
   </attributes>
   <tabularSections uuid="1cef8184-c8f4-4ae0-b558-76db940b1ce5">
     <producedTypes>

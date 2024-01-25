@@ -1287,7 +1287,7 @@ EndFunction
 Function GetRefsByCondition(DCSTemplate, Settings, ExternalDataSet, AddInfo = Undefined) Export
 	Composer = New DataCompositionTemplateComposer();
 	Template = Composer.Execute(DCSTemplate, Settings, , , Type("DataCompositionValueCollectionTemplateGenerator"));
-
+	
 	Processor = New DataCompositionProcessor();
 	Processor.Initialize(Template, New Structure("ExternalDataSet", ExternalDataSet));
 

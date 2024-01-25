@@ -1314,6 +1314,9 @@ Scenario: _005131 create specification with primitive type
 		And I activate "Quantity" field in "FormTable*" table
 		And I input "2,000" text in "Quantity" field of "FormTable*" table
 		And I finish line editing in "FormTable*" table
+		And I click "Save" button
+		When I Check the steps for Exception
+			| 'Then the form attribute named "UniqueMD5" became equal to ""'    |
 		And I click "Save and close" button
 		And table "List" contains lines:
 			| 'Description'    |
@@ -1558,4 +1561,56 @@ Scenario: _005137 create certificate item and item key
 		And I click "Save and close" button
 		And I wait "Item key (create)" window closing in 5 seconds
 	And I close all client application windows
-	
+
+Scenario: _005138 check item creation (button + in documents)
+	And I close all client application windows
+	* EN
+		* Open SO
+			Given I open hyperlink "e1cib/list/Document.SalesOrder"	
+			And I click the button named "FormCreate"
+			And in the table "ItemList" I click "Add" button
+			And I activate "Item" field in "ItemList" table
+			And I select current line in "ItemList" table
+			And I input "123" text in "Item" field of "ItemList" table
+			And I click Create button of "Item" field
+			Then "Item (create)" window is opened
+			And I move to the next attribute
+			Then the form attribute named "Description_en" became equal to "123"
+		And I close current window
+		And I input "" text in "Item" field of "ItemList" table
+		And I finish line editing in "ItemList" table
+		And I close all client application windows
+	*RU
+		Given I open hyperlink "e1cib/list/Catalog.Users"
+		And I go to line in "List" table
+			| 'Login'    |
+			| 'CI'       |
+		And I select current line in "List" table
+		And I select "Russian" exact value from "Data localization" drop-down list
+		And I click "Save and close" button
+		And I close TestClient session
+		Given I open new TestClient session or connect the existing one
+		Given I open hyperlink "e1cib/list/Document.SalesOrder"	
+		And I click the button named "FormCreate"
+		And in the table "ItemList" I click "Add" button
+		And I activate "Item" field in "ItemList" table
+		And I select current line in "ItemList" table
+		And I input "123" text in "Item" field of "ItemList" table
+		And I click Create button of "Item" field
+		Then "Item (create)" window is opened
+		And I move to the next attribute
+		Then the form attribute named "Description_ru" became equal to "123"
+		And I close current window
+		And I input "" text in "Item" field of "ItemList" table
+		And I finish line editing in "ItemList" table
+		And I close all client application windows
+	* User Data localization lang
+		Given I open hyperlink "e1cib/list/Catalog.Users"
+		And I go to line in "List" table
+			| 'Login'    |
+			| 'CI'       |
+		And I select current line in "List" table
+		And I select "English" exact value from "Data localization" drop-down list
+		And I click "Save and close" button
+		And I close TestClient session
+		Given I open new TestClient session or connect the existing one

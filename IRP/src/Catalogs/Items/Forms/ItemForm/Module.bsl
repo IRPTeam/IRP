@@ -3,6 +3,7 @@
 &AtServer
 Procedure OnCreateAtServer(Cancel, StandardProcessing)
 	LocalizationEvents.CreateMainFormItemDescription(ThisObject, "GroupDescriptions");
+	LocalizationEvents.FillDescription(Parameters.FillingText, Object);
 	If Object.Ref.IsEmpty() Then
 		If Parameters.Property("Item") Then
 			Object.Item = Parameters.Item;

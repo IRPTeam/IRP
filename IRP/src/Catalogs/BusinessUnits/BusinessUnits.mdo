@@ -43,7 +43,7 @@
     <objectField>Catalog.BusinessUnits.TabularSection.AddAttributes.StandardAttribute.Ref</objectField>
     <typeField>Catalog.BusinessUnits.TabularSection.AddAttributes.Attribute.Property</typeField>
     <valueField>Catalog.BusinessUnits.TabularSection.AddAttributes.Attribute.Value</valueField>
-    <multipleValuesKeyField>Catalog.BusinessUnits.TabularSection.AddAttributes.StandardAttribute.LineNumber</multipleValuesKeyField>
+    <multipleValuesKeyField>-1</multipleValuesKeyField>
     <multipleValuesOrderField>Catalog.BusinessUnits.TabularSection.AddAttributes.StandardAttribute.LineNumber</multipleValuesOrderField>
   </characteristics>
   <createOnInput>DontUse</createOnInput>
@@ -65,7 +65,6 @@
   <defaultObjectForm>Catalog.BusinessUnits.Form.ItemForm</defaultObjectForm>
   <defaultListForm>Catalog.BusinessUnits.Form.ListForm</defaultListForm>
   <defaultChoiceForm>Catalog.BusinessUnits.Form.ChoiceForm</defaultChoiceForm>
-  <choiceHistoryOnInput>DontUse</choiceHistoryOnInput>
   <attributes uuid="f9a37c70-5521-431b-bfc5-fc177e0f9d33">
     <name>Department</name>
     <synonym>
@@ -173,6 +172,18 @@
     <fillValue xsi:type="core:UndefinedValue"/>
     <fullTextSearch>Use</fullTextSearch>
     <dataHistory>Use</dataHistory>
+  </attributes>
+  <attributes uuid="37ad0249-bfd4-4fc8-be5d-9bd061ae79a1">
+    <name>PrintInfo</name>
+    <synonym>
+      <key>en</key>
+      <value>Print info</value>
+    </synonym>
+    <type>
+      <types>CatalogRef.PrintInfo</types>
+    </type>
+    <createOnInput>Use</createOnInput>
+    <fullTextSearch>Use</fullTextSearch>
   </attributes>
   <tabularSections uuid="8776674e-0405-4e17-9c00-6b256c306c3b">
     <producedTypes>

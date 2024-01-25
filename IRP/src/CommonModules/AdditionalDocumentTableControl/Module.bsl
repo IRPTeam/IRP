@@ -41,7 +41,7 @@ EndFunction
 // Returns:
 //  ValueTree - Check document array:
 // * Ref - DocumentRefDocumentName
-// * Error - See DetailResult
+// * Error - Array of See DetailResult
 Function CheckDocumentArray(DocumentArray, isJob = False) Export
 	
 	If isJob Then

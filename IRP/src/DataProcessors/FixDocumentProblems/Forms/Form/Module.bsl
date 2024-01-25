@@ -4,6 +4,7 @@ Procedure OnOpen(Cancel)
 	OnlyPosted = True;
 EndProcedure
 
+#Region FillDocuments
 &AtClient
 Procedure FillDocuments(Command)
 	DocumentList.Clear();
@@ -54,6 +55,10 @@ Procedure FillDocumentsAtServer()
 	
 	DocumentList.Load(Result);
 EndProcedure
+
+#EndRegion
+
+#Region CheckDocuments
 
 &AtClient
 Procedure CheckDocuments(Command)
@@ -143,6 +148,44 @@ Procedure GetJobsForCheckDocuments_Callback(Result, AllJobDone) Export
 	CheckListTree.Rows.Sort("Date, Ref, ErrorID, LineNumber", True);
 	ValueToFormAttribute(CheckListTree, "CheckList");
 EndProcedure
+
+&AtClient
+Procedure UpdateCheckSelectedRows(Command)
+	DocArray = New Array;
+	For Each ID In Items.CheckList.SelectedRows Do
+		Row = CheckList.FindByID(ID);
+		Childrens = Row.GetItems();
+		If Childrens.Count() = 0 Then
+			Parent = Row.GetParent();
+			DocArray.Add(Parent.GetID());
+			Parent.GetItems().Clear();
+		Else
+			Childrens.Clear();
+			DocArray.Add(ID);
+		EndIf;
+		
+	EndDo;
+	UpdateCheckSelectedRowsAtServer(DocArray);
+EndProcedure
+
+&AtServer
+Procedure UpdateCheckSelectedRowsAtServer(DocArray)
+	For Each ID In DocArray Do
+		Row = CheckList.FindByID(ID);
+		Result = AdditionalDocumentTableControl.CheckDocument(Row.Ref, , True);
+		For Each Error In Result Do
+			NewRow = Row.GetItems().Add();
+			FillPropertyValues(NewRow, Row);
+			NewRow.RowKey = Error.RowKey;
+			NewRow.LineNumber = Error.LineNumber;
+			NewRow.ErrorID = Error.ErrorID;
+		EndDo;
+	EndDo;
+EndProcedure
+
+#EndRegion
+
+#Region QuickFix
 
 &AtClient
 Procedure QuickFixError(Command)
@@ -277,83 +320,7 @@ Procedure GetJobsForQuickFix_Callback(Result, AllJobDone) Export
 	EndDo;
 EndProcedure
 
-&AtClient
-Procedure DocumentListRefOnChange(Item)
-	CurrentData = Items.DocumentList.CurrentData;
-	If CurrentData = Undefined Then
-		Return;
-	ElsIf Not ValueIsFilled(CurrentData.Ref) Then
-		CurrentData.DocumentType = "";
-	Else
-		CurrentData.DocumentType = TypeOf(CurrentData.Ref);
-	EndIf;
-EndProcedure
-
-&AtClient
-Procedure SetFilterByError(Command)
-	CurrentErrorRow = Items.ErrorsGroups.CurrentRow;
-	If CurrentErrorRow = Undefined Then
-		Return;
-	EndIf;
-
-	ErrorRecord = ThisObject.ErrorsGroups.FindByID(CurrentErrorRow);
-	ErrorFilter = ErrorRecord.ErrorID;
-	
-	ErrorFilterOnChange(Undefined);
-EndProcedure
-
-&AtClient
-Procedure ErrorFilterOnChange(Item)
-	
-	If IsBlankString(ThisObject.ErrorFilter) Then
-		RestoreOriginCheckList();
-	Else
-		ApplyFilterToCheckList();
-	EndIf;
-
-EndProcedure
-
-&AtClient
-Procedure ApplyFilterToCheckList()
-	If ThisObject.FullCheckList.GetItems().Count() = 0 Then
-		CopyFormData(ThisObject.CheckList, ThisObject.FullCheckList);
-	Else
-		CopyFormData(ThisObject.FullCheckList, ThisObject.CheckList);
-	EndIf;
-
-	HightRowsToDelete = new Array;
-	For Each HightRow In ThisObject.CheckList.GetItems() Do
-		LowRowsToDelete = new Array;
-		For Each LowRow In HightRow.GetItems() Do
-			If LowRow.ErrorID <> ThisObject.ErrorFilter Then
-				LowRowsToDelete.Add(LowRow);
-			EndIf;
-		EndDo;
-		For Each LowRow In LowRowsToDelete Do
-			HightRow.GetItems().Delete(LowRow);
-		EndDo;
-		If HightRow.GetItems().Count() = 0 Then
-			HightRowsToDelete.Add(HightRow);
-		EndIf;
-	EndDo;
-	For Each HightRow In HightRowsToDelete Do
-		ThisObject.CheckList.GetItems().Delete(HightRow);
-	EndDo;
-
-	For Each HightRow In ThisObject.CheckList.GetItems() Do
-		Items.CheckList.Expand(HightRow.GetID(), True);
-	EndDo;
-	
-EndProcedure
-
-&AtClient
-Procedure RestoreOriginCheckList()
-	CopyFormData(ThisObject.FullCheckList, ThisObject.CheckList);
-	ThisObject.FullCheckList.GetItems().Clear();
-	For Each HightRow In ThisObject.CheckList.GetItems() Do
-		Items.CheckList.Collapse(HightRow.GetID());
-	EndDo;
-EndProcedure
+#EndRegion
 
 #Region Posting
 
@@ -416,7 +383,6 @@ EndFunction
 //  AllJobDone - Boolean - 
 &AtServer
 Procedure GetJobsForCheckPostingDocuments_Callback(Result, AllJobDone) Export  
-	SkipRegFilled = SkipCheckRegisters.Count() > 0;
 	TreeRow = PostingInfo.GetItems();
 	For Each Row In Result Do
 		
@@ -425,13 +391,20 @@ Procedure GetJobsForCheckPostingDocuments_Callback(Result, AllJobDone) Export
 		EndIf;
 		
 		RegInfoArray = CommonFunctionsServer.GetFromCache(Row.CacheKey);
-		For Each DocRow In RegInfoArray Do
+		FillRegInfoInRow(TreeRow, RegInfoArray);
+	EndDo;
+EndProcedure
+
+&AtServer
+Procedure FillRegInfoInRow(TreeRow, RegInfoArray, Parent = Undefined)
+	SkipRegFilled = SkipCheckRegisters.Count() > 0;
+	For Each DocRow In RegInfoArray Do
 			
 			If DocRow.RegInfo.Count() = 0 Then
 				Continue;
 			EndIf;
 			
-			ParentRow = TreeRow.Add();
+			ParentRow = ?(Parent = Undefined, TreeRow.Add(), Parent);
 			ParentRow.Ref = DocRow.Ref;
 			ParentRow.DocumentType = TypeOf(DocRow.Ref);
 			ParentRow.Errors = DocRow.Error;
@@ -458,7 +431,6 @@ Procedure GetJobsForCheckPostingDocuments_Callback(Result, AllJobDone) Export
 			EndIf;
 			
 		 EndDo;
-	EndDo;
 EndProcedure
 
 &AtClient
@@ -803,6 +775,120 @@ Procedure ClearRows()
 	
 	
 	ValueToFormAttribute(Tree, "PostingInfo");
+EndProcedure
+
+&AtClient
+Procedure UpdatePostingSelectedRows(Command)
+
+	DocArray = New Array;
+	For Each ID In Items.PostingInfo.SelectedRows Do
+		Row = PostingInfo.FindByID(ID);
+		Childrens = Row.GetItems();
+		If Childrens.Count() = 0 Then
+			Parent = Row.GetParent();
+			DocArray.Add(Parent.GetID());
+			Parent.GetItems().Clear();
+		Else
+			Childrens.Clear();
+			DocArray.Add(ID);
+		EndIf;
+		
+	EndDo;
+	UpdatePostingSelectedRowsAtServer(DocArray);
+EndProcedure
+
+&AtServer
+Procedure UpdatePostingSelectedRowsAtServer(DocArray)
+	For Each ID In DocArray Do
+		Row = PostingInfo.FindByID(ID);
+		Array = New Array;
+		Array.Add(Row.Ref);
+		Result = PostingServer.CheckDocumentArray(Array);
+		FillRegInfoInRow(Row.GetItems(), Result, Row);
+	EndDo;
+EndProcedure
+
+#EndRegion
+
+#Region Service
+
+
+&AtClient
+Procedure DocumentListRefOnChange(Item)
+	CurrentData = Items.DocumentList.CurrentData;
+	If CurrentData = Undefined Then
+		Return;
+	ElsIf Not ValueIsFilled(CurrentData.Ref) Then
+		CurrentData.DocumentType = "";
+	Else
+		CurrentData.DocumentType = TypeOf(CurrentData.Ref);
+	EndIf;
+EndProcedure
+
+&AtClient
+Procedure SetFilterByError(Command)
+	CurrentErrorRow = Items.ErrorsGroups.CurrentRow;
+	If CurrentErrorRow = Undefined Then
+		Return;
+	EndIf;
+
+	ErrorRecord = ThisObject.ErrorsGroups.FindByID(CurrentErrorRow);
+	ErrorFilter = ErrorRecord.ErrorID;
+	
+	ErrorFilterOnChange(Undefined);
+EndProcedure
+
+&AtClient
+Procedure ErrorFilterOnChange(Item)
+	
+	If IsBlankString(ThisObject.ErrorFilter) Then
+		RestoreOriginCheckList();
+	Else
+		ApplyFilterToCheckList();
+	EndIf;
+
+EndProcedure
+
+&AtClient
+Procedure ApplyFilterToCheckList()
+	If ThisObject.FullCheckList.GetItems().Count() = 0 Then
+		CopyFormData(ThisObject.CheckList, ThisObject.FullCheckList);
+	Else
+		CopyFormData(ThisObject.FullCheckList, ThisObject.CheckList);
+	EndIf;
+
+	HightRowsToDelete = new Array;
+	For Each HightRow In ThisObject.CheckList.GetItems() Do
+		LowRowsToDelete = new Array;
+		For Each LowRow In HightRow.GetItems() Do
+			If LowRow.ErrorID <> ThisObject.ErrorFilter Then
+				LowRowsToDelete.Add(LowRow);
+			EndIf;
+		EndDo;
+		For Each LowRow In LowRowsToDelete Do
+			HightRow.GetItems().Delete(LowRow);
+		EndDo;
+		If HightRow.GetItems().Count() = 0 Then
+			HightRowsToDelete.Add(HightRow);
+		EndIf;
+	EndDo;
+	For Each HightRow In HightRowsToDelete Do
+		ThisObject.CheckList.GetItems().Delete(HightRow);
+	EndDo;
+
+	For Each HightRow In ThisObject.CheckList.GetItems() Do
+		Items.CheckList.Expand(HightRow.GetID(), True);
+	EndDo;
+	
+EndProcedure
+
+&AtClient
+Procedure RestoreOriginCheckList()
+	CopyFormData(ThisObject.FullCheckList, ThisObject.CheckList);
+	ThisObject.FullCheckList.GetItems().Clear();
+	For Each HightRow In ThisObject.CheckList.GetItems() Do
+		Items.CheckList.Collapse(HightRow.GetID());
+	EndDo;
 EndProcedure
 
 #EndRegion

@@ -1137,6 +1137,39 @@
           <name>CheckListCommandBar</name>
           <id>43</id>
           <items xsi:type="form:Button">
+            <name>CheckListUpdateCheckSelectedRows</name>
+            <id>238</id>
+            <visible>true</visible>
+            <enabled>true</enabled>
+            <userVisible>
+              <common>true</common>
+            </userVisible>
+            <extendedTooltip>
+              <name>CheckListUpdateCheckSelectedRowsExtendedTooltip</name>
+              <id>239</id>
+              <visible>true</visible>
+              <enabled>true</enabled>
+              <userVisible>
+                <common>true</common>
+              </userVisible>
+              <type>Label</type>
+              <autoMaxWidth>true</autoMaxWidth>
+              <autoMaxHeight>true</autoMaxHeight>
+              <extInfo xsi:type="form:LabelDecorationExtInfo">
+                <horizontalAlign>Left</horizontalAlign>
+              </extInfo>
+            </extendedTooltip>
+            <commandName>Form.Command.UpdateCheckSelectedRows</commandName>
+            <representation>Auto</representation>
+            <autoMaxWidth>true</autoMaxWidth>
+            <autoMaxHeight>true</autoMaxHeight>
+            <placementArea>UserCmds</placementArea>
+            <picture xsi:type="core:PictureRef">
+              <picture>StdPicture.Reread</picture>
+            </picture>
+            <representationInContextMenu>Auto</representationInContextMenu>
+          </items>
+          <items xsi:type="form:Button">
             <name>CheckListSortListAsc</name>
             <id>87</id>
             <visible>true</visible>
@@ -2401,6 +2434,36 @@
         <autoCommandBar>
           <name>PostingInfoCommandBar</name>
           <id>136</id>
+          <items xsi:type="form:Button">
+            <name>PostingInfoUpdatePostingSelectedRows</name>
+            <id>242</id>
+            <visible>true</visible>
+            <enabled>true</enabled>
+            <userVisible>
+              <common>true</common>
+            </userVisible>
+            <extendedTooltip>
+              <name>PostingInfoUpdatePostingSelectedRowsExtendedTooltip</name>
+              <id>243</id>
+              <visible>true</visible>
+              <enabled>true</enabled>
+              <userVisible>
+                <common>true</common>
+              </userVisible>
+              <type>Label</type>
+              <autoMaxWidth>true</autoMaxWidth>
+              <autoMaxHeight>true</autoMaxHeight>
+              <extInfo xsi:type="form:LabelDecorationExtInfo">
+                <horizontalAlign>Left</horizontalAlign>
+              </extInfo>
+            </extendedTooltip>
+            <commandName>Form.Command.UpdatePostingSelectedRows</commandName>
+            <representation>Auto</representation>
+            <autoMaxWidth>true</autoMaxWidth>
+            <autoMaxHeight>true</autoMaxHeight>
+            <placementArea>UserCmds</placementArea>
+            <representationInContextMenu>Auto</representationInContextMenu>
+          </items>
           <items xsi:type="form:FormGroup">
             <name>PostingInfoGroupCheck</name>
             <id>199</id>
@@ -4664,6 +4727,54 @@
     <action xsi:type="form:FormCommandHandlerContainer">
       <handler>
         <name>PostingInfoClearSkipRows</name>
+      </handler>
+    </action>
+    <currentRowUse>Auto</currentRowUse>
+  </formCommands>
+  <formCommands>
+    <name>UpdateCheckSelectedRows</name>
+    <title>
+      <key>en</key>
+      <value>Update check (selected rows)</value>
+    </title>
+    <id>18</id>
+    <toolTip>
+      <key>en</key>
+      <value>Update posting (selected rows)</value>
+    </toolTip>
+    <use>
+      <common>true</common>
+    </use>
+    <picture xsi:type="core:PictureRef">
+      <picture>StdPicture.Reread</picture>
+    </picture>
+    <action xsi:type="form:FormCommandHandlerContainer">
+      <handler>
+        <name>UpdateCheckSelectedRows</name>
+      </handler>
+    </action>
+    <currentRowUse>Auto</currentRowUse>
+  </formCommands>
+  <formCommands>
+    <name>UpdatePostingSelectedRows</name>
+    <title>
+      <key>en</key>
+      <value>Update posting (selected rows)</value>
+    </title>
+    <id>19</id>
+    <toolTip>
+      <key>en</key>
+      <value>Update posting (selected rows)</value>
+    </toolTip>
+    <use>
+      <common>true</common>
+    </use>
+    <picture xsi:type="core:PictureRef">
+      <picture>StdPicture.Reread</picture>
+    </picture>
+    <action xsi:type="form:FormCommandHandlerContainer">
+      <handler>
+        <name>UpdatePostingSelectedRows</name>
       </handler>
     </action>
     <currentRowUse>Auto</currentRowUse>

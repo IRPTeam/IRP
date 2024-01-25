@@ -13,19 +13,19 @@
     </dataPath>
     <titleLocation>None</titleLocation>
     <items xsi:type="form:FormField">
-      <name>Invoice</name>
-      <id>14</id>
+      <name>Document</name>
+      <id>49</id>
       <visible>true</visible>
       <enabled>true</enabled>
       <userVisible>
         <common>true</common>
       </userVisible>
       <dataPath xsi:type="form:DataPath">
-        <segments>List.Invoice</segments>
+        <segments>List.Document</segments>
       </dataPath>
       <extendedTooltip>
-        <name>InvoiceExtendedTooltip</name>
-        <id>16</id>
+        <name>DocumentExtendedTooltip</name>
+        <id>51</id>
         <visible>true</visible>
         <enabled>true</enabled>
         <userVisible>
@@ -39,8 +39,8 @@
         </extInfo>
       </extendedTooltip>
       <contextMenu>
-        <name>InvoiceContextMenu</name>
-        <id>15</id>
+        <name>DocumentContextMenu</name>
+        <id>50</id>
         <visible>true</visible>
         <enabled>true</enabled>
         <userVisible>
@@ -64,7 +64,7 @@
     </items>
     <items xsi:type="form:FormField">
       <name>InvoiceOrder</name>
-      <id>51</id>
+      <id>55</id>
       <visible>true</visible>
       <enabled>true</enabled>
       <userVisible>
@@ -75,7 +75,7 @@
       </dataPath>
       <extendedTooltip>
         <name>InvoiceOrderExtendedTooltip</name>
-        <id>53</id>
+        <id>57</id>
         <visible>true</visible>
         <enabled>true</enabled>
         <userVisible>
@@ -90,7 +90,7 @@
       </extendedTooltip>
       <contextMenu>
         <name>InvoiceOrderContextMenu</name>
-        <id>52</id>
+        <id>56</id>
         <visible>true</visible>
         <enabled>true</enabled>
         <userVisible>
@@ -113,19 +113,19 @@
       </extInfo>
     </items>
     <items xsi:type="form:FormField">
-      <name>Debt</name>
-      <id>41</id>
+      <name>Advance</name>
+      <id>52</id>
       <visible>true</visible>
       <enabled>true</enabled>
       <userVisible>
         <common>true</common>
       </userVisible>
       <dataPath xsi:type="form:DataPath">
-        <segments>List.Debt</segments>
+        <segments>List.Advance</segments>
       </dataPath>
       <extendedTooltip>
-        <name>DebtExtendedTooltip</name>
-        <id>43</id>
+        <name>AdvanceExtendedTooltip</name>
+        <id>54</id>
         <visible>true</visible>
         <enabled>true</enabled>
         <userVisible>
@@ -139,8 +139,8 @@
         </extInfo>
       </extendedTooltip>
       <contextMenu>
-        <name>DebtContextMenu</name>
-        <id>42</id>
+        <name>AdvanceContextMenu</name>
+        <id>53</id>
         <visible>true</visible>
         <enabled>true</enabled>
         <userVisible>
@@ -424,67 +424,52 @@
       <segments>List.Order</segments>
     </notDefaultUseAlwaysAttributes>
     <notDefaultUseAlwaysAttributes xsi:type="form:DataPath">
-      <segments>List.Debt</segments>
-    </notDefaultUseAlwaysAttributes>
-    <notDefaultUseAlwaysAttributes xsi:type="form:DataPath">
       <segments>List.InvoiceOrder</segments>
     </notDefaultUseAlwaysAttributes>
     <notDefaultUseAlwaysAttributes xsi:type="form:DataPath">
-      <segments>List.Invoice</segments>
+      <segments>List.Document</segments>
     </notDefaultUseAlwaysAttributes>
     <main>true</main>
     <extInfo xsi:type="form:DynamicListExtInfo">
       <queryText>SELECT ALLOWED
-	R1021B_VendorsTransactionsBalance.Basis AS Invoice,
-	R1021B_VendorsTransactionsBalance.Company AS Company,
-	R1021B_VendorsTransactionsBalance.Branch AS Branch,
-	R1021B_VendorsTransactionsBalance.Currency AS Currency,
-	R1021B_VendorsTransactionsBalance.Partner AS Partner,
-	R1021B_VendorsTransactionsBalance.LegalName AS LegalName,
-	R1021B_VendorsTransactionsBalance.Agreement AS Agreement,
-	R1021B_VendorsTransactionsBalance.Order AS InvoiceOrder,
-	R1021B_VendorsTransactionsBalance.AmountBalance AS Debt
+	R1020B_AdvancesToVendorsBalance.Basis AS Document,
+	R1020B_AdvancesToVendorsBalance.Company AS Company,
+	R1020B_AdvancesToVendorsBalance.Branch AS Branch,
+	R1020B_AdvancesToVendorsBalance.Currency AS Currency,
+	R1020B_AdvancesToVendorsBalance.Partner AS Partner,
+	R1020B_AdvancesToVendorsBalance.LegalName AS LegalName,
+	R1020B_AdvancesToVendorsBalance.Agreement AS Agreement,
+	R1020B_AdvancesToVendorsBalance.Order AS InvoiceOrder,
+	R1020B_AdvancesToVendorsBalance.AmountBalance AS Advance
 FROM
-	AccumulationRegister.R1021B_VendorsTransactions.Balance(,
+	AccumulationRegister.R1020B_AdvancesToVendors.Balance(,
 		CurrencyMovementType = VALUE(ChartOfCharacteristicTypes.CurrencyMovementType.SettlementCurrency)) AS
-		R1021B_VendorsTransactionsBalance
+		R1020B_AdvancesToVendorsBalance
 WHERE
-	NOT R1021B_VendorsTransactionsBalance.Basis.Ref IS NULL
+	NOT R1020B_AdvancesToVendorsBalance.Basis.Ref IS NULL
 
 UNION ALL
 
 SELECT
-	R2021B_CustomersTransactionsBalance.Basis,
-	R2021B_CustomersTransactionsBalance.Company,
-	R2021B_CustomersTransactionsBalance.Branch,
-	R2021B_CustomersTransactionsBalance.Currency,
-	R2021B_CustomersTransactionsBalance.Partner,
-	R2021B_CustomersTransactionsBalance.LegalName,
-	R2021B_CustomersTransactionsBalance.Agreement,
-	R2021B_CustomersTransactionsBalance.Order,
-	R2021B_CustomersTransactionsBalance.AmountBalance
+	R2020B_AdvancesFromCustomersBalance.Basis,
+	R2020B_AdvancesFromCustomersBalance.Company,
+	R2020B_AdvancesFromCustomersBalance.Branch,
+	R2020B_AdvancesFromCustomersBalance.Currency,
+	R2020B_AdvancesFromCustomersBalance.Partner,
+	R2020B_AdvancesFromCustomersBalance.LegalName,
+	R2020B_AdvancesFromCustomersBalance.Agreement,
+	R2020B_AdvancesFromCustomersBalance.Order,
+	R2020B_AdvancesFromCustomersBalance.AmountBalance
 FROM
-	AccumulationRegister.R2021B_CustomersTransactions.Balance(,
+	AccumulationRegister.R2020B_AdvancesFromCustomers.Balance(,
 		CurrencyMovementType = VALUE(ChartOfCharacteristicTypes.CurrencyMovementType.SettlementCurrency)) AS
-		R2021B_CustomersTransactionsBalance
+		R2020B_AdvancesFromCustomersBalance
 WHERE
-	NOT R2021B_CustomersTransactionsBalance.Basis.Ref IS NULL</queryText>
+	NOT R2020B_AdvancesFromCustomersBalance.Basis.Ref IS NULL</queryText>
       <autoFillAvailableFields>true</autoFillAvailableFields>
       <customQuery>true</customQuery>
       <autoSaveUserSettings>true</autoSaveUserSettings>
       <getInvisibleFieldPresentations>true</getInvisibleFieldPresentations>
-      <fields xsi:type="schema:DataCompositionSchemaDataSetField">
-        <dataPath>Invoice</dataPath>
-        <field>Invoice</field>
-        <title>
-          <localValue>
-            <content>
-              <key>en</key>
-              <value>Invoice</value>
-            </content>
-          </localValue>
-        </title>
-      </fields>
       <fields xsi:type="schema:DataCompositionSchemaDataSetField">
         <dataPath>Company</dataPath>
         <field>Company</field>
@@ -514,18 +499,6 @@ WHERE
         <field>Order</field>
       </fields>
       <fields xsi:type="schema:DataCompositionSchemaDataSetField">
-        <dataPath>Debt</dataPath>
-        <field>Debt</field>
-        <title>
-          <localValue>
-            <content>
-              <key>en</key>
-              <value>Debt</value>
-            </content>
-          </localValue>
-        </title>
-      </fields>
-      <fields xsi:type="schema:DataCompositionSchemaDataSetField">
         <dataPath>CurrencyMovementType</dataPath>
         <field>CurrencyMovementType</field>
       </fields>
@@ -545,6 +518,30 @@ WHERE
             <content>
               <key>en</key>
               <value>Invoice order</value>
+            </content>
+          </localValue>
+        </title>
+      </fields>
+      <fields xsi:type="schema:DataCompositionSchemaDataSetField">
+        <dataPath>Document</dataPath>
+        <field>Document</field>
+        <title>
+          <localValue>
+            <content>
+              <key>en</key>
+              <value>Document</value>
+            </content>
+          </localValue>
+        </title>
+      </fields>
+      <fields xsi:type="schema:DataCompositionSchemaDataSetField">
+        <dataPath>Advance</dataPath>
+        <field>Advance</field>
+        <title>
+          <localValue>
+            <content>
+              <key>en</key>
+              <value>Advance</value>
             </content>
           </localValue>
         </title>

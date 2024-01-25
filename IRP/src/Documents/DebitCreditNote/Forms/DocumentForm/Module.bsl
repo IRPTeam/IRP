@@ -27,6 +27,11 @@ Procedure AfterWriteAtServer(CurrentObject, WriteParameters) Export
 EndProcedure
 
 &AtClient
+Procedure AfterWrite(WriteParameters)
+	SetVisibilityAvailability(Object, ThisObject);
+EndProcedure
+
+&AtClient
 Procedure OnOpen(Cancel) Export
 	DocDebitCreditNoteClient.OnOpen(Object, ThisObject, Cancel);
 EndProcedure
@@ -47,11 +52,16 @@ EndProcedure
 Procedure SetVisibilityAvailability(Object, Form)
 	IsOffsetOfAdvances = (Object.TransactionType = PredefinedValue("Enum.DebitCreditNoteTransactionTpes.OffsetOfAdvances"));
 	IsDebitCreditNote = (Object.TransactionType = PredefinedValue("Enum.DebitCreditNoteTransactionTpes.DebitCreditNote"));
+	
 	SetVisibleByTransactionType(Object, Form, IsOffsetOfAdvances, IsDebitCreditNote);
 	
 	Form.Items.LegalName.Enabled        = ValueIsFilled(Object.Partner);
 	Form.Items.SendLegalName.Enabled    = ValueIsFilled(Object.SendPartner);
 	Form.Items.ReceiveLegalName.Enabled = ValueIsFilled(Object.ReceivePartner);
+
+#IF Client THEN	
+	SetVisibleRows_OffsetOfAdvancesPayments(Object, Form);
+#ENDIF
 EndProcedure
 
 &AtClientAtServerNoContext
@@ -97,9 +107,9 @@ Procedure SetVisibleByTransactionType(Object, Form, IsOffsetOfAdvances, IsDebitC
 	EndIf;
 EndProcedure
 
-&AtClient
-Procedure SetVisibleRows_OffsetOfAdvancesPayments(ActivateRow = True)
-	CurrentData = Items.OffsetOfAdvancesInvoices.CurrentData;
+&AtClientAtServerNoContext
+Procedure SetVisibleRows_OffsetOfAdvancesPayments(Object, Form, ActivateRow = True)
+	CurrentData = Form.Items.OffsetOfAdvancesInvoices.CurrentData;
 	If CurrentData = Undefined Then
 		Return;
 	EndIf;
@@ -109,7 +119,7 @@ Procedure SetVisibleRows_OffsetOfAdvancesPayments(ActivateRow = True)
 	If ActivateRow Then
 		VisibleRows = Object.OffsetOfAdvancesPayments.FindRows(New Structure("IsVisible", True));
 		If VisibleRows.Count() Then
-			Items.OffsetOfAdvancesPayments.CurrentRow = VisibleRows[0].GetID();
+			Form.Items.OffsetOfAdvancesPayments.CurrentRow = VisibleRows[0].GetID();
 		EndIf;
 	EndIf;
 EndProcedure
@@ -174,18 +184,6 @@ EndProcedure
 Procedure TransactionTypeOnChange(Item)
 	DocDebitCreditNoteClient.TransactionTypeOnChange(Object, ThisObject, Item);	
 EndProcedure
-
-&AtClient
-Procedure OffsetOfAdvancesInvoicesInvoiceStartChoice(Item, ChoiceData, StandardProcessing)
-	DocDebitCreditNoteClient.OffsetOfAdvancesInvoicesInvoiceStartChoice(Object, ThisObject, Item, ChoiceData, StandardProcessing);
-EndProcedure
-
-&AtClient
-Procedure OffsetOfAdvancesInvoicesInvoiceOnChange(Item)
-	DocDebitCreditNoteClient.OffsetOfAdvancesInvoicesInvoiceOnChange(Object, ThisObject, Item);
-EndProcedure
-
-
 
 #EndRegion
 
@@ -270,8 +268,40 @@ EndProcedure
 
 &AtClient
 Procedure OffsetOfAdvancesInvoicesOnActivateRow(Item)
-	SetVisibleRows_OffsetOfAdvancesPayments();
+	SetVisibleRows_OffsetOfAdvancesPayments(Object, ThisObject);
 EndProcedure
+
+#Region INVOICE
+
+&AtClient
+Procedure OffsetOfAdvancesInvoicesInvoiceStartChoice(Item, ChoiceData, StandardProcessing)
+	DocDebitCreditNoteClient.OffsetOfAdvancesInvoicesInvoiceStartChoice(Object, ThisObject, Item, ChoiceData, StandardProcessing);
+EndProcedure
+
+&AtClient
+Procedure OffsetOfAdvancesInvoicesInvoiceOnChange(Item)
+	DocDebitCreditNoteClient.OffsetOfAdvancesInvoicesInvoiceOnChange(Object, ThisObject, Item);
+EndProcedure
+
+#EndRegion
+
+#Region ORDER
+
+&AtClient
+Procedure OffsetOfAdvancesInvoicesOrderOnChange(Item)
+	DocDebitCreditNoteClient.OffsetOfAdvancesInvoicesOrderOnChange(Object, ThisObject, Item);
+EndProcedure
+
+#EndRegion
+
+#Region AMOUNT
+
+&AtClient
+Procedure OffsetOfAdvancesInvoicesAmountOnChange(Item)
+	DocDebitCreditNoteClient.OffsetOfAdvancesInvoicesAmountOnChange(Object, ThisObject, Item);
+EndProcedure
+
+#EndRegion
 
 #EndRegion
 
@@ -280,8 +310,40 @@ EndProcedure
 &AtClient
 Procedure OffsetOfAdvancesPaymentsBeforeAddRow(Item, Cancel, Clone, Parent, IsFolder, Parameter)
 	DocDebitCreditNoteClient.OffsetOfAdvancesPaymentsBeforeAddRow(Object, ThisObject, Item, Cancel, Clone, Parent, IsFolder, Parameter);
-	SetVisibleRows_OffsetOfAdvancesPayments(False);
+	SetVisibleRows_OffsetOfAdvancesPayments(Object, ThisObject, False);
 EndProcedure
+
+#Region DOCUMENT
+
+&AtClient
+Procedure OffsetOfAdvancesPaymentsDocumentStartChoice(Item, ChoiceData, StandardProcessing)
+	DocDebitCreditNoteClient.OffsetOfAdvancesPaymentsDocumentStartChoice(Object, ThisObject, Item, ChoiceData, StandardProcessing);
+EndProcedure
+
+&AtClient
+Procedure OffsetOfAdvancesPaymentsDocumentOnChange(Item)
+	DocDebitCreditNoteClient.OffsetOfAdvancesPaymentsDocumentOnChange(Object, ThisObject, Item);
+EndProcedure
+
+#EndRegion
+
+#Region ORDER
+
+&AtClient
+Procedure OffsetOfAdvancesPaymentsOrderOnChange(Item)
+	DocDebitCreditNoteClient.OffsetOfAdvancesPaymentsOrderOnChange(Object, ThisObject, Item);
+EndProcedure
+
+#EndRegion
+
+#Region AMOUNT
+
+&AtClient
+Procedure OffsetOfAdvancesPaymentsAmountOnChange(Item)
+	DocDebitCreditNoteClient.OffsetOfAdvancesPaymentsAmountOnChange(Object, ThisObject, Item);
+EndProcedure
+
+#EndRegion
 
 #EndRegion
 

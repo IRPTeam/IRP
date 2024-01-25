@@ -194,14 +194,17 @@ EndProcedure
 #Region INVOICE
 
 Procedure OffsetOfAdvancesInvoicesInvoiceOnChange(Object, Form, Item, CurrentData = Undefined) Export
-	//ViewClient_V2.OffsetOfAdvancesInvoicesInvoiceOnChange(Object, Form, CurrentData);
+	ViewClient_V2.OffsetOfAdvancesInvoicesInvoiceOnChange(Object, Form, CurrentData);
 EndProcedure
 
 Procedure OffsetOfAdvancesInvoicesInvoiceStartChoice(Object, Form, Item, ChoiceData, StandardProcessing) Export
 	StandardProcessing = False;
 		
 	Parameters = New Structure("Filter", New Structure());
-	Parameters.Filter.Insert("Partner", Object.Partner);
+	Parameters.Filter.Insert("Partner"   , Object.Partner);
+	Parameters.Filter.Insert("Agreement" , Object.Agreement);
+	Parameters.Filter.Insert("LegalName" , Object.LegalName);
+	Parameters.Filter.Insert("Currency" , Object.Currency);
 	
 	Parameters.Insert("Ref", Object.Ref);
 	
@@ -212,15 +215,33 @@ Procedure OffsetOfAdvancesInvoicesInvoiceStartChoice(Object, Form, Item, ChoiceD
 EndProcedure
 
 Procedure OffsetOfAdvancesInvoicesInvoiceStartChoiceEnd(Result, NotifyParameters) Export
-//	If Result = Undefined Then
-//		Return;
-//	EndIf;
-//	Form = NotifyParameters.Form;
-//	Object = NotifyParameters.Object;
-//	CurrentData = Form.Items.OffsetOfAdvancesInvoices.CurrentData;
-//	If CurrentData <> Undefined Then
-//		ViewClient_V2.SetOffsetOfAdvancesInvoicesInvoice(Object, Form, CurrentData, Result.Invoice);
-//	EndIf;
+	If Result = Undefined Then
+		Return;
+	EndIf;
+	Form = NotifyParameters.Form;
+	Object = NotifyParameters.Object;
+	CurrentData = Form.Items.OffsetOfAdvancesInvoices.CurrentData;
+	If CurrentData <> Undefined Then
+		ViewClient_V2.SetOffsetOfAdvancesInvoicesInvoice(Object, Form, CurrentData, Result.Invoice);
+		ViewClient_V2.SetOffsetOfAdvancesInvoicesOrder(Object,   Form, CurrentData, Result.Order);
+		ViewClient_V2.SetOffsetOfAdvancesInvoicesAmount(Object,  Form, CurrentData, Result.Amount);
+	EndIf;
+EndProcedure
+
+#EndRegion
+
+#Region ORDER
+
+Procedure OffsetOfAdvancesInvoicesOrderOnChange(Object, Form, Item, CurrentData = Undefined) Export
+	ViewClient_V2.OffsetOfAdvancesInvoicesOrderOnChange(Object, Form, CurrentData);
+EndProcedure
+
+#EndRegion
+
+#Region AMOUNT
+
+Procedure OffsetOfAdvancesInvoicesAmountOnChange(Object, Form, Item, CurrentData = Undefined) Export
+	ViewClient_V2.OffsetOfAdvancesInvoicesAmountOnChange(Object, Form, CurrentData);
 EndProcedure
 
 #EndRegion
@@ -238,7 +259,69 @@ Procedure OffsetOfAdvancesPaymentsBeforeAddRow(Object, Form, Item, Cancel, Clone
 	KeyOwner = CurrentData.Key;
 	ViewClient_V2.OffsetOfAdvancesPaymentsBeforeAddRow(Object, Form, Cancel, Clone, Undefined, KeyOwner);
 EndProcedure
+
+#Region DOCUMENT
+
+Procedure OffsetOfAdvancesPaymentsDocumentOnChange(Object, Form, Item, CurrentData = Undefined) Export
+	ViewClient_V2.OffsetOfAdvancesPaymentsDocumentOnChange(Object, Form, CurrentData);
+EndProcedure
+
+Procedure OffsetOfAdvancesPaymentsDocumentStartChoice(Object, Form, Item, ChoiceData, StandardProcessing) Export
+	StandardProcessing = False;
+	
+	CurrentData_Invoices = Form.Items.OffsetOfAdvancesInvoices.CurrentData;
+	If CurrentData_Invoices = Undefined Then
+		Return;
+	EndIf;
 		
+	Parameters = New Structure("Filter", New Structure());
+	Parameters.Filter.Insert("Partner"   , Object.Partner);
+	Parameters.Filter.Insert("Agreement" , Object.Agreement);
+	Parameters.Filter.Insert("LegalName" , Object.LegalName);
+	Parameters.Filter.Insert("Currency"  , Object.Currency);
+	Parameters.Filter.Insert("Order"     , CurrentData_Invoices.Order);
+	
+	
+	Parameters.Insert("Ref", Object.Ref);
+	
+	Notify = New NotifyDescription("OffsetOfAdvancesPaymentsDocumentStartChoiceEnd", 
+		ThisObject, New Structure("Form, Object", Form, Object));
+	OpenForm("Document.DebitCreditNote.Form.ChoicePaymentDocumentForm", 
+		Parameters, Item, , , , Notify, FormWindowOpeningMode.LockOwnerWindow);	
+EndProcedure
+
+Procedure OffsetOfAdvancesPaymentsDocumentStartChoiceEnd(Result, NotifyParameters) Export
+	If Result = Undefined Then
+		Return;
+	EndIf;
+	Form = NotifyParameters.Form;
+	Object = NotifyParameters.Object;
+	CurrentData = Form.Items.OffsetOfAdvancesPayments.CurrentData;
+	If CurrentData <> Undefined Then
+		ViewClient_V2.SetOffsetOfAdvancesPaymentsDocument(Object, Form, CurrentData, Result.Document);
+		ViewClient_V2.SetOffsetOfAdvancesPaymentsOrder(Object,    Form, CurrentData, Result.Order);
+		ViewClient_V2.SetOffsetOfAdvancesPaymentsAmount(Object,   Form, CurrentData, Result.Amount);
+	EndIf;
+EndProcedure
+		
+#Endregion
+
+#Region ORDER
+
+Procedure OffsetOfAdvancesPaymentsOrderOnChange(Object, Form, Item, CurrentData = Undefined) Export
+	ViewClient_V2.OffsetOfAdvancesPaymentsOrderOnChange(Object, Form, CurrentData);
+EndProcedure
+
+#EndRegion
+
+#Region AMOUNT
+
+Procedure OffsetOfAdvancesPaymentsAmountOnChange(Object, Form, Item, CurrentData = Undefined) Export
+	ViewClient_V2.OffsetOfAdvancesPaymentsAmountOnChange(Object, Form, CurrentData);
+EndProcedure
+
+#EndRegion
+
 #EndRegion
 
 #Region SEND_PARTNER

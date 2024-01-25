@@ -185,7 +185,7 @@
       <value>Transaction basis</value>
     </synonym>
     <type>
-      <types>DocumentRef</types>
+      <types>DefinedType.typeApArTransactionBasises</types>
     </type>
     <minValue xsi:type="core:UndefinedValue"/>
     <maxValue xsi:type="core:UndefinedValue"/>

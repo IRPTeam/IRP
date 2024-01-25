@@ -4225,6 +4225,58 @@ EndProcedure
 
 #EndRegion
 
+#Region OFFSET_OF_ADVANCES_INVOICES_COLUMNS
+
+// OffsetOfAdvancesInvoices.Invoice
+Procedure OffsetOfAdvancesInvoicesInvoiceOnChange(Object, Form, CurrentData = Undefined) Export
+	Rows = GetRowsByCurrentData(Form, "OffsetOfAdvancesInvoices", CurrentData);
+	Parameters = GetSimpleParameters(Object, Form, "OffsetOfAdvancesInvoices", Rows);
+	ControllerClientServer_V2.OffsetOfAdvancesInvoicesInvoiceOnChange(Parameters);
+EndProcedure
+
+// OffsetOfAdvancesInvoices.Invoice.Set
+Procedure SetOffsetOfAdvancesInvoicesInvoice(Object, Form, Row, Value) Export
+	Row.Invoice = Value;
+	Rows = GetRowsByCurrentData(Form, "OffsetOfAdvancesInvoices", Row);
+	Parameters = GetSimpleParameters(Object, Form, "OffsetOfAdvancesInvoices", Rows);
+	Parameters.Insert("IsProgramChange", True);
+	ControllerClientServer_V2.OffsetOfAdvancesInvoicesInvoiceOnChange(Parameters);
+EndProcedure
+
+// OffsetOfAdvancesInvoices.Order
+Procedure OffsetOfAdvancesInvoicesOrderOnChange(Object, Form, CurrentData = Undefined) Export
+	Rows = GetRowsByCurrentData(Form, "OffsetOfAdvancesInvoices", CurrentData);
+	Parameters = GetSimpleParameters(Object, Form, "OffsetOfAdvancesInvoices", Rows);
+	ControllerClientServer_V2.OffsetOfAdvancesInvoicesOrderOnChange(Parameters);
+EndProcedure
+
+// OffsetOfAdvancesInvoices.Order.Set
+Procedure SetOffsetOfAdvancesInvoicesOrder(Object, Form, Row, Value) Export
+	Row.Order = Value;
+	Rows = GetRowsByCurrentData(Form, "OffsetOfAdvancesInvoices", Row);
+	Parameters = GetSimpleParameters(Object, Form, "OffsetOfAdvancesInvoices", Rows);
+	Parameters.Insert("IsProgramChange", True);
+	ControllerClientServer_V2.OffsetOfAdvancesInvoicesOrderOnChange(Parameters);
+EndProcedure
+
+// OffsetOfAdvancesInvoices.Amount
+Procedure OffsetOfAdvancesInvoicesAmountOnChange(Object, Form, CurrentData = Undefined) Export
+	Rows = GetRowsByCurrentData(Form, "OffsetOfAdvancesInvoices", CurrentData);
+	Parameters = GetSimpleParameters(Object, Form, "OffsetOfAdvancesInvoices", Rows);
+	ControllerClientServer_V2.OffsetOfAdvancesInvoicesAmountOnChange(Parameters);
+EndProcedure
+
+// OffsetOfAdvancesInvoices.Amount.Set
+Procedure SetOffsetOfAdvancesInvoicesAmount(Object, Form, Row, Value) Export
+	Row.Amount = Value;
+	Rows = GetRowsByCurrentData(Form, "OffsetOfAdvancesInvoices", Row);
+	Parameters = GetSimpleParameters(Object, Form, "OffsetOfAdvancesInvoices", Rows);
+	Parameters.Insert("IsProgramChange", True);
+	ControllerClientServer_V2.OffsetOfAdvancesInvoicesAmountOnChange(Parameters);
+EndProcedure
+
+#EndRegion
+
 #Region OFFSET_OF_ADVANCES_PAYMENTS
 
 Function OffsetOfAdvancesPaymentsBeforeAddRow(Object, Form, Cancel = False, Clone = False, CurrentData = Undefined, KeyOwner = Undefined) Export
@@ -4247,6 +4299,58 @@ EndProcedure
 
 Procedure OffsetOfAdvancesPaymentsAfterDeleteRow(Object, Form) Export
 	DeleteRows(Object, Form, "OffsetOfAdvancesPayments");
+EndProcedure
+
+#EndRegion
+
+#Region OFFSET_OF_ADVANCES_PAYMENTS_COLUMNS
+
+// OffsetOfAdvancesPayments.Document
+Procedure OffsetOfAdvancesPaymentsDocumentOnChange(Object, Form, CurrentData = Undefined) Export
+	Rows = GetRowsByCurrentData(Form, "OffsetOfAdvancesPayments", CurrentData);
+	Parameters = GetSimpleParameters(Object, Form, "OffsetOfAdvancesPayments", Rows);
+	ControllerClientServer_V2.OffsetOfAdvancesPaymentsDocumentOnChange(Parameters);
+EndProcedure
+
+// OffsetOfAdvancesPayments.Document.Set
+Procedure SetOffsetOfAdvancesPaymentsDocument(Object, Form, Row, Value) Export
+	Row.Document = Value;
+	Rows = GetRowsByCurrentData(Form, "OffsetOfAdvancesPayments", Row);
+	Parameters = GetSimpleParameters(Object, Form, "OffsetOfAdvancesPayments", Rows);
+	Parameters.Insert("IsProgramChange", True);
+	ControllerClientServer_V2.OffsetOfAdvancesPaymentsDocumentOnChange(Parameters);
+EndProcedure
+
+// OffsetOfAdvancesPayments.Order
+Procedure OffsetOfAdvancesPaymentsOrderOnChange(Object, Form, CurrentData = Undefined) Export
+	Rows = GetRowsByCurrentData(Form, "OffsetOfAdvancesPayments", CurrentData);
+	Parameters = GetSimpleParameters(Object, Form, "OffsetOfAdvancesPayments", Rows);
+	ControllerClientServer_V2.OffsetOfAdvancesPaymentsOrderOnChange(Parameters);
+EndProcedure
+
+// OffsetOfAdvancesPayments.Order.Set
+Procedure SetOffsetOfAdvancesPaymentsOrder(Object, Form, Row, Value) Export
+	Row.Order = Value;
+	Rows = GetRowsByCurrentData(Form, "OffsetOfAdvancesPayments", Row);
+	Parameters = GetSimpleParameters(Object, Form, "OffsetOfAdvancesPayments", Rows);
+	Parameters.Insert("IsProgramChange", True);
+	ControllerClientServer_V2.OffsetOfAdvancesPaymentsOrderOnChange(Parameters);
+EndProcedure
+
+// OffsetOfAdvancesPayments.Amount
+Procedure OffsetOfAdvancesPaymentsAmountOnChange(Object, Form, CurrentData = Undefined) Export
+	Rows = GetRowsByCurrentData(Form, "OffsetOfAdvancesPayments", CurrentData);
+	Parameters = GetSimpleParameters(Object, Form, "OffsetOfAdvancesPayments", Rows);
+	ControllerClientServer_V2.OffsetOfAdvancesPaymentsAmountOnChange(Parameters);
+EndProcedure
+
+// OffsetOfAdvancesPayments.Amount.Set
+Procedure SetOffsetOfAdvancesPaymentsAmount(Object, Form, Row, Value) Export
+	Row.Amount = Value;
+	Rows = GetRowsByCurrentData(Form, "OffsetOfAdvancesPayments", Row);
+	Parameters = GetSimpleParameters(Object, Form, "OffsetOfAdvancesPayments", Rows);
+	Parameters.Insert("IsProgramChange", True);
+	ControllerClientServer_V2.OffsetOfAdvancesPaymentsAmountOnChange(Parameters);
 EndProcedure
 
 #EndRegion

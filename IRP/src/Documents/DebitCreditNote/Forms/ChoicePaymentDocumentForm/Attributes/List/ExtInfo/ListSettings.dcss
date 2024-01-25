@@ -4,7 +4,7 @@
 	</filter>
 	<order>
 		<item xsi:type="OrderItemField">
-			<field>Invoice.Date</field>
+			<field>Document.Date</field>
 			<orderType>Asc</orderType>
 		</item>
 	</order>

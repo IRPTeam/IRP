@@ -135,6 +135,21 @@ Function OffsetOfAdvancesAndAging(Parameters) Export
 	|INTO tmp_AllKeys
 	|FROM
 	|	tmp_DocAdv AS tmp_DocAdv
+	|	left join InformationRegister.T2018S_UserDefinedOffsetOfAdvances AS UserDefined on
+	|	tmp_DocAdv.AdvanceKey.Company = UserDefined.Company
+	|   and tmp_DocAdv.AdvanceKey.Branch = UserDefined.Branch
+	|	and tmp_DocAdv.AdvanceKey.Currency = UserDefined.Currency
+	|   and tmp_DocAdv.AdvanceKey.Partner = UserDefined.Partner
+	|   and tmp_DocAdv.AdvanceKey.AdvanceAgreement = UserDefined.Agreement
+	|   and tmp_DocAdv.AdvanceKey.LegalName = UserDefined.LegalName
+	|	and tmp_DocAdv.AdvanceKey.IsVendorAdvance = UserDefined.IsVendorAdvance
+	|	and tmp_DocAdv.AdvanceKey.IsCustomerAdvance = UserDefined.IsCustomerAdvance
+	|
+	|	and case when tmp_DocAdv.AdvanceKey.Order.Ref is null then Undefined else tmp_DocAdv.AdvanceKey.Order end
+	|	     = case when UserDefined.Order.Ref is null then Undefined else UserDefined.Order end
+	|
+	|	and case when tmp_DocAdv.AdvanceKey.AdvanceDocument.Ref is null then Undefined else tmp_DocAdv.AdvanceKey.AdvanceDocument end
+	|	     = case when UserDefined.AdvanceDocument.Ref is null then Undefined else UserDefined.AdvanceDocument end
 	|
 	|UNION ALL
 	|
@@ -145,6 +160,22 @@ Function OffsetOfAdvancesAndAging(Parameters) Export
 	|	tmp_DocTrn.Document
 	|FROM
 	|	tmp_DocTrn AS tmp_DocTrn
+	|	left join InformationRegister.T2018S_UserDefinedOffsetOfAdvances AS UserDefined on
+	|	tmp_DocTrn.TransactionKey.Company = UserDefined.Company
+	|   and tmp_DocTrn.TransactionKey.Branch = UserDefined.Branch
+	|	and tmp_DocTrn.TransactionKey.Currency = UserDefined.Currency
+	|   and tmp_DocTrn.TransactionKey.Partner = UserDefined.Partner
+	|   and tmp_DocTrn.TransactionKey.Agreement = UserDefined.Agreement
+	|   and tmp_DocTrn.TransactionKey.LegalName = UserDefined.LegalName
+	|	and tmp_DocTrn.TransactionKey.IsVendorTransaction = UserDefined.IsVendorTransaction
+	|	and tmp_DocTrn.TransactionKey.IsCustomerTransaction = UserDefined.IsCustomerTransaction
+	|
+	|	and case when tmp_DocTrn.TransactionKey.Order.Ref is null then Undefined else tmp_DocTrn.TransactionKey.Order end
+	|	     = case when UserDefined.Order.Ref is null then Undefined else UserDefined.Order end
+	|
+	|	and case when tmp_DocTrn.TransactionKey.TransactionBasis.Ref is null then Undefined else tmp_DocTrn.TransactionKey.TransactionBasis end
+	|	     = case when UserDefined.TransactionDocument.Ref is null then Undefined else UserDefined.TransactionDocument end
+	|	
 	|;
 	|
 	|
@@ -156,6 +187,7 @@ Function OffsetOfAdvancesAndAging(Parameters) Export
 	|	tmpAllKeys.Document
 	|FROM
 	|	tmp_AllKeys AS tmpAllKeys
+	|	
 	|GROUP BY
 	|	tmpAllKeys.AdvanceKey,
 	|	tmpAllKeys.TransactionKey,
@@ -163,6 +195,23 @@ Function OffsetOfAdvancesAndAging(Parameters) Export
 	|	tmpAllKeys.Document
 	|ORDER BY
 	|	PointInTime";
+	
+	
+//	Company
+//	Branch
+//	Currency
+//	Partner
+//	LegalName
+//	Order - empty
+//  AdvanceAgreement - Agreement
+//	AdvanceDocument
+//	++TransactionBasis - empty
+//	IsVendorAdvance
+//	IsCustomerAdvance
+// ++IsCustomerTransaction
+// ++IsVendorTransaction
+	
+	
 	Query.SetParameter("DocAdv", Table_DocumentAndAdvancesKey);
 	Query.SetParameter("DocTrn", Table_DocumentAndTransactionsKey);
 	QueryResult = Query.Execute();
@@ -1461,7 +1510,6 @@ Procedure CreateAdvancesKeys(Parameters, Records_AdvancesKey, Records_OffsetOfAd
 	|			ELSE AdvKeys.Order
 	|		END
 	|		AND tmp_AdvInfo.AdvanceAgreement = AdvKeys.AdvanceAgreement
-//	|		AND tmp_AdvInfo.AdvanceDocument = AdvKeys.AdvanceDocument
 	|
 	|		AND case when tmp_AdvInfo.AdvanceDocument.Ref IS NULL then true else
 	|       CASE
@@ -1517,7 +1565,6 @@ Procedure CreateAdvancesKeys(Parameters, Records_AdvancesKey, Records_OffsetOfAd
 	|	AdvInfo.Partner,
 	|	AdvInfo.LegalName,
 	|	AdvInfo.AdvanceAgreement,
-	//|	AdvInfo.AdvanceDocument,
 	|	case when AdvInfo.AdvanceDocument.Ref IS NULL then UNDEFINED else AdvInfo.AdvanceDocument end AS AdvanceDocument,
 	|	CASE
 	|		WHEN AdvInfo.Order.Ref IS NULL
@@ -1543,7 +1590,6 @@ Procedure CreateAdvancesKeys(Parameters, Records_AdvancesKey, Records_OffsetOfAd
 	|	AdvInfo.Partner,
 	|	AdvInfo.LegalName,
 	|	AdvInfo.AdvanceAgreement,
-	//|	AdvInfo.AdvanceDocument,
 	|	case when AdvInfo.AdvanceDocument.Ref IS NULL then UNDEFINED else AdvInfo.AdvanceDocument end,
 	|	CASE
 	|		WHEN AdvInfo.Order.Ref IS NULL
@@ -1561,7 +1607,6 @@ Procedure CreateAdvancesKeys(Parameters, Records_AdvancesKey, Records_OffsetOfAd
 	|	tmp_AdvInfo.Amount,
 	|	tmp_AdvInfo.Key,
 	|	tmp_AdvInfo.%1,
-	//|	MAX(AdvKeys.Ref) AS AdvanceKey
 	|	AdvKeys.Ref AS AdvanceKey
 	|FROM
 	|	tmp_AdvInfo AS tmp_AdvInfo
@@ -1573,7 +1618,6 @@ Procedure CreateAdvancesKeys(Parameters, Records_AdvancesKey, Records_OffsetOfAd
 	|		AND tmp_AdvInfo.Partner = AdvKeys.Partner
 	|		AND tmp_AdvInfo.LegalName = AdvKeys.LegalName
 	|		AND tmp_AdvInfo.AdvanceAgreement = AdvKeys.AdvanceAgreement
-	//|		AND tmp_AdvInfo.AdvanceDocument = AdvKeys.AdvanceDocument
 	|		AND CASE
 	|			WHEN tmp_AdvInfo.Order.Ref IS NULL
 	|				THEN UNDEFINED
@@ -1596,12 +1640,6 @@ Procedure CreateAdvancesKeys(Parameters, Records_AdvancesKey, Records_OffsetOfAd
 	|		END end
 	|
 	|		AND AdvKeys.%2";
-//	|GROUP BY
-//	|	tmp_AdvInfo.Document,
-//	|	tmp_AdvInfo.%1,
-//	|	tmp_AdvInfo.Date,
-//	|	tmp_AdvInfo.Amount,
-//	|	tmp_AdvInfo.Key";
  
     Query.Text = StrTemplate(Query.Text, Parameters.OrderCloseType, Parameters.AdvanceType);
 	

@@ -25,9 +25,9 @@ Procedure SelectAtClient()
 	EndIf;
 	
 	Result = New Structure();
-	Result.Insert("Invoice", CurrentData.Invoice);
-	Result.Insert("Order"  , CurrentData.InvoiceOrder);
-	Result.Insert("Amount" , CurrentData.Debt);
+	Result.Insert("Document", CurrentData.Document);
+	Result.Insert("Order"   , CurrentData.InvoiceOrder);
+	Result.Insert("Amount"  , CurrentData.Advance);
 	
 	Close(Result);
 EndProcedure

@@ -957,7 +957,6 @@
             <items xsi:type="form:FormField">
               <name>SendDocumentsKey</name>
               <id>485</id>
-              <visible>true</visible>
               <enabled>true</enabled>
               <userVisible>
                 <common>true</common>
@@ -1677,7 +1676,6 @@
             <items xsi:type="form:FormField">
               <name>ReceiveDocumentsKey</name>
               <id>523</id>
-              <visible>true</visible>
               <enabled>true</enabled>
               <userVisible>
                 <common>true</common>
@@ -2445,7 +2443,6 @@
             <items xsi:type="form:FormField">
               <name>OffsetOfAdvancesInvoicesKey</name>
               <id>433</id>
-              <visible>true</visible>
               <enabled>true</enabled>
               <userVisible>
                 <common>true</common>
@@ -2561,6 +2558,10 @@
               <dataPath xsi:type="form:DataPath">
                 <segments>Object.OffsetOfAdvancesInvoices.Order</segments>
               </dataPath>
+              <handlers>
+                <event>OnChange</event>
+                <name>OffsetOfAdvancesInvoicesOrderOnChange</name>
+              </handlers>
               <extendedTooltip>
                 <name>OffsetOfAdvancesInvoicesOrderExtendedTooltip</name>
                 <id>542</id>
@@ -2579,6 +2580,60 @@
               <contextMenu>
                 <name>OffsetOfAdvancesInvoicesOrderContextMenu</name>
                 <id>541</id>
+                <visible>true</visible>
+                <enabled>true</enabled>
+                <userVisible>
+                  <common>true</common>
+                </userVisible>
+                <autoFill>true</autoFill>
+              </contextMenu>
+              <type>InputField</type>
+              <editMode>Enter</editMode>
+              <showInHeader>true</showInHeader>
+              <headerHorizontalAlign>Left</headerHorizontalAlign>
+              <showInFooter>true</showInFooter>
+              <extInfo xsi:type="form:InputFieldExtInfo">
+                <autoMaxWidth>true</autoMaxWidth>
+                <autoMaxHeight>true</autoMaxHeight>
+                <wrap>true</wrap>
+                <chooseType>true</chooseType>
+                <typeDomainEnabled>true</typeDomainEnabled>
+                <textEdit>true</textEdit>
+              </extInfo>
+            </items>
+            <items xsi:type="form:FormField">
+              <name>OffsetOfAdvancesInvoicesAmount</name>
+              <id>543</id>
+              <visible>true</visible>
+              <enabled>true</enabled>
+              <userVisible>
+                <common>true</common>
+              </userVisible>
+              <dataPath xsi:type="form:DataPath">
+                <segments>Object.OffsetOfAdvancesInvoices.Amount</segments>
+              </dataPath>
+              <handlers>
+                <event>OnChange</event>
+                <name>OffsetOfAdvancesInvoicesAmountOnChange</name>
+              </handlers>
+              <extendedTooltip>
+                <name>OffsetOfAdvancesInvoicesAmountExtendedTooltip</name>
+                <id>545</id>
+                <visible>true</visible>
+                <enabled>true</enabled>
+                <userVisible>
+                  <common>true</common>
+                </userVisible>
+                <type>Label</type>
+                <autoMaxWidth>true</autoMaxWidth>
+                <autoMaxHeight>true</autoMaxHeight>
+                <extInfo xsi:type="form:LabelDecorationExtInfo">
+                  <horizontalAlign>Left</horizontalAlign>
+                </extInfo>
+              </extendedTooltip>
+              <contextMenu>
+                <name>OffsetOfAdvancesInvoicesAmountContextMenu</name>
+                <id>544</id>
                 <visible>true</visible>
                 <enabled>true</enabled>
                 <userVisible>
@@ -2896,7 +2951,6 @@
             <items xsi:type="form:FormField">
               <name>OffsetOfAdvancesPaymentsKey</name>
               <id>457</id>
-              <visible>true</visible>
               <enabled>true</enabled>
               <userVisible>
                 <common>true</common>
@@ -2946,7 +3000,6 @@
             <items xsi:type="form:FormField">
               <name>OffsetOfAdvancesPaymentsKeyOwner</name>
               <id>463</id>
-              <visible>true</visible>
               <enabled>true</enabled>
               <userVisible>
                 <common>true</common>
@@ -3004,6 +3057,10 @@
               <dataPath xsi:type="form:DataPath">
                 <segments>Object.OffsetOfAdvancesPayments.Document</segments>
               </dataPath>
+              <handlers>
+                <event>OnChange</event>
+                <name>OffsetOfAdvancesPaymentsDocumentOnChange</name>
+              </handlers>
               <extendedTooltip>
                 <name>OffsetOfAdvancesPaymentsDocumentExtendedTooltip</name>
                 <id>462</id>
@@ -3035,6 +3092,118 @@
               <headerHorizontalAlign>Left</headerHorizontalAlign>
               <showInFooter>true</showInFooter>
               <extInfo xsi:type="form:InputFieldExtInfo">
+                <handlers>
+                  <event>StartChoice</event>
+                  <name>OffsetOfAdvancesPaymentsDocumentStartChoice</name>
+                </handlers>
+                <autoMaxWidth>true</autoMaxWidth>
+                <autoMaxHeight>true</autoMaxHeight>
+                <wrap>true</wrap>
+                <chooseType>true</chooseType>
+                <typeDomainEnabled>true</typeDomainEnabled>
+                <textEdit>true</textEdit>
+              </extInfo>
+            </items>
+            <items xsi:type="form:FormField">
+              <name>OffsetOfAdvancesPaymentsOrder</name>
+              <id>546</id>
+              <visible>true</visible>
+              <enabled>true</enabled>
+              <userVisible>
+                <common>true</common>
+              </userVisible>
+              <dataPath xsi:type="form:DataPath">
+                <segments>Object.OffsetOfAdvancesPayments.Order</segments>
+              </dataPath>
+              <handlers>
+                <event>OnChange</event>
+                <name>OffsetOfAdvancesPaymentsOrderOnChange</name>
+              </handlers>
+              <extendedTooltip>
+                <name>OffsetOfAdvancesPaymentsOrderExtendedTooltip</name>
+                <id>548</id>
+                <visible>true</visible>
+                <enabled>true</enabled>
+                <userVisible>
+                  <common>true</common>
+                </userVisible>
+                <type>Label</type>
+                <autoMaxWidth>true</autoMaxWidth>
+                <autoMaxHeight>true</autoMaxHeight>
+                <extInfo xsi:type="form:LabelDecorationExtInfo">
+                  <horizontalAlign>Left</horizontalAlign>
+                </extInfo>
+              </extendedTooltip>
+              <contextMenu>
+                <name>OffsetOfAdvancesPaymentsOrderContextMenu</name>
+                <id>547</id>
+                <visible>true</visible>
+                <enabled>true</enabled>
+                <userVisible>
+                  <common>true</common>
+                </userVisible>
+                <autoFill>true</autoFill>
+              </contextMenu>
+              <type>InputField</type>
+              <editMode>Enter</editMode>
+              <showInHeader>true</showInHeader>
+              <headerHorizontalAlign>Left</headerHorizontalAlign>
+              <showInFooter>true</showInFooter>
+              <extInfo xsi:type="form:InputFieldExtInfo">
+                <autoMaxWidth>true</autoMaxWidth>
+                <autoMaxHeight>true</autoMaxHeight>
+                <wrap>true</wrap>
+                <chooseType>true</chooseType>
+                <typeDomainEnabled>true</typeDomainEnabled>
+                <textEdit>true</textEdit>
+              </extInfo>
+            </items>
+            <items xsi:type="form:FormField">
+              <name>OffsetOfAdvancesPaymentsAmount</name>
+              <id>549</id>
+              <visible>true</visible>
+              <enabled>true</enabled>
+              <userVisible>
+                <common>true</common>
+              </userVisible>
+              <dataPath xsi:type="form:DataPath">
+                <segments>Object.OffsetOfAdvancesPayments.Amount</segments>
+              </dataPath>
+              <handlers>
+                <event>OnChange</event>
+                <name>OffsetOfAdvancesPaymentsAmountOnChange</name>
+              </handlers>
+              <extendedTooltip>
+                <name>OffsetOfAdvancesPaymentsAmountExtendedTooltip</name>
+                <id>551</id>
+                <visible>true</visible>
+                <enabled>true</enabled>
+                <userVisible>
+                  <common>true</common>
+                </userVisible>
+                <type>Label</type>
+                <autoMaxWidth>true</autoMaxWidth>
+                <autoMaxHeight>true</autoMaxHeight>
+                <extInfo xsi:type="form:LabelDecorationExtInfo">
+                  <horizontalAlign>Left</horizontalAlign>
+                </extInfo>
+              </extendedTooltip>
+              <contextMenu>
+                <name>OffsetOfAdvancesPaymentsAmountContextMenu</name>
+                <id>550</id>
+                <visible>true</visible>
+                <enabled>true</enabled>
+                <userVisible>
+                  <common>true</common>
+                </userVisible>
+                <autoFill>true</autoFill>
+              </contextMenu>
+              <type>InputField</type>
+              <editMode>Enter</editMode>
+              <showInHeader>true</showInHeader>
+              <headerHorizontalAlign>Left</headerHorizontalAlign>
+              <showInFooter>true</showInFooter>
+              <extInfo xsi:type="form:InputFieldExtInfo">
                 <autoMaxWidth>true</autoMaxWidth>
                 <autoMaxHeight>true</autoMaxHeight>
                 <wrap>true</wrap>
@@ -3046,7 +3215,6 @@
             <items xsi:type="form:FormField">
               <name>OffsetOfAdvancesPaymentsIsVisible</name>
               <id>466</id>
-              <visible>true</visible>
               <enabled>true</enabled>
               <userVisible>
                 <common>true</common>
@@ -4003,6 +4171,10 @@
     <handlers>
       <event>BeforeWriteAtServer</event>
       <name>BeforeWriteAtServer</name>
+    </handlers>
+    <handlers>
+      <event>AfterWrite</event>
+      <name>AfterWrite</name>
     </handlers>
     <repostOnWrite>true</repostOnWrite>
   </extInfo>

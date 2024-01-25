@@ -3,33 +3,27 @@
 	<item>
 		<selection>
 			<item>
-				<field>ObjectCurrenciesMovementType</field>
+				<field>OffsetOfAdvancesPaymentsKey</field>
 			</item>
 			<item>
-				<field>ObjectCurrenciesMovementTypeType</field>
+				<field>OffsetOfAdvancesPaymentsKeyOwner</field>
 			</item>
 			<item>
-				<field>ObjectCurrenciesCurrencyFrom</field>
+				<field>OffsetOfAdvancesPaymentsDocument</field>
 			</item>
 			<item>
-				<field>ObjectCurrenciesMovementTypeCurrency</field>
+				<field>OffsetOfAdvancesPaymentsOrder</field>
 			</item>
 			<item>
-				<field>ObjectCurrenciesShowReverseRate</field>
+				<field>OffsetOfAdvancesPaymentsAmount</field>
 			</item>
 			<item>
-				<field>ObjectCurrenciesRatePresentation</field>
-			</item>
-			<item>
-				<field>ObjectCurrenciesMultiplicity</field>
-			</item>
-			<item>
-				<field>ObjectCurrenciesAmount</field>
+				<field>OffsetOfAdvancesPaymentsLineNumber</field>
 			</item>
 		</selection>
 		<filter>
 			<item xsi:type="FilterItemComparison">
-				<left xsi:type="dcscor:Field">Object.Currencies.IsVisible</left>
+				<left xsi:type="dcscor:Field">Object.OffsetOfAdvancesPayments.IsVisible</left>
 				<comparisonType>Equal</comparisonType>
 				<right xsi:type="xs:boolean">false</right>
 			</item>

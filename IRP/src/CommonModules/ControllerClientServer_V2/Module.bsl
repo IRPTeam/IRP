@@ -14978,6 +14978,152 @@ EndProcedure
 
 #EndRegion
 
+#Region OFFSET_OF_ADVANCES_INVOICES
+
+#Region OFFSET_OF_ADVANCES_INVOICES_INVOICE
+
+// OffsetOfAdvancesInvoices.Invoice.OnChange
+Procedure OffsetOfAdvancesInvoicesInvoiceOnChange(Parameters) Export
+	Binding = BindOffsetOfAdvancesInvoicesInvoice(Parameters);
+	ModelClientServer_V2.EntryPoint(Binding.StepsEnabler, Parameters);
+EndProcedure
+
+// OffsetOfAdvancesInvoices.Invoice.Set
+Procedure SetOffsetOfAdvancesInvoicesInvoice(Parameters, Results) Export
+	Binding = BindOffsetOfAdvancesInvoicesInvoice(Parameters);
+	SetterObject(Binding.StepsEnabler, Binding.DataPath, Parameters, Results);
+EndProcedure
+
+// OffsetOfAdvancesInvoices.Invoice.Bind
+Function BindOffsetOfAdvancesInvoicesInvoice(Parameters)
+	DataPath = "OffsetOfAdvancesInvoices.Invoice";
+	Binding = New Structure();
+	Return BindSteps("BindVoid", DataPath, Binding, Parameters, "BindOffsetOfAdvancesInvoicesInvoice");
+EndFunction
+
+#EndRegion
+
+#Region OFFSET_OF_ADVANCES_INVOICES_ORDER
+
+// OffsetOfAdvancesInvoices.Order.OnChange
+Procedure OffsetOfAdvancesInvoicesOrderOnChange(Parameters) Export
+	Binding = BindOffsetOfAdvancesInvoicesOrder(Parameters);
+	ModelClientServer_V2.EntryPoint(Binding.StepsEnabler, Parameters);
+EndProcedure
+
+// OffsetOfAdvancesInvoices.Order.Set
+Procedure SetOffsetOfAdvancesInvoicesOrder(Parameters, Results) Export
+	Binding = BindOffsetOfAdvancesInvoicesOrder(Parameters);
+	SetterObject(Binding.StepsEnabler, Binding.DataPath, Parameters, Results);
+EndProcedure
+
+// OffsetOfAdvancesInvoices.Order.Bind
+Function BindOffsetOfAdvancesInvoicesOrder(Parameters)
+	DataPath = "OffsetOfAdvancesInvoices.Order";
+	Binding = New Structure();
+	Return BindSteps("BindVoid", DataPath, Binding, Parameters, "BindOffsetOfAdvancesInvoicesOrder");
+EndFunction
+
+#EndRegion
+
+#Region OFFSET_OF_ADVANCES_INVOICES_AMOUNT
+
+// OffsetOfAdvancesInvoices.Amount.OnChange
+Procedure OffsetOfAdvancesInvoicesAmountOnChange(Parameters) Export
+	Binding = BindOffsetOfAdvancesInvoicesAmount(Parameters);
+	ModelClientServer_V2.EntryPoint(Binding.StepsEnabler, Parameters);
+EndProcedure
+
+// OffsetOfAdvancesInvoices.Amount.Set
+Procedure SetOffsetOfAdvancesInvoicesAmount(Parameters, Results) Export
+	Binding = BindOffsetOfAdvancesInvoicesAmount(Parameters);
+	SetterObject(Binding.StepsEnabler, Binding.DataPath, Parameters, Results);
+EndProcedure
+
+// OffsetOfAdvancesInvoices.Amount.Bind
+Function BindOffsetOfAdvancesInvoicesAmount(Parameters)
+	DataPath = "OffsetOfAdvancesInvoices.Amount";
+	Binding = New Structure();
+	Return BindSteps("BindVoid", DataPath, Binding, Parameters, "BindOffsetOfAdvancesInvoicesAmount");
+EndFunction
+
+#EndRegion
+
+#EndRegion
+
+#Region OFFSET_OF_ADVANCES_PAYMENTS
+
+#Region OFFSET_OF_ADVANCES_PATMENTS_DOCUMENT
+
+// OffsetOfAdvancesPayments.Document.OnChange
+Procedure OffsetOfAdvancesPaymentsDocumentOnChange(Parameters) Export
+	Binding = BindOffsetOfAdvancesPaymentsDocument(Parameters);
+	ModelClientServer_V2.EntryPoint(Binding.StepsEnabler, Parameters);
+EndProcedure
+
+// OffsetOfAdvancesPayments.Document.Set
+Procedure SetOffsetOfAdvancesPaymentsDocument(Parameters, Results) Export
+	Binding = BindOffsetOfAdvancesPaymentsDocument(Parameters);
+	SetterObject(Binding.StepsEnabler, Binding.DataPath, Parameters, Results);
+EndProcedure
+
+// OffsetOfAdvancesPayments.Document.Bind
+Function BindOffsetOfAdvancesPaymentsDocument(Parameters)
+	DataPath = "OffsetOfAdvancesPayments.Document";
+	Binding = New Structure();
+	Return BindSteps("BindVoid", DataPath, Binding, Parameters, "BindOffsetOfAdvancesPaymentsDocument");
+EndFunction
+
+#EndRegion
+
+#Region OFFSET_OF_ADVANCES_PATMENTS_ORDER
+
+// OffsetOfAdvancesPayments.Order.OnChange
+Procedure OffsetOfAdvancesPaymentsOrderOnChange(Parameters) Export
+	Binding = BindOffsetOfAdvancesPaymentsOrder(Parameters);
+	ModelClientServer_V2.EntryPoint(Binding.StepsEnabler, Parameters);
+EndProcedure
+
+// OffsetOfAdvancesPayments.Order.Set
+Procedure SetOffsetOfAdvancesPaymentsOrder(Parameters, Results) Export
+	Binding = BindOffsetOfAdvancesPaymentsOrder(Parameters);
+	SetterObject(Binding.StepsEnabler, Binding.DataPath, Parameters, Results);
+EndProcedure
+
+// OffsetOfAdvancesPayments.Order.Bind
+Function BindOffsetOfAdvancesPaymentsOrder(Parameters)
+	DataPath = "OffsetOfAdvancesPayments.Order";
+	Binding = New Structure();
+	Return BindSteps("BindVoid", DataPath, Binding, Parameters, "BindOffsetOfAdvancesPaymentsOrder");
+EndFunction
+
+#EndRegion
+
+#Region OFFSET_OF_ADVANCES_PATMENTS_AMOUNT
+
+// OffsetOfAdvancesPayments.Amount.OnChange
+Procedure OffsetOfAdvancesPaymentsAmountOnChange(Parameters) Export
+	Binding = BindOffsetOfAdvancesPaymentsAmount(Parameters);
+	ModelClientServer_V2.EntryPoint(Binding.StepsEnabler, Parameters);
+EndProcedure
+
+// OffsetOfAdvancesPayments.Amount.Set
+Procedure SetOffsetOfAdvancesPaymentsAmount(Parameters, Results) Export
+	Binding = BindOffsetOfAdvancesPaymentsAmount(Parameters);
+	SetterObject(Binding.StepsEnabler, Binding.DataPath, Parameters, Results);
+EndProcedure
+
+// OffsetOfAdvancesPayments.Amount.Bind
+Function BindOffsetOfAdvancesPaymentsAmount(Parameters)
+	DataPath = "OffsetOfAdvancesPayments.Amount";
+	Binding = New Structure();
+	Return BindSteps("BindVoid", DataPath, Binding, Parameters, "BindOffsetOfAdvancesPaymentsAmount");
+EndFunction
+
+#EndRegion
+
+#EndRegion
+
 // called when all chain steps is complete
 Procedure OnChainComplete(Parameters) Export
 	#IF Client THEN

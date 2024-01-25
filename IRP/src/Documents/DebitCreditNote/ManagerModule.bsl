@@ -78,11 +78,15 @@ EndFunction
 
 Function GetQueryTextsSecondaryTables()
 	QueryArray = New Array;
+	QueryArray.Add(Invoices());
+	QueryArray.Add(Payments());
+	QueryArray.Add(OffsetOfAdvances());
 	Return QueryArray;
 EndFunction
 
 Function GetQueryTextsMasterTables()
 	QueryArray = New Array;
+	QueryArray.Add(T2018S_UserDefinedOffsetOfAdvances());
 	Return QueryArray;
 EndFunction
 
@@ -90,9 +94,100 @@ EndFunction
 
 #Region Posting_SourceTable
 
+Function Invoices()
+	Return
+		"SELECT
+		|	Invoices.Ref.Date AS Period,
+		|	Invoices.Ref.Company AS Company,
+		|	Invoices.Ref.Branch AS Branch,
+		|	Invoices.Ref.Currency AS Currency,
+		|	Invoices.Ref.Partner AS Partner,
+		|	Invoices.Ref.Agreement AS Agreement,
+		|	Invoices.Ref.LegalName AS LegalName,
+		|	Invoices.Order AS Order,
+		|	Invoices.Invoice AS TransactionDocument,
+		|	Invoices.Amount,
+		|	Invoices.Key,
+		|	Invoices.Ref.Agreement.Type = VALUE(Enum.AgreementTypes.Customer)
+		|	OR Invoices.Ref.Agreement.Type = VALUE(Enum.AgreementTypes.TradeAgent) AS IsCustomerTransaction,
+		|	Invoices.Ref.Agreement.Type = VALUE(Enum.AgreementTypes.Vendor)
+		|	OR Invoices.Ref.Agreement.Type = VALUE(Enum.AgreementTypes.Consignor) AS IsVendorTransaction
+		|INTO Invoices
+		|FROM
+		|	Document.DebitCreditNote.OffsetOfAdvancesInvoices AS Invoices
+		|WHERE
+		|	Invoices.Ref = &Ref";
+EndFunction
+		
+Function Payments()
+	Return
+		"SELECT
+		|	Payments.Document AS AdvanceDocument,
+		|	Payments.KeyOwner,
+		|	Payments.Ref.Agreement.Type = VALUE(Enum.AgreementTypes.Customer)
+		|	OR Payments.Ref.Agreement.Type = VALUE(Enum.AgreementTypes.TradeAgent) AS IsCustomerAdvance,
+		|	Payments.Ref.Agreement.Type = VALUE(Enum.AgreementTypes.Vendor)
+		|	OR Payments.Ref.Agreement.Type = VALUE(Enum.AgreementTypes.Consignor) AS IsVendorAdvance
+		|INTO Payments
+		|FROM
+		|	Document.DebitCreditNote.OffsetOfAdvancesPayments AS Payments
+		|WHERE
+		|	Payments.Ref = &Ref";
+EndFunction
+
+Function OffsetOfAdvances()
+	Return
+		"SELECT
+		|	Invoices.Period,
+		|	Invoices.Company,
+		|	Invoices.Branch,
+		|	Invoices.Currency,
+		|	Invoices.Partner,
+		|	Invoices.Agreement,
+		|	Invoices.LegalName,
+		|	Invoices.Order,
+		|	Payments.AdvanceDocument,
+		|	Invoices.TransactionDocument,
+		|	Invoices.IsCustomerTransaction,
+		|	Invoices.IsVendorTransaction,
+		|	Payments.IsCustomerAdvance,
+		|	Payments.IsVendorAdvance
+		|INTO OffsetOfAdvances
+		|FROM
+		|	Invoices AS Invoices
+		|		INNER JOIN Payments AS Payments
+		|		ON Invoices.Key = Payments.KeyOwner
+		|		AND (Invoices.IsCustomerTransaction
+		|		OR Invoices.IsVendorTransaction
+		|		OR Payments.IsCustomerAdvance
+		|		OR Payments.IsVendorAdvance)";
+EndFunction
+
 #EndRegion
 
 #Region Posting_MainTables
+
+Function T2018S_UserDefinedOffsetOfAdvances()
+	Return
+		"SELECT
+		|	OffsetOfAdvances.Period,
+		|	OffsetOfAdvances.Company,
+		|	OffsetOfAdvances.Branch,
+		|	OffsetOfAdvances.Currency,
+		|	OffsetOfAdvances.Partner,
+		|	OffsetOfAdvances.Agreement,
+		|	OffsetOfAdvances.LegalName,
+		|	OffsetOfAdvances.Order,
+		|	OffsetOfAdvances.AdvanceDocument,
+		|	OffsetOfAdvances.TransactionDocument,
+		|	OffsetOfAdvances.IsVendorAdvance,
+		|	OffsetOfAdvances.IsCustomerAdvance,
+		|	OffsetOfAdvances.IsVendorTransaction,
+		|	OffsetOfAdvances.IsCustomerTransaction
+		|INTO T2018S_UserDefinedOffsetOfAdvances
+		|FROM
+		|	OffsetOfAdvances AS OffsetOfAdvances";
+EndFunction
 
 #EndRegion
 

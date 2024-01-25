@@ -245,6 +245,26 @@
   <fullTextSearch>Use</fullTextSearch>
   <dataHistory>Use</dataHistory>
  </attributes>
+ <attributes uuid="37ad0249-bfd4-4fc8-be5d-9bd061ae79a1">
+  <name>PrintInfo</name>
+  <synonym>
+   <key>en</key>
+   <value>Print info</value>
+  </synonym>
+  <synonym>
+   <key>ru</key>
+   <value>Информация для печати</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Bilgi yazdır</value>
+  </synonym>
+  <type>
+   <types>CatalogRef.PrintInfo</types>
+  </type>
+  <createOnInput>Use</createOnInput>
+  <fullTextSearch>Use</fullTextSearch>
+ </attributes>
  <tabularSections uuid="8776674e-0405-4e17-9c00-6b256c306c3b">
   <producedTypes>
    <objectType typeId="99a8f668-6c85-483b-95d0-571935ca7020" valueTypeId="c692eb30-a872-4dd4-b7fb-685783ca53b7"/>

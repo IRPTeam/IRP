@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mdclass:CommonModule xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="429f965c-c12d-4de6-9332-11359ed0f3b7">
+ <name>PrintInfoServer</name>
+ <synonym>
+  <key>en</key>
+  <value>Print info server</value>
+ </synonym>
+ <synonym>
+  <key>ru</key>
+  <value>Информация для печати сервер</value>
+ </synonym>
+ <synonym>
+  <key>tr</key>
+  <value>Sunucu bilgisi yazdır</value>
+ </synonym>
+ <server>true</server>
+ <externalConnection>true</externalConnection>
+ <clientOrdinaryApplication>true</clientOrdinaryApplication>
+ <serverCall>true</serverCall>
+</mdclass:CommonModule>

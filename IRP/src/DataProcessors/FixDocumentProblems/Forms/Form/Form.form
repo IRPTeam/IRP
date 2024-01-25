@@ -102,6 +102,56 @@
      <showInFooter>true</showInFooter>
      <extInfo xsi:type="form:CheckBoxFieldExtInfo"/>
     </items>
+    <items xsi:type="form:FormField">
+     <name>Company</name>
+     <id>235</id>
+     <visible>true</visible>
+     <enabled>true</enabled>
+     <userVisible>
+      <common>true</common>
+     </userVisible>
+     <dataPath xsi:type="form:DataPath">
+      <segments>Company</segments>
+     </dataPath>
+     <extendedTooltip>
+      <name>CompanyExtendedTooltip</name>
+      <id>237</id>
+      <visible>true</visible>
+      <enabled>true</enabled>
+      <userVisible>
+       <common>true</common>
+      </userVisible>
+      <type>Label</type>
+      <autoMaxWidth>true</autoMaxWidth>
+      <autoMaxHeight>true</autoMaxHeight>
+      <extInfo xsi:type="form:LabelDecorationExtInfo">
+       <horizontalAlign>Left</horizontalAlign>
+      </extInfo>
+     </extendedTooltip>
+     <contextMenu>
+      <name>CompanyContextMenu</name>
+      <id>236</id>
+      <visible>true</visible>
+      <enabled>true</enabled>
+      <userVisible>
+       <common>true</common>
+      </userVisible>
+      <autoFill>true</autoFill>
+     </contextMenu>
+     <type>InputField</type>
+     <editMode>Enter</editMode>
+     <showInHeader>true</showInHeader>
+     <headerHorizontalAlign>Left</headerHorizontalAlign>
+     <showInFooter>true</showInFooter>
+     <extInfo xsi:type="form:InputFieldExtInfo">
+      <autoMaxWidth>true</autoMaxWidth>
+      <autoMaxHeight>true</autoMaxHeight>
+      <wrap>true</wrap>
+      <chooseType>true</chooseType>
+      <typeDomainEnabled>true</typeDomainEnabled>
+      <textEdit>true</textEdit>
+     </extInfo>
+    </items>
     <visible>true</visible>
     <enabled>true</enabled>
     <userVisible>
@@ -136,7 +186,7 @@
     </extendedTooltip>
     <type>UsualGroup</type>
     <extInfo xsi:type="form:UsualGroupExtInfo">
-     <group>HorizontalIfPossible</group>
+     <group>AlwaysHorizontal</group>
      <behavior>Auto</behavior>
      <showLeftMargin>true</showLeftMargin>
      <united>true</united>
@@ -1102,6 +1152,39 @@
     <autoCommandBar>
      <name>CheckListCommandBar</name>
      <id>43</id>
+     <items xsi:type="form:Button">
+      <name>CheckListUpdateCheckSelectedRows</name>
+      <id>238</id>
+      <visible>true</visible>
+      <enabled>true</enabled>
+      <userVisible>
+       <common>true</common>
+      </userVisible>
+      <extendedTooltip>
+       <name>CheckListUpdateCheckSelectedRowsExtendedTooltip</name>
+       <id>239</id>
+       <visible>true</visible>
+       <enabled>true</enabled>
+       <userVisible>
+        <common>true</common>
+       </userVisible>
+       <type>Label</type>
+       <autoMaxWidth>true</autoMaxWidth>
+       <autoMaxHeight>true</autoMaxHeight>
+       <extInfo xsi:type="form:LabelDecorationExtInfo">
+        <horizontalAlign>Left</horizontalAlign>
+       </extInfo>
+      </extendedTooltip>
+      <commandName>Form.Command.UpdateCheckSelectedRows</commandName>
+      <representation>Auto</representation>
+      <autoMaxWidth>true</autoMaxWidth>
+      <autoMaxHeight>true</autoMaxHeight>
+      <placementArea>UserCmds</placementArea>
+      <picture xsi:type="core:PictureRef">
+       <picture>StdPicture.Reread</picture>
+      </picture>
+      <representationInContextMenu>Auto</representationInContextMenu>
+     </items>
      <items xsi:type="form:Button">
       <name>CheckListSortListAsc</name>
       <id>87</id>
@@ -2375,6 +2458,36 @@
     <autoCommandBar>
      <name>PostingInfoCommandBar</name>
      <id>136</id>
+     <items xsi:type="form:Button">
+      <name>PostingInfoUpdatePostingSelectedRows</name>
+      <id>242</id>
+      <visible>true</visible>
+      <enabled>true</enabled>
+      <userVisible>
+       <common>true</common>
+      </userVisible>
+      <extendedTooltip>
+       <name>PostingInfoUpdatePostingSelectedRowsExtendedTooltip</name>
+       <id>243</id>
+       <visible>true</visible>
+       <enabled>true</enabled>
+       <userVisible>
+        <common>true</common>
+       </userVisible>
+       <type>Label</type>
+       <autoMaxWidth>true</autoMaxWidth>
+       <autoMaxHeight>true</autoMaxHeight>
+       <extInfo xsi:type="form:LabelDecorationExtInfo">
+        <horizontalAlign>Left</horizontalAlign>
+       </extInfo>
+      </extendedTooltip>
+      <commandName>Form.Command.UpdatePostingSelectedRows</commandName>
+      <representation>Auto</representation>
+      <autoMaxWidth>true</autoMaxWidth>
+      <autoMaxHeight>true</autoMaxHeight>
+      <placementArea>UserCmds</placementArea>
+      <representationInContextMenu>Auto</representationInContextMenu>
+     </items>
      <items xsi:type="form:FormGroup">
       <name>PostingInfoGroupCheck</name>
       <id>199</id>
@@ -4795,6 +4908,36 @@
    </itemValueType>
   </extInfo>
  </attributes>
+ <attributes>
+  <name>Company</name>
+  <title>
+   <key>en</key>
+   <value>Company</value>
+  </title>
+  <title>
+   <key>ru</key>
+   <value>Организация</value>
+  </title>
+  <title>
+   <key>tr</key>
+   <value>Şirket</value>
+  </title>
+  <id>50</id>
+  <valueType>
+   <types>ValueList</types>
+  </valueType>
+  <view>
+   <common>true</common>
+  </view>
+  <edit>
+   <common>true</common>
+  </edit>
+  <extInfo xsi:type="form:ValueListExtInfo">
+   <itemValueType>
+    <types>CatalogRef.Companies</types>
+   </itemValueType>
+  </extInfo>
+ </attributes>
  <formCommands>
   <name>FillDocuments</name>
   <title>
@@ -5176,6 +5319,86 @@
   <action xsi:type="form:FormCommandHandlerContainer">
    <handler>
     <name>PostingInfoClearSkipRows</name>
+   </handler>
+  </action>
+  <currentRowUse>Auto</currentRowUse>
+ </formCommands>
+ <formCommands>
+  <name>UpdateCheckSelectedRows</name>
+  <title>
+   <key>en</key>
+   <value>Update check (selected rows)</value>
+  </title>
+  <title>
+   <key>ru</key>
+   <value>Обновить проверку (выбранные строки)</value>
+  </title>
+  <title>
+   <key>tr</key>
+   <value>Kontrolü güncelle (seçili satırlar)</value>
+  </title>
+  <id>18</id>
+  <toolTip>
+   <key>en</key>
+   <value>Update posting (selected rows)</value>
+  </toolTip>
+  <toolTip>
+   <key>ru</key>
+   <value>Обновить проводки (выбранные строки)</value>
+  </toolTip>
+  <toolTip>
+   <key>tr</key>
+   <value>Gönderimi güncelle (seçili satırlar)</value>
+  </toolTip>
+  <use>
+   <common>true</common>
+  </use>
+  <picture xsi:type="core:PictureRef">
+   <picture>StdPicture.Reread</picture>
+  </picture>
+  <action xsi:type="form:FormCommandHandlerContainer">
+   <handler>
+    <name>UpdateCheckSelectedRows</name>
+   </handler>
+  </action>
+  <currentRowUse>Auto</currentRowUse>
+ </formCommands>
+ <formCommands>
+  <name>UpdatePostingSelectedRows</name>
+  <title>
+   <key>en</key>
+   <value>Update posting (selected rows)</value>
+  </title>
+  <title>
+   <key>ru</key>
+   <value>Обновить проводки (выбранные строки)</value>
+  </title>
+  <title>
+   <key>tr</key>
+   <value>Gönderimi güncelle (seçili satırlar)</value>
+  </title>
+  <id>19</id>
+  <toolTip>
+   <key>en</key>
+   <value>Update posting (selected rows)</value>
+  </toolTip>
+  <toolTip>
+   <key>ru</key>
+   <value>Обновить проводки (выбранные строки)</value>
+  </toolTip>
+  <toolTip>
+   <key>tr</key>
+   <value>Gönderimi güncelle (seçili satırlar)</value>
+  </toolTip>
+  <use>
+   <common>true</common>
+  </use>
+  <picture xsi:type="core:PictureRef">
+   <picture>StdPicture.Reread</picture>
+  </picture>
+  <action xsi:type="form:FormCommandHandlerContainer">
+   <handler>
+    <name>UpdatePostingSelectedRows</name>
    </handler>
   </action>
   <currentRowUse>Auto</currentRowUse>

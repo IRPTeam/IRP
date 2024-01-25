@@ -455,6 +455,10 @@
   <event>OnCreateAtServer</event>
   <name>OnCreateAtServer</name>
  </handlers>
+ <handlers>
+  <event>OnOpen</event>
+  <name>OnOpen</name>
+ </handlers>
  <windowOpeningMode>LockOwnerWindow</windowOpeningMode>
  <autoTitle>true</autoTitle>
  <autoUrl>true</autoUrl>
@@ -538,6 +542,10 @@
   <handlers>
    <event>BeforeWriteAtServer</event>
    <name>BeforeWriteAtServer</name>
+  </handlers>
+  <handlers>
+   <event>OnReadAtServer</event>
+   <name>OnReadAtServer</name>
   </handlers>
  </extInfo>
 </form:Form>

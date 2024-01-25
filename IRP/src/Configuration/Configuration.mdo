@@ -535,8 +535,8 @@
  <commonModules>CommonModule.CatCashAccountsServer</commonModules>
  <commonModules>CommonModule.CatCompaniesClient</commonModules>
  <commonModules>CommonModule.CatCompaniesServer</commonModules>
- <commonModules>CommonModule.CatExpenseAndRevenueTypesServer</commonModules>
  <commonModules>CommonModule.CatConfigurationMetadataServer</commonModules>
+ <commonModules>CommonModule.CatExpenseAndRevenueTypesServer</commonModules>
  <commonModules>CommonModule.CatItemsServer</commonModules>
  <commonModules>CommonModule.CatPartnersServer</commonModules>
  <commonModules>CommonModule.CatRetailCustomersClient</commonModules>
@@ -774,6 +774,7 @@
  <commonModules>CommonModule.POSClient</commonModules>
  <commonModules>CommonModule.POSServer</commonModules>
  <commonModules>CommonModule.PostingServer</commonModules>
+ <commonModules>CommonModule.PrintInfoServer</commonModules>
  <commonModules>CommonModule.RowIDInfoClient</commonModules>
  <commonModules>CommonModule.RowIDInfoClientServer</commonModules>
  <commonModules>CommonModule.RowIDInfoPrivileged</commonModules>
@@ -1088,6 +1089,7 @@
  <catalogs>Catalog.DataMappingItems</catalogs>
  <catalogs>Catalog.DepreciationSchedules</catalogs>
  <catalogs>Catalog.EmployeePositions</catalogs>
+ <catalogs>Catalog.EmployeeSchedule</catalogs>
  <catalogs>Catalog.EquipmentDrivers</catalogs>
  <catalogs>Catalog.ExpenseAndRevenueTypes</catalogs>
  <catalogs>Catalog.Extensions</catalogs>
@@ -1125,7 +1127,9 @@
  <catalogs>Catalog.PlanningPeriods</catalogs>
  <catalogs>Catalog.PriceKeys</catalogs>
  <catalogs>Catalog.PriceTypes</catalogs>
+ <catalogs>Catalog.PrintInfo</catalogs>
  <catalogs>Catalog.PrintTemplates</catalogs>
+ <catalogs>Catalog.Projects</catalogs>
  <catalogs>Catalog.ReportOptions</catalogs>
  <catalogs>Catalog.RetailCustomers</catalogs>
  <catalogs>Catalog.RowIDs</catalogs>
@@ -1147,8 +1151,6 @@
  <catalogs>Catalog.Vehicles</catalogs>
  <catalogs>Catalog.VehicleTypes</catalogs>
  <catalogs>Catalog.Workstations</catalogs>
- <catalogs>Catalog.EmployeeSchedule</catalogs>
- <catalogs>Catalog.Projects</catalogs>
  <documents>Document.AdditionalAccrual</documents>
  <documents>Document.AdditionalCostAllocation</documents>
  <documents>Document.AdditionalDeduction</documents>

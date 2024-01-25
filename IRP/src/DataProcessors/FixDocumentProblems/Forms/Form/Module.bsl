@@ -163,14 +163,15 @@ Procedure QuickFixError(Command)
 			DocRefErrors = Map.Get(ErrorRow.Ref);
 			If DocRefErrors = Undefined Then
 				DocRefErrors = New Structure;
-				DocRefErrors.Insert(ErrorID, New Structure("Result, RowKey", New Array, New Array));
+				DocRefErrors.Insert(ErrorID, New Array);
 				Map.Insert(ErrorRow.Ref, DocRefErrors);
 			EndIf;
-			DocRefErrors[ErrorID].RowKey.Add(ErrorRow.RowKey);
+			DocRefErrors[ErrorID].Add(ErrorRow.RowKey);
 		EndDo;
 	EndDo;
 	
-	RunQuickFixLoop(Map);
+	JobSettingsArray = GetJobsForQuickFix(Map);
+	BackgroundJobAPIClient.OpenJobForm(JobSettingsArray, ThisObject);
 	
 	ErrorRecord.Fixed = True;
 EndProcedure
@@ -193,91 +194,84 @@ Procedure QuickFix(Command)
 		EndIf;
 		
 		If Not DocRefErrors.Property(Row.ErrorID) Then
-			DocRefErrors.Insert(Row.ErrorID, New Structure("Result, RowKey", New Array, New Array));
+			DocRefErrors.Insert(Row.ErrorID, New Array);
 		EndIf;
 		
-		DocRefErrors[Row.ErrorID].RowKey.Add(Row.RowKey);
+		DocRefErrors[Row.ErrorID].Add(Row.RowKey);
 	EndDo;
 	
-	RunQuickFixLoop(Map);
+	JobSettingsArray = GetJobsForQuickFix(Map);
+	BackgroundJobAPIClient.OpenJobForm(JobSettingsArray, ThisObject);
 EndProcedure
 
-&AtClient
-Procedure RunQuickFixLoop(Map)
-	TotalDocument = Map.Count();
-	While True Do
-		CurrentDoc = New Map;
-		For Each Doc In Map Do
-			CurrentDoc.Insert(Doc.Key, Doc.Value);
-			Map.Delete(Doc.Key);
+&AtServer
+Function GetJobsForQuickFix(Map)
+	JobDataSettings = BackgroundJobAPIServer.JobDataSettings();
+	JobDataSettings.CallbackFunction = "GetJobsForQuickFix_Callback";
+	JobDataSettings.ProcedurePath = "AdditionalDocumentTableControl.QuickFixArray";
+	JobDataSettings.CallbackWhenAllJobsDone = False;
+					
+	DocsInPack = 100;
+	StreamArray = New Array;
+	Pack = 1;
+	TotalDocs = Map.Count();
+	For Each Row In Map Do
+		StreamArray.Add(Row);
+	 	
+	 	If StreamArray.Count() = DocsInPack Then
+	 		JobSettings = BackgroundJobAPIServer.JobSettings();
+			JobSettings.ProcedureParams.Add(StreamArray);
+			JobSettings.ProcedureParams.Add(True);
+			JobSettings.Description = "Quick fix: " + Pack + " * (" + DocsInPack + ") / " + TotalDocs;
+			JobDataSettings.JobSettings.Add(JobSettings);
 			
-			If CurrentDoc.Count() > Int(TotalDocument / 100) Then
-				Break;
-			EndIf;
-		EndDo;
-		
-		If CurrentDoc.Count() = 0 Then
-			Break;
-		EndIf;
-		
-		UserInterruptProcessing();
-		Status("Quick fix. Left: " + Map.Count(), 100 * (TotalDocument - Map.Count()) / TotalDocument, Doc.Key);
-		
-		Result = QuickFixAtServer(CurrentDoc);
-		SetFlagFixed(Result);
+			StreamArray = New Array;
+	 		Pack = Pack + 1;
+	 	EndIf;
 	EndDo;
-	ShowMessageBox(, R().InfoMessage_005);
-EndProcedure
+	If StreamArray.Count() > 0 Then
+		JobSettings = BackgroundJobAPIServer.JobSettings();
+		JobSettings.ProcedureParams.Add(StreamArray);
+		JobSettings.ProcedureParams.Add(True);
+		JobSettings.Description = "Quick fix: " + Pack + " * (" + StreamArray.Count() + ") / " + TotalDocs;
+		JobDataSettings.JobSettings.Add(JobSettings);
+ 	EndIf;
 
-&AtServerNoContext
-Function QuickFixAtServer(Val CurrentDoc)
-	For Each Doc In CurrentDoc Do
-		For Each Error In Doc.Value Do
-			Try
-				Error.Value.Result = AdditionalDocumentTableControl.QuickFix(Doc.Key, Error.Value.RowKey, Error.Key);
-			Except
-				Errors = "Errors in " + Doc.Key + Chars.LF + ErrorProcessing.BriefErrorDescription(ErrorInfo());
-				CommonFunctionsClientServer.ShowUsersMessage(Errors);
-				Error.Value.Result.Add(Errors);
-			EndTry;
-		EndDo;
-	EndDo;
-	Return CurrentDoc;
+	Return JobDataSettings;
+	
 EndFunction
 
+// Get jobs for quick fix callback.
+// 
+// Parameters:
+//  Result - See BackgroundJobAPIServer.GetJobsResult
+//  AllJobDone - Boolean - 
 &AtClient
-Procedure SetFlagFixed(DocsData)
-	For Each DocumentData In DocsData Do
-		For Each ErrorRow In DocumentData.Value Do
-			FixedArray = New Array;
-			For Each RowKeyValue In ErrorRow.Value.RowKey Do
-				FixedArray.Add(RowKeyValue);
-			EndDo;
+Procedure GetJobsForQuickFix_Callback(Result, AllJobDone) Export
+	
+	For Each Row In Result Do
+		
+		If Not Row.Result Then
+			Continue;
+		EndIf;
+		DocsData = CommonFunctionsServer.GetFromCache(Row.CacheKey); // See AdditionalDocumentTableControl.QuickFixArray
+		For Each DocumentData In DocsData Do
+			FixedArray = DocumentData.RowID;
 			If FixedArray.Count() = 0 Then
 				Continue;
 			EndIf;
 			
 			For Each CheckRow In ThisObject.CheckList.GetItems() Do
-				If CheckRow.Ref = DocumentData.Key Then
-					If ErrorRow.Value.Result.Count() = 0 Then
-						AllFixed = True;
-						For Each CheckSubRow In CheckRow.GetItems() Do
-							If CheckSubRow.ErrorID = ErrorRow.Key And FixedArray.Find(CheckSubRow.RowKey) <> Undefined Then
-								CheckSubRow.Fixed = True;
-							EndIf;
-							AllFixed = AllFixed And CheckSubRow.Fixed;
-						EndDo;
-						CheckRow.Fixed = AllFixed;
-					Else
-						ProblemWhileQuickFix = StrConcat(ErrorRow.Value.Result, Chars.CR);
-						For Each CheckSubRow In CheckRow.GetItems() Do
-							If CheckSubRow.ErrorID = ErrorRow.Key And FixedArray.Find(CheckSubRow.RowKey) <> Undefined Then
-								CheckSubRow.ProblemWhileQuickFix = ProblemWhileQuickFix;
-							EndIf;
-						EndDo;
-					EndIf;
-					Break;
+				If Not CheckRow.Ref = DocumentData.Ref Then
+					Continue;
 				EndIf;
+				For Each CheckSubRow In CheckRow.GetItems() Do
+					If CheckSubRow.ErrorID = DocumentData.ErrorID And FixedArray.Find(CheckSubRow.RowKey) <> Undefined Then
+						CheckSubRow.ProblemWhileQuickFix = DocumentData.Description;
+						CheckSubRow.Fixed = DocumentData.Result;
+					EndIf;
+				EndDo;
+				Break;
 			EndDo;
 		EndDo;
 	EndDo;
@@ -384,13 +378,13 @@ Function GetJobsForCheckPostingDocuments()
 					
 	DocsInPack = 100;
 	For Each TypeItem In TypesTable Do
-		 DocumentsRows = DocumentList.FindRows(New Structure("DocumentType", TypeItem.DocumentType));
+		DocumentsRows = DocumentList.FindRows(New Structure("DocumentType", TypeItem.DocumentType));
 		 
 		StreamArray = New Array;
-		 Pack = 1;
-		 TotalDocs = DocumentsRows.Count();
-		 For Each Row In DocumentsRows Do
-		 	StreamArray.Add(Row.Ref);
+		Pack = 1;
+		TotalDocs = DocumentsRows.Count();
+		For Each Row In DocumentsRows Do
+			StreamArray.Add(Row.Ref);
 		 	
 		 	If StreamArray.Count() = DocsInPack Then
 		 		JobSettings = BackgroundJobAPIServer.JobSettings();
@@ -402,9 +396,9 @@ Function GetJobsForCheckPostingDocuments()
 				StreamArray = New Array;
 		 		Pack = Pack + 1;
 		 	EndIf;
-		 EndDo;
-		 If StreamArray.Count() > 0 Then
-	 		JobSettings = BackgroundJobAPIServer.JobSettings();
+		EndDo;
+		If StreamArray.Count() > 0 Then
+			JobSettings = BackgroundJobAPIServer.JobSettings();
 			JobSettings.ProcedureParams.Add(StreamArray);
 			JobSettings.ProcedureParams.Add(True);
 			JobSettings.Description = String(TypeItem.DocumentType) + ": " + Pack + " * (" + StreamArray.Count() + ") / " + TotalDocs;

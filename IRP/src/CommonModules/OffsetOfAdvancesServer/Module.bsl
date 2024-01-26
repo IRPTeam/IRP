@@ -93,8 +93,8 @@ Function OffsetOfAdvancesAndAging(Parameters) Export
 	Table_DocumentAndAdvancesKey.Columns.Add("Amount"     , Metadata.DefinedTypes.typeAmount.Type);
 
 	CreateAdvancesKeys(Parameters, Records_AdvancesKey, Records_OffsetOfAdvances, Table_DocumentAndAdvancesKey);
-	// Write advances keys to TM1020B_AdvancesKey, Receipt
-	Write_TM1020B_AdvancesKey(Parameters, Records_AdvancesKey);
+//	// Write advances keys to TM1020B_AdvancesKey, Receipt
+//	Write_TM1020B_AdvancesKey(Parameters, Records_AdvancesKey);
 		
 	// Create transactions keys
 	Table_DocumentAndTransactionsKey = New ValueTable();;
@@ -102,8 +102,8 @@ Function OffsetOfAdvancesAndAging(Parameters) Export
 	Table_DocumentAndTransactionsKey.Columns.Add("TransactionKey" , New TypeDescription("CatalogRef.TransactionsKeys"));
 
 	CreateTransactionsKeys(Parameters, Records_TransactionsKey, Records_OffsetAging, Table_DocumentAndTransactionsKey);
-	// Write transactions keys to TM1030B_TransactionsKey
-	Write_TM1030B_TransactionsKey(Parameters, Records_TransactionsKey);
+//	// Write transactions keys to TM1030B_TransactionsKey
+//	Write_TM1030B_TransactionsKey(Parameters, Records_TransactionsKey);
 
 	Query = New Query;
 	Query.Text =
@@ -115,7 +115,6 @@ Function OffsetOfAdvancesAndAging(Parameters) Export
 	|	&DocAdv AS DocAdv
 	|;
 	|
-	|
 	|////////////////////////////////////////////////////////////////////////////////
 	|SELECT
 	|	DocTrn.Document,
@@ -125,6 +124,21 @@ Function OffsetOfAdvancesAndAging(Parameters) Export
 	|	&DocTrn AS DocTrn
 	|;
 	|
+	|////////////////////////////////////////////////////////////////////////////////
+	|select
+	|	*
+	|into Records_AdvancesKey
+	|from
+	|	&Records_AdvancesKey as Records_AdvancesKey
+	|;
+	|
+	|////////////////////////////////////////////////////////////////////////////////
+	|select
+	|	*
+	|into Records_TransactionsKey
+	|from
+	|	&Records_TransactionsKey as Records_TransactionsKey
+	|;
 	|
 	|////////////////////////////////////////////////////////////////////////////////
 	|SELECT
@@ -135,21 +149,35 @@ Function OffsetOfAdvancesAndAging(Parameters) Export
 	|INTO tmp_AllKeys
 	|FROM
 	|	tmp_DocAdv AS tmp_DocAdv
-	|	left join InformationRegister.T2018S_UserDefinedOffsetOfAdvances AS UserDefined on
-	|	tmp_DocAdv.AdvanceKey.Company = UserDefined.Company
-	|   and tmp_DocAdv.AdvanceKey.Branch = UserDefined.Branch
-	|	and tmp_DocAdv.AdvanceKey.Currency = UserDefined.Currency
-	|   and tmp_DocAdv.AdvanceKey.Partner = UserDefined.Partner
-	|   and tmp_DocAdv.AdvanceKey.AdvanceAgreement = UserDefined.Agreement
-	|   and tmp_DocAdv.AdvanceKey.LegalName = UserDefined.LegalName
-	|	and tmp_DocAdv.AdvanceKey.IsVendorAdvance = UserDefined.IsVendorAdvance
-	|	and tmp_DocAdv.AdvanceKey.IsCustomerAdvance = UserDefined.IsCustomerAdvance
-	|
-	|	and case when tmp_DocAdv.AdvanceKey.Order.Ref is null then Undefined else tmp_DocAdv.AdvanceKey.Order end
-	|	     = case when UserDefined.Order.Ref is null then Undefined else UserDefined.Order end
-	|
-	|	and case when tmp_DocAdv.AdvanceKey.AdvanceDocument.Ref is null then Undefined else tmp_DocAdv.AdvanceKey.AdvanceDocument end
-	|	     = case when UserDefined.AdvanceDocument.Ref is null then Undefined else UserDefined.AdvanceDocument end
+	|		left join InformationRegister.T2018S_UserDefinedOffsetOfAdvances AS UserDefined
+	|		on tmp_DocAdv.AdvanceKey.Company = UserDefined.Company
+	|		and tmp_DocAdv.AdvanceKey.Branch = UserDefined.Branch
+	|		and tmp_DocAdv.AdvanceKey.Currency = UserDefined.Currency
+	|		and tmp_DocAdv.AdvanceKey.Partner = UserDefined.Partner
+	|		and tmp_DocAdv.AdvanceKey.AdvanceAgreement = UserDefined.Agreement
+	|		and tmp_DocAdv.AdvanceKey.LegalName = UserDefined.LegalName
+	|		and tmp_DocAdv.AdvanceKey.IsVendorAdvance = UserDefined.IsVendorAdvance
+	|		and tmp_DocAdv.AdvanceKey.IsCustomerAdvance = UserDefined.IsCustomerAdvance
+	|		and case
+	|			when tmp_DocAdv.AdvanceKey.Order.Ref is null
+	|				then Undefined
+	|			else tmp_DocAdv.AdvanceKey.Order
+	|		end = case
+	|			when UserDefined.Order.Ref is null
+	|				then Undefined
+	|			else UserDefined.Order
+	|		end
+	|		and case
+	|			when tmp_DocAdv.AdvanceKey.AdvanceDocument.Ref is null
+	|				then Undefined
+	|			else tmp_DocAdv.AdvanceKey.AdvanceDocument
+	|		end = case
+	|			when UserDefined.AdvanceDocument.Ref is null
+	|				then Undefined
+	|			else UserDefined.AdvanceDocument
+	|		end
+	|where
+	|	UserDefined.Recorder is null
 	|
 	|UNION ALL
 	|
@@ -160,24 +188,54 @@ Function OffsetOfAdvancesAndAging(Parameters) Export
 	|	tmp_DocTrn.Document
 	|FROM
 	|	tmp_DocTrn AS tmp_DocTrn
-	|	left join InformationRegister.T2018S_UserDefinedOffsetOfAdvances AS UserDefined on
-	|	tmp_DocTrn.TransactionKey.Company = UserDefined.Company
-	|   and tmp_DocTrn.TransactionKey.Branch = UserDefined.Branch
-	|	and tmp_DocTrn.TransactionKey.Currency = UserDefined.Currency
-	|   and tmp_DocTrn.TransactionKey.Partner = UserDefined.Partner
-	|   and tmp_DocTrn.TransactionKey.Agreement = UserDefined.Agreement
-	|   and tmp_DocTrn.TransactionKey.LegalName = UserDefined.LegalName
-	|	and tmp_DocTrn.TransactionKey.IsVendorTransaction = UserDefined.IsVendorTransaction
-	|	and tmp_DocTrn.TransactionKey.IsCustomerTransaction = UserDefined.IsCustomerTransaction
-	|
-	|	and case when tmp_DocTrn.TransactionKey.Order.Ref is null then Undefined else tmp_DocTrn.TransactionKey.Order end
-	|	     = case when UserDefined.Order.Ref is null then Undefined else UserDefined.Order end
-	|
-	|	and case when tmp_DocTrn.TransactionKey.TransactionBasis.Ref is null then Undefined else tmp_DocTrn.TransactionKey.TransactionBasis end
-	|	     = case when UserDefined.TransactionDocument.Ref is null then Undefined else UserDefined.TransactionDocument end
-	|	
+	|		left join InformationRegister.T2018S_UserDefinedOffsetOfAdvances AS UserDefined
+	|		on tmp_DocTrn.TransactionKey.Company = UserDefined.Company
+	|		and tmp_DocTrn.TransactionKey.Branch = UserDefined.Branch
+	|		and tmp_DocTrn.TransactionKey.Currency = UserDefined.Currency
+	|		and tmp_DocTrn.TransactionKey.Partner = UserDefined.Partner
+	|		and tmp_DocTrn.TransactionKey.Agreement = UserDefined.Agreement
+	|		and tmp_DocTrn.TransactionKey.LegalName = UserDefined.LegalName
+	|		and tmp_DocTrn.TransactionKey.IsVendorTransaction = UserDefined.IsVendorTransaction
+	|		and tmp_DocTrn.TransactionKey.IsCustomerTransaction = UserDefined.IsCustomerTransaction
+	|		and case
+	|			when tmp_DocTrn.TransactionKey.Order.Ref is null
+	|				then Undefined
+	|			else tmp_DocTrn.TransactionKey.Order
+	|		end = case
+	|			when UserDefined.Order.Ref is null
+	|				then Undefined
+	|			else UserDefined.Order
+	|		end
+	|		and case
+	|			when tmp_DocTrn.TransactionKey.TransactionBasis.Ref is null
+	|				then Undefined
+	|			else tmp_DocTrn.TransactionKey.TransactionBasis
+	|		end = case
+	|			when UserDefined.TransactionDocument.Ref is null
+	|				then Undefined
+	|			else UserDefined.TransactionDocument
+	|		end
+	|where
+	|	UserDefined.Recorder is null
 	|;
 	|
+	|////////////////////////////////////////////////////////////////////////////////
+	|select
+	|	*
+	|from
+	|	Records_AdvancesKey as Records_AdvancesKey
+	|		inner join tmp_AllKeys as tmpAllKeys
+	|		on Records_AdvancesKey.AdvanceKey = tmpAllKeys.AdvanceKey
+	|;
+	|
+	|////////////////////////////////////////////////////////////////////////////////
+	|select
+	|	*
+	|from
+	|	Records_TransactionsKey as Records_TransactionsKey
+	|		inner join tmp_AllKeys as tmpAllKeys
+	|		on Records_TransactionsKey.TransactionKey = tmpAllKeys.TransactionKey
+	|;
 	|
 	|////////////////////////////////////////////////////////////////////////////////
 	|SELECT
@@ -187,36 +245,35 @@ Function OffsetOfAdvancesAndAging(Parameters) Export
 	|	tmpAllKeys.Document
 	|FROM
 	|	tmp_AllKeys AS tmpAllKeys
-	|	
 	|GROUP BY
 	|	tmpAllKeys.AdvanceKey,
 	|	tmpAllKeys.TransactionKey,
 	|	tmpAllKeys.PointInTime,
 	|	tmpAllKeys.Document
+	|
 	|ORDER BY
 	|	PointInTime";
 	
 	
-//	Company
-//	Branch
-//	Currency
-//	Partner
-//	LegalName
-//	Order - empty
-//  AdvanceAgreement - Agreement
-//	AdvanceDocument
-//	++TransactionBasis - empty
-//	IsVendorAdvance
-//	IsCustomerAdvance
-// ++IsCustomerTransaction
-// ++IsVendorTransaction
-	
-	
+		
 	Query.SetParameter("DocAdv", Table_DocumentAndAdvancesKey);
 	Query.SetParameter("DocTrn", Table_DocumentAndTransactionsKey);
-	QueryResult = Query.Execute();
-	QuerySelection = QueryResult.Select();
+	Query.SetParameter("Records_AdvancesKey"     , Records_AdvancesKey);
+	Query.SetParameter("Records_TransactionsKey" , Records_TransactionsKey);
 
+	QueryResults = Query.ExecuteBatch();
+	
+	// Write advances keys to TM1020B_AdvancesKey, Receipt
+	Write_TM1020B_AdvancesKey(Parameters, QueryResults[5].Unload());
+	
+	// Write transactions keys to TM1030B_TransactionsKey
+	Write_TM1030B_TransactionsKey(Parameters, QueryResults[6].Unload());
+	
+//	QueryResult = Query.Execute();
+//	QuerySelection = QueryResult.Select();
+	
+	QuerySelection = QueryResults[7].Select();
+	
 	While QuerySelection.Next() Do
 		// Offset advances to transactions
 		If ValueIsFilled(QuerySelection.AdvanceKey) Then

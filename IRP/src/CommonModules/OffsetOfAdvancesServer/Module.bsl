@@ -220,21 +220,25 @@ Function OffsetOfAdvancesAndAging(Parameters) Export
 	|;
 	|
 	|////////////////////////////////////////////////////////////////////////////////
-	|select
-	|	*
+	|select DISTINCT
+	|	Records_AdvancesKey.*
 	|from
 	|	Records_AdvancesKey as Records_AdvancesKey
 	|		inner join tmp_AllKeys as tmpAllKeys
-	|		on Records_AdvancesKey.AdvanceKey = tmpAllKeys.AdvanceKey
+	|		on Records_AdvancesKey.AdvanceKey = tmpAllKeys.AdvanceKey 
+	|		
+	|		
 	|;
 	|
 	|////////////////////////////////////////////////////////////////////////////////
-	|select
-	|	*
+	|select DISTINCT 
+	|	Records_TransactionsKey.*
 	|from
 	|	Records_TransactionsKey as Records_TransactionsKey
 	|		inner join tmp_AllKeys as tmpAllKeys
-	|		on Records_TransactionsKey.TransactionKey = tmpAllKeys.TransactionKey
+	|		on Records_TransactionsKey.TransactionKey = tmpAllKeys.TransactionKey 
+	|		
+	|		
 	|;
 	|
 	|////////////////////////////////////////////////////////////////////////////////
@@ -253,9 +257,7 @@ Function OffsetOfAdvancesAndAging(Parameters) Export
 	|
 	|ORDER BY
 	|	PointInTime";
-	
-	
-		
+			
 	Query.SetParameter("DocAdv", Table_DocumentAndAdvancesKey);
 	Query.SetParameter("DocTrn", Table_DocumentAndTransactionsKey);
 	Query.SetParameter("Records_AdvancesKey"     , Records_AdvancesKey);

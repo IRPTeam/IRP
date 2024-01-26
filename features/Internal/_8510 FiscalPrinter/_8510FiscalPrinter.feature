@@ -1607,7 +1607,10 @@ Scenario: _0850023 check return payment by card and cash (sales by card)
 			| 'And I click "Revert" button'    |
 		And I click "Return (in day)" button
 		Then "1C:Enterprise" window is opened
+		And I click "Yes" button
+		Then "1C:Enterprise" window is opened
 		And I click "OK" button
+		Then "Payment" window is opened		
 		And I click the button named "Enter"
 		Then there are lines in TestClient message log
 			|'Not all payment done.'|
@@ -1616,6 +1619,8 @@ Scenario: _0850023 check return payment by card and cash (sales by card)
 			| '40,00'  | '⚪'            | 'Card 03'      |
 		And I activate "Payment type" field in "Payments" table
 		And I click "Return (in day)" button
+		Then "1C:Enterprise" window is opened
+		And I click "Yes" button
 		Then "1C:Enterprise" window is opened
 		And I click "OK" button
 		And I move to the next attribute		
@@ -2945,6 +2950,8 @@ Scenario: _0260165 Return of a product paid for with a certificate
 		And I click "0" button
 		And I click "0" button
 		And I click "Return (in day)" button
+		Then "1C:Enterprise" window is opened
+		And I click "Yes" button
 		Then "1C:Enterprise" window is opened
 		And I click "OK" button
 		And I move to the next attribute

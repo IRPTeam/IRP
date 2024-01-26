@@ -2780,6 +2780,18 @@ Scenario:_800062 checkmark removal control Stock balance detail in the Serial lo
 	And I click "Save and close" button
 	Then I wait that in user messages the "[Stock balance detail] cannot be changed, has posted documents" substring will appear in 10 seconds
 	And I close all client application windows
+
+Scenario:_800063 try to set mark Batch balance details in the Serial lot number that used in the documents
+	And I close all client application windows
+	Given I open hyperlink "e1cib/list/Catalog.SerialLotNumbers"
+	And I go to line in "List" table
+		| 'Serial number'   |
+		| '8908899877'      |
+	And I select current line in "List" table
+	And I set checkbox "Batch balance detail"
+	And I click "Save and close" button
+	Then I wait that in user messages the "[Batch balance detail] cannot be changed, has posted documents" substring will appear in 10 seconds
+	And I close all client application windows
 	
 
 Scenario:_800070 check stock control in the Stock adjustment as surplus

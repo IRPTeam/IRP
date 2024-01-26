@@ -41,7 +41,7 @@ EndFunction
 // Returns:
 //  ValueTree - Check document array:
 // * Ref - DocumentRefDocumentName
-// * Error - See DetailResult
+// * Error - Array of See DetailResult
 Function CheckDocumentArray(DocumentArray, isJob = False) Export
 	
 	If isJob Then
@@ -335,6 +335,85 @@ Function QuickFix(Document, RowIDList, ErrorID) Export
 	SetSafeMode(True);
 	Result = Eval(ErrorID + "(Document, RowIDList)");
 	Return Result;
+EndFunction
+
+
+// Quick fix array.
+// 
+// Parameters:
+//  ProblemsList - Array Of KeyAndValue:
+//  * Key - DocumentRefDocumentName -
+//  * Value - KeyAndValue:
+//  ** Key - String - Problem ID
+//  ** Value - Array Of String - List of row ID with problems
+//  IsJob - Boolean -
+// 
+// Returns:
+// 	Array Of Structure - Quick fix array:
+// 	* Ref - DocumentRefDocumentName - 
+// 	* RowID - Array Of String
+// 	* Result - Boolean - 
+// 	* Description - String - 
+// 	* ErrorID - String - 
+Function QuickFixArray(ProblemsList, IsJob) Export
+	ResultArray = New Array;
+	
+	If isJob And ProblemsList.Count() = 0 Then
+		Msg = BackgroundJobAPIServer.NotifySettings();
+		Msg.Log = "Empty doc list: " + ProblemsList.Count();
+		Msg.End = True;
+		Msg.DataAddress = CommonFunctionsServer.PutToCache(ResultArray);
+		BackgroundJobAPIServer.NotifyStream(Msg);
+		Return ResultArray;
+	EndIf;
+	
+	SetSafeMode(True);
+	Count = 0;
+	LastPercentLogged = 0;
+	StartDate = CurrentUniversalDateInMilliseconds();
+	For Each Doc In ProblemsList Do
+		For Each Problem In Doc.Value Do
+			Result = New Structure;
+			Result.Insert("Ref", Doc.Key);
+			Result.Insert("RowID", Problem.Value);
+			Result.Insert("Result", False);
+			Result.Insert("Description", "");
+			Result.Insert("ErrorID", Problem.Key);
+			Try
+				//@skip-check invocation-parameter-type-intersect, property-return-type, built-in-function-used-in-expression
+				Data = Eval(Problem.Key + "(Doc.Key, Problem.Value)");
+				Result.Result = True;
+			Except
+				Result.Description = ErrorProcessing.BriefErrorDescription(ErrorInfo());
+				
+				Msg = BackgroundJobAPIServer.NotifySettings();
+				Msg.Log = "Error: " + Doc.Key + ":" + Chars.LF + Result.Description;
+				BackgroundJobAPIServer.NotifyStream(Msg);
+				
+			EndTry;
+			ResultArray.Add(Result);
+		EndDo;
+		
+		Percent = 100 * Count / ProblemsList.Count();
+		If isJob And (Percent - LastPercentLogged >= 1) Then  
+			LastPercentLogged = Int(Percent);
+			Msg = BackgroundJobAPIServer.NotifySettings();
+			DateDiff = CurrentUniversalDateInMilliseconds() - StartDate;
+			Msg.Speed = Format(1000 * Count / DateDiff, "NFD=2; NG=") + " doc/sec";
+			Msg.Percent = Percent;
+			BackgroundJobAPIServer.NotifyStream(Msg);
+		EndIf;
+		
+	EndDo;
+	
+	If isJob Then
+		Msg = BackgroundJobAPIServer.NotifySettings();
+		Msg.End = True;
+		Msg.DataAddress = CommonFunctionsServer.PutToCache(ResultArray);
+		BackgroundJobAPIServer.NotifyStream(Msg);
+	EndIf;
+		
+	Return ResultArray;
 EndFunction
 
 // Error net amount greater total amount.

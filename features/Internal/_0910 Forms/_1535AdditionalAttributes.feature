@@ -6076,7 +6076,7 @@ Scenario: _015400681 check multistring additional attributes
 		Then the form attribute named "_V123449" became equal to "Turkey; Poland"	
 	And I close all client application windows
 
-Scenario: _015400685 check filter for additional sttributes
+Scenario: _015400685 check filter for additional attributes
 	And I close all client application windows
 	* Add additional attributes for partner
 		Given I open hyperlink "e1cib/list/Catalog.AddAttributeAndPropertySets"
@@ -6113,6 +6113,7 @@ Scenario: _015400685 check filter for additional sttributes
 			And I click "Ok" button
 			And I click "Save and close" button
 		* Check filter
+			Given I open hyperlink "e1cib/list/Catalog.Partners"			
 			And I go to line in "List" table
 				| 'Description' |
 				| 'Big foot'    |
@@ -6146,17 +6147,5 @@ Scenario: _015400685 check filter for additional sttributes
 			And "ResultTable" table contains lines
 				| 'Ref'      |
 				| 'Big foot' |
-			Then the number of "List" table lines is "меньше или равно" "3"
+			Then the number of "ResultTable" table lines is "меньше или равно" "3"
 	And I close all client application windows
-	
-			
-						
-						
-
-
-						
-		
-						
-		
-				
-	

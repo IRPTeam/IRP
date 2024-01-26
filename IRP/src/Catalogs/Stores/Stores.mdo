@@ -154,6 +154,18 @@
     <fullTextSearch>Use</fullTextSearch>
     <dataHistory>Use</dataHistory>
   </attributes>
+  <attributes uuid="45ba4aed-777b-43f8-b75d-624924145479">
+    <name>PrintInfo</name>
+    <synonym>
+      <key>en</key>
+      <value>Print info</value>
+    </synonym>
+    <type>
+      <types>CatalogRef.PrintInfo</types>
+    </type>
+    <createOnInput>Use</createOnInput>
+    <fullTextSearch>Use</fullTextSearch>
+  </attributes>
   <tabularSections uuid="324a6247-0e73-4a78-b83a-9fa7a0924c69">
     <producedTypes>
       <objectType typeId="25dd9507-dc8e-43e8-add3-5cd95a32e088" valueTypeId="2b4840fe-41e5-452f-805e-9f77528d64e8"/>

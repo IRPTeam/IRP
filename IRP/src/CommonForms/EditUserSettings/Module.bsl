@@ -770,3 +770,13 @@ Procedure CollapseTreeRows(Row)
 		Items.MetadataTree.Collapse(ChildRow.GetID());
 	EndDo;
 EndProcedure
+
+&AtClient
+Procedure MetadataTreeUseOnChange(Item)
+	CurrentRow = Items.MetadataTree.CurrentData;
+	If CurrentRow.Use And CurrentRow.Value = Undefined 
+			And CurrentRow.TypeRestriction.ContainsType(Type("Boolean")) 
+			And CurrentRow.TypeRestriction.Types().Count() = 1 Then
+		CurrentRow.Value = True;
+	EndIf;
+EndProcedure

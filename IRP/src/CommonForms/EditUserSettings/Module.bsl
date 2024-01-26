@@ -91,6 +91,11 @@ Procedure CollectSettingsFromTree(TreeRows, TableOfSettings, ArrayOfSavedAttribu
 			NewRow.AttributeName = Row.Name;
 			NewRow.Value = Row.Value;
 			NewRow.KindOfAttribute = Row.KindOfAttribute;
+			
+			If NewRow.Value = Undefined 
+					And TypeOf(Row.TypeRestriction) = Type("TypeDescription") Then
+				NewRow.Value = Row.TypeRestriction.AdjustValue();
+			EndIf;
 		EndIf;
 		CollectSettingsFromTree(Row.GetItems(), TableOfSettings, ArrayOfSavedAttributes);
 	EndDo;

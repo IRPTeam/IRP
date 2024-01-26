@@ -1625,4 +1625,224 @@ Function ItemInRegisterRecords(ItemOrItemKey)
 	Return Result;
 EndFunction
 
+#Region GetTreeInfo
 
+// Get item tree info.
+// 
+// Parameters:
+//  Item - CatalogRef.Items - Item
+// 
+// Returns:
+//  See GetItemTreeDescription
+Function GetItemTreeInfo(Item) Export
+	TreeInfo = GetItemTreeDescription();
+
+	FillTreeBranchItemKeys(Item, TreeInfo);
+	FillTreeBranchSerialLotNumbers(Item, TreeInfo);
+	FillTreeBranchBarcodes(Item, TreeInfo);
+	FillTreeBranchPrices(Item, TreeInfo);
+	FillTreeBranchStocks(Item, TreeInfo);
+	
+	Return TreeInfo;
+EndFunction
+
+// Get item tree description.
+// 
+// Returns:
+//  ValueTree - Get item tree description:
+// * Description - String - 
+// * RefValue - AnyRef -
+Function GetItemTreeDescription() Export
+	Result = New ValueTree();
+	Result.Columns.Add("Description", New TypeDescription("String"));
+	Result.Columns.Add("RefValue");
+	Return Result;
+EndFunction
+
+Procedure FillTreeBranchItemKeys(Item, TreeInfo)
+	
+	ItemKeysRow = TreeInfo.Rows.Add();
+	ItemKeysRow.Description = Metadata.Catalogs.ItemKeys.Synonym;
+	
+	Query = New Query;
+	Query.SetParameter("Item", Item);
+	
+	Query.Text =
+	"SELECT ALLOWED DISTINCT
+	|	ItemKeys.Ref,
+	|	ItemKeys.Presentation AS Presentation
+	|FROM
+	|	Catalog.ItemKeys AS ItemKeys
+	|WHERE
+	|	ItemKeys.Item = &Item
+	|	AND NOT ItemKeys.DeletionMark
+	|
+	|ORDER BY
+	|	Presentation";
+	QuerySelection = Query.Execute().Select();
+	
+	//@skip-check statement-type-change, property-return-type
+	While QuerySelection.Next() Do
+		ItemKeyRow = ItemKeysRow.Rows.Add();
+		ItemKeyRow.RefValue = QuerySelection.Ref; 
+		ItemKeyRow.Description = QuerySelection.Presentation; 
+	EndDo;
+	
+EndProcedure
+
+Procedure FillTreeBranchSerialLotNumbers(Item, TreeInfo)
+	
+	SerialLotNumbersRow = TreeInfo.Rows.Add();
+	SerialLotNumbersRow.Description = Metadata.Catalogs.SerialLotNumbers.Synonym;
+	
+	Query = New Query;
+	Query.SetParameter("Item", Item);
+	
+	Query.Text =
+	"SELECT ALLOWED DISTINCT
+	|	SerialLotNumbers.Ref,
+	|	SerialLotNumbers.Presentation AS Presentation
+	|FROM
+	|	Catalog.SerialLotNumbers AS SerialLotNumbers
+	|WHERE
+	|	NOT SerialLotNumbers.DeletionMark
+	|	AND SerialLotNumbers.SerialLotNumberOwner = &Item
+	|
+	|ORDER BY
+	|	Presentation";
+	QuerySelection = Query.Execute().Select();
+	
+	//@skip-check statement-type-change, property-return-type
+	While QuerySelection.Next() Do
+		SerialLotNumberRow = SerialLotNumbersRow.Rows.Add();
+		SerialLotNumberRow.RefValue = QuerySelection.Ref; 
+		SerialLotNumberRow.Description = QuerySelection.Presentation; 
+	EndDo;
+	
+EndProcedure
+
+Procedure FillTreeBranchBarcodes(Item, TreeInfo)
+	
+	BarcodeRow = TreeInfo.Rows.Add();
+	BarcodeRow.Description = Metadata.InformationRegisters.Barcodes.Synonym;
+	
+	Query = New Query;
+	Query.SetParameter("Item", Item);
+	
+	Query.Text =
+	"SELECT ALLOWED DISTINCT
+	|	Barcodes.Barcode AS Barcode
+	|FROM
+	|	InformationRegister.Barcodes AS Barcodes
+	|WHERE
+	|	Barcodes.ItemKey.Item = &Item
+	|
+	|ORDER BY
+	|	Barcode";
+	QuerySelection = Query.Execute().Select();
+	
+	//@skip-check statement-type-change, property-return-type
+	While QuerySelection.Next() Do
+		BarcodeRow.Rows.Add().Description = QuerySelection.Barcode; 
+	EndDo;
+	
+EndProcedure
+
+Procedure FillTreeBranchPrices(Item, TreeInfo)
+	
+	PricesRow = TreeInfo.Rows.Add();
+	PricesRow.Description = Metadata.InformationRegisters.PricesByItems.Synonym;
+	
+	Query = New Query;
+	Query.SetParameter("Item", Item);
+	
+	Query.Text =
+	"SELECT ALLOWED DISTINCT
+	|	PricesByItemsSliceLast.PriceType AS PriceType,
+	|	PricesByItemsSliceLast.Period,
+	|	PricesByItemsSliceLast.Price,
+	|	PricesByItemsSliceLast.PriceType.Currency AS Currency
+	|FROM
+	|	InformationRegister.PricesByItems.SliceLast AS PricesByItemsSliceLast
+	|WHERE
+	|	PricesByItemsSliceLast.Item = &Item
+	|
+	|UNION ALL
+	|
+	|SELECT DISTINCT
+	|	PricesByItemKeysSliceLast.PriceType AS PriceType,
+	|	PricesByItemKeysSliceLast.Period,
+	|	PricesByItemKeysSliceLast.Price,
+	|	PricesByItemKeysSliceLast.PriceType.Currency
+	|FROM
+	|	InformationRegister.PricesByItemKeys.SliceLast AS PricesByItemKeysSliceLast
+	|WHERE
+	|	PricesByItemKeysSliceLast.ItemKey.Item = &Item
+	|
+	|ORDER BY
+	|	PriceType";
+	QuerySelection = Query.Execute().Select();
+	
+	//@skip-check statement-type-change, property-return-type
+	While QuerySelection.Next() Do
+		PriceRow = PricesRow.Rows.Add();
+		//@skip-check invocation-parameter-type-intersect
+		PriceRow.Description = 
+			StrTemplate("%1 (%2) - %3 (%4)", 
+				QuerySelection.PriceType, 
+				Format(QuerySelection.Period, "DLF=D;"),
+				Format(QuerySelection.Price, "NZ=; NG=;"),
+				QuerySelection.Currency);
+		PriceRow.RefValue = QuerySelection.PriceType; 
+	EndDo;
+	
+EndProcedure
+
+Procedure FillTreeBranchStocks(Item, TreeInfo)
+	
+	StocksRow = TreeInfo.Rows.Add();
+	StocksRow.Description = Metadata.AccumulationRegisters.R4011B_FreeStocks.Synonym;
+	
+	Query = New Query;
+	Query.SetParameter("Item", Item);
+	
+	Query.Text =
+	"SELECT ALLOWED DISTINCT
+	|	R4011B_FreeStocksBalance.Store AS Store,
+	|	SUM(R4011B_FreeStocksBalance.QuantityBalance) AS Quantity,
+	|	CASE
+	|		WHEN R4011B_FreeStocksBalance.ItemKey.Unit = VALUE(Catalog.Units.EmptyRef)
+	|			THEN R4011B_FreeStocksBalance.ItemKey.Item.Unit
+	|		ELSE R4011B_FreeStocksBalance.ItemKey.Unit
+	|	END AS Unit
+	|FROM
+	|	AccumulationRegister.R4011B_FreeStocks.Balance AS R4011B_FreeStocksBalance
+	|WHERE
+	|	R4011B_FreeStocksBalance.ItemKey.Item = &Item
+	|GROUP BY
+	|	R4011B_FreeStocksBalance.Store,
+	|	CASE
+	|		WHEN R4011B_FreeStocksBalance.ItemKey.Unit = VALUE(Catalog.Units.EmptyRef)
+	|			THEN R4011B_FreeStocksBalance.ItemKey.Item.Unit
+	|		ELSE R4011B_FreeStocksBalance.ItemKey.Unit
+	|	END
+	|
+	|ORDER BY
+	|	Store";
+	QuerySelection = Query.Execute().Select();
+	
+	//@skip-check statement-type-change, property-return-type
+	While QuerySelection.Next() Do
+		StockRow = StocksRow.Rows.Add();
+		//@skip-check invocation-parameter-type-intersect
+		StockRow.Description = 
+			StrTemplate("%1 - %2 %3", 
+				QuerySelection.Store, 
+				Format(QuerySelection.Quantity, "NZ=; NG=;"),
+				QuerySelection.Unit);
+		StockRow.RefValue = QuerySelection.Store;
+	EndDo;
+
+EndProcedure
+
+#EndRegion

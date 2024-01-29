@@ -1625,7 +1625,7 @@ Function ItemInRegisterRecords(ItemOrItemKey)
 	Return Result;
 EndFunction
 
-#Region GetTreeInfo
+#Region GetItemDetailInfo
 
 // Get item tree info.
 // 
@@ -1633,59 +1633,30 @@ EndFunction
 //  Item - CatalogRef.Items - Item
 // 
 // Returns:
-//  See GetItemTreeDescription
-Function GetItemTreeInfo(Item) Export
-	TreeInfo = GetItemTreeDescription();
-
-	TopBranch = TreeInfo.Rows.Add();
-	TopBranch.Description = Metadata.Catalogs.ItemKeys.Synonym;
-	For Each ItemTreeBranchDescription In GetTreeBranchItemKeys(Item) Do
-		NewBranch = TopBranch.Rows.Add();
-		FillPropertyValues(NewBranch, ItemTreeBranchDescription);
-	EndDo;
-	
-	TopBranch = TreeInfo.Rows.Add();
-	TopBranch.Description = Metadata.Catalogs.SerialLotNumbers.Synonym;
-	For Each ItemTreeBranchDescription In GetTreeBranchSerialLotNumbers(Item) Do
-		NewBranch = TopBranch.Rows.Add();
-		FillPropertyValues(NewBranch, ItemTreeBranchDescription);
-	EndDo;
-	
-	TopBranch = TreeInfo.Rows.Add();
-	TopBranch.Description = Metadata.InformationRegisters.Barcodes.Synonym;
-	For Each ItemTreeBranchDescription In GetTreeBranchBarcodes(Item) Do
-		NewBranch = TopBranch.Rows.Add();
-		FillPropertyValues(NewBranch, ItemTreeBranchDescription);
-	EndDo;
-	
-	TopBranch = TreeInfo.Rows.Add();
-	TopBranch.Description = Metadata.InformationRegisters.PricesByItems.Synonym;
-	For Each ItemTreeBranchDescription In GetTreeBranchPrices(Item) Do
-		NewBranch = TopBranch.Rows.Add();
-		FillPropertyValues(NewBranch, ItemTreeBranchDescription);
-	EndDo;
-	
-	TopBranch = TreeInfo.Rows.Add();
-	TopBranch.Description = Metadata.AccumulationRegisters.R4010B_ActualStocks.Synonym;
-	For Each ItemTreeBranchDescription In GetTreeBranchStocks(Item) Do
-		NewBranch = TopBranch.Rows.Add();
-		FillPropertyValues(NewBranch, ItemTreeBranchDescription);
-	EndDo;
-	
-	Return TreeInfo;
-EndFunction
-
-// Get item tree description.
-// 
 // Returns:
 //  ValueTree - Get item tree description:
 // * Description - String - 
 // * RefValue - AnyRef -
-Function GetItemTreeDescription() Export
-	Result = New ValueTree();
-	Result.Columns.Add("Description", New TypeDescription("String"));
-	Result.Columns.Add("RefValue");
-	Return Result;
+Function GetItemTreeInfo(Item) Export
+	
+	TreeInfo = New ValueTree();
+	TreeInfo.Columns.Add("Description", New TypeDescription("String"));
+	TreeInfo.Columns.Add("RefValue");
+
+	ItemDetailInfo = GetItemDetailInfo(Item);
+	For Each DetailInfo In ItemDetailInfo Do
+		TopBranch = TreeInfo.Rows.Add();
+		TopBranch.Description = DetailInfo.Key;
+		For Each ItemTreeBranchDescription In DetailInfo.Value Do
+			NewBranch = TopBranch.Rows.Add();
+			FillPropertyValues(NewBranch, ItemTreeBranchDescription);
+		EndDo;
+	EndDo;
+	
+	TreeInfo.Rows.Sort("Description", True);
+
+	Return TreeInfo;
+	
 EndFunction
 
 // Get item tree branch description.
@@ -1699,6 +1670,29 @@ Function GetItemTreeBranchDescription() Export
 	Result.Insert("Description", "");
 	Result.Insert("RefValue");
 	Return Result;
+EndFunction
+
+// Get item detail info.
+// 
+// Parameters:
+//  Item - CatalogRef.Items - Item
+// 
+// Returns:
+//  Array of KeyAndValue - Get item detail info:
+//	* Key - String -
+//	* Value - Array of See GetItemTreeBranchDescription
+Function GetItemDetailInfo(Item)
+	
+	Result = New Map;
+	
+	Result.Insert("10. " + Metadata.Catalogs.ItemKeys.Synonym, GetTreeBranchItemKeys(Item));
+	Result.Insert("20. " + Metadata.Catalogs.SerialLotNumbers.Synonym, GetTreeBranchSerialLotNumbers(Item));
+	Result.Insert("30. " + Metadata.InformationRegisters.Barcodes.Synonym, GetTreeBranchBarcodes(Item));
+	Result.Insert("40. " + Metadata.InformationRegisters.PricesByItems.Synonym, GetTreeBranchPrices(Item));
+	Result.Insert("50. " + Metadata.AccumulationRegisters.R4010B_ActualStocks.Synonym, GetTreeBranchStocks(Item));
+	
+	Return Result;
+	
 EndFunction
 
 // Get tree branch item keys.
@@ -1839,9 +1833,7 @@ Function GetTreeBranchPrices(Item)
 	|	PricesByItemsSliceLast.Price,
 	|	PricesByItemsSliceLast.PriceType.Currency AS Currency
 	|FROM
-	|	InformationRegister.PricesByItems.SliceLast AS PricesByItemsSliceLast
-	|WHERE
-	|	PricesByItemsSliceLast.Item = &Item
+	|	InformationRegister.PricesByItems.SliceLast(, Item = &Item) AS PricesByItemsSliceLast
 	|
 	|UNION ALL
 	|
@@ -1851,9 +1843,7 @@ Function GetTreeBranchPrices(Item)
 	|	PricesByItemKeysSliceLast.Price,
 	|	PricesByItemKeysSliceLast.PriceType.Currency
 	|FROM
-	|	InformationRegister.PricesByItemKeys.SliceLast AS PricesByItemKeysSliceLast
-	|WHERE
-	|	PricesByItemKeysSliceLast.ItemKey.Item = &Item
+	|	InformationRegister.PricesByItemKeys.SliceLast(, ItemKey.Item = &Item) AS PricesByItemKeysSliceLast
 	|
 	|ORDER BY
 	|	PriceType";
@@ -1900,9 +1890,7 @@ Function GetTreeBranchStocks(Item)
 	|		ELSE ActualStocksBalance.ItemKey.Unit
 	|	END AS Unit
 	|FROM
-	|	AccumulationRegister.R4010B_ActualStocks.Balance AS ActualStocksBalance
-	|WHERE
-	|	ActualStocksBalance.ItemKey.Item = &Item
+	|	AccumulationRegister.R4010B_ActualStocks.Balance(, ItemKey.Item = &Item) AS ActualStocksBalance
 	|GROUP BY
 	|	ActualStocksBalance.Store,
 	|	CASE

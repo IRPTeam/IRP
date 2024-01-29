@@ -298,7 +298,9 @@ Procedure PaymentListBasisDocumentStartChoiceEnd(Result, AdditionalParameters) E
 	CurrentData = Form.Items.PaymentList.CurrentData;
 	If CurrentData <> Undefined Then
 		ViewClient_V2.SetPaymentListBasisDocument(Object, Form, CurrentData, Result.BasisDocument);
-		ViewClient_V2.SetPaymentListTotalAmount(Object, Form, CurrentData, Result.Amount);
+		If CurrentData.TotalAmount = 0 Then
+			ViewClient_V2.SetPaymentListTotalAmount(Object, Form, CurrentData, Result.Amount);
+		EndIf;
 	EndIf;
 EndProcedure
 

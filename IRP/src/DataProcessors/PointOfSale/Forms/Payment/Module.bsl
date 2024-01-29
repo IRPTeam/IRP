@@ -867,13 +867,23 @@ Async Function Payment_ReturnPaymentByPaymentCard(PaymentRow)
 EndFunction
 
 &AtClient
-Async Procedure Payment_CancelPaymentByPaymentCardManual(Command)
+Procedure Payment_CancelPaymentByPaymentCardManual(Command)
 	PaymentRow = Items.Payments.CurrentData;
 	If PaymentRow = Undefined Then
 		Return;
 	EndIf;
-	Await Payment_CancelPaymentByPaymentCard(PaymentRow);
-	PaymentsOnActivateRow(Undefined);
+	ShowQueryBox(
+		New NotifyDescription(
+			"Payment_CancelPaymentByPaymentCardManual_End", ThisObject, PaymentRow), 
+		R().QuestionToUser_028, QuestionDialogMode.YesNo);
+EndProcedure
+
+&AtClient
+Async Procedure Payment_CancelPaymentByPaymentCardManual_End(Answer, PaymentRow) Export
+	If Answer = DialogReturnCode.Yes Then
+		Await Payment_CancelPaymentByPaymentCard(PaymentRow);
+		PaymentsOnActivateRow(Undefined);
+	EndIf;
 EndProcedure
 
 &AtClient

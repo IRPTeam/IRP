@@ -1217,6 +1217,7 @@ Function Strings(Lang) Export
 	Strings.Insert("QuestionToUser_025", NStr("en = 'Do you want to update filled tax rates?'", Lang));
 	Strings.Insert("QuestionToUser_026", NStr("en = 'Do you want to update payment agent?'", Lang));
 	Strings.Insert("QuestionToUser_027", NStr("en = 'Filled data by employee [%1] will be cleared. Continue?'", Lang));
+	Strings.Insert("QuestionToUser_028", NStr("en = 'Do you want to refund the client?'", Lang));
 #EndRegion
 
 #Region SuggestionToUser

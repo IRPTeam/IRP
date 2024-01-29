@@ -153,5 +153,6 @@
     <types>DocumentRef.VisitorCounter</types>
     <types>DocumentRef.RetailReceiptCorrection</types>
     <types>CatalogRef.Projects</types>
+    <types>DocumentRef.DebitCreditNote</types>
   </type>
 </mdclass:DefinedType>

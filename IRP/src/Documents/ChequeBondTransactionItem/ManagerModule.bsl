@@ -286,6 +286,7 @@ Function R2020B_AdvancesFromCustomers()
 		   |	Table.LegalName,
 		   |	Table.Currency,
 		   |	Table.AdvanceAgreement AS Agreement,
+		   |	Table.Ref AS Basis,
 		   |	Table.Order,
 		   |	Table.Amount,
 		   |	UNDEFINED AS CustomersAdvancesClosing
@@ -306,6 +307,7 @@ Function R2020B_AdvancesFromCustomers()
 		   |	Table.LegalName,
 		   |	Table.Currency,
 		   |	Table.AdvanceAgreement,
+		   |	Table.Ref,
 		   |	Table.Order,
 		   |	Table.Amount,
 		   |	UNDEFINED
@@ -325,6 +327,7 @@ Function R2020B_AdvancesFromCustomers()
 		   |	Table.LegalName,
 		   |	Table.Currency,
 		   |	Table.AdvanceAgreement,
+		   |	Table.Ref,
 		   |	Table.Order,
 		   |	Table.Amount,
 		   |	UNDEFINED
@@ -344,6 +347,7 @@ Function R2020B_AdvancesFromCustomers()
 		   |	OffsetOfAdvances.LegalName,
 		   |	OffsetOfAdvances.Currency,
 		   |	OffsetOfAdvances.AdvanceAgreement,
+		   |	OffsetOfAdvances.AdvanceDocument,
 		   |	OffsetOfAdvances.AdvancesOrder,
 		   |	OffsetOfAdvances.Amount,
 		   |	OffsetOfAdvances.Recorder
@@ -467,6 +471,7 @@ Function R1020B_AdvancesToVendors()
 		   |	Table.LegalName,
 		   |	Table.Currency,
 		   |	Table.AdvanceAgreement AS Agreement,
+		   |	Table.Ref AS Basis,
 		   |	Table.Order,
 		   |	Table.Amount,
 		   |	UNDEFINED AS VendorsAdvancesClosing
@@ -487,6 +492,7 @@ Function R1020B_AdvancesToVendors()
 		   |	Table.LegalName,
 		   |	Table.Currency,
 		   |	Table.AdvanceAgreement,
+		   |	Table.Ref,
 		   |	Table.Order,
 		   |	Table.Amount,
 		   |	UNDEFINED
@@ -506,6 +512,7 @@ Function R1020B_AdvancesToVendors()
 		   |	Table.LegalName,
 		   |	Table.Currency,
 		   |	Table.AdvanceAgreement,
+		   |	Table.Ref,
 		   |	Table.Order,
 		   |	Table.Amount,
 		   |	UNDEFINED
@@ -525,6 +532,7 @@ Function R1020B_AdvancesToVendors()
 		   |	OffsetOfAdvances.LegalName,
 		   |	OffsetOfAdvances.Currency,
 		   |	OffsetOfAdvances.AdvanceAgreement,
+		   |	OffsetOfAdvances.AdvanceDocument,
 		   |	OffsetOfAdvances.AdvancesOrder,
 		   |	OffsetOfAdvances.Amount,
 		   |	OffsetOfAdvances.Recorder
@@ -744,6 +752,7 @@ Function T2014S_AdvancesInfo()
 		   |	Table.Partner,
 		   |	Table.LegalName,
 		   |	Table.Order,
+		   |	Table.Ref AS AdvanceDocument,
 		   |	TRUE AS IsCustomerAdvance,
 		   |	FALSE AS IsVendorAdvance,
 		   |	Table.Amount
@@ -764,6 +773,7 @@ Function T2014S_AdvancesInfo()
 		   |	Table.Partner,
 		   |	Table.LegalName,
 		   |	Table.Order,
+		   |	Table.Ref,
 		   |	TRUE,
 		   |	FALSE,
 		   |	-Table.Amount
@@ -783,6 +793,7 @@ Function T2014S_AdvancesInfo()
 		   |	Table.Partner,
 		   |	Table.LegalName,
 		   |	Table.Order,
+		   |	Table.Ref,
 		   |	TRUE,
 		   |	FALSE,
 		   |	-Table.Amount
@@ -802,6 +813,7 @@ Function T2014S_AdvancesInfo()
 		   |	Table.Partner,
 		   |	Table.LegalName,
 		   |	Table.Order,
+		   |	Table.Ref,
 		   |	FALSE,
 		   |	TRUE,
 		   |	Table.Amount
@@ -821,6 +833,7 @@ Function T2014S_AdvancesInfo()
 		   |	Table.Partner,
 		   |	Table.LegalName,
 		   |	Table.Order,
+		   |	Table.Ref,
 		   |	FALSE,
 		   |	TRUE,
 		   |	-Table.Amount
@@ -840,6 +853,7 @@ Function T2014S_AdvancesInfo()
 		   |	Table.Partner,
 		   |	Table.LegalName,
 		   |	Table.Order,
+		   |	Table.Ref,
 		   |	FALSE,
 		   |	TRUE,
 		   |	-Table.Amount
@@ -1026,6 +1040,7 @@ Function ChequeBondTransactionItem()
 		   |	Doc.FinancialMovementType,
 		   |	Doc.PlanningPeriod,
 		   |	Doc.Ref AS CashPlanningBasis,
+		   |	Doc.Ref AS Ref,
 		   |	CASE 
 		   |		WHEN Doc.Cheque.Type = VALUE(Enum.ChequeBondTypes.PartnerCheque) THEN VALUE(Enum.CashFlowDirections.Incoming)
 		   |		WHEN Doc.Cheque.Type = VALUE(Enum.ChequeBondTypes.OwnCheque) THEN VALUE(Enum.CashFlowDirections.Outgoing)
@@ -1201,6 +1216,7 @@ Function CustomerTransaction_Posting()
 		   |	Table.Currency,
 		   |	Table.AdvanceAgreement,
 		   |	Table.Order,
+		   |	Table.Ref,
 		   |	Table.BasisDocument,
 		   |	Table.Amount,
 		   |	Table.IsAdvance,
@@ -1225,6 +1241,7 @@ Function CustomerTransaction_Reversal()
 		   |	Table.Currency,
 		   |	Table.AdvanceAgreement,
 		   |	Table.Order,
+		   |	Table.Ref,
 		   |	Table.BasisDocument,
 		   |	Table.Amount,
 		   |	Table.IsAdvance,
@@ -1249,6 +1266,7 @@ Function CustomerTransaction_Correction()
 		   |	Table.Currency,
 		   |	Table.AdvanceAgreement,
 		   |	Table.Order,
+		   |	Table.Ref,
 		   |	Table.BasisDocument,
 		   |	-Table.Amount AS Amount,
 		   |	Table.IsAdvance,
@@ -1277,6 +1295,7 @@ Function VendorTransaction_Posting()
 		   |	Table.Currency,
 		   |	Table.AdvanceAgreement,
 		   |	Table.Order,
+		   |	Table.Ref,
 		   |	Table.BasisDocument,
 		   |	Table.Amount,
 		   |	Table.IsAdvance,
@@ -1301,6 +1320,7 @@ Function VendorTransaction_Reversal()
 		   |	Table.Currency,
 		   |	Table.AdvanceAgreement,
 		   |	Table.Order,
+		   |	Table.Ref,
 		   |	Table.BasisDocument,
 		   |	Table.Amount,
 		   |	Table.IsAdvance,
@@ -1325,6 +1345,7 @@ Function VendorTransaction_Correction()
 		   |	Table.Currency,
 		   |	Table.AdvanceAgreement,
 		   |	Table.Order,
+		   |	Table.Ref,
 		   |	Table.BasisDocument,
 		   |	-Table.Amount AS Amount,
 		   |	Table.IsAdvance,

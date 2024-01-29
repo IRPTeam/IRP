@@ -259,4 +259,35 @@
     <fillValue xsi:type="core:UndefinedValue"/>
     <mainFilter>true</mainFilter>
   </dimensions>
+  <dimensions uuid="0fbc094c-d1b6-4362-b117-9e204667f9df">
+    <name>AdvanceDocument</name>
+    <synonym>
+      <key>en</key>
+      <value>Advance document</value>
+    </synonym>
+    <type>
+      <types>DocumentRef.PurchaseReturn</types>
+      <types>DocumentRef.CreditNote</types>
+      <types>DocumentRef.DebitNote</types>
+      <types>DocumentRef.CashPayment</types>
+      <types>DocumentRef.CashReceipt</types>
+      <types>DocumentRef.BankPayment</types>
+      <types>DocumentRef.BankReceipt</types>
+      <types>DocumentRef.PurchaseInvoice</types>
+      <types>DocumentRef.PurchaseOrderClosing</types>
+      <types>DocumentRef.SalesReportToConsignor</types>
+      <types>DocumentRef.ChequeBondTransactionItem</types>
+      <types>DocumentRef.ForeignCurrencyRevaluation</types>
+      <types>DocumentRef.OpeningEntry</types>
+      <types>DocumentRef.EmployeeCashAdvance</types>
+      <types>DocumentRef.SalesReportFromTradeAgent</types>
+      <types>DocumentRef.SalesReturn</types>
+      <types>DocumentRef.SalesInvoice</types>
+      <types>DocumentRef.SalesOrderClosing</types>
+    </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <fullTextSearch>Use</fullTextSearch>
+    <fillValue xsi:type="core:UndefinedValue"/>
+  </dimensions>
 </mdclass:InformationRegister>

@@ -185,7 +185,11 @@ Function GetObjectPropertyNamesBeforeChange()
 		|CashTransferOrder,
 		|RetailCustomer,
 		|PlanningPeriod,
-		|BusinessUnit";
+		|BusinessUnit,
+		|SendPartner,
+		|SendAgreement,
+		|ReceivePartner,
+		|ReceiveAgreement";
 EndFunction
 
 // returns list of Table attributes for get value before the change
@@ -3489,7 +3493,8 @@ Procedure OnSetTransactionTypeNotify(Parameters) Export
 		Or Parameters.ObjectMetadataInfo.MetadataName = "CashExpense"
 		Or Parameters.ObjectMetadataInfo.MetadataName = "CashRevenue"
 		Or Parameters.ObjectMetadataInfo.MetadataName = "Production" 
-		Or Parameters.ObjectMetadataInfo.MetadataName = "PhysicalCountByLocation" Then
+		Or Parameters.ObjectMetadataInfo.MetadataName = "PhysicalCountByLocation"
+		Or Parameters.ObjectMetadataInfo.MetadataName = "DebitCreditNote" Then
 		Parameters.Form.FormSetVisibilityAvailability();
 	EndIf;
 	DocumentsClientServer.ChangeTitleGroupTitle(Parameters.Object, Parameters.Form);
@@ -3525,7 +3530,7 @@ Procedure PartnerOnChange(Object, Form, TableNames) Export
 	FormParameters.EventCaller = "PartnerOnUserChange";
 	For Each TableName In StrSplit(TableNames, ",") Do
 		ServerParameters = GetServerParameters(Object);
-		ServerParameters.TableName = TableName;
+		ServerParameters.TableName = TrimAll(TableName);
 		Parameters = GetParameters(ServerParameters, FormParameters);
 		ControllerClientServer_V2.PartnerOnChange(Parameters);
 	EndDo;
@@ -3549,7 +3554,8 @@ Procedure OnSetPartnerNotify(Parameters) Export
 		Or Parameters.ObjectMetadataInfo.MetadataName = "SalesReturnOrder"
 		Or Parameters.ObjectMetadataInfo.MetadataName = "PurchaseReturnOrder"
 		Or Parameters.ObjectMetadataInfo.MetadataName = "SalesReportFromTradeAgent"
-		Or Parameters.ObjectMetadataInfo.MetadataName = "SalesReportToConsignor" Then
+		Or Parameters.ObjectMetadataInfo.MetadataName = "SalesReportToConsignor"
+		Or Parameters.ObjectMetadataInfo.MetadataName = "DebitCreditNote" Then
 		Parameters.Form.FormSetVisibilityAvailability();
 	EndIf;
 	
@@ -3671,7 +3677,7 @@ EndProcedure
 
 Procedure LegalNameOnChange(Object, Form, TableNames) Export
 	For Each TableName In StrSplit(TableNames, ",") Do
-		Parameters = GetSimpleParameters(Object, Form, TableName);
+		Parameters = GetSimpleParameters(Object, Form, TrimAll(TableName));
 		ControllerClientServer_V2.LegalNameOnChange(Parameters);
 	EndDo;
 EndProcedure
@@ -3822,7 +3828,7 @@ Procedure AgreementOnChange(Object, Form, TableNames) Export
 	FormParameters.EventCaller = "AgreementOnUserChange";
 	For Each TableName In StrSplit(TableNames, ",") Do
 		ServerParameters = GetServerParameters(Object);
-		ServerParameters.TableName = TableName;
+		ServerParameters.TableName = TrimAll(TableName);
 		Parameters = GetParameters(ServerParameters, FormParameters);
 		ControllerClientServer_V2.AgreementOnChange(Parameters);
 	EndDo;
@@ -4187,6 +4193,335 @@ Procedure SetPaymentsCommission(Object, Form, Row, Value) Export
 EndProcedure
 
 #EndRegion
+
+#EndRegion
+
+#Region OFFSET_OF_ADVANCES_INVOICES
+
+Procedure OffsetOfAdvancesInvoicesSelection(Object, Form, Item, RowSelected, Field, StandardProcessing) Export
+	ListSelection(Object, Form, Item, RowSelected, Field, StandardProcessing);
+EndProcedure
+
+Procedure OffsetOfAdvancesInvoicesBeforeAddRow(Object, Form, Cancel, Clone, CurrentData = Undefined) Export
+	NewRow = AddOrCopyRow(Object, Form, "OffsetOfAdvancesInvoices", Cancel, Clone, CurrentData,
+		"OffsetOfAdvancesInvoicesOnAddRowFormNotify", "OffsetOfAdvancesInvoicesOnCopyRowFormNotify");
+	Form.Items.OffsetOfAdvancesInvoices.CurrentRow = NewRow.GetID();
+	If Form.Items.OffsetOfAdvancesInvoices.CurrentRow <> Undefined Then
+		Form.Items.OffsetOfAdvancesInvoices.ChangeRow();
+	EndIf;
+EndProcedure
+
+Procedure OffsetOfAdvancesInvoicesOnAddRowFormNotify(Parameters) Export
+	Parameters.Form.Modified = True;
+EndProcedure
+
+Procedure OffsetOfAdvancesInvoicesOnCopyRowFormNotify(Parameters) Export
+	Parameters.Form.Modified = True;
+EndProcedure
+
+Procedure OffsetOfAdvancesInvoicesAfterDeleteRow(Object, Form) Export
+	DeleteRows(Object, Form, "OffsetOfAdvancesInvoices");
+EndProcedure
+
+#EndRegion
+
+#Region OFFSET_OF_ADVANCES_INVOICES_COLUMNS
+
+// OffsetOfAdvancesInvoices.Invoice
+Procedure OffsetOfAdvancesInvoicesInvoiceOnChange(Object, Form, CurrentData = Undefined) Export
+	Rows = GetRowsByCurrentData(Form, "OffsetOfAdvancesInvoices", CurrentData);
+	Parameters = GetSimpleParameters(Object, Form, "OffsetOfAdvancesInvoices", Rows);
+	ControllerClientServer_V2.OffsetOfAdvancesInvoicesInvoiceOnChange(Parameters);
+EndProcedure
+
+// OffsetOfAdvancesInvoices.Invoice.Set
+Procedure SetOffsetOfAdvancesInvoicesInvoice(Object, Form, Row, Value) Export
+	Row.Invoice = Value;
+	Rows = GetRowsByCurrentData(Form, "OffsetOfAdvancesInvoices", Row);
+	Parameters = GetSimpleParameters(Object, Form, "OffsetOfAdvancesInvoices", Rows);
+	Parameters.Insert("IsProgramChange", True);
+	ControllerClientServer_V2.OffsetOfAdvancesInvoicesInvoiceOnChange(Parameters);
+EndProcedure
+
+// OffsetOfAdvancesInvoices.Order
+Procedure OffsetOfAdvancesInvoicesOrderOnChange(Object, Form, CurrentData = Undefined) Export
+	Rows = GetRowsByCurrentData(Form, "OffsetOfAdvancesInvoices", CurrentData);
+	Parameters = GetSimpleParameters(Object, Form, "OffsetOfAdvancesInvoices", Rows);
+	ControllerClientServer_V2.OffsetOfAdvancesInvoicesOrderOnChange(Parameters);
+EndProcedure
+
+// OffsetOfAdvancesInvoices.Order.Set
+Procedure SetOffsetOfAdvancesInvoicesOrder(Object, Form, Row, Value) Export
+	Row.Order = Value;
+	Rows = GetRowsByCurrentData(Form, "OffsetOfAdvancesInvoices", Row);
+	Parameters = GetSimpleParameters(Object, Form, "OffsetOfAdvancesInvoices", Rows);
+	Parameters.Insert("IsProgramChange", True);
+	ControllerClientServer_V2.OffsetOfAdvancesInvoicesOrderOnChange(Parameters);
+EndProcedure
+
+// OffsetOfAdvancesInvoices.Amount
+Procedure OffsetOfAdvancesInvoicesAmountOnChange(Object, Form, CurrentData = Undefined) Export
+	Rows = GetRowsByCurrentData(Form, "OffsetOfAdvancesInvoices", CurrentData);
+	Parameters = GetSimpleParameters(Object, Form, "OffsetOfAdvancesInvoices", Rows);
+	ControllerClientServer_V2.OffsetOfAdvancesInvoicesAmountOnChange(Parameters);
+EndProcedure
+
+// OffsetOfAdvancesInvoices.Amount.Set
+Procedure SetOffsetOfAdvancesInvoicesAmount(Object, Form, Row, Value) Export
+	Row.Amount = Value;
+	Rows = GetRowsByCurrentData(Form, "OffsetOfAdvancesInvoices", Row);
+	Parameters = GetSimpleParameters(Object, Form, "OffsetOfAdvancesInvoices", Rows);
+	Parameters.Insert("IsProgramChange", True);
+	ControllerClientServer_V2.OffsetOfAdvancesInvoicesAmountOnChange(Parameters);
+EndProcedure
+
+#EndRegion
+
+#Region OFFSET_OF_ADVANCES_PAYMENTS
+
+Function OffsetOfAdvancesPaymentsBeforeAddRow(Object, Form, Cancel = False, Clone = False, CurrentData = Undefined, KeyOwner = Undefined) Export
+	NewRow = AddOrCopyRow(Object, Form, "OffsetOfAdvancesPayments", Cancel, Clone, CurrentData,
+		"OffsetOfAdvancesPaymentsOnAddRowFormNotify", "OffsetOfAdvancesPaymentsOnCopyRowFormNotify", Undefined, KeyOwner);
+	Form.Items.OffsetOfAdvancesPayments.CurrentRow = NewRow.GetID();
+	If Form.Items.OffsetOfAdvancesPayments.CurrentRow <> Undefined Then
+		Form.Items.OffsetOfAdvancesPayments.ChangeRow();
+	EndIf;
+	Return NewRow;
+EndFunction
+
+Procedure OffsetOfAdvancesPaymentsOnAddRowFormNotify(Parameters) Export
+	Parameters.Form.Modified = True;
+EndProcedure
+
+Procedure OffsetOfAdvancesPaymentsOnCopyRowFormNotify(Parameters) Export
+	Parameters.Form.Modified = True;
+EndProcedure
+
+Procedure OffsetOfAdvancesPaymentsAfterDeleteRow(Object, Form) Export
+	DeleteRows(Object, Form, "OffsetOfAdvancesPayments");
+EndProcedure
+
+#EndRegion
+
+#Region OFFSET_OF_ADVANCES_PAYMENTS_COLUMNS
+
+// OffsetOfAdvancesPayments.Document
+Procedure OffsetOfAdvancesPaymentsDocumentOnChange(Object, Form, CurrentData = Undefined) Export
+	Rows = GetRowsByCurrentData(Form, "OffsetOfAdvancesPayments", CurrentData);
+	Parameters = GetSimpleParameters(Object, Form, "OffsetOfAdvancesPayments", Rows);
+	ControllerClientServer_V2.OffsetOfAdvancesPaymentsDocumentOnChange(Parameters);
+EndProcedure
+
+// OffsetOfAdvancesPayments.Document.Set
+Procedure SetOffsetOfAdvancesPaymentsDocument(Object, Form, Row, Value) Export
+	Row.Document = Value;
+	Rows = GetRowsByCurrentData(Form, "OffsetOfAdvancesPayments", Row);
+	Parameters = GetSimpleParameters(Object, Form, "OffsetOfAdvancesPayments", Rows);
+	Parameters.Insert("IsProgramChange", True);
+	ControllerClientServer_V2.OffsetOfAdvancesPaymentsDocumentOnChange(Parameters);
+EndProcedure
+
+// OffsetOfAdvancesPayments.Order
+Procedure OffsetOfAdvancesPaymentsOrderOnChange(Object, Form, CurrentData = Undefined) Export
+	Rows = GetRowsByCurrentData(Form, "OffsetOfAdvancesPayments", CurrentData);
+	Parameters = GetSimpleParameters(Object, Form, "OffsetOfAdvancesPayments", Rows);
+	ControllerClientServer_V2.OffsetOfAdvancesPaymentsOrderOnChange(Parameters);
+EndProcedure
+
+// OffsetOfAdvancesPayments.Order.Set
+Procedure SetOffsetOfAdvancesPaymentsOrder(Object, Form, Row, Value) Export
+	Row.Order = Value;
+	Rows = GetRowsByCurrentData(Form, "OffsetOfAdvancesPayments", Row);
+	Parameters = GetSimpleParameters(Object, Form, "OffsetOfAdvancesPayments", Rows);
+	Parameters.Insert("IsProgramChange", True);
+	ControllerClientServer_V2.OffsetOfAdvancesPaymentsOrderOnChange(Parameters);
+EndProcedure
+
+// OffsetOfAdvancesPayments.Amount
+Procedure OffsetOfAdvancesPaymentsAmountOnChange(Object, Form, CurrentData = Undefined) Export
+	Rows = GetRowsByCurrentData(Form, "OffsetOfAdvancesPayments", CurrentData);
+	Parameters = GetSimpleParameters(Object, Form, "OffsetOfAdvancesPayments", Rows);
+	ControllerClientServer_V2.OffsetOfAdvancesPaymentsAmountOnChange(Parameters);
+EndProcedure
+
+// OffsetOfAdvancesPayments.Amount.Set
+Procedure SetOffsetOfAdvancesPaymentsAmount(Object, Form, Row, Value) Export
+	Row.Amount = Value;
+	Rows = GetRowsByCurrentData(Form, "OffsetOfAdvancesPayments", Row);
+	Parameters = GetSimpleParameters(Object, Form, "OffsetOfAdvancesPayments", Rows);
+	Parameters.Insert("IsProgramChange", True);
+	ControllerClientServer_V2.OffsetOfAdvancesPaymentsAmountOnChange(Parameters);
+EndProcedure
+
+#EndRegion
+
+#Region SEND_PARTNER
+
+Procedure SendPartnerOnChange(Object, Form, TableNames) Export
+	FormParameters = GetFormParameters(Form);
+	FetchFromCacheBeforeChange_Object("SendPartner", FormParameters);
+	FormParameters.EventCaller = "SendPartnerOnUserChange";
+	For Each TableName In StrSplit(TableNames, ",") Do
+		ServerParameters = GetServerParameters(Object);
+		ServerParameters.TableName = TrimAll(TableName);
+		Parameters = GetParameters(ServerParameters, FormParameters);
+		ControllerClientServer_V2.SendPartnerOnChange(Parameters);
+	EndDo;
+EndProcedure
+
+Procedure OnSetSendPartnerNotify(Parameters) Export
+	Parameters.Form.FormSetVisibilityAvailability();	
+	DocumentsClientServer.ChangeTitleGroupTitle(Parameters.Object, Parameters.Form);
+EndProcedure
+
+#EndRegion
+
+#Region SEND_LEGAL_NAME
+
+Procedure SendLegalNameOnChange(Object, Form, TableNames) Export
+	For Each TableName In StrSplit(TableNames, ",") Do
+		Parameters = GetSimpleParameters(Object, Form, TrimAll(TableName));
+		ControllerClientServer_V2.SendLegalNameOnChange(Parameters);
+	EndDo;
+EndProcedure
+
+Procedure OnSetSendLegalNameNotify(Parameters) Export
+	DocumentsClientServer.ChangeTitleGroupTitle(Parameters.Object, Parameters.Form);
+EndProcedure
+
+#EndRegion
+
+#Region SEND_AGREEMENT
+
+Procedure SendAgreementOnChange(Object, Form, TableNames) Export
+	FormParameters = GetFormParameters(Form);
+	FetchFromCacheBeforeChange_Object("SendAgreement", FormParameters);
+	FormParameters.EventCaller = "SendAgreementOnUserChange";
+	For Each TableName In StrSplit(TableNames, ",") Do
+		ServerParameters = GetServerParameters(Object);
+		ServerParameters.TableName = TrimAll(TableName);
+		Parameters = GetParameters(ServerParameters, FormParameters);
+		ControllerClientServer_V2.SendAgreementOnChange(Parameters);
+	EndDo;
+EndProcedure
+
+Procedure OnSetSendAgreementNotify(Parameters) Export
+	DocumentsClientServer.ChangeTitleGroupTitle(Parameters.Object, Parameters.Form);
+EndProcedure
+
+#EndRegion
+
+#Region SEND_DOCUMENTS
+
+Procedure SendDocumentsSelection(Object, Form, Item, RowSelected, Field, StandardProcessing) Export
+	ListSelection(Object, Form, Item, RowSelected, Field, StandardProcessing);
+EndProcedure
+
+Procedure SendDocumentsBeforeAddRow(Object, Form, Cancel, Clone, CurrentData = Undefined) Export
+	NewRow = AddOrCopyRow(Object, Form, "SendDocuments", Cancel, Clone, CurrentData,
+		"SendDocumentsOnAddRowFormNotify", "SendDocumentsOnCopyRowFormNotify");
+	Form.Items.SendDocuments.CurrentRow = NewRow.GetID();
+	If Form.Items.SendDocuments.CurrentRow <> Undefined Then
+		Form.Items.SendDocuments.ChangeRow();
+	EndIf;
+EndProcedure
+
+Procedure SendDocumentsOnAddRowFormNotify(Parameters) Export
+	Parameters.Form.Modified = True;
+EndProcedure
+
+Procedure SendDocumentsOnCopyRowFormNotify(Parameters) Export
+	Parameters.Form.Modified = True;
+EndProcedure
+
+Procedure SendDocumentsAfterDeleteRow(Object, Form) Export
+	DeleteRows(Object, Form, "SendDocuments");
+EndProcedure
+
+#EndRegion
+
+#Region RECEIVE_PARTNER
+
+Procedure ReceivePartnerOnChange(Object, Form, TableNames) Export
+	FormParameters = GetFormParameters(Form);
+	FetchFromCacheBeforeChange_Object("ReceivePartner", FormParameters);
+	FormParameters.EventCaller = "ReceivePartnerOnUserChange";
+	For Each TableName In StrSplit(TableNames, ",") Do
+		ServerParameters = GetServerParameters(Object);
+		ServerParameters.TableName = TrimAll(TableName);
+		Parameters = GetParameters(ServerParameters, FormParameters);
+		ControllerClientServer_V2.ReceivePartnerOnChange(Parameters);
+	EndDo;
+EndProcedure
+
+Procedure OnSetReceivePartnerNotify(Parameters) Export
+	Parameters.Form.FormSetVisibilityAvailability();
+	DocumentsClientServer.ChangeTitleGroupTitle(Parameters.Object, Parameters.Form);
+EndProcedure
+
+#EndRegion
+
+#Region RECEIVE_LEGAL_NAME
+
+Procedure ReceiveLegalNameOnChange(Object, Form, TableNames) Export
+	For Each TableName In StrSplit(TableNames, ",") Do
+		Parameters = GetSimpleParameters(Object, Form, TrimAll(TableName));
+		ControllerClientServer_V2.ReceiveLegalNameOnChange(Parameters);
+	EndDo;
+EndProcedure
+
+Procedure OnSetReceiveLegalNameNotify(Parameters) Export
+	DocumentsClientServer.ChangeTitleGroupTitle(Parameters.Object, Parameters.Form);
+EndProcedure
+
+#EndRegion
+
+#Region RECEIVE_AGREEMENT
+
+Procedure ReceiveAgreementOnChange(Object, Form, TableNames) Export
+	FormParameters = GetFormParameters(Form);
+	FetchFromCacheBeforeChange_Object("ReceiveAgreement", FormParameters);
+	FormParameters.EventCaller = "ReceiveAgreementOnUserChange";
+	For Each TableName In StrSplit(TableNames, ",") Do
+		ServerParameters = GetServerParameters(Object);
+		ServerParameters.TableName = TrimAll(TableName);
+		Parameters = GetParameters(ServerParameters, FormParameters);
+		ControllerClientServer_V2.ReceiveAgreementOnChange(Parameters);
+	EndDo;
+EndProcedure
+
+Procedure OnSetReceiveAgreementNotify(Parameters) Export
+	DocumentsClientServer.ChangeTitleGroupTitle(Parameters.Object, Parameters.Form);
+EndProcedure
+
+#EndRegion
+
+#Region RECEIVE_DOCUMENTS
+
+Procedure ReceiveDocumentsSelection(Object, Form, Item, RowSelected, Field, StandardProcessing) Export
+	ListSelection(Object, Form, Item, RowSelected, Field, StandardProcessing);
+EndProcedure
+
+Procedure ReceiveDocumentsBeforeAddRow(Object, Form, Cancel, Clone, CurrentData = Undefined) Export
+	NewRow = AddOrCopyRow(Object, Form, "ReceiveDocuments", Cancel, Clone, CurrentData,
+		"ReceiveDocumentsOnAddRowFormNotify", "ReceiveDocumentsOnCopyRowFormNotify");
+	Form.Items.ReceiveDocuments.CurrentRow = NewRow.GetID();
+	If Form.Items.ReceiveDocuments.CurrentRow <> Undefined Then
+		Form.Items.ReceiveDocuments.ChangeRow();
+	EndIf;
+EndProcedure
+
+Procedure ReceiveDocumentsOnAddRowFormNotify(Parameters) Export
+	Parameters.Form.Modified = True;
+EndProcedure
+
+Procedure ReceiveDocumentsOnCopyRowFormNotify(Parameters) Export
+	Parameters.Form.Modified = True;
+EndProcedure
+
+Procedure ReceiveDocumentsAfterDeleteRow(Object, Form) Export
+	DeleteRows(Object, Form, "ReceiveDocuments");
+EndProcedure
 
 #EndRegion
 

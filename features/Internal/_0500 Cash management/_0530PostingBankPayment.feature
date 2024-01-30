@@ -165,7 +165,7 @@ Scenario: _051002 check that the amount does not change when select basis docume
 		And I select current line in "PaymentList" table
 		And I go to line in "List" table
 			| 'Company'        | 'Amount'      | 'Legal name'          | 'Partner'      |
-			| 'Main Company'   | '137 000,00'  | 'Company Ferron BP'   | 'Ferron BP'    |
+			| 'Main Company'   | '136 000,00'  | 'Company Ferron BP'   | 'Ferron BP'    |
 		And I click "Select" button
 		And "PaymentList" table contains lines
 			| 'Partner'   | 'Partner term'       | 'Total amount' | 'Payee'             | 'Basis document'            |

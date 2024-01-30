@@ -450,8 +450,9 @@ Scenario: _0206014 сheck posting in Fix document problems (Post selected docume
 		And I move to "Filter" tab
 		And in the table "DocumentList" I click "Check posting" button
 		Then " [Jobs: 1]: Background multi job" window is opened
+		And Delay 5
 		And I click "Update statuses" button
-		And Delay 1
+		And Delay 5
 		And "PostingInfo" table does not contain lines
 			| 'Ref'                                                  |
 			| 'Retail sales receipt 8 813 dated 29.01.2024 17:37:58' |	

@@ -12995,6 +12995,7 @@ Function BindPaymentsPaymentType(Parameters)
 	Binding.Insert("RetailSalesReceipt", 
 		"StepChangeBankTermByPaymentType,
 		|StepChangePercentByBankTermAndPaymentType,
+		|StepChangeAccountByBankTermAndPaymentType,
 		|StepChangePaymentAgentPartnerByBankTermAndPaymentType,
 		|StepChangePaymentAgentLegalNameByBankTermAndPaymentType,
 		|StepChangePaymentAgentPartnerTermsByBankTermAndPaymentType,
@@ -13005,6 +13006,7 @@ Function BindPaymentsPaymentType(Parameters)
 	Binding.Insert("RetailReceiptCorrection", 
 		"StepChangeBankTermByPaymentType,
 		|StepChangePercentByBankTermAndPaymentType,
+		|StepChangeAccountByBankTermAndPaymentType,
 		|StepChangePaymentAgentPartnerByBankTermAndPaymentType,
 		|StepChangePaymentAgentLegalNameByBankTermAndPaymentType,
 		|StepChangePaymentAgentPartnerTermsByBankTermAndPaymentType,
@@ -13015,6 +13017,7 @@ Function BindPaymentsPaymentType(Parameters)
 	Binding.Insert("RetailReturnReceipt", 
 		"StepChangeBankTermByPaymentType,
 		|StepChangePercentByBankTermAndPaymentType,
+		|StepChangeAccountByBankTermAndPaymentType,
 		|StepChangePaymentAgentPartnerByBankTermAndPaymentType,
 		|StepChangePaymentAgentLegalNameByBankTermAndPaymentType,
 		|StepChangePaymentAgentPartnerTermsByBankTermAndPaymentType,
@@ -13023,7 +13026,8 @@ Function BindPaymentsPaymentType(Parameters)
 		|StepChangeAccountByPaymentType");
 	
 	Binding.Insert("SalesOrder", 
-		"StepChangePercentByBankTermAndPaymentType");
+		"StepChangePercentByBankTermAndPaymentType,
+		|StepChangeAccountByBankTermAndPaymentType");
 	
 	Return BindSteps("BindVoid", DataPath, Binding, Parameters, "BindPaymentsPaymentType");
 EndFunction
@@ -13108,6 +13112,7 @@ Function BindPaymentsBankTerm(Parameters)
 	Binding.Insert("RetailSalesReceipt",
 		"StepChangePaymentTypeByBankTerm, 
 		|StepChangePercentByBankTermAndPaymentType,
+		|StepChangeAccountByBankTermAndPaymentType,
 		|StepChangePaymentAgentPartnerByBankTermAndPaymentType,
 		|StepChangePaymentAgentLegalNameByBankTermAndPaymentType,
 		|StepChangePaymentAgentPartnerTermsByBankTermAndPaymentType,
@@ -13116,6 +13121,7 @@ Function BindPaymentsBankTerm(Parameters)
 	Binding.Insert("RetailReceiptCorrection",
 		"StepChangePaymentTypeByBankTerm, 
 		|StepChangePercentByBankTermAndPaymentType,
+		|StepChangeAccountByBankTermAndPaymentType,
 		|StepChangePaymentAgentPartnerByBankTermAndPaymentType,
 		|StepChangePaymentAgentLegalNameByBankTermAndPaymentType,
 		|StepChangePaymentAgentPartnerTermsByBankTermAndPaymentType,
@@ -13124,13 +13130,15 @@ Function BindPaymentsBankTerm(Parameters)
 	Binding.Insert("RetailReturnReceipt", 
 		"StepChangePaymentTypeByBankTerm,
 		|StepChangePercentByBankTermAndPaymentType,
+		|StepChangeAccountByBankTermAndPaymentType,
 		|StepChangePaymentAgentPartnerByBankTermAndPaymentType,
 		|StepChangePaymentAgentLegalNameByBankTermAndPaymentType,
 		|StepChangePaymentAgentPartnerTermsByBankTermAndPaymentType,
 		|StepChangePaymentAgentLegalNameContractByBankTermAndPaymentType");
 	
 	Binding.Insert("SalesOrder", 
-		"StepChangePercentByBankTermAndPaymentType");
+		"StepChangePercentByBankTermAndPaymentType,
+		|StepChangeAccountByBankTermAndPaymentType");
 	
 	Return BindSteps("BindVoid", DataPath, Binding, Parameters, "BindPaymentsBankTerm");
 EndFunction
@@ -13196,6 +13204,23 @@ Procedure StepChangeAccountByPaymentType(Parameters, Chain) Export
 		Options.Key = Row.Key;
 		Options.StepName = "StepChangeAccountByPaymentType";
 		Chain.ChangeAccountByPaymentType.Options.Add(Options);
+	EndDo;	
+EndProcedure
+
+// Payments.Account.ChangeAccountByBankTermAndPaymentType.Step
+Procedure StepChangeAccountByBankTermAndPaymentType(Parameters, Chain) Export
+	Chain.ChangeAccountByBankTermAndPaymentType.Enable = True;
+	If Chain.Idle Then
+		Return;
+	EndIf;
+	Chain.ChangeAccountByBankTermAndPaymentType.Setter = "SetPaymentsAccount";
+	For Each Row In GetRows(Parameters, "Payments") Do
+		Options     = ModelClientServer_V2.ChangeAccountByBankTermAndPaymentTypeOptions();
+		Options.PaymentType = GetPaymentsPaymentType(Parameters, Row.Key);
+		Options.BankTerm    = GetPaymentsBankTerm(Parameters, Row.Key);
+		Options.Key = Row.Key;
+		Options.StepName = "StepChangeAccountByBankTermAndPaymentType";
+		Chain.ChangeAccountByBankTermAndPaymentType.Options.Add(Options);
 	EndDo;	
 EndProcedure
 

@@ -31,6 +31,10 @@ Procedure OnCreateAtServerObject(Form, MainAttribute, Cancel, StandardProcessing
 	ExternalCommandsServer.CreateCommands(Form, CatalogFullName, Enums.FormTypes.ObjectForm);
 	InternalCommandsServer.CreateCommands(Form, MainAttribute, CatalogFullName, Enums.FormTypes.ObjectForm);
 	
+	If Form.Items.Find("Code") <> Undefined Then
+		Form.Items.Code.ReadOnly = Not IsInRole("FullAccess");
+	EndIf;	
+
 EndProcedure
 
 // On create at server list form.

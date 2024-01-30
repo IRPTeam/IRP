@@ -85,6 +85,12 @@ When Create catalog TaxRates objects (test data base)
 When Create catalog Taxes objects (test data base)
 When Create catalog SerialLotNumbers objects (test data base)
 When Create information register Taxes records (test data base)
+When Create catalog AccrualAndDeductionTypes objects (test data base)
+When Create catalog EmployeePositions objects (test data base)
+When Create catalog FixedAssetsLedgerTypes objects (test data base)
+When Create catalog DepreciationSchedules objects (test data base)
+When Create catalog FixedAssets objects (test data base)
+When Create catalog ItemSegments objects (test data base)
 * Tax settings
 		Given I open hyperlink "e1cib/list/Catalog.Companies"
 		And I go to line in "List" table
@@ -163,6 +169,14 @@ When Create document CashStatement objects  (test data base)
 When Create document ForeignCurrencyRevaluation objects (test data base)
 When Create document MoneyTransfer objects (test data base)
 When Create catalog PartnerItems objects (test data base)
+* Load data for Accounting system
+	When Create chart of characteristic types AccountingExtraDimensionTypes objects (test data base)
+	When Create chart of accounts Basic objects with LedgerTypeVariants (Basic LTV) (test data base)
+	When Create information register T9011S_AccountsCashAccount records (Basic LTV) (test data base)
+	When Create information register T9014S_AccountsExpenseRevenue records (Basic LTV) (test data base)
+	When Create information register T9010S_AccountsItemKey records (Basic LTV) (test data base)
+	When Create information register T9012S_AccountsPartner records (Basic LTV) (test data base)
+	When Create information register T9013S_AccountsTax records (Basic LTV) (test data base)
 * Hardware
 	* Instal fiscal driver
 		Given I open hyperlink "e1cib/list/Catalog.EquipmentDrivers"

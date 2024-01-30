@@ -83,6 +83,9 @@ EndProcedure
 &AtClient
 Procedure HTMLViewControl(Command)
 	PictureViewerClient.HTMLViewControl(ThisObject, Command.Name);
+	If Items.ViewDetailsTree.Check And Items.ViewPictures.Check Then
+		PictureViewerClient.HTMLViewControl(ThisObject, Commands.ViewDetailsTree.Name);
+	EndIf;
 	ChangingFormBySettings();
 	SaveSettings();
 EndProcedure
@@ -95,6 +98,16 @@ EndProcedure
 &AtClient
 Procedure PictureViewerHTMLDocumentComplete(Item)
 	PictureViewerClient.UpdateHTMLPicture(Item, ThisObject);
+EndProcedure
+
+&AtClient
+Procedure ViewDetailsTree(Command)
+	PictureViewerClient.HTMLViewControl(ThisObject, Command.Name);
+	If Items.ViewDetailsTree.Check And Items.ViewPictures.Check Then
+		PictureViewerClient.HTMLViewControl(ThisObject, Commands.ViewPictures.Name);
+	EndIf;
+	ChangingFormBySettings();
+	SaveSettings();
 EndProcedure
 
 #EndRegion
@@ -144,6 +157,34 @@ Procedure ControlCodeStringOnChange(Item)
 	SetVisibleCodeString();
 EndProcedure
 
+&AtClient
+Procedure Tree_RefreshData(Command)
+	RefreshDetailsTreeAtServer();
+	Tree_ExpandAll(Command);
+EndProcedure
+
+&AtClient
+Procedure Tree_ExpandAll(Command)
+	For Each TreeRow In ThisObject.DetailsTree.GetItems() Do
+		Items.DetailsTree.Expand(TreeRow.GetID(), True);
+	EndDo;
+EndProcedure
+
+&AtClient
+Procedure Tree_CollapseAll(Command)
+	For Each TreeRow In ThisObject.DetailsTree.GetItems() Do
+		Items.DetailsTree.Collapse(TreeRow.GetID());
+	EndDo;
+EndProcedure
+
+&AtClient
+Procedure DetailsTreeSelection(Item, RowSelected, Field, StandardProcessing)
+	TableRow = ThisObject.DetailsTree.FindByID(RowSelected);
+	If ValueIsFilled(TableRow.RefValue) Then
+		ShowValue(, TableRow.RefValue);
+	EndIf;
+EndProcedure
+
 #EndRegion
 
 #Region Service
@@ -158,6 +199,7 @@ EndProcedure
 Procedure SetSettings()
 	PictureViewerClient.HTMLViewControl(ThisObject, "ViewPictures");
 	PictureViewerClient.HTMLViewControl(ThisObject, "ViewAdditionalAttribute");
+	PictureViewerClient.HTMLViewControl(ThisObject, "ViewDetailsTree");
 EndProcedure
 
 &AtClient
@@ -168,6 +210,12 @@ Procedure ChangingFormBySettings()
 	Else
 		Items.GroupMainLeft.Group = ChildFormItemsGroup.Horizontal;
 	EndIf;
+	
+	Items.DetailsTree.Visible = Items.ViewDetailsTree.Check;
+	If Items.DetailsTree.Visible And ThisObject.DetailsTree.GetItems().Count() = 0 Then
+		Tree_RefreshData(Undefined);
+	EndIf;
+	
 EndProcedure	
 
 &AtServer
@@ -175,6 +223,7 @@ Procedure SaveSettings()
 	NewSettings = New Structure;
 	NewSettings.Insert("ViewPictures", Items.ViewPictures.Check);
 	NewSettings.Insert("ViewAdditionalAttribute", Items.ViewAdditionalAttribute.Check);
+	NewSettings.Insert("ViewDetailsTree", Items.ViewDetailsTree.Check);
 	CommonSettingsStorage.Save("Catalog_Item", "Settings", NewSettings);
 EndProcedure	
 
@@ -192,8 +241,25 @@ Procedure RestoreSettings()
 		If RestoreSettings.Property("ViewAdditionalAttribute") Then
 			Items.ViewAdditionalAttribute.Check = Not RestoreSettings.ViewAdditionalAttribute;
 		EndIf;
+		If RestoreSettings.Property("ViewDetailsTree") Then
+			Items.ViewDetailsTree.Check = Not RestoreSettings.ViewDetailsTree;
+		EndIf;
 	EndIf;
 
+EndProcedure
+
+&AtServer
+Procedure RefreshDetailsTreeAtServer()
+	
+	ThisObject.DetailsTree.GetItems().Clear();
+	If Object.Ref.IsEmpty() Then
+		Return;
+	EndIf;
+	
+	TreeInfo = GetItemInfo.GetItemTreeInfo(Object.Ref);
+		
+	ValueToFormAttribute(TreeInfo, "DetailsTree");
+	
 EndProcedure
 
 #EndRegion

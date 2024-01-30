@@ -135,13 +135,13 @@ Scenario: _099100 preparation
 		When Create document CashStatement objects  (test data base)
 		When Create catalog PartnerItems objects (test data base)
 	* Load data for Accounting system
-		When Create chart of characteristic types AccountingExtraDimensionTypes objects
-		When Create chart of accounts Basic objects with LedgerTypeVariants (Basic LTV)
-		When Create information register T9011S_AccountsCashAccount records (Basic LTV)
-		When Create information register T9014S_AccountsExpenseRevenue records (Basic LTV)
-		When Create information register T9010S_AccountsItemKey records (Basic LTV)
-		When Create information register T9012S_AccountsPartner records (Basic LTV)
-		When Create information register T9013S_AccountsTax records (Basic LTV)
+		When Create chart of characteristic types AccountingExtraDimensionTypes objects (test data base)
+		When Create chart of accounts Basic objects with LedgerTypeVariants (Basic LTV) (test data base)
+		When Create information register T9011S_AccountsCashAccount records (Basic LTV) (test data base)
+		When Create information register T9014S_AccountsExpenseRevenue records (Basic LTV) (test data base)
+		When Create information register T9010S_AccountsItemKey records (Basic LTV) (test data base)
+		When Create information register T9012S_AccountsPartner records (Basic LTV) (test data base)
+		When Create information register T9013S_AccountsTax records (Basic LTV) (test data base)
 	* Post OE
 		Given I open hyperlink "e1cib/list/Document.OpeningEntry"
 		Then I select all lines of "List" table

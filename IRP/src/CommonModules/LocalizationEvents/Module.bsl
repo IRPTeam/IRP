@@ -311,7 +311,7 @@ EndProcedure
 // 
 // Parameters:
 //  Text - String - Text
-//  Object - CatalogObjectCatalogName - Object
+//  Object - CatalogObjectCatalogName, ChartOfCharacteristicTypesObjectChartOfCharacteristicTypesName - Object
 Procedure FillDescription(Text, Object) Export
 	
 	If Object.Ref.IsEmpty() Then

@@ -427,6 +427,7 @@
   <roles>Role.AccumulationRegisters_TM1010T_RowIDMovements</roles>
   <roles>Role.AccumulationRegisters_TM1020B_AdvancesKey</roles>
   <roles>Role.AccumulationRegisters_TM1030B_TransactionsKey</roles>
+  <roles>Role.Document_DebitCreditNote</roles>
   <commonTemplates>CommonTemplate.HTMLPictureSlider</commonTemplates>
   <commonTemplates>CommonTemplate.HTMLAddAttributes</commonTemplates>
   <commonTemplates>CommonTemplate.HTMLGallery</commonTemplates>
@@ -461,8 +462,8 @@
   <commonModules>CommonModule.CatCashAccountsServer</commonModules>
   <commonModules>CommonModule.CatCompaniesClient</commonModules>
   <commonModules>CommonModule.CatCompaniesServer</commonModules>
-  <commonModules>CommonModule.CatExpenseAndRevenueTypesServer</commonModules>
   <commonModules>CommonModule.CatConfigurationMetadataServer</commonModules>
+  <commonModules>CommonModule.CatExpenseAndRevenueTypesServer</commonModules>
   <commonModules>CommonModule.CatItemsServer</commonModules>
   <commonModules>CommonModule.CatPartnersServer</commonModules>
   <commonModules>CommonModule.CatRetailCustomersClient</commonModules>
@@ -700,6 +701,7 @@
   <commonModules>CommonModule.POSClient</commonModules>
   <commonModules>CommonModule.POSServer</commonModules>
   <commonModules>CommonModule.PostingServer</commonModules>
+  <commonModules>CommonModule.PrintInfoServer</commonModules>
   <commonModules>CommonModule.RowIDInfoClient</commonModules>
   <commonModules>CommonModule.RowIDInfoClientServer</commonModules>
   <commonModules>CommonModule.RowIDInfoPrivileged</commonModules>
@@ -739,6 +741,8 @@
   <commonModules>CommonModule.CatalogsServer</commonModules>
   <commonModules>CommonModule.InternalCommandsClient</commonModules>
   <commonModules>CommonModule.InternalCommandsServer</commonModules>
+  <commonModules>CommonModule.DocDebitCreditNoteClient</commonModules>
+  <commonModules>CommonModule.DocDebitCreditNoteServer</commonModules>
   <commonAttributes>CommonAttribute.Author</commonAttributes>
   <commonAttributes>CommonAttribute.Branch</commonAttributes>
   <commonAttributes>CommonAttribute.Description</commonAttributes>
@@ -879,6 +883,7 @@
   <definedTypes>DefinedType.typeStockAdjustmentAsWriteOffBasises</definedTypes>
   <definedTypes>DefinedType.UseUniqueID</definedTypes>
   <definedTypes>DefinedType.typeAccountingDocuments</definedTypes>
+  <definedTypes>DefinedType.typeApArTransactionBasises</definedTypes>
   <commonCommands>CommonCommand.AddProperties</commonCommands>
   <commonCommands>CommonCommand.AttachedFiles</commonCommands>
   <commonCommands>CommonCommand.EditConstants</commonCommands>
@@ -1018,6 +1023,7 @@
   <catalogs>Catalog.DataMappingItems</catalogs>
   <catalogs>Catalog.DepreciationSchedules</catalogs>
   <catalogs>Catalog.EmployeePositions</catalogs>
+  <catalogs>Catalog.EmployeeSchedule</catalogs>
   <catalogs>Catalog.EquipmentDrivers</catalogs>
   <catalogs>Catalog.ExpenseAndRevenueTypes</catalogs>
   <catalogs>Catalog.Extensions</catalogs>
@@ -1055,7 +1061,9 @@
   <catalogs>Catalog.PlanningPeriods</catalogs>
   <catalogs>Catalog.PriceKeys</catalogs>
   <catalogs>Catalog.PriceTypes</catalogs>
+  <catalogs>Catalog.PrintInfo</catalogs>
   <catalogs>Catalog.PrintTemplates</catalogs>
+  <catalogs>Catalog.Projects</catalogs>
   <catalogs>Catalog.ReportOptions</catalogs>
   <catalogs>Catalog.RetailCustomers</catalogs>
   <catalogs>Catalog.RowIDs</catalogs>
@@ -1077,8 +1085,6 @@
   <catalogs>Catalog.Vehicles</catalogs>
   <catalogs>Catalog.VehicleTypes</catalogs>
   <catalogs>Catalog.Workstations</catalogs>
-  <catalogs>Catalog.EmployeeSchedule</catalogs>
-  <catalogs>Catalog.Projects</catalogs>
   <documents>Document.AdditionalAccrual</documents>
   <documents>Document.AdditionalCostAllocation</documents>
   <documents>Document.AdditionalDeduction</documents>
@@ -1163,6 +1169,7 @@
   <documents>Document.WorkOrder</documents>
   <documents>Document.WorkOrderClosing</documents>
   <documents>Document.WorkSheet</documents>
+  <documents>Document.DebitCreditNote</documents>
   <documentJournals>DocumentJournal.DocumentsForIncomingPayment</documentJournals>
   <documentJournals>DocumentJournal.DocumentsForOutgoingPayment</documentJournals>
   <enums>Enum.AccountingAnalyticTypes</enums>
@@ -1250,6 +1257,7 @@
   <enums>Enum.TypeEquipment</enums>
   <enums>Enum.TypeExternalObject</enums>
   <enums>Enum.EmployeeScheduleTypes</enums>
+  <enums>Enum.DebitCreditNoteTransactionTpes</enums>
   <reports>Report.AllRegistersMovement</reports>
   <reports>Report.BatchBalance</reports>
   <reports>Report.BatchBalanceSimple</reports>
@@ -1368,6 +1376,7 @@
   <informationRegisters>InformationRegister.T2012S_AdvancesCurrencyRevaluation</informationRegisters>
   <informationRegisters>InformationRegister.T9540S_EmployeeVacations</informationRegisters>
   <informationRegisters>InformationRegister.T9550S_EmployeeSickLeave</informationRegisters>
+  <informationRegisters>InformationRegister.T2018S_UserDefinedOffsetOfAdvances</informationRegisters>
   <accumulationRegisters>AccumulationRegister.CashInTransit</accumulationRegisters>
   <accumulationRegisters>AccumulationRegister.R1001T_Purchases</accumulationRegisters>
   <accumulationRegisters>AccumulationRegister.R1002T_PurchaseReturns</accumulationRegisters>

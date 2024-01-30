@@ -3125,6 +3125,10 @@ Function BindPartner(Parameters)
 		"StepChangeAgreementByPartner_AgreementTypeByTransactionType,
 		|StepChangeLegalNameByPartner");
 	
+	Binding.Insert("DebitCreditNote",
+		"StepChangeAgreementByPartner_Any,
+		|StepChangeLegalNameByPartner");
+	
 	Return BindSteps("BindVoid", DataPath, Binding, Parameters, "BindPartner");
 EndFunction
 
@@ -3233,6 +3237,74 @@ Function BindPartnerConsignor(Parameters)
 		|StepChangeLegalNameConsignorByPartner");
 	
 	Return BindSteps("BindVoid", DataPath, Binding, Parameters, "BindPartnerConsignor");
+EndFunction
+
+#EndRegion
+
+#Region SEND_PARTNER
+
+// SendPartner.OnChange
+Procedure SendPartnerOnChange(Parameters) Export
+	RollbackPropertyToValueBeforeChange_Object(Parameters);
+	AddViewNotify("OnSetSendPartnerNotify", Parameters);
+	Binding = BindSendPartner(Parameters);
+	ModelClientServer_V2.EntryPoint(Binding.StepsEnabler, Parameters);
+EndProcedure
+
+// SendPartner.Set
+Procedure SetSendPartner(Parameters, Results) Export
+	Binding = BindSendPartner(Parameters);
+	SetterObject(Binding.StepsEnabler, Binding.DataPath, Parameters, Results, "OnSetSendPartnerNotify");
+EndProcedure
+
+// SendPartner.Get
+Function GetSendPartner(Parameters)
+	Return GetPropertyObject(Parameters, BindSendPartner(Parameters).DataPath);
+EndFunction
+
+// SendPartner.Bind
+Function BindSendPartner(Parameters)
+	DataPath = "SendPartner";
+	Binding = New Structure();
+	
+	Binding.Insert("DebitCreditNote",
+		"StepChangeSendLegalNameBySendPartner");
+
+	Return BindSteps("BindVoid", DataPath, Binding, Parameters, "BindSendPartner");
+EndFunction
+
+#EndRegion
+
+#Region RECEIVE_PARTNER
+
+// ReceivePartner.OnChange
+Procedure ReceivePartnerOnChange(Parameters) Export
+	RollbackPropertyToValueBeforeChange_Object(Parameters);
+	AddViewNotify("OnSetReceivePartnerNotify", Parameters);
+	Binding = BindReceivePartner(Parameters);
+	ModelClientServer_V2.EntryPoint(Binding.StepsEnabler, Parameters);
+EndProcedure
+
+// ReceivePartner.Set
+Procedure SetReceivePartner(Parameters, Results) Export
+	Binding = BindReceivePartner(Parameters);
+	SetterObject(Binding.StepsEnabler, Binding.DataPath, Parameters, Results, "OnSetReceivePartnerNotify");
+EndProcedure
+
+// ReceivePartner.Get
+Function GetReceivePartner(Parameters)
+	Return GetPropertyObject(Parameters, BindReceivePartner(Parameters).DataPath);
+EndFunction
+
+// ReceivePartner.Bind
+Function BindReceivePartner(Parameters)
+	DataPath = "ReceivePartner";
+	Binding = New Structure();
+	
+	Binding.Insert("DebitCreditNote",
+		"StepChangeReceiveLegalNameByReceivePartner");
+	
+	Return BindSteps("BindVoid", DataPath, Binding, Parameters, "BindReceivePartner");
 EndFunction
 
 #EndRegion
@@ -3911,6 +3983,92 @@ Procedure StepChangeLegalNameConsignorByPartner(Parameters, Chain) Export
 	Options.Partner   = GetPartnerConsignor(Parameters);
 	Options.LegalName = GetLegalNameConsignor(Parameters);
 	Options.StepName = "StepChangeLegalNameConsignorByPartner";
+	Chain.ChangeLegalNameByPartner.Options.Add(Options);
+EndProcedure
+
+#EndRegion
+
+#Region SEND_LEGAL_NAME
+
+// SendLegalName.OnChange
+Procedure SendLegalNameOnChange(Parameters) Export
+	AddViewNotify("OnSetSendLegalNameNotify", Parameters);
+	Binding = BindSendLegalName(Parameters);
+	ModelClientServer_V2.EntryPoint(Binding.StepsEnabler, Parameters);
+EndProcedure
+
+// SendLegalName.Set
+Procedure SetSendLegalName(Parameters, Results) Export
+	Binding = BindSendLegalName(Parameters);
+	SetterObject(Binding.StepsEnabler, Binding.DataPath, Parameters, Results, "OnSetSendLegalNameNotify");
+EndProcedure
+
+// SendLegalName.Get
+Function GetSendLegalName(Parameters)
+	Return GetPropertyObject(Parameters, BindSendLegalName(Parameters).DataPath);
+EndFunction
+
+// SendLegalName.Bind
+Function BindSendLegalName(Parameters)
+	DataPath = "SendLegalName";
+	Binding = New Structure();
+	Return BindSteps("BindVoid", DataPath, Binding, Parameters, "BindSendLegalName");
+EndFunction
+
+// SendLegalName.ChangeSendLegalNameBySendPartner.Step
+Procedure StepChangeSendLegalNameBySendPartner(Parameters, Chain) Export
+	Chain.ChangeLegalNameByPartner.Enable = True;
+	If Chain.Idle Then
+		Return;
+	EndIf;
+	Chain.ChangeLegalNameByPartner.Setter = "SetSendLegalName";
+	Options = ModelClientServer_V2.ChangeLegalNameByPartnerOptions();
+	Options.Partner   = GetSendPartner(Parameters);
+	Options.LegalName = GetSendLegalName(Parameters);
+	Options.StepName = "StepChangeSendLegalNameBySendPartner";
+	Chain.ChangeLegalNameByPartner.Options.Add(Options);
+EndProcedure
+
+#EndRegion
+
+#Region RECEIVE_LEGAL_NAME
+
+// ReceiveLegalName.OnChange
+Procedure ReceiveLegalNameOnChange(Parameters) Export
+	AddViewNotify("OnSetReceiveLegalNameNotify", Parameters);
+	Binding = BindReceiveLegalName(Parameters);
+	ModelClientServer_V2.EntryPoint(Binding.StepsEnabler, Parameters);
+EndProcedure
+
+// ReceiveLegalName.Set
+Procedure SetReceiveLegalName(Parameters, Results) Export
+	Binding = BindReceiveLegalName(Parameters);
+	SetterObject(Binding.StepsEnabler, Binding.DataPath, Parameters, Results, "OnSetReceiveLegalNameNotify");
+EndProcedure
+
+// ReceiveLegalName.Get
+Function GetReceiveLegalName(Parameters)
+	Return GetPropertyObject(Parameters, BindReceiveLegalName(Parameters).DataPath);
+EndFunction
+
+// ReceiveLegalName.Bind
+Function BindReceiveLegalName(Parameters)
+	DataPath = "ReceiveLegalName";
+	Binding = New Structure();
+	Return BindSteps("BindVoid", DataPath, Binding, Parameters, "BindReceiveLegalName");
+EndFunction
+
+// ReceiveLegalName.ChangeReceiveLegalNameByReceivePartner.Step
+Procedure StepChangeReceiveLegalNameByReceivePartner(Parameters, Chain) Export
+	Chain.ChangeLegalNameByPartner.Enable = True;
+	If Chain.Idle Then
+		Return;
+	EndIf;
+	Chain.ChangeLegalNameByPartner.Setter = "SetReceiveLegalName";
+	Options = ModelClientServer_V2.ChangeLegalNameByPartnerOptions();
+	Options.Partner   = GetReceivePartner(Parameters);
+	Options.LegalName = GetReceiveLegalName(Parameters);
+	Options.StepName = "StepChangeReceiveLegalNameByReceivePartner";
 	Chain.ChangeLegalNameByPartner.Options.Add(Options);
 EndProcedure
 
@@ -4930,6 +5088,11 @@ Procedure StepChangeAgreementByPartner_AgreementTypeByTransactionType(Parameters
 	StepChangeAgreementByPartner(Parameters, Chain, Undefined, True);
 EndProcedure
 
+// Agreement.ChangeAgreementByPartner.[Any].Step
+Procedure StepChangeAgreementByPartner_Any(Parameters, Chain) Export
+	StepChangeAgreementByPartner(Parameters, Chain, Undefined, False);
+EndProcedure
+
 // Agreement.ChangeAgreementByPartner.Step
 Procedure StepChangeAgreementByPartner(Parameters, Chain, AgreementType, AgreementTypeByTransactionType)
 	Chain.ChangeAgreementByPartner.Enable = True;
@@ -5051,6 +5214,106 @@ Procedure StepChangeAgreementConsignorByPartner(Parameters, Chain) Export
 	Options.StepName = "StepChangeAgreementConsignorByPartner";
 	Chain.ChangeAgreementByPartner.Options.Add(Options);
 EndProcedure
+
+#EndRegion
+
+#Region SEND_AGREEMENT
+
+// SendAgreement.OnChange
+Procedure SendAgreementOnChange(Parameters) Export
+	RollbackPropertyToValueBeforeChange_Object(Parameters);
+	AddViewNotify("OnSetSendAgreementNotify", Parameters);
+	Binding = BindSendAgreement(Parameters);
+	ModelClientServer_V2.EntryPoint(Binding.StepsEnabler, Parameters);
+EndProcedure
+
+// SendAgreement.Set
+Procedure SetSendAgreement(Parameters, Results) Export
+	Binding = BindSendAgreement(Parameters);
+	SetterObject(Binding.StepsEnabler, Binding.DataPath, Parameters, Results);
+EndProcedure
+
+// SendAgreement.Get
+Function GetSendAgreement(Parameters)
+	Return GetPropertyObject(Parameters, BindSendAgreement(Parameters).DataPath);
+EndFunction
+
+// SendAgreement.Bind
+Function BindSendAgreement(Parameters)
+	DataPath = "SendAgreement";
+	Binding = New Structure();
+	
+	Return BindSteps("BindVoid", DataPath, Binding, Parameters, "BindSendAgreement");
+EndFunction
+
+// SendAgreement.ChangeSendAgreementBySendPartner.Step
+//Procedure StepChangeSendAgreementBySendPartner(Parameters, Chain, AgreementType, AgreementTypeByTransactionType)
+//	Chain.ChangeAgreementByPartner.Enable = True;
+//	If Chain.Idle Then
+//		Return;
+//	EndIf;
+//	Chain.ChangeAgreementByPartner.Setter = "SetAgreement";
+//	Options = ModelClientServer_V2.ChangeAgreementByPartnerOptions();
+//	Options.Partner       = GetPartner(Parameters);
+//	Options.Agreement     = GetAgreement(Parameters);
+//	Options.CurrentDate   = GetDate(Parameters);
+//	Options.AgreementType = AgreementType;
+//	If AgreementTypeByTransactionType Then
+//		Options.TransactionType = GetTransactionType(Parameters);
+//	EndIf;
+//	Options.StepName = "StepChangeAgreementByPartner";
+//	Chain.ChangeAgreementByPartner.Options.Add(Options);
+//EndProcedure
+
+#EndRegion
+
+#Region RECEIVE_AGREEMENT
+
+// ReceiveAgreement.OnChange
+Procedure ReceiveAgreementOnChange(Parameters) Export
+	RollbackPropertyToValueBeforeChange_Object(Parameters);
+	AddViewNotify("OnSetReceiveAgreementNotify", Parameters);
+	Binding = BindReceiveAgreement(Parameters);
+	ModelClientServer_V2.EntryPoint(Binding.StepsEnabler, Parameters);
+EndProcedure
+
+// ReceiveAgreement.Set
+Procedure SetReceiveAgreement(Parameters, Results) Export
+	Binding = BindReceiveAgreement(Parameters);
+	SetterObject(Binding.StepsEnabler, Binding.DataPath, Parameters, Results);
+EndProcedure
+
+// ReceiveAgreement.Get
+Function GetReceiveAgreement(Parameters)
+	Return GetPropertyObject(Parameters, BindReceiveAgreement(Parameters).DataPath);
+EndFunction
+
+// ReceiveAgreement.Bind
+Function BindReceiveAgreement(Parameters)
+	DataPath = "ReceiveAgreement";
+	Binding = New Structure();
+		
+	Return BindSteps("BindVoid", DataPath, Binding, Parameters, "BindReceiveAgreement");
+EndFunction
+
+//// ReceiveAgreement.ChangeReceiveAgreementByReceivePartner.Step
+//Procedure StepChangeReceiveAgreementByReceivePartner(Parameters, Chain, AgreementType, AgreementTypeByTransactionType)
+//	Chain.ChangeAgreementByPartner.Enable = True;
+//	If Chain.Idle Then
+//		Return;
+//	EndIf;
+//	Chain.ChangeAgreementByPartner.Setter = "SetAgreement";
+//	Options = ModelClientServer_V2.ChangeAgreementByPartnerOptions();
+//	Options.Partner       = GetPartner(Parameters);
+//	Options.Agreement     = GetAgreement(Parameters);
+//	Options.CurrentDate   = GetDate(Parameters);
+//	Options.AgreementType = AgreementType;
+//	If AgreementTypeByTransactionType Then
+//		Options.TransactionType = GetTransactionType(Parameters);
+//	EndIf;
+//	Options.StepName = "StepChangeAgreementByPartner";
+//	Chain.ChangeAgreementByPartner.Options.Add(Options);
+//EndProcedure
 
 #EndRegion
 
@@ -14715,6 +14978,152 @@ EndProcedure
 
 #EndRegion
 
+#Region OFFSET_OF_ADVANCES_INVOICES
+
+#Region OFFSET_OF_ADVANCES_INVOICES_INVOICE
+
+// OffsetOfAdvancesInvoices.Invoice.OnChange
+Procedure OffsetOfAdvancesInvoicesInvoiceOnChange(Parameters) Export
+	Binding = BindOffsetOfAdvancesInvoicesInvoice(Parameters);
+	ModelClientServer_V2.EntryPoint(Binding.StepsEnabler, Parameters);
+EndProcedure
+
+// OffsetOfAdvancesInvoices.Invoice.Set
+Procedure SetOffsetOfAdvancesInvoicesInvoice(Parameters, Results) Export
+	Binding = BindOffsetOfAdvancesInvoicesInvoice(Parameters);
+	SetterObject(Binding.StepsEnabler, Binding.DataPath, Parameters, Results);
+EndProcedure
+
+// OffsetOfAdvancesInvoices.Invoice.Bind
+Function BindOffsetOfAdvancesInvoicesInvoice(Parameters)
+	DataPath = "OffsetOfAdvancesInvoices.Invoice";
+	Binding = New Structure();
+	Return BindSteps("BindVoid", DataPath, Binding, Parameters, "BindOffsetOfAdvancesInvoicesInvoice");
+EndFunction
+
+#EndRegion
+
+#Region OFFSET_OF_ADVANCES_INVOICES_ORDER
+
+// OffsetOfAdvancesInvoices.Order.OnChange
+Procedure OffsetOfAdvancesInvoicesOrderOnChange(Parameters) Export
+	Binding = BindOffsetOfAdvancesInvoicesOrder(Parameters);
+	ModelClientServer_V2.EntryPoint(Binding.StepsEnabler, Parameters);
+EndProcedure
+
+// OffsetOfAdvancesInvoices.Order.Set
+Procedure SetOffsetOfAdvancesInvoicesOrder(Parameters, Results) Export
+	Binding = BindOffsetOfAdvancesInvoicesOrder(Parameters);
+	SetterObject(Binding.StepsEnabler, Binding.DataPath, Parameters, Results);
+EndProcedure
+
+// OffsetOfAdvancesInvoices.Order.Bind
+Function BindOffsetOfAdvancesInvoicesOrder(Parameters)
+	DataPath = "OffsetOfAdvancesInvoices.Order";
+	Binding = New Structure();
+	Return BindSteps("BindVoid", DataPath, Binding, Parameters, "BindOffsetOfAdvancesInvoicesOrder");
+EndFunction
+
+#EndRegion
+
+#Region OFFSET_OF_ADVANCES_INVOICES_AMOUNT
+
+// OffsetOfAdvancesInvoices.Amount.OnChange
+Procedure OffsetOfAdvancesInvoicesAmountOnChange(Parameters) Export
+	Binding = BindOffsetOfAdvancesInvoicesAmount(Parameters);
+	ModelClientServer_V2.EntryPoint(Binding.StepsEnabler, Parameters);
+EndProcedure
+
+// OffsetOfAdvancesInvoices.Amount.Set
+Procedure SetOffsetOfAdvancesInvoicesAmount(Parameters, Results) Export
+	Binding = BindOffsetOfAdvancesInvoicesAmount(Parameters);
+	SetterObject(Binding.StepsEnabler, Binding.DataPath, Parameters, Results);
+EndProcedure
+
+// OffsetOfAdvancesInvoices.Amount.Bind
+Function BindOffsetOfAdvancesInvoicesAmount(Parameters)
+	DataPath = "OffsetOfAdvancesInvoices.Amount";
+	Binding = New Structure();
+	Return BindSteps("BindVoid", DataPath, Binding, Parameters, "BindOffsetOfAdvancesInvoicesAmount");
+EndFunction
+
+#EndRegion
+
+#EndRegion
+
+#Region OFFSET_OF_ADVANCES_PAYMENTS
+
+#Region OFFSET_OF_ADVANCES_PATMENTS_DOCUMENT
+
+// OffsetOfAdvancesPayments.Document.OnChange
+Procedure OffsetOfAdvancesPaymentsDocumentOnChange(Parameters) Export
+	Binding = BindOffsetOfAdvancesPaymentsDocument(Parameters);
+	ModelClientServer_V2.EntryPoint(Binding.StepsEnabler, Parameters);
+EndProcedure
+
+// OffsetOfAdvancesPayments.Document.Set
+Procedure SetOffsetOfAdvancesPaymentsDocument(Parameters, Results) Export
+	Binding = BindOffsetOfAdvancesPaymentsDocument(Parameters);
+	SetterObject(Binding.StepsEnabler, Binding.DataPath, Parameters, Results);
+EndProcedure
+
+// OffsetOfAdvancesPayments.Document.Bind
+Function BindOffsetOfAdvancesPaymentsDocument(Parameters)
+	DataPath = "OffsetOfAdvancesPayments.Document";
+	Binding = New Structure();
+	Return BindSteps("BindVoid", DataPath, Binding, Parameters, "BindOffsetOfAdvancesPaymentsDocument");
+EndFunction
+
+#EndRegion
+
+#Region OFFSET_OF_ADVANCES_PATMENTS_ORDER
+
+// OffsetOfAdvancesPayments.Order.OnChange
+Procedure OffsetOfAdvancesPaymentsOrderOnChange(Parameters) Export
+	Binding = BindOffsetOfAdvancesPaymentsOrder(Parameters);
+	ModelClientServer_V2.EntryPoint(Binding.StepsEnabler, Parameters);
+EndProcedure
+
+// OffsetOfAdvancesPayments.Order.Set
+Procedure SetOffsetOfAdvancesPaymentsOrder(Parameters, Results) Export
+	Binding = BindOffsetOfAdvancesPaymentsOrder(Parameters);
+	SetterObject(Binding.StepsEnabler, Binding.DataPath, Parameters, Results);
+EndProcedure
+
+// OffsetOfAdvancesPayments.Order.Bind
+Function BindOffsetOfAdvancesPaymentsOrder(Parameters)
+	DataPath = "OffsetOfAdvancesPayments.Order";
+	Binding = New Structure();
+	Return BindSteps("BindVoid", DataPath, Binding, Parameters, "BindOffsetOfAdvancesPaymentsOrder");
+EndFunction
+
+#EndRegion
+
+#Region OFFSET_OF_ADVANCES_PATMENTS_AMOUNT
+
+// OffsetOfAdvancesPayments.Amount.OnChange
+Procedure OffsetOfAdvancesPaymentsAmountOnChange(Parameters) Export
+	Binding = BindOffsetOfAdvancesPaymentsAmount(Parameters);
+	ModelClientServer_V2.EntryPoint(Binding.StepsEnabler, Parameters);
+EndProcedure
+
+// OffsetOfAdvancesPayments.Amount.Set
+Procedure SetOffsetOfAdvancesPaymentsAmount(Parameters, Results) Export
+	Binding = BindOffsetOfAdvancesPaymentsAmount(Parameters);
+	SetterObject(Binding.StepsEnabler, Binding.DataPath, Parameters, Results);
+EndProcedure
+
+// OffsetOfAdvancesPayments.Amount.Bind
+Function BindOffsetOfAdvancesPaymentsAmount(Parameters)
+	DataPath = "OffsetOfAdvancesPayments.Amount";
+	Binding = New Structure();
+	Return BindSteps("BindVoid", DataPath, Binding, Parameters, "BindOffsetOfAdvancesPaymentsAmount");
+EndFunction
+
+#EndRegion
+
+#EndRegion
+
 // called when all chain steps is complete
 Procedure OnChainComplete(Parameters) Export
 	#IF Client THEN
@@ -14873,6 +15282,21 @@ Procedure ExecuteViewNotify(Parameters, ViewNotify)
 	
 	ElsIf ViewNotify = "OnSetPayrollListsAmountNotify" Then ViewClient_V2.OnSetPayrollListsAmountNotify(Parameters);
 	ElsIf ViewNotify = "OnSetSalaryAmountNotify" Then ViewClient_V2.OnSetSalaryAmountNotify(Parameters);
+	
+	ElsIf ViewNotify = "OffsetOfAdvancesInvoicesOnAddRowFormNotify"  Then ViewClient_V2.OffsetOfAdvancesInvoicesOnAddRowFormNotify(Parameters);
+	ElsIf ViewNotify = "OffsetOfAdvancesInvoicesOnCopyRowFormNotify" Then ViewClient_V2.OffsetOfAdvancesInvoicesOnCopyRowFormNotify(Parameters);
+	ElsIf ViewNotify = "OffsetOfAdvancesPaymentsOnAddRowFormNotify"  Then ViewClient_V2.OffsetOfAdvancesPaymentsOnAddRowFormNotify(Parameters);
+	ElsIf ViewNotify = "OffsetOfAdvancesPaymentsOnCopyRowFormNotify" Then ViewClient_V2.OffsetOfAdvancesPaymentsOnCopyRowFormNotify(Parameters);
+	ElsIf ViewNotify = "SendDocumentsOnAddRowFormNotify"             Then ViewClient_V2.SendDocumentsOnAddRowFormNotify(Parameters);
+	ElsIf ViewNotify = "SendDocumentsOnCopyRowFormNotify"            Then ViewClient_V2.SendDocumentsOnCopyRowFormNotify(Parameters);
+	ElsIf ViewNotify = "ReceiveDocumentsOnAddRowFormNotify"          Then ViewClient_V2.ReceiveDocumentsOnAddRowFormNotify(Parameters);
+	ElsIf ViewNotify = "ReceiveDocumentsOnCopyRowFormNotify"         Then ViewClient_V2.ReceiveDocumentsOnCopyRowFormNotify(Parameters);
+	ElsIf ViewNotify = "OnSetSendPartnerNotify"                      Then ViewClient_V2.OnSetSendPartnerNotify(Parameters);
+	ElsIf ViewNotify = "OnSetSendLegalNameNotify"                    Then ViewClient_V2.OnSetSendLegalNameNotify(Parameters);
+	ElsIf ViewNotify = "OnSetSendAgreementNotify"                    Then ViewClient_V2.OnSetSendAgreementNotify(Parameters);
+	ElsIf ViewNotify = "OnSetReceivePartnerNotify"                   Then ViewClient_V2.OnSetReceivePartnerNotify(Parameters);
+	ElsIf ViewNotify = "OnSetReceiveLegalNameNotify"                 Then ViewClient_V2.OnSetReceiveLegalNameNotify(Parameters);
+	ElsIf ViewNotify = "OnSetReceiveAgreementNotify"                 Then ViewClient_V2.OnSetReceiveAgreementNotify(Parameters);
 	
 	Else
 		Raise StrTemplate("Not handled view notify [%1]", ViewNotify);

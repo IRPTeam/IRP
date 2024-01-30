@@ -480,6 +480,7 @@ Function R1020B_AdvancesToVendors()
 		   |	OffsetOfAdvances.LegalName,
 		   |	OffsetOfAdvances.Currency,
 		   |	OffsetOfAdvances.AdvanceAgreement AS Agreement,
+		   |	OffsetOfAdvances.AdvanceDocument AS Basis,
 		   |	OffsetOfAdvances.Amount,
 		   |	UNDEFINED AS Key,
 		   |	OffsetOfAdvances.Recorder AS VendorsAdvancesClosing

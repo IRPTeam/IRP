@@ -160,6 +160,7 @@ Function R1020B_AdvancesToVendors()
 		   |	VALUE(AccumulationRecordType.Expense) AS RecordType,
 		   |	OffsetOfAdvances.Recorder AS VendorsAdvancesClosing,
 		   |	OffsetOfAdvances.AdvanceAgreement AS Agreement,
+		   |	OffsetOfAdvances.AdvanceDocument AS Basis,
 		   |	OffsetOfAdvances.AdvancesOrder AS Order,
 		   |	*
 		   |INTO R1020B_AdvancesToVendors

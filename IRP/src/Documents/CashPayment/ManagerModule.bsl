@@ -483,6 +483,7 @@ Function R1020B_AdvancesToVendors()
 		   |	PaymentList.LegalName,
 		   |	PaymentList.Currency,
 		   |	PaymentList.AdvanceAgreement AS Agreement,
+		   |	PaymentList.Basis AS Basis,
 		   |	PaymentList.Order,
 		   |	PaymentList.Amount,
 		   |	PaymentList.Key,
@@ -505,6 +506,7 @@ Function R1020B_AdvancesToVendors()
 		   |	OffsetOfAdvances.LegalName,
 		   |	OffsetOfAdvances.Currency,
 		   |	OffsetOfAdvances.AdvanceAgreement,
+		   |	OffsetOfAdvances.AdvanceDocument,
 		   |	OffsetOfAdvances.AdvancesOrder,
 		   |	OffsetOfAdvances.Amount,
 		   |	OffsetOfAdvances.Key,
@@ -541,6 +543,7 @@ Function R2020B_AdvancesFromCustomers()
 		   |	PaymentList.LegalName,
 		   |	PaymentList.Currency,
 		   |	PaymentList.AdvanceAgreement AS Agreement,
+		   |	PaymentList.Basis AS Basis,
 		   |	-PaymentList.Amount AS Amount,
 		   |	PaymentList.Key
 		   |INTO R2020B_AdvancesFromCustomers
@@ -688,6 +691,7 @@ Function T2014S_AdvancesInfo()
 		   |	PaymentList.LegalName,
 		   |	PaymentList.Order,
 		   |	PaymentList.AdvanceAgreement,
+		   |	PaymentList.Basis AS AdvanceDocument,
 		   |	TRUE AS IsVendorAdvance,
 		   |	FALSE AS IsCustomerAdvance,
 		   |	PaymentList.Amount
@@ -710,6 +714,7 @@ Function T2014S_AdvancesInfo()
 		   |	PaymentList.LegalName,
 		   |	UNDEFINED,
 		   |	PaymentList.AdvanceAgreement,
+		   |	PaymentList.Basis,
 		   |	FALSE,
 		   |	TRUE,
 		   |	-PaymentList.Amount AS Amount

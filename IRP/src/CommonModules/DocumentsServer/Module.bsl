@@ -40,6 +40,10 @@ Procedure OnCreateAtServer(Object, Form, Cancel, StandardProcessing) Export
 	If CommonFunctionsClientServer.ObjectHasProperty(Form.Items, "Author") Then
 		Form.Items.Author.ReadOnly = UserSettingsServer.AllDocuments_AdditionalSettings_DisableChangeAuthor();
 	EndIf;
+	
+	If Form.Items.Find("Number") <> Undefined Then
+		Form.Items.Number.ReadOnly = Not IsInRole("FullAccess");
+	EndIf;	
 EndProcedure
 
 Procedure OnReadAtServer(Object, Form, CurrentObject) Export

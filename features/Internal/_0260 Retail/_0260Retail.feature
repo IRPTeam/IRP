@@ -1695,9 +1695,8 @@ Scenario: _0260170 check filling payment agent in RSR
 		And I click "OK" button		
 		And I finish line editing in "Payments" table
 		And "Payments" table became equal
-			| '#' | 'Amount' | 'Commission' | 'Payment type' | 'Financial movement type' | 'Payment agent legal name contract' | 'Payment terminal' | 'Bank term'    | 'Account' | 'Percent' | 'RRN Code' | 'Payment agent partner' | 'Payment agent legal name' | 'Payment agent partner terms' |
-			| '1' | ''       | ''           | 'Card 01'      | ''                        | ''                                  | ''                 | 'Bank term 02' | ''        | '1,00'    | ''         | ''                      | ''                         | ''                            |
-	// * Change payment type - cash
+			| '#' | 'Amount' | 'Commission' | 'Payment type' | 'Financial movement type' | 'Payment agent legal name contract' | 'Payment terminal' | 'Bank term'    | 'Account'      | 'Percent' | 'RRN Code' | 'Payment agent partner' | 'Payment agent legal name' | 'Payment agent partner terms' |
+			| '1' | ''       | ''           | 'Card 01'      | ''                        | ''                                  | ''                 | 'Bank term 02' | 'Transit Main' | '1,00'    | ''         | ''                      | ''                         | ''                            |
 	And I close all client application windows
 		
 				
@@ -1730,8 +1729,8 @@ Scenario: _0260171 check filling payment agent in RRR
 		And I click "OK" button		
 		And I finish line editing in "Payments" table
 		And "Payments" table became equal
-			| '#' | 'Amount' | 'Commission' | 'Payment type' | 'Financial movement type' | 'Payment agent legal name contract' | 'Payment terminal' | 'Bank term'    | 'Account' | 'Percent' | 'RRN Code' | 'Payment agent partner' | 'Payment agent legal name' | 'Payment agent partner terms' |
-			| '1' | ''       | ''           | 'Card 01'      | ''                        | ''                                  | ''                 | 'Bank term 02' | ''        | '1,00'    | ''         | ''                      | ''                         | ''                            |
+			| '#' | 'Amount' | 'Commission' | 'Payment type' | 'Financial movement type' | 'Payment agent legal name contract' | 'Payment terminal' | 'Bank term'    | 'Account'      | 'Percent' | 'RRN Code' | 'Payment agent partner' | 'Payment agent legal name' | 'Payment agent partner terms' |
+			| '1' | ''       | ''           | 'Card 01'      | ''                        | ''                                  | ''                 | 'Bank term 02' | 'Transit Main' | '1,00'    | ''         | ''                      | ''                         | ''                            |
 	And I close all client application windows					
 		
 Scenario: _0260172 check filling Account from Workstation when select payment type - cash (RSR)

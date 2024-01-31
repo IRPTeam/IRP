@@ -186,8 +186,8 @@ Scenario: _0155250 create retail sales order
 			And I click "Post" button
 		* Check payments
 			And "Payments" table became equal
-				| '#'    | 'Amount'      | 'Commission'    | 'Payment type'    | 'Payment terminal'    | 'Bank term'       | 'Account'    | 'Percent'     |
-				| '1'    | '1 000,00'    | '20,00'         | 'Card 02'         | ''                    | 'Bank term 01'    | ''           | '2,00'        |
+				| '#' | 'Amount'   | 'Commission' | 'Payment type' | 'Payment terminal' | 'Bank term'    | 'Account'        | 'Percent' |
+				| '1' | '1 000,00' | '20,00'      | 'Card 02'      | ''                 | 'Bank term 01' | 'Transit Second' | '2,00'    |
 		* Post Sales order
 			And I delete "$$NumberSalesOrder50$$" variable
 			And I delete "$$SalesOrder50$$" variable

@@ -31,7 +31,7 @@ Scenario: check the filter by own company
 		And I click the button named "FormChoose"
 		When I Check the steps for Exception
 			| 'Then the form attribute named "Company" became equal to 'Company Kalipso''    |
-	And I close all client application windows
+	And I close all client application windows 
 
 Scenario: check the filter by own company in the Cash transfer order
 	And I click the button named "FormCreate"

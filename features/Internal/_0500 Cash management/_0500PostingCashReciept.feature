@@ -149,9 +149,55 @@ Scenario: _050001 create Cash receipt based on Sales invoice
 		And "PaymentList" table contains lines
 			| 'Partner'     | 'Partner term'                       | 'Total amount'   | 'Payer'               | 'Basis document'            |
 			| 'Ferron BP'   | 'Basic Partner terms, without VAT'   | '20 000,00'      | 'Company Ferron BP'   | '$$SalesInvoice024008$$'    |
+		And I close all client application windows
+	
+
+Scenario: _050002 check that the amount does not change when select basis document in Cash receipt
 	And I close all client application windows
-
-
+	* Open CR and filling main info
+		Given I open hyperlink "e1cib/list/Document.CashReceipt"
+		And I click the button named "FormCreate"
+		And I select from the drop-down list named "Company" by "Main Company" string
+		And I select from "Cash account" drop-down list by "Cash desk №2" string
+		And I select from "Transaction type" drop-down list by "Payment from customer" string
+		And I select from the drop-down list named "Currency" by "Turkish lira" string
+		And in the table "PaymentList" I click the button named "PaymentListAdd"
+		And I select current line in "PaymentList" table
+		And I select "Ferron BP" from "Partner" drop-down list by string in "PaymentList" table
+		And I select "Company Ferron BP" from "Payer" drop-down list by string in "PaymentList" table
+		And I select "Basic Partner terms, without VAT" from "Partner term" drop-down list by string in "PaymentList" table
+		And I activate field named "PaymentListTotalAmount" in "PaymentList" table
+		And I input "5 000,00" text in the field named "PaymentListTotalAmount" of "PaymentList" table
+		And I finish line editing in "PaymentList" table
+	* Reselect SI and check amount
+		And I activate "Basis document" field in "PaymentList" table
+		And I select current line in "PaymentList" table
+		And I go to line in "List" table
+			| 'Company'        | 'Amount'      | 'Legal name'          | 'Partner'      |
+			| 'Main Company'   | '11 099,93'   | 'Company Ferron BP'   | 'Ferron BP'    |
+		And I click "Select" button
+		And "PaymentList" table contains lines
+			| 'Partner'     | 'Partner term'                       | 'Total amount'   | 'Payer'               | 'Basis document'            |
+			| 'Ferron BP'   | 'Basic Partner terms, without VAT'   | '5 000,00'       | 'Company Ferron BP'   | '$$SalesInvoice024008$$'    |
+	* Add one more line with the same invoice and check amount
+		And in the table "PaymentList" I click the button named "PaymentListAdd"
+		And I select current line in "PaymentList" table
+		And I select "Ferron BP" from "Partner" drop-down list by string in "PaymentList" table
+		And I select "Company Ferron BP" from "Payer" drop-down list by string in "PaymentList" table
+		And I select "Basic Partner terms, without VAT" from "Partner term" drop-down list by string in "PaymentList" table
+		And I finish line editing in "PaymentList" table
+		And I activate "Basis document" field in "PaymentList" table
+		And I select current line in "PaymentList" table
+		And I go to line in "List" table
+			| 'Company'        | 'Amount'      | 'Legal name'          | 'Partner'      |
+			| 'Main Company'   | '6 099,93'   | 'Company Ferron BP'   | 'Ferron BP'    |
+		And I click "Select" button
+		And "PaymentList" table contains lines
+			| 'Partner'     | 'Partner term'                       | 'Total amount'   | 'Payer'               | 'Basis document'            |
+			| 'Ferron BP'   | 'Basic Partner terms, without VAT'   | '5 000,00'       | 'Company Ferron BP'   | '$$SalesInvoice024008$$'    |
+			| 'Ferron BP'   | 'Basic Partner terms, without VAT'   | '6 099,93'       | 'Company Ferron BP'   | '$$SalesInvoice024008$$'    |
+	And I close all client application windows
+	
 
 
 Scenario: _0500011 create Cash receipt (independently)
@@ -464,7 +510,7 @@ Scenario: _050005 check input Description in the documentCash receipt
 	Given I open hyperlink "e1cib/list/Document.CashReceipt"
 	When check filling in Description
 
-Scenario: _050006 check the choice of transaction type in the documentCash receipt
+Scenario: _050006 check the choice of transaction type in the document Cash receipt
 	And I close all client application windows
 	Given I open hyperlink "e1cib/list/Document.CashReceipt"
 	When check the choice of the type of operation in the documents of receipt of payment

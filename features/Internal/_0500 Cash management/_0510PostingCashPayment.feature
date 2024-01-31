@@ -140,7 +140,50 @@ Scenario: _051001 create Cash payment based on Purchase invoice
 	And I close all client application windows
 
 
-
+Scenario: _051002 check that the amount does not change when select basis document in Cash payment
+	And I close all client application windows
+	* Open CP and filling main info
+		Given I open hyperlink "e1cib/list/Document.CashPayment"
+		And I click the button named "FormCreate"
+		And I select from the drop-down list named "Company" by "Main Company" string
+		And I select from "Cash account" drop-down list by "Cash desk №2" string
+		And I select from "Transaction type" drop-down list by "Payment from customer" string
+		And in the table "PaymentList" I click the button named "PaymentListAdd"
+		And I select current line in "PaymentList" table
+		And I select "Ferron BP" from "Partner" drop-down list by string in "PaymentList" table
+		And I select "Company Ferron BP" from "Payee" drop-down list by string in "PaymentList" table
+		And I select "Vendor Ferron, TRY" from "Partner term" drop-down list by string in "PaymentList" table
+		And I activate field named "PaymentListTotalAmount" in "PaymentList" table
+		And I input "5 000,00" text in the field named "PaymentListTotalAmount" of "PaymentList" table
+		And I finish line editing in "PaymentList" table
+	* Reselect SI and check amount
+		And I activate "Basis document" field in "PaymentList" table
+		And I select current line in "PaymentList" table
+		And I go to line in "List" table
+			| 'Company'        | 'Amount'      | 'Legal name'          | 'Partner'      |
+			| 'Main Company'   | '137 000,00'  | 'Company Ferron BP'   | 'Ferron BP'    |
+		And I click "Select" button
+		And "PaymentList" table contains lines
+			| 'Partner'   | 'Partner term'       | 'Total amount' | 'Payee'             | 'Basis document'            |
+			| 'Ferron BP' | 'Vendor Ferron, TRY' | '5 000,00'     | 'Company Ferron BP' | '$$PurchaseInvoice018001$$' |
+	// * Add one more line with the same invoice and check amount
+	// 	And in the table "PaymentList" I click the button named "PaymentListAdd"
+	// 	And I select current line in "PaymentList" table
+	// 	And I select "Ferron BP" from "Partner" drop-down list by string in "PaymentList" table
+	// 	And I select "Company Ferron BP" from "Payee" drop-down list by string in "PaymentList" table
+	// 	And I select "Vendor Ferron, TRY" from "Partner term" drop-down list by string in "PaymentList" table
+	// 	And I finish line editing in "PaymentList" table
+	// 	And I activate "Basis document" field in "PaymentList" table
+	// 	And I select current line in "PaymentList" table
+	// 	And I go to line in "List" table
+	// 		| 'Company'        | 'Amount'     | 'Legal name'          | 'Partner'      |
+	// 		| 'Main Company'   | '132 000,00' | 'Company Ferron BP'   | 'Ferron BP'    |
+	// 	And I click "Select" button
+	// 	And "PaymentList" table contains lines
+	// 		| 'Partner'   | 'Partner term'       | 'Total amount' | 'Payee'             | 'Basis document'            |
+	// 		| 'Ferron BP' | 'Vendor Ferron, TRY' | '5 000,00'     | 'Company Ferron BP' | '$$PurchaseInvoice018001$$' |
+	// 		| 'Ferron BP' | 'Vendor Ferron, TRY' | '132 000,00'   | 'Company Ferron BP' | '$$PurchaseInvoice018001$$' |
+	And I close all client application windows
 
 Scenario: _0510011 create Cash payment (independently)
 	* Create Cash payment in lire for Ferron BP (Sales invoice in lire)

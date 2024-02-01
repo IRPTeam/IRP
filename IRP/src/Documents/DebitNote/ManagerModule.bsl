@@ -252,7 +252,7 @@ Function T2014S_AdvancesInfo()
 EndFunction
 
 Function T2015S_TransactionsInfo() 
-	Return InformationRegisters.T2014S_AdvancesInfo.T2014S_AdvancesInfo_DebitNote();
+	Return InformationRegisters.T2015S_TransactionsInfo.T2015S_TransactionsInfo_DebitNote();
 EndFunction
 
 #EndRegion

@@ -153,7 +153,8 @@ Function ItemList()
 		   |	0 AS OffersAmount,
 		   |	UNDEFINED AS Order,
 		   |	DocItemList.Project,
-		   |	TRUE AS IsSales
+		   |	TRUE AS IsSales,
+		   |	UNDEFINED AS SalesOrder
 		   |INTO ItemList
 		   |FROM
 		   |	Document.SalesReportFromTradeAgent.ItemList AS DocItemList

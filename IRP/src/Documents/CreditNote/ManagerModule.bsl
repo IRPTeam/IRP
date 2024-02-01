@@ -248,7 +248,7 @@ Function R1022B_VendorsPaymentPlanning()
 EndFunction
 
 Function T2014S_AdvancesInfo() 
-	Return InformationRegisters.T2015S_TransactionsInfo.T2015S_TransactionsInfo_CreditNote();
+	Return InformationRegisters.T2014S_AdvancesInfo.T2014S_AdvancesInfo_CreditNote();
 EndFunction
 
 Function T2015S_TransactionsInfo()

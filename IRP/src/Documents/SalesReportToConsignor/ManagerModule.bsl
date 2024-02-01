@@ -136,7 +136,8 @@ Function ItemList()
 		   |	ItemList.VatRate AS VatRate,
 		   |	UNDEFINED AS Order,
 		   |	ItemList.Project,
-		   |	TRUE AS IsPurchase
+		   |	TRUE AS IsPurchase,
+		   |	UNDEFINED AS PurchaseOrder
 		   |INTO ItemList
 		   |FROM
 		   |	Document.SalesReportToConsignor.ItemList AS ItemList

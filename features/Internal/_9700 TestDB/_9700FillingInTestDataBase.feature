@@ -91,6 +91,11 @@ When Create catalog FixedAssetsLedgerTypes objects (test data base)
 When Create catalog DepreciationSchedules objects (test data base)
 When Create catalog FixedAssets objects (test data base)
 When Create catalog ItemSegments objects (test data base)
+When Create catalog EmployeeSchedule objects (test data base)
+When Create catalog LegalNameContracts objects (test data base)
+When Create catalog Projects objects (test data base)
+When Create catalog UnitsOfMeasurement objects (test data base)
+When Create catalog Vehicles objects (test data base)
 * Tax settings
 		Given I open hyperlink "e1cib/list/Catalog.Companies"
 		And I go to line in "List" table
@@ -169,6 +174,8 @@ When Create document CashStatement objects  (test data base)
 When Create document ForeignCurrencyRevaluation objects (test data base)
 When Create document MoneyTransfer objects (test data base)
 When Create catalog PartnerItems objects (test data base)
+When Create document CustomersAdvancesClosing objects (test data base)
+WHen Create document VendorsAdvancesClosing objects (test data base)
 * Load data for Accounting system
 	When Create chart of characteristic types AccountingExtraDimensionTypes objects (test data base)
 	When Create chart of accounts Basic objects with LedgerTypeVariants (Basic LTV) (test data base)
@@ -559,6 +566,16 @@ When Create catalog PartnerItems objects (test data base)
 		And Delay "3"
 * Posting CalculationMovementCosts
 		Given I open hyperlink "e1cib/list/Document.CalculationMovementCosts"
+		Then I select all lines of "List" table
+		And in the table "List" I click the button named "ListContextMenuPost"
+		And Delay "3"
+* Posting CustomersAdvancesClosing
+		Given I open hyperlink "e1cib/list/Document.CustomersAdvancesClosing"
+		Then I select all lines of "List" table
+		And in the table "List" I click the button named "ListContextMenuPost"
+		And Delay "3"
+* Posting VendorsAdvancesClosing
+		Given I open hyperlink "e1cib/list/Document.VendorsAdvancesClosing"
 		Then I select all lines of "List" table
 		And in the table "List" I click the button named "ListContextMenuPost"
 		And Delay "3"

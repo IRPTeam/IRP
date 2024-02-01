@@ -204,6 +204,7 @@
   <sessionParameters>SessionParameter.OurCompanies</sessionParameters>
   <sessionParameters>SessionParameter.RunBackgroundJobInDebugMode</sessionParameters>
   <sessionParameters>SessionParameter.Workstation</sessionParameters>
+  <sessionParameters>SessionParameter.NumberEditingAvailable</sessionParameters>
   <roles>Role.BasicRole</roles>
   <roles>Role.CreateOrModifyUsers</roles>
   <roles>Role.Document_AdditionalAccrual</roles>
@@ -734,6 +735,7 @@
   <commonModules>CommonModule.WorkstationServer</commonModules>
   <commonModules>CommonModule.DocDebitCreditNoteClient</commonModules>
   <commonModules>CommonModule.DocDebitCreditNoteServer</commonModules>
+  <commonModules>CommonModule.ChartsOfCharacteristicTypesServer</commonModules>
   <commonAttributes>CommonAttribute.Author</commonAttributes>
   <commonAttributes>CommonAttribute.Branch</commonAttributes>
   <commonAttributes>CommonAttribute.Description</commonAttributes>

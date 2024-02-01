@@ -747,5 +747,13 @@
       <event>AfterWriteAtServer</event>
       <name>AfterWriteAtServer</name>
     </handlers>
+    <handlers>
+      <event>OnReadAtServer</event>
+      <name>OnReadAtServer</name>
+    </handlers>
+    <handlers>
+      <event>OnWriteAtServer</event>
+      <name>OnWriteAtServer</name>
+    </handlers>
   </extInfo>
 </form:Form>

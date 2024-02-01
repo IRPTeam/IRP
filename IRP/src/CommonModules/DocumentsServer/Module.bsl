@@ -42,7 +42,8 @@ Procedure OnCreateAtServer(Object, Form, Cancel, StandardProcessing) Export
 	EndIf;
 	
 	If Form.Items.Find("Number") <> Undefined Then
-		Form.Items.Number.ReadOnly = Not IsInRole("FullAccess");
+		NumberEditingAvailable = SessionParametersServer.GetSessionParameter("NumberEditingAvailable");
+		Form.Items.Number.ReadOnly = Not NumberEditingAvailable;
 	EndIf;	
 EndProcedure
 

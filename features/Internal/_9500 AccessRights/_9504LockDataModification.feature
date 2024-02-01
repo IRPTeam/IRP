@@ -141,6 +141,9 @@ Scenario: 950400 preparation
 		And I execute 1C:Enterprise script at server	
 			| "Documents.PurchaseInvoice.FindByNumber(324).GetObject().Write(DocumentWriteMode.Posting);"    |
 		And I close all client application windows
+	Given I open hyperlink "e1cib/app/DataProcessor.SystemSettings"
+	And I set checkbox "Number editing available"
+	And I close "System settings" window
 		
 Scenario: 9504001 check preparation
 	When check preparation		

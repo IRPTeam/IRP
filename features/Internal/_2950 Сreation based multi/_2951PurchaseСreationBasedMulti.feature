@@ -51,6 +51,11 @@ Scenario: _090300 preparation (creation mechanism based on for purchase document
 		When Create catalog IntegrationSettings objects
 		When Create information register CurrencyRates records
 		When Create information register Taxes records (VAT)
+		Given I open hyperlink "e1cib/app/DataProcessor.SystemSettings"
+		And I set checkbox "Number editing available"
+		And I close "System settings" window
+				
+
 
 
 

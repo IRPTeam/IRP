@@ -62,6 +62,9 @@ Scenario:  _052001 preparation (Bank receipt)
 		When Create catalog Partners objects
 		When Create document BR and CS (payment by POS)
 		When Create information register Taxes records (VAT)
+		Given I open hyperlink "e1cib/app/DataProcessor.SystemSettings"
+		And I set checkbox "Number editing available"
+		And I close "System settings" window
 	* Check or create SalesOrder023001
 		Given I open hyperlink "e1cib/list/Document.SalesOrder"
 		If "List" table does not contain lines Then

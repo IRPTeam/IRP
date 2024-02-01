@@ -150,7 +150,10 @@ Function ItemList()
 		   |	DocItemList.VatRate AS VatRate,
 		   |	DocItemList.TaxAmount AS TaxAmount,
 		   |	VALUE(Catalog.Partners.EmptyRef) AS SalesPerson,
-		   |	0 AS OffersAmount
+		   |	0 AS OffersAmount,
+		   |	UNDEFINED AS Order,
+		   |	DocItemList.Project,
+		   |	TRUE AS IsSales
 		   |INTO ItemList
 		   |FROM
 		   |	Document.SalesReportFromTradeAgent.ItemList AS DocItemList
@@ -363,69 +366,11 @@ Function R4010B_ActualStocks()
 EndFunction
 
 Function R2020B_AdvancesFromCustomers()
-	Return "SELECT
-		   |	VALUE(AccumulationRecordType.Expense) AS RecordType,
-		   |	OffsetOfAdvances.Recorder AS CustomersAdvancesClosing,
-		   |	OffsetOfAdvances.AdvanceAgreement AS Agreement,
-		   |	OffsetOfAdvances.AdvanceDocument AS Basis,
-		   |	OffsetOfAdvances.AdvancesOrder AS Order,
-		   |	*
-		   |INTO R2020B_AdvancesFromCustomers
-		   |FROM
-		   |	InformationRegister.T2010S_OffsetOfAdvances AS OffsetOfAdvances
-		   |WHERE
-		   |	OffsetOfAdvances.Document = &Ref";
+	Return AccumulationRegisters.R2020B_AdvancesFromCustomers.R2020B_AdvancesFromCustomers_SI_SR_SOC_SRFTA();
 EndFunction
 
 Function R2021B_CustomersTransactions()
-	Return "SELECT
-		   |	VALUE(AccumulationRecordType.Receipt) AS RecordType,
-		   |	ItemList.Period,
-		   |	ItemList.Company,
-		   |	ItemList.Branch,
-		   |	ItemList.Currency,
-		   |	ItemList.LegalName,
-		   |	ItemList.Partner,
-		   |	ItemList.Agreement,
-		   |	ItemList.Basis,
-		   |	UNDEFINED AS Order,
-		   |	SUM(ItemList.Amount) AS Amount,
-		   |	UNDEFINED AS CustomersAdvancesClosing
-		   |INTO R2021B_CustomersTransactions
-		   |FROM
-		   |	ItemList AS ItemList
-		   |WHERE
-		   |	TRUE
-		   |GROUP BY
-		   |	ItemList.Agreement,
-		   |	ItemList.Basis,
-		   |	ItemList.Company,
-		   |	ItemList.Branch,
-		   |	ItemList.Currency,
-		   |	ItemList.LegalName,
-		   |	ItemList.Partner,
-		   |	ItemList.Period,
-		   |	VALUE(AccumulationRecordType.Receipt)
-		   |
-		   |UNION ALL
-		   |
-		   |SELECT
-		   |	VALUE(AccumulationRecordType.Expense) AS RecordType,
-		   |	OffsetOfAdvances.Period,
-		   |	OffsetOfAdvances.Company,
-		   |	OffsetOfAdvances.Branch,
-		   |	OffsetOfAdvances.Currency,
-		   |	OffsetOfAdvances.LegalName,
-		   |	OffsetOfAdvances.Partner,
-		   |	OffsetOfAdvances.TransactionAgreement,
-		   |	OffsetOfAdvances.TransactionDocument,
-		   |	OffsetOfAdvances.TransactionOrder,
-		   |	OffsetOfAdvances.Amount,
-		   |	OffsetOfAdvances.Recorder
-		   |FROM
-		   |	InformationRegister.T2010S_OffsetOfAdvances AS OffsetOfAdvances
-		   |WHERE
-		   |	OffsetOfAdvances.Document = &Ref";
+	Return AccumulationRegisters.R2021B_CustomersTransactions.R2021B_CustomersTransactions_SI_SRFTA();
 EndFunction
 
 Function R5010B_ReconciliationStatement()
@@ -466,33 +411,7 @@ Function R5021T_Revenues()
 EndFunction
 
 Function T2015S_TransactionsInfo()
-	Return "SELECT
-		   |	ItemList.Period AS Date,
-		   |	ItemList.Company,
-		   |	ItemList.Branch,
-		   |	ItemList.Currency,
-		   |	ItemList.Partner,
-		   |	ItemList.LegalName,
-		   |	ItemList.Agreement,
-		   |	UNDEFINED AS Order,
-		   |	TRUE AS IsCustomerTransaction,
-		   |	ItemList.Basis AS TransactionBasis,
-		   |	SUM(ItemList.Amount) AS Amount,
-		   |	TRUE AS IsDue
-		   |INTO T2015S_TransactionsInfo
-		   |FROM
-		   |	ItemList AS ItemList
-		   |WHERE
-		   |	TRUE
-		   |GROUP BY
-		   |	ItemList.Period,
-		   |	ItemList.Company,
-		   |	ItemList.Branch,
-		   |	ItemList.Currency,
-		   |	ItemList.Partner,
-		   |	ItemList.LegalName,
-		   |	ItemList.Agreement,
-		   |	ItemList.Basis";
+	Return InformationRegisters.T2015S_TransactionsInfo.T2015S_TransactionsInfo_SI_SRFTA();
 EndFunction
 
 Function T6020S_BatchKeysInfo()

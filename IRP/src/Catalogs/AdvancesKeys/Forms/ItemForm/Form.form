@@ -451,19 +451,19 @@
     </extInfo>
   </items>
   <items xsi:type="form:FormField">
-    <name>AdvanceDocument</name>
-    <id>40</id>
+    <name>Project</name>
+    <id>46</id>
     <visible>true</visible>
     <enabled>true</enabled>
     <userVisible>
       <common>true</common>
     </userVisible>
     <dataPath xsi:type="form:DataPath">
-      <segments>Object.AdvanceDocument</segments>
+      <segments>Object.Project</segments>
     </dataPath>
     <extendedTooltip>
-      <name>AdvanceDocumentExtendedTooltip</name>
-      <id>42</id>
+      <name>ProjectExtendedTooltip</name>
+      <id>48</id>
       <visible>true</visible>
       <enabled>true</enabled>
       <userVisible>
@@ -477,8 +477,8 @@
       </extInfo>
     </extendedTooltip>
     <contextMenu>
-      <name>AdvanceDocumentContextMenu</name>
-      <id>41</id>
+      <name>ProjectContextMenu</name>
+      <id>47</id>
       <visible>true</visible>
       <enabled>true</enabled>
       <userVisible>

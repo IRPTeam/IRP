@@ -56,7 +56,6 @@
   <defaultListForm>Document.DebitCreditNote.Form.ListForm</defaultListForm>
   <defaultChoiceForm>Document.DebitCreditNote.Form.ChoiceForm</defaultChoiceForm>
   <realTimePosting>Deny</realTimePosting>
-  <registerRecords>InformationRegister.T2018S_UserDefinedOffsetOfAdvances</registerRecords>
   <registerRecords>AccumulationRegister.R1020B_AdvancesToVendors</registerRecords>
   <registerRecords>AccumulationRegister.R1021B_VendorsTransactions</registerRecords>
   <registerRecords>AccumulationRegister.R2021B_CustomersTransactions</registerRecords>
@@ -77,22 +76,6 @@
     <maxValue xsi:type="core:UndefinedValue"/>
     <fillChecking>ShowError</fillChecking>
     <fillFromFillingValue>true</fillFromFillingValue>
-    <fillValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-    <dataHistory>Use</dataHistory>
-  </attributes>
-  <attributes uuid="a5ea2c4f-f578-4c54-a4fc-a13bb3b8932f">
-    <name>TransactionType</name>
-    <synonym>
-      <key>en</key>
-      <value>Transaction type</value>
-    </synonym>
-    <type>
-      <types>EnumRef.DebitCreditNoteTransactionTpes</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fillChecking>ShowError</fillChecking>
     <fillValue xsi:type="core:UndefinedValue"/>
     <fullTextSearch>Use</fullTextSearch>
     <dataHistory>Use</dataHistory>
@@ -232,69 +215,6 @@
     <fullTextSearch>Use</fullTextSearch>
     <dataHistory>Use</dataHistory>
   </attributes>
-  <attributes uuid="22ffa16f-5339-41a9-ae87-bea4420b8ba1">
-    <name>Partner</name>
-    <synonym>
-      <key>en</key>
-      <value>Partner</value>
-    </synonym>
-    <type>
-      <types>CatalogRef.Partners</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fillChecking>ShowError</fillChecking>
-    <fillValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-    <dataHistory>Use</dataHistory>
-  </attributes>
-  <attributes uuid="06052ec9-654e-4200-ac0f-11499d4ab5e1">
-    <name>LegalName</name>
-    <synonym>
-      <key>en</key>
-      <value>Legal name</value>
-    </synonym>
-    <type>
-      <types>CatalogRef.Companies</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fillChecking>ShowError</fillChecking>
-    <fillValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-    <dataHistory>Use</dataHistory>
-  </attributes>
-  <attributes uuid="46dd255c-8b56-4246-8e9b-1ed099c8a53e">
-    <name>Agreement</name>
-    <synonym>
-      <key>en</key>
-      <value>Agreement</value>
-    </synonym>
-    <type>
-      <types>CatalogRef.Agreements</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fillChecking>ShowError</fillChecking>
-    <fillValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-    <dataHistory>Use</dataHistory>
-  </attributes>
-  <attributes uuid="27f5024e-a990-477a-b2d9-b781be637a58">
-    <name>LegalNameContract</name>
-    <synonym>
-      <key>en</key>
-      <value>Legal name contract</value>
-    </synonym>
-    <type>
-      <types>CatalogRef.LegalNameContracts</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fillValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-    <dataHistory>Use</dataHistory>
-  </attributes>
   <attributes uuid="fd05b777-d870-453f-ba3f-0db11d413302">
     <name>Currency</name>
     <synonym>
@@ -333,24 +253,6 @@
     <synonym>
       <key>en</key>
       <value>Choice form</value>
-    </synonym>
-    <usePurposes>PersonalComputer</usePurposes>
-    <usePurposes>MobileDevice</usePurposes>
-  </forms>
-  <forms uuid="95a8ccbb-198f-403b-a55f-b564545913f2">
-    <name>ChoiceInvoiceForm</name>
-    <synonym>
-      <key>en</key>
-      <value>Choice invoice form</value>
-    </synonym>
-    <usePurposes>PersonalComputer</usePurposes>
-    <usePurposes>MobileDevice</usePurposes>
-  </forms>
-  <forms uuid="0e422751-134e-41f0-afbc-e59eb9708533">
-    <name>ChoicePaymentDocumentForm</name>
-    <synonym>
-      <key>en</key>
-      <value>Choice payment document form</value>
     </synonym>
     <usePurposes>PersonalComputer</usePurposes>
     <usePurposes>MobileDevice</usePurposes>

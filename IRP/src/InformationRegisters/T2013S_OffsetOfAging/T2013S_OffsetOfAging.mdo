@@ -70,6 +70,57 @@
     <fillValue xsi:type="core:UndefinedValue"/>
     <mainFilter>true</mainFilter>
   </dimensions>
+  <dimensions uuid="33e5838e-d769-47a6-b522-91869361ba45">
+    <name>Document</name>
+    <synonym>
+      <key>en</key>
+      <value>Document</value>
+    </synonym>
+    <type>
+      <types>DocumentRef.SalesReportFromTradeAgent</types>
+      <types>DocumentRef.CashPayment</types>
+      <types>DocumentRef.PurchaseInvoice</types>
+      <types>DocumentRef.DebitNote</types>
+      <types>DocumentRef.CreditNote</types>
+      <types>DocumentRef.BankReceipt</types>
+      <types>DocumentRef.PurchaseReturn</types>
+      <types>DocumentRef.BankPayment</types>
+      <types>DocumentRef.ChequeBondTransactionItem</types>
+      <types>DocumentRef.CashReceipt</types>
+      <types>DocumentRef.OpeningEntry</types>
+      <types>DocumentRef.SalesReturn</types>
+      <types>DocumentRef.SalesReportToConsignor</types>
+      <types>DocumentRef.PurchaseOrderClosing</types>
+      <types>DocumentRef.SalesOrderClosing</types>
+      <types>DocumentRef.SalesInvoice</types>
+      <types>DocumentRef.RetailReturnReceipt</types>
+      <types>DocumentRef.RetailSalesReceipt</types>
+      <types>DocumentRef.EmployeeCashAdvance</types>
+    </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <indexing>Index</indexing>
+    <fullTextSearch>Use</fullTextSearch>
+    <dataHistory>Use</dataHistory>
+    <fillValue xsi:type="core:UndefinedValue"/>
+    <mainFilter>true</mainFilter>
+  </dimensions>
+  <dimensions uuid="e6b9917c-9e27-4383-b34d-3e76584e9339">
+    <name>RecordType</name>
+    <synonym>
+      <key>en</key>
+      <value>Record type</value>
+    </synonym>
+    <type>
+      <types>EnumRef.RecordType</types>
+    </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <fullTextSearch>Use</fullTextSearch>
+    <dataHistory>Use</dataHistory>
+    <fillValue xsi:type="core:UndefinedValue"/>
+    <mainFilter>true</mainFilter>
+  </dimensions>
   <dimensions uuid="4878bbf2-34ea-4eb8-8d71-e40e7f1beecb">
     <name>Currency</name>
     <synonym>
@@ -113,41 +164,6 @@
     </type>
     <minValue xsi:type="core:UndefinedValue"/>
     <maxValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-    <dataHistory>Use</dataHistory>
-    <fillValue xsi:type="core:UndefinedValue"/>
-    <mainFilter>true</mainFilter>
-  </dimensions>
-  <dimensions uuid="33e5838e-d769-47a6-b522-91869361ba45">
-    <name>Document</name>
-    <synonym>
-      <key>en</key>
-      <value>Document</value>
-    </synonym>
-    <type>
-      <types>DocumentRef.SalesReportFromTradeAgent</types>
-      <types>DocumentRef.CashPayment</types>
-      <types>DocumentRef.PurchaseInvoice</types>
-      <types>DocumentRef.DebitNote</types>
-      <types>DocumentRef.CreditNote</types>
-      <types>DocumentRef.BankReceipt</types>
-      <types>DocumentRef.PurchaseReturn</types>
-      <types>DocumentRef.BankPayment</types>
-      <types>DocumentRef.ChequeBondTransactionItem</types>
-      <types>DocumentRef.CashReceipt</types>
-      <types>DocumentRef.OpeningEntry</types>
-      <types>DocumentRef.SalesReturn</types>
-      <types>DocumentRef.SalesReportToConsignor</types>
-      <types>DocumentRef.PurchaseOrderClosing</types>
-      <types>DocumentRef.SalesOrderClosing</types>
-      <types>DocumentRef.SalesInvoice</types>
-      <types>DocumentRef.RetailReturnReceipt</types>
-      <types>DocumentRef.RetailSalesReceipt</types>
-      <types>DocumentRef.EmployeeCashAdvance</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <indexing>Index</indexing>
     <fullTextSearch>Use</fullTextSearch>
     <dataHistory>Use</dataHistory>
     <fillValue xsi:type="core:UndefinedValue"/>

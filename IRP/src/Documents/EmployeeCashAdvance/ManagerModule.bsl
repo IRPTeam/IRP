@@ -114,7 +114,8 @@ Function PaymentList()
 		   |		WHEN PaymentList.Invoice.Agreement.ApArPostingDetail = VALUE(Enum.ApArPostingDetail.ByDocuments)
 		   |			THEN PaymentList.Invoice
 		   |		ELSE UNDEFINED
-		   |	END AS TransactionDocument
+		   |	END AS TransactionDocument,
+		   |	PaymentList.Project
 		   |INTO PaymentList
 		   |FROM
 		   |	Document.EmployeeCashAdvance.PaymentList AS PaymentList
@@ -167,46 +168,7 @@ Function R5022T_Expenses()
 EndFunction
 
 Function R1021B_VendorsTransactions()
-	Return "SELECT
-		   |	VALUE(AccumulationRecordType.Expense) AS RecordType,
-		   |	PaymentList.Period,
-		   |	PaymentList.Company,
-		   |	PaymentList.Branch,
-		   |	PaymentList.VendorPartner AS Partner,
-		   |	PaymentList.VendorLegalName AS LegalName,
-		   |	PaymentList.Currency,
-		   |	PaymentList.VendorAgreement AS Agreement,
-		   |	PaymentList.TransactionDocument AS Basis,
-		   |	Undefined AS Order,
-		   |	PaymentList.Key,
-		   |	PaymentList.TotalAmount AS Amount,
-		   |	UNDEFINED AS VendorsAdvancesClosing
-		   |INTO R1021B_VendorsTransactions
-		   |FROM
-		   |	PaymentList AS PaymentList
-		   |WHERE
-		   |	PaymentList.IsPurchase
-		   |
-		   |UNION ALL
-		   |
-		   |SELECT
-		   |	VALUE(AccumulationRecordType.Expense) AS RecordType,
-		   |	OffsetOfAdvances.Period,
-		   |	OffsetOfAdvances.Company,
-		   |	OffsetOfAdvances.Branch,
-		   |	OffsetOfAdvances.Partner,
-		   |	OffsetOfAdvances.LegalName,
-		   |	OffsetOfAdvances.Currency,
-		   |	OffsetOfAdvances.TransactionAgreement,
-		   |	OffsetOfAdvances.TransactionDocument,
-		   |	OffsetOfAdvances.TransactionOrder,
-		   |	OffsetOfAdvances.Key,
-		   |	OffsetOfAdvances.Amount,
-		   |	OffsetOfAdvances.Recorder
-		   |FROM
-		   |	InformationRegister.T2010S_OffsetOfAdvances AS OffsetOfAdvances
-		   |WHERE
-		   |	OffsetOfAdvances.Document = &Ref";
+	Return AccumulationRegisters.R1021B_VendorsTransactions.R1021B_VendorsTransactions_ECA();
 EndFunction
 
 Function R5010B_ReconciliationStatement()
@@ -227,46 +189,11 @@ Function R5010B_ReconciliationStatement()
 EndFunction
 
 Function T2015S_TransactionsInfo()
-	Return "SELECT
-		   |	PaymentList.Period AS Date,
-		   |	PaymentList.Key,
-		   |	PaymentList.Company,
-		   |	PaymentList.Branch,
-		   |	PaymentList.Currency,
-		   |	PaymentList.VendorPartner AS Partner,
-		   |	PaymentList.VendorLegalName AS LegalName,
-		   |	PaymentList.VendorAgreement AS Agreement,
-		   |	Undefined AS Order,
-		   |	TRUE AS IsVendorTransaction,
-		   |	FALSE AS IsCustomerTransaction,
-		   |	PaymentList.TransactionDocument AS TransactionBasis,
-		   |	PaymentList.TotalAmount AS Amount,
-		   |	TRUE AS IsPaid
-		   |INTO T2015S_TransactionsInfo
-		   |FROM
-		   |	PaymentList AS PaymentList
-		   |WHERE
-		   |	PaymentList.IsPurchase";
+	Return InformationRegisters.T2015S_TransactionsInfo.T2015S_TransactionsInfo_ECA();
 EndFunction
 
 Function R5012B_VendorsAging()
-	Return "SELECT
-		   |	VALUE(AccumulationRecordType.Expense) AS RecordType,
-		   |	OffsetOfAging.Period,
-		   |	OffsetOfAging.Company,
-		   |	OffsetOfAging.Branch,
-		   |	OffsetOfAging.Partner,
-		   |	OffsetOfAging.Agreement,
-		   |	OffsetOfAging.Currency,
-		   |	OffsetOfAging.Invoice,
-		   |	OffsetOfAging.PaymentDate,
-		   |	OffsetOfAging.Amount,
-		   |	OffsetOfAging.Recorder AS AgingClosing
-		   |INTO R5012B_VendorsAging
-		   |FROM
-		   |	InformationRegister.T2013S_OffsetOfAging AS OffsetOfAging
-		   |WHERE
-		   |	OffsetOfAging.Document = &Ref";
+	Return AccumulationRegisters.R5012B_VendorsAging.R5012B_VendorsAging_Offset();
 EndFunction
 
 #EndRegion

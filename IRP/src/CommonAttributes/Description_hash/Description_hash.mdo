@@ -284,6 +284,10 @@
     <metadata>Catalog.Projects</metadata>
     <use>Use</use>
   </content>
+  <content>
+    <metadata>Catalog.PrintInfo</metadata>
+    <use>Use</use>
+  </content>
   <autoUse>DontUse</autoUse>
   <dataSeparation>DontUse</dataSeparation>
   <usersSeparation>DontUse</usersSeparation>

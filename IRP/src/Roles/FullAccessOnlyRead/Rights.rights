@@ -9446,7 +9446,7 @@
 		</right>
 	</object>
 	<object>
-		<name>InformationRegister.T2010S_OffsetOfAdvances.Dimension.AdvancesOrder</name>
+		<name>InformationRegister.T2010S_OffsetOfAdvances.Dimension.AdvanceOrder</name>
 		<right>
 			<name>Edit</name>
 			<value>false</value>

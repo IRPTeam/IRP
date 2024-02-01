@@ -251,7 +251,7 @@ Function GetAdvancesCurrencyRevaluation(DocRef)
 	|	Table.Period,
 	|	Table.Recorder AS VendorsAdvancesClosing,
 	|	Table.Recorder AS CustomersAdvancesClosing,
-	|	Table.AdvancesOrder AS Order,
+	|	Table.AdvanceOrder AS Order,
 	|	Table.Company,
 	|	Table.Branch,
 	|	Table.Currency,
@@ -1294,7 +1294,7 @@ Procedure RevaluateCurrency_Advances(Parameters,
 		NewRow_RecordSet = Records_AdvancesCurrencyRevaluation.Add();
 		FillPropertyValues(NewRow_RecordSet, QueryTableRow);
 		NewRow_RecordSet.Document = Recorder;
-		NewRow_RecordSet.AdvancesOrder = QueryTableRow.Order;
+		NewRow_RecordSet.AdvanceOrder = QueryTableRow.Order;
 		
 		// Customers transaction (currency revaluation)
 		NewRow_Transaction = TableTransactions_CurrencyRevaluation.Add();

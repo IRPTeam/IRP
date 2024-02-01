@@ -151,7 +151,7 @@
     </items>
     <items xsi:type="form:FormField">
       <name>Ref</name>
-      <id>28</id>
+      <id>22</id>
       <visible>true</visible>
       <enabled>true</enabled>
       <userVisible/>
@@ -160,7 +160,7 @@
       </dataPath>
       <extendedTooltip>
         <name>RefExtendedTooltip</name>
-        <id>30</id>
+        <id>24</id>
         <visible>true</visible>
         <enabled>true</enabled>
         <userVisible>
@@ -175,7 +175,7 @@
       </extendedTooltip>
       <contextMenu>
         <name>RefContextMenu</name>
-        <id>29</id>
+        <id>23</id>
         <visible>true</visible>
         <enabled>true</enabled>
         <userVisible>
@@ -349,6 +349,7 @@
       </userVisible>
       <autoFill>true</autoFill>
     </contextMenu>
+    <representation>HierarchicalList</representation>
     <changeRowSet>true</changeRowSet>
     <changeRowOrder>true</changeRowOrder>
     <autoMaxWidth>true</autoMaxWidth>
@@ -423,25 +424,25 @@
     <edit>
       <common>true</common>
     </edit>
-    <notDefaultUseAlwaysAttributes xsi:type="form:DataPath">
-      <segments>List.Ref</segments>
-    </notDefaultUseAlwaysAttributes>
     <main>true</main>
     <extInfo xsi:type="form:DynamicListExtInfo">
       <queryText>SELECT
 	Table.Ref,
 	Table.DeletionMark,
 	Table.Code,
-	Table.Description_en AS Description,
-	Table.Predefined,
-	Table.PredefinedDataName
+	Table.Description_en AS Description
 FROM
 	Catalog.Projects AS Table</queryText>
       <mainTable>Catalog.Projects</mainTable>
+      <dynamicDataRead>true</dynamicDataRead>
       <autoFillAvailableFields>true</autoFillAvailableFields>
       <customQuery>true</customQuery>
       <autoSaveUserSettings>true</autoSaveUserSettings>
       <getInvisibleFieldPresentations>true</getInvisibleFieldPresentations>
+      <fields xsi:type="schema:DataCompositionSchemaNestedDataSet">
+        <dataPath>AddAttributes</dataPath>
+        <field>AddAttributes</field>
+      </fields>
       <fields xsi:type="schema:DataCompositionSchemaDataSetField">
         <dataPath>Ref</dataPath>
         <field>Ref</field>
@@ -449,6 +450,10 @@ FROM
       <fields xsi:type="schema:DataCompositionSchemaDataSetField">
         <dataPath>DeletionMark</dataPath>
         <field>DeletionMark</field>
+      </fields>
+      <fields xsi:type="schema:DataCompositionSchemaDataSetField">
+        <dataPath>Parent</dataPath>
+        <field>Parent</field>
       </fields>
       <fields xsi:type="schema:DataCompositionSchemaDataSetField">
         <dataPath>Code</dataPath>
@@ -463,6 +468,34 @@ FROM
         <field>PredefinedDataName</field>
       </fields>
       <fields xsi:type="schema:DataCompositionSchemaDataSetField">
+        <dataPath>Editor</dataPath>
+        <field>Editor</field>
+      </fields>
+      <fields xsi:type="schema:DataCompositionSchemaDataSetField">
+        <dataPath>Author</dataPath>
+        <field>Author</field>
+      </fields>
+      <fields xsi:type="schema:DataCompositionSchemaDataSetField">
+        <dataPath>ModifyDate</dataPath>
+        <field>ModifyDate</field>
+      </fields>
+      <fields xsi:type="schema:DataCompositionSchemaDataSetField">
+        <dataPath>Description_hash</dataPath>
+        <field>Description_hash</field>
+      </fields>
+      <fields xsi:type="schema:DataCompositionSchemaDataSetField">
+        <dataPath>CreateDate</dataPath>
+        <field>CreateDate</field>
+      </fields>
+      <fields xsi:type="schema:DataCompositionSchemaDataSetField">
+        <dataPath>Description_tr</dataPath>
+        <field>Description_tr</field>
+      </fields>
+      <fields xsi:type="schema:DataCompositionSchemaDataSetField">
+        <dataPath>Description_ru</dataPath>
+        <field>Description_ru</field>
+      </fields>
+      <fields xsi:type="schema:DataCompositionSchemaDataSetField">
         <dataPath>Description</dataPath>
         <field>Description</field>
         <title>
@@ -473,22 +506,6 @@ FROM
             </content>
           </localValue>
         </title>
-      </fields>
-      <fields xsi:type="schema:DataCompositionSchemaDataSetField">
-        <dataPath>Description_hash</dataPath>
-        <field>Description_hash</field>
-      </fields>
-      <fields xsi:type="schema:DataCompositionSchemaDataSetField">
-        <dataPath>Description_ru</dataPath>
-        <field>Description_ru</field>
-      </fields>
-      <fields xsi:type="schema:DataCompositionSchemaDataSetField">
-        <dataPath>Description_tr</dataPath>
-        <field>Description_tr</field>
-      </fields>
-      <fields xsi:type="schema:DataCompositionSchemaDataSetField">
-        <dataPath>AddAttributes</dataPath>
-        <field>AddAttributes</field>
       </fields>
     </extInfo>
   </attributes>

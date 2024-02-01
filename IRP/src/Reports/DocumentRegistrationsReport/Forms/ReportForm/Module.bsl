@@ -1,25 +1,16 @@
+
+#Region FormEvent
+
 &AtServer
 Procedure OnCreateAtServer(Cancel, StandardProcessing)
-	If Parameters.Property("Document") Then
-		ThisObject.Document = Parameters.Document;		
-		DocumentRegisterRecords = Parameters.Document.Metadata().RegisterRecords;
-		For Each RegisterRecord In DocumentRegisterRecords Do
-			Items.FilterRegister.ChoiceList.Add(RegisterRecord.FullName(), RegisterRecord.Synonym);
-		EndDo;
-	EndIf;
+	ThisObject.Document = Parameters.Document;		
+	DocumentRegisterRecords = Parameters.Document.Metadata().RegisterRecords;
+	For Each RegisterRecord In DocumentRegisterRecords Do
+		Items.FilterRegister.ChoiceList.Add(RegisterRecord.FullName(), RegisterRecord.Synonym);
+	EndDo;
 
 	Items.FilterRegister.ChoiceList.SortByPresentation();
-
-	If Parameters.Property("PutInTable") Then
-		ThisObject.PutInTable = Parameters.PutInTable;
-	EndIf;
-	
-	Parameters.Property("GenerateOnOpen", ThisObject.GenerateOnOpen);
-EndProcedure
-
-&AtClient
-Procedure DocumentOnChange(Item)
-	GenerateReportAtServer(ThisObject.ResultTable);
+	ThisObject.GenerateOnOpen = Parameters.GenerateOnOpen;
 EndProcedure
 
 &AtClient
@@ -29,21 +20,37 @@ Procedure OnOpen(Cancel)
 	EndIf;
 EndProcedure
 
+#EndRegion
+
+#Region Commands
+
 &AtClient
 Procedure GenerateReport(Command)
+	ResultTable = New SpreadsheetDocument();
 	GenerateReportAtServer(ThisObject.ResultTable);
 EndProcedure
 
-&AtServer
-Function GetRegisterType(ObjectMetadata)
-	If Metadata.AccumulationRegisters.IndexOf(ObjectMetadata) >= 0 Then
-		Return "AccumulationRegister";
-	ElsIf Metadata.InformationRegisters.IndexOf(ObjectMetadata) >= 0 Then
-		Return "InformationRegister";
-	Else
-		Return "";
+#EndRegion
+
+#Region ElementEvents
+
+&AtClient
+Procedure DocumentOnChange(Item)
+	GenerateReportAtServer(ThisObject.ResultTable);
+EndProcedure
+
+&AtClient
+Procedure ResultTableDetailProcessing(Item, Details, StandardProcessing, AdditionalParameters)
+	If TypeOf(Details) = Type("String") And StrStartsWith(Details, "OpenForm/") Then
+		StandardProcessing = False;
+		Filter = New Structure("Filter", New Structure("Recorder", Document));
+		OpenForm(StrSplit(Details, "/")[1] + ".ListForm", Filter);
 	EndIf;
-EndFunction
+EndProcedure
+
+#EndRegion
+
+#Region Service
 
 &AtServer
 Function CanBuildReport()
@@ -54,6 +61,51 @@ Function CanBuildReport()
 		Return True;
 	EndIf;
 EndFunction
+
+&AtServer
+Function GetChequeBondTransactionItems(DocumentRef)
+	Query = New Query();
+	Query.Text =
+		"SELECT
+		|	ChequeBondTransactionItem.Ref
+		|FROM
+		|	Document.ChequeBondTransactionItem AS ChequeBondTransactionItem
+		|WHERE
+		|	ChequeBondTransactionItem.ChequeBondTransaction = &ChequeBondTransaction
+		|	AND ChequeBondTransactionItem.Posted";
+	Query.SetParameter("ChequeBondTransaction", DocumentRef);
+	QueryResult = Query.Execute();
+	Return QueryResult.Unload().UnloadColumn("Ref");
+EndFunction
+
+&AtServer
+Function GetTechnicalRegisters()
+	ArrayOfTechnicalRegisters = New Array();
+	ArrayOfTechnicalRegisters.Add(Metadata.AccumulationRegisters.TM1010B_RowIDMovements);
+	ArrayOfTechnicalRegisters.Add(Metadata.AccumulationRegisters.TM1010T_RowIDMovements);
+	ArrayOfTechnicalRegisters.Add(Metadata.AccumulationRegisters.TM1020B_AdvancesKey);
+	ArrayOfTechnicalRegisters.Add(Metadata.AccumulationRegisters.TM1030B_TransactionsKey);
+	ArrayOfTechnicalRegisters.Add(Metadata.AccumulationRegisters.T1050T_AccountingQuantities);
+	ArrayOfTechnicalRegisters.Add(Metadata.InformationRegisters.T2010S_OffsetOfAdvances);
+	ArrayOfTechnicalRegisters.Add(Metadata.InformationRegisters.T2013S_OffsetOfAging);
+	ArrayOfTechnicalRegisters.Add(Metadata.InformationRegisters.T2014S_AdvancesInfo);
+	ArrayOfTechnicalRegisters.Add(Metadata.InformationRegisters.T2015S_TransactionsInfo);
+	ArrayOfTechnicalRegisters.Add(Metadata.InformationRegisters.T3010S_RowIDInfo);
+	ArrayOfTechnicalRegisters.Add(Metadata.InformationRegisters.T6010S_BatchesInfo);
+	ArrayOfTechnicalRegisters.Add(Metadata.InformationRegisters.T6020S_BatchKeysInfo);
+	ArrayOfTechnicalRegisters.Add(Metadata.InformationRegisters.T6040S_BundleAmountValues);
+	ArrayOfTechnicalRegisters.Add(Metadata.InformationRegisters.T6050S_ManualBundleAmountValues);
+	ArrayOfTechnicalRegisters.Add(Metadata.InformationRegisters.T6060S_BatchCostAllocationInfo);
+	ArrayOfTechnicalRegisters.Add(Metadata.InformationRegisters.T6070S_BatchRevenueAllocationInfo);
+	ArrayOfTechnicalRegisters.Add(Metadata.InformationRegisters.T6080S_ReallocatedBatchesAmountValues);
+	ArrayOfTechnicalRegisters.Add(Metadata.InformationRegisters.T6090S_CompositeBatchesAmountValues);
+	ArrayOfTechnicalRegisters.Add(Metadata.InformationRegisters.T6095S_WriteOffBatchesInfo);
+	ArrayOfTechnicalRegisters.Add(Metadata.InformationRegisters.T7010S_BillOfMaterials);
+	ArrayOfTechnicalRegisters.Add(Metadata.InformationRegisters.T7051S_ProductionDurationDetails);
+	Return ArrayOfTechnicalRegisters
+EndFunction
+
+#EndRegion
 
 &AtServer
 Procedure GenerateReportAtServer(Result)
@@ -79,29 +131,20 @@ Procedure GenerateReportAtServer(Result)
 	EndIf;
 EndProcedure
 
-&AtServer
-Function GetChequeBondTransactionItems(DocumentRef)
-	Query = New Query();
-	Query.Text =
-		"SELECT
-		|	ChequeBondTransactionItem.Ref
-		|FROM
-		|	Document.ChequeBondTransactionItem AS ChequeBondTransactionItem
-		|WHERE
-		|	ChequeBondTransactionItem.ChequeBondTransaction = &ChequeBondTransaction
-		|	AND ChequeBondTransactionItem.Posted";
-	Query.SetParameter("ChequeBondTransaction", DocumentRef);
-	QueryResult = Query.Execute();
-	Return QueryResult.Unload().UnloadColumn("Ref");
-EndFunction
-
+// Generate report for one document.
+// 
+// Parameters:
+//  DocumentRef - DocumentRefDocumentName - Document ref
+//  Result - SpreadsheetDocument - Result
+//  Template - SpreadsheetDocument - Template
+//  MainTitleArea - SpreadsheetDocument - Main title area
 &AtServer
 Procedure GenerateReportForOneDocument(DocumentRef, Result, Template, MainTitleArea)
 	Title = String(DocumentRef);
 	MainTitleArea.Parameters.Document = String(DocumentRef);
 	Result.Put(MainTitleArea);
 
-	DocumentRegisterRecords = DocumentRef.Metadata().RegisterRecords;
+	DocumentRegisterRecords = DocumentRef.Metadata().RegisterRecords; 
 
 	TableOfDocumentRegisterRecords = New ValueTable();
 	TableOfDocumentRegisterRecords.Columns.Add("RegisterRecord");
@@ -109,14 +152,24 @@ Procedure GenerateReportForOneDocument(DocumentRef, Result, Template, MainTitleA
 	For Each RegisterRecord In DocumentRegisterRecords Do
 		NewRow = TableOfDocumentRegisterRecords.Add();
 		NewRow.RegisterRecord = RegisterRecord;
-		NewRow.RegisterRecordPresentation = String(RegisterRecord);
+		NewRow.RegisterRecordPresentation = RegisterRecord.Synonym;
 	EndDo;
 	TableOfDocumentRegisterRecords.Sort("RegisterRecordPresentation");
 
-	ArrayOfDocumentRegisterRecords = New Array();
+	FilterRegisterMeta = Undefined;
+	If Not IsBlankString(ThisObject.FilterRegister) Then
+		FilterRegisterMeta = Metadata.FindByFullName(ThisObject.FilterRegister);
+	EndIf;
+
+	ArrayOfDocumentRegisterRecords = New Array(); // Array Of MetadataObject
 	For Each Row In TableOfDocumentRegisterRecords Do
-		If ValueIsFilled(ThisObject.FilterRegister) Then
-			If Upper(Row.RegisterRecord.FullName()) = Upper(ThisObject.FilterRegister) Then
+		
+		If Not AccessRight("Read", Row.RegisterRecord) Then
+			Continue;
+		EndIf;
+		
+		If Not FilterRegisterMeta = Undefined Then
+			If Row.RegisterRecord = FilterRegisterMeta Then
 				ArrayOfDocumentRegisterRecords.Add(Row.RegisterRecord);
 			EndIf;
 		Else
@@ -126,107 +179,39 @@ Procedure GenerateReportForOneDocument(DocumentRef, Result, Template, MainTitleA
 
 	RegisterNumber = -1;
 
-	TableOfRegistrations = GetTableRegistrations(ArrayOfDocumentRegisterRecords, DocumentRef);
-
-	For Each Row In TableOfRegistrations Do
-		Row.Name = Upper(TrimAll(Row.Name));
-	EndDo;
-
-	ArrayOfTechnicalRegisters = New Array();
-	ArrayOfTechnicalRegisters.Add(Upper("TM1010B_RowIDMovements"));
-	ArrayOfTechnicalRegisters.Add(Upper("TM1010T_RowIDMovements"));
-	ArrayOfTechnicalRegisters.Add(Upper("TM1020B_AdvancesKey"));
-	ArrayOfTechnicalRegisters.Add(Upper("TM1030B_TransactionsKey"));
-	
-	ArrayOfTechnicalRegisters.Add(Upper("T1050T_AccountingQuantities"));
-	
-	ArrayOfTechnicalRegisters.Add(Upper("T2010S_OffsetOfAdvances"));
-	ArrayOfTechnicalRegisters.Add(Upper("T2013S_OffsetOfAging"));
-	ArrayOfTechnicalRegisters.Add(Upper("T2014S_AdvancesInfo"));
-	ArrayOfTechnicalRegisters.Add(Upper("T2015S_TransactionsInfo"));
-
-	ArrayOfTechnicalRegisters.Add(Upper("T3010S_RowIDInfo"));
-	ArrayOfTechnicalRegisters.Add(Upper("T6010S_BatchesInfo"));
-	ArrayOfTechnicalRegisters.Add(Upper("T6020S_BatchKeysInfo"));
-	ArrayOfTechnicalRegisters.Add(Upper("T6040S_BundleAmountValues"));
-	ArrayOfTechnicalRegisters.Add(Upper("T6050S_ManualBundleAmountValues"));
-	ArrayOfTechnicalRegisters.Add(Upper("T6060S_BatchCostAllocationInfo"));
-	ArrayOfTechnicalRegisters.Add(Upper("T6070S_BatchRevenueAllocationInfo"));
-	ArrayOfTechnicalRegisters.Add(Upper("T6080S_ReallocatedBatchesAmountValues"));
-	ArrayOfTechnicalRegisters.Add(Upper("T6090S_CompositeBatchesAmountValues"));
-	ArrayOfTechnicalRegisters.Add(Upper("T6095S_WriteOffBatchesInfo"));
-	ArrayOfTechnicalRegisters.Add(Upper("T7010S_BillOfMaterials"));
-	ArrayOfTechnicalRegisters.Add(Upper("T7051S_ProductionDurationDetails"));
+	ArrayOfTechnicalRegisters = GetTechnicalRegisters();
 	
 	For Each ObjectProperty In ArrayOfDocumentRegisterRecords Do
 
 		RegisterName = ObjectProperty.FullName();
 
-		If TableOfRegistrations.Find(Upper(RegisterName), "Name") = Undefined Then
-			Continue;
-		EndIf;
-
-		If ThisObject.HideTechnicalRegisters And ArrayOfTechnicalRegisters.Find(Upper(StrSplit(RegisterName, ".")[1])) <> Undefined Then
-			Continue;
-		EndIf;
-
-		If Not AccessRight("Read", ObjectProperty) Then
+		If ThisObject.HideTechnicalRegisters And ArrayOfTechnicalRegisters.Find(ObjectProperty) <> Undefined Then
 			Continue;
 		EndIf;
 
 		RegisterNumber = RegisterNumber + 1;
 
 		ReportBuilder = New ReportBuilder();
+		
 		FieldPresentations = New Structure();
 		ArrayOfFields = New Array();
 
-		RegisterType = GetRegisterType(ObjectProperty);
+		FieldPresentations.Insert("ItemKeyItem", Metadata.Catalogs.Items.ObjectPresentation);
+		
+		ListOfResources = GetListOfFields(ObjectProperty.Resources, FieldPresentations, New Array);
+		ListOfDimensions = GetListOfFields(ObjectProperty.Dimensions, FieldPresentations, New Array);
+		ListOfAttributes = GetListOfFields(ObjectProperty.Attributes, FieldPresentations, New Array);
+		ListOfStandardAttributes = GetListOfFields(ObjectProperty.StandardAttributes, FieldPresentations, GetIgnoreList());
 
-		PutExpenseReceipt = False;
-		StringExpenseReceipt = "";
-		StringPeriod = "";
-		If RegisterType = "InformationRegister" Or RegisterType = "AccumulationRegister" Then
-			If RegisterType = "AccumulationRegister" 
-			And ObjectProperty.RegisterType = Metadata.ObjectProperties.AccumulationRegisterType.Balance Then
+		ArrayOfFields.Add(New Structure("ListOfFields, ColumnName", ListOfStandardAttributes, "StandardAttributes"));
+		ArrayOfFields.Add(New Structure("ListOfFields, ColumnName", ListOfDimensions, "Dimensions"));
+		ArrayOfFields.Add(New Structure("ListOfFields, ColumnName", ListOfResources, "Resources"));
+		ArrayOfFields.Add(New Structure("ListOfFields, ColumnName", ListOfAttributes, "Attributes"));
 
-				StringExpenseReceipt = ", RecordType";
-				FieldPresentations.Insert("RecordType", "Record type");
-				PutExpenseReceipt = True;
-
-			EndIf;
-			
-			For Each StandardAttr In ObjectProperty.StandardAttributes Do
-				If Upper(StandardAttr.Name) = Upper("Period") Then
-					StringPeriod = ", Period";
-					FieldPresentations.Insert("Period", "Period");
-					Break;
-				EndIf;
-			EndDo;
-
-			ListOfResources = GetListOfFields(ObjectProperty.Resources, FieldPresentations);
-			ListOfDimensions = GetListOfFields(ObjectProperty.Dimensions, FieldPresentations);
-			ListOfAttributes = GetListOfFields(ObjectProperty.Attributes, FieldPresentations);
-
-			AddDataToArrayOfFields(ArrayOfFields, New Structure("ListOfFields, Width", StringExpenseReceipt, 10));
-			AddDataToArrayOfFields(ArrayOfFields, New Structure("ListOfFields, Width", StringPeriod, 15));
-			AddDataToArrayOfFields(ArrayOfFields, New Structure("ListOfFields, ColumnName, Width", ListOfResources, "Resources", 30));
-			AddDataToArrayOfFields(ArrayOfFields, New Structure("ListOfFields, ColumnName, Width", ListOfDimensions, "Dimensions", 40));
-			AddDataToArrayOfFields(ArrayOfFields, New Structure("ListOfFields, ColumnName, Width", ListOfAttributes, "Attributes", 20));
-
-			FilterByTransactionCurrency = ObjectProperty.Dimensions.Find("CurrencyMovementType") <> Undefined
-				And ThisObject.OnlyTransactionCurrency;
-
-			PutDataProcessing(DocumentRef, 
-				ArrayOfFields, 
-				FieldPresentations, 
-				ReportBuilder, 
-				FilterByTransactionCurrency,
-				ObjectProperty.FullName(), 
-				ThisObject.PutInTable);
-		Else
-			Continue;
-		EndIf;
-
+		PutDataProcessing(DocumentRef, ArrayOfFields, FieldPresentations, ReportBuilder, ObjectProperty);
+		
+		SetConditionalAppearance(ReportBuilder);
+		
 		If ReportBuilder.GetQuery().Execute().IsEmpty() Then
 			Continue;
 		EndIf;
@@ -235,360 +220,147 @@ Procedure GenerateReportForOneDocument(DocumentRef, Result, Template, MainTitleA
 		ReportBuilder.PutOveralls = False;
 		ReportBuilder.PutTableFooter = False;
 		ReportBuilder.PutReportHeader = False;
-
+		ReportBuilder.DetailFillType = ReportBuilderDetailsFillType.Details;
+		ReportBuilder.PutDetailRecords = True; 
+		ReportBuilder.PutTableHeader = True; 
+	
 		Template = Reports.DocumentRegistrationsReport.GetTemplate("Template");
 		TitleArea = Template.GetArea("Title");
 		TitleArea.Parameters.RegisterName = ObjectProperty.Synonym;
 		TitleArea.Areas.Title.DetailsUse = SpreadsheetDocumentDetailUse.Cell;
-		TitleArea.Area(1, 1).Details = RegisterName;
+		TitleArea.Area(1, 1).Details = "OpenForm/" + RegisterName;
 		Result.Put(TitleArea);
 		Result.StartRowGroup();
-
-		If PutExpenseReceipt Then
-			PutRowNumber = Result.TableHeight;
-		EndIf;
-
-		ReportBuilder.Put(Result);
-
-		If PutExpenseReceipt Then
-			CurrentRowNumber = Result.TableHeight;
-			For RowNumber = PutRowNumber + 2 To CurrentRowNumber - 1 Do
-				PutArea = Result.Area(RowNumber, 2);
-				If PutArea.Text = "Expense" Then
-					PutArea.TextColor = WebColors.Red;
-				ElsIf PutArea.Text = "Receipt" Then
-					PutArea.TextColor = WebColors.Green;
-				Else
-					PutArea.TextColor = WebColors.Black;
-				EndIf;
+		Template = New SpreadsheetDocument();
+		ReportBuilder.Put(Template);
+		
+		Line1 = New Line(SpreadsheetDocumentCellLineType.Solid, 1);
+		For W = 2 To Template.TableWidth Do
+			For H = 1 To Template.TableHeight - 1 Do
+				Area = Template.Area(H, W, H, W);
+				Area.Outline(Line1, Line1, Line1, Line1);
 			EndDo;
+			If Area.ColumnWidth > 60 Then
+				Area.ColumnWidth = 60;
+			EndIf;
+		EndDo;
+		
+		If ShowItemInItemKey And Not ReportBuilder.SelectedFields.Find("ItemKeyItem") = Undefined Then
+			Area = Template.FindText("ItemKeyItem");
+			If Not Area = Undefined Then
+				Area.Text = FieldPresentations.ItemKeyItem;
+			EndIf;
 		EndIf;
-
+		
+		Result.Join(Template);
 		Result.EndRowGroup();
-
 	EndDo;
-
-	Result.ShowGroups = True;
-	Result.ShowHeaders = False;
-	Result.ShowGrid = False;
-	Result.ReadOnly = True;
-	Result.FitToPage = True;
-
 EndProcedure
 
-&AtClient
-Procedure ResultTableDetailProcessing(Item, Details, StandardProcessing, AdditionalParameters)
-	If ValueIsFilled(Details) Then
-		StandardProcessing = False;
-		OpenForm(Details + ".ListForm");
+&AtServer
+Function GetIgnoreList()
+	IgnoreList = New Array;
+	IgnoreList.Add("Active");
+	IgnoreList.Add("LineNumber");
+	IgnoreList.Add("Recorder");
+	Return IgnoreList;
+EndFunction
+
+&AtServer
+Procedure SetConditionalAppearance(ReportBuilder)
+	If Not ReportBuilder.SelectedFields.Find("RecordType") = Undefined Then
+		Appearance = ReportBuilder.ConditionalAppearance.Add("ColorRecordTypeExpense");
+		Appearance.Use = True;
+		Appearance.Area.Add("RecordType", "RecordType", AppearanceAreaType.Field);
+		Filter = Appearance.Filter.Add("RecordType");
+		Filter.Value = AccumulationRecordType.Expense;
+		Appearance.Appearance.TextColor.Value = WebColors.Red;
+		Appearance.Appearance.TextColor.Use = True;
+		
+		Appearance = ReportBuilder.ConditionalAppearance.Add("ColorRecordTypeReceipt");
+		Appearance.Use = True;
+		Filter = Appearance.Filter.Add("RecordType");
+		Filter.Value = AccumulationRecordType.Receipt;
+		Appearance.Area.Add("RecordType");
+		Appearance.Appearance.TextColor.Value = WebColors.Green;
+		Appearance.Appearance.TextColor.Use = True;
 	EndIf;
 EndProcedure
 
 &AtServer
-Procedure AddDataToArrayOfFields(ArrayOfFields, Data)
-	If ValueIsFilled(Data.ListOfFields) Then
-		ArrayOfFields.Add(Data);
-	EndIf;
-EndProcedure
-
-&AtServer
-Function GetListOfFields(ObjectMetadata, FildsPresentations)
-	ListOfFields = "";
+Function GetListOfFields(ObjectMetadata, FieldsPresentations, IgnoreFields)
+	ListOfFields = New Array;
 	For Each Row In ObjectMetadata Do
-		ListOfFields = ListOfFields + ", " + Row.Name;
-		FildsPresentations.Insert(Row.Name, Row.Synonym);
+		If Not IgnoreFields.Find(Row.Name) = Undefined Then
+			Continue;
+		EndIf;
+		
+		ListOfFields.Add(Row.Name);
+		FieldsPresentations.Insert(Row.Name, Row.Synonym);
 	EndDo;
 	Return ListOfFields;
 EndFunction
 
 &AtServer
 Function GetListOfFieldsByData(Data)
-	ListOfFields = "";
+	ListOfFields = New Array;
 	For Each Row In Data Do
-		ListOfFields = ListOfFields + Row.ListOfFields;
+		For Each El In Row.ListOfFields Do
+			ListOfFields.Add(El);
+		EndDo;
 	EndDo;
 
-	If ValueIsFilled(ListOfFields) Then
-		ListOfFields = Mid(ListOfFields, 2);
+	If ShowItemInItemKey And Not ListOfFields.Find("ItemKey") = Undefined Then
+		ListOfFields.Insert(ListOfFields.Find("ItemKey"), "ItemKey.Item");
 	EndIf;
-
-	If ShowItemInItemKey Then
-		ListOfFields = StrReplace(ListOfFields, " ItemKey", "ItemKey.Item, ItemKey");
+	
+	PeriodOrder = ListOfFields.Find("Period");
+	If Not PeriodOrder = Undefined And PeriodOrder > 0 Then
+		ListOfFields.Delete(PeriodOrder);
+		ListOfFields.Insert(0, "Period");
 	EndIf;
+	
 	Return ListOfFields;
 EndFunction
 
 &AtServer
-Procedure PutDataProcessing(DocumentRef, 
-							ArrayOfFields, 
-							FieldPresentations, 
-							ReportBuilder, 
-							FilterByTransactionCurrency,
-							Val RegisterName, 
-							Val PutInTable = False)
+Procedure PutDataProcessing(DocumentRef, ArrayOfFields,	FieldPresentations, ReportBuilder, ObjectProperty)
 
 	If Not ArrayOfFields.Count() Then
 		Return;
 	EndIf;
 
+	FilterByTransactionCurrency = ObjectProperty.Dimensions.Find("CurrencyMovementType") <> Undefined And ThisObject.OnlyTransactionCurrency;
+
 	If Not ValueIsFilled(ReportBuilder.Text) Then
-		ListOfFields = GetListOfFieldsByData(ArrayOfFields);
-		ReportBuilder.Text = 
-			"SELECT ALLOWED " + ListOfFields + "
-			|{SELECT " + ListOfFields + "}
-			|FROM " + RegisterName + " AS reg
-			|WHERE reg.Recorder = &Recorder " 
-			+ ?(FilterByTransactionCurrency,
-			" AND reg.CurrencyMovementType = VALUE(ChartOfCharacteristicTypes.CurrencyMovementType.SettlementCurrency)" ,"") + "
-			|ORDER BY " + ListOfFields;
+		ListOfFields = StrConcat(GetListOfFieldsByData(ArrayOfFields), ",");
+		Text = 
+			"SELECT ALLOWED %1
+			|{SELECT %1}
+			|FROM %2 
+			|WHERE Recorder = &Recorder 
+			|%3
+			|ORDER BY %1";
+			
+		FilterByTransaction = ?(FilterByTransactionCurrency, "AND reg.CurrencyMovementType = VALUE(ChartOfCharacteristicTypes.CurrencyMovementType.SettlementCurrency)" ,"");
+		ReportBuilder.Text = StrTemplate(Text, ListOfFields, ObjectProperty.FullName(), FilterByTransaction);
 		ReportBuilder.Parameters.Insert("Recorder", DocumentRef);
 	EndIf;
 
-	FillFieldPresentations(FieldPresentations, ReportBuilder);
-
-	TemplateDetails = ReportBuilder.Template.GetArea("Details");
-	TemplateHeader = ReportBuilder.Template.GetArea("TableHeader");
-
-	TemplateHeight = 0;
-	CountRowToHeader = 0;
-
-	For Each Row In ArrayOfFields Do
-
-		Row.Insert("ColumnNumber", 0);
-
-		If ValueIsFilled(Row.ListOfFields) Then
-
-			Row.Insert("RowCount", 1);
-
-			ColumnName = "";
-			If Not Row.Property("ColumnName", ColumnName) Then
-				ColumnName = "";
-			Else
-				CountRowToHeader = 1;
-			EndIf;
-			PrepareTemplateDetails(Row.ListOfFields, TemplateDetails, TemplateHeader, Row.ColumnNumber, Row.RowCount,
-				ColumnName, PutInTable);
-			TemplateHeight = Max(TemplateHeight, Row.RowCount);
-		EndIf;
-	EndDo;
-
-	PrepareTemplateForOutput(TemplateDetails, TemplateHeader, TemplateHeight, CountRowToHeader);
-
-	If Not PutInTable Then
-
-		NumberOfCurrentColumn = 2;
-
-		For Each Row In ArrayOfFields Do
-			If Row.ColumnNumber > 0 Then
-				OutlineOutputArea(TemplateDetails, TemplateHeader, TemplateHeight, Row.Width, NumberOfCurrentColumn);
-
-				NumberOfCurrentColumn = NumberOfCurrentColumn + 1;
-			EndIf;
-		EndDo;
-	Else
-		TotalFieldsForOutput = ReportBuilder.AvailableFields.Count();
-		CurrentWidth = -1;
-		CurrentIndexOfArray = -1;
-
-		For NumberOfCurrentColumn = 0 To TotalFieldsForOutput - 1 Do
-			If CurrentIndexOfArray <= ArrayOfFields.Count() - 2 Then
-
-				NumberNextColumn = ArrayOfFields[CurrentIndexOfArray + 1].ColumnNumber - 2;
-
-				If NumberNextColumn <= NumberOfCurrentColumn Then
-					CurrentIndexOfArray = CurrentIndexOfArray + 1;
-					CurrentWidth = ArrayOfFields[CurrentIndexOfArray].Width;
-
-					ColumnName = "";
-					If ArrayOfFields[CurrentIndexOfArray].Property("ColumnName", ColumnName) Then
-
-						If CurrentIndexOfArray <= ArrayOfFields.Count() - 2 Then
-							NumberLastColumn = ArrayOfFields[CurrentIndexOfArray + 1].ColumnNumber - 2;
-						Else
-							NumberLastColumn = TotalFieldsForOutput;
-						EndIf;
-
-						For NumberTempColumn = NumberOfCurrentColumn To NumberLastColumn - 1 Do
-							AddTitleToColumn(TemplateHeader, NumberTempColumn + 2, ColumnName);
-						EndDo;
-
-						Area = TemplateHeader.Area(1, NumberOfCurrentColumn + 2, 1, NumberLastColumn + 1);
-						Area.Merge();
-
-					EndIf;
-				EndIf;
-			EndIf;
-			OutlineOutputArea(TemplateDetails, TemplateHeader, TemplateHeight, CurrentWidth, NumberOfCurrentColumn + 2);
-		EndDo;
-	EndIf;
-
-	AreaDetails = TemplateDetails.GetArea("Details");
-	AreaHeader = TemplateHeader.GetArea("TableHeader");
-
-	ReportBuilder.DetailRecordsTemplate = AreaDetails;
-	ReportBuilder.TableHeaderTemplate = AreaHeader;
-EndProcedure
-
-&AtServer
-Procedure PrepareTemplateForOutput(TemplateDetails, TemplateHeader, TemplateHeight, Val AddCounter = 0)
-
-	TemplateDetails.Area("Details").Name = "";
-	TemplateDetails.Area(1, , TemplateHeight).Name = "Details";
-	TemplateDetails.Area(1, , TemplateHeight).ColumnWidth = 20;
-	TemplateDetails.Area(1, 1, TemplateHeight, 1).ColumnWidth = 2;
-
-	TemplateHeader.Area("TableHeader").Name = "";
-	TemplateHeader.Area(1, , TemplateHeight + AddCounter).Name = "TableHeader";
-	TemplateHeader.Area(1, , TemplateHeight + AddCounter).ColumnWidth = 20;
-	TemplateHeader.Area(1, 1, TemplateHeight + AddCounter, 1).ColumnWidth = 2;
+	FillFieldPresentations(ReportBuilder, FieldPresentations);
 
 EndProcedure
 
 &AtServer
-Procedure OutlineOutputArea(TemplateDetails, TemplateHeader, Val TemplateHeight, Val ColumnWidth, Val ColumnNumber)
-
-	Line1 = New Line(SpreadsheetDocumentCellLineType.Solid, 1);
-	Line2 = New Line(SpreadsheetDocumentCellLineType.Solid, 2);
-
-	AreaDetails = TemplateDetails.Area(1, ColumnNumber, TemplateHeight, ColumnNumber);
-	AreaHeader = TemplateHeader.Area(1, ColumnNumber, TemplateHeight + 1, ColumnNumber);
-
-	AreaDetails.ColumnWidth = ColumnWidth;
-	AreaDetails.Outline(Line1, Line1, Line1, Line1);
-
-	AreaHeader.ColumnWidth = ColumnWidth;
-	AreaHeader.Outline(Line2, Line2, Line2, Line2);
-
-EndProcedure
-
-&AtServer
-Procedure AddTitleToColumn(TemplateHeader, Val ColumnNumber, Val TitleString)
-	TemplateHeader.InsertArea(TemplateHeader.Area(TemplateHeader.Area("TableHeader").Top, ColumnNumber),
-		TemplateHeader.Area(TemplateHeader.Area("TableHeader").Top, ColumnNumber),
-		SpreadsheetDocumentShiftType.Vertical, False);
-
-	TemplateHeader.InsertArea(TemplateHeader.Area(TemplateHeader.Area("TableHeader").Top, ColumnNumber),
-		TemplateHeader.Area(TemplateHeader.Area("TableHeader").Top + 1, ColumnNumber),
-		SpreadsheetDocumentShiftType.WithoutShift, False);
-
-	TemplateHeaderTitle = TemplateHeader.Area(TemplateHeader.Area("TableHeader").Top, ColumnNumber);
-	TemplateHeaderTitle.Text = TitleString;
-	TemplateHeaderTitle.HorizontalAlign = HorizontalAlign.Center;
-EndProcedure
-
-&AtServer
-Procedure PrepareTemplateDetails(ListOfFields, TemplateDetails, TemplateHeader, ColumnNumber, RowNumber,
-	Val ColumnName = "", Val PutInTable = False)
-
-	If Not PutInTable Then
-		ColumnNumber = 0;
-
-		ColumnIndex = 2;
-
-		RowNumberHeader = RowNumber;
-		ParameterName = TemplateDetails.Area(TemplateDetails.Area("Details").Top, ColumnIndex).Parameter;
-
-		While ValueIsFilled(ParameterName) Do
-
-			If StrFind(ListOfFields + ",", " " + ParameterName + ",") > 0 Then
-
-				If ColumnNumber = 0 Then
-
-					ColumnNumber = ColumnIndex;
-
-					If ValueIsFilled(ColumnName) Then
-
-						AddTitleToColumn(TemplateHeader, ColumnIndex, ColumnName);
-						RowNumberHeader = RowNumberHeader + 1;
-
-					EndIf;
-				Else
-
-					TemplateDetails.InsertArea(TemplateDetails.Area(TemplateDetails.Area("Details").Top, ColumnIndex),
-						TemplateDetails.Area(TemplateDetails.Area("Details").Top + RowNumber, ColumnNumber),
-						SpreadsheetDocumentShiftType.Vertical, False);
-
-					TemplateHeader.InsertArea(TemplateHeader.Area(TemplateHeader.Area("TableHeader").Top, ColumnIndex),
-						TemplateHeader.Area(TemplateHeader.Area("TableHeader").Top + RowNumberHeader, ColumnNumber),
-						SpreadsheetDocumentShiftType.Vertical, False);
-
-					RowNumber = RowNumber + 1;
-					RowNumberHeader = RowNumberHeader + 1;
-
-					For i = TemplateDetails.Area("Details").Top To TemplateDetails.Area("Details").Bottom + 8 Do
-						TemplateDetails.DeleteArea(TemplateDetails.Area(i, ColumnIndex),
-							SpreadsheetDocumentShiftType.Horizontal);
-						TemplateHeader.DeleteArea(TemplateHeader.Area(i, ColumnIndex),
-							SpreadsheetDocumentShiftType.Horizontal);
-					EndDo;
-
-					ColumnIndex = ColumnIndex - 1;
-
-				EndIf;
-
-			EndIf;
-
-			ColumnIndex = ColumnIndex + 1;
-			ParameterName = TemplateDetails.Area(TemplateDetails.Area("Details").Top, ColumnIndex).Parameter;
-
-		EndDo;
-
-	Else
-
-		ColumnIndex = 2;
-
-		ParameterName = TemplateDetails.Area(TemplateDetails.Area("Details").Top, ColumnIndex).Parameter;
-
-		While ValueIsFilled(ParameterName) Do
-
-			If StrFind(ListOfFields + ",", " " + ParameterName + ",") > 0 Then
-
-				If ColumnNumber = 0 Then
-					ColumnNumber = ColumnIndex;
-				EndIf;
-
-			EndIf;
-
-			ColumnIndex = ColumnIndex + 1;
-			ParameterName = TemplateDetails.Area(TemplateDetails.Area("Details").Top, ColumnIndex).Parameter;
-
-		EndDo;
-
-	EndIf;
-
-EndProcedure
-
-&AtServer
-Function GetTableRegistrations(ArrayOfDocumentRegisterRecords, DocumentRef)
-	QueryText = "";
-
-	If Not ArrayOfDocumentRegisterRecords.Count() Then
-		Return New ValueTable();
-	EndIf;
-
-	For Each Row In ArrayOfDocumentRegisterRecords Do		
-		QueryText = QueryText + "
-		|" + ?(QueryText = "", "", "UNION ALL ") + "
-		|SELECT TOP 1 CAST(""" + Row.FullName() + """ AS STRING(200)) AS Name 
-		|FROM " + Row.FullName() + "
-		|WHERE Recorder = &Recorder";
-	EndDo;
-
-	Query = New Query(QueryText);
-	Query.SetParameter("Recorder", DocumentRef);
-	Return Query.Execute().Unload();
-EndFunction
-
-&AtServer
-Procedure FillFieldPresentations(FieldPresentations, ReportBuilder)
-	CollectionOfReportBuilder = New Structure("AvailableFields, SelectedFields, ColumnDimensions, RowDimensions, Filter");
+Procedure FillFieldPresentations(ReportBuilder, FieldPresentations)
+	CollectionOfReportBuilder = StrSplit("AvailableFields, SelectedFields, ColumnDimensions, RowDimensions, Filter", ", ", False);
 	For Each Row In CollectionOfReportBuilder Do
-		For i = 0 To ReportBuilder[Row.Key].Count() - 1 Do
-			If Not ValueIsFilled(ReportBuilder[Row.Key][i].Name) Then
+		For i = 0 To ReportBuilder[Row].Count() - 1 Do
+			If Not ValueIsFilled(ReportBuilder[Row][i].Name) Then
 				Continue;
 			EndIf;
-			If FieldPresentations.Property(ReportBuilder[Row.Key][i].Name) Then
-				ReportBuilder[Row.Key][i].Presentation = FieldPresentations[ReportBuilder[Row.Key][i].Name];
+			If FieldPresentations.Property(ReportBuilder[Row][i].Name) Then
+				ReportBuilder[Row][i].Presentation = FieldPresentations[ReportBuilder[Row][i].Name];
 			EndIf;
 		EndDo;
 	EndDo;

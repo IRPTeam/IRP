@@ -3241,7 +3241,8 @@ Function ClearByTransactionTypeBankPaymentOptions() Export
 		|Employee,
 		|PaymentPeriod,
 		|ReceiptingAccount,
-		|ReceiptingBranch");
+		|ReceiptingBranch,
+		|Project");
 EndFunction
 
 Function ClearByTransactionTypeBankPaymentExecute(Options) Export
@@ -3262,6 +3263,7 @@ Function ClearByTransactionTypeBankPaymentExecute(Options) Export
 	Result.Insert("PaymentPeriod"            , Options.PaymentPeriod);
 	Result.Insert("ReceiptingAccount"        , Options.ReceiptingAccount);
 	Result.Insert("ReceiptingBranch"         , Options.ReceiptingBranch);
+	Result.Insert("Project"                  , Options.Project);
 	
 	Outgoing_CashTransferOrder = PredefinedValue("Enum.OutgoingPaymentTransactionTypes.CashTransferOrder");
 	Outgoing_CurrencyExchange  = PredefinedValue("Enum.OutgoingPaymentTransactionTypes.CurrencyExchange");
@@ -3303,6 +3305,12 @@ Function ClearByTransactionTypeBankPaymentExecute(Options) Export
 			|PaymentTerminal,
 			|BankTerm";
 		EndIf;
+		
+		If Options.TransactionType = Outgoing_PaymentToVendor 
+			Or Options.TransactionType = Outgoing_ReturnToCustomer Then
+			StrByType = StrByType + ", Project";	
+		EndIf;
+		
 	ElsIf Options.TransactionType = Outgoing_OtherPartner Then
 		StrByType = "
 		|Partner,
@@ -3362,7 +3370,8 @@ Function ClearByTransactionTypeBankReceiptOptions() Export
 		|RetailCustomer,
 		|RevenueType,
 		|SendingAccount,
-		|SendingBranch");
+		|SendingBranch,
+		|Project");
 EndFunction
 
 Function ClearByTransactionTypeBankReceiptExecute(Options) Export
@@ -3386,6 +3395,7 @@ Function ClearByTransactionTypeBankReceiptExecute(Options) Export
 	Result.Insert("RevenueType"              , Options.RevenueType);
 	Result.Insert("SendingAccount"           , Options.SendingAccount);
 	Result.Insert("SendingBranch"            , Options.SendingBranch);
+	Result.Insert("Project"                  , Options.Project);
 	
 	Incoming_CashTransferOrder   = PredefinedValue("Enum.IncomingPaymentTransactionType.CashTransferOrder");
 	Incoming_CurrencyExchange    = PredefinedValue("Enum.IncomingPaymentTransactionType.CurrencyExchange");
@@ -3430,6 +3440,13 @@ Function ClearByTransactionTypeBankReceiptExecute(Options) Export
 			|PaymentTerminal,
 			|BankTerm";
 		EndIf;
+		
+		If Options.TransactionType = Incoming_PaymentFromCustomer
+			Or Options.TransactionType = Incoming_ReturnFromVendor Then
+			
+			StrByType = StrByType + ", Project";
+		EndIf;
+		
 	ElsIf Options.TransactionType = Incoming_OtherPartner Then
 		StrByType = "
 		|Partner,
@@ -3485,7 +3502,8 @@ Function ClearByTransactionTypeCashPaymentOptions() Export
 		|Employee,
 		|PaymentPeriod,
 		|ReceiptingAccount,
-		|ReceiptingBranch");
+		|ReceiptingBranch,
+		|Project");
 EndFunction
 
 Function ClearByTransactionTypeCashPaymentExecute(Options) Export
@@ -3502,6 +3520,7 @@ Function ClearByTransactionTypeCashPaymentExecute(Options) Export
 	Result.Insert("PaymentPeriod"            , Options.PaymentPeriod);
 	Result.Insert("ReceiptingAccount"        , Options.ReceiptingAccount);
 	Result.Insert("ReceiptingBranch"         , Options.ReceiptingBranch);
+	Result.Insert("Project"                  , Options.Project);
 
 	Outgoing_CashTransferOrder = PredefinedValue("Enum.OutgoingPaymentTransactionTypes.CashTransferOrder");
 	Outgoing_CurrencyExchange  = PredefinedValue("Enum.OutgoingPaymentTransactionTypes.CurrencyExchange");
@@ -3534,7 +3553,8 @@ Function ClearByTransactionTypeCashPaymentExecute(Options) Export
 		|Partner,
 		|Agreement,
 		|Payee,
-		|LegalNameContract";
+		|LegalNameContract,
+		|Project";
 	ElsIf Options.TransactionType = Outgoing_OtherPartner Then
 		StrByType = "
 		|Partner,
@@ -3579,7 +3599,8 @@ Function ClearByTransactionTypeCashReceiptOptions() Export
 		|MoneyTransfer,
 		|RetailCustomer,
 		|SendingAccount,
-		|SendingBranch");		
+		|SendingBranch,
+		|Project");		
 EndFunction
 
 Function ClearByTransactionTypeCashReceiptExecute(Options) Export
@@ -3597,6 +3618,7 @@ Function ClearByTransactionTypeCashReceiptExecute(Options) Export
 	Result.Insert("RetailCustomer"           , Options.RetailCustomer);
 	Result.Insert("SendingAccount"           , Options.SendingAccount);
 	Result.Insert("SendingBranch"            , Options.SendingBranch);
+	Result.Insert("Project"                  , Options.Project);
 	
 	Incoming_CashTransferOrder   = PredefinedValue("Enum.IncomingPaymentTransactionType.CashTransferOrder");
 	Incoming_CurrencyExchange    = PredefinedValue("Enum.IncomingPaymentTransactionType.CurrencyExchange");
@@ -3627,7 +3649,8 @@ Function ClearByTransactionTypeCashReceiptExecute(Options) Export
 		|Partner,
 		|Agreement,
 		|Payer,
-		|LegalNameContract";
+		|LegalNameContract,
+		|Project";
 	ElsIf Options.TransactionType = Incoming_OtherPartner Then
 		StrByType = "
 		|Partner,

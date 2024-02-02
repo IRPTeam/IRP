@@ -74,6 +74,9 @@ Procedure SessionParametersSetting(RequiredParameters) Export
 	If RequiredParameters.Find("Buffer") <> Undefined Then
 		SessionParameters.Buffer = New ValueStorage(New Array);;
 	EndIf;
+	If RequiredParameters.Find("NumberEditingAvailable") <> Undefined Then
+		SessionParameters.NumberEditingAvailable = False;
+	EndIf;
 EndProcedure
 
 Function GetSessionParameter(ParameterName) Export

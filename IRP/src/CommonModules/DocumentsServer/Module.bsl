@@ -40,6 +40,11 @@ Procedure OnCreateAtServer(Object, Form, Cancel, StandardProcessing) Export
 	If CommonFunctionsClientServer.ObjectHasProperty(Form.Items, "Author") Then
 		Form.Items.Author.ReadOnly = UserSettingsServer.AllDocuments_AdditionalSettings_DisableChangeAuthor();
 	EndIf;
+	
+	If Form.Items.Find("Number") <> Undefined Then
+		NumberEditingAvailable = SessionParametersServer.GetSessionParameter("NumberEditingAvailable");
+		Form.Items.Number.ReadOnly = Not NumberEditingAvailable;
+	EndIf;	
 EndProcedure
 
 Procedure OnReadAtServer(Object, Form, CurrentObject) Export

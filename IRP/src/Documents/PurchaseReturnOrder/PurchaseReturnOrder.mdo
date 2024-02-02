@@ -274,6 +274,7 @@
     </type>
     <minValue xsi:type="core:UndefinedValue"/>
     <maxValue xsi:type="core:UndefinedValue"/>
+    <fillChecking>ShowError</fillChecking>
     <choiceParameters>
       <name>Filter.Parent</name>
       <value xsi:type="core:ReferenceValue">

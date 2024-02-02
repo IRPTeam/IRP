@@ -7,12 +7,19 @@ Var isIconSet Export; //Boolean
 Procedure OnCreateAtServer(Cancel, StandardProcessing)
 	LocalizationEvents.CreateMainFormItemDescription(ThisObject, "GroupDescriptions");
 	LocalizationEvents.FillDescription(Parameters.FillingText, Object);
+	ChartsOfCharacteristicTypesServer.OnCreateAtServer(Object, ThisObject, Cancel, StandardProcessing);
 	ShowFormItems(ThisObject.Items, ThisObject.Object);
 EndProcedure
 
 &AtServer
 Procedure OnReadAtServer(CurrentObject)
+	ChartsOfCharacteristicTypesServer.OnReadAtServer(Object, ThisObject, CurrentObject);
 	Icon = PutToTempStorage(CurrentObject.Icon.Get(), UUID);
+EndProcedure
+
+&AtServer
+Procedure OnWriteAtServer(Cancel, CurrentObject, WriteParameters)
+	ChartsOfCharacteristicTypesServer.OnWriteAtServer(Object, ThisObject, Cancel, CurrentObject, WriteParameters);
 EndProcedure
 
 &AtServer

@@ -55,6 +55,9 @@ Scenario: _028800 preparation (Shipment confirmation)
 		When Create catalog BusinessUnits objects
 		When Create catalog ExpenseAndRevenueTypes objects
 		When Create information register Taxes records (VAT)
+		Given I open hyperlink "e1cib/app/DataProcessor.SystemSettings"
+		And I set checkbox "Number editing available"
+		And I close "System settings" window
 	* Check or create SalesOrder023005
 		Given I open hyperlink "e1cib/list/Document.SalesOrder"
 		If "List" table does not contain lines Then

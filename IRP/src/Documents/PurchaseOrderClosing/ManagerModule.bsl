@@ -295,27 +295,7 @@ Function R3025B_PurchaseOrdersToBePaid()
 EndFunction
 
 Function T2014S_AdvancesInfo()
-	Return 
-		"SELECT
-		|	Doc.Date,
-		|	Doc.Company,
-		|	Doc.Branch,
-		|	Doc.Currency,
-		|	Doc.Partner,
-		|	Doc.LegalName,
-		|	case
-		|		when Doc.Agreement.ApArPostingDetail = VALUE(Enum.ApArPostingDetail.ByDocuments)
-		|			Then Doc.Agreement
-		|		else Undefined
-		|	end AS AdvanceAgreement,
-		|	Doc.Ref AS Order,
-		|	TRUE AS IsVendorAdvance,
-		|	TRUE AS IsPurchaseOrderClose
-		|INTO T2014S_AdvancesInfo
-		|FROM
-		|	Document.PurchaseOrder AS Doc
-		|WHERE
-		|	Doc.Ref = &PurchaseOrder";
+	Return InformationRegisters.T2014S_AdvancesInfo.T2014S_AdvancesInfo_POC();
 EndFunction
 
 Function R1020B_AdvancesToVendors()

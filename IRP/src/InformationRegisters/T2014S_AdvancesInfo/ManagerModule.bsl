@@ -277,3 +277,53 @@ Function T2014S_AdvancesInfo_Cheque() Export
 		|	Table.IsOutgoingCheque
 		|	AND Table.IsAdvance";
 EndFunction
+
+Function T2014S_AdvancesInfo_SOC() Export
+	Return 
+		"SELECT DISTINCT
+		|	&Period AS Date,
+		|	TRUE AS IsCustomerAdvance,
+		|	TRUE AS IsSalesOrderClose,
+		|	CloseOrderItemList.Ref.SalesOrder.Company AS Company,
+		|	CloseOrderItemList.Ref.SalesOrder.Branch AS Branch,
+		|	CloseOrderItemList.Ref.SalesOrder.Currency AS Currency,
+		|	CloseOrderItemList.Ref.SalesOrder.Partner AS Partner,
+		|	CloseOrderItemList.Ref.SalesOrder.LegalName AS LegalName,
+		|	CASE
+		|		WHEN CloseOrderItemList.Ref.SalesOrder.Agreement.ApArPostingDetail = VALUE(Enum.ApArPostingDetail.ByDocuments)
+		|			THEN CloseOrderItemList.Ref.SalesOrder.Agreement
+		|		ELSE UNDEFINED
+		|	END AS AdvanceAgreement,
+		|	CloseOrderItemList.Ref.SalesOrder AS Order,
+		|	CloseOrderItemList.Project AS Project
+		|INTO T2014S_AdvancesInfo
+		|FROM
+		|	Document.SalesOrderClosing.ItemList AS CloseOrderItemList
+		|WHERE
+		|	CloseOrderItemList.Ref = &Ref";
+EndFunction
+
+Function T2014S_AdvancesInfo_POC() Export
+	Return 
+		"SELECT DISTINCT
+		|	&Period AS Date,
+		|	TRUE AS IsVendorAdvance,
+		|	TRUE AS IsPurchaseOrderClose,
+		|	CloseOrderItemList.Ref.PurchaseOrder.Company AS Company,
+		|	CloseOrderItemList.Ref.PurchaseOrder.Branch AS Branch,
+		|	CloseOrderItemList.Ref.PurchaseOrder.Currency AS Currency,
+		|	CloseOrderItemList.Ref.PurchaseOrder.Partner AS Partner,
+		|	CloseOrderItemList.Ref.PurchaseOrder.LegalName AS LegalName,
+		|	CASE
+		|		WHEN CloseOrderItemList.Ref.PurchaseOrder.Agreement.ApArPostingDetail = VALUE(Enum.ApArPostingDetail.ByDocuments)
+		|			THEN CloseOrderItemList.Ref.PurchaseOrder.Agreement
+		|		ELSE UNDEFINED
+		|	END AS AdvanceAgreement,
+		|	CloseOrderItemList.Ref.PurchaseOrder AS Order,
+		|	CloseOrderItemList.Project AS Project
+		|INTO T2014S_AdvancesInfo
+		|FROM
+		|	Document.PurchaseOrderClosing.ItemList AS CloseOrderItemList
+		|WHERE
+		|	CloseOrderItemList.Ref = &Ref";
+EndFunction

@@ -192,7 +192,7 @@ Function R2020B_AdvancesFromCustomers_CreditNote() Export
 		|FROM
 		|	Transactions AS Transactions
 		|WHERE
-		|	Transactions.IsVendor
+		|	Transactions.IsCustomer
 		|
 		|UNION ALL
 		|

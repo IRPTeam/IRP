@@ -314,9 +314,6 @@ Scenario: _1003003 check SI closing by advance (Ap-Ar by documents, payment firs
 		| '28.04.2021 21:50:03'  | 'Distribution department'  | 'Bank receipt 13 dated 28.04.2021 21:50:03'  | 'TRY'       | 'Customers advance closing 6 dated 28.04.2021 12:00:00'  | 'Main Company'  | 'Ferron BP'  | '-3 914,00'  | 'en description is empty'       | 'Company Ferron BP'  | ''       | 'No'                     |
 		| '28.04.2021 21:50:03'  | 'Distribution department'  | 'Bank receipt 13 dated 28.04.2021 21:50:03'  | 'TRY'       | 'Customers advance closing 6 dated 28.04.2021 12:00:00'  | 'Main Company'  | 'Ferron BP'  | '2 904,00'   | 'en description is empty'       | 'Company Ferron BP'  | ''       | 'No'                     |
 		| '28.04.2021 21:50:03'  | 'Distribution department'  | 'Bank receipt 13 dated 28.04.2021 21:50:03'  | 'TRY'       | 'Customers advance closing 6 dated 28.04.2021 12:00:00'  | 'Main Company'  | 'Ferron BP'  | '1 010,00'   | 'en description is empty'       | 'Company Ferron BP'  | ''       | 'No'                     |
-	
-	
-			
 	And I close all client application windows
 	
 

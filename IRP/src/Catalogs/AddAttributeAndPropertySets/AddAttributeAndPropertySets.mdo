@@ -1005,6 +1005,13 @@
         <value>147</value>
       </code>
     </items>
+    <items id="cbdb0151-1fae-429f-b3f4-268526f54439">
+      <name>Catalog_AgingPeriods</name>
+      <description></description>
+      <code xsi:type="core:NumberValue">
+        <value>148</value>
+      </code>
+    </items>
   </predefined>
   <editType>InDialog</editType>
   <choiceMode>BothWays</choiceMode>

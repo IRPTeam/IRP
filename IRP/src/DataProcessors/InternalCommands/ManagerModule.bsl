@@ -24,6 +24,7 @@ Function GetCommandDescription(CommandName) Export
 		CommandDescription.Picture = "IconSetNotActive";
 		CommandDescription.PictureCheck = "IconSetActive";
 		
+		CommandDescription.LocationGroup = "CommandBar.Tools";
 		CommandDescription.LocationInCommandBar = "InAdditionalSubmenu"; //ButtonLocationInCommandBar.InAdditionalSubmenu
 		CommandDescription.ModifiesStoredData = True;
 		
@@ -51,6 +52,7 @@ Function GetCommandDescription(CommandName) Export
 		CommandDescription.Picture = "IconShowAnyActive";
 		CommandDescription.PictureCheck = "IconShowOnlyActive";
 		
+		CommandDescription.LocationGroup = "CommandBar.Tools";
 		CommandDescription.LocationInCommandBar = "InAdditionalSubmenu"; //ButtonLocationInCommandBar.InAdditionalSubmenu
 		CommandDescription.ModifiesStoredData = True;
 		
@@ -72,6 +74,31 @@ Function GetCommandDescription(CommandName) Export
 	
 	Return CommandDescription;
 	
+EndFunction
+
+// Get command group description.
+// 
+// Parameters:
+//  GroupName - String - Group name
+// 
+// Returns:
+//  See InternalCommandsServer.GetCommandGroupDescription
+Function GetCommandGroupDescription(GroupName) Export
+	
+	CommandGroupDescription = InternalCommandsServer.GetCommandGroupDescription();
+	
+	GroupNameParts = StrSplit(GroupName, ".", False);
+	CommandGroupDescription.Name = GroupNameParts.Get(GroupNameParts.UBound());
+	If GroupNameParts.Count() > 1 Then
+		GroupNameParts.Delete(GroupNameParts.UBound());
+		CommandGroupDescription.LocationGroup = StrConcat(GroupNameParts, ".");
+	EndIf;
+	
+	If Right(CommandGroupDescription.Name, 8) = "_Submenu" Then
+		CommandGroupDescription.Type = "Popup";
+	EndIf;
+	
+	Return CommandGroupDescription;
 EndFunction
 
 // See InternalCommandsServer.OnCommandCreate

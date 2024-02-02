@@ -13,7 +13,7 @@
 Procedure RunCommandAction(Command, Form, MainAttribute, Targets, AddInfo = Undefined) Export
 
 	CommandName = Mid(Command.Name, StrLen("InternalCommand_") + 1);
-	InternalCommandModule = GetForm("DataProcessor.InternalCommands.Form." + CommandName);
+	InternalCommandModule = GetForm("DataProcessor.InternalCommands.Form." + CommandName); // See DataProcessor.InternalCommands.Form.CommandTemplate
 	
 	//@skip-check property-return-type
 	CommandDescription = InternalCommandModule.CommandDescription; // See InternalCommandsServer.GetCommandDescription

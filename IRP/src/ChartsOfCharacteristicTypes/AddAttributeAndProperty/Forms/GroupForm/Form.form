@@ -169,6 +169,14 @@
     <commandBar/>
   </commandInterface>
   <extInfo xsi:type="form:ChartOfCharacteristicTypesFormExtInfo">
+    <handlers>
+      <event>OnReadAtServer</event>
+      <name>OnReadAtServer</name>
+    </handlers>
+    <handlers>
+      <event>OnWriteAtServer</event>
+      <name>OnWriteAtServer</name>
+    </handlers>
     <useForFoldersAndItems>Folders</useForFoldersAndItems>
   </extInfo>
 </form:Form>

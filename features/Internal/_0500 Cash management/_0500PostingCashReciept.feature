@@ -80,6 +80,9 @@ Scenario: _050000 preparation (Cash receipt)
 	When Create document PurchaseReturn objects (creation based on)
 	And I execute 1C:Enterprise script at server
 				| "Documents.PurchaseReturn.FindByNumber(351).GetObject().Write(DocumentWriteMode.Posting);"     |
+	Given I open hyperlink "e1cib/app/DataProcessor.SystemSettings"
+	And I set checkbox "Number editing available"
+	And I close "System settings" window
 
 Scenario: _0500001 check preparation
 	When check preparation	

@@ -32,8 +32,9 @@ Procedure OnCreateAtServerObject(Form, MainAttribute, Cancel, StandardProcessing
 	InternalCommandsServer.CreateCommands(Form, MainAttribute, CatalogFullName, Enums.FormTypes.ObjectForm);
 	
 	If Form.Items.Find("Code") <> Undefined Then
-		Form.Items.Code.ReadOnly = Not IsInRole("FullAccess");
-	EndIf;	
+		NumberEditingAvailable = SessionParametersServer.GetSessionParameter("NumberEditingAvailable"); // Boolean
+		Form.Items.Code.ReadOnly = Not NumberEditingAvailable;
+	EndIf;
 
 EndProcedure
 

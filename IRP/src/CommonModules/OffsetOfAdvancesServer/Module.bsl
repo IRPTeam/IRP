@@ -619,7 +619,7 @@ Procedure OffsetTransactionsToAdvances(Parameters,
 		                                                         Document, 
 		                                                         AdvanceKey, 
 		                                                         TransactionKey, 
-		                                                         Records_OffsetOfAdvances);
+		                                                         Records_OffsetOfAdvances, True);
 			
 			OffsetAdvancesToTransactions(Parameters, 
 			                             Records_AdvancesKey, 
@@ -2102,7 +2102,14 @@ Procedure Write_Aging(Parameters, Document, Records_OffsetAging)
 	RecordSet_Aging.Write();
 EndProcedure
 
-Procedure Add_T2010S_OffsetOfAdvances_FromAdvance_ToTransaction(Parameters, RecordType, Period, Amount, Document, AdvanceKey, TransactionKey, Records_OffsetOfAdvances)
+Procedure Add_T2010S_OffsetOfAdvances_FromAdvance_ToTransaction(Parameters, 
+	                                                            RecordType, 
+	                                                            Period, 
+	                                                            Amount, 
+	                                                            Document, 
+	                                                            AdvanceKey, 
+	                                                            TransactionKey, 
+	                                                            Records_OffsetOfAdvances)
 	NewRecord = Records_OffsetOfAdvances.Add();
 	NewRecord.RecordType  = RecordType;
 	
@@ -2134,7 +2141,15 @@ Procedure Add_T2010S_OffsetOfAdvances_FromAdvance_ToTransaction(Parameters, Reco
 	NewRecord.Key = NewRecord.TransactionsRowKey;
 EndProcedure
 
-Procedure Add_T2010S_OffsetOfAdvances_FromTransaction_ToAdvance(Parameters, RecordType, Period, Amount, Document, AdvanceKey, TransactionKey, Records_OffsetOfAdvances)
+Procedure Add_T2010S_OffsetOfAdvances_FromTransaction_ToAdvance(Parameters, 
+	                                                            RecordType, 
+	                                                            Period, 
+	                                                            Amount, 
+	                                                            Document, 
+	                                                            AdvanceKey, 
+	                                                            TransactionKey, 
+	                                                            Records_OffsetOfAdvances,
+	                                                            IsReturnToAdvance = False)
 	NewRecord = Records_OffsetOfAdvances.Add();
 	NewRecord.RecordType = RecordType;
 	
@@ -2162,8 +2177,12 @@ Procedure Add_T2010S_OffsetOfAdvances_FromTransaction_ToAdvance(Parameters, Reco
 		
 	NewRecord.FromTransactionKey  = TransactionKey;
 	NewRecord.ToAdvanceKey        = AdvanceKey;
-		
-	NewRecord.Key = NewRecord.AdvancesRowKey;	
+	
+	If IsReturnToAdvance Then	
+		NewRecord.Key = NewRecord.TransactionsRowKey;
+	Else
+		NewRecord.Key = NewRecord.AdvancesRowKey;
+	EndIf;		
 EndProcedure
 
 

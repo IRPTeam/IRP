@@ -341,4 +341,4 @@ EndProcedure
 
 #EndRegion
 
-ThisObject.TabularSections = "SendDocuments, ReceiveDocuments, OffsetOfAdvancesInvoices, OffsetOfAdvancesPayments";
+ThisObject.TabularSections = "SendDocuments, ReceiveDocuments";

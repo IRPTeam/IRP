@@ -963,7 +963,10 @@ EndFunction
 Procedure RevaluateCurrency(_TempTablesManager, ArrayOfRegisterNames, CurrencyRates, RegisterType, ExpenseRevenueInfo) Export
 	For Each RegisterName In ArrayOfRegisterNames Do
 		QueryTable = _TempTablesManager.Tables.Find("_" + RegisterName).GetData().Unload();
-
+		
+		QueryTable.Columns.Add("Processed");
+		QueryTable.FillValues(False, "Processed");
+		
 		DimensionsInfo = CreateDimensionsTableAndFilter(RegisterName);
 
 		For Each Row In QueryTable Do
@@ -973,8 +976,11 @@ Procedure RevaluateCurrency(_TempTablesManager, ArrayOfRegisterNames, CurrencyRa
 			FillPropertyValues(DimensionsInfo.DimensionsFilter, Row);
 
 			OtherCurrenciesRows = QueryTable.FindRows(DimensionsInfo.DimensionsFilter);
+			
+			HaveBalanceByTransactionCurrency = False;
 			For Each OtherCurrencyRow In OtherCurrenciesRows Do
 				If OtherCurrencyRow.CurrencyMovementType = ChartsOfCharacteristicTypes.CurrencyMovementType.SettlementCurrency Then
+					HaveBalanceByTransactionCurrency = True;
 					Continue;
 				EndIf;
 
@@ -1010,6 +1016,7 @@ Procedure RevaluateCurrency(_TempTablesManager, ArrayOfRegisterNames, CurrencyRa
 				AmountRevaluated = (Row.Amount * CurrencyInfo[0].Rate) / CurrencyInfo[0].Multiplicity;
 
 				If AmountRevaluated <> OtherCurrencyRow.Amount Then
+
 					_RecordType = Undefined;
 					AmountDifference = 0;
 					If AmountRevaluated > OtherCurrencyRow.Amount Then
@@ -1078,11 +1085,80 @@ Procedure RevaluateCurrency(_TempTablesManager, ArrayOfRegisterNames, CurrencyRa
 							NewExpense.Amount = AmountDifference;
 						EndIf;
 					EndIf;
-
+					
 				EndIf; // AmountRevaluated <> OtherCurrencyRow.Amount
 
 			EndDo; // OtherCurrenciesRows
+			
+			If HaveBalanceByTransactionCurrency Then
+				For Each OtherCurrencyRow In OtherCurrenciesRows Do
+					OtherCurrencyRow.Processed = True;
+				EndDo;
+			EndIf;
+		
 		EndDo; // QueryTable
+		
+		NotProcesedRows = QueryTable.FindRows(New Structure("Processed", False));
+		For Each NotProcessedRow In NotProcesedRows Do
+			_RocordType = Undefined;
+			If NotProcessedRow.Amount = 0 Then
+				Continue;
+			ElsIf NotProcessedRow.Amount > 0 THen
+				_RecordType = AccumulationRecordType.Expense;
+				AmountBalance = NotProcessedRow.Amount;
+			Else
+				_RecordType = AccumulationRecordType.Receipt;
+				AmountBalance = - NotProcessedRow.Amount;
+			EndIf;
+													
+			NewRow = DimensionsInfo.DimensionsTable.Add();
+			FillPropertyValues(NewRow, NotProcessedRow);
+			NewRow.RecordType = _RecordType;
+			NewRow.Period = ExpenseRevenueInfo.DocumentDate;
+			NewRow.Key = String(New UUID());
+					
+			NewRow.AmountRevaluated = AmountBalance;
+					
+			_IsExpense = False;
+			_IsRevenue = False;
+
+			If RegisterType = "Active" Then
+				If AmountBalance > 0 Then // revenue
+					_IsRevenue = True;
+				Else // expense
+					_IsExpense = True;
+				EndIf;
+			EndIf;
+
+			If RegisterType = "Passive" Then
+				If AmountBalance < 0 Then // expense
+					_IsExpense = True;
+				Else // revenue
+					_IsRevenue = True;
+				EndIf;
+			EndIf;
+
+			If _IsRevenue Then
+				NewRevenue = ExpenseRevenueInfo.RevenuesTable.Add();
+				FillPropertyValues(NewRevenue, NewRow);
+				NewRevenue.Period = ExpenseRevenueInfo.DocumentDate;
+				NewRevenue.ProfitLossCenter    = ExpenseRevenueInfo.Revenue_ProfitLossCenter;
+				NewRevenue.RevenueType         = ExpenseRevenueInfo.RevenueType;
+				NewRevenue.AdditionalAnalytic  = ExpenseRevenueInfo.Revenue_AdditionalAnalytic;
+				NewRevenue.Amount = AmountBalance;
+			EndIf;
+
+			If _IsExpense Then
+				NewExpense = ExpenseRevenueInfo.ExpensesTable.Add();
+				FillPropertyValues(NewExpense, NewRow);
+				NewExpense.Period = ExpenseRevenueInfo.DocumentDate;
+				NewExpense.ProfitLossCenter    = ExpenseRevenueInfo.Expense_ProfitLossCenter;
+				NewExpense.ExpenseType         = ExpenseRevenueInfo.ExpenseType;
+				NewExpense.AdditionalAnalytic  = ExpenseRevenueInfo.Expense_AdditionalAnalytic;
+				NewExpense.Amount = AmountBalance;
+			EndIf;
+		
+		EndDo;
 		
 		DeleteEmptyAmounts(DimensionsInfo.DimensionsTable, "AmountRevaluated");
 		

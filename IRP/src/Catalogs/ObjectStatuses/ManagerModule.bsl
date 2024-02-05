@@ -1,4 +1,6 @@
 Procedure ChoiceDataGetProcessing(ChoiceData, Parameters, StandardProcessing)
+	CatalogsServer.SetParametersForDataChoosing(Catalogs.ObjectStatuses, Parameters);
+	
 	If Parameters.Property("Filter") And Parameters.Filter.Property("Ref") Then
 		StandardProcessing = False;
 		QueryTable = GetChoiceDataTable_ByUser(Parameters);

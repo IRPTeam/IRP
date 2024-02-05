@@ -19,6 +19,7 @@ Procedure ChoiceDataGetProcessing(ChoiceData, Parameters, StandardProcessing)
 	
 	StandardProcessing = False;
 	CommonFormActionsServer.CutLastSymbolsIfCameFromExcel(Parameters);
+	CatalogsServer.SetParametersForDataChoosing(Catalogs.Stores, Parameters);
 	QueryTable = GetChoiceDataTable(Parameters);
 	ChoiceData = CommonFormActionsServer.QueryTableToChoiceData(QueryTable);	
 EndProcedure
@@ -40,6 +41,9 @@ Function GetChoiceDataTable(Parameters)
 	
 	Filter = "";
 	For Each FilterItem In Parameters.Filter Do
+		If FilterItem.Key = "CustomSearchFilter" OR FilterItem.Key = "AdditionalParameters" Then
+			Continue; // Service properties
+		EndIf;
 		Filter = Filter
 			+ ?(FilterItem.Key = "Company",
 		"
@@ -63,6 +67,9 @@ Function GetChoiceDataTable(Parameters)
 
 	Query.SetParameter("SearchString", Parameters.SearchString);
 	For Each FilterItem In Parameters.Filter Do
+		If FilterItem.Key = "CustomSearchFilter" OR FilterItem.Key = "AdditionalParameters" Then
+			Continue; // Service properties
+		EndIf;
 		Query.SetParameter(FilterItem.Key, FilterItem.Value);
 	EndDo;
 	

@@ -21,6 +21,8 @@ Procedure FindDataForInputStringChoiceDataGetProcessing(Source, ChoiceData, Para
 	EndIf;
 	
 	CommonFormActionsServer.CutLastSymbolsIfCameFromExcel(Parameters);
+	
+	CatalogsServer.SetParametersForDataChoosing(Source, Parameters);
 
 	StandardProcessing = False;
 

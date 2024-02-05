@@ -708,6 +708,7 @@ Function Strings(Lang) Export
 	Strings.Insert("Form_036", NStr("en = 'Set as default'", Lang));
 	Strings.Insert("Form_037", NStr("en = 'Unset as default'", Lang));
 	Strings.Insert("Form_038", NStr("en = 'Employee'", Lang));
+	Strings.Insert("Form_039", NStr("en = 'Add attribute in additional attribute set in extension tab for current object type: %1'", Lang));
 #EndRegion
 
 #Region ErrorMessages

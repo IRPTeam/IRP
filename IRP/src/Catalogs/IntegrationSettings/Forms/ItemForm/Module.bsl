@@ -155,6 +155,8 @@ Procedure SetVisible()
 	EndIf;
 	Items.ExternalDataProc.Visible = VisibleExternalDataProc;
 	Items.ExternalDataProcSettings.Visible = VisibleExternalDataProc;
+	
+	IntegrationServer.ExtensionCall_SetVisible(ThisObject);
 EndProcedure
 
 &AtClient

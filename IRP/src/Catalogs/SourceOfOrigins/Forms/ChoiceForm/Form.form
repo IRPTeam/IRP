@@ -750,6 +750,7 @@
         <valueType>
           <types>CatalogRef.Items</types>
         </valueType>
+        <values xsi:type="core:UndefinedValue"/>
         <useRestriction>true</useRestriction>
       </parameters>
       <parameters>
@@ -762,7 +763,7 @@
             </content>
           </localValue>
         </title>
-        <valueType/>
+        <values xsi:type="core:UndefinedValue"/>
         <useRestriction>true</useRestriction>
       </parameters>
       <parameters>
@@ -778,6 +779,7 @@
         <valueType>
           <types>CatalogRef.ItemTypes</types>
         </valueType>
+        <values xsi:type="core:UndefinedValue"/>
         <useRestriction>true</useRestriction>
       </parameters>
       <parameters>
@@ -793,6 +795,7 @@
         <valueType>
           <types>CatalogRef.ItemKeys</types>
         </valueType>
+        <values xsi:type="core:UndefinedValue"/>
         <useRestriction>true</useRestriction>
       </parameters>
     </extInfo>

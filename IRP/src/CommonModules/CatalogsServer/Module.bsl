@@ -31,7 +31,7 @@ Procedure OnCreateAtServerObject(Form, MainAttribute, Cancel, StandardProcessing
 	ExternalCommandsServer.CreateCommands(Form, CatalogFullName, Enums.FormTypes.ObjectForm);
 	InternalCommandsServer.CreateCommands(Form, MainAttribute, CatalogFullName, Enums.FormTypes.ObjectForm);
 	
-	If Form.Items.Find("Code") <> Undefined Then
+	If Form.Items.Find("Code") <> Undefined And Not ThisIsEditingException(CatalogFullName) Then
 		NumberEditingAvailable = SessionParametersServer.GetSessionParameter("NumberEditingAvailable"); // Boolean
 		Form.Items.Code.ReadOnly = Not NumberEditingAvailable;
 	EndIf;
@@ -101,5 +101,23 @@ Procedure SetParameterFilterForHidingNotActive(Parameters, SourceMetadata)
 		Parameters.Filter.Insert("NotActive", False);
 	EndIf;
 EndProcedure
+
+// This is editing exception.
+// 
+// Parameters:
+//  CatalogName - String - Catalog name
+// 
+// Returns:
+//  Boolean - This is editing exception
+Function ThisIsEditingException(CatalogName)
+	
+	If CatalogName = "Catalog.Currencies" 
+			OR CatalogName = "Catalog.RetailCustomers" Then
+		Return True;
+	EndIf;
+	
+	Return False;
+	
+EndFunction
 
 #EndRegion

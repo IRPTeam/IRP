@@ -213,6 +213,11 @@ EndProcedure
 #Region COMMANDS
 
 &AtClient
+Procedure InternalCommandAction(Command) Export
+	InternalCommandsClient.RunCommandAction(Command, ThisObject, Object, Object.Ref);
+EndProcedure
+
+&AtClient
 Procedure EditCurrencies(Command)
 	CurrentData = ThisObject.Items.DeductionList.CurrentData;
 	If CurrentData = Undefined Then

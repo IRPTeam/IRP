@@ -8,7 +8,12 @@ EndProcedure
 
 #EndRegion
 
-#Region Commands
+#Region COMMANDS
+
+&AtClient
+Procedure InternalCommandAction(Command) Export
+	InternalCommandsClient.RunCommandAction(Command, ThisObject, List, Items.List.SelectedRows);
+EndProcedure
 
 &AtClient
 Procedure GeneratedFormCommandActionByName(Command) Export

@@ -92,6 +92,7 @@ EndProcedure
 // * Picture - String - 
 // * TitleCheck - String - 
 // * PictureCheck - String - 
+// * EnableChecking - Boolean - 
 // * Representation - String - 
 // * LocationInCommandBar - String - 
 // * ModifiesStoredData - Boolean - 
@@ -119,6 +120,7 @@ Function GetCommandDescription() Export
 	CommandDescription.Insert("Picture", "");
 	CommandDescription.Insert("PictureCheck", "");
 	CommandDescription.Insert("ToolTip", "");
+	CommandDescription.Insert("EnableChecking", False);
 	
 	//CommandDescription.Insert("Representation", ButtonRepresentation.Auto);
 	CommandDescription.Insert("Representation", "Auto");

@@ -22,4 +22,9 @@ Procedure GeneratedFormCommandActionByNameServer(CommandName, SelectedRows) Expo
 	ExternalCommandsServer.GeneratedListChoiceFormCommandActionByName(SelectedRows, ThisObject, CommandName);
 EndProcedure
 
+&AtClient
+Procedure InternalCommandAction(Command) Export
+	InternalCommandsClient.RunCommandAction(Command, ThisObject, List, Items.List.SelectedRows);
+EndProcedure
+
 #EndRegion

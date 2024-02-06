@@ -577,6 +577,15 @@ EndProcedure
 
 #EndRegion
 
+#Region COMMANDS
+
+&AtClient
+Procedure InternalCommandAction(Command) Export
+	InternalCommandsClient.RunCommandAction(Command, ThisObject, Object, Object.Ref);
+EndProcedure
+
+#EndRegion
+
 &AtClient
 Procedure EditCurrencies(Command)
 	CurrentData = ThisObject.Items.PaymentList.CurrentData;

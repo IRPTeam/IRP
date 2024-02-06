@@ -569,6 +569,15 @@ EndProcedure
 
 #EndRegion
 
+#Region COMMANDS
+
+&AtClient
+Procedure InternalCommandAction(Command) Export
+	InternalCommandsClient.RunCommandAction(Command, ThisObject, Object, Object.Ref);
+EndProcedure
+
+#EndRegion
+
 &AtClient
 Procedure ChoiceByAccrual(Command)
 	DocPayrollClient.ChoiceByAccrual(Object, ThisObject);

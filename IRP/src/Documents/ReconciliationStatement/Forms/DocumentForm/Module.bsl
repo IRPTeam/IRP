@@ -1,3 +1,4 @@
+
 #Region FormEvents
 
 &AtServer
@@ -213,7 +214,12 @@ EndProcedure
 
 #EndRegion
 
-#Region Commands
+#Region COMMANDS
+
+&AtClient
+Procedure InternalCommandAction(Command) Export
+	InternalCommandsClient.RunCommandAction(Command, ThisObject, Object, Object.Ref);
+EndProcedure
 
 &AtClient
 Procedure PartnerOnChange(Item)

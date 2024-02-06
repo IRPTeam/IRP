@@ -355,6 +355,11 @@ EndProcedure
 #Region COMMANDS
 
 &AtClient
+Procedure InternalCommandAction(Command) Export
+	InternalCommandsClient.RunCommandAction(Command, ThisObject, Object, Object.Ref);
+EndProcedure
+
+&AtClient
 Procedure PickupCheques(Command)
 	FormParameters = New Structure();
 	Filter = New Structure();

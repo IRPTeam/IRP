@@ -1,3 +1,4 @@
+
 #Region FORM
 
 &AtServer
@@ -473,6 +474,11 @@ EndProcedure
 #EndRegion
 
 #Region COMMANDS
+
+&AtClient
+Procedure InternalCommandAction(Command) Export
+	InternalCommandsClient.RunCommandAction(Command, ThisObject, Object, Object.Ref);
+EndProcedure
 
 &AtClient
 Procedure SearchByBarcode(Command, Barcode = "")

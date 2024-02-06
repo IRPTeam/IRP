@@ -100,7 +100,12 @@ EndProcedure
 
 #EndRegion
 
-#Region ExternalCommands
+#Region COMMANDS
+
+&AtClient
+Procedure InternalCommandAction(Command) Export
+	InternalCommandsClient.RunCommandAction(Command, ThisObject, Object, Object.Ref);
+EndProcedure
 
 &AtClient
 Procedure GeneratedFormCommandActionByName(Command) Export

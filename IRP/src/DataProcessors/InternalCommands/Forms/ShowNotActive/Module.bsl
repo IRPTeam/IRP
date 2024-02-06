@@ -28,7 +28,7 @@ EndProcedure
 
 // See InternalCommandsClient.Form_RunCommandAction
 &AtClient
-Procedure RunCommandAction(Form, MainAttribute, Targets, AddInfo = Undefined) Export
+Procedure RunCommandAction(Targets, Form, CommandFormItem, MainAttribute, AddInfo = Undefined) Export
 
 	NameParts = StrSplit(Form.FormName, ".");
 	FullName = NameParts[0] + "." + NameParts[1];

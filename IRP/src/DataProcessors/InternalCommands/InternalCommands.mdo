@@ -38,4 +38,13 @@
     <usePurposes>PersonalComputer</usePurposes>
     <usePurposes>MobileDevice</usePurposes>
   </forms>
+  <forms uuid="c47bff1b-3b89-4768-9752-fa9c0fbe5fa7">
+    <name>GroupEditingProperties</name>
+    <synonym>
+      <key>en</key>
+      <value>Group editing of properties</value>
+    </synonym>
+    <usePurposes>PersonalComputer</usePurposes>
+    <usePurposes>MobileDevice</usePurposes>
+  </forms>
 </mdclass:DataProcessor>

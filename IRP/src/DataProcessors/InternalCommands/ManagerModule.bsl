@@ -23,6 +23,7 @@ Function GetCommandDescription(CommandName) Export
 		CommandDescription.ToolTip = CommandDescription.Title; 
 		CommandDescription.Picture = "IconSetNotActive";
 		CommandDescription.PictureCheck = "IconSetActive";
+		CommandDescription.EnableChecking = True;
 		
 		CommandDescription.LocationGroup = "CommandBar.Tools";
 		CommandDescription.LocationInCommandBar = "InAdditionalSubmenu"; //ButtonLocationInCommandBar.InAdditionalSubmenu
@@ -51,6 +52,7 @@ Function GetCommandDescription(CommandName) Export
 		CommandDescription.ToolTip = CommandDescription.Title;
 		CommandDescription.Picture = "IconShowAnyActive";
 		CommandDescription.PictureCheck = "IconShowOnlyActive";
+		CommandDescription.EnableChecking = True;
 		
 		CommandDescription.LocationGroup = "CommandBar.Tools";
 		CommandDescription.LocationInCommandBar = "InAdditionalSubmenu"; //ButtonLocationInCommandBar.InAdditionalSubmenu
@@ -66,6 +68,57 @@ Function GetCommandDescription(CommandName) Export
 		For Each ContentItem In Metadata.CommonAttributes.NotActive.Content Do
 			If ContentItem.Use = Metadata.ObjectProperties.CommonAttributeUse.Use  Then
 				Targets.Add(ContentItem.Metadata.FullName());
+			EndIf;
+		EndDo;
+		CommandDescription.Targets = New FixedArray(Targets);
+
+	ElsIf CommandName = "GroupEditingProperties" Then
+		
+		CommandDescription.Name = "GroupEditingProperties";
+		//@skip-check statement-type-change, property-return-type
+		CommandDescription.Title = Metadata.DataProcessors.InternalCommands.Forms.GroupEditingProperties.Synonym;
+		CommandDescription.ToolTip = CommandDescription.Title;
+		CommandDescription.Picture = "SpreadsheetReadOnly";
+		CommandDescription.Representation = "Picture";
+		
+		CommandDescription.LocationGroup = "CommandBar.Tools";
+		CommandDescription.LocationInCommandBar = "InCommandBarAndInAdditionalSubmenu"; //ButtonLocationInCommandBar.InAdditionalSubmenu
+		CommandDescription.ModifiesStoredData = True;
+		
+		CommandDescription.HasActionOnCommandCreate = True;
+		
+		CommandDescription.UsingListForm = True;
+		CommandDescription.UsingChoiceForm = True;
+		
+		Targets = CommandDescription.Targets;
+		For Each ContentItem In Metadata.Catalogs Do
+			If ContentItem <> Metadata.Catalogs.AccessKey
+					AND ContentItem <> Metadata.Catalogs.DepreciationSchedules 
+					AND ContentItem <> Metadata.Catalogs.EmployeeSchedule
+					AND ContentItem <> Metadata.Catalogs.FixedAssets
+					AND ContentItem <> Metadata.Catalogs.FixedAssetsLedgerTypes
+					AND ContentItem <> Metadata.Catalogs.PrintInfo
+					AND ContentItem <> Metadata.Catalogs.Projects Then
+				Targets.Add(ContentItem.FullName());
+			EndIf;
+		EndDo;
+		For Each ContentItem In Metadata.Documents Do
+			If ContentItem <> Metadata.Documents.AdditionalAccrual
+					AND ContentItem <> Metadata.Documents.AdditionalDeduction 
+					AND ContentItem <> Metadata.Documents.CommissioningOfFixedAsset
+					AND ContentItem <> Metadata.Documents.DebitCreditNote
+					AND ContentItem <> Metadata.Documents.DecommissioningOfFixedAsset
+					AND ContentItem <> Metadata.Documents.DepreciationCalculation
+					AND ContentItem <> Metadata.Documents.EmployeeFiring
+					AND ContentItem <> Metadata.Documents.EmployeeHiring
+					AND ContentItem <> Metadata.Documents.EmployeeSickLeave
+					AND ContentItem <> Metadata.Documents.EmployeeTransfer
+					AND ContentItem <> Metadata.Documents.EmployeeVacation
+					AND ContentItem <> Metadata.Documents.FixedAssetTransfer
+					AND ContentItem <> Metadata.Documents.ModernizationOfFixedAsset
+					AND ContentItem <> Metadata.Documents.RetailReceiptCorrection
+					AND ContentItem <> Metadata.Documents.VisitorCounter Then
+				Targets.Add(ContentItem.FullName());
 			EndIf;
 		EndDo;
 		CommandDescription.Targets = New FixedArray(Targets);

@@ -12,7 +12,10 @@
 //  AddInfo - Undefined -  Add info
 Procedure RunCommandAction(Command, Form, MainAttribute, Targets, AddInfo = Undefined) Export
 
+	CommandFormItem = Form.Items.Find(Command.Name);
+	
 	CommandName = Mid(Command.Name, StrLen("InternalCommand_") + 1);
+	//@skip-check use-non-recommended-method
 	InternalCommandModule = GetForm("DataProcessor.InternalCommands.Form." + CommandName); // See DataProcessor.InternalCommands.Form.CommandTemplate
 	
 	//@skip-check property-return-type
@@ -20,36 +23,37 @@ Procedure RunCommandAction(Command, Form, MainAttribute, Targets, AddInfo = Unde
 	
 	If CommandDescription.HasActionBeforeRunning Then
 		//@skip-check dynamic-access-method-not-found
-		InternalCommandModule.BeforeRunning(Form, MainAttribute, Targets, AddInfo);
+		InternalCommandModule.BeforeRunning(Targets, Form, CommandFormItem, MainAttribute, AddInfo);
 	EndIf;
 	
 	//@skip-check dynamic-access-method-not-found
-	InternalCommandModule.RunCommandAction(Form, MainAttribute, Targets, AddInfo);
+	InternalCommandModule.RunCommandAction(Targets, Form, CommandFormItem, MainAttribute, AddInfo);
 	
 	If CommandDescription.HasActionAfterRunning Then
 		//@skip-check dynamic-access-method-not-found
-		InternalCommandModule.AfterRunning(Form, MainAttribute, Targets, AddInfo);
+		InternalCommandModule.AfterRunning(Targets, Form, CommandFormItem, MainAttribute, AddInfo);
 	EndIf;
 	
-	FormItem = Form.Items.Find(Command.Name);
-	FormItem.Check = Not FormItem.Check;
-	If FormItem.Check Then
-		FormItem.Title = 
+	If CommandDescription.EnableChecking Then
+		CommandFormItem.Check = Not CommandFormItem.Check;
+	EndIf;
+	If CommandFormItem.Check Then
+		CommandFormItem.Title = 
 			?(IsBlankString(CommandDescription.TitleCheck), 
 				CommandDescription.Title, 
 				CommandDescription.TitleCheck);
 		If Not IsBlankString(CommandDescription.PictureCheck) Then
 			CommandPicture = PictureLib[CommandDescription.PictureCheck]; // Picture
-			FormItem.Picture = CommandPicture;
+			CommandFormItem.Picture = CommandPicture;
 		ElsIf Not IsBlankString(CommandDescription.Picture) Then
 			CommandPicture = PictureLib[CommandDescription.Picture]; // Picture
-			FormItem.Picture = CommandPicture;
+			CommandFormItem.Picture = CommandPicture;
 		EndIf;
 	Else
-		FormItem.Title = CommandDescription.Title;
+		CommandFormItem.Title = CommandDescription.Title;
 		If Not IsBlankString(CommandDescription.Picture) Then
 			CommandPicture = PictureLib[CommandDescription.Picture]; // Picture
-			FormItem.Picture = CommandPicture;
+			CommandFormItem.Picture = CommandPicture;
 		EndIf;
 	EndIf; 
 	
@@ -62,33 +66,36 @@ EndProcedure
 // Run action before running.
 // 
 // Parameters:
-//  Form - ClientApplicationForm - Form
-//  MainAttribute - FormAttribute, DynamicList - Main form attribute
 //  Targets - AnyRef, Array of AnyRef - Command target
+//  Form - ClientApplicationForm - Form
+//  CommandFormItem - FormButton - Command form item
+//  MainAttribute - FormAttribute, DynamicList - Main form attribute
 //  AddInfo - Undefined - Add info
-Procedure Form_BeforeRunning(Form, MainAttribute, Targets, AddInfo = Undefined) Export
+Procedure Form_BeforeRunning(Targets, Form, CommandFormItem, MainAttribute, AddInfo = Undefined) Export
 	Return;
 EndProcedure
 
 // Run command action.
 // 
 // Parameters:
-//  Form - ClientApplicationForm - Form
-//  MainAttribute - FormAttribute, DynamicList - Main form attribute
 //  Targets - AnyRef, Array of AnyRef - Command target
+//  Form - ClientApplicationForm - Form
+//  CommandFormItem - FormButton - Command form item
+//  MainAttribute - FormAttribute, DynamicList - Main form attribute
 //  AddInfo - Undefined -  Add info
-Procedure Form_RunCommandAction(Form, MainAttribute, Targets, AddInfo = Undefined) Export
+Procedure Form_RunCommandAction(Targets, Form, CommandFormItem, MainAttribute, AddInfo = Undefined) Export
 	Return;
 EndProcedure
 
 // Run action after running.
 // 
 // Parameters:
-//  Form - ClientApplicationForm - Form
-//  MainAttribute - FormAttribute, DynamicList - Main form attribute
 //  Targets - AnyRef, Array of AnyRef - Command target
+//  Form - ClientApplicationForm - Form
+//  CommandFormItem - FormButton - Command form item
+//  MainAttribute - FormAttribute, DynamicList - Main form attribute
 //  AddInfo - Undefined - Add info
-Procedure Form_AfterRunning(Form, MainAttribute, Targets, AddInfo = Undefined) Export
+Procedure Form_AfterRunning(Targets, Form, CommandFormItem, MainAttribute, AddInfo = Undefined) Export
 	Return;
 EndProcedure
 

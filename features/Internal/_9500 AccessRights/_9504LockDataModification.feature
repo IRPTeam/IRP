@@ -141,6 +141,9 @@ Scenario: 950400 preparation
 		And I execute 1C:Enterprise script at server	
 			| "Documents.PurchaseInvoice.FindByNumber(324).GetObject().Write(DocumentWriteMode.Posting);"    |
 		And I close all client application windows
+	Given I open hyperlink "e1cib/app/DataProcessor.SystemSettings"
+	And I set checkbox "Number editing available"
+	And I close "System settings" window
 		
 Scenario: 9504001 check preparation
 	When check preparation		
@@ -310,6 +313,9 @@ Scenario: 950405 create reasons for documents with different comparison type
 
 Scenario: 950406 create rules for documents (number of days from the current date for User)
 	And I connect "Этот клиент" profile of TestClient
+	Given I open hyperlink "e1cib/app/DataProcessor.SystemSettings"
+	And I set checkbox "Number editing available"
+	And I close "System settings" window
 	* Preparation
 		Given I open hyperlink 'e1cib/list/Document.SalesInvoice'
 		If "List" table does not contain lines Then
@@ -380,6 +386,9 @@ Scenario: 950406 create rules for documents (number of days from the current dat
 
 Scenario: 9504061 create rules for documents (number of days from the current date for User group)
 	And I connect "Этот клиент" profile of TestClient
+	Given I open hyperlink "e1cib/app/DataProcessor.SystemSettings"
+	And I set checkbox "Number editing available"
+	And I close "System settings" window
 	* Preparation
 		Given I open hyperlink 'e1cib/list/Document.SalesInvoice'
 		If "List" table does not contain lines Then
@@ -527,6 +536,9 @@ Scenario: 9504062 create rules for documents (number of days from the current da
 Scenario: 950407 create rules for accumulation register
 	And I close TestClient session
 	And I connect "Этот клиент" profile of TestClient
+	Given I open hyperlink "e1cib/app/DataProcessor.SystemSettings"
+	And I set checkbox "Number editing available"
+	And I close "System settings" window
 	* Preparation
 		Given I open hyperlink 'e1cib/list/Document.SalesInvoice'
 		If "List" table does not contain lines Then

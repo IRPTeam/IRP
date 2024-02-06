@@ -34,12 +34,24 @@ Procedure ChoiceDataGetProcessing(ChoiceData, Parameters, StandardProcessing)
 
 	StandardProcessing = False;
 	CommonFormActionsServer.CutLastSymbolsIfCameFromExcel(Parameters);
+	CatalogsServer.SetParametersForDataChoosing(Catalogs.CashAccounts, Parameters);
 	QueryTable = GetChoiceDataTable(Parameters);
 	ChoiceData = CommonFormActionsServer.QueryTableToChoiceData(QueryTable);	
 EndProcedure
 
 Function GetChoiceDataTable(Parameters)
 	Filter = "";
+	For Each FilterItem In Parameters.Filter Do
+		If FilterItem.Key = "CustomSearchFilter" OR FilterItem.Key = "AdditionalParameters" Then
+			Continue; // Service properties
+		EndIf;
+		If FilterItem.Key = "CashAccount" Then
+			Continue; // Additional parameters
+		EndIf;
+		Filter = Filter
+			+ "
+		|	AND Table." + FilterItem.Key + " = &" + FilterItem.Key;
+	EndDo;			 
 	Settings = New Structure();
 	Settings.Insert("MetadataObject", Metadata.Catalogs.CashAccounts);
 	Settings.Insert("Filter", Filter);
@@ -58,6 +70,9 @@ Function GetChoiceDataTable(Parameters)
 	// parameters search by code
 	SearchStringNumber = CommonFunctionsClientServer.GetSearchStringNumber(Parameters.SearchString);
 	Query.SetParameter("SearchStringNumber", SearchStringNumber);
+	For Each Filter In Parameters.Filter Do
+		Query.SetParameter(Filter.Key, Filter.Value);
+	EndDo;
 
 	Return Query.Execute().Unload();	
 EndFunction

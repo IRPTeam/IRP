@@ -6,12 +6,21 @@ Procedure ChoiceDataGetProcessing(ChoiceData, Parameters, StandardProcessing)
 
 	StandardProcessing = False;
 	CommonFormActionsServer.CutLastSymbolsIfCameFromExcel(Parameters);
+	CatalogsServer.SetParametersForDataChoosing(Catalogs.EmployeePositions, Parameters);
 	QueryTable = GetChoiceDataTable(Parameters);
 	ChoiceData = CommonFormActionsServer.QueryTableToChoiceData(QueryTable);	
 EndProcedure
 
 Function GetChoiceDataTable(Parameters) Export
 	Filter = "";
+	For Each FilterItem In Parameters.Filter Do
+		If FilterItem.Key = "CustomSearchFilter" OR FilterItem.Key = "AdditionalParameters" Then
+			Continue; // Service properties
+		EndIf;
+		Filter = Filter
+			+ "
+		|	AND Table." + FilterItem.Key + " = &" + FilterItem.Key;
+	EndDo;			 
 	Settings = New Structure();
 	Settings.Insert("MetadataObject", Metadata.Catalogs.ExpenseAndRevenueTypes);
 	Settings.Insert("Filter", Filter);
@@ -26,6 +35,9 @@ Function GetChoiceDataTable(Parameters) Export
 	Query = QueryBuilder.GetQuery();
 
 	Query.SetParameter("SearchString", Parameters.SearchString);
+	For Each Filter In Parameters.Filter Do
+		Query.SetParameter(Filter.Key, Filter.Value);
+	EndDo;
 
 	// parameters search by code
 	SearchStringNumber = CommonFunctionsClientServer.GetSearchStringNumber(Parameters.SearchString);

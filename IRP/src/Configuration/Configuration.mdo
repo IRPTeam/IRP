@@ -188,6 +188,10 @@
   <commonPictures>CommonPicture.PasteRowsFromClipboard</commonPictures>
   <commonPictures>CommonPicture.ControlCodeString</commonPictures>
   <commonPictures>CommonPicture.FixedAssets</commonPictures>
+  <commonPictures>CommonPicture.IconSetActive</commonPictures>
+  <commonPictures>CommonPicture.IconSetNotActive</commonPictures>
+  <commonPictures>CommonPicture.IconShowOnlyActive</commonPictures>
+  <commonPictures>CommonPicture.IconShowAnyActive</commonPictures>
   <sessionParameters>SessionParameter.Buffer</sessionParameters>
   <sessionParameters>SessionParameter.ClientType</sessionParameters>
   <sessionParameters>SessionParameter.ConnectedAddDataProc</sessionParameters>
@@ -204,6 +208,9 @@
   <sessionParameters>SessionParameter.OurCompanies</sessionParameters>
   <sessionParameters>SessionParameter.RunBackgroundJobInDebugMode</sessionParameters>
   <sessionParameters>SessionParameter.Workstation</sessionParameters>
+  <sessionParameters>SessionParameter.InternalCommands</sessionParameters>
+  <sessionParameters>SessionParameter.NotActiveCatalogsShowing</sessionParameters>
+  <sessionParameters>SessionParameter.NumberEditingAvailable</sessionParameters>
   <roles>Role.BasicRole</roles>
   <roles>Role.CreateOrModifyUsers</roles>
   <roles>Role.Document_AdditionalAccrual</roles>
@@ -732,8 +739,12 @@
   <commonModules>CommonModule.ViewServer_V2</commonModules>
   <commonModules>CommonModule.WorkstationClient</commonModules>
   <commonModules>CommonModule.WorkstationServer</commonModules>
+  <commonModules>CommonModule.CatalogsServer</commonModules>
+  <commonModules>CommonModule.InternalCommandsClient</commonModules>
+  <commonModules>CommonModule.InternalCommandsServer</commonModules>
   <commonModules>CommonModule.DocDebitCreditNoteClient</commonModules>
   <commonModules>CommonModule.DocDebitCreditNoteServer</commonModules>
+  <commonModules>CommonModule.ChartsOfCharacteristicTypesServer</commonModules>
   <commonAttributes>CommonAttribute.Author</commonAttributes>
   <commonAttributes>CommonAttribute.Branch</commonAttributes>
   <commonAttributes>CommonAttribute.Description</commonAttributes>
@@ -755,6 +766,7 @@
   <commonAttributes>CommonAttribute.Editor</commonAttributes>
   <commonAttributes>CommonAttribute.CreateDate</commonAttributes>
   <commonAttributes>CommonAttribute.ModifyDate</commonAttributes>
+  <commonAttributes>CommonAttribute.NotActive</commonAttributes>
   <exchangePlans>ExchangePlan.ED_ExchangePlan</exchangePlans>
   <exchangePlans>ExchangePlan.FullExchange</exchangePlans>
   <httpServices>HTTPService.TestConnection</httpServices>
@@ -1288,6 +1300,7 @@
   <dataProcessors>DataProcessor.LoadAndUnloadData</dataProcessors>
   <dataProcessors>DataProcessor.FixDocumentProblems</dataProcessors>
   <dataProcessors>DataProcessor.GroupPhotoUploading</dataProcessors>
+  <dataProcessors>DataProcessor.InternalCommands</dataProcessors>
   <informationRegisters>InformationRegister.AddProperties</informationRegisters>
   <informationRegisters>InformationRegister.AttachedFiles</informationRegisters>
   <informationRegisters>InformationRegister.Barcodes</informationRegisters>

@@ -360,6 +360,7 @@ Function GetChain()
 	Chain.Insert("CalculateDifferenceCount" , GetChainLink("CalculateDifferenceCountExecute"));
 
 	Chain.Insert("ChangePercentByBankTermAndPaymentType"	       , GetChainLink("ChangePercentByBankTermAndPaymentTypeExecute"));
+	Chain.Insert("ChangeAccountByBankTermAndPaymentType"	       , GetChainLink("ChangeAccountByBankTermAndPaymentTypeExecute"));
 	Chain.Insert("ChangePartnerByBankTermAndPaymentType"	       , GetChainLink("ChangePartnerByBankTermAndPaymentTypeExecute"));
 	Chain.Insert("ChangeLegalNameByBankTermAndPaymentType"	       , GetChainLink("ChangeLegalNameByBankTermAndPaymentTypeExecute"));
 	Chain.Insert("ChangePartnerTermsByBankTermAndPaymentType"	   , GetChainLink("ChangePartnerTermsByBankTermAndPaymentTypeExecute"));
@@ -3867,6 +3868,22 @@ EndFunction
 
 Function ChangePercentByBankTermAndPaymentTypeExecute(Options) Export
 	Return ModelServer_V2.GetBankTermInfo(Options.PaymentType, Options.BankTerm).Percent;
+EndFunction
+
+#EndRegion
+
+#Region CHANGE_ACCOUNT_BY_BANK_TERM_AND_PAYMENT_TYPE
+
+Function ChangeAccountByBankTermAndPaymentTypeOptions() Export
+	Return GetChainLinkOptions("PaymentType, BankTerm, CurrentAccount");
+EndFunction
+
+Function ChangeAccountByBankTermAndPaymentTypeExecute(Options) Export
+	_Type = CommonFunctionsServer.GetRefAttribute(Options.PaymentType, "Type");
+	If _Type = PredefinedValue("Enum.PaymentTypes.Card") Then
+		Return ModelServer_V2.GetBankTermInfo(Options.PaymentType, Options.BankTerm).Account;
+	EndIf;
+	Return Options.CurrentAccount;
 EndFunction
 
 #EndRegion

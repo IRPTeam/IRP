@@ -176,6 +176,7 @@ When Create document MoneyTransfer objects (test data base)
 When Create catalog PartnerItems objects (test data base)
 When Create document CustomersAdvancesClosing objects (test data base)
 WHen Create document VendorsAdvancesClosing objects (test data base)
+When Create document EmployeeCashAdvance objects (test data base)
 * Load data for Accounting system
 	When Create chart of characteristic types AccountingExtraDimensionTypes objects (test data base)
 	When Create chart of accounts Basic objects with LedgerTypeVariants (Basic LTV) (test data base)
@@ -581,6 +582,11 @@ WHen Create document VendorsAdvancesClosing objects (test data base)
 		And Delay "3"
 * Posting ForeignCurrencyRevaluation
 		Given I open hyperlink "e1cib/list/Document.ForeignCurrencyRevaluation"
+		Then I select all lines of "List" table
+		And in the table "List" I click the button named "ListContextMenuPost"
+		And Delay "3"
+* Posting EmployeeCashAdvance
+		Given I open hyperlink "e1cib/list/Document.EmployeeCashAdvance"
 		Then I select all lines of "List" table
 		And in the table "List" I click the button named "ListContextMenuPost"
 		And Delay "3"

@@ -37,7 +37,7 @@ Procedure OnStart()
 	AttachIdleHandler("ConnectAllEquipments", 0.1, True);
 	
 	//---------------------------------------------------
-	AttachIdleHandler("OpenDebugForm", 2, True);
+//	AttachIdleHandler("OpenDebugForm", 2, True);
 	//---------------------------------------------------
 EndProcedure
 

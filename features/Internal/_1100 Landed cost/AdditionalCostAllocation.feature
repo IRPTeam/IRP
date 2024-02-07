@@ -259,7 +259,7 @@ Scenario: _0411 check preparation
 	When check preparation
 
 Scenario: _042 check additional cost allocation (documents, by quantity)
-	Given I open hyperlink "e1cib/app/Report.BatchBalance"
+	Given I open hyperlink "e1cib/app/Report.R6020_BatchBalance"
 	And I click "Select option..." button
 	And I move to "Custom" tab
 	And I activate field named "OptionsListReportOption" in "OptionsList" table
@@ -303,7 +303,7 @@ Scenario: _042 check additional cost allocation (documents, by quantity)
 	
 Scenario: _043 check additional cost allocation (documents, by amount)
 	And I close all client application windows
-	Given I open hyperlink "e1cib/app/Report.BatchBalance"
+	Given I open hyperlink "e1cib/app/Report.R6020_BatchBalance"
 	And I click "Change option..." button
 	And I move to "Fields" tab
 	And I move to the tab named "FilterPage"
@@ -345,7 +345,7 @@ Scenario: _043 check additional cost allocation (documents, by amount)
 
 Scenario: _044 check additional cost allocation (documents, by weight)
 	And I close all client application windows
-	Given I open hyperlink "e1cib/app/Report.BatchBalance"
+	Given I open hyperlink "e1cib/app/Report.R6020_BatchBalance"
 	And I click "Change option..." button
 	And I move to "Fields" tab
 	And I move to the tab named "FilterPage"
@@ -384,7 +384,7 @@ Scenario: _044 check additional cost allocation (documents, by weight)
 		
 Scenario: _045 check additional cost allocation (rows, by amount)
 	And I close all client application windows
-	Given I open hyperlink "e1cib/app/Report.BatchBalance"
+	Given I open hyperlink "e1cib/app/Report.R6020_BatchBalance"
 	And I click "Change option..." button
 	And I move to "Fields" tab
 	And I move to the tab named "FilterPage"
@@ -1119,7 +1119,7 @@ Scenario: _080 allocation of the additional cost to the invoice of the previous 
 		And I execute 1C:Enterprise script at server
 			| "Documents.CalculationMovementCosts.FindByNumber(8).GetObject().Write(DocumentWriteMode.Posting);"    |
 	* Check
-		Given I open hyperlink "e1cib/app/Report.BatchBalance"	
+		Given I open hyperlink "e1cib/app/Report.R6020_BatchBalance"	
 		And I click "Select option..." button
 		And I move to "Custom" tab
 		And I activate field named "OptionsListReportOption" in "OptionsList" table
@@ -1184,7 +1184,7 @@ Scenario: _090 allocation of the additional cost to the invoice of the previous 
 		And I execute 1C:Enterprise script at server
 			| "Documents.CalculationMovementCosts.FindByNumber(19).GetObject().Write(DocumentWriteMode.Posting);"    |
 	* Check
-		Given I open hyperlink "e1cib/app/Report.BatchBalance"	
+		Given I open hyperlink "e1cib/app/Report.R6020_BatchBalance"	
 		And I click "Select option..." button
 		And I move to "Custom" tab
 		And I activate field named "OptionsListReportOption" in "OptionsList" table
@@ -1389,7 +1389,7 @@ Scenario: _098 allocation of the additional cost (tax) (item is already sold)
 		And I execute 1C:Enterprise script at server
 			| "Documents.CalculationMovementCosts.FindByNumber(27).GetObject().Write(DocumentWriteMode.Posting);"    |
 	* Check
-		Given I open hyperlink "e1cib/app/Report.BatchBalance"	
+		Given I open hyperlink "e1cib/app/Report.R6020_BatchBalance"	
 		And I click "Select option..." button
 		And I move to "Custom" tab
 		And I activate field named "OptionsListReportOption" in "OptionsList" table
@@ -1426,7 +1426,7 @@ Scenario: _098 allocation of the additional cost (tax) (item is already sold)
 Scenario: _099 sales from one store, return to another store				
 	And I close all client application windows
 	* Check
-		Given I open hyperlink "e1cib/app/Report.BatchBalance"	
+		Given I open hyperlink "e1cib/app/Report.R6020_BatchBalance"	
 		And I click "Select option..." button
 		And I move to "Custom" tab
 		And I activate field named "OptionsListReportOption" in "OptionsList" table

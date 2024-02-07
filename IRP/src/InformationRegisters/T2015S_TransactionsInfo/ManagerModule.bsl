@@ -186,6 +186,50 @@ Function T2015S_TransactionsInfo_CreditNote() Export
 		   |	Transactions.Key";
 EndFunction
 
+Function T2015S_TransactionsInfo_DebitCreditNote() Export
+	Return 
+		"SELECT
+		|	Doc.Period AS Date,
+		|	Doc.Company,
+		|	Doc.SendBranch AS Branch,
+		|	Doc.Currency,
+		|	Doc.SendLegalName AS LegalName,
+		|	Doc.SendPartner AS Partner,
+		|	Doc.SendAgreement AS Agreement,
+		|	Doc.SendProject AS Project,
+		|	Doc.SendBasisDocument AS TransactionBasis,
+		|	Doc.SendOrder AS Order,
+		|	Doc.SendIsVendorTransaction AS IsVendorTransaction,
+		|	Doc.SendIsCustomerTransaction AS IsCustomerTransaction,
+		|	FALSE AS IsDue,
+		|	TRUE AS IsPaid,
+		|	Doc.Amount
+		|INTO T2015S_TransactionsInfo
+		|FROM
+		|	SendTransactions AS Doc
+		|
+		|UNION ALL
+		|
+		|SELECT
+		|	Doc.Period,
+		|	Doc.Company,
+		|	Doc.ReceiveBranch,
+		|	Doc.Currency,
+		|	Doc.ReceiveLegalName,
+		|	Doc.ReceivePartner,
+		|	Doc.ReceiveAgreement,
+		|	Doc.ReceiveProject,
+		|	Doc.ReceiveBasisDocument,
+		|	Doc.ReceiveOrder,
+		|	Doc.SendIsVendorTransaction,
+		|	Doc.SendIsCustomerTransaction,
+		|	TRUE AS IsDue,
+		|	FALSE AS IsPaid,
+		|	Doc.Amount
+		|FROM
+		|	ReceiveTransactions AS Doc";
+EndFunction
+
 Function T2015S_TransactionsInfo_Cheque() Export
 	Return 
 		"SELECT

@@ -1633,6 +1633,7 @@ Procedure CreateAdvancesKeys(Parameters, Records_AdvancesKey, Records_OffsetOfAd
 	|	AdvInfo.LegalName,
 	|	AdvInfo.AdvanceAgreement,
 	|	AdvInfo.Project,
+	|	AdvInfo.RecordType,
 	|	CASE
 	|		WHEN AdvInfo.Order.Ref IS NULL
 	|			THEN UNDEFINED
@@ -1658,6 +1659,7 @@ Procedure CreateAdvancesKeys(Parameters, Records_AdvancesKey, Records_OffsetOfAd
 	|	AdvInfo.LegalName,
 	|	AdvInfo.AdvanceAgreement,
 	|	AdvInfo.Project,
+	|	AdvInfo.RecordType,
 	|	CASE
 	|		WHEN AdvInfo.Order.Ref IS NULL
 	|			THEN UNDEFINED
@@ -1672,6 +1674,7 @@ Procedure CreateAdvancesKeys(Parameters, Records_AdvancesKey, Records_OffsetOfAd
 	|	tmp_AdvInfo.Document,
 	|	tmp_AdvInfo.Date,
 	|	tmp_AdvInfo.Amount,
+	|	tmp_AdvInfo.RecordType,
 	|	tmp_AdvInfo.Key,
 	|	tmp_AdvInfo.%1,
 	|	AdvKeys.Ref AS AdvanceKey
@@ -1709,7 +1712,13 @@ Procedure CreateAdvancesKeys(Parameters, Records_AdvancesKey, Records_OffsetOfAd
 
 	While QuerySelection.Next() Do
 		If Not QuerySelection[Parameters.OrderCloseType] Then
-			Add_TM1020B_AdvancesKey(AccumulationRecordType.Receipt, 
+			
+			RecordType = AccumulationRecordType.Receipt;
+			If QuerySelection.RecordType = Enums.RecordType.Expense Then
+				RecordType = AccumulationRecordType.Expense;
+			EndIf;
+			
+			Add_TM1020B_AdvancesKey(RecordType, 
 		                            QuerySelection.Date, 
 		                            QuerySelection.AdvanceKey,
 		                            QuerySelection.Amount, 

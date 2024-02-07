@@ -52,6 +52,30 @@ EndProcedure
 Procedure SetVisibilityAvailability(Object, Form)		
 	Form.Items.SendLegalName.Enabled    = ValueIsFilled(Object.SendPartner);
 	Form.Items.ReceiveLegalName.Enabled = ValueIsFilled(Object.ReceivePartner);
+	
+	IsEnabled_SendBasisDocument = True;
+	If Object.SendDebtType = PredefinedValue("Enum.DebtTypes.AdvanceCustomer")
+		Or Object.SendDebtType = PredefinedValue("Enum.DebtTypes.AdvanceVendor") Then
+		IsEnabled_SendBasisDocument = False;
+	ElsIf Not ValueIsFilled(Object.SendAgreement) Then
+		IsEnabled_SendBasisDocument = False;
+	ElsIf CommonFunctionsServer.GetRefAttribute(Object.SendAgreement, "ApArPostingDetail") 
+		<> PredefinedValue("Enum.ApArPostingDetail.ByDocuments") Then
+		IsEnabled_SendBasisDocument = False;
+	EndIf;	
+	Form.Items.SendBasisDocument.Enabled = IsEnabled_SendBasisDocument;
+	
+	IsEnabled_ReceiveBasisDocument = True;
+	If Object.ReceiveDebtType = PredefinedValue("Enum.DebtTypes.AdvanceCustomer")
+		Or Object.ReceiveDebtType = PredefinedValue("Enum.DebtTypes.AdvanceVendor") Then
+		IsEnabled_ReceiveBasisDocument = False;
+	ElsIf Not ValueIsFilled(Object.ReceiveAgreement) Then
+		IsEnabled_ReceiveBasisDocument = False;
+	ElsIf CommonFunctionsServer.GetRefAttribute(Object.ReceiveAgreement, "ApArPostingDetail") 
+		<> PredefinedValue("Enum.ApArPostingDetail.ByDocuments") Then
+		IsEnabled_ReceiveBasisDocument = False;
+	EndIf;	
+	Form.Items.ReceiveBasisDocument.Enabled = IsEnabled_ReceiveBasisDocument;
 EndProcedure
 
 &AtClient
@@ -104,6 +128,15 @@ EndProcedure
 &AtClient
 Procedure CurrencyOnChange(Item)
 	DocDebitCreditNoteClient.CurrencyOnChange(Object, ThisObject, Item);
+EndProcedure
+
+#EndRegion
+
+#Region SEND_DEBT_TYPE
+
+&AtClient
+Procedure SendDebtTypeOnChange(Item)
+	DocDebitCreditNoteClient.SendDebtTypeOnChange(Object, ThisObject, Item);
 EndProcedure
 
 #EndRegion
@@ -165,21 +198,11 @@ EndProcedure
 
 #EndRegion
 
-#Region SEND_DOCUMENTS
+#Region RECEIVE_DEBT_TYPE
 
 &AtClient
-Procedure SendDocumentsAfterDeleteRow(Item)
-	DocDebitCreditNoteClient.SendDocumentsAfterDeleteRow(Object, ThisObject, Item);
-EndProcedure
-
-&AtClient
-Procedure SendDocumentsBeforeAddRow(Item, Cancel, Clone, Parent, IsFolder, Parameter)
-	DocDebitCreditNoteClient.SendDocumentsBeforeAddRow(Object, ThisObject, Item, Cancel, Clone, Parent, IsFolder, Parameter);
-EndProcedure
-
-&AtClient
-Procedure SendDocumentsSelection(Item, RowSelected, Field, StandardProcessing)
-	DocDebitCreditNoteClient.SendDocumentsSelection(Object, ThisObject, Item, RowSelected, Field, StandardProcessing);
+Procedure ReceiveDebtTypeOnChange(Item)
+	DocDebitCreditNoteClient.ReceiveDebtTypeOnChange(Object, ThisObject, Item);
 EndProcedure
 
 #EndRegion
@@ -237,25 +260,6 @@ EndProcedure
 &AtClient
 Procedure ReceiveLegalNameEditTextChange(Item, Text, StandardProcessing)
 	DocDebitCreditNoteClient.ReceiveLegalNameEditTextChange(Object, ThisObject, Item, Text, StandardProcessing);
-EndProcedure
-
-#EndRegion
-
-#Region RECEIVE_DOCUMENTS
-
-&AtClient
-Procedure ReceiveDocumentsAfterDeleteRow(Item)
-	DocDebitCreditNoteClient.ReceiveDocumentsAfterDeleteRow(Object, ThisObject, Item);
-EndProcedure
-
-&AtClient
-Procedure ReceiveDocumentsBeforeAddRow(Item, Cancel, Clone, Parent, IsFolder, Parameter)
-	DocDebitCreditNoteClient.ReceiveDocumentsBeforeAddRow(Object, ThisObject, Item, Cancel, Clone, Parent, IsFolder, Parameter);
-EndProcedure
-
-&AtClient
-Procedure ReceiveDocumentsSelection(Item, RowSelected, Field, StandardProcessing)
-	DocDebitCreditNoteClient.ReceiveDocumentsSelection(Object, ThisObject, Item, RowSelected, Field, StandardProcessing);
 EndProcedure
 
 #EndRegion
@@ -340,5 +344,3 @@ Procedure ShowHiddenTables(Command)
 EndProcedure
 
 #EndRegion
-
-ThisObject.TabularSections = "SendDocuments, ReceiveDocuments";

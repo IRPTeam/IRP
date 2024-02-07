@@ -56,7 +56,6 @@
   <defaultListForm>Document.DebitCreditNote.Form.ListForm</defaultListForm>
   <defaultChoiceForm>Document.DebitCreditNote.Form.ChoiceForm</defaultChoiceForm>
   <realTimePosting>Deny</realTimePosting>
-  <registerRecords>InformationRegister.T2018S_UserDefinedOffsetOfAdvances</registerRecords>
   <registerRecords>AccumulationRegister.R1020B_AdvancesToVendors</registerRecords>
   <registerRecords>AccumulationRegister.R1021B_VendorsTransactions</registerRecords>
   <registerRecords>AccumulationRegister.R2021B_CustomersTransactions</registerRecords>
@@ -77,22 +76,6 @@
     <maxValue xsi:type="core:UndefinedValue"/>
     <fillChecking>ShowError</fillChecking>
     <fillFromFillingValue>true</fillFromFillingValue>
-    <fillValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-    <dataHistory>Use</dataHistory>
-  </attributes>
-  <attributes uuid="a5ea2c4f-f578-4c54-a4fc-a13bb3b8932f">
-    <name>TransactionType</name>
-    <synonym>
-      <key>en</key>
-      <value>Transaction type</value>
-    </synonym>
-    <type>
-      <types>EnumRef.DebitCreditNoteTransactionTpes</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fillChecking>ShowError</fillChecking>
     <fillValue xsi:type="core:UndefinedValue"/>
     <fullTextSearch>Use</fullTextSearch>
     <dataHistory>Use</dataHistory>
@@ -232,69 +215,6 @@
     <fullTextSearch>Use</fullTextSearch>
     <dataHistory>Use</dataHistory>
   </attributes>
-  <attributes uuid="22ffa16f-5339-41a9-ae87-bea4420b8ba1">
-    <name>Partner</name>
-    <synonym>
-      <key>en</key>
-      <value>Partner</value>
-    </synonym>
-    <type>
-      <types>CatalogRef.Partners</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fillChecking>ShowError</fillChecking>
-    <fillValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-    <dataHistory>Use</dataHistory>
-  </attributes>
-  <attributes uuid="06052ec9-654e-4200-ac0f-11499d4ab5e1">
-    <name>LegalName</name>
-    <synonym>
-      <key>en</key>
-      <value>Legal name</value>
-    </synonym>
-    <type>
-      <types>CatalogRef.Companies</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fillChecking>ShowError</fillChecking>
-    <fillValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-    <dataHistory>Use</dataHistory>
-  </attributes>
-  <attributes uuid="46dd255c-8b56-4246-8e9b-1ed099c8a53e">
-    <name>Agreement</name>
-    <synonym>
-      <key>en</key>
-      <value>Agreement</value>
-    </synonym>
-    <type>
-      <types>CatalogRef.Agreements</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fillChecking>ShowError</fillChecking>
-    <fillValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-    <dataHistory>Use</dataHistory>
-  </attributes>
-  <attributes uuid="27f5024e-a990-477a-b2d9-b781be637a58">
-    <name>LegalNameContract</name>
-    <synonym>
-      <key>en</key>
-      <value>Legal name contract</value>
-    </synonym>
-    <type>
-      <types>CatalogRef.LegalNameContracts</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fillValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-    <dataHistory>Use</dataHistory>
-  </attributes>
   <attributes uuid="fd05b777-d870-453f-ba3f-0db11d413302">
     <name>Currency</name>
     <synonym>
@@ -333,24 +253,6 @@
     <synonym>
       <key>en</key>
       <value>Choice form</value>
-    </synonym>
-    <usePurposes>PersonalComputer</usePurposes>
-    <usePurposes>MobileDevice</usePurposes>
-  </forms>
-  <forms uuid="95a8ccbb-198f-403b-a55f-b564545913f2">
-    <name>ChoiceInvoiceForm</name>
-    <synonym>
-      <key>en</key>
-      <value>Choice invoice form</value>
-    </synonym>
-    <usePurposes>PersonalComputer</usePurposes>
-    <usePurposes>MobileDevice</usePurposes>
-  </forms>
-  <forms uuid="0e422751-134e-41f0-afbc-e59eb9708533">
-    <name>ChoicePaymentDocumentForm</name>
-    <synonym>
-      <key>en</key>
-      <value>Choice payment document form</value>
     </synonym>
     <usePurposes>PersonalComputer</usePurposes>
     <usePurposes>MobileDevice</usePurposes>
@@ -637,162 +539,6 @@
       <type>
         <types>DocumentRef.PurchaseOrder</types>
         <types>DocumentRef.SalesOrder</types>
-      </type>
-      <minValue xsi:type="core:UndefinedValue"/>
-      <maxValue xsi:type="core:UndefinedValue"/>
-      <dataHistory>Use</dataHistory>
-      <fullTextSearch>Use</fullTextSearch>
-    </attributes>
-  </tabularSections>
-  <tabularSections uuid="1698ac20-fa79-40ce-bbca-452942640f4f">
-    <producedTypes>
-      <objectType typeId="76c27184-01f2-4fea-901d-75430f1a2a94" valueTypeId="4b551e77-3bf0-42ff-ad32-446b8f5abf71"/>
-      <rowType typeId="22571b82-372b-4596-957f-56f7c75d7424" valueTypeId="97153446-9dbd-44f7-a46d-a82d4898a49c"/>
-    </producedTypes>
-    <name>OffsetOfAdvancesInvoices</name>
-    <synonym>
-      <key>en</key>
-      <value>Offset of advances invoices</value>
-    </synonym>
-    <attributes uuid="6a7453ec-0b40-483e-affd-9189a474d4c6">
-      <name>Key</name>
-      <synonym>
-        <key>en</key>
-        <value>Key</value>
-      </synonym>
-      <type>
-        <types>DefinedType.typeRowID</types>
-      </type>
-      <minValue xsi:type="core:UndefinedValue"/>
-      <maxValue xsi:type="core:UndefinedValue"/>
-      <dataHistory>Use</dataHistory>
-      <fullTextSearch>Use</fullTextSearch>
-    </attributes>
-    <attributes uuid="01ef18f0-baee-40b4-9f5e-2dce576cee30">
-      <name>Invoice</name>
-      <synonym>
-        <key>en</key>
-        <value>Invoice</value>
-      </synonym>
-      <type>
-        <types>DocumentRef.PurchaseInvoice</types>
-        <types>DocumentRef.SalesInvoice</types>
-        <types>DocumentRef.SalesReturn</types>
-        <types>DocumentRef.PurchaseReturn</types>
-      </type>
-      <minValue xsi:type="core:UndefinedValue"/>
-      <maxValue xsi:type="core:UndefinedValue"/>
-      <dataHistory>Use</dataHistory>
-      <fullTextSearch>Use</fullTextSearch>
-    </attributes>
-    <attributes uuid="66550df8-4900-4df6-a2eb-7cf4691571e4">
-      <name>Order</name>
-      <synonym>
-        <key>en</key>
-        <value>Order</value>
-      </synonym>
-      <type>
-        <types>DocumentRef.SalesOrder</types>
-        <types>DocumentRef.PurchaseOrder</types>
-      </type>
-      <minValue xsi:type="core:UndefinedValue"/>
-      <maxValue xsi:type="core:UndefinedValue"/>
-      <dataHistory>Use</dataHistory>
-      <fullTextSearch>Use</fullTextSearch>
-    </attributes>
-    <attributes uuid="7f68d2ac-2a8b-4739-a995-5b1df86aec0d">
-      <name>Amount</name>
-      <synonym>
-        <key>en</key>
-        <value>Amount</value>
-      </synonym>
-      <type>
-        <types>DefinedType.typeAmount</types>
-      </type>
-      <minValue xsi:type="core:UndefinedValue"/>
-      <maxValue xsi:type="core:UndefinedValue"/>
-      <dataHistory>Use</dataHistory>
-      <fullTextSearch>Use</fullTextSearch>
-    </attributes>
-  </tabularSections>
-  <tabularSections uuid="a622b880-d68b-40e8-8f71-816da5b99fc5">
-    <producedTypes>
-      <objectType typeId="e82c7ee6-aae0-4035-bc18-64831c09553b" valueTypeId="01c441ec-c0ac-466f-a8e5-ac8b20e4161f"/>
-      <rowType typeId="acd5cb83-6bd6-4b95-9679-942d8d7ce57a" valueTypeId="a38dbe99-74f7-4cb3-b7c2-763bb4199ad6"/>
-    </producedTypes>
-    <name>OffsetOfAdvancesPayments</name>
-    <synonym>
-      <key>en</key>
-      <value>Offset of advances payments</value>
-    </synonym>
-    <attributes uuid="dd4a3847-64a8-42e4-83af-f90998c3c11c">
-      <name>Key</name>
-      <synonym>
-        <key>en</key>
-        <value>Key</value>
-      </synonym>
-      <type>
-        <types>DefinedType.typeRowID</types>
-      </type>
-      <minValue xsi:type="core:UndefinedValue"/>
-      <maxValue xsi:type="core:UndefinedValue"/>
-      <dataHistory>Use</dataHistory>
-      <fullTextSearch>Use</fullTextSearch>
-    </attributes>
-    <attributes uuid="c8ea77a0-de78-40fe-a3fe-bf52c014d75d">
-      <name>KeyOwner</name>
-      <synonym>
-        <key>en</key>
-        <value>Key owner</value>
-      </synonym>
-      <type>
-        <types>DefinedType.typeRowID</types>
-      </type>
-      <minValue xsi:type="core:UndefinedValue"/>
-      <maxValue xsi:type="core:UndefinedValue"/>
-      <dataHistory>Use</dataHistory>
-      <fullTextSearch>Use</fullTextSearch>
-    </attributes>
-    <attributes uuid="5f5de7c1-e6c6-4bc6-874b-ec9c7ae5c979">
-      <name>Document</name>
-      <synonym>
-        <key>en</key>
-        <value>Document</value>
-      </synonym>
-      <type>
-        <types>DocumentRef.BankPayment</types>
-        <types>DocumentRef.BankReceipt</types>
-        <types>DocumentRef.CashPayment</types>
-        <types>DocumentRef.CashReceipt</types>
-      </type>
-      <minValue xsi:type="core:UndefinedValue"/>
-      <maxValue xsi:type="core:UndefinedValue"/>
-      <dataHistory>Use</dataHistory>
-      <fullTextSearch>Use</fullTextSearch>
-    </attributes>
-    <attributes uuid="a7695eb2-e54b-4d91-a2b0-943d198805bc">
-      <name>Order</name>
-      <synonym>
-        <key>en</key>
-        <value>Order</value>
-      </synonym>
-      <type>
-        <types>DocumentRef.SalesOrder</types>
-        <types>DocumentRef.PurchaseOrder</types>
-      </type>
-      <minValue xsi:type="core:UndefinedValue"/>
-      <maxValue xsi:type="core:UndefinedValue"/>
-      <dataHistory>Use</dataHistory>
-      <fullTextSearch>Use</fullTextSearch>
-    </attributes>
-    <attributes uuid="891d1d97-1e93-451f-a7d5-889e18fe0e79">
-      <name>Amount</name>
-      <synonym>
-        <key>en</key>
-        <value>Amount</value>
-      </synonym>
-      <type>
-        <types>DefinedType.typeAmount</types>
       </type>
       <minValue xsi:type="core:UndefinedValue"/>
       <maxValue xsi:type="core:UndefinedValue"/>

@@ -2398,11 +2398,4 @@
 			<value>true</value>
 		</right>
 	</object>
-	<object>
-		<name>Document.DebitCreditNote.Attribute.TransactionType</name>
-		<right>
-			<name>View</name>
-			<value>true</value>
-		</right>
-	</object>
 </Rights>

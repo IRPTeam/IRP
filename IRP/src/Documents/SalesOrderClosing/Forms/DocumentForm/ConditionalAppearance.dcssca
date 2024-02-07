@@ -26,6 +26,9 @@
 			<item>
 				<field>ItemListSalesPerson</field>
 			</item>
+			<item>
+				<field>ItemListProject</field>
+			</item>
 		</selection>
 		<filter>
 			<item xsi:type="FilterItemComparison">

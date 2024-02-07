@@ -49,6 +49,8 @@
   <createOnInput>Use</createOnInput>
   <dataLockControlMode>Managed</dataLockControlMode>
   <fullTextSearch>Use</fullTextSearch>
+  <hierarchical>true</hierarchical>
+  <hierarchyType>HierarchyOfItems</hierarchyType>
   <levelCount>2</levelCount>
   <foldersOnTop>true</foldersOnTop>
   <codeLength>12</codeLength>
@@ -131,7 +133,7 @@
     <usePurposes>PersonalComputer</usePurposes>
     <usePurposes>MobileDevice</usePurposes>
   </forms>
-  <forms uuid="7825aacd-2364-46bd-bae4-91f33581fc81">
+  <forms uuid="16af5201-d539-4c19-a156-c132172b878f">
     <name>ListForm</name>
     <synonym>
       <key>en</key>
@@ -140,7 +142,7 @@
     <usePurposes>PersonalComputer</usePurposes>
     <usePurposes>MobileDevice</usePurposes>
   </forms>
-  <forms uuid="caa2f999-b307-44b1-a5d8-a6946d65b3c2">
+  <forms uuid="307a9dab-f034-4e30-b97f-52ea857f9072">
     <name>ChoiceForm</name>
     <synonym>
       <key>en</key>

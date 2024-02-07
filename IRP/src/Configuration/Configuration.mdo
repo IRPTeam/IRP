@@ -1087,6 +1087,7 @@
   <catalogs>Catalog.Vehicles</catalogs>
   <catalogs>Catalog.VehicleTypes</catalogs>
   <catalogs>Catalog.Workstations</catalogs>
+  <catalogs>Catalog.AgingPeriods</catalogs>
   <documents>Document.AdditionalAccrual</documents>
   <documents>Document.AdditionalCostAllocation</documents>
   <documents>Document.AdditionalDeduction</documents>
@@ -1259,7 +1260,8 @@
   <enums>Enum.TypeEquipment</enums>
   <enums>Enum.TypeExternalObject</enums>
   <enums>Enum.EmployeeScheduleTypes</enums>
-  <enums>Enum.DebitCreditNoteTransactionTpes</enums>
+  <enums>Enum.RecordType</enums>
+  <enums>Enum.AgingPeriodTypes</enums>
   <reports>Report.AllRegistersMovement</reports>
   <reports>Report.BatchBalance</reports>
   <reports>Report.BatchBalanceSimple</reports>
@@ -1279,6 +1281,13 @@
   <reports>Report.TrialBalanceByAccount</reports>
   <reports>Report.AccountCard</reports>
   <reports>Report.AccountAnalysis</reports>
+  <reports>Report.A101A_PartnersBalance</reports>
+  <reports>Report.R2001A_Sales</reports>
+  <reports>Report.R1001A_Purchases</reports>
+  <reports>Report.R3010A_CashOnHand</reports>
+  <reports>Report.R502A_ProfitLosses</reports>
+  <reports>Report.RP_R12R_VendorsAging</reports>
+  <reports>Report.RP_R11R_CustomersAging</reports>
   <dataProcessors>DataProcessor.AnaliseDocumentMovements</dataProcessors>
   <dataProcessors>DataProcessor.AnalyseXDTO</dataProcessors>
   <dataProcessors>DataProcessor.BuilderExample</dataProcessors>
@@ -1378,7 +1387,6 @@
   <informationRegisters>InformationRegister.T2012S_AdvancesCurrencyRevaluation</informationRegisters>
   <informationRegisters>InformationRegister.T9540S_EmployeeVacations</informationRegisters>
   <informationRegisters>InformationRegister.T9550S_EmployeeSickLeave</informationRegisters>
-  <informationRegisters>InformationRegister.T2018S_UserDefinedOffsetOfAdvances</informationRegisters>
   <accumulationRegisters>AccumulationRegister.CashInTransit</accumulationRegisters>
   <accumulationRegisters>AccumulationRegister.R1001T_Purchases</accumulationRegisters>
   <accumulationRegisters>AccumulationRegister.R1002T_PurchaseReturns</accumulationRegisters>

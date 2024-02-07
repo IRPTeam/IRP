@@ -295,90 +295,19 @@ Function R3025B_PurchaseOrdersToBePaid()
 EndFunction
 
 Function T2014S_AdvancesInfo()
-	Return 
-		"SELECT
-		|	Doc.Date,
-		|	Doc.Company,
-		|	Doc.Branch,
-		|	Doc.Currency,
-		|	Doc.Partner,
-		|	Doc.LegalName,
-		|	case
-		|		when Doc.Agreement.ApArPostingDetail = VALUE(Enum.ApArPostingDetail.ByDocuments)
-		|			Then Doc.Agreement
-		|		else Undefined
-		|	end AS AdvanceAgreement,
-		|	Doc.Ref AS Order,
-		|	TRUE AS IsVendorAdvance,
-		|	TRUE AS IsPurchaseOrderClose
-		|INTO T2014S_AdvancesInfo
-		|FROM
-		|	Document.PurchaseOrder AS Doc
-		|WHERE
-		|	Doc.Ref = &PurchaseOrder";
+	Return InformationRegisters.T2014S_AdvancesInfo.T2014S_AdvancesInfo_POC();
 EndFunction
 
 Function R1020B_AdvancesToVendors()
-	Return "SELECT
-		   |	VALUE(AccumulationRecordType.Expense) AS RecordType,
-		   |	OffsetOfAdvances.Period,
-		   |	OffsetOfAdvances.Company,
-		   |	OffsetOfAdvances.Branch,
-		   |	OffsetOfAdvances.Partner,
-		   |	OffsetOfAdvances.LegalName,
-		   |	OffsetOfAdvances.Currency,
-		   |	OffsetOfAdvances.AdvanceAgreement AS Agreement,
-		   |	OffsetOfAdvances.AdvanceDocument AS Basis,
-		   |	OffsetOfAdvances.AdvancesOrder AS Order,
-		   |	OffsetOfAdvances.Amount,
-		   |	OffsetOfAdvances.Recorder AS VendorsAdvancesClosing
-		   |INTO R1020B_AdvancesToVendors
-		   |FROM
-		   |	InformationRegister.T2010S_OffsetOfAdvances AS OffsetOfAdvances
-		   |WHERE
-		   |	OffsetOfAdvances.Document = &Ref";
+	Return AccumulationRegisters.R1020B_AdvancesToVendors.R1020B_AdvancesToVendors_PI_PR_POC_SRTC();
 EndFunction
 
 Function R1021B_VendorsTransactions()
-	Return "SELECT
-		   |	VALUE(AccumulationRecordType.Expense) AS RecordType,
-		   |	OffsetOfAdvances.Period,
-		   |	OffsetOfAdvances.Company,
-		   |	OffsetOfAdvances.Branch,
-		   |	OffsetOfAdvances.Partner,
-		   |	OffsetOfAdvances.LegalName,
-		   |	OffsetOfAdvances.Currency,
-		   |	OffsetOfAdvances.TransactionAgreement AS Agreement,
-		   |	OffsetOfAdvances.TransactionDocument AS Basis,
-		   |	OffsetOfAdvances.TransactionOrder AS Order,
-		   |	OffsetOfAdvances.Amount,
-		   |	OffsetOfAdvances.Recorder AS VendorsAdvancesClosing
-		   |INTO R1021B_VendorsTransactions
-		   |FROM
-		   |	InformationRegister.T2010S_OffsetOfAdvances AS OffsetOfAdvances
-		   |WHERE
-		   |	OffsetOfAdvances.Document = &Ref
-		   |	AND NOT OffsetOfAdvances.IsAdvanceRelease";
+	Return AccumulationRegisters.R1021B_VendorsTransactions.R1021B_VendorsTransactions_POC();
 EndFunction
 
 Function R5012B_VendorsAging()
-	Return "SELECT
-		   |	VALUE(AccumulationRecordType.Expense) AS RecordType,
-		   |	OffsetOfAging.Period,
-		   |	OffsetOfAging.Company,
-		   |	OffsetOfAging.Branch,
-		   |	OffsetOfAging.Partner,
-		   |	OffsetOfAging.Agreement,
-		   |	OffsetOfAging.Currency,
-		   |	OffsetOfAging.Invoice,
-		   |	OffsetOfAging.PaymentDate,
-		   |	OffsetOfAging.Amount,
-		   |	OffsetOfAging.Recorder AS AgingClosing
-		   |INTO R5012B_VendorsAging
-		   |FROM
-		   |	InformationRegister.T2013S_OffsetOfAging AS OffsetOfAging
-		   |WHERE
-		   |	OffsetOfAging.Document = &Ref";
+	Return AccumulationRegisters.R5012B_VendorsAging.R5012B_VendorsAging_Offset();
 EndFunction
 
 #EndRegion

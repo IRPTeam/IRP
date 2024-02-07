@@ -91,6 +91,11 @@ When Create catalog FixedAssetsLedgerTypes objects (test data base)
 When Create catalog DepreciationSchedules objects (test data base)
 When Create catalog FixedAssets objects (test data base)
 When Create catalog ItemSegments objects (test data base)
+When Create catalog EmployeeSchedule objects (test data base)
+When Create catalog LegalNameContracts objects (test data base)
+When Create catalog Projects objects (test data base)
+When Create catalog UnitsOfMeasurement objects (test data base)
+When Create catalog Vehicles objects (test data base)
 * Tax settings
 		Given I open hyperlink "e1cib/list/Catalog.Companies"
 		And I go to line in "List" table
@@ -169,6 +174,9 @@ When Create document CashStatement objects  (test data base)
 When Create document ForeignCurrencyRevaluation objects (test data base)
 When Create document MoneyTransfer objects (test data base)
 When Create catalog PartnerItems objects (test data base)
+When Create document CustomersAdvancesClosing objects (test data base)
+WHen Create document VendorsAdvancesClosing objects (test data base)
+When Create document EmployeeCashAdvance objects (test data base)
 * Load data for Accounting system
 	When Create chart of characteristic types AccountingExtraDimensionTypes objects (test data base)
 	When Create chart of accounts Basic objects with LedgerTypeVariants (Basic LTV) (test data base)
@@ -371,6 +379,11 @@ When Create catalog PartnerItems objects (test data base)
 		Then I select all lines of "List" table
 		And in the table "List" I click the button named "ListContextMenuPost"
  		And Delay "3"
+* Posting BankReceipt
+		Given I open hyperlink "e1cib/list/Document.BankReceipt"
+		Then I select all lines of "List" table
+		And in the table "List" I click the button named "ListContextMenuPost"
+ 		And Delay "3"
 * Posting Sales invoice
 		And I execute 1C:Enterprise script at server
 			| "Documents.ShipmentConfirmation.FindByNumber(3).GetObject().Write(DocumentWriteMode.Posting);"    |
@@ -472,11 +485,6 @@ When Create catalog PartnerItems objects (test data base)
 		Then I select all lines of "List" table
 		And in the table "List" I click the button named "ListContextMenuPost"
  		And Delay "3"
-* Posting BankReceipt
-		Given I open hyperlink "e1cib/list/Document.BankReceipt"
-		Then I select all lines of "List" table
-		And in the table "List" I click the button named "ListContextMenuPost"
- 		And Delay "3"
 * Posting CashReceipt
 		Given I open hyperlink "e1cib/list/Document.CashReceipt"
 		Then I select all lines of "List" table
@@ -562,8 +570,23 @@ When Create catalog PartnerItems objects (test data base)
 		Then I select all lines of "List" table
 		And in the table "List" I click the button named "ListContextMenuPost"
 		And Delay "3"
+* Posting CustomersAdvancesClosing
+		Given I open hyperlink "e1cib/list/Document.CustomersAdvancesClosing"
+		Then I select all lines of "List" table
+		And in the table "List" I click the button named "ListContextMenuPost"
+		And Delay "3"
+* Posting VendorsAdvancesClosing
+		Given I open hyperlink "e1cib/list/Document.VendorsAdvancesClosing"
+		Then I select all lines of "List" table
+		And in the table "List" I click the button named "ListContextMenuPost"
+		And Delay "3"
 * Posting ForeignCurrencyRevaluation
 		Given I open hyperlink "e1cib/list/Document.ForeignCurrencyRevaluation"
+		Then I select all lines of "List" table
+		And in the table "List" I click the button named "ListContextMenuPost"
+		And Delay "3"
+* Posting EmployeeCashAdvance
+		Given I open hyperlink "e1cib/list/Document.EmployeeCashAdvance"
 		Then I select all lines of "List" table
 		And in the table "List" I click the button named "ListContextMenuPost"
 		And Delay "3"

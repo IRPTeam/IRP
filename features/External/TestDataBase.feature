@@ -3241,7 +3241,8 @@ Scenario: Create information register T9014S_AccountsExpenseRevenue records (Bas
 	And I check or create information register "T9014S_AccountsExpenseRevenue" records:
 		| 'Period'              | 'Company'                                                           | 'LedgerTypeVariant'                                                          | 'ExpenseRevenue'                                                                 | 'Account'                                                               |
 		| '01.01.2022 00:00:00' | 'e1cib/data/Catalog.Companies?ref=b762b13668d0905011eb7663e35d7964' | 'e1cib/data/Catalog.LedgerTypeVariants?ref=b7b3f42485a6975311ee9a778a2b4096' | 'e1cib/data/Catalog.ExpenseAndRevenueTypes?ref=b762b13668d0905011eb76684b9f685f' | 'e1cib/data/ChartOfAccounts.Basic?ref=b7b3f42485a6975311ee9d8e807d8d54' |
-		| '01.01.2022 00:00:00' | 'e1cib/data/Catalog.Companies?ref=b762b13668d0905011eb7663e35d7964' | 'e1cib/data/Catalog.LedgerTypeVariants?ref=b7b3f42485a6975311ee9a778a2b4096' | 'e1cib/data/Catalog.ExpenseAndRevenueTypes?ref=b7b5ac6d7ba6186311eec0fce6eb08c6' | 'e1cib/data/ChartOfAccounts.Basic?ref=b7b3f42485a6975311ee9d8e807d8d4e' |
+		| '01.01.2022 00:00:00' | 'e1cib/data/Catalog.Companies?ref=b762b13668d0905011eb7663e35d7964' | 'e1cib/data/Catalog.LedgerTypeVariants?ref=b7b3f42485a6975311ee9a778a2b4096' | 'e1cib/data/Catalog.ExpenseAndRevenueTypes?ref=b762b13668d0905011eb76684b9f6860' | 'e1cib/data/ChartOfAccounts.Basic?ref=b7b3f42485a6975311ee9d8e807d8d4e' |
+		| '01.01.2022 00:00:00' | 'e1cib/data/Catalog.Companies?ref=b762b13668d0905011eb7663e35d7964' | 'e1cib/data/Catalog.LedgerTypeVariants?ref=b7b3f42485a6975311ee9a778a2b4096' | 'e1cib/data/Catalog.ExpenseAndRevenueTypes?ref=b7b5ac6d7ba6186311eec0fce6eb08c6' | 'e1cib/data/ChartOfAccounts.Basic?ref=b7b3f42485a6975311ee9d8e807d8d4d' |
 
 Scenario: Create information register T9010S_AccountsItemKey records (Basic LTV) (test data base)
 

@@ -1871,6 +1871,6 @@ Scenario: _0991150 check Retail sales receipt accounting movements
 	* Check accounting movements
 		And in the table "ItemList" I click "Edit accounting" button	
 		And "AccountingAnalytics" table became equal
-			| 'Debit' | 'Partner' | 'Business unit'   | 'Expense and revenue type' | 'Credit' | 'Item'               | 'Item key'   | 'Operation'                                                          |
-			| '420.2' | ''        | 'Business unit 3' | 'Expence 1'                | '3540'   | 'Item with item key' | 'XS/Color 2' | 'RetailSalesReceipt DR (R5022T_Expenses) CR (R4050B_StockInventory)' |		
+			| 'Debit' | 'Item'               | 'Business unit'   | 'Expense and revenue type'   | 'Credit' | 'Item key'   | 'Operation'                                                          |
+			| '420.1' | 'Item with item key' | 'Business unit 3' | 'Purchase of goods for sale' | '3540'   | 'XS/Color 2' | 'RetailSalesReceipt DR (R5022T_Expenses) CR (R4050B_StockInventory)' |		
 	And I close all client application windows

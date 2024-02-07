@@ -638,6 +638,28 @@
    <dataHistory>Use</dataHistory>
    <fullTextSearch>Use</fullTextSearch>
   </attributes>
+  <attributes uuid="d3978681-d541-4e5e-aa7a-3fdd6fcea0c6">
+   <name>Project</name>
+   <synonym>
+    <key>en</key>
+    <value>Project</value>
+   </synonym>
+   <synonym>
+    <key>ru</key>
+    <value>Проект</value>
+   </synonym>
+   <synonym>
+    <key>tr</key>
+    <value>Proje</value>
+   </synonym>
+   <type>
+    <types>CatalogRef.Projects</types>
+   </type>
+   <minValue xsi:type="core:UndefinedValue"/>
+   <maxValue xsi:type="core:UndefinedValue"/>
+   <dataHistory>Use</dataHistory>
+   <fullTextSearch>Use</fullTextSearch>
+  </attributes>
  </tabularSections>
  <tabularSections uuid="7a915300-b6df-4628-8036-510385ab3b05">
   <producedTypes>
@@ -813,6 +835,28 @@
    </synonym>
    <type>
     <types>CatalogRef.Agreements</types>
+   </type>
+   <minValue xsi:type="core:UndefinedValue"/>
+   <maxValue xsi:type="core:UndefinedValue"/>
+   <dataHistory>Use</dataHistory>
+   <fullTextSearch>Use</fullTextSearch>
+  </attributes>
+  <attributes uuid="0b4bfd24-6950-42c1-ac46-9f2342294d06">
+   <name>Project</name>
+   <synonym>
+    <key>en</key>
+    <value>Project</value>
+   </synonym>
+   <synonym>
+    <key>ru</key>
+    <value>Проект</value>
+   </synonym>
+   <synonym>
+    <key>tr</key>
+    <value>Proje</value>
+   </synonym>
+   <type>
+    <types>CatalogRef.Projects</types>
    </type>
    <minValue xsi:type="core:UndefinedValue"/>
    <maxValue xsi:type="core:UndefinedValue"/>
@@ -1001,6 +1045,28 @@
    <dataHistory>Use</dataHistory>
    <fullTextSearch>Use</fullTextSearch>
   </attributes>
+  <attributes uuid="318b3632-59f9-4e21-80b6-290649568705">
+   <name>Project</name>
+   <synonym>
+    <key>en</key>
+    <value>Project</value>
+   </synonym>
+   <synonym>
+    <key>ru</key>
+    <value>Проект</value>
+   </synonym>
+   <synonym>
+    <key>tr</key>
+    <value>Proje</value>
+   </synonym>
+   <type>
+    <types>CatalogRef.Projects</types>
+   </type>
+   <minValue xsi:type="core:UndefinedValue"/>
+   <maxValue xsi:type="core:UndefinedValue"/>
+   <dataHistory>Use</dataHistory>
+   <fullTextSearch>Use</fullTextSearch>
+  </attributes>
  </tabularSections>
  <tabularSections uuid="20e83825-cb44-4e37-91fb-2a746ad621a3">
   <producedTypes>
@@ -1180,6 +1246,28 @@
     <name>Filter.Company</name>
     <field>Document.OpeningEntry.Attribute.Company</field>
    </choiceParameterLinks>
+   <dataHistory>Use</dataHistory>
+   <fullTextSearch>Use</fullTextSearch>
+  </attributes>
+  <attributes uuid="5bf500d1-978e-4d51-aea4-50916657ee4d">
+   <name>Project</name>
+   <synonym>
+    <key>en</key>
+    <value>Project</value>
+   </synonym>
+   <synonym>
+    <key>ru</key>
+    <value>Проект</value>
+   </synonym>
+   <synonym>
+    <key>tr</key>
+    <value>Proje</value>
+   </synonym>
+   <type>
+    <types>CatalogRef.Projects</types>
+   </type>
+   <minValue xsi:type="core:UndefinedValue"/>
+   <maxValue xsi:type="core:UndefinedValue"/>
    <dataHistory>Use</dataHistory>
    <fullTextSearch>Use</fullTextSearch>
   </attributes>
@@ -1365,6 +1453,28 @@
    <dataHistory>Use</dataHistory>
    <fullTextSearch>Use</fullTextSearch>
   </attributes>
+  <attributes uuid="3afc08f2-63c9-4686-845a-b8d0d825719b">
+   <name>Project</name>
+   <synonym>
+    <key>en</key>
+    <value>Project</value>
+   </synonym>
+   <synonym>
+    <key>ru</key>
+    <value>Проект</value>
+   </synonym>
+   <synonym>
+    <key>tr</key>
+    <value>Proje</value>
+   </synonym>
+   <type>
+    <types>CatalogRef.Projects</types>
+   </type>
+   <minValue xsi:type="core:UndefinedValue"/>
+   <maxValue xsi:type="core:UndefinedValue"/>
+   <dataHistory>Use</dataHistory>
+   <fullTextSearch>Use</fullTextSearch>
+  </attributes>
  </tabularSections>
  <tabularSections uuid="a0987915-e51a-4527-b066-a631faf8b7bf">
   <producedTypes>
@@ -1544,6 +1654,28 @@
     <name>Filter.Company</name>
     <field>Document.OpeningEntry.Attribute.Company</field>
    </choiceParameterLinks>
+   <dataHistory>Use</dataHistory>
+   <fullTextSearch>Use</fullTextSearch>
+  </attributes>
+  <attributes uuid="1e7f01ea-6c39-4b0c-80d7-6df5db8db3e0">
+   <name>Project</name>
+   <synonym>
+    <key>en</key>
+    <value>Project</value>
+   </synonym>
+   <synonym>
+    <key>ru</key>
+    <value>Проект</value>
+   </synonym>
+   <synonym>
+    <key>tr</key>
+    <value>Proje</value>
+   </synonym>
+   <type>
+    <types>CatalogRef.Projects</types>
+   </type>
+   <minValue xsi:type="core:UndefinedValue"/>
+   <maxValue xsi:type="core:UndefinedValue"/>
    <dataHistory>Use</dataHistory>
    <fullTextSearch>Use</fullTextSearch>
   </attributes>

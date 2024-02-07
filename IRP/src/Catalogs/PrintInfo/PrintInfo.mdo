@@ -49,7 +49,7 @@
  </listPresentation>
  <listPresentation>
   <key>tr</key>
-  <value>Baskı bilgileri      </value>
+  <value>Baskı Bilgileri</value>
  </listPresentation>
  <levelCount>2</levelCount>
  <foldersOnTop>true</foldersOnTop>
@@ -76,7 +76,7 @@
   </synonym>
   <synonym>
    <key>tr</key>
-   <value>Logo                </value>
+   <value>Logo</value>
   </synonym>
   <type>
    <types>ValueStorage</types>
@@ -99,7 +99,7 @@
   </synonym>
   <synonym>
    <key>tr</key>
-   <value>Logo                </value>
+   <value>Logo</value>
   </synonym>
   <type>
    <types>Boolean</types>
@@ -122,7 +122,7 @@
   </synonym>
   <synonym>
    <key>tr</key>
-   <value>Mühür               </value>
+   <value>Mühür</value>
   </synonym>
   <type>
    <types>ValueStorage</types>
@@ -145,7 +145,7 @@
   </synonym>
   <synonym>
    <key>tr</key>
-   <value>Mühür               </value>
+   <value>Mühür</value>
   </synonym>
   <type>
    <types>Boolean</types>
@@ -164,11 +164,11 @@
   </synonym>
   <synonym>
    <key>ru</key>
-   <value>Additional print info</value>
+   <value>Дополнительная печатная информация</value>
   </synonym>
   <synonym>
    <key>tr</key>
-   <value>Ek baskı bilgisi     </value>
+   <value>Ek Baskı Bilgisi</value>
   </synonym>
   <type>
    <types>String</types>
@@ -188,11 +188,11 @@
   </synonym>
   <synonym>
    <key>ru</key>
-   <value>Стандартный цвет</value>
+   <value>Цвет по умолчанию</value>
   </synonym>
   <synonym>
    <key>tr</key>
-   <value>Varsayılan renk      </value>
+   <value>Varsayılan Renk</value>
   </synonym>
   <type>
    <types>String</types>

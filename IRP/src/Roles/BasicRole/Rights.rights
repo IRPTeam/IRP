@@ -1709,9 +1709,42 @@
 		</right>
 	</object>
 	<object>
+		<name>SessionParameter.InternalCommands</name>
+		<right>
+			<name>Get</name>
+			<value>true</value>
+		</right>
+		<right>
+			<name>Set</name>
+			<value>true</value>
+		</right>
+	</object>
+	<object>
+		<name>SessionParameter.NotActiveCatalogsShowing</name>
+		<right>
+			<name>Get</name>
+			<value>true</value>
+		</right>
+		<right>
+			<name>Set</name>
+			<value>true</value>
+		</right>
+	</object>
+	<object>
 		<name>Catalog.PrintInfo</name>
 		<right>
 			<name>Read</name>
+			<value>true</value>
+		</right>
+	</object>
+	<object>
+		<name>SessionParameter.NumberEditingAvailable</name>
+		<right>
+			<name>Set</name>
+			<value>true</value>
+		</right>
+		<right>
+			<name>Get</name>
 			<value>true</value>
 		</right>
 	</object>

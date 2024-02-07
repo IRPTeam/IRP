@@ -62,6 +62,9 @@ Scenario:  _052001 preparation (Bank receipt)
 		When Create catalog Partners objects
 		When Create document BR and CS (payment by POS)
 		When Create information register Taxes records (VAT)
+		Given I open hyperlink "e1cib/app/DataProcessor.SystemSettings"
+		And I set checkbox "Number editing available"
+		And I close "System settings" window
 	* Check or create SalesOrder023001
 		Given I open hyperlink "e1cib/list/Document.SalesOrder"
 		If "List" table does not contain lines Then
@@ -170,6 +173,50 @@ Scenario: _052001 create Bank receipt based on Sales invoice
 			| 'Ferron BP'   | 'Basic Partner terms, without VAT'   | '20 000,00'      | 'Company Ferron BP'   | '$$SalesInvoice024008$$'    |
 	And I close all client application windows
 
+Scenario: _052002 check that the amount does not change when select basis document in Bank receipt
+	And I close all client application windows
+	* Open BR and filling main info
+		Given I open hyperlink "e1cib/list/Document.BankReceipt"
+		And I click the button named "FormCreate"
+		And I select from the drop-down list named "Company" by "Main Company" string
+		And I select from "Account" drop-down list by "Bank account, TRY" string
+		And I select from "Transaction type" drop-down list by "Payment from customer" string
+		And in the table "PaymentList" I click the button named "PaymentListAdd"
+		And I select current line in "PaymentList" table
+		And I select "Ferron BP" from "Partner" drop-down list by string in "PaymentList" table
+		And I select "Company Ferron BP" from "Payer" drop-down list by string in "PaymentList" table
+		And I select "Basic Partner terms, without VAT" from "Partner term" drop-down list by string in "PaymentList" table
+		And I activate field named "PaymentListTotalAmount" in "PaymentList" table
+		And I input "5 000,00" text in the field named "PaymentListTotalAmount" of "PaymentList" table
+		And I finish line editing in "PaymentList" table
+	* Reselect SI and check amount
+		And I activate "Basis document" field in "PaymentList" table
+		And I select current line in "PaymentList" table
+		And I go to line in "List" table
+			| 'Company'        | 'Amount'      | 'Legal name'          | 'Partner'      |
+			| 'Main Company'   | '11 099,93'   | 'Company Ferron BP'   | 'Ferron BP'    |
+		And I click "Select" button
+		And "PaymentList" table contains lines
+			| 'Partner'     | 'Partner term'                       | 'Total amount'   | 'Payer'               | 'Basis document'            |
+			| 'Ferron BP'   | 'Basic Partner terms, without VAT'   | '5 000,00'       | 'Company Ferron BP'   | '$$SalesInvoice024008$$'    |
+	* Add one more line with the same invoice and check amount
+		And in the table "PaymentList" I click the button named "PaymentListAdd"
+		And I select current line in "PaymentList" table
+		And I select "Ferron BP" from "Partner" drop-down list by string in "PaymentList" table
+		And I select "Company Ferron BP" from "Payer" drop-down list by string in "PaymentList" table
+		And I select "Basic Partner terms, without VAT" from "Partner term" drop-down list by string in "PaymentList" table
+		And I finish line editing in "PaymentList" table
+		And I activate "Basis document" field in "PaymentList" table
+		And I select current line in "PaymentList" table
+		And I go to line in "List" table
+			| 'Company'        | 'Amount'      | 'Legal name'          | 'Partner'      |
+			| 'Main Company'   | '6 099,93'   | 'Company Ferron BP'   | 'Ferron BP'    |
+		And I click "Select" button
+		And "PaymentList" table contains lines
+			| 'Partner'     | 'Partner term'                       | 'Total amount'   | 'Payer'               | 'Basis document'            |
+			| 'Ferron BP'   | 'Basic Partner terms, without VAT'   | '5 000,00'       | 'Company Ferron BP'   | '$$SalesInvoice024008$$'    |
+			| 'Ferron BP'   | 'Basic Partner terms, without VAT'   | '6 099,93'       | 'Company Ferron BP'   | '$$SalesInvoice024008$$'    |
+	And I close all client application windows
 
 Scenario: _052001 create Bank receipt (independently)
 	* Create Bank receipt in lire for Ferron BP (Sales invoice in lire)

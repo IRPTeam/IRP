@@ -57,7 +57,8 @@ Function GetVisibleAttributesByTransactionType(TransactionType)
 	|PaymentList.MoneyTransfer,
 	|PaymentList.RetailCustomer,
 	|PaymentList.SendingAccount,
-	|PaymentList.SendingBranch";
+	|PaymentList.SendingBranch,
+	|PaymentList.Project";
 
 	ArrayOfAllAttributes = New Array();
 	For Each ArrayItem In StrSplit(StrAll, ",") Do
@@ -97,7 +98,8 @@ Function GetVisibleAttributesByTransactionType(TransactionType)
 		|PaymentList.Agreement,
 		|PaymentList.Payer,
 		|PaymentList.PlaningTransactionBasis,
-		|PaymentList.LegalNameContract";
+		|PaymentList.LegalNameContract,
+		|PaymentList.Project";
 		If TransactionType = PaymentFromCustomer Then
 			StrByType = StrByType + ", PaymentList.Order";
 		EndIf;

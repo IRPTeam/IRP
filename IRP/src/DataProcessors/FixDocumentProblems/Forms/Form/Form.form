@@ -5331,11 +5331,11 @@
   </title>
   <title>
    <key>ru</key>
-   <value>Обновить проверку (выбранные строки)</value>
+   <value>Обновление проверки (выбранные строки)</value>
   </title>
   <title>
    <key>tr</key>
-   <value>Kontrolü güncelle (seçili satırlar)</value>
+   <value>Güncelleme Kontrolü (seçili satırlar)</value>
   </title>
   <id>18</id>
   <toolTip>
@@ -5348,7 +5348,7 @@
   </toolTip>
   <toolTip>
    <key>tr</key>
-   <value>Gönderimi güncelle (seçili satırlar)</value>
+   <value>Güncelleme Fişi (seçili satırlar)</value>
   </toolTip>
   <use>
    <common>true</common>
@@ -5375,7 +5375,7 @@
   </title>
   <title>
    <key>tr</key>
-   <value>Gönderimi güncelle (seçili satırlar)</value>
+   <value>Güncelleme Fişi (seçili satırlar)</value>
   </title>
   <id>19</id>
   <toolTip>
@@ -5388,7 +5388,7 @@
   </toolTip>
   <toolTip>
    <key>tr</key>
-   <value>Gönderimi güncelle (seçili satırlar)</value>
+   <value>Güncelleme Fişi (seçili satırlar)</value>
   </toolTip>
   <use>
    <common>true</common>

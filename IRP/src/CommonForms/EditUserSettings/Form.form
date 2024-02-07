@@ -83,6 +83,10 @@
     <segments>MetadataTree.Use</segments>
    </dataPath>
    <titleLocation>None</titleLocation>
+   <handlers>
+    <event>OnChange</event>
+    <name>MetadataTreeUseOnChange</name>
+   </handlers>
    <extendedTooltip>
     <name>MetadataTreeUseExtendedTooltip</name>
     <id>37</id>

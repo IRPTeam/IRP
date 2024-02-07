@@ -767,7 +767,7 @@
       </content>
      </localValue>
     </title>
-    <valueType/>
+    <values xsi:type="core:UndefinedValue"/>
     <useRestriction>true</useRestriction>
    </parameters>
    <parameters>
@@ -788,7 +788,7 @@
       </content>
      </localValue>
     </title>
-    <valueType/>
+    <values xsi:type="core:UndefinedValue"/>
     <useRestriction>true</useRestriction>
    </parameters>
    <parameters>
@@ -809,7 +809,7 @@
       </content>
      </localValue>
     </title>
-    <valueType/>
+    <values xsi:type="core:UndefinedValue"/>
     <useRestriction>true</useRestriction>
    </parameters>
    <parameters>
@@ -830,7 +830,7 @@
       </content>
      </localValue>
     </title>
-    <valueType/>
+    <values xsi:type="core:UndefinedValue"/>
     <useRestriction>true</useRestriction>
    </parameters>
    <parameters>
@@ -851,7 +851,7 @@
       </content>
      </localValue>
     </title>
-    <valueType/>
+    <values xsi:type="core:UndefinedValue"/>
     <useRestriction>true</useRestriction>
    </parameters>
    <parameters>
@@ -872,7 +872,7 @@
       </content>
      </localValue>
     </title>
-    <valueType/>
+    <values xsi:type="core:UndefinedValue"/>
     <useRestriction>true</useRestriction>
    </parameters>
   </extInfo>

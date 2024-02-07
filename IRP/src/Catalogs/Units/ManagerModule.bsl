@@ -6,14 +6,27 @@ Procedure ChoiceDataGetProcessing(ChoiceData, Parameters, StandardProcessing)
 
 	StandardProcessing = False;
 	CommonFormActionsServer.CutLastSymbolsIfCameFromExcel(Parameters);
+	CatalogsServer.SetParametersForDataChoosing(Catalogs.Units, Parameters);
 	QueryTable = GetChoiceDataTable(Parameters);
 	ChoiceData = CommonFormActionsServer.QueryTableToChoiceData(QueryTable);	
 EndProcedure
 
 Function GetChoiceDataTable(Parameters)
 	Filter = "
-			 |	AND (Table.Item = &Item or  Table.Ref = &Unit)
+			 |	AND (Table.Item = &Item or Table.Ref = &Unit)
 			 |";
+	For Each FilterItem In Parameters.Filter Do
+		If FilterItem.Key = "CustomSearchFilter" OR FilterItem.Key = "AdditionalParameters" Then
+			Continue; // Service properties
+		EndIf;
+		If FilterItem.Key = "Item" Then
+			Continue; // Additional parameters
+		EndIf;
+		Filter = Filter
+			+ "
+		|	AND Table." + FilterItem.Key + " = &" + FilterItem.Key;
+	EndDo;			 
+			 
 	Settings = New Structure();
 	Settings.Insert("MetadataObject", Metadata.Catalogs.Units);
 	Settings.Insert("Filter", Filter);
@@ -28,6 +41,7 @@ Function GetChoiceDataTable(Parameters)
 	Query = QueryBuilder.GetQuery();
 
 	Query.SetParameter("SearchString", Parameters.SearchString);
+	Query.SetParameter("Item", Catalogs.Items.EmptyRef());
 	For Each Filter In Parameters.Filter Do
 		Query.SetParameter(Filter.Key, Filter.Value);
 	EndDo;

@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mdclass:Subsystem xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="1ea94447-49bd-4071-bfd7-d2d1f69f0eec">
+ <name>InternalCommands</name>
+ <synonym>
+  <key>en</key>
+  <value>Internal commands</value>
+ </synonym>
+ <synonym>
+  <key>ru</key>
+  <value>Внутренние команды</value>
+ </synonym>
+ <synonym>
+  <key>tr</key>
+  <value>Dahili Komutlar</value>
+ </synonym>
+ <content>CommonModule.InternalCommandsClient</content>
+ <content>CommonModule.InternalCommandsServer</content>
+ <parentSubsystem>Subsystem.Technical</parentSubsystem>
+</mdclass:Subsystem>

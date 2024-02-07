@@ -15,5 +15,10 @@
  </synonym>
  <includeHelpInContents>true</includeHelpInContents>
  <includeInCommandInterface>true</includeInCommandInterface>
+ <content>Report.A101A_PartnersBalance</content>
+ <content>Report.R3010A_CashOnHand</content>
+ <content>Report.RP_R12R_VendorsAging</content>
+ <content>Report.RP_R11R_CustomersAging</content>
+ <content>Catalog.AgingPeriods</content>
  <parentSubsystem>Subsystem.Reports</parentSubsystem>
 </mdclass:Subsystem>

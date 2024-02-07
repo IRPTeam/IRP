@@ -1044,6 +1044,9 @@ Function Strings(Lang) Export
 	Strings.Insert("Form_038", NStr("en='Employee';
 		|ru='Сотрудник';
 		|tr='Personel'", Lang));
+	Strings.Insert("Form_039", NStr("en='Add attribute in additional attribute set in extension tab for current object type: %1';
+		|ru='Добавить атрибут в дополнительный набор атрибутов на вкладке расширения для текущего типа объекта: %1';
+		|tr='Mevcut nesne türü için uzantı sekmesinde ek özellik setine özellik ekle: %1'", Lang));
 #EndRegion
 
 #Region ErrorMessages
@@ -1968,6 +1971,9 @@ Function Strings(Lang) Export
 	Strings.Insert("QuestionToUser_027", NStr("en='Filled data by employee [%1] will be cleared. Continue?';
 		|ru='Заполненные данные сотрудником [%1] будут очищены. Продолжить?';
 		|tr='Çalışan [%1] tarafından doldurulan veriler silinecek. Devam edilsin mi?'", Lang));
+	Strings.Insert("QuestionToUser_028", NStr("en='Do you want to refund the client?';
+		|ru='Вы хотите вернуть клиенту?';
+		|tr='Müşteriye iade yapmak istiyor musunuz?'", Lang));
 #EndRegion
 
 #Region SuggestionToUser
@@ -2596,6 +2602,22 @@ Strings.Insert("MoneyTransfer_DR_R5022T_Expenses_CR_R3021B_CashInTransit",
 		|ru='ПереводДС ДР (R5022T_Расходы) КР (R3021B_ДеньгиВПути)';
 		|tr='ParaTransferi DR (R5022T_Giderler) CR (R3021B_NakitYolda)'", Lang));
 	
+#EndRegion
+
+#Region InternalCommands
+    // Do not modify "en" strings
+	Strings.Insert("InternalCommands_SetNotActive", NStr("en='Set ""Not active""';
+		|ru='Установить ""Неактивный""';
+		|tr='""Aktif Olmayan"" Ayarla'", Lang));
+	Strings.Insert("InternalCommands_SetNotActive_Check", NStr("en='Set ""Active""';
+		|ru='Установить ""Активный""';
+		|tr='""Aktif"" Ayarla'", Lang));
+	Strings.Insert("InternalCommands_ShowNotActive", NStr("en='Show all items';
+		|ru='Показать все позиции';
+		|tr='Tüm Öğeleri Göster'", Lang));
+	Strings.Insert("InternalCommands_ShowNotActive_Check", NStr("en='Show only active items';
+		|ru='Показать только активные позиции';
+		|tr='Sadece Aktif Öğeleri Göster'", Lang));
 #EndRegion
 	
 	Return Strings;

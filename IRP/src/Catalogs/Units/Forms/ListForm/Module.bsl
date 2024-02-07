@@ -1,6 +1,7 @@
 &AtServer
 Procedure OnCreateAtServer(Cancel, StandardProcessing)
 	ThisObject.List.QueryText = LocalizationEvents.ReplaceDescriptionLocalizationPrefix(ThisObject.List.QueryText);
+	CatalogsServer.OnCreateAtServerListForm(ThisObject, List, Cancel, StandardProcessing);
 	List.Parameters.SetParameterValue("ShowAllUnits", False);
 	If Parameters.Filter.Property("Item") Then
 		List.Parameters.SetParameterValue("Item", Parameters.Filter.Item);
@@ -28,3 +29,24 @@ Procedure ShowAllUnits(Command)
 	Items.FormShowAllUnits.Check = Not Items.FormShowAllUnits.Check;
 	List.Parameters.SetParameterValue("ShowAllUnits", Items.FormShowAllUnits.Check);
 EndProcedure
+
+#Region COMMANDS
+
+&AtClient
+Procedure GeneratedFormCommandActionByName(Command) Export
+	SelectedRows = Items.List.SelectedRows;
+	ExternalCommandsClient.GeneratedListChoiceFormCommandActionByName(SelectedRows, ThisObject, Command.Name);
+	GeneratedFormCommandActionByNameServer(Command.Name, SelectedRows);
+EndProcedure
+
+&AtServer
+Procedure GeneratedFormCommandActionByNameServer(CommandName, SelectedRows) Export
+	ExternalCommandsServer.GeneratedListChoiceFormCommandActionByName(SelectedRows, ThisObject, CommandName);
+EndProcedure
+
+&AtClient
+Procedure InternalCommandAction(Command) Export
+	InternalCommandsClient.RunCommandAction(Command, ThisObject, List, Items.List.SelectedRows);
+EndProcedure
+
+#EndRegion

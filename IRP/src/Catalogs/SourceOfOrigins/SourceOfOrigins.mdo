@@ -260,9 +260,9 @@
    <value>Sahip</value>
   </synonym>
   <type>
+   <types>CatalogRef.Items</types>
    <types>CatalogRef.ItemKeys</types>
    <types>CatalogRef.ItemTypes</types>
-   <types>CatalogRef.Items</types>
   </type>
   <minValue xsi:type="core:UndefinedValue"/>
   <maxValue xsi:type="core:UndefinedValue"/>
@@ -335,6 +335,14 @@
    <key>tr</key>
    <value>Ek özellikler</value>
   </synonym>
+  <standardAttributes>
+   <dataHistory>Use</dataHistory>
+   <name>LineNumber</name>
+   <fillValue xsi:type="core:UndefinedValue"/>
+   <fullTextSearch>Use</fullTextSearch>
+   <minValue xsi:type="core:UndefinedValue"/>
+   <maxValue xsi:type="core:UndefinedValue"/>
+  </standardAttributes>
   <attributes uuid="60c734f3-09e8-43fc-97e8-23167029a7d4">
    <name>Property</name>
    <synonym>

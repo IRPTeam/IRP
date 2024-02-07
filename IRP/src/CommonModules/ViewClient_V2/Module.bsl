@@ -185,7 +185,11 @@ Function GetObjectPropertyNamesBeforeChange()
 		|CashTransferOrder,
 		|RetailCustomer,
 		|PlanningPeriod,
-		|BusinessUnit";
+		|BusinessUnit,
+		|SendPartner,
+		|SendAgreement,
+		|ReceivePartner,
+		|ReceiveAgreement";
 EndFunction
 
 // returns list of Table attributes for get value before the change
@@ -3525,7 +3529,7 @@ Procedure PartnerOnChange(Object, Form, TableNames) Export
 	FormParameters.EventCaller = "PartnerOnUserChange";
 	For Each TableName In StrSplit(TableNames, ",") Do
 		ServerParameters = GetServerParameters(Object);
-		ServerParameters.TableName = TableName;
+		ServerParameters.TableName = TrimAll(TableName);
 		Parameters = GetParameters(ServerParameters, FormParameters);
 		ControllerClientServer_V2.PartnerOnChange(Parameters);
 	EndDo;
@@ -3671,7 +3675,7 @@ EndProcedure
 
 Procedure LegalNameOnChange(Object, Form, TableNames) Export
 	For Each TableName In StrSplit(TableNames, ",") Do
-		Parameters = GetSimpleParameters(Object, Form, TableName);
+		Parameters = GetSimpleParameters(Object, Form, TrimAll(TableName));
 		ControllerClientServer_V2.LegalNameOnChange(Parameters);
 	EndDo;
 EndProcedure
@@ -3822,7 +3826,7 @@ Procedure AgreementOnChange(Object, Form, TableNames) Export
 	FormParameters.EventCaller = "AgreementOnUserChange";
 	For Each TableName In StrSplit(TableNames, ",") Do
 		ServerParameters = GetServerParameters(Object);
-		ServerParameters.TableName = TableName;
+		ServerParameters.TableName = TrimAll(TableName);
 		Parameters = GetParameters(ServerParameters, FormParameters);
 		ControllerClientServer_V2.AgreementOnChange(Parameters);
 	EndDo;
@@ -4187,6 +4191,176 @@ Procedure SetPaymentsCommission(Object, Form, Row, Value) Export
 EndProcedure
 
 #EndRegion
+
+#EndRegion
+
+#Region SEND_PARTNER
+
+Procedure SendPartnerOnChange(Object, Form, TableNames) Export
+	FormParameters = GetFormParameters(Form);
+	FetchFromCacheBeforeChange_Object("SendPartner", FormParameters);
+	FormParameters.EventCaller = "SendPartnerOnUserChange";
+	For Each TableName In StrSplit(TableNames, ",") Do
+		ServerParameters = GetServerParameters(Object);
+		ServerParameters.TableName = TrimAll(TableName);
+		Parameters = GetParameters(ServerParameters, FormParameters);
+		ControllerClientServer_V2.SendPartnerOnChange(Parameters);
+	EndDo;
+EndProcedure
+
+Procedure OnSetSendPartnerNotify(Parameters) Export
+	Parameters.Form.FormSetVisibilityAvailability();	
+	DocumentsClientServer.ChangeTitleGroupTitle(Parameters.Object, Parameters.Form);
+EndProcedure
+
+#EndRegion
+
+#Region SEND_LEGAL_NAME
+
+Procedure SendLegalNameOnChange(Object, Form, TableNames) Export
+	For Each TableName In StrSplit(TableNames, ",") Do
+		Parameters = GetSimpleParameters(Object, Form, TrimAll(TableName));
+		ControllerClientServer_V2.SendLegalNameOnChange(Parameters);
+	EndDo;
+EndProcedure
+
+Procedure OnSetSendLegalNameNotify(Parameters) Export
+	DocumentsClientServer.ChangeTitleGroupTitle(Parameters.Object, Parameters.Form);
+EndProcedure
+
+#EndRegion
+
+#Region SEND_AGREEMENT
+
+Procedure SendAgreementOnChange(Object, Form, TableNames) Export
+	FormParameters = GetFormParameters(Form);
+	FetchFromCacheBeforeChange_Object("SendAgreement", FormParameters);
+	FormParameters.EventCaller = "SendAgreementOnUserChange";
+	For Each TableName In StrSplit(TableNames, ",") Do
+		ServerParameters = GetServerParameters(Object);
+		ServerParameters.TableName = TrimAll(TableName);
+		Parameters = GetParameters(ServerParameters, FormParameters);
+		ControllerClientServer_V2.SendAgreementOnChange(Parameters);
+	EndDo;
+EndProcedure
+
+Procedure OnSetSendAgreementNotify(Parameters) Export
+	DocumentsClientServer.ChangeTitleGroupTitle(Parameters.Object, Parameters.Form);
+EndProcedure
+
+#EndRegion
+
+#Region SEND_DOCUMENTS
+
+Procedure SendDocumentsSelection(Object, Form, Item, RowSelected, Field, StandardProcessing) Export
+	ListSelection(Object, Form, Item, RowSelected, Field, StandardProcessing);
+EndProcedure
+
+Procedure SendDocumentsBeforeAddRow(Object, Form, Cancel, Clone, CurrentData = Undefined) Export
+	NewRow = AddOrCopyRow(Object, Form, "SendDocuments", Cancel, Clone, CurrentData,
+		"SendDocumentsOnAddRowFormNotify", "SendDocumentsOnCopyRowFormNotify");
+	Form.Items.SendDocuments.CurrentRow = NewRow.GetID();
+	If Form.Items.SendDocuments.CurrentRow <> Undefined Then
+		Form.Items.SendDocuments.ChangeRow();
+	EndIf;
+EndProcedure
+
+Procedure SendDocumentsOnAddRowFormNotify(Parameters) Export
+	Parameters.Form.Modified = True;
+EndProcedure
+
+Procedure SendDocumentsOnCopyRowFormNotify(Parameters) Export
+	Parameters.Form.Modified = True;
+EndProcedure
+
+Procedure SendDocumentsAfterDeleteRow(Object, Form) Export
+	DeleteRows(Object, Form, "SendDocuments");
+EndProcedure
+
+#EndRegion
+
+#Region RECEIVE_PARTNER
+
+Procedure ReceivePartnerOnChange(Object, Form, TableNames) Export
+	FormParameters = GetFormParameters(Form);
+	FetchFromCacheBeforeChange_Object("ReceivePartner", FormParameters);
+	FormParameters.EventCaller = "ReceivePartnerOnUserChange";
+	For Each TableName In StrSplit(TableNames, ",") Do
+		ServerParameters = GetServerParameters(Object);
+		ServerParameters.TableName = TrimAll(TableName);
+		Parameters = GetParameters(ServerParameters, FormParameters);
+		ControllerClientServer_V2.ReceivePartnerOnChange(Parameters);
+	EndDo;
+EndProcedure
+
+Procedure OnSetReceivePartnerNotify(Parameters) Export
+	Parameters.Form.FormSetVisibilityAvailability();
+	DocumentsClientServer.ChangeTitleGroupTitle(Parameters.Object, Parameters.Form);
+EndProcedure
+
+#EndRegion
+
+#Region RECEIVE_LEGAL_NAME
+
+Procedure ReceiveLegalNameOnChange(Object, Form, TableNames) Export
+	For Each TableName In StrSplit(TableNames, ",") Do
+		Parameters = GetSimpleParameters(Object, Form, TrimAll(TableName));
+		ControllerClientServer_V2.ReceiveLegalNameOnChange(Parameters);
+	EndDo;
+EndProcedure
+
+Procedure OnSetReceiveLegalNameNotify(Parameters) Export
+	DocumentsClientServer.ChangeTitleGroupTitle(Parameters.Object, Parameters.Form);
+EndProcedure
+
+#EndRegion
+
+#Region RECEIVE_AGREEMENT
+
+Procedure ReceiveAgreementOnChange(Object, Form, TableNames) Export
+	FormParameters = GetFormParameters(Form);
+	FetchFromCacheBeforeChange_Object("ReceiveAgreement", FormParameters);
+	FormParameters.EventCaller = "ReceiveAgreementOnUserChange";
+	For Each TableName In StrSplit(TableNames, ",") Do
+		ServerParameters = GetServerParameters(Object);
+		ServerParameters.TableName = TrimAll(TableName);
+		Parameters = GetParameters(ServerParameters, FormParameters);
+		ControllerClientServer_V2.ReceiveAgreementOnChange(Parameters);
+	EndDo;
+EndProcedure
+
+Procedure OnSetReceiveAgreementNotify(Parameters) Export
+	DocumentsClientServer.ChangeTitleGroupTitle(Parameters.Object, Parameters.Form);
+EndProcedure
+
+#EndRegion
+
+#Region RECEIVE_DOCUMENTS
+
+Procedure ReceiveDocumentsSelection(Object, Form, Item, RowSelected, Field, StandardProcessing) Export
+	ListSelection(Object, Form, Item, RowSelected, Field, StandardProcessing);
+EndProcedure
+
+Procedure ReceiveDocumentsBeforeAddRow(Object, Form, Cancel, Clone, CurrentData = Undefined) Export
+	NewRow = AddOrCopyRow(Object, Form, "ReceiveDocuments", Cancel, Clone, CurrentData,
+		"ReceiveDocumentsOnAddRowFormNotify", "ReceiveDocumentsOnCopyRowFormNotify");
+	Form.Items.ReceiveDocuments.CurrentRow = NewRow.GetID();
+	If Form.Items.ReceiveDocuments.CurrentRow <> Undefined Then
+		Form.Items.ReceiveDocuments.ChangeRow();
+	EndIf;
+EndProcedure
+
+Procedure ReceiveDocumentsOnAddRowFormNotify(Parameters) Export
+	Parameters.Form.Modified = True;
+EndProcedure
+
+Procedure ReceiveDocumentsOnCopyRowFormNotify(Parameters) Export
+	Parameters.Form.Modified = True;
+EndProcedure
+
+Procedure ReceiveDocumentsAfterDeleteRow(Object, Form) Export
+	DeleteRows(Object, Form, "ReceiveDocuments");
+EndProcedure
 
 #EndRegion
 

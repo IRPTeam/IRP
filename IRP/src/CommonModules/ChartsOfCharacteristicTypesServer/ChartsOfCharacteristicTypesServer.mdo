@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mdclass:CommonModule xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="ef456ba2-64c1-4b88-a6dc-fa4ee9005742">
+ <name>ChartsOfCharacteristicTypesServer</name>
+ <synonym>
+  <key>en</key>
+  <value>Charts of characteristic types server</value>
+ </synonym>
+ <synonym>
+  <key>ru</key>
+  <value>Сервер типов характеристик</value>
+ </synonym>
+ <synonym>
+  <key>tr</key>
+  <value>Özellik Türleri Şeması Sunucu</value>
+ </synonym>
+ <server>true</server>
+ <externalConnection>true</externalConnection>
+ <clientOrdinaryApplication>true</clientOrdinaryApplication>
+</mdclass:CommonModule>

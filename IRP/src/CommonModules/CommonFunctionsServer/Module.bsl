@@ -928,6 +928,18 @@ Function GetIsSameDataSettings() Export
 	Return Str;
 EndFunction
 
+// Get number.
+// 
+// Parameters:
+//  Value - String - Value
+// 
+// Returns:
+//  Number - Get number
+Function GetNumber(Value) Export
+	TypeDescription = New TypeDescription("Number");
+	Return TypeDescription.AdjustValue(Value);
+EndFunction
+
 #EndRegion
 
 #Region XDTO

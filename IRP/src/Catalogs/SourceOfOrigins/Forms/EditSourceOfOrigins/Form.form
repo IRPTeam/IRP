@@ -257,12 +257,12 @@
    <showInFooter>true</showInFooter>
    <extInfo xsi:type="form:InputFieldExtInfo">
     <handlers>
-     <event>StartChoice</event>
-     <name>SourceOfOriginsSourceOfOriginStartChoice</name>
-    </handlers>
-    <handlers>
      <event>EditTextChange</event>
      <name>SourceOfOriginsSourceOfOriginEditTextChange</name>
+    </handlers>
+    <handlers>
+     <event>StartChoice</event>
+     <name>SourceOfOriginsSourceOfOriginStartChoice</name>
     </handlers>
     <handlers>
      <event>Creating</event>

@@ -168,3 +168,11 @@ EndProcedure
 Function ExtensionCall_TestConnectionCall(IntegrationSettings) Export
 	Return Undefined;
 EndFunction
+
+// Extension call Set visible.
+// 
+// Parameters:
+//  Form - See Catalog.IntegrationSettings.Form.ItemForm
+Procedure ExtensionCall_SetVisible(Form) Export
+	Return;
+EndProcedure

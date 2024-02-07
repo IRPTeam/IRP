@@ -805,6 +805,28 @@
    <dataHistory>Use</dataHistory>
    <fullTextSearch>Use</fullTextSearch>
   </attributes>
+  <attributes uuid="b6a69d43-1feb-4644-a630-cc5541183835">
+   <name>Project</name>
+   <synonym>
+    <key>en</key>
+    <value>Project</value>
+   </synonym>
+   <synonym>
+    <key>ru</key>
+    <value>Проект</value>
+   </synonym>
+   <synonym>
+    <key>tr</key>
+    <value>Proje</value>
+   </synonym>
+   <type>
+    <types>CatalogRef.Projects</types>
+   </type>
+   <minValue xsi:type="core:UndefinedValue"/>
+   <maxValue xsi:type="core:UndefinedValue"/>
+   <dataHistory>Use</dataHistory>
+   <fullTextSearch>Use</fullTextSearch>
+  </attributes>
  </tabularSections>
  <tabularSections uuid="1a288d2e-b06b-469b-aab9-59aa3bbc4d34">
   <producedTypes>

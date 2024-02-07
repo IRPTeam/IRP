@@ -48,6 +48,9 @@ Scenario: _016500 preparation
 		When Create information register CurrencyRates records
 		When Create catalog IntegrationSettings objects
 		And I close all client application windows
+		Given I open hyperlink "e1cib/app/DataProcessor.SystemSettings"
+		And I set checkbox "Number editing available"
+		And I close "System settings" window
 
 Scenario: _0165001 check preparation
 	When check preparation		

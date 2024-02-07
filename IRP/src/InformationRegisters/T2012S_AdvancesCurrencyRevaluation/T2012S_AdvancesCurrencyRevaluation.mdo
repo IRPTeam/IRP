@@ -256,18 +256,18 @@
   <mainFilter>true</mainFilter>
  </dimensions>
  <dimensions uuid="a410cd46-4433-4cba-8990-1b8f4624a401">
-  <name>AdvancesOrder</name>
+  <name>AdvanceOrder</name>
   <synonym>
    <key>en</key>
-   <value>Advances order</value>
+   <value>Advance order</value>
   </synonym>
   <synonym>
    <key>ru</key>
-   <value>Заказ аванса партнера</value>
+   <value>Авансовый заказ</value>
   </synonym>
   <synonym>
    <key>tr</key>
-   <value>Cari hesap avans siparişi</value>
+   <value>Ön Sipariş</value>
   </synonym>
   <type>
    <types>DocumentRef.PurchaseOrder</types>

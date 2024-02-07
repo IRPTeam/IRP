@@ -3,6 +3,7 @@ Procedure OnCreateAtServer(Cancel, StandardProcessing)
 	LocalizationEvents.CreateMainFormItemDescription(ThisObject, "GroupDescriptions");
 	LocalizationEvents.FillDescription(Parameters.FillingText, Object);
 	ExtensionServer.AddAttributesFromExtensions(ThisObject, Object.Ref);
+	CatalogsServer.OnCreateAtServerObject(ThisObject, Object, Cancel, StandardProcessing);
 EndProcedure
 
 &AtClient
@@ -102,3 +103,23 @@ Procedure SaveSettings(Element, Settings, AddAttributesMap, AddInfo = Undefined)
 	CatalogObject.Write();
 	ThisObject.Read();
 EndProcedure
+
+#Region COMMANDS
+
+&AtClient
+Procedure GeneratedFormCommandActionByName(Command) Export
+	ExternalCommandsClient.GeneratedFormCommandActionByName(Object, ThisObject, Command.Name);
+	GeneratedFormCommandActionByNameServer(Command.Name);
+EndProcedure
+
+&AtServer
+Procedure GeneratedFormCommandActionByNameServer(CommandName) Export
+	ExternalCommandsServer.GeneratedFormCommandActionByName(Object, ThisObject, CommandName);
+EndProcedure
+
+&AtClient
+Procedure InternalCommandAction(Command) Export
+	InternalCommandsClient.RunCommandAction(Command, ThisObject, Object, Object.Ref);
+EndProcedure
+
+#EndRegion

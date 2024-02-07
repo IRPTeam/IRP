@@ -150,6 +150,76 @@
   <fullTextSearch>Use</fullTextSearch>
   <dataHistory>Use</dataHistory>
  </attributes>
+ <attributes uuid="552bc9dc-2bde-4c41-818c-3c4888d8c27a">
+  <name>DontWriteNegativeDebtAsAdvance</name>
+  <synonym>
+   <key>en</key>
+   <value>Dont write negative debt as advance</value>
+  </synonym>
+  <synonym>
+   <key>ru</key>
+   <value>Не записывать отрицательный долг как аванс</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Negatif Borç Avans Olarak Yazılmasın</value>
+  </synonym>
+  <type>
+   <types>Boolean</types>
+  </type>
+  <toolTip>
+   <key>en</key>
+   <value>if debt is negative dont write as positive advance</value>
+  </toolTip>
+  <toolTip>
+   <key>ru</key>
+   <value>Если долг отрицательный не записывать как положительный аванс</value>
+  </toolTip>
+  <toolTip>
+   <key>tr</key>
+   <value>Borç negatifse pozitif avans olarak yazılmasın</value>
+  </toolTip>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fillValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <dataHistory>Use</dataHistory>
+ </attributes>
+ <attributes uuid="0cec117d-06e9-4cf7-a47a-deaa580814d5">
+  <name>DontOffsetEmptyProjects</name>
+  <synonym>
+   <key>en</key>
+   <value>Dont offset empty projects</value>
+  </synonym>
+  <synonym>
+   <key>ru</key>
+   <value>Не учитывать пустые проекты</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Boş Projeleri Karşılamaz</value>
+  </synonym>
+  <type>
+   <types>Boolean</types>
+  </type>
+  <toolTip>
+   <key>en</key>
+   <value>If project is empty dont offset advance</value>
+  </toolTip>
+  <toolTip>
+   <key>ru</key>
+   <value>Если проект пустой не учитывать аванс</value>
+  </toolTip>
+  <toolTip>
+   <key>tr</key>
+   <value>Proje boşsa avansı karşılamaz</value>
+  </toolTip>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fillValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <dataHistory>Use</dataHistory>
+ </attributes>
  <forms uuid="ae7d1124-a3c3-401e-97a2-3a255177a6c8">
   <name>DocumentForm</name>
   <synonym>

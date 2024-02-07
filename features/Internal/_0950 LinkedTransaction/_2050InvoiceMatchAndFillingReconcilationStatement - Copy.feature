@@ -286,6 +286,9 @@ Scenario: _2050001 preparation
 				| "Number"                         |
 				| "$$NumberSalesReturn30001$$"     |
 			When create SalesReturn30001
+	Given I open hyperlink "e1cib/app/DataProcessor.SystemSettings"
+	And I set checkbox "Number editing available"
+	And I close "System settings" window
 	
 Scenario: _20500011 check preparation
 	When check preparation

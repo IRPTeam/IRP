@@ -153,6 +153,30 @@
   <fillValue xsi:type="core:UndefinedValue"/>
   <mainFilter>true</mainFilter>
  </dimensions>
+ <dimensions uuid="a2c43a1b-d729-497c-80b5-d24ddf61d4e5">
+  <name>RecordType</name>
+  <synonym>
+   <key>en</key>
+   <value>Record type</value>
+  </synonym>
+  <synonym>
+   <key>ru</key>
+   <value>Тип записи</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Kayıt tipi</value>
+  </synonym>
+  <type>
+   <types>EnumRef.RecordType</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <dataHistory>Use</dataHistory>
+  <fillValue xsi:type="core:UndefinedValue"/>
+  <mainFilter>true</mainFilter>
+ </dimensions>
  <dimensions uuid="8c64cfa4-a87d-4cb0-8913-555b5938bf0a">
   <name>IsAdvanceRelease</name>
   <synonym>
@@ -356,18 +380,18 @@
   <mainFilter>true</mainFilter>
  </dimensions>
  <dimensions uuid="a2bfbce7-ecf9-4b04-b09b-e785b4bbb9b9">
-  <name>AdvancesOrder</name>
+  <name>AdvanceOrder</name>
   <synonym>
    <key>en</key>
-   <value>Advances order</value>
+   <value>Advance order</value>
   </synonym>
   <synonym>
    <key>ru</key>
-   <value>Заказ аванса партнера</value>
+   <value>Авансовый заказ</value>
   </synonym>
   <synonym>
    <key>tr</key>
-   <value>Cari hesap avans siparişi</value>
+   <value>Ön Sipariş</value>
   </synonym>
   <type>
    <types>DocumentRef.PurchaseOrder</types>
@@ -494,6 +518,54 @@
   </synonym>
   <type>
    <types>CatalogRef.AdvancesKeys</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <dataHistory>Use</dataHistory>
+  <fillValue xsi:type="core:UndefinedValue"/>
+  <mainFilter>true</mainFilter>
+ </dimensions>
+ <dimensions uuid="df4370ee-3d7e-45a2-b2d2-0beb41930287">
+  <name>AdvanceProject</name>
+  <synonym>
+   <key>en</key>
+   <value>Advance project</value>
+  </synonym>
+  <synonym>
+   <key>ru</key>
+   <value>Проект аванса</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Avans Projesi</value>
+  </synonym>
+  <type>
+   <types>CatalogRef.Projects</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <dataHistory>Use</dataHistory>
+  <fillValue xsi:type="core:UndefinedValue"/>
+  <mainFilter>true</mainFilter>
+ </dimensions>
+ <dimensions uuid="128730b9-72b0-453c-8786-9cf858ea33ea">
+  <name>TransactionProject</name>
+  <synonym>
+   <key>en</key>
+   <value>Transaction project</value>
+  </synonym>
+  <synonym>
+   <key>ru</key>
+   <value>Проект транзакции</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>İşlem Projesi</value>
+  </synonym>
+  <type>
+   <types>CatalogRef.Projects</types>
   </type>
   <minValue xsi:type="core:UndefinedValue"/>
   <maxValue xsi:type="core:UndefinedValue"/>

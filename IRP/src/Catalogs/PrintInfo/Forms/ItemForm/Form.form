@@ -212,11 +212,11 @@
     </nonselectedPictureText>
     <nonselectedPictureText>
      <key>ru</key>
-     <value>Click to add logo</value>
+     <value>Нажмите, чтобы добавить логотип</value>
     </nonselectedPictureText>
     <nonselectedPictureText>
      <key>tr</key>
-     <value>Logoyu eklemek için tıklayın</value>
+     <value>Logo Eklemek İçin Tıkla</value>
     </nonselectedPictureText>
     <fileDragMode>AsFileRef</fileDragMode>
    </extInfo>
@@ -279,11 +279,11 @@
     </nonselectedPictureText>
     <nonselectedPictureText>
      <key>ru</key>
-     <value>Click to add seal</value>
+     <value>Добавить печать</value>
     </nonselectedPictureText>
     <nonselectedPictureText>
      <key>tr</key>
-     <value>Mühür eklemek için tıklayın</value>
+     <value>Mühür Eklemek İçin Tıkla</value>
     </nonselectedPictureText>
     <fileDragMode>AsFileRef</fileDragMode>
    </extInfo>
@@ -299,11 +299,11 @@
   </title>
   <title>
    <key>ru</key>
-   <value>Групповые фото</value>
+   <value>Группа изображений</value>
   </title>
   <title>
    <key>tr</key>
-   <value>Grup resimleri       </value>
+   <value>Grup Resimleri</value>
   </title>
   <extendedTooltip>
    <name>GroupPicturesExtendedTooltip</name>
@@ -431,7 +431,7 @@
   </title>
   <title>
    <key>tr</key>
-   <value>Logo                </value>
+   <value>Logo</value>
   </title>
   <id>2</id>
   <valueType>
@@ -457,7 +457,7 @@
   </title>
   <title>
    <key>tr</key>
-   <value>Mühür               </value>
+   <value>Mühür</value>
   </title>
   <id>3</id>
   <valueType>
@@ -479,11 +479,11 @@
   </title>
   <title>
    <key>ru</key>
-   <value>Стандартный цвет</value>
+   <value>Цвет по умолчанию</value>
   </title>
   <title>
    <key>tr</key>
-   <value>Varsayılan renk      </value>
+   <value>Varsayılan Renk</value>
   </title>
   <id>4</id>
   <valueType>

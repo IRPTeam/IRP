@@ -11,7 +11,7 @@
  </synonym>
  <synonym>
   <key>tr</key>
-  <value>Sunucu bilgisi yazdır</value>
+  <value>Baskı Bilgisi Sunucu</value>
  </synonym>
  <server>true</server>
  <externalConnection>true</externalConnection>

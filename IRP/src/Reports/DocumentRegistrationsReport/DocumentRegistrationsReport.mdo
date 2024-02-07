@@ -145,6 +145,7 @@
    <types>DocumentRef.EmployeeSickLeave</types>
    <types>DocumentRef.EmployeeTransfer</types>
    <types>DocumentRef.EmployeeVacation</types>
+   <types>DocumentRef.DebitCreditNote</types>
   </commandParameterType>
   <representation>Auto</representation>
  </commands>

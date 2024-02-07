@@ -268,6 +268,10 @@
  <commonPictures>CommonPicture.PasteRowsFromClipboard</commonPictures>
  <commonPictures>CommonPicture.ControlCodeString</commonPictures>
  <commonPictures>CommonPicture.FixedAssets</commonPictures>
+ <commonPictures>CommonPicture.IconSetActive</commonPictures>
+ <commonPictures>CommonPicture.IconSetNotActive</commonPictures>
+ <commonPictures>CommonPicture.IconShowOnlyActive</commonPictures>
+ <commonPictures>CommonPicture.IconShowAnyActive</commonPictures>
  <sessionParameters>SessionParameter.Buffer</sessionParameters>
  <sessionParameters>SessionParameter.ClientType</sessionParameters>
  <sessionParameters>SessionParameter.ConnectedAddDataProc</sessionParameters>
@@ -284,6 +288,9 @@
  <sessionParameters>SessionParameter.OurCompanies</sessionParameters>
  <sessionParameters>SessionParameter.RunBackgroundJobInDebugMode</sessionParameters>
  <sessionParameters>SessionParameter.Workstation</sessionParameters>
+ <sessionParameters>SessionParameter.InternalCommands</sessionParameters>
+ <sessionParameters>SessionParameter.NotActiveCatalogsShowing</sessionParameters>
+ <sessionParameters>SessionParameter.NumberEditingAvailable</sessionParameters>
  <roles>Role.BasicRole</roles>
  <roles>Role.CreateOrModifyUsers</roles>
  <roles>Role.Document_AdditionalAccrual</roles>
@@ -501,6 +508,7 @@
  <roles>Role.AccumulationRegisters_TM1010T_RowIDMovements</roles>
  <roles>Role.AccumulationRegisters_TM1020B_AdvancesKey</roles>
  <roles>Role.AccumulationRegisters_TM1030B_TransactionsKey</roles>
+ <roles>Role.Document_DebitCreditNote</roles>
  <commonTemplates>CommonTemplate.HTMLPictureSlider</commonTemplates>
  <commonTemplates>CommonTemplate.HTMLAddAttributes</commonTemplates>
  <commonTemplates>CommonTemplate.HTMLGallery</commonTemplates>
@@ -811,6 +819,12 @@
  <commonModules>CommonModule.ViewServer_V2</commonModules>
  <commonModules>CommonModule.WorkstationClient</commonModules>
  <commonModules>CommonModule.WorkstationServer</commonModules>
+ <commonModules>CommonModule.CatalogsServer</commonModules>
+ <commonModules>CommonModule.InternalCommandsClient</commonModules>
+ <commonModules>CommonModule.InternalCommandsServer</commonModules>
+ <commonModules>CommonModule.DocDebitCreditNoteClient</commonModules>
+ <commonModules>CommonModule.DocDebitCreditNoteServer</commonModules>
+ <commonModules>CommonModule.ChartsOfCharacteristicTypesServer</commonModules>
  <commonAttributes>CommonAttribute.Author</commonAttributes>
  <commonAttributes>CommonAttribute.Branch</commonAttributes>
  <commonAttributes>CommonAttribute.Description</commonAttributes>
@@ -832,6 +846,7 @@
  <commonAttributes>CommonAttribute.Editor</commonAttributes>
  <commonAttributes>CommonAttribute.CreateDate</commonAttributes>
  <commonAttributes>CommonAttribute.ModifyDate</commonAttributes>
+ <commonAttributes>CommonAttribute.NotActive</commonAttributes>
  <exchangePlans>ExchangePlan.ED_ExchangePlan</exchangePlans>
  <exchangePlans>ExchangePlan.FullExchange</exchangePlans>
  <httpServices>HTTPService.TestConnection</httpServices>
@@ -950,6 +965,7 @@
  <definedTypes>DefinedType.typeStockAdjustmentAsWriteOffBasises</definedTypes>
  <definedTypes>DefinedType.UseUniqueID</definedTypes>
  <definedTypes>DefinedType.typeAccountingDocuments</definedTypes>
+ <definedTypes>DefinedType.typeApArTransactionBasises</definedTypes>
  <commonCommands>CommonCommand.AddProperties</commonCommands>
  <commonCommands>CommonCommand.AttachedFiles</commonCommands>
  <commonCommands>CommonCommand.EditConstants</commonCommands>
@@ -1151,6 +1167,7 @@
  <catalogs>Catalog.Vehicles</catalogs>
  <catalogs>Catalog.VehicleTypes</catalogs>
  <catalogs>Catalog.Workstations</catalogs>
+ <catalogs>Catalog.AgingPeriods</catalogs>
  <documents>Document.AdditionalAccrual</documents>
  <documents>Document.AdditionalCostAllocation</documents>
  <documents>Document.AdditionalDeduction</documents>
@@ -1235,6 +1252,7 @@
  <documents>Document.WorkOrder</documents>
  <documents>Document.WorkOrderClosing</documents>
  <documents>Document.WorkSheet</documents>
+ <documents>Document.DebitCreditNote</documents>
  <documentJournals>DocumentJournal.DocumentsForIncomingPayment</documentJournals>
  <documentJournals>DocumentJournal.DocumentsForOutgoingPayment</documentJournals>
  <enums>Enum.AccountingAnalyticTypes</enums>
@@ -1322,6 +1340,8 @@
  <enums>Enum.TypeEquipment</enums>
  <enums>Enum.TypeExternalObject</enums>
  <enums>Enum.EmployeeScheduleTypes</enums>
+ <enums>Enum.RecordType</enums>
+ <enums>Enum.AgingPeriodTypes</enums>
  <reports>Report.AllRegistersMovement</reports>
  <reports>Report.BatchBalance</reports>
  <reports>Report.BatchBalanceSimple</reports>
@@ -1341,6 +1361,13 @@
  <reports>Report.TrialBalanceByAccount</reports>
  <reports>Report.AccountCard</reports>
  <reports>Report.AccountAnalysis</reports>
+ <reports>Report.A101A_PartnersBalance</reports>
+ <reports>Report.R2001A_Sales</reports>
+ <reports>Report.R1001A_Purchases</reports>
+ <reports>Report.R3010A_CashOnHand</reports>
+ <reports>Report.R502A_ProfitLosses</reports>
+ <reports>Report.RP_R12R_VendorsAging</reports>
+ <reports>Report.RP_R11R_CustomersAging</reports>
  <dataProcessors>DataProcessor.AnaliseDocumentMovements</dataProcessors>
  <dataProcessors>DataProcessor.AnalyseXDTO</dataProcessors>
  <dataProcessors>DataProcessor.BuilderExample</dataProcessors>
@@ -1362,6 +1389,7 @@
  <dataProcessors>DataProcessor.LoadAndUnloadData</dataProcessors>
  <dataProcessors>DataProcessor.FixDocumentProblems</dataProcessors>
  <dataProcessors>DataProcessor.GroupPhotoUploading</dataProcessors>
+ <dataProcessors>DataProcessor.InternalCommands</dataProcessors>
  <informationRegisters>InformationRegister.AddProperties</informationRegisters>
  <informationRegisters>InformationRegister.AttachedFiles</informationRegisters>
  <informationRegisters>InformationRegister.Barcodes</informationRegisters>

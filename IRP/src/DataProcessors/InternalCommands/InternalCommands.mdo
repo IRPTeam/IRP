@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mdclass:DataProcessor xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="31796445-2fbc-49af-bbe3-38bef952ccb2">
+ <producedTypes>
+  <objectType typeId="120197fb-a1bb-4f00-932c-814a873c7856" valueTypeId="9b8cef61-8d9e-4bff-a313-f6ce23b0656e"/>
+  <managerType typeId="0e57edbd-60ce-4da9-8580-f3dfc5f84c6f" valueTypeId="333d2515-db52-4445-9205-a8c99a4ae7fd"/>
+ </producedTypes>
+ <name>InternalCommands</name>
+ <synonym>
+  <key>en</key>
+  <value>Internal commands</value>
+ </synonym>
+ <synonym>
+  <key>ru</key>
+  <value>Внутренние команды</value>
+ </synonym>
+ <synonym>
+  <key>tr</key>
+  <value>Dahili Komutlar</value>
+ </synonym>
+ <useStandardCommands>true</useStandardCommands>
+ <defaultForm>DataProcessor.InternalCommands.Form.CommandTemplate</defaultForm>
+ <forms uuid="b24ce069-1bb0-40fb-bcf1-1f748b9a4dae">
+  <name>CommandTemplate</name>
+  <synonym>
+   <key>en</key>
+   <value>Command template</value>
+  </synonym>
+  <synonym>
+   <key>ru</key>
+   <value>Шаблон команды</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Komut Şablonu</value>
+  </synonym>
+  <usePurposes>PersonalComputer</usePurposes>
+  <usePurposes>MobileDevice</usePurposes>
+ </forms>
+ <forms uuid="27a931da-792e-4779-851a-8e7bf241219d">
+  <name>SetNotActive</name>
+  <synonym>
+   <key>en</key>
+   <value>Set not active</value>
+  </synonym>
+  <synonym>
+   <key>ru</key>
+   <value>Установить неактивным</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Aktif Olmayanı Ayarla</value>
+  </synonym>
+  <usePurposes>PersonalComputer</usePurposes>
+  <usePurposes>MobileDevice</usePurposes>
+ </forms>
+ <forms uuid="11eb96fe-8fc0-4f37-b3ac-5600e7e15bc5">
+  <name>ShowNotActive</name>
+  <synonym>
+   <key>en</key>
+   <value>Show not active</value>
+  </synonym>
+  <synonym>
+   <key>ru</key>
+   <value>Показать неактивные</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Aktif Olmayanı Göster</value>
+  </synonym>
+  <usePurposes>PersonalComputer</usePurposes>
+  <usePurposes>MobileDevice</usePurposes>
+ </forms>
+</mdclass:DataProcessor>

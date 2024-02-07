@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mdclass:CommonModule xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="3423d505-e39f-47f2-8dcf-c10995cd5988">
+ <name>InternalCommandsServer</name>
+ <synonym>
+  <key>en</key>
+  <value>Internal commands server</value>
+ </synonym>
+ <synonym>
+  <key>ru</key>
+  <value>Внутренние команды сервера</value>
+ </synonym>
+ <synonym>
+  <key>tr</key>
+  <value>Dahili Komutlar Sunucu</value>
+ </synonym>
+ <server>true</server>
+ <serverCall>true</serverCall>
+</mdclass:CommonModule>

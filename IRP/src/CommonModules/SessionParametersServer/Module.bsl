@@ -5,7 +5,8 @@ Procedure SessionParametersSetting(RequiredParameters) Export
 		If Not Metadata.Styles.Find(StyleName) = Undefined Then
 			MainStyle = StyleLib[StyleName];
 		EndIf;
-
+		CatalogsServer.SetSessionParameters();
+		InternalCommandsServer.SetSessionParameters();
 		Return;
 	EndIf;
 
@@ -72,6 +73,9 @@ Procedure SessionParametersSetting(RequiredParameters) Export
 	EndIf;
 	If RequiredParameters.Find("Buffer") <> Undefined Then
 		SessionParameters.Buffer = New ValueStorage(New Array);;
+	EndIf;
+	If RequiredParameters.Find("NumberEditingAvailable") <> Undefined Then
+		SessionParameters.NumberEditingAvailable = False;
 	EndIf;
 EndProcedure
 

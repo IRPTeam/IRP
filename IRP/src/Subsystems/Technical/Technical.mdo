@@ -19,4 +19,5 @@
  <subsystems>Mobile</subsystems>
  <subsystems>UniqueID</subsystems>
  <subsystems>CopyPaste</subsystems>
+ <subsystems>InternalCommands</subsystems>
 </mdclass:Subsystem>

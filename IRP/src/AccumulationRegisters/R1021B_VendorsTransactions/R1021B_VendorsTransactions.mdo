@@ -308,4 +308,26 @@
   <fullTextSearch>Use</fullTextSearch>
   <useInTotals>true</useInTotals>
  </dimensions>
+ <dimensions uuid="be75c4e8-4987-410c-8bcc-35e7b0c87dea">
+  <name>Project</name>
+  <synonym>
+   <key>en</key>
+   <value>Project</value>
+  </synonym>
+  <synonym>
+   <key>ru</key>
+   <value>Проект</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Proje</value>
+  </synonym>
+  <type>
+   <types>CatalogRef.Projects</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <useInTotals>true</useInTotals>
+ </dimensions>
 </mdclass:AccumulationRegister>

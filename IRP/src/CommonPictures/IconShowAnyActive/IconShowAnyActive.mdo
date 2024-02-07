@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mdclass:CommonPicture xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="35e613ce-6333-4157-916a-64756a137429">
+ <name>IconShowAnyActive</name>
+ <synonym>
+  <key>en</key>
+  <value>Icon show any active</value>
+ </synonym>
+ <synonym>
+  <key>ru</key>
+  <value>Иконка показать любые</value>
+ </synonym>
+ <synonym>
+  <key>tr</key>
+  <value>Herhangi Aktif Simgesi</value>
+ </synonym>
+</mdclass:CommonPicture>

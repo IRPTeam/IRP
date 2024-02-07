@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mdclass:CommonPicture xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="4f7f7eff-e151-45d9-9f1c-45864a5c6f6a">
+ <name>IconSetNotActive</name>
+ <synonym>
+  <key>en</key>
+  <value>Icon set not active</value>
+ </synonym>
+ <synonym>
+  <key>ru</key>
+  <value>Иконка установить неактивным</value>
+ </synonym>
+ <synonym>
+  <key>tr</key>
+  <value>Aktif Olmayan Simge Seti</value>
+ </synonym>
+</mdclass:CommonPicture>

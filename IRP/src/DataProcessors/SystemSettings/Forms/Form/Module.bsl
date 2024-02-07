@@ -3,6 +3,7 @@
 Procedure OnCreateAtServer(Cancel, StandardProcessing)
 	RunBackgroundJobInDebugMode = SessionParametersServer.GetSessionParameter("RunBackgroundJobInDebugMode");
 	IgnoreLockModificationData = SessionParametersServer.GetSessionParameter("IgnoreLockModificationData");
+	NumberEditingAvailable = SessionParametersServer.GetSessionParameter("NumberEditingAvailable");
 	
 	Items.InfoBaseTimeZone.ChoiceList.Clear();
 	For Each Zone In GetAvailableTimeZones() Do
@@ -99,4 +100,14 @@ EndProcedure
 &AtServer
 Procedure IgnoreLockModificationDataOnChangeAtServer()
 	SessionParameters.IgnoreLockModificationData = IgnoreLockModificationData;
+EndProcedure
+
+&AtClient
+Procedure NumberEditingAvailableOnChange(Item)
+	NumberEditingAvailableOnChangeAtServer();
+EndProcedure
+
+&AtServer
+Procedure NumberEditingAvailableOnChangeAtServer()
+	SessionParameters.NumberEditingAvailable = NumberEditingAvailable;
 EndProcedure

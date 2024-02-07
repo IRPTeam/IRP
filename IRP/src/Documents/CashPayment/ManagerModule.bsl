@@ -124,6 +124,7 @@ Function GetQueryTextsMasterTables()
 	QueryArray.Add(R3035T_CashPlanning());
 	QueryArray.Add(R5010B_ReconciliationStatement());
 	QueryArray.Add(R5012B_VendorsAging());
+	QueryArray.Add(R5011B_CustomersAging());
 	QueryArray.Add(R5015B_OtherPartnersTransactions());
 	QueryArray.Add(R9510B_SalaryPayment());
 	QueryArray.Add(T2014S_AdvancesInfo());
@@ -206,7 +207,9 @@ Function PaymentList()
 		|			then PaymentList.PlaningTransactionBasis.Ref
 		|	end as CashTransferOrder,
 		|	PaymentList.Ref.TransactionType = VALUE(Enum.OutgoingPaymentTransactionTypes.OtherPartner) AS IsOtherPartner,
-		|	PaymentList.CashFlowCenter
+		|	PaymentList.CashFlowCenter,
+		|	PaymentList.Project,
+		|	FALSE AS IsReturnToCustomerByPOS
 		|INTO PaymentList
 		|FROM
 		|	Document.CashPayment.PaymentList AS PaymentList
@@ -369,89 +372,11 @@ Function R3027B_EmployeeCashAdvance()
 EndFunction
 
 Function R1021B_VendorsTransactions()
-	Return "SELECT
-		   |	VALUE(AccumulationRecordType.Expense) AS RecordType,
-		   |	PaymentList.Period,
-		   |	PaymentList.Company,
-		   |	PaymentList.Branch,
-		   |	PaymentList.Partner,
-		   |	PaymentList.LegalName,
-		   |	PaymentList.Currency,
-		   |	PaymentList.Agreement,
-		   |	PaymentList.TransactionDocument AS Basis,
-		   |	PaymentList.Order,
-		   |	PaymentList.Key,
-		   |	PaymentList.Amount,
-		   |	UNDEFINED AS VendorsAdvancesClosing
-		   |INTO R1021B_VendorsTransactions
-		   |FROM
-		   |	PaymentList AS PaymentList
-		   |WHERE
-		   |	PaymentList.IsPaymentToVendor
-		   |	AND NOT PaymentList.IsAdvance
-		   |
-		   |UNION ALL
-		   |
-		   |SELECT
-		   |	VALUE(AccumulationRecordType.Expense) AS RecordType,
-		   |	OffsetOfAdvances.Period,
-		   |	OffsetOfAdvances.Company,
-		   |	OffsetOfAdvances.Branch,
-		   |	OffsetOfAdvances.Partner,
-		   |	OffsetOfAdvances.LegalName,
-		   |	OffsetOfAdvances.Currency,
-		   |	OffsetOfAdvances.TransactionAgreement,
-		   |	OffsetOfAdvances.TransactionDocument,
-		   |	OffsetOfAdvances.TransactionOrder,
-		   |	OffsetOfAdvances.Key,
-		   |	OffsetOfAdvances.Amount,
-		   |	OffsetOfAdvances.Recorder
-		   |FROM
-		   |	InformationRegister.T2010S_OffsetOfAdvances AS OffsetOfAdvances
-		   |WHERE
-		   |	OffsetOfAdvances.Document = &Ref";
+	Return AccumulationRegisters.R1021B_VendorsTransactions.R1021B_VendorsTransactions_BP_CP();
 EndFunction
 
 Function R2021B_CustomersTransactions()
-	Return "SELECT
-		   |	VALUE(AccumulationRecordType.Expense) AS RecordType,
-		   |	PaymentList.Period,
-		   |	PaymentList.Company,
-		   |	PaymentList.Branch,
-		   |	PaymentList.Partner,
-		   |	PaymentList.LegalName,
-		   |	PaymentList.Currency,
-		   |	PaymentList.Agreement,
-		   |	PaymentList.TransactionDocument AS Basis,
-		   |	PaymentList.Key,
-		   |	-PaymentList.Amount AS Amount,
-		   |	UNDEFINED AS CustomersAdvancesClosing
-		   |INTO R2021B_CustomersTransactions
-		   |FROM
-		   |	PaymentList AS PaymentList
-		   |WHERE
-		   |	PaymentList.IsReturnToCustomer
-		   |	AND NOT PaymentList.IsAdvance
-		   |
-		   |UNION ALL
-		   |
-		   |SELECT
-		   |	VALUE(AccumulationRecordType.Expense) AS RecordType,
-		   |	OffsetOfAdvances.Period,
-		   |	OffsetOfAdvances.Company,
-		   |	OffsetOfAdvances.Branch,
-		   |	OffsetOfAdvances.Partner,
-		   |	OffsetOfAdvances.LegalName,
-		   |	OffsetOfAdvances.Currency,
-		   |	OffsetOfAdvances.TransactionAgreement,
-		   |	OffsetOfAdvances.TransactionDocument,
-		   |	OffsetOfAdvances.Key,
-		   |	OffsetOfAdvances.Amount,
-		   |	OffsetOfAdvances.Recorder
-		   |FROM
-		   |	InformationRegister.T2010S_OffsetOfAdvances AS OffsetOfAdvances
-		   |WHERE
-		   |	OffsetOfAdvances.Document = &Ref";
+	Return AccumulationRegisters.R2021B_CustomersTransactions.R2021B_CustomersTransactions_BP_CP();
 EndFunction
 
 Function R5015B_OtherPartnersTransactions()
@@ -474,45 +399,7 @@ Function R5015B_OtherPartnersTransactions()
 EndFunction
 
 Function R1020B_AdvancesToVendors()
-	Return "SELECT
-		   |	VALUE(AccumulationRecordType.Receipt) AS RecordType,
-		   |	PaymentList.Period,
-		   |	PaymentList.Company,
-		   |	PaymentList.Branch,
-		   |	PaymentList.Partner,
-		   |	PaymentList.LegalName,
-		   |	PaymentList.Currency,
-		   |	PaymentList.AdvanceAgreement AS Agreement,
-		   |	PaymentList.Order,
-		   |	PaymentList.Amount,
-		   |	PaymentList.Key,
-		   |	UNDEFINED AS VendorsAdvancesClosing
-		   |INTO R1020B_AdvancesToVendors
-		   |FROM
-		   |	PaymentList AS PaymentList
-		   |WHERE
-		   |	PaymentList.IsPaymentToVendor
-		   |	AND PaymentList.IsAdvance
-		   |
-		   |UNION ALL
-		   |
-		   |SELECT
-		   |	VALUE(AccumulationRecordType.Expense),
-		   |	OffsetOfAdvances.Period,
-		   |	OffsetOfAdvances.Company,
-		   |	OffsetOfAdvances.Branch,
-		   |	OffsetOfAdvances.Partner,
-		   |	OffsetOfAdvances.LegalName,
-		   |	OffsetOfAdvances.Currency,
-		   |	OffsetOfAdvances.AdvanceAgreement,
-		   |	OffsetOfAdvances.AdvancesOrder,
-		   |	OffsetOfAdvances.Amount,
-		   |	OffsetOfAdvances.Key,
-		   |	OffsetOfAdvances.Recorder
-		   |FROM
-		   |	InformationRegister.T2010S_OffsetOfAdvances AS OffsetOfAdvances
-		   |WHERE
-		   |	OffsetOfAdvances.Document = &Ref";
+	Return AccumulationRegisters.R1020B_AdvancesToVendors.R1020B_AdvancesToVendors_BP_CP();
 EndFunction
 
 Function R2023B_AdvancesFromRetailCustomers()
@@ -532,43 +419,15 @@ Function R2023B_AdvancesFromRetailCustomers()
 EndFunction
 
 Function R2020B_AdvancesFromCustomers()
-	Return "SELECT
-		   |	VALUE(AccumulationRecordType.Receipt) AS RecordType,
-		   |	PaymentList.Period,
-		   |	PaymentList.Company,
-		   |	PaymentList.Branch,
-		   |	PaymentList.Partner,
-		   |	PaymentList.LegalName,
-		   |	PaymentList.Currency,
-		   |	PaymentList.AdvanceAgreement AS Agreement,
-		   |	-PaymentList.Amount AS Amount,
-		   |	PaymentList.Key
-		   |INTO R2020B_AdvancesFromCustomers
-		   |FROM
-		   |	PaymentList AS PaymentList
-		   |WHERE
-		   |	PaymentList.IsReturnToCustomer
-		   |	AND PaymentList.IsAdvance";
+	Return AccumulationRegisters.R2020B_AdvancesFromCustomers.R2020B_AdvancesFromCustomers_BP_CP();
 EndFunction
 
 Function R5012B_VendorsAging()
-	Return "SELECT
-		   |	VALUE(AccumulationRecordType.Expense) AS RecordType,
-		   |	OffsetOfAging.Period,
-		   |	OffsetOfAging.Company,
-		   |	OffsetOfAging.Branch,
-		   |	OffsetOfAging.Partner,
-		   |	OffsetOfAging.Agreement,
-		   |	OffsetOfAging.Currency,
-		   |	OffsetOfAging.Invoice,
-		   |	OffsetOfAging.PaymentDate,
-		   |	OffsetOfAging.Amount,
-		   |	OffsetOfAging.Recorder AS AgingClosing
-		   |INTO R5012B_VendorsAging
-		   |FROM
-		   |	InformationRegister.T2013S_OffsetOfAging AS OffsetOfAging
-		   |WHERE
-		   |	OffsetOfAging.Document = &Ref";
+	Return AccumulationRegisters.R5012B_VendorsAging.R5012B_VendorsAging_Offset();
+EndFunction
+
+Function R5011B_CustomersAging()
+	Return AccumulationRegisters.R5011B_CustomersAging.R5011B_CustomersAging_Offset();
 EndFunction
 
 Function R5010B_ReconciliationStatement()
@@ -678,93 +537,11 @@ Function R3025B_PurchaseOrdersToBePaid()
 EndFunction
 
 Function T2014S_AdvancesInfo()
-	Return "SELECT
-		   |	PaymentList.Period AS Date,
-		   |	PaymentList.Key,
-		   |	PaymentList.Company,
-		   |	PaymentList.Branch,
-		   |	PaymentList.Currency,
-		   |	PaymentList.Partner,
-		   |	PaymentList.LegalName,
-		   |	PaymentList.Order,
-		   |	PaymentList.AdvanceAgreement,
-		   |	TRUE AS IsVendorAdvance,
-		   |	FALSE AS IsCustomerAdvance,
-		   |	PaymentList.Amount
-		   |INTO T2014S_AdvancesInfo
-		   |FROM
-		   |	PaymentList AS PaymentList
-		   |WHERE
-		   |	PaymentList.IsPaymentToVendor
-		   |	AND PaymentList.IsAdvance
-		   |
-		   |UNION ALL
-		   |
-		   |SELECT
-		   |	PaymentList.Period,
-		   |	PaymentList.Key,
-		   |	PaymentList.Company,
-		   |	PaymentList.Branch,
-		   |	PaymentList.Currency,
-		   |	PaymentList.Partner,
-		   |	PaymentList.LegalName,
-		   |	UNDEFINED,
-		   |	PaymentList.AdvanceAgreement,
-		   |	FALSE,
-		   |	TRUE,
-		   |	-PaymentList.Amount AS Amount
-		   |FROM
-		   |	PaymentList AS PaymentList
-		   |WHERE
-		   |	PaymentList.IsReturnToCustomer
-		   |	AND PaymentList.IsAdvance";
+	Return InformationRegisters.T2014S_AdvancesInfo.T2014S_AdvancesInfo_BP_CP();
 EndFunction
 
 Function T2015S_TransactionsInfo()
-	Return "SELECT
-		   |	PaymentList.Period AS Date,
-		   |	PaymentList.Key,
-		   |	PaymentList.Company,
-		   |	PaymentList.Branch,
-		   |	PaymentList.Currency,
-		   |	PaymentList.Partner,
-		   |	PaymentList.LegalName,
-		   |	PaymentList.Agreement,
-		   |	PaymentList.Order,
-		   |	TRUE AS IsVendorTransaction,
-		   |	FALSE AS IsCustomerTransaction,
-		   |	PaymentList.TransactionDocument AS TransactionBasis,
-		   |	PaymentList.Amount AS Amount,
-		   |	TRUE AS IsPaid
-		   |INTO T2015S_TransactionsInfo
-		   |FROM
-		   |	PaymentList AS PaymentList
-		   |WHERE
-		   |	PaymentList.IsPaymentToVendor
-		   |	AND NOT PaymentList.IsAdvance
-		   |
-		   |UNION ALL
-		   |
-		   |SELECT
-		   |	PaymentList.Period,
-		   |	PaymentList.Key,
-		   |	PaymentList.Company,
-		   |	PaymentList.Branch,
-		   |	PaymentList.Currency,
-		   |	PaymentList.Partner,
-		   |	PaymentList.LegalName,
-		   |	PaymentList.Agreement,
-		   |	UNDEFINED,
-		   |	FALSE,
-		   |	TRUE,
-		   |	PaymentList.TransactionDocument,
-		   |	-PaymentList.Amount,
-		   |	TRUE AS IsPaid
-		   |FROM
-		   |	PaymentList AS PaymentList
-		   |WHERE
-		   |	PaymentList.IsReturnToCustomer
-		   |	AND NOT PaymentList.IsAdvance";
+	Return InformationRegisters.T2015S_TransactionsInfo.T2015S_TransactionsInfo_BP_CP();
 EndFunction
 
 #EndRegion

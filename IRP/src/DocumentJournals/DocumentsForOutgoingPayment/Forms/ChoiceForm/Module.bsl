@@ -1,5 +1,6 @@
 &AtServer
 Procedure OnCreateAtServer(Cancel, StandardProcessing)
+	ThisObject.AmountByDocumentDate = True;
 	JorDocumentsServer.OnCreateAtServer(Cancel, StandardProcessing, ThisObject, Parameters);
 EndProcedure
 

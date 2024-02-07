@@ -91,6 +91,11 @@ Procedure CollectSettingsFromTree(TreeRows, TableOfSettings, ArrayOfSavedAttribu
 			NewRow.AttributeName = Row.Name;
 			NewRow.Value = Row.Value;
 			NewRow.KindOfAttribute = Row.KindOfAttribute;
+			
+			If NewRow.Value = Undefined 
+					And TypeOf(Row.TypeRestriction) = Type("TypeDescription") Then
+				NewRow.Value = Row.TypeRestriction.AdjustValue();
+			EndIf;
 		EndIf;
 		CollectSettingsFromTree(Row.GetItems(), TableOfSettings, ArrayOfSavedAttributes);
 	EndDo;
@@ -764,4 +769,14 @@ Procedure CollapseTreeRows(Row)
 		CollapseTreeRows(ChildRow);
 		Items.MetadataTree.Collapse(ChildRow.GetID());
 	EndDo;
+EndProcedure
+
+&AtClient
+Procedure MetadataTreeUseOnChange(Item)
+	CurrentRow = Items.MetadataTree.CurrentData;
+	If CurrentRow.Use And CurrentRow.Value = Undefined 
+			And CurrentRow.TypeRestriction.ContainsType(Type("Boolean")) 
+			And CurrentRow.TypeRestriction.Types().Count() = 1 Then
+		CurrentRow.Value = True;
+	EndIf;
 EndProcedure

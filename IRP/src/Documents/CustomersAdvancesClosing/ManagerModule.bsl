@@ -9,6 +9,9 @@ EndFunction
 #Region Posting
 
 Function PostingGetDocumentDataTables(Ref, Cancel, PostingMode, Parameters, AddInfo = Undefined) Export
+	Parameters.Insert("DontWriteNegativeDebtAsAdvance", Ref.DontWriteNegativeDebtAsAdvance);
+	Parameters.Insert("DontOffsetEmptyProjects", Ref.DontOffsetEmptyProjects);
+	
 	QueryArray = GetQueryTextsSecondaryTables(Parameters);
 	Parameters.Insert("QueryParameters", GetAdditionalQueryParameters(Ref));
 	PostingServer.ExecuteQuery(Ref, QueryArray, Parameters);

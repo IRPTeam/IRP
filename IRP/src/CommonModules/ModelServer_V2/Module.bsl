@@ -161,13 +161,14 @@ Function GetBankTermInfo(PaymentType, BankTerm) Export
 EndFunction
 
 Function _GetBankTermInfo(PaymentType, BankTerm) Export
-	Result = New Structure("Percent, Partner, LegalName, PartnerTerms, LegalNameContract",
-	0, Undefined, Undefined, Undefined, Undefined);
+	Result = New Structure("Percent, Account, Partner, LegalName, PartnerTerms, LegalNameContract",
+	0, Undefined, Undefined, Undefined, Undefined, Undefined);
 	
 	Query = New Query;
 	Query.Text =
 		"SELECT
 		|	BankTermsPaymentTypes.Percent AS Percent,
+		|	BankTermsPaymentTypes.Account AS Account,
 		|	BankTermsPaymentTypes.Partner AS Partner,
 		|	BankTermsPaymentTypes.LegalName AS LegalName,
 		|	BankTermsPaymentTypes.PartnerTerms AS PartnerTerms,

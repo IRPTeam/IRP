@@ -1625,4 +1625,298 @@ Function ItemInRegisterRecords(ItemOrItemKey)
 	Return Result;
 EndFunction
 
+#Region GetItemDetailInfo
 
+// Get item tree info.
+// 
+// Parameters:
+//  Item - CatalogRef.Items - Item
+// 
+// Returns:
+// Returns:
+//  ValueTree - Get item tree description:
+// * Description - String - 
+// * RefValue - AnyRef -
+Function GetItemTreeInfo(Item) Export
+	
+	TreeInfo = New ValueTree();
+	TreeInfo.Columns.Add("Description", New TypeDescription("String"));
+	TreeInfo.Columns.Add("RefValue");
+
+	ItemDetailInfo = GetItemDetailInfo(Item);
+	For Each DetailInfo In ItemDetailInfo Do
+		TopBranch = TreeInfo.Rows.Add();
+		TopBranch.Description = DetailInfo.Key;
+		For Each ItemTreeBranchDescription In DetailInfo.Value Do
+			NewBranch = TopBranch.Rows.Add();
+			FillPropertyValues(NewBranch, ItemTreeBranchDescription);
+		EndDo;
+	EndDo;
+	
+	TreeInfo.Rows.Sort("Description", True);
+
+	Return TreeInfo;
+	
+EndFunction
+
+// Get item tree branch description.
+// 
+// Returns:
+//  Structure - Get item tree branch description:
+// * Description - String - 
+// * RefValue - AnyRef - 
+Function GetItemTreeBranchDescription() Export
+	Result = New Structure();
+	Result.Insert("Description", "");
+	Result.Insert("RefValue");
+	Return Result;
+EndFunction
+
+// Get item detail info.
+// 
+// Parameters:
+//  Item - CatalogRef.Items - Item
+// 
+// Returns:
+//  Array of KeyAndValue - Get item detail info:
+//	* Key - String -
+//	* Value - Array of See GetItemTreeBranchDescription
+Function GetItemDetailInfo(Item)
+	
+	Result = New Map;
+	
+	Result.Insert("10. " + Metadata.Catalogs.ItemKeys.Synonym, GetTreeBranchItemKeys(Item));
+	Result.Insert("20. " + Metadata.Catalogs.SerialLotNumbers.Synonym, GetTreeBranchSerialLotNumbers(Item));
+	Result.Insert("30. " + Metadata.InformationRegisters.Barcodes.Synonym, GetTreeBranchBarcodes(Item));
+	Result.Insert("40. " + Metadata.InformationRegisters.PricesByItems.Synonym, GetTreeBranchPrices(Item));
+	Result.Insert("50. " + Metadata.AccumulationRegisters.R4010B_ActualStocks.Synonym, GetTreeBranchStocks(Item));
+	
+	Return Result;
+	
+EndFunction
+
+// Get tree branch item keys.
+// 
+// Parameters:
+//  Item - CatalogRef.Items - Item
+// 
+// Returns:
+//  Array of See GetItemTreeBranchDescription
+Function GetTreeBranchItemKeys(Item)
+	
+	Result = New Array; // Array of See GetItemTreeBranchDescription
+	
+	Query = New Query;
+	Query.SetParameter("Item", Item);
+	
+	Query.Text =
+	"SELECT ALLOWED DISTINCT
+	|	ItemKeys.Ref,
+	|	ItemKeys.Presentation AS Presentation
+	|FROM
+	|	Catalog.ItemKeys AS ItemKeys
+	|WHERE
+	|	ItemKeys.Item = &Item
+	|	AND NOT ItemKeys.DeletionMark
+	|
+	|ORDER BY
+	|	Presentation";
+	QuerySelection = Query.Execute().Select();
+	
+	//@skip-check statement-type-change, property-return-type
+	While QuerySelection.Next() Do
+		ItemKeyRow = GetItemTreeBranchDescription();
+		ItemKeyRow.RefValue = QuerySelection.Ref; 
+		ItemKeyRow.Description = QuerySelection.Presentation;
+		Result.Add(ItemKeyRow); 
+	EndDo;
+	
+	Return Result;
+	
+EndFunction
+
+// Get tree branch serial lot numbers.
+// 
+// Parameters:
+//  Item - CatalogRef.Items - Item
+// 
+// Returns:
+//  Array of See GetItemTreeBranchDescription
+Function GetTreeBranchSerialLotNumbers(Item)
+	
+	Result = New Array; // Array of See GetItemTreeBranchDescription
+	
+	Query = New Query;
+	Query.SetParameter("Item", Item);
+	
+	Query.Text =
+	"SELECT ALLOWED DISTINCT
+	|	SerialLotNumbers.Ref,
+	|	SerialLotNumbers.Presentation AS Presentation
+	|FROM
+	|	Catalog.SerialLotNumbers AS SerialLotNumbers
+	|WHERE
+	|	NOT SerialLotNumbers.DeletionMark
+	|	AND SerialLotNumbers.SerialLotNumberOwner = &Item
+	|
+	|ORDER BY
+	|	Presentation";
+	QuerySelection = Query.Execute().Select();
+	
+	//@skip-check statement-type-change, property-return-type
+	While QuerySelection.Next() Do
+		SerialLotNumberRow = GetItemTreeBranchDescription();
+		SerialLotNumberRow.RefValue = QuerySelection.Ref; 
+		SerialLotNumberRow.Description = QuerySelection.Presentation;
+		Result.Add(SerialLotNumberRow); 
+	EndDo;
+	
+	Return Result;
+	
+EndFunction
+
+// Get tree branch barcodes.
+// 
+// Parameters:
+//  Item - CatalogRef.Items - Item
+// 
+// Returns:
+//  Array of See GetItemTreeBranchDescription
+Function GetTreeBranchBarcodes(Item)
+	
+	Result = New Array; // Array of See GetItemTreeBranchDescription
+	
+	Query = New Query;
+	Query.SetParameter("Item", Item);
+	
+	Query.Text =
+	"SELECT ALLOWED DISTINCT
+	|	Barcodes.Barcode AS Presentation
+	|FROM
+	|	InformationRegister.Barcodes AS Barcodes
+	|WHERE
+	|	Barcodes.ItemKey.Item = &Item
+	|
+	|ORDER BY
+	|	Barcode";
+	QuerySelection = Query.Execute().Select();
+	
+	//@skip-check statement-type-change, property-return-type
+	While QuerySelection.Next() Do
+		BarcodeRow = GetItemTreeBranchDescription();
+		BarcodeRow.Description = QuerySelection.Presentation;
+		Result.Add(BarcodeRow); 
+	EndDo;
+	
+	Return Result;
+	
+EndFunction
+
+// Get tree branch prices.
+// 
+// Parameters:
+//  Item - CatalogRef.Items - Item
+// 
+// Returns:
+//  Array of See GetItemTreeBranchDescription
+Function GetTreeBranchPrices(Item)
+	
+	Result = New Array; // Array of See GetItemTreeBranchDescription
+	
+	Query = New Query;
+	Query.SetParameter("Item", Item);
+	
+	Query.Text =
+	"SELECT ALLOWED DISTINCT
+	|	PricesByItemsSliceLast.PriceType AS PriceType,
+	|	PricesByItemsSliceLast.Period,
+	|	PricesByItemsSliceLast.Price,
+	|	PricesByItemsSliceLast.PriceType.Currency AS Currency
+	|FROM
+	|	InformationRegister.PricesByItems.SliceLast(, Item = &Item) AS PricesByItemsSliceLast
+	|
+	|UNION ALL
+	|
+	|SELECT DISTINCT
+	|	PricesByItemKeysSliceLast.PriceType AS PriceType,
+	|	PricesByItemKeysSliceLast.Period,
+	|	PricesByItemKeysSliceLast.Price,
+	|	PricesByItemKeysSliceLast.PriceType.Currency
+	|FROM
+	|	InformationRegister.PricesByItemKeys.SliceLast(, ItemKey.Item = &Item) AS PricesByItemKeysSliceLast
+	|
+	|ORDER BY
+	|	PriceType";
+	QuerySelection = Query.Execute().Select();
+	
+	//@skip-check statement-type-change, property-return-type, invocation-parameter-type-intersect
+	While QuerySelection.Next() Do
+		PriceRow = GetItemTreeBranchDescription();
+		PriceRow.RefValue = QuerySelection.PriceType; 
+		PriceRow.Description = 
+			StrTemplate("%1 (%2) - %3 (%4)", 
+				QuerySelection.PriceType, 
+				Format(QuerySelection.Period, "DLF=D;"),
+				Format(QuerySelection.Price, "NZ=; NG=;"),
+				QuerySelection.Currency);
+		Result.Add(PriceRow); 
+	EndDo;
+	
+	Return Result;
+	
+EndFunction
+
+// Get tree branch stocks.
+// 
+// Parameters:
+//  Item - CatalogRef.Items - Item
+// 
+// Returns:
+//  Array of See GetItemTreeBranchDescription
+Function GetTreeBranchStocks(Item)
+	
+	Result = New Array; // Array of See GetItemTreeBranchDescription
+	
+	Query = New Query;
+	Query.SetParameter("Item", Item);
+	
+	Query.Text =
+	"SELECT ALLOWED DISTINCT
+	|	ActualStocksBalance.Store AS Store,
+	|	SUM(ActualStocksBalance.QuantityBalance) AS Quantity,
+	|	CASE
+	|		WHEN ActualStocksBalance.ItemKey.Unit = VALUE(Catalog.Units.EmptyRef)
+	|			THEN ActualStocksBalance.ItemKey.Item.Unit
+	|		ELSE ActualStocksBalance.ItemKey.Unit
+	|	END AS Unit
+	|FROM
+	|	AccumulationRegister.R4010B_ActualStocks.Balance(, ItemKey.Item = &Item) AS ActualStocksBalance
+	|GROUP BY
+	|	ActualStocksBalance.Store,
+	|	CASE
+	|		WHEN ActualStocksBalance.ItemKey.Unit = VALUE(Catalog.Units.EmptyRef)
+	|			THEN ActualStocksBalance.ItemKey.Item.Unit
+	|		ELSE ActualStocksBalance.ItemKey.Unit
+	|	END
+	|
+	|ORDER BY
+	|	Store";
+	QuerySelection = Query.Execute().Select();
+	
+	//@skip-check statement-type-change, property-return-type, invocation-parameter-type-intersect
+	While QuerySelection.Next() Do
+		PriceRow = GetItemTreeBranchDescription();
+		PriceRow.RefValue = QuerySelection.Store; 
+		PriceRow.Description = 
+			StrTemplate("%1 - %2 %3", 
+				QuerySelection.Store, 
+				Format(QuerySelection.Quantity, "NZ=; NG=;"),
+				QuerySelection.Unit);
+		Result.Add(PriceRow); 
+	EndDo;
+
+	Return Result;
+	
+EndFunction
+
+#EndRegion

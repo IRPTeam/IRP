@@ -10,16 +10,33 @@ Procedure ChoiceDataGetProcessing(ChoiceData, Parameters, StandardProcessing)
 	
 	StandardProcessing = False;
 	CommonFormActionsServer.CutLastSymbolsIfCameFromExcel(Parameters);
+	CatalogsServer.SetParametersForDataChoosing(Catalogs.PaymentTypes, Parameters);
+	
+	Filter = "";
+	For Each FilterItem In Parameters.Filter Do
+		If FilterItem.Key = "CustomSearchFilter" OR FilterItem.Key = "AdditionalParameters" Then
+			Continue; // Service properties
+		EndIf;
+		If FilterItem.Key = "BankTerm" Then
+			Continue; // Additional parameters
+		EndIf;
+		Filter = Filter
+			+ "
+		|	AND Table." + FilterItem.Key + " = &" + FilterItem.Key;
+	EndDo;			 
 	
 	Query = New Query;
 	If ValueIsFilled(Parameters.Filter.BankTerm) Then
-		Query.Text = GetQueryText_Filter();
+		Query.Text = GetQueryText_Filter(Filter);
 		Query.Text = LocalizationEvents.ReplaceDescriptionLocalizationPrefix(Query.Text, "Table.PaymentType");
 	Else
-		Query.Text = GetQueryText_All();
+		Query.Text = GetQueryText_All(Filter);
 		Query.Text = LocalizationEvents.ReplaceDescriptionLocalizationPrefix(Query.Text);
 	EndIf;
 	
+	For Each Filter In Parameters.Filter Do
+		Query.SetParameter(Filter.Key, Filter.Value);
+	EndDo;
 	Query.SetParameter("BankTerm", Parameters.Filter.BankTerm);
 	Query.SetParameter("SearchString", Parameters.SearchString);
 	QueryResult = Query.Execute();
@@ -28,7 +45,7 @@ Procedure ChoiceDataGetProcessing(ChoiceData, Parameters, StandardProcessing)
 	ChoiceData = CommonFormActionsServer.QueryTableToChoiceData(QueryTable);
 EndProcedure
 
-Function GetQueryText_Filter()
+Function GetQueryText_Filter(Filter)
 	Return
 		"SELECT
 		|	2 AS Sort,
@@ -38,13 +55,14 @@ Function GetQueryText_Filter()
 		|	Catalog.BankTerms.PaymentTypes AS Table
 		|WHERE
 		|	Table.Ref = &BankTerm
-		|	AND NOT Table.PaymentType.DeletionMark
+		|	AND NOT Table.PaymentType.DeletionMark " + 
+		StrReplace(Filter, "Table.", "Table.Ref.") + "
 		|	AND Table.PaymentType.Description_en LIKE ""%"" + &SearchString + ""%""
 		|GROUP BY
 		|	Table.PaymentType";
 EndFunction
 	
-Function GetQueryText_All()
+Function GetQueryText_All(Filter)
 	Return 
 		"SELECT
 		|	2 AS Sort,
@@ -54,7 +72,7 @@ Function GetQueryText_All()
 		|	Catalog.PaymentTypes AS Table
 		|WHERE
 		|	Table.Description_en LIKE ""%"" + &SearchString + ""%""
-		|	AND NOT Table.DeletionMark";
+		|	AND NOT Table.DeletionMark" + Filter;
 EndFunction
 
 		

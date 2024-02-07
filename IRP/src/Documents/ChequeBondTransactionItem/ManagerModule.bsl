@@ -277,365 +277,27 @@ Function R3016B_ChequeAndBonds()
 EndFunction
 
 Function R2020B_AdvancesFromCustomers()
-	Return "SELECT
-		   |	VALUE(AccumulationRecordType.Receipt) AS RecordType,
-		   |	Table.Period,
-		   |	Table.Company,
-		   |	Table.Branch,
-		   |	Table.Partner,
-		   |	Table.LegalName,
-		   |	Table.Currency,
-		   |	Table.AdvanceAgreement AS Agreement,
-		   |	Table.Order,
-		   |	Table.Amount,
-		   |	UNDEFINED AS CustomersAdvancesClosing
-		   |INTO R2020B_AdvancesFromCustomers
-		   |FROM
-		   |	CustomerTransaction_Posting AS Table
-		   |WHERE
-		   |	Table.IsIncomingCheque AND Table.IsAdvance
-		   |
-		   |UNION ALL
-		   |
-		   |SELECT
-		   |	VALUE(AccumulationRecordType.Expense),
-		   |	Table.Period,
-		   |	Table.Company,
-		   |	Table.Branch,
-		   |	Table.Partner,
-		   |	Table.LegalName,
-		   |	Table.Currency,
-		   |	Table.AdvanceAgreement,
-		   |	Table.Order,
-		   |	Table.Amount,
-		   |	UNDEFINED
-		   |FROM
-		   |	CustomerTransaction_Reversal AS Table
-		   |WHERE
-		   |	Table.IsIncomingCheque AND Table.IsAdvance
-		   |
-		   |UNION ALL
-		   |
-		   |SELECT
-		   |	VALUE(AccumulationRecordType.Receipt),
-		   |	Table.Period,
-		   |	Table.Company,
-		   |	Table.Branch,
-		   |	Table.Partner,
-		   |	Table.LegalName,
-		   |	Table.Currency,
-		   |	Table.AdvanceAgreement,
-		   |	Table.Order,
-		   |	Table.Amount,
-		   |	UNDEFINED
-		   |FROM
-		   |	CustomerTransaction_Correction AS Table
-		   |WHERE
-		   |	Table.IsIncomingCheque AND Table.IsAdvance
-		   |
-		   |UNION ALL
-		   |
-		   |SELECT
-		   |	VALUE(AccumulationRecordType.Expense),
-		   |	OffsetOfAdvances.Period,
-		   |	OffsetOfAdvances.Company,
-		   |	OffsetOfAdvances.Branch,
-		   |	OffsetOfAdvances.Partner,
-		   |	OffsetOfAdvances.LegalName,
-		   |	OffsetOfAdvances.Currency,
-		   |	OffsetOfAdvances.AdvanceAgreement,
-		   |	OffsetOfAdvances.AdvancesOrder,
-		   |	OffsetOfAdvances.Amount,
-		   |	OffsetOfAdvances.Recorder
-		   |FROM
-		   |	InformationRegister.T2010S_OffsetOfAdvances AS OffsetOfAdvances
-		   |WHERE
-		   |	OffsetOfAdvances.Document = &Ref";
+	Return AccumulationRegisters.R2020B_AdvancesFromCustomers.R2020B_AdvancesFromCustomers_Cheque();
 EndFunction
 
 Function R2021B_CustomersTransactions()
-	Return "SELECT
-		   |	VALUE(AccumulationRecordType.Expense) AS RecordType,
-		   |	Table.Period,
-		   |	Table.Company,
-		   |	Table.Branch,
-		   |	Table.Partner,
-		   |	Table.LegalName,
-		   |	Table.Currency,
-		   |	Table.Agreement,
-		   |	Table.BasisDocument AS Basis,
-		   |	Table.Order,
-		   |	Table.Amount,
-		   |	UNDEFINED AS CustomersAdvancesClosing
-		   |INTO R2021B_CustomersTransactions
-		   |FROM
-		   |	CustomerTransaction_Posting AS Table
-		   |WHERE
-		   |	Table.IsIncomingCheque
-		   |	AND NOT Table.IsAdvance
-		   |
-		   |UNION ALL
-		   |
-		   |SELECT
-		   |	VALUE(AccumulationRecordType.Receipt),
-		   |	Table.Period,
-		   |	Table.Company,
-		   |	Table.Branch,
-		   |	Table.Partner,
-		   |	Table.LegalName,
-		   |	Table.Currency,
-		   |	Table.Agreement,
-		   |	Table.BasisDocument,
-		   |	Table.Order,
-		   |	Table.Amount,
-		   |	UNDEFINED
-		   |FROM
-		   |	CustomerTransaction_Reversal AS Table
-		   |WHERE
-		   |	Table.IsIncomingCheque
-		   |	AND NOT Table.IsAdvance
-		   |
-		   |UNION ALL
-		   |
-		   |SELECT
-		   |	VALUE(AccumulationRecordType.Expense),
-		   |	Table.Period,
-		   |	Table.Company,
-		   |	Table.Branch,
-		   |	Table.Partner,
-		   |	Table.LegalName,
-		   |	Table.Currency,
-		   |	Table.Agreement,
-		   |	Table.BasisDocument,
-		   |	Table.Order,
-		   |	Table.Amount,
-		   |	UNDEFINED
-		   |FROM
-		   |	CustomerTransaction_Correction AS Table
-		   |WHERE
-		   |	Table.IsIncomingCheque
-		   |	AND NOT Table.IsAdvance
-		   |
-		   |UNION ALL
-		   |
-		   |SELECT
-		   |	VALUE(AccumulationRecordType.Expense) AS RecordType,
-		   |	OffsetOfAdvances.Period,
-		   |	OffsetOfAdvances.Company,
-		   |	OffsetOfAdvances.Branch,
-		   |	OffsetOfAdvances.Partner,
-		   |	OffsetOfAdvances.LegalName,
-		   |	OffsetOfAdvances.Currency,
-		   |	OffsetOfAdvances.TransactionAgreement,
-		   |	OffsetOfAdvances.TransactionDocument,
-		   |	OffsetOfAdvances.TransactionOrder,
-		   |	OffsetOfAdvances.Amount,
-		   |	OffsetOfAdvances.Recorder
-		   |FROM
-		   |	InformationRegister.T2010S_OffsetOfAdvances AS OffsetOfAdvances
-		   |WHERE
-		   |	OffsetOfAdvances.Document = &Ref";
+	Return AccumulationRegisters.R2021B_CustomersTransactions.R2021B_CustomersTransactions_Cheque();
 EndFunction
 
 Function R5011B_CustomersAging()
-	Return "SELECT
-		   |	VALUE(AccumulationRecordType.Expense) AS RecordType,
-		   |	OffsetOfAging.Period,
-		   |	OffsetOfAging.Company,
-		   |	OffsetOfAging.Branch,
-		   |	OffsetOfAging.Partner,
-		   |	OffsetOfAging.Agreement,
-		   |	OffsetOfAging.Currency,
-		   |	OffsetOfAging.Invoice,
-		   |	OffsetOfAging.PaymentDate,
-		   |	OffsetOfAging.Amount,
-		   |	OffsetOfAging.Recorder AS AgingClosing
-		   |INTO R5011B_CustomersAging
-		   |FROM
-		   |	InformationRegister.T2013S_OffsetOfAging AS OffsetOfAging
-		   |WHERE
-		   |	OffsetOfAging.Document = &Ref";
+	Return AccumulationRegisters.R5011B_CustomersAging.R5011B_CustomersAging_Offset();
 EndFunction
 
 Function R1020B_AdvancesToVendors()
-	Return "SELECT
-		   |	VALUE(AccumulationRecordType.Receipt) AS RecordType,
-		   |	Table.Period,
-		   |	Table.Company,
-		   |	Table.Branch,
-		   |	Table.Partner,
-		   |	Table.LegalName,
-		   |	Table.Currency,
-		   |	Table.AdvanceAgreement AS Agreement,
-		   |	Table.Order,
-		   |	Table.Amount,
-		   |	UNDEFINED AS VendorsAdvancesClosing
-		   |INTO R1020B_AdvancesToVendors
-		   |FROM
-		   |	VendorTransaction_Posting AS Table
-		   |WHERE
-		   |	Table.IsOutgoingCheque AND Table.IsAdvance
-		   |
-		   |UNION ALL
-		   |
-		   |SELECT
-		   |	VALUE(AccumulationRecordType.Expense),
-		   |	Table.Period,
-		   |	Table.Company,
-		   |	Table.Branch,
-		   |	Table.Partner,
-		   |	Table.LegalName,
-		   |	Table.Currency,
-		   |	Table.AdvanceAgreement,
-		   |	Table.Order,
-		   |	Table.Amount,
-		   |	UNDEFINED
-		   |FROM
-		   |	VendorTransaction_Reversal AS Table
-		   |WHERE
-		   |	Table.IsOutgoingCheque AND Table.IsAdvance
-		   |
-		   |UNION ALL
-		   |
-		   |SELECT
-		   |	VALUE(AccumulationRecordType.Receipt),
-		   |	Table.Period,
-		   |	Table.Company,
-		   |	Table.Branch,
-		   |	Table.Partner,
-		   |	Table.LegalName,
-		   |	Table.Currency,
-		   |	Table.AdvanceAgreement,
-		   |	Table.Order,
-		   |	Table.Amount,
-		   |	UNDEFINED
-		   |FROM
-		   |	VendorTransaction_Correction AS Table
-		   |WHERE
-		   |	Table.IsOutgoingCheque AND Table.IsAdvance
-		   |
-		   |UNION ALL
-		   |
-		   |SELECT
-		   |	VALUE(AccumulationRecordType.Expense),
-		   |	OffsetOfAdvances.Period,
-		   |	OffsetOfAdvances.Company,
-		   |	OffsetOfAdvances.Branch,
-		   |	OffsetOfAdvances.Partner,
-		   |	OffsetOfAdvances.LegalName,
-		   |	OffsetOfAdvances.Currency,
-		   |	OffsetOfAdvances.AdvanceAgreement,
-		   |	OffsetOfAdvances.AdvancesOrder,
-		   |	OffsetOfAdvances.Amount,
-		   |	OffsetOfAdvances.Recorder
-		   |FROM
-		   |	InformationRegister.T2010S_OffsetOfAdvances AS OffsetOfAdvances
-		   |WHERE
-		   |	OffsetOfAdvances.Document = &Ref";
+	Return AccumulationRegisters.R1020B_AdvancesToVendors.R1020B_AdvancesToVendors_Cheque();
 EndFunction
 
 Function R1021B_VendorsTransactions()
-	Return "SELECT
-		   |	VALUE(AccumulationRecordType.Expense) AS RecordType,
-		   |	Table.Period,
-		   |	Table.Company,
-		   |	Table.Branch,
-		   |	Table.Partner,
-		   |	Table.LegalName,
-		   |	Table.Currency,
-		   |	Table.Agreement,
-		   |	Table.BasisDocument AS Basis,
-		   |	Table.Order,
-		   |	Table.Amount,
-		   |	UNDEFINED AS VendorsAdvancesClosing
-		   |INTO R1021B_VendorsTransactions
-		   |FROM
-		   |	VendorTransaction_Posting AS Table
-		   |WHERE
-		   |	Table.IsOutgoingCheque
-		   |	AND NOT Table.IsAdvance
-		   |
-		   |UNION ALL
-		   |
-		   |SELECT
-		   |	VALUE(AccumulationRecordType.Receipt),
-		   |	Table.Period,
-		   |	Table.Company,
-		   |	Table.Branch,
-		   |	Table.Partner,
-		   |	Table.LegalName,
-		   |	Table.Currency,
-		   |	Table.Agreement,
-		   |	Table.BasisDocument,
-		   |	Table.Order,
-		   |	Table.Amount,
-		   |	UNDEFINED
-		   |FROM
-		   |	VendorTransaction_Reversal AS Table
-		   |WHERE
-		   |	Table.IsOutgoingCheque
-		   |	AND NOT Table.IsAdvance
-		   |
-		   |UNION ALL
-		   |
-		   |SELECT
-		   |	VALUE(AccumulationRecordType.Expense),
-		   |	Table.Period,
-		   |	Table.Company,
-		   |	Table.Branch,
-		   |	Table.Partner,
-		   |	Table.LegalName,
-		   |	Table.Currency,
-		   |	Table.Agreement,
-		   |	Table.BasisDocument,
-		   |	Table.Order,
-		   |	Table.Amount,
-		   |	UNDEFINED
-		   |FROM
-		   |	VendorTransaction_Correction AS Table
-		   |WHERE
-		   |	Table.IsOutgoingCheque
-		   |	AND NOT Table.IsAdvance
-		   |
-		   |UNION ALL
-		   |
-		   |SELECT
-		   |	VALUE(AccumulationRecordType.Expense) AS RecordType,
-		   |	OffsetOfAdvances.Period,
-		   |	OffsetOfAdvances.Company,
-		   |	OffsetOfAdvances.Branch,
-		   |	OffsetOfAdvances.Partner,
-		   |	OffsetOfAdvances.LegalName,
-		   |	OffsetOfAdvances.Currency,
-		   |	OffsetOfAdvances.TransactionAgreement,
-		   |	OffsetOfAdvances.TransactionDocument,
-		   |	OffsetOfAdvances.TransactionOrder,
-		   |	OffsetOfAdvances.Amount,
-		   |	OffsetOfAdvances.Recorder
-		   |FROM
-		   |	InformationRegister.T2010S_OffsetOfAdvances AS OffsetOfAdvances
-		   |WHERE
-		   |	OffsetOfAdvances.Document = &Ref";
+	Return AccumulationRegisters.R1021B_VendorsTransactions.R1021B_VendorsTransactions_Cheque();
 EndFunction
 
 Function R5012B_VendorsAging()
-	Return "SELECT
-		   |	VALUE(AccumulationRecordType.Expense) AS RecordType,
-		   |	OffsetOfAging.Period,
-		   |	OffsetOfAging.Company,
-		   |	OffsetOfAging.Branch,
-		   |	OffsetOfAging.Partner,
-		   |	OffsetOfAging.Agreement,
-		   |	OffsetOfAging.Currency,
-		   |	OffsetOfAging.Invoice,
-		   |	OffsetOfAging.PaymentDate,
-		   |	OffsetOfAging.Amount,
-		   |	OffsetOfAging.Recorder AS AgingClosing
-		   |INTO R5012B_VendorsAging
-		   |FROM
-		   |	InformationRegister.T2013S_OffsetOfAging AS OffsetOfAging
-		   |WHERE
-		   |	OffsetOfAging.Document = &Ref";
+	Return AccumulationRegisters.R5012B_VendorsAging.R5012B_VendorsAging_Offset();
 EndFunction
 
 Function R5010B_ReconciliationStatement()
@@ -735,252 +397,12 @@ Function R5010B_ReconciliationStatement()
 		   |	Table.IsOutgoingCheque";
 EndFunction
 
-Function T2014S_AdvancesInfo()
-	Return "SELECT
-		   |	Table.Period AS Date,
-		   |	Table.Company,
-		   |	Table.Branch,
-		   |	Table.Currency,
-		   |	Table.Partner,
-		   |	Table.LegalName,
-		   |	Table.Order,
-		   |	TRUE AS IsCustomerAdvance,
-		   |	FALSE AS IsVendorAdvance,
-		   |	Table.Amount
-		   |INTO T2014S_AdvancesInfo
-		   |FROM
-		   |	CustomerTransaction_Posting AS Table
-		   |WHERE
-		   |	Table.IsIncomingCheque
-		   |	AND Table.IsAdvance
-		   |
-		   |UNION ALL
-		   |
-		   |SELECT
-		   |	Table.Period,
-		   |	Table.Company,
-		   |	Table.Branch,
-		   |	Table.Currency,
-		   |	Table.Partner,
-		   |	Table.LegalName,
-		   |	Table.Order,
-		   |	TRUE,
-		   |	FALSE,
-		   |	-Table.Amount
-		   |FROM
-		   |	CustomerTransaction_Reversal AS Table
-		   |WHERE
-		   |	Table.IsIncomingCheque
-		   |	AND Table.IsAdvance
-		   |
-		   |UNION ALL
-		   |
-		   |SELECT
-		   |	Table.Period,
-		   |	Table.Company,
-		   |	Table.Branch,
-		   |	Table.Currency,
-		   |	Table.Partner,
-		   |	Table.LegalName,
-		   |	Table.Order,
-		   |	TRUE,
-		   |	FALSE,
-		   |	-Table.Amount
-		   |FROM
-		   |	CustomerTransaction_Correction AS Table
-		   |WHERE
-		   |	Table.IsIncomingCheque
-		   |	AND Table.IsAdvance
-		   |
-		   |UNION ALL
-		   |
-		   |SELECT
-		   |	Table.Period,
-		   |	Table.Company,
-		   |	Table.Branch,
-		   |	Table.Currency,
-		   |	Table.Partner,
-		   |	Table.LegalName,
-		   |	Table.Order,
-		   |	FALSE,
-		   |	TRUE,
-		   |	Table.Amount
-		   |FROM
-		   |	VendorTransaction_Posting AS Table
-		   |WHERE
-		   |	Table.IsOutgoingCheque
-		   |	AND Table.IsAdvance
-		   |
-		   |UNION ALL
-		   |
-		   |SELECT
-		   |	Table.Period,
-		   |	Table.Company,
-		   |	Table.Branch,
-		   |	Table.Currency,
-		   |	Table.Partner,
-		   |	Table.LegalName,
-		   |	Table.Order,
-		   |	FALSE,
-		   |	TRUE,
-		   |	-Table.Amount
-		   |FROM
-		   |	VendorTransaction_Reversal AS Table
-		   |WHERE
-		   |	Table.IsOutgoingCheque
-		   |	AND Table.IsAdvance
-		   |
-		   |UNION ALL
-		   |
-		   |SELECT
-		   |	Table.Period,
-		   |	Table.Company,
-		   |	Table.Branch,
-		   |	Table.Currency,
-		   |	Table.Partner,
-		   |	Table.LegalName,
-		   |	Table.Order,
-		   |	FALSE,
-		   |	TRUE,
-		   |	-Table.Amount
-		   |FROM
-		   |	VendorTransaction_Correction AS Table
-		   |WHERE
-		   |	Table.IsOutgoingCheque
-		   |	AND Table.IsAdvance";
+Function T2014S_AdvancesInfo() 
+	Return InformationRegisters.T2014S_AdvancesInfo.T2014S_AdvancesInfo_Cheque();
 EndFunction
 
 Function T2015S_TransactionsInfo()
-	Return "SELECT
-		   |	Table.Period AS Date,
-		   |	Table.Company,
-		   |	Table.Branch,
-		   |	Table.Currency,
-		   |	Table.Partner,
-		   |	Table.LegalName,
-		   |	Table.Agreement,
-		   |	Table.Order,
-		   |	TRUE AS IsCustomerTransaction,
-		   |	FALSE AS IsVendorTransaction,
-		   |	Table.BasisDocument AS TransactionBasis,
-		   |	Table.Amount,
-		   |	TRUE AS IsPaid
-		   |INTO T2015S_TransactionsInfo
-		   |FROM
-		   |	CustomerTransaction_Posting AS Table
-		   |WHERE
-		   |	Table.IsIncomingCheque
-		   |	AND NOT Table.IsAdvance
-		   |
-		   |UNION ALL
-		   |
-		   |SELECT
-		   |	Table.Period,
-		   |	Table.Company,
-		   |	Table.Branch,
-		   |	Table.Currency,
-		   |	Table.Partner,
-		   |	Table.LegalName,
-		   |	Table.Agreement,
-		   |	Table.Order,
-		   |	TRUE,
-		   |	FALSE,
-		   |	Table.BasisDocument,
-		   |	-Table.Amount,
-		   |	TRUE
-		   |FROM
-		   |	CustomerTransaction_Reversal AS Table
-		   |WHERE
-		   |	Table.IsIncomingCheque
-		   |	AND NOT Table.IsAdvance
-		   |
-		   |UNION ALL
-		   |
-		   |SELECT
-		   |	Table.Period,
-		   |	Table.Company,
-		   |	Table.Branch,
-		   |	Table.Currency,
-		   |	Table.Partner,
-		   |	Table.LegalName,
-		   |	Table.Agreement,
-		   |	Table.Order,
-		   |	TRUE,
-		   |	FALSE,
-		   |	Table.BasisDocument,
-		   |	-Table.Amount,
-		   |	TRUE
-		   |FROM
-		   |	CustomerTransaction_Correction AS Table
-		   |WHERE
-		   |	Table.IsIncomingCheque
-		   |	AND NOT Table.IsAdvance
-		   |
-		   |UNION ALL
-		   |
-		   |SELECT
-		   |	Table.Period,
-		   |	Table.Company,
-		   |	Table.Branch,
-		   |	Table.Currency,
-		   |	Table.Partner,
-		   |	Table.LegalName,
-		   |	Table.Agreement,
-		   |	Table.Order,
-		   |	FALSE,
-		   |	TRUE,
-		   |	Table.BasisDocument,
-		   |	Table.Amount,
-		   |	TRUE
-		   |FROM
-		   |	VendorTransaction_Posting AS Table
-		   |WHERE
-		   |	Table.IsOutgoingCheque
-		   |	AND NOT Table.IsAdvance
-		   |
-		   |UNION ALL
-		   |
-		   |SELECT
-		   |	Table.Period,
-		   |	Table.Company,
-		   |	Table.Branch,
-		   |	Table.Currency,
-		   |	Table.Partner,
-		   |	Table.LegalName,
-		   |	Table.Agreement,
-		   |	Table.Order,
-		   |	FALSE,
-		   |	TRUE,
-		   |	Table.BasisDocument,
-		   |	-Table.Amount,
-		   |	TRUE
-		   |FROM
-		   |	VendorTransaction_Reversal AS Table
-		   |WHERE
-		   |	Table.IsOutgoingCheque
-		   |	AND NOT Table.IsAdvance
-		   |
-		   |UNION ALL
-		   |
-		   |SELECT
-		   |	Table.Period,
-		   |	Table.Company,
-		   |	Table.Branch,
-		   |	Table.Currency,
-		   |	Table.Partner,
-		   |	Table.LegalName,
-		   |	Table.Agreement,
-		   |	Table.Order,
-		   |	FALSE,
-		   |	TRUE,
-		   |	Table.BasisDocument,
-		   |	-Table.Amount,
-		   |	TRUE
-		   |FROM
-		   |	VendorTransaction_Correction AS Table
-		   |WHERE
-		   |	Table.IsOutgoingCheque
-		   |	AND NOT Table.IsAdvance";
+	Return InformationRegisters.T2015S_TransactionsInfo.T2015S_TransactionsInfo_Cheque();
 EndFunction
 
 #EndRegion
@@ -1026,6 +448,7 @@ Function ChequeBondTransactionItem()
 		   |	Doc.FinancialMovementType,
 		   |	Doc.PlanningPeriod,
 		   |	Doc.Ref AS CashPlanningBasis,
+		   |	Doc.Ref AS Ref,
 		   |	CASE 
 		   |		WHEN Doc.Cheque.Type = VALUE(Enum.ChequeBondTypes.PartnerCheque) THEN VALUE(Enum.CashFlowDirections.Incoming)
 		   |		WHEN Doc.Cheque.Type = VALUE(Enum.ChequeBondTypes.OwnCheque) THEN VALUE(Enum.CashFlowDirections.Outgoing)
@@ -1050,8 +473,8 @@ Function ChequeBondTransactionItem()
 		   |	END AS IsAdvance,
 		   |
 		   |	case when Doc.Agreement.ApArPostingDetail = VALUE(Enum.ApArPostingDetail.ByDocuments) Then
-		   |	Doc.Agreement else Undefined end AS AdvanceAgreement
-		   |
+		   |	Doc.Agreement else Undefined end AS AdvanceAgreement,
+		   |	Doc.Project
 		   |INTO ChequeBondTransactionItem
 		   |FROM
 		   |	Document.ChequeBondTransactionItem AS Doc
@@ -1200,7 +623,9 @@ Function CustomerTransaction_Posting()
 		   |	Table.LegalNameContract,
 		   |	Table.Currency,
 		   |	Table.AdvanceAgreement,
+		   |	Table.Project,
 		   |	Table.Order,
+		   |	Table.Ref,
 		   |	Table.BasisDocument,
 		   |	Table.Amount,
 		   |	Table.IsAdvance,
@@ -1224,7 +649,9 @@ Function CustomerTransaction_Reversal()
 		   |	Table.LegalNameContract,
 		   |	Table.Currency,
 		   |	Table.AdvanceAgreement,
+		   |	Table.Project,
 		   |	Table.Order,
+		   |	Table.Ref,
 		   |	Table.BasisDocument,
 		   |	Table.Amount,
 		   |	Table.IsAdvance,
@@ -1248,7 +675,9 @@ Function CustomerTransaction_Correction()
 		   |	Table.LegalNameContract,
 		   |	Table.Currency,
 		   |	Table.AdvanceAgreement,
+		   |	Table.Project,
 		   |	Table.Order,
+		   |	Table.Ref,
 		   |	Table.BasisDocument,
 		   |	-Table.Amount AS Amount,
 		   |	Table.IsAdvance,
@@ -1276,7 +705,9 @@ Function VendorTransaction_Posting()
 		   |	Table.LegalNameContract,
 		   |	Table.Currency,
 		   |	Table.AdvanceAgreement,
+		   |	Table.Project,
 		   |	Table.Order,
+		   |	Table.Ref,
 		   |	Table.BasisDocument,
 		   |	Table.Amount,
 		   |	Table.IsAdvance,
@@ -1300,7 +731,9 @@ Function VendorTransaction_Reversal()
 		   |	Table.LegalNameContract,
 		   |	Table.Currency,
 		   |	Table.AdvanceAgreement,
+		   |	Table.Project,
 		   |	Table.Order,
+		   |	Table.Ref,
 		   |	Table.BasisDocument,
 		   |	Table.Amount,
 		   |	Table.IsAdvance,
@@ -1324,7 +757,9 @@ Function VendorTransaction_Correction()
 		   |	Table.LegalNameContract,
 		   |	Table.Currency,
 		   |	Table.AdvanceAgreement,
+		   |	Table.Project,
 		   |	Table.Order,
+		   |	Table.Ref,
 		   |	Table.BasisDocument,
 		   |	-Table.Amount AS Amount,
 		   |	Table.IsAdvance,

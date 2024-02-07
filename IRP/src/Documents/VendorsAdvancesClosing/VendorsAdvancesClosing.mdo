@@ -102,6 +102,44 @@
     <fullTextSearch>Use</fullTextSearch>
     <dataHistory>Use</dataHistory>
   </attributes>
+  <attributes uuid="7310d2fd-fce1-42cd-95c4-0edf90ba661f">
+    <name>DontWriteNegativeDebtAsAdvance</name>
+    <synonym>
+      <key>en</key>
+      <value>Dont write negative debt as advance</value>
+    </synonym>
+    <type>
+      <types>Boolean</types>
+    </type>
+    <toolTip>
+      <key>en</key>
+      <value>if debt is negative dont write as positive advance</value>
+    </toolTip>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <fillValue xsi:type="core:UndefinedValue"/>
+    <fullTextSearch>Use</fullTextSearch>
+    <dataHistory>Use</dataHistory>
+  </attributes>
+  <attributes uuid="5325afaa-a6a1-48b0-a2c2-7bcfcc55b950">
+    <name>DontOffsetEmptyProjects</name>
+    <synonym>
+      <key>en</key>
+      <value>Dont offset empty projects</value>
+    </synonym>
+    <type>
+      <types>Boolean</types>
+    </type>
+    <toolTip>
+      <key>en</key>
+      <value>If project is empty dont offset advance</value>
+    </toolTip>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <fillValue xsi:type="core:UndefinedValue"/>
+    <fullTextSearch>Use</fullTextSearch>
+    <dataHistory>Use</dataHistory>
+  </attributes>
   <forms uuid="154d828d-cbee-4ea5-9426-5763fd4e48d4">
     <name>DocumentForm</name>
     <synonym>

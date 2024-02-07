@@ -1979,7 +1979,10 @@ Scenario: _200052 check Disable - Change author
 			| 'Group name'              |
 			| 'Disable - Change author' |
 		And I select current line in "MetadataTree" table
-		And I select "Yes" exact value from "Value" drop-down list in "MetadataTree" table
+		And I set "Use" checkbox in "MetadataTree" table
+		And "MetadataTree" table contains lines
+			| 'Use' | 'Group name'                            | 'Value'                   | 'Value from group' |
+			| 'Yes' | 'Disable - Change author'               | 'Yes'                     | ''                 |
 		And I finish line editing in "MetadataTree" table
 		And I click "Ok" button
 	* Check

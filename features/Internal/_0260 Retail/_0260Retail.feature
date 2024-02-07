@@ -1695,9 +1695,8 @@ Scenario: _0260170 check filling payment agent in RSR
 		And I click "OK" button		
 		And I finish line editing in "Payments" table
 		And "Payments" table became equal
-			| '#' | 'Amount' | 'Commission' | 'Payment type' | 'Financial movement type' | 'Payment agent legal name contract' | 'Payment terminal' | 'Bank term'    | 'Account' | 'Percent' | 'RRN Code' | 'Payment agent partner' | 'Payment agent legal name' | 'Payment agent partner terms' |
-			| '1' | ''       | ''           | 'Card 01'      | ''                        | ''                                  | ''                 | 'Bank term 02' | ''        | '1,00'    | ''         | ''                      | ''                         | ''                            |
-	// * Change payment type - cash
+			| '#' | 'Amount' | 'Commission' | 'Payment type' | 'Financial movement type' | 'Payment agent legal name contract' | 'Payment terminal' | 'Bank term'    | 'Account'      | 'Percent' | 'RRN Code' | 'Payment agent partner' | 'Payment agent legal name' | 'Payment agent partner terms' |
+			| '1' | ''       | ''           | 'Card 01'      | ''                        | ''                                  | ''                 | 'Bank term 02' | 'Transit Main' | '1,00'    | ''         | ''                      | ''                         | ''                            |
 	And I close all client application windows
 		
 				
@@ -1730,8 +1729,8 @@ Scenario: _0260171 check filling payment agent in RRR
 		And I click "OK" button		
 		And I finish line editing in "Payments" table
 		And "Payments" table became equal
-			| '#' | 'Amount' | 'Commission' | 'Payment type' | 'Financial movement type' | 'Payment agent legal name contract' | 'Payment terminal' | 'Bank term'    | 'Account' | 'Percent' | 'RRN Code' | 'Payment agent partner' | 'Payment agent legal name' | 'Payment agent partner terms' |
-			| '1' | ''       | ''           | 'Card 01'      | ''                        | ''                                  | ''                 | 'Bank term 02' | ''        | '1,00'    | ''         | ''                      | ''                         | ''                            |
+			| '#' | 'Amount' | 'Commission' | 'Payment type' | 'Financial movement type' | 'Payment agent legal name contract' | 'Payment terminal' | 'Bank term'    | 'Account'      | 'Percent' | 'RRN Code' | 'Payment agent partner' | 'Payment agent legal name' | 'Payment agent partner terms' |
+			| '1' | ''       | ''           | 'Card 01'      | ''                        | ''                                  | ''                 | 'Bank term 02' | 'Transit Main' | '1,00'    | ''         | ''                      | ''                         | ''                            |
 	And I close all client application windows					
 		
 Scenario: _0260172 check filling Account from Workstation when select payment type - cash (RSR)
@@ -1749,6 +1748,38 @@ Scenario: _0260172 check filling Account from Workstation when select payment ty
 		And "Payments" table contains lines
 			| 'Payment type' | 'Account'            |
 			| 'Cash'         | 'Pos cash account 1' |
+	* Change payment type - card 01
+		And I select current line in "Payments" table
+		And I click choice button of "Payment type" attribute in "Payments" table
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Card 01'     |
+		And I select current line in "List" table
+		And "Payments" table contains lines
+			| 'Payment type' | 'Bank term'    | 'Account'      | 'Percent' |
+			| 'Card 01'      | 'Bank term 02' | 'Transit Main' | '1,00'    |
+	* Change payment type - Bank credit		
+		And I select current line in "Payments" table
+		And I select "Bank credit" from "Payment type" drop-down list by string in "Payments" table
+		Then "Update item list info" window is opened
+		And I click "OK" button
+		And "Payments" table contains lines
+			| 'Payment type' | 'Bank term'     | 'Account'      | 'Percent' |
+			| 'Bank credit'  | 'Payment agent' | 'Transit Main' | '10,00'   |
+	* Change payment type - card 01
+		And I select current line in "Payments" table
+		And I select "card 01" from "Payment type" drop-down list by string in "Payments" table	
+		Then "Update item list info" window is opened
+		And I click "OK" button	
+		And "Payments" table contains lines
+			| 'Payment type' | 'Bank term'    | 'Account'      | 'Percent' |
+			| 'Card 01'      | 'Bank term 02' | 'Transit Main' | '1,00'    |
+	* Change payment type - cash
+		And I select current line in "Payments" table
+		And I select "cash" from "Payment type" drop-down list by string in "Payments" table				
+		And "Payments" table contains lines
+			| 'Payment type' | 'Bank term' | 'Account'            | 'Percent' |
+			| 'Cash'         | ''          | 'Pos cash account 1' | ''        |
 		
 Scenario: _0260173 check filling Account from Workstation when select payment type - cash (RRR)
 	And I close all client application windows
@@ -1765,7 +1796,38 @@ Scenario: _0260173 check filling Account from Workstation when select payment ty
 		And "Payments" table contains lines
 			| 'Payment type' | 'Account'            |
 			| 'Cash'         | 'Pos cash account 1' |				
-						
+	* Change payment type - card 01
+		And I select current line in "Payments" table
+		And I click choice button of "Payment type" attribute in "Payments" table
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Card 01'     |
+		And I select current line in "List" table
+		And "Payments" table contains lines
+			| 'Payment type' | 'Bank term'    | 'Account'      | 'Percent' |
+			| 'Card 01'      | 'Bank term 02' | 'Transit Main' | '1,00'    |
+	* Change payment type - Bank credit		
+		And I select current line in "Payments" table
+		And I select "Bank credit" from "Payment type" drop-down list by string in "Payments" table
+		Then "Update item list info" window is opened
+		And I click "OK" button
+		And "Payments" table contains lines
+			| 'Payment type' | 'Bank term'     | 'Account'      | 'Percent' |
+			| 'Bank credit'  | 'Payment agent' | 'Transit Main' | '10,00'   |
+	* Change payment type - card 01
+		And I select current line in "Payments" table
+		And I select "card 01" from "Payment type" drop-down list by string in "Payments" table	
+		Then "Update item list info" window is opened
+		And I click "OK" button	
+		And "Payments" table contains lines
+			| 'Payment type' | 'Bank term'    | 'Account'      | 'Percent' |
+			| 'Card 01'      | 'Bank term 02' | 'Transit Main' | '1,00'    |
+	* Change payment type - cash
+		And I select current line in "Payments" table
+		And I select "cash" from "Payment type" drop-down list by string in "Payments" table				
+		And "Payments" table contains lines
+			| 'Payment type' | 'Bank term' | 'Account'            | 'Percent' |
+			| 'Cash'         | ''          | 'Pos cash account 1' | ''        |					
 
 Scenario: _0260180 create document Visitor counter	
 	And I close all client application windows

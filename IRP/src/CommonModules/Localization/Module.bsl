@@ -708,6 +708,7 @@ Function Strings(Lang) Export
 	Strings.Insert("Form_036", NStr("en = 'Set as default'", Lang));
 	Strings.Insert("Form_037", NStr("en = 'Unset as default'", Lang));
 	Strings.Insert("Form_038", NStr("en = 'Employee'", Lang));
+	Strings.Insert("Form_039", NStr("en = 'Add attribute in additional attribute set in extension tab for current object type: %1'", Lang));
 #EndRegion
 
 #Region ErrorMessages
@@ -1217,6 +1218,7 @@ Function Strings(Lang) Export
 	Strings.Insert("QuestionToUser_025", NStr("en = 'Do you want to update filled tax rates?'", Lang));
 	Strings.Insert("QuestionToUser_026", NStr("en = 'Do you want to update payment agent?'", Lang));
 	Strings.Insert("QuestionToUser_027", NStr("en = 'Filled data by employee [%1] will be cleared. Continue?'", Lang));
+	Strings.Insert("QuestionToUser_028", NStr("en = 'Do you want to refund the client?'", Lang));
 #EndRegion
 
 #Region SuggestionToUser
@@ -1527,6 +1529,14 @@ Strings.Insert("MoneyTransfer_DR_R3021B_CashInTransit_CR_R5021T_Revenues",
 Strings.Insert("MoneyTransfer_DR_R5022T_Expenses_CR_R3021B_CashInTransit",
 	NStr("en = 'MoneyTransfer DR (R5022T_Expenses) CR (R3021B_CashInTransit)'", Lang));
 	
+#EndRegion
+
+#Region InternalCommands
+    // Do not modify "en" strings
+	Strings.Insert("InternalCommands_SetNotActive", NStr("en = 'Set ""Not active""'", Lang));
+	Strings.Insert("InternalCommands_SetNotActive_Check", NStr("en = 'Set ""Active""'", Lang));
+	Strings.Insert("InternalCommands_ShowNotActive", NStr("en = 'Show all items'", Lang));
+	Strings.Insert("InternalCommands_ShowNotActive_Check", NStr("en = 'Show only active items'", Lang));
 #EndRegion
 	
 	Return Strings;

@@ -47,6 +47,9 @@ Scenario: _090500 preparation (create PI and SI based on Goods receipt and Shipm
 		When Create catalog IntegrationSettings objects
 		When Create information register CurrencyRates records
 		When Create information register Taxes records (VAT)
+		Given I open hyperlink "e1cib/app/DataProcessor.SystemSettings"
+		And I set checkbox "Number editing available"
+		And I close "System settings" window
 
 
 

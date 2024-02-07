@@ -316,6 +316,9 @@ Scenario: _002 creating Calculation movement costs
 		Given I open hyperlink "e1cib/list/AccumulationRegister.R6030T_BatchShortageOutgoing"
 		And "List" table contains "BatchShortageOutgoing" template lines by template
 	And I close all client application windows
+	Given I open hyperlink "e1cib/app/DataProcessor.SystemSettings"
+	And I set checkbox "Number editing available"
+	And I close "System settings" window
 	
 
 Scenario: _003 creating Purchase invoice and checking close Batch wise over balance

@@ -18,8 +18,6 @@
 			<role>
 				<dcscom:dimension>true</dcscom:dimension>
 			</role>
-			<appearance/>
-			<inputParameters/>
 		</field>
 		<field xsi:type="DataSetFieldField">
 			<dataPath>Branch</dataPath>
@@ -33,8 +31,6 @@
 			<role>
 				<dcscom:dimension>true</dcscom:dimension>
 			</role>
-			<appearance/>
-			<inputParameters/>
 		</field>
 		<field xsi:type="DataSetFieldField">
 			<dataPath>CurrencyMovementType</dataPath>
@@ -48,8 +44,6 @@
 			<role>
 				<dcscom:dimension>true</dcscom:dimension>
 			</role>
-			<appearance/>
-			<inputParameters/>
 		</field>
 		<field xsi:type="DataSetFieldField">
 			<dataPath>Item</dataPath>
@@ -63,8 +57,6 @@
 			<role>
 				<dcscom:dimension>true</dcscom:dimension>
 			</role>
-			<appearance/>
-			<inputParameters/>
 		</field>
 		<field xsi:type="DataSetFieldField">
 			<dataPath>Quantity</dataPath>
@@ -75,8 +67,6 @@
 					<v8:content>Quantity</v8:content>
 				</v8:item>
 			</title>
-			<appearance/>
-			<inputParameters/>
 		</field>
 		<field xsi:type="DataSetFieldField">
 			<dataPath>Currency</dataPath>
@@ -90,8 +80,6 @@
 			<role>
 				<dcscom:dimension>true</dcscom:dimension>
 			</role>
-			<appearance/>
-			<inputParameters/>
 		</field>
 		<field xsi:type="DataSetFieldField">
 			<dataPath>Invoice</dataPath>
@@ -105,8 +93,6 @@
 			<role>
 				<dcscom:dimension>true</dcscom:dimension>
 			</role>
-			<appearance/>
-			<inputParameters/>
 		</field>
 		<field xsi:type="DataSetFieldField">
 			<dataPath>ItemKey</dataPath>
@@ -120,8 +106,6 @@
 			<role>
 				<dcscom:dimension>true</dcscom:dimension>
 			</role>
-			<appearance/>
-			<inputParameters/>
 		</field>
 		<field xsi:type="DataSetFieldField">
 			<dataPath>Amount</dataPath>
@@ -132,8 +116,6 @@
 					<v8:content>Amount</v8:content>
 				</v8:item>
 			</title>
-			<appearance/>
-			<inputParameters/>
 		</field>
 		<field xsi:type="DataSetFieldField">
 			<dataPath>NetAmount</dataPath>
@@ -144,8 +126,6 @@
 					<v8:content>Net amount</v8:content>
 				</v8:item>
 			</title>
-			<appearance/>
-			<inputParameters/>
 		</field>
 		<field xsi:type="DataSetFieldField">
 			<dataPath>OffersAmount</dataPath>
@@ -156,8 +136,6 @@
 					<v8:content>Offers amount</v8:content>
 				</v8:item>
 			</title>
-			<appearance/>
-			<inputParameters/>
 		</field>
 		<field xsi:type="DataSetFieldField">
 			<dataPath>RowKey</dataPath>
@@ -165,8 +143,6 @@
 			<useRestriction>
 				<condition>true</condition>
 			</useRestriction>
-			<appearance/>
-			<inputParameters/>
 		</field>
 		<field xsi:type="DataSetFieldField">
 			<dataPath>Partner</dataPath>
@@ -180,8 +156,6 @@
 			<role>
 				<dcscom:dimension>true</dcscom:dimension>
 			</role>
-			<appearance/>
-			<inputParameters/>
 		</field>
 		<field xsi:type="DataSetFieldField">
 			<dataPath>LegalName</dataPath>
@@ -195,8 +169,6 @@
 			<role>
 				<dcscom:dimension>true</dcscom:dimension>
 			</role>
-			<appearance/>
-			<inputParameters/>
 		</field>
 		<field xsi:type="DataSetFieldField">
 			<dataPath>PartnerTerms</dataPath>
@@ -210,8 +182,6 @@
 			<role>
 				<dcscom:dimension>true</dcscom:dimension>
 			</role>
-			<appearance/>
-			<inputParameters/>
 		</field>
 		<field xsi:type="DataSetFieldField">
 			<dataPath>RecordDocument</dataPath>
@@ -226,8 +196,6 @@
 				<dcscom:periodNumber>1</dcscom:periodNumber>
 				<dcscom:periodType>Main</dcscom:periodType>
 			</role>
-			<appearance/>
-			<inputParameters/>
 		</field>
 		<field xsi:type="DataSetFieldField">
 			<dataPath>SecondPeriod</dataPath>
@@ -242,8 +210,6 @@
 				<dcscom:periodNumber>2</dcscom:periodNumber>
 				<dcscom:periodType>Main</dcscom:periodType>
 			</role>
-			<appearance/>
-			<inputParameters/>
 		</field>
 		<field xsi:type="DataSetFieldField">
 			<dataPath>isTransacitonCurrency</dataPath>
@@ -254,8 +220,6 @@
 					<v8:content>Is transaciton currency</v8:content>
 				</v8:item>
 			</title>
-			<appearance/>
-			<inputParameters/>
 		</field>
 		<dataSource>DataSource1</dataSource>
 		<query>SELECT
@@ -314,7 +278,6 @@ FROM
 		<value xsi:type="xs:dateTime">0001-01-01T00:00:00</value>
 		<useRestriction>true</useRestriction>
 		<expression>&amp;ReportPeriod.StartDate</expression>
-		<inputParameters/>
 	</parameter>
 	<parameter>
 		<name>EndOfPeriod</name>
@@ -333,7 +296,6 @@ FROM
 		<value xsi:type="xs:dateTime">0001-01-01T00:00:00</value>
 		<useRestriction>true</useRestriction>
 		<expression>&amp;ReportPeriod.EndDate</expression>
-		<inputParameters/>
 	</parameter>
 	<parameter>
 		<name>ReportPeriod</name>
@@ -352,7 +314,6 @@ FROM
 			<v8:endDate>0001-01-01T00:00:00</v8:endDate>
 		</value>
 		<useRestriction>false</useRestriction>
-		<inputParameters/>
 	</parameter>
 	<settingsVariant>
 		<dcsset:name>A01</dcsset:name>
@@ -450,7 +411,6 @@ FROM
 				<dcsset:selection>
 					<dcsset:item xsi:type="dcsset:SelectedItemAuto"/>
 				</dcsset:selection>
-				<dcsset:outputParameters/>
 				<dcsset:item xsi:type="dcsset:StructureItemGroup">
 					<dcsset:groupItems>
 						<dcsset:item xsi:type="dcsset:GroupItemField">
@@ -467,7 +427,6 @@ FROM
 					<dcsset:selection>
 						<dcsset:item xsi:type="dcsset:SelectedItemAuto"/>
 					</dcsset:selection>
-					<dcsset:outputParameters/>
 					<dcsset:item xsi:type="dcsset:StructureItemGroup">
 						<dcsset:groupItems>
 							<dcsset:item xsi:type="dcsset:GroupItemField">
@@ -491,7 +450,6 @@ FROM
 						<dcsset:selection>
 							<dcsset:item xsi:type="dcsset:SelectedItemAuto"/>
 						</dcsset:selection>
-						<dcsset:outputParameters/>
 						<dcsset:item xsi:type="dcsset:StructureItemGroup">
 							<dcsset:use>false</dcsset:use>
 							<dcsset:filter>
@@ -624,7 +582,6 @@ FROM
 					<dcsset:selection>
 						<dcsset:item xsi:type="dcsset:SelectedItemAuto"/>
 					</dcsset:selection>
-					<dcsset:outputParameters/>
 				</dcsset:column>
 				<dcsset:row>
 					<dcsset:groupItems>
@@ -642,7 +599,6 @@ FROM
 					<dcsset:selection>
 						<dcsset:item xsi:type="dcsset:SelectedItemAuto"/>
 					</dcsset:selection>
-					<dcsset:outputParameters/>
 					<dcsset:item>
 						<dcsset:groupItems>
 							<dcsset:item xsi:type="dcsset:GroupItemField">
@@ -666,7 +622,6 @@ FROM
 						<dcsset:selection>
 							<dcsset:item xsi:type="dcsset:SelectedItemAuto"/>
 						</dcsset:selection>
-						<dcsset:outputParameters/>
 						<dcsset:item>
 							<dcsset:use>false</dcsset:use>
 							<dcsset:filter>
@@ -694,7 +649,6 @@ FROM
 						</dcsset:item>
 					</dcsset:item>
 				</dcsset:row>
-				<dcsset:outputParameters/>
 			</dcsset:item>
 		</dcsset:settings>
 	</settingsVariant>

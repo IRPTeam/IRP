@@ -37,7 +37,7 @@
 				<dcscom:dimension>true</dcscom:dimension>
 			</role>
 			<inputParameters>
-				<dcscor:item xsi:type="dcsset:SettingsParameterValue">
+				<dcscor:item>
 					<dcscor:parameter>ChoiceParameters</dcscor:parameter>
 					<dcscor:value xsi:type="dcscor:ChoiceParameters">
 						<dcscor:item>
@@ -553,10 +553,6 @@
 			</title>
 			<appearance>
 				<dcscor:item xsi:type="dcsset:SettingsParameterValue">
-					<dcscor:parameter>MarkNegatives</dcscor:parameter>
-					<dcscor:value xsi:type="xs:boolean">true</dcscor:value>
-				</dcscor:item>
-				<dcscor:item xsi:type="dcsset:SettingsParameterValue">
 					<dcscor:parameter>Format</dcscor:parameter>
 					<dcscor:value xsi:type="v8:LocalStringType">
 						<v8:item>
@@ -564,6 +560,10 @@
 							<v8:content>NFD=2</v8:content>
 						</v8:item>
 					</dcscor:value>
+				</dcscor:item>
+				<dcscor:item xsi:type="dcsset:SettingsParameterValue">
+					<dcscor:parameter>MarkNegatives</dcscor:parameter>
+					<dcscor:value xsi:type="xs:boolean">true</dcscor:value>
 				</dcscor:item>
 			</appearance>
 		</field>
@@ -932,24 +932,8 @@ FROM
 					<dcsat:item xsi:type="dcsat:Field">
 						<dcsat:value xsi:type="v8:LocalStringType">
 							<v8:item>
-								<v8:lang>ru</v8:lang>
-								<v8:content>Вал.</v8:content>
-							</v8:item>
-							<v8:item>
 								<v8:lang>en</v8:lang>
 								<v8:content>Amt.</v8:content>
-							</v8:item>
-							<v8:item>
-								<v8:lang>vi</v8:lang>
-								<v8:content>Tiền tệ</v8:content>
-							</v8:item>
-							<v8:item>
-								<v8:lang>it</v8:lang>
-								<v8:content>Val.</v8:content>
-							</v8:item>
-							<v8:item>
-								<v8:lang>pl</v8:lang>
-								<v8:content>Curr.</v8:content>
 							</v8:item>
 						</dcsat:value>
 					</dcsat:item>
@@ -965,24 +949,8 @@ FROM
 					<dcsat:item xsi:type="dcsat:Field">
 						<dcsat:value xsi:type="v8:LocalStringType">
 							<v8:item>
-								<v8:lang>ru</v8:lang>
-								<v8:content>ФВ</v8:content>
-							</v8:item>
-							<v8:item>
 								<v8:lang>en</v8:lang>
 								<v8:content>Qty.</v8:content>
-							</v8:item>
-							<v8:item>
-								<v8:lang>vi</v8:lang>
-								<v8:content>PV</v8:content>
-							</v8:item>
-							<v8:item>
-								<v8:lang>it</v8:lang>
-								<v8:content>VF</v8:content>
-							</v8:item>
-							<v8:item>
-								<v8:lang>pl</v8:lang>
-								<v8:content>FC</v8:content>
 							</v8:item>
 						</dcsat:value>
 					</dcsat:item>
@@ -998,23 +966,7 @@ FROM
 					<dcsat:item xsi:type="dcsat:Field">
 						<dcsat:value xsi:type="v8:LocalStringType">
 							<v8:item>
-								<v8:lang>ru</v8:lang>
-								<v8:content>ВП</v8:content>
-							</v8:item>
-							<v8:item>
 								<v8:lang>en</v8:lang>
-								<v8:content>PC</v8:content>
-							</v8:item>
-							<v8:item>
-								<v8:lang>vi</v8:lang>
-								<v8:content>Người sử dụng ngoài</v8:content>
-							</v8:item>
-							<v8:item>
-								<v8:lang>it</v8:lang>
-								<v8:content>VP</v8:content>
-							</v8:item>
-							<v8:item>
-								<v8:lang>pl</v8:lang>
 								<v8:content>PC</v8:content>
 							</v8:item>
 						</dcsat:value>
@@ -1031,23 +983,7 @@ FROM
 					<dcsat:item xsi:type="dcsat:Field">
 						<dcsat:value xsi:type="v8:LocalStringType">
 							<v8:item>
-								<v8:lang>ru</v8:lang>
-								<v8:content>Начальное сальдо Дт</v8:content>
-							</v8:item>
-							<v8:item>
 								<v8:lang>en</v8:lang>
-								<v8:content>Opening balance Dr</v8:content>
-							</v8:item>
-							<v8:item>
-								<v8:lang>vi</v8:lang>
-								<v8:content>Dư đầu Nợ</v8:content>
-							</v8:item>
-							<v8:item>
-								<v8:lang>it</v8:lang>
-								<v8:content>Saldo iniziale a debito</v8:content>
-							</v8:item>
-							<v8:item>
-								<v8:lang>pl</v8:lang>
 								<v8:content>Opening balance Dr</v8:content>
 							</v8:item>
 						</dcsat:value>
@@ -1070,23 +1006,7 @@ FROM
 					<dcsat:item xsi:type="dcsat:Field">
 						<dcsat:value xsi:type="v8:LocalStringType">
 							<v8:item>
-								<v8:lang>ru</v8:lang>
-								<v8:content>Обороты Дт</v8:content>
-							</v8:item>
-							<v8:item>
 								<v8:lang>en</v8:lang>
-								<v8:content>Dr turnovers</v8:content>
-							</v8:item>
-							<v8:item>
-								<v8:lang>vi</v8:lang>
-								<v8:content>Phát sinh Nợ</v8:content>
-							</v8:item>
-							<v8:item>
-								<v8:lang>it</v8:lang>
-								<v8:content>Fatturati a debito</v8:content>
-							</v8:item>
-							<v8:item>
-								<v8:lang>pl</v8:lang>
 								<v8:content>Dr turnovers</v8:content>
 							</v8:item>
 						</dcsat:value>
@@ -1109,23 +1029,7 @@ FROM
 					<dcsat:item xsi:type="dcsat:Field">
 						<dcsat:value xsi:type="v8:LocalStringType">
 							<v8:item>
-								<v8:lang>ru</v8:lang>
-								<v8:content>Обороты Кт</v8:content>
-							</v8:item>
-							<v8:item>
 								<v8:lang>en</v8:lang>
-								<v8:content>Cr turnovers</v8:content>
-							</v8:item>
-							<v8:item>
-								<v8:lang>vi</v8:lang>
-								<v8:content>Phát sinh bên Có</v8:content>
-							</v8:item>
-							<v8:item>
-								<v8:lang>it</v8:lang>
-								<v8:content>Fatturati a credito</v8:content>
-							</v8:item>
-							<v8:item>
-								<v8:lang>pl</v8:lang>
 								<v8:content>Cr turnovers</v8:content>
 							</v8:item>
 						</dcsat:value>
@@ -1148,23 +1052,7 @@ FROM
 					<dcsat:item xsi:type="dcsat:Field">
 						<dcsat:value xsi:type="v8:LocalStringType">
 							<v8:item>
-								<v8:lang>ru</v8:lang>
-								<v8:content>Конечное сальдо Дт</v8:content>
-							</v8:item>
-							<v8:item>
 								<v8:lang>en</v8:lang>
-								<v8:content>Closing balance Dr</v8:content>
-							</v8:item>
-							<v8:item>
-								<v8:lang>vi</v8:lang>
-								<v8:content>Dư cuối bên Nợ</v8:content>
-							</v8:item>
-							<v8:item>
-								<v8:lang>it</v8:lang>
-								<v8:content>Saldo finale a debito</v8:content>
-							</v8:item>
-							<v8:item>
-								<v8:lang>pl</v8:lang>
 								<v8:content>Closing balance Dr</v8:content>
 							</v8:item>
 						</dcsat:value>
@@ -1187,23 +1075,7 @@ FROM
 					<dcsat:item xsi:type="dcsat:Field">
 						<dcsat:value xsi:type="v8:LocalStringType">
 							<v8:item>
-								<v8:lang>ru</v8:lang>
-								<v8:content>Конечное сальдо Кт</v8:content>
-							</v8:item>
-							<v8:item>
 								<v8:lang>en</v8:lang>
-								<v8:content>Closing balance Cr</v8:content>
-							</v8:item>
-							<v8:item>
-								<v8:lang>vi</v8:lang>
-								<v8:content>Dư cuối bên Có</v8:content>
-							</v8:item>
-							<v8:item>
-								<v8:lang>it</v8:lang>
-								<v8:content>Saldo finale a credito</v8:content>
-							</v8:item>
-							<v8:item>
-								<v8:lang>pl</v8:lang>
 								<v8:content>Closing balance Cr</v8:content>
 							</v8:item>
 						</dcsat:value>
@@ -1226,23 +1098,7 @@ FROM
 					<dcsat:item xsi:type="dcsat:Field">
 						<dcsat:value xsi:type="v8:LocalStringType">
 							<v8:item>
-								<v8:lang>ru</v8:lang>
-								<v8:content>Показатели</v8:content>
-							</v8:item>
-							<v8:item>
 								<v8:lang>en</v8:lang>
-								<v8:content>Indicators</v8:content>
-							</v8:item>
-							<v8:item>
-								<v8:lang>vi</v8:lang>
-								<v8:content>Chỉ tiêu</v8:content>
-							</v8:item>
-							<v8:item>
-								<v8:lang>it</v8:lang>
-								<v8:content>Indicatori</v8:content>
-							</v8:item>
-							<v8:item>
-								<v8:lang>pl</v8:lang>
 								<v8:content>Indicators</v8:content>
 							</v8:item>
 						</dcsat:value>
@@ -1285,23 +1141,7 @@ FROM
 					<dcsat:item xsi:type="dcsat:Field">
 						<dcsat:value xsi:type="v8:LocalStringType">
 							<v8:item>
-								<v8:lang>ru</v8:lang>
-								<v8:content>Начальное сальдо Кт</v8:content>
-							</v8:item>
-							<v8:item>
 								<v8:lang>en</v8:lang>
-								<v8:content>Opening balance Cr</v8:content>
-							</v8:item>
-							<v8:item>
-								<v8:lang>vi</v8:lang>
-								<v8:content>Dư đầu Có</v8:content>
-							</v8:item>
-							<v8:item>
-								<v8:lang>it</v8:lang>
-								<v8:content>Saldo iniziale a credito</v8:content>
-							</v8:item>
-							<v8:item>
-								<v8:lang>pl</v8:lang>
 								<v8:content>Opening balance Cr</v8:content>
 							</v8:item>
 						</dcsat:value>
@@ -1340,23 +1180,7 @@ FROM
 					<dcsat:item xsi:type="dcsat:Field">
 						<dcsat:value xsi:type="v8:LocalStringType">
 							<v8:item>
-								<v8:lang>ru</v8:lang>
-								<v8:content>Кол.</v8:content>
-							</v8:item>
-							<v8:item>
 								<v8:lang>en</v8:lang>
-								<v8:content>Qty</v8:content>
-							</v8:item>
-							<v8:item>
-								<v8:lang>vi</v8:lang>
-								<v8:content>Số lượng</v8:content>
-							</v8:item>
-							<v8:item>
-								<v8:lang>it</v8:lang>
-								<v8:content>Quant.</v8:content>
-							</v8:item>
-							<v8:item>
-								<v8:lang>pl</v8:lang>
 								<v8:content>Qty</v8:content>
 							</v8:item>
 						</dcsat:value>
@@ -1537,7 +1361,12 @@ FROM
 					<dcscor:parameter>Period</dcscor:parameter>
 					<dcscor:value xsi:nil="true"/>
 					<dcsset:userSettingID>eeaa5d18-5f96-486f-bd0c-6809263c9b58</dcsset:userSettingID>
-					<dcsset:userSettingPresentation xsi:type="xs:string">Period</dcsset:userSettingPresentation>
+					<dcsset:userSettingPresentation xsi:type="v8:LocalStringType">
+						<v8:item>
+							<v8:lang>en</v8:lang>
+							<v8:content>Period</v8:content>
+						</v8:item>
+					</dcsset:userSettingPresentation>
 				</dcscor:item>
 			</dcsset:dataParameters>
 			<dcsset:outputParameters>

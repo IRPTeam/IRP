@@ -714,7 +714,12 @@ end</expression>
 					<dcsset:comparisonType>InList</dcsset:comparisonType>
 					<dcsset:right xsi:nil="true"/>
 					<dcsset:userSettingID>5f496f1d-c6cc-4927-8883-c0e01b7b9dee</dcsset:userSettingID>
-					<dcsset:userSettingPresentation xsi:type="xs:string">Planning periods</dcsset:userSettingPresentation>
+					<dcsset:userSettingPresentation xsi:type="v8:LocalStringType">
+						<v8:item>
+							<v8:lang>en</v8:lang>
+							<v8:content>Planning periods</v8:content>
+						</v8:item>
+					</dcsset:userSettingPresentation>
 				</dcsset:item>
 			</dcsset:filter>
 			<dcsset:dataParameters>
@@ -723,7 +728,12 @@ end</expression>
 					<dcscor:parameter>BusinessUnit</dcscor:parameter>
 					<dcscor:value xsi:nil="true"/>
 					<dcsset:userSettingID>45eb68ee-291a-4948-99bd-35a8f8ab650b</dcsset:userSettingID>
-					<dcsset:userSettingPresentation xsi:type="xs:string">Business unit</dcsset:userSettingPresentation>
+					<dcsset:userSettingPresentation xsi:type="v8:LocalStringType">
+						<v8:item>
+							<v8:lang>en</v8:lang>
+							<v8:content>Business unit</v8:content>
+						</v8:item>
+					</dcsset:userSettingPresentation>
 				</dcscor:item>
 			</dcsset:dataParameters>
 			<dcsset:conditionalAppearance>

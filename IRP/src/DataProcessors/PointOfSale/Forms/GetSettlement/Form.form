@@ -12,25 +12,25 @@
       <segments>HardwareList</segments>
     </dataPath>
     <titleLocation>None</titleLocation>
-    <excludedCommands>FindByCurrentValue</excludedCommands>
-    <excludedCommands>SearchEverywhere</excludedCommands>
+    <excludedCommands>Add</excludedCommands>
     <excludedCommands>CancelSearch</excludedCommands>
-    <excludedCommands>SortListAsc</excludedCommands>
-    <excludedCommands>SearchHistory</excludedCommands>
-    <excludedCommands>ShowRowRearrangement</excludedCommands>
-    <excludedCommands>ShowMultipleSelection</excludedCommands>
     <excludedCommands>Change</excludedCommands>
-    <excludedCommands>Delete</excludedCommands>
-    <excludedCommands>MoveDown</excludedCommands>
-    <excludedCommands>Find</excludedCommands>
-    <excludedCommands>SortListDesc</excludedCommands>
+    <excludedCommands>Copy</excludedCommands>
     <excludedCommands>CopyToClipboard</excludedCommands>
-    <excludedCommands>SelectAll</excludedCommands>
+    <excludedCommands>Delete</excludedCommands>
     <excludedCommands>EndEdit</excludedCommands>
+    <excludedCommands>Find</excludedCommands>
+    <excludedCommands>FindByCurrentValue</excludedCommands>
+    <excludedCommands>MoveDown</excludedCommands>
     <excludedCommands>MoveUp</excludedCommands>
     <excludedCommands>OutputList</excludedCommands>
-    <excludedCommands>Add</excludedCommands>
-    <excludedCommands>Copy</excludedCommands>
+    <excludedCommands>SearchEverywhere</excludedCommands>
+    <excludedCommands>SearchHistory</excludedCommands>
+    <excludedCommands>SelectAll</excludedCommands>
+    <excludedCommands>ShowMultipleSelection</excludedCommands>
+    <excludedCommands>ShowRowRearrangement</excludedCommands>
+    <excludedCommands>SortListAsc</excludedCommands>
+    <excludedCommands>SortListDesc</excludedCommands>
     <items xsi:type="form:FormField">
       <name>HardwareListHardware</name>
       <id>14</id>

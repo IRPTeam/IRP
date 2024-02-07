@@ -11,22 +11,27 @@
 		<languageInfo>
 			<id>tr</id>
 			<code>Turkish</code>
+			<description/>
 		</languageInfo>
 		<languageInfo>
 			<id>ru</id>
 			<code>Russian</code>
+			<description/>
 		</languageInfo>
 		<languageInfo>
 			<id>fr</id>
 			<code>French</code>
+			<description/>
 		</languageInfo>
 		<languageInfo>
 			<id>de</id>
 			<code>German</code>
+			<description/>
 		</languageInfo>
 		<languageInfo>
 			<id>ha</id>
 			<code>HASH</code>
+			<description/>
 		</languageInfo>
 	</languageSettings>
 	<columns>

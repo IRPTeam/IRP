@@ -267,9 +267,9 @@
         <value>Value</value>
       </synonym>
       <type>
+        <types>Boolean</types>
         <types>String</types>
         <types>Date</types>
-        <types>Boolean</types>
         <types>Number</types>
         <numberQualifiers>
           <precision>15</precision>

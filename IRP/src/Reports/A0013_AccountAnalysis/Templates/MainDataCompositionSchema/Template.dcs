@@ -17,8 +17,6 @@
 				<dcscom:orderType>Asc</dcscom:orderType>
 				<dcscom:autoOrder>false</dcscom:autoOrder>
 			</orderExpression>
-			<appearance/>
-			<inputParameters/>
 		</field>
 		<field xsi:type="DataSetFieldField">
 			<dataPath>BalancedAccount</dataPath>
@@ -37,8 +35,6 @@
 				<dcscom:orderType>Asc</dcscom:orderType>
 				<dcscom:autoOrder>false</dcscom:autoOrder>
 			</orderExpression>
-			<appearance/>
-			<inputParameters/>
 		</field>
 		<field xsi:type="DataSetFieldField">
 			<dataPath>ExtDimension1</dataPath>
@@ -52,8 +48,6 @@
 			<role>
 				<dcscom:dimension>true</dcscom:dimension>
 			</role>
-			<appearance/>
-			<inputParameters/>
 		</field>
 		<field xsi:type="DataSetFieldField">
 			<dataPath>ExtDimension2</dataPath>
@@ -67,8 +61,6 @@
 			<role>
 				<dcscom:dimension>true</dcscom:dimension>
 			</role>
-			<appearance/>
-			<inputParameters/>
 		</field>
 		<field xsi:type="DataSetFieldField">
 			<dataPath>ExtDimension3</dataPath>
@@ -82,8 +74,6 @@
 			<role>
 				<dcscom:dimension>true</dcscom:dimension>
 			</role>
-			<appearance/>
-			<inputParameters/>
 		</field>
 		<field xsi:type="DataSetFieldField">
 			<dataPath>BalancedExtDimension1</dataPath>
@@ -97,8 +87,6 @@
 			<role>
 				<dcscom:dimension>true</dcscom:dimension>
 			</role>
-			<appearance/>
-			<inputParameters/>
 		</field>
 		<field xsi:type="DataSetFieldField">
 			<dataPath>BalancedExtDimension2</dataPath>
@@ -112,8 +100,6 @@
 			<role>
 				<dcscom:dimension>true</dcscom:dimension>
 			</role>
-			<appearance/>
-			<inputParameters/>
 		</field>
 		<field xsi:type="DataSetFieldField">
 			<dataPath>BalancedExtDimension3</dataPath>
@@ -127,8 +113,6 @@
 			<role>
 				<dcscom:dimension>true</dcscom:dimension>
 			</role>
-			<appearance/>
-			<inputParameters/>
 		</field>
 		<field xsi:type="DataSetFieldField">
 			<dataPath>AmountTurnoverDr</dataPath>
@@ -154,7 +138,6 @@
 					<dcscor:value xsi:type="xs:boolean">true</dcscor:value>
 				</dcscor:item>
 			</appearance>
-			<inputParameters/>
 		</field>
 		<field xsi:type="DataSetFieldField">
 			<dataPath>AmountTurnoverCr</dataPath>
@@ -180,7 +163,6 @@
 					<dcscor:value xsi:type="xs:boolean">true</dcscor:value>
 				</dcscor:item>
 			</appearance>
-			<inputParameters/>
 		</field>
 		<field xsi:type="DataSetFieldField">
 			<dataPath>QuantityTurnoverDr</dataPath>
@@ -206,7 +188,6 @@
 					<dcscor:value xsi:type="xs:boolean">true</dcscor:value>
 				</dcscor:item>
 			</appearance>
-			<inputParameters/>
 		</field>
 		<field xsi:type="DataSetFieldField">
 			<dataPath>QuantityTurnoverCr</dataPath>
@@ -232,7 +213,6 @@
 					<dcscor:value xsi:type="xs:boolean">true</dcscor:value>
 				</dcscor:item>
 			</appearance>
-			<inputParameters/>
 		</field>
 		<field xsi:type="DataSetFieldField">
 			<dataPath>CurrencyAmountTurnoverDr</dataPath>
@@ -258,7 +238,6 @@
 					<dcscor:value xsi:type="xs:boolean">true</dcscor:value>
 				</dcscor:item>
 			</appearance>
-			<inputParameters/>
 		</field>
 		<field xsi:type="DataSetFieldField">
 			<dataPath>CurrencyAmountTurnoverCr</dataPath>
@@ -284,7 +263,6 @@
 					<dcscor:value xsi:type="xs:boolean">true</dcscor:value>
 				</dcscor:item>
 			</appearance>
-			<inputParameters/>
 		</field>
 		<field xsi:type="DataSetFieldField">
 			<dataPath>Company</dataPath>
@@ -292,7 +270,6 @@
 			<role>
 				<dcscom:dimension>true</dcscom:dimension>
 			</role>
-			<appearance/>
 			<inputParameters>
 				<dcscor:item>
 					<dcscor:parameter>ChoiceParameters</dcscor:parameter>
@@ -311,8 +288,6 @@
 			<role>
 				<dcscom:dimension>true</dcscom:dimension>
 			</role>
-			<appearance/>
-			<inputParameters/>
 		</field>
 		<field xsi:type="DataSetFieldField">
 			<dataPath>Currency</dataPath>
@@ -320,8 +295,6 @@
 			<role>
 				<dcscom:dimension>true</dcscom:dimension>
 			</role>
-			<appearance/>
-			<inputParameters/>
 		</field>
 		<field xsi:type="DataSetFieldField">
 			<dataPath>CurrencyBalanced</dataPath>
@@ -329,8 +302,6 @@
 			<role>
 				<dcscom:dimension>true</dcscom:dimension>
 			</role>
-			<appearance/>
-			<inputParameters/>
 		</field>
 		<field xsi:type="DataSetFieldFolder">
 			<dataPath>Indicators</dataPath>
@@ -373,8 +344,6 @@ FROM
 				<v8:content>Indicator Amt</v8:content>
 			</v8:item>
 		</title>
-		<appearance/>
-		<inputParameters/>
 	</calculatedField>
 	<calculatedField>
 		<dataPath>Indicators.CurrencyAmount</dataPath>
@@ -385,8 +354,6 @@ FROM
 				<v8:content>Indicator Curr</v8:content>
 			</v8:item>
 		</title>
-		<appearance/>
-		<inputParameters/>
 	</calculatedField>
 	<calculatedField>
 		<dataPath>Indicators.Quantity</dataPath>
@@ -397,8 +364,6 @@ FROM
 				<v8:content>Indicator Qty</v8:content>
 			</v8:item>
 		</title>
-		<appearance/>
-		<inputParameters/>
 	</calculatedField>
 	<totalField>
 		<dataPath>AmountTurnoverDr</dataPath>
@@ -448,7 +413,6 @@ FROM
 		<useRestriction>true</useRestriction>
 		<expression>&amp;Period.StartDate</expression>
 		<availableAsField>false</availableAsField>
-		<inputParameters/>
 	</parameter>
 	<parameter>
 		<name>EndPeriod</name>
@@ -462,7 +426,6 @@ FROM
 		<useRestriction>true</useRestriction>
 		<expression>&amp;Period.EndDate</expression>
 		<availableAsField>false</availableAsField>
-		<inputParameters/>
 	</parameter>
 	<parameter>
 		<name>Period</name>
@@ -481,7 +444,6 @@ FROM
 			<v8:endDate>0001-01-01T00:00:00</v8:endDate>
 		</value>
 		<useRestriction>false</useRestriction>
-		<inputParameters/>
 	</parameter>
 	<settingsVariant>
 		<dcsset:name>AccountAnalisys</dcsset:name>
@@ -489,26 +451,6 @@ FROM
 			<v8:item>
 				<v8:lang>en</v8:lang>
 				<v8:content>Account analysis</v8:content>
-			</v8:item>
-			<v8:item>
-				<v8:lang>tr</v8:lang>
-				<v8:content>Default</v8:content>
-			</v8:item>
-			<v8:item>
-				<v8:lang>ru</v8:lang>
-				<v8:content>Default</v8:content>
-			</v8:item>
-			<v8:item>
-				<v8:lang>fr</v8:lang>
-				<v8:content>Default</v8:content>
-			</v8:item>
-			<v8:item>
-				<v8:lang>de</v8:lang>
-				<v8:content>Default</v8:content>
-			</v8:item>
-			<v8:item>
-				<v8:lang>ha</v8:lang>
-				<v8:content>Default</v8:content>
 			</v8:item>
 		</dcsset:presentation>
 		<dcsset:settings xmlns:style="http://v8.1c.ru/8.1/data/ui/style" xmlns:sys="http://v8.1c.ru/8.1/data/ui/fonts/system" xmlns:web="http://v8.1c.ru/8.1/data/ui/colors/web" xmlns:win="http://v8.1c.ru/8.1/data/ui/colors/windows">
@@ -741,7 +683,6 @@ FROM
 				<dcsset:selection>
 					<dcsset:item xsi:type="dcsset:SelectedItemAuto"/>
 				</dcsset:selection>
-				<dcsset:outputParameters/>
 			</dcsset:item>
 		</dcsset:settings>
 	</settingsVariant>

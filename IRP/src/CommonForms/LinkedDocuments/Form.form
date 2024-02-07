@@ -845,6 +845,10 @@
       <horizontalAlign>Left</horizontalAlign>
     </autoCommandBar>
     <handlers>
+      <event>Selection</event>
+      <name>DocumentsTreeSelection</name>
+    </handlers>
+    <handlers>
       <event>BeforeAddRow</event>
       <name>DocumentsTreeBeforeAddRow</name>
     </handlers>
@@ -855,10 +859,6 @@
     <handlers>
       <event>OnActivateRow</event>
       <name>DocumentsTreeOnActivateRow</name>
-    </handlers>
-    <handlers>
-      <event>Selection</event>
-      <name>DocumentsTreeSelection</name>
     </handlers>
     <searchStringAddition>
       <visible>true</visible>
@@ -1107,11 +1107,11 @@
       </title>
       <id>118</id>
       <valueType>
+        <types>DocumentRef.RetailShipmentConfirmation</types>
         <types>DocumentRef.ShipmentConfirmation</types>
         <types>DocumentRef.WorkSheet</types>
         <types>DocumentRef.GoodsReceipt</types>
         <types>DocumentRef.RetailGoodsReceipt</types>
-        <types>DocumentRef.RetailShipmentConfirmation</types>
       </valueType>
       <view>
         <common>true</common>

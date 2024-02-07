@@ -28,18 +28,9 @@
 							<v8:lang>en</v8:lang>
 							<v8:content>NFD=2</v8:content>
 						</v8:item>
-						<v8:item>
-							<v8:lang>ru</v8:lang>
-							<v8:content>NFD=2</v8:content>
-						</v8:item>
-						<v8:item>
-							<v8:lang>tr</v8:lang>
-							<v8:content>NFD=2</v8:content>
-						</v8:item>
 					</dcscor:value>
 				</dcscor:item>
 			</appearance>
-			<inputParameters/>
 		</field>
 		<field xsi:type="DataSetFieldField">
 			<dataPath>Company</dataPath>
@@ -55,8 +46,6 @@
 				<dcscom:ignoreNullValues>true</dcscom:ignoreNullValues>
 				<dcscom:required>true</dcscom:required>
 			</role>
-			<appearance/>
-			<inputParameters/>
 		</field>
 		<field xsi:type="DataSetFieldField">
 			<dataPath>CountDays</dataPath>
@@ -71,8 +60,6 @@
 				<condition>true</condition>
 				<order>true</order>
 			</useRestriction>
-			<appearance/>
-			<inputParameters/>
 		</field>
 		<field xsi:type="DataSetFieldField">
 			<dataPath>Partner</dataPath>
@@ -88,8 +75,6 @@
 				<dcscom:ignoreNullValues>true</dcscom:ignoreNullValues>
 				<dcscom:required>true</dcscom:required>
 			</role>
-			<appearance/>
-			<inputParameters/>
 		</field>
 		<field xsi:type="DataSetFieldField">
 			<dataPath>Amount</dataPath>
@@ -108,18 +93,9 @@
 							<v8:lang>en</v8:lang>
 							<v8:content>NFD=2</v8:content>
 						</v8:item>
-						<v8:item>
-							<v8:lang>ru</v8:lang>
-							<v8:content>NFD=2</v8:content>
-						</v8:item>
-						<v8:item>
-							<v8:lang>tr</v8:lang>
-							<v8:content>NFD=2</v8:content>
-						</v8:item>
 					</dcscor:value>
 				</dcscor:item>
 			</appearance>
-			<inputParameters/>
 		</field>
 		<field xsi:type="DataSetFieldField">
 			<dataPath>Agreement</dataPath>
@@ -135,8 +111,6 @@
 				<dcscom:ignoreNullValues>true</dcscom:ignoreNullValues>
 				<dcscom:required>true</dcscom:required>
 			</role>
-			<appearance/>
-			<inputParameters/>
 		</field>
 		<field xsi:type="DataSetFieldField">
 			<dataPath>CurrencyMovementType</dataPath>
@@ -153,8 +127,6 @@
 			<attributeUseRestriction>
 				<condition>true</condition>
 			</attributeUseRestriction>
-			<appearance/>
-			<inputParameters/>
 		</field>
 		<field xsi:type="DataSetFieldField">
 			<dataPath>PaymentTerm</dataPath>
@@ -170,8 +142,6 @@
 				<dcscom:ignoreNullValues>true</dcscom:ignoreNullValues>
 				<dcscom:required>true</dcscom:required>
 			</role>
-			<appearance/>
-			<inputParameters/>
 		</field>
 		<field xsi:type="DataSetFieldField">
 			<dataPath>Invoice</dataPath>
@@ -182,8 +152,6 @@
 					<v8:content>Invoice</v8:content>
 				</v8:item>
 			</title>
-			<appearance/>
-			<inputParameters/>
 		</field>
 		<field xsi:type="DataSetFieldField">
 			<dataPath>CreditLimit</dataPath>
@@ -207,18 +175,9 @@
 							<v8:lang>en</v8:lang>
 							<v8:content>NFD=2</v8:content>
 						</v8:item>
-						<v8:item>
-							<v8:lang>ru</v8:lang>
-							<v8:content>NFD=2</v8:content>
-						</v8:item>
-						<v8:item>
-							<v8:lang>tr</v8:lang>
-							<v8:content>NFD=2</v8:content>
-						</v8:item>
 					</dcscor:value>
 				</dcscor:item>
 			</appearance>
-			<inputParameters/>
 		</field>
 		<field xsi:type="DataSetFieldField">
 			<dataPath>TotalDue</dataPath>
@@ -237,18 +196,9 @@
 							<v8:lang>en</v8:lang>
 							<v8:content>NFD=2</v8:content>
 						</v8:item>
-						<v8:item>
-							<v8:lang>ru</v8:lang>
-							<v8:content>NFD=2</v8:content>
-						</v8:item>
-						<v8:item>
-							<v8:lang>tr</v8:lang>
-							<v8:content>NFD=2</v8:content>
-						</v8:item>
 					</dcscor:value>
 				</dcscor:item>
 			</appearance>
-			<inputParameters/>
 		</field>
 		<field xsi:type="DataSetFieldField">
 			<dataPath>Currency</dataPath>
@@ -264,8 +214,6 @@
 				<dcscom:ignoreNullValues>true</dcscom:ignoreNullValues>
 				<dcscom:required>true</dcscom:required>
 			</role>
-			<appearance/>
-			<inputParameters/>
 		</field>
 		<field xsi:type="DataSetFieldField">
 			<dataPath>PaymentDate</dataPath>
@@ -276,8 +224,6 @@
 					<v8:content>PaymentDate</v8:content>
 				</v8:item>
 			</title>
-			<appearance/>
-			<inputParameters/>
 		</field>
 		<field xsi:type="DataSetFieldField">
 			<dataPath>ExpirationDate</dataPath>
@@ -292,8 +238,6 @@
 				<dcscom:ignoreNullValues>true</dcscom:ignoreNullValues>
 				<dcscom:required>true</dcscom:required>
 			</role>
-			<appearance/>
-			<inputParameters/>
 		</field>
 		<field xsi:type="DataSetFieldField">
 			<dataPath>LegalName</dataPath>
@@ -304,8 +248,6 @@
 					<v8:content>LegalName</v8:content>
 				</v8:item>
 			</title>
-			<appearance/>
-			<inputParameters/>
 		</field>
 		<field xsi:type="DataSetFieldField">
 			<dataPath>AgingPeriodGroup</dataPath>
@@ -326,8 +268,6 @@
 				<dcscom:orderType>Asc</dcscom:orderType>
 				<dcscom:autoOrder>false</dcscom:autoOrder>
 			</orderExpression>
-			<appearance/>
-			<inputParameters/>
 		</field>
 		<field xsi:type="DataSetFieldField">
 			<dataPath>AgingPeriodType</dataPath>
@@ -343,8 +283,6 @@
 				<dcscom:ignoreNullValues>true</dcscom:ignoreNullValues>
 				<dcscom:required>true</dcscom:required>
 			</role>
-			<appearance/>
-			<inputParameters/>
 		</field>
 		<field xsi:type="DataSetFieldField">
 			<dataPath>TotalFuture</dataPath>
@@ -363,18 +301,9 @@
 							<v8:lang>en</v8:lang>
 							<v8:content>NFD=2</v8:content>
 						</v8:item>
-						<v8:item>
-							<v8:lang>ru</v8:lang>
-							<v8:content>NFD=2</v8:content>
-						</v8:item>
-						<v8:item>
-							<v8:lang>tr</v8:lang>
-							<v8:content>NFD=2</v8:content>
-						</v8:item>
 					</dcscor:value>
 				</dcscor:item>
 			</appearance>
-			<inputParameters/>
 		</field>
 		<field xsi:type="DataSetFieldField">
 			<dataPath>TotalOverdue</dataPath>
@@ -393,18 +322,9 @@
 							<v8:lang>en</v8:lang>
 							<v8:content>NFD=2</v8:content>
 						</v8:item>
-						<v8:item>
-							<v8:lang>ru</v8:lang>
-							<v8:content>NFD=2</v8:content>
-						</v8:item>
-						<v8:item>
-							<v8:lang>tr</v8:lang>
-							<v8:content>NFD=2</v8:content>
-						</v8:item>
 					</dcscor:value>
 				</dcscor:item>
 			</appearance>
-			<inputParameters/>
 		</field>
 		<field xsi:type="DataSetFieldField">
 			<dataPath>AgingPeriodSort</dataPath>
@@ -421,20 +341,14 @@
 				<group>true</group>
 				<order>true</order>
 			</useRestriction>
-			<appearance/>
-			<inputParameters/>
 		</field>
 		<field xsi:type="DataSetFieldField">
 			<dataPath>Branch</dataPath>
 			<field>Branch</field>
-			<appearance/>
-			<inputParameters/>
 		</field>
 		<field xsi:type="DataSetFieldField">
 			<dataPath>Basis</dataPath>
 			<field>Basis</field>
-			<appearance/>
-			<inputParameters/>
 		</field>
 		<field xsi:type="DataSetFieldField">
 			<dataPath>TransactionCurrency</dataPath>
@@ -682,18 +596,9 @@ FROM
 						<v8:lang>en</v8:lang>
 						<v8:content>NFD=2</v8:content>
 					</v8:item>
-					<v8:item>
-						<v8:lang>ru</v8:lang>
-						<v8:content>NFD=2</v8:content>
-					</v8:item>
-					<v8:item>
-						<v8:lang>tr</v8:lang>
-						<v8:content>NFD=2</v8:content>
-					</v8:item>
 				</dcscor:value>
 			</dcscor:item>
 		</appearance>
-		<inputParameters/>
 	</calculatedField>
 	<totalField>
 		<dataPath>Amount</dataPath>
@@ -716,7 +621,6 @@ FROM
 		<value xsi:nil="true"/>
 		<useRestriction>false</useRestriction>
 		<expression>EndOfPeriod(&amp;Period, "Day")</expression>
-		<inputParameters/>
 		<denyIncompleteValues>true</denyIncompleteValues>
 		<use>Always</use>
 	</parameter>
@@ -733,7 +637,6 @@ FROM
 		</valueType>
 		<value xsi:nil="true"/>
 		<useRestriction>false</useRestriction>
-		<inputParameters/>
 		<denyIncompleteValues>true</denyIncompleteValues>
 		<use>Always</use>
 	</parameter>
@@ -776,10 +679,6 @@ FROM
 							<v8:lang>en</v8:lang>
 							<v8:content>Period</v8:content>
 						</v8:item>
-						<v8:item>
-							<v8:lang>tr</v8:lang>
-							<v8:content>Период</v8:content>
-						</v8:item>
 					</dcsset:userSettingPresentation>
 				</dcscor:item>
 				<dcscor:item xsi:type="dcsset:SettingsParameterValue">
@@ -791,14 +690,6 @@ FROM
 						<v8:item>
 							<v8:lang>en</v8:lang>
 							<v8:content>Aging periods</v8:content>
-						</v8:item>
-						<v8:item>
-							<v8:lang>tr</v8:lang>
-							<v8:content>Yaşlandırma dönemleri</v8:content>
-						</v8:item>
-						<v8:item>
-							<v8:lang>ru</v8:lang>
-							<v8:content>Периоды рассрочки</v8:content>
 						</v8:item>
 					</dcsset:userSettingPresentation>
 				</dcscor:item>
@@ -910,7 +801,6 @@ FROM
 					<dcsset:selection>
 						<dcsset:item xsi:type="dcsset:SelectedItemAuto"/>
 					</dcsset:selection>
-					<dcsset:outputParameters/>
 					<dcsset:item>
 						<dcsset:groupItems>
 							<dcsset:item xsi:type="dcsset:GroupItemField">
@@ -924,7 +814,6 @@ FROM
 						<dcsset:selection>
 							<dcsset:item xsi:type="dcsset:SelectedItemAuto"/>
 						</dcsset:selection>
-						<dcsset:outputParameters/>
 					</dcsset:item>
 				</dcsset:column>
 				<dcsset:row>
@@ -943,7 +832,6 @@ FROM
 					<dcsset:selection>
 						<dcsset:item xsi:type="dcsset:SelectedItemAuto"/>
 					</dcsset:selection>
-					<dcsset:outputParameters/>
 					<dcsset:item>
 						<dcsset:groupItems>
 							<dcsset:item xsi:type="dcsset:GroupItemField">
@@ -960,7 +848,6 @@ FROM
 						<dcsset:selection>
 							<dcsset:item xsi:type="dcsset:SelectedItemAuto"/>
 						</dcsset:selection>
-						<dcsset:outputParameters/>
 						<dcsset:item>
 							<dcsset:groupItems>
 								<dcsset:item xsi:type="dcsset:GroupItemField">
@@ -1012,7 +899,6 @@ FROM
 							<dcsset:selection>
 								<dcsset:item xsi:type="dcsset:SelectedItemAuto"/>
 							</dcsset:selection>
-							<dcsset:outputParameters/>
 							<dcsset:item>
 								<dcsset:groupItems>
 									<dcsset:item xsi:type="dcsset:GroupItemField">
@@ -1043,12 +929,10 @@ FROM
 								<dcsset:selection>
 									<dcsset:item xsi:type="dcsset:SelectedItemAuto"/>
 								</dcsset:selection>
-								<dcsset:outputParameters/>
 							</dcsset:item>
 						</dcsset:item>
 					</dcsset:item>
 				</dcsset:row>
-				<dcsset:outputParameters/>
 			</dcsset:item>
 		</dcsset:settings>
 	</settingsVariant>

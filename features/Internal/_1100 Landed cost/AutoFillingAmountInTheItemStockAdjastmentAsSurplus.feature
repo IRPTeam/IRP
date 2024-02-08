@@ -271,7 +271,7 @@ Scenario: _062 check preparation
 Scenario: _063 filling landed cost in the Item stock adjastment as surplus by price type
 		And I close all	client application windows
 	* Open report
-		Given I open hyperlink "e1cib/app/Report.BatchBalance"	
+		Given I open hyperlink "e1cib/app/Report.R6020_BatchBalance"	
 		And I click "Select option..." button
 		And I move to "Custom" tab
 		And I activate field named "OptionsListReportOption" in "OptionsList" table
@@ -296,7 +296,7 @@ Scenario: _063 filling landed cost in the Item stock adjastment as surplus by pr
 Scenario: _064 filling landed cost in the Item stock adjastment as surplus from current period landed cost
 	And I close all	client application windows
 	* Open report
-		Given I open hyperlink "e1cib/app/Report.BatchBalance"	
+		Given I open hyperlink "e1cib/app/Report.R6020_BatchBalance"	
 		And I set checkbox named "SettingsComposerUserSettingsItem2Use"
 		And I click Choice button of the field named "SettingsComposerUserSettingsItem2Value"
 		And I go to line in "List" table
@@ -321,7 +321,7 @@ Scenario: _064 filling landed cost in the Item stock adjastment as surplus from 
 Scenario: _065 filling landed cost in the Item stock adjastment as surplus from previous period landed cost
 	And I close all	client application windows
 	* Open report
-		Given I open hyperlink "e1cib/app/Report.BatchBalance"	
+		Given I open hyperlink "e1cib/app/Report.R6020_BatchBalance"	
 		And I set checkbox named "SettingsComposerUserSettingsItem2Use"
 		And I click Choice button of the field named "SettingsComposerUserSettingsItem2Value"
 		And I go to line in "List" table

@@ -192,6 +192,9 @@
     <type>
       <types>EnumRef.EquipmentAPIModule</types>
     </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <fillValue xsi:type="core:UndefinedValue"/>
   </attributes>
   <attributes uuid="6b341bb3-ed70-477f-85f8-bf71ea5b2bed">
     <name>PrintCopyIfCutterNotFound</name>

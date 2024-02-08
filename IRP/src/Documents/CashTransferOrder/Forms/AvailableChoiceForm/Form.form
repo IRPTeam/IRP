@@ -890,7 +890,6 @@ where
             </content>
           </localValue>
         </title>
-        <valueType/>
         <useRestriction>true</useRestriction>
         <valueListAllowed>true</valueListAllowed>
       </parameters>
@@ -904,7 +903,6 @@ where
             </content>
           </localValue>
         </title>
-        <valueType/>
         <useRestriction>true</useRestriction>
         <valueListAllowed>true</valueListAllowed>
       </parameters>
@@ -918,7 +916,7 @@ where
             </content>
           </localValue>
         </title>
-        <valueType/>
+        <values xsi:type="core:UndefinedValue"/>
         <useRestriction>true</useRestriction>
       </parameters>
     </extInfo>

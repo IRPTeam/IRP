@@ -12,16 +12,16 @@
       <segments>SalesOrders</segments>
     </dataPath>
     <titleLocation>None</titleLocation>
-    <excludedCommands>OutputList</excludedCommands>
-    <excludedCommands>Create</excludedCommands>
-    <excludedCommands>Copy</excludedCommands>
     <excludedCommands>Change</excludedCommands>
-    <excludedCommands>SetDeletionMark</excludedCommands>
-    <excludedCommands>Delete</excludedCommands>
-    <excludedCommands>Post</excludedCommands>
-    <excludedCommands>UndoPosting</excludedCommands>
-    <excludedCommands>CopyToClipboard</excludedCommands>
     <excludedCommands>ChangeHistory</excludedCommands>
+    <excludedCommands>Copy</excludedCommands>
+    <excludedCommands>CopyToClipboard</excludedCommands>
+    <excludedCommands>Create</excludedCommands>
+    <excludedCommands>Delete</excludedCommands>
+    <excludedCommands>OutputList</excludedCommands>
+    <excludedCommands>Post</excludedCommands>
+    <excludedCommands>SetDeletionMark</excludedCommands>
+    <excludedCommands>UndoPosting</excludedCommands>
     <items xsi:type="form:FormField">
       <name>SalesOrdersDefaultPicture</name>
       <id>45</id>
@@ -644,14 +644,14 @@
       <segments>RetailShipmentConfirmation</segments>
     </dataPath>
     <titleLocation>None</titleLocation>
-    <excludedCommands>Create</excludedCommands>
-    <excludedCommands>Copy</excludedCommands>
     <excludedCommands>Change</excludedCommands>
-    <excludedCommands>SetDeletionMark</excludedCommands>
+    <excludedCommands>Copy</excludedCommands>
+    <excludedCommands>CopyToClipboard</excludedCommands>
+    <excludedCommands>Create</excludedCommands>
     <excludedCommands>Delete</excludedCommands>
     <excludedCommands>Post</excludedCommands>
+    <excludedCommands>SetDeletionMark</excludedCommands>
     <excludedCommands>UndoPosting</excludedCommands>
-    <excludedCommands>CopyToClipboard</excludedCommands>
     <items xsi:type="form:FormField">
       <name>RetailShipmentConfirmationDefaultPicture</name>
       <id>119</id>
@@ -1272,7 +1272,6 @@
     <notDefaultUseAlwaysAttributes xsi:type="form:DataPath">
       <segments>SalesOrders.Ref</segments>
     </notDefaultUseAlwaysAttributes>
-    <savedData>true</savedData>
     <extInfo xsi:type="form:DynamicListExtInfo">
       <queryText>SELECT ALLOWED DISTINCT
 	R2012B_SalesOrdersInvoiceClosingBalance.Order
@@ -1488,6 +1487,7 @@ WHERE
           <types>Date</types>
           <dateQualifiers/>
         </valueType>
+        <values xsi:type="core:UndefinedValue"/>
       </parameters>
     </extInfo>
   </attributes>
@@ -1691,6 +1691,7 @@ WHERE
           <types>Date</types>
           <dateQualifiers/>
         </valueType>
+        <values xsi:type="core:UndefinedValue"/>
       </parameters>
       <parameters>
         <name>EndOfPeriod</name>
@@ -1706,6 +1707,7 @@ WHERE
           <types>Date</types>
           <dateQualifiers/>
         </valueType>
+        <values xsi:type="core:UndefinedValue"/>
       </parameters>
     </extInfo>
   </attributes>

@@ -15344,7 +15344,7 @@ Procedure ExecuteViewNotify(Parameters, ViewNotify)
 	ElsIf ViewNotify = "OnSetReceivePartnerNotify"                   Then ViewClient_V2.OnSetReceivePartnerNotify(Parameters);
 	ElsIf ViewNotify = "OnSetReceiveLegalNameNotify"                 Then ViewClient_V2.OnSetReceiveLegalNameNotify(Parameters);
 	ElsIf ViewNotify = "OnSetReceiveAgreementNotify"                 Then ViewClient_V2.OnSetReceiveAgreementNotify(Parameters);
-	ElsIf ViewNotify = "OnSetSentDebtTypeNotify"                     Then ViewClient_V2.OnSetSendDebtTypeNotify(Parameters);
+	ElsIf ViewNotify = "OnSetSendDebtTypeNotify"                     Then ViewClient_V2.OnSetSendDebtTypeNotify(Parameters);
 	ElsIf ViewNotify = "OnSetReceiveDebtTypeNotify"                  Then ViewClient_V2.OnSetReceiveDebtTypeNotify(Parameters);
 	
 	Else

@@ -542,6 +542,37 @@
     <items xsi:type="form:FormGroup">
       <name>GroupDebitCreditNote</name>
       <id>42</id>
+      <items xsi:type="form:Button">
+        <name>EditCurrencies</name>
+        <id>564</id>
+        <visible>true</visible>
+        <enabled>true</enabled>
+        <userVisible>
+          <common>true</common>
+        </userVisible>
+        <extendedTooltip>
+          <name>EditCurrenciesExtendedTooltip</name>
+          <id>565</id>
+          <visible>true</visible>
+          <enabled>true</enabled>
+          <userVisible>
+            <common>true</common>
+          </userVisible>
+          <type>Label</type>
+          <autoMaxWidth>true</autoMaxWidth>
+          <autoMaxHeight>true</autoMaxHeight>
+          <extInfo xsi:type="form:LabelDecorationExtInfo">
+            <horizontalAlign>Left</horizontalAlign>
+          </extInfo>
+        </extendedTooltip>
+        <type>UsualButton</type>
+        <commandName>Form.Command.EditCurrencies</commandName>
+        <representation>Auto</representation>
+        <autoMaxWidth>true</autoMaxWidth>
+        <autoMaxHeight>true</autoMaxHeight>
+        <placementArea>UserCmds</placementArea>
+        <representationInContextMenu>Auto</representationInContextMenu>
+      </items>
       <items xsi:type="form:FormGroup">
         <name>GroupInfoTitle</name>
         <id>31</id>
@@ -2315,6 +2346,27 @@
         <name>ShowHiddenTables</name>
       </handler>
     </action>
+    <currentRowUse>Auto</currentRowUse>
+  </formCommands>
+  <formCommands>
+    <name>EditCurrencies</name>
+    <title>
+      <key>en</key>
+      <value>Edit currencies</value>
+    </title>
+    <id>5</id>
+    <use>
+      <common>true</common>
+    </use>
+    <picture xsi:type="core:PictureRef">
+      <picture>CommonPicture.EditCurrencies</picture>
+    </picture>
+    <action xsi:type="form:FormCommandHandlerContainer">
+      <handler>
+        <name>EditCurrencies</name>
+      </handler>
+    </action>
+    <representation>Picture</representation>
     <currentRowUse>Auto</currentRowUse>
   </formCommands>
   <commandInterface>

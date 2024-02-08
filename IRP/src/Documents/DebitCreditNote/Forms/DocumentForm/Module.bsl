@@ -53,6 +53,8 @@ Procedure SetVisibilityAvailability(Object, Form)
 	Form.Items.SendLegalName.Enabled    = ValueIsFilled(Object.SendPartner);
 	Form.Items.ReceiveLegalName.Enabled = ValueIsFilled(Object.ReceivePartner);
 	
+	Form.Items.EditCurrencies.Enabled = Not Form.ReadOnly;
+	
 	IsEnabled_SendBasisDocument = True;
 	If Object.SendDebtType = PredefinedValue("Enum.DebtTypes.AdvanceCustomer")
 		Or Object.SendDebtType = PredefinedValue("Enum.DebtTypes.AdvanceVendor") Then
@@ -341,6 +343,16 @@ EndProcedure
 &AtClient
 Procedure ShowHiddenTables(Command)
 	DocumentsClient.ShowHiddenTables(Object, ThisObject);
+EndProcedure
+
+&AtClient
+Procedure EditCurrencies(Command)
+	FormParameters = CurrenciesClientServer.GetParameters_V7(Object, "", Object.Currency, Object.Amount);
+	NotifyParameters = New Structure();
+	NotifyParameters.Insert("Object", Object);
+	NotifyParameters.Insert("Form"  , ThisObject);
+	Notify = New NotifyDescription("EditCurrenciesContinue", CurrenciesClient, NotifyParameters);
+	OpenForm("CommonForm.EditCurrencies", FormParameters, , , , , Notify, FormWindowOpeningMode.LockOwnerWindow);
 EndProcedure
 
 #EndRegion

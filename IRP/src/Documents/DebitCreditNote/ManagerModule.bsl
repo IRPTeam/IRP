@@ -92,6 +92,7 @@ Function GetQueryTextsMasterTables()
 	QueryArray.Add(R2020B_AdvancesFromCustomers());
 	QueryArray.Add(T2015S_TransactionsInfo());
 	QueryArray.Add(R1021B_VendorsTransactions());
+	QueryArray.Add(R2021B_CustomersTransactions());
 	QueryArray.Add(R5011B_CustomersAging());
 	QueryArray.Add(R5012B_VendorsAging());
 	Return QueryArray;

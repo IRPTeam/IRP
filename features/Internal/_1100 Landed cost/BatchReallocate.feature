@@ -244,13 +244,13 @@ Scenario: _0054 check batch realocate with return (batch StockAdjustmentAsSurplu
 		And I move to "Custom" tab
 		And I activate field named "OptionsListReportOption" in "OptionsList" table
 		And I select current line in "OptionsList" table
-		Then "Batch balance (Test landed cost)" window is opened
+		Then "R6020 Batch balance (Test landed cost)" window is opened
 		And I click Choice button of the field named "SettingsComposerUserSettingsItem0Value"
 		Then "Select period" window is opened
 		And I input "19.05.2023" text in the field named "DateBegin"
 		And I input "19.05.2023" text in the field named "DateEnd"
 		And I click the button named "Select"
-		Then "Batch balance (Test landed cost)" window is opened
+		Then "R6020 Batch balance (Test landed cost)" window is opened
 		And I click "Generate" button
 		Given "Result" spreadsheet document is equal to "BatchReallocate2"
 		And I close all client application windows 		

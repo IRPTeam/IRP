@@ -1,4 +1,4 @@
-#language: en
+﻿#language: en
 @tree
 @Positive
 @Test
@@ -257,12 +257,6 @@ Scenario: Open object form "R3035T_CashPlanning"
 	And I close current window
 
 
-
-
-	
-
-
-
 Scenario: Open object form "PriceInfo"
 
 	Given I open "PriceInfo" report default form
@@ -278,11 +272,33 @@ Scenario: Open object form "PrintLabels"
 		Then I raise "Failed to open data processor form PrintLabels" exception
 	And I close current window
 
+Scenario: Open object form "AccountAnalysis"
 
+	Given I open "AccountAnalysis" report default form
+	If the warning is displayed then
+		Then I raise "Failed to open report form AccountAnalysis" exception
+	And I close current window
 
+Scenario: Open object form "AccountCard"
 
+	Given I open "AccountCard" report default form
+	If the warning is displayed then
+		Then I raise "Failed to open report form AccountCard" exception
+	And I close current window
 
+Scenario: Open object form "TrialBalance"
 
+	Given I open "TrialBalance" report default form
+	If the warning is displayed then
+		Then I raise "Failed to open report form TrialBalance" exception
+	And I close current window
+
+Scenario: Open object form "TrialBalanceByAccount"
+
+	Given I open "TrialBalanceByAccount" report default form
+	If the warning is displayed then
+		Then I raise "Failed to open report form TrialBalanceByAccount" exception
+	And I close current window
 
 Scenario: Open object form "PointOfSale"
 

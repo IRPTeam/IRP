@@ -1142,6 +1142,34 @@ Scenario: _200001 customize the CI user settings
 			| 'Description'     |
 			| 'Front office'    |
 		And I select current line in "List" table
+	* Fill in custom settings for Debit/Credit note
+		And I go to line in "MetadataTree" table
+			| 'Group name'           |
+			| 'Debit/Credit note'    |
+		And I activate "Group name" field in "MetadataTree" table
+		And I go to line in "MetadataTree" table
+			| 'Group name'   | 'Use'    |
+			| 'Company'      | 'No'     |
+		And I select current line in "MetadataTree" table
+		And I activate "Value" field in "MetadataTree" table
+		And I select current line in "MetadataTree" table
+		And I click choice button of "Value" attribute in "MetadataTree" table
+		And I go to line in "List" table
+			| 'Description'     |
+			| 'Main Company'    |
+		And I select current line in "List" table
+		And I finish line editing in "MetadataTree" table
+		And I go to line in "MetadataTree" table
+			| 'Group name'   | 'Use'    |
+			| 'Branch'       | 'No'     |
+		And I activate "Group name" field in "MetadataTree" table
+		And I activate "Value" field in "MetadataTree" table
+		And I select current line in "MetadataTree" table
+		And I click choice button of "Value" attribute in "MetadataTree" table
+		And I go to line in "List" table
+			| 'Description'     |
+			| 'Front office'    |
+		And I select current line in "List" table
 	* Fill in custom settings for Time sheet
 		And I go to line in "MetadataTree" table
 			| 'Group name'           |
@@ -1770,6 +1798,14 @@ Scenario: _2000456 check filling in field from custom user settings in Payroll
 
 Scenario: _2000457 check filling in field from custom user settings in TimeSheet
 	Given I open hyperlink "e1cib/list/Document.TimeSheet"
+	And I click the button named "FormCreate"
+	* Check that fields are filled in from user settings
+		Then the form attribute named "Branch" became equal to "Front office"
+		Then the form attribute named "Company" became equal to "Main Company"
+	And I close all client application windows
+
+Scenario: _2000458 check filling in field from custom user settings in DebitCreditNote
+	Given I open hyperlink "e1cib/list/Document.DebitCreditNote"
 	And I click the button named "FormCreate"
 	* Check that fields are filled in from user settings
 		Then the form attribute named "Branch" became equal to "Front office"

@@ -196,7 +196,6 @@ Function GetObjectMetadataInfo(Val Object, ArrayOfTableNames) Export
 	
 	AllSubordinateTables = New Array();
 	AllSubordinateTables.Add("Materials");
-	AllSubordinateTables.Add("OffsetOfAdvancesPayments");
 	
 	ArrayOfSubordinateTables = New Array();
 	For Each TableName In AllSubordinateTables Do

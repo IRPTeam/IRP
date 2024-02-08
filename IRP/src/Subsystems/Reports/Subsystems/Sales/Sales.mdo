@@ -8,5 +8,8 @@
   <includeHelpInContents>true</includeHelpInContents>
   <includeInCommandInterface>true</includeInCommandInterface>
   <content>Report.D2001_Sales</content>
+  <content>Report.R2001_Sales</content>
+  <content>Report.R1100_CustomersAging</content>
+  <content>Report.A1010_PartnersBalance</content>
   <parentSubsystem>Subsystem.Reports</parentSubsystem>
 </mdclass:Subsystem>

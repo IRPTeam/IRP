@@ -10,7 +10,6 @@
 			<item xsi:type="FilterItemComparison">
 				<left xsi:type="dcscor:Field">Payments.Hardware</left>
 				<comparisonType>Filled</comparisonType>
-				<right xsi:nil="true"/>
 			</item>
 		</filter>
 		<appearance>

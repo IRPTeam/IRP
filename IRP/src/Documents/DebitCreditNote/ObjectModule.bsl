@@ -33,13 +33,5 @@ Procedure FillCheckProcessing(Cancel, CheckedAttributes)
 EndProcedure
 
 Procedure Filling(FillingData, FillingText, StandardProcessing)
-	If FillingData = Undefined Then
-		FillingData = New Structure();
-		FillingData.Insert("TransactionType", Enums.DebitCreditNoteTransactionTpes.OffsetOfAdvances);
-		FillPropertyValues(ThisObject, FillingData);
-		ControllerClientServer_V2.SetReadOnlyProperties(ThisObject, FillingData);
-	ElsIf TypeOf(FillingData) = Type("Structure") And FillingData.Property("BasedOn") Then
-		// staddard filling
-		Return;
-	EndIf;
+	Return;
 EndProcedure

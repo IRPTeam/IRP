@@ -66,11 +66,6 @@
 		</filter>
 		<appearance>
 			<dcscor:item xsi:type="SettingsParameterValue">
-				<dcscor:use>false</dcscor:use>
-				<dcscor:parameter>BackColor</dcscor:parameter>
-				<dcscor:value xsi:type="v8ui:Color">#000000</dcscor:value>
-			</dcscor:item>
-			<dcscor:item xsi:type="SettingsParameterValue">
 				<dcscor:parameter>TextColor</dcscor:parameter>
 				<dcscor:value xsi:type="v8ui:Color">#339966</dcscor:value>
 			</dcscor:item>

@@ -497,7 +497,8 @@ Function ItemList()
 		   |	PurchaseInvoiceItemList.IsAdditionalItemCost,
 		   |	PurchaseInvoiceItemList.Ref.TransactionType = value(Enum.PurchaseTransactionTypes.Purchase) AS IsPurchase,
 		   |	PurchaseInvoiceItemList.Ref.TransactionType = value(Enum.PurchaseTransactionTypes.ReceiptFromConsignor) AS IsReceiptFromConsignor,
-		   |	PurchaseInvoiceItemList.VatRate AS VatRate
+		   |	PurchaseInvoiceItemList.VatRate AS VatRate,
+		   |	PurchaseInvoiceItemList.Project AS Project
 		   |INTO ItemList
 		   |FROM
 		   |	Document.PurchaseInvoice.ItemList AS PurchaseInvoiceItemList
@@ -763,126 +764,15 @@ Function R1012B_PurchaseOrdersInvoiceClosing()
 EndFunction
 
 Function R1020B_AdvancesToVendors()
-	Return 
-		"SELECT
-		|	VALUE(AccumulationRecordType.Expense) AS RecordType,
-		|	OffsetOfAdvances.Period,
-		|	OffsetOfAdvances.Recorder AS VendorsAdvancesClosing,
-		|	OffsetOfAdvances.AdvancesOrder AS Order,
-		|	OffsetOfAdvances.Company,
-		|	OffsetOfAdvances.Branch,
-		|	OffsetOfAdvances.Currency,
-		|	OffsetOfAdvances.LegalName,
-		|	OffsetOfAdvances.Partner,
-		|	OffsetOfAdvances.AdvanceAgreement AS Agreement,
-		|	OffsetOfAdvances.AdvanceDocument AS Basis,
-		|	OffsetOfAdvances.Amount
-		|INTO R1020B_AdvancesToVendors
-		|FROM
-		|	InformationRegister.T2010S_OffsetOfAdvances AS OffsetOfAdvances
-		|WHERE
-		|	OffsetOfAdvances.Document = &Ref";
+	Return AccumulationRegisters.R1020B_AdvancesToVendors.R1020B_AdvancesToVendors_PI_PR_POC_SRTC();
 EndFunction
 
 Function R1021B_VendorsTransactions()
-	Return "SELECT
-		   |	VALUE(AccumulationRecordType.Receipt) AS RecordType,
-		   |	ItemList.Period,
-		   |	ItemList.Company,
-		   |	ItemList.Branch,
-		   |	ItemList.Currency,
-		   |	ItemList.LegalName,
-		   |	ItemList.Partner,
-		   |	ItemList.Agreement,
-		   |	ItemList.BasisDocument AS Basis,
-		   |	ItemList.PurchaseOrder AS Order,
-		   |	SUM(ItemList.Amount) AS Amount,
-		   |	UNDEFINED AS VendorsAdvancesClosing
-		   |INTO R1021B_VendorsTransactions
-		   |FROM
-		   |	ItemList AS ItemList
-		   |WHERE
-		   |	ItemList.IsPurchase
-		   |GROUP BY
-		   |	ItemList.Agreement,
-		   |	ItemList.BasisDocument,
-		   |	ItemList.PurchaseOrder,
-		   |	ItemList.Company,
-		   |	ItemList.Branch,
-		   |	ItemList.Currency,
-		   |	ItemList.LegalName,
-		   |	ItemList.Partner,
-		   |	ItemList.Period,
-		   |	VALUE(AccumulationRecordType.Receipt)
-		   |
-		   |UNION ALL
-		   |
-		   |SELECT
-		   |	VALUE(AccumulationRecordType.Expense) AS RecordType,
-		   |	OffsetOfAdvances.Period,
-		   |	OffsetOfAdvances.Company,
-		   |	OffsetOfAdvances.Branch,
-		   |	OffsetOfAdvances.Currency,
-		   |	OffsetOfAdvances.LegalName,
-		   |	OffsetOfAdvances.Partner,
-		   |	OffsetOfAdvances.TransactionAgreement,
-		   |	OffsetOfAdvances.TransactionDocument,
-		   |	OffsetOfAdvances.TransactionOrder,
-		   |	OffsetOfAdvances.Amount,
-		   |	OffsetOfAdvances.Recorder
-		   |FROM
-		   |	InformationRegister.T2010S_OffsetOfAdvances AS OffsetOfAdvances
-		   |WHERE
-		   |	OffsetOfAdvances.Document = &Ref";
+	Return AccumulationRegisters.R1021B_VendorsTransactions.R1021B_VendorsTransactions_PI_SRTC();
 EndFunction
 
 Function R5012B_VendorsAging()
-	Return "SELECT
-		   |	VALUE(AccumulationRecordType.Receipt) AS RecordType,
-		   |	PaymentTerms.Ref.Date AS Period,
-		   |	PaymentTerms.Ref.Company AS Company,
-		   |	PaymentTerms.Ref.Branch AS Branch,
-		   |	PaymentTerms.Ref.Currency AS Currency,
-		   |	PaymentTerms.Ref.Agreement AS Agreement,
-		   |	PaymentTerms.Ref.Partner AS Partner,
-		   |	PaymentTerms.Ref AS Invoice,
-		   |	PaymentTerms.Date AS PaymentDate,
-		   |	SUM(PaymentTerms.Amount) AS Amount,
-		   |	UNDEFINED AS AgingClosing
-		   |INTO R5012B_VendorsAging
-		   |FROM
-		   |	Document.PurchaseInvoice.PaymentTerms AS PaymentTerms
-		   |WHERE
-		   |	PaymentTerms.Ref = &Ref
-		   |GROUP BY
-		   |	PaymentTerms.Date,
-		   |	PaymentTerms.Ref,
-		   |	PaymentTerms.Ref.Agreement,
-		   |	PaymentTerms.Ref.Company,
-		   |	PaymentTerms.Ref.Branch,
-		   |	PaymentTerms.Ref.Currency,
-		   |	PaymentTerms.Ref.Date,
-		   |	PaymentTerms.Ref.Partner,
-		   |	VALUE(AccumulationRecordType.Receipt)
-		   |
-		   |UNION ALL
-		   |
-		   |SELECT
-		   |	VALUE(AccumulationRecordType.Expense),
-		   |	OffsetOfAging.Period,
-		   |	OffsetOfAging.Company,
-		   |	OffsetOfAging.Branch,
-		   |	OffsetOfAging.Currency,
-		   |	OffsetOfAging.Agreement,
-		   |	OffsetOfAging.Partner,
-		   |	OffsetOfAging.Invoice,
-		   |	OffsetOfAging.PaymentDate,
-		   |	OffsetOfAging.Amount,
-		   |	OffsetOfAging.Recorder
-		   |FROM
-		   |	InformationRegister.T2013S_OffsetOfAging AS OffsetOfAging
-		   |WHERE
-		   |	OffsetOfAging.Document = &Ref";
+	Return AccumulationRegisters.R5012B_VendorsAging.R5012B_VendorsAging_PI();
 EndFunction
 
 Function R1031B_ReceiptInvoicing()
@@ -1241,35 +1131,8 @@ Function T3010S_RowIDInfo()
 		   |		AND RowIDInfo.Ref = ItemList.Ref";
 EndFunction
 
-Function T2015S_TransactionsInfo()
-	Return "SELECT
-		   |	ItemList.Period AS Date,
-		   |	ItemList.Company,
-		   |	ItemList.Branch,
-		   |	ItemList.Currency,
-		   |	ItemList.Partner,
-		   |	ItemList.LegalName,
-		   |	ItemList.Agreement,
-		   |	ItemList.PurchaseOrder AS Order,
-		   |	TRUE AS IsVendorTransaction,
-		   |	ItemList.BasisDocument AS TransactionBasis,
-		   |	SUM(ItemList.Amount) AS Amount,
-		   |	TRUE AS IsDue
-		   |INTO T2015S_TransactionsInfo
-		   |FROM
-		   |	ItemList AS ItemList
-		   |WHERE
-		   |	ItemList.IsPurchase
-		   |GROUP BY
-		   |	ItemList.Period,
-		   |	ItemList.Company,
-		   |	ItemList.Branch,
-		   |	ItemList.Currency,
-		   |	ItemList.Partner,
-		   |	ItemList.LegalName,
-		   |	ItemList.Agreement,
-		   |	ItemList.PurchaseOrder,
-		   |	ItemList.BasisDocument";
+Function T2015S_TransactionsInfo() 
+	Return InformationRegisters.T2015S_TransactionsInfo.T2015S_TransactionsInfo_PI_SRTC();
 EndFunction
 
 Function R6070T_OtherPeriodsExpenses()

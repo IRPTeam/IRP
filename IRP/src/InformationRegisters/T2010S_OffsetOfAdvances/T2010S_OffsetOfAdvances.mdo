@@ -105,6 +105,22 @@
     <fillValue xsi:type="core:UndefinedValue"/>
     <mainFilter>true</mainFilter>
   </dimensions>
+  <dimensions uuid="a2c43a1b-d729-497c-80b5-d24ddf61d4e5">
+    <name>RecordType</name>
+    <synonym>
+      <key>en</key>
+      <value>Record type</value>
+    </synonym>
+    <type>
+      <types>EnumRef.RecordType</types>
+    </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <fullTextSearch>Use</fullTextSearch>
+    <dataHistory>Use</dataHistory>
+    <fillValue xsi:type="core:UndefinedValue"/>
+    <mainFilter>true</mainFilter>
+  </dimensions>
   <dimensions uuid="8c64cfa4-a87d-4cb0-8913-555b5938bf0a">
     <name>IsAdvanceRelease</name>
     <synonym>
@@ -244,10 +260,10 @@
     <mainFilter>true</mainFilter>
   </dimensions>
   <dimensions uuid="a2bfbce7-ecf9-4b04-b09b-e785b4bbb9b9">
-    <name>AdvancesOrder</name>
+    <name>AdvanceOrder</name>
     <synonym>
       <key>en</key>
-      <value>Advances order</value>
+      <value>Advance order</value>
     </synonym>
     <type>
       <types>DocumentRef.PurchaseOrder</types>
@@ -342,35 +358,36 @@
     <fillValue xsi:type="core:UndefinedValue"/>
     <mainFilter>true</mainFilter>
   </dimensions>
-  <dimensions uuid="0ab99b5f-1d3e-42c4-bcae-17d1e0229f9b">
-    <name>AdvanceDocument</name>
+  <dimensions uuid="df4370ee-3d7e-45a2-b2d2-0beb41930287">
+    <name>AdvanceProject</name>
     <synonym>
       <key>en</key>
-      <value>Advance document</value>
+      <value>Advance project</value>
     </synonym>
     <type>
-      <types>DocumentRef.PurchaseReturn</types>
-      <types>DocumentRef.CreditNote</types>
-      <types>DocumentRef.DebitNote</types>
-      <types>DocumentRef.CashPayment</types>
-      <types>DocumentRef.CashReceipt</types>
-      <types>DocumentRef.BankPayment</types>
-      <types>DocumentRef.BankReceipt</types>
-      <types>DocumentRef.PurchaseInvoice</types>
-      <types>DocumentRef.PurchaseOrderClosing</types>
-      <types>DocumentRef.SalesReportToConsignor</types>
-      <types>DocumentRef.ChequeBondTransactionItem</types>
-      <types>DocumentRef.ForeignCurrencyRevaluation</types>
-      <types>DocumentRef.OpeningEntry</types>
-      <types>DocumentRef.EmployeeCashAdvance</types>
-      <types>DocumentRef.SalesReportFromTradeAgent</types>
-      <types>DocumentRef.SalesReturn</types>
-      <types>DocumentRef.SalesInvoice</types>
-      <types>DocumentRef.SalesOrderClosing</types>
+      <types>CatalogRef.Projects</types>
     </type>
     <minValue xsi:type="core:UndefinedValue"/>
     <maxValue xsi:type="core:UndefinedValue"/>
     <fullTextSearch>Use</fullTextSearch>
+    <dataHistory>Use</dataHistory>
     <fillValue xsi:type="core:UndefinedValue"/>
+    <mainFilter>true</mainFilter>
+  </dimensions>
+  <dimensions uuid="128730b9-72b0-453c-8786-9cf858ea33ea">
+    <name>TransactionProject</name>
+    <synonym>
+      <key>en</key>
+      <value>Transaction project</value>
+    </synonym>
+    <type>
+      <types>CatalogRef.Projects</types>
+    </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <fullTextSearch>Use</fullTextSearch>
+    <dataHistory>Use</dataHistory>
+    <fillValue xsi:type="core:UndefinedValue"/>
+    <mainFilter>true</mainFilter>
   </dimensions>
 </mdclass:InformationRegister>

@@ -82,15 +82,15 @@
   <registerRecords>InformationRegister.T6020S_BatchKeysInfo</registerRecords>
   <registerRecords>AccumulationRegister.R6060T_CostOfGoodsSold</registerRecords>
   <registerRecords>AccumulationRegister.R5010B_ReconciliationStatement</registerRecords>
+  <registerRecords>AccumulationRegister.R4010B_ActualStocks</registerRecords>
   <registerRecords>AccumulationRegister.R4050B_StockInventory</registerRecords>
+  <registerRecords>AccumulationRegister.R9010B_SourceOfOriginStock</registerRecords>
   <registerRecords>AccumulationRegister.R2001T_Sales</registerRecords>
   <registerRecords>AccumulationRegister.R2021B_CustomersTransactions</registerRecords>
   <registerRecords>AccumulationRegister.R2020B_AdvancesFromCustomers</registerRecords>
   <registerRecords>AccumulationRegister.R5021T_Revenues</registerRecords>
   <registerRecords>AccumulationRegister.R2040B_TaxesIncoming</registerRecords>
   <registerRecords>AccumulationRegister.R6020B_BatchBalance</registerRecords>
-  <registerRecords>AccumulationRegister.R4010B_ActualStocks</registerRecords>
-  <registerRecords>AccumulationRegister.R9010B_SourceOfOriginStock</registerRecords>
   <postInPrivilegedMode>true</postInPrivilegedMode>
   <unpostInPrivilegedMode>true</unpostInPrivilegedMode>
   <choiceHistoryOnInput>DontUse</choiceHistoryOnInput>
@@ -599,6 +599,20 @@
       </synonym>
       <type>
         <types>CatalogRef.TaxRates</types>
+      </type>
+      <minValue xsi:type="core:UndefinedValue"/>
+      <maxValue xsi:type="core:UndefinedValue"/>
+      <dataHistory>Use</dataHistory>
+      <fullTextSearch>Use</fullTextSearch>
+    </attributes>
+    <attributes uuid="22f08d9e-f46a-445f-8434-572bc9580e46">
+      <name>Project</name>
+      <synonym>
+        <key>en</key>
+        <value>Project</value>
+      </synonym>
+      <type>
+        <types>CatalogRef.Projects</types>
       </type>
       <minValue xsi:type="core:UndefinedValue"/>
       <maxValue xsi:type="core:UndefinedValue"/>

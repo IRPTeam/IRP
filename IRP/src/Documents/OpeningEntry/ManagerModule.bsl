@@ -329,7 +329,8 @@ Function AdvancesToVendors()
 		|	end AS Agreement,
 		|	OpeningEntryAdvanceToSuppliers.Amount AS Amount,
 		|	OpeningEntryAdvanceToSuppliers.Ref.Date AS Period,
-		|	OpeningEntryAdvanceToSuppliers.Key
+		|	OpeningEntryAdvanceToSuppliers.Key,
+		|	OpeningEntryAdvanceToSuppliers.Project
 		|INTO AdvancesToVendors
 		|FROM
 		|	Document.OpeningEntry.AdvanceToSuppliers AS OpeningEntryAdvanceToSuppliers
@@ -355,7 +356,8 @@ Function VendorsTransactions()
 		   |		ELSE OpeningEntryAccountPayableByDocuments.Agreement
 		   |	END AS Agreement,
 		   |	OpeningEntryAccountPayableByDocuments.Currency,
-		   |	OpeningEntryAccountPayableByDocuments.Amount AS Amount
+		   |	OpeningEntryAccountPayableByDocuments.Amount AS Amount,
+		   |	OpeningEntryAccountPayableByDocuments.Project
 		   |INTO VendorsTransactions
 		   |FROM
 		   |	Document.OpeningEntry.AccountPayableByDocuments AS OpeningEntryAccountPayableByDocuments
@@ -381,7 +383,8 @@ Function VendorsTransactions()
 		   |		ELSE OpeningEntryAccountPayableByAgreements.Agreement
 		   |	END AS Agreement,
 		   |	OpeningEntryAccountPayableByAgreements.Currency,
-		   |	OpeningEntryAccountPayableByAgreements.Amount AS Amount
+		   |	OpeningEntryAccountPayableByAgreements.Amount AS Amount,
+		   |	OpeningEntryAccountPayableByAgreements.Project
 		   |FROM
 		   |	Document.OpeningEntry.AccountPayableByAgreements AS OpeningEntryAccountPayableByAgreements
 		   |WHERE
@@ -425,7 +428,8 @@ Function AdvancesFromCustomers()
 		|	end AS Agreement,
 		|	OpeningEntryAdvanceFromCustomers.Amount AS Amount,
 		|	OpeningEntryAdvanceFromCustomers.Ref.Date AS Period,
-		|	OpeningEntryAdvanceFromCustomers.Key
+		|	OpeningEntryAdvanceFromCustomers.Key,
+		|	OpeningEntryAdvanceFromCustomers.Project
 		|INTO AdvancesFromCustomers
 		|FROM
 		|	Document.OpeningEntry.AdvanceFromCustomers AS OpeningEntryAdvanceFromCustomers
@@ -451,7 +455,8 @@ Function CustomersTransactions()
 		   |		ELSE OpeningEntryAccountReceivableByDocuments.Agreement
 		   |	END AS Agreement,
 		   |	OpeningEntryAccountReceivableByDocuments.Currency,
-		   |	OpeningEntryAccountReceivableByDocuments.Amount AS Amount
+		   |	OpeningEntryAccountReceivableByDocuments.Amount AS Amount,
+		   |	OpeningEntryAccountReceivableByDocuments.Project
 		   |INTO CustomersTransactions
 		   |FROM
 		   |	Document.OpeningEntry.AccountReceivableByDocuments AS OpeningEntryAccountReceivableByDocuments
@@ -477,7 +482,8 @@ Function CustomersTransactions()
 		   |		ELSE OpeningEntryAccountReceivableByAgreements.Agreement
 		   |	END AS Agreement,
 		   |	OpeningEntryAccountReceivableByAgreements.Currency,
-		   |	OpeningEntryAccountReceivableByAgreements.Amount AS Amount
+		   |	OpeningEntryAccountReceivableByAgreements.Amount AS Amount,
+		   |	OpeningEntryAccountReceivableByAgreements.Project
 		   |FROM
 		   |	Document.OpeningEntry.AccountReceivableByAgreements AS OpeningEntryAccountReceivableByAgreements
 		   |WHERE
@@ -1103,9 +1109,9 @@ Function T2014S_AdvancesInfo()
 		   |	AdvancesToVendors.Branch,
 		   |	AdvancesToVendors.Currency,
 		   |	AdvancesToVendors.Agreement AS AdvanceAgreement,
-		   |	AdvancesToVendors.Basis AS AdvanceDocument,
 		   |	AdvancesToVendors.Partner,
 		   |	AdvancesToVendors.LegalName,
+		   |	AdvancesToVendors.Project,
 		   |	TRUE AS IsVendorAdvance,
 		   |	FALSE AS IsCustomerAdvance,
 		   |	AdvancesToVendors.Amount
@@ -1124,9 +1130,9 @@ Function T2014S_AdvancesInfo()
 		   |	AdvancesFromCustomers.Branch,
 		   |	AdvancesFromCustomers.Currency,
 		   |	AdvancesFromCustomers.Agreement,
-		   |	AdvancesFromCustomers.Basis,
 		   |	AdvancesFromCustomers.Partner,
 		   |	AdvancesFromCustomers.LegalName,
+		   |	AdvancesFromCustomers.Project,
 		   |	FALSE,
 		   |	TRUE,
 		   |	AdvancesFromCustomers.Amount
@@ -1145,6 +1151,7 @@ Function T2015S_TransactionsInfo()
 		   |	VendorsTransactions.Currency,
 		   |	VendorsTransactions.Partner,
 		   |	VendorsTransactions.LegalName,
+		   |	VendorsTransactions.Project,
 		   |	VendorsTransactions.Agreement,
 		   |	TRUE AS IsVendorTransaction,
 		   |	FALSE AS IsCustomerTransaction,
@@ -1167,6 +1174,7 @@ Function T2015S_TransactionsInfo()
 		   |	CustomersTransactions.Currency,
 		   |	CustomersTransactions.Partner,
 		   |	CustomersTransactions.LegalName,
+		   |	CustomersTransactions.Project,
 		   |	CustomersTransactions.Agreement,
 		   |	FALSE,
 		   |	TRUE,

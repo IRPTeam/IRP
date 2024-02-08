@@ -151,7 +151,7 @@ Scenario: _0052 create Calculation movements cost (batch reallocate)
 		And I click "Post and close" button
 		And I wait "Calculation movement costs (create) *" window closing in 20 seconds
 	* Check batch balance calculation
-		Given I open hyperlink "e1cib/app/Report.BatchBalance"
+		Given I open hyperlink "e1cib/app/Report.R6020_BatchBalance"
 		And I click "Select option..." button
 		And I move to "Custom" tab
 		And I activate field named "OptionsListReportOption" in "OptionsList" table
@@ -239,18 +239,18 @@ Scenario: _0054 check batch realocate with return (batch StockAdjustmentAsSurplu
 		And I execute 1C:Enterprise script at server
 			| "Documents.CalculationMovementCosts.FindByNumber(21).GetObject().Write(DocumentWriteMode.Posting);"    |
 	* Check batch balance calculation
-		Given I open hyperlink "e1cib/app/Report.BatchBalance"
+		Given I open hyperlink "e1cib/app/Report.R6020_BatchBalance"
 		And I click "Select option..." button
 		And I move to "Custom" tab
 		And I activate field named "OptionsListReportOption" in "OptionsList" table
 		And I select current line in "OptionsList" table
-		Then "Batch balance (Test landed cost)" window is opened
+		Then "R6020 Batch balance (Test landed cost)" window is opened
 		And I click Choice button of the field named "SettingsComposerUserSettingsItem0Value"
 		Then "Select period" window is opened
 		And I input "19.05.2023" text in the field named "DateBegin"
 		And I input "19.05.2023" text in the field named "DateEnd"
 		And I click the button named "Select"
-		Then "Batch balance (Test landed cost)" window is opened
+		Then "R6020 Batch balance (Test landed cost)" window is opened
 		And I click "Generate" button
 		Given "Result" spreadsheet document is equal to "BatchReallocate2"
 		And I close all client application windows 		

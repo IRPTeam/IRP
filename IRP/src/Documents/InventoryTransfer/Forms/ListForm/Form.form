@@ -1033,6 +1033,7 @@ FROM
           <types>Date</types>
           <dateQualifiers/>
         </valueType>
+        <values xsi:type="core:UndefinedValue"/>
       </parameters>
     </extInfo>
   </attributes>

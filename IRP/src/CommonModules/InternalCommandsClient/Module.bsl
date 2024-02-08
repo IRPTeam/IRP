@@ -12,9 +12,15 @@
 //  AddInfo - Undefined -  Add info
 Procedure RunCommandAction(Command, Form, MainAttribute, Targets, AddInfo = Undefined) Export
 
-	CommandFormItem = Form.Items.Find(Command.Name);
+	FullCommandName = Command.Name;
+	If Left(FullCommandName, 7) = "Context" Then
+		FullCommandName = Mid(FullCommandName, 8);
+	EndIf;
+	CommandFormItem = Form.Items.Find(FullCommandName);
 	
-	CommandName = Mid(Command.Name, StrLen("InternalCommand_") + 1);
+	CommandNameParts = StrSplit(FullCommandName, "_");
+	CommandName = CommandNameParts[CommandNameParts.UBound()];
+	
 	//@skip-check use-non-recommended-method
 	InternalCommandModule = GetForm("DataProcessor.InternalCommands.Form." + CommandName); // See DataProcessor.InternalCommands.Form.CommandTemplate
 	
@@ -56,6 +62,13 @@ Procedure RunCommandAction(Command, Form, MainAttribute, Targets, AddInfo = Unde
 			CommandFormItem.Picture = CommandPicture;
 		EndIf;
 	EndIf; 
+	
+	If CommandDescription.ForContextMenu Then
+		ContextCommandFormItem = Form.Items.Find("Context" + FullCommandName);
+		ContextCommandFormItem.Check = CommandFormItem.Check;
+		ContextCommandFormItem.Title = CommandFormItem.Title;
+		ContextCommandFormItem.Picture = CommandFormItem.Picture;
+	EndIf;
 	
 EndProcedure
 

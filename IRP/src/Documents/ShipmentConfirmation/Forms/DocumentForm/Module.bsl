@@ -438,6 +438,16 @@ Procedure InternalCommandAction(Command) Export
 EndProcedure
 
 &AtClient
+Procedure InternalCommandActionWithServerContext(Command) Export
+	InternalCommandActionWithServerContextAtServer(Command.Name);
+EndProcedure
+
+&AtServer
+Procedure InternalCommandActionWithServerContextAtServer(CommandName)
+	InternalCommandsServer.RunCommandAction(CommandName, ThisObject, Object, Object.Ref);
+EndProcedure
+
+&AtClient
 Procedure SearchByBarcode(Command, Barcode = "")
 	If Object.SaveScannedBarcode And Not ValueIsFilled(Object.Ref) Then
 		QuestionToUserNotify = New NotifyDescription("SaveAndSearch", ThisObject, Barcode);

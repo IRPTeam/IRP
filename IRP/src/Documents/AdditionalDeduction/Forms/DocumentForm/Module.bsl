@@ -218,6 +218,16 @@ Procedure InternalCommandAction(Command) Export
 EndProcedure
 
 &AtClient
+Procedure InternalCommandActionWithServerContext(Command) Export
+	InternalCommandActionWithServerContextAtServer(Command.Name);
+EndProcedure
+
+&AtServer
+Procedure InternalCommandActionWithServerContextAtServer(CommandName)
+	InternalCommandsServer.RunCommandAction(CommandName, ThisObject, Object, Object.Ref);
+EndProcedure
+
+&AtClient
 Procedure EditCurrencies(Command)
 	CurrentData = ThisObject.Items.DeductionList.CurrentData;
 	If CurrentData = Undefined Then

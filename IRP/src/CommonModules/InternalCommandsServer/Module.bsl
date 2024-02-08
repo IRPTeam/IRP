@@ -7,16 +7,9 @@ Procedure SetSessionParameters() Export
 	
 	InternalCommandsArray = New Array; // Array of FixedStructure
 	
-	For Each CommandFormDescription In Metadata.DataProcessors.InternalCommands.Forms Do
-		If CommandFormDescription = Metadata.DataProcessors.InternalCommands.Forms.CommandTemplate Then
-			Continue;
-		EndIf;
-		
-		CommandName = CommandFormDescription.Name;
-		CommandDescription = New FixedStructure(
-			DataProcessors.InternalCommands.GetCommandDescription(CommandName));
-		
-		InternalCommandsArray.Add(CommandDescription);
+	AllCommandDescriptions = DataProcessors.InternalCommands.GetAllCommandDescriptions();
+	For Each CommandDescription In AllCommandDescriptions Do
+		InternalCommandsArray.Add(New FixedStructure(CommandDescription));
 	EndDo;
 	
 	SessionParameters.InternalCommands = New FixedArray(InternalCommandsArray);
@@ -48,33 +41,114 @@ Procedure CreateCommands(Form, MainAttribute, ObjectFullName, FormType, AddInfo 
 	EndDo;
 	
 	For Each Command In CommandArray Do
-		CommandName = "InternalCommand_" + Command.Name;
-		CommandForm = Form.Commands.Add(CommandName); // FormCommand
-		CommandForm.Action = "InternalCommandAction";
-		CommandForm.Title = Command.Title;
-		CommandForm.ToolTip = Command.ToolTip;
-		If Not IsBlankString(Command.Picture) Then
-			CommandPicture = PictureLib[Command.Picture]; // Picture
-			CommandForm.Picture = CommandPicture;
+		TablesArray = New Array; // Array of String
+		If Command.ForTables Then
+			TableNames = StrSplit(Command.SpecificTables, ",");
+			For Each TableName In TableNames Do
+				If Form.Items.Find(TrimAll(TableName)) <> Undefined Then
+					TablesArray.Add(TrimAll(TableName));
+				EndIf;
+			EndDo;
+		Else
+			TablesArray.Add("");
 		EndIf;
-		CommandRepresentation = ButtonRepresentation[Command.Representation]; // ButtonRepresentation
-		CommandForm.Representation = CommandRepresentation;
+		If TablesArray.Count() = 0 Then
+			Continue;
+		EndIf;
 		
-		CommandButton = Form.Items.Add(CommandName, Type("FormButton"), GetFormGroupByName(Form, Command.LocationGroup)); // FormButton
-		CommandButton.CommandName = CommandName;
-		CommandLocationInCommandBar = ButtonLocationInCommandBar[Command.LocationInCommandBar]; // ButtonLocationInCommandBar 
-		CommandButton.LocationInCommandBar = CommandLocationInCommandBar;
-		
-		IntenalCommandsParams = New Structure;
-		IntenalCommandsParams.Insert("CommandButton", CommandButton);
-		IntenalCommandsParams.Insert("CommandDescription", Command);
-		IntenalCommandsParams.Insert("Form", Form);
-		IntenalCommandsParams.Insert("MainAttribute", MainAttribute);
-		IntenalCommandsParams.Insert("ObjectFullName", ObjectFullName);
-		IntenalCommandsParams.Insert("FormType", FormType);
-		
-		DataProcessors.InternalCommands.OnCommandCreate(Command.Name, IntenalCommandsParams, AddInfo);
+		For Each TableName In TablesArray Do
+			CommandName = "InternalCommand_" + ?(TableName="", "", TableName + "_") + Command.Name;
+			
+			CommandForm = Form.Commands.Add(CommandName); // FormCommand
+			CommandForm.Action = ?(Command.ServerContextRequired, "InternalCommandActionWithServerContext", "InternalCommandAction");
+			CommandForm.Title = Command.Title;
+			CommandForm.ToolTip = Command.ToolTip;
+			If Not IsBlankString(Command.Picture) Then
+				CommandPicture = PictureLib[Command.Picture]; // Picture
+				CommandForm.Picture = CommandPicture;
+			EndIf;
+			CommandRepresentation = ButtonRepresentation[Command.Representation]; // ButtonRepresentation
+			CommandForm.Representation = CommandRepresentation;
+			
+			CommandButton = Form.Items.Add(CommandName, Type("FormButton"), GetFormGroupByName(Form, Command.LocationGroup, TableName)); // FormButton
+			CommandButton.CommandName = CommandName;
+			CommandLocationInCommandBar = ButtonLocationInCommandBar[Command.LocationInCommandBar]; // ButtonLocationInCommandBar 
+			CommandButton.LocationInCommandBar = CommandLocationInCommandBar;
+			
+			If Command.ForContextMenu Then
+				ContextCommandButton = Form.Items.Add("Context" + CommandName, Type("FormButton"), GetFormGroupByName(Form, "ContextMenu", TableName)); // FormButton
+				ContextCommandButton.CommandName = CommandName;
+			EndIf;
+			
+			IntenalCommandsParams = New Structure;
+			IntenalCommandsParams.Insert("CommandButton", CommandButton);
+			IntenalCommandsParams.Insert("CommandDescription", Command);
+			IntenalCommandsParams.Insert("Form", Form);
+			IntenalCommandsParams.Insert("MainAttribute", MainAttribute);
+			IntenalCommandsParams.Insert("ObjectFullName", ObjectFullName);
+			IntenalCommandsParams.Insert("FormType", FormType);
+			
+			DataProcessors.InternalCommands.OnCommandCreate(Command.Name, IntenalCommandsParams, AddInfo);
+		EndDo;
 	EndDo;
+	
+EndProcedure
+
+// Run command action.
+// 
+// Parameters:
+//  FullCommandName - String - Full command
+//  Form - ClientApplicationForm - Form
+//  MainAttribute - FormAttribute, DynamicList - Main form attribute
+//  Targets - AnyRef, Array of AnyRef - Command target
+//  AddInfo - Undefined -  Add info
+Procedure RunCommandAction(Val FullCommandName, Form, MainAttribute, Targets, AddInfo = Undefined) Export
+
+	If Left(FullCommandName, 7) = "Context" Then
+		FullCommandName = Mid(FullCommandName, 8);
+	EndIf;
+	CommandFormItem = Form.Items.Find(FullCommandName);
+	
+	CommandNameParts = StrSplit(FullCommandName, "_");
+	CommandName = CommandNameParts[CommandNameParts.UBound()];
+	
+	InternalCommandModule = DataProcessors.InternalCommands;
+	
+	CommandDescription = InternalCommandModule.GetCommandDescription(CommandName);
+	
+	InternalCommandModule.BeforeRunning(CommandName, Targets, Form, CommandFormItem, MainAttribute, AddInfo);
+	InternalCommandModule.RunCommandAction(CommandName, Targets, Form, CommandFormItem, MainAttribute, AddInfo);
+	InternalCommandModule.AfterRunning(CommandName, Targets, Form, CommandFormItem, MainAttribute, AddInfo);
+	
+	If CommandDescription.EnableChecking Then
+		CommandFormItem.Check = Not CommandFormItem.Check;
+	EndIf;
+	If CommandFormItem.Check Then
+		CommandFormItem.Title = 
+			?(IsBlankString(CommandDescription.TitleCheck), 
+				CommandDescription.Title, 
+				CommandDescription.TitleCheck);
+		If Not IsBlankString(CommandDescription.PictureCheck) Then
+			CommandPicture = PictureLib[CommandDescription.PictureCheck]; // Picture
+			CommandFormItem.Picture = CommandPicture;
+		ElsIf Not IsBlankString(CommandDescription.Picture) Then
+			CommandPicture = PictureLib[CommandDescription.Picture]; // Picture
+			CommandFormItem.Picture = CommandPicture;
+		EndIf;
+	Else
+		CommandFormItem.Title = CommandDescription.Title;
+		If Not IsBlankString(CommandDescription.Picture) Then
+			CommandPicture = PictureLib[CommandDescription.Picture]; // Picture
+			CommandFormItem.Picture = CommandPicture;
+		EndIf;
+	EndIf;
+	
+	If CommandDescription.ForContextMenu Then
+		ContextCommandFormItem = Form.Items.Find("Context" + FullCommandName);
+		ContextCommandFormItem.Check = CommandFormItem.Check;
+		ContextCommandFormItem.Title = CommandFormItem.Title;
+		ContextCommandFormItem.Picture = CommandFormItem.Picture;
+	EndIf;
 	
 EndProcedure
 
@@ -100,6 +174,7 @@ EndProcedure
 // * ForTables - Boolean - 
 // * ForContextMenu - Boolean - 
 // * SpecificTables - String - 
+// * ServerContextRequired - Boolean - 
 // * HasActionInitialization - Boolean - 
 // * HasActionOnCommandCreate - Boolean - 
 // * HasActionBeforeRunning - Boolean - 
@@ -132,6 +207,8 @@ Function GetCommandDescription() Export
 	CommandDescription.Insert("ForTables", False);
 	CommandDescription.Insert("ForContextMenu", False);
 	CommandDescription.Insert("SpecificTables", "");
+	
+	CommandDescription.Insert("ServerContextRequired", False);
 	
 	CommandDescription.Insert("HasActionInitialization", False);
 	CommandDescription.Insert("HasActionOnCommandCreate", False);

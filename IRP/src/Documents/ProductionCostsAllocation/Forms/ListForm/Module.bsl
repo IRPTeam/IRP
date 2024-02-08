@@ -15,6 +15,16 @@ Procedure InternalCommandAction(Command) Export
 EndProcedure
 
 &AtClient
+Procedure InternalCommandActionWithServerContext(Command) Export
+	InternalCommandActionWithServerContextAtServer(Command.Name);
+EndProcedure
+
+&AtServer
+Procedure InternalCommandActionWithServerContextAtServer(CommandName)
+	InternalCommandsServer.RunCommandAction(CommandName, ThisObject, List, Items.List.SelectedRows);
+EndProcedure
+
+&AtClient
 Procedure GeneratedFormCommandActionByName(Command) Export
 	SelectedRows = Items.List.SelectedRows;
 	ExternalCommandsClient.GeneratedListChoiceFormCommandActionByName(SelectedRows, ThisObject, Command.Name);

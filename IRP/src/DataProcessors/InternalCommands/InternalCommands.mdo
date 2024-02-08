@@ -47,4 +47,13 @@
     <usePurposes>PersonalComputer</usePurposes>
     <usePurposes>MobileDevice</usePurposes>
   </forms>
+  <forms uuid="6aae06fd-3034-4f77-a1c3-c3757c418c29">
+    <name>CloneValueFromFirstRow</name>
+    <synonym>
+      <key>en</key>
+      <value>Clone value from first row</value>
+    </synonym>
+    <usePurposes>PersonalComputer</usePurposes>
+    <usePurposes>MobileDevice</usePurposes>
+  </forms>
 </mdclass:DataProcessor>

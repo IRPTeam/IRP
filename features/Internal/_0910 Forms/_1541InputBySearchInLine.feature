@@ -70,6 +70,7 @@ Scenario: _0154000 preparation
 		When Create catalog ItemSegments objects
 		When Create catalog PaymentTypes objects
 		When Create catalog CancelReturnReasons objects
+		When Create catalog Projects objects
 	* Data for salary
 		When Create catalog EmployeePositions objects
 		When Create catalog AccrualAndDeductionTypes objects

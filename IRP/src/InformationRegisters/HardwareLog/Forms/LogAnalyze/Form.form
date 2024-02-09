@@ -294,17 +294,17 @@
         <segments>TransactionList</segments>
       </dataPath>
       <titleLocation>None</titleLocation>
-      <excludedCommands>Delete</excludedCommands>
-      <excludedCommands>ShowMultipleSelection</excludedCommands>
-      <excludedCommands>CopyToClipboard</excludedCommands>
-      <excludedCommands>SelectAll</excludedCommands>
-      <excludedCommands>ShowRowRearrangement</excludedCommands>
-      <excludedCommands>Change</excludedCommands>
-      <excludedCommands>MoveDown</excludedCommands>
-      <excludedCommands>Copy</excludedCommands>
       <excludedCommands>Add</excludedCommands>
-      <excludedCommands>MoveUp</excludedCommands>
+      <excludedCommands>Change</excludedCommands>
+      <excludedCommands>Copy</excludedCommands>
+      <excludedCommands>CopyToClipboard</excludedCommands>
+      <excludedCommands>Delete</excludedCommands>
       <excludedCommands>EndEdit</excludedCommands>
+      <excludedCommands>MoveDown</excludedCommands>
+      <excludedCommands>MoveUp</excludedCommands>
+      <excludedCommands>SelectAll</excludedCommands>
+      <excludedCommands>ShowMultipleSelection</excludedCommands>
+      <excludedCommands>ShowRowRearrangement</excludedCommands>
       <items xsi:type="form:FormField">
         <name>TransactionListPeriod</name>
         <id>30</id>

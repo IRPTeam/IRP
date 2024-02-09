@@ -390,16 +390,16 @@
           <autoFill>true</autoFill>
         </autoCommandBar>
         <handlers>
-          <event>DragStart</event>
-          <name>BankPaymentTypeListDragStart</name>
+          <event>ValueChoice</event>
+          <name>BankPaymentTypeListValueChoice</name>
         </handlers>
         <handlers>
           <event>OnActivateRow</event>
           <name>BankPaymentTypeListOnActivateRow</name>
         </handlers>
         <handlers>
-          <event>ValueChoice</event>
-          <name>BankPaymentTypeListValueChoice</name>
+          <event>DragStart</event>
+          <name>BankPaymentTypeListDragStart</name>
         </handlers>
         <searchStringAddition>
           <visible>true</visible>
@@ -997,24 +997,24 @@
             <segments>Payments</segments>
           </dataPath>
           <titleLocation>None</titleLocation>
+          <excludedCommands>Add</excludedCommands>
+          <excludedCommands>CancelSearch</excludedCommands>
+          <excludedCommands>Change</excludedCommands>
           <excludedCommands>Copy</excludedCommands>
           <excludedCommands>CopyToClipboard</excludedCommands>
           <excludedCommands>EndEdit</excludedCommands>
-          <excludedCommands>Add</excludedCommands>
-          <excludedCommands>Change</excludedCommands>
-          <excludedCommands>ShowRowRearrangement</excludedCommands>
-          <excludedCommands>MoveDown</excludedCommands>
-          <excludedCommands>SelectAll</excludedCommands>
-          <excludedCommands>SearchEverywhere</excludedCommands>
-          <excludedCommands>CancelSearch</excludedCommands>
-          <excludedCommands>SortListDesc</excludedCommands>
-          <excludedCommands>OutputList</excludedCommands>
-          <excludedCommands>SortListAsc</excludedCommands>
-          <excludedCommands>ShowMultipleSelection</excludedCommands>
-          <excludedCommands>FindByCurrentValue</excludedCommands>
           <excludedCommands>Find</excludedCommands>
-          <excludedCommands>SearchHistory</excludedCommands>
+          <excludedCommands>FindByCurrentValue</excludedCommands>
+          <excludedCommands>MoveDown</excludedCommands>
           <excludedCommands>MoveUp</excludedCommands>
+          <excludedCommands>OutputList</excludedCommands>
+          <excludedCommands>SearchEverywhere</excludedCommands>
+          <excludedCommands>SearchHistory</excludedCommands>
+          <excludedCommands>SelectAll</excludedCommands>
+          <excludedCommands>ShowMultipleSelection</excludedCommands>
+          <excludedCommands>ShowRowRearrangement</excludedCommands>
+          <excludedCommands>SortListAsc</excludedCommands>
+          <excludedCommands>SortListDesc</excludedCommands>
           <items xsi:type="form:FormField">
             <name>PaymentsPaymentDone</name>
             <id>244</id>
@@ -1362,20 +1362,20 @@
             <horizontalAlign>Left</horizontalAlign>
           </autoCommandBar>
           <handlers>
-            <event>OnActivateRow</event>
-            <name>PaymentsOnActivateRow</name>
-          </handlers>
-          <handlers>
-            <event>OnChange</event>
-            <name>PaymentsOnChange</name>
-          </handlers>
-          <handlers>
             <event>BeforeDeleteRow</event>
             <name>PaymentsBeforeDeleteRow</name>
           </handlers>
           <handlers>
+            <event>OnActivateRow</event>
+            <name>PaymentsOnActivateRow</name>
+          </handlers>
+          <handlers>
             <event>Drag</event>
             <name>PaymentsDrag</name>
+          </handlers>
+          <handlers>
+            <event>OnChange</event>
+            <name>PaymentsOnChange</name>
           </handlers>
           <searchStringAddition>
             <visible>true</visible>
@@ -3058,12 +3058,8 @@
     <autoFill>true</autoFill>
   </autoCommandBar>
   <handlers>
-    <event>OnCreateAtServer</event>
-    <name>OnCreateAtServer</name>
-  </handlers>
-  <handlers>
-    <event>FillCheckProcessingAtServer</event>
-    <name>FillCheckProcessingAtServer</name>
+    <event>NotificationProcessing</event>
+    <name>NotificationProcessing</name>
   </handlers>
   <handlers>
     <event>OnOpen</event>
@@ -3074,23 +3070,27 @@
     <name>BeforeClose</name>
   </handlers>
   <handlers>
-    <event>NotificationProcessing</event>
-    <name>NotificationProcessing</name>
+    <event>OnCreateAtServer</event>
+    <name>OnCreateAtServer</name>
   </handlers>
-  <excludedCommands>CustomizeForm</excludedCommands>
-  <excludedCommands>OK</excludedCommands>
+  <handlers>
+    <event>FillCheckProcessingAtServer</event>
+    <name>FillCheckProcessingAtServer</name>
+  </handlers>
   <excludedCommands>Abort</excludedCommands>
-  <excludedCommands>Ignore</excludedCommands>
-  <excludedCommands>RestoreValues</excludedCommands>
-  <excludedCommands>No</excludedCommands>
-  <excludedCommands>SaveValues</excludedCommands>
   <excludedCommands>Cancel</excludedCommands>
-  <excludedCommands>Retry</excludedCommands>
-  <excludedCommands>Yes</excludedCommands>
-  <excludedCommands>OpenFromStandaloneServer</excludedCommands>
-  <excludedCommands>Help</excludedCommands>
-  <excludedCommands>OpenFromMainServer</excludedCommands>
   <excludedCommands>Close</excludedCommands>
+  <excludedCommands>CustomizeForm</excludedCommands>
+  <excludedCommands>Help</excludedCommands>
+  <excludedCommands>Ignore</excludedCommands>
+  <excludedCommands>No</excludedCommands>
+  <excludedCommands>OK</excludedCommands>
+  <excludedCommands>OpenFromMainServer</excludedCommands>
+  <excludedCommands>OpenFromStandaloneServer</excludedCommands>
+  <excludedCommands>RestoreValues</excludedCommands>
+  <excludedCommands>Retry</excludedCommands>
+  <excludedCommands>SaveValues</excludedCommands>
+  <excludedCommands>Yes</excludedCommands>
   <windowOpeningMode>LockWholeInterface</windowOpeningMode>
   <autoUrl>true</autoUrl>
   <group>Vertical</group>
@@ -4119,6 +4119,7 @@ WHERE
         <valueType>
           <types>CatalogRef.BusinessUnits</types>
         </valueType>
+        <values xsi:type="core:UndefinedValue"/>
         <useRestriction>true</useRestriction>
       </parameters>
       <parameters>

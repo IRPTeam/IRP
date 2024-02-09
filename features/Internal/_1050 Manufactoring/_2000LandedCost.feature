@@ -236,7 +236,7 @@ Scenario: _2010 create Calculation movement costs (batch realocate)
 		
 
 Scenario: _2012 check batch calculation
-	Given I open hyperlink "e1cib/app/Report.BatchBalance"
+	Given I open hyperlink "e1cib/app/Report.R6020_BatchBalance"
 	And I click "Select option..." button
 	And I move to "Custom" tab
 	And I activate field named "OptionsListReportOption" in "OptionsList" table
@@ -261,7 +261,7 @@ Scenario: _2013 check batch calculation (one semiproduct consists of another sem
 			| '$$NumberCalculationMovementCosts1$$'    |
 		And in the table "List" I click the button named "ListContextMenuPost"		
 	* Check batches calculation
-		Given I open hyperlink "e1cib/app/Report.BatchBalance"
+		Given I open hyperlink "e1cib/app/Report.R6020_BatchBalance"
 		And I click "Select option..." button
 		And I move to "Custom" tab
 		And I move to "Standard" tab
@@ -357,7 +357,7 @@ Scenario: _2014 transfer of production (check landed cost)
 			| '$$NumberCalculationMovementCosts1$$'    |
 		And in the table "List" I click the button named "ListContextMenuPost"		
 	* Check batches calculation
-		Given I open hyperlink "e1cib/app/Report.BatchBalance"
+		Given I open hyperlink "e1cib/app/Report.R6020_BatchBalance"
 		And I click "Select option..." button
 		And I move to "Custom" tab
 		And I move to "Standard" tab
@@ -496,7 +496,7 @@ Scenario: _2015 sales, return and 2 sales production (check landed cost)
 			| '$$NumberCalculationMovementCosts1$$'    |
 		And in the table "List" I click the button named "ListContextMenuPost"		
 	* Check batches calculation
-		Given I open hyperlink "e1cib/app/Report.BatchBalance"
+		Given I open hyperlink "e1cib/app/Report.R6020_BatchBalance"
 		And I click "Select option..." button
 		And I move to "Custom" tab
 		And I move to "Standard" tab
@@ -565,7 +565,7 @@ Scenario: _2016 materials and production at one company, sales at another compan
 			| '$$NumberCalculationMovementCosts1$$'    |
 		And in the table "List" I click the button named "ListContextMenuPost"		
 	* Check batches calculation
-		Given I open hyperlink "e1cib/app/Report.BatchBalance"
+		Given I open hyperlink "e1cib/app/Report.R6020_BatchBalance"
 		And I click "Select option..." button
 		And I move to "Custom" tab
 		And I move to "Standard" tab
@@ -621,7 +621,7 @@ Scenario: _2022 check landed cost for multiple semiproducts with complex digits
 			| '$$NumberCalculationMovementCosts1$$'    |
 		And in the table "List" I click the button named "ListContextMenuPost"
 	* Check landed cost
-		Given I open hyperlink "e1cib/app/Report.BatchBalance"
+		Given I open hyperlink "e1cib/app/Report.R6020_BatchBalance"
 		And I click "Select option..." button
 		And I move to "Custom" tab
 		And I select current line in "StandardOptions" table

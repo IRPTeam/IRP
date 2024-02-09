@@ -1264,31 +1264,31 @@
   <enums>Enum.AgingPeriodTypes</enums>
   <enums>Enum.DebtTypes</enums>
   <reports>Report.AllRegistersMovement</reports>
-  <reports>Report.BatchBalance</reports>
-  <reports>Report.BatchBalanceSimple</reports>
+  <reports>Report.A0010_TrialBalance</reports>
+  <reports>Report.A0011_TrialBalanceByAccount</reports>
+  <reports>Report.A0012_AccountCard</reports>
+  <reports>Report.A0013_AccountAnalysis</reports>
+  <reports>Report.A1010_PartnersBalance</reports>
+  <reports>Report.D0009_DocumentRegistrationsReport</reports>
   <reports>Report.D0010_ItemsInfo</reports>
+  <reports>Report.D0011_PriceInfo</reports>
+  <reports>Report.D0012_AdditionalDocumentTablesCheck</reports>
   <reports>Report.D1001_Purchases</reports>
   <reports>Report.D2001_Sales</reports>
   <reports>Report.D4010_ActualStocks</reports>
   <reports>Report.D4011_FreeStocks</reports>
   <reports>Report.D4012_StockReservation</reports>
-  <reports>Report.DocumentRegistrationsReport</reports>
-  <reports>Report.OffsetOfAdvances</reports>
-  <reports>Report.PriceInfo</reports>
-  <reports>Report.DetailingSupplies</reports>
-  <reports>Report.ProductionPlanning</reports>
-  <reports>Report.AdditionalDocumentTablesCheck</reports>
-  <reports>Report.TrialBalance</reports>
-  <reports>Report.TrialBalanceByAccount</reports>
-  <reports>Report.AccountCard</reports>
-  <reports>Report.AccountAnalysis</reports>
-  <reports>Report.A101A_PartnersBalance</reports>
-  <reports>Report.R2001A_Sales</reports>
-  <reports>Report.R1001A_Purchases</reports>
-  <reports>Report.R3010A_CashOnHand</reports>
-  <reports>Report.R502A_ProfitLosses</reports>
-  <reports>Report.RP_R12R_VendorsAging</reports>
-  <reports>Report.RP_R11R_CustomersAging</reports>
+  <reports>Report.R1001_Purchases</reports>
+  <reports>Report.R1100_CustomersAging</reports>
+  <reports>Report.R1200_VendorsAging</reports>
+  <reports>Report.R2001_Sales</reports>
+  <reports>Report.R3010_CashOnHand</reports>
+  <reports>Report.R5012_OffsetOfAdvances</reports>
+  <reports>Report.R5020_ProfitLosses</reports>
+  <reports>Report.R6020_BatchBalance</reports>
+  <reports>Report.R6021_BatchBalanceSimple</reports>
+  <reports>Report.R7010_DetailingSupplies</reports>
+  <reports>Report.R7030_ProductionPlanning</reports>
   <dataProcessors>DataProcessor.AnaliseDocumentMovements</dataProcessors>
   <dataProcessors>DataProcessor.AnalyseXDTO</dataProcessors>
   <dataProcessors>DataProcessor.BuilderExample</dataProcessors>

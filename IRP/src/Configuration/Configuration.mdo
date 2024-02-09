@@ -192,6 +192,7 @@
   <commonPictures>CommonPicture.IconSetNotActive</commonPictures>
   <commonPictures>CommonPicture.IconShowOnlyActive</commonPictures>
   <commonPictures>CommonPicture.IconShowAnyActive</commonPictures>
+  <commonPictures>CommonPicture.PaymentStatuses</commonPictures>
   <sessionParameters>SessionParameter.Buffer</sessionParameters>
   <sessionParameters>SessionParameter.ClientType</sessionParameters>
   <sessionParameters>SessionParameter.ConnectedAddDataProc</sessionParameters>

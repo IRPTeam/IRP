@@ -468,6 +468,61 @@
       </extInfo>
     </items>
     <items xsi:type="form:FormField">
+      <name>PaimentStatus</name>
+      <id>58</id>
+      <visible>true</visible>
+      <enabled>true</enabled>
+      <userVisible>
+        <common>true</common>
+      </userVisible>
+      <dataPath xsi:type="form:DataPath">
+        <segments>List.PaimentStatus</segments>
+      </dataPath>
+      <titleLocation>None</titleLocation>
+      <extendedTooltip>
+        <name>PaimentStatusExtendedTooltip</name>
+        <id>60</id>
+        <visible>true</visible>
+        <enabled>true</enabled>
+        <userVisible>
+          <common>true</common>
+        </userVisible>
+        <type>Label</type>
+        <autoMaxWidth>true</autoMaxWidth>
+        <autoMaxHeight>true</autoMaxHeight>
+        <extInfo xsi:type="form:LabelDecorationExtInfo">
+          <horizontalAlign>Left</horizontalAlign>
+        </extInfo>
+      </extendedTooltip>
+      <contextMenu>
+        <name>PaimentStatusContextMenu</name>
+        <id>59</id>
+        <visible>true</visible>
+        <enabled>true</enabled>
+        <userVisible>
+          <common>true</common>
+        </userVisible>
+        <autoFill>true</autoFill>
+      </contextMenu>
+      <type>PictureField</type>
+      <editMode>Enter</editMode>
+      <showInHeader>true</showInHeader>
+      <headerPicture xsi:type="core:PictureRef">
+        <picture>CommonPicture.CashOk</picture>
+      </headerPicture>
+      <headerHorizontalAlign>Left</headerHorizontalAlign>
+      <showInFooter>true</showInFooter>
+      <extInfo xsi:type="form:ImageFieldExtInfo">
+        <autoMaxWidth>true</autoMaxWidth>
+        <autoMaxHeight>true</autoMaxHeight>
+        <verticalStretch>true</verticalStretch>
+        <valuesPicture xsi:type="core:PictureRef">
+          <picture>CommonPicture.PaymentStatuses</picture>
+        </valuesPicture>
+        <fileDragMode>AsFileRef</fileDragMode>
+      </extInfo>
+    </items>
+    <items xsi:type="form:FormField">
       <name>Company</name>
       <id>34</id>
       <title>
@@ -1063,10 +1118,37 @@ INDEX BY
 		WHEN NOT JE.Ref IS NULL
 			THEN 0
 		ELSE 1
-	END) AS IsHaveJE
+	END) AS IsHaveJE,
+	MAX(ISNULL(Payments.Status, -1)) AS PaimentStatus
 FROM
 	Document.SalesInvoice AS SalesInvoice
 		LEFT JOIN ItemListTable AS ItemListTable
+			LEFT JOIN (SELECT
+				R2021B_CustomersTransactions.Recorder AS Basis,
+				R2021B_CustomersTransactions.Amount,
+				ISNULL(R2021B_CustomersTransactionsBalance.AmountBalance, 0) AS AmountBalance,
+				CASE
+					WHEN ISNULL(R2021B_CustomersTransactionsBalance.AmountBalance, 0) = 0
+						THEN 0
+					WHEN ISNULL(R2021B_CustomersTransactionsBalance.AmountBalance, 0) &lt; 0
+						THEN 7
+					WHEN ISNULL(R2021B_CustomersTransactionsBalance.AmountBalance, 0) &lt; R2021B_CustomersTransactions.Amount
+						THEN 1
+					ELSE 2
+				END AS Status
+			FROM
+				AccumulationRegister.R2021B_CustomersTransactions AS R2021B_CustomersTransactions
+					LEFT JOIN AccumulationRegister.R2021B_CustomersTransactions.Balance(,
+						CurrencyMovementType = VALUE(ChartOfCharacteristicTypes.CurrencyMovementType.SettlementCurrency)) AS
+						R2021B_CustomersTransactionsBalance
+					ON R2021B_CustomersTransactionsBalance.Basis = R2021B_CustomersTransactions.Basis
+					AND R2021B_CustomersTransactionsBalance.Basis = R2021B_CustomersTransactions.Recorder
+					AND R2021B_CustomersTransactionsBalance.CurrencyMovementType = R2021B_CustomersTransactions.CurrencyMovementType
+			WHERE
+				VALUETYPE(R2021B_CustomersTransactions.Recorder) = TYPE(Document.SalesInvoice)
+				AND R2021B_CustomersTransactions.Agreement.ApArPostingDetail = VALUE(Enum.ApArPostingDetail.ByDocuments)
+				AND R2021B_CustomersTransactions.Amount > 0) AS Payments
+			ON ItemListTable.Ref = Payments.Basis
 		ON ItemListTable.Ref = SalesInvoice.Ref
 		LEFT JOIN AccumulationRegister.R2031B_ShipmentInvoicing.Balance AS R2031B_ShipmentInvoicingBalance
 		ON SalesInvoice.Ref = CAST(R2031B_ShipmentInvoicingBalance.Basis AS Document.SalesInvoice)
@@ -1226,6 +1308,50 @@ GROUP BY
         <field>Agreement</field>
       </fields>
       <fields xsi:type="schema:DataCompositionSchemaDataSetField">
+        <dataPath>PaimentStatus</dataPath>
+        <field>PaimentStatus</field>
+        <title>
+          <localValue>
+            <content>
+              <key>en</key>
+              <value>Paiment status</value>
+            </content>
+          </localValue>
+        </title>
+      </fields>
+      <fields xsi:type="schema:DataCompositionSchemaDataSetField">
+        <dataPath>Amount</dataPath>
+        <field>Amount</field>
+      </fields>
+      <fields xsi:type="schema:DataCompositionSchemaDataSetField">
+        <dataPath>AmountBalance</dataPath>
+        <field>AmountBalance</field>
+        <title>
+          <localValue>
+            <content>
+              <key>en</key>
+              <value>Amount balance</value>
+            </content>
+          </localValue>
+        </title>
+      </fields>
+      <fields xsi:type="schema:DataCompositionSchemaDataSetField">
+        <dataPath>CurrencyMovementType</dataPath>
+        <field>CurrencyMovementType</field>
+      </fields>
+      <fields xsi:type="schema:DataCompositionSchemaDataSetField">
+        <dataPath>TransactionCurrency</dataPath>
+        <field>TransactionCurrency</field>
+      </fields>
+      <fields xsi:type="schema:DataCompositionSchemaDataSetField">
+        <dataPath>Order</dataPath>
+        <field>Order</field>
+      </fields>
+      <fields xsi:type="schema:DataCompositionSchemaDataSetField">
+        <dataPath>Project</dataPath>
+        <field>Project</field>
+      </fields>
+      <fields xsi:type="schema:DataCompositionSchemaDataSetField">
         <dataPath>DateOfShipment</dataPath>
         <field>DateOfShipment</field>
       </fields>
@@ -1268,10 +1394,6 @@ GROUP BY
       <fields xsi:type="schema:DataCompositionSchemaDataSetField">
         <dataPath>Vehicle</dataPath>
         <field>Vehicle</field>
-      </fields>
-      <fields xsi:type="schema:DataCompositionSchemaDataSetField">
-        <dataPath>SourceNodeID</dataPath>
-        <field>SourceNodeID</field>
       </fields>
       <fields xsi:type="schema:DataCompositionSchemaDataSetField">
         <dataPath>ItemList</dataPath>
@@ -1324,6 +1446,22 @@ GROUP BY
       <fields xsi:type="schema:DataCompositionSchemaDataSetField">
         <dataPath>PointInTime</dataPath>
         <field>PointInTime</field>
+      </fields>
+      <fields xsi:type="schema:DataCompositionSchemaDataSetField">
+        <dataPath>SourceNodeID</dataPath>
+        <field>SourceNodeID</field>
+      </fields>
+      <fields xsi:type="schema:DataCompositionSchemaDataSetField">
+        <dataPath>Editor</dataPath>
+        <field>Editor</field>
+      </fields>
+      <fields xsi:type="schema:DataCompositionSchemaDataSetField">
+        <dataPath>ModifyDate</dataPath>
+        <field>ModifyDate</field>
+      </fields>
+      <fields xsi:type="schema:DataCompositionSchemaDataSetField">
+        <dataPath>CreateDate</dataPath>
+        <field>CreateDate</field>
       </fields>
       <parameters>
         <name>Period</name>

@@ -105,7 +105,7 @@
       </extInfo>
     </items>
     <items xsi:type="form:FormField">
-      <name>PaimentStatusIcon</name>
+      <name>PaymentStatusIcon</name>
       <id>58</id>
       <visible>true</visible>
       <enabled>true</enabled>
@@ -113,7 +113,7 @@
         <common>true</common>
       </userVisible>
       <dataPath xsi:type="form:DataPath">
-        <segments>List.PaimentStatusIcon</segments>
+        <segments>List.PaymentStatusIcon</segments>
       </dataPath>
       <titleLocation>None</titleLocation>
       <toolTip>
@@ -121,7 +121,7 @@
         <value>Payment status</value>
       </toolTip>
       <extendedTooltip>
-        <name>PaimentStatusIconExtendedTooltip</name>
+        <name>PaymentStatusIconExtendedTooltip</name>
         <id>60</id>
         <visible>true</visible>
         <enabled>true</enabled>
@@ -136,7 +136,7 @@
         </extInfo>
       </extendedTooltip>
       <contextMenu>
-        <name>PaimentStatusIconContextMenu</name>
+        <name>PaymentStatusIconContextMenu</name>
         <id>59</id>
         <visible>true</visible>
         <enabled>true</enabled>
@@ -840,6 +840,54 @@
         <textEdit>true</textEdit>
       </extInfo>
     </items>
+    <items xsi:type="form:FormField">
+      <name>PaymentStatus</name>
+      <id>61</id>
+      <visible>true</visible>
+      <enabled>true</enabled>
+      <userVisible/>
+      <dataPath xsi:type="form:DataPath">
+        <segments>List.PaymentStatus</segments>
+      </dataPath>
+      <extendedTooltip>
+        <name>PaymentStatusExtendedTooltip</name>
+        <id>63</id>
+        <visible>true</visible>
+        <enabled>true</enabled>
+        <userVisible>
+          <common>true</common>
+        </userVisible>
+        <type>Label</type>
+        <autoMaxWidth>true</autoMaxWidth>
+        <autoMaxHeight>true</autoMaxHeight>
+        <extInfo xsi:type="form:LabelDecorationExtInfo">
+          <horizontalAlign>Left</horizontalAlign>
+        </extInfo>
+      </extendedTooltip>
+      <contextMenu>
+        <name>PaymentStatusContextMenu</name>
+        <id>62</id>
+        <visible>true</visible>
+        <enabled>true</enabled>
+        <userVisible>
+          <common>true</common>
+        </userVisible>
+        <autoFill>true</autoFill>
+      </contextMenu>
+      <type>InputField</type>
+      <editMode>Enter</editMode>
+      <showInHeader>true</showInHeader>
+      <headerHorizontalAlign>Left</headerHorizontalAlign>
+      <showInFooter>true</showInFooter>
+      <extInfo xsi:type="form:InputFieldExtInfo">
+        <autoMaxWidth>true</autoMaxWidth>
+        <autoMaxHeight>true</autoMaxHeight>
+        <wrap>true</wrap>
+        <chooseType>true</chooseType>
+        <typeDomainEnabled>true</typeDomainEnabled>
+        <textEdit>true</textEdit>
+      </extInfo>
+    </items>
     <commandBarLocation>None</commandBarLocation>
     <autoCommandBar>
       <name>ListCommandBar</name>
@@ -1088,6 +1136,35 @@ INDEX BY
 ;
 
 ////////////////////////////////////////////////////////////////////////////////
+SELECT
+	R2021B_CustomersTransactions.Recorder AS Basis,
+	R2021B_CustomersTransactions.Amount,
+	ISNULL(R2021B_CustomersTransactionsBalance.AmountBalance, 0) AS AmountBalance,
+	CASE
+		WHEN ISNULL(R2021B_CustomersTransactionsBalance.AmountBalance, 0) = 0
+			THEN 0
+		WHEN ISNULL(R2021B_CustomersTransactionsBalance.AmountBalance, 0) &lt; 0
+			THEN 7
+		WHEN ISNULL(R2021B_CustomersTransactionsBalance.AmountBalance, 0) &lt; R2021B_CustomersTransactions.Amount
+			THEN 1
+		ELSE 2
+	END AS Status
+INTO PaymentsTable
+FROM
+	AccumulationRegister.R2021B_CustomersTransactions AS R2021B_CustomersTransactions
+		LEFT JOIN AccumulationRegister.R2021B_CustomersTransactions.Balance(,
+			CurrencyMovementType = VALUE(ChartOfCharacteristicTypes.CurrencyMovementType.SettlementCurrency)) AS
+			R2021B_CustomersTransactionsBalance
+		ON R2021B_CustomersTransactionsBalance.Basis = R2021B_CustomersTransactions.Basis
+		AND R2021B_CustomersTransactionsBalance.Basis = R2021B_CustomersTransactions.Recorder
+		AND R2021B_CustomersTransactionsBalance.CurrencyMovementType = R2021B_CustomersTransactions.CurrencyMovementType
+WHERE
+	VALUETYPE(R2021B_CustomersTransactions.Recorder) = TYPE(Document.SalesInvoice)
+	AND R2021B_CustomersTransactions.Agreement.ApArPostingDetail = VALUE(Enum.ApArPostingDetail.ByDocuments)
+	AND R2021B_CustomersTransactions.Amount > 0
+;
+
+////////////////////////////////////////////////////////////////////////////////
  SELECT
 	SalesInvoice.Ref,
 	CASE
@@ -1123,7 +1200,7 @@ INDEX BY
 			THEN 0
 		ELSE 1
 	END) AS IsHaveJE,
-	MAX(ISNULL(Payments.Status, -1)) AS PaimentStatusIcon,
+	MAX(ISNULL(Payments.Status, -1)) AS PaymentStatusIcon,
 	MAX(CASE
 		WHEN ISNULL(Payments.Status, -1) = 0
 			THEN VALUE(Enum.PaymentStatuses.FullyPaid)
@@ -1133,36 +1210,18 @@ INDEX BY
 			THEN VALUE(Enum.PaymentStatuses.PartiallyPaid)
 		WHEN ISNULL(Payments.Status, -1) = 2
 			THEN VALUE(Enum.PaymentStatuses.NotPaid)
-		ELSE VALUE(Enum.PaymentStatuses.EmptyRef)
-	END) AS PaimentStatus
+		ELSE VALUE(Enum.PaymentStatuses.NotTracked)
+	END) AS PaymentStatus
+{SELECT
+	Store,
+	LedgerType,
+	IsHaveJE,
+	PaymentStatusIcon,
+	PaymentStatus}
 FROM
 	Document.SalesInvoice AS SalesInvoice
 		LEFT JOIN ItemListTable AS ItemListTable
-			LEFT JOIN (SELECT
-				R2021B_CustomersTransactions.Recorder AS Basis,
-				R2021B_CustomersTransactions.Amount,
-				ISNULL(R2021B_CustomersTransactionsBalance.AmountBalance, 0) AS AmountBalance,
-				CASE
-					WHEN ISNULL(R2021B_CustomersTransactionsBalance.AmountBalance, 0) = 0
-						THEN 0
-					WHEN ISNULL(R2021B_CustomersTransactionsBalance.AmountBalance, 0) &lt; 0
-						THEN 7
-					WHEN ISNULL(R2021B_CustomersTransactionsBalance.AmountBalance, 0) &lt; R2021B_CustomersTransactions.Amount
-						THEN 1
-					ELSE 2
-				END AS Status
-			FROM
-				AccumulationRegister.R2021B_CustomersTransactions AS R2021B_CustomersTransactions
-					LEFT JOIN AccumulationRegister.R2021B_CustomersTransactions.Balance(,
-						CurrencyMovementType = VALUE(ChartOfCharacteristicTypes.CurrencyMovementType.SettlementCurrency)) AS
-						R2021B_CustomersTransactionsBalance
-					ON R2021B_CustomersTransactionsBalance.Basis = R2021B_CustomersTransactions.Basis
-					AND R2021B_CustomersTransactionsBalance.Basis = R2021B_CustomersTransactions.Recorder
-					AND R2021B_CustomersTransactionsBalance.CurrencyMovementType = R2021B_CustomersTransactions.CurrencyMovementType
-			WHERE
-				VALUETYPE(R2021B_CustomersTransactions.Recorder) = TYPE(Document.SalesInvoice)
-				AND R2021B_CustomersTransactions.Agreement.ApArPostingDetail = VALUE(Enum.ApArPostingDetail.ByDocuments)
-				AND R2021B_CustomersTransactions.Amount > 0) AS Payments
+			LEFT JOIN PaymentsTable AS Payments
 			ON ItemListTable.Ref = Payments.Basis
 		ON ItemListTable.Ref = SalesInvoice.Ref
 		LEFT JOIN AccumulationRegister.R2031B_ShipmentInvoicing.Balance AS R2031B_ShipmentInvoicingBalance
@@ -1323,22 +1382,6 @@ GROUP BY
         <field>Agreement</field>
       </fields>
       <fields xsi:type="schema:DataCompositionSchemaDataSetField">
-        <dataPath>Amount</dataPath>
-        <field>Amount</field>
-      </fields>
-      <fields xsi:type="schema:DataCompositionSchemaDataSetField">
-        <dataPath>AmountBalance</dataPath>
-        <field>AmountBalance</field>
-        <title>
-          <localValue>
-            <content>
-              <key>en</key>
-              <value>Amount balance</value>
-            </content>
-          </localValue>
-        </title>
-      </fields>
-      <fields xsi:type="schema:DataCompositionSchemaDataSetField">
         <dataPath>CurrencyMovementType</dataPath>
         <field>CurrencyMovementType</field>
       </fields>
@@ -1355,28 +1398,12 @@ GROUP BY
         <field>Project</field>
       </fields>
       <fields xsi:type="schema:DataCompositionSchemaDataSetField">
-        <dataPath>PaimentStatusIcon</dataPath>
-        <field>PaimentStatusIcon</field>
-        <title>
-          <localValue>
-            <content>
-              <key>en</key>
-              <value>Paiment status icon</value>
-            </content>
-          </localValue>
-        </title>
+        <dataPath>PaymentStatusIcon</dataPath>
+        <field>PaymentStatusIcon</field>
       </fields>
       <fields xsi:type="schema:DataCompositionSchemaDataSetField">
-        <dataPath>PaimentStatus</dataPath>
-        <field>PaimentStatus</field>
-        <title>
-          <localValue>
-            <content>
-              <key>en</key>
-              <value>Paiment status</value>
-            </content>
-          </localValue>
-        </title>
+        <dataPath>PaymentStatus</dataPath>
+        <field>PaymentStatus</field>
       </fields>
       <fields xsi:type="schema:DataCompositionSchemaDataSetField">
         <dataPath>DateOfShipment</dataPath>

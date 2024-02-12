@@ -807,6 +807,54 @@
         <textEdit>true</textEdit>
       </extInfo>
     </items>
+    <items xsi:type="form:FormField">
+      <name>PaymentStatus</name>
+      <id>70</id>
+      <visible>true</visible>
+      <enabled>true</enabled>
+      <userVisible/>
+      <dataPath xsi:type="form:DataPath">
+        <segments>List.PaymentStatus</segments>
+      </dataPath>
+      <extendedTooltip>
+        <name>PaymentStatusExtendedTooltip</name>
+        <id>72</id>
+        <visible>true</visible>
+        <enabled>true</enabled>
+        <userVisible>
+          <common>true</common>
+        </userVisible>
+        <type>Label</type>
+        <autoMaxWidth>true</autoMaxWidth>
+        <autoMaxHeight>true</autoMaxHeight>
+        <extInfo xsi:type="form:LabelDecorationExtInfo">
+          <horizontalAlign>Left</horizontalAlign>
+        </extInfo>
+      </extendedTooltip>
+      <contextMenu>
+        <name>PaymentStatusContextMenu</name>
+        <id>71</id>
+        <visible>true</visible>
+        <enabled>true</enabled>
+        <userVisible>
+          <common>true</common>
+        </userVisible>
+        <autoFill>true</autoFill>
+      </contextMenu>
+      <type>InputField</type>
+      <editMode>Enter</editMode>
+      <showInHeader>true</showInHeader>
+      <headerHorizontalAlign>Left</headerHorizontalAlign>
+      <showInFooter>true</showInFooter>
+      <extInfo xsi:type="form:InputFieldExtInfo">
+        <autoMaxWidth>true</autoMaxWidth>
+        <autoMaxHeight>true</autoMaxHeight>
+        <wrap>true</wrap>
+        <chooseType>true</chooseType>
+        <typeDomainEnabled>true</typeDomainEnabled>
+        <textEdit>true</textEdit>
+      </extInfo>
+    </items>
     <commandBarLocation>None</commandBarLocation>
     <autoCommandBar>
       <name>ListCommandBar</name>
@@ -1037,6 +1085,9 @@
     <notDefaultUseAlwaysAttributes xsi:type="form:DataPath">
       <segments>List.Ref</segments>
     </notDefaultUseAlwaysAttributes>
+    <notDefaultUseAlwaysAttributes xsi:type="form:DataPath">
+      <segments>List.PaymentStatus</segments>
+    </notDefaultUseAlwaysAttributes>
     <main>true</main>
     <extInfo xsi:type="form:DynamicListExtInfo">
       <queryText>SELECT
@@ -1052,6 +1103,35 @@ GROUP BY
 
 INDEX BY
 	Ref
+;
+
+////////////////////////////////////////////////////////////////////////////////
+SELECT
+	R1021B_VendorsTransactions.Recorder AS Basis,
+	R1021B_VendorsTransactions.Amount,
+	ISNULL(R1021B_VendorsTransactionsBalance.AmountBalance, 0) AS AmountBalance,
+	CASE
+		WHEN ISNULL(R1021B_VendorsTransactionsBalance.AmountBalance, 0) = 0
+			THEN 0
+		WHEN ISNULL(R1021B_VendorsTransactionsBalance.AmountBalance, 0) &lt; 0
+			THEN 7
+		WHEN ISNULL(R1021B_VendorsTransactionsBalance.AmountBalance, 0) &lt; R1021B_VendorsTransactions.Amount
+			THEN 1
+		ELSE 2
+	END AS Status
+INTO PaymentsTable
+FROM
+	AccumulationRegister.R1021B_VendorsTransactions AS R1021B_VendorsTransactions
+		LEFT JOIN AccumulationRegister.R1021B_VendorsTransactions.Balance(,
+			CurrencyMovementType = VALUE(ChartOfCharacteristicTypes.CurrencyMovementType.SettlementCurrency)) AS
+			R1021B_VendorsTransactionsBalance
+		ON R1021B_VendorsTransactionsBalance.Basis = R1021B_VendorsTransactions.Basis
+		AND R1021B_VendorsTransactionsBalance.Basis = R1021B_VendorsTransactions.Recorder
+		AND R1021B_VendorsTransactionsBalance.CurrencyMovementType = R1021B_VendorsTransactions.CurrencyMovementType
+WHERE
+	VALUETYPE(R1021B_VendorsTransactions.Recorder) = TYPE(Document.PurchaseInvoice)
+	AND R1021B_VendorsTransactions.Agreement.ApArPostingDetail = VALUE(Enum.ApArPostingDetail.ByDocuments)
+	AND R1021B_VendorsTransactions.Amount > 0
 ;
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -1103,36 +1183,18 @@ INDEX BY
 			THEN VALUE(Enum.PaymentStatuses.PartiallyPaid)
 		WHEN ISNULL(Payments.Status, -1) = 2
 			THEN VALUE(Enum.PaymentStatuses.NotPaid)
-		ELSE VALUE(Enum.PaymentStatuses.EmptyRef)
+		ELSE VALUE(Enum.PaymentStatuses.NotTracked)
 	END) AS PaymentStatus
+{SELECT
+	Store,
+	LedgerType,
+	IsHaveJE,
+	PaymentStatusIcon,
+	PaymentStatus}
 FROM
 	Document.PurchaseInvoice AS PurchaseInvoice
 		LEFT JOIN ItemListTable AS ItemListTable
-			LEFT JOIN (SELECT
-				R1021B_VendorsTransactions.Recorder AS Basis,
-				R1021B_VendorsTransactions.Amount,
-				ISNULL(R1021B_VendorsTransactionsBalance.AmountBalance, 0) AS AmountBalance,
-				CASE
-					WHEN ISNULL(R1021B_VendorsTransactionsBalance.AmountBalance, 0) = 0
-						THEN 0
-					WHEN ISNULL(R1021B_VendorsTransactionsBalance.AmountBalance, 0) &lt; 0
-						THEN 7
-					WHEN ISNULL(R1021B_VendorsTransactionsBalance.AmountBalance, 0) &lt; R1021B_VendorsTransactions.Amount
-						THEN 1
-					ELSE 2
-				END AS Status
-			FROM
-				AccumulationRegister.R1021B_VendorsTransactions AS R1021B_VendorsTransactions
-					LEFT JOIN AccumulationRegister.R1021B_VendorsTransactions.Balance(,
-						CurrencyMovementType = VALUE(ChartOfCharacteristicTypes.CurrencyMovementType.SettlementCurrency)) AS
-						R1021B_VendorsTransactionsBalance
-					ON R1021B_VendorsTransactionsBalance.Basis = R1021B_VendorsTransactions.Basis
-					AND R1021B_VendorsTransactionsBalance.Basis = R1021B_VendorsTransactions.Recorder
-					AND R1021B_VendorsTransactionsBalance.CurrencyMovementType = R1021B_VendorsTransactions.CurrencyMovementType
-			WHERE
-				VALUETYPE(R1021B_VendorsTransactions.Recorder) = TYPE(Document.PurchaseInvoice)
-				AND R1021B_VendorsTransactions.Agreement.ApArPostingDetail = VALUE(Enum.ApArPostingDetail.ByDocuments)
-				AND R1021B_VendorsTransactions.Amount > 0) AS Payments
+			LEFT JOIN PaymentsTable AS Payments
 			ON ItemListTable.Ref = Payments.Basis
 		ON PurchaseInvoice.Ref = ItemListTable.Ref
 		LEFT JOIN AccumulationRegister.R1031B_ReceiptInvoicing.Balance AS R1031B_ReceiptInvoicingBalance
@@ -1300,18 +1362,6 @@ GROUP BY
         </title>
       </fields>
       <fields xsi:type="schema:DataCompositionSchemaDataSetField">
-        <dataPath>AmountBalance</dataPath>
-        <field>AmountBalance</field>
-        <title>
-          <localValue>
-            <content>
-              <key>en</key>
-              <value>Amount balance</value>
-            </content>
-          </localValue>
-        </title>
-      </fields>
-      <fields xsi:type="schema:DataCompositionSchemaDataSetField">
         <dataPath>PaymentStatus</dataPath>
         <field>PaymentStatus</field>
         <title>
@@ -1322,6 +1372,7 @@ GROUP BY
             </content>
           </localValue>
         </title>
+        <useRestriction/>
       </fields>
       <fields xsi:type="schema:DataCompositionSchemaDataSetField">
         <dataPath>CurrencyMovementType</dataPath>
@@ -1338,10 +1389,6 @@ GROUP BY
       <fields xsi:type="schema:DataCompositionSchemaDataSetField">
         <dataPath>Project</dataPath>
         <field>Project</field>
-      </fields>
-      <fields xsi:type="schema:DataCompositionSchemaDataSetField">
-        <dataPath>Amount</dataPath>
-        <field>Amount</field>
       </fields>
       <fields xsi:type="schema:DataCompositionSchemaDataSetField">
         <dataPath>PaymentStatusIcon</dataPath>

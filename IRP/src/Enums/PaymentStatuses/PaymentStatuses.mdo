@@ -40,4 +40,11 @@
       <value>Overpaid</value>
     </synonym>
   </enumValues>
+  <enumValues uuid="dab39ffe-bd12-4676-be52-ee3f2d32f48d">
+    <name>NotTracked</name>
+    <synonym>
+      <key>en</key>
+      <value>Not tracked</value>
+    </synonym>
+  </enumValues>
 </mdclass:Enum>

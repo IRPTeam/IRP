@@ -105,6 +105,64 @@
       </extInfo>
     </items>
     <items xsi:type="form:FormField">
+      <name>PaymentStatusIcon</name>
+      <id>64</id>
+      <visible>true</visible>
+      <enabled>true</enabled>
+      <userVisible>
+        <common>true</common>
+      </userVisible>
+      <dataPath xsi:type="form:DataPath">
+        <segments>List.PaymentStatusIcon</segments>
+      </dataPath>
+      <titleLocation>None</titleLocation>
+      <toolTip>
+        <key>en</key>
+        <value>Payment status</value>
+      </toolTip>
+      <extendedTooltip>
+        <name>PaymentStatusIconExtendedTooltip</name>
+        <id>66</id>
+        <visible>true</visible>
+        <enabled>true</enabled>
+        <userVisible>
+          <common>true</common>
+        </userVisible>
+        <type>Label</type>
+        <autoMaxWidth>true</autoMaxWidth>
+        <autoMaxHeight>true</autoMaxHeight>
+        <extInfo xsi:type="form:LabelDecorationExtInfo">
+          <horizontalAlign>Left</horizontalAlign>
+        </extInfo>
+      </extendedTooltip>
+      <contextMenu>
+        <name>PaymentStatusIconContextMenu</name>
+        <id>65</id>
+        <visible>true</visible>
+        <enabled>true</enabled>
+        <userVisible>
+          <common>true</common>
+        </userVisible>
+        <autoFill>true</autoFill>
+      </contextMenu>
+      <type>PictureField</type>
+      <editMode>Enter</editMode>
+      <showInHeader>true</showInHeader>
+      <headerPicture xsi:type="core:PictureRef">
+        <picture>CommonPicture.CashOk</picture>
+      </headerPicture>
+      <headerHorizontalAlign>Left</headerHorizontalAlign>
+      <extInfo xsi:type="form:ImageFieldExtInfo">
+        <autoMaxWidth>true</autoMaxWidth>
+        <autoMaxHeight>true</autoMaxHeight>
+        <verticalStretch>true</verticalStretch>
+        <valuesPicture xsi:type="core:PictureRef">
+          <picture>CommonPicture.PaymentStatuses</picture>
+        </valuesPicture>
+        <fileDragMode>AsFileRef</fileDragMode>
+      </extInfo>
+    </items>
+    <items xsi:type="form:FormField">
       <name>Number</name>
       <id>16</id>
       <visible>true</visible>
@@ -449,60 +507,6 @@
         <chooseType>true</chooseType>
         <typeDomainEnabled>true</typeDomainEnabled>
         <textEdit>true</textEdit>
-      </extInfo>
-    </items>
-    <items xsi:type="form:FormField">
-      <name>PaymentStatus</name>
-      <id>64</id>
-      <visible>true</visible>
-      <enabled>true</enabled>
-      <userVisible>
-        <common>true</common>
-      </userVisible>
-      <dataPath xsi:type="form:DataPath">
-        <segments>List.PaymentStatus</segments>
-      </dataPath>
-      <titleLocation>None</titleLocation>
-      <extendedTooltip>
-        <name>PaymentStatusExtendedTooltip</name>
-        <id>66</id>
-        <visible>true</visible>
-        <enabled>true</enabled>
-        <userVisible>
-          <common>true</common>
-        </userVisible>
-        <type>Label</type>
-        <autoMaxWidth>true</autoMaxWidth>
-        <autoMaxHeight>true</autoMaxHeight>
-        <extInfo xsi:type="form:LabelDecorationExtInfo">
-          <horizontalAlign>Left</horizontalAlign>
-        </extInfo>
-      </extendedTooltip>
-      <contextMenu>
-        <name>PaymentStatusContextMenu</name>
-        <id>65</id>
-        <visible>true</visible>
-        <enabled>true</enabled>
-        <userVisible>
-          <common>true</common>
-        </userVisible>
-        <autoFill>true</autoFill>
-      </contextMenu>
-      <type>PictureField</type>
-      <editMode>Enter</editMode>
-      <showInHeader>true</showInHeader>
-      <headerPicture xsi:type="core:PictureRef">
-        <picture>CommonPicture.CashOk</picture>
-      </headerPicture>
-      <headerHorizontalAlign>Left</headerHorizontalAlign>
-      <extInfo xsi:type="form:ImageFieldExtInfo">
-        <autoMaxWidth>true</autoMaxWidth>
-        <autoMaxHeight>true</autoMaxHeight>
-        <verticalStretch>true</verticalStretch>
-        <valuesPicture xsi:type="core:PictureRef">
-          <picture>CommonPicture.PaymentStatuses</picture>
-        </valuesPicture>
-        <fileDragMode>AsFileRef</fileDragMode>
       </extInfo>
     </items>
     <items xsi:type="form:FormField">
@@ -1089,7 +1093,18 @@ INDEX BY
 			THEN 0
 		ELSE 1
 	END) AS IsHaveJE,
-	MAX(ISNULL(Payments.Status, -1)) AS PaymentStatus
+	MAX(ISNULL(Payments.Status, -1)) AS PaymentStatusIcon,
+	MAX(CASE
+		WHEN ISNULL(Payments.Status, -1) = 0
+			THEN VALUE(Enum.PaymentStatuses.FullyPaid)
+		WHEN ISNULL(Payments.Status, -1) = 7
+			THEN VALUE(Enum.PaymentStatuses.Overpaid)
+		WHEN ISNULL(Payments.Status, -1) = 1
+			THEN VALUE(Enum.PaymentStatuses.PartiallyPaid)
+		WHEN ISNULL(Payments.Status, -1) = 2
+			THEN VALUE(Enum.PaymentStatuses.NotPaid)
+		ELSE VALUE(Enum.PaymentStatuses.EmptyRef)
+	END) AS PaymentStatus
 FROM
 	Document.PurchaseInvoice AS PurchaseInvoice
 		LEFT JOIN ItemListTable AS ItemListTable
@@ -1327,6 +1342,18 @@ GROUP BY
       <fields xsi:type="schema:DataCompositionSchemaDataSetField">
         <dataPath>Amount</dataPath>
         <field>Amount</field>
+      </fields>
+      <fields xsi:type="schema:DataCompositionSchemaDataSetField">
+        <dataPath>PaymentStatusIcon</dataPath>
+        <field>PaymentStatusIcon</field>
+        <title>
+          <localValue>
+            <content>
+              <key>en</key>
+              <value>Payment status icon</value>
+            </content>
+          </localValue>
+        </title>
       </fields>
       <fields xsi:type="schema:DataCompositionSchemaDataSetField">
         <dataPath>LegalNameContract</dataPath>

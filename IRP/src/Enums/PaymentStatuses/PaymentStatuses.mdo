@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mdclass:Enum xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="ec337ebe-1b8b-4f3b-b640-99118068c47b">
+  <producedTypes>
+    <refType typeId="ab7bdac5-e10c-4c4d-aea2-f65cdc84fcda" valueTypeId="be5c8a0d-6725-445e-85e5-217a8b820cd2"/>
+    <listType typeId="36b8244e-9e47-47bd-ad5e-655ef10a6e48" valueTypeId="e86070f7-5b29-4aa3-baed-6ad5a6fd0d60"/>
+    <managerType typeId="e71abb3f-1784-4b11-9037-f735a3009881" valueTypeId="56244f5d-5e7a-4ff2-ab9f-576b5ddc33ca"/>
+  </producedTypes>
+  <name>PaymentStatuses</name>
+  <synonym>
+    <key>en</key>
+    <value>Payment statuses</value>
+  </synonym>
+  <quickChoice>true</quickChoice>
+  <choiceMode>BothWays</choiceMode>
+  <enumValues uuid="51f2810e-99e2-4f98-a1fc-02ff7c933dfe">
+    <name>NotPaid</name>
+    <synonym>
+      <key>en</key>
+      <value>Not paid</value>
+    </synonym>
+  </enumValues>
+  <enumValues uuid="edd8c074-c61a-495c-92c1-368c7097c555">
+    <name>FullyPaid</name>
+    <synonym>
+      <key>en</key>
+      <value>Fully paid</value>
+    </synonym>
+  </enumValues>
+  <enumValues uuid="13a799d9-b613-43ff-937e-af95426a6a27">
+    <name>PartiallyPaid</name>
+    <synonym>
+      <key>en</key>
+      <value>Partially paid</value>
+    </synonym>
+  </enumValues>
+  <enumValues uuid="1020f0de-faed-4c89-9816-a87c4c263ea1">
+    <name>Overpaid</name>
+    <synonym>
+      <key>en</key>
+      <value>Overpaid</value>
+    </synonym>
+  </enumValues>
+</mdclass:Enum>

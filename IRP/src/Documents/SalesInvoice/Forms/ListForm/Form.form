@@ -105,6 +105,65 @@
       </extInfo>
     </items>
     <items xsi:type="form:FormField">
+      <name>PaimentStatusIcon</name>
+      <id>58</id>
+      <visible>true</visible>
+      <enabled>true</enabled>
+      <userVisible>
+        <common>true</common>
+      </userVisible>
+      <dataPath xsi:type="form:DataPath">
+        <segments>List.PaimentStatusIcon</segments>
+      </dataPath>
+      <titleLocation>None</titleLocation>
+      <toolTip>
+        <key>en</key>
+        <value>Payment status</value>
+      </toolTip>
+      <extendedTooltip>
+        <name>PaimentStatusIconExtendedTooltip</name>
+        <id>60</id>
+        <visible>true</visible>
+        <enabled>true</enabled>
+        <userVisible>
+          <common>true</common>
+        </userVisible>
+        <type>Label</type>
+        <autoMaxWidth>true</autoMaxWidth>
+        <autoMaxHeight>true</autoMaxHeight>
+        <extInfo xsi:type="form:LabelDecorationExtInfo">
+          <horizontalAlign>Left</horizontalAlign>
+        </extInfo>
+      </extendedTooltip>
+      <contextMenu>
+        <name>PaimentStatusIconContextMenu</name>
+        <id>59</id>
+        <visible>true</visible>
+        <enabled>true</enabled>
+        <userVisible>
+          <common>true</common>
+        </userVisible>
+        <autoFill>true</autoFill>
+      </contextMenu>
+      <type>PictureField</type>
+      <editMode>Enter</editMode>
+      <showInHeader>true</showInHeader>
+      <headerPicture xsi:type="core:PictureRef">
+        <picture>CommonPicture.CashOk</picture>
+      </headerPicture>
+      <headerHorizontalAlign>Left</headerHorizontalAlign>
+      <showInFooter>true</showInFooter>
+      <extInfo xsi:type="form:ImageFieldExtInfo">
+        <autoMaxWidth>true</autoMaxWidth>
+        <autoMaxHeight>true</autoMaxHeight>
+        <verticalStretch>true</verticalStretch>
+        <valuesPicture xsi:type="core:PictureRef">
+          <picture>CommonPicture.PaymentStatuses</picture>
+        </valuesPicture>
+        <fileDragMode>AsFileRef</fileDragMode>
+      </extInfo>
+    </items>
+    <items xsi:type="form:FormField">
       <name>Number</name>
       <id>16</id>
       <title>
@@ -465,61 +524,6 @@
         <chooseType>true</chooseType>
         <typeDomainEnabled>true</typeDomainEnabled>
         <textEdit>true</textEdit>
-      </extInfo>
-    </items>
-    <items xsi:type="form:FormField">
-      <name>PaimentStatus</name>
-      <id>58</id>
-      <visible>true</visible>
-      <enabled>true</enabled>
-      <userVisible>
-        <common>true</common>
-      </userVisible>
-      <dataPath xsi:type="form:DataPath">
-        <segments>List.PaimentStatus</segments>
-      </dataPath>
-      <titleLocation>None</titleLocation>
-      <extendedTooltip>
-        <name>PaimentStatusExtendedTooltip</name>
-        <id>60</id>
-        <visible>true</visible>
-        <enabled>true</enabled>
-        <userVisible>
-          <common>true</common>
-        </userVisible>
-        <type>Label</type>
-        <autoMaxWidth>true</autoMaxWidth>
-        <autoMaxHeight>true</autoMaxHeight>
-        <extInfo xsi:type="form:LabelDecorationExtInfo">
-          <horizontalAlign>Left</horizontalAlign>
-        </extInfo>
-      </extendedTooltip>
-      <contextMenu>
-        <name>PaimentStatusContextMenu</name>
-        <id>59</id>
-        <visible>true</visible>
-        <enabled>true</enabled>
-        <userVisible>
-          <common>true</common>
-        </userVisible>
-        <autoFill>true</autoFill>
-      </contextMenu>
-      <type>PictureField</type>
-      <editMode>Enter</editMode>
-      <showInHeader>true</showInHeader>
-      <headerPicture xsi:type="core:PictureRef">
-        <picture>CommonPicture.CashOk</picture>
-      </headerPicture>
-      <headerHorizontalAlign>Left</headerHorizontalAlign>
-      <showInFooter>true</showInFooter>
-      <extInfo xsi:type="form:ImageFieldExtInfo">
-        <autoMaxWidth>true</autoMaxWidth>
-        <autoMaxHeight>true</autoMaxHeight>
-        <verticalStretch>true</verticalStretch>
-        <valuesPicture xsi:type="core:PictureRef">
-          <picture>CommonPicture.PaymentStatuses</picture>
-        </valuesPicture>
-        <fileDragMode>AsFileRef</fileDragMode>
       </extInfo>
     </items>
     <items xsi:type="form:FormField">
@@ -1119,7 +1123,18 @@ INDEX BY
 			THEN 0
 		ELSE 1
 	END) AS IsHaveJE,
-	MAX(ISNULL(Payments.Status, -1)) AS PaimentStatus
+	MAX(ISNULL(Payments.Status, -1)) AS PaimentStatusIcon,
+	MAX(CASE
+		WHEN ISNULL(Payments.Status, -1) = 0
+			THEN VALUE(Enum.PaymentStatuses.FullyPaid)
+		WHEN ISNULL(Payments.Status, -1) = 7
+			THEN VALUE(Enum.PaymentStatuses.Overpaid)
+		WHEN ISNULL(Payments.Status, -1) = 1
+			THEN VALUE(Enum.PaymentStatuses.PartiallyPaid)
+		WHEN ISNULL(Payments.Status, -1) = 2
+			THEN VALUE(Enum.PaymentStatuses.NotPaid)
+		ELSE VALUE(Enum.PaymentStatuses.EmptyRef)
+	END) AS PaimentStatus
 FROM
 	Document.SalesInvoice AS SalesInvoice
 		LEFT JOIN ItemListTable AS ItemListTable
@@ -1308,18 +1323,6 @@ GROUP BY
         <field>Agreement</field>
       </fields>
       <fields xsi:type="schema:DataCompositionSchemaDataSetField">
-        <dataPath>PaimentStatus</dataPath>
-        <field>PaimentStatus</field>
-        <title>
-          <localValue>
-            <content>
-              <key>en</key>
-              <value>Paiment status</value>
-            </content>
-          </localValue>
-        </title>
-      </fields>
-      <fields xsi:type="schema:DataCompositionSchemaDataSetField">
         <dataPath>Amount</dataPath>
         <field>Amount</field>
       </fields>
@@ -1350,6 +1353,30 @@ GROUP BY
       <fields xsi:type="schema:DataCompositionSchemaDataSetField">
         <dataPath>Project</dataPath>
         <field>Project</field>
+      </fields>
+      <fields xsi:type="schema:DataCompositionSchemaDataSetField">
+        <dataPath>PaimentStatusIcon</dataPath>
+        <field>PaimentStatusIcon</field>
+        <title>
+          <localValue>
+            <content>
+              <key>en</key>
+              <value>Paiment status icon</value>
+            </content>
+          </localValue>
+        </title>
+      </fields>
+      <fields xsi:type="schema:DataCompositionSchemaDataSetField">
+        <dataPath>PaimentStatus</dataPath>
+        <field>PaimentStatus</field>
+        <title>
+          <localValue>
+            <content>
+              <key>en</key>
+              <value>Paiment status</value>
+            </content>
+          </localValue>
+        </title>
       </fields>
       <fields xsi:type="schema:DataCompositionSchemaDataSetField">
         <dataPath>DateOfShipment</dataPath>

@@ -1263,6 +1263,7 @@
   <enums>Enum.EmployeeScheduleTypes</enums>
   <enums>Enum.RecordType</enums>
   <enums>Enum.AgingPeriodTypes</enums>
+  <enums>Enum.PaymentStatuses</enums>
   <reports>Report.A0010_TrialBalance</reports>
   <reports>Report.A0011_TrialBalanceByAccount</reports>
   <reports>Report.A0012_AccountCard</reports>

@@ -56,4 +56,13 @@
     <usePurposes>PersonalComputer</usePurposes>
     <usePurposes>MobileDevice</usePurposes>
   </forms>
+  <forms uuid="dd969621-5cb5-474e-8c22-54876a64f044">
+    <name>LoadDataFromTable</name>
+    <synonym>
+      <key>en</key>
+      <value>Load data from table</value>
+    </synonym>
+    <usePurposes>PersonalComputer</usePurposes>
+    <usePurposes>MobileDevice</usePurposes>
+  </forms>
 </mdclass:DataProcessor>

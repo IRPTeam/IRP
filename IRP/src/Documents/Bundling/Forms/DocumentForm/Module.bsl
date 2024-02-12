@@ -361,16 +361,6 @@ EndFunction
 
 #EndRegion
 
-#Region LOAD_DATA_FROM_TABLE
-
-//@skip-check module-unused-method
-&AtClient
-Procedure LoadDataFromTable(Command)
-	LoadDataFromTableClient.OpenFormForLoadData(ThisObject, ThisObject.Object);
-EndProcedure
-
-#EndRegion
-
 #Region COMMANDS
 
 &AtClient

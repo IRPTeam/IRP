@@ -14,6 +14,7 @@ Function GetAllCommandDescriptions() Export
 	Result.Add(GetCommandDescription("ShowNotActive"));
 	Result.Add(GetCommandDescription("GroupEditingProperties"));
 	Result.Add(GetCommandDescription("CloneValueFromFirstRow"));
+	Result.Add(GetCommandDescription("LoadDataFromTable"));
 	
 	Return Result;
 	
@@ -39,6 +40,9 @@ Function GetCommandDescription(CommandName) Export
 
 	ElsIf CommandName = "CloneValueFromFirstRow" Then
 		Return CloneValueFromFirstRow_GetCommandDescription();
+	
+	ElsIf CommandName = "LoadDataFromTable" Then
+		Return LoadDataFromTable_GetCommandDescription();
 
 	EndIf;
 	
@@ -82,6 +86,9 @@ Procedure OnCommandCreate(CommandName, CommandParameters, AddInfo = Undefined) E
 		
 	ElsIf CommandName = "GroupEditingProperties" Then
 		GroupEditingProperties_OnCommandCreate(CommandName, CommandParameters, AddInfo);
+		
+	ElsIf CommandName = "LoadDataFromTable" Then
+		LoadDataFromTable_OnCommandCreate(CommandName, CommandParameters, AddInfo);
 		
 	EndIf;
 	
@@ -468,6 +475,125 @@ Procedure CloneValueFromFirstRow_RunCommandAction(Targets, Form, CommandFormItem
 		Row[ColumnName] = TableData[0][ColumnName];
 	EndDo;
 
+EndProcedure
+
+#EndRegion
+
+#Region LoadDataFromTable
+
+// Load data from table get command description.
+// 
+// Returns:
+//  See InternalCommandsServer.GetCommandDescription
+Function LoadDataFromTable_GetCommandDescription()
+	
+	CommandDescription = InternalCommandsServer.GetCommandDescription();
+	
+	CommandDescription.Name = "LoadDataFromTable";
+	CommandDescription.Title = R().LDT_Button_Title;
+	CommandDescription.ToolTip = R().LDT_Button_ToolTip; 
+	CommandDescription.Picture = "SpreadsheetShowGrid";
+	CommandDescription.Representation = "Picture";
+	
+	CommandDescription.ForTables = True;
+	CommandDescription.SpecificTables = "ItemList";
+	
+	CommandDescription.LocationGroup = "CommandBar.Tools";
+	CommandDescription.ModifiesStoredData = True;
+	
+	CommandDescription.UsingObjectForm = True;
+	
+	CommandDescription.HasActionOnCommandCreate = True;
+
+	
+	Targets = CommandDescription.Targets;
+	
+	ArrayOfExcludingDocuments = New Array(); // Array of MetadataObject
+	ArrayOfExcludingDocuments.Add(Metadata.Documents.SalesOrderClosing);
+	ArrayOfExcludingDocuments.Add(Metadata.Documents.PurchaseOrderClosing);
+	
+	For Each ContentItem In Metadata.Documents Do
+		If ArrayOfExcludingDocuments.Find(ContentItem) = Undefined Then
+			Targets.Add(ContentItem.FullName());
+		EndIf;
+	EndDo;
+	CommandDescription.Targets = New FixedArray(Targets);
+	
+	Return CommandDescription;
+	
+EndFunction
+
+// See InternalCommandsServer.OnCommandCreate
+Procedure LoadDataFromTable_OnCommandCreate(CommandName, CommandParameters, AddInfo)
+
+	Form = CommandParameters.Form;
+	ObjectMetadata = Metadata.FindByFullName(CommandParameters.ObjectFullName);
+	
+	FormAddAttributes = Form.GetAttributes();
+	FormAttribute = New FormAttribute("_FieldsForLoadData", New TypeDescription(""));
+	If FormAddAttributes.Find(FormAttribute) = Undefined Then
+		NewAttributes = New Array; // Array of FormAttribute
+		NewAttributes.Add(FormAttribute);
+		Form.ChangeAttributes(NewAttributes);
+		
+		FieldsForLoadData = New Structure;
+		For Each TableChildItem In Form.Items.ItemList.ChildItems Do
+			If TableChildItem.Type = FormFieldType.InputField And TableChildItem.Visible Then
+				DataPathParts = StrSplit(TableChildItem.DataPath, ".");
+				TableName = DataPathParts[1];
+				AttributeName = DataPathParts[2];
+				//@skip-check wrong-string-literal-content
+				TableAttributes = ObjectMetadata["TabularSections"][TableName]["Attributes"]; // MetadataObjectCollection
+				ItemAttribute = TableAttributes.Find(AttributeName); // MetadataObjectAttribute
+				If Not ItemAttribute = Undefined Then
+					ItemDescription = New Structure;
+					ItemDescription.Insert("Name", AttributeName);
+					ItemDescription.Insert("Synonym", ItemAttribute.Synonym);
+					ItemDescription.Insert("Type", ItemAttribute.Type);
+					FieldsForLoadData.Insert(AttributeName, ItemDescription); 
+				EndIf;
+			EndIf;
+		EndDo;
+		//@skip-check wrong-string-literal-content
+		Form["_FieldsForLoadData"] = FieldsForLoadData;
+	EndIf;
+	
+	If ObjectMetadata = Metadata.Documents.PriceList Then
+		If Form.Items.Find("ItemKeyListLoadDataFromTable") = Undefined Then
+			CommandButton = Form.Items.Add(
+				"ItemKeyListLoadDataFromTable", Type("FormButton"), Form.Items.ItemKeyList.CommandBar); // FormButton
+			CommandButton.CommandName = "LoadDataFromTable";
+		EndIf;
+		
+		FormAttribute = New FormAttribute("_FieldsForLoadData_ItemKey", New TypeDescription(""));
+		If FormAddAttributes.Find(FormAttribute) = Undefined Then
+			NewAttributes = New Array; // Array of FormAttribute
+			NewAttributes.Add(FormAttribute);
+			Form.ChangeAttributes(NewAttributes);
+			
+			FieldsForLoadData = New Structure;
+			For Each TableChildItem In Form.Items.ItemKeyList.ChildItems Do
+				If TableChildItem.Type = FormFieldType.InputField And TableChildItem.Visible Then
+					DataPathParts = StrSplit(TableChildItem.DataPath, ".");
+					TableName = DataPathParts[1];
+					AttributeName = DataPathParts[2];
+					//@skip-check wrong-string-literal-content
+					TableAttributes = ObjectMetadata["TabularSections"][TableName]["Attributes"]; // MetadataObjectCollection
+					ItemAttribute = TableAttributes.Find(AttributeName); // MetadataObjectAttribute
+					If Not ItemAttribute = Undefined Then
+						ItemDescription = New Structure;
+						ItemDescription.Insert("Name", AttributeName);
+						ItemDescription.Insert("Synonym", ItemAttribute.Synonym);
+						ItemDescription.Insert("Type", ItemAttribute.Type);
+						FieldsForLoadData.Insert(AttributeName, ItemDescription); 
+					EndIf;
+				EndIf;
+			EndDo;
+			//@skip-check wrong-string-literal-content
+			Form["_FieldsForLoadData_ItemKey"] = FieldsForLoadData;
+		EndIf;		
+	EndIf;
+		 
 EndProcedure
 
 #EndRegion

@@ -33,7 +33,6 @@ Procedure OnCreateAtServer(Object, Form, Cancel, StandardProcessing) Export
 	ExternalCommandsServer.CreateCommands(Form, ObjectMetdata.FullName(), Enums.FormTypes.ObjectForm);
 	If ArrayOfExcludingDocuments.Find(ObjectMetdata) = Undefined Then
 		CopyPasteServer.CreateCommands(Form, ObjectMetdata.FullName(), Enums.FormTypes.ObjectForm);
-		LoadDataFromTableServer.CreateCommands(Form, ObjectMetdata, Enums.FormTypes.ObjectForm);
 	EndIf;
 	SerialLotNumbersServer.CreateCommands(Form, ObjectMetdata, Enums.FormTypes.ObjectForm);
 	

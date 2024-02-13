@@ -212,6 +212,10 @@ Function ReceiveTransactions()
 		|	Doc.ReceiveProject,
 		|	Doc.ReceiveOrder,
 		|	Doc.ReceiveBasisDocument,
+		|	(Doc.SendDebtType = VALUE(Enum.DebtTypes.AdvanceVendor)
+		|	OR Doc.SendDebtType = VALUE(Enum.DebtTypes.AdvanceCustomer))
+		|	AND (Doc.ReceiveDebtType = VALUE(Enum.DebtTypes.TransactionVendor)
+		|	OR Doc.ReceiveDebtType = VALUE(Enum.DebtTypes.TransactionCustomer)) AS IsOffset,
 		|	CASE
 		|		WHEN Doc.ReceiveDebtType = VALUE(Enum.DebtTypes.TransactionVendor)
 		|			THEN TRUE

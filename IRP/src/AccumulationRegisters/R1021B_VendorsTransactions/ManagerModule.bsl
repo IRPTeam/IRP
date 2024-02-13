@@ -420,7 +420,10 @@ Function R1021B_VendorsTransactions_DebitCreditNote() Export
 		|UNION ALL
 		|
 		|SELECT
-		|	VALUE(AccumulationRecordType.Receipt),
+		|	case when Doc.IsOffset Then 
+		|		VALUE(AccumulationRecordType.Expense) 
+		|	else 
+		|		VALUE(AccumulationRecordType.Receipt) end as RecordType,
 		|	Doc.Period,
 		|	Doc.Company,
 		|	Doc.ReceiveBranch,

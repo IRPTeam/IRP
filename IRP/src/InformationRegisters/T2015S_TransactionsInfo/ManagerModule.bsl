@@ -223,8 +223,8 @@ Function T2015S_TransactionsInfo_DebitCreditNote() Export
 		|	Doc.ReceiveOrder,
 		|	Doc.SendIsVendorTransaction,
 		|	Doc.SendIsCustomerTransaction,
-		|	TRUE AS IsDue,
-		|	FALSE AS IsPaid,
+		|	Not Doc.IsOffset AS IsDue,
+		|	Doc.IsOffset AS IsPaid,
 		|	Doc.Amount
 		|FROM
 		|	ReceiveTransactions AS Doc";

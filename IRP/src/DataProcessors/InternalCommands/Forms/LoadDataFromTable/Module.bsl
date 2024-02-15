@@ -36,34 +36,24 @@ EndProcedure
 &AtClient
 Procedure RunCommandAction(Targets, Form, CommandFormItem, MainAttribute, AddInfo = Undefined) Export
 	
-	Var EndNotify; 			// NotifyDescription
-	Var TargetField; 		// FormAttribute
-	Var FieldsForLoadData; 	// FormAttribute
-	
-	If TypeOf(AddInfo) = Type("Structure") Then
-		AddInfo.Property("FieldsForLoadData", FieldsForLoadData);
-		AddInfo.Property("TargetField", TargetField);
-		AddInfo.Property("EndNotify", EndNotify);
+	TableForLoading = "";
+	CommandNameParts = StrSplit(CommandFormItem.CommandName, "_");
+	If CommandNameParts.Count() = 3 Then
+		TableForLoading = CommandNameParts[1];
 	EndIf;
 	
-	If FieldsForLoadData = Undefined Then
-		//@skip-check wrong-string-literal-content
-		FieldsForLoadData = Form["_FieldsForLoadData"];
-	EndIf;
-	If EndNotify = Undefined Then
-		AddInfoNotify = New Structure;
-		AddInfoNotify.Insert("FormObject",     Form);
-		AddInfoNotify.Insert("DocumentObject", MainAttribute);
-		EndNotify = New NotifyDescription("LoadDataFromTableEnd", ThisObject, AddInfoNotify);
-	EndIf;
+	AddInfoNotify = New Structure;
+	AddInfoNotify.Insert("FormObject",      Form);
+	AddInfoNotify.Insert("DocumentObject",  MainAttribute);
+	AddInfoNotify.Insert("TableForLoading", TableForLoading);
+	NotifyContext = ?(Form[CommandFormItem.CommandName + "_UseFormNotify"] = True, Form, ThisObject);
+	EndNotify = New NotifyDescription(Form[CommandFormItem.CommandName + "_EndNotify"], NotifyContext, AddInfoNotify);
 	
 	FormParameters = New Structure;
-	FormParameters.Insert("FieldsForLoadData", FieldsForLoadData);
-	If TargetField <> Undefined Then
-		FormParameters.Insert("TargetField", TargetField);
-	EndIf;
+	FormParameters.Insert("FieldsForLoadData", Form[CommandFormItem.CommandName + "_Fields"]);
+	FormParameters.Insert("TargetField", Form[CommandFormItem.CommandName + "_Target"]);
 	
-	OpenForm("CommonForm.LoadDataFromTable", FormParameters, Form, , , , EndNotify);
+	OpenForm("DataProcessor.InternalCommands.Form.LoadDataFromTable_Form", FormParameters, Form, , , , EndNotify);
 
 EndProcedure
 
@@ -98,6 +88,36 @@ Procedure LoadDataFromTableEnd(Result, AddInfo) Export
 	
 EndProcedure
 
+// Load data from table end.
+// 
+// Parameters:
+//  Result - See GetLoadDataDescription
+//  AddInfo - Structure - Add info:
+//	* FormObject - ClientApplicationForm - Form
+//	* DocumentObject - DocumentObjectDocumentName - Document object
+//	* TableForLoading - String - Table for loading
+&AtClient
+Procedure LoadDataFromTableEnd_Document_PriceList(Result, AddInfo) Export
+	
+	If Result = Undefined Then
+		Return;
+	EndIf;
+	
+	NameFieldForUnit = "Item";
+	If AddInfo.TableForLoading = "ItemKeyList" Then
+		NameFieldForUnit = "ItemKey";
+	EndIf;
+	
+	DataTable = GetTableByAddress(Result.Address);
+	For Each TableRow In DataTable Do
+		DocumentTable = AddInfo.DocumentObject[AddInfo.TableForLoading]; // See Document.PriceList.ItemList
+		NewRecord = DocumentTable.Add();
+		FillPropertyValues(NewRecord, TableRow);
+		NewRecord.InputUnit = NewRecord.Unit;
+	EndDo;
+	
+EndProcedure
+
 // Get load data description.
 // 
 // Returns:
@@ -114,6 +134,26 @@ Function GetLoadDataDescription() Export
 	Result.Insert("SumColumns", "Quantity");
 	
 	Return Result;
+	
+EndFunction
+
+#EndRegion
+
+#Region PrivateServer
+
+// Get table by address.
+// 
+// Parameters:
+//  Address - String - Address
+// 
+// Returns:
+//  Array of Structure - Get table by address
+&AtServerNoContext
+Function GetTableByAddress(Address)
+	
+	DataTable = GetFromTempStorage(Address); // ValueTable
+
+	Return CommonFunctionsServer.GetTableForClient(DataTable);
 	
 EndFunction
 

@@ -496,7 +496,7 @@ Function LoadDataFromTable_GetCommandDescription()
 	CommandDescription.Representation = "Picture";
 	
 	CommandDescription.ForTables = True;
-	CommandDescription.SpecificTables = "ItemList";
+	CommandDescription.SpecificTables = "ItemList, ItemKeyList";
 	
 	CommandDescription.LocationGroup = "CommandBar.Tools";
 	CommandDescription.ModifiesStoredData = True;
@@ -528,16 +528,52 @@ Procedure LoadDataFromTable_OnCommandCreate(CommandName, CommandParameters, AddI
 
 	Form = CommandParameters.Form;
 	ObjectMetadata = Metadata.FindByFullName(CommandParameters.ObjectFullName);
+	CurrentTableName = StrSplit(CommandParameters.CommandButton.Name, "_")[1];
 	
-	FormAddAttributes = Form.GetAttributes();
-	FormAttribute = New FormAttribute("_FieldsForLoadData", New TypeDescription(""));
-	If FormAddAttributes.Find(FormAttribute) = Undefined Then
-		NewAttributes = New Array; // Array of FormAttribute
-		NewAttributes.Add(FormAttribute);
-		Form.ChangeAttributes(NewAttributes);
+	NewAttributeName_Fields = CommandParameters.CommandButton.Name + "_Fields";
+	NewAttributeName_Target = CommandParameters.CommandButton.Name + "_Target";
+	NewAttributeName_EndNotify = CommandParameters.CommandButton.Name + "_EndNotify";
+	NewAttributeName_UseFormNotify = CommandParameters.CommandButton.Name + "_UseFormNotify";
+	
+	AttributeExists_Fields = False;
+	AttributeExists_Target = False;
+	AttributeExists_EndNotify = False;
+	AttributeExists_UseFormNotify = False;
+	
+	FormAttributes = Form.GetAttributes();
+	For Each FormAttribute In FormAttributes Do
+		If FormAttribute.Name = NewAttributeName_Fields Then
+			AttributeExists_Fields = True;
+		EndIf;
+		If FormAttribute.Name = NewAttributeName_Target Then
+			AttributeExists_Target = True;
+		EndIf;
+		If FormAttribute.Name = NewAttributeName_EndNotify Then
+			AttributeExists_EndNotify = True;
+		EndIf;
+		If FormAttribute.Name = NewAttributeName_UseFormNotify Then
+			AttributeExists_UseFormNotify = True;
+		EndIf;
+	EndDo;
+	
+	NewAttributes = New Array; // Array of FormAttribute
+	If Not AttributeExists_Fields Then
+		NewAttributes.Add(New FormAttribute(NewAttributeName_Fields, New TypeDescription("")));
+	EndIf;
+	If Not AttributeExists_Target Then
+		NewAttributes.Add(New FormAttribute(NewAttributeName_Target, New TypeDescription("String")));
+	EndIf;
+	If Not AttributeExists_EndNotify Then
+		NewAttributes.Add(New FormAttribute(NewAttributeName_EndNotify, New TypeDescription("String")));
+	EndIf;
+	If Not AttributeExists_UseFormNotify Then
+		NewAttributes.Add(New FormAttribute(NewAttributeName_UseFormNotify, New TypeDescription("Boolean")));
+	EndIf;
+	Form.ChangeAttributes(NewAttributes);
 		
+	If Not AttributeExists_Fields Then
 		FieldsForLoadData = New Structure;
-		For Each TableChildItem In Form.Items.ItemList.ChildItems Do
+		For Each TableChildItem In Form.Items[CurrentTableName].ChildItems Do
 			If TableChildItem.Type = FormFieldType.InputField And TableChildItem.Visible Then
 				DataPathParts = StrSplit(TableChildItem.DataPath, ".");
 				TableName = DataPathParts[1];
@@ -554,46 +590,27 @@ Procedure LoadDataFromTable_OnCommandCreate(CommandName, CommandParameters, AddI
 				EndIf;
 			EndIf;
 		EndDo;
-		//@skip-check wrong-string-literal-content
-		Form["_FieldsForLoadData"] = FieldsForLoadData;
+		Form[NewAttributeName_Fields] = FieldsForLoadData;
 	EndIf;
 	
-	If ObjectMetadata = Metadata.Documents.PriceList Then
-		If Form.Items.Find("ItemKeyListLoadDataFromTable") = Undefined Then
-			CommandButton = Form.Items.Add(
-				"ItemKeyListLoadDataFromTable", Type("FormButton"), Form.Items.ItemKeyList.CommandBar); // FormButton
-			CommandButton.CommandName = "LoadDataFromTable";
+	If Not AttributeExists_Target Then
+		If ObjectMetadata = Metadata.Documents.PriceList Then
+			Form[NewAttributeName_Target] = "Price";
+		Else
+			Form[NewAttributeName_Target] = "Quantity";
 		EndIf;
-		
-		FormAttribute = New FormAttribute("_FieldsForLoadData_ItemKey", New TypeDescription(""));
-		If FormAddAttributes.Find(FormAttribute) = Undefined Then
-			NewAttributes = New Array; // Array of FormAttribute
-			NewAttributes.Add(FormAttribute);
-			Form.ChangeAttributes(NewAttributes);
-			
-			FieldsForLoadData = New Structure;
-			For Each TableChildItem In Form.Items.ItemKeyList.ChildItems Do
-				If TableChildItem.Type = FormFieldType.InputField And TableChildItem.Visible Then
-					DataPathParts = StrSplit(TableChildItem.DataPath, ".");
-					TableName = DataPathParts[1];
-					AttributeName = DataPathParts[2];
-					//@skip-check wrong-string-literal-content
-					TableAttributes = ObjectMetadata["TabularSections"][TableName]["Attributes"]; // MetadataObjectCollection
-					ItemAttribute = TableAttributes.Find(AttributeName); // MetadataObjectAttribute
-					If Not ItemAttribute = Undefined Then
-						ItemDescription = New Structure;
-						ItemDescription.Insert("Name", AttributeName);
-						ItemDescription.Insert("Synonym", ItemAttribute.Synonym);
-						ItemDescription.Insert("Type", ItemAttribute.Type);
-						FieldsForLoadData.Insert(AttributeName, ItemDescription); 
-					EndIf;
-				EndIf;
-			EndDo;
-			//@skip-check wrong-string-literal-content
-			Form["_FieldsForLoadData_ItemKey"] = FieldsForLoadData;
-		EndIf;		
 	EndIf;
-		 
+	
+	If Not AttributeExists_EndNotify Then
+		If ObjectMetadata = Metadata.Documents.PriceList Then
+			Form[NewAttributeName_EndNotify] = "LoadDataFromTableEnd_Document_PriceList";
+		ElsIf ObjectMetadata = Metadata.Catalogs.ItemSegments Then
+			Form[NewAttributeName_EndNotify] = "LoadDataFromTableEnd_Catalog_ItemSegments";
+		Else
+			Form[NewAttributeName_EndNotify] = "LoadDataFromTableEnd";
+		EndIf;
+	EndIf;
+	
 EndProcedure
 
 #EndRegion

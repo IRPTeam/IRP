@@ -670,7 +670,6 @@
   <commonModules>CommonModule.JorDocumentsClientServer</commonModules>
   <commonModules>CommonModule.JorDocumentsServer</commonModules>
   <commonModules>CommonModule.LandedCostServer</commonModules>
-  <commonModules>CommonModule.LoadDataFromTableClient</commonModules>
   <commonModules>CommonModule.Localization</commonModules>
   <commonModules>CommonModule.LocalizationClient</commonModules>
   <commonModules>CommonModule.LocalizationClientServer</commonModules>
@@ -978,7 +977,6 @@
   <commonForms>CommonForm.InputBarcode</commonForms>
   <commonForms>CommonForm.LinkedDocuments</commonForms>
   <commonForms>CommonForm.LinkUnlinkDocumentRows</commonForms>
-  <commonForms>CommonForm.LoadDataFromTable</commonForms>
   <commonForms>CommonForm.MainSettings</commonForms>
   <commonForms>CommonForm.PasteFromClipboardSettings</commonForms>
   <commonForms>CommonForm.PaymentByAcquiring</commonForms>

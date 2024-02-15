@@ -9,6 +9,7 @@ Procedure OnCreateAtServer(Cancel, StandardProcessing)
 		SegmentParameter.Value = Object.Ref;
 		SegmentParameter.Use = True;
 	EndIf;
+	LoadDataFromTable_OnCreateAtServer();
 	
 	AddAttributesAndPropertiesServer.OnCreateAtServer(ThisObject);
 	LocalizationEvents.CreateMainFormItemDescription(ThisObject, "GroupDescriptions");
@@ -52,12 +53,42 @@ EndProcedure
 
 #Region LOAD_DATA_FROM_TABLE
 
+&AtServer
+Procedure LoadDataFromTable_OnCreateAtServer()
+	NewAttributeName_Fields = "LoadDataFromTable_Fields";
+	NewAttributeName_Target = "LoadDataFromTable_Target";
+	NewAttributeName_EndNotify = "LoadDataFromTable_EndNotify";
+	NewAttributeName_UseFormNotify = "LoadDataFromTable_UseFormNotify";
+	
+	NewAttributes = New Array; // Array of FormAttribute
+	NewAttributes.Add(New FormAttribute(NewAttributeName_Fields, New TypeDescription("")));
+	NewAttributes.Add(New FormAttribute(NewAttributeName_Target, New TypeDescription("String")));
+	NewAttributes.Add(New FormAttribute(NewAttributeName_EndNotify, New TypeDescription("String")));
+	NewAttributes.Add(New FormAttribute(NewAttributeName_UseFormNotify, New TypeDescription("Boolean")));
+	ChangeAttributes(NewAttributes);
+
+	FieldsForLoadData = New Structure;
+	AttributesForLoadData = New Array; // Array of MetadataObjectAttribute
+	AttributesForLoadData.Add(Metadata.InformationRegisters.ItemSegments.Dimensions.Item);
+	AttributesForLoadData.Add(Metadata.InformationRegisters.ItemSegments.Dimensions.ItemKey);
+	For Each ItemAttribute In AttributesForLoadData Do
+		ItemDescription = New Structure;
+		ItemDescription.Insert("Name", ItemAttribute.Name);
+		ItemDescription.Insert("Synonym", ItemAttribute.Synonym);
+		ItemDescription.Insert("Type", ItemAttribute.Type);
+		FieldsForLoadData.Insert(ItemAttribute.Name, ItemDescription); 
+	EndDo;
+	
+	ThisObject[NewAttributeName_Fields] = FieldsForLoadData;
+	ThisObject[NewAttributeName_Target] = "Quantity";
+	ThisObject[NewAttributeName_EndNotify] = "LoadDataFromTableEnd";
+	ThisObject[NewAttributeName_UseFormNotify] = True;
+EndProcedure
+
 &AtClient
 Procedure LoadDataFromTable(Command)
-	AddInfo = New Structure;
-	AddInfo.Insert("FieldsForLoadData", "ContentSegment");
-	AddInfo.Insert("EndNotify", New NotifyDescription("LoadDataFromTableEnd", ThisObject));
-	LoadDataFromTableClient.OpenFormForLoadData(ThisObject, ThisObject.Object, AddInfo);
+	InternalCommandModule = GetForm("DataProcessor.InternalCommands.Form.LoadDataFromTable");
+	InternalCommandModule.RunCommandAction(Object.Ref, ThisObject, Items.ContentSegmentLoadDataFromTable, Object);
 EndProcedure
 
 &AtClient

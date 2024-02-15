@@ -272,32 +272,32 @@ Scenario: Open object form "PrintLabels"
 		Then I raise "Failed to open data processor form PrintLabels" exception
 	And I close current window
 
-Scenario: Open object form "AccountAnalysis"
+Scenario: Open object form "A0013_AccountAnalysis"
 
-	Given I open "AccountAnalysis" report default form
+	Given I open "A0013_AccountAnalysis" report default form
 	If the warning is displayed then
-		Then I raise "Failed to open report form AccountAnalysis" exception
+		Then I raise "Failed to open report form A0013_AccountAnalysis" exception
 	And I close current window
 
-Scenario: Open object form "AccountCard"
+Scenario: Open object form "A0012_AccountCard"
 
-	Given I open "AccountCard" report default form
+	Given I open "A0012_AccountCard" report default form
 	If the warning is displayed then
-		Then I raise "Failed to open report form AccountCard" exception
+		Then I raise "Failed to open report form A0012_AccountCard" exception
 	And I close current window
 
-Scenario: Open object form "TrialBalance"
+Scenario: Open object form "A0010_TrialBalance"
 
-	Given I open "TrialBalance" report default form
+	Given I open "A0010_TrialBalance" report default form
 	If the warning is displayed then
-		Then I raise "Failed to open report form TrialBalance" exception
+		Then I raise "Failed to open report form A0010_TrialBalance" exception
 	And I close current window
 
-Scenario: Open object form "TrialBalanceByAccount"
+Scenario: Open object form "A0011_TrialBalanceByAccount"
 
-	Given I open "TrialBalanceByAccount" report default form
+	Given I open "A0011_TrialBalanceByAccount" report default form
 	If the warning is displayed then
-		Then I raise "Failed to open report form TrialBalanceByAccount" exception
+		Then I raise "Failed to open report form A0011_TrialBalanceByAccount" exception
 	And I close current window
 
 Scenario: Open object form "PointOfSale"

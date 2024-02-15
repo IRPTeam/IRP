@@ -26,6 +26,12 @@ EndProcedure
 //  AddInfo - Undefined - Add info
 Procedure CreateCommands(Form, MainAttribute, ObjectFullName, FormType, AddInfo = Undefined) Export
 	
+	ExceptionsArray = New Array; // Array of String
+	ExceptionsArray.Add("DataProcessor.PointOfSale.Form.Form");
+	If ExceptionsArray.Find(Form.FormName) <> Undefined Then
+		Return;
+	EndIf;
+	
 	CommandArray = New Array; // Array of See GetCommandDescription
 	For Each ContentItem In SessionParameters.InternalCommands Do // See GetCommandDescription
 		If FormType = Enums.FormTypes.ObjectForm And Not ContentItem.UsingObjectForm Then

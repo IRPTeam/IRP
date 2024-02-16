@@ -1433,5 +1433,86 @@ Scenario: _012029 search for item key in the selection form
 			| 'XS/Blue'    | 'Dress'    |
 		And I close all client application windows
 
+Scenario: _012030 clone value in the SO
+	And I close all client application windows
+	* Open SO
+		Given I open hyperlink "e1cib/list/Document.SalesOrder"
+		And I click "Create" button
+	* Check clone value
+		When check clone value in the documents (Profit loss center, Revenue type)
+		
+Scenario: _012031 clone value in the SI
+	And I close all client application windows
+	* Open SI
+		Given I open hyperlink "e1cib/list/Document.SalesInvoice"
+		And I click "Create" button
+	* Check clone value
+		When check clone value in the documents (Profit loss center, Revenue type)
+
+Scenario: _012032 clone value in the SRO
+	And I close all client application windows
+	* Open SRO
+		Given I open hyperlink "e1cib/list/Document.SalesReturnOrder"
+		And I click "Create" button
+	* Check clone value
+		When check clone value in the documents (Profit loss center, Revenue type)
+
+Scenario: _012033 clone value in the SR
+	And I close all client application windows
+	* Open SR
+		Given I open hyperlink "e1cib/list/Document.SalesReturn"
+		And I click "Create" button
+	* Check clone value
+		When check clone value in the documents (Profit loss center, Revenue type)
+
+Scenario: _012034 clone value in the PI
+	And I close all client application windows
+	* Open PI
+		Given I open hyperlink "e1cib/list/Document.PurchaseInvoice"
+		And I click "Create" button
+	* Check clone value
+		When check clone value in the documents (Profit loss center, Expense type)
+
+Scenario: _012035 clone value in the PO
+	And I close all client application windows
+	* Open PO
+		Given I open hyperlink "e1cib/list/Document.PurchaseOrder"
+		And I click "Create" button
+	* Check clone value
+		When check clone value in the documents (Profit loss center, Expense type)
+
+Scenario: _012036 clone value in the PR
+	And I close all client application windows
+	* Open PR
+		Given I open hyperlink "e1cib/list/Document.PurchaseReturn"
+		And I click "Create" button
+	* Check clone value
+		When check clone value in the documents (Profit loss center, Expense type)
+
+Scenario: _012037 clone value in the PRO
+	And I close all client application windows
+	* Open PR
+		Given I open hyperlink "e1cib/list/Document.PurchaseReturnOrder"
+		And I click "Create" button
+	* Check clone value
+		When check clone value in the documents (Profit loss center, Expense type)
+
+Scenario: _012038 clone value in the StockAdjustmentAsWriteOff
+	And I close all client application windows
+	* Open StockAdjustmentAsWriteOff
+		Given I open hyperlink "e1cib/list/Document.StockAdjustmentAsWriteOff"
+		And I click "Create" button
+	* Check clone value
+		When check clone value in the documents (Profit loss center, Expense type)
+
+Scenario: _012039 clone value in the StockAdjustmentAsSurplus
+	And I close all client application windows
+	* Open StockAdjustmentAsSurplus
+		Given I open hyperlink "e1cib/list/Document.StockAdjustmentAsSurplus"
+		And I click "Create" button
+	* Check clone value
+		When check clone value in the documents (Profit loss center, Revenue type)
+		
+
 Scenario: _999999 close TestClient session
 	And I close TestClient session

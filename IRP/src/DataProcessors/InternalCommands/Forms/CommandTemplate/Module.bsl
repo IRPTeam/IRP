@@ -28,20 +28,20 @@ EndProcedure
 
 // See InternalCommandsClient.Form_BeforeRunning
 &AtClient
-Procedure BeforeRunning(Form, MainAttribute, Targets, AddInfo = Undefined) Export
+Procedure BeforeRunning(Targets, Form, CommandFormItem, MainAttribute, AddInfo = Undefined) Export
 	Return;
 EndProcedure
 
 // See InternalCommandsClient.Form_RunCommandAction
 &AtClient
-Procedure RunCommandAction(Form, MainAttribute, Targets, AddInfo = Undefined) Export
+Procedure RunCommandAction(Targets, Form, CommandFormItem, MainAttribute, AddInfo = Undefined) Export
 	CommandProcessingAtClient(Targets, AddInfo);
 	CommandProcessingAtServer(Targets, AddInfo);
 EndProcedure
 
 // See InternalCommandsClient.Form_AfterRunning
 &AtClient
-Procedure AfterRunning(Form, MainAttribute, Targets, AddInfo = Undefined) Export
+Procedure AfterRunning(Targets, Form, CommandFormItem, MainAttribute, AddInfo = Undefined) Export
 	Return;
 EndProcedure
 
@@ -68,7 +68,7 @@ EndProcedure
 // Parameters:
 //  CommandParameter - AnyRef, Array of AnyRef - Command parameter
 //  AddInfo - Undefined - Add info
-&AtServer
+&AtClient
 Procedure CommandProcessingAtClient(CommandParameter, AddInfo = Undefined)
 	Return;
 EndProcedure

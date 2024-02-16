@@ -262,6 +262,9 @@ Scenario: _001 test data
 		And in the table "List" I click the button named "ListContextMenuPost"
 		And Delay "5"
 	And I close all client application windows
+	Given I open hyperlink "e1cib/app/DataProcessor.SystemSettings"
+	And I set checkbox "Number editing available"
+	And I close "System settings" window
 
 Scenario: _0011 check preparation
 	When check preparation

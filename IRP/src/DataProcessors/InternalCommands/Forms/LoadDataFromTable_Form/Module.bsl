@@ -96,7 +96,11 @@ Procedure Next(Command)
 		
 	Else
 		
-		LoadDataDescription = LoadDataFromTableClient.GetLoadDataDescription();
+		LoadDataDescription = New Structure;
+		LoadDataDescription.Insert("Address", "");
+		LoadDataDescription.Insert("GroupColumns", "Item, ItemKey, Unit"); // See ControllerServer_V2.GetServerData
+		LoadDataDescription.Insert("SumColumns", "Quantity");
+		
 		LoadDataDescription.Address = ResultStore;
 		
 		AdditionalFieldsArray = New Array; // Array of String

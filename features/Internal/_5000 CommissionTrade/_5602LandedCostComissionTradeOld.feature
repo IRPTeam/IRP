@@ -136,7 +136,7 @@ Scenario: _05702 check preparation
 
 Scenario: _057003 check batch balance
 	And I close all client application windows
-	Given I open hyperlink "e1cib/app/Report.BatchBalance"
+	Given I open hyperlink "e1cib/app/Report.R6020_BatchBalance"
 	* Select period
 		And I click Choice button of the field named "SettingsComposerUserSettingsItem0Value"
 		And I input "01.11.2022" text in the field named "DateBegin"

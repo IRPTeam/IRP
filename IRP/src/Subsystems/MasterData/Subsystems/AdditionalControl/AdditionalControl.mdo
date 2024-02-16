@@ -8,7 +8,7 @@
   <includeHelpInContents>true</includeHelpInContents>
   <includeInCommandInterface>true</includeInCommandInterface>
   <content>CommonModule.AdditionalDocumentTableControl</content>
-  <content>Report.AdditionalDocumentTablesCheck</content>
+  <content>Report.D0012_AdditionalDocumentTablesCheck</content>
   <content>DataProcessor.FixDocumentProblems</content>
   <content>CommonModule.AdditionalDocumentTableControlReuse</content>
   <content>FunctionalOption.UseAdditionalTableControlDocument</content>

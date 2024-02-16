@@ -1093,7 +1093,7 @@ Function GetFormItemNames()
 				|AccountPayableOtherKey, AccountReceivableOtherKey, CashInTransitKey, CashInTransitIsFixedCurrency,
 				|FixedAssetsKey,
 				|AccrualListTotalVacationDays, AccrualListPaidVacationDays, AccrualListTotalSickLeaveDays ,AccrualListPaidSickLeaveDays,
-				|SendDocumentsKey, ReceiveDocumentsKey, OffsetOfAdvancesInvoicesKey, OffsetOfAdvancesPaymentsKey, OffsetOfAdvancesPaymentsKeyOwner";
+				|SendDocumentsKey, ReceiveDocumentsKey";
 	Return ItemNames;
 EndFunction	
 

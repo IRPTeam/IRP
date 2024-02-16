@@ -1616,6 +1616,7 @@ Procedure MultiSetTransactionType_BankPayment(Parameters, Results) Export
 	ResourceToBinding.Insert("PaymentPeriod"            , BindPaymentListPaymentPeriod(Parameters));
 	ResourceToBinding.Insert("ReceiptingAccount"        , BindPaymentListReceiptingAccount(Parameters));
 	ResourceToBinding.Insert("ReceiptingBranch"         , BindPaymentListReceiptingBranch(Parameters));
+	ResourceToBinding.Insert("Project"                  , BindPaymentListProject(Parameters));
 	MultiSetterObject(Parameters, Results, ResourceToBinding);
 EndProcedure
 
@@ -1641,6 +1642,7 @@ Procedure MultiSetTransactionType_BankReceipt(Parameters, Results) Export
 	ResourceToBinding.Insert("RevenueType"              , BindPaymentListRevenueType(Parameters));
 	ResourceToBinding.Insert("SendingAccount"           , BindPaymentListSendingAccount(Parameters));
 	ResourceToBinding.Insert("SendingBranch"            , BindPaymentListSendingBranch(Parameters));
+	ResourceToBinding.Insert("Project"                  , BindPaymentListProject(Parameters));
 	MultiSetterObject(Parameters, Results, ResourceToBinding);
 EndProcedure
 
@@ -1659,6 +1661,7 @@ Procedure MultiSetTransactionType_CashPayment(Parameters, Results) Export
 	ResourceToBinding.Insert("PaymentPeriod"            , BindPaymentListPaymentPeriod(Parameters));
 	ResourceToBinding.Insert("ReceiptingAccount"        , BindPaymentListReceiptingAccount(Parameters));
 	ResourceToBinding.Insert("ReceiptingBranch"         , BindPaymentListReceiptingBranch(Parameters));
+	ResourceToBinding.Insert("Project"                  , BindPaymentListProject(Parameters));
 	MultiSetterObject(Parameters, Results, ResourceToBinding);
 EndProcedure
 
@@ -1678,6 +1681,7 @@ Procedure MultiSetTransactionType_CashReceipt(Parameters, Results) Export
 	ResourceToBinding.Insert("RetailCustomer"           , BindPaymentListRetailCustomer(Parameters));
 	ResourceToBinding.Insert("SendingAccount"           , BindPaymentListSendingAccount(Parameters));
 	ResourceToBinding.Insert("SendingBranch"            , BindPaymentListSendingBranch(Parameters));
+	ResourceToBinding.Insert("Project"                  , BindPaymentListProject(Parameters));
 	MultiSetterObject(Parameters, Results, ResourceToBinding);
 EndProcedure
 
@@ -1739,6 +1743,7 @@ Procedure StepClearByTransactionTypeBankPayment(Parameters, Chain) Export
 		Options.PaymentPeriod            = GetPaymentListPaymentPeriod(Parameters, Row.Key);
 		Options.ReceiptingAccount        = GetPaymentListReceiptingAccount(Parameters, Row.Key);
 		Options.ReceiptingBranch         = GetPaymentListReceiptingBranch(Parameters, Row.Key);
+		Options.Project                  = GetPaymentListProject(Parameters, Row.Key);
 		Options.Key = Row.Key;
 		Options.StepName = "StepClearByTransactionTypeBankPayment";
 		Chain.ClearByTransactionTypeBankPayment.Options.Add(Options);
@@ -1774,6 +1779,7 @@ Procedure StepClearByTransactionTypeBankReceipt(Parameters, Chain) Export
 		Options.RevenueType              = GetPaymentListRevenueType(Parameters, Row.Key);
 		Options.SendingAccount           = GetPaymentListSendingAccount(Parameters, Row.Key);
 		Options.SendingBranch            = GetPaymentListSendingBranch(Parameters, Row.Key);
+		Options.Project                  = GetPaymentListProject(Parameters, Row.Key);
 		Options.Key = Row.Key;
 		Options.StepName = "StepClearByTransactionTypeBankReceipt";
 		Chain.ClearByTransactionTypeBankReceipt.Options.Add(Options);
@@ -1802,6 +1808,7 @@ Procedure StepClearByTransactionTypeCashPayment(Parameters, Chain) Export
 		Options.PaymentPeriod            = GetPaymentListPaymentPeriod(Parameters, Row.Key);
 		Options.ReceiptingAccount        = GetPaymentListReceiptingAccount(Parameters, Row.Key);
 		Options.ReceiptingBranch         = GetPaymentListReceiptingBranch(Parameters, Row.Key);
+		Options.Project                  = GetPaymentListProject(Parameters, Row.Key);
 		Options.Key = Row.Key;
 		Options.StepName = "StepClearByTransactionTypeCashPayment";
 		Chain.ClearByTransactionTypeCashPayment.Options.Add(Options);
@@ -1831,6 +1838,7 @@ Procedure StepClearByTransactionTypeCashReceipt(Parameters, Chain) Export
 		Options.RetailCustomer           = GetPaymentListRetailCustomer(Parameters, Row.Key);
 		Options.SendingAccount           = GetPaymentListSendingAccount(Parameters, Row.Key);
 		Options.SendingBranch            = GetPaymentListSendingBranch(Parameters, Row.Key);
+		Options.Project                  = GetPaymentListProject(Parameters, Row.Key);
 		Options.Key = Row.Key;
 		Options.StepName = "StepClearByTransactionTypeCashReceipt";
 		Chain.ClearByTransactionTypeCashReceipt.Options.Add(Options);
@@ -3124,11 +3132,7 @@ Function BindPartner(Parameters)
 	Binding.Insert("SalesReturn",
 		"StepChangeAgreementByPartner_AgreementTypeByTransactionType,
 		|StepChangeLegalNameByPartner");
-	
-	Binding.Insert("DebitCreditNote",
-		"StepChangeAgreementByPartner_Any,
-		|StepChangeLegalNameByPartner");
-	
+		
 	Return BindSteps("BindVoid", DataPath, Binding, Parameters, "BindPartner");
 EndFunction
 
@@ -7406,6 +7410,28 @@ Procedure StepPaymentListChangeOrderByAgreement(Parameters, Chain) Export
 		Chain.ChangeOrderByAgreement.Options.Add(Options);
 	EndDo;
 EndProcedure
+
+#EndRegion
+
+#Region PAYMENT_LIST_PROJECT
+
+// PaymentList.Project.Set
+Procedure SetPaymentListProject(Parameters, Results) Export
+	Binding = BindPaymentListProject(Parameters);
+	SetterObject(Binding.StepsEnabler, Binding.DataPath, Parameters, Results);
+EndProcedure
+
+// PaymentList.Project.Get
+Function GetPaymentListProject(Parameters, _Key)
+	Return GetPropertyObject(Parameters, BindPaymentListProject(Parameters).DataPath , _Key);
+EndFunction
+
+// PaymentList.Project.Bind
+Function BindPaymentListProject(Parameters)
+	DataPath = "PaymentList.Project";
+	Binding = New Structure();
+	Return BindSteps("BindVoid", DataPath, Binding, Parameters, "BindPaymentListProject");
+EndFunction
 
 #EndRegion
 
@@ -15001,152 +15027,6 @@ EndProcedure
 
 #EndRegion
 
-#Region OFFSET_OF_ADVANCES_INVOICES
-
-#Region OFFSET_OF_ADVANCES_INVOICES_INVOICE
-
-// OffsetOfAdvancesInvoices.Invoice.OnChange
-Procedure OffsetOfAdvancesInvoicesInvoiceOnChange(Parameters) Export
-	Binding = BindOffsetOfAdvancesInvoicesInvoice(Parameters);
-	ModelClientServer_V2.EntryPoint(Binding.StepsEnabler, Parameters);
-EndProcedure
-
-// OffsetOfAdvancesInvoices.Invoice.Set
-Procedure SetOffsetOfAdvancesInvoicesInvoice(Parameters, Results) Export
-	Binding = BindOffsetOfAdvancesInvoicesInvoice(Parameters);
-	SetterObject(Binding.StepsEnabler, Binding.DataPath, Parameters, Results);
-EndProcedure
-
-// OffsetOfAdvancesInvoices.Invoice.Bind
-Function BindOffsetOfAdvancesInvoicesInvoice(Parameters)
-	DataPath = "OffsetOfAdvancesInvoices.Invoice";
-	Binding = New Structure();
-	Return BindSteps("BindVoid", DataPath, Binding, Parameters, "BindOffsetOfAdvancesInvoicesInvoice");
-EndFunction
-
-#EndRegion
-
-#Region OFFSET_OF_ADVANCES_INVOICES_ORDER
-
-// OffsetOfAdvancesInvoices.Order.OnChange
-Procedure OffsetOfAdvancesInvoicesOrderOnChange(Parameters) Export
-	Binding = BindOffsetOfAdvancesInvoicesOrder(Parameters);
-	ModelClientServer_V2.EntryPoint(Binding.StepsEnabler, Parameters);
-EndProcedure
-
-// OffsetOfAdvancesInvoices.Order.Set
-Procedure SetOffsetOfAdvancesInvoicesOrder(Parameters, Results) Export
-	Binding = BindOffsetOfAdvancesInvoicesOrder(Parameters);
-	SetterObject(Binding.StepsEnabler, Binding.DataPath, Parameters, Results);
-EndProcedure
-
-// OffsetOfAdvancesInvoices.Order.Bind
-Function BindOffsetOfAdvancesInvoicesOrder(Parameters)
-	DataPath = "OffsetOfAdvancesInvoices.Order";
-	Binding = New Structure();
-	Return BindSteps("BindVoid", DataPath, Binding, Parameters, "BindOffsetOfAdvancesInvoicesOrder");
-EndFunction
-
-#EndRegion
-
-#Region OFFSET_OF_ADVANCES_INVOICES_AMOUNT
-
-// OffsetOfAdvancesInvoices.Amount.OnChange
-Procedure OffsetOfAdvancesInvoicesAmountOnChange(Parameters) Export
-	Binding = BindOffsetOfAdvancesInvoicesAmount(Parameters);
-	ModelClientServer_V2.EntryPoint(Binding.StepsEnabler, Parameters);
-EndProcedure
-
-// OffsetOfAdvancesInvoices.Amount.Set
-Procedure SetOffsetOfAdvancesInvoicesAmount(Parameters, Results) Export
-	Binding = BindOffsetOfAdvancesInvoicesAmount(Parameters);
-	SetterObject(Binding.StepsEnabler, Binding.DataPath, Parameters, Results);
-EndProcedure
-
-// OffsetOfAdvancesInvoices.Amount.Bind
-Function BindOffsetOfAdvancesInvoicesAmount(Parameters)
-	DataPath = "OffsetOfAdvancesInvoices.Amount";
-	Binding = New Structure();
-	Return BindSteps("BindVoid", DataPath, Binding, Parameters, "BindOffsetOfAdvancesInvoicesAmount");
-EndFunction
-
-#EndRegion
-
-#EndRegion
-
-#Region OFFSET_OF_ADVANCES_PAYMENTS
-
-#Region OFFSET_OF_ADVANCES_PATMENTS_DOCUMENT
-
-// OffsetOfAdvancesPayments.Document.OnChange
-Procedure OffsetOfAdvancesPaymentsDocumentOnChange(Parameters) Export
-	Binding = BindOffsetOfAdvancesPaymentsDocument(Parameters);
-	ModelClientServer_V2.EntryPoint(Binding.StepsEnabler, Parameters);
-EndProcedure
-
-// OffsetOfAdvancesPayments.Document.Set
-Procedure SetOffsetOfAdvancesPaymentsDocument(Parameters, Results) Export
-	Binding = BindOffsetOfAdvancesPaymentsDocument(Parameters);
-	SetterObject(Binding.StepsEnabler, Binding.DataPath, Parameters, Results);
-EndProcedure
-
-// OffsetOfAdvancesPayments.Document.Bind
-Function BindOffsetOfAdvancesPaymentsDocument(Parameters)
-	DataPath = "OffsetOfAdvancesPayments.Document";
-	Binding = New Structure();
-	Return BindSteps("BindVoid", DataPath, Binding, Parameters, "BindOffsetOfAdvancesPaymentsDocument");
-EndFunction
-
-#EndRegion
-
-#Region OFFSET_OF_ADVANCES_PATMENTS_ORDER
-
-// OffsetOfAdvancesPayments.Order.OnChange
-Procedure OffsetOfAdvancesPaymentsOrderOnChange(Parameters) Export
-	Binding = BindOffsetOfAdvancesPaymentsOrder(Parameters);
-	ModelClientServer_V2.EntryPoint(Binding.StepsEnabler, Parameters);
-EndProcedure
-
-// OffsetOfAdvancesPayments.Order.Set
-Procedure SetOffsetOfAdvancesPaymentsOrder(Parameters, Results) Export
-	Binding = BindOffsetOfAdvancesPaymentsOrder(Parameters);
-	SetterObject(Binding.StepsEnabler, Binding.DataPath, Parameters, Results);
-EndProcedure
-
-// OffsetOfAdvancesPayments.Order.Bind
-Function BindOffsetOfAdvancesPaymentsOrder(Parameters)
-	DataPath = "OffsetOfAdvancesPayments.Order";
-	Binding = New Structure();
-	Return BindSteps("BindVoid", DataPath, Binding, Parameters, "BindOffsetOfAdvancesPaymentsOrder");
-EndFunction
-
-#EndRegion
-
-#Region OFFSET_OF_ADVANCES_PATMENTS_AMOUNT
-
-// OffsetOfAdvancesPayments.Amount.OnChange
-Procedure OffsetOfAdvancesPaymentsAmountOnChange(Parameters) Export
-	Binding = BindOffsetOfAdvancesPaymentsAmount(Parameters);
-	ModelClientServer_V2.EntryPoint(Binding.StepsEnabler, Parameters);
-EndProcedure
-
-// OffsetOfAdvancesPayments.Amount.Set
-Procedure SetOffsetOfAdvancesPaymentsAmount(Parameters, Results) Export
-	Binding = BindOffsetOfAdvancesPaymentsAmount(Parameters);
-	SetterObject(Binding.StepsEnabler, Binding.DataPath, Parameters, Results);
-EndProcedure
-
-// OffsetOfAdvancesPayments.Amount.Bind
-Function BindOffsetOfAdvancesPaymentsAmount(Parameters)
-	DataPath = "OffsetOfAdvancesPayments.Amount";
-	Binding = New Structure();
-	Return BindSteps("BindVoid", DataPath, Binding, Parameters, "BindOffsetOfAdvancesPaymentsAmount");
-EndFunction
-
-#EndRegion
-
-#EndRegion
-
 // called when all chain steps is complete
 Procedure OnChainComplete(Parameters) Export
 	#IF Client THEN
@@ -15306,10 +15186,6 @@ Procedure ExecuteViewNotify(Parameters, ViewNotify)
 	ElsIf ViewNotify = "OnSetPayrollListsAmountNotify" Then ViewClient_V2.OnSetPayrollListsAmountNotify(Parameters);
 	ElsIf ViewNotify = "OnSetSalaryAmountNotify" Then ViewClient_V2.OnSetSalaryAmountNotify(Parameters);
 	
-	ElsIf ViewNotify = "OffsetOfAdvancesInvoicesOnAddRowFormNotify"  Then ViewClient_V2.OffsetOfAdvancesInvoicesOnAddRowFormNotify(Parameters);
-	ElsIf ViewNotify = "OffsetOfAdvancesInvoicesOnCopyRowFormNotify" Then ViewClient_V2.OffsetOfAdvancesInvoicesOnCopyRowFormNotify(Parameters);
-	ElsIf ViewNotify = "OffsetOfAdvancesPaymentsOnAddRowFormNotify"  Then ViewClient_V2.OffsetOfAdvancesPaymentsOnAddRowFormNotify(Parameters);
-	ElsIf ViewNotify = "OffsetOfAdvancesPaymentsOnCopyRowFormNotify" Then ViewClient_V2.OffsetOfAdvancesPaymentsOnCopyRowFormNotify(Parameters);
 	ElsIf ViewNotify = "SendDocumentsOnAddRowFormNotify"             Then ViewClient_V2.SendDocumentsOnAddRowFormNotify(Parameters);
 	ElsIf ViewNotify = "SendDocumentsOnCopyRowFormNotify"            Then ViewClient_V2.SendDocumentsOnCopyRowFormNotify(Parameters);
 	ElsIf ViewNotify = "ReceiveDocumentsOnAddRowFormNotify"          Then ViewClient_V2.ReceiveDocumentsOnAddRowFormNotify(Parameters);

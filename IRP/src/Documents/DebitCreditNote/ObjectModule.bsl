@@ -33,7 +33,31 @@ Procedure UndoPosting(Cancel)
 EndProcedure
 
 Procedure FillCheckProcessing(Cancel, CheckedAttributes)
-	Return;
+	
+	If ThisObject.SendPartner = ThisObject.ReceivePartner And ThisObject.SendLegalName = ThisObject.ReceiveLegalName Then
+				
+		If (ThisObject.SendDebtType = Enums.DebtTypes.AdvanceCustomer        And ThisObject.ReceiveDebtType = Enums.DebtTypes.AdvanceVendor)
+	   		Or (ThisObject.SendDebtType = Enums.DebtTypes.AdvanceCustomer     And ThisObject.ReceiveDebtType = Enums.DebtTypes.TransactionVendor)
+	   		Or (ThisObject.SendDebtType = Enums.DebtTypes.TransactionCustomer And ThisObject.ReceiveDebtType = Enums.DebtTypes.AdvanceCustomer)
+	   		Or (ThisObject.SendDebtType = Enums.DebtTypes.TransactionCustomer And ThisObject.ReceiveDebtType = Enums.DebtTypes.TransactionVendor)
+	   		Or (ThisObject.SendDebtType = Enums.DebtTypes.AdvanceVendor       And ThisObject.ReceiveDebtType = Enums.DebtTypes.AdvanceCustomer)
+	   		Or (ThisObject.SendDebtType = Enums.DebtTypes.AdvanceVendor       And ThisObject.ReceiveDebtType = Enums.DebtTypes.TransactionCustomer)
+	   		Or (ThisObject.SendDebtType = Enums.DebtTypes.TransactionVendor   And ThisObject.ReceiveDebtType = Enums.DebtTypes.AdvanceVendor) Then
+	   			   
+	   		CommonFunctionsClientServer.ShowUsersMessage(R().Error_142, "SendDebtType", ThisObject);
+		EndIf;
+	Else
+				
+		If 	(ThisObject.SendDebtType = Enums.DebtTypes.AdvanceCustomer     And ThisObject.ReceiveDebtType = Enums.DebtTypes.TransactionVendor)
+	   		Or (ThisObject.SendDebtType = Enums.DebtTypes.TransactionCustomer And ThisObject.ReceiveDebtType = Enums.DebtTypes.AdvanceCustomer)
+	   		Or (ThisObject.SendDebtType = Enums.DebtTypes.AdvanceVendor       And ThisObject.ReceiveDebtType = Enums.DebtTypes.AdvanceCustomer)
+	   		Or (ThisObject.SendDebtType = Enums.DebtTypes.AdvanceVendor       And ThisObject.ReceiveDebtType = Enums.DebtTypes.TransactionCustomer)
+	   		Or (ThisObject.SendDebtType = Enums.DebtTypes.TransactionVendor   And ThisObject.ReceiveDebtType = Enums.DebtTypes.AdvanceVendor) Then
+	   
+	   		CommonFunctionsClientServer.ShowUsersMessage(R().Error_142, "SendDebtType", ThisObject);
+	   EndIf;
+	EndIf;
+
 EndProcedure
 
 Procedure Filling(FillingData, FillingText, StandardProcessing)

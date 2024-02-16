@@ -221,7 +221,21 @@ EndFunction
 Function R1020B_AdvancesToVendors_DebitCreditNote() Export
 	Return 
 		"SELECT
-		|	VALUE(AccumulationRecordType.Expense) AS RecordType,
+		|	case
+		|		when Doc.PartnersIsEqual
+		|			then case
+		|				when Doc.IsReceiveTransactionVendor
+		|				OR Doc.IsReceiveAdvanceVendor
+		|					then VALUE(AccumulationRecordType.Expense)
+		|				else VALUE(AccumulationRecordType.Receipt)
+		|			end
+		|		else case
+		|			when Doc.IsReceiveTransactionVendor
+		|			OR Doc.IsReceiveAdvanceVendor
+		|				then VALUE(AccumulationRecordType.Expense)
+		|			else VALUE(AccumulationRecordType.Receipt)
+		|		end
+		|	end as RecordType,
 		|	Doc.Period,
 		|	Doc.Company,
 		|	Doc.SendBranch AS Branch,
@@ -241,7 +255,21 @@ Function R1020B_AdvancesToVendors_DebitCreditNote() Export
 		|UNION ALL
 		|
 		|SELECT
-		|	VALUE(AccumulationRecordType.Receipt),
+		|	case
+		|		when Doc.PartnersIsEqual
+		|			then case
+		|				when Doc.IsSendTransactionCustomer
+		|				OR Doc.IsSendAdvanceVendor
+		|					then VALUE(AccumulationRecordType.Receipt)
+		|				else VALUE(AccumulationRecordType.Expense)
+		|			end
+		|		else case
+		|			when Doc.IsSendTransactionCustomer
+		|			OR Doc.IsSendAdvanceVendor
+		|				then VALUE(AccumulationRecordType.Receipt)
+		|			else VALUE(AccumulationRecordType.Expense)
+		|		end
+		|	end as RecordType,
 		|	Doc.Period,
 		|	Doc.Company,
 		|	Doc.ReceiveBranch AS Branch,

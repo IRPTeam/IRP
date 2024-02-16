@@ -223,7 +223,23 @@ EndFunction
 Function R2020B_AdvancesFromCustomers_DebitCreditNote() Export
 	Return 
 		"SELECT
-		|	VALUE(AccumulationRecordType.Expense) AS RecordType,
+		|	case
+		|		when Doc.PartnersIsEqual
+		|			then case
+		|				when Doc.IsReceiveTransactionCustomer
+		|				OR Doc.IsReceiveAdvanceCustomer
+		|					then VALUE(AccumulationRecordType.Expense)
+		|				else VALUE(AccumulationRecordType.Receipt)
+		|			end
+		|		else case
+		|			when Doc.IsReceiveTransactionCustomer
+		|			OR Doc.IsReceiveAdvanceVendor
+		|			OR Doc.IsReceiveTransactionVendor
+		|			OR Doc.IsReceiveAdvanceCustomer
+		|				then VALUE(AccumulationRecordType.Expense)
+		|			else VALUE(AccumulationRecordType.Receipt)
+		|		end
+		|	end as RecordType,
 		|	Doc.Period,
 		|	Doc.Company,
 		|	Doc.SendBranch AS Branch,
@@ -243,7 +259,21 @@ Function R2020B_AdvancesFromCustomers_DebitCreditNote() Export
 		|UNION ALL
 		|
 		|SELECT
-		|	VALUE(AccumulationRecordType.Receipt),
+		|	case
+		|		when Doc.PartnersIsEqual
+		|			then case
+		|				when Doc.IsSendTransactionVendor
+		|				OR Doc.IsSendAdvanceCustomer
+		|					then VALUE(AccumulationRecordType.Receipt)
+		|				else VALUE(AccumulationRecordType.Expense)
+		|			end
+		|		else case
+		|			when Doc.IsSendTransactionVendor
+		|			OR Doc.IsSendAdvanceCustomer
+		|				then VALUE(AccumulationRecordType.Receipt)
+		|			else VALUE(AccumulationRecordType.Expense)
+		|		end
+		|	end as RecordType,
 		|	Doc.Period,
 		|	Doc.Company,
 		|	Doc.ReceiveBranch AS Branch,

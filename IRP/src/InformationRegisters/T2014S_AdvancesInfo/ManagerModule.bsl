@@ -161,7 +161,42 @@ EndFunction
 Function T2014S_AdvancesInfo_DebitCreditNote() Export
 	Return 
 		"SELECT
-		|	VALUE(Enum.RecordType.Expense) AS RecordType,
+		|
+		|	case
+		|		when Doc.SendIsCustomerAdvance
+		|			then case
+		|				when Doc.PartnersIsEqual
+		|					then case
+		|						when Doc.IsReceiveTransactionCustomer
+		|						OR Doc.IsReceiveAdvanceCustomer
+		|							then VALUE(AccumulationRecordType.Expense)
+		|						else VALUE(AccumulationRecordType.Receipt)
+		|					end
+		|				else case
+		|					when Doc.IsReceiveTransactionCustomer
+		|					OR Doc.IsReceiveAdvanceVendor
+		|					OR Doc.IsReceiveTransactionVendor
+		|					OR Doc.IsReceiveAdvanceCustomer
+		|						then VALUE(AccumulationRecordType.Expense)
+		|					else VALUE(AccumulationRecordType.Receipt)
+		|				end
+		|			end
+		|		else case
+		|			when Doc.PartnersIsEqual
+		|				then case
+		|					when Doc.IsReceiveTransactionVendor
+		|					OR Doc.IsReceiveAdvanceVendor
+		|						then VALUE(AccumulationRecordType.Expense)
+		|					else VALUE(AccumulationRecordType.Receipt)
+		|				end
+		|			else case
+		|				when Doc.IsReceiveTransactionVendor
+		|				OR Doc.IsReceiveAdvanceVendor
+		|					then VALUE(AccumulationRecordType.Expense)
+		|				else VALUE(AccumulationRecordType.Receipt)
+		|			end
+		|		end
+		|	end AS RecordType,
 		|	Doc.Period AS Date,
 		|	Doc.Company AS Company,
 		|	Doc.SendBranch AS Branch,
@@ -181,7 +216,39 @@ Function T2014S_AdvancesInfo_DebitCreditNote() Export
 		|UNION ALL
 		|
 		|SELECT
-		|	VALUE(Enum.RecordType.Receipt),
+		|	case
+		|		when Doc.ReceiveIsCustomerAdvance
+		|			then case
+		|				when Doc.PartnersIsEqual
+		|					then case
+		|						when Doc.IsSendTransactionVendor
+		|						OR Doc.IsSendAdvanceCustomer
+		|							then VALUE(AccumulationRecordType.Receipt)
+		|						else VALUE(AccumulationRecordType.Expense)
+		|					end
+		|				else case
+		|					when Doc.IsSendTransactionVendor
+		|					OR Doc.IsSendAdvanceCustomer
+		|						then VALUE(AccumulationRecordType.Receipt)
+		|					else VALUE(AccumulationRecordType.Expense)
+		|				end
+		|			end
+		|		else case
+		|			when Doc.PartnersIsEqual
+		|				then case
+		|					when Doc.IsSendTransactionCustomer
+		|					OR Doc.IsSendAdvanceVendor
+		|						then VALUE(AccumulationRecordType.Receipt)
+		|					else VALUE(AccumulationRecordType.Expense)
+		|				end
+		|			else case
+		|				when Doc.IsSendTransactionCustomer
+		|				OR Doc.IsSendAdvanceVendor
+		|					then VALUE(AccumulationRecordType.Receipt)
+		|				else VALUE(AccumulationRecordType.Expense)
+		|			end
+		|		end
+		|	end,
 		|	Doc.Period,
 		|	Doc.Company,
 		|	Doc.ReceiveBranch,

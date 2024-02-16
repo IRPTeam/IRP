@@ -201,8 +201,78 @@ Function T2015S_TransactionsInfo_DebitCreditNote() Export
 		|	Doc.SendOrder AS Order,
 		|	Doc.SendIsVendorTransaction AS IsVendorTransaction,
 		|	Doc.SendIsCustomerTransaction AS IsCustomerTransaction,
-		|	FALSE AS IsDue,
-		|	TRUE AS IsPaid,
+		|	case
+		|		when Doc.SendIsCustomerTransaction
+		|			then case
+		|				when Doc.PartnersIsEqual
+		|					then case
+		|						when Doc.IsReceiveAdvanceVendor
+		|						OR Doc.IsReceiveTransactionCustomer
+		|							then FALSE
+		|						else TRUE
+		|					end
+		|				else case
+		|					when Doc.IsReceiveAdvanceVendor
+		|					OR Doc.IsReceiveTransactionVendor
+		|					OR Doc.IsReceiveTransactionCustomer
+		|						then FALSE
+		|					else TRUE
+		|				end
+		|			end
+		|		else case
+		|			when Doc.PartnersIsEqual
+		|				then case
+		|					when Doc.IsReceiveAdvanceCustomer
+		|					OR Doc.IsReceiveTransactionCustomer
+		|					OR Doc.IsReceiveTransactionVendor
+		|						then FALSE
+		|					else TRUE
+		|				end
+		|			else case
+		|				when Doc.IsReceiveAdvanceCustomer
+		|				OR Doc.IsReceiveTransactionCustomer
+		|				OR Doc.IsReceiveTransactionVendor
+		|					then FALSE
+		|				else TRUE
+		|			end
+		|		end
+		|	end AS IsDue,
+		|	case
+		|		when Doc.SendIsCustomerTransaction
+		|			then case
+		|				when Doc.PartnersIsEqual
+		|					then case
+		|						when Doc.IsReceiveAdvanceVendor
+		|						OR Doc.IsReceiveTransactionCustomer
+		|							then TRUE
+		|						else FALSE
+		|					end
+		|				else case
+		|					when Doc.IsReceiveAdvanceVendor
+		|					OR Doc.IsReceiveTransactionVendor
+		|					OR Doc.IsReceiveTransactionCustomer
+		|						then TRUE
+		|					else FALSE
+		|				end
+		|			end
+		|		else case
+		|			when Doc.PartnersIsEqual
+		|				then case
+		|					when Doc.IsReceiveAdvanceCustomer
+		|					OR Doc.IsReceiveTransactionCustomer
+		|					OR Doc.IsReceiveTransactionVendor
+		|						then TRUE
+		|					else FALSE
+		|				end
+		|			else case
+		|				when Doc.IsReceiveAdvanceCustomer
+		|				OR Doc.IsReceiveTransactionCustomer
+		|				OR Doc.IsReceiveTransactionVendor
+		|					then TRUE
+		|				else FALSE
+		|			end
+		|		end
+		|	end AS IsPaid,
 		|	Doc.Amount
 		|INTO T2015S_TransactionsInfo
 		|FROM
@@ -223,8 +293,68 @@ Function T2015S_TransactionsInfo_DebitCreditNote() Export
 		|	Doc.ReceiveOrder,
 		|	Doc.SendIsVendorTransaction,
 		|	Doc.SendIsCustomerTransaction,
-		|	Not Doc.IsOffset AS IsDue,
-		|	Doc.IsOffset AS IsPaid,
+		|	case
+		|		when Doc.SendIsCustomerTransaction
+		|			then case
+		|				when Doc.PartnersIsEqual
+		|					then case
+		|						when Doc.IsSendAdvanceCustomer
+		|						OR Doc.IsSendTransactionVendor
+		|							then FALSE
+		|						else TRUE
+		|					end
+		|				else case
+		|					when Doc.IsSendAdvanceCustomer
+		|					OR Doc.IsSendTransactionVendor
+		|						then FALSE
+		|					else TRUE
+		|				end
+		|			end
+		|		else case
+		|			when Doc.PartnersIsEqual
+		|				then case
+		|					when Doc.IsSendTransactionVendor
+		|						then TRUE
+		|					else FALSE
+		|				end
+		|			else case
+		|				when Doc.IsSendTransactionVendor
+		|					then TRUE
+		|				else FALSE
+		|			end
+		|		end
+		|	end AS IsDue,
+		|	case
+		|		when Doc.SendIsCustomerTransaction
+		|			then case
+		|				when Doc.PartnersIsEqual
+		|					then case
+		|						when Doc.IsSendAdvanceCustomer
+		|						OR Doc.IsSendTransactionVendor
+		|							then TRUE
+		|						else FALSE
+		|					end
+		|				else case
+		|					when Doc.IsSendAdvanceCustomer
+		|					OR Doc.IsSendTransactionVendor
+		|						then TRUE
+		|					else FALSE
+		|				end
+		|			end
+		|		else case
+		|			when Doc.PartnersIsEqual
+		|				then case
+		|					when Doc.IsSendTransactionVendor
+		|						then FALSE
+		|					else TRUE
+		|				end
+		|			else case
+		|				when Doc.IsSendTransactionVendor
+		|					then FALSE
+		|				else TRUE
+		|			end
+		|		end
+		|	end AS IsPaid,
 		|	Doc.Amount
 		|FROM
 		|	ReceiveTransactions AS Doc";

@@ -396,9 +396,53 @@ Function R1021B_VendorsTransactions_CreditNote() Export
 EndFunction
 
 Function R1021B_VendorsTransactions_DebitCreditNote() Export
+	
+	//IsSendAdvanceCustomer
+//IsSendAdvanceVendor
+//
+//IsSendTransactionCustomer
+//IsSendTransactionVendor
+//
+//IsReceiveAdvanceCustomer
+//IsReceiveAdvanceVendor
+//
+//IsReceiveTransactionCustomer
+//IsReceiveTransactionVendor
+
+//3. Vendor transactions (VT) - Customer advances (CA) - минус - плюс
+//4. Vendor transactions (VT) - Customer transactions (CT) - минус - минус
+//16. Vendor transactions (VT) - Vendor transactions (VT) (CT)- минус - плюс
+//
+//3. Vendor transactions (VT) - Customer advances (CA) - минус - плюс
+//4. Vendor transactions (VT) - Customer transactions (CT) - минус - минус
+//16. Vendor transactions (VT) - Vendor transactions (VT) - минус - плюс
+
+
+
+//16. Vendor transactions (VT) - Vendor transactions (VT) (CT)- минус - плюс
+//
+//16. Vendor transactions (VT) - Vendor transactions (VT) - минус - плюс
+
+
+
 	Return
 		"SELECT
-		|	VALUE(AccumulationRecordType.Expense) AS RecordType,
+		|case when Doc.PartnersIsEqual then
+		|	case
+		|		when Doc.IsReceiveAdvanceCustomer
+		|			OR Doc.IsReceiveTransactionCustomer
+		|			OR Doc.IsReceiveTransactionVendor
+		|       then VALUE(AccumulationRecordType.Expense)
+		|		else VALUE(AccumulationRecordType.Receipt) end
+		|else
+		|   case
+		|		when  Doc.IsReceiveAdvanceCustomer
+		|             OR Doc.IsReceiveTransactionCustomer
+		|             OR Doc.IsReceiveTransactionVendor
+		|		then VALUE(AccumulationRecordType.Expense)
+		|		else VALUE(AccumulationRecordType.Receipt) end
+		|end as RecordType,
+		|
 		|	Doc.Period,
 		|	Doc.Company,
 		|	Doc.SendBranch AS Branch,
@@ -420,10 +464,18 @@ Function R1021B_VendorsTransactions_DebitCreditNote() Export
 		|UNION ALL
 		|
 		|SELECT
-		|	case when Doc.IsOffset Then 
-		|		VALUE(AccumulationRecordType.Expense) 
-		|	else 
-		|		VALUE(AccumulationRecordType.Receipt) end as RecordType,
+		|case when Doc.PartnersIsEqual then
+		|	case
+		|		when Doc.IsSendTransactionVendor 
+		|       then VALUE(AccumulationRecordType.Receipt)
+		|		else VALUE(AccumulationRecordType.Expense) end
+		|else
+		|   case
+		|		when  Doc.IsSendTransactionVendor 
+		|		then VALUE(AccumulationRecordType.Receipt)
+		|		else VALUE(AccumulationRecordType.Expense) end
+		|end as RecordType,
+		|
 		|	Doc.Period,
 		|	Doc.Company,
 		|	Doc.ReceiveBranch,

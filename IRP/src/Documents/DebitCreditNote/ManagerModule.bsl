@@ -102,9 +102,31 @@ EndFunction
 
 #Region Posting_SourceTable
 
+//IsSendAdvanceCustomer
+//IsSendAdvanceVendor
+//IsReceiveAdvanceCustomer
+//IsReceiveAdvanceVendor
+//
+//IsSendTransactionCustomer
+//IsSendTransactionVendor
+//IsReceiveTransactionCustomer
+//IsReceiveTransactionVendor
+
 Function SendAdvances()
 	Return
 		"SELECT
+		|	(Doc.SendPartner = Doc.ReceivePartner And Doc.SendLegalName = Doc.ReceiveLegalName) AS PartnersIsEqual,
+		|
+		|	Doc.SendDebtType = VALUE(Enum.DebtTypes.AdvanceCustomer) AS IsSendAdvanceCustomer,
+		|	Doc.SendDebtType = VALUE(Enum.DebtTypes.AdvanceVendor) AS IsSendAdvanceVendor,
+		|	Doc.ReceiveDebtType = VALUE(Enum.DebtTypes.AdvanceCustomer) AS IsReceiveAdvanceCustomer,
+		|	Doc.ReceiveDebtType = VALUE(Enum.DebtTypes.AdvanceVendor) AS IsReceiveAdvanceVendor,
+		|
+		|	Doc.SendDebtType = VALUE(Enum.DebtTypes.TransactionCustomer) AS IsSendTransactionCustomer,
+		|	Doc.SendDebtType = VALUE(Enum.DebtTypes.TransactionVendor) AS IsSendTransactionVendor,
+		|	Doc.ReceiveDebtType = VALUE(Enum.DebtTypes.TransactionCustomer) AS IsReceiveTransactionCustomer,
+		|	Doc.ReceiveDebtType = VALUE(Enum.DebtTypes.TransactionVendor) AS IsReceiveTransactionVendor,
+		|
 		|	Doc.Date AS Period,
 		|	Doc.Company,
 		|	Doc.Branch AS SendBranch,
@@ -137,6 +159,18 @@ EndFunction
 Function ReceiveAdvances()
 	Return
 		"SELECT
+		|	(Doc.SendPartner = Doc.ReceivePartner And Doc.SendLegalName = Doc.ReceiveLegalName) AS PartnersIsEqual,
+		|
+		|	Doc.SendDebtType = VALUE(Enum.DebtTypes.AdvanceCustomer) AS IsSendAdvanceCustomer,
+		|	Doc.SendDebtType = VALUE(Enum.DebtTypes.AdvanceVendor) AS IsSendAdvanceVendor,
+		|	Doc.ReceiveDebtType = VALUE(Enum.DebtTypes.AdvanceCustomer) AS IsReceiveAdvanceCustomer,
+		|	Doc.ReceiveDebtType = VALUE(Enum.DebtTypes.AdvanceVendor) AS IsReceiveAdvanceVendor,
+		|
+		|	Doc.SendDebtType = VALUE(Enum.DebtTypes.TransactionCustomer) AS IsSendTransactionCustomer,
+		|	Doc.SendDebtType = VALUE(Enum.DebtTypes.TransactionVendor) AS IsSendTransactionVendor,
+		|	Doc.ReceiveDebtType = VALUE(Enum.DebtTypes.TransactionCustomer) AS IsReceiveTransactionCustomer,
+		|	Doc.ReceiveDebtType = VALUE(Enum.DebtTypes.TransactionVendor) AS IsReceiveTransactionVendor,
+		|		
 		|	Doc.Date AS Period,
 		|	Doc.Company,
 		|	Doc.ReceiveBranch,
@@ -169,6 +203,18 @@ EndFunction
 Function SendTransactions()
 	Return
 		"SELECT
+		|	(Doc.SendPartner = Doc.ReceivePartner And Doc.SendLegalName = Doc.ReceiveLegalName) AS PartnersIsEqual,
+		|
+		|	Doc.SendDebtType = VALUE(Enum.DebtTypes.AdvanceCustomer) AS IsSendAdvanceCustomer,
+		|	Doc.SendDebtType = VALUE(Enum.DebtTypes.AdvanceVendor) AS IsSendAdvanceVendor,
+		|	Doc.ReceiveDebtType = VALUE(Enum.DebtTypes.AdvanceCustomer) AS IsReceiveAdvanceCustomer,
+		|	Doc.ReceiveDebtType = VALUE(Enum.DebtTypes.AdvanceVendor) AS IsReceiveAdvanceVendor,
+		|
+		|	Doc.SendDebtType = VALUE(Enum.DebtTypes.TransactionCustomer) AS IsSendTransactionCustomer,
+		|	Doc.SendDebtType = VALUE(Enum.DebtTypes.TransactionVendor) AS IsSendTransactionVendor,
+		|	Doc.ReceiveDebtType = VALUE(Enum.DebtTypes.TransactionCustomer) AS IsReceiveTransactionCustomer,
+		|	Doc.ReceiveDebtType = VALUE(Enum.DebtTypes.TransactionVendor) AS IsReceiveTransactionVendor,
+		|
 		|	Doc.Date AS Period,
 		|	Doc.Company,
 		|	Doc.Branch AS SendBranch,
@@ -202,6 +248,18 @@ EndFunction
 Function ReceiveTransactions()
 	Return
 		"SELECT
+		|	(Doc.SendPartner = Doc.ReceivePartner And Doc.SendLegalName = Doc.ReceiveLegalName) AS PartnersIsEqual,
+		|
+		|	Doc.SendDebtType = VALUE(Enum.DebtTypes.AdvanceCustomer) AS IsSendAdvanceCustomer,
+		|	Doc.SendDebtType = VALUE(Enum.DebtTypes.AdvanceVendor) AS IsSendAdvanceVendor,
+		|	Doc.ReceiveDebtType = VALUE(Enum.DebtTypes.AdvanceCustomer) AS IsReceiveAdvanceCustomer,
+		|	Doc.ReceiveDebtType = VALUE(Enum.DebtTypes.AdvanceVendor) AS IsReceiveAdvanceVendor,
+		|
+		|	Doc.SendDebtType = VALUE(Enum.DebtTypes.TransactionCustomer) AS IsSendTransactionCustomer,
+		|	Doc.SendDebtType = VALUE(Enum.DebtTypes.TransactionVendor) AS IsSendTransactionVendor,
+		|	Doc.ReceiveDebtType = VALUE(Enum.DebtTypes.TransactionCustomer) AS IsReceiveTransactionCustomer,
+		|	Doc.ReceiveDebtType = VALUE(Enum.DebtTypes.TransactionVendor) AS IsReceiveTransactionVendor,
+		|
 		|	Doc.Date AS Period,
 		|	Doc.Company,
 		|	Doc.ReceiveBranch,

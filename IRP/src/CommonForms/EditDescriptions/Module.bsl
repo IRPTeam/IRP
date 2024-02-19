@@ -4,10 +4,15 @@ Procedure OnCreateAtServer(Cancel, StandardProcessing)
 	If Not Parameters.Property("Values") Then
 		Cancel = True;
 	EndIf;
-	AddInfo = Undefined;
-	Parameters.Property("AddInfo", AddInfo);
-	ThisObject.DescriptionTemplate = CommonFunctionsClientServer.GetFromAddInfo(AddInfo, "DescriptionTemplate");
-	LocalizationEvents.CreateSubFormItemDescription(ThisObject, Parameters.Values, "GroupDescriptions", AddInfo);
+	
+	DescriptionParameters = Undefined;
+	If Parameters.Property("DescriptionParameters") 
+		And Parameters.DescriptionParameters.Property("DescriptionTemplate") Then
+		DescriptionParameters = Parameters.DescriptionParameters;
+		ThisObject.DescriptionTemplate = Parameters.DescriptionParameters.DescriptionTemplate;
+	EndIf;
+	
+	LocalizationEvents.CreateSubFormItemDescription(ThisObject, Parameters.Values, "GroupDescriptions", DescriptionParameters);
 EndProcedure
 
 &AtClient

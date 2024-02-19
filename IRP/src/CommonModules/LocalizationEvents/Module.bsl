@@ -180,11 +180,25 @@ EndProcedure
 //  Form - See Catalog.Items.Form.ItemForm
 //  GroupName - String - Group name
 //  AddInfo - Undefined, Structure - Add info
-Procedure CreateMainFormItemDescription(Form, GroupName, AddInfo = Undefined) Export
+Procedure CreateMainFormItemDescription(Form, GroupName, Parameters = Undefined) Export
 	
-	CreateFillByTemplate_Description        = CommonFunctionsClientServer.GetFromAddInfo(AddInfo, "CreateFillByTemplate_Description", False);
-	CreateFillByTemplate_LocalDescription   = CommonFunctionsClientServer.GetFromAddInfo(AddInfo, "CreateFillByTemplate_LocalDescription", False);
-	CreateFillByTemplate_ForeignDescription = CommonFunctionsClientServer.GetFromAddInfo(AddInfo, "CreateFillByTemplate_ForeignDescription", False);
+	CreateFillByTemplate_Description        = False;
+	CreateFillByTemplate_LocalDescription   = False;
+	CreateFillByTemplate_ForeignDescription = False;
+	
+	If Parameters <> Undefined Then
+		If Parameters.Property("CreateFillByTemplate_Description") Then
+			CreateFillByTemplate_Description = Parameters.CreateFillByTemplate_Description;
+		EndIf;
+	
+		If Parameters.Property("CreateFillByTemplate_LocalDescription") Then
+			CreateFillByTemplate_Description = Parameters.CreateFillByTemplate_LocalDescription;
+		EndIf;
+	
+		If Parameters.Property("CreateFillByTemplate_ForeignDescription") Then
+			CreateFillByTemplate_Description = Parameters.CreateFillByTemplate_ForeignDescription;
+		EndIf;
+	EndIf;
 	
 	ParentGroup = Form.Items.Find(GroupName); // FormGroup, FormGroupExtensionForAUsualGroup
 	ParentGroup.Group = ChildFormItemsGroup.Vertical;
@@ -536,6 +550,15 @@ Function NewCustomSearchFilter() Export
 	Structure.Insert("ComparisonType", ComparisonType.Equal);
 	Structure.Insert("DataCompositionComparisonType", Undefined);
 	Return Structure;
+EndFunction
+
+Function DescriptionParameters() Export
+	DescriptionParameters = New Structure();
+	DescriptionParameters.Insert("CreateFillByTemplate_Description", False);
+	DescriptionParameters.Insert("CreateFillByTemplate_LocalDescription", False);
+	DescriptionParameters.Insert("CreateFillByTemplate_ForeignDescription", False);
+	DescriptionParameters.Insert("DescriptionTemplate", Undefined);
+	Return DescriptionParameters;
 EndFunction
 
 #EndRegion

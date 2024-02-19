@@ -2,12 +2,12 @@
 
 &AtServer
 Procedure OnCreateAtServer(Cancel, StandardProcessing)
-	AddInfo = New Structure();
-	CommonFunctionsClientServer.PutToAddInfo(AddInfo, "CreateFillByTemplate_Description", True);
-	CommonFunctionsClientServer.PutToAddInfo(AddInfo, "CreateFillByTemplate_LocalDescription", True);
-	CommonFunctionsClientServer.PutToAddInfo(AddInfo, "CreateFillByTemplate_ForeignDescription", True);
+	DescriptionParameters = LocalizationEvents.DescriptionParameters();
+	DescriptionParameters.CreateFillByTemplate_Description = True;
+	DescriptionParameters.CreateFillByTemplate_LocalDescription = True;
+	DescriptionParameters.CreateFillByTemplate_ForeignDescription = True;
 
-	LocalizationEvents.CreateMainFormItemDescription(ThisObject, "GroupDescriptions", AddInfo);
+	LocalizationEvents.CreateMainFormItemDescription(ThisObject, "GroupDescriptions", DescriptionParameters);
 	LocalizationEvents.FillDescription(Parameters.FillingText, Object);
 	If Object.Ref.IsEmpty() Then
 		If Parameters.Property("Item") Then
@@ -119,11 +119,10 @@ EndProcedure
 
 &AtClient
 Procedure DescriptionOpening(Item, StandardProcessing) Export
-	AddInfo = New Structure();
-	CommonFunctionsClientServer.PutToAddInfo(AddInfo, "CreateFillByTemplate_Description", True);
-	CommonFunctionsClientServer.PutToAddInfo(AddInfo, "DescriptionTemplate",
-	CommonFunctionsServer.GetRefAttribute(Object.ItemType, "ItemDescriptionTemplate"));
-	LocalizationClient.DescriptionOpening(Object, ThisObject, Item, StandardProcessing, AddInfo);
+	DescriptionParameters = LocalizationEvents.DescriptionParameters();
+	DescriptionParameters.CreateFillByTemplate_Description = True;
+	DescriptionParameters.DescriptionTemplate = CommonFunctionsServer.GetRefAttribute(Object.ItemType, "ItemDescriptionTemplate");
+	LocalizationClient.DescriptionOpening(Object, ThisObject, Item, StandardProcessing, DescriptionParameters);
 EndProcedure
 
 #Region AddAttribute

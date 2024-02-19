@@ -115,6 +115,11 @@ EndProcedure
 
 &AtClient
 Procedure OperatorsDragStart(Item, DragParameters, Perform)
+	If Item.CurrentData = Undefined Then
+		Perform = False;
+		Return;
+	EndIf;
+	
 	If ValueIsFilled(Item.CurrentData.Operator) Then
 		DragParameters.Value = Item.CurrentData.Operator;
 	Else
@@ -149,14 +154,14 @@ EndProcedure
 
 &AtClient
 Function OperandTextProcessing(Val OperandText)
-	BeginOperand = Find(OperandText, "[");
-	EndOperand = Find(OperandText, "]");
+	BeginOperand = StrFind(OperandText, "[");
+	EndOperand = StrFind(OperandText, "]");
 	If BeginOperand <> 0
 		And EndOperand <> 0
 		And BeginOperand < EndOperand Then
 		
 		NameOperand = Mid(OperandText, BeginOperand + 1, EndOperand - BeginOperand - 1);
-		If Найти(NameOperand, ".") <> 0 Then
+		If StrFind(NameOperand, ".") <> 0 Then
 			Return Undefined;
 		EndIf;
 	EndIf;
@@ -240,7 +245,7 @@ Function CheckFourmula() Export
 			EvalResult = Eval(Text);
 			CheckText = StrReplace(ThisObject.Formula, Chars.LF, "");
 			CheckText = StrReplace(CheckText, " ", "");
-			If Find(CheckText, "][") + Find(CheckText, """[") + Find(CheckText, "]""") > 0 Then
+			If StrFind(CheckText, "][") + StrFind(CheckText, """[") + StrFind(CheckText, "]""") > 0 Then
 				CommonFunctionsClientServer.ShowUsersMessage(R().FormulaEditor_Error03);		
 				Result = False;
 			EndIf;
@@ -255,7 +260,7 @@ EndFunction
 
 &AtClient
 FUnction GetArrayOfOperands()
-	ArrayOfOperands = Новый Массив();
+	ArrayOfOperands = New Array();
 	FormulaText = TrimAll(ThisObject.Formula);
 	If StrOccurrenceCount(FormulaText, "[") <> StrOccurrenceCount(FormulaText, "]") Then
 		OperandsIsPresent = False;

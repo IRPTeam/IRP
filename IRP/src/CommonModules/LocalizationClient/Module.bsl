@@ -7,10 +7,10 @@
 //  Form - ClientApplicationForm - Form
 //  Item - FormField - Item
 //  StandardProcessing - Boolean - Standard processing
-Procedure DescriptionOpening(Object, Form, Item, StandardProcessing, AddInfo = Undefined) Export
+Procedure DescriptionOpening(Object, Form, Item, StandardProcessing, DescriptionParameters = Undefined) Export
 	StandardProcessing = False;
 	OpenArgs = New Structure("Values", New Structure());
-	OpenArgs.Insert("AddInfo", AddInfo);
+	OpenArgs.Insert("DescriptionParameters", DescriptionParameters);
 	
 	For Each Attribute In LocalizationReuse.AllDescription() Do
 		If "Description_" + LocalizationReuse.GetLocalizationCode() = Attribute Then

@@ -1625,5 +1625,31 @@ Procedure DeleteColumn(Table, ColumnName) Export
 	EndIf;
 EndProcedure
 
+// Get table for client.
+// 
+// Parameters:
+//  Table - ValueTable - Table
+// 
+// Returns:
+//  Array of Structure - Get table for client
+Function GetTableForClient(Table) Export
+	
+	Result = New Array; // Array of Structure
+	
+	KeysArray = New Array; // Array of String
+	For Each Column In Table.Columns Do
+		KeysArray.Add(Column.Name);
+	EndDo;
+	KeysString = StrConcat(KeysArray, ",");
+	
+	For Each TableRow In Table Do
+		StructureRow = ?(IsBlankString(KeysString), New Structure, New Structure(KeysString));
+		FillPropertyValues(StructureRow, TableRow);
+		Result.Add(StructureRow);
+	EndDo;
+	
+	Return Result;
+	
+EndFunction
 
 #EndRegion

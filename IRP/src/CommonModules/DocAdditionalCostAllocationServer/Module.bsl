@@ -34,3 +34,19 @@ Procedure SetGroupItemsList(Object, Form)
 EndProcedure
 
 #EndRegion
+
+#Region LIST_FORM
+
+Procedure OnCreateAtServerListForm(Form, Cancel, StandardProcessing) Export
+	DocumentsServer.OnCreateAtServerListForm(Form, Cancel, StandardProcessing);
+EndProcedure
+
+#EndRegion
+
+#Region CHOICE_FORM
+
+Procedure OnCreateAtServerChoiceForm(Form, Cancel, StandardProcessing) Export
+	DocumentsServer.OnCreateAtServerChoiceForm(Form, Cancel, StandardProcessing);
+EndProcedure
+
+#EndRegion

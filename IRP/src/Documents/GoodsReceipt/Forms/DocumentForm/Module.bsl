@@ -365,7 +365,22 @@ EndProcedure
 
 #EndRegion
 
-#Region EXTERNAL_COMMANDS
+#Region COMMANDS
+
+&AtClient
+Procedure InternalCommandAction(Command) Export
+	InternalCommandsClient.RunCommandAction(Command, ThisObject, Object, Object.Ref);
+EndProcedure
+
+&AtClient
+Procedure InternalCommandActionWithServerContext(Command) Export
+	InternalCommandActionWithServerContextAtServer(Command.Name);
+EndProcedure
+
+&AtServer
+Procedure InternalCommandActionWithServerContextAtServer(CommandName)
+	InternalCommandsServer.RunCommandAction(CommandName, ThisObject, Object, Object.Ref);
+EndProcedure
 
 &AtClient
 Procedure GeneratedFormCommandActionByName(Command) Export
@@ -423,16 +438,6 @@ EndProcedure
 Function PasteFromClipboardServer(CopySettings)
 	Return CopyPasteServer.PasteFromClipboard(Object, ThisObject, CopySettings);
 EndFunction
-
-#EndRegion
-
-#Region LOAD_DATA_FROM_TABLE
-
-//@skip-check module-unused-method
-&AtClient
-Procedure LoadDataFromTable(Command)
-	LoadDataFromTableClient.OpenFormForLoadData(ThisObject, ThisObject.Object);
-EndProcedure
 
 #EndRegion
 

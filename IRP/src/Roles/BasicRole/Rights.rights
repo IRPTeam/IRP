@@ -995,13 +995,6 @@
 		</right>
 	</object>
 	<object>
-		<name>CommonForm.LoadDataFromTable</name>
-		<right>
-			<name>View</name>
-			<value>true</value>
-		</right>
-	</object>
-	<object>
 		<name>Constant.UseCompanies</name>
 		<right>
 			<name>Read</name>
@@ -1745,6 +1738,17 @@
 		</right>
 		<right>
 			<name>Get</name>
+			<value>true</value>
+		</right>
+	</object>
+	<object>
+		<name>DataProcessor.InternalCommands</name>
+		<right>
+			<name>Use</name>
+			<value>true</value>
+		</right>
+		<right>
+			<name>View</name>
 			<value>true</value>
 		</right>
 	</object>

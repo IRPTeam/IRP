@@ -33,9 +33,10 @@ Procedure OnCreateAtServer(Object, Form, Cancel, StandardProcessing) Export
 	ExternalCommandsServer.CreateCommands(Form, ObjectMetdata.FullName(), Enums.FormTypes.ObjectForm);
 	If ArrayOfExcludingDocuments.Find(ObjectMetdata) = Undefined Then
 		CopyPasteServer.CreateCommands(Form, ObjectMetdata.FullName(), Enums.FormTypes.ObjectForm);
-		LoadDataFromTableServer.CreateCommands(Form, ObjectMetdata, Enums.FormTypes.ObjectForm);
 	EndIf;
 	SerialLotNumbersServer.CreateCommands(Form, ObjectMetdata, Enums.FormTypes.ObjectForm);
+	
+	InternalCommandsServer.CreateCommands(Form, Object, ObjectMetdata.FullName(), Enums.FormTypes.ObjectForm);
 	
 	If CommonFunctionsClientServer.ObjectHasProperty(Form.Items, "Author") Then
 		Form.Items.Author.ReadOnly = UserSettingsServer.AllDocuments_AdditionalSettings_DisableChangeAuthor();
@@ -380,6 +381,7 @@ Procedure OnCreateAtServerListForm(Form, Cancel, StandardProcessing) Export
 	FormNamesArray = StrSplit(Form.FormName, ".");
 	DocumentFullName = FormNamesArray[0] + "." + FormNamesArray[1];
 	ExternalCommandsServer.CreateCommands(Form, DocumentFullName, Enums.FormTypes.ListForm);
+	InternalCommandsServer.CreateCommands(Form, Form.List, DocumentFullName, Enums.FormTypes.ListForm);
 EndProcedure
 
 #EndRegion
@@ -390,6 +392,7 @@ Procedure OnCreateAtServerChoiceForm(Form, Cancel, StandardProcessing) Export
 	FormNamesArray = StrSplit(Form.FormName, ".");
 	DocumentFullName = FormNamesArray[0] + "." + FormNamesArray[1];
 	ExternalCommandsServer.CreateCommands(Form, DocumentFullName, Enums.FormTypes.ChoiceForm);
+	InternalCommandsServer.CreateCommands(Form, Form.List, DocumentFullName, Enums.FormTypes.ChoiceForm);
 EndProcedure
 
 #EndRegion

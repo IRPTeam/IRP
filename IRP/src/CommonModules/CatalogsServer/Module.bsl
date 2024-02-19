@@ -67,8 +67,8 @@ Procedure OnCreateAtServerChoiceForm(Form, MainAttribute, Cancel, StandardProces
 	FormNamesArray = StrSplit(Form.FormName, ".");
 	CatalogFullName = FormNamesArray[0] + "." + FormNamesArray[1];
 	
-	ExternalCommandsServer.CreateCommands(Form, CatalogFullName, Enums.FormTypes.ListForm);
-	InternalCommandsServer.CreateCommands(Form, MainAttribute, CatalogFullName, Enums.FormTypes.ListForm);
+	ExternalCommandsServer.CreateCommands(Form, CatalogFullName, Enums.FormTypes.ChoiceForm);
+	InternalCommandsServer.CreateCommands(Form, MainAttribute, CatalogFullName, Enums.FormTypes.ChoiceForm);
 	
 EndProcedure
 

@@ -447,6 +447,14 @@
 // * OpenSLNTree_Button_ToolTip - String - 
 // * BgJ_Title_001 - String - 
 // * BgJ_Title_002 - String - 
+// * InternalCommands_SetNotActive - String -
+// * InternalCommands_SetNotActive_Check - String -
+// * InternalCommands_ShowNotActive - String -
+// * InternalCommands_ShowNotActive_Check - String -
+// * GPU_AnalizeFolder - String -
+// * GPU_Load_SendToDrive - String -
+// * GPU_Load_SaveInBase - String -
+// * GPU_CheckingFilesExist - String -
 Function Strings(Lang) Export
 
 	Strings = New Structure();
@@ -1532,11 +1540,17 @@ Strings.Insert("MoneyTransfer_DR_R5022T_Expenses_CR_R3021B_CashInTransit",
 #EndRegion
 
 #Region InternalCommands
-    // Do not modify "en" strings
 	Strings.Insert("InternalCommands_SetNotActive", NStr("en = 'Set ""Not active""'", Lang));
 	Strings.Insert("InternalCommands_SetNotActive_Check", NStr("en = 'Set ""Active""'", Lang));
 	Strings.Insert("InternalCommands_ShowNotActive", NStr("en = 'Show all items'", Lang));
 	Strings.Insert("InternalCommands_ShowNotActive_Check", NStr("en = 'Show only active items'", Lang));
+#EndRegion
+	
+#Region GroupPhotoUploading
+	Strings.Insert("GPU_AnalizeFolder", NStr("en = 'Analize folder'", Lang));
+	Strings.Insert("GPU_Load_SendToDrive", NStr("en = 'Load images. Send to drive'", Lang));
+	Strings.Insert("GPU_Load_SaveInBase", NStr("en = 'Load images. Save file records'", Lang));
+	Strings.Insert("GPU_CheckingFilesExist", NStr("en = 'Checking if files exist'", Lang));
 #EndRegion
 	
 	Return Strings;

@@ -85,7 +85,7 @@ Procedure AnalizeFolder(Command)
 	EndIf;
 	
 	SplashForm = OpenForm("CommonForm.BackgroundJobSplash",
-		New Structure("BackgroundJobTitle", "Analize folder"),
+		New Structure("BackgroundJobTitle", R().GPU_AnalizeFolder),
 		ThisObject, 
 		New UUID(),,,,
 		FormWindowOpeningMode.LockOwnerWindow);
@@ -130,7 +130,7 @@ Procedure Load(Command)
 	EndIf;
 	
 	SplashForm = OpenForm("CommonForm.BackgroundJobSplash",
-		New Structure("BackgroundJobTitle", "Load images. Send to drive"),
+		New Structure("BackgroundJobTitle", R().GPU_Load_SendToDrive),
 		ThisObject, 
 		New UUID(),,,,
 		FormWindowOpeningMode.LockOwnerWindow);
@@ -195,7 +195,7 @@ Procedure AnalizeFolder_Read()
 	
 	If CurrentFileIndex = ArrayFiles.Count() Then
 		//@skip-check property-return-type
-		SplashForm.JobTitle = "Checking if files exist";
+		SplashForm.JobTitle = R().GPU_CheckingFilesExist;
 		AttachIdleHandler("AnalizeFolder_CheckFiles", 0.1, True);
 	Else
 		AttachIdleHandler("AnalizeFolder_Read", 0.01, True);
@@ -366,7 +366,7 @@ Procedure LoadingOnClient()
 	EndIf;
 	
 	BackgroundJobUUID = String(New UUID());
-	SplashForm.JobTitle = "Load images. Save file records";
+	SplashForm.JobTitle = R().GPU_Load_SaveInBase;
 	SplashForm.Items.Percent.MaxValue = 100;
 	SplashForm.Percent = 0;
 	

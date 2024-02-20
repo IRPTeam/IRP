@@ -255,6 +255,60 @@
     <fullTextSearch>Use</fullTextSearch>
     <dataHistory>Use</dataHistory>
   </attributes>
+  <attributes uuid="7d2d2b56-6be6-4fc1-9080-5f17f151fb4a">
+    <name>ItemDescriptionTemplate</name>
+    <synonym>
+      <key>en</key>
+      <value>Item description template</value>
+    </synonym>
+    <type>
+      <types>String</types>
+      <stringQualifiers>
+        <length>1024</length>
+      </stringQualifiers>
+    </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <fillValue xsi:type="core:UndefinedValue"/>
+    <fullTextSearch>Use</fullTextSearch>
+    <dataHistory>Use</dataHistory>
+  </attributes>
+  <attributes uuid="f0a19f70-f0be-4afb-bc58-1e4e704cd1cf">
+    <name>ItemLocalFullDescriptionTemplate</name>
+    <synonym>
+      <key>en</key>
+      <value>Item local full description template</value>
+    </synonym>
+    <type>
+      <types>String</types>
+      <stringQualifiers>
+        <length>1024</length>
+      </stringQualifiers>
+    </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <fillValue xsi:type="core:UndefinedValue"/>
+    <fullTextSearch>Use</fullTextSearch>
+    <dataHistory>Use</dataHistory>
+  </attributes>
+  <attributes uuid="d2cf0dde-cbe7-405e-a9da-5ffe0afec491">
+    <name>ItemForeignFullDescriptionTemplate</name>
+    <synonym>
+      <key>en</key>
+      <value>Item foreign full description template</value>
+    </synonym>
+    <type>
+      <types>String</types>
+      <stringQualifiers>
+        <length>1024</length>
+      </stringQualifiers>
+    </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <fillValue xsi:type="core:UndefinedValue"/>
+    <fullTextSearch>Use</fullTextSearch>
+    <dataHistory>Use</dataHistory>
+  </attributes>
   <tabularSections uuid="a261a912-5869-49b5-8ab6-76ad86abeaba">
     <producedTypes>
       <objectType typeId="192f1da3-6058-4b27-b623-41f7c6cafedb" valueTypeId="dff3d6ac-2e62-4190-bda0-9908ffbe49bc"/>
@@ -468,4 +522,12 @@
     <usePurposes>PersonalComputer</usePurposes>
     <usePurposes>MobileDevice</usePurposes>
   </forms>
+  <templates uuid="43085512-dcc1-46ab-94c7-e65b859a4d99">
+    <name>ItemTemplate</name>
+    <synonym>
+      <key>en</key>
+      <value>Item template</value>
+    </synonym>
+    <templateType>DataCompositionSchema</templateType>
+  </templates>
 </mdclass:Catalog>

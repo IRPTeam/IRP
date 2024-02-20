@@ -375,6 +375,7 @@
 // * Exc_008 - String - 
 // * Exc_009 - String - 
 // * Exc_010 - String - 
+// * Exc_011 - String - 
 // * Saas_001 - String - 
 // * Saas_002 - String - 
 // * Saas_003 - String - 
@@ -447,6 +448,14 @@
 // * OpenSLNTree_Button_ToolTip - String - 
 // * BgJ_Title_001 - String - 
 // * BgJ_Title_002 - String - 
+// * InternalCommands_SetNotActive - String -
+// * InternalCommands_SetNotActive_Check - String -
+// * InternalCommands_ShowNotActive - String -
+// * InternalCommands_ShowNotActive_Check - String -
+// * GPU_AnalizeFolder - String -
+// * GPU_Load_SendToDrive - String -
+// * GPU_Load_SaveInBase - String -
+// * GPU_CheckingFilesExist - String -
 Function Strings(Lang) Export
 
 	Strings = New Structure();
@@ -1262,6 +1271,7 @@ Function Strings(Lang) Export
 	Strings.Insert("Exc_008", NStr("en = 'Unknown row key.'", Lang));
 	Strings.Insert("Exc_009", NStr("en = 'Error: %1'", Lang));
 	Strings.Insert("Exc_010", NStr("en = 'Unknown metadata type: %1'", Lang));
+	Strings.Insert("Exc_011", NStr("en = 'Unknown command name: %1'", Lang));
 #EndRegion
 
 #Region Saas
@@ -1533,11 +1543,69 @@ Strings.Insert("MoneyTransfer_DR_R5022T_Expenses_CR_R3021B_CashInTransit",
 #EndRegion
 
 #Region InternalCommands
-    // Do not modify "en" strings
 	Strings.Insert("InternalCommands_SetNotActive", NStr("en = 'Set ""Not active""'", Lang));
 	Strings.Insert("InternalCommands_SetNotActive_Check", NStr("en = 'Set ""Active""'", Lang));
 	Strings.Insert("InternalCommands_ShowNotActive", NStr("en = 'Show all items'", Lang));
 	Strings.Insert("InternalCommands_ShowNotActive_Check", NStr("en = 'Show only active items'", Lang));
+#EndRegion
+	
+
+#Region FormulaEditor
+	Strings.Insert("FormulaEditor_Delimiters", NStr("en = 'Delimiters'", Lang));
+	
+	Strings.Insert("FormulaEditor_Space", NStr("en = 'Space'", Lang));
+	Strings.Insert("FormulaEditor_Operators", NStr("en = 'Operators'", Lang));
+	
+	Strings.Insert("FormulaEditor_LogicalOperatorsAndConstants", NStr("en = 'Logical operators and constants'", Lang));
+	
+	Strings.Insert("FormulaEditor_AND", NStr("en = 'AND'", Lang));
+	Strings.Insert("FormulaEditor_OR", NStr("en = 'OR'", Lang));
+	Strings.Insert("FormulaEditor_NOT", NStr("en = 'NOT'", Lang));
+	Strings.Insert("FormulaEditor_TRUE", NStr("en = 'TRUE'", Lang));
+	Strings.Insert("FormulaEditor_FALSE", NStr("en = 'FALSE'", Lang));
+	
+	Strings.Insert("FormulaEditor_NumericFunctions", NStr("en = 'Numeric functions'", Lang));
+	
+	Strings.Insert("FormulaEditor_Max", NStr("en = 'Max'", Lang));
+	Strings.Insert("FormulaEditor_Min", NStr("en = 'Min'", Lang));
+	Strings.Insert("FormulaEditor_Round", NStr("en = 'Round'", Lang));
+	Strings.Insert("FormulaEditor_Int", NStr("en = 'Int'", Lang));
+	
+	Strings.Insert("FormulaEditor_StringFunctions", NStr("en = 'String functions'", Lang));
+	
+	Strings.Insert("FormulaEditor_String", NStr("en = 'String'", Lang));
+	Strings.Insert("FormulaEditor_Upper", NStr("en = 'Upper'", Lang));
+	Strings.Insert("FormulaEditor_Left", NStr("en = 'Left'", Lang));
+	Strings.Insert("FormulaEditor_Lower", NStr("en = 'Lower'", Lang));
+	Strings.Insert("FormulaEditor_Right", NStr("en = 'Right'", Lang));
+	Strings.Insert("FormulaEditor_TrimL", NStr("en = 'TrimL'", Lang));
+	Strings.Insert("FormulaEditor_TrimAll", NStr("en = 'TrimAll'", Lang));
+	Strings.Insert("FormulaEditor_TrimR", NStr("en = 'TrimR'", Lang));
+	Strings.Insert("FormulaEditor_Title", NStr("en = 'Title'", Lang));
+	Strings.Insert("FormulaEditor_StrReplace", NStr("en = 'StrReplace'", Lang));
+	Strings.Insert("FormulaEditor_StrLen", NStr("en = 'StrLen'", Lang));
+	
+	Strings.Insert("FormulaEditor_OtherFunctions", NStr("en = 'Other functions'", Lang));
+	
+	Strings.Insert("FormulaEditor_Condition", NStr("en = 'Condition'", Lang));
+	Strings.Insert("FormulaEditor_PredefinedValue", NStr("en = 'Predefined value'", Lang));
+	Strings.Insert("FormulaEditor_ValueIsFilled", NStr("en = 'Value is filled'", Lang));
+	Strings.Insert("FormulaEditor_Format", NStr("en = 'Format'", Lang));
+	
+	Strings.Insert("FormulaEditor_Error01", NStr("en = 'Attribute name must not contain ""."". Rename attribute'", Lang));
+	Strings.Insert("FormulaEditor_Error02", NStr("en = 'Wrong formula'", Lang));
+	Strings.Insert("FormulaEditor_Error03", NStr("en = 'Wrong formula: operator or delimiters must be placed between operands'", Lang));
+	Strings.Insert("FormulaEditor_Error04", NStr("en = 'Can not eval description'", Lang));
+	Strings.Insert("FormulaEditor_Error05", NStr("en = 'Template for description is empty'", Lang));
+	Strings.Insert("FormulaEditor_Msg01", NStr("en = 'Formula is correct'", Lang));
+	
+#EndRegion
+
+#Region GroupPhotoUploading
+	Strings.Insert("GPU_AnalizeFolder", NStr("en = 'Analize folder'", Lang));
+	Strings.Insert("GPU_Load_SendToDrive", NStr("en = 'Load images. Send to drive'", Lang));
+	Strings.Insert("GPU_Load_SaveInBase", NStr("en = 'Load images. Save file records'", Lang));
+	Strings.Insert("GPU_CheckingFilesExist", NStr("en = 'Checking if files exist'", Lang));
 #EndRegion
 	
 	Return Strings;

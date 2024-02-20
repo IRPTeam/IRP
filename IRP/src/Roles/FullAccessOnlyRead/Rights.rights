@@ -12468,13 +12468,6 @@
 		</right>
 	</object>
 	<object>
-		<name>CommonForm.LoadDataFromTable</name>
-		<right>
-			<name>View</name>
-			<value>true</value>
-		</right>
-	</object>
-	<object>
 		<name>InformationRegister.T6020S_BatchKeysInfo.Resource.IndirectCostTaxAmount</name>
 		<right>
 			<name>Edit</name>
@@ -14998,13 +14991,6 @@
 			<name>Read</name>
 			<value>true</value>
 		</right>
-		<right>
-			<name>View</name>
-			<value>true</value>
-		</right>
-	</object>
-	<object>
-		<name>CommonForm.LoadDataFromTable</name>
 		<right>
 			<name>View</name>
 			<value>true</value>

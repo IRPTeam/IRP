@@ -38,4 +38,40 @@
     <usePurposes>PersonalComputer</usePurposes>
     <usePurposes>MobileDevice</usePurposes>
   </forms>
+  <forms uuid="c47bff1b-3b89-4768-9752-fa9c0fbe5fa7">
+    <name>GroupEditingProperties</name>
+    <synonym>
+      <key>en</key>
+      <value>Group editing of properties</value>
+    </synonym>
+    <usePurposes>PersonalComputer</usePurposes>
+    <usePurposes>MobileDevice</usePurposes>
+  </forms>
+  <forms uuid="6aae06fd-3034-4f77-a1c3-c3757c418c29">
+    <name>CloneValueFromFirstRow</name>
+    <synonym>
+      <key>en</key>
+      <value>Clone value from first row</value>
+    </synonym>
+    <usePurposes>PersonalComputer</usePurposes>
+    <usePurposes>MobileDevice</usePurposes>
+  </forms>
+  <forms uuid="dd969621-5cb5-474e-8c22-54876a64f044">
+    <name>LoadDataFromTable</name>
+    <synonym>
+      <key>en</key>
+      <value>Load data from table</value>
+    </synonym>
+    <usePurposes>PersonalComputer</usePurposes>
+    <usePurposes>MobileDevice</usePurposes>
+  </forms>
+  <forms uuid="25dc0fd4-7989-4078-8958-27c13b6dcace">
+    <name>LoadDataFromTable_Form</name>
+    <synonym>
+      <key>en</key>
+      <value>Load data from table (form)</value>
+    </synonym>
+    <usePurposes>PersonalComputer</usePurposes>
+    <usePurposes>MobileDevice</usePurposes>
+  </forms>
 </mdclass:DataProcessor>

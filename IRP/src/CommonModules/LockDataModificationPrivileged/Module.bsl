@@ -71,6 +71,16 @@ Procedure LockFormIfObjectIsLocked(Form, CurrentObject) Export
 	EndIf;
 EndProcedure
 
+// Check lock data.
+// 
+// Parameters:
+//  Source - DocumentObjectDocumentName, CatalogObjectCatalogName - Source
+//  Cancel - Boolean - Cancel
+//  isNew - Boolean - Is new
+//  OnOpen - Boolean - On open
+// 
+// Returns:
+//  Boolean - Check lock data
 Function CheckLockData(Source, Cancel = False, isNew = False, OnOpen = False) Export
 	If Cancel OR Source.DataExchange.Load 
 		OR SessionParameters.IgnoreLockModificationData 
@@ -289,6 +299,12 @@ Function ModifyDataIsLocked_ByTable_Simple(SourceParams, Rules, AddInfo = Undefi
 		EndIf;
 		Filter.Add(StrTemplate(TemplateFilter, FilterInSet.Name));
 		Query.SetParameter(FilterInSet.Name, FilterInSet.Value);
+        
+        If FilterInSet.Name = "Recorder" Then
+            VTTable.Columns.Add("Recorder", SourceParams.Source.Filter.Recorder.ValueType); 
+            VTTable.FillValues(FilterInSet.Value, "Recorder");
+        EndIf;
+        
 	EndDo;
 	For Index = 0 To Rules.Count() - 1 Do
 		
@@ -305,8 +321,8 @@ Function ModifyDataIsLocked_ByTable_Simple(SourceParams, Rules, AddInfo = Undefi
 		Query.SetParameter("Reason" + Index, Rules[Index].LockDataModificationReasons);
 		Query.SetParameter("Param" + Index, Rules[Index].Value);
 	EndDo;
-	
-	Query.Text =  
+
+    Query.Text =  
 		"SELECT DISTINCT 
 		|	* 
 		|INTO TableCurrent
@@ -325,6 +341,7 @@ Function ModifyDataIsLocked_ByTable_Simple(SourceParams, Rules, AddInfo = Undefi
 		|	SELECT DISTINCT 
 		|		" + StrConcat(Fields, "," + Chars.LF) + " 
 		|	FROM TableCurrent AS Table
+        |   WHERE " + StrConcat(Filter, " AND ") + "
 		|) AS NT";
 
 	Return GetResultLockCheck(Query);

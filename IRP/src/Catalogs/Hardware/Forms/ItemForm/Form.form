@@ -2326,12 +2326,12 @@
   <name>NotificationProcessing</name>
  </handlers>
  <handlers>
-  <event>OnCreateAtServer</event>
-  <name>OnCreateAtServer</name>
- </handlers>
- <handlers>
   <event>OnOpen</event>
   <name>OnOpen</name>
+ </handlers>
+ <handlers>
+  <event>OnCreateAtServer</event>
+  <name>OnCreateAtServer</name>
  </handlers>
  <windowOpeningMode>LockOwnerWindow</windowOpeningMode>
  <autoTitle>true</autoTitle>
@@ -2423,10 +2423,10 @@
    </title>
    <id>5</id>
    <valueType>
+    <types>ValueList</types>
+    <types>Boolean</types>
     <types>String</types>
     <types>Date</types>
-    <types>Boolean</types>
-    <types>ValueList</types>
     <types>Number</types>
     <numberQualifiers>
      <precision>15</precision>
@@ -2509,11 +2509,11 @@
    </title>
    <id>8</id>
    <valueType>
-    <types>Date</types>
-    <types>String</types>
-    <types>Number</types>
-    <types>Boolean</types>
     <types>ValueList</types>
+    <types>Boolean</types>
+    <types>String</types>
+    <types>Date</types>
+    <types>Number</types>
     <numberQualifiers>
      <precision>15</precision>
      <scale>5</scale>

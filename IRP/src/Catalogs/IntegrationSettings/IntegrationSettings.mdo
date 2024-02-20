@@ -209,10 +209,10 @@
     <value>Değer</value>
    </synonym>
    <type>
+    <types>CatalogRef.IntegrationSettings</types>
     <types>Boolean</types>
     <types>String</types>
     <types>Number</types>
-    <types>CatalogRef.IntegrationSettings</types>
     <numberQualifiers>
      <precision>10</precision>
     </numberQualifiers>
@@ -304,10 +304,10 @@
     <value>Değer</value>
    </synonym>
    <type>
+    <types>CatalogRef.IntegrationSettings</types>
     <types>Boolean</types>
     <types>String</types>
     <types>Number</types>
-    <types>CatalogRef.IntegrationSettings</types>
     <numberQualifiers>
      <precision>10</precision>
     </numberQualifiers>

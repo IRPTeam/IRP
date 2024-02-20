@@ -733,16 +733,16 @@
   <name>NotificationProcessing</name>
  </handlers>
  <handlers>
+  <event>OnOpen</event>
+  <name>OnOpen</name>
+ </handlers>
+ <handlers>
   <event>OnCreateAtServer</event>
   <name>OnCreateAtServer</name>
  </handlers>
  <handlers>
   <event>FillCheckProcessingAtServer</event>
   <name>FillCheckProcessingAtServer</name>
- </handlers>
- <handlers>
-  <event>OnOpen</event>
-  <name>OnOpen</name>
  </handlers>
  <windowOpeningMode>LockOwnerWindow</windowOpeningMode>
  <autoTitle>true</autoTitle>
@@ -984,6 +984,10 @@
  </commandInterface>
  <extInfo xsi:type="form:CatalogFormExtInfo">
   <handlers>
+   <event>AfterWrite</event>
+   <name>AfterWrite</name>
+  </handlers>
+  <handlers>
    <event>AfterWriteAtServer</event>
    <name>AfterWriteAtServer</name>
   </handlers>
@@ -994,10 +998,6 @@
   <handlers>
    <event>BeforeWriteAtServer</event>
    <name>BeforeWriteAtServer</name>
-  </handlers>
-  <handlers>
-   <event>AfterWrite</event>
-   <name>AfterWrite</name>
   </handlers>
  </extInfo>
 </form:Form>

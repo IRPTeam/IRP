@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mdclass:CommonPicture xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="796661ed-777d-443f-83e6-0a3689e8b9a7">
+ <name>FillByTemplate</name>
+ <synonym>
+  <key>en</key>
+  <value>Fill by template</value>
+ </synonym>
+ <synonym>
+  <key>ru</key>
+  <value>Заполнить по шаблону</value>
+ </synonym>
+ <synonym>
+  <key>tr</key>
+  <value>Şablonu doldur</value>
+ </synonym>
+</mdclass:CommonPicture>

@@ -545,7 +545,7 @@ Scenario: _029521 check the output of the document movement report for Bundling
 		And I go to line in "List" table
 		| 'Number'                      |
 		| '$$NumberBundling0029501$$'   |
-		And I click the button named "FormReportDocumentRegistrationsReportRegistrationsReport"
+		And I click the button named "FormReportD0009_DocumentRegistrationsReportRegistrationsReport"
 	* Check the report generation
 		And I select "Bundles content" exact value from "Register" drop-down list
 		And I click "Generate report" button
@@ -565,7 +565,7 @@ Scenario: _029521 check the output of the document movement report for Bundling
 		| 'Number'                      |
 		| '$$NumberBundling0029501$$'   |
 		And I select current line in "List" table
-		And I click the button named "FormReportDocumentRegistrationsReportRegistrationsReport"
+		And I click the button named "FormReportD0009_DocumentRegistrationsReportRegistrationsReport"
 		And I select "Bundles content" exact value from "Register" drop-down list
 		And I click "Generate report" button			
 	* Check the report generation
@@ -590,7 +590,7 @@ Scenario: _02951901 clear movements Bundling and check that there is no movement
 			| '$$NumberBundling0029501$$'    |
 	* Clear movements document and check that there is no movement on the registers
 		And in the table "List" I click the button named "ListContextMenuUndoPosting"
-		And I click the button named "FormReportDocumentRegistrationsReportRegistrationsReport"
+		And I click the button named "FormReportD0009_DocumentRegistrationsReportRegistrationsReport"
 		And "ResultTable" spreadsheet document does not contain values
 			| 'Register  "Bundles content"'      |
 			| 'Register  "Stock reservation"'    |
@@ -602,7 +602,7 @@ Scenario: _02951901 clear movements Bundling and check that there is no movement
 			| 'Number'                       |
 			| '$$NumberBundling0029501$$'    |
 		And in the table "List" I click the button named "ListContextMenuPost"
-		And I click the button named "FormReportDocumentRegistrationsReportRegistrationsReport"
+		And I click the button named "FormReportD0009_DocumentRegistrationsReportRegistrationsReport"
 		And I select "Bundles content" exact value from "Register" drop-down list
 		And I click "Generate report" button
 		And "ResultTable" spreadsheet document contains lines:

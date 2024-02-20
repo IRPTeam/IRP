@@ -217,21 +217,21 @@
      <segments>Object.ItemList</segments>
     </dataPath>
     <titleLocation>None</titleLocation>
-    <excludedCommands>MoveDown</excludedCommands>
-    <excludedCommands>SortListAsc</excludedCommands>
-    <excludedCommands>CopyToClipboard</excludedCommands>
+    <excludedCommands>Add</excludedCommands>
     <excludedCommands>Choose</excludedCommands>
+    <excludedCommands>Copy</excludedCommands>
+    <excludedCommands>CopyToClipboard</excludedCommands>
+    <excludedCommands>EndEdit</excludedCommands>
     <excludedCommands>FindByCurrentValue</excludedCommands>
+    <excludedCommands>MoveDown</excludedCommands>
     <excludedCommands>MoveUp</excludedCommands>
+    <excludedCommands>OutputList</excludedCommands>
+    <excludedCommands>SearchEverywhere</excludedCommands>
+    <excludedCommands>SelectAll</excludedCommands>
     <excludedCommands>ShowMultipleSelection</excludedCommands>
     <excludedCommands>ShowRowRearrangement</excludedCommands>
-    <excludedCommands>EndEdit</excludedCommands>
-    <excludedCommands>Copy</excludedCommands>
-    <excludedCommands>SearchEverywhere</excludedCommands>
+    <excludedCommands>SortListAsc</excludedCommands>
     <excludedCommands>SortListDesc</excludedCommands>
-    <excludedCommands>SelectAll</excludedCommands>
-    <excludedCommands>Add</excludedCommands>
-    <excludedCommands>OutputList</excludedCommands>
     <items xsi:type="form:FormGroup">
      <name>ItemListGroupItem</name>
      <id>37</id>
@@ -801,16 +801,16 @@
      <horizontalAlign>Left</horizontalAlign>
     </autoCommandBar>
     <handlers>
+     <event>BeforeDeleteRow</event>
+     <name>ItemListBeforeDeleteRow</name>
+    </handlers>
+    <handlers>
      <event>OnChange</event>
      <name>ItemListOnChange</name>
     </handlers>
     <handlers>
      <event>RefreshRequestProcessing</event>
      <name>ItemListRefreshRequestProcessing</name>
-    </handlers>
-    <handlers>
-     <event>BeforeDeleteRow</event>
-     <name>ItemListBeforeDeleteRow</name>
     </handlers>
     <searchStringAddition>
      <visible>true</visible>

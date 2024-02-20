@@ -375,6 +375,7 @@
 // * Exc_008 - String - 
 // * Exc_009 - String - 
 // * Exc_010 - String - 
+// * Exc_011 - String - 
 // * Saas_001 - String - 
 // * Saas_002 - String - 
 // * Saas_003 - String - 
@@ -447,6 +448,14 @@
 // * OpenSLNTree_Button_ToolTip - String - 
 // * BgJ_Title_001 - String - 
 // * BgJ_Title_002 - String - 
+// * InternalCommands_SetNotActive - String -
+// * InternalCommands_SetNotActive_Check - String -
+// * InternalCommands_ShowNotActive - String -
+// * InternalCommands_ShowNotActive_Check - String -
+// * GPU_AnalizeFolder - String -
+// * GPU_Load_SendToDrive - String -
+// * GPU_Load_SaveInBase - String -
+// * GPU_CheckingFilesExist - String -
 Function Strings(Lang) Export
 
 	Strings = New Structure();
@@ -2070,6 +2079,9 @@ Function Strings(Lang) Export
 	Strings.Insert("Exc_010", NStr("en='Unknown metadata type: %1';
 		|ru='Неизвестный тип метаданных: %1';
 		|tr='Bilinmeyen meta veri türü: %1'", Lang));
+	Strings.Insert("Exc_011", NStr("en='Unknown command name: %1';
+		|ru='Неизвестное имя команды: %1';
+		|tr='Bilinmeyen komut adı: %1'", Lang));
 #EndRegion
 
 #Region Saas
@@ -2605,7 +2617,6 @@ Strings.Insert("MoneyTransfer_DR_R5022T_Expenses_CR_R3021B_CashInTransit",
 #EndRegion
 
 #Region InternalCommands
-    // Do not modify "en" strings
 	Strings.Insert("InternalCommands_SetNotActive", NStr("en='Set ""Not active""';
 		|ru='Установить ""Неактивный""';
 		|tr='""Aktif Olmayan"" Ayarla'", Lang));
@@ -2618,6 +2629,147 @@ Strings.Insert("MoneyTransfer_DR_R5022T_Expenses_CR_R3021B_CashInTransit",
 	Strings.Insert("InternalCommands_ShowNotActive_Check", NStr("en='Show only active items';
 		|ru='Показать только активные позиции';
 		|tr='Sadece Aktif Öğeleri Göster'", Lang));
+#EndRegion
+	
+
+#Region FormulaEditor
+	Strings.Insert("FormulaEditor_Delimiters", NStr("en='Delimiters';
+		|ru='Разделители';
+		|tr='Ayraçlar'", Lang));
+	
+	Strings.Insert("FormulaEditor_Space", NStr("en='Space';
+		|ru='Пробел';
+		|tr='Boşluk'", Lang));
+	Strings.Insert("FormulaEditor_Operators", NStr("en='Operators';
+		|ru='Операторы';
+		|tr='Operatörler'", Lang));
+	
+	Strings.Insert("FormulaEditor_LogicalOperatorsAndConstants", NStr("en='Logical operators and constants';
+		|ru='Логические операторы и константы';
+		|tr='Mantıksal operatörler ve sabitler'", Lang));
+	
+	Strings.Insert("FormulaEditor_AND", NStr("en='AND';
+		|ru='И';
+		|tr='VE'", Lang));
+	Strings.Insert("FormulaEditor_OR", NStr("en='OR';
+		|ru='ИЛИ';
+		|tr='VEYA'", Lang));
+	Strings.Insert("FormulaEditor_NOT", NStr("en='NOT';
+		|ru='НЕ';
+		|tr='DEĞİL'", Lang));
+	Strings.Insert("FormulaEditor_TRUE", NStr("en='TRUE';
+		|ru='ИСТИНА';
+		|tr='DOĞRU'", Lang));
+	Strings.Insert("FormulaEditor_FALSE", NStr("en='FALSE';
+		|ru='ЛОЖЬ';
+		|tr='YANLIŞ'", Lang));
+	
+	Strings.Insert("FormulaEditor_NumericFunctions", NStr("en='Numeric functions';
+		|ru='Числовые функции';
+		|tr='Sayısal fonksiyonlar'", Lang));
+	
+	Strings.Insert("FormulaEditor_Max", NStr("en='Max';
+		|ru='Максимум';
+		|tr='Maks'", Lang));
+	Strings.Insert("FormulaEditor_Min", NStr("en='Min';
+		|ru='Минимум';
+		|tr='Min'", Lang));
+	Strings.Insert("FormulaEditor_Round", NStr("en='Round';
+		|ru='Округлить';
+		|tr='Yuvarla'", Lang));
+	Strings.Insert("FormulaEditor_Int", NStr("en='Int';
+		|ru='Цел';
+		|tr='Tamsayı'", Lang));
+	
+	Strings.Insert("FormulaEditor_StringFunctions", NStr("en='String functions';
+		|ru='Строковые функции';
+		|tr='Dize fonksiyonları'", Lang));
+	
+	Strings.Insert("FormulaEditor_String", NStr("en='String';
+		|ru='Строка';
+		|tr='Dize'", Lang));
+	Strings.Insert("FormulaEditor_Upper", NStr("en='Upper';
+		|ru='ВРег';
+		|tr='Büyük'", Lang));
+	Strings.Insert("FormulaEditor_Left", NStr("en='Left';
+		|ru='Слева';
+		|tr='Sol'", Lang));
+	Strings.Insert("FormulaEditor_Lower", NStr("en='Lower';
+		|ru='Нижний';
+		|tr='Küçük'", Lang));
+	Strings.Insert("FormulaEditor_Right", NStr("en='Right';
+		|ru='Справа';
+		|tr='Sağ'", Lang));
+	Strings.Insert("FormulaEditor_TrimL", NStr("en='TrimL';
+		|ru='СокрЛ';
+		|tr='TrimL'", Lang));
+	Strings.Insert("FormulaEditor_TrimAll", NStr("en='TrimAll';
+		|ru='СокрЛП';
+		|tr='TrimAll'", Lang));
+	Strings.Insert("FormulaEditor_TrimR", NStr("en='TrimR';
+		|ru='СокрП';
+		|tr='TrimR'", Lang));
+	Strings.Insert("FormulaEditor_Title", NStr("en='Title';
+		|ru='Наименование';
+		|tr='Başlık'", Lang));
+	Strings.Insert("FormulaEditor_StrReplace", NStr("en='StrReplace';
+		|ru='СтрЗаменить';
+		|tr='StrReplace'", Lang));
+	Strings.Insert("FormulaEditor_StrLen", NStr("en='StrLen';
+		|ru='СтрДлина';
+		|tr='StrLen'", Lang));
+	
+	Strings.Insert("FormulaEditor_OtherFunctions", NStr("en='Other functions';
+		|ru='Прочие функции';
+		|tr='Diğer fonksiyonlar'", Lang));
+	
+	Strings.Insert("FormulaEditor_Condition", NStr("en='Condition';
+		|ru='Условие';
+		|tr='Koşul'", Lang));
+	Strings.Insert("FormulaEditor_PredefinedValue", NStr("en='Predefined value';
+		|ru='Предопределенное значение';
+		|tr='Önceden tanımlanmış değer'", Lang));
+	Strings.Insert("FormulaEditor_ValueIsFilled", NStr("en='Value is filled';
+		|ru='Значение заполнено';
+		|tr='Değer dolduruldu'", Lang));
+	Strings.Insert("FormulaEditor_Format", NStr("en='Format';
+		|ru='Формат';
+		|tr='Biçim'", Lang));
+	
+	Strings.Insert("FormulaEditor_Error01", NStr("en='Attribute name must not contain ""."". Rename attribute';
+		|ru='Имя атрибута не должно содержать ""."". Переименуйте атрибут';
+		|tr='Öznitelik adı ""."" içermemelidir. Özniteliği yeniden adlandırın'", Lang));
+	Strings.Insert("FormulaEditor_Error02", NStr("en='Wrong formula';
+		|ru='Неверная формула';
+		|tr='Yanlış formül'", Lang));
+	Strings.Insert("FormulaEditor_Error03", NStr("en='Wrong formula: operator or delimiters must be placed between operands';
+		|ru='Неверная формула: оператор или разделители должны быть между операндами';
+		|tr='Yanlış formül: operatör veya ayraçlar işlenenler arasında yerleştirilmelidir'", Lang));
+	Strings.Insert("FormulaEditor_Error04", NStr("en='Can not eval description';
+		|ru='Не удается вычислить наименование';
+		|tr='Tanım değerlendirilemiyor'", Lang));
+	Strings.Insert("FormulaEditor_Error05", NStr("en='Template for description is empty';
+		|ru='Шаблон для наименования пуст';
+		|tr='Tanım için şablon boş'", Lang));
+	Strings.Insert("FormulaEditor_Msg01", NStr("en='Formula is correct';
+		|ru='Формула верна';
+		|tr='Formül doğru'", Lang));
+	
+#EndRegion
+
+#Region GroupPhotoUploading
+	Strings.Insert("GPU_AnalizeFolder", NStr("en='Analize folder';
+		|ru='Анализировать каталог';
+		|tr='Analiz klasörü'", Lang));
+	Strings.Insert("GPU_Load_SendToDrive", NStr("en='Load images. Send to drive';
+		|ru='Загрузка изображений. Отправка на диск';
+		|tr='Resimleri yükle. Sürücüye gönder'", Lang));
+	Strings.Insert("GPU_Load_SaveInBase", NStr("en='Load images. Save file records';
+		|ru='Загрузка изображений. Сохранение записей файлов';
+		|tr='Resimleri yükle. Dosya kayıtlarını kaydet'", Lang));
+	Strings.Insert("GPU_CheckingFilesExist", NStr("en='Checking if files exist';
+		|ru='Проверка существования файлов';
+		|tr='Dosyaların varlığı kontrol ediliyor'", Lang));
 #EndRegion
 	
 	Return Strings;

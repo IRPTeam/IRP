@@ -2,7 +2,12 @@
 
 &AtServer
 Procedure OnCreateAtServer(Cancel, StandardProcessing)
-	LocalizationEvents.CreateMainFormItemDescription(ThisObject, "GroupDescriptions");
+	DescriptionParameters = LocalizationEvents.DescriptionParameters();
+	DescriptionParameters.CreateFillByTemplate_Description = True;
+	DescriptionParameters.CreateFillByTemplate_LocalDescription = True;
+	DescriptionParameters.CreateFillByTemplate_ForeignDescription = True;
+
+	LocalizationEvents.CreateMainFormItemDescription(ThisObject, "GroupDescriptions", DescriptionParameters);
 	LocalizationEvents.FillDescription(Parameters.FillingText, Object);
 	If Object.Ref.IsEmpty() Then
 		If Parameters.Property("Item") Then
@@ -114,7 +119,10 @@ EndProcedure
 
 &AtClient
 Procedure DescriptionOpening(Item, StandardProcessing) Export
-	LocalizationClient.DescriptionOpening(Object, ThisObject, Item, StandardProcessing);
+	DescriptionParameters = LocalizationEvents.DescriptionParameters();
+	DescriptionParameters.CreateFillByTemplate_Description = True;
+	DescriptionParameters.DescriptionTemplate = CommonFunctionsServer.GetRefAttribute(Object.ItemType, "ItemDescriptionTemplate");
+	LocalizationClient.DescriptionOpening(Object, ThisObject, Item, StandardProcessing, DescriptionParameters);
 EndProcedure
 
 #Region AddAttribute
@@ -281,5 +289,61 @@ EndProcedure
 Procedure InternalCommandAction(Command) Export
 	InternalCommandsClient.RunCommandAction(Command, ThisObject, Object, Object.Ref);
 EndProcedure
+
+&AtClient
+Procedure FillDescriptionByTemplate(Command)
+	If ThisObject.Modified Then
+		ShowQueryBox(New NotifyDescription("FillDescriptionByTemplateEnd", ThisObject, New Structure("CommandName", Command.Name)), 
+			R().QuestionToUser_001, QuestionDialogMode.OKCancel);
+	Else
+		FillDescriptionByTemplateAtClient(Command.Name);
+	EndIf;
+EndProcedure
+
+&AtClient
+Procedure FillDescriptionByTemplateEnd(Result, NotifyParameters) Export
+	If Result = DialogReturnCode.OK Then
+		If Write() Then
+			FillDescriptionByTemplateAtClient(NotifyParameters.CommandName);
+		EndIf;
+	EndIf;
+EndProcedure
+
+&AtClient
+Procedure FillDescriptionByTemplateAtClient(CommandName)
+	If StrStartsWith(CommandName, "CommandFillByTemplate_Description") Then
+		FillDescriptionByTemplateAtServer("Description_" + LocalizationReuse.GetLocalizationCode(), "ItemDescriptionTemplate");
+	ElsIf StrStartsWith(CommandName, "CommandFillByTemplate_LocalDescription") Then
+		FillDescriptionByTemplateAtServer("LocalFullDescription", "ItemLocalFullDescriptionTemplate");
+	ElsIf StrStartsWith(CommandName, "CommandFillByTemplate_ForeignDescription") Then
+		FillDescriptionByTemplateAtServer("ForeignFullDescription", "ItemForeignFullDescriptionTemplate");
+	Else
+		Raise StrTemplate("Unknown command [%1]", CommandName);
+	EndIf;		
+EndProcedure
+
+&AtServer
+Procedure FillDescriptionByTemplateAtServer(AttributeName, TemplateName)
+	Template = Object.ItemType[TemplateName];
+	If Not ValueIsFilled(Template) Then
+		CommonFunctionsClientServer.ShowUsersMessage(R().FormulaEditor_Error05);
+		Return;
+	EndIf;
+	NewDesciption = GetItemInfo.GetDescriptionByTemplate(Object, Template);
+	If Object[AttributeName] <> NewDesciption Then
+		Object[AttributeName] = NewDesciption;
+		ThisObject.Modified = True;
+	EndIf;
+EndProcedure
+
+Procedure InternalCommandActionWithServerContext(Command) Export
+	InternalCommandActionWithServerContextAtServer(Command.Name);
+EndProcedure
+
+&AtServer
+Procedure InternalCommandActionWithServerContextAtServer(CommandName)
+	InternalCommandsServer.RunCommandAction(CommandName, ThisObject, Object, Object.Ref);
+EndProcedure
+
 
 #EndRegion

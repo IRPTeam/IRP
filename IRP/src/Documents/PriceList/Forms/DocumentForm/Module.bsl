@@ -711,7 +711,22 @@ EndProcedure
 
 #EndRegion
 
-#Region ExternalCommands
+#Region COMMANDS
+
+&AtClient
+Procedure InternalCommandAction(Command) Export
+	InternalCommandsClient.RunCommandAction(Command, ThisObject, Object, Object.Ref);
+EndProcedure
+
+&AtClient
+Procedure InternalCommandActionWithServerContext(Command) Export
+	InternalCommandActionWithServerContextAtServer(Command.Name);
+EndProcedure
+
+&AtServer
+Procedure InternalCommandActionWithServerContextAtServer(CommandName)
+	InternalCommandsServer.RunCommandAction(CommandName, ThisObject, Object, Object.Ref);
+EndProcedure
 
 &AtClient
 Procedure GeneratedFormCommandActionByName(Command) Export
@@ -731,52 +746,3 @@ Procedure ShowHiddenTables(Command)
 	DocumentsClient.ShowHiddenTables(Object, ThisObject);
 EndProcedure
 
-#Region LOAD_DATA_FROM_TABLE
-
-//@skip-check module-unused-method
-&AtClient
-Procedure LoadDataFromTable(Command)
-	AddInfo = New Structure;
-	AddInfo.Insert("TargetField", "Price");
-	If Object.PriceListType = PredefinedValue("Enum.PriceListTypes.PriceByItems") Then
-		//@skip-check wrong-string-literal-content
-		AddInfo.Insert("FieldsForLoadData", ThisObject["_FieldsForLoadData"]);
-	ElsIf Object.PriceListType = PredefinedValue("Enum.PriceListTypes.PriceByItemKeys") Then
-		//@skip-check wrong-string-literal-content
-		AddInfo.Insert("FieldsForLoadData", ThisObject["_FieldsForLoadData_ItemKey"]);
-	EndIf;
-	AddInfo.Insert("EndNotify", New NotifyDescription("LoadDataFromTableEnd", ThisObject));
-	LoadDataFromTableClient.OpenFormForLoadData(ThisObject, ThisObject.Object, AddInfo);
-EndProcedure
-
-&AtClient
-Procedure LoadDataFromTableEnd(Result, AddInfo) Export
-	
-	If Not Result = Undefined Then
-		LoadDataFromTableEndAtServer(Result.Address);
-	EndIf;
-	
-EndProcedure
-
-&AtServer
-Procedure LoadDataFromTableEndAtServer(TableAddress)
-	
-	DocumentTable = Object.ItemList;
-	NameFieldForUnit = "Item";
-	If Object.PriceListType = PredefinedValue("Enum.PriceListTypes.PriceByItemKeys") Then
-		DocumentTable = Object.ItemKeyList;
-		NameFieldForUnit = "ItemKey";
-	EndIf;
-	
-	DataTable = GetFromTempStorage(TableAddress);
-	For Each TableRow In DataTable Do
-		NewRecord = DocumentTable.Add();
-		FillPropertyValues(NewRecord, TableRow);
-		Unit = GetInputUnit(NewRecord[NameFieldForUnit]);
-		NewRecord.InputUnit = Unit;
-		NewRecord.Unit = Unit;		
-	EndDo;
-	
-EndProcedure	
-
-#EndRegion

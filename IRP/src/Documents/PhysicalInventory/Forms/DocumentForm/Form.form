@@ -4272,6 +4272,7 @@ GROUP BY
     <valueType>
      <types>DocumentRef.PhysicalInventory</types>
     </valueType>
+    <values xsi:type="core:UndefinedValue"/>
     <useRestriction>true</useRestriction>
    </parameters>
   </extInfo>

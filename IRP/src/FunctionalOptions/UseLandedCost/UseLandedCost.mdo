@@ -18,8 +18,8 @@
  <content>Document.AdditionalCostAllocation</content>
  <content>Document.CalculationMovementCosts</content>
  <content>AccumulationRegister.R6020B_BatchBalance</content>
- <content>Report.BatchBalanceSimple</content>
- <content>Report.BatchBalance</content>
+ <content>Report.R6021_BatchBalanceSimple</content>
+ <content>Report.R6020_BatchBalance</content>
  <content>Document.SalesReturn.TabularSection.ItemList.Attribute.LandedCost</content>
  <content>Document.RetailReturnReceipt.TabularSection.ItemList.Attribute.LandedCost</content>
  <content>Catalog.Companies.Attribute.LandedCostCurrencyMovementType</content>

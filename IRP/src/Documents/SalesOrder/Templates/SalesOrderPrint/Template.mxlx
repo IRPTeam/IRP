@@ -111,12 +111,7 @@
 			<c>
 				<c>
 					<f>0</f>
-					<tl>
-						<v8:item>
-							<v8:lang>ru</v8:lang>
-							<v8:content/>
-						</v8:item>
-					</tl>
+					<tl/>
 				</c>
 			</c>
 		</row>
@@ -253,14 +248,10 @@
 						</v8:item>
 						<v8:item>
 							<v8:lang>ru</v8:lang>
-							<v8:content/>
-						</v8:item>
-						<v8:item>
-							<v8:lang>tr</v8:lang>
 							<v8:content>#</v8:content>
 						</v8:item>
 						<v8:item>
-							<v8:lang>en</v8:lang>
+							<v8:lang>tr</v8:lang>
 							<v8:content>#</v8:content>
 						</v8:item>
 					</tl>
@@ -282,10 +273,6 @@
 							<v8:lang>tr</v8:lang>
 							<v8:content>Malzeme</v8:content>
 						</v8:item>
-						<v8:item>
-							<v8:lang>en</v8:lang>
-							<v8:content>Item</v8:content>
-						</v8:item>
 					</tl>
 				</c>
 			</c>
@@ -304,10 +291,6 @@
 						<v8:item>
 							<v8:lang>tr</v8:lang>
 							<v8:content>Varyant</v8:content>
-						</v8:item>
-						<v8:item>
-							<v8:lang>en</v8:lang>
-							<v8:content>Item key</v8:content>
 						</v8:item>
 					</tl>
 				</c>
@@ -328,10 +311,6 @@
 							<v8:lang>tr</v8:lang>
 							<v8:content>Miktar</v8:content>
 						</v8:item>
-						<v8:item>
-							<v8:lang>en</v8:lang>
-							<v8:content>Quantity</v8:content>
-						</v8:item>
 					</tl>
 				</c>
 			</c>
@@ -351,10 +330,6 @@
 							<v8:lang>tr</v8:lang>
 							<v8:content>Birim</v8:content>
 						</v8:item>
-						<v8:item>
-							<v8:lang>en</v8:lang>
-							<v8:content>Unit</v8:content>
-						</v8:item>
 					</tl>
 				</c>
 			</c>
@@ -373,10 +348,6 @@
 						<v8:item>
 							<v8:lang>tr</v8:lang>
 							<v8:content>Fiyat</v8:content>
-						</v8:item>
-						<v8:item>
-							<v8:lang>en</v8:lang>
-							<v8:content>Price</v8:content>
 						</v8:item>
 					</tl>
 				</c>
@@ -476,13 +447,13 @@
 			</c>
 			<c>
 				<c>
-					<f>21</f>
+					<f>18</f>
 					<parameter>Price</parameter>
 				</c>
 			</c>
 			<c>
 				<c>
-					<f>22</f>
+					<f>21</f>
 					<parameter>OffersAmount</parameter>
 				</c>
 			</c>
@@ -494,7 +465,7 @@
 			</c>
 			<c>
 				<c>
-					<f>23</f>
+					<f>22</f>
 					<parameter>TotalAmount</parameter>
 				</c>
 			</c>
@@ -513,12 +484,12 @@
 			<c>
 				<i>7</i>
 				<c>
-					<f>24</f>
+					<f>23</f>
 				</c>
 			</c>
 			<c>
 				<c>
-					<f>25</f>
+					<f>24</f>
 					<tl>
 						<v8:item>
 							<v8:lang>en</v8:lang>
@@ -537,7 +508,7 @@
 			</c>
 			<c>
 				<c>
-					<f>26</f>
+					<f>25</f>
 					<parameter>TotalNet</parameter>
 				</c>
 			</c>
@@ -549,12 +520,12 @@
 			<c>
 				<i>7</i>
 				<c>
-					<f>24</f>
+					<f>23</f>
 				</c>
 			</c>
 			<c>
 				<c>
-					<f>25</f>
+					<f>24</f>
 					<tl>
 						<v8:item>
 							<v8:lang>en</v8:lang>
@@ -573,7 +544,7 @@
 			</c>
 			<c>
 				<c>
-					<f>26</f>
+					<f>25</f>
 					<parameter>TotalTax</parameter>
 				</c>
 			</c>
@@ -592,12 +563,12 @@
 			<c>
 				<i>7</i>
 				<c>
-					<f>24</f>
+					<f>23</f>
 				</c>
 			</c>
 			<c>
 				<c>
-					<f>27</f>
+					<f>26</f>
 					<tl>
 						<v8:item>
 							<v8:lang>en</v8:lang>
@@ -616,7 +587,7 @@
 			</c>
 			<c>
 				<c>
-					<f>28</f>
+					<f>27</f>
 					<parameter>TotalOffers</parameter>
 				</c>
 			</c>
@@ -658,12 +629,12 @@
 			</c>
 			<c>
 				<c>
-					<f>24</f>
+					<f>23</f>
 				</c>
 			</c>
 			<c>
 				<c>
-					<f>27</f>
+					<f>26</f>
 					<tl>
 						<v8:item>
 							<v8:lang>en</v8:lang>
@@ -682,7 +653,7 @@
 			</c>
 			<c>
 				<c>
-					<f>26</f>
+					<f>25</f>
 					<parameter>Total</parameter>
 				</c>
 			</c>
@@ -694,7 +665,7 @@
 			<c>
 				<i>8</i>
 				<c>
-					<f>25</f>
+					<f>24</f>
 					<tl>
 						<v8:item>
 							<v8:lang>en</v8:lang>
@@ -713,7 +684,7 @@
 			</c>
 			<c>
 				<c>
-					<f>29</f>
+					<f>28</f>
 					<parameter>Currency</parameter>
 				</c>
 			</c>
@@ -737,7 +708,7 @@
 			<c>
 				<i>1</i>
 				<c>
-					<f>30</f>
+					<f>29</f>
 					<tl>
 						<v8:item>
 							<v8:lang>en</v8:lang>
@@ -756,43 +727,43 @@
 			</c>
 			<c>
 				<c>
-					<f>31</f>
+					<f>30</f>
 					<parameter>Manager</parameter>
 				</c>
 			</c>
 			<c>
 				<c>
-					<f>32</f>
+					<f>31</f>
 				</c>
 			</c>
 			<c>
 				<c>
-					<f>32</f>
+					<f>31</f>
 				</c>
 			</c>
 			<c>
 				<c>
-					<f>32</f>
+					<f>31</f>
 				</c>
 			</c>
 			<c>
 				<c>
-					<f>32</f>
+					<f>31</f>
 				</c>
 			</c>
 			<c>
 				<c>
-					<f>32</f>
+					<f>31</f>
 				</c>
 			</c>
 			<c>
 				<c>
-					<f>32</f>
+					<f>31</f>
 				</c>
 			</c>
 			<c>
 				<c>
-					<f>32</f>
+					<f>31</f>
 				</c>
 			</c>
 		</row>
@@ -807,7 +778,7 @@
 	<rowsItem>
 		<index>23</index>
 		<row>
-			<formatIndex>33</formatIndex>
+			<formatIndex>32</formatIndex>
 			<empty>true</empty>
 		</row>
 	</rowsItem>
@@ -817,7 +788,7 @@
 			<c>
 				<i>6</i>
 				<c>
-					<f>34</f>
+					<f>33</f>
 					<parameter>NameTAX</parameter>
 				</c>
 			</c>
@@ -829,7 +800,7 @@
 			<c>
 				<i>6</i>
 				<c>
-					<f>35</f>
+					<f>34</f>
 					<parameter>PercentTAX</parameter>
 				</c>
 			</c>
@@ -1051,13 +1022,6 @@
 		<horizontalAlignment>Center</horizontalAlignment>
 		<verticalAlignment>Center</verticalAlignment>
 		<fillType>Parameter</fillType>
-	</format>
-	<format>
-		<border>1</border>
-		<horizontalAlignment>Right</horizontalAlignment>
-		<verticalAlignment>Center</verticalAlignment>
-		<fillType>Parameter</fillType>
-		<format/>
 	</format>
 	<format>
 		<border>1</border>

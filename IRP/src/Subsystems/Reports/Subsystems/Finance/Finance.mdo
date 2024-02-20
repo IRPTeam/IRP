@@ -15,6 +15,6 @@
  </synonym>
  <includeHelpInContents>true</includeHelpInContents>
  <includeInCommandInterface>true</includeInCommandInterface>
- <content>Report.R502A_ProfitLosses</content>
+ <content>Report.R5020_ProfitLosses</content>
  <parentSubsystem>Subsystem.Reports</parentSubsystem>
 </mdclass:Subsystem>

@@ -339,7 +339,10 @@
   <type>
    <types>CatalogRef.Vehicles</types>
   </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
   <createOnInput>Use</createOnInput>
+  <fillValue xsi:type="core:UndefinedValue"/>
   <fullTextSearch>Use</fullTextSearch>
  </attributes>
  <forms uuid="53169e51-49ee-4cc9-95e5-2634ba3089cf">

@@ -262,6 +262,9 @@ Scenario: _001 test data
 		And in the table "List" I click the button named "ListContextMenuPost"
 		And Delay "5"
 	And I close all client application windows
+	Given I open hyperlink "e1cib/app/DataProcessor.SystemSettings"
+	And I set checkbox "Number editing available"
+	And I close "System settings" window
 
 Scenario: _0011 check preparation
 	When check preparation
@@ -390,7 +393,7 @@ Scenario: _003 creating Purchase invoice and checking close Batch wise over bala
 			| '01.08.2021'   | 'Second Company'   | '20.08.2021'   | '2'         |
 		And in the table "List" I click the button named "ListContextMenuPost"
 	* Checking close Batch wise over balance (High shoes, Store 02)
-		Given I open hyperlink "e1cib/app/Report.BatchBalance"
+		Given I open hyperlink "e1cib/app/Report.R6020_BatchBalance"
 		And I click "Select option..." button
 		And I move to "Custom" tab
 		And I activate field named "OptionsListReportOption" in "OptionsList" table
@@ -457,7 +460,7 @@ Scenario: _004 creating Sales invoice by last date and checking the mechanism fo
 			| 'Date'                  | 'Company'        | 'Store'      | 'Item key'    | 'Document'                                         |
 			| '13.08.2021 16:53:01'   | 'Main Company'   | 'Store 02'   | 'Boots/S-8'   | 'Sales invoice 9 100 dated 13.08.2021 16:53:01'    |
 	* Сhecking that the report shows unclosed batches by the created invoice (Boots/S-8, Store 02)
-		Given I open hyperlink "e1cib/app/Report.BatchBalance"
+		Given I open hyperlink "e1cib/app/Report.R6020_BatchBalance"
 		And I click Choice button of the field named "SettingsComposerUserSettingsItem2Value"
 		And I go to line in "List" table
 			| 'Description'    |
@@ -477,7 +480,7 @@ Scenario: _004 creating Sales invoice by last date and checking the mechanism fo
 			| '01.08.2021'   | 'Main Company'   | '1'         |
 		And in the table "List" I click the button named "ListContextMenuPost"
 	* Сhecking that the report shows unclosed batches by the created invoice (Boots/S-8, Store 02)
-		Given I open hyperlink "e1cib/app/Report.BatchBalance"
+		Given I open hyperlink "e1cib/app/Report.R6020_BatchBalance"
 		And I click Choice button of the field named "SettingsComposerUserSettingsItem2Value"
 		And I go to line in "List" table
 			| 'Description'    |
@@ -549,7 +552,7 @@ Scenario: _005 add Purchase invoice and checking the mechanism for aligning the 
 			And I click "OK" button
 			And I click "Post and close" button
 	* Сhecking that the report shows unclosed batches by the created invoice (Boots/S-8, Store 02)
-		Given I open hyperlink "e1cib/app/Report.BatchBalance"
+		Given I open hyperlink "e1cib/app/Report.R6020_BatchBalance"
 		And I click Choice button of the field named "SettingsComposerUserSettingsItem2Value"
 		And I go to line in "List" table
 			| 'Description'    |
@@ -569,7 +572,7 @@ Scenario: _005 add Purchase invoice and checking the mechanism for aligning the 
 			| '01.08.2021'   | 'Main Company'   | '1'         |
 		And in the table "List" I click the button named "ListContextMenuPost"
 	* Сhecking that the report shows closed batches by the created invoice (Boots/S-8, Store 02)
-		Given I open hyperlink "e1cib/app/Report.BatchBalance"
+		Given I open hyperlink "e1cib/app/Report.R6020_BatchBalance"
 		And I click Choice button of the field named "SettingsComposerUserSettingsItem2Value"
 		And I go to line in "List" table
 			| 'Description'    |
@@ -612,7 +615,7 @@ Scenario: _005 add Purchase invoice and checking the mechanism for aligning the 
 			| 'Begin date'   | 'Company'          | 'Number'    |
 			| '01.08.2021'   | 'Second Company'   | '2'         |
 		And in the table "List" I click the button named "ListContextMenuPost"
-		Given I open hyperlink "e1cib/app/Report.BatchBalance"
+		Given I open hyperlink "e1cib/app/Report.R6020_BatchBalance"
 		And I remove checkbox named "SettingsComposerUserSettingsItem2Use"
 		And I click Choice button of the field named "SettingsComposerUserSettingsItem1Value"
 		And I go to line in "List" table
@@ -658,7 +661,7 @@ Scenario: _005 add Purchase invoice and checking the mechanism for aligning the 
 			| 'Begin date'   | 'Company'          | 'Number'    |
 			| '01.08.2021'   | 'Second Company'   | '2'         |
 		And in the table "List" I click the button named "ListContextMenuPost"
-		Given I open hyperlink "e1cib/app/Report.BatchBalance"
+		Given I open hyperlink "e1cib/app/Report.R6020_BatchBalance"
 		And I remove checkbox named "SettingsComposerUserSettingsItem2Use"
 		And I click Choice button of the field named "SettingsComposerUserSettingsItem1Value"
 		And I go to line in "List" table
@@ -696,7 +699,7 @@ Scenario: _005 add Purchase invoice and checking the mechanism for aligning the 
 			| 'Begin date'   | 'Company'          | 'Number'    |
 			| '01.08.2021'   | 'Second Company'   | '2'         |
 		And in the table "List" I click the button named "ListContextMenuPost"
-		Given I open hyperlink "e1cib/app/Report.BatchBalance"
+		Given I open hyperlink "e1cib/app/Report.R6020_BatchBalance"
 		And I remove checkbox named "SettingsComposerUserSettingsItem2Use"
 		And I click Choice button of the field named "SettingsComposerUserSettingsItem1Value"
 		And I go to line in "List" table
@@ -722,7 +725,7 @@ Scenario: _005 add Purchase invoice and checking the mechanism for aligning the 
 			| 'Begin date'   | 'Company'          | 'Number'    |
 			| '01.08.2021'   | 'Second Company'   | '2'         |
 		And in the table "List" I click the button named "ListContextMenuPost"
-		Given I open hyperlink "e1cib/app/Report.BatchBalance"
+		Given I open hyperlink "e1cib/app/Report.R6020_BatchBalance"
 		And I click Choice button of the field named "SettingsComposerUserSettingsItem1Value"
 		And I go to line in "List" table
 			| 'Item'    | 'Item key'     |
@@ -758,7 +761,7 @@ Scenario: _006 changing Sales invoice and checking the mechanism for aligning th
 			| 'Date'                  | 'Company'        | 'Store'      | 'Is relevance'   | 'Item key'    | 'Document'                                         |
 			| '13.08.2021 16:53:01'   | 'Main Company'   | 'Store 02'   | 'No'             | 'Boots/S-8'   | 'Sales invoice 9 100 dated 13.08.2021 16:53:01'    |
 	* Сhecking that the report shows unclosed batches by the created invoice (Boots/S-8, Store 02)
-		Given I open hyperlink "e1cib/app/Report.BatchBalance"
+		Given I open hyperlink "e1cib/app/Report.R6020_BatchBalance"
 		And I click Choice button of the field named "SettingsComposerUserSettingsItem2Value"
 		And I go to line in "List" table
 			| 'Description'    |
@@ -778,7 +781,7 @@ Scenario: _006 changing Sales invoice and checking the mechanism for aligning th
 			| '01.08.2021'   | 'Main Company'   | '1'         |
 		And in the table "List" I click the button named "ListContextMenuPost"
 	* Сhecking that the report shows unclosed batches by the created invoice (Boots/S-8, Store 02)
-		Given I open hyperlink "e1cib/app/Report.BatchBalance"
+		Given I open hyperlink "e1cib/app/Report.R6020_BatchBalance"
 		And I click Choice button of the field named "SettingsComposerUserSettingsItem2Value"
 		And I go to line in "List" table
 			| 'Description'    |
@@ -827,7 +830,7 @@ Scenario: _006 changing Sales invoice and checking the mechanism for aligning th
 		And I select "Landed cost" exact value from "Calculation mode" drop-down list	
 		And I click "Post and close" button
 	* Сhecking the report (Boots/S-8, Store 02)
-		Given I open hyperlink "e1cib/app/Report.BatchBalance"
+		Given I open hyperlink "e1cib/app/Report.R6020_BatchBalance"
 		And I click Choice button of the field named "SettingsComposerUserSettingsItem2Value"
 		And I go to line in "List" table
 			| 'Description'    |
@@ -873,7 +876,7 @@ Scenario: _006 changing Sales invoice and checking the mechanism for aligning th
 			| 'Begin date'   | 'Company'          | 'Number'    |
 			| '01.08.2021'   | 'Second Company'   | '2'         |
 		And in the table "List" I click the button named "ListContextMenuPost"
-		Given I open hyperlink "e1cib/app/Report.BatchBalance"
+		Given I open hyperlink "e1cib/app/Report.R6020_BatchBalance"
 		And I remove checkbox named "SettingsComposerUserSettingsItem2Use"
 		And I click Choice button of the field named "SettingsComposerUserSettingsItem1Value"
 		And I go to line in "List" table
@@ -931,7 +934,7 @@ Scenario: _006 changing Sales invoice and checking the mechanism for aligning th
 			| 'Begin date'   | 'Company'        | 'Number'    |
 			| '18.08.2021'   | 'Main Company'   | '3'         |
 		And in the table "List" I click the button named "ListContextMenuPost"
-		Given I open hyperlink "e1cib/app/Report.BatchBalance"
+		Given I open hyperlink "e1cib/app/Report.R6020_BatchBalance"
 		And I remove checkbox named "SettingsComposerUserSettingsItem2Use"
 		And I click Choice button of the field named "SettingsComposerUserSettingsItem1Value"
 		And I go to line in "List" table
@@ -975,7 +978,7 @@ Scenario: _006 changing Sales invoice and checking the mechanism for aligning th
 			| 'Begin date'   | 'Company'        | 'Number'    |
 			| '01.08.2021'   | 'Main Company'   | '1'         |
 		And in the table "List" I click the button named "ListContextMenuPost"
-		Given I open hyperlink "e1cib/app/Report.BatchBalance"
+		Given I open hyperlink "e1cib/app/Report.R6020_BatchBalance"
 		And I remove checkbox named "SettingsComposerUserSettingsItem2Use"
 		And I click Choice button of the field named "SettingsComposerUserSettingsItem1Value"
 		And I go to line in "List" table
@@ -1001,7 +1004,7 @@ Scenario: _006 changing Sales invoice and checking the mechanism for aligning th
 			| 'Begin date'   | 'Company'         |
 			| '01.08.2021'   | 'Main Company'    |
 		And in the table "List" I click the button named "ListContextMenuPost"
-		Given I open hyperlink "e1cib/app/Report.BatchBalance"
+		Given I open hyperlink "e1cib/app/Report.R6020_BatchBalance"
 		And I click Choice button of the field named "SettingsComposerUserSettingsItem1Value"
 		And I go to line in "List" table
 			| 'Item'    | 'Item key'     |
@@ -1019,7 +1022,7 @@ Scenario: _006 changing Sales invoice and checking the mechanism for aligning th
 
 Scenario: _007 changing Inventory transfer and checking the mechanism for aligning the sequence of batches
 	* Сhecking calculation movements post by Inventory transfers (Shirt 36/Red)
-		Given I open hyperlink "e1cib/app/Report.BatchBalance"
+		Given I open hyperlink "e1cib/app/Report.R6020_BatchBalance"
 		And I remove checkbox named "SettingsComposerUserSettingsItem2Use"
 		And I click Choice button of the field named "SettingsComposerUserSettingsItem1Value"
 		And I go to line in "List" table
@@ -1059,7 +1062,7 @@ Scenario: _007 changing Inventory transfer and checking the mechanism for aligni
 			| '18.08.2021'   | 'Main Company'   | '3'         |
 		And in the table "List" I click the button named "ListContextMenuPost"
 	* Сhecking the report (Shirt/36/Red)
-		Given I open hyperlink "e1cib/app/Report.BatchBalance"
+		Given I open hyperlink "e1cib/app/Report.R6020_BatchBalance"
 		And I click Choice button of the field named "SettingsComposerUserSettingsItem1Value"
 		And I go to line in "List" table
 			| 'Item'    | 'Item key'    |
@@ -1097,7 +1100,7 @@ Scenario: _007 changing Inventory transfer and checking the mechanism for aligni
 			| '18.08.2021'   | 'Main Company'   | '3'         |
 		And in the table "List" I click the button named "ListContextMenuPost"
 	* Сhecking the report (Shirt/36/Red)
-		Given I open hyperlink "e1cib/app/Report.BatchBalance"
+		Given I open hyperlink "e1cib/app/Report.R6020_BatchBalance"
 		And I click Choice button of the field named "SettingsComposerUserSettingsItem1Value"
 		And I go to line in "List" table
 			| 'Item'    | 'Item key'    |
@@ -1132,7 +1135,7 @@ Scenario: _007 changing Inventory transfer and checking the mechanism for aligni
 			| '18.08.2021'   | 'Main Company'   | '3'         |
 		And in the table "List" I click the button named "ListContextMenuPost"
 	* Сhecking the report (Shirt/36/Red)
-		Given I open hyperlink "e1cib/app/Report.BatchBalance"
+		Given I open hyperlink "e1cib/app/Report.R6020_BatchBalance"
 		And I click Choice button of the field named "SettingsComposerUserSettingsItem1Value"
 		And I go to line in "List" table
 			| 'Item'    | 'Item key'    |
@@ -1169,7 +1172,7 @@ Scenario: _007 changing Inventory transfer and checking the mechanism for aligni
 			| 'Begin date'   | 'Company'          | 'End date'      |
 			| '01.08.2021'   | 'Second Company'   | '20.08.2021'    |
 		And in the table "List" I click the button named "ListContextMenuPost"
-		Given I open hyperlink "e1cib/app/Report.BatchBalance"
+		Given I open hyperlink "e1cib/app/Report.R6020_BatchBalance"
 		And I click Choice button of the field named "SettingsComposerUserSettingsItem1Value"
 		And I go to line in "List" table
 			| 'Item'    | 'Item key'    |
@@ -1218,7 +1221,7 @@ Scenario: _007 changing Inventory transfer and checking the mechanism for aligni
 			| 'Begin date'   | 'Company'        | 'Number'    |
 			| '18.08.2021'   | 'Main Company'   | '3'         |
 		And in the table "List" I click the button named "ListContextMenuPost"
-		Given I open hyperlink "e1cib/app/Report.BatchBalance"
+		Given I open hyperlink "e1cib/app/Report.R6020_BatchBalance"
 		And I click Choice button of the field named "SettingsComposerUserSettingsItem1Value"
 		And I go to line in "List" table
 			| 'Item'    | 'Item key'    |
@@ -1265,7 +1268,7 @@ Scenario: _007 changing Inventory transfer and checking the mechanism for aligni
 			| 'Begin date'   | 'Company'        | 'Number'    |
 			| '18.08.2021'   | 'Main Company'   | '3'         |
 		And in the table "List" I click the button named "ListContextMenuPost"
-		Given I open hyperlink "e1cib/app/Report.BatchBalance"
+		Given I open hyperlink "e1cib/app/Report.R6020_BatchBalance"
 		And I click Choice button of the field named "SettingsComposerUserSettingsItem1Value"
 		And I go to line in "List" table
 			| 'Item'    | 'Item key'    |
@@ -1286,7 +1289,7 @@ Scenario: _007 changing Inventory transfer and checking the mechanism for aligni
 			| 'Begin date'   | 'Company'        | 'Number'    |
 			| '18.08.2021'   | 'Main Company'   | '3'         |
 		And in the table "List" I click the button named "ListContextMenuPost"
-		Given I open hyperlink "e1cib/app/Report.BatchBalance"
+		Given I open hyperlink "e1cib/app/Report.R6020_BatchBalance"
 		And I click Choice button of the field named "SettingsComposerUserSettingsItem1Value"
 		And I go to line in "List" table
 			| 'Item'    | 'Item key'    |
@@ -1338,7 +1341,7 @@ Scenario: _008 creating Sales return on a wholly sold batches and checking the m
 			| '18.08.2021'   | 'Main Company'   | '3'         |
 		And in the table "List" I click the button named "ListContextMenuPost"
 	* Сhecking the report (Trousers 38/Yellow)
-		Given I open hyperlink "e1cib/app/Report.BatchBalance"
+		Given I open hyperlink "e1cib/app/Report.R6020_BatchBalance"
 		And I click Choice button of the field named "SettingsComposerUserSettingsItem1Value"
 		And I go to line in "List" table
 			| 'Item'       | 'Item key'     |
@@ -1373,7 +1376,7 @@ Scenario: _008 creating Sales return on a wholly sold batches and checking the m
 			| '18.08.2021'   | 'Main Company'   | '3'         |
 		And in the table "List" I click the button named "ListContextMenuPost"
 	* Сhecking the report (Trousers 38/Yellow)
-		Given I open hyperlink "e1cib/app/Report.BatchBalance"
+		Given I open hyperlink "e1cib/app/Report.R6020_BatchBalance"
 		And I click Choice button of the field named "SettingsComposerUserSettingsItem1Value"
 		And I go to line in "List" table
 			| 'Item'       | 'Item key'     |
@@ -1402,7 +1405,7 @@ Scenario: _008 creating Sales return on a wholly sold batches and checking the m
 			| '18.08.2021'   | 'Main Company'   | '3'         |
 		And in the table "List" I click the button named "ListContextMenuPost"
 	* Сhecking the report (Trousers 38/Yellow)
-		Given I open hyperlink "e1cib/app/Report.BatchBalance"
+		Given I open hyperlink "e1cib/app/Report.R6020_BatchBalance"
 		And I click Choice button of the field named "SettingsComposerUserSettingsItem1Value"
 		And I go to line in "List" table
 			| 'Item'       | 'Item key'     |
@@ -1428,7 +1431,7 @@ Scenario: _008 creating Sales return on a wholly sold batches and checking the m
 			| '18.08.2021'   | 'Main Company'   | '3'         |
 		And in the table "List" I click the button named "ListContextMenuPost"
 	* Сhecking the report (Trousers 38/Yellow)
-		Given I open hyperlink "e1cib/app/Report.BatchBalance"
+		Given I open hyperlink "e1cib/app/Report.R6020_BatchBalance"
 		And I click Choice button of the field named "SettingsComposerUserSettingsItem1Value"
 		And I go to line in "List" table
 			| 'Item'       | 'Item key'     |
@@ -1441,7 +1444,7 @@ Scenario: _008 creating Sales return on a wholly sold batches and checking the m
 
 Scenario: _009 creating Purchase return and checking the mechanism for aligning the sequence of batches
 	* Сhecking the report (37/18SD)
-		Given I open hyperlink "e1cib/app/Report.BatchBalance"
+		Given I open hyperlink "e1cib/app/Report.R6020_BatchBalance"
 		And I click Choice button of the field named "SettingsComposerUserSettingsItem1Value"
 		And I go to line in "List" table
 			| 'Item'    | 'Item key'    |
@@ -1475,7 +1478,7 @@ Scenario: _009 creating Purchase return and checking the mechanism for aligning 
 			| '18.08.2021'   | 'Main Company'   | '3'         |
 		And in the table "List" I click the button named "ListContextMenuPost"
 	* Сhecking the report (37/18SD)
-		Given I open hyperlink "e1cib/app/Report.BatchBalance"
+		Given I open hyperlink "e1cib/app/Report.R6020_BatchBalance"
 		And I click Choice button of the field named "SettingsComposerUserSettingsItem1Value"
 		And I go to line in "List" table
 			| 'Item'    | 'Item key'    |
@@ -1505,7 +1508,7 @@ Scenario: _009 creating Purchase return and checking the mechanism for aligning 
 			| '18.08.2021'   | 'Main Company'   | '3'         |
 		And in the table "List" I click the button named "ListContextMenuPost"
 	* Сhecking the report ((37/18SD)
-		Given I open hyperlink "e1cib/app/Report.BatchBalance"
+		Given I open hyperlink "e1cib/app/Report.R6020_BatchBalance"
 		And I click Choice button of the field named "SettingsComposerUserSettingsItem1Value"
 		And I go to line in "List" table
 			| 'Item'    | 'Item key'    |
@@ -1535,7 +1538,7 @@ Scenario: _009 creating Purchase return and checking the mechanism for aligning 
 			| '18.08.2021'   | 'Main Company'   | '3'         |
 		And in the table "List" I click the button named "ListContextMenuPost"
 	* Сhecking the report (37/18SD)
-		Given I open hyperlink "e1cib/app/Report.BatchBalance"
+		Given I open hyperlink "e1cib/app/Report.R6020_BatchBalance"
 		And I click Choice button of the field named "SettingsComposerUserSettingsItem1Value"
 		And I go to line in "List" table
 			| 'Item'    | 'Item key'    |
@@ -1577,7 +1580,7 @@ Scenario: _010 change Stock adjustment as surplus, Stock adjustment as write-off
 			| '18.08.2021'   | 'Main Company'   | '3'         |
 		And in the table "List" I click the button named "ListContextMenuPost"
 	* Сhecking the report (Dress XS/Blue)
-		Given I open hyperlink "e1cib/app/Report.BatchBalance"
+		Given I open hyperlink "e1cib/app/Report.R6020_BatchBalance"
 		And I click Choice button of the field named "SettingsComposerUserSettingsItem1Value"
 		And I go to line in "List" table
 			| 'Item'    | 'Item key'    |
@@ -1618,7 +1621,7 @@ Scenario: _010 change Stock adjustment as surplus, Stock adjustment as write-off
 			| '01.08.2021'   | 'Second Company'   | '2'         |
 		And in the table "List" I click the button named "ListContextMenuPost"
 	* Сhecking the report (Dress XS/Blue)
-		Given I open hyperlink "e1cib/app/Report.BatchBalance"
+		Given I open hyperlink "e1cib/app/Report.R6020_BatchBalance"
 		And I click Choice button of the field named "SettingsComposerUserSettingsItem1Value"
 		And I go to line in "List" table
 			| 'Item'    | 'Item key'    |
@@ -1648,7 +1651,7 @@ Scenario: _010 change Stock adjustment as surplus, Stock adjustment as write-off
 			| '18.08.2021'   | 'Main Company'   | '3'         |
 		And in the table "List" I click the button named "ListContextMenuPost"
 	* Сhecking the report (Dress XS/Blue)
-		Given I open hyperlink "e1cib/app/Report.BatchBalance"
+		Given I open hyperlink "e1cib/app/Report.R6020_BatchBalance"
 		And I click Choice button of the field named "SettingsComposerUserSettingsItem1Value"
 		And I go to line in "List" table
 			| 'Item'    | 'Item key'    |
@@ -1695,7 +1698,7 @@ Scenario: _010 change Stock adjustment as surplus, Stock adjustment as write-off
 			| '01.08.2021'   | 'Second Company'   | '2'         |
 		And in the table "List" I click the button named "ListContextMenuPost"
 	* Сhecking the report (Dress XS/Blue)
-		Given I open hyperlink "e1cib/app/Report.BatchBalance"
+		Given I open hyperlink "e1cib/app/Report.R6020_BatchBalance"
 		And I click Choice button of the field named "SettingsComposerUserSettingsItem1Value"
 		And I go to line in "List" table
 			| 'Item'    | 'Item key'    |
@@ -1783,7 +1786,7 @@ Scenario: _011 change Bundling and UnBundling and checking the mechanism for ali
 			| '18.08.2021'   | 'Main Company'   | '3'         |
 		And in the table "List" I click the button named "ListContextMenuPost"
 	* Сhecking the report (Store 10)
-		Given I open hyperlink "e1cib/app/Report.BatchBalance"
+		Given I open hyperlink "e1cib/app/Report.R6020_BatchBalance"
 		And I click Choice button of the field named "SettingsComposerUserSettingsItem2Value"
 		And I go to line in "List" table
 			| 'Description'    |
@@ -1842,7 +1845,7 @@ Scenario: _011 change Bundling and UnBundling and checking the mechanism for ali
 			| '18.08.2021'   | 'Main Company'   | '3'         |
 		And in the table "List" I click the button named "ListContextMenuPost"
 	* Сhecking the report (Store 10)
-		Given I open hyperlink "e1cib/app/Report.BatchBalance"
+		Given I open hyperlink "e1cib/app/Report.R6020_BatchBalance"
 		And I click Choice button of the field named "SettingsComposerUserSettingsItem2Value"
 		And I go to line in "List" table
 			| 'Description'    |
@@ -1921,7 +1924,7 @@ Scenario: _011 change Bundling and UnBundling and checking the mechanism for ali
 			| '18.08.2021'   | 'Main Company'   | '3'         |
 		And in the table "List" I click the button named "ListContextMenuPost"
 	* Сhecking the report (Store 10)
-		Given I open hyperlink "e1cib/app/Report.BatchBalance"
+		Given I open hyperlink "e1cib/app/Report.R6020_BatchBalance"
 		And I click Choice button of the field named "SettingsComposerUserSettingsItem2Value"
 		And I go to line in "List" table
 			| 'Description'    |
@@ -1952,7 +1955,7 @@ Scenario: _011 change Bundling and UnBundling and checking the mechanism for ali
 			| '18.08.2021'   | 'Main Company'   | '3'         |
 		And in the table "List" I click the button named "ListContextMenuPost"
 	* Сhecking the report (Store 10)
-		Given I open hyperlink "e1cib/app/Report.BatchBalance"
+		Given I open hyperlink "e1cib/app/Report.R6020_BatchBalance"
 		And I click Choice button of the field named "SettingsComposerUserSettingsItem2Value"
 		And I go to line in "List" table
 			| 'Description'    |
@@ -1983,7 +1986,7 @@ Scenario: _011 change Bundling and UnBundling and checking the mechanism for ali
 			| '18.08.2021'   | 'Main Company'   | '3'         |
 		And in the table "List" I click the button named "ListContextMenuPost"
 	* Сhecking the report (Store 10)
-		Given I open hyperlink "e1cib/app/Report.BatchBalance"
+		Given I open hyperlink "e1cib/app/Report.R6020_BatchBalance"
 		And I click Choice button of the field named "SettingsComposerUserSettingsItem2Value"
 		And I go to line in "List" table
 			| 'Description'    |
@@ -2045,7 +2048,7 @@ Scenario: _011 change Bundling and UnBundling and checking the mechanism for ali
 			| 'Main Company'   | '3'         |
 		And in the table "List" I click the button named "ListContextMenuPost"
 	* Сhecking the report (Store 10)
-		Given I open hyperlink "e1cib/app/Report.BatchBalance"
+		Given I open hyperlink "e1cib/app/Report.R6020_BatchBalance"
 		And I click Choice button of the field named "SettingsComposerUserSettingsItem2Value"
 		And I go to line in "List" table
 			| 'Description'    |
@@ -2062,7 +2065,7 @@ Scenario: _011 change Bundling and UnBundling and checking the mechanism for ali
 Scenario: _012 checking batches calculation for Retail sales receipt/ Retail return receipt
 	And I close all client application windows
 	* Сhecking the report (Store 10)
-		Given I open hyperlink "e1cib/app/Report.BatchBalance"
+		Given I open hyperlink "e1cib/app/Report.R6020_BatchBalance"
 		And Delay 10
 		And I click Choice button of the field named "SettingsComposerUserSettingsItem2Value"
 		And I go to line in "List" table
@@ -2088,7 +2091,7 @@ Scenario: _012 checking batches calculation for Retail sales receipt/ Retail ret
 			| '01.08.2021'   | 'Main Company'    |
 		And in the table "List" I click the button named "ListContextMenuPost"
 	* Сhecking the report (Store 10)
-		Given I open hyperlink "e1cib/app/Report.BatchBalance"
+		Given I open hyperlink "e1cib/app/Report.R6020_BatchBalance"
 		And I click Choice button of the field named "SettingsComposerUserSettingsItem2Value"
 		And I go to line in "List" table
 			| 'Description'    |
@@ -2119,7 +2122,7 @@ Scenario: _012 checking batches calculation for Retail sales receipt/ Retail ret
 			| '01.08.2021'   | 'Main Company'    |
 		And in the table "List" I click the button named "ListContextMenuPost"
 	* Сhecking the report (Store 10)
-		Given I open hyperlink "e1cib/app/Report.BatchBalance"
+		Given I open hyperlink "e1cib/app/Report.R6020_BatchBalance"
 		And I click Choice button of the field named "SettingsComposerUserSettingsItem2Value"
 		And I go to line in "List" table
 			| 'Description'    |
@@ -2170,7 +2173,7 @@ Scenario: _012 checking batches calculation for Retail sales receipt/ Retail ret
 			| '01.08.2021'   | 'Second Company'    |
 		And in the table "List" I click the button named "ListContextMenuPost"
 	* Сhecking the report (Store 10)
-		Given I open hyperlink "e1cib/app/Report.BatchBalance"
+		Given I open hyperlink "e1cib/app/Report.R6020_BatchBalance"
 		And I click Choice button of the field named "SettingsComposerUserSettingsItem2Value"
 		And I go to line in "List" table
 			| 'Description'    |
@@ -2266,7 +2269,7 @@ Scenario: _012 checking batches calculation for Retail sales receipt/ Retail ret
 				| '01.08.2021'    | 'Main Company'     |
 			And in the table "List" I click the button named "ListContextMenuPost"
 		* Сhecking the report (Store 10)
-			Given I open hyperlink "e1cib/app/Report.BatchBalance"
+			Given I open hyperlink "e1cib/app/Report.R6020_BatchBalance"
 			And I click Choice button of the field named "SettingsComposerUserSettingsItem2Value"
 			And I go to line in "List" table
 				| 'Description'     |
@@ -2355,7 +2358,7 @@ Scenario: _027 check calculation movements cost for ItemStockAdjustment
 		And I click "Post and close" button
 		And I wait "Calculation movement costs (create) *" window closing in 20 seconds
 	* Check report
-		Given I open hyperlink "e1cib/app/Report.BatchBalance"
+		Given I open hyperlink "e1cib/app/Report.R6020_BatchBalance"
 		And Delay 10
 		And I click Choice button of the field named "SettingsComposerUserSettingsItem2Value"
 		And I go to line in "List" table
@@ -2380,7 +2383,7 @@ Scenario: _027 check calculation movements cost for ItemStockAdjustment
 			| '18.09.2022'   | 'Main Company'    |
 		And in the table "List" I click the button named "ListContextMenuPost"
 	* Check report
-		Given I open hyperlink "e1cib/app/Report.BatchBalance"
+		Given I open hyperlink "e1cib/app/Report.R6020_BatchBalance"
 		And I click Choice button of the field named "SettingsComposerUserSettingsItem2Value"
 		And I go to line in "List" table
 			| 'Description'    |
@@ -2403,7 +2406,7 @@ Scenario: _027 check calculation movements cost for ItemStockAdjustment
 			| '18.09.2022'   | 'Main Company'    |
 		And in the table "List" I click the button named "ListContextMenuPost"
 	* Check report
-		Given I open hyperlink "e1cib/app/Report.BatchBalance"
+		Given I open hyperlink "e1cib/app/Report.R6020_BatchBalance"
 		And I click Choice button of the field named "SettingsComposerUserSettingsItem2Value"
 		And I go to line in "List" table
 			| 'Description'    |
@@ -2431,7 +2434,7 @@ Scenario: _028 check landed cost by materials
 		And I input "26.09.2022" text in "End date" field
 		And I click "Post and close" button
 	* Check calculation
-		Given I open hyperlink "e1cib/app/Report.BatchBalance"
+		Given I open hyperlink "e1cib/app/Report.R6020_BatchBalance"
 		And I click "Select option..." button
 		And I move to "Custom" tab
 		And I move to "Standard" tab
@@ -2473,7 +2476,7 @@ Scenario: _030 check landed cost (double return)
 		And I execute 1C:Enterprise script at server
 			| "Documents.CalculationMovementCosts.FindByNumber(13).GetObject().Write(DocumentWriteMode.Posting);"    |
 	* Check movement cost calculation
-		Given I open hyperlink "e1cib/app/Report.BatchBalance"
+		Given I open hyperlink "e1cib/app/Report.R6020_BatchBalance"
 		And I click "Select option..." button
 		And I move to "Custom" tab
 		And I go to line in "OptionsList" table
@@ -2513,7 +2516,7 @@ Scenario: _032 check landed cost SR and RRR with the same items in different lin
 		And I execute 1C:Enterprise script at server
 			| "Documents.CalculationMovementCosts.FindByNumber(3).GetObject().Write(DocumentWriteMode.Posting);"    |
 	* Check movement cost calculation
-		Given I open hyperlink "e1cib/app/Report.BatchBalance"
+		Given I open hyperlink "e1cib/app/Report.R6020_BatchBalance"
 		And I click "Select option..." button
 		And I move to "Custom" tab
 		And I go to line in "OptionsList" table

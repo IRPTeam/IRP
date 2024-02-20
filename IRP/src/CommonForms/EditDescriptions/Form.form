@@ -126,6 +126,32 @@
  <allowFormCustomize>true</allowFormCustomize>
  <enabled>true</enabled>
  <showCloseButton>true</showCloseButton>
+ <attributes>
+  <name>DescriptionTemplate</name>
+  <title>
+   <key>en</key>
+   <value>Description template</value>
+  </title>
+  <title>
+   <key>ru</key>
+   <value>Шаблон наименования</value>
+  </title>
+  <title>
+   <key>tr</key>
+   <value>TANIM şablonu</value>
+  </title>
+  <id>1</id>
+  <valueType>
+   <types>String</types>
+   <stringQualifiers/>
+  </valueType>
+  <view>
+   <common>true</common>
+  </view>
+  <edit>
+   <common>true</common>
+  </edit>
+ </attributes>
  <formCommands>
   <name>Ok</name>
   <title>

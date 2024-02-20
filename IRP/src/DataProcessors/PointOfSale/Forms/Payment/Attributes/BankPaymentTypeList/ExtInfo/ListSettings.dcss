@@ -4,7 +4,6 @@
 		<item xsi:type="FilterItemComparison">
 			<left xsi:type="dcscor:Field">Ref</left>
 			<comparisonType>Filled</comparisonType>
-			<right xsi:nil="true"/>
 		</item>
 	</filter>
 	<order>
@@ -13,13 +12,14 @@
 			<orderType>Asc</orderType>
 		</item>
 	</order>
-	<conditionalAppearance/>
 	<item xsi:type="StructureItemGroup">
 		<groupItems>
 			<item xsi:type="GroupItemField">
 				<field>Parent</field>
 				<groupType>Items</groupType>
 				<periodAdditionType>None</periodAdditionType>
+				<periodAdditionBegin xsi:type="xs:dateTime">0001-01-01T00:00:00</periodAdditionBegin>
+				<periodAdditionEnd xsi:type="xs:dateTime">0001-01-01T00:00:00</periodAdditionEnd>
 			</item>
 		</groupItems>
 	</item>

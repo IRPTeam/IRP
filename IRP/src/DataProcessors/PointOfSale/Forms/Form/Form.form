@@ -636,18 +636,18 @@
            <segments>Object.ItemList</segments>
           </dataPath>
           <titleLocation>None</titleLocation>
-          <excludedCommands>Change</excludedCommands>
-          <excludedCommands>SortListDesc</excludedCommands>
           <excludedCommands>Add</excludedCommands>
-          <excludedCommands>MoveDown</excludedCommands>
-          <excludedCommands>CopyToClipboard</excludedCommands>
+          <excludedCommands>Change</excludedCommands>
           <excludedCommands>Choose</excludedCommands>
-          <excludedCommands>OutputList</excludedCommands>
           <excludedCommands>Copy</excludedCommands>
-          <excludedCommands>MoveUp</excludedCommands>
+          <excludedCommands>CopyToClipboard</excludedCommands>
           <excludedCommands>EndEdit</excludedCommands>
-          <excludedCommands>SortListAsc</excludedCommands>
+          <excludedCommands>MoveDown</excludedCommands>
+          <excludedCommands>MoveUp</excludedCommands>
+          <excludedCommands>OutputList</excludedCommands>
           <excludedCommands>ShowRowRearrangement</excludedCommands>
+          <excludedCommands>SortListAsc</excludedCommands>
+          <excludedCommands>SortListDesc</excludedCommands>
           <items xsi:type="form:FormGroup">
            <name>ItemListGroupItem</name>
            <id>857</id>
@@ -1613,6 +1613,10 @@
            <autoFill>true</autoFill>
           </autoCommandBar>
           <handlers>
+           <event>BeforeAddRow</event>
+           <name>ItemListBeforeAddRow</name>
+          </handlers>
+          <handlers>
            <event>OnActivateRow</event>
            <name>ItemListOnActivateRow</name>
           </handlers>
@@ -1631,10 +1635,6 @@
           <handlers>
            <event>OnChange</event>
            <name>ItemListOnChange</name>
-          </handlers>
-          <handlers>
-           <event>BeforeAddRow</event>
-           <name>ItemListBeforeAddRow</name>
           </handlers>
           <searchStringAddition>
            <visible>true</visible>
@@ -4835,24 +4835,24 @@
          <segments>Object.SpecialOffers</segments>
         </dataPath>
         <titleLocation>None</titleLocation>
-        <excludedCommands>Copy</excludedCommands>
-        <excludedCommands>MoveUp</excludedCommands>
-        <excludedCommands>FindByCurrentValue</excludedCommands>
-        <excludedCommands>EndEdit</excludedCommands>
-        <excludedCommands>SearchEverywhere</excludedCommands>
         <excludedCommands>Add</excludedCommands>
-        <excludedCommands>SortListAsc</excludedCommands>
-        <excludedCommands>MoveDown</excludedCommands>
-        <excludedCommands>OutputList</excludedCommands>
-        <excludedCommands>ShowMultipleSelection</excludedCommands>
         <excludedCommands>CancelSearch</excludedCommands>
-        <excludedCommands>SortListDesc</excludedCommands>
-        <excludedCommands>Delete</excludedCommands>
-        <excludedCommands>ShowRowRearrangement</excludedCommands>
-        <excludedCommands>CopyToClipboard</excludedCommands>
-        <excludedCommands>Find</excludedCommands>
         <excludedCommands>Change</excludedCommands>
+        <excludedCommands>Copy</excludedCommands>
+        <excludedCommands>CopyToClipboard</excludedCommands>
+        <excludedCommands>Delete</excludedCommands>
+        <excludedCommands>EndEdit</excludedCommands>
+        <excludedCommands>Find</excludedCommands>
+        <excludedCommands>FindByCurrentValue</excludedCommands>
+        <excludedCommands>MoveDown</excludedCommands>
+        <excludedCommands>MoveUp</excludedCommands>
+        <excludedCommands>OutputList</excludedCommands>
+        <excludedCommands>SearchEverywhere</excludedCommands>
         <excludedCommands>SelectAll</excludedCommands>
+        <excludedCommands>ShowMultipleSelection</excludedCommands>
+        <excludedCommands>ShowRowRearrangement</excludedCommands>
+        <excludedCommands>SortListAsc</excludedCommands>
+        <excludedCommands>SortListDesc</excludedCommands>
         <items xsi:type="form:FormField">
          <name>SpecialOffersLineNumber</name>
          <id>1290</id>
@@ -6912,12 +6912,12 @@
   <name>OnOpen</name>
  </handlers>
  <handlers>
-  <event>OnCreateAtServer</event>
-  <name>OnCreateAtServer</name>
- </handlers>
- <handlers>
   <event>BeforeClose</event>
   <name>BeforeClose</name>
+ </handlers>
+ <handlers>
+  <event>OnCreateAtServer</event>
+  <name>OnCreateAtServer</name>
  </handlers>
  <autoUrl>true</autoUrl>
  <group>Vertical</group>
@@ -7238,6 +7238,11 @@ End</presentationExpression>
    <common>true</common>
   </edit>
   <main>true</main>
+  <additionalColumns>
+   <tablePath xsi:type="form:DataPath">
+    <segments>Object.SpecialOffers</segments>
+   </tablePath>
+  </additionalColumns>
   <additionalColumns>
    <tablePath xsi:type="form:DataPath">
     <segments>Object.Currencies</segments>
@@ -7593,11 +7598,6 @@ End</presentationExpression>
      <common>true</common>
     </edit>
    </columns>
-  </additionalColumns>
-  <additionalColumns>
-   <tablePath xsi:type="form:DataPath">
-    <segments>Object.SpecialOffers</segments>
-   </tablePath>
   </additionalColumns>
  </attributes>
  <attributes>
@@ -8742,8 +8742,8 @@ End</presentationExpression>
   </title>
   <id>213</id>
   <valueType>
-   <types>DocumentRef.RetailSalesReceipt</types>
    <types>DocumentRef.RetailReturnReceipt</types>
+   <types>DocumentRef.RetailSalesReceipt</types>
   </valueType>
   <view>
    <common>true</common>

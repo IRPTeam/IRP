@@ -227,7 +227,10 @@
   <type>
    <types>CatalogRef.PrintInfo</types>
   </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
   <createOnInput>Use</createOnInput>
+  <fillValue xsi:type="core:UndefinedValue"/>
   <fullTextSearch>Use</fullTextSearch>
  </attributes>
  <tabularSections uuid="324a6247-0e73-4a78-b83a-9fa7a0924c69">

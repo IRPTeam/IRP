@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<DataCompositionSchema xmlns="http://v8.1c.ru/8.1/data-composition-system/schema" xmlns:dcscom="http://v8.1c.ru/8.1/data-composition-system/common" xmlns:dcscor="http://v8.1c.ru/8.1/data-composition-system/core" xmlns:dcsset="http://v8.1c.ru/8.1/data-composition-system/settings" xmlns:v8="http://v8.1c.ru/8.1/data/core" xmlns:v8ui="http://v8.1c.ru/8.1/data/ui" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+	<dataSource>
+		<name>DataSource1</name>
+		<dataSourceType>Local</dataSourceType>
+	</dataSource>
+	<dataSet xsi:type="DataSetQuery">
+		<name>DataSet1</name>
+		<field xsi:type="DataSetFieldField">
+			<dataPath>Item</dataPath>
+			<field>Item</field>
+			<title xsi:type="v8:LocalStringType">
+				<v8:item>
+					<v8:lang>en</v8:lang>
+					<v8:content>Item</v8:content>
+				</v8:item>
+				<v8:item>
+					<v8:lang>ru</v8:lang>
+					<v8:content>Номенклатура</v8:content>
+				</v8:item>
+				<v8:item>
+					<v8:lang>tr</v8:lang>
+					<v8:content>Malzeme</v8:content>
+				</v8:item>
+			</title>
+		</field>
+		<dataSource>DataSource1</dataSource>
+		<query>SELECT
+	VALUE(Catalog.Items.EmptyRef) AS Item
+FROM
+	Catalog.Items AS Items
+{CHARACTERISTICS
+	TYPE(Catalog.Items)
+	CHARACTERISTICTYPES (SELECT
+			AddAttributeAndProperty.Ref AS ID,
+			AddAttributeAndProperty.Presentation AS Name,
+			AddAttributeAndProperty.ValueType AS ValueType
+		FROM
+			ChartOfCharacteristicTypes.AddAttributeAndProperty AS AddAttributeAndProperty
+		WHERE
+			AddAttributeAndProperty.Ref IN
+				(SELECT
+					AddAttributeAndPropertySets.Attribute AS Arribute
+				FROM
+					Catalog.AddAttributeAndPropertySets.Attributes AS AddAttributeAndPropertySets
+				WHERE
+					AddAttributeAndPropertySets.Ref = &amp;PropertySet))
+	KEYFIELD ID
+	NAMEFIELD Name
+	VALUETYPEFIELD ValueType
+	CHARACTERISTICVALUES (SELECT
+			ItemsAttributes.Ref AS Ref,
+			ItemsAttributes.Property AS Property,
+			ItemsAttributes.Value AS Value
+		FROM
+			Catalog.Items.AddAttributes AS ItemsAttributes)
+	OBJECTFIELD Ref
+	TYPEFIELD Property
+	VALUEFIELD Value}</query>
+	</dataSet>
+	<parameter>
+		<name>PropertySet</name>
+		<title xsi:type="v8:LocalStringType">
+			<v8:item>
+				<v8:lang>en</v8:lang>
+				<v8:content>Property set</v8:content>
+			</v8:item>
+			<v8:item>
+				<v8:lang>ru</v8:lang>
+				<v8:content>Набор свойств</v8:content>
+			</v8:item>
+			<v8:item>
+				<v8:lang>tr</v8:lang>
+				<v8:content>Özellik seti  </v8:content>
+			</v8:item>
+		</title>
+		<valueType>
+			<v8:Type xmlns:d4p1="http://v8.1c.ru/8.1/data/enterprise/current-config">d4p1:CatalogRef.AddAttributeAndPropertySets</v8:Type>
+		</valueType>
+		<value xsi:type="dcscor:DesignTimeValue">Catalog.AddAttributeAndPropertySets.EmptyRef</value>
+		<useRestriction>false</useRestriction>
+		<availableAsField>false</availableAsField>
+	</parameter>
+	<settingsVariant>
+		<dcsset:name>Default</dcsset:name>
+		<dcsset:presentation xsi:type="xs:string">Default</dcsset:presentation>
+		<dcsset:settings xmlns:style="http://v8.1c.ru/8.1/data/ui/style" xmlns:sys="http://v8.1c.ru/8.1/data/ui/fonts/system" xmlns:web="http://v8.1c.ru/8.1/data/ui/colors/web" xmlns:win="http://v8.1c.ru/8.1/data/ui/colors/windows"/>
+	</settingsVariant>
+</DataCompositionSchema>

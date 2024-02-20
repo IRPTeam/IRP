@@ -10,7 +10,6 @@
 			<item xsi:type="FilterItemComparison">
 				<left xsi:type="dcscor:Field">Object.ConsignorsInfo.Consignor</left>
 				<comparisonType>NotFilled</comparisonType>
-				<right xsi:nil="true"/>
 			</item>
 		</filter>
 		<appearance>
@@ -47,7 +46,6 @@
 			<item xsi:type="FilterItemComparison">
 				<left xsi:type="dcscor:Field">InheritConsignorsInfo.Consignor</left>
 				<comparisonType>NotFilled</comparisonType>
-				<right xsi:nil="true"/>
 			</item>
 		</filter>
 		<appearance>

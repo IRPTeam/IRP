@@ -1141,12 +1141,12 @@
      <showInFooter>true</showInFooter>
      <extInfo xsi:type="form:InputFieldExtInfo">
       <handlers>
-       <event>Clearing</event>
-       <name>ItemListSourceOfOriginsPresentationClearing</name>
-      </handlers>
-      <handlers>
        <event>StartChoice</event>
        <name>ItemListSourceOfOriginsPresentationStartChoice</name>
+      </handlers>
+      <handlers>
+       <event>Clearing</event>
+       <name>ItemListSourceOfOriginsPresentationClearing</name>
       </handlers>
       <autoMaxWidth>true</autoMaxWidth>
       <autoMaxHeight>true</autoMaxHeight>
@@ -2471,6 +2471,7 @@
       </userVisible>
       <autoFill>true</autoFill>
      </contextMenu>
+     <source>SourceOfOriginsSearchString</source>
      <extInfo xsi:type="form:SearchStringAdditionExtInfo">
       <autoMaxWidth>true</autoMaxWidth>
      </extInfo>
@@ -2509,6 +2510,7 @@
       <autoFill>true</autoFill>
      </contextMenu>
      <type>ViewStatusAddition</type>
+     <source>SourceOfOriginsViewStatus</source>
      <extInfo xsi:type="form:ViewStatusAdditionExtInfo">
       <autoMaxWidth>true</autoMaxWidth>
      </extInfo>
@@ -2547,6 +2549,7 @@
       <autoFill>true</autoFill>
      </contextMenu>
      <type>SearchControlAddition</type>
+     <source>SourceOfOriginsSearchControl</source>
      <extInfo xsi:type="form:SearchControlAdditionExtInfo">
       <autoMaxWidth>true</autoMaxWidth>
      </extInfo>
@@ -2594,6 +2597,7 @@
     <horizontalStretch>true</horizontalStretch>
     <verticalStretch>true</verticalStretch>
     <fileDragMode>AsFileRef</fileDragMode>
+    <rowFilter xsi:type="core:UndefinedValue"/>
    </items>
    <visible>true</visible>
    <enabled>true</enabled>

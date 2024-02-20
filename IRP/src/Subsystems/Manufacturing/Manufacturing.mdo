@@ -18,8 +18,8 @@
  <picture xsi:type="core:PictureRef">
   <picture>CommonPicture.Factory</picture>
  </picture>
- <content>Report.DetailingSupplies</content>
- <content>Report.ProductionPlanning</content>
+ <content>Report.R7010_DetailingSupplies</content>
+ <content>Report.R7030_ProductionPlanning</content>
  <content>DataProcessor.ProductionWorkspace</content>
  <content>Document.Production</content>
  <content>Catalog.BillOfMaterials</content>

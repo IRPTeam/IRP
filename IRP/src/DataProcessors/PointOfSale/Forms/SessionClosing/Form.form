@@ -3458,6 +3458,7 @@ WHERE
     <valueType>
      <types>DocumentRef.ConsolidatedRetailSales</types>
     </valueType>
+    <values xsi:type="core:UndefinedValue"/>
     <useRestriction>true</useRestriction>
    </parameters>
    <keyType>FieldValue</keyType>

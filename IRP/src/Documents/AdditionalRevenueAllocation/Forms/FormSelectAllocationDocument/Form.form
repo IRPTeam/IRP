@@ -508,6 +508,7 @@ WHERE
     <valueType>
      <types>CatalogRef.Companies</types>
     </valueType>
+    <values xsi:type="core:UndefinedValue"/>
     <useRestriction>true</useRestriction>
    </parameters>
   </extInfo>

@@ -190,7 +190,7 @@ Scenario: filling in Tax settings for company
 Scenario: check load data form in the document
 	* Open load date form	
 		And in the table "ItemList" I click "Load data from table" button
-		Then "Load data from table" window is opened
+		Then "Load data from table (form)" window is opened
 		And I set checkbox "Show image"
 	* Add barcodes
 		And in "Template" spreadsheet document I move to "R3C1" cell

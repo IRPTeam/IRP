@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mdclass:CommonPicture xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="e7209766-8e19-4f64-8fc0-433677dae6ef">
+ <name>PaymentStatuses</name>
+ <synonym>
+  <key>en</key>
+  <value>Payment statuses</value>
+ </synonym>
+ <synonym>
+  <key>ru</key>
+  <value>Статусы платежей</value>
+ </synonym>
+ <synonym>
+  <key>tr</key>
+  <value>Ödeme durumları</value>
+ </synonym>
+</mdclass:CommonPicture>

@@ -1175,16 +1175,16 @@
       <horizontalAlign>Left</horizontalAlign>
      </autoCommandBar>
      <handlers>
-      <event>OnActivateRow</event>
-      <name>WorkersOnActivateRow</name>
-     </handlers>
-     <handlers>
       <event>BeforeAddRow</event>
       <name>WorkersBeforeAddRow</name>
      </handlers>
      <handlers>
       <event>BeforeDeleteRow</event>
       <name>WorkersBeforeDeleteRow</name>
+     </handlers>
+     <handlers>
+      <event>OnActivateRow</event>
+      <name>WorkersOnActivateRow</name>
      </handlers>
      <handlers>
       <event>AfterDeleteRow</event>
@@ -2089,8 +2089,8 @@
         <horizontalAlign>Left</horizontalAlign>
        </autoCommandBar>
        <handlers>
-        <event>AfterDeleteRow</event>
-        <name>TimeSheetListAfterDeleteRow</name>
+        <event>Selection</event>
+        <name>TimeSheetListSelection</name>
        </handlers>
        <handlers>
         <event>BeforeAddRow</event>
@@ -2101,8 +2101,8 @@
         <name>TimeSheetListBeforeDeleteRow</name>
        </handlers>
        <handlers>
-        <event>Selection</event>
-        <name>TimeSheetListSelection</name>
+        <event>AfterDeleteRow</event>
+        <name>TimeSheetListAfterDeleteRow</name>
        </handlers>
        <searchStringAddition>
         <visible>true</visible>

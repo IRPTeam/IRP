@@ -15,5 +15,7 @@
  </synonym>
  <includeHelpInContents>true</includeHelpInContents>
  <includeInCommandInterface>true</includeInCommandInterface>
+ <content>Report.R7030_ProductionPlanning</content>
+ <content>Report.R7010_DetailingSupplies</content>
  <parentSubsystem>Subsystem.Reports</parentSubsystem>
 </mdclass:Subsystem>

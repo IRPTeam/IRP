@@ -1035,10 +1035,10 @@
    <common>true</common>
   </edit>
   <notDefaultUseAlwaysAttributes xsi:type="form:DataPath">
-   <segments>List.Ref</segments>
+   <segments>List.IsHaveJE</segments>
   </notDefaultUseAlwaysAttributes>
   <notDefaultUseAlwaysAttributes xsi:type="form:DataPath">
-   <segments>List.IsHaveJE</segments>
+   <segments>List.Ref</segments>
   </notDefaultUseAlwaysAttributes>
   <main>true</main>
   <extInfo xsi:type="form:DynamicListExtInfo">

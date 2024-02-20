@@ -46,10 +46,10 @@
  <defaultChoiceForm>Document.AdditionalCostAllocation.Form.ChoiceForm</defaultChoiceForm>
  <realTimePosting>Deny</realTimePosting>
  <registerRecords>InformationRegister.T6060S_BatchCostAllocationInfo</registerRecords>
- <registerRecords>AccumulationRegister.R6070T_OtherPeriodsExpenses</registerRecords>
  <registerRecords>InformationRegister.T6020S_BatchKeysInfo</registerRecords>
- <registerRecords>AccumulationRegister.R6020B_BatchBalance</registerRecords>
  <registerRecords>AccumulationRegister.R6060T_CostOfGoodsSold</registerRecords>
+ <registerRecords>AccumulationRegister.R6070T_OtherPeriodsExpenses</registerRecords>
+ <registerRecords>AccumulationRegister.R6020B_BatchBalance</registerRecords>
  <postInPrivilegedMode>true</postInPrivilegedMode>
  <unpostInPrivilegedMode>true</unpostInPrivilegedMode>
  <attributes uuid="ecc5f2e2-ecd9-40bc-83ef-f8159c869e2f">

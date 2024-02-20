@@ -7,15 +7,15 @@
  <name>GroupPhotoUploading</name>
  <synonym>
   <key>en</key>
-  <value>Group photo uploading</value>
+  <value>Uploading groups of photos</value>
  </synonym>
  <synonym>
   <key>ru</key>
-  <value>Группа отправки фото</value>
+  <value>Загрузка группы фотографий</value>
  </synonym>
  <synonym>
   <key>tr</key>
-  <value>Grup fotoğrafı yükleme</value>
+  <value>Fotoğraf gruplarını yükleme</value>
  </synonym>
  <useStandardCommands>true</useStandardCommands>
  <defaultForm>DataProcessor.GroupPhotoUploading.Form.Form</defaultForm>

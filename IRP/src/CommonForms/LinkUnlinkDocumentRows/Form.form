@@ -3162,10 +3162,6 @@
      <horizontalAlign>Left</horizontalAlign>
     </autoCommandBar>
     <handlers>
-     <event>OnActivateRow</event>
-     <name>BasisesTreeOnActivateRow</name>
-    </handlers>
-    <handlers>
      <event>Selection</event>
      <name>BasisesTreeSelection</name>
     </handlers>
@@ -3176,6 +3172,10 @@
     <handlers>
      <event>BeforeDeleteRow</event>
      <name>BeforeDeleteRow</name>
+    </handlers>
+    <handlers>
+     <event>OnActivateRow</event>
+     <name>BasisesTreeOnActivateRow</name>
     </handlers>
     <searchStringAddition>
      <visible>true</visible>
@@ -3210,6 +3210,7 @@
       </userVisible>
       <autoFill>true</autoFill>
      </contextMenu>
+     <source>BasisesTreeReverseSearchString</source>
      <extInfo xsi:type="form:SearchStringAdditionExtInfo">
       <autoMaxWidth>true</autoMaxWidth>
      </extInfo>
@@ -3248,6 +3249,7 @@
       <autoFill>true</autoFill>
      </contextMenu>
      <type>ViewStatusAddition</type>
+     <source>BasisesTreeReverseViewStatus</source>
      <extInfo xsi:type="form:ViewStatusAdditionExtInfo">
       <autoMaxWidth>true</autoMaxWidth>
      </extInfo>
@@ -3286,6 +3288,7 @@
       <autoFill>true</autoFill>
      </contextMenu>
      <type>SearchControlAddition</type>
+     <source>BasisesTreeReverseSearchControl</source>
      <extInfo xsi:type="form:SearchControlAdditionExtInfo">
       <autoMaxWidth>true</autoMaxWidth>
      </extInfo>

@@ -1614,6 +1614,31 @@
    <common>true</common>
   </edit>
  </attributes>
+ <attributes>
+  <name>BackgroundJobUUID</name>
+  <title>
+   <key>en</key>
+   <value>Background job UUID</value>
+  </title>
+  <title>
+   <key>ru</key>
+   <value>UUID фонового задания</value>
+  </title>
+  <title>
+   <key>tr</key>
+   <value>Arka plan işi UUID</value>
+  </title>
+  <id>24</id>
+  <valueType>
+   <types>UUID</types>
+  </valueType>
+  <view>
+   <common>true</common>
+  </view>
+  <edit>
+   <common>true</common>
+  </edit>
+ </attributes>
  <formCommands>
   <name>SelectPath</name>
   <title>

@@ -35,8 +35,9 @@
  <content>InformationRegister.T9014S_AccountsExpenseRevenue</content>
  <content>Catalog.LedgerTypeVariants</content>
  <content>Catalog.Companies.Attribute.LandedCostExpenseType</content>
- <content>Report.TrialBalance</content>
- <content>Report.TrialBalanceByAccount</content>
- <content>Report.AccountCard</content>
- <content>Report.AccountAnalysis</content>
+ <content>Report.A0010_TrialBalance</content>
+ <content>Report.A0011_TrialBalanceByAccount</content>
+ <content>Report.A0012_AccountCard</content>
+ <content>Report.A0013_AccountAnalysis</content>
+ <content>Subsystem.Reports.Subsystem.Accounting</content>
 </mdclass:FunctionalOption>

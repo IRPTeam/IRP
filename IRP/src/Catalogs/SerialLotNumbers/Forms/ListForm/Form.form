@@ -680,6 +680,7 @@ WHERE
      <types>CatalogRef.ItemKeys</types>
      <types>CatalogRef.ItemTypes</types>
     </valueType>
+    <values xsi:type="core:UndefinedValue"/>
     <useRestriction>true</useRestriction>
    </parameters>
    <parameters>
@@ -705,6 +706,7 @@ WHERE
      <types>CatalogRef.ItemKeys</types>
      <types>CatalogRef.ItemTypes</types>
     </valueType>
+    <values xsi:type="core:UndefinedValue"/>
     <useRestriction>true</useRestriction>
    </parameters>
    <parameters>
@@ -725,7 +727,7 @@ WHERE
       </content>
      </localValue>
     </title>
-    <valueType/>
+    <values xsi:type="core:UndefinedValue"/>
     <useRestriction>true</useRestriction>
    </parameters>
    <parameters>
@@ -751,6 +753,7 @@ WHERE
      <types>CatalogRef.ItemKeys</types>
      <types>CatalogRef.ItemTypes</types>
     </valueType>
+    <values xsi:type="core:UndefinedValue"/>
     <useRestriction>true</useRestriction>
    </parameters>
    <parameters>
@@ -771,7 +774,7 @@ WHERE
       </content>
      </localValue>
     </title>
-    <valueType/>
+    <values xsi:type="core:UndefinedValue"/>
     <useRestriction>true</useRestriction>
    </parameters>
    <parameters>
@@ -792,7 +795,7 @@ WHERE
       </content>
      </localValue>
     </title>
-    <valueType/>
+    <values xsi:type="core:UndefinedValue"/>
     <useRestriction>true</useRestriction>
    </parameters>
   </extInfo>
@@ -813,9 +816,9 @@ WHERE
   </title>
   <id>2</id>
   <valueType>
+   <types>CatalogRef.Items</types>
    <types>CatalogRef.ItemKeys</types>
    <types>CatalogRef.ItemTypes</types>
-   <types>CatalogRef.Items</types>
   </valueType>
   <view>
    <common>true</common>

@@ -1250,12 +1250,12 @@
      <showInFooter>true</showInFooter>
      <extInfo xsi:type="form:InputFieldExtInfo">
       <handlers>
-       <event>StartChoice</event>
-       <name>PaymentListFinancialMovementTypeOtherCompanyStartChoice</name>
-      </handlers>
-      <handlers>
        <event>EditTextChange</event>
        <name>PaymentListFinancialMovementTypeOtherCompanyEditTextChange</name>
+      </handlers>
+      <handlers>
+       <event>StartChoice</event>
+       <name>PaymentListFinancialMovementTypeOtherCompanyStartChoice</name>
       </handlers>
       <autoMaxWidth>true</autoMaxWidth>
       <autoMaxHeight>true</autoMaxHeight>

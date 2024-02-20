@@ -16,7 +16,7 @@
  <location>Constant.UseAdditionalTableControlDocument</location>
  <privilegedGetMode>true</privilegedGetMode>
  <content>DataProcessor.FixDocumentProblems</content>
- <content>Report.AdditionalDocumentTablesCheck</content>
+ <content>Report.D0012_AdditionalDocumentTablesCheck</content>
  <content>CommonForm.AdditionalTableControlSettings</content>
  <content>Constant.AdditionalTableControlExceptions</content>
 </mdclass:FunctionalOption>

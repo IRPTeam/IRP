@@ -1,4 +1,4 @@
-#language: en
+﻿#language: en
 @tree
 @Positive
 @Test
@@ -263,11 +263,11 @@ Scenario: Open object form "R3035T_CashPlanning"
 
 
 
-Scenario: Open object form "PriceInfo"
+Scenario: Open object form "D0011_PriceInfo"
 
-	Given I open "PriceInfo" report default form
+	Given I open "D0011_PriceInfo" report default form
 	If the warning is displayed then
-		Then I raise "Failed to open report form PriceInfo" exception
+		Then I raise "Failed to open report form D0011_PriceInfo" exception
 	And I close current window
 
 
@@ -767,12 +767,12 @@ Scenario: Open object form "Analise document movements"
 		| 'BankPayment'  | 'R1020B_AdvancesToVendors'         |
 	And I close all client application windows
 
-Scenario: Open object form "All registers movement"
+Scenario: Open object form "D0009_DocumentRegistrationsReport"
 
-	Given I open "AllRegistersMovement" report default form
+	Given I open "D0009_DocumentRegistrationsReport" report default form
 	If the warning is displayed then
-		Then I raise "Failed to open report form AllRegistersMovemen" exception
-	And I click "Generate" button		
+		Then I raise "Failed to open report form D0009_DocumentRegistrationsReport" exception
+	And I click "Generate report" button		
 	Then system warning window does not appear
 	And I close all client application windows
 	
@@ -808,18 +808,18 @@ Scenario: Open information register form "ChequeBondStatuses"
 	And I close current window
 
 
-Scenario: Open object form "DetailingSupplies"
+Scenario: Open object form "R7010_DetailingSupplies"
 
-	Given I open "DetailingSupplies" report default form
+	Given I open "R7010_DetailingSupplies" report default form
 	If the warning is displayed then
-		Then I raise "Failed to open report form DetailingSupplies" exception
+		Then I raise "Failed to open report form R7010_DetailingSupplies" exception
 	And I close current window
 
-Scenario: Open object form "ProductionPlanning"
+Scenario: Open object form "R7030_ProductionPlanning"
 
-	Given I open "ProductionPlanning" report default form
+	Given I open "R7030_ProductionPlanning" report default form
 	If the warning is displayed then
-		Then I raise "Failed to open report form ProductionPlanning" exception
+		Then I raise "Failed to open report form R7030_ProductionPlanning" exception
 	And I close current window
 
 Scenario: Open object form "ProductionWorkspace"

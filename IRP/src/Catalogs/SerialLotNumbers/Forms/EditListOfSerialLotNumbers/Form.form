@@ -1059,12 +1059,12 @@
    <autoFill>true</autoFill>
   </autoCommandBar>
   <handlers>
-   <event>OnChange</event>
-   <name>SerialLotNumbersOnChange</name>
-  </handlers>
-  <handlers>
    <event>OnActivateRow</event>
    <name>SerialLotNumbersOnActivateRow</name>
+  </handlers>
+  <handlers>
+   <event>OnChange</event>
+   <name>SerialLotNumbersOnChange</name>
   </handlers>
   <searchStringAddition>
    <visible>true</visible>

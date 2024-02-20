@@ -1166,12 +1166,12 @@
      <showInFooter>true</showInFooter>
      <extInfo xsi:type="form:InputFieldExtInfo">
       <handlers>
-       <event>StartChoice</event>
-       <name>InventorySourceOfOriginStartChoice</name>
-      </handlers>
-      <handlers>
        <event>EditTextChange</event>
        <name>InventorySourceOfOriginEditTextChange</name>
+      </handlers>
+      <handlers>
+       <event>StartChoice</event>
+       <name>InventorySourceOfOriginStartChoice</name>
       </handlers>
       <autoMaxWidth>true</autoMaxWidth>
       <autoMaxHeight>true</autoMaxHeight>
@@ -2417,12 +2417,12 @@
      <autoFill>true</autoFill>
     </autoCommandBar>
     <handlers>
-     <event>AfterDeleteRow</event>
-     <name>CashInTransitAfterDeleteRow</name>
-    </handlers>
-    <handlers>
      <event>BeforeAddRow</event>
      <name>CashInTransitBeforeAddRow</name>
+    </handlers>
+    <handlers>
+     <event>AfterDeleteRow</event>
+     <name>CashInTransitAfterDeleteRow</name>
     </handlers>
     <searchStringAddition>
      <visible>true</visible>
@@ -8385,12 +8385,12 @@
      <showInFooter>true</showInFooter>
      <extInfo xsi:type="form:InputFieldExtInfo">
       <handlers>
-       <event>StartChoice</event>
-       <name>AccountPayableOtherAgreementStartChoice</name>
-      </handlers>
-      <handlers>
        <event>EditTextChange</event>
        <name>AccountPayableOtherAgreementEditTextChange</name>
+      </handlers>
+      <handlers>
+       <event>StartChoice</event>
+       <name>AccountPayableOtherAgreementStartChoice</name>
       </handlers>
       <autoMaxWidth>true</autoMaxWidth>
       <autoMaxHeight>true</autoMaxHeight>
@@ -8592,12 +8592,12 @@
      <autoFill>true</autoFill>
     </autoCommandBar>
     <handlers>
-     <event>OnChange</event>
-     <name>MainTableOnChange</name>
-    </handlers>
-    <handlers>
      <event>OnActivateCell</event>
      <name>AccountPayableOtherOnActivateCell</name>
+    </handlers>
+    <handlers>
+     <event>OnChange</event>
+     <name>MainTableOnChange</name>
     </handlers>
     <searchStringAddition>
      <visible>true</visible>
@@ -9071,12 +9071,12 @@
      <showInFooter>true</showInFooter>
      <extInfo xsi:type="form:InputFieldExtInfo">
       <handlers>
-       <event>StartChoice</event>
-       <name>AccountReceivableOtherAgreementStartChoice</name>
-      </handlers>
-      <handlers>
        <event>EditTextChange</event>
        <name>AccountReceivableOtherAgreementEditTextChange</name>
+      </handlers>
+      <handlers>
+       <event>StartChoice</event>
+       <name>AccountReceivableOtherAgreementStartChoice</name>
       </handlers>
       <autoMaxWidth>true</autoMaxWidth>
       <autoMaxHeight>true</autoMaxHeight>
@@ -9278,12 +9278,12 @@
      <autoFill>true</autoFill>
     </autoCommandBar>
     <handlers>
-     <event>OnChange</event>
-     <name>MainTableOnChange</name>
-    </handlers>
-    <handlers>
      <event>OnActivateCell</event>
      <name>AccountReceivableOtherOnActivateCell</name>
+    </handlers>
+    <handlers>
+     <event>OnChange</event>
+     <name>MainTableOnChange</name>
     </handlers>
     <searchStringAddition>
      <visible>true</visible>
@@ -9534,12 +9534,12 @@
     <showInFooter>true</showInFooter>
     <extInfo xsi:type="form:InputFieldExtInfo">
      <handlers>
-      <event>StartChoice</event>
-      <name>PartnerTradeAgentStartChoice</name>
-     </handlers>
-     <handlers>
       <event>EditTextChange</event>
       <name>PartnerTradeAgentEditTextChange</name>
+     </handlers>
+     <handlers>
+      <event>StartChoice</event>
+      <name>PartnerTradeAgentStartChoice</name>
      </handlers>
      <autoMaxWidth>true</autoMaxWidth>
      <autoMaxHeight>true</autoMaxHeight>
@@ -9596,12 +9596,12 @@
     <showInFooter>true</showInFooter>
     <extInfo xsi:type="form:InputFieldExtInfo">
      <handlers>
-      <event>StartChoice</event>
-      <name>LegalNameTradeAgentStartChoice</name>
-     </handlers>
-     <handlers>
       <event>EditTextChange</event>
       <name>LegalNameTradeAgentEditTextChange</name>
+     </handlers>
+     <handlers>
+      <event>StartChoice</event>
+      <name>LegalNameTradeAgentStartChoice</name>
      </handlers>
      <autoMaxWidth>true</autoMaxWidth>
      <autoMaxHeight>true</autoMaxHeight>
@@ -9658,12 +9658,12 @@
     <showInFooter>true</showInFooter>
     <extInfo xsi:type="form:InputFieldExtInfo">
      <handlers>
-      <event>StartChoice</event>
-      <name>AgreementTradeAgentStartChoice</name>
-     </handlers>
-     <handlers>
       <event>EditTextChange</event>
       <name>AgreementTradeAgentEditTextChange</name>
+     </handlers>
+     <handlers>
+      <event>StartChoice</event>
+      <name>AgreementTradeAgentStartChoice</name>
      </handlers>
      <autoMaxWidth>true</autoMaxWidth>
      <autoMaxHeight>true</autoMaxHeight>
@@ -9831,12 +9831,12 @@
      <showInFooter>true</showInFooter>
      <extInfo xsi:type="form:InputFieldExtInfo">
       <handlers>
-       <event>StartChoice</event>
-       <name>ShipmentToTradeAgentItemStartChoice</name>
-      </handlers>
-      <handlers>
        <event>EditTextChange</event>
        <name>ShipmentToTradeAgentItemEditTextChange</name>
+      </handlers>
+      <handlers>
+       <event>StartChoice</event>
+       <name>ShipmentToTradeAgentItemStartChoice</name>
       </handlers>
       <autoMaxWidth>true</autoMaxWidth>
       <autoMaxHeight>true</autoMaxHeight>
@@ -10089,12 +10089,12 @@
      <showInFooter>true</showInFooter>
      <extInfo xsi:type="form:InputFieldExtInfo">
       <handlers>
-       <event>StartChoice</event>
-       <name>ShipmentToTradeAgentSerialLotNumberStartChoice</name>
-      </handlers>
-      <handlers>
        <event>EditTextChange</event>
        <name>ShipmentToTradeAgentSerialLotNumberEditTextChange</name>
+      </handlers>
+      <handlers>
+       <event>StartChoice</event>
+       <name>ShipmentToTradeAgentSerialLotNumberStartChoice</name>
       </handlers>
       <autoMaxWidth>true</autoMaxWidth>
       <autoMaxHeight>true</autoMaxHeight>
@@ -10147,12 +10147,12 @@
      <showInFooter>true</showInFooter>
      <extInfo xsi:type="form:InputFieldExtInfo">
       <handlers>
-       <event>StartChoice</event>
-       <name>ShipmentToTradeAgentSourceOfOriginStartChoice</name>
-      </handlers>
-      <handlers>
        <event>EditTextChange</event>
        <name>ShipmentToTradeAgentSourceOfOriginEditTextChange</name>
+      </handlers>
+      <handlers>
+       <event>StartChoice</event>
+       <name>ShipmentToTradeAgentSourceOfOriginStartChoice</name>
       </handlers>
       <autoMaxWidth>true</autoMaxWidth>
       <autoMaxHeight>true</autoMaxHeight>
@@ -10430,12 +10430,12 @@
     <showInFooter>true</showInFooter>
     <extInfo xsi:type="form:InputFieldExtInfo">
      <handlers>
-      <event>StartChoice</event>
-      <name>PartnerConsignorStartChoice</name>
-     </handlers>
-     <handlers>
       <event>EditTextChange</event>
       <name>PartnerConsignorEditTextChange</name>
+     </handlers>
+     <handlers>
+      <event>StartChoice</event>
+      <name>PartnerConsignorStartChoice</name>
      </handlers>
      <autoMaxWidth>true</autoMaxWidth>
      <autoMaxHeight>true</autoMaxHeight>
@@ -10492,12 +10492,12 @@
     <showInFooter>true</showInFooter>
     <extInfo xsi:type="form:InputFieldExtInfo">
      <handlers>
-      <event>StartChoice</event>
-      <name>LegalNameConsignorStartChoice</name>
-     </handlers>
-     <handlers>
       <event>EditTextChange</event>
       <name>LegalNameConsignorEditTextChange</name>
+     </handlers>
+     <handlers>
+      <event>StartChoice</event>
+      <name>LegalNameConsignorStartChoice</name>
      </handlers>
      <autoMaxWidth>true</autoMaxWidth>
      <autoMaxHeight>true</autoMaxHeight>
@@ -10554,12 +10554,12 @@
     <showInFooter>true</showInFooter>
     <extInfo xsi:type="form:InputFieldExtInfo">
      <handlers>
-      <event>StartChoice</event>
-      <name>AgreementConsignorStartChoice</name>
-     </handlers>
-     <handlers>
       <event>EditTextChange</event>
       <name>AgreementConsignorEditTextChange</name>
+     </handlers>
+     <handlers>
+      <event>StartChoice</event>
+      <name>AgreementConsignorStartChoice</name>
      </handlers>
      <autoMaxWidth>true</autoMaxWidth>
      <autoMaxHeight>true</autoMaxHeight>
@@ -10727,12 +10727,12 @@
      <showInFooter>true</showInFooter>
      <extInfo xsi:type="form:InputFieldExtInfo">
       <handlers>
-       <event>StartChoice</event>
-       <name>ReceiptFromConsignorItemStartChoice</name>
-      </handlers>
-      <handlers>
        <event>EditTextChange</event>
        <name>ReceiptFromConsignorItemEditTextChange</name>
+      </handlers>
+      <handlers>
+       <event>StartChoice</event>
+       <name>ReceiptFromConsignorItemStartChoice</name>
       </handlers>
       <autoMaxWidth>true</autoMaxWidth>
       <autoMaxHeight>true</autoMaxHeight>
@@ -11193,12 +11193,12 @@
      <showInFooter>true</showInFooter>
      <extInfo xsi:type="form:InputFieldExtInfo">
       <handlers>
-       <event>StartChoice</event>
-       <name>ReceiptFromConsignorSerialLotNumberStartChoice</name>
-      </handlers>
-      <handlers>
        <event>EditTextChange</event>
        <name>ReceiptFromConsignorSerialLotNumberEditTextChange</name>
+      </handlers>
+      <handlers>
+       <event>StartChoice</event>
+       <name>ReceiptFromConsignorSerialLotNumberStartChoice</name>
       </handlers>
       <autoMaxWidth>true</autoMaxWidth>
       <autoMaxHeight>true</autoMaxHeight>
@@ -11251,12 +11251,12 @@
      <showInFooter>true</showInFooter>
      <extInfo xsi:type="form:InputFieldExtInfo">
       <handlers>
-       <event>StartChoice</event>
-       <name>ReceiptFromConsignorSourceOfOriginStartChoice</name>
-      </handlers>
-      <handlers>
        <event>EditTextChange</event>
        <name>ReceiptFromConsignorSourceOfOriginEditTextChange</name>
+      </handlers>
+      <handlers>
+       <event>StartChoice</event>
+       <name>ReceiptFromConsignorSourceOfOriginStartChoice</name>
       </handlers>
       <autoMaxWidth>true</autoMaxWidth>
       <autoMaxHeight>true</autoMaxHeight>
@@ -13802,12 +13802,12 @@
      <autoFill>true</autoFill>
     </autoCommandBar>
     <handlers>
-     <event>AfterDeleteRow</event>
-     <name>FixedAssetsAfterDeleteRow</name>
-    </handlers>
-    <handlers>
      <event>BeforeAddRow</event>
      <name>FixedAssetsBeforeAddRow</name>
+    </handlers>
+    <handlers>
+     <event>AfterDeleteRow</event>
+     <name>FixedAssetsAfterDeleteRow</name>
     </handlers>
     <searchStringAddition>
      <visible>true</visible>
@@ -13842,6 +13842,7 @@
       </userVisible>
       <autoFill>true</autoFill>
      </contextMenu>
+     <source>FixedAssetsSearchString</source>
      <extInfo xsi:type="form:SearchStringAdditionExtInfo">
       <autoMaxWidth>true</autoMaxWidth>
      </extInfo>
@@ -13880,6 +13881,7 @@
       <autoFill>true</autoFill>
      </contextMenu>
      <type>ViewStatusAddition</type>
+     <source>FixedAssetsViewStatus</source>
      <extInfo xsi:type="form:ViewStatusAdditionExtInfo">
       <autoMaxWidth>true</autoMaxWidth>
      </extInfo>
@@ -13918,6 +13920,7 @@
       <autoFill>true</autoFill>
      </contextMenu>
      <type>SearchControlAddition</type>
+     <source>FixedAssetsSearchControl</source>
      <extInfo xsi:type="form:SearchControlAdditionExtInfo">
       <autoMaxWidth>true</autoMaxWidth>
      </extInfo>
@@ -13965,6 +13968,7 @@
     <horizontalStretch>true</horizontalStretch>
     <verticalStretch>true</verticalStretch>
     <fileDragMode>AsFileRef</fileDragMode>
+    <rowFilter xsi:type="core:UndefinedValue"/>
    </items>
    <visible>true</visible>
    <enabled>true</enabled>

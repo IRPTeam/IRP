@@ -1653,3 +1653,12 @@ Function GetTableForClient(Table) Export
 EndFunction
 
 #EndRegion
+
+Function IsRef(Type) Export
+	Return Type <> Type("Undefined") 
+		And (Catalogs.AllRefsType().ContainsType(Type)
+		Or Documents.AllRefsType().ContainsType(Type)
+		Or Enums.AllRefsType().ContainsType(Type)
+		Or ChartsOfCharacteristicTypes.AllRefsType().ContainsType(Type)
+		Or ChartsOfAccounts.AllRefsType().ContainsType(Type));
+EndFunction

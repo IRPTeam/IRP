@@ -192,6 +192,7 @@
   <commonPictures>CommonPicture.IconSetNotActive</commonPictures>
   <commonPictures>CommonPicture.IconShowOnlyActive</commonPictures>
   <commonPictures>CommonPicture.IconShowAnyActive</commonPictures>
+  <commonPictures>CommonPicture.FillByTemplate</commonPictures>
   <commonPictures>CommonPicture.PaymentStatuses</commonPictures>
   <sessionParameters>SessionParameter.Buffer</sessionParameters>
   <sessionParameters>SessionParameter.ClientType</sessionParameters>
@@ -994,6 +995,7 @@
   <commonForms>CommonForm.ShareToUsers</commonForms>
   <commonForms>CommonForm.UpdateItemListInfo</commonForms>
   <commonForms>CommonForm.BackgroundMultiJob</commonForms>
+  <commonForms>CommonForm.FormulaEditor</commonForms>
   <catalogs>Catalog.AccessGroups</catalogs>
   <catalogs>Catalog.AccessKey</catalogs>
   <catalogs>Catalog.AccessProfiles</catalogs>

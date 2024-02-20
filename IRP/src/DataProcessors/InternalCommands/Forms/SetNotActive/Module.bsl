@@ -28,7 +28,7 @@ EndProcedure
 
 // See InternalCommandsClient.Form_RunCommandAction
 &AtClient
-Procedure RunCommandAction(Form, MainAttribute, Targets, AddInfo = Undefined) Export
+Procedure RunCommandAction(Targets, Form, CommandFormItem, MainAttribute, AddInfo = Undefined) Export
 
 	CommandProcessingAtServer(Targets, AddInfo);
 	
@@ -36,7 +36,7 @@ EndProcedure
 
 // See InternalCommandsClient.Form_AfterRunning
 &AtClient
-Procedure AfterRunning(Form, MainAttribute, Targets, AddInfo = Undefined) Export
+Procedure AfterRunning(Targets, Form, CommandFormItem, MainAttribute, AddInfo = Undefined) Export
 	
 	If TypeOf(Targets) = Type("Array") Then
 		For Each Target In Targets Do

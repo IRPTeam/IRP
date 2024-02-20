@@ -673,6 +673,7 @@ GROUP BY
           <types>Date</types>
           <dateQualifiers/>
         </valueType>
+        <values xsi:type="core:UndefinedValue"/>
         <useRestriction>true</useRestriction>
       </parameters>
       <parameters>
@@ -689,6 +690,7 @@ GROUP BY
           <types>Date</types>
           <dateQualifiers/>
         </valueType>
+        <values xsi:type="core:UndefinedValue"/>
       </parameters>
       <parameters>
         <name>SelectedDocuments</name>
@@ -700,7 +702,6 @@ GROUP BY
             </content>
           </localValue>
         </title>
-        <valueType/>
         <useRestriction>true</useRestriction>
         <valueListAllowed>true</valueListAllowed>
       </parameters>
@@ -717,6 +718,7 @@ GROUP BY
         <valueType>
           <types>CatalogRef.Companies</types>
         </valueType>
+        <values xsi:type="core:UndefinedValue"/>
         <useRestriction>true</useRestriction>
       </parameters>
       <parameters>
@@ -732,6 +734,7 @@ GROUP BY
         <valueType>
           <types>ChartOfCharacteristicTypesRef.CurrencyMovementType</types>
         </valueType>
+        <values xsi:type="core:UndefinedValue"/>
         <useRestriction>true</useRestriction>
       </parameters>
     </extInfo>

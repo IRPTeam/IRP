@@ -3941,7 +3941,7 @@
       <common>true</common>
     </edit>
     <settingsSavedData xsi:type="form:DataPath">
-      <segments>CheckList</segments>
+      <segments>FullCheckList</segments>
     </settingsSavedData>
     <columns>
       <name>Ref</name>

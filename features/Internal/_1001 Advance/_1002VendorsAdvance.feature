@@ -646,7 +646,7 @@ Scenario: _1002062 generate Offset of advance report based on VendorsAdvancesClo
 			| '1'         |
 	* Generate report
 		And I click "Offset of advances" button
-		Then "Offset of advances" window is opened
+		Then "R5012 Offset of advances" window is opened
 		And I click "Run" button
 	* Check
 		And "Doc" spreadsheet document contains "OffsetOfAdvanceVendor" template lines by template

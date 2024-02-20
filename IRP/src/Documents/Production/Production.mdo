@@ -64,6 +64,7 @@
   <registerRecords>InformationRegister.T6020S_BatchKeysInfo</registerRecords>
   <registerRecords>AccumulationRegister.R6060T_CostOfGoodsSold</registerRecords>
   <registerRecords>AccumulationRegister.R7040T_ManualMaterialsCorretionInProduction</registerRecords>
+  <registerRecords>InformationRegister.T7051S_ProductionDurationDetails</registerRecords>
   <registerRecords>AccumulationRegister.R4010B_ActualStocks</registerRecords>
   <registerRecords>AccumulationRegister.R4050B_StockInventory</registerRecords>
   <registerRecords>AccumulationRegister.R7030T_ProductionPlanning</registerRecords>
@@ -73,10 +74,9 @@
   <registerRecords>AccumulationRegister.R4012B_StockReservation</registerRecords>
   <registerRecords>InformationRegister.T6010S_BatchesInfo</registerRecords>
   <registerRecords>AccumulationRegister.R7010T_DetailingSupplies</registerRecords>
+  <registerRecords>AccumulationRegister.R7050T_ProductionDurations</registerRecords>
   <registerRecords>AccumulationRegister.R6020B_BatchBalance</registerRecords>
   <registerRecords>AccumulationRegister.R4036B_IncomingStocksRequested</registerRecords>
-  <registerRecords>AccumulationRegister.R7050T_ProductionDurations</registerRecords>
-  <registerRecords>InformationRegister.T7051S_ProductionDurationDetails</registerRecords>
   <postInPrivilegedMode>true</postInPrivilegedMode>
   <unpostInPrivilegedMode>true</unpostInPrivilegedMode>
   <choiceHistoryOnInput>DontUse</choiceHistoryOnInput>

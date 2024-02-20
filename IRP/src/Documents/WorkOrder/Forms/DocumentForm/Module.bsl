@@ -1,3 +1,4 @@
+
 #Region FORM
 
 &AtServer
@@ -629,17 +630,22 @@ EndProcedure
 
 #EndRegion
 
-#Region LOAD_DATA_FROM_TABLE
+#Region COMMANDS
 
-//@skip-check module-unused-method
 &AtClient
-Procedure LoadDataFromTable(Command)
-	LoadDataFromTableClient.OpenFormForLoadData(ThisObject, ThisObject.Object);
+Procedure InternalCommandAction(Command) Export
+	InternalCommandsClient.RunCommandAction(Command, ThisObject, Object, Object.Ref);
 EndProcedure
 
-#EndRegion
+&AtClient
+Procedure InternalCommandActionWithServerContext(Command) Export
+	InternalCommandActionWithServerContextAtServer(Command.Name);
+EndProcedure
 
-#Region COMMANDS
+&AtServer
+Procedure InternalCommandActionWithServerContextAtServer(CommandName)
+	InternalCommandsServer.RunCommandAction(CommandName, ThisObject, Object, Object.Ref);
+EndProcedure
 
 &AtClient
 Procedure DecorationStatusHistoryClick(Item)

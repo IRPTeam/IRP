@@ -7,7 +7,7 @@
   <name>GroupPhotoUploading</name>
   <synonym>
     <key>en</key>
-    <value>Group photo uploading</value>
+    <value>Uploading groups of photos</value>
   </synonym>
   <useStandardCommands>true</useStandardCommands>
   <defaultForm>DataProcessor.GroupPhotoUploading.Form.Form</defaultForm>

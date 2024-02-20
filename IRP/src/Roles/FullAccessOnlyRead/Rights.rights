@@ -38,7 +38,7 @@
 		</right>
 	</object>
 	<object>
-		<name>Report.BatchBalance</name>
+		<name>Report.R6020_BatchBalance</name>
 		<right>
 			<name>Use</name>
 			<value>true</value>
@@ -278,7 +278,7 @@
 		</right>
 	</object>
 	<object>
-		<name>Report.AdditionalDocumentTablesCheck</name>
+		<name>Report.D0012_AdditionalDocumentTablesCheck</name>
 		<right>
 			<name>Use</name>
 			<value>true</value>
@@ -1953,7 +1953,7 @@
 		</right>
 	</object>
 	<object>
-		<name>Report.PriceInfo</name>
+		<name>Report.D0011_PriceInfo</name>
 		<right>
 			<name>Use</name>
 			<value>true</value>
@@ -3094,7 +3094,7 @@
 		</right>
 	</object>
 	<object>
-		<name>Report.DetailingSupplies</name>
+		<name>Report.R7010_DetailingSupplies</name>
 		<right>
 			<name>Use</name>
 			<value>true</value>
@@ -4749,7 +4749,7 @@
 		</right>
 	</object>
 	<object>
-		<name>Report.PriceInfo.Command.OpenPriceInfo</name>
+		<name>Report.D0011_PriceInfo.Command.OpenPriceInfo</name>
 		<right>
 			<name>View</name>
 			<value>true</value>
@@ -4888,17 +4888,6 @@
 		</right>
 	</object>
 	<object>
-		<name>Report.AllRegistersMovement</name>
-		<right>
-			<name>Use</name>
-			<value>true</value>
-		</right>
-		<right>
-			<name>View</name>
-			<value>true</value>
-		</right>
-	</object>
-	<object>
 		<name>AccumulationRegister.R4020T_StockTransferOrders</name>
 		<right>
 			<name>Read</name>
@@ -5003,7 +4992,7 @@
 		</right>
 	</object>
 	<object>
-		<name>Report.BatchBalanceSimple</name>
+		<name>Report.R6021_BatchBalanceSimple</name>
 		<right>
 			<name>Use</name>
 			<value>true</value>
@@ -9488,7 +9477,7 @@
 		</right>
 	</object>
 	<object>
-		<name>Report.DocumentRegistrationsReport</name>
+		<name>Report.D0009_DocumentRegistrationsReport</name>
 		<right>
 			<name>Use</name>
 			<value>true</value>
@@ -9647,7 +9636,7 @@
 		</right>
 	</object>
 	<object>
-		<name>Report.DocumentRegistrationsReport.Command.RegistrationsReport</name>
+		<name>Report.D0009_DocumentRegistrationsReport.Command.RegistrationsReport</name>
 		<right>
 			<name>View</name>
 			<value>true</value>
@@ -11346,7 +11335,7 @@
 		</right>
 	</object>
 	<object>
-		<name>Report.ProductionPlanning</name>
+		<name>Report.R7030_ProductionPlanning</name>
 		<right>
 			<name>Use</name>
 			<value>true</value>
@@ -12479,13 +12468,6 @@
 		</right>
 	</object>
 	<object>
-		<name>CommonForm.LoadDataFromTable</name>
-		<right>
-			<name>View</name>
-			<value>true</value>
-		</right>
-	</object>
-	<object>
 		<name>InformationRegister.T6020S_BatchKeysInfo.Resource.IndirectCostTaxAmount</name>
 		<right>
 			<name>Edit</name>
@@ -12928,7 +12910,7 @@
 		</right>
 	</object>
 	<object>
-		<name>Report.OffsetOfAdvances</name>
+		<name>Report.R5012_OffsetOfAdvances</name>
 		<right>
 			<name>Use</name>
 			<value>true</value>
@@ -15015,13 +14997,6 @@
 		</right>
 	</object>
 	<object>
-		<name>CommonForm.LoadDataFromTable</name>
-		<right>
-			<name>View</name>
-			<value>true</value>
-		</right>
-	</object>
-	<object>
 		<name>Constant.UseJobQueueForExternalFunctions</name>
 		<right>
 			<name>Read</name>
@@ -15765,7 +15740,7 @@
 		</right>
 	</object>
 	<object>
-		<name>Report.AdditionalDocumentTablesCheck</name>
+		<name>Report.D0012_AdditionalDocumentTablesCheck</name>
 		<right>
 			<name>Use</name>
 			<value>true</value>
@@ -16685,7 +16660,7 @@
 		</right>
 	</object>
 	<object>
-		<name>Report.TrialBalanceByAccount</name>
+		<name>Report.A0011_TrialBalanceByAccount</name>
 		<right>
 			<name>Use</name>
 			<value>true</value>
@@ -16725,7 +16700,7 @@
 		</right>
 	</object>
 	<object>
-		<name>Report.AccountAnalysis</name>
+		<name>Report.A0013_AccountAnalysis</name>
 		<right>
 			<name>Use</name>
 			<value>true</value>
@@ -16736,7 +16711,7 @@
 		</right>
 	</object>
 	<object>
-		<name>Report.TrialBalance</name>
+		<name>Report.A0010_TrialBalance</name>
 		<right>
 			<name>Use</name>
 			<value>true</value>
@@ -16768,7 +16743,7 @@
 		</right>
 	</object>
 	<object>
-		<name>Report.AccountCard</name>
+		<name>Report.A0012_AccountCard</name>
 		<right>
 			<name>Use</name>
 			<value>true</value>
@@ -16790,7 +16765,7 @@
 		</right>
 	</object>
 	<object>
-		<name>Report.R1001A_Purchases</name>
+		<name>Report.R1001_Purchases</name>
 		<right>
 			<name>View</name>
 			<value>true</value>
@@ -16801,7 +16776,7 @@
 		</right>
 	</object>
 	<object>
-		<name>Report.RP_R12R_VendorsAging</name>
+		<name>Report.R1200_VendorsAging</name>
 		<right>
 			<name>View</name>
 			<value>true</value>
@@ -16812,7 +16787,7 @@
 		</right>
 	</object>
 	<object>
-		<name>Report.A101A_PartnersBalance</name>
+		<name>Report.A1010_PartnersBalance</name>
 		<right>
 			<name>View</name>
 			<value>true</value>
@@ -16823,7 +16798,7 @@
 		</right>
 	</object>
 	<object>
-		<name>Report.R3010A_CashOnHand</name>
+		<name>Report.R3010_CashOnHand</name>
 		<right>
 			<name>View</name>
 			<value>true</value>
@@ -16834,7 +16809,7 @@
 		</right>
 	</object>
 	<object>
-		<name>Report.RP_R11R_CustomersAging</name>
+		<name>Report.R1100_CustomersAging</name>
 		<right>
 			<name>View</name>
 			<value>true</value>
@@ -16845,7 +16820,7 @@
 		</right>
 	</object>
 	<object>
-		<name>Report.R502A_ProfitLosses</name>
+		<name>Report.R5020_ProfitLosses</name>
 		<right>
 			<name>View</name>
 			<value>true</value>
@@ -16856,7 +16831,7 @@
 		</right>
 	</object>
 	<object>
-		<name>Report.R2001A_Sales</name>
+		<name>Report.R2001_Sales</name>
 		<right>
 			<name>View</name>
 			<value>true</value>

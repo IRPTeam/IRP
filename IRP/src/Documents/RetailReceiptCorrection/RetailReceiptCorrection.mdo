@@ -89,8 +89,8 @@
       <value>Basis document</value>
     </synonym>
     <type>
-      <types>DocumentRef.RetailSalesReceipt</types>
       <types>DocumentRef.RetailReturnReceipt</types>
+      <types>DocumentRef.RetailSalesReceipt</types>
       <types>DocumentRef.RetailReceiptCorrection</types>
     </type>
     <minValue xsi:type="core:UndefinedValue"/>
@@ -1636,8 +1636,8 @@
     </synonym>
     <group>FormCommandBarCreateBasedOn</group>
     <commandParameterType>
-      <types>DocumentRef.RetailSalesReceipt</types>
       <types>DocumentRef.RetailReturnReceipt</types>
+      <types>DocumentRef.RetailSalesReceipt</types>
       <types>DocumentRef.RetailReceiptCorrection</types>
     </commandParameterType>
     <representation>Auto</representation>

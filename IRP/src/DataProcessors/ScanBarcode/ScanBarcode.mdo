@@ -110,6 +110,7 @@
       </type>
       <minValue xsi:type="core:UndefinedValue"/>
       <maxValue xsi:type="core:UndefinedValue"/>
+      <fillValue xsi:type="core:UndefinedValue"/>
     </attributes>
     <attributes uuid="8cb14662-8fad-4911-ad43-0085ecdac8a5">
       <name>SerialLotNumber</name>
@@ -122,6 +123,7 @@
       </type>
       <minValue xsi:type="core:UndefinedValue"/>
       <maxValue xsi:type="core:UndefinedValue"/>
+      <fillValue xsi:type="core:UndefinedValue"/>
     </attributes>
     <attributes uuid="73436e19-6c37-471b-9620-83e674c9fbfa">
       <name>ScannedSerialLotNumber</name>
@@ -134,6 +136,7 @@
       </type>
       <minValue xsi:type="core:UndefinedValue"/>
       <maxValue xsi:type="core:UndefinedValue"/>
+      <fillValue xsi:type="core:UndefinedValue"/>
     </attributes>
   </tabularSections>
   <forms uuid="2c533795-bfcc-4d37-b4c7-055e4d38192e">

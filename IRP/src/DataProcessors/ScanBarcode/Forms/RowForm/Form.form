@@ -192,16 +192,16 @@
       <showInFooter>true</showInFooter>
       <extInfo xsi:type="form:InputFieldExtInfo">
         <handlers>
-          <event>Creating</event>
-          <name>SerialLotNumberCreating</name>
+          <event>EditTextChange</event>
+          <name>SerialLotNumberEditTextChange</name>
         </handlers>
         <handlers>
           <event>StartChoice</event>
           <name>SerialLotNumberStartChoice</name>
         </handlers>
         <handlers>
-          <event>EditTextChange</event>
-          <name>SerialLotNumberEditTextChange</name>
+          <event>Creating</event>
+          <name>SerialLotNumberCreating</name>
         </handlers>
         <autoMaxHeight>true</autoMaxHeight>
         <horizontalStretch>true</horizontalStretch>

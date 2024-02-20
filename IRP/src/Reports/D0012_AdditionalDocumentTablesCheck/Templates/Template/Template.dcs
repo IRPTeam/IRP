@@ -1,0 +1,373 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<DataCompositionSchema xmlns="http://v8.1c.ru/8.1/data-composition-system/schema" xmlns:dcscom="http://v8.1c.ru/8.1/data-composition-system/common" xmlns:dcscor="http://v8.1c.ru/8.1/data-composition-system/core" xmlns:dcsset="http://v8.1c.ru/8.1/data-composition-system/settings" xmlns:v8="http://v8.1c.ru/8.1/data/core" xmlns:v8ui="http://v8.1c.ru/8.1/data/ui" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+	<dataSource>
+		<name>DataSource1</name>
+		<dataSourceType>Local</dataSourceType>
+	</dataSource>
+	<dataSet xsi:type="DataSetQuery">
+		<name>Set</name>
+		<field xsi:type="DataSetFieldField">
+			<dataPath>Ref</dataPath>
+			<field>Ref</field>
+		</field>
+		<field xsi:type="DataSetFieldField">
+			<dataPath>DocumentType</dataPath>
+			<field>DocumentType</field>
+			<title xsi:type="v8:LocalStringType">
+				<v8:item>
+					<v8:lang>en</v8:lang>
+					<v8:content>Document type</v8:content>
+				</v8:item>
+			</title>
+		</field>
+		<field xsi:type="DataSetFieldField">
+			<dataPath>Date</dataPath>
+			<field>Date</field>
+			<title xsi:type="v8:LocalStringType">
+				<v8:item>
+					<v8:lang>en</v8:lang>
+					<v8:content>Date</v8:content>
+				</v8:item>
+			</title>
+		</field>
+		<dataSource>DataSource1</dataSource>
+		<query>SELECT
+	Doc.Ref,
+	VALUETYPE(Doc.Ref) AS DocumentType
+INTO AllDocuments
+FROM
+	Document.RetailSalesReceipt AS Doc
+
+UNION
+
+SELECT
+	Doc.Ref,
+	VALUETYPE(Doc.Ref)
+FROM
+	Document.GoodsReceipt AS Doc
+
+UNION
+
+SELECT
+	Doc.Ref,
+	VALUETYPE(Doc.Ref)
+FROM
+	Document.Bundling AS Doc
+
+UNION
+
+SELECT
+	Doc.Ref,
+	VALUETYPE(Doc.Ref)
+FROM
+	Document.InternalSupplyRequest AS Doc
+
+UNION
+
+SELECT
+	Doc.Ref,
+	VALUETYPE(Doc.Ref)
+FROM
+	Document.InventoryTransfer AS Doc
+
+UNION
+
+SELECT
+	Doc.Ref,
+	VALUETYPE(Doc.Ref)
+FROM
+	Document.InventoryTransferOrder AS Doc
+
+UNION
+
+SELECT
+	Doc.Ref,
+	VALUETYPE(Doc.Ref)
+FROM
+	Document.ItemStockAdjustment AS Doc
+
+UNION
+
+SELECT
+	Doc.Ref,
+	VALUETYPE(Doc.Ref)
+FROM
+	Document.PhysicalCountByLocation AS Doc
+
+UNION
+
+SELECT
+	Doc.Ref,
+	VALUETYPE(Doc.Ref)
+FROM
+	Document.PhysicalInventory AS Doc
+
+UNION
+
+SELECT
+	Doc.Ref,
+	VALUETYPE(Doc.Ref)
+FROM
+	Document.PurchaseInvoice AS Doc
+
+UNION
+
+SELECT
+	Doc.Ref,
+	VALUETYPE(Doc.Ref)
+FROM
+	Document.PurchaseOrder AS Doc
+
+UNION
+
+SELECT
+	Doc.Ref,
+	VALUETYPE(Doc.Ref)
+FROM
+	Document.PurchaseReturn AS Doc
+
+UNION
+
+SELECT
+	Doc.Ref,
+	VALUETYPE(Doc.Ref)
+FROM
+	Document.PurchaseReturnOrder AS Doc
+
+UNION
+
+SELECT
+	Doc.Ref,
+	VALUETYPE(Doc.Ref)
+FROM
+	Document.RetailReturnReceipt AS Doc
+
+UNION
+
+SELECT
+	Doc.Ref,
+	VALUETYPE(Doc.Ref)
+FROM
+	Document.SalesInvoice AS Doc
+
+UNION
+
+SELECT
+	Doc.Ref,
+	VALUETYPE(Doc.Ref)
+FROM
+	Document.SalesOrder AS Doc
+
+UNION
+
+SELECT
+	Doc.Ref,
+	VALUETYPE(Doc.Ref)
+FROM
+	Document.SalesReportFromTradeAgent AS Doc
+
+UNION
+
+SELECT
+	Doc.Ref,
+	VALUETYPE(Doc.Ref)
+FROM
+	Document.SalesReportToConsignor AS Doc
+
+UNION
+
+SELECT
+	Doc.Ref,
+	VALUETYPE(Doc.Ref)
+FROM
+	Document.SalesReturn AS Doc
+
+UNION
+
+SELECT
+	Doc.Ref,
+	VALUETYPE(Doc.Ref)
+FROM
+	Document.SalesReturnOrder AS Doc
+
+UNION
+
+SELECT
+	Doc.Ref,
+	VALUETYPE(Doc.Ref)
+FROM
+	Document.ShipmentConfirmation AS Doc
+
+UNION
+
+SELECT
+	Doc.Ref,
+	VALUETYPE(Doc.Ref)
+FROM
+	Document.StockAdjustmentAsSurplus AS Doc
+
+UNION
+
+SELECT
+	Doc.Ref,
+	VALUETYPE(Doc.Ref)
+FROM
+	Document.StockAdjustmentAsWriteOff AS Doc
+
+UNION
+
+SELECT
+	Doc.Ref,
+	VALUETYPE(Doc.Ref)
+FROM
+	Document.Unbundling AS Doc
+;
+
+////////////////////////////////////////////////////////////////////////////////
+SELECT
+	AllDocuments.Ref.Date AS Date,
+	AllDocuments.Ref,
+	AllDocuments.DocumentType
+FROM
+	AllDocuments AS AllDocuments</query>
+	</dataSet>
+	<calculatedField>
+		<dataPath>Status</dataPath>
+		<expression>StrConcat(AdditionalDocumentTableControl.CheckDocument(Ref, &amp;ErrorList), "
+")</expression>
+		<title xsi:type="v8:LocalStringType">
+			<v8:item>
+				<v8:lang>en</v8:lang>
+				<v8:content>Status</v8:content>
+			</v8:item>
+		</title>
+	</calculatedField>
+	<parameter>
+		<name>ErrorList</name>
+		<title xsi:type="v8:LocalStringType">
+			<v8:item>
+				<v8:lang>en</v8:lang>
+				<v8:content>Error list</v8:content>
+			</v8:item>
+		</title>
+		<valueType>
+			<v8:Type>xs:string</v8:Type>
+			<v8:StringQualifiers>
+				<v8:Length>0</v8:Length>
+				<v8:AllowedLength>Variable</v8:AllowedLength>
+			</v8:StringQualifiers>
+		</valueType>
+		<value xsi:nil="true"/>
+		<useRestriction>false</useRestriction>
+		<valueListAllowed>true</valueListAllowed>
+	</parameter>
+	<settingsVariant>
+		<dcsset:name>Default</dcsset:name>
+		<dcsset:presentation xsi:type="xs:string">Default</dcsset:presentation>
+		<dcsset:settings xmlns:style="http://v8.1c.ru/8.1/data/ui/style" xmlns:sys="http://v8.1c.ru/8.1/data/ui/fonts/system" xmlns:web="http://v8.1c.ru/8.1/data/ui/colors/web" xmlns:win="http://v8.1c.ru/8.1/data/ui/colors/windows">
+			<dcsset:filter>
+				<dcsset:item xsi:type="dcsset:FilterItemComparison">
+					<dcsset:left xsi:type="dcscor:Field">Ref.Posted</dcsset:left>
+					<dcsset:comparisonType>Equal</dcsset:comparisonType>
+					<dcsset:right xsi:type="xs:boolean">true</dcsset:right>
+				</dcsset:item>
+				<dcsset:item xsi:type="dcsset:FilterItemComparison">
+					<dcsset:left xsi:type="dcscor:Field">Status</dcsset:left>
+					<dcsset:comparisonType>Filled</dcsset:comparisonType>
+					<dcsset:right xsi:type="xs:string"/>
+				</dcsset:item>
+			</dcsset:filter>
+			<dcsset:dataParameters>
+				<dcscor:item xsi:type="dcsset:SettingsParameterValue">
+					<dcscor:parameter>ErrorList</dcscor:parameter>
+					<dcscor:value xsi:nil="true"/>
+				</dcscor:item>
+			</dcsset:dataParameters>
+			<dcsset:item xsi:type="dcsset:StructureItemGroup">
+				<dcsset:groupItems>
+					<dcsset:item xsi:type="dcsset:GroupItemField">
+						<dcsset:field>DocumentType</dcsset:field>
+						<dcsset:groupType>Items</dcsset:groupType>
+						<dcsset:periodAdditionType>None</dcsset:periodAdditionType>
+						<dcsset:periodAdditionBegin xsi:type="xs:dateTime">0001-01-01T00:00:00</dcsset:periodAdditionBegin>
+						<dcsset:periodAdditionEnd xsi:type="xs:dateTime">0001-01-01T00:00:00</dcsset:periodAdditionEnd>
+					</dcsset:item>
+				</dcsset:groupItems>
+				<dcsset:order>
+					<dcsset:item xsi:type="dcsset:OrderItemAuto"/>
+				</dcsset:order>
+				<dcsset:selection>
+					<dcsset:item xsi:type="dcsset:SelectedItemAuto"/>
+				</dcsset:selection>
+				<dcsset:item xsi:type="dcsset:StructureItemGroup">
+					<dcsset:groupItems>
+						<dcsset:item xsi:type="dcsset:GroupItemField">
+							<dcsset:field>Ref</dcsset:field>
+							<dcsset:groupType>Items</dcsset:groupType>
+							<dcsset:periodAdditionType>None</dcsset:periodAdditionType>
+							<dcsset:periodAdditionBegin xsi:type="xs:dateTime">0001-01-01T00:00:00</dcsset:periodAdditionBegin>
+							<dcsset:periodAdditionEnd xsi:type="xs:dateTime">0001-01-01T00:00:00</dcsset:periodAdditionEnd>
+						</dcsset:item>
+						<dcsset:item xsi:type="dcsset:GroupItemField">
+							<dcsset:field>Status</dcsset:field>
+							<dcsset:groupType>Items</dcsset:groupType>
+							<dcsset:periodAdditionType>None</dcsset:periodAdditionType>
+							<dcsset:periodAdditionBegin xsi:type="xs:dateTime">0001-01-01T00:00:00</dcsset:periodAdditionBegin>
+							<dcsset:periodAdditionEnd xsi:type="xs:dateTime">0001-01-01T00:00:00</dcsset:periodAdditionEnd>
+						</dcsset:item>
+					</dcsset:groupItems>
+					<dcsset:order>
+						<dcsset:item xsi:type="dcsset:OrderItemAuto"/>
+					</dcsset:order>
+					<dcsset:selection>
+						<dcsset:item xsi:type="dcsset:SelectedItemAuto"/>
+					</dcsset:selection>
+					<dcsset:conditionalAppearance>
+						<dcsset:item>
+							<dcsset:selection>
+								<dcsset:item>
+									<dcsset:field>Status</dcsset:field>
+								</dcsset:item>
+							</dcsset:selection>
+							<dcsset:filter>
+								<dcsset:item xsi:type="dcsset:FilterItemComparison">
+									<dcsset:left xsi:type="dcscor:Field">Status</dcsset:left>
+									<dcsset:comparisonType>NotFilled</dcsset:comparisonType>
+									<dcsset:right xsi:type="xs:string"/>
+								</dcsset:item>
+							</dcsset:filter>
+							<dcsset:appearance>
+								<dcscor:item xsi:type="dcsset:SettingsParameterValue">
+									<dcscor:parameter>TextColor</dcscor:parameter>
+									<dcscor:value xsi:type="v8ui:Color">style:AccentColor</dcscor:value>
+								</dcscor:item>
+								<dcscor:item xsi:type="dcsset:SettingsParameterValue">
+									<dcscor:use>false</dcscor:use>
+									<dcscor:parameter>Font</dcscor:parameter>
+									<dcscor:value xsi:type="v8ui:Font" ref="style:LargeTextFont" bold="true" italic="false" underline="false" strikeout="false" kind="StyleItem"/>
+								</dcscor:item>
+								<dcscor:item xsi:type="dcsset:SettingsParameterValue">
+									<dcscor:parameter>Text</dcscor:parameter>
+									<dcscor:value xsi:type="v8:LocalStringType">
+										<v8:item>
+											<v8:lang>en</v8:lang>
+											<v8:content>OK</v8:content>
+										</v8:item>
+									</dcscor:value>
+								</dcscor:item>
+							</dcsset:appearance>
+							<dcsset:useInOverall>DontUse</dcsset:useInOverall>
+							<dcsset:useInFieldsHeader>DontUse</dcsset:useInFieldsHeader>
+							<dcsset:useInHeader>DontUse</dcsset:useInHeader>
+							<dcsset:useInParameters>DontUse</dcsset:useInParameters>
+							<dcsset:useInFilter>DontUse</dcsset:useInFilter>
+							<dcsset:useInResourceFieldsHeader>DontUse</dcsset:useInResourceFieldsHeader>
+							<dcsset:useInOverallHeader>DontUse</dcsset:useInOverallHeader>
+							<dcsset:useInOverallResourceFieldsHeader>DontUse</dcsset:useInOverallResourceFieldsHeader>
+						</dcsset:item>
+					</dcsset:conditionalAppearance>
+				</dcsset:item>
+			</dcsset:item>
+		</dcsset:settings>
+	</settingsVariant>
+</DataCompositionSchema>

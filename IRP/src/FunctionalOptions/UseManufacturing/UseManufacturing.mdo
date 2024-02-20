@@ -12,10 +12,11 @@
   <content>Document.ProductionPlanningCorrection</content>
   <content>Document.ProductionPlanningClosing</content>
   <content>Document.Production</content>
-  <content>Report.DetailingSupplies</content>
-  <content>Report.ProductionPlanning</content>
+  <content>Report.R7010_DetailingSupplies</content>
+  <content>Report.R7030_ProductionPlanning</content>
   <content>DataProcessor.ProductionWorkspace</content>
   <content>Catalog.BusinessUnits.Attribute.Workshop</content>
   <content>Document.ProductionCostsAllocation</content>
   <content>Catalog.BillOfMaterials</content>
+  <content>Subsystem.Reports.Subsystem.Manufacturing</content>
 </mdclass:FunctionalOption>

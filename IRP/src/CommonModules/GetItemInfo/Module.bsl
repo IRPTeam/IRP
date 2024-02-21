@@ -1920,3 +1920,180 @@ Function GetTreeBranchStocks(Item)
 EndFunction
 
 #EndRegion
+
+Function GetDescriptionByTemplate(Val ObjectOrRef, Val Template, LocalizationCode="") Export	
+	Result = ParseDescriptionFormula(ObjectOrRef, Template);
+	
+	If ValueIsFilled(LocalizationCode) Then
+		MultiLanguageRefs = New ValueTable();
+		MultiLanguageRefs.Columns.Add("ArrayIndex");
+		MultiLanguageRefs.Columns.Add("TableIndex");
+		MultiLanguageRefs.Columns.Add("Ref");
+	
+		Array_Select1 = New Array();
+		Array_Select2 = New Array();
+	
+		ArrayIndexCounter = 0;
+		TableIndexCounter = 0;
+		For Each ItemOfArray In Result.ArrayOfAttributeValues Do
+			If ValueIsFilled(ItemOfArray) 
+				And CommonFunctionsServer.IsRef(TypeOf(ItemOfArray))
+				And CommonFunctionsServer.isCommonAttributeUseForMetadata("Description_en", ItemOfArray.Metadata()) Then
+			
+				NewRow = MultiLanguageRefs.Add();
+				NewRow.ArrayIndex = ArrayIndexCounter;
+				NewRow.TableIndex = TableIndexCounter;
+				NewRow.Ref = ItemOfArray;
+			
+				Array_Select1.Add(StrTemplate("&Ref%1 AS Ref%1", TableIndexCounter));
+				Array_Select2.Add(StrTemplate("Table.Ref%1.Description_en AS Descr%1", TableIndexCounter));
+			
+				TableIndexCounter = TableIndexCounter + 1;
+			EndIf;
+			ArrayIndexCounter = ArrayIndexCounter + 1;
+		EndDo;
+	
+		If MultiLanguageRefs.Count() Then
+			Query = New Query();
+			Query.Text = StrTemplate("SELECT %1 INTO Table; SELECT %2 FROM Table AS Table", 
+				StrConcat(Array_Select1, ","), StrConcat(Array_Select2, ",")); 
+			
+			For Each Row In MultiLanguageRefs Do
+				Query.Text = LocalizationEvents.ReplaceDescriptionLocalizationPrefix(Query.Text, StrTemplate("Table.Ref%1", Row.TableIndex), LocalizationCode);
+				Query.SetParameter(StrTemplate("Ref%1", Row.TableIndex), Row.Ref);
+			EndDo;
+	
+			QueryResult = Query.Execute();
+			QuerySelection = QueryResult.Select();
+			If QuerySelection.Next() Then
+				For Each Row In MultiLanguageRefs Do
+					Result.ArrayOfAttributeValues[Row.ArrayIndex] = QuerySelection[StrTemplate("Descr%1", Row.TableIndex)];
+				EndDo;
+			EndIf;
+		EndIf;
+	EndIf;
+	
+	Parameters = Result.ArrayOfAttributeValues;
+	FormulaString = """"" + " + StrReplace(Result.Value,
+		"ArrayOfAttributeValues[",
+		"Parameters[");
+	
+	Description = "";
+	If ValueIsFilled(FormulaString) Then
+		Try
+			Description = Eval(FormulaString);
+		Except
+			Raise R().FormulaEditor_Error04 + Chars.LF + ErrorDescription();	
+		EndTry;
+	EndIf;
+	
+	Return Description;
+EndFunction
+
+Function ParseDescriptionFormula(Val ObjectOrRef, Val Template)
+	Result = New Structure("Value, ArrayOfAttributeValues","" + Template, New Array());
+	PrimitiveTypes = New TypeDescription("Number, String, Date, Boolean, ValueStorage, UUID");
+	
+	For OperandCounter = 0 To StrLen(Template) Do
+		FirstSymbol = StrFind(Template, "[");
+		LastSymbol  = StrFind(Template, "]");
+		
+		If FirstSymbol = 0 Or LastSymbol = 0 Or FirstSymbol > LastSymbol Then
+			Break;
+		EndIf;
+		
+		OperandName  = Mid(Template, FirstSymbol + 1, LastSymbol - FirstSymbol - 1);
+		OperandValue = ObjectOrRef;
+		
+		ArrayOfOperandAttributes = StrSplit(OperandName, "."); 
+		
+		For AttributeCounter = 0 To ArrayOfOperandAttributes.Count()-1 Do
+			
+			AttributeName = ArrayOfOperandAttributes[AttributeCounter];
+			
+			If AttributeCounter > 0 And Not ValueIsFilled(OperandValue) Then
+				Break;
+			EndIf;
+			
+			If Not PrimitiveTypes.ContainsType(TypeOf(OperandValue)) Then
+				_Metadata = OperandValue.Ref.Metadata();
+				MetadataFullName = _Metadata.FullName();
+			Else
+				Raise StrTemplate("Can not eval description formula. error operand [%1]:[%2]", OperandName, AttributeName);				
+			КонецЕсли;
+			
+			If CommonFunctionsClientServer.ObjectHasProperty(_Metadata.Attributes, AttributeName)
+				Or CommonFunctionsClientServer.ObjectHasProperty(_Metadata.StandardAttributes, AttributeName) 
+				Or CommonFunctionsServer.isCommonAttributeUseForMetadata(AttributeName, _Metadata) Then
+				
+				If AttributeCounter > 0 Or  CommonFunctionsServer.IsRef(TypeOf(OperandValue)) Then
+					OperandValue = CommonFunctionsServer.GetRefAttribute(OperandValue, AttributeName);
+				Else
+					OperandValue = OperandValue[AttributeName];
+				EndIf;
+				
+			Else
+				AddAttribute = Undefined;
+				For Each Desc In LocalizationReuse.AllDescription() Do
+					AddAttribute = ChartsOfCharacteristicTypes.AddAttributeAndProperty.FindByAttribute(Desc, AttributeName);
+					If ValueIsFilled(AddAttribute) Then
+						Break;
+					EndIf;
+				EndDo;
+						 
+				If Not ValueIsFilled(AddAttribute) Then
+					Raise StrTemplate("Can not eval description formula. error operand [%1]:[%2]", OperandName, AttributeName);
+				EndIf;
+				
+				If AttributeCounter > 0 Or CommonFunctionsServer.IsRef(TypeOf(OperandValue)) Then
+					
+					Query = New Query();
+					Query.Text =
+					"SELECT TOP 1
+					|	AddAttributes.Value КАК Value
+					|FROM
+					|	" + MetadataFullName + ".AddAttributes AS AddAttributes
+					|WHERE
+					|	AddAttributes.Ref = &Ref
+					|	И AddAttributes.Property = &Property";
+					
+					Query.SetParameter("Ref",   OperandValue);
+					Query.SetParameter("Property", AddAttribute);
+					
+					QuerySelection = Query.Execute().Select();
+					If QuerySelection.Next() Then
+						OperandValue = QuerySelection.Value;
+					Else
+						OperandValue = "";
+					EndIf;
+					
+				Else
+					If TypeOf(OperandValue.AddAttributes) = Type("FormDataCollection") Then
+						TableRow = OperandValue.AddAttributes.Unload().Find(AddAttribute, "Property");
+					Else
+						TableRow = OperandValue.AddAttributes.Find(AddAttribute, "Property");
+					EndIf;
+					
+					OperandValue   = ?(TableRow <> Undefined, TableRow.Value, "");
+				EndIf;
+			EndIf;
+			
+		EndDo;
+		
+		Result.ArrayOfAttributeValues.Add(
+			?(ArrayOfOperandAttributes.Count() > 0 And ValueIsFilled(OperandValue), OperandValue, ""));
+		
+		Result.Value = StrReplace(
+			Result.Value,
+			"[" + OperandName + "]",
+			"ArrayOfAttributeValues[" + OperandCounter + "]");
+		Template = StrReplace(
+			Template,
+			"[" + OperandName + "]",
+			"");
+		
+	EndDo;
+	
+	Return Result;
+	
+EndFunction

@@ -159,6 +159,59 @@ Procedure InternalCommandAction(Command) Export
 EndProcedure
 
 &AtClient
+Procedure EditItemDescriptionTemplate(Command)
+	EditItemTemplate("ItemDescriptionTemplate");
+EndProcedure
+
+&AtClient
+Procedure EditItemLocalFullDescriptionTemplate(Command)
+	EditItemTemplate("ItemLocalFullDescriptionTemplate");
+EndProcedure
+
+&AtClient
+Procedure EditItemForeignFullDescriptionTemplate(Command)
+	EditItemTemplate("ItemForeignFullDescriptionTemplate");
+EndProcedure
+
+&AtClient
+Procedure EditItemTemplate(TemplateName)
+	If ThisObject.Modified Then
+		ShowQueryBox(New NotifyDescription("EditItemTemplateEnd", ThisObject, New Structure("TemplateName", TemplateName)), 
+			R().QuestionToUser_001, QuestionDialogMode.OKCancel);
+	Else
+		EditItemTemplateAtClient(TemplateName);
+	EndIf;
+EndProcedure
+
+&AtClient
+Procedure EditItemTemplateEnd(Result, NotifyParameters) Export
+	If Result = DialogReturnCode.OK Then
+		If Write() Then
+			EditItemTemplateAtClient(NotifyParameters.TemplateName);
+		EndIf;
+	EndIf;
+EndProcedure
+
+&AtClient
+Procedure EditItemTemplateAtClient(TemplateName)
+	Notify = New NotifyDescription("OnFinishEditItemTemplate", ThisObject, New Structure("TemplateName", TemplateName));
+	FormParameters = New Structure();
+	FormParameters.Insert("Formula", Object[TemplateName]);
+	FormParameters.Insert("PropertySet"   , PredefinedValue("Catalog.AddAttributeAndPropertySets.Catalog_Items"));
+	FormParameters.Insert("TemplateOwner" , "ItemTypes");
+	FormParameters.Insert("TemplateName"  , "ItemTemplate");
+	
+	OpenForm("CommonForm.FormulaEditor", FormParameters, ThisObject,,,,Notify,FormWindowOpeningMode.LockOwnerWindow);
+EndProcedure
+
+&AtClient
+Procedure OnFinishEditItemTemplate(Result, NotfyParameters) Export
+	If ValueIsFilled(Result) And Object.ItemDescriptionTemplate <> Result Then
+		ThisObject.Modified = True;
+		Object[NotfyParameters.TemplateName] = Result;
+	EndIf;
+EndProcedure
+
 Procedure InternalCommandActionWithServerContext(Command) Export
 	InternalCommandActionWithServerContextAtServer(Command.Name);
 EndProcedure

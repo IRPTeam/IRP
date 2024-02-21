@@ -180,7 +180,26 @@ EndProcedure
 //  Form - See Catalog.Items.Form.ItemForm
 //  GroupName - String - Group name
 //  AddInfo - Undefined, Structure - Add info
-Procedure CreateMainFormItemDescription(Form, GroupName, AddInfo = Undefined) Export
+Procedure CreateMainFormItemDescription(Form, GroupName, Parameters = Undefined) Export
+	
+	CreateFillByTemplate_Description        = False;
+	CreateFillByTemplate_LocalDescription   = False;
+	CreateFillByTemplate_ForeignDescription = False;
+	
+	If Parameters <> Undefined Then
+		If Parameters.Property("CreateFillByTemplate_Description") Then
+			CreateFillByTemplate_Description = Parameters.CreateFillByTemplate_Description;
+		EndIf;
+	
+		If Parameters.Property("CreateFillByTemplate_LocalDescription") Then
+			CreateFillByTemplate_Description = Parameters.CreateFillByTemplate_LocalDescription;
+		EndIf;
+	
+		If Parameters.Property("CreateFillByTemplate_ForeignDescription") Then
+			CreateFillByTemplate_Description = Parameters.CreateFillByTemplate_ForeignDescription;
+		EndIf;
+	EndIf;
+	
 	ParentGroup = Form.Items.Find(GroupName); // FormGroup, FormGroupExtensionForAUsualGroup
 	ParentGroup.Group = ChildFormItemsGroup.Vertical;
 
@@ -204,27 +223,88 @@ Procedure CreateMainFormItemDescription(Form, GroupName, AddInfo = Undefined) Ex
 		EndIf;
 
 		If StrEndsWith(Attribute, LocalizationCode) Then
-			NewAttribute = Form.Items.Add(Attribute, Type("FormField"), ParentGroup);
+			
+			UnionGroup = Undefined;
+			If CreateFillByTemplate_Description Then
+				UnionGroup = Form.Items.Add("Group_" + Attribute, Type("FormGroup"), ParentGroup);
+				UnionGroup.Type = FormGroupType.UsualGroup;
+				UnionGroup.Representation = UsualGroupRepresentation.None;
+				UnionGroup.Group = ChildFormItemsGroup.AlwaysHorizontal;
+				UnionGroup.ShowTitle = False;
+			EndIf;
+
+			NewAttribute = Form.Items.Add(Attribute, Type("FormField"), ?(UnionGroup <> Undefined, UnionGroup, ParentGroup));
 			NewAttribute.Type = FormFieldType.InputField;
 			NewAttribute.DataPath = "Object." + Attribute;
 			NewAttribute.OpenButton = True;
 			NewAttribute.AutoMarkIncomplete = True;
 			//@skip-check module-attachable-event-handler-name
 			NewAttribute.SetAction("Opening", "DescriptionOpening");
+			
+			If CreateFillByTemplate_Description Then
+				NewCommand = Form.Commands.Add("CommandFillByTemplate_Description_" + Attribute);
+				NewCommand.Picture = PictureLib.FillByTemplate;
+				NewCommand.Representation = ButtonRepresentation.Picture;
+				NewCommand.Action = "FillDescriptionByTemplate";
+			
+				NewButton = Form.Items.Add("ButtonFillByTemplate_Description_" + Attribute, Type("FormButton"),UnionGroup);
+				NewButton.CommandName = "CommandFillByTemplate_Description_" + Attribute;
+			EndIf;
+
 		EndIf;
 	EndDo;
 
 	MetadataObj = Form.Object.Ref.Metadata();
 	If CommonFunctionsServer.isCommonAttributeUseForMetadata("LocalFullDescription", MetadataObj) Then
-		NewAttribute = Form.Items.Add("LocalFullDescription", Type("FormField"), ParentGroup);
+		
+		UnionGroup = Undefined;
+		If CreateFillByTemplate_LocalDescription Then
+			UnionGroup = Form.Items.Add("Group_LocalFullDescription", Type("FormGroup"), ParentGroup);
+			UnionGroup.Type = FormGroupType.UsualGroup;
+			UnionGroup.Representation = UsualGroupRepresentation.None;
+			UnionGroup.Group = ChildFormItemsGroup.AlwaysHorizontal;
+			UnionGroup.ShowTitle = False;
+		EndIf;
+		
+		NewAttribute = Form.Items.Add("LocalFullDescription", Type("FormField"), ?(UnionGroup <> Undefined, UnionGroup, ParentGroup));
 		NewAttribute.Type = FormFieldType.InputField;
 		NewAttribute.DataPath = "Object.LocalFullDescription";
+		
+		If CreateFillByTemplate_LocalDescription Then
+			NewCommand = Form.Commands.Add("CommandFillByTemplate_LocalDescription");
+			NewCommand.Picture = PictureLib.FillByTemplate;
+			NewCommand.Representation = ButtonRepresentation.Picture;
+			NewCommand.Action = "FillDescriptionByTemplate";
+			
+			NewButton = Form.Items.Add("ButtonFillByTemplate_LocalDescription", Type("FormButton"),UnionGroup);
+			NewButton.CommandName = "CommandFillByTemplate_LocalDescription";
+		EndIf;
 	EndIf;
 
 	If CommonFunctionsServer.isCommonAttributeUseForMetadata("ForeignFullDescription", MetadataObj) Then
-		NewAttribute = Form.Items.Add("ForeignFullDescription", Type("FormField"), ParentGroup);
+		
+		UnionGroup = Undefined;
+		If CreateFillByTemplate_ForeignDescription Then
+			UnionGroup = Form.Items.Add("Group_ForeignFullDescription", Type("FormGroup"), ParentGroup);
+			UnionGroup.Type = FormGroupType.UsualGroup;
+			UnionGroup.Representation = UsualGroupRepresentation.None;
+			UnionGroup.Group = ChildFormItemsGroup.AlwaysHorizontal;
+			UnionGroup.ShowTitle = False;
+		EndIf;
+		
+		NewAttribute = Form.Items.Add("ForeignFullDescription", Type("FormField"), ?(UnionGroup <> Undefined, UnionGroup, ParentGroup));
 		NewAttribute.Type = FormFieldType.InputField;
 		NewAttribute.DataPath = "Object.ForeignFullDescription";
+		
+		If CreateFillByTemplate_ForeignDescription Then
+			NewCommand = Form.Commands.Add("CommandFillByTemplate_ForeignDescription");
+			NewCommand.Picture = PictureLib.FillByTemplate;
+			NewCommand.Representation = ButtonRepresentation.Picture;
+			NewCommand.Action = "FillDescriptionByTemplate";
+			
+			NewButton = Form.Items.Add("ButtonFillByTemplate_ForeignDescription", Type("FormButton"),UnionGroup);
+			NewButton.CommandName = "CommandFillByTemplate_ForeignDescription";
+		EndIf;
 	EndIf;
 	
 EndProcedure
@@ -239,7 +319,9 @@ EndProcedure
 Procedure CreateSubFormItemDescription(Form, Values, GroupName, AddInfo = Undefined) Export
 	ParentGroup = Form.Items.Find(GroupName); // FormGroup, FormGroupExtensionForAUsualGroup
 	ParentGroup.Group = ChildFormItemsGroup.Vertical;
-
+	
+	CreateFillByTemplate_Description = CommonFunctionsClientServer.GetFromAddInfo(AddInfo, "CreateFillByTemplate_Description", False);
+	
 	If ParentGroup = Undefined Then
 		Return;
 	EndIf;
@@ -260,11 +342,32 @@ Procedure CreateSubFormItemDescription(Form, Values, GroupName, AddInfo = Undefi
 	For Each AttributeName In AttributeNames Do
 		MetadataValue = Metadata.CommonAttributes[AttributeName];
 		If Form.Items.Find(AttributeName) = Undefined Then
-			NewAttribute = Form.Items.Add(MetadataValue.Name, Type("FormField"), ParentGroup);
+			
+			UnionGroup = Undefined;
+			If CreateFillByTemplate_Description Then
+				UnionGroup = Form.Items.Add("Group_" + MetadataValue.Name, Type("FormGroup"), ParentGroup);
+				UnionGroup.Type = FormGroupType.UsualGroup;
+				UnionGroup.Representation = UsualGroupRepresentation.None;
+				UnionGroup.Group = ChildFormItemsGroup.AlwaysHorizontal;
+				UnionGroup.ShowTitle = False;
+			EndIf;
+			
+			NewAttribute = Form.Items.Add(MetadataValue.Name, Type("FormField"), ?(UnionGroup <> Undefined, UnionGroup, ParentGroup));
 			NewAttribute.Type = FormFieldType.InputField;
 			NewAttribute.DataPath = MetadataValue.Name;
 
 			Form[MetadataValue.Name] = Values[MetadataValue.Name];
+			
+			If CreateFillByTemplate_Description Then
+				NewCommand = Form.Commands.Add("CommandFillByTemplate" + MetadataValue.Name);
+				NewCommand.Picture = PictureLib.FillByTemplate;
+				NewCommand.Representation = ButtonRepresentation.Picture;
+				NewCommand.Action = "FillDescriptionByTemplate";
+			
+				NewButton = Form.Items.Add("ButtonFillByTemplate" + MetadataValue.Name, Type("FormButton"),UnionGroup);
+				NewButton.CommandName = "CommandFillByTemplate" + MetadataValue.Name;
+			EndIf;
+			
 		EndIf;
 	EndDo;
 EndProcedure
@@ -447,6 +550,15 @@ Function NewCustomSearchFilter() Export
 	Structure.Insert("ComparisonType", ComparisonType.Equal);
 	Structure.Insert("DataCompositionComparisonType", Undefined);
 	Return Structure;
+EndFunction
+
+Function DescriptionParameters() Export
+	DescriptionParameters = New Structure();
+	DescriptionParameters.Insert("CreateFillByTemplate_Description", False);
+	DescriptionParameters.Insert("CreateFillByTemplate_LocalDescription", False);
+	DescriptionParameters.Insert("CreateFillByTemplate_ForeignDescription", False);
+	DescriptionParameters.Insert("DescriptionTemplate", Undefined);
+	Return DescriptionParameters;
 EndFunction
 
 #EndRegion

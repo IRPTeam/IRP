@@ -697,15 +697,29 @@ Function PickupItemEnd(Val Parameters, Val ScanData) Export
 					  |PresentationStartChoice_Key, 
 					  |StartChoice_Key,
 					  |ControlStringStartChoice_Key", 0, 0, 0));
-					  
 	
-	Object = Parameters.ServerSideParameters.ServerParameters.Object;
+	Object = Parameters.ServerSideParameters.ServerParameters.Object; // See Document.PhysicalCountByLocation.Form.DocumentForm.Object
 	
-	For Each ScanDataItem In ScanData Do
+	For Each ScanDataItem In ScanData Do // See BarcodeServer.FillFoundedItems
 		
 		If ScanDataItem.isService And Parameters.Filter.DisableIfIsService Then
 			Result.UserMessages.Add(StrTemplate(R().InfoMessage_026, ScanDataItem.Item));
 			Continue;
+		EndIf;
+		
+		If (Parameters.UseSerialLotNumbers OR Parameters.isSerialLotNumberAtRow) And ValueIsFilled(ScanDataItem.SerialLotNumber) And ScanDataItem.SerialLotNumber.EachSerialLotNumberIsUnique Then
+			
+			If Parameters.UseSerialLotNumbers Then
+				If Object.SerialLotNumbers.FindRows(New Structure("SerialLotNumber", ScanDataItem.SerialLotNumber)).Count() > 0 Then
+					Result.UserMessages.Add(StrTemplate(R().Error_113, ScanDataItem.SerialLotNumber));
+					Continue;
+				EndIf;
+			ElsIf Parameters.isSerialLotNumberAtRow Then
+				If Object.ItemList.FindRows(New Structure("SerialLotNumber", ScanDataItem.SerialLotNumber)).Count() > 0 Then
+					Result.UserMessages.Add(StrTemplate(R().Error_113, ScanDataItem.SerialLotNumber));
+					Continue;
+				EndIf;
+			EndIf;
 		EndIf;
 		
 		FoundedRows = FindRows(Object, Parameters, ScanDataItem);

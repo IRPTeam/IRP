@@ -1606,6 +1606,13 @@ Strings.Insert("MoneyTransfer_DR_R5022T_Expenses_CR_R3021B_CashInTransit",
 	Strings.Insert("GPU_Load_SaveInBase", NStr("en = 'Load images. Save file records'", Lang));
 	Strings.Insert("GPU_CheckingFilesExist", NStr("en = 'Checking if files exist'", Lang));
 #EndRegion
+
+#Region AuditLock
+	Strings.Insert("AuditLock_001", NStr("en = 'Audit lock (set lock)'", Lang));
+	Strings.Insert("AuditLock_002", NStr("en = 'Audit lock (unlock)'", Lang));
+	Strings.Insert("AuditLock_003", NStr("en = 'Access is denied'", Lang));
+	Strings.Insert("AuditLock_004", NStr("en = 'Document is locked by audit lock'", Lang));	
+#EndRegion
 	
 	Return Strings;
 EndFunction

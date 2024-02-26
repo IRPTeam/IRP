@@ -125,6 +125,7 @@ Function PaymentList()
 		   |	PaymentList.Partner,
 		   |	PaymentList.Employee,
 		   |	PaymentList.AdditionalAnalytic,
+		   |	PaymentList.Project,
 		   |	PaymentList.Ref.Branch AS Branch,
 		   |	PaymentList.Ref.TransactionType = VALUE(Enum.CashExpenseTransactionTypes.CurrentCompanyExpense) AS IsCurrentCompanyExpense,
 		   |	PaymentList.Ref.TransactionType = VALUE(Enum.CashExpenseTransactionTypes.OtherCompanyExpense) AS IsOtherCompanyExpense,

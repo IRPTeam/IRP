@@ -648,6 +648,7 @@ Function AuditLock_GetCommandDescription()
 	
 	CommandDescription.HasActionInitialization = True;
 	CommandDescription.HasActionOnCommandCreate = True;
+	CommandDescription.HasActionAfterRunning = True;
 	
 	CommandDescription.UsingListForm = False;
 	CommandDescription.UsingChoiceForm = False;

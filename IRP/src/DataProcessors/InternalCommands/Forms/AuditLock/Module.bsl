@@ -44,10 +44,7 @@ Procedure AfterRunning(Targets, Form, CommandFormItem, MainAttribute, AddInfo = 
 		EndDo;
 	Else
 		NotifyChanged(Targets);
-	EndIf;
-	
-	//Form.RefreshDataRepresentation();
-	
+	EndIf;	
 EndProcedure
 
 #EndRegion

@@ -1478,12 +1478,6 @@ GROUP BY
             </content>
           </localValue>
         </title>
-        <role>
-          <dimension>true</dimension>
-          <accountTypeExpression></accountTypeExpression>
-          <balanceGroupName></balanceGroupName>
-          <accountField></accountField>
-        </role>
       </fields>
       <fields xsi:type="schema:DataCompositionSchemaDataSetField">
         <dataPath>AuditLockStatus</dataPath>
@@ -1496,12 +1490,6 @@ GROUP BY
             </content>
           </localValue>
         </title>
-        <role>
-          <dimension>true</dimension>
-          <accountTypeExpression></accountTypeExpression>
-          <balanceGroupName></balanceGroupName>
-          <accountField></accountField>
-        </role>
       </fields>
       <fields xsi:type="schema:DataCompositionSchemaDataSetField">
         <dataPath>LegalNameContract</dataPath>

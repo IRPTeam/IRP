@@ -802,20 +802,40 @@ EndFunction
 #Region CHANGE_BASIS_DOCUMENT_BY_AGREEMENT
 
 Function ChangeBasisDocumentByAgreementOptions() Export
-	Return GetChainLinkOptions("Agreement, CurrentBasisDocument");
+	Return GetChainLinkOptions("Agreement, DebtType, CurrentBasisDocument, CheckAgreementInBasisDocument");
 EndFunction
 
 Function ChangeBasisDocumentByAgreementExecute(Options) Export
+	
+	If Options.CheckAgreementInBasisDocument = False Then
+		CheckAgreementInBasisDocument = False;
+	Else
+		CheckAgreementInBasisDocument = True;
+	EndIf;
+	
 	If Not ValueIsFilled(Options.Agreement) Then
 		Return Undefined;
 	EndIf;
+	
 	AgreementInfo = CatAgreementsServer.GetAgreementInfo(Options.Agreement);
+	
 	If AgreementInfo.ApArPostingDetail <> PredefinedValue("Enum.ApArPostingDetail.ByDocuments") Then
 		Return Undefined;
-	ElsIf ValueIsFilled(Options.CurrentBasisDocument)
+	EndIf;
+	
+	If CheckAgreementInBasisDocument
+		And ValueIsFilled(Options.CurrentBasisDocument)
 		And Not ServiceSystemServer.GetObjectAttribute(Options.CurrentBasisDocument, "Agreement") = Options.Agreement Then
 		Return Undefined;
 	EndIf;
+	
+	If ValueIsFilled(Options.DebtType) Then
+		If Options.DebtType = PredefinedValue("Enum.DebtTypes.AdvanceCustomer")
+			Or Options.DebtType = PredefinedValue("Enum.DebtTypes.AdvanceVendor") Then
+			Return Undefined;
+		EndIf;
+	EndIf;
+	
 	Return Options.CurrentBasisDocument;
 EndFunction
 
@@ -1017,12 +1037,14 @@ EndFunction
 #Region CHANGE_AGREEMENT_BY_PARTNER
 
 Function ChangeAgreementByPartnerOptions() Export
-	Return GetChainLinkOptions("Partner, Agreement, CurrentDate, AgreementType, TransactionType");
+	Return GetChainLinkOptions("Partner, Agreement, CurrentDate, AgreementType, TransactionType, DebtType");
 EndFunction
 
 Function ChangeAgreementByPartnerExecute(Options) Export
 	If ValueIsFilled(Options.TransactionType) Then
 		Options.AgreementType = ModelServer_V2.GetAgreementTypeByTransactionType(Options.TransactionType);
+	ElsIf ValueIsFilled(Options.DebtType) Then
+		Options.AgreementType = ModelServer_V2.GetAgreementTypeByDebtType(Options.DebtType);
 	EndIf;
 	Return DocumentsServer.GetAgreementByPartner(Options);
 EndFunction

@@ -19,6 +19,7 @@ EndFunction
 Function T2014S_AdvancesInfo_BP_CP() Export
 	Return 
 		"SELECT
+		|	VALUE(Enum.RecordType.Receipt) AS RecordType,
 		|	PaymentList.Period AS Date,
 		|	PaymentList.Key,
 		|	PaymentList.Company,
@@ -42,6 +43,7 @@ Function T2014S_AdvancesInfo_BP_CP() Export
 		|UNION ALL
 		|
 		|SELECT
+		|	VALUE(Enum.RecordType.Receipt),
 		|	PaymentList.Period,
 		|	PaymentList.Key,
 		|	PaymentList.Company,
@@ -64,53 +66,58 @@ Function T2014S_AdvancesInfo_BP_CP() Export
 EndFunction
 
 Function T2014S_AdvancesInfo_BR_CR() Export
-	Return "SELECT
-		   |	PaymentList.Period AS Date,
-		   |	PaymentList.Key,
-		   |	PaymentList.Company,
-		   |	PaymentList.Branch,
-		   |	PaymentList.Currency,
-		   |	PaymentList.Partner,
-		   |	PaymentList.LegalName,
-		   |	PaymentList.AdvanceAgreement,
-		   |	PaymentList.Project,
-		   |	PaymentList.Order,
-		   |	TRUE AS IsCustomerAdvance,
-		   |	FALSE AS IsVendorAdvance,
-		   |	PaymentList.Amount
-		   |INTO T2014S_AdvancesInfo
-		   |FROM
-		   |	PaymentList AS PaymentList
-		   |WHERE
-		   |	(PaymentList.IsPaymentFromCustomer OR PaymentList.IsPaymentFromCustomerByPOS)
-		   |	AND PaymentList.IsAdvance
-		   |
-		   |UNION ALL
-		   |
-		   |SELECT
-		   |	PaymentList.Period,
-		   |	PaymentList.Key,
-		   |	PaymentList.Company,
-		   |	PaymentList.Branch,
-		   |	PaymentList.Currency,
-		   |	PaymentList.Partner,
-		   |	PaymentList.LegalName,
-		   |	PaymentList.AdvanceAgreement,
-		   |	PaymentList.Project,
-		   |	UNDEFINED,
-		   |	FALSE,
-		   |	TRUE,
-		   |	-PaymentList.Amount AS Amount
-		   |FROM
-		   |	PaymentList AS PaymentList
-		   |WHERE
-		   |	PaymentList.IsReturnFromVendor
-		   |	AND PaymentList.IsAdvance";
+	Return 
+		"SELECT
+		|	VALUE(Enum.RecordType.Receipt) AS RecordType,
+		|	PaymentList.Period AS Date,
+		|	PaymentList.Key,
+		|	PaymentList.Company,
+		|	PaymentList.Branch,
+		|	PaymentList.Currency,
+		|	PaymentList.Partner,
+		|	PaymentList.LegalName,
+		|	PaymentList.AdvanceAgreement,
+		|	PaymentList.Project,
+		|	PaymentList.Order,
+		|	TRUE AS IsCustomerAdvance,
+		|	FALSE AS IsVendorAdvance,
+		|	PaymentList.Amount
+		|INTO T2014S_AdvancesInfo
+		|FROM
+		|	PaymentList AS PaymentList
+		|WHERE
+		|	(PaymentList.IsPaymentFromCustomer
+		|	OR PaymentList.IsPaymentFromCustomerByPOS)
+		|	AND PaymentList.IsAdvance
+		|
+		|UNION ALL
+		|
+		|SELECT
+		|	VALUE(Enum.RecordType.Receipt),
+		|	PaymentList.Period,
+		|	PaymentList.Key,
+		|	PaymentList.Company,
+		|	PaymentList.Branch,
+		|	PaymentList.Currency,
+		|	PaymentList.Partner,
+		|	PaymentList.LegalName,
+		|	PaymentList.AdvanceAgreement,
+		|	PaymentList.Project,
+		|	UNDEFINED,
+		|	FALSE,
+		|	TRUE,
+		|	-PaymentList.Amount AS Amount
+		|FROM
+		|	PaymentList AS PaymentList
+		|WHERE
+		|	PaymentList.IsReturnFromVendor
+		|	AND PaymentList.IsAdvance";
 EndFunction
 
 Function T2014S_AdvancesInfo_DebitNote() Export
 	Return 
 		"SELECT
+		|	VALUE(Enum.RecordType.Receipt) AS RecordType,
 		|	Transactions.Period AS Date,
 		|	Transactions.Company,
 		|	Transactions.Branch,
@@ -132,6 +139,7 @@ EndFunction
 Function T2014S_AdvancesInfo_CreditNote() Export
 	Return 
 		"SELECT
+		|	VALUE(Enum.RecordType.Receipt) AS RecordType,
 		|	Transactions.Period AS Date,
 		|	Transactions.Company,
 		|	Transactions.Branch,
@@ -150,9 +158,117 @@ Function T2014S_AdvancesInfo_CreditNote() Export
 		|	Transactions.IsCustomer";
 EndFunction
 
+Function T2014S_AdvancesInfo_DebitCreditNote() Export
+	Return 
+		"SELECT
+		|
+		|	case
+		|		when Doc.SendIsCustomerAdvance
+		|			then case
+		|				when Doc.PartnersIsEqual
+		|					then case
+		|						when Doc.IsReceiveTransactionCustomer
+		|						OR Doc.IsReceiveAdvanceCustomer
+		|							then VALUE(AccumulationRecordType.Expense)
+		|						else VALUE(AccumulationRecordType.Receipt)
+		|					end
+		|				else case
+		|					when Doc.IsReceiveTransactionCustomer
+		|					OR Doc.IsReceiveAdvanceVendor
+		|					OR Doc.IsReceiveTransactionVendor
+		|					OR Doc.IsReceiveAdvanceCustomer
+		|						then VALUE(AccumulationRecordType.Expense)
+		|					else VALUE(AccumulationRecordType.Receipt)
+		|				end
+		|			end
+		|		else case
+		|			when Doc.PartnersIsEqual
+		|				then case
+		|					when Doc.IsReceiveTransactionVendor
+		|					OR Doc.IsReceiveAdvanceVendor
+		|						then VALUE(AccumulationRecordType.Expense)
+		|					else VALUE(AccumulationRecordType.Receipt)
+		|				end
+		|			else case
+		|				when Doc.IsReceiveTransactionVendor
+		|				OR Doc.IsReceiveAdvanceVendor
+		|					then VALUE(AccumulationRecordType.Expense)
+		|				else VALUE(AccumulationRecordType.Receipt)
+		|			end
+		|		end
+		|	end AS RecordType,
+		|	Doc.Period AS Date,
+		|	Doc.Company AS Company,
+		|	Doc.SendBranch AS Branch,
+		|	Doc.SendPartner AS Partner,
+		|	Doc.SendLegalName AS LegalName,
+		|	Doc.Currency AS Currency,
+		|	Doc.SendAgreement AS AdvanceAgreement,
+		|	Doc.SendProject AS Project,
+		|	Doc.SendOrder AS Order,
+		|	Doc.SendIsCustomerAdvance AS IsCustomerAdvance,
+		|	Doc.SendIsVendorAdvance AS IsVendorAdvance,
+		|	Doc.Amount
+		|INTO T2014S_AdvancesInfo
+		|FROM
+		|	SendAdvances AS Doc
+		|
+		|UNION ALL
+		|
+		|SELECT
+		|	case
+		|		when Doc.ReceiveIsCustomerAdvance
+		|			then case
+		|				when Doc.PartnersIsEqual
+		|					then case
+		|						when Doc.IsSendTransactionVendor
+		|						OR Doc.IsSendAdvanceCustomer
+		|							then VALUE(AccumulationRecordType.Receipt)
+		|						else VALUE(AccumulationRecordType.Expense)
+		|					end
+		|				else case
+		|					when Doc.IsSendTransactionVendor
+		|					OR Doc.IsSendAdvanceCustomer
+		|						then VALUE(AccumulationRecordType.Receipt)
+		|					else VALUE(AccumulationRecordType.Expense)
+		|				end
+		|			end
+		|		else case
+		|			when Doc.PartnersIsEqual
+		|				then case
+		|					when Doc.IsSendTransactionCustomer
+		|					OR Doc.IsSendAdvanceVendor
+		|						then VALUE(AccumulationRecordType.Receipt)
+		|					else VALUE(AccumulationRecordType.Expense)
+		|				end
+		|			else case
+		|				when Doc.IsSendTransactionCustomer
+		|				OR Doc.IsSendAdvanceVendor
+		|					then VALUE(AccumulationRecordType.Receipt)
+		|				else VALUE(AccumulationRecordType.Expense)
+		|			end
+		|		end
+		|	end,
+		|	Doc.Period,
+		|	Doc.Company,
+		|	Doc.ReceiveBranch,
+		|	Doc.ReceivePartner,
+		|	Doc.ReceiveLegalName,
+		|	Doc.Currency,
+		|	Doc.ReceiveAgreement,
+		|	Doc.ReceiveProject,
+		|	Doc.ReceiveOrder,
+		|	Doc.ReceiveIsCustomerAdvance AS IsCustomerAdvance,
+		|	Doc.ReceiveIsVendorAdvance AS IsVendorAdvance,
+		|	Doc.Amount
+		|FROM
+		|	ReceiveAdvances AS Doc";
+EndFunction
+
 Function T2014S_AdvancesInfo_Cheque() Export 
 	Return 
 		"SELECT
+		|	VALUE(Enum.RecordType.Receipt) AS RecordType,
 		|	Table.Period AS Date,
 		|	Table.Company,
 		|	Table.Branch,
@@ -175,6 +291,7 @@ Function T2014S_AdvancesInfo_Cheque() Export
 		|UNION ALL
 		|
 		|SELECT
+		|	VALUE(Enum.RecordType.Receipt),
 		|	Table.Period,
 		|	Table.Company,
 		|	Table.Branch,
@@ -196,6 +313,7 @@ Function T2014S_AdvancesInfo_Cheque() Export
 		|UNION ALL
 		|
 		|SELECT
+		|	VALUE(Enum.RecordType.Receipt),
 		|	Table.Period,
 		|	Table.Company,
 		|	Table.Branch,
@@ -217,6 +335,7 @@ Function T2014S_AdvancesInfo_Cheque() Export
 		|UNION ALL
 		|
 		|SELECT
+		|	VALUE(Enum.RecordType.Receipt),
 		|	Table.Period,
 		|	Table.Company,
 		|	Table.Branch,
@@ -238,6 +357,7 @@ Function T2014S_AdvancesInfo_Cheque() Export
 		|UNION ALL
 		|
 		|SELECT
+		|	VALUE(Enum.RecordType.Receipt),
 		|	Table.Period,
 		|	Table.Company,
 		|	Table.Branch,
@@ -259,6 +379,7 @@ Function T2014S_AdvancesInfo_Cheque() Export
 		|UNION ALL
 		|
 		|SELECT
+		|	VALUE(Enum.RecordType.Receipt),
 		|	Table.Period,
 		|	Table.Company,
 		|	Table.Branch,
@@ -281,6 +402,7 @@ EndFunction
 Function T2014S_AdvancesInfo_SOC() Export
 	Return 
 		"SELECT DISTINCT
+		|	VALUE(Enum.RecordType.Receipt) AS RecordType,
 		|	&Period AS Date,
 		|	TRUE AS IsCustomerAdvance,
 		|	TRUE AS IsSalesOrderClose,
@@ -306,6 +428,7 @@ EndFunction
 Function T2014S_AdvancesInfo_POC() Export
 	Return 
 		"SELECT DISTINCT
+		|	VALUE(Enum.RecordType.Receipt) AS RecordType,
 		|	&Period AS Date,
 		|	TRUE AS IsVendorAdvance,
 		|	TRUE AS IsPurchaseOrderClose,

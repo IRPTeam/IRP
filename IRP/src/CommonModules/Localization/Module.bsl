@@ -1064,6 +1064,7 @@ Function Strings(Lang) Export
 	Strings.Insert("Error_139", NStr("en = 'Description not unique [%1]'", Lang));	
 	Strings.Insert("Error_140", NStr("en = 'Partner type is required'", Lang));	
 	Strings.Insert("Error_141", NStr("en = '[%1] cannot be changed, has posted documents'", Lang));	
+	Strings.Insert("Error_142", NStr("en = 'Wrong combination of send and receive debt type'", Lang));	
 	
 	Strings.Insert("Error_FillTotalAmount", NStr("en = 'Fill total amount. Row: [%1]'", Lang));
 	

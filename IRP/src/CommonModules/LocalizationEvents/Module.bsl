@@ -192,11 +192,11 @@ Procedure CreateMainFormItemDescription(Form, GroupName, Parameters = Undefined)
 		EndIf;
 	
 		If Parameters.Property("CreateFillByTemplate_LocalDescription") Then
-			CreateFillByTemplate_Description = Parameters.CreateFillByTemplate_LocalDescription;
+			CreateFillByTemplate_LocalDescription = Parameters.CreateFillByTemplate_LocalDescription;
 		EndIf;
 	
 		If Parameters.Property("CreateFillByTemplate_ForeignDescription") Then
-			CreateFillByTemplate_Description = Parameters.CreateFillByTemplate_ForeignDescription;
+			CreateFillByTemplate_ForeignDescription = Parameters.CreateFillByTemplate_ForeignDescription;
 		EndIf;
 	EndIf;
 	

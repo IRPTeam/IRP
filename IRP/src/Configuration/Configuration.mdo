@@ -192,6 +192,7 @@
   <commonPictures>CommonPicture.IconSetNotActive</commonPictures>
   <commonPictures>CommonPicture.IconShowOnlyActive</commonPictures>
   <commonPictures>CommonPicture.IconShowAnyActive</commonPictures>
+  <commonPictures>CommonPicture.FillByTemplate</commonPictures>
   <commonPictures>CommonPicture.PaymentStatuses</commonPictures>
   <sessionParameters>SessionParameter.Buffer</sessionParameters>
   <sessionParameters>SessionParameter.ClientType</sessionParameters>
@@ -671,8 +672,6 @@
   <commonModules>CommonModule.JorDocumentsClientServer</commonModules>
   <commonModules>CommonModule.JorDocumentsServer</commonModules>
   <commonModules>CommonModule.LandedCostServer</commonModules>
-  <commonModules>CommonModule.LoadDataFromTableClient</commonModules>
-  <commonModules>CommonModule.LoadDataFromTableServer</commonModules>
   <commonModules>CommonModule.Localization</commonModules>
   <commonModules>CommonModule.LocalizationClient</commonModules>
   <commonModules>CommonModule.LocalizationClientServer</commonModules>
@@ -980,7 +979,6 @@
   <commonForms>CommonForm.InputBarcode</commonForms>
   <commonForms>CommonForm.LinkedDocuments</commonForms>
   <commonForms>CommonForm.LinkUnlinkDocumentRows</commonForms>
-  <commonForms>CommonForm.LoadDataFromTable</commonForms>
   <commonForms>CommonForm.MainSettings</commonForms>
   <commonForms>CommonForm.PasteFromClipboardSettings</commonForms>
   <commonForms>CommonForm.PaymentByAcquiring</commonForms>
@@ -997,6 +995,7 @@
   <commonForms>CommonForm.ShareToUsers</commonForms>
   <commonForms>CommonForm.UpdateItemListInfo</commonForms>
   <commonForms>CommonForm.BackgroundMultiJob</commonForms>
+  <commonForms>CommonForm.FormulaEditor</commonForms>
   <catalogs>Catalog.AccessGroups</catalogs>
   <catalogs>Catalog.AccessKey</catalogs>
   <catalogs>Catalog.AccessProfiles</catalogs>

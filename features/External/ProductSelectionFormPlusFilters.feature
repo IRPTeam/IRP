@@ -1845,3 +1845,63 @@ Scenario: check the barcode search in the Item stock adjustment
 			| 'Dress'   | 'S/Yellow'             | 'pcs'    | '2,000'      | '2,000'             |
 	And I close all client application windows
 	
+
+Scenario: check clone value in the documents (Profit loss center, Expense type)
+	* Add line and fill Profit loss center and Expense type
+		And in the table "ItemList" I click the button named "ItemListAdd"
+		And I activate "Profit loss center" field in "ItemList" table
+		And I select current line in "ItemList" table
+		And I select "Distribution department" from "Profit loss center" drop-down list by string in "ItemList" table
+		And I activate "Expense type" field in "ItemList" table
+		And I select "Expense" from "Expense type" drop-down list by string in "ItemList" table
+		And I finish line editing in "ItemList" table
+		And in the table "ItemList" I click "Add" button
+		And I finish line editing in "ItemList" table
+		And in the table "ItemList" I click "Add" button
+		And I finish line editing in "ItemList" table
+	* Clone value
+		And I go to line in "ItemList" table
+			| '#' |
+			| '1' |
+		And in "ItemList" table I select all lines below the current line
+		And I activate "Expense type" field in "ItemList" table
+		And in the table "ItemList" I click "Clone value from first row" button
+		And I activate "Profit loss center" field in "ItemList" table
+		And in the table "ItemList" I click "Clone value from first row" button
+	* Check clone value
+		And "ItemList" table became equal
+			| '#' | 'Profit loss center'      | 'Expense type' |
+			| '1' | 'Distribution department' | 'Expense'      |
+			| '2' | 'Distribution department' | 'Expense'      |
+			| '3' | 'Distribution department' | 'Expense'      |
+		And I close all client application windows
+
+Scenario: check clone value in the documents (Profit loss center, Revenue type)
+	* Add line and fill Profit loss center and Revenue type
+		And in the table "ItemList" I click the button named "ItemListAdd"
+		And I activate "Profit loss center" field in "ItemList" table
+		And I select current line in "ItemList" table
+		And I select "Distribution department" from "Profit loss center" drop-down list by string in "ItemList" table
+		And I activate "Revenue type" field in "ItemList" table
+		And I select "Revenue" from "Revenue type" drop-down list by string in "ItemList" table
+		And I finish line editing in "ItemList" table
+		And in the table "ItemList" I click "Add" button
+		And I finish line editing in "ItemList" table
+		And in the table "ItemList" I click "Add" button
+		And I finish line editing in "ItemList" table
+	* Clone value
+		And I go to line in "ItemList" table
+			| '#' |
+			| '1' |
+		And in "ItemList" table I select all lines below the current line
+		And I activate "Revenue type" field in "ItemList" table
+		And in the table "ItemList" I click "Clone value from first row" button
+		And I activate "Profit loss center" field in "ItemList" table
+		And in the table "ItemList" I click "Clone value from first row" button
+	* Check clone value
+		And "ItemList" table became equal
+			| '#' | 'Profit loss center'      | 'Revenue type' |
+			| '1' | 'Distribution department' | 'Revenue'      |
+			| '2' | 'Distribution department' | 'Revenue'      |
+			| '3' | 'Distribution department' | 'Revenue'      |
+		And I close all client application windows

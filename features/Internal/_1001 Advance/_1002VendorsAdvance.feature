@@ -48,6 +48,7 @@ Scenario: _1002000 preparation (vendors advances closing)
 		When Create catalog IntegrationSettings objects
 		When Create information register CurrencyRates records
 		When Create catalog SerialLotNumbers objects
+		When Create catalog Projects objects
 		When Create information register Taxes records (VAT)
 	* Load documents
 		When Create document BankPayment objects (check movements, advance)
@@ -94,7 +95,7 @@ Scenario: _1002000 preparation (vendors advances closing)
 		And I execute 1C:Enterprise script at server
 				| "Documents.GoodsReceipt.FindByNumber(119).GetObject().Write(DocumentWriteMode.Posting);"     |
 		* Load PI
-		When Create document PurchaseInvoice objects (check movements)
+		When Create document PurchaseInvoice objects (test advance)
 		And I execute 1C:Enterprise script at server
 			| "Documents.PurchaseInvoice.FindByNumber(115).GetObject().Write(DocumentWriteMode.Posting);"    |
 		And I execute 1C:Enterprise script at server

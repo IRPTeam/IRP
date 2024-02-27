@@ -65,6 +65,7 @@
    <types>DocumentRef.SalesReportToConsignor</types>
    <types>DocumentRef.PurchaseOrderClosing</types>
    <types>DocumentRef.EmployeeCashAdvance</types>
+   <types>DocumentRef.DebitCreditNote</types>
   </type>
   <minValue xsi:type="core:UndefinedValue"/>
   <maxValue xsi:type="core:UndefinedValue"/>

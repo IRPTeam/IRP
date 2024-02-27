@@ -604,6 +604,7 @@ Function R5021T_Revenues()
 		   |	PaymentList.ProfitLossCenter,
 		   |	PaymentList.RevenueType,
 		   |	PaymentList.Currency,
+		   |	PaymentList.Project,
 		   |	PaymentList.Amount,
 		   |	PaymentList.Amount AS AmountWithTaxes
 		   |INTO R5021T_Revenues

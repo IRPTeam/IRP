@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mdclass:CommonModule xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="401d9111-7220-45cd-882b-c8e4e3def9ff">
+ <name>AuditLockPrivileged</name>
+ <synonym>
+  <key>en</key>
+  <value>Audit lock privileged</value>
+ </synonym>
+ <synonym>
+  <key>ru</key>
+  <value>Привилегия блокировки аудита</value>
+ </synonym>
+ <synonym>
+  <key>tr</key>
+  <value>Audit lock privileged</value>
+ </synonym>
+ <server>true</server>
+ <serverCall>true</serverCall>
+ <privileged>true</privileged>
+</mdclass:CommonModule>

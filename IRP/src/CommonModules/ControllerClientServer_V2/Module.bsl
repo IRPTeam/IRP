@@ -3272,7 +3272,8 @@ Function BindSendPartner(Parameters)
 	Binding = New Structure();
 	
 	Binding.Insert("DebitCreditNote",
-		"StepChangeSendLegalNameBySendPartner");
+		"StepChangeSendLegalNameBySendPartner,
+		|StepChangeSendAgreementBySendPartner");
 
 	Return BindSteps("BindVoid", DataPath, Binding, Parameters, "BindSendPartner");
 EndFunction
@@ -3306,7 +3307,8 @@ Function BindReceivePartner(Parameters)
 	Binding = New Structure();
 	
 	Binding.Insert("DebitCreditNote",
-		"StepChangeReceiveLegalNameByReceivePartner");
+		"StepChangeReceiveLegalNameByReceivePartner,
+		|StepChangeReceiveAgreementByReceivePartner");
 	
 	Return BindSteps("BindVoid", DataPath, Binding, Parameters, "BindReceivePartner");
 EndFunction
@@ -5234,7 +5236,7 @@ EndProcedure
 // SendAgreement.Set
 Procedure SetSendAgreement(Parameters, Results) Export
 	Binding = BindSendAgreement(Parameters);
-	SetterObject(Binding.StepsEnabler, Binding.DataPath, Parameters, Results);
+	SetterObject(Binding.StepsEnabler, Binding.DataPath, Parameters, Results, "OnSetSendAgreementNotify");
 EndProcedure
 
 // SendAgreement.Get
@@ -5246,28 +5248,25 @@ EndFunction
 Function BindSendAgreement(Parameters)
 	DataPath = "SendAgreement";
 	Binding = New Structure();
-	
+	Binding.Insert("DebitCreditNote", "StepChangeSendBasisDocumentBySendAgreement");
 	Return BindSteps("BindVoid", DataPath, Binding, Parameters, "BindSendAgreement");
 EndFunction
 
 // SendAgreement.ChangeSendAgreementBySendPartner.Step
-//Procedure StepChangeSendAgreementBySendPartner(Parameters, Chain, AgreementType, AgreementTypeByTransactionType)
-//	Chain.ChangeAgreementByPartner.Enable = True;
-//	If Chain.Idle Then
-//		Return;
-//	EndIf;
-//	Chain.ChangeAgreementByPartner.Setter = "SetAgreement";
-//	Options = ModelClientServer_V2.ChangeAgreementByPartnerOptions();
-//	Options.Partner       = GetPartner(Parameters);
-//	Options.Agreement     = GetAgreement(Parameters);
-//	Options.CurrentDate   = GetDate(Parameters);
-//	Options.AgreementType = AgreementType;
-//	If AgreementTypeByTransactionType Then
-//		Options.TransactionType = GetTransactionType(Parameters);
-//	EndIf;
-//	Options.StepName = "StepChangeAgreementByPartner";
-//	Chain.ChangeAgreementByPartner.Options.Add(Options);
-//EndProcedure
+Procedure StepChangeSendAgreementBySendPartner(Parameters, Chain) Export
+	Chain.ChangeAgreementByPartner.Enable = True;
+	If Chain.Idle Then
+		Return;
+	EndIf;
+	Chain.ChangeAgreementByPartner.Setter = "SetSendAgreement";
+	Options = ModelClientServer_V2.ChangeAgreementByPartnerOptions();
+	Options.Partner       = GetSendPartner(Parameters);
+	Options.Agreement     = GetSendAgreement(Parameters);
+	Options.CurrentDate   = GetDate(Parameters);
+	Options.DebtType      = GetSendDebtType(Parameters);
+	Options.StepName = "StepChangeSendAgreementBySendPartner";
+	Chain.ChangeAgreementByPartner.Options.Add(Options);
+EndProcedure
 
 #EndRegion
 
@@ -5284,7 +5283,7 @@ EndProcedure
 // ReceiveAgreement.Set
 Procedure SetReceiveAgreement(Parameters, Results) Export
 	Binding = BindReceiveAgreement(Parameters);
-	SetterObject(Binding.StepsEnabler, Binding.DataPath, Parameters, Results);
+	SetterObject(Binding.StepsEnabler, Binding.DataPath, Parameters, Results, "OnSetReceiveAgreementNotify");
 EndProcedure
 
 // ReceiveAgreement.Get
@@ -5296,28 +5295,25 @@ EndFunction
 Function BindReceiveAgreement(Parameters)
 	DataPath = "ReceiveAgreement";
 	Binding = New Structure();
-		
+	Binding.Insert("DebitCreditNote", "StepChangeReceiveBasisDocumentByReceiveAgreement");
 	Return BindSteps("BindVoid", DataPath, Binding, Parameters, "BindReceiveAgreement");
 EndFunction
 
-//// ReceiveAgreement.ChangeReceiveAgreementByReceivePartner.Step
-//Procedure StepChangeReceiveAgreementByReceivePartner(Parameters, Chain, AgreementType, AgreementTypeByTransactionType)
-//	Chain.ChangeAgreementByPartner.Enable = True;
-//	If Chain.Idle Then
-//		Return;
-//	EndIf;
-//	Chain.ChangeAgreementByPartner.Setter = "SetAgreement";
-//	Options = ModelClientServer_V2.ChangeAgreementByPartnerOptions();
-//	Options.Partner       = GetPartner(Parameters);
-//	Options.Agreement     = GetAgreement(Parameters);
-//	Options.CurrentDate   = GetDate(Parameters);
-//	Options.AgreementType = AgreementType;
-//	If AgreementTypeByTransactionType Then
-//		Options.TransactionType = GetTransactionType(Parameters);
-//	EndIf;
-//	Options.StepName = "StepChangeAgreementByPartner";
-//	Chain.ChangeAgreementByPartner.Options.Add(Options);
-//EndProcedure
+// ReceiveAgreement.ChangeReceiveAgreementByReceivePartner.Step
+Procedure StepChangeReceiveAgreementByReceivePartner(Parameters, Chain) Export
+	Chain.ChangeAgreementByPartner.Enable = True;
+	If Chain.Idle Then
+		Return;
+	EndIf;
+	Chain.ChangeAgreementByPartner.Setter = "SetReceiveAgreement";
+	Options = ModelClientServer_V2.ChangeAgreementByPartnerOptions();
+	Options.Partner       = GetReceivePartner(Parameters);
+	Options.Agreement     = GetReceiveAgreement(Parameters);
+	Options.CurrentDate   = GetDate(Parameters);
+	Options.DebtType      = GetReceiveDebtType(Parameters);
+	Options.StepName = "StepChangeReceiveAgreementByReceivePartner";
+	Chain.ChangeAgreementByPartner.Options.Add(Options);
+EndProcedure
 
 #EndRegion
 
@@ -15027,6 +15023,162 @@ EndProcedure
 
 #EndRegion
 
+#Region SEND_DEBT_TYPE
+
+// SendDebtType.OnChange
+Procedure SendDebtTypeOnChange(Parameters) Export
+	AddViewNotify("OnSetSendDebtTypeNotify", Parameters);
+	Binding = BindSendDebtType(Parameters);
+	ModelClientServer_V2.EntryPoint(Binding.StepsEnabler, Parameters);
+EndProcedure
+
+// SendDebtType.Set
+Procedure SetSendDebtType(Parameters, Results) Export
+	Binding = BindSendDebtType(Parameters);
+	SetterObject(Binding.StepsEnabler, Binding.DataPath, Parameters, Results, "OnSetSendDebtTypeNotify");
+EndProcedure
+
+// SendDebtType.Get
+Function GetSendDebtType(Parameters)
+	Return GetPropertyObject(Parameters, BindSendDebtType(Parameters).DataPath);
+EndFunction
+
+// SendDebtType.Bind
+Function BindSendDebtType(Parameters)
+	DataPath = "SendDebtType";
+	Binding = New Structure();
+	
+	Binding.Insert("DebitCreditNote",
+		"StepChangeSendAgreementBySendPartner,
+		|StepChangeSendBasisDocumentBySendAgreement");
+
+	Return BindSteps("BindVoid", DataPath, Binding, Parameters, "BindSendDebtType");
+EndFunction
+
+#EndRegion
+
+#Region RECEIVE_DEBT_TYPE
+
+// ReceiveDebtType.OnChange
+Procedure ReceiveDebtTypeOnChange(Parameters) Export
+	AddViewNotify("OnSetReceiveDebtTypeNotify", Parameters);
+	Binding = BindReceiveDebtType(Parameters);
+	ModelClientServer_V2.EntryPoint(Binding.StepsEnabler, Parameters);
+EndProcedure
+
+// ReceiveDebtType.Set
+Procedure SetReceiveDebtType(Parameters, Results) Export
+	Binding = BindReceiveDebtType(Parameters);
+	SetterObject(Binding.StepsEnabler, Binding.DataPath, Parameters, Results, "OnSetReceiveDebtTypeNotify");
+EndProcedure
+
+// ReceiveDebtType.Get
+Function GetReceiveDebtType(Parameters)
+	Return GetPropertyObject(Parameters, BindReceiveDebtType(Parameters).DataPath);
+EndFunction
+
+// ReceiveDebtType.Bind
+Function BindReceiveDebtType(Parameters)
+	DataPath = "ReceiveDebtType";
+	Binding = New Structure();
+	
+	Binding.Insert("DebitCreditNote",
+		"StepChangeReceiveAgreementByReceivePartner,
+		|StepChangeReceiveBasisDocumentByReceiveAgreement");
+	
+	Return BindSteps("BindVoid", DataPath, Binding, Parameters, "BindReceiveDebtType");
+EndFunction
+
+#EndRegion
+
+#Region SEND_BASIS_DOCUMENT
+
+// SendBasisDocument.OnChange
+Procedure SendBasisDocumentOnChange(Parameters) Export
+	Binding = BindSendBasisDocument(Parameters);
+	ModelClientServer_V2.EntryPoint(Binding.StepsEnabler, Parameters);
+EndProcedure
+
+// SendBasisDocument.Set
+Procedure SetSendBasisDocument(Parameters, Results) Export
+	Binding = BindSendBasisDocument(Parameters);
+	SetterObject(Binding.StepsEnabler, Binding.DataPath, Parameters, Results);
+EndProcedure
+
+// SendBasisDocument.Get
+Function GetSendBasisDocument(Parameters)
+	Return GetPropertyObject(Parameters, BindSendBasisDocument(Parameters).DataPath);
+EndFunction
+
+// SendBasisDocument.Bind
+Function BindSendBasisDocument(Parameters)
+	DataPath = "SendBasisDocument";
+	Binding = New Structure();
+	Return BindSteps("BindVoid", DataPath, Binding, Parameters, "BindSendBasisDocument");
+EndFunction
+
+// SendBasisDocument.ChangeSendBasisDocumentBySendAgreement.Step
+Procedure StepChangeSendBasisDocumentBySendAgreement(Parameters, Chain) Export
+	Chain.ChangeBasisDocumentByAgreement.Enable = True;
+	If Chain.Idle Then
+		Return;
+	EndIf;
+	Chain.ChangeBasisDocumentByAgreement.Setter = "SetSendBasisDocument";
+	Options = ModelClientServer_V2.ChangeBasisDocumentByAgreementOptions();
+	Options.Agreement  = GetSendAgreement(Parameters);
+	Options.DebtType   = GetSendDebtType(Parameters);
+	Options.CurrentBasisDocument = GetSendBasisDocument(Parameters);
+	Options.CheckAgreementInBasisDocument = False;
+	Options.StepName = "StepChangeSendBasisDocumentBySendAgreement";
+	Chain.ChangeBasisDocumentByAgreement.Options.Add(Options);
+EndProcedure
+
+#EndRegion
+
+#Region RECEIVE_BASIS_DOCUMENT
+
+// ReceiveBasisDocument.OnChange
+Procedure ReceiveBasisDocumentOnChange(Parameters) Export
+	Binding = BindReceiveBasisDocument(Parameters);
+	ModelClientServer_V2.EntryPoint(Binding.StepsEnabler, Parameters);
+EndProcedure
+
+// ReceiveBasisDocument.Set
+Procedure SetReceiveBasisDocument(Parameters, Results) Export
+	Binding = BindReceiveBasisDocument(Parameters);
+	SetterObject(Binding.StepsEnabler, Binding.DataPath, Parameters, Results);
+EndProcedure
+
+// ReceiveBasisDocument.Get
+Function GetReceiveBasisDocument(Parameters)
+	Return GetPropertyObject(Parameters, BindReceiveBasisDocument(Parameters).DataPath);
+EndFunction
+
+// ReceiveBasisDocument.Bind
+Function BindReceiveBasisDocument(Parameters)
+	DataPath = "ReceiveBasisDocument";
+	Binding = New Structure();
+	Return BindSteps("BindVoid", DataPath, Binding, Parameters, "BindReceiveBasisDocument");
+EndFunction
+
+// ReceiveBasisDocument.ChangeReceiveBasisDocumentByReceiveAgreement.Step
+Procedure StepChangeReceiveBasisDocumentByReceiveAgreement(Parameters, Chain) Export
+	Chain.ChangeBasisDocumentByAgreement.Enable = True;
+	If Chain.Idle Then
+		Return;
+	EndIf;
+	Chain.ChangeBasisDocumentByAgreement.Setter = "SetReceiveBasisDocument";
+	Options = ModelClientServer_V2.ChangeBasisDocumentByAgreementOptions();
+	Options.Agreement  = GetReceiveAgreement(Parameters);
+	Options.DebtType   = GetReceiveDebtType(Parameters);
+	Options.CurrentBasisDocument = GetReceiveBasisDocument(Parameters);
+	Options.CheckAgreementInBasisDocument = False;
+	Options.StepName = "StepChangeReceiveBasisDocumentByReceiveAgreement";
+	Chain.ChangeBasisDocumentByAgreement.Options.Add(Options);
+EndProcedure
+
+#EndRegion
+
 // called when all chain steps is complete
 Procedure OnChainComplete(Parameters) Export
 	#IF Client THEN
@@ -15186,16 +15338,14 @@ Procedure ExecuteViewNotify(Parameters, ViewNotify)
 	ElsIf ViewNotify = "OnSetPayrollListsAmountNotify" Then ViewClient_V2.OnSetPayrollListsAmountNotify(Parameters);
 	ElsIf ViewNotify = "OnSetSalaryAmountNotify" Then ViewClient_V2.OnSetSalaryAmountNotify(Parameters);
 	
-	ElsIf ViewNotify = "SendDocumentsOnAddRowFormNotify"             Then ViewClient_V2.SendDocumentsOnAddRowFormNotify(Parameters);
-	ElsIf ViewNotify = "SendDocumentsOnCopyRowFormNotify"            Then ViewClient_V2.SendDocumentsOnCopyRowFormNotify(Parameters);
-	ElsIf ViewNotify = "ReceiveDocumentsOnAddRowFormNotify"          Then ViewClient_V2.ReceiveDocumentsOnAddRowFormNotify(Parameters);
-	ElsIf ViewNotify = "ReceiveDocumentsOnCopyRowFormNotify"         Then ViewClient_V2.ReceiveDocumentsOnCopyRowFormNotify(Parameters);
 	ElsIf ViewNotify = "OnSetSendPartnerNotify"                      Then ViewClient_V2.OnSetSendPartnerNotify(Parameters);
 	ElsIf ViewNotify = "OnSetSendLegalNameNotify"                    Then ViewClient_V2.OnSetSendLegalNameNotify(Parameters);
 	ElsIf ViewNotify = "OnSetSendAgreementNotify"                    Then ViewClient_V2.OnSetSendAgreementNotify(Parameters);
 	ElsIf ViewNotify = "OnSetReceivePartnerNotify"                   Then ViewClient_V2.OnSetReceivePartnerNotify(Parameters);
 	ElsIf ViewNotify = "OnSetReceiveLegalNameNotify"                 Then ViewClient_V2.OnSetReceiveLegalNameNotify(Parameters);
 	ElsIf ViewNotify = "OnSetReceiveAgreementNotify"                 Then ViewClient_V2.OnSetReceiveAgreementNotify(Parameters);
+	ElsIf ViewNotify = "OnSetSendDebtTypeNotify"                     Then ViewClient_V2.OnSetSendDebtTypeNotify(Parameters);
+	ElsIf ViewNotify = "OnSetReceiveDebtTypeNotify"                  Then ViewClient_V2.OnSetReceiveDebtTypeNotify(Parameters);
 	
 	Else
 		Raise StrTemplate("Not handled view notify [%1]", ViewNotify);

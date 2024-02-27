@@ -1633,6 +1633,9 @@ Function Strings(Lang) Export
 	Strings.Insert("Error_141", NStr("en='[%1] cannot be changed, has posted documents';
 		|ru='[%1] изменить нельзя, есть проведенные документы';
 		|tr='[%1] değiştirilemez, kaydedilmiş evraklar mevcut'", Lang));	
+	Strings.Insert("Error_142", NStr("en='Wrong combination of send and receive debt type';
+		|ru='Неверное сочетание типов дебиторской и кредиторской задолженности';
+		|tr='Wrong combination of send and receive debt type'", Lang));	
 	
 	Strings.Insert("Error_FillTotalAmount", NStr("en='Fill total amount. Row: [%1]';
 		|ru='Необходимо заполнить сумму итого. Строка: [%1]';
@@ -2770,6 +2773,21 @@ Strings.Insert("MoneyTransfer_DR_R5022T_Expenses_CR_R3021B_CashInTransit",
 	Strings.Insert("GPU_CheckingFilesExist", NStr("en='Checking if files exist';
 		|ru='Проверка существования файлов';
 		|tr='Dosyaların varlığı kontrol ediliyor'", Lang));
+#EndRegion
+
+#Region AuditLock
+	Strings.Insert("AuditLock_001", NStr("en='Audit lock (set lock)';
+		|ru='Блокировка аудита (установка блокировки)';
+		|tr='Audit lock (set lock)'", Lang));
+	Strings.Insert("AuditLock_002", NStr("en='Audit lock (unlock)';
+		|ru='Блокировка аудита (разблокировка)';
+		|tr='Audit lock (unlock)'", Lang));
+	Strings.Insert("AuditLock_003", NStr("en='Access is denied';
+		|ru='Доступ запрещен';
+		|tr='Access is denied'", Lang));
+	Strings.Insert("AuditLock_004", NStr("en='Document is locked by audit lock';
+		|ru='Документ заблокирован аудиторской блокировкой';
+		|tr='Document is locked by audit lock'", Lang));	
 #EndRegion
 	
 	Return Strings;

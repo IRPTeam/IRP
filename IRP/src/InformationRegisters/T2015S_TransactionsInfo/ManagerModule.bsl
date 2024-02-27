@@ -186,6 +186,180 @@ Function T2015S_TransactionsInfo_CreditNote() Export
 		   |	Transactions.Key";
 EndFunction
 
+Function T2015S_TransactionsInfo_DebitCreditNote() Export
+	Return 
+		"SELECT
+		|	Doc.Period AS Date,
+		|	Doc.Company,
+		|	Doc.SendBranch AS Branch,
+		|	Doc.Currency,
+		|	Doc.SendLegalName AS LegalName,
+		|	Doc.SendPartner AS Partner,
+		|	Doc.SendAgreement AS Agreement,
+		|	Doc.SendProject AS Project,
+		|	Doc.SendBasisDocument AS TransactionBasis,
+		|	Doc.SendOrder AS Order,
+		|	Doc.SendIsVendorTransaction AS IsVendorTransaction,
+		|	Doc.SendIsCustomerTransaction AS IsCustomerTransaction,
+		|	case
+		|		when Doc.SendIsCustomerTransaction
+		|			then case
+		|				when Doc.PartnersIsEqual
+		|					then case
+		|						when Doc.IsReceiveAdvanceVendor
+		|						OR Doc.IsReceiveTransactionCustomer
+		|							then FALSE
+		|						else TRUE
+		|					end
+		|				else case
+		|					when Doc.IsReceiveAdvanceVendor
+		|					OR Doc.IsReceiveTransactionVendor
+		|					OR Doc.IsReceiveTransactionCustomer
+		|						then FALSE
+		|					else TRUE
+		|				end
+		|			end
+		|		else case
+		|			when Doc.PartnersIsEqual
+		|				then case
+		|					when Doc.IsReceiveAdvanceCustomer
+		|					OR Doc.IsReceiveTransactionCustomer
+		|					OR Doc.IsReceiveTransactionVendor
+		|						then FALSE
+		|					else TRUE
+		|				end
+		|			else case
+		|				when Doc.IsReceiveAdvanceCustomer
+		|				OR Doc.IsReceiveTransactionCustomer
+		|				OR Doc.IsReceiveTransactionVendor
+		|					then FALSE
+		|				else TRUE
+		|			end
+		|		end
+		|	end AS IsDue,
+		|	case
+		|		when Doc.SendIsCustomerTransaction
+		|			then case
+		|				when Doc.PartnersIsEqual
+		|					then case
+		|						when Doc.IsReceiveAdvanceVendor
+		|						OR Doc.IsReceiveTransactionCustomer
+		|							then TRUE
+		|						else FALSE
+		|					end
+		|				else case
+		|					when Doc.IsReceiveAdvanceVendor
+		|					OR Doc.IsReceiveTransactionVendor
+		|					OR Doc.IsReceiveTransactionCustomer
+		|						then TRUE
+		|					else FALSE
+		|				end
+		|			end
+		|		else case
+		|			when Doc.PartnersIsEqual
+		|				then case
+		|					when Doc.IsReceiveAdvanceCustomer
+		|					OR Doc.IsReceiveTransactionCustomer
+		|					OR Doc.IsReceiveTransactionVendor
+		|						then TRUE
+		|					else FALSE
+		|				end
+		|			else case
+		|				when Doc.IsReceiveAdvanceCustomer
+		|				OR Doc.IsReceiveTransactionCustomer
+		|				OR Doc.IsReceiveTransactionVendor
+		|					then TRUE
+		|				else FALSE
+		|			end
+		|		end
+		|	end AS IsPaid,
+		|	Doc.Amount
+		|INTO T2015S_TransactionsInfo
+		|FROM
+		|	SendTransactions AS Doc
+		|
+		|UNION ALL
+		|
+		|SELECT
+		|	Doc.Period,
+		|	Doc.Company,
+		|	Doc.ReceiveBranch,
+		|	Doc.Currency,
+		|	Doc.ReceiveLegalName,
+		|	Doc.ReceivePartner,
+		|	Doc.ReceiveAgreement,
+		|	Doc.ReceiveProject,
+		|	Doc.ReceiveBasisDocument,
+		|	Doc.ReceiveOrder,
+		|	Doc.SendIsVendorTransaction,
+		|	Doc.SendIsCustomerTransaction,
+		|	case
+		|		when Doc.SendIsCustomerTransaction
+		|			then case
+		|				when Doc.PartnersIsEqual
+		|					then case
+		|						when Doc.IsSendAdvanceCustomer
+		|						OR Doc.IsSendTransactionVendor
+		|							then FALSE
+		|						else TRUE
+		|					end
+		|				else case
+		|					when Doc.IsSendAdvanceCustomer
+		|					OR Doc.IsSendTransactionVendor
+		|						then FALSE
+		|					else TRUE
+		|				end
+		|			end
+		|		else case
+		|			when Doc.PartnersIsEqual
+		|				then case
+		|					when Doc.IsSendTransactionVendor
+		|						then TRUE
+		|					else FALSE
+		|				end
+		|			else case
+		|				when Doc.IsSendTransactionVendor
+		|					then TRUE
+		|				else FALSE
+		|			end
+		|		end
+		|	end AS IsDue,
+		|	case
+		|		when Doc.SendIsCustomerTransaction
+		|			then case
+		|				when Doc.PartnersIsEqual
+		|					then case
+		|						when Doc.IsSendAdvanceCustomer
+		|						OR Doc.IsSendTransactionVendor
+		|							then TRUE
+		|						else FALSE
+		|					end
+		|				else case
+		|					when Doc.IsSendAdvanceCustomer
+		|					OR Doc.IsSendTransactionVendor
+		|						then TRUE
+		|					else FALSE
+		|				end
+		|			end
+		|		else case
+		|			when Doc.PartnersIsEqual
+		|				then case
+		|					when Doc.IsSendTransactionVendor
+		|						then FALSE
+		|					else TRUE
+		|				end
+		|			else case
+		|				when Doc.IsSendTransactionVendor
+		|					then FALSE
+		|				else TRUE
+		|			end
+		|		end
+		|	end AS IsPaid,
+		|	Doc.Amount
+		|FROM
+		|	ReceiveTransactions AS Doc";
+EndFunction
+
 Function T2015S_TransactionsInfo_Cheque() Export
 	Return 
 		"SELECT

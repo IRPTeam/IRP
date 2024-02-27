@@ -66,6 +66,7 @@
    <types>DocumentRef.RetailSalesReceipt</types>
    <types>DocumentRef.SalesOrderClosing</types>
    <types>DocumentRef.SalesInvoice</types>
+   <types>DocumentRef.DebitCreditNote</types>
   </type>
   <minValue xsi:type="core:UndefinedValue"/>
   <maxValue xsi:type="core:UndefinedValue"/>

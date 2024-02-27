@@ -120,6 +120,7 @@ Function PaymentList()
 		   |	PaymentList.FinancialMovementType,
 		   |	PaymentList.Partner,
 		   |	PaymentList.AdditionalAnalytic,
+		   |	PaymentList.Project,
 		   |	PaymentList.Ref.Branch AS Branch,
 		   |	PaymentList.Ref.TransactionType = VALUE(Enum.CashRevenueTransactionTypes.OtherCompanyRevenue) AS
 		   |		IsOtherCompanyRevenue,

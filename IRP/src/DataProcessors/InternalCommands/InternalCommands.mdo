@@ -138,4 +138,21 @@
   <usePurposes>PersonalComputer</usePurposes>
   <usePurposes>MobileDevice</usePurposes>
  </forms>
+ <forms uuid="0bd55598-3f42-4f1b-838d-c989a189fd48">
+  <name>AuditLock</name>
+  <synonym>
+   <key>en</key>
+   <value>Audit lock</value>
+  </synonym>
+  <synonym>
+   <key>ru</key>
+   <value>Блокировка аудита</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Audit lock</value>
+  </synonym>
+  <usePurposes>PersonalComputer</usePurposes>
+  <usePurposes>MobileDevice</usePurposes>
+ </forms>
 </mdclass:DataProcessor>

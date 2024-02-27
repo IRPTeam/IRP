@@ -20,5 +20,6 @@
  <content>Catalog.Users</content>
  <content>Catalog.UserGroups</content>
  <content>Catalog.ReportOptions</content>
+ <content>InformationRegister.AuditLockHistory</content>
  <parentSubsystem>Subsystem.Settings</parentSubsystem>
 </mdclass:Subsystem>

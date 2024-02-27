@@ -76,6 +76,10 @@
  <registerRecords>AccumulationRegister.R1021B_VendorsTransactions</registerRecords>
  <registerRecords>AccumulationRegister.R2021B_CustomersTransactions</registerRecords>
  <registerRecords>AccumulationRegister.R2020B_AdvancesFromCustomers</registerRecords>
+ <registerRecords>InformationRegister.T2014S_AdvancesInfo</registerRecords>
+ <registerRecords>InformationRegister.T2015S_TransactionsInfo</registerRecords>
+ <registerRecords>AccumulationRegister.R5011B_CustomersAging</registerRecords>
+ <registerRecords>AccumulationRegister.R5012B_VendorsAging</registerRecords>
  <postInPrivilegedMode>true</postInPrivilegedMode>
  <unpostInPrivilegedMode>true</unpostInPrivilegedMode>
  <choiceHistoryOnInput>DontUse</choiceHistoryOnInput>
@@ -177,15 +181,15 @@
   <name>SendAgreement</name>
   <synonym>
    <key>en</key>
-   <value>Agreement (send)</value>
+   <value>Partner term (send)</value>
   </synonym>
   <synonym>
    <key>ru</key>
-   <value>Договор (отправка)</value>
+   <value>Условие партнера (отправка)</value>
   </synonym>
   <synonym>
    <key>tr</key>
-   <value>Anlaşma (gönderme)</value>
+   <value>Partner term (send)</value>
   </synonym>
   <type>
    <types>CatalogRef.Agreements</types>
@@ -212,6 +216,99 @@
   </synonym>
   <type>
    <types>CatalogRef.LegalNameContracts</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fillValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <dataHistory>Use</dataHistory>
+ </attributes>
+ <attributes uuid="b47ae941-8baf-4e4e-beb0-34f3e3b36aee">
+  <name>SendProject</name>
+  <synonym>
+   <key>en</key>
+   <value>Project (send)</value>
+  </synonym>
+  <synonym>
+   <key>ru</key>
+   <value>Проект (отправка)  </value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Project (send)</value>
+  </synonym>
+  <type>
+   <types>CatalogRef.Projects</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fillValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <dataHistory>Use</dataHistory>
+ </attributes>
+ <attributes uuid="53c6753e-7f0e-4b71-a630-3a3d8fcf775f">
+  <name>SendDebtType</name>
+  <synonym>
+   <key>en</key>
+   <value>Debt type (send)</value>
+  </synonym>
+  <synonym>
+   <key>ru</key>
+   <value>Тип долга (отправка) </value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Debt type (send)</value>
+  </synonym>
+  <type>
+   <types>EnumRef.DebtTypes</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fillChecking>ShowError</fillChecking>
+  <fillValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <dataHistory>Use</dataHistory>
+ </attributes>
+ <attributes uuid="ed1bb941-1c96-4093-be57-d76cced29cac">
+  <name>SendOrder</name>
+  <synonym>
+   <key>en</key>
+   <value>Order (send)</value>
+  </synonym>
+  <synonym>
+   <key>ru</key>
+   <value>Заказ (отправка)   </value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Order (send)</value>
+  </synonym>
+  <type>
+   <types>DocumentRef.PurchaseOrder</types>
+   <types>DocumentRef.SalesOrder</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <dataHistory>Use</dataHistory>
+ </attributes>
+ <attributes uuid="696bb03c-a362-44ef-9b03-b0f0e6e0195d">
+  <name>SendBasisDocument</name>
+  <synonym>
+   <key>en</key>
+   <value>Basis (send)</value>
+  </synonym>
+  <synonym>
+   <key>ru</key>
+   <value>Основание (отправка) </value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Basis (send)</value>
+  </synonym>
+  <type>
+   <types>DefinedType.typeApArTransactionBasises</types>
   </type>
   <minValue xsi:type="core:UndefinedValue"/>
   <maxValue xsi:type="core:UndefinedValue"/>
@@ -269,15 +366,15 @@
   <name>ReceiveAgreement</name>
   <synonym>
    <key>en</key>
-   <value>Agreement (receive)</value>
+   <value>Partner term (receive)</value>
   </synonym>
   <synonym>
    <key>ru</key>
-   <value>Договор (получение)</value>
+   <value>Условие партнера (получение)</value>
   </synonym>
   <synonym>
    <key>tr</key>
-   <value>Anlaşma (alma)</value>
+   <value>Partner term (receive)</value>
   </synonym>
   <type>
    <types>CatalogRef.Agreements</types>
@@ -311,6 +408,99 @@
   <fullTextSearch>Use</fullTextSearch>
   <dataHistory>Use</dataHistory>
  </attributes>
+ <attributes uuid="3e75a3d8-7574-4896-8ddf-9726980dbb75">
+  <name>ReceiveProject</name>
+  <synonym>
+   <key>en</key>
+   <value>Project (receive)</value>
+  </synonym>
+  <synonym>
+   <key>ru</key>
+   <value>Проект (получение) </value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Project (receive)</value>
+  </synonym>
+  <type>
+   <types>CatalogRef.Projects</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fillValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <dataHistory>Use</dataHistory>
+ </attributes>
+ <attributes uuid="99adfde8-10a4-40f7-8330-b1f9b10fe9a1">
+  <name>ReceiveDebtType</name>
+  <synonym>
+   <key>en</key>
+   <value>Debt type (receive)</value>
+  </synonym>
+  <synonym>
+   <key>ru</key>
+   <value>Тип долга (получение)</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Debt type (receive)</value>
+  </synonym>
+  <type>
+   <types>EnumRef.DebtTypes</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fillChecking>ShowError</fillChecking>
+  <fillValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <dataHistory>Use</dataHistory>
+ </attributes>
+ <attributes uuid="da185861-5cb4-4666-9f13-7675ed0a5a8f">
+  <name>ReceiveOrder</name>
+  <synonym>
+   <key>en</key>
+   <value>Order (receive)</value>
+  </synonym>
+  <synonym>
+   <key>ru</key>
+   <value>Заказ (получение)  </value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Order (receive)</value>
+  </synonym>
+  <type>
+   <types>DocumentRef.PurchaseOrder</types>
+   <types>DocumentRef.SalesOrder</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <dataHistory>Use</dataHistory>
+ </attributes>
+ <attributes uuid="67c30f60-c74e-4066-b429-161950c09197">
+  <name>ReceiveBasisDocument</name>
+  <synonym>
+   <key>en</key>
+   <value>Basis (receive)</value>
+  </synonym>
+  <synonym>
+   <key>ru</key>
+   <value>Основание (получение)</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Basis (receive)</value>
+  </synonym>
+  <type>
+   <types>DefinedType.typeApArTransactionBasises</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fillValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <dataHistory>Use</dataHistory>
+ </attributes>
  <attributes uuid="fd05b777-d870-453f-ba3f-0db11d413302">
   <name>Currency</name>
   <synonym>
@@ -327,6 +517,29 @@
   </synonym>
   <type>
    <types>CatalogRef.Currencies</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fillValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <dataHistory>Use</dataHistory>
+ </attributes>
+ <attributes uuid="d984b78c-64cd-4c23-acd7-76e73f595b18">
+  <name>Amount</name>
+  <synonym>
+   <key>en</key>
+   <value>Amount</value>
+  </synonym>
+  <synonym>
+   <key>ru</key>
+   <value>Сумма</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Tutar</value>
+  </synonym>
+  <type>
+   <types>DefinedType.typeAmount</types>
   </type>
   <minValue xsi:type="core:UndefinedValue"/>
   <maxValue xsi:type="core:UndefinedValue"/>
@@ -668,178 +881,6 @@
     <field>Document.DebitCreditNote.TabularSection.AddAttributes.Attribute.Property</field>
    </choiceParameterLinks>
    <dataHistory>Use</dataHistory>
-  </attributes>
- </tabularSections>
- <tabularSections uuid="b37f803e-0d14-4e3d-b535-e1863d9472f4">
-  <producedTypes>
-   <objectType typeId="690d5680-c649-4287-9a82-4745684dae24" valueTypeId="3279238c-eaf1-40d8-a2dc-f058aef1f695"/>
-   <rowType typeId="b3261437-3cf8-4fac-8f65-ae7bedd93203" valueTypeId="8db2ecee-48b9-409e-9b2b-c3d96f9e7e00"/>
-  </producedTypes>
-  <name>SendDocuments</name>
-  <synonym>
-   <key>en</key>
-   <value>Send documents</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Отправить документы</value>
-  </synonym>
-  <synonym>
-   <key>tr</key>
-   <value>Belgeleri Gönder</value>
-  </synonym>
-  <attributes uuid="8a0c5f44-4b5d-4b32-b8ca-feb36040055b">
-   <name>Key</name>
-   <synonym>
-    <key>en</key>
-    <value>Key</value>
-   </synonym>
-   <synonym>
-    <key>ru</key>
-    <value>Ключ</value>
-   </synonym>
-   <synonym>
-    <key>tr</key>
-    <value>Anahtar</value>
-   </synonym>
-   <type>
-    <types>DefinedType.typeRowID</types>
-   </type>
-   <minValue xsi:type="core:UndefinedValue"/>
-   <maxValue xsi:type="core:UndefinedValue"/>
-   <dataHistory>Use</dataHistory>
-   <fullTextSearch>Use</fullTextSearch>
-  </attributes>
-  <attributes uuid="0d3fc8a7-ccdf-445d-bf25-4a9f356ec4be">
-   <name>Basis</name>
-   <synonym>
-    <key>en</key>
-    <value>Basis</value>
-   </synonym>
-   <synonym>
-    <key>ru</key>
-    <value>Документ основания</value>
-   </synonym>
-   <synonym>
-    <key>tr</key>
-    <value>Kaynak evrak</value>
-   </synonym>
-   <type>
-    <types>DefinedType.typeApTransactionBasises</types>
-   </type>
-   <minValue xsi:type="core:UndefinedValue"/>
-   <maxValue xsi:type="core:UndefinedValue"/>
-   <dataHistory>Use</dataHistory>
-   <fullTextSearch>Use</fullTextSearch>
-  </attributes>
-  <attributes uuid="1314b863-4789-47d9-b996-7fea57667eaf">
-   <name>Order</name>
-   <synonym>
-    <key>en</key>
-    <value>Order</value>
-   </synonym>
-   <synonym>
-    <key>ru</key>
-    <value>Заказ</value>
-   </synonym>
-   <synonym>
-    <key>tr</key>
-    <value>Sipariş</value>
-   </synonym>
-   <type>
-    <types>DocumentRef.PurchaseOrder</types>
-    <types>DocumentRef.SalesOrder</types>
-   </type>
-   <minValue xsi:type="core:UndefinedValue"/>
-   <maxValue xsi:type="core:UndefinedValue"/>
-   <dataHistory>Use</dataHistory>
-   <fullTextSearch>Use</fullTextSearch>
-  </attributes>
- </tabularSections>
- <tabularSections uuid="7bdea02a-9095-4c8d-b211-3c4553384bbd">
-  <producedTypes>
-   <objectType typeId="6689e9a5-1155-4b26-aeba-bbc94ce3dc07" valueTypeId="22765494-86c6-4288-b0af-f6433d89b82d"/>
-   <rowType typeId="466e530e-746b-47df-a94a-580857b1fc98" valueTypeId="d11ed9cc-020d-4530-bdfa-b7c640c29e24"/>
-  </producedTypes>
-  <name>ReceiveDocuments</name>
-  <synonym>
-   <key>en</key>
-   <value>Receive documents</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Получить документы</value>
-  </synonym>
-  <synonym>
-   <key>tr</key>
-   <value>Belgeleri Al</value>
-  </synonym>
-  <attributes uuid="38a2e32c-e05d-45ee-bacf-007b9e464fee">
-   <name>Key</name>
-   <synonym>
-    <key>en</key>
-    <value>Key</value>
-   </synonym>
-   <synonym>
-    <key>ru</key>
-    <value>Ключ</value>
-   </synonym>
-   <synonym>
-    <key>tr</key>
-    <value>Anahtar</value>
-   </synonym>
-   <type>
-    <types>DefinedType.typeRowID</types>
-   </type>
-   <minValue xsi:type="core:UndefinedValue"/>
-   <maxValue xsi:type="core:UndefinedValue"/>
-   <dataHistory>Use</dataHistory>
-   <fullTextSearch>Use</fullTextSearch>
-  </attributes>
-  <attributes uuid="5ed069b8-54cd-449b-b51a-f30ee1412859">
-   <name>Basis</name>
-   <synonym>
-    <key>en</key>
-    <value>Basis</value>
-   </synonym>
-   <synonym>
-    <key>ru</key>
-    <value>Документ основания</value>
-   </synonym>
-   <synonym>
-    <key>tr</key>
-    <value>Kaynak evrak</value>
-   </synonym>
-   <type>
-    <types>DefinedType.typeApTransactionBasises</types>
-   </type>
-   <minValue xsi:type="core:UndefinedValue"/>
-   <maxValue xsi:type="core:UndefinedValue"/>
-   <dataHistory>Use</dataHistory>
-   <fullTextSearch>Use</fullTextSearch>
-  </attributes>
-  <attributes uuid="1446b4f2-92c9-47a9-a7bf-441b6ebc72c4">
-   <name>Order</name>
-   <synonym>
-    <key>en</key>
-    <value>Order</value>
-   </synonym>
-   <synonym>
-    <key>ru</key>
-    <value>Заказ</value>
-   </synonym>
-   <synonym>
-    <key>tr</key>
-    <value>Sipariş</value>
-   </synonym>
-   <type>
-    <types>DocumentRef.PurchaseOrder</types>
-    <types>DocumentRef.SalesOrder</types>
-   </type>
-   <minValue xsi:type="core:UndefinedValue"/>
-   <maxValue xsi:type="core:UndefinedValue"/>
-   <dataHistory>Use</dataHistory>
-   <fullTextSearch>Use</fullTextSearch>
   </attributes>
  </tabularSections>
 </mdclass:Document>

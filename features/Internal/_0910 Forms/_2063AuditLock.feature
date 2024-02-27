@@ -84,6 +84,13 @@ Scenario: _206300 preparation (audit lock)
 		And I click the button named "FormCreate"
 		And I input "Payment terminal 01" text in the field named "Description_en"
 		And I click "Save and close" button
+	* Access group
+		Given I open hyperlink "e1cib/list/Catalog.AccessGroups"
+		And I go to line in "List" table
+			| 'Description'           |
+			| 'Audit lock control'    |
+		And I select current line in "List" table
+		And I click "Save and close" button
 	* Create PaymentTypes
 		When Create catalog PaymentTypes objects
 	* Bank terms
@@ -205,7 +212,7 @@ Scenario: _2063008 check audit lock for linked documents
 		And I click "Audit lock (set lock)" button
 		Then user message window does not contain messages	
 	* Try change RSR
-		Given I open hyperlink "e1cib/list/Document.ConsolidatedRetailSales"
+		Given I open hyperlink "e1cib/list/Document.RetailSalesReceipt"
 		And I go to line in "List" table
 			| 'Number'|
 			| '3'     |
@@ -222,7 +229,7 @@ Scenario: _2063008 check audit lock for linked documents
 		And I select current line in "List" table		
 		And I click "Audit lock (unlock)" button
 	* Try change RSR
-		Given I open hyperlink "e1cib/list/Document.ConsolidatedRetailSales"
+		Given I open hyperlink "e1cib/list/Document.RetailSalesReceipt"
 		And I go to line in "List" table
 			| 'Number'|
 			| '3'     |
@@ -255,4 +262,16 @@ Scenario: _2063020 check audit lock	without permisson
 		And I click "Audit lock (set lock)" button
 		Then there are lines in TestClient message log
 			|'Access is denied'|		
+	And I close all client application windows	
+
+Scenario: _2063023 check audit lock history
+	And I close all client application windows
+	Given I open hyperlink "e1cib/list/InformationRegister.AuditLockHistory"
+	And "List" table became equal
+		| 'User'                    | 'Date' | 'Document'                                              | 'Action' |
+		| 'en description is empty' | '*'    | 'Purchase invoice 12 dated 07.09.2020 17:53:38'         | 'Lock'   |
+		| 'en description is empty' | '*'    | 'Purchase invoice 12 dated 07.09.2020 17:53:38'         | 'Unlock' |
+		| 'en description is empty' | '*'    | 'Consolidated retail sales 2 dated 21.08.2022 08:14:58' | 'Lock'   |
+		| 'en description is empty' | '*'    | 'Consolidated retail sales 2 dated 21.08.2022 08:14:58' | 'Unlock' |
+		| 'en description is empty' | '*'    | 'Consolidated retail sales 2 dated 21.08.2022 08:14:58' | 'Unlock' |
 	And I close all client application windows	

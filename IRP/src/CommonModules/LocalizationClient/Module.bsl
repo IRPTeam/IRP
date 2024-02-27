@@ -10,8 +10,9 @@
 Procedure DescriptionOpening(Object, Form, Item, StandardProcessing, DescriptionParameters = Undefined) Export
 	StandardProcessing = False;
 	OpenArgs = New Structure("Values", New Structure());
-	OpenArgs.Insert("DescriptionParameters", DescriptionParameters);
-	
+	If DescriptionParameters <> Undefined Then
+		OpenArgs.Insert("DescriptionParameters", DescriptionParameters);
+	EndIf;
 	For Each Attribute In LocalizationReuse.AllDescription() Do
 		If "Description_" + LocalizationReuse.GetLocalizationCode() = Attribute Then
 			FormItem = Form.Items.Find(Attribute); // FormFieldExtensionForATextBox

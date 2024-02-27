@@ -5378,3 +5378,92 @@ Scenario: _010054 add test command to the list of documents EmployeeSickLeave
 			Then I wait that in user messages the "Success client" substring will appear in 10 seconds
 			Then I wait that in user messages the "Success server" substring will appear in 10 seconds
 		And I close all client application windows
+
+Scenario: _010055 add test command to the list of documents DebitCreditNote
+	And I close all client application windows
+	* Open Command register
+		Given I open hyperlink "e1cib/list/InformationRegister.ExternalCommands"
+		And I click the button named "FormCreate"
+	* Filling test command data for DebitCreditNote
+		* Create metadata for DebitCreditNote and select it for the command
+			And I click Select button of "Configuration metadata" field
+			And I click "List" button	
+			And I go to line in "List" table
+				| 'Description'       |
+				| 'Debit/Credit note' |
+			And I select current line in "List" table
+			And I click Select button of "Plugins" field
+			Then "Plugins" window is opened
+			And I go to line in "List" table
+				| 'Description'      |
+				| 'Test command'     |
+			And I select current line in "List" table
+			And I select "List form" exact value from "Form type" drop-down list
+	* Save command
+		And I click "Save and close" button
+	* Check command save
+		Given I open hyperlink "e1cib/list/InformationRegister.ExternalCommands"
+		And "List" table contains lines
+		| 'Configuration metadata'  | 'Plugins'        |
+		| 'Debit/Credit note'       | 'Test command'   |
+	* Check the command from the document DebitCreditNote
+		Given I open hyperlink "e1cib/list/Document.DebitCreditNote"
+		And I go to the last line in "List" table
+		And I click "Test command" button
+		Then I wait that in user messages the "Success client" substring will appear in 10 seconds
+		Then I wait that in user messages the "Success server" substring will appear in 10 seconds
+	* Check that the command is not displayed in the document
+		And I click "Create" button
+		When I Check the steps for Exception
+			| 'And I click "Test command" button'    |
+		And I close all client application windows
+	* Connect a command to a document form
+		* Open Command register
+			Given I open hyperlink "e1cib/list/InformationRegister.ExternalCommands"
+			And I click the button named "FormCreate"
+		* Filling in command
+			And I click Select button of "Configuration metadata" field
+			And I click "List" button
+			And I go to line in "List" table
+				| 'Description'       |
+				| 'Debit/Credit note' |
+			And I select current line in "List" table
+			And I click Select button of "Plugins" field
+			And I go to line in "List" table
+				| 'Description'      |
+				| 'Test command'     |
+			And I select current line in "List" table
+			And I select "Object form" exact value from "Form type" drop-down list
+			And I click "Save and close" button
+	* Check that the command is displayed in the document
+		Given I open hyperlink "e1cib/list/Document.DebitCreditNote"
+		And I click "Create" button
+		And I click "Test command" button
+		Then I wait that in user messages the "Success client" substring will appear in 10 seconds
+		Then I wait that in user messages the "Success server" substring will appear in 10 seconds
+		And I close all client application windows
+	* Connect the command to the document selection form
+		* Open Command register
+			Given I open hyperlink "e1cib/list/InformationRegister.ExternalCommands"
+			And I click the button named "FormCreate"
+		* Filling in command
+			And I click Select button of "Configuration metadata" field
+			And I click "List" button
+			And I go to line in "List" table
+				| 'Description'       |
+				| 'Debit/Credit note' |
+			And I select current line in "List" table
+			And I click Select button of "Plugins" field
+			And I go to line in "List" table
+				| 'Description'      |
+				| 'Test command'     |
+			And I select current line in "List" table
+			And I select "Choice form" exact value from "Form type" drop-down list
+			And I click "Save and close" button
+		* Check that the command is displayed in the choice form
+			And I execute the built-in language code (Extension)
+				| 'OpenForm("Document.DebitCreditNote.ChoiceForm", , Undefined, , , , , FormWindowOpeningMode.Independent)'     |
+			And I click "Test command" button
+			Then I wait that in user messages the "Success client" substring will appear in 10 seconds
+			Then I wait that in user messages the "Success server" substring will appear in 10 seconds
+		And I close all client application windows

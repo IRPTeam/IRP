@@ -551,3 +551,14 @@ Scenario: _023131 check the display of the header of the collapsible group in Re
 								| 'And I click Select button of  "Store" field'         |
 	And I click the hyperlink named "DecorationGroupTitleCollapsedPicture"
 	And I close all client application windows
+
+Scenario: _023132 check the display of the header of the collapsible group in DebitCreditNote
+	Given I open hyperlink "e1cib/list/Document.DebitCreditNote"
+	* Check the display of the header of the collapsible group
+		When check the display of the header of the collapsible group in OpeningEntry
+		Then the field named "DecorationGroupTitleUncollapsedLabel" value contains "Company: Main Company" text
+	And I click the hyperlink named "DecorationGroupTitleUncollapsedLabel"
+	When I Check the steps for Exception
+								| 'And I click Select button of  "Company" field'         |
+	And I click the hyperlink named "DecorationGroupTitleCollapsedPicture"
+	And I close all client application windows

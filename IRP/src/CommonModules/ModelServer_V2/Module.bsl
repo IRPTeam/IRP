@@ -363,6 +363,22 @@ Function GetAgreementTypeByTransactionType(TransactionType) Export
 		Raise StrTemplate("Unknown AgreementType by TransactionType [%1]", TransactionType);
 	EndIf;
 EndFunction	
+
+Function GetAgreementTypeByDebtType(DebtType) Export
+	If Not ValueIsFilled(DebtType) Then
+		Return Enums.AgreementTypes.EmptyRef();
+	EndIf;
+	
+	If DebtType = Enums.DebtTypes.AdvanceCustomer 
+		Or DebtType = Enums.DebtTypes.TransactionCustomer Then
+		Return Enums.AgreementTypes.Customer;
+	ElsIf DebtType = Enums.DebtTypes.AdvanceVendor
+		Or DebtType = Enums.DebtTypes.TransactionVendor Then
+		Return Enums.AgreementTypes.Vendor;
+	Else
+		Raise StrTemplate("Unknown AgreementType by DebtType [%1]", DebtType);
+	EndIf;
+EndFunction	
 	
 Function GetBankTermsByPaymentType(PaymentType, Branch) Export
 	Query = New Query;

@@ -1,4 +1,4 @@
-#language: en
+﻿#language: en
 @tree
 @Positive
 @Filters
@@ -499,6 +499,11 @@ Scenario: _028013 check Description in the document Money transfer
 	Given I open hyperlink "e1cib/list/Document.MoneyTransfer"
 	When check Description
 
+Scenario: _028014 check Description in the document DebitCreditNote
+	And I close all client application windows
+	Given I open hyperlink "e1cib/list/Document.DebitCreditNote"
+	When check Description
+
 
 Scenario: _028050 check the filter by Company when selecting cash/bank in Cash expense document
 	* Temporary filling in Cash desk 3 Second Company
@@ -701,5 +706,11 @@ Scenario: _028075 check Description in the document Retail return receipt
 Scenario: _028076 check filter by own companies in the document Consolidated retail sales
 	* Open document form
 		Given I open hyperlink "e1cib/list/Document.ConsolidatedRetailSales"
+	* Check the filter for Own Company
+		When check the filter by my own company in Opening entry/Item stock adjustment
+
+Scenario: _028077 check filter by own companies in the document DebitCreditNote
+	* Open document form
+		Given I open hyperlink "e1cib/list/Document.DebitCreditNote"
 	* Check the filter for Own Company
 		When check the filter by my own company in Opening entry/Item stock adjustment

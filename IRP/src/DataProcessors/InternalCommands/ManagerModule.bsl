@@ -15,6 +15,7 @@ Function GetAllCommandDescriptions() Export
 	Result.Add(GetCommandDescription("GroupEditingProperties"));
 	Result.Add(GetCommandDescription("CloneValueFromFirstRow"));
 	Result.Add(GetCommandDescription("LoadDataFromTable"));
+	Result.Add(GetCommandDescription("AuditLock"));
 	
 	Return Result;
 	
@@ -43,6 +44,9 @@ Function GetCommandDescription(CommandName) Export
 	
 	ElsIf CommandName = "LoadDataFromTable" Then
 		Return LoadDataFromTable_GetCommandDescription();
+	
+	ElsIf CommandName = "AuditLock" Then
+		Return AuditLock_GetCommandDescription();
 
 	EndIf;
 	
@@ -89,6 +93,9 @@ Procedure OnCommandCreate(CommandName, CommandParameters, AddInfo = Undefined) E
 		
 	ElsIf CommandName = "LoadDataFromTable" Then
 		LoadDataFromTable_OnCommandCreate(CommandName, CommandParameters, AddInfo);
+		
+	ElsIf CommandName = "AuditLock" Then
+		AuditLock_OnCommandCreate(CommandName, CommandParameters, AddInfo);
 		
 	EndIf;
 	
@@ -611,6 +618,76 @@ Procedure LoadDataFromTable_OnCommandCreate(CommandName, CommandParameters, AddI
 		EndIf;
 	EndIf;
 	
+EndProcedure
+
+#EndRegion
+
+#Region AuditLock
+
+// Audit lock command description.
+// 
+// Returns:
+//  See InternalCommandsServer.GetCommandDescription
+Function AuditLock_GetCommandDescription()
+	
+	CommandDescription = InternalCommandsServer.GetCommandDescription();
+	
+	CommandDescription.Name = "AuditLock";
+	//@skip-check statement-type-change, property-return-type
+	CommandDescription.Title = R().AuditLock_001;
+	//@skip-check statement-type-change, property-return-type
+	CommandDescription.TitleCheck = R().AuditLock_002;
+	CommandDescription.ToolTip = CommandDescription.Title;
+	CommandDescription.Picture = "UserWithAuthentication";
+	CommandDescription.PictureCheck = "User";
+	CommandDescription.EnableChecking = True;
+	
+	CommandDescription.LocationGroup = "CommandBar.Tools";
+	CommandDescription.LocationInCommandBar = "InAdditionalSubmenu"; //ButtonLocationInCommandBar.InAdditionalSubmenu
+	CommandDescription.ModifiesStoredData = False;
+	
+	CommandDescription.HasActionInitialization = True;
+	CommandDescription.HasActionOnCommandCreate = True;
+	CommandDescription.HasActionAfterRunning = True;
+	
+	CommandDescription.UsingListForm = False;
+	CommandDescription.UsingChoiceForm = False;
+	CommandDescription.UsingObjectForm = True;
+	
+	Targets = CommandDescription.Targets;
+	For Each DocMetadata In Metadata.Documents Do
+		Targets.Add(DocMetadata.FullName());
+	EndDo;
+	
+	CommandDescription.Targets = New FixedArray(Targets);
+	
+	Return CommandDescription;
+	
+EndFunction
+
+// See InternalCommandsServer.OnCommandCreate
+Procedure AuditLock_OnCommandCreate(CommandName, CommandParameters, AddInfo)
+
+	If CommonFunctionsClientServer.ObjectHasProperty(CommandParameters, "MainAttribute") And
+		CommonFunctionsClientServer.ObjectHasProperty(CommandParameters.MainAttribute, "Ref") Then
+		//@skip-check property-return-type
+		CommandParameters.CommandButton.Check = AuditLockPrivileged.LockIsSet(CommandParameters.MainAttribute.Ref);
+	EndIf;
+	
+	If CommandParameters.CommandButton.Check Then
+		CommandParameters.CommandButton.Title = 
+			?(IsBlankString(CommandParameters.CommandDescription.TitleCheck), 
+				CommandParameters.CommandDescription.Title, 
+				CommandParameters.CommandDescription.TitleCheck);
+		If Not IsBlankString(CommandParameters.CommandDescription.PictureCheck) Then
+			CommandPicture = PictureLib[CommandParameters.CommandDescription.PictureCheck]; // Picture
+			CommandParameters.CommandButton.Picture = CommandPicture;
+		ElsIf Not IsBlankString(CommandParameters.CommandDescription.Picture) Then
+			CommandPicture = PictureLib[CommandParameters.CommandDescription.Picture]; // Picture
+			CommandParameters.CommandButton.Picture = CommandPicture;
+		EndIf;
+	EndIf;
+		 
 EndProcedure
 
 #EndRegion

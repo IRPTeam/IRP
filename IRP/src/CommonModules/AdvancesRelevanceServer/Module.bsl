@@ -778,11 +778,16 @@ EndFunction
 
 Procedure SetBound(DocObject, BoundParameters, RelevanceRegisterName)
 	If ValueIsFilled(BoundParameters.DateOld) Then
-		If GetPointInTime(BoundParameters, RelevanceRegisterName).Compare(DocObject.PointInTime()) = 1 Then
-			ClearRecordSet(BoundParameters, RelevanceRegisterName);
+		OldPointInTime = GetPointInTime(BoundParameters, RelevanceRegisterName);
+		If Not ValueIsFilled(OldPointInTime) Then
 			WriteRecordSet(DocObject.Ref, BoundParameters, RelevanceRegisterName);
 		Else
-			SetIsRelevance(DocObject.Ref, BoundParameters, RelevanceRegisterName);
+			If OldPointInTime.Compare(DocObject.PointInTime()) = 1 Then
+				ClearRecordSet(BoundParameters, RelevanceRegisterName);
+				WriteRecordSet(DocObject.Ref, BoundParameters, RelevanceRegisterName);
+			Else
+				SetIsRelevance(DocObject.Ref, BoundParameters, RelevanceRegisterName);
+			EndIf;
 		EndIf;
 	Else //first registration
 		WriteRecordSet(DocObject.Ref, BoundParameters, RelevanceRegisterName);

@@ -17,7 +17,7 @@
   <usePurposes>PersonalComputer</usePurposes>
   <defaultRoles>Role.FullAccess</defaultRoles>
   <vendor>IRP Team</vendor>
-  <version>2024.8.3790</version>
+  <version>2024.9.3825</version>
   <updateCatalogAddress>https://github.com/IRPTeam/IRP</updateCatalogAddress>
   <useManagedFormInOrdinaryApplication>true</useManagedFormInOrdinaryApplication>
   <useOrdinaryFormInManagedApplication>true</useOrdinaryFormInManagedApplication>
@@ -431,6 +431,8 @@
   <roles>Role.AccumulationRegisters_TM1020B_AdvancesKey</roles>
   <roles>Role.AccumulationRegisters_TM1030B_TransactionsKey</roles>
   <roles>Role.Document_DebitCreditNote</roles>
+  <roles>Role.AuditLockSet</roles>
+  <roles>Role.AuditLockUnset</roles>
   <commonTemplates>CommonTemplate.HTMLPictureSlider</commonTemplates>
   <commonTemplates>CommonTemplate.HTMLAddAttributes</commonTemplates>
   <commonTemplates>CommonTemplate.HTMLGallery</commonTemplates>
@@ -745,6 +747,7 @@
   <commonModules>CommonModule.DocDebitCreditNoteClient</commonModules>
   <commonModules>CommonModule.DocDebitCreditNoteServer</commonModules>
   <commonModules>CommonModule.ChartsOfCharacteristicTypesServer</commonModules>
+  <commonModules>CommonModule.AuditLockPrivileged</commonModules>
   <commonAttributes>CommonAttribute.Author</commonAttributes>
   <commonAttributes>CommonAttribute.Branch</commonAttributes>
   <commonAttributes>CommonAttribute.Description</commonAttributes>
@@ -794,6 +797,7 @@
   <eventSubscriptions>EventSubscription.BeforeWrite_Catalogs_CommonDataFilling</eventSubscriptions>
   <eventSubscriptions>EventSubscription.BeforeWrite_Documents_CommonDataFilling</eventSubscriptions>
   <eventSubscriptions>EventSubscription.Filling_CatalogsWithDefaultData</eventSubscriptions>
+  <eventSubscriptions>EventSubscription.BeforeWrite_AuditLock</eventSubscriptions>
   <scheduledJobs>ScheduledJob.AddExternalFunctionsToJobQueue</scheduledJobs>
   <scheduledJobs>ScheduledJob.AreaUpdate</scheduledJobs>
   <scheduledJobs>ScheduledJob.ExportData</scheduledJobs>
@@ -1262,7 +1266,9 @@
   <enums>Enum.EmployeeScheduleTypes</enums>
   <enums>Enum.RecordType</enums>
   <enums>Enum.AgingPeriodTypes</enums>
+  <enums>Enum.DebtTypes</enums>
   <enums>Enum.PaymentStatuses</enums>
+  <enums>Enum.AuditLockActions</enums>
   <reports>Report.A0010_TrialBalance</reports>
   <reports>Report.A0011_TrialBalanceByAccount</reports>
   <reports>Report.A0012_AccountCard</reports>
@@ -1387,6 +1393,8 @@
   <informationRegisters>InformationRegister.T2012S_AdvancesCurrencyRevaluation</informationRegisters>
   <informationRegisters>InformationRegister.T9540S_EmployeeVacations</informationRegisters>
   <informationRegisters>InformationRegister.T9550S_EmployeeSickLeave</informationRegisters>
+  <informationRegisters>InformationRegister.AuditLock</informationRegisters>
+  <informationRegisters>InformationRegister.AuditLockHistory</informationRegisters>
   <accumulationRegisters>AccumulationRegister.CashInTransit</accumulationRegisters>
   <accumulationRegisters>AccumulationRegister.R1001T_Purchases</accumulationRegisters>
   <accumulationRegisters>AccumulationRegister.R1002T_PurchaseReturns</accumulationRegisters>

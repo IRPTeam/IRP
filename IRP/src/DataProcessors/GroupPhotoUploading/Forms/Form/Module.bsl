@@ -1,9 +1,14 @@
 // @strict-types
+// @skip-check module-self-reference
 
 #Region Variables
 
 &AtClient
 Var SplashForm; // ClientApplicationForm
+&AtClient
+Var PacketSize; // Number
+&AtClient
+Var PacketIndex; // Number
 &AtClient
 Var ArrayFilesMD5; // Array of String
 &AtClient
@@ -72,8 +77,6 @@ EndProcedure
 &AtClient
 Procedure AnalizeFolder(Command)
 	
-	DetachIdleHandler("AnalizeFolder_Read");
-	
 	ThisObject.FilesTable.Clear();
 	If IsBlankString(ThisObject.FolderPath) Then
 		Return;
@@ -84,28 +87,23 @@ Procedure AnalizeFolder(Command)
 		Return;
 	EndIf;
 	
-	SplashForm = OpenForm("CommonForm.BackgroundJobSplash",
-		New Structure("BackgroundJobTitle", R().GPU_AnalizeFolder),
-		ThisObject, 
-		New UUID(),,,,
-		FormWindowOpeningMode.LockOwnerWindow);
-	//@skip-check property-return-type
-	SplashForm.EndDate = CommonFunctionsServer.GetCurrentSessionDate();
-	SplashForm.FormCanBeClose = True;
-	SplashForm.CommandBar.ChildItems.FormCancelJob.Visible = False;
-	SplashForm.Items.DoNotCloseOnFinish.Visible = False;
-	SplashForm.Items.Percent.MaxValue = ArrayFiles.Count();
+	ThisObject.Start = CommonFunctionsServer.GetCurrentSessionDate();
 	
-	CurrentFileIndex = 0;
+	PacketIndex = 0;
+	PacketCount = Int(ArrayFiles.Count() / PacketSize) + 1;
+	BackgroundJobUUID = New UUID();
 	ArrayFilesMD5 = New Array(); // Array of String
 	
-	AttachIdleHandler("AnalizeFolder_Read", 0.01, True);
+	//@skip-warning
+	CreateSplashForm(R().GPU_AnalizeFolder, PacketCount);
+	
+	AttachIdleHandler("AnalizeFolder_Read", 0.5, True);
 	
 EndProcedure
 
 &AtClient
 Procedure FindOwner(Command)
-	Return;
+	FindingOwnersOnClient();
 EndProcedure
 
 &AtClient
@@ -113,7 +111,6 @@ Procedure Load(Command)
 	
 	ThisObject.Start = CommonFunctionsServer.GetCurrentSessionDate();
 	
-	CurrentFileIndex = 0;
 	FilesTableRecords = New Array; // Array of FormDataCollectionItem
 	For Each FilesTableRecord In ThisObject.FilesTable Do
 		If IsBlankString(FilesTableRecord.UUID) Then
@@ -124,24 +121,15 @@ Procedure Load(Command)
 		EndIf;
 	EndDo;
 	
-	If FilesTableRecords.Count() = 0 Then
-		ThisObject.Finish = CommonFunctionsServer.GetCurrentSessionDate();
-		Return;
-	EndIf;
+	CurrentFileIndex = 0;
+	PacketIndex = 0;
+	PacketCount = Int(FilesTableRecords.Count() / PacketSize) + 1;
+	BackgroundJobUUID = New UUID();
 	
-	SplashForm = OpenForm("CommonForm.BackgroundJobSplash",
-		New Structure("BackgroundJobTitle", R().GPU_Load_SendToDrive),
-		ThisObject, 
-		New UUID(),,,,
-		FormWindowOpeningMode.LockOwnerWindow);
-	//@skip-check property-return-type
-	SplashForm.EndDate = CommonFunctionsServer.GetCurrentSessionDate();
-	SplashForm.FormCanBeClose = True;
-	SplashForm.CommandBar.ChildItems.FormCancelJob.Visible = False;
-	SplashForm.Items.DoNotCloseOnFinish.Visible = False;
-	SplashForm.Items.Percent.MaxValue = FilesTableRecords.Count();
+	//@skip-warning
+	CreateSplashForm(R().GPU_Load_SendToDrive, PacketCount);
 	
-	AttachIdleHandler("LoadingOnClient", 0.01, True);
+	AttachIdleHandler("LoadingOnClient", 0.1, True);
 	
 EndProcedure
 
@@ -156,6 +144,11 @@ Procedure PreviewOnChange(Item)
 EndProcedure
 
 &AtClient
+Procedure FilesTableBeforeAddRow(Item, Cancel, Clone, Parent, IsFolder, Parameter)
+	Cancel = True;
+EndProcedure
+
+&AtClient
 Procedure FilesTableOnActivateRow(Item)
 	If Items.FilesTable.CurrentData = Undefined Then
 		Return;
@@ -167,20 +160,66 @@ Procedure FilesTableOnActivateRow(Item)
 			+ """ height=""100%""></html>";
 EndProcedure
 
+&AtClient
+Procedure FilesTableOwnerOnChange(Item)
+	CurrentRow = ThisObject.Items.FilesTable.CurrentData;
+	If NOT ValueIsFilled(CurrentRow.Owner) Then
+		CurrentRow.IsLinked = False;
+	Else
+		FileRowDescription = FileRowDescription();
+		FileRowDescription.FileRowID = CurrentRow.UUID;
+		FillPropertyValues(FileRowDescription, CurrentRow);
+		FileRows = New Array; // Array of See FileRowDescription
+		FileRows.Add(FileRowDescription);
+		
+		CheckExistingLinks(FileRows);
+		ReadExistingLinks(FileRows)
+	EndIf;
+EndProcedure
+
 #EndRegion
 
 #Region Other
 
 &AtClient
 Procedure AnalizeFolder_Read()
-
-	FileItem = ArrayFiles[CurrentFileIndex];
-	CurrentFileIndex = CurrentFileIndex + 1;
 	
+	IsCycleEnd = False;
+	StartIndex = PacketSize * PacketIndex;
+	EndIndex = StartIndex + PacketSize - 1;
+	PacketIndex = PacketIndex + 1;
+	
+	For CurrentFileIndex = StartIndex To EndIndex Do
+		If CurrentFileIndex = ArrayFiles.Count() Then
+			IsCycleEnd = True;
+			Break;
+		EndIf;
+		//@skip-check invocation-parameter-type-intersect
+		AnalizeFolder_Read_File(ArrayFiles[CurrentFileIndex]);
+	EndDo;
+	
+	If Not IsCycleEnd Then
+		ShowCurrentSplashData();
+		AttachIdleHandler("AnalizeFolder_Read", 1, True);
+		Return;
+	EndIf;
+
 	//@skip-check property-return-type
-	SplashForm.Percent = CurrentFileIndex;
+	SetSplashData(R().GPU_CheckingFilesExist);
+	
+	AttachIdleHandler("AnalizeFolder_CheckFiles", 0.5, True);
+
+EndProcedure
+
+// Analize folder read file.
+// 
+// Parameters:
+//  FileItem - File - File item
+&AtClient
+Procedure AnalizeFolder_Read_File(FileItem)
 	
 	ImageExtensions = PictureViewerClientServer.GetImageExtensions();
+	
 	If Not FileItem.IsDirectory() And ImageExtensions.Find(FileItem.Extension) <> Undefined Then
 		FilesTableRecord = ThisObject.FilesTable.Add();
 		FilesTableRecord.FilePath = StrReplace(FileItem.FullName, ThisObject.FolderPath, "");
@@ -193,14 +232,6 @@ Procedure AnalizeFolder_Read()
 		EndIf;
 	EndIf;
 	
-	If CurrentFileIndex = ArrayFiles.Count() Then
-		//@skip-check property-return-type
-		SplashForm.JobTitle = R().GPU_CheckingFilesExist;
-		AttachIdleHandler("AnalizeFolder_CheckFiles", 0.1, True);
-	Else
-		AttachIdleHandler("AnalizeFolder_Read", 0.01, True);
-	EndIf;
-
 EndProcedure
 
 &AtClient
@@ -222,9 +253,11 @@ Procedure AnalizeFolder_CheckFiles()
 		EndDo;
 	EndDo;
 	
-	SplashForm.Close();
-	//@skip-check statement-type-change
-	SplashForm = Undefined;
+	FindingOwnersOnClient();
+	
+	CloseSplashForm();
+	
+	ThisObject.Finish = CommonFunctionsServer.GetCurrentSessionDate();
 
 EndProcedure
 
@@ -305,204 +338,232 @@ Function FileRefDescription()
 	Return Result;
 EndFunction
 
-// Start loading on client.
+// Finding owners on client.
+&AtClient
+Procedure FindingOwnersOnClient()
+	// In extensions, add finding in Before-mode
+	
+	RowFilter = New Structure("IsLinked", False);
+	RowsWithoutLink = FilesTable.FindRows(RowFilter);
+	If RowsWithoutLink.Count() > 0 Then
+		RowsArray = New Array; // Array of See FileRowDescription
+		For Each CurrentRow In RowsWithoutLink Do
+			FileRowDescription = FileRowDescription();
+			FileRowDescription.FileRowID = CurrentRow.UUID;
+			FillPropertyValues(FileRowDescription, CurrentRow);
+			RowsArray.Add(FileRowDescription);
+		EndDo;
+		CheckExistingLinks(RowsArray);
+		ReadExistingLinks(RowsArray)
+	EndIf;
+EndProcedure
+
+// File row description.
+// 
+// Returns:
+//  Structure - File row description:
+// * FileRowID - String - 
+// * FileRef - CatalogRef.Files - 
+// * Owner - DefinedType.typeFilesOwner - 
+// * IsLinked - Boolean - 
+&AtClientAtServerNoContext
+Function FileRowDescription()
+	Result = New Structure;
+	Result.Insert("FileRowID", "");
+	Result.Insert("FileRef", PredefinedValue("Catalog.Files.EmptyRef"));
+	Result.Insert("Owner", Undefined);
+	Result.Insert("IsLinked", False);
+	Return Result;
+EndFunction
+
+// Check existing links.
 // 
 // Parameters:
-//  FilesTableRecords - Array of FormDataCollectionItem - Files table records
-//  
-//@skip-check property-return-type, statement-type-change
+//  FileRows - Array of See FileRowDescription
+&AtServerNoContext
+Procedure CheckExistingLinks(FileRows)
+
+	Table = New ValueTable();
+	Table.Columns.Add("FileRowID", New TypeDescription("String"));
+	Table.Columns.Add("FileRef", New TypeDescription("CatalogRef.Files"));
+	Table.Columns.Add("Owner", Metadata.DefinedTypes.typeFilesOwner.Type);
+	
+	DataMap = New Map;
+	For Each FileRow In FileRows Do
+		FillPropertyValues(Table.Add(), FileRow);
+		DataMap.Insert(FileRow.FileRowID, FileRow);
+	EndDo;
+	
+	Query = New Query;
+	Query.SetParameter("Table", Table);
+	Query.Text =
+	"SELECT
+	|	Table.FileRowID,
+	|	Table.FileRef,
+	|	Table.Owner
+	|INTO tmpFiles
+	|FROM
+	|	&Table AS Table
+	|;
+	|
+	|////////////////////////////////////////////////////////////////////////////////
+	|SELECT
+	|	tmpFiles.FileRowID,
+	|	NOT AttachedFiles.File IS NULL AS IsLinked
+	|FROM
+	|	tmpFiles AS tmpFiles
+	|		LEFT JOIN InformationRegister.AttachedFiles AS AttachedFiles
+	|		ON tmpFiles.Owner = AttachedFiles.Owner
+	|		AND tmpFiles.FileRef = AttachedFiles.File";
+	
+	QuerySelection = Query.Execute().Select();
+	//@skip-check property-return-type, statement-type-change
+	While QuerySelection.Next() Do
+		FileRow = DataMap.Get(QuerySelection.FileRowID);
+		FileRow.IsLinked = QuerySelection.IsLinked;
+	EndDo;
+	
+EndProcedure
+
+// Read existing links.
+// 
+// Parameters:
+//  FileRows - Array of See FileRowDescription
+&AtClient
+Procedure ReadExistingLinks(FileRows)
+	Filter = New Structure("UUID", "");
+	For Each FileRow In FileRows Do
+		Filter.UUID = FileRow.FileRowID; 
+		TableRow = FilesTable.FindRows(Filter)[0];
+		TableRow.IsLinked = FileRow.IsLinked; 
+	EndDo;
+EndProcedure
+
+// Start loading on client.
+// @skip-check property-return-type, statement-type-change
 &AtClient
 Procedure LoadingOnClient()
 	
-	FilesTableRecord = FilesTableRecords[CurrentFileIndex];
-		
-	FileID = FilesTableRecord.UUID; // String
-	FileFullName = ThisObject.FolderPath + FilesTableRecord.FilePath;
-	
-	FileInfo = PictureViewerClientServer.FileInfo();
-	FileInfo.FileID = FileID;
-	FileInfo.MD5 = FilesTableRecord.MD5;
-	FileInfo.Extension = FilesTableRecord.Extension;
-	
-	UploadPictureParameters = New Structure();
-	UploadPictureParameters.Insert("ConnectionSettings", ThisObject.PictureConnectionSetting);
-	UploadPictureParameters.Insert("RequestBody", New BinaryData(FileFullName));
-	UploadPictureParameters.Insert("FileID", FileID);
-	
-	If ThisObject.PictureConnectionSetting.Value.IntegrationType = PredefinedValue("Enum.IntegrationType.LocalFileStorage") Then
-		IntegrationServer.SaveFileToFileStorage(
-			ThisObject.PictureConnectionSetting.Value.AddressPath, 
-			FileID + "." + FileInfo.Extension, 
-			UploadPictureParameters.RequestBody);
-		FileInfo.Success = True;
-		FileInfo.URI = FileID + "." + FileInfo.Extension;
+	IsCycleEnd = False;
+	StartIndex = PacketSize * PacketIndex;
+	EndIndex = StartIndex + PacketSize - 1;
+	PacketIndex = PacketIndex + 1;
+	FilesPacket = New Array; // Array of Structure
+	FilesTableMap = New Map;
 
-	ElsIf Not PictureViewerClient.ExtensionCall_UploadPicture(FileInfo, UploadPictureParameters) Then
-		ThisObject.PictureConnectionSetting.Value.QueryType = "POST";
-		ResourceParameters = New Map();
-		ResourceParameters.Insert("filename", FileID + "." + FileInfo.Extension);	
-		RequestResult = IntegrationClientServer.SendRequest(
-			ThisObject.PictureConnectionSetting.Value, ResourceParameters, , UploadPictureParameters.RequestBody);
-		If IntegrationClientServer.RequestResultIsOk(RequestResult) Then
-			DeserializeResponse = CommonFunctionsServer.DeserializeJSON(RequestResult.ResponseBody);
-			FileInfo.URI = DeserializeResponse.Data.URI;
-			FileInfo.Success = Not IsBlankString(FileInfo.URI);
-		Else
-			FileInfo.Success = False;
-		EndIf;
-	EndIf;
-	
-	If FileInfo.Success = True Then
-		FilesTableRecord.URI = FileInfo.URI;
-		FilesTableRecord.IsSaved = True;
-	EndIf;
-
-	CurrentFileIndex = CurrentFileIndex + 1;
-	SplashForm.Percent = CurrentFileIndex;
+	If TypeOf(FilesTableRecords) = Type("Array") Then
+		For CurrentFileIndex = StartIndex To EndIndex Do
+			If CurrentFileIndex = FilesTableRecords.Count() Then
+				IsCycleEnd = True;
+				Break;
+			EndIf;
+			//@skip-check variable-value-type
+			FilesTableRecord = FilesTableRecords[CurrentFileIndex];
+			FilesTableMap.Insert(FilesTableRecord.UUID, FilesTableRecord);
 			
-	If CurrentFileIndex < FilesTableRecords.Count() Then
-		AttachIdleHandler("LoadingOnClient", 0.01, True);
+			FileInfo = PictureViewerClientServer.FileInfo();
+			FileInfo.FileID = FilesTableRecord.UUID;
+			FileInfo.MD5 = FilesTableRecord.MD5;
+			FileInfo.Extension = FilesTableRecord.Extension;
+			FileInfo.FileName = FilesTableRecord.FileName;
+			FileInfo.Insert("RequestBody", New BinaryData(ThisObject.FolderPath + FilesTableRecord.FilePath));
+			FilesPacket.Add(FileInfo);
+		EndDo;
+	EndIf;
+	
+	If FilesPacket.Count() > 0 Then
+		//@skip-check invocation-parameter-type-intersect
+		Loading_SendServer(FilesPacket, ThisObject.PictureConnectionSetting);
+		For Each FileInfo In FilesPacket Do
+			FilesTableRecord = FilesTableMap.Get(FileInfo.FileID);
+			If FileInfo.Success = True Then
+				FilesTableRecord.URI = FileInfo.URI;
+				FilesTableRecord.IsSaved = True;
+				FilesTableRecord.IsFileCreate = FileInfo.Property("FileRef", FilesTableRecord.FileRef);
+			EndIf;
+		EndDo;
+	EndIf;
+	
+	If Not IsCycleEnd Then
+		ShowCurrentSplashData();
+		AttachIdleHandler("LoadingOnClient", 1, True);
 		Return;
 	EndIf;
+
+	SetSplashData(R().GPU_Load_SaveInBase, 100);
 	
-	BackgroundJobUUID = String(New UUID());
-	SplashForm.JobTitle = R().GPU_Load_SaveInBase;
-	SplashForm.Items.Percent.MaxValue = 100;
-	SplashForm.Percent = 0;
-	
-	FileDescriptionArray = New Array; // Array of TransferableFileDescription
-    For Each FilesTableRecord In ThisObject.FilesTable Do
-        FileDescriptionArray.Add(
-	        	New TransferableFileDescription(ThisObject.FolderPath + FilesTableRecord.FilePath));
-    EndDo;
-    
-   	CompletionNotifyDescription = New NotifyDescription("LoadingOnClient_PutFiles_Finish", ThisObject);
-   	ProgressNotifyDescription = New NotifyDescription("LoadingOnClient_PutFiles_Progress", ThisObject);  
-   	
-   	BeginPutFilesToServer(CompletionNotifyDescription, ProgressNotifyDescription, , FileDescriptionArray, UUID);
-   	
+	AttachIdleHandler("LoadingOnClient_SaveInBase", 1, True);
+
 EndProcedure
 
-// Loading on client put files finish.
+// Loading - send server.
 // 
 // Parameters:
-//  PlacedFileDescriptions - Array of PlacedFileDescription - Placed file descriptions
-//  AddInfo - Undefined - Add info
-&AtClient
-Procedure LoadingOnClient_PutFiles_Finish(PlacedFileDescriptions, AddInfo) Export
-	
-	FileAdrresses = New Map;
-	If PlacedFileDescriptions <> Undefined Then
-    	For Each PlacedFileDescription In PlacedFileDescriptions Do
-    		//@skip-check property-return-type
-    		If Not PlacedFileDescription.PutFileCanceled Then
-		    	//@skip-check invocation-parameter-type-intersect
-		    	FileAdrresses.Insert(Lower(PlacedFileDescription.FileRef.File.FullName), PlacedFileDescription.Address);
-    		EndIf;
-    	EndDo;
-	EndIf;
-	
-	//@skip-check invocation-parameter-type-intersect
-	StartLoadingOnServer(FileAdrresses);
-	
-	SplashForm.Close();
-	//@skip-check statement-type-change
-	SplashForm = Undefined;
-	
-	ThisObject.Finish = CommonFunctionsServer.GetCurrentSessionDate();
-	
-EndProcedure
-
-// Loading on client put files progress.
-// 
-// Parameters:
-//  PlacedFile - PlacedFileDescription - Placed file
-//  PercentFile - Number - Percent file
-//  CancelFile - Boolean - Cancel file
-//  PercentAll - Number - Percent all
-//  CancelAll - Boolean - Cancel all
-//  AddInfo - Undefined - Add info
-//@skip-check method-param-value-type, property-return-type
-&AtClient
-Procedure LoadingOnClient_PutFiles_Progress(PlacedFile, PercentFile, CancelFile, PercentAll, CancelAll, AddInfo) Export
-	If SplashForm <> Undefined Then
-		SplashForm.Percent = PercentAll;
-	EndIf;
-EndProcedure
-
-// Start loading on server.
-// 
-// Parameters:
-//  FileAdrresses - Map - File adrresses
-&AtServer
-Procedure StartLoadingOnServer(FileAdrresses)
+//  FilesPacket - Array of Structure - Files packet
+//  ConnectionSettings - See IntegrationServer.ConnectionSetting
+&AtServerNoContext
+Procedure Loading_SendServer(FilesPacket, ConnectionSettings)
 	
 	Volume = PictureViewerServer.GetIntegrationSettingsPicture().DefaultPictureStorageVolume; // CatalogRef.FileStorageVolumes
 	
-	IncompleteRecords = ThisObject.FilesTable.FindRows(New Structure("FileRef", Catalogs.Files.EmptyRef()));
-	For Each FilesTableRecord In IncompleteRecords Do
+	For Each FileInfo In FilesPacket Do // See PictureViewerClientServer.FileInfo
 		
-		FileFullName = Lower(ThisObject.FolderPath + FilesTableRecord.FilePath);
-		FileTmpAddress = FileAdrresses.Get(FileFullName); // String
-		If FileTmpAddress = Undefined Then
-			Continue;
-		EndIf;
-		
-		FileBinaryData = GetFromTempStorage(FileTmpAddress); // BinaryData
-		DeleteFromTempStorage(FileTmpAddress);
-		
-		If IsBlankString(FilesTableRecord.MD5) Then
-			FilesTableRecord.MD5 = String(PictureViewerServer.MD5ByBinaryData(FileBinaryData));
-		EndIf;
-		
-		ExistingFileRef = PictureViewerServer.GetFileRefByMD5(FilesTableRecord.MD5);
-		If ValueIsFilled(ExistingFileRef) Then
-			FilesTableRecord.FileRef = ExistingFileRef;
-			FilesTableRecord.IsFileCreate = True; 
-			Continue;
-		EndIf;
-		
-		FileInfo = PictureViewerServer.UpdatePictureInfoAndGetPreview(FileBinaryData, ThisObject.PreviewScaleSize);
-		FileInfo.FileID = FilesTableRecord.UUID;
-		FileInfo.MD5 = FilesTableRecord.MD5;
-		FileInfo.Extension = FilesTableRecord.Extension;
-		FileInfo.FileName = FilesTableRecord.FileName;
+		FileInfo.Success = False;
+		FileBody = FileInfo["RequestBody"]; // BinaryData
 		
 		UploadPictureParameters = New Structure();
-		//@skip-check property-return-type
-		UploadPictureParameters.Insert("ConnectionSettings", ThisObject.PictureConnectionSetting);
-		UploadPictureParameters.Insert("RequestBody", FileBinaryData);
-		UploadPictureParameters.Insert("FileID", FilesTableRecord.UUID);
+		UploadPictureParameters.Insert("ConnectionSettings", ConnectionSettings);
+		UploadPictureParameters.Insert("RequestBody", FileBody);
+		UploadPictureParameters.Insert("FileID", FileInfo.FileID);
 		
 		//@skip-check property-return-type
-		If IsBlankString(FilesTableRecord.URI) Then
-			If Not PictureViewerServer.ExtensionCall_UploadPicture(FileInfo, UploadPictureParameters) Then
-				ThisObject.PictureConnectionSetting.Value.QueryType = "POST";
-				ResourceParameters = New Map();
-				ResourceParameters.Insert("filename", FileInfo.FileID + "." + FileInfo.Extension);
-				RequestResult = IntegrationClientServer.SendRequest(
-					ThisObject.PictureConnectionSetting.Value, ResourceParameters, , FileBinaryData);
-				If IntegrationClientServer.RequestResultIsOk(RequestResult) Then
-					DeserializeResponse = CommonFunctionsServer.DeserializeJSON(RequestResult.ResponseBody);
-					FileInfo.URI = String(DeserializeResponse.Data.URI);
-					FileInfo.Success = True;
-				Else
-					FileInfo.Success = False;
-				EndIf;
-			EndIf;
-		Else
+		If ConnectionSettings.Value.IntegrationType = PredefinedValue("Enum.IntegrationType.LocalFileStorage") Then
+			
+			IntegrationServer.SaveFileToFileStorage(
+				ConnectionSettings.Value.AddressPath, 
+				FileInfo.FileID + "." + FileInfo.Extension, 
+				FileBody);
 			FileInfo.Success = True;
+			FileInfo.URI = FileInfo.FileID + "." + FileInfo.Extension;
+	
+		ElsIf Not PictureViewerServer.ExtensionCall_UploadPicture(FileInfo, UploadPictureParameters) Then
+			
+			ConnectionSettings.Value.QueryType = "POST";
+			ResourceParameters = New Map();
+			ResourceParameters.Insert("filename", FileInfo.FileID + "." + FileInfo.Extension);	
+			RequestResult = IntegrationClientServer.SendRequest(
+				ConnectionSettings.Value, ResourceParameters, , FileBody);
+			If IntegrationClientServer.RequestResultIsOk(RequestResult) Then
+				DeserializeResponse = CommonFunctionsServer.DeserializeJSON(RequestResult.ResponseBody);
+				//@skip-check statement-type-change
+				FileInfo.URI = DeserializeResponse.Data.URI;
+			EndIf;
 		EndIf;
 		
+		FileInfo.Success = Not IsBlankString(FileInfo.URI);
 		If FileInfo.Success = True Then
-			FilesTableRecord.FileRef = PictureViewerServer.CreateFile(Volume, FileInfo);
-			FilesTableRecord.IsFileCreate = True;
+			FileInfo.Insert("FileRef", PictureViewerServer.CreateFile(Volume, FileInfo));
 		EndIf;
+		
 	EndDo;
+
+EndProcedure
+
+&AtClient
+Procedure LoadingOnClient_SaveInBase()
+	
+	LoadingSaveInBaseOnServer();
+	
+	CloseSplashForm();
+	
+EndProcedure
+
+&AtServer
+Procedure LoadingSaveInBaseOnServer()
 	
 	CompleteRecords = New Array; // Array of FormDataCollectionItem
 	For Each FilesTableRecord In ThisObject.FilesTable Do
-		If ValueIsFilled(FilesTableRecord.FileRef) And ValueIsFilled(FilesTableRecord.Owner) Then
+		If Not FilesTableRecord.IsLinked And ValueIsFilled(FilesTableRecord.FileRef) And ValueIsFilled(FilesTableRecord.Owner) Then
 			CompleteRecords.Add(FilesTableRecord);
 		EndIf;
 	EndDo;
@@ -538,7 +599,70 @@ Procedure StartLoadingOnServer(FileAdrresses)
 		//@skip-check property-return-type
 		PictureViewerServer.LinkFileToObject(QuerySelection.FileRef, QuerySelection.Owner);
 	EndDo;
+	
+	For Each FilesTableRecord In CompleteRecords Do
+		//@skip-check property-return-type
+		FilesTableRecord.IsLinked = True;
+	EndDo;
 
 EndProcedure
 
+// Create splash form.
+//@skip-check structure-consructor-value-type, property-return-type
+// 
+// Parameters:
+//  FormTitle - String - Form title
+//  ItemCount - Number - Item count
+&AtClient
+Procedure CreateSplashForm(FormTitle, ItemCount)
+	SplashForm = OpenForm("CommonForm.BackgroundJobSplash",
+		New Structure("BackgroundJobTitle", FormTitle),
+		ThisObject, 
+		BackgroundJobUUID,,,,
+		FormWindowOpeningMode.LockOwnerWindow);
+	SplashForm.FormCanBeClose = True;
+	SplashForm.CommandBar.ChildItems.FormCancelJob.Visible = False;
+	SplashForm.Items.DoNotCloseOnFinish.Visible = False;
+	SplashForm.Items.Percent.MaxValue = ItemCount;
+EndProcedure
+
+// Set splash data.
+// @skip-check property-return-type
+// 
+// Parameters:
+//  JobTitle - Undefined, String - Job title
+//  MaxPercent - Undefined, Number - Max percent
+&AtClient
+Procedure SetSplashData(JobTitle = Undefined, MaxPercent = Undefined) Export
+	If JobTitle <> Undefined Then
+		SplashForm.JobTitle = JobTitle;
+	EndIf;
+	If MaxPercent <> Undefined Then
+		SplashForm.Items.Percent.MaxValue = MaxPercent;
+		SplashForm.Percent = 0;
+	EndIf;
+	SplashForm.EndDate = CommonFunctionsServer.GetCurrentSessionDate();
+EndProcedure
+
+// Show current splash data.
+//@skip-check property-return-type
+&AtClient
+Procedure ShowCurrentSplashData() Export
+	SplashForm.Percent = PacketIndex;
+	SplashForm.EndDate = CommonFunctionsServer.GetCurrentSessionDate();
+EndProcedure
+
+// Close splash form.
+//@skip-check statement-type-change, dynamic-access-method-not-found
+&AtClient
+Procedure CloseSplashForm()
+	If SplashForm <> Undefined Then
+		SplashForm.Close();
+		SplashForm = Undefined;
+	EndIf;
+EndProcedure
+
 #EndRegion
+
+//@skip-check module-structure-init-code-in-region
+PacketSize = 10;

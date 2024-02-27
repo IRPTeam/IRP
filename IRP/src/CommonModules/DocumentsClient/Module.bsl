@@ -1092,8 +1092,7 @@ Function GetFormItemNames()
 				|ItemListConsignor, isControlCodeString,
 				|AccountPayableOtherKey, AccountReceivableOtherKey, CashInTransitKey, CashInTransitIsFixedCurrency,
 				|FixedAssetsKey,
-				|AccrualListTotalVacationDays, AccrualListPaidVacationDays, AccrualListTotalSickLeaveDays ,AccrualListPaidSickLeaveDays,
-				|SendDocumentsKey, ReceiveDocumentsKey";
+				|AccrualListTotalVacationDays, AccrualListPaidVacationDays, AccrualListTotalSickLeaveDays ,AccrualListPaidSickLeaveDays";
 	Return ItemNames;
 EndFunction	
 

@@ -1064,6 +1064,7 @@ Function Strings(Lang) Export
 	Strings.Insert("Error_139", NStr("en = 'Description not unique [%1]'", Lang));	
 	Strings.Insert("Error_140", NStr("en = 'Partner type is required'", Lang));	
 	Strings.Insert("Error_141", NStr("en = '[%1] cannot be changed, has posted documents'", Lang));	
+	Strings.Insert("Error_142", NStr("en = 'Wrong combination of send and receive debt type'", Lang));	
 	
 	Strings.Insert("Error_FillTotalAmount", NStr("en = 'Fill total amount. Row: [%1]'", Lang));
 	
@@ -1605,6 +1606,13 @@ Strings.Insert("MoneyTransfer_DR_R5022T_Expenses_CR_R3021B_CashInTransit",
 	Strings.Insert("GPU_Load_SendToDrive", NStr("en = 'Load images. Send to drive'", Lang));
 	Strings.Insert("GPU_Load_SaveInBase", NStr("en = 'Load images. Save file records'", Lang));
 	Strings.Insert("GPU_CheckingFilesExist", NStr("en = 'Checking if files exist'", Lang));
+#EndRegion
+
+#Region AuditLock
+	Strings.Insert("AuditLock_001", NStr("en = 'Audit lock (set lock)'", Lang));
+	Strings.Insert("AuditLock_002", NStr("en = 'Audit lock (unlock)'", Lang));
+	Strings.Insert("AuditLock_003", NStr("en = 'Access is denied'", Lang));
+	Strings.Insert("AuditLock_004", NStr("en = 'Document is locked by audit lock'", Lang));	
 #EndRegion
 	
 	Return Strings;

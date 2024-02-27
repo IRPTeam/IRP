@@ -163,6 +163,59 @@
       </extInfo>
     </items>
     <items xsi:type="form:FormField">
+      <name>AuditLockIcon</name>
+      <id>73</id>
+      <visible>true</visible>
+      <enabled>true</enabled>
+      <userVisible>
+        <common>true</common>
+      </userVisible>
+      <dataPath xsi:type="form:DataPath">
+        <segments>List.AuditLockIcon</segments>
+      </dataPath>
+      <titleLocation>None</titleLocation>
+      <extendedTooltip>
+        <name>AuditLockIconExtendedTooltip</name>
+        <id>75</id>
+        <visible>true</visible>
+        <enabled>true</enabled>
+        <userVisible>
+          <common>true</common>
+        </userVisible>
+        <type>Label</type>
+        <autoMaxWidth>true</autoMaxWidth>
+        <autoMaxHeight>true</autoMaxHeight>
+        <extInfo xsi:type="form:LabelDecorationExtInfo">
+          <horizontalAlign>Left</horizontalAlign>
+        </extInfo>
+      </extendedTooltip>
+      <contextMenu>
+        <name>AuditLockIconContextMenu</name>
+        <id>74</id>
+        <visible>true</visible>
+        <enabled>true</enabled>
+        <userVisible>
+          <common>true</common>
+        </userVisible>
+        <autoFill>true</autoFill>
+      </contextMenu>
+      <type>PictureField</type>
+      <editMode>Enter</editMode>
+      <showInHeader>true</showInHeader>
+      <headerHorizontalAlign>Left</headerHorizontalAlign>
+      <showInFooter>true</showInFooter>
+      <extInfo xsi:type="form:ImageFieldExtInfo">
+        <autoMaxWidth>true</autoMaxWidth>
+        <autoMaxHeight>true</autoMaxHeight>
+        <horizontalStretch>true</horizontalStretch>
+        <verticalStretch>true</verticalStretch>
+        <valuesPicture xsi:type="core:PictureRef">
+          <picture>StdPicture.UserWithAuthentication</picture>
+        </valuesPicture>
+        <fileDragMode>AsFileRef</fileDragMode>
+      </extInfo>
+    </items>
+    <items xsi:type="form:FormField">
       <name>Number</name>
       <id>16</id>
       <visible>true</visible>
@@ -1106,7 +1159,7 @@ INDEX BY
 ;
 
 ////////////////////////////////////////////////////////////////////////////////
-SELECT
+ SELECT
 	R1021B_VendorsTransactions.Recorder AS Basis,
 	R1021B_VendorsTransactions.Amount,
 	ISNULL(R1021B_VendorsTransactionsBalance.AmountBalance, 0) AS AmountBalance,
@@ -1184,7 +1237,17 @@ WHERE
 		WHEN ISNULL(Payments.Status, -1) = 2
 			THEN VALUE(Enum.PaymentStatuses.NotPaid)
 		ELSE VALUE(Enum.PaymentStatuses.NotTracked)
-	END) AS PaymentStatus
+	END) AS PaymentStatus,
+	MAX(CASE
+		WHEN AuditLock.Document IS NULL
+			THEN -1
+		ELSE 0
+	END) AS AuditLockIcon,
+	MAX(CASE
+		WHEN AuditLock.Document IS NULL
+			THEN Value(Enum.AuditLockActions.Unlock)
+		ELSE Value(Enum.AuditLockActions.Lock)
+	END) AS AuditLockStatus
 {SELECT
 	Store,
 	LedgerType,
@@ -1202,6 +1265,8 @@ FROM
 		LEFT JOIN Document.JournalEntry AS JE
 		ON PurchaseInvoice.Ref = CAST(JE.Basis AS Document.PurchaseInvoice)
 		AND NOT JE.DeletionMark
+		LEFT JOIN InformationRegister.AuditLock AS AuditLock
+		ON Cast(AuditLock.Document AS Document.PurchaseInvoice) = PurchaseInvoice.Ref
 GROUP BY
 	PurchaseInvoice.Ref,
 	PurchaseInvoice.DeletionMark,
@@ -1398,6 +1463,30 @@ GROUP BY
             <content>
               <key>en</key>
               <value>Payment status icon</value>
+            </content>
+          </localValue>
+        </title>
+      </fields>
+      <fields xsi:type="schema:DataCompositionSchemaDataSetField">
+        <dataPath>AuditLockIcon</dataPath>
+        <field>AuditLockIcon</field>
+        <title>
+          <localValue>
+            <content>
+              <key>en</key>
+              <value>Audit lock icon</value>
+            </content>
+          </localValue>
+        </title>
+      </fields>
+      <fields xsi:type="schema:DataCompositionSchemaDataSetField">
+        <dataPath>AuditLockStatus</dataPath>
+        <field>AuditLockStatus</field>
+        <title>
+          <localValue>
+            <content>
+              <key>en</key>
+              <value>Audit lock status</value>
             </content>
           </localValue>
         </title>

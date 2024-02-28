@@ -1508,3 +1508,25 @@ Scenario: Open choise form "VisitorCounter"
 	If the warning is displayed then
 		Then I raise "Failed to open document choise form VisitorCounter" exception
 	And I close current window
+
+Scenario: Open list form "DebitCreditNote" 
+	And I close all client application windows
+	Given I open "DebitCreditNote" document default form
+	If the warning is displayed then
+		Then I raise "Failed to open document form DebitCreditNote" exception
+	And I close current window
+
+Scenario: Open object form "DebitCreditNote"
+	And I close all client application windows
+	Given I open "DebitCreditNote" document main form
+	If the warning is displayed then
+		Then I raise "Failed to open document form DebitCreditNote" exception
+	And I close current window
+
+Scenario: Open choise form "DebitCreditNote"
+	And I close all client application windows
+	And I execute the built-in language code (Extension)
+		| 'OpenForm("Document.DebitCreditNote.ChoiceForm", , Undefined, , , , , FormWindowOpeningMode.Independent)'   |
+	If the warning is displayed then
+		Then I raise "Failed to open document choise form DebitCreditNote" exception
+	And I close current window

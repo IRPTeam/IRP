@@ -1098,12 +1098,12 @@ Procedure RevaluateCurrency(_TempTablesManager, ArrayOfRegisterNames, CurrencyRa
 		
 		EndDo; // QueryTable
 		
-		NotProcesedRows = QueryTable.FindRows(New Structure("Processed", False));
-		For Each NotProcessedRow In NotProcesedRows Do
-			_RocordType = Undefined;
+		NotProcessedRows = QueryTable.FindRows(New Structure("Processed", False));
+		For Each NotProcessedRow In NotProcessedRows Do
+			_RecordType = Undefined;
 			If NotProcessedRow.Amount = 0 Then
 				Continue;
-			ElsIf NotProcessedRow.Amount > 0 THen
+			ElsIf NotProcessedRow.Amount > 0 Then
 				_RecordType = AccumulationRecordType.Expense;
 				AmountBalance = NotProcessedRow.Amount;
 			Else

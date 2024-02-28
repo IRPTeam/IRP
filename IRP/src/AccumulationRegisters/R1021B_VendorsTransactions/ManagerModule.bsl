@@ -395,6 +395,131 @@ Function R1021B_VendorsTransactions_CreditNote() Export
 		|	AND OffsetOfAdvances.Recorder REFS Document.VendorsAdvancesClosing";
 EndFunction
 
+Function R1021B_VendorsTransactions_DebitCreditNote() Export
+	
+	//IsSendAdvanceCustomer
+//IsSendAdvanceVendor
+//
+//IsSendTransactionCustomer
+//IsSendTransactionVendor
+//
+//IsReceiveAdvanceCustomer
+//IsReceiveAdvanceVendor
+//
+//IsReceiveTransactionCustomer
+//IsReceiveTransactionVendor
+
+//3. Vendor transactions (VT) - Customer advances (CA) - минус - плюс
+//4. Vendor transactions (VT) - Customer transactions (CT) - минус - минус
+//16. Vendor transactions (VT) - Vendor transactions (VT) (CT)- минус - плюс
+//
+//3. Vendor transactions (VT) - Customer advances (CA) - минус - плюс
+//4. Vendor transactions (VT) - Customer transactions (CT) - минус - минус
+//16. Vendor transactions (VT) - Vendor transactions (VT) - минус - плюс
+
+
+
+//16. Vendor transactions (VT) - Vendor transactions (VT) (CT)- минус - плюс
+//
+//16. Vendor transactions (VT) - Vendor transactions (VT) - минус - плюс
+
+
+
+	Return
+		"SELECT
+		|case when Doc.PartnersIsEqual then
+		|	case
+		|		when Doc.IsReceiveAdvanceCustomer
+		|			OR Doc.IsReceiveTransactionCustomer
+		|			OR Doc.IsReceiveTransactionVendor
+		|       then VALUE(AccumulationRecordType.Expense)
+		|		else VALUE(AccumulationRecordType.Receipt) end
+		|else
+		|   case
+		|		when  Doc.IsReceiveAdvanceCustomer
+		|             OR Doc.IsReceiveTransactionCustomer
+		|             OR Doc.IsReceiveTransactionVendor
+		|		then VALUE(AccumulationRecordType.Expense)
+		|		else VALUE(AccumulationRecordType.Receipt) end
+		|end as RecordType,
+		|
+		|	Doc.Period,
+		|	Doc.Company,
+		|	Doc.SendBranch AS Branch,
+		|	Doc.Currency,
+		|	Doc.SendLegalName AS LegalName,
+		|	Doc.SendPartner AS Partner,
+		|	Doc.SendAgreement AS Agreement,
+		|	Doc.SendProject AS Project,
+		|	Doc.SendBasisDocument AS Basis,
+		|	Doc.SendOrder AS Order,
+		|	Doc.Amount,
+		|	UNDEFINED AS VendorsAdvancesClosing
+		|INTO R1021B_VendorsTransactions
+		|FROM
+		|	SendTransactions AS Doc
+		|WHERE
+		|	Doc.SendIsVendorTransaction
+		|
+		|UNION ALL
+		|
+		|SELECT
+		|case when Doc.PartnersIsEqual then
+		|	case
+		|		when Doc.IsSendTransactionVendor 
+		|       then VALUE(AccumulationRecordType.Receipt)
+		|		else VALUE(AccumulationRecordType.Expense) end
+		|else
+		|   case
+		|		when  Doc.IsSendTransactionVendor 
+		|		then VALUE(AccumulationRecordType.Receipt)
+		|		else VALUE(AccumulationRecordType.Expense) end
+		|end as RecordType,
+		|
+		|	Doc.Period,
+		|	Doc.Company,
+		|	Doc.ReceiveBranch,
+		|	Doc.Currency,
+		|	Doc.ReceiveLegalName,
+		|	Doc.ReceivePartner,
+		|	Doc.ReceiveAgreement,
+		|	Doc.ReceiveProject,
+		|	Doc.ReceiveBasisDocument,
+		|	Doc.ReceiveOrder,
+		|	Doc.Amount,
+		|	UNDEFINED
+		|FROM
+		|	ReceiveTransactions AS Doc
+		|WHERE
+		|	Doc.SendIsVendorTransaction
+		|
+		|UNION ALL
+		|
+		|SELECT
+		|	CASE
+		|		WHEN OffsetOfAdvances.RecordType = VALUE(Enum.RecordType.Receipt)
+		|			THEN VALUE(AccumulationRecordType.Receipt)
+		|		ELSE VALUE(AccumulationRecordType.Expense)
+		|	END,
+		|	OffsetOfAdvances.Period,
+		|	OffsetOfAdvances.Company,
+		|	OffsetOfAdvances.Branch,
+		|	OffsetOfAdvances.Currency,
+		|	OffsetOfAdvances.LegalName,
+		|	OffsetOfAdvances.Partner,
+		|	OffsetOfAdvances.TransactionAgreement,
+		|	OffsetOfAdvances.TransactionProject,
+		|	OffsetOfAdvances.TransactionDocument,
+		|	OffsetOfAdvances.TransactionOrder,
+		|	OffsetOfAdvances.Amount,
+		|	OffsetOfAdvances.Recorder
+		|FROM
+		|	InformationRegister.T2010S_OffsetOfAdvances AS OffsetOfAdvances
+		|WHERE
+		|	OffsetOfAdvances.Document = &Ref
+		|	AND OffsetOfAdvances.Recorder REFS Document.VendorsAdvancesClosing";
+EndFunction
+
 Function R1021B_VendorsTransactions_Cheque() Export
 	Return 
 		"SELECT

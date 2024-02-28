@@ -1614,3 +1614,177 @@ Scenario: _005138 check item creation (button + in documents)
 		And I click "Save and close" button
 		And I close TestClient session
 		Given I open new TestClient session or connect the existing one
+
+Scenario: _005150 check name auto-generation for items (Description)
+	And I close all client application windows
+	* Select item type
+		Given I open hyperlink "e1cib/list/Catalog.ItemTypes"
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Coat'        |
+		And I select current line in "List" table
+	* Сreate an auto-naming formula (item desctiption template)
+		And I move to "Description template" tab
+		And I click the button named "EditItemDescriptionTemplate"		
+		And I expand current line in "SettingsComposer" table
+		And I go to line in "SettingsComposer" table
+			| 'Available fields' |
+			| 'Item ID'          |
+		And I select current line in "SettingsComposer" table
+		And I expand a line in "Operators" table
+			| 'Description'  |
+			| 'Delimiters'   |
+		And I go to line in "Operators" table
+			| 'Description' |
+			| 'Space'           |
+		And I select current line in "Operators" table
+		And I go to line in "SettingsComposer" table
+			| 'Available fields' |
+			| 'Item type'        |
+		And I select current line in "SettingsComposer" table
+		And I go to line in "Operators" table
+			| 'Description' |
+			| '/'           |
+		And I select current line in "Operators" table
+		And I go to line in "SettingsComposer" table
+			| 'Available fields' |
+			| 'Producer'         |
+		And I select current line in "SettingsComposer" table
+		And I click "Check" button
+		Then there are lines in TestClient message log
+			|'Formula is correct'|	
+		And I click "Ok" button
+		And I click Select button of "Season" field
+		And I go to line in "List" table
+			| 'Description' |
+			| '19SD'        |
+		And I select current line in "List" table
+		And I click "Save and close" button
+	* Check Description update
+		Given I open hyperlink "e1cib/list/Catalog.Items"
+		And I go to line in "List" table
+			| 'Description'    |
+			| 'Bodie'          |
+		And I select current line in "List" table
+		* Description en
+			And I click the button named "ButtonFillByTemplate_Description_Description_en"
+			Then the form attribute named "Description_en" became equal to "AB475590i Coat/UNIQ"
+		* Description tr
+			And I click Open button of "ENG" field
+			And I click the button named "ButtonFillByTemplateDescription_tr"
+			Then the form attribute named "Description_tr" became equal to "AB475590i Coat TR/UNIQ"
+		And I click "Ok" button
+		And I click "Save" button
+		Then the form attribute named "Description_en" became equal to "AB475590i Coat/UNIQ"
+	And I close all client application windows
+			
+		
+Scenario: _005151 check name auto-generation for items (Local full description)
+	And I close all client application windows
+	* Select item type
+		Given I open hyperlink "e1cib/list/Catalog.ItemTypes"
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Coat'        |
+		And I select current line in "List" table
+	* Сreate an auto-naming formula (item desctiption template)
+		And I move to "Description template" tab
+		And I click the button named "EditItemLocalFullDescriptionTemplate"	
+		And I expand current line in "SettingsComposer" table
+		And I go to line in "SettingsComposer" table
+			| 'Available fields' |
+			| 'Item type'        |
+		And I select current line in "SettingsComposer" table
+		And I expand current line in "Operators" table		
+		And I go to line in "Operators" table
+			| 'Description' |
+			| '/'           |
+		And I select current line in "Operators" table
+		And I go to line in "SettingsComposer" table
+			| 'Available fields' |
+			| 'Item ID'         |
+		And I select current line in "SettingsComposer" table
+		And I click "Check" button
+		Then there are lines in TestClient message log
+			|'Formula is correct'|	
+		And I click "Ok" button
+		And I click Select button of "Season" field
+		And I go to line in "List" table
+			| 'Description' |
+			| '19SD'        |
+		And I select current line in "List" table
+		And I click "Save and close" button
+	* Check Local full description update
+		Given I open hyperlink "e1cib/list/Catalog.Items"
+		And I go to line in "List" table
+			| 'Description'         |
+			| 'AB475590i Coat/UNIQ' |
+		And I select current line in "List" table
+		And I click the button named "ButtonFillByTemplate_LocalDescription"	
+		Then the form attribute named "LocalFullDescription" became equal to "Coat/AB475590i"		
+		And I click "Save" button
+		Then the form attribute named "LocalFullDescription" became equal to "Coat/AB475590i"	
+	And I close all client application windows
+
+			
+Scenario: _005152 check name auto-generation for items (Foreign full description)
+	And I close all client application windows
+	* Select item type
+		Given I open hyperlink "e1cib/list/Catalog.ItemTypes"
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Coat'        |
+		And I select current line in "List" table
+	* Сreate an auto-naming formula (item desctiption template)
+		And I move to "Description template" tab
+		And I click the button named "EditItemForeignFullDescriptionTemplate"	
+		And I expand current line in "SettingsComposer" table
+		And I go to line in "SettingsComposer" table
+			| 'Available fields' |
+			| 'Item type'        |
+		And I select current line in "SettingsComposer" table
+		And I expand current line in "Operators" table		
+		And I go to line in "Operators" table
+			| 'Description' |
+			| '/'           |
+		And I select current line in "Operators" table
+		And I go to line in "SettingsComposer" table
+			| 'Available fields' |
+			| 'Item ID'         |
+		And I select current line in "SettingsComposer" table
+		And I expand current line in "Operators" table		
+		And I go to line in "Operators" table
+			| 'Description' |
+			| '/'           |
+		And I select current line in "Operators" table
+		And I go to line in "SettingsComposer" table
+			| 'Available fields' |
+			| 'Brand'         |
+		And I select current line in "SettingsComposer" table
+		And I click "Check" button
+		Then there are lines in TestClient message log
+			|'Formula is correct'|	
+		And I click "Ok" button
+		And I click Select button of "Season" field
+		And I go to line in "List" table
+			| 'Description' |
+			| '19SD'        |
+		And I select current line in "List" table
+		And I click "Save and close" button
+	* Create new item and check Foreign full description
+		Given I open hyperlink "e1cib/list/Catalog.Items"
+		And I click the button named "FormCreate"
+		And I select from the drop-down list named "ItemType" by "coat" string
+		And I select from the drop-down list named "Unit" by "pcs" string
+		And I select "UNIQ" value from "Producer" drop-down list
+		And I expand "Purchase and production" group
+		And I select "York" value from "Brand" drop-down list
+		And I click the button named "ButtonFillByTemplate_ForeignDescription"
+		Then "1C:Enterprise" window is opened
+		And I click the button named "Button0"
+		And I input "1233" text in the field named "ItemID"
+		And I click the button named "ButtonFillByTemplate_ForeignDescription"
+		Then "1C:Enterprise" window is opened
+		And I click the button named "Button0"
+		Then the form attribute named "ForeignFullDescription" became equal to "Coat/1233/York"		
+	And I close all client application windows				

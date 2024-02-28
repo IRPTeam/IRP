@@ -4194,6 +4194,22 @@ EndProcedure
 
 #EndRegion
 
+#Region SEND_DEBT_TYPE
+
+Procedure SendDebtTypeOnChange(Object, Form, TableNames) Export
+	For Each TableName In StrSplit(TableNames, ",") Do
+		Parameters = GetSimpleParameters(Object, Form, TrimAll(TableName));
+		ControllerClientServer_V2.SendDebtTypeOnChange(Parameters);
+	EndDo;
+EndProcedure
+
+Procedure OnSetSendDebtTypeNotify(Parameters) Export
+	DocumentsClientServer.ChangeTitleGroupTitle(Parameters.Object, Parameters.Form);
+	Parameters.Form.FormSetVisibilityAvailability();
+EndProcedure
+
+#EndRegion
+
 #Region SEND_PARTNER
 
 Procedure SendPartnerOnChange(Object, Form, TableNames) Export
@@ -4246,35 +4262,23 @@ EndProcedure
 
 Procedure OnSetSendAgreementNotify(Parameters) Export
 	DocumentsClientServer.ChangeTitleGroupTitle(Parameters.Object, Parameters.Form);
+	Parameters.Form.FormSetVisibilityAvailability();
 EndProcedure
 
 #EndRegion
 
-#Region SEND_DOCUMENTS
+#Region RECEIVE_DEBT_TYPE
 
-Procedure SendDocumentsSelection(Object, Form, Item, RowSelected, Field, StandardProcessing) Export
-	ListSelection(Object, Form, Item, RowSelected, Field, StandardProcessing);
+Procedure ReceiveDebtTypeOnChange(Object, Form, TableNames) Export
+	For Each TableName In StrSplit(TableNames, ",") Do
+		Parameters = GetSimpleParameters(Object, Form, TrimAll(TableName));
+		ControllerClientServer_V2.ReceiveDebtTypeOnChange(Parameters);
+	EndDo;
 EndProcedure
 
-Procedure SendDocumentsBeforeAddRow(Object, Form, Cancel, Clone, CurrentData = Undefined) Export
-	NewRow = AddOrCopyRow(Object, Form, "SendDocuments", Cancel, Clone, CurrentData,
-		"SendDocumentsOnAddRowFormNotify", "SendDocumentsOnCopyRowFormNotify");
-	Form.Items.SendDocuments.CurrentRow = NewRow.GetID();
-	If Form.Items.SendDocuments.CurrentRow <> Undefined Then
-		Form.Items.SendDocuments.ChangeRow();
-	EndIf;
-EndProcedure
-
-Procedure SendDocumentsOnAddRowFormNotify(Parameters) Export
-	Parameters.Form.Modified = True;
-EndProcedure
-
-Procedure SendDocumentsOnCopyRowFormNotify(Parameters) Export
-	Parameters.Form.Modified = True;
-EndProcedure
-
-Procedure SendDocumentsAfterDeleteRow(Object, Form) Export
-	DeleteRows(Object, Form, "SendDocuments");
+Procedure OnSetReceiveDebtTypeNotify(Parameters) Export
+	DocumentsClientServer.ChangeTitleGroupTitle(Parameters.Object, Parameters.Form);
+	Parameters.Form.FormSetVisibilityAvailability();
 EndProcedure
 
 #EndRegion
@@ -4331,35 +4335,7 @@ EndProcedure
 
 Procedure OnSetReceiveAgreementNotify(Parameters) Export
 	DocumentsClientServer.ChangeTitleGroupTitle(Parameters.Object, Parameters.Form);
-EndProcedure
-
-#EndRegion
-
-#Region RECEIVE_DOCUMENTS
-
-Procedure ReceiveDocumentsSelection(Object, Form, Item, RowSelected, Field, StandardProcessing) Export
-	ListSelection(Object, Form, Item, RowSelected, Field, StandardProcessing);
-EndProcedure
-
-Procedure ReceiveDocumentsBeforeAddRow(Object, Form, Cancel, Clone, CurrentData = Undefined) Export
-	NewRow = AddOrCopyRow(Object, Form, "ReceiveDocuments", Cancel, Clone, CurrentData,
-		"ReceiveDocumentsOnAddRowFormNotify", "ReceiveDocumentsOnCopyRowFormNotify");
-	Form.Items.ReceiveDocuments.CurrentRow = NewRow.GetID();
-	If Form.Items.ReceiveDocuments.CurrentRow <> Undefined Then
-		Form.Items.ReceiveDocuments.ChangeRow();
-	EndIf;
-EndProcedure
-
-Procedure ReceiveDocumentsOnAddRowFormNotify(Parameters) Export
-	Parameters.Form.Modified = True;
-EndProcedure
-
-Procedure ReceiveDocumentsOnCopyRowFormNotify(Parameters) Export
-	Parameters.Form.Modified = True;
-EndProcedure
-
-Procedure ReceiveDocumentsAfterDeleteRow(Object, Form) Export
-	DeleteRows(Object, Form, "ReceiveDocuments");
+	Parameters.Form.FormSetVisibilityAvailability();
 EndProcedure
 
 #EndRegion

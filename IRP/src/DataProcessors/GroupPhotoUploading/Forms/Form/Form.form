@@ -452,6 +452,10 @@
         <dataPath xsi:type="form:DataPath">
           <segments>FilesTable.IsSaved</segments>
         </dataPath>
+        <toolTip>
+          <key>en</key>
+          <value>File is saved</value>
+        </toolTip>
         <extendedTooltip>
           <name>FilesTableIsSavedExtendedTooltip</name>
           <id>63</id>
@@ -494,62 +498,6 @@
         </extInfo>
       </items>
       <items xsi:type="form:FormField">
-        <name>FilesTableIsFileCreate</name>
-        <id>64</id>
-        <title>
-          <key>en</key>
-          <value>F</value>
-        </title>
-        <visible>true</visible>
-        <enabled>true</enabled>
-        <userVisible>
-          <common>true</common>
-        </userVisible>
-        <dataPath xsi:type="form:DataPath">
-          <segments>FilesTable.IsFileCreate</segments>
-        </dataPath>
-        <extendedTooltip>
-          <name>FilesTableIsFileCreateExtendedTooltip</name>
-          <id>66</id>
-          <visible>true</visible>
-          <enabled>true</enabled>
-          <userVisible>
-            <common>true</common>
-          </userVisible>
-          <type>Label</type>
-          <autoMaxWidth>true</autoMaxWidth>
-          <autoMaxHeight>true</autoMaxHeight>
-          <extInfo xsi:type="form:LabelDecorationExtInfo">
-            <horizontalAlign>Left</horizontalAlign>
-          </extInfo>
-        </extendedTooltip>
-        <contextMenu>
-          <name>FilesTableIsFileCreateContextMenu</name>
-          <id>65</id>
-          <visible>true</visible>
-          <enabled>true</enabled>
-          <userVisible>
-            <common>true</common>
-          </userVisible>
-          <autoFill>true</autoFill>
-        </contextMenu>
-        <type>PictureField</type>
-        <editMode>Enter</editMode>
-        <showInHeader>true</showInHeader>
-        <headerHorizontalAlign>Left</headerHorizontalAlign>
-        <showInFooter>true</showInFooter>
-        <extInfo xsi:type="form:ImageFieldExtInfo">
-          <width>1</width>
-          <maxWidth>1</maxWidth>
-          <autoMaxHeight>true</autoMaxHeight>
-          <verticalStretch>true</verticalStretch>
-          <valuesPicture xsi:type="core:PictureRef">
-            <picture>StdPicture.AppearanceCheckIcon</picture>
-          </valuesPicture>
-          <fileDragMode>AsFileRef</fileDragMode>
-        </extInfo>
-      </items>
-      <items xsi:type="form:FormField">
         <name>FilesTableOwner</name>
         <id>26</id>
         <visible>true</visible>
@@ -560,6 +508,10 @@
         <dataPath xsi:type="form:DataPath">
           <segments>FilesTable.Owner</segments>
         </dataPath>
+        <handlers>
+          <event>OnChange</event>
+          <name>FilesTableOwnerOnChange</name>
+        </handlers>
         <extendedTooltip>
           <name>FilesTableOwnerExtendedTooltip</name>
           <id>28</id>
@@ -597,6 +549,66 @@
           <chooseType>true</chooseType>
           <typeDomainEnabled>true</typeDomainEnabled>
           <textEdit>true</textEdit>
+        </extInfo>
+      </items>
+      <items xsi:type="form:FormField">
+        <name>FilesTableIsLinked</name>
+        <id>88</id>
+        <title>
+          <key>en</key>
+          <value>L</value>
+        </title>
+        <visible>true</visible>
+        <enabled>true</enabled>
+        <userVisible>
+          <common>true</common>
+        </userVisible>
+        <dataPath xsi:type="form:DataPath">
+          <segments>FilesTable.IsLinked</segments>
+        </dataPath>
+        <toolTip>
+          <key>en</key>
+          <value>File is linked</value>
+        </toolTip>
+        <extendedTooltip>
+          <name>FilesTableIsLinkedExtendedTooltip</name>
+          <id>90</id>
+          <visible>true</visible>
+          <enabled>true</enabled>
+          <userVisible>
+            <common>true</common>
+          </userVisible>
+          <type>Label</type>
+          <autoMaxWidth>true</autoMaxWidth>
+          <autoMaxHeight>true</autoMaxHeight>
+          <extInfo xsi:type="form:LabelDecorationExtInfo">
+            <horizontalAlign>Left</horizontalAlign>
+          </extInfo>
+        </extendedTooltip>
+        <contextMenu>
+          <name>FilesTableIsLinkedContextMenu</name>
+          <id>89</id>
+          <visible>true</visible>
+          <enabled>true</enabled>
+          <userVisible>
+            <common>true</common>
+          </userVisible>
+          <autoFill>true</autoFill>
+        </contextMenu>
+        <type>PictureField</type>
+        <editMode>Enter</editMode>
+        <showInHeader>true</showInHeader>
+        <headerHorizontalAlign>Left</headerHorizontalAlign>
+        <showInFooter>true</showInFooter>
+        <extInfo xsi:type="form:ImageFieldExtInfo">
+          <width>1</width>
+          <maxWidth>1</maxWidth>
+          <autoMaxHeight>true</autoMaxHeight>
+          <verticalStretch>true</verticalStretch>
+          <valuesPicture xsi:type="core:PictureRef">
+            <picture>StdPicture.AppearanceCheckIcon</picture>
+          </valuesPicture>
+          <fileDragMode>AsFileRef</fileDragMode>
         </extInfo>
       </items>
       <items xsi:type="form:FormField">
@@ -712,6 +724,7 @@
           <autoMaxHeight>true</autoMaxHeight>
           <placementArea>UserCmds</placementArea>
           <representationInContextMenu>Auto</representationInContextMenu>
+          <locationInCommandBar>InAdditionalSubmenu</locationInCommandBar>
         </items>
         <items xsi:type="form:Button">
           <name>FilesTableLoad</name>
@@ -753,6 +766,10 @@
       <handlers>
         <event>OnActivateRow</event>
         <name>FilesTableOnActivateRow</name>
+      </handlers>
+      <handlers>
+        <event>BeforeAddRow</event>
+        <name>FilesTableBeforeAddRow</name>
       </handlers>
       <searchStringAddition>
         <visible>true</visible>
@@ -895,6 +912,8 @@
         </userVisible>
         <autoFill>true</autoFill>
       </contextMenu>
+      <changeRowSet>true</changeRowSet>
+      <changeRowOrder>true</changeRowOrder>
       <autoMaxWidth>true</autoMaxWidth>
       <autoMaxHeight>true</autoMaxHeight>
       <autoMaxRowsCount>true</autoMaxRowsCount>
@@ -1266,6 +1285,23 @@
       <valueType>
         <types>String</types>
         <stringQualifiers/>
+      </valueType>
+      <view>
+        <common>true</common>
+      </view>
+      <edit>
+        <common>true</common>
+      </edit>
+    </columns>
+    <columns>
+      <name>IsLinked</name>
+      <title>
+        <key>en</key>
+        <value>Is linked</value>
+      </title>
+      <id>25</id>
+      <valueType>
+        <types>Boolean</types>
       </valueType>
       <view>
         <common>true</common>

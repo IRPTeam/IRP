@@ -11,7 +11,7 @@
  </synonym>
  <synonym>
   <key>tr</key>
-  <value>Audit lock privileged</value>
+  <value>Audit kilit öncellikli</value>
  </synonym>
  <server>true</server>
  <serverCall>true</serverCall>

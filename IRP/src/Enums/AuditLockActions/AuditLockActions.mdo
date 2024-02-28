@@ -12,11 +12,11 @@
  </synonym>
  <synonym>
   <key>ru</key>
-  <value>Действия блокировки аудита</value>
+  <value>Действия аудиторского запрета изменения данных</value>
  </synonym>
  <synonym>
   <key>tr</key>
-  <value>Audit lock actions</value>
+  <value>Audit kilit hareketleri</value>
  </synonym>
  <quickChoice>true</quickChoice>
  <choiceMode>BothWays</choiceMode>
@@ -32,7 +32,7 @@
   </synonym>
   <synonym>
    <key>tr</key>
-   <value>Lock</value>
+   <value>Kilit</value>
   </synonym>
  </enumValues>
  <enumValues uuid="73a2ff79-ae65-4e72-8a18-f9f91fb1fcc5">

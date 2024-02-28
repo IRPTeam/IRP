@@ -7,10 +7,10 @@
  </synonym>
  <synonym>
   <key>ru</key>
-  <value>Блокировка аудита   </value>
+  <value>Выключить аудиторский запрет изменения</value>
  </synonym>
  <synonym>
   <key>tr</key>
-  <value>Audit lock (unset lock)</value>
+  <value>Audit kilidi kapat</value>
  </synonym>
 </mdclass:Role>

@@ -16,7 +16,7 @@
  </synonym>
  <synonym>
   <key>tr</key>
-  <value>Debt types</value>
+  <value>Borç tipleri</value>
  </synonym>
  <quickChoice>true</quickChoice>
  <choiceMode>BothWays</choiceMode>
@@ -32,7 +32,7 @@
   </synonym>
   <synonym>
    <key>tr</key>
-   <value>Advance (Vendor)</value>
+   <value>Avans (Tedarikçi)</value>
   </synonym>
  </enumValues>
  <enumValues uuid="4cd055db-62c0-463c-80e6-823172d9a399">
@@ -47,7 +47,7 @@
   </synonym>
   <synonym>
    <key>tr</key>
-   <value>Transaction (Vendor)</value>
+   <value>Hareketler (Tedarikçi)</value>
   </synonym>
  </enumValues>
  <enumValues uuid="08dcab73-6a5c-438c-ab26-8e2287c4a288">
@@ -62,7 +62,7 @@
   </synonym>
   <synonym>
    <key>tr</key>
-   <value>Advance (Customer)</value>
+   <value>Avans (Müşteri)</value>
   </synonym>
  </enumValues>
  <enumValues uuid="49188b34-50d3-4121-b8b8-245f4aaab29c">
@@ -77,7 +77,7 @@
   </synonym>
   <synonym>
    <key>tr</key>
-   <value>Transaction (Customer)</value>
+   <value>Hareketler (Müşteriler)</value>
   </synonym>
  </enumValues>
 </mdclass:Enum>

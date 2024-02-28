@@ -146,11 +146,11 @@
   </synonym>
   <synonym>
    <key>ru</key>
-   <value>Блокировка аудита</value>
+   <value>Аудиторский запрет изменения</value>
   </synonym>
   <synonym>
    <key>tr</key>
-   <value>Audit lock</value>
+   <value>Audit kilidi</value>
   </synonym>
   <usePurposes>PersonalComputer</usePurposes>
   <usePurposes>MobileDevice</usePurposes>

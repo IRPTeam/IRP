@@ -11,7 +11,7 @@
  </synonym>
  <synonym>
   <key>tr</key>
-  <value>Before write audit lock</value>
+  <value>Kaydetmeden önce audit kilidi</value>
  </synonym>
  <source>
   <types>DocumentObject</types>

@@ -1608,7 +1608,7 @@
     </title>
     <title>
      <key>tr</key>
-     <value>Ürün (tanım şablonu)         </value>
+     <value>Malzeme (tanım şablonu)         </value>
     </title>
     <extendedTooltip>
      <name>GroupItemDescriptionTemplateExtendedTooltip</name>
@@ -1733,7 +1733,7 @@
     </title>
     <title>
      <key>tr</key>
-     <value>Ürün (yerel tam tanım şablonu) </value>
+     <value>Malzeme (yerel tam tanım şablonu) </value>
     </title>
     <extendedTooltip>
      <name>GroupItemLocalFullDescriptionTemplateExtendedTooltip</name>
@@ -1858,7 +1858,7 @@
     </title>
     <title>
      <key>tr</key>
-     <value>Ürün (yabancı tam tanım şablonu)  </value>
+     <value>Malzeme (yabancı tam tanım şablonu)  </value>
     </title>
     <extendedTooltip>
      <name>GroupItemForeignFullDescriptionTemplateExtendedTooltip</name>
@@ -1902,7 +1902,7 @@
    </title>
    <title>
     <key>tr</key>
-    <value>TANIM şablonu</value>
+    <value>Tanım şablonu</value>
    </title>
    <extendedTooltip>
     <name>PageDecriptionTemplateExtendedTooltip</name>

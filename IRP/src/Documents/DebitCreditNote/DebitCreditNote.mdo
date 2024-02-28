@@ -189,7 +189,7 @@
   </synonym>
   <synonym>
    <key>tr</key>
-   <value>Partner term (send)</value>
+   <value>Ortak dönem (gönderme)</value>
   </synonym>
   <type>
    <types>CatalogRef.Agreements</types>
@@ -235,7 +235,7 @@
   </synonym>
   <synonym>
    <key>tr</key>
-   <value>Project (send)</value>
+   <value>Proje (gönderme)</value>
   </synonym>
   <type>
    <types>CatalogRef.Projects</types>
@@ -258,7 +258,7 @@
   </synonym>
   <synonym>
    <key>tr</key>
-   <value>Debt type (send)</value>
+   <value>Borç türü (gönderme)</value>
   </synonym>
   <type>
    <types>EnumRef.DebtTypes</types>
@@ -282,7 +282,7 @@
   </synonym>
   <synonym>
    <key>tr</key>
-   <value>Order (send)</value>
+   <value>Sipariş (gönderme)</value>
   </synonym>
   <type>
    <types>DocumentRef.PurchaseOrder</types>
@@ -305,7 +305,7 @@
   </synonym>
   <synonym>
    <key>tr</key>
-   <value>Basis (send)</value>
+   <value>Temel (gönderme)</value>
   </synonym>
   <type>
    <types>DefinedType.typeApArTransactionBasises</types>
@@ -374,7 +374,7 @@
   </synonym>
   <synonym>
    <key>tr</key>
-   <value>Partner term (receive)</value>
+   <value>Ortak dönem (alma)</value>
   </synonym>
   <type>
    <types>CatalogRef.Agreements</types>
@@ -420,7 +420,7 @@
   </synonym>
   <synonym>
    <key>tr</key>
-   <value>Project (receive)</value>
+   <value>Proje (alma)   </value>
   </synonym>
   <type>
    <types>CatalogRef.Projects</types>
@@ -443,7 +443,7 @@
   </synonym>
   <synonym>
    <key>tr</key>
-   <value>Debt type (receive)</value>
+   <value>Borç türü (alma)</value>
   </synonym>
   <type>
    <types>EnumRef.DebtTypes</types>
@@ -467,7 +467,7 @@
   </synonym>
   <synonym>
    <key>tr</key>
-   <value>Order (receive)</value>
+   <value>Sipariş (alma)  </value>
   </synonym>
   <type>
    <types>DocumentRef.PurchaseOrder</types>
@@ -490,7 +490,7 @@
   </synonym>
   <synonym>
    <key>tr</key>
-   <value>Basis (receive)</value>
+   <value>Temel (alma)  </value>
   </synonym>
   <type>
    <types>DefinedType.typeApArTransactionBasises</types>

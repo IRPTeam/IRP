@@ -347,7 +347,7 @@
   </synonym>
   <synonym>
    <key>tr</key>
-   <value>Ürün tanım şablonu           </value>
+   <value>Malzeme tanım şablonu           </value>
   </synonym>
   <type>
    <types>String</types>
@@ -373,7 +373,7 @@
   </synonym>
   <synonym>
    <key>tr</key>
-   <value>Ürün yerel tam tanım şablonu  </value>
+   <value>Malzeme yerel tam tanım şablonu  </value>
   </synonym>
   <type>
    <types>String</types>
@@ -399,7 +399,7 @@
   </synonym>
   <synonym>
    <key>tr</key>
-   <value>Ürün yabancı tam tanım şablonu</value>
+   <value>Malzeme yabancı tam tanım şablonu</value>
   </synonym>
   <type>
    <types>String</types>
@@ -774,7 +774,7 @@
   </synonym>
   <synonym>
    <key>tr</key>
-   <value>Ürün şablonu                 </value>
+   <value>Malzeme şablonu                 </value>
   </synonym>
   <templateType>DataCompositionSchema</templateType>
  </templates>

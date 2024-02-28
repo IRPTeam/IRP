@@ -1546,7 +1546,7 @@ GROUP BY
       </content>
       <content>
        <key>tr</key>
-       <value>Audit lock icon</value>
+       <value>Audit kilit resmi</value>
       </content>
      </localValue>
     </title>
@@ -1566,7 +1566,7 @@ GROUP BY
       </content>
       <content>
        <key>tr</key>
-       <value>Audit lock status</value>
+       <value>Audit kilit statüsü</value>
       </content>
      </localValue>
     </title>

@@ -16,11 +16,11 @@
  </synonym>
  <synonym>
   <key>ru</key>
-  <value>История блокировок аудита</value>
+  <value>История аудиторского запрета изменения данных</value>
  </synonym>
  <synonym>
   <key>tr</key>
-  <value>Audit lock history</value>
+  <value>Audit kilit tarihçesi</value>
  </synonym>
  <useStandardCommands>true</useStandardCommands>
  <editType>InDialog</editType>

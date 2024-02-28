@@ -1,6 +1,30 @@
 
 &AtServer
 Procedure OnCreateAtServer(Cancel, StandardProcessing)
+	ThisObject.RegisterName      = Parameters.RegisterName;
+	ThisObject.DocRef            = Parameters.Ref;
+	ThisObject.Company           = Parameters.Company;
+	ThisObject.Branch            = Parameters.Branch;
+	ThisObject.Currency          = Parameters.Currency;
+	For Each Row In Parameters.SelectedDocuments Do
+		NewRow = ThisObject.SelectedDocuments.Add();
+		NewRow.Document = Row;	
+	EndDo;
+	
+	For Each Row In Parameters.AllowedTypes Do
+		NewRow = ThisObject.AllowedTypes.Add();
+		NewRow.Type = Row;	
+	EndDo;
+	FillTable();
+EndProcedure
+
+&AtClient
+Procedure FilterPartnerOnChange(Item)
+	FillTable();
+EndProcedure
+
+&AtServer
+Procedure FillTable()
 	Query = New Query();
 	Query.Text = 
 	"SELECT ALLOWED
@@ -16,8 +40,13 @@ Procedure OnCreateAtServer(Cancel, StandardProcessing)
 	|	AccumulationRegister.R1021B_VendorsTransactions.Balance(&Boundary, Company = &Company
 	|	AND Branch = &Branch
 	|	AND Currency = &Currency
-	|	AND CurrencyMovementType = Value(ChartOfCharacteristicTypes.CurrencyMovementType.SettlementCurrency)
-	|	AND VALUETYPE(Basis) IN (&AllowedTypes)) AS TransactionsBalance
+	|	AND CurrencyMovementType = VALUE(ChartOfCharacteristicTypes.CurrencyMovementType.SettlementCurrency)
+	|	AND VALUETYPE(Basis) IN (&AllowedTypes)
+	|	AND CASE
+	|		WHEN &Filter_Partner
+	|			THEN Partner = &Partner
+	|		ELSE TRUE
+	|	END) AS TransactionsBalance
 	|WHERE
 	|	TransactionsBalance.AmountBalance > 0
 	|	AND NOT TransactionsBalance.Basis.Ref IS NULL
@@ -26,22 +55,34 @@ Procedure OnCreateAtServer(Cancel, StandardProcessing)
 	|ORDER BY
 	|	TransactionsBalance.Basis.Date";
 	
-	Query.Text = StrReplace(Query.Text, "R1021B_VendorsTransactions", Parameters.RegisterName);
+	Query.Text = StrReplace(Query.Text, "R1021B_VendorsTransactions", ThisObject.RegisterName);
 	
-	If ValueIsFilled(Parameters.Ref) Then
-		Query.SetParameter("Boundary", New Boundary(Parameters.Ref.PointInTime(), BoundaryType.Excluding));
+	If ValueIsFilled(ThisObject.DocRef) Then
+		Query.SetParameter("Boundary", New Boundary(ThisObject.DocRef.PointInTime(), BoundaryType.Excluding));
 	Else
 		Query.SetParameter("Boundary", CommonFunctionsServer.GetCurrentSessionDate());
 	EndIf;
-	Query.SetParameter("Company"           , Parameters.Company);
-	Query.SetParameter("Branch"            , Parameters.Branch);
-	Query.SetParameter("Currency"          , Parameters.Currency);
-	Query.SetParameter("AllowedTypes"      , Parameters.AllowedTypes);
-	Query.SetParameter("SelectedDocuments" , Parameters.SelectedDocuments);
+	
+	ArrayOfAllowedTypes = New Array();
+	For Each Row In ThisObject.AllowedTypes Do
+		ArrayOfAllowedTypes.Add(Row.Type);	
+	EndDo;
+	
+	ArrayOfSelectedDocuments = New Array();
+	For Each Row In ThisObject.SelectedDocuments Do
+		ArrayOfSelectedDocuments.Add(Row.Document);
+	EndDo;
+	
+	Query.SetParameter("Company"           , ThisObject.Company);
+	Query.SetParameter("Branch"            , ThisObject.Branch);
+	Query.SetParameter("Currency"          , ThisObject.Currency);
+	Query.SetParameter("AllowedTypes"      , ArrayOfAllowedTypes);
+	Query.SetParameter("SelectedDocuments" , ArrayOfSelectedDocuments);
+	Query.SetParameter("Filter_Partner"    , ValueIsFilled(ThisObject.FilterPartner));
+	Query.SetParameter("Partner"           , ThisObject.FilterPartner);
 	
 	QueryResult = Query.Execute();
 	ThisObject.Documents.Load(QueryResult.Unload());
-	
 EndProcedure
 
 &AtClient
@@ -61,6 +102,10 @@ EndProcedure
 
 &AtClient
 Function CalculateRows()
+	For Each Row In ThisObject.Documents Do
+		Row.Payment = 0;
+	EndDo;
+	
 	ArrayOfRows = New Array();
 	
 	If Items.Documents.SelectedRows.Count() > 1 Then

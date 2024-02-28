@@ -4,8 +4,63 @@
     <name>GroupAmount</name>
     <id>51</id>
     <items xsi:type="form:FormField">
+      <name>FilterPartner</name>
+      <id>61</id>
+      <visible>true</visible>
+      <enabled>true</enabled>
+      <userVisible>
+        <common>true</common>
+      </userVisible>
+      <dataPath xsi:type="form:DataPath">
+        <segments>FilterPartner</segments>
+      </dataPath>
+      <handlers>
+        <event>OnChange</event>
+        <name>FilterPartnerOnChange</name>
+      </handlers>
+      <extendedTooltip>
+        <name>FilterPartnerExtendedTooltip</name>
+        <id>63</id>
+        <visible>true</visible>
+        <enabled>true</enabled>
+        <userVisible>
+          <common>true</common>
+        </userVisible>
+        <type>Label</type>
+        <autoMaxWidth>true</autoMaxWidth>
+        <autoMaxHeight>true</autoMaxHeight>
+        <extInfo xsi:type="form:LabelDecorationExtInfo">
+          <horizontalAlign>Left</horizontalAlign>
+        </extInfo>
+      </extendedTooltip>
+      <contextMenu>
+        <name>FilterPartnerContextMenu</name>
+        <id>62</id>
+        <visible>true</visible>
+        <enabled>true</enabled>
+        <userVisible>
+          <common>true</common>
+        </userVisible>
+        <autoFill>true</autoFill>
+      </contextMenu>
+      <type>InputField</type>
+      <editMode>Enter</editMode>
+      <showInHeader>true</showInHeader>
+      <headerHorizontalAlign>Left</headerHorizontalAlign>
+      <showInFooter>true</showInFooter>
+      <extInfo xsi:type="form:InputFieldExtInfo">
+        <autoMaxWidth>true</autoMaxWidth>
+        <autoMaxHeight>true</autoMaxHeight>
+        <wrap>true</wrap>
+        <clearButton>true</clearButton>
+        <chooseType>true</chooseType>
+        <typeDomainEnabled>true</typeDomainEnabled>
+        <textEdit>true</textEdit>
+      </extInfo>
+    </items>
+    <items xsi:type="form:FormField">
       <name>Amount</name>
-      <id>26</id>
+      <id>58</id>
       <visible>true</visible>
       <enabled>true</enabled>
       <userVisible>
@@ -16,7 +71,7 @@
       </dataPath>
       <extendedTooltip>
         <name>AmountExtendedTooltip</name>
-        <id>28</id>
+        <id>60</id>
         <visible>true</visible>
         <enabled>true</enabled>
         <userVisible>
@@ -31,7 +86,7 @@
       </extendedTooltip>
       <contextMenu>
         <name>AmountContextMenu</name>
-        <id>27</id>
+        <id>59</id>
         <visible>true</visible>
         <enabled>true</enabled>
         <userVisible>
@@ -1039,6 +1094,175 @@
       <common>true</common>
     </edit>
     <fillChecking>ShowError</fillChecking>
+  </attributes>
+  <attributes>
+    <name>FilterPartner</name>
+    <title>
+      <key>en</key>
+      <value>Partner</value>
+    </title>
+    <id>13</id>
+    <valueType>
+      <types>CatalogRef.Partners</types>
+    </valueType>
+    <view>
+      <common>true</common>
+    </view>
+    <edit>
+      <common>true</common>
+    </edit>
+  </attributes>
+  <attributes>
+    <name>Company</name>
+    <title>
+      <key>en</key>
+      <value>Company</value>
+    </title>
+    <id>15</id>
+    <valueType>
+      <types>CatalogRef.Companies</types>
+    </valueType>
+    <view>
+      <common>true</common>
+    </view>
+    <edit>
+      <common>true</common>
+    </edit>
+  </attributes>
+  <attributes>
+    <name>Branch</name>
+    <title>
+      <key>en</key>
+      <value>Branch</value>
+    </title>
+    <id>16</id>
+    <valueType>
+      <types>CatalogRef.BusinessUnits</types>
+    </valueType>
+    <view>
+      <common>true</common>
+    </view>
+    <edit>
+      <common>true</common>
+    </edit>
+  </attributes>
+  <attributes>
+    <name>RegisterName</name>
+    <title>
+      <key>en</key>
+      <value>Register name</value>
+    </title>
+    <id>17</id>
+    <valueType>
+      <types>String</types>
+      <stringQualifiers/>
+    </valueType>
+    <view>
+      <common>true</common>
+    </view>
+    <edit>
+      <common>true</common>
+    </edit>
+  </attributes>
+  <attributes>
+    <name>DocRef</name>
+    <title>
+      <key>en</key>
+      <value>Doc ref</value>
+    </title>
+    <id>18</id>
+    <valueType>
+      <types>DocumentRef</types>
+    </valueType>
+    <view>
+      <common>true</common>
+    </view>
+    <edit>
+      <common>true</common>
+    </edit>
+  </attributes>
+  <attributes>
+    <name>AllowedTypes</name>
+    <title>
+      <key>en</key>
+      <value>Allowed types</value>
+    </title>
+    <id>19</id>
+    <valueType>
+      <types>ValueTable</types>
+    </valueType>
+    <view>
+      <common>true</common>
+    </view>
+    <edit>
+      <common>true</common>
+    </edit>
+    <columns>
+      <name>Type</name>
+      <title>
+        <key>en</key>
+        <value>Type</value>
+      </title>
+      <id>23</id>
+      <valueType/>
+      <view>
+        <common>true</common>
+      </view>
+      <edit>
+        <common>true</common>
+      </edit>
+    </columns>
+  </attributes>
+  <attributes>
+    <name>SelectedDocuments</name>
+    <title>
+      <key>en</key>
+      <value>Selected documents</value>
+    </title>
+    <id>20</id>
+    <valueType>
+      <types>ValueTable</types>
+    </valueType>
+    <view>
+      <common>true</common>
+    </view>
+    <edit>
+      <common>true</common>
+    </edit>
+    <columns>
+      <name>Document</name>
+      <title>
+        <key>en</key>
+        <value>Document</value>
+      </title>
+      <id>22</id>
+      <valueType>
+        <types>DocumentRef</types>
+      </valueType>
+      <view>
+        <common>true</common>
+      </view>
+      <edit>
+        <common>true</common>
+      </edit>
+    </columns>
+  </attributes>
+  <attributes>
+    <name>Currency</name>
+    <title>
+      <key>en</key>
+      <value>Currency</value>
+    </title>
+    <id>21</id>
+    <valueType>
+      <types>CatalogRef.Currencies</types>
+    </valueType>
+    <view>
+      <common>true</common>
+    </view>
+    <edit>
+      <common>true</common>
+    </edit>
   </attributes>
   <formCommands>
     <name>Ok</name>

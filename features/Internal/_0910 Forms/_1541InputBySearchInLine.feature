@@ -70,6 +70,7 @@ Scenario: _0154000 preparation
 		When Create catalog ItemSegments objects
 		When Create catalog PaymentTypes objects
 		When Create catalog CancelReturnReasons objects
+		When Create catalog Projects objects
 	* Data for salary
 		When Create catalog EmployeePositions objects
 		When Create catalog AccrualAndDeductionTypes objects
@@ -2205,3 +2206,50 @@ Scenario: _01540104 check company, branch input by search in line in EmployeeSic
 			| '#' | 'Employee'    | 'Begin date' | 'End date' |
 			| '1' | 'Arina Brown' | ''           | ''         |				
 	And I close all client application windows				
+
+Scenario: _01540116 check partner, legal name, Partner term, company and store input by search in line in a document Debit credit note (in english)
+	And I close all client application windows
+	* Open a creation form DebitCreditNote
+		Given I open hyperlink "e1cib/list/Document.DebitCreditNote"
+		And I click the button named "FormCreate"
+	* Company input by search in line
+		And I select from "Company" drop-down list by "main" string
+	* Partner send input by search in line
+		And I select from "Partner (send)" drop-down list by "fer" string
+	* Partner receive input by search in line
+		And I select from "Partner (receive)" drop-down list by "kalip" string
+	* Legal name send input by search in line
+		And I select from "Legal name (send)" drop-down list by "fer" string
+	* Legal name receive input by search in line
+		And I select from "Legal name (receive)" drop-down list by "kalip" string
+	* Partner term send input by search in line
+		And I select from "Partner term (send)" drop-down list by "Basic Partner terms, TRY" string
+	* Partner term receive input by search in line
+		And I select from "Partner term (receive)" drop-down list by "Basic Partner terms, TRY" string	
+	* Branch send input by search in line
+		And I select from "Branch (send)" drop-down list by "Front office" string	
+	* Branch receive input by search in line
+		And I select from "Branch (receive)" drop-down list by "Front office" string
+	* Project send input by search in line
+		And I select from "Project (send)" drop-down list by "01" string
+	* Project receive input by search in line
+		And I select from "Project (receive)" drop-down list by "02" string
+	* Branch input by search in line
+		And I select from "Branch" drop-down list by "Front office" string
+	* Currency input by search in line
+		And I select from "Currency" drop-down list by "turk" string
+	* Check entered values
+		Then the form attribute named "Branch" became equal to "Front office"
+		Then the form attribute named "Company" became equal to "Main Company"
+		Then the form attribute named "Currency" became equal to "TRY"
+		Then the form attribute named "ReceiveAgreement" became equal to "Basic Partner terms, TRY"
+		Then the form attribute named "ReceiveBranch" became equal to "Front office"
+		Then the form attribute named "ReceiveLegalName" became equal to "Company Kalipso"
+		Then the form attribute named "ReceivePartner" became equal to "Kalipso"
+		Then the form attribute named "ReceiveProject" became equal to "Project 02"
+		Then the form attribute named "SendAgreement" became equal to "Basic Partner terms, TRY"
+		Then the form attribute named "SendBranch" became equal to "Front office"
+		Then the form attribute named "SendLegalName" became equal to "Company Ferron BP"
+		Then the form attribute named "SendPartner" became equal to "Ferron BP"
+		Then the form attribute named "SendProject" became equal to "Project 01"			
+	And I close all client application windows

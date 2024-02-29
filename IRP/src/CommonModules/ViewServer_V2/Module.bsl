@@ -233,6 +233,18 @@ Procedure AddNewRowAtServer(TableName, Parameters, OnAddViewNotify, FillingValue
 	PositionIsPresent = CommonFunctionsClientServer.ObjectHasProperty(Row, "Position");
 	isControlCodeStringIsPresent = CommonFunctionsClientServer.ObjectHasProperty(Row, "isControlCodeString");
 
+	// Payment list
+	BasisDocumentIsPresent = CommonFunctionsClientServer.ObjectHasProperty(Row, "BasisDocument");
+	AgreementIsPresent     = CommonFunctionsClientServer.ObjectHasProperty(Row, "Agreement");
+	TotalAmountIsPresent   = CommonFunctionsClientServer.ObjectHasProperty(Row, "TotalAmount");
+	OrderIsPresent         = CommonFunctionsClientServer.ObjectHasProperty(Row, "Order");
+	ProjectIsPresent       = CommonFunctionsClientServer.ObjectHasProperty(Row, "Project");
+	LegalNameContractIsPresent = CommonFunctionsClientServer.ObjectHasProperty(Row, "LegalNameContract");
+	PayeeIsPresent         = CommonFunctionsClientServer.ObjectHasProperty(Row, "Payee");
+	PayerIsPresent         = CommonFunctionsClientServer.ObjectHasProperty(Row, "Payer");
+	
+
+
 	If FillingValues.Property("Item") And ItemIsPresent Then
 		ControllerClientServer_V2.SetItemListItem(Parameters, PrepareValue(FillingValues.Item, Row.Key));
 	EndIf;
@@ -285,6 +297,40 @@ Procedure AddNewRowAtServer(TableName, Parameters, OnAddViewNotify, FillingValue
 		ControllerClientServer_V2.SetChequeBondsCheque(Parameters, PrepareValue(FillingValues.Cheque, Row.Key));
 	EndIf;
 		
+	If TableName = "PaymentList" Then	
+		If FillingValues.Property("BasisDocument") And BasisDocumentIsPresent Then
+			ControllerClientServer_V2.SetPaymentListBasisDocument(Parameters, PrepareValue(FillingValues.BasisDocument, Row.Key));
+		EndIf;
+		
+		If FillingValues.Property("Agreement") And AgreementIsPresent Then
+			ControllerClientServer_V2.SetPaymentListAgreement(Parameters, PrepareValue(FillingValues.Agreement, Row.Key));
+		EndIf;
+		
+		If FillingValues.Property("TotalAmount") And TotalAmountIsPresent Then
+			ControllerClientServer_V2.SetPaymentListTotalAmount(Parameters, PrepareValue(FillingValues.TotalAmount, Row.Key));
+		EndIf;
+		
+		If FillingValues.Property("Order") And OrderIsPresent Then
+			ControllerClientServer_V2.SetPaymentListOrder(Parameters, PrepareValue(FillingValues.Order, Row.Key));
+		EndIf;
+		
+		If FillingValues.Property("Project") And ProjectIsPresent Then
+			ControllerClientServer_V2.SetPaymentListProject(Parameters, PrepareValue(FillingValues.Project, Row.Key));
+		EndIf;
+		
+		If FillingValues.Property("LegalNameContract") And LegalNameContractIsPresent Then
+			ControllerClientServer_V2.SetPaymentListLegalNameContract(Parameters, PrepareValue(FillingValues.LegalNameContract, Row.Key));
+		EndIf;
+		
+		If FillingValues.Property("Payee") And PayeeIsPresent Then
+			ControllerClientServer_V2.SetPaymentListLegalName(Parameters, PrepareValue(FillingValues.Payee, Row.Key));
+		EndIf;
+		
+		If FillingValues.Property("Payer") And PayerIsPresent Then
+			ControllerClientServer_V2.SetPaymentListLegalName(Parameters, PrepareValue(FillingValues.Payer, Row.Key));
+		EndIf;	
+	EndIf;
+	
 	If TableName = "TimeSheetList" Then
 		If FillingValues.Property("Employee") And EmployeeIsPresent Then
 			ControllerClientServer_V2.SetTimeSheetListEmployee(Parameters, PrepareValue(FillingValues.Employee, Row.Key));

@@ -218,6 +218,98 @@ Function R1020B_AdvancesToVendors_CreditNote() Export
 		|	AND OffsetOfAdvances.Recorder REFS Document.VendorsAdvancesClosing";
 EndFunction
 
+Function R1020B_AdvancesToVendors_DebitCreditNote() Export
+	Return 
+		"SELECT
+		|	case
+		|		when Doc.PartnersIsEqual
+		|			then case
+		|				when Doc.IsReceiveTransactionVendor
+		|				OR Doc.IsReceiveAdvanceVendor
+		|					then VALUE(AccumulationRecordType.Expense)
+		|				else VALUE(AccumulationRecordType.Receipt)
+		|			end
+		|		else case
+		|			when Doc.IsReceiveTransactionVendor
+		|			OR Doc.IsReceiveAdvanceVendor
+		|				then VALUE(AccumulationRecordType.Expense)
+		|			else VALUE(AccumulationRecordType.Receipt)
+		|		end
+		|	end as RecordType,
+		|	Doc.Period,
+		|	Doc.Company,
+		|	Doc.SendBranch AS Branch,
+		|	Doc.SendPartner AS Partner,
+		|	Doc.SendLegalName AS LegalName,
+		|	Doc.Currency,
+		|	Doc.SendAgreement AS Agreement,
+		|	Doc.SendProject AS Project,
+		|	Doc.Amount,
+		|	UNDEFINED AS VendorsAdvancesClosing
+		|INTO R1020B_AdvancesToVendors
+		|FROM
+		|	SendAdvances AS Doc
+		|WHERE
+		|	Doc.SendIsVendorAdvance
+		|
+		|UNION ALL
+		|
+		|SELECT
+		|	case
+		|		when Doc.PartnersIsEqual
+		|			then case
+		|				when Doc.IsSendTransactionCustomer
+		|				OR Doc.IsSendAdvanceVendor
+		|					then VALUE(AccumulationRecordType.Receipt)
+		|				else VALUE(AccumulationRecordType.Expense)
+		|			end
+		|		else case
+		|			when Doc.IsSendTransactionCustomer
+		|			OR Doc.IsSendAdvanceVendor
+		|				then VALUE(AccumulationRecordType.Receipt)
+		|			else VALUE(AccumulationRecordType.Expense)
+		|		end
+		|	end as RecordType,
+		|	Doc.Period,
+		|	Doc.Company,
+		|	Doc.ReceiveBranch AS Branch,
+		|	Doc.ReceivePartner AS Partner,
+		|	Doc.ReceiveLegalName AS LegalName,
+		|	Doc.Currency,
+		|	Doc.ReceiveAgreement AS Agreement,
+		|	Doc.ReceiveProject AS Project,
+		|	Doc.Amount,
+		|	UNDEFINED
+		|FROM
+		|	ReceiveAdvances AS Doc
+		|WHERE
+		|	Doc.ReceiveIsVendorAdvance
+		|
+		|UNION ALL
+		|
+		|SELECT
+		|	CASE
+		|		WHEN OffsetOfAdvances.RecordType = VALUE(Enum.RecordType.Receipt)
+		|			THEN VALUE(AccumulationRecordType.Receipt)
+		|		ELSE VALUE(AccumulationRecordType.Expense)
+		|	END,
+		|	OffsetOfAdvances.Period,
+		|	OffsetOfAdvances.Company,
+		|	OffsetOfAdvances.Branch,
+		|	OffsetOfAdvances.Partner,
+		|	OffsetOfAdvances.LegalName,
+		|	OffsetOfAdvances.Currency,
+		|	OffsetOfAdvances.AdvanceAgreement,
+		|	OffsetOfAdvances.AdvanceProject,
+		|	OffsetOfAdvances.Amount,
+		|	OffsetOfAdvances.Recorder
+		|FROM
+		|	InformationRegister.T2010S_OffsetOfAdvances AS OffsetOfAdvances
+		|WHERE
+		|	OffsetOfAdvances.Document = &Ref
+		|	AND OffsetOfAdvances.Recorder REFS Document.VendorsAdvancesClosing";
+EndFunction
+
 Function R1020B_AdvancesToVendors_Cheque() Export
 	Return 
 		"SELECT

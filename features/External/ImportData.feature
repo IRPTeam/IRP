@@ -1014,8 +1014,8 @@ Scenario: Create catalog Partners and Payment type (Bank)
 
 	// Catalog.BankTerms
 	And I check or create catalog "BankTerms" objects:
-		| 'Ref'                                                               | 'DeletionMark' | 'Code' | 'BankTermType'                    | 'Description_en' | 'Description_hash' | 'Description_ru' | 'Description_tr' |
-		| 'e1cib/data/Catalog.BankTerms?ref=b79f84707d634d7f11ee14f1dde2b4df' | 'False'        | 3      | 'Enum.BankTermTypes.PaymentAgent' | 'Payment agent'  | ''                 | ''               | ''               |
+		| 'Ref'                                                               | 'DeletionMark' | 'BankTermType'                    | 'Description_en' | 'Description_hash' | 'Description_ru' | 'Description_tr' |
+		| 'e1cib/data/Catalog.BankTerms?ref=b79f84707d634d7f11ee14f1dde2b4df' | 'False'        | 'Enum.BankTermTypes.PaymentAgent' | 'Payment agent'  | ''                 | ''               | ''               |
 
 	And I refill object tabular section "PaymentTypes":
 		| 'Ref'                                                               | 'PaymentType'                                                          | 'Percent' | 'Account' | 'Partner'                                                          | 'LegalName'                                                         | 'PartnerTerms'                                                       | 'LegalNameContract' |
@@ -2621,8 +2621,8 @@ Scenario: Create catalog Workstations objects
 
 	And I check or create catalog "Workstations" objects:
 		| 'Ref'                                                                   | 'DeletionMark'  | 'Code'  | 'Description'     | 'CashAccount'                                                           | 'PrintTemplate'  | 'UserGroup'  | 'UseCashInAndCashOut'  | 'UniqueID'    |
-		| 'e1cib/data/Catalog.Workstations?ref=b762b13668d0905011eb97c8502ea899'  | 'False'         | 1       | 'Workstation 01'  | 'e1cib/data/Catalog.CashAccounts?ref=b784ae4f9cb08e5e11ed2447ef2a3755'  | ''               | ''           | 'True'                 | 'TeamAgent'   |
-		| 'e1cib/data/Catalog.Workstations?ref=b788b483d858e32911ed60ce59f44f81'  | 'False'         | 2       | 'Workstation 02'  | 'e1cib/data/Catalog.CashAccounts?ref=b784ae4f9cb08e5e11ed2447ef2a3756'  | ''               | ''           | 'False'                | 'TeamAgent'   |
+		| 'e1cib/data/Catalog.Workstations?ref=b762b13668d0905011eb97c8502ea899'  | 'False'         | 5       | 'Workstation 01'  | 'e1cib/data/Catalog.CashAccounts?ref=b784ae4f9cb08e5e11ed2447ef2a3755'  | ''               | ''           | 'True'                 | 'TeamAgent'   |
+		| 'e1cib/data/Catalog.Workstations?ref=b788b483d858e32911ed60ce59f44f81'  | 'False'         | 6       | 'Workstation 02'  | 'e1cib/data/Catalog.CashAccounts?ref=b784ae4f9cb08e5e11ed2447ef2a3756'  | ''               | ''           | 'False'                | 'TeamAgent'   |
 
 
 Scenario: Create POS cash account objects
@@ -3383,3 +3383,33 @@ Scenario: Create catalog Projects objects
 		| 'e1cib/data/Catalog.Projects?ref=b7b4b80c227e00a211eeb6ca3018dc7d' | 'False'        | 1      | 'e1cib/data/Catalog.Users?ref=aa7f120ed92fbced11eb13d7279770c0' | 'Project 01'     | ''                 | ''               | ''               | ''       | '19.01.2024 14:56:48' | '01.01.0001 00:00:00' |
 		| 'e1cib/data/Catalog.Projects?ref=b7b4b80c227e00a211eeb6ca3018dc7e' | 'False'        | 2      | 'e1cib/data/Catalog.Users?ref=aa7f120ed92fbced11eb13d7279770c0' | 'Project 02'     | ''                 | ''               | ''               | ''       | '19.01.2024 14:56:53' | '01.01.0001 00:00:00' |
 
+
+
+Scenario: Create catalog AccessGroups and AccessProfiles objects (audit lock)
+	And I execute code and put to varible "GetURL(Catalogs.Users.FindByDescription(\"CI\"))" "$$$$IdCI$$$$"
+	And I check or create catalog "AccessGroups" objects:
+		| 'Ref'                                                                  | 'DeletionMark' | 'Code' | 'OnlyRegisters' | 'Author'                                                        | 'Description_en'     | 'Description_hash' | 'Description_ru' | 'Description_tr' | 'SourceNodeID' | 'Editor' | 'CreateDate'          | 'ModifyDate'          | 'NotActive' |
+		| 'e1cib/data/Catalog.AccessGroups?ref=b7b6cb8aa66608cf11eed54b0e7af6b7' | 'False'        | 5      | 'False'         | 'e1cib/data/Catalog.Users?ref=aa7f120ed92fbced11eb13d7279770c0' | 'Audit lock control' | ''                 | ''               | ''               | ''             | ''       | '27.02.2024 10:35:56' | '01.01.0001 00:00:00' | 'False'     |
+
+	And I refill object tabular section "Profiles":
+		| 'Ref'                                                                  | 'Profile'                                                                |
+		| 'e1cib/data/Catalog.AccessGroups?ref=b7b6cb8aa66608cf11eed54b0e7af6b7' | 'e1cib/data/Catalog.AccessProfiles?ref=b7b6cb8aa66608cf11eed54b0e7af6b6' |
+		| 'e1cib/data/Catalog.AccessGroups?ref=b7b6cb8aa66608cf11eed54b0e7af6b7' | 'e1cib/data/Catalog.AccessProfiles?ref=b7b6cb8aa66608cf11eed54b0e7af6b5' |
+
+	And I refill object tabular section "Users":
+		| 'Ref'                                                                  | 'User'     |
+		| 'e1cib/data/Catalog.AccessGroups?ref=b7b6cb8aa66608cf11eed54b0e7af6b7' | '$$IdCI$$' |
+
+	And I check or create catalog "AccessProfiles" objects:
+		| 'Ref'                                                                    | 'DeletionMark' | 'Code' | 'Author'                                                        | 'Description_en' | 'Description_hash' | 'Description_ru' | 'Description_tr' | 'SourceNodeID' | 'Editor'                                                        | 'CreateDate'          | 'ModifyDate'          | 'NotActive' |
+		| 'e1cib/data/Catalog.AccessProfiles?ref=b7b6cb8aa66608cf11eed54b0e7af6b5' | 'False'        | 4      | 'e1cib/data/Catalog.Users?ref=aa7f120ed92fbced11eb13d7279770c0' | 'Full access'    | ''                 | ''               | ''               | ''             | 'e1cib/data/Catalog.Users?ref=aa7f120ed92fbced11eb13d7279770c0' | '27.02.2024 10:34:44' | '27.02.2024 10:35:07' | 'False'     |
+		| 'e1cib/data/Catalog.AccessProfiles?ref=b7b6cb8aa66608cf11eed54b0e7af6b6' | 'False'        | 5      | 'e1cib/data/Catalog.Users?ref=aa7f120ed92fbced11eb13d7279770c0' | 'Audit lock'     | ''                 | ''               | ''               | ''             | 'e1cib/data/Catalog.Users?ref=aa7f120ed92fbced11eb13d7279770c0' | '27.02.2024 10:34:44' | '27.02.2024 10:35:07' | 'False'     |
+		| 'e1cib/data/Catalog.AccessProfiles?ref=b7b6cb8aa66608cf11eed54b0e7af6b8' | 'False'        | 6      | 'e1cib/data/Catalog.Users?ref=aa7f120ed92fbced11eb13d7279770c0' | 'Audit unlock'   | ''                 | ''               | ''               | ''             | 'e1cib/data/Catalog.Users?ref=aa7f120ed92fbced11eb13d7279770c0' | '27.02.2024 10:36:16' | '27.02.2024 10:35:07' | 'False'     |
+
+	And I refill object tabular section "Roles":
+		| 'Ref'                                                                    | 'Role'           | 'Configuration' |
+		| 'e1cib/data/Catalog.AccessProfiles?ref=b7b6cb8aa66608cf11eed54b0e7af6b5' | 'FullAccess'     | 'IRP'           |
+		| 'e1cib/data/Catalog.AccessProfiles?ref=b7b6cb8aa66608cf11eed54b0e7af6b5' | 'RunThickClient' | 'IRP'           |
+		| 'e1cib/data/Catalog.AccessProfiles?ref=b7b6cb8aa66608cf11eed54b0e7af6b5' | 'RunThinClient'  | 'IRP'           |
+		| 'e1cib/data/Catalog.AccessProfiles?ref=b7b6cb8aa66608cf11eed54b0e7af6b6' | 'AuditLockSet'   | 'IRP'           |
+		| 'e1cib/data/Catalog.AccessProfiles?ref=b7b6cb8aa66608cf11eed54b0e7af6b8' | 'AuditLockUnset' | 'IRP'           |

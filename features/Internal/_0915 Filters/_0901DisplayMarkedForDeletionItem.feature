@@ -1,9 +1,9 @@
-#language: en
+﻿#language: en
 @tree
 @Positive
 @Filters
 
-Feature: check that the item marked for deletion is not displayed
+Feature: check that the item marked for deletion or not active is not displayed
 
 
 As a developer
@@ -228,3 +228,45 @@ Scenario: _090220 check that the items marked for deletion is not displayed in t
 		| Box           |
 	And I close all client application windows
 
+Scenario: _090250 mark item as not active
+	And I close all client application windows
+	Given I open hyperlink "e1cib/list/Catalog.Items"
+	* Mark item as not active
+		And I go to line in "List" table
+			| 'Description'          | 'Item type' |
+			| 'Bound Dress+Trousers' | 'Clothes'   |
+		And I select current line in "List" table
+		And I move to the next attribute
+		And I click "Set \"Not active\"" button
+		And I close "Bound Dress+Trousers (Item)" window
+		And Delay 3
+	* Check item list
+		And "List" table does not contain lines
+			| 'Description'          |
+			| 'Bound Dress+Trousers' |
+	* Selection check in documents
+		Given I open hyperlink "e1cib/list/Document.SalesOrder"
+		And I click "Create" button
+		And in the table "ItemList" I click the button named "ItemListAdd"
+		And I activate "Item" field in "ItemList" table
+		And I select current line in "ItemList" table
+		And I click choice button of "Item" attribute in "ItemList" table
+		And "List" table does not contain lines
+			| 'Description'          |
+			| 'Bound Dress+Trousers' |
+		And I close all client application windows
+	* Mark item as active
+		Given I open hyperlink "e1cib/list/Catalog.Items"
+		And I click "Show all items" button
+		And I go to line in "List" table
+			| 'Description'          | 'Item type' |
+			| 'Bound Dress+Trousers' | 'Clothes'   |
+		And I select current line in "List" table
+		And I move to the next attribute
+		And I click "Set \"Active\"" button
+		And I close "Bound Dress+Trousers (Item)" window
+		And I click "Show only active items" button
+		And "List" table contains lines
+			| 'Description'          |
+			| 'Bound Dress+Trousers' |
+	And I close all client application windows	

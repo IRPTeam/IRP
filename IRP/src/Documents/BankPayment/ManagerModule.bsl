@@ -10,6 +10,8 @@ EndFunction
 
 Function PostingGetDocumentDataTables(Ref, Cancel, PostingMode, Parameters, AddInfo = Undefined) Export
 	QueryArray = GetQueryTextsSecondaryTables();
+	Parameters.Insert("QueryParameters", GetAdditionalQueryParameters(Ref));
+	
 	PostingServer.ExecuteQuery(Ref, QueryArray, Parameters);
 
 	AccountingServer.CreateAccountingDataTables(Ref, Cancel, PostingMode, Parameters, AddInfo);
@@ -98,6 +100,11 @@ EndFunction
 Function GetAdditionalQueryParameters(Ref)
 	StrParams = New Structure;
 	StrParams.Insert("Ref", Ref);
+	If ValueIsFilled(Ref) Then
+		StrParams.Insert("BalancePeriod", New Boundary(Ref.PointInTime(), BoundaryType.Excluding));
+	Else
+		StrParams.Insert("BalancePeriod", Undefined);
+	EndIf;
 	Return StrParams;
 EndFunction
 
@@ -599,21 +606,79 @@ Function R5022T_Expenses()
 EndFunction
 
 Function R3025B_PurchaseOrdersToBePaid()
-	Return "SELECT
-		   |	VALUE(AccumulationRecordType.Expense) AS RecordType,
-		   |	PaymentList.Period,
-		   |	PaymentList.Company,
-		   |	PaymentList.Branch,
-		   |	PaymentList.Currency,
-		   |	PaymentList.Partner,
-		   |	PaymentList.LegalName,
-		   |	PaymentList.Order,
-		   |	PaymentList.Amount
-		   |INTO R3025B_PurchaseOrdersToBePaid
-		   |FROM
-		   |	PaymentList AS PaymentList
-		   |WHERE
-		   |	NOT PaymentList.Order.Ref IS NULL";
+	Return 
+		"SELECT
+		|	VALUE(AccumulationRecordType.Expense) AS RecordType,
+		|	PaymentList.Period AS Period,
+		|	PaymentList.Company AS Company,
+		|	PaymentList.Branch AS Branch,
+		|	PaymentList.Currency AS Currency,
+		|	PaymentList.Partner AS Partner,
+		|	PaymentList.LegalName AS LegalName,
+		|	PaymentList.Order AS Order,
+		|	PaymentList.Amount AS Amount
+		|INTO _PurchaseOrdersToBePaid
+		|FROM
+		|	PaymentList AS PaymentList
+		|WHERE
+		|	NOT PaymentList.Order.Ref IS NULL
+		|;
+		|
+		|////////////////////////////////////////////////////////////////////////////////
+		|SELECT
+		|	R3025B_PurchaseOrdersToBePaidBalance.Company AS Company,
+		|	R3025B_PurchaseOrdersToBePaidBalance.Branch AS Branch,
+		|	R3025B_PurchaseOrdersToBePaidBalance.Currency AS Currency,
+		|	R3025B_PurchaseOrdersToBePaidBalance.Partner AS Partner,
+		|	R3025B_PurchaseOrdersToBePaidBalance.LegalName AS LegalName,
+		|	R3025B_PurchaseOrdersToBePaidBalance.Order AS Order,
+		|	R3025B_PurchaseOrdersToBePaidBalance.AmountBalance AS AmountBalance
+		|INTO _PurchaseOrdersToBePaidBalance
+		|FROM
+		|	AccumulationRegister.R3025B_PurchaseOrdersToBePaid.Balance(&BalancePeriod, (Company, Branch, Currency, Partner,
+		|		LegalName, Order) IN
+		|		(SELECT
+		|			_PurchaseOrdersToBePaid.Company,
+		|			_PurchaseOrdersToBePaid.Branch,
+		|			_PurchaseOrdersToBePaid.Currency,
+		|			_PurchaseOrdersToBePaid.Partner,
+		|			_PurchaseOrdersToBePaid.LegalName,
+		|			_PurchaseOrdersToBePaid.Order
+		|		FROM
+		|			_PurchaseOrdersToBePaid AS _PurchaseOrdersToBePaid)) AS R3025B_PurchaseOrdersToBePaidBalance
+		|;
+		|
+		|////////////////////////////////////////////////////////////////////////////////
+		|SELECT
+		|	_PurchaseOrdersToBePaid.RecordType AS RecordType,
+		|	_PurchaseOrdersToBePaid.Period AS Period,
+		|	_PurchaseOrdersToBePaid.Company AS Company,
+		|	_PurchaseOrdersToBePaid.Branch AS Branch,
+		|	_PurchaseOrdersToBePaid.Currency AS Currency,
+		|	_PurchaseOrdersToBePaid.Partner AS Partner,
+		|	_PurchaseOrdersToBePaid.LegalName AS LegalName,
+		|	_PurchaseOrdersToBePaid.Order AS Order,
+		|	CASE
+		|		WHEN ISNULL(_PurchaseOrdersToBePaidBalance.AmountBalance, 0) > ISNULL(_PurchaseOrdersToBePaid.Amount, 0)
+		|			THEN ISNULL(_PurchaseOrdersToBePaid.Amount, 0)
+		|		ELSE ISNULL(_PurchaseOrdersToBePaidBalance.AmountBalance, 0)
+		|	END AS Amount
+		|INTO R3025B_PurchaseOrdersToBePaid
+		|FROM
+		|	_PurchaseOrdersToBePaid AS _PurchaseOrdersToBePaid
+		|		INNER JOIN _PurchaseOrdersToBePaidBalance AS _PurchaseOrdersToBePaidBalance
+		|		ON _PurchaseOrdersToBePaid.Company = _PurchaseOrdersToBePaidBalance.Company
+		|		AND _PurchaseOrdersToBePaid.Branch = _PurchaseOrdersToBePaidBalance.Branch
+		|		AND _PurchaseOrdersToBePaid.Currency = _PurchaseOrdersToBePaidBalance.Currency
+		|		AND _PurchaseOrdersToBePaid.Partner = _PurchaseOrdersToBePaidBalance.Partner
+		|		AND _PurchaseOrdersToBePaid.LegalName = _PurchaseOrdersToBePaidBalance.LegalName
+		|		AND _PurchaseOrdersToBePaid.Order = _PurchaseOrdersToBePaidBalance.Order
+		|WHERE
+		|	CASE
+		|		WHEN ISNULL(_PurchaseOrdersToBePaidBalance.AmountBalance, 0) > ISNULL(_PurchaseOrdersToBePaid.Amount, 0)
+		|			THEN ISNULL(_PurchaseOrdersToBePaid.Amount, 0)
+		|		ELSE ISNULL(_PurchaseOrdersToBePaidBalance.AmountBalance, 0)
+		|	END > 0";
 EndFunction
 
 Function T2014S_AdvancesInfo()

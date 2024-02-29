@@ -138,6 +138,8 @@ Procedure SetVisibilityAvailability(Object, Form)
 
 	IsCurrencyExchange    = Object.TransactionType = PredefinedValue("Enum.IncomingPaymentTransactionType.CurrencyExchange");
 	IsCashTransferOrder   = Object.TransactionType = PredefinedValue("Enum.IncomingPaymentTransactionType.CashTransferOrder");
+	IsPaymentFormCustomer = Object.TransactionType = PredefinedValue("Enum.IncomingPaymentTransactionType.PaymentFromCustomer");
+	
 	
 	ArrayTypes = New Array();
 	
@@ -162,6 +164,9 @@ Procedure SetVisibilityAvailability(Object, Form)
 	
 	Form.Items.EditCurrencies.Enabled = Not Form.ReadOnly;
 	Form.Items.EditAccounting.Enabled = Not Form.ReadOnly;
+	Form.Items.PaymentListPaymentByDocuments.Enabled = Not Form.ReadOnly;
+
+	Form.Items.PaymentListPaymentByDocuments.Visible = IsPaymentFormCustomer;
 EndProcedure
 
 &AtClient
@@ -557,6 +562,39 @@ Procedure WorkstationOnChange(Item)
 	DocCashReceiptClient.WorkstationOnChange(Object, ThisObject, Item);
 EndProcedure
 
+&AtClient
+Procedure PaymentByDocuments(Command)
+	FormParameters = New Structure();
+	FormParameters.Insert("SelectedDocuments", New Array());
+	
+	FormParameters.Insert("Ref"           , Object.Ref);
+	FormParameters.Insert("Company"       , Object.Company);
+	FormParameters.Insert("Branch"        , Object.Branch);
+	FormParameters.Insert("Currency"      , Object.Currency);
+	FormParameters.Insert("AllowedTypes"  , New Array());
+	
+	FormParameters.AllowedTypes.Add(Type("DocumentRef.SalesInvoice"));
+	
+	FormParameters.Insert("RegisterName", "R2021B_CustomersTransactions");
+	
+	For Each Row In Object.PaymentList Do
+		If ValueIsFilled(Row.BasisDocument) Then
+			FormParameters.SelectedDocuments.Add(Row.BasisDocument);
+		EndIf;
+	EndDo;
+	Notify = New NotifyDescription("PaymentByDocumentSelectionEnd", ThisObject);		
+	OpenForm("CommonForm.PaymentByDocuments", FormParameters, ThisObject,,,,Notify, FormWindowOpeningMode.LockOwnerWindow);	
+EndProcedure
+
+&AtClient
+Procedure PaymentByDocumentSelectionEnd(Result, NotifyParams) Export
+	If Result = Undefined Then
+		Return;
+	EndIf;
+	For Each Row In Result Do
+		ViewClient_V2.PaymentListAddFilledRow(Object, ThisObject, Row);
+	EndDo;
+EndProcedure
 
 #EndRegion
 

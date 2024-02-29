@@ -80,6 +80,25 @@ Scenario: _053000 preparation (Bank payment)
 	When Create document SalesReturn objects (advance, customers)
 	And I execute 1C:Enterprise script at server
 				| "Documents.SalesReturn.FindByNumber(12).GetObject().Write(DocumentWriteMode.Posting);"     |
+	When Create document PurchaseInvoice objects (advance)
+	And I execute 1C:Enterprise script at server
+		| "Documents.PurchaseInvoice.FindByNumber(120).GetObject().Write(DocumentWriteMode.Posting);"    |
+	And I execute 1C:Enterprise script at server
+		| "Documents.PurchaseInvoice.FindByNumber(121).GetObject().Write(DocumentWriteMode.Posting);"    |
+	And I execute 1C:Enterprise script at server
+		| "Documents.PurchaseInvoice.FindByNumber(122).GetObject().Write(DocumentWriteMode.Posting);"    |
+	And I execute 1C:Enterprise script at server
+		| "Documents.PurchaseInvoice.FindByNumber(123).GetObject().Write(DocumentWriteMode.Posting);"    |
+	And I execute 1C:Enterprise script at server
+		| "Documents.PurchaseInvoice.FindByNumber(124).GetObject().Write(DocumentWriteMode.Posting);"    |
+	And I execute 1C:Enterprise script at server
+		| "Documents.PurchaseInvoice.FindByNumber(125).GetObject().Write(DocumentWriteMode.Posting);"    |
+	And I execute 1C:Enterprise script at server
+		| "Documents.PurchaseInvoice.FindByNumber(126).GetObject().Write(DocumentWriteMode.Posting);"    |
+	And I execute 1C:Enterprise script at server
+		| "Documents.PurchaseInvoice.FindByNumber(127).GetObject().Write(DocumentWriteMode.Posting);"    |
+	And I execute 1C:Enterprise script at server
+		| "Documents.PurchaseInvoice.FindByNumber(194).GetObject().Write(DocumentWriteMode.Posting);"    |
 
 Scenario: _0530001 check preparation
 	When check preparation
@@ -518,7 +537,7 @@ Scenario: _053015 check the display of details on the form Bank payment with the
 			| '#'   | 'Total amount'   | 'Planning transaction basis'    |
 			| '1'   | '100,00'         | ''                              |
 
-Scenario: _052017 check Commission calculation in the Bank payment (Payment from customer by POS)
+Scenario: _053017 check Commission calculation in the Bank payment (Payment from customer by POS)
 	And I close all client application windows
 	Given I open hyperlink "e1cib/list/Document.BankPayment"
 	And I click the button named "FormCreate"
@@ -598,7 +617,7 @@ Scenario: _052017 check Commission calculation in the Bank payment (Payment from
 		And I close all client application windows
 
 
-Scenario: _300514 check connection to BankPayment report "Related documents"
+Scenario: _053018 check connection to BankPayment report "Related documents"
 	Given I open hyperlink "e1cib/list/Document.BankPayment"
 	* Form report Related documents
 		And I go to line in "List" table
@@ -610,7 +629,7 @@ Scenario: _300514 check connection to BankPayment report "Related documents"
 	And I close all client application windows
 
 
-Scenario: _300516 try post Bank payment with empty amount
+Scenario: _053019 try post Bank payment with empty amount
 	And I close all client application windows
 	Given I open hyperlink "e1cib/list/Document.BankPayment"
 	And I click the button named "FormCreate"
@@ -648,4 +667,90 @@ Scenario: _300516 try post Bank payment with empty amount
 		And I click "Post" button
 		Then there are lines in TestClient message log
 			|'Fill total amount. Row: [1]'|
+		And I close all client application windows
+
+Scenario: _053020 check selection form (Payment by documents) in BP
+	And I close all client application windows
+	* Open BP
+		Given I open hyperlink "e1cib/list/Document.BankPayment"
+		And I click the button named "FormCreate"
+		And I select from the drop-down list named "Company" by "Main Company" string
+		And I select from "Account" drop-down list by "Bank account, TRY" string
+		And I select from "Transaction type" drop-down list by "Payment to the vendor" string
+	* Check filter by Branch
+		* Without branch
+			And in the table "PaymentList" I click "Payment by documents" button
+			And "Documents" table became equal
+				| 'Document'                                       | 'Partner'   | 'Partner term'       | 'Legal name'        | 'Legal name contract' | 'Order'                   | 'Project' | 'Amount'     | 'Payment' |
+				| 'Purchase invoice 125 dated 12.02.2021 12:00:00' | 'Maxim'     | 'Partner term Maxim' | 'Company Maxim'     | ''                    | ''                        | ''        | '100,00'     | ''        |
+				| '$$PurchaseInvoice018001$$'                      | 'Ferron BP' | 'Vendor Ferron, TRY' | 'Company Ferron BP' | ''                    | '$$PurchaseOrder017001$$' | ''        | '137 000,00' | ''        |
+				| '$$PurchaseInvoice29604$$'                       | 'Ferron BP' | 'Vendor Ferron, TRY' | 'Company Ferron BP' | ''                    | ''                        | ''        | '13 000,00'  | ''        |
+			And I close current window
+		* With branch
+			And I move to "Other" tab
+			And I select from the drop-down list named "Branch" by "Front office" string
+			And I move to "Payments" tab
+			And in the table "PaymentList" I click "Payment by documents" button
+			And "Documents" table became equal
+				| 'Document'                                       | 'Partner' | 'Partner term'       | 'Legal name'    | 'Legal name contract' | 'Order'                                        | 'Project' | 'Amount' | 'Payment' |
+				| 'Purchase invoice 126 dated 15.03.2021 12:00:00' | 'Maxim'   | 'Partner term Maxim' | 'Company Maxim' | ''                    | ''                                             | ''        | '190,00' | ''        |
+				| 'Purchase invoice 127 dated 28.04.2021 21:50:01' | 'Maxim'   | 'Partner term Maxim' | 'Company Maxim' | ''                    | ''                                             | ''        | '100,00' | ''        |
+				| 'Purchase invoice 194 dated 04.09.2023 13:50:38' | 'Maxim'   | 'Partner term Maxim' | 'Company Aldis' | ''                    | 'Purchase order 118 dated 04.09.2023 13:46:08' | ''        | '900,00' | ''        |
+				| 'Purchase invoice 194 dated 04.09.2023 13:50:38' | 'Maxim'   | 'Partner term Maxim' | 'Company Aldis' | ''                    | 'Purchase order 119 dated 04.09.2023 13:50:07' | ''        | '900,00' | ''        |
+	* Allocation check	(one partner)
+		And I input "2 000,00" text in the field named "Amount"
+		And I click the button named "Calculate"
+		And "Documents" table became equal
+			| 'Document'                                       | 'Partner' | 'Partner term'       | 'Legal name'    | 'Legal name contract' | 'Order'                                        | 'Project' | 'Amount' | 'Payment' |
+			| 'Purchase invoice 126 dated 15.03.2021 12:00:00' | 'Maxim'   | 'Partner term Maxim' | 'Company Maxim' | ''                    | ''                                             | ''        | '190,00' | '190,00'  |
+			| 'Purchase invoice 127 dated 28.04.2021 21:50:01' | 'Maxim'   | 'Partner term Maxim' | 'Company Maxim' | ''                    | ''                                             | ''        | '100,00' | '100,00'  |
+			| 'Purchase invoice 194 dated 04.09.2023 13:50:38' | 'Maxim'   | 'Partner term Maxim' | 'Company Aldis' | ''                    | 'Purchase order 118 dated 04.09.2023 13:46:08' | ''        | '900,00' | '900,00'  |
+			| 'Purchase invoice 194 dated 04.09.2023 13:50:38' | 'Maxim'   | 'Partner term Maxim' | 'Company Aldis' | ''                    | 'Purchase order 119 dated 04.09.2023 13:50:07' | ''        | '900,00' | '810,00'  |
+		* Amount more then invoice sum
+			And I input "5 000,00" text in the field named "Amount"
+			And I click the button named "Calculate"
+			And "Documents" table became equal
+				| 'Document'                                       | 'Partner' | 'Partner term'       | 'Legal name'    | 'Legal name contract' | 'Order'                                        | 'Project' | 'Amount' | 'Payment' |
+				| 'Purchase invoice 126 dated 15.03.2021 12:00:00' | 'Maxim'   | 'Partner term Maxim' | 'Company Maxim' | ''                    | ''                                             | ''        | '190,00' | '190,00'  |
+				| 'Purchase invoice 127 dated 28.04.2021 21:50:01' | 'Maxim'   | 'Partner term Maxim' | 'Company Maxim' | ''                    | ''                                             | ''        | '100,00' | '100,00'  |
+				| 'Purchase invoice 194 dated 04.09.2023 13:50:38' | 'Maxim'   | 'Partner term Maxim' | 'Company Aldis' | ''                    | 'Purchase order 118 dated 04.09.2023 13:46:08' | ''        | '900,00' | '900,00'  |
+				| 'Purchase invoice 194 dated 04.09.2023 13:50:38' | 'Maxim'   | 'Partner term Maxim' | 'Company Aldis' | ''                    | 'Purchase order 119 dated 04.09.2023 13:50:07' | ''        | '900,00' | '900,00'  |
+			And I click "Ok" button
+			And I finish line editing in "PaymentList" table
+			And "PaymentList" table became equal
+				| '#' | 'Partner' | 'Payee'         | 'Partner term'       | 'Legal name contract' | 'Basis document'                                 | 'Project' | 'Order'                                        | 'Total amount' | 'Financial movement type' | 'Cash flow center' | 'Planning transaction basis' |
+				| '1' | 'Maxim'   | 'Company Maxim' | 'Partner term Maxim' | ''                    | 'Purchase invoice 126 dated 15.03.2021 12:00:00' | ''        | ''                                             | '190,00'       | ''                        | ''                 | ''                           |
+				| '2' | 'Maxim'   | 'Company Maxim' | 'Partner term Maxim' | ''                    | 'Purchase invoice 127 dated 28.04.2021 21:50:01' | ''        | ''                                             | '100,00'       | ''                        | ''                 | ''                           |
+				| '3' | 'Maxim'   | 'Company Aldis' | 'Partner term Maxim' | ''                    | 'Purchase invoice 194 dated 04.09.2023 13:50:38' | ''        | 'Purchase order 118 dated 04.09.2023 13:46:08' | '900,00'       | ''                        | ''                 | ''                           |
+				| '4' | 'Maxim'   | 'Company Aldis' | 'Partner term Maxim' | ''                    | 'Purchase invoice 194 dated 04.09.2023 13:50:38' | ''        | 'Purchase order 119 dated 04.09.2023 13:50:07' | '900,00'       | ''                        | ''                 | ''                           |
+			And in the table "PaymentList" I click "Payment by documents" button
+			Then the number of "Documents" table lines is "равно" "0"
+	* Allocation check	(two partners)
+			And I close current window	
+			And I move to "Other" tab
+			And I input "" text in the field named "Branch"		
+			And I move to "Payments" tab
+			And in the table "PaymentList" I click "Payment by documents" button
+		* Select lines and check allocation	
+			And I go to line in "Documents" table
+				| 'Amount'     | 'Document'                                     |
+				| '137 000,00' | '$$PurchaseInvoice018001$$' |
+			And I move one line down in "Documents" table and select line
+			And I input "149 000,00" text in the field named "Amount"
+			And I click the button named "Calculate"
+			And "Documents" table became equal
+				| 'Document'                                       | 'Partner'   | 'Partner term'       | 'Legal name'        | 'Legal name contract' | 'Order'                   | 'Project' | 'Amount'     | 'Payment'    |
+				| 'Purchase invoice 125 dated 12.02.2021 12:00:00' | 'Maxim'     | 'Partner term Maxim' | 'Company Maxim'     | ''                    | ''                        | ''        | '100,00'     | ''           |
+				| '$$PurchaseInvoice018001$$'                      | 'Ferron BP' | 'Vendor Ferron, TRY' | 'Company Ferron BP' | ''                    | '$$PurchaseOrder017001$$' | ''        | '137 000,00' | '137 000,00' |
+				| '$$PurchaseInvoice29604$$'                       | 'Ferron BP' | 'Vendor Ferron, TRY' | 'Company Ferron BP' | ''                    | ''                        | ''        | '13 000,00'  | '12 000,00'  |
+			And I click "Ok" button
+			And "PaymentList" table became equal
+				| 'Partner'   | 'Payee'             | 'Partner term'       | 'Legal name contract' | 'Basis document'                                 | 'Project' | 'Order'                                        | 'Total amount' |
+				| 'Maxim'     | 'Company Maxim'     | 'Partner term Maxim' | ''                    | 'Purchase invoice 126 dated 15.03.2021 12:00:00' | ''        | ''                                             | '190,00'       |
+				| 'Maxim'     | 'Company Maxim'     | 'Partner term Maxim' | ''                    | 'Purchase invoice 127 dated 28.04.2021 21:50:01' | ''        | ''                                             | '100,00'       |
+				| 'Maxim'     | 'Company Aldis'     | 'Partner term Maxim' | ''                    | 'Purchase invoice 194 dated 04.09.2023 13:50:38' | ''        | 'Purchase order 118 dated 04.09.2023 13:46:08' | '900,00'       |
+				| 'Maxim'     | 'Company Aldis'     | 'Partner term Maxim' | ''                    | 'Purchase invoice 194 dated 04.09.2023 13:50:38' | ''        | 'Purchase order 119 dated 04.09.2023 13:50:07' | '900,00'       |
+				| 'Maxim'     | 'Company Maxim'     | 'Partner term Maxim' | ''                    | 'Purchase invoice 125 dated 12.02.2021 12:00:00' | ''        | ''                                             | '100,00'       |
+				| 'Ferron BP' | 'Company Ferron BP' | 'Vendor Ferron, TRY' | ''                    | '$$PurchaseInvoice018001$$'                      | ''        | '$$PurchaseOrder017001$$'                      | '137 000,00'   |
+				| 'Ferron BP' | 'Company Ferron BP' | 'Vendor Ferron, TRY' | ''                    | '$$PurchaseInvoice29604$$'                       | ''        | ''                                             | '11 900,00'    |
 		And I close all client application windows

@@ -163,6 +163,7 @@ Procedure SetVisibilityAvailability(Object, Form)
 	IsCashTransferOrder   = Object.TransactionType = PredefinedValue("Enum.OutgoingPaymentTransactionTypes.CashTransferOrder");
 	IsPaymentByCheque     = Object.TransactionType = PredefinedValue("Enum.OutgoingPaymentTransactionTypes.PaymentByCheque");
 	IsSalaryPayment       = Object.TransactionType = PredefinedValue("Enum.OutgoingPaymentTransactionTypes.SalaryPayment");
+	IsPaymentToVendor     = Object.TransactionType = PredefinedValue("Enum.OutgoingPaymentTransactionTypes.PaymentToVendor");
 	
 	ArrayTypes = New Array();
 	
@@ -193,8 +194,10 @@ Procedure SetVisibilityAvailability(Object, Form)
 	Form.Items.EditCurrencies.Enabled = Not Form.ReadOnly;
 	Form.Items.EditAccounting.Enabled = Not Form.ReadOnly;
 	Form.Items.PaymentListChoiceByAccrual.Enabled = Not Form.ReadOnly;
+	Form.Items.PaymentListPaymentByDocuments.Enabled = Not Form.ReadOnly;
 	
 	Form.Items.PaymentListChoiceByAccrual.Visible = IsSalaryPayment;
+	Form.Items.PaymentListPaymentByDocuments.Visible = IsPaymentToVendor;
 EndProcedure
 
 &AtClient
@@ -642,6 +645,40 @@ EndProcedure
 &AtClient
 Procedure ShowHiddenTables(Command)
 	DocumentsClient.ShowHiddenTables(Object, ThisObject);
+EndProcedure
+
+&AtClient
+Procedure PaymentByDocuments(Command)
+	FormParameters = New Structure();
+	FormParameters.Insert("SelectedDocuments", New Array());
+	
+	FormParameters.Insert("Ref"           , Object.Ref);
+	FormParameters.Insert("Company"       , Object.Company);
+	FormParameters.Insert("Branch"        , Object.Branch);
+	FormParameters.Insert("Currency"      , Object.Currency);
+	FormParameters.Insert("AllowedTypes"  , New Array());
+	
+	FormParameters.AllowedTypes.Add(Type("DocumentRef.PurchaseInvoice"));
+	
+	FormParameters.Insert("RegisterName", "R1021B_VendorsTransactions");
+	
+	For Each Row In Object.PaymentList Do
+		If ValueIsFilled(Row.BasisDocument) Then
+			FormParameters.SelectedDocuments.Add(Row.BasisDocument);
+		EndIf;
+	EndDo;
+	Notify = New NotifyDescription("PaymentByDocumentSelectionEnd", ThisObject);		
+	OpenForm("CommonForm.PaymentByDocuments", FormParameters, ThisObject,,,,Notify, FormWindowOpeningMode.LockOwnerWindow);	
+EndProcedure
+
+&AtClient
+Procedure PaymentByDocumentSelectionEnd(Result, NotifyParams) Export
+	If Result = Undefined Then
+		Return;
+	EndIf;
+	For Each Row In Result Do
+		ViewClient_V2.PaymentListAddFilledRow(Object, ThisObject, Row);
+	EndDo;
 EndProcedure
 
 #EndRegion

@@ -100,7 +100,21 @@ Scenario:  _052001 preparation (Bank receipt)
 		| "Documents.CashStatement.FindByNumber(104).GetObject().Write(DocumentWriteMode.Posting);"   |
 	And I execute 1C:Enterprise script at server		 
 		| "Documents.CashStatement.FindByNumber(105).GetObject().Write(DocumentWriteMode.Posting);"   |
-	
+	When Create document SalesInvoice objects (advance, customers)
+	And I execute 1C:Enterprise script at server
+		| "Documents.SalesInvoice.FindByNumber(10).GetObject().Write(DocumentWriteMode.Posting);"    |
+	And I execute 1C:Enterprise script at server
+		| "Documents.SalesInvoice.FindByNumber(11).GetObject().Write(DocumentWriteMode.Posting);"    |
+	And I execute 1C:Enterprise script at server
+		| "Documents.SalesInvoice.FindByNumber(12).GetObject().Write(DocumentWriteMode.Posting);"    |
+	And I execute 1C:Enterprise script at server
+		| "Documents.SalesInvoice.FindByNumber(13).GetObject().Write(DocumentWriteMode.Posting);"    |
+	And I execute 1C:Enterprise script at server
+		| "Documents.SalesInvoice.FindByNumber(14).GetObject().Write(DocumentWriteMode.Posting);"    |
+	And I execute 1C:Enterprise script at server
+		| "Documents.SalesInvoice.FindByNumber(15).GetObject().Write(DocumentWriteMode.Posting);"    |
+	And I execute 1C:Enterprise script at server
+		| "Documents.SalesInvoice.FindByNumber(16).GetObject().Write(DocumentWriteMode.Posting);"    |
 Scenario: _0520011 check preparation
 	When check preparation
 
@@ -465,7 +479,7 @@ Scenario: _052008 check partner filter in tabular part in document Bank Receipt
 	Given I open hyperlink "e1cib/list/Document.BankReceipt"
 	When check the partner filter in the tabular part of the payment receipt documents
 
-Scenario: _050009 create Bank receipt based on Purchase return
+Scenario: _052009 create Bank receipt based on Purchase return
 	And I close all client application windows
 	* Select BR
 		Given I open hyperlink "e1cib/list/Document.PurchaseReturn"
@@ -829,7 +843,7 @@ Scenario: _052017 create Bank receipt (Transfer from POS)
 			
 				
 
-Scenario: _300515 check connection to BankReceipt report "Related documents"
+Scenario: _052018 check connection to BankReceipt report "Related documents"
 	Given I open hyperlink "e1cib/list/Document.BankReceipt"
 	* Form report Related documents
 		And I go to line in "List" table
@@ -841,7 +855,7 @@ Scenario: _300515 check connection to BankReceipt report "Related documents"
 	And I close all client application windows
 
 
-Scenario: _300516 try post Bank receipt with empty amount
+Scenario: _052019 try post Bank receipt with empty amount
 	And I close all client application windows
 	Given I open hyperlink "e1cib/list/Document.BankReceipt"
 	And I click the button named "FormCreate"
@@ -881,5 +895,90 @@ Scenario: _300516 try post Bank receipt with empty amount
 			|'Fill total amount. Row: [1]'|
 		And I close all client application windows
 		
-				
+Scenario: _052020 check selection form (Payment by documents) in BR
+	And I close all client application windows
+	* Open BR
+		Given I open hyperlink "e1cib/list/Document.BankReceipt"
+		And I click the button named "FormCreate"
+		And I select from the drop-down list named "Company" by "Main Company" string
+		And I select from "Account" drop-down list by "Bank account, TRY" string
+		And I select from "Transaction type" drop-down list by "Payment from customer" string
+	* Check filter by Branch
+		* Without branch
+			And in the table "PaymentList" I click "Payment by documents" button
+			And "Documents" table became equal
+				| 'Document'                                   | 'Partner'   | 'Partner term'                     | 'Legal name'        | 'Legal name contract' | 'Order'                                   | 'Project' | 'Amount'    | 'Payment' |
+				| 'Sales invoice 16 dated 04.09.2023 13:04:13' | 'Lunch'     | 'Basic Partner terms, TRY'         | 'Company Lunch'     | ''                    | 'Sales order 6 dated 04.09.2023 13:03:16' | ''        | '2 600,00'  | ''        |
+				| 'Sales invoice 16 dated 04.09.2023 13:04:13' | 'Lunch'     | 'Basic Partner terms, TRY'         | 'Company Lunch'     | ''                    | 'Sales order 7 dated 04.09.2023 13:03:26' | ''        | '2 600,00'  | ''        |
+				| '$$SalesInvoice024001$$'                     | 'Ferron BP' | 'Basic Partner terms, TRY'         | 'Company Ferron BP' | ''                    | '$$SalesOrder023001$$'                    | ''        | '4 350,00'  | ''        |
+				| '$$SalesInvoice024008$$'                     | 'Ferron BP' | 'Basic Partner terms, without VAT' | 'Company Ferron BP' | ''                    | '$$SalesOrder023005$$'                    | ''        | '11 099,93' | ''        |
+			And I close current window
+		* With branch
+			And I move to "Other" tab
+			And I select from the drop-down list named "Branch" by "Distribution department" string
+			And I move to "Payments" tab
+			And in the table "PaymentList" I click "Payment by documents" button
+			And "Documents" table became equal
+				| 'Document'                                   | 'Partner'  | 'Partner term'             | 'Legal name'       | 'Legal name contract' | 'Order' | 'Project' | 'Amount'    | 'Payment' |
+				| 'Sales invoice 14 dated 16.02.2021 12:14:54' | 'Lomaniti' | 'Basic Partner terms, TRY' | 'Company Lomaniti' | ''                    | ''      | ''        | '12 400,00' | ''        |
+				| 'Sales invoice 15 dated 12.04.2021 12:00:01' | 'Lomaniti' | 'Basic Partner terms, TRY' | 'Company Lomaniti' | ''                    | ''      | ''        | '20 000,00' | ''        |
+	* Allocation check	(one partner)
+		And I input "10 000,00" text in the field named "Amount"
+		And I click the button named "Calculate"
+		And "Documents" table became equal
+			| 'Document'                                   | 'Partner'  | 'Partner term'             | 'Legal name'       | 'Legal name contract' | 'Order' | 'Project' | 'Amount'    | 'Payment'   |
+			| 'Sales invoice 14 dated 16.02.2021 12:14:54' | 'Lomaniti' | 'Basic Partner terms, TRY' | 'Company Lomaniti' | ''                    | ''      | ''        | '12 400,00' | '10 000,00' |
+			| 'Sales invoice 15 dated 12.04.2021 12:00:01' | 'Lomaniti' | 'Basic Partner terms, TRY' | 'Company Lomaniti' | ''                    | ''      | ''        | '20 000,00' | ''          |
+		* Amount more then invoice sum
+			And I input "35 000,00" text in the field named "Amount"
+			And I click the button named "Calculate"
+			And "Documents" table became equal
+				| 'Document'                                   | 'Partner'  | 'Partner term'             | 'Legal name'       | 'Legal name contract' | 'Order' | 'Project' | 'Amount'    | 'Payment'   |
+				| 'Sales invoice 14 dated 16.02.2021 12:14:54' | 'Lomaniti' | 'Basic Partner terms, TRY' | 'Company Lomaniti' | ''                    | ''      | ''        | '12 400,00' | '12 400,00' |
+				| 'Sales invoice 15 dated 12.04.2021 12:00:01' | 'Lomaniti' | 'Basic Partner terms, TRY' | 'Company Lomaniti' | ''                    | ''      | ''        | '20 000,00' | '20 000,00' |
+			And I click "Ok" button
+			And I finish line editing in "PaymentList" table
+			And "PaymentList" table became equal
+				| '#' | 'Partner'  | 'Payer'            | 'Partner term'             | 'Legal name contract' | 'Basis document'                             | 'Project' | 'Order' | 'Total amount' | 'Financial movement type' | 'Cash flow center' | 'Planning transaction basis' |
+				| '1' | 'Lomaniti' | 'Company Lomaniti' | 'Basic Partner terms, TRY' | ''                    | 'Sales invoice 14 dated 16.02.2021 12:14:54' | ''        | ''      | '12 400,00'    | ''                        | ''                 | ''                           |
+				| '2' | 'Lomaniti' | 'Company Lomaniti' | 'Basic Partner terms, TRY' | ''                    | 'Sales invoice 15 dated 12.04.2021 12:00:01' | ''        | ''      | '20 000,00'    | ''                        | ''                 | ''                           |
+			And in the table "PaymentList" I click "Payment by documents" button
+			Then the number of "Documents" table lines is "равно" "0"
+	* Allocation check	(two partners)
+			And I close current window	
+			And I move to "Other" tab
+			And I input "" text in the field named "Branch"		
+			And I move to "Payments" tab
+			And in the table "PaymentList" I click "Payment by documents" button
+		* Select lines and check allocation	
+			And I go to line in "Documents" table
+				| 'Amount'   | 'Document'                                   | 'Legal name'    | 'Order'                                   | 'Partner' | 'Partner term'             |
+				| '2 600,00' | 'Sales invoice 16 dated 04.09.2023 13:04:13' | 'Company Lunch' | 'Sales order 6 dated 04.09.2023 13:03:16' | 'Lunch'   | 'Basic Partner terms, TRY' |
+			And I move one line down in "Documents" table and select line
+			And I input "4 000,00" text in the field named "Amount"
+			And I click the button named "Calculate"
+			And "Documents" table became equal
+				| 'Document'                                   | 'Partner'   | 'Partner term'                     | 'Legal name'        | 'Legal name contract' | 'Order'                                   | 'Project' | 'Amount'    | 'Payment'  |
+				| 'Sales invoice 16 dated 04.09.2023 13:04:13' | 'Lunch'     | 'Basic Partner terms, TRY'         | 'Company Lunch'     | ''                    | 'Sales order 6 dated 04.09.2023 13:03:16' | ''        | '2 600,00'  | '2 600,00' |
+				| 'Sales invoice 16 dated 04.09.2023 13:04:13' | 'Lunch'     | 'Basic Partner terms, TRY'         | 'Company Lunch'     | ''                    | 'Sales order 7 dated 04.09.2023 13:03:26' | ''        | '2 600,00'  | '1 400,00' |
+				| '$$SalesInvoice024001$$'                     | 'Ferron BP' | 'Basic Partner terms, TRY'         | 'Company Ferron BP' | ''                    | '$$SalesOrder023001$$'                    | ''        | '4 350,00'  | ''         |
+				| '$$SalesInvoice024008$$'                     | 'Ferron BP' | 'Basic Partner terms, without VAT' | 'Company Ferron BP' | ''                    | '$$SalesOrder023005$$'                    | ''        | '11 099,93' | ''         |
+		* Check fifo allocation
+			Then "Payment by documents" window is opened
+			And I select from the drop-down list named "FilterPartner" by "Ferron BP" string
+			And I input "5 000,00" text in the field named "Amount"
+			And I click the button named "Calculate"
+			Then the form attribute named "FilterPartner" became equal to "Ferron BP"
+			And "Documents" table became equal
+				| 'Document'               | 'Partner'   | 'Partner term'                     | 'Legal name'        | 'Legal name contract' | 'Order'                | 'Project' | 'Amount'    | 'Payment'  |
+				| '$$SalesInvoice024001$$' | 'Ferron BP' | 'Basic Partner terms, TRY'         | 'Company Ferron BP' | ''                    | '$$SalesOrder023001$$' | ''        | '4 350,00'  | '4 350,00' |
+				| '$$SalesInvoice024008$$' | 'Ferron BP' | 'Basic Partner terms, without VAT' | 'Company Ferron BP' | ''                    | '$$SalesOrder023005$$' | ''        | '11 099,93' | '650,00'   |
+			And I click "Ok" button
+			And "PaymentList" table became equal
+				| '#' | 'Partner'   | 'Payer'             | 'Partner term'                     | 'Legal name contract' | 'Basis document'                             | 'Project' | 'Order'                | 'Total amount' | 'Financial movement type' | 'Cash flow center' | 'Planning transaction basis' |
+				| '1' | 'Lomaniti'  | 'Company Lomaniti'  | 'Basic Partner terms, TRY'         | ''                    | 'Sales invoice 14 dated 16.02.2021 12:14:54' | ''        | ''                     | '12 400,00'    | ''                        | ''                 | ''                           |
+				| '2' | 'Lomaniti'  | 'Company Lomaniti'  | 'Basic Partner terms, TRY'         | ''                    | 'Sales invoice 15 dated 12.04.2021 12:00:01' | ''        | ''                     | '20 000,00'    | ''                        | ''                 | ''                           |
+				| '3' | 'Ferron BP' | 'Company Ferron BP' | 'Basic Partner terms, TRY'         | ''                    | '$$SalesInvoice024001$$'                     | ''        | '$$SalesOrder023001$$' | '4 350,00'     | ''                        | ''                 | ''                           |
+				| '4' | 'Ferron BP' | 'Company Ferron BP' | 'Basic Partner terms, without VAT' | ''                    | '$$SalesInvoice024008$$'                     | ''        | '$$SalesOrder023005$$' | '650,00'       | ''                        | ''                 | ''                           |
+		And I close all client application windows				
 				

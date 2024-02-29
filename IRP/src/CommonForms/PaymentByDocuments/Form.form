@@ -1076,6 +1076,41 @@
         <common>true</common>
       </edit>
     </columns>
+    <columns>
+      <name>DocDate</name>
+      <title>
+        <key>en</key>
+        <value>Doc date</value>
+      </title>
+      <id>24</id>
+      <valueType>
+        <types>Date</types>
+        <dateQualifiers/>
+      </valueType>
+      <view>
+        <common>true</common>
+      </view>
+      <edit>
+        <common>true</common>
+      </edit>
+    </columns>
+    <columns>
+      <name>RowKey</name>
+      <title>
+        <key>en</key>
+        <value>Row key</value>
+      </title>
+      <id>25</id>
+      <valueType>
+        <types>DefinedType.typeRowID</types>
+      </valueType>
+      <view>
+        <common>true</common>
+      </view>
+      <edit>
+        <common>true</common>
+      </edit>
+    </columns>
   </attributes>
   <attributes>
     <name>Amount</name>

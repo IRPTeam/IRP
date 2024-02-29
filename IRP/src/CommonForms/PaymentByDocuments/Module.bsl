@@ -35,7 +35,8 @@ Procedure FillTable()
 	|	TransactionsBalance.Order,
 	|	TransactionsBalance.Project,
 	|	TransactionsBalance.Basis.LegalName AS LegalName,
-	|	TransactionsBalance.Basis.LegalNameContract AS LegalNameContract
+	|	TransactionsBalance.Basis.LegalNameContract AS LegalNameContract,
+	|	TransactionsBalance.Basis.Date AS DocDate
 	|FROM
 	|	AccumulationRegister.R1021B_VendorsTransactions.Balance(&Boundary, Company = &Company
 	|	AND Branch = &Branch
@@ -83,6 +84,9 @@ Procedure FillTable()
 	
 	QueryResult = Query.Execute();
 	ThisObject.Documents.Load(QueryResult.Unload());
+	For Each Row In ThisObject.Documents Do
+		Row.RowKey = String(New UUID());
+	EndDo;
 EndProcedure
 
 &AtClient
@@ -110,13 +114,19 @@ Function CalculateRows()
 	
 	If Items.Documents.SelectedRows.Count() > 1 Then
 		For Each SelectedRow In Items.Documents.SelectedRows Do
-			ArrayOfRows.Add(ThisObject.Documents.FindByID(SelectedRow));
+			NewRow = GetEmptyRowTable();
+			FillPropertyValues(NewRow, ThisObject.Documents.FindByID(SelectedRow));
+			ArrayOfRows.Add(NewRow);
 		EndDo;
 	Else
 		For Each Row In ThisObject.Documents Do
-			ArrayOfRows.Add(Row);
+			NewRow = GetEmptyRowTable();
+			FillPropertyValues(NewRow, Row);
+			ArrayOfRows.Add(NewRow);
 		EndDo;
 	EndIf;
+	
+	ArrayOfRows = SortRowsByDate(ArrayOfRows);
 	
 	Result = New Array();
 	
@@ -128,20 +138,64 @@ Function CalculateRows()
 		
 		Row.Payment = Min(_Amount, Row.Amount);
 		_Amount = _Amount - Row.Payment;
-			
-		ResultRow = New Structure("BasisDocument, Partner, Agreement, TotalAmount, Order, Project, LegalName, LegalNameContract");
+		ResultRow = GetEmptyRowTable();
+		
 		FillPropertyValues(ResultRow, Row);
 		
-		ResultRow.TotalAmount = Row.Payment;
-		ResultRow.BasisDocument = Row.Document;
+		ResultRow.Insert("TotalAmount",   Row.Payment);
+		ResultRow.Insert("BasisDocument", Row.Document);
 		ResultRow.Insert("Payee", Row.LegalName);
 		ResultRow.Insert("Payer", Row.LegalName);
 		
+			
 		Result.Add(ResultRow);
+		
+		DocumentsRows = ThisObject.Documents.FindRows(New Structure("RowKey", Row.RowKey));
+		For Each DocumentRow In DocumentsRows Do
+			DocumentRow.Payment = Row.Payment;
+		EndDo;
+		
 	EndDo;
 
 	Return Result;
 EndFunction	
+
+&AtClientAtServerNoContext
+Function GetEmptyRowTable()
+	EmptyRow = New Structure();
+	EmptyRow.Insert("Agreement");
+	EmptyRow.Insert("Amount");
+	EmptyRow.Insert("DocDate");
+	EmptyRow.Insert("Document");
+	EmptyRow.Insert("LegalName");
+	EmptyRow.Insert("LegalNameContract");
+	EmptyRow.Insert("Order");
+	EmptyRow.Insert("Partner");
+	EmptyRow.Insert("Payment");
+	EmptyRow.Insert("Project");
+	EmptyRow.Insert("RowKey");
+	Return EmptyRow;
+EndFunction
+
+&AtServer
+Function SortRowsByDate(ArrayOfRows)
+	EmptyTable = ThisObject.Documents.Unload().CopyColumns();
+	For Each Row In ArrayOfRows Do
+		FillPropertyValues(EmptyTable.Add(), Row);
+	EndDo;
+	
+	EmptyTable.Sort("DocDate");
+	
+	NewArrayOfRows = New Array();
+	
+	For Each Row In EmptyTable Do
+		NewRow = GetEmptyRowTable();
+		FillPropertyValues(NewRow, Row);
+		NewArrayOfRows.Add(NewRow);
+	EndDo;
+	
+	Return NewArrayOfRows;
+EndFunction
 
 &AtClient
 Procedure Cancel(Command)

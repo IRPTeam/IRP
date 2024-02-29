@@ -473,7 +473,7 @@ Procedure LoadingOnClient()
 	
 	If FilesPacket.Count() > 0 Then
 		//@skip-check invocation-parameter-type-intersect
-		Loading_SendServer(FilesPacket, ThisObject.PictureConnectionSetting);
+		Loading_SendServer(FilesPacket, ThisObject.PictureConnectionSetting, ThisObject.PreviewScaleSize);
 		For Each FileInfo In FilesPacket Do
 			FilesTableRecord = FilesTableMap.Get(FileInfo.FileID);
 			If FileInfo.Success = True Then
@@ -501,8 +501,9 @@ EndProcedure
 // Parameters:
 //  FilesPacket - Array of Structure - Files packet
 //  ConnectionSettings - See IntegrationServer.ConnectionSetting
+//	PreviewScaleSize - Number - Preview scale size
 &AtServerNoContext
-Procedure Loading_SendServer(FilesPacket, ConnectionSettings)
+Procedure Loading_SendServer(FilesPacket, ConnectionSettings, PreviewScaleSize)
 	
 	Volume = PictureViewerServer.GetIntegrationSettingsPicture().DefaultPictureStorageVolume; // CatalogRef.FileStorageVolumes
 	
@@ -542,6 +543,8 @@ Procedure Loading_SendServer(FilesPacket, ConnectionSettings)
 		
 		FileInfo.Success = Not IsBlankString(FileInfo.URI);
 		If FileInfo.Success = True Then
+			FilePreview = PictureViewerServer.UpdatePictureInfoAndGetPreview(FileBody, PreviewScaleSize);
+			FillPropertyValues(FileInfo, FilePreview, "Preview,Size,Height,Width");
 			FileInfo.Insert("FileRef", PictureViewerServer.CreateFile(Volume, FileInfo));
 		EndIf;
 		
@@ -650,6 +653,11 @@ EndProcedure
 Procedure ShowCurrentSplashData() Export
 	SplashForm.Percent = PacketIndex;
 	SplashForm.EndDate = CommonFunctionsServer.GetCurrentSessionDate();
+	
+	If PacketIndex > 0 Then
+		TotalTime = SplashForm.EndDate - SplashForm.StartTime;
+		SplashForm.EndIn = SplashForm.StartTime + TotalTime * (SplashForm.Items.Percent.MaxValue / PacketIndex);
+	EndIf;
 EndProcedure
 
 // Close splash form.

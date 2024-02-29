@@ -782,8 +782,32 @@
 			<name>View</name>
 			<value>true</value>
 		</right>
+	</object>
+	<object>
+		<name>CommonAttribute.Editor</name>
 		<right>
-			<name>Edit</name>
+			<name>View</name>
+			<value>true</value>
+		</right>
+	</object>
+	<object>
+		<name>CommonAttribute.CreateDate</name>
+		<right>
+			<name>View</name>
+			<value>true</value>
+		</right>
+	</object>
+	<object>
+		<name>CommonAttribute.ModifyDate</name>
+		<right>
+			<name>View</name>
+			<value>true</value>
+		</right>
+	</object>
+	<object>
+		<name>CommonAttribute.NotActive</name>
+		<right>
+			<name>View</name>
 			<value>true</value>
 		</right>
 	</object>

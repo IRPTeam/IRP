@@ -273,5 +273,4 @@ Scenario: _2063023 check audit lock history
 		| 'en description is empty' | '*'    | 'Purchase invoice 12 dated 07.09.2020 17:53:38'         | 'Unlock' |
 		| 'en description is empty' | '*'    | 'Consolidated retail sales 2 dated 21.08.2022 08:14:58' | 'Lock'   |
 		| 'en description is empty' | '*'    | 'Consolidated retail sales 2 dated 21.08.2022 08:14:58' | 'Unlock' |
-		| 'en description is empty' | '*'    | 'Consolidated retail sales 2 dated 21.08.2022 08:14:58' | 'Unlock' |
 	And I close all client application windows	

@@ -2610,6 +2610,19 @@ Procedure PaymentListBeforeAddRow(Object, Form, Cancel, Clone, CurrentData = Und
 	EndIf;
 EndProcedure
 
+Function PaymentListAddFilledRow(Object, Form,  FillingValues) Export
+	Cancel      = False;
+	Clone       = False;
+	CurrentData = Undefined;
+	NewRow = AddOrCopyRow(Object, Form, "PaymentList", Cancel, Clone, CurrentData,
+		"PaymentListOnAddRowFormNotify", "PaymentListOnCopyRowFormNotify", FillingValues);
+	Form.Items.PaymentList.CurrentRow = NewRow.GetID();
+	If Form.Items.PaymentList.CurrentRow <> Undefined Then
+		Form.Items.PaymentList.ChangeRow();
+	EndIf;
+	Return NewRow;
+EndFunction
+
 Procedure PaymentListOnAddRowFormNotify(Parameters) Export
 	Parameters.Form.Modified = True;
 EndProcedure

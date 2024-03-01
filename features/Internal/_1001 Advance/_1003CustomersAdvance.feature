@@ -571,6 +571,7 @@ Scenario: _1003070 check payment status for SI
 		And I go to line in "" table
 			| 'Column1'        |
 			| 'Payment status' |
+		And I select current line in "" table
 		And Delay 2
 		And I activate current test client window
 		And Delay 2

@@ -535,8 +535,15 @@ Procedure ExecuteSetterByName(Parameters, Results, SetterName)
 EndProcedure
 
 Procedure ExecuteCommandByName(Parameters, CommandName)
-	//@skip-warning
-	Execute StrTemplate("%1(Parameters);", CommandName);
+	If CommandName = "CommandUpdateByBillOfMaterials" Then
+		CommandUpdateByBillOfMaterials(Parameters);
+	ElsIf CommandName = "CommandUpdateCurrentQuantity" Then
+		CommandUpdateCurrentQuantity(Parameters);
+	ElsIf CommandName = "CommandRecalculationWhenBasedOn" Then
+		CommandRecalculationWhenBasedOn(Parameters);
+	Else
+		Raise StrTemplate("Unsupported command name[%1]", CommandName);
+	EndIf;
 EndProcedure
 
 Function ResultArray(_Key, Value)
@@ -593,11 +600,6 @@ Function GetAllBindingsByDefault(Parameters)
 	Binding.Insert("Productions.Quantity"  , BindDefaultProductionsQuantity(Parameters));
 	
 	Return Binding;
-EndFunction
-
-Function GetAllCommandsByDefault(Parameters)
-	ArrayOfCommands = New Array();
-	Return ArrayOfCommands;
 EndFunction
 
 #EndRegion
@@ -728,7 +730,6 @@ Procedure AddNewRow(TableName, Parameters, ViewNotify = Undefined, LaunchSteps =
 	
 	Bindings = GetAllBindings(Parameters);
 	Defaults = GetAllBindingsByDefault(Parameters);
-	DefaultsCommand = GetAllCommandsByDefault(Parameters);
 	
 	For Each ColumnName In StrSplit(Parameters.ObjectMetadataInfo.Tables[TableName].Columns, ",") Do
 		
@@ -758,11 +759,7 @@ Procedure AddNewRow(TableName, Parameters, ViewNotify = Undefined, LaunchSteps =
 	
 	If LaunchSteps Then
 		LaunchNextSteps(Parameters);
-	EndIf;
-	
-	For Each CommandName In DefaultsCommand Do
-		ExecuteCommandByName(Parameters, CommandName);
-	EndDo;
+	EndIf;	
 EndProcedure
 
 #EndRegion

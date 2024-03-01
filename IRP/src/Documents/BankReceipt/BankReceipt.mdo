@@ -746,6 +746,26 @@
       <dataHistory>Use</dataHistory>
       <fullTextSearch>Use</fullTextSearch>
     </attributes>
+    <attributes uuid="08ef98c8-9a75-4067-bba2-8e4d6345fd41">
+      <name>CommissionFinancialMovementType</name>
+      <synonym>
+        <key>en</key>
+        <value>Commission financial movement type</value>
+      </synonym>
+      <type>
+        <types>CatalogRef.ExpenseAndRevenueTypes</types>
+      </type>
+      <minValue xsi:type="core:UndefinedValue"/>
+      <maxValue xsi:type="core:UndefinedValue"/>
+      <choiceParameters>
+        <name>Filter.IsFinancialMovementType</name>
+        <value xsi:type="core:BooleanValue">
+          <value>true</value>
+        </value>
+      </choiceParameters>
+      <dataHistory>Use</dataHistory>
+      <fullTextSearch>Use</fullTextSearch>
+    </attributes>
   </tabularSections>
   <tabularSections uuid="2434d324-00b7-4acc-847b-a51fc5c9af2e">
     <producedTypes>

@@ -252,7 +252,8 @@ Function PaymentList()
 		|	PaymentList.Ref.TransactionType = VALUE(Enum.IncomingPaymentTransactionType.OtherPartner) AS IsOtherPartner,
 		|	PaymentList.RevenueType AS RevenueType,
 		|	PaymentList.CashFlowCenter,
-		|	PaymentList.Project
+		|	PaymentList.Project,
+		|	PaymentList.CommissionFinancialMovementType
 		|INTO PaymentList
 		|FROM
 		|	Document.BankReceipt.PaymentList AS PaymentList
@@ -550,7 +551,7 @@ Function R3011T_CashFlow()
 		|	PaymentList.Branch,
 		|	PaymentList.Account,
 		|	VALUE(Enum.CashFlowDirections.Outgoing) AS Direction,
-		|	PaymentList.FinancialMovementType,
+		|	PaymentList.CommissionFinancialMovementType,
 		|	PaymentList.CashFlowCenter,
 		|	PaymentList.PlanningPeriod,
 		|	PaymentList.Currency,
@@ -767,8 +768,7 @@ Function R3021B_CashInTransitIncoming()
 		|	PaymentList.Currency,
 		|	PaymentList.Account,
 		|	PaymentList.PlaningTransactionBasis AS Basis,
-		|	PaymentList.Amount AS Amount,
-		|	PaymentList.Commission
+		|	PaymentList.Amount AS Amount
 		|INTO R3021B_CashInTransitIncoming
 		|FROM
 		|	PaymentList AS PaymentList
@@ -786,8 +786,7 @@ Function R3021B_CashInTransitIncoming()
 		|	PaymentList.Currency,
 		|	PaymentList.Account,
 		|	PaymentList.CashTransferOrder,
-		|	PaymentList.Amount AS Amount,
-		|	PaymentList.Commission
+		|	PaymentList.Amount AS Amount
 		|FROM
 		|	PaymentList AS PaymentList
 		|WHERE

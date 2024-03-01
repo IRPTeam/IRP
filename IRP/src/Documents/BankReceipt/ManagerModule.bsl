@@ -244,7 +244,6 @@ Function PaymentList()
 		|	PaymentList.Order AS Order,
 		|	PaymentList.PaymentType AS PaymentType,
 		|	PaymentList.PaymentTerminal AS PaymentTerminal,
-		|	PaymentList.CommissionIsSeparate AS CommissionIsSeparate,
 		|	CASE
 		|		WHEN PaymentList.PlaningTransactionBasis REFS Document.CashTransferOrder
 		|			THEN PaymentList.PlaningTransactionBasis.Ref
@@ -519,9 +518,7 @@ Function R3010B_CashOnHand()
 		|FROM
 		|	PaymentList AS PaymentList
 		|WHERE
-		|	((PaymentList.IsTransferFromPOS
-		|	AND NOT PaymentList.CommissionIsSeparate)
-		|	OR (PaymentList.IsPaymentFromCustomerByPOS))
+		|	PaymentList.IsTransferFromPOS
 		|	AND PaymentList.Commission <> 0";
 EndFunction
 
@@ -562,9 +559,7 @@ Function R3011T_CashFlow()
 		|FROM
 		|	PaymentList AS PaymentList
 		|WHERE
-		|	((PaymentList.IsTransferFromPOS
-		|	AND NOT PaymentList.CommissionIsSeparate)
-		|	OR (PaymentList.IsPaymentFromCustomerByPOS))
+		|	PaymentList.IsTransferFromPOS
 		|	AND PaymentList.Commission <> 0";
 EndFunction
 
@@ -630,7 +625,8 @@ Function R5022T_Expenses()
 		   |FROM
 		   |	PaymentList AS PaymentList
 		   |WHERE
-		   |	PaymentList.Commission <> 0";
+		   |	PaymentList.Commission <> 0
+		   |	AND NOT PaymentList.IsPaymentFromCustomerByPOS";
 EndFunction
 
 Function R3024B_SalesOrdersToBePaid()
@@ -771,11 +767,7 @@ Function R3021B_CashInTransitIncoming()
 		|	PaymentList.Currency,
 		|	PaymentList.Account,
 		|	PaymentList.PlaningTransactionBasis AS Basis,
-		|	case
-		|		when PaymentList.CommissionIsSeparate
-		|			then PaymentList.Commission + PaymentList.Amount
-		|		else PaymentList.Amount
-		|	end AS Amount,
+		|	PaymentList.Amount AS Amount,
 		|	PaymentList.Commission
 		|INTO R3021B_CashInTransitIncoming
 		|FROM
@@ -794,11 +786,7 @@ Function R3021B_CashInTransitIncoming()
 		|	PaymentList.Currency,
 		|	PaymentList.Account,
 		|	PaymentList.CashTransferOrder,
-		|	case
-		|		when PaymentList.CommissionIsSeparate
-		|			then PaymentList.Commission + PaymentList.Amount
-		|		else PaymentList.Amount
-		|	end AS Amount,
+		|	PaymentList.Amount AS Amount,
 		|	PaymentList.Commission
 		|FROM
 		|	PaymentList AS PaymentList

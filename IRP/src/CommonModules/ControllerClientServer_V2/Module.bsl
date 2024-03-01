@@ -1637,7 +1637,6 @@ Procedure MultiSetTransactionType_BankReceipt(Parameters, Results) Export
 	ResourceToBinding.Insert("PaymentType"              , BindPaymentListPaymentType(Parameters));
 	ResourceToBinding.Insert("PaymentTerminal"          , BindPaymentListPaymentTerminal(Parameters));
 	ResourceToBinding.Insert("BankTerm"                 , BindPaymentListBankTerm(Parameters));
-	ResourceToBinding.Insert("CommissionIsSeparate"     , BindPaymentListCommissionIsSeparate(Parameters));
 	ResourceToBinding.Insert("RetailCustomer"           , BindPaymentListRetailCustomer(Parameters));
 	ResourceToBinding.Insert("RevenueType"              , BindPaymentListRevenueType(Parameters));
 	ResourceToBinding.Insert("SendingAccount"           , BindPaymentListSendingAccount(Parameters));
@@ -1774,7 +1773,6 @@ Procedure StepClearByTransactionTypeBankReceipt(Parameters, Chain) Export
 		Options.PaymentType              = GetPaymentListPaymentType(Parameters, Row.Key);
 		Options.PaymentTerminal          = GetPaymentListPaymentTerminal(Parameters, Row.Key);
 		Options.BankTerm                 = GetPaymentListBankTerm(Parameters, Row.Key);
-		Options.CommissionIsSeparate     = GetPaymentListCommissionIsSeparate(Parameters, Row.Key);
 		Options.RetailCustomer           = GetPaymentListRetailCustomer(Parameters, Row.Key);
 		Options.RevenueType              = GetPaymentListRevenueType(Parameters, Row.Key);
 		Options.SendingAccount           = GetPaymentListSendingAccount(Parameters, Row.Key);
@@ -7912,28 +7910,6 @@ Function BindPaymentListBankTerm(Parameters)
 		"StepPaymentListGetCommissionPercent");
 		
 	Return BindSteps("BindVoid", DataPath, Binding, Parameters, "BindPaymentListBankTerm");
-EndFunction
-
-#EndRegion
-
-#Region PAYMENT_LIST_COMMISSION_IS_SEPARATE
-
-// PaymentList.CommissionIsSeparate.Set
-Procedure SetPaymentListCommissionIsSeparate(Parameters, Results) Export
-	Binding = BindPaymentListCommissionIsSeparate(Parameters);
-	SetterObject(Binding.StepsEnabler, Binding.DataPath, Parameters, Results);
-EndProcedure
-
-// PaymentList.CommissionIsSeparate.Get
-Function GetPaymentListCommissionIsSeparate(Parameters, _Key)
-	Return GetPropertyObject(Parameters, BindPaymentListCommissionIsSeparate(Parameters).DataPath , _Key);
-EndFunction
-
-// PaymentList.CommissionIsSeparate.Bind
-Function BindPaymentListCommissionIsSeparate(Parameters)
-	DataPath = "PaymentList.CommissionIsSeparate";
-	Binding = New Structure();
-	Return BindSteps("BindVoid", DataPath, Binding, Parameters, "BindPaymentListCommissionIsSeparate");
 EndFunction
 
 #EndRegion

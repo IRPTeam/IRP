@@ -212,7 +212,6 @@ Function PaymentList()
 		|	PaymentList.ProfitLossCenter AS ProfitLossCenter,
 		|	PaymentList.ExpenseType AS ExpenseType,
 		|	PaymentList.AdditionalAnalytic AS AdditionalAnalytic,
-		|	PaymentList.Commission AS Commission,
 		|	PaymentList.FinancialMovementType AS FinancialMovementType,
 		|	PaymentList.Ref.TransactionType = VALUE(Enum.OutgoingPaymentTransactionTypes.PaymentToVendor) AS IsPaymentToVendor,
 		|	PaymentList.Ref.TransactionType = VALUE(Enum.OutgoingPaymentTransactionTypes.CurrencyExchange) AS IsCurrencyExchange,
@@ -326,7 +325,6 @@ Function CashInTransit()
 		|	BankPaymentPaymentList.ProfitLossCenter AS ProfitLossCenter,
 		|	BankPaymentPaymentList.ExpenseType AS ExpenseType,
 		|	BankPaymentPaymentList.AdditionalAnalytic AS AdditionalAnalytic,
-		|	BankPaymentPaymentList.Commission AS Commission,
 		|	BankPaymentPaymentList.Ref.Branch AS Branch
 		|INTO TablePaymentList
 		|FROM
@@ -390,7 +388,7 @@ Function R9510B_SalaryPayment()
 		   |	PaymentList.Employee,
 		   |	PaymentList.PaymentPeriod,
 		   |	PaymentList.Currency,
-		   |	PaymentList.TotalAmount - PaymentList.Commission AS Amount
+		   |	PaymentList.TotalAmount AS Amount
 		   |INTO R9510B_SalaryPayment
 		   |FROM
 		   |	PaymentList AS PaymentList
@@ -407,7 +405,7 @@ Function R3027B_EmployeeCashAdvance()
 		   |	PaymentList.Branch,
 		   |	PaymentList.Partner,
 		   |	PaymentList.Currency,
-		   |	PaymentList.TotalAmount - PaymentList.Commission AS Amount
+		   |	PaymentList.TotalAmount AS Amount
 		   |INTO R3027B_EmployeeCashAdvance
 		   |FROM
 		   |	PaymentList AS PaymentList
@@ -566,43 +564,23 @@ Function R3035T_CashPlanning()
 EndFunction
 
 Function R5022T_Expenses()
-	Return "SELECT
-		   |	PaymentList.Period,
-		   |	PaymentList.Key,
-		   |	PaymentList.Company,
-		   |	PaymentList.Branch,
-		   |	PaymentList.Project,
-		   |	PaymentList.ProfitLossCenter,
-		   |	PaymentList.ExpenseType,
-		   |	PaymentList.Currency,
-		   |	PaymentList.AdditionalAnalytic,
-		   |	PaymentList.Commission AS Amount,
-		   |	PaymentList.Commission AS AmountWithTaxes
-		   |INTO R5022T_Expenses
-		   |FROM
-		   |	PaymentList AS PaymentList
-		   |WHERE
-		   |	PaymentList.Commission <> 0
-		   |	AND NOT PaymentList.IsReturnToCustomerByPOS
-		   |
-		   |UNION ALL
-		   |
-		   |SELECT
-		   |	PaymentList.Period,
-		   |	PaymentList.Key,
-		   |	PaymentList.Company,
-		   |	PaymentList.Branch,
-		   |	PaymentList.Project,
-		   |	PaymentList.ProfitLossCenter,
-		   |	PaymentList.ExpenseType,
-		   |	PaymentList.Currency,
-		   |	PaymentList.AdditionalAnalytic,
-		   |	PaymentList.Amount,
-		   |	PaymentList.Amount
-		   |FROM
-		   |	PaymentList AS PaymentList
-		   |WHERE
-		   |	PaymentList.IsOtherExpense";
+	Return 
+		"SELECT
+		|	PaymentList.Period,
+		|	PaymentList.Key,
+		|	PaymentList.Company,
+		|	PaymentList.Branch,
+		|	PaymentList.Project,
+		|	PaymentList.ProfitLossCenter,
+		|	PaymentList.ExpenseType,
+		|	PaymentList.Currency,
+		|	PaymentList.AdditionalAnalytic,
+		|	PaymentList.Amount AS Amount,
+		|	PaymentList.Amount AS AmountWithTaxes
+		|FROM
+		|	PaymentList AS PaymentList
+		|WHERE
+		|	PaymentList.IsOtherExpense";
 EndFunction
 
 Function R3025B_PurchaseOrdersToBePaid()
@@ -697,8 +675,7 @@ Function R3050T_PosCashBalances()
 		   |	PaymentList.PaymentType,
 		   |	PaymentList.Account,
 		   |	PaymentList.PaymentTerminal,
-		   |	- PaymentList.Amount AS Amount,
-		   |	- PaymentList.Commission AS Commission
+		   |	- PaymentList.Amount AS Amount
 		   |INTO R3050T_PosCashBalances
 		   |FROM
 		   |	PaymentList AS PaymentList
@@ -740,28 +717,14 @@ Function T1040T_AccountingAmounts()
 		|	PaymentList.Key AS Key,
 		|	PaymentList.Currency,
 		|	PaymentList.Amount,
-		|	VALUE(Catalog.AccountingOperations.BankPayment_DR_R1020B_AdvancesToVendors_R1021B_VendorsTransactions_CR_R3010B_CashOnHand) AS Operation,
+		|	VALUE(Catalog.AccountingOperations.BankPayment_DR_R1020B_AdvancesToVendors_R1021B_VendorsTransactions_CR_R3010B_CashOnHand) AS
+		|		Operation,
 		|	UNDEFINED AS AdvancesClosing
 		|INTO T1040T_AccountingAmounts
 		|FROM
 		|	PaymentList AS PaymentList
 		|WHERE
 		|	PaymentList.IsPaymentToVendor
-		|
-		|UNION ALL
-		|
-		|SELECT
-		|	PaymentList.Period,
-		|	PaymentList.Key,
-		|	PaymentList.Key,
-		|	PaymentList.Currency,
-		|	PaymentList.Commission,
-		|	VALUE(Catalog.AccountingOperations.BankPayment_DR_R5022T_Expenses_CR_R3010B_CashOnHand),
-		|	UNDEFINED
-		|FROM
-		|	PaymentList AS PaymentList
-		|WHERE
-		|	PaymentList.Commission <> 0
 		|
 		|UNION ALL
 		|
@@ -784,8 +747,6 @@ Function GetAccountingAnalytics(Parameters) Export
 		Return GetAnalytics_PaymentToVendor(Parameters); // Vendors transactions - Cash on hand
 	ElsIf Parameters.Operation = Catalogs.AccountingOperations.BankPayment_DR_R1021B_VendorsTransactions_CR_R1020B_AdvancesToVendors Then
 		Return GetAnalytics_OffsetOfAdvances(Parameters); // Vendors transactions - Advances to vendors 
-	ElsIf Parameters.Operation = Catalogs.AccountingOperations.BankPayment_DR_R5022T_Expenses_CR_R3010B_CashOnHand Then
-		Return GetAnalytics_BankCommission(Parameters); // Expenses - Cash on hand
 	EndIf;
 	Return Undefined;
 EndFunction
@@ -853,43 +814,12 @@ Function GetAnalytics_OffsetOfAdvances(Parameters)
 	Return AccountingAnalytics;
 EndFunction
 
-// Expenses - Cash on hand
-Function GetAnalytics_BankCommission(Parameters)
-	AccountingAnalytics = AccountingServer.GetAccountingAnalyticsResult(Parameters);
-	AccountParameters   = AccountingServer.GetAccountParameters(Parameters);
-
-	Debit = AccountingServer.GetT9014S_AccountsExpenseRevenue(AccountParameters, Parameters.RowData.ExpenseType);
-	If ValueIsFilled(Debit.Account) Then
-		AccountingAnalytics.Debit = Debit.Account;
-	EndIf;
-	// Debit - Analytics
-	AccountingServer.SetDebitExtDimensions(Parameters, AccountingAnalytics);
-
-	Credit = AccountingServer.GetT9011S_AccountsCashAccount(AccountParameters, 
-	                                                        Parameters.ObjectData.Account,
-	                                                        Parameters.ObjectData.Currency);
-	If ValueIsFilled(Credit.Account) Then
-		AccountingAnalytics.Credit = Credit.Account;
-	EndIf;
-	// Credit - Analytics
-	AdditionalAnalytics = New Structure();
-	AdditionalAnalytics.Insert("Account", Parameters.ObjectData.Account);
-	AccountingServer.SetCreditExtDimensions(Parameters, AccountingAnalytics, AdditionalAnalytics);
-	Return AccountingAnalytics;
-EndFunction
-
 Function GetHintDebitExtDimension(Parameters, ExtDimensionType, Value) Export
-	If Parameters.Operation = Catalogs.AccountingOperations.BankPayment_DR_R5022T_Expenses_CR_R3010B_CashOnHand And ExtDimensionType.ValueType.Types().Find(Type("CatalogRef.ExpenseAndRevenueTypes")) <> Undefined Then
-		Return Parameters.RowData.ExpenseType;
-	EndIf;
-	If Parameters.Operation = Catalogs.AccountingOperations.BankPayment_DR_R5022T_Expenses_CR_R3010B_CashOnHand And ExtDimensionType.ValueType.Types().Find(Type("CatalogRef.BusinessUnits")) <> Undefined Then
-		Return Parameters.RowData.ProfitLossCenter;
-	EndIf;
 	Return Value;
 EndFunction
 
 Function GetHintCreditExtDimension(Parameters, ExtDimensionType, Value) Export
-	If (Parameters.Operation = Catalogs.AccountingOperations.BankPayment_DR_R1020B_AdvancesToVendors_R1021B_VendorsTransactions_CR_R3010B_CashOnHand Or Parameters.Operation = Catalogs.AccountingOperations.BankPayment_DR_R5022T_Expenses_CR_R3010B_CashOnHand)
+	If (Parameters.Operation = Catalogs.AccountingOperations.BankPayment_DR_R1020B_AdvancesToVendors_R1021B_VendorsTransactions_CR_R3010B_CashOnHand)
 		And ExtDimensionType.ValueType.Types().Find(Type("CatalogRef.ExpenseAndRevenueTypes")) <> Undefined Then
 		Return Parameters.RowData.FinancialMovementType;
 	EndIf;

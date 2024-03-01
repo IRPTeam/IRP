@@ -3389,7 +3389,6 @@ Function ClearByTransactionTypeBankReceiptOptions() Export
 		|PaymentType,
 		|PaymentTerminal,
 		|BankTerm,
-		|CommissionIsSeparate,
 		|RetailCustomer,
 		|RevenueType,
 		|SendingAccount,
@@ -3413,7 +3412,6 @@ Function ClearByTransactionTypeBankReceiptExecute(Options) Export
 	Result.Insert("PaymentType"              , Options.PaymentType);
 	Result.Insert("PaymentTerminal"          , Options.PaymentTerminal);
 	Result.Insert("BankTerm"                 , Options.BankTerm);
-	Result.Insert("CommissionIsSeparate"     , Options.CommissionIsSeparate);
 	Result.Insert("RetailCustomer"           , Options.RetailCustomer);
 	Result.Insert("RevenueType"              , Options.RevenueType);
 	Result.Insert("SendingAccount"           , Options.SendingAccount);
@@ -3478,8 +3476,7 @@ Function ClearByTransactionTypeBankReceiptExecute(Options) Export
 		|LegalNameContract";	
 	ElsIf Options.TransactionType = Incoming_TransferFromPOS Then
 		StrByType = "
-		|POSAccount,
-		|CommissionIsSeparate";
+		|POSAccount";
 	ElsIf Options.TransactionType = Incoming_CustomerAdvance Then
 		StrByType = "
 		|RetailCustomer,

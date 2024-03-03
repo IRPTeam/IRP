@@ -689,6 +689,8 @@ Scenario: _1002070 check payment status for PI
 			| 'Payment status' |
 		And Delay 2
 		And I activate current test client window
+		And I select current line in "" table
+		And Delay 2
 		And I press keyboard shortcut "SPACE"
 		And I click "Apply" button
 		And I click "OK" button

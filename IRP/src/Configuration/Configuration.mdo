@@ -1301,22 +1301,23 @@
   <dataProcessors>DataProcessor.CreateRegExp</dataProcessors>
   <dataProcessors>DataProcessor.CreateSerialLotNumbers</dataProcessors>
   <dataProcessors>DataProcessor.DataHistory</dataProcessors>
+  <dataProcessors>DataProcessor.FixDocumentProblems</dataProcessors>
   <dataProcessors>DataProcessor.FunctionalOptionSettings</dataProcessors>
+  <dataProcessors>DataProcessor.GroupPhotoUploading</dataProcessors>
+  <dataProcessors>DataProcessor.InternalCommands</dataProcessors>
+  <dataProcessors>DataProcessor.LoadAndUnloadData</dataProcessors>
+  <dataProcessors>DataProcessor.MobileCreateDocument</dataProcessors>
   <dataProcessors>DataProcessor.MobileDesktop</dataProcessors>
   <dataProcessors>DataProcessor.MobileInvent</dataProcessors>
+  <dataProcessors>DataProcessor.ObjectPropertyEditor</dataProcessors>
   <dataProcessors>DataProcessor.PointOfSale</dataProcessors>
   <dataProcessors>DataProcessor.PrintLabels</dataProcessors>
   <dataProcessors>DataProcessor.Procurement</dataProcessors>
   <dataProcessors>DataProcessor.ProductionWorkspace</dataProcessors>
+  <dataProcessors>DataProcessor.ReplaceSerialLotNumber</dataProcessors>
   <dataProcessors>DataProcessor.ScanBarcode</dataProcessors>
   <dataProcessors>DataProcessor.StoreKeeperWorkspace</dataProcessors>
   <dataProcessors>DataProcessor.SystemSettings</dataProcessors>
-  <dataProcessors>DataProcessor.ObjectPropertyEditor</dataProcessors>
-  <dataProcessors>DataProcessor.ReplaceSerialLotNumber</dataProcessors>
-  <dataProcessors>DataProcessor.LoadAndUnloadData</dataProcessors>
-  <dataProcessors>DataProcessor.FixDocumentProblems</dataProcessors>
-  <dataProcessors>DataProcessor.GroupPhotoUploading</dataProcessors>
-  <dataProcessors>DataProcessor.InternalCommands</dataProcessors>
   <informationRegisters>InformationRegister.AddProperties</informationRegisters>
   <informationRegisters>InformationRegister.AttachedFiles</informationRegisters>
   <informationRegisters>InformationRegister.Barcodes</informationRegisters>

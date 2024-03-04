@@ -62,7 +62,10 @@ Function GetVisibleAttributesByTransactionType(TransactionType)
 	|PaymentList.RetailCustomer,
 	|PaymentList.SendingAccount,
 	|PaymentList.SendingBranch,
-	|PaymentList.Project";
+	|PaymentList.Project,
+	|PaymentList.CommissionPercent,
+	|PaymentList.Commission,
+	|PaymentList.CommissionFinancialMovementType";
 	
 	ArrayOfAllAttributes = New Array();
 	For Each ArrayItem In StrSplit(StrAll, ",") Do
@@ -85,7 +88,10 @@ Function GetVisibleAttributesByTransactionType(TransactionType)
 		StrByType = "
 		|PaymentList.PlaningTransactionBasis,
 		|PaymentList.SendingAccount,
-		|PaymentList.SendingBranch";
+		|PaymentList.SendingBranch,
+		|PaymentList.CommissionPercent,
+		|PaymentList.Commission,
+		|PaymentList.CommissionFinancialMovementType";
 	ElsIf TransactionType = CurrencyExchange Then
 		StrByType = "
 		|TransitAccount, 
@@ -93,7 +99,10 @@ Function GetVisibleAttributesByTransactionType(TransactionType)
 		|PaymentList.PlaningTransactionBasis,
 		|PaymentList.AmountExchange,
 		|PaymentList.SendingAccount,
-		|PaymentList.SendingBranch";
+		|PaymentList.SendingBranch,
+		|PaymentList.CommissionPercent,
+		|PaymentList.Commission,
+		|PaymentList.CommissionFinancialMovementType";
 	ElsIf TransactionType = PaymentFromCustomer 
 		Or TransactionType = ReturnFromVendor 
 		Or TransactionType = PaymentFromCustomerByPOS Then
@@ -119,17 +128,31 @@ Function GetVisibleAttributesByTransactionType(TransactionType)
 		If TransactionType = PaymentFromCustomer Or TransactionType = ReturnFromVendor Then
 			StrByType = StrByType + ", PaymentList.Project";
 		EndIf;
+		
+		If TransactionType = ReturnFromVendor 
+			Or TransactionType = PaymentFromCustomerByPOS Then
+			StrByType = StrByType + ",
+			|PaymentList.CommissionPercent,
+			|PaymentList.Commission,
+			|PaymentList.CommissionFinancialMovementType";
+		EndIf;
 	ElsIf TransactionType = OtherPartner Then
 		StrByType = "
 		|PaymentList.Partner,
 		|PaymentList.Agreement,
 		|PaymentList.Payer,
 		|PaymentList.LegalNameContract,
-		|PaymentList.BasisDocument";		
+		|PaymentList.BasisDocument,
+		|PaymentList.CommissionPercent,
+		|PaymentList.Commission,
+		|PaymentList.CommissionFinancialMovementType";		
 	ElsIf TransactionType = TransferFromPOS Then
 		StrByType = "
 		|PaymentList.PlaningTransactionBasis,
-		|PaymentList.POSAccount";
+		|PaymentList.POSAccount,
+		|PaymentList.CommissionPercent,
+		|PaymentList.Commission,
+		|PaymentList.CommissionFinancialMovementType";
 	ElsIf TransactionType = ReceiptByCheque Then
 		StrByType = "
 		|PaymentList.PlaningTransactionBasis";
@@ -139,15 +162,24 @@ Function GetVisibleAttributesByTransactionType(TransactionType)
 		|PaymentList.PaymentType,
 		|PaymentList.PaymentTerminal,
 		|PaymentList.BankTerm,
-		|PaymentList.Order";
+		|PaymentList.Order,
+		|PaymentList.CommissionPercent,
+		|PaymentList.Commission,
+		|PaymentList.CommissionFinancialMovementType";
 	ElsIf TransactionType = EmployeeCashAdvance Then
 		StrByType = "
 		|PaymentList.Partner,
 		|PaymentList.PlaningTransactionBasis,
-		|PaymentList.BasisDocument";
+		|PaymentList.BasisDocument,
+		|PaymentList.CommissionPercent,
+		|PaymentList.Commission,
+		|PaymentList.CommissionFinancialMovementType";
 	ElsIf TransactionType = OtherIncome Then
 		StrByType = "
-		|PaymentList.RevenueType";
+		|PaymentList.RevenueType,
+		|PaymentList.CommissionPercent,
+		|PaymentList.Commission,
+		|PaymentList.CommissionFinancialMovementType";
 	EndIf;
 	
 	ArrayOfVisibleAttributes = New Array();

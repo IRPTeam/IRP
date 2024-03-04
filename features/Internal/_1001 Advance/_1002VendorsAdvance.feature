@@ -686,7 +686,7 @@ Scenario: _1002064 check advance closing when PI has two same strings
 // 		And I click "Change form..." button
 // 		And I go to line in "" table
 // 			| 'Column1'        |
-// 			| 'Payment status' |
+// 			| 'Payment status' | 
 // 		And Delay 2
 // 		And I activate current test client window
 // 		And I select current line in "" table

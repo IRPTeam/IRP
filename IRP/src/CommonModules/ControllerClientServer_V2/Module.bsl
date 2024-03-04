@@ -7674,8 +7674,7 @@ Function BindPaymentListTotalAmount(Parameters)
 	DataPath = "PaymentList.TotalAmount";
 	Binding = New Structure();
 	Binding.Insert("BankPayment",
-		"StepPaymentListCalculateCommission,
-		|StepPaymentListCalculations_IsTotalAmountChanged");
+		"StepPaymentListCalculations_IsTotalAmountChanged");
 	
 	Binding.Insert("BankReceipt", 
 		"StepPaymentListCalculateCommission,
@@ -7989,9 +7988,6 @@ Function BindPaymentListCommissionPercent(Parameters)
 	DataPath = "PaymentList.CommissionPercent";
 	Binding = New Structure();
 
-	Binding.Insert("BankPayment", 
-		"StepPaymentListCalculateCommission");
-	
 	Binding.Insert("BankReceipt", 
 		"StepPaymentListCalculateCommission");
 	

@@ -667,7 +667,7 @@ Scenario: _052016 check Commission calculation in the Bank receipt (Payment from
 			| '1'   | '999,00'         | '19,98'        | 'Card 02'        | 'Payment terminal 01'   | 'Test01'      | '2,00'                  |
 		And I close all client application windows		
 		
-Scenario: _052017 create Bank receipt (Transfer from POS)
+Scenario: _052017 create Bank receipt (Transfer from POS with Comission)
 	And I close all client application windows
 	Given I open hyperlink "e1cib/list/Document.BankReceipt"
 	And I click the button named "FormCreate"
@@ -696,7 +696,6 @@ Scenario: _052017 create Bank receipt (Transfer from POS)
 		And I select current line in "List" table
 	* Filling PaymentList tab
 		And in the table "PaymentList" I click "Add" button
-		And I set "Commission is separate" checkbox in "PaymentList" table
 		And I finish line editing in "PaymentList" table
 		And I activate field named "PaymentListTotalAmount" in "PaymentList" table
 		And I select current line in "PaymentList" table
@@ -712,7 +711,7 @@ Scenario: _052017 create Bank receipt (Transfer from POS)
 		And I click choice button of "POS account" attribute in "PaymentList" table
 		And I go to line in "List" table
 			| 'Description'                             |
-			| 'POS account, Comission separate, TRY'    |
+			| 'POS account 1, TRY'    |
 		And I select current line in "List" table
 	* Check planing transaction basis selection form
 		And I activate "Planning transaction basis" field in "PaymentList" table
@@ -771,7 +770,6 @@ Scenario: _052017 create Bank receipt (Transfer from POS)
 		And I select current line in "List" table
 	* Filling PaymentList tab
 		And in the table "PaymentList" I click "Add" button
-		And I set "Commission is separate" checkbox in "PaymentList" table
 		And I finish line editing in "PaymentList" table
 		And I activate field named "PaymentListTotalAmount" in "PaymentList" table
 		And I select current line in "PaymentList" table
@@ -787,7 +785,7 @@ Scenario: _052017 create Bank receipt (Transfer from POS)
 		And I click choice button of "POS account" attribute in "PaymentList" table
 		And I go to line in "List" table
 			| 'Description'                             |
-			| 'POS account, Comission separate, TRY'    |
+			| 'POS account 1, TRY'    |
 		And I select current line in "List" table
 	* Check planing transaction basis selection form
 		And I activate "Planning transaction basis" field in "PaymentList" table
@@ -821,13 +819,10 @@ Scenario: _052017 create Bank receipt (Transfer from POS)
 			| 'Expense'        |
 		And I select current line in "List" table
 		And I finish line editing in "PaymentList" table
-		And I activate "Commission is separate" field in "PaymentList" table
-		And I remove "Commission is separate" checkbox in "PaymentList" table
-		And I finish line editing in "PaymentList" table
 	* Check filling
 		And "PaymentList" table became equal
-			| '#'   | 'Commission'   | 'Commission is separate'   | 'POS account'                            | 'Total amount'   | 'Financial movement type'   | 'Profit loss center'        | 'Planning transaction basis'                     | 'Commission percent'   | 'Additional analytic'   | 'Expense type'    |
-			| '1'   | '2,00'         | 'No'                       | 'POS account, Comission separate, TRY'   | '100,00'         | 'Movement type 1'           | 'Distribution department'   | 'Cash statement 104 dated 07.07.2022 16:33:55'   | '2,00'                 | ''                      | 'Expense'         |
+			| '#'   | 'Commission'   | 'POS account'                            | 'Total amount'   | 'Financial movement type'   | 'Profit loss center'        | 'Planning transaction basis'                     | 'Commission percent'   | 'Additional analytic'   | 'Expense type'    |
+			| '1'   | '2,00'         | 'POS account 1, TRY'   | '100,00'         | 'Movement type 1'           | 'Distribution department'   | 'Cash statement 104 dated 07.07.2022 16:33:55'   | '2,00'                 | ''                      | 'Expense'         |
 	* Check creation
 		And I click the button named "FormPost"
 		And I delete "$$NumberBankReceipt0520015$$" variable

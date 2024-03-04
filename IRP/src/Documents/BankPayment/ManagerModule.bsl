@@ -577,6 +577,7 @@ Function R5022T_Expenses()
 		|	PaymentList.AdditionalAnalytic,
 		|	PaymentList.Amount AS Amount,
 		|	PaymentList.Amount AS AmountWithTaxes
+		|INTO R5022T_Expenses
 		|FROM
 		|	PaymentList AS PaymentList
 		|WHERE

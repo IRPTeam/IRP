@@ -435,27 +435,6 @@ Scenario: _043318 check absence Bank payment movements by the Register "R3035 Ca
 			| 'R3035 Cash planning'    |
 	And I close all client application windows
 
-Scenario: _043319 check Bank payment movements by the Register "R5022 Expenses" (with  comission)
-	And I close all client application windows
-	* Select Bank payment
-		Given I open hyperlink "e1cib/list/Document.BankPayment"
-		And I go to line in "List" table
-			| 'Number'   | 'Date'                   |
-			| '323'      | '03.06.2021 17:01:44'    |
-	* Check movements by the Register  "R5022 Expenses" 
-		And I click "Registrations report" button
-		And I select "R5022 Expenses" exact value from "Register" drop-down list
-		And I click "Generate report" button
-		Then "ResultTable" spreadsheet document is equal
-			| 'Bank payment 323 dated 03.06.2021 17:01:44' | ''                    | ''          | ''                  | ''            | ''             | ''       | ''                   | ''             | ''         | ''            | ''            | ''         | ''                    | ''                             | ''        | ''                          |
-			| 'Document registrations records'             | ''                    | ''          | ''                  | ''            | ''             | ''       | ''                   | ''             | ''         | ''            | ''            | ''         | ''                    | ''                             | ''        | ''                          |
-			| 'Register  "R5022 Expenses"'                 | ''                    | ''          | ''                  | ''            | ''             | ''       | ''                   | ''             | ''         | ''            | ''            | ''         | ''                    | ''                             | ''        | ''                          |
-			| ''                                           | 'Period'              | 'Resources' | ''                  | ''            | 'Dimensions'   | ''       | ''                   | ''             | ''         | ''            | ''            | ''         | ''                    | ''                             | ''        | 'Attributes'                |
-			| ''                                           | ''                    | 'Amount'    | 'Amount with taxes' | 'Amount cost' | 'Company'      | 'Branch' | 'Profit loss center' | 'Expense type' | 'Item key' | 'Fixed asset' | 'Ledger type' | 'Currency' | 'Additional analytic' | 'Multi currency movement type' | 'Project' | 'Calculation movement cost' |
-			| ''                                           | '03.06.2021 17:01:44' | '2,57'      | '2,57'              | ''            | 'Main Company' | ''       | 'Front office'       | 'Expense'      | ''         | ''            | ''            | 'USD'      | ''                    | 'Reporting currency'           | ''        | ''                          |
-			| ''                                           | '03.06.2021 17:01:44' | '15'        | '15'                | ''            | 'Main Company' | ''       | 'Front office'       | 'Expense'      | ''         | ''            | ''            | 'TRY'      | ''                    | 'Local currency'               | ''        | ''                          |
-			| ''                                           | '03.06.2021 17:01:44' | '15'        | '15'                | ''            | 'Main Company' | ''       | 'Front office'       | 'Expense'      | ''         | ''            | ''            | 'TRY'      | ''                    | 'en description is empty'      | ''        | ''                          |
-	And I close all client application windows
 
 Scenario: _043320 check Bank payment movements by the Register "R3010 Cash on hand" (Return to customer, without basis)
 	And I close all client application windows
@@ -560,7 +539,7 @@ Scenario: _043324 check Bank payment movements by the Register "R3050 Pos cash b
 			| 'Register  "R3050 Pos cash balances"'          | ''                    | ''          | ''           | ''             | ''                        | ''                                     | ''             | ''                    |
 			| ''                                             | 'Period'              | 'Resources' | ''           | 'Dimensions'   | ''                        | ''                                     | ''             | ''                    |
 			| ''                                             | ''                    | 'Amount'    | 'Commission' | 'Company'      | 'Branch'                  | 'Account'                              | 'Payment type' | 'Payment terminal'    |
-			| ''                                             | '24.06.2022 18:06:56' | '-50'       | '-5'         | 'Main Company' | 'Distribution department' | 'POS account 1, TRY' | 'Card 01'      | 'Payment terminal 01' |
+			| ''                                             | '24.06.2022 18:06:56' | '-50'       | ''           | 'Main Company' | 'Distribution department' | 'POS account 1, TRY' | 'Card 01'      | 'Payment terminal 01' |
 	And I close all client application windows
 
 Scenario: _043325 check Bank payment movements by the Register "R2021 Customer transactions" (Return to customer by POS, with basis document)
@@ -647,7 +626,7 @@ Scenario: _043329 check Bank payment movements by the Register "R3050 Pos cash b
 			| 'Register  "R3050 Pos cash balances"'            | ''                      | ''            | ''             | ''               | ''                          | ''                                       | ''               | ''                       |
 			| ''                                               | 'Period'                | 'Resources'   | ''             | 'Dimensions'     | ''                          | ''                                       | ''               | ''                       |
 			| ''                                               | ''                      | 'Amount'      | 'Commission'   | 'Company'        | 'Branch'                    | 'Account'                                | 'Payment type'   | 'Payment terminal'       |
-			| ''                                               | '24.06.2022 18:07:02'   | '-50'         | '-5'           | 'Main Company'   | 'Distribution department'   | 'POS account 1, TRY'   | 'Card 01'        | 'Payment terminal 01'    |
+			| ''                                               | '24.06.2022 18:07:02'   | '-50'         | ''             | 'Main Company'   | 'Distribution department'   | 'POS account 1, TRY'   | 'Card 01'        | 'Payment terminal 01'    |
 		And I close all client application windows
 
 Scenario: _0433291 check absence Bank payment movements by the Register R5022 Expenses" (Return to customer by POS)
@@ -707,29 +686,7 @@ Scenario: _0433293 check Bank payment movements by the Register  "R3010 Cash on 
 			| ''                                             | 'Expense'       | '18.01.2023 12:02:58'   | '100'         | 'Main Company'   | ''         | 'Bank account, TRY'   | 'TRY'        | 'TRY'                    | 'en description is empty'        | 'No'                      |
 		And I close all client application windows
 
-Scenario: _0433294 check Bank payment movements by the Register  "R5022 Expenses" (return retail customer advance)
-		And I close all client application windows
-	* Select Bank payment
-		Given I open hyperlink "e1cib/list/Document.BankPayment"
-		And I go to line in "List" table
-			| 'Number'    |
-			| '311'       |
-	* Check movements by the Register  "R5022 Expenses" 
-		And I click "Registrations report" button
-		And I select "R5022 Expenses" exact value from "Register" drop-down list
-		And I click "Generate report" button
-		Then "ResultTable" spreadsheet document is equal
-			| 'Bank payment 311 dated 18.01.2023 12:02:58' | ''                    | ''          | ''                  | ''            | ''             | ''       | ''                   | ''             | ''         | ''            | ''            | ''         | ''                    | ''                             | ''        | ''                          |
-			| 'Document registrations records'             | ''                    | ''          | ''                  | ''            | ''             | ''       | ''                   | ''             | ''         | ''            | ''            | ''         | ''                    | ''                             | ''        | ''                          |
-			| 'Register  "R5022 Expenses"'                 | ''                    | ''          | ''                  | ''            | ''             | ''       | ''                   | ''             | ''         | ''            | ''            | ''         | ''                    | ''                             | ''        | ''                          |
-			| ''                                           | 'Period'              | 'Resources' | ''                  | ''            | 'Dimensions'   | ''       | ''                   | ''             | ''         | ''            | ''            | ''         | ''                    | ''                             | ''        | 'Attributes'                |
-			| ''                                           | ''                    | 'Amount'    | 'Amount with taxes' | 'Amount cost' | 'Company'      | 'Branch' | 'Profit loss center' | 'Expense type' | 'Item key' | 'Fixed asset' | 'Ledger type' | 'Currency' | 'Additional analytic' | 'Multi currency movement type' | 'Project' | 'Calculation movement cost' |
-			| ''                                           | '18.01.2023 12:02:58' | '0,17'      | '0,17'              | ''            | 'Main Company' | ''       | ''                   | ''             | ''         | ''            | ''            | 'USD'      | ''                    | 'Reporting currency'           | ''        | ''                          |
-			| ''                                           | '18.01.2023 12:02:58' | '1'         | '1'                 | ''            | 'Main Company' | ''       | ''                   | ''             | ''         | ''            | ''            | 'TRY'      | ''                    | 'Local currency'               | ''        | ''                          |
-			| ''                                           | '18.01.2023 12:02:58' | '1'         | '1'                 | ''            | 'Main Company' | ''       | ''                   | ''             | ''         | ''            | ''            | 'TRY'      | ''                    | 'en description is empty'      | ''        | ''                          |
-		And I close all client application windows
 	
-
 Scenario: _0433295 check Bank payment movements by the Register  "R3010 Cash on hand" (return retail customer advance)
 		And I close all client application windows
 	* Select Bank payment

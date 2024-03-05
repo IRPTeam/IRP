@@ -7845,9 +7845,6 @@ EndFunction
 Function BindPaymentListPaymentType(Parameters)
 	DataPath = "PaymentList.PaymentType";
 	Binding = New Structure();
-
-	Binding.Insert("BankPayment", 
-		"StepPaymentListGetCommissionPercent");
 	
 	Binding.Insert("BankReceipt", 
 		"StepPaymentListGetCommissionPercent");
@@ -7901,10 +7898,7 @@ EndFunction
 Function BindPaymentListBankTerm(Parameters)
 	DataPath = "PaymentList.BankTerm";
 	Binding = New Structure();
-	
-	Binding.Insert("BankPayment", 
-		"StepPaymentListGetCommissionPercent");
-	
+		
 	Binding.Insert("BankReceipt", 
 		"StepPaymentListGetCommissionPercent");
 		

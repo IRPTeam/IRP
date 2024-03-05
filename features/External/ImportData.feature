@@ -258,7 +258,7 @@ Scenario: Create catalog ExpenseAndRevenueTypes objects
 		| 'e1cib/data/Catalog.ExpenseAndRevenueTypes?ref=aa78120ed93fbced11eaf114c59ef02b'  | 'False'         | ''        | '8'     | 'False'      | 'True'       | 'False'                    | 'Revenue'                   | ''                  | ''                 | 'Revenue TR'                    |
 		| 'e1cib/data/Catalog.ExpenseAndRevenueTypes?ref=aa78120ed95fbced11eaf114c59ef02b'  | 'False'         | ''        | '9'     | 'True'       | 'False'      | 'False'                    | 'Expense'                   | ''                  | ''                 | 'Expense TR'                    |
 		| 'e1cib/data/Catalog.ExpenseAndRevenueTypes?ref=aa78120ed98fbced11eaf114c59ef02b'  | 'False'         | ''        | '10'    | 'False'      | 'False'      | 'True'                     | 'Movement type 1'           | ''                  | 'Movement type 1'  | 'Movement type 1 TR'            |
-		| 'e1cib/data/Catalog.ExpenseAndRevenueTypes?ref=aa78120ed98fbced11eaf114c58ef02b'  | 'False'         | ''        | '20'    | 'False'      | 'False'      | 'True'                     | 'Movement type 2'           | ''                  | 'Movement type 2'  | 'Movement type 2 TR'            |
+		| 'e1cib/data/Catalog.ExpenseAndRevenueTypes?ref=aa78120ed98fbced11eaf114c58ef02b'  | 'False'         | ''        | '20'    | 'False'      | 'False'      | 'True'                     | 'Movement type 3'           | ''                  | 'Movement type 3'  | 'Movement type 3 TR'            |
 
 
 Scenario: Create catalog FileStorageVolumes objects

@@ -55,3 +55,25 @@ Procedure AddFilter(QuerySchema, Filter) Export
 	Operator = QueryBatch.Operators[QueryBatch.Operators.Count() - 1];
 	Operator.Filter.Add(Filter);
 EndProcedure
+
+// Add appearance.
+// 
+// Parameters:
+//  DynamicList - DynamicList - Dynamic list
+//  Field - String - Field
+//  ComparisonType - DataCompositionComparisonType - Comparison type
+//  Value - Arbitrary - Right value
+// 
+// Returns:
+//  DataCompositionConditionalAppearanceItem
+Function AddAppearance(DynamicList, Field, ComparisonType, Value) Export
+	ConditionalAppearanceItem = DynamicList.ConditionalAppearance.Items.Add();
+	//@skip-check new-font
+	ConditionalAppearanceItem.Appearance.SetParameterValue("Font", New Font(,,,,, True));
+	FilterItem = ConditionalAppearanceItem.Filter.Items.Add(Type("DataCompositionFilterItem"));
+	FilterItem.ComparisonType = ComparisonType;
+	FilterItem.LeftValue = New DataCompositionField(Field);
+	FilterItem.RightValue = Value;
+	FilterItem.Use = True;
+	Return ConditionalAppearanceItem;
+EndFunction

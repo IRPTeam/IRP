@@ -279,15 +279,8 @@ Procedure ShowNotActive_OnCommandCreate(CommandName, CommandParameters, AddInfo)
 	CommandParameters.MainAttribute.Parameters.SetParameterValue("ShowNotActive", NotActiveShowing); 
 	CommandParameters.MainAttribute.MainTable = MainAttributeTable;
 	
-	ConditionalAppearanceItem = CommandParameters.MainAttribute.ConditionalAppearance.Items.Add();
-	//@skip-check new-font
-	ConditionalAppearanceItem.Appearance.SetParameterValue("Font", New Font(,,,,, True));
-	FilterItem = ConditionalAppearanceItem.Filter.Items.Add(Type("DataCompositionFilterItem"));
-	FilterItem.ComparisonType = DataCompositionComparisonType.Equal;
-	FilterItem.LeftValue = New DataCompositionField("NotActive");
-	FilterItem.RightValue = True;
-	FilterItem.Use = True;
-		 
+	AppearanceItem = DynamicListAPI.AddAppearance(CommandParameters.MainAttribute, "NotActive", DataCompositionComparisonType.Equal, True);
+	AppearanceItem.Appearance.SetParameterValue("Font", New Font( , , , , , True));
 EndProcedure
 
 #EndRegion

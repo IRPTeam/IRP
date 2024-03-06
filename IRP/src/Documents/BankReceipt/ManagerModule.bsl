@@ -519,7 +519,7 @@ Function R3011T_CashFlow()
 		|	PaymentList.PlanningPeriod,
 		|	PaymentList.Currency,
 		|	PaymentList.Key,
-		|	PaymentList.Amount + PaymentList.Commission AS Amount
+		|	PaymentList.Amount AS Amount
 		|INTO R3011T_CashFlow
 		|FROM
 		|	PaymentList AS PaymentList

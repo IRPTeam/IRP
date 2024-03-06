@@ -621,7 +621,7 @@ Scenario: _052016 check Commission calculation in the Bank receipt (Payment from
 	* Check Commission
 		And "PaymentList" table contains lines
 			| 'Commission'   | 'Payment terminal'      | 'Payment type'   | 'Commission percent'   | 'Bank term'   | 'Total amount'    |
-			| '1,00'         | 'Payment terminal 01'   | 'Card 01'        | '1,00'                 | 'Test01'      | '100,33'          |
+			| '1,01'         | 'Payment terminal 01'   | 'Card 01'        | '1,00'                 | 'Test01'      | '100,33'          |
 	* Check Commission calculation (sum and commision percent)
 		And I activate field named "PaymentListTotalAmount" in "PaymentList" table
 		And I select current line in "PaymentList" table
@@ -629,7 +629,7 @@ Scenario: _052016 check Commission calculation in the Bank receipt (Payment from
 		And I finish line editing in "PaymentList" table
 		And "PaymentList" table contains lines
 			| '#'   | 'Total amount'   | 'Commission'   | 'Payment type'   | 'Payment terminal'      | 'Bank term'   | 'Commission percent'    |
-			| '1'   | '333,33'         | '3,33'         | 'Card 01'        | 'Payment terminal 01'   | 'Test01'      | '1,00'                  |
+			| '1'   | '333,33'         | '3,37'         | 'Card 01'        | 'Payment terminal 01'   | 'Test01'      | '1,00'                  |
 	* Change Commission percent
 		And I activate "Commission percent" field in "PaymentList" table
 		And I select current line in "PaymentList" table
@@ -637,7 +637,7 @@ Scenario: _052016 check Commission calculation in the Bank receipt (Payment from
 		And I finish line editing in "PaymentList" table
 		And "PaymentList" table became equal
 			| '#'   | 'Total amount'   | 'Commission'   | 'Payment type'   | 'Payment terminal'      | 'Bank term'   | 'Commission percent'    |
-			| '1'   | '333,33'         | '16,67'        | 'Card 01'        | 'Payment terminal 01'   | 'Test01'      | '5,00'                  |
+			| '1'   | '333,33'         | '17,54'        | 'Card 01'        | 'Payment terminal 01'   | 'Test01'      | '5,00'                  |
 	* Change Commission sum
 		And I activate "Commission" field in "PaymentList" table
 		And I select current line in "PaymentList" table
@@ -645,7 +645,7 @@ Scenario: _052016 check Commission calculation in the Bank receipt (Payment from
 		And I finish line editing in "PaymentList" table
 		And "PaymentList" table became equal
 			| '#'   | 'Total amount'   | 'Commission'   | 'Payment type'   | 'Payment terminal'      | 'Bank term'   | 'Commission percent'    |
-			| '1'   | '333,33'         | '22,52'        | 'Card 01'        | 'Payment terminal 01'   | 'Test01'      | '6,76'                  |
+			| '1'   | '333,33'         | '22,52'        | 'Card 01'        | 'Payment terminal 01'   | 'Test01'      | '6,33'                  |
 	* Change payment type
 		And I activate "Payment type" field in "PaymentList" table
 		And I select current line in "PaymentList" table
@@ -656,7 +656,7 @@ Scenario: _052016 check Commission calculation in the Bank receipt (Payment from
 		And I select current line in "List" table
 		And "PaymentList" table became equal
 			| '#'   | 'Total amount'   | 'Commission'   | 'Payment type'   | 'Payment terminal'      | 'Bank term'   | 'Commission percent'    |
-			| '1'   | '333,33'         | '6,67'         | 'Card 02'        | 'Payment terminal 01'   | 'Test01'      | '2,00'                  |
+			| '1'   | '333,33'         | '6,80'         | 'Card 02'        | 'Payment terminal 01'   | 'Test01'      | '2,00'                  |
 	* Change sum
 		And I activate field named "PaymentListTotalAmount" in "PaymentList" table
 		And I select current line in "PaymentList" table
@@ -664,10 +664,10 @@ Scenario: _052016 check Commission calculation in the Bank receipt (Payment from
 		And I finish line editing in "PaymentList" table
 		And "PaymentList" table became equal
 			| '#'   | 'Total amount'   | 'Commission'   | 'Payment type'   | 'Payment terminal'      | 'Bank term'   | 'Commission percent'    |
-			| '1'   | '999,00'         | '19,98'        | 'Card 02'        | 'Payment terminal 01'   | 'Test01'      | '2,00'                  |
+			| '1'   | '999,00'         | '20,39'        | 'Card 02'        | 'Payment terminal 01'   | 'Test01'      | '2,00'                  |
 		And I close all client application windows		
 		
-Scenario: _052017 create Bank receipt (Transfer from POS with Comission)
+Scenario: _052017 create Bank receipt with Cash statement (Transfer from POS with Comission)
 	And I close all client application windows
 	Given I open hyperlink "e1cib/list/Document.BankReceipt"
 	And I click the button named "FormCreate"
@@ -718,17 +718,17 @@ Scenario: _052017 create Bank receipt (Transfer from POS with Comission)
 		And I click choice button of "Planning transaction basis" attribute in "PaymentList" table
 		And I activate "Cash statements" window
 		And "List" table became equal
-			| 'Number' | 'Date'                | 'Company'      | 'Amount' | 'Commission' | 'Branch' | 'Amount Balance' | 'Commission Balance' |
-			| '104'    | '07.07.2022 16:33:55' | 'Main Company' | '200,00' | '2,00'       | ''       | '200,00'         | '2,00'               |
-			| '105'    | '08.07.2022 10:47:16' | 'Main Company' | '150,00' | '1,50'       | ''       | '150,00'         | '1,50'               |
+			| 'Number' | 'Date'                | 'Company'      | 'Amount' | 'Branch' | 'Amount Balance' |
+			| '104'    | '07.07.2022 16:33:55' | 'Main Company' | '200,00' | ''       | '200,00'         |
+			| '105'    | '08.07.2022 10:47:16' | 'Main Company' | '150,00' | ''       | '150,00'         |
 		And in the table "List" I click the button named "ListSetDateInterval"
 		Then "Select period" window is opened
 		And I input "07.07.2022" text in the field named "DateBegin"
 		And I input "07.07.2022" text in the field named "DateEnd"
 		And I click the button named "Select"
 		And "List" table became equal
-			| 'Number' | 'Date'                | 'Company'      | 'Amount' | 'Commission' | 'Branch' | 'Amount Balance' | 'Commission Balance' |
-			| '104'    | '07.07.2022 16:33:55' | 'Main Company' | '200,00' | '2,00'       | ''       | '200,00'         | '2,00'               |
+			| 'Number' | 'Date'                | 'Company'      | 'Amount' | 'Branch' | 'Amount Balance' |
+			| '104'    | '07.07.2022 16:33:55' | 'Main Company' | '200,00' | ''       | '200,00'         |
 		And in the table "List" I click the button named "ListChoose"
 		And I finish line editing in "PaymentList" table
 	* Check creation
@@ -792,12 +792,12 @@ Scenario: _052017 create Bank receipt (Transfer from POS with Comission)
 		And I click choice button of "Planning transaction basis" attribute in "PaymentList" table
 		And I activate "Cash statements" window
 		And "List" table became equal
-			| 'Number' | 'Date'                | 'Company'      | 'Amount' | 'Commission' | 'Branch' | 'Amount Balance' | 'Commission Balance' |
-			| '104'    | '07.07.2022 16:33:55' | 'Main Company' | '200,00' | '2,00'       | ''       | '100,00'         | '2,00'               |
-			| '105'    | '08.07.2022 10:47:16' | 'Main Company' | '150,00' | '1,50'       | ''       | '150,00'         | '1,50'               |
+			| 'Number' | 'Date'                | 'Company'      | 'Amount' | 'Branch' | 'Amount Balance' |
+			| '104'    | '07.07.2022 16:33:55' | 'Main Company' | '200,00' | ''       | '100,00'         |
+			| '105'    | '08.07.2022 10:47:16' | 'Main Company' | '150,00' | ''       | '150,00'         |
 		And I go to line in "List" table
-			| 'Amount'   | 'Amount Balance'   | 'Commission'   | 'Commission Balance'   | 'Company'        | 'Date'                  | 'Number'   |
-			| '200,00'   | '100,00'           | '2,00'         | '2,00'                 | 'Main Company'   | '07.07.2022 16:33:55'   | '104'      |
+			| 'Amount' | 'Amount Balance' | 'Company'      | 'Date'                | 'Number' |
+			| '200,00' | '100,00'         | 'Main Company' | '07.07.2022 16:33:55' | '104'    |
 		And I select current line in "List" table
 	* Filling other attribute
 		And I activate "Commission percent" field in "PaymentList" table
@@ -821,8 +821,8 @@ Scenario: _052017 create Bank receipt (Transfer from POS with Comission)
 		And I finish line editing in "PaymentList" table
 	* Check filling
 		And "PaymentList" table became equal
-			| '#'   | 'Commission'   | 'POS account'                            | 'Total amount'   | 'Financial movement type'   | 'Profit loss center'        | 'Planning transaction basis'                     | 'Commission percent'   | 'Additional analytic'   | 'Expense type'    |
-			| '1'   | '2,00'         | 'POS account 1, TRY'   | '100,00'         | 'Movement type 1'           | 'Distribution department'   | 'Cash statement 104 dated 07.07.2022 16:33:55'   | '2,00'                 | ''                      | 'Expense'         |
+			| '#' | 'Commission' | 'POS account'        | 'Total amount' | 'Financial movement type' | 'Profit loss center'      | 'Planning transaction basis'                   | 'Commission percent' | 'Additional analytic' | 'Expense type' |
+			| '1' | '2,04'       | 'POS account 1, TRY' | '100,00'       | 'Movement type 1'         | 'Distribution department' | 'Cash statement 104 dated 07.07.2022 16:33:55' | '2,00'               | ''                    | 'Expense'      |
 	* Check creation
 		And I click the button named "FormPost"
 		And I delete "$$NumberBankReceipt0520015$$" variable

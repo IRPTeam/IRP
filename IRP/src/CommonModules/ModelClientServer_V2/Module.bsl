@@ -3897,7 +3897,8 @@ Function CalculatePaymentListCommissionOptions() Export
 EndFunction
 
 Function CalculatePaymentListCommissionExecute(Options) Export
-	Return Options.TotalAmount * Options.CommissionPercent / 100;
+	Return (Options.TotalAmount/(1- Options.CommissionPercent/100)) - Options.TotalAmount;
+	//Return Options.TotalAmount * Options.CommissionPercent / 100;
 EndFunction
 
 #EndRegion
@@ -4074,7 +4075,8 @@ Function CalculateCommissionPercentByAmountExecute(Options) Export
 		Return 0;
 	EndIf;
 	
-	Return 100 * Options.Commission / Options.TotalAmount;
+	Return Options.Commission/(Options.TotalAmount + Options.Commission) * 100;
+//	Return 100 * Options.Commission / Options.TotalAmount;
 EndFunction
 
 #EndRegion

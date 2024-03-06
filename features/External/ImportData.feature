@@ -3413,3 +3413,15 @@ Scenario: Create catalog AccessGroups and AccessProfiles objects (audit lock)
 		| 'e1cib/data/Catalog.AccessProfiles?ref=b7b6cb8aa66608cf11eed54b0e7af6b5' | 'RunThinClient'  | 'IRP'           |
 		| 'e1cib/data/Catalog.AccessProfiles?ref=b7b6cb8aa66608cf11eed54b0e7af6b6' | 'AuditLockSet'   | 'IRP'           |
 		| 'e1cib/data/Catalog.AccessProfiles?ref=b7b6cb8aa66608cf11eed54b0e7af6b8' | 'AuditLockUnset' | 'IRP'           |
+
+Scenario: Create catalog Files and information register "AttachedFiles" records
+
+	And I check or create catalog "Files" objects:
+		| 'Ref'                                                           | 'DeletionMark' | 'Code' | 'Description' | 'Volume'                                                                     | 'URI' | 'FileID' | 'Height' | 'Width' | 'SizeBytes' | 'Extension' | 'MD5' | 'Preview'                               | 'isPreviewSet' | 'isDraft' | 'Author'                                                        | 'SourceNodeID' | 'Editor' | 'CreateDate'          | 'ModifyDate'          | 'NotActive' |
+		| 'e1cib/data/Catalog.Files?ref=b7b6cb8aa66608cf11eed71065f9bf06' | 'False'        | 1      | 'Test'        | 'e1cib/data/Catalog.FileStorageVolumes?ref=b7b6cb8aa66608cf11eed71065f9bf05' | ''    | ''       |          |         |             | ''          | ''    | 'ValueStorage:AQEIAAAAAAAAAO+7v3siVSJ9' | 'False'        | 'False'   | 'e1cib/data/Catalog.Users?ref=aa7f120ed92fbced11eb13d7279770c0' | ''             | ''       | '29.02.2024 16:58:02' | '01.01.0001 00:00:00' | 'False'     |
+		| 'e1cib/data/Catalog.Files?ref=b7b6cb8aa66608cf11eed71065f9bf07' | 'False'        | 2      | 'Test 1'      | 'e1cib/data/Catalog.FileStorageVolumes?ref=b7b6cb8aa66608cf11eed71065f9bf05' | ''    | ''       |          |         |             | ''          | ''    | 'ValueStorage:AQEIAAAAAAAAAO+7v3siVSJ9' | 'False'        | 'False'   | 'e1cib/data/Catalog.Users?ref=aa7f120ed92fbced11eb13d7279770c0' | ''             | ''       | '29.02.2024 17:01:44' | '01.01.0001 00:00:00' | 'False'     |
+
+	And I check or create information register "AttachedFiles" records:
+		| 'Owner'                                                                    | 'File'                                                          | 'Priority' | 'CreationDate'        |
+		| 'e1cib/data/Document.PurchaseInvoice?ref=aa78120ed92fbced11eaf11992f9b8da' | 'e1cib/data/Catalog.Files?ref=b7b6cb8aa66608cf11eed71065f9bf07' |            | '28.02.2024 00:00:00' |
+

@@ -11,6 +11,26 @@
   </synonym>
   <useStandardCommands>true</useStandardCommands>
   <defaultForm>DataProcessor.MobileCreateDocument.Form.Form</defaultForm>
+  <attributes uuid="5a900abb-f7cf-44fd-981d-25fda62663d5">
+    <name>StoreReceiver</name>
+    <synonym>
+      <key>en</key>
+      <value>Store receiver</value>
+    </synonym>
+    <synonym>
+      <key>tr</key>
+      <value>Giriş depo</value>
+    </synonym>
+    <synonym>
+      <key>ru</key>
+      <value>Склад-получатель</value>
+    </synonym>
+    <type>
+      <types>CatalogRef.Stores</types>
+    </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+  </attributes>
   <tabularSections uuid="93f4e987-5940-46dd-ae9c-803310c3f45f">
     <producedTypes>
       <objectType typeId="66903b5f-dc1e-4aa1-8acb-877bf1bd7e0b" valueTypeId="cccdbd96-ba61-45fa-afef-e80d9e29bcfb"/>
@@ -92,19 +112,6 @@
       <synonym>
         <key>en</key>
         <value>Serial lot number</value>
-      </synonym>
-      <type>
-        <types>CatalogRef.SerialLotNumbers</types>
-      </type>
-      <minValue xsi:type="core:UndefinedValue"/>
-      <maxValue xsi:type="core:UndefinedValue"/>
-      <fillValue xsi:type="core:UndefinedValue"/>
-    </attributes>
-    <attributes uuid="577390de-160c-4f8f-b813-47f0871a89e3">
-      <name>ScannedSerialLotNumber</name>
-      <synonym>
-        <key>en</key>
-        <value>Scanned serial lot number</value>
       </synonym>
       <type>
         <types>CatalogRef.SerialLotNumbers</types>

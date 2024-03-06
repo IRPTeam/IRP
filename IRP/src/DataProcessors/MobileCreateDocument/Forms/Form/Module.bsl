@@ -6,13 +6,7 @@ Var Sound Export; // See FillSoundList
 
 &AtServer
 Procedure OnCreateAtServer(Cancel, StandardProcessing)
-
-EndProcedure
-
-&AtClient
-Procedure EnterCountOnScan(Command)
-	Items.ItemListEnterCountOnScan.Check = Not Items.ItemListEnterCountOnScan.Check;
-	ByOneScan = Items.ItemListEnterCountOnScan.Check; 
+	ByOneScan = True;
 EndProcedure
 
 &AtClient
@@ -66,9 +60,8 @@ Async Procedure SearchByBarcodeEnd(Result, AdditionalParameters) Export
 				MobileSubsystem.Play(Sound.NeedSerialLot);
 			EndIf;
 			NotifyOnClosing = New NotifyDescription("OnEditQuantityEnd", ThisObject);
-			FormParameters = New Structure("FillingData, UseSerialLot", 
-				Row, Row.UseSerialLotNumber);
-			OpenForm("DataProcessor.ScanBarcode.Form.RowForm", FormParameters, ThisObject, , , , NotifyOnClosing);
+			FormParameters = New Structure("FillingData, UseSerialLot", Row, Row.UseSerialLotNumber);
+			OpenForm("DataProcessor.MobileCreateDocument.Form.RowForm", FormParameters, ThisObject, , , , NotifyOnClosing);
 		Else
 			OnEditQuantityEnd(Row);
 		EndIf;
@@ -115,37 +108,54 @@ EndProcedure
 
 &AtClient
 Procedure ItemListOnChange(Item) Export
-	Return;
+	
+	CurrentRow = Items.ItemList.CurrentData;
+	If CurrentRow = Undefined Then
+		Return;
+	EndIf;
+	
+	NotifyOnClosing = New NotifyDescription("OnEditQuantityEnd", ThisObject);
+	FormParameters = New Structure("FillingData, UseSerialLot", CurrentRow, CurrentRow.UseSerialLotNumber);
+	OpenForm("DataProcessor.MobileCreateDocument.Form.RowForm", FormParameters, ThisObject, , , , NotifyOnClosing);
 EndProcedure
 
 &AtClient
 Procedure ItemListBeforeDeleteRow(Item, Cancel)
-	Cancel = True;
+	Return;
 EndProcedure
 
 #Region CreateDocuments
 
 &AtClient
 Procedure CreateSC(Command)
-	CreateDocument(PredefinedValue("Document.ShipmentConfirmation.EmptyRef"));
+	CreateDocument("ShipmentConfirmation");
 EndProcedure
 
 &AtClient
 Procedure CreateIT(Command)
-	CreateDocument(PredefinedValue("Document.InventoryTransfer.EmptyRef"));
+	CreateDocument("InventoryTransfer");
 EndProcedure
 
 &AtClient
 Procedure CreateGR(Command)
-	CreateDocument(PredefinedValue("Document.GoodsReceipt.EmptyRef"));
+	CreateDocument("GoodsReceipt");
 EndProcedure
 
 &AtServer
-Procedure CreateDocument(DocName)
+Procedure CreateDocument(DocName) 
+	
+	If Object.ItemList.Count() = 0 Then
+		Return;
+	EndIf;
+	
 	Try
 		BeginTransaction();
 		Wrapper = BuilderAPI.Initialize(DocName, , , "ItemList");
 		BuilderAPI.SetProperty(Wrapper, "Date", CommonFunctionsServer.GetCurrentSessionDate());
+		
+		If DocName = "InventoryTransfer" Then
+			BuilderAPI.SetProperty(Wrapper, "StoreReceiver", Object.StoreReceiver);
+		EndIf;
 		
 		For Each ItemListRow In Object.ItemList Do
 			NewRow = BuilderAPI.AddRow(Wrapper, "ItemList");
@@ -165,7 +175,9 @@ Procedure CreateDocument(DocName)
 		Doc = BuilderAPI.Write(Wrapper);
 		CommitTransaction();
 		CommonFunctionsClientServer.ShowUsersMessage(Doc.Ref);
-		Object.ItemList.Clear();
+		Object.ItemList.Clear();   
+		Items.MainPages.CurrentPage = Items.PageItemList;      
+		Modified = False;
 	Except
 		CommonFunctionsClientServer.ShowUsersMessage(ErrorProcessing.BriefErrorDescription(ErrorInfo()));
 	EndTry;	
@@ -188,3 +200,15 @@ Function FillSoundList()
 	Sounds.Insert("NeedSerialLot", DataProcessors.MobileInvent.GetTemplate("SameItemKeyBarcode"));
 	Return Sounds;
 EndFunction
+
+&AtClient
+Procedure BeforeClose(Cancel, Exit, MessageText, StandardProcessing)
+	If Object.ItemList.Count() > 0 Then
+		Cancel = True;
+	EndIf;
+EndProcedure
+
+&AtClient
+Procedure ClearItemList(Command)
+	Object.ItemList.Clear();
+EndProcedure

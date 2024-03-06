@@ -447,9 +447,9 @@ Scenario: _043421 check Bank receipt movements by the Register "R3035 Cash plann
 			| 'Register  "R3035 Cash planning"'            | ''                    | ''          | ''             | ''             | ''                  | ''                                                | ''         | ''                    | ''        | ''           | ''                             | ''                        | ''                | ''                     |
 			| ''                                           | 'Period'              | 'Resources' | 'Dimensions'   | ''             | ''                  | ''                                                | ''         | ''                    | ''        | ''           | ''                             | ''                        | ''                | 'Attributes'           |
 			| ''                                           | ''                    | 'Amount'    | 'Company'      | 'Branch'       | 'Account'           | 'Basis document'                                  | 'Currency' | 'Cash flow direction' | 'Partner' | 'Legal name' | 'Multi currency movement type' | 'Financial movement type' | 'Planning period' | 'Deferred calculation' |
-			| ''                                           | '04.06.2021 12:29:34' | '-1 620'    | 'Main Company' | 'Front office' | 'Bank account, EUR' | 'Cash transfer order 3 dated 05.04.2021 12:23:49' | 'TRY'      | 'Incoming'            | ''        | ''           | 'Local currency'               | 'Movement type 1'         | ''                | 'No'                   |
-			| ''                                           | '04.06.2021 12:29:34' | '-198'      | 'Main Company' | 'Front office' | 'Bank account, EUR' | 'Cash transfer order 3 dated 05.04.2021 12:23:49' | 'USD'      | 'Incoming'            | ''        | ''           | 'Reporting currency'           | 'Movement type 1'         | ''                | 'No'                   |
-			| ''                                           | '04.06.2021 12:29:34' | '-180'      | 'Main Company' | 'Front office' | 'Bank account, EUR' | 'Cash transfer order 3 dated 05.04.2021 12:23:49' | 'EUR'      | 'Incoming'            | ''        | ''           | 'en description is empty'      | 'Movement type 1'         | ''                | 'No'                   |
+			| ''                                           | '04.06.2021 12:29:34' | '-1 665'    | 'Main Company' | 'Front office' | 'Bank account, EUR' | 'Cash transfer order 3 dated 05.04.2021 12:23:49' | 'TRY'      | 'Incoming'            | ''        | ''           | 'Local currency'               | 'Movement type 1'         | ''                | 'No'                   |
+			| ''                                           | '04.06.2021 12:29:34' | '-203,5'    | 'Main Company' | 'Front office' | 'Bank account, EUR' | 'Cash transfer order 3 dated 05.04.2021 12:23:49' | 'USD'      | 'Incoming'            | ''        | ''           | 'Reporting currency'           | 'Movement type 1'         | ''                | 'No'                   |
+			| ''                                           | '04.06.2021 12:29:34' | '-185'      | 'Main Company' | 'Front office' | 'Bank account, EUR' | 'Cash transfer order 3 dated 05.04.2021 12:23:49' | 'EUR'      | 'Incoming'            | ''        | ''           | 'en description is empty'      | 'Movement type 1'         | ''                | 'No'                   |
 	And I close all client application windows
 
 Scenario: _043422 check Bank receipt movements by the Register "R3035 Cash planning" (Cash transfer order, with planning transaction basis)
@@ -471,7 +471,7 @@ Scenario: _043422 check Bank receipt movements by the Register "R3035 Cash plann
 			| ''                                           | ''                    | 'Amount'    | 'Company'      | 'Branch'       | 'Account'             | 'Basis document'                                  | 'Currency' | 'Cash flow direction' | 'Partner' | 'Legal name' | 'Multi currency movement type' | 'Financial movement type' | 'Planning period' | 'Deferred calculation' |
 			| ''                                           | '04.06.2021 12:30:23' | '-4 500'    | 'Main Company' | 'Front office' | 'Bank account 2, EUR' | 'Cash transfer order 2 dated 05.04.2021 12:09:54' | 'TRY'      | 'Incoming'            | ''        | ''           | 'Local currency'               | 'Movement type 1'         | ''                | 'No'                   |
 			| ''                                           | '04.06.2021 12:30:23' | '-550'      | 'Main Company' | 'Front office' | 'Bank account 2, EUR' | 'Cash transfer order 2 dated 05.04.2021 12:09:54' | 'USD'      | 'Incoming'            | ''        | ''           | 'Reporting currency'           | 'Movement type 1'         | ''                | 'No'                   |
-			| ''                                           | '04.06.2021 12:30:23' | '-500'      | 'Main Company' | 'Front office' | 'Bank account 2, EUR' | 'Cash transfer order 2 dated 05.04.2021 12:09:54' | 'EUR'      | 'Incoming'            | ''        | ''           | 'en description is empty'      | 'Movement type 1'         | ''                | 'No'                   |
+			| ''                                           | '04.06.2021 12:30:23' | '-500'      | 'Main Company' | 'Front office' | 'Bank account 2, EUR' | 'Cash transfer order 2 dated 05.04.2021 12:09:54' | 'EUR'      | 'Incoming'            | ''        | ''           | 'en description is empty'      | 'Movement type 1'         | ''                | 'No'                   |		
 	And I close all client application windows
 
 Scenario: _043423 check absence Bank receipt movements by the Register "R3035 Cash planning" (without planning transaction basis)
@@ -1301,6 +1301,28 @@ Scenario: _0434316 check Bank receipt movements by the Register "R5022 Expenses"
 			| ''                                           | '04.06.2021 12:29:34' | '45'        | '45'                | ''            | 'Main Company' | 'Front office' | 'Front office'       | 'Expense'      | ''         | ''            | ''            | 'TRY'      | ''                    | 'Local currency'               | ''        | ''                          |		
 	And I close all client application windows
 
+Scenario: _0434317 check Bank receipt movements by the Register "R3021 Cash in transit (incoming)" (Currency exchange, with bank comission)
+	And I close all client application windows
+	* Select Bank receipt
+		Given I open hyperlink "e1cib/list/Document.BankReceipt"
+		And I go to line in "List" table
+			| 'Number'    |
+			| '514'       |
+	* Check movements by the Register  "R3021 Cash in transit (incoming)" 
+		And I click "Registrations report" button
+		And I select "R3021 Cash in transit (incoming)" exact value from "Register" drop-down list
+		And I click "Generate report" button
+		Then "ResultTable" spreadsheet document is equal
+			| 'Bank receipt 514 dated 04.06.2021 12:29:34'   | ''            | ''                    | ''          | ''             | ''             | ''                  | ''                             | ''         | ''                     | ''                                                | ''                     |
+			| 'Document registrations records'               | ''            | ''                    | ''          | ''             | ''             | ''                  | ''                             | ''         | ''                     | ''                                                | ''                     |
+			| 'Register  "R3021 Cash in transit (incoming)"' | ''            | ''                    | ''          | ''             | ''             | ''                  | ''                             | ''         | ''                     | ''                                                | ''                     |
+			| ''                                             | 'Record type' | 'Period'              | 'Resources' | 'Dimensions'   | ''             | ''                  | ''                             | ''         | ''                     | ''                                                | 'Attributes'           |
+			| ''                                             | ''            | ''                    | 'Amount'    | 'Company'      | 'Branch'       | 'Account'           | 'Multi currency movement type' | 'Currency' | 'Transaction currency' | 'Basis'                                           | 'Deferred calculation' |
+			| ''                                             | 'Expense'     | '04.06.2021 12:29:34' | '185'       | 'Main Company' | 'Front office' | 'Bank account, EUR' | 'en description is empty'      | 'EUR'      | 'EUR'                  | 'Cash transfer order 3 dated 05.04.2021 12:23:49' | 'No'                   |
+			| ''                                             | 'Expense'     | '04.06.2021 12:29:34' | '203,5'     | 'Main Company' | 'Front office' | 'Bank account, EUR' | 'Reporting currency'           | 'USD'      | 'EUR'                  | 'Cash transfer order 3 dated 05.04.2021 12:23:49' | 'No'                   |
+			| ''                                             | 'Expense'     | '04.06.2021 12:29:34' | '1 665'     | 'Main Company' | 'Front office' | 'Bank account, EUR' | 'Local currency'               | 'TRY'      | 'EUR'                  | 'Cash transfer order 3 dated 05.04.2021 12:23:49' | 'No'                   |		
+	And I close all client application windows
+
 Scenario: _0434320 check Bank receipt movements by the Register "R3010 Cash on hand" (Cash transfer order, with bank comission)
 	And I close all client application windows
 	* Select Bank receipt
@@ -1318,9 +1340,31 @@ Scenario: _0434320 check Bank receipt movements by the Register "R3010 Cash on h
 			| 'Register  "R3010 Cash on hand"'             | ''            | ''                    | ''          | ''             | ''             | ''                    | ''         | ''                     | ''                             | ''                     |
 			| ''                                           | 'Record type' | 'Period'              | 'Resources' | 'Dimensions'   | ''             | ''                    | ''         | ''                     | ''                             | 'Attributes'           |
 			| ''                                           | ''            | ''                    | 'Amount'    | 'Company'      | 'Branch'       | 'Account'             | 'Currency' | 'Transaction currency' | 'Multi currency movement type' | 'Deferred calculation' |
-			| ''                                           | 'Receipt'     | '04.06.2021 12:30:23' | '500'       | 'Main Company' | 'Front office' | 'Bank account 2, EUR' | 'EUR'      | 'EUR'                  | 'en description is empty'      | 'No'                   |
-			| ''                                           | 'Receipt'     | '04.06.2021 12:30:23' | '550'       | 'Main Company' | 'Front office' | 'Bank account 2, EUR' | 'USD'      | 'EUR'                  | 'Reporting currency'           | 'No'                   |
-			| ''                                           | 'Receipt'     | '04.06.2021 12:30:23' | '4 500'     | 'Main Company' | 'Front office' | 'Bank account 2, EUR' | 'TRY'      | 'EUR'                  | 'Local currency'               | 'No'                   |		
+			| ''                                           | 'Receipt'     | '04.06.2021 12:30:23' | '498'       | 'Main Company' | 'Front office' | 'Bank account 2, EUR' | 'EUR'      | 'EUR'                  | 'en description is empty'      | 'No'                   |
+			| ''                                           | 'Receipt'     | '04.06.2021 12:30:23' | '547,8'     | 'Main Company' | 'Front office' | 'Bank account 2, EUR' | 'USD'      | 'EUR'                  | 'Reporting currency'           | 'No'                   |
+			| ''                                           | 'Receipt'     | '04.06.2021 12:30:23' | '4 482'     | 'Main Company' | 'Front office' | 'Bank account 2, EUR' | 'TRY'      | 'EUR'                  | 'Local currency'               | 'No'                   |		
+	And I close all client application windows
+
+Scenario: _0434321 check Bank receipt movements by the Register "R3021 Cash in transit (incoming)" (Cash transfer order, with bank comission)
+	And I close all client application windows
+	* Select Bank receipt
+		Given I open hyperlink "e1cib/list/Document.BankReceipt"
+		And I go to line in "List" table
+			| 'Number'    |
+			| '515'       |
+	* Check movements by the Register  "R3021 Cash in transit (incoming)" 
+		And I click "Registrations report" button
+		And I select "R3021 Cash in transit (incoming)" exact value from "Register" drop-down list
+		And I click "Generate report" button
+		Then "ResultTable" spreadsheet document is equal
+			| 'Bank receipt 515 dated 04.06.2021 12:30:23'   | ''            | ''                    | ''          | ''             | ''             | ''                    | ''                             | ''         | ''                     | ''                                                | ''                     |
+			| 'Document registrations records'               | ''            | ''                    | ''          | ''             | ''             | ''                    | ''                             | ''         | ''                     | ''                                                | ''                     |
+			| 'Register  "R3021 Cash in transit (incoming)"' | ''            | ''                    | ''          | ''             | ''             | ''                    | ''                             | ''         | ''                     | ''                                                | ''                     |
+			| ''                                             | 'Record type' | 'Period'              | 'Resources' | 'Dimensions'   | ''             | ''                    | ''                             | ''         | ''                     | ''                                                | 'Attributes'           |
+			| ''                                             | ''            | ''                    | 'Amount'    | 'Company'      | 'Branch'       | 'Account'             | 'Multi currency movement type' | 'Currency' | 'Transaction currency' | 'Basis'                                           | 'Deferred calculation' |
+			| ''                                             | 'Expense'     | '04.06.2021 12:30:23' | '500'       | 'Main Company' | 'Front office' | 'Bank account 2, EUR' | 'en description is empty'      | 'EUR'      | 'EUR'                  | 'Cash transfer order 2 dated 05.04.2021 12:09:54' | 'No'                   |
+			| ''                                             | 'Expense'     | '04.06.2021 12:30:23' | '550'       | 'Main Company' | 'Front office' | 'Bank account 2, EUR' | 'Reporting currency'           | 'USD'      | 'EUR'                  | 'Cash transfer order 2 dated 05.04.2021 12:09:54' | 'No'                   |
+			| ''                                             | 'Expense'     | '04.06.2021 12:30:23' | '4 500'     | 'Main Company' | 'Front office' | 'Bank account 2, EUR' | 'Local currency'               | 'TRY'      | 'EUR'                  | 'Cash transfer order 2 dated 05.04.2021 12:09:54' | 'No'                   |		
 	And I close all client application windows
 
 Scenario: _0434326 check Bank receipt movements by the Register "R3010 Cash on hand" (Transfer from POS, with bank comission)
@@ -1329,7 +1373,7 @@ Scenario: _0434326 check Bank receipt movements by the Register "R3010 Cash on h
 		Given I open hyperlink "e1cib/list/Document.BankReceipt"
 		And I go to line in "List" table
 			| 'Number'    |
-			| '1 522'       |
+			| '1 522'     |
 	* Check movements by the Register  "R3010 Cash on hand" 
 		And I click "Registrations report" button
 		And I select "R3010 Cash on hand" exact value from "Register" drop-down list

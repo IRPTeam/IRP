@@ -498,11 +498,7 @@ Function R3010B_CashOnHand()
 		|	PaymentList.Branch,
 		|	PaymentList.Account,
 		|	PaymentList.Currency,
-		|	case
-		|		when PaymentList.IsTransferFromPOS
-		|			then PaymentList.Amount - PaymentList.Commission
-		|		else PaymentList.Amount
-		|	end as Amount
+		|	PaymentList.Amount
 		|INTO R3010B_CashOnHand
 		|FROM
 		|	PaymentList AS PaymentList
@@ -523,7 +519,7 @@ Function R3011T_CashFlow()
 		|	PaymentList.PlanningPeriod,
 		|	PaymentList.Currency,
 		|	PaymentList.Key,
-		|	PaymentList.Amount
+		|	PaymentList.Amount + PaymentList.Commission AS Amount
 		|INTO R3011T_CashFlow
 		|FROM
 		|	PaymentList AS PaymentList
@@ -576,7 +572,7 @@ Function R3035T_CashPlanning()
 		   |		ELSE VALUE(Catalog.Companies.EmptyRef)
 		   |	END AS LegalName,
 		   |	PaymentList.FinancialMovementType,
-		   |	-PaymentList.Amount AS Amount,
+		   |	-(PaymentList.Amount + PaymentList.Commission) AS Amount,
 		   |	PaymentList.Key
 		   |INTO R3035T_CashPlanning
 		   |FROM
@@ -755,7 +751,7 @@ Function R3021B_CashInTransitIncoming()
 		|	PaymentList.Currency,
 		|	PaymentList.Account,
 		|	PaymentList.PlaningTransactionBasis AS Basis,
-		|	PaymentList.Amount AS Amount
+		|	PaymentList.Amount + PaymentList.Commission AS Amount
 		|INTO R3021B_CashInTransitIncoming
 		|FROM
 		|	PaymentList AS PaymentList

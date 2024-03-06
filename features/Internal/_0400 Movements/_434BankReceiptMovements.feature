@@ -52,6 +52,7 @@ Scenario: _043400 preparation (Bank receipt)
 		When Create catalog Companies objects (second company Ferron BP)
 		When Create catalog PartnersBankAccounts objects
 		When Create catalog SerialLotNumbers objects
+		When Create catalog RetailCustomers objects (check POS)
 		When Create catalog CashAccounts objects
 		When Create catalog PlanningPeriods objects
 		When Create catalog BankTerms objects
@@ -755,12 +756,12 @@ Scenario: _04342941 check Bank receipt movements by the Register  "R3011 Cash fl
 			| 'Register  "R3011 Cash flow"'                  | ''                    | ''          | ''             | ''                        | ''                  | ''          | ''                        | ''                        | ''                | ''         | ''                             | ''                     |
 			| ''                                             | 'Period'              | 'Resources' | 'Dimensions'   | ''                        | ''                  | ''          | ''                        | ''                        | ''                | ''         | ''                             | 'Attributes'           |
 			| ''                                             | ''                    | 'Amount'    | 'Company'      | 'Branch'                  | 'Account'           | 'Direction' | 'Financial movement type' | 'Cash flow center'        | 'Planning period' | 'Currency' | 'Multi currency movement type' | 'Deferred calculation' |
-			| ''                                             | '24.06.2022 15:19:39' | '0,86'      | 'Main Company' | 'Distribution department' | 'Bank account, TRY' | 'Outgoing'  | 'Movement type 2'         | 'Distribution department' | ''                | 'USD'      | 'Reporting currency'           | 'No'                   |
-			| ''                                             | '24.06.2022 15:19:39' | '5'         | 'Main Company' | 'Distribution department' | 'Bank account, TRY' | 'Outgoing'  | 'Movement type 2'         | 'Distribution department' | ''                | 'TRY'      | 'Local currency'               | 'No'                   |
-			| ''                                             | '24.06.2022 15:19:39' | '5'         | 'Main Company' | 'Distribution department' | 'Bank account, TRY' | 'Outgoing'  | 'Movement type 2'         | 'Distribution department' | ''                | 'TRY'      | 'en description is empty'      | 'No'                   |
+			| ''                                             | '24.06.2022 15:19:39' | '0,86'      | 'Main Company' | 'Distribution department' | 'Bank account, TRY' | 'Outgoing'  | 'Movement type 3'         | 'Distribution department' | ''                | 'USD'      | 'Reporting currency'           | 'No'                   |
+			| ''                                             | '24.06.2022 15:19:39' | '5'         | 'Main Company' | 'Distribution department' | 'Bank account, TRY' | 'Outgoing'  | 'Movement type 3'         | 'Distribution department' | ''                | 'TRY'      | 'Local currency'               | 'No'                   |
+			| ''                                             | '24.06.2022 15:19:39' | '5'         | 'Main Company' | 'Distribution department' | 'Bank account, TRY' | 'Outgoing'  | 'Movement type 3'         | 'Distribution department' | ''                | 'TRY'      | 'en description is empty'      | 'No'                   |
 			| ''                                             | '24.06.2022 15:19:39' | '8,56'      | 'Main Company' | 'Distribution department' | 'Bank account, TRY' | 'Incoming'  | 'Movement type 1'         | 'Distribution department' | ''                | 'USD'      | 'Reporting currency'           | 'No'                   |
-			| ''                                             | '24.06.2022 15:19:39' | '50'        | 'Main Company' | 'Distribution department' | 'Bank account, TRY' | 'Incoming'  | 'Movement type 1'         | 'Distribution department' | ''                | 'TRY'      | 'Local currency'               | 'No'                   |
-			| ''                                             | '24.06.2022 15:19:39' | '50'        | 'Main Company' | 'Distribution department' | 'Bank account, TRY' | 'Incoming'  | 'Movement type 1'         | 'Distribution department' | ''                | 'TRY'      | 'en description is empty'      | 'No'                   |		
+			| ''                                             | '24.06.2022 15:19:39' | '55'        | 'Main Company' | 'Distribution department' | 'Bank account, TRY' | 'Incoming'  | 'Movement type 1'         | 'Distribution department' | ''                | 'TRY'      | 'Local currency'               | 'No'                   |
+			| ''                                             | '24.06.2022 15:19:39' | '55'        | 'Main Company' | 'Distribution department' | 'Bank account, TRY' | 'Incoming'  | 'Movement type 1'         | 'Distribution department' | ''                | 'TRY'      | 'en description is empty'      | 'No'                   |		
 	And I close all client application windows	
 
 Scenario: _04342942 check Bank receipt movements by the Register  "R5022 Expenses" (Transfer from POS with comission)
@@ -1361,9 +1362,9 @@ Scenario: _0434327 check Bank receipt movements by the Register "R3011 Cash flow
 			| 'Register  "R3011 Cash flow"'                  | ''                    | ''          | ''             | ''                        | ''                  | ''          | ''                        | ''                        | ''                | ''         | ''                             | ''                     |
 			| ''                                             | 'Period'              | 'Resources' | 'Dimensions'   | ''                        | ''                  | ''          | ''                        | ''                        | ''                | ''         | ''                             | 'Attributes'           |
 			| ''                                             | ''                    | 'Amount'    | 'Company'      | 'Branch'                  | 'Account'           | 'Direction' | 'Financial movement type' | 'Cash flow center'        | 'Planning period' | 'Currency' | 'Multi currency movement type' | 'Deferred calculation' |
-			| ''                                             | '24.06.2022 15:19:39' | '0,86'      | 'Main Company' | 'Distribution department' | 'Bank account, TRY' | 'Outgoing'  | 'Movement type 2'         | 'Distribution department' | ''                | 'USD'      | 'Reporting currency'           | 'No'                   |
-			| ''                                             | '24.06.2022 15:19:39' | '5'         | 'Main Company' | 'Distribution department' | 'Bank account, TRY' | 'Outgoing'  | 'Movement type 2'         | 'Distribution department' | ''                | 'TRY'      | 'Local currency'               | 'No'                   |
-			| ''                                             | '24.06.2022 15:19:39' | '5'         | 'Main Company' | 'Distribution department' | 'Bank account, TRY' | 'Outgoing'  | 'Movement type 2'         | 'Distribution department' | ''                | 'TRY'      | 'en description is empty'      | 'No'                   |
+			| ''                                             | '24.06.2022 15:19:39' | '0,86'      | 'Main Company' | 'Distribution department' | 'Bank account, TRY' | 'Outgoing'  | 'Movement type 3'         | 'Distribution department' | ''                | 'USD'      | 'Reporting currency'           | 'No'                   |
+			| ''                                             | '24.06.2022 15:19:39' | '5'         | 'Main Company' | 'Distribution department' | 'Bank account, TRY' | 'Outgoing'  | 'Movement type 3'         | 'Distribution department' | ''                | 'TRY'      | 'Local currency'               | 'No'                   |
+			| ''                                             | '24.06.2022 15:19:39' | '5'         | 'Main Company' | 'Distribution department' | 'Bank account, TRY' | 'Outgoing'  | 'Movement type 3'         | 'Distribution department' | ''                | 'TRY'      | 'en description is empty'      | 'No'                   |
 			| ''                                             | '24.06.2022 15:19:39' | '8,56'      | 'Main Company' | 'Distribution department' | 'Bank account, TRY' | 'Incoming'  | 'Movement type 1'         | 'Distribution department' | ''                | 'USD'      | 'Reporting currency'           | 'No'                   |
 			| ''                                             | '24.06.2022 15:19:39' | '50'        | 'Main Company' | 'Distribution department' | 'Bank account, TRY' | 'Incoming'  | 'Movement type 1'         | 'Distribution department' | ''                | 'TRY'      | 'Local currency'               | 'No'                   |
 			| ''                                             | '24.06.2022 15:19:39' | '50'        | 'Main Company' | 'Distribution department' | 'Bank account, TRY' | 'Incoming'  | 'Movement type 1'         | 'Distribution department' | ''                | 'TRY'      | 'en description is empty'      | 'No'                   |		
@@ -1389,6 +1390,28 @@ Scenario: _0434328 check Bank receipt movements by the Register "R5022 Expenses"
 			| ''                                             | '24.06.2022 15:19:39' | '0,86'      | '0,86'              | ''            | 'Main Company' | 'Distribution department' | 'Front office'       | 'Expense'      | ''         | ''            | ''            | 'USD'      | ''                    | 'Reporting currency'           | ''        | ''                          |
 			| ''                                             | '24.06.2022 15:19:39' | '5'         | '5'                 | ''            | 'Main Company' | 'Distribution department' | 'Front office'       | 'Expense'      | ''         | ''            | ''            | 'TRY'      | ''                    | 'Local currency'               | ''        | ''                          |
 			| ''                                             | '24.06.2022 15:19:39' | '5'         | '5'                 | ''            | 'Main Company' | 'Distribution department' | 'Front office'       | 'Expense'      | ''         | ''            | ''            | 'TRY'      | ''                    | 'en description is empty'      | ''        | ''                          |		
+	And I close all client application windows
+
+Scenario: _0434329 check Bank receipt movements by the Register "R3021 Cash in transit (incoming)" (Transfer from POS, with bank comission)
+	And I close all client application windows
+	* Select Bank receipt
+		Given I open hyperlink "e1cib/list/Document.BankReceipt"
+		And I go to line in "List" table
+			| 'Number'    |
+			| '1 522'     |
+	* Check movements by the Register  "R3021 Cash in transit (incoming)" 
+		And I click "Registrations report" button
+		And I select "R3021 Cash in transit (incoming)" exact value from "Register" drop-down list
+		And I click "Generate report" button
+		Then "ResultTable" spreadsheet document is equal
+			| 'Bank receipt 1 522 dated 24.06.2022 15:19:39' | ''            | ''                    | ''          | ''             | ''                        | ''                  | ''                             | ''         | ''                     | ''      | ''                     |
+			| 'Document registrations records'               | ''            | ''                    | ''          | ''             | ''                        | ''                  | ''                             | ''         | ''                     | ''      | ''                     |
+			| 'Register  "R3021 Cash in transit (incoming)"' | ''            | ''                    | ''          | ''             | ''                        | ''                  | ''                             | ''         | ''                     | ''      | ''                     |
+			| ''                                             | 'Record type' | 'Period'              | 'Resources' | 'Dimensions'   | ''                        | ''                  | ''                             | ''         | ''                     | ''      | 'Attributes'           |
+			| ''                                             | ''            | ''                    | 'Amount'    | 'Company'      | 'Branch'                  | 'Account'           | 'Multi currency movement type' | 'Currency' | 'Transaction currency' | 'Basis' | 'Deferred calculation' |
+			| ''                                             | 'Expense'     | '24.06.2022 15:19:39' | '9,42'      | 'Main Company' | 'Distribution department' | 'Bank account, TRY' | 'Reporting currency'           | 'USD'      | 'TRY'                  | ''      | 'No'                   |
+			| ''                                             | 'Expense'     | '24.06.2022 15:19:39' | '55'        | 'Main Company' | 'Distribution department' | 'Bank account, TRY' | 'Local currency'               | 'TRY'      | 'TRY'                  | ''      | 'No'                   |
+			| ''                                             | 'Expense'     | '24.06.2022 15:19:39' | '55'        | 'Main Company' | 'Distribution department' | 'Bank account, TRY' | 'en description is empty'      | 'TRY'      | 'TRY'                  | ''      | 'No'                   |		
 	And I close all client application windows
 
 Scenario: _0434332 check Bank receipt movements by the Register "R3010 Cash on hand" (Customer advance, with bank comission)
@@ -1474,9 +1497,9 @@ Scenario: _0434335 check Bank receipt movements by the Register "R3011 Cash flow
 			| 'Register  "R3011 Cash flow"'                  | ''                    | ''          | ''             | ''             | ''                  | ''          | ''                        | ''                 | ''                | ''         | ''                             | ''                     |
 			| ''                                             | 'Period'              | 'Resources' | 'Dimensions'   | ''             | ''                  | ''          | ''                        | ''                 | ''                | ''         | ''                             | 'Attributes'           |
 			| ''                                             | ''                    | 'Amount'    | 'Company'      | 'Branch'       | 'Account'           | 'Direction' | 'Financial movement type' | 'Cash flow center' | 'Planning period' | 'Currency' | 'Multi currency movement type' | 'Deferred calculation' |
-			| ''                                             | '05.03.2024 16:17:01' | '17,12'     | 'Main Company' | 'Front office' | 'Bank account, TRY' | 'Incoming'  | 'Movement type 2'         | 'Front office'     | ''                | 'USD'      | 'Reporting currency'           | 'No'                   |
-			| ''                                             | '05.03.2024 16:17:01' | '100'       | 'Main Company' | 'Front office' | 'Bank account, TRY' | 'Incoming'  | 'Movement type 2'         | 'Front office'     | ''                | 'TRY'      | 'Local currency'               | 'No'                   |
-			| ''                                             | '05.03.2024 16:17:01' | '100'       | 'Main Company' | 'Front office' | 'Bank account, TRY' | 'Incoming'  | 'Movement type 2'         | 'Front office'     | ''                | 'TRY'      | 'en description is empty'      | 'No'                   |		
+			| ''                                             | '05.03.2024 16:17:01' | '17,12'     | 'Main Company' | 'Front office' | 'Bank account, TRY' | 'Incoming'  | 'Movement type 3'         | 'Front office'     | ''                | 'USD'      | 'Reporting currency'           | 'No'                   |
+			| ''                                             | '05.03.2024 16:17:01' | '100'       | 'Main Company' | 'Front office' | 'Bank account, TRY' | 'Incoming'  | 'Movement type 3'         | 'Front office'     | ''                | 'TRY'      | 'Local currency'               | 'No'                   |
+			| ''                                             | '05.03.2024 16:17:01' | '100'       | 'Main Company' | 'Front office' | 'Bank account, TRY' | 'Incoming'  | 'Movement type 3'         | 'Front office'     | ''                | 'TRY'      | 'en description is empty'      | 'No'                   |		
 	And I close all client application windows
 
 Scenario: _0434340 check Bank receipt movements by the Register "R3010 Cash on hand" (Other partner, with bank comission)
@@ -1485,7 +1508,7 @@ Scenario: _0434340 check Bank receipt movements by the Register "R3010 Cash on h
 		Given I open hyperlink "e1cib/list/Document.BankReceipt"
 		And I go to line in "List" table
 			| 'Number'    |
-			| '1 526'     |
+			| '1 527'     |
 	* Check movements by the Register  "R3010 Cash on hand" 
 		And I click "Registrations report" button
 		And I select "R3010 Cash on hand" exact value from "Register" drop-down list
@@ -1507,7 +1530,7 @@ Scenario: _0434341 check Bank receipt movements by the Register "R3011 Cash flow
 		Given I open hyperlink "e1cib/list/Document.BankReceipt"
 		And I go to line in "List" table
 			| 'Number'    |
-			| '1 526'     |
+			| '1 527'     |
 	* Check movements by the Register  "R3011 Cash flow" 
 		And I click "Registrations report" button
 		And I select "R3011 Cash flow" exact value from "Register" drop-down list
@@ -1530,7 +1553,7 @@ Scenario: _0434342 check Bank receipt movements by the Register "R5022 Expenses"
 		Given I open hyperlink "e1cib/list/Document.BankReceipt"
 		And I go to line in "List" table
 			| 'Number'    |
-			| '1 526'     |
+			| '1 527'     |
 	* Check movements by the Register  "R5022 Expenses" 
 		And I click "Registrations report" button
 		And I select "R5022 Expenses" exact value from "Register" drop-down list
@@ -1546,3 +1569,8 @@ Scenario: _0434342 check Bank receipt movements by the Register "R5022 Expenses"
 			| ''                                             | '05.03.2024 16:24:49' | '5'         | '5'                 | ''            | 'Main Company' | 'Front office' | 'Front office'       | 'Rent'         | ''         | ''            | ''            | 'TRY'      | ''                    | 'TRY'                          | ''        | ''                          |
 			| ''                                             | '05.03.2024 16:24:49' | '5'         | '5'                 | ''            | 'Main Company' | 'Front office' | 'Front office'       | 'Rent'         | ''         | ''            | ''            | 'TRY'      | ''                    | 'en description is empty'      | ''        | ''                          |		
 	And I close all client application windows
+
+
+
+
+

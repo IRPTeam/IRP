@@ -769,7 +769,7 @@ Function R3021B_CashInTransitIncoming()
 		|	PaymentList.Currency,
 		|	PaymentList.Account,
 		|	PaymentList.CashTransferOrder,
-		|	PaymentList.Amount AS Amount
+		|	PaymentList.Amount + PaymentList.Commission AS Amount
 		|FROM
 		|	PaymentList AS PaymentList
 		|WHERE

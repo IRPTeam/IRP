@@ -748,6 +748,7 @@
   <commonModules>CommonModule.DocDebitCreditNoteServer</commonModules>
   <commonModules>CommonModule.ChartsOfCharacteristicTypesServer</commonModules>
   <commonModules>CommonModule.AuditLockPrivileged</commonModules>
+  <commonModules>CommonModule.DynamicListAPI</commonModules>
   <commonAttributes>CommonAttribute.Author</commonAttributes>
   <commonAttributes>CommonAttribute.Branch</commonAttributes>
   <commonAttributes>CommonAttribute.Description</commonAttributes>

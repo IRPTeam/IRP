@@ -498,29 +498,16 @@ Function R3010B_CashOnHand()
 		|	PaymentList.Branch,
 		|	PaymentList.Account,
 		|	PaymentList.Currency,
-		|	PaymentList.Amount
+		|	case
+		|		when PaymentList.IsTransferFromPOS
+		|			then PaymentList.Amount - PaymentList.Commission
+		|		else PaymentList.Amount
+		|	end as Amount
 		|INTO R3010B_CashOnHand
 		|FROM
 		|	PaymentList AS PaymentList
 		|WHERE
-		|	TRUE
-		|
-		|UNION ALL
-		|
-		|SELECT
-		|	VALUE(AccumulationRecordType.Expense) AS RecordType,
-		|	PaymentList.Key,
-		|	PaymentList.Period,
-		|	PaymentList.Company,
-		|	PaymentList.Branch,
-		|	PaymentList.Account,
-		|	PaymentList.Currency,
-		|	PaymentList.Commission AS Amount
-		|FROM
-		|	PaymentList AS PaymentList
-		|WHERE
-		|	PaymentList.IsTransferFromPOS
-		|	AND PaymentList.Commission <> 0";
+		|	TRUE";
 EndFunction
 
 Function R3011T_CashFlow()

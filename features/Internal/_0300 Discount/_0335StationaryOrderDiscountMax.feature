@@ -107,7 +107,7 @@ Scenario: _033502 order creation discounted by price Discount Price 1 (price inc
 	And I click the button named "FormPostAndClose"
 	And Delay 2
 	And "List" table contains lines
-		| 'Partner'    | 'Σ'           |
+		| 'Partner'    | 'Amount'           |
 		| 'Ferron BP'  | '16 870,00'   |
 
 
@@ -130,7 +130,7 @@ Scenario: _033503 order creation discounted by price Discount Price 2 (price inc
 	And I click the button named "FormPostAndClose"
 	And Delay 2
 	And "List" table contains lines
-		| 'Partner'   | 'Σ'          |
+		| 'Partner'   | 'Amount'          |
 		| 'Lomaniti'  | '2 495,00'   |
 
 	
@@ -210,7 +210,7 @@ Scenario: _033504 check the discount order in group Maximum (manual)
 	And I click the button named "FormPostAndClose"
 	And Delay 2
 	And "List" table contains lines
-		| 'Partner'   | 'Σ'           |
+		| 'Partner'   | 'Amount'           |
 		| 'Lomaniti'  | '15 145,00'   |
 
 Scenario: _033505 check the application of discounts Discount Price 1 without Vat (price not include VAT) - manual in the group Minimum and Discount Price 2 without Vat
@@ -757,7 +757,7 @@ Scenario: _033512 check the discount order in group Minimum (manual)
 	And I click the button named "FormPostAndClose"
 	And Delay 2
 	And "List" table contains lines
-		| 'Partner'  | 'Σ'          |
+		| 'Partner'  | 'Amount'          |
 		| 'MIO'      | '6 639,93'   |
 
 
@@ -787,7 +787,7 @@ Scenario: _033513 check the discount order (same application rule), Discount Pri
 	And I click the button named "FormPostAndClose"
 	And Delay 2
 	And "List" table contains lines
-		| 'Partner'   | 'Σ'          |
+		| 'Partner'   | 'Amount'          |
 		| 'Lomaniti'  | '2 495,00'   |
 
 
@@ -805,7 +805,7 @@ Scenario: _033514 check the discount order (same application rule), Discount Pri
 	And I click the button named "FormPostAndClose"
 	And Delay 2
 	And "List" table contains lines
-		| 'Partner'   | 'Σ'          |
+		| 'Partner'   | 'Amount'          |
 		| 'Lomaniti'  | '2 495,00'   |
 		| 'Lomaniti'  | '2 495,00'   |
 
@@ -829,7 +829,7 @@ Scenario: _033515 check the discount order (same application rule), Discount Pri
 	And I click the button named "FormPostAndClose"
 	And Delay 2
 	And "List" table contains lines
-		| 'Partner'   | 'Σ'          |
+		| 'Partner'   | 'Amount'          |
 		| 'Lomaniti'  | '2 495,00'   |
 		| 'Lomaniti'  | '2 495,00'   |
 		| 'Lomaniti'  | '2 495,00'   |
@@ -854,7 +854,7 @@ Scenario: _033516 check the discount order (same application rule), Discount Pri
 	And I click the button named "FormPostAndClose"
 	And Delay 2
 	And "List" table contains lines
-		| 'Partner'   | 'Σ'          |
+		| 'Partner'   | 'Amount'          |
 		| 'Lomaniti'  | '2 495,00'   |
 		| 'Lomaniti'  | '2 495,00'   |
 		| 'Lomaniti'  | '2 495,00'   |
@@ -877,7 +877,7 @@ Scenario: _033517 check the discount order (same application rule), Discount Pri
 	And I click the button named "FormPostAndClose"
 	And Delay 2
 	And "List" table contains lines
-		| 'Partner'   | 'Σ'          |
+		| 'Partner'   | 'Amount'          |
 		| 'Lomaniti'  | '2 495,00'   |
 		| 'Lomaniti'  | '2 495,00'   |
 		| 'Lomaniti'  | '2 495,00'   |
@@ -899,7 +899,7 @@ Scenario: _033518 check the discount order (same application rule), Discount Pri
 	And I click the button named "FormPostAndClose"
 	And Delay 2
 	And "List" table contains lines
-		| 'Partner'   | 'Σ'          |
+		| 'Partner'   | 'Amount'          |
 		| 'Lomaniti'  | '2 495,00'   |
 		| 'Lomaniti'  | '2 495,00'   |
 		| 'Lomaniti'  | '2 495,00'   |
@@ -929,7 +929,7 @@ Scenario: _033519 check the discount order (same application rule), Discount Pri
 	And I click the button named "FormPostAndClose"
 	And Delay 2
 	And "List" table contains lines
-		| 'Partner'   | 'Σ'          |
+		| 'Partner'   | 'Amount'          |
 		| 'Lomaniti'  | '2 495,00'   |
 		| 'Lomaniti'  | '2 495,00'   |
 		| 'Lomaniti'  | '2 495,00'   |
@@ -959,7 +959,7 @@ Scenario: _033520 check the discount order (same application rule), Discount Pri
 	And I click the button named "FormPostAndClose"
 	And Delay 2
 	And "List" table contains lines
-		| 'Partner'   | 'Σ'          |
+		| 'Partner'   | 'Amount'          |
 		| 'Lomaniti'  | '2 495,00'   |
 		| 'Lomaniti'  | '2 495,00'   |
 		| 'Lomaniti'  | '2 495,00'   |
@@ -995,7 +995,7 @@ Scenario: _033521 check the discount order (same application rule), Discount Pri
 	And I click the button named "FormPostAndClose"
 	And Delay 2
 	And "List" table contains lines
-		| 'Partner'   | 'Σ'          |
+		| 'Partner'   | 'Amount'          |
 		| 'Lomaniti'  | '2 495,00'   |
 		| 'Lomaniti'  | '2 495,00'   |
 		| 'Lomaniti'  | '2 495,00'   |
@@ -1030,7 +1030,7 @@ Scenario: _033522 check the discount order (same application rule), Discount Pri
 	And I click the button named "FormPostAndClose"
 	And Delay 2
 	And "List" table contains lines
-		| 'Partner'   | 'Σ'          |
+		| 'Partner'   | 'Amount'          |
 		| 'Lomaniti'  | '2 495,00'   |
 		| 'Lomaniti'  | '2 495,00'   |
 		| 'Lomaniti'  | '2 495,00'   |
@@ -1060,7 +1060,7 @@ Scenario: _033523 check the discount order (same application rule), Discount Pri
 	And I click the button named "FormPostAndClose"
 	And Delay 2
 	And "List" table contains lines
-		| 'Partner'   | 'Σ'          |
+		| 'Partner'   | 'Amount'          |
 		| 'Lomaniti'  | '2 495,00'   |
 		| 'Lomaniti'  | '2 495,00'   |
 		| 'Lomaniti'  | '2 495,00'   |
@@ -1088,7 +1088,7 @@ Scenario: _033524 check the discount order (same application rule), Discount Pri
 	And I click the button named "FormPostAndClose"
 	And Delay 2
 	And "List" table contains lines
-		| 'Partner'   | 'Σ'          |
+		| 'Partner'   | 'Amount'          |
 		| 'Lomaniti'  | '2 495,00'   |
 		| 'Lomaniti'  | '2 495,00'   |
 		| 'Lomaniti'  | '2 495,00'   |
@@ -1121,7 +1121,7 @@ Scenario: _033525 check the discount order (same application rule), Discount Pri
 	And I click the button named "FormPostAndClose"
 	And Delay 2
 	And "List" table contains lines
-		| 'Partner'   | 'Σ'          |
+		| 'Partner'   | 'Amount'          |
 		| 'Lomaniti'  | '2 495,00'   |
 		| 'Lomaniti'  | '2 495,00'   |
 		| 'Lomaniti'  | '2 495,00'   |
@@ -1161,7 +1161,7 @@ Scenario: _033526 check the discount order (same application rule), Discount Pri
 	And I click the button named "FormPostAndClose"
 	And Delay 2
 	And "List" table contains lines
-		| 'Partner'   | 'Σ'          |
+		| 'Partner'   | 'Amount'          |
 		| 'Lomaniti'  | '2 495,00'   |
 		| 'Lomaniti'  | '2 495,00'   |
 		| 'Lomaniti'  | '2 495,00'   |
@@ -1193,7 +1193,7 @@ Scenario: _033527 check the discount order (same application rule), Discount Pri
 	And I click the button named "FormPostAndClose"
 	And Delay 2
 	And "List" table contains lines
-		| 'Partner'   | 'Σ'          |
+		| 'Partner'   | 'Amount'          |
 		| 'Lomaniti'  | '2 495,00'   |
 		| 'Lomaniti'  | '2 495,00'   |
 		| 'Lomaniti'  | '2 495,00'   |
@@ -1223,7 +1223,7 @@ Scenario: _033528 check the discount order (same application rule), Discount Pri
 	And I click the button named "FormPostAndClose"
 	And Delay 2
 	And "List" table contains lines
-		| 'Partner'   | 'Σ'          |
+		| 'Partner'   | 'Amount'          |
 		| 'Lomaniti'  | '2 495,00'   |
 		| 'Lomaniti'  | '2 495,00'   |
 		| 'Lomaniti'  | '2 495,00'   |
@@ -1259,7 +1259,7 @@ Scenario: _033529 check the discount order (same application rule), Discount Pri
 	And I click the button named "FormPostAndClose"
 	And Delay 2
 	And "List" table contains lines
-		| 'Partner'   | 'Σ'          |
+		| 'Partner'   | 'Amount'          |
 		| 'Lomaniti'  | '2 495,00'   |
 		| 'Lomaniti'  | '2 495,00'   |
 		| 'Lomaniti'  | '2 495,00'   |
@@ -1296,7 +1296,7 @@ Scenario: _033530 check the discount order (same application rule), Discount Pri
 	And I click the button named "FormPostAndClose"
 	And Delay 2
 	And "List" table contains lines
-		| 'Partner'   | 'Σ'          |
+		| 'Partner'   | 'Amount'          |
 		| 'Lomaniti'  | '2 495,00'   |
 		| 'Lomaniti'  | '2 495,00'   |
 		| 'Lomaniti'  | '2 495,00'   |
@@ -1339,7 +1339,7 @@ Scenario: _033531 check the discount order (same application rule), Discount Pri
 	And I click the button named "FormPostAndClose"
 	And Delay 2
 	And "List" table contains lines
-		| 'Partner'   | 'Σ'          |
+		| 'Partner'   | 'Amount'          |
 		| 'Lomaniti'  | '2 495,00'   |
 		| 'Lomaniti'  | '2 495,00'   |
 		| 'Lomaniti'  | '2 495,00'   |
@@ -1382,7 +1382,7 @@ Scenario: _033532 check the discount order (same application rule), Discount Pri
 	And I click the button named "FormPostAndClose"
 	And Delay 2
 	And "List" table contains lines
-		| 'Partner'          | 'Σ'         |
+		| 'Partner'          | 'Amount'         |
 		| 'Lomaniti'         | '2 495,00' |
 		| 'Lomaniti'         | '2 495,00' |
 		| 'Lomaniti'         | '2 495,00' |

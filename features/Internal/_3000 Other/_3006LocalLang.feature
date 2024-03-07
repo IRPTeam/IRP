@@ -176,7 +176,7 @@ Scenario: _300604 Turkish description search in Sales order
 	Given I open hyperlink "e1cib/list/Document.SalesOrder"
 	* Check list display
 		And "List" table contains lines
-		| 'Number'                      | 'Partner'       | 'Status'       | 'Σ'         | 'Currency'   |
+		| 'Number'                      | 'Partner'       | 'Status'       | 'Amount'         | 'Currency'   |
 		| '$$NumberSalesOrder023001$$'  | 'Ferron BP TR'  | 'Approved TR'  | '4 350,00'  | 'TRY'        |
 	* Check the Turkish search on the order form
 		And I click the button named "FormCreate"

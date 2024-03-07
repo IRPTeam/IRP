@@ -687,7 +687,7 @@ Scenario: _023104 filling in Store field from the Partner term
 # 	And I click the button named "FormPostAndClose"
 # 	* Check Sales order Saving
 # 		And "List" table contains lines
-# 		| 'Currency'  | 'Partner'     | 'Status'   | 'Σ'         |
+# 		| 'Currency'  | 'Partner'     | 'Status'   | 'Amount'         |
 # 		| 'TRY'       | 'Ferron BP'   | 'Approved' | '2 050,00'  |
 # 	And I close all client application windows
 

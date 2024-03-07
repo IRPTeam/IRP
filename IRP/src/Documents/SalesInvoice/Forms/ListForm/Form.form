@@ -427,7 +427,7 @@
       <id>25</id>
       <title>
         <key>en</key>
-        <value>Σ</value>
+        <value>Amount</value>
       </title>
       <visible>true</visible>
       <enabled>true</enabled>

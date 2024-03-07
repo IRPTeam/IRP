@@ -1513,7 +1513,7 @@ Scenario: _0850020 check auto payment form by acquiring (Enter)
 	* Check RRN
 		Given I open hyperlink "e1cib/list/Document.RetailSalesReceipt"
 		And I go to line in "List" table
-			| 'Σ'         |
+			| 'Amount'         |
 			| '100,00'    |
 		And I select current line in "List" table
 		And I move to "Payments" tab
@@ -1902,7 +1902,7 @@ Scenario: _0850025 print receipt from sales return (cash)
 	Given I open hyperlink "e1cib/list/Document.RetailSalesReceipt"	
 	* Select Retail sales receipt
 		And I go to line in "List" table
-			| 'Σ'         |
+			| 'Amount'         |
 			| '210,00'    |
 		And I click the button named "FormDocumentRetailReturnReceiptGenerate"
 		And I expand current line in "BasisesTree" table
@@ -1973,7 +1973,7 @@ Scenario: _08500251 sales return (bank credit)
 	Given I open hyperlink "e1cib/list/Document.RetailSalesReceipt"	
 	* Select Retail sales receipt
 		And I go to line in "List" table
-			| 'Σ'         |
+			| 'Amount'         |
 			| '118,00'    |
 		And I click the button named "FormDocumentRetailReturnReceiptGenerate"
 		And I expand current line in "BasisesTree" table
@@ -1992,7 +1992,7 @@ Scenario: _0850026 sales return (card)
 	Given I open hyperlink "e1cib/list/Document.RetailSalesReceipt"	
 	* Select Retail sales receipt
 		And I go to line in "List" table
-			| 'Σ'         |
+			| 'Amount'         |
 			| '620,00'    |
 		And I click the button named "FormDocumentRetailReturnReceiptGenerate"
 		And I expand current line in "BasisesTree" table
@@ -4327,7 +4327,7 @@ Scenario: _0260190 check numbers and fiscal status in the RSR and RRR list forms
 	* Open RSR list form
 		Given I open hyperlink "e1cib/list/Document.RetailSalesReceipt"
 		And "List" table contains lines 
-			| 'Σ'      | 'Company'      | 'Check number' | 'Status'  | 'Store'    | 'Consolidated retail sales' |
+			| 'Amount'      | 'Company'      | 'Check number' | 'Status'  | 'Store'    | 'Consolidated retail sales' |
 			| '300,00' | 'Main Company' | '*'            | 'Printed' | 'Store 01' | '*'                         |
 			| '720,00' | 'Main Company' | '*'            | 'Printed' | 'Store 01' | '*'                         |
 			| '840,00' | 'Main Company' | '*'            | 'Printed' | 'Store 01' | '*'                         |

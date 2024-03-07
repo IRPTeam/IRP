@@ -75,6 +75,7 @@ Scenario: _206300 preparation (audit lock)
 		When Create catalog PaymentTypes objects
 		When Create catalog AccessGroups and AccessProfiles objects (audit lock)
 		When Create information register Taxes records (VAT)
+		When Create catalog Files and information register "AttachedFiles" records
 	* Load documents
 		When Create document PurchaseInvoice objects
 		And I execute 1C:Enterprise script at server
@@ -159,8 +160,21 @@ Scenario: _2063004 check audit lock (PI)
 		And I click the button named "OK"
 		Then there are lines in TestClient message log
 			|'Document is locked by audit lock'|
+	* Check lock attached files
+		And I click "Attached files" button
+		And I go to line in "FileList" table
+			| 'File'   |
+			| 'Test 1' |
+		And in the table "FileList" I click the button named "FileListContextMenuDelete"
+		Then "1C:Enterprise" window is opened
+		And I click "Yes" button
+		Then "1C:Enterprise" window is opened
+		And I click the button named "OK"
+		Then there are lines in TestClient message log
+			|'Document is locked by audit lock'|		
+	And I close all client application windows
+	
 		
-
 Scenario: _2063007 check audit unlock
 	And I close all client application windows
 	* Preparation	
@@ -195,6 +209,16 @@ Scenario: _2063007 check audit unlock
 		And I click "Post" button
 		When I Check the steps for Exception
 			| 'Then "1C:Enterprise" window is opened'    |
+		Then user message window does not contain messages	
+	* Check lock attached files
+		And I click "Attached files" button
+		And I go to line in "FileList" table
+			| 'File'   |
+			| 'Test 1' |
+		And in the table "FileList" I click the button named "FileListContextMenuDelete"
+		Then "1C:Enterprise" window is opened
+		And I click "Yes" button
+		Then the number of "FileList" table lines is "равно" "0"
 		Then user message window does not contain messages	
 
 
@@ -238,9 +262,7 @@ Scenario: _2063008 check audit lock for linked documents
 			| 'Then "1C:Enterprise" window is opened'    |
 		Then user message window does not contain messages	
 	And I close all client application windows
-	
-			
-				
+		
 Scenario: _2063020 check audit lock	without permisson
 	And I close all client application windows
 	* Preparation
@@ -274,3 +296,4 @@ Scenario: _2063023 check audit lock history
 		| 'en description is empty' | '*'    | 'Consolidated retail sales 2 dated 21.08.2022 08:14:58' | 'Lock'   |
 		| 'en description is empty' | '*'    | 'Consolidated retail sales 2 dated 21.08.2022 08:14:58' | 'Unlock' |
 	And I close all client application windows	
+

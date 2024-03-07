@@ -63,7 +63,6 @@ Procedure Set(QuerySchemaAPI) Export
 			NewColumn.Type = FormFieldType.CheckBoxField;
 		EndIf;
 	EndDo;
-	Message (QueryText);
 EndProcedure
 
 // Add field.
@@ -121,18 +120,34 @@ EndProcedure
 //  Field - String - Field
 //  ComparisonType - DataCompositionComparisonType - Comparison type
 //  Value - Arbitrary - Right value
+//  AppearanceType - String - Ex: TextColor
+//  AppearanceValue - Arbitrary - Value of AppearanceType
+//  Fields - String - Ex: "Field1,Field2"
 // 
 // Returns:
 //  DataCompositionConditionalAppearanceItem
-Function AddAppearance(QuerySchemaAPI, Field, ComparisonType, Value) Export
-	ConditionalAppearanceItem = QuerySchemaAPI.DynamicList.ConditionalAppearance.Items.Add();
-	//@skip-check new-font
-	ConditionalAppearanceItem.Appearance.SetParameterValue("Font", New Font(,,,,, True));
+Function AddAppearance(QuerySchemaAPI, Field, ComparisonType, Value, AppearanceType = Undefined, AppearanceValue = Undefined, Fields = "") Export
+	ConditionalAppearanceItem = QuerySchemaAPI.DynamicList.SettingsComposer.Settings.ConditionalAppearance.Items.Add();
 	FilterItem = ConditionalAppearanceItem.Filter.Items.Add(Type("DataCompositionFilterItem"));
 	FilterItem.ComparisonType = ComparisonType;
 	FilterItem.LeftValue = New DataCompositionField(Field);
 	FilterItem.RightValue = Value;
 	FilterItem.Use = True;
+	
+	If Not AppearanceValue = Undefined Then
+		ConditionalAppearanceItem.Appearance.SetParameterValue(AppearanceType, AppearanceValue);
+	EndIf;
+	
+	If Not IsBlankString(Fields) Then
+		FieldList = StrSplit(Fields, ",");
+		For Each FieldPath In FieldList Do
+			FieldDC = ConditionalAppearanceItem.Fields.AppearanceFieldsAvailableFields.FindField(New DataCompositionField(FieldPath));
+			NewField = ConditionalAppearanceItem.Fields.Items.Add();
+			NewField.Field = New DataCompositionField(FieldPath);
+			NewField.Use = True;
+		EndDo;
+	EndIf;
+	
 	Return ConditionalAppearanceItem;
 EndFunction
 

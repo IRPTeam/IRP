@@ -268,19 +268,12 @@ Procedure ShowNotActive_OnCommandCreate(CommandName, CommandParameters, AddInfo)
 	CommandParameters.CommandButton.Check = NotActiveShowing;
 	
 	QuerySchemaAPI = DynamicListAPI.Get(CommandParameters.MainAttribute);
-	
 	DynamicListAPI.AddField(QuerySchemaAPI, "NotActive", "NotActive");
 	DynamicListAPI.AddFilter(QuerySchemaAPI, "NotActive = FALSE OR &ShowNotActive");
-	
-	QueryText = QuerySchemaAPI.QuerySchema.GetQueryText();
-	MainAttributeTable = CommandParameters.MainAttribute.MainTable;
-
-	CommandParameters.MainAttribute.QueryText = QueryText;
+	DynamicListAPI.Set(QuerySchemaAPI);
 	CommandParameters.MainAttribute.Parameters.SetParameterValue("ShowNotActive", NotActiveShowing); 
-	CommandParameters.MainAttribute.MainTable = MainAttributeTable;
 	
-	AppearanceItem = DynamicListAPI.AddAppearance(QuerySchemaAPI, "NotActive", DataCompositionComparisonType.Equal, True);
-	AppearanceItem.Appearance.SetParameterValue("Font", New Font( , , , , , True));
+	DynamicListAPI.AddAppearance(QuerySchemaAPI, "NotActive", DataCompositionComparisonType.Equal, True, "Font", New Font( , , , , , True));
 EndProcedure
 
 #EndRegion

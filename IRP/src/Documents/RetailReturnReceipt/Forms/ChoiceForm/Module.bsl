@@ -3,7 +3,7 @@
 
 &AtServer
 Procedure OnCreateAtServer(Cancel, StandardProcessing)
-	DocSalesReturnServer.OnCreateAtServerChoiceForm(ThisObject, Cancel, StandardProcessing);
+	DocRetailReturnReceiptServer.OnCreateAtServerChoiceForm(ThisObject, Cancel, StandardProcessing);
 EndProcedure
 
 #EndRegion

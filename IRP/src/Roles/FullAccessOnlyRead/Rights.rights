@@ -9477,7 +9477,7 @@
 		</right>
 	</object>
 	<object>
-		<name>Report.D0009_DocumentRegistrationsReport</name>
+		<name>Report.D0013_DocumentRegistrationsReport</name>
 		<right>
 			<name>Use</name>
 			<value>true</value>
@@ -9636,7 +9636,7 @@
 		</right>
 	</object>
 	<object>
-		<name>Report.D0009_DocumentRegistrationsReport.Command.RegistrationsReport</name>
+		<name>Report.D0013_DocumentRegistrationsReport.Command.RegistrationsReportInfo</name>
 		<right>
 			<name>View</name>
 			<value>true</value>

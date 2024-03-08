@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mdclass:Document xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" xmlns:mdclassExtension="http://g5.1c.ru/v8/dt/metadata/mdclass/extension" uuid="438e5073-f1d9-4354-b82e-11ff342390ae" extendedConfigurationObject="afd79b45-87a8-4645-8c31-52f2b85a8e14">
+  <producedTypes>
+    <objectType typeId="edcb99aa-84c2-4b19-b554-f3aff38a7568" valueTypeId="d5ef9e3d-cdd2-41e8-a9b1-b0669222b310"/>
+    <refType typeId="26b896e9-1615-400e-b5f9-a8cd61f70ca9" valueTypeId="40bf2ca2-5185-4a0b-82b6-1de062414c45"/>
+    <selectionType typeId="ab04f4e9-384b-405f-9116-2f9a57ac8904" valueTypeId="7fc2b2d2-3684-41f7-946d-b5835b23a38c"/>
+    <listType typeId="0170c11c-af27-4fb1-82c8-2eb9e4583978" valueTypeId="c4555270-1f49-4884-b404-2826543fe035"/>
+    <managerType typeId="1d27d30c-9c60-49fc-aee6-ccd979df1207" valueTypeId="23ef8273-6986-456b-be0c-b3607de1ca19"/>
+  </producedTypes>
+  <name>OutgoingPaymentOrder</name>
+  <objectBelonging>Adopted</objectBelonging>
+  <extension xsi:type="mdclassExtension:DocumentExtension">
+    <extendedConfigurationObject>Checked</extendedConfigurationObject>
+  </extension>
+  <useStandardCommands>true</useStandardCommands>
+</mdclass:Document>

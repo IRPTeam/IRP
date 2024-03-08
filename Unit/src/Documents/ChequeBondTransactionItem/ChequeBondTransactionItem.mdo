@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mdclass:Document xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" xmlns:mdclassExtension="http://g5.1c.ru/v8/dt/metadata/mdclass/extension" uuid="65bc4353-827c-4327-acdd-98ce893a7afd" extendedConfigurationObject="f6e2582b-1b05-422e-97cc-b02053319b0d">
+  <producedTypes>
+    <objectType typeId="1edc0e68-28ad-49c4-a08b-06730b29dcad" valueTypeId="1c8a342b-3871-474f-9a98-d7564b1fbf72"/>
+    <refType typeId="51add8f3-0963-4fd5-9783-e4e26aef127b" valueTypeId="886b5563-8c56-4f90-a7b8-e1de469c41d1"/>
+    <selectionType typeId="c1057547-d948-411b-9bef-b79124671163" valueTypeId="d14e9176-d381-47a9-8d3b-60b0549e056d"/>
+    <listType typeId="cd42b703-108f-409c-ace0-ab53310b9c38" valueTypeId="fa4748b3-8183-4488-89a9-a0526e8ab392"/>
+    <managerType typeId="202b342d-0645-4e33-a4a7-32181fe698fb" valueTypeId="475bed23-5ce6-49b1-bf81-933c0f340d17"/>
+  </producedTypes>
+  <name>ChequeBondTransactionItem</name>
+  <objectBelonging>Adopted</objectBelonging>
+  <extension xsi:type="mdclassExtension:DocumentExtension">
+    <extendedConfigurationObject>Checked</extendedConfigurationObject>
+  </extension>
+  <useStandardCommands>true</useStandardCommands>
+</mdclass:Document>

@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mdclass:Document xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" xmlns:mdclassExtension="http://g5.1c.ru/v8/dt/metadata/mdclass/extension" uuid="58d8a504-b6d8-411c-9772-e242a3308927" extendedConfigurationObject="1325b0c0-a360-421d-b6d4-f0e8590cfd22">
+  <producedTypes>
+    <objectType typeId="e3037587-fba2-4615-8c6e-9178450e667f" valueTypeId="fd3c0a6f-91d4-4a2b-88ac-15c3304d2834"/>
+    <refType typeId="7226d44d-77f1-4473-b317-f3ab2b3c6456" valueTypeId="b555c4c8-fecf-4668-8479-5567b0dfbade"/>
+    <selectionType typeId="a0399051-f36b-4042-93fd-35d757d62768" valueTypeId="d63e0f39-5796-4076-8a2f-2334efc52bcb"/>
+    <listType typeId="72fce577-0477-48b7-b191-2efa83ae449b" valueTypeId="ebd6090e-91cb-42ca-bfe0-a0e00b5a3a15"/>
+    <managerType typeId="1843aad2-e9cd-4cea-9006-aaeccc0a5b17" valueTypeId="e6c3b56a-e516-4763-8678-0aebdb936af4"/>
+  </producedTypes>
+  <name>SalesOrder</name>
+  <objectBelonging>Adopted</objectBelonging>
+  <extension xsi:type="mdclassExtension:DocumentExtension">
+    <extendedConfigurationObject>Checked</extendedConfigurationObject>
+  </extension>
+  <useStandardCommands>true</useStandardCommands>
+</mdclass:Document>

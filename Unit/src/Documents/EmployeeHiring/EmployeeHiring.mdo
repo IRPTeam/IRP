@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mdclass:Document xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" xmlns:mdclassExtension="http://g5.1c.ru/v8/dt/metadata/mdclass/extension" uuid="6c70f275-83b0-4796-bbfe-638065d27096" extendedConfigurationObject="86bdcb2f-ba60-468b-8c17-a1c8cc850467">
+  <producedTypes>
+    <objectType typeId="b5993a9c-d3df-4264-a26b-baddeb1f951d" valueTypeId="d34755a5-5f33-410d-a2ed-278bd0cbcc6c"/>
+    <refType typeId="85291f2c-e361-4b56-a787-957efd4db792" valueTypeId="f79b877d-76b0-4ec4-96ff-572a8fd5fd47"/>
+    <selectionType typeId="81270dc2-6642-41a2-9f73-4f1acc406db9" valueTypeId="0105c6b6-8404-4f41-85fa-440cf394375c"/>
+    <listType typeId="e380dee9-9aac-48e6-8e66-0dd95b02f30e" valueTypeId="bcd3a41b-e782-4e43-a660-99fe86802376"/>
+    <managerType typeId="7131fd85-ec3d-4cf4-9f10-be4245f170d8" valueTypeId="f9f3ba92-3260-4e2c-b008-b5f5a3fb3712"/>
+  </producedTypes>
+  <name>EmployeeHiring</name>
+  <objectBelonging>Adopted</objectBelonging>
+  <extension xsi:type="mdclassExtension:DocumentExtension">
+    <extendedConfigurationObject>Checked</extendedConfigurationObject>
+  </extension>
+  <useStandardCommands>true</useStandardCommands>
+</mdclass:Document>

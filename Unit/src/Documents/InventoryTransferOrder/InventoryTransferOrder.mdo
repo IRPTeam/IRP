@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mdclass:Document xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" xmlns:mdclassExtension="http://g5.1c.ru/v8/dt/metadata/mdclass/extension" uuid="10262a90-5c90-495c-b121-edcaad0a4700" extendedConfigurationObject="dfcafed1-cccc-4b34-842d-3507cd12808c">
+  <producedTypes>
+    <objectType typeId="97340ba8-d32c-447c-b641-b2ce4e26caea" valueTypeId="f89debb2-5177-45ca-9216-76486f82bbb4"/>
+    <refType typeId="abb7618c-20e6-4df6-96f7-b92770f73d24" valueTypeId="dbdde284-f4c6-4546-93a8-0ce986245b76"/>
+    <selectionType typeId="314dcc33-2efa-4841-92e1-895941326221" valueTypeId="c1a426b6-f15e-4822-915b-54c1a8b37e75"/>
+    <listType typeId="8985afc4-b373-490a-99c1-58abe2c735b2" valueTypeId="f746d208-f6ec-4b8e-af68-6f3a81f0ac94"/>
+    <managerType typeId="f49f1667-594c-4874-be71-edfefbbfe3af" valueTypeId="d67d4446-563b-4119-a140-59920150eb42"/>
+  </producedTypes>
+  <name>InventoryTransferOrder</name>
+  <objectBelonging>Adopted</objectBelonging>
+  <extension xsi:type="mdclassExtension:DocumentExtension">
+    <extendedConfigurationObject>Checked</extendedConfigurationObject>
+  </extension>
+  <useStandardCommands>true</useStandardCommands>
+</mdclass:Document>

@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mdclass:Document xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" xmlns:mdclassExtension="http://g5.1c.ru/v8/dt/metadata/mdclass/extension" uuid="c46576fd-dddc-4985-8868-894c6c6d4c2d" extendedConfigurationObject="da3be7a3-472e-48e2-93f9-ba88fafda837">
+  <producedTypes>
+    <objectType typeId="1788e716-a4ea-437a-9374-4047389398d5" valueTypeId="e6df2880-ae23-48af-8dce-082922a01456"/>
+    <refType typeId="82929fb9-1dbd-4bec-9eb6-da8f203f7f75" valueTypeId="6d8075bc-0d2f-40ed-830c-904a43e50f41"/>
+    <selectionType typeId="12978985-295d-4393-8fa1-c5b4b9c4cec3" valueTypeId="34b2589f-2650-46c0-b210-078983ae2408"/>
+    <listType typeId="62cff240-d1dd-42c0-be54-6ceb3ad09728" valueTypeId="64878666-1515-44ba-9c5d-55fed494ba55"/>
+    <managerType typeId="36f79010-034f-4206-9a47-76f75d1df4fa" valueTypeId="58332a69-c0a9-4890-87b7-2b3814176937"/>
+  </producedTypes>
+  <name>EmployeeFiring</name>
+  <objectBelonging>Adopted</objectBelonging>
+  <extension xsi:type="mdclassExtension:DocumentExtension">
+    <extendedConfigurationObject>Checked</extendedConfigurationObject>
+  </extension>
+  <useStandardCommands>true</useStandardCommands>
+</mdclass:Document>

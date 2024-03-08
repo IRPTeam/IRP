@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mdclass:Document xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" xmlns:mdclassExtension="http://g5.1c.ru/v8/dt/metadata/mdclass/extension" uuid="8204fa1b-ea5b-49c0-a873-d34855a6df59" extendedConfigurationObject="a2b50c1f-6168-40f0-80d6-9a5e433cd1b7">
+  <producedTypes>
+    <objectType typeId="fe80bbee-3f87-4d9b-b525-b8f270b1e26a" valueTypeId="89275bf0-e0f0-4f36-a831-b748bf8dcb90"/>
+    <refType typeId="39686aa3-e1d4-4709-96f5-2fcebadd6919" valueTypeId="3420dab9-1e8d-4684-9038-8fd0211c5b8c"/>
+    <selectionType typeId="da50d63e-5757-4305-b20d-0969d00a6ffb" valueTypeId="54e0a7a4-9881-4abd-aaa1-3202cf9318e9"/>
+    <listType typeId="f2bc71ec-78da-456c-9292-c3f2ec90536c" valueTypeId="ba35f5cf-eee2-402e-ae00-35e639e401ae"/>
+    <managerType typeId="10733670-e95c-4fd7-a906-7902b96f1628" valueTypeId="4c39922a-7cbb-442d-84d3-1a1f614cf439"/>
+  </producedTypes>
+  <name>Unbundling</name>
+  <objectBelonging>Adopted</objectBelonging>
+  <extension xsi:type="mdclassExtension:DocumentExtension">
+    <extendedConfigurationObject>Checked</extendedConfigurationObject>
+  </extension>
+  <useStandardCommands>true</useStandardCommands>
+</mdclass:Document>

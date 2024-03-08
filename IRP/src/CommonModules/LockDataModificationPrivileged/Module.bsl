@@ -71,6 +71,16 @@ Procedure LockFormIfObjectIsLocked(Form, CurrentObject) Export
 	EndIf;
 EndProcedure
 
+// Check lock data.
+// 
+// Parameters:
+//  Source - DocumentObjectDocumentName, CatalogObjectCatalogName - Source
+//  Cancel - Boolean - Cancel
+//  isNew - Boolean - Is new
+//  OnOpen - Boolean - On open
+// 
+// Returns:
+//  Boolean - Check lock data
 Function CheckLockData(Source, Cancel = False, isNew = False, OnOpen = False) Export
 	If Cancel OR Source.DataExchange.Load 
 		OR SessionParameters.IgnoreLockModificationData 
@@ -273,13 +283,8 @@ Function ModifyDataIsLocked_ByTable_Simple(SourceParams, Rules, AddInfo = Undefi
 	If Not FindSimpleRules Then
 		Return New Array;
 	EndIf;
-	
-	// Check new record
-	Attributes = StrConcat(Rules.UnloadColumn("Attribute"), ",");
-	VTTable = SourceParams.Source.Unload( , Attributes);
-	VTTable.GroupBy(Attributes);
-	Query.SetParameter("VTTable", VTTable);
-
+    
+    AttributeList = Rules.UnloadColumn("Attribute");
 	// Check Old record
 	TemplateFilter = "Table.%1 = &%1";
 	MetadataName = SourceParams.MetadataName;
@@ -289,7 +294,16 @@ Function ModifyDataIsLocked_ByTable_Simple(SourceParams, Rules, AddInfo = Undefi
 		EndIf;
 		Filter.Add(StrTemplate(TemplateFilter, FilterInSet.Name));
 		Query.SetParameter(FilterInSet.Name, FilterInSet.Value);
-	EndDo;
+        
+        AttributeList.Add(FilterInSet.Name);     
+    EndDo;        
+    
+  	// Check new record
+	Attributes = StrConcat(AttributeList, ",");
+	VTTable = SourceParams.Source.Unload( , Attributes);
+    VTTable.GroupBy(Attributes);
+	Query.SetParameter("VTTable", VTTable);  
+    
 	For Index = 0 To Rules.Count() - 1 Do
 		
 		If Rules[Index].LockDataModificationReasons.AdvancedMode Then
@@ -305,8 +319,8 @@ Function ModifyDataIsLocked_ByTable_Simple(SourceParams, Rules, AddInfo = Undefi
 		Query.SetParameter("Reason" + Index, Rules[Index].LockDataModificationReasons);
 		Query.SetParameter("Param" + Index, Rules[Index].Value);
 	EndDo;
-	
-	Query.Text =  
+
+    Query.Text =  
 		"SELECT DISTINCT 
 		|	* 
 		|INTO TableCurrent
@@ -325,6 +339,7 @@ Function ModifyDataIsLocked_ByTable_Simple(SourceParams, Rules, AddInfo = Undefi
 		|	SELECT DISTINCT 
 		|		" + StrConcat(Fields, "," + Chars.LF) + " 
 		|	FROM TableCurrent AS Table
+        |   WHERE " + StrConcat(Filter, " AND ") + "
 		|) AS NT";
 
 	Return GetResultLockCheck(Query);

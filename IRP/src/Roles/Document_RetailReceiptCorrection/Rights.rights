@@ -4,11 +4,41 @@
 	<setForAttributesByDefault>true</setForAttributesByDefault>
 	<independentRightsOfChildObjects>false</independentRightsOfChildObjects>
 	<object>
-		<name>Document.RetailReceiptCorrection</name>
+		<name>Document.RetailReceiptCorrection.Command.Genarate</name>
 		<right>
 			<name>View</name>
 			<value>true</value>
 		</right>
+	</object>
+	<object>
+		<name>Document.RetailReturnReceipt</name>
+		<right>
+			<name>Read</name>
+			<value>true</value>
+			<restrictionByCondition>
+				<condition>WHERE FALSE</condition>
+			</restrictionByCondition>
+		</right>
+	</object>
+	<object>
+		<name>Document.RetailSalesReceipt</name>
+		<right>
+			<name>Read</name>
+			<value>true</value>
+			<restrictionByCondition>
+				<condition>WHERE FALSE</condition>
+			</restrictionByCondition>
+		</right>
+	</object>
+	<object>
+		<name>Document.RetailReceiptCorrection.Command.PrintReceipt</name>
+		<right>
+			<name>View</name>
+			<value>true</value>
+		</right>
+	</object>
+	<object>
+		<name>Document.RetailReceiptCorrection</name>
 		<right>
 			<name>Read</name>
 			<value>true</value>
@@ -24,10 +54,6 @@
 			</restrictionByCondition>
 		</right>
 		<right>
-			<name>Edit</name>
-			<value>true</value>
-		</right>
-		<right>
 			<name>Update</name>
 			<value>true</value>
 			<restrictionByCondition>
@@ -35,7 +61,7 @@
 			</restrictionByCondition>
 		</right>
 		<right>
-			<name>InputByString</name>
+			<name>Posting</name>
 			<value>true</value>
 		</right>
 		<right>
@@ -43,11 +69,15 @@
 			<value>true</value>
 		</right>
 		<right>
-			<name>Posting</name>
+			<name>View</name>
 			<value>true</value>
 		</right>
 		<right>
 			<name>InteractiveInsert</name>
+			<value>true</value>
+		</right>
+		<right>
+			<name>Edit</name>
 			<value>true</value>
 		</right>
 		<right>
@@ -71,23 +101,11 @@
 			<value>true</value>
 		</right>
 		<right>
-			<name>SwitchToDataHistoryVersion</name>
-			<value>true</value>
-		</right>
-		<right>
-			<name>EditDataHistoryVersionComment</name>
+			<name>InputByString</name>
 			<value>true</value>
 		</right>
 		<right>
 			<name>ReadDataHistory</name>
-			<value>true</value>
-		</right>
-		<right>
-			<name>UpdateDataHistoryVersionComment</name>
-			<value>true</value>
-		</right>
-		<right>
-			<name>UpdateDataHistorySettings</name>
 			<value>true</value>
 		</right>
 		<right>
@@ -103,21 +121,23 @@
 			<value>true</value>
 		</right>
 		<right>
+			<name>UpdateDataHistorySettings</name>
+			<value>true</value>
+		</right>
+		<right>
+			<name>UpdateDataHistoryVersionComment</name>
+			<value>true</value>
+		</right>
+		<right>
 			<name>ViewDataHistory</name>
 			<value>true</value>
 		</right>
-	</object>
-	<object>
-		<name>Document.RetailReceiptCorrection.Command.PrintReceipt</name>
 		<right>
-			<name>View</name>
+			<name>EditDataHistoryVersionComment</name>
 			<value>true</value>
 		</right>
-	</object>
-	<object>
-		<name>Document.RetailReceiptCorrection.Command.Genarate</name>
 		<right>
-			<name>View</name>
+			<name>SwitchToDataHistoryVersion</name>
 			<value>true</value>
 		</right>
 	</object>

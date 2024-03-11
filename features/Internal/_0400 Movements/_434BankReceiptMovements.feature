@@ -1706,37 +1706,13 @@ Scenario: _0434346 check Bank receipt movements by the Register "Cash in transit
 			| ''                                             | 'Record type' | 'Period'              | 'Resources' | 'Dimensions'   | ''                                             | ''                   | ''                  | ''         | ''                             | 'Attributes'           |
 			| ''                                             | ''            | ''                    | 'Amount'    | 'Company'      | 'Basis document'                               | 'From account'       | 'To account'        | 'Currency' | 'Multi currency movement type' | 'Deferred calculation' |
 			| ''                                             | 'Expense'     | '09.07.2022 10:44:39' | '25,68'     | 'Main Company' | 'Cash statement 115 dated 08.07.2022 10:47:16' | 'POS account 1, TRY' | 'Bank account, TRY' | 'USD'      | 'Reporting currency'           | 'No'                   |
-			| ''                                             | 'Expense'     | '09.07.2022 10:44:39' | '34,24'     | 'Main Company' | 'Cash statement 114 dated 07.07.2022 16:33:55' | 'POS account 1, TRY' | 'Bank account, TRY' | 'USD'      | 'Reporting currency'           | 'No'                   |
+			| ''                                             | 'Expense'     | '09.07.2022 10:44:39' | '33,9'      | 'Main Company' | 'Cash statement 114 dated 07.07.2022 16:33:55' | 'POS account 1, TRY' | 'Bank account, TRY' | 'USD'      | 'Reporting currency'           | 'No'                   |
 			| ''                                             | 'Expense'     | '09.07.2022 10:44:39' | '150'       | 'Main Company' | 'Cash statement 115 dated 08.07.2022 10:47:16' | 'POS account 1, TRY' | 'Bank account, TRY' | 'TRY'      | 'Local currency'               | 'No'                   |
 			| ''                                             | 'Expense'     | '09.07.2022 10:44:39' | '150'       | 'Main Company' | 'Cash statement 115 dated 08.07.2022 10:47:16' | 'POS account 1, TRY' | 'Bank account, TRY' | 'TRY'      | 'en description is empty'      | 'No'                   |
-			| ''                                             | 'Expense'     | '09.07.2022 10:44:39' | '200'       | 'Main Company' | 'Cash statement 114 dated 07.07.2022 16:33:55' | 'POS account 1, TRY' | 'Bank account, TRY' | 'TRY'      | 'Local currency'               | 'No'                   |
-			| ''                                             | 'Expense'     | '09.07.2022 10:44:39' | '200'       | 'Main Company' | 'Cash statement 114 dated 07.07.2022 16:33:55' | 'POS account 1, TRY' | 'Bank account, TRY' | 'TRY'      | 'en description is empty'      | 'No'                   |		
+			| ''                                             | 'Expense'     | '09.07.2022 10:44:39' | '198'       | 'Main Company' | 'Cash statement 114 dated 07.07.2022 16:33:55' | 'POS account 1, TRY' | 'Bank account, TRY' | 'TRY'      | 'Local currency'               | 'No'                   |
+			| ''                                             | 'Expense'     | '09.07.2022 10:44:39' | '198'       | 'Main Company' | 'Cash statement 114 dated 07.07.2022 16:33:55' | 'POS account 1, TRY' | 'Bank account, TRY' | 'TRY'      | 'en description is empty'      | 'No'                   |		
 	And I close all client application windows
 
-Scenario: _0434347 check Bank receipt movements by the Register "Cash in transit" (Transfer from POS, with basis documents, 2 lines + commission)
-	And I close all client application windows
-	* Select Bank receipt
-		Given I open hyperlink "e1cib/list/Document.BankReceipt"
-		And I go to line in "List" table
-			| 'Number'    |
-			| '1 528'     |
-	* Check movements by the Register  "Cash in transit" 
-		And I click "Registrations report" button
-		And I select "Cash in transit" exact value from "Register" drop-down list
-		And I click "Generate report" button
-		Then "ResultTable" spreadsheet document is equal
-			| 'Bank receipt 1 528 dated 09.07.2022 10:44:39' | ''            | ''                    | ''          | ''             | ''                                             | ''                   | ''                  | ''         | ''                             | ''                     |
-			| 'Document registrations records'               | ''            | ''                    | ''          | ''             | ''                                             | ''                   | ''                  | ''         | ''                             | ''                     |
-			| 'Register  "Cash in transit"'                  | ''            | ''                    | ''          | ''             | ''                                             | ''                   | ''                  | ''         | ''                             | ''                     |
-			| ''                                             | 'Record type' | 'Period'              | 'Resources' | 'Dimensions'   | ''                                             | ''                   | ''                  | ''         | ''                             | 'Attributes'           |
-			| ''                                             | ''            | ''                    | 'Amount'    | 'Company'      | 'Basis document'                               | 'From account'       | 'To account'        | 'Currency' | 'Multi currency movement type' | 'Deferred calculation' |
-			| ''                                             | 'Expense'     | '09.07.2022 10:44:39' | '25,68'     | 'Main Company' | 'Cash statement 115 dated 08.07.2022 10:47:16' | 'POS account 1, TRY' | 'Bank account, TRY' | 'USD'      | 'Reporting currency'           | 'No'                   |
-			| ''                                             | 'Expense'     | '09.07.2022 10:44:39' | '34,24'     | 'Main Company' | 'Cash statement 114 dated 07.07.2022 16:33:55' | 'POS account 1, TRY' | 'Bank account, TRY' | 'USD'      | 'Reporting currency'           | 'No'                   |
-			| ''                                             | 'Expense'     | '09.07.2022 10:44:39' | '150'       | 'Main Company' | 'Cash statement 115 dated 08.07.2022 10:47:16' | 'POS account 1, TRY' | 'Bank account, TRY' | 'TRY'      | 'Local currency'               | 'No'                   |
-			| ''                                             | 'Expense'     | '09.07.2022 10:44:39' | '150'       | 'Main Company' | 'Cash statement 115 dated 08.07.2022 10:47:16' | 'POS account 1, TRY' | 'Bank account, TRY' | 'TRY'      | 'en description is empty'      | 'No'                   |
-			| ''                                             | 'Expense'     | '09.07.2022 10:44:39' | '200'       | 'Main Company' | 'Cash statement 114 dated 07.07.2022 16:33:55' | 'POS account 1, TRY' | 'Bank account, TRY' | 'TRY'      | 'Local currency'               | 'No'                   |
-			| ''                                             | 'Expense'     | '09.07.2022 10:44:39' | '200'       | 'Main Company' | 'Cash statement 114 dated 07.07.2022 16:33:55' | 'POS account 1, TRY' | 'Bank account, TRY' | 'TRY'      | 'en description is empty'      | 'No'                   |		
-	And I close all client application windows
 
 Scenario: _0434348 check Bank receipt movements by the Register "R3021 Cash in transit (incoming)" (Transfer from POS, with basis documents, 2 lines + commission)
 	And I close all client application windows

@@ -199,7 +199,6 @@ Scenario: _0991002 filling accounting operation
 		| 'Document_DebitNote'                                                                                         | 'Debit note'                                                                                                     |
 		| 'Document_CreditNote'                                                                                        | 'Credit note'                                                                                                    |
 		| 'BankPayment_DR_R1020B_AdvancesToVendors_R1021B_VendorsTransactions_CR_R3010B_CashOnHand'                    | 'BankPayment DR (R1020B_AdvancesToVendors R1021B_VendorsTransactions) CR (R3010B_CashOnHand)'                    |
-		| 'BankPayment_DR_R5022T_Expenses_CR_R3010B_CashOnHand'                                                        | 'BankPayment DR (R5022T_Expenses) CR (R3010B_CashOnHand)'                                                        |
 		| 'BankPayment_DR_R1021B_VendorsTransactions_CR_R1020B_AdvancesToVendors'                                      | 'BankPayment DR (R1021B_VendorsTransactions) CR (R1020B_AdvancesToVendors)'                                      |
 		| 'BankReceipt_DR_R3010B_CashOnHand_CR_R2020B_AdvancesFromCustomers_R2021B_CustomersTransactions'              | 'BankReceipt DR (R3010B_CashOnHand) CR (R2020B_AdvancesFromCustomers_R2021B_CustomersTransactions)'              |
 		| 'BankReceipt_DR_R2021B_CustomersTransactions_CR_R2020B_AdvancesFromCustomers'                                | 'BankReceipt DR (R2021B_CustomersTransactions) CR (R2020B_AdvancesFromCustomers)'                                |
@@ -259,12 +258,6 @@ Scenario: _0991003 create ledger type
 			And I go to line in "OperationsTree" table
 				| 'Presentation'                                                                                | 'Use' |
 				| 'BankPayment DR (R1020B_AdvancesToVendors R1021B_VendorsTransactions) CR (R3010B_CashOnHand)' | 'No'  |
-			And I activate "Period" field in "OperationsTree" table
-			And I select current line in "OperationsTree" table
-			And I input "01.01.2021" text in "Period" field of "OperationsTree" table
-			And I go to line in "OperationsTree" table
-				| 'Presentation'                                            | 'Use' |
-				| 'BankPayment DR (R5022T_Expenses) CR (R3010B_CashOnHand)' | 'No'  |
 			And I activate "Period" field in "OperationsTree" table
 			And I select current line in "OperationsTree" table
 			And I input "01.01.2021" text in "Period" field of "OperationsTree" table
@@ -377,7 +370,6 @@ Scenario: _0991003 create ledger type
 				| 'Presentation'                                                                                                   | 'Use' | 'Period'     |
 				| 'Bank payment'                                                                                                   | 'No'  | ''           |
 				| 'BankPayment DR (R1020B_AdvancesToVendors R1021B_VendorsTransactions) CR (R3010B_CashOnHand)'                    | 'Yes' | '01.01.2021' |
-				| 'BankPayment DR (R5022T_Expenses) CR (R3010B_CashOnHand)'                                                        | 'Yes' | '01.01.2021' |
 				| 'BankPayment DR (R1021B_VendorsTransactions) CR (R1020B_AdvancesToVendors)'                                      | 'Yes' | '01.01.2021' |
 				| 'Bank receipt'                                                                                                   | 'No'  | ''           |
 				| 'BankReceipt DR (R3010B_CashOnHand) CR (R2020B_AdvancesFromCustomers_R2021B_CustomersTransactions)'              | 'Yes' | '01.01.2021' |
@@ -1714,7 +1706,6 @@ Scenario: _0991071 check Bank payment accounting movements (Payment to the vendo
 		And "AccountingAnalytics" table became equal
 			| 'Debit' | 'Partner'                   | 'Business unit'   | 'Company'                    | 'Partner term'               | 'Credit' | 'Cash/Bank account'         | 'Operation'                                                                                   |
 			| '5201'  | 'Vendor 2 (1 partner term)' | 'Business unit 1' | 'Vendor 2'                   | 'Partner term with vendor 2' | '3250'   | 'Bank account, TRY'         | 'BankPayment DR (R1020B_AdvancesToVendors R1021B_VendorsTransactions) CR (R3010B_CashOnHand)' |
-			| '420.2' | 'Vendor 2 (1 partner term)' | 'Business unit 1' | 'Vendor 2'                   | 'Business unit 1'            | '3250'   | 'Bank account, TRY'         | 'BankPayment DR (R5022T_Expenses) CR (R3010B_CashOnHand)'                                     |
 			| '5201'  | 'Vendor 2 (1 partner term)' | 'Business unit 1' | 'Partner term with vendor 2' | 'Partner term with vendor 2' | '5202'   | 'Vendor 2 (1 partner term)' | 'BankPayment DR (R1021B_VendorsTransactions) CR (R1020B_AdvancesToVendors)'                   |		
 	And I close all client application windows
 
@@ -1733,7 +1724,6 @@ Scenario: _0991072 check Bank payment accounting movements (Payment to the vendo
 		And "AccountingAnalytics" table became equal
 			| 'Debit' | 'Partner'                   | 'Business unit'   | 'Company'                    | 'Partner term'               | 'Credit' | 'Cash/Bank account'         | 'Operation'                                                                                   |
 			| '5201'  | 'Vendor 2 (1 partner term)' | 'Business unit 1' | 'Vendor 2'                   | 'Partner term with vendor 2' | '3250'   | 'Bank account, TRY'         | 'BankPayment DR (R1020B_AdvancesToVendors R1021B_VendorsTransactions) CR (R3010B_CashOnHand)' |
-			| '420.2' | 'Vendor 2 (1 partner term)' | 'Business unit 1' | 'Vendor 2'                   | 'Business unit 1'            | '3250'   | 'Bank account, TRY'         | 'BankPayment DR (R5022T_Expenses) CR (R3010B_CashOnHand)'                                     |
 			| '5201'  | 'Vendor 2 (1 partner term)' | 'Business unit 1' | 'Partner term with vendor 2' | 'Partner term with vendor 2' | '5202'   | 'Vendor 2 (1 partner term)' | 'BankPayment DR (R1021B_VendorsTransactions) CR (R1020B_AdvancesToVendors)'                   |		
 	And I close all client application windows				
 				

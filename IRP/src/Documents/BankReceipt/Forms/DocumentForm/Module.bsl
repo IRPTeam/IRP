@@ -62,7 +62,13 @@ Function GetVisibleAttributesByTransactionType(TransactionType)
 	|PaymentList.RetailCustomer,
 	|PaymentList.SendingAccount,
 	|PaymentList.SendingBranch,
-	|PaymentList.Project";
+	|PaymentList.Project,
+	|PaymentList.ProfitLossCenter,
+	|PaymentList.ExpenseType,
+	|PaymentList.AdditionalAnalytic,
+	|PaymentList.CommissionPercent,
+	|PaymentList.Commission,
+	|PaymentList.CommissionFinancialMovementType";
 	
 	ArrayOfAllAttributes = New Array();
 	For Each ArrayItem In StrSplit(StrAll, ",") Do
@@ -85,7 +91,13 @@ Function GetVisibleAttributesByTransactionType(TransactionType)
 		StrByType = "
 		|PaymentList.PlaningTransactionBasis,
 		|PaymentList.SendingAccount,
-		|PaymentList.SendingBranch";
+		|PaymentList.SendingBranch,
+		|PaymentList.ProfitLossCenter,
+		|PaymentList.ExpenseType,
+		|PaymentList.AdditionalAnalytic,
+		|PaymentList.CommissionPercent,
+		|PaymentList.Commission,
+		|PaymentList.CommissionFinancialMovementType";
 	ElsIf TransactionType = CurrencyExchange Then
 		StrByType = "
 		|TransitAccount, 
@@ -93,7 +105,13 @@ Function GetVisibleAttributesByTransactionType(TransactionType)
 		|PaymentList.PlaningTransactionBasis,
 		|PaymentList.AmountExchange,
 		|PaymentList.SendingAccount,
-		|PaymentList.SendingBranch";
+		|PaymentList.SendingBranch,
+		|PaymentList.ProfitLossCenter,
+		|PaymentList.ExpenseType,
+		|PaymentList.AdditionalAnalytic,
+		|PaymentList.CommissionPercent,
+		|PaymentList.Commission,
+		|PaymentList.CommissionFinancialMovementType";
 	ElsIf TransactionType = PaymentFromCustomer 
 		Or TransactionType = ReturnFromVendor 
 		Or TransactionType = PaymentFromCustomerByPOS Then
@@ -113,23 +131,36 @@ Function GetVisibleAttributesByTransactionType(TransactionType)
 			StrByType = StrByType + ", 
 			|PaymentList.PaymentType,
 			|PaymentList.PaymentTerminal,
-			|PaymentList.BankTerm";
+			|PaymentList.BankTerm,
+			|PaymentList.ProfitLossCenter,
+			|PaymentList.ExpenseType,
+			|PaymentList.AdditionalAnalytic,
+			|PaymentList.CommissionPercent,
+			|PaymentList.Commission,
+			|PaymentList.CommissionFinancialMovementType";
 		EndIf;
 		
 		If TransactionType = PaymentFromCustomer Or TransactionType = ReturnFromVendor Then
 			StrByType = StrByType + ", PaymentList.Project";
 		EndIf;
+		
 	ElsIf TransactionType = OtherPartner Then
 		StrByType = "
 		|PaymentList.Partner,
 		|PaymentList.Agreement,
 		|PaymentList.Payer,
 		|PaymentList.LegalNameContract,
-		|PaymentList.BasisDocument";		
+		|PaymentList.BasisDocument";
 	ElsIf TransactionType = TransferFromPOS Then
 		StrByType = "
 		|PaymentList.PlaningTransactionBasis,
-		|PaymentList.POSAccount";
+		|PaymentList.POSAccount,
+		|PaymentList.ProfitLossCenter,
+		|PaymentList.ExpenseType,
+		|PaymentList.AdditionalAnalytic,
+		|PaymentList.CommissionPercent,
+		|PaymentList.Commission,
+		|PaymentList.CommissionFinancialMovementType";
 	ElsIf TransactionType = ReceiptByCheque Then
 		StrByType = "
 		|PaymentList.PlaningTransactionBasis";

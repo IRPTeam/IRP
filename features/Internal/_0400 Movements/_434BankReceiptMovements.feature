@@ -61,6 +61,7 @@ Scenario: _043400 preparation (Bank receipt)
 		When Create catalog CashAccounts objects (POS)
 		When Create OtherPartners objects
 		When Create information register Taxes records (VAT)
+		When Create catalog CashStatementStatuses objects (Test)
 	When Create Document discount
 	* Add plugin for discount
 		Given I open hyperlink "e1cib/list/Catalog.ExternalDataProc"
@@ -182,6 +183,13 @@ Scenario: _043400 preparation (Bank receipt)
 				And I execute 1C:Enterprise script at server
 					| "Documents.BankReceipt.FindByNumber(11).GetObject().Write(DocumentWriteMode.UndoPosting);"      |
 		And I close all client application windows
+		When create BankReceipt (Transfer from POS with Planning transaction basis)
+		And I execute 1C:Enterprise script at server
+			| "Documents.CashStatement.FindByNumber(114).GetObject().Write(DocumentWriteMode.Posting);"    |
+		And I execute 1C:Enterprise script at server
+			| "Documents.CashStatement.FindByNumber(115).GetObject().Write(DocumentWriteMode.Posting);"    |
+		And I execute 1C:Enterprise script at server
+			| "Documents.BankReceipt.FindByNumber(1528).GetObject().Write(DocumentWriteMode.Posting);"    |
 	* Load SO, SI, IPO
 		When Create document SalesOrder objects (with aging, prepaid)
 		And I execute 1C:Enterprise script at server
@@ -221,7 +229,6 @@ Scenario: _043400 preparation (Bank receipt)
 		When Create document BankReceipt objects (cash transfer)
 		And I execute 1C:Enterprise script at server
 			| "Documents.BankReceipt.FindByNumber(331).GetObject().Write(DocumentWriteMode.Posting);"    |
-	* Load PR
 		When Create document PurchaseReturn objects (advance)
 		And I execute 1C:Enterprise script at server
 			| "Documents.PurchaseReturn.FindByNumber(21).GetObject().Write(DocumentWriteMode.Write);"      |
@@ -1615,6 +1622,183 @@ Scenario: _0434342 check Bank receipt movements by the Register "R5022 Expenses"
 	And I close all client application windows
 
 
+Scenario: _0434344 check Bank receipt movements by the Register "R3010 Cash on hand" (Transfer from POS, with basis documents, 2 lines + commission)
+	And I close all client application windows
+	* Select Bank receipt
+		Given I open hyperlink "e1cib/list/Document.BankReceipt"
+		And I go to line in "List" table
+			| 'Number'    |
+			| '1 528'     |
+	* Check movements by the Register  "R3010 Cash on hand" 
+		And I click "Registrations report" button
+		And I select "R3010 Cash on hand" exact value from "Register" drop-down list
+		And I click "Generate report" button
+		Then "ResultTable" spreadsheet document is equal
+			| 'Bank receipt 1 528 dated 09.07.2022 10:44:39' | ''            | ''                    | ''          | ''             | ''             | ''                  | ''         | ''                     | ''                             | ''                     |
+			| 'Document registrations records'               | ''            | ''                    | ''          | ''             | ''             | ''                  | ''         | ''                     | ''                             | ''                     |
+			| 'Register  "R3010 Cash on hand"'               | ''            | ''                    | ''          | ''             | ''             | ''                  | ''         | ''                     | ''                             | ''                     |
+			| ''                                             | 'Record type' | 'Period'              | 'Resources' | 'Dimensions'   | ''             | ''                  | ''         | ''                     | ''                             | 'Attributes'           |
+			| ''                                             | ''            | ''                    | 'Amount'    | 'Company'      | 'Branch'       | 'Account'           | 'Currency' | 'Transaction currency' | 'Multi currency movement type' | 'Deferred calculation' |
+			| ''                                             | 'Receipt'     | '09.07.2022 10:44:39' | '25,17'     | 'Main Company' | 'Front office' | 'Bank account, TRY' | 'USD'      | 'TRY'                  | 'Reporting currency'           | 'No'                   |
+			| ''                                             | 'Receipt'     | '09.07.2022 10:44:39' | '33,56'     | 'Main Company' | 'Front office' | 'Bank account, TRY' | 'USD'      | 'TRY'                  | 'Reporting currency'           | 'No'                   |
+			| ''                                             | 'Receipt'     | '09.07.2022 10:44:39' | '147'       | 'Main Company' | 'Front office' | 'Bank account, TRY' | 'TRY'      | 'TRY'                  | 'Local currency'               | 'No'                   |
+			| ''                                             | 'Receipt'     | '09.07.2022 10:44:39' | '147'       | 'Main Company' | 'Front office' | 'Bank account, TRY' | 'TRY'      | 'TRY'                  | 'en description is empty'      | 'No'                   |
+			| ''                                             | 'Receipt'     | '09.07.2022 10:44:39' | '196'       | 'Main Company' | 'Front office' | 'Bank account, TRY' | 'TRY'      | 'TRY'                  | 'Local currency'               | 'No'                   |
+			| ''                                             | 'Receipt'     | '09.07.2022 10:44:39' | '196'       | 'Main Company' | 'Front office' | 'Bank account, TRY' | 'TRY'      | 'TRY'                  | 'en description is empty'      | 'No'                   |		
+	And I close all client application windows
 
+Scenario: _0434345 check Bank receipt movements by the Register "R3011 Cash flow" (Transfer from POS, with basis documents, 2 lines + commission)
+	And I close all client application windows
+	* Select Bank receipt
+		Given I open hyperlink "e1cib/list/Document.BankReceipt"
+		And I go to line in "List" table
+			| 'Number'    |
+			| '1 528'     |
+	* Check movements by the Register  "R3011 Cash flow" 
+		And I click "Registrations report" button
+		And I select "R3011 Cash flow" exact value from "Register" drop-down list
+		And I click "Generate report" button
+		Then "ResultTable" spreadsheet document is equal
+			| 'Bank receipt 1 528 dated 09.07.2022 10:44:39' | ''                    | ''          | ''             | ''             | ''                  | ''          | ''                        | ''                 | ''                | ''         | ''                             | ''                     |
+			| 'Document registrations records'               | ''                    | ''          | ''             | ''             | ''                  | ''          | ''                        | ''                 | ''                | ''         | ''                             | ''                     |
+			| 'Register  "R3011 Cash flow"'                  | ''                    | ''          | ''             | ''             | ''                  | ''          | ''                        | ''                 | ''                | ''         | ''                             | ''                     |
+			| ''                                             | 'Period'              | 'Resources' | 'Dimensions'   | ''             | ''                  | ''          | ''                        | ''                 | ''                | ''         | ''                             | 'Attributes'           |
+			| ''                                             | ''                    | 'Amount'    | 'Company'      | 'Branch'       | 'Account'           | 'Direction' | 'Financial movement type' | 'Cash flow center' | 'Planning period' | 'Currency' | 'Multi currency movement type' | 'Deferred calculation' |
+			| ''                                             | '09.07.2022 10:44:39' | '0,34'      | 'Main Company' | 'Front office' | 'Bank account, TRY' | 'Outgoing'  | 'Movement type 3'         | 'Shop 01'          | ''                | 'USD'      | 'Reporting currency'           | 'No'                   |
+			| ''                                             | '09.07.2022 10:44:39' | '0,69'      | 'Main Company' | 'Front office' | 'Bank account, TRY' | 'Outgoing'  | 'Movement type 3'         | 'Shop 01'          | ''                | 'USD'      | 'Reporting currency'           | 'No'                   |
+			| ''                                             | '09.07.2022 10:44:39' | '2'         | 'Main Company' | 'Front office' | 'Bank account, TRY' | 'Outgoing'  | 'Movement type 3'         | 'Shop 01'          | ''                | 'TRY'      | 'Local currency'               | 'No'                   |
+			| ''                                             | '09.07.2022 10:44:39' | '2'         | 'Main Company' | 'Front office' | 'Bank account, TRY' | 'Outgoing'  | 'Movement type 3'         | 'Shop 01'          | ''                | 'TRY'      | 'en description is empty'      | 'No'                   |
+			| ''                                             | '09.07.2022 10:44:39' | '4'         | 'Main Company' | 'Front office' | 'Bank account, TRY' | 'Outgoing'  | 'Movement type 3'         | 'Shop 01'          | ''                | 'TRY'      | 'Local currency'               | 'No'                   |
+			| ''                                             | '09.07.2022 10:44:39' | '4'         | 'Main Company' | 'Front office' | 'Bank account, TRY' | 'Outgoing'  | 'Movement type 3'         | 'Shop 01'          | ''                | 'TRY'      | 'en description is empty'      | 'No'                   |
+			| ''                                             | '09.07.2022 10:44:39' | '25,68'     | 'Main Company' | 'Front office' | 'Bank account, TRY' | 'Incoming'  | 'Movement type 1'         | 'Shop 01'          | ''                | 'USD'      | 'Reporting currency'           | 'No'                   |
+			| ''                                             | '09.07.2022 10:44:39' | '34,24'     | 'Main Company' | 'Front office' | 'Bank account, TRY' | 'Incoming'  | 'Movement type 1'         | 'Shop 01'          | ''                | 'USD'      | 'Reporting currency'           | 'No'                   |
+			| ''                                             | '09.07.2022 10:44:39' | '150'       | 'Main Company' | 'Front office' | 'Bank account, TRY' | 'Incoming'  | 'Movement type 1'         | 'Shop 01'          | ''                | 'TRY'      | 'Local currency'               | 'No'                   |
+			| ''                                             | '09.07.2022 10:44:39' | '150'       | 'Main Company' | 'Front office' | 'Bank account, TRY' | 'Incoming'  | 'Movement type 1'         | 'Shop 01'          | ''                | 'TRY'      | 'en description is empty'      | 'No'                   |
+			| ''                                             | '09.07.2022 10:44:39' | '200'       | 'Main Company' | 'Front office' | 'Bank account, TRY' | 'Incoming'  | 'Movement type 1'         | 'Shop 01'          | ''                | 'TRY'      | 'Local currency'               | 'No'                   |
+			| ''                                             | '09.07.2022 10:44:39' | '200'       | 'Main Company' | 'Front office' | 'Bank account, TRY' | 'Incoming'  | 'Movement type 1'         | 'Shop 01'          | ''                | 'TRY'      | 'en description is empty'      | 'No'                   |		
+	And I close all client application windows
 
+Scenario: _0434346 check Bank receipt movements by the Register "Cash in transit" (Transfer from POS, with basis documents, 2 lines + commission)
+	And I close all client application windows
+	* Select Bank receipt
+		Given I open hyperlink "e1cib/list/Document.BankReceipt"
+		And I go to line in "List" table
+			| 'Number'    |
+			| '1 528'     |
+	* Check movements by the Register  "Cash in transit" 
+		And I click "Registrations report" button
+		And I select "Cash in transit" exact value from "Register" drop-down list
+		And I click "Generate report" button
+		Then "ResultTable" spreadsheet document is equal
+			| 'Bank receipt 1 528 dated 09.07.2022 10:44:39' | ''            | ''                    | ''          | ''             | ''                                             | ''                   | ''                  | ''         | ''                             | ''                     |
+			| 'Document registrations records'               | ''            | ''                    | ''          | ''             | ''                                             | ''                   | ''                  | ''         | ''                             | ''                     |
+			| 'Register  "Cash in transit"'                  | ''            | ''                    | ''          | ''             | ''                                             | ''                   | ''                  | ''         | ''                             | ''                     |
+			| ''                                             | 'Record type' | 'Period'              | 'Resources' | 'Dimensions'   | ''                                             | ''                   | ''                  | ''         | ''                             | 'Attributes'           |
+			| ''                                             | ''            | ''                    | 'Amount'    | 'Company'      | 'Basis document'                               | 'From account'       | 'To account'        | 'Currency' | 'Multi currency movement type' | 'Deferred calculation' |
+			| ''                                             | 'Expense'     | '09.07.2022 10:44:39' | '25,68'     | 'Main Company' | 'Cash statement 115 dated 08.07.2022 10:47:16' | 'POS account 1, TRY' | 'Bank account, TRY' | 'USD'      | 'Reporting currency'           | 'No'                   |
+			| ''                                             | 'Expense'     | '09.07.2022 10:44:39' | '34,24'     | 'Main Company' | 'Cash statement 114 dated 07.07.2022 16:33:55' | 'POS account 1, TRY' | 'Bank account, TRY' | 'USD'      | 'Reporting currency'           | 'No'                   |
+			| ''                                             | 'Expense'     | '09.07.2022 10:44:39' | '150'       | 'Main Company' | 'Cash statement 115 dated 08.07.2022 10:47:16' | 'POS account 1, TRY' | 'Bank account, TRY' | 'TRY'      | 'Local currency'               | 'No'                   |
+			| ''                                             | 'Expense'     | '09.07.2022 10:44:39' | '150'       | 'Main Company' | 'Cash statement 115 dated 08.07.2022 10:47:16' | 'POS account 1, TRY' | 'Bank account, TRY' | 'TRY'      | 'en description is empty'      | 'No'                   |
+			| ''                                             | 'Expense'     | '09.07.2022 10:44:39' | '200'       | 'Main Company' | 'Cash statement 114 dated 07.07.2022 16:33:55' | 'POS account 1, TRY' | 'Bank account, TRY' | 'TRY'      | 'Local currency'               | 'No'                   |
+			| ''                                             | 'Expense'     | '09.07.2022 10:44:39' | '200'       | 'Main Company' | 'Cash statement 114 dated 07.07.2022 16:33:55' | 'POS account 1, TRY' | 'Bank account, TRY' | 'TRY'      | 'en description is empty'      | 'No'                   |		
+	And I close all client application windows
 
+Scenario: _0434347 check Bank receipt movements by the Register "Cash in transit" (Transfer from POS, with basis documents, 2 lines + commission)
+	And I close all client application windows
+	* Select Bank receipt
+		Given I open hyperlink "e1cib/list/Document.BankReceipt"
+		And I go to line in "List" table
+			| 'Number'    |
+			| '1 528'     |
+	* Check movements by the Register  "Cash in transit" 
+		And I click "Registrations report" button
+		And I select "Cash in transit" exact value from "Register" drop-down list
+		And I click "Generate report" button
+		Then "ResultTable" spreadsheet document is equal
+			| 'Bank receipt 1 528 dated 09.07.2022 10:44:39' | ''            | ''                    | ''          | ''             | ''                                             | ''                   | ''                  | ''         | ''                             | ''                     |
+			| 'Document registrations records'               | ''            | ''                    | ''          | ''             | ''                                             | ''                   | ''                  | ''         | ''                             | ''                     |
+			| 'Register  "Cash in transit"'                  | ''            | ''                    | ''          | ''             | ''                                             | ''                   | ''                  | ''         | ''                             | ''                     |
+			| ''                                             | 'Record type' | 'Period'              | 'Resources' | 'Dimensions'   | ''                                             | ''                   | ''                  | ''         | ''                             | 'Attributes'           |
+			| ''                                             | ''            | ''                    | 'Amount'    | 'Company'      | 'Basis document'                               | 'From account'       | 'To account'        | 'Currency' | 'Multi currency movement type' | 'Deferred calculation' |
+			| ''                                             | 'Expense'     | '09.07.2022 10:44:39' | '25,68'     | 'Main Company' | 'Cash statement 115 dated 08.07.2022 10:47:16' | 'POS account 1, TRY' | 'Bank account, TRY' | 'USD'      | 'Reporting currency'           | 'No'                   |
+			| ''                                             | 'Expense'     | '09.07.2022 10:44:39' | '34,24'     | 'Main Company' | 'Cash statement 114 dated 07.07.2022 16:33:55' | 'POS account 1, TRY' | 'Bank account, TRY' | 'USD'      | 'Reporting currency'           | 'No'                   |
+			| ''                                             | 'Expense'     | '09.07.2022 10:44:39' | '150'       | 'Main Company' | 'Cash statement 115 dated 08.07.2022 10:47:16' | 'POS account 1, TRY' | 'Bank account, TRY' | 'TRY'      | 'Local currency'               | 'No'                   |
+			| ''                                             | 'Expense'     | '09.07.2022 10:44:39' | '150'       | 'Main Company' | 'Cash statement 115 dated 08.07.2022 10:47:16' | 'POS account 1, TRY' | 'Bank account, TRY' | 'TRY'      | 'en description is empty'      | 'No'                   |
+			| ''                                             | 'Expense'     | '09.07.2022 10:44:39' | '200'       | 'Main Company' | 'Cash statement 114 dated 07.07.2022 16:33:55' | 'POS account 1, TRY' | 'Bank account, TRY' | 'TRY'      | 'Local currency'               | 'No'                   |
+			| ''                                             | 'Expense'     | '09.07.2022 10:44:39' | '200'       | 'Main Company' | 'Cash statement 114 dated 07.07.2022 16:33:55' | 'POS account 1, TRY' | 'Bank account, TRY' | 'TRY'      | 'en description is empty'      | 'No'                   |		
+	And I close all client application windows
+
+Scenario: _0434348 check Bank receipt movements by the Register "R3021 Cash in transit (incoming)" (Transfer from POS, with basis documents, 2 lines + commission)
+	And I close all client application windows
+	* Select Bank receipt
+		Given I open hyperlink "e1cib/list/Document.BankReceipt"
+		And I go to line in "List" table
+			| 'Number'    |
+			| '1 528'     |
+	* Check movements by the Register  "R3021 Cash in transit (incoming)" 
+		And I click "Registrations report" button
+		And I select "R3021 Cash in transit (incoming)" exact value from "Register" drop-down list
+		And I click "Generate report" button
+		Then "ResultTable" spreadsheet document is equal
+			| 'Bank receipt 1 528 dated 09.07.2022 10:44:39' | ''            | ''                    | ''          | ''             | ''             | ''                  | ''                             | ''         | ''                     | ''                                             | ''                     |
+			| 'Document registrations records'               | ''            | ''                    | ''          | ''             | ''             | ''                  | ''                             | ''         | ''                     | ''                                             | ''                     |
+			| 'Register  "R3021 Cash in transit (incoming)"' | ''            | ''                    | ''          | ''             | ''             | ''                  | ''                             | ''         | ''                     | ''                                             | ''                     |
+			| ''                                             | 'Record type' | 'Period'              | 'Resources' | 'Dimensions'   | ''             | ''                  | ''                             | ''         | ''                     | ''                                             | 'Attributes'           |
+			| ''                                             | ''            | ''                    | 'Amount'    | 'Company'      | 'Branch'       | 'Account'           | 'Multi currency movement type' | 'Currency' | 'Transaction currency' | 'Basis'                                        | 'Deferred calculation' |
+			| ''                                             | 'Expense'     | '09.07.2022 10:44:39' | '25,68'     | 'Main Company' | 'Front office' | 'Bank account, TRY' | 'Reporting currency'           | 'USD'      | 'TRY'                  | 'Cash statement 115 dated 08.07.2022 10:47:16' | 'No'                   |
+			| ''                                             | 'Expense'     | '09.07.2022 10:44:39' | '34,24'     | 'Main Company' | 'Front office' | 'Bank account, TRY' | 'Reporting currency'           | 'USD'      | 'TRY'                  | 'Cash statement 114 dated 07.07.2022 16:33:55' | 'No'                   |
+			| ''                                             | 'Expense'     | '09.07.2022 10:44:39' | '150'       | 'Main Company' | 'Front office' | 'Bank account, TRY' | 'Local currency'               | 'TRY'      | 'TRY'                  | 'Cash statement 115 dated 08.07.2022 10:47:16' | 'No'                   |
+			| ''                                             | 'Expense'     | '09.07.2022 10:44:39' | '150'       | 'Main Company' | 'Front office' | 'Bank account, TRY' | 'en description is empty'      | 'TRY'      | 'TRY'                  | 'Cash statement 115 dated 08.07.2022 10:47:16' | 'No'                   |
+			| ''                                             | 'Expense'     | '09.07.2022 10:44:39' | '200'       | 'Main Company' | 'Front office' | 'Bank account, TRY' | 'Local currency'               | 'TRY'      | 'TRY'                  | 'Cash statement 114 dated 07.07.2022 16:33:55' | 'No'                   |
+			| ''                                             | 'Expense'     | '09.07.2022 10:44:39' | '200'       | 'Main Company' | 'Front office' | 'Bank account, TRY' | 'en description is empty'      | 'TRY'      | 'TRY'                  | 'Cash statement 114 dated 07.07.2022 16:33:55' | 'No'                   |		
+	And I close all client application windows
+
+Scenario: _0434349 check Bank receipt movements by the Register "R3035 Cash planning" (Transfer from POS, with basis documents, 2 lines + commission)
+	And I close all client application windows
+	* Select Bank receipt
+		Given I open hyperlink "e1cib/list/Document.BankReceipt"
+		And I go to line in "List" table
+			| 'Number'    |
+			| '1 528'     |
+	* Check movements by the Register  "R3035 Cash planning" 
+		And I click "Registrations report" button
+		And I select "R3035 Cash planning" exact value from "Register" drop-down list
+		And I click "Generate report" button
+		Then "ResultTable" spreadsheet document is equal
+			| 'Bank receipt 1 528 dated 09.07.2022 10:44:39' | ''                    | ''          | ''             | ''             | ''                  | ''                                             | ''         | ''                    | ''        | ''           | ''                             | ''                        | ''                | ''                     |
+			| 'Document registrations records'               | ''                    | ''          | ''             | ''             | ''                  | ''                                             | ''         | ''                    | ''        | ''           | ''                             | ''                        | ''                | ''                     |
+			| 'Register  "R3035 Cash planning"'              | ''                    | ''          | ''             | ''             | ''                  | ''                                             | ''         | ''                    | ''        | ''           | ''                             | ''                        | ''                | ''                     |
+			| ''                                             | 'Period'              | 'Resources' | 'Dimensions'   | ''             | ''                  | ''                                             | ''         | ''                    | ''        | ''           | ''                             | ''                        | ''                | 'Attributes'           |
+			| ''                                             | ''                    | 'Amount'    | 'Company'      | 'Branch'       | 'Account'           | 'Basis document'                               | 'Currency' | 'Cash flow direction' | 'Partner' | 'Legal name' | 'Multi currency movement type' | 'Financial movement type' | 'Planning period' | 'Deferred calculation' |
+			| ''                                             | '09.07.2022 10:44:39' | '-200'      | 'Main Company' | 'Front office' | 'Bank account, TRY' | 'Cash statement 114 dated 07.07.2022 16:33:55' | 'TRY'      | 'Incoming'            | ''        | ''           | 'Local currency'               | 'Movement type 1'         | ''                | 'No'                   |
+			| ''                                             | '09.07.2022 10:44:39' | '-200'      | 'Main Company' | 'Front office' | 'Bank account, TRY' | 'Cash statement 114 dated 07.07.2022 16:33:55' | 'TRY'      | 'Incoming'            | ''        | ''           | 'en description is empty'      | 'Movement type 1'         | ''                | 'No'                   |
+			| ''                                             | '09.07.2022 10:44:39' | '-150'      | 'Main Company' | 'Front office' | 'Bank account, TRY' | 'Cash statement 115 dated 08.07.2022 10:47:16' | 'TRY'      | 'Incoming'            | ''        | ''           | 'Local currency'               | 'Movement type 1'         | ''                | 'No'                   |
+			| ''                                             | '09.07.2022 10:44:39' | '-150'      | 'Main Company' | 'Front office' | 'Bank account, TRY' | 'Cash statement 115 dated 08.07.2022 10:47:16' | 'TRY'      | 'Incoming'            | ''        | ''           | 'en description is empty'      | 'Movement type 1'         | ''                | 'No'                   |
+			| ''                                             | '09.07.2022 10:44:39' | '-34,24'    | 'Main Company' | 'Front office' | 'Bank account, TRY' | 'Cash statement 114 dated 07.07.2022 16:33:55' | 'USD'      | 'Incoming'            | ''        | ''           | 'Reporting currency'           | 'Movement type 1'         | ''                | 'No'                   |
+			| ''                                             | '09.07.2022 10:44:39' | '-25,68'    | 'Main Company' | 'Front office' | 'Bank account, TRY' | 'Cash statement 115 dated 08.07.2022 10:47:16' | 'USD'      | 'Incoming'            | ''        | ''           | 'Reporting currency'           | 'Movement type 1'         | ''                | 'No'                   |		
+	And I close all client application windows
+
+Scenario: _0434350 check Bank receipt movements by the Register "R5022 Expenses" (Transfer from POS, with basis documents, 2 lines + commission)
+	And I close all client application windows
+	* Select Bank receipt
+		Given I open hyperlink "e1cib/list/Document.BankReceipt"
+		And I go to line in "List" table
+			| 'Number'    |
+			| '1 528'     |
+	* Check movements by the Register  "R5022 Expenses" 
+		And I click "Registrations report" button
+		And I select "R5022 Expenses" exact value from "Register" drop-down list
+		And I click "Generate report" button
+		Then "ResultTable" spreadsheet document is equal
+			| 'Bank receipt 1 528 dated 09.07.2022 10:44:39' | ''                    | ''          | ''                  | ''            | ''             | ''             | ''                   | ''             | ''         | ''            | ''            | ''         | ''                    | ''                             | ''        | ''                          |
+			| 'Document registrations records'               | ''                    | ''          | ''                  | ''            | ''             | ''             | ''                   | ''             | ''         | ''            | ''            | ''         | ''                    | ''                             | ''        | ''                          |
+			| 'Register  "R5022 Expenses"'                   | ''                    | ''          | ''                  | ''            | ''             | ''             | ''                   | ''             | ''         | ''            | ''            | ''         | ''                    | ''                             | ''        | ''                          |
+			| ''                                             | 'Period'              | 'Resources' | ''                  | ''            | 'Dimensions'   | ''             | ''                   | ''             | ''         | ''            | ''            | ''         | ''                    | ''                             | ''        | 'Attributes'                |
+			| ''                                             | ''                    | 'Amount'    | 'Amount with taxes' | 'Amount cost' | 'Company'      | 'Branch'       | 'Profit loss center' | 'Expense type' | 'Item key' | 'Fixed asset' | 'Ledger type' | 'Currency' | 'Additional analytic' | 'Multi currency movement type' | 'Project' | 'Calculation movement cost' |
+			| ''                                             | '09.07.2022 10:44:39' | '0,51'      | '0,51'              | ''            | 'Main Company' | 'Front office' | 'Front office'       | 'Expense'      | ''         | ''            | ''            | 'USD'      | ''                    | 'Reporting currency'           | ''        | ''                          |
+			| ''                                             | '09.07.2022 10:44:39' | '0,68'      | '0,68'              | ''            | 'Main Company' | 'Front office' | 'Front office'       | 'Expense'      | ''         | ''            | ''            | 'USD'      | ''                    | 'Reporting currency'           | ''        | ''                          |
+			| ''                                             | '09.07.2022 10:44:39' | '3'         | '3'                 | ''            | 'Main Company' | 'Front office' | 'Front office'       | 'Expense'      | ''         | ''            | ''            | 'TRY'      | ''                    | 'Local currency'               | ''        | ''                          |
+			| ''                                             | '09.07.2022 10:44:39' | '3'         | '3'                 | ''            | 'Main Company' | 'Front office' | 'Front office'       | 'Expense'      | ''         | ''            | ''            | 'TRY'      | ''                    | 'en description is empty'      | ''        | ''                          |
+			| ''                                             | '09.07.2022 10:44:39' | '4'         | '4'                 | ''            | 'Main Company' | 'Front office' | 'Front office'       | 'Expense'      | ''         | ''            | ''            | 'TRY'      | ''                    | 'Local currency'               | ''        | ''                          |
+			| ''                                             | '09.07.2022 10:44:39' | '4'         | '4'                 | ''            | 'Main Company' | 'Front office' | 'Front office'       | 'Expense'      | ''         | ''            | ''            | 'TRY'      | ''                    | 'en description is empty'      | ''        | ''                          |		
+	And I close all client application windows

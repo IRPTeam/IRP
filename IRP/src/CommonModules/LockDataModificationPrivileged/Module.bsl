@@ -64,7 +64,7 @@ EndFunction
 // 
 // Parameters:
 //  Form - ClientApplicationForm - Form
-//  CurrentObject - DocumentObjectDocumentName, CatalogObjectCatalogName - Current object
+//  CurrentObject - DocumentObjectDocumentName, CatalogObjectCatalogName, InformationRegisterRecordSetInformationRegisterName, AccumulationRegisterRecordSetAccumulationRegisterName - Current object
 Procedure LockFormIfObjectIsLocked(Form, CurrentObject) Export
 	If CheckLockData(CurrentObject, , , True) Then
 		Form.ReadOnly = True;
@@ -74,7 +74,7 @@ EndProcedure
 // Check lock data.
 // 
 // Parameters:
-//  Source - DocumentObjectDocumentName, CatalogObjectCatalogName - Source
+//  Source - DocumentObjectDocumentName, CatalogObjectCatalogName, InformationRegisterRecordSetInformationRegisterName, AccumulationRegisterRecordSetAccumulationRegisterName - Source
 //  Cancel - Boolean - Cancel
 //  isNew - Boolean - Is new
 //  OnOpen - Boolean - On open
@@ -304,20 +304,29 @@ Function ModifyDataIsLocked_ByTable_Simple(SourceParams, Rules, AddInfo = Undefi
     VTTable.GroupBy(Attributes);
 	Query.SetParameter("VTTable", VTTable);  
     
-	For Index = 0 To Rules.Count() - 1 Do
-		
-		If Rules[Index].LockDataModificationReasons.AdvancedMode Then
+    OnlyRules = Rules.Copy();
+    OnlyRules.GroupBy("LockDataModificationReasons");
+    Index = 0;
+    RowIndex = 0;
+    For Each Rule In OnlyRules.UnloadColumn("LockDataModificationReasons") Do // CatalogRef.LockDataModificationReasons
+    	If Rule.AdvancedMode Then
 			Continue;
-		EndIf;
-		FilterRow = "Table." + Rules[Index].Attribute + " " + Rules[Index].ComparisonType + " (" + "&Param" + Index + ")";
-		Filter.Add(FilterRow);
-		Fields.Add("MAX(CASE WHEN Table." + Rules[Index].Attribute + " " + Rules[Index].ComparisonType + " (" + "&Param" + Index + ")
-			|THEN 
-			|	&Reason" + Index + " 
-			|END) AS Reason" + Index);
+    	EndIf;
+    	RuleCheck = New Array;
+    	
+		For Each RuleRow In Rules.FindRows(New Structure("LockDataModificationReasons", Rule)) Do
+			FilterRow = "Table." + RuleRow.Attribute + " " + RuleRow.ComparisonType + " (" + "&Param" + Index + "_" + RowIndex + ")";
+			RuleCheck.Add(FilterRow);
+			Query.SetParameter("Param" + Index + "_" + RowIndex, RuleRow.Value);
+			RowIndex = RowIndex + 1;
+		EndDo;
+		Fields.Add("MAX(CASE WHEN " + StrConcat(RuleCheck, " AND ") + "
+				|THEN 
+				|	&Reason" + Index + " 
+				|END) AS Reason" + Index);
 		TotalFields.Add("MAX(NT.Reason" + Index + ")");
-		Query.SetParameter("Reason" + Index, Rules[Index].LockDataModificationReasons);
-		Query.SetParameter("Param" + Index, Rules[Index].Value);
+		Query.SetParameter("Reason" + Index, Rule);
+		Index = Index + 1;
 	EndDo;
 
     Query.Text =  
@@ -339,7 +348,6 @@ Function ModifyDataIsLocked_ByTable_Simple(SourceParams, Rules, AddInfo = Undefi
 		|	SELECT DISTINCT 
 		|		" + StrConcat(Fields, "," + Chars.LF) + " 
 		|	FROM TableCurrent AS Table
-        |   WHERE " + StrConcat(Filter, " AND ") + "
 		|) AS NT";
 
 	Return GetResultLockCheck(Query);

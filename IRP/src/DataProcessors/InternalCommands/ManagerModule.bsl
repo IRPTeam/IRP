@@ -360,8 +360,6 @@ Function CloneValueFromFirstRow_GetCommandDescription()
 	
 	CommandDescription = InternalCommandsServer.GetCommandDescription();
 	
-	CommandDescription = InternalCommandsServer.GetCommandDescription();
-	
 	CommandDescription.Name = "CloneValueFromFirstRow";
 	//@skip-check statement-type-change, property-return-type
 	CommandDescription.Title = Metadata.DataProcessors.InternalCommands.Forms.CloneValueFromFirstRow.Synonym;
@@ -384,9 +382,7 @@ Function CloneValueFromFirstRow_GetCommandDescription()
 	CommandDescription.UsingObjectForm = True;
 	
 	Targets = CommandDescription.Targets;
-//	For Each ContentItem In Metadata.Documents Do
-//		Targets.Add(ContentItem.FullName());
-//	EndDo;
+	
 	Targets.Add(Metadata.Documents.PurchaseInvoice.FullName());
 	Targets.Add(Metadata.Documents.PurchaseOrder.FullName());
 	Targets.Add(Metadata.Documents.PurchaseReturn.FullName());
@@ -397,6 +393,11 @@ Function CloneValueFromFirstRow_GetCommandDescription()
 	Targets.Add(Metadata.Documents.SalesReturnOrder.FullName());
 	Targets.Add(Metadata.Documents.StockAdjustmentAsSurplus.FullName());
 	Targets.Add(Metadata.Documents.StockAdjustmentAsWriteOff.FullName());
+	
+	Targets.Add(Metadata.Documents.BankPayment.FullName());
+	Targets.Add(Metadata.Documents.BankReceipt.FullName());
+	Targets.Add(Metadata.Documents.CashPayment.FullName());
+	Targets.Add(Metadata.Documents.CashReceipt.FullName());
 	
 	CommandDescription.Targets = New FixedArray(Targets);
 	
@@ -431,10 +432,13 @@ Procedure CloneValueFromFirstRow_RunCommandAction(Targets, Form, CommandFormItem
 	EndIf;
 
 	EnableColumns = New Array; // Array of String
+	EnableColumns.Add("FinancialMovementType");
+	EnableColumns.Add("CashFlowCenter");
 	EnableColumns.Add("ProfitLossCenter");
 	EnableColumns.Add("ExpenseType");
 	EnableColumns.Add("RevenueType");
 	EnableColumns.Add("ReturnReason");
+	EnableColumns.Add("Project");
 	
 	ColumnName = StrSplit(TableItem.CurrentItem.DataPath, ".")[2];
 	If EnableColumns.Find(ColumnName) = Undefined Then

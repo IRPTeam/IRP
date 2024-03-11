@@ -377,7 +377,7 @@ Function CashInTransit()
 	|	tmp.FromAccount_POS AS FromAccount,
 	|	tmp.ToAccount_POS AS ToAccount,
 	|	tmp.Currency AS Currency,
-	|	tmp.Amount AS Amount,
+	|	tmp.Amount + tmp.Commission AS Amount,
 	|	tmp.Period,
 	|	tmp.Key
 	|FROM

@@ -1617,6 +1617,10 @@ Procedure MultiSetTransactionType_BankPayment(Parameters, Results) Export
 	ResourceToBinding.Insert("ReceiptingAccount"        , BindPaymentListReceiptingAccount(Parameters));
 	ResourceToBinding.Insert("ReceiptingBranch"         , BindPaymentListReceiptingBranch(Parameters));
 	ResourceToBinding.Insert("Project"                  , BindPaymentListProject(Parameters));
+	ResourceToBinding.Insert("ExpenseType"              , BindPaymentListExpenseType(Parameters));
+	ResourceToBinding.Insert("ProfitLossCenter"         , BindPaymentListProfitLossCenter(Parameters));
+	ResourceToBinding.Insert("AdditionalAnalytic"       , BindPaymentListAdditionalAnalytic(Parameters));
+		
 	MultiSetterObject(Parameters, Results, ResourceToBinding);
 EndProcedure
 
@@ -1642,6 +1646,13 @@ Procedure MultiSetTransactionType_BankReceipt(Parameters, Results) Export
 	ResourceToBinding.Insert("SendingAccount"           , BindPaymentListSendingAccount(Parameters));
 	ResourceToBinding.Insert("SendingBranch"            , BindPaymentListSendingBranch(Parameters));
 	ResourceToBinding.Insert("Project"                  , BindPaymentListProject(Parameters));
+	ResourceToBinding.Insert("ProfitLossCenter"         , BindPaymentListProfitLossCenter(Parameters));
+	ResourceToBinding.Insert("ExpenseType"              , BindPaymentListExpenseType(Parameters));
+	ResourceToBinding.Insert("AdditionalAnalytic"       , BindPaymentListAdditionalAnalytic(Parameters));
+	ResourceToBinding.Insert("CommissionPercent"        , BindPaymentListCommissionPercent(Parameters));
+	ResourceToBinding.Insert("Commission"               , BindPaymentListCommission(Parameters));
+	ResourceToBinding.Insert("CommissionFinancialMovementType" , BindPaymentListCommissionFinancialMovementType(Parameters));
+		
 	MultiSetterObject(Parameters, Results, ResourceToBinding);
 EndProcedure
 
@@ -1743,6 +1754,10 @@ Procedure StepClearByTransactionTypeBankPayment(Parameters, Chain) Export
 		Options.ReceiptingAccount        = GetPaymentListReceiptingAccount(Parameters, Row.Key);
 		Options.ReceiptingBranch         = GetPaymentListReceiptingBranch(Parameters, Row.Key);
 		Options.Project                  = GetPaymentListProject(Parameters, Row.Key);
+		Options.ExpenseType              = GetPaymentListExpenseType(Parameters, Row.Key);
+		Options.ProfitLossCenter         = GetPaymentListProfitLossCenter(Parameters, Row.Key);
+		Options.AdditionalAnalytic       = GetPaymentListAdditionalAnalytic(Parameters, Row.Key);
+		
 		Options.Key = Row.Key;
 		Options.StepName = "StepClearByTransactionTypeBankPayment";
 		Chain.ClearByTransactionTypeBankPayment.Options.Add(Options);
@@ -1777,7 +1792,14 @@ Procedure StepClearByTransactionTypeBankReceipt(Parameters, Chain) Export
 		Options.RevenueType              = GetPaymentListRevenueType(Parameters, Row.Key);
 		Options.SendingAccount           = GetPaymentListSendingAccount(Parameters, Row.Key);
 		Options.SendingBranch            = GetPaymentListSendingBranch(Parameters, Row.Key);
-		Options.Project                  = GetPaymentListProject(Parameters, Row.Key);
+		Options.Project                  = GetPaymentListProject(Parameters, Row.Key);		
+		Options.ProfitLossCenter         = GetPaymentListProfitLossCenter(Parameters, Row.Key);
+		Options.ExpenseType              = GetPaymentListExpenseType(Parameters, Row.Key);
+		Options.AdditionalAnalytic       = GetPaymentListAdditionalAnalytic(Parameters, Row.Key);
+		Options.CommissionPercent        = GetPaymentListCommissionPercent(Parameters, Row.Key);
+		Options.Commission               = GetPaymentListCommission(Parameters, Row.Key);
+		Options.CommissionFinancialMovementType = GetPaymentListCommissionFinancialMovementType(Parameters, Row.Key);
+				
 		Options.Key = Row.Key;
 		Options.StepName = "StepClearByTransactionTypeBankReceipt";
 		Chain.ClearByTransactionTypeBankReceipt.Options.Add(Options);
@@ -6580,6 +6602,50 @@ Function BindPaymentListExpenseType(Parameters)
 	DataPath = "PaymentList.ExpenseType";
 	Binding = New Structure();
 	Return BindSteps("BindVoid", DataPath, Binding, Parameters, "BindPaymentListExpenseType");
+EndFunction
+
+#EndRegion
+
+#Region PAYMENT_LIST_ADDITIONAL_ANALYTIC
+
+// PaymentList.AdditionalAnalytic.Set
+Procedure SetPaymentListAdditionalAnalytic(Parameters, Results) Export
+	Binding = BindPaymentListAdditionalAnalytic(Parameters);
+	SetterObject(Binding.StepsEnabler, Binding.DataPath, Parameters, Results);
+EndProcedure
+
+// PaymentList.AdditionalAnalytic.Get
+Function GetPaymentListAdditionalAnalytic(Parameters, _Key)
+	Return GetPropertyObject(Parameters, BindPaymentListAdditionalAnalytic(Parameters).DataPath, _Key);
+EndFunction
+
+// PaymentList.AdditionalAnalytic.Bind
+Function BindPaymentListAdditionalAnalytic(Parameters)
+	DataPath = "PaymentList.AdditionalAnalytic";
+	Binding = New Structure();
+	Return BindSteps("BindVoid", DataPath, Binding, Parameters, "BindPaymentListAdditionalAnalytic");
+EndFunction
+
+#EndRegion
+
+#Region PAYMENT_LIST_COMISSION_FINANCIAL_MOVEMENT_TYPE
+
+// PaymentList.CommissionFinancialMovementType.Set
+Procedure SetPaymentListCommissionFinancialMovementType(Parameters, Results) Export
+	Binding = BindPaymentListCommissionFinancialMovementType(Parameters);
+	SetterObject(Binding.StepsEnabler, Binding.DataPath, Parameters, Results);
+EndProcedure
+
+// PaymentList.CommissionFinancialMovementType.Get
+Function GetPaymentListCommissionFinancialMovementType(Parameters, _Key)
+	Return GetPropertyObject(Parameters, BindPaymentListCommissionFinancialMovementType(Parameters).DataPath, _Key);
+EndFunction
+
+// PaymentList.CommissionFinancialMovementType.Bind
+Function BindPaymentListCommissionFinancialMovementType(Parameters)
+	DataPath = "PaymentList.CommissionFinancialMovementType";
+	Binding = New Structure();
+	Return BindSteps("BindVoid", DataPath, Binding, Parameters, "BindPaymentListCommissionFinancialMovementType");
 EndFunction
 
 #EndRegion

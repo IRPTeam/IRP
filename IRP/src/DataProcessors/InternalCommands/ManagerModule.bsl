@@ -398,6 +398,7 @@ Function CloneValueFromFirstRow_GetCommandDescription()
 	Targets.Add(Metadata.Documents.BankReceipt.FullName());
 	Targets.Add(Metadata.Documents.CashPayment.FullName());
 	Targets.Add(Metadata.Documents.CashReceipt.FullName());
+	Targets.Add(Metadata.Documents.CashExpense.FullName());
 	
 	CommandDescription.Targets = New FixedArray(Targets);
 	

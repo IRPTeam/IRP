@@ -415,44 +415,155 @@ Scenario: _0156052 check items in the document by scan barcode (document without
 			| 'L/Green'    | 'Dress'                | '2,000'      | 'pcs'    | '550,00'   | '18%'   | '932,20'       | '1 100,00'        |
 			| 'PZU'        | 'Product 1 with SLN'   | '2,000'      | 'pcs'    | ''         | '18%'   | ''             | ''                |
 		And I close all client application windows
+
+Scenario: _0156053 check create GR from Mobile create documents
+	And I close all client application windows
+	* Open Mobile create documents
+		Given I open hyperlink "e1cib/app/DataProcessor.MobileCreateDocument"
+	* Scan two item with sln
+		And I move to "Create documents" tab
+		And I expand "Additional" group
+		And I move to "Additional" tab
+		And I click the button named "SearchByBarcode"
+		And I input "8908899880" text in the field named "Barcode"
+		And I move to the next attribute
+		And I click the button named "SearchByBarcode"
+		And I input "8908899880" text in the field named "Barcode"
+		And I move to the next attribute
+	* Scan item without sln
+		And I click the button named "SearchByBarcode"
+		And I input "2202283713" text in the field named "Barcode"
+		And I move to the next attribute
+	* Create GR
+		And I move to "Create documents" tab
+		Then the form attribute named "ByOneScan" became equal to "Yes"
+		And "ItemList" table became equal
+			| 'Item'               | 'Quantity' | 'Item key' | 'Unit' | 'Serial lot number' |
+			| 'Product 1 with SLN' | '2,000'    | 'PZU'      | 'pcs'  | '8908899880'        |
+			| 'Dress'              | '1,000'    | 'S/Yellow' | 'pcs'  | ''                  |
+		Then the form attribute named "ItemListRowsCount" became equal to "2"
+		Then the form attribute named "ItemListTotalQuantity" became equal to "3"
+		And I click "Goods Receipt" button
+	* Check
+		Then in the TestClient message log contains lines by template:
+			|'Goods receipt*'|
+		And I save message text as "CreateGR"
+		Given I open hyperlink "e1cib/list/Document.GoodsReceipt"
+		And I go to the last line in "List" table
+		And I select current line in "List" table
+		And "ItemList" table became equal
+			| '#' | 'Item'               | 'Item key' | 'Serial lot numbers' | 'Unit' | 'Quantity' |
+			| '1' | 'Product 1 with SLN' | 'PZU'      | '8908899880'         | 'pcs'  | '2,000'    |
+			| '2' | 'Dress'              | 'S/Yellow' | ''                   | 'pcs'  | '1,000'    |
+	And I close all client application windows
+	
 		
+Scenario: _0156054 check create SC from Mobile create documents
+	And I close all client application windows
+	* Open Mobile create documents
+		Given I open hyperlink "e1cib/app/DataProcessor.MobileCreateDocument"
+	* Scan two item with sln
+		And I move to "Create documents" tab
+		And I expand "Additional" group
+		And I move to "Additional" tab
+		And I click the button named "SearchByBarcode"
+		And I input "8908899880" text in the field named "Barcode"
+		And I move to the next attribute
+		And I click the button named "SearchByBarcode"
+		And I input "8908899880" text in the field named "Barcode"
+		And I move to the next attribute
+	* Scan item without sln
+		And I click the button named "SearchByBarcode"
+		And I input "2202283713" text in the field named "Barcode"
+		And I move to the next attribute
+	* Create SC
+		And I move to "Create documents" tab
+		Then the form attribute named "ByOneScan" became equal to "Yes"
+		And "ItemList" table became equal
+			| 'Item'               | 'Quantity' | 'Item key' | 'Unit' | 'Serial lot number' |
+			| 'Product 1 with SLN' | '2,000'    | 'PZU'      | 'pcs'  | '8908899880'        |
+			| 'Dress'              | '1,000'    | 'S/Yellow' | 'pcs'  | ''                  |
+		Then the form attribute named "ItemListRowsCount" became equal to "2"
+		Then the form attribute named "ItemListTotalQuantity" became equal to "3"
+		And I click "Shipment confirmation" button
+	* Check
+		Then in the TestClient message log contains lines by template:
+			|'Shipment confirmation*'|
+		And I save message text as "CreateGR"
+		Given I open hyperlink "e1cib/list/Document.ShipmentConfirmation"
+		And I go to the last line in "List" table
+		And I select current line in "List" table
+		And "ItemList" table became equal
+			| '#' | 'Item'               | 'Item key' | 'Serial lot numbers' | 'Unit' | 'Quantity' |
+			| '1' | 'Product 1 with SLN' | 'PZU'      | '8908899880'         | 'pcs'  | '2,000'    |
+			| '2' | 'Dress'              | 'S/Yellow' | ''                   | 'pcs'  | '1,000'    |
+	And I close all client application windows				
+		
+
+Scenario: _0156055 check create IT from Mobile create documents
+	And I close all client application windows
+	* Open Mobile create documents
+		Given I open hyperlink "e1cib/app/DataProcessor.MobileCreateDocument"
+	* Scan two item with sln
+		And I move to "Create documents" tab
+		And I expand "Additional" group
+		And I move to "Additional" tab
+		And I click the button named "SearchByBarcode"
+		And I input "8908899880" text in the field named "Barcode"
+		And I move to the next attribute
+		And I click the button named "SearchByBarcode"
+		And I input "8908899880" text in the field named "Barcode"
+		And I move to the next attribute
+	* Scan item without sln
+		And I click the button named "SearchByBarcode"
+		And I input "2202283713" text in the field named "Barcode"
+		And I move to the next attribute
+	* Create SC
+		And I move to "Create documents" tab
+		Then the form attribute named "ByOneScan" became equal to "Yes"
+		And "ItemList" table became equal
+			| 'Item'               | 'Quantity' | 'Item key' | 'Unit' | 'Serial lot number' |
+			| 'Product 1 with SLN' | '2,000'    | 'PZU'      | 'pcs'  | '8908899880'        |
+			| 'Dress'              | '1,000'    | 'S/Yellow' | 'pcs'  | ''                  |
+		Then the form attribute named "ItemListRowsCount" became equal to "2"
+		Then the form attribute named "ItemListTotalQuantity" became equal to "3"
+		And I select from "Store receiver" drop-down list by "Store 02" string		
+		And I click "Inventory transfer" button
+	* Check
+		Then in the TestClient message log contains lines by template:
+			|'Inventory transfer*'|
+		And I save message text as "CreateIT"
+		Given I open hyperlink "e1cib/list/Document.InventoryTransfer"
+		And I go to the last line in "List" table
+		And I select current line in "List" table
+		And "ItemList" table became equal
+			| '#' | 'Item'               | 'Item key' | 'Serial lot numbers' | 'Unit' | 'Quantity' |
+			| '1' | 'Product 1 with SLN' | 'PZU'      | '8908899880'         | 'pcs'  | '2,000'    |
+			| '2' | 'Dress'              | 'S/Yellow' | ''                   | 'pcs'  | '1,000'    |
+		And I click "Decoration group title collapsed picture" hyperlink
+		Then the form attribute named "StoreReceiver" became equal to "Store 02"	
+	And I close all client application windows				
+
+Scenario: _0156056 try create empty IT, SC, GR from Mobile create documents
+	And I close all client application windows
+	* Open Mobile create documents
+		Given I open hyperlink "e1cib/app/DataProcessor.MobileCreateDocument"
+	* Try create empty SC
+		And I move to "Create documents" tab
+		And I click "Shipment confirmation" button
+		When I Check the steps for Exception
+			| 'When TestClient log message contains "Shipment confirmation*" string by template'    |
+	* Try create empty GR
+		And I move to "Create documents" tab
+		And I click "Goods receipt" button
+		When I Check the steps for Exception
+			| 'When TestClient log message contains "Goods receipt*" string by template'    |
+	* Try create empty IT
+		And I move to "Create documents" tab
+		And I click "Inventory transfer" button
+		When I Check the steps for Exception
+			| 'When TestClient log message contains "Inventory transfer*" string by template'    |
+	
+
 Scenario: _999999 close TestClient session
 	And I close TestClient session		
-		
-						
-				
-
-				
-
-				
-		
-						
-		
-				
-		
-
-
-		
-				
-		
-				
-
-
-		
-				
-
-	
-		
-				
-
-
-		
-		
-				
-		
-				
-	
-		
-				
-	
-	

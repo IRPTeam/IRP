@@ -267,50 +267,13 @@ Procedure ShowNotActive_OnCommandCreate(CommandName, CommandParameters, AddInfo)
 	NotActiveShowing = SessionParameters.NotActiveCatalogsShowing[CommandParameters.ObjectFullName]; // Boolean
 	CommandParameters.CommandButton.Check = NotActiveShowing;
 	
-	OriginalQuery = True;
-	FormQueryText = CommandParameters.MainAttribute.QueryText;
-	MainAttributeTable = CommandParameters.MainAttribute.MainTable;
-	If Not CommandParameters.MainAttribute.CustomQuery Then
-		FormQueryText = "Select * From " + MainAttributeTable;
-		OriginalQuery = False;
-	EndIf;
-	
-	QueryBuilder = New QueryBuilder(FormQueryText);
-	QueryBuilder.FillSettings();
-	OldParameters = New Array; // Array of String
-	For Each BuilderParameter In QueryBuilder.Parameters Do
-		OldParameters.Add(BuilderParameter.Key);
-	EndDo; 
-	
-	If OriginalQuery Then
-		QueryBuilder.AvailableFields.Add("NotActive", "NotActive");
-		QueryBuilder.SelectedFields.Add("Ref.NotActive", "NotActive");
-	EndIf;
-	
-	NewFilter = QueryBuilder.Filter.Add("Ref.NotActive");
-	NewFilter.Set(False, True);
-	
-	ResultQuery = QueryBuilder.GetQuery();
-	QueryText = ResultQuery.Text;
-	For Each QueryParameter In ResultQuery.Parameters Do
-		If OldParameters.Find(QueryParameter.Key) = Undefined Then
-			QueryText = StrReplace(QueryText, "&"+QueryParameter.Key, "FALSE OR &ShowNotActive");
-			Break;
-		EndIf;
-	EndDo;
-	CommandParameters.MainAttribute.QueryText = QueryText;
+	QuerySchemaAPI = DynamicListAPI.Get(CommandParameters.MainAttribute);
+	DynamicListAPI.AddField(QuerySchemaAPI, "NotActive", "NotActive");
+	DynamicListAPI.AddFilter(QuerySchemaAPI, "NotActive = FALSE OR &ShowNotActive");
+	DynamicListAPI.Set(QuerySchemaAPI);
 	CommandParameters.MainAttribute.Parameters.SetParameterValue("ShowNotActive", NotActiveShowing); 
-	CommandParameters.MainAttribute.MainTable = MainAttributeTable;
 	
-	ConditionalAppearanceItem = CommandParameters.MainAttribute.ConditionalAppearance.Items.Add();
-	//@skip-check new-font
-	ConditionalAppearanceItem.Appearance.SetParameterValue("Font", New Font(,,,,, True));
-	FilterItem = ConditionalAppearanceItem.Filter.Items.Add(Type("DataCompositionFilterItem"));
-	FilterItem.ComparisonType = DataCompositionComparisonType.Equal;
-	FilterItem.LeftValue = New DataCompositionField("NotActive");
-	FilterItem.RightValue = True;
-	FilterItem.Use = True;
-		 
+	DynamicListAPI.AddAppearance(QuerySchemaAPI, "NotActive", DataCompositionComparisonType.Equal, True, "Font", New Font( , , , , , True));
 EndProcedure
 
 #EndRegion

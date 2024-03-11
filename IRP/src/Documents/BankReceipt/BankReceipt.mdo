@@ -625,10 +625,10 @@
       <fullTextSearch>Use</fullTextSearch>
     </attributes>
     <attributes uuid="1704ff55-abe1-49ad-aac9-a5c4c7f37595">
-      <name>CommissionIsSeparate</name>
+      <name>DELETE_CommissionIsSeparate</name>
       <synonym>
         <key>en</key>
-        <value>Commission is separate</value>
+        <value>DELETE commission is separate</value>
       </synonym>
       <type>
         <types>Boolean</types>
@@ -743,6 +743,26 @@
       </type>
       <minValue xsi:type="core:UndefinedValue"/>
       <maxValue xsi:type="core:UndefinedValue"/>
+      <dataHistory>Use</dataHistory>
+      <fullTextSearch>Use</fullTextSearch>
+    </attributes>
+    <attributes uuid="08ef98c8-9a75-4067-bba2-8e4d6345fd41">
+      <name>CommissionFinancialMovementType</name>
+      <synonym>
+        <key>en</key>
+        <value>Commission financial movement type</value>
+      </synonym>
+      <type>
+        <types>CatalogRef.ExpenseAndRevenueTypes</types>
+      </type>
+      <minValue xsi:type="core:UndefinedValue"/>
+      <maxValue xsi:type="core:UndefinedValue"/>
+      <choiceParameters>
+        <name>Filter.IsFinancialMovementType</name>
+        <value xsi:type="core:BooleanValue">
+          <value>true</value>
+        </value>
+      </choiceParameters>
       <dataHistory>Use</dataHistory>
       <fullTextSearch>Use</fullTextSearch>
     </attributes>

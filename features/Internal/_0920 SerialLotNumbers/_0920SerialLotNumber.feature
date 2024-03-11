@@ -4330,3 +4330,136 @@ Scenario: _092095 load sln in DataProcessor Replace Serial Lot Number
 			| 'UNIQ'  | '8908899879'    |
 			| 'UNIQ'  | '8908899880'    |
 		And I close all client application windows					
+
+Scenario: _092097 check scan unique serial in the SO
+	And I close all client application windows
+	Given I open hyperlink "e1cib/list/Document.SalesOrder"
+	And I click "Create" button
+	* Scan unique sln
+		And in the table "ItemList" I click the button named "SearchByBarcode"
+		And I input "8908899881" text in the field named "Barcode"
+		And I move to the next attribute
+		And in the table "ItemList" I click the button named "SearchByBarcode"
+		And I input "8908899881" text in the field named "Barcode"
+		And I move to the next attribute
+	* Check lines
+		And "ItemList" table became equal
+			| 'Item key' | 'Quantity' | 'Unit' | 'Item'               |
+			| 'PZU'      | '2,000'    | 'pcs'  | 'Product 1 with SLN' |
+	And I close all client application windows
+
+Scenario: _092098 check scan unique serial in the SI
+	And I close all client application windows
+	Given I open hyperlink "e1cib/list/Document.SalesInvoice"	
+	And I click "Create" button
+	* Scan unique sln
+		And in the table "ItemList" I click the button named "SearchByBarcode"
+		And I input "8908899881" text in the field named "Barcode"
+		And I move to the next attribute
+		And in the table "ItemList" I click the button named "SearchByBarcode"
+		And I input "8908899881" text in the field named "Barcode"
+		And I move to the next attribute
+	* Check lines
+		And "ItemList" table became equal
+			| 'Item key' | 'Quantity' | 'Unit' | 'Item'               |
+			| 'PZU'      | '1,000'    | 'pcs'  | 'Product 1 with SLN' |
+		Then there are lines in TestClient message log
+			|'Serial lot number [ 8908899881 ] has to be unique at the document\n'|		
+	And I close all client application windows
+	
+Scenario: _092099 check scan unique serial in the RSR
+	And I close all client application windows
+	Given I open hyperlink "e1cib/list/Document.RetailSalesReceipt"	
+	And I click "Create" button
+	* Scan unique sln
+		And in the table "ItemList" I click the button named "SearchByBarcode"
+		And I input "8908899881" text in the field named "Barcode"
+		And I move to the next attribute
+		And in the table "ItemList" I click the button named "SearchByBarcode"
+		And I input "8908899881" text in the field named "Barcode"
+		And I move to the next attribute
+	* Check lines
+		And "ItemList" table became equal
+			| 'Item key' | 'Quantity' | 'Unit' | 'Item'               |
+			| 'PZU'      | '1,000'    | 'pcs'  | 'Product 1 with SLN' |
+		Then there are lines in TestClient message log
+			|'Serial lot number [ 8908899881 ] has to be unique at the document\n'|		
+	And I close all client application windows	
+		
+Scenario: _092100 check scan unique serial in the PhysicalInventory (use sln)
+	And I close all client application windows
+	Given I open hyperlink "e1cib/list/Document.PhysicalInventory"	
+	And I click "Create" button
+	* Use sln
+		And I move to "Rules" tab
+		And I set checkbox "Use serial lot"
+	* Scan unique sln
+		And in the table "ItemList" I click the button named "SearchByBarcode"
+		And I input "8908899881" text in the field named "Barcode"
+		And I move to the next attribute
+		And in the table "ItemList" I click the button named "SearchByBarcode"
+		And I input "8908899881" text in the field named "Barcode"
+		And I move to the next attribute
+	* Check lines
+		And "ItemList" table became equal
+			| 'Item key' | 'Phys. count' | 'Unit' | 'Item'               |
+			| 'PZU'      | '1,000'       | 'pcs'  | 'Product 1 with SLN' |
+		Then there are lines in TestClient message log
+			|'Serial lot number [ 8908899881 ] has to be unique at the document\n'|		
+	And I close all client application windows	
+
+Scenario: _092101 check scan unique serial in the PhysicalInventory (not use sln)
+	And I close all client application windows
+	Given I open hyperlink "e1cib/list/Document.PhysicalInventory"	
+	And I click "Create" button
+	* Scan unique sln
+		And in the table "ItemList" I click the button named "SearchByBarcode"
+		And I input "8908899881" text in the field named "Barcode"
+		And I move to the next attribute
+		And in the table "ItemList" I click the button named "SearchByBarcode"
+		And I input "8908899881" text in the field named "Barcode"
+		And I move to the next attribute
+	* Check lines
+		And "ItemList" table became equal
+			| 'Item key' | 'Phys. count' | 'Unit' | 'Item'               |
+			| 'PZU'      | '2,000'       | 'pcs'  | 'Product 1 with SLN' |
+	And I close all client application windows	
+
+Scenario: _092102 check scan unique serial in the PhysicalCountByLocation (not use sln)
+	And I close all client application windows
+	Given I open hyperlink "e1cib/list/Document.PhysicalCountByLocation"	
+	And I click "Create" button
+	* Scan unique sln
+		And in the table "ItemList" I click the button named "SearchByBarcode"
+		And I input "8908899881" text in the field named "Barcode"
+		And I move to the next attribute
+		And in the table "ItemList" I click the button named "SearchByBarcode"
+		And I input "8908899881" text in the field named "Barcode"
+		And I move to the next attribute
+	* Check lines
+		And "ItemList" table became equal
+			| 'Item key' | 'Phys. count' | 'Unit' | 'Item'               |
+			| 'PZU'      | '2,000'       | 'pcs'  | 'Product 1 with SLN' |
+	And I close all client application windows		
+
+Scenario: _092103 check scan unique serial in the PhysicalCountByLocation (use sln)
+	And I close all client application windows
+	Given I open hyperlink "e1cib/list/Document.PhysicalCountByLocation"	
+	And I click "Create" button
+	* Use sln
+		And I move to "Rules" tab
+		And I set checkbox "Use serial lot"
+	* Scan unique sln
+		And in the table "ItemList" I click the button named "SearchByBarcode"
+		And I input "8908899881" text in the field named "Barcode"
+		And I move to the next attribute
+		And in the table "ItemList" I click the button named "SearchByBarcode"
+		And I input "8908899881" text in the field named "Barcode"
+		And I move to the next attribute
+	* Check lines
+		And "ItemList" table became equal
+			| 'Item key' | 'Phys. count' | 'Unit' | 'Item'               |
+			| 'PZU'      | '1,000'       | 'pcs'  | 'Product 1 with SLN' |
+		Then there are lines in TestClient message log
+			|'Serial lot number [ 8908899881 ] has to be unique at the document\n'|		
+	And I close all client application windows		

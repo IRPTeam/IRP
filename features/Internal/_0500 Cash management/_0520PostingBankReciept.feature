@@ -977,3 +977,32 @@ Scenario: _052020 check selection form (Payment by documents) in BR
 				| '4' | 'Ferron BP' | 'Company Ferron BP' | 'Basic Partner terms, without VAT' | ''                    | '$$SalesInvoice024008$$'                     | ''        | '$$SalesOrder023005$$' | '650,00'       | ''                        | ''                 | ''                           |
 		And I close all client application windows				
 				
+	
+
+Scenario: _052021 check amount when create BR based on SI (partner term - by partner terms)
+	And I close all client application windows
+	* Select two SI
+		Given I open hyperlink "e1cib/list/Document.SalesInvoice"
+		And I go to line in "List" table
+			| 'Amount'   | 'Legal name'      |
+			| '1 000,00' | 'Company Kalipso' |
+		And I move one line down in "List" table and select line
+	* Create Bank receipt
+		And I click the button named "FormDocumentBankReceiptGenerateBankReceipt"
+	* Check amount (documents amount )
+		And "PaymentList" table became equal
+			| '#' | 'Partner'         | 'Payer'           | 'Partner term'             | 'Legal name contract' | 'Basis document' | 'Project' | 'Order' | 'Total amount' | 'Financial movement type' | 'Cash flow center' | 'Planning transaction basis' |
+			| '1' | 'Partner Kalipso' | 'Company Kalipso' | 'Partner Kalipso Customer' | ''                    | ''               | ''        | ''      | '3 000,00'     | ''                        | ''                 | ''                           |
+	And I close all client application windows
+	* Select one SI				
+		Given I open hyperlink "e1cib/list/Document.SalesInvoice"
+		And I go to line in "List" table
+			| 'Amount'   | 'Legal name'      |
+			| '1 000,00' | 'Company Kalipso' |
+	* Create Bank receipt
+		And I click the button named "FormDocumentBankReceiptGenerateBankReceipt"
+	* Check amount (documents amount )
+		And "PaymentList" table became equal
+			| '#' | 'Partner'         | 'Payer'           | 'Partner term'             | 'Legal name contract' | 'Basis document' | 'Project' | 'Order' | 'Total amount' | 'Financial movement type' | 'Cash flow center' | 'Planning transaction basis' |
+			| '1' | 'Partner Kalipso' | 'Company Kalipso' | 'Partner Kalipso Customer' | ''                    | ''               | ''        | ''      | '1 000,00'     | ''                        | ''                 | ''                           |
+	And I close all client application windows				

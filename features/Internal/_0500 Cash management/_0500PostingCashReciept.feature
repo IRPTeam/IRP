@@ -766,3 +766,47 @@ Scenario: _050017 check selection form (Payment by documents) in CR
 				| '$$SalesInvoice024001$$' | 'Ferron BP' | 'Basic Partner terms, TRY'         | 'Company Ferron BP' | ''                    | '$$SalesOrder023001$$' | ''        | '4 350,00'  |
 				| '$$SalesInvoice024008$$' | 'Ferron BP' | 'Basic Partner terms, without VAT' | 'Company Ferron BP' | ''                    | '$$SalesOrder023005$$' | ''        | '11 099,93' |				
 		And I close all client application windows
+
+Scenario: _050018 check amount when create CR based on SI (partner term - by documents)
+	And I close all client application windows
+	* Select SI
+		Given I open hyperlink "e1cib/list/Document.SalesInvoice"
+		And I go to line in "List" table
+			| 'Amount'   | 'Number'                       | 'Partner'   |
+			| '4 350,00' | '$$NumberSalesInvoice024001$$' | 'Ferron BP' |
+	* Create Cash receipt
+		And I click the button named "FormDocumentCashReceiptGenerateCashReceipt"
+	* Check amount (document balance)
+		And "PaymentList" table became equal
+			| '#' | 'Partner'   | 'Payer'             | 'Partner term'             | 'Legal name contract' | 'Basis document'         | 'Project' | 'Order'                | 'Total amount' | 'Financial movement type' | 'Cash flow center' | 'Planning transaction basis' |
+			| '1' | 'Ferron BP' | 'Company Ferron BP' | 'Basic Partner terms, TRY' | ''                    | '$$SalesInvoice024001$$' | ''        | '$$SalesOrder023001$$' | '4 150,00'     | ''                        | ''                 | ''                           |
+	And I close all client application windows
+	
+
+Scenario: _050019 check amount when create CR based on SI (partner term - by partner terms)
+	And I close all client application windows
+	* Select two SI
+		Given I open hyperlink "e1cib/list/Document.SalesInvoice"
+		And I go to line in "List" table
+			| 'Amount'   | 'Legal name'      |
+			| '1 000,00' | 'Company Kalipso' |
+		And I move one line down in "List" table and select line
+	* Create Cash receipt
+		And I click the button named "FormDocumentCashReceiptGenerateCashReceipt"
+	* Check amount (documents amount )
+		And "PaymentList" table became equal
+			| '#' | 'Partner'         | 'Payer'           | 'Partner term'             | 'Legal name contract' | 'Basis document' | 'Project' | 'Order' | 'Total amount' | 'Financial movement type' | 'Cash flow center' | 'Planning transaction basis' |
+			| '1' | 'Partner Kalipso' | 'Company Kalipso' | 'Partner Kalipso Customer' | ''                    | ''               | ''        | ''      | '3 000,00'     | ''                        | ''                 | ''                           |
+	And I close all client application windows
+	* Select one SI				
+		Given I open hyperlink "e1cib/list/Document.SalesInvoice"
+		And I go to line in "List" table
+			| 'Amount'   | 'Legal name'      |
+			| '1 000,00' | 'Company Kalipso' |
+	* Create Cash receipt
+		And I click the button named "FormDocumentCashReceiptGenerateCashReceipt"
+	* Check amount (documents amount )
+		And "PaymentList" table became equal
+			| '#' | 'Partner'         | 'Payer'           | 'Partner term'             | 'Legal name contract' | 'Basis document' | 'Project' | 'Order' | 'Total amount' | 'Financial movement type' | 'Cash flow center' | 'Planning transaction basis' |
+			| '1' | 'Partner Kalipso' | 'Company Kalipso' | 'Partner Kalipso Customer' | ''                    | ''               | ''        | ''      | '1 000,00'     | ''                        | ''                 | ''                           |
+	And I close all client application windows				

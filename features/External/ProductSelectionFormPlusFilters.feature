@@ -1905,3 +1905,78 @@ Scenario: check clone value in the documents (Profit loss center, Revenue type)
 			| '2' | 'Distribution department' | 'Revenue'      |
 			| '3' | 'Distribution department' | 'Revenue'      |
 		And I close all client application windows
+
+Scenario: check clone value in the documents (Financial movement type, Cash flow center, Project)
+	* Add line and fill Financial movement type, Cash flow center, project
+		And in the table "PaymentList" I click the button named "PaymentListAdd"
+		And I activate "Financial movement type" field in "PaymentList" table
+		And I select current line in "PaymentList" table
+		And I select "Movement type 1" from "Financial movement type" drop-down list by string in "PaymentList" table
+		And I activate "Cash flow center" field in "PaymentList" table
+		And I select "Distribution department" from "Cash flow center" drop-down list by string in "PaymentList" table
+		And I finish line editing in "PaymentList" table
+		And I activate "Project" field in "PaymentList" table
+		And I select "Project 01" from "Project" drop-down list by string in "PaymentList" table
+		And I finish line editing in "PaymentList" table
+		And in the table "PaymentList" I click "Add" button
+		And I finish line editing in "PaymentList" table
+		And in the table "PaymentList" I click "Add" button
+		And I finish line editing in "PaymentList" table
+	* Clone value
+		And I go to line in "PaymentList" table
+			| '#' |
+			| '1' |
+		And in "PaymentList" table I select all lines below the current line
+		And I activate "Financial movement type" field in "PaymentList" table
+		And in the table "PaymentList" I click "Clone value from first row" button
+		And I activate "Cash flow center" field in "PaymentList" table
+		And in the table "PaymentList" I click "Clone value from first row" button
+		And I activate "Project" field in "PaymentList" table
+		And in the table "PaymentList" I click "Clone value from first row" button
+	* Check clone value
+		And "PaymentList" table became equal
+			| '#' | 'Cash flow center'        | 'Financial movement type' | 'Project'    |
+			| '1' | 'Distribution department' | 'Movement type 1'         | 'Project 01' |
+			| '2' | 'Distribution department' | 'Movement type 1'         | 'Project 01' |
+			| '3' | 'Distribution department' | 'Movement type 1'         | 'Project 01' |
+		And I close all client application windows
+
+Scenario: check clone value in the documents (Financial movement type, Cash flow center, Project, Expense type)
+	* Add line and fill Financial movement type, Cash flow center, project
+		And in the table "PaymentList" I click the button named "PaymentListAdd"
+		And I activate "Financial movement type" field in "PaymentList" table
+		And I select current line in "PaymentList" table
+		And I select "Movement type 1" from "Financial movement type" drop-down list by string in "PaymentList" table
+		And I activate "Cash flow center" field in "PaymentList" table
+		And I select "Distribution department" from "Cash flow center" drop-down list by string in "PaymentList" table
+		And I finish line editing in "PaymentList" table
+		And I activate "Project" field in "PaymentList" table
+		And I select "Project 01" from "Project" drop-down list by string in "PaymentList" table
+		And I finish line editing in "PaymentList" table
+		And I activate "Expense type" field in "PaymentList" table
+		And I select "Expense" from "Expense type" drop-down list by string in "PaymentList" table
+		And I finish line editing in "PaymentList" table
+		And in the table "PaymentList" I click "Add" button
+		And I finish line editing in "PaymentList" table
+		And in the table "PaymentList" I click "Add" button
+		And I finish line editing in "PaymentList" table
+	* Clone value
+		And I go to line in "PaymentList" table
+			| '#' |
+			| '1' |
+		And in "PaymentList" table I select all lines below the current line
+		And I activate "Financial movement type" field in "PaymentList" table
+		And in the table "PaymentList" I click "Clone value from first row" button
+		And I activate "Cash flow center" field in "PaymentList" table
+		And in the table "PaymentList" I click "Clone value from first row" button
+		And I activate "Project" field in "PaymentList" table
+		And in the table "PaymentList" I click "Clone value from first row" button
+		And I activate "Expense" field in "PaymentList" table
+		And in the table "PaymentList" I click "Clone value from first row" button
+	* Check clone value
+		And "PaymentList" table became equal
+			| '#' | 'Cash flow center'        | 'Financial movement type' | 'Project'    |'Expense'|
+			| '1' | 'Distribution department' | 'Movement type 1'         | 'Project 01' |'Expense'|
+			| '2' | 'Distribution department' | 'Movement type 1'         | 'Project 01' |'Expense'|
+			| '3' | 'Distribution department' | 'Movement type 1'         | 'Project 01' |'Expense'|
+		And I close all client application windows

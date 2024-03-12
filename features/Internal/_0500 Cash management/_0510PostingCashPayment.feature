@@ -766,3 +766,47 @@ Scenario: _051017 check selection form (Payment by documents) in CP
 				| 'Ferron BP' | 'Company Ferron BP' | 'Vendor Ferron, TRY' | ''                    | '$$PurchaseInvoice018001$$'                      | ''        | '$$PurchaseOrder017001$$'                      | '137 000,00'   |
 				| 'Ferron BP' | 'Company Ferron BP' | 'Vendor Ferron, TRY' | ''                    | '$$PurchaseInvoice29604$$'                       | ''        | ''                                             | '11 900,00'    |
 		And I close all client application windows
+
+Scenario: _050018 check amount when create CP based on PI (partner term - by documents)
+	And I close all client application windows
+	* Select PI
+		Given I open hyperlink "e1cib/list/Document.PurchaseInvoice"
+		And I go to line in "List" table
+			| 'Amount'     | 'Number'                          | 'Partner'   |
+			| '137 000,00' | '$$NumberPurchaseInvoice018001$$' | 'Ferron BP' |
+	* Create Cash payment
+		And I click the button named "FormDocumentCashPaymentGenerateCashPayment"
+	* Check amount (document balance)
+		And "PaymentList" table became equal
+			| '#' | 'Partner'   | 'Payee'             | 'Partner term'       | 'Legal name contract' | 'Basis document'            | 'Project' | 'Order'                   | 'Total amount' | 'Financial movement type' | 'Cash flow center' | 'Planning transaction basis' |
+			| '1' | 'Ferron BP' | 'Company Ferron BP' | 'Vendor Ferron, TRY' | ''                    | '$$PurchaseInvoice018001$$' | ''        | '$$PurchaseOrder017001$$' | '135 980,00'   | ''                        | ''                 | ''                           |
+	And I close all client application windows
+	
+
+Scenario: _050019 check amount when create CP based on PI (partner term - by partner terms)
+	And I close all client application windows
+	* Select two PI
+		Given I open hyperlink "e1cib/list/Document.PurchaseInvoice"
+		And I go to line in "List" table
+			| 'Amount' | 'Legal name' |
+			| '190,00' | 'DFC'        |
+		And I move one line down in "List" table and select line
+	* Create Cash payment
+		And I click the button named "FormDocumentCashPaymentGenerateCashPayment"
+	* Check amount (documents amount )
+		And "PaymentList" table became equal
+			| '#' | 'Partner' | 'Payee' | 'Partner term'                | 'Legal name contract' | 'Basis document' | 'Project' | 'Order' | 'Total amount' | 'Financial movement type' | 'Cash flow center' | 'Planning transaction basis' |
+			| '1' | 'DFC'     | 'DFC'   | 'DFC Vendor by Partner terms' | ''                    | ''               | ''        | ''      | '390,00'       | ''                        | ''                 | ''                           |
+	And I close all client application windows
+	* Select one PI				
+		Given I open hyperlink "e1cib/list/Document.PurchaseInvoice"
+		And I go to line in "List" table
+			| 'Amount' | 'Legal name' |
+			| '190,00' | 'DFC'        |
+	* Create Cash payment
+		And I click the button named "FormDocumentCashPaymentGenerateCashPayment"
+	* Check amount (documents amount )
+		And "PaymentList" table became equal
+			| '#' | 'Partner' | 'Payee' | 'Partner term'                | 'Legal name contract' | 'Basis document' | 'Project' | 'Order' | 'Total amount' | 'Financial movement type' | 'Cash flow center' | 'Planning transaction basis' |
+			| '1' | 'DFC'     | 'DFC'   | 'DFC Vendor by Partner terms' | ''                    | ''               | ''        | ''      | '190,00'       | ''                        | ''                 | ''                           |
+	And I close all client application windows				

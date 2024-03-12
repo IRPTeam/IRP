@@ -267,6 +267,9 @@ Scenario: _0500011 create Cash receipt (independently)
 				| 'Amount'      | 'Company'         | 'Legal name'           | 'Partner'       |
 				| '4 350,00'    | 'Main Company'    | 'Company Ferron BP'    | 'Ferron BP'     |
 			And I click "Select" button
+			And I click choice button of "Order" attribute in "PaymentList" table
+			And I select current line in "List" table
+			And I finish line editing in "PaymentList" table		
 		* Filling in amount in a tabular part
 			And I activate "Total amount" field in "PaymentList" table
 			And I input "100,00" text in "Total amount" field of "PaymentList" table

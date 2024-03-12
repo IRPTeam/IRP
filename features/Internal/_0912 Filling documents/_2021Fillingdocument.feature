@@ -833,12 +833,12 @@ Scenario: _0154101 check filling in and refilling Sales order
 			And the editing text of form attribute named "ItemListTotalTotalAmount" became equal to "1 962,60"
 			And I click "Post and close" button
 			And "List" table contains lines
-				| 'Number'                         | 'Σ'            |
+				| 'Number'                         | 'Amount'            |
 				| '$$NumberSalesOrder0154101$$'    | '1 962,60'     |
 			And Delay 2
 		* Unchecking the cancellation checkbox and check totals	
 			And I go to line in "List" table
-				| 'Number'                         | 'Σ'            |
+				| 'Number'                         | 'Amount'            |
 				| '$$NumberSalesOrder0154101$$'    | '1 962,60'     |
 			And I select current line in "List" table
 			And I go to line in "ItemList" table
@@ -851,7 +851,7 @@ Scenario: _0154101 check filling in and refilling Sales order
 			And the editing text of form attribute named "ItemListTotalTotalAmount" became equal to "2 611,60"
 			And I click "Post and close" button
 			And "List" table contains lines
-				| 'Number'                         | 'Σ'            |
+				| 'Number'                         | 'Amount'            |
 				| '$$NumberSalesOrder0154101$$'    | '2 611,60'     |
 		* Check manual price when quantity in base unit different from quantity
 			And I go to line in "List" table

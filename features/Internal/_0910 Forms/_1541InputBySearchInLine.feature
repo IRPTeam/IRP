@@ -1798,11 +1798,6 @@ Scenario: _01540114 check item input by search in line by code in a document Ban
 		And "PaymentList" table contains lines
 			| 'Financial movement type'    |
 			| 'Movement type 1'            |
-	* Expense type
-		And I select "9" from "Expense type" drop-down list by string in "PaymentList" table
-		And "PaymentList" table contains lines
-			| 'Expense type'    |
-			| 'Expense'         |
 	* Branch
 		And I select from the drop-down list named "Branch" by "3" string
 		Then the form attribute named "Branch" became equal to "Distribution department"

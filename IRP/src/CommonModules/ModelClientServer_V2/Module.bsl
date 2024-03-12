@@ -3265,7 +3265,10 @@ Function ClearByTransactionTypeBankPaymentOptions() Export
 		|PaymentPeriod,
 		|ReceiptingAccount,
 		|ReceiptingBranch,
-		|Project");
+		|Project,
+		|ExpenseType,
+		|ProfitLossCenter,
+		|AdditionalAnalytic");
 EndFunction
 
 Function ClearByTransactionTypeBankPaymentExecute(Options) Export
@@ -3287,7 +3290,10 @@ Function ClearByTransactionTypeBankPaymentExecute(Options) Export
 	Result.Insert("ReceiptingAccount"        , Options.ReceiptingAccount);
 	Result.Insert("ReceiptingBranch"         , Options.ReceiptingBranch);
 	Result.Insert("Project"                  , Options.Project);
-	
+	Result.Insert("ExpenseType"              , Options.ExpenseType);
+	Result.Insert("ProfitLossCenter"         , Options.ProfitLossCenter);
+	Result.Insert("AdditionalAnalytic"       , Options.AdditionalAnalytic);
+		
 	Outgoing_CashTransferOrder = PredefinedValue("Enum.OutgoingPaymentTransactionTypes.CashTransferOrder");
 	Outgoing_CurrencyExchange  = PredefinedValue("Enum.OutgoingPaymentTransactionTypes.CurrencyExchange");
 	Outgoing_PaymentToVendor   = PredefinedValue("Enum.OutgoingPaymentTransactionTypes.PaymentToVendor");
@@ -3298,6 +3304,7 @@ Function ClearByTransactionTypeBankPaymentExecute(Options) Export
 	Outgoing_EmployeeCashAdvance = PredefinedValue("Enum.OutgoingPaymentTransactionTypes.EmployeeCashAdvance");
 	Outgoing_SalaryPayment       = PredefinedValue("Enum.OutgoingPaymentTransactionTypes.SalaryPayment");
 	Outgoing_OtherPartner        = PredefinedValue("Enum.OutgoingPaymentTransactionTypes.OtherPartner");
+	Outgoing_OtherExpense        = PredefinedValue("Enum.OutgoingPaymentTransactionTypes.OtherExpense");
 	
 	// list of properties which not needed clear
 	// PlanningTransactionBasis, BasisDocument, Order - clearing always
@@ -3352,7 +3359,12 @@ Function ClearByTransactionTypeBankPaymentExecute(Options) Export
 	ElsIf Options.TransactionType = Outgoing_SalaryPayment Then
 		StrByType = "
 		|Employee,
-		|PaymentPeriod"; 				
+		|PaymentPeriod"; 
+	ElsIf Options.TransactionType = Outgoing_OtherExpense Then
+		StrByType = "
+		|ExpenseType,
+		|ProfitLossCenter,
+		|AdditionalAnalytic";
 	EndIf;
 	
 	ArrayOfAttributes = New Array();
@@ -3389,12 +3401,17 @@ Function ClearByTransactionTypeBankReceiptOptions() Export
 		|PaymentType,
 		|PaymentTerminal,
 		|BankTerm,
-		|CommissionIsSeparate,
 		|RetailCustomer,
 		|RevenueType,
 		|SendingAccount,
 		|SendingBranch,
-		|Project");
+		|Project,
+		|ProfitLossCenter,
+		|ExpenseType,
+		|AdditionalAnalytic,
+		|CommissionPercent,
+		|Commission,
+		|CommissionFinancialMovementType");		
 EndFunction
 
 Function ClearByTransactionTypeBankReceiptExecute(Options) Export
@@ -3413,13 +3430,18 @@ Function ClearByTransactionTypeBankReceiptExecute(Options) Export
 	Result.Insert("PaymentType"              , Options.PaymentType);
 	Result.Insert("PaymentTerminal"          , Options.PaymentTerminal);
 	Result.Insert("BankTerm"                 , Options.BankTerm);
-	Result.Insert("CommissionIsSeparate"     , Options.CommissionIsSeparate);
 	Result.Insert("RetailCustomer"           , Options.RetailCustomer);
 	Result.Insert("RevenueType"              , Options.RevenueType);
 	Result.Insert("SendingAccount"           , Options.SendingAccount);
 	Result.Insert("SendingBranch"            , Options.SendingBranch);
 	Result.Insert("Project"                  , Options.Project);
-	
+	Result.Insert("ProfitLossCenter"         , Options.ProfitLossCenter);
+	Result.Insert("ExpenseType"              , Options.ExpenseType);
+	Result.Insert("AdditionalAnalytic"       , Options.AdditionalAnalytic);
+	Result.Insert("CommissionPercent"        , Options.CommissionPercent);
+	Result.Insert("Commission"               , Options.Commission);
+	Result.Insert("CommissionFinancialMovementType" , Options.CommissionFinancialMovementType);
+		
 	Incoming_CashTransferOrder   = PredefinedValue("Enum.IncomingPaymentTransactionType.CashTransferOrder");
 	Incoming_CurrencyExchange    = PredefinedValue("Enum.IncomingPaymentTransactionType.CurrencyExchange");
 	Incoming_PaymentFromCustomer = PredefinedValue("Enum.IncomingPaymentTransactionType.PaymentFromCustomer");
@@ -3437,7 +3459,13 @@ Function ClearByTransactionTypeBankReceiptExecute(Options) Export
 	If Options.TransactionType = Incoming_CashTransferOrder Then
 		StrByType = "
 		|SendingAccount,
-		|SendingBranch";
+		|SendingBranch,
+	    |ProfitLossCenter,
+		|ExpenseType,
+		|AdditionalAnalytic,
+		|CommissionPercent,
+		|Commission,
+		|CommissionFinancialMovementType";		
 	ElsIf Options.TransactionType = Incoming_ReceiptByCheque Then
 		StrByType = "";	
 	ElsIf Options.TransactionType = Incoming_CurrencyExchange Then
@@ -3446,7 +3474,13 @@ Function ClearByTransactionTypeBankReceiptExecute(Options) Export
 		|SendingBranch,
 		|TransitAccount, 
 		|CurrencyExchange,
-		|AmountExchange";
+		|AmountExchange,
+		|ProfitLossCenter,
+		|ExpenseType,
+		|AdditionalAnalytic,
+		|CommissionPercent,
+		|Commission,
+		|CommissionFinancialMovementType";		
 	ElsIf Options.TransactionType = Incoming_PaymentFromCustomer 
 		Or Options.TransactionType = Incoming_ReturnFromVendor 
 		Or Options.TransactionType = Incoming_PaymentFromCustomerByPOS Then
@@ -3461,7 +3495,13 @@ Function ClearByTransactionTypeBankReceiptExecute(Options) Export
 			StrByType = StrByType + ", 
 			|PaymentType,
 			|PaymentTerminal,
-			|BankTerm";
+			|BankTerm,
+			|ProfitLossCenter,
+		    |ExpenseType,
+		    |AdditionalAnalytic,
+		    |CommissionPercent,
+		    |Commission,
+		    |CommissionFinancialMovementType";			
 		EndIf;
 		
 		If Options.TransactionType = Incoming_PaymentFromCustomer
@@ -3479,7 +3519,12 @@ Function ClearByTransactionTypeBankReceiptExecute(Options) Export
 	ElsIf Options.TransactionType = Incoming_TransferFromPOS Then
 		StrByType = "
 		|POSAccount,
-		|CommissionIsSeparate";
+		|ProfitLossCenter,
+		|ExpenseType,
+		|AdditionalAnalytic,
+		|CommissionPercent,
+		|Commission,
+		|CommissionFinancialMovementType";		
 	ElsIf Options.TransactionType = Incoming_CustomerAdvance Then
 		StrByType = "
 		|RetailCustomer,
@@ -3900,7 +3945,12 @@ Function CalculatePaymentListCommissionOptions() Export
 EndFunction
 
 Function CalculatePaymentListCommissionExecute(Options) Export
-	Return Options.TotalAmount * Options.CommissionPercent / 100;
+	_CommissionPercent = 0;
+	If ValueIsFilled(Options.CommissionPercent) Then
+		_CommissionPercent = Options.CommissionPercent;
+	EndIf;
+	Return (Options.TotalAmount/(1- _CommissionPercent/100)) - Options.TotalAmount;
+	//Return Options.TotalAmount * Options.CommissionPercent / 100;
 EndFunction
 
 #EndRegion
@@ -4077,7 +4127,13 @@ Function CalculateCommissionPercentByAmountExecute(Options) Export
 		Return 0;
 	EndIf;
 	
-	Return 100 * Options.Commission / Options.TotalAmount;
+	_Commission = 0;
+	If ValueIsFilled(Options.Commission) Then
+		_Commission = Options.Commission;
+	EndIf;
+	
+	Return _Commission/(Options.TotalAmount + _Commission) * 100;
+//	Return 100 * Options.Commission / Options.TotalAmount;
 EndFunction
 
 #EndRegion

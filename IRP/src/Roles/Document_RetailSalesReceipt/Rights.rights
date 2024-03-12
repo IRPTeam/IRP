@@ -4,10 +4,20 @@
 	<setForAttributesByDefault>true</setForAttributesByDefault>
 	<independentRightsOfChildObjects>false</independentRightsOfChildObjects>
 	<object>
+		<name>Document.RetailSalesReceipt.Command.PrintCopyReceipt</name>
+		<right>
+			<name>View</name>
+			<value>true</value>
+		</right>
+	</object>
+	<object>
 		<name>Document.RetailSalesReceipt</name>
 		<right>
-			<name>EditDataHistoryVersionComment</name>
+			<name>Read</name>
 			<value>true</value>
+			<restrictionByCondition>
+				<condition>#CheckDocumentAccess()</condition>
+			</restrictionByCondition>
 		</right>
 		<right>
 			<name>Insert</name>
@@ -24,22 +34,15 @@
 			</restrictionByCondition>
 		</right>
 		<right>
-			<name>Read</name>
-			<value>true</value>
-			<restrictionByCondition>
-				<condition>#CheckDocumentAccess()</condition>
-			</restrictionByCondition>
-		</right>
-		<right>
-			<name>InputByString</name>
+			<name>Posting</name>
 			<value>true</value>
 		</right>
 		<right>
-			<name>InteractivePosting</name>
+			<name>UndoPosting</name>
 			<value>true</value>
 		</right>
 		<right>
-			<name>InteractiveChangeOfPosted</name>
+			<name>View</name>
 			<value>true</value>
 		</right>
 		<right>
@@ -47,11 +50,7 @@
 			<value>true</value>
 		</right>
 		<right>
-			<name>UpdateDataHistoryOfMissingData</name>
-			<value>true</value>
-		</right>
-		<right>
-			<name>UndoPosting</name>
+			<name>Edit</name>
 			<value>true</value>
 		</right>
 		<right>
@@ -63,19 +62,7 @@
 			<value>true</value>
 		</right>
 		<right>
-			<name>SwitchToDataHistoryVersion</name>
-			<value>true</value>
-		</right>
-		<right>
-			<name>InteractiveUndoPosting</name>
-			<value>true</value>
-		</right>
-		<right>
-			<name>View</name>
-			<value>true</value>
-		</right>
-		<right>
-			<name>UpdateDataHistoryVersionComment</name>
+			<name>InteractivePosting</name>
 			<value>true</value>
 		</right>
 		<right>
@@ -83,11 +70,19 @@
 			<value>true</value>
 		</right>
 		<right>
-			<name>Posting</name>
+			<name>InteractiveUndoPosting</name>
 			<value>true</value>
 		</right>
 		<right>
-			<name>ViewDataHistory</name>
+			<name>InteractiveChangeOfPosted</name>
+			<value>true</value>
+		</right>
+		<right>
+			<name>InputByString</name>
+			<value>true</value>
+		</right>
+		<right>
+			<name>ReadDataHistory</name>
 			<value>true</value>
 		</right>
 		<right>
@@ -99,20 +94,42 @@
 			<value>true</value>
 		</right>
 		<right>
+			<name>UpdateDataHistoryOfMissingData</name>
+			<value>true</value>
+		</right>
+		<right>
 			<name>UpdateDataHistorySettings</name>
 			<value>true</value>
 		</right>
 		<right>
-			<name>Edit</name>
+			<name>UpdateDataHistoryVersionComment</name>
 			<value>true</value>
 		</right>
 		<right>
-			<name>ReadDataHistory</name>
+			<name>ViewDataHistory</name>
+			<value>true</value>
+		</right>
+		<right>
+			<name>EditDataHistoryVersionComment</name>
+			<value>true</value>
+		</right>
+		<right>
+			<name>SwitchToDataHistoryVersion</name>
 			<value>true</value>
 		</right>
 	</object>
 	<object>
-		<name>Document.RetailSalesReceipt.Command.PrintCopyReceipt</name>
+		<name>Document.JournalEntry</name>
+		<right>
+			<name>Read</name>
+			<value>true</value>
+			<restrictionByCondition>
+				<condition>WHERE FALSE</condition>
+			</restrictionByCondition>
+		</right>
+	</object>
+	<object>
+		<name>Document.RetailSalesReceipt.Command.Generate</name>
 		<right>
 			<name>View</name>
 			<value>true</value>
@@ -120,13 +137,6 @@
 	</object>
 	<object>
 		<name>Document.RetailSalesReceipt.Command.PrintReceipt</name>
-		<right>
-			<name>View</name>
-			<value>true</value>
-		</right>
-	</object>
-	<object>
-		<name>Document.RetailSalesReceipt.Command.Generate</name>
 		<right>
 			<name>View</name>
 			<value>true</value>

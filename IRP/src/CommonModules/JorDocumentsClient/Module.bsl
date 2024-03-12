@@ -234,7 +234,11 @@ Function GetDocQueryText(QueryParameters, Parameters, TableName,
 	
 	If Parameters.Property("Type") Then
 		QueryParameters.Insert("Type", Parameters.Type);
+		QueryParameters.Insert("Type_PurchaseInvoice", Type("DocumentRef.PurchaseInvoice"));
+		QueryParameters.Insert("Type_SalesInvoice"   , Type("DocumentRef.SalesInvoice"));
 		ArrayOfConditions.Add(" AND Obj.Type = &Type");
+		ArrayOfConditions.Add(" AND Obj.Type <> &Type_PurchaseInvoice");
+		ArrayOfConditions.Add(" AND Obj.Type <> &Type_SalesInvoice");
 	Else
 		QueryParameters.Insert("Type_PurchaseOrder", Type("DocumentRef.PurchaseOrder"));
 		QueryParameters.Insert("Type_SalesOrder"   , Type("DocumentRef.SalesOrder"));
@@ -350,7 +354,9 @@ EndFunction
 Function GetDocWithBalanceQueryText()
 	QueryText_DocWithBalance = 
 	"SELECT ALLOWED
-	|	CustomersTransactions.Basis AS Ref,
+	|	CASE WHEN CustomersTransactions.Basis.Ref IS NULL THEN 
+	|		CustomersTransactions.Order 
+	|	ELSE CustomersTransactions.Basis END AS Ref,
 	|	CustomersTransactions.Company AS Company,
 	|	CustomersTransactions.Partner AS Partner,
 	|	CustomersTransactions.LegalName AS LegalName,
@@ -369,7 +375,7 @@ Function GetDocWithBalanceQueryText()
 	|FROM
 	|	AccumulationRegister.R2021B_CustomersTransactions.Balance(&Period,
 	|		CurrencyMovementType = VALUE(ChartOfCharacteristicTypes.CurrencyMovementType.SettlementCurrency)
-	|	AND (Basis, Company, Partner, LegalName, Agreement, Currency) IN
+	|	AND ((Basis, Company, Partner, LegalName, Agreement, Currency) IN
 	|		(SELECT
 	|			Doc.Ref,
 	|			Doc.Company,
@@ -378,7 +384,18 @@ Function GetDocWithBalanceQueryText()
 	|			Doc.Agreement,
 	|			Doc.Currency
 	|		FROM
-	|			Doc AS Doc)) AS CustomersTransactions
+	|			Doc AS Doc)
+	|		OR
+	|		(Order, Company, Partner, LegalName, Agreement, Currency) IN
+	|		(SELECT
+	|			Doc.Ref,
+	|			Doc.Company,
+	|			Doc.Partner,
+	|			Doc.LegalName,
+	|			Doc.Agreement,
+	|			Doc.Currency
+	|		FROM
+	|			Doc AS Doc))) AS CustomersTransactions
 	|WHERE
 	|	CASE
 	|		WHEN &IsReturnTransactionType

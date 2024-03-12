@@ -96,6 +96,7 @@ Scenario: 950400 preparation
 		And I close all client application windows
 	* Load SO and change it date
 		When Create document SalesOrder objects
+		When Data preparation for LockDataModificationReasons (LockDataModificationReasons + SO)
 	* Load documents
 		When Create document PurchaseOrder objects
 		When Create document PurchaseOrder objects (check movements, GR before PI, Use receipt sheduling)

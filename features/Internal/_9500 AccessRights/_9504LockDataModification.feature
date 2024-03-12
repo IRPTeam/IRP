@@ -96,6 +96,7 @@ Scenario: 950400 preparation
 		And I close all client application windows
 	* Load SO and change it date
 		When Create document SalesOrder objects
+		When Data preparation for LockDataModificationReasons (LockDataModificationReasons + SO)
 	* Load documents
 		When Create document PurchaseOrder objects
 		When Create document PurchaseOrder objects (check movements, GR before PI, Use receipt sheduling)
@@ -249,7 +250,7 @@ Scenario: 950405 create reasons for documents with different comparison type
 			And "List" table contains lines
 				| 'Number'     |
 				| '1'          |
-				| '2'          |
+				| '108'        |
 			And I close all client application windows			
 	* Check rules (in)
 		* Modification
@@ -297,7 +298,7 @@ Scenario: 950405 create reasons for documents with different comparison type
 			And "List" table contains lines
 				| 'Number'     |
 				| '1'          |
-				| '2'          |
+				| '108'        |
 			And I close all client application windows	
 	* Delete rules
 		Given I open hyperlink 'e1cib/list/Catalog.LockDataModificationReasons'
@@ -606,7 +607,7 @@ Scenario: 950407 create rules for accumulation register
 			Given I open hyperlink 'e1cib/list/Document.SalesOrder'
 			And I go to line in "List" table
 				| 'Number'     |
-				| '2'          |
+				| '108'        |
 			And in the table "List" I click the button named "ListContextMenuUndoPosting"
 			Then "1C:Enterprise" window is opened
 			And I click "OK" button			
@@ -627,7 +628,7 @@ Scenario: 950407 create rules for accumulation register
 			Given I open hyperlink 'e1cib/list/Document.SalesOrder'
 			And I go to line in "List" table
 				| 'Number'     |
-				| '2'          |
+				| '108'        |
 			And in the table "List" I click the button named "ListContextMenuSetDeletionMark"
 			Then "1C:Enterprise" window is opened
 			And I click "Yes" button
@@ -640,7 +641,7 @@ Scenario: 950407 create rules for accumulation register
 			Given I open hyperlink 'e1cib/list/Document.SalesOrder'
 			And I go to line in "List" table
 				| 'Number'     |
-				| '2'          |
+				| '108'        |
 			And in the table "List" I click the button named "ListContextMenuPost"
 			Then user message window does not contain messages
 			And I close all client application windows
@@ -697,6 +698,43 @@ Scenario: 950407 create rules for accumulation register
 		And I click "Yes" button
 		And I close all client application windows	
 
+// Scenario: 950408 create rules for accumulation register (two rules for one register)
+// 	And I close all client application windows
+// 	* Create rule for AccumulationRegister.R4010B_ActualStocks
+// 		Given I open hyperlink 'e1cib/list/Catalog.LockDataModificationReasons'
+// 		And I click the button named "FormCreate"
+// 		And I input "lock accumulation register (two rules for one register)" text in "ENG" field
+// 		And I set checkbox "For all users"
+// 		* First rule
+// 			And in the table "RuleList" I click the button named "RuleListAdd"
+// 			And I select "R4050 Stock inventory" exact value from "Type" drop-down list in "RuleList" table
+// 			And I move to the next attribute
+// 			And I select "Store" exact value from the drop-down list named "RuleListAttribute" in "RuleList" table
+// 			And I move to the next attribute
+// 			And I select "=" exact value from the drop-down list named "RuleListComparisonType" in "RuleList" table
+// 			And I move to the next attribute
+// 			And I click choice button of the attribute named "RuleListValue" in "RuleList" table
+// 			And I go to line in "List" table
+// 				| 'Description'    |
+// 				| 'Store 01'       |
+// 			And I select current line in "List" table
+// 			And I finish line editing in "RuleList" table
+// 		* Second rule
+// 			And in the table "RuleList" I click the button named "RuleListAdd"
+// 			And I select "R4050 Stock inventory" exact value from "Type" drop-down list in "RuleList" table
+// 			And I move to the next attribute
+// 			And I select "Period" exact value from the drop-down list named "RuleListAttribute" in "RuleList" table
+// 			And I move to the next attribute
+// 			And I select "<" exact value from the drop-down list named "RuleListComparisonType" in "RuleList" table
+// 			And I move to the next attribute
+// 			Then "lock accumulation register (two rules for one register) (Lock data modification reason)" window is opened
+// 			And I activate field named "RuleListValue" in "RuleList" table
+// 			And I select current line in "RuleList" table
+// 			And I input "20.02.2024 00:00:00" text in the field named "RuleListValue" of "RuleList" table
+// 			And I finish line editing in "RuleList" table
+// 			And I click "Save and close" button
+// 	* Check rules (=)
+
 
 Scenario: 950409 create rules for information register (with recorder)
 	* Preparation
@@ -712,7 +750,7 @@ Scenario: 950409 create rules for information register (with recorder)
 		Given I open hyperlink 'e1cib/list/Document.SalesOrder'
 		If "List" table does not contain lines Then
 				| "Number"     |
-				| "2"          |
+				| "108"        |
 				And I go to line in "List" table
 					| 'Number'      |
 					| '1'           |
@@ -752,7 +790,7 @@ Scenario: 950409 create rules for information register (with recorder)
 			Given I open hyperlink 'e1cib/list/Document.SalesOrder'
 			And I go to line in "List" table
 				| 'Number'     |
-				| '2'          |
+				| '108'        |
 			And in the table "List" I click the button named "ListContextMenuUndoPosting"
 			Then "1C:Enterprise" window is opened
 			And I click "OK" button			
@@ -773,7 +811,7 @@ Scenario: 950409 create rules for information register (with recorder)
 			Given I open hyperlink 'e1cib/list/Document.SalesOrder'
 			And I go to line in "List" table
 				| 'Number'     |
-				| '2'          |
+				| '108'        |
 			And in the table "List" I click the button named "ListContextMenuSetDeletionMark"
 			Then "1C:Enterprise" window is opened
 			And I click "Yes" button
@@ -786,7 +824,7 @@ Scenario: 950409 create rules for information register (with recorder)
 			Given I open hyperlink 'e1cib/list/Document.SalesOrder'
 			And I go to line in "List" table
 				| 'Number'     |
-				| '2'          |
+				| '108'        |
 			And in the table "List" I click the button named "ListContextMenuPost"
 			Then user message window does not contain messages
 			And I close all client application windows
@@ -843,11 +881,82 @@ Scenario: 950409 create rules for information register (with recorder)
 			And I click "Yes" button
 			And I close all client application windows	
 
+Scenario: 950410 create rules for accumulation and information registers (9 rules for 3 register)
+	And I close all client application windows
+	* Preparation
+		Given I open hyperlink "e1cib/list/Catalog.LockDataModificationReasons"
+		And I go to line in "List" table
+			| 'Advanced mode' | 'Description'                                                   | 'For all users' | 'One rule' |
+			| 'No'            | '3 rules for 3 register (Free stock, Price, Stock reservation)' | 'Yes'           | 'No'       |
+		And I select current line in "List" table
+		And I remove checkbox "Disable rule"
+		And I click "Save and close" button
+	* Check rule - accumulations registers
+		Given I open hyperlink "e1cib/list/Document.SalesOrder"				
+		And I go to line in "List" table
+			| 'Amount' | 'Date'                | 'Number' |
+			| '920,00' | '30.12.2023 00:00:00' | '107'    |
+		And I select current line in "List" table
+		And I click "Post" button
+		Then "1C:Enterprise" window is opened
+		And I click the button named "OK"
+		Then there are lines in TestClient message log
+			|'Data lock reasons:\n3 rules for 3 register (Free stock, Price, Stock reservation)'|
+	* Change item in the SO and check rule
+		And I go to line in "ItemList" table
+			| 'Item'  | 'Item key' |
+			| 'Dress' | 'XS/Blue'  |
+		And I activate "Item key" field in "ItemList" table
+		And I select current line in "ItemList" table
+		And I select "L/Green" from "Item key" drop-down list by string in "ItemList" table
+		And I finish line editing in "ItemList" table
+		And I activate field named "ItemListStore" in "ItemList" table
+		And I select current line in "ItemList" table
+		And I select "Store 02" by string from the drop-down list named "ItemListStore" in "ItemList" table
+		And I finish line editing in "ItemList" table
+		And I click "Post" button
+		Then "1C:Enterprise" window is opened
+		And I click the button named "OK"
+		Then there are lines in TestClient message log
+			|'Data lock reasons:\n3 rules for 3 register (Free stock, Price, Stock reservation)'|
+	* Change reserve method and check rule
+		And I activate "Procurement method" field in "ItemList" table
+		And I select current line in "ItemList" table
+		And I select "No reserve" exact value from "Procurement method" drop-down list in "ItemList" table
+		And I finish line editing in "ItemList" table
+		And I click "Post" button
+		Then user message window does not contain messages
+	* Check rule - information registers
+		Given I open hyperlink "e1cib/list/Document.PriceList"		
+		And I go to line in "List" table
+			| 'Date'                | 'Number' | 'Price list type'    | 'Price type'        |
+			| '01.11.2018 12:32:22' | '2'      | 'Price by item keys' | 'Basic Price Types' |
+		And I select current line in "List" table
+		And I go to line in "ItemKeyList" table
+			| 'Item'  | 'Item key' | 'Price'  |
+			| 'Dress' | 'M/White'  | '520,00' |
+		And I activate "Price" field in "ItemKeyList" table
+		And I select current line in "ItemKeyList" table
+		And I input "510,00" text in "Price" field of "ItemKeyList" table
+		And I finish line editing in "ItemKeyList" table
+		And I click "Post" button
+		Then "1C:Enterprise" window is opened
+		And I click the button named "OK"
+		Then there are lines in TestClient message log
+			|'Data lock reasons:\n3 rules for 3 register (Free stock, Price, Stock reservation)'|
+	And I close all client application windows
 
 		
 
 Scenario: 950411 create rules for catalog (<)
 	Given I open hyperlink 'e1cib/list/Catalog.LockDataModificationReasons'
+	* Preparation
+		And I go to line in "List" table
+			| 'Description'                                                   |
+			| '3 rules for 3 register (Free stock, Price, Stock reservation)' |
+		And I select current line in "List" table
+		And I set checkbox "Disable rule"
+		And I click "Save and close" button
 	* Create rule
 		And I click the button named "FormCreate"
 		And I input "lock catalog <" text in "ENG" field
@@ -1920,7 +2029,12 @@ Scenario: 950430 create rules for attribute from extension
 			And I select current line in "List" table
 			And I click "Save and close" button
 			Then user message window does not contain messages
-			
+
+ 
+
+
+
+
 Scenario: 950435 check the priorities of a simple and advanced data locking rule
 	And I close all client application windows
 	* Create simple lock data reason

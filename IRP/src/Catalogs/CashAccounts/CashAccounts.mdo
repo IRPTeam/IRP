@@ -257,18 +257,18 @@
   <choiceHistoryOnInput>DontUse</choiceHistoryOnInput>
  </attributes>
  <attributes uuid="cea7e428-a4ce-4039-ab22-4d65dbae45dc">
-  <name>CommissionIsSeparate</name>
+  <name>DELETE_CommissionIsSeparate</name>
   <synonym>
    <key>en</key>
-   <value>Commission is separate</value>
+   <value>DELETE commission is separate</value>
   </synonym>
   <synonym>
    <key>ru</key>
-   <value>Комиссия отдельно</value>
+   <value>DELETE комиссия отдельно</value>
   </synonym>
   <synonym>
    <key>tr</key>
-   <value>Komisyon ayrı</value>
+   <value>DELETE komisyon ayrıdır</value>
   </synonym>
   <type>
    <types>Boolean</types>

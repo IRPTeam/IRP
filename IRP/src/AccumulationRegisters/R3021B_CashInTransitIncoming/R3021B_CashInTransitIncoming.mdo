@@ -45,27 +45,6 @@
   <maxValue xsi:type="core:UndefinedValue"/>
   <fullTextSearch>Use</fullTextSearch>
  </resources>
- <resources uuid="36a7dd6f-79d1-48d7-a97e-a7fc6feb6b21">
-  <name>Commission</name>
-  <synonym>
-   <key>en</key>
-   <value>Commission</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Сумма комиссии</value>
-  </synonym>
-  <synonym>
-   <key>tr</key>
-   <value>Komisyon</value>
-  </synonym>
-  <type>
-   <types>DefinedType.typeAmount</types>
-  </type>
-  <minValue xsi:type="core:UndefinedValue"/>
-  <maxValue xsi:type="core:UndefinedValue"/>
-  <fullTextSearch>Use</fullTextSearch>
- </resources>
  <attributes uuid="ce3889e5-ccb4-493f-a9e5-dad91d027cf5">
   <name>DeferredCalculation</name>
   <synonym>

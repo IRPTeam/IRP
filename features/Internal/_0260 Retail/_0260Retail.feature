@@ -317,7 +317,7 @@ Scenario: _0260107 create RSR and check Consolidated retail sales filling
 		And I save the window as "$$ConsolidatedRetailSales2$$" 	
 		Given I open hyperlink "e1cib/list/Document.RetailSalesReceipt"
 		And I go to line in "List" table
-			| 'Σ'           |
+			| 'Amount'           |
 			| '1 590,00'    |
 		And I select current line in "List" table
 		Then the form attribute named "ConsolidatedRetailSales" became equal to "$$ConsolidatedRetailSales2$$"
@@ -358,7 +358,7 @@ Scenario: _0260111 create RRR day to day and check Consolidated retail sales fil
 	* Select RSR and create first RRR (card)
 		Given I open hyperlink "e1cib/list/Document.RetailSalesReceipt"
 		And I go to line in "List" table
-			| 'Σ'           |
+			| 'Amount'           |
 			| '1 590,00'    |
 		And I click "Sales return" button
 		And I expand current line in "BasisesTree" table
@@ -418,7 +418,7 @@ Scenario: _0260111 create RRR day to day and check Consolidated retail sales fil
 	* Select RSR and create second RRR (cash)
 		Given I open hyperlink "e1cib/list/Document.RetailSalesReceipt"
 		And I go to line in "List" table
-			| 'Σ'           |
+			| 'Amount'           |
 			| '5 440,00'    |
 		And I click "Sales return" button
 		Then "Add linked document rows" window is opened
@@ -441,7 +441,7 @@ Scenario: _0260111 create RRR day to day and check Consolidated retail sales fil
 	* Select RSR and create third RRR (cash)	
 		Given I open hyperlink "e1cib/list/Document.RetailSalesReceipt"
 		And I go to line in "List" table
-			| 'Σ'           |
+			| 'Amount'           |
 			| '5 440,00'    |
 		And I click "Sales return" button
 		Then "Add linked document rows" window is opened
@@ -469,7 +469,7 @@ Scenario: _0260115 create RRR prior periods and check Consolidated retail sales 
 	* Select RSR and create RRR
 		Given I open hyperlink "e1cib/list/Document.RetailSalesReceipt"
 		And I go to line in "List" table
-			| 'Σ'           |
+			| 'Amount'           |
 			| '1 040,00'    |
 		And I click "Sales return" button
 		And I click "Ok" button
@@ -607,7 +607,7 @@ Scenario: _0260132 create RSR (payment by bank credit)
 	* Check RSR
 		Given I open hyperlink "e1cib/list/Document.RetailSalesReceipt"
 		And I go to line in "List" table
-			| 'Σ'           |
+			| 'Amount'           |
 			| '5 750,00'    |
 		And I select current line in "List" table
 		And I move to "Payments" tab
@@ -719,7 +719,7 @@ Scenario: _0260133 create advance payment from POS (Cash, Card)
 	* Check RSR
 		Given I open hyperlink "e1cib/list/Document.RetailSalesReceipt"
 		And I go to line in "List" table
-			| 'Σ'         |
+			| 'Amount'         |
 			| '520,00'    |
 		And I select current line in "List" table
 		And I move to "Payments" tab	
@@ -1335,7 +1335,7 @@ Scenario: _0260145 check block RSR form if Consolidated retail sales is closed
 	* Select RSR
 		Given I open hyperlink "e1cib/list/Document.RetailSalesReceipt"
 		And I go to line in "List" table
-			| 'Σ'           |
+			| 'Amount'           |
 			| '1 590,00'    |
 		And I select current line in "List" table 
 	* Check form
@@ -1382,7 +1382,7 @@ Scenario: _0260146 try unpost RSR if Consolidated retail sales is closed
 	* Select RSR
 		Given I open hyperlink "e1cib/list/Document.RetailSalesReceipt"
 		And I go to line in "List" table
-			| 'Σ'           |
+			| 'Amount'           |
 			| '1 590,00'    |
 	* Try unpost
 		And in the table "List" I click the button named "ListContextMenuUndoPosting"
@@ -1397,7 +1397,7 @@ Scenario: _0260147 try mark for deletion RSR if Consolidated retail sales is clo
 	* Select RSR
 		Given I open hyperlink "e1cib/list/Document.RetailSalesReceipt"
 		And I go to line in "List" table
-			| 'Σ'           |
+			| 'Amount'           |
 			| '1 590,00'    |
 	* Try mark for deletion
 		And in the table "List" I click the button named "ListContextMenuSetDeletionMark"
@@ -1414,7 +1414,7 @@ Scenario: _0260148 post RSR if Consolidated retail sales is closed
 	* Select RSR
 		Given I open hyperlink "e1cib/list/Document.RetailSalesReceipt"
 		And I go to line in "List" table
-			| 'Σ'           |
+			| 'Amount'           |
 			| '1 590,00'    |
 	* Post
 		And in the table "List" I click the button named "ListContextMenuPost"
@@ -1528,7 +1528,7 @@ Scenario: _0260160 check RSR changing if Consolidated retail sales is unpost
 		* Select RSR
 			Given I open hyperlink "e1cib/list/Document.RetailSalesReceipt"
 			And I go to line in "List" table
-				| 'Σ'            |
+				| 'Amount'            |
 				| '1 590,00'     |
 			And I select current line in "List" table 
 		* Header	
@@ -1617,7 +1617,7 @@ Scenario: _0260165 check RSR unpost and deletion mark if Consolidated retail sal
 	* Select RSR
 		Given I open hyperlink "e1cib/list/Document.RetailSalesReceipt"
 		And I go to line in "List" table
-			| 'Σ'           |
+			| 'Amount'           |
 			| '1 590,00'    |
 	* Unpost
 		And in the table "List" I click the button named "ListContextMenuUndoPosting"
@@ -1629,7 +1629,7 @@ Scenario: _0260166 check RSR deletion mark if Consolidated retail sales is unpos
 	* Select RSR
 		Given I open hyperlink "e1cib/list/Document.RetailSalesReceipt"
 		And I go to line in "List" table
-			| 'Σ'           |
+			| 'Amount'           |
 			| '1 590,00'    |
 	* Unpost
 		And in the table "List" I click the button named "ListContextMenuSetDeletionMark"

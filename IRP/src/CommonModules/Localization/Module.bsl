@@ -2442,11 +2442,6 @@ Strings.Insert("BankPayment_DR_R1020B_AdvancesToVendors_R1021B_VendorsTransactio
 		|ru='BankPayment DR (R1020B_AdvancesToVendors R1021B_VendorsTransactions) CR (R3010B_CashOnHand)';
 		|tr='BankaÖdeme DR (R1020B_TedarikçiAvansları R1021B_Tedarikçiİşlemleri) CR (R3010B_EldekiNakit)'", Lang)); 
 
-Strings.Insert("BankPayment_DR_R5022T_Expenses_CR_R3010B_CashOnHand",
-	NStr("en='BankPayment DR (R5022T_Expenses) CR (R3010B_CashOnHand)';
-		|ru='BankPayment DR (R5022T_Expenses) CR (R3010B_CashOnHand)';
-		|tr='BankPayment DR (R5022T_Giderler) CR (R3010B_EldekiNakit)'", Lang));
-
 Strings.Insert("BankPayment_DR_R1021B_VendorsTransactions_CR_R1020B_AdvancesToVendors",
 	NStr("en='BankPayment DR (R1021B_VendorsTransactions) CR (R1020B_AdvancesToVendors)';
 		|ru='BankPayment Дебет (R1021B_VendorsTransactions) Кредит (R1020B_AdvancesToVendors)';

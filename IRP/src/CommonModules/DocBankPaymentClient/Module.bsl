@@ -503,14 +503,6 @@ EndProcedure
 
 #EndRegion
 
-#Region COMMISSION
-
-Procedure PaymentListCommissionOnChange(Object, Form, Item, CurrentData = Undefined) Export
-	ViewClient_V2.PaymentListCommissionOnChange(Object, Form, CurrentData);
-EndProcedure
-
-#EndRegion
-
 #Region PAYMENT_TYPE
 
 Procedure PaymentListPaymentTypeOnChange(Object, Form, Item, CurrentData = Undefined) Export
@@ -523,14 +515,6 @@ EndProcedure
 
 Procedure PaymentListBankTermOnChange(Object, Form, Item, CurrentData = Undefined) Export
 	ViewClient_V2.PaymentListBankTermOnChange(Object, Form, CurrentData);
-EndProcedure
-
-#EndRegion
-
-#Region COMMISSION_PERCENT
-
-Procedure PaymentListCommissionPercentOnChange(Object, Form, Item, CurrentData = Undefined) Export
-	ViewClient_V2.PaymentListCommissionPercentOnChange(Object, Form, CurrentData);
 EndProcedure
 
 #EndRegion

@@ -629,18 +629,18 @@
    <fullTextSearch>Use</fullTextSearch>
   </attributes>
   <attributes uuid="3e30d265-e436-42f7-8417-83e626bbb7ec">
-   <name>Commission</name>
+   <name>DELETE_Commission</name>
    <synonym>
     <key>en</key>
-    <value>Commission</value>
+    <value>DELETE commission</value>
    </synonym>
    <synonym>
     <key>ru</key>
-    <value>Сумма комиссии</value>
+    <value>УДАЛИТЬ комиссию</value>
    </synonym>
    <synonym>
     <key>tr</key>
-    <value>Komisyon</value>
+    <value>SIL KOMİSYON</value>
    </synonym>
    <type>
     <types>DefinedType.typeAmount</types>
@@ -875,18 +875,18 @@
    <fullTextSearch>Use</fullTextSearch>
   </attributes>
   <attributes uuid="7785e464-9266-4de3-8464-8ff89619a7d3">
-   <name>CommissionPercent</name>
+   <name>DELETE_CommissionPercent</name>
    <synonym>
     <key>en</key>
-    <value>Commission percent</value>
+    <value>DELETE commission percent</value>
    </synonym>
    <synonym>
     <key>ru</key>
-    <value>Процент комиссии</value>
+    <value>УДАЛИТЬ процент комиссии</value>
    </synonym>
    <synonym>
     <key>tr</key>
-    <value>Komisyon oranı</value>
+    <value>SIL KOMİSYON yüzdesi</value>
    </synonym>
    <type>
     <types>Number</types>

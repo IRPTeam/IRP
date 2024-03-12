@@ -750,7 +750,7 @@ Scenario: 950409 create rules for information register (with recorder)
 		Given I open hyperlink 'e1cib/list/Document.SalesOrder'
 		If "List" table does not contain lines Then
 				| "Number"     |
-				| "2"          |
+				| "108"        |
 				And I go to line in "List" table
 					| 'Number'      |
 					| '1'           |
@@ -790,7 +790,7 @@ Scenario: 950409 create rules for information register (with recorder)
 			Given I open hyperlink 'e1cib/list/Document.SalesOrder'
 			And I go to line in "List" table
 				| 'Number'     |
-				| '2'          |
+				| '108'        |
 			And in the table "List" I click the button named "ListContextMenuUndoPosting"
 			Then "1C:Enterprise" window is opened
 			And I click "OK" button			
@@ -811,7 +811,7 @@ Scenario: 950409 create rules for information register (with recorder)
 			Given I open hyperlink 'e1cib/list/Document.SalesOrder'
 			And I go to line in "List" table
 				| 'Number'     |
-				| '2'          |
+				| '108'        |
 			And in the table "List" I click the button named "ListContextMenuSetDeletionMark"
 			Then "1C:Enterprise" window is opened
 			And I click "Yes" button
@@ -824,7 +824,7 @@ Scenario: 950409 create rules for information register (with recorder)
 			Given I open hyperlink 'e1cib/list/Document.SalesOrder'
 			And I go to line in "List" table
 				| 'Number'     |
-				| '2'          |
+				| '108'        |
 			And in the table "List" I click the button named "ListContextMenuPost"
 			Then user message window does not contain messages
 			And I close all client application windows

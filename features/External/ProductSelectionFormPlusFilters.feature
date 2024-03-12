@@ -1971,12 +1971,12 @@ Scenario: check clone value in the documents (Financial movement type, Cash flow
 		And in the table "PaymentList" I click "Clone value from first row" button
 		And I activate "Project" field in "PaymentList" table
 		And in the table "PaymentList" I click "Clone value from first row" button
-		And I activate "Expense" field in "PaymentList" table
+		And I activate "Expense type" field in "PaymentList" table
 		And in the table "PaymentList" I click "Clone value from first row" button
 	* Check clone value
 		And "PaymentList" table became equal
-			| '#' | 'Cash flow center'        | 'Financial movement type' | 'Project'    |'Expense'|
-			| '1' | 'Distribution department' | 'Movement type 1'         | 'Project 01' |'Expense'|
-			| '2' | 'Distribution department' | 'Movement type 1'         | 'Project 01' |'Expense'|
-			| '3' | 'Distribution department' | 'Movement type 1'         | 'Project 01' |'Expense'|
+			| '#' | 'Cash flow center'        | 'Financial movement type' | 'Project'    | 'Expense type' |
+			| '1' | 'Distribution department' | 'Movement type 1'         | 'Project 01' | 'Expense'      |
+			| '2' | 'Distribution department' | 'Movement type 1'         | 'Project 01' | 'Expense'      |
+			| '3' | 'Distribution department' | 'Movement type 1'         | 'Project 01' | 'Expense'      |
 		And I close all client application windows

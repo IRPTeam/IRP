@@ -57,7 +57,7 @@ Scenario: _0154000 preparation
 		When Create catalog PaymentTerminals objects
 		When Create catalog RetailCustomers objects
 		When Create catalog SerialLotNumbers objects
-		When Create catalog PaymentTerminals objects
+		When Create catalog Projects objects
 		When Create catalog RetailCustomers objects
 		When Create catalog BankTerms objects
 		When Create catalog SpecialOfferRules objects (Test)
@@ -1512,7 +1512,46 @@ Scenario: _012039 clone value in the StockAdjustmentAsSurplus
 		And I click "Create" button
 	* Check clone value
 		When check clone value in the documents (Profit loss center, Revenue type)
-		
+
+Scenario: _012040 clone value in the BankPayment
+	And I close all client application windows
+	* Open BankPayment
+		Given I open hyperlink "e1cib/list/Document.BankPayment"
+		And I click "Create" button
+	* Check clone value
+		When check clone value in the documents (Financial movement type, Cash flow center, Project)
+
+Scenario: _012041 clone value in the CashPayment
+	And I close all client application windows
+	* Open CashPayment
+		Given I open hyperlink "e1cib/list/Document.CashPayment"
+		And I click "Create" button
+	* Check clone value
+		When check clone value in the documents (Financial movement type, Cash flow center, Project)
+
+Scenario: _012042 clone value in the CashReceipt
+	And I close all client application windows
+	* Open CashReceipt
+		Given I open hyperlink "e1cib/list/Document.CashReceipt"
+		And I click "Create" button
+	* Check clone value
+		When check clone value in the documents (Financial movement type, Cash flow center, Project)
+
+Scenario: _012043 clone value in the BankReceipt
+	And I close all client application windows
+	* Open BankReceipt
+		Given I open hyperlink "e1cib/list/Document.BankReceipt"
+		And I click "Create" button
+	* Check clone value
+		When check clone value in the documents (Financial movement type, Cash flow center, Project)
+
+Scenario: _012044 clone value in the CashExpense
+	And I close all client application windows
+	* Open CashExpense
+		Given I open hyperlink "e1cib/list/Document.CashExpense"
+		And I click "Create" button
+	* Check clone value
+		When check clone value in the documents (Financial movement type, Cash flow center, Project, Expense type)
 
 Scenario: _999999 close TestClient session
 	And I close TestClient session

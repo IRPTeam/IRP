@@ -1435,9 +1435,6 @@ Strings.Insert("AccountingJE_prefix_01", NStr("en = 'JE '", Lang));
 Strings.Insert("BankPayment_DR_R1020B_AdvancesToVendors_R1021B_VendorsTransactions_CR_R3010B_CashOnHand", 
 	NStr("en = 'BankPayment DR (R1020B_AdvancesToVendors R1021B_VendorsTransactions) CR (R3010B_CashOnHand)'", Lang)); 
 
-Strings.Insert("BankPayment_DR_R5022T_Expenses_CR_R3010B_CashOnHand",
-	NStr("en = 'BankPayment DR (R5022T_Expenses) CR (R3010B_CashOnHand)'", Lang));
-
 Strings.Insert("BankPayment_DR_R1021B_VendorsTransactions_CR_R1020B_AdvancesToVendors",
 	NStr("en = 'BankPayment DR (R1021B_VendorsTransactions) CR (R1020B_AdvancesToVendors)'", Lang));
 

@@ -69,7 +69,7 @@ Scenario: _033402 range discount calculation by line
 		And I click "OK" button
 		And I click the button named "FormPostAndClose"
 		And "List" table contains lines
-		| 'Partner'    | 'Σ'          |
+		| 'Partner'    | 'Amount'          |
 		| 'Ferron BP'  | '6 820,00'   |
 	
 
@@ -112,7 +112,7 @@ Scenario: _033403 check of the minimum percentage of the range discount by lines
 			And I click "OK" button
 			And I click the button named "FormPostAndClose"
 			And "List" table contains lines
-				| 'Partner'      | 'Σ'            |
+				| 'Partner'      | 'Amount'            |
 				| 'Ferron BP'    | '6 944,00'     |
 		
 
@@ -155,7 +155,7 @@ Scenario: _033404 check of the maximum percentage of the range discount by lines
 			And I click "OK" button
 			And I click the button named "FormPostAndClose"
 			And "List" table contains lines
-				| 'Partner'      | 'Σ'            |
+				| 'Partner'      | 'Amount'            |
 				| 'Ferron BP'    | '6 540,00'     |
 		
 
@@ -193,7 +193,7 @@ Scenario: _033405 Range discount and Special price discount calculation
 		And I click "OK" button
 		And I click the button named "FormPostAndClose"
 		And "List" table contains lines
-				| 'Partner'      | 'Σ'            |
+				| 'Partner'      | 'Amount'            |
 				| 'Ferron BP'    | '6 400,00'     |
 
 
@@ -237,7 +237,7 @@ Scenario: _033406 check the discount order Range discount and crowding out 2 pri
 		And I click "OK" button
 		And I click the button named "FormPostAndClose"
 		And "List" table contains lines
-				| 'Partner'      | 'Σ'            |
+				| 'Partner'      | 'Amount'            |
 				| 'Ferron BP'    | '5 165,00'     |
 
 
@@ -281,10 +281,10 @@ Scenario: _033407 range discount recalculation when the quantity of items in the
 	// And I click "OK" button
 	And I click the button named "FormPostAndClose"
 	And "List" table contains lines
-		| 'Partner'    | 'Σ'          |
+		| 'Partner'    | 'Amount'          |
 		| 'Ferron BP'  | '7 060,00'   |
 	// And "List" table contains lines
-	// 	| 'Partner'    | 'Σ'     |
+	// 	| 'Partner'    | 'Amount'     |
 	// 	| 'Ferron BP'  |  '17 060,00'|
 
 

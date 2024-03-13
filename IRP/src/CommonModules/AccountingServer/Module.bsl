@@ -5,7 +5,6 @@ Function GetOperationsDefinition()
 	// Bank payment
 	Map.Insert(AO.BankPayment_DR_R1020B_AdvancesToVendors_R1021B_VendorsTransactions_CR_R3010B_CashOnHand , New Structure("ByRow", True));
 	Map.Insert(AO.BankPayment_DR_R1021B_VendorsTransactions_CR_R1020B_AdvancesToVendors , New Structure("ByRow", True));
-	Map.Insert(AO.BankPayment_DR_R5022T_Expenses_CR_R3010B_CashOnHand , New Structure("ByRow", True));
 	
 	// Bank receipt
 	Map.Insert(AO.BankReceipt_DR_R3010B_CashOnHand_CR_R2020B_AdvancesFromCustomers_R2021B_CustomersTransactions , New Structure("ByRow", True));

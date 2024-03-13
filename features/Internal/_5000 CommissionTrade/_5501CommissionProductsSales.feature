@@ -1212,7 +1212,7 @@ Scenario: _050043 check filling source of origin in the RSR POS (consignors prod
 	* Check filling source of origin
 		Given I open hyperlink "e1cib/list/Document.RetailSalesReceipt"	
 		And I go to line in "List" table
-			| 'Σ'         |
+			| 'Amount'         |
 			| '300,00'    |
 		And I select current line in "List" table
 		And "ItemList" table became equal

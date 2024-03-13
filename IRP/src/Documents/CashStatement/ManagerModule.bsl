@@ -229,8 +229,7 @@ Function R3021B_CashInTransitIncoming()
 		   |			THEN PaymentList.Ref
 		   |		ELSE UNDEFINED
 		   |	END AS Basis,
-		   |	PaymentList.Amount,
-		   |	PaymentList.Commission
+		   |	PaymentList.Amount
 		   |INTO R3021B_CashInTransitIncoming
 		   |FROM
 		   |	PaymentList AS PaymentList

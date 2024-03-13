@@ -581,7 +581,7 @@ Scenario: _1003064 check advance closing when SI has two same strings
 // 		And I click "OK" button
 // 	* Check
 // 		And "List" table became equal
-// 			| 'Number' | 'Σ'         | 'Date'                | 'Partner'         | 'Company'      | 'Legal name'        | 'Status'   | 'Currency' | 'Store'    | 'Payment status' |
+// 			| 'Number' | 'Amount'    | 'Date'                | 'Partner'         | 'Company'      | 'Legal name'        | 'Status'   | 'Currency' | 'Store'    | 'Payment status' |
 // 			| '1'      | '3 914,00'  | '28.01.2021 18:48:53' | 'Ferron BP'       | 'Main Company' | 'Company Ferron BP' | 'Closed'   | 'TRY'      | 'Store 02' | 'Fully paid'     |
 // 			| '2'      | '5 890,00'  | '28.01.2021 18:49:39' | 'Ferron BP'       | 'Main Company' | 'Company Ferron BP' | 'Closed'   | 'TRY'      | 'Store 02' | 'Fully paid'     |
 // 			| '3'      | '35 834,00' | '28.01.2021 18:50:57' | 'Ferron BP'       | 'Main Company' | 'Company Ferron BP' | 'Shipping' | 'TRY'      | 'Store 02' | 'Partially paid' |

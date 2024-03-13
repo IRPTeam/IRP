@@ -125,7 +125,11 @@ Function Initialize(Doc = Undefined, InitialData = Undefined, FillingData = Unde
 			DocObject.Fill(FillingData);
 		Else
 			DocMetadata = Doc.Metadata();
-			DocObject = Doc.GetObject();
+			If Doc.IsEmpty() Then
+				DocObject = Documents[DocMetadata.Name].CreateDocument();
+			Else
+				DocObject = Doc.GetObject();
+			EndIf;
 		EndIf;
 	Else
 		DocMetadata = DocInfo.DocMetadata;

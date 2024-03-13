@@ -725,10 +725,20 @@ EndFunction
 Function R1020B_AdvancesToVendors()
 	Return "SELECT 
 		   |	VALUE(AccumulationRecordType.Receipt) AS RecordType,
-		   |	*
+		   |	AdvancesToVendors.Period,
+		   |	AdvancesToVendors.Company,
+		   |	AdvancesToVendors.Branch,
+		   |	AdvancesToVendors.Currency,
+		   |	AdvancesToVendors.LegalName,
+		   |	AdvancesToVendors.Partner,
+		   |	AdvancesToVendors.Order,
+		   |	AdvancesToVendors.Agreement,
+		   |	AdvancesToVendors.Project,
+		   |	AdvancesToVendors.Amount,
+		   |	AdvancesToVendors.Key
 		   |INTO R1020B_AdvancesToVendors
 		   |FROM
-		   |	AdvancesToVendors AS QueryTable
+		   |	AdvancesToVendors AS AdvancesToVendors
 		   |WHERE 
 		   |	TRUE";
 EndFunction
@@ -736,10 +746,21 @@ EndFunction
 Function R1021B_VendorsTransactions()
 	Return "SELECT 
 		   |	VALUE(AccumulationRecordType.Receipt) AS RecordType,
-		   |	*
+		   |	VendorsTransactions.Period,
+		   |	VendorsTransactions.Company,
+		   |	VendorsTransactions.Branch,
+		   |	VendorsTransactions.Currency,
+		   |	VendorsTransactions.LegalName,
+		   |	VendorsTransactions.Partner,
+		   |	VendorsTransactions.Agreement,
+		   |	VendorsTransactions.Basis,
+		   |	VendorsTransactions.Order,
+		   |	VendorsTransactions.Project,
+		   |	VendorsTransactions.Amount,
+		   |	VendorsTransactions.Key
 		   |INTO R1021B_VendorsTransactions
 		   |FROM
-		   |	VendorsTransactions AS QueryTable
+		   |	VendorsTransactions AS VendorsTransactions
 		   |WHERE 
 		   |	TRUE";
 
@@ -748,10 +769,18 @@ EndFunction
 Function R5012B_VendorsAging()
 	Return "SELECT 
 		   |	VALUE(AccumulationRecordType.Receipt) AS RecordType,
-		   |	*
+		   |	VendorsAging.Period,
+		   |	VendorsAging.Company,
+		   |	VendorsAging.Branch,
+		   |	VendorsAging.Currency,
+		   |	VendorsAging.Agreement,
+		   |	VendorsAging.Partner,
+		   |	VendorsAging.Invoice,
+		   |	VendorsAging.PaymentDate,
+		   |	VendorsAging.Amount
 		   |INTO R5012B_VendorsAging
 		   |FROM
-		   |	VendorsAging AS QueryTable
+		   |	VendorsAging AS VendorsAging
 		   |WHERE 
 		   |	TRUE";
 
@@ -760,10 +789,20 @@ EndFunction
 Function R2020B_AdvancesFromCustomers()
 	Return "SELECT 
 		   |	VALUE(AccumulationRecordType.Receipt) AS RecordType,
-		   |	*
+		   |	AdvancesFromCustomers.Period,
+		   |	AdvancesFromCustomers.Company,
+		   |	AdvancesFromCustomers.Branch,
+		   |	AdvancesFromCustomers.Currency,
+		   |	AdvancesFromCustomers.LegalName,
+		   |	AdvancesFromCustomers.Partner,
+		   |	AdvancesFromCustomers.Order,
+		   |	AdvancesFromCustomers.Agreement,
+		   |	AdvancesFromCustomers.Project,
+		   |	AdvancesFromCustomers.Amount,
+		   |	AdvancesFromCustomers.Key
 		   |INTO R2020B_AdvancesFromCustomers
 		   |FROM
-		   |	AdvancesFromCustomers AS QueryTable
+		   |	AdvancesFromCustomers AS AdvancesFromCustomers
 		   |WHERE 
 		   |	TRUE";
 
@@ -772,10 +811,21 @@ EndFunction
 Function R2021B_CustomersTransactions()
 	Return "SELECT 
 		   |	VALUE(AccumulationRecordType.Receipt) AS RecordType,
-		   |	*
+		   |	CustomersTransactions.Period,
+		   |	CustomersTransactions.Company,
+		   |	CustomersTransactions.Branch,
+		   |	CustomersTransactions.Currency,
+		   |	CustomersTransactions.LegalName,
+		   |	CustomersTransactions.Partner,
+		   |	CustomersTransactions.Agreement,
+		   |	CustomersTransactions.Basis,
+		   |	CustomersTransactions.Order,
+		   |	CustomersTransactions.Project,
+		   |	CustomersTransactions.Amount,
+		   |	CustomersTransactions.Key
 		   |INTO R2021B_CustomersTransactions
 		   |FROM
-		   |	CustomersTransactions AS QueryTable
+		   |	CustomersTransactions AS CustomersTransactions
 		   |WHERE 
 		   |	TRUE";
 
@@ -784,10 +834,18 @@ EndFunction
 Function R5011B_CustomersAging()
 	Return "SELECT 
 		   |	VALUE(AccumulationRecordType.Receipt) AS RecordType,
-		   |	*
+		   |	CustomersAging.Period,
+		   |	CustomersAging.Company,
+		   |	CustomersAging.Branch,
+		   |	CustomersAging.Currency,
+		   |	CustomersAging.Agreement,
+		   |	CustomersAging.Partner,
+		   |	CustomersAging.Invoice,
+		   |	CustomersAging.PaymentDate,
+		   |	CustomersAging.Amount
 		   |INTO R5011B_CustomersAging
 		   |FROM
-		   |	CustomersAging AS QueryTable
+		   |	CustomersAging AS CustomersAging
 		   |WHERE 
 		   |	TRUE";
 
@@ -955,7 +1013,13 @@ EndFunction
 Function R3010B_CashOnHand()
 	Return "SELECT 
 		   |	VALUE(AccumulationRecordType.Receipt) AS RecordType,
-		   |	*
+		   |	AccountBalance.Period,
+		   |	AccountBalance.Company,
+		   |	AccountBalance.Branch,
+		   |	AccountBalance.Account,
+		   |	AccountBalance.Currency,
+		   |	AccountBalance.Amount,
+		   |	AccountBalance.Key
 		   |INTO R3010B_CashOnHand
 		   |FROM
 		   |	AccountBalance AS AccountBalance
@@ -1575,10 +1639,16 @@ EndFunction
 Function R3027B_EmployeeCashAdvance()
 	Return "SELECT
 		   |	VALUE(AccumulationRecordType.Receipt) AS RecordType,
-		   |	*
+		   |	EmployeeCashAdvance.Period,
+		   |	EmployeeCashAdvance.Company,
+		   |	EmployeeCashAdvance.Branch,
+		   |	EmployeeCashAdvance.Currency,
+		   |	EmployeeCashAdvance.Partner,
+		   |	EmployeeCashAdvance.Amount,
+		   |	EmployeeCashAdvance.Key
 		   |INTO R3027B_EmployeeCashAdvance
 		   |FROM
-		   |	EmployeeCashAdvance
+		   |	EmployeeCashAdvance AS EmployeeCashAdvance
 		   |WHERE
 		   |	TRUE";
 EndFunction
@@ -1586,10 +1656,14 @@ EndFunction
 Function R2023B_AdvancesFromRetailCustomers()
 	Return "SELECT
 		   |	VALUE(AccumulationRecordType.Receipt) AS RecordType,
-		   |	*
+		   |	AdvanceFromRetailCustomers.Period,
+		   |	AdvanceFromRetailCustomers.Company,
+		   |	AdvanceFromRetailCustomers.Branch,
+		   |	AdvanceFromRetailCustomers.RetailCustomer,
+		   |	AdvanceFromRetailCustomers.Amount
 		   |INTO R2023B_AdvancesFromRetailCustomers
 		   |FROM
-		   |	AdvanceFromRetailCustomers
+		   |	AdvanceFromRetailCustomers AS AdvanceFromRetailCustomers
 		   |WHERE
 		   |	TRUE";
 EndFunction
@@ -1597,15 +1671,21 @@ EndFunction
 Function R9510B_SalaryPayment()
 	Return "SELECT
 		   |	VALUE(AccumulationRecordType.Receipt) AS RecordType,
-		   |	*
+		   |	SalaryPayment.Company,
+		   |	SalaryPayment.Branch,
+		   |	SalaryPayment.Employee,
+		   |	SalaryPayment.PaymentPeriod,
+		   |	SalaryPayment.Currency,
+		   |	SalaryPayment.Amount,
+		   |	SalaryPayment.Key
 		   |INTO R9510B_SalaryPayment
 		   |FROM
-		   |	SalaryPayment
+		   |	SalaryPayment AS SalaryPayment
 		   |WHERE
 		   |	TRUE";
 EndFunction
 
-Function T8515S_FixedAssetsLocation()
+Function T8515S_FixedAssetsLocation()	
 	Return
 		"SELECT
 		|	FixedAssets.CommissioningDate AS Period,
@@ -1628,7 +1708,10 @@ EndFunction
 Function R8515T_CostOfFixedAsset()
 	Return
 		"SELECT
-		|	FixedAssets.*,
+		|	FixedAssets.Period,
+		|	FixedAssets.Company,
+		|	FixedAssets.FixedAsset,
+		|	FixedAssets.LedgerType,
 		|	FixedAssets.OriginalAmount AS Amount
 		|INTO R8515T_CostOfFixedAsset
 		|FROM
@@ -1638,16 +1721,42 @@ EndFunction
 Function R8510B_BookValueOfFixedAsset()
 	Return
 		"SELECT
-		|	FixedAssets.*,
+		|	OpeningEntryFixedAssets.Ref.Date AS Period,
+		|	OpeningEntryFixedAssets.Ref.Company,
+		|	OpeningEntryFixedAssets.FixedAsset,
+		|	OpeningEntryFixedAssets.ResponsiblePerson,
+		|	OpeningEntryFixedAssets.BusinessUnit AS Branch,
+		|	OpeningEntryFixedAssets.LedgerType,
+		|	OpeningEntryFixedAssets.CommissioningDate,
+		|	OpeningEntryFixedAssets.OriginalAmount,
+		|	OpeningEntryFixedAssets.BalanceAmount,
+		|	OpeningEntryFixedAssets.Currency,
+		|	OpeningEntryFixedAssets.Key
+		|INTO tmp
+		|FROM
+		|	Document.OpeningEntry.FixedAssets AS OpeningEntryFixedAssets
+		|WHERE
+		|	OpeningEntryFixedAssets.Ref = &Ref
+		|;
+		|
+		|////////////////////////////////////////////////////////////////////////////////
+		|SELECT
 		|	VALUE(AccumulationRecordType.Receipt) AS RecordType,
-		|	FixedAssets.BalanceAmount AS Amount,
-		|	FixedAssetsDepreciationInfo.Schedule AS Shedule
+		|	tmp.Period,
+		|	tmp.Company,
+		|	tmp.Branch,
+		|	tmp.FixedAsset,
+		|	tmp.LedgerType,
+		|	tmp.Currency,
+		|	tmp.Key,
+		|	tmp.BalanceAmount AS Amount,
+		|	FixedAssetsDepreciationInfo.Schedule AS Schedule
 		|INTO R8510B_BookValueOfFixedAsset
 		|FROM
-		|	FixedAssets AS FixedAssets
+		|	tmp AS tmp
 		|		LEFT JOIN Catalog.FixedAssets.DepreciationInfo AS FixedAssetsDepreciationInfo
-		|		ON FixedAssetsDepreciationInfo.Ref = FixedAssets.FixedAsset
-		|		AND FixedAssetsDepreciationInfo.LedgerType = FixedAssets.LedgerType
+		|		ON FixedAssetsDepreciationInfo.Ref = tmp.FixedAsset
+		|		AND FixedAssetsDepreciationInfo.LedgerType = tmp.LedgerType
 		|WHERE
 		|	FixedAssetsDepreciationInfo.LedgerType.CalculateDepreciation"
 EndFunction

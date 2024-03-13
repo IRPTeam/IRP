@@ -239,11 +239,20 @@ Function GetDocQueryText(QueryParameters, Parameters, TableName,
 		ArrayOfConditions.Add(" AND Obj.Type = &Type");
 		ArrayOfConditions.Add(" AND Obj.Type <> &Type_PurchaseInvoice");
 		ArrayOfConditions.Add(" AND Obj.Type <> &Type_SalesInvoice");
+		
+		If Parameters.Type = Type("DocumentRef.SalesOrder")
+			Or Parameters.Type = Type("DocumentRef.PurchaseOrder") Then
+			QueryParameters.Insert("OnlyOrders", True);
+		Else
+			QueryParameters.Insert("OnlyOrders", False);
+		EndIf;
 	Else
 		QueryParameters.Insert("Type_PurchaseOrder", Type("DocumentRef.PurchaseOrder"));
 		QueryParameters.Insert("Type_SalesOrder"   , Type("DocumentRef.SalesOrder"));
 		ArrayOfConditions.Add(" AND Obj.Type <> &Type_PurchaseOrder");
 		ArrayOfConditions.Add(" AND Obj.Type <> &Type_SalesOrder");
+		
+		QueryParameters.Insert("OnlyOrders", False);
 	EndIf;
 	
 	If Parameters.Property("RefInList") Then
@@ -354,7 +363,7 @@ EndFunction
 Function GetDocWithBalanceQueryText()
 	QueryText_DocWithBalance = 
 	"SELECT ALLOWED
-	|	CASE WHEN CustomersTransactions.Basis.Ref IS NULL THEN 
+	|	CASE WHEN &OnlyOrders THEN 
 	|		CustomersTransactions.Order 
 	|	ELSE CustomersTransactions.Basis END AS Ref,
 	|	CustomersTransactions.Company AS Company,
@@ -410,7 +419,9 @@ Function GetDocWithBalanceQueryText()
 	|UNION ALL
 	|
 	|SELECT
-	|	VendorsTransactions.Basis,
+	|	CASE WHEN &OnlyOrders THEN 
+	|		VendorsTransactions.Order 
+	|	ELSE VendorsTransactions.Basis END AS Ref,
 	|	VendorsTransactions.Company,
 	|	VendorsTransactions.Partner,
 	|	VendorsTransactions.LegalName,
@@ -428,7 +439,7 @@ Function GetDocWithBalanceQueryText()
 	|FROM
 	|	AccumulationRegister.R1021B_VendorsTransactions.Balance(&Period,
 	|		CurrencyMovementType = VALUE(ChartOfCharacteristicTypes.CurrencyMovementType.SettlementCurrency)
-	|	AND (Basis, Company, Partner, LegalName, Agreement, Currency) IN
+	|	AND ((Basis, Company, Partner, LegalName, Agreement, Currency) IN
 	|		(SELECT
 	|			Doc.Ref,
 	|			Doc.Company,
@@ -437,7 +448,20 @@ Function GetDocWithBalanceQueryText()
 	|			Doc.Agreement,
 	|			Doc.Currency
 	|		FROM
-	|			Doc AS Doc)) AS VendorsTransactions
+	|			Doc AS Doc)
+	|		OR
+	|		(Order, Company, Partner, LegalName, Agreement, Currency) IN
+	|		(SELECT
+	|			Doc.Ref,
+	|			Doc.Company,
+	|			Doc.Partner,
+	|			Doc.LegalName,
+	|			Doc.Agreement,
+	|			Doc.Currency
+	|		FROM
+	|			Doc AS Doc))
+	|
+	|) AS VendorsTransactions
 	|WHERE
 	|	CASE
 	|		WHEN &IsReturnTransactionType

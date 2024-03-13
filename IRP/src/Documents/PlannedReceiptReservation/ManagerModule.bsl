@@ -233,7 +233,8 @@ EndFunction
 
 Function R4037B_PlannedReceiptReservationRequests()
 	Return "SELECT
-		   |	VALUE(AccumulationRecordType.Expense) AS RecordType, 
+		   |	VALUE(AccumulationRecordType.Expense) AS RecordType,
+		   |	ItemList.Period, 
 		   |	ItemList.RequesterStore AS Store,
 		   |	ItemList.Requester AS Order,
 		   |	*

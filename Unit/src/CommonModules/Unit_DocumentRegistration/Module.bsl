@@ -75,6 +75,14 @@ Procedure _DocumentReistration(ArrayOfErrors)
 				                                   Reg.Name, 
 				                                   "Resource");
 				
+				Compare_BatchColumns_And_RegFields(ArrayOfErrors, 
+				                                   Ignored_Fields, 
+				                                   Batch.Columns, 
+				                                   Reg.StandardAttributes, 
+				                                   DocMetadata.Name, 
+				                                   Reg.Name, 
+				                                   "Standard attributes");
+				
 			EndDo;
 	   EndDo;
 	EndDo;
@@ -148,6 +156,11 @@ Function GetIgnored_Fields()
 	Array = New Array();
 	
 	// Document.Register.Dimension * - for all
+	
+	// standard attributes
+	Array.Add("*.*.Active");
+	Array.Add("*.*.LineNumber");
+	Array.Add("*.*.Recorder");
 	
 	// technical dimensions
 	Array.Add("*.*.CurrencyMovementType");

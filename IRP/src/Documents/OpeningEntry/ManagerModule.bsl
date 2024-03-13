@@ -1671,6 +1671,7 @@ EndFunction
 Function R9510B_SalaryPayment()
 	Return "SELECT
 		   |	VALUE(AccumulationRecordType.Receipt) AS RecordType,
+		   |	SalaryPayment.Period,
 		   |	SalaryPayment.Company,
 		   |	SalaryPayment.Branch,
 		   |	SalaryPayment.Employee,

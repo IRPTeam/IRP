@@ -494,6 +494,7 @@ Function R4014B_SerialLotNumber()
 	Return 
 		"SELECT
 		|	VALUE(AccumulationRecordType.Expense) AS RecordType,
+		|	SerialLotNumbers.Period,
 		|	SerialLotNumbers.Company,
 		|	SerialLotNumbers.Branch,
 		|	SerialLotNumbers.Store,

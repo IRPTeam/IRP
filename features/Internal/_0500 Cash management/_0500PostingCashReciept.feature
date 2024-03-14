@@ -346,7 +346,7 @@ Scenario: _0500011 create Cash receipt (independently)
 			And I click choice button of "Order" attribute in "PaymentList" table
 			And I go to line in "List" table
 				| 'Amount'      | 'Company'         | 'Legal name'           | 'Partner'       |
-				| '4 350,00'    | 'Main Company'    | 'Company Ferron BP'    | 'Ferron BP'     |
+				| '4 250,00'    | 'Main Company'    | 'Company Ferron BP'    | 'Ferron BP'     |
 			And I select current line in "List" table
 			And I finish line editing in "PaymentList" table
 		* Filling in amount in a tabular part

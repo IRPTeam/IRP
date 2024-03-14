@@ -670,15 +670,10 @@ Scenario: _900031 return money to customer based on Sales return
 		Then the form attribute named "Currency" became equal to "USD"
 		And "PaymentList" table became equal
 			| '#'   | 'Partner'      | 'Total amount'    |
-			| '1'   | 'Customer 1'   | '150,00'          |
+			| '1'   | 'Customer 1'   | '100,00'          |
 		Then the form attribute named "Branch" became equal to ""
-		And the editing text of form attribute named "PaymentListTotalTotalAmount" became equal to "150,00"
-		Then the form attribute named "CurrencyTotalAmount" became equal to "USD"
-		And I activate "Total amount" field in "PaymentList" table
-		And I select current line in "PaymentList" table
-		And I input "100,00" text in "Total amount" field of "PaymentList" table
-		And I finish line editing in "PaymentList" table
 		And the editing text of form attribute named "PaymentListTotalTotalAmount" became equal to "100,00"
+		Then the form attribute named "CurrencyTotalAmount" became equal to "USD"
 		And I click the button named "FormPost"
 		And I delete "$$NumberCashPayment03$$" variable
 		And I delete "$$CashPayment03$$" variable

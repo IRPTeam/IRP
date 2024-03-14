@@ -280,6 +280,72 @@
     <fullTextSearch>Use</fullTextSearch>
     <dataHistory>Use</dataHistory>
   </attributes>
+  <attributes uuid="8d13ef07-bf17-4880-a67c-1b4ce69d5e79">
+    <name>BankCountry</name>
+    <synonym>
+      <key>en</key>
+      <value>Bank country</value>
+    </synonym>
+    <type>
+      <types>CatalogRef.Countries</types>
+    </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <fillValue xsi:type="core:UndefinedValue"/>
+    <fullTextSearch>Use</fullTextSearch>
+    <dataHistory>Use</dataHistory>
+  </attributes>
+  <attributes uuid="30a116c0-56cb-4b04-9769-b40b314956fc">
+    <name>BankIdentifierCode</name>
+    <synonym>
+      <key>en</key>
+      <value>Bank identifier code</value>
+    </synonym>
+    <type>
+      <types>String</types>
+      <stringQualifiers>
+        <length>9</length>
+      </stringQualifiers>
+    </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <fillValue xsi:type="core:UndefinedValue"/>
+    <fullTextSearch>Use</fullTextSearch>
+    <dataHistory>Use</dataHistory>
+  </attributes>
+  <attributes uuid="8c38fbfb-66e5-4394-8c22-c7b30ee37521">
+    <name>BankSWIFTCode</name>
+    <synonym>
+      <key>en</key>
+      <value>Bank SWIFT code</value>
+    </synonym>
+    <type>
+      <types>String</types>
+      <stringQualifiers>
+        <length>11</length>
+      </stringQualifiers>
+    </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <fillValue xsi:type="core:UndefinedValue"/>
+    <fullTextSearch>Use</fullTextSearch>
+    <dataHistory>Use</dataHistory>
+  </attributes>
+  <attributes uuid="e0b94eef-08fb-4c31-bc37-4d4f52143ce2">
+    <name>isIBAN</name>
+    <synonym>
+      <key>en</key>
+      <value>Is IBAN</value>
+    </synonym>
+    <type>
+      <types>Boolean</types>
+    </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <fillValue xsi:type="core:UndefinedValue"/>
+    <fullTextSearch>Use</fullTextSearch>
+    <dataHistory>Use</dataHistory>
+  </attributes>
   <tabularSections uuid="e4e2c63b-a0fc-494f-8196-b38a6ddb475c">
     <producedTypes>
       <objectType typeId="f17642bd-0685-4d6c-8cf9-1c8be00bb9b9" valueTypeId="6413d6f8-0579-45ce-9ca5-14ad0721fb28"/>

@@ -22,5 +22,6 @@
   <content>Catalog.PaymentSchedules</content>
   <content>Catalog.CancelReturnReasons</content>
   <content>Document.PriceList</content>
+  <content>Catalog.Incoterms</content>
   <parentSubsystem>Subsystem.MasterData</parentSubsystem>
 </mdclass:Subsystem>

@@ -132,6 +132,7 @@ EndFunction
 Function GetQueryTextsMasterTables()
 	QueryArray = New Array;
 	QueryArray.Add(R2001T_Sales());
+	QueryArray.Add(R2001T_SalesNew());
 	QueryArray.Add(R2005T_SalesSpecialOffers());
 	QueryArray.Add(R2006T_Certificates());
 	QueryArray.Add(R2012B_SalesOrdersInvoiceClosing());
@@ -237,6 +238,7 @@ Function ItemList()
 		   |	ItemList.InventoryOrigin = VALUE(Enum.InventoryOriginTypes.OwnStocks) AS IsOwnStocks,
 		   |	ItemList.InventoryOrigin = VALUE(Enum.InventoryOriginTypes.ConsignorStocks) AS IsConsignorStocks,
 		   |	ItemList.InventoryOrigin AS InventoryOrigin,
+		   |	ItemList.Ref.ProjectGroup AS ProjectGroup,
 		   |	TableRowIDInfo.RowID AS RowID
 		   |INTO ItemList
 		   |FROM
@@ -903,6 +905,33 @@ Function R2001T_Sales()
 		|	AND ItemList.StatusType = VALUE(ENUM.RetailReceiptStatusTypes.Completed)";
 EndFunction
 
+Function R2001T_SalesNew()
+	Return 
+		"SELECT
+		|	ItemList.Period,
+		|	ItemList.Company,
+		|	ItemList.Branch,
+		|	ItemList.Currency,
+		|	ItemList.Invoice,
+		|	ItemList.ItemKey,
+		|	ItemList.RowKey,
+		|	ItemList.SalesPerson,
+		|	ItemList.ProjectGroup AS ProjectGroup,
+		|	SalesBySerialLotNumbers.SerialLotNumber,
+		|	SalesBySerialLotNumbers.Quantity,
+		|	SalesBySerialLotNumbers.Amount,
+		|	SalesBySerialLotNumbers.NetAmount,
+		|	SalesBySerialLotNumbers.OffersAmount
+		|INTO R2001T_SalesNew
+		|FROM
+		|	ItemList AS ItemList
+		|		LEFT JOIN SalesBySerialLotNumbers
+		|		ON ItemList.Key = SalesBySerialLotNumbers.Key
+		|WHERE
+		|	TRUE
+		|	AND ItemList.StatusType = VALUE(ENUM.RetailReceiptStatusTypes.Completed)";
+EndFunction
+
 Function R2005T_SalesSpecialOffers()
 	Return "SELECT *
 		   |INTO R2005T_SalesSpecialOffers
@@ -1323,6 +1352,7 @@ Function GetAccessKey(Obj) Export
 	AccessKeyMap = New Map;
 	AccessKeyMap.Insert("Company", Obj.Company);
 	AccessKeyMap.Insert("Branch", Obj.Branch);
+	AccessKeyMap.Insert("ProjectGroup", Obj.ProjectGroup);
 	StoreList = Obj.ItemList.Unload(, "Store");
 	StoreList.GroupBy("Store");
 	AccessKeyMap.Insert("Store", StoreList.UnloadColumn("Store"));

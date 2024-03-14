@@ -357,6 +357,7 @@ Function GetQueryTextsMasterTables()
 	QueryArray = New Array;
 	QueryArray.Add(CashInTransit());
 	QueryArray.Add(R2001T_Sales());
+	QueryArray.Add(R2001T_SalesNew());
 	QueryArray.Add(R2002T_SalesReturns());
 	QueryArray.Add(R2005T_SalesSpecialOffers());
 	QueryArray.Add(R2006T_Certificates());
@@ -446,6 +447,7 @@ Function ItemList()
 		   |	ItemList.NetAmount AS NetAmount,
 		   |	ItemList.OffersAmount AS OffersAmount,
 		   |	ItemList.ReturnReason AS ReturnReason,
+		   |	ItemList.Ref.ProjectGroup AS ProjectGroup,
 		   |	CASE
 		   |		WHEN ItemList.RetailSalesReceipt.Ref IS NULL
 		   |			THEN ItemList.Ref
@@ -781,6 +783,33 @@ Function R2001T_Sales()
 		|	-SalesBySerialLotNumbers.NetAmount AS NetAmount,
 		|	-SalesBySerialLotNumbers.OffersAmount AS OffersAmount
 		|INTO R2001T_Sales
+		|FROM
+		|	ItemList AS ItemList
+		|		LEFT JOIN SalesBySerialLotNumbers
+		|		ON ItemList.Key = SalesBySerialLotNumbers.Key
+		|WHERE
+		|	TRUE
+		|	AND ItemList.StatusType = VALUE(ENUM.RetailReceiptStatusTypes.Completed)";
+EndFunction
+
+Function R2001T_SalesNew()
+	Return 
+		"SELECT
+		|	ItemList.Period,
+		|	ItemList.Company,
+		|	ItemList.Branch,
+		|	ItemList.Currency,
+		|	ItemList.RetailSalesReceipt AS Invoice,
+		|	ItemList.ItemKey,
+		|	ItemList.RowKey,
+		|	ItemList.SalesPerson,
+		|	ItemList.ProjectGroup AS ProjectGroup,
+		|	SalesBySerialLotNumbers.SerialLotNumber,
+		|	-SalesBySerialLotNumbers.Quantity AS Quantity,
+		|	-SalesBySerialLotNumbers.Amount AS Amount,
+		|	-SalesBySerialLotNumbers.NetAmount AS NetAmount,
+		|	-SalesBySerialLotNumbers.OffersAmount AS OffersAmount
+		|INTO R2001T_SalesNew
 		|FROM
 		|	ItemList AS ItemList
 		|		LEFT JOIN SalesBySerialLotNumbers
@@ -1278,6 +1307,7 @@ Function GetAccessKey(Obj) Export
 	AccessKeyMap = New Map;
 	AccessKeyMap.Insert("Company", Obj.Company);
 	AccessKeyMap.Insert("Branch", Obj.Branch);
+	AccessKeyMap.Insert("ProjectGroup", Obj.ProjectGroup);
 	StoreList = Obj.ItemList.Unload(, "Store");
 	StoreList.GroupBy("Store");
 	AccessKeyMap.Insert("Store", StoreList.UnloadColumn("Store"));

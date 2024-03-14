@@ -433,6 +433,7 @@
   <roles>Role.Document_DebitCreditNote</roles>
   <roles>Role.AuditLockSet</roles>
   <roles>Role.AuditLockUnset</roles>
+  <roles>Role.AccumulationRegisters_R2001T_SalesNew</roles>
   <commonTemplates>CommonTemplate.HTMLPictureSlider</commonTemplates>
   <commonTemplates>CommonTemplate.HTMLAddAttributes</commonTemplates>
   <commonTemplates>CommonTemplate.HTMLGallery</commonTemplates>
@@ -1094,6 +1095,7 @@
   <catalogs>Catalog.VehicleTypes</catalogs>
   <catalogs>Catalog.Workstations</catalogs>
   <catalogs>Catalog.AgingPeriods</catalogs>
+  <catalogs>Catalog.ProjectGroup</catalogs>
   <documents>Document.AdditionalAccrual</documents>
   <documents>Document.AdditionalCostAllocation</documents>
   <documents>Document.AdditionalDeduction</documents>
@@ -1412,6 +1414,7 @@
   <accumulationRegisters>AccumulationRegister.R1031B_ReceiptInvoicing</accumulationRegisters>
   <accumulationRegisters>AccumulationRegister.R1040B_TaxesOutgoing</accumulationRegisters>
   <accumulationRegisters>AccumulationRegister.R2001T_Sales</accumulationRegisters>
+  <accumulationRegisters>AccumulationRegister.R2001T_SalesNew</accumulationRegisters>
   <accumulationRegisters>AccumulationRegister.R2002T_SalesReturns</accumulationRegisters>
   <accumulationRegisters>AccumulationRegister.R2005T_SalesSpecialOffers</accumulationRegisters>
   <accumulationRegisters>AccumulationRegister.R2006T_Certificates</accumulationRegisters>

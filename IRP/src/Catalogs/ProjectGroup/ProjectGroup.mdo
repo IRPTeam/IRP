@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mdclass:Catalog xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="c097d060-f3db-4b97-8c19-9168310fd39a">
+  <producedTypes>
+    <objectType typeId="14f88cf7-c60b-4b70-907d-be7ff91459e9" valueTypeId="be614bd8-0b0b-4197-af32-03fbab3cd0c3"/>
+    <refType typeId="7c97247b-a90a-4c6f-ba1d-cba1328234f4" valueTypeId="9ea27e8d-803f-4bdd-9e4d-b4fc4f12b338"/>
+    <selectionType typeId="6893b3ac-448f-4bcf-8bc6-375e641e7ca1" valueTypeId="279f5e98-8e05-4cbf-ae48-5bb8051a33ed"/>
+    <listType typeId="eed41266-9b12-4e4f-98f3-a3b9153dd91f" valueTypeId="3a400561-fa23-4cae-971f-cebafafe5e03"/>
+    <managerType typeId="dd58fcd7-6373-4fc2-8568-ba1bf9a40d10" valueTypeId="4d4b3f0f-80d1-4fca-9001-b6c38f748fe9"/>
+  </producedTypes>
+  <name>ProjectGroup</name>
+  <synonym>
+    <key>en</key>
+    <value>Project group</value>
+  </synonym>
+  <comment>1</comment>
+  <useStandardCommands>true</useStandardCommands>
+  <inputByString>Catalog.ProjectGroup.StandardAttribute.Code</inputByString>
+  <inputByString>Catalog.ProjectGroup.StandardAttribute.Description</inputByString>
+  <fullTextSearchOnInputByString>DontUse</fullTextSearchOnInputByString>
+  <createOnInput>Use</createOnInput>
+  <dataLockControlMode>Managed</dataLockControlMode>
+  <fullTextSearch>Use</fullTextSearch>
+  <levelCount>2</levelCount>
+  <foldersOnTop>true</foldersOnTop>
+  <codeLength>9</codeLength>
+  <descriptionLength>25</descriptionLength>
+  <codeType>String</codeType>
+  <codeAllowedLength>Variable</codeAllowedLength>
+  <checkUnique>true</checkUnique>
+  <autonumbering>true</autonumbering>
+  <defaultPresentation>AsDescription</defaultPresentation>
+  <editType>InDialog</editType>
+  <choiceMode>BothWays</choiceMode>
+</mdclass:Catalog>

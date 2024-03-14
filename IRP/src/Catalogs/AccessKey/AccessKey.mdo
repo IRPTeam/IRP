@@ -60,6 +60,13 @@
         <value></value>
       </code>
     </items>
+    <items id="49b5b9ac-2ea1-41fe-93a5-6fa46cbe29c7">
+      <name>ProjectGroup</name>
+      <description>Project group</description>
+      <code xsi:type="core:StringValue">
+        <value></value>
+      </code>
+    </items>
   </predefined>
   <editType>InDialog</editType>
   <choiceMode>BothWays</choiceMode>

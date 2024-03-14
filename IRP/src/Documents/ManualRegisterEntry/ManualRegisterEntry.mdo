@@ -87,7 +87,6 @@
   <registerRecords>AccumulationRegister.R3021B_CashInTransitIncoming</registerRecords>
   <registerRecords>AccumulationRegister.R1020B_AdvancesToVendors</registerRecords>
   <registerRecords>AccumulationRegister.R4050B_StockInventory</registerRecords>
-  <registerRecords>AccumulationRegister.R2001T_Sales</registerRecords>
   <registerRecords>AccumulationRegister.R2021B_CustomersTransactions</registerRecords>
   <registerRecords>AccumulationRegister.R4011B_FreeStocks</registerRecords>
   <registerRecords>AccumulationRegister.R4032B_GoodsInTransitOutgoing</registerRecords>
@@ -123,6 +122,7 @@
   <registerRecords>AccumulationRegister.DELETE_R8011B_TradeAgentSerialLotNumber</registerRecords>
   <registerRecords>AccumulationRegister.DELETE_R8012B_ConsignorInventory</registerRecords>
   <registerRecords>AccumulationRegister.DELETE_R8013B_ConsignorBatchWiseBalance</registerRecords>
+  <registerRecords>AccumulationRegister.R2001T_Sales</registerRecords>
   <postInPrivilegedMode>true</postInPrivilegedMode>
   <unpostInPrivilegedMode>true</unpostInPrivilegedMode>
   <attributes uuid="0efb3e65-ce41-418b-bedd-d2b4e61ae11a">

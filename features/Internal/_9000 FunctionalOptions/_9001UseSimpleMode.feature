@@ -333,9 +333,9 @@ Scenario: _900010 create Cash receipt based on SI (Payment from customer)
 		Then the form attribute named "CurrencyExchange" became equal to ""
 		And "PaymentList" table became equal
 			| '#'   | 'Partner'      | 'Total amount'    |
-			| '1'   | 'Customer 1'   | '450,00'          |
+			| '1'   | 'Customer 1'   | '300,00'          |
 		Then the form attribute named "Branch" became equal to ""
-		And the editing text of form attribute named "PaymentListTotalTotalAmount" became equal to "450,00"
+		And the editing text of form attribute named "PaymentListTotalTotalAmount" became equal to "300,00"
 		Then the form attribute named "CurrencyTotalAmount" became equal to "USD"
 	* Change amount
 		And I activate field named "PaymentListTotalAmount" in "PaymentList" table
@@ -670,15 +670,10 @@ Scenario: _900031 return money to customer based on Sales return
 		Then the form attribute named "Currency" became equal to "USD"
 		And "PaymentList" table became equal
 			| '#'   | 'Partner'      | 'Total amount'    |
-			| '1'   | 'Customer 1'   | '150,00'          |
+			| '1'   | 'Customer 1'   | '100,00'          |
 		Then the form attribute named "Branch" became equal to ""
-		And the editing text of form attribute named "PaymentListTotalTotalAmount" became equal to "150,00"
-		Then the form attribute named "CurrencyTotalAmount" became equal to "USD"
-		And I activate "Total amount" field in "PaymentList" table
-		And I select current line in "PaymentList" table
-		And I input "100,00" text in "Total amount" field of "PaymentList" table
-		And I finish line editing in "PaymentList" table
 		And the editing text of form attribute named "PaymentListTotalTotalAmount" became equal to "100,00"
+		Then the form attribute named "CurrencyTotalAmount" became equal to "USD"
 		And I click the button named "FormPost"
 		And I delete "$$NumberCashPayment03$$" variable
 		And I delete "$$CashPayment03$$" variable

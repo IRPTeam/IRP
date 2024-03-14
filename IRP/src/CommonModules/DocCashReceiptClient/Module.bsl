@@ -436,7 +436,7 @@ Procedure PaymentListOrderStartChoice(Object, Form, Item, ChoiceData, StandardPr
 
 	Parameters = New Structure();
 	Parameters.Insert("Filter", New Structure());
-	If ValueIsFilled(CurrentData.Payee) Then
+	If ValueIsFilled(CurrentData.Payer) Then
 		Parameters.Filter.Insert("LegalName", CurrentData.Payer);
 	EndIf;
 	Parameters.Filter.Insert("Company", Object.Company);

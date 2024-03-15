@@ -96,11 +96,15 @@ Function GetDocumentsStructure(ArrayOfBasisDocuments)
 	ArrayOfTables.Add(GetDocumentTable_SalesReportFromTradeAgent(ArrayOf_SalesReportFromTradeAgent));
 	ArrayOfTables.Add(GetDocumentTable_EmployeeCashAdvance(ArrayOf_EmployeeCashAdvance));
 	
-	Return JoinDocumentsStructure(ArrayOfTables);
+	DocumentAmountTable = DocumentsGenerationServer.CreateDocumentAmountTable();
+	DocumentsGenerationServer.FillDocumentAmountTable(DocumentAmountTable, ArrayOf_SalesInvoice, "SalesOrder");
+	DocumentsGenerationServer.FillDocumentAmountTable(DocumentAmountTable, ArrayOf_PurchaseReturn);
+	
+	Return JoinDocumentsStructure(ArrayOfTables, DocumentAmountTable);
 EndFunction
 
 &AtServer
-Function JoinDocumentsStructure(ArrayOfTables)
+Function JoinDocumentsStructure(ArrayOfTables, DocumentAmountTable)
 	ValueTable = New ValueTable();
 	ValueTable.Columns.Add("BasedOn"          , New TypeDescription("String"));
 	ValueTable.Columns.Add("Company"          , New TypeDescription("CatalogRef.Companies"));
@@ -121,6 +125,7 @@ Function JoinDocumentsStructure(ArrayOfTables)
 	ValueTable.Columns.Add("AmountExchange", New TypeDescription(Metadata.DefinedTypes.typeAmount.Type));
 	ValueTable.Columns.Add("FinancialMovementType", New TypeDescription("CatalogRef.ExpenseAndRevenueTypes"));
 	ValueTable.Columns.Add("Order", New TypeDescription("DocumentRef.SalesOrder"));
+	ValueTable.Columns.Add("Project", New TypeDescription("CatalogRef.Projects"));
 	
 	ValueTable.Columns.Add("RetailCustomer"  , New TypeDescription("CatalogRef.RetailCustomers"));
 	ValueTable.Columns.Add("PaymentType"     , New TypeDescription("CatalogRef.PaymentTypes"));
@@ -167,17 +172,35 @@ Function JoinDocumentsStructure(ArrayOfTables)
 
 		PaymentList = ValueTable.Copy(Filter);
 		For Each RowPaymentList In PaymentList Do
+			
+			FilterAmount = New Structure();
+			FilterAmount.Insert("Company"  , Row.Company);
+			FilterAmount.Insert("Branch"   , Row.Branch);
+			FilterAmount.Insert("Currency" , Row.Currency);
+			FilterAmount.Insert("Partner"  , RowPaymentList.Partner);
+			FilterAmount.Insert("LegalName", RowPaymentList.Payer);
+			FilterAmount.Insert("Agreement", RowPaymentList.Agreement);
+			FilterAmount.Insert("Order"    , ?(ValueIsFilled(RowPaymentList.Order), RowPaymentList.Order, Undefined));
+			FilterAmount.Insert("Project"  , RowPaymentList.Project);
+			
+			Amounts = DocumentsGenerationServer.CalculateDocumentAmount(DocumentAmountTable, FilterAmount, RowPaymentList.NetAmount, RowPaymentList.Amount);
+			
+			If Amounts.Skip Then
+				Continue;
+			EndIf;
+			
 			NewRow = New Structure();
 			NewRow.Insert("BasisDocument"           , RowPaymentList.BasisDocument);
 			NewRow.Insert("Agreement"               , RowPaymentList.Agreement);
 			NewRow.Insert("Partner"                 , RowPaymentList.Partner);
 			NewRow.Insert("Payer"                   , RowPaymentList.Payer);
-			NewRow.Insert("TotalAmount"             , RowPaymentList.Amount);
-			NewRow.Insert("NetAmount"               , RowPaymentList.NetAmount);
+			NewRow.Insert("TotalAmount"             , Amounts.TotalAmount);
+			NewRow.Insert("NetAmount"               , Amounts.NetAmount);
 			NewRow.Insert("AmountExchange"          , RowPaymentList.AmountExchange);
 			NewRow.Insert("PlaningTransactionBasis" , RowPaymentList.PlaningTransactionBasis);
 			NewRow.Insert("FinancialMovementType"   , RowPaymentList.FinancialMovementType);
 			NewRow.Insert("Order"                   , RowPaymentList.Order);
+			NewRow.Insert("Project"                 , RowPaymentList.Project);
 			NewRow.Insert("RetailCustomer"          , RowPaymentList.RetailCustomer);
 			NewRow.Insert("PaymentType"             , RowPaymentList.PaymentType);
 			NewRow.Insert("PaymentTerminal"         , RowPaymentList.PaymentTerminal);

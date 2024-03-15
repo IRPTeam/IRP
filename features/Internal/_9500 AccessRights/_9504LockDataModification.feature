@@ -64,6 +64,7 @@ Scenario: 950400 preparation
 		When Create catalog TaxRates objects
 		When Create catalog Taxes objects
 		When Create catalog CancelReturnReasons objects
+		When Create catalog Companies objects (own Second company)
 	* Change test user info
 			Given I open hyperlink "e1cib/list/Catalog.Users"
 			And I go to line in "List" table
@@ -96,7 +97,10 @@ Scenario: 950400 preparation
 		And I close all client application windows
 	* Load SO and change it date
 		When Create document SalesOrder objects
-		When Data preparation for LockDataModificationReasons (LockDataModificationReasons + SO)
+		When Data preparation for LockDataModificationReasons (LockDataModificationReasons (9 reasons for 3 registers) + SO)
+		When Data preparation for LockDataModificationReasons (LockDataModificationReasons (2 reasons for 1 register) + StockAdjustmentAsSurplus)
+		When Data preparation for LockDataModificationReasons (LockDataModificationReasons (2 reasons for 1 document) + StockAdjustmentAsWriteOff)
+		When Data preparation for LockDataModificationReasons (LockDataModificationReasons (3 reasons for 3 documents) + RSC, RGR, SC)
 	* Load documents
 		When Create document PurchaseOrder objects
 		When Create document PurchaseOrder objects (check movements, GR before PI, Use receipt sheduling)
@@ -869,6 +873,8 @@ Scenario: 950409 create rules for information register (with recorder)
 				| 'Number'     |
 				| '100'        |
 			And in the table "List" I click the button named "ListContextMenuPost"
+			When I Check the steps for Exception
+				| 'Then "1C:Enterprise" window is opened'    |
 			Then user message window does not contain messages
 			And I close all client application windows
 		* Delete rules
@@ -881,7 +887,7 @@ Scenario: 950409 create rules for information register (with recorder)
 			And I click "Yes" button
 			And I close all client application windows	
 
-Scenario: 950410 create rules for accumulation and information registers (9 rules for 3 register)
+Scenario: 950410 check rules for accumulation and information registers (9 rules for 3 register)
 	And I close all client application windows
 	* Preparation
 		Given I open hyperlink "e1cib/list/Catalog.LockDataModificationReasons"
@@ -925,6 +931,8 @@ Scenario: 950410 create rules for accumulation and information registers (9 rule
 		And I select "No reserve" exact value from "Procurement method" drop-down list in "ItemList" table
 		And I finish line editing in "ItemList" table
 		And I click "Post" button
+		When I Check the steps for Exception
+			| 'Then "1C:Enterprise" window is opened'    |
 		Then user message window does not contain messages
 	* Check rule - information registers
 		Given I open hyperlink "e1cib/list/Document.PriceList"		
@@ -946,9 +954,7 @@ Scenario: 950410 create rules for accumulation and information registers (9 rule
 			|'Data lock reasons:\n3 rules for 3 register (Free stock, Price, Stock reservation)'|
 	And I close all client application windows
 
-		
-
-Scenario: 950411 create rules for catalog (<)
+Scenario: 9504101 check rules for accumulation registers (2 rules for 1 register)
 	Given I open hyperlink 'e1cib/list/Catalog.LockDataModificationReasons'
 	* Preparation
 		And I go to line in "List" table
@@ -957,6 +963,150 @@ Scenario: 950411 create rules for catalog (<)
 		And I select current line in "List" table
 		And I set checkbox "Disable rule"
 		And I click "Save and close" button
+		And I go to line in "List" table
+			| 'Description'                                                   |
+			| '2 rules for 1 register (R4052T_StockAdjustmentAsSurplus)' |
+		And I select current line in "List" table
+		And I remove checkbox "Disable rule"
+		And I click "Save and close" button
+	* Check rule
+		Given I open hyperlink "e1cib/list/Document.StockAdjustmentAsSurplus"				
+		And I go to line in "List" table
+			| 'Date'                | 'Number' |
+			| '19.02.2024 12:00:00' | '1 902'  |
+		And I select current line in "List" table
+		And I click "Post" button
+		Then "1C:Enterprise" window is opened
+		And I click the button named "OK"
+		Then there are lines in TestClient message log
+			|'Data lock reasons:\n2 rules for 1 register (R4052T_StockAdjustmentAsSurplus)'|		
+	* Change date and check rule
+		And I move to "Other" tab
+		And I input "28.02.2024 00:00:00" text in the field named "Date"
+		And I click "Post" button
+		When I Check the steps for Exception
+			| 'Then "1C:Enterprise" window is opened'    |
+		Then user message window does not contain messages
+	And I close all client application windows
+				
+Scenario: 9504102 check rules for documents (2 rules for 1 document)
+	Given I open hyperlink 'e1cib/list/Catalog.LockDataModificationReasons'
+	* Preparation
+		And I go to line in "List" table
+			| 'Description'                                              |
+			| '2 rules for 1 register (R4052T_StockAdjustmentAsSurplus)' |
+		And I select current line in "List" table
+		And I set checkbox "Disable rule"
+		And I click "Save and close" button
+		And I go to line in "List" table
+			| 'Description'                                        |
+			| '2 rules for 1 document (StockAdjustmentAsWriteOff)' |
+		And I select current line in "List" table
+		And I remove checkbox "Disable rule"
+		And I click "Save and close" button	
+	* Check rule
+		Given I open hyperlink "e1cib/list/Document.StockAdjustmentAsWriteOff"				
+		And I go to line in "List" table
+			| 'Date'                | 'Number' |
+			| '19.02.2024 12:00:00' | '1 019'  |
+		And I select current line in "List" table
+		And I click "Post" button
+		Then "1C:Enterprise" window is opened
+		And I click the button named "OK"
+		Then there are lines in TestClient message log
+			|'Data lock reasons:\n2 rules for 1 document (StockAdjustmentAsWriteOff)'|
+	* Change date and check rule
+		And I move to "Other" tab
+		And I input "28.02.2024 00:00:00" text in the field named "Date"
+		And I click "Post" button
+		When I Check the steps for Exception
+			| 'Then "1C:Enterprise" window is opened'    |
+		Then user message window does not contain messages
+	And I close all client application windows	
+
+Scenario: 9504103 check rules for documents (3 rules for 3 documents)
+	Given I open hyperlink 'e1cib/list/Catalog.LockDataModificationReasons'
+	* Preparation
+		And I go to line in "List" table
+			| 'Description'                                        |
+			| '2 rules for 1 document (StockAdjustmentAsWriteOff)' |
+		And I select current line in "List" table
+		And I set checkbox "Disable rule"
+		And I click "Save and close" button
+		And I go to line in "List" table
+			| 'Description'                                                                                   |
+			| '3 rules for 3 document (RetailGoodsReceipt, RetailShipmentConfirmation, ShipmentConfirmation)' |
+		And I select current line in "List" table
+		And I remove checkbox "Disable rule"
+		And I click "Save and close" button	
+	* Check rule for first document
+		Given I open hyperlink "e1cib/list/Document.RetailGoodsReceipt"				
+		And I go to line in "List" table
+			| 'Date'                | 'Number' |
+			| '19.02.2024 12:00:00' | '109'    |
+		And I select current line in "List" table
+		And I click "Post" button
+		Then "1C:Enterprise" window is opened
+		And I click the button named "OK"
+		Then there are lines in TestClient message log
+			|'Data lock reasons:\n3 rules for 3 document (RetailGoodsReceipt, RetailShipmentConfirmation, ShipmentConfirmation)'|
+		* Change date and check rule
+			And I move to "Other" tab
+			And I input "28.02.2024 00:00:00" text in the field named "Date"
+			And I click "Post" button
+			When I Check the steps for Exception
+				| 'Then "1C:Enterprise" window is opened'    |
+			Then user message window does not contain messages		
+	* Check rule for second document
+		Given I open hyperlink "e1cib/list/Document.RetailShipmentConfirmation"				
+		And I go to line in "List" table
+			| 'Date'                | 'Number' |
+			| '20.02.2024 12:00:00' | '109'    |
+		And I select current line in "List" table
+		And I click "Post" button
+		Then "1C:Enterprise" window is opened
+		And I click the button named "OK"			
+		Then there are lines in TestClient message log
+			|'Data lock reasons:\n3 rules for 3 document (RetailGoodsReceipt, RetailShipmentConfirmation, ShipmentConfirmation)'|
+		* Change date and check rule
+			And I move to "Other" tab
+			And I input "28.02.2024 00:00:00" text in the field named "Date"
+			And I click "Post" button
+			When I Check the steps for Exception
+				| 'Then "1C:Enterprise" window is opened'    |
+			Then user message window does not contain messages	
+	* Check rule for third document
+		Given I open hyperlink "e1cib/list/Document.ShipmentConfirmation"				
+		And I go to line in "List" table
+			| 'Date'                | 'Number' |
+			| '21.02.2024 12:00:00' | '109'    |
+		And I select current line in "List" table
+		And I click "Post" button
+		Then "1C:Enterprise" window is opened
+		And I click the button named "OK"			
+		Then there are lines in TestClient message log
+			|'Data lock reasons:\n3 rules for 3 document (RetailGoodsReceipt, RetailShipmentConfirmation, ShipmentConfirmation)'|
+		* Change date and check rule
+			And I move to "Other" tab
+			And I input "28.02.2024 00:00:00" text in the field named "Date"
+			And I click "Post" button
+			When I Check the steps for Exception
+				| 'Then "1C:Enterprise" window is opened'    |
+			Then user message window does not contain messages
+		And I close all client application windows
+		
+
+
+Scenario: 950411 create rules for catalog (<)
+		And I close all client application windows
+		Given I open hyperlink 'e1cib/list/Catalog.LockDataModificationReasons'
+	* Preparation 
+		And I go to line in "List" table
+			| 'Description'                                                                                   |
+			| '3 rules for 3 document (RetailGoodsReceipt, RetailShipmentConfirmation, ShipmentConfirmation)' |
+		And I select current line in "List" table
+		And I set checkbox "Disable rule"
+		And I click "Save and close" button	
 	* Create rule
 		And I click the button named "FormCreate"
 		And I input "lock catalog <" text in "ENG" field

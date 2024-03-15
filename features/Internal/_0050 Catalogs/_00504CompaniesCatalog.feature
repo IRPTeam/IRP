@@ -189,7 +189,8 @@ Scenario: _0050161 create Incoterms
 		And I input "Cost and Freight TR" text in the field named "Description_tr"
 		And I input "Cost and Freight RU" text in "RU" field
 		And I click "Ok" button
-		And I input "CFR" text in the field named "Code"	
+		And I input "CFR" text in the field named "Code"
+		And I click "Yes" button	
 		And I click the button named "FormWriteAndClose"
 		And Delay 3
 	* Check creation

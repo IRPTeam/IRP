@@ -17,6 +17,9 @@ Background:
 
 Scenario: _005013 filling in the "Companies" catalog
 	When set True value to the constant
+	Given I open hyperlink "e1cib/app/DataProcessor.SystemSettings"
+	And I set checkbox "Number editing available"
+	And I close "System settings" window
 	* Preparation
 		And I close all client application windows
 		When Create catalog IntegrationSettings objects
@@ -175,3 +178,22 @@ Scenario: _005016 name uniqueness control (Projects)
 		Then there are lines in TestClient message log
 			|'Description not unique [Project 01]'|	
 		And I close all client application windows	
+
+Scenario: _0050161 create Incoterms
+	* Open a creation form Incoterms
+		Given I open hyperlink "e1cib/list/Catalog.Incoterms"
+	* Create 
+		And I click the button named "FormCreate"
+		And I click Open button of the field named "Description_en"
+		And I input "Cost and Freight" text in the field named "Description_en"
+		And I input "Cost and Freight TR" text in the field named "Description_tr"
+		And I input "Cost and Freight RU" text in "RU" field
+		And I click "Ok" button
+		And I input "CFR" text in the field named "Code"
+		And I click "Yes" button	
+		And I click the button named "FormWriteAndClose"
+		And Delay 3
+	* Check creation
+		Then I check for the "Incoterms" catalog element with the "Description_en" "Cost and Freight"
+		Then I check for the "Incoterms" catalog element with the "Description_tr" "Cost and Freight TR"
+		Then I check for the "Incoterms" catalog element with the "Description_ru" "Cost and Freight RU"

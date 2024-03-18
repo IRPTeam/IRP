@@ -410,7 +410,7 @@
    <minValue xsi:type="core:UndefinedValue"/>
    <maxValue xsi:type="core:UndefinedValue"/>
    <choiceParameterLinks>
-    <name>Filter.Company</name>
+    <name>Filter.LegalName</name>
     <field>Document.DebitNote.TabularSection.Transactions.Attribute.LegalName</field>
    </choiceParameterLinks>
    <dataHistory>Use</dataHistory>

@@ -24,6 +24,11 @@ Scenario: _005018 filling in the "Cash/Bank accounts" catalog
 		Given I open hyperlink "e1cib/list/Catalog.CashAccounts"
 		And Delay 2
 		And I click the button named "FormCreate"
+	* Check field visibility
+		And field "BankCountry" is not present on the form
+		And field "BankIdentifierCode" is not present on the form
+		And field "BankSWIFTCode" is not present on the form
+		And field "isIBAN" is not present on the form
 	* Create and check the creation of Cash account: Cash desk №1 (with fix currency), Cash desk №2 (multi currency)
 		And I click Open button of the field named "Description_en"
 		And I input "Cash desk №1" text in the field named "Description_en"
@@ -100,6 +105,10 @@ Scenario: _005018 filling in the "Cash/Bank accounts" catalog
 			| Code   | Description     |
 			| TRY    | Turkish lira    |
 		And I select current line in "List" table
+		And I set checkbox "Is IBAN"
+		And I select from "Bank country" drop-down list by "Turkey" string
+		And I input "24667788" text in "Bank identifier code" field
+		And I input "45566778789" text in "Bank SWIFT code" field		
 		And I click the button named "FormWrite"
 		* Check data save
 			Then the form attribute named "Type" became equal to "Bank"
@@ -109,6 +118,10 @@ Scenario: _005018 filling in the "Cash/Bank accounts" catalog
 			Then the form attribute named "Description_en" became equal to "Bank account, TRY"
 			Then the form attribute named "CurrencyType" became equal to "Fixed"
 			Then the form attribute named "Currency" became equal to "TRY"
+			Then the form attribute named "BankCountry" became equal to "Turkey"
+			Then the form attribute named "BankIdentifierCode" became equal to "24667788"
+			Then the form attribute named "BankSWIFTCode" became equal to "45566778789"
+			And I wait "Yes" value of the attribute named "isIBAN" for 3 seconds							
 		And I click the button named "FormWriteAndClose"
 		And Delay 5
 		Then I check for the "CashAccounts" catalog element with the "Description_en" "Bank account, TRY"  

@@ -163,5 +163,6 @@
   <types>CatalogRef.Projects</types>
   <types>DocumentRef.DebitCreditNote</types>
   <types>CatalogRef.AgingPeriods</types>
+  <types>CatalogRef.Incoterms</types>
  </type>
 </mdclass:DefinedType>

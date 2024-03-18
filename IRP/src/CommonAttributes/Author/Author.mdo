@@ -21,7 +21,35 @@
  <dataHistory>Use</dataHistory>
  <fillValue xsi:type="core:UndefinedValue"/>
  <content>
+  <metadata>Catalog.PaymentTerminals</metadata>
+  <use>Use</use>
+ </content>
+ <content>
+  <metadata>Catalog.Agreements</metadata>
+  <use>Use</use>
+ </content>
+ <content>
+  <metadata>Document.VisitorCounter</metadata>
+  <use>Use</use>
+ </content>
+ <content>
+  <metadata>Catalog.AgingPeriods</metadata>
+  <use>Use</use>
+ </content>
+ <content>
+  <metadata>Document.ProductionCostsAllocation</metadata>
+  <use>Use</use>
+ </content>
+ <content>
   <metadata>Document.ManualRegisterEntry</metadata>
+  <use>Use</use>
+ </content>
+ <content>
+  <metadata>Catalog.FileStorageVolumes</metadata>
+  <use>Use</use>
+ </content>
+ <content>
+  <metadata>Catalog.Items</metadata>
   <use>Use</use>
  </content>
  <content>
@@ -29,7 +57,31 @@
   <use>Use</use>
  </content>
  <content>
+  <metadata>Catalog.SpecialOfferTypes</metadata>
+  <use>Use</use>
+ </content>
+ <content>
+  <metadata>Document.DepreciationCalculation</metadata>
+  <use>Use</use>
+ </content>
+ <content>
   <metadata>Document.SalesOrder</metadata>
+  <use>Use</use>
+ </content>
+ <content>
+  <metadata>Catalog.LegalNameContracts</metadata>
+  <use>Use</use>
+ </content>
+ <content>
+  <metadata>Catalog.Units</metadata>
+  <use>Use</use>
+ </content>
+ <content>
+  <metadata>Catalog.PaymentSchedules</metadata>
+  <use>Use</use>
+ </content>
+ <content>
+  <metadata>Catalog.FixedAssetsLedgerTypes</metadata>
   <use>Use</use>
  </content>
  <content>
@@ -37,11 +89,47 @@
   <use>Use</use>
  </content>
  <content>
+  <metadata>Document.RetailGoodsReceipt</metadata>
+  <use>Use</use>
+ </content>
+ <content>
+  <metadata>Catalog.PartnerSegments</metadata>
+  <use>Use</use>
+ </content>
+ <content>
   <metadata>Document.ChequeBondTransaction</metadata>
   <use>Use</use>
  </content>
  <content>
+  <metadata>Catalog.Users</metadata>
+  <use>Use</use>
+ </content>
+ <content>
+  <metadata>Catalog.AddAttributeAndPropertySets</metadata>
+  <use>Use</use>
+ </content>
+ <content>
+  <metadata>Catalog.InterfaceGroups</metadata>
+  <use>Use</use>
+ </content>
+ <content>
+  <metadata>Catalog.CurrencyMovementSets</metadata>
+  <use>Use</use>
+ </content>
+ <content>
+  <metadata>Catalog.AdvancesKeys</metadata>
+  <use>Use</use>
+ </content>
+ <content>
+  <metadata>Catalog.FileStoragesInfo</metadata>
+  <use>Use</use>
+ </content>
+ <content>
   <metadata>Document.AdditionalCostAllocation</metadata>
+  <use>Use</use>
+ </content>
+ <content>
+  <metadata>Catalog.Countries</metadata>
   <use>Use</use>
  </content>
  <content>
@@ -53,7 +141,47 @@
   <use>Use</use>
  </content>
  <content>
+  <metadata>Catalog.Batches</metadata>
+  <use>Use</use>
+ </content>
+ <content>
+  <metadata>Catalog.CashAccounts</metadata>
+  <use>Use</use>
+ </content>
+ <content>
+  <metadata>Catalog.AddAttributeAndPropertyValues</metadata>
+  <use>Use</use>
+ </content>
+ <content>
+  <metadata>Catalog.FillingTemplates</metadata>
+  <use>Use</use>
+ </content>
+ <content>
+  <metadata>Document.EmployeeSickLeave</metadata>
+  <use>Use</use>
+ </content>
+ <content>
+  <metadata>Document.AdditionalDeduction</metadata>
+  <use>Use</use>
+ </content>
+ <content>
+  <metadata>Catalog.BankTerms</metadata>
+  <use>Use</use>
+ </content>
+ <content>
+  <metadata>Catalog.SpecialOffers</metadata>
+  <use>Use</use>
+ </content>
+ <content>
+  <metadata>Catalog.Workstations</metadata>
+  <use>Use</use>
+ </content>
+ <content>
   <metadata>Document.ReconciliationStatement</metadata>
+  <use>Use</use>
+ </content>
+ <content>
+  <metadata>Catalog.TaxRates</metadata>
   <use>Use</use>
  </content>
  <content>
@@ -69,7 +197,35 @@
   <use>Use</use>
  </content>
  <content>
+  <metadata>Catalog.IDInfoSets</metadata>
+  <use>Use</use>
+ </content>
+ <content>
   <metadata>Document.StockAdjustmentAsSurplus</metadata>
+  <use>Use</use>
+ </content>
+ <content>
+  <metadata>Catalog.PlanningPeriods</metadata>
+  <use>Use</use>
+ </content>
+ <content>
+  <metadata>Catalog.LedgerTypes</metadata>
+  <use>Use</use>
+ </content>
+ <content>
+  <metadata>Catalog.AccrualAndDeductionTypes</metadata>
+  <use>Use</use>
+ </content>
+ <content>
+  <metadata>Catalog.ItemKeys</metadata>
+  <use>Use</use>
+ </content>
+ <content>
+  <metadata>Catalog.CashStatementStatuses</metadata>
+  <use>Use</use>
+ </content>
+ <content>
+  <metadata>Document.EmployeeTransfer</metadata>
   <use>Use</use>
  </content>
  <content>
@@ -77,7 +233,35 @@
   <use>Use</use>
  </content>
  <content>
+  <metadata>Catalog.ItemSegments</metadata>
+  <use>Use</use>
+ </content>
+ <content>
+  <metadata>Catalog.VehicleTypes</metadata>
+  <use>Use</use>
+ </content>
+ <content>
   <metadata>Document.PhysicalCountByLocation</metadata>
+  <use>Use</use>
+ </content>
+ <content>
+  <metadata>Catalog.FixedAssets</metadata>
+  <use>Use</use>
+ </content>
+ <content>
+  <metadata>Catalog.IntegrationSettings</metadata>
+  <use>Use</use>
+ </content>
+ <content>
+  <metadata>Document.CommissioningOfFixedAsset</metadata>
+  <use>Use</use>
+ </content>
+ <content>
+  <metadata>Catalog.BillOfMaterials</metadata>
+  <use>Use</use>
+ </content>
+ <content>
+  <metadata>Catalog.Taxes</metadata>
   <use>Use</use>
  </content>
  <content>
@@ -85,7 +269,19 @@
   <use>Use</use>
  </content>
  <content>
+  <metadata>Catalog.SpecialOfferRules</metadata>
+  <use>Use</use>
+ </content>
+ <content>
   <metadata>Document.PurchaseReturn</metadata>
+  <use>Use</use>
+ </content>
+ <content>
+  <metadata>Catalog.UnitsOfMeasurement</metadata>
+  <use>Use</use>
+ </content>
+ <content>
+  <metadata>Document.TimeSheet</metadata>
   <use>Use</use>
  </content>
  <content>
@@ -93,11 +289,31 @@
   <use>Use</use>
  </content>
  <content>
+  <metadata>Catalog.Files</metadata>
+  <use>Use</use>
+ </content>
+ <content>
   <metadata>Document.SalesInvoice</metadata>
   <use>Use</use>
  </content>
  <content>
+  <metadata>Catalog.Stores</metadata>
+  <use>Use</use>
+ </content>
+ <content>
+  <metadata>Catalog.AccessProfiles</metadata>
+  <use>Use</use>
+ </content>
+ <content>
   <metadata>Document.CashRevenue</metadata>
+  <use>Use</use>
+ </content>
+ <content>
+  <metadata>Catalog.AccessGroups</metadata>
+  <use>Use</use>
+ </content>
+ <content>
+  <metadata>Document.AdditionalAccrual</metadata>
   <use>Use</use>
  </content>
  <content>
@@ -109,11 +325,35 @@
   <use>Use</use>
  </content>
  <content>
+  <metadata>Document.EmployeeHiring</metadata>
+  <use>Use</use>
+ </content>
+ <content>
+  <metadata>Catalog.Hardware</metadata>
+  <use>Use</use>
+ </content>
+ <content>
+  <metadata>Catalog.Specifications</metadata>
+  <use>Use</use>
+ </content>
+ <content>
+  <metadata>Catalog.BatchKeys</metadata>
+  <use>Use</use>
+ </content>
+ <content>
   <metadata>Document.Production</metadata>
   <use>Use</use>
  </content>
  <content>
+  <metadata>Catalog.CancelReturnReasons</metadata>
+  <use>Use</use>
+ </content>
+ <content>
   <metadata>Catalog.ReportOptions</metadata>
+  <use>Use</use>
+ </content>
+ <content>
+  <metadata>Catalog.DataMappingItems</metadata>
   <use>Use</use>
  </content>
  <content>
@@ -125,7 +365,35 @@
   <use>Use</use>
  </content>
  <content>
+  <metadata>Document.RetailShipmentConfirmation</metadata>
+  <use>Use</use>
+ </content>
+ <content>
+  <metadata>Catalog.Currencies</metadata>
+  <use>Use</use>
+ </content>
+ <content>
   <metadata>Document.AdditionalRevenueAllocation</metadata>
+  <use>Use</use>
+ </content>
+ <content>
+  <metadata>Document.DecommissioningOfFixedAsset</metadata>
+  <use>Use</use>
+ </content>
+ <content>
+  <metadata>Catalog.EmployeeSchedule</metadata>
+  <use>Use</use>
+ </content>
+ <content>
+  <metadata>Catalog.AccountingOperations</metadata>
+  <use>Use</use>
+ </content>
+ <content>
+  <metadata>Document.Payroll</metadata>
+  <use>Use</use>
+ </content>
+ <content>
+  <metadata>Catalog.LockDataModificationReasons</metadata>
   <use>Use</use>
  </content>
  <content>
@@ -137,7 +405,15 @@
   <use>Use</use>
  </content>
  <content>
+  <metadata>Catalog.BusinessUnits</metadata>
+  <use>Use</use>
+ </content>
+ <content>
   <metadata>Document.OpeningEntry</metadata>
+  <use>Use</use>
+ </content>
+ <content>
+  <metadata>Catalog.Addresses</metadata>
   <use>Use</use>
  </content>
  <content>
@@ -150,6 +426,22 @@
  </content>
  <content>
   <metadata>Document.PurchaseOrderClosing</metadata>
+  <use>Use</use>
+ </content>
+ <content>
+  <metadata>Catalog.ExpenseAndRevenueTypes</metadata>
+  <use>Use</use>
+ </content>
+ <content>
+  <metadata>Catalog.EmployeePositions</metadata>
+  <use>Use</use>
+ </content>
+ <content>
+  <metadata>Catalog.ExternalDataProc</metadata>
+  <use>Use</use>
+ </content>
+ <content>
+  <metadata>Document.ModernizationOfFixedAsset</metadata>
   <use>Use</use>
  </content>
  <content>
@@ -169,11 +461,43 @@
   <use>Use</use>
  </content>
  <content>
+  <metadata>Document.DebitCreditNote</metadata>
+  <use>Use</use>
+ </content>
+ <content>
+  <metadata>Catalog.Partners</metadata>
+  <use>Use</use>
+ </content>
+ <content>
+  <metadata>Catalog.Incoterms</metadata>
+  <use>Use</use>
+ </content>
+ <content>
+  <metadata>Document.EmployeeVacation</metadata>
+  <use>Use</use>
+ </content>
+ <content>
+  <metadata>Catalog.ExternalFunctions</metadata>
+  <use>Use</use>
+ </content>
+ <content>
   <metadata>Document.PriceList</metadata>
   <use>Use</use>
  </content>
  <content>
   <metadata>Document.IncomingPaymentOrder</metadata>
+  <use>Use</use>
+ </content>
+ <content>
+  <metadata>Catalog.SourceOfOrigins</metadata>
+  <use>Use</use>
+ </content>
+ <content>
+  <metadata>Catalog.ChequeBonds</metadata>
+  <use>Use</use>
+ </content>
+ <content>
+  <metadata>Catalog.ItemTypes</metadata>
   <use>Use</use>
  </content>
  <content>
@@ -189,7 +513,23 @@
   <use>Use</use>
  </content>
  <content>
+  <metadata>Document.EmployeeFiring</metadata>
+  <use>Use</use>
+ </content>
+ <content>
   <metadata>Document.JournalEntry</metadata>
+  <use>Use</use>
+ </content>
+ <content>
+  <metadata>Document.RetailReceiptCorrection</metadata>
+  <use>Use</use>
+ </content>
+ <content>
+  <metadata>Catalog.LedgerTypeVariants</metadata>
+  <use>Use</use>
+ </content>
+ <content>
+  <metadata>Document.EmployeeCashAdvance</metadata>
   <use>Use</use>
  </content>
  <content>
@@ -197,11 +537,31 @@
   <use>Use</use>
  </content>
  <content>
+  <metadata>Catalog.PartnerItems</metadata>
+  <use>Use</use>
+ </content>
+ <content>
+  <metadata>Catalog.Projects</metadata>
+  <use>Use</use>
+ </content>
+ <content>
+  <metadata>Catalog.IDInfoAddresses</metadata>
+  <use>Use</use>
+ </content>
+ <content>
   <metadata>Document.InventoryTransferOrder</metadata>
   <use>Use</use>
  </content>
  <content>
+  <metadata>Catalog.PriceTypes</metadata>
+  <use>Use</use>
+ </content>
+ <content>
   <metadata>Document.ProductionPlanningCorrection</metadata>
+  <use>Use</use>
+ </content>
+ <content>
+  <metadata>Catalog.PartnersBankAccounts</metadata>
   <use>Use</use>
  </content>
  <content>
@@ -217,6 +577,30 @@
   <use>Use</use>
  </content>
  <content>
+  <metadata>Catalog.RetailCustomers</metadata>
+  <use>Use</use>
+ </content>
+ <content>
+  <metadata>Catalog.PaymentTypes</metadata>
+  <use>Use</use>
+ </content>
+ <content>
+  <metadata>Catalog.Vehicles</metadata>
+  <use>Use</use>
+ </content>
+ <content>
+  <metadata>Catalog.ObjectAccessKeys</metadata>
+  <use>Use</use>
+ </content>
+ <content>
+  <metadata>Catalog.SerialLotNumbers</metadata>
+  <use>Use</use>
+ </content>
+ <content>
+  <metadata>Catalog.UserGroups</metadata>
+  <use>Use</use>
+ </content>
+ <content>
   <metadata>Document.CreditNote</metadata>
   <use>Use</use>
  </content>
@@ -226,6 +610,14 @@
  </content>
  <content>
   <metadata>Document.InternalSupplyRequest</metadata>
+  <use>Use</use>
+ </content>
+ <content>
+  <metadata>Catalog.MovementRules</metadata>
+  <use>Use</use>
+ </content>
+ <content>
+  <metadata>Catalog.ObjectStatuses</metadata>
   <use>Use</use>
  </content>
  <content>
@@ -245,355 +637,7 @@
   <use>Use</use>
  </content>
  <content>
-  <metadata>Document.CashStatement</metadata>
-  <use>Use</use>
- </content>
- <content>
-  <metadata>Document.EmployeeCashAdvance</metadata>
-  <use>Use</use>
- </content>
- <content>
-  <metadata>Document.ProductionCostsAllocation</metadata>
-  <use>Use</use>
- </content>
- <content>
-  <metadata>Document.Payroll</metadata>
-  <use>Use</use>
- </content>
- <content>
-  <metadata>Document.TimeSheet</metadata>
-  <use>Use</use>
- </content>
- <content>
-  <metadata>Document.RetailShipmentConfirmation</metadata>
-  <use>Use</use>
- </content>
- <content>
-  <metadata>Document.RetailGoodsReceipt</metadata>
-  <use>Use</use>
- </content>
- <content>
-  <metadata>Document.CommissioningOfFixedAsset</metadata>
-  <use>Use</use>
- </content>
- <content>
-  <metadata>Document.CommissioningOfFixedAsset</metadata>
-  <use>Use</use>
- </content>
- <content>
-  <metadata>Document.DecommissioningOfFixedAsset</metadata>
-  <use>Use</use>
- </content>
- <content>
-  <metadata>Document.FixedAssetTransfer</metadata>
-  <use>Use</use>
- </content>
- <content>
-  <metadata>Document.DepreciationCalculation</metadata>
-  <use>Use</use>
- </content>
- <content>
-  <metadata>Document.ModernizationOfFixedAsset</metadata>
-  <use>Use</use>
- </content>
- <content>
-  <metadata>Document.EmployeeHiring</metadata>
-  <use>Use</use>
- </content>
- <content>
-  <metadata>Document.EmployeeTransfer</metadata>
-  <use>Use</use>
- </content>
- <content>
-  <metadata>Document.EmployeeFiring</metadata>
-  <use>Use</use>
- </content>
- <content>
-  <metadata>Document.EmployeeVacation</metadata>
-  <use>Use</use>
- </content>
- <content>
-  <metadata>Document.EmployeeSickLeave</metadata>
-  <use>Use</use>
- </content>
- <content>
-  <metadata>Document.AdditionalDeduction</metadata>
-  <use>Use</use>
- </content>
- <content>
-  <metadata>Document.AdditionalAccrual</metadata>
-  <use>Use</use>
- </content>
- <content>
-  <metadata>Document.VisitorCounter</metadata>
-  <use>Use</use>
- </content>
- <content>
-  <metadata>Document.RetailReceiptCorrection</metadata>
-  <use>Use</use>
- </content>
- <content>
-  <metadata>Catalog.Agreements</metadata>
-  <use>Use</use>
- </content>
- <content>
-  <metadata>Catalog.BankTerms</metadata>
-  <use>Use</use>
- </content>
- <content>
-  <metadata>Catalog.BusinessUnits</metadata>
-  <use>Use</use>
- </content>
- <content>
-  <metadata>Catalog.CashAccounts</metadata>
-  <use>Use</use>
- </content>
- <content>
   <metadata>Catalog.Companies</metadata>
-  <use>Use</use>
- </content>
- <content>
-  <metadata>Catalog.Countries</metadata>
-  <use>Use</use>
- </content>
- <content>
-  <metadata>Catalog.CurrencyMovementSets</metadata>
-  <use>Use</use>
- </content>
- <content>
-  <metadata>Catalog.AccessGroups</metadata>
-  <use>Use</use>
- </content>
- <content>
-  <metadata>Catalog.AccessProfiles</metadata>
-  <use>Use</use>
- </content>
- <content>
-  <metadata>Catalog.AccountingOperations</metadata>
-  <use>Use</use>
- </content>
- <content>
-  <metadata>Catalog.AccrualAndDeductionTypes</metadata>
-  <use>Use</use>
- </content>
- <content>
-  <metadata>Catalog.AddAttributeAndPropertyValues</metadata>
-  <use>Use</use>
- </content>
- <content>
-  <metadata>Catalog.AddAttributeAndPropertySets</metadata>
-  <use>Use</use>
- </content>
- <content>
-  <metadata>Catalog.Addresses</metadata>
-  <use>Use</use>
- </content>
- <content>
-  <metadata>Catalog.AdvancesKeys</metadata>
-  <use>Use</use>
- </content>
- <content>
-  <metadata>Catalog.BillOfMaterials</metadata>
-  <use>Use</use>
- </content>
- <content>
-  <metadata>Catalog.CancelReturnReasons</metadata>
-  <use>Use</use>
- </content>
- <content>
-  <metadata>Catalog.CashStatementStatuses</metadata>
-  <use>Use</use>
- </content>
- <content>
-  <metadata>Catalog.ChequeBonds</metadata>
-  <use>Use</use>
- </content>
- <content>
-  <metadata>Catalog.Batches</metadata>
-  <use>Use</use>
- </content>
- <content>
-  <metadata>Catalog.BatchKeys</metadata>
-  <use>Use</use>
- </content>
- <content>
-  <metadata>Catalog.Currencies</metadata>
-  <use>Use</use>
- </content>
- <content>
-  <metadata>Catalog.DataMappingItems</metadata>
-  <use>Use</use>
- </content>
- <content>
-  <metadata>Catalog.EmployeePositions</metadata>
-  <use>Use</use>
- </content>
- <content>
-  <metadata>Catalog.ExpenseAndRevenueTypes</metadata>
-  <use>Use</use>
- </content>
- <content>
-  <metadata>Catalog.ExternalDataProc</metadata>
-  <use>Use</use>
- </content>
- <content>
-  <metadata>Catalog.ExternalFunctions</metadata>
-  <use>Use</use>
- </content>
- <content>
-  <metadata>Catalog.Files</metadata>
-  <use>Use</use>
- </content>
- <content>
-  <metadata>Catalog.FileStoragesInfo</metadata>
-  <use>Use</use>
- </content>
- <content>
-  <metadata>Catalog.FileStorageVolumes</metadata>
-  <use>Use</use>
- </content>
- <content>
-  <metadata>Catalog.FillingTemplates</metadata>
-  <use>Use</use>
- </content>
- <content>
-  <metadata>Catalog.FixedAssets</metadata>
-  <use>Use</use>
- </content>
- <content>
-  <metadata>Catalog.FixedAssetsLedgerTypes</metadata>
-  <use>Use</use>
- </content>
- <content>
-  <metadata>Catalog.Hardware</metadata>
-  <use>Use</use>
- </content>
- <content>
-  <metadata>Catalog.IDInfoAddresses</metadata>
-  <use>Use</use>
- </content>
- <content>
-  <metadata>Catalog.IDInfoSets</metadata>
-  <use>Use</use>
- </content>
- <content>
-  <metadata>Catalog.IntegrationSettings</metadata>
-  <use>Use</use>
- </content>
- <content>
-  <metadata>Catalog.InterfaceGroups</metadata>
-  <use>Use</use>
- </content>
- <content>
-  <metadata>Catalog.ItemKeys</metadata>
-  <use>Use</use>
- </content>
- <content>
-  <metadata>Catalog.Items</metadata>
-  <use>Use</use>
- </content>
- <content>
-  <metadata>Catalog.ItemSegments</metadata>
-  <use>Use</use>
- </content>
- <content>
-  <metadata>Catalog.ItemTypes</metadata>
-  <use>Use</use>
- </content>
- <content>
-  <metadata>Catalog.LedgerTypes</metadata>
-  <use>Use</use>
- </content>
- <content>
-  <metadata>Catalog.LedgerTypeVariants</metadata>
-  <use>Use</use>
- </content>
- <content>
-  <metadata>Catalog.LegalNameContracts</metadata>
-  <use>Use</use>
- </content>
- <content>
-  <metadata>Catalog.LockDataModificationReasons</metadata>
-  <use>Use</use>
- </content>
- <content>
-  <metadata>Catalog.MovementRules</metadata>
-  <use>Use</use>
- </content>
- <content>
-  <metadata>Catalog.ObjectAccessKeys</metadata>
-  <use>Use</use>
- </content>
- <content>
-  <metadata>Catalog.ObjectStatuses</metadata>
-  <use>Use</use>
- </content>
- <content>
-  <metadata>Catalog.PartnerItems</metadata>
-  <use>Use</use>
- </content>
- <content>
-  <metadata>Catalog.Partners</metadata>
-  <use>Use</use>
- </content>
- <content>
-  <metadata>Catalog.PartnersBankAccounts</metadata>
-  <use>Use</use>
- </content>
- <content>
-  <metadata>Catalog.PartnerSegments</metadata>
-  <use>Use</use>
- </content>
- <content>
-  <metadata>Catalog.PaymentSchedules</metadata>
-  <use>Use</use>
- </content>
- <content>
-  <metadata>Catalog.PaymentTerminals</metadata>
-  <use>Use</use>
- </content>
- <content>
-  <metadata>Catalog.PaymentTypes</metadata>
-  <use>Use</use>
- </content>
- <content>
-  <metadata>Catalog.PlanningPeriods</metadata>
-  <use>Use</use>
- </content>
- <content>
-  <metadata>Catalog.PriceTypes</metadata>
-  <use>Use</use>
- </content>
- <content>
-  <metadata>Catalog.RetailCustomers</metadata>
-  <use>Use</use>
- </content>
- <content>
-  <metadata>Catalog.SerialLotNumbers</metadata>
-  <use>Use</use>
- </content>
- <content>
-  <metadata>Catalog.SourceOfOrigins</metadata>
-  <use>Use</use>
- </content>
- <content>
-  <metadata>Catalog.SpecialOfferRules</metadata>
-  <use>Use</use>
- </content>
- <content>
-  <metadata>Catalog.SpecialOffers</metadata>
-  <use>Use</use>
- </content>
- <content>
-  <metadata>Catalog.SpecialOfferTypes</metadata>
-  <use>Use</use>
- </content>
- <content>
-  <metadata>Catalog.Specifications</metadata>
-  <use>Use</use>
- </content>
- <content>
-  <metadata>Catalog.Stores</metadata>
   <use>Use</use>
  </content>
  <content>
@@ -601,55 +645,11 @@
   <use>Use</use>
  </content>
  <content>
-  <metadata>Catalog.Taxes</metadata>
+  <metadata>Document.CashStatement</metadata>
   <use>Use</use>
  </content>
  <content>
-  <metadata>Catalog.TaxRates</metadata>
-  <use>Use</use>
- </content>
- <content>
-  <metadata>Catalog.Units</metadata>
-  <use>Use</use>
- </content>
- <content>
-  <metadata>Catalog.UnitsOfMeasurement</metadata>
-  <use>Use</use>
- </content>
- <content>
-  <metadata>Catalog.UserGroups</metadata>
-  <use>Use</use>
- </content>
- <content>
-  <metadata>Catalog.Users</metadata>
-  <use>Use</use>
- </content>
- <content>
-  <metadata>Catalog.Vehicles</metadata>
-  <use>Use</use>
- </content>
- <content>
-  <metadata>Catalog.VehicleTypes</metadata>
-  <use>Use</use>
- </content>
- <content>
-  <metadata>Catalog.Workstations</metadata>
-  <use>Use</use>
- </content>
- <content>
-  <metadata>Catalog.EmployeeSchedule</metadata>
-  <use>Use</use>
- </content>
- <content>
-  <metadata>Catalog.Projects</metadata>
-  <use>Use</use>
- </content>
- <content>
-  <metadata>Document.DebitCreditNote</metadata>
-  <use>Use</use>
- </content>
- <content>
-  <metadata>Catalog.AgingPeriods</metadata>
+  <metadata>Document.FixedAssetTransfer</metadata>
   <use>Use</use>
  </content>
  <autoUse>DontUse</autoUse>

@@ -1,4 +1,4 @@
-#language: en
+﻿#language: en
 @tree
 @Positive
 @ExtensionReportForm
@@ -322,3 +322,33 @@ Scenario: _4000128 check reports option share
 			| 'Total'                                | ''                 |
 	And I close TestClient session
 	Then I connect launched Test client "Этот клиент"
+
+Scenario: _4000129 check that report created by another user cannot be overwritten
+	And I close all client application windows
+	And I connect "TestAdmin" TestClient using "ABrown" login and "" password
+	* Open test report	
+		And In the command interface I select "Reports" "Barcodes" 
+	* Try change (not report author)
+		And I click "Save option..." button
+		And I activate "Report option" field in "OptionsList" table
+		And I go to line in "OptionsList" table
+			| 'Author'    | 'Report option' |
+			| 'CI'        | 'test2'         |
+		And I select current line in "OptionsList" table
+		Then "Enter an option name" window is opened
+		And I click the button named "OK"
+		Then "1C:Enterprise" window is opened
+		And I click "OK" button
+		And I close TestClient session
+	* Try change (report author)
+		Then I connect launched Test client "Этот клиент"
+		And In the command interface I select "Reports" "Barcodes" 
+		And I click "Save option..." button
+		And I activate "Report option" field in "OptionsList" table
+		And I go to line in "OptionsList" table
+			| 'Author'    | 'Report option' |
+			| 'CI'        | 'test2'         |
+		And I select current line in "OptionsList" table
+		Then "1C:Enterprise" window is opened
+		And I click "Yes" button
+		And I close all client application windows		

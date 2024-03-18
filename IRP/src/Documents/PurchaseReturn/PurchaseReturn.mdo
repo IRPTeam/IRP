@@ -392,7 +392,7 @@
   <minValue xsi:type="core:UndefinedValue"/>
   <maxValue xsi:type="core:UndefinedValue"/>
   <choiceParameterLinks>
-   <name>Filter.Company</name>
+   <name>Filter.LegalName</name>
    <field>Document.PurchaseReturn.Attribute.LegalName</field>
   </choiceParameterLinks>
   <fillValue xsi:type="core:UndefinedValue"/>

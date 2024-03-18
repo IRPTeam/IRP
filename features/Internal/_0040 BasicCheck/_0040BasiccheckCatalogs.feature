@@ -1283,3 +1283,16 @@ Scenario: Open choise form "Projects"
 		Then I raise "Failed to open catalog choise form Projects" exception
 	And I close current window
 
+Scenario: Open list form "Incoterms" 
+
+	Given I open "Incoterms" catalog default form
+	If the warning is displayed then
+		Then I raise "Failed to open catalog form Incoterms" exception
+	And I close current window
+
+Scenario: Open object form "Incoterms"
+	And I close all client application windows
+	Given I open "Incoterms" reference main form
+	If the warning is displayed then
+		Then I raise "Failed to open catalog form Incoterms" exception
+	And I close current window

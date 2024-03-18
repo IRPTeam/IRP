@@ -96,6 +96,10 @@
     </type>
     <minValue xsi:type="core:UndefinedValue"/>
     <maxValue xsi:type="core:UndefinedValue"/>
+    <choiceParameterLinks>
+      <name>Filter.LegalName</name>
+      <field>AccumulationRegister.R5010B_ReconciliationStatement.Dimension.LegalName</field>
+    </choiceParameterLinks>
     <fullTextSearch>Use</fullTextSearch>
     <useInTotals>true</useInTotals>
   </dimensions>

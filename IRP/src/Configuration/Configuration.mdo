@@ -17,7 +17,7 @@
   <usePurposes>PersonalComputer</usePurposes>
   <defaultRoles>Role.FullAccess</defaultRoles>
   <vendor>IRP Team</vendor>
-  <version>2024.11.3949</version>
+  <version>2024.12.3964</version>
   <updateCatalogAddress>https://github.com/IRPTeam/IRP</updateCatalogAddress>
   <useManagedFormInOrdinaryApplication>true</useManagedFormInOrdinaryApplication>
   <useOrdinaryFormInManagedApplication>true</useOrdinaryFormInManagedApplication>
@@ -1094,6 +1094,7 @@
   <catalogs>Catalog.VehicleTypes</catalogs>
   <catalogs>Catalog.Workstations</catalogs>
   <catalogs>Catalog.AgingPeriods</catalogs>
+  <catalogs>Catalog.Incoterms</catalogs>
   <documents>Document.AdditionalAccrual</documents>
   <documents>Document.AdditionalCostAllocation</documents>
   <documents>Document.AdditionalDeduction</documents>

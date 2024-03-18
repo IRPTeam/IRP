@@ -213,7 +213,12 @@ Function CheckDocumentsResult(Document, DocName)
 	Query.SetParameter("Headers", GetHeaderTable(Document));
 	
 	If Result.Tables.ItemList = Undefined Then
-		Query.SetParameter("ItemList", Document.ItemList.Unload());
+		
+		ItemsListTable =  Document.ItemList.Unload();
+		ItemsListTable.Columns.Add("Ref", New TypeDescription("DocumentRef." + DocName));
+		ItemsListTable.FillValues(Document.Ref, "Ref");
+		Query.SetParameter("ItemList", ItemsListTable);
+		
 	Else
 		Query.SetParameter("ItemList", Result.Tables.ItemList);
 	EndIf;
@@ -824,5 +829,28 @@ Function ErrorNotFilledPurchaseReturnTransactionType(Document, RowIDList)
 	EndIf;
 	Return Result;
 EndFunction
+
+Function ErrorProjectNotInProjectGroup(Document, RowIDList)
+	Result = New Array; // Array of String
+	If RowIDList.Count() = 0 Then
+		Return Result;
+	EndIf;
+	
+	DocObject = Document.GetObject(); // DocumentObject.SalesInvoice
+	
+	For Each RowKey In RowIDList Do
+		Row = DocObject.ItemList.FindRows(New Structure("Key", RowKey));
+		Row[0].Project = Catalogs.Projects.EmptyRef();
+	EndDo;
+	
+	If DocObject.Posted Then
+		DocObject.Write(DocumentWriteMode.Posting);
+	Else
+		DocObject.Write(DocumentWriteMode.Write);
+	EndIf;
+	
+	Return Result;
+EndFunction
+
 
 #EndRegion

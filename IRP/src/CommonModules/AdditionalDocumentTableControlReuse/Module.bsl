@@ -208,6 +208,11 @@ Function GetExceptionsByDocument()
 	Exceptions.Insert("SalesReportFromTradeAgent", 
 		"ErrorQuantityIsZero, ErrorQuantityInBaseUnitIsZero, ErrorNetAmountGreaterTotalAmount,
 		|ErrorTotalAmountMinusNetAmountNotEqualTaxAmount");
+		
+	Exceptions.Insert("PurchaseInvoice"	, "ErrorProjectNotInProjectGroup");
+	Exceptions.Insert("SalesInvoice"	, "ErrorProjectNotInProjectGroup");
+	Exceptions.Insert("PurchaseReturn"	, "ErrorProjectNotInProjectGroup");
+		
 	Return Exceptions
 EndFunction
 
@@ -897,6 +902,12 @@ Function ErrorWithItemList()
 		0
 	));
 	
+	Str.Insert("ErrorProjectNotInProjectGroup", New Structure("Query, Fields, QueryNumber", 
+		"ItemList.Project.ProjectGroup <> ItemList.Ref.ProjectGroup",	
+		"Project",
+		0
+	));
+
 	Return Str;
 EndFunction
 

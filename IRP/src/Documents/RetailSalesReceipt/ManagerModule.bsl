@@ -238,7 +238,7 @@ Function ItemList()
 		   |	ItemList.InventoryOrigin = VALUE(Enum.InventoryOriginTypes.OwnStocks) AS IsOwnStocks,
 		   |	ItemList.InventoryOrigin = VALUE(Enum.InventoryOriginTypes.ConsignorStocks) AS IsConsignorStocks,
 		   |	ItemList.InventoryOrigin AS InventoryOrigin,
-		   |	ItemList.Ref.ProjectGroup AS ProjectGroup,
+		   |	ItemList.Ref.ProjectGroup,
 		   |	TableRowIDInfo.RowID AS RowID
 		   |INTO ItemList
 		   |FROM

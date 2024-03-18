@@ -44,7 +44,8 @@
 // * ATC_ErrorNotFilledQuantityInSourceOfOrigins - String - 
 // * ATC_ErrorQuantityInSourceOfOriginsDiffQuantityInSerialLotNumber - String - 
 // * ATC_ErrorQuantityInSourceOfOriginsDiffQuantityInItemList - String - 
-// * ATC_ErrorNotFilledUnit - String - 
+// * ATC_ErrorNotFilledUnit - String -
+// * ATC_ErrorProjectNotInProjectGroup - String -
 // * Eq_001 - String - 
 // * Eq_002 - String - 
 // * Eq_003 - String - 
@@ -523,6 +524,7 @@ Function Strings(Lang) Export
 	Strings.Insert("ATC_ErrorNotFilledUnit", NStr("en = 'Row: %1. Not filled Unit'", Lang));
 	Strings.Insert("ATC_ErrorNotFilledInventoryOrigin", NStr("en = 'Row: %1. Not filled Inventory origin'", Lang));
 	Strings.Insert("ATC_ErrorPaymentsAmountIsZero", NStr("en = 'Row: %1. Payment amount is zero'", Lang));
+	Strings.Insert("ATC_ErrorProjectNotInProjectGroup", NStr("en = 'Row: %1. Project not in Project Group'", Lang));
 	
 	Strings.Insert("ATC_ErrorNotFilledPaymentMethod", NStr("en = 'Not filled Payment method'", Lang));
 	Strings.Insert("ATC_ErrorNotFilledPurchaseTransactionType", NStr("en = 'Not filled Transaction type in Purchase'", Lang));
@@ -539,6 +541,7 @@ Function Strings(Lang) Export
 	Strings.Insert("ATC_FIX_ErrorNotFilledSalesTransactionType", NStr("en = 'Instead of empty values, ""Sales"" will be set.'", Lang));
 	Strings.Insert("ATC_FIX_ErrorNotFilledSalesReturnTransactionType", NStr("en = 'Instead of empty values, ""Return from customer"" will be set.'", Lang));
 	Strings.Insert("ATC_FIX_ErrorNotFilledPurchaseReturnTransactionType", NStr("en = 'Instead of empty values, ""Return to vendor"" will be set.'", Lang));
+	Strings.Insert("ATC_FIX_ErrorProjectNotInProjectGroup", NStr("en = 'Invalid values will be replaced with empty ones'", Lang));
 	
 #EndRegion
 

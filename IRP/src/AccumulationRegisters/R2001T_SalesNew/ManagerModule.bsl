@@ -189,6 +189,7 @@ EndFunction
 //  Structure - Get access key:
 // * Company - CatalogRef.Companies -
 // * Branch - CatalogRef.BusinessUnits -
+// * ProjectGroup - CatalogRef.ProjectGroup -
 Function GetAccessKey() Export
 	AccessKeyStructure = New Structure;
 	AccessKeyStructure.Insert("Company", Catalogs.Companies.EmptyRef());

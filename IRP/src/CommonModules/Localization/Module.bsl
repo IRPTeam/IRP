@@ -376,6 +376,7 @@
 // * Exc_009 - String - 
 // * Exc_010 - String - 
 // * Exc_011 - String - 
+// * Exc_012 - String - 
 // * Saas_001 - String - 
 // * Saas_002 - String - 
 // * Saas_003 - String - 
@@ -1272,6 +1273,7 @@ Function Strings(Lang) Export
 	Strings.Insert("Exc_009", NStr("en = 'Error: %1'", Lang));
 	Strings.Insert("Exc_010", NStr("en = 'Unknown metadata type: %1'", Lang));
 	Strings.Insert("Exc_011", NStr("en = 'Unknown command name: %1'", Lang));
+	Strings.Insert("Exc_012", NStr("en = 'Save error! Changing ""%1"" is available only for user ""%2""'", Lang));
 #EndRegion
 
 #Region Saas
@@ -1434,9 +1436,6 @@ Strings.Insert("AccountingJE_prefix_01", NStr("en = 'JE '", Lang));
 
 Strings.Insert("BankPayment_DR_R1020B_AdvancesToVendors_R1021B_VendorsTransactions_CR_R3010B_CashOnHand", 
 	NStr("en = 'BankPayment DR (R1020B_AdvancesToVendors R1021B_VendorsTransactions) CR (R3010B_CashOnHand)'", Lang)); 
-
-Strings.Insert("BankPayment_DR_R5022T_Expenses_CR_R3010B_CashOnHand",
-	NStr("en = 'BankPayment DR (R5022T_Expenses) CR (R3010B_CashOnHand)'", Lang));
 
 Strings.Insert("BankPayment_DR_R1021B_VendorsTransactions_CR_R1020B_AdvancesToVendors",
 	NStr("en = 'BankPayment DR (R1021B_VendorsTransactions) CR (R1020B_AdvancesToVendors)'", Lang));

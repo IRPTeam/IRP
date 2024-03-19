@@ -283,6 +283,11 @@ Scenario: _052001 create Bank receipt (independently)
 				| 'Amount'      | 'Company'         | 'Legal name'           | 'Partner'       |
 				| '4 250,00'    | 'Main Company'    | 'Company Ferron BP'    | 'Ferron BP'     |
 			And I click "Select" button
+			And I click choice button of "Order" attribute in "PaymentList" table
+			And I go to line in "List" table
+				| 'Amount'      | 'Company'         | 'Legal name'           | 'Partner'       |
+				| '4 250,00'    | 'Main Company'    | 'Company Ferron BP'    | 'Ferron BP'     |
+			And I select current line in "List" table
 		# temporarily
 		* Filling in amount in a tabular part
 			And I activate "Total amount" field in "PaymentList" table
@@ -358,6 +363,11 @@ Scenario: _052001 create Bank receipt (independently)
 				| 'Amount'      | 'Company'         | 'Legal name'           | 'Partner'       |
 				| '4 150,00'    | 'Main Company'    | 'Company Ferron BP'    | 'Ferron BP'     |
 			And I click "Select" button
+			And I click choice button of "Order" attribute in "PaymentList" table
+			And I go to line in "List" table
+				| 'Amount'      | 'Company'         | 'Legal name'           | 'Partner'       |
+				| '4 150,00'    | 'Main Company'    | 'Company Ferron BP'    | 'Ferron BP'     |
+			And I select current line in "List" table
 		# temporarily
 		* Filling in amount in a tabular part
 			And I activate "Total amount" field in "PaymentList" table
@@ -621,7 +631,7 @@ Scenario: _052016 check Commission calculation in the Bank receipt (Payment from
 	* Check Commission
 		And "PaymentList" table contains lines
 			| 'Commission'   | 'Payment terminal'      | 'Payment type'   | 'Commission percent'   | 'Bank term'   | 'Total amount'    |
-			| '1,00'         | 'Payment terminal 01'   | 'Card 01'        | '1,00'                 | 'Test01'      | '100,33'          |
+			| '1,01'         | 'Payment terminal 01'   | 'Card 01'        | '1,00'                 | 'Test01'      | '100,33'          |
 	* Check Commission calculation (sum and commision percent)
 		And I activate field named "PaymentListTotalAmount" in "PaymentList" table
 		And I select current line in "PaymentList" table
@@ -629,7 +639,7 @@ Scenario: _052016 check Commission calculation in the Bank receipt (Payment from
 		And I finish line editing in "PaymentList" table
 		And "PaymentList" table contains lines
 			| '#'   | 'Total amount'   | 'Commission'   | 'Payment type'   | 'Payment terminal'      | 'Bank term'   | 'Commission percent'    |
-			| '1'   | '333,33'         | '3,33'         | 'Card 01'        | 'Payment terminal 01'   | 'Test01'      | '1,00'                  |
+			| '1'   | '333,33'         | '3,37'         | 'Card 01'        | 'Payment terminal 01'   | 'Test01'      | '1,00'                  |
 	* Change Commission percent
 		And I activate "Commission percent" field in "PaymentList" table
 		And I select current line in "PaymentList" table
@@ -637,7 +647,7 @@ Scenario: _052016 check Commission calculation in the Bank receipt (Payment from
 		And I finish line editing in "PaymentList" table
 		And "PaymentList" table became equal
 			| '#'   | 'Total amount'   | 'Commission'   | 'Payment type'   | 'Payment terminal'      | 'Bank term'   | 'Commission percent'    |
-			| '1'   | '333,33'         | '16,67'        | 'Card 01'        | 'Payment terminal 01'   | 'Test01'      | '5,00'                  |
+			| '1'   | '333,33'         | '17,54'        | 'Card 01'        | 'Payment terminal 01'   | 'Test01'      | '5,00'                  |
 	* Change Commission sum
 		And I activate "Commission" field in "PaymentList" table
 		And I select current line in "PaymentList" table
@@ -645,7 +655,7 @@ Scenario: _052016 check Commission calculation in the Bank receipt (Payment from
 		And I finish line editing in "PaymentList" table
 		And "PaymentList" table became equal
 			| '#'   | 'Total amount'   | 'Commission'   | 'Payment type'   | 'Payment terminal'      | 'Bank term'   | 'Commission percent'    |
-			| '1'   | '333,33'         | '22,52'        | 'Card 01'        | 'Payment terminal 01'   | 'Test01'      | '6,76'                  |
+			| '1'   | '333,33'         | '22,52'        | 'Card 01'        | 'Payment terminal 01'   | 'Test01'      | '6,33'                  |
 	* Change payment type
 		And I activate "Payment type" field in "PaymentList" table
 		And I select current line in "PaymentList" table
@@ -656,7 +666,7 @@ Scenario: _052016 check Commission calculation in the Bank receipt (Payment from
 		And I select current line in "List" table
 		And "PaymentList" table became equal
 			| '#'   | 'Total amount'   | 'Commission'   | 'Payment type'   | 'Payment terminal'      | 'Bank term'   | 'Commission percent'    |
-			| '1'   | '333,33'         | '6,67'         | 'Card 02'        | 'Payment terminal 01'   | 'Test01'      | '2,00'                  |
+			| '1'   | '333,33'         | '6,80'         | 'Card 02'        | 'Payment terminal 01'   | 'Test01'      | '2,00'                  |
 	* Change sum
 		And I activate field named "PaymentListTotalAmount" in "PaymentList" table
 		And I select current line in "PaymentList" table
@@ -664,10 +674,10 @@ Scenario: _052016 check Commission calculation in the Bank receipt (Payment from
 		And I finish line editing in "PaymentList" table
 		And "PaymentList" table became equal
 			| '#'   | 'Total amount'   | 'Commission'   | 'Payment type'   | 'Payment terminal'      | 'Bank term'   | 'Commission percent'    |
-			| '1'   | '999,00'         | '19,98'        | 'Card 02'        | 'Payment terminal 01'   | 'Test01'      | '2,00'                  |
+			| '1'   | '999,00'         | '20,39'        | 'Card 02'        | 'Payment terminal 01'   | 'Test01'      | '2,00'                  |
 		And I close all client application windows		
 		
-Scenario: _052017 create Bank receipt (Transfer from POS)
+Scenario: _052017 create Bank receipt with Cash statement (Transfer from POS with Comission)
 	And I close all client application windows
 	Given I open hyperlink "e1cib/list/Document.BankReceipt"
 	And I click the button named "FormCreate"
@@ -696,7 +706,6 @@ Scenario: _052017 create Bank receipt (Transfer from POS)
 		And I select current line in "List" table
 	* Filling PaymentList tab
 		And in the table "PaymentList" I click "Add" button
-		And I set "Commission is separate" checkbox in "PaymentList" table
 		And I finish line editing in "PaymentList" table
 		And I activate field named "PaymentListTotalAmount" in "PaymentList" table
 		And I select current line in "PaymentList" table
@@ -712,24 +721,24 @@ Scenario: _052017 create Bank receipt (Transfer from POS)
 		And I click choice button of "POS account" attribute in "PaymentList" table
 		And I go to line in "List" table
 			| 'Description'                             |
-			| 'POS account, Comission separate, TRY'    |
+			| 'POS account 1, TRY'    |
 		And I select current line in "List" table
 	* Check planing transaction basis selection form
 		And I activate "Planning transaction basis" field in "PaymentList" table
 		And I click choice button of "Planning transaction basis" attribute in "PaymentList" table
 		And I activate "Cash statements" window
 		And "List" table became equal
-			| 'Number' | 'Date'                | 'Company'      | 'Amount' | 'Commission' | 'Branch' | 'Amount Balance' | 'Commission Balance' |
-			| '104'    | '07.07.2022 16:33:55' | 'Main Company' | '200,00' | '2,00'       | ''       | '200,00'         | '2,00'               |
-			| '105'    | '08.07.2022 10:47:16' | 'Main Company' | '150,00' | '1,50'       | ''       | '150,00'         | '1,50'               |
+			| 'Number' | 'Date'                | 'Company'      | 'Amount' | 'Branch' | 'Amount Balance' |
+			| '104'    | '07.07.2022 16:33:55' | 'Main Company' | '200,00' | ''       | '200,00'         |
+			| '105'    | '08.07.2022 10:47:16' | 'Main Company' | '150,00' | ''       | '150,00'         |
 		And in the table "List" I click the button named "ListSetDateInterval"
 		Then "Select period" window is opened
 		And I input "07.07.2022" text in the field named "DateBegin"
 		And I input "07.07.2022" text in the field named "DateEnd"
 		And I click the button named "Select"
 		And "List" table became equal
-			| 'Number' | 'Date'                | 'Company'      | 'Amount' | 'Commission' | 'Branch' | 'Amount Balance' | 'Commission Balance' |
-			| '104'    | '07.07.2022 16:33:55' | 'Main Company' | '200,00' | '2,00'       | ''       | '200,00'         | '2,00'               |
+			| 'Number' | 'Date'                | 'Company'      | 'Amount' | 'Branch' | 'Amount Balance' |
+			| '104'    | '07.07.2022 16:33:55' | 'Main Company' | '200,00' | ''       | '200,00'         |
 		And in the table "List" I click the button named "ListChoose"
 		And I finish line editing in "PaymentList" table
 	* Check creation
@@ -771,7 +780,6 @@ Scenario: _052017 create Bank receipt (Transfer from POS)
 		And I select current line in "List" table
 	* Filling PaymentList tab
 		And in the table "PaymentList" I click "Add" button
-		And I set "Commission is separate" checkbox in "PaymentList" table
 		And I finish line editing in "PaymentList" table
 		And I activate field named "PaymentListTotalAmount" in "PaymentList" table
 		And I select current line in "PaymentList" table
@@ -787,19 +795,19 @@ Scenario: _052017 create Bank receipt (Transfer from POS)
 		And I click choice button of "POS account" attribute in "PaymentList" table
 		And I go to line in "List" table
 			| 'Description'                             |
-			| 'POS account, Comission separate, TRY'    |
+			| 'POS account 1, TRY'    |
 		And I select current line in "List" table
 	* Check planing transaction basis selection form
 		And I activate "Planning transaction basis" field in "PaymentList" table
 		And I click choice button of "Planning transaction basis" attribute in "PaymentList" table
 		And I activate "Cash statements" window
 		And "List" table became equal
-			| 'Number' | 'Date'                | 'Company'      | 'Amount' | 'Commission' | 'Branch' | 'Amount Balance' | 'Commission Balance' |
-			| '104'    | '07.07.2022 16:33:55' | 'Main Company' | '200,00' | '2,00'       | ''       | '100,00'         | '2,00'               |
-			| '105'    | '08.07.2022 10:47:16' | 'Main Company' | '150,00' | '1,50'       | ''       | '150,00'         | '1,50'               |
+			| 'Number' | 'Date'                | 'Company'      | 'Amount' | 'Branch' | 'Amount Balance' |
+			| '104'    | '07.07.2022 16:33:55' | 'Main Company' | '200,00' | ''       | '100,00'         |
+			| '105'    | '08.07.2022 10:47:16' | 'Main Company' | '150,00' | ''       | '150,00'         |
 		And I go to line in "List" table
-			| 'Amount'   | 'Amount Balance'   | 'Commission'   | 'Commission Balance'   | 'Company'        | 'Date'                  | 'Number'   |
-			| '200,00'   | '100,00'           | '2,00'         | '2,00'                 | 'Main Company'   | '07.07.2022 16:33:55'   | '104'      |
+			| 'Amount' | 'Amount Balance' | 'Company'      | 'Date'                | 'Number' |
+			| '200,00' | '100,00'         | 'Main Company' | '07.07.2022 16:33:55' | '104'    |
 		And I select current line in "List" table
 	* Filling other attribute
 		And I activate "Commission percent" field in "PaymentList" table
@@ -821,13 +829,10 @@ Scenario: _052017 create Bank receipt (Transfer from POS)
 			| 'Expense'        |
 		And I select current line in "List" table
 		And I finish line editing in "PaymentList" table
-		And I activate "Commission is separate" field in "PaymentList" table
-		And I remove "Commission is separate" checkbox in "PaymentList" table
-		And I finish line editing in "PaymentList" table
 	* Check filling
 		And "PaymentList" table became equal
-			| '#'   | 'Commission'   | 'Commission is separate'   | 'POS account'                            | 'Total amount'   | 'Financial movement type'   | 'Profit loss center'        | 'Planning transaction basis'                     | 'Commission percent'   | 'Additional analytic'   | 'Expense type'    |
-			| '1'   | '2,00'         | 'No'                       | 'POS account, Comission separate, TRY'   | '100,00'         | 'Movement type 1'           | 'Distribution department'   | 'Cash statement 104 dated 07.07.2022 16:33:55'   | '2,00'                 | ''                      | 'Expense'         |
+			| '#' | 'Commission' | 'POS account'        | 'Total amount' | 'Financial movement type' | 'Profit loss center'      | 'Planning transaction basis'                   | 'Commission percent' | 'Additional analytic' | 'Expense type' |
+			| '1' | '2,04'       | 'POS account 1, TRY' | '100,00'       | 'Movement type 1'         | 'Distribution department' | 'Cash statement 104 dated 07.07.2022 16:33:55' | '2,00'               | ''                    | 'Expense'      |
 	* Check creation
 		And I click the button named "FormPost"
 		And I delete "$$NumberBankReceipt0520015$$" variable
@@ -910,7 +915,7 @@ Scenario: _052020 check selection form (Payment by documents) in BR
 				| 'Document'                                   | 'Partner'   | 'Partner term'                     | 'Legal name'        | 'Legal name contract' | 'Order'                                   | 'Project' | 'Amount'    | 'Payment' |
 				| 'Sales invoice 16 dated 04.09.2023 13:04:13' | 'Lunch'     | 'Basic Partner terms, TRY'         | 'Company Lunch'     | ''                    | 'Sales order 6 dated 04.09.2023 13:03:16' | ''        | '2 600,00'  | ''        |
 				| 'Sales invoice 16 dated 04.09.2023 13:04:13' | 'Lunch'     | 'Basic Partner terms, TRY'         | 'Company Lunch'     | ''                    | 'Sales order 7 dated 04.09.2023 13:03:26' | ''        | '2 600,00'  | ''        |
-				| '$$SalesInvoice024001$$'                     | 'Ferron BP' | 'Basic Partner terms, TRY'         | 'Company Ferron BP' | ''                    | '$$SalesOrder023001$$'                    | ''        | '4 350,00'  | ''        |
+				| '$$SalesInvoice024001$$'                     | 'Ferron BP' | 'Basic Partner terms, TRY'         | 'Company Ferron BP' | ''                    | '$$SalesOrder023001$$'                    | ''        | '4 150,00'  | ''        |
 				| '$$SalesInvoice024008$$'                     | 'Ferron BP' | 'Basic Partner terms, without VAT' | 'Company Ferron BP' | ''                    | '$$SalesOrder023005$$'                    | ''        | '11 099,93' | ''        |
 			And I close current window
 		* With branch
@@ -961,7 +966,7 @@ Scenario: _052020 check selection form (Payment by documents) in BR
 				| 'Document'                                   | 'Partner'   | 'Partner term'                     | 'Legal name'        | 'Legal name contract' | 'Order'                                   | 'Project' | 'Amount'    | 'Payment'  |
 				| 'Sales invoice 16 dated 04.09.2023 13:04:13' | 'Lunch'     | 'Basic Partner terms, TRY'         | 'Company Lunch'     | ''                    | 'Sales order 6 dated 04.09.2023 13:03:16' | ''        | '2 600,00'  | '2 600,00' |
 				| 'Sales invoice 16 dated 04.09.2023 13:04:13' | 'Lunch'     | 'Basic Partner terms, TRY'         | 'Company Lunch'     | ''                    | 'Sales order 7 dated 04.09.2023 13:03:26' | ''        | '2 600,00'  | '1 400,00' |
-				| '$$SalesInvoice024001$$'                     | 'Ferron BP' | 'Basic Partner terms, TRY'         | 'Company Ferron BP' | ''                    | '$$SalesOrder023001$$'                    | ''        | '4 350,00'  | ''         |
+				| '$$SalesInvoice024001$$'                     | 'Ferron BP' | 'Basic Partner terms, TRY'         | 'Company Ferron BP' | ''                    | '$$SalesOrder023001$$'                    | ''        | '4 150,00'  | ''         |
 				| '$$SalesInvoice024008$$'                     | 'Ferron BP' | 'Basic Partner terms, without VAT' | 'Company Ferron BP' | ''                    | '$$SalesOrder023005$$'                    | ''        | '11 099,93' | ''         |
 		* Check fifo allocation
 			Then "Payment by documents" window is opened
@@ -971,14 +976,43 @@ Scenario: _052020 check selection form (Payment by documents) in BR
 			Then the form attribute named "FilterPartner" became equal to "Ferron BP"
 			And "Documents" table became equal
 				| 'Document'               | 'Partner'   | 'Partner term'                     | 'Legal name'        | 'Legal name contract' | 'Order'                | 'Project' | 'Amount'    | 'Payment'  |
-				| '$$SalesInvoice024001$$' | 'Ferron BP' | 'Basic Partner terms, TRY'         | 'Company Ferron BP' | ''                    | '$$SalesOrder023001$$' | ''        | '4 350,00'  | '4 350,00' |
-				| '$$SalesInvoice024008$$' | 'Ferron BP' | 'Basic Partner terms, without VAT' | 'Company Ferron BP' | ''                    | '$$SalesOrder023005$$' | ''        | '11 099,93' | '650,00'   |
+				| '$$SalesInvoice024001$$' | 'Ferron BP' | 'Basic Partner terms, TRY'         | 'Company Ferron BP' | ''                    | '$$SalesOrder023001$$' | ''        | '4 150,00'  | '4 150,00' |
+				| '$$SalesInvoice024008$$' | 'Ferron BP' | 'Basic Partner terms, without VAT' | 'Company Ferron BP' | ''                    | '$$SalesOrder023005$$' | ''        | '11 099,93' | '850,00'   |
 			And I click "Ok" button
 			And "PaymentList" table became equal
 				| '#' | 'Partner'   | 'Payer'             | 'Partner term'                     | 'Legal name contract' | 'Basis document'                             | 'Project' | 'Order'                | 'Total amount' | 'Financial movement type' | 'Cash flow center' | 'Planning transaction basis' |
 				| '1' | 'Lomaniti'  | 'Company Lomaniti'  | 'Basic Partner terms, TRY'         | ''                    | 'Sales invoice 14 dated 16.02.2021 12:14:54' | ''        | ''                     | '12 400,00'    | ''                        | ''                 | ''                           |
 				| '2' | 'Lomaniti'  | 'Company Lomaniti'  | 'Basic Partner terms, TRY'         | ''                    | 'Sales invoice 15 dated 12.04.2021 12:00:01' | ''        | ''                     | '20 000,00'    | ''                        | ''                 | ''                           |
-				| '3' | 'Ferron BP' | 'Company Ferron BP' | 'Basic Partner terms, TRY'         | ''                    | '$$SalesInvoice024001$$'                     | ''        | '$$SalesOrder023001$$' | '4 350,00'     | ''                        | ''                 | ''                           |
-				| '4' | 'Ferron BP' | 'Company Ferron BP' | 'Basic Partner terms, without VAT' | ''                    | '$$SalesInvoice024008$$'                     | ''        | '$$SalesOrder023005$$' | '650,00'       | ''                        | ''                 | ''                           |
+				| '3' | 'Ferron BP' | 'Company Ferron BP' | 'Basic Partner terms, TRY'         | ''                    | '$$SalesInvoice024001$$'                     | ''        | '$$SalesOrder023001$$' | '4 150,00'     | ''                        | ''                 | ''                           |
+				| '4' | 'Ferron BP' | 'Company Ferron BP' | 'Basic Partner terms, without VAT' | ''                    | '$$SalesInvoice024008$$'                     | ''        | '$$SalesOrder023005$$' | '850,00'       | ''                        | ''                 | ''                           |
 		And I close all client application windows				
 				
+	
+
+Scenario: _052021 check amount when create BR based on SI (partner term - by partner terms)
+	And I close all client application windows
+	* Select two SI
+		Given I open hyperlink "e1cib/list/Document.SalesInvoice"
+		And I go to line in "List" table
+			| 'Amount'   | 'Legal name'      |
+			| '1 000,00' | 'Company Kalipso' |
+		And I move one line down in "List" table and select line
+	* Create Bank receipt
+		And I click the button named "FormDocumentBankReceiptGenerateBankReceipt"
+	* Check amount (documents amount )
+		And "PaymentList" table became equal
+			| '#' | 'Partner'         | 'Payer'           | 'Partner term'             | 'Legal name contract' | 'Basis document' | 'Project' | 'Order' | 'Total amount' | 'Financial movement type' | 'Cash flow center' | 'Planning transaction basis' |
+			| '1' | 'Partner Kalipso' | 'Company Kalipso' | 'Partner Kalipso Customer' | ''                    | ''               | ''        | ''      | '3 000,00'     | ''                        | ''                 | ''                           |
+	And I close all client application windows
+	* Select one SI				
+		Given I open hyperlink "e1cib/list/Document.SalesInvoice"
+		And I go to line in "List" table
+			| 'Amount'   | 'Legal name'      |
+			| '1 000,00' | 'Company Kalipso' |
+	* Create Bank receipt
+		And I click the button named "FormDocumentBankReceiptGenerateBankReceipt"
+	* Check amount (documents amount )
+		And "PaymentList" table became equal
+			| '#' | 'Partner'         | 'Payer'           | 'Partner term'             | 'Legal name contract' | 'Basis document' | 'Project' | 'Order' | 'Total amount' | 'Financial movement type' | 'Cash flow center' | 'Planning transaction basis' |
+			| '1' | 'Partner Kalipso' | 'Company Kalipso' | 'Partner Kalipso Customer' | ''                    | ''               | ''        | ''      | '1 000,00'     | ''                        | ''                 | ''                           |
+	And I close all client application windows				

@@ -261,6 +261,11 @@ Scenario: _0530011 create Bank payment (independently)
 				| 'Amount'        | 'Company'         | 'Legal name'           | 'Partner'       |
 				| '136 000,00'    | 'Main Company'    | 'Company Ferron BP'    | 'Ferron BP'     |
 			And I click "Select" button
+			And I click choice button of "Order" attribute in "PaymentList" table
+			And I go to line in "List" table
+				| 'Amount'       | 'Company'        | 'Legal name'          | 'Partner'      |
+				| '136 000,00'   | 'Main Company'   | 'Company Ferron BP'   | 'Ferron BP'    |
+			And I select current line in "List" table
 		# temporarily
 		* Filling in amount in a tabular part
 			And I activate "Total amount" field in "PaymentList" table
@@ -336,6 +341,11 @@ Scenario: _0530011 create Bank payment (independently)
 				| 'Amount'        | 'Company'         | 'Legal name'           | 'Partner'       |
 				| '135 000,00'    | 'Main Company'    | 'Company Ferron BP'    | 'Ferron BP'     |
 			And I click "Select" button
+			And I click choice button of "Order" attribute in "PaymentList" table
+			And I go to line in "List" table
+				| 'Amount'       | 'Company'        | 'Legal name'          | 'Partner'      |
+				| '135 000,00'   | 'Main Company'   | 'Company Ferron BP'   | 'Ferron BP'    |
+			And I select current line in "List" table
 		# temporarily
 		* Filling in amount in a tabular part
 			And I activate "Total amount" field in "PaymentList" table
@@ -537,85 +547,6 @@ Scenario: _053015 check the display of details on the form Bank payment with the
 			| '#'   | 'Total amount'   | 'Planning transaction basis'    |
 			| '1'   | '100,00'         | ''                              |
 
-Scenario: _053017 check Commission calculation in the Bank payment (Payment from customer by POS)
-	And I close all client application windows
-	Given I open hyperlink "e1cib/list/Document.BankPayment"
-	And I click the button named "FormCreate"
-	And I select "Return to customer by POS" exact value from "Transaction type" drop-down list
-	* Filling PaymentList tab
-		And in the table "PaymentList" I click "Add" button
-		And I activate "Bank term" field in "PaymentList" table
-		And I select current line in "PaymentList" table
-		And I click choice button of "Bank term" attribute in "PaymentList" table
-		And I go to line in "List" table
-			| 'Description'    |
-			| 'Test01'         |
-		And I select current line in "List" table
-		And I activate "Payment type" field in "PaymentList" table
-		And I click choice button of "Payment type" attribute in "PaymentList" table
-		And I go to line in "List" table
-			| 'Description'    |
-			| 'Card 01'        |
-		And I select current line in "List" table
-		And I activate "Payment terminal" field in "PaymentList" table
-		And I click choice button of "Payment terminal" attribute in "PaymentList" table
-		And I go to line in "List" table
-			| 'Description'            |
-			| 'Payment terminal 01'    |
-		And I select current line in "List" table
-		And I activate field named "PaymentListTotalAmount" in "PaymentList" table
-		And I select current line in "PaymentList" table
-		And I input "100,33" text in the field named "PaymentListTotalAmount" of "PaymentList" table
-		And I finish line editing in "PaymentList" table
-	* Check Commission
-		And "PaymentList" table contains lines
-			| 'Commission'   | 'Payment terminal'      | 'Payment type'   | 'Commission percent'   | 'Bank term'   | 'Total amount'    |
-			| '1,00'         | 'Payment terminal 01'   | 'Card 01'        | '1,00'                 | 'Test01'      | '100,33'          |
-	* Check Commission calculation (sum and commision percent)
-		And I activate field named "PaymentListTotalAmount" in "PaymentList" table
-		And I select current line in "PaymentList" table
-		And I input "333,33" text in the field named "PaymentListTotalAmount" of "PaymentList" table
-		And I finish line editing in "PaymentList" table
-		And "PaymentList" table contains lines
-			| '#'   | 'Total amount'   | 'Commission'   | 'Payment type'   | 'Payment terminal'      | 'Bank term'   | 'Commission percent'    |
-			| '1'   | '333,33'         | '3,33'         | 'Card 01'        | 'Payment terminal 01'   | 'Test01'      | '1,00'                  |
-	* Change Commission percent
-		And I activate "Commission percent" field in "PaymentList" table
-		And I select current line in "PaymentList" table
-		And I input "5,00" text in "Commission percent" field of "PaymentList" table
-		And I finish line editing in "PaymentList" table
-		And "PaymentList" table became equal
-			| '#'   | 'Total amount'   | 'Commission'   | 'Payment type'   | 'Payment terminal'      | 'Bank term'   | 'Commission percent'    |
-			| '1'   | '333,33'         | '16,67'        | 'Card 01'        | 'Payment terminal 01'   | 'Test01'      | '5,00'                  |
-	* Change Commission sum
-		And I activate "Commission" field in "PaymentList" table
-		And I select current line in "PaymentList" table
-		And I input "22,52" text in "Commission" field of "PaymentList" table
-		And I finish line editing in "PaymentList" table
-		And "PaymentList" table became equal
-			| '#'   | 'Total amount'   | 'Commission'   | 'Payment type'   | 'Payment terminal'      | 'Bank term'   | 'Commission percent'    |
-			| '1'   | '333,33'         | '22,52'        | 'Card 01'        | 'Payment terminal 01'   | 'Test01'      | '6,76'                  |
-	* Change payment type
-		And I activate "Payment type" field in "PaymentList" table
-		And I select current line in "PaymentList" table
-		And I click choice button of "Payment type" attribute in "PaymentList" table
-		And I go to line in "List" table
-			| 'Description'    |
-			| 'Card 02'        |
-		And I select current line in "List" table
-		And "PaymentList" table became equal
-			| '#'   | 'Total amount'   | 'Commission'   | 'Payment type'   | 'Payment terminal'      | 'Bank term'   | 'Commission percent'    |
-			| '1'   | '333,33'         | '6,67'         | 'Card 02'        | 'Payment terminal 01'   | 'Test01'      | '2,00'                  |
-	* Change sum
-		And I activate field named "PaymentListTotalAmount" in "PaymentList" table
-		And I select current line in "PaymentList" table
-		And I input "999,00" text in the field named "PaymentListTotalAmount" of "PaymentList" table
-		And I finish line editing in "PaymentList" table
-		And "PaymentList" table became equal
-			| '#'   | 'Total amount'   | 'Commission'   | 'Payment type'   | 'Payment terminal'      | 'Bank term'   | 'Commission percent'    |
-			| '1'   | '999,00'         | '19,98'        | 'Card 02'        | 'Payment terminal 01'   | 'Test01'      | '2,00'                  |
-		And I close all client application windows
-
 
 Scenario: _053018 check connection to BankPayment report "Related documents"
 	Given I open hyperlink "e1cib/list/Document.BankPayment"
@@ -683,7 +614,7 @@ Scenario: _053020 check selection form (Payment by documents) in BP
 			And "Documents" table became equal
 				| 'Document'                                       | 'Partner'   | 'Partner term'       | 'Legal name'        | 'Legal name contract' | 'Order'                   | 'Project' | 'Amount'     | 'Payment' |
 				| 'Purchase invoice 125 dated 12.02.2021 12:00:00' | 'Maxim'     | 'Partner term Maxim' | 'Company Maxim'     | ''                    | ''                        | ''        | '100,00'     | ''        |
-				| '$$PurchaseInvoice018001$$'                      | 'Ferron BP' | 'Vendor Ferron, TRY' | 'Company Ferron BP' | ''                    | '$$PurchaseOrder017001$$' | ''        | '137 000,00' | ''        |
+				| '$$PurchaseInvoice018001$$'                      | 'Ferron BP' | 'Vendor Ferron, TRY' | 'Company Ferron BP' | ''                    | '$$PurchaseOrder017001$$' | ''        | '135 000,00' | ''        |
 				| '$$PurchaseInvoice29604$$'                       | 'Ferron BP' | 'Vendor Ferron, TRY' | 'Company Ferron BP' | ''                    | ''                        | ''        | '13 000,00'  | ''        |
 			And I close current window
 		* With branch
@@ -734,15 +665,15 @@ Scenario: _053020 check selection form (Payment by documents) in BP
 		* Select lines and check allocation	
 			And I go to line in "Documents" table
 				| 'Amount'     | 'Document'                                     |
-				| '137 000,00' | '$$PurchaseInvoice018001$$' |
+				| '135 000,00' | '$$PurchaseInvoice018001$$' |
 			And I move one line down in "Documents" table and select line
-			And I input "149 000,00" text in the field named "Amount"
+			And I input "146 000,00" text in the field named "Amount"
 			And I click the button named "Calculate"
 			And "Documents" table became equal
 				| 'Document'                                       | 'Partner'   | 'Partner term'       | 'Legal name'        | 'Legal name contract' | 'Order'                   | 'Project' | 'Amount'     | 'Payment'    |
 				| 'Purchase invoice 125 dated 12.02.2021 12:00:00' | 'Maxim'     | 'Partner term Maxim' | 'Company Maxim'     | ''                    | ''                        | ''        | '100,00'     | ''           |
-				| '$$PurchaseInvoice018001$$'                      | 'Ferron BP' | 'Vendor Ferron, TRY' | 'Company Ferron BP' | ''                    | '$$PurchaseOrder017001$$' | ''        | '137 000,00' | '137 000,00' |
-				| '$$PurchaseInvoice29604$$'                       | 'Ferron BP' | 'Vendor Ferron, TRY' | 'Company Ferron BP' | ''                    | ''                        | ''        | '13 000,00'  | '12 000,00'  |
+				| '$$PurchaseInvoice018001$$'                      | 'Ferron BP' | 'Vendor Ferron, TRY' | 'Company Ferron BP' | ''                    | '$$PurchaseOrder017001$$' | ''        | '135 000,00' | '135 000,00' |
+				| '$$PurchaseInvoice29604$$'                       | 'Ferron BP' | 'Vendor Ferron, TRY' | 'Company Ferron BP' | ''                    | ''                        | ''        | '13 000,00'  | '11 000,00'  |
 			And I click "Ok" button
 			And "PaymentList" table became equal
 				| 'Partner'   | 'Payee'             | 'Partner term'       | 'Legal name contract' | 'Basis document'                                 | 'Project' | 'Order'                                        | 'Total amount' |
@@ -751,6 +682,34 @@ Scenario: _053020 check selection form (Payment by documents) in BP
 				| 'Maxim'     | 'Company Aldis'     | 'Partner term Maxim' | ''                    | 'Purchase invoice 194 dated 04.09.2023 13:50:38' | ''        | 'Purchase order 118 dated 04.09.2023 13:46:08' | '900,00'       |
 				| 'Maxim'     | 'Company Aldis'     | 'Partner term Maxim' | ''                    | 'Purchase invoice 194 dated 04.09.2023 13:50:38' | ''        | 'Purchase order 119 dated 04.09.2023 13:50:07' | '900,00'       |
 				| 'Maxim'     | 'Company Maxim'     | 'Partner term Maxim' | ''                    | 'Purchase invoice 125 dated 12.02.2021 12:00:00' | ''        | ''                                             | '100,00'       |
-				| 'Ferron BP' | 'Company Ferron BP' | 'Vendor Ferron, TRY' | ''                    | '$$PurchaseInvoice018001$$'                      | ''        | '$$PurchaseOrder017001$$'                      | '137 000,00'   |
-				| 'Ferron BP' | 'Company Ferron BP' | 'Vendor Ferron, TRY' | ''                    | '$$PurchaseInvoice29604$$'                       | ''        | ''                                             | '11 900,00'    |
+				| 'Ferron BP' | 'Company Ferron BP' | 'Vendor Ferron, TRY' | ''                    | '$$PurchaseInvoice018001$$'                      | ''        | '$$PurchaseOrder017001$$'                      | '135 000,00'   |
+				| 'Ferron BP' | 'Company Ferron BP' | 'Vendor Ferron, TRY' | ''                    | '$$PurchaseInvoice29604$$'                       | ''        | ''                                             | '10 900,00'    |
 		And I close all client application windows
+
+Scenario: _053021 check amount when create BP based on PI (partner term - by partner terms)
+	And I close all client application windows
+	* Select two PI
+		Given I open hyperlink "e1cib/list/Document.PurchaseInvoice"
+		And I go to line in "List" table
+			| 'Amount' | 'Legal name' |
+			| '190,00' | 'DFC'        |
+		And I move one line down in "List" table and select line
+	* Create Bank payment
+		And I click the button named "FormDocumentBankPaymentGenerateBankPayment"
+	* Check amount (documents amount )
+		And "PaymentList" table became equal
+			| '#' | 'Partner' | 'Payee' | 'Partner term'                | 'Legal name contract' | 'Basis document' | 'Project' | 'Order' | 'Total amount' | 'Financial movement type' | 'Cash flow center' | 'Planning transaction basis' |
+			| '1' | 'DFC'     | 'DFC'   | 'DFC Vendor by Partner terms' | ''                    | ''               | ''        | ''      | '390,00'       | ''                        | ''                 | ''                           |
+	And I close all client application windows
+	* Select one PI				
+		Given I open hyperlink "e1cib/list/Document.PurchaseInvoice"
+		And I go to line in "List" table
+			| 'Amount' | 'Legal name' |
+			| '190,00' | 'DFC'        |
+	* Create Bank payment
+		And I click the button named "FormDocumentBankPaymentGenerateBankPayment"
+	* Check amount (documents amount )
+		And "PaymentList" table became equal
+			| '#' | 'Partner' | 'Payee' | 'Partner term'                | 'Legal name contract' | 'Basis document' | 'Project' | 'Order' | 'Total amount' | 'Financial movement type' | 'Cash flow center' | 'Planning transaction basis' |
+			| '1' | 'DFC'     | 'DFC'   | 'DFC Vendor by Partner terms' | ''                    | ''               | ''        | ''      | '190,00'       | ''                        | ''                 | ''                           |
+	And I close all client application windows	

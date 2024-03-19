@@ -56,10 +56,13 @@ Procedure SetVisibilityAvailability(Object, Form)
 	Form.Items.TransitAccount.Visible = IsBankAccount;
 	Form.Items.CurrencyType.ReadOnly  = IsBankAccount Or IsPOSAccount Or IsTransitAccount Or IsPOSCashAccount;
 	Form.Items.ReceiptingAccount.Visible    = IsPOSAccount;
-	Form.Items.CommissionIsSeparate.Visible = IsBankAccount;
 	Form.Items.CashAccount.Visible = IsPOSCashAccount;
 	Form.Items.FinancialMovementType.Visible = IsPOSCashAccount;
 	Form.Items.Acquiring.Visible    = IsPOSAccount;
+	Form.Items.BankCountry.Visible = IsBankAccount;
+	Form.Items.BankIdentifierCode.Visible = IsBankAccount;
+	Form.Items.BankSWIFTCode.Visible = IsBankAccount;
+	Form.Items.isIBAN.Visible = IsBankAccount;
 	
 	If Form.CurrencyType = "Fixed" Then
 		Form.Items.Currency.Visible = True;

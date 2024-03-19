@@ -63,6 +63,7 @@
   <commonModules>CommonModule.Unit_ExpenseAndRevenueTypes</commonModules>
   <commonModules>CommonModule.Unit_MockService</commonModules>
   <commonModules>CommonModule.Unit_Service</commonModules>
+  <commonModules>CommonModule.Unit_DocumentRegistration</commonModules>
   <commonAttributes>CommonAttribute.Author</commonAttributes>
   <commonAttributes>CommonAttribute.Branch</commonAttributes>
   <commonAttributes>CommonAttribute.Description</commonAttributes>

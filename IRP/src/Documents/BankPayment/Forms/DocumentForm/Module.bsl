@@ -61,8 +61,11 @@ Function GetVisibleAttributesByTransactionType(TransactionType)
 	|PaymentList.PaymentPeriod,
 	|PaymentList.ReceiptingAccount,
 	|PaymentList.ReceiptingBranch,
-	|PaymentList.Project";
-	
+	|PaymentList.Project,
+	|PaymentList.ExpenseType,
+	|PaymentList.ProfitLossCenter,
+	|PaymentList.AdditionalAnalytic";
+		
 	ArrayOfAllAttributes = New Array();
 	For Each ArrayItem In StrSplit(StrAll, ",") Do
 		ArrayOfAllAttributes.Add(StrReplace(TrimAll(ArrayItem), Chars.NBSp, ""));
@@ -79,6 +82,7 @@ Function GetVisibleAttributesByTransactionType(TransactionType)
 	EmployeeCashAdvance = PredefinedValue("Enum.OutgoingPaymentTransactionTypes.EmployeeCashAdvance");
 	SalaryPayment       = PredefinedValue("Enum.OutgoingPaymentTransactionTypes.SalaryPayment");
 	OtherPartner        = PredefinedValue("Enum.OutgoingPaymentTransactionTypes.OtherPartner");
+	OtherExpense        = PredefinedValue("Enum.OutgoingPaymentTransactionTypes.OtherExpense");
 	
 	If TransactionType = CashTransferOrder Then
 		StrByType = "
@@ -141,6 +145,11 @@ Function GetVisibleAttributesByTransactionType(TransactionType)
 		StrByType = "
 		|PaymentList.Employee,
 		|PaymentList.PaymentPeriod";
+	ElsIf TransactionType = OtherExpense Then
+		StrByType = "
+		|PaymentList.ExpenseType,
+		|PaymentList.ProfitLossCenter,
+		|PaymentList.AdditionalAnalytic";
 	EndIf;
 	
 	ArrayOfVisibleAttributes = New Array();
@@ -471,15 +480,6 @@ EndProcedure
 
 #EndRegion
 
-#Region COMMISSION
-
-&AtClient
-Procedure PaymentListCommissionOnChange(Item)
-	DocBankPaymentClient.PaymentListCommissionOnChange(Object, ThisObject, Item);
-EndProcedure
-
-#EndRegion
-
 #Region PAYMENT_TYPE
 
 &AtClient
@@ -494,15 +494,6 @@ EndProcedure
 &AtClient
 Procedure PaymentListBankTermOnChange(Item)
 	DocBankPaymentClient.PaymentListBankTermOnChange(Object, ThisObject, Item);
-EndProcedure
-
-#EndRegion
-
-#Region COMMISSION_PERCENT
-
-&AtClient
-Procedure PaymentListCommissionPercentOnChange(Item)
-	DocBankPaymentClient.PaymentListCommissionPercentOnChange(Object, ThisObject, Item);
 EndProcedure
 
 #EndRegion

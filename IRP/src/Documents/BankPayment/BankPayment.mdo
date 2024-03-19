@@ -429,10 +429,10 @@
       <fullTextSearch>Use</fullTextSearch>
     </attributes>
     <attributes uuid="3e30d265-e436-42f7-8417-83e626bbb7ec">
-      <name>Commission</name>
+      <name>DELETE_Commission</name>
       <synonym>
         <key>en</key>
-        <value>Commission</value>
+        <value>DELETE commission</value>
       </synonym>
       <type>
         <types>DefinedType.typeAmount</types>
@@ -524,7 +524,7 @@
       <minValue xsi:type="core:UndefinedValue"/>
       <maxValue xsi:type="core:UndefinedValue"/>
       <choiceParameterLinks>
-        <name>Filter.Company</name>
+        <name>Filter.LegalName</name>
         <field>Document.BankPayment.TabularSection.PaymentList.Attribute.Payee</field>
       </choiceParameterLinks>
       <dataHistory>Use</dataHistory>
@@ -587,10 +587,10 @@
       <fullTextSearch>Use</fullTextSearch>
     </attributes>
     <attributes uuid="7785e464-9266-4de3-8464-8ff89619a7d3">
-      <name>CommissionPercent</name>
+      <name>DELETE_CommissionPercent</name>
       <synonym>
         <key>en</key>
-        <value>Commission percent</value>
+        <value>DELETE commission percent</value>
       </synonym>
       <type>
         <types>Number</types>

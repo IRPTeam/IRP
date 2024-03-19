@@ -77,6 +77,9 @@ Procedure AddAttributesFromExtensions(Form, MetaTypeOrRef, ItemElement = Undefin
 			If Not StrFind(Column.Name, "_") Then
 				Continue;
 			EndIf;
+			If StrStartsWith(Column.Name, "DELETE_") Then
+				Continue;
+			EndIf;
 			Parent = Form.Items.Find(TabularSection.Name);
 			If Parent = Undefined Then
 				Continue;

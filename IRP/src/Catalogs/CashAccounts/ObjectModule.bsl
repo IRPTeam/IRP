@@ -13,7 +13,6 @@ Procedure BeforeWrite(Cancel)
 	EndIf;
 	If Not IsBankAccount Then
 		ThisObject.TransitAccount = Undefined;
-		ThisObject.CommissionIsSeparate = False;
 	EndIf;
 	If Not IsPOSAccount Then
 		ThisObject.ReceiptingAccount = Undefined;

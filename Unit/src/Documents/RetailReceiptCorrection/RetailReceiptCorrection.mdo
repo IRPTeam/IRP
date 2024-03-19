@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mdclass:Document xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" xmlns:mdclassExtension="http://g5.1c.ru/v8/dt/metadata/mdclass/extension" uuid="23ab9a10-a681-4479-a07c-605cfeabb9ad" extendedConfigurationObject="dc246e91-78c1-4529-8174-1bd1bf2a9fbf">
+  <producedTypes>
+    <objectType typeId="b63534cd-f64d-4171-87d4-e76d7b4c2d88" valueTypeId="447003e5-75a3-4b87-9472-4e07d0b7c7f7"/>
+    <refType typeId="09ec595d-7421-41f2-8a91-e4ba0fdb0d39" valueTypeId="118cc91d-d555-4dcb-843a-7d1ce483d337"/>
+    <selectionType typeId="a3d9824b-0954-49f8-bb0a-5e2c10375ee3" valueTypeId="8da5d8e3-82b0-4578-8c05-578057b088b8"/>
+    <listType typeId="a300e9bc-1373-43ac-8ddf-6d6f677d72c2" valueTypeId="65b13188-89a8-4699-99d6-deb7768e85e6"/>
+    <managerType typeId="71b58587-8edd-4789-9869-903e6fa2eaf8" valueTypeId="a22853a7-42c6-48d2-8826-9d1324ac6d59"/>
+  </producedTypes>
+  <name>RetailReceiptCorrection</name>
+  <objectBelonging>Adopted</objectBelonging>
+  <extension xsi:type="mdclassExtension:DocumentExtension">
+    <extendedConfigurationObject>Checked</extendedConfigurationObject>
+  </extension>
+  <useStandardCommands>true</useStandardCommands>
+</mdclass:Document>

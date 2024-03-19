@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mdclass:Document xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" xmlns:mdclassExtension="http://g5.1c.ru/v8/dt/metadata/mdclass/extension" uuid="53a66c8e-1012-410c-b043-331a146c4346" extendedConfigurationObject="af8576fb-af5d-4f70-bfa3-9245576149e0">
+  <producedTypes>
+    <objectType typeId="10579d5a-e637-4b24-be19-2d8205094b0e" valueTypeId="4fc60dc3-595d-41e0-a896-fd0d3eb037ae"/>
+    <refType typeId="602de39a-7075-4796-8dad-1be185ae9c8a" valueTypeId="ace5f220-5331-44a4-92eb-5961a21ba3c7"/>
+    <selectionType typeId="194e2889-bdb3-4c3a-883e-34831ed7c2a4" valueTypeId="ea041813-03ca-494a-9d30-ac00f14867c0"/>
+    <listType typeId="9146fa9a-5bb8-45e1-aa06-86f921245cc4" valueTypeId="348cee93-30d5-48aa-b528-684cc94a520e"/>
+    <managerType typeId="f8f392e2-65d3-4e54-849d-df9d1cc6585e" valueTypeId="c72bfa84-90fb-457a-ab87-f8291c38388b"/>
+  </producedTypes>
+  <name>ModernizationOfFixedAsset</name>
+  <objectBelonging>Adopted</objectBelonging>
+  <extension xsi:type="mdclassExtension:DocumentExtension">
+    <extendedConfigurationObject>Checked</extendedConfigurationObject>
+  </extension>
+  <useStandardCommands>true</useStandardCommands>
+</mdclass:Document>

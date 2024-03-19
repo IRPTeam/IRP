@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mdclass:Document xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" xmlns:mdclassExtension="http://g5.1c.ru/v8/dt/metadata/mdclass/extension" uuid="f8d33a8f-79d7-46d5-8a5b-34dd87578cce" extendedConfigurationObject="037698ec-5fd5-49b5-81f0-aacc0bf56ba9">
+  <producedTypes>
+    <objectType typeId="df39913b-f330-4861-94f3-ffabe8917666" valueTypeId="6c3046ea-f352-4f93-8572-b5690869f1f0"/>
+    <refType typeId="78e4e683-f24c-4fcd-8b1e-1954f2199da0" valueTypeId="139ef555-a542-4cc3-9789-9f52ddcb84f4"/>
+    <selectionType typeId="4ae5c75b-c828-49e7-8e6e-1e4ea92c3710" valueTypeId="69454788-9525-4822-b78f-5b8ce401701e"/>
+    <listType typeId="f45a29cf-2096-4acf-9edf-8bb1cab2fe37" valueTypeId="1c2a95aa-da92-43b9-b001-fc283b3cd8b3"/>
+    <managerType typeId="dac059b6-5525-4cbe-84e1-c56067fcf32f" valueTypeId="c22debbd-d414-487b-8a17-303858b97468"/>
+  </producedTypes>
+  <name>VisitorCounter</name>
+  <objectBelonging>Adopted</objectBelonging>
+  <extension xsi:type="mdclassExtension:DocumentExtension">
+    <extendedConfigurationObject>Checked</extendedConfigurationObject>
+  </extension>
+  <useStandardCommands>true</useStandardCommands>
+</mdclass:Document>

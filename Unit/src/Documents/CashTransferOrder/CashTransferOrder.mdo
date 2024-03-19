@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mdclass:Document xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" xmlns:mdclassExtension="http://g5.1c.ru/v8/dt/metadata/mdclass/extension" uuid="e09e4482-7e21-4d76-bf60-0bdaa54276de" extendedConfigurationObject="f507df9c-64de-4f50-aa00-3f9240e2a34f">
+  <producedTypes>
+    <objectType typeId="6105c707-ca19-4d84-a08e-dc771310bd2e" valueTypeId="35e79210-40f7-41a9-a34b-32d5d36409bb"/>
+    <refType typeId="7f41b3de-86b0-4ad9-ba33-b69e5390fe84" valueTypeId="328ca003-20bb-4fd0-a0d0-c3f227692735"/>
+    <selectionType typeId="dfdc838d-6733-4a0e-8cb6-d987658b434b" valueTypeId="f33b309a-4c26-4208-a506-17c5fd01d8ea"/>
+    <listType typeId="1fc1de3f-559b-4c0c-885c-6b33c9453df5" valueTypeId="a602a63b-bec0-4916-85b8-0c433b25f64b"/>
+    <managerType typeId="3556f405-05b8-43bd-97c2-1492cce42ca4" valueTypeId="828c962e-702c-420f-82f9-f47352ab84bf"/>
+  </producedTypes>
+  <name>CashTransferOrder</name>
+  <objectBelonging>Adopted</objectBelonging>
+  <extension xsi:type="mdclassExtension:DocumentExtension">
+    <extendedConfigurationObject>Checked</extendedConfigurationObject>
+  </extension>
+  <useStandardCommands>true</useStandardCommands>
+</mdclass:Document>

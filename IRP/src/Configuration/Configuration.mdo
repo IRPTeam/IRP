@@ -1277,7 +1277,7 @@
   <reports>Report.A0012_AccountCard</reports>
   <reports>Report.A0013_AccountAnalysis</reports>
   <reports>Report.A1010_PartnersBalance</reports>
-  <reports>Report.D0009_DocumentRegistrationsReport</reports>
+  <reports>Report.D0013_DocumentRegistrationsReport</reports>
   <reports>Report.D0010_ItemsInfo</reports>
   <reports>Report.D0011_PriceInfo</reports>
   <reports>Report.D0012_AdditionalDocumentTablesCheck</reports>

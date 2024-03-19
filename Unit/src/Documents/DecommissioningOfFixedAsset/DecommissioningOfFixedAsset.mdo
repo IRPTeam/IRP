@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mdclass:Document xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" xmlns:mdclassExtension="http://g5.1c.ru/v8/dt/metadata/mdclass/extension" uuid="0381b662-7cc4-4931-a6af-43fe047744ff" extendedConfigurationObject="9a726221-bc4a-40f2-b909-cf6576613f2b">
+  <producedTypes>
+    <objectType typeId="45feff4e-1d9f-4b89-a793-813ffda4fe99" valueTypeId="9dbc78cf-f4c1-4218-ba2b-76c88a2e0fa6"/>
+    <refType typeId="8320fdfa-30b7-4fe9-b633-16d26dcacc9c" valueTypeId="9f2a3d32-cdd3-48a3-9411-1cbd2f8bc001"/>
+    <selectionType typeId="34f2547c-e74e-41f3-8448-ab5d691961e7" valueTypeId="a418da6a-2a01-4c48-97d2-224a5081eb7e"/>
+    <listType typeId="d44aee49-cfec-410f-80cf-5b7d2fc325ca" valueTypeId="c1519fef-2d22-44e2-b07c-28e57d61d6ee"/>
+    <managerType typeId="bb7fac8e-60a5-4e05-95c7-7eb9a248e778" valueTypeId="08378475-a894-4881-8288-90f03fc61ba2"/>
+  </producedTypes>
+  <name>DecommissioningOfFixedAsset</name>
+  <objectBelonging>Adopted</objectBelonging>
+  <extension xsi:type="mdclassExtension:DocumentExtension">
+    <extendedConfigurationObject>Checked</extendedConfigurationObject>
+  </extension>
+  <useStandardCommands>true</useStandardCommands>
+</mdclass:Document>

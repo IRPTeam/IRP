@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mdclass:Document xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" xmlns:mdclassExtension="http://g5.1c.ru/v8/dt/metadata/mdclass/extension" uuid="37bd29c6-140f-4f63-892b-5c5e4f9a051e" extendedConfigurationObject="3d6daeaf-4bee-4926-9ea8-259330416310">
+  <producedTypes>
+    <objectType typeId="e4e6a8da-31d4-4838-a771-67739a390fa9" valueTypeId="d9c93ccc-13ea-45a2-868c-635accde22bf"/>
+    <refType typeId="478ed85b-bfd5-41ee-8871-31079c5ee20b" valueTypeId="bba55bfd-1c5d-4a46-8573-14dc7b02bd27"/>
+    <selectionType typeId="030dab53-9cda-4136-914e-b66a6ab5748c" valueTypeId="f69e1334-a250-4798-a0a8-75f770a958e9"/>
+    <listType typeId="5753f3bf-40e7-40ea-9dc3-35785652cf8e" valueTypeId="74ed6f85-a9e9-474b-840a-5ff015b7adc3"/>
+    <managerType typeId="8980e31d-e336-433b-9425-26a33d9cf2ea" valueTypeId="882a1cb9-e496-46c6-ac1a-c8bdfad7fc93"/>
+  </producedTypes>
+  <name>CustomersAdvancesClosing</name>
+  <objectBelonging>Adopted</objectBelonging>
+  <extension xsi:type="mdclassExtension:DocumentExtension">
+    <extendedConfigurationObject>Checked</extendedConfigurationObject>
+  </extension>
+  <useStandardCommands>true</useStandardCommands>
+</mdclass:Document>

@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mdclass:Document xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" xmlns:mdclassExtension="http://g5.1c.ru/v8/dt/metadata/mdclass/extension" uuid="959f9837-2195-4aa2-a9c4-a1a457b5827e" extendedConfigurationObject="7524ec79-bbff-4ab2-a0de-258aceee5d39">
+  <producedTypes>
+    <objectType typeId="4112516c-b7cc-4c3b-ae00-13d661311f97" valueTypeId="1d624396-e8e5-4f61-98e3-a303f5121f21"/>
+    <refType typeId="4ee76421-519f-4443-af41-e5c57fff193e" valueTypeId="593e2de1-2231-40a2-a82d-6702dc42ee5e"/>
+    <selectionType typeId="11c8235c-9707-4387-b00c-d2c99ffe7039" valueTypeId="cdc09364-d703-464f-8ae3-1e00c20a0c93"/>
+    <listType typeId="aae3d429-a41c-45ee-a576-3fb4b905de5f" valueTypeId="e8a94101-7c5b-4fd8-9d31-914924c51879"/>
+    <managerType typeId="2858509f-3b29-43f8-b204-5ce734795c51" valueTypeId="3e684d29-2362-41a6-bbd6-4902ef6d5f3a"/>
+  </producedTypes>
+  <name>TimeSheet</name>
+  <objectBelonging>Adopted</objectBelonging>
+  <extension xsi:type="mdclassExtension:DocumentExtension">
+    <extendedConfigurationObject>Checked</extendedConfigurationObject>
+  </extension>
+  <useStandardCommands>true</useStandardCommands>
+</mdclass:Document>

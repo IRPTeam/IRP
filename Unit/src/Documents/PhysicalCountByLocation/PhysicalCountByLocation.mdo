@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mdclass:Document xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" xmlns:mdclassExtension="http://g5.1c.ru/v8/dt/metadata/mdclass/extension" uuid="5a8223c5-9202-4b1a-aaa2-ef8df26c9713" extendedConfigurationObject="68776962-9298-4319-98da-22abfc39c643">
+  <producedTypes>
+    <objectType typeId="bc288d34-70d7-4008-93a1-8a3380268638" valueTypeId="38db6bba-3c2b-403f-849f-95210871068b"/>
+    <refType typeId="61e0e33f-8bc7-4c0b-9ea2-137e880ecb76" valueTypeId="03954448-55fc-4d09-8b46-1ba2849b8831"/>
+    <selectionType typeId="d830693f-5bf1-45fb-8762-f30cb1f26d82" valueTypeId="e040fb65-6ee1-4671-a66c-d343d4d29ccf"/>
+    <listType typeId="cfb1e1e8-1769-4676-9a8c-df6ae2357311" valueTypeId="c680cec8-20a8-4b55-bfc3-8600c2c339d4"/>
+    <managerType typeId="7812fa2e-f0f2-42e2-8b32-39a8fa5f5065" valueTypeId="ee212f9a-006a-4eef-b809-68d4ec83f2d8"/>
+  </producedTypes>
+  <name>PhysicalCountByLocation</name>
+  <objectBelonging>Adopted</objectBelonging>
+  <extension xsi:type="mdclassExtension:DocumentExtension">
+    <extendedConfigurationObject>Checked</extendedConfigurationObject>
+  </extension>
+  <useStandardCommands>true</useStandardCommands>
+</mdclass:Document>

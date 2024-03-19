@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mdclass:Document xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" xmlns:mdclassExtension="http://g5.1c.ru/v8/dt/metadata/mdclass/extension" uuid="12e4cef5-493d-4a3c-a305-8cc6ad623587" extendedConfigurationObject="e526d18d-89dd-4711-b774-c78e8aa3391c">
+  <producedTypes>
+    <objectType typeId="535a993e-98de-4548-8e60-6d52421fa275" valueTypeId="7dc55b88-cd29-4985-9235-7466767e585a"/>
+    <refType typeId="ed9a3b20-e4bb-4e86-be90-8089518fad2d" valueTypeId="0c49ae64-a573-4e8c-87c5-91261d8e36f8"/>
+    <selectionType typeId="0f6d5c39-f0f9-4e27-b368-9b691fb1427e" valueTypeId="fba307a5-b0d6-4cbd-9fcd-bc629446656b"/>
+    <listType typeId="cd57183d-a013-4b8d-b60a-d2dcb0fc8b65" valueTypeId="460c984e-4b5f-4082-9a33-3b1ceeadf609"/>
+    <managerType typeId="d7d18cb0-9bbc-4165-8bcf-05c413933069" valueTypeId="e55b159d-f2b6-430d-8b92-26fed09c169a"/>
+  </producedTypes>
+  <name>PlannedReceiptReservation</name>
+  <objectBelonging>Adopted</objectBelonging>
+  <extension xsi:type="mdclassExtension:DocumentExtension">
+    <extendedConfigurationObject>Checked</extendedConfigurationObject>
+  </extension>
+  <useStandardCommands>true</useStandardCommands>
+</mdclass:Document>

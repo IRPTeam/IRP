@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mdclass:Role xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="7fefbcf4-991a-44de-a4b2-0df17ad4e3f0">
+  <name>AccumulationRegisters_R5020B_PartnersBalance</name>
+  <synonym>
+    <key>en</key>
+    <value>AccumulationRegisters R5020B PartnersBalance</value>
+  </synonym>
+</mdclass:Role>

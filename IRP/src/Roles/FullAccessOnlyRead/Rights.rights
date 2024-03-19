@@ -16890,4 +16890,26 @@
 			<value>true</value>
 		</right>
 	</object>
+	<object>
+		<name>AccumulationRegister.R5020B_PartnersBalance</name>
+		<right>
+			<name>Read</name>
+			<value>true</value>
+		</right>
+		<right>
+			<name>View</name>
+			<value>true</value>
+		</right>
+	</object>
+	<object>
+		<name>Report.R5020_PartnersBalance</name>
+		<right>
+			<name>View</name>
+			<value>true</value>
+		</right>
+		<right>
+			<name>Use</name>
+			<value>true</value>
+		</right>
+	</object>
 </Rights>

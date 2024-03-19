@@ -71,8 +71,11 @@ Procedure SaveSettingAtClient()
 			QueryButtons = QuestionDialogMode.YesNo;
 			ShowQueryBox(OptionDescription, QueryText, QueryButtons);
 		Else
-			Notify = New NotifyDescription("SaveAsEnd", ThisObject);
 			OptionDescription = ServiceSystemServer.GetObjectAttribute(CurrentData.ReportOption, "Description");
+			AdditionalParameters = New Structure;
+			AdditionalParameters.Insert("Description", OptionDescription);
+			AdditionalParameters.Insert("Author", CurrentData.Author);
+			Notify = New NotifyDescription("SaveAsEnd", ThisObject, AdditionalParameters);
 			ShowInputString(Notify, OptionDescription, R().SuggestionToUser_3, 150);
 		EndIf;
 	EndIf;
@@ -83,6 +86,15 @@ Procedure SaveAsEnd(Result, AdditionalParameters) Export
 	If Result = Undefined Then
 		Return;
 	EndIf;
+	
+	If TypeOf(AdditionalParameters) = Type("Structure") Then
+		If Result = AdditionalParameters.Description Then
+			WarningText = StrTemplate(R().Exc_012, AdditionalParameters.Description, AdditionalParameters.Author);
+			ShowMessageBox(, WarningText);
+			Return;
+		EndIf;
+	EndIf;
+	
 	SaveChosenSetting(Result);
 EndProcedure
 

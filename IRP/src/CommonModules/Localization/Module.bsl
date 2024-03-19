@@ -376,6 +376,7 @@
 // * Exc_009 - String - 
 // * Exc_010 - String - 
 // * Exc_011 - String - 
+// * Exc_012 - String - 
 // * Saas_001 - String - 
 // * Saas_002 - String - 
 // * Saas_003 - String - 
@@ -1272,6 +1273,7 @@ Function Strings(Lang) Export
 	Strings.Insert("Exc_009", NStr("en = 'Error: %1'", Lang));
 	Strings.Insert("Exc_010", NStr("en = 'Unknown metadata type: %1'", Lang));
 	Strings.Insert("Exc_011", NStr("en = 'Unknown command name: %1'", Lang));
+	Strings.Insert("Exc_012", NStr("en = 'Save error! Changing ""%1"" is available only for user ""%2""'", Lang));
 #EndRegion
 
 #Region Saas

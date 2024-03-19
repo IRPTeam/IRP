@@ -568,11 +568,11 @@ Function R5020B_PartnersBalance_SI() Export
 		|	ItemList.Partner,
 		|	ItemList.LegalName,
 		|	ItemList.Agreement,
-		|	ItemList.BasisDocument AS Document,
+		|	ItemList.Basis AS Document,
 		|	ItemList.Currency,
 		|	0 AS Amount,
-		|	0 AS CustomerTransaction,
-		|	SUM(ItemList.Amount) AS CustomerAdvance,
+		|	SUM(ItemList.Amount) AS CustomerTransaction,
+		|	0 AS CustomerAdvance,
 		|	0 AS VendorTransaction,
 		|	0 AS VendorAdvance,
 		|	0 AS OtherTransaction,
@@ -582,7 +582,7 @@ Function R5020B_PartnersBalance_SI() Export
 		|FROM
 		|	ItemList AS ItemList
 		|WHERE
-		|	ItemList.IsPurchase
+		|	ItemList.IsSales
 		|GROUP BY
 		|	VALUE(AccumulationRecordType.Receipt),
 		|	ItemList.Period,
@@ -591,7 +591,7 @@ Function R5020B_PartnersBalance_SI() Export
 		|	ItemList.Partner,
 		|	ItemList.LegalName,
 		|	ItemList.Agreement,
-		|	ItemList.BasisDocument,
+		|	ItemList.Basis,
 		|	ItemList.Currency
 		|
 		|UNION ALL

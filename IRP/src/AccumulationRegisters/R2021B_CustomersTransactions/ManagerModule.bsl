@@ -348,37 +348,6 @@ Function R2021B_CustomersTransactions_CreditNote() Export
 EndFunction
 
 Function R2021B_CustomersTransactions_DebitCreditNote() Export
-	
-	//IsSendAdvanceCustomer
-//IsSendAdvanceVendor
-//
-//IsSendTransactionCustomer
-//IsSendTransactionVendor
-//
-//IsReceiveAdvanceCustomer
-//IsReceiveAdvanceVendor
-//
-//IsReceiveTransactionCustomer
-//IsReceiveTransactionVendor
-	
-//	5. Customer transactions (CT) - Vendor advances (VA) - минус - плюс
-//15. Customer transactions (CT) - Customer transactions (CT)- минус - плюс
-//
-//5. Customer transactions (CT) - Vendor advances (VA) - минус - плюс
-//9. Customer transactions (CT) - Vendor transactions (VT) - минус - минус
-//15. Customer transactions (CT) - Customer transactions (CT)- минус - плюс 
-	
-
-//1. Customer advances (CA) - Customer transactions (CT) - минус - минус
-//4. Vendor transactions (VT) - Customer transactions (CT) - минус - минус
-//15. Customer transactions (CT) - Customer transactions (CT)- минус - плюс
-//
-//1. Customer advances (CA) - Customer transactions (CT) - минус - минус
-//4. Vendor transactions (VT) - Customer transactions (CT) - минус - минус
-//15. Customer transactions (CT) - Customer transactions (CT)- минус - плюс 
-
-
-
 	Return
 		"SELECT
 		|case when Doc.PartnersIsEqual then

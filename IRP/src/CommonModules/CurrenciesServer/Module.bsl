@@ -241,6 +241,27 @@ Procedure PreparePostingDataTables(Parameters, CurrencyTable, AddInfo = Undefine
 	
 	ExchangeDifference(Parameters);
 	
+	For Each ItemOfPostingInfoRow In ArrayOfPostingInfo Do
+		ItemOfPostingInfo = ItemOfPostingInfoRow.Value;
+		If ItemOfPostingInfo.PrepareTable.Count() 
+			And ItemOfPostingInfo.Metadata = Metadata.AccumulationRegisters.R5020B_PartnersBalance Then
+				
+			ArrayForDelete = New Array();
+			For Each Row In ItemOfPostingInfo.PrepareTable Do
+				If ValueIsFilled(Row.CurrencyMovementType)
+					And Row.CurrencyMovementType.Type = Enums.CurrencyType.Agreement
+					And (ValueIsFilled(Row.CustomerAdvance) Or ValueIsFilled(Row.VendorAdvance)) Then
+						ArrayForDelete.Add(Row);
+				EndIf;
+			EndDo;
+			
+			For Each ItemForDelete In ArrayForDelete Do
+				ItemOfPostingInfo.PrepareTable.Delete(ItemForDelete);
+			EndDo;
+				
+		EndIf;
+	EndDo;
+	
 EndProcedure
 
 Function GetAdvancesCurrencyRevaluation(DocRef)
@@ -400,6 +421,11 @@ Function ExpandTable(TempTableManager, RecordSet, UseAgreementMovementType, UseC
 	AddAmountsColumns(RecordSet, "ConsignorPrice");
 	AddAmountsColumns(RecordSet, "SalesAmount");
 	AddAmountsColumns(RecordSet, "NetOfferAmount");
+	AddAmountsColumns(RecordSet, "CustomerTransaction");
+	AddAmountsColumns(RecordSet, "CustomerAdvance");
+	AddAmountsColumns(RecordSet, "VendorTransaction");
+	AddAmountsColumns(RecordSet, "VendorAdvance");
+	AddAmountsColumns(RecordSet, "OtherTransaction");
 
 	Query = New Query();
 	Query.TempTablesManager = TempTableManager;
@@ -481,6 +507,36 @@ Function ExpandTable(TempTableManager, RecordSet, UseAgreementMovementType, UseC
 	|			THEN 0
 	|		ELSE (RecordSet.ConsignorPrice * CurrencyTable.Rate )/ CurrencyTable.Multiplicity
 	|	END AS Number(15,2)) AS ConsignorPrice,
+	|	CAST(CASE
+	|		WHEN CurrencyTable.Rate = 0
+	|		OR CurrencyTable.Multiplicity = 0
+	|			THEN 0
+	|		ELSE (RecordSet.CustomerTransaction * CurrencyTable.Rate )/ CurrencyTable.Multiplicity
+	|	END AS Number(15,2)) AS CustomerTransaction,
+	|	CAST(CASE
+	|		WHEN CurrencyTable.Rate = 0
+	|		OR CurrencyTable.Multiplicity = 0
+	|			THEN 0
+	|		ELSE (RecordSet.CustomerAdvance * CurrencyTable.Rate )/ CurrencyTable.Multiplicity
+	|	END AS Number(15,2)) AS CustomerAdvance,
+	|	CAST(CASE
+	|		WHEN CurrencyTable.Rate = 0
+	|		OR CurrencyTable.Multiplicity = 0
+	|			THEN 0
+	|		ELSE (RecordSet.VendorTransaction * CurrencyTable.Rate )/ CurrencyTable.Multiplicity
+	|	END AS Number(15,2)) AS VendorTransaction,
+	|	CAST(CASE
+	|		WHEN CurrencyTable.Rate = 0
+	|		OR CurrencyTable.Multiplicity = 0
+	|			THEN 0
+	|		ELSE (RecordSet.VendorAdvance * CurrencyTable.Rate )/ CurrencyTable.Multiplicity
+	|	END AS Number(15,2)) AS VendorAdvance,
+	|	CAST(CASE
+	|		WHEN CurrencyTable.Rate = 0
+	|		OR CurrencyTable.Multiplicity = 0
+	|			THEN 0
+	|		ELSE (RecordSet.OtherTransaction * CurrencyTable.Rate )/ CurrencyTable.Multiplicity
+	|	END AS Number(15,2)) AS OtherTransaction,
 	|	CurrencyTable.MovementType.DeferredCalculation AS DeferredCalculation,
 	|	CurrencyTable.MovementType.Currency AS Currency
 	|FROM
@@ -517,6 +573,11 @@ Function ExpandTable(TempTableManager, RecordSet, UseAgreementMovementType, UseC
 	|	CAST(RecordSet.AmountTax AS Number(15,2)) AS AmountTax,
 	|	CAST(RecordSet.Price AS Number(15,2)) AS Price,
 	|	CAST(RecordSet.ConsignorPrice AS Number(15,2)) AS ConsignorPrice,
+	|	CAST(RecordSet.CustomerTransaction AS Number(15,2)) AS CustomerTransaction,
+	|	CAST(RecordSet.CustomerAdvance AS Number(15,2)) AS CustomerAdvance,
+	|	CAST(RecordSet.VendorTransaction AS Number(15,2)) AS VendorTransaction,
+	|	CAST(RecordSet.VendorAdvance AS Number(15,2)) AS VendorAdvance,
+	|	CAST(RecordSet.OtherTransaction AS Number(15,2)) AS OtherTransaction,
 	|	FALSE,
 	|	RecordSet.Currency
 	|FROM
@@ -1237,6 +1298,8 @@ Procedure RevaluateCurrency_Advances(Parameters,
 	|	tmp1.Branch,
 	|	tmp1.LegalName,
 	|	tmp1.Partner,
+	|	tmp1.Agreement,
+	|	tmp1.Project,
 	|	tmp1.Order,
 	|	tmp1.Currency,
 	|	tmp1.TransactionCurrency,
@@ -1261,6 +1324,8 @@ Procedure RevaluateCurrency_Advances(Parameters,
 	|	tmp1.TransactionCurrency,
 	|	tmp1.LegalName,
 	|	tmp1.Partner,
+	|	tmp1.Agreement,
+	|	tmp1.Project,
 	|	tmp1.Order,
 	|	SUM(tmp1.Amount) AS Amount,
 	|	SUM(tmp2.AmountBalance) AS AmountBalance
@@ -1268,12 +1333,14 @@ Procedure RevaluateCurrency_Advances(Parameters,
 	|FROM
 	|	tmp1 AS tmp1
 	|		LEFT JOIN AccumulationRegister.R2020B_AdvancesFromCustomers.Balance(&BalancePeriod, (Company, Branch, LegalName,
-	|			Partner, Order, Currency, TransactionCurrency, CurrencyMovementType) IN
+	|			Partner, Agreement, Project, Order, Currency, TransactionCurrency, CurrencyMovementType) IN
 	|			(SELECT
 	|				Reg.Company,
 	|				Reg.Branch,
 	|				Reg.LegalName,
 	|				Reg.Partner,
+	|				Reg.Agreement,
+	|				Reg.Project,
 	|				Reg.Order,
 	|				Reg.Currency,
 	|				Reg.TransactionCurrency,
@@ -1287,6 +1354,8 @@ Procedure RevaluateCurrency_Advances(Parameters,
 	|		AND (tmp1.TransactionCurrency = tmp2.TransactionCurrency)
 	|		AND (tmp1.LegalName = tmp2.LegalName)
 	|		AND (tmp1.Partner = tmp2.Partner)
+	|		AND (tmp1.Agreement = tmp2.Agreement)
+	|		AND (tmp1.Project = tmp2.Project)
 	|		AND (tmp1.Order = tmp2.Order)
 	|GROUP BY
 	|	tmp1.Company,
@@ -1296,6 +1365,8 @@ Procedure RevaluateCurrency_Advances(Parameters,
 	|	tmp1.TransactionCurrency,
 	|	tmp1.LegalName,
 	|	tmp1.Partner,
+	|	tmp1.Agreement,
+	|	tmp1.Project,
 	|	tmp1.Order
 	|;
 	|
@@ -1308,6 +1379,8 @@ Procedure RevaluateCurrency_Advances(Parameters,
 	|	tmp2.TransactionCurrency,
 	|	tmp2.LegalName,
 	|	tmp2.Partner,
+	|	tmp2.Agreement,
+	|	tmp2.Project,
 	|	tmp2.Order,
 	|	CAST(CASE
 	|		WHEN tmp3.AmountBalance = tmp3.Amount
@@ -1323,6 +1396,8 @@ Procedure RevaluateCurrency_Advances(Parameters,
 	|		AND (tmp2.TransactionCurrency = tmp3.TransactionCurrency)
 	|		AND (tmp2.LegalName = tmp3.LegalName)
 	|		AND (tmp2.Partner = tmp3.Partner)
+	|		AND (tmp2.Agreement = tmp3.Agreement)
+	|		AND (tmp2.Project = tmp3.Project)
 	|		AND (tmp2.Order = tmp3.Order)
 	|		AND (tmp3.CurrencyMovementType = VALUE(ChartOfCharacteristicTypes.CurrencyMovementType.SettlementCurrency))
 	|WHERE
@@ -1340,6 +1415,8 @@ Procedure RevaluateCurrency_Advances(Parameters,
 	|	tmp3.TransactionCurrency,
 	|	tmp3.LegalName,
 	|	tmp3.Partner,
+	|	tmp3.Agreement,
+	|	tmp3.Project,
 	|	tmp3.Order,
 	|	tmp3.Amount
 	|FROM

@@ -1499,6 +1499,7 @@
   <accumulationRegisters>AccumulationRegister.R9555T_PaidSickLeaves</accumulationRegisters>
   <accumulationRegisters>AccumulationRegister.R9560T_AdditionalAccrual</accumulationRegisters>
   <accumulationRegisters>AccumulationRegister.R9570T_AdditionalDeduction</accumulationRegisters>
+  <accumulationRegisters>AccumulationRegister.R5020B_PartnersBalance</accumulationRegisters>
   <chartsOfCharacteristicTypes>ChartOfCharacteristicTypes.AccountingExtraDimensionTypes</chartsOfCharacteristicTypes>
   <chartsOfCharacteristicTypes>ChartOfCharacteristicTypes.AddAttributeAndProperty</chartsOfCharacteristicTypes>
   <chartsOfCharacteristicTypes>ChartOfCharacteristicTypes.CurrencyMovementType</chartsOfCharacteristicTypes>

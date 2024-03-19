@@ -956,15 +956,23 @@ Procedure Write_SelfRecords(Parameters,
 		// Transactions (currency revaluation)
 		TableTransactions_CurrencyRevaluation = TableTransactions.CopyColumns();
 
+		// Partners balance
+		RecordSet_PartnersBalance = AccumulationRegisters.R5020B_PartnersBalance.CreateRecordSet();
+		RecordSet_PartnersBalance.Filter.Recorder.Set(Row.Document);
+		TablePartnersBalance = RecordSet_PartnersBalance.UnloadColumns();
+		TablePartnersBalance.Columns.Delete(TablePartnersBalance.Columns.PointInTime);
+		
 		If UseKeyForCurrency Then
 			TableAdvances.Columns.Add("Key", Metadata.DefinedTypes.typeRowID.Type);
 			TableTransactions.Columns.Add("Key", Metadata.DefinedTypes.typeRowID.Type);
 			TableAccountingAmounts.Columns.Add("Key", Metadata.DefinedTypes.typeRowID.Type);
+			TablePartnersBalance.Columns.Add("Key", Metadata.DefinedTypes.typeRowID.Type);
 		EndIf;
 
 		OffsetInfoByDocument = Records_OffsetOfAdvances.Copy(New Structure("Document", Row.Document));
 
 		For Each RowOffset In OffsetInfoByDocument Do
+								
 			// Advances
 			NewRow_Advances = TableAdvances.Add();
 			FillPropertyValues(NewRow_Advances, RowOffset);
@@ -980,10 +988,31 @@ Procedure Write_SelfRecords(Parameters,
 			NewRow_Advances.Project   = RowOffset.AdvanceProject;
 			NewRow_Advances.Agreement = RowOffset.AdvanceAgreement;
 			
+			// Partner balance - advances
+			NewRow_PartnerBalance_Advances = TablePartnersBalance.Add();
+			NewRow_PartnerBalance_Advances.RecordType = NewRow_Advances.RecordType;
+			NewRow_PartnerBalance_Advances.Period     = NewRow_Advances.Period;
+			NewRow_PartnerBalance_Advances.Company    = NewRow_Advances.Company;
+			NewRow_PartnerBalance_Advances.Branch     = NewRow_Advances.Branch;
+			NewRow_PartnerBalance_Advances.Partner    = NewRow_Advances.Partner;
+			NewRow_PartnerBalance_Advances.LegalName  = NewRow_Advances.LegalName;
+			NewRow_PartnerBalance_Advances.Agreement  = NewRow_Advances.Agreement;
+			NewRow_PartnerBalance_Advances.Currency   = NewRow_Advances.Currency;
+			NewRow_PartnerBalance_Advances.AdvancesClosing = Parameters.Object.Ref;;
+			
+			If Parameters.RegisterName_Advances = Metadata.AccumulationRegisters.R2020B_AdvancesFromCustomers.Name Then
+				NewRow_PartnerBalance_Advances.CustomerAdvance = NewRow_Advances.Amount;
+			ElsIf Parameters.RegisterName_Advances = Metadata.AccumulationRegisters.R1020B_AdvancesToVendors.Name Then
+				NewRow_PartnerBalance_Advances.VendorAdvance = NewRow_Advances.Amount;
+			Else
+				Raise StrTemplate("Unknown advance register [%1]", Parameters.RegisterName_Advances);
+			EndIf;
+			
 			If UseKeyForCurrency Then
 				NewRow_Advances.Key = RowOffset.Key;
+				NewRow_PartnerBalance_Advances.Key = RowOffset.Key;
 			EndIf;
-
+			
 			If RowOffset.IsAdvanceRelease = True Then
 				Continue;
 			EndIf;
@@ -1003,10 +1032,38 @@ Procedure Write_SelfRecords(Parameters,
 			NewRow_Transactions.Order     = RowOffset.TransactionOrder;
 			NewRow_Transactions.Project   = RowOffset.TransactionProject;
 			NewRow_Transactions.Agreement = RowOffset.TransactionAgreement;
-			If UseKeyForCurrency Then
-				NewRow_Transactions.Key = RowOffset.Key;
+			
+			// Partners balance - transactions
+			NewRow_PartnersBalance_Transactions = TablePartnersBalance.Add();
+			If NewRow_Transactions.RecordType = AccumulationRecordType.Expense Then
+				NewRow_PartnersBalance_Transactions.RecordType = AccumulationRecordType.Receipt;
+			Else
+				NewRow_PartnersBalance_Transactions.RecordType = AccumulationRecordType.Expense;
 			EndIf;
 			
+			NewRow_PartnersBalance_Transactions.Period     = NewRow_Transactions.Period;
+			NewRow_PartnersBalance_Transactions.Company    = NewRow_Transactions.Company;
+			NewRow_PartnersBalance_Transactions.Branch     = NewRow_Transactions.Branch;
+			NewRow_PartnersBalance_Transactions.Partner    = NewRow_Transactions.Partner;
+			NewRow_PartnersBalance_Transactions.LegalName  = NewRow_Transactions.LegalName;
+			NewRow_PartnersBalance_Transactions.Agreement  = NewRow_Transactions.Agreement;
+			NewRow_PartnersBalance_Transactions.Document   = NewRow_Transactions.Basis;
+			NewRow_PartnersBalance_Transactions.Currency   = NewRow_Transactions.Currency;
+			NewRow_PartnersBalance_Transactions.AdvancesClosing = Parameters.Object.Ref;
+			
+			If Parameters.RegisterName_Transactions = Metadata.AccumulationRegisters.R2021B_CustomersTransactions.Name Then
+				NewRow_PartnersBalance_Transactions.CustomerTransaction = NewRow_Transactions.Amount;
+			ElsIf Parameters.RegisterName_Transactions = Metadata.AccumulationRegisters.R1021B_VendorsTransactions.Name Then
+				NewRow_PartnersBalance_Transactions.VendorTransaction = NewRow_Transactions.Amount;
+			Else
+				Raise StrTemplate("Unknown transaction register [%1]", Parameters.RegisterName_Advances);
+			EndIf;
+															
+			If UseKeyForCurrency Then
+				NewRow_Transactions.Key = RowOffset.Key;
+				NewRow_PartnersBalance_Transactions.Key = RowOffset.Key;
+			EndIf;
+						
 			// Accounting amounts
 			NewRow_AccountingAmounts = TableAccountingAmounts.Add();
 			FillPropertyValues(NewRow_AccountingAmounts, RowOffset);
@@ -1021,8 +1078,8 @@ Procedure Write_SelfRecords(Parameters,
 			If UseKeyForCurrency Then
 				NewRow_AccountingAmounts.Key = RowOffset.Key;
 			EndIf;
-			
-		EndDo;
+						
+		EndDo; // OffsetInfoByDocument
 	
 		// Currency calculation
 		
@@ -1035,12 +1092,19 @@ Procedure Write_SelfRecords(Parameters,
 		
 		PostingDataTables = New Map();
 		
+		// Advances
 		RecordSet_AdvancesSettings = PostingServer.PostingTableSettings(TableAdvances, RecordSet_Advances);
 		PostingDataTables.Insert(RecordSet_Advances.Metadata(), RecordSet_AdvancesSettings);
 		
+		// Transactions
 		RecordSet_TransactionsSettings = PostingServer.PostingTableSettings(TableTransactions, RecordSet_Transactions);
 		PostingDataTables.Insert(RecordSet_Transactions.Metadata(), RecordSet_TransactionsSettings);
 		
+		// Partner balance
+		RecordSet_PartnerBalanceSettings = PostingServer.PostingTableSettings(TablePartnersBalance, RecordSet_PartnersBalance);
+		PostingDataTables.Insert(RecordSet_PartnersBalance.Metadata(), RecordSet_PartnerBalanceSettings);
+		
+		// Acounting amounts
 		RecordSet_AccountingAmountsSettings = PostingServer.PostingTableSettings(TableAccountingAmounts, RecordSet_AccountingAmounts);
 		PostingDataTables.Insert(RecordSet_AccountingAmounts.Metadata(), RecordSet_AccountingAmountsSettings);
 		
@@ -1066,15 +1130,17 @@ Procedure Write_SelfRecords(Parameters,
 		RecordSet_Advances.SetActive(True);
 		RecordSet_Advances.Write();
 				
-		CurrenciesServer.RevaluateCurrency_Advances(Parameters, 
-					                                RecordSet_Advances, 
-					                                TableTransactions_CurrencyRevaluation,
-					                                TableAccountingAmounts_CurrencyRevaluation,
-					                                Records_AdvancesCurrencyRevaluation);				
-					                                            
-		RecordSet_Advances.SetActive(True);
-		RecordSet_Advances.Write();
-					
+		// not working
+//		CurrenciesServer.RevaluateCurrency_Advances(Parameters, 
+//					                                RecordSet_Advances, 
+//					                                TableTransactions_CurrencyRevaluation,
+//					                                TableAccountingAmounts_CurrencyRevaluation,
+//					                                Records_AdvancesCurrencyRevaluation);				
+//					                                            
+//		RecordSet_Advances.SetActive(True);
+//		RecordSet_Advances.Write();
+			
+							
 		// Transactions					
 		ItemOfPostingInfo = GetFromPostingInfo(ArrayOfPostingInfo, Metadata.AccumulationRegisters[Parameters.RegisterName_Transactions]);
 			
@@ -1084,19 +1150,31 @@ Procedure Write_SelfRecords(Parameters,
 		EndDo;
 		RecordSet_Transactions.SetActive(True);
 		RecordSet_Transactions.Write();
-						
-		CurrenciesServer.RevaluateCurrency_Transactions(Parameters, 
-						                                RecordSet_Transactions,
-						                                TableTransactions_CurrencyRevaluation, 
-						                                TableAccountingAmounts_CurrencyRevaluation,
-						                                Records_TransactionsCurrencyRevaluation);
-						                                                 
-		RecordSet_Transactions.SetActive(True);
-		RecordSet_Transactions.Write();
-					
-		ItemOfPostingInfo = GetFromPostingInfo(ArrayOfPostingInfo, Metadata.AccumulationRegisters.T1040T_AccountingAmounts);
+				
+		// not working				
+//		CurrenciesServer.RevaluateCurrency_Transactions(Parameters, 
+//						                                RecordSet_Transactions,
+//						                                TableTransactions_CurrencyRevaluation, 
+//						                                TableAccountingAmounts_CurrencyRevaluation,
+//						                                Records_TransactionsCurrencyRevaluation);
+//						                                                 
+//		RecordSet_Transactions.SetActive(True);
+//		RecordSet_Transactions.Write();
+		
+		// Partners balance
+		ItemOfPostingInfo = GetFromPostingInfo(ArrayOfPostingInfo, Metadata.AccumulationRegisters.R5020B_PartnersBalance);
 			
+		RecordSet_PartnersBalance.Read();
+		For Each RowPostingInfo In ItemOfPostingInfo.Value.PrepareTable Do
+			FillPropertyValues(RecordSet_PartnersBalance.Add(), RowPostingInfo);
+		EndDo;
+		RecordSet_PartnersBalance.SetActive(True);
+		RecordSet_PartnersBalance.Write();
+					
+				
 		// Accounting amounts (advances)
+		ItemOfPostingInfo = GetFromPostingInfo(ArrayOfPostingInfo, Metadata.AccumulationRegisters.T1040T_AccountingAmounts);
+		
 		RecordSet_AccountingAmounts.Read();
 		For Each RowPostingInfo In ItemOfPostingInfo.Value.PrepareTable Do
 			FillPropertyValues(RecordSet_AccountingAmounts.Add(), RowPostingInfo);
@@ -1104,15 +1182,16 @@ Procedure Write_SelfRecords(Parameters,
 		RecordSet_AccountingAmounts.SetActive(True);
 		RecordSet_AccountingAmounts.Write();
 		
-		// Accounting amounts (currency revaluation)
-		If TableAccountingAmounts_CurrencyRevaluation.Count() Then
-			RecordSet_AccountingAmounts.Read();
-			For Each RowTableAccountingAmounts_CurrencyRevaluation In TableAccountingAmounts_CurrencyRevaluation Do
-				FillPropertyValues(RecordSet_AccountingAmounts.Add(), RowTableAccountingAmounts_CurrencyRevaluation);
-			EndDo;
-			RecordSet_AccountingAmounts.SetActive(True);
-			RecordSet_AccountingAmounts.Write();
-		EndIf;
+		// not working
+//		// Accounting amounts (currency revaluation)
+//		If TableAccountingAmounts_CurrencyRevaluation.Count() Then
+//			RecordSet_AccountingAmounts.Read();
+//			For Each RowTableAccountingAmounts_CurrencyRevaluation In TableAccountingAmounts_CurrencyRevaluation Do
+//				FillPropertyValues(RecordSet_AccountingAmounts.Add(), RowTableAccountingAmounts_CurrencyRevaluation);
+//			EndDo;
+//			RecordSet_AccountingAmounts.SetActive(True);
+//			RecordSet_AccountingAmounts.Write();
+//		EndIf;
 		
 	EndDo;
 EndProcedure
@@ -2272,7 +2351,17 @@ Procedure Clear_SelfRecords(Parameters)
 	|WHERE
 	|	T1040T_AccountingAmounts.AdvancesClosing = &Ref
 	|GROUP BY
-	|	T1040T_AccountingAmounts.Recorder";
+	|	T1040T_AccountingAmounts.Recorder
+	|;
+	|//////////////////////////////////////////////////////////////////////////////
+	|SELECT
+	|	R5020B_PartnersBalance.Recorder
+	|FROM
+	|	AccumulationRegister.R5020B_PartnersBalance AS R5020B_PartnersBalance
+	|WHERE
+	|	R5020B_PartnersBalance.AdvancesClosing = &Ref
+	|GROUP BY
+	|	R5020B_PartnersBalance.Recorder";
 	
 	Query.Text = StrTemplate(Query.Text, 
 	                         Parameters.RegisterName_Advances,
@@ -2288,6 +2377,7 @@ Procedure Clear_SelfRecords(Parameters)
 	ClearRegisterRecords(Ref, QueryResults[1].Unload(), Parameters.RegisterName_Transactions , Parameters.DocumentName);
 	ClearRegisterRecords(Ref, QueryResults[2].Unload(), Parameters.RegisterName_Aging        , "AgingClosing");
 	ClearRegisterRecords(Ref, QueryResults[3].Unload(), "T1040T_AccountingAmounts"           , "AdvancesClosing");
+	ClearRegisterRecords(Ref, QueryResults[4].Unload(), "R5020B_PartnersBalance"             , "AdvancesClosing");
 EndProcedure
 
 Procedure ClearRegisterRecords(DocRef, TableOfRecorders, RegisterName, AttrName)

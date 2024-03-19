@@ -342,7 +342,7 @@ Procedure PutDataProcessing(DocumentRef, ArrayOfFields,	FieldPresentations, Repo
 			|%3
 			|ORDER BY %1";
 			
-		FilterByTransaction = ?(FilterByTransactionCurrency, "AND reg.CurrencyMovementType = VALUE(ChartOfCharacteristicTypes.CurrencyMovementType.SettlementCurrency)" ,"");
+		FilterByTransaction = ?(FilterByTransactionCurrency, "AND CurrencyMovementType = VALUE(ChartOfCharacteristicTypes.CurrencyMovementType.SettlementCurrency)" ,"");
 		ReportBuilder.Text = StrTemplate(Text, ListOfFields, ObjectProperty.FullName(), FilterByTransaction);
 		ReportBuilder.Parameters.Insert("Recorder", DocumentRef);
 	EndIf;

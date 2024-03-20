@@ -990,7 +990,15 @@ Procedure Write_SelfRecords(Parameters,
 			
 			// Partner balance - advances
 			NewRow_PartnerBalance_Advances = TablePartnersBalance.Add();
-			NewRow_PartnerBalance_Advances.RecordType = NewRow_Advances.RecordType;
+			
+			If TypeOf(Row.Document) = Type("DocumentRef.BankReceipt")
+				Or TypeOf(Row.Document) = Type("DocumentRef.CashReceipt")
+				Or TypeOf(Row.Document) = Type("DocumentRef.SalesInvoice") Then
+				NewRow_PartnerBalance_Advances.RecordType = ReverseRecordType(NewRow_Advances.RecordType);
+			Else
+				NewRow_PartnerBalance_Advances.RecordType = NewRow_Advances.RecordType;
+			EndIf;
+			
 			NewRow_PartnerBalance_Advances.Period     = NewRow_Advances.Period;
 			NewRow_PartnerBalance_Advances.Company    = NewRow_Advances.Company;
 			NewRow_PartnerBalance_Advances.Branch     = NewRow_Advances.Branch;
@@ -1035,11 +1043,13 @@ Procedure Write_SelfRecords(Parameters,
 			
 			// Partners balance - transactions
 			NewRow_PartnersBalance_Transactions = TablePartnersBalance.Add();
-			If NewRow_Transactions.RecordType = AccumulationRecordType.Expense Then
-				NewRow_PartnersBalance_Transactions.RecordType = AccumulationRecordType.Receipt;
-			Else
-				NewRow_PartnersBalance_Transactions.RecordType = AccumulationRecordType.Expense;
-			EndIf;
+			
+			NewRow_PartnersBalance_Transactions.RecordType = NewRow_Transactions.RecordType;
+//			If NewRow_Transactions.RecordType = AccumulationRecordType.Expense Then
+//				NewRow_PartnersBalance_Transactions.RecordType = AccumulationRecordType.Receipt;
+//			Else
+//				NewRow_PartnersBalance_Transactions.RecordType = AccumulationRecordType.Expense;
+//			EndIf;
 			
 			NewRow_PartnersBalance_Transactions.Period     = NewRow_Transactions.Period;
 			NewRow_PartnersBalance_Transactions.Company    = NewRow_Transactions.Company;
@@ -1195,6 +1205,12 @@ Procedure Write_SelfRecords(Parameters,
 		
 	EndDo;
 EndProcedure
+
+Function ReverseRecordType(RecordType)
+	Return ?(RecordType = AccumulationRecordType.Receipt, 
+		AccumulationRecordType.Expense, 
+		AccumulationRecordType.Receipt);
+EndFunction
 
 Function GetFromPostingInfo(ArrayOfPostingInfo, RecordSetType)
 	For Each ItemOfPostingInfo In ArrayOfPostingInfo Do

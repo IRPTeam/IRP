@@ -1047,7 +1047,8 @@ Procedure Write_SelfRecords(Parameters,
 			
 			If TypeOf(Row.Document) = Type("DocumentRef.BankPayment") 
 				Or TypeOf(Row.Document) = Type("DocumentRef.CashPayment") 
-				Or TypeOf(Row.Document) = Type("DocumentRef.PurchaseInvoice") Then
+				Or TypeOf(Row.Document) = Type("DocumentRef.PurchaseInvoice")
+				Or TypeOf(Row.Document) = Type("DocumentRef.PurchaseReturn") Then
 				NewRow_PartnersBalance_Transactions.RecordType = ReverseRecordType(NewRow_Transactions.RecordType);
 			Else
 				NewRow_PartnersBalance_Transactions.RecordType = NewRow_Transactions.RecordType;

@@ -97,6 +97,10 @@
 						</v8:item>
 					</dcscor:value>
 				</dcscor:item>
+				<dcscor:item xsi:type="dcsset:SettingsParameterValue">
+					<dcscor:parameter>MarkNegatives</dcscor:parameter>
+					<dcscor:value xsi:type="xs:boolean">true</dcscor:value>
+				</dcscor:item>
 			</appearance>
 		</field>
 		<field xsi:type="DataSetFieldField">

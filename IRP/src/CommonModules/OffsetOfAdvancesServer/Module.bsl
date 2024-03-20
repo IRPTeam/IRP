@@ -928,6 +928,9 @@ Procedure Write_SelfRecords(Parameters,
 	AccountingOperations.Insert(Type("DocumentRef.SalesInvoice")    , Op.SalesInvoice_DR_R2020B_AdvancesFromCustomers_CR_R2021B_CustomersTransactions);
 	AccountingOperations.Insert(Type("DocumentRef.PurchaseInvoice") , Op.PurchaseInvoice_DR_R1021B_VendorsTransactions_CR_R1020B_AdvancesToVendors);
 	
+	IsCustomerAdvanceClosing = (TypeOf(Parameters.Object.Ref) = Type("DocumentRef.CustomersAdvancesClosing"));
+	IsVendorAdvanceClosing = (TypeOf(Parameters.Object.Ref) = Type("DocumentRef.VendorsAdvancesClosing"));
+	
 	For Each Row In Recorders Do
 
 		UseKeyForCurrency = ArrayOfDocumentTypes.Find(TypeOf(Row.Document)) <> Undefined;
@@ -994,7 +997,11 @@ Procedure Write_SelfRecords(Parameters,
 			If TypeOf(Row.Document) = Type("DocumentRef.BankReceipt")
 				Or TypeOf(Row.Document) = Type("DocumentRef.CashReceipt")
 				Or TypeOf(Row.Document) = Type("DocumentRef.SalesInvoice")
-				Or TypeOf(Row.Document) = Type("DocumentRef.SalesReturn") Then
+				Or TypeOf(Row.Document) = Type("DocumentRef.SalesReturn")
+				Or (TypeOf(Row.Document) = Type("DocumentRef.DebitNote") And IsVendorAdvanceClosing)
+				Or (TypeOf(Row.Document) = Type("DocumentRef.DebitNote") And IsCustomerAdvanceClosing) 
+				Or (TypeOf(Row.Document) = Type("DocumentRef.CreditNote") And IsVendorAdvanceClosing)
+				Or (TypeOf(Row.Document) = Type("DocumentRef.CreditNote") And IsCustomerAdvanceClosing) Then
 				NewRow_PartnerBalance_Advances.RecordType = ReverseRecordType(NewRow_Advances.RecordType);
 			Else
 				NewRow_PartnerBalance_Advances.RecordType = NewRow_Advances.RecordType;
@@ -1007,7 +1014,7 @@ Procedure Write_SelfRecords(Parameters,
 			NewRow_PartnerBalance_Advances.LegalName  = NewRow_Advances.LegalName;
 			NewRow_PartnerBalance_Advances.Agreement  = NewRow_Advances.Agreement;
 			NewRow_PartnerBalance_Advances.Currency   = NewRow_Advances.Currency;
-			NewRow_PartnerBalance_Advances.AdvancesClosing = Parameters.Object.Ref;;
+			NewRow_PartnerBalance_Advances.AdvancesClosing = Parameters.Object.Ref;
 			
 			If Parameters.RegisterName_Advances = Metadata.AccumulationRegisters.R2020B_AdvancesFromCustomers.Name Then
 				NewRow_PartnerBalance_Advances.CustomerAdvance = NewRow_Advances.Amount;
@@ -1048,7 +1055,8 @@ Procedure Write_SelfRecords(Parameters,
 			If TypeOf(Row.Document) = Type("DocumentRef.BankPayment") 
 				Or TypeOf(Row.Document) = Type("DocumentRef.CashPayment") 
 				Or TypeOf(Row.Document) = Type("DocumentRef.PurchaseInvoice")
-				Or TypeOf(Row.Document) = Type("DocumentRef.PurchaseReturn") Then
+				Or TypeOf(Row.Document) = Type("DocumentRef.PurchaseReturn")
+				Or (TypeOf(Row.Document) = Type("DocumentRef.DebitNote") And IsVendorAdvanceClosing) Then
 				NewRow_PartnersBalance_Transactions.RecordType = ReverseRecordType(NewRow_Transactions.RecordType);
 			Else
 				NewRow_PartnersBalance_Transactions.RecordType = NewRow_Transactions.RecordType;

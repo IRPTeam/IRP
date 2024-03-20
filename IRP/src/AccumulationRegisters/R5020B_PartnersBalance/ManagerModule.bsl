@@ -742,6 +742,79 @@ Function R5020B_PartnersBalance_RSR() Export
 			|	VALUE(AccumulationRecordType.Expense)";
 EndFunction	
 
+Function R5020B_PartnersBalance_RRR() Export
+	Return 
+		"SELECT
+		|	VALUE(AccumulationRecordType.Receipt) AS RecordType,
+		|	ItemList.Period,
+		|	ItemList.Company,
+		|	ItemList.Branch,
+		|	ItemList.Partner,
+		|	ItemList.LegalName,
+		|	ItemList.Agreement,
+		|	ItemList.BasisDocument AS Document,
+		|	ItemList.Currency,
+		|	0 AS Amount,
+		|	-SUM(ItemList.TotalAmount) AS CustomerTransaction,
+		|	0 AS CustomerAdvance,
+		|	0 AS VendorTransaction,
+		|	0 AS VendorAdvance,
+		|	0 AS OtherTransaction,
+		|	UNDEFINED AS AdvancesClosing
+		|INTO R5020B_PartnersBalance
+		|FROM
+		|	ItemList AS ItemList
+		|WHERE
+		|	ItemList.UsePartnerTransactions
+		|	AND ItemList.StatusType = VALUE(ENUM.RetailReceiptStatusTypes.Completed)
+		|GROUP BY
+		|	ItemList.Period,
+		|	ItemList.Company,
+		|	ItemList.Branch,
+		|	ItemList.Partner,
+		|	ItemList.LegalName,
+		|	ItemList.Agreement,
+		|	ItemList.BasisDocument,
+		|	ItemList.Currency,
+		|	VALUE(AccumulationRecordType.Receipt)
+		|
+		|UNION ALL
+		|
+		|SELECT
+		|	VALUE(AccumulationRecordType.Expense),
+		|	ItemList.Period,
+		|	ItemList.Company,
+		|	ItemList.Branch,
+		|	ItemList.Partner,
+		|	ItemList.LegalName,
+		|	ItemList.Agreement,
+		|	ItemList.BasisDocument,
+		|	ItemList.Currency,
+		|	0 AS Amount,
+		|	-SUM(ItemList.TotalAmount) AS CustomerTransaction,
+		|	0 AS CustomerAdvance,
+		|	0 AS VendorTransaction,
+		|	0 AS VendorAdvance,
+		|	0 AS OtherTransaction,
+		|	UNDEFINED
+		|FROM
+		|	ItemList AS ItemList
+		|WHERE
+		|	ItemList.UsePartnerTransactions
+		|	AND ItemList.StatusType = VALUE(ENUM.RetailReceiptStatusTypes.Completed)
+		|GROUP BY
+		|	ItemList.Period,
+		|	ItemList.Company,
+		|	ItemList.Branch,
+		|	ItemList.Partner,
+		|	ItemList.LegalName,
+		|	ItemList.Agreement,
+		|	ItemList.BasisDocument,
+		|	ItemList.Currency,
+		|	VALUE(AccumulationRecordType.Expense)";
+
+EndFunction
+
 Function R5020B_PartnersBalance_SR() Export
 	Return 
 		"SELECT
@@ -837,3 +910,59 @@ Function R5020B_PartnersBalance_SR() Export
 		
 EndFunction
 
+Function R5020B_PartnersBalance_ECA() Export
+	Return 
+		"SELECT
+		|	VALUE(AccumulationRecordType.Receipt) AS RecordType,
+		|	PaymentList.Period,
+		|	PaymentList.Company,
+		|	PaymentList.Branch,
+		|	PaymentList.VendorPartner AS Partner,
+		|	PaymentList.VendorLegalName AS LegalName,
+		|	PaymentList.VendorAgreement AS Agreement,
+		|	PaymentList.TransactionDocument AS Document,
+		|	PaymentList.Currency,
+		|	0 AS Amount,
+		|	0 AS CustomerTransaction,
+		|	0 AS CustomerAdvance,
+		|	PaymentList.TotalAmount AS VendorTransaction,
+		|	0 AS VendorAdvance,
+		|	0 AS OtherTransaction,
+		|	PaymentList.Key,
+		|	UNDEFINED AS AdvancesClosing
+		|INTO R5020B_PartnersBalance
+		|FROM
+		|	PaymentList AS PaymentList
+		|WHERE
+		|	PaymentList.IsPurchase
+		|
+		|UNION ALL
+		|
+		|SELECT
+		|	CASE
+		|		WHEN OffsetOfAdvances.RecordType = VALUE(Enum.RecordType.Receipt)
+		|			THEN VALUE(AccumulationRecordType.Expense)
+		|		ELSE VALUE(AccumulationRecordType.Receipt)
+		|	END,
+		|	OffsetOfAdvances.Period,
+		|	OffsetOfAdvances.Company,
+		|	OffsetOfAdvances.Branch,
+		|	OffsetOfAdvances.Partner,
+		|	OffsetOfAdvances.LegalName,
+		|	OffsetOfAdvances.TransactionAgreement,
+		|	OffsetOfAdvances.TransactionDocument,
+		|	OffsetOfAdvances.Currency,
+		|	0 AS Amount,
+		|	0 AS CustomerTransaction,
+		|	0 AS CustomerAdvance,
+		|	OffsetOfAdvances.Amount AS VendorTransaction,
+		|	0 AS VendorAdvance,
+		|	0 AS OtherTransaction,
+		|	OffsetOfAdvances.Key,
+		|	OffsetOfAdvances.Recorder
+		|FROM
+		|	InformationRegister.T2010S_OffsetOfAdvances AS OffsetOfAdvances
+		|WHERE
+		|	OffsetOfAdvances.Document = &Ref
+		|	AND OffsetOfAdvances.Recorder REFS Document.VendorsAdvancesClosing";
+EndFunction

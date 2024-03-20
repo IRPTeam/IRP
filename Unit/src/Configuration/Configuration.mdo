@@ -84,6 +84,7 @@
   <definedTypes>DefinedType.typeAmount</definedTypes>
   <definedTypes>DefinedType.typeDescription</definedTypes>
   <definedTypes>DefinedType.typeFilesOwner</definedTypes>
+  <commandGroups>CommandGroup.Service</commandGroups>
   <constants>Constant.SaasMode</constants>
   <commonForms>CommonForm.AttachFile</commonForms>
   <commonForms>CommonForm.Unit_DataContentAnalyzer</commonForms>
@@ -103,10 +104,96 @@
   <catalogs>Catalog.Unit_ServiceExchangeHistory</catalogs>
   <catalogs>Catalog.Units</catalogs>
   <catalogs>Catalog.Users</catalogs>
+  <documents>Document.AdditionalAccrual</documents>
+  <documents>Document.AdditionalCostAllocation</documents>
+  <documents>Document.AdditionalDeduction</documents>
+  <documents>Document.AdditionalRevenueAllocation</documents>
+  <documents>Document.BankPayment</documents>
+  <documents>Document.BankReceipt</documents>
+  <documents>Document.BatchReallocateIncoming</documents>
+  <documents>Document.BatchReallocateOutgoing</documents>
+  <documents>Document.Bundling</documents>
+  <documents>Document.CalculationMovementCosts</documents>
+  <documents>Document.CashExpense</documents>
+  <documents>Document.CashPayment</documents>
+  <documents>Document.CashReceipt</documents>
+  <documents>Document.CashRevenue</documents>
+  <documents>Document.CashStatement</documents>
+  <documents>Document.CashTransferOrder</documents>
+  <documents>Document.ChequeBondTransaction</documents>
+  <documents>Document.ChequeBondTransactionItem</documents>
+  <documents>Document.CommissioningOfFixedAsset</documents>
+  <documents>Document.ConsolidatedRetailSales</documents>
+  <documents>Document.CreditNote</documents>
+  <documents>Document.CustomersAdvancesClosing</documents>
+  <documents>Document.DebitNote</documents>
+  <documents>Document.DecommissioningOfFixedAsset</documents>
+  <documents>Document.DepreciationCalculation</documents>
+  <documents>Document.EmployeeCashAdvance</documents>
+  <documents>Document.EmployeeFiring</documents>
+  <documents>Document.EmployeeHiring</documents>
+  <documents>Document.EmployeeSickLeave</documents>
+  <documents>Document.EmployeeTransfer</documents>
+  <documents>Document.EmployeeVacation</documents>
+  <documents>Document.FixedAssetTransfer</documents>
+  <documents>Document.ForeignCurrencyRevaluation</documents>
+  <documents>Document.GoodsReceipt</documents>
+  <documents>Document.IncomingPaymentOrder</documents>
+  <documents>Document.InternalSupplyRequest</documents>
+  <documents>Document.InventoryTransfer</documents>
+  <documents>Document.InventoryTransferOrder</documents>
+  <documents>Document.ItemStockAdjustment</documents>
+  <documents>Document.JournalEntry</documents>
+  <documents>Document.Labeling</documents>
+  <documents>Document.ManualRegisterEntry</documents>
+  <documents>Document.ModernizationOfFixedAsset</documents>
+  <documents>Document.MoneyTransfer</documents>
+  <documents>Document.OpeningEntry</documents>
+  <documents>Document.OutgoingPaymentOrder</documents>
+  <documents>Document.Payroll</documents>
+  <documents>Document.PhysicalCountByLocation</documents>
+  <documents>Document.PhysicalInventory</documents>
+  <documents>Document.PlannedReceiptReservation</documents>
+  <documents>Document.PriceList</documents>
+  <documents>Document.Production</documents>
+  <documents>Document.ProductionCostsAllocation</documents>
+  <documents>Document.ProductionPlanning</documents>
+  <documents>Document.ProductionPlanningClosing</documents>
+  <documents>Document.ProductionPlanningCorrection</documents>
+  <documents>Document.PurchaseInvoice</documents>
+  <documents>Document.PurchaseOrder</documents>
+  <documents>Document.PurchaseOrderClosing</documents>
+  <documents>Document.PurchaseReturn</documents>
+  <documents>Document.PurchaseReturnOrder</documents>
+  <documents>Document.ReconciliationStatement</documents>
+  <documents>Document.RetailGoodsReceipt</documents>
+  <documents>Document.RetailReceiptCorrection</documents>
+  <documents>Document.RetailReturnReceipt</documents>
+  <documents>Document.RetailSalesReceipt</documents>
+  <documents>Document.RetailShipmentConfirmation</documents>
+  <documents>Document.SalesInvoice</documents>
+  <documents>Document.SalesOrder</documents>
+  <documents>Document.SalesOrderClosing</documents>
+  <documents>Document.SalesReportFromTradeAgent</documents>
+  <documents>Document.SalesReportToConsignor</documents>
+  <documents>Document.SalesReturn</documents>
+  <documents>Document.SalesReturnOrder</documents>
+  <documents>Document.ShipmentConfirmation</documents>
+  <documents>Document.StockAdjustmentAsSurplus</documents>
+  <documents>Document.StockAdjustmentAsWriteOff</documents>
+  <documents>Document.TimeSheet</documents>
+  <documents>Document.Unbundling</documents>
+  <documents>Document.VendorsAdvancesClosing</documents>
+  <documents>Document.VisitorCounter</documents>
+  <documents>Document.WorkOrder</documents>
+  <documents>Document.WorkOrderClosing</documents>
+  <documents>Document.WorkSheet</documents>
+  <documents>Document.DebitCreditNote</documents>
   <enums>Enum.CurrencyType</enums>
   <enums>Enum.ItemTypes</enums>
   <enums>Enum.REP_ReportParametrTypes</enums>
   <reports>Report.REP_Barcodes</reports>
+  <reports>Report.D0009_DocumentRegistrationsReport</reports>
   <dataProcessors>DataProcessor.Unit_CheckAllTypeData</dataProcessors>
   <dataProcessors>DataProcessor.Unit_RunTest</dataProcessors>
   <informationRegisters>InformationRegister.AttachedFiles</informationRegisters>

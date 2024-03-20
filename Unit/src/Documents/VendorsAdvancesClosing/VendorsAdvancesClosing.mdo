@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mdclass:Document xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" xmlns:mdclassExtension="http://g5.1c.ru/v8/dt/metadata/mdclass/extension" uuid="f8fdeab3-69cd-45d1-bda5-1ee37e10e7c6" extendedConfigurationObject="056ebbd8-2cfd-417a-857b-2808bcad7f1e">
+  <producedTypes>
+    <objectType typeId="8608a64c-aa0f-429d-95b3-32eda2182438" valueTypeId="150324d0-5b48-48ff-81e7-b29d6f56d6fe"/>
+    <refType typeId="ed1d5e70-46f1-4d2c-838a-f25e33c6bc30" valueTypeId="e608c546-e19e-4796-93ca-db91b88b0b3a"/>
+    <selectionType typeId="5e55aeee-6a05-4af5-b12b-c208b08b9999" valueTypeId="e1d7afe4-7aa3-4ea5-b545-299381ca54a9"/>
+    <listType typeId="96e26ded-33a8-43ab-a179-d0ddeb2ce075" valueTypeId="e784cb9f-76ac-4c96-8820-85c3899420dc"/>
+    <managerType typeId="f1eea6c1-fc63-448c-a6df-d60419acdb9a" valueTypeId="4350fc52-db4b-4425-878e-a23c8c6dcc41"/>
+  </producedTypes>
+  <name>VendorsAdvancesClosing</name>
+  <objectBelonging>Adopted</objectBelonging>
+  <extension xsi:type="mdclassExtension:DocumentExtension">
+    <extendedConfigurationObject>Checked</extendedConfigurationObject>
+  </extension>
+  <useStandardCommands>true</useStandardCommands>
+</mdclass:Document>

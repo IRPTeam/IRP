@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mdclass:Document xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" xmlns:mdclassExtension="http://g5.1c.ru/v8/dt/metadata/mdclass/extension" uuid="bb4226a7-fa5c-4481-8691-498ef9ea5949" extendedConfigurationObject="83e59da4-9944-4602-aaa1-84118d633087">
+  <producedTypes>
+    <objectType typeId="ee5a6a14-14af-4baf-8bb3-ff3c875b6bea" valueTypeId="73f2e100-e69d-4471-beff-5d19a34f13fa"/>
+    <refType typeId="3c0ea812-9a12-47a0-9578-cf8b58718908" valueTypeId="7e1ccb3b-4e77-48fd-b185-75d10deb105f"/>
+    <selectionType typeId="08cd0164-8155-46ca-a496-0c6ef1ea1e9a" valueTypeId="710f3707-95b9-48d3-9016-55fffdcda54f"/>
+    <listType typeId="5ee2c757-4730-47b4-986d-b9d26ae039a7" valueTypeId="dbe81957-0744-42bc-855a-5a59af943fcc"/>
+    <managerType typeId="04584e8c-0ec9-4898-a342-3c37b6052418" valueTypeId="8f352d86-27e9-4a16-bbca-902a2bc9e01d"/>
+  </producedTypes>
+  <name>AdditionalAccrual</name>
+  <objectBelonging>Adopted</objectBelonging>
+  <extension xsi:type="mdclassExtension:DocumentExtension">
+    <extendedConfigurationObject>Checked</extendedConfigurationObject>
+  </extension>
+  <useStandardCommands>true</useStandardCommands>
+</mdclass:Document>

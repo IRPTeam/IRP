@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mdclass:Document xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" xmlns:mdclassExtension="http://g5.1c.ru/v8/dt/metadata/mdclass/extension" uuid="e7532091-c09a-469f-9940-f90a216a35f4" extendedConfigurationObject="9d030403-6eef-4a13-ad3d-34980b839089">
+  <producedTypes>
+    <objectType typeId="1102ae7e-4463-494e-9478-6525a36e4e34" valueTypeId="ceff22f6-7014-436e-9819-6d6ae1c780b5"/>
+    <refType typeId="fd8f1f84-0f04-4d70-85c5-862d66d60b25" valueTypeId="a5ec32a7-c4f4-4a78-b33a-7f1be4efa535"/>
+    <selectionType typeId="d6dd3335-6378-4649-879f-7250ce01ab39" valueTypeId="cad85f66-c328-40b2-a3ed-b0041e4c3439"/>
+    <listType typeId="53022adc-a867-42cb-9ed5-b58cbbed5b20" valueTypeId="5c5573e1-5cf2-463f-8aed-dffc1ff309bb"/>
+    <managerType typeId="512082e4-b9ba-4613-8ac2-511db7613973" valueTypeId="5f188320-d2a8-4780-b088-b032046f600b"/>
+  </producedTypes>
+  <name>Payroll</name>
+  <objectBelonging>Adopted</objectBelonging>
+  <extension xsi:type="mdclassExtension:DocumentExtension">
+    <extendedConfigurationObject>Checked</extendedConfigurationObject>
+  </extension>
+  <useStandardCommands>true</useStandardCommands>
+</mdclass:Document>

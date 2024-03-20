@@ -1044,7 +1044,14 @@ Procedure Write_SelfRecords(Parameters,
 			// Partners balance - transactions
 			NewRow_PartnersBalance_Transactions = TablePartnersBalance.Add();
 			
-			NewRow_PartnersBalance_Transactions.RecordType = NewRow_Transactions.RecordType;
+			If TypeOf(Row.Document) = Type("DocumentRef.BankPayment") 
+				Or TypeOf(Row.Document) = Type("DocumentRef.CashPayment") 
+				Or TypeOf(Row.Document) = Type("DocumentRef.PurchaseInvoice") Then
+				NewRow_PartnersBalance_Transactions.RecordType = ReverseRecordType(NewRow_Transactions.RecordType);
+			Else
+				NewRow_PartnersBalance_Transactions.RecordType = NewRow_Transactions.RecordType;
+			EndIf;
+			
 //			If NewRow_Transactions.RecordType = AccumulationRecordType.Expense Then
 //				NewRow_PartnersBalance_Transactions.RecordType = AccumulationRecordType.Receipt;
 //			Else

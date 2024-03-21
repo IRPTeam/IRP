@@ -2,14 +2,14 @@
 // Print command handler.
 //
 // Parameters:
-//	CommandParameter - Array of DocumentRef.InventoryTransfer - contains a reference to the object for which the print command was executed.
+//	CommandParameter - Array of DocumentRef.GoodsReceipt - contains a reference to the object for which the print command was executed.
 //	CommandExecuteParameters - CommandExecuteParameters - command execute parameters.
 &AtClient
 Procedure CommandProcessing(CommandParameter, CommandExecuteParameters)
 
 	For Each ItRef In CommandParameter Do
 		Param = InitPrintParam(ItRef);
-		Param.NameTemplate = "InventoryTransferPrint";
+		Param.NameTemplate = "GoodsReceiptPrint";
 		Param.BuilderLayout = True;
 
 		OpenForm("CommonForm.PrintForm", , , "UniqueOpeningOfTheCommonPrintingPlate");
@@ -25,13 +25,13 @@ EndFunction
 // Sales order print server.
 // 
 // Parameters:
-//  Ref - DocumentRef.InventoryTransfer
+//  Ref - DocumentRef.GoodsReceipt
 //  Param - See UniversalPrintServer.InitPrintParam
 // 
 // Returns:
-//  SpreadsheetDocument - Inventory transfer print server
+//  SpreadsheetDocument - Sales order print server
 &AtServer
-Function InventoryTransferPrintServer(Ref, Param)
-	Spreadsheet = Documents.InventoryTransfer.Print(Ref, Param);
+Function GoodsReceiptPrintServer(Ref, Param)
+	Spreadsheet = Documents.GoodsReceipt.Print(Ref, Param);
 	Return Spreadsheet;
 EndFunction

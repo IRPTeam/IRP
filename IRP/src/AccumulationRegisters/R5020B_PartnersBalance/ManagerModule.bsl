@@ -1302,8 +1302,8 @@ Function R5020B_PartnersBalance_DebitNote() Export
 		|SELECT
 		|	CASE
 		|		WHEN OffsetOfAdvances.RecordType = VALUE(Enum.RecordType.Receipt)
-		|			THEN VALUE(AccumulationRecordType.Expense)
-		|		ELSE VALUE(AccumulationRecordType.Receipt)
+		|			THEN VALUE(AccumulationRecordType.Receipt)
+		|		ELSE VALUE(AccumulationRecordType.Expense)
 		|	END AS RecordType,
 		|	OffsetOfAdvances.Period,
 		|	OffsetOfAdvances.Company,
@@ -1478,8 +1478,8 @@ Function R5020B_PartnersBalance_CreditNote() Export
 		|SELECT
 		|	CASE
 		|		WHEN OffsetOfAdvances.RecordType = VALUE(Enum.RecordType.Receipt)
-		|			THEN VALUE(AccumulationRecordType.Expense)
-		|		ELSE VALUE(AccumulationRecordType.Receipt)
+		|			THEN VALUE(AccumulationRecordType.Receipt)
+		|		ELSE VALUE(AccumulationRecordType.Expense)
 		|	END AS RecordType,
 		|	OffsetOfAdvances.Period,
 		|	OffsetOfAdvances.Company,

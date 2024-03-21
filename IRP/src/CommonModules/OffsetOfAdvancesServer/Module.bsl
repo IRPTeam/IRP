@@ -998,11 +998,11 @@ Procedure Write_SelfRecords(Parameters,
 				Or TypeOf(Row.Document) = Type("DocumentRef.CashReceipt")
 				Or TypeOf(Row.Document) = Type("DocumentRef.SalesReportFromTradeAgent")
 				Or TypeOf(Row.Document) = Type("DocumentRef.SalesInvoice")
-				Or TypeOf(Row.Document) = Type("DocumentRef.SalesReturn")
-				Or (TypeOf(Row.Document) = Type("DocumentRef.DebitNote") And IsVendorAdvanceClosing)
-				Or (TypeOf(Row.Document) = Type("DocumentRef.DebitNote") And IsCustomerAdvanceClosing) 
-				Or (TypeOf(Row.Document) = Type("DocumentRef.CreditNote") And IsVendorAdvanceClosing)
-				Or (TypeOf(Row.Document) = Type("DocumentRef.CreditNote") And IsCustomerAdvanceClosing) Then
+				Or TypeOf(Row.Document) = Type("DocumentRef.SalesReturn") Then
+				//Or (TypeOf(Row.Document) = Type("DocumentRef.DebitNote") And IsVendorAdvanceClosing)
+				//Or (TypeOf(Row.Document) = Type("DocumentRef.DebitNote") And IsCustomerAdvanceClosing) 
+				//Or (TypeOf(Row.Document) = Type("DocumentRef.CreditNote") And IsVendorAdvanceClosing)
+				//Or (TypeOf(Row.Document) = Type("DocumentRef.CreditNote") And IsCustomerAdvanceClosing) Then
 				NewRow_PartnerBalance_Advances.RecordType = ReverseRecordType(NewRow_Advances.RecordType);
 			Else
 				NewRow_PartnerBalance_Advances.RecordType = NewRow_Advances.RecordType;
@@ -1057,18 +1057,12 @@ Procedure Write_SelfRecords(Parameters,
 				Or TypeOf(Row.Document) = Type("DocumentRef.CashPayment") 
 				Or TypeOf(Row.Document) = Type("DocumentRef.SalesReportToConsignor")
 				Or TypeOf(Row.Document) = Type("DocumentRef.PurchaseInvoice")
-				Or TypeOf(Row.Document) = Type("DocumentRef.PurchaseReturn")
-				Or (TypeOf(Row.Document) = Type("DocumentRef.DebitNote") And IsVendorAdvanceClosing) Then
+				Or TypeOf(Row.Document) = Type("DocumentRef.PurchaseReturn") Then
+				//Or (TypeOf(Row.Document) = Type("DocumentRef.DebitNote") And IsVendorAdvanceClosing) Then
 				NewRow_PartnersBalance_Transactions.RecordType = ReverseRecordType(NewRow_Transactions.RecordType);
 			Else
 				NewRow_PartnersBalance_Transactions.RecordType = NewRow_Transactions.RecordType;
 			EndIf;
-			
-//			If NewRow_Transactions.RecordType = AccumulationRecordType.Expense Then
-//				NewRow_PartnersBalance_Transactions.RecordType = AccumulationRecordType.Receipt;
-//			Else
-//				NewRow_PartnersBalance_Transactions.RecordType = AccumulationRecordType.Expense;
-//			EndIf;
 			
 			NewRow_PartnersBalance_Transactions.Period     = NewRow_Transactions.Period;
 			NewRow_PartnersBalance_Transactions.Company    = NewRow_Transactions.Company;

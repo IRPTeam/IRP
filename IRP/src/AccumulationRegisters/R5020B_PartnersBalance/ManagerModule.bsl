@@ -59,6 +59,7 @@ Function R5020B_PartnersBalance_BP_CP() Export
 		|;
 		|
 		|////////////////////////////////////////////////////////////////////////////////
+		// Customer advance, Vendor advance
 		|SELECT
 		|	VALUE(AccumulationRecordType.Receipt) AS RecordType,
 		|	PaymentList.Period,
@@ -97,9 +98,13 @@ Function R5020B_PartnersBalance_BP_CP() Export
 		|
 		|UNION ALL
 		|
-		|SELECT // vendor advance offset
-		|
-		|	OffsetPartnersBalance.RecordType,
+		// Customer advance, Vendor advance (offset)
+		|SELECT
+		|	case when OffsetPartnersBalance.IsReturnToCustomer then
+		|		OffsetPartnersBalance.RecordType_Reverse
+		|	else
+		|		OffsetPartnersBalance.RecordType
+		|	end,
 		|	OffsetPartnersBalance.Period,
 		|	OffsetPartnersBalance.Company,
 		|	OffsetPartnersBalance.Branch,
@@ -134,6 +139,7 @@ Function R5020B_PartnersBalance_BP_CP() Export
 		|
 		|UNION ALL
 		|
+		// Customer transaction, Vendor transaction
 		|SELECT
 		|	VALUE(AccumulationRecordType.Receipt) AS RecordType,
 		|	PaymentList.Period,
@@ -171,8 +177,13 @@ Function R5020B_PartnersBalance_BP_CP() Export
 		|
 		|UNION ALL
 		|
+		// Customer transaction, Vendor transaction (offset)
 		|SELECT
-		|	OffsetPartnersBalance.RecordType_Reverse,
+		|	case when OffsetPartnersBalance.IsReturnToCustomer then 
+		|		OffsetPartnersBalance.RecordType
+		|	else
+		|		OffsetPartnersBalance.RecordType_Reverse
+		|	end,
 		|	OffsetPartnersBalance.Period,
 		|	OffsetPartnersBalance.Company,
 		|	OffsetPartnersBalance.Branch,
@@ -207,6 +218,7 @@ Function R5020B_PartnersBalance_BP_CP() Export
 		|
 		|UNION ALL
 		|
+		// Other transaction
 		|SELECT
 		|
 		|	VALUE(AccumulationRecordType.Receipt) AS RecordType,
@@ -821,8 +833,8 @@ Function R5020B_PartnersBalance_SR() Export
 		|SELECT
 		|	CASE
 		|		WHEN OffsetOfAdvances.RecordType = VALUE(Enum.RecordType.Receipt)
-		|			THEN VALUE(AccumulationRecordType.Expense)
-		|		ELSE VALUE(AccumulationRecordType.Receipt)
+		|			THEN VALUE(AccumulationRecordType.Receipt)
+		|		ELSE VALUE(AccumulationRecordType.Expense)
 		|	END AS RecordType,
 		|	OffsetOfAdvances.Period,
 		|	OffsetOfAdvances.Company,
@@ -834,7 +846,7 @@ Function R5020B_PartnersBalance_SR() Export
 		|	OffsetOfAdvances.Currency,
 		|	0 AS Amount,
 		|	0 AS CustomerTransaction,
-		|	OffsetOfAdvances.Amount AS CustomerAdvance,
+		|	-OffsetOfAdvances.Amount AS CustomerAdvance,
 		|	0 AS VendorTransaction,
 		|	0 AS VendorAdvance,
 		|	0 AS OtherTransaction,

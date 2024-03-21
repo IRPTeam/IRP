@@ -70,7 +70,9 @@ Function OffsetOfAdvancesAndAging(Parameters) Export
 	Records_OffsetOfAdvances.Columns.Delete(Records_OffsetOfAdvances.Columns.PointInTime);
 	Records_OffsetOfAdvances.Columns.Add("AdvancesRowKey"     , Metadata.DefinedTypes.typeRowID.Type);
 	Records_OffsetOfAdvances.Columns.Add("TransactionsRowKey" , Metadata.DefinedTypes.typeRowID.Type);
+	Records_OffsetOfAdvances.Columns.Add("IsReturnToAdvance" , New TypeDescription("Boolean"));
 	
+		
 	// detail info by all aging
 	Records_OffsetAging = InformationRegisters.T2013S_OffsetOfAging.CreateRecordSet().UnloadColumns();
 	Records_OffsetAging.Columns.Delete(Records_OffsetAging.Columns.PointInTime);
@@ -998,7 +1000,16 @@ Procedure Write_SelfRecords(Parameters,
 				Or TypeOf(Row.Document) = Type("DocumentRef.CashReceipt")
 				Or TypeOf(Row.Document) = Type("DocumentRef.SalesReportFromTradeAgent")
 				Or TypeOf(Row.Document) = Type("DocumentRef.SalesInvoice")
-				Or TypeOf(Row.Document) = Type("DocumentRef.SalesReturn") Then
+				Or (TypeOf(Row.Document) = Type("DocumentRef.SalesReturn") And Not RowOffset.IsReturnToAdvance) 
+				
+				Or (TypeOf(Row.Document) = Type("DocumentRef.BankPayment") And 
+					Row.Document.TransactionType = Enums.OutgoingPaymentTransactionTypes.ReturnToCustomer)
+					
+				Or (TypeOf(Row.Document) = Type("DocumentRef.CashPayment") And 
+					Row.Document.TransactionType = Enums.OutgoingPaymentTransactionTypes.ReturnToCustomer) Then
+					
+					
+					
 				//Or (TypeOf(Row.Document) = Type("DocumentRef.DebitNote") And IsVendorAdvanceClosing)
 				//Or (TypeOf(Row.Document) = Type("DocumentRef.DebitNote") And IsCustomerAdvanceClosing) 
 				//Or (TypeOf(Row.Document) = Type("DocumentRef.CreditNote") And IsVendorAdvanceClosing)
@@ -1018,7 +1029,13 @@ Procedure Write_SelfRecords(Parameters,
 			NewRow_PartnerBalance_Advances.AdvancesClosing = Parameters.Object.Ref;
 			
 			If Parameters.RegisterName_Advances = Metadata.AccumulationRegisters.R2020B_AdvancesFromCustomers.Name Then
+				
 				NewRow_PartnerBalance_Advances.CustomerAdvance = NewRow_Advances.Amount;
+				
+				If (TypeOf(Row.Document) = Type("DocumentRef.SalesReturn") And RowOffset.IsReturnToAdvance) Then
+					NewRow_PartnerBalance_Advances.CustomerAdvance = - NewRow_PartnerBalance_Advances.CustomerAdvance;	
+				EndIf;	
+				
 			ElsIf Parameters.RegisterName_Advances = Metadata.AccumulationRegisters.R1020B_AdvancesToVendors.Name Then
 				NewRow_PartnerBalance_Advances.VendorAdvance = NewRow_Advances.Amount;
 			Else
@@ -1064,6 +1081,15 @@ Procedure Write_SelfRecords(Parameters,
 				NewRow_PartnersBalance_Transactions.RecordType = NewRow_Transactions.RecordType;
 			EndIf;
 			
+			If (TypeOf(Row.Document) = Type("DocumentRef.BankPayment") And 
+					Row.Document.TransactionType = Enums.OutgoingPaymentTransactionTypes.ReturnToCustomer)
+					
+				Or (TypeOf(Row.Document) = Type("DocumentRef.CashPayment") And 
+					Row.Document.TransactionType = Enums.OutgoingPaymentTransactionTypes.ReturnToCustomer) Then
+					
+				NewRow_PartnersBalance_Transactions.RecordType = NewRow_Transactions.RecordType;
+			EndIf;	
+						
 			NewRow_PartnersBalance_Transactions.Period     = NewRow_Transactions.Period;
 			NewRow_PartnersBalance_Transactions.Company    = NewRow_Transactions.Company;
 			NewRow_PartnersBalance_Transactions.Branch     = NewRow_Transactions.Branch;
@@ -2294,6 +2320,8 @@ Procedure Add_T2010S_OffsetOfAdvances_FromTransaction_ToAdvance(Parameters,
 		
 	NewRecord.FromTransactionKey  = TransactionKey;
 	NewRecord.ToAdvanceKey        = AdvanceKey;
+	
+	NewRecord.IsReturnToAdvance = IsReturnToAdvance; 
 	
 	If IsReturnToAdvance Then	
 		NewRecord.Key = NewRecord.TransactionsRowKey;

@@ -1935,6 +1935,10 @@
   </commands>
   <commands uuid="84013da3-0716-4825-b14d-8cb6259fe658">
     <name>SalesInvoicePrint</name>
+    <synonym>
+      <key>en</key>
+      <value>Sales invoice</value>
+    </synonym>
     <group>CommandGroup.Print</group>
     <commandParameterType>
       <types>DocumentRef.SalesInvoice</types>

@@ -533,7 +533,7 @@ Function R5020B_PartnersBalance_PI() Export
 		|	0 AS Amount,
 		|	0 AS CustomerTransaction,
 		|	0 AS CustomerAdvance,
-		|	SUM(OffsetOfAdvances.Amount),
+		|	SUM(OffsetOfAdvances.Amount) AS VendorTransaction,
 		|	0 AS VendorAdvance,
 		|	0 AS OtherTransaction,
 		|	OffsetOfAdvances.Recorder,

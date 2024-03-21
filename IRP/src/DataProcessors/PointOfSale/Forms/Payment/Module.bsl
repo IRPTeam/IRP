@@ -995,6 +995,7 @@ Procedure SetPaymentCheck(Command)
 		Return;
 	EndIf;
 	PaymentRow.PaymentDone = True;
+	PaymentsOnActivateRow(Undefined);
 EndProcedure
 
 &AtClient
@@ -1004,6 +1005,7 @@ Procedure SetPaymentUncheck(Command)
 		Return;
 	EndIf;
 	PaymentRow.PaymentDone = False;
+	PaymentsOnActivateRow(Undefined);
 EndProcedure
 
 #EndRegion

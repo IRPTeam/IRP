@@ -1161,7 +1161,7 @@ Function R5020B_PartnersBalance_SRFTA() Export
 		|	0 AS VendorTransaction,
 		|	0 AS VendorAdvance,
 		|	0 AS OtherTransaction,
-		|	UNDEFINED AS CustomersAdvancesClosing
+		|	UNDEFINED AS AdvancesClosing
 		|INTO R5020B_PartnersBalance
 		|FROM
 		|	ItemList AS ItemList
@@ -1183,8 +1183,8 @@ Function R5020B_PartnersBalance_SRFTA() Export
 		|SELECT
 		|	CASE
 		|		WHEN OffsetOfAdvances.RecordType = VALUE(Enum.RecordType.Receipt)
-		|			THEN VALUE(AccumulationRecordType.Expense)
-		|		ELSE VALUE(AccumulationRecordType.Receipt)
+		|			THEN VALUE(AccumulationRecordType.Receipt)
+		|		ELSE VALUE(AccumulationRecordType.Expense)
 		|	END,
 		|	OffsetOfAdvances.Period,
 		|	OffsetOfAdvances.Company,
@@ -1212,8 +1212,8 @@ Function R5020B_PartnersBalance_SRFTA() Export
 		|SELECT
 		|	CASE
 		|		WHEN OffsetOfAdvances.RecordType = VALUE(Enum.RecordType.Receipt)
-		|			THEN VALUE(AccumulationRecordType.Receipt)
-		|		ELSE VALUE(AccumulationRecordType.Expense)
+		|			THEN VALUE(AccumulationRecordType.Expense)
+		|		ELSE VALUE(AccumulationRecordType.Receipt)
 		|	END AS RecordType,
 		|	OffsetOfAdvances.Period,
 		|	OffsetOfAdvances.Company,

@@ -996,6 +996,7 @@ Procedure Write_SelfRecords(Parameters,
 			
 			If TypeOf(Row.Document) = Type("DocumentRef.BankReceipt")
 				Or TypeOf(Row.Document) = Type("DocumentRef.CashReceipt")
+				Or TypeOf(Row.Document) = Type("DocumentRef.SalesReportFromTradeAgent")
 				Or TypeOf(Row.Document) = Type("DocumentRef.SalesInvoice")
 				Or TypeOf(Row.Document) = Type("DocumentRef.SalesReturn")
 				Or (TypeOf(Row.Document) = Type("DocumentRef.DebitNote") And IsVendorAdvanceClosing)
@@ -1054,6 +1055,7 @@ Procedure Write_SelfRecords(Parameters,
 			
 			If TypeOf(Row.Document) = Type("DocumentRef.BankPayment") 
 				Or TypeOf(Row.Document) = Type("DocumentRef.CashPayment") 
+				Or TypeOf(Row.Document) = Type("DocumentRef.SalesReportToConsignor")
 				Or TypeOf(Row.Document) = Type("DocumentRef.PurchaseInvoice")
 				Or TypeOf(Row.Document) = Type("DocumentRef.PurchaseReturn")
 				Or (TypeOf(Row.Document) = Type("DocumentRef.DebitNote") And IsVendorAdvanceClosing) Then

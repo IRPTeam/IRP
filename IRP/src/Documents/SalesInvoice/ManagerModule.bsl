@@ -10,6 +10,14 @@ Function Print(Ref, Param) Export
 	EndIf;
 EndFunction
 
+// Sales Invoice print.
+// 
+// Parameters:
+//  Ref - DocumentRef.SalesInvoice
+//  Param - See UniversalPrintServer.InitPrintParam
+// 
+// Returns:
+//  SpreadsheetDocument - Sales Invoice print
 Function SalesInvoicePrint(Ref, Param)
 		
 	Template = GetTemplate("SalesInvoicePrint");

@@ -128,7 +128,7 @@ Function GetChoiceDataTable(Parameters) Export
 	CommonFormActionsServer.SetCustomSearchFilter(QueryBuilder, Parameters);
 	
 	Query = QueryBuilder.GetQuery();
-
+	
 	Query.SetParameter("SearchString", Parameters.SearchString);
 	For Each Filter In Parameters.Filter Do
 		Query.SetParameter(Filter.Key, Filter.Value);
@@ -150,6 +150,10 @@ Function GetChoiceDataTable(Parameters) Export
 	If Query.Parameters.IncludePartnerSegments Then
 		PartnersSegmentsArray = InformationRegisters.PartnerSegments.GetSegmentsRefArrayByPartner(Query.Parameters.Partner);
 		Query.SetParameter("PartnerSegments", PartnersSegmentsArray);
+	EndIf;
+	
+	If AdditionalParameters.Property("AllAgreements") And AdditionalParameters.AllAgreements Then
+		Query.Text = StrReplace(Query.Text, "TOP 10", "");
 	EndIf;
 	
 	// parameters search by code

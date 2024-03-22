@@ -1074,6 +1074,13 @@
       <fullTextSearch>Use</fullTextSearch>
     </attributes>
   </tabularSections>
+  <templates uuid="d8115267-310a-46de-980a-94cba30c1bb4">
+    <name>WorkSheetPrint</name>
+    <synonym>
+      <key>en</key>
+      <value>Work sheet</value>
+    </synonym>
+  </templates>
   <commands uuid="9335be6a-fa4e-4299-9618-9d20ca625cb8">
     <name>Generate</name>
     <synonym>
@@ -1085,6 +1092,19 @@
       <types>DocumentRef.WorkOrder</types>
       <types>DocumentRef.SalesOrder</types>
       <types>DocumentRef.SalesInvoice</types>
+    </commandParameterType>
+    <parameterUseMode>Multiple</parameterUseMode>
+    <representation>Auto</representation>
+  </commands>
+  <commands uuid="bb4548ba-571d-4a05-b951-178a9a468c81">
+    <name>WorkSheetPrint</name>
+    <synonym>
+      <key>en</key>
+      <value>Work sheet</value>
+    </synonym>
+    <group>CommandGroup.Print</group>
+    <commandParameterType>
+      <types>DocumentRef.WorkSheet</types>
     </commandParameterType>
     <parameterUseMode>Multiple</parameterUseMode>
     <representation>Auto</representation>

@@ -2,14 +2,14 @@
 // Print command handler.
 //
 // Parameters:
-//	CommandParameter - Array of DocumentRef.SalesInvoice - contains a reference to the object for which the print command was executed.
+//	CommandParameter - Array of DocumentRef.OpeningEntry - contains a reference to the object for which the print command was executed.
 //	CommandExecuteParameters - CommandExecuteParameters - command execute parameters.
 &AtClient
 Procedure CommandProcessing(CommandParameter, CommandExecuteParameters)
 
 	For Each ItRef In CommandParameter Do
 		Param = InitPrintParam(ItRef);
-		Param.NameTemplate = "SalesInvoicePrint";
+		Param.NameTemplate = "OpeningEntryPrint";
 		Param.BuilderLayout = True;
 
 		OpenForm("CommonForm.PrintForm", , , "UniqueOpeningOfTheCommonPrintingPlate");
@@ -22,16 +22,16 @@ Function InitPrintParam(It)
 	Return UniversalPrintServer.InitPrintParam(It);
 EndFunction
 
-// Sales invoice print server.
+// Opening entry print server.
 // 
 // Parameters:
-//  Ref - DocumentRef.SalesInvoice
+//  Ref - DocumentRef.OpeningEntry
 //  Param - See UniversalPrintServer.InitPrintParam
 // 
 // Returns:
-//  SpreadsheetDocument - Sales invoice print server
+//  SpreadsheetDocument - Opening entry print server
 &AtServer
-Function SalesOrderPrintServer(Ref, Param)
-	Spreadsheet = Documents.SalesInvoice.Print(Ref, Param);
+Function OpeningEntryPrintServer(Ref, Param)
+	Spreadsheet = Documents.OpeningEntry.Print(Ref, Param);
 	Return Spreadsheet;
 EndFunction

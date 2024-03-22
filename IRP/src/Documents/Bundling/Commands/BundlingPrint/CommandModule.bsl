@@ -9,7 +9,7 @@ Procedure CommandProcessing(CommandParameter, CommandExecuteParameters)
 
 	For Each ItRef In CommandParameter Do
 		Param = InitPrintParam(ItRef);
-		Param.NameTemplate = "UnbundlingPrint";
+		Param.NameTemplate = "BundlingPrint";
 		Param.BuilderLayout = True;
 
 		OpenForm("CommonForm.PrintForm", , , "UniqueOpeningOfTheCommonPrintingPlate");
@@ -22,16 +22,16 @@ Function InitPrintParam(It)
 	Return UniversalPrintServer.InitPrintParam(It);
 EndFunction
 
-// Unbundling print server.
+// Bundling print server.
 // 
 // Parameters:
-//  Ref - DocumentRef.Unbundling
+//  Ref - DocumentRef.Bundling
 //  Param - See UniversalPrintServer.InitPrintParam
 // 
 // Returns:
-//  SpreadsheetDocument - Unbundling print server
+//  SpreadsheetDocument - Bundling print server
 &AtServer
-Function UnbundlingPrintServer(Ref, Param)
-	Spreadsheet = Documents.Unbundling.Print(Ref, Param);
+Function BundlingPrintServer(Ref, Param)
+	Spreadsheet = Documents.Bundling.Print(Ref, Param);
 	Return Spreadsheet;
 EndFunction

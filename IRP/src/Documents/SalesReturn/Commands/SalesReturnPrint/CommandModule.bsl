@@ -2,14 +2,14 @@
 // Print command handler.
 //
 // Parameters:
-//	CommandParameter - Array of DocumentRef.SalesInvoice - contains a reference to the object for which the print command was executed.
+//	CommandParameter - Array of DocumentRef.SalesReturn - contains a reference to the object for which the print command was executed.
 //	CommandExecuteParameters - CommandExecuteParameters - command execute parameters.
 &AtClient
 Procedure CommandProcessing(CommandParameter, CommandExecuteParameters)
 
 	For Each ItRef In CommandParameter Do
 		Param = InitPrintParam(ItRef);
-		Param.NameTemplate = "UnbundlingPrint";
+		Param.NameTemplate = "SalesReturnPrint";
 		Param.BuilderLayout = True;
 
 		OpenForm("CommonForm.PrintForm", , , "UniqueOpeningOfTheCommonPrintingPlate");
@@ -22,16 +22,16 @@ Function InitPrintParam(It)
 	Return UniversalPrintServer.InitPrintParam(It);
 EndFunction
 
-// Unbundling print server.
+// Sales return print server.
 // 
 // Parameters:
-//  Ref - DocumentRef.Unbundling
+//  Ref - DocumentRef.SalesReturn
 //  Param - See UniversalPrintServer.InitPrintParam
 // 
 // Returns:
-//  SpreadsheetDocument - Unbundling print server
+//  SpreadsheetDocument - Sales return print server
 &AtServer
-Function UnbundlingPrintServer(Ref, Param)
-	Spreadsheet = Documents.Unbundling.Print(Ref, Param);
+Function SalesOrderPrintServer(Ref, Param)
+	Spreadsheet = Documents.SalesReturn.Print(Ref, Param);
 	Return Spreadsheet;
 EndFunction

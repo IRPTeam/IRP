@@ -5,6 +5,9 @@ Procedure BeforeWrite(Cancel, Replacing)
 	EndIf;
 	
 	For Each _row In ThisObject Do
+		If ValueIsFilled(_row.AdvancesClosing) Then
+			Continue;
+		EndIf;
 		_row.Amount = 
 			  _row.CustomerTransaction 
 			  + _row.CustomerAdvance

@@ -513,6 +513,13 @@
       <dataHistory>Use</dataHistory>
     </attributes>
   </tabularSections>
+  <templates uuid="d4bd34b0-f9e4-4875-bdfe-53cb37c90337">
+    <name>PhysicalInventoryPrint</name>
+    <synonym>
+      <key>en</key>
+      <value>Physical inventory</value>
+    </synonym>
+  </templates>
   <commands uuid="0bde3178-3d8f-4901-85f4-d1e501e2298b">
     <name>GeneratePhysicalCountByLocation</name>
     <synonym>
@@ -523,6 +530,19 @@
     <commandParameterType>
       <types>DocumentRef.PhysicalInventory</types>
     </commandParameterType>
+    <representation>Auto</representation>
+  </commands>
+  <commands uuid="f8fdd055-1d14-403d-9c3d-32831d683c12">
+    <name>PhysicalInventoryPrint</name>
+    <synonym>
+      <key>en</key>
+      <value>Physical inventory</value>
+    </synonym>
+    <group>CommandGroup.Print</group>
+    <commandParameterType>
+      <types>DocumentRef.PhysicalInventory</types>
+    </commandParameterType>
+    <parameterUseMode>Multiple</parameterUseMode>
     <representation>Auto</representation>
   </commands>
 </mdclass:Document>

@@ -645,8 +645,7 @@ Function R4010B_ActualStocks()
 		   |		WHEN SerialLotNumbers.StockBalanceDetail
 		   |			THEN SerialLotNumbers.SerialLotNumber
 		   |		ELSE VALUE(Catalog.SerialLotNumbers.EmptyRef)
-		   |	END,
-		   |	VALUE(AccumulationRecordType.Receipt)";
+		   |	END";
 EndFunction
 
 Function R4011B_FreeStocks()

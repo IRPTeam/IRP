@@ -288,7 +288,14 @@ Function GetAgreementByPartner(AgreementParameters) Export
 	Else
 		CurrentDate = CommonFunctionsServer.GetCurrentSessionDate();
 	EndIf;
-
+	
+	If AgreementParameters.Property("AllAgreements") Then
+		AllAgreements = AgreementParameters.AllAgreements;
+	Else
+		AllAgreements = False;
+	EndIf;
+	
+	AdditionalParameters.Insert("AllAgreements" , AllAgreements);
 	AdditionalParameters.Insert("EndOfUseDate", CurrentDate);
 	AdditionalParameters.Insert("Partner", Partner);
 	
@@ -296,7 +303,7 @@ Function GetAgreementByPartner(AgreementParameters) Export
 	Parameters.Insert("CustomSearchFilter"   , SerializeArrayOfFilters(ArrayOfFilters));
 	Parameters.Insert("AdditionalParameters" , SerializeArrayOfFilters(AdditionalParameters));
 	Parameters.Insert("Agreement"            , AgreementParameters.Agreement);
-
+	
 	Return Catalogs.Agreements.GetDefaultChoiceRef(Parameters);
 EndFunction
 

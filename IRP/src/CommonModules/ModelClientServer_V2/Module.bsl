@@ -1046,6 +1046,7 @@ Function ChangeAgreementByPartnerExecute(Options) Export
 	ElsIf ValueIsFilled(Options.DebtType) Then
 		Options.AgreementType = ModelServer_V2.GetAgreementTypeByDebtType(Options.DebtType);
 	EndIf;
+	Options.Insert("AllAgreements", True);
 	Return DocumentsServer.GetAgreementByPartner(Options);
 EndFunction
 

@@ -31,7 +31,7 @@ EndFunction
 // Returns:
 //  SpreadsheetDocument - Commissioning of fixed asset print server
 &AtServer
-Function SalesOrderPrintServer(Ref, Param)
+Function CommissioningOfFixedAssetPrintServer(Ref, Param)
 	Spreadsheet = Documents.CommissioningOfFixedAsset.Print(Ref, Param);
 	Return Spreadsheet;
 EndFunction

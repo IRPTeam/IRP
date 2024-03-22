@@ -31,7 +31,7 @@ EndFunction
 // Returns:
 //  SpreadsheetDocument - Item stock adjustment print server
 &AtServer
-Function SalesOrderPrintServer(Ref, Param)
+Function ItemStockAdjustmentPrintServer(Ref, Param)
 	Spreadsheet = Documents.ItemStockAdjustment.Print(Ref, Param);
 	Return Spreadsheet;
 EndFunction

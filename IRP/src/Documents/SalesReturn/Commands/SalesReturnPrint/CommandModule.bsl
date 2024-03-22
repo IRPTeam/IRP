@@ -31,7 +31,7 @@ EndFunction
 // Returns:
 //  SpreadsheetDocument - Sales return print server
 &AtServer
-Function SalesOrderPrintServer(Ref, Param)
+Function SalesReturnPrintServer(Ref, Param)
 	Spreadsheet = Documents.SalesReturn.Print(Ref, Param);
 	Return Spreadsheet;
 EndFunction

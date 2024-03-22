@@ -2,7 +2,7 @@
 // Print command handler.
 //
 // Parameters:
-//	CommandParameter - Array of DocumentRef.SalesOrder - contains a reference to the object for which the print command was executed.
+//	CommandParameter - Array of DocumentRef.PurchaseReturn - contains a reference to the object for which the print command was executed.
 //	CommandExecuteParameters - CommandExecuteParameters - command execute parameters.
 &AtClient
 Procedure CommandProcessing(CommandParameter, CommandExecuteParameters)
@@ -22,16 +22,16 @@ Function InitPrintParam(It)
 	Return UniversalPrintServer.InitPrintParam(It);
 EndFunction
 
-// Sales order print server.
+// Purchase return print server.
 // 
 // Parameters:
-//  Ref - DocumentRef.SalesOrder
+//  Ref - DocumentRef.PurchaseReturn
 //  Param - See UniversalPrintServer.InitPrintParam
 // 
 // Returns:
-//  SpreadsheetDocument - Sales order print server
+//  SpreadsheetDocument - Purchase return print server
 &AtServer
-Function SalesOrderPrintServer(Ref, Param)
-	Spreadsheet = Documents.SalesOrder.Print(Ref, Param);
+Function PurchaseReturnPrintServer(Ref, Param)
+	Spreadsheet = Documents.PurchaseReturn.Print(Ref, Param);
 	Return Spreadsheet;
 EndFunction

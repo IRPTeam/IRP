@@ -31,7 +31,7 @@ EndFunction
 // Returns:
 //  SpreadsheetDocument - Physical inventory print server
 &AtServer
-Function SalesOrderPrintServer(Ref, Param)
+Function PhysicalInventoryPrintServer(Ref, Param)
 	Spreadsheet = Documents.PhysicalInventory.Print(Ref, Param);
 	Return Spreadsheet;
 EndFunction

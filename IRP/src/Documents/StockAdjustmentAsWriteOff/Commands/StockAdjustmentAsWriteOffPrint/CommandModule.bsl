@@ -31,7 +31,7 @@ EndFunction
 // Returns:
 //  SpreadsheetDocument - Stock Adjustment As Write Off server
 &AtServer
-Function SalesOrderPrintServer(Ref, Param)
+Function StockAdjustmentAsWriteOffPrintServer(Ref, Param)
 	Spreadsheet = Documents.StockAdjustmentAsWriteOff.Print(Ref, Param);
 	Return Spreadsheet;
 EndFunction

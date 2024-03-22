@@ -2,7 +2,7 @@
 // Print command handler.
 //
 // Parameters:
-//	CommandParameter - Array of DocumentRef.SalesOrder - contains a reference to the object for which the print command was executed.
+//	CommandParameter - Array of DocumentRef.ModernizationOfFixedAsset - contains a reference to the object for which the print command was executed.
 //	CommandExecuteParameters - CommandExecuteParameters - command execute parameters.
 &AtClient
 Procedure CommandProcessing(CommandParameter, CommandExecuteParameters)
@@ -31,7 +31,7 @@ EndFunction
 // Returns:
 //  SpreadsheetDocument - Modernization of fixed asset server
 &AtServer
-Function SalesOrderPrintServer(Ref, Param)
+Function ModernizationOfFixedAssetPrintServer(Ref, Param)
 	Spreadsheet = Documents.ModernizationOfFixedAsset.Print(Ref, Param);
 	Return Spreadsheet;
 EndFunction

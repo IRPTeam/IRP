@@ -2,7 +2,7 @@
 // Print command handler.
 //
 // Parameters:
-//	CommandParameter - Array of DocumentRef.SalesOrder - contains a reference to the object for which the print command was executed.
+//	CommandParameter - Array of DocumentRef.Production - contains a reference to the object for which the print command was executed.
 //	CommandExecuteParameters - CommandExecuteParameters - command execute parameters.
 &AtClient
 Procedure CommandProcessing(CommandParameter, CommandExecuteParameters)

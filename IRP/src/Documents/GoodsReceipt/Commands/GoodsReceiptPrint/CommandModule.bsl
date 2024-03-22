@@ -22,14 +22,14 @@ Function InitPrintParam(It)
 	Return UniversalPrintServer.InitPrintParam(It);
 EndFunction
 
-// Sales order print server.
+// Goods receipt print server.
 // 
 // Parameters:
 //  Ref - DocumentRef.GoodsReceipt
 //  Param - See UniversalPrintServer.InitPrintParam
 // 
 // Returns:
-//  SpreadsheetDocument - Sales order print server
+//  SpreadsheetDocument - Goods receipt print server
 &AtServer
 Function GoodsReceiptPrintServer(Ref, Param)
 	Spreadsheet = Documents.GoodsReceipt.Print(Ref, Param);

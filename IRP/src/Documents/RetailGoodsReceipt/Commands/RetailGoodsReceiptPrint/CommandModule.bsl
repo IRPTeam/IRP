@@ -31,7 +31,7 @@ EndFunction
 // Returns:
 //  SpreadsheetDocument - Retail goods receipt print server
 &AtServer
-Function SalesOrderPrintServer(Ref, Param)
+Function RetailGoodsReceiptPrintServer(Ref, Param)
 	Spreadsheet = Documents.RetailGoodsReceipt.Print(Ref, Param);
 	Return Spreadsheet;
 EndFunction

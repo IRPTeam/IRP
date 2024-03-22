@@ -31,7 +31,7 @@ EndFunction
 // Returns:
 //  SpreadsheetDocument - Sales report from trade agent print server
 &AtServer
-Function SalesOrderPrintServer(Ref, Param)
+Function SalesReportFromTradeAgentPrintServer(Ref, Param)
 	Spreadsheet = Documents.SalesReportFromTradeAgent.Print(Ref, Param);
 	Return Spreadsheet;
 EndFunction

@@ -16,6 +16,14 @@
   </synonym>
   <editType>InDialog</editType>
   <dataLockControlMode>Managed</dataLockControlMode>
+  <recordPresentation>
+    <key>en</key>
+    <value>T9050 Accounting row analytics</value>
+  </recordPresentation>
+  <listPresentation>
+    <key>en</key>
+    <value>T9050 Accounting row analytics</value>
+  </listPresentation>
   <dimensions uuid="96c86a0b-59a3-4f6e-b9f4-aee00d7321fd">
     <name>Document</name>
     <synonym>

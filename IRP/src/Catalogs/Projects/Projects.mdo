@@ -49,6 +49,14 @@
   <createOnInput>Use</createOnInput>
   <dataLockControlMode>Managed</dataLockControlMode>
   <fullTextSearch>Use</fullTextSearch>
+  <objectPresentation>
+    <key>en</key>
+    <value>Project</value>
+  </objectPresentation>
+  <listPresentation>
+    <key>en</key>
+    <value>Projects</value>
+  </listPresentation>
   <hierarchical>true</hierarchical>
   <hierarchyType>HierarchyOfItems</hierarchyType>
   <levelCount>2</levelCount>

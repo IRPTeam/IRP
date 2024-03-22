@@ -1030,4 +1030,24 @@
       <fullTextSearch>Use</fullTextSearch>
     </attributes>
   </tabularSections>
+  <templates uuid="4b7bbba0-8c3f-4582-a948-d610095f02e0">
+    <name>SalesReportFromTradeAgentPrint</name>
+    <synonym>
+      <key>en</key>
+      <value>Sales report from trade agent</value>
+    </synonym>
+  </templates>
+  <commands uuid="9b2e9472-5b40-4bdf-bdb3-c319ef059461">
+    <name>SalesReportFromTradeAgentPrint</name>
+    <synonym>
+      <key>en</key>
+      <value>Sales report from trade agent</value>
+    </synonym>
+    <group>CommandGroup.Print</group>
+    <commandParameterType>
+      <types>DocumentRef.SalesReportFromTradeAgent</types>
+    </commandParameterType>
+    <parameterUseMode>Multiple</parameterUseMode>
+    <representation>Auto</representation>
+  </commands>
 </mdclass:Document>

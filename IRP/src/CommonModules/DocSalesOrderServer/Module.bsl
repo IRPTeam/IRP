@@ -57,6 +57,7 @@ EndProcedure
 Function CheckItemList(Object) Export
 
 	Query = New Query();
+	//@skip-check bsl-ql-hub
 	Query.Text =
 	"SELECT
 	|	Table.LineNumber As LineNumber,
@@ -73,8 +74,7 @@ Function CheckItemList(Object) Export
 	|	ItemList AS ItemList
 	|Where
 	|	ItemList.ItemKey.Item.ItemType.Type = Value(Enum.ItemTypes.Product)
-	|	And
-	|	Not ItemList.Store.UseShipmentConfirmation
+	|	AND	NOT ItemList.Store.UseShipmentConfirmation
 	|GROUP BY
 	|	ItemList.Store";
 

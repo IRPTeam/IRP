@@ -1,6 +1,7 @@
 
 Function CheckBalance(Ref, ItemList_InDocument, Records_InDocument, Records_Exists, RecordType, Unposting, AddInfo = Undefined) Export
 	Query = New Query();
+	//@skip-check bsl-ql-hub
 	Query.Text = 
 	"SELECT
 	|	Records.RowRef,

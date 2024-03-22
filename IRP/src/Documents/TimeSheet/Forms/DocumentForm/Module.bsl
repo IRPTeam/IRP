@@ -166,7 +166,6 @@ Function GetCalendarDates()
 			And Not ValueIsFilled(Row.ActuallyDaysHours) Then
 			Result.Weekend.Add(Row.Date);
 		
-		
 		ElsIf ValueIsFilled(Row.ActuallyDaysHours)
 			And Not Row.IsVacation And Not Row.IsSickLeave Then	
 			Result.FullWorkedDays.Add(Row.Date);

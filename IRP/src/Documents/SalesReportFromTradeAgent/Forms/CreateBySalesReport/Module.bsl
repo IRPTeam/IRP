@@ -46,4 +46,3 @@ Procedure SalesReportListUseOnChange(Item)
 	EndDo;
 EndProcedure
 
-

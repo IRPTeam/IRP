@@ -41,4 +41,3 @@ Procedure OK(Command)
 	Close();
 EndProcedure
 
-

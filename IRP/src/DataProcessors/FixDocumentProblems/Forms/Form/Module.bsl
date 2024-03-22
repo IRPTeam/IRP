@@ -812,7 +812,6 @@ EndProcedure
 
 #Region Service
 
-
 &AtClient
 Procedure DocumentListRefOnChange(Item)
 	CurrentData = Items.DocumentList.CurrentData;

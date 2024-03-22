@@ -1156,10 +1156,6 @@
     </extendedTooltip>
     <type>Pages</type>
     <extInfo xsi:type="form:PagesGroupExtInfo">
-      <handlers>
-        <event>OnCurrentPageChange</event>
-        <name>MainPagesOnCurrentPageChange</name>
-      </handlers>
       <pagesRepresentation>Swipe</pagesRepresentation>
       <currentRowUse>Auto</currentRowUse>
     </extInfo>

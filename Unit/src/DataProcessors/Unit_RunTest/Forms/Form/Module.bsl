@@ -86,8 +86,6 @@ Procedure UpdateLog()
 	
 EndProcedure
 
-
-
 &AtServer
 Procedure OnCreateAtServer(Cancel, StandardProcessing)
 	FillTestsAtServer();  

@@ -13,8 +13,8 @@ Procedure CheckUniqueIDBeforeWrite(Source, Cancel) Export
 	DataLock = New DataLock();
 	DataLockItem = DataLock.Add(Source.Metadata().FullName());
 	DataLockItem.Mode = DataLockMode.Shared;
-	DataLock.Lock();
 	Try
+		DataLock.Lock();
 		//@skip-check module-unused-local-variable
 		Str = New Structure(Source.UniqueID);
 	Except

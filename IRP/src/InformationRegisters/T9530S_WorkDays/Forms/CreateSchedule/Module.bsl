@@ -178,4 +178,3 @@ Procedure WeekendsBeforeDeleteRow(Item, Cancel)
 	Cancel = True;
 EndProcedure
 
-

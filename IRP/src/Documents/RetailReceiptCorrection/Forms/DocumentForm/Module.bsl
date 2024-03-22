@@ -467,7 +467,6 @@ EndProcedure
 
 #EndRegion
 
-
 #Region SOURCE_OF_ORIGINS
 
 &AtClient

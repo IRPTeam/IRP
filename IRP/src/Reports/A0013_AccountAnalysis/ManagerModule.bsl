@@ -50,7 +50,6 @@ Function Details_AccountAnalisys(DetailValuesMap)
 	Return Result;
 EndFunction
 
-
 Function Details_AccountCard(DetailValuesMap)
 	Result = New Structure();
 	Result.Insert("DataParameters", New Map());

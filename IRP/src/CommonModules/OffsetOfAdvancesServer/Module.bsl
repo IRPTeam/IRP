@@ -2194,7 +2194,6 @@ Procedure Add_T2010S_OffsetOfAdvances_FromTransaction_ToAdvance(Parameters,
 	EndIf;		
 EndProcedure
 
-
 Procedure Add_TM1020B_AdvancesKey(RecordType, Period, AdvanceKey, Amount, Records_AdvancesKey)
 	NewRecord = Records_AdvancesKey.Add();
 	NewRecord.RecordType = RecordType;

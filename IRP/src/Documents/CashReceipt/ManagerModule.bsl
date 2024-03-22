@@ -223,7 +223,6 @@ EndFunction
 
 #Region Posting_MainTables
 
-
 Function CashInTransit()
 	Return "SELECT
 	|	CashReceiptPaymentList.Ref.Company AS Company,

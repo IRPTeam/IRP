@@ -1494,5 +1494,4 @@ Procedure RevaluateCurrency_Transactions(Parameters,
 	EndDo;
 EndProcedure
 
-
 #EndRegion

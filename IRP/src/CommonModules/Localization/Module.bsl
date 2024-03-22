@@ -1548,7 +1548,6 @@ Strings.Insert("MoneyTransfer_DR_R5022T_Expenses_CR_R3021B_CashInTransit",
 	Strings.Insert("InternalCommands_ShowNotActive_Check", NStr("en = 'Show only active items'", Lang));
 #EndRegion
 	
-
 #Region FormulaEditor
 	Strings.Insert("FormulaEditor_Delimiters", NStr("en = 'Delimiters'", Lang));
 	

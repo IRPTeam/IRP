@@ -194,7 +194,6 @@ Procedure CreateDocuments(Val StructureRow, CreateGoodsReceipt, CreateInventoryT
 	CreationDate = CommonFunctionsServer.GetCurrentSessionDate();
 	If CreateGoodsReceipt Then
 		
-		
 		If ValueIsFilled(ThisObject.Unit) Then
 			StructureRow.Unit = ThisObject.Unit;
 			StructureRow.QuantityInBaseUnit =

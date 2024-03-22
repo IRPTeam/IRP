@@ -1442,7 +1442,6 @@ Function ReleaseAdvanceByOrder(Parameters, Records_AdvancesKey, Records_OffsetOf
 		NewOffsetInfo.AdvanceAgreement = AdvanceKey.AdvanceAgreement;
 		NewOffsetInfo.AdvanceProject   = AdvanceKey.Project;
 		
-		
 		// OffsetOfAdvances - plus without order (record type expense)
 		NewOffsetInfo = Records_OffsetOfAdvances.Add();
 		NewOffsetInfo.IsAdvanceRelease = True;

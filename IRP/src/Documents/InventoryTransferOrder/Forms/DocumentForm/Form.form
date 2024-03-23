@@ -3499,9 +3499,6 @@
     <navigationPanel>
       <cmiFragmentRecord>
         <command>InformationRegister.CreatedProcurementOrders.StandardCommand.OpenByValue.Order</command>
-        <commandParameter xsi:type="form:DataPath">
-          <segments>Object.Ref</segments>
-        </commandParameter>
         <userVisible/>
       </cmiFragmentRecord>
     </navigationPanel>

@@ -18,25 +18,25 @@
           <segments>FormItems</segments>
         </dataPath>
         <titleLocation>None</titleLocation>
-        <excludedCommands>Delete</excludedCommands>
-        <excludedCommands>OutputList</excludedCommands>
-        <excludedCommands>Find</excludedCommands>
-        <excludedCommands>SortListAsc</excludedCommands>
+        <excludedCommands>Add</excludedCommands>
         <excludedCommands>CancelSearch</excludedCommands>
-        <excludedCommands>Copy</excludedCommands>
-        <excludedCommands>MoveUp</excludedCommands>
-        <excludedCommands>ShowMultipleSelection</excludedCommands>
         <excludedCommands>Change</excludedCommands>
-        <excludedCommands>SelectAll</excludedCommands>
+        <excludedCommands>Copy</excludedCommands>
+        <excludedCommands>CopyToClipboard</excludedCommands>
+        <excludedCommands>Delete</excludedCommands>
+        <excludedCommands>EndEdit</excludedCommands>
+        <excludedCommands>Find</excludedCommands>
+        <excludedCommands>FindByCurrentValue</excludedCommands>
+        <excludedCommands>MoveDown</excludedCommands>
+        <excludedCommands>MoveUp</excludedCommands>
+        <excludedCommands>OutputList</excludedCommands>
         <excludedCommands>SearchEverywhere</excludedCommands>
         <excludedCommands>SearchHistory</excludedCommands>
-        <excludedCommands>MoveDown</excludedCommands>
-        <excludedCommands>Add</excludedCommands>
-        <excludedCommands>EndEdit</excludedCommands>
-        <excludedCommands>SortListDesc</excludedCommands>
-        <excludedCommands>FindByCurrentValue</excludedCommands>
+        <excludedCommands>SelectAll</excludedCommands>
+        <excludedCommands>ShowMultipleSelection</excludedCommands>
         <excludedCommands>ShowRowRearrangement</excludedCommands>
-        <excludedCommands>CopyToClipboard</excludedCommands>
+        <excludedCommands>SortListAsc</excludedCommands>
+        <excludedCommands>SortListDesc</excludedCommands>
         <items xsi:type="form:FormField">
           <name>FormItemsDescription</name>
           <id>16</id>
@@ -847,18 +847,18 @@
           <segments>FoundRefList</segments>
         </dataPath>
         <titleLocation>None</titleLocation>
-        <excludedCommands>Delete</excludedCommands>
-        <excludedCommands>EndEdit</excludedCommands>
-        <excludedCommands>ShowRowRearrangement</excludedCommands>
-        <excludedCommands>FindByCurrentValue</excludedCommands>
-        <excludedCommands>SearchHistory</excludedCommands>
-        <excludedCommands>SelectAll</excludedCommands>
-        <excludedCommands>SearchEverywhere</excludedCommands>
-        <excludedCommands>Copy</excludedCommands>
-        <excludedCommands>ShowMultipleSelection</excludedCommands>
-        <excludedCommands>CopyToClipboard</excludedCommands>
         <excludedCommands>Add</excludedCommands>
         <excludedCommands>Change</excludedCommands>
+        <excludedCommands>Copy</excludedCommands>
+        <excludedCommands>CopyToClipboard</excludedCommands>
+        <excludedCommands>Delete</excludedCommands>
+        <excludedCommands>EndEdit</excludedCommands>
+        <excludedCommands>FindByCurrentValue</excludedCommands>
+        <excludedCommands>SearchEverywhere</excludedCommands>
+        <excludedCommands>SearchHistory</excludedCommands>
+        <excludedCommands>SelectAll</excludedCommands>
+        <excludedCommands>ShowMultipleSelection</excludedCommands>
+        <excludedCommands>ShowRowRearrangement</excludedCommands>
         <items xsi:type="form:FormField">
           <name>FoundRefListRef</name>
           <id>73</id>

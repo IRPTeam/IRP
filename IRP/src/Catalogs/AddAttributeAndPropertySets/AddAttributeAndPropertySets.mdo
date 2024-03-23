@@ -900,7 +900,6 @@
     </items>
     <items id="f76c6623-1f9f-4442-a14b-fa20ac6c53d2">
       <name>Catalog_Incoterms</name>
-      <description></description>
       <code xsi:type="core:NumberValue">
         <value>149</value>
       </code>

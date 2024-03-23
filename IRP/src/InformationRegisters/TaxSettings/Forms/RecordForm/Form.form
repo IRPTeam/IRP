@@ -143,12 +143,12 @@
     <showInFooter>true</showInFooter>
     <extInfo xsi:type="form:InputFieldExtInfo">
       <handlers>
-        <event>StartChoice</event>
-        <name>CompanyStartChoice</name>
-      </handlers>
-      <handlers>
         <event>EditTextChange</event>
         <name>CompanyEditTextChange</name>
+      </handlers>
+      <handlers>
+        <event>StartChoice</event>
+        <name>CompanyStartChoice</name>
       </handlers>
       <autoMaxWidth>true</autoMaxWidth>
       <autoMaxHeight>true</autoMaxHeight>

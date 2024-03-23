@@ -146,7 +146,6 @@
   <predefined>
     <items id="e171ffad-e13a-4e2e-9319-9037bec5904d">
       <name>SalesOrder</name>
-      <description>Sales order</description>
       <code xsi:type="core:NumberValue">
         <value>0</value>
       </code>
@@ -154,7 +153,6 @@
     </items>
     <items id="72d5c9d9-a3f0-42c2-87f0-169d621fae5e">
       <name>SalesReturnOrder</name>
-      <description>Sales return order</description>
       <code xsi:type="core:NumberValue">
         <value>0</value>
       </code>
@@ -162,7 +160,6 @@
     </items>
     <items id="2a12c8b2-ef6e-485d-9e7b-11932d60003b">
       <name>PurchaseOrder</name>
-      <description>Purchase order</description>
       <code xsi:type="core:NumberValue">
         <value>0</value>
       </code>
@@ -170,7 +167,6 @@
     </items>
     <items id="a8559087-bcb5-408a-b346-99a24f2cc035">
       <name>PurchaseReturnOrder</name>
-      <description>Purchase return order</description>
       <code xsi:type="core:NumberValue">
         <value>0</value>
       </code>
@@ -178,7 +174,6 @@
     </items>
     <items id="4bca0f62-13eb-4af1-ba7b-7de74bfc953a">
       <name>InventoryTransferOrder</name>
-      <description>Inventory transfer order</description>
       <code xsi:type="core:NumberValue">
         <value>0</value>
       </code>
@@ -186,7 +181,6 @@
     </items>
     <items id="d16d1352-b5bc-4397-af42-16678054bcea">
       <name>OutgoingPaymentOrder</name>
-      <description>Outgoing payment order</description>
       <code xsi:type="core:NumberValue">
         <value>0</value>
       </code>
@@ -194,7 +188,6 @@
     </items>
     <items id="e904823b-2419-48d9-9136-b230e4da8a3b">
       <name>ReconciliationStatement</name>
-      <description>Reconciliation statement</description>
       <code xsi:type="core:NumberValue">
         <value>0</value>
       </code>
@@ -202,14 +195,12 @@
     </items>
     <items id="748479bd-dbd2-459d-ac53-92c750c6505d">
       <name>PhysicalCountByLocation</name>
-      <description>Physical count by location</description>
       <code xsi:type="core:NumberValue">
         <value>0</value>
       </code>
       <isFolder>true</isFolder>
       <content id="94db2442-3d9d-4627-ae9e-5d83003e1aec">
         <name>Complete</name>
-        <description>Complete</description>
         <code xsi:type="core:NumberValue">
           <value>0</value>
         </code>
@@ -217,7 +208,6 @@
     </items>
     <items id="83a9eeaa-a8f6-4fa4-9496-74fd8b74d65a">
       <name>PhysicalInventory</name>
-      <description>Physical inventory</description>
       <code xsi:type="core:NumberValue">
         <value>0</value>
       </code>
@@ -225,7 +215,6 @@
     </items>
     <items id="e25ea91f-552c-4a7b-bf52-23e520acf75c">
       <name>IncomingPaymentOrder</name>
-      <description>Incoming payment order</description>
       <code xsi:type="core:NumberValue">
         <value>1</value>
       </code>

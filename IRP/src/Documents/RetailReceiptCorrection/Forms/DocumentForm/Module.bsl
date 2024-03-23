@@ -827,7 +827,6 @@ Procedure ItemListControlCodeStringStateOpeningEnd(Result, AddInfo) Export
 		EndDo;
 	EndIf;
 	
-	
 	ControlCodeStringsClient.UpdateState(Object);
 	Modified = True;
 EndProcedure

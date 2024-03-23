@@ -21,7 +21,7 @@ Function GetSearchCodeAndOrder(_Code)
 	_Order = "";
 	For i = 1 To StrLen(_Code) Do
 		Symbol = Mid(_Code, i, 1);
-		If Find("0123456789", Symbol) = 0 Then
+		If StrFind("0123456789", Symbol) = 0 Then
 			Continue;
 		EndIf;
 		_Order = "" + _Order + Symbol;

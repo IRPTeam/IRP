@@ -68,7 +68,6 @@ Function Details_AccountCard(DetailValuesMap)
 	Result.DetailsFilters.Insert(DetailValuesMap["Account"], 
 		New Structure("FieldName, ComparisonType", "Account", DataCompositionComparisonType.InHierarchy));
 	
-	
 	FilterByExtDimension(1, DetailValuesMap, Result.DetailsFiltersGroupOR);
 	FilterByExtDimension(2, DetailValuesMap, Result.DetailsFiltersGroupOR);
 	FilterByExtDimension(3, DetailValuesMap, Result.DetailsFiltersGroupOR);

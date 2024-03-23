@@ -772,8 +772,6 @@ Procedure ClearRows()
 		EndDo;
 	EndDo;
 	
-	
-	
 	ValueToFormAttribute(Tree, "PostingInfo");
 EndProcedure
 

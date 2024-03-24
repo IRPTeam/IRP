@@ -928,7 +928,42 @@ Function R5020B_PartnersBalance_RSR() Export
 			|	ItemList.Agreement,
 			|	ItemList.BasisDocument,
 			|	ItemList.Currency,
-			|	VALUE(AccumulationRecordType.Expense)";
+			|	VALUE(AccumulationRecordType.Expense)
+			|
+			|UNION ALL
+			|
+			|SELECT
+			|	VALUE(AccumulationRecordType.Receipt) AS RecordType,
+			|	PaymentAgent.Period,
+			|	PaymentAgent.Company,
+			|	PaymentAgent.Branch,
+			|	PaymentAgent.Partner,
+			|	PaymentAgent.LegalName,
+			|	PaymentAgent.Agreement,
+			|	PaymentAgent.Basis,
+			|	PaymentAgent.Currency,
+			|	0 AS Amount,
+			|	0 AS CustomerTransaction,
+			|	0 AS CustomerAdvance,
+			|	0 AS VendorTransaction,
+			|	0 AS VendorAdvance,
+			|	SUM(PaymentAgent.Amount) AS OtherTransaction,
+			|	UNDEFINED
+			|FROM
+			|	PaymentAgent AS PaymentAgent
+			|WHERE
+			|	TRUE
+			|	AND PaymentAgent.StatusType = VALUE(ENUM.RetailReceiptStatusTypes.Completed)
+			|GROUP BY
+			|	VALUE(AccumulationRecordType.Receipt),
+			|	PaymentAgent.Period,
+			|	PaymentAgent.Company,
+			|	PaymentAgent.Branch,
+			|	PaymentAgent.Partner,
+			|	PaymentAgent.LegalName,
+			|	PaymentAgent.Agreement,
+			|	PaymentAgent.Basis,
+			|	PaymentAgent.Currency";
 EndFunction	
 
 Function R5020B_PartnersBalance_RRR() Export
@@ -1000,8 +1035,41 @@ Function R5020B_PartnersBalance_RRR() Export
 		|	ItemList.Agreement,
 		|	ItemList.BasisDocument,
 		|	ItemList.Currency,
-		|	VALUE(AccumulationRecordType.Expense)";
-
+		|	VALUE(AccumulationRecordType.Expense)
+		|
+		|UNION ALL
+		|
+		|SELECT
+		|	VALUE(AccumulationRecordType.Receipt) AS RecordType,
+		|	Payments.Period,
+		|	Payments.Company,
+		|	Payments.Branch,
+		|	Payments.Partner,
+		|	Payments.LegalName,
+		|	Payments.Agreement,
+		|	UNDEFINED,
+		|	Payments.Currency,
+		|	0 AS Amount,
+		|	0 AS CustomerTransaction,
+		|	0 AS CustomerAdvance,
+		|	0 AS VendorTransaction,
+		|	0 AS VendorAdvance,
+		|	-SUM(Payments.Amount) AS OtherTransaction,
+		|	UNDEFINED
+		|FROM
+		|	Payments AS Payments
+		|WHERE
+		|	Payments.IsPaymentAgent
+		|	AND Payments.StatusType = VALUE(ENUM.RetailReceiptStatusTypes.Completed)
+		|GROUP BY
+		|	VALUE(AccumulationRecordType.Receipt),
+		|	Payments.Period,
+		|	Payments.Company,
+		|	Payments.Branch,
+		|	Payments.Partner,
+		|	Payments.LegalName,
+		|	Payments.Currency,
+		|	Payments.Agreement";
 EndFunction
 
 Function R5020B_PartnersBalance_ECA() Export
@@ -1278,7 +1346,6 @@ Function R5020B_PartnersBalance_DebitNote() Export
 		|	Transactions.IsCustomer
 		|
 		|UNION ALL
-		|
 		// Customer transaction
 		|SELECT
 		|	CASE
@@ -1309,7 +1376,6 @@ Function R5020B_PartnersBalance_DebitNote() Export
 		|	AND OffsetOfAdvances.Recorder REFS Document.CustomersAdvancesClosing
 		|
 		|UNION ALL
-		|
 		// Customer advance
 		|SELECT
 		|	CASE
@@ -1340,7 +1406,6 @@ Function R5020B_PartnersBalance_DebitNote() Export
 		|	AND OffsetOfAdvances.Recorder REFS Document.CustomersAdvancesClosing
 		|
 		|UNION ALL
-		|
 		// Vendor transaction
 		|SELECT
 		|	CASE
@@ -1371,7 +1436,6 @@ Function R5020B_PartnersBalance_DebitNote() Export
 		|	AND OffsetOfAdvances.Recorder REFS Document.VendorsAdvancesClosing
 		|
 		|UNION ALL
-		|
 		// Vendor advance
 		|SELECT
 		|	VALUE(AccumulationRecordType.Expense) AS RecordType,
@@ -1397,7 +1461,6 @@ Function R5020B_PartnersBalance_DebitNote() Export
 		|	Transactions.IsVendor
 		|
 		|UNION ALL
-		|
 		// Vendor advance
 		|SELECT
 		|	CASE
@@ -1425,7 +1488,33 @@ Function R5020B_PartnersBalance_DebitNote() Export
 		|	InformationRegister.T2010S_OffsetOfAdvances AS OffsetOfAdvances
 		|WHERE
 		|	OffsetOfAdvances.Document = &Ref
-		|	AND OffsetOfAdvances.Recorder REFS Document.VendorsAdvancesClosing";	
+		|	AND OffsetOfAdvances.Recorder REFS Document.VendorsAdvancesClosing
+		|
+		|UNION ALL
+		// Other
+		|SELECT
+		|	VALUE(AccumulationRecordType.Receipt),
+		|	Transactions.Period,
+		|	Transactions.Company,
+		|	Transactions.Branch,
+		|	Transactions.Partner,
+		|	Transactions.LegalName,
+		|	Transactions.Agreement,
+		|	UNDEFINED,
+		|	Transactions.Currency,
+		|	0 AS Amount,
+		|	0 AS CustomerTransaction,
+		|	0 AS CustomerAdvance,
+		|	0 AS VendorTransaction,
+		|	0 AS VendorAdvance,
+		|	Transactions.Amount AS OtherTransaction,
+		|	UNDeFINED,
+		|	Transactions.Key AS Key
+		|FROM
+		|	Transactions AS Transactions
+		|WHERE
+		|	Transactions.IsOther";
+	
 EndFunction
 
 Function R5020B_PartnersBalance_CreditNote() Export
@@ -1598,7 +1687,32 @@ Function R5020B_PartnersBalance_CreditNote() Export
 		|	InformationRegister.T2010S_OffsetOfAdvances AS OffsetOfAdvances
 		|WHERE
 		|	OffsetOfAdvances.Document = &Ref
-		|	AND OffsetOfAdvances.Recorder REFS Document.CustomersAdvancesClosing";
+		|	AND OffsetOfAdvances.Recorder REFS Document.CustomersAdvancesClosing
+		|
+		|UNION ALL
+		// Other
+		|SELECT
+		|	VALUE(AccumulationRecordType.Expense),
+		|	Transactions.Period,
+		|	Transactions.Company,
+		|	Transactions.Branch,
+		|	Transactions.Partner,
+		|	Transactions.LegalName,
+		|	Transactions.Agreement,
+		|	UNDEFINED,
+		|	Transactions.Currency,
+		|	0 AS Amount,
+		|	0 AS CustomerTransaction,
+		|	0 AS CustomerAdvance,
+		|	0 AS VendorTransaction,
+		|	0 AS VendorAdvance,
+		|	Transactions.Amount AS OtherTransaction,
+		|	UNDEFINED,
+		|	Transactions.Key
+		|FROM
+		|	Transactions AS Transactions
+		|WHERE
+		|	Transactions.IsOther";
 EndFUnction
 
 

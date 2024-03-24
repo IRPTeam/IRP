@@ -236,7 +236,12 @@ Procedure SetVisibilityAvailability(Object, Form)
 	Form.Items.EditAccounting.Enabled = Not Form.ReadOnly;
 	Form.Items.PaymentListPaymentByDocuments.Enabled = Not Form.ReadOnly;
 
-	Form.Items.PaymentListPaymentByDocuments.Visible = IsPaymentFormCustomer;	
+	Form.Items.PaymentListPaymentByDocuments.Visible = IsPaymentFormCustomer;
+	
+	Form.Items.ExpenseType.Visible  = IsCurrencyExchange;
+	Form.Items.LossCenter.Visible   = IsCurrencyExchange;
+	Form.Items.RevenueType.Visible  = IsCurrencyExchange;
+	Form.Items.ProfitCenter.Visible = IsCurrencyExchange;
 EndProcedure
 
 &AtClient

@@ -625,6 +625,12 @@ Function Strings(Lang) Export
 	
 	Strings.Insert("POS_ERROR_NoDeletingPrintedReceipt", NStr("en = 'Error! Receipt is already printed: %1'", Lang));
 	
+	Strings.Insert("POS_Warning_Revert", NStr("en = 'Now you are canceling Sales/Return transaction on pos terminal!
+		|Are you sure you want to process transaction?'", Lang));
+	
+	Strings.Insert("POS_Warning_ReturnInDay", NStr("en = 'Now you are going to RETURN money by pos terminal.
+		|Are you sure you want to process transaction?'", Lang));
+	
 #EndRegion
 
 #Region Service

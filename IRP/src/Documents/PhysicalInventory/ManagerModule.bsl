@@ -122,7 +122,6 @@ Function PhysicalInventoryPrint(Ref, Param)
 	
 EndFunction	
 
-
 #EndRegion
 
 #Region Posting

@@ -145,6 +145,12 @@ Scenario: _043400 preparation (Bank receipt)
 			| "Documents.SalesOrder.FindByNumber(314).GetObject().Write(DocumentWriteMode.Posting);"    |
 		And I execute 1C:Enterprise script at server
 			| "Documents.SalesOrder.FindByNumber(315).GetObject().Write(DocumentWriteMode.Posting);"    |
+		When Create document CashTransferOrder objects (check movements)
+		And I execute 1C:Enterprise script at server
+			| "Documents.CashTransferOrder.FindByNumber(3).GetObject().Write(DocumentWriteMode.Posting);"    |
+		When Create document BankPayment objects (check cash planning, cash transfer order and OPO)
+		And I execute 1C:Enterprise script at server
+			| "Documents.BankPayment.FindByNumber(324).GetObject().Write(DocumentWriteMode.Posting);"    |
 	* Load Bank receipt
 		When Create document BankReceipt objects
 		When Create document BankReceipt objects (exchange and transfer)

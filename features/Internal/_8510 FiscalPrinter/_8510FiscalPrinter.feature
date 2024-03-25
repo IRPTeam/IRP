@@ -4871,7 +4871,6 @@ Scenario: _0260212 manual payment by card (block Pay button)
 			| '✔'            | 'Card 03'      | '520,00' |		
 		When I Check the steps for Exception
 			| 'And I click "Pay" button'    |
-		And I select current line in "BankPaymentTypeList" table
 		And I select current line in "Payments" table
 		And in the table "Payments" I click "Set payment uncheck" button	
 		And "Payments" table became equal

@@ -86,8 +86,6 @@ Function SalesInvoicePrint(Ref, Param)
 	Spreadsheet = New SpreadsheetDocument;
 	Spreadsheet.LanguageCode = Param.LayoutLang;
 
-	TaxVat = TaxesServer.GetVatRef();
-	
 	While SelectionHeader.Next() Do
 		AreaCaption.Parameters.Fill(SelectionHeader);
 		Spreadsheet.Put(AreaCaption);
@@ -115,7 +113,6 @@ Function SalesInvoicePrint(Ref, Param)
 	Return Spreadsheet;
 	
 EndFunction	
-
 
 #EndRegion
 

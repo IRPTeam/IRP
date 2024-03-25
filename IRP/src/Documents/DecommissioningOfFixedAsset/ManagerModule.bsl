@@ -84,8 +84,6 @@ Function DecommissioningOfFixedAssetPrint(Ref, Param)
 	Spreadsheet = New SpreadsheetDocument;
 	Spreadsheet.LanguageCode = Param.LayoutLang;
 
-	TaxVat = TaxesServer.GetVatRef();
-	
 	While SelectionHeader.Next() Do
 		AreaCaption.Parameters.Fill(SelectionHeader);
 		Spreadsheet.Put(AreaCaption);
@@ -99,10 +97,6 @@ Function DecommissioningOfFixedAssetPrint(Ref, Param)
 		FindRow = SelectionItems.FindRows(Choice);
 
 		Number = 0;
-		TotalSum = 0;
-		TotalTax = 0;
-		TotalNet = 0;
-		TotalOffers = 0;
 		For Each It In FindRow Do
 			Number = Number + 1;
 			AreaItemList.Parameters.Fill(It);
@@ -117,9 +111,6 @@ Function DecommissioningOfFixedAssetPrint(Ref, Param)
 	Return Spreadsheet;
 	
 EndFunction	
-
-
-
 
 #EndRegion
 

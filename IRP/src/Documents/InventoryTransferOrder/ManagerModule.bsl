@@ -88,8 +88,6 @@ Function InventoryTransferOrderPrint(Ref, Param)
 	Spreadsheet = New SpreadsheetDocument;
 	Spreadsheet.LanguageCode = Param.LayoutLang;
 
-	TaxVat = TaxesServer.GetVatRef();
-	
 	While SelectionHeader.Next() Do
 		AreaCaption.Parameters.Fill(SelectionHeader);
 		Spreadsheet.Put(AreaCaption);
@@ -116,8 +114,7 @@ Function InventoryTransferOrderPrint(Ref, Param)
 	Spreadsheet = UniversalPrintServer.ResetLangSettings(Spreadsheet, Param.LayoutLang);
 	Return Spreadsheet;
 	
-EndFunction	
-
+EndFunction
 
 #EndRegion
 

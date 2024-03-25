@@ -152,7 +152,6 @@ Function SalesReturnPrint(Ref, Param)
 	
 EndFunction	
 
-
 #EndRegion
 
 #Region Posting

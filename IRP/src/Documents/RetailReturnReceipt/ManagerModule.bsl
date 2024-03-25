@@ -152,7 +152,6 @@ Function RetailReturnReceiptPrint(Ref, Param)
 	
 EndFunction	
 
-
 #EndRegion
 
 #Region Posting

@@ -13,7 +13,7 @@ EndFunction
 // Modernization of fixed print.
 // 
 // Parameters:
-//  Ref - DocumentRef.ModernizationOfFixed
+//  Ref - DocumentRef.ModernizationOfFixedAsset
 //  Param - See UniversalPrintServer.InitPrintParam
 // 
 // Returns:
@@ -88,14 +88,10 @@ Function ModernizationOfFixedAssetPrint(Ref, Param)
 	AreaItemListHeader = Template.GetArea("ItemListHeader|ItemColumn");
 	AreaItemList = Template.GetArea("ItemList|ItemColumn");
 	AreaFooter = Template.GetArea("Footer");
-	AreaListHeaderTAX = Template.GetArea("ItemListHeaderTAX|ColumnTAX");
-	AreaListTAX = Template.GetArea("ItemListTAX|ColumnTAX");
-
+	
 	Spreadsheet = New SpreadsheetDocument;
 	Spreadsheet.LanguageCode = Param.LayoutLang;
 
-	TaxVat = TaxesServer.GetVatRef();
-	
 	While SelectionHeader.Next() Do
 		AreaCaption.Parameters.Fill(SelectionHeader);
 		Spreadsheet.Put(AreaCaption);
@@ -112,7 +108,6 @@ Function ModernizationOfFixedAssetPrint(Ref, Param)
 		TotalSum = 0;
 		TotalTax = 0;
 		TotalNet = 0;
-		TotalOffers = 0;
 		For Each It In FindRow Do
 			Number = Number + 1;
 			AreaItemList.Parameters.Fill(It);

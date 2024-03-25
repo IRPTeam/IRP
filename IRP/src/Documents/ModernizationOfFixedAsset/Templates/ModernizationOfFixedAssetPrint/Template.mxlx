@@ -320,9 +320,13 @@
 				</c>
 			</c>
 			<c>
-				<i>8</i>
 				<c>
 					<f>26</f>
+				</c>
+			</c>
+			<c>
+				<c>
+					<f>27</f>
 					<parameter>TotalAmount</parameter>
 				</c>
 			</c>
@@ -341,7 +345,7 @@
 			<c>
 				<i>7</i>
 				<c>
-					<f>27</f>
+					<f>28</f>
 					<tl>
 						<v8:item>
 							<v8:lang>en</v8:lang>
@@ -352,7 +356,7 @@
 			</c>
 			<c>
 				<c>
-					<f>28</f>
+					<f>29</f>
 					<parameter>TotalNet</parameter>
 				</c>
 			</c>
@@ -364,7 +368,7 @@
 			<c>
 				<i>7</i>
 				<c>
-					<f>27</f>
+					<f>28</f>
 					<tl>
 						<v8:item>
 							<v8:lang>en</v8:lang>
@@ -375,7 +379,7 @@
 			</c>
 			<c>
 				<c>
-					<f>28</f>
+					<f>29</f>
 					<parameter>TotalTax</parameter>
 				</c>
 			</c>
@@ -417,7 +421,7 @@
 			</c>
 			<c>
 				<c>
-					<f>29</f>
+					<f>30</f>
 					<tl>
 						<v8:item>
 							<v8:lang>en</v8:lang>
@@ -428,7 +432,7 @@
 			</c>
 			<c>
 				<c>
-					<f>28</f>
+					<f>29</f>
 					<parameter>Total</parameter>
 				</c>
 			</c>
@@ -452,7 +456,7 @@
 			<c>
 				<i>1</i>
 				<c>
-					<f>30</f>
+					<f>31</f>
 					<tl>
 						<v8:item>
 							<v8:lang>en</v8:lang>
@@ -463,38 +467,38 @@
 			</c>
 			<c>
 				<c>
-					<f>31</f>
+					<f>32</f>
 					<parameter>Manager</parameter>
 				</c>
 			</c>
 			<c>
 				<c>
-					<f>32</f>
+					<f>33</f>
 				</c>
 			</c>
 			<c>
 				<c>
-					<f>32</f>
+					<f>33</f>
 				</c>
 			</c>
 			<c>
 				<c>
-					<f>32</f>
+					<f>33</f>
 				</c>
 			</c>
 			<c>
 				<c>
-					<f>32</f>
+					<f>33</f>
 				</c>
 			</c>
 			<c>
 				<c>
-					<f>32</f>
+					<f>33</f>
 				</c>
 			</c>
 			<c>
 				<c>
-					<f>32</f>
+					<f>33</f>
 				</c>
 			</c>
 		</row>
@@ -509,7 +513,7 @@
 	<rowsItem>
 		<index>20</index>
 		<row>
-			<formatIndex>33</formatIndex>
+			<formatIndex>34</formatIndex>
 			<empty>true</empty>
 		</row>
 	</rowsItem>
@@ -519,7 +523,7 @@
 			<c>
 				<i>6</i>
 				<c>
-					<f>34</f>
+					<f>35</f>
 					<parameter>NameTAX</parameter>
 				</c>
 			</c>
@@ -531,7 +535,7 @@
 			<c>
 				<i>6</i>
 				<c>
-					<f>35</f>
+					<f>36</f>
 					<parameter>PercentTAX</parameter>
 				</c>
 			</c>
@@ -803,13 +807,32 @@
 		<horizontalAlignment>Right</horizontalAlignment>
 		<verticalAlignment>Center</verticalAlignment>
 		<fillType>Parameter</fillType>
-		<format/>
+		<format>
+			<v8:item>
+				<v8:lang>en</v8:lang>
+				<v8:content>NFD=2</v8:content>
+			</v8:item>
+		</format>
+	</format>
+	<format>
+		<format>
+			<v8:item>
+				<v8:lang>en</v8:lang>
+				<v8:content>NFD=2</v8:content>
+			</v8:item>
+		</format>
 	</format>
 	<format>
 		<border>1</border>
 		<horizontalAlignment>Right</horizontalAlignment>
 		<verticalAlignment>Center</verticalAlignment>
 		<fillType>Parameter</fillType>
+		<format>
+			<v8:item>
+				<v8:lang>en</v8:lang>
+				<v8:content>NFD=2</v8:content>
+			</v8:item>
+		</format>
 	</format>
 	<format>
 		<font>3</font>
@@ -821,7 +844,12 @@
 		<width>96</width>
 		<horizontalAlignment>Right</horizontalAlignment>
 		<fillType>Parameter</fillType>
-		<format/>
+		<format>
+			<v8:item>
+				<v8:lang>en</v8:lang>
+				<v8:content>NFD=2</v8:content>
+			</v8:item>
+		</format>
 	</format>
 	<format>
 		<font>3</font>

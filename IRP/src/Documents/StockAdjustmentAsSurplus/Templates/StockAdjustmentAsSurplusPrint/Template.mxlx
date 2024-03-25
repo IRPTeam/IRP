@@ -340,13 +340,13 @@
 			</c>
 			<c>
 				<c>
-					<f>17</f>
+					<f>20</f>
 					<parameter>Price</parameter>
 				</c>
 			</c>
 			<c>
 				<c>
-					<f>17</f>
+					<f>20</f>
 					<parameter>TaxAmount</parameter>
 				</c>
 			</c>
@@ -805,6 +805,12 @@
 		<horizontalAlignment>Right</horizontalAlignment>
 		<verticalAlignment>Center</verticalAlignment>
 		<fillType>Parameter</fillType>
+		<format>
+			<v8:item>
+				<v8:lang>en</v8:lang>
+				<v8:content>NFD=2</v8:content>
+			</v8:item>
+		</format>
 	</format>
 	<format>
 		<font>3</font>
@@ -816,7 +822,13 @@
 		<width>96</width>
 		<horizontalAlignment>Right</horizontalAlignment>
 		<fillType>Parameter</fillType>
-		<format/>
+		<format>
+			<v8:item>
+				<v8:lang>en</v8:lang>
+				<v8:content>NFD=2</v8:content>
+			</v8:item>
+		</format>
+		<editFormat/>
 	</format>
 	<format>
 		<font>3</font>
@@ -854,6 +866,7 @@
 	<format>
 		<border>1</border>
 		<horizontalAlignment>Right</horizontalAlignment>
+		<verticalAlignment>Center</verticalAlignment>
 		<textPlacement>Wrap</textPlacement>
 		<fillType>Parameter</fillType>
 	</format>

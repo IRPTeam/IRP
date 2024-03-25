@@ -128,6 +128,7 @@ Function SalesOrderPrint(Ref, Param)
 			Number = Number + 1;
 			AreaItemList.Parameters.Fill(It);
 			AreaItemList.Parameters.Number = Number;
+			
 			Spreadsheet.Put(AreaItemList);
 
 			AreaListTAX.Parameters.PercentTax = It.VatRate;

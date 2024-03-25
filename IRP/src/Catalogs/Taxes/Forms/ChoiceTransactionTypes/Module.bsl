@@ -9,7 +9,6 @@ Procedure OnCreateAtServer(Cancel, StandardProcessing)
 	EndDo;
 EndProcedure
 
-
 &AtClient
 Procedure Ok(Command)
 	Result = New Structure();

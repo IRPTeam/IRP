@@ -132,6 +132,7 @@ Procedure DoDetailProcess(SelectedAction, ApplyingSettings, NotifyParams) Экс
 	Else
 		
 		OtherReportFormName = NotifyParams.DetailsInfo.AdditionalDetailsActions.OtherReportMapping[SelectedAction];
+		//@skip-check use-non-recommended-method
 		OtherReportForm = GetForm(OtherReportFormName, New Structure("IsDetailProcessing", True), ThisObject, New UUID());
 		
 		SettingsComposer1 = ThisObject.Report.SettingsComposer;

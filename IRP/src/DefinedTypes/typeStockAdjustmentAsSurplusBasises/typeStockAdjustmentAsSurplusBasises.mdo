@@ -9,7 +9,7 @@
     <value>Type stock adjustment as surplus basises</value>
   </synonym>
   <type>
-    <types>DocumentRef.PhysicalInventory</types>
     <types>DocumentRef.StockAdjustmentAsSurplus</types>
+    <types>DocumentRef.PhysicalInventory</types>
   </type>
 </mdclass:DefinedType>

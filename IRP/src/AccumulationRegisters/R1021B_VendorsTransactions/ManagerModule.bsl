@@ -397,7 +397,7 @@ EndFunction
 
 Function R1021B_VendorsTransactions_DebitCreditNote() Export
 	
-	//IsSendAdvanceCustomer
+//IsSendAdvanceCustomer
 //IsSendAdvanceVendor
 //
 //IsSendTransactionCustomer
@@ -409,21 +409,15 @@ Function R1021B_VendorsTransactions_DebitCreditNote() Export
 //IsReceiveTransactionCustomer
 //IsReceiveTransactionVendor
 
-//3. Vendor transactions (VT) - Customer advances (CA) - минус - плюс
-//4. Vendor transactions (VT) - Customer transactions (CT) - минус - минус
-//16. Vendor transactions (VT) - Vendor transactions (VT) (CT)- минус - плюс
+//3. Vendor transactions (VT) - Customer advances (CA) - minus - plus
+//4. Vendor transactions (VT) - Customer transactions (CT) - minus - minus
+//16. Vendor transactions (VT) - Vendor transactions (VT) (CT)- minus - plus
 //
-//3. Vendor transactions (VT) - Customer advances (CA) - минус - плюс
-//4. Vendor transactions (VT) - Customer transactions (CT) - минус - минус
-//16. Vendor transactions (VT) - Vendor transactions (VT) - минус - плюс
-
-
-
-//16. Vendor transactions (VT) - Vendor transactions (VT) (CT)- минус - плюс
-//
-//16. Vendor transactions (VT) - Vendor transactions (VT) - минус - плюс
-
-
+//3. Vendor transactions (VT) - Customer advances (CA) - minus - plus
+//4. Vendor transactions (VT) - Customer transactions (CT) - minus - minus
+//16. Vendor transactions (VT) - Vendor transactions (VT) - minus - plus
+//16. Vendor transactions (VT) - Vendor transactions (VT) (CT)- minus - plus
+//16. Vendor transactions (VT) - Vendor transactions (VT) - minus - plus
 
 	Return
 		"SELECT

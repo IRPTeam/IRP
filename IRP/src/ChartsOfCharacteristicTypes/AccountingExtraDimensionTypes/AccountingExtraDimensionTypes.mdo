@@ -23,6 +23,7 @@
   </objectPresentation>
   <type>
     <types>CatalogRef.Companies</types>
+    <types>CatalogRef.LegalNameContracts</types>
     <types>CatalogRef.CashAccounts</types>
     <types>CatalogRef.ExpenseAndRevenueTypes</types>
     <types>CatalogRef.Partners</types>
@@ -32,7 +33,6 @@
     <types>CatalogRef.Stores</types>
     <types>CatalogRef.ItemKeys</types>
     <types>CatalogRef.BusinessUnits</types>
-    <types>CatalogRef.LegalNameContracts</types>
   </type>
   <foldersOnTop>true</foldersOnTop>
   <codeAllowedLength>Variable</codeAllowedLength>

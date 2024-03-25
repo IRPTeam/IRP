@@ -535,6 +535,23 @@ Function FormHaveAttribute(Form, AttributeName) Export
 	Return False;
 EndFunction
 
+
+// Is ref.
+// 
+// Parameters:
+//  Type - Type - Type
+// 
+// Returns:
+//  Boolean - Is ref
+Function IsRef(Type) Export
+	Return Type <> Type("Undefined") 
+		And (Catalogs.AllRefsType().ContainsType(Type)
+		Or Documents.AllRefsType().ContainsType(Type)
+		Or Enums.AllRefsType().ContainsType(Type)
+		Or ChartsOfCharacteristicTypes.AllRefsType().ContainsType(Type)
+		Or ChartsOfAccounts.AllRefsType().ContainsType(Type));
+EndFunction
+
 #EndRegion
 
 #Region WorkWithDate
@@ -1507,6 +1524,12 @@ Function JoinTables(ArrayOfJoiningTables, Fields) Export
 	EndIf;
 EndFunction
 
+// Merge tables.
+// 
+// Parameters:
+//  MasterTable - ValueTable - Master table
+//  SourceTable - ValueTable - Source table
+//  AddColumnFromSourceTable - String - Add column from source table
 Procedure MergeTables(MasterTable, SourceTable, AddColumnFromSourceTable = "") Export
 	If Not IsBlankString(AddColumnFromSourceTable) Then
 		Column = SourceTable.Columns.Find(AddColumnFromSourceTable);
@@ -1519,6 +1542,13 @@ Procedure MergeTables(MasterTable, SourceTable, AddColumnFromSourceTable = "") E
 	EndDo;
 EndProcedure
 
+// Create table.
+// 
+// Parameters:
+//  RegisterMetadata - MetadataObjectAccountingRegister - Register metadata
+// 
+// Returns:
+//  ValueTable - Create table
 Function CreateTable(RegisterMetadata) Export
 	Table = New ValueTable();
 	For Each Item In RegisterMetadata.Dimensions Do
@@ -1545,6 +1575,7 @@ EndFunction
 // Parameters:
 //  Table1 - ValueTable - Table1
 //  Table2 - ValueTable - Table2
+//  DeleteColumns - String - 
 // 
 // Returns:
 //  Boolean - Tables is equal
@@ -1653,12 +1684,3 @@ Function GetTableForClient(Table) Export
 EndFunction
 
 #EndRegion
-
-Function IsRef(Type) Export
-	Return Type <> Type("Undefined") 
-		And (Catalogs.AllRefsType().ContainsType(Type)
-		Or Documents.AllRefsType().ContainsType(Type)
-		Or Enums.AllRefsType().ContainsType(Type)
-		Or ChartsOfCharacteristicTypes.AllRefsType().ContainsType(Type)
-		Or ChartsOfAccounts.AllRefsType().ContainsType(Type));
-EndFunction

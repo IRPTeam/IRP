@@ -4,7 +4,21 @@
 	<setForAttributesByDefault>true</setForAttributesByDefault>
 	<independentRightsOfChildObjects>false</independentRightsOfChildObjects>
 	<object>
-		<name>Subsystem.SalesAR</name>
+		<name>Subsystem.SalesAR.Subsystem.Pricing</name>
+		<right>
+			<name>View</name>
+			<value>true</value>
+		</right>
+	</object>
+	<object>
+		<name>Subsystem.SalesAR.Subsystem.Sales</name>
+		<right>
+			<name>View</name>
+			<value>true</value>
+		</right>
+	</object>
+	<object>
+		<name>Subsystem.SalesAR.Subsystem.SalesReturn</name>
 		<right>
 			<name>View</name>
 			<value>true</value>
@@ -25,14 +39,7 @@
 		</right>
 	</object>
 	<object>
-		<name>Subsystem.SalesAR.Subsystem.Sales</name>
-		<right>
-			<name>View</name>
-			<value>true</value>
-		</right>
-	</object>
-	<object>
-		<name>Subsystem.SalesAR.Subsystem.Pricing</name>
+		<name>Subsystem.SalesAR</name>
 		<right>
 			<name>View</name>
 			<value>true</value>
@@ -40,13 +47,6 @@
 	</object>
 	<object>
 		<name>Subsystem.SalesAR.Subsystem.CommissionTrading</name>
-		<right>
-			<name>View</name>
-			<value>true</value>
-		</right>
-	</object>
-	<object>
-		<name>Subsystem.SalesAR.Subsystem.SalesReturn</name>
 		<right>
 			<name>View</name>
 			<value>true</value>

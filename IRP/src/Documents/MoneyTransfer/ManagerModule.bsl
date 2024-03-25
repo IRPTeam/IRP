@@ -578,7 +578,6 @@ Function GetAnalytics_CurrencyExchangeExpenses(Parameters)
 	// Debit - Analytics
 	AccountingServer.SetDebitExtDimensions(Parameters, AccountingAnalytics);
 
-
 	AccountingAnalytics.Credit = AccountingServer.GetT9011S_AccountsCashAccount(AccountParameters, 
 	                                                                            Parameters.ObjectData.TransitAccount,
 	                                                                            Parameters.ObjectData.TransitAccount.Currency).Account;

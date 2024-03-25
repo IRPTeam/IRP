@@ -140,7 +140,6 @@ Procedure SetVisibilityAvailability(Object, Form)
 	IsCashTransferOrder   = Object.TransactionType = PredefinedValue("Enum.IncomingPaymentTransactionType.CashTransferOrder");
 	IsPaymentFormCustomer = Object.TransactionType = PredefinedValue("Enum.IncomingPaymentTransactionType.PaymentFromCustomer");
 	
-	
 	ArrayTypes = New Array();
 	
 	If IsCurrencyExchange Or IsCashTransferOrder Then

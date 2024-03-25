@@ -3721,7 +3721,6 @@ EndProcedure
 
 #EndRegion
 
-
 #Region CONSOLIDATED_RETAIL_SALES
 
 Procedure ConsolidatedRetailSalesOnChange(Object, Form, TableNames) Export
@@ -3872,7 +3871,6 @@ Procedure AgreementConsignorOnChange(Object, Form, TableNames) Export
 EndProcedure
 
 #EndRegion
-
 
 #Region RETAIL_CUSTOMER
 

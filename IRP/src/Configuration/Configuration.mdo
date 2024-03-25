@@ -1314,7 +1314,6 @@
   <dataProcessors>DataProcessor.ObjectPropertyEditor</dataProcessors>
   <dataProcessors>DataProcessor.PointOfSale</dataProcessors>
   <dataProcessors>DataProcessor.PrintLabels</dataProcessors>
-  <dataProcessors>DataProcessor.Procurement</dataProcessors>
   <dataProcessors>DataProcessor.ProductionWorkspace</dataProcessors>
   <dataProcessors>DataProcessor.ReplaceSerialLotNumber</dataProcessors>
   <dataProcessors>DataProcessor.ScanBarcode</dataProcessors>

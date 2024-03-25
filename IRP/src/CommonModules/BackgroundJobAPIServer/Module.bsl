@@ -262,7 +262,6 @@ Procedure FillJobInfo(Job, JobRow)
 	
 EndProcedure
 
-
 // Get jobs result.
 // 
 // Parameters:

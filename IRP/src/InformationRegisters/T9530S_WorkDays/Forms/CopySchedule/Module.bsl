@@ -70,4 +70,3 @@ Procedure Cancel(Command)
 	ThisObject.Close(Undefined);
 EndProcedure
 
-

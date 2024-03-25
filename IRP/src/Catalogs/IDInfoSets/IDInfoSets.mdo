@@ -38,14 +38,12 @@
     </items>
     <items id="a8d65579-1f88-4b9b-9c47-aefd32253e30">
       <name>Catalog_Companies</name>
-      <description>Catalog companies</description>
       <code xsi:type="core:NumberValue">
         <value>0</value>
       </code>
     </items>
     <items id="3da031ae-3c4a-4e8a-b3af-4d732b45af27">
       <name>Catalog_Partners</name>
-      <description>Catalog partners</description>
       <code xsi:type="core:NumberValue">
         <value>0</value>
       </code>

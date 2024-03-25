@@ -63,8 +63,8 @@ EndFunction
 
 Procedure GeneratePhysicalCountByLocation(Parameters, AddInfo = Undefined) Export
 
+	BeginTransaction();
 	Try
-		BeginTransaction();
 		For Each Instance In Parameters.ArrayOfInstance Do
 
 			Wrapper = BuilderAPI.Initialize("PhysicalCountByLocation");

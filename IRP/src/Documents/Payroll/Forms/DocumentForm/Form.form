@@ -1422,8 +1422,8 @@
           <autoFill>true</autoFill>
         </autoCommandBar>
         <handlers>
-          <event>AfterDeleteRow</event>
-          <name>PayrollListsAfterDeleteRow</name>
+          <event>Selection</event>
+          <name>PayrollListsSelection</name>
         </handlers>
         <handlers>
           <event>BeforeAddRow</event>
@@ -1434,8 +1434,8 @@
           <name>PayrollListsBeforeDeleteRow</name>
         </handlers>
         <handlers>
-          <event>Selection</event>
-          <name>PayrollListsSelection</name>
+          <event>AfterDeleteRow</event>
+          <name>PayrollListsAfterDeleteRow</name>
         </handlers>
         <searchStringAddition>
           <visible>true</visible>
@@ -2169,8 +2169,8 @@
           <autoFill>true</autoFill>
         </autoCommandBar>
         <handlers>
-          <event>AfterDeleteRow</event>
-          <name>PayrollListsAfterDeleteRow</name>
+          <event>Selection</event>
+          <name>PayrollListsSelection</name>
         </handlers>
         <handlers>
           <event>BeforeAddRow</event>
@@ -2181,8 +2181,8 @@
           <name>PayrollListsBeforeDeleteRow</name>
         </handlers>
         <handlers>
-          <event>Selection</event>
-          <name>PayrollListsSelection</name>
+          <event>AfterDeleteRow</event>
+          <name>PayrollListsAfterDeleteRow</name>
         </handlers>
         <searchStringAddition>
           <visible>true</visible>
@@ -2665,8 +2665,8 @@
           <autoFill>true</autoFill>
         </autoCommandBar>
         <handlers>
-          <event>AfterDeleteRow</event>
-          <name>PayrollListsAfterDeleteRow</name>
+          <event>Selection</event>
+          <name>PayrollListsSelection</name>
         </handlers>
         <handlers>
           <event>BeforeAddRow</event>
@@ -2677,8 +2677,8 @@
           <name>PayrollListsBeforeDeleteRow</name>
         </handlers>
         <handlers>
-          <event>Selection</event>
-          <name>PayrollListsSelection</name>
+          <event>AfterDeleteRow</event>
+          <name>PayrollListsAfterDeleteRow</name>
         </handlers>
         <searchStringAddition>
           <visible>true</visible>

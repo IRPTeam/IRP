@@ -168,3 +168,6 @@ Procedure ShowUserMessage(Cancel, Object, AttributeName)
 	CommonFunctionsClientServer.ShowUsersMessage(MessageText, AttributeName, Object);	
 EndProcedure
 
+Procedure FillCheckProcessing_BankReceipt_CurrencyExchange(Object, Cancel) Export
+	MoneyDocumentsServer.FillCheckProcessing_BankReceipt_CurrencyExchange(Object, Cancel);
+EndProcedure

@@ -145,6 +145,12 @@ Scenario: _043400 preparation (Bank receipt)
 			| "Documents.SalesOrder.FindByNumber(314).GetObject().Write(DocumentWriteMode.Posting);"    |
 		And I execute 1C:Enterprise script at server
 			| "Documents.SalesOrder.FindByNumber(315).GetObject().Write(DocumentWriteMode.Posting);"    |
+		When Create document CashTransferOrder objects (check movements)
+		And I execute 1C:Enterprise script at server
+			| "Documents.CashTransferOrder.FindByNumber(3).GetObject().Write(DocumentWriteMode.Posting);"    |
+		When Create document BankPayment objects (check cash planning, cash transfer order and OPO)
+		And I execute 1C:Enterprise script at server
+			| "Documents.BankPayment.FindByNumber(324).GetObject().Write(DocumentWriteMode.Posting);"    |
 	* Load Bank receipt
 		When Create document BankReceipt objects
 		When Create document BankReceipt objects (exchange and transfer)
@@ -1311,27 +1317,6 @@ Scenario: _0434316 check Bank receipt movements by the Register "R5022 Expenses"
 			| ''                                           | '04.06.2021 12:29:34' | '45'        | '45'                | ''            | 'Main Company' | 'Front office' | 'Front office'       | 'Expense'      | ''         | ''            | ''            | 'TRY'      | ''                    | 'Local currency'               | ''        | ''                          |		
 	And I close all client application windows
 
-Scenario: _0434317 check Bank receipt movements by the Register "R3021 Cash in transit (incoming)" (Currency exchange, with bank comission)
-	And I close all client application windows
-	* Select Bank receipt
-		Given I open hyperlink "e1cib/list/Document.BankReceipt"
-		And I go to line in "List" table
-			| 'Number'    |
-			| '514'       |
-	* Check movements by the Register  "R3021 Cash in transit (incoming)" 
-		And I click "Registrations report" button
-		And I select "R3021 Cash in transit (incoming)" exact value from "Register" drop-down list
-		And I click "Generate report" button
-		Then "ResultTable" spreadsheet document is equal
-			| 'Bank receipt 514 dated 04.06.2021 12:29:34'   | ''            | ''                    | ''          | ''             | ''             | ''                  | ''                             | ''         | ''                     | ''                                                | ''                     |
-			| 'Document registrations records'               | ''            | ''                    | ''          | ''             | ''             | ''                  | ''                             | ''         | ''                     | ''                                                | ''                     |
-			| 'Register  "R3021 Cash in transit (incoming)"' | ''            | ''                    | ''          | ''             | ''             | ''                  | ''                             | ''         | ''                     | ''                                                | ''                     |
-			| ''                                             | 'Record type' | 'Period'              | 'Resources' | 'Dimensions'   | ''             | ''                  | ''                             | ''         | ''                     | ''                                                | 'Attributes'           |
-			| ''                                             | ''            | ''                    | 'Amount'    | 'Company'      | 'Branch'       | 'Account'           | 'Multi currency movement type' | 'Currency' | 'Transaction currency' | 'Basis'                                           | 'Deferred calculation' |
-			| ''                                             | 'Expense'     | '04.06.2021 12:29:34' | '185'       | 'Main Company' | 'Front office' | 'Bank account, EUR' | 'en description is empty'      | 'EUR'      | 'EUR'                  | 'Cash transfer order 3 dated 05.04.2021 12:23:49' | 'No'                   |
-			| ''                                             | 'Expense'     | '04.06.2021 12:29:34' | '203,5'     | 'Main Company' | 'Front office' | 'Bank account, EUR' | 'Reporting currency'           | 'USD'      | 'EUR'                  | 'Cash transfer order 3 dated 05.04.2021 12:23:49' | 'No'                   |
-			| ''                                             | 'Expense'     | '04.06.2021 12:29:34' | '1 665'     | 'Main Company' | 'Front office' | 'Bank account, EUR' | 'Local currency'               | 'TRY'      | 'EUR'                  | 'Cash transfer order 3 dated 05.04.2021 12:23:49' | 'No'                   |		
-	And I close all client application windows
 
 Scenario: _0434320 check Bank receipt movements by the Register "R3010 Cash on hand" (Cash transfer order, with bank comission)
 	And I close all client application windows

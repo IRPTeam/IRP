@@ -99,6 +99,7 @@ When Create catalog UserGroups objects (test data base)
 When Create catalog Users objects (test data base)
 When Create catalog Workstations objects (test data base)
 When Create catalog PlanningPeriods objects (test data base)
+When Create document CashTransferOrder objects (test data base)
 When Create document BankPayment objects (test data base)
 When Create document BankReceipt objects (test data base)
 When Create document Bundling objects (test data base)
@@ -106,7 +107,6 @@ When Create document CashExpense objects (test data base)
 When Create document CashPayment objects (test data base)
 When Create document CashReceipt objects (test data base)
 When Create document CashRevenue objects (test data base)
-When Create document CashTransferOrder objects (test data base)
 When Create document CreditNote objects (test data base)
 When Create document DebitNote objects (test data base)
 When Create document GoodsReceipt objects (test data base)
@@ -270,6 +270,11 @@ When Create catalog PartnerItems objects (test data base)
 		Then I select all lines of "List" table
 		And in the table "List" I click the button named "ListContextMenuPost"
  		And Delay "3"
+* Posting CashTransferOrder
+		Given I open hyperlink "e1cib/list/Document.CashTransferOrder"
+		Then I select all lines of "List" table
+		And in the table "List" I click the button named "ListContextMenuPost"
+ 		And Delay "3"
 * Posting CashPayment
 		Given I open hyperlink "e1cib/list/Document.CashPayment"
 		Then I select all lines of "List" table
@@ -297,11 +302,6 @@ When Create catalog PartnerItems objects (test data base)
  		And Delay "3"
 * Posting CashRevenue
 		Given I open hyperlink "e1cib/list/Document.CashRevenue"
-		Then I select all lines of "List" table
-		And in the table "List" I click the button named "ListContextMenuPost"
- 		And Delay "3"
-* Posting CashTransferOrder
-		Given I open hyperlink "e1cib/list/Document.CashTransferOrder"
 		Then I select all lines of "List" table
 		And in the table "List" I click the button named "ListContextMenuPost"
  		And Delay "3"

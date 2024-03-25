@@ -154,6 +154,7 @@ Function PaymentList()
 		|	PaymentList.Ref.CurrencyExchange AS CurrencyExchange,
 		|	PaymentList.Ref.Account AS Account,
 		|	PaymentList.Ref.TransitAccount AS TransitAccount,
+		|	PaymentList.Ref.TransitAccount.Currency AS TransitCurrency,
 		|	CASE
 		|		WHEN PaymentList.Agreement.ApArPostingDetail = VALUE(Enum.ApArPostingDetail.ByDocuments)
 		|			THEN CASE
@@ -219,6 +220,7 @@ Function PaymentList()
 		|	PaymentList.PlaningTransactionBasis.PlanningPeriod AS PlanningPeriod,
 		|	PaymentList.Ref AS Basis,
 		|	PaymentList.Key AS Key,
+		|	PaymentList.TransitUUID AS TransitUUID,
 		|	PaymentList.ProfitLossCenter AS ProfitLossCenter,
 		|	PaymentList.ExpenseType AS ExpenseType,
 		|	PaymentList.AdditionalAnalytic AS AdditionalAnalytic,
@@ -773,7 +775,30 @@ Function R3021B_CashInTransitIncoming()
 		|	PaymentList AS PaymentList
 		|WHERE
 		|	PaymentList.IsCashTransferOrder
-		|	OR PaymentList.IsCurrencyExchange";
+		|
+		|UNION ALL
+		|
+		|SELECT
+		|	VALUE(AccumulationRecordType.Expense),
+		|	PaymentList.Period,
+		|	PaymentList.TransitUUID,
+		|	PaymentList.Company,
+		|	PaymentList.Branch,
+		|	PaymentList.TransitCurrency,
+		|	PaymentList.TransitAccount,
+		|	PaymentList.CashTransferOrder,
+		|	Currencies.Amount
+		|FROM
+		|	PaymentList AS PaymentList
+		|		INNER JOIN Document.BankReceipt.Currencies AS Currencies
+		|		ON Currencies.Ref = &Ref
+		|		AND Currencies.CurrencyFrom = PaymentList.Currency
+		|		AND Currencies.MovementType.Currency = PaymentList.TransitCurrency
+		|		AND PaymentList.Currency <> PaymentList.CurrencyExchange
+		|		AND Currencies.Key <> PaymentList.TransitUUID
+		|		AND PaymentList.IsCurrencyExchange
+		|WHERE
+		|	TRUE";
 EndFunction
 
 #EndRegion

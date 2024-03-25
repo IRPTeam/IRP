@@ -465,7 +465,7 @@ Scenario: _52003 SI - CR (AR - by documents, CR - payment from customer, IsAdvan
 		And I input "10.03.2023" text in the field named "DateEnd"
 		And I click the button named "Select"
 		And I select from the drop-down list named "SettingsComposerUserSettingsItem1Value" by "Legal currency, TRY" string
-		And I select from the drop-down list named "SettingsComposerUserSettingsItem2Value" by "Customer 1 (1 partner term)" string		
+		And I select from the drop-down list named "SettingsComposerUserSettingsItem2Value" by "Customer 1 (3 partner terms)" string		
 		And I click "Generate" button
 	* Check
 		And "Result" spreadsheet document contains lines:
@@ -473,7 +473,7 @@ Scenario: _52003 SI - CR (AR - by documents, CR - payment from customer, IsAdvan
 			| 'Partner'                                   | 'Legal name'                                              | ''         | ''                             | 'Receipt' | 'Expense' | 'Closing' | 'Receipt' | 'Expense' | 'Closing' | 'Receipt' | 'Expense' | 'Closing' | 'Receipt' | 'Expense' | 'Closing' | 'Receipt' | 'Expense' | 'Closing' | 'Receipt' | 'Expense' | 'Closing' |
 			| 'Recorder'                                  | 'Agreement'                                               | 'Currency' | 'Multi currency movement type' | ''        | ''        | ''        | ''        | ''        | ''        | ''        | ''        | ''        | ''        | ''        | ''        | ''        | ''        | ''        | ''        | ''        | ''        |
 			| 'Own company 2'                             | ''                                                        | ''         | ''                             | '950,00'  | '950,00'  | ''        | ''        | ''        | ''        | '950,00'  | '950,00'  | ''        | ''        | ''        | ''        | ''        | ''        | ''        | ''        | ''        | ''        |
-			| 'Customer 1 (1 partner term)'               | 'Client 1'                                                | ''         | ''                             | '950,00'  | '950,00'  | ''        | ''        | ''        | ''        | '950,00'  | '950,00'  | ''        | ''        | ''        | ''        | ''        | ''        | ''        | ''        | ''        | ''        |
+			| 'Customer 1 (3 partner terms)'              | 'Client 1'                                                | ''         | ''                             | '950,00'  | '950,00'  | ''        | ''        | ''        | ''        | '950,00'  | '950,00'  | ''        | ''        | ''        | ''        | ''        | ''        | ''        | ''        | ''        | ''        |
 			| 'Sales invoice 2 dated 24.02.2023 10:18:20' | 'Partner term with customer (by document + credit limit)' | 'TRY'      | 'Legal currency, TRY'          | '950,00'  | ''        | '950,00'  | ''        | ''        | ''        | '950,00'  | ''        | '950,00'  | ''        | ''        | ''        | ''        | ''        | ''        | ''        | ''        | ''        |
 			| 'Cash receipt 1 dated 10.03.2023 00:00:00'  | 'Partner term with customer (by document + credit limit)' | 'TRY'      | 'Legal currency, TRY'          | ''        | '950,00'  | ''        | ''        | ''        | ''        | ''        | '950,00'  | ''        | ''        | ''        | ''        | ''        | ''        | ''        | ''        | ''        | ''        |
 			| 'Total'                                     | ''                                                        | ''         | ''                             | '950,00'  | '950,00'  | ''        | ''        | ''        | ''        | '950,00'  | '950,00'  | ''        | ''        | ''        | ''        | ''        | ''        | ''        | ''        | ''        | ''        |
@@ -495,76 +495,21 @@ Scenario: _52004 SI - BR (AR - by documents, BR - payment from customer, IsAdvan
 		And I input "01.04.2023" text in the field named "DateEnd"
 		And I click the button named "Select"
 		And I select from the drop-down list named "SettingsComposerUserSettingsItem1Value" by "Legal currency, TRY" string
-		And I select from the drop-down list named "SettingsComposerUserSettingsItem2Value" by "Customer 1 (1 partner term)" string
+		And I select from the drop-down list named "SettingsComposerUserSettingsItem2Value" by "Customer 1 (3 partner terms)" string
 		And I click "Generate" button
 	* Check
 		And "Result" spreadsheet document contains lines:
-			| 'Company'                                   | ''                                                                                                                | ''         | ''                             | 'Amount'  | ''        | ''        | 'CA'      | ''        | ''        | 'CT'      | ''        | ''        | 'VA'      | ''        | ''        | 'VT'      | ''        | ''        | 'Other'   | ''        | ''        |
-			| 'Partner'                                   | 'Legal name'                                                                                                      | ''         | ''                             | 'Receipt' | 'Expense' | 'Closing' | 'Receipt' | 'Expense' | 'Closing' | 'Receipt' | 'Expense' | 'Closing' | 'Receipt' | 'Expense' | 'Closing' | 'Receipt' | 'Expense' | 'Closing' | 'Receipt' | 'Expense' | 'Closing' |
-			| 'Recorder'                                  | 'Agreement'                                                                                                       | 'Currency' | 'Multi currency movement type' | ''        | ''        | ''        | ''        | ''        | ''        | ''        | ''        | ''        | ''        | ''        | ''        | ''        | ''        | ''        | ''        | ''        | ''        |
-			| 'Own company 2'                             | ''                                                                                                                | ''         | ''                             | '520,00'  | '350,00'  | '170,00'  | ''        | '350,00'  | '-350,00' | '520,00'  | ''        | '520,00'  | ''        | ''        | ''        | ''        | ''        | ''        | ''        | ''        | ''        |
-			| 'Customer 1 (1 partner term)'               | 'Client 1'                                                                                                        | ''         | ''                             | '520,00'  | '350,00'  | '170,00'  | ''        | '350,00'  | '-350,00' | '520,00'  | ''        | '520,00'  | ''        | ''        | ''        | ''        | ''        | ''        | ''        | ''        | ''        |
-			| 'Sales invoice 3 dated 30.03.2023 12:23:56' | 'Partner term with customer (by document + credit limit)'                                                         | 'TRY'      | 'Legal currency, TRY'          | '480,00'  | ''        | '480,00'  | ''        | ''        | ''        | '480,00'  | ''        | '480,00'  | ''        | ''        | ''        | ''        | ''        | ''        | ''        | ''        | ''        |
-			| 'Bank receipt 3 dated 01.04.2023 13:53:41'  | 'Partner term with customer (by document + credit limit)'                                                         | 'TRY'      | 'Legal currency, TRY'          | ''        | '350,00'  | '130,00'  | ''        | '350,00'  | '-350,00' | ''        | ''        | '480,00'  | ''        | ''        | ''        | ''        | ''        | ''        | ''        | ''        | ''        |		
+			| 'Company'                                   | ''                                                        | ''         | ''                             | 'Amount'  | ''        | ''        | 'CA'      | ''        | ''        | 'CT'      | ''        | ''        | 'VA'      | ''        | ''        | 'VT'      | ''        | ''        | 'Other'   | ''        | ''        |
+			| 'Partner'                                   | 'Legal name'                                              | ''         | ''                             | 'Receipt' | 'Expense' | 'Closing' | 'Receipt' | 'Expense' | 'Closing' | 'Receipt' | 'Expense' | 'Closing' | 'Receipt' | 'Expense' | 'Closing' | 'Receipt' | 'Expense' | 'Closing' | 'Receipt' | 'Expense' | 'Closing' |
+			| 'Recorder'                                  | 'Agreement'                                               | 'Currency' | 'Multi currency movement type' | ''        | ''        | ''        | ''        | ''        | ''        | ''        | ''        | ''        | ''        | ''        | ''        | ''        | ''        | ''        | ''        | ''        | ''        |
+			| 'Own company 2'                             | ''                                                        | ''         | ''                             | '520,00'  | '350,00'  | '170,00'  | ''        | '350,00'  | '-350,00' | '520,00'  | ''        | '520,00'  | ''        | ''        | ''        | ''        | ''        | ''        | ''        | ''        | ''        |
+			| 'Customer 1 (3 partner terms)'              | 'Client 1'                                                | ''         | ''                             | '520,00'  | '350,00'  | '170,00'  | ''        | '350,00'  | '-350,00' | '520,00'  | ''        | '520,00'  | ''        | ''        | ''        | ''        | ''        | ''        | ''        | ''        | ''        |
+			| 'Sales invoice 3 dated 30.03.2023 12:23:56' | 'Partner term with customer (by document + credit limit)' | 'TRY'      | 'Legal currency, TRY'          | '480,00'  | ''        | '480,00'  | ''        | ''        | ''        | '480,00'  | ''        | '480,00'  | ''        | ''        | ''        | ''        | ''        | ''        | ''        | ''        | ''        |
+			| 'Bank receipt 3 dated 01.04.2023 13:53:41'  | 'Partner term with customer (by document + credit limit)' | 'TRY'      | 'Legal currency, TRY'          | ''        | '350,00'  | '130,00'  | ''        | '350,00'  | '-350,00' | ''        | ''        | '480,00'  | ''        | ''        | ''        | ''        | ''        | ''        | ''        | ''        | ''        |
 	And I close all client application windows
 	
-
-Scenario: _52005 BR - SI - DN (AR - by documents, BR - payment from customer, IsAdvance = True, with customer advance closing)
-	And I close all client application windows
-	* Preparation
-		Given I open hyperlink "e1cib/list/Document.CustomersAdvancesClosing"		
-		And I go to line in "List" table
-			| 'Number' |
-			| '1'      |
-		And in the table "List" I click the button named "ListContextMenuPost"
-		And I go to line in "List" table
-			| 'Number' |
-			| '2'      |
-		And in the table "List" I click the button named "ListContextMenuPost"
-		And I go to line in "List" table
-			| 'Number' |
-			| '3'      |
-		And in the table "List" I click the button named "ListContextMenuPost"
-		And I go to line in "List" table
-			| 'Number' |
-			| '4'      |
-		And in the table "List" I click the button named "ListContextMenuPost"
-		And I go to line in "List" table
-			| 'Number' |
-			| '5'      |
-		And in the table "List" I click the button named "ListContextMenuPost"
-	* Open report R5020_PartnersBalance and select option
-		Given I open hyperlink "e1cib/app/Report.R5020_PartnersBalance"
-		And I click "Select option..." button
-		Then "Load form" window is opened
-		And I go to line in "OptionsList" table
-			| 'Report option'  |
-			| 'For test'       |
-		And I select current line in "OptionsList" table
-	* Select partner, period and currency movement type
-		And I click Choice button of the field named "SettingsComposerUserSettingsItem0Value"
-		And I input "30.03.2023" text in the field named "DateBegin"
-		And I input "01.04.2023" text in the field named "DateEnd"
-		And I click the button named "Select"
-		And I select from the drop-down list named "SettingsComposerUserSettingsItem1Value" by "Legal currency, TRY" string
-		And I select from the drop-down list named "SettingsComposerUserSettingsItem2Value" by "Customer 1 (1 partner term)" string
-		And I click "Generate" button
-	* Check
-		And "Result" spreadsheet document contains lines:
-			| 'Company'                                   | ''                                                                                                                                     | ''         | ''                             | 'Amount'  | ''        | ''        | 'CA'      | ''        | ''        | 'CT'      | ''        | ''        | 'VA'      | ''        | ''        | 'VT'      | ''        | ''        | 'Other'   | ''        | ''        |
-			| 'Partner'                                   | 'Legal name'                                                                                                                           | ''         | ''                             | 'Receipt' | 'Expense' | 'Closing' | 'Receipt' | 'Expense' | 'Closing' | 'Receipt' | 'Expense' | 'Closing' | 'Receipt' | 'Expense' | 'Closing' | 'Receipt' | 'Expense' | 'Closing' | 'Receipt' | 'Expense' | 'Closing' |
-			| 'Recorder'                                  | 'Agreement'                                                                                                                            | 'Currency' | 'Multi currency movement type' | ''        | ''        | ''        | ''        | ''        | ''        | ''        | ''        | ''        | ''        | ''        | ''        | ''        | ''        | ''        | ''        | ''        | ''        |
-			| 'Own company 2'                             | ''                                                                                                                                     | ''         | ''                             | '560,00'  | '390,00'  | '170,00'  | '40,00'   | '350,00'  | '-310,00' | '520,00'  | '40,00'   | '480,00'  | ''        | ''        | ''        | ''        | ''        | ''        | ''        | ''        | ''        |
-			| 'Customer 1 (1 partner term)'               | 'Client 1'                                                                                                                             | ''         | ''                             | '560,00'  | '390,00'  | '170,00'  | '40,00'   | '350,00'  | '-310,00' | '520,00'  | '40,00'   | '480,00'  | ''        | ''        | ''        | ''        | ''        | ''        | ''        | ''        | ''        |
-			| 'Sales invoice 3 dated 30.03.2023 12:23:56' | 'Partner term with customer (by document + credit limit)'                                                                              | 'TRY'      | 'Legal currency, TRY'          | '480,00'  | ''        | '480,00'  | ''        | ''        | ''        | '480,00'  | ''        | '480,00'  | ''        | ''        | ''        | ''        | ''        | ''        | ''        | ''        | ''        |
-			| 'Bank receipt 3 dated 01.04.2023 13:53:41'  | 'Partner term with customer (by document + credit limit)'                                                                              | 'TRY'      | 'Legal currency, TRY'          | ''        | '350,00'  | '130,00'  | ''        | '350,00'  | '-350,00' | ''        | ''        | '480,00'  | ''        | ''        | ''        | ''        | ''        | ''        | ''        | ''        | ''        |
-			| 'Debit note 2 dated 01.04.2023 14:10:35'    | 'Partner term with customer (by document + credit limit)'                                                                              | 'TRY'      | 'Legal currency, TRY'          | '80,00'   | '40,00'   | '170,00'  | '40,00'   | ''        | '-310,00' | '40,00'   | '40,00'   | '480,00'  | ''        | ''        | ''        | ''        | ''        | ''        | ''        | ''        | ''        |
-			| 'Total'                                     | ''                                                                                                                                     | ''         | ''                             | '560,00'  | '390,00'  | '170,00'  | '40,00'   | '350,00'  | '-310,00' | '520,00'  | '40,00'   | '480,00'  | ''        | ''        | ''        | ''        | ''        | ''        | ''        | ''        | ''        |	
-		And I close all client application windows
-
-
-				
-Scenario: _52006 PI-PR-CP-BR (AP - by partner terms, BR - return from vendor, IsAdvance = False)
+			
+Scenario: _52005 PI-PR-CP-BR (AP - by partner terms, BR - return from vendor, IsAdvance = False)
 	And I close all client application windows
 	* Open report R5020_PartnersBalance and select option
 		Given I open hyperlink "e1cib/app/Report.R5020_PartnersBalance"
@@ -648,44 +593,6 @@ Scenario: _52006 PI-BP-CP (AP - by documents, BP - payment to vendor, BP-IsAdvan
 		And I close all client application windows
 		
 
-Scenario: _52006 PI-BP-CP (AP - by documents, CP,BP-IsAdvance = True, with vendor advance closing )
-	And I close all client application windows
-	* Preparation
-		Given I open hyperlink "e1cib/list/Document.VendorsAdvancesClosing"		
-		And I go to line in "List" table
-			| 'Number' |
-			| '12'     |
-		And in the table "List" I click the button named "ListContextMenuPost"
-	* Open report R5020_PartnersBalance and select option
-		Given I open hyperlink "e1cib/app/Report.R5020_PartnersBalance"
-		And I click "Select option..." button
-		Then "Load form" window is opened
-		And I go to line in "OptionsList" table
-			| 'Report option'  |
-			| 'For test'       |
-		And I select current line in "OptionsList" table
-	* Select partner, period and currency movement type
-		And I click Choice button of the field named "SettingsComposerUserSettingsItem0Value"
-		And I input "02.12.2023" text in the field named "DateBegin"
-		And I input "03.12.2023" text in the field named "DateEnd"
-		And I click the button named "Select"
-		And I select from the drop-down list named "SettingsComposerUserSettingsItem1Value" by "Legal currency, TRY" string
-		And I select from the drop-down list named "SettingsComposerUserSettingsItem2Value" by "Customer and vendor" string
-		And I click "Generate" button
-	* Check				
-		And "Result" spreadsheet document contains lines:
-			| 'Company'                                      | ''                                                                                                                             | ''         | ''                             | 'Amount'   | ''          | ''          | 'CA'      | ''        | ''        | 'CT'      | ''        | ''        | 'VA'       | ''         | ''        | 'VT'       | ''         | ''          | 'Other'   | ''        | ''        |
-			| 'Partner'                                      | 'Legal name'                                                                                                                   | ''         | ''                             | 'Receipt'  | 'Expense'   | 'Closing'   | 'Receipt' | 'Expense' | 'Closing' | 'Receipt' | 'Expense' | 'Closing' | 'Receipt'  | 'Expense'  | 'Closing' | 'Receipt'  | 'Expense'  | 'Closing'   | 'Receipt' | 'Expense' | 'Closing' |
-			| 'Recorder'                                     | 'Agreement'                                                                                                                    | 'Currency' | 'Multi currency movement type' | ''         | ''          | ''          | ''        | ''        | ''        | ''        | ''        | ''        | ''         | ''         | ''        | ''         | ''         | ''          | ''        | ''        | ''        |
-			| 'Own company 2'                                | ''                                                                                                                             | ''         | ''                             | '6 400,00' | '10 885,00' | '-4 485,00' | ''        | ''        | ''        | ''        | ''        | ''        | '1 200,00' | '1 200,00' | ''        | '5 200,00' | '9 685,00' | '-4 485,00' | ''        | ''        | ''        |
-			| 'Customer and vendor'                          | 'Client and vendor'                                                                                                            | ''         | ''                             | '6 400,00' | '10 885,00' | '-4 485,00' | ''        | ''        | ''        | ''        | ''        | ''        | '1 200,00' | '1 200,00' | ''        | '5 200,00' | '9 685,00' | '-4 485,00' | ''        | ''        | ''        |
-			| 'Purchase invoice 5 dated 02.12.2023 12:30:00' | 'Partner term with vendor (advance payment by document)'                                                                       | 'TRY'      | 'Legal currency, TRY'          | ''         | '9 685,00'  | '-9 685,00' | ''        | ''        | ''        | ''        | ''        | ''        | ''         | ''         | ''        | ''         | '9 685,00' | '-9 685,00' | ''        | ''        | ''        |
-			| 'Bank payment 8 dated 02.12.2023 16:00:00'     | 'Partner term with vendor (advance payment by document)'                                                                       | 'TRY'      | 'Legal currency, TRY'          | '4 000,00' | ''          | '-5 685,00' | ''        | ''        | ''        | ''        | ''        | ''        | ''         | ''         | ''        | '4 000,00' | ''         | '-5 685,00' | ''        | ''        | ''        |
-			| 'Cash payment 5 dated 03.12.2023 12:00:00'     | 'Partner term with vendor (advance payment by document)'                                                                       | 'TRY'      | 'Legal currency, TRY'          | '2 000,00' | '1 000,00'  | '-4 685,00' | ''        | ''        | ''        | ''        | ''        | ''        | '1 000,00' | '1 000,00' | ''        | '1 000,00' | ''         | '-4 685,00' | ''        | ''        | ''        |
-			| 'Bank payment 9 dated 03.12.2023 12:30:00'     | 'Partner term with vendor (advance payment by document)'                                                                       | 'TRY'      | 'Legal currency, TRY'          | '400,00'   | '200,00'    | '-4 485,00' | ''        | ''        | ''        | ''        | ''        | ''        | '200,00'   | '200,00'   | ''        | '200,00'   | ''         | '-4 485,00' | ''        | ''        | ''        |
-			| 'Total'                                        | ''                                                                                                                             | ''         | ''                             | '6 400,00' | '10 885,00' | '-4 485,00' | ''        | ''        | ''        | ''        | ''        | ''        | '1 200,00' | '1 200,00' | ''        | '5 200,00' | '9 685,00' | '-4 485,00' | ''        | ''        | ''        |
-		And I close all client application windows
-
 Scenario: _52007 SR-BP (AP - by documents, IsAdvance = False)
 	And I close all client application windows
 	* Open report R5020_PartnersBalance and select option
@@ -702,17 +609,17 @@ Scenario: _52007 SR-BP (AP - by documents, IsAdvance = False)
 		And I input "11.08.2023" text in the field named "DateEnd"
 		And I click the button named "Select"
 		And I select from the drop-down list named "SettingsComposerUserSettingsItem1Value" by "Legal currency, TRY" string
-		And I select from the drop-down list named "SettingsComposerUserSettingsItem2Value" by "Customer 1 (1 partner term)" string
+		And I select from the drop-down list named "SettingsComposerUserSettingsItem2Value" by "Customer 1 (3 partner terms)" string
 		And I click "Generate" button
 	* Check				
 		And "Result" spreadsheet document contains lines:
-			| 'Company'                                  | ''                                                                                                                                     | ''         | ''                             | 'Amount'  | ''        | ''         | 'CA'      | ''        | ''        | 'CT'      | ''        | ''         | 'VA'      | ''        | ''        | 'VT'      | ''        | ''        | 'Other'   | ''        | ''        |
-			| 'Partner'                                  | 'Legal name'                                                                                                                           | ''         | ''                             | 'Receipt' | 'Expense' | 'Closing'  | 'Receipt' | 'Expense' | 'Closing' | 'Receipt' | 'Expense' | 'Closing'  | 'Receipt' | 'Expense' | 'Closing' | 'Receipt' | 'Expense' | 'Closing' | 'Receipt' | 'Expense' | 'Closing' |
-			| 'Recorder'                                 | 'Agreement'                                                                                                                            | 'Currency' | 'Multi currency movement type' | ''        | ''        | ''         | ''        | ''        | ''        | ''        | ''        | ''         | ''        | ''        | ''        | ''        | ''        | ''        | ''        | ''        | ''        |
-			| 'Own company 2'                            | ''                                                                                                                                     | ''         | ''                             | ''        | ''        | '1 670,00' | ''        | ''        | ''        | ''        | ''        | '1 670,00' | ''        | ''        | ''        | ''        | ''        | ''        | ''        | ''        | ''        |
-			| 'Customer 1 (1 partner term)'              | 'Client 1'                                                                                                                             | ''         | ''                             | ''        | ''        | '1 670,00' | ''        | ''        | ''        | ''        | ''        | '1 670,00' | ''        | ''        | ''        | ''        | ''        | ''        | ''        | ''        | ''        |
-			| 'Sales return 4 dated 10.08.2023 12:00:00' | 'Partner term with customer (by document + credit limit)'                                                                              | 'TRY'      | 'Legal currency, TRY'          | '-100,00' | ''        | '1 570,00' | ''        | ''        | ''        | '-100,00' | ''        | '1 570,00' | ''        | ''        | ''        | ''        | ''        | ''        | ''        | ''        | ''        |
-			| 'Bank payment 3 dated 11.08.2023 12:00:00' | 'Partner term with customer (by document + credit limit)'                                                                              | 'TRY'      | 'Legal currency, TRY'          | '100,00'  | ''        | '1 670,00' | ''        | ''        | ''        | '100,00'  | ''        | '1 670,00' | ''        | ''        | ''        | ''        | ''        | ''        | ''        | ''        | ''        |
+			| 'Company'                                  | ''                                                        | ''         | ''                             | 'Amount'  | ''        | ''         | 'CA'      | ''        | ''        | 'CT'      | ''        | ''         | 'VA'      | ''        | ''        | 'VT'      | ''        | ''        | 'Other'   | ''        | ''        |
+			| 'Partner'                                  | 'Legal name'                                              | ''         | ''                             | 'Receipt' | 'Expense' | 'Closing'  | 'Receipt' | 'Expense' | 'Closing' | 'Receipt' | 'Expense' | 'Closing'  | 'Receipt' | 'Expense' | 'Closing' | 'Receipt' | 'Expense' | 'Closing' | 'Receipt' | 'Expense' | 'Closing' |
+			| 'Recorder'                                 | 'Agreement'                                               | 'Currency' | 'Multi currency movement type' | ''        | ''        | ''         | ''        | ''        | ''        | ''        | ''        | ''         | ''        | ''        | ''        | ''        | ''        | ''        | ''        | ''        | ''        |
+			| 'Own company 2'                            | ''                                                        | ''         | ''                             | ''        | ''        | '1 670,00' | ''        | ''        | '-900,00' | ''        | ''        | '2 570,00' | ''        | ''        | ''        | ''        | ''        | ''        | ''        | ''        | ''        |
+			| 'Customer 1 (3 partner terms)'             | 'Client 1'                                                | ''         | ''                             | ''        | ''        | '1 670,00' | ''        | ''        | '-900,00' | ''        | ''        | '2 570,00' | ''        | ''        | ''        | ''        | ''        | ''        | ''        | ''        | ''        |
+			| 'Sales return 4 dated 10.08.2023 12:00:00' | 'Partner term with customer (by document + credit limit)' | 'TRY'      | 'Legal currency, TRY'          | '-100,00' | ''        | '1 570,00' | ''        | ''        | '-900,00' | '-100,00' | ''        | '2 470,00' | ''        | ''        | ''        | ''        | ''        | ''        | ''        | ''        | ''        |
+			| 'Bank payment 3 dated 11.08.2023 12:00:00' | 'Partner term with customer (by document + credit limit)' | 'TRY'      | 'Legal currency, TRY'          | '100,00'  | ''        | '1 670,00' | ''        | ''        | '-900,00' | '100,00'  | ''        | '2 570,00' | ''        | ''        | ''        | ''        | ''        | ''        | ''        | ''        | ''        |
 		And I close all client application windows
 		
 Scenario: _52008 SI-BR (AP - by documents, BR - PaymentFromCustomerByPOS IsAdvance = True, IsAdvance = False, without customer advance closing)
@@ -746,7 +653,7 @@ Scenario: _52008 SI-BR (AP - by documents, BR - PaymentFromCustomerByPOS IsAdvan
 			| 'Total'                                      | ''                                                                                                                    | ''         | ''                             | '750,00'  | '750,00'  | ''        | ''        | '250,00'  | '-250,00' | '750,00'  | '500,00'  | '250,00'  | ''        | ''        | ''        | ''        | ''        | ''        | ''        | ''        | ''        |
 		And I close all client application windows				
 
-Scenario: _52008 SI-BR-SR-BP (AP - by documents, BP - Return to customer, BR- Payment from customer, IsAdvance = True, IsAdvance = False, without customer advance closing)
+Scenario: _52009 SI-BR-SR-BP (AP - by documents, BP - Return to customer, BR- Payment from customer, IsAdvance = True, IsAdvance = False, without customer advance closing)
 	And I close all client application windows
 	* Open report R5020_PartnersBalance and select option
 		Given I open hyperlink "e1cib/app/Report.R5020_PartnersBalance"
@@ -765,22 +672,281 @@ Scenario: _52008 SI-BR-SR-BP (AP - by documents, BP - Return to customer, BR- Pa
 		And I select from the drop-down list named "SettingsComposerUserSettingsItem2Value" by "Customer 3" string
 		And I click "Generate" button
 		And "Result" spreadsheet document contains lines:
-			| 'Company'                                    | ''                                                                                                                    | ''         | ''                             | 'Amount'  | ''        | ''        | 'CA'      | ''        | ''        | 'CT'      | ''        | ''        | 'VA'      | ''        | ''        | 'VT'      | ''        | ''        | 'Other'   | ''        | ''        |
-			| 'Partner'                                    | 'Legal name'                                                                                                          | ''         | ''                             | 'Receipt' | 'Expense' | 'Closing' | 'Receipt' | 'Expense' | 'Closing' | 'Receipt' | 'Expense' | 'Closing' | 'Receipt' | 'Expense' | 'Closing' | 'Receipt' | 'Expense' | 'Closing' | 'Receipt' | 'Expense' | 'Closing' |
-			| 'Recorder'                                   | 'Agreement'                                                                                                           | 'Currency' | 'Multi currency movement type' | ''        | ''        | ''        | ''        | ''        | ''        | ''        | ''        | ''        | ''        | ''        | ''        | ''        | ''        | ''        | ''        | ''        | ''        |
-			| 'Own company 2'                              | ''                                                                                                                    | ''         | ''                             | '750,00'  | '750,00'  | ''        | '200,00'  | '250,00'  | '-50,00'  | '550,00'  | '500,00'  | '50,00'   | ''        | ''        | ''        | ''        | ''        | ''        | ''        | ''        | ''        |
-			| 'Customer 3'                                 | 'Client 3'                                                                                                            | ''         | ''                             | '750,00'  | '750,00'  | ''        | '200,00'  | '250,00'  | '-50,00'  | '550,00'  | '500,00'  | '50,00'   | ''        | ''        | ''        | ''        | ''        | ''        | ''        | ''        | ''        |
-			| 'Sales invoice 12 dated 02.12.2023 12:00:00' | 'Partner term with customer (by document + credit limit)'                                                             | 'TRY'      | 'Legal currency, TRY'          | '750,00'  | ''        | '750,00'  | ''        | ''        | ''        | '750,00'  | ''        | '750,00'  | ''        | ''        | ''        | ''        | ''        | ''        | ''        | ''        | ''        |
-			| 'Bank receipt 11 dated 02.12.2023 14:00:00'  | 'Partner term with customer (by document + credit limit)'                                                             | 'TRY'      | 'Legal currency, TRY'          | ''        | '500,00'  | '250,00'  | ''        | ''        | ''        | ''        | '500,00'  | '250,00'  | ''        | ''        | ''        | ''        | ''        | ''        | ''        | ''        | ''        |
-			| 'Bank receipt 12 dated 02.12.2023 15:00:00'  | 'Partner term with customer (by document + credit limit)'                                                             | 'TRY'      | 'Legal currency, TRY'          | ''        | '250,00'  | ''        | ''        | '250,00'  | '-250,00' | ''        | ''        | '250,00'  | ''        | ''        | ''        | ''        | ''        | ''        | ''        | ''        | ''        |
-			| 'Sales return 7 dated 04.12.2023 12:00:00'   | 'Partner term with customer (by document + credit limit)'                                                             | 'TRY'      | 'Legal currency, TRY'          | '-300,00' | ''        | '-300,00' | ''        | ''        | '-250,00' | '-300,00' | ''        | '-50,00'  | ''        | ''        | ''        | ''        | ''        | ''        | ''        | ''        | ''        |
-			| 'Bank payment 11 dated 04.12.2023 16:00:00'  | 'Partner term with customer (by document + credit limit)'                                                             | 'TRY'      | 'Legal currency, TRY'          | '150,00'  | ''        | '-150,00' | '150,00'  | ''        | '-100,00' | ''        | ''        | '-50,00'  | ''        | ''        | ''        | ''        | ''        | ''        | ''        | ''        | ''        |
-			| 'Bank payment 12 dated 05.12.2023 12:00:00'  | 'Partner term with customer (by document + credit limit)'                                                             | 'TRY'      | 'Legal currency, TRY'          | '100,00'  | ''        | '-50,00'  | ''        | ''        | '-100,00' | '100,00'  | ''        | '50,00'   | ''        | ''        | ''        | ''        | ''        | ''        | ''        | ''        | ''        |
-			| 'Bank payment 10 dated 05.12.2023 17:00:00'  | 'Partner term with customer (by document + credit limit)'                                                             | 'TRY'      | 'Legal currency, TRY'          | '50,00'   | ''        | ''        | '50,00'   | ''        | '-50,00'  | ''        | ''        | '50,00'   | ''        | ''        | ''        | ''        | ''        | ''        | ''        | ''        | ''        |
-			| 'Total'                                      | ''                                                                                                                    | ''         | ''                             | '750,00'  | '750,00'  | ''        | '200,00'  | '250,00'  | '-50,00'  | '550,00'  | '500,00'  | '50,00'   | ''        | ''        | ''        | ''        | ''        | ''        | ''        | ''        | ''        |
+			| 'Company'                                    | ''                                                        | ''         | ''                             | 'Amount'  | ''        | ''        | 'CA'      | ''        | ''        | 'CT'      | ''        | ''        | 'VA'      | ''        | ''        | 'VT'      | ''        | ''        | 'Other'   | ''        | ''        |
+			| 'Partner'                                    | 'Legal name'                                              | ''         | ''                             | 'Receipt' | 'Expense' | 'Closing' | 'Receipt' | 'Expense' | 'Closing' | 'Receipt' | 'Expense' | 'Closing' | 'Receipt' | 'Expense' | 'Closing' | 'Receipt' | 'Expense' | 'Closing' | 'Receipt' | 'Expense' | 'Closing' |
+			| 'Recorder'                                   | 'Agreement'                                               | 'Currency' | 'Multi currency movement type' | ''        | ''        | ''        | ''        | ''        | ''        | ''        | ''        | ''        | ''        | ''        | ''        | ''        | ''        | ''        | ''        | ''        | ''        |
+			| 'Own company 2'                              | ''                                                        | ''         | ''                             | '750,00'  | '750,00'  | ''        | '150,00'  | '250,00'  | '-100,00' | '600,00'  | '500,00'  | '100,00'  | ''        | ''        | ''        | ''        | ''        | ''        | ''        | ''        | ''        |
+			| 'Customer 3'                                 | 'Client 3'                                                | ''         | ''                             | '750,00'  | '750,00'  | ''        | '150,00'  | '250,00'  | '-100,00' | '600,00'  | '500,00'  | '100,00'  | ''        | ''        | ''        | ''        | ''        | ''        | ''        | ''        | ''        |
+			| 'Sales invoice 12 dated 02.12.2023 12:00:00' | 'Partner term with customer (by document + credit limit)' | 'TRY'      | 'Legal currency, TRY'          | '750,00'  | ''        | '750,00'  | ''        | ''        | ''        | '750,00'  | ''        | '750,00'  | ''        | ''        | ''        | ''        | ''        | ''        | ''        | ''        | ''        |
+			| 'Bank receipt 11 dated 02.12.2023 14:00:00'  | 'Partner term with customer (by document + credit limit)' | 'TRY'      | 'Legal currency, TRY'          | ''        | '500,00'  | '250,00'  | ''        | ''        | ''        | ''        | '500,00'  | '250,00'  | ''        | ''        | ''        | ''        | ''        | ''        | ''        | ''        | ''        |
+			| 'Bank receipt 12 dated 02.12.2023 15:00:00'  | 'Partner term with customer (by document + credit limit)' | 'TRY'      | 'Legal currency, TRY'          | ''        | '250,00'  | ''        | ''        | '250,00'  | '-250,00' | ''        | ''        | '250,00'  | ''        | ''        | ''        | ''        | ''        | ''        | ''        | ''        | ''        |
+			| 'Sales return 7 dated 04.12.2023 12:00:00'   | 'Partner term with customer (by document + credit limit)' | 'TRY'      | 'Legal currency, TRY'          | '-300,00' | ''        | '-300,00' | ''        | ''        | '-250,00' | '-300,00' | ''        | '-50,00'  | ''        | ''        | ''        | ''        | ''        | ''        | ''        | ''        | ''        |
+			| 'Bank payment 11 dated 04.12.2023 16:00:00'  | 'Partner term with customer (by document + credit limit)' | 'TRY'      | 'Legal currency, TRY'          | '150,00'  | ''        | '-150,00' | '150,00'  | ''        | '-100,00' | ''        | ''        | '-50,00'  | ''        | ''        | ''        | ''        | ''        | ''        | ''        | ''        | ''        |
+			| 'Bank payment 12 dated 05.12.2023 12:00:00'  | 'Partner term with customer (by document + credit limit)' | 'TRY'      | 'Legal currency, TRY'          | '150,00'  | ''        | ''        | ''        | ''        | '-100,00' | '150,00'  | ''        | '100,00'  | ''        | ''        | ''        | ''        | ''        | ''        | ''        | ''        | ''        |
+			| 'Total'                                      | ''                                                        | ''         | ''                             | '750,00'  | '750,00'  | ''        | '150,00'  | '250,00'  | '-100,00' | '600,00'  | '500,00'  | '100,00'  | ''        | ''        | ''        | ''        | ''        | ''        | ''        | ''        | ''        |
 		And I close all client application windows
 
-Scenario: _52010 SI-BR-SR-BP (AP - by documents, BP - Return to customer, BR- Payment from customer, IsAdvance = True, IsAdvance = False, with customer advance closing)
+Scenario: _52010 BP (OtherPartner)
+	And I close all client application windows
+	* Open report R5020_PartnersBalance and select option
+		Given I open hyperlink "e1cib/app/Report.R5020_PartnersBalance"
+		And I click "Select option..." button
+		Then "Load form" window is opened
+		And I go to line in "OptionsList" table
+			| 'Report option'  |
+			| 'For test'       |
+		And I select current line in "OptionsList" table
+	* Select partner, period and currency movement type
+		And I click Choice button of the field named "SettingsComposerUserSettingsItem0Value"
+		And I input "22.03.2024" text in the field named "DateBegin"
+		And I input "22.03.2024" text in the field named "DateEnd"
+		And I click the button named "Select"
+		And I select from the drop-down list named "SettingsComposerUserSettingsItem1Value" by "Legal currency, TRY" string
+		And I select from the drop-down list named "SettingsComposerUserSettingsItem2Value" by "Other partner" string
+		And I click "Generate" button
+		And "Result" spreadsheet document contains lines:
+			| 'Company'                                   | ''                                                                                                                       | ''         | ''                             | 'Amount'  | ''        | ''        | 'CA'      | ''        | ''        | 'CT'      | ''        | ''        | 'VA'      | ''        | ''        | 'VT'      | ''        | ''        | 'Other'   | ''        | ''        |
+			| 'Partner'                                   | 'Legal name'                                                                                                             | ''         | ''                             | 'Receipt' | 'Expense' | 'Closing' | 'Receipt' | 'Expense' | 'Closing' | 'Receipt' | 'Expense' | 'Closing' | 'Receipt' | 'Expense' | 'Closing' | 'Receipt' | 'Expense' | 'Closing' | 'Receipt' | 'Expense' | 'Closing' |
+			| 'Recorder'                                  | 'Agreement'                                                                                                              | 'Currency' | 'Multi currency movement type' | ''        | ''        | ''        | ''        | ''        | ''        | ''        | ''        | ''        | ''        | ''        | ''        | ''        | ''        | ''        | ''        | ''        | ''        |
+			| 'Own company 2'                             | ''                                                                                                                       | ''         | ''                             | '9,80'    | ''        | '9,80'    | ''        | ''        | ''        | ''        | ''        | ''        | ''        | ''        | ''        | ''        | ''        | ''        | '9,80'    | ''        | '9,80'    |
+			| 'Other partner'                             | 'Other partner'                                                                                                          | ''         | ''                             | '9,80'    | ''        | '9,80'    | ''        | ''        | ''        | ''        | ''        | ''        | ''        | ''        | ''        | ''        | ''        | ''        | '9,80'    | ''        | '9,80'    |
+			| 'Bank payment 13 dated 22.03.2024 10:51:11' | 'Other partner term'                                                                                                     | 'TRY'      | 'Legal currency, TRY'          | '9,80'    | ''        | '9,80'    | ''        | ''        | ''        | ''        | ''        | ''        | ''        | ''        | ''        | ''        | ''        | ''        | '9,80'    | ''        | '9,80'    |
+			| 'Total'                                     | ''                                                                                                                       | ''         | ''                             | '9,80'    | ''        | '9,80'    | ''        | ''        | ''        | ''        | ''        | ''        | ''        | ''        | ''        | ''        | ''        | ''        | '9,80'    | ''        | '9,80'    |
+	And I close all client application windows
+	
+
+Scenario: _52011 BR (OtherPartner)
+	And I close all client application windows
+	* Open report R5020_PartnersBalance and select option
+		Given I open hyperlink "e1cib/app/Report.R5020_PartnersBalance"
+		And I click "Select option..." button
+		Then "Load form" window is opened
+		And I go to line in "OptionsList" table
+			| 'Report option'  |
+			| 'For test'       |
+		And I select current line in "OptionsList" table
+	* Select partner, period and currency movement type
+		And I click Choice button of the field named "SettingsComposerUserSettingsItem0Value"
+		And I input "11.01.2024" text in the field named "DateBegin"
+		And I input "11.01.2024" text in the field named "DateEnd"
+		And I click the button named "Select"
+		And I select from the drop-down list named "SettingsComposerUserSettingsItem1Value" by "Legal currency, TRY" string
+		And I select from the drop-down list named "SettingsComposerUserSettingsItem2Value" by "Other partner" string
+		And I click "Generate" button
+		And "Result" spreadsheet document contains lines:				
+			| 'Company'                                   | ''                                                                                                                       | ''         | ''                             | 'Amount'  | ''        | ''        | 'CA'      | ''        | ''        | 'CT'      | ''        | ''        | 'VA'      | ''        | ''        | 'VT'      | ''        | ''        | 'Other'   | ''        | ''        |
+			| 'Partner'                                   | 'Legal name'                                                                                                             | ''         | ''                             | 'Receipt' | 'Expense' | 'Closing' | 'Receipt' | 'Expense' | 'Closing' | 'Receipt' | 'Expense' | 'Closing' | 'Receipt' | 'Expense' | 'Closing' | 'Receipt' | 'Expense' | 'Closing' | 'Receipt' | 'Expense' | 'Closing' |
+			| 'Recorder'                                  | 'Agreement'                                                                                                              | 'Currency' | 'Multi currency movement type' | ''        | ''        | ''        | ''        | ''        | ''        | ''        | ''        | ''        | ''        | ''        | ''        | ''        | ''        | ''        | ''        | ''        | ''        |
+			| 'Own company 2'                             | ''                                                                                                                       | ''         | ''                             | ''        | '490,00'  | ''        | ''        | ''        | ''        | ''        | ''        | ''        | ''        | ''        | ''        | ''        | ''        | ''        | ''        | '490,00'  | ''        |
+			| 'Other partner'                             | 'Other partner'                                                                                                          | ''         | ''                             | ''        | '490,00'  | ''        | ''        | ''        | ''        | ''        | ''        | ''        | ''        | ''        | ''        | ''        | ''        | ''        | ''        | '490,00'  | ''        |
+			| 'Bank receipt 14 dated 11.01.2024 10:00:00' | 'Other partner term'                                                                                                     | 'TRY'      | 'Legal currency, TRY'          | ''        | '490,00'  | ''        | ''        | ''        | ''        | ''        | ''        | ''        | ''        | ''        | ''        | ''        | ''        | ''        | ''        | '490,00'  | ''        |
+			| 'Total'                                     | ''                                                                                                                       | ''         | ''                             | ''        | '490,00'  | ''        | ''        | ''        | ''        | ''        | ''        | ''        | ''        | ''        | ''        | ''        | ''        | ''        | ''        | '490,00'  | ''        |
+		And I close all client application windows
+
+Scenario: _52011 CR (OtherPartner)
+	And I close all client application windows
+	* Open report R5020_PartnersBalance and select option
+		Given I open hyperlink "e1cib/app/Report.R5020_PartnersBalance"
+		And I click "Select option..." button
+		Then "Load form" window is opened
+		And I go to line in "OptionsList" table
+			| 'Report option'  |
+			| 'For test'       |
+		And I select current line in "OptionsList" table
+	* Select partner, period and currency movement type
+		And I click Choice button of the field named "SettingsComposerUserSettingsItem0Value"
+		And I input "02.12.2023" text in the field named "DateBegin"
+		And I input "02.12.2023" text in the field named "DateEnd"
+		And I click the button named "Select"
+		And I select from the drop-down list named "SettingsComposerUserSettingsItem1Value" by "Legal currency, TRY" string
+		And I select from the drop-down list named "SettingsComposerUserSettingsItem2Value" by "Other partner" string
+		And I click "Generate" button
+		
+		And I close all client application windows
+
+Scenario: _52012 BR (AP - by documents, BR - ReturnFromVendor, IsAdvance = True, without vendor advance closing)
+	And I close all client application windows
+	* Open report R5020_PartnersBalance and select option
+		Given I open hyperlink "e1cib/app/Report.R5020_PartnersBalance"
+		And I click "Select option..." button
+		Then "Load form" window is opened
+		And I go to line in "OptionsList" table
+			| 'Report option'  |
+			| 'For test'       |
+		And I select current line in "OptionsList" table
+	* Select partner, period and currency movement type
+		And I click Choice button of the field named "SettingsComposerUserSettingsItem0Value"
+		And I input "01.12.2023" text in the field named "DateBegin"
+		And I input "05.12.2023" text in the field named "DateEnd"
+		And I click the button named "Select"
+		And I select from the drop-down list named "SettingsComposerUserSettingsItem1Value" by "Legal currency, TRY" string
+		And I select from the drop-down list named "SettingsComposerUserSettingsItem2Value" by "Customer and vendor" string
+		And I click "Generate" button
+		And "Result" spreadsheet document contains lines:
+			| 'Company'                                      | ''                                                                                                                             | ''         | ''                             | 'Amount'   | ''         | ''          | 'CA'      | ''        | ''        | 'CT'      | ''        | ''        | 'VA'       | ''        | ''         | 'VT'       | ''         | ''          | 'Other'   | ''        | ''        |
+			| 'Partner'                                      | 'Legal name'                                                                                                                   | ''         | ''                             | 'Receipt'  | 'Expense'  | 'Closing'   | 'Receipt' | 'Expense' | 'Closing' | 'Receipt' | 'Expense' | 'Closing' | 'Receipt'  | 'Expense' | 'Closing'  | 'Receipt'  | 'Expense'  | 'Closing'   | 'Receipt' | 'Expense' | 'Closing' |
+			| 'Recorder'                                     | 'Agreement'                                                                                                                    | 'Currency' | 'Multi currency movement type' | ''         | ''         | ''          | ''        | ''        | ''        | ''        | ''        | ''        | ''         | ''        | ''         | ''         | ''         | ''          | ''        | ''        | ''        |
+			| 'Own company 2'                                | ''                                                                                                                             | ''         | ''                             | '5 200,00' | '9 735,00' | '-4 535,00' | ''        | ''        | ''        | ''        | ''        | ''        | '1 200,00' | '50,00'   | '1 150,00' | '4 000,00' | '9 685,00' | '-5 685,00' | ''        | ''        | ''        |
+			| 'Customer and vendor'                          | 'Client and vendor'                                                                                                            | ''         | ''                             | '5 200,00' | '9 735,00' | '-4 535,00' | ''        | ''        | ''        | ''        | ''        | ''        | '1 200,00' | '50,00'   | '1 150,00' | '4 000,00' | '9 685,00' | '-5 685,00' | ''        | ''        | ''        |
+			| 'Purchase invoice 5 dated 02.12.2023 12:30:00' | 'Partner term with vendor (advance payment by document)'                                                                       | 'TRY'      | 'Legal currency, TRY'          | ''         | '9 685,00' | '-9 685,00' | ''        | ''        | ''        | ''        | ''        | ''        | ''         | ''        | ''         | ''         | '9 685,00' | '-9 685,00' | ''        | ''        | ''        |
+			| 'Bank payment 8 dated 02.12.2023 16:00:00'     | 'Partner term with vendor (advance payment by document)'                                                                       | 'TRY'      | 'Legal currency, TRY'          | '4 000,00' | ''         | '-5 685,00' | ''        | ''        | ''        | ''        | ''        | ''        | ''         | ''        | ''         | '4 000,00' | ''         | '-5 685,00' | ''        | ''        | ''        |
+			| 'Cash payment 5 dated 03.12.2023 12:00:00'     | 'Partner term with vendor (advance payment by document)'                                                                       | 'TRY'      | 'Legal currency, TRY'          | '1 000,00' | ''         | '-4 685,00' | ''        | ''        | ''        | ''        | ''        | ''        | '1 000,00' | ''        | '1 000,00' | ''         | ''         | '-5 685,00' | ''        | ''        | ''        |
+			| 'Bank payment 9 dated 03.12.2023 12:30:00'     | 'Partner term with vendor (advance payment by document)'                                                                       | 'TRY'      | 'Legal currency, TRY'          | '200,00'   | ''         | '-4 485,00' | ''        | ''        | ''        | ''        | ''        | ''        | '200,00'   | ''        | '1 200,00' | ''         | ''         | '-5 685,00' | ''        | ''        | ''        |
+			| 'Bank receipt 13 dated 05.12.2023 10:00:00'    | 'Partner term with vendor (advance payment by document)'                                                                       | 'TRY'      | 'Legal currency, TRY'          | ''         | '50,00'    | '-4 535,00' | ''        | ''        | ''        | ''        | ''        | ''        | ''         | '50,00'   | '1 150,00' | ''         | ''         | '-5 685,00' | ''        | ''        | ''        |
+			| 'Total'                                        | ''                                                                                                                             | ''         | ''                             | '5 200,00' | '9 735,00' | '-4 535,00' | ''        | ''        | ''        | ''        | ''        | ''        | '1 200,00' | '50,00'   | '1 150,00' | '4 000,00' | '9 685,00' | '-5 685,00' | ''        | ''        | ''        |
+		And I close all client application windows
+		
+Scenario: _52013 ECA (is Purchase)
+	And I close all client application windows
+	* Open report R5020_PartnersBalance and select option
+		Given I open hyperlink "e1cib/app/Report.R5020_PartnersBalance"
+		And I click "Select option..." button
+		Then "Load form" window is opened
+		And I go to line in "OptionsList" table
+			| 'Report option'  |
+			| 'For test'       |
+		And I select current line in "OptionsList" table
+	* Select partner, period and currency movement type
+		And I click Choice button of the field named "SettingsComposerUserSettingsItem0Value"
+		And I input "22.03.2024" text in the field named "DateBegin"
+		And I input "22.03.2024" text in the field named "DateEnd"
+		And I click the button named "Select"
+		And I select from the drop-down list named "SettingsComposerUserSettingsItem1Value" by "Legal currency, TRY" string
+		And I select from the drop-down list named "SettingsComposerUserSettingsItem2Value" by "Vendor 1 (1 partner term)" string
+		And I click "Generate" button
+		Then "Result" spreadsheet document is equal
+			| 'Company'                                           | ''                           | ''         | ''                             | 'Amount'  | ''        | ''        | 'CA'      | ''        | ''        | 'CT'      | ''        | ''        | 'VA'      | ''        | ''        | 'VT'      | ''        | ''        | 'Other'   | ''        | ''        |
+			| 'Partner'                                           | 'Legal name'                 | ''         | ''                             | 'Receipt' | 'Expense' | 'Closing' | 'Receipt' | 'Expense' | 'Closing' | 'Receipt' | 'Expense' | 'Closing' | 'Receipt' | 'Expense' | 'Closing' | 'Receipt' | 'Expense' | 'Closing' | 'Receipt' | 'Expense' | 'Closing' |
+			| 'Recorder'                                          | 'Agreement'                  | 'Currency' | 'Multi currency movement type' | ''        | ''        | ''        | ''        | ''        | ''        | ''        | ''        | ''        | ''        | ''        | ''        | ''        | ''        | ''        | ''        | ''        | ''        |
+			| 'Own company 2'                                     | ''                           | ''         | ''                             | '200,00'  | ''        | '*'       | ''        | ''        | ''        | ''        | ''        | ''        | ''        | ''        | ''        | '200,00'  | ''        | '*'       | ''        | ''        | ''        |
+			| 'Vendor 1 (1 partner term)'                         | 'Vendor 1'                   | ''         | ''                             | '200,00'  | ''        | '*'       | ''        | ''        | ''        | ''        | ''        | ''        | ''        | ''        | ''        | '200,00'  | ''        | '*'       | ''        | ''        | ''        |
+			| 'Employee cash advance 3 dated 22.03.2024 11:52:17' | 'Partner term with vendor 1' | 'TRY'      | 'Legal currency, TRY'          | '200,00'  | ''        | '*'       | ''        | ''        | ''        | ''        | ''        | ''        | ''        | ''        | ''        | '200,00'  | ''        | '*'       | ''        | ''        | ''        |
+		And I close all client application windows
+		
+Scenario: _52014 RSR - RRR - BR (StatusType = Completed, UsePartnerTransactions, BR - Payment from customer by POS, IsAdvance = True)
+	And I close all client application windows
+	* Open report R5020_PartnersBalance and select option
+		Given I open hyperlink "e1cib/app/Report.R5020_PartnersBalance"
+		And I click "Select option..." button
+		Then "Load form" window is opened
+		And I go to line in "OptionsList" table
+			| 'Report option'  |
+			| 'For test'       |
+		And I select current line in "OptionsList" table
+	* Select partner, period and currency movement type
+		And I click Choice button of the field named "SettingsComposerUserSettingsItem0Value"
+		And I input "02.02.2024" text in the field named "DateBegin"
+		And I input "02.02.2024" text in the field named "DateEnd"
+		And I click the button named "Select"
+		And I select from the drop-down list named "SettingsComposerUserSettingsItem1Value" by "Legal currency, TRY" string
+		And I select from the drop-down list named "SettingsComposerUserSettingsItem2Value" by "Customer 3" string
+		And I click "Generate" button
+		Then "Result" spreadsheet document is equal
+			| 'Company'                                           | ''                                                                                                                    | ''         | ''                             | 'Amount'  | ''        | ''        | 'CA'      | ''        | ''        | 'CT'      | ''        | ''        | 'VA'      | ''        | ''        | 'VT'      | ''        | ''        | 'Other'   | ''        | ''        |
+			| 'Partner'                                           | 'Legal name'                                                                                                          | ''         | ''                             | 'Receipt' | 'Expense' | 'Closing' | 'Receipt' | 'Expense' | 'Closing' | 'Receipt' | 'Expense' | 'Closing' | 'Receipt' | 'Expense' | 'Closing' | 'Receipt' | 'Expense' | 'Closing' | 'Receipt' | 'Expense' | 'Closing' |
+			| 'Recorder'                                          | 'Agreement'                                                                                                           | 'Currency' | 'Multi currency movement type' | ''        | ''        | ''        | ''        | ''        | ''        | ''        | ''        | ''        | ''        | ''        | ''        | ''        | ''        | ''        | ''        | ''        | ''        |
+			| 'Own company 2'                                     | ''                                                                                                                    | ''         | ''                             | ''        | '100,00'  | '-100,00' | ''        | '100,00'  | '-200,00' | ''        | ''        | '100,00'  | ''        | ''        | ''        | ''        | ''        | ''        | ''        | ''        | ''        |
+			| 'Customer 3'                                        | 'Client 3'                                                                                                            | ''         | ''                             | ''        | '100,00'  | '-100,00' | ''        | '100,00'  | '-200,00' | ''        | ''        | '100,00'  | ''        | ''        | ''        | ''        | ''        | ''        | ''        | ''        | ''        |
+			| 'Retail sales receipt 4 dated 02.02.2024 00:00:05'  | 'Partner term with customer (by document + credit limit)'                                                             | 'TRY'      | 'Legal currency, TRY'          | '490,00'  | '490,00'  | ''        | ''        | ''        | '-100,00' | '490,00'  | '490,00'  | '100,00'  | ''        | ''        | ''        | ''        | ''        | ''        | ''        | ''        | ''        |
+			| 'Bank receipt 15 dated 02.02.2024 10:00:00'         | 'Partner term with customer (by document + credit limit)'                                                             | 'TRY'      | 'Legal currency, TRY'          | ''        | '100,00'  | '-100,00' | ''        | '100,00'  | '-200,00' | ''        | ''        | '100,00'  | ''        | ''        | ''        | ''        | ''        | ''        | ''        | ''        | ''        |
+			| 'Retail return receipt 2 dated 02.02.2024 16:00:00' | 'Partner term with customer (by document + credit limit)'                                                             | 'TRY'      | 'Legal currency, TRY'          | '-490,00' | '-490,00' | '-100,00' | ''        | ''        | '-200,00' | '-490,00' | '-490,00' | '100,00'  | ''        | ''        | ''        | ''        | ''        | ''        | ''        | ''        | ''        |
+			| 'Total'                                             | ''                                                                                                                    | ''         | ''                             | ''        | '100,00'  | '-100,00' | ''        | '100,00'  | '-200,00' | ''        | ''        | '100,00'  | ''        | ''        | ''        | ''        | ''        | ''        | ''        | ''        | ''        |	
+		And I close all client application windows
+
+
+
+Scenario: _52030 BR - SI - DN (AR - by documents, BR - payment from customer, IsAdvance = True, with customer advance closing)
+	And I close all client application windows
+	* Preparation
+		Given I open hyperlink "e1cib/list/Document.CustomersAdvancesClosing"		
+		And I go to line in "List" table
+			| 'Number' |
+			| '1'      |
+		And in the table "List" I click the button named "ListContextMenuPost"
+		And I go to line in "List" table
+			| 'Number' |
+			| '2'      |
+		And in the table "List" I click the button named "ListContextMenuPost"
+		And I go to line in "List" table
+			| 'Number' |
+			| '3'      |
+		And in the table "List" I click the button named "ListContextMenuPost"
+		And I go to line in "List" table
+			| 'Number' |
+			| '4'      |
+		And in the table "List" I click the button named "ListContextMenuPost"
+		And I go to line in "List" table
+			| 'Number' |
+			| '5'      |
+		And in the table "List" I click the button named "ListContextMenuPost"
+	* Open report R5020_PartnersBalance and select option
+		Given I open hyperlink "e1cib/app/Report.R5020_PartnersBalance"
+		And I click "Select option..." button
+		Then "Load form" window is opened
+		And I go to line in "OptionsList" table
+			| 'Report option'  |
+			| 'For test'       |
+		And I select current line in "OptionsList" table
+	* Select partner, period and currency movement type
+		And I click Choice button of the field named "SettingsComposerUserSettingsItem0Value"
+		And I input "30.03.2023" text in the field named "DateBegin"
+		And I input "01.04.2023" text in the field named "DateEnd"
+		And I click the button named "Select"
+		And I select from the drop-down list named "SettingsComposerUserSettingsItem1Value" by "Legal currency, TRY" string
+		And I select from the drop-down list named "SettingsComposerUserSettingsItem2Value" by "Customer 1 (3 partner terms)" string
+		And I click "Generate" button
+	* Check
+		And "Result" spreadsheet document contains lines:
+			| 'Company'                                   | ''                                                        | ''         | ''                             | 'Amount'  | ''        | ''        | 'CA'      | ''        | ''        | 'CT'      | ''        | ''        | 'VA'      | ''        | ''        | 'VT'      | ''        | ''        | 'Other'   | ''        | ''        |
+			| 'Partner'                                   | 'Legal name'                                              | ''         | ''                             | 'Receipt' | 'Expense' | 'Closing' | 'Receipt' | 'Expense' | 'Closing' | 'Receipt' | 'Expense' | 'Closing' | 'Receipt' | 'Expense' | 'Closing' | 'Receipt' | 'Expense' | 'Closing' | 'Receipt' | 'Expense' | 'Closing' |
+			| 'Recorder'                                  | 'Agreement'                                               | 'Currency' | 'Multi currency movement type' | ''        | ''        | ''        | ''        | ''        | ''        | ''        | ''        | ''        | ''        | ''        | ''        | ''        | ''        | ''        | ''        | ''        | ''        |
+			| 'Own company 2'                             | ''                                                        | ''         | ''                             | '560,00'  | '390,00'  | '170,00'  | '40,00'   | '350,00'  | '-310,00' | '520,00'  | '40,00'   | '480,00'  | ''        | ''        | ''        | ''        | ''        | ''        | ''        | ''        | ''        |
+			| 'Customer 1 (3 partner terms)'              | 'Client 1'                                                | ''         | ''                             | '560,00'  | '390,00'  | '170,00'  | '40,00'   | '350,00'  | '-310,00' | '520,00'  | '40,00'   | '480,00'  | ''        | ''        | ''        | ''        | ''        | ''        | ''        | ''        | ''        |
+			| 'Sales invoice 3 dated 30.03.2023 12:23:56' | 'Partner term with customer (by document + credit limit)' | 'TRY'      | 'Legal currency, TRY'          | '480,00'  | ''        | '480,00'  | ''        | ''        | ''        | '480,00'  | ''        | '480,00'  | ''        | ''        | ''        | ''        | ''        | ''        | ''        | ''        | ''        |
+			| 'Bank receipt 3 dated 01.04.2023 13:53:41'  | 'Partner term with customer (by document + credit limit)' | 'TRY'      | 'Legal currency, TRY'          | ''        | '350,00'  | '130,00'  | ''        | '350,00'  | '-350,00' | ''        | ''        | '480,00'  | ''        | ''        | ''        | ''        | ''        | ''        | ''        | ''        | ''        |
+			| 'Debit note 2 dated 01.04.2023 14:10:35'    | 'Partner term with customer (by document + credit limit)' | 'TRY'      | 'Legal currency, TRY'          | '80,00'   | '40,00'   | '170,00'  | '40,00'   | ''        | '-310,00' | '40,00'   | '40,00'   | '480,00'  | ''        | ''        | ''        | ''        | ''        | ''        | ''        | ''        | ''        |
+			| 'Total'                                     | ''                                                        | ''         | ''                             | '560,00'  | '390,00'  | '170,00'  | '40,00'   | '350,00'  | '-310,00' | '520,00'  | '40,00'   | '480,00'  | ''        | ''        | ''        | ''        | ''        | ''        | ''        | ''        | ''        |
+		And I close all client application windows
+
+Scenario: _52031 PI-BP-CP (AP - by documents, CP,BP-IsAdvance = True, with vendor advance closing )
+	And I close all client application windows
+	* Preparation
+		Given I open hyperlink "e1cib/list/Document.VendorsAdvancesClosing"		
+		And I go to line in "List" table
+			| 'Number' |
+			| '12'     |
+		And in the table "List" I click the button named "ListContextMenuPost"
+	* Open report R5020_PartnersBalance and select option
+		Given I open hyperlink "e1cib/app/Report.R5020_PartnersBalance"
+		And I click "Select option..." button
+		Then "Load form" window is opened
+		And I go to line in "OptionsList" table
+			| 'Report option'  |
+			| 'For test'       |
+		And I select current line in "OptionsList" table
+	* Select partner, period and currency movement type
+		And I click Choice button of the field named "SettingsComposerUserSettingsItem0Value"
+		And I input "02.12.2023" text in the field named "DateBegin"
+		And I input "03.12.2023" text in the field named "DateEnd"
+		And I click the button named "Select"
+		And I select from the drop-down list named "SettingsComposerUserSettingsItem1Value" by "Legal currency, TRY" string
+		And I select from the drop-down list named "SettingsComposerUserSettingsItem2Value" by "Customer and vendor" string
+		And I click "Generate" button
+	* Check				
+		And "Result" spreadsheet document contains lines:
+			| 'Company'                                      | ''                                                       | ''         | ''                             | 'Amount'   | ''         | ''          | 'CA'      | ''        | ''        | 'CT'      | ''        | ''        | 'VA'       | ''         | ''        | 'VT'       | ''         | ''          | 'Other'   | ''        | ''        |
+			| 'Partner'                                      | 'Legal name'                                             | ''         | ''                             | 'Receipt'  | 'Expense'  | 'Closing'   | 'Receipt' | 'Expense' | 'Closing' | 'Receipt' | 'Expense' | 'Closing' | 'Receipt'  | 'Expense'  | 'Closing' | 'Receipt'  | 'Expense'  | 'Closing'   | 'Receipt' | 'Expense' | 'Closing' |
+			| 'Recorder'                                     | 'Agreement'                                              | 'Currency' | 'Multi currency movement type' | ''         | ''         | ''          | ''        | ''        | ''        | ''        | ''        | ''        | ''         | ''         | ''        | ''         | ''         | ''          | ''        | ''        | ''        |
+			| 'Own company 2'                                | ''                                                       | ''         | ''                             | '5 200,00' | '9 685,00' | '-4 485,00' | ''        | ''        | ''        | ''        | ''        | ''        | '1 200,00' | '1 200,00' | ''        | '5 200,00' | '9 685,00' | '-4 485,00' | ''        | ''        | ''        |
+			| 'Customer and vendor'                          | 'Client and vendor'                                      | ''         | ''                             | '5 200,00' | '9 685,00' | '-4 485,00' | ''        | ''        | ''        | ''        | ''        | ''        | '1 200,00' | '1 200,00' | ''        | '5 200,00' | '9 685,00' | '-4 485,00' | ''        | ''        | ''        |
+			| 'Purchase invoice 5 dated 02.12.2023 12:30:00' | 'Partner term with vendor (advance payment by document)' | 'TRY'      | 'Legal currency, TRY'          | ''         | '9 685,00' | '-9 685,00' | ''        | ''        | ''        | ''        | ''        | ''        | ''         | ''         | ''        | ''         | '9 685,00' | '-9 685,00' | ''        | ''        | ''        |
+			| 'Bank payment 8 dated 02.12.2023 16:00:00'     | 'Partner term with vendor (advance payment by document)' | 'TRY'      | 'Legal currency, TRY'          | '4 000,00' | ''         | '-5 685,00' | ''        | ''        | ''        | ''        | ''        | ''        | ''         | ''         | ''        | '4 000,00' | ''         | '-5 685,00' | ''        | ''        | ''        |
+			| 'Cash payment 5 dated 03.12.2023 12:00:00'     | 'Partner term with vendor (advance payment by document)' | 'TRY'      | 'Legal currency, TRY'          | '1 000,00' | ''         | '-4 685,00' | ''        | ''        | ''        | ''        | ''        | ''        | '1 000,00' | '1 000,00' | ''        | '1 000,00' | ''         | '-4 685,00' | ''        | ''        | ''        |
+			| 'Bank payment 9 dated 03.12.2023 12:30:00'     | 'Partner term with vendor (advance payment by document)' | 'TRY'      | 'Legal currency, TRY'          | '200,00'   | ''         | '-4 485,00' | ''        | ''        | ''        | ''        | ''        | ''        | '200,00'   | '200,00'   | ''        | '200,00'   | ''         | '-4 485,00' | ''        | ''        | ''        |
+			| 'Total'                                        | ''                                                       | ''         | ''                             | '5 200,00' | '9 685,00' | '-4 485,00' | ''        | ''        | ''        | ''        | ''        | ''        | '1 200,00' | '1 200,00' | ''        | '5 200,00' | '9 685,00' | '-4 485,00' | ''        | ''        | ''        |
+		And I close all client application windows
+
+Scenario: _52032 SI-BR-SR-BP (AP - by documents, BP - Return to customer, BR- Payment from customer, IsAdvance = True, IsAdvance = False, with customer advance closing)
 	And I close all client application windows
 	* Preparation
 		Given I open hyperlink "e1cib/list/Document.CustomersAdvancesClosing"		
@@ -805,5 +971,37 @@ Scenario: _52010 SI-BR-SR-BP (AP - by documents, BP - Return to customer, BR- Pa
 		And I select from the drop-down list named "SettingsComposerUserSettingsItem2Value" by "Customer 3" string
 		And I click "Generate" button
 		And "Result" spreadsheet document contains lines:
+			| 'Company'                                    | ''                                                                                                                    | ''         | ''                             | 'Amount'  | ''        | ''        | 'CA'      | ''        | ''        | 'CT'      | ''        | ''        | 'VA'      | ''        | ''        | 'VT'      | ''        | ''        | 'Other'   | ''        | ''        |
+			| 'Partner'                                    | 'Legal name'                                                                                                          | ''         | ''                             | 'Receipt' | 'Expense' | 'Closing' | 'Receipt' | 'Expense' | 'Closing' | 'Receipt' | 'Expense' | 'Closing' | 'Receipt' | 'Expense' | 'Closing' | 'Receipt' | 'Expense' | 'Closing' | 'Receipt' | 'Expense' | 'Closing' |
+			| 'Recorder'                                   | 'Agreement'                                                                                                           | 'Currency' | 'Multi currency movement type' | ''        | ''        | ''        | ''        | ''        | ''        | ''        | ''        | ''        | ''        | ''        | ''        | ''        | ''        | ''        | ''        | ''        | ''        |
+			| 'Own company 2'                              | ''                                                                                                                    | ''         | ''                             | '750,00'  | '750,00'  | ''        | '550,00'  | '550,00'  | ''        | '600,00'  | '600,00'  | ''        | ''        | ''        | ''        | ''        | ''        | ''        | ''        | ''        | ''        |
+			| 'Customer 3'                                 | 'Client 3'                                                                                                            | ''         | ''                             | '750,00'  | '750,00'  | ''        | '550,00'  | '550,00'  | ''        | '600,00'  | '600,00'  | ''        | ''        | ''        | ''        | ''        | ''        | ''        | ''        | ''        | ''        |
+			| 'Sales invoice 12 dated 02.12.2023 12:00:00' | 'Partner term with customer (by document + credit limit)'                                                             | 'TRY'      | 'Legal currency, TRY'          | '750,00'  | ''        | '750,00'  | ''        | ''        | ''        | '750,00'  | ''        | '750,00'  | ''        | ''        | ''        | ''        | ''        | ''        | ''        | ''        | ''        |
+			| 'Bank receipt 11 dated 02.12.2023 14:00:00'  | 'Partner term with customer (by document + credit limit)'                                                             | 'TRY'      | 'Legal currency, TRY'          | ''        | '500,00'  | '250,00'  | ''        | ''        | ''        | ''        | '500,00'  | '250,00'  | ''        | ''        | ''        | ''        | ''        | ''        | ''        | ''        | ''        |
+			| 'Bank receipt 12 dated 02.12.2023 15:00:00'  | 'Partner term with customer (by document + credit limit)'                                                             | 'TRY'      | 'Legal currency, TRY'          | ''        | '250,00'  | ''        | '250,00'  | '250,00'  | ''        | ''        | '250,00'  | ''        | ''        | ''        | ''        | ''        | ''        | ''        | ''        | ''        | ''        |
+			| 'Sales return 7 dated 04.12.2023 12:00:00'   | 'Partner term with customer (by document + credit limit)'                                                             | 'TRY'      | 'Legal currency, TRY'          | '-300,00' | ''        | '-300,00' | ''        | '300,00'  | '-300,00' | '-300,00' | '-300,00' | ''        | ''        | ''        | ''        | ''        | ''        | ''        | ''        | ''        | ''        |
+			| 'Bank payment 11 dated 04.12.2023 16:00:00'  | 'Partner term with customer (by document + credit limit)'                                                             | 'TRY'      | 'Legal currency, TRY'          | '150,00'  | ''        | '-150,00' | '150,00'  | ''        | '-150,00' | ''        | ''        | ''        | ''        | ''        | ''        | ''        | ''        | ''        | ''        | ''        | ''        |
+			| 'Bank payment 12 dated 05.12.2023 12:00:00'  | 'Partner term with customer (by document + credit limit)'                                                             | 'TRY'      | 'Legal currency, TRY'          | '150,00'  | ''        | ''        | '150,00'  | ''        | ''        | '150,00'  | '150,00'  | ''        | ''        | ''        | ''        | ''        | ''        | ''        | ''        | ''        | ''        |
+			| 'Total'                                      | ''                                                                                                                    | ''         | ''                             | '750,00'  | '750,00'  | ''        | '550,00'  | '550,00'  | ''        | '600,00'  | '600,00'  | ''        | ''        | ''        | ''        | ''        | ''        | ''        | ''        | ''        | ''        |		
 		And I close all client application windows
-				
+
+
+// Scenario: _52013 BR (AP - by documents, BR - ReturnFromVendor, IsAdvance = True, with vendor advance closing)
+// 	And I close all client application windows
+// 	* Open report R5020_PartnersBalance and select option
+// 		Given I open hyperlink "e1cib/app/Report.R5020_PartnersBalance"
+// 		And I click "Select option..." button
+// 		Then "Load form" window is opened
+// 		And I go to line in "OptionsList" table
+// 			| 'Report option'  |
+// 			| 'For test'       |
+// 		And I select current line in "OptionsList" table
+// 	* Select partner, period and currency movement type
+// 		And I click Choice button of the field named "SettingsComposerUserSettingsItem0Value"
+// 		And I input "11.01.2024" text in the field named "DateBegin"
+// 		And I input "11.01.2024" text in the field named "DateEnd"
+// 		And I click the button named "Select"
+// 		And I select from the drop-down list named "SettingsComposerUserSettingsItem1Value" by "Legal currency, TRY" string
+// 		And I select from the drop-down list named "SettingsComposerUserSettingsItem2Value" by "Other partner" string
+// 		And I click "Generate" button
+		

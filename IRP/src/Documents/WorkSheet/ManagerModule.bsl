@@ -31,7 +31,7 @@ Function WorkSheetPrint(Ref, Param)
 	|	DocumentHeader.Partner.Description_en AS Partner,
 	|	DocumentHeader.Author AS Author,
 	|	DocumentHeader.Ref AS Ref,
-	|	DocumentHeader.Currency.Description_en AS Currency
+	|	DocumentHeader.Currency.Code AS Currency
 	|FROM
 	|	Document.WorkSheet AS DocumentHeader
 	|WHERE
@@ -67,7 +67,6 @@ Function WorkSheetPrint(Ref, Param)
 	LCode = Param.DataLang;
 	Text = LocalizationEvents.ReplaceDescriptionLocalizationPrefix(Text, "DocumentHeader.Company", LCode);
 	Text = LocalizationEvents.ReplaceDescriptionLocalizationPrefix(Text, "DocumentHeader.Partner", LCode);
-	Text = LocalizationEvents.ReplaceDescriptionLocalizationPrefix(Text, "DocumentHeader.Currency", LCode);
 	Text = LocalizationEvents.ReplaceDescriptionLocalizationPrefix(Text, "DocumentItemList.ItemKey.Item", LCode);
 	Text = LocalizationEvents.ReplaceDescriptionLocalizationPrefix(Text, "DocumentItemList.ItemKey", LCode);
 	Text = LocalizationEvents.ReplaceDescriptionLocalizationPrefix(Text, "DocumentItemList.Unit", LCode);

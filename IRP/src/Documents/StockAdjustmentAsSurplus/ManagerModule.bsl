@@ -31,7 +31,7 @@ Function StockAdjustmentAsSurplusPrint(Ref, Param)
 	|	DocumentHeader.Store.Description_en AS Store,
 	|	DocumentHeader.Author AS Author,
 	|	DocumentHeader.Ref AS Ref,
-	|	DocumentHeader.Currency.Description_en AS Currency
+	|	DocumentHeader.Currency.Code AS Currency
 	|FROM
 	|	Document.StockAdjustmentAsSurplus AS DocumentHeader
 	|WHERE
@@ -75,7 +75,6 @@ Function StockAdjustmentAsSurplusPrint(Ref, Param)
 	LCode = Param.DataLang;
 	Text = LocalizationEvents.ReplaceDescriptionLocalizationPrefix(Text, "DocumentHeader.Company", LCode);
 	Text = LocalizationEvents.ReplaceDescriptionLocalizationPrefix(Text, "DocumentHeader.Store", LCode);
-	Text = LocalizationEvents.ReplaceDescriptionLocalizationPrefix(Text, "DocumentHeader.Currency", LCode);
 	Text = LocalizationEvents.ReplaceDescriptionLocalizationPrefix(Text, "DocumentItemList.ItemKey.Item", LCode);
 	Text = LocalizationEvents.ReplaceDescriptionLocalizationPrefix(Text, "DocumentItemList.ItemKey", LCode);
 	Text = LocalizationEvents.ReplaceDescriptionLocalizationPrefix(Text, "DocumentItemList.Unit", LCode);

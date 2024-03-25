@@ -22,6 +22,7 @@ Function WorkOrderPrint(Ref, Param)
 		
 	Template = GetTemplate("WorkOrderPrint");
 	Template.LanguageCode = Param.LayoutLang;
+	
 	Query = New Query;
 	Text =
 	"SELECT

@@ -63,7 +63,6 @@ Procedure Filling(FillingData, FillingText, StandardProcessing)
 				Continue;
 			EndIf;
 			
-			
 			FillingStructure.Insert(Tab.Name, New Array());
 			For Each Row In Basis[Tab.Name] Do
 				NewRow = New Structure();
@@ -71,7 +70,6 @@ Procedure Filling(FillingData, FillingText, StandardProcessing)
 					If ThisMetadata.TabularSections[Tab.Name].Attributes.Find(Column.Name) = Undefined Then
 						Continue;
 					EndIf;
-					
 					
 					NewRow.Insert(Column.Name, Row[Column.Name]);
 				EndDo;

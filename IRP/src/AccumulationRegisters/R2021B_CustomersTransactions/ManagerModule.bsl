@@ -377,8 +377,6 @@ Function R2021B_CustomersTransactions_DebitCreditNote() Export
 //4. Vendor transactions (VT) - Customer transactions (CT) - минус - минус
 //15. Customer transactions (CT) - Customer transactions (CT)- минус - плюс 
 
-
-
 	Return
 		"SELECT
 		|case when Doc.PartnersIsEqual then

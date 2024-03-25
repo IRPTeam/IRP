@@ -1470,7 +1470,6 @@ Procedure RevaluateCurrency_Transactions(Parameters,
 	AccountingOperations.Insert(Type("DocumentRef.SalesInvoice")    , Op.SalesInvoice_DR_R2021B_CustomersTransactions_CR_R5021T_Revenues_CurrencyRevaluation);
 	AccountingOperations.Insert(Type("DocumentRef.PurchaseInvoice") , Op.PurchaseInvoice_DR_R4050B_StockInventory_R5022T_Expenses_CR_R1021B_VendorsTransactions_CurrencyRevaluation);
 	
-	
 	For Each QueryTableRow In QueryTable Do
 		NewRow_RecordSet = RecordSet_Transactions.Add();
 		FillPropertyValues(NewRow_RecordSet, QueryTableRow);
@@ -1493,6 +1492,5 @@ Procedure RevaluateCurrency_Transactions(Parameters,
 		EndIf;
 	EndDo;
 EndProcedure
-
 
 #EndRegion

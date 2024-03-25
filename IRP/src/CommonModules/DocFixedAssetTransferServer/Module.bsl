@@ -87,4 +87,3 @@ Function _GetFixedAssetLocation(Date, Company, FixedAsset) Export
 	Return Result;
 EndFunction
 
-

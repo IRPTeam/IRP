@@ -336,6 +336,9 @@
     <type>
       <types>EnumRef.OfferGroupType</types>
     </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <fillValue xsi:type="core:UndefinedValue"/>
     <use>ForFolderAndItem</use>
   </attributes>
   <tabularSections uuid="0f4c534b-e7a5-4315-af0f-02d495968dc0">

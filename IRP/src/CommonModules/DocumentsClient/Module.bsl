@@ -1448,7 +1448,6 @@ Procedure PickupItemsEnd(ScanData, AddInfo) Export
 		Return;
 	EndIf;
 
-
 	Object 	= AddInfo.Object; // See Document.RetailSalesReceipt.Form.DocumentForm.Object
 	Form 	= AddInfo.Form; // See Document.RetailSalesReceipt.Form.DocumentForm
 	For Each ScanRow In ScanData Do

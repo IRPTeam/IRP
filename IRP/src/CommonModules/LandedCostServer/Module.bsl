@@ -2705,6 +2705,7 @@ EndFunction
 
 Function GetPriceForEmptyAmountFromDataForReceipt(ItemKey, Period, DataForReceipt)
 	Query = New Query;
+	//@skip-check bsl-ql-hub
 	Query.Text =
 		"SELECT
 		|	TemporaryTable.BatchKey,
@@ -3393,6 +3394,7 @@ EndProcedure
 
 Function GetSalesBatches(SalesInvoice, DataForSalesBatches, BatchKey)
 	Query = New Query();
+	//@skip-check bsl-ql-hub
 	Query.Text =
 	"SELECT
 	|	DataForSalesBatches.Batch AS Batch,

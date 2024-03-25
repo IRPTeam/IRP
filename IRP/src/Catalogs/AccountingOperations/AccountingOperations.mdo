@@ -146,14 +146,12 @@
   <predefined>
     <items id="bb863899-549b-4f65-a7fd-4c1f4e53062b">
       <name>Document_BankPayment</name>
-      <description>Bank payment</description>
       <code xsi:type="core:NumberValue">
         <value>1</value>
       </code>
       <isFolder>true</isFolder>
       <content id="0a5ed6e5-a6f6-4167-b3d9-198842f906e6">
         <name>BankPayment_DR_R1020B_AdvancesToVendors_R1021B_VendorsTransactions_CR_R3010B_CashOnHand</name>
-        <description>Dr Partner account - Cr Cash account</description>
         <code xsi:type="core:NumberValue">
           <value>3</value>
         </code>
@@ -167,21 +165,18 @@
     </items>
     <items id="e1dd6187-4d04-4b2a-8c5b-f6ca00ed7cc6">
       <name>Document_BankReceipt</name>
-      <description>Bank receipt</description>
       <code xsi:type="core:NumberValue">
         <value>2</value>
       </code>
       <isFolder>true</isFolder>
       <content id="84005d98-3b5e-4d01-9885-c136d7fa2202">
         <name>BankReceipt_DR_R3010B_CashOnHand_CR_R2020B_AdvancesFromCustomers_R2021B_CustomersTransactions</name>
-        <description>Dr Cash account - Cr partner account</description>
         <code xsi:type="core:NumberValue">
           <value>4</value>
         </code>
       </content>
       <content id="e6f92cc0-3065-4c8d-b902-aee4c0468291">
         <name>BankReceipt_DR_R2021B_CustomersTransactions_CR_R2020B_AdvancesFromCustomers</name>
-        <description></description>
         <code xsi:type="core:NumberValue">
           <value>14</value>
         </code>
@@ -189,42 +184,36 @@
     </items>
     <items id="5780092e-ac78-48e0-8f40-6a3fb575aeb2">
       <name>Document_PurchaseInvoice</name>
-      <description>Purchase invoice</description>
       <code xsi:type="core:NumberValue">
         <value>5</value>
       </code>
       <isFolder>true</isFolder>
       <content id="436a2614-e716-45b0-b595-9b5dc7abd846">
         <name>PurchaseInvoice_DR_R4050B_StockInventory_R5022T_Expenses_CR_R1021B_VendorsTransactions</name>
-        <description>Dr Item key account - Cr Partner account</description>
         <code xsi:type="core:NumberValue">
           <value>6</value>
         </code>
       </content>
       <content id="d758c87d-587a-4d4a-a0dd-fdb979084274">
         <name>PurchaseInvoice_DR_R1021B_VendorsTransactions_CR_R1020B_AdvancesToVendors</name>
-        <description>Dr Partner account trn - Cr Partner account adv</description>
         <code xsi:type="core:NumberValue">
           <value>7</value>
         </code>
       </content>
       <content id="d75b04c3-eee9-4726-821b-2984b3e3d799">
         <name>PurchaseInvoice_DR_R1040B_TaxesOutgoing_CR_R1021B_VendorsTransactions</name>
-        <description>Dr Tax account - Cr Partner account</description>
         <code xsi:type="core:NumberValue">
           <value>8</value>
         </code>
       </content>
       <content id="3139d27d-f017-4cd2-9371-581a24328085">
         <name>PurchaseInvoice_DR_R1021B_VendorsTransactions_CR_R1020B_AdvancesToVendors_CurrencyRevaluation</name>
-        <description></description>
         <code xsi:type="core:NumberValue">
           <value>24</value>
         </code>
       </content>
       <content id="bfff9af6-8d6a-4bb7-bc85-dcb122c941a7">
         <name>PurchaseInvoice_DR_R4050B_StockInventory_R5022T_Expenses_CR_R1021B_VendorsTransactions_CurrencyRevaluation</name>
-        <description></description>
         <code xsi:type="core:NumberValue">
           <value>25</value>
         </code>
@@ -245,49 +234,42 @@
     </items>
     <items id="ac174994-2762-4d95-8dc9-154a578a14a2">
       <name>Document_SalesInvoice</name>
-      <description></description>
       <code xsi:type="core:NumberValue">
         <value>13</value>
       </code>
       <isFolder>true</isFolder>
       <content id="13cc96b1-55aa-4a8f-9ffa-84fd9cd02e1c">
         <name>SalesInvoice_DR_R2021B_CustomersTransactions_CR_R5021T_Revenues</name>
-        <description></description>
         <code xsi:type="core:NumberValue">
           <value>15</value>
         </code>
       </content>
       <content id="1b7650ad-043d-4694-a395-c0f1ec19d281">
         <name>SalesInvoice_DR_R5021T_Revenues_CR_R2040B_TaxesIncoming</name>
-        <description></description>
         <code xsi:type="core:NumberValue">
           <value>16</value>
         </code>
       </content>
       <content id="0e27f185-a673-4288-a461-e63f85ec7165">
         <name>SalesInvoice_DR_R5022T_Expenses_CR_R4050B_StockInventory</name>
-        <description></description>
         <code xsi:type="core:NumberValue">
           <value>17</value>
         </code>
       </content>
       <content id="3070b93b-5d84-4762-a76a-9a4a2167f2ee">
         <name>SalesInvoice_DR_R2020B_AdvancesFromCustomers_CR_R2021B_CustomersTransactions</name>
-        <description></description>
         <code xsi:type="core:NumberValue">
           <value>18</value>
         </code>
       </content>
       <content id="494bc5e0-6a57-4f1c-ad2d-657643e6436f">
         <name>SalesInvoice_DR_R2020B_AdvancesFromCustomers_CR_R2021B_CustomersTransactions_CurrencyRevaluation</name>
-        <description></description>
         <code xsi:type="core:NumberValue">
           <value>22</value>
         </code>
       </content>
       <content id="7c250c81-c5a7-4347-9445-d06ba1390361">
         <name>SalesInvoice_DR_R2021B_CustomersTransactions_CR_R5021T_Revenues_CurrencyRevaluation</name>
-        <description></description>
         <code xsi:type="core:NumberValue">
           <value>23</value>
         </code>
@@ -295,21 +277,18 @@
     </items>
     <items id="75cbb6bf-1e5f-4185-b83d-648393a21e9c">
       <name>Document_ForeignCurrencyRevaluation</name>
-      <description></description>
       <code xsi:type="core:NumberValue">
         <value>19</value>
       </code>
       <isFolder>true</isFolder>
       <content id="dfa58a7e-3be1-4264-80cd-080643a5604e">
         <name>ForeignCurrencyRevaluation_DR_R2020B_AdvancesFromCustomers_CR_R5021T_Revenues</name>
-        <description></description>
         <code xsi:type="core:NumberValue">
           <value>20</value>
         </code>
       </content>
       <content id="38c3d013-996a-417f-8c24-447320fbd054">
         <name>ForeignCurrencyRevaluation_DR_R5022T_Expenses_CR_R2020B_AdvancesFromCustomers</name>
-        <description></description>
         <code xsi:type="core:NumberValue">
           <value>21</value>
         </code>
@@ -317,21 +296,18 @@
     </items>
     <items id="dbb6f24e-0162-41b1-969f-af92a96b2508">
       <name>Document_CashPayment</name>
-      <description></description>
       <code xsi:type="core:NumberValue">
         <value>26</value>
       </code>
       <isFolder>true</isFolder>
       <content id="408a2f66-656c-4320-b6f7-a013e1c63556">
         <name>CashPayment_DR_R1020B_AdvancesToVendors_R1021B_VendorsTransactions_CR_R3010B_CashOnHand</name>
-        <description></description>
         <code xsi:type="core:NumberValue">
           <value>34</value>
         </code>
       </content>
       <content id="dc68413a-90b1-4758-996e-0c35004f64e9">
         <name>CashPayment_DR_R1021B_VendorsTransactions_CR_R1020B_AdvancesToVendors</name>
-        <description></description>
         <code xsi:type="core:NumberValue">
           <value>35</value>
         </code>
@@ -339,21 +315,18 @@
     </items>
     <items id="e77f99dd-6495-487d-9873-5edbf00b51b4">
       <name>Document_CashReceipt</name>
-      <description></description>
       <code xsi:type="core:NumberValue">
         <value>27</value>
       </code>
       <isFolder>true</isFolder>
       <content id="6d9b584a-afc8-42d4-9875-bc7a50dd5580">
         <name>CashReceipt_DR_R3010B_CashOnHand_CR_R2020B_AdvancesFromCustomers_R2021B_CustomersTransactions</name>
-        <description></description>
         <code xsi:type="core:NumberValue">
           <value>36</value>
         </code>
       </content>
       <content id="e67d6131-1aea-4ae7-99d2-e8025d13fd1d">
         <name>CashReceipt_DR_R2021B_CustomersTransactions_CR_R2020B_AdvancesFromCustomers</name>
-        <description></description>
         <code xsi:type="core:NumberValue">
           <value>37</value>
         </code>
@@ -361,14 +334,12 @@
     </items>
     <items id="f42da89c-a0fb-4df4-bb09-3de02be76354">
       <name>Document_CashExpense</name>
-      <description></description>
       <code xsi:type="core:NumberValue">
         <value>28</value>
       </code>
       <isFolder>true</isFolder>
       <content id="9bc6340d-7f54-458e-a572-2d42e1a36fc0">
         <name>CashExpense_DR_R5022T_Expenses_CR_R3010B_CashOnHand</name>
-        <description></description>
         <code xsi:type="core:NumberValue">
           <value>32</value>
         </code>
@@ -376,14 +347,12 @@
     </items>
     <items id="957e4a8b-1d80-420f-9d5f-03de818b080c">
       <name>Document_CashRevenue</name>
-      <description></description>
       <code xsi:type="core:NumberValue">
         <value>29</value>
       </code>
       <isFolder>true</isFolder>
       <content id="d98857dd-e6f4-456b-9086-e241a4a00844">
         <name>CashRevenue_DR_R3010B_CashOnHand_CR_R5021_Revenues</name>
-        <description></description>
         <code xsi:type="core:NumberValue">
           <value>33</value>
         </code>
@@ -391,28 +360,24 @@
     </items>
     <items id="5f7860bf-8a96-4d16-984b-4fb514e994c4">
       <name>Document_DebitNote</name>
-      <description></description>
       <code xsi:type="core:NumberValue">
         <value>30</value>
       </code>
       <isFolder>true</isFolder>
       <content id="321ab1a7-d2a3-494b-a559-f947721faf7f">
         <name>DebitNote_DR_R1020B_AdvancesToVendors_CR_R5021_Revenues</name>
-        <description></description>
         <code xsi:type="core:NumberValue">
           <value>38</value>
         </code>
       </content>
       <content id="046c2b44-08d5-491e-b98c-f546e920cd02">
         <name>DebitNote_DR_R1021B_VendorsTransactions_CR_R1020B_AdvancesToVendors</name>
-        <description></description>
         <code xsi:type="core:NumberValue">
           <value>39</value>
         </code>
       </content>
       <content id="022ae9ba-8e6d-486f-a173-4ef454cd1370">
         <name>DebitNote_DR_R2021B_CustomersTransactions_CR_R5021_Revenues</name>
-        <description></description>
         <code xsi:type="core:NumberValue">
           <value>40</value>
         </code>
@@ -420,28 +385,24 @@
     </items>
     <items id="0dc9eae5-05d2-463e-89ce-6840f9a6a934">
       <name>Document_CreditNote</name>
-      <description></description>
       <code xsi:type="core:NumberValue">
         <value>31</value>
       </code>
       <isFolder>true</isFolder>
       <content id="e3f8e94f-99a5-4617-93cd-076015ad42ba">
         <name>CreditNote_DR_R2020B_AdvancesFromCustomers_CR_R5022T_Expenses</name>
-        <description></description>
         <code xsi:type="core:NumberValue">
           <value>41</value>
         </code>
       </content>
       <content id="f28b8356-42f7-45bb-a471-518f0f2f310e">
         <name>CreditNote_DR_R2021B_CustomersTransactions_CR_R2020B_AdvancesFromCustomers</name>
-        <description></description>
         <code xsi:type="core:NumberValue">
           <value>42</value>
         </code>
       </content>
       <content id="ede515d2-6be7-4e3e-8805-1e61c552167a">
         <name>CreditNote_DR_R1021B_VendorsTransactions_CR_R5022T_Expenses</name>
-        <description></description>
         <code xsi:type="core:NumberValue">
           <value>43</value>
         </code>
@@ -449,42 +410,36 @@
     </items>
     <items id="249b66fa-33bd-4d0a-b148-66d6d90ce904">
       <name>Document_MoneyTransfer</name>
-      <description></description>
       <code xsi:type="core:NumberValue">
         <value>44</value>
       </code>
       <isFolder>true</isFolder>
       <content id="369606fc-a9d6-42e2-abea-d3d5d0d98153">
         <name>MoneyTransfer_DR_R3010B_CashOnHand_CR_R3010B_CashOnHand</name>
-        <description></description>
         <code xsi:type="core:NumberValue">
           <value>45</value>
         </code>
       </content>
       <content id="d3d817dc-b0c3-4f52-a7b3-d175127786fd">
         <name>MoneyTransfer_DR_R3021B_CashInTransit_CR_R3010B_CashOnHand</name>
-        <description></description>
         <code xsi:type="core:NumberValue">
           <value>46</value>
         </code>
       </content>
       <content id="e9a428bb-a932-4286-a180-50ba528ae89b">
         <name>MoneyTransfer_DR_R3010B_CashOnHand_CR_R3021B_CashInTransit</name>
-        <description></description>
         <code xsi:type="core:NumberValue">
           <value>47</value>
         </code>
       </content>
       <content id="fa0f40e8-32f5-48b5-b9ce-cd0485dc715f">
         <name>MoneyTransfer_DR_R3021B_CashInTransit_CR_R5021T_Revenues</name>
-        <description></description>
         <code xsi:type="core:NumberValue">
           <value>48</value>
         </code>
       </content>
       <content id="64a3ab9e-e061-40f5-9ffe-973ee1f3408f">
         <name>MoneyTransfer_DR_R5022T_Expenses_CR_R3021B_CashInTransit</name>
-        <description></description>
         <code xsi:type="core:NumberValue">
           <value>49</value>
         </code>

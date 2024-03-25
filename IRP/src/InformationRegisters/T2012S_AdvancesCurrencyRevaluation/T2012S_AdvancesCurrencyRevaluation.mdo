@@ -81,17 +81,17 @@
       <types>DocumentRef.BankReceipt</types>
       <types>DocumentRef.PurchaseReturn</types>
       <types>DocumentRef.BankPayment</types>
+      <types>DocumentRef.EmployeeCashAdvance</types>
       <types>DocumentRef.ChequeBondTransactionItem</types>
       <types>DocumentRef.CashReceipt</types>
       <types>DocumentRef.OpeningEntry</types>
+      <types>DocumentRef.RetailReturnReceipt</types>
       <types>DocumentRef.SalesReturn</types>
+      <types>DocumentRef.RetailSalesReceipt</types>
       <types>DocumentRef.SalesReportToConsignor</types>
       <types>DocumentRef.PurchaseOrderClosing</types>
       <types>DocumentRef.SalesOrderClosing</types>
       <types>DocumentRef.SalesInvoice</types>
-      <types>DocumentRef.RetailSalesReceipt</types>
-      <types>DocumentRef.RetailReturnReceipt</types>
-      <types>DocumentRef.EmployeeCashAdvance</types>
     </type>
     <minValue xsi:type="core:UndefinedValue"/>
     <maxValue xsi:type="core:UndefinedValue"/>
@@ -113,6 +113,7 @@
     <minValue xsi:type="core:UndefinedValue"/>
     <maxValue xsi:type="core:UndefinedValue"/>
     <fullTextSearch>Use</fullTextSearch>
+    <fillValue xsi:type="core:UndefinedValue"/>
   </dimensions>
   <dimensions uuid="ef15aeea-dcda-4113-998e-9d4e58309040">
     <name>Currency</name>
@@ -142,6 +143,7 @@
     <minValue xsi:type="core:UndefinedValue"/>
     <maxValue xsi:type="core:UndefinedValue"/>
     <fullTextSearch>Use</fullTextSearch>
+    <fillValue xsi:type="core:UndefinedValue"/>
   </dimensions>
   <dimensions uuid="2f4457ed-94b1-4752-b988-3e22b97d7d9b">
     <name>Partner</name>

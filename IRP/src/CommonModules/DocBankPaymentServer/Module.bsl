@@ -68,18 +68,18 @@ Function GetDocumentTable_CashTransferOrder_QueryText() Export
 		   |INTO tmp_CashTransferOrder
 		   |FROM
 		   |	AccumulationRegister.R3035T_CashPlanning.Turnovers(, &EndOfDate, ,
-		   |		CashFlowDirection = VALUE(Enum.CashFlowDirections.Outgoing)
-		   |	AND CurrencyMovementType = VALUE(ChartOfCharacteristicTypes.CurrencyMovementType.SettlementCurrency)
-		   |	AND CASE
-		   |		WHEN &UseArrayOfBasisDocuments
-		   |			THEN BasisDocument IN (&ArrayOfBasisDocuments)
-		   |		ELSE TRUE
-		   |	END) AS R3035T_CashPlanningTurnovers
+		   |			CashFlowDirection = VALUE(Enum.CashFlowDirections.Outgoing)
+		   |			AND CurrencyMovementType = VALUE(ChartOfCharacteristicTypes.CurrencyMovementType.SettlementCurrency)
+		   |			AND Account.Type = VALUE(Enum.CashAccountTypes.Bank)
+		   |			AND CASE
+		   |				WHEN &UseArrayOfBasisDocuments
+		   |					THEN BasisDocument IN (&ArrayOfBasisDocuments)
+		   |				ELSE TRUE
+		   |			END) AS R3035T_CashPlanningTurnovers
 		   |		INNER JOIN Document.CashTransferOrder AS Doc
 		   |		ON R3035T_CashPlanningTurnovers.BasisDocument = Doc.Ref
 		   |WHERE
-		   |	R3035T_CashPlanningTurnovers.Account.Type = VALUE(Enum.CashAccountTypes.Bank)
-		   |	AND R3035T_CashPlanningTurnovers.AmountTurnover > 0";
+		   |	R3035T_CashPlanningTurnovers.AmountTurnover > 0";
 EndFunction
 
 Function GetDocumentTable_CashTransferOrder_ForClient(ArrayOfBasisDocuments, ObjectRef = Undefined) Export

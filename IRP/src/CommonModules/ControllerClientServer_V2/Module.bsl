@@ -3766,7 +3766,6 @@ Function BindToPersonalSalary(Parameters)
 	Return BindSteps("BindVoid", DataPath, Binding, Parameters, "BindToPersonalSalary");
 EndFunction
 
-
 // ToSalary.ChangeSalaryByPositionOrEmployee.Step
 Procedure StepChangeToSalaryByPositionOrEmployee(Parameters, Chain) Export
 	Chain.ChangeSalaryByPositionOrEmployee.Enable = True;
@@ -12129,11 +12128,9 @@ Function BindSingleRowSerialLotNumber(Parameters)
 		
 	Binding.Insert("InventoryTransfer", "StepItemListChangeInventoryOriginByItemKey");
 
-	
 	Binding.Insert("SalesReturn",
 		"StepItemListChangeInventoryOriginByItemKey,
 		|StepItemListChangeConsignorByItemKey");
-	
 	
 	Binding.Insert("RetailReturnReceipt",
 		"StepItemListChangeInventoryOriginByItemKey,

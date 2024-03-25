@@ -997,8 +997,8 @@
           <autoFill>true</autoFill>
         </autoCommandBar>
         <handlers>
-          <event>AfterDeleteRow</event>
-          <name>DeductionListAfterDeleteRow</name>
+          <event>Selection</event>
+          <name>DeductionListSelection</name>
         </handlers>
         <handlers>
           <event>BeforeAddRow</event>
@@ -1009,8 +1009,8 @@
           <name>DeductionListBeforeDeleteRow</name>
         </handlers>
         <handlers>
-          <event>Selection</event>
-          <name>DeductionListSelection</name>
+          <event>AfterDeleteRow</event>
+          <name>DeductionListAfterDeleteRow</name>
         </handlers>
         <searchStringAddition>
           <visible>true</visible>
@@ -1045,6 +1045,7 @@
             </userVisible>
             <autoFill>true</autoFill>
           </contextMenu>
+          <source>DeductionListSearchString</source>
           <extInfo xsi:type="form:SearchStringAdditionExtInfo">
             <autoMaxWidth>true</autoMaxWidth>
           </extInfo>
@@ -1083,6 +1084,7 @@
             <autoFill>true</autoFill>
           </contextMenu>
           <type>ViewStatusAddition</type>
+          <source>DeductionListViewStatus</source>
           <extInfo xsi:type="form:ViewStatusAdditionExtInfo">
             <autoMaxWidth>true</autoMaxWidth>
           </extInfo>
@@ -1121,6 +1123,7 @@
             <autoFill>true</autoFill>
           </contextMenu>
           <type>SearchControlAddition</type>
+          <source>DeductionListSearchControl</source>
           <extInfo xsi:type="form:SearchControlAdditionExtInfo">
             <autoMaxWidth>true</autoMaxWidth>
           </extInfo>
@@ -1168,6 +1171,7 @@
         <horizontalStretch>true</horizontalStretch>
         <verticalStretch>true</verticalStretch>
         <fileDragMode>AsFileRef</fileDragMode>
+        <rowFilter xsi:type="core:UndefinedValue"/>
       </items>
       <visible>true</visible>
       <enabled>true</enabled>

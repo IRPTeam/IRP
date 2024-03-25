@@ -896,9 +896,6 @@ FROM
       <cmiFragmentRecord>
         <command>Catalog.Companies.Command.OpenCompanyList</command>
         <type>Added</type>
-        <commandParameter xsi:type="form:DataPath">
-          <segments>Items.List.CurrentData.Ref</segments>
-        </commandParameter>
         <group>FormNavigationPanelGoTo</group>
         <index>0</index>
         <userVisible>

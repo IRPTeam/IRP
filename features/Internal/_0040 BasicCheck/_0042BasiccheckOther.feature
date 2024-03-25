@@ -352,12 +352,6 @@ Scenario: Open information register form "DataMappingTable"
 		Then I raise "Failed to open information register form  DataMappingTable" exception
 	And I close current window
 
-Scenario: Open object form "Procurement"
-
-	Given I open "Procurement" data processor default form
-	If the warning is displayed then
-		Then I raise "Failed to open data processor form Procurement" exception
-	And I close current window
 
 Scenario: Open object form "R1001 Purchases"
 

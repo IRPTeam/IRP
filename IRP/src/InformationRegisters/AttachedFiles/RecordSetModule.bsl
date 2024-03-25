@@ -1,5 +1,8 @@
 
 Procedure BeforeWrite(Cancel, Replacing)
+	If DataExchange.Load Then
+		Return;
+	EndIf;
 	// Change, Add
 	For Each Record In ThisObject Do
 		If Documents.AllRefsType().ContainsType(TypeOf(Record.Owner)) Then

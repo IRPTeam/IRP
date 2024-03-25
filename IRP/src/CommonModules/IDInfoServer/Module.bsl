@@ -201,7 +201,6 @@ Function NameToUniqueId(Name, AddInfo = Undefined)
 	Return Mid(Name, 2);
 EndFunction
 
-
 Function GetCountryByIDInfoType(IDInfoTypeRef, Country, UUIDForSettings, AddInfo = Undefined) Export
 	ArrayOfCountry = New Array();
 	For Each Row In IDInfoTypeRef.ExternalDataProcess Do

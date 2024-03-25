@@ -136,7 +136,6 @@ EndProcedure
 	
 #EndRegion
 
-
 #Region MATERIALS
 
 Procedure MaterialsSelection(Object, Form, Item, RowSelected, Field, StandardProcessing) Export

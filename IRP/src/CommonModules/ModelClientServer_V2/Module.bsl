@@ -989,7 +989,6 @@ Function ChangePartnerByTransactionTypeExecute(Options) Export
 	Return Undefined;
 EndFunction
 
-
 #EndRegion
 
 #Region CHANGE_PARTNER_BY_RETAIL_CUSTOMER

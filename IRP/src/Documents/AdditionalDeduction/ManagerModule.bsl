@@ -123,7 +123,6 @@ Function DeductionList()
 		|	Table.Ref = &Ref";
 EndFunction
 
-
 #EndRegion
 
 #Region Posting_MainTables

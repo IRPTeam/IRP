@@ -1000,7 +1000,7 @@ Procedure Write_SelfRecords(Parameters,
 				Or TypeOf(Row.Document) = Type("DocumentRef.CashReceipt")
 				Or TypeOf(Row.Document) = Type("DocumentRef.SalesReportFromTradeAgent")
 				Or TypeOf(Row.Document) = Type("DocumentRef.SalesInvoice")
-				Or (TypeOf(Row.Document) = Type("DocumentRef.SalesReturn") And Not RowOffset.IsReturnToAdvance) 
+				Or (TypeOf(Row.Document) = Type("DocumentRef.SalesReturn") And Not RowOffset.IsReturnToAdvance)
 				
 				Or (TypeOf(Row.Document) = Type("DocumentRef.BankPayment") And 
 					Row.Document.TransactionType = Enums.OutgoingPaymentTransactionTypes.ReturnToCustomer)
@@ -1008,17 +1008,21 @@ Procedure Write_SelfRecords(Parameters,
 				Or (TypeOf(Row.Document) = Type("DocumentRef.CashPayment") And 
 					Row.Document.TransactionType = Enums.OutgoingPaymentTransactionTypes.ReturnToCustomer) Then
 					
-					
-					
-				//Or (TypeOf(Row.Document) = Type("DocumentRef.DebitNote") And IsVendorAdvanceClosing)
-				//Or (TypeOf(Row.Document) = Type("DocumentRef.DebitNote") And IsCustomerAdvanceClosing) 
-				//Or (TypeOf(Row.Document) = Type("DocumentRef.CreditNote") And IsVendorAdvanceClosing)
-				//Or (TypeOf(Row.Document) = Type("DocumentRef.CreditNote") And IsCustomerAdvanceClosing) Then
 				NewRow_PartnerBalance_Advances.RecordType = ReverseRecordType(NewRow_Advances.RecordType);
+			
 			Else
 				NewRow_PartnerBalance_Advances.RecordType = NewRow_Advances.RecordType;
 			EndIf;
 			
+			If (TypeOf(Row.Document) = Type("DocumentRef.BankReceipt") And 
+					Row.Document.TransactionType = Enums.IncomingPaymentTransactionType.ReturnFromVendor)
+					
+				Or (TypeOf(Row.Document) = Type("DocumentRef.CashReceipt") And 
+					Row.Document.TransactionType = Enums.IncomingPaymentTransactionType.ReturnFromVendor) Then
+					
+				NewRow_PartnerBalance_Advances.RecordType = NewRow_Advances.RecordType;
+			EndIf;	
+						
 			NewRow_PartnerBalance_Advances.Period     = NewRow_Advances.Period;
 			NewRow_PartnerBalance_Advances.Company    = NewRow_Advances.Company;
 			NewRow_PartnerBalance_Advances.Branch     = NewRow_Advances.Branch;
@@ -1075,8 +1079,9 @@ Procedure Write_SelfRecords(Parameters,
 				Or TypeOf(Row.Document) = Type("DocumentRef.SalesReportToConsignor")
 				Or TypeOf(Row.Document) = Type("DocumentRef.PurchaseInvoice")
 				Or TypeOf(Row.Document) = Type("DocumentRef.PurchaseReturn") Then
-				//Or (TypeOf(Row.Document) = Type("DocumentRef.DebitNote") And IsVendorAdvanceClosing) Then
+				
 				NewRow_PartnersBalance_Transactions.RecordType = ReverseRecordType(NewRow_Transactions.RecordType);
+			
 			Else
 				NewRow_PartnersBalance_Transactions.RecordType = NewRow_Transactions.RecordType;
 			EndIf;
@@ -1088,6 +1093,15 @@ Procedure Write_SelfRecords(Parameters,
 					Row.Document.TransactionType = Enums.OutgoingPaymentTransactionTypes.ReturnToCustomer) Then
 					
 				NewRow_PartnersBalance_Transactions.RecordType = NewRow_Transactions.RecordType;
+			EndIf;	
+				
+			If (TypeOf(Row.Document) = Type("DocumentRef.BankReceipt") And 
+					Row.Document.TransactionType = Enums.IncomingPaymentTransactionType.ReturnFromVendor)
+					
+				Or (TypeOf(Row.Document) = Type("DocumentRef.CashReceipt") And 
+					Row.Document.TransactionType = Enums.IncomingPaymentTransactionType.ReturnFromVendor) Then
+					
+				NewRow_PartnersBalance_Transactions.RecordType = ReverseRecordType(NewRow_Transactions.RecordType);
 			EndIf;	
 						
 			NewRow_PartnersBalance_Transactions.Period     = NewRow_Transactions.Period;

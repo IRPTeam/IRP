@@ -287,6 +287,7 @@ Function R5020B_PartnersBalance_BR_CR() Export
 		|;
 		|
 		|////////////////////////////////////////////////////////////////////////////////
+		// Customer advance, Vendor advance
 		|SELECT
 		|	VALUE(AccumulationRecordType.Expense) AS RecordType,
 		|	PaymentList.Period,
@@ -324,10 +325,13 @@ Function R5020B_PartnersBalance_BR_CR() Export
 		|	OR PaymentList.IsPaymentFromCustomerByPOS)
 		|
 		|UNION ALL
-		|
+		// Customer advance, Vendor advance (offset)
 		|SELECT
-		//|	OffsetPartnersBalance.RecordType,
-		|	OffsetPartnersBalance.RecordType_Reverse,
+		|	CASE WHEN OffsetPartnersBalance.IsReturnFromVendor THEN
+		|		OffsetPartnersBalance.RecordType
+		|	ELSE
+		|		OffsetPartnersBalance.RecordType_Reverse
+		|	END,
 		|	OffsetPartnersBalance.Period,
 		|	OffsetPartnersBalance.Company,
 		|	OffsetPartnersBalance.Branch,
@@ -361,7 +365,7 @@ Function R5020B_PartnersBalance_BR_CR() Export
 		|	OR OffsetPartnersBalance.IsPaymentFromCustomerByPOS
 		|
 		|UNION ALL
-		|
+		// Customer transaction, Vendor transaction
 		|SELECT
 		|	VALUE(AccumulationRecordType.Expense) AS RecordType,
 		|	PaymentList.Period,
@@ -400,8 +404,12 @@ Function R5020B_PartnersBalance_BR_CR() Export
 		|UNION ALL
 		|
 		|SELECT
-		//|	OffsetPartnersBalance.RecordType_Reverse,
-		|	OffsetPartnersBalance.RecordType,
+		// Customer transaction, Vendor transaction (offset)
+		|	CASE WHEN OffsetPartnersBalance.IsReturnFromVendor THEN
+		|		OffsetPartnersBalance.RecordType_Reverse
+		|	ELSE
+		|		OffsetPartnersBalance.RecordType
+		|	END,
 		|	OffsetPartnersBalance.Period,
 		|	OffsetPartnersBalance.Company,
 		|	OffsetPartnersBalance.Branch,

@@ -68,6 +68,13 @@ Procedure FillCheckProcessing(Cancel, CheckedAttributes)
 		EndIf;
 	EndDo;
 	
+	If Cancel = True Then
+		Return;
+	EndIf;
+	
+	If ThisObject.TransactionType = Enums.IncomingPaymentTransactionType.CurrencyExchange Then
+		CheckDataPrivileged.FillCheckProcessing_BankReceipt_CurrencyExchange(ThisObject, Cancel);
+	EndIf;
 EndProcedure
 
 Procedure Posting(Cancel, PostingMode)
@@ -115,3 +122,5 @@ Procedure OnCopy(CopiedObject)
 	RRNCode = "";
 	PaymentInfo = "";
 EndProcedure
+
+

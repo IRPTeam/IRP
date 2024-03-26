@@ -3300,7 +3300,7 @@ Function ClearByTransactionTypeBankPaymentExecute(Options) Export
 	Outgoing_ReturnToCustomer  = PredefinedValue("Enum.OutgoingPaymentTransactionTypes.ReturnToCustomer");
 	Outgoing_ReturnToCustomerByPOS  = PredefinedValue("Enum.OutgoingPaymentTransactionTypes.ReturnToCustomerByPOS");
 	Outgoing_PaymentByCheque     = PredefinedValue("Enum.OutgoingPaymentTransactionTypes.PaymentByCheque");
-	Outgoing_CustomerAdvance     = PredefinedValue("Enum.OutgoingPaymentTransactionTypes.CustomerAdvance");
+	Outgoing_RetailCustomerAdvance     = PredefinedValue("Enum.OutgoingPaymentTransactionTypes.RetailCustomerAdvance");
 	Outgoing_EmployeeCashAdvance = PredefinedValue("Enum.OutgoingPaymentTransactionTypes.EmployeeCashAdvance");
 	Outgoing_SalaryPayment       = PredefinedValue("Enum.OutgoingPaymentTransactionTypes.SalaryPayment");
 	Outgoing_OtherPartner        = PredefinedValue("Enum.OutgoingPaymentTransactionTypes.OtherPartner");
@@ -3347,7 +3347,7 @@ Function ClearByTransactionTypeBankPaymentExecute(Options) Export
 		|Agreement,
 		|Payee,
 		|LegalNameContract";		
-	ElsIf Options.TransactionType = Outgoing_CustomerAdvance Then
+	ElsIf Options.TransactionType = Outgoing_RetailCustomerAdvance Then
 		StrByType = "
 		|RetailCustomer,
 		|PaymentType,
@@ -3449,7 +3449,7 @@ Function ClearByTransactionTypeBankReceiptExecute(Options) Export
 	Incoming_TransferFromPOS     = PredefinedValue("Enum.IncomingPaymentTransactionType.TransferFromPOS");
 	Incoming_PaymentFromCustomerByPOS = PredefinedValue("Enum.IncomingPaymentTransactionType.PaymentFromCustomerByPOS");
 	Incoming_ReceiptByCheque     = PredefinedValue("Enum.IncomingPaymentTransactionType.ReceiptByCheque");
-	Incoming_CustomerAdvance     = PredefinedValue("Enum.IncomingPaymentTransactionType.CustomerAdvance");
+	Incoming_RetailCustomerAdvance     = PredefinedValue("Enum.IncomingPaymentTransactionType.RetailCustomerAdvance");
 	Incoming_EmployeeCashAdvance = PredefinedValue("Enum.IncomingPaymentTransactionType.EmployeeCashAdvance");
 	Incoming_OtherIncome         = PredefinedValue("Enum.IncomingPaymentTransactionType.OtherIncome");
 	Incoming_OtherPartner        = PredefinedValue("Enum.IncomingPaymentTransactionType.OtherPartner");
@@ -3525,7 +3525,7 @@ Function ClearByTransactionTypeBankReceiptExecute(Options) Export
 		|CommissionPercent,
 		|Commission,
 		|CommissionFinancialMovementType";		
-	ElsIf Options.TransactionType = Incoming_CustomerAdvance Then
+	ElsIf Options.TransactionType = Incoming_RetailCustomerAdvance Then
 		StrByType = "
 		|RetailCustomer,
 		|PaymentType,
@@ -3594,7 +3594,7 @@ Function ClearByTransactionTypeCashPaymentExecute(Options) Export
 	Outgoing_CurrencyExchange  = PredefinedValue("Enum.OutgoingPaymentTransactionTypes.CurrencyExchange");
 	Outgoing_PaymentToVendor   = PredefinedValue("Enum.OutgoingPaymentTransactionTypes.PaymentToVendor");
 	Outgoing_ReturnToCustomer  = PredefinedValue("Enum.OutgoingPaymentTransactionTypes.ReturnToCustomer");
-	Outgoing_CustomerAdvance     = PredefinedValue("Enum.OutgoingPaymentTransactionTypes.CustomerAdvance");
+	Outgoing_RetailCustomerAdvance     = PredefinedValue("Enum.OutgoingPaymentTransactionTypes.RetailCustomerAdvance");
 	Outgoing_EmployeeCashAdvance = PredefinedValue("Enum.OutgoingPaymentTransactionTypes.EmployeeCashAdvance");
 	Outgoing_SalaryPayment       = PredefinedValue("Enum.OutgoingPaymentTransactionTypes.SalaryPayment");
 	Outgoing_OtherPartner        = PredefinedValue("Enum.OutgoingPaymentTransactionTypes.OtherPartner");
@@ -3613,7 +3613,7 @@ Function ClearByTransactionTypeCashPaymentExecute(Options) Export
 	ElsIf Options.TransactionType = Outgoing_EmployeeCashAdvance Then
 		StrByType = "
 		|Partner"; 
-	ElsIf Options.TransactionType = Outgoing_CustomerAdvance Then
+	ElsIf Options.TransactionType = Outgoing_RetailCustomerAdvance Then
 		StrByType = "
 		|RetailCustomer";
 	ElsIf Options.TransactionType = Outgoing_PaymentToVendor Or Options.TransactionType = Outgoing_ReturnToCustomer Then
@@ -3693,7 +3693,7 @@ Function ClearByTransactionTypeCashReceiptExecute(Options) Export
 	Incoming_PaymentFromCustomer = PredefinedValue("Enum.IncomingPaymentTransactionType.PaymentFromCustomer");
 	Incoming_ReturnFromVendor    = PredefinedValue("Enum.IncomingPaymentTransactionType.ReturnFromVendor");
 	Incoming_CashIn              = PredefinedValue("Enum.IncomingPaymentTransactionType.CashIn");
-	Incoming_CustomerAdvance     = PredefinedValue("Enum.IncomingPaymentTransactionType.CustomerAdvance");
+	Incoming_RetailCustomerAdvance     = PredefinedValue("Enum.IncomingPaymentTransactionType.RetailCustomerAdvance");
 	Incoming_EmployeeCashAdvance = PredefinedValue("Enum.IncomingPaymentTransactionType.EmployeeCashAdvance");
 	Incoming_OtherPartner        = PredefinedValue("Enum.IncomingPaymentTransactionType.OtherPartner");
 	
@@ -3725,7 +3725,7 @@ Function ClearByTransactionTypeCashReceiptExecute(Options) Export
 		|Agreement,
 		|Payer,
 		|LegalNameContract";			
-	ElsIf Options.TransactionType = Incoming_CustomerAdvance Then
+	ElsIf Options.TransactionType = Incoming_RetailCustomerAdvance Then
 		StrByType = "
 		|RetailCustomer";
 	ElsIf Options.TransactionType = Incoming_EmployeeCashAdvance Then

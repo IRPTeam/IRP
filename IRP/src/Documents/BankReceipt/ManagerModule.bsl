@@ -236,7 +236,7 @@ Function PaymentList()
 		|		IsCashTransferOrder,
 		|	PaymentList.Ref.TransactionType = VALUE(Enum.IncomingPaymentTransactionType.TransferFromPOS) AS IsTransferFromPOS,
 		|	PaymentList.Ref.TransactionType = VALUE(Enum.IncomingPaymentTransactionType.ReturnFromVendor) AS IsReturnFromVendor,
-		|	PaymentList.Ref.TransactionType = VALUE(Enum.IncomingPaymentTransactionType.CustomerAdvance) AS IsCustomerAdvance,
+		|	PaymentList.Ref.TransactionType = VALUE(Enum.IncomingPaymentTransactionType.RetailCustomerAdvance) AS IsCustomerAdvance,
 		|	PaymentList.Ref.TransactionType = VALUE(Enum.IncomingPaymentTransactionType.EmployeeCashAdvance) AS
 		|		IsEmployeeCashAdvance,
 		|	PaymentList.RetailCustomer AS RetailCustomer,

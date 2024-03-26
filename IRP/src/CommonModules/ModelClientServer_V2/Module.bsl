@@ -359,7 +359,7 @@ Function GetChain()
 	
 	Chain.Insert("CalculateDifferenceCount" , GetChainLink("CalculateDifferenceCountExecute"));
 
-	Chain.Insert("ChangePercentByBankTermAndPaymentType"	       , GetChainLink("ChangePercentByBankTermAndPaymentTypeExecute"));
+	Chain.Insert("ChangeCommissionPercentByBankTermAndPaymentType"	       , GetChainLink("ChangeCommissionPercentByBankTermAndPaymentTypeExecute"));
 	Chain.Insert("ChangeAccountByBankTermAndPaymentType"	       , GetChainLink("ChangeAccountByBankTermAndPaymentTypeExecute"));
 	Chain.Insert("ChangePartnerByBankTermAndPaymentType"	       , GetChainLink("ChangePartnerByBankTermAndPaymentTypeExecute"));
 	Chain.Insert("ChangeLegalNameByBankTermAndPaymentType"	       , GetChainLink("ChangeLegalNameByBankTermAndPaymentTypeExecute"));
@@ -3530,7 +3530,9 @@ Function ClearByTransactionTypeBankReceiptExecute(Options) Export
 		|RetailCustomer,
 		|PaymentType,
 		|PaymentTerminal,
-		|BankTerm";
+		|BankTerm,
+		|CommissionPercent,
+		|Commission";
 	ElsIf Options.TransactionType = Incoming_EmployeeCashAdvance Then
 		StrByType = "
 		|Partner";
@@ -3941,7 +3943,7 @@ EndFunction
 #Region CALCULATE_PAYMENT_LIST_COMMISSION
 
 Function CalculatePaymentListCommissionOptions() Export
-	Return GetChainLinkOptions("TotalAmount, CommissionPercent");
+	Return GetChainLinkOptions("TotalAmount, CommissionPercent, TransactionType");
 EndFunction
 
 Function CalculatePaymentListCommissionExecute(Options) Export
@@ -3949,20 +3951,32 @@ Function CalculatePaymentListCommissionExecute(Options) Export
 	If ValueIsFilled(Options.CommissionPercent) Then
 		_CommissionPercent = Options.CommissionPercent;
 	EndIf;
-	Return (Options.TotalAmount/(1- _CommissionPercent/100)) - Options.TotalAmount;
-	//Return Options.TotalAmount * Options.CommissionPercent / 100;
+	
+	CommissionAmount = 0;
+	If Options.TransactionType = PredefinedValue("Enum.IncomingPaymentTransactionType.RetailCustomerAdvance") Then
+		CommissionAmount = Options.TotalAmount * _CommissionPercent / 100;
+	Else
+		CommissionAmount = (Options.TotalAmount/(1- _CommissionPercent/100)) - Options.TotalAmount;
+	EndIf;
+	
+	Return CommissionAmount;
 EndFunction
 
 #EndRegion
 
 #Region CHANGE_PERCENT_BY_BANK_TERM_AND_PAYMENT_TYPE
 
-Function ChangePercentByBankTermAndPaymentTypeOptions() Export
-	Return GetChainLinkOptions("PaymentType, BankTerm");
+Function ChangeCommissionPercentByBankTermAndPaymentTypeOptions() Export
+	Return GetChainLinkOptions("PaymentType, BankTerm, CurrentCommissionPercent, IsUserChange");
 EndFunction
 
-Function ChangePercentByBankTermAndPaymentTypeExecute(Options) Export
-	Return ModelServer_V2.GetBankTermInfo(Options.PaymentType, Options.BankTerm).Percent;
+Function ChangeCommissionPercentByBankTermAndPaymentTypeExecute(Options) Export
+	If Not Options.IsUserChange Then
+		Return Options.CurrentCommissionPercent;
+	EndIf;
+	
+	BankTermInfo = ModelServer_V2.GetBankTermInfo(Options.PaymentType, Options.BankTerm);
+	Return BankTermInfo.Percent;
 EndFunction
 
 #EndRegion
@@ -4110,7 +4124,9 @@ Function CalculatePercentByAmountExecute(Options) Export
 		Return 0;
 	EndIf;
 		
-	Return 100 * Options.Commission / Options.Amount;
+	CommissionPercent = 100 * Options.Commission / Options.Amount;
+		
+	Return CommissionPercent
 EndFunction
 
 #EndRegion
@@ -4118,7 +4134,7 @@ EndFunction
 #Region CALCULATE_PERCENT_COMMISSION_BY_AMOUNT
 
 Function CalculateCommissionPercentByAmountOptions() Export
-	Return GetChainLinkOptions("TotalAmount, Commission");
+	Return GetChainLinkOptions("TotalAmount, Commission, TransactionType");
 EndFunction
 
 Function CalculateCommissionPercentByAmountExecute(Options) Export
@@ -4132,8 +4148,16 @@ Function CalculateCommissionPercentByAmountExecute(Options) Export
 		_Commission = Options.Commission;
 	EndIf;
 	
-	Return _Commission/(Options.TotalAmount + _Commission) * 100;
-//	Return 100 * Options.Commission / Options.TotalAmount;
+	CommissionPercent = 0;
+	If Options.TransactionType = PredefinedValue("Enum.IncomingPaymentTransactionType.RetailCustomerAdvance") Then
+		If ValueIsFilled(Options.TotalAmount) Then
+			CommissionPercent = 100 * _Commission / Options.TotalAmount;
+		EndIf;
+	Else
+		CommissionPercent = _Commission/(Options.TotalAmount + _Commission) * 100;
+	EndIf;
+	
+	Return CommissionPercent;
 EndFunction
 
 #EndRegion
@@ -4150,7 +4174,6 @@ Function ChangeisControlCodeStringByItemExecute(Options) Export
 	Except
 		Workstation = Undefined;
 	EndTry;
-	
 	
 	If ValueIsFilled(Workstation) And CommonFunctionsServer.GetRefAttribute(Workstation, "IgnoreCodeStringControl") Then
 		Return False;

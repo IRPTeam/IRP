@@ -170,7 +170,9 @@ Function GetVisibleAttributesByTransactionType(TransactionType)
 		|PaymentList.PaymentType,
 		|PaymentList.PaymentTerminal,
 		|PaymentList.BankTerm,
-		|PaymentList.Order";
+		|PaymentList.Order,
+		|PaymentList.CommissionPercent,
+		|PaymentList.Commission";
 	ElsIf TransactionType = EmployeeCashAdvance Then
 		StrByType = "
 		|PaymentList.Partner,

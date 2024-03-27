@@ -3,8 +3,6 @@
 
 &AtServer
 Procedure OnCreateAtServer(Cancel, StandardProcessing)
-	LocalizationEvents.CreateMainFormItemDescription(ThisObject, "GroupDescriptions");
-	LocalizationEvents.FillDescription(Parameters.FillingText, Object);
 	If Parameters.Key.IsEmpty() Then
 		SetVisibilityAvailability(Object, ThisObject);
 	EndIf;

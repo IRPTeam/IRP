@@ -55,13 +55,14 @@ Scenario: _043400 preparation (Bank receipt)
 		When Create catalog RetailCustomers objects (check POS)
 		When Create catalog CashAccounts objects
 		When Create catalog PlanningPeriods objects
-		When Create catalog BankTerms objects
 		When Create catalog PaymentTerminals objects
 		When Create catalog PaymentTypes objects
 		When Create catalog CashAccounts objects (POS)
 		When Create OtherPartners objects
 		When Create information register Taxes records (VAT)
 		When Create catalog CashStatementStatuses objects (Test)
+		When Create catalog BankTerms objects
+		When Create catalog BankTerms objects (for Shop 02)
 	When Create Document discount
 	* Add plugin for discount
 		Given I open hyperlink "e1cib/list/Catalog.ExternalDataProc"
@@ -1536,12 +1537,9 @@ Scenario: _0434335 check Bank receipt movements by the Register "R3011 Cash flow
 			| 'Register  "R3011 Cash flow"'                  | ''                    | ''          | ''             | ''             | ''                  | ''          | ''                        | ''                 | ''                | ''         | ''                             | ''                     |
 			| ''                                             | 'Period'              | 'Resources' | 'Dimensions'   | ''             | ''                  | ''          | ''                        | ''                 | ''                | ''         | ''                             | 'Attributes'           |
 			| ''                                             | ''                    | 'Amount'    | 'Company'      | 'Branch'       | 'Account'           | 'Direction' | 'Financial movement type' | 'Cash flow center' | 'Planning period' | 'Currency' | 'Multi currency movement type' | 'Deferred calculation' |
-			| ''                                             | '05.03.2024 16:17:01' | '0,17'      | 'Main Company' | 'Front office' | 'Bank account, TRY' | 'Outgoing'  | 'Movement type 3'         | 'Front office'     | ''                | 'USD'      | 'Reporting currency'           | 'No'                   |
-			| ''                                             | '05.03.2024 16:17:01' | '1'         | 'Main Company' | 'Front office' | 'Bank account, TRY' | 'Outgoing'  | 'Movement type 3'         | 'Front office'     | ''                | 'TRY'      | 'Local currency'               | 'No'                   |
-			| ''                                             | '05.03.2024 16:17:01' | '1'         | 'Main Company' | 'Front office' | 'Bank account, TRY' | 'Outgoing'  | 'Movement type 3'         | 'Front office'     | ''                | 'TRY'      | 'en description is empty'      | 'No'                   |
-			| ''                                             | '05.03.2024 16:17:01' | '17,29'     | 'Main Company' | 'Front office' | 'Bank account, TRY' | 'Incoming'  | 'Movement type 3'         | 'Front office'     | ''                | 'USD'      | 'Reporting currency'           | 'No'                   |
-			| ''                                             | '05.03.2024 16:17:01' | '101'       | 'Main Company' | 'Front office' | 'Bank account, TRY' | 'Incoming'  | 'Movement type 3'         | 'Front office'     | ''                | 'TRY'      | 'Local currency'               | 'No'                   |
-			| ''                                             | '05.03.2024 16:17:01' | '101'       | 'Main Company' | 'Front office' | 'Bank account, TRY' | 'Incoming'  | 'Movement type 3'         | 'Front office'     | ''                | 'TRY'      | 'en description is empty'      | 'No'                   |		
+			| ''                                             | '05.03.2024 16:17:01' | '17,12'     | 'Main Company' | 'Front office' | 'Bank account, TRY' | 'Incoming'  | 'Movement type 3'         | 'Front office'     | ''                | 'USD'      | 'Reporting currency'           | 'No'                   |
+			| ''                                             | '05.03.2024 16:17:01' | '100'       | 'Main Company' | 'Front office' | 'Bank account, TRY' | 'Incoming'  | 'Movement type 3'         | 'Front office'     | ''                | 'TRY'      | 'Local currency'               | 'No'                   |
+			| ''                                             | '05.03.2024 16:17:01' | '100'       | 'Main Company' | 'Front office' | 'Bank account, TRY' | 'Incoming'  | 'Movement type 3'         | 'Front office'     | ''                | 'TRY'      | 'en description is empty'      | 'No'                   |		
 	And I close all client application windows
 
 Scenario: _0434340 check Bank receipt movements by the Register "R3010 Cash on hand" (Other partner, with bank comission)

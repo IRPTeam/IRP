@@ -7909,7 +7909,7 @@ Function BindPaymentListPaymentType(Parameters)
 	Binding = New Structure();
 	
 	Binding.Insert("BankReceipt", 
-		"StepPaymentListGetCommissionPercent");
+		"StepPaymentListChangeCommisionPercentByBankTermAndPaymentType");
 	Return BindSteps("BindVoid", DataPath, Binding, Parameters, "BindPaymentListPaymentType");
 EndFunction
 
@@ -7962,7 +7962,7 @@ Function BindPaymentListBankTerm(Parameters)
 	Binding = New Structure();
 		
 	Binding.Insert("BankReceipt", 
-		"StepPaymentListGetCommissionPercent");
+		"StepPaymentListChangeCommisionPercentByBankTermAndPaymentType");
 		
 	Return BindSteps("BindVoid", DataPath, Binding, Parameters, "BindPaymentListBankTerm");
 EndFunction
@@ -7994,10 +7994,10 @@ Function BindPaymentListCommission(Parameters)
 	Binding = New Structure();
 
 	Binding.Insert("BankPayment", 
-		"StepChangeCommissionPercentByAmount");
+		"StepPaymentListChangeCommissionPercentByAmount");
 	
 	Binding.Insert("BankReceipt", 
-		"StepChangeCommissionPercentByAmount");
+		"StepPaymentListChangeCommissionPercentByAmount");
 	Return BindSteps("BindVoid", DataPath, Binding, Parameters, "BindPaymentListCommission");
 EndFunction
 
@@ -8012,6 +8012,7 @@ Procedure StepPaymentListCalculateCommission(Parameters, Chain) Export
 		Options     = ModelClientServer_V2.CalculatePaymentListCommissionOptions();
 		Options.TotalAmount = GetPaymentListTotalAmount(Parameters, Row.Key);
 		Options.CommissionPercent = GetPaymentListCommissionPercent(Parameters, Row.Key);
+		Options.TransactionType = GetTransactionType(Parameters);
 		Options.Key = Row.Key;
 		Options.StepName = "StepPaymentListCalculateCommission";
 		Chain.PaymentListCalculateCommission.Options.Add(Options);
@@ -8050,25 +8051,27 @@ Function BindPaymentListCommissionPercent(Parameters)
 	Return BindSteps("BindVoid", DataPath, Binding, Parameters, "BindPaymentListCommissionPercent");
 EndFunction
 
-// PaymentList.CommissionPercent.ChangePercentByBankTermAndPaymentType.Step
-Procedure StepPaymentListGetCommissionPercent(Parameters, Chain) Export
-	Chain.ChangePercentByBankTermAndPaymentType.Enable = True;
+// PaymentList.CommissionPercent.ChangeCommisionPercentByBankTermAndPaymentType.Step
+Procedure StepPaymentListChangeCommisionPercentByBankTermAndPaymentType(Parameters, Chain) Export
+	Chain.ChangeCommissionPercentByBankTermAndPaymentType.Enable = True;
 	If Chain.Idle Then
 		Return;
 	EndIf;
-	Chain.ChangePercentByBankTermAndPaymentType.Setter = "SetPaymentListCommissionPercent";
+	Chain.ChangeCommissionPercentByBankTermAndPaymentType.Setter = "SetPaymentListCommissionPercent";
 	For Each Row In GetRows(Parameters, "PaymentList") Do
-		Options     = ModelClientServer_V2.ChangePercentByBankTermAndPaymentTypeOptions();
+		Options     = ModelClientServer_V2.ChangeCommissionPercentByBankTermAndPaymentTypeOptions();
 		Options.PaymentType = GetPaymentListPaymentType(Parameters, Row.Key);
 		Options.BankTerm = GetPaymentListBankTerm(Parameters, Row.Key);
+		Options.CurrentCommissionPercent = GetPaymentListCommissionPercent(Parameters, Row.Key);
+		Options.IsUserChange = IsUserChange(Parameters, "StepPaymentListChangeCommisionPercentByBankTermAndPaymentType");
 		Options.Key = Row.Key;
-		Options.StepName = "StepPaymentListGetCommissionPercent";
-		Chain.ChangePercentByBankTermAndPaymentType.Options.Add(Options);
+		Options.StepName = "StepPaymentListChangeCommisionPercentByBankTermAndPaymentType";
+		Chain.ChangeCommissionPercentByBankTermAndPaymentType.Options.Add(Options);
 	EndDo;	
 EndProcedure
 
-// PaymentList.CommissionPercent.ChangePercentByAmount.Step
-Procedure StepChangeCommissionPercentByAmount(Parameters, Chain) Export
+// PaymentList.CommissionPercent.ChangeCommissionPercentByAmount.Step
+Procedure StepPaymentListChangeCommissionPercentByAmount(Parameters, Chain) Export
 	Chain.ChangeCommissionPercentByAmount.Enable = True;
 	If Chain.Idle Then
 		Return;
@@ -8078,9 +8081,10 @@ Procedure StepChangeCommissionPercentByAmount(Parameters, Chain) Export
 		Options     = ModelClientServer_V2.CalculateCommissionPercentByAmountOptions();
 		Options.Commission = GetPaymentListCommission(Parameters, Row.Key);
 		Options.TotalAmount = GetPaymentListTotalAmount(Parameters, Row.Key);
+		Options.TransactionType = GetTransactionType(Parameters);
 		Options.DisableNextSteps = True;
 		Options.Key = Row.Key;
-		Options.StepName = "StepChangeCommissionPercentByAmount";
+		Options.StepName = "StepPaymentListChangeCommissionPercentByAmount";
 		Chain.ChangeCommissionPercentByAmount.Options.Add(Options);
 	EndDo;	
 EndProcedure
@@ -13042,7 +13046,7 @@ Function BindPaymentsPaymentType(Parameters)
 
 	Binding.Insert("RetailSalesReceipt", 
 		"StepChangeBankTermByPaymentType,
-		|StepChangePercentByBankTermAndPaymentType,
+		|StepPaymentsChangeCommissionPercentByBankTermAndPaymentType,
 		|StepChangePaymentAgentPartnerByBankTermAndPaymentType,
 		|StepChangePaymentAgentLegalNameByBankTermAndPaymentType,
 		|StepChangePaymentAgentPartnerTermsByBankTermAndPaymentType,
@@ -13052,7 +13056,7 @@ Function BindPaymentsPaymentType(Parameters)
 	
 	Binding.Insert("RetailReceiptCorrection", 
 		"StepChangeBankTermByPaymentType,
-		|StepChangePercentByBankTermAndPaymentType,
+		|StepPaymentsChangeCommissionPercentByBankTermAndPaymentType,
 		|StepChangePaymentAgentPartnerByBankTermAndPaymentType,
 		|StepChangePaymentAgentLegalNameByBankTermAndPaymentType,
 		|StepChangePaymentAgentPartnerTermsByBankTermAndPaymentType,
@@ -13062,7 +13066,7 @@ Function BindPaymentsPaymentType(Parameters)
 	
 	Binding.Insert("RetailReturnReceipt", 
 		"StepChangeBankTermByPaymentType,
-		|StepChangePercentByBankTermAndPaymentType,
+		|StepPaymentsChangeCommissionPercentByBankTermAndPaymentType,
 		|StepChangePaymentAgentPartnerByBankTermAndPaymentType,
 		|StepChangePaymentAgentLegalNameByBankTermAndPaymentType,
 		|StepChangePaymentAgentPartnerTermsByBankTermAndPaymentType,
@@ -13071,7 +13075,7 @@ Function BindPaymentsPaymentType(Parameters)
 		|StepChangeAccountByPaymentType");
 	
 	Binding.Insert("SalesOrder", 
-		"StepChangePercentByBankTermAndPaymentType,
+		"StepPaymentsChangeCommissionPercentByBankTermAndPaymentType,
 		|StepChangeAccountByBankTermAndPaymentType");
 	
 	Return BindSteps("BindVoid", DataPath, Binding, Parameters, "BindPaymentsPaymentType");
@@ -13156,7 +13160,7 @@ Function BindPaymentsBankTerm(Parameters)
 
 	Binding.Insert("RetailSalesReceipt",
 		"StepChangePaymentTypeByBankTerm, 
-		|StepChangePercentByBankTermAndPaymentType,
+		|StepPaymentsChangeCommissionPercentByBankTermAndPaymentType,
 		|StepChangeAccountByBankTermAndPaymentType,
 		|StepChangePaymentAgentPartnerByBankTermAndPaymentType,
 		|StepChangePaymentAgentLegalNameByBankTermAndPaymentType,
@@ -13165,7 +13169,7 @@ Function BindPaymentsBankTerm(Parameters)
 	
 	Binding.Insert("RetailReceiptCorrection",
 		"StepChangePaymentTypeByBankTerm, 
-		|StepChangePercentByBankTermAndPaymentType,
+		|StepPaymentsChangeCommissionPercentByBankTermAndPaymentType,
 		|StepChangeAccountByBankTermAndPaymentType,
 		|StepChangePaymentAgentPartnerByBankTermAndPaymentType,
 		|StepChangePaymentAgentLegalNameByBankTermAndPaymentType,
@@ -13174,7 +13178,7 @@ Function BindPaymentsBankTerm(Parameters)
 	
 	Binding.Insert("RetailReturnReceipt", 
 		"StepChangePaymentTypeByBankTerm,
-		|StepChangePercentByBankTermAndPaymentType,
+		|StepPaymentsChangeCommissionPercentByBankTermAndPaymentType,
 		|StepChangeAccountByBankTermAndPaymentType,
 		|StepChangePaymentAgentPartnerByBankTermAndPaymentType,
 		|StepChangePaymentAgentLegalNameByBankTermAndPaymentType,
@@ -13182,7 +13186,7 @@ Function BindPaymentsBankTerm(Parameters)
 		|StepChangePaymentAgentLegalNameContractByBankTermAndPaymentType");
 	
 	Binding.Insert("SalesOrder", 
-		"StepChangePercentByBankTermAndPaymentType,
+		"StepPaymentsChangeCommissionPercentByBankTermAndPaymentType,
 		|StepChangeAccountByBankTermAndPaymentType");
 	
 	Return BindSteps("BindVoid", DataPath, Binding, Parameters, "BindPaymentsBankTerm");
@@ -13338,16 +13342,16 @@ Function BindPaymentsCommission(Parameters)
 	Binding = New Structure();
 
 	Binding.Insert("RetailSalesReceipt", 
-		"StepChangePercentByAmount");
+		"StepPaymentsChangeCommissionPercentByAmount");
 	
 	Binding.Insert("RetailReceiptCorrection", 
-		"StepChangePercentByAmount");
+		"StepPaymentsChangeCommissionPercentByAmount");
 	
 	Binding.Insert("RetailReturnReceipt", 
-		"StepChangePercentByAmount");
+		"StepPaymentsChangeCommissionPercentByAmount");
 		
 	Binding.Insert("SalesOrder", 
-		"StepChangePercentByAmount");
+		"StepPaymentsChangeCommissionPercentByAmount");
 		
 	Return BindSteps("BindVoid", DataPath, Binding, Parameters, "BindPaymentsCommission");
 EndFunction
@@ -13410,25 +13414,27 @@ Function BindPaymentsPercent(Parameters)
 	Return BindSteps("BindVoid", DataPath, Binding, Parameters, "BindPaymentsPercent");
 EndFunction
 
-// Payments.Percent.ChangePercentByBankTermAndPaymentType.Step
-Procedure StepChangePercentByBankTermAndPaymentType(Parameters, Chain) Export
-	Chain.ChangePercentByBankTermAndPaymentType.Enable = True;
+// Payments.Percent.ChangeCommissionPercentByBankTermAndPaymentType.Step
+Procedure StepPaymentsChangeCommissionPercentByBankTermAndPaymentType(Parameters, Chain) Export
+	Chain.ChangeCommissionPercentByBankTermAndPaymentType.Enable = True;
 	If Chain.Idle Then
 		Return;
 	EndIf;
-	Chain.ChangePercentByBankTermAndPaymentType.Setter = "SetPaymentsPercent";
+	Chain.ChangeCommissionPercentByBankTermAndPaymentType.Setter = "SetPaymentsPercent";
 	For Each Row In GetRows(Parameters, "Payments") Do
-		Options     = ModelClientServer_V2.ChangePercentByBankTermAndPaymentTypeOptions();
+		Options     = ModelClientServer_V2.ChangeCommissionPercentByBankTermAndPaymentTypeOptions();
 		Options.PaymentType = GetPaymentsPaymentType(Parameters, Row.Key);
 		Options.BankTerm    = GetPaymentsBankTerm(Parameters, Row.Key);
+		Options.CurrentCommissionPercent = GetPaymentsPercent(Parameters, Row.Key);
+		Options.IsUserChange = IsUserChange(Parameters, "StepPaymentsChangeCommissionPercentByBankTermAndPaymentType");
 		Options.Key = Row.Key;
-		Options.StepName = "StepChangePercentByBankTermAndPaymentType";
-		Chain.ChangePercentByBankTermAndPaymentType.Options.Add(Options);
+		Options.StepName = "StepPaymentsChangeCommissionPercentByBankTermAndPaymentType";
+		Chain.ChangeCommissionPercentByBankTermAndPaymentType.Options.Add(Options);
 	EndDo;	
 EndProcedure
 
-// Payments.Percent.ChangePercentByAmount.Step
-Procedure StepChangePercentByAmount(Parameters, Chain) Export
+// Payments.CommissionPercent.ChangeCommissionPercentByAmount.Step
+Procedure StepPaymentsChangeCommissionPercentByAmount(Parameters, Chain) Export
 	Chain.ChangePercentByAmount.Enable = True;
 	If Chain.Idle Then
 		Return;
@@ -13440,7 +13446,7 @@ Procedure StepChangePercentByAmount(Parameters, Chain) Export
 		Options.Amount = GetPaymentsAmount(Parameters, Row.Key);
 		Options.DisableNextSteps = True;
 		Options.Key = Row.Key;
-		Options.StepName = "StepChangePercentByAmount";
+		Options.StepName = "StepPaymentsChangeCommissionPercentByAmount";
 		Chain.ChangePercentByAmount.Options.Add(Options);
 	EndDo;	
 EndProcedure

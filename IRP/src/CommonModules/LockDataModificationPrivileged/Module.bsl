@@ -4,6 +4,7 @@
 
 Procedure BeforeWrite_DocumentsLockDataModification(Source, Cancel, WriteMode, PostingMode) Export
 	CheckLockData(Source, Cancel, Source.IsNew());
+	CheckManualMovementsEdit(Source, Cancel, Source.IsNew());
 EndProcedure
 
 Procedure BeforeWrite_CatalogsLockDataModification(Source, Cancel) Export
@@ -99,6 +100,11 @@ Function CheckLockData(Source, Cancel = False, isNew = False, OnOpen = False) Ex
 	EndIf;
 	Return Cancel;
 EndFunction
+
+Function CheckManualMovementsEdit(Source, Cancel, IsNew)
+EndFunction
+
+
 
 #EndRegion
 

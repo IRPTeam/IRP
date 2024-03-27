@@ -1,8 +1,10 @@
 &AtServer
 Procedure OnCreateAtServer(Cancel, StandardProcessing)
-	Object.DocumentRef = Documents.SalesInvoice.GetRef(New UUID("41CF0805-70B4-11ED-B78C-E657999BD693"));
 	
-	CommonFunctionsServer.GetAttributesFromRef(Object.DocumentRef, "ManualMovementsEdit");
+	If Parameters.Property("DocRef") Then
+		Object.DocumentRef = Parameters.DocRef;
+		ManualMovementsEdit = CommonFunctionsServer.GetAttributesFromRef(Object.DocumentRef, "ManualMovementsEdit").ManualMovementsEdit;
+	EndIf;
 	
 EndProcedure
 
@@ -25,12 +27,16 @@ EndProcedure
 Procedure ClearAttributes()
 	
 	AttributesArray = New Array;
+	AttributesArrayDelete = New Array;	
 	
 	For Each Row In Object.Movements Do
 		If Items.Find(Row.RegisterName) <> Undefined Then
 			AttributesArray.Add(Items[Row.RegisterName]);
+			
+			AttributesArrayDelete.Add(Items[Row.RegisterName].Name);
 		EndIf;	
 	EndDo;
+	ChangeAttributes(New Array, AttributesArrayDelete);
 		
 	For Each ChildItem In Items.Registers.ChildItems Do
 		AttributesArray.Add(ChildItem);
@@ -38,7 +44,9 @@ Procedure ClearAttributes()
 			
 	For Each ArrayItem In AttributesArray Do
 		Items.Delete(ArrayItem);	
-	EndDo;	 		
+	EndDo;
+	
+	
 	Object.Movements.Clear();
 	
 EndProcedure	
@@ -78,7 +86,7 @@ Procedure FillObjectMovements()
 			
 			MovementsValueTable = MovementsValue.Unload();
 			
-			AddPageForMovement(Row.RegisterName);
+			AddPageForMovement(Row.RegisterName, Row.MovementsCount);
 			AddRegisterTableToForm(Row.RegisterName, MovementsValueTable);
 		EndIf;
 	EndDo;
@@ -86,13 +94,13 @@ Procedure FillObjectMovements()
 EndProcedure
 
 &AtServer
-Procedure AddPageForMovement(RegisterName)
+Procedure AddPageForMovement(RegisterName, RecordsCount)
 
 	PageName = "Register_" + RegisterName;
 
 	NewPage = Items.Add(PageName, Type("FormGroup"), Items.Registers);
 	NewPage.Type = FormGroupType.Page;
-	NewPage.Title = RegisterName;
+	NewPage.Title = StrTemplate("(%1) %2", RecordsCount, RegisterName);
 
 	DecorationName = RegisterName + "Decoration";
 	
@@ -150,7 +158,6 @@ EndProcedure
 Procedure RereadData(Command)
 	FillObjectMovements();	
 EndProcedure
-
 
 &AtServer
 Procedure WriteMovementsOnServer(Cancel)

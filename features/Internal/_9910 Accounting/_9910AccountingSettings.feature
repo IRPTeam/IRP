@@ -1420,21 +1420,21 @@ Scenario: _0991035 accounts settings for partner (vendor)
 		And I select from the drop-down list named "AccountAdvancesVendor" by "40501" string
 		And I select from the drop-down list named "AccountTransactionsVendor" by "9087" string
 		And I change the radio button named "RecordType" value to "Partner"
-		And I select from the drop-down list named "Partner" by "Customer 1 (1 partner term)" string
+		And I select from the drop-down list named "Partner" by "Customer 1 (3 partner terms)" string
 		Then the form attribute named "AccountAdvancesVendor" became equal to "405.01"
 		Then the form attribute named "AccountTransactionsVendor" became equal to "90878699"
 		Then the form attribute named "Company" became equal to "Own company 1"
 		Then the form attribute named "Customer" became equal to "No"
 		Then the form attribute named "LedgerTypeVariant" became equal to "LTV with account charts code mask"
 		Then the form attribute named "Other" became equal to "No"
-		Then the form attribute named "Partner" became equal to "Customer 1 (1 partner term)"
+		Then the form attribute named "Partner" became equal to "Customer 1 (3 partner terms)"
 		Then the form attribute named "RecordType" became equal to "Partner"
 		Then the form attribute named "Vendor" became equal to "Yes"
 		And I click "Save and close" button
 	* Check
 		And "List" table contains lines
 			| 'Period'     | 'Company'       | 'Partner'                     | 'Ledger type variant'               | 'Agreement' | 'Vendor' | 'Customer' | 'Transactions' | 'Other' | 'Advances' |
-			| '01.01.2022' | 'Own company 1' | 'Customer 1 (1 partner term)' | 'LTV with account charts code mask' | ''          | 'Yes'    | 'No'       | ''             | 'No'    | ''         |
+			| '01.01.2022' | 'Own company 1' | 'Customer 1 (3 partner terms)' | 'LTV with account charts code mask' | ''          | 'Yes'    | 'No'       | ''             | 'No'    | ''         |
 	And I close all client application windows
 
 Scenario: _0991036 accounts settings for partner (customer)
@@ -1760,9 +1760,9 @@ Scenario: _0991100 check Cash payment accounting movements
 	* Check accounting movements
 		And in the table "PaymentList" I click "Edit accounting" button
 		And "AccountingAnalytics" table became equal
-			| 'Debit' | 'Partner'                   | 'Business unit' | 'Company'                    | 'Partner term'               | 'Credit' | 'Cash/Bank account'         | 'Operation'                                                                                   |
-			| '5201'  | 'Vendor 1 (1 partner term)' | ''              | 'Vendor 1'                   | 'Partner term with vendor 1' | '3240'   | 'Cash, TRY'                 | 'CashPayment DR (R1020B_AdvancesToVendors_R1021B_VendorsTransactions) CR (R3010B_CashOnHand)' |
-			| '5201'  | ''                          | ''              | 'Partner term with vendor 1' | 'Partner term with vendor 1' | '5202'   | 'Vendor 1 (1 partner term)' | 'CashPayment DR (R1021B_VendorsTransactions) CR (R1020B_AdvancesToVendors)'                   |		
+			| 'Debit' | 'Partner'                   | 'Business unit'   | 'Company'                    | 'Partner term'               | 'Credit' | 'Cash/Bank account'         | 'Operation'                                                                                   |
+			| '5201'  | 'Vendor 1 (1 partner term)' | 'Business unit 1' | 'Vendor 1'                   | 'Partner term with vendor 1' | '3240'   | 'Cash, TRY'                 | 'CashPayment DR (R1020B_AdvancesToVendors_R1021B_VendorsTransactions) CR (R3010B_CashOnHand)' |
+			| '5201'  | 'Business unit 1'           | 'Business unit 1' | 'Partner term with vendor 1' | 'Partner term with vendor 1' | '5202'   | 'Vendor 1 (1 partner term)' | 'CashPayment DR (R1021B_VendorsTransactions) CR (R1020B_AdvancesToVendors)'                   |		
 	And I close all client application windows	
 						
 Scenario: _0991110 check Cash receipt accounting movements
@@ -1777,9 +1777,9 @@ Scenario: _0991110 check Cash receipt accounting movements
 	* Check accounting movements
 		And in the table "PaymentList" I click "Edit accounting" button
 		And "AccountingAnalytics" table became equal
-			| 'Debit' | 'Cash/Bank account'           | 'Company'                                                 | 'Partner'                     | 'Business unit' | 'Credit' | 'Partner term'                                            | 'Operation'                                                                                         |
-			| '3240'  | 'Cash, TRY'                   | 'Client 1'                                                | 'Customer 1 (1 partner term)' | ''              | '4010'   | 'Partner term with customer (by document + credit limit)' | 'CashReceipt DR (R3010B_CashOnHand) CR (R2020B_AdvancesFromCustomers_R2021B_CustomersTransactions)' |
-			| '4010'  | 'Customer 1 (1 partner term)' | 'Partner term with customer (by document + credit limit)' | 'Customer 1 (1 partner term)' | ''              | '4020'   | 'Partner term with customer (by document + credit limit)' | 'CashReceipt DR (R2021B_CustomersTransactions) CR (R2020B_AdvancesFromCustomers)'                   |	
+			| 'Debit' | 'Cash/Bank account'            | 'Company'                                                 | 'Partner'                      | 'Business unit'   | 'Credit' | 'Partner term'                                            | 'Operation'                                                                                         |
+			| '3240'  | 'Cash, TRY'                    | 'Client 1'                                                | 'Customer 1 (3 partner terms)' | 'Business unit 1' | '4010'   | 'Partner term with customer (by document + credit limit)' | 'CashReceipt DR (R3010B_CashOnHand) CR (R2020B_AdvancesFromCustomers_R2021B_CustomersTransactions)' |
+			| '4010'  | 'Customer 1 (3 partner terms)' | 'Partner term with customer (by document + credit limit)' | 'Customer 1 (3 partner terms)' | 'Business unit 1' | '4020'   | 'Partner term with customer (by document + credit limit)' | 'CashReceipt DR (R2021B_CustomersTransactions) CR (R2020B_AdvancesFromCustomers)'                   |		
 	And I close all client application windows
 
 Scenario: _0991120 check Cash expense accounting movements

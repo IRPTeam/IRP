@@ -924,6 +924,7 @@ GROUP BY
           <types>Date</types>
           <dateQualifiers/>
         </valueType>
+        <values xsi:type="core:UndefinedValue"/>
       </parameters>
       <parameters>
         <name>Company</name>
@@ -938,6 +939,7 @@ GROUP BY
         <valueType>
           <types>CatalogRef.Companies</types>
         </valueType>
+        <values xsi:type="core:UndefinedValue"/>
         <useRestriction>true</useRestriction>
       </parameters>
       <parameters>
@@ -953,6 +955,7 @@ GROUP BY
         <valueType>
           <types>CatalogRef.CashAccounts</types>
         </valueType>
+        <values xsi:type="core:UndefinedValue"/>
         <useRestriction>true</useRestriction>
       </parameters>
       <parameters>
@@ -968,6 +971,7 @@ GROUP BY
         <valueType>
           <types>CatalogRef.CashAccounts</types>
         </valueType>
+        <values xsi:type="core:UndefinedValue"/>
         <useRestriction>true</useRestriction>
       </parameters>
       <parameters>
@@ -983,6 +987,7 @@ GROUP BY
         <valueType>
           <types>CatalogRef.BusinessUnits</types>
         </valueType>
+        <values xsi:type="core:UndefinedValue"/>
         <useRestriction>true</useRestriction>
       </parameters>
     </extInfo>

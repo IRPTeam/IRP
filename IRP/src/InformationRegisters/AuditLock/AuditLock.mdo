@@ -17,6 +17,14 @@
   <useStandardCommands>true</useStandardCommands>
   <editType>InDialog</editType>
   <dataLockControlMode>Managed</dataLockControlMode>
+  <recordPresentation>
+    <key>en</key>
+    <value>Audit lock</value>
+  </recordPresentation>
+  <listPresentation>
+    <key>en</key>
+    <value>Audit locks</value>
+  </listPresentation>
   <dimensions uuid="4f0971b4-a3aa-4451-905d-705816410b0f">
     <name>Document</name>
     <synonym>

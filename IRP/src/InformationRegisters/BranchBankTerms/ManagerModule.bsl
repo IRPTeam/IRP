@@ -1,6 +1,5 @@
 #Region AccessObject
 
-
 // Get access key.
 // See Role.TemplateInformationRegisters
 // 

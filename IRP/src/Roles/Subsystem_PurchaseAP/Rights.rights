@@ -4,20 +4,6 @@
 	<setForAttributesByDefault>true</setForAttributesByDefault>
 	<independentRightsOfChildObjects>false</independentRightsOfChildObjects>
 	<object>
-		<name>Subsystem.PurchaseAP.Subsystem.PurchaseReturn</name>
-		<right>
-			<name>View</name>
-			<value>true</value>
-		</right>
-	</object>
-	<object>
-		<name>Subsystem.PurchaseAP</name>
-		<right>
-			<name>View</name>
-			<value>true</value>
-		</right>
-	</object>
-	<object>
 		<name>Subsystem.PurchaseAP.Subsystem.Pricing</name>
 		<right>
 			<name>View</name>
@@ -32,7 +18,21 @@
 		</right>
 	</object>
 	<object>
+		<name>Subsystem.PurchaseAP.Subsystem.PurchaseReturn</name>
+		<right>
+			<name>View</name>
+			<value>true</value>
+		</right>
+	</object>
+	<object>
 		<name>Subsystem.Reports.Subsystem.Purchase</name>
+		<right>
+			<name>View</name>
+			<value>true</value>
+		</right>
+	</object>
+	<object>
+		<name>Subsystem.PurchaseAP</name>
 		<right>
 			<name>View</name>
 			<value>true</value>

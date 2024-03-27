@@ -55,6 +55,7 @@ Function GetQueryText_Filter()
 EndFunction
 
 Function GetQueryText_All()
+	//@skip-check ql-constants-in-binary-operation
 	Return 
 		"SELECT
 		|	2 AS Sort,

@@ -81,7 +81,6 @@ Procedure GoodsInTransitIncomingRefreshRequestProcessingAtServer()
 			Filter.Insert("Store", ThisObject.Store);
 		EndIf;
 		
-		
 		BasisesTable = RowIDInfoPrivileged.GetBasises(GR_EmptyRef, Filter);
 		For Each Row In BasisesTable Do
 			NewRow = BasisTableTotal.Add();
@@ -191,34 +190,37 @@ EndProcedure
 Procedure CreateDocuments(Val StructureRow, CreateGoodsReceipt, CreateInventoryTransfer)
 
 	BeginTransaction();
-	CreationDate = CommonFunctionsServer.GetCurrentSessionDate();
-	If CreateGoodsReceipt Then
-		
-		
-		If ValueIsFilled(ThisObject.Unit) Then
-			StructureRow.Unit = ThisObject.Unit;
-			StructureRow.QuantityInBaseUnit =
-			Catalogs.Units.Convert(StructureRow.Unit, StructureRow.BasisUnit, ThisObject.Quantity);
-		Else
-			StructureRow.QuantityInBaseUnit = ThisObject.Quantity;
-		EndIf; 
-		
-		ResultTable = ThisObject.GoodsInTransitIncoming.Unload().CopyColumns();
-		FillPropertyValues(ResultTable.Add(), StructureRow);
-		
-		GoodsReceipt = Documents.GoodsReceipt.CreateDocument();
-		GoodsReceipt.Date = CreationDate + 1;
-		
-		Data = RowIDInfoPrivileged.ExtractData(ResultTable, GoodsReceipt.Ref);
-		FillingValues = RowIDInfoPrivileged.ConvertDataToFillingValues(GoodsReceipt.Ref.Metadata(), Data);
-		If Not FillingValues.Count() Then
-			Raise "Converting Data to Filling values failed";
+	Try
+		CreationDate = CommonFunctionsServer.GetCurrentSessionDate();
+		If CreateGoodsReceipt Then
+			
+			If ValueIsFilled(ThisObject.Unit) Then
+				StructureRow.Unit = ThisObject.Unit;
+				StructureRow.QuantityInBaseUnit =
+				Catalogs.Units.Convert(StructureRow.Unit, StructureRow.BasisUnit, ThisObject.Quantity);
+			Else
+				StructureRow.QuantityInBaseUnit = ThisObject.Quantity;
+			EndIf; 
+			
+			ResultTable = ThisObject.GoodsInTransitIncoming.Unload().CopyColumns();
+			FillPropertyValues(ResultTable.Add(), StructureRow);
+			
+			GoodsReceipt = Documents.GoodsReceipt.CreateDocument();
+			GoodsReceipt.Date = CreationDate + 1;
+			
+			Data = RowIDInfoPrivileged.ExtractData(ResultTable, GoodsReceipt.Ref);
+			FillingValues = RowIDInfoPrivileged.ConvertDataToFillingValues(GoodsReceipt.Ref.Metadata(), Data);
+			If Not FillingValues.Count() Then
+				Raise "Converting Data to Filling values failed";
+			EndIf;
+			GoodsReceipt.Fill(FillingValues[0]);
+			GoodsReceipt.Write(DocumentWriteMode.Posting);		
 		EndIf;
-		GoodsReceipt.Fill(FillingValues[0]);
-		GoodsReceipt.Write(DocumentWriteMode.Posting);		
-	EndIf;
-	CommitTransaction();
-
+		CommitTransaction();
+	Except
+		RollbackTransaction();
+		CommonFunctionsClientServer.ShowUsersMessage(ErrorProcessing.DetailErrorDescription(ErrorInfo()));
+	EndTry;
 	Clear();
 
 	If CreateGoodsReceipt Then

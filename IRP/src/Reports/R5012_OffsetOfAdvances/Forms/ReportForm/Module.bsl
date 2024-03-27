@@ -36,7 +36,6 @@ Procedure RunAtServer()
 			Area_Row.Parameters.ADV_KEY = ADV_KEY;
 			ArrayOf_FromADV.Add(ADV_KEY);
 			
-			 
 			TRN_KEY = GetTRN_KEY(MainRow.Company, MainRow.Branch, MainRow.Currency, 
 				MainRow.Partner, MainRow.LegalName, MainRow.Agreement, DocumentRow.Order, DocumentRow.Document);
 			Area_Row.Parameters.TRN_KEY = TRN_KEY;
@@ -56,7 +55,6 @@ Procedure RunAtServer()
 					EndDo;
 				EndIf;
 			EndIf;
-			
 			
 		EndDo; // DocumentRow
 		

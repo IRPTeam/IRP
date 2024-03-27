@@ -1,6 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<suppress:SuppressGenericObject xmlns:suppress="http://g5.1c.ru/v8/dt/check/suppress/model" fqn="Role.FullAccess.Rights">
-  <suppressions key="com.e1c.v8codestyle.right:right-start-external-connection" value="true"/>
-  <suppressions key="com.e1c.v8codestyle.right:right-start-thick-client" value="true"/>
-  <suppressions key="com.e1c.v8codestyle.right:right-start-automation" value="true"/>
-</suppress:SuppressGenericObject>

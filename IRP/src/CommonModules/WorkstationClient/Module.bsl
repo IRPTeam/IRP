@@ -10,7 +10,6 @@ Function GetCurrentWorkstation() Export
 	Return Workstation;
 EndFunction
 
-
 // Get unique ID.
 // 
 // Returns:

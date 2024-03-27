@@ -242,6 +242,7 @@ Function CheckFourmula() Export
 		EndDo;
 		
 		Try
+			//@skip-check module-unused-local-variable
 			EvalResult = Eval(Text);
 			CheckText = StrReplace(ThisObject.Formula, Chars.LF, "");
 			CheckText = StrReplace(CheckText, " ", "");

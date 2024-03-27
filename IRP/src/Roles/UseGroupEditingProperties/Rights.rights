@@ -4,18 +4,18 @@
 	<setForAttributesByDefault>true</setForAttributesByDefault>
 	<independentRightsOfChildObjects>false</independentRightsOfChildObjects>
 	<object>
-		<name>DataProcessor.ObjectPropertyEditor</name>
-		<right>
-			<name>Use</name>
-			<value>true</value>
-		</right>
+		<name>DataProcessor.ObjectPropertyEditor.Command.GroupEditingProperties</name>
 		<right>
 			<name>View</name>
 			<value>true</value>
 		</right>
 	</object>
 	<object>
-		<name>DataProcessor.ObjectPropertyEditor.Command.GroupEditingProperties</name>
+		<name>DataProcessor.ObjectPropertyEditor</name>
+		<right>
+			<name>Use</name>
+			<value>true</value>
+		</right>
 		<right>
 			<name>View</name>
 			<value>true</value>

@@ -1,0 +1,121 @@
+{
+  "version": 1,
+  "settings": {
+    "begin-transaction": {
+      "enabled": true
+    },
+    "code-after-async-call": {
+      "enabled": true
+    },
+    "commit-transaction": {
+      "enabled": true
+    },
+    "module-structure-method-in-regions": {
+      "enabled": false
+    },
+    "manager-module-named-self-reference": {
+      "enabled": false
+    },
+    "export-procedure-missing-comment": {
+      "enabled": false
+    },
+    "form-ql-hub": {
+      "enabled": false
+    },
+    "ql-join-to-sub-query": {
+      "enabled": false
+    },
+    "module-region-empty": {
+      "enabled": false
+    },
+    "bsl-legacy-check-dynamic-feature-access-for-unknown-left-part": {
+      "enabled": false
+    },
+    "new-font": {
+      "enabled": false
+    },
+    "ql-temp-table-index": {
+      "enabled": false
+    },
+    "reading-attribute-from-database": {
+      "enabled": false
+    },
+    "bsl-variable-name-invalid": {
+      "enabled": false
+    },
+    "invocation-form-event-handler": {
+      "enabled": false
+    },
+    "doc-comment-collection-item-type": {
+      "enabled": false
+    },
+    "bsl-legacy-check-dynamic-feature-access": {
+      "enabled": false
+    },
+    "module-consecutive-blank-lines": {
+      "enabled": true
+    },
+    "unknown-form-parameter-access": {
+      "enabled": false
+    },
+    "md-object-attribute-comment-not-exist": {
+      "enabled": false,
+      "properties": {
+        "attributesList": "Description"
+      }
+    },
+    "constructor-function-return-section": {
+      "enabled": false
+    },
+    "export-method-in-command-form-module": {
+      "enabled": false
+    },
+    "doc-comment-export-function-return-section": {
+      "enabled": false
+    },
+    "doc-comment-parameter-section": {
+      "enabled": false
+    },
+    "db-object-anyref-type": {
+      "enabled": false
+    },
+    "method-too-many-params": {
+      "enabled": false
+    },
+    "property-return-type": {
+      "properties": {
+        "excludeTopMdObjectNamePattern": "R()"
+      }
+    },
+    "rollback-transaction": {
+      "enabled": true
+    },
+    "module-structure-form-event-regions": {
+      "enabled": false
+    },
+    "doc-comment-return-section-type": {
+      "enabled": false
+    },
+    "query-in-loop": {
+      "enabled": false
+    },
+    "module-structure-top-region": {
+      "enabled": false
+    },
+    "structure-consructor-too-many-keys": {
+      "enabled": false
+    },
+    "module-structure-event-regions": {
+      "enabled": false
+    },
+    "module-structure-var-in-region": {
+      "enabled": false
+    },
+    "module-self-reference": {
+      "enabled": false
+    },
+    "dcs-ql-hub": {
+      "enabled": false
+    }
+  }
+}

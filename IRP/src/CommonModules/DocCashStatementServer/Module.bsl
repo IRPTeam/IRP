@@ -64,18 +64,16 @@ Procedure FillTransactions(Object) Export
 	Query.Text =
 	"SELECT
 	|	R3010B_CashOnHandTurnovers.Recorder AS Document,
+	|	R3010B_CashOnHandTurnovers.Recorder.Date AS Date,
 	|	SUM(R3010B_CashOnHandTurnovers.AmountExpense) AS Expense,
 	|	SUM(R3010B_CashOnHandTurnovers.AmountReceipt) AS Receipt
 	|FROM
 	|	AccumulationRegister.R3010B_CashOnHand.Turnovers(&BegOfPeriod, &EndOfPeriod, Record,
 	|		Account.Branch = &Branch
-	|	AND Company = &Company) AS R3010B_CashOnHandTurnovers
-	|WHERE
-	|	R3010B_CashOnHandTurnovers.Account.Type = VALUE(Enum.CashAccountTypes.Cash)
-	|	AND
-	|		R3010B_CashOnHandTurnovers.CurrencyMovementType = VALUE(ChartOfCharacteristicTypes.CurrencyMovementType.SettlementCurrency)
+	|	AND Company = &Company AND Account.Type = VALUE(Enum.CashAccountTypes.Cash) AND CurrencyMovementType = VALUE(ChartOfCharacteristicTypes.CurrencyMovementType.SettlementCurrency)) AS R3010B_CashOnHandTurnovers
 	|GROUP BY
-	|	R3010B_CashOnHandTurnovers.Recorder
+	|	R3010B_CashOnHandTurnovers.Recorder,
+	|	R3010B_CashOnHandTurnovers.Recorder.Date
 	|ORDER BY
 	|	R3010B_CashOnHandTurnovers.Recorder.Date";
 

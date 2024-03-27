@@ -39,7 +39,6 @@ Procedure OpenRef(Command)
 	EndIf;
 EndProcedure
 
-
 &AtClient
 Function GetAllWindows()
 	WindowsForWork = New Array; // Array Of ClientApplicationWindow

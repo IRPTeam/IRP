@@ -88,7 +88,6 @@ Function GetCashAdvanceDeduction(Parameters) Export
 	Return New Structure("Table, GroupColumn, SumColumn", ResultTable, GroupColumn, SumColumn);
 EndFunction
 
-
 Function GetPayrolls_Deduction(Parameters) Export
 	ResultTable = New ValueTable();
 	ResultTable.Columns.Add("Employee");

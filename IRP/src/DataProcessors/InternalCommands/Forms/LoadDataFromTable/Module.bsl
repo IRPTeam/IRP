@@ -103,11 +103,6 @@ Procedure LoadDataFromTableEnd_Document_PriceList(Result, AddInfo) Export
 		Return;
 	EndIf;
 	
-	NameFieldForUnit = "Item";
-	If AddInfo.TableForLoading = "ItemKeyList" Then
-		NameFieldForUnit = "ItemKey";
-	EndIf;
-	
 	DataTable = GetTableByAddress(Result.Address);
 	For Each TableRow In DataTable Do
 		DocumentTable = AddInfo.DocumentObject[AddInfo.TableForLoading]; // See Document.PriceList.ItemList

@@ -659,8 +659,8 @@ Scenario: _0260133 create advance payment from POS (Cash, Card)
 	* Check cash receipt
 		Given I open hyperlink "e1cib/list/Document.CashReceipt"
 		And I go to line in "List" table
-			| 'Amount'   | 'Transaction type'    |
-			| '400,00'   | 'Customer advance'    |
+			| 'Amount' | 'Transaction type'        |
+			| '400,00' | 'Retail customer advance' |
 		And I select current line in "List" table
 		Then the form attribute named "Company" became equal to "Main Company"
 		Then the form attribute named "CashAccount" became equal to "Pos cash account 1"
@@ -674,8 +674,8 @@ Scenario: _0260133 create advance payment from POS (Cash, Card)
 	* Check bank receipt  
 		Given I open hyperlink "e1cib/list/Document.BankReceipt"
 		And I go to line in "List" table
-			| 'Amount'   | 'Transaction type'    |
-			| '100,00'   | 'Customer advance'    |
+			| 'Amount' | 'Transaction type'        |
+			| '100,00' | 'Retail customer advance' |
 		And I select current line in "List" table
 		Then the form attribute named "Company" became equal to "Main Company"
 		Then the form attribute named "Account" became equal to "Transit Main"

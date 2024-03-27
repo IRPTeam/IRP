@@ -1001,6 +1001,7 @@ Procedure Write_SelfRecords(Parameters,
 				Or TypeOf(Row.Document) = Type("DocumentRef.SalesReportFromTradeAgent")
 				Or TypeOf(Row.Document) = Type("DocumentRef.SalesInvoice")
 				Or (TypeOf(Row.Document) = Type("DocumentRef.SalesReturn") And Not RowOffset.IsReturnToAdvance)
+				Or (TypeOf(Row.Document) = Type("DocumentRef.PurchaseReturn") And RowOffset.IsReturnToAdvance)
 				
 				Or (TypeOf(Row.Document) = Type("DocumentRef.BankPayment") And 
 					Row.Document.TransactionType = Enums.OutgoingPaymentTransactionTypes.ReturnToCustomer)
@@ -1032,16 +1033,21 @@ Procedure Write_SelfRecords(Parameters,
 			NewRow_PartnerBalance_Advances.Currency   = NewRow_Advances.Currency;
 			NewRow_PartnerBalance_Advances.AdvancesClosing = Parameters.Object.Ref;
 			
+			// Partner balance Advance Amounts
 			If Parameters.RegisterName_Advances = Metadata.AccumulationRegisters.R2020B_AdvancesFromCustomers.Name Then
-				
 				NewRow_PartnerBalance_Advances.CustomerAdvance = NewRow_Advances.Amount;
 				
 				If (TypeOf(Row.Document) = Type("DocumentRef.SalesReturn") And RowOffset.IsReturnToAdvance) Then
-					NewRow_PartnerBalance_Advances.CustomerAdvance = - NewRow_PartnerBalance_Advances.CustomerAdvance;	
+					NewRow_PartnerBalance_Advances.CustomerAdvance = - NewRow_Advances.Amount; // Sales return	
 				EndIf;	
 				
 			ElsIf Parameters.RegisterName_Advances = Metadata.AccumulationRegisters.R1020B_AdvancesToVendors.Name Then
 				NewRow_PartnerBalance_Advances.VendorAdvance = NewRow_Advances.Amount;
+				
+				If (TypeOf(Row.Document) = Type("DocumentRef.PurchaseReturn") And RowOffset.IsReturnToAdvance) Then
+					NewRow_PartnerBalance_Advances.VendorAdvance = - NewRow_Advances.Amount; // Purchase return	
+				EndIf;	
+				
 			Else
 				Raise StrTemplate("Unknown advance register [%1]", Parameters.RegisterName_Advances);
 			EndIf;

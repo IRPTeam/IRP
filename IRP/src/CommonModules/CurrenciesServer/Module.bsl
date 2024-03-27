@@ -241,26 +241,26 @@ Procedure PreparePostingDataTables(Parameters, CurrencyTable, AddInfo = Undefine
 	
 	ExchangeDifference(Parameters);
 	
-	For Each ItemOfPostingInfoRow In ArrayOfPostingInfo Do
-		ItemOfPostingInfo = ItemOfPostingInfoRow.Value;
-		If ItemOfPostingInfo.PrepareTable.Count() 
-			And ItemOfPostingInfo.Metadata = Metadata.AccumulationRegisters.R5020B_PartnersBalance Then
-				
-			ArrayForDelete = New Array();
-			For Each Row In ItemOfPostingInfo.PrepareTable Do
-				If ValueIsFilled(Row.CurrencyMovementType)
-					And Row.CurrencyMovementType.Type = Enums.CurrencyType.Agreement
-					And (ValueIsFilled(Row.CustomerAdvance) Or ValueIsFilled(Row.VendorAdvance)) Then
-						ArrayForDelete.Add(Row);
-				EndIf;
-			EndDo;
-			
-			For Each ItemForDelete In ArrayForDelete Do
-				ItemOfPostingInfo.PrepareTable.Delete(ItemForDelete);
-			EndDo;
-				
-		EndIf;
-	EndDo;
+//	For Each ItemOfPostingInfoRow In ArrayOfPostingInfo Do
+//		ItemOfPostingInfo = ItemOfPostingInfoRow.Value;
+//		If ItemOfPostingInfo.PrepareTable.Count() 
+//			And ItemOfPostingInfo.Metadata = Metadata.AccumulationRegisters.R5020B_PartnersBalance Then
+//				
+//			ArrayForDelete = New Array();
+//			For Each Row In ItemOfPostingInfo.PrepareTable Do
+//				If ValueIsFilled(Row.CurrencyMovementType)
+//					And Row.CurrencyMovementType.Type = Enums.CurrencyType.Agreement
+//					And (ValueIsFilled(Row.CustomerAdvance) Or ValueIsFilled(Row.VendorAdvance)) Then
+//						ArrayForDelete.Add(Row);
+//				EndIf;
+//			EndDo;
+//			
+//			For Each ItemForDelete In ArrayForDelete Do
+//				ItemOfPostingInfo.PrepareTable.Delete(ItemForDelete);
+//			EndDo;
+//				
+//		EndIf;
+//	EndDo;
 	
 EndProcedure
 
@@ -1266,9 +1266,10 @@ Procedure DeleteEmptyAmounts(Table, ColumnName) Export
 EndProcedure
 
 Function CreateDimensionsTableAndFilter(RegisterName)
+	_RegisterName = GetMetadataReisterName(RegisterName);
 	DimensionsFilter = New Structure;
 	DimensionsTable = New ValueTable;
-	For Each Dimension In Metadata.AccumulationRegisters[RegisterName].Dimensions Do
+	For Each Dimension In Metadata.AccumulationRegisters[_RegisterName].Dimensions Do
 		DimensionsTable.Columns.Add(Dimension.Name, Dimension.Type);
 		If Upper(Dimension.Name) = Upper("CurrencyMovementType") Or Upper(Dimension.Name) = Upper("Currency") Then
 			Continue;
@@ -1276,14 +1277,22 @@ Function CreateDimensionsTableAndFilter(RegisterName)
 		DimensionsFilter.Insert(Dimension.Name);
 	EndDo;
 	DimensionsTable.Columns.Add("AmountRevaluated", Metadata.DefinedTypes.typeAmount.Type);
-	DimensionsTable.Columns.Add("RecordType"      , Metadata.AccumulationRegisters[RegisterName].StandardAttributes.RecordType.Type);
-	DimensionsTable.Columns.Add("Period"          , Metadata.AccumulationRegisters[RegisterName].StandardAttributes.Period.Type);
+	DimensionsTable.Columns.Add("RecordType"      , Metadata.AccumulationRegisters[_RegisterName].StandardAttributes.RecordType.Type);
+	DimensionsTable.Columns.Add("Period"          , Metadata.AccumulationRegisters[_RegisterName].StandardAttributes.Period.Type);
 	DimensionsTable.Columns.Add("Key"      , Metadata.DefinedTypes.typeRowID.Type);
 	
 	Result = New Structure;
 	Result.Insert("DimensionsTable", DimensionsTable);
 	Result.Insert("DimensionsFilter", DimensionsFilter);
 	Return Result;
+EndFunction
+
+Function GetMetadataReisterName(RegisterName)
+	If StrStartsWith(RegisterName, "R5020B_PartnersBalance") Then
+		Return "R5020B_PartnersBalance";
+	Else
+		Return RegisterName;
+	EndIf;
 EndFunction
 
 Procedure RevaluateCurrency_Advances(Parameters, 

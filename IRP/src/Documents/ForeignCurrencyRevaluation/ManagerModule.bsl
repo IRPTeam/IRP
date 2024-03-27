@@ -27,6 +27,17 @@ Function PostingGetDocumentDataTables(Ref, Cancel, PostingMode, Parameters, AddI
 	|	and (CurrencyMovementType = VALUE(ChartOfCharacteristicTypes.CurrencyMovementType.SettlementCurrency)
 	|	or Currency <> TransactionCurrency)) AS Reg
 	|;
+	|// active
+	|SELECT
+	|	*,
+	|	Reg.CurrencyMovementType.Source AS Source,
+	|	Reg.VendorAdvanceBalance AS Amount
+	|INTO _R5020B_PartnersBalance_VendorAdvance
+	|FROM
+	|	AccumulationRegister.R5020B_PartnersBalance.Balance(&Period, Company = &Company
+	|	and (CurrencyMovementType = VALUE(ChartOfCharacteristicTypes.CurrencyMovementType.SettlementCurrency)
+	|	or Currency <> TransactionCurrency)) AS Reg
+	|;
 	|// passive
 	|SELECT
 	|	*,
@@ -35,6 +46,17 @@ Function PostingGetDocumentDataTables(Ref, Cancel, PostingMode, Parameters, AddI
 	|INTO _R1021B_VendorsTransactions
 	|FROM
 	|	AccumulationRegister.R1021B_VendorsTransactions.Balance(&Period, Company = &Company
+	|	and (CurrencyMovementType = VALUE(ChartOfCharacteristicTypes.CurrencyMovementType.SettlementCurrency)
+	|	or Currency <> TransactionCurrency)) AS Reg
+	|;
+	|// passive
+	|SELECT
+	|	*,
+	|	Reg.CurrencyMovementType.Source AS Source,
+	|	Reg.VendorTransactionBalance AS Amount
+	|INTO _R5020B_PartnersBalance_VendorTransaction
+	|FROM
+	|	AccumulationRegister.R5020B_PartnersBalance.Balance(&Period, Company = &Company
 	|	and (CurrencyMovementType = VALUE(ChartOfCharacteristicTypes.CurrencyMovementType.SettlementCurrency)
 	|	or Currency <> TransactionCurrency)) AS Reg
 	|;
@@ -49,6 +71,17 @@ Function PostingGetDocumentDataTables(Ref, Cancel, PostingMode, Parameters, AddI
 	|	and (CurrencyMovementType = VALUE(ChartOfCharacteristicTypes.CurrencyMovementType.SettlementCurrency)
 	|	or Currency <> TransactionCurrency)) AS Reg
 	|;
+	|// passive
+	|SELECT
+	|	*,
+	|	Reg.CurrencyMovementType.Source AS Source,
+	|	Reg.CustomerAdvanceBalance AS Amount
+	|INTO _R5020B_PartnersBalance_CustomerAdvance
+	|FROM
+	|	AccumulationRegister.R5020B_PartnersBalance.Balance(&Period, Company = &Company
+	|	and (CurrencyMovementType = VALUE(ChartOfCharacteristicTypes.CurrencyMovementType.SettlementCurrency)
+	|	or Currency <> TransactionCurrency)) AS Reg
+	|;
 	|// active
 	|SELECT
 	|	*,
@@ -57,6 +90,17 @@ Function PostingGetDocumentDataTables(Ref, Cancel, PostingMode, Parameters, AddI
 	|INTO _R2021B_CustomersTransactions
 	|FROM
 	|	AccumulationRegister.R2021B_CustomersTransactions.Balance(&Period, Company = &Company
+	|	and (CurrencyMovementType = VALUE(ChartOfCharacteristicTypes.CurrencyMovementType.SettlementCurrency)
+	|	or Currency <> TransactionCurrency)) AS Reg
+	|;
+	|// active
+	|SELECT
+	|	*,
+	|	Reg.CurrencyMovementType.Source AS Source,
+	|	Reg.CustomerTransactionBalance AS Amount
+	|INTO _R5020B_PartnersBalance_CustomerTransaction
+	|FROM
+	|	AccumulationRegister.R5020B_PartnersBalance.Balance(&Period, Company = &Company
 	|	and (CurrencyMovementType = VALUE(ChartOfCharacteristicTypes.CurrencyMovementType.SettlementCurrency)
 	|	or Currency <> TransactionCurrency)) AS Reg
 	|;
@@ -181,6 +225,18 @@ Function PostingGetDocumentDataTables(Ref, Cancel, PostingMode, Parameters, AddI
 	|	and (CurrencyMovementType = VALUE(ChartOfCharacteristicTypes.CurrencyMovementType.SettlementCurrency)
 	|	or Currency <> TransactionCurrency)) AS Reg
 	|;
+	|// active
+	|SELECT
+	|	*,
+	|	Reg.CurrencyMovementType.Source AS Source,
+	|	Reg.OtherTransactionBalance AS Amount
+	|INTO _R5020B_PartnersBalance_OtherTransaction
+	|FROM
+	|	AccumulationRegister.R5020B_PartnersBalance.Balance(&Period, Company = &Company
+	|	and (CurrencyMovementType = VALUE(ChartOfCharacteristicTypes.CurrencyMovementType.SettlementCurrency)
+	|	or Currency <> TransactionCurrency)) AS Reg
+	|;
+	|
 	|////////////////////////////////////////////////////////////////////////////////
 	|SELECT
 	|	Reg.TransactionCurrency AS CurrencyFrom,
@@ -189,6 +245,15 @@ Function PostingGetDocumentDataTables(Ref, Cancel, PostingMode, Parameters, AddI
 	|INTO CurrencyPairs
 	|FROM
 	|	_R1020B_AdvancesToVendors AS Reg
+	|
+	|UNION ALL
+	|
+	|SELECT
+	|	Reg.TransactionCurrency AS CurrencyFrom,
+	|	Reg.Currency AS CurrencyTo,
+	|	Reg.Source AS Source
+	|FROM
+	|	_R5020B_PartnersBalance_VendorAdvance AS Reg
 	|
 	|UNION ALL
 	|
@@ -202,6 +267,15 @@ Function PostingGetDocumentDataTables(Ref, Cancel, PostingMode, Parameters, AddI
 	|UNION ALL
 	|
 	|SELECT
+	|	Reg.TransactionCurrency AS CurrencyFrom,
+	|	Reg.Currency AS CurrencyTo,
+	|	Reg.Source AS Source
+	|FROM
+	|	_R5020B_PartnersBalance_VendorTransaction AS Reg
+	|
+	|UNION ALL
+	|
+	|SELECT
 	|	Reg.TransactionCurrency,
 	|	Reg.Currency,
 	|	Reg.Source
@@ -211,11 +285,29 @@ Function PostingGetDocumentDataTables(Ref, Cancel, PostingMode, Parameters, AddI
 	|UNION ALL
 	|
 	|SELECT
+	|	Reg.TransactionCurrency AS CurrencyFrom,
+	|	Reg.Currency AS CurrencyTo,
+	|	Reg.Source AS Source
+	|FROM
+	|	_R5020B_PartnersBalance_CustomerAdvance AS Reg
+	|
+	|UNION ALL
+	|
+	|SELECT
 	|	Reg.TransactionCurrency,
 	|	Reg.Currency,
 	|	Reg.Source
 	|FROM
 	|	_R2021B_CustomersTransactions AS Reg
+	|
+	|UNION ALL
+	|
+	|SELECT
+	|	Reg.TransactionCurrency AS CurrencyFrom,
+	|	Reg.Currency AS CurrencyTo,
+	|	Reg.Source AS Source
+	|FROM
+	|	_R5020B_PartnersBalance_CustomerTransaction AS Reg
 	|
 	|UNION ALL
 	|
@@ -315,6 +407,15 @@ Function PostingGetDocumentDataTables(Ref, Cancel, PostingMode, Parameters, AddI
 	|	Reg.Source
 	|FROM
 	|	_R5015B_OtherPartnersTransactions AS Reg
+	|
+	|UNION ALL
+	|
+	|SELECT
+	|	Reg.TransactionCurrency AS CurrencyFrom,
+	|	Reg.Currency AS CurrencyTo,
+	|	Reg.Source AS Source
+	|FROM
+	|	_R5020B_PartnersBalance_OtherTransaction AS Reg
 	|;
 	|
 	|////////////////////////////////////////////////////////////////////////////////
@@ -377,6 +478,11 @@ Function PostingGetDocumentDataTables(Ref, Cancel, PostingMode, Parameters, AddI
 	ArrayOfOthers.Add("R3016B_ChequeAndBonds");
 	ArrayOfOthers.Add("R6070T_OtherPeriodsExpenses");
 	ArrayOfOthers.Add("R6080T_OtherPeriodsRevenues");
+	ArrayOfOthers.Add("R5020B_PartnersBalance_CustomerTransaction");
+	ArrayOfOthers.Add("R5020B_PartnersBalance_CustomerAdvance");
+	ArrayOfOthers.Add("R5020B_PartnersBalance_VendorTransaction");
+	ArrayOfOthers.Add("R5020B_PartnersBalance_VendorAdvance");
+	ArrayOfOthers.Add("R5020B_PartnersBalance_OtherTransaction");
 
 	ExpenseRevenueParams = New Structure();
 	ExpenseRevenueParams.Insert("DocumentDate", DocumentDate);
@@ -617,6 +723,7 @@ Function GetQueryTextsMasterTables()
 	QueryArray.Add(R9510B_SalaryPayment());
 	QueryArray.Add(R8510B_BookValueOfFixedAsset());
 	QueryArray.Add(T1040T_AccountingAmounts());
+	QueryArray.Add(R5020B_PartnersBalance());
 	Return QueryArray;
 EndFunction
 
@@ -636,6 +743,138 @@ Function R5022T_Expenses()
 		   |	_R5022T_Expenses
 		   |WHERE
 		   |	TRUE";
+EndFunction
+
+Function R5020B_PartnersBalance()
+	Return
+		"SELECT
+		|	Table.RecordType,
+		|	Table.Period,
+		|	Table.Company,
+		|	Table.Branch,
+		|	Table.Partner,
+		|	Table.LegalName,
+		|	Table.Agreement,
+		|	Table.Document,
+		|	Table.Currency,
+		|	Table.CurrencyMovementType,
+		|	Table.TransactionCurrency,
+		|	0 AS Amount,
+		|	Table.AmountRevaluated AS CustomerTransaction,
+		|	0 AS CustomerAdvance,
+		|	0 AS VendorTransaction,
+		|	0 AS VendorAdvance,
+		|	0 AS OtherTransaction,
+		|	UNDEFINED AS AdvancesClosing
+		|INTO R5020B_PartnersBalance
+		|FROM
+		|	Revaluated_R5020B_PartnersBalance_CustomerTransaction AS Table
+		|WHERE
+		|	Table.AmountRevaluated <> 0
+		|
+		|UNION ALL
+		|
+		|SELECT
+		|	Table.RecordType,
+		|	Table.Period,
+		|	Table.Company,
+		|	Table.Branch,
+		|	Table.Partner,
+		|	Table.LegalName,
+		|	Table.Agreement,
+		|	Table.Document,
+		|	Table.Currency,
+		|	Table.CurrencyMovementType,
+		|	Table.TransactionCurrency,
+		|	0 AS Amount,
+		|	0 AS CustomerTransaction,
+		|	Table.AmountRevaluated AS CustomerAdvance,
+		|	0 AS VendorTransaction,
+		|	0 AS VendorAdvance,
+		|	0 AS OtherTransaction,
+		|	UNDEFINED
+		|FROM
+		|	Revaluated_R5020B_PartnersBalance_CustomerAdvance AS Table
+		|WHERE
+		|	Table.AmountRevaluated <> 0
+		|
+		|UNION ALL
+		|
+		|SELECT
+		|	Table.RecordType,
+		|	Table.Period,
+		|	Table.Company,
+		|	Table.Branch,
+		|	Table.Partner,
+		|	Table.LegalName,
+		|	Table.Agreement,
+		|	Table.Document,
+		|	Table.Currency,
+		|	Table.CurrencyMovementType,
+		|	Table.TransactionCurrency,
+		|	0 AS Amount,
+		|	0 AS CustomerTransaction,
+		|	0 AS CustomerAdvance,
+		|	Table.AmountRevaluated AS VendorTransaction,
+		|	0 AS VendorAdvance,
+		|	0 AS OtherTransaction,
+		|	UNDEFINED
+		|FROM
+		|	Revaluated_R5020B_PartnersBalance_VendorTransaction AS Table
+		|WHERE
+		|	Table.AmountRevaluated <> 0
+		|
+		|UNION ALL
+		|
+		|SELECT
+		|	Table.RecordType,
+		|	Table.Period,
+		|	Table.Company,
+		|	Table.Branch,
+		|	Table.Partner,
+		|	Table.LegalName,
+		|	Table.Agreement,
+		|	Table.Document,
+		|	Table.Currency,
+		|	Table.CurrencyMovementType,
+		|	Table.TransactionCurrency,
+		|	0 AS Amount,
+		|	0 AS CustomerTransaction,
+		|	0 AS CustomerAdvance,
+		|	0 AS VendorTransaction,
+		|	Table.AmountRevaluated AS VendorAdvance,
+		|	0 AS OtherTransaction,
+		|	UNDEFINED
+		|FROM
+		|	Revaluated_R5020B_PartnersBalance_VendorAdvance AS Table
+		|WHERE
+		|	Table.AmountRevaluated <> 0
+		|
+		|UNION ALL
+		|
+		|SELECT
+		|	Table.RecordType,
+		|	Table.Period,
+		|	Table.Company,
+		|	Table.Branch,
+		|	Table.Partner,
+		|	Table.LegalName,
+		|	Table.Agreement,
+		|	Table.Document,
+		|	Table.Currency,
+		|	Table.CurrencyMovementType,
+		|	Table.TransactionCurrency,
+		|	0 AS Amount,
+		|	0 AS CustomerTransaction,
+		|	0 AS CustomerAdvance,
+		|	0 AS VendorTransaction,
+		|	0 AS VendorAdvance,
+		|	Table.AmountRevaluated AS OtherTransaction,
+		|	UNDEFINED
+		|FROM
+		|	Revaluated_R5020B_PartnersBalance_OtherTransaction AS Table
+		|WHERE
+		|	Table.AmountRevaluated <> 0";
 EndFunction
 
 Function R1020B_AdvancesToVendors()

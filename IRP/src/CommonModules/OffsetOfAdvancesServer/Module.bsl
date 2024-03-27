@@ -1002,6 +1002,7 @@ Procedure Write_SelfRecords(Parameters,
 				Or TypeOf(Row.Document) = Type("DocumentRef.SalesInvoice")
 				Or (TypeOf(Row.Document) = Type("DocumentRef.SalesReturn") And Not RowOffset.IsReturnToAdvance)
 				Or (TypeOf(Row.Document) = Type("DocumentRef.PurchaseReturn") And RowOffset.IsReturnToAdvance)
+				Or (TypeOf(Row.Document) = Type("DocumentRef.OpeningEntry") And IsCustomerAdvanceClosing)
 				
 				Or (TypeOf(Row.Document) = Type("DocumentRef.BankPayment") And 
 					Row.Document.TransactionType = Enums.OutgoingPaymentTransactionTypes.ReturnToCustomer)
@@ -1084,7 +1085,8 @@ Procedure Write_SelfRecords(Parameters,
 				Or TypeOf(Row.Document) = Type("DocumentRef.CashPayment") 
 				Or TypeOf(Row.Document) = Type("DocumentRef.SalesReportToConsignor")
 				Or TypeOf(Row.Document) = Type("DocumentRef.PurchaseInvoice")
-				Or TypeOf(Row.Document) = Type("DocumentRef.PurchaseReturn") Then
+				Or TypeOf(Row.Document) = Type("DocumentRef.PurchaseReturn")
+				Or (TypeOf(Row.Document) = Type("DocumentRef.OpeningEntry") And IsVendorAdvanceClosing) Then
 				
 				NewRow_PartnersBalance_Transactions.RecordType = ReverseRecordType(NewRow_Transactions.RecordType);
 			

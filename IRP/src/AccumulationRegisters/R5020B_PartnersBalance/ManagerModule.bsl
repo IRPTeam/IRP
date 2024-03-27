@@ -650,8 +650,8 @@ Function R5020B_PartnersBalance_PR() Export
 		|SELECT
 		|	CASE
 		|		WHEN OffsetOfAdvances.RecordType = VALUE(Enum.RecordType.Receipt)
-		|			THEN VALUE(AccumulationRecordType.Receipt)
-		|		ELSE VALUE(AccumulationRecordType.Expense)
+		|			THEN VALUE(AccumulationRecordType.Expense)
+		|		ELSE VALUE(AccumulationRecordType.Receipt)
 		|	END AS RecordType,
 		|	OffsetOfAdvances.Period,
 		|	OffsetOfAdvances.Company,
@@ -665,7 +665,7 @@ Function R5020B_PartnersBalance_PR() Export
 		|	0 AS CustomerTransaction,
 		|	0 AS CustomerAdvance,
 		|	0 AS VendorTransaction,
-		|	OffsetOfAdvances.Amount AS VendorAdvance,
+		|	-OffsetOfAdvances.Amount AS VendorAdvance,
 		|	0 AS OtherTransaction,
 		|	OffsetOfAdvances.Recorder
 		|FROM
@@ -1723,4 +1723,152 @@ Function R5020B_PartnersBalance_CreditNote() Export
 		|	Transactions.IsOther";
 EndFUnction
 
+Function R5020B_PartnersBalance_OE() Export
+	Return
+	// Customer transactions
+		"SELECT
+		|	VALUE(AccumulationRecordType.Receipt) AS RecordType,
+		|	CustomersTransactions.Period,
+		|	CustomersTransactions.Company,
+		|	CustomersTransactions.Branch,
+		|	CustomersTransactions.Partner,
+		|	CustomersTransactions.LegalName,
+		|	CustomersTransactions.Agreement,
+		|	CustomersTransactions.Basis AS Document,
+		|	CustomersTransactions.Currency,
+		|	0 AS Amount,
+		|	CustomersTransactions.Amount AS CustomerTransaction,
+		|	0 AS CustomerAdvance,
+		|	0 AS VendorTransaction,
+		|	0 AS VendorAdvance,
+		|	0 AS OtherTransaction,
+		|	UNDEFINED AS AdvancesClosing,
+		|	CustomersTransactions.Key
+		|INTO R5020B_PartnersBalance
+		|FROM
+		|	CustomersTransactions AS CustomersTransactions
+		|WHERE
+		|	TRUE
+		|
+		|UNION ALL
+		// Customer advances
+		|SELECT
+		|	VALUE(AccumulationRecordType.Expense),
+		|	AdvancesFromCustomers.Period,
+		|	AdvancesFromCustomers.Company,
+		|	AdvancesFromCustomers.Branch,
+		|	AdvancesFromCustomers.Partner,
+		|	AdvancesFromCustomers.LegalName,
+		|	AdvancesFromCustomers.Agreement,
+		|	UNDEFINED,
+		|	AdvancesFromCustomers.Currency,
+		|	0 AS Amount,
+		|	0 AS CustomerTransaction,
+		|	AdvancesFromCustomers.Amount AS CustomerAdvance,
+		|	0 AS VendorTransaction,
+		|	0 AS VendorAdvance,
+		|	0 AS OtherTransaction,
+		|	UNDEFINED,
+		|	AdvancesFromCustomers.Key
+		|FROM
+		|	AdvancesFromCustomers AS AdvancesFromCustomers
+		|WHERE
+		|	TRUE
+		|
+		|UNION ALL
+		// Vendor transactions
+		|SELECT
+		|	VALUE(AccumulationRecordType.Expense),
+		|	VendorsTransactions.Period,
+		|	VendorsTransactions.Company,
+		|	VendorsTransactions.Branch,
+		|	VendorsTransactions.Partner,
+		|	VendorsTransactions.LegalName,
+		|	VendorsTransactions.Agreement,
+		|	VendorsTransactions.Basis,
+		|	VendorsTransactions.Currency,
+		|	0 AS Amount,
+		|	0 AS CustomerTransaction,
+		|	0 AS CustomerAdvance,
+		|	VendorsTransactions.Amount AS VendorTransaction,
+		|	0 AS VendorAdvance,
+		|	0 AS OtherTransaction,
+		|	UNDEFINED,
+		|	VendorsTransactions.Key
+		|FROM
+		|	VendorsTransactions AS VendorsTransactions
+		|WHERE
+		|	TRUE
+		|
+		|UNION ALL
+		// Vendor advances
+		|SELECT
+		|	VALUE(AccumulationRecordType.Receipt),
+		|	AdvancesToVendors.Period,
+		|	AdvancesToVendors.Company,
+		|	AdvancesToVendors.Branch,
+		|	AdvancesToVendors.Partner,
+		|	AdvancesToVendors.LegalName,
+		|	AdvancesToVendors.Agreement,
+		|	UNDEFINED,
+		|	AdvancesToVendors.Currency,
+		|	0 AS Amount,
+		|	0 AS CustomerTransaction,
+		|	0 AS CustomerAdvance,
+		|	0 AS VendorTransaction,
+		|	AdvancesToVendors.Amount AS VendorAdvance,
+		|	0 AS OtherTransaction,
+		|	UNDEFINED,
+		|	AdvancesToVendors.Key
+		|FROM
+		|	AdvancesToVendors AS AdvancesToVendors
+		|WHERE
+		|	TRUE
+		|
+		|UNION ALL
+		// Other transactions
+		|SELECT
+		|	VALUE(AccumulationRecordType.Expense),
+		|	OtherVendorsTransactions.Period,
+		|	OtherVendorsTransactions.Company,
+		|	OtherVendorsTransactions.Branch,
+		|	OtherVendorsTransactions.Partner,
+		|	OtherVendorsTransactions.LegalName,
+		|	OtherVendorsTransactions.Agreement,
+		|	UNDEFINED,
+		|	OtherVendorsTransactions.Currency,
+		|	0 AS Amount,
+		|	0 AS CustomerTransaction,
+		|	0 AS CustomerAdvance,
+		|	0 AS VendorTransaction,
+		|	0 AS VendorAdvance,
+		|	OtherVendorsTransactions.Amount AS OtherTransaction,
+		|	UNDEFINED,
+		|	OtherVendorsTransactions.Key
+		|FROM
+		|	OtherVendorsTransactions AS OtherVendorsTransactions
+		|
+		|UNION ALL
+		|
+		|SELECT
+		|	VALUE(AccumulationRecordType.Receipt),
+		|	OtherCustomersTransactions.Period,
+		|	OtherCustomersTransactions.Company,
+		|	OtherCustomersTransactions.Branch,
+		|	OtherCustomersTransactions.Partner,
+		|	OtherCustomersTransactions.LegalName,
+		|	OtherCustomersTransactions.Agreement,
+		|	UNDEFINED,
+		|	OtherCustomersTransactions.Currency,
+		|	0 AS Amount,
+		|	0 AS CustomerTransaction,
+		|	0 AS CustomerAdvance,
+		|	0 AS VendorTransaction,
+		|	0 AS VendorAdvance,
+		|	OtherCustomersTransactions.Amount AS OtherTransaction,
+		|	UNDEFINED,
+		|	OtherCustomersTransactions.Key
+		|FROM
+		|	OtherCustomersTransactions AS OtherCustomersTransactions";
+EndFunction
 

@@ -576,39 +576,61 @@ Procedure PostingInfo_CreateTable(NewMovementStorage)
 	
 	Table = NewMovementStorage.Get(); // ValueTable
 	
-	ArrayAddedAttributes = New Array; // Array Of FormAttribute
+	CurrentMovementStructure = CommonFunctionsServer.BlankFormTableCreationStructure();
+	CurrentMovementStructure.TableName	= "CurrentMovement";
+	CurrentMovementStructure.ValueTable = Table;
+	CurrentMovementStructure.Form		= ThisForm;
 	
-	For Each Column In Table.Columns Do 
-		If Column.Name = "PointInTime" Or Column.Name = "Recorder" Then
-			Continue;
-		EndIf;
-		
-		TypeDescription = New TypeDescription(Column.ValueType);
-	    AttributeDescription = New FormAttribute(Column.Name, TypeDescription, "CurrentMovement"); 
-	    ArrayAddedAttributes.Add(AttributeDescription); 
-	    AttributeDescription = New FormAttribute(Column.Name, TypeDescription, "NewMovement"); 
-	    ArrayAddedAttributes.Add(AttributeDescription); 
-	EndDo; 
+	CommonFunctionsServer.CreateFormTable(CurrentMovementStructure);
 	
-	ChangeAttributes(ArrayAddedAttributes);
+	NewMovementStructure = CommonFunctionsServer.BlankFormTableCreationStructure();
+	NewMovementStructure.TableName	= "NewMovement";
+	NewMovementStructure.ValueTable = Table;
+	NewMovementStructure.Form		= ThisForm;
 	
-	For Each Column In Table.Columns Do 
-		If Column.Name = "PointInTime" Or Column.Name = "Recorder" Then
-			Continue;
-		EndIf;
-		
-	    NewColumn = Items.Add("CurrentMovement" + Column.Name, Type("FormField"), Items.CurrentMovement); // FormField 
-	    NewColumn.Title = Column.Name; 
-	    NewColumn.DataPath = "CurrentMovement." + Column.Name;
-	    NewColumn.Type = FormFieldType.InputField; 
-	    
-		NewColumn = Items.Add("NewMovement" + Column.Name, Type("FormField"), Items.NewMovement); // FormField 
-	    NewColumn.Title = Column.Name; 
-	    NewColumn.DataPath = "NewMovement." + Column.Name;
-	    NewColumn.Type = FormFieldType.InputField; 
-	EndDo;
+	CommonFunctionsServer.CreateFormTable(NewMovementStructure);
 	
 EndProcedure
+
+Procedure Backup()
+	
+//	ArrayAddedAttributes = New Array; // Array Of FormAttribute
+//	
+//	For Each Column In Table.Columns Do 
+//		If Column.Name = "PointInTime" Or Column.Name = "Recorder" Then
+//			Continue;
+//		EndIf;
+//		
+//		TypeDescription = New TypeDescription(Column.ValueType);
+//	    AttributeDescription = New FormAttribute(Column.Name, TypeDescription, "CurrentMovement"); 
+//	    ArrayAddedAttributes.Add(AttributeDescription); 
+//	    AttributeDescription = New FormAttribute(Column.Name, TypeDescription, "NewMovement"); 
+//	    ArrayAddedAttributes.Add(AttributeDescription); 
+//	EndDo; 
+//	
+//	Form.ChangeAttributes(ArrayAddedAttributes);
+//	
+//	For Each Column In Table.Columns Do 
+//		If Column.Name = "PointInTime" Or Column.Name = "Recorder" Then
+//			Continue;
+//		EndIf;
+//		
+//	    NewColumn = Items.Add("CurrentMovement" + Column.Name, Type("FormField"), Items.CurrentMovement); // FormField 
+//	    NewColumn.Title = Column.Name; 
+//	    NewColumn.DataPath = "CurrentMovement." + Column.Name;
+//	    NewColumn.Type = FormFieldType.InputField; 
+//	    
+//		NewColumn = Items.Add("NewMovement" + Column.Name, Type("FormField"), Items.NewMovement); // FormField 
+//	    NewColumn.Title = Column.Name; 
+//	    NewColumn.DataPath = "NewMovement." + Column.Name;
+//	    NewColumn.Type = FormFieldType.InputField; 
+//	EndDo;
+	
+EndProcedure	
+
+	
+
+
 
 &AtServer
 Procedure PostingInfo_ClearTables()

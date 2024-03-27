@@ -1683,4 +1683,79 @@ Function GetTableForClient(Table) Export
 	
 EndFunction
 
+// Blank form table creation structure.
+// 
+// Returns:
+//  Structure - Blank form creation structure:
+// * TableName - String
+// * ValueTable - ValueTable
+// * Form - ClientApplicationForm
+// * CreateTableOnForm - Boolean - 
+// * ParentName - String 
+Function BlankFormTableCreationStructure() Export
+	
+	Structure = New Structure();
+	Structure.Insert("TableName");
+	Structure.Insert("ValueTable");
+	Structure.Insert("Form");
+	Structure.Insert("CreateTableOnForm", False);
+	Structure.Insert("ParentName");
+	
+	Return Structure
+	
+EndFunction	
+
+// Create form table.
+// 
+// Parameters:
+//  CreactionStructure - see BlankFormTableCreationStructure
+&AtServer
+Procedure CreateFormTable(CreactionStructure) Export
+	
+	TableName 			= CreactionStructure.TableName;
+	ValueTable 			= CreactionStructure.ValueTable;
+	Form 				= CreactionStructure.Form;
+	CreateTableOnForm	= CreactionStructure.CreateTableOnForm;
+	ParentName 			= CreactionStructure.ParentName;
+	
+	ArrayAddedAttributes = New Array; // Array Of FormAttribute
+	
+	If CreateTableOnForm Then
+		ArrayAddedAttributes.Add(New FormAttribute(TableName, New TypeDescription("ValueTable")));
+		
+		Form.ChangeAttributes(ArrayAddedAttributes);
+		
+		FormTable = Form.Items.Add(TableName, Type("FormTable"), Form.Items[ParentName]);
+		FormTable.DataPath = TableName;
+			
+	EndIf;
+	ArrayAddedAttributes.Clear();
+	
+		
+	For Each Column In ValueTable.Columns Do 
+		If Column.Name = "PointInTime" Or Column.Name = "Recorder" Then
+			Continue;
+		EndIf;
+		
+		TypeDescription = New TypeDescription(Column.ValueType);
+		AttributeDescription = New FormAttribute(Column.Name, TypeDescription, TableName);
+		ArrayAddedAttributes.Add(AttributeDescription);
+	EndDo;
+	
+	Form.ChangeAttributes(ArrayAddedAttributes);
+	
+	For Each Column In ValueTable.Columns Do 
+		If Column.Name = "PointInTime" Or Column.Name = "Recorder" Then
+			Continue;
+		EndIf;
+		
+		NewColumn = Form.Items.Add(TableName + Column.Name, Type("FormField"), Form.Items[TableName]); // FormField 
+		NewColumn.Title		= Column.Name; 
+		NewColumn.DataPath	= TableName+ "." + Column.Name;
+		NewColumn.Type		= FormFieldType.InputField; 
+		
+	EndDo;
+	
+EndProcedure
+
 #EndRegion

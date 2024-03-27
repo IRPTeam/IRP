@@ -4,7 +4,36 @@
 	<setForAttributesByDefault>false</setForAttributesByDefault>
 	<independentRightsOfChildObjects>true</independentRightsOfChildObjects>
 	<object>
+		<name>Document.CashPayment.Attribute.TransactionType</name>
+		<right>
+			<name>View</name>
+			<value>true</value>
+		</right>
+	</object>
+	<object>
+		<name>Document.BatchReallocateOutgoing</name>
+		<right>
+			<name>Read</name>
+			<value>true</value>
+		</right>
+		<right>
+			<name>View</name>
+			<value>true</value>
+		</right>
+	</object>
+	<object>
 		<name>Document.WorkOrder.Attribute.Company</name>
+		<right>
+			<name>View</name>
+			<value>true</value>
+		</right>
+	</object>
+	<object>
+		<name>Catalog.Agreements</name>
+		<right>
+			<name>Read</name>
+			<value>true</value>
+		</right>
 		<right>
 			<name>View</name>
 			<value>true</value>
@@ -39,6 +68,17 @@
 		</right>
 	</object>
 	<object>
+		<name>Document.VendorsAdvancesClosing</name>
+		<right>
+			<name>Read</name>
+			<value>true</value>
+		</right>
+		<right>
+			<name>View</name>
+			<value>true</value>
+		</right>
+	</object>
+	<object>
 		<name>Document.InventoryTransferOrder.Attribute.StoreReceiver</name>
 		<right>
 			<name>View</name>
@@ -47,6 +87,28 @@
 	</object>
 	<object>
 		<name>Document.ReconciliationStatement.Attribute.Company</name>
+		<right>
+			<name>View</name>
+			<value>true</value>
+		</right>
+	</object>
+	<object>
+		<name>Document.ForeignCurrencyRevaluation</name>
+		<right>
+			<name>Read</name>
+			<value>true</value>
+		</right>
+		<right>
+			<name>View</name>
+			<value>true</value>
+		</right>
+	</object>
+	<object>
+		<name>Document.ProductionCostsAllocation</name>
+		<right>
+			<name>Read</name>
+			<value>true</value>
+		</right>
 		<right>
 			<name>View</name>
 			<value>true</value>
@@ -71,6 +133,20 @@
 		</right>
 	</object>
 	<object>
+		<name>Catalog.Agreements.Attribute.PriceIncludeTax</name>
+		<right>
+			<name>View</name>
+			<value>true</value>
+		</right>
+	</object>
+	<object>
+		<name>Document.RetailGoodsReceipt.Attribute.Company</name>
+		<right>
+			<name>View</name>
+			<value>true</value>
+		</right>
+	</object>
+	<object>
 		<name>Document.ShipmentConfirmation.Attribute.Company</name>
 		<right>
 			<name>View</name>
@@ -86,6 +162,17 @@
 	</object>
 	<object>
 		<name>Document.DebitNote.Attribute.Company</name>
+		<right>
+			<name>View</name>
+			<value>true</value>
+		</right>
+	</object>
+	<object>
+		<name>Document.MoneyTransfer</name>
+		<right>
+			<name>Read</name>
+			<value>true</value>
+		</right>
 		<right>
 			<name>View</name>
 			<value>true</value>
@@ -145,6 +232,13 @@
 		</right>
 	</object>
 	<object>
+		<name>Document.ForeignCurrencyRevaluation.Attribute.Company</name>
+		<right>
+			<name>View</name>
+			<value>true</value>
+		</right>
+	</object>
+	<object>
 		<name>Document.CashRevenue.TabularSection.PaymentList</name>
 		<right>
 			<name>View</name>
@@ -159,6 +253,27 @@
 		</right>
 	</object>
 	<object>
+		<name>Catalog.Agreements.Attribute.PriceType</name>
+		<right>
+			<name>View</name>
+			<value>true</value>
+		</right>
+	</object>
+	<object>
+		<name>Document.EmployeeTransfer.Attribute.Company</name>
+		<right>
+			<name>View</name>
+			<value>true</value>
+		</right>
+	</object>
+	<object>
+		<name>Document.EmployeeSickLeave.Attribute.Company</name>
+		<right>
+			<name>View</name>
+			<value>true</value>
+		</right>
+	</object>
+	<object>
 		<name>Document.RetailReturnReceipt.Attribute.LegalName</name>
 		<right>
 			<name>View</name>
@@ -166,7 +281,28 @@
 		</right>
 	</object>
 	<object>
+		<name>Document.RetailShipmentConfirmation.TabularSection.ItemList.Attribute.Store</name>
+		<right>
+			<name>View</name>
+			<value>true</value>
+		</right>
+	</object>
+	<object>
 		<name>Document.SalesReportToConsignor.Attribute.Company</name>
+		<right>
+			<name>View</name>
+			<value>true</value>
+		</right>
+	</object>
+	<object>
+		<name>Document.MoneyTransfer.Attribute.ProfitCenter</name>
+		<right>
+			<name>View</name>
+			<value>true</value>
+		</right>
+	</object>
+	<object>
+		<name>Document.RetailSalesReceipt.TabularSection.Payments.Attribute.FinancialMovementType</name>
 		<right>
 			<name>View</name>
 			<value>true</value>
@@ -181,6 +317,13 @@
 	</object>
 	<object>
 		<name>Document.PurchaseOrder.TabularSection.ItemList.Attribute.Store</name>
+		<right>
+			<name>View</name>
+			<value>true</value>
+		</right>
+	</object>
+	<object>
+		<name>Document.AdditionalAccrual.Attribute.Company</name>
 		<right>
 			<name>View</name>
 			<value>true</value>
@@ -212,11 +355,25 @@
 		</right>
 	</object>
 	<object>
+		<name>Document.MoneyTransfer.Attribute.RevenueType</name>
+		<right>
+			<name>View</name>
+			<value>true</value>
+		</right>
+	</object>
+	<object>
 		<name>Document.ChequeBondTransaction</name>
 		<right>
 			<name>Read</name>
 			<value>true</value>
 		</right>
+		<right>
+			<name>View</name>
+			<value>true</value>
+		</right>
+	</object>
+	<object>
+		<name>Document.IncomingPaymentOrder.Attribute.TransactionType</name>
 		<right>
 			<name>View</name>
 			<value>true</value>
@@ -251,6 +408,13 @@
 		</right>
 	</object>
 	<object>
+		<name>Document.PurchaseOrder.Attribute.TransactionType</name>
+		<right>
+			<name>View</name>
+			<value>true</value>
+		</right>
+	</object>
+	<object>
 		<name>Document.SalesReturn.Attribute.Company</name>
 		<right>
 			<name>View</name>
@@ -272,7 +436,21 @@
 		</right>
 	</object>
 	<object>
+		<name>Document.ForeignCurrencyRevaluation.Attribute.ExpenseAdditionalAnalytic</name>
+		<right>
+			<name>View</name>
+			<value>true</value>
+		</right>
+	</object>
+	<object>
 		<name>Document.CreditNote.TabularSection.Transactions.Attribute.AdditionalAnalytic</name>
+		<right>
+			<name>View</name>
+			<value>true</value>
+		</right>
+	</object>
+	<object>
+		<name>Document.TimeSheet.Attribute.Company</name>
 		<right>
 			<name>View</name>
 			<value>true</value>
@@ -293,6 +471,17 @@
 		</right>
 	</object>
 	<object>
+		<name>Document.BatchReallocateIncoming</name>
+		<right>
+			<name>Read</name>
+			<value>true</value>
+		</right>
+		<right>
+			<name>View</name>
+			<value>true</value>
+		</right>
+	</object>
+	<object>
 		<name>Document.PurchaseInvoice.TabularSection.ItemList</name>
 		<right>
 			<name>View</name>
@@ -301,6 +490,17 @@
 	</object>
 	<object>
 		<name>Document.CreditNote.TabularSection.Transactions.Attribute.ExpenseType</name>
+		<right>
+			<name>View</name>
+			<value>true</value>
+		</right>
+	</object>
+	<object>
+		<name>Document.AdditionalCostAllocation</name>
+		<right>
+			<name>Read</name>
+			<value>true</value>
+		</right>
 		<right>
 			<name>View</name>
 			<value>true</value>
@@ -332,7 +532,25 @@
 		</right>
 	</object>
 	<object>
+		<name>Document.BankPayment.TabularSection.PaymentList.Attribute.CashFlowCenter</name>
+		<right>
+			<name>View</name>
+			<value>true</value>
+		</right>
+	</object>
+	<object>
 		<name>Document.SalesReportFromTradeAgent</name>
+		<right>
+			<name>Read</name>
+			<value>true</value>
+		</right>
+		<right>
+			<name>View</name>
+			<value>true</value>
+		</right>
+	</object>
+	<object>
+		<name>Document.CustomersAdvancesClosing</name>
 		<right>
 			<name>Read</name>
 			<value>true</value>
@@ -361,6 +579,13 @@
 		</right>
 	</object>
 	<object>
+		<name>Document.ForeignCurrencyRevaluation.Attribute.RevenueType</name>
+		<right>
+			<name>View</name>
+			<value>true</value>
+		</right>
+	</object>
+	<object>
 		<name>Document.CashTransferOrder.Attribute.Receiver</name>
 		<right>
 			<name>View</name>
@@ -369,6 +594,24 @@
 	</object>
 	<object>
 		<name>Document.ShipmentConfirmation.TabularSection.ItemList</name>
+		<right>
+			<name>View</name>
+			<value>true</value>
+		</right>
+	</object>
+	<object>
+		<name>Document.CalculationMovementCosts</name>
+		<right>
+			<name>Read</name>
+			<value>true</value>
+		</right>
+		<right>
+			<name>View</name>
+			<value>true</value>
+		</right>
+	</object>
+	<object>
+		<name>Document.Payroll.Attribute.Company</name>
 		<right>
 			<name>View</name>
 			<value>true</value>
@@ -396,7 +639,43 @@
 		</right>
 	</object>
 	<object>
+		<name>Document.MoneyTransfer.Attribute.ReceiveCashFlowCenter</name>
+		<right>
+			<name>View</name>
+			<value>true</value>
+		</right>
+	</object>
+	<object>
+		<name>Document.SalesReturn.Attribute.TransactionType</name>
+		<right>
+			<name>View</name>
+			<value>true</value>
+		</right>
+	</object>
+	<object>
 		<name>Document.CashReceipt.TabularSection.PaymentList</name>
+		<right>
+			<name>View</name>
+			<value>true</value>
+		</right>
+	</object>
+	<object>
+		<name>Document.EmployeeSickLeave</name>
+		<right>
+			<name>Read</name>
+			<value>true</value>
+		</right>
+		<right>
+			<name>View</name>
+			<value>true</value>
+		</right>
+	</object>
+	<object>
+		<name>Document.AdditionalDeduction</name>
+		<right>
+			<name>Read</name>
+			<value>true</value>
+		</right>
 		<right>
 			<name>View</name>
 			<value>true</value>
@@ -411,6 +690,13 @@
 	</object>
 	<object>
 		<name>Document.InventoryTransfer.Attribute.StoreTransit</name>
+		<right>
+			<name>View</name>
+			<value>true</value>
+		</right>
+	</object>
+	<object>
+		<name>Document.SalesReturnOrder.Attribute.TransactionType</name>
 		<right>
 			<name>View</name>
 			<value>true</value>
@@ -446,6 +732,20 @@
 	</object>
 	<object>
 		<name>Document.Unbundling.Attribute.Company</name>
+		<right>
+			<name>View</name>
+			<value>true</value>
+		</right>
+	</object>
+	<object>
+		<name>Document.AdditionalDeduction.Attribute.Company</name>
+		<right>
+			<name>View</name>
+			<value>true</value>
+		</right>
+	</object>
+	<object>
+		<name>Document.MoneyTransfer.Attribute.SendCashFlowCenter</name>
 		<right>
 			<name>View</name>
 			<value>true</value>
@@ -510,6 +810,13 @@
 		</right>
 	</object>
 	<object>
+		<name>Document.PhysicalCountByLocation.Attribute.TransactionType</name>
+		<right>
+			<name>View</name>
+			<value>true</value>
+		</right>
+	</object>
+	<object>
 		<name>Document.StockAdjustmentAsSurplus.Attribute.Company</name>
 		<right>
 			<name>View</name>
@@ -549,7 +856,75 @@
 		</right>
 	</object>
 	<object>
+		<name>Document.MoneyTransfer.Attribute.ExpenseType</name>
+		<right>
+			<name>View</name>
+			<value>true</value>
+		</right>
+	</object>
+	<object>
+		<name>Document.EmployeeTransfer</name>
+		<right>
+			<name>Read</name>
+			<value>true</value>
+		</right>
+		<right>
+			<name>View</name>
+			<value>true</value>
+		</right>
+	</object>
+	<object>
+		<name>Document.RetailGoodsReceipt.TabularSection.ItemList.Attribute.Store</name>
+		<right>
+			<name>View</name>
+			<value>true</value>
+		</right>
+	</object>
+	<object>
+		<name>Document.PhysicalInventory</name>
+		<right>
+			<name>Read</name>
+			<value>true</value>
+		</right>
+		<right>
+			<name>View</name>
+			<value>true</value>
+		</right>
+	</object>
+	<object>
+		<name>Document.CashPayment.TabularSection.PaymentList.Attribute.CashFlowCenter</name>
+		<right>
+			<name>View</name>
+			<value>true</value>
+		</right>
+	</object>
+	<object>
+		<name>Document.EmployeeVacation.Attribute.Company</name>
+		<right>
+			<name>View</name>
+			<value>true</value>
+		</right>
+	</object>
+	<object>
 		<name>Document.ChequeBondTransaction.Attribute.Company</name>
+		<right>
+			<name>View</name>
+			<value>true</value>
+		</right>
+	</object>
+	<object>
+		<name>Document.PhysicalCountByLocation</name>
+		<right>
+			<name>Read</name>
+			<value>true</value>
+		</right>
+		<right>
+			<name>View</name>
+			<value>true</value>
+		</right>
+	</object>
+	<object>
+		<name>Document.CashRevenue.TabularSection.PaymentList.Attribute.CashFlowCenter</name>
 		<right>
 			<name>View</name>
 			<value>true</value>
@@ -591,6 +966,13 @@
 		</right>
 	</object>
 	<object>
+		<name>Document.CashStatement.TabularSection.PaymentList.Attribute.FinancialMovementType</name>
+		<right>
+			<name>View</name>
+			<value>true</value>
+		</right>
+	</object>
+	<object>
 		<name>Document.CashPayment.Attribute.Currency</name>
 		<right>
 			<name>View</name>
@@ -620,6 +1002,42 @@
 		</right>
 	</object>
 	<object>
+		<name>Document.RetailShipmentConfirmation.Attribute.TransactionType</name>
+		<right>
+			<name>View</name>
+			<value>true</value>
+		</right>
+	</object>
+	<object>
+		<name>Document.EmployeeCashAdvance.TabularSection.PaymentList.Attribute.ProfitLossCenter</name>
+		<right>
+			<name>View</name>
+			<value>true</value>
+		</right>
+	</object>
+	<object>
+		<name>Document.TimeSheet</name>
+		<right>
+			<name>Read</name>
+			<value>true</value>
+		</right>
+		<right>
+			<name>View</name>
+			<value>true</value>
+		</right>
+	</object>
+	<object>
+		<name>Document.ConsolidatedRetailSales</name>
+		<right>
+			<name>Read</name>
+			<value>true</value>
+		</right>
+		<right>
+			<name>View</name>
+			<value>true</value>
+		</right>
+	</object>
+	<object>
 		<name>Document.SalesInvoice</name>
 		<right>
 			<name>Read</name>
@@ -638,7 +1056,35 @@
 		</right>
 	</object>
 	<object>
+		<name>Document.SalesInvoice.Attribute.TransactionType</name>
+		<right>
+			<name>View</name>
+			<value>true</value>
+		</right>
+	</object>
+	<object>
+		<name>Document.PurchaseInvoice.Attribute.TransactionType</name>
+		<right>
+			<name>View</name>
+			<value>true</value>
+		</right>
+	</object>
+	<object>
 		<name>Document.OpeningEntry.TabularSection.Inventory</name>
+		<right>
+			<name>View</name>
+			<value>true</value>
+		</right>
+	</object>
+	<object>
+		<name>Document.EmployeeCashAdvance.Attribute.Company</name>
+		<right>
+			<name>View</name>
+			<value>true</value>
+		</right>
+	</object>
+	<object>
+		<name>Document.ShipmentConfirmation.Attribute.ShipFrom</name>
 		<right>
 			<name>View</name>
 			<value>true</value>
@@ -687,6 +1133,13 @@
 		</right>
 	</object>
 	<object>
+		<name>Document.BankReceipt.TabularSection.PaymentList.Attribute.CashFlowCenter</name>
+		<right>
+			<name>View</name>
+			<value>true</value>
+		</right>
+	</object>
+	<object>
 		<name>Document.CashTransferOrder.Attribute.Sender</name>
 		<right>
 			<name>View</name>
@@ -713,6 +1166,17 @@
 	</object>
 	<object>
 		<name>Document.StockAdjustmentAsWriteOff.TabularSection.ItemList.Attribute.ExpenseType</name>
+		<right>
+			<name>View</name>
+			<value>true</value>
+		</right>
+	</object>
+	<object>
+		<name>Document.AdditionalAccrual</name>
+		<right>
+			<name>Read</name>
+			<value>true</value>
+		</right>
 		<right>
 			<name>View</name>
 			<value>true</value>
@@ -762,6 +1226,17 @@
 		</right>
 	</object>
 	<object>
+		<name>Document.EmployeeHiring</name>
+		<right>
+			<name>Read</name>
+			<value>true</value>
+		</right>
+		<right>
+			<name>View</name>
+			<value>true</value>
+		</right>
+	</object>
+	<object>
 		<name>Document.InventoryTransfer.Attribute.StoreReceiver</name>
 		<right>
 			<name>View</name>
@@ -770,6 +1245,13 @@
 	</object>
 	<object>
 		<name>Document.SalesInvoice.TabularSection.ItemList.Attribute.Store</name>
+		<right>
+			<name>View</name>
+			<value>true</value>
+		</right>
+	</object>
+	<object>
+		<name>Document.CashRevenue.Attribute.TransactionType</name>
 		<right>
 			<name>View</name>
 			<value>true</value>
@@ -794,6 +1276,13 @@
 		</right>
 	</object>
 	<object>
+		<name>Document.RetailReturnReceipt.TabularSection.Payments.Attribute.FinancialMovementType</name>
+		<right>
+			<name>View</name>
+			<value>true</value>
+		</right>
+	</object>
+	<object>
 		<name>Document.ProductionPlanningCorrection.Attribute.BusinessUnit</name>
 		<right>
 			<name>View</name>
@@ -808,6 +1297,13 @@
 		</right>
 	</object>
 	<object>
+		<name>Document.ForeignCurrencyRevaluation.Attribute.ExpenseType</name>
+		<right>
+			<name>View</name>
+			<value>true</value>
+		</right>
+	</object>
+	<object>
 		<name>Document.StockAdjustmentAsWriteOff.TabularSection.ItemList</name>
 		<right>
 			<name>View</name>
@@ -816,6 +1312,13 @@
 	</object>
 	<object>
 		<name>Document.InventoryTransfer.Attribute.Company</name>
+		<right>
+			<name>View</name>
+			<value>true</value>
+		</right>
+	</object>
+	<object>
+		<name>Document.CashReceipt.Attribute.TransactionType</name>
 		<right>
 			<name>View</name>
 			<value>true</value>
@@ -838,6 +1341,13 @@
 			<name>Read</name>
 			<value>true</value>
 		</right>
+		<right>
+			<name>View</name>
+			<value>true</value>
+		</right>
+	</object>
+	<object>
+		<name>Document.BankReceipt.Attribute.TransactionType</name>
 		<right>
 			<name>View</name>
 			<value>true</value>
@@ -872,7 +1382,57 @@
 		</right>
 	</object>
 	<object>
+		<name>Document.AdditionalRevenueAllocation</name>
+		<right>
+			<name>Read</name>
+			<value>true</value>
+		</right>
+		<right>
+			<name>View</name>
+			<value>true</value>
+		</right>
+	</object>
+	<object>
+		<name>Document.EmployeeCashAdvance.TabularSection.PaymentList.Attribute.ExpenseType</name>
+		<right>
+			<name>View</name>
+			<value>true</value>
+		</right>
+	</object>
+	<object>
+		<name>Document.DebitCreditNote.Attribute.Company</name>
+		<right>
+			<name>View</name>
+			<value>true</value>
+		</right>
+	</object>
+	<object>
+		<name>Document.Payroll</name>
+		<right>
+			<name>Read</name>
+			<value>true</value>
+		</right>
+		<right>
+			<name>View</name>
+			<value>true</value>
+		</right>
+	</object>
+	<object>
+		<name>Document.OutgoingPaymentOrder.Attribute.TransactionType</name>
+		<right>
+			<name>View</name>
+			<value>true</value>
+		</right>
+	</object>
+	<object>
 		<name>Document.BankPayment.TabularSection.PaymentList.Attribute.FinancialMovementType</name>
+		<right>
+			<name>View</name>
+			<value>true</value>
+		</right>
+	</object>
+	<object>
+		<name>Document.MoneyTransfer.Attribute.ReceiveFinancialMovementType</name>
 		<right>
 			<name>View</name>
 			<value>true</value>
@@ -887,6 +1447,13 @@
 	</object>
 	<object>
 		<name>Document.Unbundling.Attribute.Store</name>
+		<right>
+			<name>View</name>
+			<value>true</value>
+		</right>
+	</object>
+	<object>
+		<name>Document.Payroll.Attribute.Currency</name>
 		<right>
 			<name>View</name>
 			<value>true</value>
@@ -976,11 +1543,25 @@
 		</right>
 	</object>
 	<object>
+		<name>Document.PurchaseReturn.Attribute.TransactionType</name>
+		<right>
+			<name>View</name>
+			<value>true</value>
+		</right>
+	</object>
+	<object>
 		<name>Document.PurchaseOrderClosing</name>
 		<right>
 			<name>Read</name>
 			<value>true</value>
 		</right>
+		<right>
+			<name>View</name>
+			<value>true</value>
+		</right>
+	</object>
+	<object>
+		<name>Document.ForeignCurrencyRevaluation.Attribute.ExpenseProfitLossCenter</name>
 		<right>
 			<name>View</name>
 			<value>true</value>
@@ -1015,11 +1596,39 @@
 		</right>
 	</object>
 	<object>
+		<name>Document.MoneyTransfer.Attribute.SendFinancialMovementType</name>
+		<right>
+			<name>View</name>
+			<value>true</value>
+		</right>
+	</object>
+	<object>
+		<name>Document.ForeignCurrencyRevaluation.Attribute.RevenueAdditionalAnalytic</name>
+		<right>
+			<name>View</name>
+			<value>true</value>
+		</right>
+	</object>
+	<object>
+		<name>Document.EmployeeFiring.Attribute.Company</name>
+		<right>
+			<name>View</name>
+			<value>true</value>
+		</right>
+	</object>
+	<object>
 		<name>Document.OutgoingPaymentOrder</name>
 		<right>
 			<name>Read</name>
 			<value>true</value>
 		</right>
+		<right>
+			<name>View</name>
+			<value>true</value>
+		</right>
+	</object>
+	<object>
+		<name>Document.CashExpense.TabularSection.PaymentList.Attribute.CashFlowCenter</name>
 		<right>
 			<name>View</name>
 			<value>true</value>
@@ -1044,7 +1653,21 @@
 		</right>
 	</object>
 	<object>
+		<name>Document.GoodsReceipt.Attribute.TransactionType</name>
+		<right>
+			<name>View</name>
+			<value>true</value>
+		</right>
+	</object>
+	<object>
 		<name>Document.PurchaseOrder.Attribute.Company</name>
+		<right>
+			<name>View</name>
+			<value>true</value>
+		</right>
+	</object>
+	<object>
+		<name>Document.RetailReturnReceipt.TabularSection.Payments.Attribute.CashFlowCenter</name>
 		<right>
 			<name>View</name>
 			<value>true</value>
@@ -1069,7 +1692,39 @@
 		</right>
 	</object>
 	<object>
+		<name>Document.BankPayment.Attribute.TransactionType</name>
+		<right>
+			<name>View</name>
+			<value>true</value>
+		</right>
+	</object>
+	<object>
+		<name>Document.RetailGoodsReceipt.TabularSection.ItemList</name>
+		<right>
+			<name>View</name>
+			<value>true</value>
+		</right>
+	</object>
+	<object>
+		<name>Document.RetailShipmentConfirmation.Attribute.Company</name>
+		<right>
+			<name>View</name>
+			<value>true</value>
+		</right>
+	</object>
+	<object>
 		<name>Document.StockAdjustmentAsWriteOff</name>
+		<right>
+			<name>Read</name>
+			<value>true</value>
+		</right>
+		<right>
+			<name>View</name>
+			<value>true</value>
+		</right>
+	</object>
+	<object>
+		<name>Document.DebitCreditNote</name>
 		<right>
 			<name>Read</name>
 			<value>true</value>
@@ -1105,6 +1760,24 @@
 		</right>
 	</object>
 	<object>
+		<name>Document.WorkOrderClosing</name>
+		<right>
+			<name>Read</name>
+			<value>true</value>
+		</right>
+		<right>
+			<name>View</name>
+			<value>true</value>
+		</right>
+	</object>
+	<object>
+		<name>Document.ForeignCurrencyRevaluation.Attribute.RevenueProfitLossCenter</name>
+		<right>
+			<name>View</name>
+			<value>true</value>
+		</right>
+	</object>
+	<object>
 		<name>Document.PurchaseReturn.Attribute.Company</name>
 		<right>
 			<name>View</name>
@@ -1119,7 +1792,25 @@
 		</right>
 	</object>
 	<object>
+		<name>Document.EmployeeVacation</name>
+		<right>
+			<name>Read</name>
+			<value>true</value>
+		</right>
+		<right>
+			<name>View</name>
+			<value>true</value>
+		</right>
+	</object>
+	<object>
 		<name>Document.GoodsReceipt.Attribute.Company</name>
+		<right>
+			<name>View</name>
+			<value>true</value>
+		</right>
+	</object>
+	<object>
+		<name>Document.CashReceipt.TabularSection.PaymentList.Attribute.CashFlowCenter</name>
 		<right>
 			<name>View</name>
 			<value>true</value>
@@ -1161,7 +1852,25 @@
 		</right>
 	</object>
 	<object>
+		<name>Document.PriceList</name>
+		<right>
+			<name>Read</name>
+			<value>true</value>
+		</right>
+		<right>
+			<name>View</name>
+			<value>true</value>
+		</right>
+	</object>
+	<object>
 		<name>Document.CreditNote.Attribute.Company</name>
+		<right>
+			<name>View</name>
+			<value>true</value>
+		</right>
+	</object>
+	<object>
+		<name>Document.SalesOrder.Attribute.TransactionType</name>
 		<right>
 			<name>View</name>
 			<value>true</value>
@@ -1208,6 +1917,13 @@
 	</object>
 	<object>
 		<name>Document.SalesInvoice.TabularSection.ItemList</name>
+		<right>
+			<name>View</name>
+			<value>true</value>
+		</right>
+	</object>
+	<object>
+		<name>Document.CashExpense.Attribute.TransactionType</name>
 		<right>
 			<name>View</name>
 			<value>true</value>
@@ -1261,7 +1977,25 @@
 		</right>
 	</object>
 	<object>
+		<name>Document.RetailSalesReceipt.TabularSection.Payments.Attribute.CashFlowCenter</name>
+		<right>
+			<name>View</name>
+			<value>true</value>
+		</right>
+	</object>
+	<object>
 		<name>Document.InventoryTransfer.Attribute.StoreSender</name>
+		<right>
+			<name>View</name>
+			<value>true</value>
+		</right>
+	</object>
+	<object>
+		<name>Document.EmployeeFiring</name>
+		<right>
+			<name>Read</name>
+			<value>true</value>
+		</right>
 		<right>
 			<name>View</name>
 			<value>true</value>
@@ -1301,6 +2035,17 @@
 	</object>
 	<object>
 		<name>Document.CreditNote.TabularSection.Transactions</name>
+		<right>
+			<name>View</name>
+			<value>true</value>
+		</right>
+	</object>
+	<object>
+		<name>Document.EmployeeCashAdvance</name>
+		<right>
+			<name>Read</name>
+			<value>true</value>
+		</right>
 		<right>
 			<name>View</name>
 			<value>true</value>
@@ -1372,6 +2117,13 @@
 		</right>
 	</object>
 	<object>
+		<name>Document.ShipmentConfirmation.Attribute.TransactionType</name>
+		<right>
+			<name>View</name>
+			<value>true</value>
+		</right>
+	</object>
+	<object>
 		<name>Document.PurchaseOrder</name>
 		<right>
 			<name>Read</name>
@@ -1408,7 +2160,21 @@
 		</right>
 	</object>
 	<object>
+		<name>Document.Production.Attribute.TransactionType</name>
+		<right>
+			<name>View</name>
+			<value>true</value>
+		</right>
+	</object>
+	<object>
 		<name>CommonAttribute.Branch</name>
+		<right>
+			<name>View</name>
+			<value>true</value>
+		</right>
+	</object>
+	<object>
+		<name>Document.RetailGoodsReceipt.Attribute.TransactionType</name>
 		<right>
 			<name>View</name>
 			<value>true</value>
@@ -1465,6 +2231,20 @@
 		</right>
 	</object>
 	<object>
+		<name>Document.MoneyTransfer.Attribute.LossCenter</name>
+		<right>
+			<name>View</name>
+			<value>true</value>
+		</right>
+	</object>
+	<object>
+		<name>Document.PurchaseReturnOrder.Attribute.TransactionType</name>
+		<right>
+			<name>View</name>
+			<value>true</value>
+		</right>
+	</object>
+	<object>
 		<name>Document.InternalSupplyRequest</name>
 		<right>
 			<name>Read</name>
@@ -1483,7 +2263,21 @@
 		</right>
 	</object>
 	<object>
+		<name>Document.EmployeeHiring.Attribute.Company</name>
+		<right>
+			<name>View</name>
+			<value>true</value>
+		</right>
+	</object>
+	<object>
 		<name>Document.OpeningEntry.Attribute.Company</name>
+		<right>
+			<name>View</name>
+			<value>true</value>
+		</right>
+	</object>
+	<object>
+		<name>Document.CashStatement.TabularSection.PaymentList.Attribute.CashFlowCenter</name>
 		<right>
 			<name>View</name>
 			<value>true</value>
@@ -1519,11 +2313,29 @@
 		</right>
 	</object>
 	<object>
+		<name>Document.ChequeBondTransactionItem</name>
+		<right>
+			<name>Read</name>
+			<value>true</value>
+		</right>
+		<right>
+			<name>View</name>
+			<value>true</value>
+		</right>
+	</object>
+	<object>
 		<name>Document.BankReceipt</name>
 		<right>
 			<name>Read</name>
 			<value>true</value>
 		</right>
+		<right>
+			<name>View</name>
+			<value>true</value>
+		</right>
+	</object>
+	<object>
+		<name>Document.ShipmentConfirmation.Attribute.ShipFromAddress</name>
 		<right>
 			<name>View</name>
 			<value>true</value>
@@ -1538,6 +2350,24 @@
 	</object>
 	<object>
 		<name>Document.CashExpense.TabularSection.PaymentList</name>
+		<right>
+			<name>View</name>
+			<value>true</value>
+		</right>
+	</object>
+	<object>
+		<name>Document.RetailShipmentConfirmation.TabularSection.ItemList</name>
+		<right>
+			<name>View</name>
+			<value>true</value>
+		</right>
+	</object>
+	<object>
+		<name>Catalog.Companies</name>
+		<right>
+			<name>Read</name>
+			<value>true</value>
+		</right>
 		<right>
 			<name>View</name>
 			<value>true</value>
@@ -1563,836 +2393,6 @@
 	</object>
 	<object>
 		<name>Document.IncomingPaymentOrder.Attribute.Account</name>
-		<right>
-			<name>View</name>
-			<value>true</value>
-		</right>
-	</object>
-	<object>
-		<name>Document.EmployeeCashAdvance</name>
-		<right>
-			<name>View</name>
-			<value>true</value>
-		</right>
-		<right>
-			<name>Read</name>
-			<value>true</value>
-		</right>
-	</object>
-	<object>
-		<name>Document.EmployeeCashAdvance.Attribute.Company</name>
-		<right>
-			<name>View</name>
-			<value>true</value>
-		</right>
-	</object>
-	<object>
-		<name>Document.EmployeeCashAdvance.TabularSection.PaymentList.Attribute.ProfitLossCenter</name>
-		<right>
-			<name>View</name>
-			<value>true</value>
-		</right>
-	</object>
-	<object>
-		<name>Document.EmployeeCashAdvance.TabularSection.PaymentList.Attribute.ExpenseType</name>
-		<right>
-			<name>View</name>
-			<value>true</value>
-		</right>
-	</object>
-	<object>
-		<name>Document.Payroll</name>
-		<right>
-			<name>View</name>
-			<value>true</value>
-		</right>
-		<right>
-			<name>Read</name>
-			<value>true</value>
-		</right>
-	</object>
-	<object>
-		<name>Document.Payroll.Attribute.Company</name>
-		<right>
-			<name>View</name>
-			<value>true</value>
-		</right>
-	</object>
-	<object>
-		<name>Document.Payroll.Attribute.Currency</name>
-		<right>
-			<name>View</name>
-			<value>true</value>
-		</right>
-	</object>
-	<object>
-		<name>Document.TimeSheet</name>
-		<right>
-			<name>View</name>
-			<value>true</value>
-		</right>
-		<right>
-			<name>Read</name>
-			<value>true</value>
-		</right>
-	</object>
-	<object>
-		<name>Document.TimeSheet.Attribute.Company</name>
-		<right>
-			<name>View</name>
-			<value>true</value>
-		</right>
-	</object>
-	<object>
-		<name>Document.ForeignCurrencyRevaluation</name>
-		<right>
-			<name>View</name>
-			<value>true</value>
-		</right>
-		<right>
-			<name>Read</name>
-			<value>true</value>
-		</right>
-	</object>
-	<object>
-		<name>Document.ForeignCurrencyRevaluation.Attribute.Company</name>
-		<right>
-			<name>View</name>
-			<value>true</value>
-		</right>
-	</object>
-	<object>
-		<name>Document.ForeignCurrencyRevaluation.Attribute.RevenueType</name>
-		<right>
-			<name>View</name>
-			<value>true</value>
-		</right>
-	</object>
-	<object>
-		<name>Document.ForeignCurrencyRevaluation.Attribute.RevenueProfitLossCenter</name>
-		<right>
-			<name>View</name>
-			<value>true</value>
-		</right>
-	</object>
-	<object>
-		<name>Document.ForeignCurrencyRevaluation.Attribute.RevenueAdditionalAnalytic</name>
-		<right>
-			<name>View</name>
-			<value>true</value>
-		</right>
-	</object>
-	<object>
-		<name>Document.ForeignCurrencyRevaluation.Attribute.ExpenseType</name>
-		<right>
-			<name>View</name>
-			<value>true</value>
-		</right>
-	</object>
-	<object>
-		<name>Document.ForeignCurrencyRevaluation.Attribute.ExpenseProfitLossCenter</name>
-		<right>
-			<name>View</name>
-			<value>true</value>
-		</right>
-	</object>
-	<object>
-		<name>Document.ForeignCurrencyRevaluation.Attribute.ExpenseAdditionalAnalytic</name>
-		<right>
-			<name>View</name>
-			<value>true</value>
-		</right>
-	</object>
-	<object>
-		<name>Document.VendorsAdvancesClosing</name>
-		<right>
-			<name>View</name>
-			<value>true</value>
-		</right>
-		<right>
-			<name>Read</name>
-			<value>true</value>
-		</right>
-	</object>
-	<object>
-		<name>Document.WorkOrderClosing</name>
-		<right>
-			<name>View</name>
-			<value>true</value>
-		</right>
-		<right>
-			<name>Read</name>
-			<value>true</value>
-		</right>
-	</object>
-	<object>
-		<name>Document.ProductionCostsAllocation</name>
-		<right>
-			<name>View</name>
-			<value>true</value>
-		</right>
-		<right>
-			<name>Read</name>
-			<value>true</value>
-		</right>
-	</object>
-	<object>
-		<name>Document.PriceList</name>
-		<right>
-			<name>View</name>
-			<value>true</value>
-		</right>
-		<right>
-			<name>Read</name>
-			<value>true</value>
-		</right>
-	</object>
-	<object>
-		<name>Document.PhysicalInventory</name>
-		<right>
-			<name>View</name>
-			<value>true</value>
-		</right>
-		<right>
-			<name>Read</name>
-			<value>true</value>
-		</right>
-	</object>
-	<object>
-		<name>Document.PhysicalCountByLocation</name>
-		<right>
-			<name>View</name>
-			<value>true</value>
-		</right>
-		<right>
-			<name>Read</name>
-			<value>true</value>
-		</right>
-	</object>
-	<object>
-		<name>Document.MoneyTransfer</name>
-		<right>
-			<name>View</name>
-			<value>true</value>
-		</right>
-		<right>
-			<name>Read</name>
-			<value>true</value>
-		</right>
-	</object>
-	<object>
-		<name>Document.CustomersAdvancesClosing</name>
-		<right>
-			<name>View</name>
-			<value>true</value>
-		</right>
-		<right>
-			<name>Read</name>
-			<value>true</value>
-		</right>
-	</object>
-	<object>
-		<name>Document.ChequeBondTransactionItem</name>
-		<right>
-			<name>View</name>
-			<value>true</value>
-		</right>
-		<right>
-			<name>Read</name>
-			<value>true</value>
-		</right>
-	</object>
-	<object>
-		<name>Document.ConsolidatedRetailSales</name>
-		<right>
-			<name>View</name>
-			<value>true</value>
-		</right>
-		<right>
-			<name>Read</name>
-			<value>true</value>
-		</right>
-	</object>
-	<object>
-		<name>Document.BatchReallocateOutgoing</name>
-		<right>
-			<name>View</name>
-			<value>true</value>
-		</right>
-		<right>
-			<name>Read</name>
-			<value>true</value>
-		</right>
-	</object>
-	<object>
-		<name>Document.BatchReallocateIncoming</name>
-		<right>
-			<name>View</name>
-			<value>true</value>
-		</right>
-		<right>
-			<name>Read</name>
-			<value>true</value>
-		</right>
-	</object>
-	<object>
-		<name>Document.CalculationMovementCosts</name>
-		<right>
-			<name>View</name>
-			<value>true</value>
-		</right>
-		<right>
-			<name>Read</name>
-			<value>true</value>
-		</right>
-	</object>
-	<object>
-		<name>Document.AdditionalCostAllocation</name>
-		<right>
-			<name>View</name>
-			<value>true</value>
-		</right>
-		<right>
-			<name>Read</name>
-			<value>true</value>
-		</right>
-	</object>
-	<object>
-		<name>Document.AdditionalRevenueAllocation</name>
-		<right>
-			<name>View</name>
-			<value>true</value>
-		</right>
-		<right>
-			<name>Read</name>
-			<value>true</value>
-		</right>
-	</object>
-	<object>
-		<name>Catalog.Companies</name>
-		<right>
-			<name>View</name>
-			<value>true</value>
-		</right>
-		<right>
-			<name>Read</name>
-			<value>true</value>
-		</right>
-	</object>
-	<object>
-		<name>Document.RetailShipmentConfirmation.Attribute.Company</name>
-		<right>
-			<name>View</name>
-			<value>true</value>
-		</right>
-	</object>
-	<object>
-		<name>Document.RetailShipmentConfirmation.TabularSection.ItemList.Attribute.Store</name>
-		<right>
-			<name>View</name>
-			<value>true</value>
-		</right>
-	</object>
-	<object>
-		<name>Document.RetailShipmentConfirmation.TabularSection.ItemList</name>
-		<right>
-			<name>View</name>
-			<value>true</value>
-		</right>
-	</object>
-	<object>
-		<name>Document.RetailGoodsReceipt.Attribute.Company</name>
-		<right>
-			<name>View</name>
-			<value>true</value>
-		</right>
-	</object>
-	<object>
-		<name>Document.RetailGoodsReceipt.TabularSection.ItemList.Attribute.Store</name>
-		<right>
-			<name>View</name>
-			<value>true</value>
-		</right>
-	</object>
-	<object>
-		<name>Document.RetailGoodsReceipt.TabularSection.ItemList</name>
-		<right>
-			<name>View</name>
-			<value>true</value>
-		</right>
-	</object>
-	<object>
-		<name>Document.RetailGoodsReceipt.Attribute.TransactionType</name>
-		<right>
-			<name>View</name>
-			<value>true</value>
-		</right>
-	</object>
-	<object>
-		<name>Document.RetailShipmentConfirmation.Attribute.TransactionType</name>
-		<right>
-			<name>View</name>
-			<value>true</value>
-		</right>
-	</object>
-	<object>
-		<name>Document.ShipmentConfirmation.Attribute.ShipFrom</name>
-		<right>
-			<name>View</name>
-			<value>true</value>
-		</right>
-	</object>
-	<object>
-		<name>Document.ShipmentConfirmation.Attribute.ShipFromAddress</name>
-		<right>
-			<name>View</name>
-			<value>true</value>
-		</right>
-	</object>
-	<object>
-		<name>Document.BankPayment.Attribute.TransactionType</name>
-		<right>
-			<name>View</name>
-			<value>true</value>
-		</right>
-	</object>
-	<object>
-		<name>Document.BankReceipt.Attribute.TransactionType</name>
-		<right>
-			<name>View</name>
-			<value>true</value>
-		</right>
-	</object>
-	<object>
-		<name>Document.CashExpense.Attribute.TransactionType</name>
-		<right>
-			<name>View</name>
-			<value>true</value>
-		</right>
-	</object>
-	<object>
-		<name>Document.CashPayment.Attribute.TransactionType</name>
-		<right>
-			<name>View</name>
-			<value>true</value>
-		</right>
-	</object>
-	<object>
-		<name>Document.CashReceipt.Attribute.TransactionType</name>
-		<right>
-			<name>View</name>
-			<value>true</value>
-		</right>
-	</object>
-	<object>
-		<name>Document.CashRevenue.Attribute.TransactionType</name>
-		<right>
-			<name>View</name>
-			<value>true</value>
-		</right>
-	</object>
-	<object>
-		<name>Document.GoodsReceipt.Attribute.TransactionType</name>
-		<right>
-			<name>View</name>
-			<value>true</value>
-		</right>
-	</object>
-	<object>
-		<name>Document.IncomingPaymentOrder.Attribute.TransactionType</name>
-		<right>
-			<name>View</name>
-			<value>true</value>
-		</right>
-	</object>
-	<object>
-		<name>Document.OutgoingPaymentOrder.Attribute.TransactionType</name>
-		<right>
-			<name>View</name>
-			<value>true</value>
-		</right>
-	</object>
-	<object>
-		<name>Document.PhysicalCountByLocation.Attribute.TransactionType</name>
-		<right>
-			<name>View</name>
-			<value>true</value>
-		</right>
-	</object>
-	<object>
-		<name>Document.Production.Attribute.TransactionType</name>
-		<right>
-			<name>View</name>
-			<value>true</value>
-		</right>
-	</object>
-	<object>
-		<name>Document.PurchaseInvoice.Attribute.TransactionType</name>
-		<right>
-			<name>View</name>
-			<value>true</value>
-		</right>
-	</object>
-	<object>
-		<name>Document.PurchaseOrder.Attribute.TransactionType</name>
-		<right>
-			<name>View</name>
-			<value>true</value>
-		</right>
-	</object>
-	<object>
-		<name>Document.PurchaseReturn.Attribute.TransactionType</name>
-		<right>
-			<name>View</name>
-			<value>true</value>
-		</right>
-	</object>
-	<object>
-		<name>Document.PurchaseReturnOrder.Attribute.TransactionType</name>
-		<right>
-			<name>View</name>
-			<value>true</value>
-		</right>
-	</object>
-	<object>
-		<name>Document.SalesInvoice.Attribute.TransactionType</name>
-		<right>
-			<name>View</name>
-			<value>true</value>
-		</right>
-	</object>
-	<object>
-		<name>Document.SalesOrder.Attribute.TransactionType</name>
-		<right>
-			<name>View</name>
-			<value>true</value>
-		</right>
-	</object>
-	<object>
-		<name>Document.SalesReturn.Attribute.TransactionType</name>
-		<right>
-			<name>View</name>
-			<value>true</value>
-		</right>
-	</object>
-	<object>
-		<name>Document.SalesReturnOrder.Attribute.TransactionType</name>
-		<right>
-			<name>View</name>
-			<value>true</value>
-		</right>
-	</object>
-	<object>
-		<name>Document.ShipmentConfirmation.Attribute.TransactionType</name>
-		<right>
-			<name>View</name>
-			<value>true</value>
-		</right>
-	</object>
-	<object>
-		<name>Document.EmployeeHiring</name>
-		<right>
-			<name>Read</name>
-			<value>true</value>
-		</right>
-		<right>
-			<name>View</name>
-			<value>true</value>
-		</right>
-	</object>
-	<object>
-		<name>Document.EmployeeFiring</name>
-		<right>
-			<name>Read</name>
-			<value>true</value>
-		</right>
-		<right>
-			<name>View</name>
-			<value>true</value>
-		</right>
-	</object>
-	<object>
-		<name>Document.EmployeeTransfer</name>
-		<right>
-			<name>Read</name>
-			<value>true</value>
-		</right>
-		<right>
-			<name>View</name>
-			<value>true</value>
-		</right>
-	</object>
-	<object>
-		<name>Document.EmployeeSickLeave</name>
-		<right>
-			<name>Read</name>
-			<value>true</value>
-		</right>
-		<right>
-			<name>View</name>
-			<value>true</value>
-		</right>
-	</object>
-	<object>
-		<name>Document.EmployeeVacation</name>
-		<right>
-			<name>Read</name>
-			<value>true</value>
-		</right>
-		<right>
-			<name>View</name>
-			<value>true</value>
-		</right>
-	</object>
-	<object>
-		<name>Document.EmployeeFiring.Attribute.Company</name>
-		<right>
-			<name>View</name>
-			<value>true</value>
-		</right>
-	</object>
-	<object>
-		<name>Document.EmployeeHiring.Attribute.Company</name>
-		<right>
-			<name>View</name>
-			<value>true</value>
-		</right>
-	</object>
-	<object>
-		<name>Document.EmployeeSickLeave.Attribute.Company</name>
-		<right>
-			<name>View</name>
-			<value>true</value>
-		</right>
-	</object>
-	<object>
-		<name>Document.EmployeeTransfer.Attribute.Company</name>
-		<right>
-			<name>View</name>
-			<value>true</value>
-		</right>
-	</object>
-	<object>
-		<name>Document.EmployeeVacation.Attribute.Company</name>
-		<right>
-			<name>View</name>
-			<value>true</value>
-		</right>
-	</object>
-	<object>
-		<name>Document.AdditionalAccrual</name>
-		<right>
-			<name>Read</name>
-			<value>true</value>
-		</right>
-		<right>
-			<name>View</name>
-			<value>true</value>
-		</right>
-	</object>
-	<object>
-		<name>Document.AdditionalDeduction</name>
-		<right>
-			<name>Read</name>
-			<value>true</value>
-		</right>
-		<right>
-			<name>View</name>
-			<value>true</value>
-		</right>
-	</object>
-	<object>
-		<name>Document.AdditionalAccrual.Attribute.Company</name>
-		<right>
-			<name>View</name>
-			<value>true</value>
-		</right>
-	</object>
-	<object>
-		<name>Document.AdditionalDeduction.Attribute.Company</name>
-		<right>
-			<name>View</name>
-			<value>true</value>
-		</right>
-	</object>
-	<object>
-		<name>Document.CashPayment.TabularSection.PaymentList.Attribute.CashFlowCenter</name>
-		<right>
-			<name>View</name>
-			<value>true</value>
-		</right>
-	</object>
-	<object>
-		<name>Document.CashReceipt.TabularSection.PaymentList.Attribute.CashFlowCenter</name>
-		<right>
-			<name>View</name>
-			<value>true</value>
-		</right>
-	</object>
-	<object>
-		<name>Document.BankPayment.TabularSection.PaymentList.Attribute.CashFlowCenter</name>
-		<right>
-			<name>View</name>
-			<value>true</value>
-		</right>
-	</object>
-	<object>
-		<name>Document.BankReceipt.TabularSection.PaymentList.Attribute.CashFlowCenter</name>
-		<right>
-			<name>View</name>
-			<value>true</value>
-		</right>
-	</object>
-	<object>
-		<name>Document.CashRevenue.TabularSection.PaymentList.Attribute.CashFlowCenter</name>
-		<right>
-			<name>View</name>
-			<value>true</value>
-		</right>
-	</object>
-	<object>
-		<name>Document.CashStatement.TabularSection.PaymentList.Attribute.FinancialMovementType</name>
-		<right>
-			<name>View</name>
-			<value>true</value>
-		</right>
-	</object>
-	<object>
-		<name>Document.CashStatement.TabularSection.PaymentList.Attribute.CashFlowCenter</name>
-		<right>
-			<name>View</name>
-			<value>true</value>
-		</right>
-	</object>
-	<object>
-		<name>Document.RetailReturnReceipt.TabularSection.Payments.Attribute.FinancialMovementType</name>
-		<right>
-			<name>View</name>
-			<value>true</value>
-		</right>
-	</object>
-	<object>
-		<name>Document.RetailReturnReceipt.TabularSection.Payments.Attribute.CashFlowCenter</name>
-		<right>
-			<name>View</name>
-			<value>true</value>
-		</right>
-	</object>
-	<object>
-		<name>Document.RetailSalesReceipt.TabularSection.Payments.Attribute.FinancialMovementType</name>
-		<right>
-			<name>View</name>
-			<value>true</value>
-		</right>
-	</object>
-	<object>
-		<name>Document.RetailSalesReceipt.TabularSection.Payments.Attribute.CashFlowCenter</name>
-		<right>
-			<name>View</name>
-			<value>true</value>
-		</right>
-	</object>
-	<object>
-		<name>Document.MoneyTransfer.Attribute.SendFinancialMovementType</name>
-		<right>
-			<name>View</name>
-			<value>true</value>
-		</right>
-	</object>
-	<object>
-		<name>Document.MoneyTransfer.Attribute.SendCashFlowCenter</name>
-		<right>
-			<name>View</name>
-			<value>true</value>
-		</right>
-	</object>
-	<object>
-		<name>Document.MoneyTransfer.Attribute.ReceiveFinancialMovementType</name>
-		<right>
-			<name>View</name>
-			<value>true</value>
-		</right>
-	</object>
-	<object>
-		<name>Document.MoneyTransfer.Attribute.ReceiveCashFlowCenter</name>
-		<right>
-			<name>View</name>
-			<value>true</value>
-		</right>
-	</object>
-	<object>
-		<name>Document.CashExpense.TabularSection.PaymentList.Attribute.CashFlowCenter</name>
-		<right>
-			<name>View</name>
-			<value>true</value>
-		</right>
-	</object>
-	<object>
-		<name>Catalog.Agreements</name>
-		<right>
-			<name>View</name>
-			<value>true</value>
-		</right>
-		<right>
-			<name>Read</name>
-			<value>true</value>
-		</right>
-	</object>
-	<object>
-		<name>Catalog.Agreements.Attribute.PriceType</name>
-		<right>
-			<name>View</name>
-			<value>true</value>
-		</right>
-	</object>
-	<object>
-		<name>Catalog.Agreements.Attribute.PriceIncludeTax</name>
-		<right>
-			<name>View</name>
-			<value>true</value>
-		</right>
-	</object>
-	<object>
-		<name>Document.MoneyTransfer.Attribute.ExpenseType</name>
-		<right>
-			<name>View</name>
-			<value>true</value>
-		</right>
-	</object>
-	<object>
-		<name>Document.MoneyTransfer.Attribute.LossCenter</name>
-		<right>
-			<name>View</name>
-			<value>true</value>
-		</right>
-	</object>
-	<object>
-		<name>Document.MoneyTransfer.Attribute.RevenueType</name>
-		<right>
-			<name>View</name>
-			<value>true</value>
-		</right>
-	</object>
-	<object>
-		<name>Document.MoneyTransfer.Attribute.ProfitCenter</name>
-		<right>
-			<name>View</name>
-			<value>true</value>
-		</right>
-	</object>
-	<object>
-		<name>Document.DebitCreditNote</name>
-		<right>
-			<name>Read</name>
-			<value>true</value>
-		</right>
-		<right>
-			<name>View</name>
-			<value>true</value>
-		</right>
-	</object>
-	<object>
-		<name>Document.DebitCreditNote.Attribute.Company</name>
 		<right>
 			<name>View</name>
 			<value>true</value>

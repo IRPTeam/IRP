@@ -936,9 +936,6 @@
     <notDefaultUseAlwaysAttributes xsi:type="form:DataPath">
       <segments>List.Ref</segments>
     </notDefaultUseAlwaysAttributes>
-    <notDefaultUseAlwaysAttributes xsi:type="form:DataPath">
-      <segments>List.IsHaveJE</segments>
-    </notDefaultUseAlwaysAttributes>
     <main>true</main>
     <extInfo xsi:type="form:DynamicListExtInfo">
       <queryText>SELECT

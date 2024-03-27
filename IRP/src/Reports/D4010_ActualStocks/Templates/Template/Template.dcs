@@ -318,6 +318,7 @@ FROM
 				<v8:DateFractions>DateTime</v8:DateFractions>
 			</v8:DateQualifiers>
 		</valueType>
+		<value xsi:nil="true"/>
 		<useRestriction>true</useRestriction>
 		<expression>&amp;Period.StartDate</expression>
 		<availableAsField>false</availableAsField>
@@ -336,6 +337,7 @@ FROM
 				<v8:DateFractions>DateTime</v8:DateFractions>
 			</v8:DateQualifiers>
 		</valueType>
+		<value xsi:nil="true"/>
 		<useRestriction>true</useRestriction>
 		<expression>&amp;Period.EndDate</expression>
 		<availableAsField>false</availableAsField>

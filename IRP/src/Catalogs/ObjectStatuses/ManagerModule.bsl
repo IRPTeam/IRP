@@ -73,6 +73,7 @@ EndFunction
 
 Function GetChoiceDataTable_ByUser(Parameters)
 	Query = New Query();
+	//@skip-check ql-constants-in-binary-operation
 	Query.Text = 
 	"SELECT
 	|	ObjectStatuses.Ref,

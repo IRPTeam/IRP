@@ -250,12 +250,14 @@ Function GetDocumentTable_IncomingPaymentOrder(ArrayOfBasisDocuments)
 	|	R3035T_CashPlanningTurnovers.AmountTurnover AS Amount,
 	|	R3035T_CashPlanningTurnovers.BasisDocument AS PlaningTransactionBasis
 	|FROM
-	|	AccumulationRegister.R3035T_CashPlanning.Turnovers(, , , CashFlowDirection = VALUE(Enum.CashFlowDirections.Incoming)
-	|	AND CurrencyMovementType = VALUE(ChartOfCharacteristicTypes.CurrencyMovementType.SettlementCurrency)
-	|	AND BasisDocument IN (&ArrayOfBasisDocuments)) AS R3035T_CashPlanningTurnovers
+	|	AccumulationRegister.R3035T_CashPlanning.Turnovers(, , , 
+	|		CashFlowDirection = VALUE(Enum.CashFlowDirections.Incoming)
+	|			AND CurrencyMovementType = VALUE(ChartOfCharacteristicTypes.CurrencyMovementType.SettlementCurrency)
+	|			AND BasisDocument IN (&ArrayOfBasisDocuments)
+	|			AND Account.Type = VALUE(Enum.CashAccountTypes.Bank)
+	|		) AS R3035T_CashPlanningTurnovers
 	|WHERE
-	|	R3035T_CashPlanningTurnovers.Account.Type = VALUE(Enum.CashAccountTypes.Bank)
-	|	AND R3035T_CashPlanningTurnovers.AmountTurnover > 0";
+	|	R3035T_CashPlanningTurnovers.AmountTurnover > 0";
 	Query.SetParameter("ArrayOfBasisDocuments", ArrayOfBasisDocuments);
 	QueryResult = Query.Execute();
 	Return QueryResult.Unload();

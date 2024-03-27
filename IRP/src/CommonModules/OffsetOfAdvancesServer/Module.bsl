@@ -1598,7 +1598,6 @@ Function ReleaseAdvanceByOrder(Parameters, Records_AdvancesKey, Records_OffsetOf
 		NewOffsetInfo.AdvanceAgreement = AdvanceKey.AdvanceAgreement;
 		NewOffsetInfo.AdvanceProject   = AdvanceKey.Project;
 		
-		
 		// OffsetOfAdvances - plus without order (record type expense)
 		NewOffsetInfo = Records_OffsetOfAdvances.Add();
 		NewOffsetInfo.IsAdvanceRelease = True;
@@ -2351,7 +2350,6 @@ Procedure Add_T2010S_OffsetOfAdvances_FromTransaction_ToAdvance(Parameters,
 		NewRecord.Key = NewRecord.AdvancesRowKey;
 	EndIf;		
 EndProcedure
-
 
 Procedure Add_TM1020B_AdvancesKey(RecordType, Period, AdvanceKey, Amount, Records_AdvancesKey)
 	NewRecord = Records_AdvancesKey.Add();

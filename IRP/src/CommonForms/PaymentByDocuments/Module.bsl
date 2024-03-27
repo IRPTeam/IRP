@@ -147,7 +147,6 @@ Function CalculateRows()
 		ResultRow.Insert("Payee", Row.LegalName);
 		ResultRow.Insert("Payer", Row.LegalName);
 		
-			
 		Result.Add(ResultRow);
 		
 		DocumentsRows = ThisObject.Documents.FindRows(New Structure("RowKey", Row.RowKey));
@@ -211,6 +210,4 @@ EndProcedure
 Procedure DocumentsBeforeDeleteRow(Item, Cancel)
 	Cancel = True;
 EndProcedure
-
-
 

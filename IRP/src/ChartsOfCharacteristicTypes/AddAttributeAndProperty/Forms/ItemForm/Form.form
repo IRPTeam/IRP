@@ -428,12 +428,12 @@
     <autoFill>true</autoFill>
   </autoCommandBar>
   <handlers>
-    <event>OnCreateAtServer</event>
-    <name>OnCreateAtServer</name>
-  </handlers>
-  <handlers>
     <event>OnOpen</event>
     <name>OnOpen</name>
+  </handlers>
+  <handlers>
+    <event>OnCreateAtServer</event>
+    <name>OnCreateAtServer</name>
   </handlers>
   <windowOpeningMode>LockOwnerWindow</windowOpeningMode>
   <autoTitle>true</autoTitle>
@@ -500,12 +500,12 @@
   </commandInterface>
   <extInfo xsi:type="form:ChartOfCharacteristicTypesFormExtInfo">
     <handlers>
-      <event>BeforeWriteAtServer</event>
-      <name>BeforeWriteAtServer</name>
-    </handlers>
-    <handlers>
       <event>OnReadAtServer</event>
       <name>OnReadAtServer</name>
+    </handlers>
+    <handlers>
+      <event>BeforeWriteAtServer</event>
+      <name>BeforeWriteAtServer</name>
     </handlers>
     <handlers>
       <event>OnWriteAtServer</event>

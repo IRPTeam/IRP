@@ -87,6 +87,7 @@ EndProcedure
 
 &AtClient
 Procedure LoadDataFromTable(Command)
+	//@skip-check use-non-recommended-method
 	InternalCommandModule = GetForm("DataProcessor.InternalCommands.Form.LoadDataFromTable");
 	InternalCommandModule.RunCommandAction(Object.Ref, ThisObject, Items.ContentSegmentLoadDataFromTable, Object);
 EndProcedure

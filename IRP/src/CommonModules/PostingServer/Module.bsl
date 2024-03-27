@@ -899,6 +899,7 @@ Function CheckBalance_ExecuteQuery(Ref, Parameters, Tables, RecordType, Unpostin
 	
 	Query = New Query();
 	Query.TempTablesManager = Parameters.TempTablesManager;
+	//@skip-check bsl-ql-hub
 	Query.Text =
 	"SELECT
 	|	ItemList.ItemKey,

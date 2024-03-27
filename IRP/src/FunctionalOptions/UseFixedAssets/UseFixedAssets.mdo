@@ -17,4 +17,5 @@
   <content>Catalog.FixedAssets</content>
   <content>Catalog.DepreciationSchedules</content>
   <content>Document.ModernizationOfFixedAsset</content>
+  <content>Document.CalculationMovementCosts</content>
 </mdclass:FunctionalOption>

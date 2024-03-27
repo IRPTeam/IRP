@@ -69,8 +69,6 @@ Procedure SetVisibilityAvailability(Object, Form)
 	Form.Items.LinkUnlinkBasisDocuments.Enabled = Not Form.ReadOnly;
 
 	IsCourierDelivery = (Object.TransactionType = PredefinedValue("Enum.RetailShipmentConfirmationTransactionTypes.CourierDelivery"));
-	IsPickupDelivery = (Object.TransactionType = PredefinedValue("Enum.RetailShipmentConfirmationTransactionTypes.Pickup"));
-	
 	Form.Items.Courier.Visible = IsCourierDelivery;
 	
 	_QuantityIsFixed = False;

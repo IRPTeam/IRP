@@ -467,7 +467,6 @@ EndProcedure
 
 #EndRegion
 
-
 #Region SOURCE_OF_ORIGINS
 
 &AtClient
@@ -827,7 +826,6 @@ Procedure ItemListControlCodeStringStateOpeningEnd(Result, AddInfo) Export
 			FillPropertyValues(Object.ControlCodeStrings.Add(), Row);
 		EndDo;
 	EndIf;
-	
 	
 	ControlCodeStringsClient.UpdateState(Object);
 	Modified = True;

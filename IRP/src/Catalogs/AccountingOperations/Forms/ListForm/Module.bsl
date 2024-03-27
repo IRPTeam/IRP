@@ -31,17 +31,10 @@ Procedure FillDefaultDescriptionsAtServer()
 			Continue;
 		EndIf;
 
-		ArrayOfPrefix = New Array();
-		ArrayOfPrefix.Add("en");
-		ArrayOfPrefix.Add("ru");
-		ArrayOfPrefix.Add("tr");
-	
-		For Each Prefix In ArrayOfPrefix Do
-			If ValueIsFilled(Obj.PredefinedDataName) And R(CurrentUserLang).Property(Obj.PredefinedDataName) Then
-				Obj["Description_" + CurrentUserLang] = R(CurrentUserLang)[Obj.PredefinedDataName];
-				Obj.Write();
-			EndIf;
-		EndDo;
+		If ValueIsFilled(Obj.PredefinedDataName) And R(CurrentUserLang).Property(Obj.PredefinedDataName) Then
+			Obj["Description_" + CurrentUserLang] = R(CurrentUserLang)[Obj.PredefinedDataName];
+			Obj.Write();
+		EndIf;
 		
 	EndDo;
 EndProcedure

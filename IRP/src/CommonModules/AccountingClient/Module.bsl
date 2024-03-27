@@ -97,7 +97,6 @@ Procedure SelectLedgerType_MultipleDocuments(Result, AdditionalParameters) Expor
 	AccountingServer.CreateJE_ByArrayRefs(AdditionalParameters.ArrayOfDocuments, Result.ArrayOfLedgerTypes);
 EndProcedure
 
-
 Procedure AddExtDimensionRow(Object, Form, AnalyticRow, AnalyticType, ExtDimType, ExtDim)
 	If Not ValueIsFilled(ExtDim) Then
 		Return;

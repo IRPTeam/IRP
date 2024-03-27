@@ -372,4 +372,24 @@
       <dataHistory>Use</dataHistory>
     </attributes>
   </tabularSections>
+  <templates uuid="f4050711-865d-4623-9d81-57d14ee65980">
+    <name>UnbundlingPrint</name>
+    <synonym>
+      <key>en</key>
+      <value>Unbundling</value>
+    </synonym>
+  </templates>
+  <commands uuid="74e89620-f670-4425-b3b2-969171a2684d">
+    <name>UnbundlingPrint</name>
+    <synonym>
+      <key>en</key>
+      <value>Unbundling</value>
+    </synonym>
+    <group>CommandGroup.Print</group>
+    <commandParameterType>
+      <types>DocumentRef.Unbundling</types>
+    </commandParameterType>
+    <parameterUseMode>Multiple</parameterUseMode>
+    <representation>Auto</representation>
+  </commands>
 </mdclass:Document>

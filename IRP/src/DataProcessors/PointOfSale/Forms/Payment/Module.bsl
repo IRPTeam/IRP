@@ -872,15 +872,18 @@ Procedure Payment_CancelPaymentByPaymentCardManual(Command)
 	If PaymentRow = Undefined Then
 		Return;
 	EndIf;
-	ShowQueryBox(
-		New NotifyDescription(
-			"Payment_CancelPaymentByPaymentCardManual_End", ThisObject, PaymentRow), 
-		R().QuestionToUser_028, QuestionDialogMode.YesNo);
+
+	Notify = New NotifyDescription(
+		"Payment_CancelPaymentByPaymentCardManual_End", ThisObject, PaymentRow);
+	OpenForm(
+		"DataProcessor.PointOfSale.Form.CancellationConfirmation",
+		New Structure("WarningMessage", R().POS_Warning_ReturnInDay),
+		ThisObject,,,, Notify);
 EndProcedure
 
 &AtClient
 Async Procedure Payment_CancelPaymentByPaymentCardManual_End(Answer, PaymentRow) Export
-	If Answer = DialogReturnCode.Yes Then
+	If Answer = True Then
 		Await Payment_CancelPaymentByPaymentCard(PaymentRow);
 		PaymentsOnActivateRow(Undefined);
 	EndIf;
@@ -917,8 +920,21 @@ Async Procedure Payment_RevertLastPaymentManual(Command)
 	If PaymentRow = Undefined Then
 		Return;
 	EndIf;
-	Await Payment_RevertLastPayment(PaymentRow);
-	PaymentsOnActivateRow(Undefined);
+	
+	Notify = New NotifyDescription(
+		"Payment_RevertLastPaymentManual_End", ThisObject, PaymentRow);
+	OpenForm(
+		"DataProcessor.PointOfSale.Form.CancellationConfirmation",
+		New Structure("WarningMessage", R().POS_Warning_Revert),
+		ThisObject,,,, Notify);
+EndProcedure
+
+&AtClient
+Async Procedure Payment_RevertLastPaymentManual_End(Answer, PaymentRow) Export
+	If Answer = True Then
+		Await Payment_RevertLastPayment(PaymentRow);
+		PaymentsOnActivateRow(Undefined);
+	EndIf;
 EndProcedure
 
 &AtClient
@@ -995,6 +1011,7 @@ Procedure SetPaymentCheck(Command)
 		Return;
 	EndIf;
 	PaymentRow.PaymentDone = True;
+	PaymentsOnActivateRow(Undefined);
 EndProcedure
 
 &AtClient
@@ -1004,6 +1021,7 @@ Procedure SetPaymentUncheck(Command)
 		Return;
 	EndIf;
 	PaymentRow.PaymentDone = False;
+	PaymentsOnActivateRow(Undefined);
 EndProcedure
 
 #EndRegion

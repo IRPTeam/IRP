@@ -1,25 +1,25 @@
-﻿<?xml version="1.0" encoding="UTF-8"?>
+<?xml version="1.0" encoding="UTF-8"?>
 <Rights xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://v8.1c.ru/8.2/roles" xsi:type="Rights">
-  <setForNewObjects>false</setForNewObjects>
-  <setForAttributesByDefault>true</setForAttributesByDefault>
-  <independentRightsOfChildObjects>false</independentRightsOfChildObjects>
-  <object>
-    <name>AccumulationRegister.R1005T_PurchaseSpecialOffers</name>
-    <right>
-      <name>Read</name>
-      <value>true</value>
-      <restrictionByCondition>
-        <condition>#AccessRegisters("Company", "Branch", "", "", "", "")</condition>
-      </restrictionByCondition>
-    </right>
-    <right>
-      <name>View</name>
-      <value>true</value>
-    </right>
-  </object>
-  <restrictionTemplate>
-    <name>AccessRegisters(D1, D2, D3, D4, D5, CompareRule)</name>
-    <condition>
+	<setForNewObjects>false</setForNewObjects>
+	<setForAttributesByDefault>true</setForAttributesByDefault>
+	<independentRightsOfChildObjects>false</independentRightsOfChildObjects>
+	<object>
+		<name>AccumulationRegister.R1005T_PurchaseSpecialOffers</name>
+		<right>
+			<name>Read</name>
+			<value>true</value>
+			<restrictionByCondition>
+				<condition>#AccessRegisters("Company", "Branch", "", "", "", "")</condition>
+			</restrictionByCondition>
+		</right>
+		<right>
+			<name>View</name>
+			<value>true</value>
+		</right>
+	</object>
+	<restrictionTemplate>
+		<name>AccessRegisters(D1, D2, D3, D4, D5, CompareRule)</name>
+		<condition>
 #If Not &amp;UseObjectAccess #Then
 	// Access restiction not using. Set UseObjectAccess functional option TRUE
 	WHERE TRUE
@@ -48,5 +48,5 @@ WHERE TRUE IN
 		#EndIf
 )
 #EndIf</condition>
-  </restrictionTemplate>
+	</restrictionTemplate>
 </Rights>

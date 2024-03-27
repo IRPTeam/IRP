@@ -1562,6 +1562,13 @@
       <fullTextSearch>Use</fullTextSearch>
     </attributes>
   </tabularSections>
+  <templates uuid="1d1ce399-1c7c-40b3-a365-a5669cff0944">
+    <name>PurchaseInvoicePrint</name>
+    <synonym>
+      <key>en</key>
+      <value>Purchase invoice</value>
+    </synonym>
+  </templates>
   <commands uuid="3d6c750a-5c87-42b0-935c-d84c03253f22">
     <name>Generate</name>
     <synonym>
@@ -1575,6 +1582,19 @@
       <types>DocumentRef.PurchaseOrder</types>
       <types>DocumentRef.SalesOrder</types>
       <types>DocumentRef.GoodsReceipt</types>
+    </commandParameterType>
+    <parameterUseMode>Multiple</parameterUseMode>
+    <representation>Auto</representation>
+  </commands>
+  <commands uuid="02af29b7-9f13-463a-8495-1de1af3bb4e4">
+    <name>PurchaseInvoicePrint</name>
+    <synonym>
+      <key>en</key>
+      <value>Purchase invoice</value>
+    </synonym>
+    <group>CommandGroup.Print</group>
+    <commandParameterType>
+      <types>DocumentRef.PurchaseInvoice</types>
     </commandParameterType>
     <parameterUseMode>Multiple</parameterUseMode>
     <representation>Auto</representation>

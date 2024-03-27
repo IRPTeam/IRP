@@ -635,4 +635,24 @@
       <fullTextSearch>Use</fullTextSearch>
     </attributes>
   </tabularSections>
+  <templates uuid="7a1c87eb-f06b-4aa8-a45c-a4f394327070">
+    <name>ModernizationOfFixedAssetPrint</name>
+    <synonym>
+      <key>en</key>
+      <value>Modernization of fixed asset</value>
+    </synonym>
+  </templates>
+  <commands uuid="a2f557f4-2daa-4066-bd41-7d474aa7cd19">
+    <name>ModernizationOfFixedAssetPrint</name>
+    <synonym>
+      <key>en</key>
+      <value>Modernization of fixed asset</value>
+    </synonym>
+    <group>CommandGroup.Print</group>
+    <commandParameterType>
+      <types>DocumentRef.ModernizationOfFixedAsset</types>
+    </commandParameterType>
+    <parameterUseMode>Multiple</parameterUseMode>
+    <representation>Auto</representation>
+  </commands>
 </mdclass:Document>

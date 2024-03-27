@@ -780,6 +780,13 @@
       <fullTextSearch>Use</fullTextSearch>
     </attributes>
   </tabularSections>
+  <templates uuid="d7f00949-ae5c-4524-af34-dbb33f9ec8dc">
+    <name>StockAdjustmentAsWriteOffPrint</name>
+    <synonym>
+      <key>en</key>
+      <value>Stock adjustment as write off</value>
+    </synonym>
+  </templates>
   <commands uuid="afca89d7-6ca4-4ef4-be00-d3d54af55c69">
     <name>Generate</name>
     <synonym>
@@ -789,6 +796,19 @@
     <group>FormCommandBarCreateBasedOn</group>
     <commandParameterType>
       <types>DocumentRef.PhysicalInventory</types>
+    </commandParameterType>
+    <parameterUseMode>Multiple</parameterUseMode>
+    <representation>Auto</representation>
+  </commands>
+  <commands uuid="0d1efa34-0fb2-4d5d-a306-857911f7bd29">
+    <name>StockAdjustmentAsWriteOffPrint</name>
+    <synonym>
+      <key>en</key>
+      <value>Stock adjustment as write off</value>
+    </synonym>
+    <group>CommandGroup.Print</group>
+    <commandParameterType>
+      <types>DocumentRef.StockAdjustmentAsWriteOff</types>
     </commandParameterType>
     <parameterUseMode>Multiple</parameterUseMode>
     <representation>Auto</representation>

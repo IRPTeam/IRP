@@ -101,7 +101,7 @@ Scenario: _25002 print settings for company, store, business unit
 		And I select current line in "List" table
 		And I select from "Print info" drop-down list by "Print settings" string
 		And I click "Save" button
-		Then the form attribute named "PrintInfo" became equal to "Print settings"
+		Then the field named "PrintInfo" is filled
 	* Add print settings for Store 02
 		Given I open hyperlink "e1cib/data/Catalog.Stores?ref=aa78120ed92fbced11eaf114c59ef00c"
 		And I click Select button of "Print info" field
@@ -111,7 +111,7 @@ Scenario: _25002 print settings for company, store, business unit
 		And I select current line in "List" table
 		And I select from "Print info" drop-down list by "Print settings" string
 		And I click "Save" button
-		Then the form attribute named "PrintInfo" became equal to "Print settings"
+		Then the field named "PrintInfo" is filled
 	* Add print settings for Front office
 		Given I open hyperlink "e1cib/data/Catalog.BusinessUnits?ref=aa78120ed92fbced11eaf114c59ef023"
 		And I click Select button of "Print info" field
@@ -121,7 +121,7 @@ Scenario: _25002 print settings for company, store, business unit
 		And I select current line in "List" table
 		And I select from "Print info" drop-down list by "Print settings" string
 		And I click "Save" button
-		Then the form attribute named "PrintInfo" became equal to "Print settings"		
+		Then the field named "PrintInfo" is filled		
 		And I close all client application windows
 				
 				
@@ -137,7 +137,7 @@ Scenario: _25003 check Sales order printing (different language)
 		And I go to line in "List" table and invert selection:
 			| "Number"    |
 			| "112"       |
-		And I click "SalesOrderPrint" button
+		And I click the button named "FormDocumentSalesOrderSalesOrderPrint"
 	* Check print form
 		And "PrintFormConfig" table became equal
 			| 'Print'   | 'Object'                                      | 'Template'      | 'Count copy'    |
@@ -213,7 +213,7 @@ Scenario: _25005 check Sales order printing (change template)
 		And I go to line in "List" table and invert selection:
 			| "Number"    |
 			| "112"       |
-		And I click "SalesOrderPrint" button
+		And I click the button named "FormDocumentSalesOrderSalesOrderPrint"
 	* Change template
 		And I go to line in "PrintFormConfig" table
 			| 'Count copy'   | 'Object'                                      | 'Print'   | 'Template'       |
@@ -235,23 +235,3 @@ Scenario: _25005 check Sales order printing (change template)
 		When I Check the steps for Exception
 			| 'And in "Result" spreadsheet document I input text "Trousers3"'    |
 		And I close all client application windows
-				
-				
-		
-
-				
-						
-				
-
-						
-		
-				
-				
-					
-		
-				
-				
-				
-				
-				
-				

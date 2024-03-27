@@ -1605,6 +1605,10 @@
   </templates>
   <commands uuid="34291d62-91e3-4f95-8ce2-3de95d4efd57">
     <name>SalesOrderPrint</name>
+    <synonym>
+      <key>en</key>
+      <value>Sales order</value>
+    </synonym>
     <group>CommandGroup.Print</group>
     <commandParameterType>
       <types>DocumentRef.SalesOrder</types>

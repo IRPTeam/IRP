@@ -613,4 +613,24 @@
       <fullTextSearch>Use</fullTextSearch>
     </attributes>
   </tabularSections>
+  <templates uuid="c2e98b3a-ed32-4aeb-9758-8f86fb742500">
+    <name>CommissioningOfFixedAssetPrint</name>
+    <synonym>
+      <key>en</key>
+      <value>Commissioning of fixed asset</value>
+    </synonym>
+  </templates>
+  <commands uuid="b0030b26-71cc-481f-87ca-f16a90b334ae">
+    <name>CommissioningOfFixedAssetPrint</name>
+    <synonym>
+      <key>en</key>
+      <value>Commissioning of fixed asset</value>
+    </synonym>
+    <group>CommandGroup.Print</group>
+    <commandParameterType>
+      <types>DocumentRef.CommissioningOfFixedAsset</types>
+    </commandParameterType>
+    <parameterUseMode>Multiple</parameterUseMode>
+    <representation>Auto</representation>
+  </commands>
 </mdclass:Document>

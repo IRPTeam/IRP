@@ -42,7 +42,10 @@ Procedure OnStart()
 EndProcedure
 
 Procedure OpenDebugForm() Export
-	OpenForm("AccumulationRegister.R3021B_CashInTransitIncoming.ListForm");
+	OpenForm("AccumulationRegister.R5020B_PartnersBalance.ListForm");
+	OpenForm("InformationRegister.T2010S_OffsetOfAdvances.ListForm");
+	OpenForm("AccumulationRegister.R1020B_AdvancesToVendors.ListForm");
+	OpenForm("AccumulationRegister.R1021B_VendorsTransactions.ListForm");
 EndProcedure	
 
 // Before start.

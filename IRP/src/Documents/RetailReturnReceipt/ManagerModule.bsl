@@ -524,6 +524,7 @@ Function GetQueryTextsMasterTables()
 	QueryArray.Add(T6010S_BatchesInfo());
 	QueryArray.Add(T6020S_BatchKeysInfo());
 	QueryArray.Add(R5015B_OtherPartnersTransactions());
+	QueryArray.Add(R5020B_PartnersBalance());
 	Return QueryArray;
 EndFunction
 
@@ -1172,7 +1173,7 @@ Function R2021B_CustomersTransactions()
 		   |	ItemList.Partner,
 		   |	ItemList.Agreement,
 		   |	ItemList.BasisDocument,
-		   |	SUM(ItemList.TotalAmount),
+		   |	-SUM(ItemList.TotalAmount),
 		   |	UNDEFINED
 		   |FROM
 		   |	ItemList AS ItemList
@@ -1408,6 +1409,10 @@ Function R8014T_ConsignorSales()
 		|WHERE
 		|	ItemList.IsConsignorStocks
 		|	AND ItemList.StatusType = VALUE(ENUM.RetailReceiptStatusTypes.Completed)";
+EndFunction
+
+Function R5020B_PartnersBalance()
+	Return AccumulationRegisters.R5020B_PartnersBalance.R5020B_PartnersBalance_RRR();
 EndFunction
 
 #EndRegion

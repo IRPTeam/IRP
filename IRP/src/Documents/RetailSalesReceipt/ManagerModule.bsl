@@ -303,6 +303,7 @@ Function GetQueryTextsMasterTables()
 	QueryArray.Add(T3010S_RowIDInfo());
 	QueryArray.Add(T6020S_BatchKeysInfo());
 	QueryArray.Add(R5015B_OtherPartnersTransactions());
+	QueryArray.Add(R5020B_PartnersBalance());
 	Return QueryArray;
 EndFunction
 
@@ -1454,6 +1455,10 @@ Function R2012B_SalesOrdersInvoiceClosing()
 		   |WHERE
 		   |	ItemList.SalesOrderExists
 		   |	AND ItemList.StatusType = VALUE(ENUM.RetailReceiptStatusTypes.Completed)";
+EndFunction
+
+Function R5020B_PartnersBalance()
+	Return AccumulationRegisters.R5020B_PartnersBalance.R5020B_PartnersBalance_RSR();
 EndFunction
 
 #EndRegion

@@ -172,6 +172,7 @@ Procedure PostingCheckBeforeWrite(Ref, Cancel, PostingMode, Parameters, AddInfo 
 	Tables.R3021B_CashInTransitIncoming.Columns.Add("Key", Metadata.DefinedTypes.typeRowID.Type);
 	Tables.R8510B_BookValueOfFixedAsset.Columns.Add("Key", Metadata.DefinedTypes.typeRowID.Type);
 	Tables.CashInTransit.Columns.Add("Key", Metadata.DefinedTypes.typeRowID.Type);
+	Tables.R5020B_PartnersBalance.Columns.Add("Key", Metadata.DefinedTypes.typeRowID.Type);
 
 	PostingServer.FillPostingTables(Tables, Ref, QueryArray, Parameters);
 EndProcedure
@@ -393,6 +394,7 @@ Function GetQueryTextsMasterTables()
 	QueryArray.Add(T8515S_FixedAssetsLocation());
 	QueryArray.Add(R8515T_CostOfFixedAsset());
 	QueryArray.Add(R8510B_BookValueOfFixedAsset());
+	QueryArray.Add(R5020B_PartnersBalance());
 	Return QueryArray;
 EndFunction
 
@@ -1888,6 +1890,10 @@ Function R8510B_BookValueOfFixedAsset()
 		|		AND FixedAssetsDepreciationInfo.LedgerType = tmp.LedgerType
 		|WHERE
 		|	FixedAssetsDepreciationInfo.LedgerType.CalculateDepreciation"
+EndFunction
+
+Function R5020B_PartnersBalance()
+	Return AccumulationRegisters.R5020B_PartnersBalance.R5020B_PartnersBalance_OE();
 EndFunction
 
 #EndRegion

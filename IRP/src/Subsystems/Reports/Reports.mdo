@@ -16,6 +16,7 @@
   <content>Report.D4010_ActualStocks</content>
   <content>Report.D4011_FreeStocks</content>
   <content>Report.A1010_PartnersBalance</content>
+  <content>Report.R5020_PartnersBalance</content>
   <subsystems>Sales</subsystems>
   <subsystems>Purchase</subsystems>
   <subsystems>Inventory</subsystems>

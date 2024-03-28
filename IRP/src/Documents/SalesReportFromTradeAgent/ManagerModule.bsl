@@ -368,6 +368,7 @@ Function GetQueryTextsMasterTables()
 	QueryArray.Add(R9010B_SourceOfOriginStock());
 	QueryArray.Add(T2015S_TransactionsInfo());
 	QueryArray.Add(T6020S_BatchKeysInfo());
+	QueryArray.Add(R5020B_PartnersBalance());
 	Return QueryArray;
 EndFunction
 
@@ -504,6 +505,10 @@ EndFunction
 
 Function R2021B_CustomersTransactions()
 	Return AccumulationRegisters.R2021B_CustomersTransactions.R2021B_CustomersTransactions_SI_SRFTA();
+EndFunction
+
+Function R5020B_PartnersBalance()
+	Return AccumulationRegisters.R5020B_PartnersBalance.R5020B_PartnersBalance_SRFTA();
 EndFunction
 
 Function R5010B_ReconciliationStatement()

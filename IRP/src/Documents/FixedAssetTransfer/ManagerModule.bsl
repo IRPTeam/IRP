@@ -86,9 +86,12 @@ EndFunction
 Function GetAdditionalQueryParameters(Ref)
 	StrParams = New Structure;
 	StrParams.Insert("Ref", Ref);
-	StrParams.Insert("Company"       , Ref.Company);
-	StrParams.Insert("BusinessUnitSender"  , Ref.BusinessUnitSender);
-	StrParams.Insert("BusinessUnitReceiver", Ref.BusinessUnitReceiver);
+	StrParams.Insert("Company"                 , Ref.Company);
+	StrParams.Insert("BranchSender"            , Ref.Branch);
+	StrParams.Insert("BranchReceiver"          , Ref.BranchReceiver);
+	StrParams.Insert("ProfitLossCenterSender"  , Ref.ProfitLossCenterSender);
+	StrParams.Insert("ProfitLossCenterReceiver", Ref.ProfitLossCenterReceiver);
+	StrParams.Insert("ResponsiblePersonSender" , Ref.ResponsiblePersonSender);
 	StrParams.Insert("FixedAsset"    , Ref.FixedAsset);
 	If ValueIsFilled(Ref) Then
 		StrParams.Insert("BalancePeriod" , New Boundary(Ref.PointInTime(), BoundaryType.Excluding));
@@ -125,15 +128,18 @@ Function T8515S_FixedAssetsLocation()
 		"SELECT
 		|	&Period AS Period,
 		|	T8515S_FixedAssetsLocationSliceLast.Company,
+		|	T8515S_FixedAssetsLocationSliceLast.Branch,
+		|	T8515S_FixedAssetsLocationSliceLast.ProfitLossCenter,
 		|	T8515S_FixedAssetsLocationSliceLast.FixedAsset,
 		|	T8515S_FixedAssetsLocationSliceLast.ResponsiblePerson,
-		|	T8515S_FixedAssetsLocationSliceLast.Branch,
 		|	FALSE AS IsActive
 		|INTO T8515S_FixedAssetsLocation
 		|FROM
 		|	InformationRegister.T8515S_FixedAssetsLocation.SliceLast(&BalancePeriod, Company = &Company
+		|	AND Branch = &BranchSender
+		|	AND ProfitLossCenter = &ProfitLossCenterSender
 		|	AND FixedAsset = &FixedAsset
-		|	AND Branch = &BusinessUnitSender) AS T8515S_FixedAssetsLocationSliceLast
+		|	AND ResponsiblePerson = &ResponsiblePersonSender) AS T8515S_FixedAssetsLocationSliceLast
 		|WHERE
 		|	T8515S_FixedAssetsLocationSliceLast.IsActive
 		|
@@ -142,9 +148,10 @@ Function T8515S_FixedAssetsLocation()
 		|SELECT
 		|	FixedAssetTransfer.Date,
 		|	FixedAssetTransfer.Company,
+		|	FixedAssetTransfer.BranchReceiver,
+		|	FixedAssetTransfer.ProfitLossCenterReceiver,
 		|	FixedAssetTransfer.FixedAsset,
 		|	FixedAssetTransfer.ResponsiblePersonReceiver,
-		|	FixedAssetTransfer.BusinessUnitReceiver,
 		|	TRUE
 		|FROM
 		|	Document.FixedAssetTransfer AS FixedAssetTransfer
@@ -157,6 +164,8 @@ Function R8510B_BookValueOfFixedAsset()
 		"SELECT
 		|	&Period AS Period,
 		|	R8510B_BookValueOfFixedAssetBalance.Company,
+		|	R8510B_BookValueOfFixedAssetBalance.Branch,
+		|	R8510B_BookValueOfFixedAssetBalance.ProfitLossCenter,
 		|	R8510B_BookValueOfFixedAssetBalance.FixedAsset,
 		|	R8510B_BookValueOfFixedAssetBalance.LedgerType,
 		|	R8510B_BookValueOfFixedAssetBalance.Schedule,
@@ -164,9 +173,11 @@ Function R8510B_BookValueOfFixedAsset()
 		|	R8510B_BookValueOfFixedAssetBalance.AmountBalance AS Amount
 		|INTO _BookValueOfFixedAsset
 		|FROM
-		|	AccumulationRegister.R8510B_BookValueOfFixedAsset.Balance(&BalancePeriod, FixedAsset = &FixedAsset
-		|	AND Branch = &BusinessUnitSender
+		|	AccumulationRegister.R8510B_BookValueOfFixedAsset.Balance(&BalancePeriod, 
+		|	FixedAsset = &FixedAsset
 		|	AND Company = &Company
+		|	AND Branch = &BranchSender
+		|	AND ProfitLossCenter = &ProfitLossCenterSender
 		|	AND CurrencyMovementType = VALUE(ChartOfCharacteristicTypes.CurrencyMovementType.SettlementCurrency)) AS
 		|		R8510B_BookValueOfFixedAssetBalance
 		|;
@@ -176,7 +187,8 @@ Function R8510B_BookValueOfFixedAsset()
 		|	VALUE(AccumulationRecordType.Expense) AS RecordType,
 		|	_BookValueOfFixedAsset.Period,
 		|	_BookValueOfFixedAsset.Company,
-		|	&BusinessUnitSender AS Branch,
+		|	_BookValueOfFixedAsset.Branch,
+		|	_BookValueOfFixedAsset.ProfitLossCenter,
 		|	_BookValueOfFixedAsset.FixedAsset,
 		|	_BookValueOfFixedAsset.LedgerType,
 		|	_BookValueOfFixedAsset.Schedule,
@@ -194,7 +206,8 @@ Function R8510B_BookValueOfFixedAsset()
 		|	VALUE(AccumulationRecordType.Receipt),
 		|	_BookValueOfFixedAsset.Period,
 		|	_BookValueOfFixedAsset.Company,
-		|	&BusinessUnitReceiver,
+		|	&BranchReceiver,
+		|	&ProfitLossCenterReceiver,
 		|	_BookValueOfFixedAsset.FixedAsset,
 		|	_BookValueOfFixedAsset.LedgerType,
 		|	_BookValueOfFixedAsset.Schedule,

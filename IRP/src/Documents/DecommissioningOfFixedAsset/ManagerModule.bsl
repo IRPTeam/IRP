@@ -105,7 +105,6 @@ Function GetAdditionalQueryParameters(Ref)
 	StrParams = New Structure;
 	StrParams.Insert("Ref"           , Ref);
 	StrParams.Insert("Company"       , Ref.Company);
-	StrParams.Insert("Branch"        , Ref.BusinessUnit);
 	StrParams.Insert("FixedAsset"    , Ref.FixedAsset);
 	If ValueIsFilled(Ref) Then
 		StrParams.Insert("BalancePeriod" , New Boundary(Ref.PointInTime(), BoundaryType.Excluding));
@@ -150,7 +149,7 @@ Function ItemList()
 		"SELECT
 		|	ItemList.Ref.Date AS Period,
 		|	ItemList.Ref.Company AS Company,
-		|	ItemList.Ref.BusinessUnit AS Branch,
+		|	ItemList.Ref.Branch AS Branch,
 		|	ItemList.Ref.FixedAsset AS FixedAsset,
 		|	ItemList.Ref AS Ref,
 		|	ItemList.Store AS Store,
@@ -171,7 +170,7 @@ Function SerialLotNumbers()
 		"SELECT
 		|	SerialLotNumbers.Ref.Date AS Period,
 		|	SerialLotNumbers.Ref.Company AS Company,
-		|	SerialLotNumbers.Ref.BusinessUnit AS Branch,
+		|	SerialLotNumbers.Ref.Branch AS Branch,
 		|	SerialLotNumbers.Key,
 		|	SerialLotNumbers.SerialLotNumber,
 		|	SerialLotNumbers.SerialLotNumber.StockBalanceDetail AS StockBalanceDetail,
@@ -452,6 +451,7 @@ Function R8510B_BookValueOfFixedAsset()
 		|	&Period AS Period,
 		|	R8510B_BookValueOfFixedAssetBalance.Company,
 		|	R8510B_BookValueOfFixedAssetBalance.Branch,
+		|	R8510B_BookValueOfFixedAssetBalance.ProfitLossCenter,
 		|	R8510B_BookValueOfFixedAssetBalance.FixedAsset,
 		|	R8510B_BookValueOfFixedAssetBalance.LedgerType,
 		|	R8510B_BookValueOfFixedAssetBalance.Schedule,
@@ -476,8 +476,7 @@ Function T8515S_FixedAssetsLocation()
 		|INTO T8515S_FixedAssetsLocation
 		|FROM
 		|	InformationRegister.T8515S_FixedAssetsLocation.SliceLast(&BalancePeriod, Company = &Company
-		|	AND FixedAsset = &FixedAsset
-		|	AND Branch = &Branch) AS T8515S_FixedAssetsLocationSliceLast
+		|	AND FixedAsset = &FixedAsset) AS T8515S_FixedAssetsLocationSliceLast
 		|WHERE
 		|	T8515S_FixedAssetsLocationSliceLast.IsActive";
 EndFunction

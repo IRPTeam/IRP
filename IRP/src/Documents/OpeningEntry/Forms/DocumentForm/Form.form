@@ -13261,7 +13261,7 @@
           </extInfo>
         </items>
         <items xsi:type="form:FormField">
-          <name>FixedAssetsBusinessUnit</name>
+          <name>FixedAssetsProfitLossCenter</name>
           <id>1554</id>
           <visible>true</visible>
           <enabled>true</enabled>
@@ -13269,10 +13269,10 @@
             <common>true</common>
           </userVisible>
           <dataPath xsi:type="form:DataPath">
-            <segments>Object.FixedAssets.BusinessUnit</segments>
+            <segments>Object.FixedAssets.ProfitLossCenter</segments>
           </dataPath>
           <extendedTooltip>
-            <name>FixedAssetsBusinessUnitExtendedTooltip</name>
+            <name>FixedAssetsProfitLossCenterExtendedTooltip</name>
             <id>1556</id>
             <visible>true</visible>
             <enabled>true</enabled>
@@ -13287,7 +13287,7 @@
             </extInfo>
           </extendedTooltip>
           <contextMenu>
-            <name>FixedAssetsBusinessUnitContextMenu</name>
+            <name>FixedAssetsProfitLossCenterContextMenu</name>
             <id>1555</id>
             <visible>true</visible>
             <enabled>true</enabled>

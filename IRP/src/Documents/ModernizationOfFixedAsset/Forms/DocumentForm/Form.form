@@ -415,7 +415,7 @@
           </extInfo>
         </items>
         <items xsi:type="form:FormField">
-          <name>BusinessUnit</name>
+          <name>ProfitLossCenter</name>
           <id>1091</id>
           <visible>true</visible>
           <enabled>true</enabled>
@@ -423,10 +423,10 @@
             <common>true</common>
           </userVisible>
           <dataPath xsi:type="form:DataPath">
-            <segments>Object.BusinessUnit</segments>
+            <segments>Object.ProfitLossCenter</segments>
           </dataPath>
           <extendedTooltip>
-            <name>BusinessUnitExtendedTooltip</name>
+            <name>ProfitLossCenterExtendedTooltip</name>
             <id>1093</id>
             <visible>true</visible>
             <enabled>true</enabled>
@@ -441,7 +441,7 @@
             </extInfo>
           </extendedTooltip>
           <contextMenu>
-            <name>BusinessUnitContextMenu</name>
+            <name>ProfitLossCenterContextMenu</name>
             <id>1092</id>
             <visible>true</visible>
             <enabled>true</enabled>

@@ -686,7 +686,8 @@ Function FixedAssets()
 		|	OpeningEntryFixedAssets.Ref.Company,
 		|	OpeningEntryFixedAssets.FixedAsset,
 		|	OpeningEntryFixedAssets.ResponsiblePerson,
-		|	OpeningEntryFixedAssets.BusinessUnit AS Branch,
+		|	OpeningEntryFixedAssets.Ref.Branch AS Branch,
+		|	OpeningEntryFixedAssets.ProfitLossCenter AS ProfitLossCenter,
 		|	OpeningEntryFixedAssets.LedgerType,
 		|	OpeningEntryFixedAssets.CommissioningDate,
 		|	OpeningEntryFixedAssets.OriginalAmount,
@@ -1694,6 +1695,7 @@ Function T8515S_FixedAssetsLocation()
 		|	FixedAssets.FixedAsset,
 		|	FixedAssets.ResponsiblePerson,
 		|	FixedAssets.Branch,
+		|	FixedAssets.ProfitLossCenter,
 		|	TRUE AS IsActive
 		|INTO T8515S_FixedAssetsLocation
 		|FROM
@@ -1702,6 +1704,7 @@ Function T8515S_FixedAssetsLocation()
 		|	FixedAssets.CommissioningDate,
 		|	FixedAssets.Company,
 		|	FixedAssets.FixedAsset,
+		|	FixedAssets.ProfitLossCenter,
 		|	FixedAssets.ResponsiblePerson,
 		|	FixedAssets.Branch";
 EndFunction
@@ -1726,7 +1729,8 @@ Function R8510B_BookValueOfFixedAsset()
 		|	OpeningEntryFixedAssets.Ref.Company,
 		|	OpeningEntryFixedAssets.FixedAsset,
 		|	OpeningEntryFixedAssets.ResponsiblePerson,
-		|	OpeningEntryFixedAssets.BusinessUnit AS Branch,
+		|	OpeningEntryFixedAssets.Ref.Branch AS Branch,
+		|	OpeningEntryFixedAssets.ProfitLossCenter AS ProfitLossCenter,
 		|	OpeningEntryFixedAssets.LedgerType,
 		|	OpeningEntryFixedAssets.CommissioningDate,
 		|	OpeningEntryFixedAssets.OriginalAmount,
@@ -1746,6 +1750,7 @@ Function R8510B_BookValueOfFixedAsset()
 		|	tmp.Period,
 		|	tmp.Company,
 		|	tmp.Branch,
+		|	tmp.ProfitLossCenter,
 		|	tmp.FixedAsset,
 		|	tmp.LedgerType,
 		|	tmp.Currency,

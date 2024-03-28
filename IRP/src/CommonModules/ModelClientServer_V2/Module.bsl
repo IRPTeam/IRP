@@ -424,7 +424,8 @@ Function GetChain()
 	Chain.Insert("ChangeShipmentModeByTransactionType"   , GetChainLink("ChangeShipmentModeByTransactionTypeExecute"));
 	
 	Chain.Insert("ChangeResponsiblePersonSenderByFixedAsset" , GetChainLink("ChangeResponsiblePersonSenderByFixedAssetExecute"));
-	Chain.Insert("ChangeBusinessUnitSenderByFixedAsset"      , GetChainLink("ChangeBusinessUnitSenderByFixedAssetExecute"));
+	Chain.Insert("ChangeBranchByFixedAsset"      , GetChainLink("ChangeBranchByFixedAssetExecute"));
+	Chain.Insert("ChangeProfitLossCenterSenderByFixedAsset"      , GetChainLink("ChangeProfitLossCenterSenderByFixedAssetExecute"));
 	
 	Chain.Insert("ChangePositionByEmployee"         , GetChainLink("ChangePositionByEmployeeExecute"));	
 	Chain.Insert("ChangeEmployeeScheduleByEmployee" , GetChainLink("ChangeEmployeeScheduleByEmployeeExecute"));
@@ -1951,15 +1952,28 @@ EndFunction
 	
 #EndRegion
 
-#Region CHANGE_BRANCH_SENDER_BY_FIXED_ASSET
+#Region CHANGE_BRANCH_BY_FIXED_ASSET
 
-Function ChangeBusinessUnitSenderByFixedAssetOptions() Export
+Function ChangeBranchByFixedAssetOptions() Export
 	Return GetChainLinkOptions("FixedAsset, Company, Date");
 EndFunction
 
-Function ChangeBusinessUnitSenderByFixedAssetExecute(Options) Export
+Function ChangeBranchByFixedAssetExecute(Options) Export
 	Result = DocFixedAssetTransferServer.GetFixedAssetLocation(Options.Date, Options.Company, Options.FixedAsset);
 	Return Result.Branch;
+EndFunction
+
+#EndRegion
+
+#Region CHANGE_PROFIT_LOSS_CENTER_SENDER_BY_FIXED_ASSET
+
+Function ChangeProfitLossCenterSenderByFixedAssetOptions() Export
+	Return GetChainLinkOptions("FixedAsset, Company, Date");
+EndFunction
+
+Function ChangeProfitLossCenterSenderByFixedAssetExecute(Options) Export
+	Result = DocFixedAssetTransferServer.GetFixedAssetLocation(Options.Date, Options.Company, Options.FixedAsset);
+	Return Result.ProfitLossCenter;
 EndFunction
 
 #EndRegion

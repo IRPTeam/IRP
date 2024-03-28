@@ -702,7 +702,7 @@ Procedure DoRegistration_CalculationMode_LandedCost(LocksStorage, CalculationSet
 		EndIf;
 	EndDo;
 	
-	_DataForFixedAssets.GroupBy("Period, Document, Company, Branch, FixedAsset, LedgerType, Schedule, Currency", 
+	_DataForFixedAssets.GroupBy("Period, Document, Company, Branch, ProfitLossCenter, FixedAsset, LedgerType, Schedule, Currency", 
 		"Amount");
 	
 	_DataForFixedAssetsByLedgerTypes = _DataForFixedAssets.CopyColumns();
@@ -919,6 +919,7 @@ Function GetBatchWiseBalance(CalculationSettings)
 	DataForFixedAssets.Columns.Add("Document"         , RegMetadata.Dimensions.Document.Type);
 	DataForFixedAssets.Columns.Add("Company"          , RegMetadata.Dimensions.Company.Type);
 	DataForFixedAssets.Columns.Add("Branch"           , RegMetadata.Dimensions.Branch.Type);
+	DataForFixedAssets.Columns.Add("ProfitLossCenter" , RegMetadata.Dimensions.ProfitLossCenter.Type);
 	DataForFixedAssets.Columns.Add("FixedAsset"       , RegMetadata.Dimensions.FixedAsset.Type);
 	DataForFixedAssets.Columns.Add("LedgerType"       , RegMetadata.Dimensions.LedgerType.Type);
 	DataForFixedAssets.Columns.Add("Schedule"         , RegMetadata.Dimensions.Schedule.Type);
@@ -1074,6 +1075,8 @@ Function GetBatchTree(TempTablesManager, CalculationSettings)
 	|	case
 	|		when T6020S_BatchKeysInfo.Recorder refs Document.StockAdjustmentAsWriteOff
 	|		OR T6020S_BatchKeysInfo.Recorder refs Document.WorkSheet
+	|		OR T6020S_BatchKeysInfo.Recorder refs Document.CommissioningOfFixedAsset
+	|		OR T6020S_BatchKeysInfo.Recorder refs Document.ModernizationOfFixedAsset
 	|			then T6020S_BatchKeysInfo.ProfitLossCenter
 	|		else undefined
 	|	end AS ProfitLossCenter,
@@ -1158,6 +1161,8 @@ Function GetBatchTree(TempTablesManager, CalculationSettings)
 	|	case
 	|		when T6020S_BatchKeysInfo.Recorder refs Document.StockAdjustmentAsWriteOff
 	|		OR T6020S_BatchKeysInfo.Recorder refs Document.WorkSheet
+	|		OR T6020S_BatchKeysInfo.Recorder refs Document.CommissioningOfFixedAsset
+	|		OR T6020S_BatchKeysInfo.Recorder refs Document.ModernizationOfFixedAsset
 	|			then T6020S_BatchKeysInfo.ProfitLossCenter
 	|		else undefined
 	|	end,
@@ -1281,6 +1286,8 @@ Function GetBatchTree(TempTablesManager, CalculationSettings)
 	|	case
 	|		when T6020S_BatchKeysInfo.Recorder refs Document.StockAdjustmentAsWriteOff
 	|		OR T6020S_BatchKeysInfo.Recorder refs Document.WorkSheet
+	|		OR T6020S_BatchKeysInfo.Recorder refs Document.CommissioningOfFixedAsset
+	|		OR T6020S_BatchKeysInfo.Recorder refs Document.ModernizationOfFixedAsset
 	|			then T6020S_BatchKeysInfo.ProfitLossCenter
 	|		else undefined
 	|	end AS ProfitLossCenter,
@@ -1360,6 +1367,8 @@ Function GetBatchTree(TempTablesManager, CalculationSettings)
 	|	case
 	|		when T6020S_BatchKeysInfo.Recorder refs Document.StockAdjustmentAsWriteOff
 	|		OR T6020S_BatchKeysInfo.Recorder refs Document.WorkSheet
+	|		OR T6020S_BatchKeysInfo.Recorder refs Document.CommissioningOfFixedAsset
+	|		OR T6020S_BatchKeysInfo.Recorder refs Document.ModernizationOfFixedAsset
 	|			then T6020S_BatchKeysInfo.ProfitLossCenter
 	|		else undefined
 	|	end,
@@ -2281,8 +2290,9 @@ Procedure CalculateBatch(Document, Rows, Tables, Tree, TableOfReturnedBatches, E
 						Or TypeOf(Row.Document) = Type("DocumentRef.ModernizationOfFixedAsset") Then
 						NewRow_DataForFixedAssets = Tables.DataForFixedAssets.Add();
 						FillPropertyValues(NewRow_DataForFixedAssets, NewRow);
-						NewRow_DataForFixedAssets.FixedAsset = Row.FixedAsset;						
-						NewRow_DataForFixedAssets.Branch = Row.Branch;						
+						NewRow_DataForFixedAssets.FixedAsset       = Row.FixedAsset;						
+						NewRow_DataForFixedAssets.Branch           = Row.Branch;						
+						NewRow_DataForFixedAssets.ProfitLossCenter = Row.ProfitLossCenter;						
 					EndIf;	
 						
 				EndIf;

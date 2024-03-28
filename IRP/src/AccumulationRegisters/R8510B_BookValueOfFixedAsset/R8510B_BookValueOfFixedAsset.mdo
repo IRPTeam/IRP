@@ -71,6 +71,20 @@
     <fullTextSearch>Use</fullTextSearch>
     <useInTotals>true</useInTotals>
   </dimensions>
+  <dimensions uuid="4d6f5b93-5f39-404b-8649-ff58b6169755">
+    <name>ProfitLossCenter</name>
+    <synonym>
+      <key>en</key>
+      <value>Profit loss center</value>
+    </synonym>
+    <type>
+      <types>CatalogRef.BusinessUnits</types>
+    </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <fullTextSearch>Use</fullTextSearch>
+    <useInTotals>true</useInTotals>
+  </dimensions>
   <dimensions uuid="968b6d74-47c3-4960-a1b8-3ca141088718">
     <name>FixedAsset</name>
     <synonym>

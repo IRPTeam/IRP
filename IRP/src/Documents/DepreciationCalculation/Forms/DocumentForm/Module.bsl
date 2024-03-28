@@ -61,4 +61,18 @@ Procedure GeneratedFormCommandActionByNameServer(CommandName) Export
 	ExternalCommandsServer.GeneratedFormCommandActionByName(Object, ThisObject, CommandName);
 EndProcedure
 
+&AtClient
+Procedure FillCalculations(Command)
+	If Not CheckFilling() Then
+		Return;
+	EndIf;
+	FillCalculationsAtServer();
+EndProcedure
+
+&AtServer
+Procedure FillCalculationsAtServer()
+	Object.Calculations.Load(
+		Documents.DepreciationCalculation.GetCalculations(Object.Ref, Object.Date, Object.Company, Object.Branch));
+EndProcedure
+
 #EndRegion

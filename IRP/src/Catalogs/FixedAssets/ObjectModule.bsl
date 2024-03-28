@@ -20,3 +20,7 @@ EndProcedure
 Procedure Filling(FillingData, FillingText, StandardProcessing)
 	Return;
 EndProcedure
+
+Procedure OnCopy(CopiedObject)
+	ThisObject.InventoryNumber = "";
+EndProcedure

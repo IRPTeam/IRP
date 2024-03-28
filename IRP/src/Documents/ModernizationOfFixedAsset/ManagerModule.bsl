@@ -142,7 +142,8 @@ Function ItemList()
 		|	ItemList.Ref AS Ref,
 		|	ItemList.Ref.Date AS Period,
 		|	ItemList.Ref.Company AS Company,
-		|	ItemList.Ref.BusinessUnit AS Branch,
+		|	ItemList.Ref.Branch AS Branch,
+		|	ItemList.Ref.ProfitLossCenter AS ProfitLossCenter,
 		|	ItemList.Ref.FixedAsset AS FixedAsset,
 		|	ItemList.Store AS Store,
 		|	ItemList.ItemKey AS ItemKey,
@@ -163,7 +164,7 @@ Function SerialLotNumbers()
 		"SELECT
 		|	SerialLotNumbers.Ref.Date AS Period,
 		|	SerialLotNumbers.Ref.Company AS Company,
-		|	SerialLotNumbers.Ref.BusinessUnit AS Branch,
+		|	SerialLotNumbers.Ref.Branch AS Branch,
 		|	SerialLotNumbers.Key,
 		|	SerialLotNumbers.SerialLotNumber,
 		|	SerialLotNumbers.SerialLotNumber.StockBalanceDetail AS StockBalanceDetail,
@@ -354,6 +355,7 @@ Function T6020S_BatchKeysInfo()
 		|	ItemList.Store,
 		|	ItemList.ItemKey,
 		|	ItemList.Branch,
+		|	ItemList.ProfitLossCenter,
 		|	ItemList.Key,
 		|	ItemList.Quantity AS Quantity
 		|INTO BatchKeysInfo_1
@@ -372,6 +374,7 @@ Function T6020S_BatchKeysInfo()
 		|	BatchKeysInfo_1.Store,
 		|	BatchKeysInfo_1.ItemKey,
 		|	BatchKeysInfo_1.Branch,
+		|	BatchKeysInfo_1.ProfitLossCenter,
 		|	SUM(CASE
 		|		WHEN ISNULL(SourceOfOrigins.Quantity, 0) <> 0
 		|			THEN ISNULL(SourceOfOrigins.Quantity, 0)
@@ -392,6 +395,7 @@ Function T6020S_BatchKeysInfo()
 		|	BatchKeysInfo_1.Store,
 		|	BatchKeysInfo_1.ItemKey,
 		|	BatchKeysInfo_1.Branch,
+		|	BatchKeysInfo_1.ProfitLossCenter,
 		|	ISNULL(SourceOfOrigins.SourceOfOrigin, VALUE(Catalog.SourceOfOrigins.EmptyRef)),
 		|	ISNULL(SourceOfOrigins.SerialLotNumber, VALUE(Catalog.SerialLotNumbers.EmptyRef))
 		|;
@@ -492,6 +496,7 @@ Function T6020S_BatchKeysInfo()
 		|	BatchKeysInfo_Expense.Store,
 		|	BatchKeysInfo_Expense.ItemKey,
 		|	BatchKeysInfo_Expense.Branch,
+		|	BatchKeysInfo_Expense.ProfitLossCenter,
 		|	BatchKeysInfo_Expense.Quantity,
 		|	BatchKeysInfo_Expense.SourceOfOrigin,
 		|	BatchKeysInfo_Expense.SerialLotNumber,
@@ -512,6 +517,7 @@ Function T6020S_BatchKeysInfo()
 		|	NULL,
 		|	BatchKeysInfo_Receipt.Store,
 		|	BatchKeysInfo_Receipt.ItemKey,
+		|	NULL,
 		|	NULL,
 		|	BatchKeysInfo_Receipt.Quantity,
 		|	BatchKeysInfo_Receipt.SourceOfOrigin,
@@ -571,6 +577,7 @@ Function R8510B_BookValueOfFixedAsset()
 		|	T8510S_FixedAssetsInfo.Period AS Period,
 		|	T8510S_FixedAssetsInfo.Company AS Company,
 		|	T8510S_FixedAssetsInfo.Branch AS Branch,
+		|	T8510S_FixedAssetsInfo.ProfitLossCenter AS ProfitLossCenter,
 		|	T8510S_FixedAssetsInfo.FixedAsset AS FixedAsset,
 		|	T8510S_FixedAssetsInfo.LedgerType AS LedgerType,
 		|	T8510S_FixedAssetsInfo.Schedule AS Schedule,
@@ -590,6 +597,7 @@ Function R8510B_BookValueOfFixedAsset()
 		|	ItemList.Period,
 		|	ItemList.Company,
 		|	ItemList.Branch,
+		|	ItemList.ProfitLossCenter,
 		|	ItemList.FixedAsset,
 		|	FixedAssetsDepreciationInfo.LedgerType,
 		|	FixedAssetsDepreciationInfo.Schedule,

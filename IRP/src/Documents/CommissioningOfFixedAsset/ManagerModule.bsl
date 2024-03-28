@@ -141,7 +141,8 @@ Function ItemList()
 		"SELECT
 		|	ItemList.Ref.Date AS Period,
 		|	ItemList.Ref.Company AS Company,
-		|	ItemList.Ref.BusinessUnit AS Branch,
+		|	ItemList.Ref.ProfitLossCenter AS ProfitLossCenter,
+		|	ItemList.Ref.Branch AS Branch,	
 		|	ItemList.Ref.ResponsiblePerson AS ResponsiblePerson,
 		|	ItemList.Ref.FixedAsset AS FixedAsset,
 		|	ItemList.Store AS Store,
@@ -160,7 +161,7 @@ Function SerialLotNumbers()
 		"SELECT
 		|	SerialLotNumbers.Ref.Date AS Period,
 		|	SerialLotNumbers.Ref.Company AS Company,
-		|	SerialLotNumbers.Ref.BusinessUnit AS Branch,
+		|	SerialLotNumbers.Ref.Branch AS Branch,
 		|	SerialLotNumbers.Key,
 		|	SerialLotNumbers.SerialLotNumber,
 		|	SerialLotNumbers.SerialLotNumber.StockBalanceDetail AS StockBalanceDetail,
@@ -220,20 +221,27 @@ Function R4014B_SerialLotNumber()
 	Return 
 		"SELECT
 		|	VALUE(AccumulationRecordType.Expense) AS RecordType,
-		|	*
+		|	SerialLotNumbers.Period,
+		|	SerialLotNumbers.Company,
+		|	SerialLotNumbers.Branch,
+		|	SerialLotNumbers.ItemKey,
+		|	SerialLotNumbers.SerialLotNumber,
+		|	SerialLotNumbers.Quantity
 		|INTO R4014B_SerialLotNumber
 		|FROM
-		|	SerialLotNumbers AS QueryTable
+		|	SerialLotNumbers AS SerialLotNumbers
 		|WHERE
 		|	TRUE";
-
 EndFunction
 
 Function R4011B_FreeStocks()
 	Return 
 		"SELECT
 		|	VALUE(AccumulationRecordType.Expense) AS RecordType,
-		|	*
+		|	ItemList.Period,
+		|	ItemList.Store,
+		|	ItemList.ItemKey,
+		|	ItemList.Quantity
 		|INTO R4011B_FreeStocks
 		|FROM
 		|	ItemList AS ItemList
@@ -309,6 +317,7 @@ Function T6020S_BatchKeysInfo()
 		|	ItemList.Store,
 		|	ItemList.ItemKey,
 		|	ItemList.Branch,
+		|	ItemList.ProfitLossCenter,
 		|	ItemList.Key,
 		|	ItemList.Quantity AS Quantity
 		|INTO BatchKeysInfo_1
@@ -327,6 +336,7 @@ Function T6020S_BatchKeysInfo()
 		|	BatchKeysInfo_1.Store,
 		|	BatchKeysInfo_1.ItemKey,
 		|	BatchKeysInfo_1.Branch,
+		|	BatchKeysInfo_1.ProfitLossCenter,
 		|	SUM(CASE
 		|		WHEN ISNULL(SourceOfOrigins.Quantity, 0) <> 0
 		|			THEN ISNULL(SourceOfOrigins.Quantity, 0)
@@ -347,6 +357,7 @@ Function T6020S_BatchKeysInfo()
 		|	BatchKeysInfo_1.Store,
 		|	BatchKeysInfo_1.ItemKey,
 		|	BatchKeysInfo_1.Branch,
+		|	BatchKeysInfo_1.ProfitLossCenter,
 		|	ISNULL(SourceOfOrigins.SourceOfOrigin, VALUE(Catalog.SourceOfOrigins.EmptyRef)),
 		|	ISNULL(SourceOfOrigins.SerialLotNumber, VALUE(Catalog.SerialLotNumbers.EmptyRef))";
 EndFunction
@@ -385,26 +396,38 @@ EndFunction
 Function R8510B_BookValueOfFixedAsset()
 	Return
 		"SELECT
-		|	*,
 		|	VALUE(AccumulationRecordType.Receipt) AS RecordType,
-		|	T8510S_FixedAssetsInfo.Recorder AS CalculationMovementCost
+		|	FixedAssetsInfo.Period,
+		|	FixedAssetsInfo.Company,
+		|	FixedAssetsInfo.Branch,
+		|	FixedAssetsInfo.ProfitLossCenter,
+		|	FixedAssetsInfo.FixedAsset,
+		|	FixedAssetsInfo.LedgerType,
+		|	FixedAssetsInfo.Schedule,
+		|	FixedAssetsInfo.Currency,
+		|	FixedAssetsInfo.Amount,
+		|	FixedAssetsInfo.Recorder AS CalculationMovementCost
 		|INTO R8510B_BookValueOfFixedAsset
 		|FROM
-		|	InformationRegister.T8510S_FixedAssetsInfo AS T8510S_FixedAssetsInfo
+		|	InformationRegister.T8510S_FixedAssetsInfo AS FixedAssetsInfo
 		|WHERE
-		|	T8510S_FixedAssetsInfo.Document = &Ref";
+		|	FixedAssetsInfo.Document = &Ref";
 EndFunction
 
 Function R8515T_CostOfFixedAsset()
 	Return
 		"SELECT
-		|	*,
-		|	T8510S_FixedAssetsInfo.Recorder AS CalculationMovementCost
+		|	FixedAssetsInfo.Period,
+		|	FixedAssetsInfo.Company,
+		|	FixedAssetsInfo.FixedAsset,
+		|	FixedAssetsInfo.LedgerType,
+		|	FixedAssetsInfo.Amount,
+		|	FixedAssetsInfo.Recorder AS CalculationMovementCost
 		|INTO R8515T_CostOfFixedAsset
 		|FROM
-		|	InformationRegister.T8510S_FixedAssetsInfo AS T8510S_FixedAssetsInfo
+		|	InformationRegister.T8510S_FixedAssetsInfo AS FixedAssetsInfo
 		|WHERE
-		|	T8510S_FixedAssetsInfo.Document = &Ref";
+		|	FixedAssetsInfo.Document = &Ref";
 EndFunction
 
 Function T8515S_FixedAssetsLocation()
@@ -413,6 +436,7 @@ Function T8515S_FixedAssetsLocation()
 		|	ItemList.Period,
 		|	ItemList.Company,
 		|	ItemList.Branch,
+		|	ItemList.ProfitLossCenter,
 		|	ItemList.ResponsiblePerson,
 		|	ItemList.FixedAsset,
 		|	TRUE AS IsActive
@@ -425,6 +449,7 @@ Function T8515S_FixedAssetsLocation()
 		|	ItemList.Period,
 		|	ItemList.Company,
 		|	ItemList.Branch,
+		|	ItemList.ProfitLossCenter,
 		|	ItemList.ResponsiblePerson,
 		|	ItemList.FixedAsset";
 EndFunction

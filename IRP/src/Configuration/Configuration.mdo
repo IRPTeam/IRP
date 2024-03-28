@@ -851,6 +851,7 @@
   <functionalOptions>FunctionalOption.UseSourceOfOrigin</functionalOptions>
   <functionalOptions>FunctionalOption.UseFixedAssets</functionalOptions>
   <functionalOptions>FunctionalOption.UseLegalNameContract</functionalOptions>
+  <functionalOptions>FunctionalOption.UseResponsiblePerson</functionalOptions>
   <definedTypes>DefinedType.typeAccessDocument</definedTypes>
   <definedTypes>DefinedType.typeAccountStatementBasises</definedTypes>
   <definedTypes>DefinedType.typeAddPropertyOwners</definedTypes>
@@ -960,6 +961,7 @@
   <constants>Constant.AdditionalTableControlExceptions</constants>
   <constants>Constant.UseFixedAssets</constants>
   <constants>Constant.UseLegalNameContract</constants>
+  <constants>Constant.UseResponsiblePerson</constants>
   <commonForms>CommonForm.AdditionalTableControlSettings</commonForms>
   <commonForms>CommonForm.AddLinkedDocumentRows</commonForms>
   <commonForms>CommonForm.AttachFile</commonForms>

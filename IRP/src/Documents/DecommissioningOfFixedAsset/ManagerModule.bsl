@@ -472,6 +472,7 @@ Function T8515S_FixedAssetsLocation()
 		|	T8515S_FixedAssetsLocationSliceLast.FixedAsset,
 		|	T8515S_FixedAssetsLocationSliceLast.ResponsiblePerson,
 		|	T8515S_FixedAssetsLocationSliceLast.Branch,
+		|	T8515S_FixedAssetsLocationSliceLast.ProfitLossCenter,
 		|	FALSE AS IsActive
 		|INTO T8515S_FixedAssetsLocation
 		|FROM

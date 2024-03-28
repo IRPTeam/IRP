@@ -228,6 +228,16 @@ Scenario: _52001 preparation (Partner Balance register)
 			Then I select all lines of "List" table
 			And in the table "List" I click the button named "ListContextMenuPost"
 	 		And Delay "3"
+	* Posting CashTransferOrder
+			Given I open hyperlink "e1cib/list/Document.CashTransferOrder"
+			Then I select all lines of "List" table
+			And in the table "List" I click the button named "ListContextMenuPost"
+	 		And Delay "3"
+	* Posting BankPayment
+			Given I open hyperlink "e1cib/list/Document.BankPayment"
+			Then I select all lines of "List" table
+			And in the table "List" I click the button named "ListContextMenuPost"
+	 		And Delay "3"
 	* Posting BankReceipt
 			Given I open hyperlink "e1cib/list/Document.BankReceipt"
 			Then I select all lines of "List" table
@@ -329,11 +339,6 @@ Scenario: _52001 preparation (Partner Balance register)
 			Then I select all lines of "List" table
 			And in the table "List" I click the button named "ListContextMenuPost"
 	 		And Delay "3"
-	* Posting BankPayment
-			Given I open hyperlink "e1cib/list/Document.BankPayment"
-			Then I select all lines of "List" table
-			And in the table "List" I click the button named "ListContextMenuPost"
-	 		And Delay "3"
 	* Posting CashReceipt
 			Given I open hyperlink "e1cib/list/Document.CashReceipt"
 			Then I select all lines of "List" table
@@ -346,11 +351,6 @@ Scenario: _52001 preparation (Partner Balance register)
 	 		And Delay "3"
 	* Posting CashRevenue
 			Given I open hyperlink "e1cib/list/Document.CashRevenue"
-			Then I select all lines of "List" table
-			And in the table "List" I click the button named "ListContextMenuPost"
-	 		And Delay "3"
-	* Posting CashTransferOrder
-			Given I open hyperlink "e1cib/list/Document.CashTransferOrder"
 			Then I select all lines of "List" table
 			And in the table "List" I click the button named "ListContextMenuPost"
 	 		And Delay "3"

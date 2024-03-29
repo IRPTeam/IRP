@@ -1506,6 +1506,11 @@ Scenario: set True value to the constant
 		And I remove "Use" checkbox in "FunctionalOptions" table
 		And I finish line editing in "FunctionalOptions" table
 		And I go to line in "FunctionalOptions" table
+			| 'Option'           | 'Use' |
+			| 'Use fixed assets' | 'Yes' |
+		And I remove "Use" checkbox in "FunctionalOptions" table
+		And I finish line editing in "FunctionalOptions" table
+		And I go to line in "FunctionalOptions" table
 			| 'Option'            | 'Use' |
 			| 'Use object access' | 'Yes' |
 		And I remove "Use" checkbox in "FunctionalOptions" table
@@ -1525,7 +1530,17 @@ Scenario: set True value to the constant Use salary
 			| 'Use salary'    |
 		And I set "Use" checkbox in "FunctionalOptions" table
 		And I click "Save" button
-		And I close current window		
+		And I close current window	
+
+Scenario: set True value to the constant Use fixed assets
+		Given I open hyperlink "e1cib/app/DataProcessor.FunctionalOptionSettings"
+		Then "Functional option settings" window is opened
+		And I go to line in "FunctionalOptions" table
+			| 'Option'        |
+			| 'Use fixed assets'    |
+		And I set "Use" checkbox in "FunctionalOptions" table
+		And I click "Save" button
+		And I close current window	
 
 Scenario: set True value to the constant Use additional table control document
 		Given I open hyperlink "e1cib/app/DataProcessor.FunctionalOptionSettings"

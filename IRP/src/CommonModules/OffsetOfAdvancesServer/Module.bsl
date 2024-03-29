@@ -930,11 +930,13 @@ Procedure Write_SelfRecords(Parameters,
 	AccountingOperations.Insert(Type("DocumentRef.SalesInvoice")    , Op.SalesInvoice_DR_R2020B_AdvancesFromCustomers_CR_R2021B_CustomersTransactions);
 	AccountingOperations.Insert(Type("DocumentRef.PurchaseInvoice") , Op.PurchaseInvoice_DR_R1021B_VendorsTransactions_CR_R1020B_AdvancesToVendors);
 	
-	IsCustomerAdvanceClosing = (TypeOf(Parameters.Object.Ref) = Type("DocumentRef.CustomersAdvancesClosing"));
-	IsVendorAdvanceClosing = (TypeOf(Parameters.Object.Ref) = Type("DocumentRef.VendorsAdvancesClosing"));
+	IsCustomerAdvanceClosing = Parameters.Object.Ref.Metadata() = Metadata.Documents.CustomersAdvancesClosing;
+	IsVendorAdvanceClosing = Parameters.Object.Ref.Metadata() = Metadata.Documents.VendorsAdvancesClosing;
 	
 	For Each Row In Recorders Do
-
+		
+		DocMetadata = Row.Document.Metadata();
+		
 		UseKeyForCurrency = ArrayOfDocumentTypes.Find(TypeOf(Row.Document)) <> Undefined;
 
 		// Accounting amounts
@@ -996,30 +998,28 @@ Procedure Write_SelfRecords(Parameters,
 			// Partner balance - advances
 			NewRow_PartnerBalance_Advances = TablePartnersBalance.Add();
 			
-			If TypeOf(Row.Document) = Type("DocumentRef.BankReceipt")
-				Or TypeOf(Row.Document) = Type("DocumentRef.CashReceipt")
-				Or TypeOf(Row.Document) = Type("DocumentRef.SalesReportFromTradeAgent")
-				Or TypeOf(Row.Document) = Type("DocumentRef.SalesInvoice")
-				Or (TypeOf(Row.Document) = Type("DocumentRef.SalesReturn") And Not RowOffset.IsReturnToAdvance)
-				Or (TypeOf(Row.Document) = Type("DocumentRef.PurchaseReturn") And RowOffset.IsReturnToAdvance)
-				Or (TypeOf(Row.Document) = Type("DocumentRef.OpeningEntry") And IsCustomerAdvanceClosing)
-				
-				Or (TypeOf(Row.Document) = Type("DocumentRef.BankPayment") And 
+			If DocMetadata = Metadata.Documents.BankReceipt
+				Or DocMetadata = Metadata.Documents.CashReceipt
+				Or DocMetadata = Metadata.Documents.SalesReportFromTradeAgent
+				Or DocMetadata = Metadata.Documents.SalesInvoice
+				Or (DocMetadata = Metadata.Documents.SalesReturn And Not RowOffset.IsReturnToAdvance)
+				Or (DocMetadata = Metadata.Documents.PurchaseReturn And RowOffset.IsReturnToAdvance)
+				Or (DocMetadata = Metadata.Documents.OpeningEntry  And IsCustomerAdvanceClosing)
+				Or (DocMetadata = Metadata.Documents.BankPayment And 
 					Row.Document.TransactionType = Enums.OutgoingPaymentTransactionTypes.ReturnToCustomer)
-					
-				Or (TypeOf(Row.Document) = Type("DocumentRef.CashPayment") And 
+				Or (DocMetadata = Metadata.Documents.CashPayment And 
 					Row.Document.TransactionType = Enums.OutgoingPaymentTransactionTypes.ReturnToCustomer) Then
-					
+									
 				NewRow_PartnerBalance_Advances.RecordType = ReverseRecordType(NewRow_Advances.RecordType);
 			
 			Else
 				NewRow_PartnerBalance_Advances.RecordType = NewRow_Advances.RecordType;
 			EndIf;
 			
-			If (TypeOf(Row.Document) = Type("DocumentRef.BankReceipt") And 
+			If (DocMetadata = Metadata.Documents.BankReceipt And 
 					Row.Document.TransactionType = Enums.IncomingPaymentTransactionType.ReturnFromVendor)
 					
-				Or (TypeOf(Row.Document) = Type("DocumentRef.CashReceipt") And 
+				Or (DocMetadata = Metadata.Documents.CashReceipt And 
 					Row.Document.TransactionType = Enums.IncomingPaymentTransactionType.ReturnFromVendor) Then
 					
 				NewRow_PartnerBalance_Advances.RecordType = NewRow_Advances.RecordType;
@@ -1038,14 +1038,14 @@ Procedure Write_SelfRecords(Parameters,
 			If Parameters.RegisterName_Advances = Metadata.AccumulationRegisters.R2020B_AdvancesFromCustomers.Name Then
 				NewRow_PartnerBalance_Advances.CustomerAdvance = NewRow_Advances.Amount;
 				
-				If (TypeOf(Row.Document) = Type("DocumentRef.SalesReturn") And RowOffset.IsReturnToAdvance) Then
+				If (DocMetadata = Metadata.Documents.SalesReturn And RowOffset.IsReturnToAdvance) Then
 					NewRow_PartnerBalance_Advances.CustomerAdvance = - NewRow_Advances.Amount; // Sales return	
 				EndIf;	
 				
 			ElsIf Parameters.RegisterName_Advances = Metadata.AccumulationRegisters.R1020B_AdvancesToVendors.Name Then
 				NewRow_PartnerBalance_Advances.VendorAdvance = NewRow_Advances.Amount;
 				
-				If (TypeOf(Row.Document) = Type("DocumentRef.PurchaseReturn") And RowOffset.IsReturnToAdvance) Then
+				If (DocMetadata = Metadata.Documents.PurchaseReturn And RowOffset.IsReturnToAdvance) Then
 					NewRow_PartnerBalance_Advances.VendorAdvance = - NewRow_Advances.Amount; // Purchase return	
 				EndIf;	
 				
@@ -1081,12 +1081,12 @@ Procedure Write_SelfRecords(Parameters,
 			// Partners balance - transactions
 			NewRow_PartnersBalance_Transactions = TablePartnersBalance.Add();
 			
-			If TypeOf(Row.Document) = Type("DocumentRef.BankPayment") 
-				Or TypeOf(Row.Document) = Type("DocumentRef.CashPayment") 
-				Or TypeOf(Row.Document) = Type("DocumentRef.SalesReportToConsignor")
-				Or TypeOf(Row.Document) = Type("DocumentRef.PurchaseInvoice")
-				Or TypeOf(Row.Document) = Type("DocumentRef.PurchaseReturn")
-				Or (TypeOf(Row.Document) = Type("DocumentRef.OpeningEntry") And IsVendorAdvanceClosing) Then
+			If DocMetadata = Metadata.Documents.BankPayment
+				Or DocMetadata = Metadata.Documents.CashPayment
+				Or DocMetadata = Metadata.Documents.SalesReportToConsignor
+				Or DocMetadata = Metadata.Documents.PurchaseInvoice
+				Or DocMetadata = Metadata.Documents.PurchaseReturn
+				Or (DocMetadata = Metadata.Documents.OpeningEntry And IsVendorAdvanceClosing) Then
 				
 				NewRow_PartnersBalance_Transactions.RecordType = ReverseRecordType(NewRow_Transactions.RecordType);
 			
@@ -1094,19 +1094,19 @@ Procedure Write_SelfRecords(Parameters,
 				NewRow_PartnersBalance_Transactions.RecordType = NewRow_Transactions.RecordType;
 			EndIf;
 			
-			If (TypeOf(Row.Document) = Type("DocumentRef.BankPayment") And 
+			If (DocMetadata = Metadata.Documents.BankPayment And 
 					Row.Document.TransactionType = Enums.OutgoingPaymentTransactionTypes.ReturnToCustomer)
 					
-				Or (TypeOf(Row.Document) = Type("DocumentRef.CashPayment") And 
+				Or (DocMetadata = Metadata.Documents.CashPayment And 
 					Row.Document.TransactionType = Enums.OutgoingPaymentTransactionTypes.ReturnToCustomer) Then
 					
 				NewRow_PartnersBalance_Transactions.RecordType = NewRow_Transactions.RecordType;
 			EndIf;	
 				
-			If (TypeOf(Row.Document) = Type("DocumentRef.BankReceipt") And 
+			If (DocMetadata = Metadata.Documents.BankReceipt And 
 					Row.Document.TransactionType = Enums.IncomingPaymentTransactionType.ReturnFromVendor)
 					
-				Or (TypeOf(Row.Document) = Type("DocumentRef.CashReceipt") And 
+				Or (DocMetadata = Metadata.Documents.CashReceipt And 
 					Row.Document.TransactionType = Enums.IncomingPaymentTransactionType.ReturnFromVendor) Then
 					
 				NewRow_PartnersBalance_Transactions.RecordType = ReverseRecordType(NewRow_Transactions.RecordType);
@@ -1155,9 +1155,9 @@ Procedure Write_SelfRecords(Parameters,
 		// Currency calculation
 		
 		CurrencyTable = Undefined;
-		If TypeOf(Row.Document) = Type("DocumentRef.PurchaseOrderClosing") Then
+		If DocMetadata = Metadata.Documents.PurchaseOrderClosing Then
 			CurrencyTable = Row.Document.PurchaseOrder.Currencies.Unload();
-		ElsIf TypeOf(Row.Document) = Type("DocumentRef.SalesOrderClosing") Then
+		ElsIf DocMetadata = Metadata.Documents.SalesOrderClosing Then
 			CurrencyTable = Row.Document.SalesOrder.Currencies.Unload();
 		EndIf;
 		
@@ -1200,18 +1200,7 @@ Procedure Write_SelfRecords(Parameters,
 		EndDo;
 		RecordSet_Advances.SetActive(True);
 		RecordSet_Advances.Write();
-				
-		// not working
-//		CurrenciesServer.RevaluateCurrency_Advances(Parameters, 
-//					                                RecordSet_Advances, 
-//					                                TableTransactions_CurrencyRevaluation,
-//					                                TableAccountingAmounts_CurrencyRevaluation,
-//					                                Records_AdvancesCurrencyRevaluation);				
-//					                                            
-//		RecordSet_Advances.SetActive(True);
-//		RecordSet_Advances.Write();
-			
-							
+														
 		// Transactions					
 		ItemOfPostingInfo = GetFromPostingInfo(ArrayOfPostingInfo, Metadata.AccumulationRegisters[Parameters.RegisterName_Transactions]);
 			
@@ -1222,16 +1211,6 @@ Procedure Write_SelfRecords(Parameters,
 		RecordSet_Transactions.SetActive(True);
 		RecordSet_Transactions.Write();
 				
-		// not working				
-//		CurrenciesServer.RevaluateCurrency_Transactions(Parameters, 
-//						                                RecordSet_Transactions,
-//						                                TableTransactions_CurrencyRevaluation, 
-//						                                TableAccountingAmounts_CurrencyRevaluation,
-//						                                Records_TransactionsCurrencyRevaluation);
-//						                                                 
-//		RecordSet_Transactions.SetActive(True);
-//		RecordSet_Transactions.Write();
-		
 		// Partners balance
 		ItemOfPostingInfo = GetFromPostingInfo(ArrayOfPostingInfo, Metadata.AccumulationRegisters.R5020B_PartnersBalance);
 			
@@ -1241,7 +1220,6 @@ Procedure Write_SelfRecords(Parameters,
 		EndDo;
 		RecordSet_PartnersBalance.SetActive(True);
 		RecordSet_PartnersBalance.Write();
-					
 				
 		// Accounting amounts (advances)
 		ItemOfPostingInfo = GetFromPostingInfo(ArrayOfPostingInfo, Metadata.AccumulationRegisters.T1040T_AccountingAmounts);

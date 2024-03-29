@@ -239,29 +239,7 @@ Procedure PreparePostingDataTables(Parameters, CurrencyTable, AddInfo = Undefine
 		EndDo;
 	EndIf;
 	
-	ExchangeDifference(Parameters);
-	
-//	For Each ItemOfPostingInfoRow In ArrayOfPostingInfo Do
-//		ItemOfPostingInfo = ItemOfPostingInfoRow.Value;
-//		If ItemOfPostingInfo.PrepareTable.Count() 
-//			And ItemOfPostingInfo.Metadata = Metadata.AccumulationRegisters.R5020B_PartnersBalance Then
-//				
-//			ArrayForDelete = New Array();
-//			For Each Row In ItemOfPostingInfo.PrepareTable Do
-//				If ValueIsFilled(Row.CurrencyMovementType)
-//					And Row.CurrencyMovementType.Type = Enums.CurrencyType.Agreement
-//					And (ValueIsFilled(Row.CustomerAdvance) Or ValueIsFilled(Row.VendorAdvance)) Then
-//						ArrayForDelete.Add(Row);
-//				EndIf;
-//			EndDo;
-//			
-//			For Each ItemForDelete In ArrayForDelete Do
-//				ItemOfPostingInfo.PrepareTable.Delete(ItemForDelete);
-//			EndDo;
-//				
-//		EndIf;
-//	EndDo;
-	
+	ExchangeDifference(Parameters);	
 EndProcedure
 
 Function GetAdvancesCurrencyRevaluation(DocRef)

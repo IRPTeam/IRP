@@ -68,12 +68,20 @@ Procedure FillCheckProcessing(Cancel, CheckedAttributes)
 		EndIf;
 	EndDo;
 	
-	If Cancel = True Then
-		Return;
+	If Not Cancel Then
+		If ThisObject.TransactionType = Enums.IncomingPaymentTransactionType.CurrencyExchange Then
+			CheckDataPrivileged.FillCheckProcessing_BankReceipt_CurrencyExchange(ThisObject, Cancel);
+		EndIf;
 	EndIf;
 	
-	If ThisObject.TransactionType = Enums.IncomingPaymentTransactionType.CurrencyExchange Then
-		CheckDataPrivileged.FillCheckProcessing_BankReceipt_CurrencyExchange(ThisObject, Cancel);
+	If Not Cancel Then	
+		If ThisObject.TransactionType = Enums.IncomingPaymentTransactionType.PaymentFromCustomer
+			Or ThisObject.TransactionType = Enums.IncomingPaymentTransactionType.ReturnFromVendor
+			Or ThisObject.TransactionType = Enums.IncomingPaymentTransactionType.TransferFromPOS
+			Or ThisObject.TransactionType = Enums.IncomingPaymentTransactionType.OtherPartner Then
+			
+			CheckedAttributes.Add("PaymentList.Agreement");
+		EndIf;
 	EndIf;
 EndProcedure
 

@@ -830,6 +830,7 @@ Function GetQueryTextsMasterTables()
 	QueryArray.Add(T6010S_BatchesInfo());
 	QueryArray.Add(T6020S_BatchKeysInfo());
 	QueryArray.Add(S1001L_VendorsPricesByItemKey());
+	QueryArray.Add(R5020B_PartnersBalance());
 	Return QueryArray;
 EndFunction
 
@@ -1413,6 +1414,11 @@ Function S1001L_VendorsPricesByItemKey()
 	|////////////////////////////////////////////////////////////////////////////////
 	|DROP VTRecordPurchasePrices";
 EndFunction
+
+Function R5020B_PartnersBalance()
+	Return AccumulationRegisters.R5020B_PartnersBalance.R5020B_PartnersBalance_PI();
+EndFunction
+
 #EndRegion
 
 #Region AccessObject

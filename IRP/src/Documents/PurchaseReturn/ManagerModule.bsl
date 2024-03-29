@@ -478,6 +478,7 @@ Function GetQueryTextsMasterTables()
 	QueryArray.Add(T2015S_TransactionsInfo());
 	QueryArray.Add(T3010S_RowIDInfo());
 	QueryArray.Add(T6020S_BatchKeysInfo());
+	QueryArray.Add(R5020B_PartnersBalance());
 	Return QueryArray;
 EndFunction
 
@@ -569,6 +570,10 @@ EndFunction
 
 Function R5012B_VendorsAging()
 	Return AccumulationRegisters.R5012B_VendorsAging.R5012B_VendorsAging_Offset();
+EndFunction
+
+Function R5020B_PartnersBalance()
+	Return AccumulationRegisters.R5020B_PartnersBalance.R5020B_PartnersBalance_PR();
 EndFunction
 
 Function R1031B_ReceiptInvoicing()

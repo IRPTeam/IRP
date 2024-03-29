@@ -322,6 +322,7 @@ Function GetQueryTextsMasterTables()
 	QueryArray.Add(T6020S_BatchKeysInfo());
 	QueryArray.Add(T1040T_AccountingAmounts());
 	QueryArray.Add(T1050T_AccountingQuantities());
+	QueryArray.Add(R5020B_PartnersBalance());
 	Return QueryArray;
 EndFunction
 
@@ -1274,6 +1275,10 @@ Function R8014T_ConsignorSales()
 		|		ON ItemList.Key = SourceOfOrigins.Key
 		|WHERE
 		|	ItemList.IsConsignorStocks";
+EndFunction
+		 
+Function R5020B_PartnersBalance()
+	Return AccumulationRegisters.R5020B_PartnersBalance.R5020B_PartnersBalance_SI();
 EndFunction
 		 
 #EndRegion

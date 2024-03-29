@@ -25,6 +25,10 @@ Procedure FillingDocumentsWithDefaultData(Source, FillingData, FillingText, Stan
 		EndIf;
 	EndDo;
 	
+	If Not Data.Property("Store") And Not FOServer.IsUseStores() Then
+		Data.Insert("Store", Catalogs.Stores.Default);
+	EndIf;
+	
 	If IsUsedNewFunctionality Then
 		ArrayOfAllMainTables = New Array();
 		ArrayOfAllMainTables.Add("ItemList");

@@ -10878,7 +10878,11 @@ EndProcedure
 
 // ItemList.Store.Get
 Function GetItemListStore(Parameters, _Key)
-	Return GetPropertyObject(Parameters, BindItemListStore(Parameters).DataPath, _Key);
+	If Not FOServer.IsUseStores() Then
+		Return PredefinedValue("Catalog.Stores.Default");
+	Else
+		Return GetPropertyObject(Parameters, BindItemListStore(Parameters).DataPath, _Key);
+	EndIf;
 EndFunction
 
 // ItemList.Store.Default.Bind

@@ -20,6 +20,7 @@ Scenario: _0153500 preparation
 	When set True value to the constant Use accounting
 	And Delay 1
 	When set True value to the constant Use salary
+	When set True value to the constant Use fixed assets
 	And Delay 1
 	When set True value to the constant Use commission trading
 	* Load info

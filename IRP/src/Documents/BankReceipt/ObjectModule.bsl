@@ -77,7 +77,7 @@ Procedure FillCheckProcessing(Cancel, CheckedAttributes)
 	If Not Cancel Then	
 		If ThisObject.TransactionType = Enums.IncomingPaymentTransactionType.PaymentFromCustomer
 			Or ThisObject.TransactionType = Enums.IncomingPaymentTransactionType.ReturnFromVendor
-			Or ThisObject.TransactionType = Enums.IncomingPaymentTransactionType.TransferFromPOS
+			Or ThisObject.TransactionType = Enums.IncomingPaymentTransactionType.PaymentFromCustomerByPOS
 			Or ThisObject.TransactionType = Enums.IncomingPaymentTransactionType.OtherPartner Then
 			
 			CheckedAttributes.Add("PaymentList.Agreement");

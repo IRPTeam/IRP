@@ -800,7 +800,6 @@
   <eventSubscriptions>EventSubscription.BeforeWrite_Documents_CommonDataFilling</eventSubscriptions>
   <eventSubscriptions>EventSubscription.Filling_CatalogsWithDefaultData</eventSubscriptions>
   <eventSubscriptions>EventSubscription.BeforeWrite_AuditLock</eventSubscriptions>
-  <eventSubscriptions>EventSubscription.BeforeWrite_DocumentManualEditingCheck</eventSubscriptions>
   <scheduledJobs>ScheduledJob.AddExternalFunctionsToJobQueue</scheduledJobs>
   <scheduledJobs>ScheduledJob.AreaUpdate</scheduledJobs>
   <scheduledJobs>ScheduledJob.ExportData</scheduledJobs>

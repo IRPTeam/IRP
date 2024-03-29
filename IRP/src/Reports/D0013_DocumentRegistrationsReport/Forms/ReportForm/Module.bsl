@@ -365,3 +365,11 @@ Procedure FillFieldPresentations(ReportBuilder, FieldPresentations)
 		EndDo;
 	EndDo;
 EndProcedure
+
+&AtClient
+Procedure EditMovements(Command)
+	
+	FormParameters = New Structure("DocRef", Document);
+	OpenForm("DataProcessor.EditDocumentsMovements.Form", FormParameters);
+	
+EndProcedure

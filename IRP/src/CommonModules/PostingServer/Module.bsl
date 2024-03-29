@@ -30,6 +30,12 @@ Procedure Post(DocObject, Cancel, PostingMode, AddInfo = Undefined) Export
 	CurrenciesServer.PreparePostingDataTables(Parameters, CurrencyTable, AddInfo);
 
 	RegisteredRecords = RegisterRecords(Parameters);
+	If Parameters.Cancel Then
+		For Each Message In Parameters.Messages Do
+			CommonFunctionsClientServer.ShowUsersMessage(Message);
+		EndDo;
+		Return;
+	EndIf;	
 	
 	RegisteredRecordsArray = New Array;
 	For Each Record In RegisteredRecords Do
@@ -73,6 +79,9 @@ EndProcedure
 // * PostingDataTables - Array Of KeyAndValue:
 // ** Key - MetadataObject -
 // ** Value - See PostingTableSettings
+// * ManualMovementsEdit - Boolean -  
+// * Messages - Array - 
+
 Function GetPostingParameters(DocObject, PostingMode, AddInfo = Undefined)
 	Cancel = False;
 	
@@ -87,7 +96,9 @@ Function GetPostingParameters(DocObject, PostingMode, AddInfo = Undefined)
 	Parameters.Insert("DocumentDataTables", New Structure);
 	Parameters.Insert("LockDataSources", New Map);
 	Parameters.Insert("PostingDataTables", New Map);
-
+	Parameters.Insert("ManualMovementsEdit", DocObject.ManualMovementsEdit);
+	Parameters.Insert("Messages", New Array);
+	
 	Module = Documents[Parameters.Metadata.Name]; // DocumentManager.SalesOrder, DocumentManagerDocumentName
 	Parameters.Insert("Module", Module);
 	
@@ -165,6 +176,9 @@ EndFunction
 // Returns:
 //  Map - Register records
 Function RegisterRecords(Parameters)
+	
+	ManualRecordsDifference = False;
+	
 	RegisteredRecords = New Map();
 	For Each Row In Parameters.PostingDataTables Do
 		RecordSet = Row.Value.RecordSet_Document;
@@ -192,6 +206,11 @@ Function RegisterRecords(Parameters)
 		// MD5
 		If RecordSetIsEqual(RecordSet, TableForLoad) Then
 			Continue;
+		Else
+			If Parameters.ManualMovementsEdit Then;
+				Parameters.Cancel		= True;
+				ManualRecordsDifference = True;
+			EndIf;		
 		EndIf;
 			
 		//If Not Parameters.PostingByRef Then
@@ -210,6 +229,14 @@ Function RegisterRecords(Parameters)
 		Data.Insert("Metadata", RecordSet.Metadata());
 		RegisteredRecords.Insert(RecordSet.Metadata(), Data);
 	EndDo;
+	If Parameters.ManualMovementsEdit Then
+		If ManualRecordsDifference Then
+			Parameters.Messages.Add(R().Error_144);
+		Else
+			Parameters.Messages.Add(R().InfoMessage_036);
+		EndIf;
+	EndIf;
+				
 	Return RegisteredRecords;
 EndFunction
 

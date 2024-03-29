@@ -11,8 +11,13 @@ EndProcedure
 &AtClient
 Procedure OnOpen(Cancel)
 	
+	If Not ValueIsFilled(Object.DocumentRef) Then
+		Return;
+	EndIf;
+	
 	FillObjectMovements();
 	SetEnabledToRegisterPages();
+	MovementAnalysisAtServer();
 	
 EndProcedure
 
@@ -44,8 +49,7 @@ Procedure ClearAttributes()
 			
 	For Each ArrayItem In AttributesArray Do
 		Items.Delete(ArrayItem);	
-	EndDo;
-	
+	EndDo;	
 	
 	Object.Movements.Clear();
 	
@@ -54,6 +58,10 @@ EndProcedure
 &AtServer
 Procedure FillObjectMovements()
 	
+	If Not ValueIsFilled(Object.DocumentRef) Then
+		Return;
+	EndIf;
+
 	ClearAttributes();	
 
 	DocumentObject = Object.DocumentRef.GetObject();
@@ -93,15 +101,22 @@ Procedure FillObjectMovements()
 	
 EndProcedure
 
+&AtClient
+Procedure RegisterTableOnChange(Item)
+	
+	Item.Parent.Picture = PictureLib.Change;
+	
+EndProcedure
+
 &AtServer
 Procedure AddPageForMovement(RegisterName, RecordsCount)
 
 	PageName = "Register_" + RegisterName;
 
 	NewPage = Items.Add(PageName, Type("FormGroup"), Items.Registers);
-	NewPage.Type = FormGroupType.Page;
-	NewPage.Title = StrTemplate("(%1) %2", RecordsCount, RegisterName);
-
+	NewPage.Type	= FormGroupType.Page;
+	NewPage.Title	= StrTemplate("(%1) %2", RecordsCount, RegisterName);
+		
 	DecorationName = RegisterName + "Decoration";
 	
 	DecorationItem = Items.Add(DecorationName, Type("FormDecoration"), Items[PageName]);
@@ -109,17 +124,19 @@ Procedure AddPageForMovement(RegisterName, RecordsCount)
 	DecorationItem.Title	= RegisterName;
 
 EndProcedure
+
 &AtServer
 Procedure AddRegisterTableToForm(TableName, MovementsValueTable)
 	
 	PageName = "Register_" + TableName;
 
 	CurrentMovementStructure = CommonFunctionsServer.BlankFormTableCreationStructure();
-	CurrentMovementStructure.TableName			= TableName;
-	CurrentMovementStructure.ValueTable			= MovementsValueTable;
-	CurrentMovementStructure.Form				= ThisForm;
-	CurrentMovementStructure.CreateTableOnForm	= True;
-	CurrentMovementStructure.ParentName 		= PageName;
+	CurrentMovementStructure.TableName				= TableName;
+	CurrentMovementStructure.ValueTable				= MovementsValueTable;
+	CurrentMovementStructure.Form					= ThisForm;
+	CurrentMovementStructure.CreateTableOnForm		= True;
+	CurrentMovementStructure.ParentName 			= PageName;
+	CurrentMovementStructure.OnChangeProcedureName	= "RegisterTableOnChange";
 	
 	CommonFunctionsServer.CreateFormTable(CurrentMovementStructure);
 	
@@ -145,10 +162,17 @@ EndProcedure
 &AtClient
 Procedure WriteMovements(Command)
 	
+	Posted = CommonFunctionsServer.GetAttributesFromRef(Object.DocumentRef, "Posted").Posted;
+	If Not Posted Then
+		TextMessage = R().Error_146;
+		CommonFunctionsClientServer.ShowUsersMessage(TextMessage);
+		Return;
+	EndIf;
+	
 	Cancel = False;
 	WriteMovementsOnServer(Cancel);
 	If Not Cancel Then
-		TextMessage = "Movements successfully recorded";
+		TextMessage = R().InfoMessage_037;
 		CommonFunctionsClientServer.ShowUsersMessage(TextMessage);
 	EndIf;
 	
@@ -188,11 +212,88 @@ Procedure WriteMovementsOnServer(Cancel)
 		CommitTransaction();
 		
 	Except
+		RollbackTransaction();
 		Cancel = True;
-		If TransactionActive() Then
-			RollbackTransaction();
-			GetUserMessages(ErrorDescription());
-		EndIf;
+		GetUserMessages(ErrorDescription());
 	EndTry;
+	
+EndProcedure
+
+&AtClient
+Procedure MovementAnalysis(Command)
+		
+	IsDifferenceInMovements = False;
+	MovementAnalysisAtServer(IsDifferenceInMovements);
+	
+	If ManualMovementsEdit And Not IsDifferenceInMovements Then
+		
+		QuestionToUserNotify = New NotifyDescription("UncheckManualMovementsEditNotify", ThisObject, New Structure);
+		ShowQueryBox(QuestionToUserNotify, R().QuestionToUser_029, QuestionDialogMode.YesNo);
+
+	EndIf;
+		
+EndProcedure
+
+&AtClient
+Procedure UncheckManualMovementsEditNotify(Result, AddirionalParameters) Export
+	
+	If Not Result = DialogReturnCode.Yes Then
+		Return;
+	EndIf;
+	SetManualMovementsEditInDocument(False);
+	
+EndProcedure
+
+&AtServer
+Procedure SetManualMovementsEditInDocument(DocumentManualMovementsEdit)
+	
+	DocObject = Object.DocumentRef.GetObject();
+	DocObject.DataExchange.Load		= True;
+	DocObject.ManualMovementsEdit	= DocumentManualMovementsEdit;
+	DocObject.Write(DocumentWriteMode.Write);
+	
+	ManualMovementsEdit = DocumentManualMovementsEdit;
+	
+EndProcedure
+
+&AtServer
+Procedure MovementAnalysisAtServer(IsDifferenceInMovements = False)
+	
+	RegEditNames = New Array;
+	
+	Array = New Array;
+	Array.Add(Object.DocumentRef);
+	ChechResult = PostingServer.CheckDocumentArray(Array);
+	If ChechResult.Count() > 0 Then
+		IsDifferenceInMovements = True;
+		For Each ArrayItemStructure In ChechResult Do
+			If ArrayItemStructure.Ref = Object.DocumentRef Then
+				For Each RegInfo In ArrayItemStructure.RegInfo Do
+					Message = StrTemplate(R().Error_145, RegInfo.RegName);
+					CommonFunctionsClientServer.ShowUsersMessage(Message);
+					
+					DotPosition = StrFind(RegInfo.RegName, ".");
+					RegEditNames.Add(Mid(RegInfo.RegName, DotPosition+1));
+				EndDo;
+			EndIf;
+		EndDo;
+	EndIf;
+	
+	SetPicturesForPages(RegEditNames);
+	
+EndProcedure
+
+&AtServer
+Procedure SetPicturesForPages(RegEditNames)
+
+	For Each Page In Items.Registers.ChildItems Do		
+		RegisterName = StrReplace(Page.Name, "Register_", "");
+		
+		If RegEditNames.Find(RegisterName) <> Undefined Then
+			Page.Picture = PictureLib.Change;
+		Else	
+			Page.Picture = PictureLib.AppearanceCheckBox;
+		EndIf;		
+	EndDo;
 	
 EndProcedure

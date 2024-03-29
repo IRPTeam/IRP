@@ -259,6 +259,8 @@
 // * Error_126 - String - 
 // * Error_127 - String - 
 // * Error_128 - String - 
+// * Error_144 - String - 
+// * Error_145 - String - 
 // * Error_FillTotalAmount - String - 
 // * MF_Error_001 - String - 
 // * MF_Error_002 - String - 
@@ -314,6 +316,8 @@
 // * InfoMessage_033 - String - 
 // * InfoMessage_034 - String - 
 // * InfoMessage_035 - String - 
+// * InfoMessage_036 - String - 
+// * InfoMessage_037 - String - 
 // * InfoMessage_Payment - String - 
 // * InfoMessage_PaymentReturn - String - 
 // * InfoMessage_SessionIsClosed - String - 
@@ -1073,6 +1077,13 @@ Function Strings(Lang) Export
 	Strings.Insert("Error_141", NStr("en = '[%1] cannot be changed, has posted documents'", Lang));	
 	Strings.Insert("Error_142", NStr("en = 'Wrong combination of send and receive debt type'", Lang));	
 	Strings.Insert("Error_143", NStr("en = 'Document Bank payment (currency exchange) not entered'", Lang));	
+	Strings.Insert("Error_144", NStr("en = 'Document''s movements were changed manually. Posting is denied'", Lang));
+	
+	// %1 - Register name
+	Strings.Insert("Error_145", NStr("en = 'There are differences between current movements and potential movements in register [%1]'", Lang));
+	
+	Strings.Insert("Error_146", NStr("en = 'Document in not posted.'", Lang));
+	Strings.insert("Error_147", Nstr("en = 'The document has manual entries and cannot be canceled.'", Lang));
 	
 	Strings.Insert("Error_FillTotalAmount", NStr("en = 'Fill total amount. Row: [%1]'", Lang));
 	
@@ -1185,6 +1196,8 @@ Function Strings(Lang) Export
 	
 	Strings.Insert("InfoMessage_034", NStr("en = 'Time zone not changed'", Lang));
 	Strings.Insert("InfoMessage_035", NStr("en = 'Time zone changed to %1'", Lang));
+	Strings.Insert("InfoMessage_036", NStr("en = 'New document movements are no different from manual corrections. The ""Manual movements edit"" checkbox can be removed'", Lang));
+	Strings.Insert("InfoMessage_037", NStr("en = 'Movements successfully recorded'", Lang));
 	
 	Strings.Insert("InfoMessage_Payment", NStr("en = 'Payment (+)'", Lang));
 	Strings.Insert("InfoMessage_PaymentReturn", NStr("en = 'Payment Return'", Lang));
@@ -1237,6 +1250,7 @@ Function Strings(Lang) Export
 	Strings.Insert("QuestionToUser_026", NStr("en = 'Do you want to update payment agent?'", Lang));
 	Strings.Insert("QuestionToUser_027", NStr("en = 'Filled data by employee [%1] will be cleared. Continue?'", Lang));
 	Strings.Insert("QuestionToUser_028", NStr("en = 'Do you want to refund the client?'", Lang));
+	Strings.Insert("QuestionToUser_029", NStr("en = 'New document movements are no different from manual corrections. The ""Manual movements edit"" checkbox can be removed. Remove check-box?'", Lang));
 #EndRegion
 
 #Region SuggestionToUser

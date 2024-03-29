@@ -1692,6 +1692,7 @@ EndFunction
 // * Form - ClientApplicationForm
 // * CreateTableOnForm - Boolean - 
 // * ParentName - String 
+// * OnChangeProcedureName - String 
 Function BlankFormTableCreationStructure() Export
 	
 	Structure = New Structure();
@@ -1700,6 +1701,7 @@ Function BlankFormTableCreationStructure() Export
 	Structure.Insert("Form");
 	Structure.Insert("CreateTableOnForm", False);
 	Structure.Insert("ParentName");
+	Structure.Insert("OnChangeProcedureName","");
 	
 	Return Structure
 	
@@ -1727,6 +1729,9 @@ Procedure CreateFormTable(CreactionStructure) Export
 		
 		FormTable = Form.Items.Add(TableName, Type("FormTable"), Form.Items[ParentName]);
 		FormTable.DataPath = TableName;
+		If ValueIsFilled(CreactionStructure.OnChangeProcedureName) Then
+			FormTable.SetAction("OnChange", CreactionStructure.OnChangeProcedureName);
+		EndIf;
 			
 	EndIf;
 	ArrayAddedAttributes.Clear();

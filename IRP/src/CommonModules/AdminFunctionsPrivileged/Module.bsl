@@ -98,30 +98,4 @@ Procedure CommonDataFilling1BeforeWrite_Documents(Source, Cancel, WriteMode, Pos
 	CommonDataFillingBeforeWrite_Catalogs(Source, Cancel);
 EndProcedure
 
-Procedure DocManualEditingCheck(Source, Cancel, WriteMode, PostingMode) Export
-	
-	If Not ValueIsFilled(Source.Ref) Then
-		Return;
-	EndIf;
-	
-	If WriteMode = DocumentWriteMode.Posting And 
-		CommonFunctionsServer.GetAttributesFromRef(Source.Ref, "ManualMovementsEdit").ManualMovementsEdit Then
-		
-		DocumentsArray = New Array;
-		DocumentsArray.Add(Source.Ref);
-		
-		CheckResult = PostingServer.CheckDocumentArray(DocumentsArray);
-		If CheckResult.Count() > 0 Then
-			Cancel = True;
-			
-			TextMessage = NStr("en = 'Document''s movements were changed manually. Posting is denied'");			
-		Else
-			TextMessage = NStr("en = 'New document movements are no different from manual corrections. The ""Manual movements edit"" checkbox can be removed'");
-		EndIf;
-		CommonFunctionsClientServer.ShowUsersMessage(TextMessage);
-		
-	EndIf;
-	
-EndProcedure
-
 #EndRegion

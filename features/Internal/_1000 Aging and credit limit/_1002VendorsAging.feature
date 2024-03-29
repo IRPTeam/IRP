@@ -636,6 +636,9 @@ Scenario: _1020050 check the offset of Purchase invoice advance (type of settlem
 				And I select current line in "List" table
 				And I input "8000,00" text in the field named "PaymentListTotalAmount" of "PaymentList" table
 				And I finish line editing in "PaymentList" table
+				And I activate "Partner term" field in "PaymentList" table
+				And I select current line in "PaymentList" table
+				And I select "Vendor Ferron, TRY" from "Partner term" drop-down list by string in "PaymentList" table			
 			And I click the button named "FormPost"
 			And I delete "$$NumberCashPayment10000505$$" variable
 			And I delete "$$CashPayment10000505$$" variable
@@ -658,9 +661,9 @@ Scenario: _1020050 check the offset of Purchase invoice advance (type of settlem
 		* Check movements
 			Given I open hyperlink 'e1cib/list/AccumulationRegister.R5012B_VendorsAging'
 			And "List" table contains lines:
-				| 'Period'                            | 'Recorder'                      | 'Currency'    | 'Company'         | 'Branch'    | 'Partner'      | 'Amount'      | 'Agreement'             | 'Invoice'                       | 'Payment date'                                | 'Aging closing'                   |
-				| '$$DatePurchaseInvoice0240164$$'    | '$$PurchaseInvoice0240164$$'    | 'TRY'         | 'Main Company'    | ''          | 'Ferron BP'    | '4 000,00'    | 'Vendor Ferron, TRY'    | '$$PurchaseInvoice0240164$$'    | '$$DatePaymentTermsPurchaseInvoiceAging$$'    | ''                                |
-				| '$$DateCashPayment10000505$$'       | '$$CashPayment10000505$$'       | 'TRY'         | 'Main Company'    | ''          | 'Ferron BP'    | '4 000,00'    | 'Vendor Ferron, TRY'    | '$$PurchaseInvoice0240164$$'    | '$$DatePaymentTermsPurchaseInvoiceAging$$'    | 'Vendors advances closing 4*'     |
+				| 'Period'                         | 'Recorder'                   | 'Currency' | 'Company'      | 'Branch' | 'Partner'   | 'Amount'   | 'Agreement'          | 'Invoice'                    | 'Payment date'                              | 'Aging closing'               |
+				| '$$DatePurchaseInvoice0240164$$' | '$$PurchaseInvoice0240164$$' | 'TRY'      | 'Main Company' | ''       | 'Ferron BP' | '4 000,00' | 'Vendor Ferron, TRY' | '$$PurchaseInvoice0240164$$' | '$$DatePaymentTermsPurchaseInvoiceAging$$'  | ''                            |
+				| '$$DateCashPayment10000505$$'    | '$$CashPayment10000505$$'    | 'TRY'      | 'Main Company' | ''       | 'Ferron BP' | '4 000,00' | 'Vendor Ferron, TRY' | '$$PurchaseInvoiceAging$$'  | '$$DatePaymentTermsPurchaseInvoiceAging$$' | 'Vendors advances closing 4*' |
 			And I close all client application windows	
 
 

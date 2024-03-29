@@ -70,7 +70,7 @@ Function GetVisibleAttributesByTransactionType(TransactionType)
 	PaymentFromCustomer = PredefinedValue("Enum.IncomingPaymentTransactionType.PaymentFromCustomer");
 	ReturnFromVendor    = PredefinedValue("Enum.IncomingPaymentTransactionType.ReturnFromVendor");
 	CashIn              = PredefinedValue("Enum.IncomingPaymentTransactionType.CashIn");
-	CustomerAdvance     = PredefinedValue("Enum.IncomingPaymentTransactionType.CustomerAdvance");
+	RetailCustomerAdvance = PredefinedValue("Enum.IncomingPaymentTransactionType.RetailCustomerAdvance");
 	EmployeeCashAdvance = PredefinedValue("Enum.IncomingPaymentTransactionType.EmployeeCashAdvance");
 	OtherPartner        = PredefinedValue("Enum.IncomingPaymentTransactionType.OtherPartner");
 	
@@ -109,7 +109,7 @@ Function GetVisibleAttributesByTransactionType(TransactionType)
 		|PaymentList.Agreement,
 		|PaymentList.Payer,
 		|PaymentList.LegalNameContract";		
-	ElsIf TransactionType = CustomerAdvance Then
+	ElsIf TransactionType = RetailCustomerAdvance Then
 		StrByType = "
 		|PaymentList.RetailCustomer,
 		|PaymentList.Order";

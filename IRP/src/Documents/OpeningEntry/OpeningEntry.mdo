@@ -2712,4 +2712,24 @@
       <fullTextSearch>Use</fullTextSearch>
     </attributes>
   </tabularSections>
+  <templates uuid="17958af1-40c0-4ad9-a99f-e9f528a8de9f">
+    <name>OpeningEntryPrint</name>
+    <synonym>
+      <key>en</key>
+      <value>Opening entry</value>
+    </synonym>
+  </templates>
+  <commands uuid="1f3938f8-b45d-4288-af4c-83d578272ab4">
+    <name>OpeningEntryPrint</name>
+    <synonym>
+      <key>en</key>
+      <value>Opening entry</value>
+    </synonym>
+    <group>CommandGroup.Print</group>
+    <commandParameterType>
+      <types>DocumentRef.OpeningEntry</types>
+    </commandParameterType>
+    <parameterUseMode>Multiple</parameterUseMode>
+    <representation>Auto</representation>
+  </commands>
 </mdclass:Document>

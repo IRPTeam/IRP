@@ -611,4 +611,24 @@
       <fullTextSearch>Use</fullTextSearch>
     </attributes>
   </tabularSections>
+  <templates uuid="eacaf2f9-beea-4df7-9432-0a42621ff886">
+    <name>DecommissioningOfFixedAssetPrint</name>
+    <synonym>
+      <key>en</key>
+      <value>Decommissioning of fixed asset</value>
+    </synonym>
+  </templates>
+  <commands uuid="7a890e7a-081e-4078-917d-93306676b303">
+    <name>DecommissioningOfFixedAssetPrint</name>
+    <synonym>
+      <key>en</key>
+      <value>Decommissioning of fixed asset</value>
+    </synonym>
+    <group>CommandGroup.Print</group>
+    <commandParameterType>
+      <types>DocumentRef.DecommissioningOfFixedAsset</types>
+    </commandParameterType>
+    <parameterUseMode>Multiple</parameterUseMode>
+    <representation>Auto</representation>
+  </commands>
 </mdclass:Document>

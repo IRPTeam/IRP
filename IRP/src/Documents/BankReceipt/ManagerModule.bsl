@@ -224,7 +224,12 @@ Function PaymentList()
 		|	PaymentList.ProfitLossCenter AS ProfitLossCenter,
 		|	PaymentList.ExpenseType AS ExpenseType,
 		|	PaymentList.AdditionalAnalytic AS AdditionalAnalytic,
-		|	PaymentList.Commission AS Commission,
+		|	CASE WHEN PaymentList.Ref.TransactionType = VALUE(Enum.IncomingPaymentTransactionType.RetailCustomerAdvance) THEN
+		|		0
+		|	ELSE
+		|		PaymentList.Commission 
+		|	END AS Commission,
+		|	PaymentList.Commission AS RetailCustomerAdvanceCommission,
 		|	PaymentList.FinancialMovementType AS FinancialMovementType,
 		|	PaymentList.Ref.TransactionType = VALUE(Enum.IncomingPaymentTransactionType.PaymentFromCustomer) AS
 		|		IsPaymentFromCustomer,
@@ -236,7 +241,7 @@ Function PaymentList()
 		|		IsCashTransferOrder,
 		|	PaymentList.Ref.TransactionType = VALUE(Enum.IncomingPaymentTransactionType.TransferFromPOS) AS IsTransferFromPOS,
 		|	PaymentList.Ref.TransactionType = VALUE(Enum.IncomingPaymentTransactionType.ReturnFromVendor) AS IsReturnFromVendor,
-		|	PaymentList.Ref.TransactionType = VALUE(Enum.IncomingPaymentTransactionType.CustomerAdvance) AS IsCustomerAdvance,
+		|	PaymentList.Ref.TransactionType = VALUE(Enum.IncomingPaymentTransactionType.RetailCustomerAdvance) AS IsCustomerAdvance,
 		|	PaymentList.Ref.TransactionType = VALUE(Enum.IncomingPaymentTransactionType.EmployeeCashAdvance) AS
 		|		IsEmployeeCashAdvance,
 		|	PaymentList.RetailCustomer AS RetailCustomer,
@@ -705,7 +710,7 @@ Function R3026B_SalesOrdersCustomerAdvance()
 		   |	PaymentList.PaymentType,
 		   |	PaymentList.PaymentTerminal,
 		   |	PaymentList.BankTerm,
-		   |	PaymentList.Commission,
+		   |	PaymentList.RetailCustomerAdvanceCommission AS Commission,
 		   |	PaymentList.Amount
 		   |INTO R3026B_SalesOrdersCustomerAdvance
 		   |FROM
@@ -732,7 +737,7 @@ Function R3050T_PosCashBalances()
 		   |	PaymentList.Account,
 		   |	PaymentList.PaymentTerminal,
 		   |	PaymentList.Amount,
-		   |	PaymentList.Commission
+		   |	PaymentList.RetailCustomerAdvanceCommission AS Commission
 		   |INTO R3050T_PosCashBalances
 		   |FROM
 		   |	PaymentList AS PaymentList

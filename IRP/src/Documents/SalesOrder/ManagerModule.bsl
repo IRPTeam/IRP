@@ -25,17 +25,17 @@ Function SalesOrderPrint(Ref, Param)
 	Query = New Query;
 	Text =
 	"SELECT
-	|	SalesOrder.Number AS Number,
-	|	SalesOrder.Date AS Date,
-	|	SalesOrder.Company.Description_en AS Company,
-	|	SalesOrder.Partner.Description_en AS Partner,
-	|	SalesOrder.Author AS Author,
-	|	SalesOrder.Ref AS Ref,
-	|	SalesOrder.Currency.Description_en AS Currency
+	|	DocumentHeader.Number AS Number,
+	|	DocumentHeader.Date AS Date,
+	|	DocumentHeader.Company.Description_en AS Company,
+	|	DocumentHeader.Partner.Description_en AS Partner,
+	|	DocumentHeader.Author AS Author,
+	|	DocumentHeader.Ref AS Ref,
+	|	DocumentHeader.Currency.Code AS Currency
 	|FROM
-	|	Document.SalesOrder AS SalesOrder
+	|	Document.SalesOrder AS DocumentHeader
 	|WHERE
-	|	SalesOrder.Ref = &Ref
+	|	DocumentHeader.Ref = &Ref
 	|;
 	|
 	|////////////////////////////////////////////////////////////////////////////////
@@ -80,7 +80,6 @@ Function SalesOrderPrint(Ref, Param)
 	LCode = Param.DataLang;
 	Text = LocalizationEvents.ReplaceDescriptionLocalizationPrefix(Text, "SalesOrder.Company", LCode);
 	Text = LocalizationEvents.ReplaceDescriptionLocalizationPrefix(Text, "SalesOrder.Partner", LCode);
-	Text = LocalizationEvents.ReplaceDescriptionLocalizationPrefix(Text, "SalesOrder.Currency", LCode);
 	Text = LocalizationEvents.ReplaceDescriptionLocalizationPrefix(Text, "SalesOrderItemList.ItemKey.Item", LCode);
 	Text = LocalizationEvents.ReplaceDescriptionLocalizationPrefix(Text, "SalesOrderItemList.ItemKey", LCode);
 	Text = LocalizationEvents.ReplaceDescriptionLocalizationPrefix(Text, "SalesOrderItemList.Unit", LCode);
@@ -128,6 +127,7 @@ Function SalesOrderPrint(Ref, Param)
 			Number = Number + 1;
 			AreaItemList.Parameters.Fill(It);
 			AreaItemList.Parameters.Number = Number;
+			
 			Spreadsheet.Put(AreaItemList);
 
 			AreaListTAX.Parameters.PercentTax = It.VatRate;

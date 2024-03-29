@@ -1143,19 +1143,19 @@ Function GetAdvanceDocumentParameters(_Payments, AdvanceDirection)
 	If AdvanceDirection = "Incoming" Then // receipt advance
 		DocumentParameters.Insert("CashDocumentName", "CashReceipt");
 		DocumentParameters.Insert("CashDocumentTransactionType",
-			PredefinedValue("Enum.IncomingPaymentTransactionType.CustomerAdvance"));
+			PredefinedValue("Enum.IncomingPaymentTransactionType.RetailCustomerAdvance"));
 
 		DocumentParameters.Insert("BankDocumentName", "BankReceipt");
 		DocumentParameters.Insert("BankDocumentTransactionType",
-			PredefinedValue("Enum.IncomingPaymentTransactionType.CustomerAdvance"));
+			PredefinedValue("Enum.IncomingPaymentTransactionType.RetailCustomerAdvance"));
 	ElsIf AdvanceDirection = "Outgoing" Then // return advance
 		DocumentParameters.Insert("CashDocumentName", "CashPayment");
 		DocumentParameters.Insert("CashDocumentTransactionType",
-			PredefinedValue("Enum.OutgoingPaymentTransactionTypes.CustomerAdvance"));
+			PredefinedValue("Enum.OutgoingPaymentTransactionTypes.RetailCustomerAdvance"));
 
 		DocumentParameters.Insert("BankDocumentName", "BankPayment");
 		DocumentParameters.Insert("BankDocumentTransactionType",
-			PredefinedValue("Enum.OutgoingPaymentTransactionTypes.CustomerAdvance"));
+			PredefinedValue("Enum.OutgoingPaymentTransactionTypes.RetailCustomerAdvance"));
 	Else
 		Raise "Wrong advance direction";
 	EndIf;

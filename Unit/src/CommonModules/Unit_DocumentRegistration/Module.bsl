@@ -390,24 +390,24 @@ Function GetIgnored_Fields()
 	Array.Add("ChequeBondTransactionItem.R2020B_AdvancesFromCustomers.Project");
 	Array.Add("ChequeBondTransactionItem.R2021B_CustomersTransactions.Project");
 
-	Array.Add("CreditNote.R1020B_AdvancesToVendors.Order");
-	Array.Add("CreditNote.R1021B_VendorsTransactions.Order");
-	Array.Add("CreditNote.R2020B_AdvancesFromCustomers.Order");
-	Array.Add("CreditNote.R2021B_CustomersTransactions.Order");
-	Array.Add("CreditNote.T2014S_AdvancesInfo.Order");
-	Array.Add("CreditNote.T2014S_AdvancesInfo.IsVendorAdvance");
-	Array.Add("CreditNote.T2015S_TransactionsInfo.Order");
-	Array.Add("CreditNote.T2015S_TransactionsInfo.IsCustomerTransaction");
-	Array.Add("CreditNote.R5015B_OtherPartnersTransactions.Basis");
+	//Array.Add("CreditNote.R1020B_AdvancesToVendors.Order");
+	//Array.Add("CreditNote.R1021B_VendorsTransactions.Order");
+	//Array.Add("CreditNote.R2020B_AdvancesFromCustomers.Order");
+	//Array.Add("CreditNote.R2021B_CustomersTransactions.Order");
+	//Array.Add("CreditNote.T2014S_AdvancesInfo.Order");
+	//Array.Add("CreditNote.T2014S_AdvancesInfo.IsVendorAdvance");
+	//Array.Add("CreditNote.T2015S_TransactionsInfo.Order");
+	//Array.Add("CreditNote.T2015S_TransactionsInfo.IsCustomerTransaction");
+	//Array.Add("CreditNote.R5015B_OtherPartnersTransactions.Basis");
 
-	Array.Add("DebitNote.R1020B_AdvancesToVendors.Order");
-	Array.Add("DebitNote.R2020B_AdvancesFromCustomers.Order");
-	Array.Add("DebitNote.R2021B_CustomersTransactions.Order");
-	Array.Add("DebitNote.T2014S_AdvancesInfo.Order");
-	Array.Add("DebitNote.T2014S_AdvancesInfo.IsCustomerAdvance");
-	Array.Add("DebitNote.T2015S_TransactionsInfo.Order");
-	Array.Add("DebitNote.T2015S_TransactionsInfo.IsVendorTransaction");
-	Array.Add("DebitNote.R5015B_OtherPartnersTransactions.Basis");
+	//Array.Add("DebitNote.R1020B_AdvancesToVendors.Order");
+	//Array.Add("DebitNote.R2020B_AdvancesFromCustomers.Order");
+	//Array.Add("DebitNote.R2021B_CustomersTransactions.Order");
+	//Array.Add("DebitNote.T2014S_AdvancesInfo.Order");
+	//Array.Add("DebitNote.T2014S_AdvancesInfo.IsCustomerAdvance");
+	//Array.Add("DebitNote.T2015S_TransactionsInfo.Order");
+	//Array.Add("DebitNote.T2015S_TransactionsInfo.IsVendorTransaction");
+	//Array.Add("DebitNote.R5015B_OtherPartnersTransactions.Basis");
 	
 	Array.Add("DebitCreditNote.R1020B_AdvancesToVendors.Order");
 	Array.Add("DebitCreditNote.R2020B_AdvancesFromCustomers.Order");

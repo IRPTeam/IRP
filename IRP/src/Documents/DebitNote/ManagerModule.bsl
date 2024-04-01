@@ -106,7 +106,6 @@ Function GetQueryTextsMasterTables()
 	QueryArray.Add(R5012B_VendorsAging());
 	QueryArray.Add(R5015B_OtherPartnersTransactions());
 	QueryArray.Add(R5021T_Revenues());
-	QueryArray.Add(T2014S_AdvancesInfo());
 	QueryArray.Add(T2015S_TransactionsInfo());
 	QueryArray.Add(T1040T_AccountingAmounts());
 	QueryArray.Add(R5020B_PartnersBalance());
@@ -200,6 +199,7 @@ Function R5015B_OtherPartnersTransactions()
 		   |	Transactions.LegalName,
 		   |	Transactions.Partner,
 		   |	Transactions.Agreement,
+		   |	UNDEFINED AS Basis,
 		   |	Transactions.Amount AS Amount,
 		   |	Transactions.Key AS Key
 		   |INTO R5015B_OtherPartnersTransactions
@@ -251,10 +251,6 @@ EndFunction
 
 Function R5012B_VendorsAging()
 	Return AccumulationRegisters.R5012B_VendorsAging.R5012B_VendorsAging_DebitNote();
-EndFunction
-
-Function T2014S_AdvancesInfo()
-	Return InformationRegisters.T2014S_AdvancesInfo.T2014S_AdvancesInfo_DebitNote();
 EndFunction
 
 Function T2015S_TransactionsInfo() 

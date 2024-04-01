@@ -129,9 +129,11 @@ Function T2015S_TransactionsInfo_DebitNote() Export
 		|	Transactions.LegalName,
 		|	Transactions.Agreement,
 		|	Transactions.Project,
+		|	UNDEFINED AS Order,
 		|	Transactions.BasisDocument AS TransactionBasis,
 		|	Transactions.Key,
 		|	TRUE AS IsCustomerTransaction,
+		|	FALSE AS IsVendorTransaction,
 		|	TRUE AS IsDue,
 		|	SUM(Transactions.Amount) AS Amount
 		|INTO T2015S_TransactionsInfo
@@ -149,41 +151,111 @@ Function T2015S_TransactionsInfo_DebitNote() Export
 		|	Transactions.Agreement,
 		|	Transactions.Project,
 		|	Transactions.BasisDocument,
+		|	Transactions.Key
+		|
+		|UNION ALL
+		|
+		|SELECT
+		|	Transactions.Period AS Date,
+		|	Transactions.Company,
+		|	Transactions.Branch,
+		|	Transactions.Currency,
+		|	Transactions.Partner,
+		|	Transactions.LegalName,
+		|	Transactions.Agreement,
+		|	Transactions.Project,
+		|	UNDEFINED AS Order,
+		|	Transactions.BasisDocument AS TransactionBasis,
+		|	Transactions.Key,
+		|	FALSE AS IsCustomerTransaction,
+		|	TRUE AS IsVendorTransaction,
+		|	TRUE AS IsDue,
+		|	-SUM(Transactions.Amount) AS Amount
+		|FROM
+		|	Transactions AS Transactions
+		|WHERE
+		|	Transactions.IsCustomer
+		|GROUP BY
+		|	Transactions.Period,
+		|	Transactions.Company,
+		|	Transactions.Branch,
+		|	Transactions.Currency,
+		|	Transactions.Partner,
+		|	Transactions.LegalName,
+		|	Transactions.Agreement,
+		|	Transactions.Project,
+		|	Transactions.BasisDocument,
 		|	Transactions.Key";
 EndFunction
 
-Function T2015S_TransactionsInfo_CreditNote() Export
+Function T2015S_TransactionsInfo_CreditNote() Export 
 	Return 
 		"SELECT
-		   |	Transactions.Period AS Date,
-		   |	Transactions.Company,
-		   |	Transactions.Branch,
-		   |	Transactions.Currency,
-		   |	Transactions.LegalName,
-		   |	Transactions.Partner,
-		   |	Transactions.Agreement,
-		   |	Transactions.Project,
-		   |	Transactions.BasisDocument AS TransactionBasis,
-		   |	Transactions.Key,
-		   |	TRUE AS IsVendorTransaction,
-		   |	TRUE AS IsDue,
-		   |	SUM(Transactions.Amount) AS Amount
-		   |INTO T2015S_TransactionsInfo
-		   |FROM
-		   |	Transactions AS Transactions
-		   |WHERE
-		   |	Transactions.IsVendor
-		   |GROUP BY
-		   |	Transactions.Period,
-		   |	Transactions.Company,
-		   |	Transactions.Branch,
-		   |	Transactions.Currency,
-		   |	Transactions.Partner,
-		   |	Transactions.LegalName,
-		   |	Transactions.Agreement,
-		   |	Transactions.Project,
-		   |	Transactions.BasisDocument,
-		   |	Transactions.Key";
+		|	Transactions.Period AS Date,
+		|	Transactions.Company,
+		|	Transactions.Branch,
+		|	Transactions.Currency,
+		|	Transactions.LegalName,
+		|	Transactions.Partner,
+		|	Transactions.Agreement,
+		|	Transactions.Project,
+		|	UNDEFINED AS Order,
+		|	Transactions.BasisDocument AS TransactionBasis,
+		|	Transactions.Key,
+		|	TRUE AS IsVendorTransaction,
+		|	FALSE AS IsCustomerTransaction,
+		|	TRUE AS IsDue,
+		|	SUM(Transactions.Amount) AS Amount
+		|INTO T2015S_TransactionsInfo
+		|FROM
+		|	Transactions AS Transactions
+		|WHERE
+		|	Transactions.IsVendor
+		|GROUP BY
+		|	Transactions.Period,
+		|	Transactions.Company,
+		|	Transactions.Branch,
+		|	Transactions.Currency,
+		|	Transactions.Partner,
+		|	Transactions.LegalName,
+		|	Transactions.Agreement,
+		|	Transactions.Project,
+		|	Transactions.BasisDocument,
+		|	Transactions.Key
+		|
+		|UNION ALL
+		|
+		|SELECT
+		|	Transactions.Period,
+		|	Transactions.Company,
+		|	Transactions.Branch,
+		|	Transactions.Currency,
+		|	Transactions.LegalName,
+		|	Transactions.Partner,
+		|	Transactions.Agreement,
+		|	Transactions.Project,
+		|	UNDEFINED,
+		|	Transactions.BasisDocument,
+		|	Transactions.Key,
+		|	FALSE AS IsVendorTransaction,
+		|	TRUE AS IsCustomerTransaction,
+		|	TRUE AS IsDue,
+		|	-SUM(Transactions.Amount) AS Amount
+		|FROM
+		|	Transactions AS Transactions
+		|WHERE
+		|	Transactions.IsCustomer
+		|GROUP BY
+		|	Transactions.Period,
+		|	Transactions.Company,
+		|	Transactions.Branch,
+		|	Transactions.Currency,
+		|	Transactions.Partner,
+		|	Transactions.LegalName,
+		|	Transactions.Agreement,
+		|	Transactions.Project,
+		|	Transactions.BasisDocument,
+		|	Transactions.Key";
 EndFunction
 
 Function T2015S_TransactionsInfo_DebitCreditNote() Export

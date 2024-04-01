@@ -1002,8 +1002,11 @@ Procedure Write_SelfRecords(Parameters,
 				Or DocMetadata = Metadata.Documents.CashReceipt
 				Or DocMetadata = Metadata.Documents.SalesReportFromTradeAgent
 				Or DocMetadata = Metadata.Documents.SalesInvoice
+				Or (DocMetadata = Metadata.Documents.DebitCreditNote And IsCustomerAdvanceClosing)
 				Or (DocMetadata = Metadata.Documents.SalesReturn And Not RowOffset.IsReturnToAdvance)
+				Or (DocMetadata = Metadata.Documents.CreditNote And Not RowOffset.IsReturnToAdvance And IsCustomerAdvanceClosing)
 				Or (DocMetadata = Metadata.Documents.PurchaseReturn And RowOffset.IsReturnToAdvance)
+				Or (DocMetadata = Metadata.Documents.DebitNote And RowOffset.IsReturnToAdvance And IsVendorAdvanceClosing)
 				Or (DocMetadata = Metadata.Documents.OpeningEntry  And IsCustomerAdvanceClosing)
 				Or (DocMetadata = Metadata.Documents.BankPayment And 
 					Row.Document.TransactionType = Enums.OutgoingPaymentTransactionTypes.ReturnToCustomer)
@@ -1038,14 +1041,16 @@ Procedure Write_SelfRecords(Parameters,
 			If Parameters.RegisterName_Advances = Metadata.AccumulationRegisters.R2020B_AdvancesFromCustomers.Name Then
 				NewRow_PartnerBalance_Advances.CustomerAdvance = NewRow_Advances.Amount;
 				
-				If (DocMetadata = Metadata.Documents.SalesReturn And RowOffset.IsReturnToAdvance) Then
+				If (DocMetadata = Metadata.Documents.SalesReturn And RowOffset.IsReturnToAdvance) 
+					Or (DocMetadata = Metadata.Documents.CreditNote And RowOffset.IsReturnToAdvance And IsCustomerAdvanceClosing) Then
 					NewRow_PartnerBalance_Advances.CustomerAdvance = - NewRow_Advances.Amount; // Sales return	
 				EndIf;	
 				
 			ElsIf Parameters.RegisterName_Advances = Metadata.AccumulationRegisters.R1020B_AdvancesToVendors.Name Then
 				NewRow_PartnerBalance_Advances.VendorAdvance = NewRow_Advances.Amount;
 				
-				If (DocMetadata = Metadata.Documents.PurchaseReturn And RowOffset.IsReturnToAdvance) Then
+				If (DocMetadata = Metadata.Documents.PurchaseReturn And RowOffset.IsReturnToAdvance) 
+					Or (DocMetadata = Metadata.Documents.DebitNote And RowOffset.IsReturnToAdvance And IsVendorAdvanceClosing) Then
 					NewRow_PartnerBalance_Advances.VendorAdvance = - NewRow_Advances.Amount; // Purchase return	
 				EndIf;	
 				
@@ -1085,7 +1090,9 @@ Procedure Write_SelfRecords(Parameters,
 				Or DocMetadata = Metadata.Documents.CashPayment
 				Or DocMetadata = Metadata.Documents.SalesReportToConsignor
 				Or DocMetadata = Metadata.Documents.PurchaseInvoice
+				Or (DocMetadata = Metadata.Documents.CreditNote And IsVendorAdvanceClosing)
 				Or DocMetadata = Metadata.Documents.PurchaseReturn
+				Or (DocMetadata = Metadata.Documents.DebitNote And IsVendorAdvanceClosing)
 				Or (DocMetadata = Metadata.Documents.OpeningEntry And IsVendorAdvanceClosing) Then
 				
 				NewRow_PartnersBalance_Transactions.RecordType = ReverseRecordType(NewRow_Transactions.RecordType);

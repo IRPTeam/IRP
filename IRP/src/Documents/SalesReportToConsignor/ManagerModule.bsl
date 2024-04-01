@@ -110,6 +110,7 @@ Function ItemList()
 		   |	ItemList.Quantity AS UnitQuantity,
 		   |	ItemList.QuantityInBaseUnit AS Quantity,
 		   |	ItemList.TotalAmount AS Amount,
+		   |	ItemList.TradeAgentFeeAmount,
 		   |	ItemList.Ref.Partner AS Partner,
 		   |	ItemList.Ref.LegalName AS LegalName,
 		   |	CASE
@@ -156,6 +157,7 @@ Function GetQueryTextsMasterTables()
 	QueryArray.Add(R1040B_TaxesOutgoing());
 	QueryArray.Add(R5010B_ReconciliationStatement());
 	QueryArray.Add(T2015S_TransactionsInfo());
+	QueryArray.Add(R5020B_PartnersBalance());
 	Return QueryArray;
 EndFunction
 
@@ -210,6 +212,10 @@ EndFunction
 
 Function T2015S_TransactionsInfo()
 	Return InformationRegisters.T2015S_TransactionsInfo.T2015S_TransactionsInfo_PI_SRTC();
+EndFunction
+
+Function R5020B_PartnersBalance()
+	Return AccumulationRegisters.R5020B_PartnersBalance.R5020B_PartnersBalance_SRTC();
 EndFunction
 
 #EndRegion

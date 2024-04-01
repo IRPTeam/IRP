@@ -371,6 +371,11 @@ Scenario: _1000015 create Bank receipt and check Aging register movements
 					| 'Description'      |
 					| 'Kalipso'          |
 				And I select current line in "List" table
+				And I click choice button of "Partner term" attribute in "PaymentList" table
+				And I go to line in "List" table
+					| 'Description'      |
+					| 'Basic Partner terms, without VAT'          |
+				And I select current line in "List" table
 				And I input "250,00" text in the field named "PaymentListTotalAmount" of "PaymentList" table
 			And I click the button named "FormPost"
 			And I delete "$$NumberBankReceipt1000015$$" variable
@@ -762,9 +767,9 @@ Scenario: _1000050 check the offset of Sales invoice advance (type of settlement
 			And "List" table contains lines:
 				| 'Recorder'                | 'Currency' | 'Company'      | 'Branch' | 'Partner' | 'Amount' | 'Agreement'                        | 'Invoice'                 | 'Payment date' | 'Aging closing'                |
 				| '$$SalesInvoice0240164$$' | 'TRY'      | 'Main Company' | ''       | 'Kalipso' | '550,00' | 'Basic Partner terms, without VAT' | '$$SalesInvoice0240164$$' | '*'            | ''                             |
-				| '$$SalesInvoice0240164$$' | 'TRY'      | 'Main Company' | ''       | 'Kalipso' | '550,00' | 'Basic Partner terms, without VAT' | '$$SalesInvoice0240164$$' | '*'            | 'Customers advance closing 4*' |
+				| '$$SalesInvoice0240164$$' | 'TRY'      | 'Main Company' | ''       | 'Kalipso' | '50,00'  | 'Basic Partner terms, without VAT' | '$$SalesInvoice0240164$$' | '*'            | 'Customers advance closing 4*' |
 				| '$$SalesInvoice024016$$'  | 'TRY'      | 'Main Company' | ''       | 'Kalipso' | '550,00' | 'Basic Partner terms, without VAT' | '$$SalesInvoice024016$$'  | '*'            | ''                             |
-				| '$$SalesInvoice024016$$'  | 'TRY'      | 'Main Company' | ''       | 'Kalipso' | '550,00' | 'Basic Partner terms, without VAT' | '$$SalesInvoice024016$$'  | '*'            | 'Customers advance closing 4*' |
+				| '$$SalesInvoice024016$$'  | 'TRY'      | 'Main Company' | ''       | 'Kalipso' | '50,00'  | 'Basic Partner terms, without VAT' | '$$SalesInvoice024016$$'  | '*'            | 'Customers advance closing 4*' |
 			And I close all client application windows	
 
 Scenario: _1000055 check Aging sum when delete row from SI

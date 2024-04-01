@@ -433,6 +433,7 @@
   <roles>Role.Document_DebitCreditNote</roles>
   <roles>Role.AuditLockSet</roles>
   <roles>Role.AuditLockUnset</roles>
+  <roles>Role.AccumulationRegisters_R5020B_PartnersBalance</roles>
   <commonTemplates>CommonTemplate.HTMLPictureSlider</commonTemplates>
   <commonTemplates>CommonTemplate.HTMLAddAttributes</commonTemplates>
   <commonTemplates>CommonTemplate.HTMLGallery</commonTemplates>
@@ -1299,6 +1300,7 @@
   <reports>Report.R6021_BatchBalanceSimple</reports>
   <reports>Report.R7010_DetailingSupplies</reports>
   <reports>Report.R7030_ProductionPlanning</reports>
+  <reports>Report.R5020_PartnersBalance</reports>
   <dataProcessors>DataProcessor.AnaliseDocumentMovements</dataProcessors>
   <dataProcessors>DataProcessor.AnalyseXDTO</dataProcessors>
   <dataProcessors>DataProcessor.BuilderExample</dataProcessors>
@@ -1501,6 +1503,7 @@
   <accumulationRegisters>AccumulationRegister.R9555T_PaidSickLeaves</accumulationRegisters>
   <accumulationRegisters>AccumulationRegister.R9560T_AdditionalAccrual</accumulationRegisters>
   <accumulationRegisters>AccumulationRegister.R9570T_AdditionalDeduction</accumulationRegisters>
+  <accumulationRegisters>AccumulationRegister.R5020B_PartnersBalance</accumulationRegisters>
   <chartsOfCharacteristicTypes>ChartOfCharacteristicTypes.AccountingExtraDimensionTypes</chartsOfCharacteristicTypes>
   <chartsOfCharacteristicTypes>ChartOfCharacteristicTypes.AddAttributeAndProperty</chartsOfCharacteristicTypes>
   <chartsOfCharacteristicTypes>ChartOfCharacteristicTypes.CurrencyMovementType</chartsOfCharacteristicTypes>

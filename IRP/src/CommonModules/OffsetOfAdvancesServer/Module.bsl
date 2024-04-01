@@ -1002,7 +1002,7 @@ Procedure Write_SelfRecords(Parameters,
 				Or DocMetadata = Metadata.Documents.CashReceipt
 				Or DocMetadata = Metadata.Documents.SalesReportFromTradeAgent
 				Or DocMetadata = Metadata.Documents.SalesInvoice
-				Or (DocMetadata = Metadata.Documents.DebitCreditNote And IsCustomerAdvanceClosing)
+				Or (DocMetadata = Metadata.Documents.DebitNote And IsCustomerAdvanceClosing)
 				Or (DocMetadata = Metadata.Documents.SalesReturn And Not RowOffset.IsReturnToAdvance)
 				Or (DocMetadata = Metadata.Documents.CreditNote And Not RowOffset.IsReturnToAdvance And IsCustomerAdvanceClosing)
 				Or (DocMetadata = Metadata.Documents.PurchaseReturn And RowOffset.IsReturnToAdvance)

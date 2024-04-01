@@ -174,7 +174,7 @@ Function T2015S_TransactionsInfo_DebitNote() Export
 		|FROM
 		|	Transactions AS Transactions
 		|WHERE
-		|	Transactions.IsCustomer
+		|	Transactions.IsVendor
 		|GROUP BY
 		|	Transactions.Period,
 		|	Transactions.Company,

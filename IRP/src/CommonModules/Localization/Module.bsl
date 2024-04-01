@@ -595,6 +595,7 @@ Function Strings(Lang) Export
 
 	Strings.Insert("EqFP_ErrorWhileConfirmCode", NStr("en = 'Error while confirm code on request: %1'", Lang));
 	Strings.Insert("EqFP_CashierNameCanNotBeEmpty", NStr("en = 'Cashier name can not be empty. Author -> Partner -> Description (lang)'", Lang));
+	Strings.Insert("EqFP_ReceivedWrongAnswerFromDevice", NStr("en = 'Received wrong answer from device. Contact Administrator.'", Lang));
 
 #EndRegion
 

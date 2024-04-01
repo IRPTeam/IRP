@@ -64,6 +64,8 @@
   <commonModules>CommonModule.Unit_MockService</commonModules>
   <commonModules>CommonModule.Unit_Service</commonModules>
   <commonModules>CommonModule.Unit_DocumentRegistration</commonModules>
+  <commonModules>CommonModule.Unit_CommonServerCall</commonModules>
+  <commonModules>CommonModule.EquipmentFiscalPrinter_CommonAPI</commonModules>
   <commonAttributes>CommonAttribute.Author</commonAttributes>
   <commonAttributes>CommonAttribute.Branch</commonAttributes>
   <commonAttributes>CommonAttribute.Description</commonAttributes>
@@ -104,6 +106,7 @@
   <catalogs>Catalog.Unit_ServiceExchangeHistory</catalogs>
   <catalogs>Catalog.Units</catalogs>
   <catalogs>Catalog.Users</catalogs>
+  <catalogs>Catalog.Unit_ErrorTypes</catalogs>
   <documents>Document.AdditionalAccrual</documents>
   <documents>Document.AdditionalCostAllocation</documents>
   <documents>Document.AdditionalDeduction</documents>

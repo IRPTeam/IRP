@@ -108,6 +108,7 @@ EndFunction
 
 Function GetQueryTextsSecondaryTables()
 	QueryArray = New Array;
+	QueryArray.Add(BookValueOfFixedAsset());
 	Return QueryArray;
 EndFunction
 
@@ -115,7 +116,7 @@ Function GetQueryTextsMasterTables()
 	QueryArray = New Array;
 	QueryArray.Add(T8515S_FixedAssetsLocation());
 	QueryArray.Add(R8510B_BookValueOfFixedAsset());
-//	QueryArray.Add(T1040T_AccountingAmounts());
+	QueryArray.Add(T1040T_AccountingAmounts());
 	Return QueryArray;
 EndFunction
 
@@ -123,6 +124,29 @@ EndFunction
 
 #Region Posting_SourceTable
 
+Function BookValueOfFixedAsset()
+	Return
+		"SELECT
+		|	&Period AS Period,
+		|	R8510B_BookValueOfFixedAssetBalance.Company,
+		|	R8510B_BookValueOfFixedAssetBalance.Branch,
+		|	R8510B_BookValueOfFixedAssetBalance.ProfitLossCenter,
+		|	R8510B_BookValueOfFixedAssetBalance.FixedAsset,
+		|	R8510B_BookValueOfFixedAssetBalance.LedgerType,
+		|	R8510B_BookValueOfFixedAssetBalance.Schedule,
+		|	R8510B_BookValueOfFixedAssetBalance.Currency,
+		|	R8510B_BookValueOfFixedAssetBalance.AmountBalance AS Amount
+		|INTO _BookValueOfFixedAsset
+		|FROM
+		|	AccumulationRegister.R8510B_BookValueOfFixedAsset.Balance(&BalancePeriod, 
+		|	FixedAsset = &FixedAsset
+		|	AND Company = &Company
+		|	AND Branch = &BranchSender
+		|	AND ProfitLossCenter = &ProfitLossCenterSender
+		|	AND CurrencyMovementType = VALUE(ChartOfCharacteristicTypes.CurrencyMovementType.SettlementCurrency)) AS
+		|		R8510B_BookValueOfFixedAssetBalance";
+EndFunction
+	
 #EndRegion
 
 #Region Posting_MainTables
@@ -166,28 +190,6 @@ EndFunction
 Function R8510B_BookValueOfFixedAsset()
 	Return
 		"SELECT
-		|	&Period AS Period,
-		|	R8510B_BookValueOfFixedAssetBalance.Company,
-		|	R8510B_BookValueOfFixedAssetBalance.Branch,
-		|	R8510B_BookValueOfFixedAssetBalance.ProfitLossCenter,
-		|	R8510B_BookValueOfFixedAssetBalance.FixedAsset,
-		|	R8510B_BookValueOfFixedAssetBalance.LedgerType,
-		|	R8510B_BookValueOfFixedAssetBalance.Schedule,
-		|	R8510B_BookValueOfFixedAssetBalance.Currency,
-		|	R8510B_BookValueOfFixedAssetBalance.AmountBalance AS Amount
-		|INTO _BookValueOfFixedAsset
-		|FROM
-		|	AccumulationRegister.R8510B_BookValueOfFixedAsset.Balance(&BalancePeriod, 
-		|	FixedAsset = &FixedAsset
-		|	AND Company = &Company
-		|	AND Branch = &BranchSender
-		|	AND ProfitLossCenter = &ProfitLossCenterSender
-		|	AND CurrencyMovementType = VALUE(ChartOfCharacteristicTypes.CurrencyMovementType.SettlementCurrency)) AS
-		|		R8510B_BookValueOfFixedAssetBalance
-		|;
-		|
-		|////////////////////////////////////////////////////////////////////////////////
-		|SELECT
 		|	VALUE(AccumulationRecordType.Expense) AS RecordType,
 		|	_BookValueOfFixedAsset.Period,
 		|	_BookValueOfFixedAsset.Company,
@@ -248,174 +250,62 @@ EndFunction
 Function T1040T_AccountingAmounts()
 	Return 
 		"SELECT
-		|	ItemList.Period,
-		|	ItemList.Key AS RowKey,
-		|	ItemList.Currency,
-		|	ItemList.NetAmount AS Amount,
-		|	VALUE(Catalog.AccountingOperations.PurchaseInvoice_DR_R4050B_StockInventory_R5022T_Expenses_CR_R1021B_VendorsTransactions) AS
+		|	_BookValueOfFixedAsset.Period,
+		|	"""" AS RowKey,
+		|	_BookValueOfFixedAsset.Currency,
+		|	_BookValueOfFixedAsset.Amount,
+		|	VALUE(Catalog.AccountingOperations.FixedAssetTransfer_DR_R8510B_BookValueOfFixedAsset_CR_R8510B_BookValueOfFixedAsset) AS
 		|		Operation,
 		|	UNDEFINED AS AdvancesClosing
 		|INTO T1040T_AccountingAmounts
 		|FROM
-		|	ItemList AS ItemList
+		|	_BookValueOfFixedAsset AS _BookValueOfFixedAsset
 		|WHERE
-		|	ItemList.IsPurchase
-		|
-		|UNION ALL
-		|
-		|SELECT
-		|	ItemList.Period,
-		|	ItemList.Key AS RowKey,
-		|	ItemList.Currency,
-		|	ItemList.TaxAmount,
-		|	VALUE(Catalog.AccountingOperations.PurchaseInvoice_DR_R1040B_TaxesOutgoing_CR_R1021B_VendorsTransactions),
-		|	UNDEFINED
-		|FROM
-		|	ItemList as ItemList
-		|WHERE
-		|	ItemList.IsPurchase
-		|
-		|UNION ALL
-		|
-		|SELECT
-		|	T2010S_OffsetOfAdvances.Period,
-		|	T2010S_OffsetOfAdvances.Key AS RowKey,
-		|	T2010S_OffsetOfAdvances.Currency,
-		|	T2010S_OffsetOfAdvances.Amount,
-		|	VALUE(Catalog.AccountingOperations.PurchaseInvoice_DR_R1021B_VendorsTransactions_CR_R1020B_AdvancesToVendors),
-		|	T2010S_OffsetOfAdvances.Recorder
-		|FROM
-		|	InformationRegister.T2010S_OffsetOfAdvances AS T2010S_OffsetOfAdvances
-		|WHERE
-		|	T2010S_OffsetOfAdvances.Document = &Ref";
-EndFunction
-
-Function T1050T_AccountingQuantities()
-	Return "SELECT
-		   |	ItemList.Period,
-		   |	ItemList.Key AS RowKey,
-		   |	VALUE(Catalog.AccountingOperations.PurchaseInvoice_DR_R4050B_StockInventory_R5022T_Expenses_CR_R1021B_VendorsTransactions) AS Operation,
-		   |	ItemList.Quantity
-		   |INTO T1050T_AccountingQuantities
-		   |FROM
-		   |	ItemList AS ItemList
-		   |WHERE
-		   |	ItemList.IsPurchase";
+		|	TRUE";
 EndFunction
 
 Function GetAccountingAnalytics(Parameters) Export
 	Operations = Catalogs.AccountingOperations;
-	If Parameters.Operation = Operations.PurchaseInvoice_DR_R4050B_StockInventory_R5022T_Expenses_CR_R1021B_VendorsTransactions 
-		Or Parameters.Operation = Operations.PurchaseInvoice_DR_R4050B_StockInventory_R5022T_Expenses_CR_R1021B_VendorsTransactions_CurrencyRevaluation Then
+	If Parameters.Operation = Operations.FixedAssetTransfer_DR_R8510B_BookValueOfFixedAsset_CR_R8510B_BookValueOfFixedAsset Then
+		 
+		Return GetAnalytics_BookValue_BookValue(Parameters); // Book value - Book value
 		
-		Return GetAnalytics_ReceiptInventory(Parameters); // Stock inventory - Vendors transactions
-		
-	ElsIf Parameters.Operation = Operations.PurchaseInvoice_DR_R1021B_VendorsTransactions_CR_R1020B_AdvancesToVendors 
-		Or Parameters.Operation = Operations.PurchaseInvoice_DR_R1021B_VendorsTransactions_CR_R1020B_AdvancesToVendors_CurrencyRevaluation Then
-		
-		Return GetAnalytics_OffsetOfAdvances(Parameters); // Vendors transactions - Advances to vendors
-	
-	ElsIf Parameters.Operation = Operations.PurchaseInvoice_DR_R1040B_TaxesOutgoing_CR_R1021B_VendorsTransactions Then
-		Return GetAnalytics_VATIncoming(Parameters); // Taxes outgoing - Vendors transactions
 	EndIf;
 	Return Undefined;
 EndFunction
 
 #Region Accounting_Analytics
 
-// Stock inventory - Vendors transactions
-Function GetAnalytics_ReceiptInventory(Parameters)
+// Book value - Book value
+Function GetAnalytics_BookValue_BookValue(Parameters)
 	AccountingAnalytics = AccountingServer.GetAccountingAnalyticsResult(Parameters);
 	AccountParameters   = AccountingServer.GetAccountParameters(Parameters);
 
 	// Debit
-	Debit = AccountingServer.GetT9010S_AccountsItemKey(AccountParameters, Parameters.RowData.ItemKey);
-	If ValueIsFilled(Debit.Account) Then
-		AccountingAnalytics.Debit = Debit.Account;
-	EndIf;
-	AdditionalAnalytics = New Structure;
-	AdditionalAnalytics.Insert("Item", Parameters.RowData.ItemKey.Item);
-	AccountingServer.SetDebitExtDimensions(Parameters, AccountingAnalytics, AdditionalAnalytics);
-	
-	// Credit
-	Credit = AccountingServer.GetT9012S_AccountsPartner(AccountParameters, 
-	                                                    Parameters.ObjectData.Partner,
-	                                                    Parameters.ObjectData.Agreement,
-	                                                    Parameters.ObjectData.Currency);
-	                                                    
-	If ValueIsFilled(Credit.AccountTransactionsVendor) Then
-		AccountingAnalytics.Credit = Credit.AccountTransactionsVendor;
-	EndIf;
-	AccountingServer.SetCreditExtDimensions(Parameters, AccountingAnalytics);
-
-	Return AccountingAnalytics;
-EndFunction
-
-// Vendors transactions - Advances to vendors
-Function GetAnalytics_OffsetOfAdvances(Parameters)
-	AccountingAnalytics = AccountingServer.GetAccountingAnalyticsResult(Parameters);
-	AccountParameters   = AccountingServer.GetAccountParameters(Parameters);
-
-	// Debit
-	Accounts = AccountingServer.GetT9012S_AccountsPartner(AccountParameters, 
-														  Parameters.ObjectData.Partner,
-														  Parameters.ObjectData.Agreement,
-														  Parameters.ObjectData.Currency);
-														  
-	If ValueIsFilled(Accounts.AccountTransactionsVendor) Then
-		AccountingAnalytics.Debit = Accounts.AccountTransactionsVendor;
-	EndIf;
+	Debit = AccountingServer.GetT9015S_AccountsFixedAsset(AccountParameters, Parameters.ObjectData.FixedAsset);
+	AccountingAnalytics.Debit = Debit.Account;
 	AccountingServer.SetDebitExtDimensions(Parameters, AccountingAnalytics);
 	
 	// Credit
-	If ValueIsFilled(Accounts.AccountAdvancesVendor) Then
-		AccountingAnalytics.Credit = Accounts.AccountAdvancesVendor;
-	EndIf;
-	AccountingServer.SetCreditExtDimensions(Parameters, AccountingAnalytics);
-
-	Return AccountingAnalytics;
-EndFunction
-
-// Taxes outgoing - Vendors transactions
-Function GetAnalytics_VATIncoming(Parameters)
-	AccountingAnalytics = AccountingServer.GetAccountingAnalyticsResult(Parameters);
-	AccountParameters   = AccountingServer.GetAccountParameters(Parameters);
-		
-	// Debit
-	Debit = AccountingServer.GetT9013S_AccountsTax(AccountParameters, Parameters.RowData.TaxInfo);
-	If ValueIsFilled(Debit.OutgoingAccount) Then
-		AccountingAnalytics.Debit = Debit.OutgoingAccount;
-	EndIf;
-	AccountingServer.SetDebitExtDimensions(Parameters, AccountingAnalytics, Parameters.RowData.TaxInfo);
-	
-	// Credit
-	Credit = AccountingServer.GetT9012S_AccountsPartner(AccountParameters, 
-	                                                    Parameters.ObjectData.Partner,
-	                                                    Parameters.ObjectData.Agreement,
-	                                                    Parameters.ObjectData.Currency);
-	                                                    
-	If ValueIsFilled(Credit.AccountTransactionsVendor) Then
-		AccountingAnalytics.Credit = Credit.AccountTransactionsVendor;
-	EndIf;
+	Credit = AccountingServer.GetT9015S_AccountsFixedAsset(AccountParameters, Parameters.ObjectData.FixedAsset);
+	AccountingAnalytics.Credit = Credit.Account;
 	AccountingServer.SetCreditExtDimensions(Parameters, AccountingAnalytics);
 
 	Return AccountingAnalytics;
 EndFunction
 
 Function GetHintDebitExtDimension(Parameters, ExtDimensionType, Value) Export
-	If Parameters.Operation = Catalogs.AccountingOperations.PurchaseInvoice_DR_R1021B_VendorsTransactions_CR_R1020B_AdvancesToVendors
-		And ExtDimensionType.ValueType.Types().Find(Type("CatalogRef.Companies")) <> Undefined Then
-		Return Parameters.ObjectData.LegalName;
+	If Parameters.Operation = Catalogs.AccountingOperations.FixedAssetTransfer_DR_R8510B_BookValueOfFixedAsset_CR_R8510B_BookValueOfFixedAsset
+		And ExtDimensionType.ValueType.Types().Find(Type("CatalogRef.BusinessUnits")) <> Undefined Then
+		Return Parameters.ObjectData.ProfitLossCenterReceiver;
 	EndIf;
 	Return Value;
 EndFunction
 
 Function GetHintCreditExtDimension(Parameters, ExtDimensionType, Value) Export
-	If (Parameters.Operation = Catalogs.AccountingOperations.PurchaseInvoice_DR_R1021B_VendorsTransactions_CR_R1020B_AdvancesToVendors
-		Or Parameters.Operation = Catalogs.AccountingOperations.PurchaseInvoice_DR_R1040B_TaxesOutgoing_CR_R1021B_VendorsTransactions
-		Or Parameters.Operation = Catalogs.AccountingOperations.PurchaseInvoice_DR_R4050B_StockInventory_R5022T_Expenses_CR_R1021B_VendorsTransactions)
-		And ExtDimensionType.ValueType.Types().Find(Type("CatalogRef.Companies")) <> Undefined Then
-		Return Parameters.ObjectData.LegalName;
+	If Parameters.Operation = Catalogs.AccountingOperations.FixedAssetTransfer_DR_R8510B_BookValueOfFixedAsset_CR_R8510B_BookValueOfFixedAsset
+		And ExtDimensionType.ValueType.Types().Find(Type("CatalogRef.BusinessUnits")) <> Undefined Then
+		Return Parameters.ObjectData.ProfitLossCenterSender;
 	EndIf;
 	Return Value;
 EndFunction

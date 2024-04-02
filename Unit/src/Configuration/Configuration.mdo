@@ -64,7 +64,7 @@
   <commonModules>CommonModule.Unit_MockService</commonModules>
   <commonModules>CommonModule.Unit_Service</commonModules>
   <commonModules>CommonModule.Unit_DocumentRegistration</commonModules>
-  <commonModules>CommonModule.Unit_CommonServerCall</commonModules>
+  <commonModules>CommonModule.Units_CommonServerCall</commonModules>
   <commonModules>CommonModule.EquipmentFiscalPrinter_CommonAPI</commonModules>
   <commonAttributes>CommonAttribute.Author</commonAttributes>
   <commonAttributes>CommonAttribute.Branch</commonAttributes>

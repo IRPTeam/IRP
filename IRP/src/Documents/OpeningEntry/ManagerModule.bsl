@@ -137,6 +137,11 @@ EndFunction
 #Region Posting
 
 Function PostingGetDocumentDataTables(Ref, Cancel, PostingMode, Parameters, AddInfo = Undefined) Export
+	Clear_T9500S_AccrualAndDeductionValues_Records(Ref);
+	If PostingMode <> Undefined Then
+		Write_T9500S_AccrualAndDeductionValues_Records(Ref);
+	EndIf;
+	
 	QueryArray = GetQueryTextsSecondaryTables();
 	PostingServer.ExecuteQuery(Ref, QueryArray, Parameters);
 
@@ -359,6 +364,7 @@ Function GetQueryTextsSecondaryTables()
 	QueryArray.Add(OtherCustomersTransactions());
 	QueryArray.Add(CashInTransitDoc());
 	QueryArray.Add(FixedAssets());
+	QueryArray.Add(EmployeeList());
 	QueryArray.Add(PostingServer.Exists_R4010B_ActualStocks());
 	QueryArray.Add(PostingServer.Exists_R4011B_FreeStocks());
 	QueryArray.Add(PostingServer.Exists_R4014B_SerialLotNumber());
@@ -395,6 +401,8 @@ Function GetQueryTextsMasterTables()
 	QueryArray.Add(R8515T_CostOfFixedAsset());
 	QueryArray.Add(R8510B_BookValueOfFixedAsset());
 	QueryArray.Add(R5020B_PartnersBalance());
+	QueryArray.Add(T9510S_Staffing());
+	QueryArray.Add(R9545T_PaidVacations());
 	Return QueryArray;
 EndFunction
 
@@ -829,6 +837,28 @@ Function FixedAssets()
 		|	Document.OpeningEntry.FixedAssets AS OpeningEntryFixedAssets
 		|WHERE
 		|	OpeningEntryFixedAssets.Ref = &Ref";
+EndFunction
+
+Function EmployeeList()
+	Return
+		"SELECT
+		|	EmployeeList.Ref.Date AS Period,
+		|	EmployeeList.Ref.Company AS Company,
+		|	EmployeeList.Ref.Branch AS Branch,
+		|	EmployeeList.Employee,
+		|	EmployeeList.Position,
+		|	EmployeeList.EmployeeSchedule,
+		|	EmployeeList.ProfitLossCenter,
+		|	CASE
+		|		WHEN EmployeeList.RemainingVacationDays >= EmployeeList.Ref.Company.SalaryMaxDaysVacation
+		|			THEN 0
+		|		ELSE EmployeeList.Ref.Company.SalaryMaxDaysVacation - EmployeeList.RemainingVacationDays
+		|	END PaidVacationDays
+		|INTO EmployeeList
+		|FROM
+		|	Document.OpeningEntry.EmployeeList AS EmployeeList
+		|WHERE
+		|	EmployeeList.Ref = &Ref"
 EndFunction
 
 #EndRegion
@@ -1901,6 +1931,38 @@ Function R5020B_PartnersBalance()
 	Return AccumulationRegisters.R5020B_PartnersBalance.R5020B_PartnersBalance_OE();
 EndFunction
 
+Function T9510S_Staffing()
+	Return
+		"SELECT
+		|	EmployeeList.Period,
+		|	EmployeeList.Company,
+		|	EmployeeList.Branch,
+		|	EmployeeList.Employee,
+		|	EmployeeList.Position,
+		|	EmployeeList.EmployeeSchedule,
+		|	EmployeeList.ProfitLossCenter
+		|INTO T9510S_Staffing
+		|FROM
+		|	EmployeeList AS EmployeeList
+		|WHERE
+		|	TRUE";
+EndFunction
+
+Function R9545T_PaidVacations()
+	Return
+		"SELECT
+		|	EmployeeList.Period,
+		|	EmployeeList.Company,
+		|	EmployeeList.Employee,
+		|	EmployeeList.Position,
+		|	EmployeeList.PaidVacationDays AS Paid
+		|INTO R9545T_PaidVacations
+		|FROM
+		|	EmployeeList AS EmployeeList
+		|WHERE
+		|	EmployeeList.PaidVacationDays <> 0";
+EndFunction
+
 #EndRegion
 
 #Region AccessObject
@@ -1922,6 +1984,50 @@ EndFunction
 #EndRegion
 
 #Region Service
+
+Procedure Clear_T9500S_AccrualAndDeductionValues_Records(Ref)
+	Query = New Query();
+	Query.Text =
+	"SELECT
+	|	Table.EmployeeOrPosition,
+	|	Table.AccualOrDeductionType,
+	|	Table.Period
+	|FROM
+	|	InformationRegister.T9500S_AccrualAndDeductionValues AS Table
+	|WHERE
+	|	Table.Document = &Document";
+	Query.SetParameter("Document", Ref);
+	QueryResult = Query.Execute();
+	QuerySelection = QueryResult.Select();
+	
+	While QuerySelection.Next() Do
+		RecordSet = InformationRegisters.T9500S_AccrualAndDeductionValues.CreateRecordSet();
+		RecordSet.Filter.EmployeeOrPosition.Set(QuerySelection.EmployeeOrPosition);
+		RecordSet.Filter.AccualOrDeductionType.Set(QuerySelection.AccualOrDeductionType);
+		RecordSet.Filter.Period.Set(QuerySelection.Period);
+		RecordSet.Clear();
+		RecordSet.Write();
+	EndDo;
+EndProcedure
+
+Procedure Write_T9500S_AccrualAndDeductionValues_Records(Ref)
+	For Each Row In Ref.EmployeeList Do
+		If Row.SalaryType <> Enums.SalaryTypes.Personal Then
+			Continue;
+		EndIf;
+		RecordSet = InformationRegisters.T9500S_AccrualAndDeductionValues.CreateRecordSet();
+		RecordSet.Filter.EmployeeOrPosition.Set(Row.Employee);
+		RecordSet.Filter.AccualOrDeductionType.Set(Row.AccrualType);
+		NewRecord = RecordSet.Add();
+	
+		NewRecord.Period = Ref.Date;
+		NewRecord.EmployeeOrPosition = Row.Employee;
+		NewRecord.AccualOrDeductionType = Row.AccrualType;
+		NewRecord.Value = Row.Salary;
+		NewRecord.Document = Ref;
+		RecordSet.Write();
+	EndDo;
+EndProcedure
 
 Procedure FormGetProcessing(FormType, Parameters, SelectedForm, AdditionalInfo, StandardProcessing)
 	If FormType = "ListForm" And FOServer.isUseSimpleMode() Then

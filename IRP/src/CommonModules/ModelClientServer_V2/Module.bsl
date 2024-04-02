@@ -435,6 +435,7 @@ Function GetChain()
 	Chain.Insert("ChangeSalaryByPosition"     , GetChainLink("ChangeSalaryByPositionExecute"));
 	Chain.Insert("ChangeSalaryByPositionOrEmployee"       , GetChainLink("ChangeSalaryByPositionOrEmployeeExecute"));
 	Chain.Insert("ChangeAccrualTypeByPositionOrEmployee"  , GetChainLink("ChangeAccrualTypeByPositionOrEmployeeExecute"));
+	Chain.Insert("ChangeSalaryBySalaryType", GetChainLink("ChangeSalaryBySalaryTypeExecute"));
 
 	// Extractors
 	Chain.Insert("ExtractDataAgreementApArPostingDetail"   , GetChainLink("ExtractDataAgreementApArPostingDetailExecute"));
@@ -4346,6 +4347,22 @@ EndFunction
 Function ChangeAccrualTypeByPositionOrEmployeeExecute(Options) Export
 	Result = SalaryServer.GetAccrualTypeByPositionOrEmployee(Options.Ref, Options.Date, Options.Employee, Options.Position);
 	Return Result;
+EndFunction
+
+#EndRegion
+
+#Region CHANGE_SALARY_BY_SALARY_TYPE
+
+Function ChangeSalaryBySalaryTypeOptions() Export
+	Return GetChainLinkOptions("SalaryType, CurrentSalary");
+EndFunction
+	
+Function ChangeSalaryBySalaryTypeExecute(Options) Export
+	If Options.SalaryType = PredefinedValue("Enum.SalaryTypes.Personal") Then
+		Return Options.CurrentSalary;
+	EndIf;
+	
+	Return Undefined;
 EndFunction
 
 #EndRegion

@@ -14725,6 +14725,74 @@ EndProcedure
 
 #EndRegion
 
+#Region EMPLOYEE_LIST
+
+#Region EMPLOYEE_LIST_SALARY_TYPE
+
+// EmployeeList.SalaryType.OnChange
+Procedure EmployeeListSalaryTypeOnChange(Parameters) Export
+	Binding = BindEmployeeListSalaryType(Parameters);
+	ModelClientServer_V2.EntryPoint(Binding.StepsEnabler, Parameters);
+EndProcedure
+
+// EmployeeList.SalaryType.Get
+Function GetEmployeeListSalaryType(Parameters, _Key)
+	Return GetPropertyObject(Parameters, BindEmployeeListSalaryType(Parameters).DataPath, _Key);
+EndFunction
+
+// EmployeeList.SalaryType.Bind
+Function BindEmployeeListSalaryType(Parameters)
+	DataPath = "EmployeeList.SalaryType";
+	Binding = New Structure();
+	Binding.Insert("OpeningEntry", "StepChangeSalaryBySalaryType");
+	
+	Return BindSteps("BindVoid", DataPath, Binding, Parameters, "BindEmployeeListSalaryType");
+EndFunction
+
+#Region EMPLOYEE_LIST_SALARY
+
+// EmployeeList.Salary.Set
+Procedure SetEmployeeListSalary(Parameters, Results) Export
+	Binding = BindEmployeeListSalary(Parameters);
+	SetterObject(Binding.StepsEnabler, Binding.DataPath, Parameters, Results);
+EndProcedure
+
+// EmployeeList.Salary.Get
+Function GetEmployeeListSalary(Parameters, _Key)
+	Return GetPropertyObject(Parameters, BindEmployeeListSalary(Parameters).DataPath, _Key);
+EndFunction
+
+// EmployeeList.Salary.Bind
+Function BindEmployeeListSalary(Parameters)
+	DataPath = "EmployeeList.Salary";
+	Binding = New Structure();
+	
+	Return BindSteps("BindVoid", DataPath, Binding, Parameters, "BindEmployeeListSalary");
+EndFunction
+
+// EmployeeList.Salary.ChangeSalaryBySalaryType.Step
+Procedure StepChangeSalaryBySalaryType(Parameters, Chain) Export
+	Chain.ChangeSalaryBySalaryType.Enable = True;
+	If Chain.Idle Then
+		Return;
+	EndIf;
+	Chain.ChangeSalaryBySalaryType.Setter = "SetEmployeeListSalary";
+	For Each Row In GetRows(Parameters, Parameters.TableName) Do
+		Options = ModelClientServer_V2.ChangeSalaryBySalaryTypeOptions();
+		Options.SalaryType      = GetEmployeeListSalaryType(Parameters, Row.Key);
+		Options.CurrentSalary   = GetEmployeeListSalary(Parameters, Row.Key);
+		Options.Key = Row.Key;
+		Options.StepName = "StepChangeSalaryBySalaryType";
+		Chain.ChangeSalaryBySalaryType.Options.Add(Options);
+	EndDo;
+EndProcedure
+
+#EndRegion
+
+#EndRegion
+
+#EndRegion
+
 #Region PAYROLL_LISTS
 
 #Region PAYROLL_LISTS_EMPLOYEE
@@ -15386,6 +15454,9 @@ Procedure ExecuteViewNotify(Parameters, ViewNotify)
 	ElsIf ViewNotify = "AdvanceFromRetailCustomersOnCopyRowFormNotify" Then ViewClient_V2.AdvanceFromRetailCustomersOnCopyRowFormNotify(Parameters);
 	ElsIf ViewNotify = "SalaryPaymentOnAddRowFormNotify"               Then ViewClient_V2.SalaryPaymentOnAddRowFormNotify(Parameters);
 	ElsIf ViewNotify = "SalaryPaymentOnCopyRowFormNotify"              Then ViewClient_V2.SalaryPaymentOnCopyRowFormNotify(Parameters);
+	
+	ElsIf ViewNotify = "EmployeeListOnAddRowFormNotify"               Then ViewClient_V2.EmployeeListOnAddRowFormNotify(Parameters);
+	ElsIf ViewNotify = "EmployeeListOnCopyRowFormNotify"              Then ViewClient_V2.EmployeeListOnCopyRowFormNotify(Parameters);
 	
 	ElsIf ViewNotify = "OnSetPayrollListsAmountNotify" Then ViewClient_V2.OnSetPayrollListsAmountNotify(Parameters);
 	ElsIf ViewNotify = "OnSetSalaryAmountNotify" Then ViewClient_V2.OnSetSalaryAmountNotify(Parameters);

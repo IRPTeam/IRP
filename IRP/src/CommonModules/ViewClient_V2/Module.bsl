@@ -1245,6 +1245,39 @@ EndProcedure
 
 #EndRegion
 
+#Region EMPLOYEE_LIST
+
+Function EmployeeListBeforeAddRow(Object, Form, Cancel = False, Clone = False, CurrentData = Undefined) Export
+	NewRow = AddOrCopyRow(Object, Form, "EmployeeList", Cancel, Clone, CurrentData,
+		"EmployeeListOnAddRowFormNotify", "EmployeeListOnCopyRowFormNotify");
+	Form.Items.EmployeeList.CurrentRow = NewRow.GetID();
+	If Form.Items.EmployeeList.CurrentRow <> Undefined Then
+		Form.Items.EmployeeList.ChangeRow();
+	EndIf;
+	Return NewRow;
+EndFunction
+
+Procedure EmployeeListOnAddRowFormNotify(Parameters) Export
+	Parameters.Form.Modified = True;
+EndProcedure
+
+Procedure EmployeeListOnCopyRowFormNotify(Parameters) Export
+	Parameters.Form.Modified = True;
+EndProcedure
+
+Procedure EmployeeListAfterDeleteRow(Object, Form) Export
+	DeleteRows(Object, Form, "EmployeeList");
+EndProcedure
+
+// EmployeeList.SalaryType
+Procedure EmployeeListSalaryTypeOnChange(Object, Form, CurrentData = Undefined) Export
+	Rows = GetRowsByCurrentData(Form, "EmployeeList", CurrentData);
+	Parameters = GetSimpleParameters(Object, Form, "EmployeeList", Rows);
+	ControllerClientServer_V2.EmployeeListSalaryTypeOnChange(Parameters);
+EndProcedure
+
+#EndRegion
+
 #Region SHIPMENT_TO_TRADE_AGENT
 
 Function ShipmentToTradeAgentBeforeAddRow(Object, Form, Cancel = False, Clone = False, CurrentData = Undefined) Export

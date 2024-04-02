@@ -407,16 +407,14 @@ Scenario: _0401572 check Retail Sales order movements by the Register  "R3026 Sa
 			| 'Number'    |
 			| '314'       |
 	* Check movements by the Register  "R3026 Sales orders customer advance" 
-		And I click "Registrations report" button
+		And I click "Registrations report info" button
 		And I select "R3026 Sales orders customer advance" exact value from "Register" drop-down list
 		And I click "Generate report" button
 		Then "ResultTable" spreadsheet document is equal
-			| 'Sales order 314 dated 09.01.2023 12:49:08'         | ''              | ''                      | ''            | ''             | ''               | ''         | ''                    | ''           | ''                  | ''                                            | ''          | ''               | ''                   | ''                |
-			| 'Document registrations records'                    | ''              | ''                      | ''            | ''             | ''               | ''         | ''                    | ''           | ''                  | ''                                            | ''          | ''               | ''                   | ''                |
-			| 'Register  "R3026 Sales orders customer advance"'   | ''              | ''                      | ''            | ''             | ''               | ''         | ''                    | ''           | ''                  | ''                                            | ''          | ''               | ''                   | ''                |
-			| ''                                                  | 'Record type'   | 'Period'                | 'Resources'   | ''             | 'Dimensions'     | ''         | ''                    | ''           | ''                  | ''                                            | ''          | ''               | ''                   | ''                |
-			| ''                                                  | ''              | ''                      | 'Amount'      | 'Commission'   | 'Company'        | 'Branch'   | 'Payment type enum'   | 'Currency'   | 'Retail customer'   | 'Order'                                       | 'Account'   | 'Payment type'   | 'Payment terminal'   | 'Bank term'       |
-			| ''                                                  | 'Receipt'       | '09.01.2023 12:49:08'   | '1 000'       | '20'           | 'Main Company'   | ''         | 'Card'                | 'TRY'        | 'Sam Jons'          | 'Sales order 314 dated 09.01.2023 12:49:08'   | ''          | 'Card 02'        | ''                   | 'Bank term 01'    |
+			| 'Sales order 314 dated 09.01.2023 12:49:08'       | ''                    | ''           | ''             | ''       | ''                  | ''         | ''                | ''                                          | ''        | ''             | ''                 | ''             | ''       | ''           |
+			| 'Register  "R3026 Sales orders customer advance"' | ''                    | ''           | ''             | ''       | ''                  | ''         | ''                | ''                                          | ''        | ''             | ''                 | ''             | ''       | ''           |
+			| ''                                                | 'Period'              | 'RecordType' | 'Company'      | 'Branch' | 'Payment type enum' | 'Currency' | 'Retail customer' | 'Order'                                     | 'Account' | 'Payment type' | 'Payment terminal' | 'Bank term'    | 'Amount' | 'Commission' |
+			| ''                                                | '09.01.2023 12:49:08' | 'Receipt'    | 'Main Company' | ''       | 'Card'              | 'TRY'      | 'Sam Jons'        | 'Sales order 314 dated 09.01.2023 12:49:08' | ''        | 'Card 02'      | ''                 | 'Bank term 01' | '1 000'  | '20'         |	
 		And I close all client application windows
 
 Scenario: _0401574 check there is no Sales order movements by the Register  "R3026 Sales orders customer advance"

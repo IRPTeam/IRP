@@ -713,16 +713,14 @@ Scenario: _0424284 check Retail sales receipt movements by the Register  "R2006 
 			| 'Number'    |
 			| '16'       |
 	* Check movements by the Register  "R2006 Certificates"
-		And I click "Registrations report" button
+		And I click "Registrations report info" button
 		And I select "R2006 Certificates" exact value from "Register" drop-down list
 		And I click "Generate report" button
 		Then "ResultTable" spreadsheet document is equal
-			| 'Retail sales receipt 16 dated 22.08.2023 11:22:15' | ''                    | ''          | ''       | ''           | ''                  | ''              |
-			| 'Document registrations records'                    | ''                    | ''          | ''       | ''           | ''                  | ''              |
-			| 'Register  "R2006 Certificates"'                    | ''                    | ''          | ''       | ''           | ''                  | ''              |
-			| ''                                                  | 'Period'              | 'Resources' | ''       | 'Dimensions' | ''                  | 'Attributes'    |
-			| ''                                                  | ''                    | 'Quantity'  | 'Amount' | 'Currency'   | 'Serial lot number' | 'Movement type' |
-			| ''                                                  | '22.08.2023 11:22:15' | '-1'        | '-500'   | 'TRY'        | '99999999999'       | 'Used'          |	
+			| 'Retail sales receipt 16 dated 22.08.2023 11:22:15' | ''                    | ''         | ''                  | ''         | ''       | ''              |
+			| 'Register  "R2006 Certificates"'                    | ''                    | ''         | ''                  | ''         | ''       | ''              |
+			| ''                                                  | 'Period'              | 'Currency' | 'Serial lot number' | 'Quantity' | 'Amount' | 'Movement type' |
+			| ''                                                  | '22.08.2023 11:22:15' | 'TRY'      | '99999999999'       | '-1'       | '-500'   | 'Used'          |	
 		And I close all client application windows
 
 Scenario: _0424285 check postponed Retail sales receipt movements

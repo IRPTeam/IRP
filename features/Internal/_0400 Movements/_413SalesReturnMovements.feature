@@ -962,19 +962,17 @@ Scenario: _041331 check Sales return movements by the Register  "R4050 Stock inv
 			| 'Number'    |
 			| '192'       |
 	* Check movements by the Register  "R4050 Stock inventory"
-		And I click "Registrations report" button
+		And I click "Registrations report info" button
 		And I select "R4050 Stock inventory" exact value from "Register" drop-down list
 		And I click "Generate report" button
 		Then "ResultTable" spreadsheet document is equal
-			| 'Sales return 192 dated 02.11.2022 10:53:27'   | ''              | ''                      | ''            | ''               | ''                    | ''            |
-			| 'Document registrations records'               | ''              | ''                      | ''            | ''               | ''                    | ''            |
-			| 'Register  "R4050 Stock inventory"'            | ''              | ''                      | ''            | ''               | ''                    | ''            |
-			| ''                                             | 'Record type'   | 'Period'                | 'Resources'   | 'Dimensions'     | ''                    | ''            |
-			| ''                                             | ''              | ''                      | 'Quantity'    | 'Company'        | 'Store'               | 'Item key'    |
-			| ''                                             | 'Receipt'       | '02.11.2022 10:53:27'   | '1'           | 'Main Company'   | 'Store 01'            | 'XS/Blue'     |
-			| ''                                             | 'Receipt'       | '02.11.2022 10:53:27'   | '4'           | 'Main Company'   | 'Store 01'            | 'PZU'         |
-			| ''                                             | 'Expense'       | '02.11.2022 10:53:27'   | '1'           | 'Main Company'   | 'Trade agent store'   | 'XS/Blue'     |
-			| ''                                             | 'Expense'       | '02.11.2022 10:53:27'   | '4'           | 'Main Company'   | 'Trade agent store'   | 'PZU'         |
+			| 'Sales return 192 dated 02.11.2022 10:53:27' | ''                    | ''           | ''             | ''                  | ''         | ''         |
+			| 'Register  "R4050 Stock inventory"'          | ''                    | ''           | ''             | ''                  | ''         | ''         |
+			| ''                                           | 'Period'              | 'RecordType' | 'Company'      | 'Store'             | 'Item key' | 'Quantity' |
+			| ''                                           | '02.11.2022 10:53:27' | 'Receipt'    | 'Main Company' | 'Store 01'          | 'XS/Blue'  | '1'        |
+			| ''                                           | '02.11.2022 10:53:27' | 'Receipt'    | 'Main Company' | 'Store 01'          | 'PZU'      | '4'        |
+			| ''                                           | '02.11.2022 10:53:27' | 'Expense'    | 'Main Company' | 'Trade agent store' | 'XS/Blue'  | '1'        |
+			| ''                                           | '02.11.2022 10:53:27' | 'Expense'    | 'Main Company' | 'Trade agent store' | 'PZU'      | '4'        |	
 		And I close all client application windows	
 	
 

@@ -258,18 +258,16 @@ Scenario: _044109 check Cash revenue movements by the Register "R3011 Cash flow"
 			| 'Number'    |
 			| '1'         |
 	* Check movements by the Register  "R3011 Cash flow" 
-		And I click "Registrations report" button
+		And I click "Registrations report info" button
 		And I select "R3011 Cash flow" exact value from "Register" drop-down list
 		And I click "Generate report" button
 		Then "ResultTable" spreadsheet document is equal
-			| 'Cash revenue 1 dated 07.09.2020 19:24:49' | ''                    | ''          | ''             | ''        | ''                  | ''          | ''                        | ''                 | ''                | ''         | ''                             | ''                     |
-			| 'Document registrations records'           | ''                    | ''          | ''             | ''        | ''                  | ''          | ''                        | ''                 | ''                | ''         | ''                             | ''                     |
-			| 'Register  "R3011 Cash flow"'              | ''                    | ''          | ''             | ''        | ''                  | ''          | ''                        | ''                 | ''                | ''         | ''                             | ''                     |
-			| ''                                         | 'Period'              | 'Resources' | 'Dimensions'   | ''        | ''                  | ''          | ''                        | ''                 | ''                | ''         | ''                             | 'Attributes'           |
-			| ''                                         | ''                    | 'Amount'    | 'Company'      | 'Branch'  | 'Account'           | 'Direction' | 'Financial movement type' | 'Cash flow center' | 'Planning period' | 'Currency' | 'Multi currency movement type' | 'Deferred calculation' |
-			| ''                                         | '07.09.2020 19:24:49' | '20,2'      | 'Main Company' | 'Shop 01' | 'Bank account, TRY' | 'Incoming'  | 'Movement type 1'         | 'Front office'     | ''                | 'USD'      | 'Reporting currency'           | 'No'                   |
-			| ''                                         | '07.09.2020 19:24:49' | '118'       | 'Main Company' | 'Shop 01' | 'Bank account, TRY' | 'Incoming'  | 'Movement type 1'         | 'Front office'     | ''                | 'TRY'      | 'Local currency'               | 'No'                   |
-			| ''                                         | '07.09.2020 19:24:49' | '118'       | 'Main Company' | 'Shop 01' | 'Bank account, TRY' | 'Incoming'  | 'Movement type 1'         | 'Front office'     | ''                | 'TRY'      | 'en description is empty'      | 'No'                   |		
+			| 'Cash revenue 1 dated 07.09.2020 19:24:49' | ''                    | ''             | ''        | ''                  | ''          | ''                        | ''                 | ''                | ''         | ''                             | ''       | ''                     |
+			| 'Register  "R3011 Cash flow"'              | ''                    | ''             | ''        | ''                  | ''          | ''                        | ''                 | ''                | ''         | ''                             | ''       | ''                     |
+			| ''                                         | 'Period'              | 'Company'      | 'Branch'  | 'Account'           | 'Direction' | 'Financial movement type' | 'Cash flow center' | 'Planning period' | 'Currency' | 'Multi currency movement type' | 'Amount' | 'Deferred calculation' |
+			| ''                                         | '07.09.2020 19:24:49' | 'Main Company' | 'Shop 01' | 'Bank account, TRY' | 'Incoming'  | 'Movement type 1'         | 'Front office'     | ''                | 'TRY'      | 'Local currency'               | '118'    | 'No'                   |
+			| ''                                         | '07.09.2020 19:24:49' | 'Main Company' | 'Shop 01' | 'Bank account, TRY' | 'Incoming'  | 'Movement type 1'         | 'Front office'     | ''                | 'TRY'      | 'en description is empty'      | '118'    | 'No'                   |
+			| ''                                         | '07.09.2020 19:24:49' | 'Main Company' | 'Shop 01' | 'Bank account, TRY' | 'Incoming'  | 'Movement type 1'         | 'Front office'     | ''                | 'USD'      | 'Reporting currency'           | '20,2'   | 'No'                   |
 	And I close all client application windows
 
 Scenario: _044130 Cash revenue clear posting/mark for deletion

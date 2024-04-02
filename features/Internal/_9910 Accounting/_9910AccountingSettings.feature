@@ -16,6 +16,7 @@ Background:
 Scenario: _099100 preparation
 	When set True value to the constant
 	When set True value to the constant Use accounting
+	When set True value to the constant Use fixed assets
 	* Load info (TestDB)
 		When Create catalog AddAttributeAndPropertySets objects (test data base)
 		When Create catalog AddAttributeAndPropertyValues objects (test data base)
@@ -134,6 +135,9 @@ Scenario: _099100 preparation
 		When Create information register UserSettings records (test data base)
 		When Create document CashStatement objects  (test data base)
 		When Create catalog PartnerItems objects (test data base)
+		When Create catalog FixedAssetsLedgerTypes objects (test data base)
+		When Create catalog DepreciationSchedules objects (test data base)
+		When Create catalog FixedAssets objects (test data base)
 	* Load data for Accounting system
 		When Create chart of characteristic types AccountingExtraDimensionTypes objects (test data base)
 		When Create chart of accounts Basic objects with LedgerTypeVariants (Basic LTV) (test data base)

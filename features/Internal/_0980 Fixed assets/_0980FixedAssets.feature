@@ -70,10 +70,11 @@ Scenario: _980001 preparation (fixed assets)
 		When Create information register Taxes records (VAT)
 		When Create test data for fixed assets
 		When Create document PurchaseInvoice and Calculation movement cost objects (fixed assets)
-		And I execute 1C:Enterprise script at server
-			| "Documents.PurchaseInvoice.FindByNumber(78).GetObject().Write(DocumentWriteMode.Posting);"    |
-		And I execute 1C:Enterprise script at server
-			| "Documents.PurchaseInvoice.FindByNumber(79).GetObject().Write(DocumentWriteMode.Posting);"    |
+		* Posting Purchase invoice
+			Given I open hyperlink "e1cib/list/Document.PurchaseInvoice"
+			Then I select all lines of "List" table
+			And in the table "List" I click the button named "ListContextMenuPost"
+			And Delay "5"
 		* Posting Calculation movement costs
 			Given I open hyperlink "e1cib/list/Document.CalculationMovementCosts"
 			Then "Calculation movement costs" window is opened
@@ -278,6 +279,12 @@ Scenario: _980007 create commissioning of fixed asset
 
 Scenario: _9800020 create depreciation calculation
 	And I close all client application windows
+	* Preparation (calculation movement cost)
+		Given I open hyperlink "e1cib/list/Document.CalculationMovementCosts"
+		Then "Calculation movement costs" window is opened
+		Then I select all lines of "List" table
+		And in the table "List" I click the button named "ListContextMenuPost"
+		And Delay "5"
 	* Create deprecation calculation for first month
 		Given I open hyperlink "e1cib/list/Document.DepreciationCalculation"
 		And I click "Create" button	
@@ -295,6 +302,7 @@ Scenario: _9800020 create depreciation calculation
 		Then the number of "Calculations" table lines is "равно" 0
 	* Fill deprecation calculation for second month
 		And I input "29.02.2024 00:00:00" text in the field named "Date"
+		And I move to the next attribute
 		And in the table "Calculations" I click "Fill calculations" button
 		And "Calculations" table became equal
 			| '#' | 'Fixed asset'      | 'Profit loss center'   | 'Ledger type'                          | 'Schedule'                  | 'Calculation method' | 'Currency' | 'Expense type' | 'Amount balance' | 'Amount' |
@@ -356,5 +364,4 @@ Scenario: _9800021 check filter by branch for Depreciation calculation
 		And I click Choice button of the field named "Date"
 		And in the table "Calculations" I click "Fill calculations" button
 		Then the number of "Calculations" table lines is "равно" 0
-	And I close all client application windows
-	
+	And I close all client application windows	

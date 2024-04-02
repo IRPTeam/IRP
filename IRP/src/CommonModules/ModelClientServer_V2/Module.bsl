@@ -2863,7 +2863,7 @@ Function CalculateTaxAmount(RateRef, PriceIncludeTax, TotalAmount, NetAmount, Re
 			TaxAmount = NetAmount * TaxRate;
 		EndIf;
 	EndIf;
-	Return TaxAmount;
+	Return Round(TaxAmount, 2);
 EndFunction
 
 Function SimpleCalculationsOptions() Export

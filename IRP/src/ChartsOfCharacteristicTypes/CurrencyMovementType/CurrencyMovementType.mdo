@@ -31,7 +31,6 @@
   <predefined>
     <items id="f71f3bfa-242f-4c9c-9e10-2d66fe1c1801">
       <name>SettlementCurrency</name>
-      <description>Settlement currency</description>
       <type>
         <types>EnumRef.CurrencyType</types>
       </type>

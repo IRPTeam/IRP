@@ -47,6 +47,7 @@ Procedure PostingCheckBeforeWrite(Ref, Cancel, PostingMode, Parameters, AddInfo 
 	Tables.R3011T_CashFlow.Columns.Add("Key", Metadata.DefinedTypes.typeRowID.Type);
 	Tables.R3021B_CashInTransitIncoming.Columns.Add("Key", Metadata.DefinedTypes.typeRowID.Type);
 	Tables.R5015B_OtherPartnersTransactions.Columns.Add("Key", Metadata.DefinedTypes.typeRowID.Type);
+	Tables.R5020B_PartnersBalance.Columns.Add("Key", Metadata.DefinedTypes.typeRowID.Type);
 
 	PostingServer.FillPostingTables(Tables, Ref, QueryArray, Parameters);
 EndProcedure
@@ -138,6 +139,7 @@ Function GetQueryTextsMasterTables()
 	QueryArray.Add(T1040T_AccountingAmounts());
 	QueryArray.Add(T2014S_AdvancesInfo());
 	QueryArray.Add(T2015S_TransactionsInfo());
+	QueryArray.Add(R5020B_PartnersBalance());
 	Return QueryArray;
 EndFunction
 
@@ -152,6 +154,7 @@ Function PaymentList()
 		|	PaymentList.Ref.Currency AS Currency,
 		|	PaymentList.Ref.Account AS Account,
 		|	PaymentList.Ref.TransitAccount AS TransitAccount,
+		|	PaymentList.Ref.TransitAccount.Currency AS TransitCurrency,
 		|	CASE
 		|		WHEN PaymentList.Agreement.ApArPostingDetail = VALUE(Enum.ApArPostingDetail.ByDocuments)
 		|			THEN CASE
@@ -220,7 +223,7 @@ Function PaymentList()
 		|	PaymentList.Ref.TransactionType = VALUE(Enum.OutgoingPaymentTransactionTypes.ReturnToCustomer) AS IsReturnToCustomer,
 		|	PaymentList.Ref.TransactionType = VALUE(Enum.OutgoingPaymentTransactionTypes.ReturnToCustomerByPOS) AS
 		|		IsReturnToCustomerByPOS,
-		|	PaymentList.Ref.TransactionType = VALUE(Enum.OutgoingPaymentTransactionTypes.CustomerAdvance) AS IsCustomerAdvance,
+		|	PaymentList.Ref.TransactionType = VALUE(Enum.OutgoingPaymentTransactionTypes.RetailCustomerAdvance) AS IsCustomerAdvance,
 		|	PaymentList.Ref.TransactionType = VALUE(Enum.OutgoingPaymentTransactionTypes.EmployeeCashAdvance) AS
 		|		IsEmployeeCashAdvance,
 		|	PaymentList.Ref.TransactionType = VALUE(Enum.OutgoingPaymentTransactionTypes.SalaryPayment) AS IsSalaryPayment,
@@ -360,22 +363,39 @@ Function R1021B_VendorsTransactions()
 EndFunction
 
 Function R3021B_CashInTransitIncoming()
-	Return "SELECT
-		   |	VALUE(AccumulationRecordType.Receipt) AS RecordType,
-		   |	PaymentList.Period,
-		   |	PaymentList.Company,
-		   |	PaymentList.ReceiptingBranch AS Branch,
-		   |	PaymentList.ReceiptingCurrency AS Currency,
-		   |	PaymentList.ReceiptingAccount AS Account,
-		   |	PaymentList.CashTransferOrder AS Basis,
-		   |	PaymentList.Key,
-		   |	PaymentList.TotalAmount AS Amount
-		   |INTO R3021B_CashInTransitIncoming
-		   |FROM
-		   |	PaymentList AS PaymentList
-		   |WHERE
-		   |	PaymentList.IsCashTransferOrder
-		   |	OR PaymentList.IsCurrencyExchange";
+	Return 
+		"SELECT
+		|	VALUE(AccumulationRecordType.Receipt) AS RecordType,
+		|	PaymentList.Period,
+		|	PaymentList.Company,
+		|	PaymentList.ReceiptingBranch AS Branch,
+		|	PaymentList.ReceiptingCurrency AS Currency,
+		|	PaymentList.ReceiptingAccount AS Account,
+		|	PaymentList.CashTransferOrder AS Basis,
+		|	PaymentList.Key,
+		|	PaymentList.TotalAmount AS Amount
+		|INTO R3021B_CashInTransitIncoming
+		|FROM
+		|	PaymentList AS PaymentList
+		|WHERE
+		|	PaymentList.IsCashTransferOrder
+		|
+		|UNION ALL
+		|
+		|SELECT
+		|	VALUE(AccumulationRecordType.Receipt) AS RecordType,
+		|	PaymentList.Period,
+		|	PaymentList.Company,
+		|	PaymentList.Branch,
+		|	PaymentList.TransitCurrency,
+		|	PaymentList.TransitAccount,
+		|	PaymentList.CashTransferOrder,
+		|	PaymentList.Key,
+		|	PaymentList.TotalAmount AS Amount
+		|FROM
+		|	PaymentList AS PaymentList
+		|WHERE
+		|	PaymentList.IsCurrencyExchange";
 EndFunction
 
 Function R9510B_SalaryPayment()
@@ -682,6 +702,10 @@ Function R3050T_PosCashBalances()
 		   |	PaymentList AS PaymentList
 		   |WHERE
 		   |	PaymentList.IsReturnToCustomerByPOS";
+EndFunction
+
+Function R5020B_PartnersBalance()
+	Return AccumulationRegisters.R5020B_PartnersBalance.R5020B_PartnersBalance_BP_CP();
 EndFunction
 
 #EndRegion

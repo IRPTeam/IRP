@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mdclass:Document xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" xmlns:mdclassExtension="http://g5.1c.ru/v8/dt/metadata/mdclass/extension" uuid="c2919e81-9224-449f-b79f-3e609d68210c" extendedConfigurationObject="09155f26-d73b-4f82-8c54-a553f7ffccf4">
+  <producedTypes>
+    <objectType typeId="36ff07ce-bdd0-4918-bd4a-e45ed2d8cc52" valueTypeId="16265840-6dcc-4a5d-8a47-d7d820745bef"/>
+    <refType typeId="3654c206-aa2a-4297-b1c3-32f318400208" valueTypeId="072765f3-1aef-4d36-9b22-6ac01a1affce"/>
+    <selectionType typeId="d1320c54-fd3c-4eac-bf4a-165661b74c59" valueTypeId="d36202bd-ffca-4225-bb72-79e5b3e5e0c8"/>
+    <listType typeId="75fb9902-259a-4495-bbc8-e62585477c46" valueTypeId="3c407d1c-1cb1-4ebf-b5f0-eab22ae406de"/>
+    <managerType typeId="92e7022c-7b8a-4cef-988f-2d86fbd21666" valueTypeId="1dfa15ae-627b-4f18-8dba-3e2a9d0d729f"/>
+  </producedTypes>
+  <name>ProductionCostsAllocation</name>
+  <objectBelonging>Adopted</objectBelonging>
+  <extension xsi:type="mdclassExtension:DocumentExtension">
+    <extendedConfigurationObject>Checked</extendedConfigurationObject>
+  </extension>
+  <useStandardCommands>true</useStandardCommands>
+</mdclass:Document>

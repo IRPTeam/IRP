@@ -612,12 +612,12 @@ After that - all jobs in CURRENT session will be start as common code, not like 
     <autoFill>true</autoFill>
   </autoCommandBar>
   <handlers>
-    <event>OnCreateAtServer</event>
-    <name>OnCreateAtServer</name>
-  </handlers>
-  <handlers>
     <event>OnOpen</event>
     <name>OnOpen</name>
+  </handlers>
+  <handlers>
+    <event>OnCreateAtServer</event>
+    <name>OnCreateAtServer</name>
   </handlers>
   <autoTitle>true</autoTitle>
   <autoUrl>true</autoUrl>
@@ -829,7 +829,7 @@ After that - all jobs in CURRENT session will be start as common code, not like 
       <common>true</common>
     </use>
     <picture xsi:type="core:PictureRef">
-      <picture>StdPicture.RotateCounterClockwise</picture>
+      <picture>StdPicture.RotateCounterclockwise</picture>
     </picture>
     <action xsi:type="form:FormCommandHandlerContainer">
       <handler>

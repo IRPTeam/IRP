@@ -98,6 +98,8 @@
     <type>
       <types>EnumRef.AddressTypes</types>
     </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
     <fillChecking>ShowError</fillChecking>
     <fillValue xsi:type="core:ReferenceValue">
       <value>Enum.AddressTypes.EnumValue.Other</value>

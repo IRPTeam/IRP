@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mdclass:Document xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" xmlns:mdclassExtension="http://g5.1c.ru/v8/dt/metadata/mdclass/extension" uuid="edf71ad0-cb47-4e1d-91b4-b65c2ae1e9dc" extendedConfigurationObject="a8da6ee1-1c0c-49ce-b054-b73330fa1dd1">
+  <producedTypes>
+    <objectType typeId="3c9de088-faf2-4f4c-a049-c8071f2d3872" valueTypeId="36315bd2-d0ae-486e-ba41-b5dd04e2621e"/>
+    <refType typeId="17e8193e-bf24-49b6-9eed-ea76e38faddf" valueTypeId="9cf30d4d-c08c-42e1-93ee-9637cf2cab76"/>
+    <selectionType typeId="129758ea-ad24-4f77-913e-ae13734db419" valueTypeId="47e5a952-ebd2-4e81-8453-ea0df7998b7c"/>
+    <listType typeId="c87baa14-e68d-4d09-bd96-8b6df7f58072" valueTypeId="a1f49a24-2f58-4133-8f08-eb5238676aa8"/>
+    <managerType typeId="17124a88-d428-4d68-88fc-3537fd417822" valueTypeId="3f9c2d07-ec2e-411e-99ba-56525877843f"/>
+  </producedTypes>
+  <name>Bundling</name>
+  <objectBelonging>Adopted</objectBelonging>
+  <extension xsi:type="mdclassExtension:DocumentExtension">
+    <extendedConfigurationObject>Checked</extendedConfigurationObject>
+  </extension>
+  <useStandardCommands>true</useStandardCommands>
+</mdclass:Document>

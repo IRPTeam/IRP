@@ -60,3 +60,36 @@ Function Is(Object)
 	Result.Insert("OutgoingPaymentOrder", TypeOf(Object.Ref) = Type("DocumentRef.OutgoingPaymentOrder"));
 	Return Result;
 EndFunction
+
+Procedure FillCheckProcessing_BankReceipt_CurrencyExchange(Object, Cancel) Export
+	Query = New Query();
+	Query.Text = 
+	"SELECT
+	|	R3021B_CashInTransitIncoming.Amount
+	|FROM
+	|	AccumulationRegister.R3021B_CashInTransitIncoming AS R3021B_CashInTransitIncoming
+	|WHERE
+	|	R3021B_CashInTransitIncoming.Basis IN (&ArrayOfBasises)
+	|	AND R3021B_CashInTransitIncoming.Amount <> 0
+	|	AND R3021B_CashInTransitIncoming.Recorder <> &Ref
+	|	AND R3021B_CashInTransitIncoming.Recorder REFS Document.BankPayment";
+	
+	ArrayOfBasises = New Array();
+	For Each Row In Object.PaymentList Do
+		If ValueIsFilled(Row.PlaningTransactionBasis) Then
+			ArrayOfBasises.Add(Row.PlaningTransactionBasis);
+		EndIf;
+	EndDo;
+			
+	Query.SetParameter("ArrayOfBasises", ArrayOfBasises);		
+	Query.SetParameter("Ref", Object.Ref);
+	
+	QueryResult = Query.Execute();
+	QuerySelection = QueryResult.Select();
+	
+	If Not QuerySelection.Next() Then
+		Cancel = True;
+		CommonFunctionsClientServer.ShowUsersMessage(R().Error_143);
+	EndIf;
+EndProcedure
+

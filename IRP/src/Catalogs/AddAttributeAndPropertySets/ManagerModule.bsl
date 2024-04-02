@@ -118,6 +118,7 @@ EndFunction
 
 Procedure SynchronizeAttributes(Set, ArrayOfAttributes)
 	If Not TransactionActive() Then
+		//@skip-check rollback-transaction, commit-transaction
 		BeginTransaction(DataLockControlMode.Managed);
 		Try
 			WriteDataToObject(Set, ArrayOfAttributes);

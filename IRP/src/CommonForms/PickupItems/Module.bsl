@@ -225,6 +225,7 @@ Procedure ItemTypeAfterSelection()
 		If Not QueryPriceExecution.IsEmpty() Then
 			QueryPriceUnload = QueryPriceExecution.Unload();
 			LastQuery = New Query();
+			//@skip-check bsl-ql-hub
 			QueryText = "SELECT
 						|	Items.Item,
 						|	Items.Unit,

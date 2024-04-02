@@ -57,7 +57,6 @@ Async Procedure CurrencyOnChange(Item)
 	EndIf;
 EndProcedure
 
-
 &AtClient
 Procedure ExtDimensionTypesOnStartEdit(Item, NewRow, Clone)
 	If Not Clone And  NewRow Then
@@ -66,5 +65,4 @@ Procedure ExtDimensionTypesOnStartEdit(Item, NewRow, Clone)
 		Item.CurrentData.Quantity = Object.Quantity;
 	EndIf;
 EndProcedure
-
 

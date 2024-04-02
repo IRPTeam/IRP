@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mdclass:Document xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" xmlns:mdclassExtension="http://g5.1c.ru/v8/dt/metadata/mdclass/extension" uuid="dd38c466-3a1e-4f6f-b7c1-755fec3cfd3d" extendedConfigurationObject="d56cd891-e01f-4c0c-b88b-661fc7d66815">
+  <producedTypes>
+    <objectType typeId="5f2e006b-f966-4197-a441-055f880f2537" valueTypeId="14f7a940-432c-4d01-a5da-65a80175cfc1"/>
+    <refType typeId="705f52e6-dce1-4fd6-9267-c10abcf2c3c6" valueTypeId="5ff4f735-6c22-4153-83d3-f4c62517803f"/>
+    <selectionType typeId="167736b0-e24b-4f95-8893-93c547186894" valueTypeId="a7aae971-7ba3-4edb-9b34-1abe6a029772"/>
+    <listType typeId="b3bfedb2-1794-41c9-a395-9cd16aeef2fc" valueTypeId="96016ec1-bfca-44ca-8d66-22de134fc145"/>
+    <managerType typeId="ef89b69c-d175-4ae6-ba5b-4b29abe63dd5" valueTypeId="7b8726d3-5249-4e26-bba7-8240da27ed49"/>
+  </producedTypes>
+  <name>CashReceipt</name>
+  <objectBelonging>Adopted</objectBelonging>
+  <extension xsi:type="mdclassExtension:DocumentExtension">
+    <extendedConfigurationObject>Checked</extendedConfigurationObject>
+  </extension>
+  <useStandardCommands>true</useStandardCommands>
+</mdclass:Document>

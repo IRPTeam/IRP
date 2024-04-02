@@ -18,6 +18,14 @@
   <createOnInput>Use</createOnInput>
   <dataLockControlMode>Managed</dataLockControlMode>
   <fullTextSearch>Use</fullTextSearch>
+  <objectPresentation>
+    <key>en</key>
+    <value>Depreciation calculation</value>
+  </objectPresentation>
+  <listPresentation>
+    <key>en</key>
+    <value>Depreciation calculations</value>
+  </listPresentation>
   <numberLength>12</numberLength>
   <numberAllowedLength>Variable</numberAllowedLength>
   <checkUnique>true</checkUnique>
@@ -26,8 +34,8 @@
   <defaultListForm>Document.DepreciationCalculation.Form.ListForm</defaultListForm>
   <defaultChoiceForm>Document.DepreciationCalculation.Form.ChoiceForm</defaultChoiceForm>
   <realTimePosting>Deny</realTimePosting>
-  <registerRecords>AccumulationRegister.R8510B_BookValueOfFixedAsset</registerRecords>
   <registerRecords>AccumulationRegister.R5022T_Expenses</registerRecords>
+  <registerRecords>AccumulationRegister.R8510B_BookValueOfFixedAsset</registerRecords>
   <postInPrivilegedMode>true</postInPrivilegedMode>
   <unpostInPrivilegedMode>true</unpostInPrivilegedMode>
   <attributes uuid="0fb812b1-156c-4055-9a1c-a07db92ca4b5">

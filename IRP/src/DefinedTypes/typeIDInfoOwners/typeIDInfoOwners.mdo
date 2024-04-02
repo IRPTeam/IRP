@@ -11,8 +11,8 @@
   <type>
     <types>CatalogRef.Companies</types>
     <types>CatalogRef.Partners</types>
-    <types>CatalogRef.Stores</types>
-    <types>CatalogRef.AccrualAndDeductionTypes</types>
     <types>CatalogRef.EmployeePositions</types>
+    <types>CatalogRef.AccrualAndDeductionTypes</types>
+    <types>CatalogRef.Stores</types>
   </type>
 </mdclass:DefinedType>

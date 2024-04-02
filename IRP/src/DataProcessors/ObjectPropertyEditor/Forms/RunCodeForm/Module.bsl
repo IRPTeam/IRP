@@ -16,6 +16,7 @@ EndProcedure
 Procedure RunCodeAtServer()
 	SetSafeMode(True);
 	For Each ObjectRow In ObjectTable Do
+		//@skip-check module-unused-local-variable
 		ObjectRef = ObjectRow.Ref;
 		Execute(CodeText);
 	EndDo;	

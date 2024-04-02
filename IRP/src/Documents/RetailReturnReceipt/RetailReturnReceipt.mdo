@@ -147,6 +147,7 @@
   <registerRecords>AccumulationRegister.T1040T_AccountingAmounts</registerRecords>
   <registerRecords>AccumulationRegister.R4014B_SerialLotNumber</registerRecords>
   <registerRecords>AccumulationRegister.R5015B_OtherPartnersTransactions</registerRecords>
+  <registerRecords>AccumulationRegister.R5020B_PartnersBalance</registerRecords>
   <postInPrivilegedMode>true</postInPrivilegedMode>
   <unpostInPrivilegedMode>true</unpostInPrivilegedMode>
   <choiceHistoryOnInput>DontUse</choiceHistoryOnInput>
@@ -2008,6 +2009,13 @@
       <dataHistory>Use</dataHistory>
     </attributes>
   </tabularSections>
+  <templates uuid="717b7e6f-4f4c-4678-89c4-12b350d5d1e2">
+    <name>RetailReturnReceiptPrint</name>
+    <synonym>
+      <key>en</key>
+      <value>Retail return receipt</value>
+    </synonym>
+  </templates>
   <commands uuid="da583033-ea5c-4fa1-8143-846671611e1a">
     <name>Generate</name>
     <synonym>
@@ -2032,6 +2040,19 @@
     <commandParameterType>
       <types>DocumentRef.RetailReturnReceipt</types>
     </commandParameterType>
+    <representation>Auto</representation>
+  </commands>
+  <commands uuid="3820ead5-76a6-46b3-8566-d96dfbad38bc">
+    <name>RetailReturnReceiptPrint</name>
+    <synonym>
+      <key>en</key>
+      <value>Retail return receipt</value>
+    </synonym>
+    <group>CommandGroup.Print</group>
+    <commandParameterType>
+      <types>DocumentRef.RetailReturnReceipt</types>
+    </commandParameterType>
+    <parameterUseMode>Multiple</parameterUseMode>
     <representation>Auto</representation>
   </commands>
 </mdclass:Document>

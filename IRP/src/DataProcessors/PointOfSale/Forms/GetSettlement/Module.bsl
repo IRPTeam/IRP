@@ -1,6 +1,5 @@
 // @strict-types
 
-
 &AtServer
 Procedure OnCreateAtServer(Cancel, StandardProcessing)
 	Workstation = Parameters.Workstation;

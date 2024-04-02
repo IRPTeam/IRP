@@ -117,7 +117,6 @@ EndProcedure
 
 #EndRegion
 
-
 #Region POSITION
 
 &AtClient

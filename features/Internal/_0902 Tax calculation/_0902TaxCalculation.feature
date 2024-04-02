@@ -887,7 +887,7 @@ Scenario: _090216 check tax in the BP (depend of transaction type)
 			| 'Partner'     | 'Payee'               | 'Tax amount'   | 'Total amount'   | 'VAT'   | 'Net amount'    |
 			| 'Ferron BP'   | 'Company Ferron BP'   | '74,07'        | '1 000,00'       | '8%'    | '925,93'        |
 	* Change transaction type and check tax rate
-		And I select "Customer advance" exact value from "Transaction type" drop-down list
+		And I select "Retail customer advance" exact value from "Transaction type" drop-down list
 		Then "1C:Enterprise" window is opened
 		And I click "OK" button
 		And "PaymentList" table became equal
@@ -928,7 +928,7 @@ Scenario: _090217 check tax in the CP (depend of transaction type)
 			| 'Partner'     | 'Payee'               | 'Tax amount'   | 'Total amount'   | 'VAT'   | 'Net amount'    |
 			| 'Ferron BP'   | 'Company Ferron BP'   | '74,07'        | '1 000,00'       | '8%'    | '925,93'        |
 	* Change transaction type and check tax rate
-		And I select "Customer advance" exact value from "Transaction type" drop-down list
+		And I select "Retail customer advance" exact value from "Transaction type" drop-down list
 		Then "1C:Enterprise" window is opened
 		And I click "OK" button
 		And "PaymentList" table became equal

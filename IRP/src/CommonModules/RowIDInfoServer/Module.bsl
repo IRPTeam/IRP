@@ -2689,7 +2689,6 @@ Function ExtractData_FromSI(BasisesTable, DataReceiver, AddInfo = Undefined)
 	|		ON BasisesTable.Basis = SourceOfOrigins.Ref
 	|		AND BasisesTable.BasisKey = SourceOfOrigins.Key";
 
-
 	Query.SetParameter("BasisesTable", BasisesTable);
 	QueryResults = Query.ExecuteBatch();
 
@@ -11762,7 +11761,6 @@ Function _GetAllDataFromBasis(DocRef, Basis, BasisKey, RowID, CurrentStep, Propo
 			Return ExtractDataFromBasis(DocRef, BasisesInfo, ProportionalScaling, "ExtractData_FromSO");
 		EndIf;
 		
-
 		If BasisesInfo.Basis = BasisesInfo.RowRef.Basis Then
 			Break; // is root basis, top level
 		EndIf;

@@ -478,6 +478,7 @@ Procedure CreateDocuments(Parameters_Production = Undefined, Parameters_Inventor
 	ArrayOf_NewProduction = New Array();	
 	ArrayOf_NewInventoryTransfer = New Array();
 	
+	//@skip-check begin-transaction
 	BeginTransaction();
 	CreationDate = CommonFunctionsServer.GetCurrentSessionDate();
 	
@@ -503,6 +504,7 @@ Procedure CreateDocuments(Parameters_Production = Undefined, Parameters_Inventor
 		EndDo;
 	EndIf;    
 	
+	//@skip-check commit-transaction
 	CommitTransaction();
 
 	Clear();

@@ -1667,6 +1667,7 @@ Procedure LoadNewColumns(Form)
 			Path = StrReplace(Path, "TabularSection.", "");
 		EndIf;
 		
+		//@skip-check bsl-ql-hub
 		Query.Text = "SELECT T." + TypeOption_FieldRef.Name + " AS Ref FROM " + Path + " AS T";
 		If Not TypeOption_FieldFilter = Undefined Then
 			Query.Text = Query.Text + Chars.CR +

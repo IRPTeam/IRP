@@ -85,22 +85,20 @@ Function StatusHasPostingType(Status, PostingType) Export
 
 	Query = New Query();
 	Query.Text = "SELECT
-				 |	ObjectStatuses.PostingAdvanced AS Advanced,
-				 |	ObjectStatuses.PostingPartnerAccountTransactions AS PartnerAccountTransactions,
-				 |	ObjectStatuses.PostingReconciliationStatement AS ReconciliationStatement,
-				 |	ObjectStatuses.PostingAccountBalance AS AccountBalance,
-				 |	ObjectStatuses.PostingPlaningCashTransactions AS PlaningCashTransactions,
+				 |	ObjectStatuses.PostingCashPlanning AS PostingCashPlanning,
+				 |	ObjectStatuses.PostingCustomerTransactions AS PostingCustomerTransactions,
+				 |	ObjectStatuses.PostingVendorTransactions AS PostingVendorTransactions,
 				 |	ObjectStatuses.PostingChequeBondBalance AS ChequeBondBalance
 				 |FROM
 				 |	Catalog.ObjectStatuses AS ObjectStatuses
 				 |WHERE
 				 |	ObjectStatuses.Ref = &Ref
-				 |	AND ( ObjectStatuses.PostingAdvanced = &PostingType
-				 |	OR ObjectStatuses.PostingPartnerAccountTransactions = &PostingType
-				 |	OR ObjectStatuses.PostingReconciliationStatement = &PostingType
-				 |	OR ObjectStatuses.PostingAccountBalance = &PostingType
-				 |	OR ObjectStatuses.PostingPlaningCashTransactions = &PostingType
-				 |	Or ObjectStatuses.PostingChequeBondBalance = &PostingType)";
+				 |	AND (
+				 |		ObjectStatuses.PostingCashPlanning = &PostingType
+				 |		OR ObjectStatuses.PostingCustomerTransactions = &PostingType
+				 |		OR ObjectStatuses.PostingVendorTransactions = &PostingType
+				 |		OR ObjectStatuses.PostingChequeBondBalance = &PostingType
+				 |	)";
 	Query.SetParameter("Ref", Status);
 	Query.SetParameter("PostingType", PostingType);
 

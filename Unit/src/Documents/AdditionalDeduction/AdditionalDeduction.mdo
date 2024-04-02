@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mdclass:Document xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" xmlns:mdclassExtension="http://g5.1c.ru/v8/dt/metadata/mdclass/extension" uuid="b565d8dd-8cc7-4c61-a315-29eb7977ca61" extendedConfigurationObject="4c3747e2-f8d9-4165-b37d-5dc076841b55">
+  <producedTypes>
+    <objectType typeId="8ae68363-bfa5-4191-a511-7fead696ceae" valueTypeId="beeaa8d5-ef2c-4826-bfcc-6131fe48f0e3"/>
+    <refType typeId="c4f4c54c-0d5d-425a-be0d-244ccd529e08" valueTypeId="007bb973-500f-4719-9fb3-ba584fde106c"/>
+    <selectionType typeId="5a62cd57-4393-47d8-ad43-eca92486e4c8" valueTypeId="0da64ef5-dfb1-4b18-b076-62a17cb456d8"/>
+    <listType typeId="cdda0ab7-39e2-470c-b1e4-99c4ff11b5a4" valueTypeId="8a257e9e-c43c-4b7e-be7c-a152cdae4228"/>
+    <managerType typeId="0c31b066-223d-4461-b8c9-282e9afef394" valueTypeId="d5dda6c9-5da0-42d6-8e18-9609ff3fcd84"/>
+  </producedTypes>
+  <name>AdditionalDeduction</name>
+  <objectBelonging>Adopted</objectBelonging>
+  <extension xsi:type="mdclassExtension:DocumentExtension">
+    <extendedConfigurationObject>Checked</extendedConfigurationObject>
+  </extension>
+  <useStandardCommands>true</useStandardCommands>
+</mdclass:Document>

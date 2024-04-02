@@ -4,6 +4,134 @@ Function GetPrintForm(Ref, PrintFormName, AddInfo = Undefined) Export
 	Return Undefined;
 EndFunction
 
+Function Print(Ref, Param) Export
+	If StrCompare(Param.NameTemplate, "OpeningEntryPrint") = 0 Then
+		Return OpeningEntryPrint(Ref, Param);
+	EndIf;
+EndFunction
+
+// Sales Invoice print.
+// 
+// Parameters:
+//  Ref - DocumentRef.OpeningEntry
+//  Param - See UniversalPrintServer.InitPrintParam
+// 
+// Returns:
+//  SpreadsheetDocument - Opening entry print
+Function OpeningEntryPrint(Ref, Param)
+		
+	Template = GetTemplate("OpeningEntryPrint");
+	Template.LanguageCode = Param.LayoutLang;
+	Query = New Query;
+	Text =
+	"SELECT
+	|	DocumentHeader.Number AS Number,
+	|	DocumentHeader.Date AS Date,
+	|	DocumentHeader.Company.Description_en AS Company,
+	|	DocumentHeader.Author AS Author,
+	|	DocumentHeader.Ref AS Ref	
+	|FROM
+	|	Document.OpeningEntry AS DocumentHeader
+	|WHERE
+	|	DocumentHeader.Ref = &Ref
+	|;
+	|
+	|////////////////////////////////////////////////////////////////////////////////
+	|SELECT
+	|	DocumentItemList.ItemKey.Item.Description_en AS Item,
+	|	DocumentItemList.ItemKey.Description_en AS ItemKey,
+	|	DocumentItemList.Quantity AS Quantity,
+	|	DocumentItemList.Item.Unit AS Unit,
+	|	DocumentItemList.Price AS Price,
+	|	DocumentItemList.AmountTax AS TaxAmount,
+	|	DocumentItemList.Amount AS TotalAmount,
+	|	DocumentItemList.Amount AS NetAmount,
+	|	DocumentItemList.Ref AS Ref,
+	|	DocumentItemList.Key AS Key
+	|INTO Items
+	|FROM
+	|	Document.OpeningEntry.Inventory AS DocumentItemList
+	|WHERE
+	|	DocumentItemList.Ref = &Ref	
+	|;
+	|
+	|////////////////////////////////////////////////////////////////////////////////
+	|SELECT
+	|	Items.Item AS Item,
+	|	Items.ItemKey AS ItemKey,
+	|	Items.Quantity AS Quantity,
+	|	Items.Unit AS Unit,
+	|	Items.Price AS Price,
+	|	Items.TaxAmount AS TaxAmount,
+	|	Items.TotalAmount AS TotalAmount,
+	|	Items.NetAmount AS NetAmount,
+	|	Items.Ref AS Ref,
+	|	Items.Key AS Key
+	|FROM
+	|	Items AS Items";
+
+	LCode = Param.DataLang;
+	Text = LocalizationEvents.ReplaceDescriptionLocalizationPrefix(Text, "DocumentHeader.Company", LCode);
+	Text = LocalizationEvents.ReplaceDescriptionLocalizationPrefix(Text, "DocumentItemList.ItemKey.Item", LCode);
+	Text = LocalizationEvents.ReplaceDescriptionLocalizationPrefix(Text, "DocumentItemList.ItemKey", LCode);
+	Text = LocalizationEvents.ReplaceDescriptionLocalizationPrefix(Text, "DocumentItemList.Unit", LCode);
+	Query.Text = Text;                                                    
+
+	Query.Parameters.Insert("Ref", Ref);
+	Selection = Query.ExecuteBatch();
+	SelectionHeader = Selection[0].Select();
+	SelectionItems = Selection[2].Unload();
+	SelectionItems.Indexes.Add("Ref");
+
+	AreaCaption = Template.GetArea("Caption");
+	AreaHeader = Template.GetArea("Header");
+	AreaItemListHeader = Template.GetArea("ItemListHeader|ItemColumn");
+	AreaItemList = Template.GetArea("ItemList|ItemColumn");
+	AreaFooter = Template.GetArea("Footer");
+
+	Spreadsheet = New SpreadsheetDocument;
+	Spreadsheet.LanguageCode = Param.LayoutLang;
+
+	While SelectionHeader.Next() Do
+		AreaCaption.Parameters.Fill(SelectionHeader);
+		Spreadsheet.Put(AreaCaption);
+
+		AreaHeader.Parameters.Fill(SelectionHeader);
+		Spreadsheet.Put(AreaHeader);
+
+		Spreadsheet.Put(AreaItemListHeader);
+			
+		Choice	= New Structure("Ref", SelectionHeader.Ref);
+		FindRow = SelectionItems.FindRows(Choice);
+
+		Number = 0;
+		TotalSum = 0;
+		TotalTax = 0;
+		TotalNet = 0;
+	
+		For Each It In FindRow Do
+			Number = Number + 1;
+			AreaItemList.Parameters.Fill(It);
+			AreaItemList.Parameters.Number = Number;
+			Spreadsheet.Put(AreaItemList);
+			
+			TotalSum = TotalSum + It.TotalAmount;
+			TotalTax = TotalTax + It.TaxAmount;			
+			TotalNet = TotalNet + It.NetAmount;
+		EndDo;
+	EndDo;
+
+	AreaFooter.Parameters.Total = TotalSum;
+	AreaFooter.Parameters.Total = TotalSum;
+	AreaFooter.Parameters.TotalTax = TotalTax;
+	AreaFooter.Parameters.TotalNet = TotalNet;
+	AreaFooter.Parameters.Manager = SelectionHeader.Author;
+	Spreadsheet.Put(AreaFooter);
+	Spreadsheet = UniversalPrintServer.ResetLangSettings(Spreadsheet, Param.LayoutLang);
+	Return Spreadsheet;
+	
+EndFunction	
+
 #EndRegion
 
 #Region Posting
@@ -44,6 +172,7 @@ Procedure PostingCheckBeforeWrite(Ref, Cancel, PostingMode, Parameters, AddInfo 
 	Tables.R3021B_CashInTransitIncoming.Columns.Add("Key", Metadata.DefinedTypes.typeRowID.Type);
 	Tables.R8510B_BookValueOfFixedAsset.Columns.Add("Key", Metadata.DefinedTypes.typeRowID.Type);
 	Tables.CashInTransit.Columns.Add("Key", Metadata.DefinedTypes.typeRowID.Type);
+	Tables.R5020B_PartnersBalance.Columns.Add("Key", Metadata.DefinedTypes.typeRowID.Type);
 
 	PostingServer.FillPostingTables(Tables, Ref, QueryArray, Parameters);
 EndProcedure
@@ -265,6 +394,7 @@ Function GetQueryTextsMasterTables()
 	QueryArray.Add(T8515S_FixedAssetsLocation());
 	QueryArray.Add(R8515T_CostOfFixedAsset());
 	QueryArray.Add(R8510B_BookValueOfFixedAsset());
+	QueryArray.Add(R5020B_PartnersBalance());
 	Return QueryArray;
 EndFunction
 
@@ -1760,6 +1890,10 @@ Function R8510B_BookValueOfFixedAsset()
 		|		AND FixedAssetsDepreciationInfo.LedgerType = tmp.LedgerType
 		|WHERE
 		|	FixedAssetsDepreciationInfo.LedgerType.CalculateDepreciation"
+EndFunction
+
+Function R5020B_PartnersBalance()
+	Return AccumulationRegisters.R5020B_PartnersBalance.R5020B_PartnersBalance_OE();
 EndFunction
 
 #EndRegion

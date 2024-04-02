@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mdclass:Document xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" xmlns:mdclassExtension="http://g5.1c.ru/v8/dt/metadata/mdclass/extension" uuid="3f3ef0b5-d4e9-4ada-9c2c-37707783414d" extendedConfigurationObject="769b223f-7568-472d-995d-156d7c15eca0">
+  <producedTypes>
+    <objectType typeId="58fabb91-395d-426e-aae6-88df8855bcd4" valueTypeId="00739404-9ee6-4ca0-b5d4-7d129436d8e2"/>
+    <refType typeId="7d81446e-f7d7-4f74-99ce-e1c11d6ecd27" valueTypeId="33e83b3d-9ec2-4a6d-9925-384b66838dbf"/>
+    <selectionType typeId="ff6edcfb-5111-4edf-a743-f8f2b2083a25" valueTypeId="5d945e47-9727-4d9f-9165-4274e4e82996"/>
+    <listType typeId="b1a619e7-1334-4ce7-b912-1a78abc5b428" valueTypeId="5d37fcfc-1f5e-4a9b-b17d-066f3b446cad"/>
+    <managerType typeId="3dddbb93-5f27-4b19-a766-65477425c3a6" valueTypeId="da28396e-284f-4cfe-978a-4cda378a13e4"/>
+  </producedTypes>
+  <name>ConsolidatedRetailSales</name>
+  <objectBelonging>Adopted</objectBelonging>
+  <extension xsi:type="mdclassExtension:DocumentExtension">
+    <extendedConfigurationObject>Checked</extendedConfigurationObject>
+  </extension>
+  <useStandardCommands>true</useStandardCommands>
+</mdclass:Document>

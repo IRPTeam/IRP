@@ -159,9 +159,9 @@ Procedure FillCheckPackageByPayment(SourceData, CheckPackage, isCash)
 	FillInputParameters(SourceData, CheckPackage.Parameters);
 	CheckPackage.Parameters.TaxationSystem = 0;	//TODO: TaxSystem choice
 
-	If SourceData.TransactionType = Enums.OutgoingPaymentTransactionTypes.CustomerAdvance Then
+	If SourceData.TransactionType = Enums.OutgoingPaymentTransactionTypes.RetailCustomerAdvance Then
 		CheckPackage.Parameters.OperationType = 2;
-	ElsIf SourceData.TransactionType = Enums.IncomingPaymentTransactionType.CustomerAdvance Then
+	ElsIf SourceData.TransactionType = Enums.IncomingPaymentTransactionType.RetailCustomerAdvance Then
 		CheckPackage.Parameters.OperationType = 1;
 	Else
 		Raise "Unknown transaction type";

@@ -63,6 +63,7 @@ Function GetQueryText_Filter(Filter)
 EndFunction
 	
 Function GetQueryText_All(Filter)
+	//@skip-check ql-constants-in-binary-operation
 	Return 
 		"SELECT
 		|	2 AS Sort,

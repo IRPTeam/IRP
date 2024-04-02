@@ -625,6 +625,12 @@ Function Strings(Lang) Export
 	
 	Strings.Insert("POS_ERROR_NoDeletingPrintedReceipt", NStr("en = 'Error! Receipt is already printed: %1'", Lang));
 	
+	Strings.Insert("POS_Warning_Revert", NStr("en = 'Now you are canceling Sales/Return transaction on pos terminal!
+		|Are you sure you want to process transaction?'", Lang));
+	
+	Strings.Insert("POS_Warning_ReturnInDay", NStr("en = 'Now you are going to RETURN money by pos terminal.
+		|Are you sure you want to process transaction?'", Lang));
+	
 #EndRegion
 
 #Region Service
@@ -1066,6 +1072,7 @@ Function Strings(Lang) Export
 	Strings.Insert("Error_140", NStr("en = 'Partner type is required'", Lang));	
 	Strings.Insert("Error_141", NStr("en = '[%1] cannot be changed, has posted documents'", Lang));	
 	Strings.Insert("Error_142", NStr("en = 'Wrong combination of send and receive debt type'", Lang));	
+	Strings.Insert("Error_143", NStr("en = 'Document Bank payment (currency exchange) not entered'", Lang));	
 	
 	Strings.Insert("Error_FillTotalAmount", NStr("en = 'Fill total amount. Row: [%1]'", Lang));
 	
@@ -1548,7 +1555,6 @@ Strings.Insert("MoneyTransfer_DR_R5022T_Expenses_CR_R3021B_CashInTransit",
 	Strings.Insert("InternalCommands_ShowNotActive_Check", NStr("en = 'Show only active items'", Lang));
 #EndRegion
 	
-
 #Region FormulaEditor
 	Strings.Insert("FormulaEditor_Delimiters", NStr("en = 'Delimiters'", Lang));
 	

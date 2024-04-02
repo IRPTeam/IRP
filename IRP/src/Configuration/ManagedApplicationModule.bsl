@@ -37,20 +37,15 @@ Procedure OnStart()
 	AttachIdleHandler("ConnectAllEquipments", 0.1, True);
 	
 	//---------------------------------------------------
-//	AttachIdleHandler("OpenDebugForm", 2, True);
+	//AttachIdleHandler("OpenDebugForm", 2, True);
 	//---------------------------------------------------
 EndProcedure
 
 Procedure OpenDebugForm() Export
-	OpenForm("InformationRegister.T2014S_AdvancesInfo.ListForm");
-	OpenForm("InformationRegister.T2015S_TransactionsInfo.ListForm");
-	OpenForm("AccumulationRegister.TM1020B_AdvancesKey.ListForm");
-	OpenForm("AccumulationRegister.TM1030B_TransactionsKey.ListForm");
+	OpenForm("AccumulationRegister.R5020B_PartnersBalance.ListForm");
+	OpenForm("InformationRegister.T2010S_OffsetOfAdvances.ListForm");
 	OpenForm("AccumulationRegister.R1020B_AdvancesToVendors.ListForm");
 	OpenForm("AccumulationRegister.R1021B_VendorsTransactions.ListForm");
-	OpenForm("AccumulationRegister.R2020B_AdvancesFromCustomers.ListForm");
-	OpenForm("AccumulationRegister.R2021B_CustomersTransactions.ListForm");
-	OpenForm("Document.DebitCreditNote.Form.ListForm");
 EndProcedure	
 
 // Before start.

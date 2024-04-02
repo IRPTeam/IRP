@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mdclass:Document xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" xmlns:mdclassExtension="http://g5.1c.ru/v8/dt/metadata/mdclass/extension" uuid="196ee35f-610f-4481-a28c-eba2c4382513" extendedConfigurationObject="73a929dd-036d-4b89-a41d-d549565261aa">
+  <producedTypes>
+    <objectType typeId="85ee8b5e-7beb-4557-8be8-035af5f99eb4" valueTypeId="5e692ba3-2328-428a-8e9f-bf703e5215ae"/>
+    <refType typeId="da152aeb-d105-4a70-aa89-65bcd7f80cc7" valueTypeId="8593bd52-49f5-4875-b93c-6814d95a8b93"/>
+    <selectionType typeId="efd93719-b360-4488-9af2-0198b1791506" valueTypeId="078a2e2e-cffe-4ca5-aa76-1a47e6ad523c"/>
+    <listType typeId="bf5913df-5a84-40cf-ace8-e4dff8dedbbd" valueTypeId="1bd2fdb5-089c-48d3-89c2-55206b11cea0"/>
+    <managerType typeId="52bc4768-3b4a-405a-ad5d-e6e264b6fbc5" valueTypeId="e7e72c78-e25b-4df9-8fe9-4cbf4408faf1"/>
+  </producedTypes>
+  <name>InventoryTransfer</name>
+  <objectBelonging>Adopted</objectBelonging>
+  <extension xsi:type="mdclassExtension:DocumentExtension">
+    <extendedConfigurationObject>Checked</extendedConfigurationObject>
+  </extension>
+  <useStandardCommands>true</useStandardCommands>
+</mdclass:Document>

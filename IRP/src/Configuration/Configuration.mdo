@@ -17,7 +17,7 @@
   <usePurposes>PersonalComputer</usePurposes>
   <defaultRoles>Role.FullAccess</defaultRoles>
   <vendor>IRP Team</vendor>
-  <version>2024.12.3964</version>
+  <version>2024.14.4078</version>
   <updateCatalogAddress>https://github.com/IRPTeam/IRP</updateCatalogAddress>
   <useManagedFormInOrdinaryApplication>true</useManagedFormInOrdinaryApplication>
   <useOrdinaryFormInManagedApplication>true</useOrdinaryFormInManagedApplication>
@@ -433,6 +433,7 @@
   <roles>Role.Document_DebitCreditNote</roles>
   <roles>Role.AuditLockSet</roles>
   <roles>Role.AuditLockUnset</roles>
+  <roles>Role.AccumulationRegisters_R5020B_PartnersBalance</roles>
   <commonTemplates>CommonTemplate.HTMLPictureSlider</commonTemplates>
   <commonTemplates>CommonTemplate.HTMLAddAttributes</commonTemplates>
   <commonTemplates>CommonTemplate.HTMLGallery</commonTemplates>
@@ -1277,7 +1278,7 @@
   <reports>Report.A0012_AccountCard</reports>
   <reports>Report.A0013_AccountAnalysis</reports>
   <reports>Report.A1010_PartnersBalance</reports>
-  <reports>Report.D0009_DocumentRegistrationsReport</reports>
+  <reports>Report.D0013_DocumentRegistrationsReport</reports>
   <reports>Report.D0010_ItemsInfo</reports>
   <reports>Report.D0011_PriceInfo</reports>
   <reports>Report.D0012_AdditionalDocumentTablesCheck</reports>
@@ -1297,6 +1298,7 @@
   <reports>Report.R6021_BatchBalanceSimple</reports>
   <reports>Report.R7010_DetailingSupplies</reports>
   <reports>Report.R7030_ProductionPlanning</reports>
+  <reports>Report.R5020_PartnersBalance</reports>
   <dataProcessors>DataProcessor.AnaliseDocumentMovements</dataProcessors>
   <dataProcessors>DataProcessor.AnalyseXDTO</dataProcessors>
   <dataProcessors>DataProcessor.BuilderExample</dataProcessors>
@@ -1314,7 +1316,6 @@
   <dataProcessors>DataProcessor.ObjectPropertyEditor</dataProcessors>
   <dataProcessors>DataProcessor.PointOfSale</dataProcessors>
   <dataProcessors>DataProcessor.PrintLabels</dataProcessors>
-  <dataProcessors>DataProcessor.Procurement</dataProcessors>
   <dataProcessors>DataProcessor.ProductionWorkspace</dataProcessors>
   <dataProcessors>DataProcessor.ReplaceSerialLotNumber</dataProcessors>
   <dataProcessors>DataProcessor.ScanBarcode</dataProcessors>
@@ -1500,6 +1501,7 @@
   <accumulationRegisters>AccumulationRegister.R9555T_PaidSickLeaves</accumulationRegisters>
   <accumulationRegisters>AccumulationRegister.R9560T_AdditionalAccrual</accumulationRegisters>
   <accumulationRegisters>AccumulationRegister.R9570T_AdditionalDeduction</accumulationRegisters>
+  <accumulationRegisters>AccumulationRegister.R5020B_PartnersBalance</accumulationRegisters>
   <chartsOfCharacteristicTypes>ChartOfCharacteristicTypes.AccountingExtraDimensionTypes</chartsOfCharacteristicTypes>
   <chartsOfCharacteristicTypes>ChartOfCharacteristicTypes.AddAttributeAndProperty</chartsOfCharacteristicTypes>
   <chartsOfCharacteristicTypes>ChartOfCharacteristicTypes.CurrencyMovementType</chartsOfCharacteristicTypes>

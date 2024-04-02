@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mdclass:Document xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" xmlns:mdclassExtension="http://g5.1c.ru/v8/dt/metadata/mdclass/extension" uuid="85cc2e35-c578-4c80-b5cb-369cf91f3252" extendedConfigurationObject="dae141e9-c68d-4ee9-a643-51b4416f0df1">
+  <producedTypes>
+    <objectType typeId="3c5ba5b1-a887-4282-8a7c-6ccb656288b6" valueTypeId="df7629cf-3caa-40dd-96f9-062b153cf1e4"/>
+    <refType typeId="dab20ae5-d8ab-4dbb-a899-190bca969d9d" valueTypeId="3e5c8bee-37e4-4cc0-a01e-4b256bf242be"/>
+    <selectionType typeId="3f1e92ad-7183-4d56-ad58-30ae0b97b6b3" valueTypeId="23863f65-abfc-496f-8547-2790ca615e4e"/>
+    <listType typeId="ba31659d-8449-4353-9c1c-88fa9d5ae3cd" valueTypeId="a0044c08-1b5e-4e77-bd2c-922c63b67b26"/>
+    <managerType typeId="94596912-4b17-4b3b-b9b7-618740ef9bab" valueTypeId="f7896b9d-822c-4e95-8228-9348b29f475b"/>
+  </producedTypes>
+  <name>JournalEntry</name>
+  <objectBelonging>Adopted</objectBelonging>
+  <extension xsi:type="mdclassExtension:DocumentExtension">
+    <extendedConfigurationObject>Checked</extendedConfigurationObject>
+  </extension>
+  <useStandardCommands>true</useStandardCommands>
+</mdclass:Document>

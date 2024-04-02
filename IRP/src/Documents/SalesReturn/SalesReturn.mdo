@@ -146,6 +146,7 @@
   <registerRecords>AccumulationRegister.R4014B_SerialLotNumber</registerRecords>
   <registerRecords>AccumulationRegister.R2031B_ShipmentInvoicing</registerRecords>
   <registerRecords>AccumulationRegister.R2012B_SalesOrdersInvoiceClosing</registerRecords>
+  <registerRecords>AccumulationRegister.R5020B_PartnersBalance</registerRecords>
   <postInPrivilegedMode>true</postInPrivilegedMode>
   <unpostInPrivilegedMode>true</unpostInPrivilegedMode>
   <choiceHistoryOnInput>DontUse</choiceHistoryOnInput>
@@ -1549,6 +1550,13 @@
       <fullTextSearch>Use</fullTextSearch>
     </attributes>
   </tabularSections>
+  <templates uuid="766d66e3-dfa6-4eee-90f5-0e01cc27060a">
+    <name>SalesReturnPrint</name>
+    <synonym>
+      <key>en</key>
+      <value>Sales return</value>
+    </synonym>
+  </templates>
   <commands uuid="06f3887f-381e-4674-9946-3a40bff7527b">
     <name>Generate</name>
     <synonym>
@@ -1560,6 +1568,19 @@
       <types>DocumentRef.SalesReturnOrder</types>
       <types>DocumentRef.GoodsReceipt</types>
       <types>DocumentRef.SalesInvoice</types>
+    </commandParameterType>
+    <parameterUseMode>Multiple</parameterUseMode>
+    <representation>Auto</representation>
+  </commands>
+  <commands uuid="935a08e3-bae9-4ee1-9774-7c4ad04ae91c">
+    <name>SalesReturnPrint</name>
+    <synonym>
+      <key>en</key>
+      <value>Sales return</value>
+    </synonym>
+    <group>CommandGroup.Print</group>
+    <commandParameterType>
+      <types>DocumentRef.SalesReturn</types>
     </commandParameterType>
     <parameterUseMode>Multiple</parameterUseMode>
     <representation>Auto</representation>

@@ -38,6 +38,9 @@
 					<v8:content>Item</v8:content>
 				</v8:item>
 			</title>
+			<role>
+				<dcscom:dimension>true</dcscom:dimension>
+			</role>
 		</field>
 		<field xsi:type="DataSetFieldField">
 			<dataPath>Store</dataPath>
@@ -274,23 +277,23 @@ FROM
 	</dataSet>
 	<totalField>
 		<dataPath>Quantity.QuantityClosingBalance</dataPath>
-		<expression>Count(Quantity.QuantityClosingBalance)</expression>
+		<expression>Sum(Quantity.QuantityClosingBalance)</expression>
 	</totalField>
 	<totalField>
 		<dataPath>Quantity.QuantityExpense</dataPath>
-		<expression>Count(Quantity.QuantityExpense)</expression>
+		<expression>Sum(Quantity.QuantityExpense)</expression>
 	</totalField>
 	<totalField>
 		<dataPath>Quantity.QuantityOpeningBalance</dataPath>
-		<expression>Count(Quantity.QuantityOpeningBalance)</expression>
+		<expression>Sum(Quantity.QuantityOpeningBalance)</expression>
 	</totalField>
 	<totalField>
 		<dataPath>Quantity.QuantityReceipt</dataPath>
-		<expression>Count(Quantity.QuantityReceipt)</expression>
+		<expression>Sum(Quantity.QuantityReceipt)</expression>
 	</totalField>
 	<totalField>
 		<dataPath>Quantity.QuantityTurnover</dataPath>
-		<expression>Count(Quantity.QuantityTurnover)</expression>
+		<expression>Sum(Quantity.QuantityTurnover)</expression>
 	</totalField>
 	<parameter>
 		<name>BeginOfPeriod</name>
@@ -307,8 +310,8 @@ FROM
 			</v8:DateQualifiers>
 		</valueType>
 		<value xsi:nil="true"/>
-		<useRestriction>false</useRestriction>
-		<expression>&amp;Period.StartData</expression>
+		<useRestriction>true</useRestriction>
+		<expression>&amp;Period.StartDate</expression>
 		<availableAsField>false</availableAsField>
 	</parameter>
 	<parameter>
@@ -326,7 +329,7 @@ FROM
 			</v8:DateQualifiers>
 		</valueType>
 		<value xsi:nil="true"/>
-		<useRestriction>false</useRestriction>
+		<useRestriction>true</useRestriction>
 		<expression>&amp;Period.EndDate</expression>
 		<availableAsField>false</availableAsField>
 	</parameter>

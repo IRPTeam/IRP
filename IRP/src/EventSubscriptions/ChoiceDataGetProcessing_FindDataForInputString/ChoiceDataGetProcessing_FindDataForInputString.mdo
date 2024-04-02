@@ -6,8 +6,8 @@
     <value>Choice data get processing find data for input string</value>
   </synonym>
   <source>
-    <types>CatalogManager</types>
     <types>ChartOfCharacteristicTypesManager</types>
+    <types>CatalogManager</types>
     <types>ChartOfAccountsManager.Basic</types>
   </source>
   <event>ChoiceDataGetProcessing</event>

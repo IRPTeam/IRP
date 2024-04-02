@@ -54,7 +54,7 @@ EndProcedure
 
 Procedure AccountStartChoice(Object, Form, Item, ChoiceData, StandardProcessing) Export
 	ArrayOfFilters = New Array();
-	If Object.TransactionType = PredefinedValue("Enum.IncomingPaymentTransactionType.CustomerAdvance") Then
+	If Object.TransactionType = PredefinedValue("Enum.IncomingPaymentTransactionType.RetailCustomerAdvance") Then
 		AccountTypeList = New ValueList();
 		AccountTypeList.Add(PredefinedValue("Enum.CashAccountTypes.Bank"));
 		AccountTypeList.Add(PredefinedValue("Enum.CashAccountTypes.POS"));
@@ -71,7 +71,7 @@ EndProcedure
 
 Procedure AccountEditTextChange(Object, Form, Item, Text, StandardProcessing) Export
 	ArrayOfFilters = New Array();
-	If Object.TransactionType = PredefinedValue("Enum.IncomingPaymentTransactionType.CustomerAdvance") Then
+	If Object.TransactionType = PredefinedValue("Enum.IncomingPaymentTransactionType.RetailCustomerAdvance") Then
 		AccountTypeList = New ValueList();
 		AccountTypeList.Add(PredefinedValue("Enum.CashAccountTypes.Bank"));
 		AccountTypeList.Add(PredefinedValue("Enum.CashAccountTypes.POS"));

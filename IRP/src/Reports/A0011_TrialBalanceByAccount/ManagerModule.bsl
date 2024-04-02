@@ -50,7 +50,6 @@ Function Details_AccountAnalisys(DetailValuesMap)
 	Return Result;
 EndFunction
 
-
 Function Details_AccountCard(DetailValuesMap)
 	Result = New Structure();
 	Result.Insert("DataParameters", New Map());
@@ -68,7 +67,6 @@ Function Details_AccountCard(DetailValuesMap)
 	// New filter to other report Key=Value, FiledName= fild name in other report  	
 	Result.DetailsFilters.Insert(DetailValuesMap["Account"], 
 		New Structure("FieldName, ComparisonType", "Account", DataCompositionComparisonType.InHierarchy));
-	
 	
 	FilterByExtDimension(1, DetailValuesMap, Result.DetailsFiltersGroupOR);
 	FilterByExtDimension(2, DetailValuesMap, Result.DetailsFiltersGroupOR);

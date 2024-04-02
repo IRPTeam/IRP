@@ -7,7 +7,7 @@
   <name>D4010_ActualStocks</name>
   <synonym>
     <key>en</key>
-    <value>D4010  ActualStocks</value>
+    <value>D4010 Actual stocks</value>
   </synonym>
   <useStandardCommands>true</useStandardCommands>
   <mainDataCompositionSchema>Report.D4010_ActualStocks.Template.Template</mainDataCompositionSchema>

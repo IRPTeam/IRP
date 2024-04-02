@@ -74,6 +74,7 @@ Async Procedure Payment_CancelPaymentByPaymentCard()
 	PaymentSettings.In.Amount = Amount;
 	
 	If Await EquipmentAcquiringAPIClient.CancelPaymentByPaymentCard(Hardware, PaymentSettings) Then
+		//@skip-check module-unused-local-variable
 		PaymentInfo = CommonFunctionsServer.SerializeJSON(PaymentSettings);
 	Else
 		Items.DecorationProblem.Visible = True;
@@ -89,6 +90,7 @@ Async Procedure Payment_EmergencyReversal()
 	PaymentSettings = EquipmentAcquiringAPIClient.EmergencyReversalSettings();
 	
 	If Await EquipmentAcquiringAPIClient.EmergencyReversal(Hardware, PaymentSettings) Then
+		//@skip-check module-unused-local-variable
 		PaymentInfo = CommonFunctionsServer.SerializeJSON(PaymentSettings);
 	Else
 		Items.DecorationProblem.Visible = True;

@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mdclass:Document xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" xmlns:mdclassExtension="http://g5.1c.ru/v8/dt/metadata/mdclass/extension" uuid="beee4c36-2011-4cce-b655-1d07021369ce" extendedConfigurationObject="1fa5d00a-a03d-4aa4-8ca8-083fd3c795b3">
+  <producedTypes>
+    <objectType typeId="f965ff9f-5487-4c9d-921c-533075897dc7" valueTypeId="1f192b01-e769-49ef-9a04-fbaeca4fa9ab"/>
+    <refType typeId="df30a31a-ae51-45ff-bd6a-64bb9ed6d933" valueTypeId="b4ed829d-2dff-439d-b5d3-fbdab5e0175d"/>
+    <selectionType typeId="5f399a01-dd33-4109-a253-06bf454e6c9b" valueTypeId="c93aab9e-fa41-4b4a-8979-8f35be133064"/>
+    <listType typeId="639f3a26-ce53-4714-8e50-22e83e7e129f" valueTypeId="4c8eb6a9-589c-445b-8bb4-70a02402dfe8"/>
+    <managerType typeId="5d411e72-4218-4c09-990c-455029aca15f" valueTypeId="7d8bd32e-9f2b-487a-99bd-a5dbd6511f40"/>
+  </producedTypes>
+  <name>PurchaseReturnOrder</name>
+  <objectBelonging>Adopted</objectBelonging>
+  <extension xsi:type="mdclassExtension:DocumentExtension">
+    <extendedConfigurationObject>Checked</extendedConfigurationObject>
+  </extension>
+  <useStandardCommands>true</useStandardCommands>
+</mdclass:Document>

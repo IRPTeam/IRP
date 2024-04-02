@@ -62,12 +62,12 @@
   <defaultListForm>Document.CashStatement.Form.ListForm</defaultListForm>
   <defaultChoiceForm>Document.CashStatement.Form.ChoiceForm</defaultChoiceForm>
   <realTimePosting>Deny</realTimePosting>
+  <registerRecords>AccumulationRegister.R3011T_CashFlow</registerRecords>
   <registerRecords>AccumulationRegister.R3021B_CashInTransitIncoming</registerRecords>
   <registerRecords>AccumulationRegister.R3050T_PosCashBalances</registerRecords>
   <registerRecords>AccumulationRegister.R3035T_CashPlanning</registerRecords>
   <registerRecords>AccumulationRegister.R3010B_CashOnHand</registerRecords>
   <registerRecords>AccumulationRegister.CashInTransit</registerRecords>
-  <registerRecords>AccumulationRegister.R3011T_CashFlow</registerRecords>
   <postInPrivilegedMode>true</postInPrivilegedMode>
   <unpostInPrivilegedMode>true</unpostInPrivilegedMode>
   <choiceHistoryOnInput>DontUse</choiceHistoryOnInput>

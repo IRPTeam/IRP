@@ -62,7 +62,6 @@
   <predefined>
     <items id="bd902239-daa4-480f-bf8e-731e384fa593">
       <name>ManualPriceType</name>
-      <description>Manual price type</description>
       <code xsi:type="core:NumberValue">
         <value>0</value>
       </code>

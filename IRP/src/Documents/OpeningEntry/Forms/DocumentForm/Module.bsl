@@ -1014,7 +1014,6 @@ Procedure EditCurrenciesFixedAssets(Command)
 	OpenForm("CommonForm.EditCurrencies", FormParameters, , , , , Notify, FormWindowOpeningMode.LockOwnerWindow);
 EndProcedure
 
-
 &AtClient
 Procedure EditCurrenciesCashInTransit(Command)
 	CurrentData = ThisObject.Items.CashInTransit.CurrentData;
@@ -1203,7 +1202,6 @@ Procedure ShowHiddenTables(Command)
 EndProcedure
 
 #EndRegion
-
 
 #Region PARTNER_TRADE_AGENT
 

@@ -17,6 +17,14 @@
   <useStandardCommands>true</useStandardCommands>
   <editType>InDialog</editType>
   <dataLockControlMode>Managed</dataLockControlMode>
+  <recordPresentation>
+    <key>en</key>
+    <value>Audit lock history</value>
+  </recordPresentation>
+  <listPresentation>
+    <key>en</key>
+    <value>Audit locks history</value>
+  </listPresentation>
   <resources uuid="bf9da530-0f85-4810-9e08-1dbe90722ddf">
     <name>Action</name>
     <synonym>

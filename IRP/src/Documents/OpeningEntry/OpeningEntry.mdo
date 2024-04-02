@@ -94,6 +94,7 @@
   <registerRecords>AccumulationRegister.R2023B_AdvancesFromRetailCustomers</registerRecords>
   <registerRecords>AccumulationRegister.R4014B_SerialLotNumber</registerRecords>
   <registerRecords>AccumulationRegister.R5015B_OtherPartnersTransactions</registerRecords>
+  <registerRecords>AccumulationRegister.R5020B_PartnersBalance</registerRecords>
   <postInPrivilegedMode>true</postInPrivilegedMode>
   <unpostInPrivilegedMode>true</unpostInPrivilegedMode>
   <choiceHistoryOnInput>DontUse</choiceHistoryOnInput>
@@ -2712,4 +2713,24 @@
       <fullTextSearch>Use</fullTextSearch>
     </attributes>
   </tabularSections>
+  <templates uuid="17958af1-40c0-4ad9-a99f-e9f528a8de9f">
+    <name>OpeningEntryPrint</name>
+    <synonym>
+      <key>en</key>
+      <value>Opening entry</value>
+    </synonym>
+  </templates>
+  <commands uuid="1f3938f8-b45d-4288-af4c-83d578272ab4">
+    <name>OpeningEntryPrint</name>
+    <synonym>
+      <key>en</key>
+      <value>Opening entry</value>
+    </synonym>
+    <group>CommandGroup.Print</group>
+    <commandParameterType>
+      <types>DocumentRef.OpeningEntry</types>
+    </commandParameterType>
+    <parameterUseMode>Multiple</parameterUseMode>
+    <representation>Auto</representation>
+  </commands>
 </mdclass:Document>

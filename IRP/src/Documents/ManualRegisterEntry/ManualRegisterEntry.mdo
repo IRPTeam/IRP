@@ -67,6 +67,7 @@
   <defaultChoiceForm>Document.ManualRegisterEntry.Form.ChoiceForm</defaultChoiceForm>
   <realTimePosting>Deny</realTimePosting>
   <registerRecords>AccumulationRegister.R1002T_PurchaseReturns</registerRecords>
+  <registerRecords>AccumulationRegister.DELETE_R8011B_TradeAgentSerialLotNumber</registerRecords>
   <registerRecords>AccumulationRegister.R5022T_Expenses</registerRecords>
   <registerRecords>AccumulationRegister.R2005T_SalesSpecialOffers</registerRecords>
   <registerRecords>AccumulationRegister.R1021B_VendorsTransactions</registerRecords>
@@ -97,6 +98,7 @@
   <registerRecords>AccumulationRegister.R4052T_StockAdjustmentAsSurplus</registerRecords>
   <registerRecords>AccumulationRegister.R4012B_StockReservation</registerRecords>
   <registerRecords>AccumulationRegister.R4031B_GoodsInTransitIncoming</registerRecords>
+  <registerRecords>AccumulationRegister.DELETE_R8012B_ConsignorInventory</registerRecords>
   <registerRecords>AccumulationRegister.R3010B_CashOnHand</registerRecords>
   <registerRecords>AccumulationRegister.R4051T_StockAdjustmentAsWriteOff</registerRecords>
   <registerRecords>AccumulationRegister.R2013T_SalesOrdersProcurement</registerRecords>
@@ -106,9 +108,11 @@
   <registerRecords>AccumulationRegister.R5041B_TaxesPayable</registerRecords>
   <registerRecords>AccumulationRegister.R2040B_TaxesIncoming</registerRecords>
   <registerRecords>AccumulationRegister.R4034B_GoodsShipmentSchedule</registerRecords>
+  <registerRecords>AccumulationRegister.DELETE_R8013B_ConsignorBatchWiseBalance</registerRecords>
   <registerRecords>AccumulationRegister.R5012B_VendorsAging</registerRecords>
   <registerRecords>AccumulationRegister.R1014T_CanceledPurchaseOrders</registerRecords>
   <registerRecords>AccumulationRegister.R3015B_CashAdvance</registerRecords>
+  <registerRecords>AccumulationRegister.DELETE_R8010B_TradeAgentInventory</registerRecords>
   <registerRecords>AccumulationRegister.R4016B_InternalSupplyRequestOrdering</registerRecords>
   <registerRecords>AccumulationRegister.R1010T_PurchaseOrders</registerRecords>
   <registerRecords>AccumulationRegister.R4033B_GoodsReceiptSchedule</registerRecords>
@@ -119,10 +123,7 @@
   <registerRecords>AccumulationRegister.R3016B_ChequeAndBonds</registerRecords>
   <registerRecords>AccumulationRegister.R2012B_SalesOrdersInvoiceClosing</registerRecords>
   <registerRecords>AccumulationRegister.R1011B_PurchaseOrdersReceipt</registerRecords>
-  <registerRecords>AccumulationRegister.DELETE_R8010B_TradeAgentInventory</registerRecords>
-  <registerRecords>AccumulationRegister.DELETE_R8011B_TradeAgentSerialLotNumber</registerRecords>
-  <registerRecords>AccumulationRegister.DELETE_R8012B_ConsignorInventory</registerRecords>
-  <registerRecords>AccumulationRegister.DELETE_R8013B_ConsignorBatchWiseBalance</registerRecords>
+  <registerRecords>AccumulationRegister.R5020B_PartnersBalance</registerRecords>
   <postInPrivilegedMode>true</postInPrivilegedMode>
   <unpostInPrivilegedMode>true</unpostInPrivilegedMode>
   <attributes uuid="0efb3e65-ce41-418b-bedd-d2b4e61ae11a">

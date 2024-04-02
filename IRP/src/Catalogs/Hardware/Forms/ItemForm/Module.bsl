@@ -16,7 +16,6 @@ Procedure BeforeWriteAtServer(Cancel, CurrentObject, WriteParameters)
 	AddAttributesAndPropertiesServer.BeforeWriteAtServer(ThisObject, Cancel, CurrentObject, WriteParameters);
 EndProcedure
 
-
 &AtClient
 Procedure OnOpen(Cancel)
 	SetVisible();

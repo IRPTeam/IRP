@@ -78,7 +78,7 @@ Function GetVisibleAttributesByTransactionType(TransactionType)
 	ReturnToCustomerByPOS  = PredefinedValue("Enum.OutgoingPaymentTransactionTypes.ReturnToCustomerByPOS");
 	PaymentByCheque     = PredefinedValue("Enum.OutgoingPaymentTransactionTypes.PaymentByCheque");
 	PaymentByCheque     = PredefinedValue("Enum.OutgoingPaymentTransactionTypes.PaymentByCheque");
-	CustomerAdvance     = PredefinedValue("Enum.OutgoingPaymentTransactionTypes.CustomerAdvance");
+	RetailCustomerAdvance = PredefinedValue("Enum.OutgoingPaymentTransactionTypes.RetailCustomerAdvance");
 	EmployeeCashAdvance = PredefinedValue("Enum.OutgoingPaymentTransactionTypes.EmployeeCashAdvance");
 	SalaryPayment       = PredefinedValue("Enum.OutgoingPaymentTransactionTypes.SalaryPayment");
 	OtherPartner        = PredefinedValue("Enum.OutgoingPaymentTransactionTypes.OtherPartner");
@@ -129,7 +129,7 @@ Function GetVisibleAttributesByTransactionType(TransactionType)
 	ElsIf TransactionType = PaymentByCheque Then
 		StrByType = "
 		|PaymentList.PlaningTransactionBasis";
-	ElsIf TransactionType = CustomerAdvance Then
+	ElsIf TransactionType = RetailCustomerAdvance Then
 		StrByType = "
 		|PaymentList.RetailCustomer,
 		|PaymentList.PaymentType,

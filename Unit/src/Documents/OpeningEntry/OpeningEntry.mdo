@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mdclass:Document xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" xmlns:mdclassExtension="http://g5.1c.ru/v8/dt/metadata/mdclass/extension" uuid="664bfcd7-ca7e-4bad-8e5d-8df88705f052" extendedConfigurationObject="a6658dc0-3fc6-42db-8975-39c59feb9ebc">
+  <producedTypes>
+    <objectType typeId="6074cc04-365b-4d7f-9b15-07bd9d279aee" valueTypeId="129ad974-8033-4c15-811b-aa9518b43785"/>
+    <refType typeId="110bd740-040c-4ab3-b049-c5598426f212" valueTypeId="fc63a8d6-2013-4d3f-a69a-a15c78fce21a"/>
+    <selectionType typeId="24d77359-7a6b-48f7-9c12-c0d45fde3ba6" valueTypeId="837475da-02aa-42be-b0ce-6948847ae109"/>
+    <listType typeId="02b81fe6-ba9e-4a55-a0af-422116d9a061" valueTypeId="67dd8787-d70f-46f1-9bad-56bf549c6290"/>
+    <managerType typeId="1af6b160-7d65-49d0-bc9e-ec7732847513" valueTypeId="c606a080-836c-4b38-8489-63f8359d9cdc"/>
+  </producedTypes>
+  <name>OpeningEntry</name>
+  <objectBelonging>Adopted</objectBelonging>
+  <extension xsi:type="mdclassExtension:DocumentExtension">
+    <extendedConfigurationObject>Checked</extendedConfigurationObject>
+  </extension>
+  <useStandardCommands>true</useStandardCommands>
+</mdclass:Document>

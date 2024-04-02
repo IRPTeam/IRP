@@ -148,8 +148,8 @@ Procedure CreateDocument(DocName)
 		Return;
 	EndIf;
 	
+	BeginTransaction();
 	Try
-		BeginTransaction();
 		Wrapper = BuilderAPI.Initialize(DocName, , , "ItemList");
 		BuilderAPI.SetProperty(Wrapper, "Date", CommonFunctionsServer.GetCurrentSessionDate());
 		
@@ -173,12 +173,13 @@ Procedure CreateDocument(DocName)
 			EndIf;
 		EndDo;
 		Doc = BuilderAPI.Write(Wrapper);
-		CommitTransaction();
+		Modified = False;
 		CommonFunctionsClientServer.ShowUsersMessage(Doc.Ref);
 		Object.ItemList.Clear();   
 		Items.MainPages.CurrentPage = Items.PageItemList;      
-		Modified = False;
+		CommitTransaction();
 	Except
+		RollbackTransaction();
 		CommonFunctionsClientServer.ShowUsersMessage(ErrorProcessing.BriefErrorDescription(ErrorInfo()));
 	EndTry;	
 EndProcedure

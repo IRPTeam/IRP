@@ -50,7 +50,6 @@ Function Details_AccountAnalisys(DetailValuesMap)
 	Return Result;
 EndFunction
 
-
 Function Details_AccountCard(DetailValuesMap)
 	Result = New Structure();
 	Result.Insert("DataParameters", New Map());
@@ -65,7 +64,6 @@ Function Details_AccountCard(DetailValuesMap)
 	
 	Result.DetailsFilters.Insert(DetailValuesMap["BalancedAccount"], 
 		New Structure("FieldName, ComparisonType", "Account", DataCompositionComparisonType.InHierarchy));
-	
 	
 	FilterByExtDimension(1, DetailValuesMap, Result.DetailsFiltersGroupOR);
 	FilterByExtDimension(2, DetailValuesMap, Result.DetailsFiltersGroupOR);

@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mdclass:Document xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" xmlns:mdclassExtension="http://g5.1c.ru/v8/dt/metadata/mdclass/extension" uuid="772de99e-23b5-4deb-922b-381f67891715" extendedConfigurationObject="63b28e93-072b-4155-8cd0-efbfdfa4daaf">
+  <producedTypes>
+    <objectType typeId="66338a02-5310-4772-b92f-b3b217273f9e" valueTypeId="5d7b7a92-decb-449e-ad61-b0eab9260e69"/>
+    <refType typeId="c565b891-d787-42d4-be71-bcbea3244bb2" valueTypeId="893ccb20-af47-4d80-a4e8-c11e103c546a"/>
+    <selectionType typeId="4cce1d1f-5e18-4516-aa47-10df2c567778" valueTypeId="15b8ce6d-c298-4f1c-af53-1e6eadf51877"/>
+    <listType typeId="e48411b9-5408-4ba6-86e1-fc17aa13ecb0" valueTypeId="5d15b853-a1ad-4a96-a1fd-a3116ccce388"/>
+    <managerType typeId="8daa1cd8-12f5-417d-a228-801ead25d2bf" valueTypeId="c490d69f-4b92-4f6a-88b7-2d3480521054"/>
+  </producedTypes>
+  <name>EmployeeTransfer</name>
+  <objectBelonging>Adopted</objectBelonging>
+  <extension xsi:type="mdclassExtension:DocumentExtension">
+    <extendedConfigurationObject>Checked</extendedConfigurationObject>
+  </extension>
+  <useStandardCommands>true</useStandardCommands>
+</mdclass:Document>

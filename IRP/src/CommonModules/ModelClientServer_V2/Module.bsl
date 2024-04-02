@@ -359,7 +359,7 @@ Function GetChain()
 	
 	Chain.Insert("CalculateDifferenceCount" , GetChainLink("CalculateDifferenceCountExecute"));
 
-	Chain.Insert("ChangePercentByBankTermAndPaymentType"	       , GetChainLink("ChangePercentByBankTermAndPaymentTypeExecute"));
+	Chain.Insert("ChangeCommissionPercentByBankTermAndPaymentType"	       , GetChainLink("ChangeCommissionPercentByBankTermAndPaymentTypeExecute"));
 	Chain.Insert("ChangeAccountByBankTermAndPaymentType"	       , GetChainLink("ChangeAccountByBankTermAndPaymentTypeExecute"));
 	Chain.Insert("ChangePartnerByBankTermAndPaymentType"	       , GetChainLink("ChangePartnerByBankTermAndPaymentTypeExecute"));
 	Chain.Insert("ChangeLegalNameByBankTermAndPaymentType"	       , GetChainLink("ChangeLegalNameByBankTermAndPaymentTypeExecute"));
@@ -989,7 +989,6 @@ Function ChangePartnerByTransactionTypeExecute(Options) Export
 	Return Undefined;
 EndFunction
 
-
 #EndRegion
 
 #Region CHANGE_PARTNER_BY_RETAIL_CUSTOMER
@@ -1046,6 +1045,7 @@ Function ChangeAgreementByPartnerExecute(Options) Export
 	ElsIf ValueIsFilled(Options.DebtType) Then
 		Options.AgreementType = ModelServer_V2.GetAgreementTypeByDebtType(Options.DebtType);
 	EndIf;
+	Options.Insert("AllAgreements", True);
 	Return DocumentsServer.GetAgreementByPartner(Options);
 EndFunction
 
@@ -3300,7 +3300,7 @@ Function ClearByTransactionTypeBankPaymentExecute(Options) Export
 	Outgoing_ReturnToCustomer  = PredefinedValue("Enum.OutgoingPaymentTransactionTypes.ReturnToCustomer");
 	Outgoing_ReturnToCustomerByPOS  = PredefinedValue("Enum.OutgoingPaymentTransactionTypes.ReturnToCustomerByPOS");
 	Outgoing_PaymentByCheque     = PredefinedValue("Enum.OutgoingPaymentTransactionTypes.PaymentByCheque");
-	Outgoing_CustomerAdvance     = PredefinedValue("Enum.OutgoingPaymentTransactionTypes.CustomerAdvance");
+	Outgoing_RetailCustomerAdvance     = PredefinedValue("Enum.OutgoingPaymentTransactionTypes.RetailCustomerAdvance");
 	Outgoing_EmployeeCashAdvance = PredefinedValue("Enum.OutgoingPaymentTransactionTypes.EmployeeCashAdvance");
 	Outgoing_SalaryPayment       = PredefinedValue("Enum.OutgoingPaymentTransactionTypes.SalaryPayment");
 	Outgoing_OtherPartner        = PredefinedValue("Enum.OutgoingPaymentTransactionTypes.OtherPartner");
@@ -3347,7 +3347,7 @@ Function ClearByTransactionTypeBankPaymentExecute(Options) Export
 		|Agreement,
 		|Payee,
 		|LegalNameContract";		
-	ElsIf Options.TransactionType = Outgoing_CustomerAdvance Then
+	ElsIf Options.TransactionType = Outgoing_RetailCustomerAdvance Then
 		StrByType = "
 		|RetailCustomer,
 		|PaymentType,
@@ -3449,7 +3449,7 @@ Function ClearByTransactionTypeBankReceiptExecute(Options) Export
 	Incoming_TransferFromPOS     = PredefinedValue("Enum.IncomingPaymentTransactionType.TransferFromPOS");
 	Incoming_PaymentFromCustomerByPOS = PredefinedValue("Enum.IncomingPaymentTransactionType.PaymentFromCustomerByPOS");
 	Incoming_ReceiptByCheque     = PredefinedValue("Enum.IncomingPaymentTransactionType.ReceiptByCheque");
-	Incoming_CustomerAdvance     = PredefinedValue("Enum.IncomingPaymentTransactionType.CustomerAdvance");
+	Incoming_RetailCustomerAdvance     = PredefinedValue("Enum.IncomingPaymentTransactionType.RetailCustomerAdvance");
 	Incoming_EmployeeCashAdvance = PredefinedValue("Enum.IncomingPaymentTransactionType.EmployeeCashAdvance");
 	Incoming_OtherIncome         = PredefinedValue("Enum.IncomingPaymentTransactionType.OtherIncome");
 	Incoming_OtherPartner        = PredefinedValue("Enum.IncomingPaymentTransactionType.OtherPartner");
@@ -3525,12 +3525,14 @@ Function ClearByTransactionTypeBankReceiptExecute(Options) Export
 		|CommissionPercent,
 		|Commission,
 		|CommissionFinancialMovementType";		
-	ElsIf Options.TransactionType = Incoming_CustomerAdvance Then
+	ElsIf Options.TransactionType = Incoming_RetailCustomerAdvance Then
 		StrByType = "
 		|RetailCustomer,
 		|PaymentType,
 		|PaymentTerminal,
-		|BankTerm";
+		|BankTerm,
+		|CommissionPercent,
+		|Commission";
 	ElsIf Options.TransactionType = Incoming_EmployeeCashAdvance Then
 		StrByType = "
 		|Partner";
@@ -3594,7 +3596,7 @@ Function ClearByTransactionTypeCashPaymentExecute(Options) Export
 	Outgoing_CurrencyExchange  = PredefinedValue("Enum.OutgoingPaymentTransactionTypes.CurrencyExchange");
 	Outgoing_PaymentToVendor   = PredefinedValue("Enum.OutgoingPaymentTransactionTypes.PaymentToVendor");
 	Outgoing_ReturnToCustomer  = PredefinedValue("Enum.OutgoingPaymentTransactionTypes.ReturnToCustomer");
-	Outgoing_CustomerAdvance     = PredefinedValue("Enum.OutgoingPaymentTransactionTypes.CustomerAdvance");
+	Outgoing_RetailCustomerAdvance     = PredefinedValue("Enum.OutgoingPaymentTransactionTypes.RetailCustomerAdvance");
 	Outgoing_EmployeeCashAdvance = PredefinedValue("Enum.OutgoingPaymentTransactionTypes.EmployeeCashAdvance");
 	Outgoing_SalaryPayment       = PredefinedValue("Enum.OutgoingPaymentTransactionTypes.SalaryPayment");
 	Outgoing_OtherPartner        = PredefinedValue("Enum.OutgoingPaymentTransactionTypes.OtherPartner");
@@ -3613,7 +3615,7 @@ Function ClearByTransactionTypeCashPaymentExecute(Options) Export
 	ElsIf Options.TransactionType = Outgoing_EmployeeCashAdvance Then
 		StrByType = "
 		|Partner"; 
-	ElsIf Options.TransactionType = Outgoing_CustomerAdvance Then
+	ElsIf Options.TransactionType = Outgoing_RetailCustomerAdvance Then
 		StrByType = "
 		|RetailCustomer";
 	ElsIf Options.TransactionType = Outgoing_PaymentToVendor Or Options.TransactionType = Outgoing_ReturnToCustomer Then
@@ -3693,7 +3695,7 @@ Function ClearByTransactionTypeCashReceiptExecute(Options) Export
 	Incoming_PaymentFromCustomer = PredefinedValue("Enum.IncomingPaymentTransactionType.PaymentFromCustomer");
 	Incoming_ReturnFromVendor    = PredefinedValue("Enum.IncomingPaymentTransactionType.ReturnFromVendor");
 	Incoming_CashIn              = PredefinedValue("Enum.IncomingPaymentTransactionType.CashIn");
-	Incoming_CustomerAdvance     = PredefinedValue("Enum.IncomingPaymentTransactionType.CustomerAdvance");
+	Incoming_RetailCustomerAdvance     = PredefinedValue("Enum.IncomingPaymentTransactionType.RetailCustomerAdvance");
 	Incoming_EmployeeCashAdvance = PredefinedValue("Enum.IncomingPaymentTransactionType.EmployeeCashAdvance");
 	Incoming_OtherPartner        = PredefinedValue("Enum.IncomingPaymentTransactionType.OtherPartner");
 	
@@ -3725,7 +3727,7 @@ Function ClearByTransactionTypeCashReceiptExecute(Options) Export
 		|Agreement,
 		|Payer,
 		|LegalNameContract";			
-	ElsIf Options.TransactionType = Incoming_CustomerAdvance Then
+	ElsIf Options.TransactionType = Incoming_RetailCustomerAdvance Then
 		StrByType = "
 		|RetailCustomer";
 	ElsIf Options.TransactionType = Incoming_EmployeeCashAdvance Then
@@ -3941,7 +3943,7 @@ EndFunction
 #Region CALCULATE_PAYMENT_LIST_COMMISSION
 
 Function CalculatePaymentListCommissionOptions() Export
-	Return GetChainLinkOptions("TotalAmount, CommissionPercent");
+	Return GetChainLinkOptions("TotalAmount, CommissionPercent, TransactionType");
 EndFunction
 
 Function CalculatePaymentListCommissionExecute(Options) Export
@@ -3949,20 +3951,32 @@ Function CalculatePaymentListCommissionExecute(Options) Export
 	If ValueIsFilled(Options.CommissionPercent) Then
 		_CommissionPercent = Options.CommissionPercent;
 	EndIf;
-	Return (Options.TotalAmount/(1- _CommissionPercent/100)) - Options.TotalAmount;
-	//Return Options.TotalAmount * Options.CommissionPercent / 100;
+	
+	CommissionAmount = 0;
+	If Options.TransactionType = PredefinedValue("Enum.IncomingPaymentTransactionType.RetailCustomerAdvance") Then
+		CommissionAmount = Options.TotalAmount * _CommissionPercent / 100;
+	Else
+		CommissionAmount = (Options.TotalAmount/(1- _CommissionPercent/100)) - Options.TotalAmount;
+	EndIf;
+	
+	Return CommissionAmount;
 EndFunction
 
 #EndRegion
 
 #Region CHANGE_PERCENT_BY_BANK_TERM_AND_PAYMENT_TYPE
 
-Function ChangePercentByBankTermAndPaymentTypeOptions() Export
-	Return GetChainLinkOptions("PaymentType, BankTerm");
+Function ChangeCommissionPercentByBankTermAndPaymentTypeOptions() Export
+	Return GetChainLinkOptions("PaymentType, BankTerm, CurrentCommissionPercent, IsUserChange");
 EndFunction
 
-Function ChangePercentByBankTermAndPaymentTypeExecute(Options) Export
-	Return ModelServer_V2.GetBankTermInfo(Options.PaymentType, Options.BankTerm).Percent;
+Function ChangeCommissionPercentByBankTermAndPaymentTypeExecute(Options) Export
+	If Not Options.IsUserChange Then
+		Return Options.CurrentCommissionPercent;
+	EndIf;
+	
+	BankTermInfo = ModelServer_V2.GetBankTermInfo(Options.PaymentType, Options.BankTerm);
+	Return BankTermInfo.Percent;
 EndFunction
 
 #EndRegion
@@ -4110,7 +4124,9 @@ Function CalculatePercentByAmountExecute(Options) Export
 		Return 0;
 	EndIf;
 		
-	Return 100 * Options.Commission / Options.Amount;
+	CommissionPercent = 100 * Options.Commission / Options.Amount;
+		
+	Return CommissionPercent
 EndFunction
 
 #EndRegion
@@ -4118,7 +4134,7 @@ EndFunction
 #Region CALCULATE_PERCENT_COMMISSION_BY_AMOUNT
 
 Function CalculateCommissionPercentByAmountOptions() Export
-	Return GetChainLinkOptions("TotalAmount, Commission");
+	Return GetChainLinkOptions("TotalAmount, Commission, TransactionType");
 EndFunction
 
 Function CalculateCommissionPercentByAmountExecute(Options) Export
@@ -4132,8 +4148,16 @@ Function CalculateCommissionPercentByAmountExecute(Options) Export
 		_Commission = Options.Commission;
 	EndIf;
 	
-	Return _Commission/(Options.TotalAmount + _Commission) * 100;
-//	Return 100 * Options.Commission / Options.TotalAmount;
+	CommissionPercent = 0;
+	If Options.TransactionType = PredefinedValue("Enum.IncomingPaymentTransactionType.RetailCustomerAdvance") Then
+		If ValueIsFilled(Options.TotalAmount) Then
+			CommissionPercent = 100 * _Commission / Options.TotalAmount;
+		EndIf;
+	Else
+		CommissionPercent = _Commission/(Options.TotalAmount + _Commission) * 100;
+	EndIf;
+	
+	Return CommissionPercent;
 EndFunction
 
 #EndRegion
@@ -4150,7 +4174,6 @@ Function ChangeisControlCodeStringByItemExecute(Options) Export
 	Except
 		Workstation = Undefined;
 	EndTry;
-	
 	
 	If ValueIsFilled(Workstation) And CommonFunctionsServer.GetRefAttribute(Workstation, "IgnoreCodeStringControl") Then
 		Return False;

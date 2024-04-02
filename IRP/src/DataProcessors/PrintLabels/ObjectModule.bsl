@@ -40,6 +40,7 @@ Procedure FillAtServer(Object, Form) Export
 	ItemsInfo = GetItemInfo.ItemPriceInfoByTable(ItemPriceTable, CommonFunctionsServer.GetCurrentSessionDate());
 
 	PriceQuery = New Query();
+	//@skip-check bsl-ql-hub
 	PriceQuery.Text = 
 	"SELECT
 	|	ItemSource.Item,

@@ -437,20 +437,20 @@
   </commandInterface>
   <extInfo xsi:type="form:CatalogFormExtInfo">
     <handlers>
-      <event>BeforeWriteAtServer</event>
-      <name>BeforeWriteAtServer</name>
-    </handlers>
-    <handlers>
-      <event>OnReadAtServer</event>
-      <name>OnReadAtServer</name>
+      <event>AfterWrite</event>
+      <name>AfterWrite</name>
     </handlers>
     <handlers>
       <event>AfterWriteAtServer</event>
       <name>AfterWriteAtServer</name>
     </handlers>
     <handlers>
-      <event>AfterWrite</event>
-      <name>AfterWrite</name>
+      <event>OnReadAtServer</event>
+      <name>OnReadAtServer</name>
+    </handlers>
+    <handlers>
+      <event>BeforeWriteAtServer</event>
+      <name>BeforeWriteAtServer</name>
     </handlers>
   </extInfo>
 </form:Form>

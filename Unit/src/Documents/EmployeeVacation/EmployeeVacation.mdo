@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mdclass:Document xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" xmlns:mdclassExtension="http://g5.1c.ru/v8/dt/metadata/mdclass/extension" uuid="0504642e-67b0-412e-8289-b837970d21d2" extendedConfigurationObject="bde56744-ba88-40af-bdb4-f8c09277ce76">
+  <producedTypes>
+    <objectType typeId="a5e0a30e-84d5-4ed9-b5cc-de952247b5a6" valueTypeId="323c3d41-d149-455d-9988-689a9e5cf005"/>
+    <refType typeId="98c8cfea-5981-45b2-ae51-043adde070d0" valueTypeId="750462cc-e783-4b7c-9b15-65b686d6d512"/>
+    <selectionType typeId="75ae777d-5cd1-4dd4-9b06-604925cb803b" valueTypeId="671abbdb-beef-4ee8-b56b-9186bf4fb636"/>
+    <listType typeId="e534e150-a545-4d9c-aa68-009916a1618a" valueTypeId="97f98967-56bb-4e38-84b1-353952e197b4"/>
+    <managerType typeId="2b7ce2f0-326c-403e-aedd-73e11682df3e" valueTypeId="4650780d-3751-42e6-be01-54fb2234ad5f"/>
+  </producedTypes>
+  <name>EmployeeVacation</name>
+  <objectBelonging>Adopted</objectBelonging>
+  <extension xsi:type="mdclassExtension:DocumentExtension">
+    <extendedConfigurationObject>Checked</extendedConfigurationObject>
+  </extension>
+  <useStandardCommands>true</useStandardCommands>
+</mdclass:Document>

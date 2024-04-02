@@ -68,10 +68,10 @@
       <types>DocumentRef.PurchaseReturnOrder</types>
       <types>DocumentRef.WorkOrder</types>
       <types>DocumentRef.SalesOrder</types>
+      <types>DocumentRef.RetailSalesReceipt</types>
       <types>DocumentRef.InventoryTransferOrder</types>
       <types>DocumentRef.InventoryTransfer</types>
       <types>DocumentRef.SalesInvoice</types>
-      <types>DocumentRef.RetailSalesReceipt</types>
     </type>
     <minValue xsi:type="core:UndefinedValue"/>
     <maxValue xsi:type="core:UndefinedValue"/>

@@ -14,8 +14,6 @@ Procedure OnWrite(Cancel)
 	If DataExchange.Load Then
 		Return;
 	EndIf;
-
-	WriteMode = CommonFunctionsClientServer.GetFromAddInfo(ThisObject.AdditionalProperties, "WriteMode");
 EndProcedure
 
 Procedure BeforeDelete(Cancel)

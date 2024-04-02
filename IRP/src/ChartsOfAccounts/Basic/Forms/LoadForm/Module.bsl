@@ -89,19 +89,19 @@ Function LoadAtServer()
 		Return False;
 	EndIf;
 	
+	BeginTransaction();
 	Try
-		BeginTransaction();
 		CreateUpdateAccounts(QueryTableRefs, ValueTable);
 	
 		QueryTableOwners = GetOwners(ValueTable);
 		
-		SetOwners(QueryTableOwners, ValueTable)
+		SetOwners(QueryTableOwners, ValueTable);
+		CommitTransaction();
 	Except
 		RollbackTransaction();
 		Raise ErrorDescription();
 	EndTry;
 	
-	CommitTransaction();
 	Return True;
 EndFunction
 
@@ -345,7 +345,7 @@ Procedure CreateUpdateAccounts(QueryTable, ValueTable)
 			Sub1Type.TurnoversOnly    = Row.Sub1Turnover;
 			Sub1Type.Quantity         = Row.Sub1Quantity;
 			Sub1Type.Currency         = Row.Sub1Currency;
-			Sub1Type.Amount = Row.Sub1Amount;
+			Sub1Type.Amount 		  = Row.Sub1Amount;
 		EndIf;
 	
 		Sub2TypeRef = Sub2TypeMap[Row.Sub2Type];
@@ -395,7 +395,6 @@ Procedure SetOwners(QueryTable, ValueTable)
 	EndDo;
 EndProcedure
 	
-
 ThisObject.Columns = 
 		"LedgerType,
 		|ForbidRecord,

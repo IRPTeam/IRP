@@ -1940,7 +1940,8 @@ Function T9510S_Staffing()
 		|	EmployeeList.Employee,
 		|	EmployeeList.Position,
 		|	EmployeeList.EmployeeSchedule,
-		|	EmployeeList.ProfitLossCenter
+		|	EmployeeList.ProfitLossCenter,
+		|	FALSE AS Fired
 		|INTO T9510S_Staffing
 		|FROM
 		|	EmployeeList AS EmployeeList

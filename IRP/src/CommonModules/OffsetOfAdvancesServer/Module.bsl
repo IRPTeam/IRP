@@ -999,9 +999,11 @@ Procedure Write_SelfRecords(Parameters,
 			NewRow_PartnerBalance_Advances = TablePartnersBalance.Add();
 			
 			If DocMetadata = Metadata.Documents.BankReceipt
+				Or (DocMetadata = Metadata.Documents.DebitCreditNote And Row.Document.ReceiveDebtType = Enums.DebtTypes.AdvanceCustomer) 
 				Or DocMetadata = Metadata.Documents.CashReceipt
 				Or DocMetadata = Metadata.Documents.SalesReportFromTradeAgent
 				Or DocMetadata = Metadata.Documents.SalesInvoice
+				Or (DocMetadata = Metadata.Documents.DebitCreditNote And Row.Document.ReceiveDebtType = Enums.DebtTypes.TransactionCustomer)
 				Or (DocMetadata = Metadata.Documents.DebitNote And IsCustomerAdvanceClosing)
 				Or (DocMetadata = Metadata.Documents.SalesReturn And Not RowOffset.IsReturnToAdvance)
 				Or (DocMetadata = Metadata.Documents.CreditNote And Not RowOffset.IsReturnToAdvance And IsCustomerAdvanceClosing)
@@ -1087,9 +1089,11 @@ Procedure Write_SelfRecords(Parameters,
 			NewRow_PartnersBalance_Transactions = TablePartnersBalance.Add();
 			
 			If DocMetadata = Metadata.Documents.BankPayment
+				Or (DocMetadata = Metadata.Documents.DebitCreditNote And Row.Document.ReceiveDebtType = Enums.DebtTypes.AdvanceVendor)
 				Or DocMetadata = Metadata.Documents.CashPayment
 				Or DocMetadata = Metadata.Documents.SalesReportToConsignor
 				Or DocMetadata = Metadata.Documents.PurchaseInvoice
+				Or (DocMetadata = Metadata.Documents.DebitCreditNote And Row.Document.ReceiveDebtType = Enums.DebtTypes.TransactionVendor)
 				Or (DocMetadata = Metadata.Documents.CreditNote And IsVendorAdvanceClosing)
 				Or DocMetadata = Metadata.Documents.PurchaseReturn
 				Or (DocMetadata = Metadata.Documents.DebitNote And IsVendorAdvanceClosing)

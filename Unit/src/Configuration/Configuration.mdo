@@ -194,6 +194,7 @@
   <enums>Enum.REP_ReportParametrTypes</enums>
   <reports>Report.REP_Barcodes</reports>
   <reports>Report.D0009_DocumentRegistrationsReport</reports>
+  <reports>Report.D0013_DocumentRegistrationsReport</reports>
   <dataProcessors>DataProcessor.Unit_CheckAllTypeData</dataProcessors>
   <dataProcessors>DataProcessor.Unit_RunTest</dataProcessors>
   <informationRegisters>InformationRegister.AttachedFiles</informationRegisters>

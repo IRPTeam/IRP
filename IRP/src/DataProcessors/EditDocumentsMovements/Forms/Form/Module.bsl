@@ -104,7 +104,7 @@ EndProcedure
 &AtClient
 Procedure RegisterTableOnChange(Item)
 	
-	Item.Parent.Picture = PictureLib.Change;
+	Item.Parent.Picture = PictureLib.AppearanceExclamationMark;
 	
 EndProcedure
 
@@ -112,17 +112,11 @@ EndProcedure
 Procedure AddPageForMovement(RegisterName, RecordsCount)
 
 	PageName = "Register_" + RegisterName;
-
+	
 	NewPage = Items.Add(PageName, Type("FormGroup"), Items.Registers);
 	NewPage.Type	= FormGroupType.Page;
-	NewPage.Title	= StrTemplate("(%1) %2", RecordsCount, RegisterName);
-		
-	DecorationName = RegisterName + "Decoration";
+	NewPage.Title	= StrTemplate("%1 (%2)", RegisterName, RecordsCount);
 	
-	DecorationItem = Items.Add(DecorationName, Type("FormDecoration"), Items[PageName]);
-	DecorationItem.Type		= FormDecorationType.Label;
-	DecorationItem.Title	= RegisterName;
-
 EndProcedure
 
 &AtServer
@@ -147,9 +141,21 @@ EndProcedure
 &AtClient
 Procedure ManualMovementsEditOnChange(Item)
 	
-	SetEnabledToRegisterPages();
+	If GetAttributesFromRef(Object.DocumentRef, "ManualMovementsEdit").ManualMovementsEdit Then
+		QuestionToUserNotify = New NotifyDescription("RestoreDefaultMovementsNotify", ThisObject, New Structure);
+		ShowQueryBox(QuestionToUserNotify, R().QuestionToUser_030, QuestionDialogMode.YesNo);
+	Else
+		SetEnabledToRegisterPages();
+	EndIf;
 	
 EndProcedure
+
+&AtServer
+Function GetAttributesFromRef(Ref, Attribute)
+	
+	Return CommonFunctionsServer.GetAttributesFromRef(Ref, Attribute);
+	
+EndFunction
 
 &AtClient
 Procedure SetEnabledToRegisterPages()
@@ -180,7 +186,11 @@ EndProcedure
 
 &AtClient
 Procedure RereadData(Command)
-	FillObjectMovements();	
+	
+	FillObjectMovements();
+	SetEnabledToRegisterPages();
+	MovementAnalysisAtServer();
+	
 EndProcedure
 
 &AtServer
@@ -235,12 +245,62 @@ Procedure MovementAnalysis(Command)
 EndProcedure
 
 &AtClient
-Procedure UncheckManualMovementsEditNotify(Result, AddirionalParameters) Export
+Procedure UncheckManualMovementsEditNotify(Result, AdditionalParameters) Export
 	
 	If Not Result = DialogReturnCode.Yes Then
 		Return;
 	EndIf;
 	SetManualMovementsEditInDocument(False);
+	
+EndProcedure
+
+&AtClient
+Procedure RestoreDefaultMovementsNotify(Result, AdditionalParameters) Export
+	
+	If Not Result = DialogReturnCode.Yes Then
+		ManualMovementsEdit = True;
+		Return;
+	EndIf;
+	
+	SetDefaultMovementsToDocument();
+	
+EndProcedure
+
+&AtServer
+Procedure SetDefaultMovementsToDocument()
+
+	Array = New Array;
+	Array.Add(Object.DocumentRef);
+	
+	ChechResult = PostingServer.CheckDocumentArray(Array);
+	If ChechResult.Count() > 0 Then
+		DifferenceStructure = ChechResult[0];
+		
+		For Each RegInfo In DifferenceStructure.RegInfo Do
+			
+			DotPosition = StrFind(RegInfo.RegName, ".");
+			RegName = Mid(RegInfo.RegName, DotPosition+1);
+			
+			TableName = RegName;
+			ThisObject[RegName].Load(RegInfo.NewPostingData);
+			
+		EndDo;
+		
+		Cancel = False;
+		WriteMovementsOnServer(Cancel);
+		If Not Cancel Then
+			
+			SetManualMovementsEditInDocument(False);
+			TextMessage = R().InfoMessage_037;
+			
+			CommonFunctionsClientServer.ShowUsersMessage(TextMessage);
+		Else
+			ManualMovementsEdit = True;
+		EndIf;
+		
+		MovementAnalysisAtServer();
+		
+	EndIf;
 	
 EndProcedure
 
@@ -270,7 +330,7 @@ Procedure MovementAnalysisAtServer(IsDifferenceInMovements = False)
 			If ArrayItemStructure.Ref = Object.DocumentRef Then
 				For Each RegInfo In ArrayItemStructure.RegInfo Do
 					Message = StrTemplate(R().Error_145, RegInfo.RegName);
-					CommonFunctionsClientServer.ShowUsersMessage(Message);
+					//CommonFunctionsClientServer.ShowUsersMessage(Message);
 					
 					DotPosition = StrFind(RegInfo.RegName, ".");
 					RegEditNames.Add(Mid(RegInfo.RegName, DotPosition+1));
@@ -290,7 +350,7 @@ Procedure SetPicturesForPages(RegEditNames)
 		RegisterName = StrReplace(Page.Name, "Register_", "");
 		
 		If RegEditNames.Find(RegisterName) <> Undefined Then
-			Page.Picture = PictureLib.Change;
+			Page.Picture = PictureLib.AppearanceExclamationMark;
 		Else	
 			Page.Picture = PictureLib.AppearanceCheckBox;
 		EndIf;		

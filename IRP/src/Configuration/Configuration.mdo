@@ -433,6 +433,7 @@
   <roles>Role.Document_DebitCreditNote</roles>
   <roles>Role.AuditLockSet</roles>
   <roles>Role.AuditLockUnset</roles>
+  <roles>Role.ManualRegisterEdit</roles>
   <commonTemplates>CommonTemplate.HTMLPictureSlider</commonTemplates>
   <commonTemplates>CommonTemplate.HTMLAddAttributes</commonTemplates>
   <commonTemplates>CommonTemplate.HTMLGallery</commonTemplates>

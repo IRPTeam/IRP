@@ -794,16 +794,14 @@ Scenario: _042537 check Retail return receipt movements by the Register  "R2006 
 			| 'Number'   |
 			| '12'       |
 	* Check movements by the Register  "R2006 Certificates"
-		And I click "Registrations report" button
+		And I click "Registrations report info" button
 		And I select "R2006 Certificates" exact value from "Register" drop-down list
 		And I click "Generate report" button
 		Then "ResultTable" spreadsheet document is equal
-			| 'Retail return receipt 12 dated 22.08.2023 14:22:30' | ''                    | ''          | ''       | ''           | ''                  | ''              |
-			| 'Document registrations records'                     | ''                    | ''          | ''       | ''           | ''                  | ''              |
-			| 'Register  "R2006 Certificates"'                     | ''                    | ''          | ''       | ''           | ''                  | ''              |
-			| ''                                                   | 'Period'              | 'Resources' | ''       | 'Dimensions' | ''                  | 'Attributes'    |
-			| ''                                                   | ''                    | 'Quantity'  | 'Amount' | 'Currency'   | 'Serial lot number' | 'Movement type' |
-			| ''                                                   | '22.08.2023 14:22:30' | '1'         | '500'    | 'TRY'        | '99999999999'       | 'ReturnUsed'    |		
+			| 'Retail return receipt 12 dated 22.08.2023 14:22:30' | ''                    | ''         | ''                  | ''         | ''       | ''              |
+			| 'Register  "R2006 Certificates"'                     | ''                    | ''         | ''                  | ''         | ''       | ''              |
+			| ''                                                   | 'Period'              | 'Currency' | 'Serial lot number' | 'Quantity' | 'Amount' | 'Movement type' |
+			| ''                                                   | '22.08.2023 14:22:30' | 'TRY'      | '99999999999'       | '1'        | '500'    | 'ReturnUsed'    |	
 		And I close all client application windows
 
 Scenario: _042538 check Retail return receipt movements by the Register  "R2006 Certificates" (Return of an unused certificate)

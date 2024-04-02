@@ -207,18 +207,16 @@ Scenario: _040007 check item stock adjustment movements by the Register  "R4051 
 			| 'Number'    |
 			| '1'         |
 	* Check movements by the Register  "R4052 Stock adjustment (Surplus)"
-		And I click "Registrations report" button
+		And I click "Registrations report info" button
 		And I select "R4051 Stock adjustment (Write off)" exact value from "Register" drop-down list
 		And I click "Generate report" button
 		Then "ResultTable" spreadsheet document is equal
-			| 'Item stock adjustment 1 dated 27.01.2021 19:04:15'   | ''                      | ''            | ''             | ''        | ''             |
-			| 'Document registrations records'                      | ''                      | ''            | ''             | ''        | ''             |
-			| 'Register  "R4051 Stock adjustment (Write off)"'      | ''                      | ''            | ''             | ''        | ''             |
-			| ''                                                    | 'Period'                | 'Resources'   | 'Dimensions'   | ''        | ''             |
-			| ''                                                    | ''                      | 'Quantity'    | 'Store'        | 'Basis'   | 'Item key'     |
-			| ''                                                    | '27.01.2021 19:04:15'   | '5'           | 'Store 02'     | ''        | '36/Yellow'    |
-			| ''                                                    | '27.01.2021 19:04:15'   | '10'          | 'Store 02'     | ''        | '37/18SD'      |
-			| ''                                                    | '27.01.2021 19:04:15'   | '16'          | 'Store 02'     | ''        | 'XS/Blue'      |
+			| 'Item stock adjustment 1 dated 27.01.2021 19:04:15' | ''                    | ''         | ''      | ''          | ''         |
+			| 'Register  "R4051 Stock adjustment (Write off)"'    | ''                    | ''         | ''      | ''          | ''         |
+			| ''                                                  | 'Period'              | 'Store'    | 'Basis' | 'Item key'  | 'Quantity' |
+			| ''                                                  | '27.01.2021 19:04:15' | 'Store 02' | ''      | 'XS/Blue'   | '16'       |
+			| ''                                                  | '27.01.2021 19:04:15' | 'Store 02' | ''      | '36/Yellow' | '5'        |
+			| ''                                                  | '27.01.2021 19:04:15' | 'Store 02' | ''      | '37/18SD'   | '10'       |		
 		And I close all client application windows	
 
 Scenario: _040012 item stock adjustment clear posting/mark for deletion

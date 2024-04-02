@@ -790,17 +790,15 @@ Scenario: _042934 check Opening entry movements by the Register  "R2023 Advances
 			| 'Number'    |
 			| '315'       |
 	* Check movements by the Register  "R2023 Advances from retail customers" 
-		And I click "Registrations report" button
+		And I click "Registrations report info" button
 		And I select "R2023 Advances from retail customers" exact value from "Register" drop-down list
 		And I click "Generate report" button
 		Then "ResultTable" spreadsheet document is equal
-			| 'Opening entry 315 dated 03.03.2023 17:09:42'        | ''              | ''                      | ''            | ''               | ''         | ''                   |
-			| 'Document registrations records'                     | ''              | ''                      | ''            | ''               | ''         | ''                   |
-			| 'Register  "R2023 Advances from retail customers"'   | ''              | ''                      | ''            | ''               | ''         | ''                   |
-			| ''                                                   | 'Record type'   | 'Period'                | 'Resources'   | 'Dimensions'     | ''         | ''                   |
-			| ''                                                   | ''              | ''                      | 'Amount'      | 'Company'        | 'Branch'   | 'Retail customer'    |
-			| ''                                                   | 'Receipt'       | '03.03.2023 17:09:42'   | '1 000'       | 'Main Company'   | ''         | 'Daniel Smith'       |
-			| ''                                                   | 'Receipt'       | '03.03.2023 17:09:42'   | '1 000'       | 'Main Company'   | ''         | 'Sam Jons'           |
+			| 'Opening entry 315 dated 03.03.2023 17:09:42'      | ''                    | ''           | ''             | ''       | ''                | ''       |
+			| 'Register  "R2023 Advances from retail customers"' | ''                    | ''           | ''             | ''       | ''                | ''       |
+			| ''                                                 | 'Period'              | 'RecordType' | 'Company'      | 'Branch' | 'Retail customer' | 'Amount' |
+			| ''                                                 | '03.03.2023 17:09:42' | 'Receipt'    | 'Main Company' | ''       | 'Daniel Smith'    | '1 000'  |
+			| ''                                                 | '03.03.2023 17:09:42' | 'Receipt'    | 'Main Company' | ''       | 'Sam Jons'        | '1 000'  |	
 		And I close all client application windows
 
 Scenario: _042935 check Opening entry movements by the Register  "Cash in transit" (cash in transit)

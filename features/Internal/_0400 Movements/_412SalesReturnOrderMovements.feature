@@ -168,19 +168,17 @@ Scenario: _041201 check Sales return order movements by the Register  "R2012 Inv
 			| 'Number'    |
 			| '102'       |
 	* Check movements by the Register  "R2012 Invoice closing of sales orders"
-		And I click "Registrations report" button
+		And I click "Registrations report info" button
 		And I select "R2012 Invoice closing of sales orders" exact value from "Register" drop-down list
 		And I click "Generate report" button
 		Then "ResultTable" spreadsheet document is equal
-			| 'Sales return order 102 dated 12.03.2021 09:19:54'  | ''            | ''                    | ''          | ''       | ''           | ''             | ''                        | ''                                                 | ''         | ''         | ''                                     |
-			| 'Document registrations records'                    | ''            | ''                    | ''          | ''       | ''           | ''             | ''                        | ''                                                 | ''         | ''         | ''                                     |
-			| 'Register  "R2012 Invoice closing of sales orders"' | ''            | ''                    | ''          | ''       | ''           | ''             | ''                        | ''                                                 | ''         | ''         | ''                                     |
-			| ''                                                  | 'Record type' | 'Period'              | 'Resources' | ''       | ''           | 'Dimensions'   | ''                        | ''                                                 | ''         | ''         | ''                                     |
-			| ''                                                  | ''            | ''                    | 'Quantity'  | 'Amount' | 'Net amount' | 'Company'      | 'Branch'                  | 'Order'                                            | 'Currency' | 'Item key' | 'Row key'                              |
-			| ''                                                  | 'Receipt'     | '12.03.2021 09:19:54' | '1'         | '95'     | '80,51'      | 'Main Company' | 'Distribution department' | 'Sales return order 102 dated 12.03.2021 09:19:54' | 'TRY'      | 'Internet' | '37e26a55-1218-4af2-a620-5129b5ac46c9' |
-			| ''                                                  | 'Receipt'     | '12.03.2021 09:19:54' | '1'         | '494'    | '418,64'     | 'Main Company' | 'Distribution department' | 'Sales return order 102 dated 12.03.2021 09:19:54' | 'TRY'      | 'XS/Blue'  | '9504489e-16cb-4b67-9691-4fef4a8c41e5' |
-			| ''                                                  | 'Receipt'     | '12.03.2021 09:19:54' | '10'        | '3 325'  | '2 817,8'    | 'Main Company' | 'Distribution department' | 'Sales return order 102 dated 12.03.2021 09:19:54' | 'TRY'      | '36/Red'   | '51779d1c-2838-4ad7-b00f-42a0f64224ba' |
-			| ''                                                  | 'Receipt'     | '12.03.2021 09:19:54' | '24'        | '15 960' | '13 525,42'  | 'Main Company' | 'Distribution department' | 'Sales return order 102 dated 12.03.2021 09:19:54' | 'TRY'      | '36/18SD'  | '77531307-5aaa-44a6-a1df-979318620e56' |		
+			| 'Sales return order 102 dated 12.03.2021 09:19:54'  | ''                    | ''           | ''             | ''                        | ''                                                 | ''         | ''         | ''                                     | ''         | ''       | ''           |
+			| 'Register  "R2012 Invoice closing of sales orders"' | ''                    | ''           | ''             | ''                        | ''                                                 | ''         | ''         | ''                                     | ''         | ''       | ''           |
+			| ''                                                  | 'Period'              | 'RecordType' | 'Company'      | 'Branch'                  | 'Order'                                            | 'Currency' | 'Item key' | 'Row key'                              | 'Quantity' | 'Amount' | 'Net amount' |
+			| ''                                                  | '12.03.2021 09:19:54' | 'Receipt'    | 'Main Company' | 'Distribution department' | 'Sales return order 102 dated 12.03.2021 09:19:54' | 'TRY'      | 'XS/Blue'  | '9504489e-16cb-4b67-9691-4fef4a8c41e5' | '1'        | '494'    | '418,64'     |
+			| ''                                                  | '12.03.2021 09:19:54' | 'Receipt'    | 'Main Company' | 'Distribution department' | 'Sales return order 102 dated 12.03.2021 09:19:54' | 'TRY'      | '36/Red'   | '51779d1c-2838-4ad7-b00f-42a0f64224ba' | '10'       | '3 325'  | '2 817,8'    |
+			| ''                                                  | '12.03.2021 09:19:54' | 'Receipt'    | 'Main Company' | 'Distribution department' | 'Sales return order 102 dated 12.03.2021 09:19:54' | 'TRY'      | '36/18SD'  | '77531307-5aaa-44a6-a1df-979318620e56' | '24'       | '15 960' | '13 525,42'  |
+			| ''                                                  | '12.03.2021 09:19:54' | 'Receipt'    | 'Main Company' | 'Distribution department' | 'Sales return order 102 dated 12.03.2021 09:19:54' | 'TRY'      | 'Internet' | '37e26a55-1218-4af2-a620-5129b5ac46c9' | '1'        | '95'     | '80,51'      |
 	And I close all client application windows
 
 

@@ -1,4 +1,4 @@
-#language: en
+﻿#language: en
 @tree
 @Positive
 @Movements
@@ -144,18 +144,16 @@ Scenario: _041502 check Purchase return order movements by the Register "R1012 I
 			| 'Number'    |
 			| '231'       |
 	* Check movements by the Register  "R1012 Invoice closing of purchase orders" 
-		And I click "Registrations report" button
+		And I click "Registrations report info" button
 		And I select "R1012 Invoice closing of purchase orders" exact value from "Register" drop-down list
 		And I click "Generate report" button
 		Then "ResultTable" spreadsheet document is equal
-			| 'Purchase return order 231 dated 14.03.2021 18:52:33'    | ''              | ''                      | ''            | ''         | ''             | ''               | ''               | ''                                                      | ''           | ''            | ''                                        |
-			| 'Document registrations records'                         | ''              | ''                      | ''            | ''         | ''             | ''               | ''               | ''                                                      | ''           | ''            | ''                                        |
-			| 'Register  "R1012 Invoice closing of purchase orders"'   | ''              | ''                      | ''            | ''         | ''             | ''               | ''               | ''                                                      | ''           | ''            | ''                                        |
-			| ''                                                       | 'Record type'   | 'Period'                | 'Resources'   | ''         | ''             | 'Dimensions'     | ''               | ''                                                      | ''           | ''            | ''                                        |
-			| ''                                                       | ''              | ''                      | 'Quantity'    | 'Amount'   | 'Net amount'   | 'Company'        | 'Branch'         | 'Order'                                                 | 'Currency'   | 'Item key'    | 'Row key'                                 |
-			| ''                                                       | 'Receipt'       | '14.03.2021 18:52:33'   | '1'           | '180'      | '152,54'       | 'Main Company'   | 'Front office'   | 'Purchase return order 231 dated 14.03.2021 18:52:33'   | 'TRY'        | '36/Yellow'   | '923e7825-c20f-4a3e-a983-2b85d80e475a'    |
-			| ''                                                       | 'Receipt'       | '14.03.2021 18:52:33'   | '2'           | '270'      | '228,81'       | 'Main Company'   | 'Front office'   | 'Purchase return order 231 dated 14.03.2021 18:52:33'   | 'TRY'        | 'Internet'    | '1b90516b-b3ac-4ca5-bb47-44477975f242'    |
-			| ''                                                       | 'Receipt'       | '14.03.2021 18:52:33'   | '5'           | '450'      | '381,36'       | 'Main Company'   | 'Front office'   | 'Purchase return order 231 dated 14.03.2021 18:52:33'   | 'TRY'        | 'S/Yellow'    | '4fcbb4cf-3824-47fb-89b5-50d151315d4d'    |
+			| 'Purchase return order 231 dated 14.03.2021 18:52:33'  | ''                    | ''           | ''             | ''             | ''                                                    | ''         | ''          | ''                                     | ''         | ''       | ''           |
+			| 'Register  "R1012 Invoice closing of purchase orders"' | ''                    | ''           | ''             | ''             | ''                                                    | ''         | ''          | ''                                     | ''         | ''       | ''           |
+			| ''                                                     | 'Period'              | 'RecordType' | 'Company'      | 'Branch'       | 'Order'                                               | 'Currency' | 'Item key'  | 'Row key'                              | 'Quantity' | 'Amount' | 'Net amount' |
+			| ''                                                     | '14.03.2021 18:52:33' | 'Receipt'    | 'Main Company' | 'Front office' | 'Purchase return order 231 dated 14.03.2021 18:52:33' | 'TRY'      | 'S/Yellow'  | '4fcbb4cf-3824-47fb-89b5-50d151315d4d' | '5'        | '450'    | '381,36'     |
+			| ''                                                     | '14.03.2021 18:52:33' | 'Receipt'    | 'Main Company' | 'Front office' | 'Purchase return order 231 dated 14.03.2021 18:52:33' | 'TRY'      | '36/Yellow' | '923e7825-c20f-4a3e-a983-2b85d80e475a' | '1'        | '180'    | '152,54'     |
+			| ''                                                     | '14.03.2021 18:52:33' | 'Receipt'    | 'Main Company' | 'Front office' | 'Purchase return order 231 dated 14.03.2021 18:52:33' | 'TRY'      | 'Internet'  | '1b90516b-b3ac-4ca5-bb47-44477975f242' | '2'        | '270'    | '228,81'     |	
 	And I close all client application windows
 
 

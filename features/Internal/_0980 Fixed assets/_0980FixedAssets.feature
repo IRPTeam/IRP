@@ -74,10 +74,12 @@ Scenario: _980001 preparation (fixed assets)
 			| "Documents.PurchaseInvoice.FindByNumber(78).GetObject().Write(DocumentWriteMode.Posting);"    |
 		And I execute 1C:Enterprise script at server
 			| "Documents.PurchaseInvoice.FindByNumber(79).GetObject().Write(DocumentWriteMode.Posting);"    |
-		And I execute 1C:Enterprise script at server
-			| "Documents.CalculationMovementCosts.FindByNumber(78).GetObject().Write(DocumentWriteMode.Posting);"    |
-		And I execute 1C:Enterprise script at server
-			| "Documents.CalculationMovementCosts.FindByNumber(79).GetObject().Write(DocumentWriteMode.Posting);"    |
+		* Posting Calculation movement costs
+			Given I open hyperlink "e1cib/list/Document.CalculationMovementCosts"
+			Then "Calculation movement costs" window is opened
+			Then I select all lines of "List" table
+			And in the table "List" I click the button named "ListContextMenuPost"
+			And Delay "5"
 	And I close all client application windows
 	
 Scenario: _980002 check preparation
@@ -216,6 +218,15 @@ Scenario: _980007 create commissioning of fixed asset
 			| 'Description'   |
 			| 'Fixed asset 1' |
 		And I select current line in "List" table
+		And I move to "Other" tab
+		And I move to "More" tab
+		And I input "12.01.2024 00:00:00" text in the field named "Date"
+		And I move to the next attribute
+		And I click Choice button of the field named "Branch"
+		And I go to line in "List" table
+			| 'Description'  |
+			| 'Front office' |
+		And I select current line in "List" table
 		And I click "Post" button
 	* Check
 		And I delete "$$NumberCommissioningOfFixedAsset1$$" variable
@@ -241,6 +252,15 @@ Scenario: _980007 create commissioning of fixed asset
 		And I activate "Item" field in "ItemList" table
 		And I select current line in "ItemList" table
 		And I select "Fixed asset 2" from "Item" drop-down list by string in "ItemList" table
+		And I move to "Other" tab
+		And I move to "More" tab
+		And I input "03.02.2024 00:00:00" text in the field named "Date"
+		And I move to the next attribute
+		And I click Choice button of the field named "Branch"
+		And I go to line in "List" table
+			| 'Description'  |
+			| 'Front office' |
+		And I select current line in "List" table
 		And I click "Post" button
 		And "ItemList" table became equal
 			| '#' | 'Item'          | 'Item key'      | 'Serial lot numbers' | 'Unit' | 'Source of origins' | 'Quantity' | 'Store'    |
@@ -256,4 +276,85 @@ Scenario: _980007 create commissioning of fixed asset
 			| '$$NumberCommissioningOfFixedAsset2$$' |
 	And I close all client application windows
 
-						
+Scenario: _9800020 create depreciation calculation
+	And I close all client application windows
+	* Create deprecation calculation for first month
+		Given I open hyperlink "e1cib/list/Document.DepreciationCalculation"
+		And I click "Create" button	
+	* Filling main details
+		And I select from the drop-down list named "Company" by "Main Company" string	
+		And I click Choice button of the field named "Branch"
+		And I go to line in "List" table
+			| 'Description'  |
+			| 'Front office' |
+		And I select current line in "List" table
+	* Fill deprecation calculation for first month (empty)
+		And I click Choice button of the field named "Date"
+		And I input "31.01.2024 00:00:00" text in the field named "Date"
+		And in the table "Calculations" I click "Fill calculations" button
+		Then the number of "Calculations" table lines is "равно" 0
+	* Fill deprecation calculation for second month
+		And I input "29.02.2024 00:00:00" text in the field named "Date"
+		And in the table "Calculations" I click "Fill calculations" button
+		And "Calculations" table became equal
+			| '#' | 'Fixed asset'      | 'Profit loss center'   | 'Ledger type'                          | 'Schedule'                  | 'Calculation method' | 'Currency' | 'Expense type' | 'Amount balance' | 'Amount' |
+			| '1' | 'Computer Servers' | 'Logistics department' | 'Computer Hardware (with deprecation)' | 'Straight line (36 months)' | 'Straight line'      | 'TRY'      | 'Expense'      | '5 000,00'       | '138,89' |
+		* Change amount
+			And I activate "Amount" field in "Calculations" table
+			And I select current line in "Calculations" table
+			And I input "277,78" text in "Amount" field of "Calculations" table
+			And I finish line editing in "Calculations" table
+		And I click "Post" button
+	* Check
+		And I delete "$$NumberDepreciationCalculation1$$" variable
+		And I delete "$$DepreciationCalculation1$$" variable
+		And I save the value of "Number" field as "$$NumberDepreciationCalculation1$$"
+		And I save the window as "$$DepreciationCalculation1$$"
+		And I click the button named "FormPostAndClose"
+		And "List" table contains lines
+			| 'Number'                             |
+			| '$$NumberDepreciationCalculation1$$' |
+	* Fill deprecation calculation for third month
+		Given I open hyperlink "e1cib/list/Document.DepreciationCalculation"
+		And I click "Create" button
+		And I input "31.03.2024 00:00:00" text in the field named "Date"
+		And I select from the drop-down list named "Company" by "Main Company" string	
+		And I click Choice button of the field named "Branch"
+		And I go to line in "List" table
+			| 'Description'  |
+			| 'Front office' |
+		And I select current line in "List" table
+		And in the table "Calculations" I click "Fill calculations" button
+		And "Calculations" table became equal
+			| '#' | 'Fixed asset'      | 'Profit loss center'   | 'Ledger type'                               | 'Schedule'                      | 'Calculation method' | 'Currency' | 'Expense type' | 'Amount balance' | 'Amount'   |
+			| '1' | 'Computer Servers' | 'Logistics department' | 'Computer Hardware (with deprecation)'      | 'Straight line (36 months)'     | 'Straight line'      | 'TRY'      | 'Expense'      | '4 722,22'       | '138,89'   |
+			| '2' | 'Office Furniture' | 'Logistics department' | 'Furniture and Fixtures (with deprecation)' | 'Declining balance (60 months)' | 'Declining balance'  | 'TRY'      | 'Expense'      | '7 000,00'       | '1 166,67' |
+		And I click "Post" button
+	* Check
+		And I delete "$$NumberDepreciationCalculation2$$" variable
+		And I delete "$$DepreciationCalculation2$$" variable
+		And I save the value of "Number" field as "$$NumberDepreciationCalculation2$$"
+		And I save the window as "$$DepreciationCalculation2$$"
+		And I click the button named "FormPostAndClose"
+		And "List" table contains lines
+			| 'Number'                             |
+			| '$$NumberDepreciationCalculation2$$' |
+		And I close all client application windows
+
+Scenario: _9800021 check filter by branch for Depreciation calculation
+	And I close all client application windows
+	* Create deprecation calculation for first month
+		Given I open hyperlink "e1cib/list/Document.DepreciationCalculation"
+		And I click "Create" button
+		And I click Choice button of the field named "Date"
+		And I input "30.04.2024 00:00:00" text in the field named "Date"
+		And I move to the next attribute		
+	* Filling main details
+		And I select from the drop-down list named "Company" by "Main Company" string	
+		Then the form attribute named "Branch" became equal to ""		
+	* Fill deprecation calculation for first month (empty)
+		And I click Choice button of the field named "Date"
+		And in the table "Calculations" I click "Fill calculations" button
+		Then the number of "Calculations" table lines is "равно" 0
+	And I close all client application windows
+	

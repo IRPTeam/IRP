@@ -22,5 +22,10 @@
     <types>DocumentRef.ForeignCurrencyRevaluation</types>
     <types>DocumentRef.SalesInvoice</types>
     <types>DocumentRef.CashExpense</types>
+    <types>DocumentRef.CommissioningOfFixedAsset</types>
+    <types>DocumentRef.DecommissioningOfFixedAsset</types>
+    <types>DocumentRef.FixedAssetTransfer</types>
+    <types>DocumentRef.ModernizationOfFixedAsset</types>
+    <types>DocumentRef.DepreciationCalculation</types>
   </type>
 </mdclass:DefinedType>

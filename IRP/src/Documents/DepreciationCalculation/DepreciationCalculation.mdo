@@ -36,6 +36,8 @@
   <realTimePosting>Deny</realTimePosting>
   <registerRecords>AccumulationRegister.R5022T_Expenses</registerRecords>
   <registerRecords>AccumulationRegister.R8510B_BookValueOfFixedAsset</registerRecords>
+  <registerRecords>AccumulationRegister.T1040T_AccountingAmounts</registerRecords>
+  <registerRecords>AccumulationRegister.T1050T_AccountingQuantities</registerRecords>
   <postInPrivilegedMode>true</postInPrivilegedMode>
   <unpostInPrivilegedMode>true</unpostInPrivilegedMode>
   <attributes uuid="0fb812b1-156c-4055-9a1c-a07db92ca4b5">
@@ -237,6 +239,20 @@
       <key>en</key>
       <value>Calculations</value>
     </synonym>
+    <attributes uuid="b107bc13-ecff-4cb7-8733-cd761be3e07c">
+      <name>Key</name>
+      <synonym>
+        <key>en</key>
+        <value>Key</value>
+      </synonym>
+      <type>
+        <types>DefinedType.typeRowID</types>
+      </type>
+      <minValue xsi:type="core:UndefinedValue"/>
+      <maxValue xsi:type="core:UndefinedValue"/>
+      <dataHistory>Use</dataHistory>
+      <fullTextSearch>Use</fullTextSearch>
+    </attributes>
     <attributes uuid="066380d2-4149-4d3d-81df-9fc4808dc2ed">
       <name>FixedAsset</name>
       <synonym>

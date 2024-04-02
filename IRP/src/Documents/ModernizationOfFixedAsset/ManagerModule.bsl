@@ -143,6 +143,8 @@ Function PostingGetDocumentDataTables(Ref, Cancel, PostingMode, Parameters, AddI
 
 	CurrenciesServer.ExcludePostingDataTable(Parameters, Metadata.InformationRegisters.T6020S_BatchKeysInfo);
 	
+	AccountingServer.CreateAccountingDataTables(Ref, Cancel, PostingMode, Parameters, AddInfo);
+	
 	Return Tables;
 EndFunction
 
@@ -255,6 +257,8 @@ Function GetQueryTextsMasterTables()
 	QueryArray.Add(R8510B_BookValueOfFixedAsset());
 	QueryArray.Add(T6010S_BatchesInfo());
 	QueryArray.Add(R8515T_CostOfFixedAsset());
+	QueryArray.Add(T1040T_AccountingAmounts());
+	QueryArray.Add(T1050T_AccountingQuantities());
 	Return QueryArray;
 EndFunction
 
@@ -268,6 +272,7 @@ Function ItemList()
 		|	ItemList.Ref AS Ref,
 		|	ItemList.Ref.Date AS Period,
 		|	ItemList.Ref.Company AS Company,
+		|	ItemList.Ref.Company.LandedCostCurrencyMovementType.Currency AS Currency,
 		|	ItemList.Ref.Branch AS Branch,
 		|	ItemList.Ref.ProfitLossCenter AS ProfitLossCenter,
 		|	ItemList.Ref.FixedAsset AS FixedAsset,
@@ -792,5 +797,110 @@ Function GetAccessKey(Obj) Export
 	AccessKeyMap.Insert("Store", CopyTable.UnloadColumn("Store"));
 	Return AccessKeyMap;
 EndFunction
+
+#EndRegion
+
+#Region Accounting
+
+Function T1040T_AccountingAmounts()
+	Return 
+		"SELECT
+		|	ItemList.Period,
+		|	ItemList.Key AS RowKey,
+		|	ItemList.Currency,
+		|	ItemList.Amount AS Amount,
+		|	VALUE(Catalog.AccountingOperations.ModernizationOfFixedAsset_DR_R4050B_StockInventory_CR_R8510B_BookValueOfFixedAsset) AS Operation,
+		|	UNDEFINED AS AdvancesClosing
+		|INTO T1040T_AccountingAmounts
+		|FROM
+		|	ItemList AS ItemList
+		|WHERE
+		|	Not ItemList.IsMount";
+EndFunction
+
+Function T1050T_AccountingQuantities()
+	Return "SELECT
+		   |	ItemList.Period,
+		   |	ItemList.Key AS RowKey,
+		   |	VALUE(Catalog.AccountingOperations.ModernizationOfFixedAsset_DR_R4050B_StockInventory_CR_R8510B_BookValueOfFixedAsset) AS Operation,
+		   |	ItemList.Quantity
+		   |INTO T1050T_AccountingQuantities
+		   |FROM
+		   |	ItemList AS ItemList
+		   |WHERE
+		   |	NOT ItemList.IsMount";
+EndFunction
+
+Function GetAccountingAnalytics(Parameters) Export
+	Operations = Catalogs.AccountingOperations;
+	// Unmount
+	If Parameters.Operation = Operations.ModernizationOfFixedAsset_DR_R4050B_StockInventory_CR_R8510B_BookValueOfFixedAsset Then 
+		
+		Return GetAnalytics_StockInventory_BookValue(Parameters); // Stock inventory - Book value
+	
+	// Mount	
+	ElsIf Parameters.Operation = Operations.ModernizationOfFixedAsset_DR_R8510B_BookValueOfFixedAsset_CR_R4050B_StockInventory Then 
+		
+		Return GetAnalytics_BookValue_StockInventory(Parameters); // Book value - Stock inventory
+	
+	EndIf;
+	Return Undefined;
+EndFunction
+
+#Region Accounting_Analytics
+
+// Stock inventory - Book value
+Function GetAnalytics_StockInventory_BookValue(Parameters)
+	AccountingAnalytics = AccountingServer.GetAccountingAnalyticsResult(Parameters);
+	AccountParameters   = AccountingServer.GetAccountParameters(Parameters);
+
+	// Debit
+	Debit = AccountingServer.GetT9010S_AccountsItemKey(AccountParameters, Parameters.RowData.ItemKey);
+	AccountingAnalytics.Debit = Debit.Account;
+	
+	AdditionalAnalytics = New Structure;
+	AdditionalAnalytics.Insert("Item", Parameters.RowData.ItemKey.Item);
+	AccountingServer.SetDebitExtDimensions(Parameters, AccountingAnalytics, AdditionalAnalytics);
+	
+	// Credit
+	Credit = AccountingServer.GetT9015S_AccountsFixedAsset(AccountParameters, Parameters.ObjectData.FixedAsset);
+	                                                    
+	AccountingAnalytics.Credit = Credit.Account;
+	AccountingServer.SetCreditExtDimensions(Parameters, AccountingAnalytics);
+
+	Return AccountingAnalytics;
+EndFunction
+
+// Book value - Stock inventory
+Function GetAnalytics_BookValue_StockInventory(Parameters)
+	AccountingAnalytics = AccountingServer.GetAccountingAnalyticsResult(Parameters);
+	AccountParameters   = AccountingServer.GetAccountParameters(Parameters);
+
+	// Debit
+	Debit = AccountingServer.GetT9015S_AccountsFixedAsset(AccountParameters, Parameters.ObjectData.FixedAsset);														  
+	AccountingAnalytics.Debit = Debit.Account;
+	
+	AccountingServer.SetDebitExtDimensions(Parameters, AccountingAnalytics);
+	
+	// Credit
+	Credit = AccountingServer.GetT9010S_AccountsItemKey(AccountParameters, Parameters.RowData.ItemKey);
+	AccountingAnalytics.Credit = Credit.Account;
+	
+	AdditionalAnalytics = New Structure;
+	AdditionalAnalytics.Insert("Item", Parameters.RowData.ItemKey.Item);
+	AccountingServer.SetCreditExtDimensions(Parameters, AccountingAnalytics, AdditionalAnalytics);
+	
+	Return AccountingAnalytics;
+EndFunction
+
+Function GetHintDebitExtDimension(Parameters, ExtDimensionType, Value) Export
+	Return Value;
+EndFunction
+
+Function GetHintCreditExtDimension(Parameters, ExtDimensionType, Value) Export
+	Return Value;
+EndFunction
+
+#EndRegion
 
 #EndRegion

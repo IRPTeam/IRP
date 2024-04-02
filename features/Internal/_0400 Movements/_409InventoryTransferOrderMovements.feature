@@ -274,13 +274,13 @@ Scenario: _040358 check Inventory transfer order movements by the Register  "R40
 		And I select "R4012 Stock Reservation" exact value from "Register" drop-down list
 		And I click "Generate report" button
 		Then "ResultTable" spreadsheet document is equal
-			| 'Inventory transfer order 201 dated 28.02.2021 20:17:48' | ''                    | ''           | ''         | ''          | ''                                                       | ''         |
-			| 'Register  "R4012 Stock Reservation"'                    | ''                    | ''           | ''         | ''          | ''                                                       | ''         |
-			| ''                                                       | 'Period'              | 'RecordType' | 'Store'    | 'Item key'  | 'Order'                                                  | 'Quantity' |
-			| ''                                                       | '02.04.2024 14:26:09' | 'Receipt'    | 'Store 02' | 'S/Yellow'  | 'Inventory transfer order 201 dated 28.02.2021 20:17:48' | '10'       |
-			| ''                                                       | '02.04.2024 14:26:09' | 'Receipt'    | 'Store 02' | 'XS/Blue'   | 'Inventory transfer order 201 dated 28.02.2021 20:17:48' | '10'       |
-			| ''                                                       | '02.04.2024 14:26:09' | 'Receipt'    | 'Store 02' | '36/Yellow' | 'Inventory transfer order 201 dated 28.02.2021 20:17:48' | '2'        |
-			| ''                                                       | '02.04.2024 14:26:09' | 'Receipt'    | 'Store 02' | '36/Red'    | 'Inventory transfer order 201 dated 28.02.2021 20:17:48' | '15'       |
+			| 'Inventory transfer order 201 dated 28.02.2021 20:17:48' | ''       | ''           | ''         | ''          | ''                                                       | ''         |
+			| 'Register  "R4012 Stock Reservation"'                    | ''       | ''           | ''         | ''          | ''                                                       | ''         |
+			| ''                                                       | 'Period' | 'RecordType' | 'Store'    | 'Item key'  | 'Order'                                                  | 'Quantity' |
+			| ''                                                       | '*'      | 'Receipt'    | 'Store 02' | 'S/Yellow'  | 'Inventory transfer order 201 dated 28.02.2021 20:17:48' | '10'       |
+			| ''                                                       | '*'      | 'Receipt'    | 'Store 02' | 'XS/Blue'   | 'Inventory transfer order 201 dated 28.02.2021 20:17:48' | '10'       |
+			| ''                                                       | '*'      | 'Receipt'    | 'Store 02' | '36/Yellow' | 'Inventory transfer order 201 dated 28.02.2021 20:17:48' | '2'        |
+			| ''                                                       | '*'      | 'Receipt'    | 'Store 02' | '36/Red'    | 'Inventory transfer order 201 dated 28.02.2021 20:17:48' | '15'       |
 		And I close all client application windows
 
 

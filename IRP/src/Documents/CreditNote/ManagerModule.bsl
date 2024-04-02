@@ -118,40 +118,45 @@ EndFunction
 
 Function Transactions()
 	Return "SELECT
-		   |	Transactions.Ref.Date AS Period,
-		   |	Transactions.Ref.Company AS Company,
-		   |	Transactions.Partner,
-		   |	Transactions.LegalName,
-		   |	Transactions.Agreement,
-		   |	CASE
-		   |		WHEN Transactions.Agreement.ApArPostingDetail = VALUE(Enum.ApArPostingDetail.ByDocuments)
-		   |			THEN Transactions.Ref
-		   |		ELSE UNDEFINED
-		   |	END AS BasisDocument,
-		   |
-		   |	case when Transactions.Agreement.ApArPostingDetail = VALUE(Enum.ApArPostingDetail.ByDocuments) Then
-		   |	Transactions.Agreement else Undefined end AS AdvanceAgreement,
-		   |
-		   |	Transactions.Ref AS AdvancesOrTransactionDocument,
-		   |	Transactions.Ref AS Ref,
-		   |	Transactions.Agreement.Type = VALUE(Enum.AgreementTypes.Vendor) AS IsVendor,
-		   |	Transactions.Agreement.Type = VALUE(Enum.AgreementTypes.Customer) AS IsCustomer,
-		   |	Transactions.Agreement.Type = VALUE(Enum.AgreementTypes.Other) AS IsOther,
-		   |	Transactions.Agreement.ApArPostingDetail = VALUE(Enum.ApArPostingDetail.ByDocuments) AS IsPostingDetail_ByDocuments,
-		   |	Transactions.Currency,
-		   |	Transactions.Key,
-		   |	Transactions.Amount,
-		   |	Transactions.Ref.Branch AS Branch,
-		   |	Transactions.LegalNameContract AS LegalNameContract,
-		   |	Transactions.ProfitLossCenter,
-		   |	Transactions.AdditionalAnalytic,
-		   |	Transactions.ExpenseType,
-		   |	Transactions.Project
-		   |INTO Transactions
-		   |FROM
-		   |	Document.CreditNote.Transactions AS Transactions
-		   |WHERE
-		   |	Transactions.Ref = &Ref";
+	|	Transactions.Ref.Date AS Period,
+	|	Transactions.Ref.Company AS Company,
+	|	Transactions.Partner,
+	|	Transactions.LegalName,
+	|	Transactions.Agreement,
+	|	CASE
+	|		WHEN Transactions.Agreement.ApArPostingDetail = VALUE(Enum.ApArPostingDetail.ByDocuments)
+	|			THEN CASE
+	|				WHEN Transactions.BasisDocument.Ref IS NULL
+	|					THEN Transactions.Ref
+	|				ELSE Transactions.BasisDocument
+	|			END
+	|		ELSE UNDEFINED
+	|	END AS BasisDocument,
+	|	case
+	|		when Transactions.Agreement.ApArPostingDetail = VALUE(Enum.ApArPostingDetail.ByDocuments)
+	|			Then Transactions.Agreement
+	|		else Undefined
+	|	end AS AdvanceAgreement,
+	|	Transactions.Ref AS AdvancesOrTransactionDocument,
+	|	Transactions.Ref AS Ref,
+	|	Transactions.Agreement.Type = VALUE(Enum.AgreementTypes.Vendor) AS IsVendor,
+	|	Transactions.Agreement.Type = VALUE(Enum.AgreementTypes.Customer) AS IsCustomer,
+	|	Transactions.Agreement.Type = VALUE(Enum.AgreementTypes.Other) AS IsOther,
+	|	Transactions.Agreement.ApArPostingDetail = VALUE(Enum.ApArPostingDetail.ByDocuments) AS IsPostingDetail_ByDocuments,
+	|	Transactions.Currency,
+	|	Transactions.Key,
+	|	Transactions.Amount,
+	|	Transactions.Ref.Branch AS Branch,
+	|	Transactions.LegalNameContract AS LegalNameContract,
+	|	Transactions.ProfitLossCenter,
+	|	Transactions.AdditionalAnalytic,
+	|	Transactions.ExpenseType,
+	|	Transactions.Project
+	|INTO Transactions
+	|FROM
+	|	Document.CreditNote.Transactions AS Transactions
+	|WHERE
+	|	Transactions.Ref = &Ref";
 EndFunction
 
 #EndRegion

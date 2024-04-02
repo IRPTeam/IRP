@@ -215,7 +215,6 @@
     <items xsi:type="form:FormField">
       <name>CalculationsKey</name>
       <id>68</id>
-      <visible>true</visible>
       <enabled>true</enabled>
       <userVisible>
         <common>true</common>

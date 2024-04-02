@@ -852,6 +852,7 @@
   <functionalOptions>FunctionalOption.UseSourceOfOrigin</functionalOptions>
   <functionalOptions>FunctionalOption.UseFixedAssets</functionalOptions>
   <functionalOptions>FunctionalOption.UseLegalNameContract</functionalOptions>
+  <functionalOptions>FunctionalOption.UseResponsiblePerson</functionalOptions>
   <definedTypes>DefinedType.typeAccessDocument</definedTypes>
   <definedTypes>DefinedType.typeAccountStatementBasises</definedTypes>
   <definedTypes>DefinedType.typeAddPropertyOwners</definedTypes>
@@ -961,6 +962,7 @@
   <constants>Constant.AdditionalTableControlExceptions</constants>
   <constants>Constant.UseFixedAssets</constants>
   <constants>Constant.UseLegalNameContract</constants>
+  <constants>Constant.UseResponsiblePerson</constants>
   <commonForms>CommonForm.AdditionalTableControlSettings</commonForms>
   <commonForms>CommonForm.AddLinkedDocumentRows</commonForms>
   <commonForms>CommonForm.AttachFile</commonForms>
@@ -1400,6 +1402,7 @@
   <informationRegisters>InformationRegister.T9550S_EmployeeSickLeave</informationRegisters>
   <informationRegisters>InformationRegister.AuditLock</informationRegisters>
   <informationRegisters>InformationRegister.AuditLockHistory</informationRegisters>
+  <informationRegisters>InformationRegister.T9015S_AccountsFixedAsset</informationRegisters>
   <accumulationRegisters>AccumulationRegister.CashInTransit</accumulationRegisters>
   <accumulationRegisters>AccumulationRegister.R1001T_Purchases</accumulationRegisters>
   <accumulationRegisters>AccumulationRegister.R1002T_PurchaseReturns</accumulationRegisters>

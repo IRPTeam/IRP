@@ -3398,8 +3398,6 @@ Procedure OnSetFixedAssetNotify(Parameters) Export
 	DocumentsClientServer.ChangeTitleGroupTitle(Parameters.Object, Parameters.Form);
 EndProcedure
 
-//
-
 #EndRegion
 
 #Region TRADE_AGENT_FEE_TYPE

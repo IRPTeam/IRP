@@ -2622,10 +2622,10 @@
       <fullTextSearch>Use</fullTextSearch>
     </attributes>
     <attributes uuid="587037a7-5032-492e-8dcd-68d486ba2011">
-      <name>BusinessUnit</name>
+      <name>ProfitLossCenter</name>
       <synonym>
         <key>en</key>
-        <value>Business unit</value>
+        <value>Profit loss center</value>
       </synonym>
       <type>
         <types>CatalogRef.BusinessUnits</types>

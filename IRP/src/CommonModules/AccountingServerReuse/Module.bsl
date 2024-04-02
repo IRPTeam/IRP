@@ -18,3 +18,7 @@ EndFunction
 Function GetT9014S_AccountsExpenseRevenue_Reuse(Period, Company, LedgerTypeVariant, ExpenseRevenue) Export
 	Return AccountingServer.__GetT9014S_AccountsExpenseRevenue(Period, Company, LedgerTypeVariant, ExpenseRevenue);
 EndFunction
+
+Function GetT9015S_AccountsFixedAsset_Reuse(Period, Company, LedgerTypeVariant, FixedAsset) Export
+	Return AccountingServer.__GetT9015S_AccountsFixedAsset(Period, Company, LedgerTypeVariant, FixedAsset);
+EndFunction

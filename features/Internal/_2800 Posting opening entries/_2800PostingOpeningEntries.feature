@@ -21,6 +21,7 @@ Background:
 Scenario: _400000 preparation (Opening entries)
 	When set True value to the constant
 	When set True value to the constant Use salary 
+	When set True value to the constant Use fixed assets
 	* Load info
 		When Create information register Barcodes records
 		When Create catalog Companies objects (own Second company)

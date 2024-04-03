@@ -57,6 +57,9 @@ Scenario: _400000 preparation (Opening entries)
 		When Create catalog ExpenseAndRevenueTypes objects
 		When Create catalog RetailCustomers objects (check POS)
 		When Create information register Taxes records (VAT)
+		When Create catalog EmployeePositions objects
+		When Create catalog AccrualAndDeductionTypes objects
+		When Create catalog EmployeeSchedule objects
 
 	
 Scenario: _4000001 check preparation
@@ -1548,4 +1551,86 @@ Scenario: _400020 create OpeningEntry (account payble other and account receivab
 		Given I open hyperlink "e1cib/list/Document.OpeningEntry"
 		And "List" table contains lines
 			| 'Number'                          |
-			| '$$NumberOpeningEntry400020$$'    |				
+			| '$$NumberOpeningEntry400020$$'    |	
+
+Scenario: _400023 create OpeningEntry (employee)
+	And I close all client application windows
+	* Open document form opening entry
+		Given I open hyperlink "e1cib/list/Document.OpeningEntry"
+		And I click the button named "FormCreate"
+	* Filling in company info
+		And I click Select button of "Company" field
+		And I go to line in "List" table
+			| Description     |
+			| Main Company    |
+		And I select current line in "List" table
+	* Filling Salary payment
+		And I move to "Employee" tab
+		* Add first line
+			And in the table "EmployeeList" I click the button named "EmployeeListAdd"
+			And I activate field named "EmployeeListEmployee" in "EmployeeList" table
+			And I select current line in "EmployeeList" table
+			And I click choice button of the attribute named "EmployeeListEmployee" in "EmployeeList" table
+			And I go to line in "List" table
+				| 'Description'  |
+				| 'Anna Petrova' |
+			And I select current line in "List" table
+			And I activate "Position" field in "EmployeeList" table
+			And I select "Sales person" from "Position" drop-down list by string in "EmployeeList" table
+			And I activate "Employee schedule" field in "EmployeeList" table
+			And I click choice button of "Employee schedule" attribute in "EmployeeList" table
+			And I go to line in "List" table
+				| 'Description'                      | 'Type' |
+				| '1 working day / 2 days off (day)' | 'Day'  |
+			And I select current line in "List" table
+			And I activate field named "EmployeeListProfitLossCenter" in "EmployeeList" table
+			And I select "Shop 01" by string from the drop-down list named "EmployeeListProfitLossCenter" in "EmployeeList" table
+			And I activate "Accrual type" field in "EmployeeList" table
+			And I click choice button of "Accrual type" attribute in "EmployeeList" table
+			And I go to line in "List" table
+				| 'Description' |
+				| 'Salary'      |
+			And I select current line in "List" table
+			And I activate "Salary type" field in "EmployeeList" table
+			And I select "By position" exact value from "Salary type" drop-down list in "EmployeeList" table
+			And I finish line editing in "EmployeeList" table
+			And I input "10" text in "Remaining vacation days" field of "EmployeeList" table
+			And I finish line editing in "EmployeeList" table
+		* Add second line
+			And in the table "EmployeeList" I click the button named "EmployeeListAdd"
+			And I click choice button of "Salary type" attribute in "EmployeeList" table
+			And I activate field named "EmployeeListEmployee" in "EmployeeList" table
+			And I click choice button of the attribute named "EmployeeListEmployee" in "EmployeeList" table
+			And I go to line in "List" table
+				| 'Description'   |
+				| 'David Romanov' |
+			And I select current line in "List" table
+			And I activate "Position" field in "EmployeeList" table
+			And I select "Manager" from "Position" drop-down list by string in "EmployeeList" table
+			And I activate "Employee schedule" field in "EmployeeList" table
+			And I select "5 working days / 2 days off (day)" from "Employee schedule" drop-down list by string in "EmployeeList" table
+			And I activate field named "EmployeeListProfitLossCenter" in "EmployeeList" table
+			And I select "Front office" by string from the drop-down list named "EmployeeListProfitLossCenter" in "EmployeeList" table
+			And I activate "Accrual type" field in "EmployeeList" table
+			And I select "Salary" from "Accrual type" drop-down list by string in "EmployeeList" table
+			And I activate "Salary type" field in "EmployeeList" table
+			And I select "Personal" exact value from "Salary type" drop-down list in "EmployeeList" table
+			And I finish line editing in "EmployeeList" table
+			And I activate "Salary" field in "EmployeeList" table
+			And I select current line in "EmployeeList" table
+			And I input "10 000,00" text in "Salary" field of "EmployeeList" table
+			And I finish line editing in "EmployeeList" table
+			And I activate "Remaining vacation days" field in "EmployeeList" table
+			And I select current line in "EmployeeList" table
+			And I input "5" text in "Remaining vacation days" field of "EmployeeList" table
+			And I finish line editing in "EmployeeList" table
+		And I click the button named "FormPost"
+		And I delete "$$NumberOpeningEntry400023$$" variable
+		And I delete "$$OpeningEntry400023$$" variable
+		And I save the value of "Number" field as "$$NumberOpeningEntry400023$$"
+		And I save the window as "$$OpeningEntry400023$$"
+	* Check creation
+		Given I open hyperlink "e1cib/list/Document.OpeningEntry"
+		And "List" table contains lines
+			| 'Number'                          |
+			| '$$NumberOpeningEntry400023$$'    |			

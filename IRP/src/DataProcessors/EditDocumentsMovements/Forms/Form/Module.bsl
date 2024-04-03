@@ -1,9 +1,11 @@
+// @strict-types
+
 &AtServer
 Procedure OnCreateAtServer(Cancel, StandardProcessing)
 	
-	If Parameters.Property("DocRef") Then
-		Object.DocumentRef = Parameters.DocRef;
-		ManualMovementsEdit = CommonFunctionsServer.GetAttributesFromRef(Object.DocumentRef, "ManualMovementsEdit").ManualMovementsEdit;
+	If ValueIsFilled(Parameters.DocRef) Then
+	 	Object.DocumentRef = Parameters.DocRef;
+		ManualMovementsEdit = CommonFunctionsServer.GetRefAttribute(Object.DocumentRef, "ManualMovementsEdit");
 	EndIf;
 	
 EndProcedure
@@ -16,8 +18,8 @@ Procedure OnOpen(Cancel)
 	EndIf;
 	
 	FillObjectMovements();
-	SetEnabledToRegisterPages();
-	MovementAnalysisAtServer();
+	SetEnabledToRegisterPages(ManualMovementsEdit);
+	MovementAnalysisAsynh();	
 	
 EndProcedure
 
@@ -31,8 +33,8 @@ EndProcedure
 &AtServer
 Procedure ClearAttributes()
 	
-	AttributesArray = New Array;
-	AttributesArrayDelete = New Array;	
+	AttributesArray = New Array; //Array of Arbitrary
+	AttributesArrayDelete = New Array; //Array of String	
 	
 	For Each Row In Object.Movements Do
 		If Items.Find(Row.RegisterName) <> Undefined Then
@@ -58,30 +60,26 @@ EndProcedure
 &AtServer
 Procedure FillObjectMovements()
 	
+	ClearAttributes();
+	
 	If Not ValueIsFilled(Object.DocumentRef) Then
 		Return;
 	EndIf;
 
-	ClearAttributes();	
-
-	DocumentObject = Object.DocumentRef.GetObject();
 	DocumentMeta = Object.DocumentRef.Metadata();
 
-	Counter = 0;
 	For Each ItemMovement In DocumentMeta.RegisterRecords Do
 
 		RegisterName = ItemMovement.Name;
 
-		MovementsValue = DocumentObject.RegisterRecords[RegisterName];
-		MovementsValue.Read();
+		MovementsValueTable = PostingServer.GetDocumentMovementsByRegisterName(Object.DocumentRef, ItemMovement.FullName());
 
-		MovementsValueTable = MovementsValue.Unload();
-
-		MovementCount = MovementsValue.Count();
+		MovementCount = MovementsValueTable.Count();
 
 		NewRow = Object.Movements.Add();
 		NewRow.RegisterName = RegisterName;
 		NewRow.MovementsCount = MovementCount;
+		NewRow.ValueTableStorage = ValueToStringInternal(MovementsValueTable);
 	EndDo;
 	
 	Object.Movements.Sort("RegisterName");
@@ -89,13 +87,13 @@ Procedure FillObjectMovements()
 	For Each Row In Object.Movements Do
 		If Row.MovementsCount > 0 Then
 			
-			MovementsValue = DocumentObject.RegisterRecords[Row.RegisterName];
-			MovementsValue.Read();
+			ValueTableStorage = ValueFromStringInternal(Row.ValueTableStorage);
+			If TypeOf(ValueTableStorage) = Type("ValueTable") Then
+				MovementsValueTable = ValueTableStorage;
 			
-			MovementsValueTable = MovementsValue.Unload();
-			
-			AddPageForMovement(Row.RegisterName, Row.MovementsCount);
-			AddRegisterTableToForm(Row.RegisterName, MovementsValueTable);
+				AddPageForMovement(Row.RegisterName, Row.MovementsCount);
+				AddRegisterTableToForm(Row.RegisterName, MovementsValueTable);
+			EndIf;	
 		EndIf;
 	EndDo;
 	
@@ -127,7 +125,7 @@ Procedure AddRegisterTableToForm(TableName, MovementsValueTable)
 	CurrentMovementStructure = CommonFunctionsServer.BlankFormTableCreationStructure();
 	CurrentMovementStructure.TableName				= TableName;
 	CurrentMovementStructure.ValueTable				= MovementsValueTable;
-	CurrentMovementStructure.Form					= ThisForm;
+	CurrentMovementStructure.Form					= ThisObject;
 	CurrentMovementStructure.CreateTableOnForm		= True;
 	CurrentMovementStructure.ParentName 			= PageName;
 	CurrentMovementStructure.OnChangeProcedureName	= "RegisterTableOnChange";
@@ -139,56 +137,59 @@ Procedure AddRegisterTableToForm(TableName, MovementsValueTable)
 EndProcedure
 
 &AtClient
-Procedure ManualMovementsEditOnChange(Item)
+Async Procedure ManualMovementsEditOnChange(Item)
 	
-	If GetAttributesFromRef(Object.DocumentRef, "ManualMovementsEdit").ManualMovementsEdit Then
-		QuestionToUserNotify = New NotifyDescription("RestoreDefaultMovementsNotify", ThisObject, New Structure);
-		ShowQueryBox(QuestionToUserNotify, R().QuestionToUser_030, QuestionDialogMode.YesNo);
+	If CommonFunctionsServer.GetRefAttribute(Object.DocumentRef, "ManualMovementsEdit") Then
+		
+		Answer = Await DoQueryBoxAsync(R().QuestionToUser_030, QuestionDialogMode.YesNo,, DialogReturnCode.Yes);
+		
+		If Answer = DialogReturnCode.Yes Then 
+			SetDefaultMovementsToDocument();
+		Else
+			ManualMovementsEdit = True;		
+		EndIf;
+		
 	Else
-		SetEnabledToRegisterPages();
+		SetEnabledToRegisterPages(ManualMovementsEdit);
 	EndIf;
 	
 EndProcedure
 
-&AtServer
-Function GetAttributesFromRef(Ref, Attribute)
-	
-	Return CommonFunctionsServer.GetAttributesFromRef(Ref, Attribute);
-	
-EndFunction
 
+// Set enabled to register pages.
+// 
+// Parameters:
+//  ManualMovementsEditValue - Boolean 
 &AtClient
-Procedure SetEnabledToRegisterPages()
+Procedure SetEnabledToRegisterPages(ManualMovementsEditValue)
 	
-	Items.Registers.ReadOnly 			= Not ManualMovementsEdit;
-	Items.FormWriteMovements.Enabled	= ManualMovementsEdit;
+	Items.Registers.ReadOnly = Not ManualMovementsEditValue;
+	Items.FormWriteMovements.Enabled = ManualMovementsEditValue;
 	
 EndProcedure
 
 &AtClient
 Procedure WriteMovements(Command)
 	
-	Posted = CommonFunctionsServer.GetAttributesFromRef(Object.DocumentRef, "Posted").Posted;
+	Posted = CommonFunctionsServer.GetRefAttribute(Object.DocumentRef, "Posted");
 	If Not Posted Then
-		TextMessage = R().Error_146;
-		CommonFunctionsClientServer.ShowUsersMessage(TextMessage);
+		CommonFunctionsClientServer.ShowUsersMessage(R().Error_146);
 		Return;
 	EndIf;
 	
 	Cancel = False;
 	WriteMovementsOnServer(Cancel);
 	If Not Cancel Then
-		TextMessage = R().InfoMessage_037;
-		CommonFunctionsClientServer.ShowUsersMessage(TextMessage);
+		CommonFunctionsClientServer.ShowUsersMessage(R().InfoMessage_037);
 	EndIf;
 	
 EndProcedure
 
 &AtClient
-Procedure RereadData(Command)
+Procedure RereadPostingData(Command)
 	
 	FillObjectMovements();
-	SetEnabledToRegisterPages();
+	SetEnabledToRegisterPages(ManualMovementsEdit);
 	MovementAnalysisAtServer();
 	
 EndProcedure
@@ -203,12 +204,10 @@ Procedure WriteMovementsOnServer(Cancel)
 		
 		For Each Row In Object.Movements Do
 			If Row.MovementsCount > 0 Then
-				VT_Movements = ThisForm[Row.RegisterName].Unload();
+				VT_Movements = ThisObject[Row.RegisterName].Unload();
 				
 				RegisterRecords = DocumentObject.RegisterRecords[Row.RegisterName];
-				RegisterRecords.Read();
 				RegisterRecords.DataExchange.Load = True;
-				RegisterRecords.Clear();
 				RegisterRecords.Load(VT_Movements);
 				RegisterRecords.Write();
 				
@@ -231,45 +230,31 @@ EndProcedure
 
 &AtClient
 Procedure MovementAnalysis(Command)
-		
+	MovementAnalysisAsynh();		
+EndProcedure
+
+&AtClient
+Async Procedure MovementAnalysisAsynh()
+	
 	IsDifferenceInMovements = False;
 	MovementAnalysisAtServer(IsDifferenceInMovements);
 	
 	If ManualMovementsEdit And Not IsDifferenceInMovements Then
 		
-		QuestionToUserNotify = New NotifyDescription("UncheckManualMovementsEditNotify", ThisObject, New Structure);
-		ShowQueryBox(QuestionToUserNotify, R().QuestionToUser_029, QuestionDialogMode.YesNo);
-
-	EndIf;
+		Answer = Await DoQueryBoxAsync(R().QuestionToUser_029, QuestionDialogMode.YesNo,, DialogReturnCode.Yes);
 		
-EndProcedure
-
-&AtClient
-Procedure UncheckManualMovementsEditNotify(Result, AdditionalParameters) Export
+		If Answer = DialogReturnCode.Yes Then 
+			SetManualMovementsEditInDocument(False);
+		EndIf;
 	
-	If Not Result = DialogReturnCode.Yes Then
-		Return;
-	EndIf;
-	SetManualMovementsEditInDocument(False);
+	EndIf;	
 	
-EndProcedure
-
-&AtClient
-Procedure RestoreDefaultMovementsNotify(Result, AdditionalParameters) Export
-	
-	If Not Result = DialogReturnCode.Yes Then
-		ManualMovementsEdit = True;
-		Return;
-	EndIf;
-	
-	SetDefaultMovementsToDocument();
-	
-EndProcedure
+EndProcedure	
 
 &AtServer
 Procedure SetDefaultMovementsToDocument()
 
-	Array = New Array;
+	Array = New Array; //Array of DocumentRefDocumentName
 	Array.Add(Object.DocumentRef);
 	
 	ChechResult = PostingServer.CheckDocumentArray(Array);
@@ -319,23 +304,21 @@ EndProcedure
 &AtServer
 Procedure MovementAnalysisAtServer(IsDifferenceInMovements = False)
 	
-	RegEditNames = New Array;
+	RegEditNames = New Array;//Array of String
 	
-	Array = New Array;
+	Array = New Array; //Array of DocumentRefDocumentName
 	Array.Add(Object.DocumentRef);
 	ChechResult = PostingServer.CheckDocumentArray(Array);
 	If ChechResult.Count() > 0 Then
 		IsDifferenceInMovements = True;
 		For Each ArrayItemStructure In ChechResult Do
-			If ArrayItemStructure.Ref = Object.DocumentRef Then
-				For Each RegInfo In ArrayItemStructure.RegInfo Do
-					Message = StrTemplate(R().Error_145, RegInfo.RegName);
-					//CommonFunctionsClientServer.ShowUsersMessage(Message);
-					
-					DotPosition = StrFind(RegInfo.RegName, ".");
-					RegEditNames.Add(Mid(RegInfo.RegName, DotPosition+1));
-				EndDo;
-			EndIf;
+			If Not ArrayItemStructure.Ref = Object.DocumentRef Then
+				Continue;
+			EndIf;	
+			For Each RegInfo In ArrayItemStructure.RegInfo Do
+				DotPosition = StrFind(RegInfo.RegName, ".");
+				RegEditNames.Add(Mid(RegInfo.RegName, DotPosition+1));
+			EndDo;			
 		EndDo;
 	EndIf;
 	

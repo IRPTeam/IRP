@@ -77,10 +77,10 @@ EndProcedure
 // * DocumentDataTables - Map -
 // * LockDataSources - Map -
 // * PostingDataTables - Array Of KeyAndValue:
-// ** Key - MetadataObject -
+// ** Key - MetadataObjectDocument - Meta doc
 // ** Value - See PostingTableSettings
 // * ManualMovementsEdit - Boolean -  
-// * Messages - Array - 
+// * Messages - Array - Array of String
 
 Function GetPostingParameters(DocObject, PostingMode, AddInfo = Undefined)
 	Cancel = False;
@@ -177,7 +177,7 @@ EndFunction
 //  Map - Register records
 Function RegisterRecords(Parameters)
 	
-	ManualRecordsDifference = False;
+	isManualRecordsHasDifference = False;
 	
 	RegisteredRecords = New Map();
 	For Each Row In Parameters.PostingDataTables Do
@@ -207,9 +207,9 @@ Function RegisterRecords(Parameters)
 		If RecordSetIsEqual(RecordSet, TableForLoad) Then
 			Continue;
 		Else
-			If Parameters.ManualMovementsEdit Then;
-				Parameters.Cancel		= True;
-				ManualRecordsDifference = True;
+			If Parameters.ManualMovementsEdit Then
+				Parameters.Cancel = True;
+				isManualRecordsHasDifference = True;
 			EndIf;		
 		EndIf;
 			
@@ -230,7 +230,7 @@ Function RegisterRecords(Parameters)
 		RegisteredRecords.Insert(RecordSet.Metadata(), Data);
 	EndDo;
 	If Parameters.ManualMovementsEdit Then
-		If ManualRecordsDifference Then
+		If isManualRecordsHasDifference Then
 			Parameters.Messages.Add(R().Error_144);
 		Else
 			Parameters.Messages.Add(R().InfoMessage_036);
@@ -239,6 +239,22 @@ Function RegisterRecords(Parameters)
 				
 	Return RegisteredRecords;
 EndFunction
+
+// Get document movements by register name.
+// 
+// Parameters:
+//  DocRef - DocumentRef - Doc ref
+//  RegisterName - String - Register name
+// 
+// Returns:
+//  ValueTable - ValueTable
+Function GetDocumentMovementsByRegisterName(DocRef, RegisterName) Export
+	Query = New Query("SELECT * FROM " + RegisterName + " WHERE Recorder = &Ref");
+	Query.SetParameter("Ref", DocRef);
+	
+	Return Query.Execute().Unload();
+	
+EndFunction	
 
 Function RecordSetIsEqual(RecordSet, TableForLoad)
 	RecordSet.Read();

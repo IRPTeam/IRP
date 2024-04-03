@@ -1696,11 +1696,11 @@ EndFunction
 Function BlankFormTableCreationStructure() Export
 	
 	Structure = New Structure();
-	Structure.Insert("TableName");
-	Structure.Insert("ValueTable");
+	Structure.Insert("TableName", "");
+	Structure.Insert("ValueTable", New ValueTable());
 	Structure.Insert("Form");
 	Structure.Insert("CreateTableOnForm", False);
-	Structure.Insert("ParentName");
+	Structure.Insert("ParentName", "");
 	Structure.Insert("OnChangeProcedureName","");
 	
 	Return Structure
@@ -1710,15 +1710,15 @@ EndFunction
 // Create form table.
 // 
 // Parameters:
-//  CreactionStructure - see BlankFormTableCreationStructure
+//  CreactionStructure - See BlankFormTableCreationStructure
 &AtServer
 Procedure CreateFormTable(CreactionStructure) Export
 	
-	TableName 			= CreactionStructure.TableName;
-	ValueTable 			= CreactionStructure.ValueTable;
-	Form 				= CreactionStructure.Form;
-	CreateTableOnForm	= CreactionStructure.CreateTableOnForm;
-	ParentName 			= CreactionStructure.ParentName;
+	TableName = CreactionStructure.TableName;
+	ValueTable = CreactionStructure.ValueTable;
+	Form = CreactionStructure.Form;
+	CreateTableOnForm = CreactionStructure.CreateTableOnForm;
+	ParentName 	= CreactionStructure.ParentName;
 	
 	ArrayAddedAttributes = New Array; // Array Of FormAttribute
 	

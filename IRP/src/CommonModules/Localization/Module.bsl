@@ -1077,10 +1077,10 @@ Function Strings(Lang) Export
 	Strings.Insert("Error_141", NStr("en = '[%1] cannot be changed, has posted documents'", Lang));	
 	Strings.Insert("Error_142", NStr("en = 'Wrong combination of send and receive debt type'", Lang));	
 	Strings.Insert("Error_143", NStr("en = 'Document Bank payment (currency exchange) not entered'", Lang));	
-	Strings.Insert("Error_144", NStr("en = 'Document''s movements were changed manually. Posting is denied'", Lang));
+	Strings.Insert("Error_144", NStr("en = 'Document`s movements had been modified manually. Reposting or undoposting is disabled due to manual adjustments.'", Lang));
 	
 	// %1 - Register name
-	Strings.Insert("Error_145", NStr("en = 'There are differences between current movements and potential movements in register [%1]'", Lang));
+	Strings.Insert("Error_145", NStr("en = 'Differences detected between the current manual movements and the potential automated movements in register [%1].'", Lang));
 	
 	Strings.Insert("Error_146", NStr("en = 'Document in not posted.'", Lang));
 	Strings.insert("Error_147", Nstr("en = 'The document has manual entries and cannot be canceled.'", Lang));
@@ -1196,7 +1196,7 @@ Function Strings(Lang) Export
 	
 	Strings.Insert("InfoMessage_034", NStr("en = 'Time zone not changed'", Lang));
 	Strings.Insert("InfoMessage_035", NStr("en = 'Time zone changed to %1'", Lang));
-	Strings.Insert("InfoMessage_036", NStr("en = 'New document movements are no different from manual corrections. The ""Manual movements edit"" checkbox can be removed'", Lang));
+	Strings.Insert("InfoMessage_036", NStr("en = 'New document movements are identical to the manual corrections. The ""Manual Movements Edit"" checkbox is now unnecessary and can be removed.'", Lang));
 	Strings.Insert("InfoMessage_037", NStr("en = 'Movements successfully recorded'", Lang));
 	
 	Strings.Insert("InfoMessage_Payment", NStr("en = 'Payment (+)'", Lang));
@@ -1250,7 +1250,7 @@ Function Strings(Lang) Export
 	Strings.Insert("QuestionToUser_026", NStr("en = 'Do you want to update payment agent?'", Lang));
 	Strings.Insert("QuestionToUser_027", NStr("en = 'Filled data by employee [%1] will be cleared. Continue?'", Lang));
 	Strings.Insert("QuestionToUser_028", NStr("en = 'Do you want to refund the client?'", Lang));
-	Strings.Insert("QuestionToUser_029", NStr("en = 'New document movements are no different from manual corrections. The ""Manual movements edit"" checkbox can be removed. Remove check-box?'", Lang));
+	Strings.Insert("QuestionToUser_029", NStr("en = 'New document movements match the manual corrections, making the ""Manual Movements Edit"" checkbox unnecessary. Would you like to remove this checkbox?'", Lang));
 	Strings.Insert("QuestionToUser_030", NStr("en = 'Do you want to restore movements to default?'", Lang));
 #EndRegion
 

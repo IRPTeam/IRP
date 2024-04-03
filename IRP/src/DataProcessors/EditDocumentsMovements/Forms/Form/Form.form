@@ -147,7 +147,7 @@
         </extInfo>
       </extendedTooltip>
       <type>UsualButton</type>
-      <commandName>Form.Command.RereadData</commandName>
+      <commandName>Form.Command.RereadPostingData</commandName>
       <representation>PictureAndText</representation>
       <autoMaxWidth>true</autoMaxWidth>
       <autoMaxHeight>true</autoMaxHeight>
@@ -381,10 +381,10 @@
     <currentRowUse>Auto</currentRowUse>
   </formCommands>
   <formCommands>
-    <name>RereadData</name>
+    <name>RereadPostingData</name>
     <title>
       <key>en</key>
-      <value>Reread data</value>
+      <value>Reread posting data</value>
     </title>
     <id>2</id>
     <use>
@@ -392,7 +392,7 @@
     </use>
     <action xsi:type="form:FormCommandHandlerContainer">
       <handler>
-        <name>RereadData</name>
+        <name>RereadPostingData</name>
       </handler>
     </action>
     <currentRowUse>Auto</currentRowUse>
@@ -418,6 +418,12 @@
     </action>
     <currentRowUse>Auto</currentRowUse>
   </formCommands>
+  <parameters>
+    <name>DocRef</name>
+    <valueType>
+      <types>DocumentRef</types>
+    </valueType>
+  </parameters>
   <commandInterface>
     <navigationPanel/>
     <commandBar/>

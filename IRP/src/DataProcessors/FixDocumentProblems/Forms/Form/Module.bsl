@@ -564,10 +564,9 @@ Procedure PostingInfoBeforeRowChange(Item, Cancel)
 EndProcedure
 
 &AtServer
-Procedure PostingInfo_UpdateTable(Ref, NewMovementStorage)
-	Query = New Query("SELECT * FROM " + CurrentRegName + " WHERE Recorder = &Ref");
-	Query.SetParameter("Ref", Ref);
-	CurrentMovement.Load(Query.Execute().Unload());
+Procedure PostingInfo_UpdateTable(Ref, NewMovementStorage)	
+	ValueTable = PostingServer.GetDocumentMovementsByRegisterName(Ref, CurrentRegName);
+	CurrentMovement.Load(ValueTable);
 	NewMovement.Load(NewMovementStorage.Get());
 EndProcedure
 

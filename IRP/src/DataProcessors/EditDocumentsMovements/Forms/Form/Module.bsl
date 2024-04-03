@@ -5,6 +5,7 @@ Procedure OnCreateAtServer(Cancel, StandardProcessing)
 	
 	If ValueIsFilled(Parameters.DocRef) Then
 	 	Object.DocumentRef = Parameters.DocRef;
+		//@skip-check statement-type-change
 		ManualMovementsEdit = CommonFunctionsServer.GetRefAttribute(Object.DocumentRef, "ManualMovementsEdit");
 	EndIf;
 	

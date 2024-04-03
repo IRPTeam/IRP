@@ -67,9 +67,10 @@ Scenario: _097700 preparation (Сheck payroll)
 		When Create catalog EmployeeSchedule objects
 		When create Payroll and Time Sheet for Second Company
 		When Create document EmployeeHiring objects
+		When Create document OpeningEntry objects (employee)
 		And I execute 1C:Enterprise script at server
-			| "Documents.EmployeeHiring.FindByNumber(2).GetObject().Write(DocumentWriteMode.Posting);"   |
-			| "Documents.EmployeeHiring.FindByNumber(3).GetObject().Write(DocumentWriteMode.Posting);" |
+			| "Documents.OpeningEntry.FindByNumber(112).GetObject().Write(DocumentWriteMode.Posting);" |
+		And I execute 1C:Enterprise script at server
 			| "Documents.EmployeeHiring.FindByNumber(4).GetObject().Write(DocumentWriteMode.Posting);" |
 	* Salary settings for company
 		* Main Company

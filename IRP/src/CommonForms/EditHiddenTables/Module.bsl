@@ -1,4 +1,3 @@
-
 &AtClient
 Var DocumentTables;
 
@@ -9,6 +8,7 @@ EndProcedure
 
 &AtClient
 Procedure OnOpen(Cancel)
+	DocumentTables = InitializeDocumentTables();
 	CreateDocumentTables(DocumentTables);
 	UpdateTables();
 EndProcedure
@@ -60,10 +60,10 @@ Procedure CreateDocumentTables(DocumentTables)
 	ChangeAttributes(ArrayOfAttributes);
 	
 	For Each Table In Tables Do
-		ItemGroup = ThisObject.Items.Add("Group" + Table.TableName, Type("FormGroup"), ThisObject);
-		ItemGroup.Type = FormGroupType.UsualGroup;
+		ItemGroup = ThisObject.Items.Add("Group" + Table.TableName, Type("FormGroup"), Items.Pages);
+		ItemGroup.Type = FormGroupType.Page;
 		ItemGroup.Title = Table.TableName;
-		ItemGroup.Behavior = UsualGroupBehavior.Collapsible;
+		
 		ItemTable = ThisObject.Items.Add(Table.TableName, Type("FormTable"), ItemGroup);
 		ItemTable.DataPath = Table.TableName;
 		For Each ColumnName In Table.TableColumns Do
@@ -71,7 +71,6 @@ Procedure CreateDocumentTables(DocumentTables)
 			ItemColumn.Type = FormFieldType.InputField;
 			ItemColumn.DataPath = Table.TableName + "." + ColumnName;
 		EndDo;
-		ItemGroup.Hide();
 	EndDo;
 EndProcedure
 
@@ -93,10 +92,15 @@ EndProcedure
 
 #Region Initialize
 
-DocumentTables = New Structure();
-HiddenTables = DocumentsClientServer.GetHiddenTables();
-For Each HiddenTable In HiddenTables Do
-	DocumentTables.Insert(HiddenTable, False);
-EndDo;
+&AtServer
+Function InitializeDocumentTables()
+	DocumentTables = New Structure();
+	For Each Table In ThisObject.DocumentRef.Metadata().TabularSections Do
+		DocumentTables.Insert(Table.Name, False);
+	EndDo;
+	Return DocumentTables;
+EndFunction
+
+
 
 #EndRegion

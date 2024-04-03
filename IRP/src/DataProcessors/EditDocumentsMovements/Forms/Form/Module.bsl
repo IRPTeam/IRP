@@ -5,8 +5,8 @@ Procedure OnCreateAtServer(Cancel, StandardProcessing)
 	
 	If ValueIsFilled(Parameters.DocRef) Then
 	 	Object.DocumentRef = Parameters.DocRef;
-		//@skip-check statement-type-change
-		ManualMovementsEdit = CommonFunctionsServer.GetRefAttribute(Object.DocumentRef, "ManualMovementsEdit");
+	 	MovementsEdit = CommonFunctionsServer.GetRefAttribute(Object.DocumentRef, "ManualMovementsEdit"); //Boolean
+		ManualMovementsEdit =  Boolean(MovementsEdit);
 	EndIf;
 	
 EndProcedure
@@ -34,7 +34,7 @@ EndProcedure
 &AtServer
 Procedure ClearAttributes()
 	
-	AttributesArray = New Array; //Array of Arbitrary
+	AttributesArray = New Array; //Array of FormTable
 	AttributesArrayDelete = New Array; //Array of String	
 	
 	For Each Row In Object.Movements Do
@@ -100,10 +100,15 @@ Procedure FillObjectMovements()
 	
 EndProcedure
 
+// Register table on change.
+// 
+// Parameters:
+//  Item - FormTable - Item
 &AtClient
 Procedure RegisterTableOnChange(Item)
 	
-	Item.Parent.Picture = PictureLib.AppearanceExclamationMark;
+	Parent = Item.Parent; //FormGroup
+	Parent.Picture = PictureLib.AppearanceExclamationMark;
 	
 EndProcedure
 
@@ -118,6 +123,11 @@ Procedure AddPageForMovement(RegisterName, RecordsCount)
 	
 EndProcedure
 
+// Add register table to form.
+// 
+// Parameters:
+//  TableName - String
+//  MovementsValueTable - ValueTable
 &AtServer
 Procedure AddRegisterTableToForm(TableName, MovementsValueTable)
 	
@@ -133,7 +143,8 @@ Procedure AddRegisterTableToForm(TableName, MovementsValueTable)
 	
 	CommonFunctionsServer.CreateFormTable(CurrentMovementStructure);
 	
-	ThisObject[TableName].Load(MovementsValueTable);
+	Table = ThisObject[TableName]; //FormDataCollection
+	Table.Load(MovementsValueTable);
 
 EndProcedure
 
@@ -142,12 +153,13 @@ Async Procedure ManualMovementsEditOnChange(Item)
 	
 	If CommonFunctionsServer.GetRefAttribute(Object.DocumentRef, "ManualMovementsEdit") Then
 		
-		Answer = Await DoQueryBoxAsync(R().QuestionToUser_030, QuestionDialogMode.YesNo,, DialogReturnCode.Yes);
+		Answer = Await DoQueryBoxAsync(R().QuestionToUser_030, QuestionDialogMode.YesNo,, DialogReturnCode.Yes); //DialogReturnCode
 		
 		If Answer = DialogReturnCode.Yes Then 
 			SetDefaultMovementsToDocument();
+			SetEnabledToRegisterPages(ManualMovementsEdit);
 		Else
-			ManualMovementsEdit = True;		
+			ManualMovementsEdit = True;	
 		EndIf;
 		
 	Else
@@ -155,7 +167,6 @@ Async Procedure ManualMovementsEditOnChange(Item)
 	EndIf;
 	
 EndProcedure
-
 
 // Set enabled to register pages.
 // 
@@ -205,7 +216,8 @@ Procedure WriteMovementsOnServer(Cancel)
 		
 		For Each Row In Object.Movements Do
 			If Row.MovementsCount > 0 Then
-				VT_Movements = ThisObject[Row.RegisterName].Unload();
+				Table = ThisObject[Row.RegisterName]; //FormDataCollection
+				VT_Movements = Table.Unload();
 				
 				RegisterRecords = DocumentObject.RegisterRecords[Row.RegisterName];
 				RegisterRecords.DataExchange.Load = True;
@@ -242,7 +254,7 @@ Async Procedure MovementAnalysisAsynh()
 	
 	If ManualMovementsEdit And Not IsDifferenceInMovements Then
 		
-		Answer = Await DoQueryBoxAsync(R().QuestionToUser_029, QuestionDialogMode.YesNo,, DialogReturnCode.Yes);
+		Answer = Await DoQueryBoxAsync(R().QuestionToUser_029, QuestionDialogMode.YesNo,, DialogReturnCode.Yes); //DialogReturnCode
 		
 		If Answer = DialogReturnCode.Yes Then 
 			SetManualMovementsEditInDocument(False);
@@ -268,7 +280,8 @@ Procedure SetDefaultMovementsToDocument()
 			RegName = Mid(RegInfo.RegName, DotPosition+1);
 			
 			TableName = RegName;
-			ThisObject[RegName].Load(RegInfo.NewPostingData);
+			Table = ThisObject[RegName]; //FormDataCollection
+			Table.Load(RegInfo.NewPostingData);
 			
 		EndDo;
 		
@@ -277,9 +290,8 @@ Procedure SetDefaultMovementsToDocument()
 		If Not Cancel Then
 			
 			SetManualMovementsEditInDocument(False);
-			TextMessage = R().InfoMessage_037;
-			
-			CommonFunctionsClientServer.ShowUsersMessage(TextMessage);
+						
+			CommonFunctionsClientServer.ShowUsersMessage(R().InfoMessage_037);
 		Else
 			ManualMovementsEdit = True;
 		EndIf;

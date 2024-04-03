@@ -1595,6 +1595,7 @@ Scenario: _400023 create OpeningEntry (employee)
 			And I select "By position" exact value from "Salary type" drop-down list in "EmployeeList" table
 			And I finish line editing in "EmployeeList" table
 			And I input "10" text in "Remaining vacation days" field of "EmployeeList" table
+			And I input "01.01.2023" text in "Employment date" field of "EmployeeList" table
 			And I finish line editing in "EmployeeList" table
 		* Add second line
 			And in the table "EmployeeList" I click the button named "EmployeeListAdd"
@@ -1623,6 +1624,7 @@ Scenario: _400023 create OpeningEntry (employee)
 			And I activate "Remaining vacation days" field in "EmployeeList" table
 			And I select current line in "EmployeeList" table
 			And I input "5" text in "Remaining vacation days" field of "EmployeeList" table
+			And I input "10.02.2023" text in "Employment date" field of "EmployeeList" table
 			And I finish line editing in "EmployeeList" table
 		And I click the button named "FormPost"
 		And I delete "$$NumberOpeningEntry400023$$" variable

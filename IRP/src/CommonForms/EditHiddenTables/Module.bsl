@@ -1,5 +1,7 @@
+// @strict-types
+
 &AtClient
-Var DocumentTables;
+Var DocumentTables; //Structure
 
 &AtServer
 Procedure OnCreateAtServer(Cancel, StandardProcessing)
@@ -19,9 +21,14 @@ Procedure SaveToDocument(Command)
 		If Not KeyValue.Value Then
 			Continue;
 		EndIf;
-		ThisObject.FormOwner.Object[KeyValue.Key].Clear();
-		For Each Row In ThisObject[KeyValue.Key] Do
-			FillPropertyValues(ThisObject.FormOwner.Object[KeyValue.Key].Add(), Row);
+		FormDataStructure = ThisObject.FormOwner.Object; //FormDataStructure
+		DocumentTable = FormDataStructure[KeyValue.Key]; //FormDataCollection 
+		DocumentTable.Clear();
+		
+		Table = ThisObject[KeyValue.Key]; //FormDataCollection
+		For Each Row In Table Do
+			NewRow = DocumentTable.Add();
+			FillPropertyValues(NewRow, Row);
 		EndDo;
 	EndDo;
 EndProcedure
@@ -31,12 +38,16 @@ Procedure Cancel(Command)
 	Close();
 EndProcedure
 
+// Create document tables.
+// 
+// Parameters:
+//  DocumentTables - Structure - Document tables
 &AtServer
 Procedure CreateDocumentTables(DocumentTables)
 	Tables = New ValueTable();
-	Tables.Columns.Add("TableName");
-	Tables.Columns.Add("TableColumns");
-	ArrayOfAttributes = New Array();
+	Tables.Columns.Add("TableName", New TypeDescription("String"));
+	Tables.Columns.Add("TableColumns", New TypeDescription("Array"));
+	ArrayOfAttributes = New Array(); //Array of FormAttribute
 	DocumentMetadata = ThisObject.DocumentRef.Metadata();
 	For Each KeyValue In DocumentTables Do
 		TableName = KeyValue.Key;
@@ -47,7 +58,7 @@ Procedure CreateDocumentTables(DocumentTables)
 		If IsTableExists  Then
 			NewTable = Tables.Add();
 			NewTable.TableName = TableName;
-			TableColumns = New Array();
+			TableColumns = New Array(); //Array of String
 			ArrayOfAttributes.Add(New FormAttribute(TableName, New TypeDescription("ValueTable")));
 			For Each Column In TabularSection.Attributes Do
 				ArrayOfAttributes.Add(New FormAttribute(Column.Name, Column.Type, TableName, Column.Synonym));
@@ -60,7 +71,7 @@ Procedure CreateDocumentTables(DocumentTables)
 	ChangeAttributes(ArrayOfAttributes);
 	
 	For Each Table In Tables Do
-		ItemGroup = ThisObject.Items.Add("Group" + Table.TableName, Type("FormGroup"), Items.Pages);
+		ItemGroup = ThisObject.Items.Add("Group" + Table.TableName, Type("FormGroup"), Items.Pages); //FormGroupType
 		ItemGroup.Type = FormGroupType.Page;
 		ItemGroup.Title = Table.TableName;
 		
@@ -81,16 +92,21 @@ Procedure UpdateTables()
 		If Not KeyValue.Value Then
 			Continue;
 		EndIf;
-		ThisObject[TableName].Clear();
-		For Each Row In ThisObject.FormOwner.Object[TableName] Do
-			FillPropertyValues(ThisObject[TableName].Add(), Row);
+		Table = ThisObject[TableName]; //FormDataCollection
+		Table.Clear();
+		
+		DocumentTable = ThisObject.FormOwner.Object[TableName]; //FormDataCollection
+		
+		For Each Row In DocumentTable Do
+			Table = ThisObject[TableName]; //FormDataCollection
+			NewRow = Table.Add(); 
+			FillPropertyValues(NewRow, Row);
 		EndDo;
-		ThisObject.Items["Group" + TableName].Title = StrTemplate("%1 [%2]",
-			ThisObject.Items["Group" + TableName].Title, ThisObject[TableName].Count());
+		CurrentTable = ThisObject[TableName]; //FormDataCollection
+		ThisObject.Items["Group" + TableName].Title = StrTemplate("%1 (%2)",
+			ThisObject.Items["Group" + TableName].Title, CurrentTable.Count());
 	EndDo;
 EndProcedure
-
-#Region Initialize
 
 &AtServer
 Function InitializeDocumentTables()
@@ -100,7 +116,3 @@ Function InitializeDocumentTables()
 	EndDo;
 	Return DocumentTables;
 EndFunction
-
-
-
-#EndRegion

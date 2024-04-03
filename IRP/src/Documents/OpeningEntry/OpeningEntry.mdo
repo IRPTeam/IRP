@@ -95,6 +95,8 @@
   <registerRecords>AccumulationRegister.R4014B_SerialLotNumber</registerRecords>
   <registerRecords>AccumulationRegister.R5015B_OtherPartnersTransactions</registerRecords>
   <registerRecords>AccumulationRegister.R5020B_PartnersBalance</registerRecords>
+  <registerRecords>InformationRegister.T9510S_Staffing</registerRecords>
+  <registerRecords>AccumulationRegister.R9545T_PaidVacations</registerRecords>
   <postInPrivilegedMode>true</postInPrivilegedMode>
   <unpostInPrivilegedMode>true</unpostInPrivilegedMode>
   <choiceHistoryOnInput>DontUse</choiceHistoryOnInput>
@@ -2706,6 +2708,180 @@
       </synonym>
       <type>
         <types>CatalogRef.Currencies</types>
+      </type>
+      <minValue xsi:type="core:UndefinedValue"/>
+      <maxValue xsi:type="core:UndefinedValue"/>
+      <dataHistory>Use</dataHistory>
+      <fullTextSearch>Use</fullTextSearch>
+    </attributes>
+  </tabularSections>
+  <tabularSections uuid="e4b629ed-f1a7-4581-91b2-5dd5d80fe823">
+    <producedTypes>
+      <objectType typeId="1c293a63-5f0a-4306-9b74-03b33f6b088e" valueTypeId="a0af1662-1279-4244-99ce-bd233043d8e5"/>
+      <rowType typeId="66c34ec4-016b-4843-9806-135dcd1bd1a5" valueTypeId="ad2b5978-e6ad-4b4d-ae6a-c3c2ddf5c6ac"/>
+    </producedTypes>
+    <name>EmployeeList</name>
+    <synonym>
+      <key>en</key>
+      <value>Employee list</value>
+    </synonym>
+    <attributes uuid="fbf734c3-227c-491b-a81f-e7e5405a9715">
+      <name>Key</name>
+      <synonym>
+        <key>en</key>
+        <value>Key</value>
+      </synonym>
+      <type>
+        <types>DefinedType.typeRowID</types>
+      </type>
+      <minValue xsi:type="core:UndefinedValue"/>
+      <maxValue xsi:type="core:UndefinedValue"/>
+      <dataHistory>Use</dataHistory>
+      <fullTextSearch>Use</fullTextSearch>
+    </attributes>
+    <attributes uuid="ee7fada7-4b08-4f8a-8dad-930689152220">
+      <name>Employee</name>
+      <synonym>
+        <key>en</key>
+        <value>Employee</value>
+      </synonym>
+      <type>
+        <types>CatalogRef.Partners</types>
+      </type>
+      <minValue xsi:type="core:UndefinedValue"/>
+      <maxValue xsi:type="core:UndefinedValue"/>
+      <fillChecking>ShowError</fillChecking>
+      <choiceParameters>
+        <name>Filter.Employee</name>
+        <value xsi:type="core:BooleanValue">
+          <value>true</value>
+        </value>
+      </choiceParameters>
+      <dataHistory>Use</dataHistory>
+      <fullTextSearch>Use</fullTextSearch>
+    </attributes>
+    <attributes uuid="819cda29-b323-437a-a1d6-d0d3583178a2">
+      <name>Position</name>
+      <synonym>
+        <key>en</key>
+        <value>Position</value>
+      </synonym>
+      <type>
+        <types>CatalogRef.EmployeePositions</types>
+      </type>
+      <minValue xsi:type="core:UndefinedValue"/>
+      <maxValue xsi:type="core:UndefinedValue"/>
+      <fillChecking>ShowError</fillChecking>
+      <dataHistory>Use</dataHistory>
+      <fullTextSearch>Use</fullTextSearch>
+    </attributes>
+    <attributes uuid="8be42b7a-3ff5-401f-b996-ad80e376f554">
+      <name>EmployeeSchedule</name>
+      <synonym>
+        <key>en</key>
+        <value>Employee schedule</value>
+      </synonym>
+      <type>
+        <types>CatalogRef.EmployeeSchedule</types>
+      </type>
+      <minValue xsi:type="core:UndefinedValue"/>
+      <maxValue xsi:type="core:UndefinedValue"/>
+      <fillChecking>ShowError</fillChecking>
+      <dataHistory>Use</dataHistory>
+      <fullTextSearch>Use</fullTextSearch>
+    </attributes>
+    <attributes uuid="d1e7ca3d-2b3d-49f2-8492-b4c0b40e4d62">
+      <name>EmploymentDate</name>
+      <synonym>
+        <key>en</key>
+        <value>Employment date</value>
+      </synonym>
+      <type>
+        <types>Date</types>
+        <dateQualifiers>
+          <dateFractions>Date</dateFractions>
+        </dateQualifiers>
+      </type>
+      <minValue xsi:type="core:UndefinedValue"/>
+      <maxValue xsi:type="core:UndefinedValue"/>
+      <dataHistory>Use</dataHistory>
+      <fullTextSearch>Use</fullTextSearch>
+    </attributes>
+    <attributes uuid="7b67bbcd-b51a-4e20-b33c-648108e54d56">
+      <name>ProfitLossCenter</name>
+      <synonym>
+        <key>en</key>
+        <value>Profit loss center</value>
+      </synonym>
+      <type>
+        <types>CatalogRef.BusinessUnits</types>
+      </type>
+      <minValue xsi:type="core:UndefinedValue"/>
+      <maxValue xsi:type="core:UndefinedValue"/>
+      <dataHistory>Use</dataHistory>
+      <fullTextSearch>Use</fullTextSearch>
+    </attributes>
+    <attributes uuid="7dbe0d77-68b8-44fd-9607-81dc44d0bf31">
+      <name>AccrualType</name>
+      <synonym>
+        <key>en</key>
+        <value>Accrual type</value>
+      </synonym>
+      <type>
+        <types>CatalogRef.AccrualAndDeductionTypes</types>
+      </type>
+      <minValue xsi:type="core:UndefinedValue"/>
+      <maxValue xsi:type="core:UndefinedValue"/>
+      <fillChecking>ShowError</fillChecking>
+      <choiceParameters>
+        <name>Filter.Type</name>
+        <value xsi:type="core:ReferenceValue">
+          <value>Enum.PayrollTypes.EnumValue.Accrual</value>
+        </value>
+      </choiceParameters>
+      <dataHistory>Use</dataHistory>
+      <fullTextSearch>Use</fullTextSearch>
+    </attributes>
+    <attributes uuid="8691ae31-7be9-44d5-bb65-b18c49987ce1">
+      <name>SalaryType</name>
+      <synonym>
+        <key>en</key>
+        <value>Salary type</value>
+      </synonym>
+      <type>
+        <types>EnumRef.SalaryTypes</types>
+      </type>
+      <minValue xsi:type="core:UndefinedValue"/>
+      <maxValue xsi:type="core:UndefinedValue"/>
+      <fillChecking>ShowError</fillChecking>
+      <dataHistory>Use</dataHistory>
+      <fullTextSearch>Use</fullTextSearch>
+    </attributes>
+    <attributes uuid="39d34b1d-bedf-46f7-94dc-c387e0c3c6f7">
+      <name>Salary</name>
+      <synonym>
+        <key>en</key>
+        <value>Salary</value>
+      </synonym>
+      <type>
+        <types>DefinedType.typeAmount</types>
+      </type>
+      <minValue xsi:type="core:UndefinedValue"/>
+      <maxValue xsi:type="core:UndefinedValue"/>
+      <dataHistory>Use</dataHistory>
+      <fullTextSearch>Use</fullTextSearch>
+    </attributes>
+    <attributes uuid="eb33bbf2-120c-458a-bdd7-439e19b8267b">
+      <name>RemainingVacationDays</name>
+      <synonym>
+        <key>en</key>
+        <value>Remaining vacation days</value>
+      </synonym>
+      <type>
+        <types>Number</types>
+        <numberQualifiers>
+          <precision>3</precision>
+        </numberQualifiers>
       </type>
       <minValue xsi:type="core:UndefinedValue"/>
       <maxValue xsi:type="core:UndefinedValue"/>

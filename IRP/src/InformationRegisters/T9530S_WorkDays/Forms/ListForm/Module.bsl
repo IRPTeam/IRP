@@ -126,8 +126,18 @@ Procedure CalendarSelection(Item, SelectedDate)
 		Return;
 	EndIf;
 	
+	KeyValues = New Structure();
+	KeyValues.Insert("Date", SelectedDate);
+	KeyValues.Insert("EmployeeSchedule", ThisObject.EmployeeScheduleFilter);
+	
+	RecordKeyInfo = GetRecordKey(KeyValues);
+	
 	OpeningParameters = New Structure();
-	OpeningParameters.Insert("Key", GetRecordKey(SelectedDate));
+	If RecordKeyInfo.IsExists Then
+		OpeningParameters.Insert("Key", RecordKeyInfo.RecordKey);
+	Else
+		OpeningParameters.Insert("FillingValues", KeyValues);
+	EndIf;
 	
 	OpenForm("InformationRegister.T9530S_WorkDays.RecordForm",
 		OpeningParameters, ThisObject, , , , New NotifyDescription("UpdateFormEnd", ThisObject)
@@ -135,13 +145,15 @@ Procedure CalendarSelection(Item, SelectedDate)
 EndProcedure
 
 &AtServer
-Function GetRecordKey(SelectedDate)
-	KeyValues = New Structure();
-	KeyValues.Insert("Date", SelectedDate);
-	KeyValues.Insert("EmployeeSchedule", ThisObject.EmployeeScheduleFilter);
+Function GetRecordKey(KeyValues)
 	
-	RecordKey = InformationRegisters.T9530S_WorkDays.CreateRecordKey(KeyValues);
-	Return RecordKey;
+	RecordSet = InformationRegisters.T9530S_WorkDays.CreateRecordSet();
+	RecordSet.Filter.Date.Set(KeyValues.Date);
+	RecordSet.Filter.EmployeeSchedule.Set(KeyValues.EmployeeSchedule);
+	RecordSet.Read();
+	
+	RecordKey = InformationRegisters.T9530S_WorkDays.CreateRecordKey(KeyValues);	
+	Return New Structure("RecordKey, IsExists", RecordKey, RecordSet.Count() > 0);
 EndFunction
 	
 &AtClient

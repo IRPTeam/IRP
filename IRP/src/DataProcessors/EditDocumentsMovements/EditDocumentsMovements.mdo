@@ -65,22 +65,6 @@
       <maxValue xsi:type="core:UndefinedValue"/>
       <fillValue xsi:type="core:UndefinedValue"/>
     </attributes>
-    <attributes uuid="9712ea94-f954-45c2-80b2-4910bf8a24ca">
-      <name>ValueTableStorage</name>
-      <synonym>
-        <key>en</key>
-        <value>Value table storage</value>
-      </synonym>
-      <type>
-        <types>String</types>
-        <stringQualifiers/>
-      </type>
-      <minValue xsi:type="core:UndefinedValue"/>
-      <maxValue xsi:type="core:UndefinedValue"/>
-      <fillValue xsi:type="core:StringValue">
-        <value></value>
-      </fillValue>
-    </attributes>
   </tabularSections>
   <forms uuid="df3ea8da-a78a-45dd-abfe-6c1e37c14b64">
     <name>Form</name>

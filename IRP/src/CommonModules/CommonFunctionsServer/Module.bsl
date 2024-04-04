@@ -1698,12 +1698,12 @@ Function BlankFormTableCreationStructure() Export
 	Structure = New Structure();
 	Structure.Insert("TableName", "");
 	Structure.Insert("ValueTable", New ValueTable());
-	Structure.Insert("Form");
+	Structure.Insert("Form", Undefined);
 	Structure.Insert("CreateTableOnForm", False);
 	Structure.Insert("ParentName", "");
-	Structure.Insert("OnChangeProcedureName","");
+	Structure.Insert("OnChangeProcedureName", "");
 	
-	Return Structure
+	Return Structure;
 	
 EndFunction	
 
@@ -1711,7 +1711,6 @@ EndFunction
 // 
 // Parameters:
 //  CreactionStructure - See BlankFormTableCreationStructure
-&AtServer
 Procedure CreateFormTable(CreactionStructure) Export
 	
 	TableName = CreactionStructure.TableName;
@@ -1736,7 +1735,6 @@ Procedure CreateFormTable(CreactionStructure) Export
 	EndIf;
 	ArrayAddedAttributes.Clear();
 	
-		
 	For Each Column In ValueTable.Columns Do 
 		If Column.Name = "PointInTime" Or Column.Name = "Recorder" Then
 			Continue;
@@ -1756,7 +1754,7 @@ Procedure CreateFormTable(CreactionStructure) Export
 		
 		NewColumn = Form.Items.Add(TableName + Column.Name, Type("FormField"), Form.Items[TableName]); // FormField 
 		NewColumn.Title		= Column.Name; 
-		NewColumn.DataPath	= TableName+ "." + Column.Name;
+		NewColumn.DataPath	= TableName + "." + Column.Name;
 		NewColumn.Type		= FormFieldType.InputField; 
 		
 	EndDo;

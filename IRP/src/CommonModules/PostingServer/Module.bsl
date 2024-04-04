@@ -80,8 +80,7 @@ EndProcedure
 // ** Key - MetadataObjectDocument - Meta doc
 // ** Value - See PostingTableSettings
 // * ManualMovementsEdit - Boolean -  
-// * Messages - Array - Array of String
-
+// * Messages -  Array of String - User message
 Function GetPostingParameters(DocObject, PostingMode, AddInfo = Undefined)
 	Cancel = False;
 	

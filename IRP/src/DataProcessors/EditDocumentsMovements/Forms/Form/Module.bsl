@@ -8,7 +8,7 @@ Procedure OnCreateAtServer(Cancel, StandardProcessing)
 	 	MovementsEdit = CommonFunctionsServer.GetRefAttribute(Object.DocumentRef, "ManualMovementsEdit"); //Boolean
 		ManualMovementsEdit =  Boolean(MovementsEdit);
 	EndIf;
-	
+	///
 EndProcedure
 
 &AtClient
@@ -20,7 +20,7 @@ Procedure OnOpen(Cancel)
 	
 	FillObjectMovements();
 	SetEnabledToRegisterPages(ManualMovementsEdit);
-	MovementAnalysisAsynh();	
+	MovementAnalysisAsync();	
 	
 EndProcedure
 
@@ -68,19 +68,24 @@ Procedure FillObjectMovements()
 	EndIf;
 
 	DocumentMeta = Object.DocumentRef.Metadata();
-
+	StructureTables = New Structure();
+	
 	For Each ItemMovement In DocumentMeta.RegisterRecords Do
 
 		RegisterName = ItemMovement.Name;
 
-		MovementsValueTable = PostingServer.GetDocumentMovementsByRegisterName(Object.DocumentRef, ItemMovement.FullName());
+		MovementsValueTable = PostingServer.GetDocumentMovementsByRegisterName(
+		Object.DocumentRef,
+		ItemMovement.FullName()); //ValueTable
 
 		MovementCount = MovementsValueTable.Count();
 
 		NewRow = Object.Movements.Add();
 		NewRow.RegisterName = RegisterName;
 		NewRow.MovementsCount = MovementCount;
-		NewRow.ValueTableStorage = ValueToStringInternal(MovementsValueTable);
+		
+		StructureTables.Insert(RegisterName, MovementsValueTable);
+						
 	EndDo;
 	
 	Object.Movements.Sort("RegisterName");
@@ -88,13 +93,11 @@ Procedure FillObjectMovements()
 	For Each Row In Object.Movements Do
 		If Row.MovementsCount > 0 Then
 			
-			ValueTableStorage = ValueFromStringInternal(Row.ValueTableStorage);
-			If TypeOf(ValueTableStorage) = Type("ValueTable") Then
-				MovementsValueTable = ValueTableStorage;
+			ValueTable = StructureTables[RegisterName]; //ValueTable
 			
-				AddPageForMovement(Row.RegisterName, Row.MovementsCount);
-				AddRegisterTableToForm(Row.RegisterName, MovementsValueTable);
-			EndIf;	
+			AddPageForMovement(Row.RegisterName, Row.MovementsCount);
+			AddRegisterTableToForm(Row.RegisterName, ValueTable);
+				
 		EndIf;
 	EndDo;
 	
@@ -173,7 +176,7 @@ EndProcedure
 // Parameters:
 //  ManualMovementsEditValue - Boolean 
 &AtClient
-Procedure SetEnabledToRegisterPages(ManualMovementsEditValue)
+Procedure SetEnabledToRegisterPages(Val ManualMovementsEditValue)
 	
 	Items.Registers.ReadOnly = Not ManualMovementsEditValue;
 	Items.FormWriteMovements.Enabled = ManualMovementsEditValue;
@@ -220,7 +223,9 @@ Procedure WriteMovementsOnServer(Cancel)
 				VT_Movements = Table.Unload();
 				
 				RegisterRecords = DocumentObject.RegisterRecords[Row.RegisterName];
-				RegisterRecords.DataExchange.Load = True;
+				If DoNotControlWriteRules = True Then
+					RegisterRecords.DataExchange.Load = True;
+				EndIf;	
 				RegisterRecords.Load(VT_Movements);
 				RegisterRecords.Write();
 				
@@ -236,18 +241,19 @@ Procedure WriteMovementsOnServer(Cancel)
 	Except
 		RollbackTransaction();
 		Cancel = True;
-		GetUserMessages(ErrorDescription());
+		CommonFunctionsClientServer.ShowUsersMessage(
+			ErrorProcessing.BriefErrorDescription(ErrorInfo()));
 	EndTry;
 	
 EndProcedure
 
 &AtClient
 Procedure MovementAnalysis(Command)
-	MovementAnalysisAsynh();		
+	MovementAnalysisAsync();		
 EndProcedure
 
 &AtClient
-Async Procedure MovementAnalysisAsynh()
+Async Procedure MovementAnalysisAsync()
 	
 	IsDifferenceInMovements = False;
 	MovementAnalysisAtServer(IsDifferenceInMovements);
@@ -270,18 +276,20 @@ Procedure SetDefaultMovementsToDocument()
 	Array = New Array; //Array of DocumentRefDocumentName
 	Array.Add(Object.DocumentRef);
 	
-	ChechResult = PostingServer.CheckDocumentArray(Array);
-	If ChechResult.Count() > 0 Then
-		DifferenceStructure = ChechResult[0];
+	CheckResult = PostingServer.CheckDocumentArray(Array);
+	If CheckResult.Count() > 0 Then
+		DifferenceStructure = CheckResult[0];
 		
 		For Each RegInfo In DifferenceStructure.RegInfo Do
 			
 			DotPosition = StrFind(RegInfo.RegName, ".");
-			RegName = Mid(RegInfo.RegName, DotPosition+1);
+			RegName = Mid(RegInfo.RegName, DotPosition + 1);
+			
+			NewPostingData = RegInfo.NewPostingData; //ValueTable
 			
 			TableName = RegName;
 			Table = ThisObject[RegName]; //FormDataCollection
-			Table.Load(RegInfo.NewPostingData);
+			Table.Load(NewPostingData);
 			
 		EndDo;
 		
@@ -321,18 +329,16 @@ Procedure MovementAnalysisAtServer(IsDifferenceInMovements = False)
 	
 	Array = New Array; //Array of DocumentRefDocumentName
 	Array.Add(Object.DocumentRef);
-	ChechResult = PostingServer.CheckDocumentArray(Array);
-	If ChechResult.Count() > 0 Then
+	CheckResult = PostingServer.CheckDocumentArray(Array);
+	If CheckResult.Count() > 0 Then
 		IsDifferenceInMovements = True;
-		For Each ArrayItemStructure In ChechResult Do
-			If Not ArrayItemStructure.Ref = Object.DocumentRef Then
-				Continue;
-			EndIf;	
-			For Each RegInfo In ArrayItemStructure.RegInfo Do
-				DotPosition = StrFind(RegInfo.RegName, ".");
-				RegEditNames.Add(Mid(RegInfo.RegName, DotPosition+1));
-			EndDo;			
-		EndDo;
+		ArrayItemStructure = CheckResult[0];
+		
+		For Each RegInfo In ArrayItemStructure.RegInfo Do
+			DotPosition = StrFind(RegInfo.RegName, ".");
+			RegEditNames.Add(Mid(RegInfo.RegName, DotPosition+1));
+		EndDo;			
+		
 	EndIf;
 	
 	SetPicturesForPages(RegEditNames);

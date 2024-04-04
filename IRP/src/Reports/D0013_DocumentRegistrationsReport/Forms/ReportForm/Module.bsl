@@ -183,10 +183,10 @@ Procedure GenerateReportForOneDocument(DocumentRef, Result, Template, MainTitleA
 	
 	DocsArray = New Array;
 	DocsArray.Add(DocumentRef);
-	PotencialMovementsArray = PostingServer.CheckDocumentArray(DocsArray);
+	NewMovementsArray = PostingServer.CheckDocumentArray(DocsArray);
 	DifferentMovementsArray = New Array;
-	If PotencialMovementsArray.Count() Then
-		DifferentMovementsArray = PotencialMovementsArray[0].RegInfo;
+	If NewMovementsArray.Count() Then
+		DifferentMovementsArray = NewMovementsArray[0].RegInfo;
 	EndIf;
 	
 	For Each ObjectProperty In ArrayOfDocumentRegisterRecords Do
@@ -225,94 +225,20 @@ Procedure GenerateReportForOneDocument(DocumentRef, Result, Template, MainTitleA
 		
 		If ReportBuilder.GetQuery().Execute().IsEmpty() Then
 			Continue;
-		EndIf;
+		EndIf;		
+		
+		IsDifference = True;
 		
 		For Each DifferentMovement In DifferentMovementsArray Do
 			If RegisterName = DifferentMovement.RegName Then
-				IsDifference = True;
+				Structure = New Structure;
+				Structure.Insert("ListOfDimensions", ListOfDimensions);
+				Structure.Insert("FieldPresentations", FieldPresentations);
+				Structure.Insert("DifferentMovement", DifferentMovement);
+				Structure.Insert("ReportBuilder", ReportBuilder);
+				Structure.Insert("ListOfResources", ListOfResources);
 				
-				CurrentMovementsVT		= ReportBuilder.GetQuery().Execute().Unload();
-				PotencialMovementsVT	= DifferentMovement.NewPostingData;
-				
-				FieldsString = "";
-				For Each Field In ListOfDimensions Do
-					FieldsString = FieldsString+Field;
-					FieldsString = FieldsString+",";
-				EndDo;
-				For Each Field In ListOfResources Do
-					FieldsString = FieldsString+Field;
-					FieldsString = FieldsString+",";
-				EndDo;
-				FieldsString = Left(FieldsString, StrLen(FieldsString)-1);
-				
-				PotencialMovementsVT.Columns.Delete("LineNumber");
-				If CurrentMovementsVT.Columns.Find("ItemKeyItem") <> Undefined Then
-					ColumnString = "";
-					For Each Column In PotencialMovementsVT.Columns Do
-						If Column.Name = "PointInTime" Then
-							Continue;
-						EndIf;
-						ColumnString = ColumnString+"VT."+Column.Name;
-						ColumnString = ColumnString+",";
-					EndDo;
-					ColumnString = Left(ColumnString, StrLen(ColumnString)-1);
-					
-					Query = New Query;
-					Query.SetParameter("VT", PotencialMovementsVT);
-					Query.Text = 
-					"SELECT %1
-					|
-					|INTO TT
-					|FROM
-					|	&VT AS VT
-					|;
-					|
-					|////////////////////////////////////////////////////////////////////////////////
-					|SELECT
-					|	ItemKeys.Item AS ItemKeyItem,
-					|	TT.*
-					|FROM
-					|	TT AS TT
-					|		LEFT JOIN Catalog.ItemKeys AS ItemKeys
-					|		ON TT.itemKey = ItemKeys.Ref";
-					Query.Text = StrTemplate(Query.Text, ColumnString);
-					
-					PotencialMovementsVT = Query.Execute().Unload();
-				EndIf;
-				
-				ResultVT = ValueTableDifference(CurrentMovementsVT, PotencialMovementsVT, FieldsString);
-				
-				CurrentMovementsVT.Columns.Insert(0,"Potencial", New TypeDescription("Boolean"));
-				CurrentMovementsVT.Columns.Insert(0,"ManualEdit", New TypeDescription("Boolean"));
-				
-				CurrentMovementsVT.FillValues(False, "ManualEdit");
-				CurrentMovementsVT.FillValues(False, "Potencial");
-
-				SearchArray = ResultVT.FindRows(New Structure("Sign", 0)); //Current movement = 0
-				For Each Row In SearchArray Do
-					SearchStructure = New Structure(FieldsString);
-					FillPropertyValues(SearchStructure, Row);
-					SearchStructure.Insert("ManualEdit", False);
-					SearchArray = CurrentMovementsVT.FindRows(SearchStructure);
-					If SearchArray.Count() > 0 Then
-						SearchArray[0].ManualEdit = True;
-					EndIf;
-				EndDo;
-				
-				SearchArray = ResultVT.FindRows(New Structure("Sign", 1)); //Potencial movement = 1
-				For Each Row In SearchArray Do
-					NewRowInVT = CurrentMovementsVT.Add();
-					FillPropertyValues(NewRowInVT, Row);
-					NewRowInVT.Potencial = True;
-				EndDo;
-				
-				CurrentMovementsVT.Sort("ManualEdit, Potencial,"+FieldsString);
-				
-				ReportBuilder.DataSource = New DataSourceDescription(CurrentMovementsVT); 
-				FillFieldPresentations(ReportBuilder, FieldPresentations);
-				
-				SetConditionalAppearance(ReportBuilder);
-				
+				OutputDifferenceInRegistersMovements(Structure);					
 			EndIf;
 		EndDo;
 		
@@ -368,6 +294,98 @@ Procedure GenerateReportForOneDocument(DocumentRef, Result, Template, MainTitleA
 	EndDo;
 EndProcedure
 
+&AtServer
+Procedure OutputDifferenceInRegistersMovements(ParametersStructure)
+	
+	ListOfDimensions = ListOfDimensions.ListOfDimensions;
+	FieldPresentations = ListOfDimensions.FieldPresentations;
+	DifferentMovement = ListOfDimensions.DifferentMovement;
+	ReportBuilder = ListOfDimensions.ReportBuilder;
+	ListOfResources = ListOfDimensions.ListOfResources;
+	
+	CurrentMovementsVT	= ReportBuilder.GetQuery().Execute().Unload();
+	NewMovementsVT	= DifferentMovement.NewPostingData;
+	
+	FieldsString = "";
+	For Each Field In ListOfDimensions Do
+		FieldsString = FieldsString + Field;
+		FieldsString = FieldsString + ",";
+	EndDo;
+	For Each Field In ListOfResources Do
+		FieldsString = FieldsString + Field;
+		FieldsString = FieldsString + ",";
+	EndDo;
+	FieldsString = Left(FieldsString, StrLen(FieldsString)-1);
+	
+	NewMovementsVT.Columns.Delete("LineNumber");
+	If Not CurrentMovementsVT.Columns.Find("ItemKeyItem") = Undefined Then
+		ColumnString = "";
+		For Each Column In NewMovementsVT.Columns Do
+			If Column.Name = "PointInTime" Then
+				Continue;
+			EndIf;
+			ColumnString = ColumnString + "VT." + Column.Name;
+			ColumnString = ColumnString + ",";
+		EndDo;
+		ColumnString = Left(ColumnString, StrLen(ColumnString) - 1);
+		
+		Query = New Query;
+		Query.SetParameter("VT", NewMovementsVT);
+		Query.Text = 
+		"SELECT %1
+		|
+		|INTO TT
+		|FROM
+		|	&VT AS VT
+		|;
+		|
+		|////////////////////////////////////////////////////////////////////////////////
+		|SELECT
+		|	ItemKeys.Item AS ItemKeyItem,
+		|	TT.*
+		|FROM
+		|	TT AS TT
+		|		LEFT JOIN Catalog.ItemKeys AS ItemKeys
+		|		ON TT.itemKey = ItemKeys.Ref";
+		Query.Text = StrTemplate(Query.Text, ColumnString);
+		
+		NewMovementsVT = Query.Execute().Unload();
+	EndIf;
+	
+	ResultVT = ValueTableDifference(CurrentMovementsVT, NewMovementsVT, FieldsString);
+	
+	CurrentMovementsVT.Columns.Insert(0, "Potential", New TypeDescription("Boolean"));
+	CurrentMovementsVT.Columns.Insert(0, "ManualEdit", New TypeDescription("Boolean"));
+	
+	CurrentMovementsVT.FillValues(False, "ManualEdit");
+	CurrentMovementsVT.FillValues(False, "Potential");
+
+	SearchArray = ResultVT.FindRows(New Structure("Sign", 0)); // Current movement = 0
+	For Each Row In SearchArray Do
+		SearchStructure = New Structure(FieldsString);
+		FillPropertyValues(SearchStructure, Row);
+		SearchStructure.Insert("ManualEdit", False);
+		SearchArray = CurrentMovementsVT.FindRows(SearchStructure);
+		If SearchArray.Count() > 0 Then
+			SearchArray[0].ManualEdit = True;
+		EndIf;
+	EndDo;
+	
+	SearchArray = ResultVT.FindRows(New Structure("Sign", 1)); // Potential movement = 1
+	For Each Row In SearchArray Do
+		NewRowInVT = CurrentMovementsVT.Add();
+		FillPropertyValues(NewRowInVT, Row);
+		NewRowInVT.Potential = True;
+	EndDo;
+	
+	CurrentMovementsVT.Sort("ManualEdit, Potential,"+FieldsString);
+	
+	ReportBuilder.DataSource = New DataSourceDescription(CurrentMovementsVT); 
+	FillFieldPresentations(ReportBuilder, FieldPresentations);
+	
+	SetConditionalAppearance(ReportBuilder);
+EndProcedure
+
 Function ValueTableDifference(Table0, Table1, Dimensions) Export
 
 	Columns = "";
@@ -383,7 +401,7 @@ Function ValueTableDifference(Table0, Table1, Dimensions) Export
 	ValueTable.FillValues(1, "Sign");
 	
 	For Each Row In Table0 Do 
-		FillPropertyValues(ValueTable.Add(), Row)
+		FillPropertyValues(ValueTable.Add(), Row);
 	EndDo;
 	
 	ValueTable.Columns.Add("Count");
@@ -429,7 +447,7 @@ Procedure SetConditionalAppearance(ReportBuilder)
 	EndIf;
 	
 	If Not ReportBuilder.SelectedFields.Find("ManualEdit") = Undefined Then
-		//Manual edit
+		// Manual edit
 		Appearance = ReportBuilder.ConditionalAppearance.Add("ManualEdit");
 		Appearance.Use = True;
 		
@@ -437,24 +455,25 @@ Procedure SetConditionalAppearance(ReportBuilder)
 		Filter.Value	= True;
 		Filter.Use		= True;
 		
-		Appearance.Appearance.Font.Value	= New Font(Appearance.Appearance.Font.Value,,,True);
+		Appearance.Appearance.Font.Value	= New Font(Appearance.Appearance.Font.Value, , , True);
 		Appearance.Appearance.Font.Use		= True;
 		
 		Appearance.Appearance.BackColor.Value	= WebColors.LightGreen;
 		Appearance.Appearance.BackColor.Use		= True;
 		
-		//Potencial
-		Appearance = ReportBuilder.ConditionalAppearance.Add("Potencial");
+		// Potential
+		Appearance = ReportBuilder.ConditionalAppearance.Add("Potential");
 		Appearance.Use = True;
 		
-		Filter = Appearance.Filter.Add("Potencial");
+		Filter = Appearance.Filter.Add("Potential");
 		Filter.Value	= True;
 		Filter.Use		= True;
 		
-		Appearance.Appearance.Font.Value	= New Font(Appearance.Appearance.Font.Value,,,,,,True);
+		Appearance.Appearance.Font.Value	= New Font(Appearance.Appearance.Font.Value, , , , , , True);
 		Appearance.Appearance.Font.Use		= True;
 
-	EndIf
+	EndIf;
+	
 EndProcedure
 
 &AtServer

@@ -742,6 +742,21 @@
    <dataHistory>Use</dataHistory>
   </attributes>
  </tabularSections>
+ <templates uuid="e2a4ecbb-4064-4432-9285-83e94093037b">
+  <name>InventoryTransferOrderPrint</name>
+  <synonym>
+   <key>en</key>
+   <value>Inventory transfer order</value>
+  </synonym>
+  <synonym>
+   <key>ru</key>
+   <value>Заказ на перемещение товаров</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Depo transfer siparişi</value>
+  </synonym>
+ </templates>
  <commands uuid="05afd2ec-bc48-4541-b975-3137c621f045">
   <name>Generate</name>
   <synonym>
@@ -759,6 +774,27 @@
   <group>FormCommandBarCreateBasedOn</group>
   <commandParameterType>
    <types>DocumentRef.InternalSupplyRequest</types>
+  </commandParameterType>
+  <parameterUseMode>Multiple</parameterUseMode>
+  <representation>Auto</representation>
+ </commands>
+ <commands uuid="3441fab0-cc7e-476d-ae13-ffd1e9f16b84">
+  <name>InventoryTransferOrderPrint</name>
+  <synonym>
+   <key>en</key>
+   <value>Inventory transfer order</value>
+  </synonym>
+  <synonym>
+   <key>ru</key>
+   <value>Заказ на перемещение товаров</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Depo transfer siparişi</value>
+  </synonym>
+  <group>CommandGroup.Print</group>
+  <commandParameterType>
+   <types>DocumentRef.InventoryTransferOrder</types>
   </commandParameterType>
   <parameterUseMode>Multiple</parameterUseMode>
   <representation>Auto</representation>

@@ -513,6 +513,7 @@
  <roles>Role.Document_DebitCreditNote</roles>
  <roles>Role.AuditLockSet</roles>
  <roles>Role.AuditLockUnset</roles>
+ <roles>Role.AccumulationRegisters_R5020B_PartnersBalance</roles>
  <commonTemplates>CommonTemplate.HTMLPictureSlider</commonTemplates>
  <commonTemplates>CommonTemplate.HTMLAddAttributes</commonTemplates>
  <commonTemplates>CommonTemplate.HTMLGallery</commonTemplates>
@@ -931,6 +932,7 @@
  <functionalOptions>FunctionalOption.UseSourceOfOrigin</functionalOptions>
  <functionalOptions>FunctionalOption.UseFixedAssets</functionalOptions>
  <functionalOptions>FunctionalOption.UseLegalNameContract</functionalOptions>
+ <functionalOptions>FunctionalOption.UseResponsiblePerson</functionalOptions>
  <definedTypes>DefinedType.typeAccessDocument</definedTypes>
  <definedTypes>DefinedType.typeAccountStatementBasises</definedTypes>
  <definedTypes>DefinedType.typeAddPropertyOwners</definedTypes>
@@ -1040,6 +1042,7 @@
  <constants>Constant.AdditionalTableControlExceptions</constants>
  <constants>Constant.UseFixedAssets</constants>
  <constants>Constant.UseLegalNameContract</constants>
+ <constants>Constant.UseResponsiblePerson</constants>
  <commonForms>CommonForm.AdditionalTableControlSettings</commonForms>
  <commonForms>CommonForm.AddLinkedDocumentRows</commonForms>
  <commonForms>CommonForm.AttachFile</commonForms>
@@ -1352,12 +1355,13 @@
  <enums>Enum.DebtTypes</enums>
  <enums>Enum.PaymentStatuses</enums>
  <enums>Enum.AuditLockActions</enums>
+ <enums>Enum.SalaryTypes</enums>
  <reports>Report.A0010_TrialBalance</reports>
  <reports>Report.A0011_TrialBalanceByAccount</reports>
  <reports>Report.A0012_AccountCard</reports>
  <reports>Report.A0013_AccountAnalysis</reports>
  <reports>Report.A1010_PartnersBalance</reports>
- <reports>Report.D0009_DocumentRegistrationsReport</reports>
+ <reports>Report.D0013_DocumentRegistrationsReport</reports>
  <reports>Report.D0010_ItemsInfo</reports>
  <reports>Report.D0011_PriceInfo</reports>
  <reports>Report.D0012_AdditionalDocumentTablesCheck</reports>
@@ -1377,6 +1381,7 @@
  <reports>Report.R6021_BatchBalanceSimple</reports>
  <reports>Report.R7010_DetailingSupplies</reports>
  <reports>Report.R7030_ProductionPlanning</reports>
+ <reports>Report.R5020_PartnersBalance</reports>
  <dataProcessors>DataProcessor.AnaliseDocumentMovements</dataProcessors>
  <dataProcessors>DataProcessor.AnalyseXDTO</dataProcessors>
  <dataProcessors>DataProcessor.BuilderExample</dataProcessors>
@@ -1394,7 +1399,6 @@
  <dataProcessors>DataProcessor.ObjectPropertyEditor</dataProcessors>
  <dataProcessors>DataProcessor.PointOfSale</dataProcessors>
  <dataProcessors>DataProcessor.PrintLabels</dataProcessors>
- <dataProcessors>DataProcessor.Procurement</dataProcessors>
  <dataProcessors>DataProcessor.ProductionWorkspace</dataProcessors>
  <dataProcessors>DataProcessor.ReplaceSerialLotNumber</dataProcessors>
  <dataProcessors>DataProcessor.ScanBarcode</dataProcessors>
@@ -1479,6 +1483,7 @@
  <informationRegisters>InformationRegister.T9550S_EmployeeSickLeave</informationRegisters>
  <informationRegisters>InformationRegister.AuditLock</informationRegisters>
  <informationRegisters>InformationRegister.AuditLockHistory</informationRegisters>
+ <informationRegisters>InformationRegister.T9015S_AccountsFixedAsset</informationRegisters>
  <accumulationRegisters>AccumulationRegister.CashInTransit</accumulationRegisters>
  <accumulationRegisters>AccumulationRegister.R1001T_Purchases</accumulationRegisters>
  <accumulationRegisters>AccumulationRegister.R1002T_PurchaseReturns</accumulationRegisters>
@@ -1580,6 +1585,7 @@
  <accumulationRegisters>AccumulationRegister.R9555T_PaidSickLeaves</accumulationRegisters>
  <accumulationRegisters>AccumulationRegister.R9560T_AdditionalAccrual</accumulationRegisters>
  <accumulationRegisters>AccumulationRegister.R9570T_AdditionalDeduction</accumulationRegisters>
+ <accumulationRegisters>AccumulationRegister.R5020B_PartnersBalance</accumulationRegisters>
  <chartsOfCharacteristicTypes>ChartOfCharacteristicTypes.AccountingExtraDimensionTypes</chartsOfCharacteristicTypes>
  <chartsOfCharacteristicTypes>ChartOfCharacteristicTypes.AddAttributeAndProperty</chartsOfCharacteristicTypes>
  <chartsOfCharacteristicTypes>ChartOfCharacteristicTypes.CurrencyMovementType</chartsOfCharacteristicTypes>

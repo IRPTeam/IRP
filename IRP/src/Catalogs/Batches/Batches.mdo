@@ -72,17 +72,17 @@
    <types>DocumentRef.RetailReturnReceipt</types>
    <types>DocumentRef.SalesReturn</types>
    <types>DocumentRef.StockAdjustmentAsSurplus</types>
+   <types>DocumentRef.ModernizationOfFixedAsset</types>
    <types>DocumentRef.StockAdjustmentAsWriteOff</types>
    <types>DocumentRef.Bundling</types>
    <types>DocumentRef.RetailSalesReceipt</types>
    <types>DocumentRef.Production</types>
    <types>DocumentRef.ItemStockAdjustment</types>
+   <types>DocumentRef.DecommissioningOfFixedAsset</types>
    <types>DocumentRef.InventoryTransfer</types>
    <types>DocumentRef.BatchReallocateIncoming</types>
    <types>DocumentRef.BatchReallocateOutgoing</types>
    <types>DocumentRef.SalesInvoice</types>
-   <types>DocumentRef.DecommissioningOfFixedAsset</types>
-   <types>DocumentRef.ModernizationOfFixedAsset</types>
   </type>
   <minValue xsi:type="core:UndefinedValue"/>
   <maxValue xsi:type="core:UndefinedValue"/>

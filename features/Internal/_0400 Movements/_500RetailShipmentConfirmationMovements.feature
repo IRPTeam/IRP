@@ -191,19 +191,17 @@ Scenario: _050006 check Retail shipment confirmation movements by the Register  
 			| 'Number'    |
 			| '314'       |
 	* Check movements by the Register  "R4032 Goods in transit (outgoing)" 
-		And I click "Registrations report" button
+		And I click "Registrations report info" button
 		And I select "R4032 Goods in transit (outgoing)" exact value from "Register" drop-down list
 		And I click "Generate report" button
 		Then "ResultTable" spreadsheet document is equal
-			| 'Retail shipment confirmation 314 dated 24.05.2023 14:43:31'   | ''              | ''                      | ''            | ''             | ''                                                             | ''            |
-			| 'Document registrations records'                               | ''              | ''                      | ''            | ''             | ''                                                             | ''            |
-			| 'Register  "R4032 Goods in transit (outgoing)"'                | ''              | ''                      | ''            | ''             | ''                                                             | ''            |
-			| ''                                                             | 'Record type'   | 'Period'                | 'Resources'   | 'Dimensions'   | ''                                                             | ''            |
-			| ''                                                             | ''              | ''                      | 'Quantity'    | 'Store'        | 'Basis'                                                        | 'Item key'    |
-			| ''                                                             | 'Expense'       | '24.05.2023 14:43:31'   | '2'           | 'Store 01'     | 'Retail shipment confirmation 314 dated 24.05.2023 14:43:31'   | 'XS/Blue'     |
-			| ''                                                             | 'Expense'       | '24.05.2023 14:43:31'   | '2'           | 'Store 01'     | 'Retail shipment confirmation 314 dated 24.05.2023 14:43:31'   | '37/18SD'     |
-			| ''                                                             | 'Expense'       | '24.05.2023 14:43:31'   | '2'           | 'Store 01'     | 'Retail shipment confirmation 314 dated 24.05.2023 14:43:31'   | 'PZU'         |
-
+			| 'Retail shipment confirmation 314 dated 24.05.2023 14:43:31' | ''                    | ''           | ''         | ''                                                           | ''         | ''         |
+			| 'Register  "R4032 Goods in transit (outgoing)"'              | ''                    | ''           | ''         | ''                                                           | ''         | ''         |
+			| ''                                                           | 'Period'              | 'RecordType' | 'Store'    | 'Basis'                                                      | 'Item key' | 'Quantity' |
+			| ''                                                           | '24.05.2023 14:43:31' | 'Expense'    | 'Store 01' | 'Retail shipment confirmation 314 dated 24.05.2023 14:43:31' | 'XS/Blue'  | '2'        |
+			| ''                                                           | '24.05.2023 14:43:31' | 'Expense'    | 'Store 01' | 'Retail shipment confirmation 314 dated 24.05.2023 14:43:31' | '37/18SD'  | '2'        |
+			| ''                                                           | '24.05.2023 14:43:31' | 'Expense'    | 'Store 01' | 'Retail shipment confirmation 314 dated 24.05.2023 14:43:31' | 'PZU'      | '2'        |		
+		
 
 Scenario: _050007 check Retail shipment confirmation movements by the Register  "T3010S Row ID info"
 		And I close all client application windows

@@ -25,6 +25,30 @@
  <useStandardCommands>true</useStandardCommands>
  <editType>InDialog</editType>
  <dataLockControlMode>Managed</dataLockControlMode>
+ <recordPresentation>
+  <key>en</key>
+  <value>Audit lock history</value>
+ </recordPresentation>
+ <recordPresentation>
+  <key>ru</key>
+  <value>История аудиторского запрета изменения данных</value>
+ </recordPresentation>
+ <recordPresentation>
+  <key>tr</key>
+  <value>Audit kilit tarihçesi</value>
+ </recordPresentation>
+ <listPresentation>
+  <key>en</key>
+  <value>Audit locks history</value>
+ </listPresentation>
+ <listPresentation>
+  <key>ru</key>
+  <value>История блокировок аудита</value>
+ </listPresentation>
+ <listPresentation>
+  <key>tr</key>
+  <value>Audit locks history</value>
+ </listPresentation>
  <resources uuid="bf9da530-0f85-4810-9e08-1dbe90722ddf">
   <name>Action</name>
   <synonym>

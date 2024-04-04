@@ -514,25 +514,25 @@
    <segments>CurrentCodes</segments>
   </dataPath>
   <titleLocation>None</titleLocation>
-  <excludedCommands>SearchEverywhere</excludedCommands>
-  <excludedCommands>ShowRowRearrangement</excludedCommands>
-  <excludedCommands>ShowMultipleSelection</excludedCommands>
-  <excludedCommands>SortListDesc</excludedCommands>
-  <excludedCommands>Find</excludedCommands>
   <excludedCommands>Add</excludedCommands>
-  <excludedCommands>MoveDown</excludedCommands>
+  <excludedCommands>CancelSearch</excludedCommands>
   <excludedCommands>Change</excludedCommands>
+  <excludedCommands>Copy</excludedCommands>
+  <excludedCommands>CopyToClipboard</excludedCommands>
+  <excludedCommands>Delete</excludedCommands>
+  <excludedCommands>EndEdit</excludedCommands>
+  <excludedCommands>Find</excludedCommands>
+  <excludedCommands>FindByCurrentValue</excludedCommands>
+  <excludedCommands>MoveDown</excludedCommands>
   <excludedCommands>MoveUp</excludedCommands>
   <excludedCommands>OutputList</excludedCommands>
-  <excludedCommands>FindByCurrentValue</excludedCommands>
-  <excludedCommands>CancelSearch</excludedCommands>
+  <excludedCommands>SearchEverywhere</excludedCommands>
   <excludedCommands>SearchHistory</excludedCommands>
-  <excludedCommands>Delete</excludedCommands>
-  <excludedCommands>CopyToClipboard</excludedCommands>
-  <excludedCommands>EndEdit</excludedCommands>
-  <excludedCommands>Copy</excludedCommands>
-  <excludedCommands>SortListAsc</excludedCommands>
   <excludedCommands>SelectAll</excludedCommands>
+  <excludedCommands>ShowMultipleSelection</excludedCommands>
+  <excludedCommands>ShowRowRearrangement</excludedCommands>
+  <excludedCommands>SortListAsc</excludedCommands>
+  <excludedCommands>SortListDesc</excludedCommands>
   <items xsi:type="form:FormField">
    <name>CurrentCodesControlCodeStringType</name>
    <id>63</id>
@@ -1122,16 +1122,16 @@
   <autoFill>true</autoFill>
  </autoCommandBar>
  <handlers>
-  <event>OnCreateAtServer</event>
-  <name>OnCreateAtServer</name>
- </handlers>
- <handlers>
   <event>NotificationProcessing</event>
   <name>NotificationProcessing</name>
  </handlers>
  <handlers>
   <event>OnOpen</event>
   <name>OnOpen</name>
+ </handlers>
+ <handlers>
+  <event>OnCreateAtServer</event>
+  <name>OnCreateAtServer</name>
  </handlers>
  <autoTitle>true</autoTitle>
  <autoUrl>true</autoUrl>

@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mdclass:Document xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" xmlns:mdclassExtension="http://g5.1c.ru/v8/dt/metadata/mdclass/extension" uuid="0830c646-bab1-4f25-aaf7-c065a9e962ff" extendedConfigurationObject="f5078e26-7faf-4ba0-9aba-167ab704e665">
+  <producedTypes>
+    <objectType typeId="c719826c-8897-4e0b-a968-68022a6649a4" valueTypeId="d5bbc173-35ac-40d2-847a-0946b68fca30"/>
+    <refType typeId="a559f77c-a469-4785-b068-8ed007594e35" valueTypeId="ee013962-d8c2-4ae7-b749-c26c39e4c1bd"/>
+    <selectionType typeId="b76e14ee-a0ea-434c-abde-21394e29eb35" valueTypeId="3d52889c-3a9b-45e9-9da6-71b524612666"/>
+    <listType typeId="0fe3789c-308d-4a92-958b-6b49a22599b4" valueTypeId="b3cf3778-5228-4e4e-8bcb-dcb74d528011"/>
+    <managerType typeId="382ca9e0-95d3-4d4d-a08c-e761ca26be2e" valueTypeId="4b85c2b2-d7ed-4d7b-952f-720fccac5957"/>
+  </producedTypes>
+  <name>CashPayment</name>
+  <objectBelonging>Adopted</objectBelonging>
+  <extension xsi:type="mdclassExtension:DocumentExtension">
+    <extendedConfigurationObject>Checked</extendedConfigurationObject>
+  </extension>
+  <useStandardCommands>true</useStandardCommands>
+</mdclass:Document>

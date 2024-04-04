@@ -20,5 +20,6 @@
  <content>Report.R1200_VendorsAging</content>
  <content>Report.R1100_CustomersAging</content>
  <content>Catalog.AgingPeriods</content>
+ <content>Report.R5020_PartnersBalance</content>
  <parentSubsystem>Subsystem.Reports</parentSubsystem>
 </mdclass:Subsystem>

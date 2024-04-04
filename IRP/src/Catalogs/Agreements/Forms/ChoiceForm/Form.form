@@ -1041,6 +1041,7 @@ WHERE
       <dateFractions>Date</dateFractions>
      </dateQualifiers>
     </valueType>
+    <values xsi:type="core:UndefinedValue"/>
     <useRestriction>true</useRestriction>
    </parameters>
    <parameters>
@@ -1061,7 +1062,7 @@ WHERE
       </content>
      </localValue>
     </title>
-    <valueType/>
+    <values xsi:type="core:UndefinedValue"/>
     <useRestriction>true</useRestriction>
    </parameters>
    <parameters>
@@ -1085,6 +1086,7 @@ WHERE
     <valueType>
      <types>CatalogRef.Partners</types>
     </valueType>
+    <values xsi:type="core:UndefinedValue"/>
     <useRestriction>true</useRestriction>
    </parameters>
    <parameters>
@@ -1108,6 +1110,7 @@ WHERE
     <valueType>
      <types>Boolean</types>
     </valueType>
+    <values xsi:type="core:UndefinedValue"/>
     <useRestriction>true</useRestriction>
    </parameters>
    <parameters>
@@ -1128,7 +1131,7 @@ WHERE
       </content>
      </localValue>
     </title>
-    <valueType/>
+    <values xsi:type="core:UndefinedValue"/>
     <useRestriction>true</useRestriction>
    </parameters>
   </extInfo>

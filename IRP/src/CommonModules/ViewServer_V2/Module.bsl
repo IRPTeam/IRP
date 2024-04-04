@@ -244,7 +244,6 @@ Procedure AddNewRowAtServer(TableName, Parameters, OnAddViewNotify, FillingValue
 	PayerIsPresent         = CommonFunctionsClientServer.ObjectHasProperty(Row, "Payer");
 	
 
-
 	If FillingValues.Property("Item") And ItemIsPresent Then
 		ControllerClientServer_V2.SetItemListItem(Parameters, PrepareValue(FillingValues.Item, Row.Key));
 	EndIf;

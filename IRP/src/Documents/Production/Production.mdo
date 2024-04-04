@@ -1026,6 +1026,21 @@
    <dataHistory>Use</dataHistory>
   </attributes>
  </tabularSections>
+ <templates uuid="5c638ebd-4059-4767-965d-a0f7a4d2f4ef">
+  <name>ProductionPrint</name>
+  <synonym>
+   <key>en</key>
+   <value>Production</value>
+  </synonym>
+  <synonym>
+   <key>ru</key>
+   <value>Рабочая база</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Çalışma sistemi</value>
+  </synonym>
+ </templates>
  <commands uuid="09865ee1-96a5-4f9c-a83f-4d12d47b414a">
   <name>Generate</name>
   <synonym>
@@ -1044,6 +1059,27 @@
   <commandParameterType>
    <types>DocumentRef.ProductionPlanning</types>
   </commandParameterType>
+  <representation>Auto</representation>
+ </commands>
+ <commands uuid="44270fd8-5ca7-483d-a01d-50808b8901e0">
+  <name>ProductionPrint</name>
+  <synonym>
+   <key>en</key>
+   <value>Production</value>
+  </synonym>
+  <synonym>
+   <key>ru</key>
+   <value>Рабочая база</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Çalışma sistemi</value>
+  </synonym>
+  <group>CommandGroup.Print</group>
+  <commandParameterType>
+   <types>DocumentRef.Production</types>
+  </commandParameterType>
+  <parameterUseMode>Multiple</parameterUseMode>
   <representation>Auto</representation>
  </commands>
 </mdclass:Document>

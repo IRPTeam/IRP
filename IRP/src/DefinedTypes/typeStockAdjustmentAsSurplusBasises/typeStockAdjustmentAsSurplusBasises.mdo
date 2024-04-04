@@ -17,7 +17,7 @@
   <value>Tip stok sayım giriş fiş kaynak evrakı</value>
  </synonym>
  <type>
-  <types>DocumentRef.PhysicalInventory</types>
   <types>DocumentRef.StockAdjustmentAsSurplus</types>
+  <types>DocumentRef.PhysicalInventory</types>
  </type>
 </mdclass:DefinedType>

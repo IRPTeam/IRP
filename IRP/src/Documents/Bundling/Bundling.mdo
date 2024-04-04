@@ -537,4 +537,40 @@
    <dataHistory>Use</dataHistory>
   </attributes>
  </tabularSections>
+ <templates uuid="f178d1f7-9dad-44bf-beee-b41ae672ea3f">
+  <name>BundlingPrint</name>
+  <synonym>
+   <key>en</key>
+   <value>Bundling</value>
+  </synonym>
+  <synonym>
+   <key>ru</key>
+   <value>Комплектация набора</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Takım oluşturma fişi</value>
+  </synonym>
+ </templates>
+ <commands uuid="185f043d-3bae-4252-bfa6-93b677593ed5">
+  <name>BundlingPrint</name>
+  <synonym>
+   <key>en</key>
+   <value>Bundling</value>
+  </synonym>
+  <synonym>
+   <key>ru</key>
+   <value>Комплектация набора</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Takım oluşturma fişi</value>
+  </synonym>
+  <group>CommandGroup.Print</group>
+  <commandParameterType>
+   <types>DocumentRef.Bundling</types>
+  </commandParameterType>
+  <parameterUseMode>Multiple</parameterUseMode>
+  <representation>Auto</representation>
+ </commands>
 </mdclass:Document>

@@ -4,6 +4,119 @@ Function GetPrintForm(Ref, PrintFormName, AddInfo = Undefined) Export
 	Return Undefined;
 EndFunction
 
+Function Print(Ref, Param) Export
+	If StrCompare(Param.NameTemplate, "WorkSheetPrint") = 0 Then
+		Return WorkSheetPrint(Ref, Param);
+	EndIf;
+EndFunction
+
+// Work sheet print.
+// 
+// Parameters:
+//  Ref - DocumentRef.WorkSheet
+//  Param - See UniversalPrintServer.InitPrintParam
+// 
+// Returns:
+//  SpreadsheetDocument - Work sheet print
+Function WorkSheetPrint(Ref, Param)
+		
+	Template = GetTemplate("WorkSheetPrint");
+	Template.LanguageCode = Param.LayoutLang;
+	Query = New Query;
+	Text =
+	"SELECT
+	|	DocumentHeader.Number AS Number,
+	|	DocumentHeader.Date AS Date,
+	|	DocumentHeader.Company.Description_en AS Company,
+	|	DocumentHeader.Partner.Description_en AS Partner,
+	|	DocumentHeader.Author AS Author,
+	|	DocumentHeader.Ref AS Ref,
+	|	DocumentHeader.Currency.Code AS Currency
+	|FROM
+	|	Document.WorkSheet AS DocumentHeader
+	|WHERE
+	|	DocumentHeader.Ref = &Ref
+	|;
+	|
+	|////////////////////////////////////////////////////////////////////////////////
+	|SELECT
+	|	DocumentItemList.ItemKey.Item.Description_en AS Item,
+	|	DocumentItemList.ItemKey.Description_en AS ItemKey,
+	|	DocumentItemList.Quantity AS Quantity,
+	|	DocumentItemList.Unit.Description_en AS Unit,
+	|	DocumentItemList.Ref AS Ref,
+	|	DocumentItemList.Key AS Key
+	|INTO Items
+	|FROM
+	|	Document.WorkSheet.ItemList AS DocumentItemList
+	|WHERE
+	|	DocumentItemList.Ref = &Ref	
+	|;
+	|
+	|////////////////////////////////////////////////////////////////////////////////
+	|SELECT
+	|	Items.Item AS Item,
+	|	Items.ItemKey AS ItemKey,
+	|	Items.Quantity AS Quantity,
+	|	Items.Unit AS Unit,
+	|	Items.Ref AS Ref,
+	|	Items.Key AS Key
+	|FROM
+	|	Items AS Items";
+
+	LCode = Param.DataLang;
+	Text = LocalizationEvents.ReplaceDescriptionLocalizationPrefix(Text, "DocumentHeader.Company", LCode);
+	Text = LocalizationEvents.ReplaceDescriptionLocalizationPrefix(Text, "DocumentHeader.Partner", LCode);
+	Text = LocalizationEvents.ReplaceDescriptionLocalizationPrefix(Text, "DocumentItemList.ItemKey.Item", LCode);
+	Text = LocalizationEvents.ReplaceDescriptionLocalizationPrefix(Text, "DocumentItemList.ItemKey", LCode);
+	Text = LocalizationEvents.ReplaceDescriptionLocalizationPrefix(Text, "DocumentItemList.Unit", LCode);
+	Query.Text = Text;                                                    
+
+	Query.Parameters.Insert("Ref", Ref);
+	Selection = Query.ExecuteBatch();
+	SelectionHeader = Selection[0].Select();
+	SelectionItems = Selection[2].Unload();
+	SelectionItems.Indexes.Add("Ref");
+
+	AreaCaption = Template.GetArea("Caption");
+	AreaHeader = Template.GetArea("Header");
+	AreaItemListHeader = Template.GetArea("ItemListHeader|ItemColumn");
+	AreaItemList = Template.GetArea("ItemList|ItemColumn");
+	AreaFooter = Template.GetArea("Footer");
+	
+	Spreadsheet = New SpreadsheetDocument;
+	Spreadsheet.LanguageCode = Param.LayoutLang;
+
+	While SelectionHeader.Next() Do
+		AreaCaption.Parameters.Fill(SelectionHeader);
+		Spreadsheet.Put(AreaCaption);
+
+		AreaHeader.Parameters.Fill(SelectionHeader);
+		Spreadsheet.Put(AreaHeader);
+
+		Spreadsheet.Put(AreaItemListHeader);
+				
+		Choice	= New Structure("Ref", SelectionHeader.Ref);
+		FindRow = SelectionItems.FindRows(Choice);
+
+		Number = 0;
+		
+		For Each It In FindRow Do
+			Number = Number + 1;
+			AreaItemList.Parameters.Fill(It);
+			AreaItemList.Parameters.Number = Number;
+			Spreadsheet.Put(AreaItemList);		
+		EndDo;
+	EndDo;
+
+	AreaFooter.Parameters.Currency = SelectionHeader.Currency;
+	AreaFooter.Parameters.Manager = SelectionHeader.Author;
+	Spreadsheet.Put(AreaFooter);
+	Spreadsheet = UniversalPrintServer.ResetLangSettings(Spreadsheet, Param.LayoutLang);
+	Return Spreadsheet;
+	
+EndFunction	
+
 #EndRegion
 
 #Region Posting

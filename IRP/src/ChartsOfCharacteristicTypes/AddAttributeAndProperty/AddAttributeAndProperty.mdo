@@ -40,46 +40,46 @@
  </objectPresentation>
  <characteristicExtValues>Catalog.AddAttributeAndPropertyValues</characteristicExtValues>
  <type>
-  <types>Boolean</types>
-  <types>CatalogRef.Currencies</types>
-  <types>CatalogRef.AddAttributeAndPropertyValues</types>
-  <types>String</types>
-  <types>Date</types>
-  <types>Number</types>
-  <types>CatalogRef.Countries</types>
   <types>CatalogRef.Companies</types>
-  <types>CatalogRef.ItemTypes</types>
   <types>CatalogRef.LegalNameContracts</types>
-  <types>CatalogRef.Partners</types>
-  <types>CatalogRef.PriceTypes</types>
-  <types>CatalogRef.Stores</types>
-  <types>CatalogRef.BusinessUnits</types>
-  <types>CatalogRef.Agreements</types>
-  <types>CatalogRef.Projects</types>
-  <types>CatalogRef.AccountingOperations</types>
-  <types>CatalogRef.AccrualAndDeductionTypes</types>
-  <types>CatalogRef.BankTerms</types>
-  <types>CatalogRef.CancelReturnReasons</types>
-  <types>CatalogRef.CashAccounts</types>
-  <types>CatalogRef.CurrencyMovementSets</types>
-  <types>CatalogRef.DepreciationSchedules</types>
-  <types>CatalogRef.EmployeePositions</types>
-  <types>CatalogRef.EmployeeSchedule</types>
-  <types>CatalogRef.ExpenseAndRevenueTypes</types>
-  <types>CatalogRef.Items</types>
-  <types>CatalogRef.ItemKeys</types>
-  <types>CatalogRef.LedgerTypeVariants</types>
-  <types>CatalogRef.LedgerTypes</types>
   <types>CatalogRef.PaymentTerminals</types>
-  <types>CatalogRef.PaymentSchedules</types>
-  <types>CatalogRef.PartnersBankAccounts</types>
-  <types>CatalogRef.PaymentTypes</types>
-  <types>CatalogRef.SerialLotNumbers</types>
-  <types>CatalogRef.TaxAnalytics</types>
-  <types>CatalogRef.TaxRates</types>
-  <types>CatalogRef.Taxes</types>
+  <types>CatalogRef.CashAccounts</types>
   <types>CatalogRef.Units</types>
+  <types>CatalogRef.PaymentTypes</types>
+  <types>CatalogRef.CancelReturnReasons</types>
+  <types>CatalogRef.AccountingOperations</types>
+  <types>CatalogRef.ExpenseAndRevenueTypes</types>
+  <types>CatalogRef.PriceTypes</types>
+  <types>CatalogRef.DepreciationSchedules</types>
+  <types>CatalogRef.Partners</types>
+  <types>CatalogRef.TaxRates</types>
+  <types>Boolean</types>
   <types>CatalogRef.UnitsOfMeasurement</types>
+  <types>CatalogRef.EmployeePositions</types>
+  <types>CatalogRef.PartnersBankAccounts</types>
+  <types>CatalogRef.Currencies</types>
+  <types>CatalogRef.LedgerTypeVariants</types>
+  <types>CatalogRef.AddAttributeAndPropertyValues</types>
+  <types>CatalogRef.PaymentSchedules</types>
+  <types>CatalogRef.EmployeeSchedule</types>
+  <types>CatalogRef.AccrualAndDeductionTypes</types>
+  <types>CatalogRef.Items</types>
+  <types>String</types>
+  <types>CatalogRef.TaxAnalytics</types>
+  <types>CatalogRef.LedgerTypes</types>
+  <types>CatalogRef.BankTerms</types>
+  <types>CatalogRef.SerialLotNumbers</types>
+  <types>CatalogRef.Agreements</types>
+  <types>Date</types>
+  <types>CatalogRef.Projects</types>
+  <types>Number</types>
+  <types>CatalogRef.Taxes</types>
+  <types>CatalogRef.Countries</types>
+  <types>CatalogRef.CurrencyMovementSets</types>
+  <types>CatalogRef.Stores</types>
+  <types>CatalogRef.ItemKeys</types>
+  <types>CatalogRef.ItemTypes</types>
+  <types>CatalogRef.BusinessUnits</types>
   <numberQualifiers>
    <precision>15</precision>
    <scale>4</scale>

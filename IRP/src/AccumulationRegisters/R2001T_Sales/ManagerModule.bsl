@@ -5,6 +5,7 @@ Function CheckBalance(Ref, ItemList_InDocument, Records_InDocument, Records_Exis
 	EndIf;
 	
 	Query = New Query();
+	//@skip-check bsl-ql-hub
 	Query.Text = 
 	"SELECT
 	|	Records.Invoice,

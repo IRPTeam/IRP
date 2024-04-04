@@ -29,11 +29,7 @@ EndProcedure
 Procedure SetGroupItemsList(Object, Form)
 	AttributesArray = New Array();
 	AttributesArray.Add("Company");
-	AttributesArray.Add("FixedAsset");
-	AttributesArray.Add("ResponsiblePersonSender");
-	AttributesArray.Add("BusinessUnitSender");
-	AttributesArray.Add("ResponsiblePersonReceiver");
-	AttributesArray.Add("BusinessUnitReceiver");
+	AttributesArray.Add("FixedAsset");	
 	DocumentsServer.DeleteUnavailableTitleItemNames(AttributesArray);
 	For Each Attr In AttributesArray Do
 		Form.GroupItems.Add(Attr, ?(ValueIsFilled(Form.Items[Attr].Title), Form.Items[Attr].Title,
@@ -68,7 +64,8 @@ Function _GetFixedAssetLocation(Date, Company, FixedAsset) Export
 	Query.Text = 
 	"SELECT
 	|	T8515S_FixedAssetsLocationSliceLast.ResponsiblePerson,
-	|	T8515S_FixedAssetsLocationSliceLast.Branch
+	|	T8515S_FixedAssetsLocationSliceLast.Branch,
+	|	T8515S_FixedAssetsLocationSliceLast.ProfitLossCenter
 	|FROM
 	|	InformationRegister.T8515S_FixedAssetsLocation.SliceLast(&Date, Company = &Company
 	|	AND FixedAsset = &FixedAsset) AS T8515S_FixedAssetsLocationSliceLast
@@ -79,12 +76,12 @@ Function _GetFixedAssetLocation(Date, Company, FixedAsset) Export
 	Query.SetParameter("FixedAsset", FixedAsset);
 	QueryResult = Query.Execute();
 	QuerySelection = QueryResult.Select();
-	Result = New Structure("ResponsiblePerson, Branch");
+	Result = New Structure("ResponsiblePerson, Branch, ProfitLossCenter");
 	If QuerySelection.Next() Then
 		Result.ResponsiblePerson = QuerySelection.ResponsiblePerson;
-		Result.Branch = QuerySelection.Branch;
+		Result.Branch            = QuerySelection.Branch;
+		Result.ProfitLossCenter  = QuerySelection.ProfitLossCenter;
 	EndIf;
 	Return Result;
 EndFunction
-
 

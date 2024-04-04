@@ -4,14 +4,7 @@
 	<setForAttributesByDefault>true</setForAttributesByDefault>
 	<independentRightsOfChildObjects>false</independentRightsOfChildObjects>
 	<object>
-		<name>Subsystem.Salary.Subsystem.Catalogs</name>
-		<right>
-			<name>View</name>
-			<value>true</value>
-		</right>
-	</object>
-	<object>
-		<name>Subsystem.Salary.Subsystem.Settings</name>
+		<name>Subsystem.Reports.Subsystem.Salary</name>
 		<right>
 			<name>View</name>
 			<value>true</value>
@@ -25,7 +18,14 @@
 		</right>
 	</object>
 	<object>
-		<name>Subsystem.Reports.Subsystem.Salary</name>
+		<name>Subsystem.Salary.Subsystem.Settings</name>
+		<right>
+			<name>View</name>
+			<value>true</value>
+		</right>
+	</object>
+	<object>
+		<name>Subsystem.Salary.Subsystem.Catalogs</name>
 		<right>
 			<name>View</name>
 			<value>true</value>

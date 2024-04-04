@@ -562,6 +562,7 @@ FROM
      <types>Date</types>
      <dateQualifiers/>
     </valueType>
+    <values xsi:type="core:UndefinedValue"/>
     <useRestriction>true</useRestriction>
     <availableAsField>false</availableAsField>
    </parameters>
@@ -587,6 +588,7 @@ FROM
      <types>Date</types>
      <dateQualifiers/>
     </valueType>
+    <values xsi:type="core:UndefinedValue"/>
     <availableAsField>false</availableAsField>
    </parameters>
    <parameters>
@@ -610,6 +612,7 @@ FROM
     <valueType>
      <types>CatalogRef.Companies</types>
     </valueType>
+    <values xsi:type="core:UndefinedValue"/>
     <useRestriction>true</useRestriction>
     <availableAsField>false</availableAsField>
    </parameters>
@@ -634,6 +637,7 @@ FROM
     <valueType>
      <types>CatalogRef.Currencies</types>
     </valueType>
+    <values xsi:type="core:UndefinedValue"/>
     <useRestriction>true</useRestriction>
     <availableAsField>false</availableAsField>
    </parameters>
@@ -658,6 +662,7 @@ FROM
     <valueType>
      <types>CatalogRef.BusinessUnits</types>
     </valueType>
+    <values xsi:type="core:UndefinedValue"/>
     <useRestriction>true</useRestriction>
     <availableAsField>false</availableAsField>
    </parameters>
@@ -679,7 +684,6 @@ FROM
       </content>
      </localValue>
     </title>
-    <valueType/>
     <useRestriction>true</useRestriction>
     <valueListAllowed>true</valueListAllowed>
     <availableAsField>false</availableAsField>

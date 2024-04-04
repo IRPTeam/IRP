@@ -24,6 +24,30 @@
  </synonym>
  <editType>InDialog</editType>
  <dataLockControlMode>Managed</dataLockControlMode>
+ <recordPresentation>
+  <key>en</key>
+  <value>T9050 Accounting row analytics</value>
+ </recordPresentation>
+ <recordPresentation>
+  <key>ru</key>
+  <value>T9050 Аналитика строк бухгалтерии</value>
+ </recordPresentation>
+ <recordPresentation>
+  <key>tr</key>
+  <value>T9050 Muhasebe satır analitikleri</value>
+ </recordPresentation>
+ <listPresentation>
+  <key>en</key>
+  <value>T9050 Accounting row analytics</value>
+ </listPresentation>
+ <listPresentation>
+  <key>ru</key>
+  <value>T9050 Аналитика строк бухгалтерии</value>
+ </listPresentation>
+ <listPresentation>
+  <key>tr</key>
+  <value>T9050 Muhasebe satır analitikleri</value>
+ </listPresentation>
  <dimensions uuid="96c86a0b-59a3-4f6e-b9f4-aee00d7321fd">
   <name>Document</name>
   <synonym>
@@ -70,6 +94,9 @@
   <maxValue xsi:type="core:UndefinedValue"/>
   <fullTextSearch>Use</fullTextSearch>
   <dataHistory>Use</dataHistory>
+  <fillValue xsi:type="core:StringValue">
+   <value/>
+  </fillValue>
  </dimensions>
  <dimensions uuid="5b8c160f-9d4e-48c2-9416-b9505abe413c">
   <name>Operation</name>
@@ -92,6 +119,7 @@
   <maxValue xsi:type="core:UndefinedValue"/>
   <fullTextSearch>Use</fullTextSearch>
   <dataHistory>Use</dataHistory>
+  <fillValue xsi:type="core:UndefinedValue"/>
  </dimensions>
  <dimensions uuid="8ab1c6e5-9b00-4672-9929-bead96e4c455">
   <name>LedgerType</name>
@@ -114,6 +142,7 @@
   <maxValue xsi:type="core:UndefinedValue"/>
   <fullTextSearch>Use</fullTextSearch>
   <dataHistory>Use</dataHistory>
+  <fillValue xsi:type="core:UndefinedValue"/>
  </dimensions>
  <dimensions uuid="e87f9a6f-fc50-4bb7-9ee1-58469a78ae44">
   <name>AccountDebit</name>
@@ -137,6 +166,7 @@
   <indexing>Index</indexing>
   <fullTextSearch>Use</fullTextSearch>
   <dataHistory>Use</dataHistory>
+  <fillValue xsi:type="core:UndefinedValue"/>
  </dimensions>
  <dimensions uuid="6ef1f0e8-2c53-4178-87da-e2d7a5936bf1">
   <name>AccountCredit</name>
@@ -160,6 +190,7 @@
   <indexing>Index</indexing>
   <fullTextSearch>Use</fullTextSearch>
   <dataHistory>Use</dataHistory>
+  <fillValue xsi:type="core:UndefinedValue"/>
  </dimensions>
  <dimensions uuid="669d81d5-6902-440d-b1ff-76f38ba96658">
   <name>IsFixed</name>
@@ -182,6 +213,7 @@
   <maxValue xsi:type="core:UndefinedValue"/>
   <fullTextSearch>Use</fullTextSearch>
   <dataHistory>Use</dataHistory>
+  <fillValue xsi:type="core:UndefinedValue"/>
  </dimensions>
  <dimensions uuid="b89f97e9-d729-425f-be87-9891ef5d6001">
   <name>UUID</name>

@@ -528,4 +528,40 @@
    <dataHistory>Use</dataHistory>
   </attributes>
  </tabularSections>
+ <templates uuid="eaf1bdb6-762c-499a-997d-6115e49133ed">
+  <name>ItemStockAdjustmentPrint</name>
+  <synonym>
+   <key>en</key>
+   <value>Item stock adjustment</value>
+  </synonym>
+  <synonym>
+   <key>ru</key>
+   <value>Пересорт товара</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Varyant stok düzeltme fişi</value>
+  </synonym>
+ </templates>
+ <commands uuid="d0fa7f38-9536-46c3-8230-6f050fc02bd2">
+  <name>ItemStockAdjustmentPrint</name>
+  <synonym>
+   <key>en</key>
+   <value>Item stock adjustment</value>
+  </synonym>
+  <synonym>
+   <key>ru</key>
+   <value>Пересорт товара</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Varyant stok düzeltme fişi</value>
+  </synonym>
+  <group>CommandGroup.Print</group>
+  <commandParameterType>
+   <types>DocumentRef.ItemStockAdjustment</types>
+  </commandParameterType>
+  <parameterUseMode>Multiple</parameterUseMode>
+  <representation>Auto</representation>
+ </commands>
 </mdclass:Document>

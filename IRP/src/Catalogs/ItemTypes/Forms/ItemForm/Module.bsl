@@ -212,6 +212,7 @@ Procedure OnFinishEditItemTemplate(Result, NotfyParameters) Export
 	EndIf;
 EndProcedure
 
+&AtServer
 Procedure InternalCommandActionWithServerContext(Command) Export
 	InternalCommandActionWithServerContextAtServer(Command.Name);
 EndProcedure

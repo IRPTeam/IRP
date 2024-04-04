@@ -245,6 +245,1318 @@
 			<dataPath>LegalName</dataPath>
 			<field>LegalName</field>
 		</field>
+		<field xsi:type="DataSetFieldField">
+			<dataPath>OpeningBalance.InvoiceAmountOpeningBalance</dataPath>
+			<field>InvoiceAmountOpeningBalance</field>
+			<title xsi:type="v8:LocalStringType">
+				<v8:item>
+					<v8:lang>en</v8:lang>
+					<v8:content>Invoice amount</v8:content>
+				</v8:item>
+				<v8:item>
+					<v8:lang>ru</v8:lang>
+					<v8:content>Инвойсная стоимость сумма</v8:content>
+				</v8:item>
+				<v8:item>
+					<v8:lang>tr</v8:lang>
+					<v8:content>Fatura tutarı</v8:content>
+				</v8:item>
+			</title>
+			<role>
+				<dcscom:balance>true</dcscom:balance>
+				<dcscom:balanceGroupName>InvoiceAmount</dcscom:balanceGroupName>
+				<dcscom:balanceType>OpeningBalance</dcscom:balanceType>
+			</role>
+		</field>
+		<field xsi:type="DataSetFieldField">
+			<dataPath>Receipt.InvoiceAmountReceipt</dataPath>
+			<field>InvoiceAmountReceipt</field>
+			<title xsi:type="v8:LocalStringType">
+				<v8:item>
+					<v8:lang>en</v8:lang>
+					<v8:content>Invoice amount</v8:content>
+				</v8:item>
+				<v8:item>
+					<v8:lang>ru</v8:lang>
+					<v8:content>Инвойсная стоимость сумма</v8:content>
+				</v8:item>
+				<v8:item>
+					<v8:lang>tr</v8:lang>
+					<v8:content>Fatura tutarı</v8:content>
+				</v8:item>
+			</title>
+		</field>
+		<field xsi:type="DataSetFieldField">
+			<dataPath>Expense.InvoiceAmountExpense</dataPath>
+			<field>InvoiceAmountExpense</field>
+			<title xsi:type="v8:LocalStringType">
+				<v8:item>
+					<v8:lang>en</v8:lang>
+					<v8:content>Invoice amount</v8:content>
+				</v8:item>
+				<v8:item>
+					<v8:lang>ru</v8:lang>
+					<v8:content>Инвойсная стоимость сумма</v8:content>
+				</v8:item>
+				<v8:item>
+					<v8:lang>tr</v8:lang>
+					<v8:content>Fatura tutarı</v8:content>
+				</v8:item>
+			</title>
+		</field>
+		<field xsi:type="DataSetFieldField">
+			<dataPath>ClosingBalance.InvoiceAmountClosingBalance</dataPath>
+			<field>InvoiceAmountClosingBalance</field>
+			<title xsi:type="v8:LocalStringType">
+				<v8:item>
+					<v8:lang>en</v8:lang>
+					<v8:content>Invoice amount</v8:content>
+				</v8:item>
+				<v8:item>
+					<v8:lang>ru</v8:lang>
+					<v8:content>Инвойсная стоимость сумма</v8:content>
+				</v8:item>
+				<v8:item>
+					<v8:lang>tr</v8:lang>
+					<v8:content>Fatura tutarı</v8:content>
+				</v8:item>
+			</title>
+			<role>
+				<dcscom:balance>true</dcscom:balance>
+				<dcscom:balanceGroupName>InvoiceAmount</dcscom:balanceGroupName>
+				<dcscom:balanceType>ClosingBalance</dcscom:balanceType>
+			</role>
+		</field>
+		<field xsi:type="DataSetFieldField">
+			<dataPath>OpeningBalance.InvoiceTaxAmountOpeningBalance</dataPath>
+			<field>InvoiceTaxAmountOpeningBalance</field>
+			<title xsi:type="v8:LocalStringType">
+				<v8:item>
+					<v8:lang>en</v8:lang>
+					<v8:content>Invoice tax amount</v8:content>
+				</v8:item>
+				<v8:item>
+					<v8:lang>ru</v8:lang>
+					<v8:content>Сумма налогов инвойсной стоимости</v8:content>
+				</v8:item>
+				<v8:item>
+					<v8:lang>tr</v8:lang>
+					<v8:content>Fatura vergi tutarı</v8:content>
+				</v8:item>
+			</title>
+			<role>
+				<dcscom:balance>true</dcscom:balance>
+				<dcscom:balanceGroupName>InvoiceTaxAmount</dcscom:balanceGroupName>
+				<dcscom:balanceType>OpeningBalance</dcscom:balanceType>
+			</role>
+		</field>
+		<field xsi:type="DataSetFieldField">
+			<dataPath>Receipt.InvoiceTaxAmountReceipt</dataPath>
+			<field>InvoiceTaxAmountReceipt</field>
+			<title xsi:type="v8:LocalStringType">
+				<v8:item>
+					<v8:lang>en</v8:lang>
+					<v8:content>Invoice tax amount</v8:content>
+				</v8:item>
+				<v8:item>
+					<v8:lang>ru</v8:lang>
+					<v8:content>Сумма налогов инвойсной стоимости</v8:content>
+				</v8:item>
+				<v8:item>
+					<v8:lang>tr</v8:lang>
+					<v8:content>Fatura vergi tutarı</v8:content>
+				</v8:item>
+			</title>
+		</field>
+		<field xsi:type="DataSetFieldField">
+			<dataPath>Expense.InvoiceTaxAmountExpense</dataPath>
+			<field>InvoiceTaxAmountExpense</field>
+			<title xsi:type="v8:LocalStringType">
+				<v8:item>
+					<v8:lang>en</v8:lang>
+					<v8:content>Invoice tax amount</v8:content>
+				</v8:item>
+				<v8:item>
+					<v8:lang>ru</v8:lang>
+					<v8:content>Сумма налогов инвойсной стоимости</v8:content>
+				</v8:item>
+				<v8:item>
+					<v8:lang>tr</v8:lang>
+					<v8:content>Fatura vergi tutarı</v8:content>
+				</v8:item>
+			</title>
+		</field>
+		<field xsi:type="DataSetFieldField">
+			<dataPath>ClosingBalance.InvoiceTaxAmountClosingBalance</dataPath>
+			<field>InvoiceTaxAmountClosingBalance</field>
+			<title xsi:type="v8:LocalStringType">
+				<v8:item>
+					<v8:lang>en</v8:lang>
+					<v8:content>Invoice tax amount</v8:content>
+				</v8:item>
+				<v8:item>
+					<v8:lang>ru</v8:lang>
+					<v8:content>Сумма налогов инвойсной стоимости</v8:content>
+				</v8:item>
+				<v8:item>
+					<v8:lang>tr</v8:lang>
+					<v8:content>Fatura vergi tutarı</v8:content>
+				</v8:item>
+			</title>
+			<role>
+				<dcscom:balance>true</dcscom:balance>
+				<dcscom:balanceGroupName>InvoiceTaxAmount</dcscom:balanceGroupName>
+				<dcscom:balanceType>ClosingBalance</dcscom:balanceType>
+			</role>
+		</field>
+		<field xsi:type="DataSetFieldField">
+			<dataPath>OpeningBalance.IndirectCostAmountOpeningBalance</dataPath>
+			<field>IndirectCostAmountOpeningBalance</field>
+			<title xsi:type="v8:LocalStringType">
+				<v8:item>
+					<v8:lang>en</v8:lang>
+					<v8:content>Indirect cost amount</v8:content>
+				</v8:item>
+				<v8:item>
+					<v8:lang>ru</v8:lang>
+					<v8:content>Сумма косвенных расходов</v8:content>
+				</v8:item>
+				<v8:item>
+					<v8:lang>tr</v8:lang>
+					<v8:content>Dolaylı maliyet tutarı</v8:content>
+				</v8:item>
+			</title>
+			<role>
+				<dcscom:balance>true</dcscom:balance>
+				<dcscom:balanceGroupName>IndirectCostAmount</dcscom:balanceGroupName>
+				<dcscom:balanceType>OpeningBalance</dcscom:balanceType>
+			</role>
+		</field>
+		<field xsi:type="DataSetFieldField">
+			<dataPath>Receipt.IndirectCostAmountReceipt</dataPath>
+			<field>IndirectCostAmountReceipt</field>
+			<title xsi:type="v8:LocalStringType">
+				<v8:item>
+					<v8:lang>en</v8:lang>
+					<v8:content>Indirect cost amount</v8:content>
+				</v8:item>
+				<v8:item>
+					<v8:lang>ru</v8:lang>
+					<v8:content>Сумма косвенных расходов</v8:content>
+				</v8:item>
+				<v8:item>
+					<v8:lang>tr</v8:lang>
+					<v8:content>Dolaylı maliyet tutarı</v8:content>
+				</v8:item>
+			</title>
+		</field>
+		<field xsi:type="DataSetFieldField">
+			<dataPath>Expense.IndirectCostAmountExpense</dataPath>
+			<field>IndirectCostAmountExpense</field>
+			<title xsi:type="v8:LocalStringType">
+				<v8:item>
+					<v8:lang>en</v8:lang>
+					<v8:content>Indirect cost amount</v8:content>
+				</v8:item>
+				<v8:item>
+					<v8:lang>ru</v8:lang>
+					<v8:content>Сумма косвенных расходов</v8:content>
+				</v8:item>
+				<v8:item>
+					<v8:lang>tr</v8:lang>
+					<v8:content>Dolaylı maliyet tutarı</v8:content>
+				</v8:item>
+			</title>
+		</field>
+		<field xsi:type="DataSetFieldField">
+			<dataPath>ClosingBalance.IndirectCostAmountClosingBalance</dataPath>
+			<field>IndirectCostAmountClosingBalance</field>
+			<title xsi:type="v8:LocalStringType">
+				<v8:item>
+					<v8:lang>en</v8:lang>
+					<v8:content>Indirect cost amount</v8:content>
+				</v8:item>
+				<v8:item>
+					<v8:lang>ru</v8:lang>
+					<v8:content>Сумма косвенных расходов</v8:content>
+				</v8:item>
+				<v8:item>
+					<v8:lang>tr</v8:lang>
+					<v8:content>Dolaylı maliyet tutarı</v8:content>
+				</v8:item>
+			</title>
+			<role>
+				<dcscom:balance>true</dcscom:balance>
+				<dcscom:balanceGroupName>IndirectCostAmount</dcscom:balanceGroupName>
+				<dcscom:balanceType>ClosingBalance</dcscom:balanceType>
+			</role>
+		</field>
+		<field xsi:type="DataSetFieldField">
+			<dataPath>OpeningBalance.IndirectCostTaxAmountOpeningBalance</dataPath>
+			<field>IndirectCostTaxAmountOpeningBalance</field>
+			<title xsi:type="v8:LocalStringType">
+				<v8:item>
+					<v8:lang>en</v8:lang>
+					<v8:content>Indirect cost tax amount</v8:content>
+				</v8:item>
+				<v8:item>
+					<v8:lang>ru</v8:lang>
+					<v8:content>Сумма налогов косвенных расходов</v8:content>
+				</v8:item>
+				<v8:item>
+					<v8:lang>tr</v8:lang>
+					<v8:content>Dolaylı maliyet vergi tutarı</v8:content>
+				</v8:item>
+			</title>
+			<role>
+				<dcscom:balance>true</dcscom:balance>
+				<dcscom:balanceGroupName>IndirectCostTaxAmount</dcscom:balanceGroupName>
+				<dcscom:balanceType>OpeningBalance</dcscom:balanceType>
+			</role>
+		</field>
+		<field xsi:type="DataSetFieldField">
+			<dataPath>Receipt.IndirectCostTaxAmountReceipt</dataPath>
+			<field>IndirectCostTaxAmountReceipt</field>
+			<title xsi:type="v8:LocalStringType">
+				<v8:item>
+					<v8:lang>en</v8:lang>
+					<v8:content>Indirect cost tax amount</v8:content>
+				</v8:item>
+				<v8:item>
+					<v8:lang>ru</v8:lang>
+					<v8:content>Сумма налогов косвенных расходов</v8:content>
+				</v8:item>
+				<v8:item>
+					<v8:lang>tr</v8:lang>
+					<v8:content>Dolaylı maliyet vergi tutarı</v8:content>
+				</v8:item>
+			</title>
+		</field>
+		<field xsi:type="DataSetFieldField">
+			<dataPath>Expense.IndirectCostTaxAmountExpense</dataPath>
+			<field>IndirectCostTaxAmountExpense</field>
+			<title xsi:type="v8:LocalStringType">
+				<v8:item>
+					<v8:lang>en</v8:lang>
+					<v8:content>Indirect cost tax amount</v8:content>
+				</v8:item>
+				<v8:item>
+					<v8:lang>ru</v8:lang>
+					<v8:content>Сумма налогов косвенных расходов</v8:content>
+				</v8:item>
+				<v8:item>
+					<v8:lang>tr</v8:lang>
+					<v8:content>Dolaylı maliyet vergi tutarı</v8:content>
+				</v8:item>
+			</title>
+		</field>
+		<field xsi:type="DataSetFieldField">
+			<dataPath>ClosingBalance.IndirectCostTaxAmountClosingBalance</dataPath>
+			<field>IndirectCostTaxAmountClosingBalance</field>
+			<title xsi:type="v8:LocalStringType">
+				<v8:item>
+					<v8:lang>en</v8:lang>
+					<v8:content>Indirect cost tax amount</v8:content>
+				</v8:item>
+				<v8:item>
+					<v8:lang>ru</v8:lang>
+					<v8:content>Сумма налогов косвенных расходов</v8:content>
+				</v8:item>
+				<v8:item>
+					<v8:lang>tr</v8:lang>
+					<v8:content>Dolaylı maliyet vergi tutarı</v8:content>
+				</v8:item>
+			</title>
+			<role>
+				<dcscom:balance>true</dcscom:balance>
+				<dcscom:balanceGroupName>IndirectCostTaxAmount</dcscom:balanceGroupName>
+				<dcscom:balanceType>ClosingBalance</dcscom:balanceType>
+			</role>
+		</field>
+		<field xsi:type="DataSetFieldField">
+			<dataPath>OpeningBalance.ExtraCostAmountByRatioOpeningBalance</dataPath>
+			<field>ExtraCostAmountByRatioOpeningBalance</field>
+			<title xsi:type="v8:LocalStringType">
+				<v8:item>
+					<v8:lang>en</v8:lang>
+					<v8:content>Extra cost amount by ratio</v8:content>
+				</v8:item>
+				<v8:item>
+					<v8:lang>ru</v8:lang>
+					<v8:content>Доп. стоимость по коефф.</v8:content>
+				</v8:item>
+				<v8:item>
+					<v8:lang>tr</v8:lang>
+					<v8:content>Orana göre ek maliyet miktarı</v8:content>
+				</v8:item>
+			</title>
+			<role>
+				<dcscom:balance>true</dcscom:balance>
+				<dcscom:balanceGroupName>ExtraCostAmountByRatio</dcscom:balanceGroupName>
+				<dcscom:balanceType>OpeningBalance</dcscom:balanceType>
+			</role>
+		</field>
+		<field xsi:type="DataSetFieldField">
+			<dataPath>Receipt.ExtraCostAmountByRatioReceipt</dataPath>
+			<field>ExtraCostAmountByRatioReceipt</field>
+			<title xsi:type="v8:LocalStringType">
+				<v8:item>
+					<v8:lang>en</v8:lang>
+					<v8:content>Extra cost amount by ratio</v8:content>
+				</v8:item>
+				<v8:item>
+					<v8:lang>ru</v8:lang>
+					<v8:content>Доп. стоимость по коефф.</v8:content>
+				</v8:item>
+				<v8:item>
+					<v8:lang>tr</v8:lang>
+					<v8:content>Orana göre ek maliyet miktarı</v8:content>
+				</v8:item>
+			</title>
+		</field>
+		<field xsi:type="DataSetFieldField">
+			<dataPath>Expense.ExtraCostAmountByRatioExpense</dataPath>
+			<field>ExtraCostAmountByRatioExpense</field>
+			<title xsi:type="v8:LocalStringType">
+				<v8:item>
+					<v8:lang>en</v8:lang>
+					<v8:content>Extra cost amount by ratio</v8:content>
+				</v8:item>
+				<v8:item>
+					<v8:lang>ru</v8:lang>
+					<v8:content>Доп. стоимость по коефф.</v8:content>
+				</v8:item>
+				<v8:item>
+					<v8:lang>tr</v8:lang>
+					<v8:content>Orana göre ek maliyet miktarı</v8:content>
+				</v8:item>
+			</title>
+		</field>
+		<field xsi:type="DataSetFieldField">
+			<dataPath>ClosingBalance.ExtraCostAmountByRatioClosingBalance</dataPath>
+			<field>ExtraCostAmountByRatioClosingBalance</field>
+			<title xsi:type="v8:LocalStringType">
+				<v8:item>
+					<v8:lang>en</v8:lang>
+					<v8:content>Extra cost amount by ratio</v8:content>
+				</v8:item>
+				<v8:item>
+					<v8:lang>ru</v8:lang>
+					<v8:content>Доп. стоимость по коефф.</v8:content>
+				</v8:item>
+				<v8:item>
+					<v8:lang>tr</v8:lang>
+					<v8:content>Orana göre ek maliyet miktarı</v8:content>
+				</v8:item>
+			</title>
+			<role>
+				<dcscom:balance>true</dcscom:balance>
+				<dcscom:balanceGroupName>ExtraCostAmountByRatio</dcscom:balanceGroupName>
+				<dcscom:balanceType>ClosingBalance</dcscom:balanceType>
+			</role>
+		</field>
+		<field xsi:type="DataSetFieldField">
+			<dataPath>OpeningBalance.ExtraCostTaxAmountByRatioOpeningBalance</dataPath>
+			<field>ExtraCostTaxAmountByRatioOpeningBalance</field>
+			<title xsi:type="v8:LocalStringType">
+				<v8:item>
+					<v8:lang>en</v8:lang>
+					<v8:content>Extra cost tax amount by ratio</v8:content>
+				</v8:item>
+				<v8:item>
+					<v8:lang>ru</v8:lang>
+					<v8:content>Сумма налогов доп. стоимости по коефф.</v8:content>
+				</v8:item>
+				<v8:item>
+					<v8:lang>tr</v8:lang>
+					<v8:content>Oranla ek maliyet vergi tutarı</v8:content>
+				</v8:item>
+			</title>
+			<role>
+				<dcscom:balance>true</dcscom:balance>
+				<dcscom:balanceGroupName>ExtraCostTaxAmountByRatio</dcscom:balanceGroupName>
+				<dcscom:balanceType>OpeningBalance</dcscom:balanceType>
+			</role>
+		</field>
+		<field xsi:type="DataSetFieldField">
+			<dataPath>Receipt.ExtraCostTaxAmountByRatioReceipt</dataPath>
+			<field>ExtraCostTaxAmountByRatioReceipt</field>
+			<title xsi:type="v8:LocalStringType">
+				<v8:item>
+					<v8:lang>en</v8:lang>
+					<v8:content>Extra cost tax amount by ratio</v8:content>
+				</v8:item>
+				<v8:item>
+					<v8:lang>ru</v8:lang>
+					<v8:content>Сумма налогов доп. стоимости по коефф.</v8:content>
+				</v8:item>
+				<v8:item>
+					<v8:lang>tr</v8:lang>
+					<v8:content>Oranla ek maliyet vergi tutarı</v8:content>
+				</v8:item>
+			</title>
+		</field>
+		<field xsi:type="DataSetFieldField">
+			<dataPath>Expense.ExtraCostTaxAmountByRatioExpense</dataPath>
+			<field>ExtraCostTaxAmountByRatioExpense</field>
+			<title xsi:type="v8:LocalStringType">
+				<v8:item>
+					<v8:lang>en</v8:lang>
+					<v8:content>Extra cost tax amount by ratio</v8:content>
+				</v8:item>
+				<v8:item>
+					<v8:lang>ru</v8:lang>
+					<v8:content>Сумма налогов доп. стоимости по коефф.</v8:content>
+				</v8:item>
+				<v8:item>
+					<v8:lang>tr</v8:lang>
+					<v8:content>Oranla ek maliyet vergi tutarı</v8:content>
+				</v8:item>
+			</title>
+		</field>
+		<field xsi:type="DataSetFieldField">
+			<dataPath>ClosingBalance.ExtraCostTaxAmountByRatioClosingBalance</dataPath>
+			<field>ExtraCostTaxAmountByRatioClosingBalance</field>
+			<title xsi:type="v8:LocalStringType">
+				<v8:item>
+					<v8:lang>en</v8:lang>
+					<v8:content>Extra cost tax amount by ratio</v8:content>
+				</v8:item>
+				<v8:item>
+					<v8:lang>ru</v8:lang>
+					<v8:content>Сумма налогов доп. стоимости по коефф.</v8:content>
+				</v8:item>
+				<v8:item>
+					<v8:lang>tr</v8:lang>
+					<v8:content>Oranla ek maliyet vergi tutarı</v8:content>
+				</v8:item>
+			</title>
+			<role>
+				<dcscom:balance>true</dcscom:balance>
+				<dcscom:balanceGroupName>ExtraCostTaxAmountByRatio</dcscom:balanceGroupName>
+				<dcscom:balanceType>ClosingBalance</dcscom:balanceType>
+			</role>
+		</field>
+		<field xsi:type="DataSetFieldField">
+			<dataPath>OpeningBalance.ExtraDirectCostAmountOpeningBalance</dataPath>
+			<field>ExtraDirectCostAmountOpeningBalance</field>
+			<title xsi:type="v8:LocalStringType">
+				<v8:item>
+					<v8:lang>en</v8:lang>
+					<v8:content>Extra direct cost amount</v8:content>
+				</v8:item>
+				<v8:item>
+					<v8:lang>ru</v8:lang>
+					<v8:content>Сумма косвенной стоимости</v8:content>
+				</v8:item>
+				<v8:item>
+					<v8:lang>tr</v8:lang>
+					<v8:content>Ekstra doğrudan maliyet tutarı</v8:content>
+				</v8:item>
+			</title>
+			<role>
+				<dcscom:balance>true</dcscom:balance>
+				<dcscom:balanceGroupName>ExtraDirectCostAmount</dcscom:balanceGroupName>
+				<dcscom:balanceType>OpeningBalance</dcscom:balanceType>
+			</role>
+		</field>
+		<field xsi:type="DataSetFieldField">
+			<dataPath>Receipt.ExtraDirectCostAmountReceipt</dataPath>
+			<field>ExtraDirectCostAmountReceipt</field>
+			<title xsi:type="v8:LocalStringType">
+				<v8:item>
+					<v8:lang>en</v8:lang>
+					<v8:content>Extra direct cost amount</v8:content>
+				</v8:item>
+				<v8:item>
+					<v8:lang>ru</v8:lang>
+					<v8:content>Сумма косвенной стоимости</v8:content>
+				</v8:item>
+				<v8:item>
+					<v8:lang>tr</v8:lang>
+					<v8:content>Ekstra doğrudan maliyet tutarı</v8:content>
+				</v8:item>
+			</title>
+		</field>
+		<field xsi:type="DataSetFieldField">
+			<dataPath>Expense.ExtraDirectCostAmountExpense</dataPath>
+			<field>ExtraDirectCostAmountExpense</field>
+			<title xsi:type="v8:LocalStringType">
+				<v8:item>
+					<v8:lang>en</v8:lang>
+					<v8:content>Extra direct cost amount</v8:content>
+				</v8:item>
+				<v8:item>
+					<v8:lang>ru</v8:lang>
+					<v8:content>Сумма косвенной стоимости</v8:content>
+				</v8:item>
+				<v8:item>
+					<v8:lang>tr</v8:lang>
+					<v8:content>Ekstra doğrudan maliyet tutarı</v8:content>
+				</v8:item>
+			</title>
+		</field>
+		<field xsi:type="DataSetFieldField">
+			<dataPath>ClosingBalance.ExtraDirectCostAmountClosingBalance</dataPath>
+			<field>ExtraDirectCostAmountClosingBalance</field>
+			<title xsi:type="v8:LocalStringType">
+				<v8:item>
+					<v8:lang>en</v8:lang>
+					<v8:content>Extra direct cost amount</v8:content>
+				</v8:item>
+				<v8:item>
+					<v8:lang>ru</v8:lang>
+					<v8:content>Сумма косвенной стоимости</v8:content>
+				</v8:item>
+				<v8:item>
+					<v8:lang>tr</v8:lang>
+					<v8:content>Ekstra doğrudan maliyet tutarı</v8:content>
+				</v8:item>
+			</title>
+			<role>
+				<dcscom:balance>true</dcscom:balance>
+				<dcscom:balanceGroupName>ExtraDirectCostAmount</dcscom:balanceGroupName>
+				<dcscom:balanceType>ClosingBalance</dcscom:balanceType>
+			</role>
+		</field>
+		<field xsi:type="DataSetFieldField">
+			<dataPath>OpeningBalance.ExtraDirectCostTaxAmountOpeningBalance</dataPath>
+			<field>ExtraDirectCostTaxAmountOpeningBalance</field>
+			<title xsi:type="v8:LocalStringType">
+				<v8:item>
+					<v8:lang>en</v8:lang>
+					<v8:content>Extra direct cost tax amount</v8:content>
+				</v8:item>
+				<v8:item>
+					<v8:lang>ru</v8:lang>
+					<v8:content>Сумма налоговой прямой стоимости</v8:content>
+				</v8:item>
+				<v8:item>
+					<v8:lang>tr</v8:lang>
+					<v8:content>Ek doğrudan maliyet vergi miktarı</v8:content>
+				</v8:item>
+			</title>
+			<role>
+				<dcscom:balance>true</dcscom:balance>
+				<dcscom:balanceGroupName>ExtraDirectCostTaxAmount</dcscom:balanceGroupName>
+				<dcscom:balanceType>OpeningBalance</dcscom:balanceType>
+			</role>
+		</field>
+		<field xsi:type="DataSetFieldField">
+			<dataPath>Receipt.ExtraDirectCostTaxAmountReceipt</dataPath>
+			<field>ExtraDirectCostTaxAmountReceipt</field>
+			<title xsi:type="v8:LocalStringType">
+				<v8:item>
+					<v8:lang>en</v8:lang>
+					<v8:content>Extra direct cost tax amount</v8:content>
+				</v8:item>
+				<v8:item>
+					<v8:lang>ru</v8:lang>
+					<v8:content>Сумма налоговой прямой стоимости</v8:content>
+				</v8:item>
+				<v8:item>
+					<v8:lang>tr</v8:lang>
+					<v8:content>Ek doğrudan maliyet vergi miktarı</v8:content>
+				</v8:item>
+			</title>
+		</field>
+		<field xsi:type="DataSetFieldField">
+			<dataPath>Expense.ExtraDirectCostTaxAmountExpense</dataPath>
+			<field>ExtraDirectCostTaxAmountExpense</field>
+			<title xsi:type="v8:LocalStringType">
+				<v8:item>
+					<v8:lang>en</v8:lang>
+					<v8:content>Extra direct cost tax amount</v8:content>
+				</v8:item>
+				<v8:item>
+					<v8:lang>ru</v8:lang>
+					<v8:content>Сумма налоговой прямой стоимости</v8:content>
+				</v8:item>
+				<v8:item>
+					<v8:lang>tr</v8:lang>
+					<v8:content>Ek doğrudan maliyet vergi miktarı</v8:content>
+				</v8:item>
+			</title>
+		</field>
+		<field xsi:type="DataSetFieldField">
+			<dataPath>ClosingBalance.ExtraDirectCostTaxAmountClosingBalance</dataPath>
+			<field>ExtraDirectCostTaxAmountClosingBalance</field>
+			<title xsi:type="v8:LocalStringType">
+				<v8:item>
+					<v8:lang>en</v8:lang>
+					<v8:content>Extra direct cost tax amount</v8:content>
+				</v8:item>
+				<v8:item>
+					<v8:lang>ru</v8:lang>
+					<v8:content>Сумма налоговой прямой стоимости</v8:content>
+				</v8:item>
+				<v8:item>
+					<v8:lang>tr</v8:lang>
+					<v8:content>Ek doğrudan maliyet vergi miktarı</v8:content>
+				</v8:item>
+			</title>
+			<role>
+				<dcscom:balance>true</dcscom:balance>
+				<dcscom:balanceGroupName>ExtraDirectCostTaxAmount</dcscom:balanceGroupName>
+				<dcscom:balanceType>ClosingBalance</dcscom:balanceType>
+			</role>
+		</field>
+		<field xsi:type="DataSetFieldField">
+			<dataPath>OpeningBalance.AllocatedCostAmountOpeningBalance</dataPath>
+			<field>AllocatedCostAmountOpeningBalance</field>
+			<title xsi:type="v8:LocalStringType">
+				<v8:item>
+					<v8:lang>en</v8:lang>
+					<v8:content>Allocated cost amount</v8:content>
+				</v8:item>
+				<v8:item>
+					<v8:lang>ru</v8:lang>
+					<v8:content>Сумма доп. расходов</v8:content>
+				</v8:item>
+				<v8:item>
+					<v8:lang>tr</v8:lang>
+					<v8:content>Tahsis edilen maliyet miktarı</v8:content>
+				</v8:item>
+			</title>
+			<role>
+				<dcscom:balance>true</dcscom:balance>
+				<dcscom:balanceGroupName>AllocatedCostAmount</dcscom:balanceGroupName>
+				<dcscom:balanceType>OpeningBalance</dcscom:balanceType>
+			</role>
+		</field>
+		<field xsi:type="DataSetFieldField">
+			<dataPath>Receipt.AllocatedCostAmountReceipt</dataPath>
+			<field>AllocatedCostAmountReceipt</field>
+			<title xsi:type="v8:LocalStringType">
+				<v8:item>
+					<v8:lang>en</v8:lang>
+					<v8:content>Allocated cost amount</v8:content>
+				</v8:item>
+				<v8:item>
+					<v8:lang>ru</v8:lang>
+					<v8:content>Сумма доп. расходов</v8:content>
+				</v8:item>
+				<v8:item>
+					<v8:lang>tr</v8:lang>
+					<v8:content>Tahsis edilen maliyet miktarı</v8:content>
+				</v8:item>
+			</title>
+		</field>
+		<field xsi:type="DataSetFieldField">
+			<dataPath>Expense.AllocatedCostAmountExpense</dataPath>
+			<field>AllocatedCostAmountExpense</field>
+			<title xsi:type="v8:LocalStringType">
+				<v8:item>
+					<v8:lang>en</v8:lang>
+					<v8:content>Allocated cost amount</v8:content>
+				</v8:item>
+				<v8:item>
+					<v8:lang>ru</v8:lang>
+					<v8:content>Сумма доп. расходов</v8:content>
+				</v8:item>
+				<v8:item>
+					<v8:lang>tr</v8:lang>
+					<v8:content>Tahsis edilen maliyet miktarı</v8:content>
+				</v8:item>
+			</title>
+		</field>
+		<field xsi:type="DataSetFieldField">
+			<dataPath>ClosingBalance.AllocatedCostAmountClosingBalance</dataPath>
+			<field>AllocatedCostAmountClosingBalance</field>
+			<title xsi:type="v8:LocalStringType">
+				<v8:item>
+					<v8:lang>en</v8:lang>
+					<v8:content>Allocated cost amount</v8:content>
+				</v8:item>
+				<v8:item>
+					<v8:lang>ru</v8:lang>
+					<v8:content>Сумма доп. расходов</v8:content>
+				</v8:item>
+				<v8:item>
+					<v8:lang>tr</v8:lang>
+					<v8:content>Tahsis edilen maliyet miktarı</v8:content>
+				</v8:item>
+			</title>
+			<role>
+				<dcscom:balance>true</dcscom:balance>
+				<dcscom:balanceGroupName>AllocatedCostAmount</dcscom:balanceGroupName>
+				<dcscom:balanceType>ClosingBalance</dcscom:balanceType>
+			</role>
+		</field>
+		<field xsi:type="DataSetFieldField">
+			<dataPath>OpeningBalance.AllocatedCostTaxAmountOpeningBalance</dataPath>
+			<field>AllocatedCostTaxAmountOpeningBalance</field>
+			<title xsi:type="v8:LocalStringType">
+				<v8:item>
+					<v8:lang>en</v8:lang>
+					<v8:content>Allocated cost tax amount</v8:content>
+				</v8:item>
+				<v8:item>
+					<v8:lang>ru</v8:lang>
+					<v8:content>Сумма налогов доп. расходов</v8:content>
+				</v8:item>
+				<v8:item>
+					<v8:lang>tr</v8:lang>
+					<v8:content>Ayrılan maliyet vergi miktarı</v8:content>
+				</v8:item>
+			</title>
+			<role>
+				<dcscom:balance>true</dcscom:balance>
+				<dcscom:balanceGroupName>AllocatedCostTaxAmount</dcscom:balanceGroupName>
+				<dcscom:balanceType>OpeningBalance</dcscom:balanceType>
+			</role>
+		</field>
+		<field xsi:type="DataSetFieldField">
+			<dataPath>Receipt.AllocatedCostTaxAmountReceipt</dataPath>
+			<field>AllocatedCostTaxAmountReceipt</field>
+			<title xsi:type="v8:LocalStringType">
+				<v8:item>
+					<v8:lang>en</v8:lang>
+					<v8:content>Allocated cost tax amount</v8:content>
+				</v8:item>
+				<v8:item>
+					<v8:lang>ru</v8:lang>
+					<v8:content>Сумма налогов доп. расходов</v8:content>
+				</v8:item>
+				<v8:item>
+					<v8:lang>tr</v8:lang>
+					<v8:content>Ayrılan maliyet vergi miktarı</v8:content>
+				</v8:item>
+			</title>
+		</field>
+		<field xsi:type="DataSetFieldField">
+			<dataPath>Expense.AllocatedCostTaxAmountExpense</dataPath>
+			<field>AllocatedCostTaxAmountExpense</field>
+			<title xsi:type="v8:LocalStringType">
+				<v8:item>
+					<v8:lang>en</v8:lang>
+					<v8:content>Allocated cost tax amount</v8:content>
+				</v8:item>
+				<v8:item>
+					<v8:lang>ru</v8:lang>
+					<v8:content>Сумма налогов доп. расходов</v8:content>
+				</v8:item>
+				<v8:item>
+					<v8:lang>tr</v8:lang>
+					<v8:content>Ayrılan maliyet vergi miktarı</v8:content>
+				</v8:item>
+			</title>
+		</field>
+		<field xsi:type="DataSetFieldField">
+			<dataPath>ClosingBalance.AllocatedCostTaxAmountClosingBalance</dataPath>
+			<field>AllocatedCostTaxAmountClosingBalance</field>
+			<title xsi:type="v8:LocalStringType">
+				<v8:item>
+					<v8:lang>en</v8:lang>
+					<v8:content>Allocated cost tax amount</v8:content>
+				</v8:item>
+				<v8:item>
+					<v8:lang>ru</v8:lang>
+					<v8:content>Сумма налогов доп. расходов</v8:content>
+				</v8:item>
+				<v8:item>
+					<v8:lang>tr</v8:lang>
+					<v8:content>Ayrılan maliyet vergi miktarı</v8:content>
+				</v8:item>
+			</title>
+			<role>
+				<dcscom:balance>true</dcscom:balance>
+				<dcscom:balanceGroupName>AllocatedCostTaxAmount</dcscom:balanceGroupName>
+				<dcscom:balanceType>ClosingBalance</dcscom:balanceType>
+			</role>
+		</field>
+		<field xsi:type="DataSetFieldField">
+			<dataPath>OpeningBalance.AllocatedRevenueAmountOpeningBalance</dataPath>
+			<field>AllocatedRevenueAmountOpeningBalance</field>
+			<title xsi:type="v8:LocalStringType">
+				<v8:item>
+					<v8:lang>en</v8:lang>
+					<v8:content>Allocated revenue amount</v8:content>
+				</v8:item>
+				<v8:item>
+					<v8:lang>ru</v8:lang>
+					<v8:content>Сумма доп. доходов</v8:content>
+				</v8:item>
+				<v8:item>
+					<v8:lang>tr</v8:lang>
+					<v8:content>Dağıtılan gelir miktarı</v8:content>
+				</v8:item>
+			</title>
+			<role>
+				<dcscom:balance>true</dcscom:balance>
+				<dcscom:balanceGroupName>AllocatedRevenueAmount</dcscom:balanceGroupName>
+				<dcscom:balanceType>OpeningBalance</dcscom:balanceType>
+			</role>
+		</field>
+		<field xsi:type="DataSetFieldField">
+			<dataPath>Receipt.AllocatedRevenueAmountReceipt</dataPath>
+			<field>AllocatedRevenueAmountReceipt</field>
+			<title xsi:type="v8:LocalStringType">
+				<v8:item>
+					<v8:lang>en</v8:lang>
+					<v8:content>Allocated revenue amount</v8:content>
+				</v8:item>
+				<v8:item>
+					<v8:lang>ru</v8:lang>
+					<v8:content>Сумма доп. доходов</v8:content>
+				</v8:item>
+				<v8:item>
+					<v8:lang>tr</v8:lang>
+					<v8:content>Dağıtılan gelir miktarı</v8:content>
+				</v8:item>
+			</title>
+		</field>
+		<field xsi:type="DataSetFieldField">
+			<dataPath>Expense.AllocatedRevenueAmountExpense</dataPath>
+			<field>AllocatedRevenueAmountExpense</field>
+			<title xsi:type="v8:LocalStringType">
+				<v8:item>
+					<v8:lang>en</v8:lang>
+					<v8:content>Allocated revenue amount</v8:content>
+				</v8:item>
+				<v8:item>
+					<v8:lang>ru</v8:lang>
+					<v8:content>Сумма доп. доходов</v8:content>
+				</v8:item>
+				<v8:item>
+					<v8:lang>tr</v8:lang>
+					<v8:content>Dağıtılan gelir miktarı</v8:content>
+				</v8:item>
+			</title>
+		</field>
+		<field xsi:type="DataSetFieldField">
+			<dataPath>ClosingBalance.AllocatedRevenueAmountClosingBalance</dataPath>
+			<field>AllocatedRevenueAmountClosingBalance</field>
+			<title xsi:type="v8:LocalStringType">
+				<v8:item>
+					<v8:lang>en</v8:lang>
+					<v8:content>Allocated revenue amount</v8:content>
+				</v8:item>
+				<v8:item>
+					<v8:lang>ru</v8:lang>
+					<v8:content>Сумма доп. доходов</v8:content>
+				</v8:item>
+				<v8:item>
+					<v8:lang>tr</v8:lang>
+					<v8:content>Dağıtılan gelir miktarı</v8:content>
+				</v8:item>
+			</title>
+			<role>
+				<dcscom:balance>true</dcscom:balance>
+				<dcscom:balanceGroupName>AllocatedRevenueAmount</dcscom:balanceGroupName>
+				<dcscom:balanceType>ClosingBalance</dcscom:balanceType>
+			</role>
+		</field>
+		<field xsi:type="DataSetFieldField">
+			<dataPath>OpeningBalance.AllocatedRevenueTaxAmountOpeningBalance</dataPath>
+			<field>AllocatedRevenueTaxAmountOpeningBalance</field>
+			<title xsi:type="v8:LocalStringType">
+				<v8:item>
+					<v8:lang>en</v8:lang>
+					<v8:content>Allocated revenue tax amount</v8:content>
+				</v8:item>
+				<v8:item>
+					<v8:lang>ru</v8:lang>
+					<v8:content>Сумма налогов доп. доходов</v8:content>
+				</v8:item>
+				<v8:item>
+					<v8:lang>tr</v8:lang>
+					<v8:content>Ayrılan gelir vergisi tutarı</v8:content>
+				</v8:item>
+			</title>
+			<role>
+				<dcscom:balance>true</dcscom:balance>
+				<dcscom:balanceGroupName>AllocatedRevenueTaxAmount</dcscom:balanceGroupName>
+				<dcscom:balanceType>OpeningBalance</dcscom:balanceType>
+			</role>
+		</field>
+		<field xsi:type="DataSetFieldField">
+			<dataPath>Receipt.AllocatedRevenueTaxAmountReceipt</dataPath>
+			<field>AllocatedRevenueTaxAmountReceipt</field>
+			<title xsi:type="v8:LocalStringType">
+				<v8:item>
+					<v8:lang>en</v8:lang>
+					<v8:content>Allocated revenue tax amount</v8:content>
+				</v8:item>
+				<v8:item>
+					<v8:lang>ru</v8:lang>
+					<v8:content>Сумма налогов доп. доходов</v8:content>
+				</v8:item>
+				<v8:item>
+					<v8:lang>tr</v8:lang>
+					<v8:content>Ayrılan gelir vergisi tutarı</v8:content>
+				</v8:item>
+			</title>
+		</field>
+		<field xsi:type="DataSetFieldField">
+			<dataPath>Expense.AllocatedRevenueTaxAmountExpense</dataPath>
+			<field>AllocatedRevenueTaxAmountExpense</field>
+			<title xsi:type="v8:LocalStringType">
+				<v8:item>
+					<v8:lang>en</v8:lang>
+					<v8:content>Allocated revenue tax amount</v8:content>
+				</v8:item>
+				<v8:item>
+					<v8:lang>ru</v8:lang>
+					<v8:content>Сумма налогов доп. доходов</v8:content>
+				</v8:item>
+				<v8:item>
+					<v8:lang>tr</v8:lang>
+					<v8:content>Ayrılan gelir vergisi tutarı</v8:content>
+				</v8:item>
+			</title>
+		</field>
+		<field xsi:type="DataSetFieldField">
+			<dataPath>ClosingBalance.AllocatedRevenueTaxAmountClosingBalance</dataPath>
+			<field>AllocatedRevenueTaxAmountClosingBalance</field>
+			<title xsi:type="v8:LocalStringType">
+				<v8:item>
+					<v8:lang>en</v8:lang>
+					<v8:content>Allocated revenue tax amount</v8:content>
+				</v8:item>
+				<v8:item>
+					<v8:lang>ru</v8:lang>
+					<v8:content>Сумма налогов доп. доходов</v8:content>
+				</v8:item>
+				<v8:item>
+					<v8:lang>tr</v8:lang>
+					<v8:content>Ayrılan gelir vergisi tutarı</v8:content>
+				</v8:item>
+			</title>
+			<role>
+				<dcscom:balance>true</dcscom:balance>
+				<dcscom:balanceGroupName>AllocatedRevenueTaxAmount</dcscom:balanceGroupName>
+				<dcscom:balanceType>ClosingBalance</dcscom:balanceType>
+			</role>
+		</field>
+		<field xsi:type="DataSetFieldField">
+			<dataPath>OpeningBalance.TotalAmountOpeningBalance</dataPath>
+			<field>TotalAmountOpeningBalance</field>
+			<title xsi:type="v8:LocalStringType">
+				<v8:item>
+					<v8:lang>en</v8:lang>
+					<v8:content>Total amount</v8:content>
+				</v8:item>
+				<v8:item>
+					<v8:lang>ru</v8:lang>
+					<v8:content>Итого</v8:content>
+				</v8:item>
+				<v8:item>
+					<v8:lang>tr</v8:lang>
+					<v8:content>Toplam tutar</v8:content>
+				</v8:item>
+			</title>
+			<role>
+				<dcscom:balance>true</dcscom:balance>
+				<dcscom:balanceGroupName>TotalAmount</dcscom:balanceGroupName>
+				<dcscom:balanceType>OpeningBalance</dcscom:balanceType>
+			</role>
+		</field>
+		<field xsi:type="DataSetFieldField">
+			<dataPath>Receipt.TotalAmountReceipt</dataPath>
+			<field>TotalAmountReceipt</field>
+			<title xsi:type="v8:LocalStringType">
+				<v8:item>
+					<v8:lang>en</v8:lang>
+					<v8:content>Total amount</v8:content>
+				</v8:item>
+				<v8:item>
+					<v8:lang>ru</v8:lang>
+					<v8:content>Итого</v8:content>
+				</v8:item>
+				<v8:item>
+					<v8:lang>tr</v8:lang>
+					<v8:content>Toplam tutar</v8:content>
+				</v8:item>
+			</title>
+		</field>
+		<field xsi:type="DataSetFieldField">
+			<dataPath>Expense.TotalAmountExpense</dataPath>
+			<field>TotalAmountExpense</field>
+			<title xsi:type="v8:LocalStringType">
+				<v8:item>
+					<v8:lang>en</v8:lang>
+					<v8:content>Total amount</v8:content>
+				</v8:item>
+				<v8:item>
+					<v8:lang>ru</v8:lang>
+					<v8:content>Итого</v8:content>
+				</v8:item>
+				<v8:item>
+					<v8:lang>tr</v8:lang>
+					<v8:content>Toplam tutar</v8:content>
+				</v8:item>
+			</title>
+		</field>
+		<field xsi:type="DataSetFieldField">
+			<dataPath>ClosingBalance.TotalAmountClosingBalance</dataPath>
+			<field>TotalAmountClosingBalance</field>
+			<title xsi:type="v8:LocalStringType">
+				<v8:item>
+					<v8:lang>en</v8:lang>
+					<v8:content>Total amount</v8:content>
+				</v8:item>
+				<v8:item>
+					<v8:lang>ru</v8:lang>
+					<v8:content>Итого</v8:content>
+				</v8:item>
+				<v8:item>
+					<v8:lang>tr</v8:lang>
+					<v8:content>Toplam tutar</v8:content>
+				</v8:item>
+			</title>
+			<role>
+				<dcscom:balance>true</dcscom:balance>
+				<dcscom:balanceGroupName>TotalAmount</dcscom:balanceGroupName>
+				<dcscom:balanceType>ClosingBalance</dcscom:balanceType>
+			</role>
+		</field>
+		<field xsi:type="DataSetFieldField">
+			<dataPath>OpeningBalance.TotalNetAmountOpeningBalance</dataPath>
+			<field>TotalNetAmountOpeningBalance</field>
+			<title xsi:type="v8:LocalStringType">
+				<v8:item>
+					<v8:lang>en</v8:lang>
+					<v8:content>Total net amount</v8:content>
+				</v8:item>
+				<v8:item>
+					<v8:lang>ru</v8:lang>
+					<v8:content>Сумма без налогов</v8:content>
+				</v8:item>
+				<v8:item>
+					<v8:lang>tr</v8:lang>
+					<v8:content>Toplam net tutar</v8:content>
+				</v8:item>
+			</title>
+			<role>
+				<dcscom:balance>true</dcscom:balance>
+				<dcscom:balanceGroupName>TotalNetAmount</dcscom:balanceGroupName>
+				<dcscom:balanceType>OpeningBalance</dcscom:balanceType>
+			</role>
+		</field>
+		<field xsi:type="DataSetFieldField">
+			<dataPath>Receipt.TotalNetAmountReceipt</dataPath>
+			<field>TotalNetAmountReceipt</field>
+			<title xsi:type="v8:LocalStringType">
+				<v8:item>
+					<v8:lang>en</v8:lang>
+					<v8:content>Total net amount</v8:content>
+				</v8:item>
+				<v8:item>
+					<v8:lang>ru</v8:lang>
+					<v8:content>Сумма без налогов</v8:content>
+				</v8:item>
+				<v8:item>
+					<v8:lang>tr</v8:lang>
+					<v8:content>Toplam net tutar</v8:content>
+				</v8:item>
+			</title>
+		</field>
+		<field xsi:type="DataSetFieldField">
+			<dataPath>Expense.TotalNetAmountExpense</dataPath>
+			<field>TotalNetAmountExpense</field>
+			<title xsi:type="v8:LocalStringType">
+				<v8:item>
+					<v8:lang>en</v8:lang>
+					<v8:content>Total net amount</v8:content>
+				</v8:item>
+				<v8:item>
+					<v8:lang>ru</v8:lang>
+					<v8:content>Сумма без налогов</v8:content>
+				</v8:item>
+				<v8:item>
+					<v8:lang>tr</v8:lang>
+					<v8:content>Toplam net tutar</v8:content>
+				</v8:item>
+			</title>
+		</field>
+		<field xsi:type="DataSetFieldField">
+			<dataPath>ClosingBalance.TotalNetAmountClosingBalance</dataPath>
+			<field>TotalNetAmountClosingBalance</field>
+			<title xsi:type="v8:LocalStringType">
+				<v8:item>
+					<v8:lang>en</v8:lang>
+					<v8:content>Total net amount</v8:content>
+				</v8:item>
+				<v8:item>
+					<v8:lang>ru</v8:lang>
+					<v8:content>Сумма без налогов</v8:content>
+				</v8:item>
+				<v8:item>
+					<v8:lang>tr</v8:lang>
+					<v8:content>Toplam net tutar</v8:content>
+				</v8:item>
+			</title>
+			<role>
+				<dcscom:balance>true</dcscom:balance>
+				<dcscom:balanceGroupName>TotalNetAmount</dcscom:balanceGroupName>
+				<dcscom:balanceType>ClosingBalance</dcscom:balanceType>
+			</role>
+		</field>
+		<field xsi:type="DataSetFieldField">
+			<dataPath>OpeningBalance.TotalTaxAmountOpeningBalance</dataPath>
+			<field>TotalTaxAmountOpeningBalance</field>
+			<title xsi:type="v8:LocalStringType">
+				<v8:item>
+					<v8:lang>en</v8:lang>
+					<v8:content>Total tax amount</v8:content>
+				</v8:item>
+				<v8:item>
+					<v8:lang>ru</v8:lang>
+					<v8:content>Налоги</v8:content>
+				</v8:item>
+				<v8:item>
+					<v8:lang>tr</v8:lang>
+					<v8:content>Toplam vergi tutarı</v8:content>
+				</v8:item>
+			</title>
+			<role>
+				<dcscom:balance>true</dcscom:balance>
+				<dcscom:balanceGroupName>TotalTaxAmount</dcscom:balanceGroupName>
+				<dcscom:balanceType>OpeningBalance</dcscom:balanceType>
+			</role>
+		</field>
+		<field xsi:type="DataSetFieldField">
+			<dataPath>Receipt.TotalTaxAmountReceipt</dataPath>
+			<field>TotalTaxAmountReceipt</field>
+			<title xsi:type="v8:LocalStringType">
+				<v8:item>
+					<v8:lang>en</v8:lang>
+					<v8:content>Total tax amount</v8:content>
+				</v8:item>
+				<v8:item>
+					<v8:lang>ru</v8:lang>
+					<v8:content>Налоги</v8:content>
+				</v8:item>
+				<v8:item>
+					<v8:lang>tr</v8:lang>
+					<v8:content>Toplam vergi tutarı</v8:content>
+				</v8:item>
+			</title>
+		</field>
+		<field xsi:type="DataSetFieldField">
+			<dataPath>Expense.TotalTaxAmountExpense</dataPath>
+			<field>TotalTaxAmountExpense</field>
+			<title xsi:type="v8:LocalStringType">
+				<v8:item>
+					<v8:lang>en</v8:lang>
+					<v8:content>Total tax amount</v8:content>
+				</v8:item>
+				<v8:item>
+					<v8:lang>ru</v8:lang>
+					<v8:content>Налоги</v8:content>
+				</v8:item>
+				<v8:item>
+					<v8:lang>tr</v8:lang>
+					<v8:content>Toplam vergi tutarı</v8:content>
+				</v8:item>
+			</title>
+		</field>
+		<field xsi:type="DataSetFieldField">
+			<dataPath>ClosingBalance.TotalTaxAmountClosingBalance</dataPath>
+			<field>TotalTaxAmountClosingBalance</field>
+			<title xsi:type="v8:LocalStringType">
+				<v8:item>
+					<v8:lang>en</v8:lang>
+					<v8:content>Total tax amount</v8:content>
+				</v8:item>
+				<v8:item>
+					<v8:lang>ru</v8:lang>
+					<v8:content>Налоги</v8:content>
+				</v8:item>
+				<v8:item>
+					<v8:lang>tr</v8:lang>
+					<v8:content>Toplam vergi tutarı</v8:content>
+				</v8:item>
+			</title>
+			<role>
+				<dcscom:balance>true</dcscom:balance>
+				<dcscom:balanceGroupName>TotalTaxAmount</dcscom:balanceGroupName>
+				<dcscom:balanceType>ClosingBalance</dcscom:balanceType>
+			</role>
+		</field>
+		<field xsi:type="DataSetFieldField">
+			<dataPath>OpeningBalance.TotalCostAmountOpeningBalance</dataPath>
+			<field>TotalCostAmountOpeningBalance</field>
+			<title xsi:type="v8:LocalStringType">
+				<v8:item>
+					<v8:lang>en</v8:lang>
+					<v8:content>Total cost amount</v8:content>
+				</v8:item>
+				<v8:item>
+					<v8:lang>ru</v8:lang>
+					<v8:content>Общая сумма затрат</v8:content>
+				</v8:item>
+				<v8:item>
+					<v8:lang>tr</v8:lang>
+					<v8:content>Total cost amount</v8:content>
+				</v8:item>
+			</title>
+			<role>
+				<dcscom:balance>true</dcscom:balance>
+				<dcscom:balanceGroupName>TotalCostAmount</dcscom:balanceGroupName>
+				<dcscom:balanceType>OpeningBalance</dcscom:balanceType>
+			</role>
+		</field>
+		<field xsi:type="DataSetFieldField">
+			<dataPath>Receipt.TotalCostAmountReceipt</dataPath>
+			<field>TotalCostAmountReceipt</field>
+			<title xsi:type="v8:LocalStringType">
+				<v8:item>
+					<v8:lang>en</v8:lang>
+					<v8:content>Total cost amount</v8:content>
+				</v8:item>
+				<v8:item>
+					<v8:lang>ru</v8:lang>
+					<v8:content>Общая сумма затрат</v8:content>
+				</v8:item>
+				<v8:item>
+					<v8:lang>tr</v8:lang>
+					<v8:content>Total cost amount</v8:content>
+				</v8:item>
+			</title>
+		</field>
+		<field xsi:type="DataSetFieldField">
+			<dataPath>Expense.TotalCostAmountExpense</dataPath>
+			<field>TotalCostAmountExpense</field>
+			<title xsi:type="v8:LocalStringType">
+				<v8:item>
+					<v8:lang>en</v8:lang>
+					<v8:content>Total cost amount</v8:content>
+				</v8:item>
+				<v8:item>
+					<v8:lang>ru</v8:lang>
+					<v8:content>Общая сумма затрат</v8:content>
+				</v8:item>
+				<v8:item>
+					<v8:lang>tr</v8:lang>
+					<v8:content>Total cost amount</v8:content>
+				</v8:item>
+			</title>
+		</field>
+		<field xsi:type="DataSetFieldField">
+			<dataPath>ClosingBalance.TotalCostAmountClosingBalance</dataPath>
+			<field>TotalCostAmountClosingBalance</field>
+			<title xsi:type="v8:LocalStringType">
+				<v8:item>
+					<v8:lang>en</v8:lang>
+					<v8:content>Total cost amount</v8:content>
+				</v8:item>
+				<v8:item>
+					<v8:lang>ru</v8:lang>
+					<v8:content>Общая сумма затрат</v8:content>
+				</v8:item>
+				<v8:item>
+					<v8:lang>tr</v8:lang>
+					<v8:content>Total cost amount</v8:content>
+				</v8:item>
+			</title>
+			<role>
+				<dcscom:balance>true</dcscom:balance>
+				<dcscom:balanceGroupName>TotalCostAmount</dcscom:balanceGroupName>
+				<dcscom:balanceType>ClosingBalance</dcscom:balanceType>
+			</role>
+		</field>
 		<dataSource>DataSource1</dataSource>
 		<query>SELECT
 	R6020B_BatchBalanceBalanceAndTurnovers.Company,
@@ -252,18 +1564,80 @@
 	R6020B_BatchBalanceBalanceAndTurnovers.ItemKey,
 	R6020B_BatchBalanceBalanceAndTurnovers.Batch,
 	R6020B_BatchBalanceBalanceAndTurnovers.BatchKey,
-	R6020B_BatchBalanceBalanceAndTurnovers.QuantityOpeningBalance,
-	R6020B_BatchBalanceBalanceAndTurnovers.AmountOpeningBalance,
-	R6020B_BatchBalanceBalanceAndTurnovers.AmountCostOpeningBalance,
-	R6020B_BatchBalanceBalanceAndTurnovers.QuantityReceipt,
-	R6020B_BatchBalanceBalanceAndTurnovers.AmountReceipt,
-	R6020B_BatchBalanceBalanceAndTurnovers.AmountCostReceipt,
-	R6020B_BatchBalanceBalanceAndTurnovers.QuantityExpense,
-	R6020B_BatchBalanceBalanceAndTurnovers.AmountExpense,
-	R6020B_BatchBalanceBalanceAndTurnovers.AmountCostExpense,
-	R6020B_BatchBalanceBalanceAndTurnovers.QuantityClosingBalance,
-	R6020B_BatchBalanceBalanceAndTurnovers.AmountClosingBalance,
-	R6020B_BatchBalanceBalanceAndTurnovers.AmountCostClosingBalance,
+	R6020B_BatchBalanceBalanceAndTurnovers.QuantityOpeningBalance AS QuantityOpeningBalance,
+	R6020B_BatchBalanceBalanceAndTurnovers.QuantityReceipt AS QuantityReceipt,
+	R6020B_BatchBalanceBalanceAndTurnovers.QuantityExpense AS QuantityExpense,
+	R6020B_BatchBalanceBalanceAndTurnovers.QuantityClosingBalance AS QuantityClosingBalance,
+	R6020B_BatchBalanceBalanceAndTurnovers.InvoiceAmountOpeningBalance AS InvoiceAmountOpeningBalance,
+	R6020B_BatchBalanceBalanceAndTurnovers.InvoiceAmountReceipt AS InvoiceAmountReceipt,
+	R6020B_BatchBalanceBalanceAndTurnovers.InvoiceAmountExpense AS InvoiceAmountExpense,
+	R6020B_BatchBalanceBalanceAndTurnovers.InvoiceAmountClosingBalance AS InvoiceAmountClosingBalance,
+	R6020B_BatchBalanceBalanceAndTurnovers.InvoiceTaxAmountOpeningBalance AS InvoiceTaxAmountOpeningBalance,
+	R6020B_BatchBalanceBalanceAndTurnovers.InvoiceTaxAmountReceipt AS InvoiceTaxAmountReceipt,
+	R6020B_BatchBalanceBalanceAndTurnovers.InvoiceTaxAmountExpense AS InvoiceTaxAmountExpense,
+	R6020B_BatchBalanceBalanceAndTurnovers.InvoiceTaxAmountClosingBalance AS InvoiceTaxAmountClosingBalance,
+	R6020B_BatchBalanceBalanceAndTurnovers.IndirectCostAmountOpeningBalance AS IndirectCostAmountOpeningBalance,
+	R6020B_BatchBalanceBalanceAndTurnovers.IndirectCostAmountReceipt AS IndirectCostAmountReceipt,
+	R6020B_BatchBalanceBalanceAndTurnovers.IndirectCostAmountExpense AS IndirectCostAmountExpense,
+	R6020B_BatchBalanceBalanceAndTurnovers.IndirectCostAmountClosingBalance AS IndirectCostAmountClosingBalance,
+	R6020B_BatchBalanceBalanceAndTurnovers.IndirectCostTaxAmountOpeningBalance AS IndirectCostTaxAmountOpeningBalance,
+	R6020B_BatchBalanceBalanceAndTurnovers.IndirectCostTaxAmountReceipt AS IndirectCostTaxAmountReceipt,
+	R6020B_BatchBalanceBalanceAndTurnovers.IndirectCostTaxAmountExpense AS IndirectCostTaxAmountExpense,
+	R6020B_BatchBalanceBalanceAndTurnovers.IndirectCostTaxAmountClosingBalance AS IndirectCostTaxAmountClosingBalance,
+	R6020B_BatchBalanceBalanceAndTurnovers.ExtraCostAmountByRatioOpeningBalance AS ExtraCostAmountByRatioOpeningBalance,
+	R6020B_BatchBalanceBalanceAndTurnovers.ExtraCostAmountByRatioReceipt AS ExtraCostAmountByRatioReceipt,
+	R6020B_BatchBalanceBalanceAndTurnovers.ExtraCostAmountByRatioExpense AS ExtraCostAmountByRatioExpense,
+	R6020B_BatchBalanceBalanceAndTurnovers.ExtraCostAmountByRatioClosingBalance AS ExtraCostAmountByRatioClosingBalance,
+	R6020B_BatchBalanceBalanceAndTurnovers.ExtraCostTaxAmountByRatioOpeningBalance AS
+		ExtraCostTaxAmountByRatioOpeningBalance,
+	R6020B_BatchBalanceBalanceAndTurnovers.ExtraCostTaxAmountByRatioReceipt AS ExtraCostTaxAmountByRatioReceipt,
+	R6020B_BatchBalanceBalanceAndTurnovers.ExtraCostTaxAmountByRatioExpense AS ExtraCostTaxAmountByRatioExpense,
+	R6020B_BatchBalanceBalanceAndTurnovers.ExtraCostTaxAmountByRatioClosingBalance AS
+		ExtraCostTaxAmountByRatioClosingBalance,
+	R6020B_BatchBalanceBalanceAndTurnovers.ExtraDirectCostAmountOpeningBalance AS ExtraDirectCostAmountOpeningBalance,
+	R6020B_BatchBalanceBalanceAndTurnovers.ExtraDirectCostAmountReceipt AS ExtraDirectCostAmountReceipt,
+	R6020B_BatchBalanceBalanceAndTurnovers.ExtraDirectCostAmountExpense AS ExtraDirectCostAmountExpense,
+	R6020B_BatchBalanceBalanceAndTurnovers.ExtraDirectCostAmountClosingBalance AS ExtraDirectCostAmountClosingBalance,
+	R6020B_BatchBalanceBalanceAndTurnovers.ExtraDirectCostTaxAmountOpeningBalance AS
+		ExtraDirectCostTaxAmountOpeningBalance,
+	R6020B_BatchBalanceBalanceAndTurnovers.ExtraDirectCostTaxAmountReceipt AS ExtraDirectCostTaxAmountReceipt,
+	R6020B_BatchBalanceBalanceAndTurnovers.ExtraDirectCostTaxAmountExpense AS ExtraDirectCostTaxAmountExpense,
+	R6020B_BatchBalanceBalanceAndTurnovers.ExtraDirectCostTaxAmountClosingBalance AS
+		ExtraDirectCostTaxAmountClosingBalance,
+	R6020B_BatchBalanceBalanceAndTurnovers.AllocatedCostAmountOpeningBalance AS AllocatedCostAmountOpeningBalance,
+	R6020B_BatchBalanceBalanceAndTurnovers.AllocatedCostAmountReceipt AS AllocatedCostAmountReceipt,
+	R6020B_BatchBalanceBalanceAndTurnovers.AllocatedCostAmountExpense AS AllocatedCostAmountExpense,
+	R6020B_BatchBalanceBalanceAndTurnovers.AllocatedCostAmountClosingBalance AS AllocatedCostAmountClosingBalance,
+	R6020B_BatchBalanceBalanceAndTurnovers.AllocatedCostTaxAmountOpeningBalance AS AllocatedCostTaxAmountOpeningBalance,
+	R6020B_BatchBalanceBalanceAndTurnovers.AllocatedCostTaxAmountReceipt AS AllocatedCostTaxAmountReceipt,
+	R6020B_BatchBalanceBalanceAndTurnovers.AllocatedCostTaxAmountExpense AS AllocatedCostTaxAmountExpense,
+	R6020B_BatchBalanceBalanceAndTurnovers.AllocatedCostTaxAmountClosingBalance AS AllocatedCostTaxAmountClosingBalance,
+	R6020B_BatchBalanceBalanceAndTurnovers.AllocatedRevenueAmountOpeningBalance AS AllocatedRevenueAmountOpeningBalance,
+	R6020B_BatchBalanceBalanceAndTurnovers.AllocatedRevenueAmountReceipt AS AllocatedRevenueAmountReceipt,
+	R6020B_BatchBalanceBalanceAndTurnovers.AllocatedRevenueAmountExpense AS AllocatedRevenueAmountExpense,
+	R6020B_BatchBalanceBalanceAndTurnovers.AllocatedRevenueAmountClosingBalance AS AllocatedRevenueAmountClosingBalance,
+	R6020B_BatchBalanceBalanceAndTurnovers.AllocatedRevenueTaxAmountOpeningBalance AS
+		AllocatedRevenueTaxAmountOpeningBalance,
+	R6020B_BatchBalanceBalanceAndTurnovers.AllocatedRevenueTaxAmountReceipt AS AllocatedRevenueTaxAmountReceipt,
+	R6020B_BatchBalanceBalanceAndTurnovers.AllocatedRevenueTaxAmountExpense AS AllocatedRevenueTaxAmountExpense,
+	R6020B_BatchBalanceBalanceAndTurnovers.AllocatedRevenueTaxAmountClosingBalance AS
+		AllocatedRevenueTaxAmountClosingBalance,
+	R6020B_BatchBalanceBalanceAndTurnovers.TotalAmountOpeningBalance AS TotalAmountOpeningBalance,
+	R6020B_BatchBalanceBalanceAndTurnovers.TotalAmountReceipt AS TotalAmountReceipt,
+	R6020B_BatchBalanceBalanceAndTurnovers.TotalAmountExpense AS TotalAmountExpense,
+	R6020B_BatchBalanceBalanceAndTurnovers.TotalAmountClosingBalance AS TotalAmountClosingBalance,
+	R6020B_BatchBalanceBalanceAndTurnovers.TotalNetAmountOpeningBalance AS TotalNetAmountOpeningBalance,
+	R6020B_BatchBalanceBalanceAndTurnovers.TotalNetAmountReceipt AS TotalNetAmountReceipt,
+	R6020B_BatchBalanceBalanceAndTurnovers.TotalNetAmountExpense AS TotalNetAmountExpense,
+	R6020B_BatchBalanceBalanceAndTurnovers.TotalNetAmountClosingBalance AS TotalNetAmountClosingBalance,
+	R6020B_BatchBalanceBalanceAndTurnovers.TotalTaxAmountOpeningBalance AS TotalTaxAmountOpeningBalance,
+	R6020B_BatchBalanceBalanceAndTurnovers.TotalTaxAmountReceipt AS TotalTaxAmountReceipt,
+	R6020B_BatchBalanceBalanceAndTurnovers.TotalTaxAmountExpense AS TotalTaxAmountExpense,
+	R6020B_BatchBalanceBalanceAndTurnovers.TotalTaxAmountClosingBalance AS TotalTaxAmountClosingBalance,
+	R6020B_BatchBalanceBalanceAndTurnovers.IndirectCostAmountOpeningBalance + R6020B_BatchBalanceBalanceAndTurnovers.ExtraCostAmountByRatioOpeningBalance + R6020B_BatchBalanceBalanceAndTurnovers.ExtraDirectCostAmountOpeningBalance + R6020B_BatchBalanceBalanceAndTurnovers.AllocatedCostAmountOpeningBalance AS TotalCostAmountOpeningBalance,
+	R6020B_BatchBalanceBalanceAndTurnovers.IndirectCostAmountReceipt + R6020B_BatchBalanceBalanceAndTurnovers.ExtraCostAmountByRatioReceipt + R6020B_BatchBalanceBalanceAndTurnovers.ExtraDirectCostAmountReceipt + R6020B_BatchBalanceBalanceAndTurnovers.AllocatedCostAmountReceipt AS TotalCostAmountReceipt,
+	R6020B_BatchBalanceBalanceAndTurnovers.IndirectCostAmountExpense + R6020B_BatchBalanceBalanceAndTurnovers.ExtraCostAmountByRatioExpense + R6020B_BatchBalanceBalanceAndTurnovers.ExtraDirectCostAmountExpense + R6020B_BatchBalanceBalanceAndTurnovers.AllocatedCostAmountExpense AS TotalCostAmountExpense,
+	R6020B_BatchBalanceBalanceAndTurnovers.IndirectCostAmountClosingBalance + R6020B_BatchBalanceBalanceAndTurnovers.ExtraCostAmountByRatioClosingBalance + R6020B_BatchBalanceBalanceAndTurnovers.ExtraDirectCostAmountClosingBalance + R6020B_BatchBalanceBalanceAndTurnovers.AllocatedCostAmountClosingBalance AS TotalCostAmountClosingBalance,
 	R6020B_BatchBalanceBalanceAndTurnovers.SecondPeriod,
 	CASE
 		WHEN R6020B_BatchBalanceBalanceAndTurnovers.Recorder = UNDEFINED
@@ -275,52 +1649,276 @@ FROM
 		R6020B_BatchBalanceBalanceAndTurnovers</query>
 	</dataSet>
 	<totalField>
-		<dataPath>ClosingBalance.AmountClosingBalance</dataPath>
-		<expression>Sum(ClosingBalance.AmountClosingBalance)</expression>
+		<dataPath>OpeningBalance.AllocatedCostAmountOpeningBalance</dataPath>
+		<expression>Sum(OpeningBalance.AllocatedCostAmountOpeningBalance)</expression>
 	</totalField>
 	<totalField>
-		<dataPath>ClosingBalance.QuantityClosingBalance</dataPath>
-		<expression>Sum(ClosingBalance.QuantityClosingBalance)</expression>
+		<dataPath>OpeningBalance.AllocatedCostTaxAmountOpeningBalance</dataPath>
+		<expression>Sum(OpeningBalance.AllocatedCostTaxAmountOpeningBalance)</expression>
 	</totalField>
 	<totalField>
-		<dataPath>Expense.AmountExpense</dataPath>
-		<expression>Sum(Expense.AmountExpense)</expression>
+		<dataPath>OpeningBalance.AllocatedRevenueAmountOpeningBalance</dataPath>
+		<expression>Sum(OpeningBalance.AllocatedRevenueAmountOpeningBalance)</expression>
 	</totalField>
 	<totalField>
-		<dataPath>Expense.QuantityExpense</dataPath>
-		<expression>Sum(Expense.QuantityExpense)</expression>
+		<dataPath>OpeningBalance.AllocatedRevenueTaxAmountOpeningBalance</dataPath>
+		<expression>Sum(OpeningBalance.AllocatedRevenueTaxAmountOpeningBalance)</expression>
 	</totalField>
 	<totalField>
-		<dataPath>Receipt.AmountReceipt</dataPath>
-		<expression>Sum(Receipt.AmountReceipt)</expression>
+		<dataPath>OpeningBalance.ExtraCostAmountByRatioOpeningBalance</dataPath>
+		<expression>Sum(OpeningBalance.ExtraCostAmountByRatioOpeningBalance)</expression>
+	</totalField>
+	<totalField>
+		<dataPath>OpeningBalance.ExtraCostTaxAmountByRatioOpeningBalance</dataPath>
+		<expression>Sum(OpeningBalance.ExtraCostTaxAmountByRatioOpeningBalance)</expression>
+	</totalField>
+	<totalField>
+		<dataPath>OpeningBalance.ExtraDirectCostAmountOpeningBalance</dataPath>
+		<expression>Sum(OpeningBalance.ExtraDirectCostAmountOpeningBalance)</expression>
+	</totalField>
+	<totalField>
+		<dataPath>OpeningBalance.ExtraDirectCostTaxAmountOpeningBalance</dataPath>
+		<expression>Sum(OpeningBalance.ExtraDirectCostTaxAmountOpeningBalance)</expression>
+	</totalField>
+	<totalField>
+		<dataPath>OpeningBalance.IndirectCostAmountOpeningBalance</dataPath>
+		<expression>Sum(OpeningBalance.IndirectCostAmountOpeningBalance)</expression>
+	</totalField>
+	<totalField>
+		<dataPath>OpeningBalance.IndirectCostTaxAmountOpeningBalance</dataPath>
+		<expression>Sum(OpeningBalance.IndirectCostTaxAmountOpeningBalance)</expression>
+	</totalField>
+	<totalField>
+		<dataPath>OpeningBalance.InvoiceAmountOpeningBalance</dataPath>
+		<expression>Sum(OpeningBalance.InvoiceAmountOpeningBalance)</expression>
+	</totalField>
+	<totalField>
+		<dataPath>OpeningBalance.InvoiceTaxAmountOpeningBalance</dataPath>
+		<expression>Sum(OpeningBalance.InvoiceTaxAmountOpeningBalance)</expression>
+	</totalField>
+	<totalField>
+		<dataPath>OpeningBalance.QuantityOpeningBalance</dataPath>
+		<expression>Sum(OpeningBalance.QuantityOpeningBalance)</expression>
+	</totalField>
+	<totalField>
+		<dataPath>OpeningBalance.TotalAmountOpeningBalance</dataPath>
+		<expression>Sum(OpeningBalance.TotalAmountOpeningBalance)</expression>
+	</totalField>
+	<totalField>
+		<dataPath>OpeningBalance.TotalNetAmountOpeningBalance</dataPath>
+		<expression>Sum(OpeningBalance.TotalNetAmountOpeningBalance)</expression>
+	</totalField>
+	<totalField>
+		<dataPath>OpeningBalance.TotalTaxAmountOpeningBalance</dataPath>
+		<expression>Sum(OpeningBalance.TotalTaxAmountOpeningBalance)</expression>
+	</totalField>
+	<totalField>
+		<dataPath>Receipt.AllocatedCostAmountReceipt</dataPath>
+		<expression>Sum(Receipt.AllocatedCostAmountReceipt)</expression>
+	</totalField>
+	<totalField>
+		<dataPath>Receipt.AllocatedCostTaxAmountReceipt</dataPath>
+		<expression>Sum(Receipt.AllocatedCostTaxAmountReceipt)</expression>
+	</totalField>
+	<totalField>
+		<dataPath>Receipt.AllocatedRevenueAmountReceipt</dataPath>
+		<expression>Sum(Receipt.AllocatedRevenueAmountReceipt)</expression>
+	</totalField>
+	<totalField>
+		<dataPath>Receipt.AllocatedRevenueTaxAmountReceipt</dataPath>
+		<expression>Sum(Receipt.AllocatedRevenueTaxAmountReceipt)</expression>
+	</totalField>
+	<totalField>
+		<dataPath>Receipt.ExtraCostAmountByRatioReceipt</dataPath>
+		<expression>Sum(Receipt.ExtraCostAmountByRatioReceipt)</expression>
+	</totalField>
+	<totalField>
+		<dataPath>Receipt.ExtraCostTaxAmountByRatioReceipt</dataPath>
+		<expression>Sum(Receipt.ExtraCostTaxAmountByRatioReceipt)</expression>
+	</totalField>
+	<totalField>
+		<dataPath>Receipt.ExtraDirectCostAmountReceipt</dataPath>
+		<expression>Sum(Receipt.ExtraDirectCostAmountReceipt)</expression>
+	</totalField>
+	<totalField>
+		<dataPath>Receipt.ExtraDirectCostTaxAmountReceipt</dataPath>
+		<expression>Sum(Receipt.ExtraDirectCostTaxAmountReceipt)</expression>
+	</totalField>
+	<totalField>
+		<dataPath>Receipt.IndirectCostAmountReceipt</dataPath>
+		<expression>Sum(Receipt.IndirectCostAmountReceipt)</expression>
+	</totalField>
+	<totalField>
+		<dataPath>Receipt.IndirectCostTaxAmountReceipt</dataPath>
+		<expression>Sum(Receipt.IndirectCostTaxAmountReceipt)</expression>
+	</totalField>
+	<totalField>
+		<dataPath>Receipt.InvoiceAmountReceipt</dataPath>
+		<expression>Sum(Receipt.InvoiceAmountReceipt)</expression>
+	</totalField>
+	<totalField>
+		<dataPath>Receipt.InvoiceTaxAmountReceipt</dataPath>
+		<expression>Sum(Receipt.InvoiceTaxAmountReceipt)</expression>
 	</totalField>
 	<totalField>
 		<dataPath>Receipt.QuantityReceipt</dataPath>
 		<expression>Sum(Receipt.QuantityReceipt)</expression>
 	</totalField>
 	<totalField>
-		<dataPath>ClosingBalance.AmountCostClosingBalance</dataPath>
-		<expression>Sum(ClosingBalance.AmountCostClosingBalance)</expression>
+		<dataPath>Receipt.TotalAmountReceipt</dataPath>
+		<expression>Sum(Receipt.TotalAmountReceipt)</expression>
 	</totalField>
 	<totalField>
-		<dataPath>Expense.AmountCostExpense</dataPath>
-		<expression>Sum(Expense.AmountCostExpense)</expression>
+		<dataPath>Receipt.TotalNetAmountReceipt</dataPath>
+		<expression>Sum(Receipt.TotalNetAmountReceipt)</expression>
 	</totalField>
 	<totalField>
-		<dataPath>Receipt.AmountCostReceipt</dataPath>
-		<expression>Sum(Receipt.AmountCostReceipt)</expression>
+		<dataPath>Receipt.TotalTaxAmountReceipt</dataPath>
+		<expression>Sum(Receipt.TotalTaxAmountReceipt)</expression>
 	</totalField>
 	<totalField>
-		<dataPath>OpeningBalance.AmountCostOpeningBalance</dataPath>
-		<expression>Sum(OpeningBalance.AmountCostOpeningBalance)</expression>
+		<dataPath>Expense.AllocatedCostAmountExpense</dataPath>
+		<expression>Sum(Expense.AllocatedCostAmountExpense)</expression>
 	</totalField>
 	<totalField>
-		<dataPath>OpeningBalance.AmountOpeningBalance</dataPath>
-		<expression>Sum(OpeningBalance.AmountOpeningBalance)</expression>
+		<dataPath>Expense.AllocatedCostTaxAmountExpense</dataPath>
+		<expression>Sum(Expense.AllocatedCostTaxAmountExpense)</expression>
 	</totalField>
 	<totalField>
-		<dataPath>OpeningBalance.QuantityOpeningBalance</dataPath>
-		<expression>Sum(OpeningBalance.QuantityOpeningBalance)</expression>
+		<dataPath>Expense.AllocatedRevenueAmountExpense</dataPath>
+		<expression>Sum(Expense.AllocatedRevenueAmountExpense)</expression>
+	</totalField>
+	<totalField>
+		<dataPath>Expense.AllocatedRevenueTaxAmountExpense</dataPath>
+		<expression>Sum(Expense.AllocatedRevenueTaxAmountExpense)</expression>
+	</totalField>
+	<totalField>
+		<dataPath>Expense.ExtraCostAmountByRatioExpense</dataPath>
+		<expression>Sum(Expense.ExtraCostAmountByRatioExpense)</expression>
+	</totalField>
+	<totalField>
+		<dataPath>Expense.ExtraCostTaxAmountByRatioExpense</dataPath>
+		<expression>Sum(Expense.ExtraCostTaxAmountByRatioExpense)</expression>
+	</totalField>
+	<totalField>
+		<dataPath>Expense.ExtraDirectCostAmountExpense</dataPath>
+		<expression>Sum(Expense.ExtraDirectCostAmountExpense)</expression>
+	</totalField>
+	<totalField>
+		<dataPath>Expense.ExtraDirectCostTaxAmountExpense</dataPath>
+		<expression>Sum(Expense.ExtraDirectCostTaxAmountExpense)</expression>
+	</totalField>
+	<totalField>
+		<dataPath>Expense.IndirectCostAmountExpense</dataPath>
+		<expression>Sum(Expense.IndirectCostAmountExpense)</expression>
+	</totalField>
+	<totalField>
+		<dataPath>Expense.IndirectCostTaxAmountExpense</dataPath>
+		<expression>Sum(Expense.IndirectCostTaxAmountExpense)</expression>
+	</totalField>
+	<totalField>
+		<dataPath>Expense.InvoiceAmountExpense</dataPath>
+		<expression>Sum(Expense.InvoiceAmountExpense)</expression>
+	</totalField>
+	<totalField>
+		<dataPath>Expense.InvoiceTaxAmountExpense</dataPath>
+		<expression>Sum(Expense.InvoiceTaxAmountExpense)</expression>
+	</totalField>
+	<totalField>
+		<dataPath>Expense.QuantityExpense</dataPath>
+		<expression>Sum(Expense.QuantityExpense)</expression>
+	</totalField>
+	<totalField>
+		<dataPath>Expense.TotalAmountExpense</dataPath>
+		<expression>Sum(Expense.TotalAmountExpense)</expression>
+	</totalField>
+	<totalField>
+		<dataPath>Expense.TotalNetAmountExpense</dataPath>
+		<expression>Sum(Expense.TotalNetAmountExpense)</expression>
+	</totalField>
+	<totalField>
+		<dataPath>Expense.TotalTaxAmountExpense</dataPath>
+		<expression>Sum(Expense.TotalTaxAmountExpense)</expression>
+	</totalField>
+	<totalField>
+		<dataPath>ClosingBalance.AllocatedCostAmountClosingBalance</dataPath>
+		<expression>Sum(ClosingBalance.AllocatedCostAmountClosingBalance)</expression>
+	</totalField>
+	<totalField>
+		<dataPath>ClosingBalance.AllocatedCostTaxAmountClosingBalance</dataPath>
+		<expression>Sum(ClosingBalance.AllocatedCostTaxAmountClosingBalance)</expression>
+	</totalField>
+	<totalField>
+		<dataPath>ClosingBalance.AllocatedRevenueAmountClosingBalance</dataPath>
+		<expression>Sum(ClosingBalance.AllocatedRevenueAmountClosingBalance)</expression>
+	</totalField>
+	<totalField>
+		<dataPath>ClosingBalance.AllocatedRevenueTaxAmountClosingBalance</dataPath>
+		<expression>Sum(ClosingBalance.AllocatedRevenueTaxAmountClosingBalance)</expression>
+	</totalField>
+	<totalField>
+		<dataPath>ClosingBalance.ExtraCostAmountByRatioClosingBalance</dataPath>
+		<expression>Sum(ClosingBalance.ExtraCostAmountByRatioClosingBalance)</expression>
+	</totalField>
+	<totalField>
+		<dataPath>ClosingBalance.ExtraCostTaxAmountByRatioClosingBalance</dataPath>
+		<expression>Sum(ClosingBalance.ExtraCostTaxAmountByRatioClosingBalance)</expression>
+	</totalField>
+	<totalField>
+		<dataPath>ClosingBalance.ExtraDirectCostAmountClosingBalance</dataPath>
+		<expression>Sum(ClosingBalance.ExtraDirectCostAmountClosingBalance)</expression>
+	</totalField>
+	<totalField>
+		<dataPath>ClosingBalance.ExtraDirectCostTaxAmountClosingBalance</dataPath>
+		<expression>Sum(ClosingBalance.ExtraDirectCostTaxAmountClosingBalance)</expression>
+	</totalField>
+	<totalField>
+		<dataPath>ClosingBalance.IndirectCostAmountClosingBalance</dataPath>
+		<expression>Sum(ClosingBalance.IndirectCostAmountClosingBalance)</expression>
+	</totalField>
+	<totalField>
+		<dataPath>ClosingBalance.IndirectCostTaxAmountClosingBalance</dataPath>
+		<expression>Sum(ClosingBalance.IndirectCostTaxAmountClosingBalance)</expression>
+	</totalField>
+	<totalField>
+		<dataPath>ClosingBalance.InvoiceAmountClosingBalance</dataPath>
+		<expression>Sum(ClosingBalance.InvoiceAmountClosingBalance)</expression>
+	</totalField>
+	<totalField>
+		<dataPath>ClosingBalance.InvoiceTaxAmountClosingBalance</dataPath>
+		<expression>Sum(ClosingBalance.InvoiceTaxAmountClosingBalance)</expression>
+	</totalField>
+	<totalField>
+		<dataPath>ClosingBalance.QuantityClosingBalance</dataPath>
+		<expression>Sum(ClosingBalance.QuantityClosingBalance)</expression>
+	</totalField>
+	<totalField>
+		<dataPath>ClosingBalance.TotalAmountClosingBalance</dataPath>
+		<expression>Sum(ClosingBalance.TotalAmountClosingBalance)</expression>
+	</totalField>
+	<totalField>
+		<dataPath>ClosingBalance.TotalNetAmountClosingBalance</dataPath>
+		<expression>Sum(ClosingBalance.TotalNetAmountClosingBalance)</expression>
+	</totalField>
+	<totalField>
+		<dataPath>ClosingBalance.TotalTaxAmountClosingBalance</dataPath>
+		<expression>Sum(ClosingBalance.TotalTaxAmountClosingBalance)</expression>
+	</totalField>
+	<totalField>
+		<dataPath>OpeningBalance.TotalCostAmountOpeningBalance</dataPath>
+		<expression>Sum(OpeningBalance.TotalCostAmountOpeningBalance)</expression>
+	</totalField>
+	<totalField>
+		<dataPath>Receipt.TotalCostAmountReceipt</dataPath>
+		<expression>Sum(Receipt.TotalCostAmountReceipt)</expression>
+	</totalField>
+	<totalField>
+		<dataPath>Expense.TotalCostAmountExpense</dataPath>
+		<expression>Sum(Expense.TotalCostAmountExpense)</expression>
+	</totalField>
+	<totalField>
+		<dataPath>ClosingBalance.TotalCostAmountClosingBalance</dataPath>
+		<expression>Sum(ClosingBalance.TotalCostAmountClosingBalance)</expression>
 	</totalField>
 	<parameter>
 		<name>ReportPeriod</name>
@@ -367,7 +1965,7 @@ FROM
 			</v8:DateQualifiers>
 		</valueType>
 		<value xsi:nil="true"/>
-		<useRestriction>false</useRestriction>
+		<useRestriction>true</useRestriction>
 		<expression>&amp;ReportPeriod.StartDate</expression>
 		<availableAsField>false</availableAsField>
 	</parameter>
@@ -394,7 +1992,7 @@ FROM
 			</v8:DateQualifiers>
 		</valueType>
 		<value xsi:nil="true"/>
-		<useRestriction>false</useRestriction>
+		<useRestriction>true</useRestriction>
 		<expression>&amp;ReportPeriod.EndDate</expression>
 		<availableAsField>false</availableAsField>
 	</parameter>
@@ -435,52 +2033,76 @@ FROM
 				<dcsset:item xsi:type="dcsset:SelectedItemFolder">
 					<dcsset:field>OpeningBalance</dcsset:field>
 					<dcsset:item xsi:type="dcsset:SelectedItemField">
-						<dcsset:field>OpeningBalance.AmountOpeningBalance</dcsset:field>
-					</dcsset:item>
-					<dcsset:item xsi:type="dcsset:SelectedItemField">
-						<dcsset:field>OpeningBalance.AmountCostOpeningBalance</dcsset:field>
-					</dcsset:item>
-					<dcsset:item xsi:type="dcsset:SelectedItemField">
 						<dcsset:field>OpeningBalance.QuantityOpeningBalance</dcsset:field>
+					</dcsset:item>
+					<dcsset:item xsi:type="dcsset:SelectedItemField">
+						<dcsset:field>OpeningBalance.InvoiceAmountOpeningBalance</dcsset:field>
+					</dcsset:item>
+					<dcsset:item xsi:type="dcsset:SelectedItemField">
+						<dcsset:field>OpeningBalance.TotalCostAmountOpeningBalance</dcsset:field>
+					</dcsset:item>
+					<dcsset:item xsi:type="dcsset:SelectedItemField">
+						<dcsset:field>OpeningBalance.AllocatedRevenueAmountOpeningBalance</dcsset:field>
+					</dcsset:item>
+					<dcsset:item xsi:type="dcsset:SelectedItemField">
+						<dcsset:field>OpeningBalance.TotalAmountOpeningBalance</dcsset:field>
 					</dcsset:item>
 					<dcsset:placement>Auto</dcsset:placement>
 				</dcsset:item>
 				<dcsset:item xsi:type="dcsset:SelectedItemFolder">
 					<dcsset:field>Receipt</dcsset:field>
 					<dcsset:item xsi:type="dcsset:SelectedItemField">
-						<dcsset:field>Receipt.AmountReceipt</dcsset:field>
-					</dcsset:item>
-					<dcsset:item xsi:type="dcsset:SelectedItemField">
-						<dcsset:field>Receipt.AmountCostReceipt</dcsset:field>
-					</dcsset:item>
-					<dcsset:item xsi:type="dcsset:SelectedItemField">
 						<dcsset:field>Receipt.QuantityReceipt</dcsset:field>
+					</dcsset:item>
+					<dcsset:item xsi:type="dcsset:SelectedItemField">
+						<dcsset:field>Receipt.InvoiceAmountReceipt</dcsset:field>
+					</dcsset:item>
+					<dcsset:item xsi:type="dcsset:SelectedItemField">
+						<dcsset:field>Receipt.TotalCostAmountReceipt</dcsset:field>
+					</dcsset:item>
+					<dcsset:item xsi:type="dcsset:SelectedItemField">
+						<dcsset:field>Receipt.AllocatedRevenueAmountReceipt</dcsset:field>
+					</dcsset:item>
+					<dcsset:item xsi:type="dcsset:SelectedItemField">
+						<dcsset:field>Receipt.TotalAmountReceipt</dcsset:field>
 					</dcsset:item>
 					<dcsset:placement>Auto</dcsset:placement>
 				</dcsset:item>
 				<dcsset:item xsi:type="dcsset:SelectedItemFolder">
 					<dcsset:field>Expense</dcsset:field>
 					<dcsset:item xsi:type="dcsset:SelectedItemField">
-						<dcsset:field>Expense.AmountExpense</dcsset:field>
-					</dcsset:item>
-					<dcsset:item xsi:type="dcsset:SelectedItemField">
-						<dcsset:field>Expense.AmountCostExpense</dcsset:field>
-					</dcsset:item>
-					<dcsset:item xsi:type="dcsset:SelectedItemField">
 						<dcsset:field>Expense.QuantityExpense</dcsset:field>
+					</dcsset:item>
+					<dcsset:item xsi:type="dcsset:SelectedItemField">
+						<dcsset:field>Expense.InvoiceAmountExpense</dcsset:field>
+					</dcsset:item>
+					<dcsset:item xsi:type="dcsset:SelectedItemField">
+						<dcsset:field>Expense.TotalCostAmountExpense</dcsset:field>
+					</dcsset:item>
+					<dcsset:item xsi:type="dcsset:SelectedItemField">
+						<dcsset:field>Expense.AllocatedRevenueAmountExpense</dcsset:field>
+					</dcsset:item>
+					<dcsset:item xsi:type="dcsset:SelectedItemField">
+						<dcsset:field>Expense.TotalAmountExpense</dcsset:field>
 					</dcsset:item>
 					<dcsset:placement>Auto</dcsset:placement>
 				</dcsset:item>
 				<dcsset:item xsi:type="dcsset:SelectedItemFolder">
 					<dcsset:field>ClosingBalance</dcsset:field>
 					<dcsset:item xsi:type="dcsset:SelectedItemField">
-						<dcsset:field>ClosingBalance.AmountClosingBalance</dcsset:field>
-					</dcsset:item>
-					<dcsset:item xsi:type="dcsset:SelectedItemField">
-						<dcsset:field>ClosingBalance.AmountCostClosingBalance</dcsset:field>
-					</dcsset:item>
-					<dcsset:item xsi:type="dcsset:SelectedItemField">
 						<dcsset:field>ClosingBalance.QuantityClosingBalance</dcsset:field>
+					</dcsset:item>
+					<dcsset:item xsi:type="dcsset:SelectedItemField">
+						<dcsset:field>ClosingBalance.InvoiceAmountClosingBalance</dcsset:field>
+					</dcsset:item>
+					<dcsset:item xsi:type="dcsset:SelectedItemField">
+						<dcsset:field>ClosingBalance.TotalCostAmountClosingBalance</dcsset:field>
+					</dcsset:item>
+					<dcsset:item xsi:type="dcsset:SelectedItemField">
+						<dcsset:field>ClosingBalance.AllocatedRevenueAmountClosingBalance</dcsset:field>
+					</dcsset:item>
+					<dcsset:item xsi:type="dcsset:SelectedItemField">
+						<dcsset:field>ClosingBalance.TotalAmountClosingBalance</dcsset:field>
 					</dcsset:item>
 					<dcsset:placement>Auto</dcsset:placement>
 				</dcsset:item>

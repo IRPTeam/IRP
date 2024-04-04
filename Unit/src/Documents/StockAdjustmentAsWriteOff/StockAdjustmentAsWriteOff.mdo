@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mdclass:Document xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" xmlns:mdclassExtension="http://g5.1c.ru/v8/dt/metadata/mdclass/extension" uuid="83184973-c9ff-4496-87f6-a40b26b010df" extendedConfigurationObject="b73d846a-302c-4ae1-80ef-a06ea11cb5b9">
+  <producedTypes>
+    <objectType typeId="7afd8942-9e09-48f4-966c-dd5775408c73" valueTypeId="22361e1d-3313-4085-a17d-95f01a9129a8"/>
+    <refType typeId="d8e0b6c5-f342-449c-8af8-2daf2bd6af76" valueTypeId="58a0b2fc-f385-446f-90c5-7f8f448c8b07"/>
+    <selectionType typeId="0a6a9d8c-3a3c-4d8f-a43b-b47fc65bf9f7" valueTypeId="dd1bb5e2-537a-4fc0-8c43-6b0a46409451"/>
+    <listType typeId="3065197d-5797-4932-9521-df1c03d20cfa" valueTypeId="0a25e7c8-f117-4d49-9511-b6dd31e531f1"/>
+    <managerType typeId="2adb026a-f72a-4ecb-9dab-d083815f1d17" valueTypeId="4948c2fd-fa3c-4613-9bb3-9356df41522f"/>
+  </producedTypes>
+  <name>StockAdjustmentAsWriteOff</name>
+  <objectBelonging>Adopted</objectBelonging>
+  <extension xsi:type="mdclassExtension:DocumentExtension">
+    <extendedConfigurationObject>Checked</extendedConfigurationObject>
+  </extension>
+  <useStandardCommands>true</useStandardCommands>
+</mdclass:Document>

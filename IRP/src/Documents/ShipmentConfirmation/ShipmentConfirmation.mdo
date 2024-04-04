@@ -1233,6 +1233,21 @@
    <fullTextSearch>Use</fullTextSearch>
   </attributes>
  </tabularSections>
+ <templates uuid="f464c3b4-b4dd-4cc5-94ef-11f99bb1b154">
+  <name>ShipmentConfirmationPrint</name>
+  <synonym>
+   <key>en</key>
+   <value>Shipment confirmation</value>
+  </synonym>
+  <synonym>
+   <key>ru</key>
+   <value>Расходная товарная накладная</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Sevk irsaliyesi</value>
+  </synonym>
+ </templates>
  <commands uuid="c7df6d13-1d5e-44f0-8ab1-91615427c7bf">
   <name>Generate</name>
   <synonym>
@@ -1253,6 +1268,27 @@
    <types>DocumentRef.SalesOrder</types>
    <types>DocumentRef.InventoryTransfer</types>
    <types>DocumentRef.SalesInvoice</types>
+  </commandParameterType>
+  <parameterUseMode>Multiple</parameterUseMode>
+  <representation>Auto</representation>
+ </commands>
+ <commands uuid="93aa58d1-ccaa-4f80-9e6a-db6641af93fa">
+  <name>ShipmentConfirmationPrint</name>
+  <synonym>
+   <key>en</key>
+   <value>Shipment confirmation</value>
+  </synonym>
+  <synonym>
+   <key>ru</key>
+   <value>Расходная товарная накладная</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Sevk irsaliyesi</value>
+  </synonym>
+  <group>CommandGroup.Print</group>
+  <commandParameterType>
+   <types>DocumentRef.ShipmentConfirmation</types>
   </commandParameterType>
   <parameterUseMode>Multiple</parameterUseMode>
   <representation>Auto</representation>

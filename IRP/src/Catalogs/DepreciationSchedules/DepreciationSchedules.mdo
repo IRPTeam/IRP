@@ -29,7 +29,6 @@
   <typesFilterValue xsi:type="core:ReferenceValue">
    <value>Catalog.AddAttributeAndPropertySets.Catalog_DepreciationSchedules</value>
   </typesFilterValue>
-  <dataPathField>0</dataPathField>
   <multipleValuesUseField>Catalog.AddAttributeAndPropertySets.TabularSection.Properties.Attribute.Collection</multipleValuesUseField>
   <characteristicValues>InformationRegister.AddProperties</characteristicValues>
   <objectField>InformationRegister.AddProperties.Dimension.Object</objectField>
@@ -45,7 +44,6 @@
   <typesFilterValue xsi:type="core:ReferenceValue">
    <value>Catalog.AddAttributeAndPropertySets.Catalog_DepreciationSchedules</value>
   </typesFilterValue>
-  <dataPathField>0</dataPathField>
   <multipleValuesUseField>Catalog.AddAttributeAndPropertySets.TabularSection.Attributes.Attribute.Collection</multipleValuesUseField>
   <characteristicValues>Catalog.DepreciationSchedules.TabularSection.AddAttributes</characteristicValues>
   <objectField>Catalog.DepreciationSchedules.TabularSection.AddAttributes.StandardAttribute.Ref</objectField>
@@ -57,6 +55,30 @@
  <createOnInput>Use</createOnInput>
  <dataLockControlMode>Managed</dataLockControlMode>
  <fullTextSearch>Use</fullTextSearch>
+ <objectPresentation>
+  <key>en</key>
+  <value>Depreciation schedule</value>
+ </objectPresentation>
+ <objectPresentation>
+  <key>ru</key>
+  <value>График амортизации</value>
+ </objectPresentation>
+ <objectPresentation>
+  <key>tr</key>
+  <value>Depreciation schedule</value>
+ </objectPresentation>
+ <listPresentation>
+  <key>en</key>
+  <value>Depreciation schedules</value>
+ </listPresentation>
+ <listPresentation>
+  <key>ru</key>
+  <value>Расписание расчета инвентаризации</value>
+ </listPresentation>
+ <listPresentation>
+  <key>tr</key>
+  <value>Amortisman programları</value>
+ </listPresentation>
  <levelCount>2</levelCount>
  <foldersOnTop>true</foldersOnTop>
  <codeLength>12</codeLength>

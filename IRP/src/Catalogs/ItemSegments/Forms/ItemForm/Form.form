@@ -674,9 +674,6 @@ WHERE
   <navigationPanel>
    <cmiFragmentRecord>
     <command>InformationRegister.ItemSegments.StandardCommand.OpenByValue.Segment</command>
-    <commandParameter xsi:type="form:DataPath">
-     <segments>Object.Ref</segments>
-    </commandParameter>
     <userVisible/>
    </cmiFragmentRecord>
   </navigationPanel>

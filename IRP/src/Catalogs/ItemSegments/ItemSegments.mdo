@@ -215,8 +215,8 @@
   </synonym>
   <group>CommandGroup.Service</group>
   <commandParameterType>
-   <types>CatalogRef.ItemKeys</types>
    <types>CatalogRef.Items</types>
+   <types>CatalogRef.ItemKeys</types>
   </commandParameterType>
   <parameterUseMode>Multiple</parameterUseMode>
   <representation>Auto</representation>

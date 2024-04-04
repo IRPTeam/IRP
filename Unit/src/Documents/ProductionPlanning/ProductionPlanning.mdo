@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mdclass:Document xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" xmlns:mdclassExtension="http://g5.1c.ru/v8/dt/metadata/mdclass/extension" uuid="b9819657-3283-4804-93cd-a05d62a06f6a" extendedConfigurationObject="8583acdd-683e-4346-8716-6911791e0322">
+  <producedTypes>
+    <objectType typeId="42fab212-f9a8-4924-abbd-c7f9848d276f" valueTypeId="c81675f4-16af-4b6b-bf48-e5916ce3e160"/>
+    <refType typeId="c64fbf0e-7c83-4dd6-8085-de07d76bdd30" valueTypeId="beb4534b-ddb9-47ff-a71a-0aa98d2e5633"/>
+    <selectionType typeId="889722d7-7714-4ab8-b7bd-c10d62a1f09d" valueTypeId="25800f2b-19c9-4042-8649-ff81ecb3c662"/>
+    <listType typeId="43bb3e03-a979-4d92-a55c-d22e573b6c33" valueTypeId="21fba6a6-e6aa-4614-933f-712e32318b2a"/>
+    <managerType typeId="d9b5cfa0-94f7-4341-a109-19b5051a6aa4" valueTypeId="24fe0eac-8536-4cda-9b63-de0922f4d662"/>
+  </producedTypes>
+  <name>ProductionPlanning</name>
+  <objectBelonging>Adopted</objectBelonging>
+  <extension xsi:type="mdclassExtension:DocumentExtension">
+    <extendedConfigurationObject>Checked</extendedConfigurationObject>
+  </extension>
+  <useStandardCommands>true</useStandardCommands>
+</mdclass:Document>

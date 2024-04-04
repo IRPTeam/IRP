@@ -94,6 +94,7 @@
  <registerRecords>AccumulationRegister.T1040T_AccountingAmounts</registerRecords>
  <registerRecords>AccumulationRegister.R3024B_SalesOrdersToBePaid</registerRecords>
  <registerRecords>AccumulationRegister.R2012B_SalesOrdersInvoiceClosing</registerRecords>
+ <registerRecords>AccumulationRegister.R5020B_PartnersBalance</registerRecords>
  <postInPrivilegedMode>true</postInPrivilegedMode>
  <unpostInPrivilegedMode>true</unpostInPrivilegedMode>
  <choiceHistoryOnInput>DontUse</choiceHistoryOnInput>
@@ -756,6 +757,21 @@
    <dataHistory>Use</dataHistory>
   </attributes>
  </tabularSections>
+ <templates uuid="b1dac9a0-84a5-4aee-b121-ac5752f96505">
+  <name>SalesOrderClosingPrint</name>
+  <synonym>
+   <key>en</key>
+   <value>Sales order closing</value>
+  </synonym>
+  <synonym>
+   <key>ru</key>
+   <value>Закрытие заказа покупателя</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Satış sipariş kapatma fişi</value>
+  </synonym>
+ </templates>
  <commands uuid="a8f970bd-1d98-4d02-a232-68d677103235">
   <name>Generate</name>
   <synonym>
@@ -775,6 +791,27 @@
    <types>DocumentRef.SalesOrder</types>
   </commandParameterType>
   <modifiesData>true</modifiesData>
+  <representation>Auto</representation>
+ </commands>
+ <commands uuid="6766872f-6cc0-4eec-88ce-cfe01ff75c3f">
+  <name>SalesOrderClosingPrint</name>
+  <synonym>
+   <key>en</key>
+   <value>Sales order closing</value>
+  </synonym>
+  <synonym>
+   <key>ru</key>
+   <value>Закрытие заказа покупателя</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Satış sipariş kapatma fişi</value>
+  </synonym>
+  <group>CommandGroup.Print</group>
+  <commandParameterType>
+   <types>DocumentRef.SalesOrderClosing</types>
+  </commandParameterType>
+  <parameterUseMode>Multiple</parameterUseMode>
   <representation>Auto</representation>
  </commands>
 </mdclass:Document>

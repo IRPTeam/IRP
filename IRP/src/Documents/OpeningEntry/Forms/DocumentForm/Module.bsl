@@ -103,6 +103,7 @@ Procedure SetVisibilityAvailability(Object, Form)
 	Form.Items.ReceiptFromConsignor.Visible = UseCommissionTrading;
 	
 	Form.Items.SalaryPayment.Visible              = FOServer.IsUseSalary();
+	Form.Items.EmployeeList.Visible                   = FOServer.IsUseSalary();
 	Form.Items.AdvanceFromRetailCustomers.Visible = FOServer.IsUseRetail();
 EndProcedure
 
@@ -433,6 +434,25 @@ EndProcedure
 &AtClient
 Procedure SalaryPaymentAfterDeleteRow(Item)
 	DocOpeningEntryClient.SalaryPaymentAfterDeleteRow(Object, ThisObject, Item);
+EndProcedure
+
+#EndRegion
+
+#Region EMPLOYEE_LIST
+
+&AtClient
+Procedure EmployeeListBeforeAddRow(Item, Cancel, Clone, Parent, IsFolder, Parameter)
+	DocOpeningEntryClient.EmployeeListBeforeAddRow(Object, ThisObject, Item, Cancel, Clone, Parent, IsFolder, Parameter);
+EndProcedure
+
+&AtClient
+Procedure EmployeeListAfterDeleteRow(Item)
+	DocOpeningEntryClient.EmployeeListAfterDeleteRow(Object, ThisObject, Item);
+EndProcedure
+
+&AtClient
+Procedure EmployeeListSalaryTypeOnChange(Item)
+	DocOpeningEntryClient.EmployeeListSalaryTypeOnChange(Object, ThisObject, Item);
 EndProcedure
 
 #EndRegion
@@ -1014,7 +1034,6 @@ Procedure EditCurrenciesFixedAssets(Command)
 	OpenForm("CommonForm.EditCurrencies", FormParameters, , , , , Notify, FormWindowOpeningMode.LockOwnerWindow);
 EndProcedure
 
-
 &AtClient
 Procedure EditCurrenciesCashInTransit(Command)
 	CurrentData = ThisObject.Items.CashInTransit.CurrentData;
@@ -1203,7 +1222,6 @@ Procedure ShowHiddenTables(Command)
 EndProcedure
 
 #EndRegion
-
 
 #Region PARTNER_TRADE_AGENT
 
@@ -1608,6 +1626,6 @@ MainTables = "AccountBalance, AdvanceFromCustomers, AdvanceToSuppliers,
 		|AccountReceivableByDocuments, AccountReceivableByAgreements,
 		|Inventory,
 		|ShipmentToTradeAgent, ReceiptFromConsignor,
-		|EmployeeCashAdvance, AdvanceFromRetailCustomers, SalaryPayment,
+		|EmployeeCashAdvance, AdvanceFromRetailCustomers, SalaryPayment, EmployeeList,
 		|AccountReceivableOther, AccountPayableOther, CashInTransit, FixedAssets";
 

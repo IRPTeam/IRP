@@ -17,18 +17,18 @@
   <value>Tür ap ar işlem temelleri</value>
  </synonym>
  <type>
-  <types>DocumentRef.CashTransferOrder</types>
-  <types>DocumentRef.EmployeeCashAdvance</types>
-  <types>DocumentRef.CreditNote</types>
-  <types>DocumentRef.DebitNote</types>
-  <types>DocumentRef.OpeningEntry</types>
-  <types>DocumentRef.PurchaseInvoice</types>
-  <types>DocumentRef.PurchaseReturn</types>
-  <types>DocumentRef.RetailReturnReceipt</types>
-  <types>DocumentRef.RetailSalesReceipt</types>
-  <types>DocumentRef.SalesInvoice</types>
   <types>DocumentRef.SalesReportFromTradeAgent</types>
-  <types>DocumentRef.SalesReportToConsignor</types>
+  <types>DocumentRef.CashTransferOrder</types>
+  <types>DocumentRef.PurchaseInvoice</types>
+  <types>DocumentRef.DebitNote</types>
+  <types>DocumentRef.CreditNote</types>
+  <types>DocumentRef.PurchaseReturn</types>
+  <types>DocumentRef.EmployeeCashAdvance</types>
+  <types>DocumentRef.OpeningEntry</types>
+  <types>DocumentRef.RetailReturnReceipt</types>
   <types>DocumentRef.SalesReturn</types>
+  <types>DocumentRef.RetailSalesReceipt</types>
+  <types>DocumentRef.SalesReportToConsignor</types>
+  <types>DocumentRef.SalesInvoice</types>
  </type>
 </mdclass:DefinedType>

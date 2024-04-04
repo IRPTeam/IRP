@@ -29,7 +29,6 @@
   <typesFilterValue xsi:type="core:ReferenceValue">
    <value>Catalog.AddAttributeAndPropertySets.Catalog_FixedAssets</value>
   </typesFilterValue>
-  <dataPathField>0</dataPathField>
   <multipleValuesUseField>Catalog.AddAttributeAndPropertySets.TabularSection.Properties.Attribute.Collection</multipleValuesUseField>
   <characteristicValues>InformationRegister.AddProperties</characteristicValues>
   <objectField>InformationRegister.AddProperties.Dimension.Object</objectField>
@@ -45,7 +44,6 @@
   <typesFilterValue xsi:type="core:ReferenceValue">
    <value>Catalog.AddAttributeAndPropertySets.Catalog_FixedAssets</value>
   </typesFilterValue>
-  <dataPathField>0</dataPathField>
   <multipleValuesUseField>Catalog.AddAttributeAndPropertySets.TabularSection.Attributes.Attribute.Collection</multipleValuesUseField>
   <characteristicValues>Catalog.FixedAssets.TabularSection.AddAttributes</characteristicValues>
   <objectField>Catalog.FixedAssets.TabularSection.AddAttributes.StandardAttribute.Ref</objectField>
@@ -57,6 +55,30 @@
  <createOnInput>Use</createOnInput>
  <dataLockControlMode>Managed</dataLockControlMode>
  <fullTextSearch>Use</fullTextSearch>
+ <objectPresentation>
+  <key>en</key>
+  <value>Fixed asset</value>
+ </objectPresentation>
+ <objectPresentation>
+  <key>ru</key>
+  <value>Основное средство</value>
+ </objectPresentation>
+ <objectPresentation>
+  <key>tr</key>
+  <value>Sabit kıymet</value>
+ </objectPresentation>
+ <listPresentation>
+  <key>en</key>
+  <value>Fixed assets</value>
+ </listPresentation>
+ <listPresentation>
+  <key>ru</key>
+  <value>Основные средства</value>
+ </listPresentation>
+ <listPresentation>
+  <key>tr</key>
+  <value>Sabit kıymetler</value>
+ </listPresentation>
  <levelCount>2</levelCount>
  <foldersOnTop>true</foldersOnTop>
  <codeLength>12</codeLength>

@@ -659,12 +659,12 @@ Scenario: _0260133 create advance payment from POS (Cash, Card)
 	* Check cash receipt
 		Given I open hyperlink "e1cib/list/Document.CashReceipt"
 		And I go to line in "List" table
-			| 'Amount'   | 'Transaction type'    |
-			| '400,00'   | 'Customer advance'    |
+			| 'Amount' | 'Transaction type'        |
+			| '400,00' | 'Retail customer advance' |
 		And I select current line in "List" table
 		Then the form attribute named "Company" became equal to "Main Company"
 		Then the form attribute named "CashAccount" became equal to "Pos cash account 1"
-		Then the form attribute named "TransactionType" became equal to "Customer advance"
+		Then the form attribute named "TransactionType" became equal to "Retail customer advance"
 		And "PaymentList" table became equal
 			| '#'   | 'Retail customer'   | 'Total amount'    |
 			| '1'   | 'Daniel Smith'      | '400,00'          |
@@ -674,12 +674,12 @@ Scenario: _0260133 create advance payment from POS (Cash, Card)
 	* Check bank receipt  
 		Given I open hyperlink "e1cib/list/Document.BankReceipt"
 		And I go to line in "List" table
-			| 'Amount'   | 'Transaction type'    |
-			| '100,00'   | 'Customer advance'    |
+			| 'Amount' | 'Transaction type'        |
+			| '100,00' | 'Retail customer advance' |
 		And I select current line in "List" table
 		Then the form attribute named "Company" became equal to "Main Company"
 		Then the form attribute named "Account" became equal to "Transit Main"
-		Then the form attribute named "TransactionType" became equal to "Customer advance"
+		Then the form attribute named "TransactionType" became equal to "Retail customer advance"
 		And "PaymentList" table became equal
 			| '#'   | 'Retail customer'   | 'Total amount'    |
 			| '1'   | 'Daniel Smith'      | '100,00'          |
@@ -740,7 +740,7 @@ Scenario: _0260137 return advance payment (cash)
 			| 'Description'     |
 			| 'Main Company'    |
 		And I select current line in "List" table
-		And I select "Customer advance" exact value from "Transaction type" drop-down list
+		And I select "Retail customer advance" exact value from "Transaction type" drop-down list
 		And I click Select button of "Cash account" field
 		And I go to line in "List" table
 			| 'Description'     |
@@ -787,7 +787,7 @@ Scenario: _0260138 return advance payment (card)
 			| 'Description'     |
 			| 'Main Company'    |
 		And I select current line in "List" table
-		And I select "Customer advance" exact value from "Transaction type" drop-down list
+		And I select "Retail customer advance" exact value from "Transaction type" drop-down list
 		And I click Select button of "Account" field
 		And I go to line in "List" table
 			| 'Description'          |

@@ -176,10 +176,10 @@
    <value>Basit değer</value>
   </synonym>
   <type>
-   <types>String</types>
-   <types>Number</types>
-   <types>Date</types>
    <types>Boolean</types>
+   <types>String</types>
+   <types>Date</types>
+   <types>Number</types>
    <numberQualifiers>
     <precision>15</precision>
     <scale>5</scale>

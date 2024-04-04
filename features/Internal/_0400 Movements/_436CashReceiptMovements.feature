@@ -996,16 +996,14 @@ Scenario: _043644 check Cash receipt movements by the Register "R3021 Cash in tr
 			| 'Number'    |
 			| '331'       |
 	* Check movements by the Register  "R3021 Cash in transit (incoming)" 
-		And I click "Registrations report" button
+		And I click "Registrations report info" button
 		And I select "R3021 Cash in transit (incoming)" exact value from "Register" drop-down list
 		And I click "Generate report" button
 		Then "ResultTable" spreadsheet document is equal
-			| 'Cash receipt 331 dated 03.07.2023 14:21:54'   | ''            | ''                    | ''          | ''             | ''             | ''             | ''                             | ''         | ''                     | ''      | ''                     |
-			| 'Document registrations records'               | ''            | ''                    | ''          | ''             | ''             | ''             | ''                             | ''         | ''                     | ''      | ''                     |
-			| 'Register  "R3021 Cash in transit (incoming)"' | ''            | ''                    | ''          | ''             | ''             | ''             | ''                             | ''         | ''                     | ''      | ''                     |
-			| ''                                             | 'Record type' | 'Period'              | 'Resources' | 'Dimensions'   | ''             | ''             | ''                             | ''         | ''                     | ''      | 'Attributes'           |
-			| ''                                             | ''            | ''                    | 'Amount'    | 'Company'      | 'Branch'       | 'Account'      | 'Multi currency movement type' | 'Currency' | 'Transaction currency' | 'Basis' | 'Deferred calculation' |
-			| ''                                             | 'Expense'     | '03.07.2023 14:21:54' | '171,2'     | 'Main Company' | 'Front office' | 'Cash desk №1' | 'Reporting currency'           | 'USD'      | 'TRY'                  | ''      | 'No'                   |
-			| ''                                             | 'Expense'     | '03.07.2023 14:21:54' | '1 000'     | 'Main Company' | 'Front office' | 'Cash desk №1' | 'Local currency'               | 'TRY'      | 'TRY'                  | ''      | 'No'                   |
-			| ''                                             | 'Expense'     | '03.07.2023 14:21:54' | '1 000'     | 'Main Company' | 'Front office' | 'Cash desk №1' | 'en description is empty'      | 'TRY'      | 'TRY'                  | ''      | 'No'                   |		
+			| 'Cash receipt 331 dated 03.07.2023 14:21:54'   | ''                    | ''           | ''             | ''             | ''             | ''                             | ''         | ''                     | ''      | ''       | ''                     |
+			| 'Register  "R3021 Cash in transit (incoming)"' | ''                    | ''           | ''             | ''             | ''             | ''                             | ''         | ''                     | ''      | ''       | ''                     |
+			| ''                                             | 'Period'              | 'RecordType' | 'Company'      | 'Branch'       | 'Account'      | 'Multi currency movement type' | 'Currency' | 'Transaction currency' | 'Basis' | 'Amount' | 'Deferred calculation' |
+			| ''                                             | '03.07.2023 14:21:54' | 'Expense'    | 'Main Company' | 'Front office' | 'Cash desk №1' | 'Local currency'               | 'TRY'      | 'TRY'                  | ''      | '1 000'  | 'No'                   |
+			| ''                                             | '03.07.2023 14:21:54' | 'Expense'    | 'Main Company' | 'Front office' | 'Cash desk №1' | 'Reporting currency'           | 'USD'      | 'TRY'                  | ''      | '171,2'  | 'No'                   |
+			| ''                                             | '03.07.2023 14:21:54' | 'Expense'    | 'Main Company' | 'Front office' | 'Cash desk №1' | 'en description is empty'      | 'TRY'      | 'TRY'                  | ''      | '1 000'  | 'No'                   |	
 	And I close all client application windows

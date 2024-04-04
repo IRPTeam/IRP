@@ -47,6 +47,7 @@
   <minValue xsi:type="core:UndefinedValue"/>
   <maxValue xsi:type="core:UndefinedValue"/>
   <fullTextSearch>Use</fullTextSearch>
+  <fillValue xsi:type="core:UndefinedValue"/>
  </resources>
  <dimensions uuid="758ae1f9-f92c-43f3-89c2-59b7c03295b4">
   <name>Company</name>
@@ -68,6 +69,7 @@
   <minValue xsi:type="core:UndefinedValue"/>
   <maxValue xsi:type="core:UndefinedValue"/>
   <fullTextSearch>Use</fullTextSearch>
+  <fillValue xsi:type="core:UndefinedValue"/>
  </dimensions>
  <dimensions uuid="8d27b879-a508-4e0c-a046-0d6d0d23f1b7">
   <name>Branch</name>
@@ -89,6 +91,31 @@
   <minValue xsi:type="core:UndefinedValue"/>
   <maxValue xsi:type="core:UndefinedValue"/>
   <fullTextSearch>Use</fullTextSearch>
+  <fillValue xsi:type="core:UndefinedValue"/>
+ </dimensions>
+ <dimensions uuid="616c2387-795b-4c41-bfff-978a9c6f5c02">
+  <name>ProfitLossCenter</name>
+  <synonym>
+   <key>en</key>
+   <value>Profit loss center</value>
+  </synonym>
+  <synonym>
+   <key>ru</key>
+   <value>Центр прибыли/убытков</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Kar/Zarar merkezi</value>
+  </synonym>
+  <type>
+   <types>CatalogRef.BusinessUnits</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <dataHistory>Use</dataHistory>
+  <fillValue xsi:type="core:UndefinedValue"/>
+  <mainFilter>true</mainFilter>
  </dimensions>
  <dimensions uuid="1aaa5688-ab8e-4f1b-8757-47d5b2bd0b08">
   <name>Document</name>
@@ -135,6 +162,7 @@
   <minValue xsi:type="core:UndefinedValue"/>
   <maxValue xsi:type="core:UndefinedValue"/>
   <fullTextSearch>Use</fullTextSearch>
+  <fillValue xsi:type="core:UndefinedValue"/>
  </dimensions>
  <dimensions uuid="6858164d-a9d8-4b2e-a041-2d9bd1fc5cf5">
   <name>LedgerType</name>
@@ -156,6 +184,7 @@
   <minValue xsi:type="core:UndefinedValue"/>
   <maxValue xsi:type="core:UndefinedValue"/>
   <fullTextSearch>Use</fullTextSearch>
+  <fillValue xsi:type="core:UndefinedValue"/>
  </dimensions>
  <dimensions uuid="2f5e49f0-0772-4c40-a642-345f4ae2c1a8">
   <name>Schedule</name>
@@ -177,6 +206,7 @@
   <minValue xsi:type="core:UndefinedValue"/>
   <maxValue xsi:type="core:UndefinedValue"/>
   <fullTextSearch>Use</fullTextSearch>
+  <fillValue xsi:type="core:UndefinedValue"/>
  </dimensions>
  <dimensions uuid="5a2eb75d-386a-423d-ac90-aede08f6e59f">
   <name>Currency</name>

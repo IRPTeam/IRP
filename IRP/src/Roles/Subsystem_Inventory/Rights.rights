@@ -4,20 +4,6 @@
 	<setForAttributesByDefault>true</setForAttributesByDefault>
 	<independentRightsOfChildObjects>false</independentRightsOfChildObjects>
 	<object>
-		<name>Subsystem.Inventory.Subsystem.PhysicalCount</name>
-		<right>
-			<name>View</name>
-			<value>true</value>
-		</right>
-	</object>
-	<object>
-		<name>Subsystem.Inventory</name>
-		<right>
-			<name>View</name>
-			<value>true</value>
-		</right>
-	</object>
-	<object>
 		<name>Subsystem.Inventory.Subsystem.Transfers</name>
 		<right>
 			<name>View</name>
@@ -32,14 +18,7 @@
 		</right>
 	</object>
 	<object>
-		<name>Subsystem.Inventory.Subsystem.Items</name>
-		<right>
-			<name>View</name>
-			<value>true</value>
-		</right>
-	</object>
-	<object>
-		<name>Subsystem.Inventory.Subsystem.CostCalculation</name>
+		<name>Subsystem.Inventory</name>
 		<right>
 			<name>View</name>
 			<value>true</value>
@@ -47,6 +26,27 @@
 	</object>
 	<object>
 		<name>Subsystem.Reports.Subsystem.Inventory</name>
+		<right>
+			<name>View</name>
+			<value>true</value>
+		</right>
+	</object>
+	<object>
+		<name>Subsystem.Inventory.Subsystem.Items</name>
+		<right>
+			<name>View</name>
+			<value>true</value>
+		</right>
+	</object>
+	<object>
+		<name>Subsystem.Inventory.Subsystem.PhysicalCount</name>
+		<right>
+			<name>View</name>
+			<value>true</value>
+		</right>
+	</object>
+	<object>
+		<name>Subsystem.Inventory.Subsystem.CostCalculation</name>
 		<right>
 			<name>View</name>
 			<value>true</value>

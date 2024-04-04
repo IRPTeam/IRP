@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mdclass:Document xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" xmlns:mdclassExtension="http://g5.1c.ru/v8/dt/metadata/mdclass/extension" uuid="f45dcffb-dac6-4449-a913-b686717dc390" extendedConfigurationObject="e91da949-718c-4b5d-bb88-389aca4d373f">
+  <producedTypes>
+    <objectType typeId="06624f4d-5421-4433-a191-f21acfabe7ba" valueTypeId="2ee52470-6158-496e-b4c5-ae7586678d6a"/>
+    <refType typeId="e5e781d3-313a-4faa-a716-b8c142869704" valueTypeId="66deacd3-549d-4d2f-84d7-51b399e06734"/>
+    <selectionType typeId="591d744a-f6db-4c88-a020-6ec199de8044" valueTypeId="3f19455b-d106-4120-80d8-5a8359349740"/>
+    <listType typeId="e726a085-330c-4634-9a58-271b0cc0e661" valueTypeId="7f5e89cb-861a-40f8-889a-5e15b779822e"/>
+    <managerType typeId="fb393591-1b44-409c-90e0-54cb9e3e8470" valueTypeId="196a4354-bbca-4aa2-8303-3c9ec482ee03"/>
+  </producedTypes>
+  <name>CreditNote</name>
+  <objectBelonging>Adopted</objectBelonging>
+  <extension xsi:type="mdclassExtension:DocumentExtension">
+    <extendedConfigurationObject>Checked</extendedConfigurationObject>
+  </extension>
+  <useStandardCommands>true</useStandardCommands>
+</mdclass:Document>

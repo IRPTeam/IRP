@@ -37,6 +37,10 @@
   <use>Use</use>
  </content>
  <content>
+  <metadata>Document.AdditionalDeduction</metadata>
+  <use>Use</use>
+ </content>
+ <content>
   <metadata>Document.RetailReturnReceipt</metadata>
   <use>Use</use>
  </content>
@@ -53,7 +57,15 @@
   <use>Use</use>
  </content>
  <content>
+  <metadata>Document.AdditionalAccrual</metadata>
+  <use>Use</use>
+ </content>
+ <content>
   <metadata>Document.SalesReportToConsignor</metadata>
+  <use>Use</use>
+ </content>
+ <content>
+  <metadata>Document.Payroll</metadata>
   <use>Use</use>
  </content>
  <content>
@@ -85,6 +97,14 @@
   <use>Use</use>
  </content>
  <content>
+  <metadata>Document.RetailReceiptCorrection</metadata>
+  <use>Use</use>
+ </content>
+ <content>
+  <metadata>Document.EmployeeCashAdvance</metadata>
+  <use>Use</use>
+ </content>
+ <content>
   <metadata>Document.PurchaseInvoice</metadata>
   <use>Use</use>
  </content>
@@ -102,26 +122,6 @@
  </content>
  <content>
   <metadata>Document.BankReceipt</metadata>
-  <use>Use</use>
- </content>
- <content>
-  <metadata>Document.EmployeeCashAdvance</metadata>
-  <use>Use</use>
- </content>
- <content>
-  <metadata>Document.Payroll</metadata>
-  <use>Use</use>
- </content>
- <content>
-  <metadata>Document.AdditionalAccrual</metadata>
-  <use>Use</use>
- </content>
- <content>
-  <metadata>Document.AdditionalDeduction</metadata>
-  <use>Use</use>
- </content>
- <content>
-  <metadata>Document.RetailReceiptCorrection</metadata>
   <use>Use</use>
  </content>
  <autoUse>DontUse</autoUse>

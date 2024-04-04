@@ -1065,6 +1065,21 @@
    <fullTextSearch>Use</fullTextSearch>
   </attributes>
  </tabularSections>
+ <templates uuid="69dcc984-de4c-4e4e-9b29-0a738c790339">
+  <name>GoodsReceiptPrint</name>
+  <synonym>
+   <key>en</key>
+   <value>Sales invoice</value>
+  </synonym>
+  <synonym>
+   <key>ru</key>
+   <value>Реализация товаров и услуг</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Satış faturası</value>
+  </synonym>
+ </templates>
  <commands uuid="1785d764-b574-4b4b-9d33-bb6b7dd137c1">
   <name>Generate</name>
   <synonym>
@@ -1085,6 +1100,27 @@
    <types>DocumentRef.PurchaseOrder</types>
    <types>DocumentRef.SalesReturn</types>
    <types>DocumentRef.InventoryTransfer</types>
+  </commandParameterType>
+  <parameterUseMode>Multiple</parameterUseMode>
+  <representation>Auto</representation>
+ </commands>
+ <commands uuid="39585951-c458-4e06-be52-32b64b8403c6">
+  <name>GoodsReceiptPrint</name>
+  <synonym>
+   <key>en</key>
+   <value>Goods receipt</value>
+  </synonym>
+  <synonym>
+   <key>ru</key>
+   <value>Приходная товарная накладная</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Satın alma irsaliyesi</value>
+  </synonym>
+  <group>CommandGroup.Print</group>
+  <commandParameterType>
+   <types>DocumentRef.GoodsReceipt</types>
   </commandParameterType>
   <parameterUseMode>Multiple</parameterUseMode>
   <representation>Auto</representation>

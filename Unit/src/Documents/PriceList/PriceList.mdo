@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mdclass:Document xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" xmlns:mdclassExtension="http://g5.1c.ru/v8/dt/metadata/mdclass/extension" uuid="1ad14049-478c-4bd4-a10c-8b6bdae91f52" extendedConfigurationObject="c1c1a133-eee5-43ed-a07a-da7f91422606">
+  <producedTypes>
+    <objectType typeId="4b67be9a-cdbf-4295-a9b6-ba941526e2b5" valueTypeId="4ce0f7c4-a9e1-4c30-a941-15c5ccab88a4"/>
+    <refType typeId="41698084-a6c6-4ec6-a54d-f342e212113e" valueTypeId="19425414-85a0-40bf-99aa-c345283a6267"/>
+    <selectionType typeId="fd0f0551-9806-48e7-ae11-e6cd11d652a7" valueTypeId="4c046b2c-e91f-4393-8df7-2c3ef746843b"/>
+    <listType typeId="87ca22f1-2ad9-4e08-a348-232e142aea3f" valueTypeId="aaf8ae6d-452b-4040-b3e3-3ae212d2555a"/>
+    <managerType typeId="824f030b-e247-45b0-9198-521296732a56" valueTypeId="173c524f-f9bd-45d7-aa9a-bcb568378508"/>
+  </producedTypes>
+  <name>PriceList</name>
+  <objectBelonging>Adopted</objectBelonging>
+  <extension xsi:type="mdclassExtension:DocumentExtension">
+    <extendedConfigurationObject>Checked</extendedConfigurationObject>
+  </extension>
+  <useStandardCommands>true</useStandardCommands>
+</mdclass:Document>

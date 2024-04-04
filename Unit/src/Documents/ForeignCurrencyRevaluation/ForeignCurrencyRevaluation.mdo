@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mdclass:Document xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" xmlns:mdclassExtension="http://g5.1c.ru/v8/dt/metadata/mdclass/extension" uuid="740e797c-a178-481e-92ad-9b9621a77cc6" extendedConfigurationObject="08d2c217-11ab-42a6-af14-67feb76ce242">
+  <producedTypes>
+    <objectType typeId="de335407-eace-4514-bf90-36e6659573dd" valueTypeId="a998eefe-cde1-49ac-b57f-f3e3839c1af7"/>
+    <refType typeId="fbcf5329-b8ba-47a7-9036-4557fbe94a56" valueTypeId="60b7fb9e-23d8-4eee-8a0d-0678c03b8f41"/>
+    <selectionType typeId="02a8dc90-fa5a-4be6-a6c1-3ce3b6866c03" valueTypeId="e141b9db-2b36-4de9-b843-1650ca293599"/>
+    <listType typeId="79c4c96b-fa09-44ef-bce5-4d7a5abfd2ce" valueTypeId="d3e4a176-326d-4659-b3e8-84278072f534"/>
+    <managerType typeId="670332fa-2478-461d-b9e5-f5fbf8761584" valueTypeId="832a1c56-9c82-403b-b9f6-a4616aee4f2d"/>
+  </producedTypes>
+  <name>ForeignCurrencyRevaluation</name>
+  <objectBelonging>Adopted</objectBelonging>
+  <extension xsi:type="mdclassExtension:DocumentExtension">
+    <extendedConfigurationObject>Checked</extendedConfigurationObject>
+  </extension>
+  <useStandardCommands>true</useStandardCommands>
+</mdclass:Document>

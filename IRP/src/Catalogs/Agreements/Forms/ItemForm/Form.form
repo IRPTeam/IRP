@@ -2105,12 +2105,12 @@
     <showInFooter>true</showInFooter>
     <extInfo xsi:type="form:InputFieldExtInfo">
      <handlers>
-      <event>StartChoice</event>
-      <name>TradeAgentFeeItemStartChoice</name>
-     </handlers>
-     <handlers>
       <event>EditTextChange</event>
       <name>TradeAgentFeeItemEditTextChange</name>
+     </handlers>
+     <handlers>
+      <event>StartChoice</event>
+      <name>TradeAgentFeeItemStartChoice</name>
      </handlers>
      <autoMaxWidth>true</autoMaxWidth>
      <autoMaxHeight>true</autoMaxHeight>

@@ -676,18 +676,30 @@
      </extInfo>
     </items>
     <items xsi:type="form:FormField">
-     <name>BusinessUnitSender</name>
+     <name>BranchSender</name>
      <id>1095</id>
+     <title>
+      <key>en</key>
+      <value>Branch (sender)</value>
+     </title>
+     <title>
+      <key>ru</key>
+      <value>Подразделение (отправитель) </value>
+     </title>
+     <title>
+      <key>tr</key>
+      <value>Branch (sender)</value>
+     </title>
      <visible>true</visible>
      <enabled>true</enabled>
      <userVisible>
       <common>true</common>
      </userVisible>
      <dataPath xsi:type="form:DataPath">
-      <segments>Object.BusinessUnitSender</segments>
+      <segments>Object.Branch</segments>
      </dataPath>
      <extendedTooltip>
-      <name>BusinessUnitSenderExtendedTooltip</name>
+      <name>BranchSenderExtendedTooltip</name>
       <id>1097</id>
       <visible>true</visible>
       <enabled>true</enabled>
@@ -702,8 +714,59 @@
       </extInfo>
      </extendedTooltip>
      <contextMenu>
-      <name>BusinessUnitSenderContextMenu</name>
+      <name>BranchSenderContextMenu</name>
       <id>1096</id>
+      <visible>true</visible>
+      <enabled>true</enabled>
+      <userVisible>
+       <common>true</common>
+      </userVisible>
+      <autoFill>true</autoFill>
+     </contextMenu>
+     <type>InputField</type>
+     <readOnly>true</readOnly>
+     <editMode>Enter</editMode>
+     <showInHeader>true</showInHeader>
+     <headerHorizontalAlign>Left</headerHorizontalAlign>
+     <showInFooter>true</showInFooter>
+     <extInfo xsi:type="form:InputFieldExtInfo">
+      <autoMaxWidth>true</autoMaxWidth>
+      <autoMaxHeight>true</autoMaxHeight>
+      <wrap>true</wrap>
+      <chooseType>true</chooseType>
+      <typeDomainEnabled>true</typeDomainEnabled>
+      <textEdit>true</textEdit>
+     </extInfo>
+    </items>
+    <items xsi:type="form:FormField">
+     <name>ProfitLossCenterSender</name>
+     <id>1100</id>
+     <visible>true</visible>
+     <enabled>true</enabled>
+     <userVisible>
+      <common>true</common>
+     </userVisible>
+     <dataPath xsi:type="form:DataPath">
+      <segments>Object.ProfitLossCenterSender</segments>
+     </dataPath>
+     <extendedTooltip>
+      <name>ProfitLossCenterSenderExtendedTooltip</name>
+      <id>1102</id>
+      <visible>true</visible>
+      <enabled>true</enabled>
+      <userVisible>
+       <common>true</common>
+      </userVisible>
+      <type>Label</type>
+      <autoMaxWidth>true</autoMaxWidth>
+      <autoMaxHeight>true</autoMaxHeight>
+      <extInfo xsi:type="form:LabelDecorationExtInfo">
+       <horizontalAlign>Left</horizontalAlign>
+      </extInfo>
+     </extendedTooltip>
+     <contextMenu>
+      <name>ProfitLossCenterSenderContextMenu</name>
+      <id>1101</id>
       <visible>true</visible>
       <enabled>true</enabled>
       <userVisible>
@@ -824,7 +887,7 @@
      </extInfo>
     </items>
     <items xsi:type="form:FormField">
-     <name>BusinessUnitReceiver</name>
+     <name>BranchReceiver</name>
      <id>1092</id>
      <visible>true</visible>
      <enabled>true</enabled>
@@ -832,10 +895,10 @@
       <common>true</common>
      </userVisible>
      <dataPath xsi:type="form:DataPath">
-      <segments>Object.BusinessUnitReceiver</segments>
+      <segments>Object.BranchReceiver</segments>
      </dataPath>
      <extendedTooltip>
-      <name>BusinessUnitReceiverExtendedTooltip</name>
+      <name>BranchReceiverExtendedTooltip</name>
       <id>1094</id>
       <visible>true</visible>
       <enabled>true</enabled>
@@ -850,8 +913,58 @@
       </extInfo>
      </extendedTooltip>
      <contextMenu>
-      <name>BusinessUnitReceiverContextMenu</name>
+      <name>BranchReceiverContextMenu</name>
       <id>1093</id>
+      <visible>true</visible>
+      <enabled>true</enabled>
+      <userVisible>
+       <common>true</common>
+      </userVisible>
+      <autoFill>true</autoFill>
+     </contextMenu>
+     <type>InputField</type>
+     <editMode>Enter</editMode>
+     <showInHeader>true</showInHeader>
+     <headerHorizontalAlign>Left</headerHorizontalAlign>
+     <showInFooter>true</showInFooter>
+     <extInfo xsi:type="form:InputFieldExtInfo">
+      <autoMaxWidth>true</autoMaxWidth>
+      <autoMaxHeight>true</autoMaxHeight>
+      <wrap>true</wrap>
+      <chooseType>true</chooseType>
+      <typeDomainEnabled>true</typeDomainEnabled>
+      <textEdit>true</textEdit>
+     </extInfo>
+    </items>
+    <items xsi:type="form:FormField">
+     <name>ProfitLossCenterReceiver</name>
+     <id>1103</id>
+     <visible>true</visible>
+     <enabled>true</enabled>
+     <userVisible>
+      <common>true</common>
+     </userVisible>
+     <dataPath xsi:type="form:DataPath">
+      <segments>Object.ProfitLossCenterReceiver</segments>
+     </dataPath>
+     <extendedTooltip>
+      <name>ProfitLossCenterReceiverExtendedTooltip</name>
+      <id>1105</id>
+      <visible>true</visible>
+      <enabled>true</enabled>
+      <userVisible>
+       <common>true</common>
+      </userVisible>
+      <type>Label</type>
+      <autoMaxWidth>true</autoMaxWidth>
+      <autoMaxHeight>true</autoMaxHeight>
+      <extInfo xsi:type="form:LabelDecorationExtInfo">
+       <horizontalAlign>Left</horizontalAlign>
+      </extInfo>
+     </extendedTooltip>
+     <contextMenu>
+      <name>ProfitLossCenterReceiverContextMenu</name>
+      <id>1104</id>
       <visible>true</visible>
       <enabled>true</enabled>
       <userVisible>
@@ -1402,6 +1515,36 @@
    <placementArea>UserCmds</placementArea>
    <representationInContextMenu>Auto</representationInContextMenu>
   </items>
+  <items xsi:type="form:Button">
+   <name>EditAccounting</name>
+   <id>1108</id>
+   <visible>true</visible>
+   <enabled>true</enabled>
+   <userVisible>
+    <common>true</common>
+   </userVisible>
+   <extendedTooltip>
+    <name>EditAccountingExtendedTooltip</name>
+    <id>1109</id>
+    <visible>true</visible>
+    <enabled>true</enabled>
+    <userVisible>
+     <common>true</common>
+    </userVisible>
+    <type>Label</type>
+    <autoMaxWidth>true</autoMaxWidth>
+    <autoMaxHeight>true</autoMaxHeight>
+    <extInfo xsi:type="form:LabelDecorationExtInfo">
+     <horizontalAlign>Left</horizontalAlign>
+    </extInfo>
+   </extendedTooltip>
+   <commandName>Form.Command.EditAccounting</commandName>
+   <representation>Auto</representation>
+   <autoMaxWidth>true</autoMaxWidth>
+   <autoMaxHeight>true</autoMaxHeight>
+   <placementArea>UserCmds</placementArea>
+   <representationInContextMenu>Auto</representationInContextMenu>
+  </items>
   <visible>true</visible>
   <enabled>true</enabled>
   <userVisible>
@@ -1502,6 +1645,56 @@
    <itemValueType/>
   </extInfo>
  </attributes>
+ <attributes>
+  <name>AccountingExtDimensions</name>
+  <title>
+   <key>en</key>
+   <value>Accounting ext dimensions</value>
+  </title>
+  <title>
+   <key>ru</key>
+   <value>Бухгалтерские субконто</value>
+  </title>
+  <title>
+   <key>tr</key>
+   <value>Muhasebe kırılımları</value>
+  </title>
+  <id>13</id>
+  <valueType>
+   <types>InformationRegisterRecordSet.T9051S_AccountingExtDimensions</types>
+  </valueType>
+  <view>
+   <common>true</common>
+  </view>
+  <edit>
+   <common>true</common>
+  </edit>
+ </attributes>
+ <attributes>
+  <name>AccountingRowAnalytics</name>
+  <title>
+   <key>en</key>
+   <value>Accounting row analytics</value>
+  </title>
+  <title>
+   <key>ru</key>
+   <value>Аналитика строки бух. проводки</value>
+  </title>
+  <title>
+   <key>tr</key>
+   <value>Muhasebe satır analitikleri</value>
+  </title>
+  <id>14</id>
+  <valueType>
+   <types>InformationRegisterRecordSet.T9050S_AccountingRowAnalytics</types>
+  </valueType>
+  <view>
+   <common>true</common>
+  </view>
+  <edit>
+   <common>true</common>
+  </edit>
+ </attributes>
  <formCommands>
   <name>ShowRowKey</name>
   <title>
@@ -1584,6 +1777,36 @@
     <name>EditCurrencies</name>
    </handler>
   </action>
+  <representation>Picture</representation>
+  <currentRowUse>Auto</currentRowUse>
+ </formCommands>
+ <formCommands>
+  <name>EditAccounting</name>
+  <title>
+   <key>en</key>
+   <value>Edit accounting</value>
+  </title>
+  <title>
+   <key>ru</key>
+   <value>Изменить бух. проводки</value>
+  </title>
+  <title>
+   <key>tr</key>
+   <value>Muhasebe değiştir</value>
+  </title>
+  <id>18</id>
+  <use>
+   <common>true</common>
+  </use>
+  <picture xsi:type="core:PictureRef">
+   <picture>StdPicture.ChartOfAccounts</picture>
+  </picture>
+  <action xsi:type="form:FormCommandHandlerContainer">
+   <handler>
+    <name>EditAccounting</name>
+   </handler>
+  </action>
+  <functionalOptions>FunctionalOption.UseAccounting</functionalOptions>
   <representation>Picture</representation>
   <currentRowUse>Auto</currentRowUse>
  </formCommands>

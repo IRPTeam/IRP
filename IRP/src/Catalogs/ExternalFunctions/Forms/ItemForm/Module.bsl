@@ -309,6 +309,10 @@ EndFunction
 
 #Region COMMANDS
 
+// Generated form command action by name.
+// 
+// Parameters:
+//  Command - CommandBarButton - Command
 &AtClient
 Procedure GeneratedFormCommandActionByName(Command) Export
 	ExternalCommandsClient.GeneratedFormCommandActionByName(Object, ThisObject, Command.Name);
@@ -320,11 +324,19 @@ Procedure GeneratedFormCommandActionByNameServer(CommandName) Export
 	ExternalCommandsServer.GeneratedFormCommandActionByName(Object, ThisObject, CommandName);
 EndProcedure
 
+// Internal command action.
+// 
+// Parameters:
+//  Command - CommandBarButton - Command
 &AtClient
 Procedure InternalCommandAction(Command) Export
 	InternalCommandsClient.RunCommandAction(Command, ThisObject, Object, Object.Ref);
 EndProcedure
 
+// Internal command action with server context.
+// 
+// Parameters:
+//  Command - CommandBarButton - Command
 &AtClient
 Procedure InternalCommandActionWithServerContext(Command) Export
 	InternalCommandActionWithServerContextAtServer(Command.Name);

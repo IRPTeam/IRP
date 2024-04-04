@@ -82,7 +82,7 @@ Function GetVisibleAttributesByTransactionType(TransactionType)
 	TransferFromPOS     = PredefinedValue("Enum.IncomingPaymentTransactionType.TransferFromPOS");
 	PaymentFromCustomerByPOS = PredefinedValue("Enum.IncomingPaymentTransactionType.PaymentFromCustomerByPOS");
 	ReceiptByCheque     = PredefinedValue("Enum.IncomingPaymentTransactionType.ReceiptByCheque");
-	CustomerAdvance     = PredefinedValue("Enum.IncomingPaymentTransactionType.CustomerAdvance");
+	RetailCustomerAdvance  = PredefinedValue("Enum.IncomingPaymentTransactionType.RetailCustomerAdvance");
 	EmployeeCashAdvance = PredefinedValue("Enum.IncomingPaymentTransactionType.EmployeeCashAdvance");
 	OtherIncome         = PredefinedValue("Enum.IncomingPaymentTransactionType.OtherIncome");
 	OtherPartner        = PredefinedValue("Enum.IncomingPaymentTransactionType.OtherPartner");
@@ -164,13 +164,15 @@ Function GetVisibleAttributesByTransactionType(TransactionType)
 	ElsIf TransactionType = ReceiptByCheque Then
 		StrByType = "
 		|PaymentList.PlaningTransactionBasis";
-	ElsIf TransactionType = CustomerAdvance Then
+	ElsIf TransactionType = RetailCustomerAdvance Then
 		StrByType = "
 		|PaymentList.RetailCustomer,
 		|PaymentList.PaymentType,
 		|PaymentList.PaymentTerminal,
 		|PaymentList.BankTerm,
-		|PaymentList.Order";
+		|PaymentList.Order,
+		|PaymentList.CommissionPercent,
+		|PaymentList.Commission";
 	ElsIf TransactionType = EmployeeCashAdvance Then
 		StrByType = "
 		|PaymentList.Partner,
@@ -236,7 +238,12 @@ Procedure SetVisibilityAvailability(Object, Form)
 	Form.Items.EditAccounting.Enabled = Not Form.ReadOnly;
 	Form.Items.PaymentListPaymentByDocuments.Enabled = Not Form.ReadOnly;
 
-	Form.Items.PaymentListPaymentByDocuments.Visible = IsPaymentFormCustomer;	
+	Form.Items.PaymentListPaymentByDocuments.Visible = IsPaymentFormCustomer;
+	
+	Form.Items.ExpenseType.Visible  = IsCurrencyExchange;
+	Form.Items.LossCenter.Visible   = IsCurrencyExchange;
+	Form.Items.RevenueType.Visible  = IsCurrencyExchange;
+	Form.Items.ProfitCenter.Visible = IsCurrencyExchange;
 EndProcedure
 
 &AtClient

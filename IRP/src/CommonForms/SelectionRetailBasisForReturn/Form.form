@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<form:Form xmlns:core="http://g5.1c.ru/v8/dt/mcore" xmlns:core_1="http://g5.1c.ru/v8/dt/data-composition-system/core" xmlns:form="http://g5.1c.ru/v8/dt/form" xmlns:schema="http://g5.1c.ru/v8/dt/data-composition-system/schema" xmlns:settings="http://g5.1c.ru/v8/dt/data-composition-system/settings" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+<form:Form xmlns:core="http://g5.1c.ru/v8/dt/mcore" xmlns:form="http://g5.1c.ru/v8/dt/form" xmlns:schema="http://g5.1c.ru/v8/dt/data-composition-system/schema" xmlns:settings="http://g5.1c.ru/v8/dt/data-composition-system/settings" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
  <items xsi:type="form:FormGroup">
   <name>Header</name>
   <id>1</id>
@@ -893,19 +893,8 @@ HAVING
       <parameter>
        <value>Format</value>
       </parameter>
-      <values xsi:type="core_1:LocalString">
-       <content>
-        <key>en</key>
-        <value>ND=15; NFD=2; NZ=</value>
-       </content>
-       <content>
-        <key>ru</key>
-        <value>ND=15; NFD=2; NZ=</value>
-       </content>
-       <content>
-        <key>tr</key>
-        <value>ND=15; NFD=2; NZ=</value>
-       </content>
+      <values xsi:type="core:StringValue">
+       <value>ND=15; NFD=2; NZ=</value>
       </values>
      </items>
     </appearance>
@@ -932,6 +921,7 @@ HAVING
      <types>Date</types>
      <dateQualifiers/>
     </valueType>
+    <values xsi:type="core:UndefinedValue"/>
    </parameters>
    <parameters>
     <name>EndOfPeriod</name>
@@ -955,6 +945,7 @@ HAVING
      <types>Date</types>
      <dateQualifiers/>
     </valueType>
+    <values xsi:type="core:UndefinedValue"/>
    </parameters>
    <keyField>RetailSalesReceipt</keyField>
   </extInfo>

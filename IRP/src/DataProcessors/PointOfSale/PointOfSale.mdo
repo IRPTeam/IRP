@@ -292,4 +292,21 @@
   <usePurposes>PersonalComputer</usePurposes>
   <usePurposes>MobileDevice</usePurposes>
  </forms>
+ <forms uuid="24f15b61-9328-41d6-85d0-35e1cc0faa0c">
+  <name>CancellationConfirmation</name>
+  <synonym>
+   <key>en</key>
+   <value>Cancellation confirmation</value>
+  </synonym>
+  <synonym>
+   <key>ru</key>
+   <value>Подтверждение отмены</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Cancellation confirmation</value>
+  </synonym>
+  <usePurposes>PersonalComputer</usePurposes>
+  <usePurposes>MobileDevice</usePurposes>
+ </forms>
 </mdclass:DataProcessor>

@@ -457,7 +457,7 @@ Function GetDocumentTable_SalesOrder_CustomerAdvance(ArrayOfBasisDocuments, Paym
 	Query.Text = 
 	"SELECT
 	|	""SalesOrder"" AS BasedOn,
-	|	VALUE(Enum.IncomingPaymentTransactionType.CustomerAdvance) AS TransactionType,
+	|	VALUE(Enum.IncomingPaymentTransactionType.RetailCustomerAdvance) AS TransactionType,
 	|	R3026B_SalesOrdersCustomerAdvance.Company,
 	|	R3026B_SalesOrdersCustomerAdvance.Branch,
 	|	R3026B_SalesOrdersCustomerAdvance.Currency,

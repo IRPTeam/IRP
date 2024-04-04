@@ -352,7 +352,6 @@ EndProcedure
 
 #EndRegion
 
-
 #Region PRICE
 
 &AtClient

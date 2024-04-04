@@ -30,7 +30,6 @@
   <typesFilterValue xsi:type="core:ReferenceValue">
    <value>Catalog.AddAttributeAndPropertySets.Catalog_VehicleTypes</value>
   </typesFilterValue>
-  <dataPathField>0</dataPathField>
   <multipleValuesUseField>Catalog.AddAttributeAndPropertySets.TabularSection.Properties.Attribute.Collection</multipleValuesUseField>
   <characteristicValues>InformationRegister.AddProperties</characteristicValues>
   <objectField>InformationRegister.AddProperties.Dimension.Object</objectField>
@@ -46,7 +45,6 @@
   <typesFilterValue xsi:type="core:ReferenceValue">
    <value>Catalog.AddAttributeAndPropertySets.Catalog_VehicleTypes</value>
   </typesFilterValue>
-  <dataPathField>0</dataPathField>
   <multipleValuesUseField>Catalog.AddAttributeAndPropertySets.TabularSection.Attributes.Attribute.Collection</multipleValuesUseField>
   <characteristicValues>Catalog.VehicleTypes.TabularSection.AddAttributes</characteristicValues>
   <objectField>Catalog.VehicleTypes.TabularSection.AddAttributes.StandardAttribute.Ref</objectField>

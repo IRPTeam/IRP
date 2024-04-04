@@ -26,6 +26,30 @@
  <createOnInput>Use</createOnInput>
  <dataLockControlMode>Managed</dataLockControlMode>
  <fullTextSearch>Use</fullTextSearch>
+ <objectPresentation>
+  <key>en</key>
+  <value>Access key</value>
+ </objectPresentation>
+ <objectPresentation>
+  <key>ru</key>
+  <value>Ключ доступа</value>
+ </objectPresentation>
+ <objectPresentation>
+  <key>tr</key>
+  <value>Erişim anahtarı</value>
+ </objectPresentation>
+ <listPresentation>
+  <key>en</key>
+  <value>Access key</value>
+ </listPresentation>
+ <listPresentation>
+  <key>ru</key>
+  <value>Ключ доступа</value>
+ </listPresentation>
+ <listPresentation>
+  <key>tr</key>
+  <value>Erişim anahtarı</value>
+ </listPresentation>
  <levelCount>2</levelCount>
  <foldersOnTop>true</foldersOnTop>
  <descriptionLength>50</descriptionLength>

@@ -704,12 +704,12 @@
       <showInFooter>true</showInFooter>
       <extInfo xsi:type="form:InputFieldExtInfo">
        <handlers>
-        <event>StartChoice</event>
-        <name>SendPartnerStartChoice</name>
-       </handlers>
-       <handlers>
         <event>EditTextChange</event>
         <name>SendPartnerEditTextChange</name>
+       </handlers>
+       <handlers>
+        <event>StartChoice</event>
+        <name>SendPartnerStartChoice</name>
        </handlers>
        <autoMaxWidth>true</autoMaxWidth>
        <autoMaxHeight>true</autoMaxHeight>
@@ -766,12 +766,12 @@
       <showInFooter>true</showInFooter>
       <extInfo xsi:type="form:InputFieldExtInfo">
        <handlers>
-        <event>StartChoice</event>
-        <name>SendAgreementStartChoice</name>
-       </handlers>
-       <handlers>
         <event>EditTextChange</event>
         <name>SendAgreementEditTextChange</name>
+       </handlers>
+       <handlers>
+        <event>StartChoice</event>
+        <name>SendAgreementStartChoice</name>
        </handlers>
        <autoMaxWidth>true</autoMaxWidth>
        <autoMaxHeight>true</autoMaxHeight>
@@ -828,12 +828,12 @@
       <showInFooter>true</showInFooter>
       <extInfo xsi:type="form:InputFieldExtInfo">
        <handlers>
-        <event>StartChoice</event>
-        <name>SendLegalNameStartChoice</name>
-       </handlers>
-       <handlers>
         <event>EditTextChange</event>
         <name>SendLegalNameEditTextChange</name>
+       </handlers>
+       <handlers>
+        <event>StartChoice</event>
+        <name>SendLegalNameStartChoice</name>
        </handlers>
        <autoMaxWidth>true</autoMaxWidth>
        <autoMaxHeight>true</autoMaxHeight>
@@ -1302,12 +1302,12 @@
       <showInFooter>true</showInFooter>
       <extInfo xsi:type="form:InputFieldExtInfo">
        <handlers>
-        <event>StartChoice</event>
-        <name>ReceivePartnerStartChoice</name>
-       </handlers>
-       <handlers>
         <event>EditTextChange</event>
         <name>ReceivePartnerEditTextChange</name>
+       </handlers>
+       <handlers>
+        <event>StartChoice</event>
+        <name>ReceivePartnerStartChoice</name>
        </handlers>
        <autoMaxWidth>true</autoMaxWidth>
        <autoMaxHeight>true</autoMaxHeight>
@@ -1364,12 +1364,12 @@
       <showInFooter>true</showInFooter>
       <extInfo xsi:type="form:InputFieldExtInfo">
        <handlers>
-        <event>StartChoice</event>
-        <name>ReceiveAgreementStartChoice</name>
-       </handlers>
-       <handlers>
         <event>EditTextChange</event>
         <name>ReceiveAgreementEditTextChange</name>
+       </handlers>
+       <handlers>
+        <event>StartChoice</event>
+        <name>ReceiveAgreementStartChoice</name>
        </handlers>
        <autoMaxWidth>true</autoMaxWidth>
        <autoMaxHeight>true</autoMaxHeight>
@@ -1426,12 +1426,12 @@
       <showInFooter>true</showInFooter>
       <extInfo xsi:type="form:InputFieldExtInfo">
        <handlers>
-        <event>StartChoice</event>
-        <name>ReceiveLegalNameStartChoice</name>
-       </handlers>
-       <handlers>
         <event>EditTextChange</event>
         <name>ReceiveLegalNameEditTextChange</name>
+       </handlers>
+       <handlers>
+        <event>StartChoice</event>
+        <name>ReceiveLegalNameStartChoice</name>
        </handlers>
        <autoMaxWidth>true</autoMaxWidth>
        <autoMaxHeight>true</autoMaxHeight>
@@ -2495,6 +2495,10 @@
  </commandInterface>
  <extInfo xsi:type="form:DocumentFormExtInfo">
   <handlers>
+   <event>AfterWrite</event>
+   <name>AfterWrite</name>
+  </handlers>
+  <handlers>
    <event>AfterWriteAtServer</event>
    <name>AfterWriteAtServer</name>
   </handlers>
@@ -2505,10 +2509,6 @@
   <handlers>
    <event>BeforeWriteAtServer</event>
    <name>BeforeWriteAtServer</name>
-  </handlers>
-  <handlers>
-   <event>AfterWrite</event>
-   <name>AfterWrite</name>
   </handlers>
   <repostOnWrite>true</repostOnWrite>
  </extInfo>

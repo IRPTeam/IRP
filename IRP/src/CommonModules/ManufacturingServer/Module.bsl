@@ -24,6 +24,7 @@ EndFunction
 
 Function FillBillOfMaterialsTable(Parameters) Export
 	Query = New Query();
+	//@skip-check bsl-ql-hub
 	Query.Text =
 	"SELECT
 	|	&Key AS Key,
@@ -116,6 +117,7 @@ EndFunction
 
 Function FillBillOfMaterialsTableCorrection(Parameters) Export
 	Query = New Query();
+	//@skip-check bsl-ql-hub
 	Query.Text = 
 		"SELECT
 		|	&Key AS Key,

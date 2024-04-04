@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mdclass:Document xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" xmlns:mdclassExtension="http://g5.1c.ru/v8/dt/metadata/mdclass/extension" uuid="b464b34d-984b-4f8d-9c3f-511beb1c4ad7" extendedConfigurationObject="42ccfda9-7dab-478f-af99-b042ab7f0479">
+  <producedTypes>
+    <objectType typeId="8252f22f-e6e9-4a8b-82a7-73fefa63f552" valueTypeId="d39a5837-c608-47fb-8a6e-c08ae434b1bd"/>
+    <refType typeId="515d62c9-bb2a-4de4-b09f-0e19e5da0c5b" valueTypeId="c98211f5-db25-4a5c-925a-8f1eff43aa44"/>
+    <selectionType typeId="53f2f3ee-f838-450d-91da-94dc3931b786" valueTypeId="4697dfe3-ce8f-411e-ae37-d24f9fff7a3e"/>
+    <listType typeId="39a2b477-032d-490d-bada-4657626efb69" valueTypeId="deabbf75-6a67-4173-b088-f1e8826ab2c8"/>
+    <managerType typeId="53c0a87a-d8ee-48a6-896f-3b07f9b78c76" valueTypeId="62061d71-4f39-46e7-8854-bbce0a79fb62"/>
+  </producedTypes>
+  <name>CalculationMovementCosts</name>
+  <objectBelonging>Adopted</objectBelonging>
+  <extension xsi:type="mdclassExtension:DocumentExtension">
+    <extendedConfigurationObject>Checked</extendedConfigurationObject>
+  </extension>
+  <useStandardCommands>true</useStandardCommands>
+</mdclass:Document>

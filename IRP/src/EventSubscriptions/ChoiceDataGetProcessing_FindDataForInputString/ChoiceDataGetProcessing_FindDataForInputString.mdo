@@ -14,8 +14,8 @@
   <value>Veri seç veri işleme satır başı girişi için veri bulma</value>
  </synonym>
  <source>
-  <types>CatalogManager</types>
   <types>ChartOfCharacteristicTypesManager</types>
+  <types>CatalogManager</types>
   <types>ChartOfAccountsManager.Basic</types>
  </source>
  <event>ChoiceDataGetProcessing</event>

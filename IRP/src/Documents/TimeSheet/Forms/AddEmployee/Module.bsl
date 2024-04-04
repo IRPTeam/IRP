@@ -94,4 +94,3 @@ Procedure CloseWithResult()
 	Close(New Structure("ArrayOfEmployee", ArrayOfEmployee));
 EndProcedure
 
-

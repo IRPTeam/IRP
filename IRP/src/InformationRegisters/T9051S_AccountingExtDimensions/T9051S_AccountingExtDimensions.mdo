@@ -24,6 +24,30 @@
  </synonym>
  <editType>InDialog</editType>
  <dataLockControlMode>Managed</dataLockControlMode>
+ <recordPresentation>
+  <key>en</key>
+  <value>T9051 Accounting ext dimensions</value>
+ </recordPresentation>
+ <recordPresentation>
+  <key>ru</key>
+  <value>T9051 Бухгалтерские внешние измерения</value>
+ </recordPresentation>
+ <recordPresentation>
+  <key>tr</key>
+  <value>T9051 Muhasebe ek boyutlar</value>
+ </recordPresentation>
+ <listPresentation>
+  <key>en</key>
+  <value>T9051 Accounting ext dimensions</value>
+ </listPresentation>
+ <listPresentation>
+  <key>ru</key>
+  <value>T9051 Бухгалтерские внешние измерения</value>
+ </listPresentation>
+ <listPresentation>
+  <key>tr</key>
+  <value>T9051 Muhasebe ek boyutlar</value>
+ </listPresentation>
  <dimensions uuid="c5ed342b-b856-4b42-a710-f4ca4d89a3fe">
   <name>Document</name>
   <synonym>
@@ -70,6 +94,9 @@
   <maxValue xsi:type="core:UndefinedValue"/>
   <fullTextSearch>Use</fullTextSearch>
   <dataHistory>Use</dataHistory>
+  <fillValue xsi:type="core:StringValue">
+   <value/>
+  </fillValue>
  </dimensions>
  <dimensions uuid="e411fa44-d986-4097-953b-0f41b6747474">
   <name>Operation</name>
@@ -92,6 +119,7 @@
   <maxValue xsi:type="core:UndefinedValue"/>
   <fullTextSearch>Use</fullTextSearch>
   <dataHistory>Use</dataHistory>
+  <fillValue xsi:type="core:UndefinedValue"/>
  </dimensions>
  <dimensions uuid="e0d5ca55-dac0-4d3c-8bf9-a7e952234d15">
   <name>LedgerType</name>
@@ -114,6 +142,7 @@
   <maxValue xsi:type="core:UndefinedValue"/>
   <fullTextSearch>Use</fullTextSearch>
   <dataHistory>Use</dataHistory>
+  <fillValue xsi:type="core:UndefinedValue"/>
  </dimensions>
  <dimensions uuid="c3e7e17b-e415-444c-b0e0-823b067d668c">
   <name>AnalyticType</name>
@@ -136,6 +165,7 @@
   <maxValue xsi:type="core:UndefinedValue"/>
   <fullTextSearch>Use</fullTextSearch>
   <dataHistory>Use</dataHistory>
+  <fillValue xsi:type="core:UndefinedValue"/>
  </dimensions>
  <dimensions uuid="d2184163-8a7f-4f00-b608-63a3414c0568">
   <name>ExtDimensionType</name>
@@ -159,6 +189,7 @@
   <indexing>Index</indexing>
   <fullTextSearch>Use</fullTextSearch>
   <dataHistory>Use</dataHistory>
+  <fillValue xsi:type="core:UndefinedValue"/>
  </dimensions>
  <dimensions uuid="9e7f5eda-ec7d-4a0a-8ccf-273a25b77dda">
   <name>ExtDimension</name>
@@ -182,6 +213,7 @@
   <indexing>Index</indexing>
   <fullTextSearch>Use</fullTextSearch>
   <dataHistory>Use</dataHistory>
+  <fillValue xsi:type="core:UndefinedValue"/>
  </dimensions>
  <dimensions uuid="784a3bdd-24c3-415c-9a6e-f457c8a740e8">
   <name>UUID</name>

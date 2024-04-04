@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mdclass:Catalog xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:core="http://g5.1c.ru/v8/dt/mcore" xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="6a7999cf-4363-4940-af07-b203e058bb2f">
+  <producedTypes>
+    <objectType typeId="8a0d4c22-6b8d-4c86-9957-3e9e3b6ff27d" valueTypeId="e62556a7-daa4-4873-806f-34f2862f4f86"/>
+    <refType typeId="6e496735-4289-4f1e-b31e-5afc5bd3e4cf" valueTypeId="8e68c76a-afc8-4722-81a8-76f134d4bdda"/>
+    <selectionType typeId="cade0553-cce1-4e84-98f6-466e321a594f" valueTypeId="e97d0787-b511-4246-a728-a2788937911d"/>
+    <listType typeId="9642b0b8-9dba-4a94-839b-ca892787c74f" valueTypeId="6d52262f-9f10-4a00-8e07-2c0eeb1e21b7"/>
+    <managerType typeId="4e914f54-f550-4325-b26e-518891dd7518" valueTypeId="4f28a9db-7cd2-44d0-9385-aef11e1ceaba"/>
+  </producedTypes>
+  <name>Unit_ErrorTypes</name>
+  <synonym>
+    <key>en</key>
+    <value>Error types</value>
+  </synonym>
+  <useStandardCommands>true</useStandardCommands>
+  <inputByString>Catalog.Unit_ErrorTypes.StandardAttribute.Description</inputByString>
+  <fullTextSearchOnInputByString>DontUse</fullTextSearchOnInputByString>
+  <createOnInput>Use</createOnInput>
+  <fullTextSearch>Use</fullTextSearch>
+  <objectPresentation>
+    <key>en</key>
+    <value>Error type</value>
+  </objectPresentation>
+  <levelCount>2</levelCount>
+  <foldersOnTop>true</foldersOnTop>
+  <descriptionLength>150</descriptionLength>
+  <codeType>String</codeType>
+  <codeAllowedLength>Variable</codeAllowedLength>
+  <defaultPresentation>AsDescription</defaultPresentation>
+  <predefined>
+    <items id="65eb5204-4e91-48a8-a1c9-e2efd22622ac">
+      <name>ErrorOnFiscalWhenGetXMLResponse</name>
+      <description>Error on fiscal when get XML response</description>
+      <code xsi:type="core:StringValue">
+        <value></value>
+      </code>
+    </items>
+  </predefined>
+  <editType>InDialog</editType>
+  <choiceMode>BothWays</choiceMode>
+  <attributes uuid="a67500f6-9d88-4229-99b7-b4b785b9c5d8">
+    <name>Boolean</name>
+    <synonym>
+      <key>en</key>
+      <value>Boolean</value>
+    </synonym>
+    <type>
+      <types>Boolean</types>
+    </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <fillValue xsi:type="core:UndefinedValue"/>
+    <fullTextSearch>Use</fullTextSearch>
+    <dataHistory>Use</dataHistory>
+  </attributes>
+</mdclass:Catalog>

@@ -310,7 +310,7 @@
     <common>true</common>
    </userVisible>
    <dataPath xsi:type="form:DataPath">
-    <segments>List.Variant</segments>
+    <segments>List.LedgerTypeVariant</segments>
    </dataPath>
    <extendedTooltip>
     <name>VariantExtendedTooltip</name>

@@ -1259,6 +1259,21 @@
    <fullTextSearch>Use</fullTextSearch>
   </attributes>
  </tabularSections>
+ <templates uuid="f8ca9855-f92f-4810-a7fd-1bd56c053064">
+  <name>StockAdjustmentAsSurplusPrint</name>
+  <synonym>
+   <key>en</key>
+   <value>Stock adjustment as surplus</value>
+  </synonym>
+  <synonym>
+   <key>ru</key>
+   <value>Оприходование товаров</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Stok sayım girişi</value>
+  </synonym>
+ </templates>
  <commands uuid="dcd5dc59-8ace-4a92-b575-3245c8435c5d">
   <name>Generate</name>
   <synonym>
@@ -1276,6 +1291,27 @@
   <group>FormCommandBarCreateBasedOn</group>
   <commandParameterType>
    <types>DocumentRef.PhysicalInventory</types>
+  </commandParameterType>
+  <parameterUseMode>Multiple</parameterUseMode>
+  <representation>Auto</representation>
+ </commands>
+ <commands uuid="60a522a0-f97b-403f-ade1-fdb921100586">
+  <name>StockAdjustmentAsSurplusPrint</name>
+  <synonym>
+   <key>en</key>
+   <value>Stock adjustment as surplus</value>
+  </synonym>
+  <synonym>
+   <key>ru</key>
+   <value>Оприходование товаров</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Stok sayım girişi</value>
+  </synonym>
+  <group>CommandGroup.Print</group>
+  <commandParameterType>
+   <types>DocumentRef.StockAdjustmentAsSurplus</types>
   </commandParameterType>
   <parameterUseMode>Multiple</parameterUseMode>
   <representation>Auto</representation>

@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mdclass:Document xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" xmlns:mdclassExtension="http://g5.1c.ru/v8/dt/metadata/mdclass/extension" uuid="7d14e9d8-880e-423e-bd2a-c4347b2cbe57" extendedConfigurationObject="6d1e0b54-4583-4cb2-8ec3-e6ceddaec77a">
+  <producedTypes>
+    <objectType typeId="5fef03f1-52c6-4b2c-bc3f-ee4669040c2a" valueTypeId="d0661e25-55b1-4e98-ba58-75c427dc5e9e"/>
+    <refType typeId="bf2b9e59-6499-4750-9497-ecfcbe370c00" valueTypeId="9848b84c-0a51-4a94-8379-c4e01c5b5039"/>
+    <selectionType typeId="442bcd27-c5e1-4d9d-a367-2e06ac4a9817" valueTypeId="3cb41803-94e7-4c09-9148-46239526e33c"/>
+    <listType typeId="613b539b-8b7a-42c8-9983-c787912ca97c" valueTypeId="3cdedfcd-9aba-4132-ac0b-95d7626e36e3"/>
+    <managerType typeId="b22c3023-85e5-4567-9fb9-81a8bb44f6c7" valueTypeId="0690ea07-5ccd-41bc-9785-598a03c3f8fa"/>
+  </producedTypes>
+  <name>CommissioningOfFixedAsset</name>
+  <objectBelonging>Adopted</objectBelonging>
+  <extension xsi:type="mdclassExtension:DocumentExtension">
+    <extendedConfigurationObject>Checked</extendedConfigurationObject>
+  </extension>
+  <useStandardCommands>true</useStandardCommands>
+</mdclass:Document>

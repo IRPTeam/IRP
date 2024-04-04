@@ -18,6 +18,7 @@ Scenario: 960001 preparation (access rights system registers)
 	When set True value to the constant Use consolidated retail sales
 	When set True value to the constant Use object access
 	When set True value to the constant Use salary
+	When set True value to the constant Use fixed assets
 	* Add VA extension
 		Given I open hyperlink "e1cib/list/Catalog.Extensions"
 		If "List" table does not contain lines Then
@@ -495,6 +496,9 @@ Scenario: 963040 try post BankPayment (LimitedAccess)
 		| 'Number' | 'Date'                 |
 		| '82'     | '31.10.2023 11:45:20'  |
 	And I select current line in "List" table
+	And I activate "Partner term" field in "PaymentList" table
+	And I select current line in "PaymentList" table
+	And I select "Test partner term" from "Partner term" drop-down list by string in "PaymentList" table	
 	And I click "Post and close" button
 	Then user message window does not contain messages
 	Then I wait "Bank payment * dated * *" window closing in "5" seconds
@@ -506,6 +510,9 @@ Scenario: 963040 try post BankReceipt (LimitedAccess)
 		| 'Number' | 'Date'                 |
 		| '82'     | '31.10.2023 11:46:28'  |
 	And I select current line in "List" table
+	And I activate "Partner term" field in "PaymentList" table
+	And I select current line in "PaymentList" table
+	And I select "Test partner term (customer)" from "Partner term" drop-down list by string in "PaymentList" table	
 	And I click "Post and close" button
 	Then user message window does not contain messages
 	Then I wait "Bank receipt * dated * *" window closing in "5" seconds
@@ -528,6 +535,9 @@ Scenario: 963042 try post CashPayment (LimitedAccess)
 		| 'Number' | 'Date'                 |
 		| '28'     | '31.10.2023 11:46:55'  |
 	And I select current line in "List" table
+	And I activate "Partner term" field in "PaymentList" table
+	And I select current line in "PaymentList" table
+	And I select "Test partner term" from "Partner term" drop-down list by string in "PaymentList" table	
 	And I click "Post and close" button
 	Then user message window does not contain messages
 	Then I wait "Cash payment * dated * *" window closing in "5" seconds
@@ -539,6 +549,9 @@ Scenario: 963043 try post CashReceipt (LimitedAccess)
 		| 'Number' | 'Date'                 |
 		| '28'     | '31.10.2023 11:47:16'  |
 	And I select current line in "List" table
+	And I activate "Partner term" field in "PaymentList" table
+	And I select current line in "PaymentList" table
+	And I select "Test partner term (customer)" from "Partner term" drop-down list by string in "PaymentList" table	
 	And I click "Post and close" button
 	Then user message window does not contain messages
 	Then I wait "Cash receipt * dated * *" window closing in "5" seconds

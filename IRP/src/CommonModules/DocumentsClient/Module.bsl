@@ -1092,7 +1092,8 @@ Function GetFormItemNames()
 				|ItemListConsignor, isControlCodeString,
 				|AccountPayableOtherKey, AccountReceivableOtherKey, CashInTransitKey, CashInTransitIsFixedCurrency,
 				|FixedAssetsKey,
-				|AccrualListTotalVacationDays, AccrualListPaidVacationDays, AccrualListTotalSickLeaveDays ,AccrualListPaidSickLeaveDays";
+				|AccrualListTotalVacationDays, AccrualListPaidVacationDays, AccrualListTotalSickLeaveDays ,AccrualListPaidSickLeaveDays,
+				|EmployeeListKey";
 	Return ItemNames;
 EndFunction	
 
@@ -1447,7 +1448,6 @@ Procedure PickupItemsEnd(ScanData, AddInfo) Export
 	If Not ValueIsFilled(ScanData) Or Not AddInfo.Property("Object") Or Not AddInfo.Property("Form") Then
 		Return;
 	EndIf;
-
 
 	Object 	= AddInfo.Object; // See Document.RetailSalesReceipt.Form.DocumentForm.Object
 	Form 	= AddInfo.Form; // See Document.RetailSalesReceipt.Form.DocumentForm

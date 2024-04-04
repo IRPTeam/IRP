@@ -75,9 +75,9 @@
    <value>Evrak</value>
   </synonym>
   <type>
-   <types>DocumentRef.SalesInvoice</types>
-   <types>DocumentRef.InventoryTransfer</types>
    <types>DocumentRef.RetailSalesReceipt</types>
+   <types>DocumentRef.InventoryTransfer</types>
+   <types>DocumentRef.SalesInvoice</types>
   </type>
   <minValue xsi:type="core:UndefinedValue"/>
   <maxValue xsi:type="core:UndefinedValue"/>

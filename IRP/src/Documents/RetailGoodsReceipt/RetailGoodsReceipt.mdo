@@ -1341,6 +1341,21 @@
    <fullTextSearch>Use</fullTextSearch>
   </attributes>
  </tabularSections>
+ <templates uuid="7f01bd67-62ff-4c2f-88e4-5d9516157405">
+  <name>RetailGoodsReceiptPrint</name>
+  <synonym>
+   <key>en</key>
+   <value>Retail goods receipt</value>
+  </synonym>
+  <synonym>
+   <key>ru</key>
+   <value>Приемка розничной продажи</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Perakende mal kabulü</value>
+  </synonym>
+ </templates>
  <commands uuid="92a3b5a5-6201-4796-9d7e-07aa0756639d">
   <name>Generate</name>
   <synonym>
@@ -1360,6 +1375,27 @@
    <types>DocumentRef.RetailShipmentConfirmation</types>
    <types>DocumentRef.SalesOrder</types>
    <types>DocumentRef.RetailSalesReceipt</types>
+  </commandParameterType>
+  <parameterUseMode>Multiple</parameterUseMode>
+  <representation>Auto</representation>
+ </commands>
+ <commands uuid="f856afef-b338-4ae5-8f78-1972308c2fb5">
+  <name>RetailGoodsReceiptPrint</name>
+  <synonym>
+   <key>en</key>
+   <value>Retail goods receipt</value>
+  </synonym>
+  <synonym>
+   <key>ru</key>
+   <value>Приемка розничной продажи</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Perakende mal kabulü</value>
+  </synonym>
+  <group>CommandGroup.Print</group>
+  <commandParameterType>
+   <types>DocumentRef.RetailGoodsReceipt</types>
   </commandParameterType>
   <parameterUseMode>Multiple</parameterUseMode>
   <representation>Auto</representation>

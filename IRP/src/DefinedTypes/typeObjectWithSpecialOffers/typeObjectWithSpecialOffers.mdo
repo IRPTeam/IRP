@@ -17,16 +17,16 @@
   <value>Özel tekliflerle tip nesne</value>
  </synonym>
  <type>
-  <types>DocumentObject.PurchaseInvoice</types>
-  <types>DocumentObject.PurchaseOrder</types>
-  <types>DocumentObject.PurchaseReturn</types>
-  <types>DocumentObject.PurchaseReturnOrder</types>
-  <types>DocumentObject.RetailReturnReceipt</types>
   <types>DocumentObject.RetailSalesReceipt</types>
-  <types>DocumentObject.SalesInvoice</types>
   <types>DocumentObject.SalesOrder</types>
   <types>DocumentObject.SalesReturn</types>
+  <types>DocumentObject.RetailReturnReceipt</types>
   <types>DocumentObject.SalesReturnOrder</types>
+  <types>DocumentObject.PurchaseReturnOrder</types>
+  <types>DocumentObject.PurchaseReturn</types>
+  <types>DocumentObject.SalesInvoice</types>
   <types>DocumentObject.WorkOrder</types>
+  <types>DocumentObject.PurchaseInvoice</types>
+  <types>DocumentObject.PurchaseOrder</types>
  </type>
 </mdclass:DefinedType>

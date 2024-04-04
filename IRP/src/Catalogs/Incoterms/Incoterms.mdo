@@ -26,6 +26,30 @@
  <createOnInput>Use</createOnInput>
  <dataLockControlMode>Managed</dataLockControlMode>
  <fullTextSearch>Use</fullTextSearch>
+ <objectPresentation>
+  <key>en</key>
+  <value>Incoterm</value>
+ </objectPresentation>
+ <objectPresentation>
+  <key>ru</key>
+  <value>Инкотермс</value>
+ </objectPresentation>
+ <objectPresentation>
+  <key>tr</key>
+  <value>Incoterm</value>
+ </objectPresentation>
+ <listPresentation>
+  <key>en</key>
+  <value>Incoterms</value>
+ </listPresentation>
+ <listPresentation>
+  <key>ru</key>
+  <value>Инкотермс</value>
+ </listPresentation>
+ <listPresentation>
+  <key>tr</key>
+  <value>Incoterms</value>
+ </listPresentation>
  <levelCount>2</levelCount>
  <foldersOnTop>true</foldersOnTop>
  <codeLength>3</codeLength>

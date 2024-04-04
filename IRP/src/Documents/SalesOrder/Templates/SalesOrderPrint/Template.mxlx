@@ -11,27 +11,27 @@
 		<languageInfo>
 			<id>tr</id>
 			<code>Turkish</code>
-			<description/>
+			<description>Turkish</description>
 		</languageInfo>
 		<languageInfo>
 			<id>ru</id>
 			<code>Russian</code>
-			<description/>
+			<description>Russian</description>
 		</languageInfo>
 		<languageInfo>
 			<id>fr</id>
 			<code>French</code>
-			<description/>
+			<description>French</description>
 		</languageInfo>
 		<languageInfo>
 			<id>de</id>
 			<code>German</code>
-			<description/>
+			<description>German</description>
 		</languageInfo>
 		<languageInfo>
 			<id>ha</id>
 			<code>HASH</code>
-			<description/>
+			<description>HASH</description>
 		</languageInfo>
 	</languageSettings>
 	<columns>
@@ -447,7 +447,7 @@
 			</c>
 			<c>
 				<c>
-					<f>18</f>
+					<f>21</f>
 					<parameter>Price</parameter>
 				</c>
 			</c>
@@ -459,13 +459,13 @@
 			</c>
 			<c>
 				<c>
-					<f>18</f>
+					<f>21</f>
 					<parameter>TaxAmount</parameter>
 				</c>
 			</c>
 			<c>
 				<c>
-					<f>22</f>
+					<f>21</f>
 					<parameter>TotalAmount</parameter>
 				</c>
 			</c>
@@ -484,12 +484,12 @@
 			<c>
 				<i>7</i>
 				<c>
-					<f>23</f>
+					<f>22</f>
 				</c>
 			</c>
 			<c>
 				<c>
-					<f>24</f>
+					<f>23</f>
 					<tl>
 						<v8:item>
 							<v8:lang>en</v8:lang>
@@ -508,7 +508,7 @@
 			</c>
 			<c>
 				<c>
-					<f>25</f>
+					<f>24</f>
 					<parameter>TotalNet</parameter>
 				</c>
 			</c>
@@ -520,12 +520,12 @@
 			<c>
 				<i>7</i>
 				<c>
-					<f>23</f>
+					<f>22</f>
 				</c>
 			</c>
 			<c>
 				<c>
-					<f>24</f>
+					<f>23</f>
 					<tl>
 						<v8:item>
 							<v8:lang>en</v8:lang>
@@ -544,7 +544,7 @@
 			</c>
 			<c>
 				<c>
-					<f>25</f>
+					<f>24</f>
 					<parameter>TotalTax</parameter>
 				</c>
 			</c>
@@ -563,12 +563,12 @@
 			<c>
 				<i>7</i>
 				<c>
-					<f>23</f>
+					<f>22</f>
 				</c>
 			</c>
 			<c>
 				<c>
-					<f>26</f>
+					<f>25</f>
 					<tl>
 						<v8:item>
 							<v8:lang>en</v8:lang>
@@ -587,7 +587,7 @@
 			</c>
 			<c>
 				<c>
-					<f>27</f>
+					<f>24</f>
 					<parameter>TotalOffers</parameter>
 				</c>
 			</c>
@@ -629,12 +629,12 @@
 			</c>
 			<c>
 				<c>
-					<f>23</f>
+					<f>22</f>
 				</c>
 			</c>
 			<c>
 				<c>
-					<f>26</f>
+					<f>25</f>
 					<tl>
 						<v8:item>
 							<v8:lang>en</v8:lang>
@@ -653,7 +653,7 @@
 			</c>
 			<c>
 				<c>
-					<f>25</f>
+					<f>24</f>
 					<parameter>Total</parameter>
 				</c>
 			</c>
@@ -665,7 +665,7 @@
 			<c>
 				<i>8</i>
 				<c>
-					<f>24</f>
+					<f>23</f>
 					<tl>
 						<v8:item>
 							<v8:lang>en</v8:lang>
@@ -684,7 +684,7 @@
 			</c>
 			<c>
 				<c>
-					<f>28</f>
+					<f>26</f>
 					<parameter>Currency</parameter>
 				</c>
 			</c>
@@ -708,7 +708,7 @@
 			<c>
 				<i>1</i>
 				<c>
-					<f>29</f>
+					<f>27</f>
 					<tl>
 						<v8:item>
 							<v8:lang>en</v8:lang>
@@ -727,43 +727,43 @@
 			</c>
 			<c>
 				<c>
-					<f>30</f>
+					<f>28</f>
 					<parameter>Manager</parameter>
 				</c>
 			</c>
 			<c>
 				<c>
-					<f>31</f>
+					<f>29</f>
 				</c>
 			</c>
 			<c>
 				<c>
-					<f>31</f>
+					<f>29</f>
 				</c>
 			</c>
 			<c>
 				<c>
-					<f>31</f>
+					<f>29</f>
 				</c>
 			</c>
 			<c>
 				<c>
-					<f>31</f>
+					<f>29</f>
 				</c>
 			</c>
 			<c>
 				<c>
-					<f>31</f>
+					<f>29</f>
 				</c>
 			</c>
 			<c>
 				<c>
-					<f>31</f>
+					<f>29</f>
 				</c>
 			</c>
 			<c>
 				<c>
-					<f>31</f>
+					<f>29</f>
 				</c>
 			</c>
 		</row>
@@ -778,7 +778,7 @@
 	<rowsItem>
 		<index>23</index>
 		<row>
-			<formatIndex>32</formatIndex>
+			<formatIndex>30</formatIndex>
 			<empty>true</empty>
 		</row>
 	</rowsItem>
@@ -788,7 +788,7 @@
 			<c>
 				<i>6</i>
 				<c>
-					<f>33</f>
+					<f>31</f>
 					<parameter>NameTAX</parameter>
 				</c>
 			</c>
@@ -800,7 +800,7 @@
 			<c>
 				<i>6</i>
 				<c>
-					<f>34</f>
+					<f>32</f>
 					<parameter>PercentTAX</parameter>
 				</c>
 			</c>
@@ -1031,23 +1031,17 @@
 		<format>
 			<v8:item>
 				<v8:lang>en</v8:lang>
-				<v8:content>NZ=' '</v8:content>
+				<v8:content>NFD=2</v8:content>
 			</v8:item>
 			<v8:item>
 				<v8:lang>ru</v8:lang>
-				<v8:content>NZ=' '</v8:content>
+				<v8:content>NFD=2</v8:content>
 			</v8:item>
 			<v8:item>
 				<v8:lang>tr</v8:lang>
-				<v8:content>NZ=' '</v8:content>
+				<v8:content>NFD=2</v8:content>
 			</v8:item>
 		</format>
-	</format>
-	<format>
-		<border>1</border>
-		<horizontalAlignment>Right</horizontalAlignment>
-		<verticalAlignment>Center</verticalAlignment>
-		<fillType>Parameter</fillType>
 	</format>
 	<format>
 		<font>3</font>
@@ -1063,31 +1057,24 @@
 		<width>96</width>
 		<horizontalAlignment>Right</horizontalAlignment>
 		<fillType>Parameter</fillType>
-		<format/>
-	</format>
-	<format>
-		<font>4</font>
-		<horizontalAlignment>Right</horizontalAlignment>
-	</format>
-	<format>
-		<font>4</font>
-		<width>96</width>
-		<horizontalAlignment>Right</horizontalAlignment>
-		<fillType>Parameter</fillType>
 		<format>
 			<v8:item>
 				<v8:lang>en</v8:lang>
-				<v8:content>NZ=' '</v8:content>
+				<v8:content>NFD=2</v8:content>
 			</v8:item>
 			<v8:item>
 				<v8:lang>ru</v8:lang>
-				<v8:content>NZ=' '</v8:content>
+				<v8:content>NFD=2</v8:content>
 			</v8:item>
 			<v8:item>
 				<v8:lang>tr</v8:lang>
-				<v8:content>NZ=' '</v8:content>
+				<v8:content>NFD=2</v8:content>
 			</v8:item>
 		</format>
+	</format>
+	<format>
+		<font>4</font>
+		<horizontalAlignment>Right</horizontalAlignment>
 	</format>
 	<format>
 		<font>4</font>
@@ -1121,6 +1108,7 @@
 	<format>
 		<border>1</border>
 		<horizontalAlignment>Right</horizontalAlignment>
+		<verticalAlignment>Center</verticalAlignment>
 		<textPlacement>Wrap</textPlacement>
 		<fillType>Parameter</fillType>
 	</format>

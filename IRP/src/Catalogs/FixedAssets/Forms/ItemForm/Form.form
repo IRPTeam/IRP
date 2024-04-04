@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<form:Form xmlns:form="http://g5.1c.ru/v8/dt/form" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+<form:Form xmlns:core="http://g5.1c.ru/v8/dt/mcore" xmlns:form="http://g5.1c.ru/v8/dt/form" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
  <items xsi:type="form:FormGroup">
   <name>GroupMainPages</name>
   <id>52</id>
@@ -394,6 +394,7 @@
       </userVisible>
       <autoFill>true</autoFill>
      </contextMenu>
+     <source>DepreciationInfoSearchString</source>
      <extInfo xsi:type="form:SearchStringAdditionExtInfo">
       <autoMaxWidth>true</autoMaxWidth>
      </extInfo>
@@ -432,6 +433,7 @@
       <autoFill>true</autoFill>
      </contextMenu>
      <type>ViewStatusAddition</type>
+     <source>DepreciationInfoViewStatus</source>
      <extInfo xsi:type="form:ViewStatusAdditionExtInfo">
       <autoMaxWidth>true</autoMaxWidth>
      </extInfo>
@@ -470,6 +472,7 @@
       <autoFill>true</autoFill>
      </contextMenu>
      <type>SearchControlAddition</type>
+     <source>DepreciationInfoSearchControl</source>
      <extInfo xsi:type="form:SearchControlAdditionExtInfo">
       <autoMaxWidth>true</autoMaxWidth>
      </extInfo>
@@ -517,6 +520,7 @@
     <horizontalStretch>true</horizontalStretch>
     <verticalStretch>true</verticalStretch>
     <fileDragMode>AsFileRef</fileDragMode>
+    <rowFilter xsi:type="core:UndefinedValue"/>
    </items>
    <visible>true</visible>
    <enabled>true</enabled>
@@ -643,16 +647,16 @@
  </commandInterface>
  <extInfo xsi:type="form:CatalogFormExtInfo">
   <handlers>
-   <event>BeforeWriteAtServer</event>
-   <name>BeforeWriteAtServer</name>
+   <event>AfterWriteAtServer</event>
+   <name>AfterWriteAtServer</name>
   </handlers>
   <handlers>
    <event>OnReadAtServer</event>
    <name>OnReadAtServer</name>
   </handlers>
   <handlers>
-   <event>AfterWriteAtServer</event>
-   <name>AfterWriteAtServer</name>
+   <event>BeforeWriteAtServer</event>
+   <name>BeforeWriteAtServer</name>
   </handlers>
  </extInfo>
 </form:Form>

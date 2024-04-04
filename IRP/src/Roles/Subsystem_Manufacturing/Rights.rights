@@ -4,20 +4,6 @@
 	<setForAttributesByDefault>true</setForAttributesByDefault>
 	<independentRightsOfChildObjects>false</independentRightsOfChildObjects>
 	<object>
-		<name>Subsystem.Manufacturing</name>
-		<right>
-			<name>View</name>
-			<value>true</value>
-		</right>
-	</object>
-	<object>
-		<name>Subsystem.Manufacturing.Subsystem.ManufacturingPurchase</name>
-		<right>
-			<name>View</name>
-			<value>true</value>
-		</right>
-	</object>
-	<object>
 		<name>Subsystem.Manufacturing.Subsystem.InventoryTransfer</name>
 		<right>
 			<name>View</name>
@@ -32,6 +18,13 @@
 		</right>
 	</object>
 	<object>
+		<name>Subsystem.Reports.Subsystem.Manufacturing</name>
+		<right>
+			<name>View</name>
+			<value>true</value>
+		</right>
+	</object>
+	<object>
 		<name>Subsystem.Manufacturing.Subsystem.Planning</name>
 		<right>
 			<name>View</name>
@@ -39,7 +32,14 @@
 		</right>
 	</object>
 	<object>
-		<name>Subsystem.Reports.Subsystem.Manufacturing</name>
+		<name>Subsystem.Manufacturing</name>
+		<right>
+			<name>View</name>
+			<value>true</value>
+		</right>
+	</object>
+	<object>
+		<name>Subsystem.Manufacturing.Subsystem.ManufacturingPurchase</name>
 		<right>
 			<name>View</name>
 			<value>true</value>

@@ -26,12 +26,12 @@
     <horizontalAlign>Left</horizontalAlign>
    </autoCommandBar>
    <handlers>
-    <event>DragStart</event>
-    <name>SettingsComposerDragStart</name>
-   </handlers>
-   <handlers>
     <event>Selection</event>
     <name>SettingsComposerSelection</name>
+   </handlers>
+   <handlers>
+    <event>DragStart</event>
+    <name>SettingsComposerDragStart</name>
    </handlers>
    <searchStringAddition>
     <visible>true</visible>

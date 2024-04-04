@@ -159,16 +159,14 @@ Scenario: _041705 check Physical inventory movements by the Register  "R4032 Goo
 			| 'Number'    |
 			| '201'       |
 	* Check movements by the Register  "R4032 Goods in transit (outgoing)"
-		And I click "Registrations report" button
+		And I click "Registrations report info" button
 		And I select "R4032 Goods in transit (outgoing)" exact value from "Register" drop-down list
 		And I click "Generate report" button
 		Then "ResultTable" spreadsheet document is equal
-			| 'Physical inventory 201 dated 15.03.2021 15:29:31' | ''            | ''                    | ''          | ''           | ''      | ''         |
-			| 'Document registrations records'                   | ''            | ''                    | ''          | ''           | ''      | ''         |
-			| 'Register  "R4032 Goods in transit (outgoing)"'    | ''            | ''                    | ''          | ''           | ''      | ''         |
-			| ''                                                 | 'Record type' | 'Period'              | 'Resources' | 'Dimensions' | ''      | ''         |
-			| ''                                                 | ''            | ''                    | 'Quantity'  | 'Store'      | 'Basis' | 'Item key' |
-			| ''                                                 | 'Receipt'     | '15.03.2021 15:29:31' | '2'         | 'Store 06'   | ''      | 'XS/Blue'  |		
+			| 'Physical inventory 201 dated 15.03.2021 15:29:31' | ''                    | ''           | ''         | ''      | ''         | ''         |
+			| 'Register  "R4032 Goods in transit (outgoing)"'    | ''                    | ''           | ''         | ''      | ''         | ''         |
+			| ''                                                 | 'Period'              | 'RecordType' | 'Store'    | 'Basis' | 'Item key' | 'Quantity' |
+			| ''                                                 | '15.03.2021 15:29:31' | 'Receipt'    | 'Store 06' | ''      | 'XS/Blue'  | '2'        |	
 		And I close all client application windows
 
 Scenario: _041730 Physical inventory clear posting/mark for deletion

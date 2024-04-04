@@ -187,6 +187,7 @@ Procedure OnComposeResult(ResultDocument, DetailsData, StandardProcessing)
 EndProcedure
 
 Function GetQueryTextForSpecifications()
+	//@skip-check bsl-ql-hub
 	Return "SELECT ALLOWED
 		   |	Table.ItemKey AS ItemKey,
 		   |	Table.Item AS Item,

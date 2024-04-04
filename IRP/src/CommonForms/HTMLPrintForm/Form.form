@@ -83,12 +83,12 @@
   <autoFill>true</autoFill>
  </autoCommandBar>
  <handlers>
-  <event>OnCreateAtServer</event>
-  <name>OnCreateAtServer</name>
- </handlers>
- <handlers>
   <event>NotificationProcessing</event>
   <name>NotificationProcessing</name>
+ </handlers>
+ <handlers>
+  <event>OnCreateAtServer</event>
+  <name>OnCreateAtServer</name>
  </handlers>
  <autoUrl>true</autoUrl>
  <group>Vertical</group>

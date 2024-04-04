@@ -107,6 +107,8 @@
  <registerRecords>AccumulationRegister.R5021T_Revenues</registerRecords>
  <registerRecords>AccumulationRegister.R2040B_TaxesIncoming</registerRecords>
  <registerRecords>AccumulationRegister.R6020B_BatchBalance</registerRecords>
+ <registerRecords>AccumulationRegister.R5020B_PartnersBalance</registerRecords>
+ <registerRecords>AccumulationRegister.T1040T_AccountingAmounts</registerRecords>
  <postInPrivilegedMode>true</postInPrivilegedMode>
  <unpostInPrivilegedMode>true</unpostInPrivilegedMode>
  <choiceHistoryOnInput>DontUse</choiceHistoryOnInput>
@@ -1582,4 +1584,40 @@
    <fullTextSearch>Use</fullTextSearch>
   </attributes>
  </tabularSections>
+ <templates uuid="4b7bbba0-8c3f-4582-a948-d610095f02e0">
+  <name>SalesReportFromTradeAgentPrint</name>
+  <synonym>
+   <key>en</key>
+   <value>Sales report from trade agent</value>
+  </synonym>
+  <synonym>
+   <key>ru</key>
+   <value>Отчеты комиссионера о продажах</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Konsiyeye alandan satış raporu</value>
+  </synonym>
+ </templates>
+ <commands uuid="9b2e9472-5b40-4bdf-bdb3-c319ef059461">
+  <name>SalesReportFromTradeAgentPrint</name>
+  <synonym>
+   <key>en</key>
+   <value>Sales report from trade agent</value>
+  </synonym>
+  <synonym>
+   <key>ru</key>
+   <value>Отчеты комиссионера о продажах</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Konsiyeye alandan satış raporu</value>
+  </synonym>
+  <group>CommandGroup.Print</group>
+  <commandParameterType>
+   <types>DocumentRef.SalesReportFromTradeAgent</types>
+  </commandParameterType>
+  <parameterUseMode>Multiple</parameterUseMode>
+  <representation>Auto</representation>
+ </commands>
 </mdclass:Document>

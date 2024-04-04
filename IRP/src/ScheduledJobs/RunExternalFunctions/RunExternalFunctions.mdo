@@ -14,7 +14,6 @@
   <value>Dış fonksiyonları çalıştır</value>
  </synonym>
  <methodName>CommonModule.ServiceSystemServer.RunExternalFunctions</methodName>
- <description>Run external functions from job queue</description>
  <key>RunExternalFunctions</key>
  <use>true</use>
  <predefined>true</predefined>

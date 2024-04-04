@@ -155,7 +155,6 @@
   </items>
   <items id="de5fda38-0918-458a-9016-e51b46979277">
    <name>Document_DebitNote</name>
-   <description>Document debit note</description>
    <code xsi:type="core:NumberValue">
     <value>0</value>
    </code>

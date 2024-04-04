@@ -136,6 +136,7 @@
    <value>Özelliklerin grup düzenlemesi</value>
   </synonym>
   <group>FormCommandBarImportant</group>
+  <commandParameterType/>
   <parameterUseMode>Multiple</parameterUseMode>
   <modifiesData>true</modifiesData>
   <representation>Picture</representation>

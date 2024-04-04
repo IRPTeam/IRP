@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="UTF-8"?>
+<?xml version="1.0" encoding="UTF-8"?>
 <mdclass:Role xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="7e35cea8-2b64-4ef6-854e-80fa402b0565">
  <name>AccumulationRegisters_DELETE_R8013B_ConsignorBatchWiseBalance</name>
  <synonym>

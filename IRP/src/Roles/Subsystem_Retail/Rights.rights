@@ -4,13 +4,6 @@
 	<setForAttributesByDefault>true</setForAttributesByDefault>
 	<independentRightsOfChildObjects>false</independentRightsOfChildObjects>
 	<object>
-		<name>Subsystem.Retail</name>
-		<right>
-			<name>View</name>
-			<value>true</value>
-		</right>
-	</object>
-	<object>
 		<name>Subsystem.Retail.Subsystem.Sales</name>
 		<right>
 			<name>View</name>
@@ -19,6 +12,13 @@
 	</object>
 	<object>
 		<name>Subsystem.Reports.Subsystem.Retail</name>
+		<right>
+			<name>View</name>
+			<value>true</value>
+		</right>
+	</object>
+	<object>
+		<name>Subsystem.Retail</name>
 		<right>
 			<name>View</name>
 			<value>true</value>

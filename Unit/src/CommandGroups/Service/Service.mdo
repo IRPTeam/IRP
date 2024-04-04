@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mdclass:CommandGroup xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" xmlns:mdclassExtension="http://g5.1c.ru/v8/dt/metadata/mdclass/extension" uuid="e67e1805-e162-4721-b076-4b4d93caedff" extendedConfigurationObject="3a1b9444-4c26-461d-ab0b-9f0721713de9">
+  <name>Service</name>
+  <objectBelonging>Adopted</objectBelonging>
+  <extension xsi:type="mdclassExtension:CommandGroupExtension">
+    <extendedConfigurationObject>Checked</extendedConfigurationObject>
+    <category>Checked</category>
+  </extension>
+  <category>FormCommandBar</category>
+</mdclass:CommandGroup>

@@ -29,7 +29,6 @@
   <typesFilterValue xsi:type="core:ReferenceValue">
    <value>Catalog.AddAttributeAndPropertySets.Catalog_FixedAssetsLedgerTypes</value>
   </typesFilterValue>
-  <dataPathField>0</dataPathField>
   <multipleValuesUseField>Catalog.AddAttributeAndPropertySets.TabularSection.Properties.Attribute.Collection</multipleValuesUseField>
   <characteristicValues>InformationRegister.AddProperties</characteristicValues>
   <objectField>InformationRegister.AddProperties.Dimension.Object</objectField>
@@ -45,7 +44,6 @@
   <typesFilterValue xsi:type="core:ReferenceValue">
    <value>Catalog.AddAttributeAndPropertySets.Catalog_FixedAssetsLedgerTypes</value>
   </typesFilterValue>
-  <dataPathField>0</dataPathField>
   <multipleValuesUseField>Catalog.AddAttributeAndPropertySets.TabularSection.Attributes.Attribute.Collection</multipleValuesUseField>
   <characteristicValues>Catalog.FixedAssetsLedgerTypes.TabularSection.AddAttributes</characteristicValues>
   <objectField>Catalog.FixedAssetsLedgerTypes.TabularSection.AddAttributes.StandardAttribute.Ref</objectField>
@@ -57,6 +55,30 @@
  <createOnInput>Use</createOnInput>
  <dataLockControlMode>Managed</dataLockControlMode>
  <fullTextSearch>Use</fullTextSearch>
+ <objectPresentation>
+  <key>en</key>
+  <value>Fixed assets ledger type</value>
+ </objectPresentation>
+ <objectPresentation>
+  <key>ru</key>
+  <value>Тип ведомости основных средств</value>
+ </objectPresentation>
+ <objectPresentation>
+  <key>tr</key>
+  <value>Fixed assets ledger type</value>
+ </objectPresentation>
+ <listPresentation>
+  <key>en</key>
+  <value>Fixed assets ledger types</value>
+ </listPresentation>
+ <listPresentation>
+  <key>ru</key>
+  <value>Вид расчета основных средств</value>
+ </listPresentation>
+ <listPresentation>
+  <key>tr</key>
+  <value>Sabit kıymetler defteri türleri</value>
+ </listPresentation>
  <levelCount>2</levelCount>
  <foldersOnTop>true</foldersOnTop>
  <codeLength>12</codeLength>
@@ -118,6 +140,7 @@
     <value>true</value>
    </value>
   </choiceParameters>
+  <fillValue xsi:type="core:UndefinedValue"/>
   <fullTextSearch>Use</fullTextSearch>
  </attributes>
  <tabularSections uuid="b271cf7a-f2ca-48f0-9b75-a356989010c9">

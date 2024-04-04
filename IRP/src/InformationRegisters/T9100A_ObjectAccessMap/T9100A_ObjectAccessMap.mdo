@@ -65,8 +65,11 @@
   <type>
    <types>CatalogRef.ObjectAccessKeys</types>
   </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
   <createOnInput>Use</createOnInput>
   <fullTextSearch>Use</fullTextSearch>
+  <fillValue xsi:type="core:UndefinedValue"/>
  </resources>
  <dimensions uuid="4f4a6a0a-fd8e-43a7-b7a0-fc4da94c2bb1">
   <name>ObjectRef</name>

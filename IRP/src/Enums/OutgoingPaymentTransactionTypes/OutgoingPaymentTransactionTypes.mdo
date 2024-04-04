@@ -111,18 +111,18 @@
   </synonym>
  </enumValues>
  <enumValues uuid="bfbf9552-7b10-44f1-9926-1bcfe31da944">
-  <name>CustomerAdvance</name>
+  <name>RetailCustomerAdvance</name>
   <synonym>
    <key>en</key>
-   <value>Customer advance</value>
+   <value>Retail customer advance</value>
   </synonym>
   <synonym>
    <key>ru</key>
-   <value>Аванс от розничного покупателя</value>
+   <value>Аванс розничного клиента</value>
   </synonym>
   <synonym>
    <key>tr</key>
-   <value>Perakende müşteri avansı</value>
+   <value>Retail customer advance</value>
   </synonym>
  </enumValues>
  <enumValues uuid="3c391634-bcbf-4cdf-8e25-86fcef266bf3">

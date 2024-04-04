@@ -30,14 +30,10 @@
   <typesFilterValue xsi:type="core:ReferenceValue">
    <value>Catalog.AddAttributeAndPropertySets.Document_ModernizationOfFixedAsset</value>
   </typesFilterValue>
-  <dataPathField>0</dataPathField>
-  <multipleValuesUseField>0</multipleValuesUseField>
   <characteristicValues>InformationRegister.AddProperties</characteristicValues>
   <objectField>InformationRegister.AddProperties.Dimension.Object</objectField>
   <typeField>InformationRegister.AddProperties.Dimension.Property</typeField>
   <valueField>InformationRegister.AddProperties.Resource.Value</valueField>
-  <multipleValuesKeyField>0</multipleValuesKeyField>
-  <multipleValuesOrderField>0</multipleValuesOrderField>
  </characteristics>
  <characteristics>
   <characteristicTypes>Catalog.AddAttributeAndPropertySets.TabularSection.Attributes</characteristicTypes>
@@ -46,14 +42,10 @@
   <typesFilterValue xsi:type="core:ReferenceValue">
    <value>Catalog.AddAttributeAndPropertySets.Document_ModernizationOfFixedAsset</value>
   </typesFilterValue>
-  <dataPathField>0</dataPathField>
-  <multipleValuesUseField>0</multipleValuesUseField>
   <characteristicValues>Document.ModernizationOfFixedAsset.TabularSection.AddAttributes</characteristicValues>
   <objectField>Document.ModernizationOfFixedAsset.TabularSection.AddAttributes.StandardAttribute.Ref</objectField>
   <typeField>Document.ModernizationOfFixedAsset.TabularSection.AddAttributes.Attribute.Property</typeField>
   <valueField>Document.ModernizationOfFixedAsset.TabularSection.AddAttributes.Attribute.Value</valueField>
-  <multipleValuesKeyField>0</multipleValuesKeyField>
-  <multipleValuesOrderField>0</multipleValuesOrderField>
  </characteristics>
  <createOnInput>DontUse</createOnInput>
  <dataLockControlMode>Managed</dataLockControlMode>
@@ -89,6 +81,8 @@
  <registerRecords>InformationRegister.T6010S_BatchesInfo</registerRecords>
  <registerRecords>AccumulationRegister.R6020B_BatchBalance</registerRecords>
  <registerRecords>AccumulationRegister.R4014B_SerialLotNumber</registerRecords>
+ <registerRecords>AccumulationRegister.T1040T_AccountingAmounts</registerRecords>
+ <registerRecords>AccumulationRegister.T1050T_AccountingQuantities</registerRecords>
  <postInPrivilegedMode>true</postInPrivilegedMode>
  <unpostInPrivilegedMode>true</unpostInPrivilegedMode>
  <choiceHistoryOnInput>DontUse</choiceHistoryOnInput>
@@ -141,18 +135,18 @@
   <dataHistory>Use</dataHistory>
  </attributes>
  <attributes uuid="912cde08-3f11-4fdd-8598-636388985ce4">
-  <name>BusinessUnit</name>
+  <name>ProfitLossCenter</name>
   <synonym>
    <key>en</key>
-   <value>Business unit</value>
+   <value>Profit loss center</value>
   </synonym>
   <synonym>
    <key>ru</key>
-   <value>Подразделение</value>
+   <value>Центр прибыли/убытков</value>
   </synonym>
   <synonym>
    <key>tr</key>
-   <value>Departman</value>
+   <value>Kar/Zarar merkezi</value>
   </synonym>
   <type>
    <types>CatalogRef.BusinessUnits</types>
@@ -987,4 +981,40 @@
    <fullTextSearch>Use</fullTextSearch>
   </attributes>
  </tabularSections>
+ <templates uuid="7a1c87eb-f06b-4aa8-a45c-a4f394327070">
+  <name>ModernizationOfFixedAssetPrint</name>
+  <synonym>
+   <key>en</key>
+   <value>Modernization of fixed asset</value>
+  </synonym>
+  <synonym>
+   <key>ru</key>
+   <value>Модернизация основных средств</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Sabit kıymetin modernizasyonu</value>
+  </synonym>
+ </templates>
+ <commands uuid="a2f557f4-2daa-4066-bd41-7d474aa7cd19">
+  <name>ModernizationOfFixedAssetPrint</name>
+  <synonym>
+   <key>en</key>
+   <value>Modernization of fixed asset</value>
+  </synonym>
+  <synonym>
+   <key>ru</key>
+   <value>Модернизация основных средств</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Sabit kıymetin modernizasyonu</value>
+  </synonym>
+  <group>CommandGroup.Print</group>
+  <commandParameterType>
+   <types>DocumentRef.ModernizationOfFixedAsset</types>
+  </commandParameterType>
+  <parameterUseMode>Multiple</parameterUseMode>
+  <representation>Auto</representation>
+ </commands>
 </mdclass:Document>

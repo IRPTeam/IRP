@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mdclass:Document xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" xmlns:mdclassExtension="http://g5.1c.ru/v8/dt/metadata/mdclass/extension" uuid="994b1fb1-d1b5-474c-9b8b-50f6eeb4b887" extendedConfigurationObject="09930681-7d82-4725-ad79-b389896a8e4d">
+  <producedTypes>
+    <objectType typeId="a38df25d-ac38-4b01-b678-4ae0e76e3d02" valueTypeId="a9c17e4d-bb81-401e-b7b9-fbc2a67fa742"/>
+    <refType typeId="72a00356-abfe-4a75-b3b5-86ce8649b08a" valueTypeId="c368452a-50b7-41b0-a744-6f0eb666adbd"/>
+    <selectionType typeId="7cb55e39-1df1-4faa-a613-305c3ddf8b7a" valueTypeId="2b67b77e-9eb5-4564-adc7-3499a00c6fae"/>
+    <listType typeId="2eae0d31-e785-4745-b513-ddcf6619251a" valueTypeId="c542f2e2-9493-4a20-9251-c5595ad66a7d"/>
+    <managerType typeId="2817e935-1d65-4799-a865-498032e90326" valueTypeId="83618592-2e38-4ec3-ab94-63365e9d7077"/>
+  </producedTypes>
+  <name>ManualRegisterEntry</name>
+  <objectBelonging>Adopted</objectBelonging>
+  <extension xsi:type="mdclassExtension:DocumentExtension">
+    <extendedConfigurationObject>Checked</extendedConfigurationObject>
+  </extension>
+  <useStandardCommands>true</useStandardCommands>
+</mdclass:Document>

@@ -1,6 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<suppress:SuppressGenericObject xmlns:suppress="http://g5.1c.ru/v8/dt/check/suppress/model" fqn="Catalog.Partners.Form.ItemForm.Form">
-  <containments fqn="attributes:SalesOrdersList">
-    <suppressions key="com.e1c.v8codestyle.form:form-list-ref-use-always-flag-disabled" value="true"/>
-  </containments>
-</suppress:SuppressGenericObject>

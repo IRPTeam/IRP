@@ -58,14 +58,14 @@
    <types>DocumentRef.CreditNote</types>
    <types>DocumentRef.BankReceipt</types>
    <types>DocumentRef.PurchaseReturn</types>
+   <types>DocumentRef.DebitCreditNote</types>
    <types>DocumentRef.BankPayment</types>
+   <types>DocumentRef.EmployeeCashAdvance</types>
    <types>DocumentRef.ChequeBondTransactionItem</types>
    <types>DocumentRef.CashReceipt</types>
    <types>DocumentRef.OpeningEntry</types>
    <types>DocumentRef.SalesReportToConsignor</types>
    <types>DocumentRef.PurchaseOrderClosing</types>
-   <types>DocumentRef.EmployeeCashAdvance</types>
-   <types>DocumentRef.DebitCreditNote</types>
   </type>
   <minValue xsi:type="core:UndefinedValue"/>
   <maxValue xsi:type="core:UndefinedValue"/>

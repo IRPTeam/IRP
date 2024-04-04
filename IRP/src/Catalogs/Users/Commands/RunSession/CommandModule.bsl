@@ -24,6 +24,7 @@ EndProcedure
 
 &AtServer
 Function CheckAdmin()
+	//@skip-check using-isinrole
 	Return IsInRole(Metadata.Roles.FullAccess);
 EndFunction
 	
@@ -35,7 +36,7 @@ Function GetUserConnectionProperty(UserRef)
 		Return Undefined;
 	EndIf; 
 	
-	ConnectionTime = CurrentDate();
+	ConnectionTime = CommonFunctionsServer.GetCurrentSessionDate();
 	
 	NewPassword = UserSettingsServer.GeneratePassword();
 	

@@ -170,7 +170,6 @@ Procedure Clear(Command)
 	UseSeriallotNumber = False;
 EndProcedure
 
-
 &AtClient
 Procedure ScanBarcodeEndMobile(Barcode, Result, Message, Parameters) Export
 	ProcessBarcodeResult = Barcodeclient.ProcessBarcode(Barcode, Parameters);

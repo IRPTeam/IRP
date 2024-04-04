@@ -518,10 +518,6 @@
      <event>OnChange</event>
      <name>ItemListOnChange</name>
     </handlers>
-    <handlers>
-     <event>RefreshRequestProcessing</event>
-     <name>ItemListRefreshRequestProcessing</name>
-    </handlers>
     <searchStringAddition>
      <visible>true</visible>
      <enabled>true</enabled>
@@ -1236,10 +1232,6 @@
   </extendedTooltip>
   <type>Pages</type>
   <extInfo xsi:type="form:PagesGroupExtInfo">
-   <handlers>
-    <event>OnCurrentPageChange</event>
-    <name>MainPagesOnCurrentPageChange</name>
-   </handlers>
    <pagesRepresentation>Swipe</pagesRepresentation>
    <currentRowUse>Auto</currentRowUse>
   </extInfo>
@@ -1354,31 +1346,6 @@
    </handler>
   </action>
   <representation>Picture</representation>
-  <currentRowUse>Auto</currentRowUse>
- </formCommands>
- <formCommands>
-  <name>EnterCountOnScan</name>
-  <title>
-   <key>en</key>
-   <value> +1 </value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value> +1 </value>
-  </title>
-  <title>
-   <key>tr</key>
-   <value> +1 </value>
-  </title>
-  <id>4</id>
-  <use>
-   <common>true</common>
-  </use>
-  <action xsi:type="form:FormCommandHandlerContainer">
-   <handler>
-    <name>EnterCountOnScan</name>
-   </handler>
-  </action>
   <currentRowUse>Auto</currentRowUse>
  </formCommands>
  <formCommands>

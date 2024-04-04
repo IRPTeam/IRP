@@ -239,19 +239,16 @@ Scenario: _051012 check Retail goods receipt movements by the Register  "R4011 F
 			| 'Number'      |
 			| '1 204'       |
 	* Check movements by the Register "R4011 Free stocks" 
-		And I click "Registrations report" button
+		And I click "Registrations report info" button
 		And I select "R4011 Free stocks" exact value from "Register" drop-down list
 		And I click "Generate report" button
 		Then "ResultTable" spreadsheet document is equal
-			| 'Retail goods receipt 1 204 dated 03.08.2023 10:54:07' | ''            | ''                    | ''          | ''           | ''         |
-			| 'Document registrations records'                       | ''            | ''                    | ''          | ''           | ''         |
-			| 'Register  "R4011 Free stocks"'                        | ''            | ''                    | ''          | ''           | ''         |
-			| ''                                                     | 'Record type' | 'Period'              | 'Resources' | 'Dimensions' | ''         |
-			| ''                                                     | ''            | ''                    | 'Quantity'  | 'Store'      | 'Item key' |
-			| ''                                                     | 'Receipt'     | '03.08.2023 10:54:07' | '1'         | 'Store 01'   | 'L/Green'  |
-			| ''                                                     | 'Receipt'     | '03.08.2023 10:54:07' | '1'         | 'Store 01'   | 'UNIQ'     |
-			| ''                                                     | 'Receipt'     | '03.08.2023 10:54:07' | '2'         | 'Store 01'   | '38/Black' |
-			| ''                                                     | 'Receipt'     | '03.08.2023 10:54:07' | '2'         | 'Store 01'   | 'PZU'      |
-			| ''                                                     | 'Receipt'     | '03.08.2023 10:54:07' | '2'         | 'Store 01'   | 'UNIQ'     |
+			| 'Retail goods receipt 1 204 dated 03.08.2023 10:54:07' | ''                    | ''           | ''         | ''         | ''         |
+			| 'Register  "R4011 Free stocks"'                        | ''                    | ''           | ''         | ''         | ''         |
+			| ''                                                     | 'Period'              | 'RecordType' | 'Store'    | 'Item key' | 'Quantity' |
+			| ''                                                     | '03.08.2023 10:54:07' | 'Receipt'    | 'Store 01' | 'L/Green'  | '1'        |
+			| ''                                                     | '03.08.2023 10:54:07' | 'Receipt'    | 'Store 01' | '38/Black' | '2'        |
+			| ''                                                     | '03.08.2023 10:54:07' | 'Receipt'    | 'Store 01' | 'PZU'      | '2'        |
+			| ''                                                     | '03.08.2023 10:54:07' | 'Receipt'    | 'Store 01' | 'UNIQ'     | '2'        |
+			| ''                                                     | '03.08.2023 10:54:07' | 'Receipt'    | 'Store 01' | 'UNIQ'     | '1'        |	
 		And I close all client application windows
-												

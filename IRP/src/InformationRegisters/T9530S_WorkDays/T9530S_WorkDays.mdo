@@ -90,6 +90,7 @@
   <fillChecking>ShowError</fillChecking>
   <fullTextSearch>Use</fullTextSearch>
   <dataHistory>Use</dataHistory>
+  <fillFromFillingValue>true</fillFromFillingValue>
   <fillValue xsi:type="core:UndefinedValue"/>
   <mainFilter>true</mainFilter>
  </dimensions>

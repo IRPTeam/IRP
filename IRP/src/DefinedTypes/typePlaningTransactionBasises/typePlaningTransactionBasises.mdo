@@ -23,11 +23,11 @@
   <types>DocumentRef.ChequeBondTransactionItem</types>
   <types>DocumentRef.PurchaseOrder</types>
   <types>DocumentRef.OutgoingPaymentOrder</types>
+  <types>DocumentRef.OpeningEntry</types>
   <types>DocumentRef.RetailReturnReceipt</types>
   <types>DocumentRef.SalesOrder</types>
   <types>DocumentRef.MoneyTransfer</types>
   <types>DocumentRef.CashStatement</types>
   <types>DocumentRef.SalesInvoice</types>
-  <types>DocumentRef.OpeningEntry</types>
  </type>
 </mdclass:DefinedType>

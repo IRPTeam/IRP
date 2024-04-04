@@ -20,6 +20,7 @@ Scenario: _0153500 preparation
 	When set True value to the constant Use accounting
 	And Delay 1
 	When set True value to the constant Use salary
+	When set True value to the constant Use fixed assets
 	And Delay 1
 	When set True value to the constant Use commission trading
 	* Load info
@@ -5314,7 +5315,7 @@ Scenario: _0154006831 check that additional attributes and properties are displa
 		And I click "Save and close" button
 	* Check that the additional Test attribute has been displayed on the form
 		When in opened panel I select "Incoterms"
-		And I activate "Incoterms (create)" window 
+		And I activate "Incoterm (create)" window 
 		And field "Test" is present on the form
 		And I close current window
 		And I go to line in "List" table
@@ -6068,8 +6069,8 @@ Scenario: _015400680 check add attributes (collection, Projects and Stores)
 		And I select current line in "ItemList" table
 		And I click choice button of "Additional analytic" attribute in "ItemList" table
 		And I go to line in "" table
-			| ''         |
-			| 'Projects' |
+			| ''        |
+			| 'Project' |
 		And I select current line in "" table
 		And I go to line in "List" table
 			| 'Description'|
@@ -6089,7 +6090,7 @@ Scenario: _015400680 check add attributes (collection, Projects and Stores)
 		And I click choice button of "Additional analytic" attribute in "ItemList" table
 		And I go to line in "" table
 			| ''         |
-			| 'Projects' |
+			| 'Project'  |
 		And I select current line in "" table
 		And I go to line in "List" table
 			| 'Description'|

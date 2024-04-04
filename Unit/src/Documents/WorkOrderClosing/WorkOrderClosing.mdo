@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mdclass:Document xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" xmlns:mdclassExtension="http://g5.1c.ru/v8/dt/metadata/mdclass/extension" uuid="baa200e3-ca21-4a6c-a37c-9d7163ff4014" extendedConfigurationObject="bb038f52-83c9-401e-a4f2-d822f634ce0a">
+  <producedTypes>
+    <objectType typeId="fb69435c-4b16-4dcd-b97a-314785fb7597" valueTypeId="c9cdd140-7698-432c-96e3-1d91bbf6e0f6"/>
+    <refType typeId="48c946f3-1ca1-4342-81b9-277c87c72dc9" valueTypeId="0914ce22-039b-4ddc-8efd-841ec63386dd"/>
+    <selectionType typeId="aaa8e45c-c001-4422-859f-e0b533dc74f4" valueTypeId="877c1f01-10ac-4e14-b7a5-2224c8b15729"/>
+    <listType typeId="67aced94-1878-4474-9308-85cc8de1bd1c" valueTypeId="44c8ecf9-02ea-4694-909d-858c93bb60f8"/>
+    <managerType typeId="8c479623-165e-4e88-b0bd-ace3fb9aa4d1" valueTypeId="e0a539d4-ff18-49bb-b26d-9069e771f6e3"/>
+  </producedTypes>
+  <name>WorkOrderClosing</name>
+  <objectBelonging>Adopted</objectBelonging>
+  <extension xsi:type="mdclassExtension:DocumentExtension">
+    <extendedConfigurationObject>Checked</extendedConfigurationObject>
+  </extension>
+  <useStandardCommands>true</useStandardCommands>
+</mdclass:Document>

@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mdclass:Document xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" xmlns:mdclassExtension="http://g5.1c.ru/v8/dt/metadata/mdclass/extension" uuid="9c8b4aae-5f76-43d4-9939-8cfb025974eb" extendedConfigurationObject="926d149e-ccb1-402e-804c-7dc25af8a435">
+  <producedTypes>
+    <objectType typeId="6048ca7f-de2e-4db5-8fdf-5f2d1cac7adb" valueTypeId="1308043c-6435-4dd9-b7d3-44805553376b"/>
+    <refType typeId="db782164-f87b-4827-a0b5-103166d861dd" valueTypeId="39e9b5db-c431-4681-8edf-a828ee7ed219"/>
+    <selectionType typeId="20c53f80-3956-447e-b647-04adc80ef908" valueTypeId="d151cc56-c313-4f07-b055-37049ab731f7"/>
+    <listType typeId="e6ac0354-0bca-45f9-869f-9f2d450e35f1" valueTypeId="45a65e32-6de4-4ab8-8396-ef136468668f"/>
+    <managerType typeId="63ce848b-ab22-470d-82ae-c63d8c93550f" valueTypeId="113b02ed-2fd7-4668-9b5c-df53980cf2ed"/>
+  </producedTypes>
+  <name>ItemStockAdjustment</name>
+  <objectBelonging>Adopted</objectBelonging>
+  <extension xsi:type="mdclassExtension:DocumentExtension">
+    <extendedConfigurationObject>Checked</extendedConfigurationObject>
+  </extension>
+  <useStandardCommands>true</useStandardCommands>
+</mdclass:Document>

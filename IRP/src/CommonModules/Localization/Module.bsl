@@ -792,6 +792,9 @@ Function Strings(Lang) Export
 	Strings.Insert("EqFP_CashierNameCanNotBeEmpty", NStr("en='Cashier name can not be empty. Author -> Partner -> Description (lang)';
 		|ru='Имя кассира не может быть пустым. Автор -> Партнер -> Наименование (язык)';
 		|tr='Kasiyer adı boş olamaz. Yazar -> Ortak -> Tanım (dil)'", Lang));
+	Strings.Insert("EqFP_ReceivedWrongAnswerFromDevice", NStr("en='Received wrong answer from device. Contact Administrator.';
+		|ru='Получен неверный ответ от устройства. Свяжитесь с Администратором.';
+		|tr='Received wrong answer from device. Contact Administrator.'", Lang));
 
 #EndRegion
 
@@ -858,6 +861,20 @@ Function Strings(Lang) Export
 	Strings.Insert("POS_ERROR_NoDeletingPrintedReceipt", NStr("en='Error! Receipt is already printed: %1';
 		|ru='Ошибка! Чек уже напечатан: %1';
 		|tr='Hata! Makbuz zaten basıldı: %1'", Lang));
+	
+	Strings.Insert("POS_Warning_Revert", NStr("en='Now you are canceling Sales/Return transaction on pos terminal!
+		|Are you sure you want to process transaction?';
+		|ru='Сейчас вы отменяете транзакцию Продажи/Возврата на POS-терминале!
+		|Вы уверены, что хотите обработать транзакцию?';
+		|tr='Now you are canceling Sales/Return transaction on pos terminal!
+		|Are you sure you want to process transaction?'", Lang));
+	
+	Strings.Insert("POS_Warning_ReturnInDay", NStr("en='Now you are going to RETURN money by pos terminal.
+		|Are you sure you want to process transaction?';
+		|ru='Сейчас вы собираетесь ВЕРНУТЬ деньги через POS-терминал. 
+		|Вы уверены, что хотите обработать транзакцию?';
+		|tr='Now you are going to RETURN money by pos terminal.
+		|Are you sure you want to process transaction?'", Lang));
 	
 #EndRegion
 
@@ -1637,6 +1654,9 @@ Function Strings(Lang) Export
 	Strings.Insert("Error_142", NStr("en='Wrong combination of send and receive debt type';
 		|ru='Неверное сочетание типов дебиторской и кредиторской задолженности';
 		|tr='Borç ve alacak tiplerin yanlıştır'", Lang));	
+	Strings.Insert("Error_143", NStr("en='Document Bank payment (currency exchange) not entered';
+		|ru='Документ Банковский платеж (обмен валют) не введен';
+		|tr='Document Bank payment (currency exchange) not entered'", Lang));	
 	
 	Strings.Insert("Error_FillTotalAmount", NStr("en='Fill total amount. Row: [%1]';
 		|ru='Необходимо заполнить сумму итого. Строка: [%1]';
@@ -2615,7 +2635,42 @@ Strings.Insert("MoneyTransfer_DR_R5022T_Expenses_CR_R3021B_CashInTransit",
 	NStr("en='MoneyTransfer DR (R5022T_Expenses) CR (R3021B_CashInTransit)';
 		|ru='ПереводДС ДР (R5022T_Расходы) КР (R3021B_ДеньгиВПути)';
 		|tr='ParaTransferi DR (R5022T_Giderler) CR (R3021B_NakitYolda)'", Lang));
-	
+
+Strings.Insert("CommissioningOfFixedAsset_DR_R8510B_BookValueOfFixedAsset_CR_R4050B_StockInventory",
+	NStr("en='CommissioningOfFixedAsset DR (R8510B_BookValueOfFixedAsset) CR (R4050B_StockInventory)';
+		|ru='ВводВЭксплуатациюОсновногоСредства Д-т (R8510B_BookValueOfFixedAsset) К-т (R4050B_StockInventory)';
+		|tr='CommissioningOfFixedAsset DR (R8510B_BookValueOfFixedAsset) CR (R4050B_StockInventory)'", Lang));
+
+Strings.Insert("DecommissioningOfFixedAsset_DR_R4050B_StockInventory_CR_R8510B_BookValueOfFixedAsset",
+	NStr("en='DecommissioningOfFixedAsset DR (R4050B_StockInventory) CR (R8510B_BookValueOfFixedAsset)';
+		|ru='СписаниеОсновногоСредства Д-т (R4050B_StockInventory) К-т (R8510B_BookValueOfFixedAsset)';
+		|tr='DecommissioningOfFixedAsset DR (R4050B_StockInventory) CR (R8510B_BookValueOfFixedAsset)'", Lang));
+
+Strings.Insert("ModernizationOfFixedAsset_DR_R8510B_BookValueOfFixedAsset_CR_R4050B_StockInventory",
+	NStr("en='ModernizationOfFixedAsset DR (R8510B_BookValueOfFixedAsset) CR (R4050B_StockInventory)';
+		|ru='МодернизацияОсновногоСредства Д-т (R8510B_BookValueOfFixedAsset) К-т (R4050B_StockInventory)';
+		|tr='ModernizationOfFixedAsset DR (R8510B_BookValueOfFixedAsset) CR (R4050B_StockInventory)'", Lang));
+
+Strings.Insert("ModernizationOfFixedAsset_DR_R4050B_StockInventory_CR_R8510B_BookValueOfFixedAsset",
+	NStr("en='ModernizationOfFixedAsset DR (R4050B_StockInventory) CR (R8510B_BookValueOfFixedAsset)';
+		|ru='МодернизацияОсновногоСредства Д-т (R4050B_StockInventory) К-т (R8510B_BookValueOfFixedAsset)';
+		|tr='ModernizationOfFixedAsset DR (R4050B_StockInventory) CR (R8510B_BookValueOfFixedAsset)'", Lang));
+
+Strings.Insert("FixedAssetTransfer_DR_R8510B_BookValueOfFixedAsset_CR_R8510B_BookValueOfFixedAsset",
+	NStr("en='FixedAssetTransfer DR (R8510B_BookValueOfFixedAsset) CR (R8510B_BookValueOfFixedAsset)';
+		|ru='ПередачаОсновногоСредства Д-т (R8510B_BookValueOfFixedAsset) К-т (R8510B_BookValueOfFixedAsset)';
+		|tr='FixedAssetTransfer DR (R8510B_BookValueOfFixedAsset) CR (R8510B_BookValueOfFixedAsset)'", Lang));
+
+Strings.Insert("DepreciationCalculation_DR_DepreciationFixedAsset_CR_R8510B_BookValueOfFixedAsset",
+	NStr("en='DepreciationCalculation DR (DepreciationFixedAsset) CR (R8510B_BookValueOfFixedAsset)';
+		|ru='РасчетАмортизации Д-т (DepreciationFixedAsset) К-т (R8510B_BookValueOfFixedAsset)';
+		|tr='DepreciationCalculation DR (DepreciationFixedAsset) CR (R8510B_BookValueOfFixedAsset)'", Lang));
+
+Strings.Insert("DepreciationCalculation_DR_R5022T_Expenses_CR_DepreciationFixedAsset",
+	NStr("en='DepreciationCalculation DR (R5022T_Expenses) CR (DepreciationFixedAsset)';
+		|ru='РасчетАмортизации Д-т (R5022T_Expenses) К-т (DepreciationFixedAsset)';
+		|tr='DepreciationCalculation DR (R5022T_Expenses) CR (DepreciationFixedAsset)'", Lang));
+
 #EndRegion
 
 #Region InternalCommands
@@ -2633,7 +2688,6 @@ Strings.Insert("MoneyTransfer_DR_R5022T_Expenses_CR_R3021B_CashInTransit",
 		|tr='Sadece Aktif Öğeleri Göster'", Lang));
 #EndRegion
 	
-
 #Region FormulaEditor
 	Strings.Insert("FormulaEditor_Delimiters", NStr("en='Delimiters';
 		|ru='Разделители';

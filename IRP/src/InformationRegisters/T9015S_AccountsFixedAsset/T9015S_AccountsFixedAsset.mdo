@@ -1,0 +1,217 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mdclass:InformationRegister xmlns:core="http://g5.1c.ru/v8/dt/mcore" xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" uuid="01b716d4-7b59-464b-946f-358a76ad9665">
+ <producedTypes>
+  <selectionType typeId="78584a99-7e6a-4edf-896c-100dd1d5e8c4" valueTypeId="097caf84-d664-4963-abbc-2a8281a8bc92"/>
+  <listType typeId="df6eb580-eebf-4875-bed4-2be3bcdecd57" valueTypeId="29993eee-a3b8-4de2-add1-cc28fa96add2"/>
+  <managerType typeId="524ab396-4dde-44bb-8a2d-0b80480c40c5" valueTypeId="c48d0c24-7e00-4218-98fa-5e1a8a08b43e"/>
+  <recordSetType typeId="355781a0-7ab1-4bb2-89cd-f94a49de47d5" valueTypeId="8708b327-7f6a-4e35-8e84-6d2a8a9f39f7"/>
+  <recordKeyType typeId="6cadfdd6-c813-485b-b975-5cdc65b9703c" valueTypeId="26c0363b-607b-499f-946f-1260cad9eccd"/>
+  <recordType typeId="99772cb1-a6db-440f-855b-71c4644becad" valueTypeId="95ccd7c5-3bb4-4c9e-b124-03adcf129663"/>
+  <recordManagerType typeId="0c416ffa-d283-42e7-a43c-9a44e5283b1f" valueTypeId="2d333a1d-4c48-4e86-a220-8d2f2c261738"/>
+ </producedTypes>
+ <name>T9015S_AccountsFixedAsset</name>
+ <synonym>
+  <key>en</key>
+  <value>Accounts (Fixed asset)</value>
+ </synonym>
+ <synonym>
+  <key>ru</key>
+  <value>Счета (Основное средство)</value>
+ </synonym>
+ <synonym>
+  <key>tr</key>
+  <value>Accounts (Fixed asset)</value>
+ </synonym>
+ <useStandardCommands>true</useStandardCommands>
+ <editType>InDialog</editType>
+ <defaultRecordForm>InformationRegister.T9015S_AccountsFixedAsset.Form.RecordForm</defaultRecordForm>
+ <informationRegisterPeriodicity>Day</informationRegisterPeriodicity>
+ <dataLockControlMode>Managed</dataLockControlMode>
+ <recordPresentation>
+  <key>en</key>
+  <value>Accounts (Fixed asset)</value>
+ </recordPresentation>
+ <recordPresentation>
+  <key>ru</key>
+  <value>Счета (Основное средство)</value>
+ </recordPresentation>
+ <recordPresentation>
+  <key>tr</key>
+  <value>Accounts (Fixed asset)</value>
+ </recordPresentation>
+ <resources uuid="817b5145-cf25-4dd9-a426-e0c2f48af7b9">
+  <name>Account</name>
+  <synonym>
+   <key>en</key>
+   <value>Account</value>
+  </synonym>
+  <synonym>
+   <key>ru</key>
+   <value>Счет</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Hesap</value>
+  </synonym>
+  <type>
+   <types>ChartOfAccountsRef.Basic</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fillChecking>ShowError</fillChecking>
+  <choiceParameterLinks>
+   <name>Filter.LedgerTypeVariant</name>
+   <field>InformationRegister.T9015S_AccountsFixedAsset.Dimension.LedgerTypeVariant</field>
+  </choiceParameterLinks>
+  <fullTextSearch>Use</fullTextSearch>
+  <dataHistory>Use</dataHistory>
+  <fillValue xsi:type="core:UndefinedValue"/>
+ </resources>
+ <resources uuid="a0d30041-365e-43dc-8c99-27c05bf108f8">
+  <name>AccountDepreciation</name>
+  <synonym>
+   <key>en</key>
+   <value>Account (depreciation)</value>
+  </synonym>
+  <synonym>
+   <key>ru</key>
+   <value>Счет (амортизация)</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Account (depreciation)</value>
+  </synonym>
+  <type>
+   <types>ChartOfAccountsRef.Basic</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fillChecking>ShowError</fillChecking>
+  <choiceParameterLinks>
+   <name>Filter.LedgerTypeVariant</name>
+   <field>InformationRegister.T9015S_AccountsFixedAsset.Dimension.LedgerTypeVariant</field>
+  </choiceParameterLinks>
+  <fullTextSearch>Use</fullTextSearch>
+  <dataHistory>Use</dataHistory>
+  <fillValue xsi:type="core:UndefinedValue"/>
+ </resources>
+ <dimensions uuid="863f5cd4-9923-4aeb-a12f-682ca9a40690">
+  <name>Company</name>
+  <synonym>
+   <key>en</key>
+   <value>Company</value>
+  </synonym>
+  <synonym>
+   <key>ru</key>
+   <value>Организация</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Şirket</value>
+  </synonym>
+  <type>
+   <types>CatalogRef.Companies</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fillChecking>ShowError</fillChecking>
+  <indexing>Index</indexing>
+  <fullTextSearch>Use</fullTextSearch>
+  <dataHistory>Use</dataHistory>
+  <fillValue xsi:type="core:UndefinedValue"/>
+  <mainFilter>true</mainFilter>
+ </dimensions>
+ <dimensions uuid="3edccb6e-f859-456b-915e-9a604def5a17">
+  <name>LedgerTypeVariant</name>
+  <synonym>
+   <key>en</key>
+   <value>Ledger type variant</value>
+  </synonym>
+  <synonym>
+   <key>ru</key>
+   <value>Вариант типа учета</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Defter tip seçeneği</value>
+  </synonym>
+  <type>
+   <types>CatalogRef.LedgerTypeVariants</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fillChecking>ShowError</fillChecking>
+  <indexing>Index</indexing>
+  <fullTextSearch>Use</fullTextSearch>
+  <dataHistory>Use</dataHistory>
+  <fillValue xsi:type="core:UndefinedValue"/>
+  <mainFilter>true</mainFilter>
+ </dimensions>
+ <dimensions uuid="e6026510-8b33-44b9-b96e-31c13edb4a57">
+  <name>FixedAsset</name>
+  <synonym>
+   <key>en</key>
+   <value>Fixed asset</value>
+  </synonym>
+  <synonym>
+   <key>ru</key>
+   <value>Основное средство</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Sabit kıymet</value>
+  </synonym>
+  <type>
+   <types>CatalogRef.FixedAssets</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <dataHistory>Use</dataHistory>
+  <fillFromFillingValue>true</fillFromFillingValue>
+  <fillValue xsi:type="core:UndefinedValue"/>
+  <master>true</master>
+  <mainFilter>true</mainFilter>
+ </dimensions>
+ <dimensions uuid="f0f33f86-6301-46c2-b702-109a6fdab303">
+  <name>Type</name>
+  <synonym>
+   <key>en</key>
+   <value>Type</value>
+  </synonym>
+  <synonym>
+   <key>ru</key>
+   <value>Вид</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Tip</value>
+  </synonym>
+  <type>
+   <types>EnumRef.FixedAssetTypes</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <dataHistory>Use</dataHistory>
+  <fillValue xsi:type="core:UndefinedValue"/>
+  <mainFilter>true</mainFilter>
+ </dimensions>
+ <forms uuid="8dfe1166-1a7a-4913-81d5-e10693aacf16">
+  <name>RecordForm</name>
+  <synonym>
+   <key>en</key>
+   <value>Record form</value>
+  </synonym>
+  <synonym>
+   <key>ru</key>
+   <value>Форма записи</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Kayıt formu</value>
+  </synonym>
+  <usePurposes>PersonalComputer</usePurposes>
+  <usePurposes>MobileDevice</usePurposes>
+ </forms>
+</mdclass:InformationRegister>

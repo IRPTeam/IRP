@@ -1534,9 +1534,7 @@ Scenario: _0850020 check auto payment form by acquiring (Enter)
 	* Check control code string tab
 		And I click "Show hidden tables" button
 		Then "Edit hidden tables" window is opened
-		And I expand "ControlCodeStrings [1]" group
-		And I move to "ControlCodeStrings [1]" tab
-		And I activate "Code string" field in "ControlCodeStrings" table
+		And I move to "ControlCodeStrings (1)" tab
 		And "ControlCodeStrings" table became equal
 			| 'Key'   | 'Code string'            | 'Code is approved'    |
 			| '*'     | '11111111111111111111'   | 'Yes'                 |
@@ -1698,8 +1696,7 @@ Scenario: _0850024 return by card without basis document (without RRN)
 			| '1'   | '200,00'   | ''             | 'Card 03'        | ''                   | 'No'                  | 'Bank term 03'   | 'POS Terminal'   | '1,00'      | '*'           |
 		And I click "Show hidden tables" button
 		Then "Edit hidden tables" window is opened
-		And I expand "ControlCodeStrings [1]" group
-		And I move to "ControlCodeStrings [1]" tab
+		And I move to "ControlCodeStrings (1)" tab
 		And "ControlCodeStrings" table became equal
 			| 'Key'   | 'Code string'            | 'Code is approved'    |
 			| '*'     | '11111111111111111111'   | 'Yes'                 |
@@ -2464,8 +2461,7 @@ Scenario: _0260156 check marking code in the Retail sales receipt and Retail ret
 		And I input "Q3VycmVudCByb3cgd2lsbCBkZWNvZGUgdG8gYmFzZTY0" text in the field named "Barcode"
 		And I move to the next attribute	
 		And I click "Show hidden tables" button
-		And I expand "ControlCodeStrings [1]" group
-		And I move to "ControlCodeStrings [1]" tab		
+		And I move to "ControlCodeStrings (1)" tab
 		And "ControlCodeStrings" table became equal
 			| 'Key'   | 'Code string'                                    | 'Code is approved'    |
 			| '*'     | 'Q3VycmVudCByb3cgd2lsbCBkZWNvZGUgdG8gYmFzZTY0'   | 'Yes'                 |
@@ -2498,8 +2494,7 @@ Scenario: _0260156 check marking code in the Retail sales receipt and Retail ret
 		And I click "Sales return" button
 		And I click "Ok" button
 		And I click "Show hidden tables" button
-		And I expand "ControlCodeStrings [1]" group
-		And I move to "ControlCodeStrings [1]" tab		
+		And I move to "ControlCodeStrings (1)" tab
 		And "ControlCodeStrings" table became equal
 			| 'Key'   | 'Code string'                                    | 'Code is approved'    |
 			| '*'     | 'Q3VycmVudCByb3cgd2lsbCBkZWNvZGUgdG8gYmFzZTY0'   | 'No'                  |
@@ -2515,8 +2510,7 @@ Scenario: _0260156 check marking code in the Retail sales receipt and Retail ret
 		And I click "Post" button
 	* Check 
 		And I click "Show hidden tables" button
-		And I expand "ControlCodeStrings [2]" group
-		And I move to "ControlCodeStrings [2]" tab		
+		And I move to "ControlCodeStrings (2)" tab	
 		And "ControlCodeStrings" table became equal
 			| 'Key'   | 'Code string'                                    | 'Code is approved'    |
 			| '*'     | 'Q3VycmVudCByb3cgd2lsbCBkZWNvZGUgdG8gYmFzZTY0'   | 'No'                  |
@@ -2538,8 +2532,7 @@ Scenario: _0260157 check marking code when change item key in the RSR
 		And I move to the next attribute	
 	* Check marking code
 		And I click "Show hidden tables" button
-		And I expand "ControlCodeStrings [1]" group
-		And I move to "ControlCodeStrings [1]" tab		
+		And I move to "ControlCodeStrings (1)" tab
 		And "ControlCodeStrings" table became equal
 			| 'Key'   | 'Code string'                                    | 'Code is approved'    |
 			| '*'     | 'Q3VycmVudCByb3cgd2lsbCBkZWNvZGUgdG8gYmFzZTY0'   | 'Yes'                 |
@@ -2552,8 +2545,7 @@ Scenario: _0260157 check marking code when change item key in the RSR
 			| 'ODS'         |
 		And I select current line in "List" table
 		And I click "Show hidden tables" button
-		And I expand "ControlCodeStrings [0]" group
-		And I move to "ControlCodeStrings [0]" tab		
+		And I move to "ControlCodeStrings (0)" tab		
 		Then the number of "ControlCodeStrings" table lines is "равно" 0
 		And I close current window
 	* Check marking code when change quantity
@@ -2570,8 +2562,7 @@ Scenario: _0260157 check marking code when change item key in the RSR
 		And I input "2,000" text in "Quantity" field of "ItemList" table
 		And I finish line editing in "ItemList" table
 		And I click "Show hidden tables" button
-		And I expand "ControlCodeStrings [1]" group
-		And I move to "ControlCodeStrings [1]" tab		
+		And I move to "ControlCodeStrings (1)" tab
 		Then the number of "ControlCodeStrings" table lines is "равно" 1
 		And I close current window
 				
@@ -2591,8 +2582,7 @@ Scenario: _0260158 check marking code when change item key in the RRR
 		And I move to the next attribute	
 	* Check marking code
 		And I click "Show hidden tables" button
-		And I expand "ControlCodeStrings [1]" group
-		And I move to "ControlCodeStrings [1]" tab		
+		And I move to "ControlCodeStrings (1)" tab	
 		And "ControlCodeStrings" table became equal
 			| 'Key'   | 'Code string'                                    | 'Code is approved'    |
 			| '*'     | 'Q3VycmVudCByb3cgd2lsbCBkZWNvZGUgdG8gYmFzZTY0'   | 'Yes'                 |
@@ -2605,8 +2595,7 @@ Scenario: _0260158 check marking code when change item key in the RRR
 			| 'ODS'         |
 		And I select current line in "List" table
 		And I click "Show hidden tables" button
-		And I expand "ControlCodeStrings [0]" group
-		And I move to "ControlCodeStrings [0]" tab		
+		And I move to "ControlCodeStrings (0)" tab	
 		Then the number of "ControlCodeStrings" table lines is "равно" 0
 		And I close current window
 	* Check clean marking code when change quantity
@@ -2623,8 +2612,7 @@ Scenario: _0260158 check marking code when change item key in the RRR
 		And I input "2,000" text in "Quantity" field of "ItemList" table
 		And I finish line editing in "ItemList" table
 		And I click "Show hidden tables" button
-		And I expand "ControlCodeStrings [1]" group
-		And I move to "ControlCodeStrings [1]" tab		
+		And I move to "ControlCodeStrings (1)" tab	
 		Then the number of "ControlCodeStrings" table lines is "равно" 1
 		And I close current window	
 		And I close all client application windows	
@@ -2643,8 +2631,7 @@ Scenario: _0260159 check marking code without check code string
 		And I move to the next attribute
 	* Check 
 		And I click "Show hidden tables" button
-		And I expand "ControlCodeStrings [1]" group
-		And I move to "ControlCodeStrings [1]" tab	
+		And I move to "ControlCodeStrings (1)" tab
 		And "ControlCodeStrings" table contains lines
 			| 'Key' | 'Code string' | 'Code is approved' | 'Not check' |
 			| '*'   | '*'           | 'Yes'              | 'Yes'       |

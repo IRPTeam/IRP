@@ -162,6 +162,20 @@
           <value>10</value>
         </code>
       </content>
+      <content id="457b2655-1ac4-4443-9d2f-d5b97b218b81">
+        <name>BankPayment_DR_R2020B_AdvancesFromCustomers_R2021B_CustomersTransactions_CR_R3010B_CashOnHand</name>
+        <description></description>
+        <code xsi:type="core:NumberValue">
+          <value>62</value>
+        </code>
+      </content>
+      <content id="846d9a22-1946-4b22-a831-e5055950c36e">
+        <name>BankPayment_DR_R2021B_CustomersTransactions_CR_R2020B_AdvancesFromCustomers</name>
+        <description></description>
+        <code xsi:type="core:NumberValue">
+          <value>63</value>
+        </code>
+      </content>
     </items>
     <items id="e1dd6187-4d04-4b2a-8c5b-f6ca00ed7cc6">
       <name>Document_BankReceipt</name>
@@ -176,9 +190,23 @@
         </code>
       </content>
       <content id="e6f92cc0-3065-4c8d-b902-aee4c0468291">
-        <name>BankReceipt_DR_R2021B_CustomersTransactions_CR_R2020B_AdvancesFromCustomers</name>
+        <name>BankReceipt_DR_R2020B_AdvancesFromCustomers_CR_R2021B_CustomersTransactions</name>
         <code xsi:type="core:NumberValue">
           <value>14</value>
+        </code>
+      </content>
+      <content id="75a21bc0-af5b-4d26-8313-ad8281d4c473">
+        <name>BankReceipt_DR_R3010B_CashOnHand_CR_R1020B_AdvancesToVendors_R1021B_VendorsTransactions</name>
+        <description></description>
+        <code xsi:type="core:NumberValue">
+          <value>66</value>
+        </code>
+      </content>
+      <content id="111f2066-7855-40c6-bf54-228e5ae44756">
+        <name>BankReceipt_DR_R1020B_AdvancesToVendors_CR_R1021B_VendorsTransactions</name>
+        <description></description>
+        <code xsi:type="core:NumberValue">
+          <value>67</value>
         </code>
       </content>
     </items>
@@ -312,6 +340,20 @@
           <value>35</value>
         </code>
       </content>
+      <content id="f7106390-3987-4720-aeee-dacaa0f2a3b3">
+        <name>CashPayment_DR_R2020B_AdvancesFromCustomers_R2021B_CustomersTransactions_CR_R3010B_CashOnHand</name>
+        <description></description>
+        <code xsi:type="core:NumberValue">
+          <value>64</value>
+        </code>
+      </content>
+      <content id="06d24c46-557b-4e20-a5a0-6b707047e40f">
+        <name>CashPayment_DR_R2021B_CustomersTransactions_CR_R2020B_AdvancesFromCustomers</name>
+        <description></description>
+        <code xsi:type="core:NumberValue">
+          <value>65</value>
+        </code>
+      </content>
     </items>
     <items id="e77f99dd-6495-487d-9873-5edbf00b51b4">
       <name>Document_CashReceipt</name>
@@ -326,9 +368,23 @@
         </code>
       </content>
       <content id="e67d6131-1aea-4ae7-99d2-e8025d13fd1d">
-        <name>CashReceipt_DR_R2021B_CustomersTransactions_CR_R2020B_AdvancesFromCustomers</name>
+        <name>CashReceipt_DR_R2020B_AdvancesFromCustomers_CR_R2021B_CustomersTransactions</name>
         <code xsi:type="core:NumberValue">
           <value>37</value>
+        </code>
+      </content>
+      <content id="c992cd20-6d49-4b01-935b-3e21fdced2fa">
+        <name>CashReceipt_DR_R3010B_CashOnHand_CR_R1020B_AdvancesToVendors_R1021B_VendorsTransactions</name>
+        <description></description>
+        <code xsi:type="core:NumberValue">
+          <value>68</value>
+        </code>
+      </content>
+      <content id="92cc20b7-780f-419b-84e1-bf4c3e7a54ec">
+        <name>CashReceipt_DR_R1020B_AdvancesToVendors_CR_R1021B_VendorsTransactions</name>
+        <description></description>
+        <code xsi:type="core:NumberValue">
+          <value>69</value>
         </code>
       </content>
     </items>

@@ -1406,8 +1406,9 @@ Function GetAnalytics_RevenueFromSales(Parameters)
 	AccountingServer.SetDebitExtDimensions(Parameters, AccountingAnalytics, AdditionalAnalytics);
 	
 	// Credit
-	AccountingAnalytics.Credit = ChartsOfAccounts.Basic.FindByCode("REV-SALES"); //Credit.Account;
-
+	Credit = AccountingServer.GetT9014S_AccountsExpenseRevenue(AccountParameters, Parameters.RowData.RevenueType);
+	AccountingAnalytics.Credit = Credit.Account;
+	
 	// Credit - Analytics
 	AccountingServer.SetCreditExtDimensions(Parameters, AccountingAnalytics);
 	Return AccountingAnalytics;

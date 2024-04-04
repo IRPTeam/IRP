@@ -433,10 +433,6 @@
     <use>Use</use>
   </content>
   <content>
-    <metadata>Document.ModernizationOfFixedAsset</metadata>
-    <use>Use</use>
-  </content>
-  <content>
     <metadata>Document.OutgoingPaymentOrder</metadata>
     <use>Use</use>
   </content>
@@ -638,6 +634,10 @@
   </content>
   <content>
     <metadata>Document.CashStatement</metadata>
+    <use>Use</use>
+  </content>
+  <content>
+    <metadata>Document.ModernizationOfFixedAsset</metadata>
     <use>Use</use>
   </content>
   <content>

@@ -14,6 +14,8 @@ Background:
 
 Scenario: preparation
 	When set True value to the constant
+	When set True value to the constant use Salary
+	When set True value to the constant use Fixed assets
 	* Add VA extension
 		Given I open hyperlink "e1cib/list/Catalog.Extensions"
 		If "List" table does not contain lines Then
@@ -1295,4 +1297,144 @@ Scenario: Open object form "Incoterms"
 	Given I open "Incoterms" reference main form
 	If the warning is displayed then
 		Then I raise "Failed to open catalog form Incoterms" exception
+	And I close current window
+
+Scenario: Open choise form "Incoterms"
+	And I close all client application windows
+	And I execute the built-in language code (Extension)
+		| 'OpenForm("Catalog.Incoterms.ChoiceForm", , Undefined, , , , , FormWindowOpeningMode.Independent)'   |
+	If the warning is displayed then
+		Then I raise "Failed to open catalog choise form Incoterms" exception
+	And I close current window
+
+Scenario: Open list form "AccrualAndDeductionTypes" 
+	And I close all client application windows
+	Given I open "AccrualAndDeductionTypes" catalog default form
+	If the warning is displayed then
+		Then I raise "Failed to open catalog form AccrualAndDeductionTypes" exception
+	And I close current window
+
+Scenario: Open object form "AccrualAndDeductionTypes"
+	And I close all client application windows
+	Given I open "AccrualAndDeductionTypes" reference main form
+	If the warning is displayed then
+		Then I raise "Failed to open catalog form AccrualAndDeductionTypes" exception
+	And I close current window
+
+Scenario: Open choise form "AccrualAndDeductionTypes"
+	And I close all client application windows
+	And I execute the built-in language code (Extension)
+		| 'OpenForm("Catalog.AccrualAndDeductionTypes.ChoiceForm", , Undefined, , , , , FormWindowOpeningMode.Independent)'   |
+	If the warning is displayed then
+		Then I raise "Failed to open catalog choise form AccrualAndDeductionTypes" exception
+	And I close current window
+
+Scenario: Open list form "EmployeePositions" 
+	And I close all client application windows
+	Given I open "EmployeePositions" catalog default form
+	If the warning is displayed then
+		Then I raise "Failed to open catalog form EmployeePositions" exception
+	And I close current window
+
+Scenario: Open object form "EmployeePositions"
+	And I close all client application windows
+	Given I open "EmployeePositions" reference main form
+	If the warning is displayed then
+		Then I raise "Failed to open catalog form EmployeePositions" exception
+	And I close current window
+
+Scenario: Open choise form "EmployeePositions"
+	And I close all client application windows
+	And I execute the built-in language code (Extension)
+		| 'OpenForm("Catalog.EmployeePositions.ChoiceForm", , Undefined, , , , , FormWindowOpeningMode.Independent)'   |
+	If the warning is displayed then
+		Then I raise "Failed to open catalog choise form EmployeePositions" exception
+	And I close current window
+
+Scenario: Open list form "EmployeeSchedule" 
+	And I close all client application windows
+	Given I open "EmployeeSchedule" catalog default form
+	If the warning is displayed then
+		Then I raise "Failed to open catalog form EmployeeSchedule" exception
+	And I close current window
+
+Scenario: Open object form "EmployeeSchedule"
+	And I close all client application windows
+	Given I open "EmployeeSchedule" reference main form
+	If the warning is displayed then
+		Then I raise "Failed to open catalog form EmployeeSchedule" exception
+	And I close current window
+
+Scenario: Open choise form "EmployeeSchedule"
+	And I close all client application windows
+	And I execute the built-in language code (Extension)
+		| 'OpenForm("Catalog.EmployeeSchedule.ChoiceForm", , Undefined, , , , , FormWindowOpeningMode.Independent)'   |
+	If the warning is displayed then
+		Then I raise "Failed to open catalog choise form EmployeeSchedule" exception
+	And I close current window
+
+Scenario: Open list form "FixedAssets" 
+	And I close all client application windows
+	Given I open "FixedAssets" catalog default form
+	If the warning is displayed then
+		Then I raise "Failed to open catalog form FixedAssets" exception
+	And I close current window
+
+Scenario: Open object form "FixedAssets"
+	And I close all client application windows
+	Given I open "FixedAssets" reference main form
+	If the warning is displayed then
+		Then I raise "Failed to open catalog form FixedAssets" exception
+	And I close current window
+
+Scenario: Open choise form "FixedAssets"
+	And I close all client application windows
+	And I execute the built-in language code (Extension)
+		| 'OpenForm("Catalog.FixedAssets.ChoiceForm", , Undefined, , , , , FormWindowOpeningMode.Independent)'   |
+	If the warning is displayed then
+		Then I raise "Failed to open catalog choise form FixedAssets" exception
+	And I close current window
+
+Scenario: Open list form "FixedAssetsLedgerTypes" 
+	And I close all client application windows
+	Given I open "FixedAssetsLedgerTypes" catalog default form
+	If the warning is displayed then
+		Then I raise "Failed to open catalog form FixedAssetsLedgerTypes" exception
+	And I close current window
+
+Scenario: Open object form "FixedAssetsLedgerTypes"
+	And I close all client application windows
+	Given I open "FixedAssetsLedgerTypes" reference main form
+	If the warning is displayed then
+		Then I raise "Failed to open catalog form FixedAssetsLedgerTypes" exception
+	And I close current window
+
+Scenario: Open choise form "FixedAssetsLedgerTypes"
+	And I close all client application windows
+	And I execute the built-in language code (Extension)
+		| 'OpenForm("Catalog.FixedAssetsLedgerTypes.ChoiceForm", , Undefined, , , , , FormWindowOpeningMode.Independent)'   |
+	If the warning is displayed then
+		Then I raise "Failed to open catalog choise form FixedAssetsLedgerTypes" exception
+	And I close current window
+
+Scenario: Open list form "DepreciationSchedules" 
+	And I close all client application windows
+	Given I open "DepreciationSchedules" catalog default form
+	If the warning is displayed then
+		Then I raise "Failed to open catalog form DepreciationSchedules" exception
+	And I close current window
+
+Scenario: Open object form "DepreciationSchedules"
+	And I close all client application windows
+	Given I open "DepreciationSchedules" reference main form
+	If the warning is displayed then
+		Then I raise "Failed to open catalog form DepreciationSchedules" exception
+	And I close current window
+
+Scenario: Open choise form "DepreciationSchedules"
+	And I close all client application windows
+	And I execute the built-in language code (Extension)
+		| 'OpenForm("Catalog.DepreciationSchedules.ChoiceForm", , Undefined, , , , , FormWindowOpeningMode.Independent)'   |
+	If the warning is displayed then
+		Then I raise "Failed to open catalog choise form DepreciationSchedules" exception
 	And I close current window

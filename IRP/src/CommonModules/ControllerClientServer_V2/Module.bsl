@@ -2562,7 +2562,8 @@ Function BindDate(Parameters)
 	
 	Binding.Insert("FixedAssetTransfer", 
 		"StepChangeResponsiblePersonSenderByFixedAsset,
-		|StepChangeBusinessUnitSenderByFixedAsset");
+		|StepChangeBranchByFixedAsset,
+		|StepChangeProfitLossCenterSenderByFixedAsset");
 	
 	Binding.Insert("EmployeeTransfer", 
 		"StepChangeFromPositionByEmployee,
@@ -2573,7 +2574,6 @@ Function BindDate(Parameters)
 		|StepChangeEmployeeScheduleByEmployee,
 		|StepChangeProfitLossCenterByEmployee,
 		|StepChangeBranchByEmployee");
-	
 	
 	Binding.Insert("EmployeeFiring", 
 		"StepChangePositionByEmployee,
@@ -2760,14 +2760,14 @@ Function BindCompany(Parameters)
 	
 	Binding.Insert("FixedAssetTransfer", 
 		"StepChangeResponsiblePersonSenderByFixedAsset,
-		|StepChangeBusinessUnitSenderByFixedAsset");
+		|StepChangeBranchByFixedAsset,
+		|StepChangeProfitLossCenterSenderByFixedAsset");
 	
 	Binding.Insert("EmployeeTransfer", 
 		"StepChangeFromPositionByEmployee,
 		|StepChangeEmployeeScheduleByEmployee,
 		|StepChangeProfitLossCenterByEmployee,
 		|StepChangeBranchByEmployee");
-	
 	
 	Binding.Insert("EmployeeFiring", 
 		"StepChangePositionByEmployee,
@@ -2871,6 +2871,21 @@ Procedure StepChangeBranchByEmployee(Parameters, Chain) Export
 	Chain.ChangeBranchByEmployee.Options.Add(Options);
 EndProcedure
 
+// Branch.ChangeBranchByFixedAsset.Step
+Procedure StepChangeBranchByFixedAsset(Parameters, Chain) Export
+	Chain.ChangeBranchByFixedAsset.Enable = True;
+	If Chain.Idle Then
+		Return;
+	EndIf;
+	Chain.ChangeBranchByFixedAsset.Setter = "SetBranch";
+	Options = ModelClientServer_V2.ChangeBranchByFixedAssetOptions();
+	Options.FixedAsset = GetFixedAsset(Parameters);
+	Options.Company    = GetCompany(Parameters);
+	Options.Date       = GetDate(Parameters);
+	Options.StepName = "StepChangeBranchByFixedAsset";
+	Chain.ChangeBranchByFixedAsset.Options.Add(Options);
+EndProcedure
+
 #EndRegion
 
 #Region RECEIVE_BRANCH
@@ -2936,7 +2951,8 @@ Function BindFixedAsset(Parameters)
 	Binding = New Structure();
 	Binding.Insert("FixedAssetTransfer", 
 		"StepChangeResponsiblePersonSenderByFixedAsset,
-		|StepChangeBusinessUnitSenderByFixedAsset");
+		|StepChangeBranchByFixedAsset,
+		|StepChangeProfitLossCenterSenderByFixedAsset");
 
 	Return BindSteps("BindVoid", DataPath, Binding, Parameters, "BindFixedAsset");
 EndFunction
@@ -2975,34 +2991,34 @@ EndProcedure
 
 #EndRegion
 
-#Region BRANCH_SENDER
+#Region PROFIT_LOSS_CENTER_SENDER
 
-// BusinessUnitSender.Set
-Procedure SetBusinessUnitSender(Parameters, Results) Export
-	Binding = BindBusinessUnitSender(Parameters);
+// ProfitLossCenterSender.Set
+Procedure SetProfitLossCenterSender(Parameters, Results) Export
+	Binding = BindProfitLossCenterSender(Parameters);
 	SetterObject(Binding.StepsEnabler, Binding.DataPath, Parameters, Results);
 EndProcedure
 
-// BusinessUnitSender.Bind
-Function BindBusinessUnitSender(Parameters)
-	DataPath = "BusinessUnitSender";
+// ProfitLossCenterSender.Bind
+Function BindProfitLossCenterSender(Parameters)
+	DataPath = "ProfitLossCenterSender";
 	Binding = New Structure();
-	Return BindSteps("BindVoid", DataPath, Binding, Parameters, "BindBusinessUnitSender");
+	Return BindSteps("BindVoid", DataPath, Binding, Parameters, "BindProfitLossCenterSender");
 EndFunction
 
-// BusinessUnitSender.ChangeBusinessUnitSenderSenderByFixedAsset.Step
-Procedure StepChangeBusinessUnitSenderByFixedAsset(Parameters, Chain) Export
-	Chain.ChangeBusinessUnitSenderByFixedAsset.Enable = True;
+// ProfitLossCenterSender.ChangeProfitLossCenterSenderByFixedAsset.Step
+Procedure StepChangeProfitLossCenterSenderByFixedAsset(Parameters, Chain) Export
+	Chain.ChangeProfitLossCenterSenderByFixedAsset.Enable = True;
 	If Chain.Idle Then
 		Return;
 	EndIf;
-	Chain.ChangeBusinessUnitSenderByFixedAsset.Setter = "SetBusinessUnitSender";
-	Options = ModelClientServer_V2.ChangeBusinessUnitSenderByFixedAssetOptions();
+	Chain.ChangeProfitLossCenterSenderByFixedAsset.Setter = "SetProfitLossCenterSender";
+	Options = ModelClientServer_V2.ChangeProfitLossCenterSenderByFixedAssetOptions();
 	Options.FixedAsset = GetFixedAsset(Parameters);
 	Options.Company    = GetCompany(Parameters);
 	Options.Date       = GetDate(Parameters);
-	Options.StepName = "StepChangeBusinessUnitSenderByFixedAsset";
-	Chain.ChangeBusinessUnitSenderByFixedAsset.Options.Add(Options);
+	Options.StepName = "StepChangeProfitLossCenterSenderByFixedAsset";
+	Chain.ChangeProfitLossCenterSenderByFixedAsset.Options.Add(Options);
 EndProcedure
 
 #EndRegion
@@ -14709,6 +14725,74 @@ EndProcedure
 
 #EndRegion
 
+#Region EMPLOYEE_LIST
+
+#Region EMPLOYEE_LIST_SALARY_TYPE
+
+// EmployeeList.SalaryType.OnChange
+Procedure EmployeeListSalaryTypeOnChange(Parameters) Export
+	Binding = BindEmployeeListSalaryType(Parameters);
+	ModelClientServer_V2.EntryPoint(Binding.StepsEnabler, Parameters);
+EndProcedure
+
+// EmployeeList.SalaryType.Get
+Function GetEmployeeListSalaryType(Parameters, _Key)
+	Return GetPropertyObject(Parameters, BindEmployeeListSalaryType(Parameters).DataPath, _Key);
+EndFunction
+
+// EmployeeList.SalaryType.Bind
+Function BindEmployeeListSalaryType(Parameters)
+	DataPath = "EmployeeList.SalaryType";
+	Binding = New Structure();
+	Binding.Insert("OpeningEntry", "StepChangeSalaryBySalaryType");
+	
+	Return BindSteps("BindVoid", DataPath, Binding, Parameters, "BindEmployeeListSalaryType");
+EndFunction
+
+#Region EMPLOYEE_LIST_SALARY
+
+// EmployeeList.Salary.Set
+Procedure SetEmployeeListSalary(Parameters, Results) Export
+	Binding = BindEmployeeListSalary(Parameters);
+	SetterObject(Binding.StepsEnabler, Binding.DataPath, Parameters, Results);
+EndProcedure
+
+// EmployeeList.Salary.Get
+Function GetEmployeeListSalary(Parameters, _Key)
+	Return GetPropertyObject(Parameters, BindEmployeeListSalary(Parameters).DataPath, _Key);
+EndFunction
+
+// EmployeeList.Salary.Bind
+Function BindEmployeeListSalary(Parameters)
+	DataPath = "EmployeeList.Salary";
+	Binding = New Structure();
+	
+	Return BindSteps("BindVoid", DataPath, Binding, Parameters, "BindEmployeeListSalary");
+EndFunction
+
+// EmployeeList.Salary.ChangeSalaryBySalaryType.Step
+Procedure StepChangeSalaryBySalaryType(Parameters, Chain) Export
+	Chain.ChangeSalaryBySalaryType.Enable = True;
+	If Chain.Idle Then
+		Return;
+	EndIf;
+	Chain.ChangeSalaryBySalaryType.Setter = "SetEmployeeListSalary";
+	For Each Row In GetRows(Parameters, Parameters.TableName) Do
+		Options = ModelClientServer_V2.ChangeSalaryBySalaryTypeOptions();
+		Options.SalaryType      = GetEmployeeListSalaryType(Parameters, Row.Key);
+		Options.CurrentSalary   = GetEmployeeListSalary(Parameters, Row.Key);
+		Options.Key = Row.Key;
+		Options.StepName = "StepChangeSalaryBySalaryType";
+		Chain.ChangeSalaryBySalaryType.Options.Add(Options);
+	EndDo;
+EndProcedure
+
+#EndRegion
+
+#EndRegion
+
+#EndRegion
+
 #Region PAYROLL_LISTS
 
 #Region PAYROLL_LISTS_EMPLOYEE
@@ -15370,6 +15454,9 @@ Procedure ExecuteViewNotify(Parameters, ViewNotify)
 	ElsIf ViewNotify = "AdvanceFromRetailCustomersOnCopyRowFormNotify" Then ViewClient_V2.AdvanceFromRetailCustomersOnCopyRowFormNotify(Parameters);
 	ElsIf ViewNotify = "SalaryPaymentOnAddRowFormNotify"               Then ViewClient_V2.SalaryPaymentOnAddRowFormNotify(Parameters);
 	ElsIf ViewNotify = "SalaryPaymentOnCopyRowFormNotify"              Then ViewClient_V2.SalaryPaymentOnCopyRowFormNotify(Parameters);
+	
+	ElsIf ViewNotify = "EmployeeListOnAddRowFormNotify"               Then ViewClient_V2.EmployeeListOnAddRowFormNotify(Parameters);
+	ElsIf ViewNotify = "EmployeeListOnCopyRowFormNotify"              Then ViewClient_V2.EmployeeListOnCopyRowFormNotify(Parameters);
 	
 	ElsIf ViewNotify = "OnSetPayrollListsAmountNotify" Then ViewClient_V2.OnSetPayrollListsAmountNotify(Parameters);
 	ElsIf ViewNotify = "OnSetSalaryAmountNotify" Then ViewClient_V2.OnSetSalaryAmountNotify(Parameters);

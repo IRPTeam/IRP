@@ -11,5 +11,6 @@
     <picture>CommonPicture.Unit_Autotest</picture>
   </picture>
   <content>DataProcessor.Unit_RunTest</content>
+  <content>Catalog.Unit_ErrorTypes</content>
   <subsystems>Unit_IntegrationExchanges</subsystems>
 </mdclass:Subsystem>

@@ -5,6 +5,11 @@ Procedure OnReadAtServer(CurrentObject)
 EndProcedure
 
 &AtServer
+Procedure BeforeWriteAtServer(Cancel, CurrentObject, WriteParameters)
+	AccountingServer.BeforeWriteAtServer(Object, ThisObject, Cancel, CurrentObject, WriteParameters);
+EndProcedure
+
+&AtServer
 Procedure OnCreateAtServer(Cancel, StandardProcessing)
 	DocumentsServer.OnCreateAtServer(Object, ThisObject, Cancel, StandardProcessing);
 	If Parameters.Key.IsEmpty() Then
@@ -20,6 +25,7 @@ EndProcedure
 &AtClientAtServerNoContext
 Procedure SetVisibilityAvailability(Object, Form)
 	Form.Items.EditCurrencies.Enabled = Not Form.ReadOnly;
+	Form.Items.EditAccounting.Enabled = Not Form.ReadOnly;
 EndProcedure
 
 &AtClient
@@ -59,6 +65,41 @@ EndProcedure
 &AtServer
 Procedure GeneratedFormCommandActionByNameServer(CommandName) Export
 	ExternalCommandsServer.GeneratedFormCommandActionByName(Object, ThisObject, CommandName);
+EndProcedure
+
+&AtClient
+Procedure FillCalculations(Command)
+	If Not CheckFilling() Then
+		Return;
+	EndIf;
+	FillCalculationsAtServer();
+EndProcedure
+
+&AtServer
+Procedure FillCalculationsAtServer()
+	Object.Calculations.Load(
+		Documents.DepreciationCalculation.GetCalculations(Object.Ref, Object.Date, Object.Company, Object.Branch));
+EndProcedure
+
+&AtClient
+Procedure EditAccounting(Command)
+	CurrentData = ThisObject.Items.Calculations.CurrentData;
+	If CurrentData = Undefined Then
+		Return;
+	EndIf;
+	UpdateAccountingData();
+	AccountingClient.OpenFormEditAccounting(Object, ThisObject, CurrentData, "Calculations");
+EndProcedure
+
+&AtServer
+Procedure UpdateAccountingData()
+	_AccountingRowAnalytics = ThisObject.AccountingRowAnalytics.Unload();
+	_AccountingExtDimensions = ThisObject.AccountingExtDimensions.Unload();
+	AccountingClientServer.UpdateAccountingTables(Object, 
+			                                      _AccountingRowAnalytics, 
+		                                          _AccountingExtDimensions, "Calculations");
+	ThisObject.AccountingRowAnalytics.Load(_AccountingRowAnalytics);
+	ThisObject.AccountingExtDimensions.Load(_AccountingExtDimensions);
 EndProcedure
 
 #EndRegion

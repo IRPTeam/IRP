@@ -18,6 +18,7 @@ Scenario: 960001 preparation (access rights system registers)
 	When set True value to the constant Use consolidated retail sales
 	When set True value to the constant Use object access
 	When set True value to the constant Use salary
+	When set True value to the constant Use fixed assets
 	And I close TestClient session
 	Given I open new TestClient session or connect the existing one
 	When Create catalog Users and AccessProfiles objects (LimitedAccess)

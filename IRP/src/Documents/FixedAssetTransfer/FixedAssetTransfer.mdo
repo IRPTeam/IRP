@@ -62,6 +62,7 @@
   <realTimePosting>Deny</realTimePosting>
   <registerRecords>AccumulationRegister.R8510B_BookValueOfFixedAsset</registerRecords>
   <registerRecords>InformationRegister.T8515S_FixedAssetsLocation</registerRecords>
+  <registerRecords>AccumulationRegister.T1040T_AccountingAmounts</registerRecords>
   <postInPrivilegedMode>true</postInPrivilegedMode>
   <unpostInPrivilegedMode>true</unpostInPrivilegedMode>
   <choiceHistoryOnInput>DontUse</choiceHistoryOnInput>
@@ -101,14 +102,13 @@
     <name>ResponsiblePersonSender</name>
     <synonym>
       <key>en</key>
-      <value>Responsible person sender</value>
+      <value>Responsible person (sender)</value>
     </synonym>
     <type>
       <types>CatalogRef.Partners</types>
     </type>
     <minValue xsi:type="core:UndefinedValue"/>
     <maxValue xsi:type="core:UndefinedValue"/>
-    <fillChecking>ShowError</fillChecking>
     <choiceParameters>
       <name>Filter.Employee</name>
       <value xsi:type="core:BooleanValue">
@@ -123,14 +123,13 @@
     <name>ResponsiblePersonReceiver</name>
     <synonym>
       <key>en</key>
-      <value>Responsible person receiver</value>
+      <value>Responsible person (receiver)</value>
     </synonym>
     <type>
       <types>CatalogRef.Partners</types>
     </type>
     <minValue xsi:type="core:UndefinedValue"/>
     <maxValue xsi:type="core:UndefinedValue"/>
-    <fillChecking>ShowError</fillChecking>
     <choiceParameters>
       <name>Filter.Employee</name>
       <value xsi:type="core:BooleanValue">
@@ -141,34 +140,47 @@
     <fullTextSearch>Use</fullTextSearch>
     <dataHistory>Use</dataHistory>
   </attributes>
-  <attributes uuid="6a1fc8d2-5cd0-4ce5-83f9-c510613252b8">
-    <name>BusinessUnitSender</name>
+  <attributes uuid="fbe2380c-563e-48c3-8c91-57b5400ac1f9">
+    <name>BranchReceiver</name>
     <synonym>
       <key>en</key>
-      <value>Business unit sender</value>
+      <value>Branch (receiver)</value>
     </synonym>
     <type>
       <types>CatalogRef.BusinessUnits</types>
     </type>
     <minValue xsi:type="core:UndefinedValue"/>
     <maxValue xsi:type="core:UndefinedValue"/>
-    <fillChecking>ShowError</fillChecking>
     <fillValue xsi:type="core:UndefinedValue"/>
     <fullTextSearch>Use</fullTextSearch>
     <dataHistory>Use</dataHistory>
   </attributes>
-  <attributes uuid="0bfc7809-ccd1-47ea-a71e-fece8aeb1f6b">
-    <name>BusinessUnitReceiver</name>
+  <attributes uuid="4b949cf4-0f55-456f-8373-4858731c1f27">
+    <name>ProfitLossCenterSender</name>
     <synonym>
       <key>en</key>
-      <value>Business unit receiver</value>
+      <value>Profit loss center (sender)</value>
     </synonym>
     <type>
       <types>CatalogRef.BusinessUnits</types>
     </type>
     <minValue xsi:type="core:UndefinedValue"/>
     <maxValue xsi:type="core:UndefinedValue"/>
-    <fillChecking>ShowError</fillChecking>
+    <fillValue xsi:type="core:UndefinedValue"/>
+    <fullTextSearch>Use</fullTextSearch>
+    <dataHistory>Use</dataHistory>
+  </attributes>
+  <attributes uuid="02dc4247-3578-464c-9484-647521ec813c">
+    <name>ProfitLossCenterReceiver</name>
+    <synonym>
+      <key>en</key>
+      <value>Profit loss center (receiver)</value>
+    </synonym>
+    <type>
+      <types>CatalogRef.BusinessUnits</types>
+    </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
     <fillValue xsi:type="core:UndefinedValue"/>
     <fullTextSearch>Use</fullTextSearch>
     <dataHistory>Use</dataHistory>

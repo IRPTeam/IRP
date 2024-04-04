@@ -566,17 +566,15 @@ Scenario: _0402433 check Inventory transfer movements by the Register  "R4050 St
 			| 'Number'    |
 			| '192'       |
 	* Check movements by the Register  "R4050 Stock inventory"
-		And I click "Registrations report" button
+		And I click "Registrations report info" button
 		And I select "R4050 Stock inventory" exact value from "Register" drop-down list
 		And I click "Generate report" button
 		Then "ResultTable" spreadsheet document is equal
-			| 'Inventory transfer 192 dated 04.11.2022 17:58:35'   | ''              | ''                      | ''            | ''               | ''           | ''            |
-			| 'Document registrations records'                     | ''              | ''                      | ''            | ''               | ''           | ''            |
-			| 'Register  "R4050 Stock inventory"'                  | ''              | ''                      | ''            | ''               | ''           | ''            |
-			| ''                                                   | 'Record type'   | 'Period'                | 'Resources'   | 'Dimensions'     | ''           | ''            |
-			| ''                                                   | ''              | ''                      | 'Quantity'    | 'Company'        | 'Store'      | 'Item key'    |
-			| ''                                                   | 'Receipt'       | '04.11.2022 17:58:35'   | '2'           | 'Main Company'   | 'Store 01'   | 'S/Yellow'    |
-			| ''                                                   | 'Expense'       | '04.11.2022 17:58:35'   | '2'           | 'Main Company'   | 'Store 02'   | 'S/Yellow'    |
+			| 'Inventory transfer 192 dated 04.11.2022 17:58:35' | ''                    | ''           | ''             | ''         | ''         | ''         |
+			| 'Register  "R4050 Stock inventory"'                | ''                    | ''           | ''             | ''         | ''         | ''         |
+			| ''                                                 | 'Period'              | 'RecordType' | 'Company'      | 'Store'    | 'Item key' | 'Quantity' |
+			| ''                                                 | '04.11.2022 17:58:35' | 'Receipt'    | 'Main Company' | 'Store 01' | 'S/Yellow' | '2'        |
+			| ''                                                 | '04.11.2022 17:58:35' | 'Expense'    | 'Main Company' | 'Store 02' | 'S/Yellow' | '2'        |	
 		And I close all client application windows
 
 

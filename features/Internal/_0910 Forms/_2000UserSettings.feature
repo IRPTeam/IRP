@@ -23,6 +23,7 @@ Scenario: _200000 preparation (user settings)
 	When set True value to the constant
 	When set True value to the constant Use commission trading
 	When set True value to the constant Use salary
+	When set True value to the constant Use fixed assets
 	* Load info
 		When Create catalog Users objects
 		When Create catalog ObjectStatuses objects

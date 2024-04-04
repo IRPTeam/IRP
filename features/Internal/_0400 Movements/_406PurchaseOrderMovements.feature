@@ -346,16 +346,14 @@ Scenario: _0401238 check Purchase order movements by the Register  "R1022 Vendor
 			| 'Number'    |
 			| '323'       |
 	* Check movements by the Register  "R1022 Vendors payment planning" 
-		And I click "Registrations report" button
+		And I click "Registrations report info" button
 		And I select "R1022 Vendors payment planning" exact value from "Register" drop-down list
 		And I click "Generate report" button
 		Then "ResultTable" spreadsheet document is equal
-			| 'Purchase order 323 dated 30.05.2021 12:55:44'   | ''              | ''                      | ''            | ''               | ''               | ''                                               | ''                    | ''            | ''                      |
-			| 'Document registrations records'                 | ''              | ''                      | ''            | ''               | ''               | ''                                               | ''                    | ''            | ''                      |
-			| 'Register  "R1022 Vendors payment planning"'     | ''              | ''                      | ''            | ''               | ''               | ''                                               | ''                    | ''            | ''                      |
-			| ''                                               | 'Record type'   | 'Period'                | 'Resources'   | 'Dimensions'     | ''               | ''                                               | ''                    | ''            | ''                      |
-			| ''                                               | ''              | ''                      | 'Amount'      | 'Company'        | 'Branch'         | 'Basis'                                          | 'Legal name'          | 'Partner'     | 'Agreement'             |
-			| ''                                               | 'Receipt'       | '30.05.2021 12:55:44'   | '1 170'       | 'Main Company'   | 'Front office'   | 'Purchase order 323 dated 30.05.2021 12:55:44'   | 'Company Ferron BP'   | 'Ferron BP'   | 'Vendor Ferron, TRY'    |
+			| 'Purchase order 323 dated 30.05.2021 12:55:44' | ''                    | ''           | ''             | ''             | ''                                             | ''                  | ''          | ''                   | ''       |
+			| 'Register  "R1022 Vendors payment planning"'   | ''                    | ''           | ''             | ''             | ''                                             | ''                  | ''          | ''                   | ''       |
+			| ''                                             | 'Period'              | 'RecordType' | 'Company'      | 'Branch'       | 'Basis'                                        | 'Legal name'        | 'Partner'   | 'Agreement'          | 'Amount' |
+			| ''                                             | '30.05.2021 12:55:44' | 'Receipt'    | 'Main Company' | 'Front office' | 'Purchase order 323 dated 30.05.2021 12:55:44' | 'Company Ferron BP' | 'Ferron BP' | 'Vendor Ferron, TRY' | '1 170'  |		
 		And I close all client application windows
 
 Scenario: _0401239 Purchase order clear posting/mark for deletion

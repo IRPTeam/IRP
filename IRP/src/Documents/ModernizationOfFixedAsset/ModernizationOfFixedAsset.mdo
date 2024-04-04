@@ -65,6 +65,8 @@
   <registerRecords>InformationRegister.T6010S_BatchesInfo</registerRecords>
   <registerRecords>AccumulationRegister.R6020B_BatchBalance</registerRecords>
   <registerRecords>AccumulationRegister.R4014B_SerialLotNumber</registerRecords>
+  <registerRecords>AccumulationRegister.T1040T_AccountingAmounts</registerRecords>
+  <registerRecords>AccumulationRegister.T1050T_AccountingQuantities</registerRecords>
   <postInPrivilegedMode>true</postInPrivilegedMode>
   <unpostInPrivilegedMode>true</unpostInPrivilegedMode>
   <choiceHistoryOnInput>DontUse</choiceHistoryOnInput>
@@ -101,10 +103,10 @@
     <dataHistory>Use</dataHistory>
   </attributes>
   <attributes uuid="912cde08-3f11-4fdd-8598-636388985ce4">
-    <name>BusinessUnit</name>
+    <name>ProfitLossCenter</name>
     <synonym>
       <key>en</key>
-      <value>Business unit</value>
+      <value>Profit loss center</value>
     </synonym>
     <type>
       <types>CatalogRef.BusinessUnits</types>

@@ -199,7 +199,7 @@ Scenario: _043004 check Debit note movements by the Register "R1021 Vendors tran
 			| 'Number'    |
 			| '1'         |
 	* Check movements by the Register  "R1021 Vendors transactions" 
-		And I click "Registrations report info" button
+		And I click "Registrations report" button
 		And I select "R1021 Vendors transactions" exact value from "Register" drop-down list
 		And I click "Generate report" button
 		Then "ResultTable" spreadsheet document is equal

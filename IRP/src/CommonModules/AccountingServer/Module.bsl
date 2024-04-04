@@ -7,24 +7,28 @@ Function GetOperationsDefinition()
 	Map.Insert(AO.BankPayment_DR_R1021B_VendorsTransactions_CR_R1020B_AdvancesToVendors , New Structure("ByRow", True));
 	Map.Insert(AO.BankPayment_DR_R2020B_AdvancesFromCustomers_R2021B_CustomersTransactions_CR_R3010B_CashOnHand , New Structure("ByRow", True));
 	Map.Insert(AO.BankPayment_DR_R2021B_CustomersTransactions_CR_R2020B_AdvancesFromCustomers , New Structure("ByRow", True));
+	Map.Insert(AO.BankPayment_DR_R3021B_CashInTransitIncoming_CR_R3010B_CashOnHand , New Structure("ByRow", True));
 	
 	// Bank receipt
 	Map.Insert(AO.BankReceipt_DR_R3010B_CashOnHand_CR_R2020B_AdvancesFromCustomers_R2021B_CustomersTransactions , New Structure("ByRow", True));
 	Map.Insert(AO.BankReceipt_DR_R2020B_AdvancesFromCustomers_CR_R2021B_CustomersTransactions , New Structure("ByRow", True));
 	Map.Insert(AO.BankReceipt_DR_R3010B_CashOnHand_CR_R1020B_AdvancesToVendors_R1021B_VendorsTransactions , New Structure("ByRow", True));
 	Map.Insert(AO.BankReceipt_DR_R1020B_AdvancesToVendors_CR_R1021B_VendorsTransactions , New Structure("ByRow", True));
+	Map.Insert(AO.BankReceipt_DR_R3010B_CashOnHand_CR_R3021B_CashInTransitIncoming , New Structure("ByRow", True));
 	
 	// Cash payment
 	Map.Insert(AO.CashPayment_DR_R1020B_AdvancesToVendors_R1021B_VendorsTransactions_CR_R3010B_CashOnHand , New Structure("ByRow", True));
 	Map.Insert(AO.CashPayment_DR_R1021B_VendorsTransactions_CR_R1020B_AdvancesToVendors , New Structure("ByRow", True));
 	Map.Insert(AO.CashPayment_DR_R2020B_AdvancesFromCustomers_R2021B_CustomersTransactions_CR_R3010B_CashOnHand , New Structure("ByRow", True));
 	Map.Insert(AO.CashPayment_DR_R2021B_CustomersTransactions_CR_R2020B_AdvancesFromCustomers , New Structure("ByRow", True));
+	Map.Insert(AO.CashPayment_DR_R3021B_CashInTransitIncoming_CR_R3010B_CashOnHand , New Structure("ByRow", True));
 	
 	// Cash receipt
 	Map.Insert(AO.CashReceipt_DR_R3010B_CashOnHand_CR_R2020B_AdvancesFromCustomers_R2021B_CustomersTransactions , New Structure("ByRow", True));
 	Map.Insert(AO.CashReceipt_DR_R2020B_AdvancesFromCustomers_CR_R2021B_CustomersTransactions , New Structure("ByRow", True));
 	Map.Insert(AO.CashReceipt_DR_R3010B_CashOnHand_CR_R1020B_AdvancesToVendors_R1021B_VendorsTransactions , New Structure("ByRow", True));
 	Map.Insert(AO.CashReceipt_DR_R1020B_AdvancesToVendors_CR_R1021B_VendorsTransactions , New Structure("ByRow", True));
+	Map.Insert(AO.CashReceipt_DR_R3010B_CashOnHand_CR_R3021B_CashInTransitIncoming , New Structure("ByRow", True));
 	
 	// Cash expense
 	Map.Insert(AO.CashExpense_DR_R5022T_Expenses_CR_R3010B_CashOnHand , New Structure("ByRow", True));
@@ -466,6 +470,7 @@ Function __GetT9011S_AccountsCashAccount(Period, Company, LedgerTypeVariant, Cas
 	|	ByCashAccount.Company,
 	|	ByCashAccount.CashAccount,
 	|	ByCashAccount.Account,
+	|	ByCashAccount.AccountTransit,
 	|	1 AS Priority
 	|INTO Accounts
 	|FROM
@@ -479,6 +484,7 @@ Function __GetT9011S_AccountsCashAccount(Period, Company, LedgerTypeVariant, Cas
 	|	ByCompany.Company,
 	|	ByCompany.CashAccount,
 	|	ByCompany.Account,
+	|	ByCompany.AccountTransit,
 	|	2
 	|FROM
 	|	InformationRegister.T9011S_AccountsCashAccount.SliceLast(&Period, Company = &Company
@@ -491,6 +497,7 @@ Function __GetT9011S_AccountsCashAccount(Period, Company, LedgerTypeVariant, Cas
 	|	Accounts.Company,
 	|	Accounts.CashAccount,
 	|	Accounts.Account,
+	|	Accounts.AccountTransit,
 	|	Accounts.Priority AS Priority
 	|FROM
 	|	Accounts AS Accounts
@@ -504,9 +511,10 @@ Function __GetT9011S_AccountsCashAccount(Period, Company, LedgerTypeVariant, Cas
 	Query.SetParameter("Currency"    , Currency);
 	QueryResult = Query.Execute();
 	QuerySelection = QueryResult.Select();
-	Result = New Structure("Account");
+	Result = New Structure("Account, AccountTransit");
 	If QuerySelection.Next() Then
 		Result.Account = QuerySelection.Account;
+		Result.AccountTransit = QuerySelection.AccountTransit;
 	EndIf;
 	Return Result;
 EndFunction

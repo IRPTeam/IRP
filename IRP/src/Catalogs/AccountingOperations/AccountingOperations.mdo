@@ -176,6 +176,13 @@
           <value>63</value>
         </code>
       </content>
+      <content id="fd556c44-372a-43f5-877a-101ca36e8ab4">
+        <name>BankPayment_DR_R3021B_CashInTransitIncoming_CR_R3010B_CashOnHand</name>
+        <description></description>
+        <code xsi:type="core:NumberValue">
+          <value>70</value>
+        </code>
+      </content>
     </items>
     <items id="e1dd6187-4d04-4b2a-8c5b-f6ca00ed7cc6">
       <name>Document_BankReceipt</name>
@@ -207,6 +214,13 @@
         <description></description>
         <code xsi:type="core:NumberValue">
           <value>67</value>
+        </code>
+      </content>
+      <content id="5852dccb-2a40-47d5-9665-4513840fc9f8">
+        <name>BankReceipt_DR_R3010B_CashOnHand_CR_R3021B_CashInTransitIncoming</name>
+        <description></description>
+        <code xsi:type="core:NumberValue">
+          <value>72</value>
         </code>
       </content>
     </items>
@@ -354,6 +368,13 @@
           <value>65</value>
         </code>
       </content>
+      <content id="f5e035f2-dbde-448b-9d6c-600a07679776">
+        <name>CashPayment_DR_R3021B_CashInTransitIncoming_CR_R3010B_CashOnHand</name>
+        <description></description>
+        <code xsi:type="core:NumberValue">
+          <value>71</value>
+        </code>
+      </content>
     </items>
     <items id="e77f99dd-6495-487d-9873-5edbf00b51b4">
       <name>Document_CashReceipt</name>
@@ -385,6 +406,13 @@
         <description></description>
         <code xsi:type="core:NumberValue">
           <value>69</value>
+        </code>
+      </content>
+      <content id="f8a2280a-433a-4d02-8d1a-668abd4a705d">
+        <name>CashReceipt_DR_R3010B_CashOnHand_CR_R3021B_CashInTransitIncoming</name>
+        <description></description>
+        <code xsi:type="core:NumberValue">
+          <value>73</value>
         </code>
       </content>
     </items>

@@ -718,7 +718,23 @@ Function T1040T_AccountingAmounts()
 		|	InformationRegister.T2010S_OffsetOfAdvances AS OffsetOfAdvances
 		|WHERE
 		|	OffsetOfAdvances.Document = &Ref
-		|	AND OffsetOfAdvances.Recorder REFS Document.VendorsAdvancesClosing";
+		|	AND OffsetOfAdvances.Recorder REFS Document.VendorsAdvancesClosing
+		|
+		|UNION ALL
+		|
+		// Cash transfer order
+		|SELECT
+		|	PaymentList.Period,
+		|	PaymentList.Key AS RowKey,
+		|	PaymentList.Key AS Key,
+		|	PaymentList.Currency,
+		|	PaymentList.Amount,
+		|	VALUE(Catalog.AccountingOperations.CashReceipt_DR_R3010B_CashOnHand_CR_R3021B_CashInTransitIncoming) AS Operation,
+		|	UNDEFINED AS AdvancesClosing
+		|FROM
+		|	PaymentList AS PaymentList
+		|WHERE
+		|	PaymentList.IsCashTransferOrder";
 EndFunction
 
 Function GetAccountingAnalytics(Parameters) Export
@@ -732,6 +748,8 @@ Function GetAccountingAnalytics(Parameters) Export
 		Return GetAnalytics_ReturnFromVendor(Parameters); // Cash on hand -  Vendor transactions
 	ElsIf Parameters.Operation = Catalogs.AccountingOperations.CashReceipt_DR_R1020B_AdvancesToVendors_CR_R1021B_VendorsTransactions Then
 		Return GetAnalytics_ReturnFromVendor_Offset(Parameters); // Advance from vendor - Vendor transactions
+	ElsIf Parameters.Operation = AO.CashReceipt_DR_R3010B_CashOnHand_CR_R3021B_CashInTransitIncoming Then
+		Return GetAnalytics_CashTransferOrder(Parameters); // Cash on hand - Cash in transit 
 	EndIf;
 	Return Undefined;
 EndFunction
@@ -844,11 +862,39 @@ Function GetAnalytics_ReturnFromVendor_Offset(Parameters)
 	Return AccountingAnalytics;
 EndFunction
 
+// Cash on hand - Cash in transit
+Function GetAnalytics_CashTransferOrder(Parameters)
+	AccountingAnalytics = AccountingServer.GetAccountingAnalyticsResult(Parameters);
+	AccountParameters   = AccountingServer.GetAccountParameters(Parameters);
+
+	// Debit
+	Debit = AccountingServer.GetT9011S_AccountsCashAccount(AccountParameters, 
+															Parameters.ObjectData.CashAccount,
+															Parameters.ObjectData.Currency);
+	AccountingAnalytics.Debit = Debit.Account;
+	AdditionalAnalytics = New Structure();
+	AdditionalAnalytics.Insert("Account", Parameters.RowData.SendingAccount);
+	AccountingServer.SetDebitExtDimensions(Parameters, AccountingAnalytics, AdditionalAnalytics);
+	
+	// Credit
+	Credit = AccountingServer.GetT9011S_AccountsCashAccount(AccountParameters, 
+															Parameters.ObjectData.CashAccount,
+															Parameters.ObjectData.Currency);
+		                                               
+	AccountingAnalytics.Credit = Credit.AccountTransit;
+	AdditionalAnalytics = New Structure();
+	AdditionalAnalytics.Insert("Account", Parameters.ObjectData.CashAccount);
+	AccountingServer.SetCreditExtDimensions(Parameters, AccountingAnalytics, AdditionalAnalytics);
+
+	Return AccountingAnalytics;
+EndFunction
+
 Function GetHintDebitExtDimension(Parameters, ExtDimensionType, Value) Export
 	AO = Catalogs.AccountingOperations;
 	
 	If (Parameters.Operation = AO.CashReceipt_DR_R3010B_CashOnHand_CR_R2020B_AdvancesFromCustomers_R2021B_CustomersTransactions 
-		Or Parameters.Operation = AO.CashReceipt_DR_R3010B_CashOnHand_CR_R1020B_AdvancesToVendors_R1021B_VendorsTransactions)
+		Or Parameters.Operation = AO.CashReceipt_DR_R3010B_CashOnHand_CR_R1020B_AdvancesToVendors_R1021B_VendorsTransactions
+		Or Parameters.Operation = AO.CashReceipt_DR_R3010B_CashOnHand_CR_R3021B_CashInTransitIncoming)
 		
 		And ExtDimensionType.ValueType.Types().Find(Type("CatalogRef.ExpenseAndRevenueTypes")) <> Undefined Then
 		Return Parameters.RowData.FinancialMovementType;
@@ -857,6 +903,13 @@ Function GetHintDebitExtDimension(Parameters, ExtDimensionType, Value) Export
 EndFunction
 
 Function GetHintCreditExtDimension(Parameters, ExtDimensionType, Value) Export
+	AO = Catalogs.AccountingOperations;
+	
+	If Parameters.Operation = AO.CashReceipt_DR_R3010B_CashOnHand_CR_R3021B_CashInTransitIncoming
+		
+		And ExtDimensionType.ValueType.Types().Find(Type("CatalogRef.ExpenseAndRevenueTypes")) <> Undefined Then
+		Return Parameters.RowData.FinancialMovementType;
+	EndIf;
 	Return Value;
 EndFunction
 

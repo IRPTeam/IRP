@@ -1740,7 +1740,16 @@ Procedure CreateFormTable(CreactionStructure) Export
 			Continue;
 		EndIf;
 		
-		TypeDescription = New TypeDescription(Column.ValueType);
+		TypesArray = Column.ValueType.Types(); //Array of type
+		
+		TypesArrayResult = New Array;
+		For Each ArrayItem In TypesArray Do
+			If ArrayItem <> Type("Null") Then
+				TypesArrayResult.Add(ArrayItem);
+			EndIf;
+		EndDo;
+		
+		TypeDescription = New TypeDescription(TypesArrayResult);
 		AttributeDescription = New FormAttribute(Column.Name, TypeDescription, TableName);
 		ArrayAddedAttributes.Add(AttributeDescription);
 	EndDo;

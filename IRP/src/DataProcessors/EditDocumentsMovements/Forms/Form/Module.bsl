@@ -91,14 +91,12 @@ Procedure FillObjectMovements()
 	Object.Movements.Sort("RegisterName");
 	
 	For Each Row In Object.Movements Do
-		If Row.MovementsCount > 0 Then
-			
-			ValueTable = StructureTables[RegisterName]; //ValueTable
-			
-			AddPageForMovement(Row.RegisterName, Row.MovementsCount);
-			AddRegisterTableToForm(Row.RegisterName, ValueTable);
+					
+		ValueTable = StructureTables[Row.RegisterName]; //ValueTable
+		
+		AddPageForMovement(Row.RegisterName, Row.MovementsCount);
+		AddRegisterTableToForm(Row.RegisterName, ValueTable);
 				
-		EndIf;
 	EndDo;
 	
 EndProcedure
@@ -123,6 +121,9 @@ Procedure AddPageForMovement(RegisterName, RecordsCount)
 	NewPage = Items.Add(PageName, Type("FormGroup"), Items.Registers);
 	NewPage.Type	= FormGroupType.Page;
 	NewPage.Title	= StrTemplate("%1 (%2)", RegisterName, RecordsCount);
+	If RecordsCount = 0 Then
+		//NewPage.Visible = False;
+	EndIf;
 	
 EndProcedure
 
@@ -218,18 +219,15 @@ Procedure WriteMovementsOnServer(Cancel)
 		DocumentObject = Object.DocumentRef.GetObject();
 		
 		For Each Row In Object.Movements Do
-			If Row.MovementsCount > 0 Then
-				Table = ThisObject[Row.RegisterName]; //FormDataCollection
-				VT_Movements = Table.Unload();
-				
-				RegisterRecords = DocumentObject.RegisterRecords[Row.RegisterName];
-				If DoNotControlWriteRules = True Then
-					RegisterRecords.DataExchange.Load = True;
-				EndIf;	
-				RegisterRecords.Load(VT_Movements);
-				RegisterRecords.Write();
-				
-			EndIf;
+			Table = ThisObject[Row.RegisterName]; //FormDataCollection
+			VT_Movements = Table.Unload();
+			
+			RegisterRecords = DocumentObject.RegisterRecords[Row.RegisterName];
+			If DoNotControlWriteRules = True Then
+				RegisterRecords.DataExchange.Load = True;
+			EndIf;	
+			RegisterRecords.Load(VT_Movements);
+			RegisterRecords.Write();
 		EndDo;
 		
 		DocumentObject.ManualMovementsEdit	= True;

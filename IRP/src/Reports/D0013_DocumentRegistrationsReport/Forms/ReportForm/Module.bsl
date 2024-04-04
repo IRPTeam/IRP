@@ -227,10 +227,10 @@ Procedure GenerateReportForOneDocument(DocumentRef, Result, Template, MainTitleA
 			Continue;
 		EndIf;		
 		
-		IsDifference = True;
-		
 		For Each DifferentMovement In DifferentMovementsArray Do
 			If RegisterName = DifferentMovement.RegName Then
+				IsDifference = True;
+				
 				Structure = New Structure;
 				Structure.Insert("ListOfDimensions", ListOfDimensions);
 				Structure.Insert("FieldPresentations", FieldPresentations);
@@ -238,7 +238,7 @@ Procedure GenerateReportForOneDocument(DocumentRef, Result, Template, MainTitleA
 				Structure.Insert("ReportBuilder", ReportBuilder);
 				Structure.Insert("ListOfResources", ListOfResources);
 				
-				OutputDifferenceInRegistersMovements(Structure);					
+				OutputDifferenceInRegistersMovements(Structure);
 			EndIf;
 		EndDo;
 		
@@ -297,11 +297,11 @@ EndProcedure
 &AtServer
 Procedure OutputDifferenceInRegistersMovements(ParametersStructure)
 	
-	ListOfDimensions = ListOfDimensions.ListOfDimensions;
-	FieldPresentations = ListOfDimensions.FieldPresentations;
-	DifferentMovement = ListOfDimensions.DifferentMovement;
-	ReportBuilder = ListOfDimensions.ReportBuilder;
-	ListOfResources = ListOfDimensions.ListOfResources;
+	ListOfDimensions = ParametersStructure.ListOfDimensions;
+	FieldPresentations = ParametersStructure.FieldPresentations;
+	DifferentMovement = ParametersStructure.DifferentMovement;
+	ReportBuilder = ParametersStructure.ReportBuilder;
+	ListOfResources = ParametersStructure.ListOfResources;
 	
 	CurrentMovementsVT	= ReportBuilder.GetQuery().Execute().Unload();
 	NewMovementsVT	= DifferentMovement.NewPostingData;

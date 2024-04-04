@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mdclass:Constant xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:core="http://g5.1c.ru/v8/dt/mcore" xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="23bc5e6a-e877-47df-aa9e-5d06c8d32b72">
+  <producedTypes>
+    <managerType typeId="2907ebed-04f6-4c7a-b889-151ea85717dc" valueTypeId="a43b68bf-ab11-40ef-b445-509c6c3fcc46"/>
+    <valueManagerType typeId="4f6bfaeb-e7eb-4e6d-a34f-1e22992ba9ac" valueTypeId="86f81203-6560-4fe5-86f2-4cd4d5ad817b"/>
+    <valueKeyType typeId="33eedbbb-3252-445b-92ec-c87a7da8162c" valueTypeId="0cea5f16-ec8e-4b49-973c-27dfb6de1fdc"/>
+  </producedTypes>
+  <name>UseResponsiblePerson</name>
+  <synonym>
+    <key>en</key>
+    <value>Use responsible person</value>
+  </synonym>
+  <type>
+    <types>Boolean</types>
+  </type>
+  <useStandardCommands>true</useStandardCommands>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <dataLockControlMode>Managed</dataLockControlMode>
+</mdclass:Constant>

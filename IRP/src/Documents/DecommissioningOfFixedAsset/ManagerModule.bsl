@@ -4,6 +4,114 @@ Function GetPrintForm(Ref, PrintFormName, AddInfo = Undefined) Export
 	Return Undefined;
 EndFunction
 
+Function Print(Ref, Param) Export
+	If StrCompare(Param.NameTemplate, "DecommissioningOfFixedAssetPrint") = 0 Then
+		Return DecommissioningOfFixedAssetPrint(Ref, Param);
+	EndIf;
+EndFunction
+
+// Decommissioning of fixed asset print.
+// 
+// Parameters:
+//  Ref - DocumentRef.DecommissioningOfFixedAsset
+//  Param - See UniversalPrintServer.InitPrintParam
+// 
+// Returns:
+//  SpreadsheetDocument - Decommissioning of fixed asset print
+Function DecommissioningOfFixedAssetPrint(Ref, Param)
+		
+	Template = GetTemplate("DecommissioningOfFixedAssetPrint");
+	Template.LanguageCode = Param.LayoutLang;
+	Query = New Query;
+	Text =
+	"SELECT
+	|	DocumentHeader.Number AS Number,
+	|	DocumentHeader.Date AS Date,
+	|	DocumentHeader.Company.Description_en AS Company,
+	|	DocumentHeader.Author AS Author,
+	|	DocumentHeader.Ref AS Ref	
+	|FROM
+	|	Document.DecommissioningOfFixedAsset AS DocumentHeader
+	|WHERE
+	|	DocumentHeader.Ref = &Ref
+	|;
+	|
+	|////////////////////////////////////////////////////////////////////////////////
+	|SELECT
+	|	DocumentItemList.ItemKey.Item.Description_en AS Item,
+	|	DocumentItemList.ItemKey.Description_en AS ItemKey,
+	|	DocumentItemList.Quantity AS Quantity,
+	|	DocumentItemList.Unit.Description_en AS Unit,
+	|	DocumentItemList.Ref AS Ref,
+	|	DocumentItemList.Key AS Key
+	|INTO Items
+	|FROM
+	|	Document.DecommissioningOfFixedAsset.ItemList AS DocumentItemList
+	|WHERE
+	|	DocumentItemList.Ref = &Ref	
+	|;
+	|
+	|////////////////////////////////////////////////////////////////////////////////
+	|SELECT
+	|	Items.Item AS Item,
+	|	Items.ItemKey AS ItemKey,
+	|	Items.Quantity AS Quantity,
+	|	Items.Unit AS Unit,
+	|	Items.Ref AS Ref,
+	|	Items.Key AS Key
+	|FROM
+	|	Items AS Items";
+
+	LCode = Param.DataLang;
+	Text = LocalizationEvents.ReplaceDescriptionLocalizationPrefix(Text, "DocumentHeader.Company", LCode);
+	Text = LocalizationEvents.ReplaceDescriptionLocalizationPrefix(Text, "DocumentItemList.ItemKey.Item", LCode);
+	Text = LocalizationEvents.ReplaceDescriptionLocalizationPrefix(Text, "DocumentItemList.ItemKey", LCode);
+	Text = LocalizationEvents.ReplaceDescriptionLocalizationPrefix(Text, "DocumentItemList.Unit", LCode);
+	Query.Text = Text;                                                    
+
+	Query.Parameters.Insert("Ref", Ref);
+	Selection = Query.ExecuteBatch();
+	SelectionHeader = Selection[0].Select();
+	SelectionItems = Selection[2].Unload();
+	SelectionItems.Indexes.Add("Ref");
+
+	AreaCaption = Template.GetArea("Caption");
+	AreaHeader = Template.GetArea("Header");
+	AreaItemListHeader = Template.GetArea("ItemListHeader|ItemColumn");
+	AreaItemList = Template.GetArea("ItemList|ItemColumn");
+	AreaFooter = Template.GetArea("Footer");
+
+	Spreadsheet = New SpreadsheetDocument;
+	Spreadsheet.LanguageCode = Param.LayoutLang;
+
+	While SelectionHeader.Next() Do
+		AreaCaption.Parameters.Fill(SelectionHeader);
+		Spreadsheet.Put(AreaCaption);
+
+		AreaHeader.Parameters.Fill(SelectionHeader);
+		Spreadsheet.Put(AreaHeader);
+
+		Spreadsheet.Put(AreaItemListHeader);
+			
+		Choice	= New Structure("Ref", SelectionHeader.Ref);
+		FindRow = SelectionItems.FindRows(Choice);
+
+		Number = 0;
+		For Each It In FindRow Do
+			Number = Number + 1;
+			AreaItemList.Parameters.Fill(It);
+			AreaItemList.Parameters.Number = Number;
+			Spreadsheet.Put(AreaItemList);			
+		EndDo;
+	EndDo;
+
+	AreaFooter.Parameters.Manager = SelectionHeader.Author;
+	Spreadsheet.Put(AreaFooter);
+	Spreadsheet = UniversalPrintServer.ResetLangSettings(Spreadsheet, Param.LayoutLang);
+	Return Spreadsheet;
+	
+EndFunction	
+
 #EndRegion
 
 #Region Posting
@@ -17,6 +125,8 @@ Function PostingGetDocumentDataTables(Ref, Cancel, PostingMode, Parameters, AddI
 	PostingServer.ExecuteQuery(Ref, QueryArray, Parameters);
 
 	CurrenciesServer.ExcludePostingDataTable(Parameters, Metadata.InformationRegisters.T6020S_BatchKeysInfo);
+	
+	AccountingServer.CreateAccountingDataTables(Ref, Cancel, PostingMode, Parameters, AddInfo);
 	
 	Return Tables;
 EndFunction
@@ -105,7 +215,6 @@ Function GetAdditionalQueryParameters(Ref)
 	StrParams = New Structure;
 	StrParams.Insert("Ref"           , Ref);
 	StrParams.Insert("Company"       , Ref.Company);
-	StrParams.Insert("Branch"        , Ref.BusinessUnit);
 	StrParams.Insert("FixedAsset"    , Ref.FixedAsset);
 	If ValueIsFilled(Ref) Then
 		StrParams.Insert("BalancePeriod" , New Boundary(Ref.PointInTime(), BoundaryType.Excluding));
@@ -150,7 +259,7 @@ Function ItemList()
 		"SELECT
 		|	ItemList.Ref.Date AS Period,
 		|	ItemList.Ref.Company AS Company,
-		|	ItemList.Ref.BusinessUnit AS Branch,
+		|	ItemList.Ref.Branch AS Branch,
 		|	ItemList.Ref.FixedAsset AS FixedAsset,
 		|	ItemList.Ref AS Ref,
 		|	ItemList.Store AS Store,
@@ -171,7 +280,7 @@ Function SerialLotNumbers()
 		"SELECT
 		|	SerialLotNumbers.Ref.Date AS Period,
 		|	SerialLotNumbers.Ref.Company AS Company,
-		|	SerialLotNumbers.Ref.BusinessUnit AS Branch,
+		|	SerialLotNumbers.Ref.Branch AS Branch,
 		|	SerialLotNumbers.Key,
 		|	SerialLotNumbers.SerialLotNumber,
 		|	SerialLotNumbers.SerialLotNumber.StockBalanceDetail AS StockBalanceDetail,
@@ -452,6 +561,7 @@ Function R8510B_BookValueOfFixedAsset()
 		|	&Period AS Period,
 		|	R8510B_BookValueOfFixedAssetBalance.Company,
 		|	R8510B_BookValueOfFixedAssetBalance.Branch,
+		|	R8510B_BookValueOfFixedAssetBalance.ProfitLossCenter,
 		|	R8510B_BookValueOfFixedAssetBalance.FixedAsset,
 		|	R8510B_BookValueOfFixedAssetBalance.LedgerType,
 		|	R8510B_BookValueOfFixedAssetBalance.Schedule,
@@ -472,12 +582,12 @@ Function T8515S_FixedAssetsLocation()
 		|	T8515S_FixedAssetsLocationSliceLast.FixedAsset,
 		|	T8515S_FixedAssetsLocationSliceLast.ResponsiblePerson,
 		|	T8515S_FixedAssetsLocationSliceLast.Branch,
+		|	T8515S_FixedAssetsLocationSliceLast.ProfitLossCenter,
 		|	FALSE AS IsActive
 		|INTO T8515S_FixedAssetsLocation
 		|FROM
 		|	InformationRegister.T8515S_FixedAssetsLocation.SliceLast(&BalancePeriod, Company = &Company
-		|	AND FixedAsset = &FixedAsset
-		|	AND Branch = &Branch) AS T8515S_FixedAssetsLocationSliceLast
+		|	AND FixedAsset = &FixedAsset) AS T8515S_FixedAssetsLocationSliceLast
 		|WHERE
 		|	T8515S_FixedAssetsLocationSliceLast.IsActive";
 EndFunction
@@ -502,5 +612,52 @@ Function GetAccessKey(Obj) Export
 	AccessKeyMap.Insert("Store", CopyTable.UnloadColumn("Store"));
 	Return AccessKeyMap;
 EndFunction
+
+#EndRegion
+
+#Region Accounting
+
+Function GetAccountingAnalytics(Parameters) Export
+	Operations = Catalogs.AccountingOperations;
+	If Parameters.Operation = Operations.DecommissioningOfFixedAsset_DR_R4050B_StockInventory_CR_R8510B_BookValueOfFixedAsset Then
+		 
+		Return GetAnalytics_StockInventory_BookValue(Parameters); // Stock inventory - Book value
+	
+	EndIf;
+	Return Undefined;
+EndFunction
+
+#Region Accounting_Analytics
+
+// Stock inventory - Book value
+Function GetAnalytics_StockInventory_BookValue(Parameters)
+	AccountingAnalytics = AccountingServer.GetAccountingAnalyticsResult(Parameters);
+	AccountParameters   = AccountingServer.GetAccountParameters(Parameters);
+
+	// Debit
+	Debit = AccountingServer.GetT9010S_AccountsItemKey(AccountParameters, Parameters.RowData.ItemKey);
+	AccountingAnalytics.Debit = Debit.Account;
+
+	AdditionalAnalytics = New Structure;
+	AdditionalAnalytics.Insert("Item", Parameters.RowData.ItemKey.Item);
+	AccountingServer.SetDebitExtDimensions(Parameters, AccountingAnalytics, AdditionalAnalytics);
+	
+	// Credit
+	Credit = AccountingServer.GetT9015S_AccountsFixedAsset(AccountParameters, Parameters.ObjectData.FixedAsset);
+	AccountingAnalytics.Credit = Credit.Account;
+	AccountingServer.SetCreditExtDimensions(Parameters, AccountingAnalytics);
+
+	Return AccountingAnalytics;
+EndFunction
+
+Function GetHintDebitExtDimension(Parameters, ExtDimensionType, Value) Export
+	Return Value;
+EndFunction
+
+Function GetHintCreditExtDimension(Parameters, ExtDimensionType, Value) Export
+	Return Value;
+EndFunction
+
+#EndRegion
 
 #EndRegion

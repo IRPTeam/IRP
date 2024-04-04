@@ -228,19 +228,17 @@ Scenario: _041608 check Stock adjustment as surplus movements by the Register  "
 			| 'Number'  |
 			| '201'     |
 	* Check movements by the Register  "R4052 Stock adjustment (Surplus)" 
-		And I click "Registrations report" button
+		And I click "Registrations report info" button
 		And I select "R4052 Stock adjustment (Surplus)" exact value from "Register" drop-down list
 		And I click "Generate report" button
 		Then "ResultTable" spreadsheet document is equal
-			| 'Stock adjustment as surplus 201 dated 01.03.2021 12:00:00' | ''                    | ''          | ''           | ''                                                          | ''         |
-			| 'Document registrations records'                            | ''                    | ''          | ''           | ''                                                          | ''         |
-			| 'Register  "R4052 Stock adjustment (Surplus)"'              | ''                    | ''          | ''           | ''                                                          | ''         |
-			| ''                                                          | 'Period'              | 'Resources' | 'Dimensions' | ''                                                          | ''         |
-			| ''                                                          | ''                    | 'Quantity'  | 'Store'      | 'Basis'                                                     | 'Item key' |
-			| ''                                                          | '01.03.2021 12:00:00' | '4'         | 'Store 05'   | 'Stock adjustment as surplus 201 dated 01.03.2021 12:00:00' | '36/18SD'  |
-			| ''                                                          | '01.03.2021 12:00:00' | '7'         | 'Store 05'   | 'Stock adjustment as surplus 201 dated 01.03.2021 12:00:00' | '36/Red'   |
-			| ''                                                          | '01.03.2021 12:00:00' | '8'         | 'Store 05'   | 'Stock adjustment as surplus 201 dated 01.03.2021 12:00:00' | 'XS/Blue'  |
-			| ''                                                          | '01.03.2021 12:00:00' | '8'         | 'Store 05'   | 'Stock adjustment as surplus 201 dated 01.03.2021 12:00:00' | 'M/White'  |				
+			| 'Stock adjustment as surplus 201 dated 01.03.2021 12:00:00' | ''                    | ''         | ''                                                          | ''         | ''         |
+			| 'Register  "R4052 Stock adjustment (Surplus)"'              | ''                    | ''         | ''                                                          | ''         | ''         |
+			| ''                                                          | 'Period'              | 'Store'    | 'Basis'                                                     | 'Item key' | 'Quantity' |
+			| ''                                                          | '01.03.2021 12:00:00' | 'Store 05' | 'Stock adjustment as surplus 201 dated 01.03.2021 12:00:00' | 'XS/Blue'  | '8'        |
+			| ''                                                          | '01.03.2021 12:00:00' | 'Store 05' | 'Stock adjustment as surplus 201 dated 01.03.2021 12:00:00' | 'M/White'  | '8'        |
+			| ''                                                          | '01.03.2021 12:00:00' | 'Store 05' | 'Stock adjustment as surplus 201 dated 01.03.2021 12:00:00' | '36/Red'   | '7'        |
+			| ''                                                          | '01.03.2021 12:00:00' | 'Store 05' | 'Stock adjustment as surplus 201 dated 01.03.2021 12:00:00' | '36/18SD'  | '4'        |	
 	And I close all client application windows
 
 Scenario: _041830 Stock adjustment as surplus clear posting/mark for deletion

@@ -55,10 +55,10 @@
     </synonym>
   </enumValues>
   <enumValues uuid="bfbf9552-7b10-44f1-9926-1bcfe31da944">
-    <name>CustomerAdvance</name>
+    <name>RetailCustomerAdvance</name>
     <synonym>
       <key>en</key>
-      <value>Customer advance</value>
+      <value>Retail customer advance</value>
     </synonym>
   </enumValues>
   <enumValues uuid="3c391634-bcbf-4cdf-8e25-86fcef266bf3">

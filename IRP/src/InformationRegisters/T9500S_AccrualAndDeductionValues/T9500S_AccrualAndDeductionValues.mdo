@@ -63,6 +63,7 @@
     <type>
       <types>DocumentRef.EmployeeHiring</types>
       <types>DocumentRef.EmployeeTransfer</types>
+      <types>DocumentRef.OpeningEntry</types>
     </type>
     <minValue xsi:type="core:UndefinedValue"/>
     <maxValue xsi:type="core:UndefinedValue"/>

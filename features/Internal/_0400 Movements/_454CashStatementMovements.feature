@@ -235,18 +235,16 @@ Scenario: _045406 check CashStatement movements by the Register  "R3011 Cash flo
 			| 'Number'    |
 			| '11'        |
 	* Check movements by the Register  "R3011 Cash flow"
-		And I click "Registrations report" button
+		And I click "Registrations report info" button
 		And I select "R3011 Cash flow" exact value from "Register" drop-down list
 		And I click "Generate report" button
 		Then "ResultTable" spreadsheet document is equal
-			| 'Cash statement 11 dated 23.06.2022 22:53:32' | ''                    | ''          | ''             | ''                        | ''                                     | ''          | ''                        | ''                 | ''                | ''         | ''                             | ''                     |
-			| 'Document registrations records'              | ''                    | ''          | ''             | ''                        | ''                                     | ''          | ''                        | ''                 | ''                | ''         | ''                             | ''                     |
-			| 'Register  "R3011 Cash flow"'                 | ''                    | ''          | ''             | ''                        | ''                                     | ''          | ''                        | ''                 | ''                | ''         | ''                             | ''                     |
-			| ''                                            | 'Period'              | 'Resources' | 'Dimensions'   | ''                        | ''                                     | ''          | ''                        | ''                 | ''                | ''         | ''                             | 'Attributes'           |
-			| ''                                            | ''                    | 'Amount'    | 'Company'      | 'Branch'                  | 'Account'                              | 'Direction' | 'Financial movement type' | 'Cash flow center' | 'Planning period' | 'Currency' | 'Multi currency movement type' | 'Deferred calculation' |
-			| ''                                            | '23.06.2022 22:53:32' | '34,24'     | 'Main Company' | 'Distribution department' | 'POS account 1, TRY' | 'Outgoing'  | 'Movement type 1'         | 'Shop 01'          | ''                | 'USD'      | 'Reporting currency'           | 'No'                   |
-			| ''                                            | '23.06.2022 22:53:32' | '200'       | 'Main Company' | 'Distribution department' | 'POS account 1, TRY' | 'Outgoing'  | 'Movement type 1'         | 'Shop 01'          | ''                | 'TRY'      | 'Local currency'               | 'No'                   |
-			| ''                                            | '23.06.2022 22:53:32' | '200'       | 'Main Company' | 'Distribution department' | 'POS account 1, TRY' | 'Outgoing'  | 'Movement type 1'         | 'Shop 01'          | ''                | 'TRY'      | 'en description is empty'      | 'No'                   |		
+			| 'Cash statement 11 dated 23.06.2022 22:53:32' | ''                    | ''             | ''                        | ''                   | ''          | ''                        | ''                 | ''                | ''         | ''                             | ''       | ''                     |
+			| 'Register  "R3011 Cash flow"'                 | ''                    | ''             | ''                        | ''                   | ''          | ''                        | ''                 | ''                | ''         | ''                             | ''       | ''                     |
+			| ''                                            | 'Period'              | 'Company'      | 'Branch'                  | 'Account'            | 'Direction' | 'Financial movement type' | 'Cash flow center' | 'Planning period' | 'Currency' | 'Multi currency movement type' | 'Amount' | 'Deferred calculation' |
+			| ''                                            | '23.06.2022 22:53:32' | 'Main Company' | 'Distribution department' | 'POS account 1, TRY' | 'Outgoing'  | 'Movement type 1'         | 'Shop 01'          | ''                | 'TRY'      | 'Local currency'               | '200'    | 'No'                   |
+			| ''                                            | '23.06.2022 22:53:32' | 'Main Company' | 'Distribution department' | 'POS account 1, TRY' | 'Outgoing'  | 'Movement type 1'         | 'Shop 01'          | ''                | 'TRY'      | 'en description is empty'      | '200'    | 'No'                   |
+			| ''                                            | '23.06.2022 22:53:32' | 'Main Company' | 'Distribution department' | 'POS account 1, TRY' | 'Outgoing'  | 'Movement type 1'         | 'Shop 01'          | ''                | 'USD'      | 'Reporting currency'           | '34,24'  | 'No'                   |	
 		And I close all client application windows
 
 Scenario: _045430 Cash statement clear posting/mark for deletion

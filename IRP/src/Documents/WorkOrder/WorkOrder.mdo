@@ -1313,6 +1313,13 @@
       <dataHistory>Use</dataHistory>
     </attributes>
   </tabularSections>
+  <templates uuid="16a21ab6-15e3-4873-adbf-b4b75e727c41">
+    <name>WorkOrderPrint</name>
+    <synonym>
+      <key>en</key>
+      <value>Work order</value>
+    </synonym>
+  </templates>
   <commands uuid="7b7208a5-e46e-44eb-b124-9c0b77ee72ce">
     <name>Generate</name>
     <synonym>
@@ -1322,6 +1329,19 @@
     <group>FormCommandBarCreateBasedOn</group>
     <commandParameterType>
       <types>DocumentRef.SalesOrder</types>
+    </commandParameterType>
+    <parameterUseMode>Multiple</parameterUseMode>
+    <representation>Auto</representation>
+  </commands>
+  <commands uuid="30f569ef-48bc-4ff3-9744-9b48e7e27ca3">
+    <name>WorkOrderPrint</name>
+    <synonym>
+      <key>en</key>
+      <value>Work order</value>
+    </synonym>
+    <group>CommandGroup.Print</group>
+    <commandParameterType>
+      <types>DocumentRef.WorkOrder</types>
     </commandParameterType>
     <parameterUseMode>Multiple</parameterUseMode>
     <representation>Auto</representation>

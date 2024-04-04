@@ -445,6 +445,95 @@
         </code>
       </content>
     </items>
+    <items id="d6dda5c8-2319-4196-8da6-f299137dcb0b">
+      <name>Document_CommissioningOfFixedAsset</name>
+      <description></description>
+      <code xsi:type="core:NumberValue">
+        <value>50</value>
+      </code>
+      <isFolder>true</isFolder>
+      <content id="1da3da7d-dfd9-41e4-961b-d313cbde7d23">
+        <name>CommissioningOfFixedAsset_DR_R8510B_BookValueOfFixedAsset_CR_R4050B_StockInventory</name>
+        <description></description>
+        <code xsi:type="core:NumberValue">
+          <value>54</value>
+        </code>
+      </content>
+    </items>
+    <items id="e9a75965-1fa6-4738-ad40-19f9b3edceed">
+      <name>Document_ModernizationOfFixedAsset</name>
+      <description></description>
+      <code xsi:type="core:NumberValue">
+        <value>51</value>
+      </code>
+      <isFolder>true</isFolder>
+      <content id="7d1f4663-2901-4049-8255-add0457c7654">
+        <name>ModernizationOfFixedAsset_DR_R8510B_BookValueOfFixedAsset_CR_R4050B_StockInventory</name>
+        <description></description>
+        <code xsi:type="core:NumberValue">
+          <value>56</value>
+        </code>
+      </content>
+      <content id="54333f77-3f41-4e24-91fe-0799c1119831">
+        <name>ModernizationOfFixedAsset_DR_R4050B_StockInventory_CR_R8510B_BookValueOfFixedAsset</name>
+        <description></description>
+        <code xsi:type="core:NumberValue">
+          <value>57</value>
+        </code>
+      </content>
+    </items>
+    <items id="90bd03f3-a90b-4e8c-835d-acbbc7338e5f">
+      <name>Document_DecommissioningOfFixedAsset</name>
+      <description></description>
+      <code xsi:type="core:NumberValue">
+        <value>52</value>
+      </code>
+      <isFolder>true</isFolder>
+      <content id="9f91bf98-f604-4fb7-b411-e670a3714169">
+        <name>DecommissioningOfFixedAsset_DR_R4050B_StockInventory_CR_R8510B_BookValueOfFixedAsset</name>
+        <description></description>
+        <code xsi:type="core:NumberValue">
+          <value>55</value>
+        </code>
+      </content>
+    </items>
+    <items id="3ce38b7f-d089-41cf-bb68-1b59233374ae">
+      <name>Document_FixedAssetTransfer</name>
+      <description></description>
+      <code xsi:type="core:NumberValue">
+        <value>53</value>
+      </code>
+      <isFolder>true</isFolder>
+      <content id="fdf17dc2-596d-41b2-8a08-b9a0377c2657">
+        <name>FixedAssetTransfer_DR_R8510B_BookValueOfFixedAsset_CR_R8510B_BookValueOfFixedAsset</name>
+        <description></description>
+        <code xsi:type="core:NumberValue">
+          <value>58</value>
+        </code>
+      </content>
+    </items>
+    <items id="408073ab-5900-48d6-a691-735f8c53b524">
+      <name>Document_DepreciationCalculation</name>
+      <description></description>
+      <code xsi:type="core:NumberValue">
+        <value>59</value>
+      </code>
+      <isFolder>true</isFolder>
+      <content id="9f33fd36-eb45-49ff-8eec-364efd39872e">
+        <name>DepreciationCalculation_DR_DepreciationFixedAsset_CR_R8510B_BookValueOfFixedAsset</name>
+        <description></description>
+        <code xsi:type="core:NumberValue">
+          <value>60</value>
+        </code>
+      </content>
+      <content id="fe69b40a-efd7-47f5-95ea-df8f185a3ed5">
+        <name>DepreciationCalculation_DR_R5022T_Expenses_CR_DepreciationFixedAsset</name>
+        <description></description>
+        <code xsi:type="core:NumberValue">
+          <value>61</value>
+        </code>
+      </content>
+    </items>
   </predefined>
   <editType>InDialog</editType>
   <choiceMode>BothWays</choiceMode>

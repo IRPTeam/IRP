@@ -20,6 +20,7 @@ When set True value to the constant Use commission trading
 When set True value to the constant Use accounting
 When set True value to the constant Use salary
 When set True value to the constant Use retail orders
+When set True value to the constant Use fixed assets
 When Create catalog ExternalDataProc objects (test data base)
 * Add ExternalDataProc
 		* Discount
@@ -175,8 +176,11 @@ When Create document ForeignCurrencyRevaluation objects (test data base)
 When Create document MoneyTransfer objects (test data base)
 When Create catalog PartnerItems objects (test data base)
 When Create document CustomersAdvancesClosing objects (test data base)
-WHen Create document VendorsAdvancesClosing objects (test data base)
+When Create document VendorsAdvancesClosing objects (test data base)
 When Create document EmployeeCashAdvance objects (test data base)
+When Create document SalesReportFromTradeAgent objects (test data base)
+When Create document SalesReportToConsignor objects (test data base)
+When Create document ConsolidatedRetailSales objects (test data base)
 * Load data for Accounting system
 	When Create chart of characteristic types AccountingExtraDimensionTypes objects (test data base)
 	When Create chart of accounts Basic objects with LedgerTypeVariants (Basic LTV) (test data base)
@@ -587,6 +591,21 @@ When Create document EmployeeCashAdvance objects (test data base)
 		And Delay "3"
 * Posting EmployeeCashAdvance
 		Given I open hyperlink "e1cib/list/Document.EmployeeCashAdvance"
+		Then I select all lines of "List" table
+		And in the table "List" I click the button named "ListContextMenuPost"
+		And Delay "3"
+* Posting ConsolidatedRetailSales
+		Given I open hyperlink "e1cib/list/Document.ConsolidatedRetailSales"
+		Then I select all lines of "List" table
+		And in the table "List" I click the button named "ListContextMenuPost"
+		And Delay "3"
+* Posting SalesReportFromTradeAgent
+		Given I open hyperlink "e1cib/list/Document.SalesReportFromTradeAgent"
+		Then I select all lines of "List" table
+		And in the table "List" I click the button named "ListContextMenuPost"
+		And Delay "3"
+* Posting SalesReportToConsignor
+		Given I open hyperlink "e1cib/list/Document.SalesReportToConsignor"
 		Then I select all lines of "List" table
 		And in the table "List" I click the button named "ListContextMenuPost"
 		And Delay "3"

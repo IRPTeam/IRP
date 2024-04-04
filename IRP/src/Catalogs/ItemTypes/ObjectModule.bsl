@@ -2,6 +2,16 @@ Procedure BeforeWrite(Cancel)
 	If DataExchange.Load Then
 		Return;
 	EndIf;
+	
+	EmptyValues = New Array;
+	For Each Row In AvailableAttributes Do
+		If Not ValueIsFilled(Row.Attribute) Then
+			EmptyValues.Add(Row);
+		EndIf;
+	EndDo;
+	For Each Row In EmptyValues Do
+		AvailableAttributes.Delete(Row);
+	EndDo;
 EndProcedure
 
 Procedure BeforeDelete(Cancel)

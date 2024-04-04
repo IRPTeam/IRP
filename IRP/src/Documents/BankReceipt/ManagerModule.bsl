@@ -48,6 +48,8 @@ Procedure PostingCheckBeforeWrite(Ref, Cancel, PostingMode, Parameters, AddInfo 
 	Tables.R5015B_OtherPartnersTransactions.Columns.Add("Key", Metadata.DefinedTypes.typeRowID.Type);
 	Tables.T1040T_AccountingAmounts.Columns.Add("Key", Metadata.DefinedTypes.typeRowID.Type);
 	Tables.CashInTransit.Columns.Add("Key", Metadata.DefinedTypes.typeRowID.Type);
+	Tables.R5020B_PartnersBalance.Columns.Add("Key", Metadata.DefinedTypes.typeRowID.Type);
+	
 	PostingServer.FillPostingTables(Tables, Ref, QueryArray, Parameters);
 EndProcedure
 
@@ -139,6 +141,7 @@ Function GetQueryTextsMasterTables()
 	QueryArray.Add(T2014S_AdvancesInfo());
 	QueryArray.Add(T2015S_TransactionsInfo());
 	QueryArray.Add(T1040T_AccountingAmounts());
+	QueryArray.Add(R5020B_PartnersBalance());
 	Return QueryArray;
 EndFunction
 
@@ -224,7 +227,12 @@ Function PaymentList()
 		|	PaymentList.ProfitLossCenter AS ProfitLossCenter,
 		|	PaymentList.ExpenseType AS ExpenseType,
 		|	PaymentList.AdditionalAnalytic AS AdditionalAnalytic,
-		|	PaymentList.Commission AS Commission,
+		|	CASE WHEN PaymentList.Ref.TransactionType = VALUE(Enum.IncomingPaymentTransactionType.RetailCustomerAdvance) THEN
+		|		0
+		|	ELSE
+		|		PaymentList.Commission 
+		|	END AS Commission,
+		|	PaymentList.Commission AS RetailCustomerAdvanceCommission,
 		|	PaymentList.FinancialMovementType AS FinancialMovementType,
 		|	PaymentList.Ref.TransactionType = VALUE(Enum.IncomingPaymentTransactionType.PaymentFromCustomer) AS
 		|		IsPaymentFromCustomer,
@@ -236,7 +244,7 @@ Function PaymentList()
 		|		IsCashTransferOrder,
 		|	PaymentList.Ref.TransactionType = VALUE(Enum.IncomingPaymentTransactionType.TransferFromPOS) AS IsTransferFromPOS,
 		|	PaymentList.Ref.TransactionType = VALUE(Enum.IncomingPaymentTransactionType.ReturnFromVendor) AS IsReturnFromVendor,
-		|	PaymentList.Ref.TransactionType = VALUE(Enum.IncomingPaymentTransactionType.CustomerAdvance) AS IsCustomerAdvance,
+		|	PaymentList.Ref.TransactionType = VALUE(Enum.IncomingPaymentTransactionType.RetailCustomerAdvance) AS IsCustomerAdvance,
 		|	PaymentList.Ref.TransactionType = VALUE(Enum.IncomingPaymentTransactionType.EmployeeCashAdvance) AS
 		|		IsEmployeeCashAdvance,
 		|	PaymentList.RetailCustomer AS RetailCustomer,
@@ -705,7 +713,7 @@ Function R3026B_SalesOrdersCustomerAdvance()
 		   |	PaymentList.PaymentType,
 		   |	PaymentList.PaymentTerminal,
 		   |	PaymentList.BankTerm,
-		   |	PaymentList.Commission,
+		   |	PaymentList.RetailCustomerAdvanceCommission AS Commission,
 		   |	PaymentList.Amount
 		   |INTO R3026B_SalesOrdersCustomerAdvance
 		   |FROM
@@ -732,7 +740,7 @@ Function R3050T_PosCashBalances()
 		   |	PaymentList.Account,
 		   |	PaymentList.PaymentTerminal,
 		   |	PaymentList.Amount,
-		   |	PaymentList.Commission
+		   |	PaymentList.RetailCustomerAdvanceCommission AS Commission
 		   |INTO R3050T_PosCashBalances
 		   |FROM
 		   |	PaymentList AS PaymentList
@@ -799,6 +807,10 @@ Function R3021B_CashInTransitIncoming()
 		|		AND PaymentList.IsCurrencyExchange
 		|WHERE
 		|	TRUE";
+EndFunction
+
+Function R5020B_PartnersBalance()
+	Return AccumulationRegisters.R5020B_PartnersBalance.R5020B_PartnersBalance_BR_CR();
 EndFunction
 
 #EndRegion

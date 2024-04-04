@@ -326,16 +326,14 @@ Scenario: _043010 check Debit note movements by the Register "R5010 Reconciliati
 			| 'Number'    |
 			| '3'         |
 	* Check movements by the Register  "R5010 Reconciliation statement" 
-		And I click "Registrations report" button
+		And I click "Registrations report info" button
 		And I select "R5010 Reconciliation statement" exact value from "Register" drop-down list
 		And I click "Generate report" button
 		Then "ResultTable" spreadsheet document is equal
-			| 'Debit note 3 dated 12.06.2023 14:52:33'       | ''              | ''                      | ''            | ''               | ''               | ''           | ''                  | ''                       |
-			| 'Document registrations records'               | ''              | ''                      | ''            | ''               | ''               | ''           | ''                  | ''                       |
-			| 'Register  "R5010 Reconciliation statement"'   | ''              | ''                      | ''            | ''               | ''               | ''           | ''                  | ''                       |
-			| ''                                             | 'Record type'   | 'Period'                | 'Resources'   | 'Dimensions'     | ''               | ''           | ''                  | ''                       |
-			| ''                                             | ''              | ''                      | 'Amount'      | 'Company'        | 'Branch'         | 'Currency'   | 'Legal name'        | 'Legal name contract'    |
-			| ''                                             | 'Receipt'       | '12.06.2023 14:52:33'   | '100'         | 'Main Company'   | 'Front office'   | 'TRY'        | 'Other partner 1'   | ''                       |
+			| 'Debit note 3 dated 12.06.2023 14:52:33'     | ''                    | ''           | ''             | ''             | ''         | ''                | ''                    | ''       |
+			| 'Register  "R5010 Reconciliation statement"' | ''                    | ''           | ''             | ''             | ''         | ''                | ''                    | ''       |
+			| ''                                           | 'Period'              | 'RecordType' | 'Company'      | 'Branch'       | 'Currency' | 'Legal name'      | 'Legal name contract' | 'Amount' |
+			| ''                                           | '12.06.2023 14:52:33' | 'Receipt'    | 'Main Company' | 'Front office' | 'TRY'      | 'Other partner 1' | ''                    | '100'    |	
 	And I close all client application windows
 
 Scenario: _043030 Debit note clear posting/mark for deletion

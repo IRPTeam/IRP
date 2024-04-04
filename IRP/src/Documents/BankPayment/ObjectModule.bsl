@@ -43,6 +43,15 @@ Procedure FillCheckProcessing(Cancel, CheckedAttributes)
 		EndIf;
 	EndDo;
 	
+	If Not Cancel Then
+		If ThisObject.TransactionType = Enums.OutgoingPaymentTransactionTypes.PaymentToVendor
+			Or ThisObject.TransactionType = Enums.OutgoingPaymentTransactionTypes.ReturnToCustomer
+			Or ThisObject.TransactionType = Enums.OutgoingPaymentTransactionTypes.ReturnToCustomerByPOS
+			Or ThisObject.TransactionType = Enums.OutgoingPaymentTransactionTypes.OtherPartner Then
+			
+			CheckedAttributes.Add("PaymentList.Agreement");
+		EndIf;
+	EndIf;
 EndProcedure
 
 Procedure Posting(Cancel, PostingMode)

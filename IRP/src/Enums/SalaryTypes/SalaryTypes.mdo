@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mdclass:Enum xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="c7d179c7-ba17-48c1-9faa-39a0a13c4f00">
+  <producedTypes>
+    <refType typeId="07a68cc2-4c42-40ee-9cd7-37dfab1d7101" valueTypeId="8dd1a525-20c9-4ecf-8b9a-19040e83f5c8"/>
+    <listType typeId="22b7e4e7-6304-4fbe-aa06-f139bfa37880" valueTypeId="256c635c-c9d9-4a43-b4a4-488e8f15b878"/>
+    <managerType typeId="b6182ef6-6b48-4cdf-930e-55ebed7ff1c2" valueTypeId="0abb8e72-30fc-494b-b1eb-604c7fd1ea2f"/>
+  </producedTypes>
+  <name>SalaryTypes</name>
+  <synonym>
+    <key>en</key>
+    <value>Salary types</value>
+  </synonym>
+  <quickChoice>true</quickChoice>
+  <choiceMode>BothWays</choiceMode>
+  <enumValues uuid="4a6dd8e8-b616-4957-a6b5-7e315a90bcb5">
+    <name>ByPosition</name>
+    <synonym>
+      <key>en</key>
+      <value>By position</value>
+    </synonym>
+  </enumValues>
+  <enumValues uuid="200801bc-b11c-407e-b7c1-96b8efd86202">
+    <name>Personal</name>
+    <synonym>
+      <key>en</key>
+      <value>Personal</value>
+    </synonym>
+  </enumValues>
+</mdclass:Enum>

@@ -28,6 +28,7 @@ Procedure PostingCheckBeforeWrite(Ref, Cancel, PostingMode, Parameters, AddInfo 
 	Tables.R3027B_EmployeeCashAdvance.Columns.Add("Key", Metadata.DefinedTypes.typeRowID.Type);
 	Tables.R5022T_Expenses.Columns.Add("Key", Metadata.DefinedTypes.typeRowID.Type);
 	Tables.R1020B_AdvancesToVendors.Columns.Add("Key", Metadata.DefinedTypes.typeRowID.Type);
+	Tables.R5020B_PartnersBalance.Columns.Add("Key", Metadata.DefinedTypes.typeRowID.Type);
 
 	PostingServer.FillPostingTables(Tables, Ref, QueryArray, Parameters);
 EndProcedure
@@ -135,6 +136,7 @@ Function GetQueryTextsMasterTables()
 	QueryArray.Add(R5012B_VendorsAging());
 	QueryArray.Add(R5022T_Expenses());
 	QueryArray.Add(T2015S_TransactionsInfo());
+	QueryArray.Add(R5020B_PartnersBalance());
 	Return QueryArray;
 EndFunction
 
@@ -194,6 +196,10 @@ EndFunction
 
 Function R5012B_VendorsAging()
 	Return AccumulationRegisters.R5012B_VendorsAging.R5012B_VendorsAging_Offset();
+EndFunction
+
+Function R5020B_PartnersBalance()
+	Return AccumulationRegisters.R5020B_PartnersBalance.R5020B_PartnersBalance_ECA();
 EndFunction
 
 #EndRegion

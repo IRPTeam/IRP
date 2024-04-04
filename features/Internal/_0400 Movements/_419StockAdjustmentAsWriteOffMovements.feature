@@ -220,17 +220,15 @@ Scenario: _041908 check Stock adjustment as write off movements by the Register 
 			| 'Number'  |
 			| '201'     |
 	* Check movements by the Register  "R4051 Stock adjustment (Write off)" 
-		And I click "Registrations report" button
+		And I click "Registrations report info" button
 		And I select "R4051 Stock adjustment (Write off)" exact value from "Register" drop-down list
 		And I click "Generate report" button
 		Then "ResultTable" spreadsheet document is equal
-			| 'Stock adjustment as write-off 201 dated 15.03.2021 15:29:14' | ''                    | ''          | ''           | ''                                                            | ''          |
-			| 'Document registrations records'                              | ''                    | ''          | ''           | ''                                                            | ''          |
-			| 'Register  "R4051 Stock adjustment (Write off)"'              | ''                    | ''          | ''           | ''                                                            | ''          |
-			| ''                                                            | 'Period'              | 'Resources' | 'Dimensions' | ''                                                            | ''          |
-			| ''                                                            | ''                    | 'Quantity'  | 'Store'      | 'Basis'                                                       | 'Item key'  |
-			| ''                                                            | '15.03.2021 15:29:14' | '2'         | 'Store 01'   | 'Stock adjustment as write-off 201 dated 15.03.2021 15:29:14' | '38/Yellow' |
-			| ''                                                            | '15.03.2021 15:29:14' | '8'         | 'Store 01'   | 'Stock adjustment as write-off 201 dated 15.03.2021 15:29:14' | 'M/White'   |		
+			| 'Stock adjustment as write-off 201 dated 15.03.2021 15:29:14' | ''                    | ''         | ''                                                            | ''          | ''         |
+			| 'Register  "R4051 Stock adjustment (Write off)"'              | ''                    | ''         | ''                                                            | ''          | ''         |
+			| ''                                                            | 'Period'              | 'Store'    | 'Basis'                                                       | 'Item key'  | 'Quantity' |
+			| ''                                                            | '15.03.2021 15:29:14' | 'Store 01' | 'Stock adjustment as write-off 201 dated 15.03.2021 15:29:14' | 'M/White'   | '8'        |
+			| ''                                                            | '15.03.2021 15:29:14' | 'Store 01' | 'Stock adjustment as write-off 201 dated 15.03.2021 15:29:14' | '38/Yellow' | '2'        |	
 	And I close all client application windows
 
 

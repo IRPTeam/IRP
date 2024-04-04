@@ -107,6 +107,7 @@
   <registerRecords>AccumulationRegister.R4014B_SerialLotNumber</registerRecords>
   <registerRecords>AccumulationRegister.R2012B_SalesOrdersInvoiceClosing</registerRecords>
   <registerRecords>AccumulationRegister.R5015B_OtherPartnersTransactions</registerRecords>
+  <registerRecords>AccumulationRegister.R5020B_PartnersBalance</registerRecords>
   <postInPrivilegedMode>true</postInPrivilegedMode>
   <unpostInPrivilegedMode>true</unpostInPrivilegedMode>
   <choiceHistoryOnInput>DontUse</choiceHistoryOnInput>
@@ -2034,6 +2035,13 @@
       <dataHistory>Use</dataHistory>
     </attributes>
   </tabularSections>
+  <templates uuid="70688825-7030-4598-8fc6-3a36d155a5ed">
+    <name>RetailSalesReceiptPrint</name>
+    <synonym>
+      <key>en</key>
+      <value>Retail sales receipt</value>
+    </synonym>
+  </templates>
   <commands uuid="fac0f0ce-cdcd-4e1f-ae4e-961fb1021bce">
     <name>Generate</name>
     <synonym>
@@ -2070,6 +2078,19 @@
     <commandParameterType>
       <types>DocumentRef.RetailSalesReceipt</types>
     </commandParameterType>
+    <representation>Auto</representation>
+  </commands>
+  <commands uuid="437abb61-a53e-4898-bcce-22f318f1796e">
+    <name>RetailSalesReceiptPrint</name>
+    <synonym>
+      <key>en</key>
+      <value>Retail sales receipt</value>
+    </synonym>
+    <group>CommandGroup.Print</group>
+    <commandParameterType>
+      <types>DocumentRef.RetailSalesReceipt</types>
+    </commandParameterType>
+    <parameterUseMode>Multiple</parameterUseMode>
     <representation>Auto</representation>
   </commands>
 </mdclass:Document>

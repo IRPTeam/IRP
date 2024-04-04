@@ -1295,18 +1295,16 @@ Scenario: _0401348 check Sales invoice movements by the Register  "R4014 Serial 
 		| 'Number'   |
 		| '194'      |
 	* Check movements by the Register  "R4014 Serial lot numbers"
-		And I click "Registrations report" button
+		And I click "Registrations report info" button
 		And I select "R4014 Serial lot numbers" exact value from "Register" drop-down list
 		And I click "Generate report" button
 		Then "ResultTable" spreadsheet document is equal
-			| 'Sales invoice 194 dated 04.11.2022 16:33:38' | ''            | ''                    | ''          | ''             | ''                        | ''      | ''         | ''                  |
-			| 'Document registrations records'              | ''            | ''                    | ''          | ''             | ''                        | ''      | ''         | ''                  |
-			| 'Register  "R4014 Serial lot numbers"'        | ''            | ''                    | ''          | ''             | ''                        | ''      | ''         | ''                  |
-			| ''                                            | 'Record type' | 'Period'              | 'Resources' | 'Dimensions'   | ''                        | ''      | ''         | ''                  |
-			| ''                                            | ''            | ''                    | 'Quantity'  | 'Company'      | 'Branch'                  | 'Store' | 'Item key' | 'Serial lot number' |
-			| ''                                            | 'Expense'     | '04.11.2022 16:33:38' | '1'         | 'Main Company' | 'Distribution department' | ''      | 'UNIQ'     | '09987897977889'    |
-			| ''                                            | 'Expense'     | '04.11.2022 16:33:38' | '2'         | 'Main Company' | 'Distribution department' | ''      | 'UNIQ'     | '11111111111111'    |
-			| ''                                            | 'Expense'     | '04.11.2022 16:33:38' | '4'         | 'Main Company' | 'Distribution department' | ''      | 'PZU'      | '0514'              |
+			| 'Sales invoice 194 dated 04.11.2022 16:33:38' | ''                    | ''           | ''             | ''                        | ''      | ''         | ''                  | ''         |
+			| 'Register  "R4014 Serial lot numbers"'        | ''                    | ''           | ''             | ''                        | ''      | ''         | ''                  | ''         |
+			| ''                                            | 'Period'              | 'RecordType' | 'Company'      | 'Branch'                  | 'Store' | 'Item key' | 'Serial lot number' | 'Quantity' |
+			| ''                                            | '04.11.2022 16:33:38' | 'Expense'    | 'Main Company' | 'Distribution department' | ''      | 'UNIQ'     | '09987897977889'    | '1'        |
+			| ''                                            | '04.11.2022 16:33:38' | 'Expense'    | 'Main Company' | 'Distribution department' | ''      | 'UNIQ'     | '11111111111111'    | '2'        |
+			| ''                                            | '04.11.2022 16:33:38' | 'Expense'    | 'Main Company' | 'Distribution department' | ''      | 'PZU'      | '0514'              | '4'        |
 		And I close all client application windows
 
 

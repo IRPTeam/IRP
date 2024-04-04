@@ -219,7 +219,9 @@ Procedure GenerateReportForOneDocument(DocumentRef, Result, Template, MainTitleA
 
 		PutDataProcessing(DocumentRef, ArrayOfFields, FieldPresentations, ReportBuilder, ObjectProperty);
 		
-		SetConditionalAppearance(ReportBuilder);
+		If Metadata.AccumulationRegisters.Contains(ObjectProperty) Then
+			SetConditionalAppearance(ReportBuilder);
+		EndIf;
 		
 		If ReportBuilder.GetQuery().Execute().IsEmpty() Then
 			Continue;

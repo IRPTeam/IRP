@@ -252,8 +252,8 @@ Function GetIgnored_Fields()
 	Array.Add("ShipmentConfirmation.R4032B_GoodsInTransitOutgoing.*");
 	Array.Add("ShipmentConfirmation.R4034B_GoodsShipmentSchedule.*");
 	
-	Array.Add("CommissioningOfFixedAsset.R4011B_FreeStocks.*");
-	Array.Add("CommissioningOfFixedAsset.R4014B_SerialLotNumber.*");
+	//Array.Add("CommissioningOfFixedAsset.R4011B_FreeStocks.*");
+	Array.Add("CommissioningOfFixedAsset.R4014B_SerialLotNumber.Store");
 
 	Array.Add("DecommissioningOfFixedAsset.R4011B_FreeStocks.*");
 	Array.Add("DecommissioningOfFixedAsset.R4014B_SerialLotNumber.*");

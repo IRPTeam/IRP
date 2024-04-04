@@ -1054,16 +1054,14 @@ Scenario: _0433308 check Bank payment movements by the Register  "R3021 Cash in 
 			| 'Number'  |
 			| '324'     |
 	* Check movements by the Register  "R3021 Cash in transit (incoming)" 
-		And I click "Registrations report" button
+		And I click "Registrations report info" button
 		And I select "R3021 Cash in transit (incoming)" exact value from "Register" drop-down list
 		And I click "Generate report" button
 		Then "ResultTable" spreadsheet document is equal
-			| 'Bank payment 324 dated 03.06.2021 17:05:34'   | ''            | ''                    | ''          | ''             | ''       | ''             | ''                             | ''         | ''                     | ''                                                | ''                     |
-			| 'Document registrations records'               | ''            | ''                    | ''          | ''             | ''       | ''             | ''                             | ''         | ''                     | ''                                                | ''                     |
-			| 'Register  "R3021 Cash in transit (incoming)"' | ''            | ''                    | ''          | ''             | ''       | ''             | ''                             | ''         | ''                     | ''                                                | ''                     |
-			| ''                                             | 'Record type' | 'Period'              | 'Resources' | 'Dimensions'   | ''       | ''             | ''                             | ''         | ''                     | ''                                                | 'Attributes'           |
-			| ''                                             | ''            | ''                    | 'Amount'    | 'Company'      | 'Branch' | 'Account'      | 'Multi currency movement type' | 'Currency' | 'Transaction currency' | 'Basis'                                           | 'Deferred calculation' |
-			| ''                                             | 'Receipt'     | '03.06.2021 17:05:34' | '171,2'     | 'Main Company' | ''       | 'Transit Main' | 'Reporting currency'           | 'USD'      | 'TRY'                  | 'Cash transfer order 3 dated 05.04.2021 12:23:49' | 'No'                   |
-			| ''                                             | 'Receipt'     | '03.06.2021 17:05:34' | '1 000'     | 'Main Company' | ''       | 'Transit Main' | 'Local currency'               | 'TRY'      | 'TRY'                  | 'Cash transfer order 3 dated 05.04.2021 12:23:49' | 'No'                   |
-			| ''                                             | 'Receipt'     | '03.06.2021 17:05:34' | '1 000'     | 'Main Company' | ''       | 'Transit Main' | 'en description is empty'      | 'TRY'      | 'TRY'                  | 'Cash transfer order 3 dated 05.04.2021 12:23:49' | 'No'                   |		
+			| 'Bank payment 324 dated 03.06.2021 17:05:34'   | ''                    | ''           | ''             | ''       | ''             | ''                             | ''         | ''                     | ''                                                | ''       | ''                     |
+			| 'Register  "R3021 Cash in transit (incoming)"' | ''                    | ''           | ''             | ''       | ''             | ''                             | ''         | ''                     | ''                                                | ''       | ''                     |
+			| ''                                             | 'Period'              | 'RecordType' | 'Company'      | 'Branch' | 'Account'      | 'Multi currency movement type' | 'Currency' | 'Transaction currency' | 'Basis'                                           | 'Amount' | 'Deferred calculation' |
+			| ''                                             | '03.06.2021 17:05:34' | 'Receipt'    | 'Main Company' | ''       | 'Transit Main' | 'Local currency'               | 'TRY'      | 'TRY'                  | 'Cash transfer order 3 dated 05.04.2021 12:23:49' | '1 000'  | 'No'                   |
+			| ''                                             | '03.06.2021 17:05:34' | 'Receipt'    | 'Main Company' | ''       | 'Transit Main' | 'Reporting currency'           | 'USD'      | 'TRY'                  | 'Cash transfer order 3 dated 05.04.2021 12:23:49' | '171,2'  | 'No'                   |
+			| ''                                             | '03.06.2021 17:05:34' | 'Receipt'    | 'Main Company' | ''       | 'Transit Main' | 'en description is empty'      | 'TRY'      | 'TRY'                  | 'Cash transfer order 3 dated 05.04.2021 12:23:49' | '1 000'  | 'No'                   |	
 		And I close all client application windows

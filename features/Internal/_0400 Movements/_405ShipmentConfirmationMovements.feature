@@ -603,16 +603,14 @@ Scenario: _040194 check Shipment confirmation movements by the Register  "R4011 
 			| 'Number'    |
 			| '8'         |
 	* Check movements by the Register  "R4011 Free stocks"
-		And I click "Registrations report" button
+		And I click "Registrations report info" button
 		And I select "R4011 Free stocks" exact value from "Register" drop-down list
 		And I click "Generate report" button
 		Then "ResultTable" spreadsheet document is equal
-			| 'Shipment confirmation 8 dated 18.02.2021 10:48:53'   | ''              | ''                      | ''            | ''             | ''            |
-			| 'Document registrations records'                      | ''              | ''                      | ''            | ''             | ''            |
-			| 'Register  "R4011 Free stocks"'                       | ''              | ''                      | ''            | ''             | ''            |
-			| ''                                                    | 'Record type'   | 'Period'                | 'Resources'   | 'Dimensions'   | ''            |
-			| ''                                                    | ''              | ''                      | 'Quantity'    | 'Store'        | 'Item key'    |
-			| ''                                                    | 'Expense'       | '18.02.2021 10:48:53'   | '6'           | 'Store 02'     | 'XS/Blue'     |
+			| 'Shipment confirmation 8 dated 18.02.2021 10:48:53' | ''                    | ''           | ''         | ''         | ''         |
+			| 'Register  "R4011 Free stocks"'                     | ''                    | ''           | ''         | ''         | ''         |
+			| ''                                                  | 'Period'              | 'RecordType' | 'Store'    | 'Item key' | 'Quantity' |
+			| ''                                                  | '18.02.2021 10:48:53' | 'Expense'    | 'Store 02' | 'XS/Blue'  | '6'        |		
 		And I close all client application windows
 
 Scenario: _040199 Shipment confirmation clear posting/mark for deletion

@@ -20,6 +20,7 @@ When set True value to the constant Use commission trading
 When set True value to the constant Use accounting
 When set True value to the constant Use salary
 When set True value to the constant Use retail orders
+When set True value to the constant Use fixed assets
 When Create catalog ExternalDataProc objects (test data base)
 * Add ExternalDataProc
 		* Discount

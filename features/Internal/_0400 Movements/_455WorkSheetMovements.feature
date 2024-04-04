@@ -1,4 +1,4 @@
-#language: en
+﻿#language: en
 @tree
 @Positive
 @Movements3
@@ -287,18 +287,16 @@ Scenario: _045513 check WorkSheet movements by the Register  "R4012 Stock Reserv
 			| 'Number'    |
 			| '3'         |
 	* Check movements by the Register  "R4012 Stock Reservation" 
-		And I click "Registrations report" button
+		And I click "Registrations report info" button
 		And I select "R4012 Stock Reservation" exact value from "Register" drop-down list
 		And I click "Generate report" button
 		Then "ResultTable" spreadsheet document is equal
-			| 'Work sheet 3 dated 22.09.2022 15:55:17'   | ''              | ''                      | ''            | ''             | ''             | ''                                           |
-			| 'Document registrations records'           | ''              | ''                      | ''            | ''             | ''             | ''                                           |
-			| 'Register  "R4012 Stock Reservation"'      | ''              | ''                      | ''            | ''             | ''             | ''                                           |
-			| ''                                         | 'Record type'   | 'Period'                | 'Resources'   | 'Dimensions'   | ''             | ''                                           |
-			| ''                                         | ''              | ''                      | 'Quantity'    | 'Store'        | 'Item key'     | 'Order'                                      |
-			| ''                                         | 'Expense'       | '22.09.2022 15:55:17'   | '1,521'       | 'Store 01'     | 'Material 3'   | 'Work order 31 dated 22.09.2022 12:41:21'    |
-			| ''                                         | 'Expense'       | '22.09.2022 15:55:17'   | '4'           | 'Store 01'     | 'Material 1'   | 'Work order 31 dated 22.09.2022 12:41:21'    |
-			| ''                                         | 'Expense'       | '22.09.2022 15:55:17'   | '6'           | 'Store 01'     | 'Material 2'   | 'Work order 31 dated 22.09.2022 12:41:21'    |
+			| 'Work sheet 3 dated 22.09.2022 15:55:17' | ''                    | ''           | ''         | ''           | ''                                        | ''         |
+			| 'Register  "R4012 Stock Reservation"'    | ''                    | ''           | ''         | ''           | ''                                        | ''         |
+			| ''                                       | 'Period'              | 'RecordType' | 'Store'    | 'Item key'   | 'Order'                                   | 'Quantity' |
+			| ''                                       | '22.09.2022 15:55:17' | 'Expense'    | 'Store 01' | 'Material 1' | 'Work order 31 dated 22.09.2022 12:41:21' | '4'        |
+			| ''                                       | '22.09.2022 15:55:17' | 'Expense'    | 'Store 01' | 'Material 3' | 'Work order 31 dated 22.09.2022 12:41:21' | '1,521'    |
+			| ''                                       | '22.09.2022 15:55:17' | 'Expense'    | 'Store 01' | 'Material 2' | 'Work order 31 dated 22.09.2022 12:41:21' | '6'        |	
 		And I close all client application windows
 
 Scenario: _045520 Work sheet clear posting/mark for deletion

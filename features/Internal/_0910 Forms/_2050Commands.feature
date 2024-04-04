@@ -20,6 +20,7 @@ Scenario: _0205001 preparation (commands)
 	When set True value to the constant Use accounting
 	When set True value to the constant Use salary
 	When set True value to the constant Use commission trading
+	When set True value to the constant Use fixed assets
 	* Load info
 		When Create information register Barcodes records
 		When Create catalog Companies objects (own Second company)

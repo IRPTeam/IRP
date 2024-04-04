@@ -93,17 +93,15 @@ Scenario: _045102 check Incoming payment order movements by the Register "R2022 
 			| 'Number'    |
 			| '113'       |
 	* Check movements by the Register  "R2022 Customers payment planning" 
-		And I click "Registrations report" button
+		And I click "Registrations report info" button
 		And I select "R2022 Customers payment planning" exact value from "Register" drop-down list
 		And I click "Generate report" button
 		Then "ResultTable" spreadsheet document is equal
-			| 'Incoming payment order 113 dated 01.06.2021 10:53:53'   | ''              | ''                      | ''            | ''               | ''          | ''                                              | ''                  | ''          | ''                                    |
-			| 'Document registrations records'                         | ''              | ''                      | ''            | ''               | ''          | ''                                              | ''                  | ''          | ''                                    |
-			| 'Register  "R2022 Customers payment planning"'           | ''              | ''                      | ''            | ''               | ''          | ''                                              | ''                  | ''          | ''                                    |
-			| ''                                                       | 'Record type'   | 'Period'                | 'Resources'   | 'Dimensions'     | ''          | ''                                              | ''                  | ''          | ''                                    |
-			| ''                                                       | ''              | ''                      | 'Amount'      | 'Company'        | 'Branch'    | 'Basis'                                         | 'Legal name'        | 'Partner'   | 'Agreement'                           |
-			| ''                                                       | 'Expense'       | '01.06.2021 10:53:53'   | '200'         | 'Main Company'   | 'Shop 01'   | 'Sales order 112 dated 30.05.2021 12:24:18'     | 'Company Kalipso'   | 'Kalipso'   | 'Basic Partner terms, without VAT'    |
-			| ''                                                       | 'Expense'       | '01.06.2021 10:53:53'   | '400'         | 'Main Company'   | 'Shop 01'   | 'Sales invoice 113 dated 01.06.2021 10:37:58'   | 'Company Kalipso'   | 'Kalipso'   | 'Basic Partner terms, without VAT'    |
+			| 'Incoming payment order 113 dated 01.06.2021 10:53:53' | ''                    | ''           | ''             | ''        | ''                                            | ''                | ''        | ''                                 | ''       |
+			| 'Register  "R2022 Customers payment planning"'         | ''                    | ''           | ''             | ''        | ''                                            | ''                | ''        | ''                                 | ''       |
+			| ''                                                     | 'Period'              | 'RecordType' | 'Company'      | 'Branch'  | 'Basis'                                       | 'Legal name'      | 'Partner' | 'Agreement'                        | 'Amount' |
+			| ''                                                     | '01.06.2021 10:53:53' | 'Expense'    | 'Main Company' | 'Shop 01' | 'Sales invoice 113 dated 01.06.2021 10:37:58' | 'Company Kalipso' | 'Kalipso' | 'Basic Partner terms, without VAT' | '400'    |
+			| ''                                                     | '01.06.2021 10:53:53' | 'Expense'    | 'Main Company' | 'Shop 01' | 'Sales order 112 dated 30.05.2021 12:24:18'   | 'Company Kalipso' | 'Kalipso' | 'Basic Partner terms, without VAT' | '200'    |	
 	And I close all client application windows
 
 Scenario: _045103 check Incoming payment order movements by the Register "R3035 Cash planning"

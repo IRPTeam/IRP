@@ -80,7 +80,7 @@ Async Function GetDataKKT(Hardware, Settings) Export
 		Settings.Out.TableParametersKKT = TableParametersKKT;
 	Else
 		TableParametersKKTPrepared = EquipmentFiscalPrinterAPIClient.TableParametersKKT();
-		FillDataFromDeviceResponse(TableParametersKKTPrepared, TableParametersKKT);
+		FillDataFromDeviceResponse(Hardware, TableParametersKKTPrepared, TableParametersKKT);
 		Settings.Out.TableParametersKKT = TableParametersKKTPrepared;
 	EndIf;
 
@@ -159,7 +159,7 @@ Async Function OpenShift(Hardware, Settings) Export
 		Settings.Out.OutputParameters = OutputParameters;
 	Else
 		OutputParametersPrepared = EquipmentFiscalPrinterAPIClient.OutputParameters();
-		FillDataFromDeviceResponse(OutputParametersPrepared, OutputParameters);
+		FillDataFromDeviceResponse(Hardware, OutputParametersPrepared, OutputParameters);
 		Settings.Out.OutputParameters = OutputParametersPrepared;
 	EndIf;
 
@@ -203,7 +203,7 @@ Async Function CloseShift(Hardware, Settings) Export
 		Settings.Out.OutputParameters = OutputParameters;
 	Else
 		OutputParametersPrepared = EquipmentFiscalPrinterAPIClient.OutputParameters();
-		FillDataFromDeviceResponse(OutputParametersPrepared, OutputParameters);
+		FillDataFromDeviceResponse(Hardware, OutputParametersPrepared, OutputParameters);
 		Settings.Out.OutputParameters = OutputParametersPrepared;
 	EndIf;
 
@@ -247,7 +247,7 @@ Async Function ProcessCheck(Hardware, Settings) Export
 		//@skip-check wrong-type-expression, statement-type-change
 		Settings.Out.DocumentOutputParameters = DocumentOutputParameters;
 	Else
-		FillDataFromDeviceResponse(Settings.Out.DocumentOutputParameters, DocumentOutputParameters);
+		FillDataFromDeviceResponse(Hardware, Settings.Out.DocumentOutputParameters, DocumentOutputParameters);
 	EndIf;
 
 	If ConnectParameters.WriteLog Then
@@ -290,7 +290,7 @@ Async Function ProcessCorrectionCheck(Hardware, Settings) Export
 		Settings.Out.DocumentOutputParameters = DocumentOutputParameters;
 	Else
 		//@skip-check invocation-parameter-type-intersect
-		FillDataFromDeviceResponse(Settings.Out.DocumentOutputParameters, DocumentOutputParameters);
+		FillDataFromDeviceResponse(Hardware, Settings.Out.DocumentOutputParameters, DocumentOutputParameters);
 	EndIf;
 
 	If ConnectParameters.WriteLog Then
@@ -473,7 +473,7 @@ Async Function GetCurrentStatus(Hardware, Settings) Export
 		Settings.Out.OutputParameters = OutputParameters;
 	Else
 		OutputParametersPrepared = EquipmentFiscalPrinterAPIClient.OutputParameters();
-		FillDataFromDeviceResponse(OutputParametersPrepared, OutputParameters);
+		FillDataFromDeviceResponse(Hardware, OutputParametersPrepared, OutputParameters);
 		Settings.Out.OutputParameters = OutputParametersPrepared;
 	EndIf;
 
@@ -685,7 +685,7 @@ Async Function RequestKM(Hardware, Settings) Export
 		//@skip-check wrong-type-expression, statement-type-change
 		Settings.Out.RequestKMResult = RequestKMResult;
 	Else
-		FillDataFromDeviceResponse(Settings.Out.RequestKMResult, RequestKMResult);
+		FillDataFromDeviceResponse(Hardware, Settings.Out.RequestKMResult, RequestKMResult);
 	EndIf;
 
 	If ConnectParameters.WriteLog Then
@@ -727,7 +727,7 @@ Async Function GetProcessingKMResult(Hardware, Settings) Export
 		//@skip-check wrong-type-expression, statement-type-change
 		Settings.Out.ProcessingKMResult = ProcessingKMResult;
 	Else
-		FillDataFromDeviceResponse(Settings.Out.ProcessingKMResult, ProcessingKMResult);
+		FillDataFromDeviceResponse(Hardware, Settings.Out.ProcessingKMResult, ProcessingKMResult);
 	EndIf;
 
 	If ConnectParameters.WriteLog Then
@@ -975,13 +975,20 @@ EndFunction
 // Fill data from device response.
 //
 // Parameters:
+//  Hardware - CatalogRef.Hardware
 //  Data - Structure
 //  DeviceResponse - String -  Device response
-Procedure FillDataFromDeviceResponse(Data, DeviceResponse) Export
-	Reader = New XMLReader();
-	Reader.SetString(DeviceResponse);
-	Result = XDTOFactory.ReadXML(Reader); // XDTODataObject
-	Reader.Close();
+Procedure FillDataFromDeviceResponse(Hardware, Data, DeviceResponse) Export
+	Try
+		Result = ReadXMLReponse(DeviceResponse);
+	Except
+		Error = ErrorProcessing.DetailErrorDescription(ErrorInfo());
+		Str = New Structure;
+		Str.Insert("Description", Error);
+		Str.Insert("DeviceResponse", DeviceResponse);
+		HardwareServer.WriteLog(Hardware, "Parsing result", False, Str, Result);
+		Raise R().EqFP_ReceivedWrongAnswerFromDevice;
+	EndTry;
 	If Not Result.Properties().Get("Parameters") = Undefined Then
 		//@skip-check property-return-type
 		DeviceResponseParameters = Result.Parameters; // XDTODataObject
@@ -996,6 +1003,14 @@ Procedure FillDataFromDeviceResponse(Data, DeviceResponse) Export
 		EndIf;
 	EndDo;
 EndProcedure
+
+Function ReadXMLReponse(DeviceResponse)
+	Reader = New XMLReader();
+	Reader.SetString(DeviceResponse);
+	Result = XDTOFactory.ReadXML(Reader); // XDTODataObject
+	Reader.Close();
+	Return Result;
+EndFunction
 
 // Transform to type by source.
 // @skip-check property-return-type, dynamic-access-method-not-found, variable-value-type, invocation-parameter-type-intersect

@@ -71,6 +71,23 @@ Function GetOperationsDefinition()
 	Map.Insert(AO.MoneyTransfer_DR_R3021B_CashInTransit_CR_R5021T_Revenues   , New Structure("ByRow", False));
 	Map.Insert(AO.MoneyTransfer_DR_R5022T_Expenses_CR_R3021B_CashInTransit   , New Structure("ByRow", False));
 
+	// Commissioning of fixed assets
+	Map.Insert(AO.CommissioningOfFixedAsset_DR_R8510B_BookValueOfFixedAsset_CR_R4050B_StockInventory, New Structure("ByRow", True));
+
+	// Decommissioning of fixed assets
+	Map.Insert(AO.DecommissioningOfFixedAsset_DR_R4050B_StockInventory_CR_R8510B_BookValueOfFixedAsset, New Structure("ByRow", True));
+	
+	// Modernization of fixed assets
+	Map.Insert(AO.ModernizationOfFixedAsset_DR_R8510B_BookValueOfFixedAsset_CR_R4050B_StockInventory, New Structure("ByRow", True));
+	Map.Insert(AO.ModernizationOfFixedAsset_DR_R4050B_StockInventory_CR_R8510B_BookValueOfFixedAsset, New Structure("ByRow", True));
+ 
+ 	// Fixed asstet transfer
+	Map.Insert(AO.FixedAssetTransfer_DR_R8510B_BookValueOfFixedAsset_CR_R8510B_BookValueOfFixedAsset, New Structure("ByRow", False));
+	
+	// Depreciation calculation
+	Map.Insert(AO.DepreciationCalculation_DR_DepreciationFixedAsset_CR_R8510B_BookValueOfFixedAsset, New Structure("ByRow", True));
+	Map.Insert(AO.DepreciationCalculation_DR_R5022T_Expenses_CR_DepreciationFixedAsset             , New Structure("ByRow", True));
+	
 Return Map;
 EndFunction
 
@@ -867,9 +884,82 @@ Function __GetT9014S_AccountsExpenseRevenue(Period, Company, LedgerTypeVariant, 
 	Query.SetParameter("ExpenseRevenue" , ExpenseRevenue);
 	QueryResult = Query.Execute();
 	QuerySelection = QueryResult.Select();
-	Result = New Structure("Account", Undefined);
+	Result = New Structure("Account");
 	If QuerySelection.Next() Then
 		Result.Account = QuerySelection.Account;
+	EndIf;
+	Return Result;
+EndFunction
+
+Function GetT9015S_AccountsFixedAsset(AccountParameters, FixedAsset) Export
+	Return AccountingServerReuse.GetT9015S_AccountsFixedAsset_Reuse(
+		AccountParameters.Period, 
+		AccountParameters.Company, 
+		AccountParameters.LedgerTypeVariant, 
+		FixedAsset);
+EndFunction
+
+Function __GetT9015S_AccountsFixedAsset(Period, Company, LedgerTypeVariant, FixedAsset) Export
+	Query = New Query();
+	Query.Text =
+	"SELECT
+	|	ByFixedAsset.Account,
+	|	ByFixedAsset.AccountDepreciation,
+	|	1 AS Priority
+	|INTO Accounts
+	|FROM
+	|	InformationRegister.T9015S_AccountsFixedAsset.SliceLast(&Period, Company = &Company
+	|	AND LedgerTypeVariant = &LedgerTypeVariant
+	|	AND FixedAsset = &FixedAsset
+	|	AND Type.Ref IS NULL) AS ByFixedAsset
+	|
+	|UNION ALL
+	|
+	|SELECT
+	|	ByType.Account,
+	|	ByType.AccountDepreciation,
+	|	2
+	|FROM
+	|	InformationRegister.T9015S_AccountsFixedAsset.SliceLast(&Period, Company = &Company
+	|	AND LedgerTypeVariant = &LedgerTypeVariant
+	|	AND FixedAsset.Ref IS NULL
+	|	AND Type = &Type ) AS ByType
+	|
+	|UNION ALL
+	|
+	|SELECT
+	|	ByCompany.Account,
+	|	ByCompany.AccountDepreciation,
+	|	3
+	|FROM
+	|	InformationRegister.T9015S_AccountsFixedAsset.SliceLast(&Period, Company = &Company
+	|	AND LedgerTypeVariant = &LedgerTypeVariant
+	|	AND FixedAsset.Ref IS NULL
+	|	AND Type.Ref IS NULL) AS ByCompany
+	|;
+	|
+	|////////////////////////////////////////////////////////////////////////////////
+	|SELECT
+	|	Accounts.Account,
+	|	Accounts.AccountDepreciation,
+	|	Accounts.Priority AS Priority
+	|FROM
+	|	Accounts AS Accounts
+	|
+	|ORDER BY
+	|	Priority";
+	Query.SetParameter("Period"   , Period);
+	Query.SetParameter("Company"  , Company);
+	Query.SetParameter("LedgerTypeVariant" , LedgerTypeVariant);
+	Query.SetParameter("FixedAsset" , FixedAsset);
+	Query.SetParameter("Type"       , FixedAsset.Type);
+	
+	QueryResult = Query.Execute();
+	QuerySelection = QueryResult.Select();
+	Result = New Structure("Account, AccountDepreciation");
+	If QuerySelection.Next() Then
+		Result.Account = QuerySelection.Account;
+		Result.AccountDepreciation = QuerySelection.AccountDepreciation;
 	EndIf;
 	Return Result;
 EndFunction
@@ -1168,6 +1258,7 @@ Function GetAccountingData_LandedCost(Parameters)
 	|	Document.%1.ItemList AS ItemList
 	|WHERE
 	|	ItemList.Ref = &Recorder and ItemList.Key = &RowKey
+	|	AND %2
 	|;
 	|
 	|////////////////////////////////////////////////////////////////////////////////
@@ -1189,7 +1280,12 @@ Function GetAccountingData_LandedCost(Parameters)
 	|	R6020B_BatchBalance.Company.LandedCostCurrencyMovementType.Currency,
 	|	ItemList.QuantityInBaseUnit";
 	
-	Query.Text = StrTemplate(Query.Text, Parameters.Recorder.MeTadata().Name);
+	AdditionalCondition = "TRUE";
+	If Parameters.Recorder.MeTadata() = Metadata.Documents.ModernizationOfFixedAsset Then		
+		AdditionalCondition = "ItemList.ModernizationType = VALUE(Enum.ModernizationTypes.Mount)";
+	EndIf;
+	
+	Query.Text = StrTemplate(Query.Text, Parameters.Recorder.MeTadata().Name, AdditionalCondition);
 	
 	OperationsDefinition = GetOperationsDefinition();
 	Property = OperationsDefinition.Get(Parameters.Operation);
@@ -1363,6 +1459,18 @@ Function GetAccountingData(Parameters)
 	EndIf;
 	
 	If Parameters.Operation = Catalogs.AccountingOperations.SalesInvoice_DR_R5022T_Expenses_CR_R4050B_StockInventory Then
+		Return GetAccountingData_LandedCost(Parameters);
+	EndIf;
+	
+	If Parameters.Operation = Catalogs.AccountingOperations.CommissioningOfFixedAsset_DR_R8510B_BookValueOfFixedAsset_CR_R4050B_StockInventory Then
+		Return GetAccountingData_LandedCost(Parameters);
+	EndIf;
+	
+	If Parameters.Operation = Catalogs.AccountingOperations.ModernizationOfFixedAsset_DR_R8510B_BookValueOfFixedAsset_CR_R4050B_StockInventory Then
+		Return GetAccountingData_LandedCost(Parameters);
+	EndIf;
+	
+	If Parameters.Operation = Catalogs.AccountingOperations.DecommissioningOfFixedAsset_DR_R4050B_StockInventory_CR_R8510B_BookValueOfFixedAsset Then
 		Return GetAccountingData_LandedCost(Parameters);
 	EndIf;
 	

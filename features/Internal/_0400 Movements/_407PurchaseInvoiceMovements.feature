@@ -852,19 +852,17 @@ Scenario: _0401027 check Purchase invoice movements by the Register  "R4014 Seri
 			| 'Number'    |
 			| '195'       |
 	* Check movements by the Register  "R4014 Serial lot numbers" 
-		And I click "Registrations report" button
+		And I click "Registrations report info" button
 		And I select "R4014 Serial lot numbers" exact value from "Register" drop-down list
 		And I click "Generate report" button
 		Then "ResultTable" spreadsheet document is equal
-			| 'Purchase invoice 195 dated 02.11.2022 16:31:38' | ''            | ''                    | ''          | ''             | ''                        | ''      | ''         | ''                  |
-			| 'Document registrations records'                 | ''            | ''                    | ''          | ''             | ''                        | ''      | ''         | ''                  |
-			| 'Register  "R4014 Serial lot numbers"'           | ''            | ''                    | ''          | ''             | ''                        | ''      | ''         | ''                  |
-			| ''                                               | 'Record type' | 'Period'              | 'Resources' | 'Dimensions'   | ''                        | ''      | ''         | ''                  |
-			| ''                                               | ''            | ''                    | 'Quantity'  | 'Company'      | 'Branch'                  | 'Store' | 'Item key' | 'Serial lot number' |
-			| ''                                               | 'Receipt'     | '02.11.2022 16:31:38' | '2'         | 'Main Company' | 'Distribution department' | ''      | 'ODS'      | '1123'              |
-			| ''                                               | 'Receipt'     | '02.11.2022 16:31:38' | '5'         | 'Main Company' | 'Distribution department' | ''      | 'UNIQ'     | '11111111111111'    |
-			| ''                                               | 'Receipt'     | '02.11.2022 16:31:38' | '10'        | 'Main Company' | 'Distribution department' | ''      | 'UNIQ'     | '0512'              |
-			| ''                                               | 'Receipt'     | '02.11.2022 16:31:38' | '10'        | 'Main Company' | 'Distribution department' | ''      | 'UNIQ'     | '11111111111111'    |		
+			| 'Purchase invoice 195 dated 02.11.2022 16:31:38' | ''                    | ''           | ''             | ''                        | ''      | ''         | ''                  | ''         |
+			| 'Register  "R4014 Serial lot numbers"'           | ''                    | ''           | ''             | ''                        | ''      | ''         | ''                  | ''         |
+			| ''                                               | 'Period'              | 'RecordType' | 'Company'      | 'Branch'                  | 'Store' | 'Item key' | 'Serial lot number' | 'Quantity' |
+			| ''                                               | '02.11.2022 16:31:38' | 'Receipt'    | 'Main Company' | 'Distribution department' | ''      | 'UNIQ'     | '0512'              | '10'       |
+			| ''                                               | '02.11.2022 16:31:38' | 'Receipt'    | 'Main Company' | 'Distribution department' | ''      | 'UNIQ'     | '11111111111111'    | '5'        |
+			| ''                                               | '02.11.2022 16:31:38' | 'Receipt'    | 'Main Company' | 'Distribution department' | ''      | 'UNIQ'     | '11111111111111'    | '10'       |
+			| ''                                               | '02.11.2022 16:31:38' | 'Receipt'    | 'Main Company' | 'Distribution department' | ''      | 'ODS'      | '1123'              | '2'        |	
 		And I close all client application windows
 
 

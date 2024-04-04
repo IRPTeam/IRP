@@ -304,16 +304,14 @@ Scenario: _043110 check Credit note movements by the Register "R5010 Reconciliat
 			| 'Number'    |
 			| '3'         |
 	* Check movements by the Register  "R5010 Reconciliation statement" 
-		And I click "Registrations report" button
+		And I click "Registrations report info" button
 		And I select "R5010 Reconciliation statement" exact value from "Register" drop-down list
 		And I click "Generate report" button
 		Then "ResultTable" spreadsheet document is equal
-			| 'Credit note 3 dated 12.06.2023 14:56:54'      | ''              | ''                      | ''            | ''               | ''               | ''           | ''                  | ''                       |
-			| 'Document registrations records'               | ''              | ''                      | ''            | ''               | ''               | ''           | ''                  | ''                       |
-			| 'Register  "R5010 Reconciliation statement"'   | ''              | ''                      | ''            | ''               | ''               | ''           | ''                  | ''                       |
-			| ''                                             | 'Record type'   | 'Period'                | 'Resources'   | 'Dimensions'     | ''               | ''           | ''                  | ''                       |
-			| ''                                             | ''              | ''                      | 'Amount'      | 'Company'        | 'Branch'         | 'Currency'   | 'Legal name'        | 'Legal name contract'    |
-			| ''                                             | 'Expense'       | '12.06.2023 14:56:54'   | '100'         | 'Main Company'   | 'Front office'   | 'TRY'        | 'Other partner 2'   | ''                       |
+			| 'Credit note 3 dated 12.06.2023 14:56:54'    | ''                    | ''           | ''             | ''             | ''         | ''                | ''                    | ''       |
+			| 'Register  "R5010 Reconciliation statement"' | ''                    | ''           | ''             | ''             | ''         | ''                | ''                    | ''       |
+			| ''                                           | 'Period'              | 'RecordType' | 'Company'      | 'Branch'       | 'Currency' | 'Legal name'      | 'Legal name contract' | 'Amount' |
+			| ''                                           | '12.06.2023 14:56:54' | 'Expense'    | 'Main Company' | 'Front office' | 'TRY'      | 'Other partner 2' | ''                    | '100'    |	
 	And I close all client application windows
 
 Scenario: _043130 Credit note clear posting/mark for deletion

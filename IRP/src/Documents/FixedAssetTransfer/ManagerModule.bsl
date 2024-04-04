@@ -14,6 +14,9 @@ Function PostingGetDocumentDataTables(Ref, Cancel, PostingMode, Parameters, AddI
 	QueryArray = GetQueryTextsSecondaryTables();
 	Parameters.Insert("QueryParameters", GetAdditionalQueryParameters(Ref));
 	PostingServer.ExecuteQuery(Ref, QueryArray, Parameters);
+	
+	AccountingServer.CreateAccountingDataTables(Ref, Cancel, PostingMode, Parameters, AddInfo);
+	
 	Return Tables;
 EndFunction
 
@@ -86,9 +89,12 @@ EndFunction
 Function GetAdditionalQueryParameters(Ref)
 	StrParams = New Structure;
 	StrParams.Insert("Ref", Ref);
-	StrParams.Insert("Company"       , Ref.Company);
-	StrParams.Insert("BusinessUnitSender"  , Ref.BusinessUnitSender);
-	StrParams.Insert("BusinessUnitReceiver", Ref.BusinessUnitReceiver);
+	StrParams.Insert("Company"                 , Ref.Company);
+	StrParams.Insert("BranchSender"            , Ref.Branch);
+	StrParams.Insert("BranchReceiver"          , Ref.BranchReceiver);
+	StrParams.Insert("ProfitLossCenterSender"  , Ref.ProfitLossCenterSender);
+	StrParams.Insert("ProfitLossCenterReceiver", Ref.ProfitLossCenterReceiver);
+	StrParams.Insert("ResponsiblePersonSender" , Ref.ResponsiblePersonSender);
 	StrParams.Insert("FixedAsset"    , Ref.FixedAsset);
 	If ValueIsFilled(Ref) Then
 		StrParams.Insert("BalancePeriod" , New Boundary(Ref.PointInTime(), BoundaryType.Excluding));
@@ -102,6 +108,7 @@ EndFunction
 
 Function GetQueryTextsSecondaryTables()
 	QueryArray = New Array;
+	QueryArray.Add(BookValueOfFixedAsset());
 	Return QueryArray;
 EndFunction
 
@@ -109,6 +116,7 @@ Function GetQueryTextsMasterTables()
 	QueryArray = New Array;
 	QueryArray.Add(T8515S_FixedAssetsLocation());
 	QueryArray.Add(R8510B_BookValueOfFixedAsset());
+	QueryArray.Add(T1040T_AccountingAmounts());
 	Return QueryArray;
 EndFunction
 
@@ -116,6 +124,29 @@ EndFunction
 
 #Region Posting_SourceTable
 
+Function BookValueOfFixedAsset()
+	Return
+		"SELECT
+		|	&Period AS Period,
+		|	R8510B_BookValueOfFixedAssetBalance.Company,
+		|	R8510B_BookValueOfFixedAssetBalance.Branch,
+		|	R8510B_BookValueOfFixedAssetBalance.ProfitLossCenter,
+		|	R8510B_BookValueOfFixedAssetBalance.FixedAsset,
+		|	R8510B_BookValueOfFixedAssetBalance.LedgerType,
+		|	R8510B_BookValueOfFixedAssetBalance.Schedule,
+		|	R8510B_BookValueOfFixedAssetBalance.Currency,
+		|	R8510B_BookValueOfFixedAssetBalance.AmountBalance AS Amount
+		|INTO _BookValueOfFixedAsset
+		|FROM
+		|	AccumulationRegister.R8510B_BookValueOfFixedAsset.Balance(&BalancePeriod, 
+		|	FixedAsset = &FixedAsset
+		|	AND Company = &Company
+		|	AND Branch = &BranchSender
+		|	AND ProfitLossCenter = &ProfitLossCenterSender
+		|	AND CurrencyMovementType = VALUE(ChartOfCharacteristicTypes.CurrencyMovementType.SettlementCurrency)) AS
+		|		R8510B_BookValueOfFixedAssetBalance";
+EndFunction
+	
 #EndRegion
 
 #Region Posting_MainTables
@@ -125,15 +156,18 @@ Function T8515S_FixedAssetsLocation()
 		"SELECT
 		|	&Period AS Period,
 		|	T8515S_FixedAssetsLocationSliceLast.Company,
+		|	T8515S_FixedAssetsLocationSliceLast.Branch,
+		|	T8515S_FixedAssetsLocationSliceLast.ProfitLossCenter,
 		|	T8515S_FixedAssetsLocationSliceLast.FixedAsset,
 		|	T8515S_FixedAssetsLocationSliceLast.ResponsiblePerson,
-		|	T8515S_FixedAssetsLocationSliceLast.Branch,
 		|	FALSE AS IsActive
 		|INTO T8515S_FixedAssetsLocation
 		|FROM
 		|	InformationRegister.T8515S_FixedAssetsLocation.SliceLast(&BalancePeriod, Company = &Company
+		|	AND Branch = &BranchSender
+		|	AND ProfitLossCenter = &ProfitLossCenterSender
 		|	AND FixedAsset = &FixedAsset
-		|	AND Branch = &BusinessUnitSender) AS T8515S_FixedAssetsLocationSliceLast
+		|	AND ResponsiblePerson = &ResponsiblePersonSender) AS T8515S_FixedAssetsLocationSliceLast
 		|WHERE
 		|	T8515S_FixedAssetsLocationSliceLast.IsActive
 		|
@@ -142,9 +176,10 @@ Function T8515S_FixedAssetsLocation()
 		|SELECT
 		|	FixedAssetTransfer.Date,
 		|	FixedAssetTransfer.Company,
+		|	FixedAssetTransfer.BranchReceiver,
+		|	FixedAssetTransfer.ProfitLossCenterReceiver,
 		|	FixedAssetTransfer.FixedAsset,
 		|	FixedAssetTransfer.ResponsiblePersonReceiver,
-		|	FixedAssetTransfer.BusinessUnitReceiver,
 		|	TRUE
 		|FROM
 		|	Document.FixedAssetTransfer AS FixedAssetTransfer
@@ -155,28 +190,11 @@ EndFunction
 Function R8510B_BookValueOfFixedAsset()
 	Return
 		"SELECT
-		|	&Period AS Period,
-		|	R8510B_BookValueOfFixedAssetBalance.Company,
-		|	R8510B_BookValueOfFixedAssetBalance.FixedAsset,
-		|	R8510B_BookValueOfFixedAssetBalance.LedgerType,
-		|	R8510B_BookValueOfFixedAssetBalance.Schedule,
-		|	R8510B_BookValueOfFixedAssetBalance.Currency,
-		|	R8510B_BookValueOfFixedAssetBalance.AmountBalance AS Amount
-		|INTO _BookValueOfFixedAsset
-		|FROM
-		|	AccumulationRegister.R8510B_BookValueOfFixedAsset.Balance(&BalancePeriod, FixedAsset = &FixedAsset
-		|	AND Branch = &BusinessUnitSender
-		|	AND Company = &Company
-		|	AND CurrencyMovementType = VALUE(ChartOfCharacteristicTypes.CurrencyMovementType.SettlementCurrency)) AS
-		|		R8510B_BookValueOfFixedAssetBalance
-		|;
-		|
-		|////////////////////////////////////////////////////////////////////////////////
-		|SELECT
 		|	VALUE(AccumulationRecordType.Expense) AS RecordType,
 		|	_BookValueOfFixedAsset.Period,
 		|	_BookValueOfFixedAsset.Company,
-		|	&BusinessUnitSender AS Branch,
+		|	_BookValueOfFixedAsset.Branch,
+		|	_BookValueOfFixedAsset.ProfitLossCenter,
 		|	_BookValueOfFixedAsset.FixedAsset,
 		|	_BookValueOfFixedAsset.LedgerType,
 		|	_BookValueOfFixedAsset.Schedule,
@@ -194,7 +212,8 @@ Function R8510B_BookValueOfFixedAsset()
 		|	VALUE(AccumulationRecordType.Receipt),
 		|	_BookValueOfFixedAsset.Period,
 		|	_BookValueOfFixedAsset.Company,
-		|	&BusinessUnitReceiver,
+		|	&BranchReceiver,
+		|	&ProfitLossCenterReceiver,
 		|	_BookValueOfFixedAsset.FixedAsset,
 		|	_BookValueOfFixedAsset.LedgerType,
 		|	_BookValueOfFixedAsset.Schedule,
@@ -223,5 +242,74 @@ Function GetAccessKey(Obj) Export
 	AccessKeyMap.Insert("Branch", Obj.Branch);
 	Return AccessKeyMap;
 EndFunction
+
+#EndRegion
+
+#Region Accounting
+
+Function T1040T_AccountingAmounts()
+	Return 
+		"SELECT
+		|	_BookValueOfFixedAsset.Period,
+		|	"""" AS RowKey,
+		|	_BookValueOfFixedAsset.Currency,
+		|	_BookValueOfFixedAsset.Amount,
+		|	VALUE(Catalog.AccountingOperations.FixedAssetTransfer_DR_R8510B_BookValueOfFixedAsset_CR_R8510B_BookValueOfFixedAsset) AS
+		|		Operation,
+		|	UNDEFINED AS AdvancesClosing
+		|INTO T1040T_AccountingAmounts
+		|FROM
+		|	_BookValueOfFixedAsset AS _BookValueOfFixedAsset
+		|WHERE
+		|	TRUE";
+EndFunction
+
+Function GetAccountingAnalytics(Parameters) Export
+	Operations = Catalogs.AccountingOperations;
+	If Parameters.Operation = Operations.FixedAssetTransfer_DR_R8510B_BookValueOfFixedAsset_CR_R8510B_BookValueOfFixedAsset Then
+		 
+		Return GetAnalytics_BookValue_BookValue(Parameters); // Book value - Book value
+		
+	EndIf;
+	Return Undefined;
+EndFunction
+
+#Region Accounting_Analytics
+
+// Book value - Book value
+Function GetAnalytics_BookValue_BookValue(Parameters)
+	AccountingAnalytics = AccountingServer.GetAccountingAnalyticsResult(Parameters);
+	AccountParameters   = AccountingServer.GetAccountParameters(Parameters);
+
+	// Debit
+	Debit = AccountingServer.GetT9015S_AccountsFixedAsset(AccountParameters, Parameters.ObjectData.FixedAsset);
+	AccountingAnalytics.Debit = Debit.Account;
+	AccountingServer.SetDebitExtDimensions(Parameters, AccountingAnalytics);
+	
+	// Credit
+	Credit = AccountingServer.GetT9015S_AccountsFixedAsset(AccountParameters, Parameters.ObjectData.FixedAsset);
+	AccountingAnalytics.Credit = Credit.Account;
+	AccountingServer.SetCreditExtDimensions(Parameters, AccountingAnalytics);
+
+	Return AccountingAnalytics;
+EndFunction
+
+Function GetHintDebitExtDimension(Parameters, ExtDimensionType, Value) Export
+	If Parameters.Operation = Catalogs.AccountingOperations.FixedAssetTransfer_DR_R8510B_BookValueOfFixedAsset_CR_R8510B_BookValueOfFixedAsset
+		And ExtDimensionType.ValueType.Types().Find(Type("CatalogRef.BusinessUnits")) <> Undefined Then
+		Return Parameters.ObjectData.ProfitLossCenterReceiver;
+	EndIf;
+	Return Value;
+EndFunction
+
+Function GetHintCreditExtDimension(Parameters, ExtDimensionType, Value) Export
+	If Parameters.Operation = Catalogs.AccountingOperations.FixedAssetTransfer_DR_R8510B_BookValueOfFixedAsset_CR_R8510B_BookValueOfFixedAsset
+		And ExtDimensionType.ValueType.Types().Find(Type("CatalogRef.BusinessUnits")) <> Undefined Then
+		Return Parameters.ObjectData.ProfitLossCenterSender;
+	EndIf;
+	Return Value;
+EndFunction
+
+#EndRegion
 
 #EndRegion

@@ -3508,3 +3508,48 @@ Scenario: Create catalog ReportOptions objects (R5020_PartnersBalance)
 	And I check or create catalog "ReportOptions" objects:
 		| 'Ref'                                                                   | 'DeletionMark' | 'Code'                                 | 'Description' | 'ObjectKey'                    | 'Option'                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         | 'Author'                                                        | 'Editor'                                                        | 'CreateDate'          | 'ModifyDate'          | 'NotActive' |
 		| 'e1cib/data/Catalog.ReportOptions?ref=b7b7f539c58cb9f711eee6a07fe7a2fb' | 'False'        | '1a1f987f-8d2b-4ac0-86f1-175da8f7a83d' | 'For test'    | 'Report.R5020_PartnersBalance' | 'ValueStorage:AgFTS2/0iI3BTqDV67a9oKcN7VndbtpIFN7bVuo7ZL23ndhgjCFyqGg27VZqm6phq70dZo6JJePxesYkadWn2MfZi32kfYU94x+wwaGEBmikRVHAM+fnO+d859gMzk/569+///li/GI8t5nb9n2nS1ywOqRj9xwyZpZN+m3eGfMus50We/7s6Rfr67OnX7XiXz/PDXgvbqbh0QwSGYjo1GgdW8YRREzwIJqcGr+PXpGe8WLw7Kl3CUrhmjxC+UieGldKxSemOesdt9hxkpr4bnKqKGFiGgsZKLRH5K1UMDVloWvkyiecSSaS+9lABSj1pboN4W51Mw3MTGQufyvXS/siUtLMPZVKs94anSqaWS8N1povBa9hvB4GE6FIpIlyc5Ug2kwliLi4nif4ZhHv9fX18bV9LJKJ2baslvnHu7eX7AqmdCEbfFuYBJFUNGJgIBeeeBJCYLo6+uqJF2DajtDOibqNsS6X2S7wN7j8KoCQZ0oo5+uLwUfA7HFIPDO/zkyY2sY21oaTBGAKkXoYc2dpkiD/bx/W2jsxyzCOUGkbyyLEfJWmVaBCGAynItVB51f5zobgnniphIFPQ4lg9MditUhoZvgihghb9iUNddWrmOcICpE6hEVA94BTdYzsgCBWjR7new/q8fwGA5HNMc73HtTjWYjDbX1yC5G7HcchZRmnBr+JJPiMA4yGIdJ2sf6dBDsb7oBcZ6lUYgrJkM906Adg2RKCfdJtyfU+ebfk+nEQcLRDAo4SGkma3cMOSMIKikMQseL+EGSsuH8UhPy0i4n4CfDJ7YDzsOZ/nySsOd4n/WqOHwfxRjsj3mHn4AqG/RPwQDNwxfmjIOKFutLf2x6ci5ndw1JxGcI+mbjse59EXPZ9CB56Zu1AAZGFCpJGhr7KtnQwZ2Ia0ySQIio5GoKvKqL5KdNJEXTzV3GtUmizuT29NTj/M6WhZy6t5qJJMLlS5VlWJ26tOaJBT5DEaABMliFQhInIDyZGFSnaODm7oom68PUbVgJQRQVMO5UfwT9ugm8MwHa42+9S4na7Nmm1YEzGbrdNxi272+1xq285lmdmcAvo2HpJcZT35teB07U5475NHMoo6bgdh/Sow0nbpm1OO9Bvs17WrhWdb4yQrQv0AcOP9HT5kWqC4qGY6AIU8KQxsIoXafhXvtYlvd/vsB5njIy5y0nHsbqk5+pLq9t2Xct1qT9uSnrNzocEJAKnumcqqG/04WiC+5V83qG1s0IuzvfuriQaD4E3lrI6FhaDwNOVw5DoFHBF5pKF35WJl582z6U/0TCFEnqhE5ebg/OIX/gfsN8E4lnZrSnNtKF6thEWjIIpZLRokexvZFkn2d/cXqa4TRER3JHwj+IC3vpSVtLx3fmp3K0rK3ek8CPEIlH3zWEUhKeGStC12dgnPdrrc5vjXLOhTzq+A4RafSDAbN9mLjjchubh9JCJWITxEiZB9ONSJYO3NVk8c7XBPJGqOFU76bphHANe4CPGCKb4XKBgi4yWoV8CbchfQ4xNAa08MCElmUoT0KPvdSLSOA/Cm+jPelE2P2m9Lvcbzzz0oItul56nMpPZ5MvseuZioZDIiznkPPsxLNt5LyJMVsNGo0pOi/sQsUG/2bQeTtsbRu2VR8ciAYske9mdpDnfF3pLiw5TJYoZgiWeKyz9SrX2ybhm4hu/bt3Bj1WCbMiQkiLzG3aVIhtwZBuS7JIlO6JJ7SvGPVP7FiY0fI9N/39yN0juShfW2nCjPqw14konbtqKK724eTPWIW+GuQ56FfXGsBtwV2fc4n5UfPLM8u45+A8=' | 'e1cib/data/Catalog.Users?ref=aa7f120ed92fbced11eb13d7279770c0' | 'e1cib/data/Catalog.Users?ref=aa7f120ed92fbced11eb13d7279770c0' | '21.03.2024 11:55:16' | '21.03.2024 12:02:48' | 'False'     |
+
+Scenario: Create catalog AccessGroups and AccessProfiles (Basic)
+
+	// Catalog.AccessProfiles
+
+	And I check or create catalog "AccessProfiles" objects:
+		| 'Ref'                                                                    | 'DeletionMark' | 'Code' | 'Author'   | 'Description_en' | 'Description_hash' | 'Description_ru' | 'Description_tr' | 'SourceNodeID' | 'Editor' | 'CreateDate'          | 'ModifyDate'          | 'NotActive' |
+		| 'e1cib/data/Catalog.AccessProfiles?ref=b7b9951512c95f4111eef319971ab6db' | 'False'        | 11     | '$$IdCI$$' | 'Basic'          | ''                 | ''               | ''               | ''             | ''       | '05.04.2024 09:56:13' | '01.01.0001 00:00:00' | 'False'     |
+		| 'e1cib/data/Catalog.AccessProfiles?ref=b7b9951512c95f4111eef319971ab7db' | 'False'        | 12     | '$$IdCI$$' | 'FullAccess'     | ''                 | ''               | ''               | ''             | ''       | '05.04.2024 09:56:13' | '01.01.0001 00:00:00' | 'False'     |
+		
+	And I refill object tabular section "Roles":
+		| 'Ref'                                                                    | 'Role'                          | 'Configuration' |
+		| 'e1cib/data/Catalog.AccessProfiles?ref=b7b9951512c95f4111eef319971ab6db' | 'BasicRole'                     | 'IRP'           |
+		| 'e1cib/data/Catalog.AccessProfiles?ref=b7b9951512c95f4111eef319971ab6db' | 'RunThinClient'                 | 'IRP'           |
+		| 'e1cib/data/Catalog.AccessProfiles?ref=b7b9951512c95f4111eef319971ab6db' | 'Subsystem_Accounting'          | 'IRP'           |
+		| 'e1cib/data/Catalog.AccessProfiles?ref=b7b9951512c95f4111eef319971ab6db' | 'Subsystem_Inventory'           | 'IRP'           |
+		| 'e1cib/data/Catalog.AccessProfiles?ref=b7b9951512c95f4111eef319971ab6db' | 'Subsystem_Manufacturing'       | 'IRP'           |
+		| 'e1cib/data/Catalog.AccessProfiles?ref=b7b9951512c95f4111eef319971ab6db' | 'Subsystem_MasterData'          | 'IRP'           |
+		| 'e1cib/data/Catalog.AccessProfiles?ref=b7b9951512c95f4111eef319971ab6db' | 'Subsystem_PurchaseAP'          | 'IRP'           |
+		| 'e1cib/data/Catalog.AccessProfiles?ref=b7b9951512c95f4111eef319971ab6db' | 'Subsystem_Reports'             | 'IRP'           |
+		| 'e1cib/data/Catalog.AccessProfiles?ref=b7b9951512c95f4111eef319971ab6db' | 'Subsystem_Retail'              | 'IRP'           |
+		| 'e1cib/data/Catalog.AccessProfiles?ref=b7b9951512c95f4111eef319971ab6db' | 'Subsystem_Salary'              | 'IRP'           |
+		| 'e1cib/data/Catalog.AccessProfiles?ref=b7b9951512c95f4111eef319971ab6db' | 'Subsystem_SalesAR'             | 'IRP'           |
+		| 'e1cib/data/Catalog.AccessProfiles?ref=b7b9951512c95f4111eef319971ab6db' | 'SubsystemTreasury'             | 'IRP'           |
+		| 'e1cib/data/Catalog.AccessProfiles?ref=b7b9951512c95f4111eef319971ab6db' | 'TemplateAccumulationRegisters' | 'IRP'           |
+		| 'e1cib/data/Catalog.AccessProfiles?ref=b7b9951512c95f4111eef319971ab6db' | 'TemplateCatalogs'              | 'IRP'           |
+		| 'e1cib/data/Catalog.AccessProfiles?ref=b7b9951512c95f4111eef319971ab6db' | 'TemplateDocument'              | 'IRP'           |
+		| 'e1cib/data/Catalog.AccessProfiles?ref=b7b9951512c95f4111eef319971ab6db' | 'TemplateInformationRegisters'  | 'IRP'           |
+		| 'e1cib/data/Catalog.AccessProfiles?ref=b7b9951512c95f4111eef319971ab6db' | 'UseAllFunctionsMode'           | 'IRP'           |
+		| 'e1cib/data/Catalog.AccessProfiles?ref=b7b9951512c95f4111eef319971ab7db' | 'FullAccess'                    | 'IRP'           |
+
+	And I check or create catalog "AccessGroups" objects:
+		| 'Ref'                                                                  | 'DeletionMark' | 'Code' | 'OnlyRegisters' | 'Author'   | 'Description_en'     | 'Description_hash' | 'Description_ru' | 'Description_tr' | 'SourceNodeID' | 'Editor' | 'CreateDate'          | 'ModifyDate'          | 'NotActive' |
+		| 'e1cib/data/Catalog.AccessGroups?ref=b7b9951512c95f4111eef319971ab6dc' | 'False'        | 11     | 'False'         | '$$IdCI$$' | 'ManualRegisterEdit' | ''                 | ''               | ''               | ''             | ''       | '05.04.2024 09:56:27' | '01.01.0001 00:00:00' | 'False'     |
+		| 'e1cib/data/Catalog.AccessGroups?ref=b7b9951512c95f4111eef319971ab7dc' | 'False'        | 12     | 'False'         | '$$IdCI$$' | 'FullAccess'         | ''                 | ''               | ''               | ''             | ''       | '05.04.2024 09:56:27' | '01.01.0001 00:00:00' | 'False'     |
+
+	And I refill object tabular section "Profiles":
+		| 'Ref'                                                                  | 'Profile'                                                                |
+		| 'e1cib/data/Catalog.AccessGroups?ref=b7b9951512c95f4111eef319971ab6dc' | 'e1cib/data/Catalog.AccessProfiles?ref=b7b9951512c95f4111eef319971ab6db' |
+		| 'e1cib/data/Catalog.AccessGroups?ref=b7b9951512c95f4111eef319971ab7dc' | 'e1cib/data/Catalog.AccessProfiles?ref=b7b9951512c95f4111eef319971ab7db' |
+
+	And I refill object tabular section "Users":
+		| 'Ref'                                                                  | 'User'                                                          |
+		| 'e1cib/data/Catalog.AccessGroups?ref=b7b9951512c95f4111eef319971ab6dc' | 'e1cib/data/Catalog.Users?ref=aa78120ed92fbced11eaf116b327099a' |
+		| 'e1cib/data/Catalog.AccessGroups?ref=b7b9951512c95f4111eef319971ab7dc' | '$$IdCI$$'                                                      |

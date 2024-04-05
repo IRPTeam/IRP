@@ -604,6 +604,11 @@ Function ItemList()
 		   |	NOT GoodsReceipts.Key IS NULL AS GoodsReceiptExists,
 		   |	PurchaseInvoiceItemList.ItemKey AS ItemKey,
 		   |	PurchaseInvoiceItemList.PurchaseOrder AS PurchaseOrder,
+		   |	CASE
+		   |		WHEN PurchaseInvoiceItemList.Agreement.UseOrdersForSettlements
+		   |			THEN PurchaseInvoiceItemList.PurchaseOrder
+		   |		ELSE UNDEFINED
+		   |	END AS PurchaseOrderSettlements,
 		   |	PurchaseInvoiceItemList.SalesOrder AS SalesOrder,
 		   |	PurchaseInvoiceItemList.InternalSupplyRequest,
 		   |	PurchaseInvoiceItemList.Ref AS Invoice,

@@ -137,6 +137,11 @@ Function SendAdvances()
 		|	Doc.SendProject,
 		|	Doc.SendOrder,
 		|	CASE
+		|		WHEN Doc.SendAgreement.UseOrdersForSettlements
+		|			THEN Doc.SendOrder
+		|		ELSE UNDEFINED
+		|	END AS SendOrderSettlements,
+		|	CASE
 		|		WHEN Doc.SendDebtType = VALUE(Enum.DebtTypes.AdvanceVendor)
 		|			THEN TRUE
 		|		ELSE FALSE
@@ -181,6 +186,11 @@ Function ReceiveAdvances()
 		|	Doc.ReceiveProject,
 		|	Doc.ReceiveOrder,
 		|	CASE
+		|		WHEN Doc.ReceiveAgreement.UseOrdersForSettlements
+		|			THEN Doc.ReceiveOrder
+		|		ELSE UNDEFINED
+		|	END AS ReceiveOrderSettlements,
+		|	CASE
 		|		WHEN Doc.ReceiveDebtType = VALUE(Enum.DebtTypes.AdvanceVendor)
 		|			THEN TRUE
 		|		ELSE FALSE
@@ -224,6 +234,11 @@ Function SendTransactions()
 		|	Doc.SendAgreement,
 		|	Doc.SendProject,
 		|	Doc.SendOrder,
+		|	CASE
+		|		WHEN Doc.SendAgreement.UseOrdersForSettlements
+		|			THEN Doc.SendOrder
+		|		ELSE UNDEFINED
+		|	END AS SendOrderSettlements,
 		|	Doc.SendBasisDocument,
 		|	CASE
 		|		WHEN Doc.SendDebtType = VALUE(Enum.DebtTypes.TransactionVendor)
@@ -269,6 +284,11 @@ Function ReceiveTransactions()
 		|	Doc.ReceiveAgreement,
 		|	Doc.ReceiveProject,
 		|	Doc.ReceiveOrder,
+		|	CASE
+		|		WHEN Doc.ReceiveAgreement.UseOrdersForSettlements
+		|			THEN Doc.ReceiveOrder
+		|		ELSE UNDEFINED
+		|	END AS ReceiveOrderSettlements,
 		|	Doc.ReceiveBasisDocument,
 		|	(Doc.SendDebtType = VALUE(Enum.DebtTypes.AdvanceVendor)
 		|	OR Doc.SendDebtType = VALUE(Enum.DebtTypes.AdvanceCustomer))

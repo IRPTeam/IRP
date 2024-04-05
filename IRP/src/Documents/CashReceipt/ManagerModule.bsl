@@ -204,7 +204,12 @@ Function PaymentList()
 		|	PaymentList.Partner,
 		|	PaymentList.Ref.Branch AS Branch,
 		|	PaymentList.LegalNameContract AS LegalNameContract,
-		|	PaymentList.Order,
+		|	PaymentList.Order AS Order,
+		|	CASE
+		|		WHEN PaymentList.Agreement.UseOrdersForSettlements
+		|			THEN PaymentList.Order
+		|		ELSE UNDEFINED
+		|	END AS OrderSettlements,
 		|	case
 		|		when PaymentList.PlaningTransactionBasis REFS Document.CashTransferOrder
 		|			then PaymentList.PlaningTransactionBasis.Ref

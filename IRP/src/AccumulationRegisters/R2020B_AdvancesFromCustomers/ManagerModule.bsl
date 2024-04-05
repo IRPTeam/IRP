@@ -28,7 +28,7 @@ Function R2020B_AdvancesFromCustomers_BR_CR() Export
 		|	PaymentList.Currency,
 		|	PaymentList.AdvanceAgreement AS Agreement,
 		|	PaymentList.Project,
-		|	PaymentList.Order,
+		|	PaymentList.OrderSettlements AS Order,
 		|	PaymentList.Amount,
 		|	PaymentList.Key,
 		|	UNDEFINED AS CustomersAdvancesClosing
@@ -325,7 +325,7 @@ Function R2020B_AdvancesFromCustomers_Cheque() Export
 		   |	Table.LegalName,
 		   |	Table.Currency,
 		   |	Table.AdvanceAgreement AS Agreement,
-		   |	Table.Order,
+		   |	Table.OrderSettlements AS Order,
 		   |	Table.Amount,
 		   |	UNDEFINED AS CustomersAdvancesClosing
 		   |INTO R2020B_AdvancesFromCustomers
@@ -345,7 +345,7 @@ Function R2020B_AdvancesFromCustomers_Cheque() Export
 		   |	Table.LegalName,
 		   |	Table.Currency,
 		   |	Table.AdvanceAgreement,
-		   |	Table.Order,
+		   |	Table.OrderSettlements,
 		   |	Table.Amount,
 		   |	UNDEFINED
 		   |FROM
@@ -364,7 +364,7 @@ Function R2020B_AdvancesFromCustomers_Cheque() Export
 		   |	Table.LegalName,
 		   |	Table.Currency,
 		   |	Table.AdvanceAgreement,
-		   |	Table.Order,
+		   |	Table.OrderSettlements,
 		   |	Table.Amount,
 		   |	UNDEFINED
 		   |FROM

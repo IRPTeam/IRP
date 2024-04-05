@@ -232,6 +232,11 @@ Function PaymentList()
 		|	PaymentList.Ref.Branch AS Branch,
 		|	PaymentList.LegalNameContract AS LegalNameContract,
 		|	PaymentList.Order AS Order,
+		|	CASE
+		|		WHEN PaymentList.Agreement.UseOrdersForSettlements
+		|			THEN PaymentList.Order
+		|		ELSE UNDEFINED
+		|	END AS OrderSettlements,
 		|	PaymentList.PaymentType AS PaymentType,
 		|	PaymentList.PaymentTerminal AS PaymentTerminal,
 		|	PaymentList.Employee AS Employee,

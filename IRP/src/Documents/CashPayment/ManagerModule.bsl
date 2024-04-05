@@ -714,7 +714,7 @@ Function T1040T_AccountingAmounts()
 		|	PaymentList.Key AS Key,
 		|	PaymentList.Currency,
 		|	PaymentList.Amount,
-		|	VALUE(Catalog.AccountingOperations.CashPayment_DR_R3021B_CashInTransitIncoming_CR_R3010B_CashOnHand) AS Operation,
+		|	VALUE(Catalog.AccountingOperations.CashPayment_DR_R3021B_CashInTransitIncoming_CR_R3010B_CashOnHand_CashTransferOrder) AS Operation,
 		|	UNDEFINED AS AdvancesClosing
 		|FROM
 		|	PaymentList AS PaymentList
@@ -734,7 +734,7 @@ Function GetAccountingAnalytics(Parameters) Export
 		Return GetAnalytics_ReturnToCustomer(Parameters); // Customer transactions - Cash on hand
 	ElsIf Parameters.Operation = AO.CashPayment_DR_R2021B_CustomersTransactions_CR_R2020B_AdvancesFromCustomers Then
 		Return GetAnalytics_ReturnToCustomer_Offset(Parameters); // Customer transactions - Advances from customer
-	ElsIf Parameters.Operation = AO.CashPayment_DR_R3021B_CashInTransitIncoming_CR_R3010B_CashOnHand Then
+	ElsIf Parameters.Operation = AO.CashPayment_DR_R3021B_CashInTransitIncoming_CR_R3010B_CashOnHand_CashTransferOrder Then
 		Return GetAnalytics_CashTransferOrder(Parameters); // Cash in transit - Cash on hand
 	EndIf;
 	Return Undefined;
@@ -876,7 +876,7 @@ EndFunction
 Function GetHintDebitExtDimension(Parameters, ExtDimensionType, Value) Export
 	AO = Catalogs.AccountingOperations;
 	
-	If Parameters.Operation = AO.CashPayment_DR_R3021B_CashInTransitIncoming_CR_R3010B_CashOnHand
+	If Parameters.Operation = AO.CashPayment_DR_R3021B_CashInTransitIncoming_CR_R3010B_CashOnHand_CashTransferOrder
 		
 		And ExtDimensionType.ValueType.Types().Find(Type("CatalogRef.ExpenseAndRevenueTypes")) <> Undefined Then
 		Return Parameters.RowData.FinancialMovementType;
@@ -890,7 +890,7 @@ Function GetHintCreditExtDimension(Parameters, ExtDimensionType, Value) Export
 	
 	If (Parameters.Operation = AO.CashPayment_DR_R1020B_AdvancesToVendors_R1021B_VendorsTransactions_CR_R3010B_CashOnHand
 		Or Parameters.Operation = AO.CashPayment_DR_R2020B_AdvancesFromCustomers_R2021B_CustomersTransactions_CR_R3010B_CashOnHand
-		Or Parameters.Operation = AO.CashPayment_DR_R3021B_CashInTransitIncoming_CR_R3010B_CashOnHand)
+		Or Parameters.Operation = AO.CashPayment_DR_R3021B_CashInTransitIncoming_CR_R3010B_CashOnHand_CashTransferOrder)
 		
 		And ExtDimensionType.ValueType.Types().Find(Type("CatalogRef.ExpenseAndRevenueTypes")) <> Undefined Then
 		Return Parameters.RowData.FinancialMovementType;

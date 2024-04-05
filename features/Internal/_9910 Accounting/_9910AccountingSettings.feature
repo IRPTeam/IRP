@@ -202,10 +202,26 @@ Scenario: _0991002 filling accounting operation
 		| 'Document_CashRevenue'                                                                                       | 'Cash revenue'                                                                                                   |
 		| 'Document_DebitNote'                                                                                         | 'Debit note'                                                                                                     |
 		| 'Document_CreditNote'                                                                                        | 'Credit note'                                                                                                    |
+		| 'Document_MoneyTransfer'                                                                                     | 'Money transfer'                                                                                                 |
+		| 'Document_CommissioningOfFixedAsset'                                                                         | 'Commissioning of fixed asset'                                                                                   |
+		| 'Document_ModernizationOfFixedAsset'                                                                         | 'Modernization of fixed asset'                                                                                   |
+		| 'Document_DecommissioningOfFixedAsset'                                                                       | 'Decommissioning of fixed asset'                                                                                 |
+		| 'Document_FixedAssetTransfer'                                                                                | 'Fixed asset transfer'                                                                                           |
+		| 'Document_DepreciationCalculation'                                                                           | 'Depreciation calculation'                                                                                       |
 		| 'BankPayment_DR_R1020B_AdvancesToVendors_R1021B_VendorsTransactions_CR_R3010B_CashOnHand'                    | 'BankPayment DR (R1020B_AdvancesToVendors R1021B_VendorsTransactions) CR (R3010B_CashOnHand)'                    |
 		| 'BankPayment_DR_R1021B_VendorsTransactions_CR_R1020B_AdvancesToVendors'                                      | 'BankPayment DR (R1021B_VendorsTransactions) CR (R1020B_AdvancesToVendors)'                                      |
+		| 'BankPayment_DR_R2020B_AdvancesFromCustomers_R2021B_CustomersTransactions_CR_R3010B_CashOnHand'              | 'BankPayment DR (R2020B_AdvancesFromCustomers_R2021B_CustomersTransactions) CR (R3010B_CashOnHand)'              |
+		| 'BankPayment_DR_R2021B_CustomersTransactions_CR_R2020B_AdvancesFromCustomers'                                | 'BankPayment DR (R2021B_CustomersTransactions) CR (R2020B_AdvancesFromCustomers)'                                |
+		| 'BankPayment_DR_R3021B_CashInTransitIncoming_CR_R3010B_CashOnHand_CashTransferOrder'                         | 'BankPayment DR (R3021B_CashInTransitIncoming) CR (R3010B_CashOnHand) (Cash transfer)'                           |
+		| 'BankPayment_DR_R3021B_CashInTransitIncoming_CR_R3010B_CashOnHand_CurrencyExchange'                          | 'BankPayment DR (R3021B_CashInTransitIncoming) CR (R3010B_CashOnHand) (Currency exchange)'                       |
 		| 'BankReceipt_DR_R3010B_CashOnHand_CR_R2020B_AdvancesFromCustomers_R2021B_CustomersTransactions'              | 'BankReceipt DR (R3010B_CashOnHand) CR (R2020B_AdvancesFromCustomers_R2021B_CustomersTransactions)'              |
-		| 'BankReceipt_DR_R2021B_CustomersTransactions_CR_R2020B_AdvancesFromCustomers'                                | 'BankReceipt DR (R2021B_CustomersTransactions) CR (R2020B_AdvancesFromCustomers)'                                |
+		| 'BankReceipt_DR_R2020B_AdvancesFromCustomers_CR_R2021B_CustomersTransactions'                                | 'BankReceipt DR (R2020B_AdvancesFromCustomers) CR (R2021B_CustomersTransactions)'                                |
+		| 'BankReceipt_DR_R3010B_CashOnHand_CR_R1020B_AdvancesToVendors_R1021B_VendorsTransactions'                    | 'BankReceipt DR (R3010B_CashOnHand) CR (R1020B_AdvancesToVendors_R1021B_VendorsTransactions)'                    |
+		| 'BankReceipt_DR_R1020B_AdvancesToVendors_CR_R1021B_VendorsTransactions'                                      | 'BankReceipt DR (R1020B_AdvancesToVendors) CR (R1021B_VendorsTransactions)'                                      |
+		| 'BankReceipt_DR_R3010B_CashOnHand_CR_R3021B_CashInTransitIncoming_CashTransferOrder'                         | 'BankReceipt DR (R3010B_CashOnHand) CR (R3021B_CashInTransitIncoming) (Cash transfer)'                           |
+		| 'BankReceipt_DR_R3010B_CashOnHand_CR_R3021B_CashInTransitIncoming_CurrencyExchange'                          | 'BankReceipt DR (R3010B_CashOnHand) CR (R3021B_CashInTransitIncoming) (Currency exchange)'                       |
+		| 'BankReceipt_DR_R3021B_CashInTransit_CR_R5021T_Revenues'                                                     | 'BankReceipt DR (R3021B_CashInTransit) CR (R5021T_Revenues)'                                                     |
+		| 'BankReceipt_DR_R5022T_Expenses_CR_R3021B_CashInTransit'                                                     | 'BankReceipt DR (R5022T_Expenses) CR (R3021B_CashInTransit)'                                                     |
 		| 'PurchaseInvoice_DR_R4050B_StockInventory_R5022T_Expenses_CR_R1021B_VendorsTransactions'                     | 'PurchaseInvoice DR (R4050B_StockInventory_R5022T_Expenses) CR (R1021B_VendorsTransactions)'                     |
 		| 'PurchaseInvoice_DR_R1021B_VendorsTransactions_CR_R1020B_AdvancesToVendors'                                  | 'PurchaseInvoice DR (R1021B_VendorsTransactions) CR (R1020B_AdvancesToVendors)'                                  |
 		| 'PurchaseInvoice_DR_R1040B_TaxesOutgoing_CR_R1021B_VendorsTransactions'                                      | 'PurchaseInvoice DR (R1040B_TaxesOutgoing) CR (R1021B_VendorsTransactions)'                                      |
@@ -222,8 +238,14 @@ Scenario: _0991002 filling accounting operation
 		| 'ForeignCurrencyRevaluation_DR_R5022T_Expenses_CR_R2020B_AdvancesFromCustomers'                              | 'ForeignCurrencyRevaluation DR (R5022T_Expenses) CR (R2020B_AdvancesFromCustomers)'                              |
 		| 'CashPayment_DR_R1020B_AdvancesToVendors_R1021B_VendorsTransactions_CR_R3010B_CashOnHand'                    | 'CashPayment DR (R1020B_AdvancesToVendors_R1021B_VendorsTransactions) CR (R3010B_CashOnHand)'                    |
 		| 'CashPayment_DR_R1021B_VendorsTransactions_CR_R1020B_AdvancesToVendors'                                      | 'CashPayment DR (R1021B_VendorsTransactions) CR (R1020B_AdvancesToVendors)'                                      |
+		| 'CashPayment_DR_R2020B_AdvancesFromCustomers_R2021B_CustomersTransactions_CR_R3010B_CashOnHand'              | 'CashPayment DR (R2020B_AdvancesFromCustomers_R2021B_CustomersTransactions) CR (R3010B_CashOnHand)'              |
+		| 'CashPayment_DR_R2021B_CustomersTransactions_CR_R2020B_AdvancesFromCustomers'                                | 'CashPayment DR (R2021B_CustomersTransactions) CR (R2020B_AdvancesFromCustomers)'                                |
+		| 'CashPayment_DR_R3021B_CashInTransitIncoming_CR_R3010B_CashOnHand_CashTransferOrder'                         | 'CashPayment DR (R3021B_CashInTransitIncoming) CR (R3010B_CashOnHand) (Cash transfer)'                           |
 		| 'CashReceipt_DR_R3010B_CashOnHand_CR_R2020B_AdvancesFromCustomers_R2021B_CustomersTransactions'              | 'CashReceipt DR (R3010B_CashOnHand) CR (R2020B_AdvancesFromCustomers_R2021B_CustomersTransactions)'              |
-		| 'CashReceipt_DR_R2021B_CustomersTransactions_CR_R2020B_AdvancesFromCustomers'                                | 'CashReceipt DR (R2021B_CustomersTransactions) CR (R2020B_AdvancesFromCustomers)'                                |
+		| 'CashReceipt_DR_R2020B_AdvancesFromCustomers_CR_R2021B_CustomersTransactions'                                | 'CashReceipt DR (R2020B_AdvancesFromCustomers) CR (R2021B_CustomersTransactions)'                                |
+		| 'CashReceipt_DR_R3010B_CashOnHand_CR_R1020B_AdvancesToVendors_R1021B_VendorsTransactions'                    | 'CashReceipt DR (R3010B_CashOnHand) CR (R1020B_AdvancesToVendors_R1021B_VendorsTransactions)'                    |
+		| 'CashReceipt_DR_R1020B_AdvancesToVendors_CR_R1021B_VendorsTransactions'                                      | 'CashReceipt DR (R1020B_AdvancesToVendors) CR (R1021B_VendorsTransactions)'                                      |
+		| 'CashReceipt_DR_R3010B_CashOnHand_CR_R3021B_CashInTransitIncoming_CashTransferOrder'                         | 'CashReceipt DR (R3010B_CashOnHand) CR (R3021B_CashInTransitIncoming) (Cash transfer)'                           |
 		| 'CashExpense_DR_R5022T_Expenses_CR_R3010B_CashOnHand'                                                        | 'CashExpense DR (R5022T_Expenses) CR (R3010B_CashOnHand)'                                                        |
 		| 'CashRevenue_DR_R3010B_CashOnHand_CR_R5021_Revenues'                                                         | 'CashRevenue DR (R3010B_CashOnHand) CR (R5021_Revenues)'                                                         |
 		| 'DebitNote_DR_R1020B_AdvancesToVendors_CR_R5021_Revenues'                                                    | 'DebitNote DR (R1020B_AdvancesToVendors) CR (R5021_Revenues)'                                                    |
@@ -231,7 +253,19 @@ Scenario: _0991002 filling accounting operation
 		| 'DebitNote_DR_R2021B_CustomersTransactions_CR_R5021_Revenues'                                                | 'DebitNote DR (R2021B_CustomersTransactions) CR (R5021_Revenues)'                                                |
 		| 'CreditNote_DR_R2020B_AdvancesFromCustomers_CR_R5022T_Expenses'                                              | 'CreditNote DR (R2020B_AdvancesFromCustomers) CR (R5022T_Expenses)'                                              |
 		| 'CreditNote_DR_R2021B_CustomersTransactions_CR_R2020B_AdvancesFromCustomers'                                 | 'CreditNote DR (R2021B_CustomersTransactions) CR (R2020B_AdvancesFromCustomers)'                                 |
-		| 'CreditNote_DR_R1021B_VendorsTransactions_CR_R5022T_Expenses'                                                | 'CreditNote DR (R1021B_VendorsTransactions CR (R5022T_Expenses)'                                                 |	
+		| 'CreditNote_DR_R1021B_VendorsTransactions_CR_R5022T_Expenses'                                                | 'CreditNote DR (R1021B_VendorsTransactions CR (R5022T_Expenses)'                                                 |
+		| 'MoneyTransfer_DR_R3010B_CashOnHand_CR_R3010B_CashOnHand'                                                    | 'MoneyTransfer DR (R3010B_CashOnHand) CR (R3010B_CashOnHand)'                                                    |
+		| 'MoneyTransfer_DR_R3021B_CashInTransit_CR_R3010B_CashOnHand'                                                 | 'MoneyTransfer DR (R3021B_CashInTransit) CR (R3010B_CashOnHand)'                                                 |
+		| 'MoneyTransfer_DR_R3010B_CashOnHand_CR_R3021B_CashInTransit'                                                 | 'MoneyTransfer DR (R3010B_CashOnHand) CR (R3021B_CashInTransit)'                                                 |
+		| 'MoneyTransfer_DR_R3021B_CashInTransit_CR_R5021T_Revenues'                                                   | 'MoneyTransfer DR (R3021B_CashInTransit) CR (R5021T_Revenues)'                                                   |
+		| 'MoneyTransfer_DR_R5022T_Expenses_CR_R3021B_CashInTransit'                                                   | 'MoneyTransfer DR (R5022T_Expenses) CR (R3021B_CashInTransit)'                                                   |
+		| 'CommissioningOfFixedAsset_DR_R8510B_BookValueOfFixedAsset_CR_R4050B_StockInventory'                         | 'CommissioningOfFixedAsset DR (R8510B_BookValueOfFixedAsset) CR (R4050B_StockInventory)'                         |
+		| 'ModernizationOfFixedAsset_DR_R8510B_BookValueOfFixedAsset_CR_R4050B_StockInventory'                         | 'ModernizationOfFixedAsset DR (R8510B_BookValueOfFixedAsset) CR (R4050B_StockInventory)'                         |
+		| 'ModernizationOfFixedAsset_DR_R4050B_StockInventory_CR_R8510B_BookValueOfFixedAsset'                         | 'ModernizationOfFixedAsset DR (R4050B_StockInventory) CR (R8510B_BookValueOfFixedAsset)'                         |
+		| 'DecommissioningOfFixedAsset_DR_R4050B_StockInventory_CR_R8510B_BookValueOfFixedAsset'                       | 'DecommissioningOfFixedAsset DR (R4050B_StockInventory) CR (R8510B_BookValueOfFixedAsset)'                       |
+		| 'FixedAssetTransfer_DR_R8510B_BookValueOfFixedAsset_CR_R8510B_BookValueOfFixedAsset'                         | 'FixedAssetTransfer DR (R8510B_BookValueOfFixedAsset) CR (R8510B_BookValueOfFixedAsset)'                         |
+		| 'DepreciationCalculation_DR_DepreciationFixedAsset_CR_R8510B_BookValueOfFixedAsset'                          | 'DepreciationCalculation DR (DepreciationFixedAsset) CR (R8510B_BookValueOfFixedAsset)'                          |
+		| 'DepreciationCalculation_DR_R5022T_Expenses_CR_DepreciationFixedAsset'                                       | 'DepreciationCalculation DR (R5022T_Expenses) CR (DepreciationFixedAsset)'                                       |	
 	And I close all client application windows
 		
 		
@@ -279,7 +313,7 @@ Scenario: _0991003 create ledger type
 			And I input "01.01.2021" text in "Period" field of "OperationsTree" table
 			And I go to line in "OperationsTree" table
 				| 'Presentation'                                                                    | 'Use' |
-				| 'BankReceipt DR (R2021B_CustomersTransactions) CR (R2020B_AdvancesFromCustomers)' | 'No'  |
+				| 'BankReceipt DR (R2020B_AdvancesFromCustomers) CR (R2021B_CustomersTransactions)' | 'No'  |
 			And I activate "Period" field in "OperationsTree" table
 			And I select current line in "OperationsTree" table
 			And I input "01.01.2021" text in "Period" field of "OperationsTree" table
@@ -377,7 +411,7 @@ Scenario: _0991003 create ledger type
 				| 'BankPayment DR (R1021B_VendorsTransactions) CR (R1020B_AdvancesToVendors)'                                      | 'Yes' | '01.01.2021' |
 				| 'Bank receipt'                                                                                                   | 'No'  | ''           |
 				| 'BankReceipt DR (R3010B_CashOnHand) CR (R2020B_AdvancesFromCustomers_R2021B_CustomersTransactions)'              | 'Yes' | '01.01.2021' |
-				| 'BankReceipt DR (R2021B_CustomersTransactions) CR (R2020B_AdvancesFromCustomers)'                                | 'Yes' | '01.01.2021' |
+				| 'BankReceipt DR (R2020B_AdvancesFromCustomers) CR (R2021B_CustomersTransactions)'                                | 'Yes' | '01.01.2021' |
 				| 'Purchase invoice'                                                                                               | 'No'  | ''           |
 				| 'PurchaseInvoice DR (R4050B_StockInventory_R5022T_Expenses) CR (R1021B_VendorsTransactions)'                     | 'Yes' | '01.01.2021' |
 				| 'PurchaseInvoice DR (R1021B_VendorsTransactions) CR (R1020B_AdvancesToVendors)'                                  | 'Yes' | '01.01.2021' |
@@ -774,17 +808,17 @@ Scenario: _0991015 check load charts of accounts (correct data)
 			And I click "Refresh" button
 	* Check
 		And "List" table contains lines
-			| 'Code'                   | 'Order'    | 'Description'         | 'Type' | 'Ext. Dim 2'       | 'Q.'  | 'Ext. Dim 3'       | 'C.'  | 'Ledger type variant'               | 'Ext. Dim 1' | 'Off-balance' |
-			| 'Account charts (Basic)' | ''         | ''                    | ''     | ''                 | ''    | ''                 | ''    | ''                                  | ''           | ''            |
-			| '90878699'               | '90878699' | 'Test assets account' | 'A'    | 'Item key (turn.)' | 'Yes' | 'Tax type (turn.)' | 'No'  | 'LTV with account charts code mask' | 'Item'       | 'No'          |
-			| '908990'                 | '908990'   | 'Test group'          | 'P'    | ''                 | 'No'  | ''                 | 'Yes' | 'LTV with account charts code mask' | 'Partner'    | 'No'          |
+			| 'Code'                   | 'Order'    | 'Description'         | 'Type' | 'Ext. Dim 2'       | 'Q.'  | 'Ext. Dim 3'          | 'C.'  | 'Ledger type variant'               | 'Ext. Dim 1' | 'Off-balance' |
+			| 'Account charts (Basic)' | ''         | ''                    | ''     | ''                 | ''    | ''                    | ''    | ''                                  | ''           | ''            |
+			| '90878699'               | '90878699' | 'Test assets account' | 'A'    | 'Item key (turn.)' | 'Yes' | 'Fixed asset (turn.)' | 'No'  | 'LTV with account charts code mask' | 'Item'       | 'No'          |
+			| '908990'                 | '908990'   | 'Test group'          | 'P'    | ''                 | 'No'  | ''                    | 'Yes' | 'LTV with account charts code mask' | 'Partner'    | 'No'          |
 		And I expand a line in "List" table
 			| 'C.'  | 'Code'   | 'Description' | 'Ext. Dim 1' | 'Ledger type variant'               | 'Off-balance' | 'Order'  | 'Q.' | 'Type' |
 			| 'Yes' | '908990' | 'Test group'  | 'Partner'    | 'LTV with account charts code mask' | 'No'          | '908990' | 'No' | 'P'    |
 		* Liabilities account
 			And I go to line in "List" table
-				| 'C.' | 'Code'      | 'Description'              | 'Ext. Dim 1' | 'Ext. Dim 2'       | 'Ext. Dim 3'       | 'Ledger type variant'               | 'Off-balance' | 'Order'     | 'Q.'  | 'Type' |
-				| 'No' | '10878699'  | 'Test liabilities account' | 'Item'       | 'Item key (turn.)' | 'Tax type (turn.)' | 'LTV with account charts code mask' | 'No'          | '10878699'  | 'Yes' | 'P'    |
+				| 'C.' | 'Code'      | 'Description'              | 'Ext. Dim 1' | 'Ext. Dim 2'       | 'Ext. Dim 3'          | 'Ledger type variant'               | 'Off-balance' | 'Order'     | 'Q.'  | 'Type' |
+				| 'No' | '10878699'  | 'Test liabilities account' | 'Item'       | 'Item key (turn.)' | 'Fixed asset (turn.)' | 'LTV with account charts code mask' | 'No'          | '10878699'  | 'Yes' | 'P'    |
 			And I select current line in "List" table
 			And the editing text of form attribute named "Code" became equal to "108.78.699"
 			Then the form attribute named "Currency" became equal to "No"
@@ -793,7 +827,7 @@ Scenario: _0991015 check load charts of accounts (correct data)
 				| 'Extra dimension type' | 'Currency' | 'Turnovers only' | 'Quantity' | 'Amount' |
 				| 'Item'                 | 'Yes'      | 'No'             | 'No'       | 'Yes'    |
 				| 'Item key'             | 'No'       | 'Yes'            | 'Yes'      | 'No'     |
-				| 'Tax type'             | 'No'       | 'Yes'            | 'No'       | 'No'     |
+				| 'Fixed asset'          | 'No'       | 'Yes'            | 'No'       | 'No'     |
 			
 			Then the form attribute named "LedgerTypeVariant" became equal to "LTV with account charts code mask"
 			Then the form attribute named "NotUsedForRecords" became equal to "No"
@@ -806,8 +840,8 @@ Scenario: _0991015 check load charts of accounts (correct data)
 			And I close current window
 		* Assets account
 			And I go to line in "List" table
-				| 'C.' | 'Code'      | 'Description'         | 'Ext. Dim 1' | 'Ext. Dim 2'       | 'Ext. Dim 3'       | 'Ledger type variant'               | 'Off-balance' | 'Order'     | 'Q.'  | 'Type' |
-				| 'No' | '90878699'  | 'Test assets account' | 'Item'       | 'Item key (turn.)' | 'Tax type (turn.)' | 'LTV with account charts code mask' | 'No'          | '90878699'  | 'Yes' | 'A'    |
+				| 'C.' | 'Code'     | 'Description'         | 'Ext. Dim 1' | 'Ext. Dim 2'       | 'Ext. Dim 3'          | 'Ledger type variant'               | 'Off-balance' | 'Order'    | 'Q.'  | 'Type' |
+				| 'No' | '90878699' | 'Test assets account' | 'Item'       | 'Item key (turn.)' | 'Fixed asset (turn.)' | 'LTV with account charts code mask' | 'No'          | '90878699' | 'Yes' | 'A'    |
 			And I select current line in "List" table
 			And the editing text of form attribute named "Code" became equal to "908.78.699"
 			Then the form attribute named "Currency" became equal to "No"
@@ -816,7 +850,7 @@ Scenario: _0991015 check load charts of accounts (correct data)
 				| 'Extra dimension type' | 'Currency' | 'Turnovers only' | 'Quantity' | 'Amount' |
 				| 'Item'                 | 'Yes'      | 'No'             | 'No'       | 'Yes'    |
 				| 'Item key'             | 'No'       | 'Yes'            | 'Yes'      | 'No'     |
-				| 'Tax type'             | 'No'       | 'Yes'            | 'No'       | 'No'     |
+				| 'Fixed asset'          | 'No'       | 'Yes'            | 'No'       | 'No'     |
 			
 			Then the form attribute named "LedgerTypeVariant" became equal to "LTV with account charts code mask"
 			Then the form attribute named "NotUsedForRecords" became equal to "No"
@@ -1072,11 +1106,16 @@ Scenario: _0991021 accounts settings for Cash account (general for company)
 		Then the form attribute named "LedgerTypeVariant" became equal to "LTV with account charts code mask"
 		And the editing text of form attribute named "Period" became equal to "01.01.2022"
 		Then the form attribute named "RecordType" became equal to "All"
+		And I click Select button of "Account transit" field
+		And I go to line in "List" table
+			| 'Description'     |
+			| 'Assets acccount' |
+		And I select current line in "List" table
 		And I click "Save and close" button
 	* Check
 		And "List" table contains lines
-			| 'Period'     | 'Company'       | 'Ledger type variant'               | 'Cash account' | 'Account' |
-			| '01.01.2022' | 'Own company 1' | 'LTV with account charts code mask' | ''             | '405.01'  |
+			| 'Period'     | 'Company'       | 'Ledger type variant'               | 'Account' |
+			| '01.01.2022' | 'Own company 1' | 'LTV with account charts code mask' | '405.01'  |
 	And I close all client application windows
 	
 		
@@ -1087,25 +1126,30 @@ Scenario: _0991022 accounts settings for Cash account (for Cash account)
 	* Create new element for product			 
 		And I click the button named "FormCreate"
 		And I change the radio button named "RecordType" value to "Cash/Bank account"
-		And I click Select button of "Cash account" field
+		And I select from the drop-down list named "Company" by "Own company 2" string
+		And I click Select button of "Cash/Bank account" field
 		And I go to line in "List" table
 			| 'Description'  |
 			| 'Cash, TRY' |
 		And I select current line in "List" table		
 		And I input "01.02.2022" text in the field named "Period"
-		And I select from the drop-down list named "Company" by "Own company 1" string
 		And I select from "Ledger type variant" drop-down list by "ltv" string
 		And I select from the drop-down list named "Account" by "40501" string
 		Then the form attribute named "Account" became equal to "405.01"
-		Then the form attribute named "Company" became equal to "Own company 1"
+		Then the form attribute named "Company" became equal to "Own company 2"
 		Then the form attribute named "LedgerTypeVariant" became equal to "LTV with account charts code mask"
 		And the editing text of form attribute named "Period" became equal to "01.02.2022"
-		Then the form attribute named "CashAccount" became equal to "Cash, TRY"		
+		Then the form attribute named "CashAccount" became equal to "Cash, TRY"	
+		And I click Select button of "Account transit" field
+		And I go to line in "List" table
+			| 'Description'     |
+			| 'Assets acccount' |
+		And I select current line in "List" table	
 		And I click "Save and close" button
 	* Check
 		And "List" table contains lines
-			| 'Period'     | 'Company'       | 'Ledger type variant'               | 'Cash account' | 'Account' |
-			| '01.02.2022' | 'Own company 1' | 'LTV with account charts code mask' | 'Cash, TRY'    | '405.01'  |
+			| 'Period'     | 'Company'       | 'Ledger type variant'               | 'Cash/Bank account' | 'Account' |
+			| '01.02.2022' | 'Own company 2' | 'LTV with account charts code mask' | 'Cash, TRY'         | '405.01'  |
 	And I close all client application windows			
 
 Scenario: _0991026 accounts settings for Bank account (for Bank account)
@@ -1114,26 +1158,31 @@ Scenario: _0991026 accounts settings for Bank account (for Bank account)
 		Given I open hyperlink "e1cib/list/InformationRegister.T9011S_AccountsCashAccount"	
 	* Create new element for product			 
 		And I click the button named "FormCreate"
+		And I select from the drop-down list named "Company" by "Own company 2" string
 		And I change the radio button named "RecordType" value to "Cash/Bank account"
-		And I click Select button of "Cash account" field
+		And I click Select button of "Cash/Bank account" field
 		And I go to line in "List" table
 			| 'Description'       |
 			| 'Bank account, EUR' |
 		And I select current line in "List" table		
 		And I input "01.02.2022" text in the field named "Period"
-		And I select from the drop-down list named "Company" by "Own company 1" string
 		And I select from "Ledger type variant" drop-down list by "ltv" string
 		And I select from the drop-down list named "Account" by "40501" string
 		Then the form attribute named "Account" became equal to "405.01"
-		Then the form attribute named "Company" became equal to "Own company 1"
+		Then the form attribute named "Company" became equal to "Own company 2"
 		Then the form attribute named "LedgerTypeVariant" became equal to "LTV with account charts code mask"
 		And the editing text of form attribute named "Period" became equal to "01.02.2022"
-		Then the form attribute named "CashAccount" became equal to "Bank account, EUR"		
-		And I click "Save and close" button
+		Then the form attribute named "CashAccount" became equal to "Bank account, EUR"	
+		And I click Select button of "Account transit" field
+		And I go to line in "List" table
+			| 'Description'     |
+			| 'Assets acccount' |
+		And I select current line in "List" table	
+		And I click "Save and close" button	
 	* Check
 		And "List" table contains lines
-			| 'Period'     | 'Company'      | 'Ledger type variant'               | 'Cash account'      | 'Account' |
-			| '01.02.2022' | 'Own company 1' | 'LTV with account charts code mask' | 'Bank account, EUR' | '405.01'  |
+			| 'Period'     | 'Company'       | 'Ledger type variant'               | 'Cash/Bank account' | 'Account' |
+			| '01.02.2022' | 'Own company 2' | 'LTV with account charts code mask' | 'Bank account, EUR' | '405.01'  |
 	And I close all client application windows
 
 Scenario: _0991027 accounts settings for Expense/Revenue (general for company)
@@ -1693,7 +1742,7 @@ Scenario: _0991070 check Bank receipt accounting movements (Payment from custome
 		And "AccountingAnalytics" table became equal
 			| 'Debit' | 'Cash/Bank account'           | 'Company'                                     | 'Business unit'   | 'Partner'                     | 'Credit' | 'Partner term'                                | 'Operation'                                                                                         |
 			| '3250'  | 'Bank account, TRY'           | 'Client 2'                                    | 'Business unit 1' | 'Customer 2 (2 partner term)' | '4010'   | 'Individual partner term 1 (by partner term)' | 'BankReceipt DR (R3010B_CashOnHand) CR (R2020B_AdvancesFromCustomers_R2021B_CustomersTransactions)' |
-			| '4010'  | 'Customer 2 (2 partner term)' | 'Individual partner term 1 (by partner term)' | 'Business unit 1' | 'Customer 2 (2 partner term)' | '4020'   | 'Individual partner term 1 (by partner term)' | 'BankReceipt DR (R2021B_CustomersTransactions) CR (R2020B_AdvancesFromCustomers)'                   |
+			| '4010'  | 'Customer 2 (2 partner term)' | 'Individual partner term 1 (by partner term)' | 'Business unit 1' | 'Customer 2 (2 partner term)' | '4020'   | 'Individual partner term 1 (by partner term)' | 'BankReceipt DR (R2020B_AdvancesFromCustomers) CR (R2021B_CustomersTransactions)'                   |
 	And I close all client application windows
 
 Scenario: _0991071 check Bank payment accounting movements (Payment to the vendor)

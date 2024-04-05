@@ -3,36 +3,74 @@ Function GetOperationsDefinition()
 	Map = New Map();
 	AO = Catalogs.AccountingOperations;
 	// Bank payment
-	Map.Insert(AO.BankPayment_DR_R1020B_AdvancesToVendors_R1021B_VendorsTransactions_CR_R3010B_CashOnHand , New Structure("ByRow", True));
-	Map.Insert(AO.BankPayment_DR_R1021B_VendorsTransactions_CR_R1020B_AdvancesToVendors , New Structure("ByRow", True));
-	Map.Insert(AO.BankPayment_DR_R2020B_AdvancesFromCustomers_R2021B_CustomersTransactions_CR_R3010B_CashOnHand , New Structure("ByRow", True));
-	Map.Insert(AO.BankPayment_DR_R2021B_CustomersTransactions_CR_R2020B_AdvancesFromCustomers , New Structure("ByRow", True));
-	Map.Insert(AO.BankPayment_DR_R3021B_CashInTransitIncoming_CR_R3010B_CashOnHand_CashTransferOrder , New Structure("ByRow", True));
-	Map.Insert(AO.BankPayment_DR_R3021B_CashInTransitIncoming_CR_R3010B_CashOnHand_CurrencyExchange , New Structure("ByRow", True));
+	// Transaction type - Payment to vendor
+	Map.Insert(AO.BankPayment_DR_R1020B_AdvancesToVendors_R1021B_VendorsTransactions_CR_R3010B_CashOnHand, 
+		New Structure("ByRow, TransactionType", True, Enums.OutgoingPaymentTransactionTypes.PaymentToVendor));
+	Map.Insert(AO.BankPayment_DR_R1021B_VendorsTransactions_CR_R1020B_AdvancesToVendors,
+		New Structure("ByRow, TransactionType", True, Enums.OutgoingPaymentTransactionTypes.PaymentToVendor));
+	// Transaction type - Return to customer
+	Map.Insert(AO.BankPayment_DR_R2020B_AdvancesFromCustomers_R2021B_CustomersTransactions_CR_R3010B_CashOnHand,
+		New Structure("ByRow, TransactionType", True, Enums.OutgoingPaymentTransactionTypes.ReturnToCustomer));
+	Map.Insert(AO.BankPayment_DR_R2021B_CustomersTransactions_CR_R2020B_AdvancesFromCustomers,
+		New Structure("ByRow, TransactionType", True, Enums.OutgoingPaymentTransactionTypes.ReturnToCustomer));
+	// Transaction type - Cash transfer order
+	Map.Insert(AO.BankPayment_DR_R3021B_CashInTransitIncoming_CR_R3010B_CashOnHand_CashTransferOrder, 
+		New Structure("ByRow, TransactionType", True, Enums.OutgoingPaymentTransactionTypes.CashTransferOrder));
+	// Transaction type - Currency exchange
+	Map.Insert(AO.BankPayment_DR_R3021B_CashInTransitIncoming_CR_R3010B_CashOnHand_CurrencyExchange,
+		New Structure("ByRow, TransactionType", True, Enums.OutgoingPaymentTransactionTypes.CurrencyExchange));
 	
 	// Bank receipt
-	Map.Insert(AO.BankReceipt_DR_R3010B_CashOnHand_CR_R2020B_AdvancesFromCustomers_R2021B_CustomersTransactions , New Structure("ByRow", True));
-	Map.Insert(AO.BankReceipt_DR_R2020B_AdvancesFromCustomers_CR_R2021B_CustomersTransactions , New Structure("ByRow", True));
-	Map.Insert(AO.BankReceipt_DR_R3010B_CashOnHand_CR_R1020B_AdvancesToVendors_R1021B_VendorsTransactions , New Structure("ByRow", True));
-	Map.Insert(AO.BankReceipt_DR_R1020B_AdvancesToVendors_CR_R1021B_VendorsTransactions , New Structure("ByRow", True));
-	Map.Insert(AO.BankReceipt_DR_R3010B_CashOnHand_CR_R3021B_CashInTransitIncoming_CashTransferOrder , New Structure("ByRow", True));
-	Map.Insert(AO.BankReceipt_DR_R3010B_CashOnHand_CR_R3021B_CashInTransitIncoming_CurrencyExchange , New Structure("ByRow", True));
-	Map.Insert(AO.BankReceipt_DR_R3021B_CashInTransit_CR_R5021T_Revenues, New Structure("ByRow", False));
-	Map.Insert(AO.BankReceipt_DR_R5022T_Expenses_CR_R3021B_CashInTransit, New Structure("ByRow", False));
+	// Transaction type - Payment from customer
+	Map.Insert(AO.BankReceipt_DR_R3010B_CashOnHand_CR_R2020B_AdvancesFromCustomers_R2021B_CustomersTransactions,
+		New Structure("ByRow, TransactionType", True, Enums.IncomingPaymentTransactionType.PaymentFromCustomer));
+	Map.Insert(AO.BankReceipt_DR_R2020B_AdvancesFromCustomers_CR_R2021B_CustomersTransactions,
+		New Structure("ByRow, TransactionType", True, Enums.IncomingPaymentTransactionType.PaymentFromCustomer));
+	// Transaction type - Return from vendor
+	Map.Insert(AO.BankReceipt_DR_R3010B_CashOnHand_CR_R1020B_AdvancesToVendors_R1021B_VendorsTransactions,
+		New Structure("ByRow, TransactionType", True, Enums.IncomingPaymentTransactionType.ReturnFromVendor));
+	Map.Insert(AO.BankReceipt_DR_R1020B_AdvancesToVendors_CR_R1021B_VendorsTransactions,
+		New Structure("ByRow, TransactionType", True, Enums.IncomingPaymentTransactionType.ReturnFromVendor));
+	// Transaction type - Cash transfer order
+	Map.Insert(AO.BankReceipt_DR_R3010B_CashOnHand_CR_R3021B_CashInTransitIncoming_CashTransferOrder,
+		New Structure("ByRow, TransactionType", True, Enums.IncomingPaymentTransactionType.CashTransferOrder));
+	//  Transaction type - Currency exchange
+	Map.Insert(AO.BankReceipt_DR_R3010B_CashOnHand_CR_R3021B_CashInTransitIncoming_CurrencyExchange,
+		New Structure("ByRow, TransactionType", True, Enums.IncomingPaymentTransactionType.CurrencyExchange));
+	Map.Insert(AO.BankReceipt_DR_R3021B_CashInTransit_CR_R5021T_Revenues,
+		New Structure("ByRow, TransactionType", False, Enums.IncomingPaymentTransactionType.CurrencyExchange));
+	Map.Insert(AO.BankReceipt_DR_R5022T_Expenses_CR_R3021B_CashInTransit,
+		New Structure("ByRow, TransactionType", False, Enums.IncomingPaymentTransactionType.CurrencyExchange));
 
 	// Cash payment
-	Map.Insert(AO.CashPayment_DR_R1020B_AdvancesToVendors_R1021B_VendorsTransactions_CR_R3010B_CashOnHand , New Structure("ByRow", True));
-	Map.Insert(AO.CashPayment_DR_R1021B_VendorsTransactions_CR_R1020B_AdvancesToVendors , New Structure("ByRow", True));
-	Map.Insert(AO.CashPayment_DR_R2020B_AdvancesFromCustomers_R2021B_CustomersTransactions_CR_R3010B_CashOnHand , New Structure("ByRow", True));
-	Map.Insert(AO.CashPayment_DR_R2021B_CustomersTransactions_CR_R2020B_AdvancesFromCustomers , New Structure("ByRow", True));
-	Map.Insert(AO.CashPayment_DR_R3021B_CashInTransitIncoming_CR_R3010B_CashOnHand_CashTransferOrder , New Structure("ByRow", True));
+	//  Transaction type - Payment to vendor
+	Map.Insert(AO.CashPayment_DR_R1020B_AdvancesToVendors_R1021B_VendorsTransactions_CR_R3010B_CashOnHand,
+		New Structure("ByRow, TransactionType", True, Enums.OutgoingPaymentTransactionTypes.PaymentToVendor));
+	Map.Insert(AO.CashPayment_DR_R1021B_VendorsTransactions_CR_R1020B_AdvancesToVendors, 
+		New Structure("ByRow, TransactionType", True, Enums.OutgoingPaymentTransactionTypes.PaymentToVendor));
+	//  Transaction type - Return to customer
+	Map.Insert(AO.CashPayment_DR_R2020B_AdvancesFromCustomers_R2021B_CustomersTransactions_CR_R3010B_CashOnHand, 
+		New Structure("ByRow, TransactionType", True, Enums.OutgoingPaymentTransactionTypes.ReturnToCustomer));
+	Map.Insert(AO.CashPayment_DR_R2021B_CustomersTransactions_CR_R2020B_AdvancesFromCustomers, 
+		New Structure("ByRow, TransactionType", True, Enums.OutgoingPaymentTransactionTypes.ReturnToCustomer));
+	//  Transaction type - Cash transfer order
+	Map.Insert(AO.CashPayment_DR_R3021B_CashInTransitIncoming_CR_R3010B_CashOnHand_CashTransferOrder,
+		New Structure("ByRow, TransactionType", True, Enums.OutgoingPaymentTransactionTypes.CashTransferOrder));
 	
 	// Cash receipt
-	Map.Insert(AO.CashReceipt_DR_R3010B_CashOnHand_CR_R2020B_AdvancesFromCustomers_R2021B_CustomersTransactions , New Structure("ByRow", True));
-	Map.Insert(AO.CashReceipt_DR_R2020B_AdvancesFromCustomers_CR_R2021B_CustomersTransactions , New Structure("ByRow", True));
-	Map.Insert(AO.CashReceipt_DR_R3010B_CashOnHand_CR_R1020B_AdvancesToVendors_R1021B_VendorsTransactions , New Structure("ByRow", True));
-	Map.Insert(AO.CashReceipt_DR_R1020B_AdvancesToVendors_CR_R1021B_VendorsTransactions , New Structure("ByRow", True));
-	Map.Insert(AO.CashReceipt_DR_R3010B_CashOnHand_CR_R3021B_CashInTransitIncoming_CashTransferOrder , New Structure("ByRow", True));
+	//  Transaction type - Payment from customer
+	Map.Insert(AO.CashReceipt_DR_R3010B_CashOnHand_CR_R2020B_AdvancesFromCustomers_R2021B_CustomersTransactions, 
+		New Structure("ByRow, TransactionType", True, Enums.IncomingPaymentTransactionType.PaymentFromCustomer));
+	Map.Insert(AO.CashReceipt_DR_R2020B_AdvancesFromCustomers_CR_R2021B_CustomersTransactions,
+		New Structure("ByRow, TransactionType", True, Enums.IncomingPaymentTransactionType.PaymentFromCustomer));
+	//  Transaction type - Return from vendor
+	Map.Insert(AO.CashReceipt_DR_R3010B_CashOnHand_CR_R1020B_AdvancesToVendors_R1021B_VendorsTransactions,
+		New Structure("ByRow, TransactionType", True, Enums.IncomingPaymentTransactionType.ReturnFromVendor));
+	Map.Insert(AO.CashReceipt_DR_R1020B_AdvancesToVendors_CR_R1021B_VendorsTransactions,
+		New Structure("ByRow, TransactionType", True, Enums.IncomingPaymentTransactionType.ReturnFromVendor));
+	//  Transaction type - Cash transfer order
+	Map.Insert(AO.CashReceipt_DR_R3010B_CashOnHand_CR_R3021B_CashInTransitIncoming_CashTransferOrder,
+		New Structure("ByRow, TransactionType", True, Enums.IncomingPaymentTransactionType.CashTransferOrder));
 	
 	// Cash expense
 	Map.Insert(AO.CashExpense_DR_R5022T_Expenses_CR_R3010B_CashOnHand , New Structure("ByRow", True));
@@ -51,27 +89,36 @@ Function GetOperationsDefinition()
 	Map.Insert(AO.CreditNote_DR_R1021B_VendorsTransactions_CR_R5022T_Expenses , New Structure("ByRow", True));
 				
 	// Purchase invoice
-	//
 	// receipt inventory
-	Map.Insert(AO.PurchaseInvoice_DR_R4050B_StockInventory_R5022T_Expenses_CR_R1021B_VendorsTransactions , New Structure("ByRow", True));
-	Map.Insert(AO.PurchaseInvoice_DR_R4050B_StockInventory_R5022T_Expenses_CR_R1021B_VendorsTransactions_CurrencyRevaluation , New Structure("ByRow", True));
+	Map.Insert(AO.PurchaseInvoice_DR_R4050B_StockInventory_R5022T_Expenses_CR_R1021B_VendorsTransactions, 
+		New Structure("ByRow, TransactionType", True, Enums.PurchaseTransactionTypes.Purchase));
+	Map.Insert(AO.PurchaseInvoice_DR_R4050B_StockInventory_R5022T_Expenses_CR_R1021B_VendorsTransactions_CurrencyRevaluation,
+		New Structure("ByRow, TransactionType", True, Enums.PurchaseTransactionTypes.Purchase));
 	// offset of advabces
-	Map.Insert(AO.PurchaseInvoice_DR_R1021B_VendorsTransactions_CR_R1020B_AdvancesToVendors , New Structure("ByRow", False));
-	Map.Insert(AO.PurchaseInvoice_DR_R1021B_VendorsTransactions_CR_R1020B_AdvancesToVendors_CurrencyRevaluation , New Structure("ByRow", False));
+	Map.Insert(AO.PurchaseInvoice_DR_R1021B_VendorsTransactions_CR_R1020B_AdvancesToVendors,
+		New Structure("ByRow, TransactionType", False, Enums.PurchaseTransactionTypes.Purchase));
+	Map.Insert(AO.PurchaseInvoice_DR_R1021B_VendorsTransactions_CR_R1020B_AdvancesToVendors_CurrencyRevaluation,
+		New Structure("ByRow, TransactionType", False, Enums.PurchaseTransactionTypes.Purchase));
 	
-	Map.Insert(AO.PurchaseInvoice_DR_R1040B_TaxesOutgoing_CR_R1021B_VendorsTransactions , New Structure("ByRow", True));
+	Map.Insert(AO.PurchaseInvoice_DR_R1040B_TaxesOutgoing_CR_R1021B_VendorsTransactions,
+		New Structure("ByRow, TransactionType", True, Enums.PurchaseTransactionTypes.Purchase));
 	
 	// Sales invoice
-	//
 	// sales inventory
-	Map.Insert(AO.SalesInvoice_DR_R2021B_CustomersTransactions_CR_R5021T_Revenues , New Structure("ByRow", True));
-	Map.Insert(AO.SalesInvoice_DR_R2021B_CustomersTransactions_CR_R5021T_Revenues_CurrencyRevaluation , New Structure("ByRow", True));
+	Map.Insert(AO.SalesInvoice_DR_R2021B_CustomersTransactions_CR_R5021T_Revenues,
+		New Structure("ByRow, TransactionType", True, Enums.SalesTransactionTypes.Sales));
+	Map.Insert(AO.SalesInvoice_DR_R2021B_CustomersTransactions_CR_R5021T_Revenues_CurrencyRevaluation,
+		New Structure("ByRow, TransactionType", True, Enums.SalesTransactionTypes.Sales));
 	// offset of advances
-	Map.Insert(AO.SalesInvoice_DR_R2020B_AdvancesFromCustomers_CR_R2021B_CustomersTransactions , New Structure("ByRow", False));
-	Map.Insert(AO.SalesInvoice_DR_R2020B_AdvancesFromCustomers_CR_R2021B_CustomersTransactions_CurrencyRevaluation , New Structure("ByRow", False));
+	Map.Insert(AO.SalesInvoice_DR_R2020B_AdvancesFromCustomers_CR_R2021B_CustomersTransactions,
+		New Structure("ByRow, TransactionType", False, Enums.SalesTransactionTypes.Sales));
+	Map.Insert(AO.SalesInvoice_DR_R2020B_AdvancesFromCustomers_CR_R2021B_CustomersTransactions_CurrencyRevaluation,
+		New Structure("ByRow, TransactionType", False, Enums.SalesTransactionTypes.Sales));
 	
-	Map.Insert(AO.SalesInvoice_DR_R5021T_Revenues_CR_R2040B_TaxesIncoming , New Structure("ByRow", True));
-	Map.Insert(AO.SalesInvoice_DR_R5022T_Expenses_CR_R4050B_StockInventory , New Structure("ByRow", True));
+	Map.Insert(AO.SalesInvoice_DR_R5021T_Revenues_CR_R2040B_TaxesIncoming,
+		New Structure("ByRow, TransactionType", True, Enums.SalesTransactionTypes.Sales));
+	Map.Insert(AO.SalesInvoice_DR_R5022T_Expenses_CR_R4050B_StockInventory,
+		New Structure("ByRow, TransactionType", True, Enums.SalesTransactionTypes.Sales));
 	
 	// Retail sales receipt
 	Map.Insert(AO.RetailSalesReceipt_DR_R5022T_Expenses_CR_R4050B_StockInventory , New Structure("ByRow", True));
@@ -298,9 +345,8 @@ Function GetLedgerTypesByCompany(Ref, Date, Company) Export
 	Return ArrayOfLedgerTypes;
 EndFunction
 
-Function GetAccountingOperationsByLedgerType(Ref, Period, LedgerType) Export
-	OperationsDefinition = GetOperationsDefinition();
-	MetadataName = Ref.Metadata().Name;
+Function GetAccountingOperationsByLedgerType(Object, Period, LedgerType)
+	MetadataName = Object.Ref.Metadata().Name;
 	AccountingOperationGroup = Catalogs.AccountingOperations["Document_" + MetadataName];
 	Query = New Query();
 	Query.Text =
@@ -318,6 +364,14 @@ Function GetAccountingOperationsByLedgerType(Ref, Period, LedgerType) Export
 	QuerySelection = QueryResult.Select();
 	
 	ArrayOfAccountingOperations = New Array();
+	
+	OperationsDefinition = GetOperationsDefinition();
+	
+	DocTransactionType = Undefined;
+	If CommonFunctionsClientServer.ObjectHasProperty(Object, "TransactionType") Then
+		DocTransactionType = Object.TransactionType;
+	EndIf;
+	
 	While QuerySelection.Next() Do
 		Def = OperationsDefinition.Get(QuerySelection.AccountingOperation);
 		ByRow = ?(Def = Undefined, False, Def.ByRow);
@@ -325,8 +379,19 @@ Function GetAccountingOperationsByLedgerType(Ref, Period, LedgerType) Export
 		If Def <> Undefined And Def.Property("RequestTable") Then
 			RequestTable = Def.RequestTable;
 		EndIf;
-		ArrayOfAccountingOperations.Add(New Structure("Operation, ByRow, RequestTable, MetadataName",
-			QuerySelection.AccountingOperation, ByRow, RequestTable, MetadataName));
+		
+		If Def <> Undefined 
+			And Def.Property("TransactionType") 
+			And Def.TransactionType <> DocTransactionType Then
+			Continue;
+		EndIf;
+		
+		NewAccountingOperation = New Structure();
+		NewAccountingOperation.Insert("Operation"    , QuerySelection.AccountingOperation);
+		NewAccountingOperation.Insert("ByRow"        , ByRow);
+		NewAccountingOperation.Insert("RequestTable" , RequestTable);
+		NewAccountingOperation.Insert("MetadataName" , MetadataName);
+		ArrayOfAccountingOperations.Add(NewAccountingOperation);
 	EndDo;
 	Return ArrayOfAccountingOperations;
 EndFunction
@@ -347,6 +412,33 @@ Function GetLedgerTypeVariants() Export
 		Result.Add(QuerySelection.Ref);
 	EndDo;
 	Return Result;
+EndFunction
+
+Function SplitAccountingOperationsByTransactionTypes(DocumentInfo) Export
+	Result = New Structure();
+	Result.Insert("With_TransactionType", New Map());
+	Result.Insert("Without_TransactionType", New Array());
+	
+	OperationsDefinition = GetOperationsDefinition();
+	
+	For Each KeyValue In OperationsDefinition Do
+		If KeyValue.Key.Parent = DocumentInfo Then
+			If KeyValue.Value.Property("TransactionType") And ValueIsFilled(KeyValue.Value.TransactionType) Then
+				If Result.With_TransactionType.Get(KeyValue.Value.TransactionType) = Undefined Then
+					Result.With_TransactionType.Insert(KeyValue.Value.TransactionType, New Array());
+				EndIf;
+				
+				Result.With_TransactionType[KeyValue.Value.TransactionType].Add(KeyValue.Key);
+				
+			Else
+				
+				Result.Without_TransactionType.Add(KeyValue.Key);
+				
+			EndIf;
+		EndIf;
+	EndDo;
+	
+	Return Result;	
 EndFunction
 
 #EndRegion
@@ -1003,7 +1095,7 @@ Procedure UpdateAccountingTables(Object,
 		If Filter_LedgerType <> Undefined And Filter_LedgerType <> LedgerType Then
 			Continue;
 		EndIf;
-		OperationsInfo = GetAccountingOperationsByLedgerType(Object.Ref, Period, LedgerType);
+		OperationsInfo = GetAccountingOperationsByLedgerType(Object, Period, LedgerType);
 		For Each OperationInfo In OperationsInfo Do
 			OperationsByLedgerType.Add(New Structure("LedgerType, OperationInfo", LedgerType, OperationInfo));
 		EndDo;
@@ -1205,7 +1297,7 @@ Procedure ClearAccountingTables(Object, AccountingRowAnalytics, AccountingExtDim
 		EndIf;
 	
 		Operations = New Array();	
-		OperationsInfo = GetAccountingOperationsByLedgerType(Object.Ref, Period, Row.LedgerType);
+		OperationsInfo = GetAccountingOperationsByLedgerType(Object, Period, Row.LedgerType);
 		For Each OperationInfo In OperationsInfo Do
 			Operations.Add(OperationInfo.Operation);
 		EndDo;
@@ -1239,7 +1331,7 @@ Procedure ClearAccountingTables(Object, AccountingRowAnalytics, AccountingExtDim
 		EndIf;
 		
 		Operations = New Array();	
-		OperationsInfo = GetAccountingOperationsByLedgerType(Object.Ref, Period, Row.LedgerType);
+		OperationsInfo = GetAccountingOperationsByLedgerType(Object, Period, Row.LedgerType);
 		For Each OperationInfo In OperationsInfo Do
 			Operations.Add(OperationInfo.Operation);
 		EndDo;
@@ -1671,7 +1763,7 @@ EndProcedure
 
 #EndRegion
 
-#Region Service
+#Region JournalEntry
 
 Procedure CreateJE_ByDocumentName(DocumentName, Company, LedgerType, StartDate, EndDate) Export
 	Query = New Query();

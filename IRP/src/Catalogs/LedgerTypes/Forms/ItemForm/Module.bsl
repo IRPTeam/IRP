@@ -20,10 +20,12 @@ EndProcedure
 Procedure FillCheckProcessingAtServer(Cancel, CheckedAttributes)
 	For Each Level1 In ThisObject.OperationsTree.GetItems() Do
 		For Each Level2 In Level1.GetItems() Do
-			If Level2.Use And Not ValueIsFilled(Level2.Period) Then
-				Cancel = True;
-				CommonFunctionsClientServer.ShowUsersMessage(StrTemplate(R().Error_111, Level1.Document, Level2.AccountingOperation));
-			EndIf;
+			For Each Level3 In Level2.GetItems() Do
+				If Level3.Use And Not ValueIsFilled(Level3.Period) Then
+					Cancel = True;
+					CommonFunctionsClientServer.ShowUsersMessage(StrTemplate(R().Error_111, Level1.Document, Level3.AccountingOperation));
+				EndIf;
+			EndDo;
 		EndDo;
 	EndDo;
 EndProcedure
@@ -32,18 +34,23 @@ EndProcedure
 Procedure AfterWriteAtServer(CurrentObject, WriteParameters)
 	For Each Level1 In ThisObject.OperationsTree.GetItems() Do
 		For Each Level2 In Level1.GetItems() Do
-			If Not ValueIsFilled(Level2.Period) Then
-				Continue;
-			EndIf;
-			RecordSet = InformationRegisters.LedgerTypeOperations.CreateRecordSet();
-			RecordSet.Filter.LedgerType.Set(Object.Ref);
-			RecordSet.Filter.AccountingOperation.Set(Level2.AccountingOperation);
-			NewRecord = RecordSet.Add();
-			NewRecord.LedgerType = Object.Ref;
-			NewRecord.AccountingOperation = Level2.AccountingOperation;
-			NewRecord.Period = Level2.Period;
-			NewRecord.Use = Level2.Use;
-			RecordSet.Write();
+			For Each Level3 In Level2.GetItems() Do
+				RecordSet = InformationRegisters.LedgerTypeOperations.CreateRecordSet();
+				RecordSet.Filter.LedgerType.Set(Object.Ref);
+				RecordSet.Filter.AccountingOperation.Set(Level3.AccountingOperation);
+				
+				If ValueIsFilled(Level3.Period) Then
+					NewRecord = RecordSet.Add();
+					NewRecord.LedgerType = Object.Ref;
+					NewRecord.AccountingOperation = Level3.AccountingOperation;
+					NewRecord.Period = Level3.Period;
+					NewRecord.Use = Level3.Use;
+				Else
+					RecordSet.Clear();
+				EndIf;
+				
+				RecordSet.Write();
+			EndDo;
 		EndDo;
 	EndDo;
 	SetVisibilityAvailability(Object, ThisObject);
@@ -98,15 +105,21 @@ Procedure SetVisibilityAvailability(Object, Form)
 	For Each Level1 In ArrayOfAccountingOperations Do
 		NewLevel1 = Form.OperationsTree.GetItems().Add();
 		FillPropertyValues(NewLevel1, Level1);
+		
 		For Each Level2 In Level1.Rows Do
-			FillPropertyValues(NewLevel1.GetItems().Add(), Level2);
+			NewLevel2 = NewLevel1.GetItems().Add();
+			FillPropertyValues(NewLevel2, Level2);
+			
+			For Each Level3 In Level2.Rows Do
+				NewLevel3 = NewLevel2.GetItems().Add();
+				FillPropertyValues(NewLevel3, Level3);
+			EndDo;
 		EndDo;
 	EndDo;
 EndProcedure
 
 &AtServerNoContext
 Function GetAccountingOperations(LedgerTypeRef)
-	ArrayOfAccountingOperations = New Array();
 	Query = New Query();
 	Query.Text = 
 	"SELECT
@@ -140,28 +153,92 @@ Function GetAccountingOperations(LedgerTypeRef)
 	Query.SetParameter("LedgerType", LedgerTypeRef);
 	QueryResult = Query.Execute();
 	QuerySelection = QueryResult.Select(QueryResultIteration.ByGroups);
-	While QuerySelection.Next() Do
-		Level1 = New Structure();
-		Level1.Insert("Level", 1);
-		Level1.Insert("Picture", 1);
-		Level1.Insert("Presentation", String(QuerySelection.Document));
-		Level1.Insert("Document", QuerySelection.Document);
-		Level1.Insert("Rows", New Array());
-		ArrayOfAccountingOperations.Add(Level1);
+	
+	ArrayOfRowsLevel1 = New Array();
+	While QuerySelection.Next() Do // Level1
+		Level1 = CreateLevel1(QuerySelection.Document);
 		
+		AccountingOperations = AccountingServer.SplitAccountingOperationsByTransactionTypes(QuerySelection.Document);
 		QuerySelectionDetail = QuerySelection.Select();
-		While QuerySelectionDetail.Next() Do
-			Level2 = New Structure();
-			Level2.Insert("Level", 2);
-			Level2.Insert("Picture", 0);
-			Level2.Insert("Presentation", String(QuerySelectionDetail.AccountingOperation));
-			Level2.Insert("AccountingOperation", QuerySelectionDetail.AccountingOperation);
-			Level2.Insert("Period", QuerySelectionDetail.Period);
-			Level2.Insert("Use", QuerySelectionDetail.Use);
-			Level1.Rows.Add(Level2);
-		EndDo;
-	EndDo;
-	Return ArrayOfAccountingOperations;
+		
+		ArrayOfRowsLevel2 = New Array();
+		For Each KeyValue In AccountingOperations.With_TransactionType Do // Level2
+			
+			Level2 = CreateLevel2(KeyValue.Key);
+			
+			ArrayOfRowsLevel3 = New Array();
+			For Each AO In KeyValue.Value Do // Level3
+				QuerySelectionDetail.Reset();
+				If QuerySelectionDetail.FindNext(New Structure("AccountingOperation", AO)) Then
+					ArrayOfRowsLevel3.Add(CreateLevel3(QuerySelectionDetail));
+				EndIf;
+			EndDo; // Level3
+			
+			If ArrayOfRowsLevel3.Count() Then
+				Level2.Rows = ArrayOfRowsLevel3;
+				ArrayOfRowsLevel2.Add(Level2);
+			EndIf;
+			
+		EndDo; // Level2
+		
+		Level2 = CreateLevel2(R().AccountingInfo_02);
+		
+		ArrayOfRowsLevel3 = New Array();
+		For Each AO In AccountingOperations.Without_TransactionType Do // Level3
+			QuerySelectionDetail.Reset();
+			If QuerySelectionDetail.FindNext(New Structure("AccountingOperation", AO)) Then
+				ArrayOfRowsLevel3.Add(CreateLevel3(QuerySelectionDetail));
+			EndIf;
+		EndDo; // Level3
+			
+		If ArrayOfRowsLevel3.Count() Then
+			Level2.Rows = ArrayOfRowsLevel3;
+			ArrayOfRowsLevel2.Add(Level2);
+		EndIf;
+		
+		If ArrayOfRowsLevel2.Count() Then
+			For Each RowLevel2 In ArrayOfRowsLevel2 Do
+				Level1.Rows.Add(RowLevel2);
+			EndDo;
+			ArrayOfRowsLevel1.Add(Level1);
+		EndIf;
+		
+	EndDo; // Level1
+	
+	Return ArrayOfRowsLevel1;
+EndFunction
+
+&AtServerNoContext
+Function CreateLevel1(Document)
+	Level1 = New Structure();
+	Level1.Insert("Level", 1);
+	Level1.Insert("Picture", 1);
+	Level1.Insert("Presentation", String(Document));
+	Level1.Insert("Document", Document);
+	Level1.Insert("Rows", New Array());
+	Return Level1;
+EndFunction
+
+&AtServerNoContext
+Function CreateLevel2(TransactionType)
+	Level2 = New Structure();
+	Level2.Insert("Level", 2);
+	Level2.Insert("Picture", 2);
+	Level2.Insert("Presentation", String(TransactionType));
+	Level2.Insert("Rows", New Array());
+	Return Level2;
+EndFunction
+
+&AtServerNoContext
+Function CreateLevel3(QuerySelection)
+	Level3 = New Structure();
+	Level3.Insert("Level", 3);
+	Level3.Insert("Picture", 0);
+	Level3.Insert("Presentation", String(QuerySelection.AccountingOperation));
+	Level3.Insert("AccountingOperation", QuerySelection.AccountingOperation);
+	Level3.Insert("Period", QuerySelection.Period);
+	Level3.Insert("Use", QuerySelection.Use);
+	Return Level3;
 EndFunction
 
 &AtClient

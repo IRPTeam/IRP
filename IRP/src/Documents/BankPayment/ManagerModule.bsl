@@ -815,7 +815,7 @@ Function T1040T_AccountingAmounts()
 		|FROM
 		|	PaymentList AS PaymentList
 		|WHERE
-		|	PaymentList.IsCashTransferOrder";
+		|	PaymentList.IsCashTransferOrder OR PaymentList.IsCurrencyExchange";
 EndFunction
 
 Function GetAccountingAnalytics(Parameters) Export
@@ -945,13 +945,23 @@ Function GetAnalytics_CashTransferOrder(Parameters)
 	AccountParameters   = AccountingServer.GetAccountParameters(Parameters);
 
 	// Debit
-	Debit = AccountingServer.GetT9011S_AccountsCashAccount(AccountParameters, 
+	AdditionalAnalytics = New Structure();
+	If Parameters.ObjectData.TransactionType = Enums.OutgoingPaymentTransactionTypes.CurrencyExchange Then
+		
+		Debit = AccountingServer.GetT9011S_AccountsCashAccount(AccountParameters, 
+															Parameters.ObjectData.TransitAccount,
+															Parameters.ObjectData.TransitAccount.Currency);
+		AdditionalAnalytics.Insert("Account", Parameters.ObjectData.TransitAccount);
+		AccountingAnalytics.Debit = Debit.Account;
+	Else		
+		
+		Debit = AccountingServer.GetT9011S_AccountsCashAccount(AccountParameters, 
 															Parameters.RowData.ReceiptingAccount,
 															Parameters.ObjectData.Currency);
-		                                               
-	AccountingAnalytics.Debit = Debit.AccountTransit;
-	AdditionalAnalytics = New Structure();
-	AdditionalAnalytics.Insert("Account", Parameters.RowData.ReceiptingAccount);
+		AdditionalAnalytics.Insert("Account", Parameters.RowData.ReceiptingAccount);
+		AccountingAnalytics.Debit = Debit.AccountTransit;
+	EndIf;
+
 	AccountingServer.SetDebitExtDimensions(Parameters, AccountingAnalytics, AdditionalAnalytics);
 
 	// Credit

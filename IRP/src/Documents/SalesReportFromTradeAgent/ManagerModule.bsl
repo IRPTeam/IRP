@@ -286,7 +286,8 @@ Function ItemList()
 		   |	UNDEFINED AS Order,
 		   |	DocItemList.Project,
 		   |	TRUE AS IsSales,
-		   |	UNDEFINED AS SalesOrder
+		   |	UNDEFINED AS SalesOrder,
+		   |	UNDEFINED AS SalesOrderSettlements
 		   |INTO ItemList
 		   |FROM
 		   |	Document.SalesReportFromTradeAgent.ItemList AS DocItemList

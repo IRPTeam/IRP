@@ -114,50 +114,6 @@ Function T2014S_AdvancesInfo_BR_CR() Export
 		|	AND PaymentList.IsAdvance";
 EndFunction
 
-Function T2014S_AdvancesInfo_DebitNote() Export
-	Return 
-		"SELECT
-		|	VALUE(Enum.RecordType.Receipt) AS RecordType,
-		|	Transactions.Period AS Date,
-		|	Transactions.Company,
-		|	Transactions.Branch,
-		|	Transactions.Partner,
-		|	Transactions.LegalName,
-		|	Transactions.Currency,
-		|	Transactions.AdvanceAgreement,
-		|	Transactions.Project,
-		|	Transactions.Key,
-		|	Transactions.Amount,
-		|	TRUE AS IsVendorAdvance
-		|INTO T2014S_AdvancesInfo
-		|FROM
-		|	Transactions AS Transactions
-		|WHERE
-		|	Transactions.IsVendor";
-EndFunction
-
-Function T2014S_AdvancesInfo_CreditNote() Export
-	Return 
-		"SELECT
-		|	VALUE(Enum.RecordType.Receipt) AS RecordType,
-		|	Transactions.Period AS Date,
-		|	Transactions.Company,
-		|	Transactions.Branch,
-		|	Transactions.Partner,
-		|	Transactions.LegalName,
-		|	Transactions.Currency,
-		|	Transactions.AdvanceAgreement,
-		|	Transactions.Project,
-		|	TRUE AS IsCustomerAdvance,
-		|	Transactions.Key,
-		|	Transactions.Amount
-		|INTO T2014S_AdvancesInfo
-		|FROM
-		|	Transactions AS Transactions
-		|WHERE
-		|	Transactions.IsCustomer";
-EndFunction
-
 Function T2014S_AdvancesInfo_DebitCreditNote() Export
 	Return 
 		"SELECT

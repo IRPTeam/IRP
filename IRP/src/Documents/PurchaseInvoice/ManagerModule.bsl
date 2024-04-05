@@ -522,10 +522,6 @@ Function GetAdditionalQueryParameters(Ref)
 	Return StrParams;
 EndFunction
 
-#EndRegion
-
-#Region Posting_SourceTable
-
 Function GetQueryTextsSecondaryTables()
 	QueryArray = New Array;
 	QueryArray.Add(ItemList());
@@ -540,6 +536,49 @@ Function GetQueryTextsSecondaryTables()
 	QueryArray.Add(PostingServer.Exists_R4014B_SerialLotNumber());
 	Return QueryArray;
 EndFunction
+
+Function GetQueryTextsMasterTables()
+	QueryArray = New Array;
+	QueryArray.Add(R1001T_Purchases());
+	QueryArray.Add(R1005T_PurchaseSpecialOffers());
+	QueryArray.Add(R1011B_PurchaseOrdersReceipt());
+	QueryArray.Add(R1012B_PurchaseOrdersInvoiceClosing());
+	QueryArray.Add(R1020B_AdvancesToVendors());
+	QueryArray.Add(R1021B_VendorsTransactions());
+	QueryArray.Add(R1022B_VendorsPaymentPlanning());
+	QueryArray.Add(R1031B_ReceiptInvoicing());
+	QueryArray.Add(R1040B_TaxesOutgoing());
+	QueryArray.Add(R2013T_SalesOrdersProcurement());
+	QueryArray.Add(R4010B_ActualStocks());
+	QueryArray.Add(R4011B_FreeStocks());
+	QueryArray.Add(R4012B_StockReservation());
+	QueryArray.Add(R4014B_SerialLotNumber());
+	QueryArray.Add(R4017B_InternalSupplyRequestProcurement());
+	QueryArray.Add(R4031B_GoodsInTransitIncoming());
+	QueryArray.Add(R4033B_GoodsReceiptSchedule());
+	QueryArray.Add(R4035B_IncomingStocks());
+	QueryArray.Add(R4036B_IncomingStocksRequested());
+	QueryArray.Add(R4050B_StockInventory());
+	QueryArray.Add(R5010B_ReconciliationStatement());
+	QueryArray.Add(R5012B_VendorsAging());
+	QueryArray.Add(R5022T_Expenses());
+	QueryArray.Add(R6070T_OtherPeriodsExpenses());
+	QueryArray.Add(R8015T_ConsignorPrices());
+	QueryArray.Add(R9010B_SourceOfOriginStock());
+	QueryArray.Add(T1040T_AccountingAmounts());
+	QueryArray.Add(T1050T_AccountingQuantities());
+	QueryArray.Add(T2015S_TransactionsInfo());
+	QueryArray.Add(T3010S_RowIDInfo());
+	QueryArray.Add(T6010S_BatchesInfo());
+	QueryArray.Add(T6020S_BatchKeysInfo());
+	QueryArray.Add(S1001L_VendorsPricesByItemKey());
+	QueryArray.Add(R5020B_PartnersBalance());
+	Return QueryArray;
+EndFunction
+
+#EndRegion
+
+#Region Posting_SourceTable
 
 Function ItemList()
 	Return "SELECT
@@ -799,45 +838,6 @@ EndFunction
 #EndRegion
 
 #Region Posting_MainTables
-
-Function GetQueryTextsMasterTables()
-	QueryArray = New Array;
-	QueryArray.Add(R1001T_Purchases());
-	QueryArray.Add(R1005T_PurchaseSpecialOffers());
-	QueryArray.Add(R1011B_PurchaseOrdersReceipt());
-	QueryArray.Add(R1012B_PurchaseOrdersInvoiceClosing());
-	QueryArray.Add(R1020B_AdvancesToVendors());
-	QueryArray.Add(R1021B_VendorsTransactions());
-	QueryArray.Add(R1022B_VendorsPaymentPlanning());
-	QueryArray.Add(R1031B_ReceiptInvoicing());
-	QueryArray.Add(R1040B_TaxesOutgoing());
-	QueryArray.Add(R2013T_SalesOrdersProcurement());
-	QueryArray.Add(R4010B_ActualStocks());
-	QueryArray.Add(R4011B_FreeStocks());
-	QueryArray.Add(R4012B_StockReservation());
-	QueryArray.Add(R4014B_SerialLotNumber());
-	QueryArray.Add(R4017B_InternalSupplyRequestProcurement());
-	QueryArray.Add(R4031B_GoodsInTransitIncoming());
-	QueryArray.Add(R4033B_GoodsReceiptSchedule());
-	QueryArray.Add(R4035B_IncomingStocks());
-	QueryArray.Add(R4036B_IncomingStocksRequested());
-	QueryArray.Add(R4050B_StockInventory());
-	QueryArray.Add(R5010B_ReconciliationStatement());
-	QueryArray.Add(R5012B_VendorsAging());
-	QueryArray.Add(R5022T_Expenses());
-	QueryArray.Add(R6070T_OtherPeriodsExpenses());
-	QueryArray.Add(R8015T_ConsignorPrices());
-	QueryArray.Add(R9010B_SourceOfOriginStock());
-	QueryArray.Add(T1040T_AccountingAmounts());
-	QueryArray.Add(T1050T_AccountingQuantities());
-	QueryArray.Add(T2015S_TransactionsInfo());
-	QueryArray.Add(T3010S_RowIDInfo());
-	QueryArray.Add(T6010S_BatchesInfo());
-	QueryArray.Add(T6020S_BatchKeysInfo());
-	QueryArray.Add(S1001L_VendorsPricesByItemKey());
-	QueryArray.Add(R5020B_PartnersBalance());
-	Return QueryArray;
-EndFunction
 
 Function R9010B_SourceOfOriginStock()
 	Return "SELECT

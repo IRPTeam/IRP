@@ -95,22 +95,14 @@ Function GetQueryTextsMasterTables()
 	QueryArray.Add(R2021B_CustomersTransactions());
 	QueryArray.Add(R5011B_CustomersAging());
 	QueryArray.Add(R5012B_VendorsAging());
+	QueryArray.Add(R5010B_ReconciliationStatement());
+	QueryArray.Add(R5020B_PartnersBalance());
 	Return QueryArray;
 EndFunction
 
 #EndRegion
 
 #Region Posting_SourceTable
-
-//IsSendAdvanceCustomer
-//IsSendAdvanceVendor
-//IsReceiveAdvanceCustomer
-//IsReceiveAdvanceVendor
-//
-//IsSendTransactionCustomer
-//IsSendTransactionVendor
-//IsReceiveTransactionCustomer
-//IsReceiveTransactionVendor
 
 Function SendAdvances()
 	Return
@@ -132,6 +124,7 @@ Function SendAdvances()
 		|	Doc.Branch AS SendBranch,
 		|	Doc.SendPartner,
 		|	Doc.SendLegalName,
+		|	Doc.SendLegalNameContract,
 		|	Doc.Currency,
 		|	Doc.SendAgreement,
 		|	Doc.SendProject,
@@ -151,6 +144,13 @@ Function SendAdvances()
 		|			THEN TRUE
 		|		ELSE FALSE
 		|	END AS SendIsCustomerAdvance,
+		|	Doc.SendLegalNameContract <> Doc.ReceiveLegalNameContract AS IsDifferentContracts,
+		|	(Doc.Branch <> Doc.ReceiveBranch 
+		|		Or Doc.SendPartner <> Doc.ReceivePartner
+		|		Or Doc.SendLegalName <> Doc.ReceiveLegalName
+		|		Or Doc.SendAgreement <> Doc.ReceiveAgreement
+		|		Or case when Doc.SendBasisDocument.Ref IS NULL Then Undefined else Doc.SendBasisDocument end
+		|			<> case when Doc.ReceiveBasisDocument.Ref IS NULL Then Undefined else Doc.ReceiveBasisDocument end) AS IsDifferentPartners,
 		|	Doc.Amount
 		|INTO SendAdvances
 		|FROM
@@ -181,6 +181,7 @@ Function ReceiveAdvances()
 		|	Doc.ReceiveBranch,
 		|	Doc.ReceivePartner,
 		|	Doc.ReceiveLegalName,
+		|	Doc.ReceiveLegalNameContract,
 		|	Doc.Currency,
 		|	Doc.ReceiveAgreement,
 		|	Doc.ReceiveProject,
@@ -200,6 +201,13 @@ Function ReceiveAdvances()
 		|			THEN TRUE
 		|		ELSE FALSE
 		|	END AS ReceiveIsCustomerAdvance,
+		|	Doc.SendLegalNameContract <> Doc.ReceiveLegalNameContract AS IsDifferentContracts,
+		|	(Doc.Branch <> Doc.ReceiveBranch 
+		|		Or Doc.SendPartner <> Doc.ReceivePartner
+		|		Or Doc.SendLegalName <> Doc.ReceiveLegalName
+		|		Or Doc.SendAgreement <> Doc.ReceiveAgreement
+		|		Or case when Doc.SendBasisDocument.Ref IS NULL Then Undefined else Doc.SendBasisDocument end
+		|			<> case when Doc.ReceiveBasisDocument.Ref IS NULL Then Undefined else Doc.ReceiveBasisDocument end) AS IsDifferentPartners,
 		|	Doc.Amount
 		|INTO ReceiveAdvances
 		|FROM
@@ -230,6 +238,7 @@ Function SendTransactions()
 		|	Doc.Branch AS SendBranch,
 		|	Doc.SendPartner,
 		|	Doc.SendLegalName,
+		|	Doc.SendLegalNameContract,
 		|	Doc.Currency,
 		|	Doc.SendAgreement,
 		|	Doc.SendProject,
@@ -250,6 +259,13 @@ Function SendTransactions()
 		|			THEN TRUE
 		|		ELSE FALSE
 		|	END AS SendIsCustomerTransaction,
+		|	Doc.SendLegalNameContract <> Doc.ReceiveLegalNameContract AS IsDifferentContracts,
+		|	(Doc.Branch <> Doc.ReceiveBranch 
+		|		Or Doc.SendPartner <> Doc.ReceivePartner
+		|		Or Doc.SendLegalName <> Doc.ReceiveLegalName
+		|		Or Doc.SendAgreement <> Doc.ReceiveAgreement
+		|		Or case when Doc.SendBasisDocument.Ref IS NULL Then Undefined else Doc.SendBasisDocument end
+		|			<> case when Doc.ReceiveBasisDocument.Ref IS NULL Then Undefined else Doc.ReceiveBasisDocument end) AS IsDifferentPartners,
 		|	Doc.Amount
 		|INTO SendTransactions
 		|FROM
@@ -280,6 +296,7 @@ Function ReceiveTransactions()
 		|	Doc.ReceiveBranch,
 		|	Doc.ReceivePartner,
 		|	Doc.ReceiveLegalName,
+		|	Doc.ReceiveLegalNameContract,
 		|	Doc.Currency,
 		|	Doc.ReceiveAgreement,
 		|	Doc.ReceiveProject,
@@ -304,6 +321,13 @@ Function ReceiveTransactions()
 		|			THEN TRUE
 		|		ELSE FALSE
 		|	END AS SendIsCustomerTransaction,
+		|	Doc.SendLegalNameContract <> Doc.ReceiveLegalNameContract AS IsDifferentContracts,
+		|	(Doc.Branch <> Doc.ReceiveBranch 
+		|		Or Doc.SendPartner <> Doc.ReceivePartner
+		|		Or Doc.SendLegalName <> Doc.ReceiveLegalName
+		|		Or Doc.SendAgreement <> Doc.ReceiveAgreement
+		|		Or case when Doc.SendBasisDocument.Ref IS NULL Then Undefined else Doc.SendBasisDocument end
+		|			<> case when Doc.ReceiveBasisDocument.Ref IS NULL Then Undefined else Doc.ReceiveBasisDocument end) AS IsDifferentPartners,
 		|	Doc.Amount
 		|INTO ReceiveTransactions
 		|FROM
@@ -317,6 +341,152 @@ EndFunction
 #EndRegion
 
 #Region Posting_MainTables
+
+Function R5010B_ReconciliationStatement()
+	Return
+		// Vendor advance (send)
+		"SELECT
+		|	VALUE(AccumulationRecordType.Expense) AS RecordType,
+		|	SendAdvances.Period,
+		|	SendAdvances.Company,
+		|	SendAdvances.SendBranch AS Branch,
+		|	SendAdvances.Currency,
+		|	SendAdvances.SendLegalName AS LegalName,
+		|	SendAdvances.SendLegalNameContract AS LegalNameContract,
+		|	SendAdvances.Amount
+		|INTO R5010B_ReconciliationStatement
+		|FROM 
+		|	SendAdvances AS SendAdvances
+		|WHERE
+		|	SendAdvances.IsSendAdvanceVendor
+		|	AND SendAdvances.IsDifferentContracts
+		|
+		|UNION ALL
+		|
+		// Vendor advance (receive)
+		|SELECT
+		|	VALUE(AccumulationRecordType.Receipt),
+		|	ReceiveAdvances.Period,
+		|	ReceiveAdvances.Company,
+		|	ReceiveAdvances.ReceiveBranch AS Branch,
+		|	ReceiveAdvances.Currency,
+		|	ReceiveAdvances.ReceiveLegalName AS LegalName,
+		|	ReceiveAdvances.ReceiveLegalNameContract AS LegalNameContract,
+		|	ReceiveAdvances.Amount
+		|FROM
+		|	ReceiveAdvances AS ReceiveAdvances
+		|WHERE
+		|	ReceiveAdvances.IsReceiveAdvanceVendor
+		|	AND ReceiveAdvances.IsDifferentContracts
+		|
+		|UNION ALL
+		|
+		// Customer advance (send)
+		|SELECT
+		|	VALUE(AccumulationRecordType.Receipt),
+		|	SendAdvances.Period,
+		|	SendAdvances.Company,
+		|	SendAdvances.SendBranch AS Branch,
+		|	SendAdvances.Currency,
+		|	SendAdvances.SendLegalName AS LegalName,
+		|	SendAdvances.SendLegalNameContract AS LegalNameContract,
+		|	SendAdvances.Amount
+		|FROM
+		|	SendAdvances AS SendAdvances
+		|WHERE
+		|	SendAdvances.IsSendAdvanceCustomer
+		|	AND SendAdvances.IsDifferentContracts
+		|
+		|UNION ALL
+		|
+		// Customer advance (receipt)
+		|SELECT
+		|	VALUE(AccumulationRecordType.Expense),
+		|	ReceiveAdvances.Period,
+		|	ReceiveAdvances.Company,
+		|	ReceiveAdvances.ReceiveBranch AS Branch,
+		|	ReceiveAdvances.Currency,
+		|	ReceiveAdvances.ReceiveLegalName AS LegalName,
+		|	ReceiveAdvances.ReceiveLegalNameContract AS LegalNameContract,
+		|	ReceiveAdvances.Amount
+		|FROM
+		|	ReceiveAdvances AS ReceiveAdvances
+		|WHERE
+		|	ReceiveAdvances.IsReceiveAdvanceCustomer
+		|	AND ReceiveAdvances.IsDifferentContracts
+		|
+		|UNION ALL
+		|
+		// Vendor transaction (send)
+		|SELECT
+		|	VALUE(AccumulationRecordType.Receipt) AS RecordType,
+		|	SendTransactions.Period,
+		|	SendTransactions.Company,
+		|	SendTransactions.SendBranch AS Branch,
+		|	SendTransactions.Currency,
+		|	SendTransactions.SendLegalName AS LegalName,
+		|	SendTransactions.SendLegalNameContract AS LegalNameContract,
+		|	SendTransactions.Amount
+		|FROM 
+		|	SendTransactions AS SendTransactions
+		|WHERE
+		|	SendTransactions.IsSendTransactionVendor
+		|	AND SendTransactions.IsDifferentContracts
+		|
+		|UNION ALL
+		|
+		// Vendor transaction (receive)
+		|SELECT
+		|	VALUE(AccumulationRecordType.Expense),
+		|	ReceiveTransactions.Period,
+		|	ReceiveTransactions.Company,
+		|	ReceiveTransactions.ReceiveBranch AS Branch,
+		|	ReceiveTransactions.Currency,
+		|	ReceiveTransactions.ReceiveLegalName AS LegalName,
+		|	ReceiveTransactions.ReceiveLegalNameContract AS LegalNameContract,
+		|	ReceiveTransactions.Amount
+		|FROM
+		|	ReceiveTransactions AS ReceiveTransactions
+		|WHERE
+		|	ReceiveTransactions.IsReceiveTransactionVendor
+		|	AND ReceiveTransactions.IsDifferentContracts
+		|
+		|UNION ALL
+		|
+		// Customer transaction (send)
+		|SELECT
+		|	VALUE(AccumulationRecordType.Expense),
+		|	SendTransactions.Period,
+		|	SendTransactions.Company,
+		|	SendTransactions.SendBranch AS Branch,
+		|	SendTransactions.Currency,
+		|	SendTransactions.SendLegalName AS LegalName,
+		|	SendTransactions.SendLegalNameContract AS LegalNameContract,
+		|	SendTransactions.Amount
+		|FROM
+		|	SendTransactions AS SendTransactions
+		|WHERE
+		|	SendTransactions.IsSendTransactionCustomer
+		|	AND SendTransactions.IsDifferentContracts
+		|
+		|UNION ALL
+		|
+		// Customer transaction (receipt)
+		|SELECT
+		|	VALUE(AccumulationRecordType.Receipt),
+		|	ReceiveTransactions.Period,
+		|	ReceiveTransactions.Company,
+		|	ReceiveTransactions.ReceiveBranch AS Branch,
+		|	ReceiveTransactions.Currency,
+		|	ReceiveTransactions.ReceiveLegalName AS LegalName,
+		|	ReceiveTransactions.ReceiveLegalNameContract AS LegalNameContract,
+		|	ReceiveTransactions.Amount
+		|FROM
+		|	ReceiveTransactions AS ReceiveTransactions
+		|WHERE
+		|	ReceiveTransactions.IsReceiveTransactionCustomer
+		|	AND ReceiveTransactions.IsDifferentContracts";
+EndFunction
 
 Function T2014S_AdvancesInfo()
 	Return InformationRegisters.T2014S_AdvancesInfo.T2014S_AdvancesInfo_DebitCreditNote();
@@ -348,6 +518,10 @@ EndFunction
 
 Function R5012B_VendorsAging()
 	Return AccumulationRegisters.R5012B_VendorsAging.R5012B_VendorsAging_Offset();
+EndFunction
+
+Function R5020B_PartnersBalance()
+	Return AccumulationRegisters.R5020B_PartnersBalance.R5020B_PartnersBalance_DebitCreditNote();
 EndFunction
 
 #EndRegion

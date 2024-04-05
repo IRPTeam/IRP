@@ -118,7 +118,7 @@ Function R2020B_AdvancesFromCustomers_BP_CP() Export
 		|	AND OffsetOfAdvances.Recorder REFS Document.CustomersAdvancesClosing";
 EndFunction
 
-Function R2020B_AdvancesFromCustomers_SI_SR_SOC_SRFTA() Export
+Function R2020B_AdvancesFromCustomers_SI_SR_SOC_SRFTA() Export 
 	Return 
 		"SELECT
 		|	CASE
@@ -162,6 +162,7 @@ Function R2020B_AdvancesFromCustomers_DebitNote() Export
 		|	OffsetOfAdvances.Currency,
 		|	OffsetOfAdvances.AdvanceAgreement AS Agreement,
 		|	OffsetOfAdvances.AdvanceProject AS Project,
+		|	OffsetOfAdvances.AdvanceOrder AS Order,
 		|	OffsetOfAdvances.Amount,
 		|	OffsetOfAdvances.Key,
 		|	OffsetOfAdvances.Recorder AS CustomersAdvancesClosing
@@ -176,32 +177,11 @@ EndFunction
 Function R2020B_AdvancesFromCustomers_CreditNote() Export
 	Return 
 		"SELECT
-		|	VALUE(AccumulationRecordType.Receipt) AS RecordType,
-		|	Transactions.Period,
-		|	Transactions.Company,
-		|	Transactions.Branch,
-		|	Transactions.Partner,
-		|	Transactions.LegalName,
-		|	Transactions.Currency,
-		|	Transactions.AdvanceAgreement AS Agreement,
-		|	Transactions.Project,
-		|	Transactions.Amount,
-		|	Transactions.Key,
-		|	UNDEFINED AS CustomersAdvancesClosing
-		|INTO R2020B_AdvancesFromCustomers
-		|FROM
-		|	Transactions AS Transactions
-		|WHERE
-		|	Transactions.IsCustomer
-		|
-		|UNION ALL
-		|
-		|SELECT
 		|	CASE
 		|		WHEN OffsetOfAdvances.RecordType = VALUE(Enum.RecordType.Receipt)
 		|			THEN VALUE(AccumulationRecordType.Receipt)
 		|		ELSE VALUE(AccumulationRecordType.Expense)
-		|	END,
+		|	END AS RecordType,
 		|	OffsetOfAdvances.Period,
 		|	OffsetOfAdvances.Company,
 		|	OffsetOfAdvances.Branch,
@@ -209,10 +189,11 @@ Function R2020B_AdvancesFromCustomers_CreditNote() Export
 		|	OffsetOfAdvances.LegalName,
 		|	OffsetOfAdvances.Currency,
 		|	OffsetOfAdvances.AdvanceAgreement,
-		|	OffsetOfAdvances.AdvanceProject,
+		|	OffsetOfAdvances.AdvanceProject AS Project,
+		|	OffsetOfAdvances.AdvanceOrder AS Order,
 		|	OffsetOfAdvances.Amount,
 		|	OffsetOfAdvances.Key,
-		|	OffsetOfAdvances.Recorder
+		|	OffsetOfAdvances.Recorder AS CustomersAdvancesClosing
 		|FROM
 		|	InformationRegister.T2010S_OffsetOfAdvances AS OffsetOfAdvances
 		|WHERE

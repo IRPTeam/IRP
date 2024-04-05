@@ -7698,10 +7698,12 @@ Scenario: _0154181 additional tables
 			| "$$NumberSalesInvoice024025$$"    |
 		And I select current line in "List" table
 	* Check additional tables
-		And I click "Show hidden tables" button					
-		And I expand "RowIDInfo [1]" group
-		And I move to "RowIDInfo [1]" tab
+		And I click "Show hidden tables" button	
+		And I move to "RowIDInfo (1)" tab				
 		And I activate "Next step" field in "RowIDInfo" table
+		And "RowIDInfo" table contains lines
+			| 'Quantity' | 'Basis' | 'Current step' | 'Next step' |
+			| '20,000'   | ''      | ''             | 'SC'        |
 		And I select current line in "RowIDInfo" table
 		And I input "" text in "Next step" field of "RowIDInfo" table
 		And I finish line editing in "RowIDInfo" table

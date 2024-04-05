@@ -644,7 +644,7 @@ Function ItemList()
 		   |	PurchaseInvoiceItemList.ItemKey AS ItemKey,
 		   |	PurchaseInvoiceItemList.PurchaseOrder AS PurchaseOrder,
 		   |	CASE
-		   |		WHEN PurchaseInvoiceItemList.Agreement.UseOrdersForSettlements
+		   |		WHEN PurchaseInvoiceItemList.Ref.Agreement.UseOrdersForSettlements
 		   |			THEN PurchaseInvoiceItemList.PurchaseOrder
 		   |		ELSE UNDEFINED
 		   |	END AS PurchaseOrderSettlements,

@@ -5,7 +5,7 @@ Procedure OnCreateAtServer(Cancel, StandardProcessing)
 	
 	If ValueIsFilled(Parameters.DocRef) Then
 	 	Object.DocumentRef = Parameters.DocRef;
-	 	MovementsEdit = CommonFunctionsServer.GetRefAttribute(Object.DocumentRef, "ManualMovementsEdit"); //Boolean
+	 	MovementsEdit = CommonFunctionsServer.GetRefAttribute(Object.DocumentRef, "ManualMovementsEdit"); // Boolean
 		ManualMovementsEdit =  Boolean(MovementsEdit);
 	EndIf;
 	///
@@ -34,8 +34,8 @@ EndProcedure
 &AtServer
 Procedure ClearAttributes()
 	
-	AttributesArray = New Array; //Array of FormTable
-	AttributesArrayDelete = New Array; //Array of String	
+	AttributesArray = New Array; // Array of FormTable
+	AttributesArrayDelete = New Array; // Array of String	
 	
 	For Each Row In Object.Movements Do
 		If Items.Find(Row.RegisterName) <> Undefined Then
@@ -76,7 +76,7 @@ Procedure FillObjectMovements()
 
 		MovementsValueTable = PostingServer.GetDocumentMovementsByRegisterName(
 		Object.DocumentRef,
-		ItemMovement.FullName()); //ValueTable
+		ItemMovement.FullName()); // ValueTable
 
 		MovementCount = MovementsValueTable.Count();
 
@@ -92,7 +92,7 @@ Procedure FillObjectMovements()
 	
 	For Each Row In Object.Movements Do
 					
-		ValueTable = StructureTables[Row.RegisterName]; //ValueTable
+		ValueTable = StructureTables[Row.RegisterName]; // ValueTable
 		
 		AddPageForMovement(Row.RegisterName, Row.MovementsCount);
 		AddRegisterTableToForm(Row.RegisterName, ValueTable);
@@ -108,7 +108,7 @@ EndProcedure
 &AtClient
 Procedure RegisterTableOnChange(Item)
 	
-	Parent = Item.Parent; //FormGroup
+	Parent = Item.Parent; // FormGroup
 	Parent.Picture = PictureLib.AppearanceExclamationMark;
 	
 EndProcedure
@@ -122,7 +122,7 @@ Procedure AddPageForMovement(RegisterName, RecordsCount)
 	NewPage.Type	= FormGroupType.Page;
 	NewPage.Title	= StrTemplate("%1 (%2)", RegisterName, RecordsCount);
 	If RecordsCount = 0 Then
-		//NewPage.Visible = False;
+		NewPage.Visible = False;
 	EndIf;
 	
 EndProcedure
@@ -147,7 +147,7 @@ Procedure AddRegisterTableToForm(TableName, MovementsValueTable)
 	
 	CommonFunctionsServer.CreateFormTable(CurrentMovementStructure);
 	
-	Table = ThisObject[TableName]; //FormDataCollection
+	Table = ThisObject[TableName]; // FormDataCollection
 	Table.Load(MovementsValueTable);
 
 EndProcedure
@@ -157,7 +157,7 @@ Async Procedure ManualMovementsEditOnChange(Item)
 	
 	If CommonFunctionsServer.GetRefAttribute(Object.DocumentRef, "ManualMovementsEdit") Then
 		
-		Answer = Await DoQueryBoxAsync(R().QuestionToUser_030, QuestionDialogMode.YesNo,, DialogReturnCode.Yes); //DialogReturnCode
+		Answer = Await DoQueryBoxAsync(R().QuestionToUser_030, QuestionDialogMode.YesNo, , DialogReturnCode.Yes); // DialogReturnCode
 		
 		If Answer = DialogReturnCode.Yes Then 
 			SetDefaultMovementsToDocument();
@@ -219,7 +219,7 @@ Procedure WriteMovementsOnServer(Cancel)
 		DocumentObject = Object.DocumentRef.GetObject();
 		
 		For Each Row In Object.Movements Do
-			Table = ThisObject[Row.RegisterName]; //FormDataCollection
+			Table = ThisObject[Row.RegisterName]; // FormDataCollection
 			VT_Movements = Table.Unload();
 			
 			RegisterRecords = DocumentObject.RegisterRecords[Row.RegisterName];
@@ -258,7 +258,7 @@ Async Procedure MovementAnalysisAsync()
 	
 	If ManualMovementsEdit And Not IsDifferenceInMovements Then
 		
-		Answer = Await DoQueryBoxAsync(R().QuestionToUser_029, QuestionDialogMode.YesNo,, DialogReturnCode.Yes); //DialogReturnCode
+		Answer = Await DoQueryBoxAsync(R().QuestionToUser_029, QuestionDialogMode.YesNo, , DialogReturnCode.Yes); // DialogReturnCode
 		
 		If Answer = DialogReturnCode.Yes Then 
 			SetManualMovementsEditInDocument(False);
@@ -271,7 +271,7 @@ EndProcedure
 &AtServer
 Procedure SetDefaultMovementsToDocument()
 
-	Array = New Array; //Array of DocumentRefDocumentName
+	Array = New Array; // Array of DocumentRefDocumentName
 	Array.Add(Object.DocumentRef);
 	
 	CheckResult = PostingServer.CheckDocumentArray(Array);
@@ -283,10 +283,10 @@ Procedure SetDefaultMovementsToDocument()
 			DotPosition = StrFind(RegInfo.RegName, ".");
 			RegName = Mid(RegInfo.RegName, DotPosition + 1);
 			
-			NewPostingData = RegInfo.NewPostingData; //ValueTable
+			NewPostingData = RegInfo.NewPostingData; // ValueTable
 			
 			TableName = RegName;
-			Table = ThisObject[RegName]; //FormDataCollection
+			Table = ThisObject[RegName]; // FormDataCollection
 			Table.Load(NewPostingData);
 			
 		EndDo;
@@ -323,9 +323,9 @@ EndProcedure
 &AtServer
 Procedure MovementAnalysisAtServer(IsDifferenceInMovements = False)
 	
-	RegEditNames = New Array;//Array of String
+	RegEditNames = New Array;// Array of String
 	
-	Array = New Array; //Array of DocumentRefDocumentName
+	Array = New Array; // Array of DocumentRefDocumentName
 	Array.Add(Object.DocumentRef);
 	CheckResult = PostingServer.CheckDocumentArray(Array);
 	If CheckResult.Count() > 0 Then
@@ -334,7 +334,7 @@ Procedure MovementAnalysisAtServer(IsDifferenceInMovements = False)
 		
 		For Each RegInfo In ArrayItemStructure.RegInfo Do
 			DotPosition = StrFind(RegInfo.RegName, ".");
-			RegEditNames.Add(Mid(RegInfo.RegName, DotPosition+1));
+			RegEditNames.Add(Mid(RegInfo.RegName, DotPosition + 1));
 		EndDo;			
 		
 	EndIf;

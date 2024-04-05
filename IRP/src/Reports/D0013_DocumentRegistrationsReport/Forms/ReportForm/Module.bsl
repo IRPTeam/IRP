@@ -256,7 +256,7 @@ Procedure GenerateReportForOneDocument(DocumentRef, Result, Template, MainTitleA
 		TitleArea.Areas.Title.DetailsUse = SpreadsheetDocumentDetailUse.Cell;
 		TitleArea.Area(1, 1).Details = "OpenForm/" + RegisterName;
 		If IsDifference Then
-			TitleArea.Parameters.RegisterName = TitleArea.Parameters.RegisterName+" !Manual edit";
+			TitleArea.Parameters.RegisterName = TitleArea.Parameters.RegisterName + " !Manual edit";
 			TitleArea.CurrentArea.BackColor = WebColors.Red;
 		EndIf;
 	
@@ -266,7 +266,7 @@ Procedure GenerateReportForOneDocument(DocumentRef, Result, Template, MainTitleA
 		ReportBuilder.Put(Template);
 		
 		If IsDifference And Not ShowTechnicalColumns Then
-			AreaName = StrTemplate("R1C2:R%1C3", Format(Template.TableHeight,"NG=0"));
+			AreaName = StrTemplate("R1C2:R%1C3", Format(Template.TableHeight, "NG=0"));
 			DeleteArea = Template.Area(AreaName);
 			Template.DeleteArea(DeleteArea, SpreadsheetDocumentShiftType.Horizontal);
 		EndIf;
@@ -315,7 +315,7 @@ Procedure OutputDifferenceInRegistersMovements(ParametersStructure)
 		FieldsString = FieldsString + Field;
 		FieldsString = FieldsString + ",";
 	EndDo;
-	FieldsString = Left(FieldsString, StrLen(FieldsString)-1);
+	FieldsString = Left(FieldsString, StrLen(FieldsString) - 1);
 	
 	NewMovementsVT.Columns.Delete("LineNumber");
 	If Not CurrentMovementsVT.Columns.Find("ItemKeyItem") = Undefined Then
@@ -378,7 +378,7 @@ Procedure OutputDifferenceInRegistersMovements(ParametersStructure)
 		NewRowInVT.Potential = True;
 	EndDo;
 	
-	CurrentMovementsVT.Sort("ManualEdit, Potential,"+FieldsString);
+	CurrentMovementsVT.Sort("ManualEdit, Potential," + FieldsString);
 	
 	ReportBuilder.DataSource = New DataSourceDescription(CurrentMovementsVT); 
 	FillFieldPresentations(ReportBuilder, FieldPresentations);
@@ -386,11 +386,12 @@ Procedure OutputDifferenceInRegistersMovements(ParametersStructure)
 	SetConditionalAppearance(ReportBuilder);
 EndProcedure
 
+&AtServer
 Function ValueTableDifference(Table0, Table1, Dimensions) Export
 
 	Columns = "";
 	For Each Column In Table0.Columns Do
-		Columns = Columns + ", " + Column.Name
+		Columns = Columns + ", " + Column.Name;
 	EndDo;
 	Columns = Mid(Columns, 2);
 	

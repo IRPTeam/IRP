@@ -578,14 +578,14 @@ Procedure PostingInfo_CreateTable(NewMovementStorage)
 	CurrentMovementStructure = CommonFunctionsServer.BlankFormTableCreationStructure();
 	CurrentMovementStructure.TableName	= "CurrentMovement";
 	CurrentMovementStructure.ValueTable = Table;
-	CurrentMovementStructure.Form		= ThisForm;
+	CurrentMovementStructure.Form		= ThisObject;
 	
 	CommonFunctionsServer.CreateFormTable(CurrentMovementStructure);
 	
 	NewMovementStructure = CommonFunctionsServer.BlankFormTableCreationStructure();
 	NewMovementStructure.TableName	= "NewMovement";
 	NewMovementStructure.ValueTable = Table;
-	NewMovementStructure.Form		= ThisForm;
+	NewMovementStructure.Form		= ThisObject;
 	
 	CommonFunctionsServer.CreateFormTable(NewMovementStructure);
 	

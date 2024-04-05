@@ -1749,7 +1749,14 @@ Procedure CreateFormTable(CreactionStructure) Export
 			EndIf;
 		EndDo;
 		
-		TypeDescription = New TypeDescription(TypesArrayResult);
+		// 1
+		
+		TypeDescription = New TypeDescription(
+				TypesArrayResult,
+				Column.ValueType.NumberQualifiers,
+				Column.ValueType.StringQualifiers,
+				Column.ValueType.DateQualifiers,
+				Column.ValueType.BinaryDataQualifiers);
 		AttributeDescription = New FormAttribute(Column.Name, TypeDescription, TableName);
 		ArrayAddedAttributes.Add(AttributeDescription);
 	EndDo;

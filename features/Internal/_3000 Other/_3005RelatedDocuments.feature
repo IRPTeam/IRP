@@ -179,7 +179,7 @@ Scenario: _300521 check post/unpost/mark for deletion from report "Related docum
 				| '$$SalesInvoice300521$$'             |
 		And I close all client application windows
 
-Scenario: _300522 show columns in the report "Related documents"
+Scenario: _300522 show colums in the report "Related documents"
 	And I close all client application windows
 	* Select SO
 		Given I open hyperlink "e1cib/list/Document.SalesOrder"

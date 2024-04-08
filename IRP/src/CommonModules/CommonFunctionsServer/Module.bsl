@@ -1749,8 +1749,6 @@ Procedure CreateFormTable(CreactionStructure) Export
 			EndIf;
 		EndDo;
 		
-		// 1
-		
 		TypeDescription = New TypeDescription(
 				TypesArrayResult,
 				Column.ValueType.NumberQualifiers,

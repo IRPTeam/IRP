@@ -32,6 +32,10 @@ EndProcedure
 
 &AtServer
 Procedure UpdateCommandAvailability()
+	CurrentRow = Items.DocumentsTree.CurrentRow;
+	If CurrentRow = Undefined Then
+		Return;
+	EndIf;
 	CurrentData = ThisObject.DocumentsTree.FindByID(Items.DocumentsTree.CurrentRow);
 	If CurrentData = Undefined Then
 		Return;

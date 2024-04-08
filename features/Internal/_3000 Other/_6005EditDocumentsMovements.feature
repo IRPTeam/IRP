@@ -184,6 +184,8 @@ Scenario: _605703 change movements for PI
 		Then there are lines in TestClient message log
 			|'Document`s movements had been modified manually. Reposting or undoposting is disabled due to manual adjustments.'|		
 		And I click "Cancel posting" button
+		Then "1C:Enterprise" window is opened
+		And I click the button named "OK"		
 		Then there are lines in TestClient message log
 			|'The document has manual entries and cannot be canceled.'|
 	* Check manual modifications

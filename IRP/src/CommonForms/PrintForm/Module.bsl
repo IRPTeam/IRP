@@ -47,6 +47,15 @@ Procedure NotificationProcessing(EventName, Parameter)
 	EndIf;
 EndProcedure
 
+// Set current row to PrintFormConfig.
+// 
+// Parameters:
+//  RowID - Number - Row ID
+&AtClient
+Procedure SetCurrentRowToPrintFormConfig(RowID)
+	Items.PrintFormConfig.CurrentRow = RowID;
+EndProcedure
+
 // Fill print form config.
 // 
 // Parameters:
@@ -77,8 +86,9 @@ Procedure FillPrintFormConfig(Parameter)
 			NewStr.Template = NameTemplate;
 			NewStr.SpreadsheetDoc = Parameter.SpreadsheetDoc;
 		EndIf;
+		SetCurrentRowToPrintFormConfig(NewStr.GetID());
 	Else
-		Items.PrintFormConfig.CurrentRow = SearchArray[0].GetID();
+		SetCurrentRowToPrintFormConfig(SearchArray[0].GetID());
 	EndIf;
 	
 	If PrintFormConfig.Count() = 1 And Items.PrintFormConfig.Visible Then

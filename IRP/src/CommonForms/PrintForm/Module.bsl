@@ -58,7 +58,8 @@ Procedure FillPrintFormConfig(Parameter)
 	NameTemplate = Parameter.NameTemplate;
 	FindObj.Insert("Ref", RefDoc);
 	FindObj.Insert("NameTemplate", NameTemplate);
-	If PrintFormConfig.FindRows(FindObj).Count() = 0 Then
+	SearchArray = PrintFormConfig.FindRows(FindObj);
+	If SearchArray.Count() = 0 Then
 		NewStr = PrintFormConfig.Add();
 		NewStr.Print = True;
 		NewStr.Presentation = "" + Parameter.RefDocument;
@@ -76,6 +77,8 @@ Procedure FillPrintFormConfig(Parameter)
 			NewStr.Template = NameTemplate;
 			NewStr.SpreadsheetDoc = Parameter.SpreadsheetDoc;
 		EndIf;
+	Else
+		Items.PrintFormConfig.CurrentRow = SearchArray[0].GetID();
 	EndIf;
 	
 	If PrintFormConfig.Count() = 1 And Items.PrintFormConfig.Visible Then

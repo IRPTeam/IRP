@@ -93,25 +93,25 @@ Scenario: _605703 change movements for PI
 			And I finish line editing in "R1021B_VendorsTransactions" table
 			And I go to line in "R1021B_VendorsTransactions" table
 				| 'Active' | 'Agreement'          | 'Amount'  | 'Basis'                                         | 'Company'      | 'Currency' | 'CurrencyMovementType' | 'DeferredCalculation' | 'LegalName'         | 'LineNumber' | 'Partner'   | 'Period'              | 'RecordType' | 'TransactionCurrency' |
-				| 'Yes'    | 'Vendor Ferron, TRY' | '137 000' | 'Purchase invoice 12 dated 07.09.2020 17:53:38' | 'Main Company' | 'TRY'      | 'Local currency'       | 'No'                  | 'Company Ferron BP' | '2'          | 'Ferron BP' | '07.09.2020 17:53:38' | 'Receipt'    | 'TRY'                 |
+				| 'Yes'    | 'Vendor Ferron, TRY' | '137 000,00' | 'Purchase invoice 12 dated 07.09.2020 17:53:38' | 'Main Company' | 'TRY'      | 'Local currency'       | 'No'                  | 'Company Ferron BP' | '2'          | 'Ferron BP' | '07.09.2020 17:53:38' | 'Receipt'    | 'TRY'                 |
 			And I select current line in "R1021B_VendorsTransactions" table
 			And I select "Expense" exact value from the drop-down list named "R1021B_VendorsTransactionsRecordType" in "R1021B_VendorsTransactions" table
 			And I finish line editing in "R1021B_VendorsTransactions" table
 			And I go to line in "R1021B_VendorsTransactions" table
 				| 'Active' | 'Agreement'          | 'Amount'   | 'Basis'                                         | 'Company'      | 'Currency' | 'CurrencyMovementType' | 'DeferredCalculation' | 'LegalName'         | 'LineNumber' | 'Partner'   | 'Period'              | 'RecordType' | 'TransactionCurrency' |
-				| 'Yes'    | 'Vendor Ferron, TRY' | '23 454,4' | 'Purchase invoice 12 dated 07.09.2020 17:53:38' | 'Main Company' | 'USD'      | 'Reporting currency'   | 'No'                  | 'Company Ferron BP' | '3'          | 'Ferron BP' | '07.09.2020 17:53:38' | 'Receipt'    | 'TRY'                 |
+				| 'Yes'    | 'Vendor Ferron, TRY' | '23 454,40' | 'Purchase invoice 12 dated 07.09.2020 17:53:38' | 'Main Company' | 'USD'      | 'Reporting currency'   | 'No'                  | 'Company Ferron BP' | '3'          | 'Ferron BP' | '07.09.2020 17:53:38' | 'Receipt'    | 'TRY'                 |
 			And I select current line in "R1021B_VendorsTransactions" table
 			And I select "Expense" exact value from the drop-down list named "R1021B_VendorsTransactionsRecordType" in "R1021B_VendorsTransactions" table
 			And I finish line editing in "R1021B_VendorsTransactions" table
 			And I go to line in "R1021B_VendorsTransactions" table
-				| 'Active' | 'Agreement'          | 'Amount'  | 'Basis'                                         | 'Company'      | 'Currency' | 'CurrencyMovementType'    | 'DeferredCalculation' | 'LegalName'         | 'LineNumber' | 'Partner'   | 'Period'              | 'RecordType' | 'TransactionCurrency' |
-				| 'Yes'    | 'Vendor Ferron, TRY' | '137 000' | 'Purchase invoice 12 dated 07.09.2020 17:53:38' | 'Main Company' | 'TRY'      | 'en description is empty' | 'No'                  | 'Company Ferron BP' | '4'          | 'Ferron BP' | '07.09.2020 17:53:38' | 'Receipt'    | 'TRY'                 |
+				| 'Active' | 'Agreement'          | 'Amount'     | 'Basis'                                         | 'Company'      | 'Currency' | 'CurrencyMovementType'    | 'DeferredCalculation' | 'LegalName'         | 'LineNumber' | 'Partner'   | 'Period'              | 'RecordType' | 'TransactionCurrency' |
+				| 'Yes'    | 'Vendor Ferron, TRY' | '137 000,00' | 'Purchase invoice 12 dated 07.09.2020 17:53:38' | 'Main Company' | 'TRY'      | 'en description is empty' | 'No'                  | 'Company Ferron BP' | '4'          | 'Ferron BP' | '07.09.2020 17:53:38' | 'Receipt'    | 'TRY'                 |
 			And I select current line in "R1021B_VendorsTransactions" table
 			And I select "Expense" exact value from the drop-down list named "R1021B_VendorsTransactionsRecordType" in "R1021B_VendorsTransactions" table
 			And I finish line editing in "R1021B_VendorsTransactions" table
 			And I go to line in "R1021B_VendorsTransactions" table
-				| 'Active' | 'Agreement'          | 'Amount'   | 'Basis'                                         | 'Company'      | 'Currency' | 'CurrencyMovementType' | 'DeferredCalculation' | 'LegalName'         | 'LineNumber' | 'Partner'   | 'Period'              | 'RecordType' | 'TransactionCurrency' |
-				| 'Yes'    | 'Vendor Ferron, TRY' | '23 454,4' | 'Purchase invoice 12 dated 07.09.2020 17:53:38' | 'Main Company' | 'USD'      | 'Reporting currency'   | 'No'                  | 'Company Ferron BP' | '3'          | 'Ferron BP' | '07.09.2020 17:53:38' | 'Expense'    | 'TRY'                 |
+				| 'Active' | 'Agreement'          | 'Amount'    | 'Basis'                                         | 'Company'      | 'Currency' | 'CurrencyMovementType' | 'DeferredCalculation' | 'LegalName'         | 'LineNumber' | 'Partner'   | 'Period'              | 'RecordType' | 'TransactionCurrency' |
+				| 'Yes'    | 'Vendor Ferron, TRY' | '23 454,40' | 'Purchase invoice 12 dated 07.09.2020 17:53:38' | 'Main Company' | 'USD'      | 'Reporting currency'   | 'No'                  | 'Company Ferron BP' | '3'          | 'Ferron BP' | '07.09.2020 17:53:38' | 'Expense'    | 'TRY'                 |
 			And I activate field named "R1021B_VendorsTransactionsCompany" in "R1021B_VendorsTransactions" table
 		* Change movements for R1040B_TaxesOutgoing
 			And I move to "R1040B_TaxesOutgoing (3)" tab
@@ -129,45 +129,44 @@ Scenario: _605703 change movements for PI
 			And I select "Receipt" exact value from the drop-down list named "R5020B_PartnersBalanceRecordType" in "R5020B_PartnersBalance" table
 			And I finish line editing in "R5020B_PartnersBalance" table
 			And I go to line in "R5020B_PartnersBalance" table
-				| 'Active' | 'Agreement'          | 'Amount'  | 'Company'      | 'Currency' | 'CurrencyMovementType' | 'Document'                                      | 'LegalName'         | 'LineNumber' | 'Partner'   | 'Period'              | 'RecordType' | 'TransactionCurrency' | 'VendorTransaction' |
-				| 'Yes'    | 'Vendor Ferron, TRY' | '137 000' | 'Main Company' | 'TRY'      | 'Local currency'       | 'Purchase invoice 12 dated 07.09.2020 17:53:38' | 'Company Ferron BP' | '2'          | 'Ferron BP' | '07.09.2020 17:53:38' | 'Expense'    | 'TRY'                 | '137 000'           |
+				| 'Active' | 'Agreement'          | 'Amount'     | 'Company'      | 'Currency' | 'CurrencyMovementType' | 'Document'                                      | 'LegalName'         | 'LineNumber' | 'Partner'   | 'Period'              | 'RecordType' | 'TransactionCurrency' | 'VendorTransaction' |
+				| 'Yes'    | 'Vendor Ferron, TRY' | '137 000,00' | 'Main Company' | 'TRY'      | 'Local currency'       | 'Purchase invoice 12 dated 07.09.2020 17:53:38' | 'Company Ferron BP' | '2'          | 'Ferron BP' | '07.09.2020 17:53:38' | 'Expense'    | 'TRY'                 | '137 000,00'        |			
+			And I select "Receipt" exact value from the drop-down list named "R5020B_PartnersBalanceRecordType" in "R5020B_PartnersBalance" table
+			And I finish line editing in "R5020B_PartnersBalance" table
+			And I go to line in "R5020B_PartnersBalance" table
+				| 'Active' | 'Agreement'          | 'Amount'    | 'Company'      | 'Currency' | 'CurrencyMovementType' | 'Document'                                      | 'LegalName'         | 'LineNumber' | 'Partner'   | 'Period'              | 'RecordType' | 'TransactionCurrency' | 'VendorTransaction' |
+				| 'Yes'    | 'Vendor Ferron, TRY' | '23 454,40' | 'Main Company' | 'USD'      | 'Reporting currency'   | 'Purchase invoice 12 dated 07.09.2020 17:53:38' | 'Company Ferron BP' | '3'          | 'Ferron BP' | '07.09.2020 17:53:38' | 'Expense'    | 'TRY'                 | '23 454,40'         |
 			And I select current line in "R5020B_PartnersBalance" table
 			And I select "Receipt" exact value from the drop-down list named "R5020B_PartnersBalanceRecordType" in "R5020B_PartnersBalance" table
 			And I finish line editing in "R5020B_PartnersBalance" table
 			And I go to line in "R5020B_PartnersBalance" table
-				| 'Active' | 'Agreement'          | 'Amount'   | 'Company'      | 'Currency' | 'CurrencyMovementType' | 'Document'                                      | 'LegalName'         | 'LineNumber' | 'Partner'   | 'Period'              | 'RecordType' | 'TransactionCurrency' | 'VendorTransaction' |
-				| 'Yes'    | 'Vendor Ferron, TRY' | '23 454,4' | 'Main Company' | 'USD'      | 'Reporting currency'   | 'Purchase invoice 12 dated 07.09.2020 17:53:38' | 'Company Ferron BP' | '3'          | 'Ferron BP' | '07.09.2020 17:53:38' | 'Expense'    | 'TRY'                 | '23 454,4'          |
+				| 'Active' | 'Agreement'          | 'Amount'     | 'Company'      | 'Currency' | 'CurrencyMovementType'    | 'Document'                                      | 'LegalName'         | 'LineNumber' | 'Partner'   | 'Period'              | 'RecordType' | 'TransactionCurrency' | 'VendorTransaction' |
+				| 'Yes'    | 'Vendor Ferron, TRY' | '137 000,00' | 'Main Company' | 'TRY'      | 'en description is empty' | 'Purchase invoice 12 dated 07.09.2020 17:53:38' | 'Company Ferron BP' | '4'          | 'Ferron BP' | '07.09.2020 17:53:38' | 'Expense'    | 'TRY'                 | '137 000,00'        |
 			And I select current line in "R5020B_PartnersBalance" table
 			And I select "Receipt" exact value from the drop-down list named "R5020B_PartnersBalanceRecordType" in "R5020B_PartnersBalance" table
 			And I finish line editing in "R5020B_PartnersBalance" table
 			And I go to line in "R5020B_PartnersBalance" table
-				| 'Active' | 'Agreement'          | 'Amount'  | 'Company'      | 'Currency' | 'CurrencyMovementType'    | 'Document'                                      | 'LegalName'         | 'LineNumber' | 'Partner'   | 'Period'              | 'RecordType' | 'TransactionCurrency' | 'VendorTransaction' |
-				| 'Yes'    | 'Vendor Ferron, TRY' | '137 000' | 'Main Company' | 'TRY'      | 'en description is empty' | 'Purchase invoice 12 dated 07.09.2020 17:53:38' | 'Company Ferron BP' | '4'          | 'Ferron BP' | '07.09.2020 17:53:38' | 'Expense'    | 'TRY'                 | '137 000'           |
-			And I select current line in "R5020B_PartnersBalance" table
-			And I select "Receipt" exact value from the drop-down list named "R5020B_PartnersBalanceRecordType" in "R5020B_PartnersBalance" table
-			And I finish line editing in "R5020B_PartnersBalance" table
-			And I go to line in "R5020B_PartnersBalance" table
-				| 'Active' | 'Agreement'          | 'Amount'  | 'Company'      | 'Currency' | 'CurrencyMovementType' | 'Document'                                      | 'LegalName'         | 'LineNumber' | 'Partner'   | 'Period'              | 'RecordType' | 'TransactionCurrency' | 'VendorTransaction' |
-				| 'Yes'    | 'Vendor Ferron, TRY' | '137 000' | 'Main Company' | 'TRY'      | 'TRY'                  | 'Purchase invoice 12 dated 07.09.2020 17:53:38' | 'Company Ferron BP' | '1'          | 'Ferron BP' | '07.09.2020 17:53:38' | 'Receipt'    | 'TRY'                 | '137 000'           |
+				| 'Active' | 'Agreement'          | 'Amount'     | 'Company'      | 'Currency' | 'CurrencyMovementType' | 'Document'                                      | 'LegalName'         | 'LineNumber' | 'Partner'   | 'Period'              | 'RecordType' | 'TransactionCurrency' | 'VendorTransaction' |
+				| 'Yes'    | 'Vendor Ferron, TRY' | '137 000,00' | 'Main Company' | 'TRY'      | 'TRY'                  | 'Purchase invoice 12 dated 07.09.2020 17:53:38' | 'Company Ferron BP' | '1'          | 'Ferron BP' | '07.09.2020 17:53:38' | 'Receipt'    | 'TRY'                 | '137 000,00'        |
 			And I activate "VendorTransaction" field in "R5020B_PartnersBalance" table
 			And I select current line in "R5020B_PartnersBalance" table
 			And I input "-137 000" text in "VendorTransaction" field of "R5020B_PartnersBalance" table
 			And I finish line editing in "R5020B_PartnersBalance" table
 			And I go to line in "R5020B_PartnersBalance" table
-				| 'Active' | 'Agreement'          | 'Amount'  | 'Company'      | 'Currency' | 'CurrencyMovementType' | 'Document'                                      | 'LegalName'         | 'LineNumber' | 'Partner'   | 'Period'              | 'RecordType' | 'TransactionCurrency' | 'VendorTransaction' |
-				| 'Yes'    | 'Vendor Ferron, TRY' | '137 000' | 'Main Company' | 'TRY'      | 'Local currency'       | 'Purchase invoice 12 dated 07.09.2020 17:53:38' | 'Company Ferron BP' | '2'          | 'Ferron BP' | '07.09.2020 17:53:38' | 'Receipt'    | 'TRY'                 | '137 000'           |
+				| 'Active' | 'Agreement'          | 'Amount'     | 'Company'      | 'Currency' | 'CurrencyMovementType' | 'Document'                                      | 'LegalName'         | 'LineNumber' | 'Partner'   | 'Period'              | 'RecordType' | 'TransactionCurrency' | 'VendorTransaction' |
+				| 'Yes'    | 'Vendor Ferron, TRY' | '137 000,00' | 'Main Company' | 'TRY'      | 'Local currency'       | 'Purchase invoice 12 dated 07.09.2020 17:53:38' | 'Company Ferron BP' | '2'          | 'Ferron BP' | '07.09.2020 17:53:38' | 'Receipt'    | 'TRY'                 | '137 000,00'        |
 			And I select current line in "R5020B_PartnersBalance" table
 			And I input "-137 000" text in "VendorTransaction" field of "R5020B_PartnersBalance" table
 			And I finish line editing in "R5020B_PartnersBalance" table
 			And I go to line in "R5020B_PartnersBalance" table
-				| 'Active' | 'Agreement'          | 'Amount'   | 'Company'      | 'Currency' | 'CurrencyMovementType' | 'Document'                                      | 'LegalName'         | 'LineNumber' | 'Partner'   | 'Period'              | 'RecordType' | 'TransactionCurrency' | 'VendorTransaction' |
-				| 'Yes'    | 'Vendor Ferron, TRY' | '23 454,4' | 'Main Company' | 'USD'      | 'Reporting currency'   | 'Purchase invoice 12 dated 07.09.2020 17:53:38' | 'Company Ferron BP' | '3'          | 'Ferron BP' | '07.09.2020 17:53:38' | 'Receipt'    | 'TRY'                 | '23 454,4'          |
+				| 'Active' | 'Agreement'          | 'Amount'    | 'Company'      | 'Currency' | 'CurrencyMovementType' | 'Document'                                      | 'LegalName'         | 'LineNumber' | 'Partner'   | 'Period'              | 'RecordType' | 'TransactionCurrency' | 'VendorTransaction' |
+				| 'Yes'    | 'Vendor Ferron, TRY' | '23 454,40' | 'Main Company' | 'USD'      | 'Reporting currency'   | 'Purchase invoice 12 dated 07.09.2020 17:53:38' | 'Company Ferron BP' | '3'          | 'Ferron BP' | '07.09.2020 17:53:38' | 'Receipt'    | 'TRY'                 | '23 454,40'         |
 			And I select current line in "R5020B_PartnersBalance" table
 			And I input "-23 454,4" text in "VendorTransaction" field of "R5020B_PartnersBalance" table
 			And I finish line editing in "R5020B_PartnersBalance" table
 			And I go to line in "R5020B_PartnersBalance" table
-				| 'Active' | 'Agreement'          | 'Amount'  | 'Company'      | 'Currency' | 'CurrencyMovementType'    | 'Document'                                      | 'LegalName'         | 'LineNumber' | 'Partner'   | 'Period'              | 'RecordType' | 'TransactionCurrency' | 'VendorTransaction' |
-				| 'Yes'    | 'Vendor Ferron, TRY' | '137 000' | 'Main Company' | 'TRY'      | 'en description is empty' | 'Purchase invoice 12 dated 07.09.2020 17:53:38' | 'Company Ferron BP' | '4'          | 'Ferron BP' | '07.09.2020 17:53:38' | 'Receipt'    | 'TRY'                 | '137 000'           |
+				| 'Active' | 'Agreement'          | 'Amount'     | 'Company'      | 'Currency' | 'CurrencyMovementType'    | 'Document'                                      | 'LegalName'         | 'LineNumber' | 'Partner'   | 'Period'              | 'RecordType' | 'TransactionCurrency' | 'VendorTransaction' |
+				| 'Yes'    | 'Vendor Ferron, TRY' | '137 000,00' | 'Main Company' | 'TRY'      | 'en description is empty' | 'Purchase invoice 12 dated 07.09.2020 17:53:38' | 'Company Ferron BP' | '4'          | 'Ferron BP' | '07.09.2020 17:53:38' | 'Receipt'    | 'TRY'                 | '137 000,00'        |
 			And I select current line in "R5020B_PartnersBalance" table
 			And I input "-137 000" text in "VendorTransaction" field of "R5020B_PartnersBalance" table
 			And I finish line editing in "R5020B_PartnersBalance" table
@@ -175,6 +174,19 @@ Scenario: _605703 change movements for PI
 	* Check
 		Then there are lines in TestClient message log
 			|'Movements successfully recorded'|
+	* Try post/unpost document with manual modification
+		When in opened panel I select "Purchase invoices"
+		And I go to line in "List" table
+			| 'Number' |
+			| '12'     |
+		And I select current line in "List" table
+		And I click "Post" button
+		Then there are lines in TestClient message log
+			|'Document`s movements had been modified manually. Reposting or undoposting is disabled due to manual adjustments.'|		
+		And I click "Cancel posting" button
+		Then there are lines in TestClient message log
+			|'The document has manual entries and cannot be canceled.'|
+	* Check manual modifications
 		When in opened panel I select "Purchase invoice 12 dated 07.09.2020 17:53:38: Document registrations report"
 		And I select "R1021 Vendors transactions" exact value from "Register" drop-down list
 		And I expand "Filters" group
@@ -184,14 +196,14 @@ Scenario: _605703 change movements for PI
 			| 'Purchase invoice 12 dated 07.09.2020 17:53:38'       | ''           | ''          | ''                    | ''           | ''             | ''       | ''                             | ''         | ''                     | ''                  | ''          | ''                   | ''                                              | ''      | ''        | ''         | ''                     | ''                         |
 			| 'Register  "R1021 Vendors transactions !Manual edit"' | ''           | ''          | ''                    | ''           | ''             | ''       | ''                             | ''         | ''                     | ''                  | ''          | ''                   | ''                                              | ''      | ''        | ''         | ''                     | ''                         |
 			| ''                                                    | 'ManualEdit' | 'Potential' | 'Period'              | 'RecordType' | 'Company'      | 'Branch' | 'Multi currency movement type' | 'Currency' | 'Transaction currency' | 'Legal name'        | 'Partner'   | 'Agreement'          | 'Basis'                                         | 'Order' | 'Project' | 'Amount'   | 'Deferred calculation' | 'Vendors advances closing' |
-			| ''                                                    | 'No'         | 'Yes'       | '07.09.2020 17:53:38' | 'Receipt'    | 'Main Company' | ''       | 'en description is empty'      | 'TRY'      | 'TRY'                  | 'Company Ferron BP' | 'Ferron BP' | 'Vendor Ferron, TRY' | 'Purchase invoice 12 dated 07.09.2020 17:53:38' | ''      | ''        | '137 000'  | 'No'                   | ''                         |
-			| ''                                                    | 'No'         | 'Yes'       | '07.09.2020 17:53:38' | 'Receipt'    | 'Main Company' | ''       | 'Local currency'               | 'TRY'      | 'TRY'                  | 'Company Ferron BP' | 'Ferron BP' | 'Vendor Ferron, TRY' | 'Purchase invoice 12 dated 07.09.2020 17:53:38' | ''      | ''        | '137 000'  | 'No'                   | ''                         |
+			| ''                                                    | 'No'         | 'Yes'       | '07.09.2020 17:53:38' | 'Receipt'    | 'Main Company' | ''       | 'en description is empty'      | 'TRY'      | 'TRY'                  | 'Company Ferron BP' | 'Ferron BP' | 'Vendor Ferron, TRY' | 'Purchase invoice 12 dated 07.09.2020 17:53:38' | ''      | ''        | '137 000'  | 'No'                   | ''                         |
+			| ''                                                    | 'No'         | 'Yes'       | '07.09.2020 17:53:38' | 'Receipt'    | 'Main Company' | ''       | 'Local currency'               | 'TRY'      | 'TRY'                  | 'Company Ferron BP' | 'Ferron BP' | 'Vendor Ferron, TRY' | 'Purchase invoice 12 dated 07.09.2020 17:53:38' | ''      | ''        | '137 000'  | 'No'                   | ''                         |
 			| ''                                                    | 'No'         | 'Yes'       | '07.09.2020 17:53:38' | 'Receipt'    | 'Main Company' | ''       | 'Reporting currency'           | 'USD'      | 'TRY'                  | 'Company Ferron BP' | 'Ferron BP' | 'Vendor Ferron, TRY' | 'Purchase invoice 12 dated 07.09.2020 17:53:38' | ''      | ''        | '23 454,4' | 'No'                   | ''                         |
-			| ''                                                    | 'No'         | 'Yes'       | '07.09.2020 17:53:38' | 'Receipt'    | 'Main Company' | ''       | 'TRY'                          | 'TRY'      | 'TRY'                  | 'Company Ferron BP' | 'Ferron BP' | 'Vendor Ferron, TRY' | 'Purchase invoice 12 dated 07.09.2020 17:53:38' | ''      | ''        | '137 000'  | 'No'                   | ''                         |
-			| ''                                                    | 'Yes'        | 'No'        | '07.09.2020 17:53:38' | 'Expense'    | 'Main Company' | ''       | 'en description is empty'      | 'TRY'      | 'TRY'                  | 'Company Ferron BP' | 'Ferron BP' | 'Vendor Ferron, TRY' | 'Purchase invoice 12 dated 07.09.2020 17:53:38' | ''      | ''        | '137 000'  | 'No'                   | ''                         |
-			| ''                                                    | 'Yes'        | 'No'        | '07.09.2020 17:53:38' | 'Expense'    | 'Main Company' | ''       | 'Local currency'               | 'TRY'      | 'TRY'                  | 'Company Ferron BP' | 'Ferron BP' | 'Vendor Ferron, TRY' | 'Purchase invoice 12 dated 07.09.2020 17:53:38' | ''      | ''        | '137 000'  | 'No'                   | ''                         |
+			| ''                                                    | 'No'         | 'Yes'       | '07.09.2020 17:53:38' | 'Receipt'    | 'Main Company' | ''       | 'TRY'                          | 'TRY'      | 'TRY'                  | 'Company Ferron BP' | 'Ferron BP' | 'Vendor Ferron, TRY' | 'Purchase invoice 12 dated 07.09.2020 17:53:38' | ''      | ''        | '137 000'  | 'No'                   | ''                         |
+			| ''                                                    | 'Yes'        | 'No'        | '07.09.2020 17:53:38' | 'Expense'    | 'Main Company' | ''       | 'en description is empty'      | 'TRY'      | 'TRY'                  | 'Company Ferron BP' | 'Ferron BP' | 'Vendor Ferron, TRY' | 'Purchase invoice 12 dated 07.09.2020 17:53:38' | ''      | ''        | '137 000'  | 'No'                   | ''                         |
+			| ''                                                    | 'Yes'        | 'No'        | '07.09.2020 17:53:38' | 'Expense'    | 'Main Company' | ''       | 'Local currency'               | 'TRY'      | 'TRY'                  | 'Company Ferron BP' | 'Ferron BP' | 'Vendor Ferron, TRY' | 'Purchase invoice 12 dated 07.09.2020 17:53:38' | ''      | ''        | '137 000'  | 'No'                   | ''                         |
 			| ''                                                    | 'Yes'        | 'No'        | '07.09.2020 17:53:38' | 'Expense'    | 'Main Company' | ''       | 'Reporting currency'           | 'USD'      | 'TRY'                  | 'Company Ferron BP' | 'Ferron BP' | 'Vendor Ferron, TRY' | 'Purchase invoice 12 dated 07.09.2020 17:53:38' | ''      | ''        | '23 454,4' | 'No'                   | ''                         |
-			| ''                                                    | 'Yes'        | 'No'        | '07.09.2020 17:53:38' | 'Expense'    | 'Main Company' | ''       | 'TRY'                          | 'TRY'      | 'TRY'                  | 'Company Ferron BP' | 'Ferron BP' | 'Vendor Ferron, TRY' | 'Purchase invoice 12 dated 07.09.2020 17:53:38' | ''      | ''        | '137 000'  | 'No'                   | ''                         |
+			| ''                                                    | 'Yes'        | 'No'        | '07.09.2020 17:53:38' | 'Expense'    | 'Main Company' | ''       | 'TRY'                          | 'TRY'      | 'TRY'                  | 'Company Ferron BP' | 'Ferron BP' | 'Vendor Ferron, TRY' | 'Purchase invoice 12 dated 07.09.2020 17:53:38' | ''      | ''        | '137 000'  | 'No'                   | ''                         |
 		And I select "R1040 Taxes outgoing" exact value from "Register" drop-down list
 		And I click "Generate report" button
 		Then "ResultTable" spreadsheet document is equal
@@ -204,18 +216,18 @@ Scenario: _605703 change movements for PI
 			| ''                                              | 'Yes'        | 'No'        | '07.09.2020 17:53:38' | 'Receipt'    | 'Main Company' | ''       | 'VAT' | '18%'      | ''                  | '35 593,23'      | '6 406,78'   |
 		And I select "R5020 Partners balance" exact value from "Register" drop-down list
 		And I click "Generate report" button
-		// Then "ResultTable" spreadsheet document is equal
-		// 	| 'Purchase invoice 12 dated 07.09.2020 17:53:38'   | ''           | ''          | ''                    | ''           | ''             | ''       | ''          | ''                  | ''                   | ''                                              | ''         | ''                             | ''                     | ''          | ''                     | ''                 | ''                   | ''               | ''                  | ''                 |
-		// 	| 'Register  "R5020 Partners balance !Manual edit"' | ''           | ''          | ''                    | ''           | ''             | ''       | ''          | ''                  | ''                   | ''                                              | ''         | ''                             | ''                     | ''          | ''                     | ''                 | ''                   | ''               | ''                  | ''                 |
-		// 	| ''                                                | 'ManualEdit' | 'Potential' | 'Period'              | 'RecordType' | 'Company'      | 'Branch' | 'Partner'   | 'Legal name'        | 'Agreement'          | 'Document'                                      | 'Currency' | 'Multi currency movement type' | 'Transaction currency' | 'Amount'    | 'Customer transaction' | 'Customer advance' | 'Vendor transaction' | 'Vendor advance' | 'Other transaction' | 'Advances closing' |
-		// 	| ''                                                | 'No'         | 'Yes'       | '07.09.2020 17:53:38' | 'Expense'    | 'Main Company' | ''       | 'Ferron BP' | 'Company Ferron BP' | 'Vendor Ferron, TRY' | 'Purchase invoice 12 dated 07.09.2020 17:53:38' | 'TRY'      | 'en description is empty'      | 'TRY'                  | '137 000'   | ''                     | ''                 | '137 000'            | ''               | ''                  | ''                 |
-		// 	| ''                                                | 'No'         | 'Yes'       | '07.09.2020 17:53:38' | 'Expense'    | 'Main Company' | ''       | 'Ferron BP' | 'Company Ferron BP' | 'Vendor Ferron, TRY' | 'Purchase invoice 12 dated 07.09.2020 17:53:38' | 'TRY'      | 'Local currency'               | 'TRY'                  | '137 000'   | ''                     | ''                 | '137 000'            | ''               | ''                  | ''                 |
-		// 	| ''                                                | 'No'         | 'Yes'       | '07.09.2020 17:53:38' | 'Expense'    | 'Main Company' | ''       | 'Ferron BP' | 'Company Ferron BP' | 'Vendor Ferron, TRY' | 'Purchase invoice 12 dated 07.09.2020 17:53:38' | 'TRY'      | 'TRY'                          | 'TRY'                  | '137 000'   | ''                     | ''                 | '137 000'            | ''               | ''                  | ''                 |
-		// 	| ''                                                | 'No'         | 'Yes'       | '07.09.2020 17:53:38' | 'Expense'    | 'Main Company' | ''       | 'Ferron BP' | 'Company Ferron BP' | 'Vendor Ferron, TRY' | 'Purchase invoice 12 dated 07.09.2020 17:53:38' | 'USD'      | 'Reporting currency'           | 'TRY'                  | '23 454,4'  | ''                     | ''                 | '23 454,4'           | ''               | ''                  | ''                 |
-		// 	| ''                                                | 'Yes'        | 'No'        | '07.09.2020 17:53:38' | 'Receipt'    | 'Main Company' | ''       | 'Ferron BP' | 'Company Ferron BP' | 'Vendor Ferron, TRY' | 'Purchase invoice 12 dated 07.09.2020 17:53:38' | 'TRY'      | 'en description is empty'      | 'TRY'                  | '-137 000'  | ''                     | ''                 | '-137 000'           | ''               | ''                  | ''                 |
-		// 	| ''                                                | 'Yes'        | 'No'        | '07.09.2020 17:53:38' | 'Receipt'    | 'Main Company' | ''       | 'Ferron BP' | 'Company Ferron BP' | 'Vendor Ferron, TRY' | 'Purchase invoice 12 dated 07.09.2020 17:53:38' | 'TRY'      | 'Local currency'               | 'TRY'                  | '-137 000'  | ''                     | ''                 | '-137 000'           | ''               | ''                  | ''                 |
-		// 	| ''                                                | 'Yes'        | 'No'        | '07.09.2020 17:53:38' | 'Receipt'    | 'Main Company' | ''       | 'Ferron BP' | 'Company Ferron BP' | 'Vendor Ferron, TRY' | 'Purchase invoice 12 dated 07.09.2020 17:53:38' | 'TRY'      | 'TRY'                          | 'TRY'                  | '-137 000'  | ''                     | ''                 | '-137 000'           | ''               | ''                  | ''                 |
-		// 	| ''                                                | 'Yes'        | 'No'        | '07.09.2020 17:53:38' | 'Receipt'    | 'Main Company' | ''       | 'Ferron BP' | 'Company Ferron BP' | 'Vendor Ferron, TRY' | 'Purchase invoice 12 dated 07.09.2020 17:53:38' | 'USD'      | 'Reporting currency'           | 'TRY'                  | '-23 454,4' | ''                     | ''                 | '-23 454,4'          | ''               | ''                  | ''                 |
+		Then "ResultTable" spreadsheet document is equal
+			| 'Purchase invoice 12 dated 07.09.2020 17:53:38'   | ''           | ''          | ''                    | ''           | ''             | ''       | ''          | ''                  | ''                   | ''                                              | ''         | ''                             | ''                     | ''          | ''                     | ''                 | ''                   | ''               | ''                  | ''                 |
+			| 'Register  "R5020 Partners balance !Manual edit"' | ''           | ''          | ''                    | ''           | ''             | ''       | ''          | ''                  | ''                   | ''                                              | ''         | ''                             | ''                     | ''          | ''                     | ''                 | ''                   | ''               | ''                  | ''                 |
+			| ''                                                | 'ManualEdit' | 'Potential' | 'Period'              | 'RecordType' | 'Company'      | 'Branch' | 'Partner'   | 'Legal name'        | 'Agreement'          | 'Document'                                      | 'Currency' | 'Multi currency movement type' | 'Transaction currency' | 'Amount'    | 'Customer transaction' | 'Customer advance' | 'Vendor transaction' | 'Vendor advance' | 'Other transaction' | 'Advances closing' |
+			| ''                                                | 'No'         | 'Yes'       | '07.09.2020 17:53:38' | 'Expense'    | 'Main Company' | ''       | 'Ferron BP' | 'Company Ferron BP' | 'Vendor Ferron, TRY' | 'Purchase invoice 12 dated 07.09.2020 17:53:38' | 'TRY'      | 'en description is empty'      | 'TRY'                  | ''          | ''                     | ''                 | '137 000'            | ''               | ''                  | ''                 |
+			| ''                                                | 'No'         | 'Yes'       | '07.09.2020 17:53:38' | 'Expense'    | 'Main Company' | ''       | 'Ferron BP' | 'Company Ferron BP' | 'Vendor Ferron, TRY' | 'Purchase invoice 12 dated 07.09.2020 17:53:38' | 'TRY'      | 'Local currency'               | 'TRY'                  | ''          | ''                     | ''                 | '137 000'            | ''               | ''                  | ''                 |
+			| ''                                                | 'No'         | 'Yes'       | '07.09.2020 17:53:38' | 'Expense'    | 'Main Company' | ''       | 'Ferron BP' | 'Company Ferron BP' | 'Vendor Ferron, TRY' | 'Purchase invoice 12 dated 07.09.2020 17:53:38' | 'TRY'      | 'TRY'                          | 'TRY'                  | ''          | ''                     | ''                 | '137 000'            | ''               | ''                  | ''                 |
+			| ''                                                | 'No'         | 'Yes'       | '07.09.2020 17:53:38' | 'Expense'    | 'Main Company' | ''       | 'Ferron BP' | 'Company Ferron BP' | 'Vendor Ferron, TRY' | 'Purchase invoice 12 dated 07.09.2020 17:53:38' | 'USD'      | 'Reporting currency'           | 'TRY'                  | ''          | ''                     | ''                 | '23 454,4'           | ''               | ''                  | ''                 |
+			| ''                                                | 'Yes'        | 'No'        | '07.09.2020 17:53:38' | 'Receipt'    | 'Main Company' | ''       | 'Ferron BP' | 'Company Ferron BP' | 'Vendor Ferron, TRY' | 'Purchase invoice 12 dated 07.09.2020 17:53:38' | 'TRY'      | 'en description is empty'      | 'TRY'                  | '-137 000'  | ''                     | ''                 | '-137 000'           | ''               | ''                  | ''                 |
+			| ''                                                | 'Yes'        | 'No'        | '07.09.2020 17:53:38' | 'Receipt'    | 'Main Company' | ''       | 'Ferron BP' | 'Company Ferron BP' | 'Vendor Ferron, TRY' | 'Purchase invoice 12 dated 07.09.2020 17:53:38' | 'TRY'      | 'Local currency'               | 'TRY'                  | '-137 000'  | ''                     | ''                 | '-137 000'           | ''               | ''                  | ''                 |
+			| ''                                                | 'Yes'        | 'No'        | '07.09.2020 17:53:38' | 'Receipt'    | 'Main Company' | ''       | 'Ferron BP' | 'Company Ferron BP' | 'Vendor Ferron, TRY' | 'Purchase invoice 12 dated 07.09.2020 17:53:38' | 'TRY'      | 'TRY'                          | 'TRY'                  | '-137 000'  | ''                     | ''                 | '-137 000'           | ''               | ''                  | ''                 |
+			| ''                                                | 'Yes'        | 'No'        | '07.09.2020 17:53:38' | 'Receipt'    | 'Main Company' | ''       | 'Ferron BP' | 'Company Ferron BP' | 'Vendor Ferron, TRY' | 'Purchase invoice 12 dated 07.09.2020 17:53:38' | 'USD'      | 'Reporting currency'           | 'TRY'                  | '-23 454,4' | ''                     | ''                 | '-23 454,4'          | ''               | ''                  | ''                 |	
 		And I close all client application windows
 	* Cancel manual changes
 		Given I open hyperlink "e1cib/list/Document.PurchaseInvoice"
@@ -239,10 +251,10 @@ Scenario: _605703 change movements for PI
 			| 'Purchase invoice 12 dated 07.09.2020 17:53:38' | ''                    | ''           | ''             | ''       | ''                             | ''         | ''                     | ''                  | ''          | ''                   | ''                                              | ''      | ''        | ''         | ''                     | ''                         |
 			| 'Register  "R1021 Vendors transactions"'        | ''                    | ''           | ''             | ''       | ''                             | ''         | ''                     | ''                  | ''          | ''                   | ''                                              | ''      | ''        | ''         | ''                     | ''                         |
 			| ''                                              | 'Period'              | 'RecordType' | 'Company'      | 'Branch' | 'Multi currency movement type' | 'Currency' | 'Transaction currency' | 'Legal name'        | 'Partner'   | 'Agreement'          | 'Basis'                                         | 'Order' | 'Project' | 'Amount'   | 'Deferred calculation' | 'Vendors advances closing' |
-			| ''                                              | '07.09.2020 17:53:38' | 'Receipt'    | 'Main Company' | ''       | 'Local currency'               | 'TRY'      | 'TRY'                  | 'Company Ferron BP' | 'Ferron BP' | 'Vendor Ferron, TRY' | 'Purchase invoice 12 dated 07.09.2020 17:53:38' | ''      | ''        | '137 000'  | 'No'                   | ''                         |
+			| ''                                              | '07.09.2020 17:53:38' | 'Receipt'    | 'Main Company' | ''       | 'Local currency'               | 'TRY'      | 'TRY'                  | 'Company Ferron BP' | 'Ferron BP' | 'Vendor Ferron, TRY' | 'Purchase invoice 12 dated 07.09.2020 17:53:38' | ''      | ''        | '137 000'  | 'No'                   | ''                         |
 			| ''                                              | '07.09.2020 17:53:38' | 'Receipt'    | 'Main Company' | ''       | 'Reporting currency'           | 'USD'      | 'TRY'                  | 'Company Ferron BP' | 'Ferron BP' | 'Vendor Ferron, TRY' | 'Purchase invoice 12 dated 07.09.2020 17:53:38' | ''      | ''        | '23 454,4' | 'No'                   | ''                         |
-			| ''                                              | '07.09.2020 17:53:38' | 'Receipt'    | 'Main Company' | ''       | 'TRY'                          | 'TRY'      | 'TRY'                  | 'Company Ferron BP' | 'Ferron BP' | 'Vendor Ferron, TRY' | 'Purchase invoice 12 dated 07.09.2020 17:53:38' | ''      | ''        | '137 000'  | 'No'                   | ''                         |
-			| ''                                              | '07.09.2020 17:53:38' | 'Receipt'    | 'Main Company' | ''       | 'en description is empty'      | 'TRY'      | 'TRY'                  | 'Company Ferron BP' | 'Ferron BP' | 'Vendor Ferron, TRY' | 'Purchase invoice 12 dated 07.09.2020 17:53:38' | ''      | ''        | '137 000'  | 'No'                   | ''                         |
+			| ''                                              | '07.09.2020 17:53:38' | 'Receipt'    | 'Main Company' | ''       | 'TRY'                          | 'TRY'      | 'TRY'                  | 'Company Ferron BP' | 'Ferron BP' | 'Vendor Ferron, TRY' | 'Purchase invoice 12 dated 07.09.2020 17:53:38' | ''      | ''        | '137 000'  | 'No'                   | ''                         |
+			| ''                                              | '07.09.2020 17:53:38' | 'Receipt'    | 'Main Company' | ''       | 'en description is empty'      | 'TRY'      | 'TRY'                  | 'Company Ferron BP' | 'Ferron BP' | 'Vendor Ferron, TRY' | 'Purchase invoice 12 dated 07.09.2020 17:53:38' | ''      | ''        | '137 000'  | 'No'                   | ''                         |
 		And I select "R1040 Taxes outgoing" exact value from "Register" drop-down list
 		And I click "Generate report" button
 		Then "ResultTable" spreadsheet document is equal
@@ -252,6 +264,18 @@ Scenario: _605703 change movements for PI
 			| ''                                              | '07.09.2020 17:53:38' | 'Receipt'    | 'Main Company' | ''       | 'VAT' | '18%'      | ''                  | '16 949,15'      | '3 050,85'   |
 			| ''                                              | '07.09.2020 17:53:38' | 'Receipt'    | 'Main Company' | ''       | 'VAT' | '18%'      | ''                  | '35 593,22'      | '6 406,78'   |
 			| ''                                              | '07.09.2020 17:53:38' | 'Receipt'    | 'Main Company' | ''       | 'VAT' | '18%'      | ''                  | '63 559,32'      | '11 440,68'  |
+		And I select "R5020 Partners balance" exact value from "Register" drop-down list
+		And I click "Generate report" button
+		Then "ResultTable" spreadsheet document is equal
+			| 'Purchase invoice 12 dated 07.09.2020 17:53:38' | ''            | ''                    | ''          | ''                     | ''                 | ''                   | ''               | ''                  | ''             | ''       | ''          | ''                  | ''                   | ''                                              | ''         | ''                             | ''                     | ''                 |
+			| 'Document registrations records'                | ''            | ''                    | ''          | ''                     | ''                 | ''                   | ''               | ''                  | ''             | ''       | ''          | ''                  | ''                   | ''                                              | ''         | ''                             | ''                     | ''                 |
+			| 'Register  "R5020 Partners balance"'            | ''            | ''                    | ''          | ''                     | ''                 | ''                   | ''               | ''                  | ''             | ''       | ''          | ''                  | ''                   | ''                                              | ''         | ''                             | ''                     | ''                 |
+			| ''                                              | 'Record type' | 'Period'              | 'Resources' | ''                     | ''                 | ''                   | ''               | ''                  | 'Dimensions'   | ''       | ''          | ''                  | ''                   | ''                                              | ''         | ''                             | ''                     | 'Attributes'       |
+			| ''                                              | ''            | ''                    | 'Amount'    | 'Customer transaction' | 'Customer advance' | 'Vendor transaction' | 'Vendor advance' | 'Other transaction' | 'Company'      | 'Branch' | 'Partner'   | 'Legal name'        | 'Agreement'          | 'Document'                                      | 'Currency' | 'Multi currency movement type' | 'Transaction currency' | 'Advances closing' |
+			| ''                                              | 'Expense'     | '07.09.2020 17:53:38' | '23 454,4'  | ''                     | ''                 | '23 454,4'           | ''               | ''                  | 'Main Company' | ''       | 'Ferron BP' | 'Company Ferron BP' | 'Vendor Ferron, TRY' | 'Purchase invoice 12 dated 07.09.2020 17:53:38' | 'USD'      | 'Reporting currency'           | 'TRY'                  | ''                 |
+			| ''                                              | 'Expense'     | '07.09.2020 17:53:38' | '137 000'   | ''                     | ''                 | '137 000'            | ''               | ''                  | 'Main Company' | ''       | 'Ferron BP' | 'Company Ferron BP' | 'Vendor Ferron, TRY' | 'Purchase invoice 12 dated 07.09.2020 17:53:38' | 'TRY'      | 'Local currency'               | 'TRY'                  | ''                 |
+			| ''                                              | 'Expense'     | '07.09.2020 17:53:38' | '137 000'   | ''                     | ''                 | '137 000'            | ''               | ''                  | 'Main Company' | ''       | 'Ferron BP' | 'Company Ferron BP' | 'Vendor Ferron, TRY' | 'Purchase invoice 12 dated 07.09.2020 17:53:38' | 'TRY'      | 'TRY'                          | 'TRY'                  | ''                 |
+			| ''                                              | 'Expense'     | '07.09.2020 17:53:38' | '137 000'   | ''                     | ''                 | '137 000'            | ''               | ''                  | 'Main Company' | ''       | 'Ferron BP' | 'Company Ferron BP' | 'Vendor Ferron, TRY' | 'Purchase invoice 12 dated 07.09.2020 17:53:38' | 'TRY'      | 'en description is empty'      | 'TRY'                  | ''                 |	
 		And I close all client application windows
 		
 Scenario: _605704 check Reread button in the Data processor Edit documents movements
@@ -268,7 +292,7 @@ Scenario: _605704 check Reread button in the Data processor Edit documents movem
 		And I move to "R4011B_FreeStocks (3)" tab
 		And I go to line in "R4011B_FreeStocks" table
 			| 'Active' | 'ItemKey'   | 'Quantity' | 'RecordType' | 'Store'    |
-			| 'Yes'    | '36/Yellow' | '300'      | 'Receipt'    | 'Store 01' |
+			| 'Yes'    | '36/Yellow' | '300,000'  | 'Receipt'    | 'Store 01' |
 		And I select current line in "R4011B_FreeStocks" table
 		And I click choice button of the attribute named "R4011B_FreeStocksStore" in "R4011B_FreeStocks" table
 		And I go to line in "List" table
@@ -278,34 +302,20 @@ Scenario: _605704 check Reread button in the Data processor Edit documents movem
 		And I finish line editing in "R4011B_FreeStocks" table
 		And "R4011B_FreeStocks" table became equal
 			| 'Period'              | 'LineNumber' | 'Active' | 'RecordType' | 'Store'    | 'ItemKey'   | 'Quantity' |
-			| '07.09.2020 17:53:38' | '1'          | 'Yes'    | 'Receipt'    | 'Store 01' | 'M/White'   | '100'      |
-			| '07.09.2020 17:53:38' | '2'          | 'Yes'    | 'Receipt'    | 'Store 01' | 'L/Green'   | '200'      |
-			| '07.09.2020 17:53:38' | '3'          | 'Yes'    | 'Receipt'    | 'Store 02' | '36/Yellow' | '300'      |
+			| '07.09.2020 17:53:38' | '1'          | 'Yes'    | 'Receipt'    | 'Store 01' | 'M/White'   | '100,000'  |
+			| '07.09.2020 17:53:38' | '2'          | 'Yes'    | 'Receipt'    | 'Store 01' | 'L/Green'   | '200,000'  |
+			| '07.09.2020 17:53:38' | '3'          | 'Yes'    | 'Receipt'    | 'Store 02' | '36/Yellow' | '300,000'  |
 	* Reread movements
 		And I click "Reread posting data" button
 		And "R4011B_FreeStocks" table became equal
 			| 'Active' | 'RecordType' | 'Store'    | 'ItemKey'   | 'Quantity' |
-			| 'Yes'    | 'Receipt'    | 'Store 01' | 'M/White'   | '100'      |
-			| 'Yes'    | 'Receipt'    | 'Store 01' | 'L/Green'   | '200'      |
-			| 'Yes'    | 'Receipt'    | 'Store 01' | '36/Yellow' | '300'      |
+			| 'Yes'    | 'Receipt'    | 'Store 01' | 'M/White'   | '100,000'  |
+			| 'Yes'    | 'Receipt'    | 'Store 01' | 'L/Green'   | '200,000'  |
+			| 'Yes'    | 'Receipt'    | 'Store 01' | '36/Yellow' | '300,000'  |
 	And I close all client application windows
 	
 
 
-// Scenario: _605710 check that Editing movements is unavailable without role Manual register edit
-// 	And I close all client application windows
-// 	And I connect "TestAdmin" TestClient using "ABrown" login and "" password
-// 	And Delay 3
-// 	* Select PI
-// 		Given I open hyperlink "e1cib/list/Document.PurchaseInvoice"
-// 		And I go to line in "List" table
-// 			| 'Number'    |
-// 			| '12' |
-// 	* Check that Editing movements button is unavailable
-// 		And I click "Registrations report info" button
-// 		When I Check the steps for Exception
-// 			| 'And I click "Edit" button'    |
-	
 				
 
 

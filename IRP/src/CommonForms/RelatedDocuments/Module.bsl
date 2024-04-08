@@ -191,9 +191,18 @@ EndProcedure
 
 &AtClient
 Procedure Refresh(Command)
+	
+	RefreshReport();
+		
+EndProcedure
+
+&AtClient
+Procedure RefreshReport()
+	
 	SetCurrentDocument();
 	GenerateTree();
 	ExpandDocumentsTree();
+	
 EndProcedure
 
 &AtClient
@@ -331,9 +340,9 @@ Procedure OutputWithOutParents(ListOfDocuments, CurrentBranch)
 		QuerySelection = Query.Execute().Select();
 		If QuerySelection.Next() Then
 			If GetFromCache(QuerySelection.Ref) = Undefined Then
-
 				NewRow = CurrentBranch.GetItems().Add();
-
+				FillPropertyValues(NewRow, QuerySelection);
+				
 				NewRow.Ref = QuerySelection.Ref;
 				NewRow.Posted = QuerySelection.Posted;
 				NewRow.DeletionMark = QuerySelection.DeletionMark;
@@ -395,8 +404,8 @@ Procedure OutputChildrenDocuments(TreeRow)
 		
 		DocMeta = Metadata.Documents[KeyValue.Key];
 		
-		AllAtributes = GetAllAttributesForDucument(DocMeta);
-		For Each DocsAttribute In AllAtributes Do
+		AllAttributes = GetAllAttributesForDocument(DocMeta);
+		For Each DocsAttribute In AllAttributes Do
 			AddRowToAllAttributesValueTable(DocsAttribute);
 		EndDo;
 		AllAttributesValueTable.Sort("AttributeName");
@@ -480,30 +489,30 @@ Function DocumentHaveAmount(DocumentMetadata)
 EndFunction
 
 &AtServer
-Function GetAllAttributesForDucument(DocumentMetadata)
-	AllAtributes = New Array;
+Function GetAllAttributesForDocument(DocumentMetadata)
+	AllAttributes = New Array;
 	For Each Attribute In DocumentMetadata.Attributes Do
-		AllAtributes.Add(Attribute);
+		AllAttributes.Add(Attribute);
 	EndDo;
 	For Each Attribute In DocumentMetadata.StandardAttributes Do
-		AllAtributes.Add(Attribute);
+		AllAttributes.Add(Attribute);
 	EndDo;
-	Return AllAtributes;
+	Return AllAttributes;
 EndFunction
 
 &AtServer
 Function GetSelectedAttibutesForDocument(DocumentMetadata)
 	
-	AllAttributes = GetAllAttributesForDucument(DocumentMetadata);
+	AllAttributes = GetAllAttributesForDocument(DocumentMetadata);
 	AllAttributesStrings = New Array;
 	For Each AttributeInArray In AllAttributes Do
 		AllAttributesStrings.Add(AttributeInArray.Name);
 	EndDo;
 	
-	SelectedAttibutes = AllAttributesValueTable.FindRows(New Structure("Check", True));
+	SelectedAttributes = AllAttributesValueTable.FindRows(New Structure("Check", True));
 	
 	AttributeString = "";
-	For Each RowAttribute In SelectedAttibutes Do
+	For Each RowAttribute In SelectedAttributes Do
 		If AllAttributesStrings.Find(RowAttribute.AttributeName) = Undefined Then
 			AttributeString = AttributeString + ", " + "Null";
 			Continue;
@@ -581,37 +590,44 @@ Procedure CreateColumnsAtServer()
 		AttributesNamesArray.Add(AttributeInArray.Name);
 	EndDo;
 	
-	AttribitesToDelete = New Array;
-	AttriburesToAdd = New Array;
+	AttributesToDelete = New Array;
+	AttributesToAdd = New Array;
 	
 	For Each Row In AllAttributesValueTable Do
 		
-		AttributeExsist =  AttributesNamesArray.Find(Row.AttributeName) <> Undefined;
-		If AttributeExsist And Row.Check Then
+		AttributeExist =  AttributesNamesArray.Find(Row.AttributeName) <> Undefined;
+		If AttributeExist And Row.Check Then
 			Continue;
-		ElsIf AttributeExsist And Not Row.Check Then
-			AttribitesToDelete.Add("DocumentsTree."+Row.AttributeName);
-		ElsIf Not AttributeExsist And Not Row.Check Then
+		ElsIf AttributeExist And Not Row.Check Then
+			AttributesToDelete.Add("DocumentsTree." + Row.AttributeName);
+		ElsIf Not AttributeExist And Not Row.Check Then
 			Continue;
-		ElsIf Not AttributeExsist And Row.Check Then
-			AttriburesToAdd.Add(Row);
+		ElsIf Not AttributeExist And Row.Check Then
+			AttributesToAdd.Add(Row);
 		EndIf;
 	EndDo;
 	
-	AtttibutesArray = New Array;
-	For Each ArrayItem In AttriburesToAdd Do
-		NewAttribute = New FormAttribute(ArrayItem.AttributeName, ArrayItem.AttributeType,"DocumentsTree" ,ArrayItem.AttributeSynonym);
-		AtttibutesArray.Add(NewAttribute);
+	AttributesArray = New Array;
+	For Each ArrayItem In AttributesToAdd Do
+		NewAttribute = New FormAttribute(
+			ArrayItem.AttributeName,
+			ArrayItem.AttributeType,
+			"DocumentsTree",
+			ArrayItem.AttributeSynonym);
+		AttributesArray.Add(NewAttribute);
 	EndDo;
-	If AtttibutesArray.Count() > 0 Or AttribitesToDelete.Count() > 0 Then 
-		ChangeAttributes(AtttibutesArray, AttribitesToDelete);
+	If AttributesArray.Count() > 0 Or AttributesToDelete.Count() > 0 Then 
+		ChangeAttributes(AttributesArray, AttributesToDelete);
 	EndIf;
 	
-	For Each ArrayItem In AttriburesToAdd Do
-		NewColumn = Items.Добавить(ArrayItem.AttributeName+"DocumentsTree", Type("FormField"), Items.DocumentsTree);
+	For Each ArrayItem In AttributesToAdd Do
+		NewColumn = Items.Add(
+			ArrayItem.AttributeName + "DocumentsTree", 
+			Type("FormField"),
+			Items.DocumentsTree);
 		NewColumn.DataPath = "DocumentsTree."+ArrayItem.AttributeName;
-		NewColumn.Заголовок = ArrayItem.AttributeSynonym;
-		NewColumn.Вид = ВидПоляФормы.ПолеВвода;
+		NewColumn.Title = ArrayItem.AttributeSynonym;
+		NewColumn.Type = FormFieldType.InputField;
 	EndDo;
 	
 EndProcedure
@@ -619,10 +635,11 @@ EndProcedure
 &AtClient
 Procedure AllAttributesValueTableOnChange(Item)
 	CreateColumnsAtServer();
+	RefreshReport();
 EndProcedure
 
 &AtClient
-Procedure ShowSettings(Command)
+Procedure ShowColumns(Command)
 	Items.DocumentsTreeShowSettings.Check = Not Items.DocumentsTreeShowSettings.Check;
 	
 	SetVisibleToAllAttributesValueTable(Items.DocumentsTreeShowSettings.Check);

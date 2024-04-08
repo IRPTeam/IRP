@@ -454,7 +454,7 @@
             <horizontalAlign>Left</horizontalAlign>
           </extInfo>
         </extendedTooltip>
-        <commandName>Form.Command.ShowSettings</commandName>
+        <commandName>Form.Command.ShowColumns</commandName>
         <representation>PictureAndText</representation>
         <autoMaxWidth>true</autoMaxWidth>
         <autoMaxHeight>true</autoMaxHeight>
@@ -1759,22 +1759,22 @@
     <currentRowUse>Auto</currentRowUse>
   </formCommands>
   <formCommands>
-    <name>ShowSettings</name>
+    <name>ShowColumns</name>
     <title>
       <key>en</key>
-      <value>Show settings</value>
+      <value>Show columns</value>
     </title>
     <id>5</id>
     <toolTip>
       <key>en</key>
-      <value>Show settings</value>
+      <value>Show additional columns</value>
     </toolTip>
     <use>
       <common>true</common>
     </use>
     <action xsi:type="form:FormCommandHandlerContainer">
       <handler>
-        <name>ShowSettings</name>
+        <name>ShowColumns</name>
       </handler>
     </action>
     <currentRowUse>Auto</currentRowUse>

@@ -100,11 +100,15 @@ Function GetDocumentsStructure(ArrayOfBasisDocuments)
 	ArrayOfTables.Add(GetDocumentTable_SalesReportFromTradeAgent(ArrayOf_SalesReportFromTradeAgent));
 	ArrayOfTables.Add(GetDocumentTable_EmployeeCashAdvance(ArrayOf_EmployeeCashAdvance));
 	
-	Return JoinDocumentsStructure(ArrayOfTables);
+	DocumentAmountTable = DocumentsGenerationServer.CreateDocumentAmountTable();
+	DocumentsGenerationServer.FillDocumentAmountTable(DocumentAmountTable, ArrayOf_SalesInvoice, "SalesOrder");
+	DocumentsGenerationServer.FillDocumentAmountTable(DocumentAmountTable, ArrayOf_PurchaseReturn);
+	
+	Return JoinDocumentsStructure(ArrayOfTables, DocumentAmountTable);
 EndFunction
 
 &AtServer
-Function JoinDocumentsStructure(ArrayOfTables)
+Function JoinDocumentsStructure(ArrayOfTables, DocumentAmountTable)
 	ValueTable = New ValueTable();
 	ValueTable.Columns.Add("BasedOn"         , New TypeDescription("String"));
 	ValueTable.Columns.Add("Company"         , New TypeDescription("CatalogRef.Companies"));
@@ -124,6 +128,8 @@ Function JoinDocumentsStructure(ArrayOfTables)
 		New TypeDescription(Metadata.DefinedTypes.typePlaningTransactionBasises.Type));
 	ValueTable.Columns.Add("FinancialMovementType", New TypeDescription("CatalogRef.ExpenseAndRevenueTypes"));
 	ValueTable.Columns.Add("Order", New TypeDescription("DocumentRef.SalesOrder"));
+	ValueTable.Columns.Add("Project", New TypeDescription("CatalogRef.Projects"));
+	
 	ValueTable.Columns.Add("MoneyTransfer"  , New TypeDescription("DocumentRef.MoneyTransfer"));
 	ValueTable.Columns.Add("RetailCustomer" , New TypeDescription("CatalogRef.RetailCustomers"));
 	
@@ -164,17 +170,35 @@ Function JoinDocumentsStructure(ArrayOfTables)
 
 		PaymentList = ValueTable.Copy(Filter);
 		For Each RowPaymentList In PaymentList Do
+			
+			FilterAmount = New Structure();
+			FilterAmount.Insert("Company"  , Row.Company);
+			FilterAmount.Insert("Branch"   , Row.Branch);
+			FilterAmount.Insert("Currency" , Row.Currency);
+			FilterAmount.Insert("Partner"  , RowPaymentList.Partner);
+			FilterAmount.Insert("LegalName", RowPaymentList.Payer);
+			FilterAmount.Insert("Agreement", RowPaymentList.Agreement);
+			FilterAmount.Insert("Order"    , ?(ValueIsFilled(RowPaymentList.Order), RowPaymentList.Order, Undefined));
+			FilterAmount.Insert("Project"  , RowPaymentList.Project);
+			
+			Amounts = DocumentsGenerationServer.CalculateDocumentAmount(DocumentAmountTable, FilterAmount, RowPaymentList.NetAmount, RowPaymentList.Amount);
+			
+			If Amounts.Skip Then
+				Continue;
+			EndIf;
+		
 			NewRow = New Structure();
 			NewRow.Insert("BasisDocument"           , RowPaymentList.BasisDocument);
 			NewRow.Insert("Agreement"               , RowPaymentList.Agreement);
 			NewRow.Insert("Partner"                 , RowPaymentList.Partner);
 			NewRow.Insert("Payer"                   , RowPaymentList.Payer);
-			NewRow.Insert("TotalAmount"             , RowPaymentList.Amount);
-			NewRow.Insert("NetAmount"               , RowPaymentList.NetAmount);
+			NewRow.Insert("TotalAmount"             , Amounts.TotalAmount);
+			NewRow.Insert("NetAmount"               , Amounts.NetAmount);
 			NewRow.Insert("AmountExchange"          , RowPaymentList.AmountExchange);
 			NewRow.Insert("PlaningTransactionBasis" , RowPaymentList.PlaningTransactionBasis);
 			NewRow.Insert("FinancialMovementType"   , RowPaymentList.FinancialMovementType);
 			NewRow.Insert("Order"                   , RowPaymentList.Order);
+			NewRow.Insert("Project"                 , RowPaymentList.Project);
 			NewRow.Insert("MoneyTransfer"           , RowPaymentList.MoneyTransfer);
 			NewRow.Insert("RetailCustomer"          , RowPaymentList.RetailCustomer);
 			Result.PaymentList.Add(NewRow);
@@ -220,12 +244,14 @@ Function GetDocumentTable_IncomingPaymentOrder(ArrayOfBasisDocuments)
 	|	R3035T_CashPlanningTurnovers.AmountTurnover AS Amount,
 	|	R3035T_CashPlanningTurnovers.BasisDocument AS PlaningTransactionBasis
 	|FROM
-	|	AccumulationRegister.R3035T_CashPlanning.Turnovers(, , , CashFlowDirection = VALUE(Enum.CashFlowDirections.Incoming)
-	|	AND CurrencyMovementType = VALUE(ChartOfCharacteristicTypes.CurrencyMovementType.SettlementCurrency)
-	|	AND BasisDocument IN (&ArrayOfBasisDocuments)) AS R3035T_CashPlanningTurnovers
+	|	AccumulationRegister.R3035T_CashPlanning.Turnovers(, , , 
+	|		CashFlowDirection = VALUE(Enum.CashFlowDirections.Incoming)
+	|			AND CurrencyMovementType = VALUE(ChartOfCharacteristicTypes.CurrencyMovementType.SettlementCurrency)
+	|			AND BasisDocument IN (&ArrayOfBasisDocuments)
+	|			AND Account.Type = VALUE(Enum.CashAccountTypes.Cash)
+	|		) AS R3035T_CashPlanningTurnovers
 	|WHERE
-	|	R3035T_CashPlanningTurnovers.Account.Type = VALUE(Enum.CashAccountTypes.Cash)
-	|	AND R3035T_CashPlanningTurnovers.AmountTurnover > 0";
+	|	R3035T_CashPlanningTurnovers.AmountTurnover > 0";
 	Query.SetParameter("ArrayOfBasisDocuments", ArrayOfBasisDocuments);
 	QueryResult = Query.Execute();
 	Return QueryResult.Unload();

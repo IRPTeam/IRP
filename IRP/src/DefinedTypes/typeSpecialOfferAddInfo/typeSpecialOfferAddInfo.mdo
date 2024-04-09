@@ -9,9 +9,9 @@
     <value>Type special offer add info</value>
   </synonym>
   <type>
-    <types>Date</types>
-    <types>String</types>
     <types>Boolean</types>
+    <types>String</types>
+    <types>Date</types>
     <types>Number</types>
     <numberQualifiers>
       <precision>15</precision>

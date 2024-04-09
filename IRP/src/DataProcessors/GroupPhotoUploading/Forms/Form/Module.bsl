@@ -55,7 +55,6 @@ Procedure OnOpen(Cancel)
 	EndIf;
 EndProcedure
 
-
 #EndRegion
 
 #Region Commands

@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mdclass:Document xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" xmlns:mdclassExtension="http://g5.1c.ru/v8/dt/metadata/mdclass/extension" uuid="91dc1719-589b-4cdc-a7df-a24af8681069" extendedConfigurationObject="38e8fc21-55d5-400f-a497-d611ed847b64">
+  <producedTypes>
+    <objectType typeId="74e8cd5d-15db-4423-a45c-5893202c477e" valueTypeId="6ee69b27-9980-4cdf-8703-1709b9b3fb5f"/>
+    <refType typeId="4b6a0c7b-7957-4b56-9b0a-6e2885d3a609" valueTypeId="bf5fdd7b-cced-450e-ba93-e5ada71061e5"/>
+    <selectionType typeId="f38e315e-51a1-434c-b51f-96dff6b50d6c" valueTypeId="bd2fef8a-0713-4989-b3fe-003ced05e954"/>
+    <listType typeId="f9511413-0725-42b4-b2d4-4adf87608e9f" valueTypeId="a8a3c7ba-59f5-44e0-aa7a-f8981b282279"/>
+    <managerType typeId="026378c9-6a00-44fb-917e-b95789382080" valueTypeId="d38bc761-4ba7-4043-86ff-d95ba3f7c7e8"/>
+  </producedTypes>
+  <name>BatchReallocateIncoming</name>
+  <objectBelonging>Adopted</objectBelonging>
+  <extension xsi:type="mdclassExtension:DocumentExtension">
+    <extendedConfigurationObject>Checked</extendedConfigurationObject>
+  </extension>
+  <useStandardCommands>true</useStandardCommands>
+</mdclass:Document>

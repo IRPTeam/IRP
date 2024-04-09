@@ -114,6 +114,8 @@ Function GetDocumentTable_PurchaseDocument_ForPayment(ArrayOfBasisDocuments, Doc
 	|	R1021B_VendorsTransactions.Agreement AS StandardAgreement,
 	|	VALUE(Catalog.Agreements.EmptyRef) AS Agreement,
 	|	R1021B_VendorsTransactions.LegalName AS LegalName,
+	|	R1021B_VendorsTransactions.Order AS Order,
+	|	R1021B_VendorsTransactions.Project AS Project,
 	|	R1021B_VendorsTransactions.AmountBalance AS Amount
 	|FROM
 	|	AccumulationRegister.R1021B_VendorsTransactions.Balance(, (Company, Branch, Currency, Agreement, Partner, LegalName) IN
@@ -162,6 +164,8 @@ Function GetDocumentTable_PurchaseDocument_ForPayment(ArrayOfBasisDocuments, Doc
 	|	tmp.Partner AS Partner,
 	|	tmp.Agreement AS Agreement,
 	|	tmp.LegalName AS LegalName,
+	|	tmp.Order AS Order,
+	|	tmp.Project AS Project,
 	|	tmp.Amount AS Amount
 	|INTO QueryTable_StandardAgreements
 	|FROM
@@ -179,6 +183,8 @@ Function GetDocumentTable_PurchaseDocument_ForPayment(ArrayOfBasisDocuments, Doc
 	|	R1021B_VendorsTransactions.Partner,
 	|	R1021B_VendorsTransactions.Agreement,
 	|	R1021B_VendorsTransactions.LegalName AS Payee,
+	|	R1021B_VendorsTransactions.Order AS Order,
+	|	R1021B_VendorsTransactions.Project AS Project,
 	|	R1021B_VendorsTransactions.AmountBalance AS Amount
 	|FROM
 	|	AccumulationRegister.R1021B_VendorsTransactions.Balance(, Basis IN
@@ -203,6 +209,8 @@ Function GetDocumentTable_PurchaseDocument_ForPayment(ArrayOfBasisDocuments, Doc
 	|	PartnerTransactionsBalance.Partner,
 	|	PartnerTransactionsBalance.Agreement,
 	|	PartnerTransactionsBalance.LegalName,
+	|	PartnerTransactionsBalance.Order,
+	|	PartnerTransactionsBalance.Project,
 	|	PartnerTransactionsBalance.AmountBalance
 	|FROM
 	|	AccumulationRegister.R1021B_VendorsTransactions.Balance(, (Company, Branch, Currency, Agreement, Partner, LegalName) IN
@@ -232,6 +240,8 @@ Function GetDocumentTable_PurchaseDocument_ForPayment(ArrayOfBasisDocuments, Doc
 	|	QueryTable_StandardAgreements.Partner,
 	|	QueryTable_StandardAgreements.Agreement,
 	|	QueryTable_StandardAgreements.LegalName,
+	|	QueryTable_StandardAgreements.Order,
+	|	QueryTable_StandardAgreements.Project,
 	|	QueryTable_StandardAgreements.Amount
 	|FROM
 	|	QueryTable_StandardAgreements AS QueryTable_StandardAgreements";
@@ -262,6 +272,8 @@ Function GetDocumentTable_SalesDocument_ForReceipt(ArrayOfBasisDocuments, Docume
 	|	R2021B_CustomersTransactionsBalance.Agreement AS StandardAgreement,
 	|	VALUE(Catalog.Agreements.EmptyRef) AS Agreement,
 	|	R2021B_CustomersTransactionsBalance.LegalName AS LegalName,
+	|	R2021B_CustomersTransactionsBalance.Order AS Order,
+	|	R2021B_CustomersTransactionsBalance.Project AS Project,
 	|	R2021B_CustomersTransactionsBalance.AmountBalance AS Amount
 	|FROM
 	|	AccumulationRegister.R2021B_CustomersTransactions.Balance(, (Company, Branch, Currency, Agreement, Partner, LegalName) IN
@@ -305,6 +317,8 @@ Function GetDocumentTable_SalesDocument_ForReceipt(ArrayOfBasisDocuments, Docume
 	|	tmp.Partner AS Partner,
 	|	tmp.Agreement AS Agreement,
 	|	tmp.LegalName AS LegalName,
+	|	tmp.Order AS Order,
+	|	tmp.Project AS Project,
 	|	tmp.Amount AS Amount
 	|INTO QueryTable_StandardAgreements
 	|FROM
@@ -322,6 +336,8 @@ Function GetDocumentTable_SalesDocument_ForReceipt(ArrayOfBasisDocuments, Docume
 	|	R2021B_CustomersTransactionsBalance.Partner,
 	|	R2021B_CustomersTransactionsBalance.Agreement,
 	|	R2021B_CustomersTransactionsBalance.LegalName AS Payer,
+	|	R2021B_CustomersTransactionsBalance.Order AS Order,
+	|	R2021B_CustomersTransactionsBalance.Project AS Project,
 	|	R2021B_CustomersTransactionsBalance.AmountBalance AS Amount
 	|FROM
 	|	AccumulationRegister.R2021B_CustomersTransactions.Balance(, Basis IN
@@ -346,6 +362,8 @@ Function GetDocumentTable_SalesDocument_ForReceipt(ArrayOfBasisDocuments, Docume
 	|	R2021B_CustomersTransactionsBalance.Partner,
 	|	R2021B_CustomersTransactionsBalance.Agreement,
 	|	R2021B_CustomersTransactionsBalance.LegalName,
+	|	R2021B_CustomersTransactionsBalance.Order,
+	|	R2021B_CustomersTransactionsBalance.Project,
 	|	R2021B_CustomersTransactionsBalance.AmountBalance
 	|FROM
 	|	AccumulationRegister.R2021B_CustomersTransactions.Balance(, (Company, Branch, Currency, Agreement, Partner, LegalName) IN
@@ -375,6 +393,8 @@ Function GetDocumentTable_SalesDocument_ForReceipt(ArrayOfBasisDocuments, Docume
 	|	QueryTable_StandardAgreements.Partner,
 	|	QueryTable_StandardAgreements.Agreement,
 	|	QueryTable_StandardAgreements.LegalName,
+	|	QueryTable_StandardAgreements.Order,
+	|	QueryTable_StandardAgreements.Project,
 	|	QueryTable_StandardAgreements.Amount
 	|FROM
 	|	QueryTable_StandardAgreements AS QueryTable_StandardAgreements";
@@ -437,7 +457,7 @@ Function GetDocumentTable_SalesOrder_CustomerAdvance(ArrayOfBasisDocuments, Paym
 	Query.Text = 
 	"SELECT
 	|	""SalesOrder"" AS BasedOn,
-	|	VALUE(Enum.IncomingPaymentTransactionType.CustomerAdvance) AS TransactionType,
+	|	VALUE(Enum.IncomingPaymentTransactionType.RetailCustomerAdvance) AS TransactionType,
 	|	R3026B_SalesOrdersCustomerAdvance.Company,
 	|	R3026B_SalesOrdersCustomerAdvance.Branch,
 	|	R3026B_SalesOrdersCustomerAdvance.Currency,
@@ -479,6 +499,8 @@ Function GetDocumentTable_SalesReturn_ForPayment(ArrayOfBasisDocuments, AddInfo 
 	|	R2021B_CustomersTransactionsBalance.Agreement AS StandardAgreement,
 	|	VALUE(Catalog.Agreements.EmptyRef) AS Agreement,
 	|	R2021B_CustomersTransactionsBalance.LegalName AS LegalName,
+	|	R2021B_CustomersTransactionsBalance.Order AS Order,
+	|	R2021B_CustomersTransactionsBalance.Project AS Project,
 	|	R2021B_CustomersTransactionsBalance.AmountBalance AS Amount
 	|FROM
 	|	AccumulationRegister.R2021B_CustomersTransactions.Balance(, (Company, Branch, Currency, Agreement, Partner, LegalName) IN
@@ -526,6 +548,8 @@ Function GetDocumentTable_SalesReturn_ForPayment(ArrayOfBasisDocuments, AddInfo 
 	|	tmp.Partner AS Partner,
 	|	tmp.Agreement AS Agreement,
 	|	tmp.LegalName AS LegalName,
+	|	tmp.Order AS Order,
+	|	tmp.Project AS Project,
 	|	tmp.Amount AS Amount
 	|INTO QueryTable_StandardAgreements
 	|FROM
@@ -543,6 +567,8 @@ Function GetDocumentTable_SalesReturn_ForPayment(ArrayOfBasisDocuments, AddInfo 
 	|	R2021B_CustomersTransactionsBalance.Partner,
 	|	R2021B_CustomersTransactionsBalance.Agreement,
 	|	R2021B_CustomersTransactionsBalance.LegalName AS Payee,
+	|	R2021B_CustomersTransactionsBalance.Order AS Order,
+	|	R2021B_CustomersTransactionsBalance.Project AS Project,
 	|	-R2021B_CustomersTransactionsBalance.AmountBalance AS Amount
 	|FROM
 	|	AccumulationRegister.R2021B_CustomersTransactions.Balance(, Basis IN
@@ -567,6 +593,8 @@ Function GetDocumentTable_SalesReturn_ForPayment(ArrayOfBasisDocuments, AddInfo 
 	|	R2021B_CustomersTransactionsBalance.Partner,
 	|	R2021B_CustomersTransactionsBalance.Agreement,
 	|	R2021B_CustomersTransactionsBalance.LegalName,
+	|	R2021B_CustomersTransactionsBalance.Order,
+	|	R2021B_CustomersTransactionsBalance.Project,
 	|	-R2021B_CustomersTransactionsBalance.AmountBalance
 	|FROM
 	|	AccumulationRegister.R2021B_CustomersTransactions.Balance(, (Company, Branch, Currency, Agreement, Partner, LegalName) IN
@@ -596,6 +624,8 @@ Function GetDocumentTable_SalesReturn_ForPayment(ArrayOfBasisDocuments, AddInfo 
 	|	QueryTable_StandardAgreements.Partner,
 	|	QueryTable_StandardAgreements.Agreement,
 	|	QueryTable_StandardAgreements.LegalName,
+	|	QueryTable_StandardAgreements.Order,
+	|	QueryTable_StandardAgreements.Project,
 	|	-QueryTable_StandardAgreements.Amount
 	|FROM
 	|	QueryTable_StandardAgreements AS QueryTable_StandardAgreements";
@@ -625,6 +655,8 @@ Function GetDocumentTable_PurchaseReturn_ForReceipt(ArrayOfBasisDocuments, AddIn
 	|	R1021B_VendorsTransactions.Agreement AS StandardAgreement,
 	|	VALUE(Catalog.Agreements.EmptyRef) AS Agreement,
 	|	R1021B_VendorsTransactions.LegalName AS LegalName,
+	|	R1021B_VendorsTransactions.Order AS Order,
+	|	R1021B_VendorsTransactions.Project AS Project,
 	|	R1021B_VendorsTransactions.AmountBalance AS Amount
 	|FROM
 	|	AccumulationRegister.R1021B_VendorsTransactions.Balance(, (Company, Branch, Currency, Agreement, Partner, LegalName) IN
@@ -671,6 +703,8 @@ Function GetDocumentTable_PurchaseReturn_ForReceipt(ArrayOfBasisDocuments, AddIn
 	|	tmp.Partner AS Partner,
 	|	tmp.Agreement AS Agreement,
 	|	tmp.LegalName AS LegalName,
+	|	tmp.Order AS Order,
+	|	tmp.Project AS Project,
 	|	tmp.Amount AS Amount
 	|INTO QueryTable_StandardAgreements
 	|FROM
@@ -688,6 +722,8 @@ Function GetDocumentTable_PurchaseReturn_ForReceipt(ArrayOfBasisDocuments, AddIn
 	|	R1021B_VendorsTransactions.Partner,
 	|	R1021B_VendorsTransactions.Agreement,
 	|	R1021B_VendorsTransactions.LegalName AS Payer,
+	|	R1021B_VendorsTransactions.Order AS Order,
+	|	R1021B_VendorsTransactions.Project AS Project,
 	|	-R1021B_VendorsTransactions.AmountBalance AS Amount
 	|FROM
 	|	AccumulationRegister.R1021B_VendorsTransactions.Balance(, Basis IN
@@ -712,6 +748,8 @@ Function GetDocumentTable_PurchaseReturn_ForReceipt(ArrayOfBasisDocuments, AddIn
 	|	PartnerTransactionsBalance.Partner,
 	|	PartnerTransactionsBalance.Agreement,
 	|	PartnerTransactionsBalance.LegalName,
+	|	PartnerTransactionsBalance.Order,
+	|	PartnerTransactionsBalance.Project,
 	|	-PartnerTransactionsBalance.AmountBalance
 	|FROM
 	|	AccumulationRegister.R1021B_VendorsTransactions.Balance(, (Company, Branch, Currency, Agreement, Partner, LegalName) IN
@@ -741,6 +779,8 @@ Function GetDocumentTable_PurchaseReturn_ForReceipt(ArrayOfBasisDocuments, AddIn
 	|	QueryTable_StandardAgreements.Partner,
 	|	QueryTable_StandardAgreements.Agreement,
 	|	QueryTable_StandardAgreements.LegalName,
+	|	QueryTable_StandardAgreements.Order,
+	|	QueryTable_StandardAgreements.Project,
 	|	-QueryTable_StandardAgreements.Amount
 	|FROM
 	|	QueryTable_StandardAgreements AS QueryTable_StandardAgreements";
@@ -749,5 +789,67 @@ Function GetDocumentTable_PurchaseReturn_ForReceipt(ArrayOfBasisDocuments, AddIn
 	QueryResult = Query.Execute();
 	Return QueryResult.Unload();
 EndFunction
+
+Function CreateDocumentAmountTable() Export
+	AmountsTable = New ValueTable();
+	AmountsTable.Columns.Add("Company");
+	AmountsTable.Columns.Add("Branch");
+	AmountsTable.Columns.Add("Currency");
+	AmountsTable.Columns.Add("Partner");
+	AmountsTable.Columns.Add("LegalName");
+	AmountsTable.Columns.Add("Agreement");
+	AmountsTable.Columns.Add("Order");
+	AmountsTable.Columns.Add("Project");
+	AmountsTable.Columns.Add("Amount");
+	
+	Return AmountsTable;
+EndFunction
+
+Procedure FillDocumentAmountTable(DocumentAmountTable, ArrayOfocuments, Order_ColumnName = "") Export
+	For Each DocRef In ArrayOfocuments Do
+		DocHeader = New Structure();
+		DocHeader.Insert("Company"   , DocRef.Company);
+		DocHeader.Insert("Branch"    , DocRef.Branch);
+		DocHeader.Insert("Currency"  , DocRef.Currency);
+		DocHeader.Insert("Partner"   , DocRef.Partner);
+		DocHeader.Insert("LegalName" , DocRef.LegalName);
+		DocHeader.Insert("Agreement" , DocRef.Agreement);
+		
+		For Each Row In DocRef.ItemList Do
+			NewRow = DocumentAmountTable.Add();
+			FillPropertyValues(NewRow, DocHeader);
+			If ValueIsFilled(Order_ColumnName) Then
+				_Order = Row[Order_ColumnName];
+				If ValueIsFilled(_Order) Then
+					NewRow.Order = _Order;
+				EndIf;
+			EndIf;
+			NewRow.Project = Row.Project;
+			NewRow.Amount = Row.TotalAmount;
+		EndDo;
+	EndDo;
+EndProcedure
+
+Function CalculateDocumentAmount(DocumentAmountTable, Filter, NetAmount, TotalAmount) Export
+	
+	Result = New Structure("NetAmount, TotalAmount, Skip", NetAmount, TotalAmount, False);
+		
+	DocumentAmount = Undefined;
+			
+	DocumentAmountRows = DocumentAmountTable.Copy(Filter);
+	If DocumentAmountRows.Count() Then
+		DocumentAmount = DocumentAmountRows.Total("Amount");
+		Result.TotalAmount = Min(DocumentAmount, Result.TotalAmount);
+		Result.NetAmount = Min(DocumentAmount, Result.NetAmount);		
+		Return Result;
+	Else
+		If DocumentAmountTable.Count() Then
+			Result.Skip = True;
+			Return Result;
+		EndIf;
+	EndIf;
+	
+	Return Result;
+EndFunction		
 
 #EndRegion

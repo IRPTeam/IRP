@@ -35,6 +35,7 @@
     <minValue xsi:type="core:UndefinedValue"/>
     <maxValue xsi:type="core:UndefinedValue"/>
     <fullTextSearch>Use</fullTextSearch>
+    <fillValue xsi:type="core:UndefinedValue"/>
   </resources>
   <dimensions uuid="a49d2cf4-4f16-423b-805d-17cd7f27198d">
     <name>Company</name>
@@ -50,6 +51,7 @@
     <fillChecking>ShowError</fillChecking>
     <indexing>Index</indexing>
     <fullTextSearch>Use</fullTextSearch>
+    <fillValue xsi:type="core:UndefinedValue"/>
   </dimensions>
   <dimensions uuid="b168c583-ef43-429f-9524-ec5f9a37808e">
     <name>BusinessUnit</name>
@@ -71,6 +73,7 @@
     </choiceParameters>
     <indexing>Index</indexing>
     <fullTextSearch>Use</fullTextSearch>
+    <fillValue xsi:type="core:UndefinedValue"/>
   </dimensions>
   <dimensions uuid="b6a527a5-5f61-41c1-91fc-7acee261e038">
     <name>ItemKey</name>
@@ -85,6 +88,7 @@
     <maxValue xsi:type="core:UndefinedValue"/>
     <fillChecking>ShowError</fillChecking>
     <indexing>Index</indexing>
+    <fillValue xsi:type="core:UndefinedValue"/>
   </dimensions>
   <dimensions uuid="01251559-ba0e-4fae-8162-9d7c23321fc2">
     <name>Document</name>

@@ -6,7 +6,6 @@
     <value>Salary privileged</value>
   </synonym>
   <server>true</server>
-  <externalConnection>true</externalConnection>
   <serverCall>true</serverCall>
   <privileged>true</privileged>
 </mdclass:CommonModule>

@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mdclass:Document xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" xmlns:mdclassExtension="http://g5.1c.ru/v8/dt/metadata/mdclass/extension" uuid="b4cf37b2-f94b-451c-92e6-6319add8be3b" extendedConfigurationObject="56080286-6619-4f9a-b838-ea75f43f246b">
+  <producedTypes>
+    <objectType typeId="dda2eca0-bb5d-4909-aa45-2d8e4dc14a7c" valueTypeId="ed228020-4d1c-4f84-a73a-d1e16743bf1d"/>
+    <refType typeId="5affbcab-e876-4ddb-bf04-d4b30aa63229" valueTypeId="698b1fc0-de6c-4ac7-a671-9182050d4e43"/>
+    <selectionType typeId="b5941578-c8e5-47fa-ab52-af0b05f275bd" valueTypeId="2349edde-f4f1-410c-95df-0630246dd90b"/>
+    <listType typeId="a68e00d8-0704-4e2e-bbf4-e1db1f63bb03" valueTypeId="19d59d79-40d5-440b-b1f0-8a75db0dc047"/>
+    <managerType typeId="6cd1b16c-09ef-4f6d-bd3f-b5de797e3c43" valueTypeId="c98888a7-29e4-43d8-9037-b12cff76e36c"/>
+  </producedTypes>
+  <name>ReconciliationStatement</name>
+  <objectBelonging>Adopted</objectBelonging>
+  <extension xsi:type="mdclassExtension:DocumentExtension">
+    <extendedConfigurationObject>Checked</extendedConfigurationObject>
+  </extension>
+  <useStandardCommands>true</useStandardCommands>
+</mdclass:Document>

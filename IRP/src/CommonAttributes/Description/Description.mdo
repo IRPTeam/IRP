@@ -18,6 +18,26 @@
     <value></value>
   </fillValue>
   <content>
+    <metadata>Document.BatchReallocateOutgoing</metadata>
+    <use>Use</use>
+  </content>
+  <content>
+    <metadata>Document.VisitorCounter</metadata>
+    <use>Use</use>
+  </content>
+  <content>
+    <metadata>Document.VendorsAdvancesClosing</metadata>
+    <use>Use</use>
+  </content>
+  <content>
+    <metadata>Document.ForeignCurrencyRevaluation</metadata>
+    <use>Use</use>
+  </content>
+  <content>
+    <metadata>Document.ProductionCostsAllocation</metadata>
+    <use>Use</use>
+  </content>
+  <content>
     <metadata>Document.ManualRegisterEntry</metadata>
     <use>Use</use>
   </content>
@@ -27,6 +47,10 @@
   </content>
   <content>
     <metadata>Document.MoneyTransfer</metadata>
+    <use>Use</use>
+  </content>
+  <content>
+    <metadata>Document.DepreciationCalculation</metadata>
     <use>Use</use>
   </content>
   <content>
@@ -42,7 +66,15 @@
     <use>Use</use>
   </content>
   <content>
+    <metadata>Document.RetailGoodsReceipt</metadata>
+    <use>Use</use>
+  </content>
+  <content>
     <metadata>Document.ChequeBondTransaction</metadata>
+    <use>Use</use>
+  </content>
+  <content>
+    <metadata>Document.BatchReallocateIncoming</metadata>
     <use>Use</use>
   </content>
   <content>
@@ -55,6 +87,22 @@
   </content>
   <content>
     <metadata>Document.SalesReportFromTradeAgent</metadata>
+    <use>Use</use>
+  </content>
+  <content>
+    <metadata>Document.CustomersAdvancesClosing</metadata>
+    <use>Use</use>
+  </content>
+  <content>
+    <metadata>Document.CalculationMovementCosts</metadata>
+    <use>Use</use>
+  </content>
+  <content>
+    <metadata>Document.EmployeeSickLeave</metadata>
+    <use>Use</use>
+  </content>
+  <content>
+    <metadata>Document.AdditionalDeduction</metadata>
     <use>Use</use>
   </content>
   <content>
@@ -78,6 +126,10 @@
     <use>Use</use>
   </content>
   <content>
+    <metadata>Document.EmployeeTransfer</metadata>
+    <use>Use</use>
+  </content>
+  <content>
     <metadata>Document.PhysicalInventory</metadata>
     <use>Use</use>
   </content>
@@ -86,11 +138,19 @@
     <use>Use</use>
   </content>
   <content>
+    <metadata>Document.CommissioningOfFixedAsset</metadata>
+    <use>Use</use>
+  </content>
+  <content>
     <metadata>Document.InventoryTransfer</metadata>
     <use>Use</use>
   </content>
   <content>
     <metadata>Document.PurchaseReturn</metadata>
+    <use>Use</use>
+  </content>
+  <content>
+    <metadata>Document.TimeSheet</metadata>
     <use>Use</use>
   </content>
   <content>
@@ -106,11 +166,19 @@
     <use>Use</use>
   </content>
   <content>
+    <metadata>Document.AdditionalAccrual</metadata>
+    <use>Use</use>
+  </content>
+  <content>
     <metadata>Document.ShipmentConfirmation</metadata>
     <use>Use</use>
   </content>
   <content>
     <metadata>Document.ProductionPlanning</metadata>
+    <use>Use</use>
+  </content>
+  <content>
+    <metadata>Document.EmployeeHiring</metadata>
     <use>Use</use>
   </content>
   <content>
@@ -130,7 +198,15 @@
     <use>Use</use>
   </content>
   <content>
+    <metadata>Document.RetailShipmentConfirmation</metadata>
+    <use>Use</use>
+  </content>
+  <content>
     <metadata>Document.AdditionalRevenueAllocation</metadata>
+    <use>Use</use>
+  </content>
+  <content>
+    <metadata>Document.Payroll</metadata>
     <use>Use</use>
   </content>
   <content>
@@ -174,6 +250,18 @@
     <use>Use</use>
   </content>
   <content>
+    <metadata>Document.DebitCreditNote</metadata>
+    <use>Use</use>
+  </content>
+  <content>
+    <metadata>Document.WorkOrderClosing</metadata>
+    <use>Use</use>
+  </content>
+  <content>
+    <metadata>Document.EmployeeVacation</metadata>
+    <use>Use</use>
+  </content>
+  <content>
     <metadata>Document.PriceList</metadata>
     <use>Use</use>
   </content>
@@ -194,7 +282,19 @@
     <use>Use</use>
   </content>
   <content>
+    <metadata>Document.EmployeeFiring</metadata>
+    <use>Use</use>
+  </content>
+  <content>
     <metadata>Document.JournalEntry</metadata>
+    <use>Use</use>
+  </content>
+  <content>
+    <metadata>Document.RetailReceiptCorrection</metadata>
+    <use>Use</use>
+  </content>
+  <content>
+    <metadata>Document.EmployeeCashAdvance</metadata>
     <use>Use</use>
   </content>
   <content>
@@ -242,6 +342,10 @@
     <use>Use</use>
   </content>
   <content>
+    <metadata>Document.ChequeBondTransactionItem</metadata>
+    <use>Use</use>
+  </content>
+  <content>
     <metadata>Document.BankReceipt</metadata>
     <use>Use</use>
   </content>
@@ -250,75 +354,7 @@
     <use>Use</use>
   </content>
   <content>
-    <metadata>Document.EmployeeCashAdvance</metadata>
-    <use>Use</use>
-  </content>
-  <content>
-    <metadata>Document.ProductionCostsAllocation</metadata>
-    <use>Use</use>
-  </content>
-  <content>
-    <metadata>Document.Payroll</metadata>
-    <use>Use</use>
-  </content>
-  <content>
-    <metadata>Document.TimeSheet</metadata>
-    <use>Use</use>
-  </content>
-  <content>
-    <metadata>Document.RetailShipmentConfirmation</metadata>
-    <use>Use</use>
-  </content>
-  <content>
-    <metadata>Document.RetailGoodsReceipt</metadata>
-    <use>Use</use>
-  </content>
-  <content>
-    <metadata>Document.BatchReallocateIncoming</metadata>
-    <use>Use</use>
-  </content>
-  <content>
-    <metadata>Document.BatchReallocateOutgoing</metadata>
-    <use>Use</use>
-  </content>
-  <content>
-    <metadata>Document.CalculationMovementCosts</metadata>
-    <use>Use</use>
-  </content>
-  <content>
-    <metadata>Document.ChequeBondTransactionItem</metadata>
-    <use>Use</use>
-  </content>
-  <content>
-    <metadata>Document.CustomersAdvancesClosing</metadata>
-    <use>Use</use>
-  </content>
-  <content>
-    <metadata>Document.ForeignCurrencyRevaluation</metadata>
-    <use>Use</use>
-  </content>
-  <content>
-    <metadata>Document.VendorsAdvancesClosing</metadata>
-    <use>Use</use>
-  </content>
-  <content>
-    <metadata>Document.WorkOrderClosing</metadata>
-    <use>Use</use>
-  </content>
-  <content>
-    <metadata>Document.CommissioningOfFixedAsset</metadata>
-    <use>Use</use>
-  </content>
-  <content>
     <metadata>Document.DecommissioningOfFixedAsset</metadata>
-    <use>Use</use>
-  </content>
-  <content>
-    <metadata>Document.FixedAssetTransfer</metadata>
-    <use>Use</use>
-  </content>
-  <content>
-    <metadata>Document.DepreciationCalculation</metadata>
     <use>Use</use>
   </content>
   <content>
@@ -326,43 +362,7 @@
     <use>Use</use>
   </content>
   <content>
-    <metadata>Document.EmployeeHiring</metadata>
-    <use>Use</use>
-  </content>
-  <content>
-    <metadata>Document.EmployeeTransfer</metadata>
-    <use>Use</use>
-  </content>
-  <content>
-    <metadata>Document.EmployeeFiring</metadata>
-    <use>Use</use>
-  </content>
-  <content>
-    <metadata>Document.EmployeeVacation</metadata>
-    <use>Use</use>
-  </content>
-  <content>
-    <metadata>Document.EmployeeSickLeave</metadata>
-    <use>Use</use>
-  </content>
-  <content>
-    <metadata>Document.AdditionalDeduction</metadata>
-    <use>Use</use>
-  </content>
-  <content>
-    <metadata>Document.AdditionalAccrual</metadata>
-    <use>Use</use>
-  </content>
-  <content>
-    <metadata>Document.VisitorCounter</metadata>
-    <use>Use</use>
-  </content>
-  <content>
-    <metadata>Document.RetailReceiptCorrection</metadata>
-    <use>Use</use>
-  </content>
-  <content>
-    <metadata>Document.DebitCreditNote</metadata>
+    <metadata>Document.FixedAssetTransfer</metadata>
     <use>Use</use>
   </content>
   <autoUse>DontUse</autoUse>

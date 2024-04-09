@@ -31,4 +31,5 @@ Async Procedure PrintReceipt(CommandParameter)
 	If Not EquipmentPrintFiscalReceiptResult.Info.Success Then
 		CommonFunctionsClientServer.ShowUsersMessage(EquipmentPrintFiscalReceiptResult.Info.Error);
 	EndIf;
+	NotifyChanged(Type("DocumentRef.RetailReturnReceipt"));
 EndProcedure

@@ -34,6 +34,10 @@ EndProcedure
 
 #Region COMMANDS
 
+// Generated form command action by name.
+// 
+// Parameters:
+//  Command - CommandBarButton - Command
 &AtClient
 Procedure GeneratedFormCommandActionByName(Command) Export
 	SelectedRows = Items.List.SelectedRows;
@@ -41,16 +45,29 @@ Procedure GeneratedFormCommandActionByName(Command) Export
 	GeneratedFormCommandActionByNameServer(Command.Name, SelectedRows);
 EndProcedure
 
+// Generated form command action by name server.
+// 
+// Parameters:
+//  CommandName - CommandBarButton - Command name
+//  SelectedRows - Array - Selected rows
 &AtServer
 Procedure GeneratedFormCommandActionByNameServer(CommandName, SelectedRows) Export
 	ExternalCommandsServer.GeneratedListChoiceFormCommandActionByName(SelectedRows, ThisObject, CommandName);
 EndProcedure
 
+// Internal command action.
+// 
+// Parameters:
+//  Command - CommandBarButton - Command
 &AtClient
 Procedure InternalCommandAction(Command) Export
 	InternalCommandsClient.RunCommandAction(Command, ThisObject, List, Items.List.SelectedRows);
 EndProcedure
 
+// Internal command action with server context.
+// 
+// Parameters:
+//  Command - CommandBarButton - Command
 &AtClient
 Procedure InternalCommandActionWithServerContext(Command) Export
 	InternalCommandActionWithServerContextAtServer(Command.Name);

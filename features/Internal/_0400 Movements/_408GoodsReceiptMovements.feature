@@ -354,17 +354,15 @@ Scenario: _0401211 check Goods receipt movements by the Register  "R4017 Procure
 			| 'Number'    |
 			| '117'       |
 	* Check movements by the Register  "R4017 Procurement of internal supply requests"
-		And I click "Registrations report" button
+		And I click "Registrations report info" button
 		And I select "R4017 Procurement of internal supply requests" exact value from "Register" drop-down list
 		And I click "Generate report" button
 		Then "ResultTable" spreadsheet document is equal
-			| 'Goods receipt 117 dated 12.02.2021 15:13:11'                 | ''              | ''                      | ''            | ''               | ''               | ''           | ''                                                        | ''             |
-			| 'Document registrations records'                              | ''              | ''                      | ''            | ''               | ''               | ''           | ''                                                        | ''             |
-			| 'Register  "R4017 Procurement of internal supply requests"'   | ''              | ''                      | ''            | ''               | ''               | ''           | ''                                                        | ''             |
-			| ''                                                            | 'Record type'   | 'Period'                | 'Resources'   | 'Dimensions'     | ''               | ''           | ''                                                        | ''             |
-			| ''                                                            | ''              | ''                      | 'Quantity'    | 'Company'        | 'Branch'         | 'Store'      | 'Internal supply request'                                 | 'Item key'     |
-			| ''                                                            | 'Expense'       | '12.02.2021 15:13:11'   | '5'           | 'Main Company'   | 'Front office'   | 'Store 02'   | 'Internal supply request 117 dated 12.02.2021 14:39:38'   | '36/Yellow'    |
-			| ''                                                            | 'Expense'       | '12.02.2021 15:13:11'   | '10'          | 'Main Company'   | 'Front office'   | 'Store 02'   | 'Internal supply request 117 dated 12.02.2021 14:39:38'   | 'S/Yellow'     |
+			| 'Goods receipt 117 dated 12.02.2021 15:13:11'               | ''                    | ''           | ''             | ''             | ''         | ''                                                      | ''          | ''         |
+			| 'Register  "R4017 Procurement of internal supply requests"' | ''                    | ''           | ''             | ''             | ''         | ''                                                      | ''          | ''         |
+			| ''                                                          | 'Period'              | 'RecordType' | 'Company'      | 'Branch'       | 'Store'    | 'Internal supply request'                               | 'Item key'  | 'Quantity' |
+			| ''                                                          | '12.02.2021 15:13:11' | 'Expense'    | 'Main Company' | 'Front office' | 'Store 02' | 'Internal supply request 117 dated 12.02.2021 14:39:38' | 'S/Yellow'  | '10'       |
+			| ''                                                          | '12.02.2021 15:13:11' | 'Expense'    | 'Main Company' | 'Front office' | 'Store 02' | 'Internal supply request 117 dated 12.02.2021 14:39:38' | '36/Yellow' | '5'        |	
 		And I close all client application windows
 
 Scenario: _0401219 Goods receipt clear posting/mark for deletion

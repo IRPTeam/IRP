@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mdclass:Document xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" xmlns:mdclassExtension="http://g5.1c.ru/v8/dt/metadata/mdclass/extension" uuid="77918984-488f-4988-86bb-40aef6b18a25" extendedConfigurationObject="8414293c-c0e1-45e2-8940-d298db8c1978">
+  <producedTypes>
+    <objectType typeId="47e66fc4-b523-48aa-ac50-13cdf692df44" valueTypeId="fd874835-968f-43b8-ae9b-768cc7d86d1f"/>
+    <refType typeId="343744f0-cfec-4f54-b216-47fe2d6a31d4" valueTypeId="d993ca70-6f1b-4871-9fbc-fdff64e40efb"/>
+    <selectionType typeId="19c7bb41-e837-4239-9cda-f3c981df4cdd" valueTypeId="c74636b1-ca07-4431-bd66-aa323eb612f0"/>
+    <listType typeId="2c2cd9f9-fd37-45a4-b08f-7896f18adc4b" valueTypeId="a4d2e8bd-786f-4950-9307-28a779d1e22e"/>
+    <managerType typeId="878c0815-dda9-4388-ac72-f98bd21bad26" valueTypeId="cc2cd28c-510c-4eb3-9416-b71953ce3cca"/>
+  </producedTypes>
+  <name>ShipmentConfirmation</name>
+  <objectBelonging>Adopted</objectBelonging>
+  <extension xsi:type="mdclassExtension:DocumentExtension">
+    <extendedConfigurationObject>Checked</extendedConfigurationObject>
+  </extension>
+  <useStandardCommands>true</useStandardCommands>
+</mdclass:Document>

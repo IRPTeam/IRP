@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mdclass:Document xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" xmlns:mdclassExtension="http://g5.1c.ru/v8/dt/metadata/mdclass/extension" uuid="196e0967-5a0d-41b1-a3a5-ab9d0466373d" extendedConfigurationObject="eef53ebb-b10f-4d69-99d7-6ae89432628b">
+  <producedTypes>
+    <objectType typeId="44b55e49-87f3-4fa1-aa08-8854934bd9f1" valueTypeId="9ecfb5e1-15ba-4fda-938c-2bf9904227bd"/>
+    <refType typeId="25ef6953-f200-4058-b7bc-d0f98cbb125c" valueTypeId="ff0a8c7a-7482-4d1e-ac89-aae73050a3a5"/>
+    <selectionType typeId="85672167-2b74-4078-86f1-8918d593829b" valueTypeId="5c21dd65-68de-4def-b674-902306afa45a"/>
+    <listType typeId="b936f0a2-283c-4562-a0fe-c4ff7975c1ce" valueTypeId="4d9730d4-7a82-4a55-9346-c3f8c8bc086e"/>
+    <managerType typeId="31f73f9e-4d5c-46d8-bce0-5a7aff703f3f" valueTypeId="21ec30e7-7965-465f-8de6-b070664ab22e"/>
+  </producedTypes>
+  <name>InternalSupplyRequest</name>
+  <objectBelonging>Adopted</objectBelonging>
+  <extension xsi:type="mdclassExtension:DocumentExtension">
+    <extendedConfigurationObject>Checked</extendedConfigurationObject>
+  </extension>
+  <useStandardCommands>true</useStandardCommands>
+</mdclass:Document>

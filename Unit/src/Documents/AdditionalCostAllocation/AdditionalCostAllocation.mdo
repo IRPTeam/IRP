@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mdclass:Document xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" xmlns:mdclassExtension="http://g5.1c.ru/v8/dt/metadata/mdclass/extension" uuid="e6f20f23-69ff-4a0e-a652-442d63915360" extendedConfigurationObject="3a4f91ee-ac2f-48d6-ad0a-3288ec1d0247">
+  <producedTypes>
+    <objectType typeId="1c3a6edb-0497-448f-99d2-9dc594007a92" valueTypeId="8466c62d-a267-44f5-a510-0f7adc3e0ac3"/>
+    <refType typeId="3fca909c-4c15-45e4-8ec3-f8032c32a8a3" valueTypeId="217a96f1-7393-4589-be32-53e775e78c01"/>
+    <selectionType typeId="b37e1fba-b416-4d31-abd8-a57d59bda7c6" valueTypeId="d0534e4f-cf44-40d1-a9e3-333af0924d5f"/>
+    <listType typeId="c05b6bee-ad3c-4dd3-b2b0-b54f828414fd" valueTypeId="4fd89e71-0a6c-434b-bd91-a3374f712d19"/>
+    <managerType typeId="1689c8a4-05ba-4e16-9589-fbf05dbd154f" valueTypeId="6f18ba1b-119a-42e0-82c0-0eb229c75db4"/>
+  </producedTypes>
+  <name>AdditionalCostAllocation</name>
+  <objectBelonging>Adopted</objectBelonging>
+  <extension xsi:type="mdclassExtension:DocumentExtension">
+    <extendedConfigurationObject>Checked</extendedConfigurationObject>
+  </extension>
+  <useStandardCommands>true</useStandardCommands>
+</mdclass:Document>

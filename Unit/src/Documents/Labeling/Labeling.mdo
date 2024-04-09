@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mdclass:Document xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" xmlns:mdclassExtension="http://g5.1c.ru/v8/dt/metadata/mdclass/extension" uuid="6ba92cae-dba6-4770-a843-578700fbeeaf" extendedConfigurationObject="15802646-1457-4759-b1e7-b7df55ab910f">
+  <producedTypes>
+    <objectType typeId="9cdf4467-bbd1-4959-8e68-41528f28a97d" valueTypeId="a584a6e6-80a9-4bd1-99cc-998def79f1a6"/>
+    <refType typeId="ad1eba60-ffdd-4678-8dca-6c71a7452d0b" valueTypeId="3c6c2f67-9bee-4a0c-93e5-3b7b39f4c5c2"/>
+    <selectionType typeId="a3df7f72-37cd-43ad-a274-def560994253" valueTypeId="d67a6126-ec00-4905-962d-bbe2610b3f30"/>
+    <listType typeId="b290a40f-b985-4c69-aa6a-835c2c132711" valueTypeId="9b943c1b-0c68-4ba7-b765-a60cb0a61048"/>
+    <managerType typeId="d7a85999-fc56-4c95-bd55-c31954d69015" valueTypeId="7087df3c-5b92-4fbc-8b31-d9fbc9e6d077"/>
+  </producedTypes>
+  <name>Labeling</name>
+  <objectBelonging>Adopted</objectBelonging>
+  <extension xsi:type="mdclassExtension:DocumentExtension">
+    <extendedConfigurationObject>Checked</extendedConfigurationObject>
+  </extension>
+  <useStandardCommands>true</useStandardCommands>
+</mdclass:Document>

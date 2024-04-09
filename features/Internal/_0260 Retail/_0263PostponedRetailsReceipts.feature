@@ -664,7 +664,7 @@ Scenario: _0263111 create postponed return with basis document
 			| '4' | '*'                    | 'Dress'                                                   | ''             | 'XS/Blue'  | 'Shop 02'            | 'No'                 | '79,32'      | ''                   | 'pcs'  | ''              | ''                  | '1,000'    | '520,00' | '440,68'     | '520,00'       | ''                    | 'Store 01' | ''             | ''       | '18%' | ''              | ''            | ''                |
 			| '5' | '*'                    | 'Service'                                                 | ''             | 'Rent'     | 'Shop 02'            | 'No'                 | '15,25'      | ''                   | 'pcs'  | ''              | ''                  | '1,000'    | '100,00' | '84,75'      | '100,00'       | ''                    | 'Store 01' | ''             | ''       | '18%' | ''              | ''            | ''                |
 		And I click "Show hidden tables" button
-		And I expand "ControlCodeStrings [2]" group
+		And I move to "ControlCodeStrings (2)" tab
 		And "ControlCodeStrings" table contains lines
 			| 'Code string'                                 | 'Code is approved' | 'Not check' |
 			| 'Q3VycmVudCByb3cgd2lsbCBkZWNvZGUgdG8gYmFzZTY0' | 'No'               | 'No'        |

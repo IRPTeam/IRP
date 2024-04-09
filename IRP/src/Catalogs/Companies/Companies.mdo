@@ -391,8 +391,29 @@
     <type>
       <types>CatalogRef.PrintInfo</types>
     </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
     <createOnInput>Use</createOnInput>
+    <fillValue xsi:type="core:UndefinedValue"/>
     <fullTextSearch>Use</fullTextSearch>
+  </attributes>
+  <attributes uuid="9116b6b8-c10c-4d5b-9d20-d24696cb94e1">
+    <name>MainLegalAddress</name>
+    <synonym>
+      <key>en</key>
+      <value>Main legal address</value>
+    </synonym>
+    <type>
+      <types>String</types>
+      <stringQualifiers>
+        <length>1024</length>
+      </stringQualifiers>
+    </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <fillValue xsi:type="core:UndefinedValue"/>
+    <fullTextSearch>Use</fullTextSearch>
+    <dataHistory>Use</dataHistory>
   </attributes>
   <tabularSections uuid="1cef8184-c8f4-4ae0-b558-76db940b1ce5">
     <producedTypes>

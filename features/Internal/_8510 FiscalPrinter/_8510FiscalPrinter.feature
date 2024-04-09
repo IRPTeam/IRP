@@ -1534,9 +1534,7 @@ Scenario: _0850020 check auto payment form by acquiring (Enter)
 	* Check control code string tab
 		And I click "Show hidden tables" button
 		Then "Edit hidden tables" window is opened
-		And I expand "ControlCodeStrings [1]" group
-		And I move to "ControlCodeStrings [1]" tab
-		And I activate "Code string" field in "ControlCodeStrings" table
+		And I move to "ControlCodeStrings (1)" tab
 		And "ControlCodeStrings" table became equal
 			| 'Key'   | 'Code string'            | 'Code is approved'    |
 			| '*'     | '11111111111111111111'   | 'Yes'                 |
@@ -1606,8 +1604,9 @@ Scenario: _0850023 check return payment by card and cash (sales by card)
 		When I Check the steps for Exception
 			| 'And I click "Revert" button'    |
 		And I click "Return (in day)" button
-		Then "1C:Enterprise" window is opened
-		And I click "Yes" button
+		Then "Cancellation confirmation" window is opened
+		And I change checkbox "Yes, I do know what am I doing"
+		And I click the button named "OK"		
 		Then "1C:Enterprise" window is opened
 		And I click "OK" button
 		Then "Payment" window is opened		
@@ -1619,8 +1618,9 @@ Scenario: _0850023 check return payment by card and cash (sales by card)
 			| '40,00'  | '⚪'            | 'Card 03'      |
 		And I activate "Payment type" field in "Payments" table
 		And I click "Return (in day)" button
-		Then "1C:Enterprise" window is opened
-		And I click "Yes" button
+		Then "Cancellation confirmation" window is opened
+		And I change checkbox "Yes, I do know what am I doing"
+		And I click the button named "OK"	
 		Then "1C:Enterprise" window is opened
 		And I click "OK" button
 		And I move to the next attribute		
@@ -1696,8 +1696,7 @@ Scenario: _0850024 return by card without basis document (without RRN)
 			| '1'   | '200,00'   | ''             | 'Card 03'        | ''                   | 'No'                  | 'Bank term 03'   | 'POS Terminal'   | '1,00'      | '*'           |
 		And I click "Show hidden tables" button
 		Then "Edit hidden tables" window is opened
-		And I expand "ControlCodeStrings [1]" group
-		And I move to "ControlCodeStrings [1]" tab
+		And I move to "ControlCodeStrings (1)" tab
 		And "ControlCodeStrings" table became equal
 			| 'Key'   | 'Code string'            | 'Code is approved'    |
 			| '*'     | '11111111111111111111'   | 'Yes'                 |
@@ -2462,8 +2461,7 @@ Scenario: _0260156 check marking code in the Retail sales receipt and Retail ret
 		And I input "Q3VycmVudCByb3cgd2lsbCBkZWNvZGUgdG8gYmFzZTY0" text in the field named "Barcode"
 		And I move to the next attribute	
 		And I click "Show hidden tables" button
-		And I expand "ControlCodeStrings [1]" group
-		And I move to "ControlCodeStrings [1]" tab		
+		And I move to "ControlCodeStrings (1)" tab
 		And "ControlCodeStrings" table became equal
 			| 'Key'   | 'Code string'                                    | 'Code is approved'    |
 			| '*'     | 'Q3VycmVudCByb3cgd2lsbCBkZWNvZGUgdG8gYmFzZTY0'   | 'Yes'                 |
@@ -2496,8 +2494,7 @@ Scenario: _0260156 check marking code in the Retail sales receipt and Retail ret
 		And I click "Sales return" button
 		And I click "Ok" button
 		And I click "Show hidden tables" button
-		And I expand "ControlCodeStrings [1]" group
-		And I move to "ControlCodeStrings [1]" tab		
+		And I move to "ControlCodeStrings (1)" tab
 		And "ControlCodeStrings" table became equal
 			| 'Key'   | 'Code string'                                    | 'Code is approved'    |
 			| '*'     | 'Q3VycmVudCByb3cgd2lsbCBkZWNvZGUgdG8gYmFzZTY0'   | 'No'                  |
@@ -2513,8 +2510,7 @@ Scenario: _0260156 check marking code in the Retail sales receipt and Retail ret
 		And I click "Post" button
 	* Check 
 		And I click "Show hidden tables" button
-		And I expand "ControlCodeStrings [2]" group
-		And I move to "ControlCodeStrings [2]" tab		
+		And I move to "ControlCodeStrings (2)" tab	
 		And "ControlCodeStrings" table became equal
 			| 'Key'   | 'Code string'                                    | 'Code is approved'    |
 			| '*'     | 'Q3VycmVudCByb3cgd2lsbCBkZWNvZGUgdG8gYmFzZTY0'   | 'No'                  |
@@ -2536,8 +2532,7 @@ Scenario: _0260157 check marking code when change item key in the RSR
 		And I move to the next attribute	
 	* Check marking code
 		And I click "Show hidden tables" button
-		And I expand "ControlCodeStrings [1]" group
-		And I move to "ControlCodeStrings [1]" tab		
+		And I move to "ControlCodeStrings (1)" tab
 		And "ControlCodeStrings" table became equal
 			| 'Key'   | 'Code string'                                    | 'Code is approved'    |
 			| '*'     | 'Q3VycmVudCByb3cgd2lsbCBkZWNvZGUgdG8gYmFzZTY0'   | 'Yes'                 |
@@ -2550,8 +2545,7 @@ Scenario: _0260157 check marking code when change item key in the RSR
 			| 'ODS'         |
 		And I select current line in "List" table
 		And I click "Show hidden tables" button
-		And I expand "ControlCodeStrings [0]" group
-		And I move to "ControlCodeStrings [0]" tab		
+		And I move to "ControlCodeStrings (0)" tab		
 		Then the number of "ControlCodeStrings" table lines is "равно" 0
 		And I close current window
 	* Check marking code when change quantity
@@ -2568,8 +2562,7 @@ Scenario: _0260157 check marking code when change item key in the RSR
 		And I input "2,000" text in "Quantity" field of "ItemList" table
 		And I finish line editing in "ItemList" table
 		And I click "Show hidden tables" button
-		And I expand "ControlCodeStrings [1]" group
-		And I move to "ControlCodeStrings [1]" tab		
+		And I move to "ControlCodeStrings (1)" tab
 		Then the number of "ControlCodeStrings" table lines is "равно" 1
 		And I close current window
 				
@@ -2589,8 +2582,7 @@ Scenario: _0260158 check marking code when change item key in the RRR
 		And I move to the next attribute	
 	* Check marking code
 		And I click "Show hidden tables" button
-		And I expand "ControlCodeStrings [1]" group
-		And I move to "ControlCodeStrings [1]" tab		
+		And I move to "ControlCodeStrings (1)" tab	
 		And "ControlCodeStrings" table became equal
 			| 'Key'   | 'Code string'                                    | 'Code is approved'    |
 			| '*'     | 'Q3VycmVudCByb3cgd2lsbCBkZWNvZGUgdG8gYmFzZTY0'   | 'Yes'                 |
@@ -2603,8 +2595,7 @@ Scenario: _0260158 check marking code when change item key in the RRR
 			| 'ODS'         |
 		And I select current line in "List" table
 		And I click "Show hidden tables" button
-		And I expand "ControlCodeStrings [0]" group
-		And I move to "ControlCodeStrings [0]" tab		
+		And I move to "ControlCodeStrings (0)" tab	
 		Then the number of "ControlCodeStrings" table lines is "равно" 0
 		And I close current window
 	* Check clean marking code when change quantity
@@ -2621,8 +2612,7 @@ Scenario: _0260158 check marking code when change item key in the RRR
 		And I input "2,000" text in "Quantity" field of "ItemList" table
 		And I finish line editing in "ItemList" table
 		And I click "Show hidden tables" button
-		And I expand "ControlCodeStrings [1]" group
-		And I move to "ControlCodeStrings [1]" tab		
+		And I move to "ControlCodeStrings (1)" tab	
 		Then the number of "ControlCodeStrings" table lines is "равно" 1
 		And I close current window	
 		And I close all client application windows	
@@ -2641,8 +2631,7 @@ Scenario: _0260159 check marking code without check code string
 		And I move to the next attribute
 	* Check 
 		And I click "Show hidden tables" button
-		And I expand "ControlCodeStrings [1]" group
-		And I move to "ControlCodeStrings [1]" tab	
+		And I move to "ControlCodeStrings (1)" tab
 		And "ControlCodeStrings" table contains lines
 			| 'Key' | 'Code string' | 'Code is approved' | 'Not check' |
 			| '*'   | '*'           | 'Yes'              | 'Yes'       |
@@ -2950,8 +2939,9 @@ Scenario: _0260165 Return of a product paid for with a certificate
 		And I click "0" button
 		And I click "0" button
 		And I click "Return (in day)" button
-		Then "1C:Enterprise" window is opened
-		And I click "Yes" button
+		Then "Cancellation confirmation" window is opened
+		And I change checkbox "Yes, I do know what am I doing"
+		And I click the button named "OK"	
 		Then "1C:Enterprise" window is opened
 		And I click "OK" button
 		And I move to the next attribute
@@ -3342,6 +3332,9 @@ Scenario: _0260175 check revert card payment for sales (POS)
 			| 'And I click "Pay" button'    |
 	* Revert payment
 		And I click "Revert" button
+		Then "Cancellation confirmation" window is opened
+		And I change checkbox "Yes, I do know what am I doing"
+		And I click the button named "OK"
 		And I click "OK" button
 		And Delay 5
 		And I parsed the log of the fiscal emulator by the path '$$LogPathAcquiring$$' into the variable "ParsingResult1"
@@ -3406,6 +3399,9 @@ Scenario: _0260176 check revert card payment for return (POS)
 			| 'And I click "Return" button'    |
 	* Revert payment
 		And I click "Revert" button
+		Then "Cancellation confirmation" window is opened
+		And I change checkbox "Yes, I do know what am I doing"
+		And I click the button named "OK"
 		And I click "OK" button
 		And Delay 5
 		And I parsed the log of the fiscal emulator by the path '$$LogPathAcquiring$$' into the variable "ParsingResult1"
@@ -4841,6 +4837,35 @@ Scenario: _0260210 on double click in CRS
 		Then system warning window does not appear
 		And I close all client application windows	
 
-
-
-						
+Scenario: _0260212 manual payment by card (block Pay button)
+	And I close all client application windows
+	And In the command interface I select "Retail" "Point of sale"
+	* Select items
+		And I click "Search by barcode (F7)" button
+		And I input "2202283705" text in the field named "Barcode"
+		And I move to the next attribute
+	* Payment
+		And I click "Payment (+)" button
+		And I click "Card (*)" button
+		And I go to line in "BankPaymentTypeList" table
+			| 'Reference' |
+			| 'Card 03'   |
+		And I select current line in "BankPaymentTypeList" table
+		And I activate "Payment type" field in "Payments" table
+		And in the table "Payments" I click "Set payment check" button
+		And "Payments" table became equal
+			| 'Payment done' | 'Payment type' | 'Amount' |
+			| '✔'            | 'Card 03'      | '520,00' |		
+		When I Check the steps for Exception
+			| 'And I click "Pay" button'    |
+		And I select current line in "Payments" table
+		And in the table "Payments" I click "Set payment uncheck" button	
+		And "Payments" table became equal
+			| 'Payment done' | 'Payment type' | 'Amount' |
+			| '⚪'            | 'Card 03'      | '520,00' |		
+		And I click "Pay" button
+		Then "1C:Enterprise" window is opened
+		And I click "OK" button
+		And I move to the next attribute
+		And I click "OK" button	
+	And I close all client application windows			

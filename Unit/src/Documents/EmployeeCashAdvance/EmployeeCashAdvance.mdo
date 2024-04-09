@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mdclass:Document xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" xmlns:mdclassExtension="http://g5.1c.ru/v8/dt/metadata/mdclass/extension" uuid="81b843e0-ec31-451b-a223-88f6d11ca2de" extendedConfigurationObject="de024b50-2fd1-4537-8285-85a7b38853e8">
+  <producedTypes>
+    <objectType typeId="880beba1-3b65-4b0a-9f43-e8619a69b97b" valueTypeId="e24a0994-5075-4739-a9d6-c5e886963653"/>
+    <refType typeId="ed9d602f-8246-4dd1-80b1-5aff0e502be2" valueTypeId="b7e4468f-e7a7-45af-a347-48f069875e5c"/>
+    <selectionType typeId="f2985611-3c14-4d06-8275-a3a9091fc5f8" valueTypeId="a5d18ffe-a5da-42ee-b5ec-388a133e9634"/>
+    <listType typeId="358f1392-c5e4-4d4f-be0d-76f491fd2a46" valueTypeId="bbce3523-553c-4510-ae07-103d59a9d48e"/>
+    <managerType typeId="bbdd23f2-804b-47b0-8400-1b4f412dd8de" valueTypeId="01990042-2e3b-4730-bdee-1ba6b82f07e4"/>
+  </producedTypes>
+  <name>EmployeeCashAdvance</name>
+  <objectBelonging>Adopted</objectBelonging>
+  <extension xsi:type="mdclassExtension:DocumentExtension">
+    <extendedConfigurationObject>Checked</extendedConfigurationObject>
+  </extension>
+  <useStandardCommands>true</useStandardCommands>
+</mdclass:Document>

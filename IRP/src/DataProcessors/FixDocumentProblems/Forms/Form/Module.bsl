@@ -772,8 +772,6 @@ Procedure ClearRows()
 		EndDo;
 	EndDo;
 	
-	
-	
 	ValueToFormAttribute(Tree, "PostingInfo");
 EndProcedure
 
@@ -811,7 +809,6 @@ EndProcedure
 #EndRegion
 
 #Region Service
-
 
 &AtClient
 Procedure DocumentListRefOnChange(Item)

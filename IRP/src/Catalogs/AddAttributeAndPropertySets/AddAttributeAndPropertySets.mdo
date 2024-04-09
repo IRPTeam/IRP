@@ -898,6 +898,12 @@
         <value>148</value>
       </code>
     </items>
+    <items id="f76c6623-1f9f-4442-a14b-fa20ac6c53d2">
+      <name>Catalog_Incoterms</name>
+      <code xsi:type="core:NumberValue">
+        <value>149</value>
+      </code>
+    </items>
   </predefined>
   <editType>InDialog</editType>
   <choiceMode>BothWays</choiceMode>

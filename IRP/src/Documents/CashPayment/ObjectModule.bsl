@@ -33,6 +33,15 @@ EndProcedure
 Procedure FillCheckProcessing(Cancel, CheckedAttributes)
 	DocumentsServer.FillCheckBankCashDocuments(ThisObject, CheckedAttributes);
 	DocumentsServer.CheckMatchingToBasisDocument(ThisObject, "CashAccount", "Sender", Cancel);
+	
+	If Not Cancel Then
+		If ThisObject.TransactionType = Enums.OutgoingPaymentTransactionTypes.PaymentToVendor
+			Or ThisObject.TransactionType = Enums.OutgoingPaymentTransactionTypes.ReturnToCustomer
+			Or ThisObject.TransactionType = Enums.OutgoingPaymentTransactionTypes.OtherPartner Then
+			
+			CheckedAttributes.Add("PaymentList.Agreement");
+		EndIf;
+	EndIf;
 EndProcedure
 
 Procedure Posting(Cancel, PostingMode)

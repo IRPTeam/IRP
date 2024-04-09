@@ -1,4 +1,4 @@
-#language: en
+﻿#language: en
 @tree
 @Positive
 @Movements
@@ -270,19 +270,17 @@ Scenario: _040358 check Inventory transfer order movements by the Register  "R40
 			| 'Number'    |
 			| '201'       |
 	* Check movements by the Register  "R4012 Stock Reservation"
-		And I click "Registrations report" button
+		And I click "Registrations report info" button
 		And I select "R4012 Stock Reservation" exact value from "Register" drop-down list
 		And I click "Generate report" button
 		Then "ResultTable" spreadsheet document is equal
-			| 'Inventory transfer order 201 dated 28.02.2021 20:17:48'   | ''              | ''         | ''            | ''             | ''            | ''                                                          |
-			| 'Document registrations records'                           | ''              | ''         | ''            | ''             | ''            | ''                                                          |
-			| 'Register  "R4012 Stock Reservation"'                      | ''              | ''         | ''            | ''             | ''            | ''                                                          |
-			| ''                                                         | 'Record type'   | 'Period'   | 'Resources'   | 'Dimensions'   | ''            | ''                                                          |
-			| ''                                                         | ''              | ''         | 'Quantity'    | 'Store'        | 'Item key'    | 'Order'                                                     |
-			| ''                                                         | 'Receipt'       | '*'        | '2'           | 'Store 02'     | '36/Yellow'   | 'Inventory transfer order 201 dated 28.02.2021 20:17:48'    |
-			| ''                                                         | 'Receipt'       | '*'        | '10'          | 'Store 02'     | 'S/Yellow'    | 'Inventory transfer order 201 dated 28.02.2021 20:17:48'    |
-			| ''                                                         | 'Receipt'       | '*'        | '10'          | 'Store 02'     | 'XS/Blue'     | 'Inventory transfer order 201 dated 28.02.2021 20:17:48'    |
-			| ''                                                         | 'Receipt'       | '*'        | '15'          | 'Store 02'     | '36/Red'      | 'Inventory transfer order 201 dated 28.02.2021 20:17:48'    |
+			| 'Inventory transfer order 201 dated 28.02.2021 20:17:48' | ''       | ''           | ''         | ''          | ''                                                       | ''         |
+			| 'Register  "R4012 Stock Reservation"'                    | ''       | ''           | ''         | ''          | ''                                                       | ''         |
+			| ''                                                       | 'Period' | 'RecordType' | 'Store'    | 'Item key'  | 'Order'                                                  | 'Quantity' |
+			| ''                                                       | '*'      | 'Receipt'    | 'Store 02' | 'S/Yellow'  | 'Inventory transfer order 201 dated 28.02.2021 20:17:48' | '10'       |
+			| ''                                                       | '*'      | 'Receipt'    | 'Store 02' | 'XS/Blue'   | 'Inventory transfer order 201 dated 28.02.2021 20:17:48' | '10'       |
+			| ''                                                       | '*'      | 'Receipt'    | 'Store 02' | '36/Yellow' | 'Inventory transfer order 201 dated 28.02.2021 20:17:48' | '2'        |
+			| ''                                                       | '*'      | 'Receipt'    | 'Store 02' | '36/Red'    | 'Inventory transfer order 201 dated 28.02.2021 20:17:48' | '15'       |
 		And I close all client application windows
 
 

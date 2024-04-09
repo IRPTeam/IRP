@@ -18,6 +18,14 @@
   <createOnInput>Use</createOnInput>
   <dataLockControlMode>Managed</dataLockControlMode>
   <fullTextSearch>Use</fullTextSearch>
+  <objectPresentation>
+    <key>en</key>
+    <value>Depreciation calculation</value>
+  </objectPresentation>
+  <listPresentation>
+    <key>en</key>
+    <value>Depreciation calculations</value>
+  </listPresentation>
   <numberLength>12</numberLength>
   <numberAllowedLength>Variable</numberAllowedLength>
   <checkUnique>true</checkUnique>
@@ -26,8 +34,10 @@
   <defaultListForm>Document.DepreciationCalculation.Form.ListForm</defaultListForm>
   <defaultChoiceForm>Document.DepreciationCalculation.Form.ChoiceForm</defaultChoiceForm>
   <realTimePosting>Deny</realTimePosting>
-  <registerRecords>AccumulationRegister.R8510B_BookValueOfFixedAsset</registerRecords>
   <registerRecords>AccumulationRegister.R5022T_Expenses</registerRecords>
+  <registerRecords>AccumulationRegister.R8510B_BookValueOfFixedAsset</registerRecords>
+  <registerRecords>AccumulationRegister.T1040T_AccountingAmounts</registerRecords>
+  <registerRecords>AccumulationRegister.T1050T_AccountingQuantities</registerRecords>
   <postInPrivilegedMode>true</postInPrivilegedMode>
   <unpostInPrivilegedMode>true</unpostInPrivilegedMode>
   <attributes uuid="0fb812b1-156c-4055-9a1c-a07db92ca4b5">
@@ -212,6 +222,163 @@
       </synonym>
       <type>
         <types>Boolean</types>
+      </type>
+      <minValue xsi:type="core:UndefinedValue"/>
+      <maxValue xsi:type="core:UndefinedValue"/>
+      <dataHistory>Use</dataHistory>
+      <fullTextSearch>Use</fullTextSearch>
+    </attributes>
+  </tabularSections>
+  <tabularSections uuid="dccff1a5-34a5-4cff-bd86-aa80a55aa2d7">
+    <producedTypes>
+      <objectType typeId="fb352896-4c00-41dc-8a70-82f88a336eeb" valueTypeId="46476cb4-9645-43fd-98a3-a490f2e7b01a"/>
+      <rowType typeId="459e037c-d040-4c06-8dfa-0da5dd6677c8" valueTypeId="b3d5fcc2-8d00-416b-8fbc-6b43c1bc1a1f"/>
+    </producedTypes>
+    <name>Calculations</name>
+    <synonym>
+      <key>en</key>
+      <value>Calculations</value>
+    </synonym>
+    <attributes uuid="b107bc13-ecff-4cb7-8733-cd761be3e07c">
+      <name>Key</name>
+      <synonym>
+        <key>en</key>
+        <value>Key</value>
+      </synonym>
+      <type>
+        <types>DefinedType.typeRowID</types>
+      </type>
+      <minValue xsi:type="core:UndefinedValue"/>
+      <maxValue xsi:type="core:UndefinedValue"/>
+      <dataHistory>Use</dataHistory>
+      <fullTextSearch>Use</fullTextSearch>
+    </attributes>
+    <attributes uuid="066380d2-4149-4d3d-81df-9fc4808dc2ed">
+      <name>FixedAsset</name>
+      <synonym>
+        <key>en</key>
+        <value>Fixed asset</value>
+      </synonym>
+      <type>
+        <types>CatalogRef.FixedAssets</types>
+      </type>
+      <minValue xsi:type="core:UndefinedValue"/>
+      <maxValue xsi:type="core:UndefinedValue"/>
+      <dataHistory>Use</dataHistory>
+      <fullTextSearch>Use</fullTextSearch>
+    </attributes>
+    <attributes uuid="d074fbd9-402c-4cc8-a52a-275bc97216dc">
+      <name>ProfitLossCenter</name>
+      <synonym>
+        <key>en</key>
+        <value>Profit loss center</value>
+      </synonym>
+      <type>
+        <types>CatalogRef.BusinessUnits</types>
+      </type>
+      <minValue xsi:type="core:UndefinedValue"/>
+      <maxValue xsi:type="core:UndefinedValue"/>
+      <dataHistory>Use</dataHistory>
+      <fullTextSearch>Use</fullTextSearch>
+    </attributes>
+    <attributes uuid="2f3619e6-31f1-4e6a-a92c-aea868cb939a">
+      <name>LedgerType</name>
+      <synonym>
+        <key>en</key>
+        <value>Ledger type</value>
+      </synonym>
+      <type>
+        <types>CatalogRef.FixedAssetsLedgerTypes</types>
+      </type>
+      <minValue xsi:type="core:UndefinedValue"/>
+      <maxValue xsi:type="core:UndefinedValue"/>
+      <dataHistory>Use</dataHistory>
+      <fullTextSearch>Use</fullTextSearch>
+    </attributes>
+    <attributes uuid="7610b195-e64c-4308-a3a9-3bacc0a8e0f9">
+      <name>Schedule</name>
+      <synonym>
+        <key>en</key>
+        <value>Schedule</value>
+      </synonym>
+      <type>
+        <types>CatalogRef.DepreciationSchedules</types>
+      </type>
+      <minValue xsi:type="core:UndefinedValue"/>
+      <maxValue xsi:type="core:UndefinedValue"/>
+      <dataHistory>Use</dataHistory>
+      <fullTextSearch>Use</fullTextSearch>
+    </attributes>
+    <attributes uuid="33174149-6947-4c31-be40-7687f309a893">
+      <name>CalculationMethod</name>
+      <synonym>
+        <key>en</key>
+        <value>Calculation method</value>
+      </synonym>
+      <type>
+        <types>EnumRef.DepreciationMethods</types>
+      </type>
+      <minValue xsi:type="core:UndefinedValue"/>
+      <maxValue xsi:type="core:UndefinedValue"/>
+      <dataHistory>Use</dataHistory>
+      <fullTextSearch>Use</fullTextSearch>
+    </attributes>
+    <attributes uuid="f8019f0d-a8f0-4de9-b653-cf456fefa6db">
+      <name>Currency</name>
+      <synonym>
+        <key>en</key>
+        <value>Currency</value>
+      </synonym>
+      <type>
+        <types>CatalogRef.Currencies</types>
+      </type>
+      <minValue xsi:type="core:UndefinedValue"/>
+      <maxValue xsi:type="core:UndefinedValue"/>
+      <dataHistory>Use</dataHistory>
+      <fullTextSearch>Use</fullTextSearch>
+    </attributes>
+    <attributes uuid="b9bef88b-b90b-4484-b7aa-9ee0061f0917">
+      <name>ExpenseType</name>
+      <synonym>
+        <key>en</key>
+        <value>Expense type</value>
+      </synonym>
+      <type>
+        <types>CatalogRef.ExpenseAndRevenueTypes</types>
+      </type>
+      <minValue xsi:type="core:UndefinedValue"/>
+      <maxValue xsi:type="core:UndefinedValue"/>
+      <choiceParameters>
+        <name>Filter.IsExpense</name>
+        <value xsi:type="core:BooleanValue">
+          <value>true</value>
+        </value>
+      </choiceParameters>
+      <dataHistory>Use</dataHistory>
+      <fullTextSearch>Use</fullTextSearch>
+    </attributes>
+    <attributes uuid="f5deea1e-869c-43e3-aca8-9905ce35b421">
+      <name>AmountBalance</name>
+      <synonym>
+        <key>en</key>
+        <value>Amount balance</value>
+      </synonym>
+      <type>
+        <types>DefinedType.typeAmount</types>
+      </type>
+      <minValue xsi:type="core:UndefinedValue"/>
+      <maxValue xsi:type="core:UndefinedValue"/>
+      <dataHistory>Use</dataHistory>
+      <fullTextSearch>Use</fullTextSearch>
+    </attributes>
+    <attributes uuid="69777ff1-b5d8-4738-aa44-b02c72051e98">
+      <name>Amount</name>
+      <synonym>
+        <key>en</key>
+        <value>Amount</value>
+      </synonym>
+      <type>
+        <types>DefinedType.typeAmount</types>
       </type>
       <minValue xsi:type="core:UndefinedValue"/>
       <maxValue xsi:type="core:UndefinedValue"/>

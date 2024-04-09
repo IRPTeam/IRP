@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mdclass:Catalog xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:core="http://g5.1c.ru/v8/dt/mcore" xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="bcf548d8-71a6-4999-88b1-440802933fc6">
+  <producedTypes>
+    <objectType typeId="2ed6ff0d-1e71-4759-9fc2-a11755d87bd5" valueTypeId="3bfb101e-9f50-4302-bbf1-f99ff3dd585f"/>
+    <refType typeId="03ed19ba-bab4-44f6-a216-883e2d168833" valueTypeId="cdbf9a36-faa7-452a-9179-f64d7a22b73d"/>
+    <selectionType typeId="64953b71-a354-4da9-8ba6-453398e6180d" valueTypeId="7309a9d9-5dea-4b89-b99c-042b316b505f"/>
+    <listType typeId="161bd319-146a-4e93-aa29-0acbe7ebe272" valueTypeId="9d7c3963-20ea-4d1b-b3df-5268ff2e3562"/>
+    <managerType typeId="dc28d9db-4b28-412d-b74f-038031e493f6" valueTypeId="5f01c03d-1e13-4cb3-bda5-9c7e8e4d1ddc"/>
+  </producedTypes>
+  <name>Incoterms</name>
+  <synonym>
+    <key>en</key>
+    <value>Incoterms</value>
+  </synonym>
+  <useStandardCommands>true</useStandardCommands>
+  <inputByString>Catalog.Incoterms.StandardAttribute.Code</inputByString>
+  <fullTextSearchOnInputByString>DontUse</fullTextSearchOnInputByString>
+  <createOnInput>Use</createOnInput>
+  <dataLockControlMode>Managed</dataLockControlMode>
+  <fullTextSearch>Use</fullTextSearch>
+  <objectPresentation>
+    <key>en</key>
+    <value>Incoterm</value>
+  </objectPresentation>
+  <listPresentation>
+    <key>en</key>
+    <value>Incoterms</value>
+  </listPresentation>
+  <levelCount>2</levelCount>
+  <foldersOnTop>true</foldersOnTop>
+  <codeLength>3</codeLength>
+  <codeType>String</codeType>
+  <codeAllowedLength>Variable</codeAllowedLength>
+  <checkUnique>true</checkUnique>
+  <autonumbering>true</autonumbering>
+  <defaultPresentation>AsDescription</defaultPresentation>
+  <editType>InDialog</editType>
+  <choiceMode>BothWays</choiceMode>
+  <defaultObjectForm>Catalog.Incoterms.Form.ItemForm</defaultObjectForm>
+  <defaultListForm>Catalog.Incoterms.Form.ListForm</defaultListForm>
+  <defaultChoiceForm>Catalog.Incoterms.Form.ChoiceForm</defaultChoiceForm>
+  <tabularSections uuid="687d07b9-bc59-4d37-a6c3-383f8e79d32a">
+    <producedTypes>
+      <objectType typeId="45baf1cd-27c2-48eb-95c4-8a9c772a4b1d" valueTypeId="5839e5bc-93ce-4835-a75d-0d6b8c646994"/>
+      <rowType typeId="e29074d6-4dc0-40a7-88a3-9d6f22bc8803" valueTypeId="1a42b4e6-bba0-46b0-93d0-52141a518907"/>
+    </producedTypes>
+    <name>AddAttributes</name>
+    <synonym>
+      <key>en</key>
+      <value>Additional attributes</value>
+    </synonym>
+    <attributes uuid="06a511fd-1de0-49c0-8658-2796c0f2c69e">
+      <name>Property</name>
+      <synonym>
+        <key>en</key>
+        <value>Property</value>
+      </synonym>
+      <type>
+        <types>ChartOfCharacteristicTypesRef.AddAttributeAndProperty</types>
+      </type>
+      <minValue xsi:type="core:UndefinedValue"/>
+      <maxValue xsi:type="core:UndefinedValue"/>
+      <dataHistory>Use</dataHistory>
+      <fullTextSearch>Use</fullTextSearch>
+    </attributes>
+    <attributes uuid="f32a87b2-d621-412a-a2b0-3d282725b84d">
+      <name>Value</name>
+      <synonym>
+        <key>en</key>
+        <value>Value</value>
+      </synonym>
+      <type>
+        <types>Characteristic.AddAttributeAndProperty</types>
+      </type>
+      <minValue xsi:type="core:UndefinedValue"/>
+      <maxValue xsi:type="core:UndefinedValue"/>
+      <choiceParameterLinks>
+        <name>Filter.Owner</name>
+        <field>Catalog.Incoterms.TabularSection.AddAttributes.Attribute.Property</field>
+      </choiceParameterLinks>
+      <dataHistory>Use</dataHistory>
+      <fullTextSearch>Use</fullTextSearch>
+    </attributes>
+    <attributes uuid="b266b5d1-afe8-4678-b51f-7ccd8560ab8e">
+      <name>SearchLiteral</name>
+      <synonym>
+        <key>en</key>
+        <value>Search literal</value>
+      </synonym>
+      <type>
+        <types>String</types>
+        <stringQualifiers>
+          <length>500</length>
+        </stringQualifiers>
+      </type>
+      <minValue xsi:type="core:UndefinedValue"/>
+      <maxValue xsi:type="core:UndefinedValue"/>
+      <dataHistory>Use</dataHistory>
+      <fullTextSearch>Use</fullTextSearch>
+    </attributes>
+  </tabularSections>
+  <forms uuid="460cfbfc-efd3-4ae8-b145-bd3b3874c694">
+    <name>ItemForm</name>
+    <synonym>
+      <key>en</key>
+      <value>Item form</value>
+    </synonym>
+    <usePurposes>PersonalComputer</usePurposes>
+    <usePurposes>MobileDevice</usePurposes>
+  </forms>
+  <forms uuid="972b45ee-306a-491c-9a8c-1771781ff1e9">
+    <name>ListForm</name>
+    <synonym>
+      <key>en</key>
+      <value>List form</value>
+    </synonym>
+    <usePurposes>PersonalComputer</usePurposes>
+    <usePurposes>MobileDevice</usePurposes>
+  </forms>
+  <forms uuid="0050e2fb-32d7-4ab5-9003-0e69e8ec4a6a">
+    <name>ChoiceForm</name>
+    <synonym>
+      <key>en</key>
+      <value>Choice form</value>
+    </synonym>
+    <usePurposes>PersonalComputer</usePurposes>
+    <usePurposes>MobileDevice</usePurposes>
+  </forms>
+</mdclass:Catalog>

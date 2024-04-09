@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mdclass:Document xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" xmlns:mdclassExtension="http://g5.1c.ru/v8/dt/metadata/mdclass/extension" uuid="670878c2-39e1-45a3-bd60-6274fbee9f83" extendedConfigurationObject="de51ca37-0e68-4e39-acb0-28d0f5625e43">
+  <producedTypes>
+    <objectType typeId="fe9436dd-2da2-465f-a8bd-4a56cd614f89" valueTypeId="6f2aeeb3-bea5-4613-ae8b-489b24c98743"/>
+    <refType typeId="225b3e7d-de68-4ed9-9833-96caebebf9ce" valueTypeId="d391fc31-6984-451f-b497-0f83699ec32e"/>
+    <selectionType typeId="20bd2aed-0c94-4eb1-af30-30c7f3af79fd" valueTypeId="1519afaf-30cb-4ddb-bdb7-740f3e064a07"/>
+    <listType typeId="6243f4d9-bdd4-4316-b180-46a8025e9f29" valueTypeId="ee198277-b993-41e9-8afd-24c44e0726b5"/>
+    <managerType typeId="9996f5fe-891a-48d5-aea0-6b7db6668d5d" valueTypeId="9bd68e90-b5d3-4ea4-be6e-449ee7c2393e"/>
+  </producedTypes>
+  <name>PurchaseInvoice</name>
+  <objectBelonging>Adopted</objectBelonging>
+  <extension xsi:type="mdclassExtension:DocumentExtension">
+    <extendedConfigurationObject>Checked</extendedConfigurationObject>
+  </extension>
+  <useStandardCommands>true</useStandardCommands>
+</mdclass:Document>

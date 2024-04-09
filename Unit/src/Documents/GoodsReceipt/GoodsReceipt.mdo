@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mdclass:Document xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" xmlns:mdclassExtension="http://g5.1c.ru/v8/dt/metadata/mdclass/extension" uuid="96857e5b-c15c-4164-9711-49e3e66748d5" extendedConfigurationObject="e21fc0a4-9f3b-43c1-873d-952dbbb8ae63">
+  <producedTypes>
+    <objectType typeId="679468e9-047d-4624-aab7-19ec348a1ee7" valueTypeId="119e7926-58e1-4207-af3f-06f284e0aa17"/>
+    <refType typeId="03284712-de48-4158-acf7-3f961ddc304c" valueTypeId="e2333f15-3264-4d73-8de8-e9e8d6dde065"/>
+    <selectionType typeId="787b8a33-5cfe-4e4a-a579-af31be55ac6f" valueTypeId="31f841c2-f720-452b-86ba-dd161f4d3fa2"/>
+    <listType typeId="7d110030-30b5-4614-a7c8-b286d71f6249" valueTypeId="f2f62f63-1f72-472d-a166-e274e707643a"/>
+    <managerType typeId="b0bddfb9-9aa0-467b-9eaf-8ac78f4e953f" valueTypeId="97646fe3-def0-4789-a54b-5942344c0e81"/>
+  </producedTypes>
+  <name>GoodsReceipt</name>
+  <objectBelonging>Adopted</objectBelonging>
+  <extension xsi:type="mdclassExtension:DocumentExtension">
+    <extendedConfigurationObject>Checked</extendedConfigurationObject>
+  </extension>
+  <useStandardCommands>true</useStandardCommands>
+</mdclass:Document>

@@ -14,8 +14,6 @@ Procedure OnWrite(Cancel)
 	If DataExchange.Load Then
 		Return;
 	EndIf;
-
-	WriteMode = CommonFunctionsClientServer.GetFromAddInfo(ThisObject.AdditionalProperties, "WriteMode");
 EndProcedure
 
 Procedure BeforeDelete(Cancel)
@@ -45,6 +43,7 @@ Procedure FillCheckProcessing(Cancel, CheckedAttributes)
 	   		Or (ThisObject.SendDebtType = Enums.DebtTypes.TransactionVendor   And ThisObject.ReceiveDebtType = Enums.DebtTypes.AdvanceVendor) Then
 	   			   
 	   		CommonFunctionsClientServer.ShowUsersMessage(R().Error_142, "SendDebtType", ThisObject);
+	   		Cancel = True;
 		EndIf;
 	Else
 				
@@ -55,6 +54,7 @@ Procedure FillCheckProcessing(Cancel, CheckedAttributes)
 	   		Or (ThisObject.SendDebtType = Enums.DebtTypes.TransactionVendor   And ThisObject.ReceiveDebtType = Enums.DebtTypes.AdvanceVendor) Then
 	   
 	   		CommonFunctionsClientServer.ShowUsersMessage(R().Error_142, "SendDebtType", ThisObject);
+	   		Cancel = True;
 	   EndIf;
 	EndIf;
 

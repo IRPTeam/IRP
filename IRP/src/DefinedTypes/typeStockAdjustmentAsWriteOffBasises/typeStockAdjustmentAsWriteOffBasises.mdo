@@ -9,7 +9,7 @@
     <value>Type stock adjustment as write off basises</value>
   </synonym>
   <type>
-    <types>DocumentRef.PhysicalInventory</types>
     <types>DocumentRef.StockAdjustmentAsWriteOff</types>
+    <types>DocumentRef.PhysicalInventory</types>
   </type>
 </mdclass:DefinedType>

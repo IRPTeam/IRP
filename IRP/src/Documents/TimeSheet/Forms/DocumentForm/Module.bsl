@@ -166,7 +166,6 @@ Function GetCalendarDates()
 			And Not ValueIsFilled(Row.ActuallyDaysHours) Then
 			Result.Weekend.Add(Row.Date);
 		
-		
 		ElsIf ValueIsFilled(Row.ActuallyDaysHours)
 			And Not Row.IsVacation And Not Row.IsSickLeave Then	
 			Result.FullWorkedDays.Add(Row.Date);
@@ -392,7 +391,6 @@ Procedure AddEmployeeEnd(Result, NotifyParams) Export
 		FillingResult.Address, FillingResult.GroupColumn, FillingResult.SumColumn);
 	ThisObject.Modified = True;
 	
-	
 	FillWorkersAtServer();
 	
 	For Each Row In ThisObject.Workers Do
@@ -568,9 +566,6 @@ Async Procedure RefillByCurrentEmployee(Command)
 	EndIf;
 	
 	CurrentData_Employee         = CurrentData.Employee;
-	CurrentData_EmployeeSchedule = CurrentData.EmployeeSchedule;
-	CurrentData_Position         = CurrentData.Position;
-	CurrentData_ProfitLisCenter  = CurrentData.ProfitLossCenter;
 		
 	If ValueIsFilled(CurrentData_Employee) Then
 		Answer = Await DoQueryBoxAsync(StrTemplate(R().QuestionToUser_027, CurrentData_Employee), QuestionDialogMode.OKCancel);

@@ -12,6 +12,7 @@ EndProcedure
 
 Procedure DeleteAvailableAttribute(ItemType, Attribute) Export
 	If Not TransactionActive() Then
+		//@skip-check rollback-transaction, commit-transaction
 		BeginTransaction(DataLockControlMode.Managed);
 		Try
 			DeleteDataFromObject(ItemType, Attribute);

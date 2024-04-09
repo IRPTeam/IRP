@@ -35,6 +35,7 @@ Procedure PostingCheckBeforeWrite(Ref, Cancel, PostingMode, Parameters, AddInfo 
 	Tables.R5022T_Expenses.Columns.Add("Key", Metadata.DefinedTypes.typeRowID.Type);
 	Tables.R5015B_OtherPartnersTransactions.Columns.Add("Key", Metadata.DefinedTypes.typeRowID.Type);
 	Tables.T1040T_AccountingAmounts.Columns.Add("Key", Metadata.DefinedTypes.typeRowID.Type);
+	Tables.R5020B_PartnersBalance.Columns.Add("Key", Metadata.DefinedTypes.typeRowID.Type);
 
 	PostingServer.FillPostingTables(Tables, Ref, QueryArray, Parameters);
 EndProcedure
@@ -105,9 +106,9 @@ Function GetQueryTextsMasterTables()
 	QueryArray.Add(R5012B_VendorsAging());
 	QueryArray.Add(R5015B_OtherPartnersTransactions());
 	QueryArray.Add(R5022T_Expenses());
-	QueryArray.Add(T2014S_AdvancesInfo());
 	QueryArray.Add(T2015S_TransactionsInfo());
 	QueryArray.Add(T1040T_AccountingAmounts());
+	QueryArray.Add(R5020B_PartnersBalance());
 	Return QueryArray;
 EndFunction
 
@@ -117,40 +118,45 @@ EndFunction
 
 Function Transactions()
 	Return "SELECT
-		   |	Transactions.Ref.Date AS Period,
-		   |	Transactions.Ref.Company AS Company,
-		   |	Transactions.Partner,
-		   |	Transactions.LegalName,
-		   |	Transactions.Agreement,
-		   |	CASE
-		   |		WHEN Transactions.Agreement.ApArPostingDetail = VALUE(Enum.ApArPostingDetail.ByDocuments)
-		   |			THEN Transactions.Ref
-		   |		ELSE UNDEFINED
-		   |	END AS BasisDocument,
-		   |
-		   |	case when Transactions.Agreement.ApArPostingDetail = VALUE(Enum.ApArPostingDetail.ByDocuments) Then
-		   |	Transactions.Agreement else Undefined end AS AdvanceAgreement,
-		   |
-		   |	Transactions.Ref AS AdvancesOrTransactionDocument,
-		   |	Transactions.Ref AS Ref,
-		   |	Transactions.Agreement.Type = VALUE(Enum.AgreementTypes.Vendor) AS IsVendor,
-		   |	Transactions.Agreement.Type = VALUE(Enum.AgreementTypes.Customer) AS IsCustomer,
-		   |	Transactions.Agreement.Type = VALUE(Enum.AgreementTypes.Other) AS IsOther,
-		   |	Transactions.Agreement.ApArPostingDetail = VALUE(Enum.ApArPostingDetail.ByDocuments) AS IsPostingDetail_ByDocuments,
-		   |	Transactions.Currency,
-		   |	Transactions.Key,
-		   |	Transactions.Amount,
-		   |	Transactions.Ref.Branch AS Branch,
-		   |	Transactions.LegalNameContract AS LegalNameContract,
-		   |	Transactions.ProfitLossCenter,
-		   |	Transactions.AdditionalAnalytic,
-		   |	Transactions.ExpenseType,
-		   |	Transactions.Project
-		   |INTO Transactions
-		   |FROM
-		   |	Document.CreditNote.Transactions AS Transactions
-		   |WHERE
-		   |	Transactions.Ref = &Ref";
+	|	Transactions.Ref.Date AS Period,
+	|	Transactions.Ref.Company AS Company,
+	|	Transactions.Partner,
+	|	Transactions.LegalName,
+	|	Transactions.Agreement,
+	|	CASE
+	|		WHEN Transactions.Agreement.ApArPostingDetail = VALUE(Enum.ApArPostingDetail.ByDocuments)
+	|			THEN CASE
+	|				WHEN Transactions.BasisDocument.Ref IS NULL
+	|					THEN Transactions.Ref
+	|				ELSE Transactions.BasisDocument
+	|			END
+	|		ELSE UNDEFINED
+	|	END AS BasisDocument,
+	|	case
+	|		when Transactions.Agreement.ApArPostingDetail = VALUE(Enum.ApArPostingDetail.ByDocuments)
+	|			Then Transactions.Agreement
+	|		else Undefined
+	|	end AS AdvanceAgreement,
+	|	Transactions.Ref AS AdvancesOrTransactionDocument,
+	|	Transactions.Ref AS Ref,
+	|	Transactions.Agreement.Type = VALUE(Enum.AgreementTypes.Vendor) AS IsVendor,
+	|	Transactions.Agreement.Type = VALUE(Enum.AgreementTypes.Customer) AS IsCustomer,
+	|	Transactions.Agreement.Type = VALUE(Enum.AgreementTypes.Other) AS IsOther,
+	|	Transactions.Agreement.ApArPostingDetail = VALUE(Enum.ApArPostingDetail.ByDocuments) AS IsPostingDetail_ByDocuments,
+	|	Transactions.Currency,
+	|	Transactions.Key,
+	|	Transactions.Amount,
+	|	Transactions.Ref.Branch AS Branch,
+	|	Transactions.LegalNameContract AS LegalNameContract,
+	|	Transactions.ProfitLossCenter,
+	|	Transactions.AdditionalAnalytic,
+	|	Transactions.ExpenseType,
+	|	Transactions.Project
+	|INTO Transactions
+	|FROM
+	|	Document.CreditNote.Transactions AS Transactions
+	|WHERE
+	|	Transactions.Ref = &Ref";
 EndFunction
 
 #EndRegion
@@ -194,6 +200,7 @@ Function R5015B_OtherPartnersTransactions()
 		   |	Transactions.LegalName,
 		   |	Transactions.Partner,
 		   |	Transactions.Agreement,
+		   |	UNDEFINED AS Basis,
 		   |	Transactions.Key,
 		   |	Transactions.Amount
 		   |INTO R5015B_OtherPartnersTransactions
@@ -247,12 +254,12 @@ Function R1022B_VendorsPaymentPlanning()
 		   |	VALUE(AccumulationRecordType.Receipt)";
 EndFunction
 
-Function T2014S_AdvancesInfo() 
-	Return InformationRegisters.T2014S_AdvancesInfo.T2014S_AdvancesInfo_CreditNote();
-EndFunction
-
 Function T2015S_TransactionsInfo()
 	Return InformationRegisters.T2015S_TransactionsInfo.T2015S_TransactionsInfo_CreditNote();
+EndFunction
+
+Function R5020B_PartnersBalance()
+	Return AccumulationRegisters.R5020B_PartnersBalance.R5020B_PartnersBalance_CreditNote();
 EndFunction
 
 #EndRegion

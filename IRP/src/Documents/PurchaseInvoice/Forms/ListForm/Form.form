@@ -1136,10 +1136,10 @@
       <segments>List.IsHaveJE</segments>
     </notDefaultUseAlwaysAttributes>
     <notDefaultUseAlwaysAttributes xsi:type="form:DataPath">
-      <segments>List.Ref</segments>
+      <segments>List.PaymentStatus</segments>
     </notDefaultUseAlwaysAttributes>
     <notDefaultUseAlwaysAttributes xsi:type="form:DataPath">
-      <segments>List.PaymentStatus</segments>
+      <segments>List.Ref</segments>
     </notDefaultUseAlwaysAttributes>
     <main>true</main>
     <extInfo xsi:type="form:DynamicListExtInfo">
@@ -1437,7 +1437,6 @@ GROUP BY
             </content>
           </localValue>
         </title>
-        <useRestriction/>
       </fields>
       <fields xsi:type="schema:DataCompositionSchemaDataSetField">
         <dataPath>CurrencyMovementType</dataPath>

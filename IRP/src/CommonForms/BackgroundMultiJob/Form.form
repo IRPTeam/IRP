@@ -737,20 +737,20 @@
       <segments>JobList</segments>
     </dataPath>
     <titleLocation>None</titleLocation>
-    <excludedCommands>SortListDesc</excludedCommands>
-    <excludedCommands>Copy</excludedCommands>
-    <excludedCommands>Change</excludedCommands>
-    <excludedCommands>EndEdit</excludedCommands>
-    <excludedCommands>CopyToClipboard</excludedCommands>
-    <excludedCommands>SelectAll</excludedCommands>
-    <excludedCommands>SearchEverywhere</excludedCommands>
-    <excludedCommands>FindByCurrentValue</excludedCommands>
-    <excludedCommands>ShowRowRearrangement</excludedCommands>
-    <excludedCommands>ShowMultipleSelection</excludedCommands>
-    <excludedCommands>Delete</excludedCommands>
     <excludedCommands>Add</excludedCommands>
+    <excludedCommands>Change</excludedCommands>
+    <excludedCommands>Copy</excludedCommands>
+    <excludedCommands>CopyToClipboard</excludedCommands>
+    <excludedCommands>Delete</excludedCommands>
+    <excludedCommands>EndEdit</excludedCommands>
+    <excludedCommands>FindByCurrentValue</excludedCommands>
+    <excludedCommands>SearchEverywhere</excludedCommands>
     <excludedCommands>SearchHistory</excludedCommands>
+    <excludedCommands>SelectAll</excludedCommands>
+    <excludedCommands>ShowMultipleSelection</excludedCommands>
+    <excludedCommands>ShowRowRearrangement</excludedCommands>
     <excludedCommands>SortListAsc</excludedCommands>
+    <excludedCommands>SortListDesc</excludedCommands>
     <items xsi:type="form:FormGroup">
       <name>JobListGroupIcon</name>
       <id>85</id>
@@ -2275,12 +2275,12 @@
     <horizontalAlign>Left</horizontalAlign>
   </autoCommandBar>
   <handlers>
-    <event>OnCreateAtServer</event>
-    <name>OnCreateAtServer</name>
-  </handlers>
-  <handlers>
     <event>OnOpen</event>
     <name>OnOpen</name>
+  </handlers>
+  <handlers>
+    <event>OnCreateAtServer</event>
+    <name>OnCreateAtServer</name>
   </handlers>
   <autoTitle>true</autoTitle>
   <autoUrl>true</autoUrl>

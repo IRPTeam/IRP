@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mdclass:FunctionalOption xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="94b0f378-15ee-482d-86da-919b2b41c2e6">
+  <name>UseResponsiblePerson</name>
+  <synonym>
+    <key>en</key>
+    <value>Use responsible person</value>
+  </synonym>
+  <location>Constant.UseResponsiblePerson</location>
+  <privilegedGetMode>true</privilegedGetMode>
+  <content>Document.CommissioningOfFixedAsset.Attribute.ResponsiblePerson</content>
+  <content>InformationRegister.T8515S_FixedAssetsLocation.Dimension.ResponsiblePerson</content>
+  <content>Document.FixedAssetTransfer.Attribute.ResponsiblePersonSender</content>
+  <content>Document.FixedAssetTransfer.Attribute.ResponsiblePersonReceiver</content>
+  <content>Document.OpeningEntry.TabularSection.FixedAssets.Attribute.ResponsiblePerson</content>
+</mdclass:FunctionalOption>

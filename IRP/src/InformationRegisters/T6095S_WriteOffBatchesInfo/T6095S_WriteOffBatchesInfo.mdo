@@ -233,11 +233,11 @@
       <value>Document</value>
     </synonym>
     <type>
+      <types>DocumentRef.CommissioningOfFixedAsset</types>
+      <types>DocumentRef.ModernizationOfFixedAsset</types>
       <types>DocumentRef.StockAdjustmentAsWriteOff</types>
       <types>DocumentRef.WorkSheet</types>
-      <types>DocumentRef.CommissioningOfFixedAsset</types>
       <types>DocumentRef.DecommissioningOfFixedAsset</types>
-      <types>DocumentRef.ModernizationOfFixedAsset</types>
     </type>
     <minValue xsi:type="core:UndefinedValue"/>
     <maxValue xsi:type="core:UndefinedValue"/>

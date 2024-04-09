@@ -22,14 +22,10 @@
     <typesFilterValue xsi:type="core:ReferenceValue">
       <value>Catalog.AddAttributeAndPropertySets.Document_CommissioningOfFixedAsset</value>
     </typesFilterValue>
-    <dataPathField>0</dataPathField>
-    <multipleValuesUseField>0</multipleValuesUseField>
     <characteristicValues>InformationRegister.AddProperties</characteristicValues>
     <objectField>InformationRegister.AddProperties.Dimension.Object</objectField>
     <typeField>InformationRegister.AddProperties.Dimension.Property</typeField>
     <valueField>InformationRegister.AddProperties.Resource.Value</valueField>
-    <multipleValuesKeyField>0</multipleValuesKeyField>
-    <multipleValuesOrderField>0</multipleValuesOrderField>
   </characteristics>
   <characteristics>
     <characteristicTypes>Catalog.AddAttributeAndPropertySets.TabularSection.Attributes</characteristicTypes>
@@ -38,14 +34,10 @@
     <typesFilterValue xsi:type="core:ReferenceValue">
       <value>Catalog.AddAttributeAndPropertySets.Document_CommissioningOfFixedAsset</value>
     </typesFilterValue>
-    <dataPathField>0</dataPathField>
-    <multipleValuesUseField>0</multipleValuesUseField>
     <characteristicValues>Document.CommissioningOfFixedAsset.TabularSection.AddAttributes</characteristicValues>
     <objectField>Document.CommissioningOfFixedAsset.TabularSection.AddAttributes.StandardAttribute.Ref</objectField>
     <typeField>Document.CommissioningOfFixedAsset.TabularSection.AddAttributes.Attribute.Property</typeField>
     <valueField>Document.CommissioningOfFixedAsset.TabularSection.AddAttributes.Attribute.Value</valueField>
-    <multipleValuesKeyField>0</multipleValuesKeyField>
-    <multipleValuesOrderField>0</multipleValuesOrderField>
   </characteristics>
   <createOnInput>DontUse</createOnInput>
   <dataLockControlMode>Managed</dataLockControlMode>
@@ -73,6 +65,8 @@
   <registerRecords>AccumulationRegister.R4011B_FreeStocks</registerRecords>
   <registerRecords>AccumulationRegister.R6020B_BatchBalance</registerRecords>
   <registerRecords>AccumulationRegister.R4014B_SerialLotNumber</registerRecords>
+  <registerRecords>AccumulationRegister.T1040T_AccountingAmounts</registerRecords>
+  <registerRecords>AccumulationRegister.T1050T_AccountingQuantities</registerRecords>
   <postInPrivilegedMode>true</postInPrivilegedMode>
   <unpostInPrivilegedMode>true</unpostInPrivilegedMode>
   <choiceHistoryOnInput>DontUse</choiceHistoryOnInput>
@@ -130,10 +124,10 @@
     <dataHistory>Use</dataHistory>
   </attributes>
   <attributes uuid="7c7d7401-236e-4126-bb3f-2058e350c018">
-    <name>BusinessUnit</name>
+    <name>ProfitLossCenter</name>
     <synonym>
       <key>en</key>
-      <value>Business unit</value>
+      <value>Profit loss center</value>
     </synonym>
     <type>
       <types>CatalogRef.BusinessUnits</types>
@@ -621,4 +615,24 @@
       <fullTextSearch>Use</fullTextSearch>
     </attributes>
   </tabularSections>
+  <templates uuid="c2e98b3a-ed32-4aeb-9758-8f86fb742500">
+    <name>CommissioningOfFixedAssetPrint</name>
+    <synonym>
+      <key>en</key>
+      <value>Commissioning of fixed asset</value>
+    </synonym>
+  </templates>
+  <commands uuid="b0030b26-71cc-481f-87ca-f16a90b334ae">
+    <name>CommissioningOfFixedAssetPrint</name>
+    <synonym>
+      <key>en</key>
+      <value>Commissioning of fixed asset</value>
+    </synonym>
+    <group>CommandGroup.Print</group>
+    <commandParameterType>
+      <types>DocumentRef.CommissioningOfFixedAsset</types>
+    </commandParameterType>
+    <parameterUseMode>Multiple</parameterUseMode>
+    <representation>Auto</representation>
+  </commands>
 </mdclass:Document>

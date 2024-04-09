@@ -82,6 +82,7 @@ Function GetExclude_Catalogs()
 	ArrayOfExcluded.Add("Catalog.RetailCustomers");
 	ArrayOfExcluded.Add("Catalog.ExternalFunctions");
 	ArrayOfExcluded.Add("Catalog.ObjectAccessKeys");
+	ArrayOfExcluded.Add("Catalog.Incoterms");
 	ArrayOfExcluded.Add("Catalog.TR_Cities");
 	ArrayOfExcluded.Add("Catalog.TR_CitySubdivisions");
 	ArrayOfExcluded.Add("Catalog.TR_ESF_Address");
@@ -92,6 +93,7 @@ Function GetExclude_Catalogs()
 	ArrayOfExcluded.Add("Catalog.TR_ESF_TaxExemptionReasons");
 	ArrayOfExcluded.Add("Catalog.TR_ESF_TransportModes");
 	ArrayOfExcluded.Add("Catalog.TR_TaxAuthorities");
+	ArrayOfExcluded.Add("Catalog.Unit_ErrorTypes");
 	Return ArrayOfExcluded;
 EndFunction
 

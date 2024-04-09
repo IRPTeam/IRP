@@ -3,11 +3,36 @@ Procedure BeforeWrite(Cancel, WriteMode, PostingMode)
 		Return;
 	EndIf;
 
-	CurrenciesClientServer.DeleteUnusedRowsFromCurrenciesTable(ThisObject.Currencies, ThisObject.PaymentList);
+	IsMoneyExchange = ThisObject.TransactionType = Enums.IncomingPaymentTransactionType.CurrencyExchange;
+		
+	TotalTable = New ValueTable();
+	TotalTable.Columns.Add("Key");
+	For Each Row In ThisObject.PaymentList Do
+		TotalTable.Add().Key = Row.Key;
+		If IsMoneyExchange Then
+			
+			If Not ValueIsFilled(Row.TransitUUID) Then
+				Row.TransitUUID = New UUID();
+			EndIf;
+			
+			TotalTable.Add().Key = Row.TransitUUID;	
+		EndIf;	
+	EndDo;
+	
+	CurrenciesClientServer.DeleteUnusedRowsFromCurrenciesTable(ThisObject.Currencies, TotalTable);
+		
 	For Each Row In ThisObject.PaymentList Do
 		Parameters = CurrenciesClientServer.GetParameters_V8(ThisObject, Row);
 		CurrenciesClientServer.DeleteRowsByKeyFromCurrenciesTable(ThisObject.Currencies, Row.Key);
 		CurrenciesServer.UpdateCurrencyTable(Parameters, ThisObject.Currencies);
+		
+		If IsMoneyExchange Then		
+			TransitCurrency = ThisObject.TransitAccount.Currency;
+		
+			Parameters = CurrenciesClientServer.GetParameters_V7(ThisObject, Row.TransitUUID, TransitCurrency, Row.AmountExchange);
+			CurrenciesClientServer.DeleteRowsByKeyFromCurrenciesTable(ThisObject.Currencies, Row.TransitUUID);
+			CurrenciesServer.UpdateCurrencyTable(Parameters, ThisObject.Currencies);		
+		EndIf;		
 	EndDo;
 
 	ThisObject.AdditionalProperties.Insert("WriteMode", WriteMode);
@@ -43,6 +68,21 @@ Procedure FillCheckProcessing(Cancel, CheckedAttributes)
 		EndIf;
 	EndDo;
 	
+	If Not Cancel Then
+		If ThisObject.TransactionType = Enums.IncomingPaymentTransactionType.CurrencyExchange Then
+			CheckDataPrivileged.FillCheckProcessing_BankReceipt_CurrencyExchange(ThisObject, Cancel);
+		EndIf;
+	EndIf;
+	
+	If Not Cancel Then	
+		If ThisObject.TransactionType = Enums.IncomingPaymentTransactionType.PaymentFromCustomer
+			Or ThisObject.TransactionType = Enums.IncomingPaymentTransactionType.ReturnFromVendor
+			Or ThisObject.TransactionType = Enums.IncomingPaymentTransactionType.PaymentFromCustomerByPOS
+			Or ThisObject.TransactionType = Enums.IncomingPaymentTransactionType.OtherPartner Then
+			
+			CheckedAttributes.Add("PaymentList.Agreement");
+		EndIf;
+	EndIf;
 EndProcedure
 
 Procedure Posting(Cancel, PostingMode)
@@ -90,3 +130,5 @@ Procedure OnCopy(CopiedObject)
 	RRNCode = "";
 	PaymentInfo = "";
 EndProcedure
+
+

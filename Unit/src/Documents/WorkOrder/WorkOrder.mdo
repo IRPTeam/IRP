@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mdclass:Document xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" xmlns:mdclassExtension="http://g5.1c.ru/v8/dt/metadata/mdclass/extension" uuid="3efee53b-4ce2-4c51-bc3b-f716d4fec49d" extendedConfigurationObject="59be6022-712e-4131-8752-8dfc50eb4647">
+  <producedTypes>
+    <objectType typeId="6d4d4f4f-d436-4265-bf9d-8684749f3e95" valueTypeId="98d6a4d2-07b7-433b-b223-fc50bf56851b"/>
+    <refType typeId="e9ef0c22-c001-4de8-abca-a0b41862c197" valueTypeId="f6dedd09-f663-4313-a378-fbae50f20b4c"/>
+    <selectionType typeId="025a93b5-1817-4d81-9d1d-21dc63c1cca1" valueTypeId="4a7ba811-a7d2-464e-bfd6-a70f0fd06354"/>
+    <listType typeId="9b2b6f63-6ee1-4358-9045-d494cf9298c3" valueTypeId="b55ba291-5da3-41f0-b4cb-b91ffa663f9a"/>
+    <managerType typeId="f17d516a-ea45-4a6c-8131-a0c487fb13e9" valueTypeId="c28c9885-4919-4b62-a58f-8d8217e31d5c"/>
+  </producedTypes>
+  <name>WorkOrder</name>
+  <objectBelonging>Adopted</objectBelonging>
+  <extension xsi:type="mdclassExtension:DocumentExtension">
+    <extendedConfigurationObject>Checked</extendedConfigurationObject>
+  </extension>
+  <useStandardCommands>true</useStandardCommands>
+</mdclass:Document>

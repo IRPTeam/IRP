@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mdclass:Document xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" xmlns:mdclassExtension="http://g5.1c.ru/v8/dt/metadata/mdclass/extension" uuid="b237377d-088b-4b5e-851c-94472157114a" extendedConfigurationObject="d78046ef-1f26-4b96-8449-550697c130ce">
+  <producedTypes>
+    <objectType typeId="fdef7888-9c3f-4b17-a501-413272dc8cce" valueTypeId="cc664d39-9cff-472d-aa48-02068bc5934c"/>
+    <refType typeId="99ebe231-5bba-4f00-bb79-a466aebed63c" valueTypeId="7528ddac-bf9d-498e-bf94-c25e7d5e23f4"/>
+    <selectionType typeId="5fe94b2a-4b8b-4905-9912-3d4c8b584aae" valueTypeId="621816b9-71ed-4a78-8127-0fff7a962454"/>
+    <listType typeId="c1188c2d-f7ee-4817-b51e-f6320e705abf" valueTypeId="8cdfd6b3-2bb2-41bf-ad53-329141b921df"/>
+    <managerType typeId="c4db5b93-db47-4f4e-9fb2-7e96f9d396f5" valueTypeId="125cb706-2dd7-4479-9494-e7e003bb5207"/>
+  </producedTypes>
+  <name>DebitNote</name>
+  <objectBelonging>Adopted</objectBelonging>
+  <extension xsi:type="mdclassExtension:DocumentExtension">
+    <extendedConfigurationObject>Checked</extendedConfigurationObject>
+  </extension>
+  <useStandardCommands>true</useStandardCommands>
+</mdclass:Document>

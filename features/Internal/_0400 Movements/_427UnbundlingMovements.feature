@@ -1,4 +1,4 @@
-#language: en
+﻿#language: en
 @tree
 @Positive
 @Movements2
@@ -88,20 +88,18 @@ Scenario: _042702 check Unbundling movements by the Register  "R4011 Free stocks
 			| 'Number'    |
 			| '1'         |
 	* Check movements by the Register  "R4011 Free stocks"
-		And I click "Registrations report" button
+		And I click "Registrations report info" button
 		And I select "R4011 Free stocks" exact value from "Register" drop-down list
 		And I click "Generate report" button
 		Then "ResultTable" spreadsheet document is equal
-			| 'Unbundling 1 dated 07.09.2020 18:23:12'   | ''              | ''                      | ''            | ''             | ''             |
-			| 'Document registrations records'           | ''              | ''                      | ''            | ''             | ''             |
-			| 'Register  "R4011 Free stocks"'            | ''              | ''                      | ''            | ''             | ''             |
-			| ''                                         | 'Record type'   | 'Period'                | 'Resources'   | 'Dimensions'   | ''             |
-			| ''                                         | ''              | ''                      | 'Quantity'    | 'Store'        | 'Item key'     |
-			| ''                                         | 'Receipt'       | '07.09.2020 18:23:12'   | '2'           | 'Store 01'     | 'S/Yellow'     |
-			| ''                                         | 'Receipt'       | '07.09.2020 18:23:12'   | '2'           | 'Store 01'     | 'XS/Blue'      |
-			| ''                                         | 'Receipt'       | '07.09.2020 18:23:12'   | '4'           | 'Store 01'     | 'L/Green'      |
-			| ''                                         | 'Receipt'       | '07.09.2020 18:23:12'   | '4'           | 'Store 01'     | 'M/Brown'      |
-			| ''                                         | 'Expense'       | '07.09.2020 18:23:12'   | '2'           | 'Store 01'     | 'Dress/A-8'    |
+			| 'Unbundling 1 dated 07.09.2020 18:23:12' | ''                    | ''           | ''         | ''          | ''         |
+			| 'Register  "R4011 Free stocks"'          | ''                    | ''           | ''         | ''          | ''         |
+			| ''                                       | 'Period'              | 'RecordType' | 'Store'    | 'Item key'  | 'Quantity' |
+			| ''                                       | '07.09.2020 18:23:12' | 'Receipt'    | 'Store 01' | 'S/Yellow'  | '2'        |
+			| ''                                       | '07.09.2020 18:23:12' | 'Receipt'    | 'Store 01' | 'XS/Blue'   | '2'        |
+			| ''                                       | '07.09.2020 18:23:12' | 'Receipt'    | 'Store 01' | 'L/Green'   | '4'        |
+			| ''                                       | '07.09.2020 18:23:12' | 'Receipt'    | 'Store 01' | 'M/Brown'   | '4'        |
+			| ''                                       | '07.09.2020 18:23:12' | 'Expense'    | 'Store 01' | 'Dress/A-8' | '2'        |		
 		And I close all client application windows
 			
 Scenario: _042730 Unbundling clear posting/mark for deletion

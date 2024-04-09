@@ -22,7 +22,6 @@
     <typesFilterValue xsi:type="core:ReferenceValue">
       <value>Catalog.AddAttributeAndPropertySets.Document_DecommissioningOfFixedAsset</value>
     </typesFilterValue>
-    <dataPathField>0</dataPathField>
     <multipleValuesUseField>Catalog.AddAttributeAndPropertySets.TabularSection.Properties.Attribute.Collection</multipleValuesUseField>
     <characteristicValues>InformationRegister.AddProperties</characteristicValues>
     <objectField>InformationRegister.AddProperties.Dimension.Object</objectField>
@@ -38,7 +37,6 @@
     <typesFilterValue xsi:type="core:ReferenceValue">
       <value>Catalog.AddAttributeAndPropertySets.Document_DecommissioningOfFixedAsset</value>
     </typesFilterValue>
-    <dataPathField>0</dataPathField>
     <multipleValuesUseField>Catalog.AddAttributeAndPropertySets.TabularSection.Attributes.Attribute.Collection</multipleValuesUseField>
     <characteristicValues>Document.DecommissioningOfFixedAsset.TabularSection.AddAttributes</characteristicValues>
     <objectField>Document.DecommissioningOfFixedAsset.TabularSection.AddAttributes.StandardAttribute.Ref</objectField>
@@ -73,6 +71,8 @@
   <registerRecords>InformationRegister.T6010S_BatchesInfo</registerRecords>
   <registerRecords>AccumulationRegister.R6020B_BatchBalance</registerRecords>
   <registerRecords>AccumulationRegister.R4014B_SerialLotNumber</registerRecords>
+  <registerRecords>AccumulationRegister.T1040T_AccountingAmounts</registerRecords>
+  <registerRecords>AccumulationRegister.T1050T_AccountingQuantities</registerRecords>
   <postInPrivilegedMode>true</postInPrivilegedMode>
   <unpostInPrivilegedMode>true</unpostInPrivilegedMode>
   <choiceHistoryOnInput>DontUse</choiceHistoryOnInput>
@@ -104,21 +104,6 @@
     <minValue xsi:type="core:UndefinedValue"/>
     <maxValue xsi:type="core:UndefinedValue"/>
     <fillChecking>ShowError</fillChecking>
-    <fillValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-    <dataHistory>Use</dataHistory>
-  </attributes>
-  <attributes uuid="d1a4f5f5-01b4-4a9e-b4a7-0a799e1f8a3b">
-    <name>BusinessUnit</name>
-    <synonym>
-      <key>en</key>
-      <value>Business unit</value>
-    </synonym>
-    <type>
-      <types>CatalogRef.BusinessUnits</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
     <fillValue xsi:type="core:UndefinedValue"/>
     <fullTextSearch>Use</fullTextSearch>
     <dataHistory>Use</dataHistory>
@@ -628,4 +613,24 @@
       <fullTextSearch>Use</fullTextSearch>
     </attributes>
   </tabularSections>
+  <templates uuid="eacaf2f9-beea-4df7-9432-0a42621ff886">
+    <name>DecommissioningOfFixedAssetPrint</name>
+    <synonym>
+      <key>en</key>
+      <value>Decommissioning of fixed asset</value>
+    </synonym>
+  </templates>
+  <commands uuid="7a890e7a-081e-4078-917d-93306676b303">
+    <name>DecommissioningOfFixedAssetPrint</name>
+    <synonym>
+      <key>en</key>
+      <value>Decommissioning of fixed asset</value>
+    </synonym>
+    <group>CommandGroup.Print</group>
+    <commandParameterType>
+      <types>DocumentRef.DecommissioningOfFixedAsset</types>
+    </commandParameterType>
+    <parameterUseMode>Multiple</parameterUseMode>
+    <representation>Auto</representation>
+  </commands>
 </mdclass:Document>

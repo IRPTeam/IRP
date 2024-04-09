@@ -358,24 +358,21 @@ EndProcedure
 
 &AtServer
 Function ReplaceAtServer()
-	BeginTransaction();
 	_isError = True;
+	BeginTransaction();
 	Try
 		For Each _row In ThisObject.SerialLotNumbers Do
 			ReplaceRef(_row);
 		EndDo;
 		_isError = False;
+		CommonFunctionsClientServer.ShowUsersMessage("Done");
+		CommitTransaction();
 	Except
+		RollbackTransaction();
 		ErrorInfo = ErrorDescription();
+		Raise ErrorInfo;
 	EndTry;
 	
-	If _isError Then
-		RollbackTransaction();
-		Raise ErrorInfo;
-	Else
-		CommitTransaction();
-		CommonFunctionsClientServer.ShowUsersMessage("Done");
-	EndIf;
 	Return Not _isError;
 EndFunction
 

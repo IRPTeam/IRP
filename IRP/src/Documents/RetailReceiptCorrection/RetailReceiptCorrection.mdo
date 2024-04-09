@@ -277,7 +277,7 @@
     <minValue xsi:type="core:UndefinedValue"/>
     <maxValue xsi:type="core:UndefinedValue"/>
     <choiceParameterLinks>
-      <name>Filter.Company</name>
+      <name>Filter.LegalName</name>
       <field>Document.RetailReceiptCorrection.Attribute.LegalName</field>
     </choiceParameterLinks>
     <fillValue xsi:type="core:UndefinedValue"/>
@@ -1390,6 +1390,10 @@
       </type>
       <minValue xsi:type="core:UndefinedValue"/>
       <maxValue xsi:type="core:UndefinedValue"/>
+      <choiceParameterLinks>
+        <name>Filter.LegalName</name>
+        <field>Document.RetailReceiptCorrection.TabularSection.Payments.Attribute.PaymentAgentLegalName</field>
+      </choiceParameterLinks>
       <dataHistory>Use</dataHistory>
       <fullTextSearch>Use</fullTextSearch>
     </attributes>

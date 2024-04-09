@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mdclass:Document xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" xmlns:mdclassExtension="http://g5.1c.ru/v8/dt/metadata/mdclass/extension" uuid="72acc674-a72a-4fe1-9920-fe3c2f474fe2" extendedConfigurationObject="93975184-19b7-4487-ba8c-1d6231de003a">
+  <producedTypes>
+    <objectType typeId="8ad79dc6-b7a1-4105-8e4c-bd0558b44f83" valueTypeId="a2058542-15c2-4a00-8521-e66cc725338d"/>
+    <refType typeId="a9131143-d53b-44cd-b4b0-977dac50ca14" valueTypeId="76f84c96-2df0-4101-87f4-f063d496e0b6"/>
+    <selectionType typeId="d7cf4380-42ac-458f-afe0-9a3ec35c5d30" valueTypeId="fe096100-79d9-4432-b265-d577942e9c8a"/>
+    <listType typeId="3de60a86-7dc5-48a3-8c8e-96b469cab159" valueTypeId="43b987f2-5dae-47e3-8372-de02cf97a74a"/>
+    <managerType typeId="b84308af-c97b-40d3-b5ad-80b176647045" valueTypeId="86fe7195-1eaf-4e52-9eec-03ffc1622f28"/>
+  </producedTypes>
+  <name>SalesReportToConsignor</name>
+  <objectBelonging>Adopted</objectBelonging>
+  <extension xsi:type="mdclassExtension:DocumentExtension">
+    <extendedConfigurationObject>Checked</extendedConfigurationObject>
+  </extension>
+  <useStandardCommands>true</useStandardCommands>
+</mdclass:Document>

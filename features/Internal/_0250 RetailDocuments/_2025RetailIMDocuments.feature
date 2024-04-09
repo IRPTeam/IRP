@@ -218,7 +218,7 @@ Scenario: _0155255 create Bank receipt based on retail sales order
 	* Check filling
 		Then the form attribute named "Company" became equal to "Main Company"
 		Then the form attribute named "Account" became equal to "Bank account, TRY"
-		Then the form attribute named "TransactionType" became equal to "Customer advance"
+		Then the form attribute named "TransactionType" became equal to "Retail customer advance"
 		Then the form attribute named "Currency" became equal to "TRY"
 		And "PaymentList" table became equal
 			| '#'   | 'Commission'   | 'Retail customer'   | 'Expense type'   | 'Payment type'   | 'Commission percent'   | 'Additional analytic'   | 'Payment terminal'   | 'Bank term'      | 'Order'                                       | 'Total amount'   | 'Financial movement type'   | 'Profit loss center'    |
@@ -254,7 +254,7 @@ Scenario: _0155260 create Cash receipt based on retail sales order
 	* Check filling
 		Then the form attribute named "Company" became equal to "Main Company"
 		Then the form attribute named "CashAccount" became equal to "Cash desk №2"
-		Then the form attribute named "TransactionType" became equal to "Customer advance"
+		Then the form attribute named "TransactionType" became equal to "Retail customer advance"
 		Then the form attribute named "Currency" became equal to "TRY"
 		And "PaymentList" table became equal
 			| '#'   | 'Retail customer'   | 'Order'                                       | 'Total amount'   | 'Financial movement type'    |
@@ -482,8 +482,7 @@ Scenario: _0155268 create Retail GR based on Retail SC
 		And I input "1,000" text in the field named "ItemListQuantity" of "ItemList" table
 		And I finish line editing in "ItemList" table
 		And I click "Show hidden tables" button
-		And I expand "ShipmentConfirmations [5]" group
-		And I move to "ShipmentConfirmations [5]" tab
+		And I move to "ShipmentConfirmations (5)" tab
 		And "ShipmentConfirmations" table became equal
 			| 'Quantity' | 'Quantity in shipment confirmation' |
 			| '1,000'    | '1,000'                             |
@@ -767,8 +766,7 @@ Scenario: _0155272 create RSC - RGR - RSR transaction type (pickup), without ret
 			And I click "Ok" button
 		* Check
 			And I click "Show hidden tables" button
-			And I expand "ShipmentConfirmations [3]" group
-			And I move to "ShipmentConfirmations [3]" tab
+			And I move to "ShipmentConfirmations (3)" tab
 			And "ShipmentConfirmations" table became equal
 				| 'Key'    | 'Shipment confirmation'    | 'Quantity'    | 'Quantity in shipment confirmation'    | 'Basis key'     |
 				| '*'      | '$$RSC02$$'                | '1,000'       | '1,000'                                | '*'             |

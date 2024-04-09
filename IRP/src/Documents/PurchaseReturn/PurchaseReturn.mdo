@@ -145,6 +145,7 @@
   <registerRecords>AccumulationRegister.R6020B_BatchBalance</registerRecords>
   <registerRecords>AccumulationRegister.T1040T_AccountingAmounts</registerRecords>
   <registerRecords>AccumulationRegister.R4014B_SerialLotNumber</registerRecords>
+  <registerRecords>AccumulationRegister.R5020B_PartnersBalance</registerRecords>
   <postInPrivilegedMode>true</postInPrivilegedMode>
   <unpostInPrivilegedMode>true</unpostInPrivilegedMode>
   <choiceHistoryOnInput>DontUse</choiceHistoryOnInput>
@@ -296,7 +297,7 @@
     <minValue xsi:type="core:UndefinedValue"/>
     <maxValue xsi:type="core:UndefinedValue"/>
     <choiceParameterLinks>
-      <name>Filter.Company</name>
+      <name>Filter.LegalName</name>
       <field>Document.PurchaseReturn.Attribute.LegalName</field>
     </choiceParameterLinks>
     <fillValue xsi:type="core:UndefinedValue"/>
@@ -1486,6 +1487,13 @@
       <fullTextSearch>Use</fullTextSearch>
     </attributes>
   </tabularSections>
+  <templates uuid="51957519-9932-4a60-88ef-00dca0c83335">
+    <name>PurchaseReturnPrint</name>
+    <synonym>
+      <key>en</key>
+      <value>Purchase return</value>
+    </synonym>
+  </templates>
   <commands uuid="d53c1c62-7a81-4f9c-ab47-6e66a1567e9b">
     <name>Generate</name>
     <synonym>
@@ -1497,6 +1505,19 @@
       <types>DocumentRef.PurchaseInvoice</types>
       <types>DocumentRef.PurchaseReturnOrder</types>
       <types>DocumentRef.ShipmentConfirmation</types>
+    </commandParameterType>
+    <parameterUseMode>Multiple</parameterUseMode>
+    <representation>Auto</representation>
+  </commands>
+  <commands uuid="b8095a7e-a2a1-42ac-be75-193a48712133">
+    <name>PurchaseReturnPrint</name>
+    <synonym>
+      <key>en</key>
+      <value>Purchase return</value>
+    </synonym>
+    <group>CommandGroup.Print</group>
+    <commandParameterType>
+      <types>DocumentRef.PurchaseReturn</types>
     </commandParameterType>
     <parameterUseMode>Multiple</parameterUseMode>
     <representation>Auto</representation>

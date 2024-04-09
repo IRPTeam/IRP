@@ -20,6 +20,7 @@ Scenario: _0153500 preparation
 	When set True value to the constant Use accounting
 	And Delay 1
 	When set True value to the constant Use salary
+	When set True value to the constant Use fixed assets
 	And Delay 1
 	When set True value to the constant Use commission trading
 	* Load info
@@ -69,6 +70,7 @@ Scenario: _0153500 preparation
 		When Create catalog PaymentTerminals objects
 		When Create catalog RetailCustomers objects
 		When Create catalog BankTerms objects
+		When Create catalog Incoterms objects
 		When Create catalog SpecialOfferRules objects (Test)
 		When Create catalog SpecialOfferTypes objects (Test)
 		When Create catalog SpecialOffers objects (Test)
@@ -3991,8 +3993,8 @@ Scenario: _015400704 check that additional attributes and properties are display
 	* Open LegalNameContracts form
 		Given I open hyperlink "e1cib/list/Catalog.LegalNameContracts"
 		And I go to line in "List" table
-			| Contract number    |
-			| Test               |
+			| Description    |
+			| Test           |
 		And I select current line in "List" table
 		And field "Test" is not present on the form
 	* Adding by selected LegalNameContracts additional Test attribute without closing the form
@@ -5282,6 +5284,50 @@ Scenario: _015400664 check that additional attributes and properties are display
 			| 'Test 1'     | ''         |
 	And I close all client application windows
 
+Scenario: _0154006831 check that additional attributes and properties are displayed on the form without reopening (Catalog_Incoterms)
+	Then I check for the "AddAttributeAndPropertyValues" charts of characteristic types with the Description Eng "Test"
+	* Open a form to create Incoterms
+		Given I open hyperlink "e1cib/list/Catalog.Incoterms"
+		And I click the button named "FormCreate"
+		And field "Test" is not present on the form
+	* Adding additional Test attribute without closing the form
+		Given I open hyperlink "e1cib/list/Catalog.AddAttributeAndPropertySets"
+		And I go to line in "List" table
+			| Predefined data name    |
+			| Catalog_Incoterms       |
+		And I select current line in "List" table
+		And in the table "Attributes" I click the button named "AttributesAdd"
+		And I click choice button of "Attribute" attribute in "Attributes" table
+		And I go to line in "List" table
+			| Description    |
+			| Test           |
+		And I select current line in "List" table
+		And I finish line editing in "Attributes" table
+		And I move to "Properties" tab
+		And in the table "Properties" I click the button named "PropertiesAdd"
+		And I click choice button of "Property" attribute in "Properties" table
+		And I go to line in "List" table
+			| 'Description'    |
+			| 'Test 1'         |
+		And I select current line in "List" table
+		And I finish line editing in "Properties" table
+		And I input "Incoterms" text in the field named "Description_en"
+		And I click "Save and close" button
+	* Check that the additional Test attribute has been displayed on the form
+		When in opened panel I select "Incoterms"
+		And I activate "Incoterm (create)" window 
+		And field "Test" is present on the form
+		And I close current window
+		And I go to line in "List" table
+			| 'Description'    |
+			| 'CIF'            |
+		And I select current line in "List" table
+		And I click "Add properties" button
+		And "Properties" table became equal
+			| 'Property'   | 'Value'    |
+			| 'Test 1'     | ''         |
+	And I close all client application windows
+
 Scenario: _015400665 check that additional attributes and properties are displayed on the form without reopening (document SalesReportFromTradeAgent)
 	Then I check for the "AddAttributeAndPropertyValues" charts of characteristic types with the Description Eng "Test"
 	* Open a form to create Sales report from trade agent
@@ -5964,6 +6010,7 @@ Scenario: _015400670 check AddAttribute with type hyperlink
 		And I click the button named "OK"
 		And I close all client application windows
 
+
 Scenario: _015400680 check add attributes (collection, Projects and Stores)
 	And I close all client application windows
 	* Setting additional attributes collection for SI
@@ -6022,8 +6069,8 @@ Scenario: _015400680 check add attributes (collection, Projects and Stores)
 		And I select current line in "ItemList" table
 		And I click choice button of "Additional analytic" attribute in "ItemList" table
 		And I go to line in "" table
-			| ''         |
-			| 'Projects' |
+			| ''        |
+			| 'Project' |
 		And I select current line in "" table
 		And I go to line in "List" table
 			| 'Description'|
@@ -6043,7 +6090,7 @@ Scenario: _015400680 check add attributes (collection, Projects and Stores)
 		And I click choice button of "Additional analytic" attribute in "ItemList" table
 		And I go to line in "" table
 			| ''         |
-			| 'Projects' |
+			| 'Project'  |
 		And I select current line in "" table
 		And I go to line in "List" table
 			| 'Description'|

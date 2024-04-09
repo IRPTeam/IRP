@@ -33,6 +33,7 @@
       <types>DocumentRef.DebitNote</types>
       <types>DocumentRef.CreditNote</types>
       <types>DocumentRef.BankReceipt</types>
+      <types>DocumentRef.DebitCreditNote</types>
       <types>DocumentRef.BankPayment</types>
       <types>DocumentRef.ChequeBondTransactionItem</types>
       <types>DocumentRef.CashReceipt</types>
@@ -42,7 +43,6 @@
       <types>DocumentRef.RetailSalesReceipt</types>
       <types>DocumentRef.SalesOrderClosing</types>
       <types>DocumentRef.SalesInvoice</types>
-      <types>DocumentRef.DebitCreditNote</types>
     </type>
     <minValue xsi:type="core:UndefinedValue"/>
     <maxValue xsi:type="core:UndefinedValue"/>

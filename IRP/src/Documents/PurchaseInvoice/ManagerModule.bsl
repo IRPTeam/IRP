@@ -4,6 +4,153 @@ Function GetPrintForm(Ref, PrintFormName, AddInfo = Undefined) Export
 	Return Undefined;
 EndFunction
 
+Function Print(Ref, Param) Export
+	If StrCompare(Param.NameTemplate, "PurchaseInvoicePrint") = 0 Then
+		Return PurchaseInvoicePrint(Ref, Param);
+	EndIf;
+EndFunction
+
+// Purchase invoice print.
+// 
+// Parameters:
+//  Ref - DocumentRef.PurchaseInvoice
+//  Param - See UniversalPrintServer.InitPrintParam
+// 
+// Returns:
+//  SpreadsheetDocument - Purchase invoice print
+Function PurchaseInvoicePrint(Ref, Param)
+		
+	Template = GetTemplate("PurchaseInvoicePrint");
+	Template.LanguageCode = Param.LayoutLang;
+	Query = New Query;
+	Text =
+	"SELECT
+	|	DocumentHeader.Number AS Number,
+	|	DocumentHeader.Date AS Date,
+	|	DocumentHeader.Company.Description_en AS Company,
+	|	DocumentHeader.Partner.Description_en AS Partner,
+	|	DocumentHeader.Author AS Author,
+	|	DocumentHeader.Ref AS Ref,
+	|	DocumentHeader.Currency.Code AS Currency
+	|FROM
+	|	Document.PurchaseInvoice AS DocumentHeader
+	|WHERE
+	|	DocumentHeader.Ref = &Ref
+	|;
+	|
+	|////////////////////////////////////////////////////////////////////////////////
+	|SELECT
+	|	DocumentItemList.ItemKey.Item.Description_en AS Item,
+	|	DocumentItemList.ItemKey.Description_en AS ItemKey,
+	|	DocumentItemList.Quantity AS Quantity,
+	|	DocumentItemList.Unit.Description_en AS Unit,
+	|	DocumentItemList.Price AS Price,
+	|	DocumentItemList.VatRate AS VatRate,
+	|	DocumentItemList.TaxAmount AS TaxAmount,
+	|	DocumentItemList.TotalAmount AS TotalAmount,
+	|	DocumentItemList.NetAmount AS NetAmount,
+	|	DocumentItemList.OffersAmount AS OffersAmount,
+	|	DocumentItemList.Ref AS Ref,
+	|	DocumentItemList.Key AS Key
+	|INTO Items
+	|FROM
+	|	Document.PurchaseInvoice.ItemList AS DocumentItemList
+	|WHERE
+	|	DocumentItemList.Ref = &Ref	
+	|;
+	|
+	|////////////////////////////////////////////////////////////////////////////////
+	|SELECT
+	|	Items.Item AS Item,
+	|	Items.ItemKey AS ItemKey,
+	|	Items.Quantity AS Quantity,
+	|	Items.Unit AS Unit,
+	|	Items.Price AS Price,
+	|	Items.VatRate AS VatRate,
+	|	Items.TaxAmount AS TaxAmount,
+	|	Items.TotalAmount AS TotalAmount,
+	|	Items.NetAmount AS NetAmount,
+	|	Items.OffersAmount AS OffersAmount,
+	|	Items.Ref AS Ref,
+	|	Items.Key AS Key
+	|FROM
+	|	Items AS Items";
+
+	LCode = Param.DataLang;
+	Text = LocalizationEvents.ReplaceDescriptionLocalizationPrefix(Text, "DocumentHeader.Company", LCode);
+	Text = LocalizationEvents.ReplaceDescriptionLocalizationPrefix(Text, "DocumentHeader.Partner", LCode);
+	Text = LocalizationEvents.ReplaceDescriptionLocalizationPrefix(Text, "DocumentItemList.ItemKey.Item", LCode);
+	Text = LocalizationEvents.ReplaceDescriptionLocalizationPrefix(Text, "DocumentItemList.ItemKey", LCode);
+	Text = LocalizationEvents.ReplaceDescriptionLocalizationPrefix(Text, "DocumentItemList.Unit", LCode);
+	Query.Text = Text;                                                    
+
+	Query.Parameters.Insert("Ref", Ref);
+	Selection = Query.ExecuteBatch();
+	SelectionHeader = Selection[0].Select();
+	SelectionItems = Selection[2].Unload();
+	SelectionItems.Indexes.Add("Ref");
+
+	AreaCaption = Template.GetArea("Caption");
+	AreaHeader = Template.GetArea("Header");
+	AreaItemListHeader = Template.GetArea("ItemListHeader|ItemColumn");
+	AreaItemList = Template.GetArea("ItemList|ItemColumn");
+	AreaFooter = Template.GetArea("Footer");
+	AreaListHeaderTAX = Template.GetArea("ItemListHeaderTAX|ColumnTAX");
+	AreaListTAX = Template.GetArea("ItemListTAX|ColumnTAX");
+
+	Spreadsheet = New SpreadsheetDocument;
+	Spreadsheet.LanguageCode = Param.LayoutLang;
+
+	TaxVat = TaxesServer.GetVatRef();
+	
+	While SelectionHeader.Next() Do
+		AreaCaption.Parameters.Fill(SelectionHeader);
+		Spreadsheet.Put(AreaCaption);
+
+		AreaHeader.Parameters.Fill(SelectionHeader);
+		Spreadsheet.Put(AreaHeader);
+
+		Spreadsheet.Put(AreaItemListHeader);
+		AreaListHeaderTAX.Parameters.NameTAX = LocalizationEvents.DescriptionRefLocalization(TaxVat, Spreadsheet.LanguageCode);
+		Spreadsheet.Join(AreaListHeaderTAX);
+		
+		Choice	= New Structure("Ref", SelectionHeader.Ref);
+		FindRow = SelectionItems.FindRows(Choice);
+
+		Number = 0;
+		TotalSum = 0;
+		TotalTax = 0;
+		TotalNet = 0;
+		TotalOffers = 0;
+		For Each It In FindRow Do
+			Number = Number + 1;
+			AreaItemList.Parameters.Fill(It);
+			AreaItemList.Parameters.Number = Number;
+			Spreadsheet.Put(AreaItemList);
+
+			AreaListTAX.Parameters.PercentTax = It.VatRate;
+			Spreadsheet.Join(AreaListTAX);
+			
+			TotalSum = TotalSum + It.TotalAmount;
+			TotalTax = TotalTax + It.TaxAmount;
+			TotalOffers	= TotalOffers + It.OffersAmount;
+			TotalNet = TotalNet + It.NetAmount;
+		EndDo;
+	EndDo;
+
+	AreaFooter.Parameters.Total = TotalSum;
+	AreaFooter.Parameters.Currency = SelectionHeader.Currency;
+	AreaFooter.Parameters.Total = TotalSum;
+	AreaFooter.Parameters.TotalTax = TotalTax;
+	AreaFooter.Parameters.TotalNet = TotalNet;
+	AreaFooter.Parameters.TotalOffers = TotalOffers;
+	AreaFooter.Parameters.Manager = SelectionHeader.Author;
+	Spreadsheet.Put(AreaFooter);
+	Spreadsheet = UniversalPrintServer.ResetLangSettings(Spreadsheet, Param.LayoutLang);
+	Return Spreadsheet;
+	
+EndFunction	
+
 #EndRegion
 
 #Region Posting
@@ -375,10 +522,6 @@ Function GetAdditionalQueryParameters(Ref)
 	Return StrParams;
 EndFunction
 
-#EndRegion
-
-#Region Posting_SourceTable
-
 Function GetQueryTextsSecondaryTables()
 	QueryArray = New Array;
 	QueryArray.Add(ItemList());
@@ -393,6 +536,49 @@ Function GetQueryTextsSecondaryTables()
 	QueryArray.Add(PostingServer.Exists_R4014B_SerialLotNumber());
 	Return QueryArray;
 EndFunction
+
+Function GetQueryTextsMasterTables()
+	QueryArray = New Array;
+	QueryArray.Add(R1001T_Purchases());
+	QueryArray.Add(R1005T_PurchaseSpecialOffers());
+	QueryArray.Add(R1011B_PurchaseOrdersReceipt());
+	QueryArray.Add(R1012B_PurchaseOrdersInvoiceClosing());
+	QueryArray.Add(R1020B_AdvancesToVendors());
+	QueryArray.Add(R1021B_VendorsTransactions());
+	QueryArray.Add(R1022B_VendorsPaymentPlanning());
+	QueryArray.Add(R1031B_ReceiptInvoicing());
+	QueryArray.Add(R1040B_TaxesOutgoing());
+	QueryArray.Add(R2013T_SalesOrdersProcurement());
+	QueryArray.Add(R4010B_ActualStocks());
+	QueryArray.Add(R4011B_FreeStocks());
+	QueryArray.Add(R4012B_StockReservation());
+	QueryArray.Add(R4014B_SerialLotNumber());
+	QueryArray.Add(R4017B_InternalSupplyRequestProcurement());
+	QueryArray.Add(R4031B_GoodsInTransitIncoming());
+	QueryArray.Add(R4033B_GoodsReceiptSchedule());
+	QueryArray.Add(R4035B_IncomingStocks());
+	QueryArray.Add(R4036B_IncomingStocksRequested());
+	QueryArray.Add(R4050B_StockInventory());
+	QueryArray.Add(R5010B_ReconciliationStatement());
+	QueryArray.Add(R5012B_VendorsAging());
+	QueryArray.Add(R5022T_Expenses());
+	QueryArray.Add(R6070T_OtherPeriodsExpenses());
+	QueryArray.Add(R8015T_ConsignorPrices());
+	QueryArray.Add(R9010B_SourceOfOriginStock());
+	QueryArray.Add(T1040T_AccountingAmounts());
+	QueryArray.Add(T1050T_AccountingQuantities());
+	QueryArray.Add(T2015S_TransactionsInfo());
+	QueryArray.Add(T3010S_RowIDInfo());
+	QueryArray.Add(T6010S_BatchesInfo());
+	QueryArray.Add(T6020S_BatchKeysInfo());
+	QueryArray.Add(S1001L_VendorsPricesByItemKey());
+	QueryArray.Add(R5020B_PartnersBalance());
+	Return QueryArray;
+EndFunction
+
+#EndRegion
+
+#Region Posting_SourceTable
 
 Function ItemList()
 	Return "SELECT
@@ -457,6 +643,11 @@ Function ItemList()
 		   |	NOT GoodsReceipts.Key IS NULL AS GoodsReceiptExists,
 		   |	PurchaseInvoiceItemList.ItemKey AS ItemKey,
 		   |	PurchaseInvoiceItemList.PurchaseOrder AS PurchaseOrder,
+		   |	CASE
+		   |		WHEN PurchaseInvoiceItemList.Ref.Agreement.UseOrdersForSettlements
+		   |			THEN PurchaseInvoiceItemList.PurchaseOrder
+		   |		ELSE UNDEFINED
+		   |	END AS PurchaseOrderSettlements,
 		   |	PurchaseInvoiceItemList.SalesOrder AS SalesOrder,
 		   |	PurchaseInvoiceItemList.InternalSupplyRequest,
 		   |	PurchaseInvoiceItemList.Ref AS Invoice,
@@ -647,44 +838,6 @@ EndFunction
 #EndRegion
 
 #Region Posting_MainTables
-
-Function GetQueryTextsMasterTables()
-	QueryArray = New Array;
-	QueryArray.Add(R1001T_Purchases());
-	QueryArray.Add(R1005T_PurchaseSpecialOffers());
-	QueryArray.Add(R1011B_PurchaseOrdersReceipt());
-	QueryArray.Add(R1012B_PurchaseOrdersInvoiceClosing());
-	QueryArray.Add(R1020B_AdvancesToVendors());
-	QueryArray.Add(R1021B_VendorsTransactions());
-	QueryArray.Add(R1022B_VendorsPaymentPlanning());
-	QueryArray.Add(R1031B_ReceiptInvoicing());
-	QueryArray.Add(R1040B_TaxesOutgoing());
-	QueryArray.Add(R2013T_SalesOrdersProcurement());
-	QueryArray.Add(R4010B_ActualStocks());
-	QueryArray.Add(R4011B_FreeStocks());
-	QueryArray.Add(R4012B_StockReservation());
-	QueryArray.Add(R4014B_SerialLotNumber());
-	QueryArray.Add(R4017B_InternalSupplyRequestProcurement());
-	QueryArray.Add(R4031B_GoodsInTransitIncoming());
-	QueryArray.Add(R4033B_GoodsReceiptSchedule());
-	QueryArray.Add(R4035B_IncomingStocks());
-	QueryArray.Add(R4036B_IncomingStocksRequested());
-	QueryArray.Add(R4050B_StockInventory());
-	QueryArray.Add(R5010B_ReconciliationStatement());
-	QueryArray.Add(R5012B_VendorsAging());
-	QueryArray.Add(R5022T_Expenses());
-	QueryArray.Add(R6070T_OtherPeriodsExpenses());
-	QueryArray.Add(R8015T_ConsignorPrices());
-	QueryArray.Add(R9010B_SourceOfOriginStock());
-	QueryArray.Add(T1040T_AccountingAmounts());
-	QueryArray.Add(T1050T_AccountingQuantities());
-	QueryArray.Add(T2015S_TransactionsInfo());
-	QueryArray.Add(T3010S_RowIDInfo());
-	QueryArray.Add(T6010S_BatchesInfo());
-	QueryArray.Add(T6020S_BatchKeysInfo());
-	QueryArray.Add(S1001L_VendorsPricesByItemKey());
-	Return QueryArray;
-EndFunction
 
 Function R9010B_SourceOfOriginStock()
 	Return "SELECT
@@ -1266,6 +1419,11 @@ Function S1001L_VendorsPricesByItemKey()
 	|////////////////////////////////////////////////////////////////////////////////
 	|DROP VTRecordPurchasePrices";
 EndFunction
+
+Function R5020B_PartnersBalance()
+	Return AccumulationRegisters.R5020B_PartnersBalance.R5020B_PartnersBalance_PI();
+EndFunction
+
 #EndRegion
 
 #Region AccessObject

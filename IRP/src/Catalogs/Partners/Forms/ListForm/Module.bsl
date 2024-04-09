@@ -86,7 +86,6 @@ Procedure FilterOtherOnChange(Item)
 	Item.TitleTextColor = ?(ThisObject.FilterOther, New Color(), WebColors.LightGray);
 EndProcedure
 
-
 &AtClientAtServerNoContext
 Procedure SetBooleanListFilter(FilterItems, FieldName, RightValue)
 	CommonFunctionsClientServer.SetFilterItem(FilterItems, FieldName, RightValue, DataCompositionComparisonType.Equal, RightValue = True);

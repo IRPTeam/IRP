@@ -4,14 +4,14 @@
 	<setForAttributesByDefault>true</setForAttributesByDefault>
 	<independentRightsOfChildObjects>false</independentRightsOfChildObjects>
 	<object>
-		<name>Subsystem.Accounting.Subsystem.LedgerTypes</name>
+		<name>Subsystem.Accounting.Subsystem.Other</name>
 		<right>
 			<name>View</name>
 			<value>true</value>
 		</right>
 	</object>
 	<object>
-		<name>Subsystem.Accounting.Subsystem.Accounts</name>
+		<name>Subsystem.Reports.Subsystem.Accounting</name>
 		<right>
 			<name>View</name>
 			<value>true</value>
@@ -25,14 +25,14 @@
 		</right>
 	</object>
 	<object>
-		<name>Subsystem.Accounting.Subsystem.Other</name>
+		<name>Subsystem.Accounting.Subsystem.LedgerTypes</name>
 		<right>
 			<name>View</name>
 			<value>true</value>
 		</right>
 	</object>
 	<object>
-		<name>Subsystem.Reports.Subsystem.Accounting</name>
+		<name>Subsystem.Accounting.Subsystem.Accounts</name>
 		<right>
 			<name>View</name>
 			<value>true</value>

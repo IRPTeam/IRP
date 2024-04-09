@@ -1,4 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<suppress:SuppressGenericObject xmlns:suppress="http://g5.1c.ru/v8/dt/check/suppress/model" fqn="CommonForm.RelatedDocuments.Form">
-  <suppressions key="com.e1c.v8codestyle.form:form-list-ref-user-visibility-enabled" value="true"/>
-</suppress:SuppressGenericObject>

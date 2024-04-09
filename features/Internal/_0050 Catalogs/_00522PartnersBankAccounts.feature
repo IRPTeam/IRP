@@ -1,9 +1,9 @@
-#language: en
+﻿#language: en
 @tree
 @Positive
 @PartnerCatalogs
 
-Feature: filling in Partners bank account
+Feature: filling in Partners bank account and Legal name contract
 
 As an owner
 I want to fill out information on the company
@@ -61,4 +61,39 @@ Scenario: _005022 filling in the "Partners bank account" catalog
 		Then I check for the "PartnersBankAccounts" catalog element with the "Description_en" "Partner bank account"  
 	
 
-	
+Scenario: _005025 filling in the "Legal name contracts" catalog	
+	And I close all client application windows
+	* Open "Legal name contracts" catalog	
+		Given I open hyperlink "e1cib/list/Catalog.LegalNameContracts"		
+		And I click the button named "FormCreate"
+	* Filling details
+		Then "Legal name contract (create)" window is opened
+		And I input "Legal name contract 1 dated 01.01.2023" text in the field named "Description"
+		And I input "1" text in "Contract number" field
+		And I input "01.01.2023" text in "Begin date" field
+		And I input "31.12.2023" text in "End date" field
+		And I select from the drop-down list named "Company" by "Main Company" string
+		And I select from "Legal name" drop-down list by "Company Kalipso" string
+		And I select from the drop-down list named "Currency" by "EUR" string
+		And I click Select button of "Partner bank account" field
+		Then "Partners bank accounts" window is opened
+		And I go to line in "List" table
+			| 'Description'          | 'Number'            |
+			| 'Partner bank account' | '56788888888888689' |
+		And I select current line in "List" table
+		And I click "Save" button
+	* Check data save
+		And the editing text of form attribute named "BeginDate" became equal to "01.01.2023"
+		Then the form attribute named "Company" became equal to "Main Company"
+		Then the form attribute named "ContractNumber" became equal to "1"
+		Then the form attribute named "Currency" became equal to "EUR"
+		Then the form attribute named "Description" became equal to "Legal name contract 1 dated 01.01.2023"
+		And the editing text of form attribute named "EndDate" became equal to "31.12.2023"
+		Then the form attribute named "LegalName" became equal to "Company Kalipso"
+		Then the form attribute named "PartnerBankAccount" became equal to "Partner bank account"
+		And I click "Save and close" button 
+	* Check for created Partners bank account
+		And "List" table contains lines
+			| 'Description'                            | 'Begin date' | 'End date'   | 'Company'      | 'Partner bank account' |
+			| 'Legal name contract 1 dated 01.01.2023' | '01.01.2023' | '31.12.2023' | 'Main Company' | 'Partner bank account' |
+		And I close all client application windows		

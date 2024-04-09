@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mdclass:Document xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" xmlns:mdclassExtension="http://g5.1c.ru/v8/dt/metadata/mdclass/extension" uuid="5512f564-3f40-41f9-8dfa-7c971b54ec0f" extendedConfigurationObject="a494447a-472e-4bce-9c04-e21db8bdf3d0">
+  <producedTypes>
+    <objectType typeId="fdcc9e01-4e00-456a-a39e-4f4d00e1cec1" valueTypeId="14b18af2-7f28-453f-a173-cda0e39d7be3"/>
+    <refType typeId="97821e56-3355-4bed-82c6-1524c961e886" valueTypeId="14ac0c04-72e6-4270-99d5-8a21f6d4476b"/>
+    <selectionType typeId="d2e7c438-563e-4e2b-8df0-a504ac34963a" valueTypeId="159236b4-9675-4bb0-9dce-7340ba638ba7"/>
+    <listType typeId="3972c7e1-7abc-456a-8e4a-4fbb95e63765" valueTypeId="34633732-c8c3-4f68-a1a2-0f22944e44b2"/>
+    <managerType typeId="79ed3d79-e93b-4997-8d4f-afdb039aab09" valueTypeId="2cba008d-dea2-4ba8-bbc5-6d20818b40ea"/>
+  </producedTypes>
+  <name>WorkSheet</name>
+  <objectBelonging>Adopted</objectBelonging>
+  <extension xsi:type="mdclassExtension:DocumentExtension">
+    <extendedConfigurationObject>Checked</extendedConfigurationObject>
+  </extension>
+  <useStandardCommands>true</useStandardCommands>
+</mdclass:Document>

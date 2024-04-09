@@ -11,6 +11,8 @@ Procedure BeforeWrite(Cancel, WriteMode, PostingMode)
 		CurrenciesServer.UpdateCurrencyTable(Parameters, ThisObject.Currencies);
 	EndDo;
 	
+	ThisObject.AdditionalProperties.Insert("WriteMode", WriteMode);
+	
 	ThisObject.AdditionalProperties.Insert("OriginalDocumentDate", PostingServer.GetOriginalDocumentDate(ThisObject));
 	ThisObject.AdditionalProperties.Insert("IsPostingNewDocument" , WriteMode = DocumentWriteMode.Posting And Not Ref.Posted);
 EndProcedure
@@ -18,6 +20,11 @@ EndProcedure
 Procedure OnWrite(Cancel)
 	If DataExchange.Load Then
 		Return;
+	EndIf;
+	
+	WriteMode = CommonFunctionsClientServer.GetFromAddInfo(ThisObject.AdditionalProperties, "WriteMode");
+	If FOServer.IsUseAccounting() And WriteMode = DocumentWriteMode.Posting Then
+		AccountingServer.OnWrite(ThisObject, Cancel);
 	EndIf;
 EndProcedure
 

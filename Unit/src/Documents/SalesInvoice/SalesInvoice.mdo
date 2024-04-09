@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mdclass:Document xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" xmlns:mdclassExtension="http://g5.1c.ru/v8/dt/metadata/mdclass/extension" uuid="ef3f17d6-220c-4e8d-a685-4edd0e10f4e5" extendedConfigurationObject="771f6888-b5cc-46c9-8c25-393ec7c54d09">
+  <producedTypes>
+    <objectType typeId="4e2a30f1-91b4-4ca9-b29b-de9e8de1f6c5" valueTypeId="d43eea44-41d4-46b8-94df-856e9c97cc8a"/>
+    <refType typeId="39768987-afc3-401f-8840-e6cd5410fd45" valueTypeId="e761d10e-9393-4dac-8f56-0cf2b3c0cc55"/>
+    <selectionType typeId="d7fa1ca2-9dfd-4909-973f-8c133666c067" valueTypeId="178b4fdc-fe51-411a-825a-6040e235c948"/>
+    <listType typeId="244124f0-6cf1-4432-8771-31c71a01575a" valueTypeId="300c6e2c-fef8-481d-acd0-d2ea45cc4de4"/>
+    <managerType typeId="3644431b-ecb2-4a9a-8b3c-6a66d8418eba" valueTypeId="2446f8c3-60df-4188-826d-2861c34cdb8f"/>
+  </producedTypes>
+  <name>SalesInvoice</name>
+  <objectBelonging>Adopted</objectBelonging>
+  <extension xsi:type="mdclassExtension:DocumentExtension">
+    <extendedConfigurationObject>Checked</extendedConfigurationObject>
+  </extension>
+  <useStandardCommands>true</useStandardCommands>
+</mdclass:Document>

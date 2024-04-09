@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mdclass:Document xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" xmlns:mdclassExtension="http://g5.1c.ru/v8/dt/metadata/mdclass/extension" uuid="d214f78a-cf96-4035-b0b3-fde46e2eab53" extendedConfigurationObject="4a72ba33-1789-4ecb-9604-49253ee56c75">
+  <producedTypes>
+    <objectType typeId="71840770-43a6-417f-94ae-987896f367d1" valueTypeId="dc33bb82-bc82-46f8-ba4c-c382f7f758ad"/>
+    <refType typeId="9ac249a7-9815-4314-a39f-6648b8202794" valueTypeId="51814c8f-6ac4-43b0-89cb-399c255c02d0"/>
+    <selectionType typeId="f28adf65-ab5a-4140-88ed-beeab97062ad" valueTypeId="9b68e22a-fdf1-428a-9232-9d87e51b3033"/>
+    <listType typeId="314493a3-b645-45fe-a689-74b57a91e08d" valueTypeId="92ecce95-6e70-4c02-b5af-4b68e09d15e5"/>
+    <managerType typeId="d29040b9-ccd4-412d-ba2a-7bafd29dd4e8" valueTypeId="97cf3745-7079-4e99-a683-8bc933bc97d7"/>
+  </producedTypes>
+  <name>EmployeeSickLeave</name>
+  <objectBelonging>Adopted</objectBelonging>
+  <extension xsi:type="mdclassExtension:DocumentExtension">
+    <extendedConfigurationObject>Checked</extendedConfigurationObject>
+  </extension>
+  <useStandardCommands>true</useStandardCommands>
+</mdclass:Document>

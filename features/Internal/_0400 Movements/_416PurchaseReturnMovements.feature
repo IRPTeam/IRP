@@ -600,16 +600,14 @@ Scenario: _041622 check Purchase return movements by the Register  "R4014 Serial
 			| 'Number'    |
 			| '195'       |
 	* Check movements by the Register  "R4014 Serial lot numbers" 
-		And I click "Registrations report" button
+		And I click "Registrations report info" button
 		And I select "R4014 Serial lot numbers" exact value from "Register" drop-down list
 		And I click "Generate report" button
 		Then "ResultTable" spreadsheet document is equal
-			| 'Purchase return 195 dated 02.11.2022 16:31:47' | ''            | ''                    | ''          | ''             | ''                        | ''      | ''         | ''                  |
-			| 'Document registrations records'                | ''            | ''                    | ''          | ''             | ''                        | ''      | ''         | ''                  |
-			| 'Register  "R4014 Serial lot numbers"'          | ''            | ''                    | ''          | ''             | ''                        | ''      | ''         | ''                  |
-			| ''                                              | 'Record type' | 'Period'              | 'Resources' | 'Dimensions'   | ''                        | ''      | ''         | ''                  |
-			| ''                                              | ''            | ''                    | 'Quantity'  | 'Company'      | 'Branch'                  | 'Store' | 'Item key' | 'Serial lot number' |
-			| ''                                              | 'Expense'     | '02.11.2022 16:31:47' | '1'         | 'Main Company' | 'Distribution department' | ''      | 'ODS'      | '1123'              |		
+			| 'Purchase return 195 dated 02.11.2022 16:31:47' | ''                    | ''           | ''             | ''                        | ''      | ''         | ''                  | ''         |
+			| 'Register  "R4014 Serial lot numbers"'          | ''                    | ''           | ''             | ''                        | ''      | ''         | ''                  | ''         |
+			| ''                                              | 'Period'              | 'RecordType' | 'Company'      | 'Branch'                  | 'Store' | 'Item key' | 'Serial lot number' | 'Quantity' |
+			| ''                                              | '02.11.2022 16:31:47' | 'Expense'    | 'Main Company' | 'Distribution department' | ''      | 'ODS'      | '1123'              | '1'        |	
 	And I close all client application windows
 
 

@@ -110,6 +110,7 @@
   <registerRecords>AccumulationRegister.R4014B_SerialLotNumber</registerRecords>
   <registerRecords>AccumulationRegister.R2031B_ShipmentInvoicing</registerRecords>
   <registerRecords>AccumulationRegister.R2012B_SalesOrdersInvoiceClosing</registerRecords>
+  <registerRecords>AccumulationRegister.R5020B_PartnersBalance</registerRecords>
   <postInPrivilegedMode>true</postInPrivilegedMode>
   <unpostInPrivilegedMode>true</unpostInPrivilegedMode>
   <choiceHistoryOnInput>DontUse</choiceHistoryOnInput>
@@ -292,7 +293,7 @@
     <minValue xsi:type="core:UndefinedValue"/>
     <maxValue xsi:type="core:UndefinedValue"/>
     <choiceParameterLinks>
-      <name>Filter.Company</name>
+      <name>Filter.LegalName</name>
       <field>Document.SalesInvoice.Attribute.LegalName</field>
     </choiceParameterLinks>
     <fillValue xsi:type="core:UndefinedValue"/>
@@ -1909,6 +1910,13 @@
       <fullTextSearch>Use</fullTextSearch>
     </attributes>
   </tabularSections>
+  <templates uuid="3ff8fed4-eec7-453a-bebe-b7c540c6a558">
+    <name>SalesInvoicePrint</name>
+    <synonym>
+      <key>en</key>
+      <value>Sales invoice</value>
+    </synonym>
+  </templates>
   <commands uuid="884ba46e-eebe-48ad-aaf4-2d1edd607970">
     <name>Generate</name>
     <synonym>
@@ -1922,6 +1930,19 @@
       <types>DocumentRef.SalesOrder</types>
       <types>DocumentRef.WorkSheet</types>
       <types>DocumentRef.SalesReportToConsignor</types>
+    </commandParameterType>
+    <parameterUseMode>Multiple</parameterUseMode>
+    <representation>Auto</representation>
+  </commands>
+  <commands uuid="84013da3-0716-4825-b14d-8cb6259fe658">
+    <name>SalesInvoicePrint</name>
+    <synonym>
+      <key>en</key>
+      <value>Sales invoice</value>
+    </synonym>
+    <group>CommandGroup.Print</group>
+    <commandParameterType>
+      <types>DocumentRef.SalesInvoice</types>
     </commandParameterType>
     <parameterUseMode>Multiple</parameterUseMode>
     <representation>Auto</representation>

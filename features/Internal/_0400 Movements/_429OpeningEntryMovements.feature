@@ -71,6 +71,10 @@ Scenario: _042900 preparation (Opening entry)
 		When Create catalog CashAccounts objects
 		When Create OtherPartners objects
 		When Create information register Taxes records (VAT)
+		When Create catalog EmployeePositions objects
+		When Create catalog AccrualAndDeductionTypes objects
+		When Create catalog EmployeeSchedule objects
+		When Create information register T9500S_AccrualAndDeductionValues records
 	When Create Document discount
 	When settings for Main Company (commission trade)
 	* Add plugin for discount
@@ -104,6 +108,7 @@ Scenario: _042900 preparation (Opening entry)
 		When Create document OpeningEntry objects (advance from retail customers)
 		When Create document OpeningEntry objects (other partner)
 		When Create document OpeningEntry objects (cash in transit)
+		When Create document OpeningEntry objects (employee for movements)
 		And I execute 1C:Enterprise script at server
 			| "Documents.OpeningEntry.FindByNumber(1).GetObject().Write(DocumentWriteMode.Posting);"    |
 		And I execute 1C:Enterprise script at server
@@ -140,6 +145,8 @@ Scenario: _042900 preparation (Opening entry)
 			| "Documents.OpeningEntry.FindByNumber(121).GetObject().Write(DocumentWriteMode.Posting);"    |
 		And I execute 1C:Enterprise script at server
 			| "Documents.OpeningEntry.FindByNumber(122).GetObject().Write(DocumentWriteMode.Posting);"    |
+		And I execute 1C:Enterprise script at server
+			| "Documents.OpeningEntry.FindByNumber(222).GetObject().Write(DocumentWriteMode.Posting);"    |
 		And I close all client application windows
 		
 Scenario: _0429001 check preparation
@@ -790,17 +797,15 @@ Scenario: _042934 check Opening entry movements by the Register  "R2023 Advances
 			| 'Number'    |
 			| '315'       |
 	* Check movements by the Register  "R2023 Advances from retail customers" 
-		And I click "Registrations report" button
+		And I click "Registrations report info" button
 		And I select "R2023 Advances from retail customers" exact value from "Register" drop-down list
 		And I click "Generate report" button
 		Then "ResultTable" spreadsheet document is equal
-			| 'Opening entry 315 dated 03.03.2023 17:09:42'        | ''              | ''                      | ''            | ''               | ''         | ''                   |
-			| 'Document registrations records'                     | ''              | ''                      | ''            | ''               | ''         | ''                   |
-			| 'Register  "R2023 Advances from retail customers"'   | ''              | ''                      | ''            | ''               | ''         | ''                   |
-			| ''                                                   | 'Record type'   | 'Period'                | 'Resources'   | 'Dimensions'     | ''         | ''                   |
-			| ''                                                   | ''              | ''                      | 'Amount'      | 'Company'        | 'Branch'   | 'Retail customer'    |
-			| ''                                                   | 'Receipt'       | '03.03.2023 17:09:42'   | '1 000'       | 'Main Company'   | ''         | 'Daniel Smith'       |
-			| ''                                                   | 'Receipt'       | '03.03.2023 17:09:42'   | '1 000'       | 'Main Company'   | ''         | 'Sam Jons'           |
+			| 'Opening entry 315 dated 03.03.2023 17:09:42'      | ''                    | ''           | ''             | ''       | ''                | ''       |
+			| 'Register  "R2023 Advances from retail customers"' | ''                    | ''           | ''             | ''       | ''                | ''       |
+			| ''                                                 | 'Period'              | 'RecordType' | 'Company'      | 'Branch' | 'Retail customer' | 'Amount' |
+			| ''                                                 | '03.03.2023 17:09:42' | 'Receipt'    | 'Main Company' | ''       | 'Daniel Smith'    | '1 000'  |
+			| ''                                                 | '03.03.2023 17:09:42' | 'Receipt'    | 'Main Company' | ''       | 'Sam Jons'        | '1 000'  |	
 		And I close all client application windows
 
 Scenario: _042935 check Opening entry movements by the Register  "Cash in transit" (cash in transit)
@@ -904,6 +909,48 @@ Scenario: _042938 check Opening entry movements by the Register  "R5015 Other pa
 			| ''                                              | 'Expense'     | '07.07.2023 12:17:50' | '100'       | 'Main Company' | ''       | 'Local currency'               | 'TRY'      | 'TRY'                  | 'Other partner 2' | 'Other partner 2' | 'Other partner 2' | ''      | 'No'                   |
 			| ''                                              | 'Expense'     | '07.07.2023 12:17:50' | '100'       | 'Main Company' | ''       | 'TRY'                          | 'TRY'      | 'TRY'                  | 'Other partner 2' | 'Other partner 2' | 'Other partner 2' | ''      | 'No'                   |
 			| ''                                              | 'Expense'     | '07.07.2023 12:17:50' | '100'       | 'Main Company' | ''       | 'en description is empty'      | 'TRY'      | 'TRY'                  | 'Other partner 2' | 'Other partner 2' | 'Other partner 2' | ''      | 'No'                   |		
+		And I close all client application windows
+
+Scenario: _042939 check Opening entry movements by the Register  "R9545 Paid vacations" (employee)
+	And I close all client application windows
+	* Select Opening entry
+		Given I open hyperlink "e1cib/list/Document.OpeningEntry"
+		And I go to line in "List" table
+			| 'Number'    |
+			| '222'       |
+	* Check movements by the Register  "R9545 Paid vacations" 
+		And I click "Registrations report" button
+		And I select "R9545 Paid vacations" exact value from "Register" drop-down list
+		And I click "Generate report" button
+		Then "ResultTable" spreadsheet document is equal
+			| 'Opening entry 222 dated 03.04.2024 15:22:43' | ''                    | ''          | ''             | ''              |
+			| 'Document registrations records'              | ''                    | ''          | ''             | ''              |
+			| 'Register  "R9545 Paid vacations"'            | ''                    | ''          | ''             | ''              |
+			| ''                                            | 'Period'              | 'Resources' | 'Dimensions'   | ''              |
+			| ''                                            | ''                    | 'Paid'      | 'Company'      | 'Employee'      |
+			| ''                                            | '03.04.2024 15:22:43' | '14'        | 'Main Company' | 'Anna Petrova'  |
+			| ''                                            | '03.04.2024 15:22:43' | '19'        | 'Main Company' | 'David Romanov' |	
+		And I close all client application windows
+
+Scenario: _042940 check Opening entry movements by the Register  "T9510 Staffing" (employee)
+	And I close all client application windows
+	* Select Opening entry
+		Given I open hyperlink "e1cib/list/Document.OpeningEntry"
+		And I go to line in "List" table
+			| 'Number'    |
+			| '222'       |
+	* Check movements by the Register  "T9510 Staffing" 
+		And I click "Registrations report" button
+		And I select "T9510 Staffing" exact value from "Register" drop-down list
+		And I click "Generate report" button
+		Then "ResultTable" spreadsheet document is equal
+			| 'Opening entry 222 dated 03.04.2024 15:22:43' | ''                    | ''          | ''       | ''             | ''                                  | ''                   | ''              | ''             |
+			| 'Document registrations records'              | ''                    | ''          | ''       | ''             | ''                                  | ''                   | ''              | ''             |
+			| 'Register  "T9510 Staffing"'                  | ''                    | ''          | ''       | ''             | ''                                  | ''                   | ''              | ''             |
+			| ''                                            | 'Period'              | 'Resources' | ''       | ''             | ''                                  | ''                   | 'Dimensions'    | ''             |
+			| ''                                            | ''                    | 'Fired'     | 'Branch' | 'Position'     | 'Employee schedule'                 | 'Profit loss center' | 'Employee'      | 'Company'      |
+			| ''                                            | '03.04.2024 15:22:43' | 'No'        | ''       | 'Manager'      | '5 working days / 2 days off (day)' | 'Front office'       | 'David Romanov' | 'Main Company' |
+			| ''                                            | '03.04.2024 15:22:43' | 'No'        | ''       | 'Sales person' | '1 working day / 2 days off (day)'  | 'Shop 01'            | 'Anna Petrova'  | 'Main Company' |	
 		And I close all client application windows
 
 Scenario: _042930 Opening entry clear posting/mark for deletion

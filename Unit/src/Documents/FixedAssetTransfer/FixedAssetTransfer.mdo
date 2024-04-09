@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mdclass:Document xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" xmlns:mdclassExtension="http://g5.1c.ru/v8/dt/metadata/mdclass/extension" uuid="18c807a6-b7a2-42d2-a1cc-a7a418d6106e" extendedConfigurationObject="ff74f658-0ca7-4191-ac1d-2f97715ff0d2">
+  <producedTypes>
+    <objectType typeId="0d500e4c-4de0-4b37-9d69-cb3eff7584d6" valueTypeId="9a8c4637-38f4-4a9e-8ed5-b9b9e1406bd5"/>
+    <refType typeId="a80ff75a-1943-43f1-ae9f-531c8bcd3f9c" valueTypeId="cdc9cd41-2a13-4620-9a7f-9a13ce783942"/>
+    <selectionType typeId="cd809705-26be-42d3-9730-ef1079dc3fe4" valueTypeId="2d5d4598-2d8f-4d00-9bb1-7165ab9ccd07"/>
+    <listType typeId="c36cedb7-ff8d-47c0-aa26-01e4e6321157" valueTypeId="cdc412b3-de67-4633-820d-f96ba21670b9"/>
+    <managerType typeId="5dfcc61f-43ef-4a00-bc45-3e9d8a7a4dbd" valueTypeId="d5be0ae5-cfb3-45e6-a723-859fef070820"/>
+  </producedTypes>
+  <name>FixedAssetTransfer</name>
+  <objectBelonging>Adopted</objectBelonging>
+  <extension xsi:type="mdclassExtension:DocumentExtension">
+    <extendedConfigurationObject>Checked</extendedConfigurationObject>
+  </extension>
+  <useStandardCommands>true</useStandardCommands>
+</mdclass:Document>

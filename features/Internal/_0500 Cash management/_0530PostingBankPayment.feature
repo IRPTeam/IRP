@@ -261,6 +261,11 @@ Scenario: _0530011 create Bank payment (independently)
 				| 'Amount'        | 'Company'         | 'Legal name'           | 'Partner'       |
 				| '136 000,00'    | 'Main Company'    | 'Company Ferron BP'    | 'Ferron BP'     |
 			And I click "Select" button
+			And I click choice button of "Order" attribute in "PaymentList" table
+			And I go to line in "List" table
+				| 'Amount'       | 'Company'        | 'Legal name'          | 'Partner'      |
+				| '136 000,00'   | 'Main Company'   | 'Company Ferron BP'   | 'Ferron BP'    |
+			And I select current line in "List" table
 		# temporarily
 		* Filling in amount in a tabular part
 			And I activate "Total amount" field in "PaymentList" table
@@ -336,6 +341,11 @@ Scenario: _0530011 create Bank payment (independently)
 				| 'Amount'        | 'Company'         | 'Legal name'           | 'Partner'       |
 				| '135 000,00'    | 'Main Company'    | 'Company Ferron BP'    | 'Ferron BP'     |
 			And I click "Select" button
+			And I click choice button of "Order" attribute in "PaymentList" table
+			And I go to line in "List" table
+				| 'Amount'       | 'Company'        | 'Legal name'          | 'Partner'      |
+				| '135 000,00'   | 'Main Company'   | 'Company Ferron BP'   | 'Ferron BP'    |
+			And I select current line in "List" table
 		# temporarily
 		* Filling in amount in a tabular part
 			And I activate "Total amount" field in "PaymentList" table
@@ -604,7 +614,7 @@ Scenario: _053020 check selection form (Payment by documents) in BP
 			And "Documents" table became equal
 				| 'Document'                                       | 'Partner'   | 'Partner term'       | 'Legal name'        | 'Legal name contract' | 'Order'                   | 'Project' | 'Amount'     | 'Payment' |
 				| 'Purchase invoice 125 dated 12.02.2021 12:00:00' | 'Maxim'     | 'Partner term Maxim' | 'Company Maxim'     | ''                    | ''                        | ''        | '100,00'     | ''        |
-				| '$$PurchaseInvoice018001$$'                      | 'Ferron BP' | 'Vendor Ferron, TRY' | 'Company Ferron BP' | ''                    | '$$PurchaseOrder017001$$' | ''        | '137 000,00' | ''        |
+				| '$$PurchaseInvoice018001$$'                      | 'Ferron BP' | 'Vendor Ferron, TRY' | 'Company Ferron BP' | ''                    | '$$PurchaseOrder017001$$' | ''        | '135 000,00' | ''        |
 				| '$$PurchaseInvoice29604$$'                       | 'Ferron BP' | 'Vendor Ferron, TRY' | 'Company Ferron BP' | ''                    | ''                        | ''        | '13 000,00'  | ''        |
 			And I close current window
 		* With branch
@@ -655,15 +665,15 @@ Scenario: _053020 check selection form (Payment by documents) in BP
 		* Select lines and check allocation	
 			And I go to line in "Documents" table
 				| 'Amount'     | 'Document'                                     |
-				| '137 000,00' | '$$PurchaseInvoice018001$$' |
+				| '135 000,00' | '$$PurchaseInvoice018001$$' |
 			And I move one line down in "Documents" table and select line
-			And I input "149 000,00" text in the field named "Amount"
+			And I input "146 000,00" text in the field named "Amount"
 			And I click the button named "Calculate"
 			And "Documents" table became equal
 				| 'Document'                                       | 'Partner'   | 'Partner term'       | 'Legal name'        | 'Legal name contract' | 'Order'                   | 'Project' | 'Amount'     | 'Payment'    |
 				| 'Purchase invoice 125 dated 12.02.2021 12:00:00' | 'Maxim'     | 'Partner term Maxim' | 'Company Maxim'     | ''                    | ''                        | ''        | '100,00'     | ''           |
-				| '$$PurchaseInvoice018001$$'                      | 'Ferron BP' | 'Vendor Ferron, TRY' | 'Company Ferron BP' | ''                    | '$$PurchaseOrder017001$$' | ''        | '137 000,00' | '137 000,00' |
-				| '$$PurchaseInvoice29604$$'                       | 'Ferron BP' | 'Vendor Ferron, TRY' | 'Company Ferron BP' | ''                    | ''                        | ''        | '13 000,00'  | '12 000,00'  |
+				| '$$PurchaseInvoice018001$$'                      | 'Ferron BP' | 'Vendor Ferron, TRY' | 'Company Ferron BP' | ''                    | '$$PurchaseOrder017001$$' | ''        | '135 000,00' | '135 000,00' |
+				| '$$PurchaseInvoice29604$$'                       | 'Ferron BP' | 'Vendor Ferron, TRY' | 'Company Ferron BP' | ''                    | ''                        | ''        | '13 000,00'  | '11 000,00'  |
 			And I click "Ok" button
 			And "PaymentList" table became equal
 				| 'Partner'   | 'Payee'             | 'Partner term'       | 'Legal name contract' | 'Basis document'                                 | 'Project' | 'Order'                                        | 'Total amount' |
@@ -672,6 +682,34 @@ Scenario: _053020 check selection form (Payment by documents) in BP
 				| 'Maxim'     | 'Company Aldis'     | 'Partner term Maxim' | ''                    | 'Purchase invoice 194 dated 04.09.2023 13:50:38' | ''        | 'Purchase order 118 dated 04.09.2023 13:46:08' | '900,00'       |
 				| 'Maxim'     | 'Company Aldis'     | 'Partner term Maxim' | ''                    | 'Purchase invoice 194 dated 04.09.2023 13:50:38' | ''        | 'Purchase order 119 dated 04.09.2023 13:50:07' | '900,00'       |
 				| 'Maxim'     | 'Company Maxim'     | 'Partner term Maxim' | ''                    | 'Purchase invoice 125 dated 12.02.2021 12:00:00' | ''        | ''                                             | '100,00'       |
-				| 'Ferron BP' | 'Company Ferron BP' | 'Vendor Ferron, TRY' | ''                    | '$$PurchaseInvoice018001$$'                      | ''        | '$$PurchaseOrder017001$$'                      | '137 000,00'   |
-				| 'Ferron BP' | 'Company Ferron BP' | 'Vendor Ferron, TRY' | ''                    | '$$PurchaseInvoice29604$$'                       | ''        | ''                                             | '11 900,00'    |
+				| 'Ferron BP' | 'Company Ferron BP' | 'Vendor Ferron, TRY' | ''                    | '$$PurchaseInvoice018001$$'                      | ''        | '$$PurchaseOrder017001$$'                      | '135 000,00'   |
+				| 'Ferron BP' | 'Company Ferron BP' | 'Vendor Ferron, TRY' | ''                    | '$$PurchaseInvoice29604$$'                       | ''        | ''                                             | '10 900,00'    |
 		And I close all client application windows
+
+Scenario: _053021 check amount when create BP based on PI (partner term - by partner terms)
+	And I close all client application windows
+	* Select two PI
+		Given I open hyperlink "e1cib/list/Document.PurchaseInvoice"
+		And I go to line in "List" table
+			| 'Amount' | 'Legal name' |
+			| '190,00' | 'DFC'        |
+		And I move one line down in "List" table and select line
+	* Create Bank payment
+		And I click the button named "FormDocumentBankPaymentGenerateBankPayment"
+	* Check amount (documents amount )
+		And "PaymentList" table became equal
+			| '#' | 'Partner' | 'Payee' | 'Partner term'                | 'Legal name contract' | 'Basis document' | 'Project' | 'Order' | 'Total amount' | 'Financial movement type' | 'Cash flow center' | 'Planning transaction basis' |
+			| '1' | 'DFC'     | 'DFC'   | 'DFC Vendor by Partner terms' | ''                    | ''               | ''        | ''      | '390,00'       | ''                        | ''                 | ''                           |
+	And I close all client application windows
+	* Select one PI				
+		Given I open hyperlink "e1cib/list/Document.PurchaseInvoice"
+		And I go to line in "List" table
+			| 'Amount' | 'Legal name' |
+			| '190,00' | 'DFC'        |
+	* Create Bank payment
+		And I click the button named "FormDocumentBankPaymentGenerateBankPayment"
+	* Check amount (documents amount )
+		And "PaymentList" table became equal
+			| '#' | 'Partner' | 'Payee' | 'Partner term'                | 'Legal name contract' | 'Basis document' | 'Project' | 'Order' | 'Total amount' | 'Financial movement type' | 'Cash flow center' | 'Planning transaction basis' |
+			| '1' | 'DFC'     | 'DFC'   | 'DFC Vendor by Partner terms' | ''                    | ''               | ''        | ''      | '190,00'       | ''                        | ''                 | ''                           |
+	And I close all client application windows	

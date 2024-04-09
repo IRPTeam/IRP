@@ -12,9 +12,11 @@
     <types>CatalogRef.LockDataModificationReasons</types>
     <types>CatalogRef.Companies</types>
     <types>CatalogRef.LegalNameContracts</types>
+    <types>CatalogRef.Incoterms</types>
     <types>DocumentRef.SalesReportFromTradeAgent</types>
     <types>DocumentRef.CashTransferOrder</types>
     <types>DocumentRef.IncomingPaymentOrder</types>
+    <types>DocumentRef.AdditionalAccrual</types>
     <types>CatalogRef.PaymentTerminals</types>
     <types>CatalogRef.SpecialOffers</types>
     <types>CatalogRef.CashAccounts</types>
@@ -22,27 +24,39 @@
     <types>CatalogRef.PaymentTypes</types>
     <types>CatalogRef.CancelReturnReasons</types>
     <types>DocumentRef.SalesReturnOrder</types>
+    <types>DocumentRef.AdditionalRevenueAllocation</types>
     <types>DocumentRef.CashPayment</types>
+    <types>DocumentRef.AdditionalDeduction</types>
     <types>CatalogRef.SpecialOfferRules</types>
     <types>CatalogRef.AccountingOperations</types>
+    <types>DocumentRef.AdditionalCostAllocation</types>
     <types>CatalogRef.Files</types>
+    <types>DocumentRef.EmployeeSickLeave</types>
     <types>DocumentRef.WorkOrderClosing</types>
     <types>CatalogRef.BillOfMaterials</types>
     <types>DocumentRef.PurchaseInvoice</types>
     <types>CatalogRef.ExpenseAndRevenueTypes</types>
     <types>DocumentRef.DebitNote</types>
     <types>DocumentRef.CreditNote</types>
+    <types>DocumentRef.ProductionCostsAllocation</types>
     <types>DocumentRef.BankReceipt</types>
     <types>CatalogRef.UserGroups</types>
     <types>DocumentRef.PurchaseReturn</types>
+    <types>DocumentRef.DebitCreditNote</types>
+    <types>DocumentRef.CommissioningOfFixedAsset</types>
+    <types>DocumentRef.RetailShipmentConfirmation</types>
     <types>DocumentRef.ChequeBondTransaction</types>
+    <types>CatalogRef.VehicleTypes</types>
     <types>CatalogRef.PartnerSegments</types>
+    <types>DocumentRef.FixedAssetTransfer</types>
     <types>CatalogRef.IntegrationSettings</types>
     <types>CatalogRef.PlanningPeriods</types>
     <types>DocumentRef.ManualRegisterEntry</types>
+    <types>CatalogRef.SourceOfOrigins</types>
     <types>CatalogRef.ItemSegments</types>
     <types>DocumentRef.PurchaseReturnOrder</types>
     <types>CatalogRef.PriceTypes</types>
+    <types>CatalogRef.DepreciationSchedules</types>
     <types>DocumentRef.Labeling</types>
     <types>DocumentRef.ConsolidatedRetailSales</types>
     <types>CatalogRef.Workstations</types>
@@ -50,6 +64,7 @@
     <types>CatalogRef.Partners</types>
     <types>DocumentRef.ShipmentConfirmation</types>
     <types>DocumentRef.InternalSupplyRequest</types>
+    <types>DocumentRef.EmployeeCashAdvance</types>
     <types>DocumentRef.Unbundling</types>
     <types>DocumentRef.PriceList</types>
     <types>CatalogRef.EquipmentDrivers</types>
@@ -57,17 +72,22 @@
     <types>CatalogRef.TaxRates</types>
     <types>DocumentRef.WorkOrder</types>
     <types>DocumentRef.PurchaseOrder</types>
+    <types>CatalogRef.Vehicles</types>
     <types>CatalogRef.AccessGroups</types>
     <types>DocumentRef.CashReceipt</types>
     <types>CatalogRef.Hardware</types>
     <types>CatalogRef.UnitsOfMeasurement</types>
     <types>DocumentRef.OutgoingPaymentOrder</types>
+    <types>CatalogRef.EmployeePositions</types>
     <types>CatalogRef.PartnersBankAccounts</types>
     <types>DocumentRef.OpeningEntry</types>
+    <types>DocumentRef.EmployeeVacation</types>
     <types>DocumentRef.RetailReturnReceipt</types>
     <types>CatalogRef.Currencies</types>
+    <types>DocumentRef.Payroll</types>
     <types>DocumentRef.SalesOrder</types>
     <types>DocumentRef.MoneyTransfer</types>
+    <types>CatalogRef.FixedAssets</types>
     <types>CatalogRef.LedgerTypeVariants</types>
     <types>DocumentRef.SalesReturn</types>
     <types>DocumentRef.CashRevenue</types>
@@ -77,10 +97,17 @@
     <types>CatalogRef.PaymentSchedules</types>
     <types>DocumentRef.StockAdjustmentAsSurplus</types>
     <types>CatalogRef.ObjectStatuses</types>
+    <types>CatalogRef.EmployeeSchedule</types>
+    <types>DocumentRef.ModernizationOfFixedAsset</types>
+    <types>CatalogRef.AgingPeriods</types>
     <types>DocumentRef.StockAdjustmentAsWriteOff</types>
     <types>CatalogRef.PartnerItems</types>
+    <types>DocumentRef.EmployeeHiring</types>
     <types>DocumentRef.Bundling</types>
+    <types>CatalogRef.AccrualAndDeductionTypes</types>
     <types>DocumentRef.RetailSalesReceipt</types>
+    <types>DocumentRef.RetailReceiptCorrection</types>
+    <types>DocumentRef.EmployeeTransfer</types>
     <types>CatalogRef.Items</types>
     <types>DocumentRef.PlannedReceiptReservation</types>
     <types>DocumentRef.WorkSheet</types>
@@ -90,12 +117,16 @@
     <types>CatalogRef.BankTerms</types>
     <types>CatalogRef.SerialLotNumbers</types>
     <types>CatalogRef.Agreements</types>
+    <types>CatalogRef.Projects</types>
     <types>DocumentRef.SalesReportToConsignor</types>
     <types>CatalogRef.Taxes</types>
     <types>DocumentRef.Production</types>
     <types>DocumentRef.ItemStockAdjustment</types>
     <types>CatalogRef.RetailCustomers</types>
     <types>CatalogRef.Countries</types>
+    <types>DocumentRef.DecommissioningOfFixedAsset</types>
+    <types>CatalogRef.Addresses</types>
+    <types>DocumentRef.TimeSheet</types>
     <types>CatalogRef.SpecialOfferTypes</types>
     <types>DocumentRef.InventoryTransferOrder</types>
     <types>CatalogRef.AccessProfiles</types>
@@ -113,6 +144,8 @@
     <types>CatalogRef.ItemKeys</types>
     <types>CatalogRef.ItemTypes</types>
     <types>DocumentRef.ReconciliationStatement</types>
+    <types>DocumentRef.VisitorCounter</types>
+    <types>DocumentRef.EmployeeFiring</types>
     <types>DocumentRef.GoodsReceipt</types>
     <types>DocumentRef.PhysicalInventory</types>
     <types>CatalogRef.Users</types>
@@ -120,40 +153,8 @@
     <types>CatalogRef.ChequeBonds</types>
     <types>DocumentRef.ProductionPlanningClosing</types>
     <types>CatalogRef.BusinessUnits</types>
-    <types>DocumentRef.CashExpense</types>
-    <types>CatalogRef.SourceOfOrigins</types>
-    <types>DocumentRef.EmployeeCashAdvance</types>
-    <types>DocumentRef.ProductionCostsAllocation</types>
-    <types>DocumentRef.Payroll</types>
-    <types>CatalogRef.EmployeePositions</types>
-    <types>CatalogRef.AccrualAndDeductionTypes</types>
-    <types>DocumentRef.TimeSheet</types>
-    <types>CatalogRef.VehicleTypes</types>
-    <types>CatalogRef.Vehicles</types>
-    <types>CatalogRef.Addresses</types>
     <types>DocumentRef.RetailGoodsReceipt</types>
-    <types>DocumentRef.RetailShipmentConfirmation</types>
-    <types>CatalogRef.FixedAssets</types>
+    <types>DocumentRef.CashExpense</types>
     <types>CatalogRef.FixedAssetsLedgerTypes</types>
-    <types>CatalogRef.DepreciationSchedules</types>
-    <types>DocumentRef.CommissioningOfFixedAsset</types>
-    <types>DocumentRef.DecommissioningOfFixedAsset</types>
-    <types>DocumentRef.FixedAssetTransfer</types>
-    <types>DocumentRef.ModernizationOfFixedAsset</types>
-    <types>DocumentRef.EmployeeFiring</types>
-    <types>DocumentRef.EmployeeHiring</types>
-    <types>DocumentRef.EmployeeSickLeave</types>
-    <types>DocumentRef.EmployeeTransfer</types>
-    <types>DocumentRef.EmployeeVacation</types>
-    <types>DocumentRef.AdditionalDeduction</types>
-    <types>DocumentRef.AdditionalRevenueAllocation</types>
-    <types>DocumentRef.AdditionalCostAllocation</types>
-    <types>DocumentRef.AdditionalAccrual</types>
-    <types>CatalogRef.EmployeeSchedule</types>
-    <types>DocumentRef.VisitorCounter</types>
-    <types>DocumentRef.RetailReceiptCorrection</types>
-    <types>CatalogRef.Projects</types>
-    <types>DocumentRef.DebitCreditNote</types>
-    <types>CatalogRef.AgingPeriods</types>
   </type>
 </mdclass:DefinedType>

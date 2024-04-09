@@ -143,8 +143,6 @@ Scenario: _043300 preparation (Bank payment)
 		And I execute 1C:Enterprise script at server
 			| "Documents.BankPayment.FindByNumber(2).GetObject().Write(DocumentWriteMode.Posting);"    |
 		And I execute 1C:Enterprise script at server
-			| "Documents.BankPayment.FindByNumber(3).GetObject().Write(DocumentWriteMode.Posting);"    |
-		And I execute 1C:Enterprise script at server
 			| "Documents.BankPayment.FindByNumber(10).GetObject().Write(DocumentWriteMode.Posting);"    |
 		When Create document SalesOrder objects (check movements, SC before SI, Use shipment sheduling)
 		And I execute 1C:Enterprise script at server
@@ -261,7 +259,7 @@ Scenario: _043303 check absence Bank payment movements by the Register "R5010 Re
 		Given I open hyperlink "e1cib/list/Document.BankPayment"
 		And I go to line in "List" table
 			| 'Number'    |
-			| '3'         |
+			| '324'       |
 	* Check movements by the Register  "R5010 Reconciliation statement" 
 		And I click "Registrations report" button
 		And I select "R5010 Reconciliation statement" exact value from "Register" drop-down list
@@ -1046,4 +1044,24 @@ Scenario: _0433307 check Bank payment movements by the Register  "R3021 Cash in 
 			| ''                                             | 'Receipt'     | '03.07.2023 14:20:52' | ''          | 'Main Company' | 'Front office' | 'Bank account 2, EUR' | 'Local currency'               | 'TRY'      | 'EUR'                  | ''      | 'No'                   |
 			| ''                                             | 'Receipt'     | '03.07.2023 14:20:52' | ''          | 'Main Company' | 'Front office' | 'Bank account 2, EUR' | 'Reporting currency'           | 'USD'      | 'EUR'                  | ''      | 'No'                   |
 			| ''                                             | 'Receipt'     | '03.07.2023 14:20:52' | '1 000'     | 'Main Company' | 'Front office' | 'Bank account 2, EUR' | 'en description is empty'      | 'EUR'      | 'EUR'                  | ''      | 'No'                   |		
+		And I close all client application windows
+
+Scenario: _0433308 check Bank payment movements by the Register  "R3021 Cash in transit (incoming)" (cash transfer - currency exchange)
+		And I close all client application windows
+	* Select Bank payment
+		Given I open hyperlink "e1cib/list/Document.BankPayment"
+		And I go to line in "List" table
+			| 'Number'  |
+			| '324'     |
+	* Check movements by the Register  "R3021 Cash in transit (incoming)" 
+		And I click "Registrations report info" button
+		And I select "R3021 Cash in transit (incoming)" exact value from "Register" drop-down list
+		And I click "Generate report" button
+		Then "ResultTable" spreadsheet document is equal
+			| 'Bank payment 324 dated 03.06.2021 17:05:34'   | ''                    | ''           | ''             | ''       | ''             | ''                             | ''         | ''                     | ''                                                | ''       | ''                     |
+			| 'Register  "R3021 Cash in transit (incoming)"' | ''                    | ''           | ''             | ''       | ''             | ''                             | ''         | ''                     | ''                                                | ''       | ''                     |
+			| ''                                             | 'Period'              | 'RecordType' | 'Company'      | 'Branch' | 'Account'      | 'Multi currency movement type' | 'Currency' | 'Transaction currency' | 'Basis'                                           | 'Amount' | 'Deferred calculation' |
+			| ''                                             | '03.06.2021 17:05:34' | 'Receipt'    | 'Main Company' | ''       | 'Transit Main' | 'Local currency'               | 'TRY'      | 'TRY'                  | 'Cash transfer order 3 dated 05.04.2021 12:23:49' | '1 000'  | 'No'                   |
+			| ''                                             | '03.06.2021 17:05:34' | 'Receipt'    | 'Main Company' | ''       | 'Transit Main' | 'Reporting currency'           | 'USD'      | 'TRY'                  | 'Cash transfer order 3 dated 05.04.2021 12:23:49' | '171,2'  | 'No'                   |
+			| ''                                             | '03.06.2021 17:05:34' | 'Receipt'    | 'Main Company' | ''       | 'Transit Main' | 'en description is empty'      | 'TRY'      | 'TRY'                  | 'Cash transfer order 3 dated 05.04.2021 12:23:49' | '1 000'  | 'No'                   |	
 		And I close all client application windows

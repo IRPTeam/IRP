@@ -26,4 +26,3 @@ Procedure EditUniqueID(Command)
 	Items.UniqueID.ReadOnly = Not Items.UniqueID.ReadOnly;
 EndProcedure
 
-

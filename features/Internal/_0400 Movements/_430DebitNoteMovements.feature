@@ -192,25 +192,26 @@ Scenario: _043003 check absence Debit note movements by the Register "R1021 Vend
 	And I close all client application windows
 
 
-Scenario: _043004 check Debit note movements by the Register "R1020 Advances to vendors" (with vendor)
+Scenario: _043004 check Debit note movements by the Register "R1021 Vendors transactions" (with vendor)
 	* Select Debit note
 		Given I open hyperlink "e1cib/list/Document.DebitNote"
 		And I go to line in "List" table
 			| 'Number'    |
 			| '1'         |
-	* Check movements by the Register  "R1020 Advances to vendors" 
+	* Check movements by the Register  "R1021 Vendors transactions" 
 		And I click "Registrations report" button
-		And I select "R1020 Advances to vendors" exact value from "Register" drop-down list
+		And I select "R1021 Vendors transactions" exact value from "Register" drop-down list
 		And I click "Generate report" button
 		Then "ResultTable" spreadsheet document is equal
-			| 'Debit note 1 dated 05.04.2021 09:30:36' | ''            | ''                    | ''          | ''             | ''             | ''                             | ''         | ''                     | ''                  | ''          | ''      | ''                   | ''                    | ''                     | ''                         |
-			| 'Document registrations records'         | ''            | ''                    | ''          | ''             | ''             | ''                             | ''         | ''                     | ''                  | ''          | ''      | ''                   | ''                    | ''                     | ''                         |
-			| 'Register  "R1020 Advances to vendors"'  | ''            | ''                    | ''          | ''             | ''             | ''                             | ''         | ''                     | ''                  | ''          | ''      | ''                   | ''                    | ''                     | ''                         |
-			| ''                                       | 'Record type' | 'Period'              | 'Resources' | 'Dimensions'   | ''             | ''                             | ''         | ''                     | ''                  | ''          | ''      | ''                   | ''                    | 'Attributes'           | ''                         |
-			| ''                                       | ''            | ''                    | 'Amount'    | 'Company'      | 'Branch'       | 'Multi currency movement type' | 'Currency' | 'Transaction currency' | 'Legal name'        | 'Partner'   | 'Order' | 'Agreement'          | 'Project'             | 'Deferred calculation' | 'Vendors advances closing' |
-			| ''                                       | 'Receipt'     | '05.04.2021 09:30:36' | '393,76'    | 'Main Company' | 'Front office' | 'Reporting currency'           | 'USD'      | 'TRY'                  | 'Company Ferron BP' | 'Ferron BP' | ''      | 'Vendor Ferron, TRY' | 'Project 01'          | 'No'                   | ''                         |
-			| ''                                       | 'Receipt'     | '05.04.2021 09:30:36' | '2 300'     | 'Main Company' | 'Front office' | 'Local currency'               | 'TRY'      | 'TRY'                  | 'Company Ferron BP' | 'Ferron BP' | ''      | 'Vendor Ferron, TRY' | 'Project 01'          | 'No'                   | ''                         |
-			| ''                                       | 'Receipt'     | '05.04.2021 09:30:36' | '2 300'     | 'Main Company' | 'Front office' | 'en description is empty'      | 'TRY'      | 'TRY'                  | 'Company Ferron BP' | 'Ferron BP' | ''      | 'Vendor Ferron, TRY' | 'Project 01'          | 'No'                   | ''                         |
+			| 'Debit note 1 dated 05.04.2021 09:30:36' | ''            | ''                    | ''          | ''             | ''             | ''                             | ''         | ''                     | ''                  | ''          | ''                   | ''                                       | ''      | ''           | ''                     | ''                         |
+			| 'Document registrations records'         | ''            | ''                    | ''          | ''             | ''             | ''                             | ''         | ''                     | ''                  | ''          | ''                   | ''                                       | ''      | ''           | ''                     | ''                         |
+			| 'Register  "R1021 Vendors transactions"' | ''            | ''                    | ''          | ''             | ''             | ''                             | ''         | ''                     | ''                  | ''          | ''                   | ''                                       | ''      | ''           | ''                     | ''                         |
+			| ''                                       | 'Record type' | 'Period'              | 'Resources' | 'Dimensions'   | ''             | ''                             | ''         | ''                     | ''                  | ''          | ''                   | ''                                       | ''      | ''           | 'Attributes'           | ''                         |
+			| ''                                       | ''            | ''                    | 'Amount'    | 'Company'      | 'Branch'       | 'Multi currency movement type' | 'Currency' | 'Transaction currency' | 'Legal name'        | 'Partner'   | 'Agreement'          | 'Basis'                                  | 'Order' | 'Project'    | 'Deferred calculation' | 'Vendors advances closing' |
+			| ''                                       | 'Receipt'     | '05.04.2021 09:30:36' | '-2 300'    | 'Main Company' | 'Front office' | 'Local currency'               | 'TRY'      | 'TRY'                  | 'Company Ferron BP' | 'Ferron BP' | 'Vendor Ferron, TRY' | 'Debit note 1 dated 05.04.2021 09:30:36' | ''      | 'Project 01' | 'No'                   | ''                         |
+			| ''                                       | 'Receipt'     | '05.04.2021 09:30:36' | '-2 300'    | 'Main Company' | 'Front office' | 'TRY'                          | 'TRY'      | 'TRY'                  | 'Company Ferron BP' | 'Ferron BP' | 'Vendor Ferron, TRY' | 'Debit note 1 dated 05.04.2021 09:30:36' | ''      | 'Project 01' | 'No'                   | ''                         |
+			| ''                                       | 'Receipt'     | '05.04.2021 09:30:36' | '-2 300'    | 'Main Company' | 'Front office' | 'en description is empty'      | 'TRY'      | 'TRY'                  | 'Company Ferron BP' | 'Ferron BP' | 'Vendor Ferron, TRY' | 'Debit note 1 dated 05.04.2021 09:30:36' | ''      | 'Project 01' | 'No'                   | ''                         |
+			| ''                                       | 'Receipt'     | '05.04.2021 09:30:36' | '-393,76'   | 'Main Company' | 'Front office' | 'Reporting currency'           | 'USD'      | 'TRY'                  | 'Company Ferron BP' | 'Ferron BP' | 'Vendor Ferron, TRY' | 'Debit note 1 dated 05.04.2021 09:30:36' | ''      | 'Project 01' | 'No'                   | ''                         |	
 	And I close all client application windows
 
 Scenario: _043005 check absence Debit note movements by the Register "R2021 Customer transactions" (with vendor)
@@ -326,16 +327,14 @@ Scenario: _043010 check Debit note movements by the Register "R5010 Reconciliati
 			| 'Number'    |
 			| '3'         |
 	* Check movements by the Register  "R5010 Reconciliation statement" 
-		And I click "Registrations report" button
+		And I click "Registrations report info" button
 		And I select "R5010 Reconciliation statement" exact value from "Register" drop-down list
 		And I click "Generate report" button
 		Then "ResultTable" spreadsheet document is equal
-			| 'Debit note 3 dated 12.06.2023 14:52:33'       | ''              | ''                      | ''            | ''               | ''               | ''           | ''                  | ''                       |
-			| 'Document registrations records'               | ''              | ''                      | ''            | ''               | ''               | ''           | ''                  | ''                       |
-			| 'Register  "R5010 Reconciliation statement"'   | ''              | ''                      | ''            | ''               | ''               | ''           | ''                  | ''                       |
-			| ''                                             | 'Record type'   | 'Period'                | 'Resources'   | 'Dimensions'     | ''               | ''           | ''                  | ''                       |
-			| ''                                             | ''              | ''                      | 'Amount'      | 'Company'        | 'Branch'         | 'Currency'   | 'Legal name'        | 'Legal name contract'    |
-			| ''                                             | 'Receipt'       | '12.06.2023 14:52:33'   | '100'         | 'Main Company'   | 'Front office'   | 'TRY'        | 'Other partner 1'   | ''                       |
+			| 'Debit note 3 dated 12.06.2023 14:52:33'     | ''                    | ''           | ''             | ''             | ''         | ''                | ''                    | ''       |
+			| 'Register  "R5010 Reconciliation statement"' | ''                    | ''           | ''             | ''             | ''         | ''                | ''                    | ''       |
+			| ''                                           | 'Period'              | 'RecordType' | 'Company'      | 'Branch'       | 'Currency' | 'Legal name'      | 'Legal name contract' | 'Amount' |
+			| ''                                           | '12.06.2023 14:52:33' | 'Receipt'    | 'Main Company' | 'Front office' | 'TRY'      | 'Other partner 1' | ''                    | '100'    |	
 	And I close all client application windows
 
 Scenario: _043030 Debit note clear posting/mark for deletion

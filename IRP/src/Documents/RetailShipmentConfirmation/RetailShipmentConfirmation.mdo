@@ -846,6 +846,13 @@
       <fullTextSearch>Use</fullTextSearch>
     </attributes>
   </tabularSections>
+  <templates uuid="43a2c7ee-a922-4f00-8ade-9f4e27d92588">
+    <name>RetailShipmentConfirmationPrint</name>
+    <synonym>
+      <key>en</key>
+      <value>Retail shipment confirmation</value>
+    </synonym>
+  </templates>
   <commands uuid="b2ececf0-7cbd-456e-b35f-4e2570c5bf85">
     <name>Generate</name>
     <synonym>
@@ -855,6 +862,19 @@
     <group>FormCommandBarCreateBasedOn</group>
     <commandParameterType>
       <types>DocumentRef.SalesOrder</types>
+    </commandParameterType>
+    <parameterUseMode>Multiple</parameterUseMode>
+    <representation>Auto</representation>
+  </commands>
+  <commands uuid="a6bd9b41-2ff6-462d-8895-38ecb3b63860">
+    <name>RetailShipmentConfirmationPrint</name>
+    <synonym>
+      <key>en</key>
+      <value>Retail shipment confirmation</value>
+    </synonym>
+    <group>CommandGroup.Print</group>
+    <commandParameterType>
+      <types>DocumentRef.RetailShipmentConfirmation</types>
     </commandParameterType>
     <parameterUseMode>Multiple</parameterUseMode>
     <representation>Auto</representation>

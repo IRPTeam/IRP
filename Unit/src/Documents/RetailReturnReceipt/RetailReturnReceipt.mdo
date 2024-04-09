@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mdclass:Document xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" xmlns:mdclassExtension="http://g5.1c.ru/v8/dt/metadata/mdclass/extension" uuid="dc5d12b3-0b43-4be4-978d-67ebbe6c6f83" extendedConfigurationObject="5995d642-4404-4e7d-9805-a9937b265dc8">
+  <producedTypes>
+    <objectType typeId="bacf979f-d685-49f5-81fd-58d62623bac2" valueTypeId="f6f8c6f7-e9a1-4e47-9eed-dbbcfccd9aaf"/>
+    <refType typeId="5c04a29b-dc7c-4e68-beeb-8985f072b483" valueTypeId="80306d57-6b3e-47a3-9f79-e71a4e25f74d"/>
+    <selectionType typeId="3c813ab3-ad16-440c-b589-742e97496153" valueTypeId="17c7cce0-b925-48e5-8b08-8ebf5ea1a5b0"/>
+    <listType typeId="25bdbc4f-9d6b-4b46-82a8-a615bcc1dfa2" valueTypeId="eec76422-8aa7-48b8-88eb-ac2bce1fce28"/>
+    <managerType typeId="52ed5113-ffda-4b2f-b3cb-0868348dc323" valueTypeId="032949ab-b2a1-42cb-9cde-e74fdbd821f1"/>
+  </producedTypes>
+  <name>RetailReturnReceipt</name>
+  <objectBelonging>Adopted</objectBelonging>
+  <extension xsi:type="mdclassExtension:DocumentExtension">
+    <extendedConfigurationObject>Checked</extendedConfigurationObject>
+  </extension>
+  <useStandardCommands>true</useStandardCommands>
+</mdclass:Document>

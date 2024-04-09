@@ -88,7 +88,6 @@ Function GetQueryTextsSecondaryTables()
 	QueryArray.Add(MoneySender());
 	QueryArray.Add(MoneyReceiver());
 	QueryArray.Add(MoneyTransit());
-	QueryArray.Add(ExpenseRevenueAnalytics());
 	Return QueryArray;
 EndFunction
 
@@ -188,21 +187,6 @@ Function MoneyTransit()
 		|	AND Currencies.MovementType.Currency = Currencies.Ref.TransitAccount.Currency
 		|	AND Currencies.Ref.SendCurrency <> Currencies.Ref.ReceiveCurrency
 		|	AND Currencies.Key <> Currencies.Ref.TransitUUID";
-EndFunction
-
-Function ExpenseRevenueAnalytics()
-	Return
-		"SELECT
-		|	MoneyTransfer.SendUUID AS Key,
-		|	MoneyTransfer.ExpenseType,
-		|	MoneyTransfer.LossCenter,
-		|	MoneyTransfer.RevenueType,
-		|	MoneyTransfer.ProfitCenter
-		|INTO ExpenseRevenueAnalytics
-		|FROM
-		|	Document.MoneyTransfer AS MoneyTransfer
-		|WHERE
-		|	MoneyTransfer.Ref = &Ref";
 EndFunction
 
 #EndRegion
@@ -577,7 +561,6 @@ Function GetAnalytics_CurrencyExchangeExpenses(Parameters)
 	AccountingAnalytics.Debit = AccountingServer.GetT9014S_AccountsExpenseRevenue(AccountParameters, Parameters.ObjectData.ExpenseType).Account;
 	// Debit - Analytics
 	AccountingServer.SetDebitExtDimensions(Parameters, AccountingAnalytics);
-
 
 	AccountingAnalytics.Credit = AccountingServer.GetT9011S_AccountsCashAccount(AccountParameters, 
 	                                                                            Parameters.ObjectData.TransitAccount,

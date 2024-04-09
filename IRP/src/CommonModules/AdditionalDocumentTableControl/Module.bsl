@@ -337,7 +337,6 @@ Function QuickFix(Document, RowIDList, ErrorID) Export
 	Return Result;
 EndFunction
 
-
 // Quick fix array.
 // 
 // Parameters:

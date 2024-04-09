@@ -161,5 +161,3 @@ Function GetConsignorSales(Parameters) Export
 	QueryTable = QueryResult.Unload();
 	Return QueryTable;
 EndFunction
-
-

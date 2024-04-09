@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mdclass:Document xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" xmlns:mdclassExtension="http://g5.1c.ru/v8/dt/metadata/mdclass/extension" uuid="6bcf20d0-bda7-494c-98d8-3cea2f5711d7" extendedConfigurationObject="f7692618-3cc0-4712-ab62-f3d897d5d8b9">
+  <producedTypes>
+    <objectType typeId="b46d72e5-c38e-4a54-832a-b2a21b995c92" valueTypeId="c94ecd91-0634-497c-9095-3a1f5d0ff8e7"/>
+    <refType typeId="1feba98f-0cf7-4447-bdad-d63084dfffaa" valueTypeId="e5600228-1e3e-45fe-af6a-0999458a008a"/>
+    <selectionType typeId="62ae6d8f-ae9b-4ff9-bc6a-465d293cb298" valueTypeId="223c785a-b03f-47de-9c4b-ae98ffc9c004"/>
+    <listType typeId="1d7f4947-3278-474c-921c-53830493c8fa" valueTypeId="7c9aa5f1-11e5-493d-a69f-64991725b993"/>
+    <managerType typeId="7e0aecc5-9e4a-43f2-bba9-1d99ca6c8679" valueTypeId="a54417f5-a592-4389-87b1-75ec9d7f6592"/>
+  </producedTypes>
+  <name>BankReceipt</name>
+  <objectBelonging>Adopted</objectBelonging>
+  <extension xsi:type="mdclassExtension:DocumentExtension">
+    <extendedConfigurationObject>Checked</extendedConfigurationObject>
+  </extension>
+  <useStandardCommands>true</useStandardCommands>
+</mdclass:Document>

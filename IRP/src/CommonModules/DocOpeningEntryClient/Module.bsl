@@ -214,4 +214,18 @@ EndProcedure
 
 #EndRegion
 
+#Region EMPLOYEE_LIST
 
+Procedure EmployeeListBeforeAddRow(Object, Form, Item, Cancel, Clone, Parent, IsFolder, Parameter) Export
+	ViewClient_V2.EmployeeListBeforeAddRow(Object, Form, Cancel, Clone);
+EndProcedure
+
+Procedure EmployeeListAfterDeleteRow(Object, Form, Item) Export
+	ViewClient_V2.EmployeeListAfterDeleteRow(Object, Form);
+EndProcedure
+
+Procedure EmployeeListSalaryTypeOnChange(Object, Form, Item, CurrentData = Undefined) Export
+	ViewClient_V2.EmployeeListSalaryTypeOnChange(Object, Form, CurrentData);
+EndProcedure
+
+#EndRegion

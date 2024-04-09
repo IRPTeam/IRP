@@ -111,7 +111,8 @@ EndProcedure
 //  Boolean - This is editing exception
 Function ThisIsEditingException(CatalogName)
 	
-	If CatalogName = "Catalog.Currencies" 
+	If CatalogName = "Catalog.Currencies"
+			OR CatalogName = "Catalog.Incoterms"
 			OR CatalogName = "Catalog.RetailCustomers" Then
 		Return True;
 	EndIf;

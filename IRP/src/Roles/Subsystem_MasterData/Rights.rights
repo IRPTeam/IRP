@@ -11,7 +11,7 @@
 		</right>
 	</object>
 	<object>
-		<name>Subsystem.MasterData.Subsystem.Items</name>
+		<name>Subsystem.MasterData.Subsystem.Retail</name>
 		<right>
 			<name>View</name>
 			<value>true</value>
@@ -25,7 +25,7 @@
 		</right>
 	</object>
 	<object>
-		<name>Subsystem.MasterData.Subsystem.AdditionalControl</name>
+		<name>Subsystem.MasterData.Subsystem.Finance</name>
 		<right>
 			<name>View</name>
 			<value>true</value>
@@ -46,14 +46,14 @@
 		</right>
 	</object>
 	<object>
-		<name>Subsystem.MasterData.Subsystem.Finance</name>
+		<name>Subsystem.MasterData.Subsystem.Items</name>
 		<right>
 			<name>View</name>
 			<value>true</value>
 		</right>
 	</object>
 	<object>
-		<name>Subsystem.MasterData.Subsystem.Retail</name>
+		<name>Subsystem.MasterData.Subsystem.AdditionalControl</name>
 		<right>
 			<name>View</name>
 			<value>true</value>

@@ -75,6 +75,7 @@
   <registerRecords>AccumulationRegister.R1022B_VendorsPaymentPlanning</registerRecords>
   <registerRecords>AccumulationRegister.T1040T_AccountingAmounts</registerRecords>
   <registerRecords>AccumulationRegister.R5015B_OtherPartnersTransactions</registerRecords>
+  <registerRecords>AccumulationRegister.R5020B_PartnersBalance</registerRecords>
   <postInPrivilegedMode>true</postInPrivilegedMode>
   <unpostInPrivilegedMode>true</unpostInPrivilegedMode>
   <choiceHistoryOnInput>DontUse</choiceHistoryOnInput>
@@ -274,7 +275,7 @@
       <minValue xsi:type="core:UndefinedValue"/>
       <maxValue xsi:type="core:UndefinedValue"/>
       <choiceParameterLinks>
-        <name>Filter.Company</name>
+        <name>Filter.LegalName</name>
         <field>Document.CreditNote.TabularSection.Transactions.Attribute.LegalName</field>
       </choiceParameterLinks>
       <dataHistory>Use</dataHistory>
@@ -288,6 +289,23 @@
       </synonym>
       <type>
         <types>CatalogRef.Projects</types>
+      </type>
+      <minValue xsi:type="core:UndefinedValue"/>
+      <maxValue xsi:type="core:UndefinedValue"/>
+      <dataHistory>Use</dataHistory>
+      <fullTextSearch>Use</fullTextSearch>
+    </attributes>
+    <attributes uuid="e7ee7882-24b3-4cae-b37e-b1d1cd7feccd">
+      <name>BasisDocument</name>
+      <synonym>
+        <key>en</key>
+        <value>Basis document</value>
+      </synonym>
+      <type>
+        <types>DocumentRef.SalesInvoice</types>
+        <types>DocumentRef.SalesReturn</types>
+        <types>DocumentRef.PurchaseInvoice</types>
+        <types>DocumentRef.PurchaseReturn</types>
       </type>
       <minValue xsi:type="core:UndefinedValue"/>
       <maxValue xsi:type="core:UndefinedValue"/>

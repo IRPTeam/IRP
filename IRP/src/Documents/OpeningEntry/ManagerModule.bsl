@@ -4,11 +4,144 @@ Function GetPrintForm(Ref, PrintFormName, AddInfo = Undefined) Export
 	Return Undefined;
 EndFunction
 
+Function Print(Ref, Param) Export
+	If StrCompare(Param.NameTemplate, "OpeningEntryPrint") = 0 Then
+		Return OpeningEntryPrint(Ref, Param);
+	EndIf;
+EndFunction
+
+// Sales Invoice print.
+// 
+// Parameters:
+//  Ref - DocumentRef.OpeningEntry
+//  Param - See UniversalPrintServer.InitPrintParam
+// 
+// Returns:
+//  SpreadsheetDocument - Opening entry print
+Function OpeningEntryPrint(Ref, Param)
+		
+	Template = GetTemplate("OpeningEntryPrint");
+	Template.LanguageCode = Param.LayoutLang;
+	Query = New Query;
+	Text =
+	"SELECT
+	|	DocumentHeader.Number AS Number,
+	|	DocumentHeader.Date AS Date,
+	|	DocumentHeader.Company.Description_en AS Company,
+	|	DocumentHeader.Author AS Author,
+	|	DocumentHeader.Ref AS Ref	
+	|FROM
+	|	Document.OpeningEntry AS DocumentHeader
+	|WHERE
+	|	DocumentHeader.Ref = &Ref
+	|;
+	|
+	|////////////////////////////////////////////////////////////////////////////////
+	|SELECT
+	|	DocumentItemList.ItemKey.Item.Description_en AS Item,
+	|	DocumentItemList.ItemKey.Description_en AS ItemKey,
+	|	DocumentItemList.Quantity AS Quantity,
+	|	DocumentItemList.Item.Unit AS Unit,
+	|	DocumentItemList.Price AS Price,
+	|	DocumentItemList.AmountTax AS TaxAmount,
+	|	DocumentItemList.Amount AS TotalAmount,
+	|	DocumentItemList.Amount AS NetAmount,
+	|	DocumentItemList.Ref AS Ref,
+	|	DocumentItemList.Key AS Key
+	|INTO Items
+	|FROM
+	|	Document.OpeningEntry.Inventory AS DocumentItemList
+	|WHERE
+	|	DocumentItemList.Ref = &Ref	
+	|;
+	|
+	|////////////////////////////////////////////////////////////////////////////////
+	|SELECT
+	|	Items.Item AS Item,
+	|	Items.ItemKey AS ItemKey,
+	|	Items.Quantity AS Quantity,
+	|	Items.Unit AS Unit,
+	|	Items.Price AS Price,
+	|	Items.TaxAmount AS TaxAmount,
+	|	Items.TotalAmount AS TotalAmount,
+	|	Items.NetAmount AS NetAmount,
+	|	Items.Ref AS Ref,
+	|	Items.Key AS Key
+	|FROM
+	|	Items AS Items";
+
+	LCode = Param.DataLang;
+	Text = LocalizationEvents.ReplaceDescriptionLocalizationPrefix(Text, "DocumentHeader.Company", LCode);
+	Text = LocalizationEvents.ReplaceDescriptionLocalizationPrefix(Text, "DocumentItemList.ItemKey.Item", LCode);
+	Text = LocalizationEvents.ReplaceDescriptionLocalizationPrefix(Text, "DocumentItemList.ItemKey", LCode);
+	Text = LocalizationEvents.ReplaceDescriptionLocalizationPrefix(Text, "DocumentItemList.Unit", LCode);
+	Query.Text = Text;                                                    
+
+	Query.Parameters.Insert("Ref", Ref);
+	Selection = Query.ExecuteBatch();
+	SelectionHeader = Selection[0].Select();
+	SelectionItems = Selection[2].Unload();
+	SelectionItems.Indexes.Add("Ref");
+
+	AreaCaption = Template.GetArea("Caption");
+	AreaHeader = Template.GetArea("Header");
+	AreaItemListHeader = Template.GetArea("ItemListHeader|ItemColumn");
+	AreaItemList = Template.GetArea("ItemList|ItemColumn");
+	AreaFooter = Template.GetArea("Footer");
+
+	Spreadsheet = New SpreadsheetDocument;
+	Spreadsheet.LanguageCode = Param.LayoutLang;
+
+	While SelectionHeader.Next() Do
+		AreaCaption.Parameters.Fill(SelectionHeader);
+		Spreadsheet.Put(AreaCaption);
+
+		AreaHeader.Parameters.Fill(SelectionHeader);
+		Spreadsheet.Put(AreaHeader);
+
+		Spreadsheet.Put(AreaItemListHeader);
+			
+		Choice	= New Structure("Ref", SelectionHeader.Ref);
+		FindRow = SelectionItems.FindRows(Choice);
+
+		Number = 0;
+		TotalSum = 0;
+		TotalTax = 0;
+		TotalNet = 0;
+	
+		For Each It In FindRow Do
+			Number = Number + 1;
+			AreaItemList.Parameters.Fill(It);
+			AreaItemList.Parameters.Number = Number;
+			Spreadsheet.Put(AreaItemList);
+			
+			TotalSum = TotalSum + It.TotalAmount;
+			TotalTax = TotalTax + It.TaxAmount;			
+			TotalNet = TotalNet + It.NetAmount;
+		EndDo;
+	EndDo;
+
+	AreaFooter.Parameters.Total = TotalSum;
+	AreaFooter.Parameters.Total = TotalSum;
+	AreaFooter.Parameters.TotalTax = TotalTax;
+	AreaFooter.Parameters.TotalNet = TotalNet;
+	AreaFooter.Parameters.Manager = SelectionHeader.Author;
+	Spreadsheet.Put(AreaFooter);
+	Spreadsheet = UniversalPrintServer.ResetLangSettings(Spreadsheet, Param.LayoutLang);
+	Return Spreadsheet;
+	
+EndFunction	
+
 #EndRegion
 
 #Region Posting
 
 Function PostingGetDocumentDataTables(Ref, Cancel, PostingMode, Parameters, AddInfo = Undefined) Export
+	Clear_T9500S_AccrualAndDeductionValues_Records(Ref);
+	If PostingMode <> Undefined Then
+		Write_T9500S_AccrualAndDeductionValues_Records(Ref);
+	EndIf;
+	
 	QueryArray = GetQueryTextsSecondaryTables();
 	PostingServer.ExecuteQuery(Ref, QueryArray, Parameters);
 
@@ -44,6 +177,7 @@ Procedure PostingCheckBeforeWrite(Ref, Cancel, PostingMode, Parameters, AddInfo 
 	Tables.R3021B_CashInTransitIncoming.Columns.Add("Key", Metadata.DefinedTypes.typeRowID.Type);
 	Tables.R8510B_BookValueOfFixedAsset.Columns.Add("Key", Metadata.DefinedTypes.typeRowID.Type);
 	Tables.CashInTransit.Columns.Add("Key", Metadata.DefinedTypes.typeRowID.Type);
+	Tables.R5020B_PartnersBalance.Columns.Add("Key", Metadata.DefinedTypes.typeRowID.Type);
 
 	PostingServer.FillPostingTables(Tables, Ref, QueryArray, Parameters);
 EndProcedure
@@ -230,6 +364,7 @@ Function GetQueryTextsSecondaryTables()
 	QueryArray.Add(OtherCustomersTransactions());
 	QueryArray.Add(CashInTransitDoc());
 	QueryArray.Add(FixedAssets());
+	QueryArray.Add(EmployeeList());
 	QueryArray.Add(PostingServer.Exists_R4010B_ActualStocks());
 	QueryArray.Add(PostingServer.Exists_R4011B_FreeStocks());
 	QueryArray.Add(PostingServer.Exists_R4014B_SerialLotNumber());
@@ -265,6 +400,9 @@ Function GetQueryTextsMasterTables()
 	QueryArray.Add(T8515S_FixedAssetsLocation());
 	QueryArray.Add(R8515T_CostOfFixedAsset());
 	QueryArray.Add(R8510B_BookValueOfFixedAsset());
+	QueryArray.Add(R5020B_PartnersBalance());
+	QueryArray.Add(T9510S_Staffing());
+	QueryArray.Add(R9545T_PaidVacations());
 	Return QueryArray;
 EndFunction
 
@@ -686,7 +824,8 @@ Function FixedAssets()
 		|	OpeningEntryFixedAssets.Ref.Company,
 		|	OpeningEntryFixedAssets.FixedAsset,
 		|	OpeningEntryFixedAssets.ResponsiblePerson,
-		|	OpeningEntryFixedAssets.BusinessUnit AS Branch,
+		|	OpeningEntryFixedAssets.Ref.Branch AS Branch,
+		|	OpeningEntryFixedAssets.ProfitLossCenter AS ProfitLossCenter,
 		|	OpeningEntryFixedAssets.LedgerType,
 		|	OpeningEntryFixedAssets.CommissioningDate,
 		|	OpeningEntryFixedAssets.OriginalAmount,
@@ -698,6 +837,28 @@ Function FixedAssets()
 		|	Document.OpeningEntry.FixedAssets AS OpeningEntryFixedAssets
 		|WHERE
 		|	OpeningEntryFixedAssets.Ref = &Ref";
+EndFunction
+
+Function EmployeeList()
+	Return
+		"SELECT
+		|	EmployeeList.Ref.Date AS Period,
+		|	EmployeeList.Ref.Company AS Company,
+		|	EmployeeList.Ref.Branch AS Branch,
+		|	EmployeeList.Employee,
+		|	EmployeeList.Position,
+		|	EmployeeList.EmployeeSchedule,
+		|	EmployeeList.ProfitLossCenter,
+		|	CASE
+		|		WHEN EmployeeList.RemainingVacationDays >= EmployeeList.Ref.Company.SalaryMaxDaysVacation
+		|			THEN 0
+		|		ELSE EmployeeList.Ref.Company.SalaryMaxDaysVacation - EmployeeList.RemainingVacationDays
+		|	END PaidVacationDays
+		|INTO EmployeeList
+		|FROM
+		|	Document.OpeningEntry.EmployeeList AS EmployeeList
+		|WHERE
+		|	EmployeeList.Ref = &Ref"
 EndFunction
 
 #EndRegion
@@ -725,10 +886,20 @@ EndFunction
 Function R1020B_AdvancesToVendors()
 	Return "SELECT 
 		   |	VALUE(AccumulationRecordType.Receipt) AS RecordType,
-		   |	*
+		   |	AdvancesToVendors.Period,
+		   |	AdvancesToVendors.Company,
+		   |	AdvancesToVendors.Branch,
+		   |	AdvancesToVendors.Currency,
+		   |	AdvancesToVendors.LegalName,
+		   |	AdvancesToVendors.Partner,
+		   |	UNDEFINED AS Order,
+		   |	AdvancesToVendors.Agreement,
+		   |	AdvancesToVendors.Project,
+		   |	AdvancesToVendors.Amount,
+		   |	AdvancesToVendors.Key
 		   |INTO R1020B_AdvancesToVendors
 		   |FROM
-		   |	AdvancesToVendors AS QueryTable
+		   |	AdvancesToVendors AS AdvancesToVendors
 		   |WHERE 
 		   |	TRUE";
 EndFunction
@@ -736,10 +907,21 @@ EndFunction
 Function R1021B_VendorsTransactions()
 	Return "SELECT 
 		   |	VALUE(AccumulationRecordType.Receipt) AS RecordType,
-		   |	*
+		   |	VendorsTransactions.Period,
+		   |	VendorsTransactions.Company,
+		   |	VendorsTransactions.Branch,
+		   |	VendorsTransactions.Currency,
+		   |	VendorsTransactions.LegalName,
+		   |	VendorsTransactions.Partner,
+		   |	VendorsTransactions.Agreement,
+		   |	VendorsTransactions.Basis,
+		   |	UNDEFINED AS Order,
+		   |	VendorsTransactions.Project,
+		   |	VendorsTransactions.Amount,
+		   |	VendorsTransactions.Key
 		   |INTO R1021B_VendorsTransactions
 		   |FROM
-		   |	VendorsTransactions AS QueryTable
+		   |	VendorsTransactions AS VendorsTransactions
 		   |WHERE 
 		   |	TRUE";
 
@@ -748,10 +930,18 @@ EndFunction
 Function R5012B_VendorsAging()
 	Return "SELECT 
 		   |	VALUE(AccumulationRecordType.Receipt) AS RecordType,
-		   |	*
+		   |	VendorsAging.Period,
+		   |	VendorsAging.Company,
+		   |	VendorsAging.Branch,
+		   |	VendorsAging.Currency,
+		   |	VendorsAging.Agreement,
+		   |	VendorsAging.Partner,
+		   |	VendorsAging.Invoice,
+		   |	VendorsAging.PaymentDate,
+		   |	VendorsAging.Amount
 		   |INTO R5012B_VendorsAging
 		   |FROM
-		   |	VendorsAging AS QueryTable
+		   |	VendorsAging AS VendorsAging
 		   |WHERE 
 		   |	TRUE";
 
@@ -760,10 +950,20 @@ EndFunction
 Function R2020B_AdvancesFromCustomers()
 	Return "SELECT 
 		   |	VALUE(AccumulationRecordType.Receipt) AS RecordType,
-		   |	*
+		   |	AdvancesFromCustomers.Period,
+		   |	AdvancesFromCustomers.Company,
+		   |	AdvancesFromCustomers.Branch,
+		   |	AdvancesFromCustomers.Currency,
+		   |	AdvancesFromCustomers.LegalName,
+		   |	AdvancesFromCustomers.Partner,
+		   |	UNDEFINED AS Order,
+		   |	AdvancesFromCustomers.Agreement,
+		   |	AdvancesFromCustomers.Project,
+		   |	AdvancesFromCustomers.Amount,
+		   |	AdvancesFromCustomers.Key
 		   |INTO R2020B_AdvancesFromCustomers
 		   |FROM
-		   |	AdvancesFromCustomers AS QueryTable
+		   |	AdvancesFromCustomers AS AdvancesFromCustomers
 		   |WHERE 
 		   |	TRUE";
 
@@ -772,10 +972,21 @@ EndFunction
 Function R2021B_CustomersTransactions()
 	Return "SELECT 
 		   |	VALUE(AccumulationRecordType.Receipt) AS RecordType,
-		   |	*
+		   |	CustomersTransactions.Period,
+		   |	CustomersTransactions.Company,
+		   |	CustomersTransactions.Branch,
+		   |	CustomersTransactions.Currency,
+		   |	CustomersTransactions.LegalName,
+		   |	CustomersTransactions.Partner,
+		   |	CustomersTransactions.Agreement,
+		   |	CustomersTransactions.Basis,
+		   |	UNDEFINED AS Order,
+		   |	CustomersTransactions.Project,
+		   |	CustomersTransactions.Amount,
+		   |	CustomersTransactions.Key
 		   |INTO R2021B_CustomersTransactions
 		   |FROM
-		   |	CustomersTransactions AS QueryTable
+		   |	CustomersTransactions AS CustomersTransactions
 		   |WHERE 
 		   |	TRUE";
 
@@ -784,10 +995,18 @@ EndFunction
 Function R5011B_CustomersAging()
 	Return "SELECT 
 		   |	VALUE(AccumulationRecordType.Receipt) AS RecordType,
-		   |	*
+		   |	CustomersAging.Period,
+		   |	CustomersAging.Company,
+		   |	CustomersAging.Branch,
+		   |	CustomersAging.Currency,
+		   |	CustomersAging.Agreement,
+		   |	CustomersAging.Partner,
+		   |	CustomersAging.Invoice,
+		   |	CustomersAging.PaymentDate,
+		   |	CustomersAging.Amount
 		   |INTO R5011B_CustomersAging
 		   |FROM
-		   |	CustomersAging AS QueryTable
+		   |	CustomersAging AS CustomersAging
 		   |WHERE 
 		   |	TRUE";
 
@@ -955,7 +1174,13 @@ EndFunction
 Function R3010B_CashOnHand()
 	Return "SELECT 
 		   |	VALUE(AccumulationRecordType.Receipt) AS RecordType,
-		   |	*
+		   |	AccountBalance.Period,
+		   |	AccountBalance.Company,
+		   |	AccountBalance.Branch,
+		   |	AccountBalance.Account,
+		   |	AccountBalance.Currency,
+		   |	AccountBalance.Amount,
+		   |	AccountBalance.Key
 		   |INTO R3010B_CashOnHand
 		   |FROM
 		   |	AccountBalance AS AccountBalance
@@ -1575,10 +1800,16 @@ EndFunction
 Function R3027B_EmployeeCashAdvance()
 	Return "SELECT
 		   |	VALUE(AccumulationRecordType.Receipt) AS RecordType,
-		   |	*
+		   |	EmployeeCashAdvance.Period,
+		   |	EmployeeCashAdvance.Company,
+		   |	EmployeeCashAdvance.Branch,
+		   |	EmployeeCashAdvance.Currency,
+		   |	EmployeeCashAdvance.Partner,
+		   |	EmployeeCashAdvance.Amount,
+		   |	EmployeeCashAdvance.Key
 		   |INTO R3027B_EmployeeCashAdvance
 		   |FROM
-		   |	EmployeeCashAdvance
+		   |	EmployeeCashAdvance AS EmployeeCashAdvance
 		   |WHERE
 		   |	TRUE";
 EndFunction
@@ -1586,10 +1817,14 @@ EndFunction
 Function R2023B_AdvancesFromRetailCustomers()
 	Return "SELECT
 		   |	VALUE(AccumulationRecordType.Receipt) AS RecordType,
-		   |	*
+		   |	AdvanceFromRetailCustomers.Period,
+		   |	AdvanceFromRetailCustomers.Company,
+		   |	AdvanceFromRetailCustomers.Branch,
+		   |	AdvanceFromRetailCustomers.RetailCustomer,
+		   |	AdvanceFromRetailCustomers.Amount
 		   |INTO R2023B_AdvancesFromRetailCustomers
 		   |FROM
-		   |	AdvanceFromRetailCustomers
+		   |	AdvanceFromRetailCustomers AS AdvanceFromRetailCustomers
 		   |WHERE
 		   |	TRUE";
 EndFunction
@@ -1597,15 +1832,22 @@ EndFunction
 Function R9510B_SalaryPayment()
 	Return "SELECT
 		   |	VALUE(AccumulationRecordType.Receipt) AS RecordType,
-		   |	*
+		   |	SalaryPayment.Period,
+		   |	SalaryPayment.Company,
+		   |	SalaryPayment.Branch,
+		   |	SalaryPayment.Employee,
+		   |	SalaryPayment.PaymentPeriod,
+		   |	SalaryPayment.Currency,
+		   |	SalaryPayment.Amount,
+		   |	SalaryPayment.Key
 		   |INTO R9510B_SalaryPayment
 		   |FROM
-		   |	SalaryPayment
+		   |	SalaryPayment AS SalaryPayment
 		   |WHERE
 		   |	TRUE";
 EndFunction
 
-Function T8515S_FixedAssetsLocation()
+Function T8515S_FixedAssetsLocation()	
 	Return
 		"SELECT
 		|	FixedAssets.CommissioningDate AS Period,
@@ -1613,6 +1855,7 @@ Function T8515S_FixedAssetsLocation()
 		|	FixedAssets.FixedAsset,
 		|	FixedAssets.ResponsiblePerson,
 		|	FixedAssets.Branch,
+		|	FixedAssets.ProfitLossCenter,
 		|	TRUE AS IsActive
 		|INTO T8515S_FixedAssetsLocation
 		|FROM
@@ -1621,6 +1864,7 @@ Function T8515S_FixedAssetsLocation()
 		|	FixedAssets.CommissioningDate,
 		|	FixedAssets.Company,
 		|	FixedAssets.FixedAsset,
+		|	FixedAssets.ProfitLossCenter,
 		|	FixedAssets.ResponsiblePerson,
 		|	FixedAssets.Branch";
 EndFunction
@@ -1628,7 +1872,10 @@ EndFunction
 Function R8515T_CostOfFixedAsset()
 	Return
 		"SELECT
-		|	FixedAssets.*,
+		|	FixedAssets.Period,
+		|	FixedAssets.Company,
+		|	FixedAssets.FixedAsset,
+		|	FixedAssets.LedgerType,
 		|	FixedAssets.OriginalAmount AS Amount
 		|INTO R8515T_CostOfFixedAsset
 		|FROM
@@ -1638,18 +1885,83 @@ EndFunction
 Function R8510B_BookValueOfFixedAsset()
 	Return
 		"SELECT
-		|	FixedAssets.*,
+		|	OpeningEntryFixedAssets.Ref.Date AS Period,
+		|	OpeningEntryFixedAssets.Ref.Company,
+		|	OpeningEntryFixedAssets.FixedAsset,
+		|	OpeningEntryFixedAssets.ResponsiblePerson,
+		|	OpeningEntryFixedAssets.Ref.Branch AS Branch,
+		|	OpeningEntryFixedAssets.ProfitLossCenter AS ProfitLossCenter,
+		|	OpeningEntryFixedAssets.LedgerType,
+		|	OpeningEntryFixedAssets.CommissioningDate,
+		|	OpeningEntryFixedAssets.OriginalAmount,
+		|	OpeningEntryFixedAssets.BalanceAmount,
+		|	OpeningEntryFixedAssets.Currency,
+		|	OpeningEntryFixedAssets.Key
+		|INTO tmp
+		|FROM
+		|	Document.OpeningEntry.FixedAssets AS OpeningEntryFixedAssets
+		|WHERE
+		|	OpeningEntryFixedAssets.Ref = &Ref
+		|;
+		|
+		|////////////////////////////////////////////////////////////////////////////////
+		|SELECT
 		|	VALUE(AccumulationRecordType.Receipt) AS RecordType,
-		|	FixedAssets.BalanceAmount AS Amount,
-		|	FixedAssetsDepreciationInfo.Schedule AS Shedule
+		|	tmp.Period,
+		|	tmp.Company,
+		|	tmp.Branch,
+		|	tmp.ProfitLossCenter,
+		|	tmp.FixedAsset,
+		|	tmp.LedgerType,
+		|	tmp.Currency,
+		|	tmp.Key,
+		|	tmp.BalanceAmount AS Amount,
+		|	FixedAssetsDepreciationInfo.Schedule AS Schedule
 		|INTO R8510B_BookValueOfFixedAsset
 		|FROM
-		|	FixedAssets AS FixedAssets
+		|	tmp AS tmp
 		|		LEFT JOIN Catalog.FixedAssets.DepreciationInfo AS FixedAssetsDepreciationInfo
-		|		ON FixedAssetsDepreciationInfo.Ref = FixedAssets.FixedAsset
-		|		AND FixedAssetsDepreciationInfo.LedgerType = FixedAssets.LedgerType
+		|		ON FixedAssetsDepreciationInfo.Ref = tmp.FixedAsset
+		|		AND FixedAssetsDepreciationInfo.LedgerType = tmp.LedgerType
 		|WHERE
 		|	FixedAssetsDepreciationInfo.LedgerType.CalculateDepreciation"
+EndFunction
+
+Function R5020B_PartnersBalance()
+	Return AccumulationRegisters.R5020B_PartnersBalance.R5020B_PartnersBalance_OE();
+EndFunction
+
+Function T9510S_Staffing()
+	Return
+		"SELECT
+		|	EmployeeList.Period,
+		|	EmployeeList.Company,
+		|	EmployeeList.Branch,
+		|	EmployeeList.Employee,
+		|	EmployeeList.Position,
+		|	EmployeeList.EmployeeSchedule,
+		|	EmployeeList.ProfitLossCenter,
+		|	FALSE AS Fired
+		|INTO T9510S_Staffing
+		|FROM
+		|	EmployeeList AS EmployeeList
+		|WHERE
+		|	TRUE";
+EndFunction
+
+Function R9545T_PaidVacations()
+	Return
+		"SELECT
+		|	EmployeeList.Period,
+		|	EmployeeList.Company,
+		|	EmployeeList.Employee,
+		|	EmployeeList.Position,
+		|	EmployeeList.PaidVacationDays AS Paid
+		|INTO R9545T_PaidVacations
+		|FROM
+		|	EmployeeList AS EmployeeList
+		|WHERE
+		|	EmployeeList.PaidVacationDays <> 0";
 EndFunction
 
 #EndRegion
@@ -1673,6 +1985,50 @@ EndFunction
 #EndRegion
 
 #Region Service
+
+Procedure Clear_T9500S_AccrualAndDeductionValues_Records(Ref)
+	Query = New Query();
+	Query.Text =
+	"SELECT
+	|	Table.EmployeeOrPosition,
+	|	Table.AccualOrDeductionType,
+	|	Table.Period
+	|FROM
+	|	InformationRegister.T9500S_AccrualAndDeductionValues AS Table
+	|WHERE
+	|	Table.Document = &Document";
+	Query.SetParameter("Document", Ref);
+	QueryResult = Query.Execute();
+	QuerySelection = QueryResult.Select();
+	
+	While QuerySelection.Next() Do
+		RecordSet = InformationRegisters.T9500S_AccrualAndDeductionValues.CreateRecordSet();
+		RecordSet.Filter.EmployeeOrPosition.Set(QuerySelection.EmployeeOrPosition);
+		RecordSet.Filter.AccualOrDeductionType.Set(QuerySelection.AccualOrDeductionType);
+		RecordSet.Filter.Period.Set(QuerySelection.Period);
+		RecordSet.Clear();
+		RecordSet.Write();
+	EndDo;
+EndProcedure
+
+Procedure Write_T9500S_AccrualAndDeductionValues_Records(Ref)
+	For Each Row In Ref.EmployeeList Do
+		If Row.SalaryType <> Enums.SalaryTypes.Personal Then
+			Continue;
+		EndIf;
+		RecordSet = InformationRegisters.T9500S_AccrualAndDeductionValues.CreateRecordSet();
+		RecordSet.Filter.EmployeeOrPosition.Set(Row.Employee);
+		RecordSet.Filter.AccualOrDeductionType.Set(Row.AccrualType);
+		NewRecord = RecordSet.Add();
+	
+		NewRecord.Period = Ref.Date;
+		NewRecord.EmployeeOrPosition = Row.Employee;
+		NewRecord.AccualOrDeductionType = Row.AccrualType;
+		NewRecord.Value = Row.Salary;
+		NewRecord.Document = Ref;
+		RecordSet.Write();
+	EndDo;
+EndProcedure
 
 Procedure FormGetProcessing(FormType, Parameters, SelectedForm, AdditionalInfo, StandardProcessing)
 	If FormType = "ListForm" And FOServer.isUseSimpleMode() Then

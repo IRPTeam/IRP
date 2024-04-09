@@ -99,6 +99,7 @@
   <registerRecords>AccumulationRegister.R2023B_AdvancesFromRetailCustomers</registerRecords>
   <registerRecords>AccumulationRegister.R3024B_SalesOrdersToBePaid</registerRecords>
   <registerRecords>AccumulationRegister.R5015B_OtherPartnersTransactions</registerRecords>
+  <registerRecords>AccumulationRegister.R5020B_PartnersBalance</registerRecords>
   <postInPrivilegedMode>true</postInPrivilegedMode>
   <unpostInPrivilegedMode>true</unpostInPrivilegedMode>
   <choiceHistoryOnInput>DontUse</choiceHistoryOnInput>
@@ -451,7 +452,7 @@
       <minValue xsi:type="core:UndefinedValue"/>
       <maxValue xsi:type="core:UndefinedValue"/>
       <choiceParameterLinks>
-        <name>Filter.Company</name>
+        <name>Filter.LegalName</name>
         <field>Document.CashReceipt.TabularSection.PaymentList.Attribute.Payer</field>
       </choiceParameterLinks>
       <dataHistory>Use</dataHistory>

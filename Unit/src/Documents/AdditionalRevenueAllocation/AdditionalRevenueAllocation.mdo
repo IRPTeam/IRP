@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mdclass:Document xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" xmlns:mdclassExtension="http://g5.1c.ru/v8/dt/metadata/mdclass/extension" uuid="d482b2c1-5279-4cf8-9f06-6859847dcfc5" extendedConfigurationObject="98730cb5-191f-4458-aa38-82dbc3ddd90b">
+  <producedTypes>
+    <objectType typeId="71295334-7193-42d4-82ea-1f62b8d87979" valueTypeId="6ff4c669-8e54-4ffb-ac5c-47cc31f77adc"/>
+    <refType typeId="ddb20da7-2dee-4469-8af9-ecac2dc4620f" valueTypeId="4399e2c1-24d5-4453-8142-0f7523724e88"/>
+    <selectionType typeId="a1343076-2b90-4958-9162-bfcc79fee4e4" valueTypeId="005b9650-4189-46ca-9acb-91bdf9643595"/>
+    <listType typeId="b1c9c11b-9612-4e5a-9fc5-b024e060de8d" valueTypeId="1555ffd5-253a-4974-80ed-ff68f0892c3f"/>
+    <managerType typeId="fa1f21c7-beed-48a8-9fa9-cc0085d42a44" valueTypeId="a070727a-9435-4ed7-9629-2439c5f3c475"/>
+  </producedTypes>
+  <name>AdditionalRevenueAllocation</name>
+  <objectBelonging>Adopted</objectBelonging>
+  <extension xsi:type="mdclassExtension:DocumentExtension">
+    <extendedConfigurationObject>Checked</extendedConfigurationObject>
+  </extension>
+  <useStandardCommands>true</useStandardCommands>
+</mdclass:Document>

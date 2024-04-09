@@ -132,6 +132,7 @@ Procedure DoDetailProcess(SelectedAction, ApplyingSettings, NotifyParams) Экс
 	Else
 		
 		OtherReportFormName = NotifyParams.DetailsInfo.AdditionalDetailsActions.OtherReportMapping[SelectedAction];
+		//@skip-check use-non-recommended-method
 		OtherReportForm = GetForm(OtherReportFormName, New Structure("IsDetailProcessing", True), ThisObject, New UUID());
 		
 		SettingsComposer1 = ThisObject.Report.SettingsComposer;
@@ -330,8 +331,8 @@ EndProcedure
 &AtClient
 Function GetReportsWithDetailProcesing()
 	ReportsWithDetails = New Array();
-	ReportsWithDetails.Add("TrialBalance");
-	ReportsWithDetails.Add("TrialBalanceByAccount");
-	ReportsWithDetails.Add("AccountAnalysis");
+	ReportsWithDetails.Add("A0010_TrialBalance");
+	ReportsWithDetails.Add("A0011_TrialBalanceByAccount");
+	ReportsWithDetails.Add("A0013_AccountAnalysis");
 	Return ReportsWithDetails;
 EndFunction

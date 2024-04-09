@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mdclass:Document xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" xmlns:mdclassExtension="http://g5.1c.ru/v8/dt/metadata/mdclass/extension" uuid="c77f4e62-f1f9-4f29-862a-c08d69af6593" extendedConfigurationObject="b2939253-d40b-47fe-8d6e-0d7e7f473dfa">
+  <producedTypes>
+    <objectType typeId="6263ce03-6d11-400c-94a5-dea31655370a" valueTypeId="1282580f-1c85-4aba-8f51-229d289ec3cb"/>
+    <refType typeId="01dba9e0-5f39-4834-b3dc-e9fe72f58231" valueTypeId="280cec26-d70a-421a-94d4-70592542936a"/>
+    <selectionType typeId="a674265a-2f91-4f65-8b37-ae706c4fc434" valueTypeId="3011c8d5-20e6-4718-bc15-c81b964684b4"/>
+    <listType typeId="2e82b8ad-798e-4fff-b199-1cb2f10649fd" valueTypeId="6ee9d05f-a47b-4d43-b908-adf0e53fd375"/>
+    <managerType typeId="ae92c8a4-43cb-4f11-ad46-5c964dac1177" valueTypeId="815ad8bd-5c8e-43a3-9216-d0210f558ac9"/>
+  </producedTypes>
+  <name>RetailSalesReceipt</name>
+  <objectBelonging>Adopted</objectBelonging>
+  <extension xsi:type="mdclassExtension:DocumentExtension">
+    <extendedConfigurationObject>Checked</extendedConfigurationObject>
+  </extension>
+  <useStandardCommands>true</useStandardCommands>
+</mdclass:Document>

@@ -420,7 +420,6 @@ EndFunction
 //  Boolean - Validate email
 Function ValidateEmail(Val Address, RaiseOnFalse = True) Export
 
-	
 	LatinCharacters = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ";
     Digits = "0123456789";
     ValidSymbols = "-._@+";
@@ -535,7 +534,6 @@ Function FormHaveAttribute(Form, AttributeName) Export
 	Return False;
 EndFunction
 
-
 // Is ref.
 // 
 // Parameters:
@@ -628,6 +626,112 @@ Procedure Pause(Time) Export
     Job.WaitForExecutionCompletion(Time);
 
 EndProcedure
+
+// Convert map to structure.
+// 
+// Parameters:
+//  Map - Map - Map
+// 
+// Returns:
+//  Structure
+Function ConvertMapToStructure(Val Map) Export
+	
+	If Not TypeOf(Map) = Type("Map") Then
+		Return Map;
+	EndIf;
+	
+	NewMap = CopyObject(Map);
+	NewStructure = New Structure;
+	For Each MapPair In NewMap Do
+		Value = MapPair.Value;
+		If TypeOf(Value) = Type("Map") Then
+			//@skip-check statement-type-change
+			Value = ConvertMapToStructure(Value);
+		ElsIf TypeOf(Value) = Type("Array") Then
+			For Index = 0 To Value.UBound() Do
+				//@skip-check invocation-parameter-type-intersect
+				Value[Index] = ConvertMapToStructure(Value[Index]);
+			EndDo;
+		EndIf;
+		
+		MapKey = MapPair.Key; // String
+		ConvertMapToStructure_ReplaceOftenCase(MapKey);
+		
+		// Check if first symbol is number - add prefix "_"
+		Prefix = ConvertMapToStructure_ConvertName(MapKey, True);
+		If Not IsBlankString(Prefix) Then
+			MapKey = Prefix + MapKey;
+		EndIf;
+		
+		Try
+			NewStructure.Insert(MapKey, Value);
+		Except
+			// Check all other symbols and replace 
+			MapKey = ConvertMapToStructure_ConvertName(MapKey);
+			NewStructure.Insert("_" + MapKey, Value);
+		EndTry;
+	EndDo;
+	
+	Return NewStructure;
+EndFunction
+
+Procedure ConvertMapToStructure_ReplaceOftenCase(MapKey)
+	MapKey = StrReplace(MapKey, " ", "");
+	MapKey = StrReplace(MapKey, "-", "");
+	MapKey = StrReplace(MapKey, "=", "");
+	MapKey = StrReplace(MapKey, "*", "");
+EndProcedure
+
+// Convert map to structure convert name.
+// 
+// Parameters:
+//  Value - String - Value
+//  GetPrefix - Boolean - 
+// 
+// Returns:
+//  String - Convert map to structure convert name
+Function ConvertMapToStructure_ConvertName(Val Value, GetPrefix = False) Export
+	Prefix = "";
+	StrLen = StrLen(Value);
+	For Index = 1 To StrLen Do
+		ValueChar = Mid(Value, Index, 1);
+		Code = CharCode(ValueChar);
+		If Code >= 48 And Code <= 57 Then // Numbers
+			If Index = 1 Then 
+				Prefix = "_";
+				If GetPrefix Then
+					Break;
+				EndIf;
+			EndIf;
+		ElsIf Code >= 65 And Code <= 90 Then // A-Z
+		
+		ElsIf Code >= 97 And Code <= 122 Then // a-z
+		
+		ElsIf Code = 95 Then // _
+		
+		Else
+			Value = StrReplace(Value, ValueChar, "_");		
+		EndIf;
+	EndDo;
+	If GetPrefix Then
+		Return Prefix;
+	Else
+		Return Prefix + Value;
+	EndIf;
+EndFunction
+
+// Copy object.
+// 
+// Parameters:
+//  Object - Arbitrary, Map, Structure, ValueTable - Object
+// 
+// Returns:
+//  Arbitrary, Map, Structure, ValueTable - Copy object
+Function CopyObject(Val Object) Export
+	XML = SerializeXMLUseXDTO(Object);
+	NewObject = DeserializeXMLUseXDTO(XML);
+	Return NewObject;
+EndFunction
 
 #EndRegion
 
@@ -1405,17 +1509,29 @@ EndFunction
 
 #Region UniqueDescriptions
 
-Procedure CheckUniqueDescriptions(Cancel, Object) Export
+// Check unique descriptions privileged call.
+// 
+// Parameters:
+//  Cancel - Boolean - Cancel
+//  Object - CatalogObjectCatalogName - Object
+Procedure CheckUniqueDescriptions_PrivilegedCall(Cancel, Object) Export
 	CheckDataPrivileged.CheckUniqueDescriptions(Cancel, Object);
 EndProcedure
 
-Procedure __CheckUniqueDescriptions(Cancel, Object) Export
+// Check unique description.
+// 
+// Parameters:
+//  Cancel - Boolean - Cancel
+//  Object - CatalogObjectCatalogName - Object
+Procedure CheckUniqueDescription(Cancel, Object) Export
 	FullName = Object.Metadata().FullName();
 	
+	//@skip-check begin-transaction
 	BeginTransaction(DataLockControlMode.Managed);
 	DataLock = New DataLock();
 	ItemLock = DataLock.Add(FullName);
 	ItemLock.Mode = DataLockMode.Exclusive;
+	//@skip-check lock-out-of-try
 	DataLock.Lock();
 	
 	QueryParameters = New Structure();
@@ -1456,6 +1572,7 @@ Procedure __CheckUniqueDescriptions(Cancel, Object) Export
 	
 	While QuerySelection.Next() Do
 		Cancel = True;
+		//@skip-check invocation-parameter-type-intersect, property-return-type
 		CommonFunctionsClientServer.ShowUsersMessage(StrTemplate(R().Error_139, QuerySelection.Ref));
 	EndDo;
 EndProcedure
@@ -1464,6 +1581,14 @@ EndProcedure
 
 #Region Tables
 
+// Join tables.
+// 
+// Parameters:
+//  ArrayOfJoiningTables - Array Of ValueTable - Array of joining tables
+//  Fields - String - Fields
+// 
+// Returns:
+//  ValueTable - Join tables
 Function JoinTables(ArrayOfJoiningTables, Fields) Export
 
 	If Not ArrayOfJoiningTables.Count() Then

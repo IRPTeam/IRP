@@ -195,9 +195,11 @@ Procedure FillVendorPrice(Object) Export
 		|	S1001L_VendorsPricesByItemKeySliceLast.Currency AS LastVendorPriceCurrency
 		|FROM
 		|	InformationRegister.S1001L_VendorsPricesByItemKey.SliceLast(&Period, Partner = &Partner
-		|	AND ItemKey IN (&ItemKeys)) AS S1001L_VendorsPricesByItemKeySliceLast";
+		|	AND ItemKey IN (&ItemKeys)
+		|	AND Currency = &Currency) AS S1001L_VendorsPricesByItemKeySliceLast";
 	
 	Query.SetParameter("Period", CurrentSessionDate());
+	Query.SetParameter("Currency", Object.Currency);
 	Query.SetParameter("Partner", Object.Partner);
 	Query.SetParameter("ItemKeys", Object.ItemList.Unload().UnloadColumn("ItemKey"));
 	

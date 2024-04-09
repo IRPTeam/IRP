@@ -105,6 +105,9 @@ Procedure SetVisibilityAvailability(Object, Form)
 	Form.Items.ItemListQuantityIsFixed.Visible = _QuantityIsFixed;
 	Form.Items.ItemListQuantityInBaseUnit.Visible = _QuantityIsFixed;
 	Form.Items.EditQuantityInBaseUnit.Enabled = Not _QuantityIsFixed;
+	
+	Form.Items.VendorPrice.Visible = Form.Items.ShowVendorPrice.Check;
+	
 EndProcedure
 
 &AtClient
@@ -333,6 +336,7 @@ EndProcedure
 &AtClient
 Procedure ItemListItemOnChange(Item)
 	DocPurchaseOrderClient.ItemListItemOnChange(Object, ThisObject, Item);
+	ItemListItemKeyOnChangeAtServer();
 EndProcedure
 
 &AtClient
@@ -352,6 +356,12 @@ EndProcedure
 &AtClient
 Procedure ItemListItemKeyOnChange(Item)
 	DocPurchaseOrderClient.ItemListItemKeyOnChange(Object, ThisObject, Item);
+	ItemListItemKeyOnChangeAtServer();
+EndProcedure
+
+&AtServer
+Procedure ItemListItemKeyOnChangeAtServer()
+	DocumentsServer.FillVendorPrice(Object);
 EndProcedure
 
 #EndRegion
@@ -821,6 +831,21 @@ EndProcedure
 Procedure EditQuantityInBaseUnit(Command)
 	Items.ItemListQuantityInBaseUnit.Visible = Not Items.ItemListQuantityInBaseUnit.Visible;
 	Items.ItemListQuantityIsFixed.Visible = Not Items.ItemListQuantityIsFixed.Visible;	 	
+EndProcedure
+
+&AtClient
+Procedure ShowVendorPrice(Command)
+	Items.ShowVendorPrice.Check = Not Items.ShowVendorPrice.Check;
+
+	ShowVendorPriceVisibleOnServer(Items.ShowVendorPrice.Check);
+	If Items.ShowVendorPrice.Check Then
+		Items.ItemList.CurrentItem = Items.ItemListLastVendorPrice;
+	EndIf;
+EndProcedure
+
+&AtServer
+Procedure ShowVendorPriceVisibleOnServer(Visible)
+	Items.VendorPrice.Visible = Visible;
 EndProcedure
 
 #EndRegion

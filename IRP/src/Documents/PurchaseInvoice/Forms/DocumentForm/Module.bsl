@@ -1,4 +1,6 @@
 
+
+
 #Region FORM
 
 &AtServer
@@ -100,6 +102,9 @@ Procedure SetVisibilityAvailability(Object, Form)
 	Form.Items.EditQuantityInBaseUnit.Enabled = Not _QuantityIsFixed;
 	
 	Form.Items.ItemListIsAdditionalItemCost.Visible = FOServer.IsUseStores();
+	
+	Form.Items.VendorPrice.Visible = Form.Items.ShowVendorPrice.Check;
+	
 EndProcedure
 
 &AtClient
@@ -288,6 +293,7 @@ EndProcedure
 &AtClient
 Procedure ItemListItemOnChange(Item)
 	DocPurchaseInvoiceClient.ItemListItemOnChange(Object, ThisObject, Item);
+	ItemListItemKeyOnChangeAtServer();
 EndProcedure
 
 &AtClient
@@ -307,7 +313,15 @@ EndProcedure
 &AtClient
 Procedure ItemListItemKeyOnChange(Item)
 	DocPurchaseInvoiceClient.ItemListItemKeyOnChange(Object, ThisObject, Item);
+	ItemListItemKeyOnChangeAtServer();
 EndProcedure
+
+&AtServer
+Procedure ItemListItemKeyOnChangeAtServer()
+	DocumentsServer.FillVendorPrice(Object);
+EndProcedure
+
+
 
 #EndRegion
 
@@ -825,6 +839,21 @@ Procedure UpdateAccountingData()
 		                                          _AccountingExtDimensions, "ItemList");
 	ThisObject.AccountingRowAnalytics.Load(_AccountingRowAnalytics);
 	ThisObject.AccountingExtDimensions.Load(_AccountingExtDimensions);
+EndProcedure
+
+&AtClient
+Procedure ShowVendorPrice(Command)
+	Items.ShowVendorPrice.Check = Not Items.ShowVendorPrice.Check;
+
+	ShowVendorPriceVisibleOnServer(Items.ShowVendorPrice.Check);
+	If Items.ShowVendorPrice.Check Then
+		Items.ItemList.CurrentItem = Items.ItemListLastVendorPrice;
+	EndIf;
+EndProcedure
+
+&AtServer
+Procedure ShowVendorPriceVisibleOnServer(Visible)
+	Items.VendorPrice.Visible = Visible;
 EndProcedure
 
 #EndRegion

@@ -414,7 +414,7 @@ Procedure OutputChildrenDocuments(TreeRow)
 		EndDo;
 		AllAttributesValueTable.Sort("AttributeName");
 		
-		SelectedAttributeString = GetSelectedAttibutesForDocument(DocMeta);
+		SelectedAttributeString = GetSelectedAttributesForDocument(DocMeta);
 		
 		Query.Text = Query.Text + ?(Query.Text = "", 
 		"
@@ -505,7 +505,7 @@ Function GetAllAttributesForDocument(DocumentMetadata)
 EndFunction
 
 &AtServer
-Function GetSelectedAttibutesForDocument(DocumentMetadata)
+Function GetSelectedAttributesForDocument(DocumentMetadata)
 	
 	AllAttributes = GetAllAttributesForDocument(DocumentMetadata);
 	AllAttributesStrings = New Array;
@@ -531,7 +531,7 @@ EndFunction
 Function GetQueryForDocumentProperties(DocumentRef)
 	DocumentMetadata = DocumentRef.Metadata();
 	
-	SelectedAttributeString = GetSelectedAttibutesForDocument(DocumentMetadata);
+	SelectedAttributeString = GetSelectedAttributesForDocument(DocumentMetadata);
 	
 	Query = New Query("SELECT ALLOWED Ref, Posted, DeletionMark, %1, Presentation, ""%2"" AS DocumentName %3
 					  |FROM Document.%2 WHERE Ref = &Ref");
@@ -629,7 +629,7 @@ Procedure CreateColumnsAtServer()
 			ArrayItem.AttributeName + "DocumentsTree", 
 			Type("FormField"),
 			Items.DocumentsTree);
-		NewColumn.DataPath = "DocumentsTree."+ArrayItem.AttributeName;
+		NewColumn.DataPath = "DocumentsTree." + ArrayItem.AttributeName;
 		NewColumn.Title = ArrayItem.AttributeSynonym;
 		NewColumn.Type = FormFieldType.InputField;
 	EndDo;

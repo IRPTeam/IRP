@@ -210,7 +210,6 @@ Procedure FillVendorPrice(Object) Export
 			FillPropertyValues(Row, SearchRow, "LastVendorPrice, LastVendorPriceCurrency");
 		EndIf;	
 	EndDo;
-		
 EndProcedure
 
 #EndRegion

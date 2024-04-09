@@ -914,22 +914,15 @@ Procedure Write_SelfRecords(Parameters,
 	Recorders = Records_OffsetOfAdvances.Copy();
 	Recorders.GroupBy("Document");
 
-	ArrayOfDocumentTypes = New Array();
-	ArrayOfDocumentTypes.Add(Type("DocumentRef.BankPayment"));
-	ArrayOfDocumentTypes.Add(Type("DocumentRef.BankReceipt"));
-	ArrayOfDocumentTypes.Add(Type("DocumentRef.CashPayment"));
-	ArrayOfDocumentTypes.Add(Type("DocumentRef.CashReceipt"));
-	ArrayOfDocumentTypes.Add(Type("DocumentRef.CreditNote"));
-	ArrayOfDocumentTypes.Add(Type("DocumentRef.DebitNote"));
-	ArrayOfDocumentTypes.Add(Type("DocumentRef.OpeningEntry"));
+	ArrayOfDocuments_UseKeyForCurrency = New Array();
+	ArrayOfDocuments_UseKeyForCurrency.Add(Metadata.Documents.BankPayment);
+	ArrayOfDocuments_UseKeyForCurrency.Add(Metadata.Documents.BankReceipt);
+	ArrayOfDocuments_UseKeyForCurrency.Add(Metadata.Documents.CashPayment);
+	ArrayOfDocuments_UseKeyForCurrency.Add(Metadata.Documents.CashReceipt);
+	ArrayOfDocuments_UseKeyForCurrency.Add(Metadata.Documents.CreditNote);
+	ArrayOfDocuments_UseKeyForCurrency.Add(Metadata.Documents.DebitCreditNote);
+	ArrayOfDocuments_UseKeyForCurrency.Add(Metadata.Documents.OpeningEntry);
 
-	Op = Catalogs.AccountingOperations;
-	AccountingOperations = New Map();
-	AccountingOperations.Insert(Type("DocumentRef.BankPayment")     , Op.BankPayment_DR_R1021B_VendorsTransactions_CR_R1020B_AdvancesToVendors);
-	AccountingOperations.Insert(Type("DocumentRef.BankReceipt")     , Op.BankReceipt_DR_R2021B_CustomersTransactions_CR_R2020B_AdvancesFromCustomers);
-	AccountingOperations.Insert(Type("DocumentRef.SalesInvoice")    , Op.SalesInvoice_DR_R2020B_AdvancesFromCustomers_CR_R2021B_CustomersTransactions);
-	AccountingOperations.Insert(Type("DocumentRef.PurchaseInvoice") , Op.PurchaseInvoice_DR_R1021B_VendorsTransactions_CR_R1020B_AdvancesToVendors);
-	
 	IsCustomerAdvanceClosing = Parameters.Object.Ref.Metadata() = Metadata.Documents.CustomersAdvancesClosing;
 	IsVendorAdvanceClosing = Parameters.Object.Ref.Metadata() = Metadata.Documents.VendorsAdvancesClosing;
 	
@@ -937,7 +930,7 @@ Procedure Write_SelfRecords(Parameters,
 		
 		DocMetadata = Row.Document.Metadata();
 		
-		UseKeyForCurrency = ArrayOfDocumentTypes.Find(TypeOf(Row.Document)) <> Undefined;
+		UseKeyForCurrency = ArrayOfDocuments_UseKeyForCurrency.Find(DocMetadata) <> Undefined;
 
 		// Accounting amounts
 		RecordSet_AccountingAmounts = AccumulationRegisters.T1040T_AccountingAmounts.CreateRecordSet();
@@ -1152,7 +1145,7 @@ Procedure Write_SelfRecords(Parameters,
 			NewRow_AccountingAmounts.AdvancesClosing = Parameters.Object.Ref;
 			NewRow_AccountingAmounts.RowKey = RowOffset.Key;
 			
-			Operation = AccountingOperations.Get(TypeOf(Row.Document));
+			Operation = GetAccountingOperation(DocMetadata, Row.Document);
 			If Operation <> Undefined Then
 				NewRow_AccountingAmounts.Operation = Operation;
 			EndIf;
@@ -1241,20 +1234,60 @@ Procedure Write_SelfRecords(Parameters,
 		EndDo;
 		RecordSet_AccountingAmounts.SetActive(True);
 		RecordSet_AccountingAmounts.Write();
-		
-		// not working
-//		// Accounting amounts (currency revaluation)
-//		If TableAccountingAmounts_CurrencyRevaluation.Count() Then
-//			RecordSet_AccountingAmounts.Read();
-//			For Each RowTableAccountingAmounts_CurrencyRevaluation In TableAccountingAmounts_CurrencyRevaluation Do
-//				FillPropertyValues(RecordSet_AccountingAmounts.Add(), RowTableAccountingAmounts_CurrencyRevaluation);
-//			EndDo;
-//			RecordSet_AccountingAmounts.SetActive(True);
-//			RecordSet_AccountingAmounts.Write();
-//		EndIf;
-		
+				
 	EndDo;
 EndProcedure
+
+Function GetAccountingOperation(DocMetadata, Doc)
+	AO = Catalogs.AccountingOperations;
+	
+	// Bank payment
+	If DocMetadata = Metadata.Documents.BankPayment Then
+		
+		If Doc.TransactionType = Enums.OutgoingPaymentTransactionTypes.PaymentToVendor Then
+			Return AO.BankPayment_DR_R1021B_VendorsTransactions_CR_R1020B_AdvancesToVendors;
+		ElsIf Doc.TransactionType = Enums.OutgoingPaymentTransactionTypes.ReturnToCustomer Then
+			Return AO.BankPayment_DR_R2021B_CustomersTransactions_CR_R2020B_AdvancesFromCustomers;
+		EndIf;
+	
+	// Cash payment
+	ElsIf DocMetadata = Metadata.Documents.CashPayment Then
+	
+		If Doc.TransactionType = Enums.OutgoingPaymentTransactionTypes.PaymentToVendor Then
+			Return AO.CashPayment_DR_R1021B_VendorsTransactions_CR_R1020B_AdvancesToVendors;
+		ElsIf Doc.TransactionType = Enums.OutgoingPaymentTransactionTypes.ReturnToCustomer Then
+			Return AO.CashPayment_DR_R2021B_CustomersTransactions_CR_R2020B_AdvancesFromCustomers;
+		EndIf;
+	
+	// Bank receipt
+	ElsIf DocMetadata = Metadata.Documents.BankReceipt Then
+	
+		If Doc.TransactionType = Enums.IncomingPaymentTransactionType.PaymentFromCustomer Then
+			Return AO.BankReceipt_DR_R2020B_AdvancesFromCustomers_CR_R2021B_CustomersTransactions;
+		ElsIf Doc.TransactionType = Enums.IncomingPaymentTransactionType.ReturnFromVendor Then
+			Return AO.BankReceipt_DR_R1020B_AdvancesToVendors_CR_R1021B_VendorsTransactions;
+		EndIf;
+	
+	// Cash receipt
+	ElsIf DocMetadata = Metadata.Documents.CashReceipt Then
+	
+		If Doc.TransactionType = Enums.IncomingPaymentTransactionType.PaymentFromCustomer Then
+			Return AO.CashReceipt_DR_R3010B_CashOnHand_CR_R2020B_AdvancesFromCustomers_R2021B_CustomersTransactions;
+		ElsIf Doc.TransactionType = Enums.IncomingPaymentTransactionType.ReturnFromVendor Then
+			Return AO.CashReceipt_DR_R1020B_AdvancesToVendors_CR_R1021B_VendorsTransactions;
+		EndIf;
+	
+	// Sales invoice
+	ElsIf DocMetadata = Metadata.Documents.SalesInvoice Then
+		Return AO.SalesInvoice_DR_R2020B_AdvancesFromCustomers_CR_R2021B_CustomersTransactions;
+		
+	// Purchase invoice
+	ElsIf DocMetadata = Metadata.Documents.PurchaseInvoice Then
+		Return AO.PurchaseInvoice_DR_R1021B_VendorsTransactions_CR_R1020B_AdvancesToVendors;
+	EndIf;
+	
+	Return Undefined;
+EndFunction	
 
 Function ReverseRecordType(RecordType)
 	Return ?(RecordType = AccumulationRecordType.Receipt, 

@@ -845,41 +845,124 @@ EndFunction
 #Region Accounting
 
 Function T1040T_AccountingAmounts()
-	Return "SELECT
-		   |	PaymentList.Period,
-		   |	PaymentList.Key AS RowKey,
-		   |	PaymentList.Key AS Key,
-		   |	PaymentList.Currency,
-		   |	PaymentList.Amount,
-		   |	VALUE(Catalog.AccountingOperations.BankReceipt_DR_R3010B_CashOnHand_CR_R2020B_AdvancesFromCustomers_R2021B_CustomersTransactions) AS Operation,
-		   |	UNDEFINED AS AdvancesClosing
-		   |INTO T1040T_AccountingAmounts
-		   |FROM
-		   |	PaymentList AS PaymentList
-		   |WHERE
-		   |	PaymentList.IsPaymentFromCustomer
-		   |
-		   |UNION ALL
-		   |
-		   |SELECT
-		   |	OffsetOfAdvances.Period,
-		   |	OffsetOfAdvances.Key,
-		   |	OffsetOfAdvances.Key,
-		   |	OffsetOfAdvances.Currency,
-		   |	OffsetOfAdvances.Amount,
-		   |	VALUE(Catalog.AccountingOperations.BankReceipt_DR_R2021B_CustomersTransactions_CR_R2020B_AdvancesFromCustomers),
-		   |	OffsetOfAdvances.Recorder
-		   |FROM
-		   |	InformationRegister.T2010S_OffsetOfAdvances AS OffsetOfAdvances
-		   |WHERE
-		   |	OffsetOfAdvances.Document = &Ref";
+	Return 
+		// Payment from customer
+		"SELECT
+		|	PaymentList.Period,
+		|	PaymentList.Key AS RowKey,
+		|	PaymentList.Key AS Key,
+		|	PaymentList.Currency,
+		|	PaymentList.Amount,
+		|	VALUE(Catalog.AccountingOperations.BankReceipt_DR_R3010B_CashOnHand_CR_R2020B_AdvancesFromCustomers_R2021B_CustomersTransactions) AS Operation,
+		|	UNDEFINED AS AdvancesClosing
+		|INTO T1040T_AccountingAmounts
+		|FROM
+		|	PaymentList AS PaymentList
+		|WHERE
+		|	PaymentList.IsPaymentFromCustomer
+		|
+		|UNION ALL
+		|
+		// Payment from customer (offset)
+		|SELECT
+		|	OffsetOfAdvances.Period,
+		|	OffsetOfAdvances.Key,
+		|	OffsetOfAdvances.Key,
+		|	OffsetOfAdvances.Currency,
+		|	OffsetOfAdvances.Amount,
+		|	VALUE(Catalog.AccountingOperations.BankReceipt_DR_R2020B_AdvancesFromCustomers_CR_R2021B_CustomersTransactions),
+		|	OffsetOfAdvances.Recorder
+		|FROM
+		|	InformationRegister.T2010S_OffsetOfAdvances AS OffsetOfAdvances
+		|WHERE
+		|	OffsetOfAdvances.Document = &Ref
+		|	AND OffsetOfAdvances.Recorder REFS Document.CustomersAdvancesClosing
+		|
+		|UNION ALL
+		|
+		// Return from vendor
+		|SELECT
+		|	PaymentList.Period,
+		|	PaymentList.Key AS RowKey,
+		|	PaymentList.Key AS Key,
+		|	PaymentList.Currency,
+		|	PaymentList.Amount,
+		|	VALUE(Catalog.AccountingOperations.BankReceipt_DR_R3010B_CashOnHand_CR_R1020B_AdvancesToVendors_R1021B_VendorsTransactions) AS Operation,
+		|	UNDEFINED AS AdvancesClosing
+		|FROM
+		|	PaymentList AS PaymentList
+		|WHERE
+		|	PaymentList.IsReturnFromVendor
+		|
+		|UNION ALL
+		|
+		// Return from vendor (offset)
+		|SELECT
+		|	OffsetOfAdvances.Period,
+		|	OffsetOfAdvances.Key,
+		|	OffsetOfAdvances.Key,
+		|	OffsetOfAdvances.Currency,
+		|	OffsetOfAdvances.Amount,
+		|	VALUE(Catalog.AccountingOperations.BankReceipt_DR_R1020B_AdvancesToVendors_CR_R1021B_VendorsTransactions),
+		|	OffsetOfAdvances.Recorder
+		|FROM
+		|	InformationRegister.T2010S_OffsetOfAdvances AS OffsetOfAdvances
+		|WHERE
+		|	OffsetOfAdvances.Document = &Ref
+		|	AND OffsetOfAdvances.Recorder REFS Document.VendorsAdvancesClosing
+		|
+		|UNION ALL
+		|
+		// Cash transfer order
+		|SELECT
+		|	PaymentList.Period,
+		|	PaymentList.Key AS RowKey,
+		|	PaymentList.Key AS Key,
+		|	PaymentList.Currency,
+		|	PaymentList.Amount,
+		|	VALUE(Catalog.AccountingOperations.BankReceipt_DR_R3010B_CashOnHand_CR_R3021B_CashInTransitIncoming_CashTransferOrder) AS Operation,
+		|	UNDEFINED AS AdvancesClosing
+		|FROM
+		|	PaymentList AS PaymentList
+		|WHERE
+		|	PaymentList.IsCashTransferOrder
+		|
+		|UNION ALL
+		|
+		// Currency exchange
+		|SELECT
+		|	PaymentList.Period,
+		|	PaymentList.Key AS RowKey,
+		|	PaymentList.Key AS Key,
+		|	PaymentList.Currency,
+		|	PaymentList.Amount,
+		|	VALUE(Catalog.AccountingOperations.BankReceipt_DR_R3010B_CashOnHand_CR_R3021B_CashInTransitIncoming_CurrencyExchange) AS Operation,
+		|	UNDEFINED AS AdvancesClosing
+		|FROM
+		|	PaymentList AS PaymentList
+		|WHERE
+		|	PaymentList.IsCurrencyExchange";
 EndFunction
 
 Function GetAccountingAnalytics(Parameters) Export
-	If Parameters.Operation = Catalogs.AccountingOperations.BankReceipt_DR_R3010B_CashOnHand_CR_R2020B_AdvancesFromCustomers_R2021B_CustomersTransactions Then
-		Return GetAnalytics_DR_R3010B_CR_R2020B_R2021B(Parameters); // Cash on hand -  Customer transactions
-	ElsIf Parameters.Operation = Catalogs.AccountingOperations.BankReceipt_DR_R2021B_CustomersTransactions_CR_R2020B_AdvancesFromCustomers Then
-		Return GetAnalytics_DR_R2021B_CR_R2020B(Parameters); // Customer transactions - Advances from customer 
+	AO = Catalogs.AccountingOperations;
+	
+	If Parameters.Operation = AO.BankReceipt_DR_R3010B_CashOnHand_CR_R2020B_AdvancesFromCustomers_R2021B_CustomersTransactions Then
+		Return GetAnalytics_PaymentFromCustomer(Parameters); // Cash on hand -  Customer transactions
+	ElsIf Parameters.Operation = Catalogs.AccountingOperations.BankReceipt_DR_R2020B_AdvancesFromCustomers_CR_R2021B_CustomersTransactions Then
+		Return GetAnalytics_PaymentFromCustomer_Offset(Parameters); // Advances from customer - Customer transactions
+	ElsIf Parameters.Operation = Catalogs.AccountingOperations.BankReceipt_DR_R3010B_CashOnHand_CR_R1020B_AdvancesToVendors_R1021B_VendorsTransactions Then
+		Return GetAnalytics_ReturnFromVendor(Parameters); // Cash on hand -  Vendor transactions
+	ElsIf Parameters.Operation = Catalogs.AccountingOperations.BankReceipt_DR_R1020B_AdvancesToVendors_CR_R1021B_VendorsTransactions Then
+		Return GetAnalytics_ReturnFromVendor_Offset(Parameters); // Advance from vendor - Vendor transactions 
+	ElsIf Parameters.Operation = AO.BankReceipt_DR_R3010B_CashOnHand_CR_R3021B_CashInTransitIncoming_CashTransferOrder Then
+		Return GetAnalytics_CashTransferOrder(Parameters); // Cash on hand - Cash in transit 
+	ElsIf Parameters.Operation = AO.BankReceipt_DR_R3010B_CashOnHand_CR_R3021B_CashInTransitIncoming_CurrencyExchange Then
+		Return GetAnalytics_CurrencyExchange(Parameters); // Cash on hand - Cash in transit
+	ElsIf Parameters.Operation = AO.BankReceipt_DR_R3021B_CashInTransit_CR_R5021T_Revenues Then
+		Return GetAnalytics_CurrencyExchange_Revenues(Parameters); // Cash in transit - Revenues
+	ElsIf Parameters.Operation = AO.BankReceipt_DR_R5022T_Expenses_CR_R3021B_CashInTransit Then
+		Return GetAnalytics_CurrencyExchange_Expenses(Parameters); // Expenses - Cash in transit
 	EndIf;
 	Return Undefined;
 EndFunction
@@ -887,21 +970,21 @@ EndFunction
 #Region Accounting_Analytics
 
 // Cash on hand - Customer transaction
-Function GetAnalytics_DR_R3010B_CR_R2020B_R2021B(Parameters)
+Function GetAnalytics_PaymentFromCustomer(Parameters)
 	AccountingAnalytics = AccountingServer.GetAccountingAnalyticsResult(Parameters);
 	AccountParameters   = AccountingServer.GetAccountParameters(Parameters);
 	
+	// Debit
 	Debit = AccountingServer.GetT9011S_AccountsCashAccount(AccountParameters, 
 	                                                       Parameters.ObjectData.Account,
 	                                                       Parameters.ObjectData.Currency);
-	If ValueIsFilled(Debit.Account) Then
-		AccountingAnalytics.Debit = Debit.Account;
-	EndIf;
-	// Debit - Analytics
+	AccountingAnalytics.Debit = Debit.Account;
+
 	AdditionalAnalytics = New Structure();
 	AdditionalAnalytics.Insert("Account", Parameters.ObjectData.Account);
 	AccountingServer.SetDebitExtDimensions(Parameters, AccountingAnalytics, AdditionalAnalytics);
 	
+	// Credit
 	Credit = AccountingServer.GetT9012S_AccountsPartner(AccountParameters, 
 	                                                    Parameters.RowData.Partner, 
 	                                                    Parameters.RowData.Agreement,
@@ -909,22 +992,17 @@ Function GetAnalytics_DR_R3010B_CR_R2020B_R2021B(Parameters)
 	                                                    
 	IsAdvance = AccountingServer.IsAdvance(Parameters.RowData);
 	If IsAdvance Then
-		If ValueIsFilled(Credit.AccountAdvancesCustomer) Then
-			AccountingAnalytics.Credit = Credit.AccountAdvancesCustomer;
-		EndIf;
+		AccountingAnalytics.Credit = Credit.AccountAdvancesCustomer;
 	Else
-		If ValueIsFilled(Credit.AccountTransactionsCustomer) Then
-			AccountingAnalytics.Credit = Credit.AccountTransactionsCustomer;
-		EndIf;
+		AccountingAnalytics.Credit = Credit.AccountTransactionsCustomer;
 	EndIf;
-	// Credit - Analytics
 	AccountingServer.SetCreditExtDimensions(Parameters, AccountingAnalytics);
 	
 	Return AccountingAnalytics;
 EndFunction
 
-// Customer transactions - Advances from customer
-Function GetAnalytics_DR_R2021B_CR_R2020B(Parameters)
+// Advances from customer - Customer transactions
+Function GetAnalytics_PaymentFromCustomer_Offset(Parameters)
 	AccountingAnalytics = AccountingServer.GetAccountingAnalyticsResult(Parameters);
 	AccountParameters   = AccountingServer.GetAccountParameters(Parameters);
 
@@ -933,23 +1011,183 @@ Function GetAnalytics_DR_R2021B_CR_R2020B(Parameters)
 	                                                      Parameters.RowData.Agreement,
 	                                                      Parameters.ObjectData.Currency);
 	                                                      
-	If ValueIsFilled(Accounts.AccountTransactionsCustomer) Then
-		AccountingAnalytics.Debit = Accounts.AccountTransactionsCustomer;
-	EndIf;
-	// Debit - Analytics
+	// Debit
+	AccountingAnalytics.Debit = Accounts.AccountAdvancesCustomer;
 	AccountingServer.SetDebitExtDimensions(Parameters, AccountingAnalytics);
 
-	If ValueIsFilled(Accounts.AccountAdvancesCustomer) Then
-		AccountingAnalytics.Credit = Accounts.AccountAdvancesCustomer;
-	EndIf;
-	// Credit - Analytics
+	// Credit
+	AccountingAnalytics.Credit = Accounts.AccountTransactionsCustomer;
 	AccountingServer.SetCreditExtDimensions(Parameters, AccountingAnalytics);
 
 	Return AccountingAnalytics;
 EndFunction
 
+// Cash on hand - Vendor transaction
+Function GetAnalytics_ReturnFromVendor(Parameters)
+	AccountingAnalytics = AccountingServer.GetAccountingAnalyticsResult(Parameters);
+	AccountParameters   = AccountingServer.GetAccountParameters(Parameters);
+	
+	// Debit
+	Debit = AccountingServer.GetT9011S_AccountsCashAccount(AccountParameters, 
+	                                                       Parameters.ObjectData.Account,
+	                                                       Parameters.ObjectData.Currency);
+	AccountingAnalytics.Debit = Debit.Account;
+
+	AdditionalAnalytics = New Structure();
+	AdditionalAnalytics.Insert("Account", Parameters.ObjectData.Account);
+	AccountingServer.SetDebitExtDimensions(Parameters, AccountingAnalytics, AdditionalAnalytics);
+	
+	// Credit
+	Credit = AccountingServer.GetT9012S_AccountsPartner(AccountParameters, 
+	                                                    Parameters.RowData.Partner, 
+	                                                    Parameters.RowData.Agreement,
+	                                                    Parameters.ObjectData.Currency);
+	                                                    
+	IsAdvance = AccountingServer.IsAdvance(Parameters.RowData);
+	If IsAdvance Then
+		AccountingAnalytics.Credit = Credit.AccountAdvancesVendor;
+	Else
+		AccountingAnalytics.Credit = Credit.AccountTransactionsVendor;
+	EndIf;
+	AccountingServer.SetCreditExtDimensions(Parameters, AccountingAnalytics);
+	
+	Return AccountingAnalytics;
+EndFunction
+
+// Advance from vendor - Vendor transactions
+Function GetAnalytics_ReturnFromVendor_Offset(Parameters)
+	AccountingAnalytics = AccountingServer.GetAccountingAnalyticsResult(Parameters);
+	AccountParameters   = AccountingServer.GetAccountParameters(Parameters);
+
+	Accounts = AccountingServer.GetT9012S_AccountsPartner(AccountParameters, 
+	                                                      Parameters.RowData.Partner, 
+	                                                      Parameters.RowData.Agreement,
+	                                                      Parameters.ObjectData.Currency);
+	                                                      
+	// Debit
+	AccountingAnalytics.Debit = Accounts.AccountAdvancesVendor;
+	AccountingServer.SetDebitExtDimensions(Parameters, AccountingAnalytics);
+
+	// Credit
+	AccountingAnalytics.Credit = Accounts.AccountTransactionsVendor;
+	AccountingServer.SetCreditExtDimensions(Parameters, AccountingAnalytics);
+
+	Return AccountingAnalytics;
+EndFunction
+
+// Cash on hand - Cash in transit
+Function GetAnalytics_CashTransferOrder(Parameters)
+	AccountingAnalytics = AccountingServer.GetAccountingAnalyticsResult(Parameters);
+	AccountParameters   = AccountingServer.GetAccountParameters(Parameters);
+
+	// Debit
+	Debit = AccountingServer.GetT9011S_AccountsCashAccount(AccountParameters, 
+															Parameters.ObjectData.Account,
+															Parameters.ObjectData.Currency);
+	AccountingAnalytics.Debit = Debit.Account;
+	AdditionalAnalytics = New Structure();
+	AdditionalAnalytics.Insert("Account", Parameters.RowData.SendingAccount);
+	AccountingServer.SetDebitExtDimensions(Parameters, AccountingAnalytics, AdditionalAnalytics);
+	
+	// Credit
+	Credit = AccountingServer.GetT9011S_AccountsCashAccount(AccountParameters, 
+															Parameters.ObjectData.Account,
+															Parameters.ObjectData.Currency);
+	
+	AccountingAnalytics.Credit = Credit.AccountTransit;	
+	AdditionalAnalytics = New Structure();	
+	AdditionalAnalytics.Insert("Account", Parameters.ObjectData.Account);
+	AccountingServer.SetCreditExtDimensions(Parameters, AccountingAnalytics, AdditionalAnalytics);
+
+	Return AccountingAnalytics;
+EndFunction
+
+// Cash on hand - Cash in transit
+Function GetAnalytics_CurrencyExchange(Parameters)
+	AccountingAnalytics = AccountingServer.GetAccountingAnalyticsResult(Parameters);
+	AccountParameters   = AccountingServer.GetAccountParameters(Parameters);
+
+	// Debit
+	Debit = AccountingServer.GetT9011S_AccountsCashAccount(AccountParameters, 
+															Parameters.ObjectData.Account,
+															Parameters.ObjectData.Currency);
+	AccountingAnalytics.Debit = Debit.Account;
+	AdditionalAnalytics = New Structure();
+	AdditionalAnalytics.Insert("Account", Parameters.RowData.SendingAccount);
+	AccountingServer.SetDebitExtDimensions(Parameters, AccountingAnalytics, AdditionalAnalytics);
+	
+	// Credit	
+	Credit = AccountingServer.GetT9011S_AccountsCashAccount(AccountParameters, 
+															Parameters.ObjectData.TransitAccount,
+															Parameters.ObjectData.TransitAccount.Currency);
+	AccountingAnalytics.Credit = Credit.Account;
+	AdditionalAnalytics = New Structure();
+	AdditionalAnalytics.Insert("Account", Parameters.ObjectData.TransitAccount);
+	AccountingServer.SetCreditExtDimensions(Parameters, AccountingAnalytics, AdditionalAnalytics);
+
+	Return AccountingAnalytics;
+EndFunction
+
+// Cash in transit - Revenues
+Function GetAnalytics_CurrencyExchange_Revenues(Parameters)
+	AccountingAnalytics = AccountingServer.GetAccountingAnalyticsResult(Parameters);
+	AccountParameters   = AccountingServer.GetAccountParameters(Parameters);
+	
+	// Debit	
+	Debit = AccountingServer.GetT9011S_AccountsCashAccount(AccountParameters, 
+															Parameters.ObjectData.TransitAccount,
+															Parameters.ObjectData.TransitAccount.Currency);
+	AccountingAnalytics.Debit = Debit.Account;
+	AdditionalAnalytics = New Structure();
+	AdditionalAnalytics.Insert("Account", Parameters.ObjectData.TransitAccount);
+	AdditionalAnalytics.Insert("FinancialMovementType", Parameters.ObjectData.Ref.PaymentList[0].FinancialMovementType);
+	AccountingServer.SetDebitExtDimensions(Parameters, AccountingAnalytics, AdditionalAnalytics);
+	
+	// Credit
+	Credit = AccountingServer.GetT9014S_AccountsExpenseRevenue(AccountParameters, Parameters.ObjectData.RevenueType);	
+	AccountingAnalytics.Credit = Credit.Account;
+	AdditionalAnalytics = New Structure();
+	AdditionalAnalytics.Insert("RevenueType", Parameters.ObjectData.RevenueType);
+	AdditionalAnalytics.Insert("ProfitCenter", Parameters.ObjectData.ProfitCenter);
+	AccountingServer.SetCreditExtDimensions(Parameters, AccountingAnalytics, AdditionalAnalytics);
+	
+	Return AccountingAnalytics;
+EndFunction
+
+// Expenses - Cash in transit
+Function GetAnalytics_CurrencyExchange_Expenses(Parameters)
+	AccountingAnalytics = AccountingServer.GetAccountingAnalyticsResult(Parameters);
+	AccountParameters   = AccountingServer.GetAccountParameters(Parameters);
+	
+	// Debit
+	Debit = AccountingServer.GetT9014S_AccountsExpenseRevenue(AccountParameters, Parameters.ObjectData.ExpenseType);
+	AccountingAnalytics.Debit = Debit.Account;
+	AdditionalAnalytics = New Structure();
+	AdditionalAnalytics.Insert("ExpenseType", Parameters.ObjectData.ExpenseType);
+	AdditionalAnalytics.Insert("LossCenter", Parameters.ObjectData.LossCenter);
+	AccountingServer.SetDebitExtDimensions(Parameters, AccountingAnalytics, AdditionalAnalytics);
+	
+	// Credit	
+	Credit = AccountingServer.GetT9011S_AccountsCashAccount(AccountParameters, 
+															Parameters.ObjectData.TransitAccount,
+															Parameters.ObjectData.TransitAccount.Currency);
+	AccountingAnalytics.Credit = Credit.Account;
+	AdditionalAnalytics = New Structure();
+	AdditionalAnalytics.Insert("Account", Parameters.ObjectData.TransitAccount);
+	AdditionalAnalytics.Insert("FinancialMovementType", Parameters.ObjectData.Ref.PaymentList[0].FinancialMovementType);
+	AccountingServer.SetCreditExtDimensions(Parameters, AccountingAnalytics, AdditionalAnalytics);
+	
+	Return AccountingAnalytics;
+EndFunction
+
 Function GetHintDebitExtDimension(Parameters, ExtDimensionType, Value) Export
-	If Parameters.Operation = Catalogs.AccountingOperations.BankReceipt_DR_R3010B_CashOnHand_CR_R2020B_AdvancesFromCustomers_R2021B_CustomersTransactions 
+	AO = Catalogs.AccountingOperations;
+	
+	If (Parameters.Operation = AO.BankReceipt_DR_R3010B_CashOnHand_CR_R2020B_AdvancesFromCustomers_R2021B_CustomersTransactions 
+		Or Parameters.Operation = AO.BankReceipt_DR_R3010B_CashOnHand_CR_R1020B_AdvancesToVendors_R1021B_VendorsTransactions
+		Or Parameters.Operation = AO.BankReceipt_DR_R3010B_CashOnHand_CR_R3021B_CashInTransitIncoming_CashTransferOrder
+		Or Parameters.Operation = AO.BankReceipt_DR_R3010B_CashOnHand_CR_R3021B_CashInTransitIncoming_CurrencyExchange)
+		
 		And ExtDimensionType.ValueType.Types().Find(Type("CatalogRef.ExpenseAndRevenueTypes")) <> Undefined Then
 		Return Parameters.RowData.FinancialMovementType;
 	EndIf;
@@ -957,6 +1195,14 @@ Function GetHintDebitExtDimension(Parameters, ExtDimensionType, Value) Export
 EndFunction
 
 Function GetHintCreditExtDimension(Parameters, ExtDimensionType, Value) Export
+	AO = Catalogs.AccountingOperations;
+	
+	If (Parameters.Operation = AO.BankReceipt_DR_R3010B_CashOnHand_CR_R3021B_CashInTransitIncoming_CashTransferOrder
+		Or Parameters.Operation = AO.BankReceipt_DR_R3010B_CashOnHand_CR_R3021B_CashInTransitIncoming_CurrencyExchange)
+		
+		And ExtDimensionType.ValueType.Types().Find(Type("CatalogRef.ExpenseAndRevenueTypes")) <> Undefined Then
+		Return Parameters.RowData.FinancialMovementType;
+	EndIf;
 	Return Value;
 EndFunction
 

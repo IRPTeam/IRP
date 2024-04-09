@@ -345,7 +345,7 @@
           <horizontalStretch>true</horizontalStretch>
           <verticalStretch>true</verticalStretch>
           <valuesPicture xsi:type="core:PictureRef">
-            <picture>CommonPicture.IconCollection4</picture>
+            <picture>CommonPicture.IconCollection6</picture>
           </valuesPicture>
           <fileDragMode>AsFileRef</fileDragMode>
         </extInfo>

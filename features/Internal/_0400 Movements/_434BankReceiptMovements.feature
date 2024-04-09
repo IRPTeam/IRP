@@ -240,7 +240,7 @@ Scenario: _043400 preparation (Bank receipt)
 		And I execute 1C:Enterprise script at server
 			| "Documents.PurchaseReturn.FindByNumber(21).GetObject().Write(DocumentWriteMode.Write);"      |
 			| "Documents.PurchaseReturn.FindByNumber(21).GetObject().Write(DocumentWriteMode.Posting);"    |
-		When Create document BankPayment objects (Return from vendor)
+		When Create document BankReceipt objects (Return from vendor)
 		And I execute 1C:Enterprise script at server
 			| "Documents.BankReceipt.FindByNumber(516).GetObject().Write(DocumentWriteMode.Posting);"    |
 		And I execute 1C:Enterprise script at server

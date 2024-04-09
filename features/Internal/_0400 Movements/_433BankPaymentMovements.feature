@@ -742,26 +742,20 @@ Scenario: _0433297 check Bank payment movements by the Register  "R3011 Cash flo
 		Given I open hyperlink "e1cib/list/Document.BankPayment"
 		And I go to line in "List" table
 			| 'Number'    |
-			| '323'       |
+			| '311'       |
 	* Check movements by the Register  "R3011 Cash flow" 
 		And I click "Registrations report" button
 		And I select "R3011 Cash flow" exact value from "Register" drop-down list
 		And I click "Generate report" button
 		Then "ResultTable" spreadsheet document is equal
-			| 'Bank payment 323 dated 03.06.2021 17:01:44' | ''                    | ''          | ''             | ''       | ''                  | ''          | ''                        | ''                 | ''                | ''         | ''                             | ''                     |
+			| 'Bank payment 311 dated 18.01.2023 12:02:58' | ''                    | ''          | ''             | ''       | ''                  | ''          | ''                        | ''                 | ''                | ''         | ''                             | ''                     |
 			| 'Document registrations records'             | ''                    | ''          | ''             | ''       | ''                  | ''          | ''                        | ''                 | ''                | ''         | ''                             | ''                     |
 			| 'Register  "R3011 Cash flow"'                | ''                    | ''          | ''             | ''       | ''                  | ''          | ''                        | ''                 | ''                | ''         | ''                             | ''                     |
 			| ''                                           | 'Period'              | 'Resources' | 'Dimensions'   | ''       | ''                  | ''          | ''                        | ''                 | ''                | ''         | ''                             | 'Attributes'           |
 			| ''                                           | ''                    | 'Amount'    | 'Company'      | 'Branch' | 'Account'           | 'Direction' | 'Financial movement type' | 'Cash flow center' | 'Planning period' | 'Currency' | 'Multi currency movement type' | 'Deferred calculation' |
-			| ''                                           | '03.06.2021 17:01:44' | '68,48'     | 'Main Company' | ''       | 'Bank account, TRY' | 'Outgoing'  | 'Movement type 1'         | 'Front office'     | 'First'           | 'USD'      | 'Reporting currency'           | 'No'                   |
-			| ''                                           | '03.06.2021 17:01:44' | '171,2'     | 'Main Company' | ''       | 'Bank account, TRY' | 'Outgoing'  | 'Movement type 1'         | 'Front office'     | ''                | 'USD'      | 'Reporting currency'           | 'No'                   |
-			| ''                                           | '03.06.2021 17:01:44' | '256,8'     | 'Main Company' | ''       | 'Bank account, TRY' | 'Outgoing'  | 'Movement type 1'         | 'Front office'     | 'First'           | 'USD'      | 'Reporting currency'           | 'No'                   |
-			| ''                                           | '03.06.2021 17:01:44' | '400'       | 'Main Company' | ''       | 'Bank account, TRY' | 'Outgoing'  | 'Movement type 1'         | 'Front office'     | 'First'           | 'TRY'      | 'Local currency'               | 'No'                   |
-			| ''                                           | '03.06.2021 17:01:44' | '400'       | 'Main Company' | ''       | 'Bank account, TRY' | 'Outgoing'  | 'Movement type 1'         | 'Front office'     | 'First'           | 'TRY'      | 'en description is empty'      | 'No'                   |
-			| ''                                           | '03.06.2021 17:01:44' | '1 000'     | 'Main Company' | ''       | 'Bank account, TRY' | 'Outgoing'  | 'Movement type 1'         | 'Front office'     | ''                | 'TRY'      | 'Local currency'               | 'No'                   |
-			| ''                                           | '03.06.2021 17:01:44' | '1 000'     | 'Main Company' | ''       | 'Bank account, TRY' | 'Outgoing'  | 'Movement type 1'         | 'Front office'     | ''                | 'TRY'      | 'en description is empty'      | 'No'                   |
-			| ''                                           | '03.06.2021 17:01:44' | '1 500'     | 'Main Company' | ''       | 'Bank account, TRY' | 'Outgoing'  | 'Movement type 1'         | 'Front office'     | 'First'           | 'TRY'      | 'Local currency'               | 'No'                   |
-			| ''                                           | '03.06.2021 17:01:44' | '1 500'     | 'Main Company' | ''       | 'Bank account, TRY' | 'Outgoing'  | 'Movement type 1'         | 'Front office'     | 'First'           | 'TRY'      | 'en description is empty'      | 'No'                   |		
+			| ''                                           | '18.01.2023 12:02:58' | '17,12'     | 'Main Company' | ''       | 'Bank account, TRY' | 'Outgoing'  | ''                        | ''                 | ''                | 'USD'      | 'Reporting currency'           | 'No'                   |
+			| ''                                           | '18.01.2023 12:02:58' | '100'       | 'Main Company' | ''       | 'Bank account, TRY' | 'Outgoing'  | ''                        | ''                 | ''                | 'TRY'      | 'Local currency'               | 'No'                   |
+			| ''                                           | '18.01.2023 12:02:58' | '100'       | 'Main Company' | ''       | 'Bank account, TRY' | 'Outgoing'  | ''                        | ''                 | ''                | 'TRY'      | 'en description is empty'      | 'No'                   |
 		And I close all client application windows
 
 Scenario: _0433298 check Bank payment movements by the Register  "R3010 Cash on hand" (Other partner)

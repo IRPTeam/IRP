@@ -81,7 +81,7 @@ Function R2021B_CustomersTransactions_BR_CR() Export
 		|	PaymentList.Agreement,
 		|	PaymentList.Project,
 		|	PaymentList.TransactionDocument AS Basis,
-		|	PaymentList.Order,
+		|	PaymentList.OrderSettlements AS Order,
 		|	PaymentList.Key,
 		|	PaymentList.Amount AS Amount,
 		|	UNDEFINED AS CustomersAdvancesClosing
@@ -134,7 +134,7 @@ Function R2021B_CustomersTransactions_SI_SRFTA() Export
 		|	ItemList.Agreement,
 		|	ItemList.Project,
 		|	ItemList.Basis,
-		|	ItemList.SalesOrder AS Order,
+		|	ItemList.SalesOrderSettlements AS Order,
 		|	SUM(ItemList.Amount) AS Amount,
 		|	UNDEFINED AS CustomersAdvancesClosing
 		|INTO R2021B_CustomersTransactions
@@ -146,7 +146,7 @@ Function R2021B_CustomersTransactions_SI_SRFTA() Export
 		|	ItemList.Agreement,
 		|	ItemList.Project,
 		|	ItemList.Basis,
-		|	ItemList.SalesOrder,
+		|	ItemList.SalesOrderSettlements,
 		|	ItemList.Company,
 		|	ItemList.Branch,
 		|	ItemList.Currency,
@@ -400,7 +400,7 @@ Function R2021B_CustomersTransactions_DebitCreditNote() Export
 		|	Doc.SendAgreement AS Agreement,
 		|	Doc.SendProject AS Project,
 		|	Doc.SendBasisDocument AS Basis,
-		|	Doc.SendOrder AS Order,
+		|	Doc.SendOrderSettlements AS Order,
 		|	Doc.Amount,
 		|	UNDEFINED AS CustomersAdvancesClosing
 		|INTO R2021B_CustomersTransactions
@@ -435,7 +435,7 @@ Function R2021B_CustomersTransactions_DebitCreditNote() Export
 		|	Doc.ReceiveAgreement,
 		|	Doc.ReceiveProject,
 		|	Doc.ReceiveBasisDocument,
-		|	Doc.ReceiveOrder,
+		|	Doc.ReceiveOrderSettlements,
 		|	Doc.Amount,
 		|	UNDEFINED
 		|FROM
@@ -482,7 +482,7 @@ Function R2021B_CustomersTransactions_Cheque() Export
 		|	Table.Currency,
 		|	Table.Agreement,
 		|	Table.BasisDocument AS Basis,
-		|	Table.Order,
+		|	Table.OrderSettlements AS Order,
 		|	Table.Amount,
 		|	UNDEFINED AS CustomersAdvancesClosing
 		|INTO R2021B_CustomersTransactions
@@ -504,7 +504,7 @@ Function R2021B_CustomersTransactions_Cheque() Export
 		|	Table.Currency,
 		|	Table.Agreement,
 		|	Table.BasisDocument,
-		|	Table.Order,
+		|	Table.OrderSettlements,
 		|	Table.Amount,
 		|	UNDEFINED
 		|FROM
@@ -525,7 +525,7 @@ Function R2021B_CustomersTransactions_Cheque() Export
 		|	Table.Currency,
 		|	Table.Agreement,
 		|	Table.BasisDocument,
-		|	Table.Order,
+		|	Table.OrderSettlements,
 		|	Table.Amount,
 		|	UNDEFINED
 		|FROM

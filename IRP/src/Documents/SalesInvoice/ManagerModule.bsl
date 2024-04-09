@@ -380,6 +380,11 @@ Function ItemList()
 		   |	SalesInvoiceItemList.Ref.Date AS Period,
 		   |	SalesInvoiceItemList.Ref.PriceIncludeTax AS PriceIncludeTax,
 		   |	SalesInvoiceItemList.SalesOrder AS SalesOrder,
+		   |	CASE
+		   |		WHEN SalesInvoiceItemList.Ref.Agreement.UseOrdersForSettlements
+		   |			THEN SalesInvoiceItemList.SalesOrder
+		   |		ELSE UNDEFINED
+		   |	END AS SalesOrderSettlements,
 		   |	NOT SalesInvoiceItemList.SalesOrder.Ref IS NULL AS SalesOrderExists,
 		   |	TableRowIDInfo.RowID AS RowKey,
 		   |	SalesInvoiceItemList.DeliveryDate AS DeliveryDate,

@@ -27,7 +27,7 @@ Function T2014S_AdvancesInfo_BP_CP() Export
 		|	PaymentList.Currency,
 		|	PaymentList.Partner,
 		|	PaymentList.LegalName,
-		|	PaymentList.Order,
+		|	PaymentList.OrderSettlements AS Order,
 		|	TRUE AS IsVendorAdvance,
 		|	FALSE AS IsCustomerAdvance,
 		|	PaymentList.AdvanceAgreement,
@@ -78,7 +78,7 @@ Function T2014S_AdvancesInfo_BR_CR() Export
 		|	PaymentList.LegalName,
 		|	PaymentList.AdvanceAgreement,
 		|	PaymentList.Project,
-		|	PaymentList.Order,
+		|	PaymentList.OrderSettlements AS Order,
 		|	TRUE AS IsCustomerAdvance,
 		|	FALSE AS IsVendorAdvance,
 		|	PaymentList.Amount
@@ -161,7 +161,7 @@ Function T2014S_AdvancesInfo_DebitCreditNote() Export
 		|	Doc.Currency AS Currency,
 		|	Doc.SendAgreement AS AdvanceAgreement,
 		|	Doc.SendProject AS Project,
-		|	Doc.SendOrder AS Order,
+		|	Doc.SendOrderSettlements AS Order,
 		|	Doc.SendIsCustomerAdvance AS IsCustomerAdvance,
 		|	Doc.SendIsVendorAdvance AS IsVendorAdvance,
 		|	Doc.Amount
@@ -213,7 +213,7 @@ Function T2014S_AdvancesInfo_DebitCreditNote() Export
 		|	Doc.Currency,
 		|	Doc.ReceiveAgreement,
 		|	Doc.ReceiveProject,
-		|	Doc.ReceiveOrder,
+		|	Doc.ReceiveOrderSettlements,
 		|	Doc.ReceiveIsCustomerAdvance AS IsCustomerAdvance,
 		|	Doc.ReceiveIsVendorAdvance AS IsVendorAdvance,
 		|	Doc.Amount
@@ -233,7 +233,7 @@ Function T2014S_AdvancesInfo_Cheque() Export
 		|	Table.LegalName,
 		|	Table.AdvanceAgreement,
 		|	Table.Project,
-		|	Table.Order,
+		|	Table.OrderSettlements AS Order,
 		|	TRUE AS IsCustomerAdvance,
 		|	FALSE AS IsVendorAdvance,
 		|	Table.Amount
@@ -256,7 +256,7 @@ Function T2014S_AdvancesInfo_Cheque() Export
 		|	Table.LegalName,
 		|	Table.AdvanceAgreement,
 		|	Table.Project,
-		|	Table.Order,
+		|	Table.OrderSettlements,
 		|	TRUE,
 		|	FALSE,
 		|	-Table.Amount
@@ -278,7 +278,7 @@ Function T2014S_AdvancesInfo_Cheque() Export
 		|	Table.LegalName,
 		|	Table.AdvanceAgreement,
 		|	Table.Project,
-		|	Table.Order,
+		|	Table.OrderSettlements,
 		|	TRUE,
 		|	FALSE,
 		|	-Table.Amount
@@ -300,7 +300,7 @@ Function T2014S_AdvancesInfo_Cheque() Export
 		|	Table.LegalName,
 		|	Table.AdvanceAgreement,
 		|	Table.Project,
-		|	Table.Order,
+		|	Table.OrderSettlements,
 		|	FALSE,
 		|	TRUE,
 		|	Table.Amount
@@ -322,7 +322,7 @@ Function T2014S_AdvancesInfo_Cheque() Export
 		|	Table.LegalName,
 		|	Table.AdvanceAgreement,
 		|	Table.Project,
-		|	Table.Order,
+		|	Table.OrderSettlements,
 		|	FALSE,
 		|	TRUE,
 		|	-Table.Amount
@@ -344,7 +344,7 @@ Function T2014S_AdvancesInfo_Cheque() Export
 		|	Table.LegalName,
 		|	Table.AdvanceAgreement,
 		|	Table.Project,
-		|	Table.Order,
+		|	Table.OrderSettlements,
 		|	FALSE,
 		|	TRUE,
 		|	-Table.Amount

@@ -529,9 +529,9 @@ Scenario: _01541362 create RSR using form link/unlink (different company, store,
 			| 'Dress (XS/Blue)'                                    | 'No'  | 'Main Company' | 'Shop 01' | '1,000'    | 'pcs'            | '520,00'   | 'TRY'      |
 			| 'Trousers (38/Yellow)'                               | 'No'  | 'Main Company' | 'Shop 01' | '2,000'    | 'pcs'            | '400,00'   | 'TRY'      |
 			| 'Boots (36/18SD)'                                    | 'No'  | 'Main Company' | 'Shop 01' | '1,000'    | 'Boots (12 pcs)' | '8 400,00' | 'TRY'      |
-			| 'Retail sales receipt 203 dated 09.04.2024 17:38:14' | 'No'  | 'Main Company' | 'Shop 01' | ''         | ''               | ''         | ''         |
+			| '$$RetailSalesReceipt015413$$'                       | 'No'  | 'Main Company' | 'Shop 01' | ''         | ''               | ''         | ''         |
 			| 'Shirt (38/Black)'                                   | 'No'  | 'Main Company' | 'Shop 01' | '1,000'    | 'pcs'            | '350,00'   | 'TRY'      |
-			| 'Dress (XS/Blue)'                                    | 'No'  | 'Main Company' | 'Shop 01' | '1,000'    | 'pcs'            | '520,00'   | 'TRY'      |		
+			| 'Dress (XS/Blue)'                                    | 'No'  | 'Main Company' | 'Shop 01' | '1,000'    | 'pcs'            | '520,00'   | 'TRY'      |
 		And I go to line in "BasisesTree" table
 			| 'Currency'   | 'Price'    | 'Quantity'   | 'Row presentation'   | 'Unit'   | 'Use'    |
 			| 'TRY'        | '520,00'   | '1,000'      | 'Dress (XS/Blue)'    | 'pcs'    | 'No'     |

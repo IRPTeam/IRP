@@ -1069,13 +1069,14 @@ Scenario: _0155276 check links with different Branches for IM documents (RSO-RSC
 			And in the table "ItemList" I click "Goods receipts" button
 			And Delay 2
 			And "DocumentsTree" table became equal
-				| '#' | 'Presentation'                                         | 'Invoice' | 'QuantityInDocument' | 'Quantity' |
-				| ''  | 'Product 5 with SLN (ODS)'                             | '1,000'   | '1,000'              | '1,000'    |
-				| '1' | 'Retail goods receipt 1 208 dated 10.04.2024 09:55:45' | ''        | '1,000'              | '1,000'    |
-				| ''  | 'Scarf (XS/Red)'                                       | '1,000'   | '1,000'              | '1,000'    |
-				| '2' | 'Retail goods receipt 1 208 dated 10.04.2024 09:55:45' | ''        | '1,000'              | '1,000'    |	
+				| '#' | 'Presentation'             | 'Invoice' | 'QuantityInDocument' | 'Quantity' |
+				| ''  | 'Product 5 with SLN (ODS)' | '1,000'   | '1,000'              | '1,000'    |
+				| '1' | '$$RGR06$$'                | ''        | '1,000'              | '1,000'    |
+				| ''  | 'Scarf (XS/Red)'           | '1,000'   | '1,000'              | '1,000'    |
+				| '2' | '$$RGR06$$'                | ''        | '1,000'              | '1,000'    |
 		* Unlink and link
 			And I close "Linked documents" window
+			And in the table "ItemList" I click "Link unlink basis documents" button	
 			And I change checkbox "Linked documents"
 			And in the table "ResultsTree" I click "Unlink all" button
 			And I click "Auto link" button
@@ -1088,11 +1089,11 @@ Scenario: _0155276 check links with different Branches for IM documents (RSO-RSC
 			And in the table "ItemList" I click "Goods receipts" button
 			And Delay 2
 			And "DocumentsTree" table became equal
-				| '#' | 'Presentation'                                         | 'Invoice' | 'QuantityInDocument' | 'Quantity' |
-				| ''  | 'Product 5 with SLN (ODS)'                             | '1,000'   | '1,000'              | '1,000'    |
-				| '1' | 'Retail goods receipt 1 208 dated 10.04.2024 09:55:45' | ''        | '1,000'              | '1,000'    |
-				| ''  | 'Scarf (XS/Red)'                                       | '1,000'   | '1,000'              | '1,000'    |
-				| '2' | 'Retail goods receipt 1 208 dated 10.04.2024 09:55:45' | ''        | '1,000'              | '1,000'    |	
+				| '#' | 'Presentation'             | 'Invoice' | 'QuantityInDocument' | 'Quantity' |
+				| ''  | 'Product 5 with SLN (ODS)' | '1,000'   | '1,000'              | '1,000'    |
+				| '1' | '$$RGR06$$'                | ''        | '1,000'              | '1,000'    |
+				| ''  | 'Scarf (XS/Red)'           | '1,000'   | '1,000'              | '1,000'    |
+				| '2' | '$$RGR06$$'                | ''        | '1,000'              | '1,000'    |
 			And I click "Post" button
 			And I delete "$$NumberRRR06$$" variable
 			And I save the value of "Number" field as "$$NumberRRR06$$"

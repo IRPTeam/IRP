@@ -16,7 +16,7 @@
  </synonym>
  <synonym>
   <key>ru</key>
-  <value>Бух. счета - Затраты/доходы</value>
+  <value>Бух. счета (доходы/расходы)</value>
  </synonym>
  <synonym>
   <key>tr</key>
@@ -33,7 +33,7 @@
  </recordPresentation>
  <recordPresentation>
   <key>ru</key>
-  <value>Бух. счета - Затраты/доходы</value>
+  <value>Бух. счета (доходы/расходы)</value>
  </recordPresentation>
  <recordPresentation>
   <key>tr</key>

@@ -482,8 +482,7 @@ Scenario: _0155268 create Retail GR based on Retail SC
 		And I input "1,000" text in the field named "ItemListQuantity" of "ItemList" table
 		And I finish line editing in "ItemList" table
 		And I click "Show hidden tables" button
-		And I expand "ShipmentConfirmations [5]" group
-		And I move to "ShipmentConfirmations [5]" tab
+		And I move to "ShipmentConfirmations (5)" tab
 		And "ShipmentConfirmations" table became equal
 			| 'Quantity' | 'Quantity in shipment confirmation' |
 			| '1,000'    | '1,000'                             |
@@ -767,8 +766,7 @@ Scenario: _0155272 create RSC - RGR - RSR transaction type (pickup), without ret
 			And I click "Ok" button
 		* Check
 			And I click "Show hidden tables" button
-			And I expand "ShipmentConfirmations [3]" group
-			And I move to "ShipmentConfirmations [3]" tab
+			And I move to "ShipmentConfirmations (3)" tab
 			And "ShipmentConfirmations" table became equal
 				| 'Key'    | 'Shipment confirmation'    | 'Quantity'    | 'Quantity in shipment confirmation'    | 'Basis key'     |
 				| '*'      | '$$RSC02$$'                | '1,000'       | '1,000'                                | '*'             |

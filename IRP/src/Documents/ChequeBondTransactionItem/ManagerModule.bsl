@@ -443,8 +443,12 @@ Function ChequeBondTransactionItem()
 		   |	Doc.Cheque.DueDate AS DueDate,
 		   |	Doc.BasisDocument,
 		   |	Doc.Order,
+		   |	CASE
+		   |		WHEN DOc.Agreement.UseOrdersForSettlements
+		   |			THEN Doc.Order
+		   |		ELSE UNDEFINED
+		   |	END AS OrderSettlements,
 		   |	Doc.LegalNameContract,
-		   |
 		   |	Doc.FinancialMovementType,
 		   |	Doc.PlanningPeriod,
 		   |	Doc.Ref AS CashPlanningBasis,
@@ -625,6 +629,7 @@ Function CustomerTransaction_Posting()
 		   |	Table.AdvanceAgreement,
 		   |	Table.Project,
 		   |	Table.Order,
+		   |	Table.OrderSettlements,
 		   |	Table.Ref,
 		   |	Table.BasisDocument,
 		   |	Table.Amount,
@@ -651,6 +656,7 @@ Function CustomerTransaction_Reversal()
 		   |	Table.AdvanceAgreement,
 		   |	Table.Project,
 		   |	Table.Order,
+		   |	Table.OrderSettlements,
 		   |	Table.Ref,
 		   |	Table.BasisDocument,
 		   |	Table.Amount,
@@ -677,6 +683,7 @@ Function CustomerTransaction_Correction()
 		   |	Table.AdvanceAgreement,
 		   |	Table.Project,
 		   |	Table.Order,
+		   |	Table.OrderSettlements,
 		   |	Table.Ref,
 		   |	Table.BasisDocument,
 		   |	-Table.Amount AS Amount,
@@ -707,6 +714,7 @@ Function VendorTransaction_Posting()
 		   |	Table.AdvanceAgreement,
 		   |	Table.Project,
 		   |	Table.Order,
+		   |	Table.OrderSettlements,
 		   |	Table.Ref,
 		   |	Table.BasisDocument,
 		   |	Table.Amount,
@@ -733,6 +741,7 @@ Function VendorTransaction_Reversal()
 		   |	Table.AdvanceAgreement,
 		   |	Table.Project,
 		   |	Table.Order,
+		   |	Table.OrderSettlements,
 		   |	Table.Ref,
 		   |	Table.BasisDocument,
 		   |	Table.Amount,
@@ -759,6 +768,7 @@ Function VendorTransaction_Correction()
 		   |	Table.AdvanceAgreement,
 		   |	Table.Project,
 		   |	Table.Order,
+		   |	Table.OrderSettlements,
 		   |	Table.Ref,
 		   |	Table.BasisDocument,
 		   |	-Table.Amount AS Amount,

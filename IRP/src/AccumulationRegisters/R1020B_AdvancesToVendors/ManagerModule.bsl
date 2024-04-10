@@ -1,3 +1,4 @@
+// BSLLS-off
 #Region AccessObject
 
 // Get access key.
@@ -26,7 +27,7 @@ Function R1020B_AdvancesToVendors_BP_CP() Export
 		|	PaymentList.Partner,
 		|	PaymentList.LegalName,
 		|	PaymentList.Currency,
-		|	PaymentList.Order,
+		|	PaymentList.OrderSettlements AS Order,
 		|	PaymentList.Amount,
 		|	PaymentList.Key,
 		|	PaymentList.AdvanceAgreement AS Agreement,
@@ -116,7 +117,7 @@ Function R1020B_AdvancesToVendors_BR_CR() Export
 		|	AND OffsetOfAdvances.Recorder REFS Document.VendorsAdvancesClosing";
 EndFunction
 
-Function R1020B_AdvancesToVendors_PI_PR_POC_SRTC() Export
+Function R1020B_AdvancesToVendors_PI_PR_POC_SRTC() Export 
 	Return 
 		"SELECT
 		|	CASE
@@ -125,17 +126,17 @@ Function R1020B_AdvancesToVendors_PI_PR_POC_SRTC() Export
 		|		ELSE VALUE(AccumulationRecordType.Expense)
 		|	END AS RecordType,
 		|	OffsetOfAdvances.Period,
-		|	OffsetOfAdvances.Recorder AS VendorsAdvancesClosing,
-		|	OffsetOfAdvances.AdvanceOrder AS Order,
 		|	OffsetOfAdvances.Company,
 		|	OffsetOfAdvances.Branch,
-		|	OffsetOfAdvances.Currency,
-		|	OffsetOfAdvances.LegalName,
 		|	OffsetOfAdvances.Partner,
+		|	OffsetOfAdvances.LegalName,
+		|	OffsetOfAdvances.Currency,	
 		|	OffsetOfAdvances.AdvanceAgreement AS Agreement,
 		|	OffsetOfAdvances.AdvanceProject AS Project,
+		|	OffsetOfAdvances.AdvanceOrder AS Order,
 		|	OffsetOfAdvances.Amount,
-		|	UNDEFINED AS Key
+		|	UNDEFINED AS Key,
+		|	OffsetOfAdvances.Recorder AS VendorsAdvancesClosing
 		|INTO R1020B_AdvancesToVendors
 		|FROM
 		|	InformationRegister.T2010S_OffsetOfAdvances AS OffsetOfAdvances
@@ -147,40 +148,20 @@ EndFunction
 Function R1020B_AdvancesToVendors_DebitNote() Export
 	Return 
 		"SELECT
-		|	VALUE(AccumulationRecordType.Receipt) AS RecordType,
-		|	Transactions.Period,
-		|	Transactions.Company,
-		|	Transactions.Branch,
-		|	Transactions.Partner,
-		|	Transactions.LegalName,
-		|	Transactions.Currency,
-		|	Transactions.AdvanceAgreement AS Agreement,
-		|	Transactions.Project,
-		|	Transactions.Amount,
-		|	Transactions.Key,
-		|	UNDEFINED AS VendorsAdvancesClosing
-		|INTO R1020B_AdvancesToVendors
-		|FROM
-		|	Transactions AS Transactions
-		|WHERE
-		|	Transactions.IsVendor
-		|
-		|UNION ALL
-		|
-		|SELECT
 		|	CASE
 		|		WHEN OffsetOfAdvances.RecordType = VALUE(Enum.RecordType.Receipt)
 		|			THEN VALUE(AccumulationRecordType.Receipt)
 		|		ELSE VALUE(AccumulationRecordType.Expense)
-		|	END,
+		|	END AS RecordType,
 		|	OffsetOfAdvances.Period,
 		|	OffsetOfAdvances.Company,
 		|	OffsetOfAdvances.Branch,
 		|	OffsetOfAdvances.Partner,
 		|	OffsetOfAdvances.LegalName,
 		|	OffsetOfAdvances.Currency,
-		|	OffsetOfAdvances.AdvanceAgreement,
-		|	OffsetOfAdvances.AdvanceProject,
+		|	OffsetOfAdvances.AdvanceAgreement AS Agreement,
+		|	OffsetOfAdvances.AdvanceProject AS Project,
+		|	OffsetOfAdvances.AdvanceOrder AS Order,
 		|	OffsetOfAdvances.Amount,
 		|	OffsetOfAdvances.Key,
 		|	OffsetOfAdvances.Recorder
@@ -207,6 +188,7 @@ Function R1020B_AdvancesToVendors_CreditNote() Export
 		|	OffsetOfAdvances.Currency,
 		|	OffsetOfAdvances.AdvanceAgreement AS Agreement,
 		|	OffsetOfAdvances.AdvanceProject AS Project,
+		|	OffsetOfAdvances.AdvanceOrder AS Order,
 		|	OffsetOfAdvances.Amount,
 		|	OffsetOfAdvances.Key,
 		|	OffsetOfAdvances.Recorder AS VendorsAdvancesClosing
@@ -321,7 +303,7 @@ Function R1020B_AdvancesToVendors_Cheque() Export
 		|	Table.LegalName,
 		|	Table.Currency,
 		|	Table.AdvanceAgreement AS Agreement,
-		|	Table.Order,
+		|	Table.OrderSettlements AS Order,
 		|	Table.Amount,
 		|	UNDEFINED AS VendorsAdvancesClosing
 		|INTO R1020B_AdvancesToVendors
@@ -342,7 +324,7 @@ Function R1020B_AdvancesToVendors_Cheque() Export
 		|	Table.LegalName,
 		|	Table.Currency,
 		|	Table.AdvanceAgreement,
-		|	Table.Order,
+		|	Table.OrderSettlements,
 		|	Table.Amount,
 		|	UNDEFINED
 		|FROM
@@ -362,7 +344,7 @@ Function R1020B_AdvancesToVendors_Cheque() Export
 		|	Table.LegalName,
 		|	Table.Currency,
 		|	Table.AdvanceAgreement,
-		|	Table.Order,
+		|	Table.OrderSettlements,
 		|	Table.Amount,
 		|	UNDEFINED
 		|FROM

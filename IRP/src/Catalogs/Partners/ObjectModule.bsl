@@ -28,7 +28,7 @@ Procedure BeforeDelete(Cancel)
 EndProcedure
 
 Procedure FillCheckProcessing(Cancel, CheckedAttributes)
-	CommonFunctionsServer.CheckUniqueDescriptions(Cancel, ThisObject);
+	CommonFunctionsServer.CheckUniqueDescriptions_PrivilegedCall(Cancel, ThisObject);
 	
 	ArrayOfPartnerTypes = New Array();
 	ArrayOfPartnerTypes.Add("Customer");

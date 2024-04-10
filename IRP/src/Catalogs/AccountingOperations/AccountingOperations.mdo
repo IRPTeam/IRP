@@ -14,11 +14,11 @@
  </synonym>
  <synonym>
   <key>ru</key>
-  <value>Бухгалтерские операции</value>
+  <value>Шаблоны бухгалтерских проводок</value>
  </synonym>
  <synonym>
   <key>tr</key>
-  <value>Muhasebe hareketleri</value>
+  <value>Muhasebe hareket şablonları</value>
  </synonym>
  <useStandardCommands>true</useStandardCommands>
  <inputByString>Catalog.AccountingOperations.StandardAttribute.Code</inputByString>

@@ -14,7 +14,7 @@
  </synonym>
  <synonym>
   <key>ru</key>
-  <value>Расписание расчета инвентаризации</value>
+  <value>Графики расчета амортизации</value>
  </synonym>
  <synonym>
   <key>tr</key>
@@ -61,7 +61,7 @@
  </objectPresentation>
  <objectPresentation>
   <key>ru</key>
-  <value>График амортизации</value>
+  <value>График расчета амортизации</value>
  </objectPresentation>
  <objectPresentation>
   <key>tr</key>
@@ -73,7 +73,7 @@
  </listPresentation>
  <listPresentation>
   <key>ru</key>
-  <value>Расписание расчета инвентаризации</value>
+  <value>Графики расчета амортизации</value>
  </listPresentation>
  <listPresentation>
   <key>tr</key>

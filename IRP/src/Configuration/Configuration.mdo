@@ -750,6 +750,8 @@
   <commonModules>CommonModule.ChartsOfCharacteristicTypesServer</commonModules>
   <commonModules>CommonModule.AuditLockPrivileged</commonModules>
   <commonModules>CommonModule.DynamicListAPI</commonModules>
+  <commonModules>CommonModule.DocChequeBondTransactionItemClient</commonModules>
+  <commonModules>CommonModule.DocChequeBondTransactionItemServer</commonModules>
   <commonAttributes>CommonAttribute.Author</commonAttributes>
   <commonAttributes>CommonAttribute.Branch</commonAttributes>
   <commonAttributes>CommonAttribute.Description</commonAttributes>

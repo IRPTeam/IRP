@@ -17,6 +17,7 @@ EndProcedure
 &AtClient
 Procedure OnOpen(Cancel)
 	ExpandDocumentsTree();
+	SetVisibleToAllAttributesValueTable(False);
 EndProcedure
 
 &AtServer
@@ -31,6 +32,10 @@ EndProcedure
 
 &AtServer
 Procedure UpdateCommandAvailability()
+	CurrentRow = Items.DocumentsTree.CurrentRow;
+	If CurrentRow = Undefined Then
+		Return;
+	EndIf;
 	CurrentData = ThisObject.DocumentsTree.FindByID(Items.DocumentsTree.CurrentRow);
 	If CurrentData = Undefined Then
 		Return;
@@ -190,9 +195,18 @@ EndProcedure
 
 &AtClient
 Procedure Refresh(Command)
+	
+	RefreshReport();
+		
+EndProcedure
+
+&AtClient
+Procedure RefreshReport()
+	
 	SetCurrentDocument();
 	GenerateTree();
 	ExpandDocumentsTree();
+	
 EndProcedure
 
 &AtClient
@@ -207,11 +221,35 @@ Procedure GenerateForCurrent(Command)
 EndProcedure
 
 &AtServer
+Procedure AddRowToAllAttributesValueTable(MetaAttribute)
+	ArrayException = New Array;
+	ArrayException.Add("DeletionMark");
+	ArrayException.Add("DocumentStatus");
+	ArrayException.Add("Ref");
+	ArrayException.Add("Presentation");
+	ArrayException.Add("Posted");
+	ArrayException.Add("LimitationByParent");
+	ArrayException.Add("IsCurrentDocument");
+	
+	If ArrayException.Find(MetaAttribute.Name) <> Undefined Then
+		Return;
+	EndIf;
+	
+	If AllAttributesValueTable.FindRows(New Structure("AttributeName", MetaAttribute.Name)).Count() = 0 Then
+		NewRow = AllAttributesValueTable.Add();
+		NewRow.AttributeName = MetaAttribute.Name;
+		NewRow.AttributeSynonym = ?(ValueIsFilled(MetaAttribute.Synonym), MetaAttribute.Synonym, MetaAttribute.Name);
+		NewRow.AttributeType = New TypeDescription(MetaAttribute.Type.Types());
+	EndIf;
+EndProcedure
+
+&AtServer
 Procedure OutputParentDocuments(DocumentRef, CurrentBranch)
 	DocumentMetadata = DocumentRef.Metadata();
 	ListOfAttributes = New ValueList();
 
 	For Each Attribute In DocumentMetadata.Attributes Do
+		AddRowToAllAttributesValueTable(Attribute);
 		ArrayOfTypes = Attribute.Type.Types();
 		For Each CurrentType In ArrayOfTypes Do
 			AttributeMetadata = Metadata.FindByType(CurrentType);
@@ -279,7 +317,9 @@ Procedure OutputParentDocuments(DocumentRef, CurrentBranch)
 	NewRow = CurrentBranch.GetItems().Add();
 	QuerySelection = Query.Execute().Select();
 	If QuerySelection.Next() Then
-
+		
+		FillPropertyValues(NewRow, QuerySelection);
+		
 		NewRow.Ref = QuerySelection.Ref;
 		NewRow.Posted = QuerySelection.Posted;
 		NewRow.DeletionMark = QuerySelection.DeletionMark;
@@ -304,9 +344,9 @@ Procedure OutputWithOutParents(ListOfDocuments, CurrentBranch)
 		QuerySelection = Query.Execute().Select();
 		If QuerySelection.Next() Then
 			If GetFromCache(QuerySelection.Ref) = Undefined Then
-
 				NewRow = CurrentBranch.GetItems().Add();
-
+				FillPropertyValues(NewRow, QuerySelection);
+				
 				NewRow.Ref = QuerySelection.Ref;
 				NewRow.Posted = QuerySelection.Posted;
 				NewRow.DeletionMark = QuerySelection.DeletionMark;
@@ -365,28 +405,42 @@ Procedure OutputChildrenDocuments(TreeRow)
 
 	Query = New Query();
 	For Each KeyValue In CacheByDocumentTypes Do
-
+		
+		DocMeta = Metadata.Documents[KeyValue.Key];
+		
+		AllAttributes = GetAllAttributesForDocument(DocMeta);
+		For Each DocsAttribute In AllAttributes Do
+			AddRowToAllAttributesValueTable(DocsAttribute);
+		EndDo;
+		AllAttributesValueTable.Sort("AttributeName");
+		
+		SelectedAttributeString = GetSelectedAttributesForDocument(DocMeta);
+		
 		Query.Text = Query.Text + ?(Query.Text = "", 
 		"
 		|SELECT ALLOWED", "
 		|UNION ALL
 		|SELECT") + "
-		|Ref, Date, Presentation, Posted, DeletionMark, 
+		|Ref, Date, Presentation, Posted, DeletionMark,
 		|" 
 		+ ?(GetFromCache(KeyValue.Key, "Attributes")["DocumentAmount"], "DocumentAmount", 0) + " AS Amount				
+		|%1
 		|FROM Document." + KeyValue.Key + "
 		|WHERE Ref In (&" + KeyValue.Key + ")";
+		
+		Query.Text = StrTemplate(Query.Text, SelectedAttributeString);
 
 		Query.SetParameter(KeyValue.Key, KeyValue.Value.ArrayOfRefs);
 	EndDo;
 	Query.Text = Query.Text + " ORDER BY Date";
-
+	
 	QuerySelection = Query.Execute().Select();
 
 	While QuerySelection.Next() Do
 		If GetFromCache(QuerySelection.Ref) = Undefined Then
-
+			
 			NewRow = TreeRow.GetItems().Add();
+			FillPropertyValues(NewRow, QuerySelection);
 			NewRow.Ref = QuerySelection.Ref;
 			NewRow.Presentation = QuerySelection.Presentation;
 			NewRow.Amount = QuerySelection.Amount;
@@ -439,17 +493,55 @@ Function DocumentHaveAmount(DocumentMetadata)
 EndFunction
 
 &AtServer
+Function GetAllAttributesForDocument(DocumentMetadata)
+	AllAttributes = New Array;
+	For Each Attribute In DocumentMetadata.Attributes Do
+		AllAttributes.Add(Attribute);
+	EndDo;
+	For Each Attribute In DocumentMetadata.StandardAttributes Do
+		AllAttributes.Add(Attribute);
+	EndDo;
+	Return AllAttributes;
+EndFunction
+
+&AtServer
+Function GetSelectedAttributesForDocument(DocumentMetadata)
+	
+	AllAttributes = GetAllAttributesForDocument(DocumentMetadata);
+	AllAttributesStrings = New Array;
+	For Each AttributeInArray In AllAttributes Do
+		AllAttributesStrings.Add(AttributeInArray.Name);
+	EndDo;
+	
+	SelectedAttributes = AllAttributesValueTable.FindRows(New Structure("Check", True));
+	
+	AttributeString = "";
+	For Each RowAttribute In SelectedAttributes Do
+		If AllAttributesStrings.Find(RowAttribute.AttributeName) = Undefined Then
+			AttributeString = AttributeString + ", " + "Null";
+			Continue;
+		EndIf;
+		AttributeString = AttributeString + ", " + RowAttribute.AttributeName;
+	EndDo;
+		
+	Return AttributeString;
+EndFunction
+
+&AtServer
 Function GetQueryForDocumentProperties(DocumentRef)
 	DocumentMetadata = DocumentRef.Metadata();
-	Query = New Query("SELECT ALLOWED Ref, Posted, DeletionMark, %1, Presentation, ""%2"" AS DocumentName
+	
+	SelectedAttributeString = GetSelectedAttributesForDocument(DocumentMetadata);
+	
+	Query = New Query("SELECT ALLOWED Ref, Posted, DeletionMark, %1, Presentation, ""%2"" AS DocumentName %3
 					  |FROM Document.%2 WHERE Ref = &Ref");
 
 	If DocumentHaveAmount(DocumentMetadata) Then
-		Query.Text = StrTemplate(Query.Text, "DocumentAmount AS Amount", DocumentMetadata.Name);
+		Query.Text = StrTemplate(Query.Text, "DocumentAmount AS Amount", DocumentMetadata.Name, SelectedAttributeString);
 	Else
-		Query.Text = StrTemplate(Query.Text, "NULL AS Amount", DocumentMetadata.Name);
+		Query.Text = StrTemplate(Query.Text, "NULL AS Amount", DocumentMetadata.Name, SelectedAttributeString);
 	EndIf;
-
+	
 	Query.SetParameter("Ref", DocumentRef);
 	Return Query;
 EndFunction
@@ -492,4 +584,72 @@ EndProcedure
 &AtClient
 Procedure DocumentsTreeBeforeDeleteRow(Item, Cancel)
 	Cancel = True;
+EndProcedure
+
+&AtServer
+Procedure CreateColumnsAtServer()
+	AttributesArray = GetAttributes("DocumentsTree");
+	AttributesNamesArray = New Array;
+	For Each AttributeInArray In AttributesArray Do
+		AttributesNamesArray.Add(AttributeInArray.Name);
+	EndDo;
+	
+	AttributesToDelete = New Array;
+	AttributesToAdd = New Array;
+	
+	For Each Row In AllAttributesValueTable Do
+		
+		AttributeExist =  AttributesNamesArray.Find(Row.AttributeName) <> Undefined;
+		If AttributeExist And Row.Check Then
+			Continue;
+		ElsIf AttributeExist And Not Row.Check Then
+			AttributesToDelete.Add("DocumentsTree." + Row.AttributeName);
+		ElsIf Not AttributeExist And Not Row.Check Then
+			Continue;
+		ElsIf Not AttributeExist And Row.Check Then
+			AttributesToAdd.Add(Row);
+		EndIf;
+	EndDo;
+	
+	AttributesArray = New Array;
+	For Each ArrayItem In AttributesToAdd Do
+		NewAttribute = New FormAttribute(
+			ArrayItem.AttributeName,
+			ArrayItem.AttributeType,
+			"DocumentsTree",
+			ArrayItem.AttributeSynonym);
+		AttributesArray.Add(NewAttribute);
+	EndDo;
+	If AttributesArray.Count() > 0 Or AttributesToDelete.Count() > 0 Then 
+		ChangeAttributes(AttributesArray, AttributesToDelete);
+	EndIf;
+	
+	For Each ArrayItem In AttributesToAdd Do
+		NewColumn = Items.Add(
+			ArrayItem.AttributeName + "DocumentsTree", 
+			Type("FormField"),
+			Items.DocumentsTree);
+		NewColumn.DataPath = "DocumentsTree." + ArrayItem.AttributeName;
+		NewColumn.Title = ArrayItem.AttributeSynonym;
+		NewColumn.Type = FormFieldType.InputField;
+	EndDo;
+	
+EndProcedure
+
+&AtClient
+Procedure AllAttributesValueTableOnChange(Item)
+	CreateColumnsAtServer();
+	RefreshReport();
+EndProcedure
+
+&AtClient
+Procedure ShowColumns(Command)
+	Items.DocumentsTreeShowSettings.Check = Not Items.DocumentsTreeShowSettings.Check;
+	
+	SetVisibleToAllAttributesValueTable(Items.DocumentsTreeShowSettings.Check);
+EndProcedure
+
+&AtClient
+Procedure SetVisibleToAllAttributesValueTable(Visible)
+	Items.AllAttributesValueTable.Visible = Visible;
 EndProcedure

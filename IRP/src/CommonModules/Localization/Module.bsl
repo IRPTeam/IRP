@@ -2456,6 +2456,9 @@ Strings.Insert("AccountingQuestion_02", NStr("en='Change [Currency] mark in anal
 Strings.Insert("AccountingInfo_01", NStr("en='Load complete';
 	|ru='Загрузка завершена';
 	|tr='Yükleme tamam'", Lang));
+Strings.Insert("AccountingInfo_02", NStr("en='<For all transaction types>';
+	|ru='Для всех видов операций';
+	|tr='<For all transaction types>'", Lang));
 
 Strings.Insert("AccountingJE_prefix_01", NStr("en='JE ';
 	|ru='JE ';
@@ -2546,10 +2549,10 @@ Strings.Insert("ForeignCurrencyRevaluation_DR_R2020B_AdvancesFromCustomers_CR_R5
 		|ru='ForeignCurrencyRevaluation Дт (R2020B_AdvancesFromCustomers) Кт (R5021T_Revenues)';
 		|tr='ForeignCurrencyRevaluation DR (R2020B_MüşterilerdenAvanslar) CR (R5021T_Gelirler)'", Lang));
 
-Strings.Insert("BankReceipt_DR_R2021B_CustomersTransactions_CR_R2020B_AdvancesFromCustomers",
-	NStr("en='BankReceipt DR (R2021B_CustomersTransactions) CR (R2020B_AdvancesFromCustomers)';
-		|ru='BankReceipt DR (R2021B_CustomersTransactions) CR (R2020B_AdvancesFromCustomers)';
-		|tr='BankaMakbuzu DR (R2021B_Müşteriİşlemleri) CR (R2020B_MüşteridenAvanslar)'", Lang));
+Strings.Insert("BankReceipt_DR_R2020B_AdvancesFromCustomers_CR_R2021B_CustomersTransactions",
+	NStr("en='BankReceipt DR (R2020B_AdvancesFromCustomers) CR (R2021B_CustomersTransactions)';
+		|ru='ПоступлениеНаРасчетныйСчет Дт (R2020B_AdvancesFromCustomers) Кт (R2021B_CustomersTransactions)';
+		|tr='BankReceipt DR (R2020B_AdvancesFromCustomers) CR (R2021B_CustomersTransactions)'", Lang));
 	
 Strings.Insert("CashPayment_DR_R1020B_AdvancesToVendors_R1021B_VendorsTransactions_CR_R3010B_CashOnHand",
 	NStr("en='CashPayment DR (R1020B_AdvancesToVendors_R1021B_VendorsTransactions) CR (R3010B_CashOnHand)';
@@ -2566,10 +2569,10 @@ Strings.Insert("CashReceipt_DR_R3010B_CashOnHand_CR_R2020B_AdvancesFromCustomers
 		|ru='CashReceipt DR (R3010B_CashOnHand) CR (R2020B_AdvancesFromCustomers_R2021B_CustomersTransactions)';
 		|tr='CashReceipt DR (R3010B_EldekiNakit) CR (R2020B_MüşteridenAvanslar_R2021B_Müşteriİşlemleri)'", Lang)); 
 	
-Strings.Insert("CashReceipt_DR_R2021B_CustomersTransactions_CR_R2020B_AdvancesFromCustomers",
-	NStr("en='CashReceipt DR (R2021B_CustomersTransactions) CR (R2020B_AdvancesFromCustomers)';
-		|ru='CashReceipt Дебет (R2021B_CustomersTransactions) Кредит (R2020B_AdvancesFromCustomers)';
-		|tr='NakitMakbuzu DR (R2021B_Müşteriİşlemleri) CR (R2020B_MüşteridenAvanslar)'", Lang));
+Strings.Insert("CashReceipt_DR_R2020B_AdvancesFromCustomers_CR_R2021B_CustomersTransactions",
+	NStr("en='CashReceipt DR (R2020B_AdvancesFromCustomers) CR (R2021B_CustomersTransactions)';
+		|ru='ПриходныйКассовыйОрдер Дт (R2020B_AdvancesFromCustomers) Кт (R2021B_CustomersTransactions)';
+		|tr='CashReceipt DR (R2020B_AdvancesFromCustomers) CR (R2021B_CustomersTransactions)'", Lang));
 	
 Strings.Insert("CashExpense_DR_R5022T_Expenses_CR_R3010B_CashOnHand",
 	NStr("en='CashExpense DR (R5022T_Expenses) CR (R3010B_CashOnHand)';
@@ -2638,38 +2641,118 @@ Strings.Insert("MoneyTransfer_DR_R5022T_Expenses_CR_R3021B_CashInTransit",
 
 Strings.Insert("CommissioningOfFixedAsset_DR_R8510B_BookValueOfFixedAsset_CR_R4050B_StockInventory",
 	NStr("en='CommissioningOfFixedAsset DR (R8510B_BookValueOfFixedAsset) CR (R4050B_StockInventory)';
-		|ru='ВводВЭксплуатациюОсновногоСредства Д-т (R8510B_BookValueOfFixedAsset) К-т (R4050B_StockInventory)';
+		|ru='ВводВЭксплуатациюОсновногоСредства Дт (R8510B_BookValueOfFixedAsset) Кт (R4050B_StockInventory)';
 		|tr='CommissioningOfFixedAsset DR (R8510B_BookValueOfFixedAsset) CR (R4050B_StockInventory)'", Lang));
 
 Strings.Insert("DecommissioningOfFixedAsset_DR_R4050B_StockInventory_CR_R8510B_BookValueOfFixedAsset",
 	NStr("en='DecommissioningOfFixedAsset DR (R4050B_StockInventory) CR (R8510B_BookValueOfFixedAsset)';
-		|ru='СписаниеОсновногоСредства Д-т (R4050B_StockInventory) К-т (R8510B_BookValueOfFixedAsset)';
+		|ru='СписаниеОсновногоСредства Дт (R4050B_StockInventory) Кт (R8510B_BookValueOfFixedAsset)';
 		|tr='DecommissioningOfFixedAsset DR (R4050B_StockInventory) CR (R8510B_BookValueOfFixedAsset)'", Lang));
 
 Strings.Insert("ModernizationOfFixedAsset_DR_R8510B_BookValueOfFixedAsset_CR_R4050B_StockInventory",
 	NStr("en='ModernizationOfFixedAsset DR (R8510B_BookValueOfFixedAsset) CR (R4050B_StockInventory)';
-		|ru='МодернизацияОсновногоСредства Д-т (R8510B_BookValueOfFixedAsset) К-т (R4050B_StockInventory)';
+		|ru='МодернизацияОсновногоСредства Дт (R8510B_BookValueOfFixedAsset) Кт (R4050B_StockInventory)';
 		|tr='ModernizationOfFixedAsset DR (R8510B_BookValueOfFixedAsset) CR (R4050B_StockInventory)'", Lang));
 
 Strings.Insert("ModernizationOfFixedAsset_DR_R4050B_StockInventory_CR_R8510B_BookValueOfFixedAsset",
 	NStr("en='ModernizationOfFixedAsset DR (R4050B_StockInventory) CR (R8510B_BookValueOfFixedAsset)';
-		|ru='МодернизацияОсновногоСредства Д-т (R4050B_StockInventory) К-т (R8510B_BookValueOfFixedAsset)';
+		|ru='МодернизацияОсновногоСредства Дт (R4050B_StockInventory) Кт (R8510B_BookValueOfFixedAsset)';
 		|tr='ModernizationOfFixedAsset DR (R4050B_StockInventory) CR (R8510B_BookValueOfFixedAsset)'", Lang));
 
 Strings.Insert("FixedAssetTransfer_DR_R8510B_BookValueOfFixedAsset_CR_R8510B_BookValueOfFixedAsset",
 	NStr("en='FixedAssetTransfer DR (R8510B_BookValueOfFixedAsset) CR (R8510B_BookValueOfFixedAsset)';
-		|ru='ПередачаОсновногоСредства Д-т (R8510B_BookValueOfFixedAsset) К-т (R8510B_BookValueOfFixedAsset)';
+		|ru='ПередачаОсновногоСредства Дт (R8510B_BookValueOfFixedAsset) Кт (R8510B_BookValueOfFixedAsset)';
 		|tr='FixedAssetTransfer DR (R8510B_BookValueOfFixedAsset) CR (R8510B_BookValueOfFixedAsset)'", Lang));
 
 Strings.Insert("DepreciationCalculation_DR_DepreciationFixedAsset_CR_R8510B_BookValueOfFixedAsset",
 	NStr("en='DepreciationCalculation DR (DepreciationFixedAsset) CR (R8510B_BookValueOfFixedAsset)';
-		|ru='РасчетАмортизации Д-т (DepreciationFixedAsset) К-т (R8510B_BookValueOfFixedAsset)';
+		|ru='РасчетАмортизации Дт (DepreciationFixedAsset) Кт (R8510B_BookValueOfFixedAsset)';
 		|tr='DepreciationCalculation DR (DepreciationFixedAsset) CR (R8510B_BookValueOfFixedAsset)'", Lang));
 
 Strings.Insert("DepreciationCalculation_DR_R5022T_Expenses_CR_DepreciationFixedAsset",
 	NStr("en='DepreciationCalculation DR (R5022T_Expenses) CR (DepreciationFixedAsset)';
-		|ru='РасчетАмортизации Д-т (R5022T_Expenses) К-т (DepreciationFixedAsset)';
+		|ru='РасчетАмортизации Дт (R5022T_Expenses) Кт (DepreciationFixedAsset)';
 		|tr='DepreciationCalculation DR (R5022T_Expenses) CR (DepreciationFixedAsset)'", Lang));
+
+Strings.Insert("BankPayment_DR_R2020B_AdvancesFromCustomers_R2021B_CustomersTransactions_CR_R3010B_CashOnHand",
+	NStr("en='BankPayment DR (R2020B_AdvancesFromCustomers_R2021B_CustomersTransactions) CR (R3010B_CashOnHand)';
+		|ru='СписаниеСРасчетногоСчета Дт (R2020B_AdvancesFromCustomers_R2021B_CustomersTransactions) Кт (R3010B_CashOnHand)';
+		|tr='BankPayment DR (R2020B_AdvancesFromCustomers_R2021B_CustomersTransactions) CR (R3010B_CashOnHand)'", Lang));
+
+Strings.Insert("BankPayment_DR_R2021B_CustomersTransactions_CR_R2020B_AdvancesFromCustomers",
+	NStr("en='BankPayment DR (R2021B_CustomersTransactions) CR (R2020B_AdvancesFromCustomers)';
+		|ru='СписаниеСРасчетногоСчета Дт (R2021B_CustomersTransactions) Кт (R2020B_AdvancesFromCustomers)';
+		|tr='BankPayment DR (R2021B_CustomersTransactions) CR (R2020B_AdvancesFromCustomers)'", Lang));
+
+Strings.Insert("CashPayment_DR_R2020B_AdvancesFromCustomers_R2021B_CustomersTransactions_CR_R3010B_CashOnHand",
+	NStr("en='CashPayment DR (R2020B_AdvancesFromCustomers_R2021B_CustomersTransactions) CR (R3010B_CashOnHand)';
+		|ru='РасходныйКассовыйОрдер Дт (R2020B_AdvancesFromCustomers_R2021B_CustomersTransactions) Кт (R3010B_CashOnHand)';
+		|tr='CashPayment DR (R2020B_AdvancesFromCustomers_R2021B_CustomersTransactions) CR (R3010B_CashOnHand)'", Lang));
+
+Strings.Insert("CashPayment_DR_R2021B_CustomersTransactions_CR_R2020B_AdvancesFromCustomers",
+	NStr("en='CashPayment DR (R2021B_CustomersTransactions) CR (R2020B_AdvancesFromCustomers)';
+		|ru='РасходныйКассовыйОрдер Дт (R2021B_CustomersTransactions) Кт (R2020B_AdvancesFromCustomers)';
+		|tr='CashPayment DR (R2021B_CustomersTransactions) CR (R2020B_AdvancesFromCustomers)'", Lang));
+
+Strings.Insert("BankReceipt_DR_R3010B_CashOnHand_CR_R1020B_AdvancesToVendors_R1021B_VendorsTransactions",
+	NStr("en='BankReceipt DR (R3010B_CashOnHand) CR (R1020B_AdvancesToVendors_R1021B_VendorsTransactions)';
+		|ru='СписаниеСРасчетногоСчета Дт (R3010B_CashOnHand) Кт (R1020B_AdvancesToVendors_R1021B_VendorsTransactions)';
+		|tr='BankReceipt DR (R3010B_CashOnHand) CR (R1020B_AdvancesToVendors_R1021B_VendorsTransactions)'", Lang));
+
+Strings.Insert("BankReceipt_DR_R1020B_AdvancesToVendors_CR_R1021B_VendorsTransactions",
+	NStr("en='BankReceipt DR (R1020B_AdvancesToVendors) CR (R1021B_VendorsTransactions)';
+		|ru='ПоступлениеНаРасчетныйСчет Дт (R1020B_AdvancesToVendors) Кт (R1021B_VendorsTransactions)';
+		|tr='BankReceipt DR (R1020B_AdvancesToVendors) CR (R1021B_VendorsTransactions)'", Lang));
+
+Strings.Insert("CashReceipt_DR_R3010B_CashOnHand_CR_R1020B_AdvancesToVendors_R1021B_VendorsTransactions",
+	NStr("en='CashReceipt DR (R3010B_CashOnHand) CR (R1020B_AdvancesToVendors_R1021B_VendorsTransactions)';
+		|ru='ПриходныйКассовыйОрдер Дт (R3010B_CashOnHand) Кт (R1020B_AdvancesToVendors_R1021B_VendorsTransactions)';
+		|tr='CashReceipt DR (R3010B_CashOnHand) CR (R1020B_AdvancesToVendors_R1021B_VendorsTransactions)'", Lang));
+
+Strings.Insert("CashReceipt_DR_R1020B_AdvancesToVendors_CR_R1021B_VendorsTransactions",
+	NStr("en='CashReceipt DR (R1020B_AdvancesToVendors) CR (R1021B_VendorsTransactions)';
+		|ru='ПриходныйКассовыйОрдер Дт (R1020B_AdvancesToVendors) Кт (R1021B_VendorsTransactions)';
+		|tr='CashReceipt DR (R1020B_AdvancesToVendors) CR (R1021B_VendorsTransactions)'", Lang));
+
+Strings.Insert("BankPayment_DR_R3021B_CashInTransitIncoming_CR_R3010B_CashOnHand_CashTransferOrder",
+	NStr("en='BankPayment DR (R3021B_CashInTransitIncoming) CR (R3010B_CashOnHand) (Cash transfer)';
+		|ru='СписаниеСРасчетногоСчета Дт (R3021B_CashInTransitIncoming) Кт (R3010B_CashOnHand) (Перевод наличных)';
+		|tr='BankPayment DR (R3021B_CashInTransitIncoming) CR (R3010B_CashOnHand) (Cash transfer)'", Lang));
+
+Strings.Insert("BankPayment_DR_R3021B_CashInTransitIncoming_CR_R3010B_CashOnHand_CurrencyExchange",
+	NStr("en='BankPayment DR (R3021B_CashInTransitIncoming) CR (R3010B_CashOnHand) (Currency exchange)';
+		|ru='СписаниеСРасчетногоСчета Дт (R3021B_CashInTransitIncoming) Кт (R3010B_CashOnHand) (Обмен валют)';
+		|tr='BankPayment DR (R3021B_CashInTransitIncoming) CR (R3010B_CashOnHand) (Currency exchange)'", Lang));
+
+Strings.Insert("CashPayment_DR_R3021B_CashInTransitIncoming_CR_R3010B_CashOnHand_CashTransferOrder",
+	NStr("en='CashPayment DR (R3021B_CashInTransitIncoming) CR (R3010B_CashOnHand) (Cash transfer)';
+		|ru='РасходныйКассовыйОрдер Дт (R3021B_CashInTransitIncoming) Кт (R3010B_CashOnHand) (Перевод наличных)';
+		|tr='CashPayment DR (R3021B_CashInTransitIncoming) CR (R3010B_CashOnHand) (Cash transfer)'", Lang));
+
+Strings.Insert("BankReceipt_DR_R3010B_CashOnHand_CR_R3021B_CashInTransitIncoming_CashTransferOrder",
+	NStr("en='BankReceipt DR (R3010B_CashOnHand) CR (R3021B_CashInTransitIncoming) (Cash transfer)';
+		|ru='ПоступлениеНаРасчетныйСчет Дт (R3010B_CashOnHand) Кт (R3021B_CashInTransitIncoming) (Перевод наличных)';
+		|tr='BankReceipt DR (R3010B_CashOnHand) CR (R3021B_CashInTransitIncoming) (Cash transfer)'", Lang));
+
+Strings.Insert("BankReceipt_DR_R3010B_CashOnHand_CR_R3021B_CashInTransitIncoming_CurrencyExchange",
+	NStr("en='BankReceipt DR (R3010B_CashOnHand) CR (R3021B_CashInTransitIncoming) (Currency exchange)';
+		|ru='ПоступлениеНаРасчетныйСчет Дт (R3010B_CashOnHand) Кт (R3021B_CashInTransitIncoming) (Обмен валют)';
+		|tr='BankReceipt DR (R3010B_CashOnHand) CR (R3021B_CashInTransitIncoming) (Currency exchange)'", Lang));
+
+Strings.Insert("BankReceipt_DR_R3021B_CashInTransit_CR_R5021T_Revenues",
+	NStr("en='BankReceipt DR (R3021B_CashInTransit) CR (R5021T_Revenues)';
+		|ru='ПоступлениеНаРасчетныйСчет Дт (R3021B_CashInTransit) Кт (R5021T_Revenues)';
+		|tr='BankReceipt DR (R3021B_CashInTransit) CR (R5021T_Revenues)'", Lang));
+
+Strings.Insert("BankReceipt_DR_R5022T_Expenses_CR_R3021B_CashInTransit",
+	NStr("en='BankReceipt DR (R5022T_Expenses) CR (R3021B_CashInTransit)';
+		|ru='ПоступлениеНаРасчетныйСчет Дт (R5022T_Expenses) Кт (R3021B_CashInTransit)';
+		|tr='BankReceipt DR (R5022T_Expenses) CR (R3021B_CashInTransit)'", Lang));
+
+Strings.Insert("CashReceipt_DR_R3010B_CashOnHand_CR_R3021B_CashInTransitIncoming_CashTransferOrder",
+	NStr("en='CashReceipt DR (R3010B_CashOnHand) CR (R3021B_CashInTransitIncoming) (Cash transfer)';
+		|ru='ПриходныйКассовыйОрдер Дт (R3010B_CashOnHand) Кт (R3021B_CashInTransitIncoming) (Перемещение ДС)';
+		|tr='CashReceipt DR (R3010B_CashOnHand) CR (R3021B_CashInTransitIncoming) (Cash transfer)'", Lang));
 
 #EndRegion
 

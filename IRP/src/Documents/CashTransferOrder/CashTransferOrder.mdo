@@ -406,7 +406,7 @@
   </synonym>
   <synonym>
    <key>ru</key>
-   <value>Статья ДДС отправки</value>
+   <value>Статья ДДС расход</value>
   </synonym>
   <synonym>
    <key>tr</key>
@@ -430,7 +430,7 @@
   </synonym>
   <synonym>
    <key>ru</key>
-   <value>Статья ДДС получения</value>
+   <value>Статья ДДС приход</value>
   </synonym>
   <synonym>
    <key>tr</key>

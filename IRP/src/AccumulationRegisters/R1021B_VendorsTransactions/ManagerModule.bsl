@@ -1,3 +1,4 @@
+// BSLLS-off
 #Region AccessObject
 
 // Get access key.
@@ -29,7 +30,7 @@ Function R1021B_VendorsTransactions_BP_CP() Export
 		|	PaymentList.Agreement,
 		|	PaymentList.Project,
 		|	PaymentList.TransactionDocument AS Basis,
-		|	PaymentList.Order,
+		|	PaymentList.OrderSettlements AS Order,
 		|	PaymentList.Key,
 		|	PaymentList.Amount,
 		|	UNDEFINED AS VendorsAdvancesClosing
@@ -118,7 +119,7 @@ Function R1021B_VendorsTransactions_BR_CR() Export
 		|	AND OffsetOfAdvances.Recorder REFS Document.VendorsAdvancesClosing";
 EndFunction
 
-Function R1021B_VendorsTransactions_PI_SRTC() Export
+Function R1021B_VendorsTransactions_PI_SRTC() Export 
 	Return 
 		"SELECT
 		|	VALUE(AccumulationRecordType.Receipt) AS RecordType,
@@ -131,7 +132,7 @@ Function R1021B_VendorsTransactions_PI_SRTC() Export
 		|	ItemList.Agreement,
 		|	ItemList.Project,
 		|	ItemList.BasisDocument AS Basis,
-		|	ItemList.PurchaseOrder AS Order,
+		|	ItemList.PurchaseOrderSettlements AS Order,
 		|	SUM(ItemList.Amount) AS Amount,
 		|	UNDEFINED AS VendorsAdvancesClosing
 		|INTO R1021B_VendorsTransactions
@@ -142,7 +143,7 @@ Function R1021B_VendorsTransactions_PI_SRTC() Export
 		|GROUP BY
 		|	ItemList.Agreement,
 		|	ItemList.BasisDocument,
-		|	ItemList.PurchaseOrder,
+		|	ItemList.PurchaseOrderSettlements,
 		|	ItemList.Company,
 		|	ItemList.Branch,
 		|	ItemList.Currency,
@@ -322,6 +323,29 @@ EndFunction
 Function R1021B_VendorsTransactions_DebitNote() Export
 	Return 
 		"SELECT
+		|	VALUE(AccumulationRecordType.Receipt) AS RecordType,
+		|	Transactions.Period,
+		|	Transactions.Company,
+		|	Transactions.Branch,
+		|	Transactions.Currency,
+		|	Transactions.LegalName,
+		|	Transactions.Partner,
+		|	Transactions.Agreement,
+		|	Transactions.Project,
+		|	Transactions.BasisDocument AS Basis,
+		|	UNDEFINED AS Order,
+		|	Transactions.Key,
+		|	-Transactions.Amount AS Amount,
+		|	UNDEFINED AS VendorsAdvancesClosing
+		|INTO R1021B_VendorsTransactions
+		|FROM
+		|	Transactions AS Transactions
+		|WHERE
+		|	Transactions.IsVendor
+		|
+		|UNION ALL
+		|
+		|SELECT
 		|	CASE
 		|		WHEN OffsetOfAdvances.RecordType = VALUE(Enum.RecordType.Receipt)
 		|			THEN VALUE(AccumulationRecordType.Receipt)
@@ -336,6 +360,7 @@ Function R1021B_VendorsTransactions_DebitNote() Export
 		|	OffsetOfAdvances.TransactionAgreement AS Agreement,
 		|	OffsetOfAdvances.TransactionProject AS Project,
 		|	OffsetOfAdvances.TransactionDocument AS Basis,
+		|	OffsetOfAdvances.TransactionOrder AS Order,
 		|	OffsetOfAdvances.Key,
 		|	OffsetOfAdvances.Amount,
 		|	OffsetOfAdvances.Recorder AS VendorsAdvancesClosing
@@ -359,6 +384,7 @@ Function R1021B_VendorsTransactions_CreditNote() Export
 		|	Transactions.Agreement,
 		|	Transactions.Project,
 		|	Transactions.BasisDocument AS Basis,
+		|	UNDEFINED AS Order,
 		|	Transactions.Key,
 		|	Transactions.Amount,
 		|	UNDEFINED AS VendorsAdvancesClosing
@@ -385,6 +411,7 @@ Function R1021B_VendorsTransactions_CreditNote() Export
 		|	OffsetOfAdvances.TransactionAgreement,
 		|	OffsetOfAdvances.TransactionProject,
 		|	OffsetOfAdvances.TransactionDocument,
+		|	UNDEFINED,
 		|	OffsetOfAdvances.Key,
 		|	OffsetOfAdvances.Amount,
 		|	OffsetOfAdvances.Recorder
@@ -446,7 +473,7 @@ Function R1021B_VendorsTransactions_DebitCreditNote() Export
 		|	Doc.SendAgreement AS Agreement,
 		|	Doc.SendProject AS Project,
 		|	Doc.SendBasisDocument AS Basis,
-		|	Doc.SendOrder AS Order,
+		|	Doc.SendOrderSettlements AS Order,
 		|	Doc.Amount,
 		|	UNDEFINED AS VendorsAdvancesClosing
 		|INTO R1021B_VendorsTransactions
@@ -479,7 +506,7 @@ Function R1021B_VendorsTransactions_DebitCreditNote() Export
 		|	Doc.ReceiveAgreement,
 		|	Doc.ReceiveProject,
 		|	Doc.ReceiveBasisDocument,
-		|	Doc.ReceiveOrder,
+		|	Doc.ReceiveOrderSettlements,
 		|	Doc.Amount,
 		|	UNDEFINED
 		|FROM
@@ -526,7 +553,7 @@ Function R1021B_VendorsTransactions_Cheque() Export
 		|	Table.Currency,
 		|	Table.Agreement,
 		|	Table.BasisDocument AS Basis,
-		|	Table.Order,
+		|	Table.OrderSettlements AS Order,
 		|	Table.Amount,
 		|	UNDEFINED AS VendorsAdvancesClosing
 		|INTO R1021B_VendorsTransactions
@@ -548,7 +575,7 @@ Function R1021B_VendorsTransactions_Cheque() Export
 		|	Table.Currency,
 		|	Table.Agreement,
 		|	Table.BasisDocument,
-		|	Table.Order,
+		|	Table.OrderSettlements,
 		|	Table.Amount,
 		|	UNDEFINED
 		|FROM
@@ -569,7 +596,7 @@ Function R1021B_VendorsTransactions_Cheque() Export
 		|	Table.Currency,
 		|	Table.Agreement,
 		|	Table.BasisDocument,
-		|	Table.Order,
+		|	Table.OrderSettlements,
 		|	Table.Amount,
 		|	UNDEFINED
 		|FROM

@@ -179,8 +179,44 @@ Scenario: _300521 check post/unpost/mark for deletion from report "Related docum
 				| '$$SalesInvoice300521$$'             |
 		And I close all client application windows
 
-
-
-
-
-
+Scenario: _300522 show colums in the report "Related documents"
+	And I close all client application windows
+	* Select SO
+		Given I open hyperlink "e1cib/list/Document.SalesOrder"
+		And I go to line in "List" table
+			| 'Number'                      |
+			| '$$NumberSalesOrder300521$$'  |
+		And I click "*Related documents" button
+	* Show column
+		And in the table "DocumentsTree" I click "Show columns" button
+		And I go to line in "AllAttributesValueTable" table
+			| 'Check' | 'Name'    |
+			| 'No'    | 'Company' |
+		And I set "Check" checkbox in "AllAttributesValueTable" table
+		And I finish line editing in "AllAttributesValueTable" table
+		And I go to line in "AllAttributesValueTable" table
+			| 'Check' | 'Name'       |
+			| 'No'    | 'Legal name' |
+		And I set "Check" checkbox in "AllAttributesValueTable" table
+		And I finish line editing in "AllAttributesValueTable" table
+		And I go to line in "AllAttributesValueTable" table
+			| 'Check' | 'Name'    |
+			| 'No'    | 'Partner' |
+		And I set "Check" checkbox in "AllAttributesValueTable" table
+		And I finish line editing in "AllAttributesValueTable" table
+	* Check
+		And "DocumentsTree" table became equal
+			| 'Presentation'                   | 'Amount' | 'Company'         | 'Partner'      | 'Legal name'           |
+			| '$$SalesOrder300521$$'           | '400,00' | 'Main Company TR' | 'Ferron BP TR' | 'Company Ferron BP TR' |
+			| '$$ShipmentConfirmation300521$$' | ''       | 'Main Company TR' | 'Ferron BP TR' | 'Company Ferron BP TR' |
+			| '$$SalesInvoice300521$$'         | '400,00' | 'Main Company TR' | 'Ferron BP TR' | 'Company Ferron BP TR' |
+		And I go to line in "AllAttributesValueTable" table
+			| 'Check' | 'Name'    |
+			| 'Yes'   | 'Company' |
+		And I remove "Check" checkbox in "AllAttributesValueTable" table
+		And "DocumentsTree" table became equal
+			| 'Presentation'                   | 'Amount' | 'Partner'      | 'Legal name'           |
+			| '$$SalesOrder300521$$'           | '400,00' | 'Ferron BP TR' | 'Company Ferron BP TR' |
+			| '$$ShipmentConfirmation300521$$' | ''       | 'Ferron BP TR' | 'Company Ferron BP TR' |
+			| '$$SalesInvoice300521$$'         | '400,00' | 'Ferron BP TR' | 'Company Ferron BP TR' |
+		And I close all client application windows

@@ -202,7 +202,7 @@
   </synonym>
   <synonym>
    <key>ru</key>
-   <value>Из центра прибылей и убытков</value>
+   <value>Центр прибылей/убытков расход</value>
   </synonym>
   <synonym>
    <key>tr</key>
@@ -273,7 +273,7 @@
   </synonym>
   <synonym>
    <key>ru</key>
-   <value>В центр прибылей и убытков</value>
+   <value>Центр ДДС (расход)</value>
   </synonym>
   <synonym>
    <key>tr</key>

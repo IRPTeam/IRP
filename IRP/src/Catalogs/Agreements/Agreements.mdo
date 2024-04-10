@@ -723,7 +723,7 @@
   </synonym>
   <synonym>
    <key>ru</key>
-   <value>Центр прибыли/убытков</value>
+   <value>Центр прибылей/убытков</value>
   </synonym>
   <synonym>
    <key>tr</key>
@@ -800,6 +800,29 @@
   </synonym>
   <type>
    <types>CatalogRef.PartnersBankAccounts</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fillValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <dataHistory>Use</dataHistory>
+ </attributes>
+ <attributes uuid="7f4bdbe2-5dbe-4488-aaf0-a536423ecafd">
+  <name>UseOrdersForSettlements</name>
+  <synonym>
+   <key>en</key>
+   <value>Use orders for settlements</value>
+  </synonym>
+  <synonym>
+   <key>ru</key>
+   <value>Использовать заказы в взаиморасчетах</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Use orders for settlements</value>
+  </synonym>
+  <type>
+   <types>Boolean</types>
   </type>
   <minValue xsi:type="core:UndefinedValue"/>
   <maxValue xsi:type="core:UndefinedValue"/>

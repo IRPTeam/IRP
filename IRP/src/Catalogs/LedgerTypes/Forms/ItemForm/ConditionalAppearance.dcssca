@@ -10,10 +10,18 @@
 			</item>
 		</selection>
 		<filter>
-			<item xsi:type="FilterItemComparison">
-				<left xsi:type="dcscor:Field">OperationsTree.Level</left>
-				<comparisonType>Equal</comparisonType>
-				<right xsi:type="xs:decimal">1</right>
+			<item xsi:type="FilterItemGroup">
+				<groupType>OrGroup</groupType>
+				<item xsi:type="FilterItemComparison">
+					<left xsi:type="dcscor:Field">OperationsTree.Level</left>
+					<comparisonType>Equal</comparisonType>
+					<right xsi:type="xs:decimal">1</right>
+				</item>
+				<item xsi:type="FilterItemComparison">
+					<left xsi:type="dcscor:Field">OperationsTree.Level</left>
+					<comparisonType>Equal</comparisonType>
+					<right xsi:type="xs:decimal">2</right>
+				</item>
 			</item>
 		</filter>
 		<appearance>

@@ -331,7 +331,7 @@
    </synonym>
    <synonym>
     <key>ru</key>
-    <value>Центр прибыли/убытков</value>
+    <value>Центр прибылей/убытков</value>
    </synonym>
    <synonym>
     <key>tr</key>
@@ -506,7 +506,7 @@
    </synonym>
    <synonym>
     <key>ru</key>
-    <value>Статья движений денежных средств</value>
+    <value>Статья ДДС</value>
    </synonym>
    <synonym>
     <key>tr</key>
@@ -528,7 +528,7 @@
    </synonym>
    <synonym>
     <key>ru</key>
-    <value>Центр движения денежных средств</value>
+    <value>Центр ДДС</value>
    </synonym>
    <synonym>
     <key>tr</key>
@@ -650,7 +650,7 @@
    </synonym>
    <synonym>
     <key>ru</key>
-    <value>Центр денежных потоков (другая компания)</value>
+    <value>Центр ДДС (другая компания)</value>
    </synonym>
    <synonym>
     <key>tr</key>

@@ -11,7 +11,7 @@
  </synonym>
  <synonym>
   <key>ru</key>
-  <value>R5020 Баланс партнеров</value>
+  <value>R5020 Взаиморасчеты с партнерами</value>
  </synonym>
  <synonym>
   <key>tr</key>
@@ -27,7 +27,7 @@
   </synonym>
   <synonym>
    <key>ru</key>
-   <value>Основная схема компоновки</value>
+   <value>Основная схема компоновки данных</value>
   </synonym>
   <synonym>
    <key>tr</key>

@@ -1064,7 +1064,7 @@ FROM
 							</v8:item>
 							<v8:item>
 								<v8:lang>ru</v8:lang>
-								<v8:content>Открытие</v8:content>
+								<v8:content>Начальный остаток</v8:content>
 							</v8:item>
 							<v8:item>
 								<v8:lang>tr</v8:lang>
@@ -1115,7 +1115,7 @@ FROM
 							</v8:item>
 							<v8:item>
 								<v8:lang>ru</v8:lang>
-								<v8:content>Закрытие</v8:content>
+								<v8:content>Конечный остаток</v8:content>
 							</v8:item>
 							<v8:item>
 								<v8:lang>tr</v8:lang>
@@ -1149,7 +1149,7 @@ FROM
 							</v8:item>
 							<v8:item>
 								<v8:lang>ru</v8:lang>
-								<v8:content>Открытие</v8:content>
+								<v8:content>Начальный остаток</v8:content>
 							</v8:item>
 							<v8:item>
 								<v8:lang>tr</v8:lang>
@@ -1200,7 +1200,7 @@ FROM
 							</v8:item>
 							<v8:item>
 								<v8:lang>ru</v8:lang>
-								<v8:content>Закрытие</v8:content>
+								<v8:content>Конечный остаток</v8:content>
 							</v8:item>
 							<v8:item>
 								<v8:lang>tr</v8:lang>
@@ -1234,7 +1234,7 @@ FROM
 							</v8:item>
 							<v8:item>
 								<v8:lang>ru</v8:lang>
-								<v8:content>Открытие</v8:content>
+								<v8:content>Начальный остаток</v8:content>
 							</v8:item>
 							<v8:item>
 								<v8:lang>tr</v8:lang>
@@ -1285,7 +1285,7 @@ FROM
 							</v8:item>
 							<v8:item>
 								<v8:lang>ru</v8:lang>
-								<v8:content>Закрытие</v8:content>
+								<v8:content>Конечный остаток</v8:content>
 							</v8:item>
 							<v8:item>
 								<v8:lang>tr</v8:lang>
@@ -1319,7 +1319,7 @@ FROM
 							</v8:item>
 							<v8:item>
 								<v8:lang>ru</v8:lang>
-								<v8:content>Открытие</v8:content>
+								<v8:content>Начальный остаток</v8:content>
 							</v8:item>
 							<v8:item>
 								<v8:lang>tr</v8:lang>
@@ -1370,7 +1370,7 @@ FROM
 							</v8:item>
 							<v8:item>
 								<v8:lang>ru</v8:lang>
-								<v8:content>Закрытие</v8:content>
+								<v8:content>Конечный остаток</v8:content>
 							</v8:item>
 							<v8:item>
 								<v8:lang>tr</v8:lang>
@@ -1404,7 +1404,7 @@ FROM
 							</v8:item>
 							<v8:item>
 								<v8:lang>ru</v8:lang>
-								<v8:content>Открытие</v8:content>
+								<v8:content>Начальный остаток</v8:content>
 							</v8:item>
 							<v8:item>
 								<v8:lang>tr</v8:lang>
@@ -1455,7 +1455,7 @@ FROM
 							</v8:item>
 							<v8:item>
 								<v8:lang>ru</v8:lang>
-								<v8:content>Закрытие</v8:content>
+								<v8:content>Конечный остаток</v8:content>
 							</v8:item>
 							<v8:item>
 								<v8:lang>tr</v8:lang>
@@ -1473,7 +1473,7 @@ FROM
 						</v8:item>
 						<v8:item>
 							<v8:lang>ru</v8:lang>
-							<v8:content>Дополнительно</v8:content>
+							<v8:content>Прочие</v8:content>
 						</v8:item>
 						<v8:item>
 							<v8:lang>tr</v8:lang>
@@ -1489,7 +1489,7 @@ FROM
 							</v8:item>
 							<v8:item>
 								<v8:lang>ru</v8:lang>
-								<v8:content>Открытие</v8:content>
+								<v8:content>Начальный остаток</v8:content>
 							</v8:item>
 							<v8:item>
 								<v8:lang>tr</v8:lang>
@@ -1540,7 +1540,7 @@ FROM
 							</v8:item>
 							<v8:item>
 								<v8:lang>ru</v8:lang>
-								<v8:content>Закрытие</v8:content>
+								<v8:content>Конечный остаток</v8:content>
 							</v8:item>
 							<v8:item>
 								<v8:lang>tr</v8:lang>

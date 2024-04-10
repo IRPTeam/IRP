@@ -15,7 +15,7 @@
  </synonym>
  <synonym>
   <key>ru</key>
-  <value>R5020 Баланс партнеров</value>
+  <value>R5020 Взаиморасчеты с партнерами</value>
  </synonym>
  <synonym>
   <key>tr</key>
@@ -53,7 +53,7 @@
   </synonym>
   <synonym>
    <key>ru</key>
-   <value>Транзакция клиента</value>
+   <value>Транзакция покупателя</value>
   </synonym>
   <synonym>
    <key>tr</key>
@@ -74,7 +74,7 @@
   </synonym>
   <synonym>
    <key>ru</key>
-   <value>Аванс от розничного покупателя</value>
+   <value>Аванс покупателя</value>
   </synonym>
   <synonym>
    <key>tr</key>
@@ -137,7 +137,7 @@
   </synonym>
   <synonym>
    <key>ru</key>
-   <value>Другая транзакция</value>
+   <value>Прочая транзакция</value>
   </synonym>
   <synonym>
    <key>tr</key>

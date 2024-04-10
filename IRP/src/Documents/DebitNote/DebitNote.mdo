@@ -310,7 +310,7 @@
    </synonym>
    <synonym>
     <key>ru</key>
-    <value>Центр прибыли/убытков</value>
+    <value>Центр прибылей/убытков</value>
    </synonym>
    <synonym>
     <key>tr</key>
@@ -433,6 +433,31 @@
    </synonym>
    <type>
     <types>CatalogRef.Projects</types>
+   </type>
+   <minValue xsi:type="core:UndefinedValue"/>
+   <maxValue xsi:type="core:UndefinedValue"/>
+   <dataHistory>Use</dataHistory>
+   <fullTextSearch>Use</fullTextSearch>
+  </attributes>
+  <attributes uuid="89c7b97f-37a1-44ff-9561-85982a10b564">
+   <name>BasisDocument</name>
+   <synonym>
+    <key>en</key>
+    <value>Basis document</value>
+   </synonym>
+   <synonym>
+    <key>ru</key>
+    <value>Документ основания</value>
+   </synonym>
+   <synonym>
+    <key>tr</key>
+    <value>Kaynak evrak</value>
+   </synonym>
+   <type>
+    <types>DocumentRef.SalesInvoice</types>
+    <types>DocumentRef.SalesReturn</types>
+    <types>DocumentRef.PurchaseInvoice</types>
+    <types>DocumentRef.PurchaseReturn</types>
    </type>
    <minValue xsi:type="core:UndefinedValue"/>
    <maxValue xsi:type="core:UndefinedValue"/>

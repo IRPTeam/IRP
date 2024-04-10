@@ -817,7 +817,7 @@
    </synonym>
    <synonym>
     <key>ru</key>
-    <value>Центр прибыли/убытков</value>
+    <value>Центр прибылей/убытков</value>
    </synonym>
    <synonym>
     <key>tr</key>
@@ -883,7 +883,7 @@
    </synonym>
    <synonym>
     <key>ru</key>
-    <value>Статья движений денежных средств</value>
+    <value>Статья ДДС</value>
    </synonym>
    <synonym>
     <key>tr</key>
@@ -905,7 +905,7 @@
    </synonym>
    <synonym>
     <key>ru</key>
-    <value>Центр движения денежных средств</value>
+    <value>Центр ДДС</value>
    </synonym>
    <synonym>
     <key>tr</key>
@@ -1227,7 +1227,7 @@
    </synonym>
    <synonym>
     <key>ru</key>
-    <value>Финансовый тип движения комиссии</value>
+    <value>Статья ДДС комиссии</value>
    </synonym>
    <synonym>
     <key>tr</key>

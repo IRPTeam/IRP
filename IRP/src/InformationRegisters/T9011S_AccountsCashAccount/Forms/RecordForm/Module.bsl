@@ -29,6 +29,7 @@ EndProcedure
 Procedure SetVisible()
 	Items.CashAccount.Visible = ThisObject.RecordType = "CashAccount";
 	Items.Currency.Visible = ThisObject.RecordType = "CashAccount";
+	Items.AccountTransit.Visible = ThisObject.Record.CashAccount.Type <> Enums.CashAccountTypes.Transit;
 EndProcedure
 
 &AtClient
@@ -38,5 +39,6 @@ Procedure CashAccountOnChange(Item)
 	Else
 		Record.Currency = Undefined;
 	EndIf;
+	SetVisible();
 EndProcedure
 

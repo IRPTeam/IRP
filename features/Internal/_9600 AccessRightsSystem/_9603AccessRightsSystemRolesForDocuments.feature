@@ -55,6 +55,11 @@ Scenario: _964000 preparation (access rights roles for documents)
 		When filling Access key in the AccessGroups
 	And I click "Save and close" button
 	When import data for access rights
+	* Re-save users
+		Given I open hyperlink "e1cib/list/Catalog.Users"
+		And for each line of "List" table I do
+			And I select current line in "List" table
+			And I click "Save and close" button				
 	And I close all client application windows
 
 Scenario: _964001 check preparation

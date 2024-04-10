@@ -28,7 +28,7 @@ Function T2015S_TransactionsInfo_BP_CP() Export
 		|	PaymentList.LegalName,
 		|	PaymentList.Agreement,
 		|	PaymentList.Project,
-		|	PaymentList.Order,
+		|	PaymentList.OrderSettlements AS Order,
 		|	TRUE AS IsVendorTransaction,
 		|	FALSE AS IsCustomerTransaction,
 		|	PaymentList.TransactionDocument AS TransactionBasis,
@@ -79,7 +79,7 @@ Function T2015S_TransactionsInfo_BR_CR() Export
 		|	PaymentList.LegalName,
 		|	PaymentList.Agreement,
 		|	PaymentList.Project,
-		|	PaymentList.Order,
+		|	PaymentList.OrderSettlements AS Order,
 		|	TRUE AS IsCustomerTransaction,
 		|	FALSE AS IsVendorTransaction,
 		|	PaymentList.TransactionDocument AS TransactionBasis,
@@ -129,9 +129,11 @@ Function T2015S_TransactionsInfo_DebitNote() Export
 		|	Transactions.LegalName,
 		|	Transactions.Agreement,
 		|	Transactions.Project,
+		|	UNDEFINED AS Order,
 		|	Transactions.BasisDocument AS TransactionBasis,
 		|	Transactions.Key,
 		|	TRUE AS IsCustomerTransaction,
+		|	FALSE AS IsVendorTransaction,
 		|	TRUE AS IsDue,
 		|	SUM(Transactions.Amount) AS Amount
 		|INTO T2015S_TransactionsInfo
@@ -149,41 +151,111 @@ Function T2015S_TransactionsInfo_DebitNote() Export
 		|	Transactions.Agreement,
 		|	Transactions.Project,
 		|	Transactions.BasisDocument,
+		|	Transactions.Key
+		|
+		|UNION ALL
+		|
+		|SELECT
+		|	Transactions.Period AS Date,
+		|	Transactions.Company,
+		|	Transactions.Branch,
+		|	Transactions.Currency,
+		|	Transactions.Partner,
+		|	Transactions.LegalName,
+		|	Transactions.Agreement,
+		|	Transactions.Project,
+		|	UNDEFINED AS Order,
+		|	Transactions.BasisDocument AS TransactionBasis,
+		|	Transactions.Key,
+		|	FALSE AS IsCustomerTransaction,
+		|	TRUE AS IsVendorTransaction,
+		|	TRUE AS IsDue,
+		|	-SUM(Transactions.Amount) AS Amount
+		|FROM
+		|	Transactions AS Transactions
+		|WHERE
+		|	Transactions.IsVendor
+		|GROUP BY
+		|	Transactions.Period,
+		|	Transactions.Company,
+		|	Transactions.Branch,
+		|	Transactions.Currency,
+		|	Transactions.Partner,
+		|	Transactions.LegalName,
+		|	Transactions.Agreement,
+		|	Transactions.Project,
+		|	Transactions.BasisDocument,
 		|	Transactions.Key";
 EndFunction
 
-Function T2015S_TransactionsInfo_CreditNote() Export
+Function T2015S_TransactionsInfo_CreditNote() Export 
 	Return 
 		"SELECT
-		   |	Transactions.Period AS Date,
-		   |	Transactions.Company,
-		   |	Transactions.Branch,
-		   |	Transactions.Currency,
-		   |	Transactions.LegalName,
-		   |	Transactions.Partner,
-		   |	Transactions.Agreement,
-		   |	Transactions.Project,
-		   |	Transactions.BasisDocument AS TransactionBasis,
-		   |	Transactions.Key,
-		   |	TRUE AS IsVendorTransaction,
-		   |	TRUE AS IsDue,
-		   |	SUM(Transactions.Amount) AS Amount
-		   |INTO T2015S_TransactionsInfo
-		   |FROM
-		   |	Transactions AS Transactions
-		   |WHERE
-		   |	Transactions.IsVendor
-		   |GROUP BY
-		   |	Transactions.Period,
-		   |	Transactions.Company,
-		   |	Transactions.Branch,
-		   |	Transactions.Currency,
-		   |	Transactions.Partner,
-		   |	Transactions.LegalName,
-		   |	Transactions.Agreement,
-		   |	Transactions.Project,
-		   |	Transactions.BasisDocument,
-		   |	Transactions.Key";
+		|	Transactions.Period AS Date,
+		|	Transactions.Company,
+		|	Transactions.Branch,
+		|	Transactions.Currency,
+		|	Transactions.LegalName,
+		|	Transactions.Partner,
+		|	Transactions.Agreement,
+		|	Transactions.Project,
+		|	UNDEFINED AS Order,
+		|	Transactions.BasisDocument AS TransactionBasis,
+		|	Transactions.Key,
+		|	TRUE AS IsVendorTransaction,
+		|	FALSE AS IsCustomerTransaction,
+		|	TRUE AS IsDue,
+		|	SUM(Transactions.Amount) AS Amount
+		|INTO T2015S_TransactionsInfo
+		|FROM
+		|	Transactions AS Transactions
+		|WHERE
+		|	Transactions.IsVendor
+		|GROUP BY
+		|	Transactions.Period,
+		|	Transactions.Company,
+		|	Transactions.Branch,
+		|	Transactions.Currency,
+		|	Transactions.Partner,
+		|	Transactions.LegalName,
+		|	Transactions.Agreement,
+		|	Transactions.Project,
+		|	Transactions.BasisDocument,
+		|	Transactions.Key
+		|
+		|UNION ALL
+		|
+		|SELECT
+		|	Transactions.Period,
+		|	Transactions.Company,
+		|	Transactions.Branch,
+		|	Transactions.Currency,
+		|	Transactions.LegalName,
+		|	Transactions.Partner,
+		|	Transactions.Agreement,
+		|	Transactions.Project,
+		|	UNDEFINED,
+		|	Transactions.BasisDocument,
+		|	Transactions.Key,
+		|	FALSE AS IsVendorTransaction,
+		|	TRUE AS IsCustomerTransaction,
+		|	TRUE AS IsDue,
+		|	-SUM(Transactions.Amount) AS Amount
+		|FROM
+		|	Transactions AS Transactions
+		|WHERE
+		|	Transactions.IsCustomer
+		|GROUP BY
+		|	Transactions.Period,
+		|	Transactions.Company,
+		|	Transactions.Branch,
+		|	Transactions.Currency,
+		|	Transactions.Partner,
+		|	Transactions.LegalName,
+		|	Transactions.Agreement,
+		|	Transactions.Project,
+		|	Transactions.BasisDocument,
+		|	Transactions.Key";
 EndFunction
 
 Function T2015S_TransactionsInfo_DebitCreditNote() Export
@@ -198,7 +270,7 @@ Function T2015S_TransactionsInfo_DebitCreditNote() Export
 		|	Doc.SendAgreement AS Agreement,
 		|	Doc.SendProject AS Project,
 		|	Doc.SendBasisDocument AS TransactionBasis,
-		|	Doc.SendOrder AS Order,
+		|	Doc.SendOrderSettlements AS Order,
 		|	Doc.SendIsVendorTransaction AS IsVendorTransaction,
 		|	Doc.SendIsCustomerTransaction AS IsCustomerTransaction,
 		|	case
@@ -290,7 +362,7 @@ Function T2015S_TransactionsInfo_DebitCreditNote() Export
 		|	Doc.ReceiveAgreement,
 		|	Doc.ReceiveProject,
 		|	Doc.ReceiveBasisDocument,
-		|	Doc.ReceiveOrder,
+		|	Doc.ReceiveOrderSettlements,
 		|	Doc.SendIsVendorTransaction,
 		|	Doc.SendIsCustomerTransaction,
 		|	case
@@ -371,7 +443,7 @@ Function T2015S_TransactionsInfo_Cheque() Export
 		|	Table.LegalName,
 		|	Table.Agreement,
 		|	Table.Project,
-		|	Table.Order,
+		|	Table.OrderSettlements AS Order,
 		|	TRUE AS IsCustomerTransaction,
 		|	FALSE AS IsVendorTransaction,
 		|	Table.BasisDocument AS TransactionBasis,
@@ -395,7 +467,7 @@ Function T2015S_TransactionsInfo_Cheque() Export
 		|	Table.LegalName,
 		|	Table.Agreement,
 		|	Table.Project,
-		|	Table.Order,
+		|	Table.OrderSettlements,
 		|	TRUE,
 		|	FALSE,
 		|	Table.BasisDocument,
@@ -418,7 +490,7 @@ Function T2015S_TransactionsInfo_Cheque() Export
 		|	Table.LegalName,
 		|	Table.Agreement,
 		|	Table.Project,
-		|	Table.Order,
+		|	Table.OrderSettlements,
 		|	TRUE,
 		|	FALSE,
 		|	Table.BasisDocument,
@@ -441,7 +513,7 @@ Function T2015S_TransactionsInfo_Cheque() Export
 		|	Table.LegalName,
 		|	Table.Agreement,
 		|	Table.Project,
-		|	Table.Order,
+		|	Table.OrderSettlements,
 		|	FALSE,
 		|	TRUE,
 		|	Table.BasisDocument,
@@ -464,7 +536,7 @@ Function T2015S_TransactionsInfo_Cheque() Export
 		|	Table.LegalName,
 		|	Table.Agreement,
 		|	Table.Project,
-		|	Table.Order,
+		|	Table.OrderSettlements,
 		|	FALSE,
 		|	TRUE,
 		|	Table.BasisDocument,
@@ -487,7 +559,7 @@ Function T2015S_TransactionsInfo_Cheque() Export
 		|	Table.LegalName,
 		|	Table.Agreement,
 		|	Table.Project,
-		|	Table.Order,
+		|	Table.OrderSettlements,
 		|	FALSE,
 		|	TRUE,
 		|	Table.BasisDocument,
@@ -511,7 +583,7 @@ Function T2015S_TransactionsInfo_PI_SRTC() Export
 		|	ItemList.LegalName,
 		|	ItemList.Agreement,
 		|	ItemList.Project,
-		|	ItemList.PurchaseOrder AS Order,
+		|	ItemList.PurchaseOrderSettlements AS Order,
 		|	TRUE AS IsVendorTransaction,
 		|	ItemList.BasisDocument AS TransactionBasis,
 		|	SUM(ItemList.Amount) AS Amount,
@@ -530,7 +602,7 @@ Function T2015S_TransactionsInfo_PI_SRTC() Export
 		|	ItemList.LegalName,
 		|	ItemList.Agreement,
 		|	ItemList.Project,
-		|	ItemList.PurchaseOrder,
+		|	ItemList.PurchaseOrderSettlements,
 		|	ItemList.BasisDocument";
 EndFunction
 
@@ -577,7 +649,7 @@ Function T2015S_TransactionsInfo_SI_SRFTA() Export
 		|	ItemList.LegalName,
 		|	ItemList.Agreement,
 		|	ItemList.Project,
-		|	ItemList.SalesOrder AS Order,
+		|	ItemList.SalesOrderSettlements AS Order,
 		|	TRUE AS IsCustomerTransaction,
 		|	ItemList.Basis AS TransactionBasis,
 		|	SUM(ItemList.Amount) AS Amount,
@@ -596,7 +668,7 @@ Function T2015S_TransactionsInfo_SI_SRFTA() Export
 		|	ItemList.LegalName,
 		|	ItemList.Agreement,
 		|	ItemList.Project,
-		|	ItemList.SalesOrder,
+		|	ItemList.SalesOrderSettlements,
 		|	ItemList.Basis";
 EndFunction
 

@@ -8,7 +8,7 @@ Function CheckUnitForItemKey(ItemObject) Export
 EndFunction
 
 Procedure CheckUniqueDescriptions(Cancel, Object) Export
-	CommonFunctionsServer.__CheckUniqueDescriptions(Cancel, Object);
+	CommonFunctionsServer.CheckUniqueDescription(Cancel, Object);
 EndProcedure
 
 Procedure FillCheckProcessing_Catalog_SerialLotNumbers(Cancel, Object) Export

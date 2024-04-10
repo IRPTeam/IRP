@@ -138,7 +138,8 @@ Function ItemList()
 		   |	UNDEFINED AS Order,
 		   |	ItemList.Project,
 		   |	TRUE AS IsPurchase,
-		   |	UNDEFINED AS PurchaseOrder
+		   |	UNDEFINED AS PurchaseOrder,
+		   |	UNDEFINED AS PurchaseOrderSettlements
 		   |INTO ItemList
 		   |FROM
 		   |	Document.SalesReportToConsignor.ItemList AS ItemList

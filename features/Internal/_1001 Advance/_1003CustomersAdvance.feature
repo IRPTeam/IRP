@@ -486,10 +486,10 @@ Scenario: _1003062 check CustomersAdvancesClosing movements
 			| ''                                                      | 'Period'              | 'RecordType' | 'Advance key' | 'Amount' |
 			| ''                                                      | '28.04.2021 21:50:03' | 'Receipt'    | '*'           | '10 000' |
 			| ''                                                      | '28.04.2021 21:50:03' | 'Receipt'    | '*'           | '2 000'  |
+			| ''                                                      | '28.04.2021 21:50:03' | 'Expense'    | '*'           | '10 000' |
 			| ''                                                      | '28.04.2021 21:50:03' | 'Expense'    | '*'           | '-3 914' |
 			| ''                                                      | '28.04.2021 21:50:03' | 'Expense'    | '*'           | '510'    |
 			| ''                                                      | '28.04.2021 21:50:03' | 'Expense'    | '*'           | '3 404'  |
-			| ''                                                      | '28.04.2021 21:50:03' | 'Expense'    | '*'           | '10 000' |
 			| ''                                                      | '28.04.2021 21:50:03' | 'Expense'    | '*'           | '980'    |
 	* TM1030 Transactions key
 		And I select "TM1030 Transactions key" exact value from "Register" drop-down list

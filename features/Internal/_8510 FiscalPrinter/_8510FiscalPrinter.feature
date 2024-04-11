@@ -4869,3 +4869,56 @@ Scenario: _0260212 manual payment by card (block Pay button)
 		And I move to the next attribute
 		And I click "OK" button	
 	And I close all client application windows			
+
+Scenario: _0260213 check error log for fiscal printer
+	And I close all client application windows
+	* Preparation
+		Given I open hyperlink "e1cib/list/Catalog.Unit_ErrorTypes"
+		And I go to line in "List" table
+			| 'Description'                           |
+			| 'Error on fiscal when get XML response' |
+		And I select current line in "List" table
+		And I set checkbox named "Boolean"
+		And I click "Save and close" button
+		And I wait "Error on fiscal when get XML response (Error type) *" window closing in 5 seconds
+	* Create RSR with error from POS
+		And In the command interface I select "Retail" "Point of sale"
+		And I click "Search by barcode (F7)" button
+		And I input "2202283705" text in the field named "Barcode"
+		And I move to the next attribute		
+		And I click "Payment (+)" button
+		And I click "Cash (/)" button
+		And I click "OK" button
+	* Check error
+		Then "1C:Enterprise" window is opened
+		And I click the button named "OK"
+		And "Payments" table became equal
+			| 'Payment done' | 'Payment type' | 'Amount' |
+			| ' '            | 'Cash'         | '520,00' |
+		And I click "X" button
+		Then "Point of sales *" window is opened
+		And I click the button named "ItemListDelete"
+	* Check logs
+		Given I open hyperlink "e1cib/list/Catalog.Hardware"	
+		And I go to line in "List" table
+			| 'Description'    |
+			| 'Fiscal printer' |
+		And I click "Analyze log" button		
+		And "TransactionList" table contains lines
+			| 'Period' | 'Hardware'       | 'Method'         | 'Result' |
+			| '*'      | 'Fiscal printer' | 'Parsing result' | 'No'     |
+	* Remove settings for error
+		Given I open hyperlink "e1cib/list/Catalog.Unit_ErrorTypes"
+		And I go to line in "List" table
+			| 'Description'                           |
+			| 'Error on fiscal when get XML response' |
+		And I select current line in "List" table
+		And I remove checkbox named "Boolean"
+		And I click "Save and close" button	
+		And I wait "Error on fiscal when get XML response (Error type) *" window closing in 5 seconds
+		
+						
+						
+				
+				
+						

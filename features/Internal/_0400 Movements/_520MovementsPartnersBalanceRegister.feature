@@ -1876,7 +1876,7 @@ Scenario: _52070 check Sales report to consignor movements by the Register  "R50
 			| ''                                                      | 'Expense'     | '10.03.2023 12:00:00' | '240'       | ''                     | ''                 | '240'                | ''               | ''                  | 'Own company 2' | 'Business unit 2' | 'Consignor 1 (without VAT)' | 'Consignor 1' | 'Partner term Consignor 1' | ''         | 'TRY'      | 'Agreement currency, TRY'      | 'TRY'                  | ''                 |
 			| ''                                                      | 'Expense'     | '10.03.2023 12:00:00' | '240'       | ''                     | ''                 | '240'                | ''               | ''                  | 'Own company 2' | 'Business unit 2' | 'Consignor 1 (without VAT)' | 'Consignor 1' | 'Partner term Consignor 1' | ''         | 'TRY'      | 'en description is empty'      | 'TRY'                  | ''                 |
 
-Scenario: _52071 check Debit note movements by the Register  "R5020 Partners balance" (IsVendor, IsAdvance = True)
+Scenario: _52071 check Debit note movements by the Register  "R5020 Partners balance" (IsVendor, IsAdvance = False)
 	And I close all client application windows
 	* Select Debit note
 		Given I open hyperlink "e1cib/list/Document.DebitNote"
@@ -1900,7 +1900,7 @@ Scenario: _52071 check Debit note movements by the Register  "R5020 Partners bal
 			| ''                                       | 'Expense'     | '24.02.2023 11:03:25' | ''          | ''                     | ''                 | ''                   | ''               | ''                  | 'Own company 2' | 'Business unit 1' | 'Vendor 1 (1 partner term)' | 'Vendor 1'   | 'Partner term with vendor 1' | ''         | 'EUR'      | 'Budgeting currency, EUR'      | 'TRY'                  | ''                 |		
 		
 		
-Scenario: _52072 check Debit note movements by the Register  "R5020 Partners balance" (IsCustomer, IsAdvance = False)
+Scenario: _52072 check Debit note movements by the Register  "R5020 Partners balance" (IsCustomer, IsAdvance = True)
 	And I close all client application windows
 	* Select Debit note
 		Given I open hyperlink "e1cib/list/Document.DebitNote"

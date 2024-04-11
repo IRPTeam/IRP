@@ -22,6 +22,10 @@
     <key>en</key>
     <value>Cheque bond transaction item</value>
   </objectPresentation>
+  <listPresentation>
+    <key>en</key>
+    <value>Cheque bond transaction items</value>
+  </listPresentation>
   <numberLength>12</numberLength>
   <numberAllowedLength>Variable</numberAllowedLength>
   <checkUnique>true</checkUnique>

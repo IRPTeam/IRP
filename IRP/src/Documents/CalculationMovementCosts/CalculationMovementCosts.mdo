@@ -22,6 +22,10 @@
     <key>en</key>
     <value>Calculation movement costs</value>
   </objectPresentation>
+  <listPresentation>
+    <key>en</key>
+    <value>Calculation movements costs</value>
+  </listPresentation>
   <numberLength>12</numberLength>
   <numberAllowedLength>Variable</numberAllowedLength>
   <checkUnique>true</checkUnique>

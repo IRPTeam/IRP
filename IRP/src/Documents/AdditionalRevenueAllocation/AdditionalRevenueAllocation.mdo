@@ -21,6 +21,10 @@
     <key>en</key>
     <value>Additional revenue allocation</value>
   </objectPresentation>
+  <listPresentation>
+    <key>en</key>
+    <value>Additional revenue allocations</value>
+  </listPresentation>
   <numberLength>12</numberLength>
   <numberAllowedLength>Variable</numberAllowedLength>
   <checkUnique>true</checkUnique>

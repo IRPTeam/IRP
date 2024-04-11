@@ -8,11 +8,11 @@ Procedure BeforeWrite(Cancel, Replacing)
 		If ValueIsFilled(_row.AdvancesClosing) Then
 			Continue;
 		EndIf;
-		_row.Amount = 
-			  _row.CustomerTransaction 
-			  + _row.CustomerAdvance
-			  + _row.VendorTransaction
-			  + _row.VendorAdvance
-			  + _row.OtherTransaction;
+//		_row.Amount = 
+//			  _row.CustomerTransaction 
+//			  + _row.CustomerAdvance
+//			  + _row.VendorTransaction
+//			  + _row.VendorAdvance
+//			  + _row.OtherTransaction;
 	EndDo;	
 EndProcedure

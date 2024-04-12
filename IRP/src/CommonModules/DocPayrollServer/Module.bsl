@@ -112,11 +112,13 @@ Function GetPayrolls_Deduction(Parameters) Export
 	|FROM
 	|	AccumulationRegister.R9570T_AdditionalDeduction.Turnovers(BEGINOFPERIOD(&BeginDate, DAY), ENDOFPERIOD(&EndDate,
 	|		DAY),, Company = &Company
-	|	AND Branch = &Branch) AS R9570T_AdditionalDeductionTurnovers";
+	|	AND Branch = &Branch
+	|	AND DeductionType.CalculationType = &CalculationType) AS R9570T_AdditionalDeductionTurnovers";
 	Query.SetParameter("BeginDate", Parameters.BeginDate);
 	Query.SetParameter("EndDate", Parameters.EndDate);
 	Query.SetParameter("Company", Parameters.Company);
 	Query.SetParameter("Branch", Parameters.Branch);
+	Query.SetParameter("CalculationType", Parameters.CalculationType);
 	QueryResult = Query.Execute();
 	QuerySelection = QueryResult.Select();
 	While QuerySelection.Next() Do
@@ -246,7 +248,7 @@ Function GetPayrolls_Accrual(Parameters) Export
 	For Each Row In QueryTable Do
 		NewAccrualValue = AccrualValues.Add();
 		FillPropertyValues(NewAccrualValue, Row);
-		AccrualValue = GetAccrualByEmployeeOrPosition(Row);
+		AccrualValue = GetAccrualByEmployeeOrPosition(Parameters, Row);
 		If AccrualValue <> Undefined And ValueIsFilled(AccrualValue.Accrual) Then
 			NewAccrualValue.Accrual = AccrualValue.Accrual; 	
 			NewAccrualValue.Value   = AccrualValue.Value;
@@ -504,19 +506,19 @@ Function GetAccrualSettings(Company)
 	Return Result;
 EndFunction
 
-Function GetAccrualByEmployeeOrPosition(TableRow)
-	ByEmployee = GetAccrualValue(TableRow.Employee, TableRow.Date);
+Function GetAccrualByEmployeeOrPosition(Parameters, TableRow)
+	ByEmployee = GetAccrualValue(Parameters, TableRow.Employee, TableRow.Date);
 	If ValueIsFilled(ByEmployee.Accrual) Then
 		Return ByEmployee;
 	Else
-		ByPosition = GetAccrualValue(TableRow.Position, TableRow.Date);
+		ByPosition = GetAccrualValue(Parameters, TableRow.Position, TableRow.Date);
 		If ValueIsFilled(ByPosition.Accrual) Then
 			Return ByPosition;
 		EndIf;
 	EndIf;
 EndFunction	
 
-Function GetAccrualValue(EmployeeOrPosition, Date)
+Function GetAccrualValue(Parameters, EmployeeOrPosition, Date)
 	Query = New Query();
 	Query.Text = 
 	"SELECT
@@ -525,11 +527,13 @@ Function GetAccrualValue(EmployeeOrPosition, Date)
 	|	AccrualValues.Period
 	|FROM
 	|	InformationRegister.T9500S_AccrualAndDeductionValues.SliceLast(ENDOFPERIOD(&Date, DAY),
-	|		EmployeeOrPosition = &EmployeeOrPosition) AS AccrualValues
+	|		EmployeeOrPosition = &EmployeeOrPosition
+	|	AND AccualOrDeductionType.CalculationType = &CalculationType) AS AccrualValues
 	|WHERE
 	|	NOT AccrualValues.NotActual";
 	Query.SetParameter("Date", Date);
 	Query.SetParameter("EmployeeOrPosition", EmployeeOrPosition);
+	Query.SetParameter("CalculationType", Parameters.CalculationType);
 	QueryResult = Query.Execute();
 	QuerySelection = QueryResult.Select();
 	

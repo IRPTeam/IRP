@@ -1,0 +1,155 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mdclass:Catalog xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:core="http://g5.1c.ru/v8/dt/mcore" xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="f14b9526-9a8b-4cb4-a9fc-99fa6f904ef0">
+  <producedTypes>
+    <objectType typeId="b6e12331-d8c5-4fa4-a4ad-7a125c4dfdcf" valueTypeId="7180d5c6-d931-4938-804e-20b7230fcc9e"/>
+    <refType typeId="0ba36752-c040-41c3-bf03-681f73bf68b0" valueTypeId="a8031a7d-0e20-4b2e-885a-24993d5c5fda"/>
+    <selectionType typeId="41c21059-a3c5-4731-83d5-6a5cf8359753" valueTypeId="e063c141-5aa1-44e1-ac01-d8a5708e07ca"/>
+    <listType typeId="30a45281-3789-472c-bb42-6285ad4d3880" valueTypeId="23b4bf13-b7fc-4866-ab20-cc78e769a40d"/>
+    <managerType typeId="9bbeb61e-d465-4c80-a44f-42fe1d670cab" valueTypeId="d48fed7f-1489-4cc3-be6c-46ca424a5386"/>
+  </producedTypes>
+  <name>SalaryCalculationType</name>
+  <synonym>
+    <key>en</key>
+    <value>Salary calculation type</value>
+  </synonym>
+  <useStandardCommands>true</useStandardCommands>
+  <inputByString>Catalog.SalaryCalculationType.StandardAttribute.Code</inputByString>
+  <fullTextSearchOnInputByString>DontUse</fullTextSearchOnInputByString>
+  <characteristics>
+    <characteristicTypes>Catalog.AddAttributeAndPropertySets.TabularSection.Properties</characteristicTypes>
+    <keyField>Catalog.AddAttributeAndPropertySets.TabularSection.Properties.Attribute.Property</keyField>
+    <typesFilterField>Catalog.AddAttributeAndPropertySets.TabularSection.Properties.StandardAttribute.Ref</typesFilterField>
+    <typesFilterValue xsi:type="core:ReferenceValue">
+      <value>Catalog.AddAttributeAndPropertySets.Catalog_SalaryCalculationType</value>
+    </typesFilterValue>
+    <dataPathField>Catalog.AddAttributeAndPropertySets.TabularSection.Properties.StandardAttribute.Ref</dataPathField>
+    <characteristicValues>InformationRegister.AddProperties</characteristicValues>
+    <objectField>InformationRegister.AddProperties.Dimension.Object</objectField>
+    <typeField>InformationRegister.AddProperties.Dimension.Property</typeField>
+    <valueField>InformationRegister.AddProperties.Resource.Value</valueField>
+  </characteristics>
+  <characteristics>
+    <characteristicTypes>Catalog.AddAttributeAndPropertySets.TabularSection.Attributes</characteristicTypes>
+    <keyField>Catalog.AddAttributeAndPropertySets.TabularSection.Attributes.Attribute.Attribute</keyField>
+    <typesFilterField>Catalog.AddAttributeAndPropertySets.TabularSection.Attributes.StandardAttribute.Ref</typesFilterField>
+    <typesFilterValue xsi:type="core:ReferenceValue">
+      <value>Catalog.AddAttributeAndPropertySets.Catalog_SalaryCalculationType</value>
+    </typesFilterValue>
+    <dataPathField>Catalog.AddAttributeAndPropertySets.TabularSection.Attributes.StandardAttribute.Ref</dataPathField>
+    <characteristicValues>Catalog.SalaryCalculationType.TabularSection.AddAttributes</characteristicValues>
+    <objectField>Catalog.SalaryCalculationType.TabularSection.AddAttributes.StandardAttribute.Ref</objectField>
+    <typeField>Catalog.SalaryCalculationType.TabularSection.AddAttributes.Attribute.Property</typeField>
+    <valueField>Catalog.SalaryCalculationType.TabularSection.AddAttributes.Attribute.Value</valueField>
+  </characteristics>
+  <createOnInput>Use</createOnInput>
+  <dataLockControlMode>Managed</dataLockControlMode>
+  <fullTextSearch>Use</fullTextSearch>
+  <objectPresentation>
+    <key>en</key>
+    <value>Salary calculation type</value>
+  </objectPresentation>
+  <listPresentation>
+    <key>en</key>
+    <value>Salary calculation types</value>
+  </listPresentation>
+  <levelCount>2</levelCount>
+  <foldersOnTop>true</foldersOnTop>
+  <codeLength>3</codeLength>
+  <codeType>String</codeType>
+  <codeAllowedLength>Variable</codeAllowedLength>
+  <checkUnique>true</checkUnique>
+  <autonumbering>true</autonumbering>
+  <defaultPresentation>AsDescription</defaultPresentation>
+  <editType>InDialog</editType>
+  <choiceMode>BothWays</choiceMode>
+  <defaultObjectForm>Catalog.SalaryCalculationType.Form.ItemForm</defaultObjectForm>
+  <defaultListForm>Catalog.SalaryCalculationType.Form.ListForm</defaultListForm>
+  <defaultChoiceForm>Catalog.SalaryCalculationType.Form.ChoiceForm</defaultChoiceForm>
+  <tabularSections uuid="f8b0198e-0734-497e-86ed-033a6301a86f">
+    <producedTypes>
+      <objectType typeId="af8d2a1a-4262-4cbc-998a-e44f0f4608da" valueTypeId="9fdd3d0d-a573-4fef-9968-e7ca0fcde220"/>
+      <rowType typeId="2ae29754-e1ac-4e67-9791-23ab12ff9933" valueTypeId="8018f60a-c4a6-40b1-a149-956ffaa7fced"/>
+    </producedTypes>
+    <name>AddAttributes</name>
+    <synonym>
+      <key>en</key>
+      <value>Additional attributes</value>
+    </synonym>
+    <attributes uuid="93e0dbf3-c7ca-4078-9001-68017d600995">
+      <name>Property</name>
+      <synonym>
+        <key>en</key>
+        <value>Property</value>
+      </synonym>
+      <type>
+        <types>ChartOfCharacteristicTypesRef.AddAttributeAndProperty</types>
+      </type>
+      <minValue xsi:type="core:UndefinedValue"/>
+      <maxValue xsi:type="core:UndefinedValue"/>
+      <dataHistory>Use</dataHistory>
+      <fullTextSearch>Use</fullTextSearch>
+    </attributes>
+    <attributes uuid="b24398b0-f098-466a-8f55-18fdbb009207">
+      <name>Value</name>
+      <synonym>
+        <key>en</key>
+        <value>Value</value>
+      </synonym>
+      <type>
+        <types>Characteristic.AddAttributeAndProperty</types>
+      </type>
+      <minValue xsi:type="core:UndefinedValue"/>
+      <maxValue xsi:type="core:UndefinedValue"/>
+      <choiceParameterLinks>
+        <name>Filter.Owner</name>
+        <field>Catalog.SalaryCalculationType.TabularSection.AddAttributes.Attribute.Property</field>
+      </choiceParameterLinks>
+      <dataHistory>Use</dataHistory>
+      <fullTextSearch>Use</fullTextSearch>
+    </attributes>
+    <attributes uuid="2e6a64d2-f8f6-41ca-9e97-27306d540148">
+      <name>SearchLiteral</name>
+      <synonym>
+        <key>en</key>
+        <value>Search literal</value>
+      </synonym>
+      <type>
+        <types>String</types>
+        <stringQualifiers>
+          <length>500</length>
+        </stringQualifiers>
+      </type>
+      <minValue xsi:type="core:UndefinedValue"/>
+      <maxValue xsi:type="core:UndefinedValue"/>
+      <dataHistory>Use</dataHistory>
+      <fullTextSearch>Use</fullTextSearch>
+    </attributes>
+  </tabularSections>
+  <forms uuid="fdec129e-0d2b-4cd8-b6b9-3e9ea44c4e7b">
+    <name>ItemForm</name>
+    <synonym>
+      <key>en</key>
+      <value>Item form</value>
+    </synonym>
+    <usePurposes>PersonalComputer</usePurposes>
+    <usePurposes>MobileDevice</usePurposes>
+  </forms>
+  <forms uuid="718bf270-19f5-40de-9e3f-0be6fd8ea6b1">
+    <name>ListForm</name>
+    <synonym>
+      <key>en</key>
+      <value>List form</value>
+    </synonym>
+    <usePurposes>PersonalComputer</usePurposes>
+    <usePurposes>MobileDevice</usePurposes>
+  </forms>
+  <forms uuid="57fa31b4-6fd3-4ccf-968b-8d0e3be1e97f">
+    <name>ChoiceForm</name>
+    <synonym>
+      <key>en</key>
+      <value>Choice form</value>
+    </synonym>
+    <usePurposes>PersonalComputer</usePurposes>
+    <usePurposes>MobileDevice</usePurposes>
+  </forms>
+</mdclass:Catalog>

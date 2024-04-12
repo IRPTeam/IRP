@@ -245,19 +245,19 @@ Scenario: _001 test data
 		And Delay "5"
 	* Posting Work order
 		Given I open hyperlink "e1cib/list/Document.WorkOrder"
-		Then "Work order" window is opened
+		Then "Work orders" window is opened
 		Then I select all lines of "List" table
 		And in the table "List" I click the button named "ListContextMenuPost"
 		And Delay "5"
 	* Posting Work sheet
 		Given I open hyperlink "e1cib/list/Document.WorkSheet"
-		Then "Work sheet" window is opened
+		Then "Work sheets" window is opened
 		Then I select all lines of "List" table
 		And in the table "List" I click the button named "ListContextMenuPost"
 		And Delay "5"
 	* Posting AdditionalCostAllocation
 		Given I open hyperlink "e1cib/list/Document.AdditionalCostAllocation"
-		Then "Additional cost allocation" window is opened
+		Then "Additional cost allocations" window is opened
 		Then I select all lines of "List" table
 		And in the table "List" I click the button named "ListContextMenuPost"
 		And Delay "5"

@@ -1712,6 +1712,7 @@ Procedure MultiSetTransactionType_CashExpense(Parameters, Results) Export
 	ResourceToBinding.Insert("OtherCompany"     , BindOtherCompany(Parameters));
 	ResourceToBinding.Insert("Employee"         , BindPaymentListEmployee(Parameters));
 	ResourceToBinding.Insert("PaymentPeriod"    , BindPaymentListPaymentPeriod(Parameters));
+	ResourceToBinding.Insert("CalculationType"  , BindPaymentListCalculationType(Parameters));
 	ResourceToBinding.Insert("ProfitLossCenter" , BindPaymentListProfitLossCenter(Parameters));
 	ResourceToBinding.Insert("ExpenseType"      , BindPaymentListExpenseType(Parameters));
 	ResourceToBinding.Insert("FinancialMovementTypeOtherCompany" , BindPaymentListFinancialMovementTypeOtherCompany(Parameters));
@@ -1902,6 +1903,7 @@ Procedure StepClearByTransactionTypeCashExpense(Parameters, Chain) Export
 		Options.Partner                  = GetPaymentListPartner(Parameters, Row.Key);
 		Options.Employee                 = GetPaymentListEmployee(Parameters, Row.Key);
 		Options.PaymentPeriod            = GetPaymentListPaymentPeriod(Parameters, Row.Key);
+		Options.CalculationType          = GetPaymentListCalculationType(Parameters, Row.Key);
 		Options.ProfitLossCenter         = GetPaymentListProfitLossCenter(Parameters, Row.Key);
 		Options.ExpenseType              = GetPaymentListExpenseType(Parameters, Row.Key);
 		Options.FinancialMovementTypeOtherCompany = GetPaymentListFinancialMovementTypeOtherCompany(Parameters, Row.Key);

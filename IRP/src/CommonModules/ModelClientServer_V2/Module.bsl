@@ -3828,6 +3828,7 @@ Function ClearByTransactionTypeCashExpenseOptions() Export
 		|Employee,
 		|OtherCompany,
 		|PaymentPeriod,
+		|CalculationType,
 		|ProfitLossCenter,
 		|ExpenseType,
 		|FinancialMovementTypeOtherCompany");
@@ -3839,6 +3840,7 @@ Function ClearByTransactionTypeCashExpenseExecute(Options) Export
 	Result.Insert("Employee"      , Options.Employee);
 	Result.Insert("OtherCompany"  , Options.OtherCompany);
 	Result.Insert("PaymentPeriod" , Options.PaymentPeriod);
+	Result.Insert("CalculationType"  , Options.CalculationType);
 	Result.Insert("ProfitLossCenter" , Options.ProfitLossCenter);
 	Result.Insert("ExpenseType"      , Options.ExpenseType);
 	Result.Insert("FinancialMovementTypeOtherCompany" , Options.FinancialMovementTypeOtherCompany);
@@ -3863,7 +3865,8 @@ Function ClearByTransactionTypeCashExpenseExecute(Options) Export
 		|Partner,
 		|Employee,
 		|OtherCompany,
-		|PaymentPeriod";
+		|PaymentPeriod,
+		|CalculationType";
 	EndIf;
 		
 	ArrayOfAttributes = New Array();

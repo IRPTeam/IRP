@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mdclass:CommonCommand xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="3f7c425c-d193-4525-a93f-21188a8b6ce3">
+  <name>OpenVendorPrices</name>
+  <synonym>
+    <key>en</key>
+    <value>Open vendor prices</value>
+  </synonym>
+  <group>CommandGroup.Service</group>
+  <commandParameterType>
+    <types>DocumentRef.PurchaseInvoice</types>
+    <types>DocumentRef.PurchaseOrder</types>
+  </commandParameterType>
+  <representation>Auto</representation>
+</mdclass:CommonCommand>

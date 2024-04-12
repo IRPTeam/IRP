@@ -101,7 +101,13 @@ Scenario: _0155100 preparation (Retail SO - Retail SC - Retail GR)
 			| "Documents.BankReceipt.FindByNumber(317).GetObject().Write(DocumentWriteMode.Posting);"    |
 		And I execute 1C:Enterprise script at server
 			| "Documents.CashReceipt.FindByNumber(317).GetObject().Write(DocumentWriteMode.Posting);"    |
-		
+		When Create document RetailSalesOrder - RetailShipmentConfirmation - RetailSalesReceipt (different Branch)
+		And I execute 1C:Enterprise script at server
+			| "Documents.SalesOrder.FindByNumber(720).GetObject().Write(DocumentWriteMode.Posting);"    |
+		And I execute 1C:Enterprise script at server
+			| "Documents.RetailShipmentConfirmation.FindByNumber(721).GetObject().Write(DocumentWriteMode.Posting);"    |
+		And I execute 1C:Enterprise script at server
+			| "Documents.RetailSalesReceipt.FindByNumber(1708).GetObject().Write(DocumentWriteMode.Posting);"    |
 	
 Scenario: _01551001 check preparation
 	When check preparation	
@@ -978,29 +984,122 @@ Scenario: _0155275 add items in POS	and link lines to basis document
 				
 
 					
-							
-				
-				
-		
-				
-		
-						
-				
-						
-				
-				
-				
-		
-		
-
-							
-			
-						
-
-						
-		
-		
-				
-		
-				
-
+Scenario: _0155276 check links with different Branches for IM documents (RSO-RSC-RSR-RGR-RRR)
+	And I close all client application windows
+	* Create RGR (Branch Shop 01)
+		Given I open hyperlink "e1cib/list/Document.RetailGoodsReceipt"
+		And I click "Create" button
+		* Filling main details
+			And I select from the drop-down list named "Company" by "Main Company" string
+			And I activate field named "ItemListLineNumber" in "ItemList" table
+			And I select "Return from customer" exact value from "Transaction type" drop-down list
+			And I activate field named "ItemListLineNumber" in "ItemList" table
+			And I select from the drop-down list named "Store" by "02" string
+			And I select from the drop-down list named "RetailCustomer" by "Daniel Smith" string
+			And I select from the drop-down list named "Branch" by "Shop 01" string
+		* Filling items
+			And in the table "ItemList" I click "Add" button
+			And I activate "Item" field in "ItemList" table
+			And I select current line in "ItemList" table
+			And I select "product 5" from "Item" drop-down list by string in "ItemList" table
+			And I activate "Serial lot numbers" field in "ItemList" table
+			And I click choice button of "Serial lot numbers" attribute in "ItemList" table
+			And in the table "SerialLotNumbers" I click "Add" button
+			And I click choice button of the attribute named "SerialLotNumbersSerialLotNumber" in "SerialLotNumbers" table
+			And I go to line in "List" table
+				| 'Owner' | 'Serial number' |
+				| 'ODS'   | '90808979899'   |
+			And I select current line in "List" table
+			And I activate "Quantity" field in "SerialLotNumbers" table
+			And I input "1,000" text in "Quantity" field of "SerialLotNumbers" table
+			And I finish line editing in "SerialLotNumbers" table
+			And I click "Ok" button
+			And I finish line editing in "ItemList" table
+			And in the table "ItemList" I click "Add" button
+			And I activate "Item" field in "ItemList" table
+			And I select current line in "ItemList" table
+			And I select "scarf" from "Item" drop-down list by string in "ItemList" table
+			And I finish line editing in "ItemList" table
+		* Link to RSC
+			And in the table "ItemList" I click "Link unlink basis documents" button
+			And I go to line in "ItemListRows" table
+				| '#' | 'Quantity' | 'Row presentation'         | 'Store'    | 'Unit' |
+				| '1' | '1,000'    | 'Product 5 with SLN (ODS)' | 'Store 02' | 'pcs'  |
+			And I activate field named "ItemListRowsRowPresentation" in "ItemListRows" table
+			And I go to line in "BasisesTree" table
+				| 'Branch'       | 'Company'      | 'Currency' | 'Price'  | 'Quantity' | 'Row presentation'         | 'Unit' |
+				| 'Front office' | 'Main Company' | 'TRY'      | '100,00' | '2,000'    | 'Product 5 with SLN (ODS)' | 'pcs'  |
+			And I click the button named "Link"
+			And I go to line in "ItemListRows" table
+				| '#' | 'Quantity' | 'Row presentation' | 'Store'    | 'Unit' |
+				| '2' | '1,000'    | 'Scarf (XS/Red)'   | 'Store 02' | 'pcs'  |
+			And I go to line in "BasisesTree" table
+				| 'Branch'       | 'Company'      | 'Currency' | 'Price' | 'Quantity' | 'Row presentation' | 'Unit' |
+				| 'Front office' | 'Main Company' | 'TRY'      | '70,00' | '2,000'    | 'Scarf (XS/Red)'   | 'pcs'  |
+			And I click the button named "Link"
+			And I set checkbox "Linked documents"
+		* Check
+			And "ResultsTree" table became equal
+				| 'Row presentation'                                           | 'Company'      | 'Branch'       | 'Quantity' | 'Unit' | 'Price'  | 'Currency' |
+				| 'Sales order 720 dated 02.04.2024 12:00:00'                  | 'Main Company' | 'Front office' | ''         | ''     | ''       | ''         |
+				| 'Retail shipment confirmation 721 dated 09.04.2024 18:34:44' | 'Main Company' | 'Shop 01'      | ''         | ''     | ''       | ''         |
+				| 'Retail sales receipt 1 708 dated 09.04.2024 18:35:58'       | 'Main Company' | 'Front office' | ''         | ''     | ''       | ''         |
+				| 'Product 5 with SLN (ODS)'                                   | 'Main Company' | 'Front office' | '1,000'    | 'pcs'  | '100,00' | 'TRY'      |
+				| 'Scarf (XS/Red)'                                             | 'Main Company' | 'Front office' | '1,000'    | 'pcs'  | '70,00'  | 'TRY'      |
+	* Post RGR
+		And I click "Ok" button
+		And I click "Post" button
+		And I delete "$$NumberRGR06$$" variable
+		And I delete "$$RGR06$$" variable
+		And I delete "$$DateRGR06$$" variable
+		And I save the value of "Number" field as "$$NumberRGR06$$"
+		And I save the window as "$$RGR06$$"
+		And I save the value of the field named "Date" as "$$DateRGR06$$"		
+	* Create RRR
+		And I click "Sales return" button
+		And I click "Ok" button
+		* Change branch
+			And I move to "Other" tab
+			And I select from the drop-down list named "Branch" by "front" string
+			And I move to "Item list" tab
+			And "ItemList" table became equal
+				| '#' | 'Retail sales receipt'                                 | 'Item'               | 'Sales person' | 'Item key' | 'Profit loss center' | 'Dont calculate row' | 'Tax amount' | 'Serial lot numbers' | 'Unit' | 'Return reason' | 'Source of origins' | 'Quantity' | 'Price'  | 'Net amount' | 'Total amount' | 'Additional analytic' | 'Store'    | 'Revenue type' | 'Detail' | 'VAT' | 'Offers amount' | 'Landed cost' | 'Landed cost tax' |
+				| '1' | 'Retail sales receipt 1 708 dated 09.04.2024 18:35:58' | 'Product 5 with SLN' | ''             | 'ODS'      | ''                   | 'No'                 | '15,25'      | '90808979899'        | 'pcs'  | ''              | ''                  | '1,000'    | '100,00' | '84,75'      | '100,00'       | ''                    | 'Store 02' | ''             | ''       | '18%' | ''              | ''            | ''                |
+				| '2' | 'Retail sales receipt 1 708 dated 09.04.2024 18:35:58' | 'Scarf'              | ''             | 'XS/Red'   | ''                   | 'No'                 | '10,68'      | ''                   | 'pcs'  | ''              | ''                  | '1,000'    | '70,00'  | '59,32'      | '70,00'        | ''                    | 'Store 02' | ''             | ''       | '18%' | ''              | ''            | ''                |
+			And in the table "ItemList" I click "Goods receipts" button
+			And Delay 2
+			And "DocumentsTree" table became equal
+				| '#' | 'Presentation'             | 'Invoice' | 'QuantityInDocument' | 'Quantity' |
+				| ''  | 'Product 5 with SLN (ODS)' | '1,000'   | '1,000'              | '1,000'    |
+				| '1' | '$$RGR06$$'                | ''        | '1,000'              | '1,000'    |
+				| ''  | 'Scarf (XS/Red)'           | '1,000'   | '1,000'              | '1,000'    |
+				| '2' | '$$RGR06$$'                | ''        | '1,000'              | '1,000'    |
+		* Unlink and link
+			And I close "Linked documents" window
+			And in the table "ItemList" I click "Link unlink basis documents" button	
+			And I change checkbox "Linked documents"
+			And in the table "ResultsTree" I click "Unlink all" button
+			And I click "Auto link" button
+			And I click "Ok" button
+		* Check
+			And "ItemList" table became equal
+				| '#' | 'Retail sales receipt'                                 | 'Item'               | 'Sales person' | 'Item key' | 'Profit loss center' | 'Dont calculate row' | 'Tax amount' | 'Serial lot numbers' | 'Unit' | 'Return reason' | 'Source of origins' | 'Quantity' | 'Price'  | 'Net amount' | 'Total amount' | 'Additional analytic' | 'Store'    | 'Revenue type' | 'Detail' | 'VAT' | 'Offers amount' | 'Landed cost' | 'Landed cost tax' |
+				| '1' | 'Retail sales receipt 1 708 dated 09.04.2024 18:35:58' | 'Product 5 with SLN' | ''             | 'ODS'      | ''                   | 'No'                 | '15,25'      | '90808979899'        | 'pcs'  | ''              | ''                  | '1,000'    | '100,00' | '84,75'      | '100,00'       | ''                    | 'Store 02' | ''             | ''       | '18%' | ''              | ''            | ''                |
+				| '2' | 'Retail sales receipt 1 708 dated 09.04.2024 18:35:58' | 'Scarf'              | ''             | 'XS/Red'   | ''                   | 'No'                 | '10,68'      | ''                   | 'pcs'  | ''              | ''                  | '1,000'    | '70,00'  | '59,32'      | '70,00'        | ''                    | 'Store 02' | ''             | ''       | '18%' | ''              | ''            | ''                |
+			And in the table "ItemList" I click "Goods receipts" button
+			And Delay 2
+			And "DocumentsTree" table became equal
+				| '#' | 'Presentation'             | 'Invoice' | 'QuantityInDocument' | 'Quantity' |
+				| ''  | 'Product 5 with SLN (ODS)' | '1,000'   | '1,000'              | '1,000'    |
+				| '1' | '$$RGR06$$'                | ''        | '1,000'              | '1,000'    |
+				| ''  | 'Scarf (XS/Red)'           | '1,000'   | '1,000'              | '1,000'    |
+				| '2' | '$$RGR06$$'                | ''        | '1,000'              | '1,000'    |
+			And I click "Post" button
+			And I delete "$$NumberRRR06$$" variable
+			And I save the value of "Number" field as "$$NumberRRR06$$"
+			And I click "Post and close" button	
+			Given I open hyperlink "e1cib/list/Document.RetailReturnReceipt"		
+			And "ItemList" table contains lines
+				| 'Number'          |
+				| '$$NumberRRR06$$' |
+			And I close all client application windows			

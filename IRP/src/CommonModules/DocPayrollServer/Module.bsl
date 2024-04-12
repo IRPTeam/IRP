@@ -245,6 +245,8 @@ Function GetPayrolls_Accrual(Parameters) Export
 	AccrualValues.Columns.Add("Value", New TypeDescription("Number"));
 	AccrualValues.Columns.Add("Period", New TypeDescription("Date"));
 	
+	ArrayForDelete = New Array();
+	
 	For Each Row In QueryTable Do
 		NewAccrualValue = AccrualValues.Add();
 		FillPropertyValues(NewAccrualValue, Row);
@@ -255,7 +257,13 @@ Function GetPayrolls_Accrual(Parameters) Export
 			NewAccrualValue.Period  = AccrualValue.Period;
 			
 			Row.Accrual = AccrualValue.Accrual;
+		Else
+			ArrayForDelete.Add(Row);
 		EndIf; 	
+	EndDo;
+	
+	For Each ItemForDelete In ArrayForDelete Do
+		QueryTable.Delete(ItemForDelete);
 	EndDo;
 	
 	CalculatedSalary = _MonthlySalary(AccrualValues, Parameters.BeginDate, Parameters.EndDate);
@@ -301,11 +309,13 @@ Function GetPayrolls_Accrual(Parameters) Export
 	|FROM
 	|	AccumulationRegister.R9560T_AdditionalAccrual.Turnovers(BEGINOFPERIOD(&BeginDate, DAY), ENDOFPERIOD(&EndDate, DAY),,
 	|		Company = &Company
-	|	AND Branch = &Branch) AS R9560T_AdditionalAccrualTurnovers";
+	|	AND Branch = &Branch
+	|	AND AccrualType.CalculationType = &CalculationType) AS R9560T_AdditionalAccrualTurnovers";
 	Query.SetParameter("BeginDate", Parameters.BeginDate);
 	Query.SetParameter("EndDate", Parameters.EndDate);
 	Query.SetParameter("Company", Parameters.Company);
 	Query.SetParameter("Branch", Parameters.Branch);
+	Query.SetParameter("CalculationType", Parameters.CalculationType);
 	QueryResult = Query.Execute();
 	QuerySelection = QueryResult.Select();
 	While QuerySelection.Next() Do
@@ -741,6 +751,7 @@ Function PutChoiceDataToServerStorage(ChoiceData, FormUUID) Export
 	ValueTable = New ValueTable();
 	ValueTable.Columns.Add("Employee");
 	ValueTable.Columns.Add("PaymentPeriod");
+	ValueTable.Columns.Add("CalculationType");
 	ValueTable.Columns.Add("NetAmount");
 	ValueTable.Columns.Add("TotalAmount");
 	
@@ -750,7 +761,7 @@ Function PutChoiceDataToServerStorage(ChoiceData, FormUUID) Export
 		NewRow.NetAmount  = Row.Amount;
 		NewRow.TotalAmount = Row.Amount;
 	EndDo;
-	GroupColumn = "Employee, PaymentPeriod";
+	GroupColumn = "Employee, PaymentPeriod, CalculationType";
 	SumColumn = "NetAmount, TotalAmount";
 	ValueTable.GroupBy(GroupColumn, SumColumn);
 	Address = PutToTempStorage(ValueTable, FormUUID);

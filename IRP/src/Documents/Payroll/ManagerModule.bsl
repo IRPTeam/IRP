@@ -280,6 +280,7 @@ Function R9510B_SalaryPayment()
 		|	CashAdvanceDeductionList.Branch,
 		|	CashAdvanceDeductionList.Currency,
 		|	CashAdvanceDeductionList.PaymentPeriod,
+		|	Undefined,
 		|	CashAdvanceDeductionList.Employee,
 		|	CashAdvanceDeductionList.Amount
 		|FROM

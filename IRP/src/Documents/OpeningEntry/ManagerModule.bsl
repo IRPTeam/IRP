@@ -790,6 +790,7 @@ Function SalaryPayment()
 		   |	SalaryPayment.Currency,
 		   |	SalaryPayment.Employee,
 		   |	SalaryPayment.PaymentPeriod,
+		   |	SalaryPayment.CalculationType,
 		   |	SalaryPayment.Amount AS Amount,
 		   |	SalaryPayment.Ref.Date AS Period,
 		   |	SalaryPayment.Key

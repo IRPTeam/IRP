@@ -1079,7 +1079,28 @@ Scenario: _0155276 check links with different Branches for IM documents (RSO-RSC
 			And in the table "ItemList" I click "Link unlink basis documents" button	
 			And I change checkbox "Linked documents"
 			And in the table "ResultsTree" I click "Unlink all" button
-			And I click "Auto link" button
+			Then "Link / unlink document row" window is opened
+			And I go to line in "ItemListRows" table
+				| '#' | 'Quantity' | 'Row presentation' | 'Store'    | 'Unit' |
+				| '2' | '1,000'    | 'Scarf (XS/Red)'   | 'Store 02' | 'pcs'  |
+			And I activate field named "ItemListRowsRowPresentation" in "ItemListRows" table
+			And I go to line in "BasisesTree" table
+				| 'Branch'  | 'Company'      | 'Row presentation' |
+				| 'Shop 01' | 'Main Company' | '$$RGR06$$'        |
+			And I go to line in "BasisesTree" table
+				| 'Branch'  | 'Company'      | 'Currency' | 'Price' | 'Quantity' | 'Row presentation' | 'Unit' |
+				| 'Shop 01' | 'Main Company' | 'TRY'      | '70,00' | '1,000'    | 'Scarf (XS/Red)'   | 'pcs'  |
+			And I click the button named "Link"
+			And I go to line in "ItemListRows" table
+				| '#' | 'Quantity' | 'Row presentation'         | 'Store'    | 'Unit' |
+				| '1' | '1,000'    | 'Product 5 with SLN (ODS)' | 'Store 02' | 'pcs'  |
+			And I go to line in "BasisesTree" table
+				| 'Branch'  | 'Company'      | 'Row presentation' |
+				| 'Shop 01' | 'Main Company' | '$$RGR06$$'        |
+			And I go to line in "BasisesTree" table
+				| 'Branch'  | 'Company'      | 'Currency' | 'Price'  | 'Quantity' | 'Row presentation'         | 'Unit' |
+				| 'Shop 01' | 'Main Company' | 'TRY'      | '100,00' | '1,000'    | 'Product 5 with SLN (ODS)' | 'pcs'  |
+			And I click the button named "Link"
 			And I click "Ok" button
 		* Check
 			And "ItemList" table became equal
@@ -1094,12 +1115,21 @@ Scenario: _0155276 check links with different Branches for IM documents (RSO-RSC
 				| '1' | '$$RGR06$$'                | ''        | '1,000'              | '1,000'    |
 				| ''  | 'Scarf (XS/Red)'           | '1,000'   | '1,000'              | '1,000'    |
 				| '2' | '$$RGR06$$'                | ''        | '1,000'              | '1,000'    |
+			And I click "Ok" button
+			And I move to "Payments" tab
+			And in the table "Payments" I click the button named "PaymentsAdd"
+			And I activate "Payment type" field in "Payments" table
+			And I select current line in "Payments" table
+			And I select "cash" from "Payment type" drop-down list by string in "Payments" table
+			And I activate field named "PaymentsAmount" in "Payments" table
+			And I input "170,00" text in the field named "PaymentsAmount" of "Payments" table
+			And I finish line editing in "Payments" table	
 			And I click "Post" button
 			And I delete "$$NumberRRR06$$" variable
 			And I save the value of "Number" field as "$$NumberRRR06$$"
 			And I click "Post and close" button	
 			Given I open hyperlink "e1cib/list/Document.RetailReturnReceipt"		
-			And "ItemList" table contains lines
+			And "List" table contains lines
 				| 'Number'          |
 				| '$$NumberRRR06$$' |
 			And I close all client application windows			

@@ -698,16 +698,7 @@ Function NeedAutoLinkAtServer(RowInfo)
 	If BasisesTable.Count() = 1 Then
 		FillPropertyValues(NeedAutoLink.BaseInfo, BasisesTable[0]);
 		NeedAutoLink.IsOk = True;
-	Else
-		
-		BasisesTable.Columns.Add("Priority");
-		Priority = 0;
-		For Each Row In BasisesTable Do
-			Row.Priority = Priority;
-			Priority = Priority - 1; 
-		EndDo;   
-		BasisesTable.Sort("Priority");
-		
+	Else		
 		For Each Row In BasisesTable Do
 			If RowInfo.SelectedRow.QuantityInBaseUnit = Row.QuantityInBaseUnit Then
 				FillPropertyValues(NeedAutoLink.BaseInfo, Row);

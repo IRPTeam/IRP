@@ -156,5 +156,6 @@
     <types>DocumentRef.RetailGoodsReceipt</types>
     <types>DocumentRef.CashExpense</types>
     <types>CatalogRef.FixedAssetsLedgerTypes</types>
+    <types>CatalogRef.SalaryCalculationType</types>
   </type>
 </mdclass:DefinedType>

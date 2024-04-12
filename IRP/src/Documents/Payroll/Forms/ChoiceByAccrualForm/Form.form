@@ -578,12 +578,6 @@ FROM
       <fields xsi:type="schema:DataCompositionSchemaDataSetField">
         <dataPath>CalculationType</dataPath>
         <field>CalculationType</field>
-        <role>
-          <dimension>true</dimension>
-          <accountTypeExpression></accountTypeExpression>
-          <balanceGroupName></balanceGroupName>
-          <accountField></accountField>
-        </role>
       </fields>
       <parameters>
         <name>Boundary</name>

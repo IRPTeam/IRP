@@ -145,6 +145,11 @@ Function GetLinkedDocumentsFilter_RGR(Object) Export
 	Filter.Insert("TransactionTypeRGR" , Object.TransactionType);
 		
 	Filter.Insert("Ref"                , Object.Ref);
+	
+	VisibleFields = New Structure();
+	VisibleFields.Insert("Company");
+	VisibleFields.Insert("Branch");
+	Filter.Insert("VisibleFields", VisibleFields);
 	Return Filter;
 EndFunction
 
@@ -293,6 +298,7 @@ Procedure FillVisibleFields(BasisesTree, VisibleFields) Export
 				Continue;
 			EndIf;
 			TopLevel[Field.Key + "Presentation"] = TopLevel.Basis[Field.Key];
+			FillVisibleFields(TopLevel, VisibleFields);
 		EndDo;
 	EndDo;
 EndProcedure

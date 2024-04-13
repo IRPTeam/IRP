@@ -233,13 +233,13 @@ Scenario: _0202602 create RRR based on RGR (with RSR)
 		And in the table "ItemList" I click "Link unlink basis documents" button
 		And I set checkbox "Linked documents"
 		And "ResultsTree" table contains lines
-			| 'Row presentation'                                     | 'Company'      | 'Branch'  | 'Quantity' | 'Unit' | 'Price'  | 'Currency' |
-			| 'Retail sales receipt 1 203 dated 02.08.2023 14:36:25' | 'Main Company' | 'Shop 01' | ''         | ''     | ''       | ''         |
-			| 'Retail goods receipt*'                                | ''             | ''        | ''         | ''     | ''       | ''         |
-			| 'Shirt (38/Black)'                                     | ''             | ''        | '2,000'    | 'pcs'  | '350,00' | 'TRY'      |
-			| 'Retail sales receipt 1 204 dated 02.08.2023 14:37:42' | 'Main Company' | 'Shop 01' | ''         | ''     | ''       | ''         |
-			| 'Retail goods receipt*'                                | ''             | ''        | ''         | ''     | ''       | ''         |
-			| 'Product 1 with SLN (PZU)'                             | ''             | ''        | '2,000'    | 'pcs'  | '400,00' | 'TRY'      |
+			| 'Row presentation'                                     | 'Company'      | 'Branch'                  | 'Quantity' | 'Unit' | 'Price'  | 'Currency' |
+			| 'Retail sales receipt 1 203 dated 02.08.2023 14:36:25' | 'Main Company' | 'Shop 01'                 | ''         | ''     | ''       | ''         |
+			| 'Retail goods receipt*'                                | 'Main Company' | 'Distribution department' | ''         | ''     | ''       | ''         |
+			| 'Shirt (38/Black)'                                     | 'Main Company' | 'Distribution department' | '2,000'    | 'pcs'  | '350,00' | 'TRY'      |
+			| 'Retail sales receipt 1 204 dated 02.08.2023 14:37:42' | 'Main Company' | 'Shop 01'                 | ''         | ''     | ''       | ''         |
+			| 'Retail goods receipt*'                                | 'Main Company' | 'Distribution department' | ''         | ''     | ''       | ''         |
+			| 'Product 1 with SLN (PZU)'                             | 'Main Company' | 'Distribution department' | '2,000'    | 'pcs'  | '400,00' | 'TRY'      |
 	* Unlink 
 		And in the table "ResultsTree" I click "Unlink all" button
 		And I click "Ok" button	

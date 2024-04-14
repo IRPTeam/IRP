@@ -43,6 +43,7 @@ Scenario: _085000 preparation (Cash expence and Cash revenue)
 		When Create document CashExpense objects
 		When Create document CashRevenue objects
 		When Create catalog Partners objects
+		When Create catalog SalaryCalculationType objects
 		When Create catalog CashAccounts objects (Second Company)
 		When Create information register Taxes records (VAT)
 	* Post
@@ -609,6 +610,12 @@ Scenario: _085017 check Cash expense (Other company salary)
 				| 'Description'             |
 				| 'Third (only salary)'     |
 			And I select current line in "List" table
+			And I activate "Calculation type" field in "PaymentList" table
+			And I click choice button of "Calculation type" attribute in "PaymentList" table
+			And I go to line in "List" table
+				| 'Description'             |
+				| 'Salary'     |
+			And I select current line in "List" table
 			And I activate "VAT" field in "PaymentList" table
 			And I select "0%" exact value from "VAT" drop-down list in "PaymentList" table
 			And I finish line editing in "PaymentList" table
@@ -640,6 +647,12 @@ Scenario: _085017 check Cash expense (Other company salary)
 			And I go to line in "List" table
 				| 'Description'             |
 				| 'Third (only salary)'     |
+			And I select current line in "List" table
+			And I activate "Calculation type" field in "PaymentList" table
+			And I click choice button of "Calculation type" attribute in "PaymentList" table
+			And I go to line in "List" table
+				| 'Description'             |
+				| 'Bonus'     |
 			And I select current line in "List" table
 			And I activate "VAT" field in "PaymentList" table
 			And I select "0%" exact value from "VAT" drop-down list in "PaymentList" table

@@ -58,6 +58,7 @@ Procedure SetVisibilityAvailability(Object, Form)
 	Form.Items.EditCurrenciesAccrual.Enabled = Not Form.ReadOnly;
 	Form.Items.EditCurrenciesDeduction.Enabled = Not Form.ReadOnly;
 	Form.Items.EditCurrenciesCashAdvanceDeduction.Enabled = Not Form.ReadOnly;
+	Form.Items.EditCurrenciesTaxes.Enabled = Not Form.ReadOnly;
 	
 	Form.Items.FillAccrual.Enabled = Not Form.ReadOnly;
 	Form.Items.FillDeduction.Enabled = Not Form.ReadOnly;	
@@ -146,6 +147,30 @@ Procedure CurrencyOnChange(Item)
 	DocPayrollClient.CurrencyOnChange(Object, ThisObject, Item);
 EndProcedure
 	
+#EndRegion
+
+#Region SALARY_TAX_LIST
+
+&AtClient
+Procedure SalaryTaxListSelection(Item, RowSelected, Field, StandardProcessing)
+	DocPayrollClient.PayrollListsSelection(Object, ThisObject, Item, RowSelected, Field, StandardProcessing);
+EndProcedure
+
+&AtClient
+Procedure SalaryTaxListBeforeAddRow(Item, Cancel, Clone, Parent, IsFolder, Parameter)
+	DocPayrollClient.PayrollListsBeforeAddRow(Object, ThisObject, Item, Cancel, Clone, Parent, IsFolder, Parameter);
+EndProcedure
+
+&AtClient
+Procedure SalaryTaxListBeforeDeleteRow(Item, Cancel)
+	DocPayrollClient.PayrollListsBeforeDeleteRow(Object, ThisObject, Item, Cancel);
+EndProcedure
+
+&AtClient
+Procedure SalaryTaxListAfterDeleteRow(Item)
+	DocPayrollClient.PayrollListsAfterDeleteRow(Object, ThisObject, Item);
+EndProcedure
+
 #EndRegion
 
 #Region PAYROLL_LISTS_LIST
@@ -416,6 +441,11 @@ EndProcedure
 &AtClient
 Procedure EditCurrenciesDeduction(Command)
 	EditCurrencies(Command, "DeductionList");
+EndProcedure
+
+&AtClient
+Procedure EditCurrenciesTaxes(Command)
+	EditCurrencies(Command, "SalaryTaxList");
 EndProcedure
 
 &AtClient

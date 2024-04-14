@@ -98,6 +98,7 @@ Function GetQueryTextsSecondaryTables()
 	QueryArray.Add(AccrualList());
 	QueryArray.Add(DeductionList());
 	QueryArray.Add(CashAdvanceDeductionList());
+	QueryArray.Add(SalaryTaxList());
 	Return QueryArray;
 EndFunction
 
@@ -109,6 +110,7 @@ Function GetQueryTextsMasterTables()
 	QueryArray.Add(R9510B_SalaryPayment());
 	QueryArray.Add(R9545T_PaidVacations());
 	QueryArray.Add(R9555T_PaidSickLeaves());
+	QueryArray.Add(R5041B_TaxesPayable());
 	Return QueryArray;
 EndFunction
 
@@ -177,6 +179,28 @@ Function CashAdvanceDeductionList()
 		   |	CashAdvanceDeductionList.Ref = &Ref";
 EndFunction
 
+Function SalaryTaxList()
+	Return
+		"SELECT
+		|	PayrollSalaryTaxList.Ref.Date AS Period,
+		|	PayrollSalaryTaxList.Key AS Key,
+		|	PayrollSalaryTaxList.Ref.Company AS Company,
+		|	PayrollSalaryTaxList.Ref.Branch AS Branch,
+		|	PayrollSalaryTaxList.Ref.Currency AS Currency,
+		|	PayrollSalaryTaxList.Ref.PaymentPeriod AS PaymentPeriod,
+		|	PayrollSalaryTaxList.Ref.CalculationType AS CalculationType,
+		|	PayrollSalaryTaxList.Employee AS Employee,
+		|	PayrollSalaryTaxList.Amount AS Amount,
+		|	PayrollSalaryTaxList.Tax.TaxPayer = VALUE(Enum.TaxPayers.Employee) AS IsEmployeePayer,
+		|	PayrollSalaryTaxList.Tax.TaxPayer = VALUE(Enum.TaxPayers.Company) AS IsCompanyPayer,
+		|	PayrollSalaryTaxList.Tax
+		|INTO SalaryTaxList
+		|FROM
+		|	Document.Payroll.SalaryTaxList AS PayrollSalaryTaxList
+		|WHERE
+		|	PayrollSalaryTaxList.Ref = &Ref"	
+EndFunction
+
 #EndRegion
 
 #Region Posting_MainTables
@@ -212,7 +236,23 @@ Function R5022T_Expenses()
 		|FROM
 		|	DeductionList
 		|WHERE
-		|	NOT DeductionList.IsRevenue";
+		|	NOT DeductionList.IsRevenue
+		|
+		|UNION ALL
+		|
+		|SELECT
+		|	SalaryTaxList.Period,
+		|	SalaryTaxList.Key,
+		|	SalaryTaxList.Company,
+		|	SalaryTaxList.Branch,
+		|	SalaryTaxList.Currency,
+		|	SalaryTaxList.ExpenseType,
+		|	SalaryTaxList.ProfitLossCenter,
+		|	SalaryTaxList.Amount
+		|FROM
+		|	SalaryTaxList
+		|WHERE
+		|	SalaryTaxist.IsCompanyPayer";
 EndFunction
 
 Function R5021T_Revenues()
@@ -286,7 +326,25 @@ Function R9510B_SalaryPayment()
 		|FROM
 		|	CashAdvanceDeductionList
 		|WHERE
-		|	TRUE";
+		|	TRUE
+		|
+		|UNION ALL
+		|
+		|SELECT
+		|	VALUE(AccumulationRecordType.Expense),
+		|	SalaryTaxList.Period,
+		|	SalaryTaxList.Key,
+		|	SalaryTaxList.Company,
+		|	SalaryTaxList.Branch,
+		|	SalaryTaxList.Currency,
+		|	SalaryTaxList.PaymentPeriod,
+		|	SalaryTaxList.CalculationType,
+		|	SalaryTaxList.Employee,
+		|	SalaryTaxList.Amount
+		|FROM
+		|	SalaryTaxList
+		|WHERE
+		|	SalaryTaxist.IsEmployeePayer";
 EndFunction
 
 Function R3027B_EmployeeCashAdvance()
@@ -334,6 +392,22 @@ Function R9555T_PaidSickLeaves()
 		|WHERE
 		|	AccrualList.PaidSickLeaveDays <> 0";	
 EndFunction
+
+Function R5041B_TaxesPayable()
+	Return
+		"SELECT
+		|	VALUE(AccumulationRecordType.Receipt),
+		|	SalaryTaxList.Period,
+		|	SalaryTaxList.Key,
+		|	SalaryTaxList.Company,
+		|	SalaryTaxList.Tax,
+		|	SalaryTaxList.Amount
+		|INTO R5041B_TaxesPayable
+		|FROM
+		|	SalaryTaxList
+		|WHERE
+		|	TRUE";
+EndFUnction
 
 #EndRegion
 

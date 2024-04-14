@@ -26,4 +26,5 @@ EndProcedure
 
 Procedure Filling(FillingData, FillingText, StandardProcessing)
 	ThisObject.Type = Enums.TaxType.Rate;
+	ThisObject.TaxPayer = Enums.TaxPayers.Company;
 EndProcedure

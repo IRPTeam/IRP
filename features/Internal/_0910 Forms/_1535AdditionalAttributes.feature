@@ -5025,6 +5025,59 @@ Scenario: _015400724 check that additional attributes and properties are display
 			| 'Test 1'     | ''         |
 	And I close all client application windows
 
+Scenario: _015400725 check that additional attributes and properties are displayed on the form without reopening (catalog SalaryCalculationType)
+	Then I check for the "AddAttributeAndPropertyValues" charts of characteristic types with the Description Eng "Test"
+	* Create SalaryCalculationType
+		Given I open hyperlink "e1cib/list/Catalog.SalaryCalculationType"
+		And I click the button named "FormCreate"
+		And I input "Test" text in the field named "Description_en"
+		And I select "Day" exact value from the drop-down list named "Type"
+		And I click "Save and close" button
+	* Open SalaryCalculationType form
+		Given I open hyperlink "e1cib/list/Catalog.SalaryCalculationType"
+		And I go to line in "List" table
+			| Description    |
+			| Test           |
+		And I select current line in "List" table
+		And field "Test" is not present on the form
+	* Adding by selected SalaryCalculationType additional Test attribute without closing the form
+		Given I open hyperlink "e1cib/list/Catalog.AddAttributeAndPropertySets"
+		And I go to line in "List" table
+			| Predefined data name       |
+			| Catalog_SalaryCalculationType    |
+		And I select current line in "List" table
+		And in the table "Attributes" I click the button named "AttributesAdd"
+		And I click choice button of "Attribute" attribute in "Attributes" table
+		And I go to line in "List" table
+			| Description    |
+			| Test           |
+		And I select current line in "List" table
+		And I finish line editing in "Attributes" table
+		And I move to "Properties" tab
+		And in the table "Properties" I click the button named "PropertiesAdd"
+		And I click choice button of "Property" attribute in "Properties" table
+		And I go to line in "List" table
+			| 'Description'    |
+			| 'Test 1'         |
+		And I select current line in "List" table
+		And I finish line editing in "Properties" table
+		And I click "Save and close" button
+	* Check that the additional Test attribute has been displayed on the form
+		When in opened panel I select "Salary calculation type"
+		// When I click command interface button "UI groups"
+		And field "Test" is present on the form
+		And I click Select button of "Test" field
+		And I go to line in "List" table
+			| 'Description'    |
+			| 'Test 1'         |
+		And I select current line in "List" table
+		Then "Test" form attribute became equal to "Test 1"
+		And I click "Add properties" button
+		And "Properties" table became equal
+			| 'Property'   | 'Value'    |
+			| 'Test 1'     | ''         |
+	And I close all client application windows
+
 Scenario: _01540064 check that additional attributes and properties are displayed on the form without reopening (Catalog_ChequeBonds)
 	Then I check for the "AddAttributeAndPropertyValues" charts of characteristic types with the Description Eng "Test"
 	* Open a form to create Catalog_ChequeBonds

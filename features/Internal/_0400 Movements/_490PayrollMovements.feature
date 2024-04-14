@@ -56,6 +56,7 @@ Scenario: _040990 preparation (payroll movements)
 		When Create catalog ExpenseAndRevenueTypes objects
 		When Create catalog Companies objects (second company Ferron BP)
 		When Create catalog PartnersBankAccounts objects
+		When Create catalog SalaryCalculationType objects
 		When Create information register Taxes records (VAT)
 	When Create Document discount
 	* Add plugin for discount
@@ -154,28 +155,26 @@ Scenario: _040994 check Payroll movements by the Register  "R9510 Salary payment
 			| 'Number'    |
 			| '4'         |
 	* Check movements by the Register  "R9510 Salary payment" 
-		And I click "Registrations report" button
+		And I click "Registrations report info" button
 		And I select "R9510 Salary payment" exact value from "Register" drop-down list
 		And I click "Generate report" button
 		Then "ResultTable" spreadsheet document is equal
-			| 'Payroll 4 dated 27.04.2023 12:39:37'   | ''              | ''                      | ''            | ''               | ''               | ''                  | ''                      | ''           | ''                       | ''                                |
-			| 'Document registrations records'        | ''              | ''                      | ''            | ''               | ''               | ''                  | ''                      | ''           | ''                       | ''                                |
-			| 'Register  "R9510 Salary payment"'      | ''              | ''                      | ''            | ''               | ''               | ''                  | ''                      | ''           | ''                       | ''                                |
-			| ''                                      | 'Record type'   | 'Period'                | 'Resources'   | 'Dimensions'     | ''               | ''                  | ''                      | ''           | ''                       | ''                                |
-			| ''                                      | ''              | ''                      | 'Amount'      | 'Company'        | 'Branch'         | 'Employee'          | 'Payment period'        | 'Currency'   | 'Transaction currency'   | 'Multi currency movement type'    |
-			| ''                                      | 'Receipt'       | '27.04.2023 12:39:37'   | '136,96'      | 'Main Company'   | 'Front office'   | 'David Romanov'     | 'Third (only salary)'   | 'USD'        | 'TRY'                    | 'Reporting currency'              |
-			| ''                                      | 'Receipt'       | '27.04.2023 12:39:37'   | '256,8'       | 'Main Company'   | 'Front office'   | 'Alexander Orlov'   | 'Third (only salary)'   | 'USD'        | 'TRY'                    | 'Reporting currency'              |
-			| ''                                      | 'Receipt'       | '27.04.2023 12:39:37'   | '800'         | 'Main Company'   | 'Front office'   | 'David Romanov'     | 'Third (only salary)'   | 'TRY'        | 'TRY'                    | 'Local currency'                  |
-			| ''                                      | 'Receipt'       | '27.04.2023 12:39:37'   | '800'         | 'Main Company'   | 'Front office'   | 'David Romanov'     | 'Third (only salary)'   | 'TRY'        | 'TRY'                    | 'en description is empty'         |
-			| ''                                      | 'Receipt'       | '27.04.2023 12:39:37'   | '1 500'       | 'Main Company'   | 'Front office'   | 'Alexander Orlov'   | 'Third (only salary)'   | 'TRY'        | 'TRY'                    | 'Local currency'                  |
-			| ''                                      | 'Receipt'       | '27.04.2023 12:39:37'   | '1 500'       | 'Main Company'   | 'Front office'   | 'Alexander Orlov'   | 'Third (only salary)'   | 'TRY'        | 'TRY'                    | 'en description is empty'         |
-			| ''                                      | 'Expense'       | '27.04.2023 12:39:37'   | '5,14'        | 'Main Company'   | 'Front office'   | 'Alexander Orlov'   | 'Third (only salary)'   | 'USD'        | 'TRY'                    | 'Reporting currency'              |
-			| ''                                      | 'Expense'       | '27.04.2023 12:39:37'   | '8,56'        | 'Main Company'   | 'Front office'   | 'David Romanov'     | 'Third (only salary)'   | 'USD'        | 'TRY'                    | 'Reporting currency'              |
-			| ''                                      | 'Expense'       | '27.04.2023 12:39:37'   | '11,98'       | 'Main Company'   | 'Front office'   | 'David Romanov'     | 'Third (only salary)'   | 'USD'        | 'TRY'                    | 'Reporting currency'              |
-			| ''                                      | 'Expense'       | '27.04.2023 12:39:37'   | '30'          | 'Main Company'   | 'Front office'   | 'Alexander Orlov'   | 'Third (only salary)'   | 'TRY'        | 'TRY'                    | 'Local currency'                  |
-			| ''                                      | 'Expense'       | '27.04.2023 12:39:37'   | '30'          | 'Main Company'   | 'Front office'   | 'Alexander Orlov'   | 'Third (only salary)'   | 'TRY'        | 'TRY'                    | 'en description is empty'         |
-			| ''                                      | 'Expense'       | '27.04.2023 12:39:37'   | '50'          | 'Main Company'   | 'Front office'   | 'David Romanov'     | 'Third (only salary)'   | 'TRY'        | 'TRY'                    | 'Local currency'                  |
-			| ''                                      | 'Expense'       | '27.04.2023 12:39:37'   | '50'          | 'Main Company'   | 'Front office'   | 'David Romanov'     | 'Third (only salary)'   | 'TRY'        | 'TRY'                    | 'en description is empty'         |
-			| ''                                      | 'Expense'       | '27.04.2023 12:39:37'   | '70'          | 'Main Company'   | 'Front office'   | 'David Romanov'     | 'Third (only salary)'   | 'TRY'        | 'TRY'                    | 'Local currency'                  |
-			| ''                                      | 'Expense'       | '27.04.2023 12:39:37'   | '70'          | 'Main Company'   | 'Front office'   | 'David Romanov'     | 'Third (only salary)'   | 'TRY'        | 'TRY'                    | 'en description is empty'         |
+			| 'Payroll 4 dated 27.04.2023 12:39:37' | ''                    | ''           | ''             | ''             | ''                | ''                    | ''         | ''                     | ''                             | ''                 | ''       |
+			| 'Register  "R9510 Salary payment"'    | ''                    | ''           | ''             | ''             | ''                | ''                    | ''         | ''                     | ''                             | ''                 | ''       |
+			| ''                                    | 'Period'              | 'RecordType' | 'Company'      | 'Branch'       | 'Employee'        | 'Payment period'      | 'Currency' | 'Transaction currency' | 'Multi currency movement type' | 'Calculation type' | 'Amount' |
+			| ''                                    | '27.04.2023 12:39:37' | 'Receipt'    | 'Main Company' | 'Front office' | 'Alexander Orlov' | 'Third (only salary)' | 'TRY'      | 'TRY'                  | 'Local currency'               | 'Salary'           | '1 500'  |
+			| ''                                    | '27.04.2023 12:39:37' | 'Receipt'    | 'Main Company' | 'Front office' | 'Alexander Orlov' | 'Third (only salary)' | 'TRY'      | 'TRY'                  | 'en description is empty'      | 'Salary'           | '1 500'  |
+			| ''                                    | '27.04.2023 12:39:37' | 'Receipt'    | 'Main Company' | 'Front office' | 'Alexander Orlov' | 'Third (only salary)' | 'USD'      | 'TRY'                  | 'Reporting currency'           | 'Salary'           | '256,8'  |
+			| ''                                    | '27.04.2023 12:39:37' | 'Receipt'    | 'Main Company' | 'Front office' | 'David Romanov'   | 'Third (only salary)' | 'TRY'      | 'TRY'                  | 'Local currency'               | 'Salary'           | '800'    |
+			| ''                                    | '27.04.2023 12:39:37' | 'Receipt'    | 'Main Company' | 'Front office' | 'David Romanov'   | 'Third (only salary)' | 'TRY'      | 'TRY'                  | 'en description is empty'      | 'Salary'           | '800'    |
+			| ''                                    | '27.04.2023 12:39:37' | 'Receipt'    | 'Main Company' | 'Front office' | 'David Romanov'   | 'Third (only salary)' | 'USD'      | 'TRY'                  | 'Reporting currency'           | 'Salary'           | '136,96' |
+			| ''                                    | '27.04.2023 12:39:37' | 'Expense'    | 'Main Company' | 'Front office' | 'Alexander Orlov' | 'Third (only salary)' | 'TRY'      | 'TRY'                  | 'Local currency'               | 'Salary'           | '30'     |
+			| ''                                    | '27.04.2023 12:39:37' | 'Expense'    | 'Main Company' | 'Front office' | 'Alexander Orlov' | 'Third (only salary)' | 'TRY'      | 'TRY'                  | 'en description is empty'      | 'Salary'           | '30'     |
+			| ''                                    | '27.04.2023 12:39:37' | 'Expense'    | 'Main Company' | 'Front office' | 'Alexander Orlov' | 'Third (only salary)' | 'USD'      | 'TRY'                  | 'Reporting currency'           | 'Salary'           | '5,14'   |
+			| ''                                    | '27.04.2023 12:39:37' | 'Expense'    | 'Main Company' | 'Front office' | 'David Romanov'   | 'Third (only salary)' | 'TRY'      | 'TRY'                  | 'Local currency'               | 'Salary'           | '70'     |
+			| ''                                    | '27.04.2023 12:39:37' | 'Expense'    | 'Main Company' | 'Front office' | 'David Romanov'   | 'Third (only salary)' | 'TRY'      | 'TRY'                  | 'Local currency'               | 'Salary'           | '50'     |
+			| ''                                    | '27.04.2023 12:39:37' | 'Expense'    | 'Main Company' | 'Front office' | 'David Romanov'   | 'Third (only salary)' | 'TRY'      | 'TRY'                  | 'en description is empty'      | 'Salary'           | '70'     |
+			| ''                                    | '27.04.2023 12:39:37' | 'Expense'    | 'Main Company' | 'Front office' | 'David Romanov'   | 'Third (only salary)' | 'TRY'      | 'TRY'                  | 'en description is empty'      | 'Salary'           | '50'     |
+			| ''                                    | '27.04.2023 12:39:37' | 'Expense'    | 'Main Company' | 'Front office' | 'David Romanov'   | 'Third (only salary)' | 'USD'      | 'TRY'                  | 'Reporting currency'           | 'Salary'           | '11,98'  |
+			| ''                                    | '27.04.2023 12:39:37' | 'Expense'    | 'Main Company' | 'Front office' | 'David Romanov'   | 'Third (only salary)' | 'USD'      | 'TRY'                  | 'Reporting currency'           | 'Salary'           | '8,56'   |	
 		And I close all client application windows

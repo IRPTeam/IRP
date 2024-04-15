@@ -168,6 +168,7 @@ Function CashAdvanceDeductionList()
 		   |	CashAdvanceDeductionList.Ref.Branch AS Branch,
 		   |	CashAdvanceDeductionList.Ref.Currency AS Currency,
 		   |	CashAdvanceDeductionList.Ref.PaymentPeriod AS PaymentPeriod,
+		   |	CashAdvanceDeductionList.Ref.CalculationType AS CalculationType,
 		   |	CashAdvanceDeductionList.Employee,
 		   |	CashAdvanceDeductionList.Amount
 		   |INTO CashAdvanceDeductionList
@@ -280,7 +281,7 @@ Function R9510B_SalaryPayment()
 		|	CashAdvanceDeductionList.Branch,
 		|	CashAdvanceDeductionList.Currency,
 		|	CashAdvanceDeductionList.PaymentPeriod,
-		|	Undefined,
+		|	CashAdvanceDeductionList.CalculationType,
 		|	CashAdvanceDeductionList.Employee,
 		|	CashAdvanceDeductionList.Amount
 		|FROM

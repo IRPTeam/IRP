@@ -22,8 +22,7 @@ EndProcedure
 Function GetItemKeyArray(DocRef)
 	
 	If CommonFunctionsClientServer.ObjectHasProperty(DocRef, "ItemList") Then
-		MainTable = "ItemList";
-		
+				
 		TempTable = DocRef.ItemList.Unload();
 		Array = TempTable.UnloadColumn("ItemKey");
 		

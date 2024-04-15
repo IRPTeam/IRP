@@ -59,6 +59,8 @@ Scenario: _097700 preparation (Сheck payroll)
 		When Create catalog PaymentTypes objects
 		When Create catalog CashAccounts objects (POS)
 		When Create catalog SalaryCalculationType objects
+		When Create catalog Taxes objects (Salary tax)
+		When Create catalog Partners, Companies, Agreements for Tax authority
 	* Data for salary
 		When Create catalog EmployeePositions objects
 		When Create catalog Partners objects (Employee for salary)
@@ -828,6 +830,10 @@ Scenario: _097716 create payroll
 		And I input "01.11.2023" text in "Begin date" field
 		And I input "30.11.2023" text in "End date" field
 		And in the table "AccrualList" I click the button named "FillAccrual"
+		And I select from the drop-down list named "Partner" by "Tax authority" string
+		And I move to the next attribute
+		Then the form attribute named "LegalName" became equal to "Tax authority"
+		Then the form attribute named "Agreement" became equal to "Tax"	
 	* Check
 		And "AccrualList" table became equal
 			| '#' | 'Amount'   | 'Employee'        | 'Position'     | 'Accrual type' | 'Expense type' | 'Profit loss center' |
@@ -835,6 +841,104 @@ Scenario: _097716 create payroll
 			| '2' | '7 000,00' | 'Anna Petrova'    | 'Sales person' | 'Salary'       | 'Expense'      | 'Shop 01'            |
 			| '3' | '471,70'   | 'Arina Brown'     | 'Sales person' | 'Salary'       | 'Expense'      | 'Shop 01'            |
 			| '4' | '9 545,45' | 'David Romanov'   | 'Manager'      | 'Salary'       | 'Expense'      | 'Shop 01'            |
+	* Fill taxes
+		And I move to "Taxes" tab
+		* First Employee
+			And in the table "SalaryTaxList" I click the button named "SalaryTaxListAdd"
+			And I activate field named "SalaryTaxListEmployee" in "SalaryTaxList" table
+			And I select current line in "SalaryTaxList" table
+			And I select "Alexander Orlov" by string from the drop-down list named "SalaryTaxListEmployee" in "SalaryTaxList" table
+			And I activate "Tax" field in "SalaryTaxList" table
+			And I click choice button of "Tax" attribute in "SalaryTaxList" table
+			And I go to line in "List" table
+				| 'Description'                 |
+				| 'Social Insurance (Employee)' |
+			And I select current line in "List" table
+			And I activate field named "SalaryTaxListExpenseType" in "SalaryTaxList" table
+			And I select "Expense" by string from the drop-down list named "SalaryTaxListExpenseType" in "SalaryTaxList" table
+			And I activate field named "SalaryTaxListProfitLossCenter" in "SalaryTaxList" table
+			And I select "Shop 01" by string from the drop-down list named "SalaryTaxListProfitLossCenter" in "SalaryTaxList" table
+			And I activate field named "SalaryTaxListAmount" in "SalaryTaxList" table
+			And I select current line in "SalaryTaxList" table
+			And I input "700,00" text in the field named "SalaryTaxListAmount" of "SalaryTaxList" table
+			And I finish line editing in "SalaryTaxList" table
+			And in the table "SalaryTaxList" I click the button named "SalaryTaxListAdd"
+			And I activate field named "SalaryTaxListEmployee" in "SalaryTaxList" table
+			And I select "Alexander Orlov" by string from the drop-down list named "SalaryTaxListEmployee" in "SalaryTaxList" table
+			And I activate "Tax" field in "SalaryTaxList" table
+			And I select "Income Tax (Emloyee)" from "Tax" drop-down list by string in "SalaryTaxList" table
+			And I activate field named "SalaryTaxListExpenseType" in "SalaryTaxList" table
+			And I select "Expense" by string from the drop-down list named "SalaryTaxListExpenseType" in "SalaryTaxList" table
+			And I activate field named "SalaryTaxListProfitLossCenter" in "SalaryTaxList" table
+			And I select "Shop 01" by string from the drop-down list named "SalaryTaxListProfitLossCenter" in "SalaryTaxList" table
+			And I activate field named "SalaryTaxListAmount" in "SalaryTaxList" table
+			And I input "700,00" text in the field named "SalaryTaxListAmount" of "SalaryTaxList" table
+			And I finish line editing in "SalaryTaxList" table
+			And in the table "SalaryTaxList" I click the button named "SalaryTaxListAdd"
+			And I activate field named "SalaryTaxListEmployee" in "SalaryTaxList" table
+			And I select "Alexander Orlov" by string from the drop-down list named "SalaryTaxListEmployee" in "SalaryTaxList" table
+			And I activate "Tax" field in "SalaryTaxList" table
+			And I select "Single Social Contribution (Company)" from "Tax" drop-down list by string in "SalaryTaxList" table
+			And I activate field named "SalaryTaxListExpenseType" in "SalaryTaxList" table
+			And I select "Expense" by string from the drop-down list named "SalaryTaxListExpenseType" in "SalaryTaxList" table
+			And I activate field named "SalaryTaxListProfitLossCenter" in "SalaryTaxList" table
+			And I select "Shop 01" by string from the drop-down list named "SalaryTaxListProfitLossCenter" in "SalaryTaxList" table
+			And I activate field named "SalaryTaxListAmount" in "SalaryTaxList" table
+			And I input "1 000,00" text in the field named "SalaryTaxListAmount" of "SalaryTaxList" table
+			And I finish line editing in "SalaryTaxList" table
+		* Second Employee	
+			And in the table "SalaryTaxList" I click the button named "SalaryTaxListAdd"
+			And I activate field named "SalaryTaxListEmployee" in "SalaryTaxList" table
+			And I select current line in "SalaryTaxList" table
+			And I select "Anna Petrova" by string from the drop-down list named "SalaryTaxListEmployee" in "SalaryTaxList" table
+			And I activate "Tax" field in "SalaryTaxList" table
+			And I click choice button of "Tax" attribute in "SalaryTaxList" table
+			And I go to line in "List" table
+				| 'Description'                 |
+				| 'Social Insurance (Employee)' |
+			And I select current line in "List" table
+			And I activate field named "SalaryTaxListExpenseType" in "SalaryTaxList" table
+			And I select "Expense" by string from the drop-down list named "SalaryTaxListExpenseType" in "SalaryTaxList" table
+			And I activate field named "SalaryTaxListProfitLossCenter" in "SalaryTaxList" table
+			And I select "Shop 01" by string from the drop-down list named "SalaryTaxListProfitLossCenter" in "SalaryTaxList" table
+			And I activate field named "SalaryTaxListAmount" in "SalaryTaxList" table
+			And I select current line in "SalaryTaxList" table
+			And I input "700,00" text in the field named "SalaryTaxListAmount" of "SalaryTaxList" table
+			And I finish line editing in "SalaryTaxList" table
+			And in the table "SalaryTaxList" I click the button named "SalaryTaxListAdd"
+			And I activate field named "SalaryTaxListEmployee" in "SalaryTaxList" table
+			And I select "Anna Petrova" by string from the drop-down list named "SalaryTaxListEmployee" in "SalaryTaxList" table
+			And I activate "Tax" field in "SalaryTaxList" table
+			And I select "Income Tax (Emloyee)" from "Tax" drop-down list by string in "SalaryTaxList" table
+			And I activate field named "SalaryTaxListExpenseType" in "SalaryTaxList" table
+			And I select "Expense" by string from the drop-down list named "SalaryTaxListExpenseType" in "SalaryTaxList" table
+			And I activate field named "SalaryTaxListProfitLossCenter" in "SalaryTaxList" table
+			And I select "Shop 01" by string from the drop-down list named "SalaryTaxListProfitLossCenter" in "SalaryTaxList" table
+			And I activate field named "SalaryTaxListAmount" in "SalaryTaxList" table
+			And I input "700,00" text in the field named "SalaryTaxListAmount" of "SalaryTaxList" table
+			And I finish line editing in "SalaryTaxList" table
+			And in the table "SalaryTaxList" I click the button named "SalaryTaxListAdd"
+			And I activate field named "SalaryTaxListEmployee" in "SalaryTaxList" table
+			And I select "Anna Petrova" by string from the drop-down list named "SalaryTaxListEmployee" in "SalaryTaxList" table
+			And I activate "Tax" field in "SalaryTaxList" table
+			And I select "Single Social Contribution (Company)" from "Tax" drop-down list by string in "SalaryTaxList" table
+			And I activate field named "SalaryTaxListExpenseType" in "SalaryTaxList" table
+			And I select "Expense" by string from the drop-down list named "SalaryTaxListExpenseType" in "SalaryTaxList" table
+			And I activate field named "SalaryTaxListProfitLossCenter" in "SalaryTaxList" table
+			And I select "Shop 01" by string from the drop-down list named "SalaryTaxListProfitLossCenter" in "SalaryTaxList" table
+			And I activate field named "SalaryTaxListAmount" in "SalaryTaxList" table
+			And I input "1 000,00" text in the field named "SalaryTaxListAmount" of "SalaryTaxList" table
+			And I finish line editing in "SalaryTaxList" table
+	* Check
+		And "SalaryTaxList" table became equal
+			| '#' | 'Amount'   | 'Employee'        | 'Tax'                                  | 'Tax payer' | 'Expense type' | 'Profit loss center' |
+			| '1' | '700,00'   | 'Alexander Orlov' | 'Social Insurance (Employee)'          | 'Employee'  | 'Expense'      | 'Shop 01'            |
+			| '2' | '700,00'   | 'Alexander Orlov' | 'Income Tax (Emloyee)'                 | 'Employee'  | 'Expense'      | 'Shop 01'            |
+			| '3' | '1 000,00' | 'Alexander Orlov' | 'Single Social Contribution (Company)' | 'Company'   | 'Expense'      | 'Shop 01'            |
+			| '4' | '700,00'   | 'Anna Petrova'    | 'Social Insurance (Employee)'          | 'Employee'  | 'Expense'      | 'Shop 01'            |
+			| '5' | '700,00'   | 'Anna Petrova'    | 'Income Tax (Emloyee)'                 | 'Employee'  | 'Expense'      | 'Shop 01'            |
+			| '6' | '1 000,00' | 'Anna Petrova'    | 'Single Social Contribution (Company)' | 'Company'   | 'Expense'      | 'Shop 01'            |			
+	* Post
 		And I click "Post" button	
 		And I delete "$$NumberPayroll$$" variable
 		And I save the value of "Number" field as "$$NumberPayroll$$"

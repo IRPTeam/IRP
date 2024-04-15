@@ -3172,6 +3172,10 @@ Function BindPartner(Parameters)
 		"StepChangeAgreementByPartner_AgreementTypeByTransactionType,
 		|StepChangeLegalNameByPartner");
 		
+	Binding.Insert("Payroll",
+		"StepChangeAgreementByPartner_AgreementTypeIsOther,
+		|StepChangeLegalNameByPartner");
+	
 	Return BindSteps("BindVoid", DataPath, Binding, Parameters, "BindPartner");
 EndFunction
 
@@ -5104,6 +5108,10 @@ Function BindAgreement(Parameters)
 		|StepItemListChangeTradeAgentFeePercentByAgreement,
 		|StepChangeTradeAgentFeeTypeByAgreement");
 	
+	Binding.Insert("Payroll",
+		"StepChangeCompanyByAgreement,
+		|StepChangeCurrencyByAgreement");
+	
 	Return BindSteps("BindVoid", DataPath, Binding, Parameters, "BindAgreement");
 EndFunction
 
@@ -5125,6 +5133,11 @@ EndProcedure
 // Agreement.ChangeAgreementByPartner.[AgreementTypeIsTradeAgent].Step
 Procedure StepChangeAgreementByPartner_AgreementTypeIsTradeAgent(Parameters, Chain) Export
 	StepChangeAgreementByPartner(Parameters, Chain, PredefinedValue("Enum.AgreementTypes.TradeAgent"), False);
+EndProcedure
+
+// Agreement.ChangeAgreementByPartner.[AgreementTypeIsOther].Step
+Procedure StepChangeAgreementByPartner_AgreementTypeIsOther(Parameters, Chain) Export
+	StepChangeAgreementByPartner(Parameters, Chain, PredefinedValue("Enum.AgreementTypes.Other"), False);
 EndProcedure
 
 // Agreement.ChangeAgreementByPartner.[AgreementTypeByTransactionType].Step

@@ -30,7 +30,9 @@ Procedure PostingCheckBeforeWrite(Ref, Cancel, PostingMode, Parameters, AddInfo 
 	Tables.R5021T_Revenues.Columns.Add("Key", Metadata.DefinedTypes.typeRowID.Type);
 	Tables.R9510B_SalaryPayment.Columns.Add("Key", Metadata.DefinedTypes.typeRowID.Type);
 	Tables.R3027B_EmployeeCashAdvance.Columns.Add("Key", Metadata.DefinedTypes.typeRowID.Type);
-
+	Tables.R5015B_OtherPartnersTransactions.Columns.Add("Key", Metadata.DefinedTypes.typeRowID.Type);
+	Tables.R5020B_PartnersBalance.Columns.Add("Key", Metadata.DefinedTypes.typeRowID.Type);
+	
 	PostingServer.FillPostingTables(Tables, Ref, QueryArray, Parameters);
 EndProcedure
 
@@ -98,6 +100,7 @@ Function GetQueryTextsSecondaryTables()
 	QueryArray.Add(AccrualList());
 	QueryArray.Add(DeductionList());
 	QueryArray.Add(CashAdvanceDeductionList());
+	QueryArray.Add(SalaryTaxList());
 	Return QueryArray;
 EndFunction
 
@@ -109,6 +112,8 @@ Function GetQueryTextsMasterTables()
 	QueryArray.Add(R9510B_SalaryPayment());
 	QueryArray.Add(R9545T_PaidVacations());
 	QueryArray.Add(R9555T_PaidSickLeaves());
+	QueryArray.Add(R5015B_OtherPartnersTransactions());
+	QueryArray.Add(R5020B_PartnersBalance());
 	Return QueryArray;
 EndFunction
 
@@ -178,6 +183,33 @@ Function CashAdvanceDeductionList()
 		   |	CashAdvanceDeductionList.Ref = &Ref";
 EndFunction
 
+Function SalaryTaxList()
+	Return
+		"SELECT
+		|	PayrollSalaryTaxList.Ref.Date AS Period,
+		|	PayrollSalaryTaxList.Key AS Key,
+		|	PayrollSalaryTaxList.Ref.Company AS Company,
+		|	PayrollSalaryTaxList.Ref.Branch AS Branch,
+		|	PayrollSalaryTaxList.Ref.Currency AS Currency,
+		|	PayrollSalaryTaxList.Ref.Partner AS Partner,
+		|	PayrollSalaryTaxList.Ref.LegalName AS LegalName,
+		|	PayrollSalaryTaxList.Ref.Agreement AS Agreement,
+		|	PayrollSalaryTaxList.Ref.PaymentPeriod AS PaymentPeriod,
+		|	PayrollSalaryTaxList.Ref.CalculationType AS CalculationType,
+		|	PayrollSalaryTaxList.Employee AS Employee,
+		|	PayrollSalaryTaxList.ExpenseType AS ExpenseType,
+		|	PayrollSalaryTaxList.ProfitLossCenter AS ProfitLossCenter,
+		|	PayrollSalaryTaxList.Amount AS Amount,
+		|	PayrollSalaryTaxList.Tax.TaxPayer = VALUE(Enum.TaxPayers.Employee) AS IsEmployeePayer,
+		|	PayrollSalaryTaxList.Tax.TaxPayer = VALUE(Enum.TaxPayers.Company) AS IsCompanyPayer,
+		|	PayrollSalaryTaxList.Tax
+		|INTO SalaryTaxList
+		|FROM
+		|	Document.Payroll.SalaryTaxList AS PayrollSalaryTaxList
+		|WHERE
+		|	PayrollSalaryTaxList.Ref = &Ref"	
+EndFunction
+
 #EndRegion
 
 #Region Posting_MainTables
@@ -213,7 +245,23 @@ Function R5022T_Expenses()
 		|FROM
 		|	DeductionList
 		|WHERE
-		|	NOT DeductionList.IsRevenue";
+		|	NOT DeductionList.IsRevenue
+		|
+		|UNION ALL
+		|
+		|SELECT
+		|	SalaryTaxList.Period,
+		|	SalaryTaxList.Key,
+		|	SalaryTaxList.Company,
+		|	SalaryTaxList.Branch,
+		|	SalaryTaxList.Currency,
+		|	SalaryTaxList.ExpenseType,
+		|	SalaryTaxList.ProfitLossCenter,
+		|	SalaryTaxList.Amount
+		|FROM
+		|	SalaryTaxList
+		|WHERE
+		|	SalaryTaxList.IsCompanyPayer";
 EndFunction
 
 Function R5021T_Revenues()
@@ -287,7 +335,25 @@ Function R9510B_SalaryPayment()
 		|FROM
 		|	CashAdvanceDeductionList
 		|WHERE
-		|	TRUE";
+		|	TRUE
+		|
+		|UNION ALL
+		|
+		|SELECT
+		|	VALUE(AccumulationRecordType.Expense),
+		|	SalaryTaxList.Period,
+		|	SalaryTaxList.Key,
+		|	SalaryTaxList.Company,
+		|	SalaryTaxList.Branch,
+		|	SalaryTaxList.Currency,
+		|	SalaryTaxList.PaymentPeriod,
+		|	SalaryTaxList.CalculationType,
+		|	SalaryTaxList.Employee,
+		|	SalaryTaxList.Amount
+		|FROM
+		|	SalaryTaxList
+		|WHERE
+		|	SalaryTaxList.IsEmployeePayer";
 EndFunction
 
 Function R3027B_EmployeeCashAdvance()
@@ -334,6 +400,31 @@ Function R9555T_PaidSickLeaves()
 		|	AccrualList AS AccrualList
 		|WHERE
 		|	AccrualList.PaidSickLeaveDays <> 0";	
+EndFunction
+
+Function R5015B_OtherPartnersTransactions()
+	Return 
+		"SELECT
+		|	VALUE(AccumulationRecordType.Expense) AS RecordType,
+		|	SalaryTaxList.Period,
+		|	SalaryTaxList.Company,
+		|	SalaryTaxList.Branch,
+		|	SalaryTaxList.Partner,
+		|	SalaryTaxList.LegalName,
+		|	SalaryTaxList.Currency,
+		|	SalaryTaxList.Agreement,
+		|	UNDEFINED AS Basis,
+		|	SalaryTaxList.Key,
+		|	SalaryTaxList.Amount AS Amount
+		|INTO R5015B_OtherPartnersTransactions
+		|FROM
+		|	SalaryTaxList AS SalaryTaxList
+		|WHERE
+		|	TRUE";
+EndFunction
+
+Function R5020B_PartnersBalance()
+	Return AccumulationRegisters.R5020B_PartnersBalance.R5020B_PartnersBalance_Payroll();
 EndFunction
 
 #EndRegion

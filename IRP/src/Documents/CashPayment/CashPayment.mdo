@@ -794,6 +794,28 @@
    <dataHistory>Use</dataHistory>
    <fullTextSearch>Use</fullTextSearch>
   </attributes>
+  <attributes uuid="b176ef48-f65e-432f-a76d-85643b7a72dd">
+   <name>CalculationType</name>
+   <synonym>
+    <key>en</key>
+    <value>Calculation type</value>
+   </synonym>
+   <synonym>
+    <key>ru</key>
+    <value>Вариант оплаты</value>
+   </synonym>
+   <synonym>
+    <key>tr</key>
+    <value>Hesaplama tipi</value>
+   </synonym>
+   <type>
+    <types>CatalogRef.SalaryCalculationType</types>
+   </type>
+   <minValue xsi:type="core:UndefinedValue"/>
+   <maxValue xsi:type="core:UndefinedValue"/>
+   <dataHistory>Use</dataHistory>
+   <fullTextSearch>Use</fullTextSearch>
+  </attributes>
  </tabularSections>
  <tabularSections uuid="eaf31d05-7f0d-4841-9fa3-9ab9aa12e70d">
   <producedTypes>

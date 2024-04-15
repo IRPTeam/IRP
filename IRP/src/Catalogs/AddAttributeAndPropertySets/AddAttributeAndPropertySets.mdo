@@ -920,6 +920,13 @@
     <value>149</value>
    </code>
   </items>
+  <items id="14341052-2325-4066-93a7-1385274365eb">
+   <name>Catalog_SalaryCalculationType</name>
+   <description/>
+   <code xsi:type="core:NumberValue">
+    <value>150</value>
+   </code>
+  </items>
  </predefined>
  <editType>InDialog</editType>
  <choiceMode>BothWays</choiceMode>

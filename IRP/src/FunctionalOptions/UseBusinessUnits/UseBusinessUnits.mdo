@@ -41,7 +41,6 @@
  <content>AccumulationRegister.R1012B_PurchaseOrdersInvoiceClosing.Dimension.Branch</content>
  <content>AccumulationRegister.R1021B_VendorsTransactions.Dimension.Branch</content>
  <content>AccumulationRegister.R1002T_PurchaseReturns.Dimension.Branch</content>
- <content>AccumulationRegister.R5041B_TaxesPayable.Dimension.Branch</content>
  <content>AccumulationRegister.R2012B_SalesOrdersInvoiceClosing.Dimension.Branch</content>
  <content>AccumulationRegister.R3015B_CashAdvance.Dimension.Branch</content>
  <content>Catalog.AdvancesKeys.Attribute.Branch</content>

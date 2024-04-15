@@ -2457,7 +2457,7 @@ Strings.Insert("AccountingInfo_01", NStr("en='Load complete';
 	|ru='Загрузка завершена';
 	|tr='Yükleme tamam'", Lang));
 Strings.Insert("AccountingInfo_02", NStr("en='<For all transaction types>';
-	|ru='Для всех видов операций';
+	|ru='<Для всех видов операций>';
 	|tr='<For all transaction types>'", Lang));
 
 Strings.Insert("AccountingJE_prefix_01", NStr("en='JE ';

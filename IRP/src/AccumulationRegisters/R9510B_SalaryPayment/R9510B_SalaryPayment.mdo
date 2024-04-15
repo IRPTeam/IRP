@@ -199,4 +199,26 @@
   <fullTextSearch>Use</fullTextSearch>
   <useInTotals>true</useInTotals>
  </dimensions>
+ <dimensions uuid="c5667240-f66a-4291-97fa-1f0e9006ebc6">
+  <name>CalculationType</name>
+  <synonym>
+   <key>en</key>
+   <value>Calculation type</value>
+  </synonym>
+  <synonym>
+   <key>ru</key>
+   <value>Вариант оплаты</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Hesaplama tipi</value>
+  </synonym>
+  <type>
+   <types>CatalogRef.SalaryCalculationType</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <useInTotals>true</useInTotals>
+ </dimensions>
 </mdclass:AccumulationRegister>

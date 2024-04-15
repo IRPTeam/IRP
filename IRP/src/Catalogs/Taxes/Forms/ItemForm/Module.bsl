@@ -43,9 +43,19 @@ EndProcedure
 
 &AtClientAtServerNoContext
 Procedure SetVisibilityAvailability(Object, Form)
+	IsSalaryTax = Object.Kind = PredefinedValue("Enum.TaxKind.Salary");
+	IsVatTax = Object.Kind = PredefinedValue("Enum.TaxKind.VAT");
 	UseTaxRate = Object.Type = PredefinedValue("Enum.TaxType.Rate");
-	Form.Items.TaxRates.Visible = UseTaxRate;
-	Form.Items.GroupTaxRates.Visible = UseTaxRate;
+	
+	Form.Items.TaxPayer.Visible = IsSalaryTax;
+	
+	Form.Items.Type.Visible = IsVatTax;
+	
+	Form.Items.TaxRates.Visible = UseTaxRate And IsVatTax;
+	Form.Items.GroupTaxRates.Visible = UseTaxRate And IsVatTax;
+	
+	Form.Items.UseDocuments.Visible = IsVatTax;
+	Form.Items.GroupUseDocuments.Visible = IsVatTax;
 	
 	For Each Row In Form.Object.UseDocuments Do
 		ArrayOfTransactionTypes = Object.TransactionTypes.FindRows(New Structure("DocumentName", Row.DocumentName));
@@ -147,6 +157,11 @@ EndFunction
 &AtClient
 Procedure TypeOnChange(Item)
 	SetVisibilityAvailability(Object, ThisObject);
+EndProcedure
+
+&AtClient
+Procedure KindOnChange(Item)
+	SetVisibilityAvailability(Object, ThisObject);	
 EndProcedure
 
 #Region AddAttributes

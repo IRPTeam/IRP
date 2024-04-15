@@ -5031,7 +5031,6 @@ Scenario: _015400725 check that additional attributes and properties are display
 		Given I open hyperlink "e1cib/list/Catalog.SalaryCalculationType"
 		And I click the button named "FormCreate"
 		And I input "Test" text in the field named "Description_en"
-		And I select "Day" exact value from the drop-down list named "Type"
 		And I click "Save and close" button
 	* Open SalaryCalculationType form
 		Given I open hyperlink "e1cib/list/Catalog.SalaryCalculationType"
@@ -5063,7 +5062,7 @@ Scenario: _015400725 check that additional attributes and properties are display
 		And I finish line editing in "Properties" table
 		And I click "Save and close" button
 	* Check that the additional Test attribute has been displayed on the form
-		When in opened panel I select "Salary calculation type"
+		When in opened panel I select "Salary calculation types"
 		// When I click command interface button "UI groups"
 		And field "Test" is present on the form
 		And I click Select button of "Test" field

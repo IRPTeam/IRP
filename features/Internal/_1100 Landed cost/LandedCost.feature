@@ -272,7 +272,7 @@ Scenario: _0011 check preparation
 Scenario: _002 creating Calculation movement costs
 	Given I open hyperlink "e1cib/list/Document.CalculationMovementCosts"
 	* Calculation movement costs for Main company (01/08-15/08)
-		Then "Calculation movement costs" window is opened
+		Then "Calculations movement costs" window is opened
 		And I click the button named "FormCreate"
 		And I click Select button of "Company" field
 		And I go to line in "List" table
@@ -813,7 +813,7 @@ Scenario: _006 changing Sales invoice and checking the mechanism for aligning th
 		And in the table "List" I click the button named "ListContextMenuPost"
 	* Calculation movement costs for Main company (19/08-20/08)
 		Given I open hyperlink "e1cib/list/Document.CalculationMovementCosts"
-		Then "Calculation movement costs" window is opened
+		Then "Calculations movement costs" window is opened
 		And I click the button named "FormCreate"
 		And I click Select button of "Company" field
 		And I go to line in "List" table

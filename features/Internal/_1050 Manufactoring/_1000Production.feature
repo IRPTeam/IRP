@@ -746,7 +746,7 @@ Scenario: _1011 check Production planning movements
 
 Scenario: _1035 create document Production
 	* Semiproduct
-		And In the command interface I select "Manufacturing" "Production"
+		And In the command interface I select "Manufacturing" "Productions"
 		And I click the button named "FormCreate"
 		* Filling in header info
 			And I click Select button of "Company" field

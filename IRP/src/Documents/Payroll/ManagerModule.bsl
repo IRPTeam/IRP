@@ -125,6 +125,7 @@ Function AccrualList()
 		|	AccrualList.Ref.Branch AS Branch,
 		|	AccrualList.Ref.Currency AS Currency,
 		|	AccrualList.Ref.PaymentPeriod AS PaymentPeriod,
+		|	AccrualList.Ref.CalculationType AS CalculationType,
 		|	AccrualList.Employee,
 		|	AccrualList.ExpenseType,
 		|	AccrualList.ProfitLossCenter,
@@ -146,6 +147,7 @@ Function DeductionList()
 		   |	DeductionList.Ref.Branch AS Branch,
 		   |	DeductionList.Ref.Currency AS Currency,
 		   |	DeductionList.Ref.PaymentPeriod AS PaymentPeriod,
+		   |	DeductionList.Ref.CalculationType AS CalculationType,
 		   |	DeductionList.Employee,
 		   |	DeductionList.ExpenseType,
 		   |	DeductionList.ProfitLossCenter,
@@ -166,6 +168,7 @@ Function CashAdvanceDeductionList()
 		   |	CashAdvanceDeductionList.Ref.Branch AS Branch,
 		   |	CashAdvanceDeductionList.Ref.Currency AS Currency,
 		   |	CashAdvanceDeductionList.Ref.PaymentPeriod AS PaymentPeriod,
+		   |	CashAdvanceDeductionList.Ref.CalculationType AS CalculationType,
 		   |	CashAdvanceDeductionList.Employee,
 		   |	CashAdvanceDeductionList.Amount
 		   |INTO CashAdvanceDeductionList
@@ -241,6 +244,7 @@ Function R9510B_SalaryPayment()
 		|	AccrualList.Branch,
 		|	AccrualList.Currency,
 		|	AccrualList.PaymentPeriod,
+		|	AccrualList.CalculationType,
 		|	AccrualList.Employee,
 		|	AccrualList.Amount
 		|INTO R9510B_SalaryPayment
@@ -259,6 +263,7 @@ Function R9510B_SalaryPayment()
 		|	DeductionList.Branch,
 		|	DeductionList.Currency,
 		|	DeductionList.PaymentPeriod,
+		|	DeductionList.CalculationType,
 		|	DeductionList.Employee,
 		|	DeductionList.Amount
 		|FROM
@@ -276,6 +281,7 @@ Function R9510B_SalaryPayment()
 		|	CashAdvanceDeductionList.Branch,
 		|	CashAdvanceDeductionList.Currency,
 		|	CashAdvanceDeductionList.PaymentPeriod,
+		|	CashAdvanceDeductionList.CalculationType,
 		|	CashAdvanceDeductionList.Employee,
 		|	CashAdvanceDeductionList.Amount
 		|FROM

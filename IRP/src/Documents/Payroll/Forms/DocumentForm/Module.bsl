@@ -392,6 +392,7 @@ Function FillPayrollListsAtServer(TypeColumnName, _Type)
 	FillingParameters.Insert("_Type"     , _Type);
 	FillingParameters.Insert("TypeColumnName" , TypeColumnName);
 	FillingParameters.Insert("Ref" , Object.Ref);
+	FillingParameters.Insert("CalculationType" , Object.CalculationType);
 	
 	If _Type = Enums.PayrollTypes.Accrual Then
 		Result = DocPayrollServer.GetPayrolls_Accrual(FillingParameters);

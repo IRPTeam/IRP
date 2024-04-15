@@ -1098,6 +1098,7 @@
   <catalogs>Catalog.Workstations</catalogs>
   <catalogs>Catalog.AgingPeriods</catalogs>
   <catalogs>Catalog.Incoterms</catalogs>
+  <catalogs>Catalog.SalaryCalculationType</catalogs>
   <documents>Document.AdditionalAccrual</documents>
   <documents>Document.AdditionalCostAllocation</documents>
   <documents>Document.AdditionalDeduction</documents>

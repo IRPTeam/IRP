@@ -112,11 +112,13 @@ Function GetPayrolls_Deduction(Parameters) Export
 	|FROM
 	|	AccumulationRegister.R9570T_AdditionalDeduction.Turnovers(BEGINOFPERIOD(&BeginDate, DAY), ENDOFPERIOD(&EndDate,
 	|		DAY),, Company = &Company
-	|	AND Branch = &Branch) AS R9570T_AdditionalDeductionTurnovers";
+	|	AND Branch = &Branch
+	|	AND DeductionType.CalculationType = &CalculationType) AS R9570T_AdditionalDeductionTurnovers";
 	Query.SetParameter("BeginDate", Parameters.BeginDate);
 	Query.SetParameter("EndDate", Parameters.EndDate);
 	Query.SetParameter("Company", Parameters.Company);
 	Query.SetParameter("Branch", Parameters.Branch);
+	Query.SetParameter("CalculationType", Parameters.CalculationType);
 	QueryResult = Query.Execute();
 	QuerySelection = QueryResult.Select();
 	While QuerySelection.Next() Do
@@ -243,17 +245,25 @@ Function GetPayrolls_Accrual(Parameters) Export
 	AccrualValues.Columns.Add("Value", New TypeDescription("Number"));
 	AccrualValues.Columns.Add("Period", New TypeDescription("Date"));
 	
+	ArrayForDelete = New Array();
+	
 	For Each Row In QueryTable Do
 		NewAccrualValue = AccrualValues.Add();
 		FillPropertyValues(NewAccrualValue, Row);
-		AccrualValue = GetAccrualByEmployeeOrPosition(Row);
+		AccrualValue = GetAccrualByEmployeeOrPosition(Parameters, Row);
 		If AccrualValue <> Undefined And ValueIsFilled(AccrualValue.Accrual) Then
 			NewAccrualValue.Accrual = AccrualValue.Accrual; 	
 			NewAccrualValue.Value   = AccrualValue.Value;
 			NewAccrualValue.Period  = AccrualValue.Period;
 			
 			Row.Accrual = AccrualValue.Accrual;
+		Else
+			ArrayForDelete.Add(Row);
 		EndIf; 	
+	EndDo;
+	
+	For Each ItemForDelete In ArrayForDelete Do
+		QueryTable.Delete(ItemForDelete);
 	EndDo;
 	
 	CalculatedSalary = _MonthlySalary(AccrualValues, Parameters.BeginDate, Parameters.EndDate);
@@ -299,11 +309,13 @@ Function GetPayrolls_Accrual(Parameters) Export
 	|FROM
 	|	AccumulationRegister.R9560T_AdditionalAccrual.Turnovers(BEGINOFPERIOD(&BeginDate, DAY), ENDOFPERIOD(&EndDate, DAY),,
 	|		Company = &Company
-	|	AND Branch = &Branch) AS R9560T_AdditionalAccrualTurnovers";
+	|	AND Branch = &Branch
+	|	AND AccrualType.CalculationType = &CalculationType) AS R9560T_AdditionalAccrualTurnovers";
 	Query.SetParameter("BeginDate", Parameters.BeginDate);
 	Query.SetParameter("EndDate", Parameters.EndDate);
 	Query.SetParameter("Company", Parameters.Company);
 	Query.SetParameter("Branch", Parameters.Branch);
+	Query.SetParameter("CalculationType", Parameters.CalculationType);
 	QueryResult = Query.Execute();
 	QuerySelection = QueryResult.Select();
 	While QuerySelection.Next() Do
@@ -504,19 +516,19 @@ Function GetAccrualSettings(Company)
 	Return Result;
 EndFunction
 
-Function GetAccrualByEmployeeOrPosition(TableRow)
-	ByEmployee = GetAccrualValue(TableRow.Employee, TableRow.Date);
+Function GetAccrualByEmployeeOrPosition(Parameters, TableRow)
+	ByEmployee = GetAccrualValue(Parameters, TableRow.Employee, TableRow.Date);
 	If ValueIsFilled(ByEmployee.Accrual) Then
 		Return ByEmployee;
 	Else
-		ByPosition = GetAccrualValue(TableRow.Position, TableRow.Date);
+		ByPosition = GetAccrualValue(Parameters, TableRow.Position, TableRow.Date);
 		If ValueIsFilled(ByPosition.Accrual) Then
 			Return ByPosition;
 		EndIf;
 	EndIf;
 EndFunction	
 
-Function GetAccrualValue(EmployeeOrPosition, Date)
+Function GetAccrualValue(Parameters, EmployeeOrPosition, Date)
 	Query = New Query();
 	Query.Text = 
 	"SELECT
@@ -525,11 +537,13 @@ Function GetAccrualValue(EmployeeOrPosition, Date)
 	|	AccrualValues.Period
 	|FROM
 	|	InformationRegister.T9500S_AccrualAndDeductionValues.SliceLast(ENDOFPERIOD(&Date, DAY),
-	|		EmployeeOrPosition = &EmployeeOrPosition) AS AccrualValues
+	|		EmployeeOrPosition = &EmployeeOrPosition
+	|	AND AccualOrDeductionType.CalculationType = &CalculationType) AS AccrualValues
 	|WHERE
 	|	NOT AccrualValues.NotActual";
 	Query.SetParameter("Date", Date);
 	Query.SetParameter("EmployeeOrPosition", EmployeeOrPosition);
+	Query.SetParameter("CalculationType", Parameters.CalculationType);
 	QueryResult = Query.Execute();
 	QuerySelection = QueryResult.Select();
 	
@@ -737,6 +751,7 @@ Function PutChoiceDataToServerStorage(ChoiceData, FormUUID) Export
 	ValueTable = New ValueTable();
 	ValueTable.Columns.Add("Employee");
 	ValueTable.Columns.Add("PaymentPeriod");
+	ValueTable.Columns.Add("CalculationType");
 	ValueTable.Columns.Add("NetAmount");
 	ValueTable.Columns.Add("TotalAmount");
 	
@@ -746,7 +761,7 @@ Function PutChoiceDataToServerStorage(ChoiceData, FormUUID) Export
 		NewRow.NetAmount  = Row.Amount;
 		NewRow.TotalAmount = Row.Amount;
 	EndDo;
-	GroupColumn = "Employee, PaymentPeriod";
+	GroupColumn = "Employee, PaymentPeriod, CalculationType";
 	SumColumn = "NetAmount, TotalAmount";
 	ValueTable.GroupBy(GroupColumn, SumColumn);
 	Address = PutToTempStorage(ValueTable, FormUUID);

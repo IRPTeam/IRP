@@ -55,6 +55,8 @@ EndProcedure
 
 &AtClientAtServerNoContext
 Procedure SetVisibilityAvailability(Object, Form)
+	Form.Items.LegalName.Enabled = ValueIsFilled(Object.Partner);
+	
 	Form.Items.EditCurrenciesAccrual.Enabled = Not Form.ReadOnly;
 	Form.Items.EditCurrenciesDeduction.Enabled = Not Form.ReadOnly;
 	Form.Items.EditCurrenciesCashAdvanceDeduction.Enabled = Not Form.ReadOnly;
@@ -147,6 +149,64 @@ Procedure CurrencyOnChange(Item)
 	DocPayrollClient.CurrencyOnChange(Object, ThisObject, Item);
 EndProcedure
 	
+#EndRegion
+
+
+#Region PARTNER
+
+&AtClient
+Procedure PartnerOnChange(Item)
+	DocPayrollClient.PartnerOnChange(Object, ThisObject, Item);
+EndProcedure
+
+&AtClient
+Procedure PartnerStartChoice(Item, ChoiceData, StandardProcessing)
+	DocPayrollClient.PartnerStartChoice(Object, ThisObject, Item, ChoiceData, StandardProcessing);
+EndProcedure
+
+&AtClient
+Procedure PartnerEditTextChange(Item, Text, StandardProcessing)
+	DocPayrollClient.PartnerTextChange(Object, ThisObject, Item, Text, StandardProcessing);
+EndProcedure
+
+#EndRegion
+
+#Region LEGAL_NAME
+
+&AtClient
+Procedure LegalNameOnChange(Item)
+	DocPayrollClient.LegalNameOnChange(Object, ThisObject, Item);
+EndProcedure
+
+&AtClient
+Procedure LegalNameStartChoice(Item, ChoiceData, StandardProcessing)
+	DocPayrollClient.LegalNameStartChoice(Object, ThisObject, Item, ChoiceData, StandardProcessing);
+EndProcedure
+
+&AtClient
+Procedure LegalNameEditTextChange(Item, Text, StandardProcessing)
+	DocPayrollClient.LegalNameTextChange(Object, ThisObject, Item, Text, StandardProcessing);
+EndProcedure
+
+#EndRegion
+
+#Region AGREEMENT
+
+&AtClient
+Procedure AgreementOnChange(Item)
+	DocPayrollClient.AgreementOnChange(Object, ThisObject, Item);
+EndProcedure
+
+&AtClient
+Procedure AgreementStartChoice(Item, ChoiceData, StandardProcessing)
+	DocPayrollClient.AgreementStartChoice(Object, ThisObject, Item, ChoiceData, StandardProcessing);
+EndProcedure
+
+&AtClient
+Procedure AgreementEditTextChange(Item, Text, StandardProcessing)
+	DocPayrollClient.AgreementTextChange(Object, ThisObject, Item, Text, StandardProcessing);
+EndProcedure
+
 #EndRegion
 
 #Region SALARY_TAX_LIST
@@ -469,4 +529,4 @@ EndProcedure
 
 #EndRegion
 
-ThisObject.MainTables = "AccrualList, DeductionList, CashAdvanceDeductionList";
+ThisObject.MainTables = "AccrualList, DeductionList, CashAdvanceDeductionList, SalaryTaxList";

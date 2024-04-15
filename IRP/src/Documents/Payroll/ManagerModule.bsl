@@ -30,7 +30,9 @@ Procedure PostingCheckBeforeWrite(Ref, Cancel, PostingMode, Parameters, AddInfo 
 	Tables.R5021T_Revenues.Columns.Add("Key", Metadata.DefinedTypes.typeRowID.Type);
 	Tables.R9510B_SalaryPayment.Columns.Add("Key", Metadata.DefinedTypes.typeRowID.Type);
 	Tables.R3027B_EmployeeCashAdvance.Columns.Add("Key", Metadata.DefinedTypes.typeRowID.Type);
-
+	Tables.R5015B_OtherPartnersTransactions.Columns.Add("Key", Metadata.DefinedTypes.typeRowID.Type);
+	Tables.R5020B_PartnersBalance.Columns.Add("Key", Metadata.DefinedTypes.typeRowID.Type);
+	
 	PostingServer.FillPostingTables(Tables, Ref, QueryArray, Parameters);
 EndProcedure
 
@@ -110,7 +112,8 @@ Function GetQueryTextsMasterTables()
 	QueryArray.Add(R9510B_SalaryPayment());
 	QueryArray.Add(R9545T_PaidVacations());
 	QueryArray.Add(R9555T_PaidSickLeaves());
-	QueryArray.Add(R5041B_TaxesPayable());
+	QueryArray.Add(R5015B_OtherPartnersTransactions());
+	QueryArray.Add(R5020B_PartnersBalance());
 	Return QueryArray;
 EndFunction
 
@@ -188,9 +191,14 @@ Function SalaryTaxList()
 		|	PayrollSalaryTaxList.Ref.Company AS Company,
 		|	PayrollSalaryTaxList.Ref.Branch AS Branch,
 		|	PayrollSalaryTaxList.Ref.Currency AS Currency,
+		|	PayrollSalaryTaxList.Ref.Partner AS Partner,
+		|	PayrollSalaryTaxList.Ref.LegalName AS LegalName,
+		|	PayrollSalaryTaxList.Ref.Agreement AS Agreement,
 		|	PayrollSalaryTaxList.Ref.PaymentPeriod AS PaymentPeriod,
 		|	PayrollSalaryTaxList.Ref.CalculationType AS CalculationType,
 		|	PayrollSalaryTaxList.Employee AS Employee,
+		|	PayrollSalaryTaxList.ExpenseType AS ExpenseType,
+		|	PayrollSalaryTaxList.ProfitLossCenter AS ProfitLossCenter,
 		|	PayrollSalaryTaxList.Amount AS Amount,
 		|	PayrollSalaryTaxList.Tax.TaxPayer = VALUE(Enum.TaxPayers.Employee) AS IsEmployeePayer,
 		|	PayrollSalaryTaxList.Tax.TaxPayer = VALUE(Enum.TaxPayers.Company) AS IsCompanyPayer,
@@ -253,7 +261,7 @@ Function R5022T_Expenses()
 		|FROM
 		|	SalaryTaxList
 		|WHERE
-		|	SalaryTaxist.IsCompanyPayer";
+		|	SalaryTaxList.IsCompanyPayer";
 EndFunction
 
 Function R5021T_Revenues()
@@ -345,7 +353,7 @@ Function R9510B_SalaryPayment()
 		|FROM
 		|	SalaryTaxList
 		|WHERE
-		|	SalaryTaxist.IsEmployeePayer";
+		|	SalaryTaxList.IsEmployeePayer";
 EndFunction
 
 Function R3027B_EmployeeCashAdvance()
@@ -394,21 +402,29 @@ Function R9555T_PaidSickLeaves()
 		|	AccrualList.PaidSickLeaveDays <> 0";	
 EndFunction
 
-Function R5041B_TaxesPayable()
-	Return
+Function R5015B_OtherPartnersTransactions()
+	Return 
 		"SELECT
-		|	VALUE(AccumulationRecordType.Receipt),
+		|	VALUE(AccumulationRecordType.Expense) AS RecordType,
 		|	SalaryTaxList.Period,
-		|	SalaryTaxList.Key,
 		|	SalaryTaxList.Company,
-		|	SalaryTaxList.Tax,
-		|	SalaryTaxList.Amount
-		|INTO R5041B_TaxesPayable
+		|	SalaryTaxList.Branch,
+		|	SalaryTaxList.Partner,
+		|	SalaryTaxList.LegalName,
+		|	SalaryTaxList.Currency,
+		|	SalaryTaxList.Agreement,
+		|	SalaryTaxList.Key,
+		|	SalaryTaxList.Amount AS Amount
+		|INTO R5015B_OtherPartnersTransactions
 		|FROM
-		|	SalaryTaxList
+		|	SalaryTaxList AS SalaryTaxList
 		|WHERE
 		|	TRUE";
-EndFUnction
+EndFunction
+
+Function R5020B_PartnersBalance()
+	Return AccumulationRegisters.R5020B_PartnersBalance.R5020B_PartnersBalance_Payroll();
+EndFunction
 
 #EndRegion
 

@@ -207,7 +207,7 @@ Scenario: _040995 check Payroll movements by the Register  "R5015 Other partners
 			| 'Number'    |
 			| '4'         |
 	* Check movements by the Register  "R5015 Other partners transactions" 
-		And I click "Registrations report" button
+		And I click "Registrations report info" button
 		And I select "R5015 Other partners transactions" exact value from "Register" drop-down list
 		And I click "Generate report" button
 		Then "ResultTable" spreadsheet document is equal
@@ -231,7 +231,7 @@ Scenario: _040995 check Payroll movements by the Register  "R5015 Other partners
 			| ''                                              | '27.04.2023 12:39:37' | 'Expense'    | 'Main Company' | 'Front office' | 'en description is empty'      | 'TRY'      | 'TRY'                  | 'Tax authority' | 'Tax authority' | 'Tax'       | ''      | '50'     | 'No'                   |
 			| ''                                              | '27.04.2023 12:39:37' | 'Expense'    | 'Main Company' | 'Front office' | 'en description is empty'      | 'TRY'      | 'TRY'                  | 'Tax authority' | 'Tax authority' | 'Tax'       | ''      | '70'     | 'No'                   |
 			| ''                                              | '27.04.2023 12:39:37' | 'Expense'    | 'Main Company' | 'Front office' | 'en description is empty'      | 'TRY'      | 'TRY'                  | 'Tax authority' | 'Tax authority' | 'Tax'       | ''      | '70'     | 'No'                   |
-			| ''                                              | '27.04.2023 12:39:37' | 'Expense'    | 'Main Company' | 'Front office' | 'en description is empty'      | 'TRY'      | 'TRY'                  | 'Tax authority' | 'Tax authority' | 'Tax'       | ''      | '100'    | 'No'                   |		
+			| ''                                              | '27.04.2023 12:39:37' | 'Expense'    | 'Main Company' | 'Front office' | 'en description is empty'      | 'TRY'      | 'TRY'                  | 'Tax authority' | 'Tax authority' | 'Tax'       | ''      | '100'    | 'No'                   |				
 		And I close all client application windows
 
 Scenario: _040996 check Payroll movements by the Register  "R5020 Partners balance"
@@ -242,7 +242,7 @@ Scenario: _040996 check Payroll movements by the Register  "R5020 Partners balan
 			| 'Number'    |
 			| '4'         |
 	* Check movements by the Register  "R5020 Partners balance" 
-		And I click "Registrations report" button
+		And I click "Registrations report info" button
 		And I select "R5020 Partners balance" exact value from "Register" drop-down list
 		And I click "Generate report" button
 		Then "ResultTable" spreadsheet document is equal

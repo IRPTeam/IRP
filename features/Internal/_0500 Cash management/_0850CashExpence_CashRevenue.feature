@@ -21,6 +21,7 @@ Background:
 	
 Scenario: _085000 preparation (Cash expence and Cash revenue)
 	When set True value to the constant
+	When set True value to the constant Use salary
 	* Load info
 		When Create catalog ObjectStatuses objects
 		When Create catalog Currencies objects

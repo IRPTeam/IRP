@@ -2287,7 +2287,7 @@ Function R5020B_PartnersBalance_Payroll() Export
 		// Other transaction
 		"SELECT
 		|
-		|	VALUE(AccumulationRecordType.Receipt) AS RecordType,
+		|	VALUE(AccumulationRecordType.Expense) AS RecordType,
 		|	SalaryTaxList.Period,
 		|	SalaryTaxList.Company,
 		|	SalaryTaxList.Branch,

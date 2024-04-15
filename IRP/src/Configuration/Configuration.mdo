@@ -580,6 +580,7 @@
   <commonModules>CommonModule.DocPlannedReceiptReservationClient</commonModules>
   <commonModules>CommonModule.DocPlannedReceiptReservationServer</commonModules>
   <commonModules>CommonModule.DocPriceListClient</commonModules>
+  <commonModules>CommonModule.DocPriceListServer</commonModules>
   <commonModules>CommonModule.DocProductionClient</commonModules>
   <commonModules>CommonModule.DocProductionCostsAllocationClient</commonModules>
   <commonModules>CommonModule.DocProductionCostsAllocationServer</commonModules>
@@ -639,8 +640,9 @@
   <commonModules>CommonModule.DocUnbundlingServer</commonModules>
   <commonModules>CommonModule.DocVisitorCounterClient</commonModules>
   <commonModules>CommonModule.DocVisitorCounterServer</commonModules>
-  <commonModules>CommonModule.DocWorkOrderClient</commonModules>
+  <commonModules>CommonModule.DocWorkOrderClosingClient</commonModules>
   <commonModules>CommonModule.DocWorkOrderClosingServer</commonModules>
+  <commonModules>CommonModule.DocWorkOrderClient</commonModules>
   <commonModules>CommonModule.DocWorkOrderServer</commonModules>
   <commonModules>CommonModule.DocWorkSheetClient</commonModules>
   <commonModules>CommonModule.DocWorkSheetServer</commonModules>
@@ -752,6 +754,8 @@
   <commonModules>CommonModule.DynamicListAPI</commonModules>
   <commonModules>CommonModule.DocChequeBondTransactionItemClient</commonModules>
   <commonModules>CommonModule.DocChequeBondTransactionItemServer</commonModules>
+  <commonModules>CommonModule.DocDepreciationCalculationClient</commonModules>
+  <commonModules>CommonModule.DocDepreciationCalculationServer</commonModules>
   <commonAttributes>CommonAttribute.Author</commonAttributes>
   <commonAttributes>CommonAttribute.Branch</commonAttributes>
   <commonAttributes>CommonAttribute.Description</commonAttributes>

@@ -1794,7 +1794,7 @@ Function UpdateRowIDCatalog(Source, Row, RowItemList, RowRefObject, Cancel, Reco
 		RowRefObject.StoreReceiver = Source.StoreReceiver;
 	EndIf;
 	
-	If Is.SI Or Is.SRO Or Is.SR Or Is.RSR Or Is.RRR Or Is.WO Then
+	If Is.SI Or Is.SRO Or Is.SR Or Is.RSR Or Is.WO Then
 		RowRefObject.PartnerSales         = Source.Partner;
 		RowRefObject.LegalNameSales       = Source.LegalName;
 		RowRefObject.AgreementSales       = Source.Agreement;
@@ -1857,9 +1857,6 @@ Function UpdateRowIDCatalog(Source, Row, RowItemList, RowRefObject, Cancel, Reco
 		ElsIf Source.TransactionType = Enums.RetailGoodsReceiptTransactionTypes.Pickup Then
 			RowRefObject.TransactionTypeRSC = Enums.RetailShipmentConfirmationTransactionTypes.Pickup;
 		ElsIf Source.TransactionType = Enums.RetailGoodsReceiptTransactionTypes.ReturnFromCustomer Then
-			RowRefObject.TransactionTypeRSC = Enums.RetailShipmentConfirmationTransactionTypes.EmptyRef();
-			RowRefObject.PartnerSales   = Source.Partner;
-			RowRefObject.LegalNameSales = Source.LegalName;
 			RowRefObject.TransactionTypeRGR = Source.TransactionType;		
 		Else
 			Raise StrTemplate("Unsapported transaction type [%1]", Source.TransactionType);
@@ -8378,16 +8375,6 @@ Procedure ApplyFilterSet_RGR_ForRRR(Query)
 	|				ELSE FALSE
 	|			END
 	|			AND CASE
-	|				WHEN &Filter_PartnerSales
-	|					THEN RowRef.PartnerSales = &PartnerSales
-	|				ELSE FALSE
-	|			END
-	|			AND CASE
-	|				WHEN &Filter_LegalNameSales
-	|					THEN RowRef.LegalNameSales = &LegalNameSales
-	|				ELSE FALSE
-	|			END
-	|			AND CASE
 	|				WHEN &Filter_RetailCustomer
 	|					THEN RowRef.RetailCustomer = &RetailCustomer
 	|				ELSE FALSE
@@ -9635,21 +9622,6 @@ Procedure ApplyFilterSet_RSR_ForRRR(Query)
 	|
 	|			END
 	|			AND CASE
-	|				WHEN &Filter_PartnerSales
-	|					THEN RowRef.PartnerSales = &PartnerSales
-	|				ELSE FALSE
-	|			END
-	|			AND CASE
-	|				WHEN &Filter_LegalNameSales
-	|					THEN RowRef.LegalNameSales = &LegalNameSales
-	|				ELSE FALSE
-	|			END
-	|			AND CASE
-	|				WHEN &Filter_AgreementSales
-	|					THEN RowRef.AgreementSales = &AgreementSales
-	|				ELSE FALSE
-	|			END
-	|			AND CASE
 	|				WHEN &Filter_CurrencySales
 	|					THEN RowRef.CurrencySales = &CurrencySales
 	|				ELSE FALSE
@@ -9698,16 +9670,6 @@ Procedure ApplyFilterSet_RSR_ForRGR(Query)
 	|					THEN RowRef.Company = &Company
 	|				ELSE TRUE
 	|
-	|			END
-	|			AND CASE
-	|				WHEN &Filter_PartnerSales
-	|					THEN RowRef.PartnerSales = &PartnerSales
-	|				ELSE FALSE
-	|			END
-	|			AND CASE
-	|				WHEN &Filter_LegalNameSales
-	|					THEN RowRef.LegalNameSales = &LegalNameSales
-	|				ELSE FALSE
 	|			END
 	|			AND CASE
 	|				WHEN &Filter_TransactionTypeRGR

@@ -113,6 +113,56 @@
       </extInfo>
     </items>
     <items xsi:type="form:FormField">
+      <name>CalculationType</name>
+      <id>50</id>
+      <visible>true</visible>
+      <enabled>true</enabled>
+      <userVisible>
+        <common>true</common>
+      </userVisible>
+      <dataPath xsi:type="form:DataPath">
+        <segments>List.CalculationType</segments>
+      </dataPath>
+      <extendedTooltip>
+        <name>CalculationTypeExtendedTooltip</name>
+        <id>52</id>
+        <visible>true</visible>
+        <enabled>true</enabled>
+        <userVisible>
+          <common>true</common>
+        </userVisible>
+        <type>Label</type>
+        <autoMaxWidth>true</autoMaxWidth>
+        <autoMaxHeight>true</autoMaxHeight>
+        <extInfo xsi:type="form:LabelDecorationExtInfo">
+          <horizontalAlign>Left</horizontalAlign>
+        </extInfo>
+      </extendedTooltip>
+      <contextMenu>
+        <name>CalculationTypeContextMenu</name>
+        <id>51</id>
+        <visible>true</visible>
+        <enabled>true</enabled>
+        <userVisible>
+          <common>true</common>
+        </userVisible>
+        <autoFill>true</autoFill>
+      </contextMenu>
+      <type>InputField</type>
+      <editMode>Enter</editMode>
+      <showInHeader>true</showInHeader>
+      <headerHorizontalAlign>Left</headerHorizontalAlign>
+      <showInFooter>true</showInFooter>
+      <extInfo xsi:type="form:InputFieldExtInfo">
+        <autoMaxWidth>true</autoMaxWidth>
+        <autoMaxHeight>true</autoMaxHeight>
+        <wrap>true</wrap>
+        <chooseType>true</chooseType>
+        <typeDomainEnabled>true</typeDomainEnabled>
+        <textEdit>true</textEdit>
+      </extInfo>
+    </items>
+    <items xsi:type="form:FormField">
       <name>ListAmount</name>
       <id>41</id>
       <visible>true</visible>
@@ -429,7 +479,8 @@
       <queryText>SELECT
 	R9510B_SalaryPaymentBalance.Employee AS Employee,
 	R9510B_SalaryPaymentBalance.AmountBalance AS Amount,
-	R9510B_SalaryPaymentBalance.PaymentPeriod AS PaymentPeriod
+	R9510B_SalaryPaymentBalance.PaymentPeriod AS PaymentPeriod,
+	R9510B_SalaryPaymentBalance.CalculationType
 FROM
 	AccumulationRegister.R9510B_SalaryPayment.Balance(&amp;Boundary, Company = &amp;Company
 	AND Branch = &amp;Branch
@@ -523,6 +574,10 @@ FROM
         <attributeUseRestriction>
           <condition>true</condition>
         </attributeUseRestriction>
+      </fields>
+      <fields xsi:type="schema:DataCompositionSchemaDataSetField">
+        <dataPath>CalculationType</dataPath>
+        <field>CalculationType</field>
       </fields>
       <parameters>
         <name>Boundary</name>

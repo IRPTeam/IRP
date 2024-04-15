@@ -295,10 +295,10 @@ Scenario: _028503 create SR based on SI (different company, branch, store)
 		Then "Add linked document rows" window is opened
 		And I expand current line in "BasisesTree" table
 		And "BasisesTree" table became equal
-			| 'Row presentation'                              | 'Use'   | 'Company'        | 'Branch'                    | 'Quantity'   | 'Unit'   | 'Price'    | 'Currency'    |
-			| 'Sales invoice 102 dated 05.03.2021 12:57:59'   | 'No'    | 'Main Company'   | 'Distribution department'   | ''           | ''       | ''         | ''            |
-			| 'Boots (37/18SD)'                               | 'No'    | ''               | ''                          | '1,000'      | 'pcs'    | '700,00'   | 'TRY'         |
-			| 'Dress (M/White)'                               | 'No'    | ''               | ''                          | '2,000'      | 'pcs'    | '520,00'   | 'TRY'         |
+			| 'Row presentation'                            | 'Use' | 'Company'      | 'Branch'                  | 'Quantity' | 'Unit' | 'Price'  | 'Currency' |
+			| 'Sales invoice 102 dated 05.03.2021 12:57:59' | 'No'  | 'Main Company' | 'Distribution department' | ''         | ''     | ''       | ''         |
+			| 'Boots (37/18SD)'                             | 'No'  | 'Main Company' | 'Distribution department' | '1,000'    | 'pcs'  | '700,00' | 'TRY'      |
+			| 'Dress (M/White)'                             | 'No'  | 'Main Company' | 'Distribution department' | '2,000'    | 'pcs'  | '520,00' | 'TRY'      |
 		And I go to line in "BasisesTree" table
 			| 'Row presentation'    |
 			| 'Dress (M/White)'     |

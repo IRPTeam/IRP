@@ -524,11 +524,14 @@ Scenario: _01541362 create RSR using form link/unlink (different company, store,
 		And I move to "Item list" tab		
 		And I click the button named "AddBasisDocuments"
 		And "BasisesTree" table became equal
-			| 'Row presentation'                                     | 'Use'   | 'Company'        | 'Branch'    | 'Quantity'   | 'Unit'             | 'Price'      | 'Currency'    |
-			| 'Retail sales receipt 201 dated 15.03.2021 16:01:04'   | 'No'    | 'Main Company'   | 'Shop 01'   | ''           | ''                 | ''           | ''            |
-			| 'Dress (XS/Blue)'                                      | 'No'    | ''               | ''          | '1,000'      | 'pcs'              | '520,00'     | 'TRY'         |
-			| 'Trousers (38/Yellow)'                                 | 'No'    | ''               | ''          | '2,000'      | 'pcs'              | '400,00'     | 'TRY'         |
-			| 'Boots (36/18SD)'                                      | 'No'    | ''               | ''          | '1,000'      | 'Boots (12 pcs)'   | '8 400,00'   | 'TRY'         |
+			| 'Row presentation'                                   | 'Use' | 'Company'      | 'Branch'  | 'Quantity' | 'Unit'           | 'Price'    | 'Currency' |
+			| 'Retail sales receipt 201 dated 15.03.2021 16:01:04' | 'No'  | 'Main Company' | 'Shop 01' | ''         | ''               | ''         | ''         |
+			| 'Dress (XS/Blue)'                                    | 'No'  | 'Main Company' | 'Shop 01' | '1,000'    | 'pcs'            | '520,00'   | 'TRY'      |
+			| 'Trousers (38/Yellow)'                               | 'No'  | 'Main Company' | 'Shop 01' | '2,000'    | 'pcs'            | '400,00'   | 'TRY'      |
+			| 'Boots (36/18SD)'                                    | 'No'  | 'Main Company' | 'Shop 01' | '1,000'    | 'Boots (12 pcs)' | '8 400,00' | 'TRY'      |
+			| '$$RetailSalesReceipt015413$$'                       | 'No'  | 'Main Company' | 'Shop 01' | ''         | ''               | ''         | ''         |
+			| 'Shirt (38/Black)'                                   | 'No'  | 'Main Company' | 'Shop 01' | '1,000'    | 'pcs'            | '350,00'   | 'TRY'      |
+			| 'Dress (XS/Blue)'                                    | 'No'  | 'Main Company' | 'Shop 01' | '1,000'    | 'pcs'            | '520,00'   | 'TRY'      |
 		And I go to line in "BasisesTree" table
 			| 'Currency'   | 'Price'    | 'Quantity'   | 'Row presentation'   | 'Unit'   | 'Use'    |
 			| 'TRY'        | '520,00'   | '1,000'      | 'Dress (XS/Blue)'    | 'pcs'    | 'No'     |

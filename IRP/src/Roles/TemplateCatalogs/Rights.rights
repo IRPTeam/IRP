@@ -1622,6 +1622,21 @@
 			<value>true</value>
 		</right>
 	</object>
+	<object>
+		<name>Catalog.SalaryCalculationType</name>
+		<right>
+			<name>View</name>
+			<value>true</value>
+		</right>
+		<right>
+			<name>InputByString</name>
+			<value>true</value>
+		</right>
+		<right>
+			<name>Read</name>
+			<value>true</value>
+		</right>
+	</object>
 	<restrictionTemplate>
 		<name>Access(KeySynonym, AttributePath, AdditionalRule)</name>
 		<condition>// Table WHERE #Access("Company", "Company", "")

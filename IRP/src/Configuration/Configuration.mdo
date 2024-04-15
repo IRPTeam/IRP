@@ -17,7 +17,7 @@
   <usePurposes>PersonalComputer</usePurposes>
   <defaultRoles>Role.FullAccess</defaultRoles>
   <vendor>IRP Team</vendor>
-  <version>2024.15.4162</version>
+  <version>2024.16.4195</version>
   <updateCatalogAddress>https://github.com/IRPTeam/IRP</updateCatalogAddress>
   <useManagedFormInOrdinaryApplication>true</useManagedFormInOrdinaryApplication>
   <useOrdinaryFormInManagedApplication>true</useOrdinaryFormInManagedApplication>
@@ -1098,6 +1098,7 @@
   <catalogs>Catalog.Workstations</catalogs>
   <catalogs>Catalog.AgingPeriods</catalogs>
   <catalogs>Catalog.Incoterms</catalogs>
+  <catalogs>Catalog.SalaryCalculationType</catalogs>
   <documents>Document.AdditionalAccrual</documents>
   <documents>Document.AdditionalCostAllocation</documents>
   <documents>Document.AdditionalDeduction</documents>
@@ -1276,6 +1277,7 @@
   <enums>Enum.PaymentStatuses</enums>
   <enums>Enum.AuditLockActions</enums>
   <enums>Enum.SalaryTypes</enums>
+  <enums>Enum.TaxPayers</enums>
   <reports>Report.A0010_TrialBalance</reports>
   <reports>Report.A0011_TrialBalanceByAccount</reports>
   <reports>Report.A0012_AccountCard</reports>

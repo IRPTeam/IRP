@@ -10,7 +10,7 @@
   <name>CalculationMovementCosts</name>
   <synonym>
     <key>en</key>
-    <value>Calculations movement costs</value>
+    <value>Calculation movement costs</value>
   </synonym>
   <useStandardCommands>true</useStandardCommands>
   <inputByString>Document.CalculationMovementCosts.StandardAttribute.Number</inputByString>
@@ -24,7 +24,7 @@
   </objectPresentation>
   <listPresentation>
     <key>en</key>
-    <value>Calculation movements costs</value>
+    <value>Calculations movement costs</value>
   </listPresentation>
   <numberLength>12</numberLength>
   <numberAllowedLength>Variable</numberAllowedLength>

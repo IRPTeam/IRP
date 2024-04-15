@@ -413,6 +413,7 @@ Function R5015B_OtherPartnersTransactions()
 		|	SalaryTaxList.LegalName,
 		|	SalaryTaxList.Currency,
 		|	SalaryTaxList.Agreement,
+		|	UNDEFINED AS Basis,
 		|	SalaryTaxList.Key,
 		|	SalaryTaxList.Amount AS Amount
 		|INTO R5015B_OtherPartnersTransactions

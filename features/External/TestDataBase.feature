@@ -3493,7 +3493,6 @@ Scenario: Create chart of accounts Basic objects with LedgerTypeVariants (Basic 
 		| 'e1cib/data/Catalog.AccountingOperations?refName=ModernizationOfFixedAsset_DR_R4050B_StockInventory_CR_R8510B_BookValueOfFixedAsset'                         | '01.01.2021 00:00:00' | 'e1cib/data/Catalog.LedgerTypes?ref=b7b3f42485a6975311ee9a778a2b4095' | 'True' |
 		| 'e1cib/data/Catalog.AccountingOperations?refName=DecommissioningOfFixedAsset_DR_R4050B_StockInventory_CR_R8510B_BookValueOfFixedAsset'                       | '01.01.2021 00:00:00' | 'e1cib/data/Catalog.LedgerTypes?ref=b7b3f42485a6975311ee9a778a2b4095' | 'True' |
 		| 'e1cib/data/Catalog.AccountingOperations?refName=FixedAssetTransfer_DR_R8510B_BookValueOfFixedAsset_CR_R8510B_BookValueOfFixedAsset'                         | '01.01.2021 00:00:00' | 'e1cib/data/Catalog.LedgerTypes?ref=b7b3f42485a6975311ee9a778a2b4095' | 'True' |
-		| 'e1cib/data/Catalog.AccountingOperations?refName=DepreciationCalculation_DR_DepreciationFixedAsset_CR_R8510B_BookValueOfFixedAsset'                          | '01.01.2021 00:00:00' | 'e1cib/data/Catalog.LedgerTypes?ref=b7b3f42485a6975311ee9a778a2b4095' | 'True' |
 		| 'e1cib/data/Catalog.AccountingOperations?refName=DepreciationCalculation_DR_R5022T_Expenses_CR_DepreciationFixedAsset'                                       | '01.01.2021 00:00:00' | 'e1cib/data/Catalog.LedgerTypes?ref=b7b3f42485a6975311ee9a778a2b4095' | 'True' |
 
 

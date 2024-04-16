@@ -1440,6 +1440,9 @@ Strings.Insert("AccountingQuestion_02", NStr("en = 'Change [Currency] mark in an
 
 Strings.Insert("AccountingInfo_01", NStr("en = 'Load complete'", Lang));
 Strings.Insert("AccountingInfo_02", NStr("en = '<For all transaction types>'", Lang));
+Strings.Insert("AccountingInfo_03", NStr("en = 'Profit loss center'", Lang));
+Strings.Insert("AccountingInfo_04", NStr("en = 'Expense/Revenue'", Lang));
+Strings.Insert("AccountingInfo_05", NStr("en = 'Expense/Revenue & Profit loss center'", Lang));
 
 Strings.Insert("AccountingJE_prefix_01", NStr("en = 'JE '", Lang));
 

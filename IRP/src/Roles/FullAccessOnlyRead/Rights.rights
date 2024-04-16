@@ -6634,7 +6634,7 @@
 		</right>
 	</object>
 	<object>
-		<name>InformationRegister.T9014S_AccountsExpenseRevenue.Resource.Account</name>
+		<name>InformationRegister.T9014S_AccountsExpenseRevenue.Resource.AccountExpense</name>
 		<right>
 			<name>Edit</name>
 			<value>false</value>

@@ -24,17 +24,35 @@
     <value>Accounts (Expense / Revenue)</value>
   </recordPresentation>
   <resources uuid="7098c274-62dd-4d32-a6fa-b34f96f33a2a">
-    <name>Account</name>
+    <name>AccountExpense</name>
     <synonym>
       <key>en</key>
-      <value>Account</value>
+      <value>Account (expense)</value>
     </synonym>
     <type>
       <types>ChartOfAccountsRef.Basic</types>
     </type>
     <minValue xsi:type="core:UndefinedValue"/>
     <maxValue xsi:type="core:UndefinedValue"/>
-    <fillChecking>ShowError</fillChecking>
+    <choiceParameterLinks>
+      <name>Filter.LedgerTypeVariant</name>
+      <field>InformationRegister.T9014S_AccountsExpenseRevenue.Dimension.LedgerTypeVariant</field>
+    </choiceParameterLinks>
+    <fullTextSearch>Use</fullTextSearch>
+    <dataHistory>Use</dataHistory>
+    <fillValue xsi:type="core:UndefinedValue"/>
+  </resources>
+  <resources uuid="3ac66420-f5dc-4b52-a383-15275d9b2305">
+    <name>AccountRevenue</name>
+    <synonym>
+      <key>en</key>
+      <value>Account (revenue)</value>
+    </synonym>
+    <type>
+      <types>ChartOfAccountsRef.Basic</types>
+    </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
     <choiceParameterLinks>
       <name>Filter.LedgerTypeVariant</name>
       <field>InformationRegister.T9014S_AccountsExpenseRevenue.Dimension.LedgerTypeVariant</field>
@@ -95,6 +113,54 @@
     <fillFromFillingValue>true</fillFromFillingValue>
     <fillValue xsi:type="core:UndefinedValue"/>
     <master>true</master>
+    <mainFilter>true</mainFilter>
+  </dimensions>
+  <dimensions uuid="cdcd6651-b743-4852-8f51-c88fa47717e0">
+    <name>ProfitLossCenter</name>
+    <synonym>
+      <key>en</key>
+      <value>Profit loss center</value>
+    </synonym>
+    <type>
+      <types>CatalogRef.BusinessUnits</types>
+    </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <fullTextSearch>Use</fullTextSearch>
+    <dataHistory>Use</dataHistory>
+    <fillValue xsi:type="core:UndefinedValue"/>
+    <mainFilter>true</mainFilter>
+  </dimensions>
+  <dimensions uuid="48082164-b14d-4dbb-a1ef-6128482a8377">
+    <name>Expense</name>
+    <synonym>
+      <key>en</key>
+      <value>Expense</value>
+    </synonym>
+    <type>
+      <types>Boolean</types>
+    </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <fullTextSearch>Use</fullTextSearch>
+    <dataHistory>Use</dataHistory>
+    <fillValue xsi:type="core:UndefinedValue"/>
+    <mainFilter>true</mainFilter>
+  </dimensions>
+  <dimensions uuid="2b9d6fc8-c5e9-425d-b276-9574c3da8ef9">
+    <name>Revenue</name>
+    <synonym>
+      <key>en</key>
+      <value>Revenue</value>
+    </synonym>
+    <type>
+      <types>Boolean</types>
+    </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <fullTextSearch>Use</fullTextSearch>
+    <dataHistory>Use</dataHistory>
+    <fillValue xsi:type="core:UndefinedValue"/>
     <mainFilter>true</mainFilter>
   </dimensions>
   <forms uuid="513676d2-16f5-42b9-a3cf-f3f4524f051f">

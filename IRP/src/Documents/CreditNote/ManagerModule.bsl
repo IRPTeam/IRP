@@ -359,10 +359,10 @@ Function GetAnalytics_CustomerAdvancesExpenses(Parameters)
 	// Debit - Analytics
 	AccountingServer.SetDebitExtDimensions(Parameters, AccountingAnalytics);
 
-	Credit = AccountingServer.GetT9014S_AccountsExpenseRevenue(AccountParameters, Parameters.RowData.ExpenseType);
-	If ValueIsFilled(Credit.Account) Then
-		AccountingAnalytics.Credit = Credit.Account;
-	EndIf;
+	Credit = AccountingServer.GetT9014S_AccountsExpenseRevenue(AccountParameters, 
+	                                                           Parameters.RowData.ExpenseType,
+	                                                           Parameters.RowData.ProfitLossCenter);
+	AccountingAnalytics.Credit = Credit.AccountExpense;
 	// Credit - Analytics
 	AccountingServer.SetCreditExtDimensions(Parameters, AccountingAnalytics);
 	
@@ -377,17 +377,12 @@ Function GetAnalytics_OffsetOfAdvancesCustomer(Parameters)
 	Accounts = AccountingServer.GetT9012S_AccountsPartner(AccountParameters, 
 	                                                      Parameters.RowData.Partner, 
 	                                                      Parameters.RowData.Agreement,
-	                                                      Parameters.RowData.Currency);
-	                                                      
-	If ValueIsFilled(Accounts.AccountTransactionsCustomer) Then
-		AccountingAnalytics.Debit = Accounts.AccountTransactionsCustomer;
-	EndIf;
+	                                                      Parameters.RowData.Currency);	                                                      
+	AccountingAnalytics.Debit = Accounts.AccountTransactionsCustomer;
+
 	// Debit - Analytics
 	AccountingServer.SetDebitExtDimensions(Parameters, AccountingAnalytics);
-
-	If ValueIsFilled(Accounts.AccountAdvancesCustomer) Then
-		AccountingAnalytics.Credit = Accounts.AccountAdvancesCustomer;
-	EndIf;
+	AccountingAnalytics.Credit = Accounts.AccountAdvancesCustomer;
 	// Credit - Analytics
 	AccountingServer.SetCreditExtDimensions(Parameters, AccountingAnalytics);
 
@@ -403,17 +398,14 @@ Function GetAnalytics_VendorTransactionExpenses(Parameters)
 	                                                   Parameters.RowData.Partner, 
 	                                                   Parameters.RowData.Agreement,
 	                                                   Parameters.RowData.Currency);
-	                                                   
-	If ValueIsFilled(Debit.AccountTransactionsVendor) Then
-		AccountingAnalytics.Debit = Debit.AccountTransactionsVendor;
-	EndIf;
+	AccountingAnalytics.Debit = Debit.AccountTransactionsVendor;
 	// Debit - Analytics
 	AccountingServer.SetDebitExtDimensions(Parameters, AccountingAnalytics);
 
-	Credit = AccountingServer.GetT9014S_AccountsExpenseRevenue(AccountParameters, Parameters.RowData.ExpenseType);
-	If ValueIsFilled(Credit.Account) Then
-		AccountingAnalytics.Credit = Credit.Account;
-	EndIf;
+	Credit = AccountingServer.GetT9014S_AccountsExpenseRevenue(AccountParameters, 
+	                                                           Parameters.RowData.ExpenseType,
+	                                                           Parameters.RowData.ProfitLossCenter);
+	AccountingAnalytics.Credit = Credit.AccountExpense;
 	// Credit - Analytics
 	AccountingServer.SetCreditExtDimensions(Parameters, AccountingAnalytics);
 	

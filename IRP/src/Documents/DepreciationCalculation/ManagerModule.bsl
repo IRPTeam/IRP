@@ -418,8 +418,10 @@ Function GetAnalytics_Expenses_Depreciation(Parameters)
 	AccountParameters   = AccountingServer.GetAccountParameters(Parameters);
 
 	// Debit
-	Debit = AccountingServer.GetT9014S_AccountsExpenseRevenue(AccountParameters, Parameters.RowData.ExpenseType);
-	AccountingAnalytics.Debit = Debit.Account;
+	Debit = AccountingServer.GetT9014S_AccountsExpenseRevenue(AccountParameters, 
+	                                                          Parameters.RowData.ExpenseType,
+	                                                          Parameters.RowData.ProfitLossCenter);
+	AccountingAnalytics.Debit = Debit.AccountExpense;
 	
 	AccountingServer.SetDebitExtDimensions(Parameters, AccountingAnalytics);
 	

@@ -952,54 +952,157 @@ Function __GetT9013S_AccountsTax(Period, Company, LedgerTypeVariant, Tax, VatRat
 	Return Result;
 EndFunction
 
-Function GetT9014S_AccountsExpenseRevenue(AccountParameters, ExpenseRevenue) Export
+Function GetT9014S_AccountsExpenseRevenue(AccountParameters, ExpenseRevenue, ProfitLossCenter) Export
 	Return __GetT9014S_AccountsExpenseRevenue(//AccountingServerReuse.GetT9014S_AccountsExpenseRevenue_Reuse(
 		AccountParameters.Period, 
 		AccountParameters.Company, 
 		AccountParameters.LedgerTypeVariant, 
-		ExpenseRevenue);
+		ExpenseRevenue,
+		ProfitLossCenter);
 EndFunction
 
-Function __GetT9014S_AccountsExpenseRevenue(Period, Company, LedgerTypeVariant, ExpenseRevenue) Export
+Function __GetT9014S_AccountsExpenseRevenue(Period, Company, LedgerTypeVariant, ExpenseRevenue, ProfitLossCenter) Export
 	Query = New Query();
 	Query.Text = 
 	"SELECT
-	|	ByExpenseRevenue.Account,
+	|	Table.AccountExpense,
 	|	1 AS Priority
-	|INTO Accounts
+	|INTO AccountsExpense
 	|FROM
-	|	InformationRegister.T9014S_AccountsExpenseRevenue.SliceLast(&Period, Company = &Company AND LedgerTypeVariant = &LedgerTypeVariant
-	|	AND ExpenseRevenue = &ExpenseRevenue) AS ByExpenseRevenue
+	|	InformationRegister.T9014S_AccountsExpenseRevenue.SliceLast(&Period, Expense
+	|	AND Company = &Company
+	|	AND LedgerTypeVariant = &LedgerTypeVariant
+	|	AND ExpenseRevenue = &ExpenseRevenue
+	|	AND ProfitLossCenter = &ProfitLossCenter) AS Table
 	|
 	|UNION ALL
 	|
 	|SELECT
-	|	ByCompany.Account,
+	|	Table.AccountExpense,
 	|	2
 	|FROM
-	|	InformationRegister.T9014S_AccountsExpenseRevenue.SliceLast(&Period, Company = &Company AND LedgerTypeVariant = &LedgerTypeVariant
-	|	AND ExpenseRevenue.Ref IS NULL) AS ByCompany
+	|	InformationRegister.T9014S_AccountsExpenseRevenue.SliceLast(&Period, Expense
+	|	AND Company = &Company
+	|	AND LedgerTypeVariant = &LedgerTypeVariant
+	|	AND ExpenseRevenue = &ExpenseRevenue
+	|	AND ProfitLossCenter.Ref IS NULL) AS Table
+	|
+	|UNION ALL
+	|
+	|SELECT
+	|	Table.AccountExpense,
+	|	3
+	|FROM
+	|	InformationRegister.T9014S_AccountsExpenseRevenue.SliceLast(&Period, Expense
+	|	AND Company = &Company
+	|	AND LedgerTypeVariant = &LedgerTypeVariant
+	|	AND ExpenseRevenue.Ref IS NULL
+	|	AND ProfitLossCenter = &ProfitLossCenter) AS Table
+	|
+	|UNION ALL
+	|
+	|SELECT
+	|	Table.AccountExpense,
+	|	4
+	|FROM
+	|	InformationRegister.T9014S_AccountsExpenseRevenue.SliceLast(&Period, Expense
+	|	AND Company = &Company
+	|	AND LedgerTypeVariant = &LedgerTypeVariant
+	|	AND ExpenseRevenue.Ref IS NULL
+	|	AND ProfitLossCenter.Ref IS NULL) AS Table
 	|;
 	|
 	|////////////////////////////////////////////////////////////////////////////////
 	|SELECT
-	|	Accounts.Account,
-	|	Accounts.Priority AS Priority
+	|	Table.AccountRevenue,
+	|	1 AS Priority
+	|INTO AccountsRevenue
 	|FROM
-	|	Accounts AS Accounts
+	|	InformationRegister.T9014S_AccountsExpenseRevenue.SliceLast(&Period, Revenue
+	|	AND Company = &Company
+	|	AND LedgerTypeVariant = &LedgerTypeVariant
+	|	AND ExpenseRevenue = &ExpenseRevenue
+	|	AND ProfitLossCenter = &ProfitLossCenter) AS Table
+	|
+	|UNION ALL
+	|
+	|SELECT
+	|	Table.AccountRevenue,
+	|	2
+	|FROM
+	|	InformationRegister.T9014S_AccountsExpenseRevenue.SliceLast(&Period, Revenue
+	|	AND Company = &Company
+	|	AND LedgerTypeVariant = &LedgerTypeVariant
+	|	AND ExpenseRevenue = &ExpenseRevenue
+	|	AND ProfitLossCenter.Ref IS NULL) AS Table
+	|
+	|UNION ALL
+	|
+	|SELECT
+	|	Table.AccountRevenue,
+	|	3
+	|FROM
+	|	InformationRegister.T9014S_AccountsExpenseRevenue.SliceLast(&Period, Revenue
+	|	AND Company = &Company
+	|	AND LedgerTypeVariant = &LedgerTypeVariant
+	|	AND ExpenseRevenue.Ref IS NULL
+	|	AND ProfitLossCenter = &ProfitLossCenter) AS Table
+	|
+	|UNION ALL
+	|
+	|SELECT
+	|	Table.AccountRevenue,
+	|	4
+	|FROM
+	|	InformationRegister.T9014S_AccountsExpenseRevenue.SliceLast(&Period, Revenue
+	|	AND Company = &Company
+	|	AND LedgerTypeVariant = &LedgerTypeVariant
+	|	AND ExpenseRevenue.Ref IS NULL
+	|	AND ProfitLossCenter.Ref IS NULL) AS Table
+	|;
+	|
+	|////////////////////////////////////////////////////////////////////////////////
+	|SELECT TOP 1
+	|	Table.AccountExpense,
+	|	Table.Priority AS Priority
+	|FROM
+	|	AccountsExpense AS Table
+	|
+	|ORDER BY
+	|	Priority
+	|;
+	|/////////////////
+	|SELECT TOP 1
+	|	Table.AccountRevenue,
+	|	Table.Priority AS Priority
+	|FROM
+	|	AccountsRevenue AS Table
 	|
 	|ORDER BY
 	|	Priority";
+	
 	Query.SetParameter("Period"  , Period);
 	Query.SetParameter("Company" , Company);
 	Query.SetParameter("LedgerTypeVariant" , LedgerTypeVariant);
 	Query.SetParameter("ExpenseRevenue" , ExpenseRevenue);
-	QueryResult = Query.Execute();
-	QuerySelection = QueryResult.Select();
-	Result = New Structure("Account");
-	If QuerySelection.Next() Then
-		Result.Account = QuerySelection.Account;
+	Query.SetParameter("ProfitLossCenter" , ProfitLossCenter);
+	
+	QueryResults = Query.ExecuteBatch();
+	
+	Result = New Structure();
+	Result.Insert("AccountExpense", Undefined);
+	Result.Insert("AccountRevenue", Undefined);
+	
+	QuerySelection_Expense = QueryResults[2].Select();
+	If QuerySelection_Expense.Next() Then
+		Result.AccountExpense = QuerySelection_Expense.AccountExpense;
 	EndIf;
+	
+	QuerySelection_Revenue = QueryResults[3].Select();
+	If QuerySelection_Revenue.Next() Then
+		Result.AccountRevenue = QuerySelection_Revenue.AccountRevenue;
+	EndIf;
+	
 	Return Result;
 EndFunction
 

@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mdclass:CommonModule xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="d345c22e-4d90-44a5-bcec-d754befea491">
+  <name>DocDepreciationCalculationClient</name>
+  <synonym>
+    <key>en</key>
+    <value>Doc depreciation calculation client</value>
+  </synonym>
+  <clientManagedApplication>true</clientManagedApplication>
+  <clientOrdinaryApplication>true</clientOrdinaryApplication>
+</mdclass:CommonModule>

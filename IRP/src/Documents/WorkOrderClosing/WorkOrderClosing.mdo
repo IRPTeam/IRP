@@ -22,6 +22,10 @@
     <key>en</key>
     <value>Work order closing</value>
   </objectPresentation>
+  <listPresentation>
+    <key>en</key>
+    <value>Work order closings</value>
+  </listPresentation>
   <numberLength>12</numberLength>
   <numberAllowedLength>Variable</numberAllowedLength>
   <checkUnique>true</checkUnique>

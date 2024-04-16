@@ -50,6 +50,10 @@
   <createOnInput>DontUse</createOnInput>
   <dataLockControlMode>Managed</dataLockControlMode>
   <fullTextSearch>Use</fullTextSearch>
+  <objectPresentation>
+    <key>en</key>
+    <value>Inventory transfer</value>
+  </objectPresentation>
   <listPresentation>
     <key>en</key>
     <value>Inventory transfers</value>

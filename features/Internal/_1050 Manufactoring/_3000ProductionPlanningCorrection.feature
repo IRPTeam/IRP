@@ -109,7 +109,7 @@ Scenario: _3003 create Production planning correction statuses
 Scenario: _3050 create production planning correction and check it movements (quantity)
 	// First month
 	* Create document
-		And In the command interface I select "Manufacturing" "Production planning correction"
+		And In the command interface I select "Manufacturing" "Production planning corrections"
 		And I click the button named "FormCreate"
 		And I click Select button of "Company" field
 		And I go to line in "List" table
@@ -389,7 +389,7 @@ Scenario: _3060 create production planning correction and check it movements (ch
 	// ThirdMonth
 		And I close all client application windows
 	* Create document
-		And In the command interface I select "Manufacturing" "Production planning correction"
+		And In the command interface I select "Manufacturing" "Production planning corrections"
 		And I click the button named "FormCreate"
 		And I click Select button of "Company" field
 		And I go to line in "List" table
@@ -620,7 +620,7 @@ Scenario: _3070 create second production planning correction and check it moveme
 	* Change user
 		And I connect "TestAdmin" TestClient using "ABrown" login and "" password
 	* Create document
-		And In the command interface I select "Manufacturing" "Production planning correction"
+		And In the command interface I select "Manufacturing" "Production planning corrections"
 		And I click the button named "FormCreate"
 		And I click Select button of "Company" field
 		And I go to line in "List" table

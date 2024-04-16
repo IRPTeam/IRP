@@ -631,13 +631,6 @@
         <value>59</value>
       </code>
       <isFolder>true</isFolder>
-      <content id="9f33fd36-eb45-49ff-8eec-364efd39872e">
-        <name>DepreciationCalculation_DR_DepreciationFixedAsset_CR_R8510B_BookValueOfFixedAsset</name>
-        <description></description>
-        <code xsi:type="core:NumberValue">
-          <value>60</value>
-        </code>
-      </content>
       <content id="fe69b40a-efd7-47f5-95ea-df8f185a3ed5">
         <name>DepreciationCalculation_DR_R5022T_Expenses_CR_DepreciationFixedAsset</name>
         <description></description>

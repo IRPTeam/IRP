@@ -1566,9 +1566,6 @@ Strings.Insert("ModernizationOfFixedAsset_DR_R4050B_StockInventory_CR_R8510B_Boo
 Strings.Insert("FixedAssetTransfer_DR_R8510B_BookValueOfFixedAsset_CR_R8510B_BookValueOfFixedAsset",
 	NStr("en = 'FixedAssetTransfer DR (R8510B_BookValueOfFixedAsset) CR (R8510B_BookValueOfFixedAsset)'", Lang));
 
-Strings.Insert("DepreciationCalculation_DR_DepreciationFixedAsset_CR_R8510B_BookValueOfFixedAsset",
-	NStr("en = 'DepreciationCalculation DR (DepreciationFixedAsset) CR (R8510B_BookValueOfFixedAsset)'", Lang));
-
 Strings.Insert("DepreciationCalculation_DR_R5022T_Expenses_CR_DepreciationFixedAsset",
 	NStr("en = 'DepreciationCalculation DR (R5022T_Expenses) CR (DepreciationFixedAsset)'", Lang));
 

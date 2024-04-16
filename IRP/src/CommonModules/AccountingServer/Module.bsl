@@ -148,7 +148,6 @@ Function GetOperationsDefinition()
 	Map.Insert(AO.FixedAssetTransfer_DR_R8510B_BookValueOfFixedAsset_CR_R8510B_BookValueOfFixedAsset, New Structure("ByRow", False));
 	
 	// Depreciation calculation
-	Map.Insert(AO.DepreciationCalculation_DR_DepreciationFixedAsset_CR_R8510B_BookValueOfFixedAsset, New Structure("ByRow", True));
 	Map.Insert(AO.DepreciationCalculation_DR_R5022T_Expenses_CR_DepreciationFixedAsset             , New Structure("ByRow", True));
 	
 Return Map;

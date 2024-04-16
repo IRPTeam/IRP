@@ -244,6 +244,24 @@
       <maxValue xsi:type="core:UndefinedValue"/>
       <fillValue xsi:type="core:UndefinedValue"/>
     </attributes>
+    <attributes uuid="a7f3e2e1-ace4-4f37-ad54-89e3573827b3">
+      <name>AttachedFile</name>
+      <synonym>
+        <key>en</key>
+        <value>Attached file</value>
+      </synonym>
+      <type>
+        <types>String</types>
+        <stringQualifiers>
+          <length>10</length>
+        </stringQualifiers>
+      </type>
+      <minValue xsi:type="core:UndefinedValue"/>
+      <maxValue xsi:type="core:UndefinedValue"/>
+      <fillValue xsi:type="core:StringValue">
+        <value></value>
+      </fillValue>
+    </attributes>
   </tabularSections>
   <forms uuid="98be86aa-baca-4362-aad8-e72462019d68">
     <name>Form</name>

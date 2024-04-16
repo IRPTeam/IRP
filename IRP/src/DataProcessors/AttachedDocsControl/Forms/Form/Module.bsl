@@ -10,6 +10,117 @@ Procedure OnCreateAtServer(Cancel, StandardProcessing)
 
 EndProcedure
 
+&AtClient
+Procedure NotificationProcessing(EventName, Parameter, Source)
+	
+	//PictureViewerClient.HTMLEventAction(EventName, Parameter, Source, ThisObject);
+	PictureViewerClient.HTMLEventAction(EventName, Parameter, Source, GetCurrentDocInTable());
+	
+EndProcedure
+
+
+#EndRegion
+
+#Region FormCommandsEventHandlers
+
+&AtClient
+Procedure FillDocuments(Command)
+	
+	FillDocumentsToControl();
+	
+EndProcedure
+
+#EndRegion
+
+#Region FormTableItemsEventHandlers
+
+&AtClient
+Procedure DocumentsOnActivateRow(Item)
+
+	CurrentData = Items.Documents.CurrentData;
+	If CurrentData = Undefined Then
+		Return;
+	EndIf;
+	
+	Items.DocumentsAttachedFiles.RowFilter = New FixedStructure("ID", CurrentData.ID);
+	PictureViewerClient.UpdateObjectPictures(ThisObject, CurrentData.DocRef);
+	IRPTE_send_to_1C("{""value"":""update_slider""}");
+	
+EndProcedure
+
+	
+#EndRegion
+
+#Region PictureViewer
+
+&AtClient
+Procedure HTMLViewControl(Command)
+	PictureViewerClient.HTMLViewControl(ThisObject, Command.Name);
+	If Items.ViewDetailsTree.Check And Items.ViewPictures.Check Then
+		PictureViewerClient.HTMLViewControl(ThisObject, Commands.ViewDetailsTree.Name);
+	EndIf;
+	ChangingFormBySettings();
+	SaveSettings();
+EndProcedure
+
+&AtServer
+Procedure SaveSettings()
+
+EndProcedure
+
+&AtClient
+Function GetCurrentDocInTable()
+	
+	Structure = New Structure;
+	Structure.Insert("Object", New Structure);
+	Structure.Insert("UUID", ThisObject.UUID);
+	Structure.Insert("Items", ThisForm.Items);
+	
+	DocRef = Undefined;
+	CurrentData = Items.Documents.CurrentData;
+	If CurrentData <> Undefined Then
+		DocRef = CurrentData.DocRef;
+	EndIf;
+	
+	Structure.Object.Insert("Ref", DocRef);
+	
+	Return Structure;
+	
+EndFunction
+
+&НаКлиенте
+Procedure IRPTE_send_to_1C(Text)
+	HTMLWindowPictures = PictureViewerClient.InfoDocumentComplete(Items.PictureViewHTML);
+	HTMLWindowPictures.send_to_1C("call1C", Text);
+EndProcedure
+
+
+&AtClient
+Procedure PictureViewHTMLOnClick(Item, EventData, StandardProcessing)
+	PictureViewerClient.PictureViewHTMLOnClick(GetCurrentDocInTable(), Item, EventData, StandardProcessing);
+EndProcedure
+
+&AtClient
+Procedure PictureViewerHTMLDocumentComplete(Item)
+	PictureViewerClient.UpdateHTMLPicture(Item, GetCurrentDocInTable());
+EndProcedure
+
+&AtClient
+Procedure ViewDetailsTree(Command)
+	PictureViewerClient.HTMLViewControl(ThisObject, Command.Name);
+	If Items.ViewDetailsTree.Check And Items.ViewPictures.Check Then
+		PictureViewerClient.HTMLViewControl(ThisObject, Commands.ViewPictures.Name);
+	EndIf;
+	ChangingFormBySettings();
+	SaveSettings();
+EndProcedure
+
+&AtClient
+// @skip-check unknown-method-property
+Procedure ChangingFormBySettings()
+	
+EndProcedure
+
 #EndRegion
 
 #Region Private
@@ -39,22 +150,20 @@ Function GetArrayMetaDocsToControl()
 	
 EndFunction
 
-&AtServer
-Procedure FillDocumentsToControl()
+&AtServerNoContext
+Function GetQueryText(DocsNamesArray)
 	
-	Object.Documents.Clear();
-	
-	DocsNamesToControl = GetArrayMetaDocsToControl(); //Array
-	If DocsNamesToControl.Count() = 0 Then
-		Return;
-	EndIf;
-
-	
-	Template = "SELECT Doc.Ref, Doc.Date, VALUETYPE(Doc.Ref) %1 %2 FROM Document.%3 AS Doc, ""$4"" AS DocMetaName WHERE Doc.Date BETWEEN &StartDate AND &EndDate";
+	Template = "SELECT Doc.Ref, Doc.Date, ""%1"" %2, VALUETYPE(Doc.Ref) %3 %4 FROM Document.%5 AS Doc WHERE Doc.Date BETWEEN &StartDate AND &EndDate";
 	
 	Array = New Array;
-	For Each DocName In DocsNamesToControl Do
-		Array.Add(StrTemplate(Template, ?(Array.Count(), "", "AS DocumentType"), ?(Array.Count(), "", "INTO AllDocuments"), DocName, DocName));
+	For Each DocName In DocsNamesArray Do
+		Array.Add(StrTemplate(
+		Template,
+		DocName,
+		?(Array.Count(), "", "AS DocMetaName"),
+		?(Array.Count(), "", "AS DocumentType"), 
+		?(Array.Count(), "", "INTO AllDocuments"),
+		DocName));
 	EndDo;
 
 	QueryTxt = StrConcat(Array, Chars.LF + "UNION ALL" + Chars.LF) +	"
@@ -67,8 +176,8 @@ Procedure FillDocumentsToControl()
 	|	AllDocuments.Ref.Branch AS Branch,
 	|	AllDocuments.Ref.Number AS DocNumber,
 	|	AllDocuments.Ref AS DocRef,
-	|	AllDocuments.DocMetaName,
 	|	AllDocuments.DocumentType,
+	|	AllDocuments.DocMetaName,
 	|	CASE
 	|		WHEN AllDocuments.Ref.Posted
 	|			THEN 0
@@ -86,6 +195,48 @@ Procedure FillDocumentsToControl()
 	|ORDER BY
 	|	AllDocuments.Date";
 	
+	Return QueryTxt;
+	
+EndFunction
+
+&AtServerNoContext
+Function GetDocsTypeToAttachValueTable(DocsNamesArray)
+	
+	Query = New Query;
+	Query.SetParameter("DocsNamesArray", DocsNamesArray);
+	Query.Text = 
+	"SELECT
+	|	AttachedDocumentSettingsFileSettings.Ref.Description AS DocMetaName,
+	|	AttachedDocumentSettingsFileSettings.FilePresention AS FilePresention,
+	|	AttachedDocumentSettingsFileSettings.FileTooltips AS FileTooltips,
+	|	AttachedDocumentSettingsFileSettings.FileTemplate AS FileTemplate,
+	|	AttachedDocumentSettingsFileSettings.NamingFormat AS NamingFormat,
+	|	AttachedDocumentSettingsFileSettings.Required AS Required,
+	|	AttachedDocumentSettingsFileSettings.MaximumFileSize AS MaximumFileSize,
+	|	AttachedDocumentSettingsFileSettings.FileFormat AS FileFormat
+	|FROM
+	|	Catalog.AttachedDocumentSettings.FileSettings AS AttachedDocumentSettingsFileSettings
+	|WHERE
+	|	AttachedDocumentSettingsFileSettings.Ref.Description IN(&DocsNamesArray)";
+	
+	Return Query.Execute().Unload();
+	
+EndFunction
+
+&AtServer
+Procedure FillDocumentsToControl()
+	
+	Object.Documents.Clear();
+	
+	DocsNamesToControl = GetArrayMetaDocsToControl(); //Array
+	If DocsNamesToControl.Count() = 0 Then
+		Return;
+	EndIf;
+
+	QueryTxt = GetQueryText(DocsNamesToControl);
+	
+	DocsTypeToAttachVT = GetDocsTypeToAttachValueTable(DocsNamesToControl);
+		
 	Query = New Query(QueryTxt);
 	Query.SetParameter("StartDate", Object.Period.StartDate);
 	Query.SetParameter("EndDate", Object.Period.EndDate);
@@ -102,21 +253,19 @@ Procedure FillDocumentsToControl()
 		FillPropertyValues(NewRow, SelectionDetailRecords);
 		
 		NewRow.ID = New UUID;
+		
+		SearchArray = DocsTypeToAttachVT.FindRows(New Structure("DocMetaName", SelectionDetailRecords.DocMetaName));
+		For Each Row In SearchArray Do
+			NewChildRow = Object.DocumentsAttachedFiles.Add();
+			FillPropertyValues(NewChildRow, Row);
+			NewChildRow.ID = NewRow.ID;
+		EndDo;
+		
 	EndDo;
 
 	
 EndProcedure
 
-#EndRegion
-
-#Region FormCommandsEventHandlers
-
-&AtClient
-Procedure FillDocuments(Command)
-	
-	FillDocumentsToControl();
-	
-EndProcedure
-
 
 #EndRegion
+

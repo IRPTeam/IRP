@@ -27,6 +27,7 @@
     <types>DocumentRef.PurchaseReturnOrder</types>
     <types>CatalogRef.PriceTypes</types>
     <types>DocumentRef.Labeling</types>
+    <types>DocumentRef.ConsolidatedRetailSales</types>
     <types>DocumentRef.BankPayment</types>
     <types>CatalogRef.Partners</types>
     <types>DocumentRef.ShipmentConfirmation</types>

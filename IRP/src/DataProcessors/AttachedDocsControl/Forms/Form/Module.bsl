@@ -50,11 +50,11 @@ Procedure FillDocumentsToControl()
 	EndIf;
 
 	
-	Template = "SELECT Doc.Ref, Doc.Date, VALUETYPE(Doc.Ref) %1 %2 FROM Document.%3 AS Doc WHERE Doc.Date BETWEEN &StartDate AND &EndDate";
+	Template = "SELECT Doc.Ref, Doc.Date, VALUETYPE(Doc.Ref) %1 %2 FROM Document.%3 AS Doc, ""$4"" AS DocMetaName WHERE Doc.Date BETWEEN &StartDate AND &EndDate";
 	
 	Array = New Array;
 	For Each DocName In DocsNamesToControl Do
-		Array.Add(StrTemplate(Template, ?(Array.Count(), "", "AS DocumentType"), ?(Array.Count(), "", "INTO AllDocuments"), DocName));
+		Array.Add(StrTemplate(Template, ?(Array.Count(), "", "AS DocumentType"), ?(Array.Count(), "", "INTO AllDocuments"), DocName, DocName));
 	EndDo;
 
 	QueryTxt = StrConcat(Array, Chars.LF + "UNION ALL" + Chars.LF) +	"
@@ -67,6 +67,7 @@ Procedure FillDocumentsToControl()
 	|	AllDocuments.Ref.Branch AS Branch,
 	|	AllDocuments.Ref.Number AS DocNumber,
 	|	AllDocuments.Ref AS DocRef,
+	|	AllDocuments.DocMetaName,
 	|	AllDocuments.DocumentType,
 	|	CASE
 	|		WHEN AllDocuments.Ref.Posted
@@ -99,6 +100,8 @@ Procedure FillDocumentsToControl()
 	While SelectionDetailRecords.Next() Do
 		NewRow = Object.Documents.Add();
 		FillPropertyValues(NewRow, SelectionDetailRecords);
+		
+		NewRow.ID = New UUID;
 	EndDo;
 
 	

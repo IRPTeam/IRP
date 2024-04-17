@@ -13,6 +13,7 @@ Function PostingGetDocumentDataTables(Ref, Cancel, PostingMode, Parameters, AddI
 	QueryArray = GetQueryTextsSecondaryTables();
 	Parameters.Insert("QueryParameters", GetAdditionalQueryParameters(Ref));
 	PostingServer.ExecuteQuery(Ref, QueryArray, Parameters);
+	AccountingServer.CreateAccountingDataTables(Ref, Cancel, PostingMode, Parameters, AddInfo);
 	Return Tables;
 EndFunction
 
@@ -32,6 +33,7 @@ Procedure PostingCheckBeforeWrite(Ref, Cancel, PostingMode, Parameters, AddInfo 
 	Tables.R3027B_EmployeeCashAdvance.Columns.Add("Key", Metadata.DefinedTypes.typeRowID.Type);
 	Tables.R5015B_OtherPartnersTransactions.Columns.Add("Key", Metadata.DefinedTypes.typeRowID.Type);
 	Tables.R5020B_PartnersBalance.Columns.Add("Key", Metadata.DefinedTypes.typeRowID.Type);
+	Tables.T1040T_AccountingAmounts.Columns.Add("Key", Metadata.DefinedTypes.typeRowID.Type);
 	
 	PostingServer.FillPostingTables(Tables, Ref, QueryArray, Parameters);
 EndProcedure
@@ -114,6 +116,7 @@ Function GetQueryTextsMasterTables()
 	QueryArray.Add(R9555T_PaidSickLeaves());
 	QueryArray.Add(R5015B_OtherPartnersTransactions());
 	QueryArray.Add(R5020B_PartnersBalance());
+	QueryArray.Add(T1040T_AccountingAmounts());
 	Return QueryArray;
 EndFunction
 
@@ -444,5 +447,272 @@ Function GetAccessKey(Obj) Export
 	AccessKeyMap.Insert("Branch", Obj.Branch);
 	Return AccessKeyMap;
 EndFunction
+
+#EndRegion
+
+#Region Accounting
+
+Function T1040T_AccountingAmounts()
+	Return 
+		"SELECT
+		|	AccrualList.Period,
+		|	AccrualList.Key AS RowKey,
+		|	AccrualList.Key AS Key,
+		|	AccrualList.Currency,
+		|	AccrualList.Amount AS Amount,
+		|	VALUE(Catalog.AccountingOperations.Payroll_DR_R5022T_Expenses_CR_R9510B_SalaryPayment_Accrual) AS Operation,
+		|	UNDEFINED AS AdvancesClosing
+		|INTO T1040T_AccountingAmounts
+		|FROM
+		|	AccrualList AS AccrualList
+		|WHERE
+		|	TRUE
+		|
+		|UNION ALL
+		|
+		|SELECT
+		|	SalaryTaxList.Period,
+		|	SalaryTaxList.Key,
+		|	SalaryTaxList.Key,
+		|	SalaryTaxList.Currency,
+		|	SalaryTaxList.Amount,
+		|	VALUE(Catalog.AccountingOperations.Payroll_DR_R9510B_SalaryPayment_CR_R5015B_OtherPartnersTransactions_Taxes),
+		|	UNDEFINED
+		|FROM
+		|	SalaryTaxList AS SalaryTaxList
+		|WHERE
+		|	SalaryTaxList.IsEmployeePayer
+		|
+		|UNION ALL
+		|
+		|SELECT
+		|	SalaryTaxList.Period,
+		|	SalaryTaxList.Key,
+		|	SalaryTaxList.Key,
+		|	SalaryTaxList.Currency,
+		|	SalaryTaxList.Amount,
+		|	VALUE(Catalog.AccountingOperations.Payroll_DR_R5022T_Expenses_CR_R5015B_OtherPartnersTransactions_Taxes),
+		|	UNDEFINED
+		|FROM
+		|	SalaryTaxList AS SalaryTaxList
+		|WHERE
+		|	SalaryTaxList.IsCompanyPayer
+		|
+		|UNION ALL
+		|
+		|SELECT
+		|	CashAdvanceDeductionList.Period,
+		|	CashAdvanceDeductionList.Key,
+		|	CashAdvanceDeductionList.Key,
+		|	CashAdvanceDeductionList.Currency,
+		|	CashAdvanceDeductionList.Amount,
+		|	VALUE(Catalog.AccountingOperations.Payroll_DR_R9510B_SalaryPayment_CR_R3027B_EmployeeCashAdvance),
+		|	UNDEFINED
+		|FROM
+		|	CashAdvanceDeductionList AS CashAdvanceDeductionList
+		|WHERE
+		|	TRUE
+		|
+		|UNION ALL
+		|
+		|SELECT
+		|	DeductionList.Period,
+		|	DeductionList.Key,
+		|	DeductionList.Key,
+		|	DeductionList.Currency,
+		|	DeductionList.Amount,
+		|	VALUE(Catalog.AccountingOperations.Payroll_DR_R9510B_SalaryPayment_CR_R5021T_Revenues_Deduction_IsRevenue),
+		|	UNDEFINED
+		|FROM
+		|	DeductionList AS DeductionList
+		|WHERE
+		|	DeductionList.IsRevenue
+		|
+		|UNION ALL
+		|
+		|SELECT
+		|	DeductionList.Period,
+		|	DeductionList.Key,
+		|	DeductionList.Key,
+		|	DeductionList.Currency,
+		|	-DeductionList.Amount,
+		|	VALUE(Catalog.AccountingOperations.Payroll_DR_R5022T_Expenses_CR_R9510B_SalaryPayment_Deduction_IsNotRevenue),
+		|	UNDEFINED
+		|FROM
+		|	DeductionList AS DeductionList
+		|WHERE
+		|	NOT DeductionList.IsRevenue";
+EndFunction
+
+Function GetAccountingAnalytics(Parameters) Export
+	Operations = Catalogs.AccountingOperations;
+	
+	If Parameters.Operation = Operations.Payroll_DR_R5022T_Expenses_CR_R9510B_SalaryPayment_Accrual Then
+		
+		Return GetAnalytics_DR_R5022T_Expenses_CR_R9510B_SalaryPayment_Accrual(Parameters); // Expenses - Salary payment
+	
+	ElsIf Parameters.Operation = Operations.Payroll_DR_R9510B_SalaryPayment_CR_R5015B_OtherPartnersTransactions_Taxes Then 
+		
+		Return GetAnalytics_DR_R9510B_SalaryPayment_CR_R5015B_OtherPartnersTransactions_Taxes(Parameters); // Salary payment - Other partner transactions
+	
+	ElsIf Parameters.Operation = Operations.Payroll_DR_R5022T_Expenses_CR_R5015B_OtherPartnersTransactions_Taxes Then
+		
+		Return GetAnalytics_DR_R5022T_Expenses_CR_R5015B_OtherPartnersTransactions_Taxes(Parameters); // Expenses - Other partner transaction
+	
+	ElsIf Parameters.Operation = Operations.Payroll_DR_R9510B_SalaryPayment_CR_R3027B_EmployeeCashAdvance Then
+		
+		Return GetAnalytics_DR_R9510B_SalaryPayment_CR_R3027B_EmployeeCashAdvance(Parameters); // Salary payment - Employee cash advance
+		
+	ElsIf Parameters.Operation = Operations.Payroll_DR_R9510B_SalaryPayment_CR_R5021T_Revenues_Deduction_IsRevenue Then
+		
+		Return GetAnalytics_DR_R9510B_SalaryPayment_CR_R5021T_Revenues_Deduction_IsRevenue(Parameters); // Salary payment - Revenues
+		
+	ElsIf Parameters.Operation = Operations.Payroll_DR_R5022T_Expenses_CR_R9510B_SalaryPayment_Deduction_IsNotRevenue Then
+		
+		Return GetAnalytics_DR_R5022T_Expenses_CR_R9510B_SalaryPayment_Deduction_IsNotRevenue(Parameters); // Expenses - Salary payment (minus)
+		
+	EndIf;
+	
+	Return Undefined;
+EndFunction
+
+#Region Accounting_Analytics
+
+// Expenses - Salary payment (accrual)*
+Function GetAnalytics_DR_R5022T_Expenses_CR_R9510B_SalaryPayment_Accrual(Parameters)
+	
+	AccountingAnalytics = AccountingServer.GetAccountingAnalyticsResult(Parameters);
+	AccountParameters   = AccountingServer.GetAccountParameters(Parameters);
+
+	// Debit
+	Debit = AccountingServer.GetT9014S_AccountsExpenseRevenue(AccountParameters, 
+	                                                          Parameters.RowData.ExpenseType,
+	                                                          Parameters.RowData.ProfitLossCenter);
+	AccountingAnalytics.Debit = Debit.AccountExpense;
+	AccountingServer.SetDebitExtDimensions(Parameters, AccountingAnalytics);
+	
+	// Credit
+	Credit = AccountingServer.GetT9016S_AccountsEmployee(AccountParameters, Parameters.RowData.Employee);
+	AccountingAnalytics.Credit = Credit.AccountSalaryPayment;
+	AccountingServer.SetCreditExtDimensions(Parameters, AccountingAnalytics);
+	Return AccountingAnalytics;
+EndFunction
+
+// Salary payment - Other partner transactions (taxes)*
+Function GetAnalytics_DR_R9510B_SalaryPayment_CR_R5015B_OtherPartnersTransactions_Taxes(Parameters)
+	
+	AccountingAnalytics = AccountingServer.GetAccountingAnalyticsResult(Parameters);
+	AccountParameters   = AccountingServer.GetAccountParameters(Parameters);
+		
+	// Debit
+	Debit = AccountingServer.GetT9016S_AccountsEmployee(AccountParameters, Parameters.RowData.Employee);
+	AccountingAnalytics.Debit = Debit.AccountSalaryPayment;
+	AccountingServer.SetDebitExtDimensions(Parameters, AccountingAnalytics);
+	
+	// Credit
+	Credit = AccountingServer.GetT9012S_AccountsPartner(AccountParameters, 
+	                                                    Parameters.ObjectData.Partner,
+	                                                    Parameters.ObjectData.Agreement,
+	                                                    Parameters.ObjectData.Currency);
+	AccountingAnalytics.Credit = Credit.AccountTransactionsOther;
+	AccountingServer.SetCreditExtDimensions(Parameters, AccountingAnalytics);
+	
+	Return AccountingAnalytics;
+EndFunction
+
+// Expenes - Other partner transactions (taxes)*
+Function GetAnalytics_DR_R5022T_Expenses_CR_R5015B_OtherPartnersTransactions_Taxes(Parameters)
+	
+	AccountingAnalytics = AccountingServer.GetAccountingAnalyticsResult(Parameters);
+	AccountParameters   = AccountingServer.GetAccountParameters(Parameters);
+		
+	// Debit
+	Debit = AccountingServer.GetT9014S_AccountsExpenseRevenue(AccountParameters, 
+	                                                          Parameters.RowData.ExpenseType,
+	                                                          Parameters.RowData.ProfitLossCenter);
+	AccountingAnalytics.Debit = Debit.AccountExpense;
+	AccountingServer.SetDebitExtDimensions(Parameters, AccountingAnalytics);
+	
+	// Credit
+	Credit = AccountingServer.GetT9012S_AccountsPartner(AccountParameters, 
+	                                                    Parameters.ObjectData.Partner,
+	                                                    Parameters.ObjectData.Agreement,
+	                                                    Parameters.ObjectData.Currency);
+	AccountingAnalytics.Credit = Credit.AccountTransactionsOther;
+	AccountingServer.SetCreditExtDimensions(Parameters, AccountingAnalytics);
+	
+	Return AccountingAnalytics;
+EndFunction
+
+// Salary payment - Employee cash advance (cash advance)*
+Function GetAnalytics_DR_R9510B_SalaryPayment_CR_R3027B_EmployeeCashAdvance(Parameters)
+	
+	AccountingAnalytics = AccountingServer.GetAccountingAnalyticsResult(Parameters);
+	AccountParameters   = AccountingServer.GetAccountParameters(Parameters);
+	
+	// Debit
+	Debit = AccountingServer.GetT9016S_AccountsEmployee(AccountParameters, Parameters.RowData.Employee); 
+	AccountingAnalytics.Debit = Debit.AccountSalaryPayment;
+	AccountingServer.SetDebitExtDimensions(Parameters, AccountingAnalytics);
+
+	// Credit
+	Credit = AccountingServer.GetT9016S_AccountsEmployee(AccountParameters, Parameters.RowData.Employee);
+	AccountingAnalytics.Credit = Credit.AccountCashAdvance;
+	AccountingServer.SetCreditExtDimensions(Parameters, AccountingAnalytics);
+	
+	Return AccountingAnalytics;
+EndFunction
+
+// Salary payment - Revenues (deduction)*
+Function GetAnalytics_DR_R9510B_SalaryPayment_CR_R5021T_Revenues_Deduction_IsRevenue(Parameters)
+	
+	AccountingAnalytics = AccountingServer.GetAccountingAnalyticsResult(Parameters);
+	AccountParameters   = AccountingServer.GetAccountParameters(Parameters);
+
+	// Debit
+	Debit = AccountingServer.GetT9016S_AccountsEmployee(AccountParameters, Parameters.RowData.Employee);
+	AccountingAnalytics.Debit = Debit.AccountSalaryPayment;
+	AccountingServer.SetDebitExtDimensions(Parameters, AccountingAnalytics);
+	
+	// Credit
+	Credit = AccountingServer.GetT9014S_AccountsExpenseRevenue(AccountParameters, 
+	                                                           Parameters.RowData.ExpenseType,
+	                                                           Parameters.RowData.ProfitLossCenter);
+	AccountingAnalytics.Credit = Credit.AccountRevenue;
+	AccountingServer.SetCreditExtDimensions(Parameters, AccountingAnalytics);
+
+	Return AccountingAnalytics;
+EndFunction
+
+// Expenses - Salary payment (deduction minus)* 
+Function GetAnalytics_DR_R5022T_Expenses_CR_R9510B_SalaryPayment_Deduction_IsNotRevenue(Parameters)
+	
+	AccountingAnalytics = AccountingServer.GetAccountingAnalyticsResult(Parameters);
+	AccountParameters   = AccountingServer.GetAccountParameters(Parameters);
+
+	// Debit
+	Debit = AccountingServer.GetT9014S_AccountsExpenseRevenue(AccountParameters, 
+	                                                           Parameters.RowData.ExpenseType,
+	                                                           Parameters.RowData.ProfitLossCenter);
+	AccountingAnalytics.Debit = Debit.AccountExpense;
+	AccountingServer.SetDebitExtDimensions(Parameters, AccountingAnalytics);
+
+	// Credit
+	Credit = AccountingServer.GetT9016S_AccountsEmployee(AccountParameters, Parameters.RowData.Employee);
+	AccountingAnalytics.Credit = Credit.AccountSalaryPayment;
+	AccountingServer.SetCreditExtDimensions(Parameters, AccountingAnalytics);
+	
+	Return AccountingAnalytics;
+EndFunction
+
+Function GetHintDebitExtDimension(Parameters, ExtDimensionType, Value) Export
+	Return Value;
+EndFunction
+
+Function GetHintCreditExtDimension(Parameters, ExtDimensionType, Value) Export
+	Return Value;
+EndFunction
+
+#EndRegion
 
 #EndRegion

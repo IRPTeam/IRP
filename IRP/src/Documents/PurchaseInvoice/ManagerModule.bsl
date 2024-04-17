@@ -1537,7 +1537,7 @@ Function GetAnalytics_ReceiptInventory(Parameters)
 	                                                          Parameters.RowData.ExpenseType,
 	                                                          Parameters.RowData.ProfitLossCenter);
 	
-	If ValueIsFilled(Debit.AccountExpense) Then
+	If ValueIsFilled(Debit.AccountExpense) And Parameters.RowData.IsService  Then
 		AccountingAnalytics.Debit = Debit.AccountExpense;
 	Else
 		Debit = AccountingServer.GetT9010S_AccountsItemKey(AccountParameters, Parameters.RowData.ItemKey);

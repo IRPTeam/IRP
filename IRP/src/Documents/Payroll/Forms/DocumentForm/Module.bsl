@@ -18,6 +18,7 @@ EndProcedure
 &AtServer
 Procedure BeforeWriteAtServer(Cancel, CurrentObject, WriteParameters)
 	AddAttributesAndPropertiesServer.BeforeWriteAtServer(ThisObject, Cancel, CurrentObject, WriteParameters);
+	AccountingServer.BeforeWriteAtServer(Object, ThisObject, Cancel, CurrentObject, WriteParameters);
 EndProcedure
 
 &AtServer
@@ -61,6 +62,11 @@ Procedure SetVisibilityAvailability(Object, Form)
 	Form.Items.EditCurrenciesDeduction.Enabled = Not Form.ReadOnly;
 	Form.Items.EditCurrenciesCashAdvanceDeduction.Enabled = Not Form.ReadOnly;
 	Form.Items.EditCurrenciesTaxes.Enabled = Not Form.ReadOnly;
+	
+	Form.Items.EditAccountingAccrual.Enabled = Not Form.ReadOnly;
+	Form.Items.EditAccountingDeduction.Enabled = Not Form.ReadOnly;
+	Form.Items.EditAccountingCashAdvanceDeduction.Enabled = Not Form.ReadOnly;
+	Form.Items.EditAccountingTaxes.Enabled = Not Form.ReadOnly;
 	
 	Form.Items.FillAccrual.Enabled = Not Form.ReadOnly;
 	Form.Items.FillDeduction.Enabled = Not Form.ReadOnly;	
@@ -525,6 +531,47 @@ EndProcedure
 &AtClient
 Procedure ShowHiddenTables(Command)
 	DocumentsClient.ShowHiddenTables(Object, ThisObject);
+EndProcedure
+
+&AtClient
+Procedure EditAccountingAccrual(Command)
+	EditAccounting("AccrualList");
+EndProcedure
+
+&AtClient
+Procedure EditAccountingDeduction(Command)
+	EditAccounting("DeductionList");
+EndProcedure
+
+&AtClient
+Procedure EditAccountingCashAdvanceDeduction(Command)
+	EditAccounting("CashAdvanceDeductionList");
+EndProcedure
+
+&AtClient
+Procedure EditAccountingTaxes(Command)
+	EditAccounting("SalaryTaxList");
+EndProcedure
+
+&AtClient
+Procedure EditAccounting(TableName)
+	CurrentData = ThisObject.Items[TableName].CurrentData;
+	If CurrentData = Undefined Then
+		Return;
+	EndIf;
+	UpdateAccountingData(TableName);
+	AccountingClient.OpenFormEditAccounting(Object, ThisObject, CurrentData, TableName);
+EndProcedure
+
+&AtServer
+Procedure UpdateAccountingData(TableName)
+	_AccountingRowAnalytics = ThisObject.AccountingRowAnalytics.Unload();
+	_AccountingExtDimensions = ThisObject.AccountingExtDimensions.Unload();
+	AccountingClientServer.UpdateAccountingTables(Object, 
+			                                      _AccountingRowAnalytics, 
+		                                          _AccountingExtDimensions, TableName);
+	ThisObject.AccountingRowAnalytics.Load(_AccountingRowAnalytics);
+	ThisObject.AccountingExtDimensions.Load(_AccountingExtDimensions);
 EndProcedure
 
 #EndRegion

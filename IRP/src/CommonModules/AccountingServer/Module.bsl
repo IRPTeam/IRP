@@ -150,7 +150,15 @@ Function GetOperationsDefinition()
 	// Depreciation calculation
 	Map.Insert(AO.DepreciationCalculation_DR_R5022T_Expenses_CR_DepreciationFixedAsset             , New Structure("ByRow", True));
 	
-Return Map;
+	// Payroll
+	Map.Insert(AO.Payroll_DR_R5022T_Expenses_CR_R9510B_SalaryPayment_Accrual                , New Structure("ByRow, ReferTableName", True, "AccrualList"));
+	Map.Insert(AO.Payroll_DR_R9510B_SalaryPayment_CR_R5015B_OtherPartnersTransactions_Taxes , New Structure("ByRow, ReferTableName", True, "SalaryTaxList"));
+	Map.Insert(AO.Payroll_DR_R5022T_Expenses_CR_R5015B_OtherPartnersTransactions_Taxes      , New Structure("ByRow, ReferTableName", True, "SalaryTaxList"));
+	Map.Insert(AO.Payroll_DR_R9510B_SalaryPayment_CR_R5021T_Revenues_Deduction_IsRevenue    , New Structure("ByRow, ReferTableName", True, "DeductionList"));
+	Map.Insert(AO.Payroll_DR_R5022T_Expenses_CR_R9510B_SalaryPayment_Deduction_IsNotRevenue , New Structure("ByRow, ReferTableName", True, "DeductionList"));
+	Map.Insert(AO.Payroll_DR_R9510B_SalaryPayment_CR_R3027B_EmployeeCashAdvance             , New Structure("ByRow, ReferTableName", True, "CashAdvanceDeductionList"));
+	
+	Return Map;
 EndFunction
 
 Function GetSupportedDocuments() Export
@@ -344,7 +352,7 @@ Function GetLedgerTypesByCompany(Ref, Date, Company) Export
 	Return ArrayOfLedgerTypes;
 EndFunction
 
-Function GetAccountingOperationsByLedgerType(Object, Period, LedgerType)
+Function GetAccountingOperationsByLedgerType(Object, Period, LedgerType, MainTableName)
 	MetadataName = Object.Ref.Metadata().Name;
 	AccountingOperationGroup = Catalogs.AccountingOperations["Document_" + MetadataName];
 	Query = New Query();
@@ -374,14 +382,28 @@ Function GetAccountingOperationsByLedgerType(Object, Period, LedgerType)
 	While QuerySelection.Next() Do
 		Def = OperationsDefinition.Get(QuerySelection.AccountingOperation);
 		ByRow = ?(Def = Undefined, False, Def.ByRow);
+		
 		RequestTable = False;
 		If Def <> Undefined And Def.Property("RequestTable") Then
 			RequestTable = Def.RequestTable;
 		EndIf;
 		
+		ReferTableName = Undefined;
+		If Def <> Undefined And Def.Property("ReferTableName") Then
+			ReferTableName = Def.ReferTableName;
+		EndIf;
+		
+		// Filters
+		
 		If Def <> Undefined 
 			And Def.Property("TransactionType") 
 			And Def.TransactionType <> DocTransactionType Then
+			Continue;
+		EndIf;
+		
+		If ValueIsFilled(ReferTableName)
+			And ValueIsFilled(MainTableName)
+			And ReferTableName <> MainTableName Then
 			Continue;
 		EndIf;
 		
@@ -390,6 +412,7 @@ Function GetAccountingOperationsByLedgerType(Object, Period, LedgerType)
 		NewAccountingOperation.Insert("ByRow"        , ByRow);
 		NewAccountingOperation.Insert("RequestTable" , RequestTable);
 		NewAccountingOperation.Insert("MetadataName" , MetadataName);
+		NewAccountingOperation.Insert("ReferTableName" , ReferTableName);
 		ArrayOfAccountingOperations.Add(NewAccountingOperation);
 	EndDo;
 	Return ArrayOfAccountingOperations;
@@ -741,7 +764,6 @@ Function __GetT9012S_AccountsPartner(Period, Company, LedgerTypeVariant, Partner
 	|
 	|/////////////////////////////////////////////////////////////////////////////////////////////////////
 	|SELECT
-	|	ByAgreement.AccountAdvancesOther,
 	|	ByAgreement.AccountTransactionsOther,
 	|	1 AS Priority
 	|INTO Accounts_Other
@@ -756,7 +778,6 @@ Function __GetT9012S_AccountsPartner(Period, Company, LedgerTypeVariant, Partner
 	|UNION ALL
 	|
 	|SELECT
-	|	ByPartner.AccountAdvancesOther,
 	|	ByPartner.AccountTransactionsOther,
 	|	2
 	|FROM
@@ -770,7 +791,6 @@ Function __GetT9012S_AccountsPartner(Period, Company, LedgerTypeVariant, Partner
 	|UNION ALL
 	|
 	|SELECT
-	|	ByCurrency.AccountAdvancesOther,
 	|	ByCurrency.AccountTransactionsOther,
 	|	3
 	|FROM
@@ -784,7 +804,6 @@ Function __GetT9012S_AccountsPartner(Period, Company, LedgerTypeVariant, Partner
 	|UNION ALL
 	|
 	|SELECT
-	|	ByCompany.AccountAdvancesOther,
 	|	ByCompany.AccountTransactionsOther,
 	|	4
 	|FROM
@@ -821,7 +840,6 @@ Function __GetT9012S_AccountsPartner(Period, Company, LedgerTypeVariant, Partner
 	|
 	|////////////////////////////////////////////////////////////////////////////////
 	|SELECT TOP 1
-	|	Accounts.AccountAdvancesOther,
 	|	Accounts.AccountTransactionsOther,
 	|	Accounts.Priority AS Priority
 	|FROM
@@ -844,7 +862,6 @@ Function __GetT9012S_AccountsPartner(Period, Company, LedgerTypeVariant, Partner
 	Result.Insert("AccountTransactionsVendor"    , Undefined);
 	Result.Insert("AccountAdvancesCustomer"      , Undefined);
 	Result.Insert("AccountTransactionsCustomer"  , Undefined);
-	Result.Insert("AccountAdvancesOther"         , Undefined);
 	Result.Insert("AccountTransactionsOther"     , Undefined);
 
 	QuerySelection_Vendor = QueryResults[3].Select();
@@ -861,7 +878,6 @@ Function __GetT9012S_AccountsPartner(Period, Company, LedgerTypeVariant, Partner
 	
 	QuerySelection_Other = QueryResults[5].Select();
 	If QuerySelection_Other.Next() Then
-		Result.AccountAdvancesOther = QuerySelection_Other.AccountAdvancesOther;
 		Result.AccountTransactionsOther = QuerySelection_Other.AccountTransactionsOther;
 	EndIf;
 	
@@ -1178,6 +1194,64 @@ Function __GetT9015S_AccountsFixedAsset(Period, Company, LedgerTypeVariant, Fixe
 	Return Result;
 EndFunction
 
+Function GetT9016S_AccountsEmployee(AccountParameters, Employee) Export
+	Return AccountingServerReuse.GetT9016S_AccountsEmployee_Reuse(
+		AccountParameters.Period, 
+		AccountParameters.Company, 
+		AccountParameters.LedgerTypeVariant, 
+		Employee);
+EndFunction
+
+Function __GetT9016S_AccountsEmployee(Period, Company, LedgerTypeVariant, Employee) Export
+	Query = New Query();
+	Query.Text =
+	"SELECT
+	|	Table.AccountSalaryPayment,
+	|	Table.AccountCashAdvance,
+	|	1 AS Priority
+	|INTO Accounts
+	|FROM
+	|	InformationRegister.T9016S_AccountsEmployee.SliceLast(&Period, Company = &Company
+	|	AND LedgerTypeVariant = &LedgerTypeVariant
+	|	AND Employee = &Employee) AS Table
+	|
+	|UNION ALL
+	|
+	|SELECT
+	|	Table.AccountSalaryPayment,
+	|	Table.AccountCashAdvance,
+	|	2
+	|FROM
+	|	InformationRegister.T9016S_AccountsEmployee.SliceLast(&Period, Company = &Company
+	|	AND LedgerTypeVariant = &LedgerTypeVariant
+	|	AND Employee.Ref IS NULL) AS Table
+	|;
+	|
+	|////////////////////////////////////////////////////////////////////////////////
+	|SELECT
+	|	Accounts.AccountSalaryPayment,
+	|	Accounts.AccountCashAdvance,
+	|	Accounts.Priority AS Priority
+	|FROM
+	|	Accounts AS Accounts
+	|
+	|ORDER BY
+	|	Priority";
+	Query.SetParameter("Period"   , Period);
+	Query.SetParameter("Company"  , Company);
+	Query.SetParameter("LedgerTypeVariant" , LedgerTypeVariant);
+	Query.SetParameter("Employee" , Employee);
+	
+	QueryResult = Query.Execute();
+	QuerySelection = QueryResult.Select();
+	Result = New Structure("AccountSalaryPayment, AccountCashAdvance");
+	If QuerySelection.Next() Then
+		Result.AccountSalaryPayment = QuerySelection.AccountSalaryPayment;
+		Result.AccountCashAdvance = QuerySelection.AccountCashAdvance;
+	EndIf;
+	Return Result;
+EndFunction
+
 #EndRegion
 
 Procedure UpdateAccountingTables(Object, 
@@ -1197,7 +1271,7 @@ Procedure UpdateAccountingTables(Object,
 		If Filter_LedgerType <> Undefined And Filter_LedgerType <> LedgerType Then
 			Continue;
 		EndIf;
-		OperationsInfo = GetAccountingOperationsByLedgerType(Object, Period, LedgerType);
+		OperationsInfo = GetAccountingOperationsByLedgerType(Object, Period, LedgerType, MainTableName);
 		For Each OperationInfo In OperationsInfo Do
 			OperationsByLedgerType.Add(New Structure("LedgerType, OperationInfo", LedgerType, OperationInfo));
 		EndDo;
@@ -1390,6 +1464,9 @@ EndProcedure
 
 Procedure ClearAccountingTables(Object, AccountingRowAnalytics, AccountingExtDimensions, Period, LedgerTypes, MainTableName)
 	// AccountingRowAnalytics
+	
+	Def = GetOperationsDefinition();
+	
 	ArrayForDelete = New Array();
 	For Each Row In AccountingRowAnalytics Do
 		
@@ -1398,11 +1475,17 @@ Procedure ClearAccountingTables(Object, AccountingRowAnalytics, AccountingExtDim
 			Continue;
 		EndIf;
 	
+		OpDef = Def.Get(Row.Operation);
+		If OpDef.Property("ReferTableName") And OpDef.ReferTableName <> MainTableName Then
+			Continue;
+		EndIf;
+	
 		Operations = New Array();	
-		OperationsInfo = GetAccountingOperationsByLedgerType(Object, Period, Row.LedgerType);
+		OperationsInfo = GetAccountingOperationsByLedgerType(Object, Period, Row.LedgerType, MainTableName);
 		For Each OperationInfo In OperationsInfo Do
 			Operations.Add(OperationInfo.Operation);
 		EndDo;
+		
 		If Operations.Find(Row.Operation) = Undefined Then
 			ArrayForDelete.Add(Row);
 			Continue;
@@ -1419,6 +1502,7 @@ Procedure ClearAccountingTables(Object, AccountingRowAnalytics, AccountingExtDim
 			EndIf;
 		EndIf;
 	EndDo;
+	
 	For Each ItemForDelete In ArrayForDelete Do
 		AccountingRowAnalytics.Delete(ItemForDelete);
 	EndDo;
@@ -1432,11 +1516,17 @@ Procedure ClearAccountingTables(Object, AccountingRowAnalytics, AccountingExtDim
 			Continue;
 		EndIf;
 		
+		OpDef = Def.Get(Row.Operation);
+		If OpDef.Property("ReferTableName") And OpDef.ReferTableName <> MainTableName Then
+			Continue;
+		EndIf;
+	
 		Operations = New Array();	
-		OperationsInfo = GetAccountingOperationsByLedgerType(Object, Period, Row.LedgerType);
+		OperationsInfo = GetAccountingOperationsByLedgerType(Object, Period, Row.LedgerType, MainTableName);
 		For Each OperationInfo In OperationsInfo Do
 			Operations.Add(OperationInfo.Operation);
 		EndDo;
+		
 		If Operations.Find(Row.Operation) = Undefined Then
 			ArrayForDelete.Add(Row);
 			Continue;
@@ -1453,6 +1543,7 @@ Procedure ClearAccountingTables(Object, AccountingRowAnalytics, AccountingExtDim
 			EndIf;
 		EndIf;
 	EndDo;
+	
 	For Each ItemForDelete In ArrayForDelete Do
 		AccountingExtDimensions.Delete(ItemForDelete);
 	EndDo;
@@ -1812,7 +1903,14 @@ EndProcedure
 
 // Object
 
-Procedure OnWrite(Object, Cancel) Export
+Procedure OnWrite(Object, Cancel, MainTableName = Undefined) Export
+	
+	If ValueIsFilled(MainTableName) Then
+		_MainTableName = MainTableName;
+	Else
+		_MainTableName = AccountingClientServer.GetDocumentMainTable(Object);
+	EndIf;
+	
 	_AccountingRowAnalytics = CommonFunctionsClientServer.GetFromAddInfo(Object.AdditionalProperties, "AccountingRowAnalytics", Undefined);
 	If _AccountingRowAnalytics = Undefined Then
 		RecordSet = InformationRegisters.T9050S_AccountingRowAnalytics.CreateRecordSet();
@@ -1832,7 +1930,7 @@ Procedure OnWrite(Object, Cancel) Export
 	AccountingClientServer.UpdateAccountingTables(Object, 
 		                                         _AccountingRowAnalytics, 
 		                                         _AccountingExtDimensions,
-		                                         AccountingClientServer.GetDocumentMainTable(Object));
+		                                         _MainTableName);
 		
 	Object.AdditionalProperties.Insert("AccountingRowAnalytics"  , _AccountingRowAnalytics);
 	Object.AdditionalProperties.Insert("AccountingExtDimensions" , _AccountingExtDimensions);

@@ -457,6 +457,7 @@ Function T1040T_AccountingAmounts()
 		"SELECT
 		|	AccrualList.Period,
 		|	AccrualList.Key AS RowKey,
+		|	AccrualList.Key AS Key,
 		|	AccrualList.Currency,
 		|	AccrualList.Amount AS Amount,
 		|	VALUE(Catalog.AccountingOperations.Payroll_DR_R5022T_Expenses_CR_R9510B_SalaryPayment_Accrual) AS Operation,
@@ -471,7 +472,8 @@ Function T1040T_AccountingAmounts()
 		|
 		|SELECT
 		|	SalaryTaxList.Period,
-		|	SalaryTaxList.Key AS RowKey,
+		|	SalaryTaxList.Key,
+		|	SalaryTaxList.Key,
 		|	SalaryTaxList.Currency,
 		|	SalaryTaxList.Amount,
 		|	VALUE(Catalog.AccountingOperations.Payroll_DR_R9510B_SalaryPayment_CR_R5015B_OtherPartnersTransactions_Taxes),
@@ -485,7 +487,8 @@ Function T1040T_AccountingAmounts()
 		|
 		|SELECT
 		|	SalaryTaxList.Period,
-		|	SalaryTaxList.Key AS RowKey,
+		|	SalaryTaxList.Key,
+		|	SalaryTaxList.Key,
 		|	SalaryTaxList.Currency,
 		|	SalaryTaxList.Amount,
 		|	VALUE(Catalog.AccountingOperations.Payroll_DR_R5022T_Expenses_CR_R5015B_OtherPartnersTransactions_Taxes),
@@ -499,7 +502,8 @@ Function T1040T_AccountingAmounts()
 		|
 		|SELECT
 		|	CashAdvanceDeductionList.Period,
-		|	CashAdvanceDeductionList.Key AS RowKey,
+		|	CashAdvanceDeductionList.Key,
+		|	CashAdvanceDeductionList.Key,
 		|	CashAdvanceDeductionList.Currency,
 		|	CashAdvanceDeductionList.Amount,
 		|	VALUE(Catalog.AccountingOperations.Payroll_DR_R9510B_SalaryPayment_CR_R3027B_EmployeeCashAdvance),
@@ -513,7 +517,8 @@ Function T1040T_AccountingAmounts()
 		|
 		|SELECT
 		|	DeductionList.Period,
-		|	DeductionList.Key AS RowKey,
+		|	DeductionList.Key,
+		|	DeductionList.Key,
 		|	DeductionList.Currency,
 		|	DeductionList.Amount,
 		|	VALUE(Catalog.AccountingOperations.Payroll_DR_R9510B_SalaryPayment_CR_R5021T_Revenues_Deduction_IsRevenue),
@@ -527,7 +532,8 @@ Function T1040T_AccountingAmounts()
 		|
 		|SELECT
 		|	DeductionList.Period,
-		|	DeductionList.Key AS RowKey,
+		|	DeductionList.Key,
+		|	DeductionList.Key,
 		|	DeductionList.Currency,
 		|	-DeductionList.Amount,
 		|	VALUE(Catalog.AccountingOperations.Payroll_DR_R5022T_Expenses_CR_R9510B_SalaryPayment_Deduction_IsNotRevenue),
@@ -609,7 +615,7 @@ Function GetAnalytics_DR_R9510B_SalaryPayment_CR_R5015B_OtherPartnersTransaction
 	                                                    Parameters.ObjectData.Agreement,
 	                                                    Parameters.ObjectData.Currency);
 	AccountingAnalytics.Credit = Credit.AccountTransactionsOther;
-	AccountingServer.SetCreditExtDimensions(Parameters, AccountingAnalytics, Parameters.RowData.TaxInfo);
+	AccountingServer.SetCreditExtDimensions(Parameters, AccountingAnalytics);
 	
 	Return AccountingAnalytics;
 EndFunction
@@ -633,7 +639,7 @@ Function GetAnalytics_DR_R5022T_Expenses_CR_R5015B_OtherPartnersTransactions_Tax
 	                                                    Parameters.ObjectData.Agreement,
 	                                                    Parameters.ObjectData.Currency);
 	AccountingAnalytics.Credit = Credit.AccountTransactionsOther;
-	AccountingServer.SetCreditExtDimensions(Parameters, AccountingAnalytics, Parameters.RowData.TaxInfo);
+	AccountingServer.SetCreditExtDimensions(Parameters, AccountingAnalytics);
 	
 	Return AccountingAnalytics;
 EndFunction
@@ -672,7 +678,7 @@ Function GetAnalytics_DR_R9510B_SalaryPayment_CR_R5021T_Revenues_Deduction_IsRev
 	Credit = AccountingServer.GetT9014S_AccountsExpenseRevenue(AccountParameters, 
 	                                                           Parameters.RowData.ExpenseType,
 	                                                           Parameters.RowData.ProfitLossCenter);
-	AccountingAnalytics.Credit = Credit.AccountExpense;
+	AccountingAnalytics.Credit = Credit.AccountRevenue;
 	AccountingServer.SetCreditExtDimensions(Parameters, AccountingAnalytics);
 
 	Return AccountingAnalytics;

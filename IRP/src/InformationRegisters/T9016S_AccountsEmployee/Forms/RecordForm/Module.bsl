@@ -1,8 +1,8 @@
 
 &AtServer
 Procedure OnCreateAtServer(Cancel, StandardProcessing)
-	ThisObject.Items.RecordType.ChoiceList.Add("All"      , R().AccountingInfo_06);
-	ThisObject.Items.RecordType.ChoiceList.Add("Employee" , Metadata.Catalogs.FixedAssets.ObjectPresentation);
+	ThisObject.Items.RecordType.ChoiceList.Add("All"      , R().CLV_1);
+	ThisObject.Items.RecordType.ChoiceList.Add("Employee" , R().AccountingInfo_06);
 	
 	If ValueIsFilled(Record.Employee) Then
 		ThisObject.RecordType = "Employee";

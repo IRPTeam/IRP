@@ -1147,7 +1147,7 @@ Function GetAnalytics_CurrencyExchange_Revenues(Parameters)
 	Credit = AccountingServer.GetT9014S_AccountsExpenseRevenue(AccountParameters, 
 	                                                           Parameters.ObjectData.RevenueType,
 	                                                           Parameters.ObjectData.ProfitCenter);	
-	AccountingAnalytics.Credit = Credit.Account;
+	AccountingAnalytics.Credit = Credit.AccountRevenue;
 	AdditionalAnalytics = New Structure();
 	AdditionalAnalytics.Insert("RevenueType", Parameters.ObjectData.RevenueType);
 	AdditionalAnalytics.Insert("ProfitCenter", Parameters.ObjectData.ProfitCenter);
@@ -1165,7 +1165,7 @@ Function GetAnalytics_CurrencyExchange_Expenses(Parameters)
 	Debit = AccountingServer.GetT9014S_AccountsExpenseRevenue(AccountParameters, 
 	                                                          Parameters.ObjectData.ExpenseType,
 	                                                          Parameters.ObjectData.LossCenter);
-	AccountingAnalytics.Debit = Debit.Account;
+	AccountingAnalytics.Debit = Debit.AccountExpense;
 	AdditionalAnalytics = New Structure();
 	AdditionalAnalytics.Insert("ExpenseType", Parameters.ObjectData.ExpenseType);
 	AdditionalAnalytics.Insert("LossCenter", Parameters.ObjectData.LossCenter);

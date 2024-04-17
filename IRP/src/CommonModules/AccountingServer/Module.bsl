@@ -150,7 +150,15 @@ Function GetOperationsDefinition()
 	// Depreciation calculation
 	Map.Insert(AO.DepreciationCalculation_DR_R5022T_Expenses_CR_DepreciationFixedAsset             , New Structure("ByRow", True));
 	
-Return Map;
+	// Payroll
+	Map.Insert(AO.Payroll_DR_R5022T_Expenses_CR_R9510B_SalaryPayment_Accrual                , New Structure("ByRow", True));
+	Map.Insert(AO.Payroll_DR_R9510B_SalaryPayment_CR_R5015B_OtherPartnersTransactions_Taxes , New Structure("ByRow", True));
+	Map.Insert(AO.Payroll_DR_R5022T_Expenses_CR_R5015B_OtherPartnersTransactions_Taxes      , New Structure("ByRow", True));
+	Map.Insert(AO.Payroll_DR_R9510B_SalaryPayment_CR_R5021T_Revenues_Deduction_IsRevenue    , New Structure("ByRow", True));
+	Map.Insert(AO.Payroll_DR_R5022T_Expenses_CR_R9510B_SalaryPayment_Deduction_IsNotRevenue , New Structure("ByRow", True));
+	Map.Insert(AO.Payroll_DR_R9510B_SalaryPayment_CR_R3027B_EmployeeCashAdvance             , New Structure("ByRow", True));
+	
+	Return Map;
 EndFunction
 
 Function GetSupportedDocuments() Export
@@ -1174,6 +1182,65 @@ Function __GetT9015S_AccountsFixedAsset(Period, Company, LedgerTypeVariant, Fixe
 	If QuerySelection.Next() Then
 		Result.Account = QuerySelection.Account;
 		Result.AccountDepreciation = QuerySelection.AccountDepreciation;
+	EndIf;
+	Return Result;
+EndFunction
+
+Function GetT9016S_AccountsEmployee(AccountParameters, Employee) Export
+	Return AccountingServerReuse.GetT9016S_AccountsEmployee_Reuse(
+		AccountParameters.Period, 
+		AccountParameters.Company, 
+		AccountParameters.LedgerTypeVariant, 
+		Employee);
+EndFunction
+
+Function __GetT9016S_AccountsEmployee(Period, Company, LedgerTypeVariant, Employee) Export
+	Query = New Query();
+	Query.Text =
+	"SELECT
+	|	Table.AccountSalaryPayment,
+	|	Table.AccountCashAdvance,
+	|	1 AS Priority
+	|INTO Accounts
+	|FROM
+	|	InformationRegister.T9015S_AccountsFixedAsset.SliceLast(&Period, Company = &Company
+	|	AND LedgerTypeVariant = &LedgerTypeVariant
+	|	AND Employee = &Employee) AS Table
+	|
+	|
+	|UNION ALL
+	|
+	|SELECT
+	|	Table.AccountSalaryPayment,
+	|	Table.AccountCashAdvance,
+	|	2
+	|FROM
+	|	InformationRegister.T9015S_AccountsFixedAsset.SliceLast(&Period, Company = &Company
+	|	AND LedgerTypeVariant = &LedgerTypeVariant
+	|	AND Employee.Ref IS NULL ) AS Table
+	|;
+	|
+	|////////////////////////////////////////////////////////////////////////////////
+	|SELECT
+	|	Accounts.AccountSalaryPayment,
+	|	Accounts.AccountCashAdvance,
+	|	Accounts.Priority AS Priority
+	|FROM
+	|	Accounts AS Accounts
+	|
+	|ORDER BY
+	|	Priority";
+	Query.SetParameter("Period"   , Period);
+	Query.SetParameter("Company"  , Company);
+	Query.SetParameter("LedgerTypeVariant" , LedgerTypeVariant);
+	Query.SetParameter("Employee" , Employee);
+	
+	QueryResult = Query.Execute();
+	QuerySelection = QueryResult.Select();
+	Result = New Structure("AccountSalaryPayment, AccountCashAdvance");
+	If QuerySelection.Next() Then
+		Result.AccountSalaryPayment = QuerySelection.AccountSalaryPayment;
+		Result.AccountCashAdvance = QuerySelection.AccountCashAdvance;
 	EndIf;
 	Return Result;
 EndFunction

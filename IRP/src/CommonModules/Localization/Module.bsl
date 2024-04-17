@@ -1443,6 +1443,7 @@ Strings.Insert("AccountingInfo_02", NStr("en = '<For all transaction types>'", L
 Strings.Insert("AccountingInfo_03", NStr("en = 'Profit loss center'", Lang));
 Strings.Insert("AccountingInfo_04", NStr("en = 'Expense/Revenue'", Lang));
 Strings.Insert("AccountingInfo_05", NStr("en = 'Expense/Revenue & Profit loss center'", Lang));
+Strings.Insert("AccountingInfo_06", NStr("en = 'Employee'", Lang));
 
 Strings.Insert("AccountingJE_prefix_01", NStr("en = 'JE '", Lang));
 
@@ -1616,6 +1617,24 @@ Strings.Insert("BankReceipt_DR_R5022T_Expenses_CR_R3021B_CashInTransit",
 
 Strings.Insert("CashReceipt_DR_R3010B_CashOnHand_CR_R3021B_CashInTransitIncoming_CashTransferOrder",
 	NStr("en = 'CashReceipt DR (R3010B_CashOnHand) CR (R3021B_CashInTransitIncoming) (Cash transfer)'", Lang));
+
+Strings.Insert("Payroll_DR_R5022T_Expenses_CR_R9510B_SalaryPayment_Accrual",
+	NStr("en = 'Payroll DR (R5022T_Expenses) CR (R9510B_SalaryPayment) (Accrual)'", Lang));
+	
+Strings.Insert("Payroll_DR_R9510B_SalaryPayment_CR_R5015B_OtherPartnersTransactions_Taxes",
+	NStr("en = 'Payroll DR (R9510B_SalaryPayment) CR (R5015B_OtherPartnersTransactions) (Taxes)'", Lang));
+
+Strings.Insert("Payroll_DR_R5022T_Expenses_CR_R5015B_OtherPartnersTransactions_Taxes",
+	NStr("en = 'Payroll DR (R5022T_Expenses) CR (R5015B_OtherPartnersTransactions) (Taxes)'", Lang));
+	
+Strings.Insert("Payroll_DR_R9510B_SalaryPayment_CR_R5021T_Revenues_Deduction_IsRevenue",
+	NStr("en = 'Payroll DR (R9510B_SalaryPayment) CR (R5021T_Revenues) (Deduction Is Revenue)'", Lang));
+	
+Strings.Insert("Payroll_DR_R5022T_Expenses_CR_R9510B_SalaryPayment_Deduction_IsNotRevenue",
+	NStr("en = 'Payroll DR (R5022T_Expenses) CR (R9510B_SalaryPayment) (Deduction Is Not Revenue)'", Lang));
+	
+Strings.Insert("Payroll_DR_R9510B_SalaryPayment_CR_R3027B_EmployeeCashAdvance",
+	NStr("en = 'Payroll DR (R9510B_SalaryPayment) CR (R3027B_EmployeeCashAdvance)'", Lang));
 
 #EndRegion
 

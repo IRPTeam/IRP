@@ -22,3 +22,7 @@ EndFunction
 Function GetT9015S_AccountsFixedAsset_Reuse(Period, Company, LedgerTypeVariant, FixedAsset) Export
 	Return AccountingServer.__GetT9015S_AccountsFixedAsset(Period, Company, LedgerTypeVariant, FixedAsset);
 EndFunction
+
+Function GetT9016S_AccountsEmployee_Reuse(Period, Company, LedgerTypeVariant, Employee) Export
+	Return AccountingServer.__GetT9016S_AccountsEmployee(Period, Company, LedgerTypeVariant, Employee);
+EndFunction

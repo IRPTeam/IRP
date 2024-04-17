@@ -97,6 +97,7 @@ Function GetQueryTextsMasterTables()
 	QueryArray.Add(R5012B_VendorsAging());
 	QueryArray.Add(R5010B_ReconciliationStatement());
 	QueryArray.Add(R5020B_PartnersBalance());
+	//QueryArray.Add(T1040T_AccountingAmounts());
 	Return QueryArray;
 EndFunction
 

@@ -764,7 +764,6 @@ Function __GetT9012S_AccountsPartner(Period, Company, LedgerTypeVariant, Partner
 	|
 	|/////////////////////////////////////////////////////////////////////////////////////////////////////
 	|SELECT
-	|	ByAgreement.AccountAdvancesOther,
 	|	ByAgreement.AccountTransactionsOther,
 	|	1 AS Priority
 	|INTO Accounts_Other
@@ -779,7 +778,6 @@ Function __GetT9012S_AccountsPartner(Period, Company, LedgerTypeVariant, Partner
 	|UNION ALL
 	|
 	|SELECT
-	|	ByPartner.AccountAdvancesOther,
 	|	ByPartner.AccountTransactionsOther,
 	|	2
 	|FROM
@@ -793,7 +791,6 @@ Function __GetT9012S_AccountsPartner(Period, Company, LedgerTypeVariant, Partner
 	|UNION ALL
 	|
 	|SELECT
-	|	ByCurrency.AccountAdvancesOther,
 	|	ByCurrency.AccountTransactionsOther,
 	|	3
 	|FROM
@@ -807,7 +804,6 @@ Function __GetT9012S_AccountsPartner(Period, Company, LedgerTypeVariant, Partner
 	|UNION ALL
 	|
 	|SELECT
-	|	ByCompany.AccountAdvancesOther,
 	|	ByCompany.AccountTransactionsOther,
 	|	4
 	|FROM
@@ -844,7 +840,6 @@ Function __GetT9012S_AccountsPartner(Period, Company, LedgerTypeVariant, Partner
 	|
 	|////////////////////////////////////////////////////////////////////////////////
 	|SELECT TOP 1
-	|	Accounts.AccountAdvancesOther,
 	|	Accounts.AccountTransactionsOther,
 	|	Accounts.Priority AS Priority
 	|FROM
@@ -867,7 +862,6 @@ Function __GetT9012S_AccountsPartner(Period, Company, LedgerTypeVariant, Partner
 	Result.Insert("AccountTransactionsVendor"    , Undefined);
 	Result.Insert("AccountAdvancesCustomer"      , Undefined);
 	Result.Insert("AccountTransactionsCustomer"  , Undefined);
-	Result.Insert("AccountAdvancesOther"         , Undefined);
 	Result.Insert("AccountTransactionsOther"     , Undefined);
 
 	QuerySelection_Vendor = QueryResults[3].Select();
@@ -884,7 +878,6 @@ Function __GetT9012S_AccountsPartner(Period, Company, LedgerTypeVariant, Partner
 	
 	QuerySelection_Other = QueryResults[5].Select();
 	If QuerySelection_Other.Next() Then
-		Result.AccountAdvancesOther = QuerySelection_Other.AccountAdvancesOther;
 		Result.AccountTransactionsOther = QuerySelection_Other.AccountTransactionsOther;
 	EndIf;
 	

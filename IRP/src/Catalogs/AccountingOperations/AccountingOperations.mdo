@@ -639,6 +639,56 @@
         </code>
       </content>
     </items>
+    <items id="c97bde75-9f0f-421f-ad63-4e0cc0a59588">
+      <name>Document_Payroll</name>
+      <description></description>
+      <code xsi:type="core:NumberValue">
+        <value>78</value>
+      </code>
+      <isFolder>true</isFolder>
+      <content id="88eec9da-0451-4bd2-8172-99098e5b853c">
+        <name>Payroll_DR_R5022T_Expenses_CR_R9510B_SalaryPayment_Accrual</name>
+        <description></description>
+        <code xsi:type="core:NumberValue">
+          <value>79</value>
+        </code>
+      </content>
+      <content id="d9937e47-c736-4cde-b7d1-b2d8759380d4">
+        <name>Payroll_DR_R9510B_SalaryPayment_CR_R5015B_OtherPartnersTransactions_Taxes</name>
+        <description></description>
+        <code xsi:type="core:NumberValue">
+          <value>80</value>
+        </code>
+      </content>
+      <content id="ad11c30b-b7ed-4c80-b1b1-86d99bae367d">
+        <name>Payroll_DR_R9510B_SalaryPayment_CR_R5021T_Revenues_Deduction_IsRevenue</name>
+        <description></description>
+        <code xsi:type="core:NumberValue">
+          <value>81</value>
+        </code>
+      </content>
+      <content id="abef70ac-b942-4ca6-8f3d-dbccda6d8587">
+        <name>Payroll_DR_R5022T_Expenses_CR_R9510B_SalaryPayment_Deduction_IsNotRevenue</name>
+        <description></description>
+        <code xsi:type="core:NumberValue">
+          <value>82</value>
+        </code>
+      </content>
+      <content id="ac38ce85-d26d-411b-9a73-46b01874b4d3">
+        <name>Payroll_DR_R9510B_SalaryPayment_CR_R3027B_EmployeeCashAdvance</name>
+        <description></description>
+        <code xsi:type="core:NumberValue">
+          <value>83</value>
+        </code>
+      </content>
+      <content id="cab29434-922f-4b02-a4ee-05264b06bf7c">
+        <name>Payroll_DR_R5022T_Expenses_CR_R5015B_OtherPartnersTransactions_Taxes</name>
+        <description></description>
+        <code xsi:type="core:NumberValue">
+          <value>84</value>
+        </code>
+      </content>
+    </items>
   </predefined>
   <editType>InDialog</editType>
   <choiceMode>BothWays</choiceMode>

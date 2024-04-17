@@ -1577,6 +1577,20 @@
 			</restrictionByCondition>
 		</right>
 	</object>
+	<object>
+		<name>InformationRegister.T9016S_AccountsEmployee</name>
+		<right>
+			<name>View</name>
+			<value>true</value>
+		</right>
+		<right>
+			<name>Read</name>
+			<value>true</value>
+			<restrictionByCondition>
+				<condition>#AccessRegisters("Company", "", "", "", "", "")</condition>
+			</restrictionByCondition>
+		</right>
+	</object>
 	<restrictionTemplate>
 		<name>AccessRegisters(D1, D2, D3, D4, D5, CompareRule)</name>
 		<condition>

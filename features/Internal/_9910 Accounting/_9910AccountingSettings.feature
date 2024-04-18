@@ -265,7 +265,6 @@ Scenario: _0991002 filling accounting operation
 		| 'ModernizationOfFixedAsset_DR_R4050B_StockInventory_CR_R8510B_BookValueOfFixedAsset'                         | 'ModernizationOfFixedAsset DR (R4050B_StockInventory) CR (R8510B_BookValueOfFixedAsset)'                         |
 		| 'DecommissioningOfFixedAsset_DR_R4050B_StockInventory_CR_R8510B_BookValueOfFixedAsset'                       | 'DecommissioningOfFixedAsset DR (R4050B_StockInventory) CR (R8510B_BookValueOfFixedAsset)'                       |
 		| 'FixedAssetTransfer_DR_R8510B_BookValueOfFixedAsset_CR_R8510B_BookValueOfFixedAsset'                         | 'FixedAssetTransfer DR (R8510B_BookValueOfFixedAsset) CR (R8510B_BookValueOfFixedAsset)'                         |
-		| 'DepreciationCalculation_DR_DepreciationFixedAsset_CR_R8510B_BookValueOfFixedAsset'                          | 'DepreciationCalculation DR (DepreciationFixedAsset) CR (R8510B_BookValueOfFixedAsset)'                          |
 		| 'DepreciationCalculation_DR_R5022T_Expenses_CR_DepreciationFixedAsset'                                       | 'DepreciationCalculation DR (R5022T_Expenses) CR (DepreciationFixedAsset)'                                       |	
 	And I close all client application windows
 		
@@ -1197,7 +1196,6 @@ Scenario: _0991027 accounts settings for Expense/Revenue (general for company)
 			Then there are lines in TestClient message log
 				|'"Company" is a required field.'|
 				|'"Ledger type variant" is a required field.'|
-				|'"Account" is a required field.'|
 		And I input "01.01.2022" text in the field named "Period"
 		And I click Choice button of the field named "Company"
 		And I go to line in "List" table
@@ -1205,8 +1203,12 @@ Scenario: _0991027 accounts settings for Expense/Revenue (general for company)
 			| 'Own company 1'    |
 		And I select current line in "List" table
 		And I select from "Ledger type variant" drop-down list by "ltv" string
-		And I select from the drop-down list named "Account" by "40501" string
-		Then the form attribute named "Account" became equal to "405.01"
+		And I set checkbox named "Expense"
+		And I set checkbox named "Revenue"
+		And I select from "Account (expense)" drop-down list by "40501" string
+		And I select from "Account (revenue)" drop-down list by "40501" string		
+		Then the form attribute named "AccountExpense" became equal to "405.01"
+		Then the form attribute named "AccountRevenue" became equal to "405.01"
 		Then the form attribute named "Company" became equal to "Own company 1"
 		Then the form attribute named "LedgerTypeVariant" became equal to "LTV with account charts code mask"
 		And the editing text of form attribute named "Period" became equal to "01.01.2022"
@@ -1214,41 +1216,62 @@ Scenario: _0991027 accounts settings for Expense/Revenue (general for company)
 		And I click "Save and close" button
 	* Check
 		And "List" table contains lines
-			| 'Period'     | 'Company'      | 'Ledger type variant'               | 'Expense / Revenue' | 'Account' |
-			| '01.01.2022' | 'Own company 1' | 'LTV with account charts code mask' | ''                  | '405.01'  |
+			| 'Period'     | 'Company'       | 'Ledger type variant'               | 'Expense / Revenue' | 'Account (expense)' | 'Account (revenue)' |
+			| '01.01.2022' | 'Own company 1' | 'LTV with account charts code mask' | ''                  | '405.01'            | '405.01'            |
 	And I close all client application windows
 
 Scenario: _0991028 accounts settings for Expense/Revenue
 	And I close all client application windows
 	* Open list form
 		Given I open hyperlink "e1cib/list/InformationRegister.T9014S_AccountsExpenseRevenue"	
-	* Create new element for product			 
+	* Create new element for expense			 
 		And I click the button named "FormCreate"
 		And I input "01.01.2022" text in the field named "Period"
 		And I click Choice button of the field named "Company"
 		And I go to line in "List" table
 			| 'Description'     |
-			| 'Own company 1'    |
+			| 'Own company 1'   |
 		And I select current line in "List" table
-		And I change the radio button named "RecordType" value to "Expense and revenue type"
+		And I change the radio button named "RecordType" value to "Expense/Revenue"
 		And I click Select button of "Expense / Revenue" field
 		And I go to line in "List" table
 			| 'Description'   |
 			| 'Other expence' |
 		And I select current line in "List" table
-		And I select from "Expense / Revenue" drop-down list by "Other revenues" string	
 		And I select from "Ledger type variant" drop-down list by "ltv" string
-		And I select from the drop-down list named "Account" by "90878699" string
-		Then the form attribute named "Account" became equal to "90878699"
+		And I set checkbox named "Expense"
+		And I select from "Account (expense)" drop-down list by "90878699" string	
+		Then the form attribute named "AccountExpense" became equal to "90878699"
 		Then the form attribute named "Company" became equal to "Own company 1"
 		Then the form attribute named "LedgerTypeVariant" became equal to "LTV with account charts code mask"
 		And the editing text of form attribute named "Period" became equal to "01.01.2022"
-		Then the form attribute named "ExpenseRevenue" became equal to "Other revenues"		
+		Then the form attribute named "ExpenseRevenue" became equal to "Other expence"	
 		And I click "Save and close" button
+	* Create new element for revenue
+			And I click the button named "FormCreate"
+		And I input "01.01.2022" text in the field named "Period"
+		And I click Choice button of the field named "Company"
+		And I go to line in "List" table
+			| 'Description'     |
+			| 'Own company 1'   |
+		And I select current line in "List" table
+		And I change the radio button named "RecordType" value to "Expense/Revenue"
+		And I select from "Expense / Revenue" drop-down list by "Other revenues" string	
+		And I select from "Ledger type variant" drop-down list by "ltv" string
+		And I set checkbox named "Revenue"
+		And I select from "Account (revenue)" drop-down list by "10878699" string	
+		Then the form attribute named "AccountRevenue" became equal to "10878699"
+		Then the form attribute named "Company" became equal to "Own company 1"
+		Then the form attribute named "LedgerTypeVariant" became equal to "LTV with account charts code mask"
+		And the editing text of form attribute named "Period" became equal to "01.01.2022"
+		Then the form attribute named "ExpenseRevenue" became equal to "Other revenues"	
+		And I click "Save and close" button
+			
 	* Check
 		And "List" table contains lines
-			| 'Period'     | 'Company'       | 'Ledger type variant'               | 'Expense / Revenue' | 'Account'  |
-			| '01.01.2022' | 'Own company 1' | 'LTV with account charts code mask' | 'Other revenues'    | '90878699' |
+			| 'Period'     | 'Company'       | 'Ledger type variant'               | 'Expense / Revenue' | 'Account (expense)' | 'Account (revenue)' |
+			| '01.01.2022' | 'Own company 1' | 'LTV with account charts code mask' | 'Other expence'     | '90878699'          | ''                  |
+			| '01.01.2022' | 'Own company 1' | 'LTV with account charts code mask' | 'Other revenues'    | ''                  | '10878699'          |
 	And I close all client application windows
 
 Scenario: _0991029 accounts settings for item key (general for company)
@@ -1444,7 +1467,6 @@ Scenario: _0991034 accounts settings for partner (general for company)
 		And I select from the drop-down list named "AccountTransactionsVendor" by "9087" string
 		And I select from the drop-down list named "AccountAdvancesCustomer" by "40501" string
 		And I select from the drop-down list named "AccountTransactionsCustomer" by "9087" string
-		And I select from the drop-down list named "AccountAdvancesOther" by "40501" string
 		And I select from the drop-down list named "AccountTransactionsOther" by "9087" string
 		And I click "Save and close" button
 	* Check
@@ -1525,8 +1547,8 @@ Scenario: _0991036 accounts settings for partner (customer)
 		And I click "Save and close" button
 	* Check
 		And "List" table contains lines
-			| 'Period'     | 'Company'       | 'Partner' | 'Ledger type variant'               | 'Agreement' | 'Vendor' | 'Customer' | 'Transactions' | 'Other' | 'Advances' |
-			| '01.01.2022' | 'Own company 1' | 'Customer 2 (2 partner term)'   | 'LTV with account charts code mask' | ''          | 'No'     | 'Yes'      | ''             | 'No'    | ''         |
+			| 'Period'     | 'Company'       | 'Partner'                      | 'Ledger type variant'               | 'Agreement' | 'Vendor' | 'Currency' | 'Customer' | 'Transactions' | 'Other' | 'Advances' |
+			| '01.01.2022' | 'Own company 1' | 'Customer 2 (2 partner term)'  | 'LTV with account charts code mask' | ''          | 'No'     | ''         | 'Yes'      | ''             | 'No'    | '405.01'   |		
 	And I close all client application windows
 				
 
@@ -1559,8 +1581,8 @@ Scenario: _0991037 accounts settings for partner (partner term)
 		And I click "Save and close" button
 	* Check
 		And "List" table contains lines
-			| 'Period'     | 'Company'       | 'Partner' | 'Ledger type variant'               | 'Agreement'                                               | 'Vendor' | 'Customer' | 'Transactions' | 'Other' | 'Advances' |
-			| '01.01.2022' | 'Own company 1' | ''        | 'LTV with account charts code mask' | 'Partner term with customer (by document + credit limit)' | 'No'     | 'Yes'      | ''             | 'No'    | ''         |
+			| 'Period'     | 'Company'       | 'Partner'                      | 'Ledger type variant'               | 'Agreement'                                               | 'Vendor' | 'Currency' | 'Customer' | 'Transactions' | 'Other' | 'Advances' |
+			| '01.01.2022' | 'Own company 1' | ''                             | 'LTV with account charts code mask' | 'Partner term with customer (by document + credit limit)' | 'No'     | ''         | 'Yes'      | ''             | 'No'    | '405.01'   |
 	And I close all client application windows	
 
 Scenario: _0991038 accounts settings for tax (general for company)
@@ -1634,26 +1656,26 @@ Scenario: _0991058 create journal entry for one PI
 		Then the form attribute named "LedgerTypeCurrencyMovementTypeCurrency" became equal to "TRY"
 		Then the form attribute named "Number" became equal to "1"
 		And "RegisterRecords" table became equal
-			| 'Period'              | 'Account Dr' | '#'  | 'Amount'   | 'DebitQuantity' | 'Activity' | 'Credit currency' | 'Ext. Dim. Debit'                                   | 'Debit amount' | 'Extra dimension2 Dr'   | 'Credit quantity' | 'Extra dimension3 Dr' | 'Debit currency' | 'Account Cr' | 'Ext. Dim. Credit'          | 'Operation'                                                                                  | 'Extra dimension2 Cr'        | 'Credit amount' | 'Extra dimension3 Cr' |
-			| '24.02.2023 10:04:33' | '3540'       | '1'  | '633,33'   | '4'             | 'Yes'      | 'TRY'             | 'Item 1 with serial lot number (use line grouping)' | '633,33'       | 'XS/Color 2'            | ''                | 'Business unit 1'     | 'TRY'            | '5201'       | 'Vendor 1 (1 partner term)' | 'PurchaseInvoice DR (R4050B_StockInventory_R5022T_Expenses) CR (R1021B_VendorsTransactions)' | 'Partner term with vendor 1' | '633,33'        | 'Business unit 1'     |
-			| '24.02.2023 10:04:33' | '5301'       | '2'  | '126,67'   | ''              | 'Yes'      | 'TRY'             | 'VAT'                                               | '126,67'       | 'Business unit 1'       | ''                | ''                    | 'TRY'            | '5201'       | 'Vendor 1 (1 partner term)' | 'PurchaseInvoice DR (R1040B_TaxesOutgoing) CR (R1021B_VendorsTransactions)'                  | 'Partner term with vendor 1' | '126,67'        | 'Business unit 1'     |
-			| '24.02.2023 10:04:33' | '3540'       | '3'  | '2 500,00' | '20'            | 'Yes'      | 'TRY'             | 'Item without item key (pcs)'                       | '2 500'        | 'Item without item key' | ''                | 'Business unit 1'     | 'TRY'            | '5201'       | 'Vendor 1 (1 partner term)' | 'PurchaseInvoice DR (R4050B_StockInventory_R5022T_Expenses) CR (R1021B_VendorsTransactions)' | 'Partner term with vendor 1' | '2 500'         | 'Business unit 1'     |
-			| '24.02.2023 10:04:33' | '5301'       | '4'  | '500,00'   | ''              | 'Yes'      | 'TRY'             | 'VAT'                                               | '500'          | 'Business unit 1'       | ''                | ''                    | 'TRY'            | '5201'       | 'Vendor 1 (1 partner term)' | 'PurchaseInvoice DR (R1040B_TaxesOutgoing) CR (R1021B_VendorsTransactions)'                  | 'Partner term with vendor 1' | '500'           | 'Business unit 1'     |
-			| '24.02.2023 10:04:33' | '3540'       | '5'  | '1 541,67' | '10'            | 'Yes'      | 'TRY'             | 'Item 1 with serial lot number (use line grouping)' | '1 541,67'     | 'S/Color 2'             | ''                | ''                    | 'TRY'            | '5201'       | 'Vendor 1 (1 partner term)' | 'PurchaseInvoice DR (R4050B_StockInventory_R5022T_Expenses) CR (R1021B_VendorsTransactions)' | 'Partner term with vendor 1' | '1 541,67'      | ''                    |
-			| '24.02.2023 10:04:33' | '5301'       | '6'  | '308,33'   | ''              | 'Yes'      | 'TRY'             | 'VAT'                                               | '308,33'       | ''                      | ''                | ''                    | 'TRY'            | '5201'       | 'Vendor 1 (1 partner term)' | 'PurchaseInvoice DR (R1040B_TaxesOutgoing) CR (R1021B_VendorsTransactions)'                  | 'Partner term with vendor 1' | '308,33'        | ''                    |
-			| '24.02.2023 10:04:33' | '3540'       | '7'  | '1 200,00' | '8'             | 'Yes'      | 'TRY'             | 'Item 1 with serial lot number (use line grouping)' | '1 200'        | 'S/Color 2'             | ''                | 'Business unit 1'     | 'TRY'            | '5201'       | 'Vendor 1 (1 partner term)' | 'PurchaseInvoice DR (R4050B_StockInventory_R5022T_Expenses) CR (R1021B_VendorsTransactions)' | 'Partner term with vendor 1' | '1 200'         | 'Business unit 1'     |
-			| '24.02.2023 10:04:33' | '5301'       | '8'  | '240,00'   | ''              | 'Yes'      | 'TRY'             | 'VAT'                                               | '240'          | 'Business unit 1'       | ''                | ''                    | 'TRY'            | '5201'       | 'Vendor 1 (1 partner term)' | 'PurchaseInvoice DR (R1040B_TaxesOutgoing) CR (R1021B_VendorsTransactions)'                  | 'Partner term with vendor 1' | '240'           | 'Business unit 1'     |
-			| '24.02.2023 10:04:33' | '3540'       | '9'  | '4 583,33' | '50'            | 'Yes'      | 'TRY'             | 'Item with item key'                                | '4 583,33'     | 'S/Color 1'             | ''                | 'Business unit 1'     | 'TRY'            | '5201'       | 'Vendor 1 (1 partner term)' | 'PurchaseInvoice DR (R4050B_StockInventory_R5022T_Expenses) CR (R1021B_VendorsTransactions)' | 'Partner term with vendor 1' | '4 583,33'      | 'Business unit 1'     |
-			| '24.02.2023 10:04:33' | '5301'       | '10' | '916,67'   | ''              | 'Yes'      | 'TRY'             | 'VAT'                                               | '916,67'       | 'Business unit 1'       | ''                | ''                    | 'TRY'            | '5201'       | 'Vendor 1 (1 partner term)' | 'PurchaseInvoice DR (R1040B_TaxesOutgoing) CR (R1021B_VendorsTransactions)'                  | 'Partner term with vendor 1' | '916,67'        | 'Business unit 1'     |
-			| '24.02.2023 10:04:33' | '3540'       | '11' | '100,00'   | '1'             | 'Yes'      | 'TRY'             | 'Item 4 with unique serial lot number'              | '100'          | 'S/Color 1'             | ''                | ''                    | 'TRY'            | '5201'       | 'Vendor 1 (1 partner term)' | 'PurchaseInvoice DR (R4050B_StockInventory_R5022T_Expenses) CR (R1021B_VendorsTransactions)' | 'Partner term with vendor 1' | '100'           | ''                    |
-			| '24.02.2023 10:04:33' | '5301'       | '12' | '20,00'    | ''              | 'Yes'      | 'TRY'             | 'VAT'                                               | '20'           | ''                      | ''                | ''                    | 'TRY'            | '5201'       | 'Vendor 1 (1 partner term)' | 'PurchaseInvoice DR (R1040B_TaxesOutgoing) CR (R1021B_VendorsTransactions)'                  | 'Partner term with vendor 1' | '20'            | ''                    |
-			| '24.02.2023 10:04:33' | '3540'       | '13' | '875,00'   | '10'            | 'Yes'      | 'TRY'             | 'Item with item key'                                | '875'          | 'S/Color 1'             | ''                | ''                    | 'TRY'            | '5201'       | 'Vendor 1 (1 partner term)' | 'PurchaseInvoice DR (R4050B_StockInventory_R5022T_Expenses) CR (R1021B_VendorsTransactions)' | 'Partner term with vendor 1' | '875'           | ''                    |
-			| '24.02.2023 10:04:33' | '5301'       | '14' | '175,00'   | ''              | 'Yes'      | 'TRY'             | 'VAT'                                               | '175'          | ''                      | ''                | ''                    | 'TRY'            | '5201'       | 'Vendor 1 (1 partner term)' | 'PurchaseInvoice DR (R1040B_TaxesOutgoing) CR (R1021B_VendorsTransactions)'                  | 'Partner term with vendor 1' | '175'           | ''                    |	
+			| 'Period'              | 'Account Dr' | 'Amount'   | 'DebitQuantity' | 'Activity' | 'Credit currency' | 'Ext. Dim. Debit'                                   | 'Debit amount' | 'Extra dimension2 Dr'   | 'Credit quantity' | 'Extra dimension3 Dr' | 'Debit currency' | 'Account Cr' | 'Ext. Dim. Credit'          | 'Operation'                                                                                  | 'Extra dimension2 Cr'        | 'Credit amount' | 'Extra dimension3 Cr' |
+			| '24.02.2023 10:04:33' | '3540'       | '633,33'   | '4'             | 'Yes'      | 'TRY'             | 'Item 1 with serial lot number (use line grouping)' | '633,33'       | 'XS/Color 2'            | ''                | 'Business unit 1'     | 'TRY'            | '5201'       | 'Vendor 1 (1 partner term)' | 'PurchaseInvoice DR (R4050B_StockInventory_R5022T_Expenses) CR (R1021B_VendorsTransactions)' | 'Partner term with vendor 1' | '633,33'        | 'Business unit 1'     |
+			| '24.02.2023 10:04:33' | '5301'       | '126,67'   | ''              | 'Yes'      | 'TRY'             | 'VAT'                                               | '126,67'       | 'Business unit 1'       | ''                | ''                    | 'TRY'            | '5201'       | 'Vendor 1 (1 partner term)' | 'PurchaseInvoice DR (R1040B_TaxesOutgoing) CR (R1021B_VendorsTransactions)'                  | 'Partner term with vendor 1' | '126,67'        | 'Business unit 1'     |
+			| '24.02.2023 10:04:33' | '3540'       | '2 500,00' | '20'            | 'Yes'      | 'TRY'             | 'Item without item key (pcs)'                       | '2 500'        | 'Item without item key' | ''                | 'Business unit 1'     | 'TRY'            | '5201'       | 'Vendor 1 (1 partner term)' | 'PurchaseInvoice DR (R4050B_StockInventory_R5022T_Expenses) CR (R1021B_VendorsTransactions)' | 'Partner term with vendor 1' | '2 500'         | 'Business unit 1'     |
+			| '24.02.2023 10:04:33' | '5301'       | '500,00'   | ''              | 'Yes'      | 'TRY'             | 'VAT'                                               | '500'          | 'Business unit 1'       | ''                | ''                    | 'TRY'            | '5201'       | 'Vendor 1 (1 partner term)' | 'PurchaseInvoice DR (R1040B_TaxesOutgoing) CR (R1021B_VendorsTransactions)'                  | 'Partner term with vendor 1' | '500'           | 'Business unit 1'     |
+			| '24.02.2023 10:04:33' | '3540'       | '1 541,67' | '10'            | 'Yes'      | 'TRY'             | 'Item 1 with serial lot number (use line grouping)' | '1 541,67'     | 'S/Color 2'             | ''                | ''                    | 'TRY'            | '5201'       | 'Vendor 1 (1 partner term)' | 'PurchaseInvoice DR (R4050B_StockInventory_R5022T_Expenses) CR (R1021B_VendorsTransactions)' | 'Partner term with vendor 1' | '1 541,67'      | ''                    |
+			| '24.02.2023 10:04:33' | '5301'       | '308,33'   | ''              | 'Yes'      | 'TRY'             | 'VAT'                                               | '308,33'       | ''                      | ''                | ''                    | 'TRY'            | '5201'       | 'Vendor 1 (1 partner term)' | 'PurchaseInvoice DR (R1040B_TaxesOutgoing) CR (R1021B_VendorsTransactions)'                  | 'Partner term with vendor 1' | '308,33'        | ''                    |
+			| '24.02.2023 10:04:33' | '3540'       | '1 200,00' | '8'             | 'Yes'      | 'TRY'             | 'Item 1 with serial lot number (use line grouping)' | '1 200'        | 'S/Color 2'             | ''                | 'Business unit 1'     | 'TRY'            | '5201'       | 'Vendor 1 (1 partner term)' | 'PurchaseInvoice DR (R4050B_StockInventory_R5022T_Expenses) CR (R1021B_VendorsTransactions)' | 'Partner term with vendor 1' | '1 200'         | 'Business unit 1'     |
+			| '24.02.2023 10:04:33' | '5301'       | '240,00'   | ''              | 'Yes'      | 'TRY'             | 'VAT'                                               | '240'          | 'Business unit 1'       | ''                | ''                    | 'TRY'            | '5201'       | 'Vendor 1 (1 partner term)' | 'PurchaseInvoice DR (R1040B_TaxesOutgoing) CR (R1021B_VendorsTransactions)'                  | 'Partner term with vendor 1' | '240'           | 'Business unit 1'     |
+			| '24.02.2023 10:04:33' | '3540'       | '4 583,33' | '50'            | 'Yes'      | 'TRY'             | 'Item with item key'                                | '4 583,33'     | 'S/Color 1'             | ''                | 'Business unit 1'     | 'TRY'            | '5201'       | 'Vendor 1 (1 partner term)' | 'PurchaseInvoice DR (R4050B_StockInventory_R5022T_Expenses) CR (R1021B_VendorsTransactions)' | 'Partner term with vendor 1' | '4 583,33'      | 'Business unit 1'     |
+			| '24.02.2023 10:04:33' | '5301'       | '916,67'   | ''              | 'Yes'      | 'TRY'             | 'VAT'                                               | '916,67'       | 'Business unit 1'       | ''                | ''                    | 'TRY'            | '5201'       | 'Vendor 1 (1 partner term)' | 'PurchaseInvoice DR (R1040B_TaxesOutgoing) CR (R1021B_VendorsTransactions)'                  | 'Partner term with vendor 1' | '916,67'        | 'Business unit 1'     |
+			| '24.02.2023 10:04:33' | '3540'       | '100,00'   | '1'             | 'Yes'      | 'TRY'             | 'Item 4 with unique serial lot number'              | '100'          | 'S/Color 1'             | ''                | ''                    | 'TRY'            | '5201'       | 'Vendor 1 (1 partner term)' | 'PurchaseInvoice DR (R4050B_StockInventory_R5022T_Expenses) CR (R1021B_VendorsTransactions)' | 'Partner term with vendor 1' | '100'           | ''                    |
+			| '24.02.2023 10:04:33' | '5301'       | '20,00'    | ''              | 'Yes'      | 'TRY'             | 'VAT'                                               | '20'           | ''                      | ''                | ''                    | 'TRY'            | '5201'       | 'Vendor 1 (1 partner term)' | 'PurchaseInvoice DR (R1040B_TaxesOutgoing) CR (R1021B_VendorsTransactions)'                  | 'Partner term with vendor 1' | '20'            | ''                    |
+			| '24.02.2023 10:04:33' | '3540'       | '875,00'   | '10'            | 'Yes'      | 'TRY'             | 'Item with item key'                                | '875'          | 'S/Color 1'             | ''                | ''                    | 'TRY'            | '5201'       | 'Vendor 1 (1 partner term)' | 'PurchaseInvoice DR (R4050B_StockInventory_R5022T_Expenses) CR (R1021B_VendorsTransactions)' | 'Partner term with vendor 1' | '875'           | ''                    |
+			| '24.02.2023 10:04:33' | '5301'       | '175,00'   | ''              | 'Yes'      | 'TRY'             | 'VAT'                                               | '175'          | ''                      | ''                | ''                    | 'TRY'            | '5201'       | 'Vendor 1 (1 partner term)' | 'PurchaseInvoice DR (R1040B_TaxesOutgoing) CR (R1021B_VendorsTransactions)'                  | 'Partner term with vendor 1' | '175'           | ''                    |
 		And "Totals" table became equal
 			| '#' | 'Chart of account' | 'Amount Debit' | 'Amount Credit' |
 			| '1' | '3540'             | '11 433,33'    | ''              |
 			| '2' | '5201'             | ''             | '13 720,00'     |
-			| '3' | '5301'             | '2 286,67'     | ''              |
+			| '3' | '5301'             | '2 286,67'     | ''              |			
 		Then the form attribute named "UserDefined" became equal to "No"
 		And I click "Save and close" button	
 	* Check Journal entry creation
@@ -1841,10 +1863,10 @@ Scenario: _0991076 check Bank receipt accounting movements (Currency exchange)
 	* Check accounting movements
 		And in the table "PaymentList" I click "Edit accounting" button
 		And "AccountingAnalytics" table became equal
-			| 'Debit' | 'Cash/Bank account' | 'Company'       | 'Partner'      | 'Business unit' | 'Credit' | 'Expense and revenue type' | 'Operation'                                                                                |
-			| '3221'  | 'Transit, TRY'      | 'Own company 2' | ''             | ''              | '420.5'  | ''                         | 'BankReceipt DR (R3021B_CashInTransit) CR (R5021T_Revenues)'                               |
-			| '420.5' | ''                  | ''              | 'Transit, TRY' | 'Own company 2' | '3221'   | ''                         | 'BankReceipt DR (R5022T_Expenses) CR (R3021B_CashInTransit)'                               |
-			| '3250'  | 'Bank account, TRY' | ''              | 'Transit, TRY' | ''              | '3221'   | ''                         | 'BankReceipt DR (R3010B_CashOnHand) CR (R3021B_CashInTransitIncoming) (Currency exchange)' |	
+			| 'Debit' | 'Cash/Bank account' | 'Company'       | 'Partner' | 'Business unit' | 'Credit' | ' ' | 'Operation'                                                                                |
+			| '3221'  | 'Transit, TRY'      | 'Own company 2' | ''        | ''              | '9100'   | ''  | 'BankReceipt DR (R3021B_CashInTransit) CR (R5021T_Revenues)'                               |
+			| '420.5' | ''                  | 'Own company 2' | ''        | 'Transit, TRY'  | '3221'   | ''  | 'BankReceipt DR (R5022T_Expenses) CR (R3021B_CashInTransit)'                               |
+			| '3250'  | 'Bank account, TRY' | ''              | ''        | 'Transit, TRY'  | '3221'   | ''  | 'BankReceipt DR (R3010B_CashOnHand) CR (R3021B_CashInTransitIncoming) (Currency exchange)' |		
 	And I close all client application windows
 
 Scenario: _0991077 check Bank payment accounting movements (Return to customer)
@@ -1898,7 +1920,7 @@ Scenario: _0991080 check Purchase invoice accounting movements
 			| '5201'  | 'Vendor 1 (1 partner term)' | ''                | 'Partner term with vendor 1' | '4020.2' | 'PurchaseInvoice DR (R1021B_VendorsTransactions) CR (R1020B_AdvancesToVendors_CurrencyRevaluation)'              |
 			| '3540'  | 'Vendor 1 (1 partner term)' | 'Business unit 1' | 'Partner term with vendor 1' | '5201'   | 'PurchaseInvoice DR (R4050B_StockInventory_R5022T_Expenses) CR (R1021B_VendorsTransactions)'                     |
 			| '5301'  | 'Vendor 1 (1 partner term)' | 'Business unit 1' | 'Partner term with vendor 1' | '5201'   | 'PurchaseInvoice DR (R1040B_TaxesOutgoing) CR (R1021B_VendorsTransactions)'                                      |
-			| '3540'  | 'Vendor 1 (1 partner term)' | 'Business unit 1' | 'Partner term with vendor 1' | '5201'   | 'PurchaseInvoice DR (R4050B_StockInventory_R5022T_Expenses) CR (R1021B_VendorsTransactions_CurrencyRevaluation)' |
+			| '3540'  | 'Vendor 1 (1 partner term)' | 'Business unit 1' | 'Partner term with vendor 1' | '5201'   | 'PurchaseInvoice DR (R4050B_StockInventory_R5022T_Expenses) CR (R1021B_VendorsTransactions_CurrencyRevaluation)' |	
 	And I close all client application windows	
 
 			
@@ -2031,10 +2053,10 @@ Scenario: _0991190 check Money transfer accounting movements (Currency exchange)
 	* Check accounting movements
 		And I click the button named "EditAccounting"
 		And "AccountingAnalytics" table became equal
-			| 'Debit' | 'Cash/Bank account' | 'Company'         | 'Business unit'           | 'Credit' | 'Operation'                                                      |
-			| '3250'  | 'Bank account, TRY' | 'Own company 2'   | 'Business unit 3'         | '3250'   | 'MoneyTransfer DR (R3010B_CashOnHand) CR (R3010B_CashOnHand)'    |
-			| '3221'  | 'Bank account, TRY' | 'Own company 2'   | 'Business unit 3'         | '3250'   | 'MoneyTransfer DR (R3021B_CashInTransit) CR (R3010B_CashOnHand)' |
-			| '3250'  | 'Transit, TRY'      | 'Own company 2'   | ''                        | '3221'   | 'MoneyTransfer DR (R3010B_CashOnHand) CR (R3021B_CashInTransit)' |
-			| '3221'  | ''                  | 'Business unit 3' | 'Foreign exchange income' | '420.5'  | 'MoneyTransfer DR (R3021B_CashInTransit) CR (R5021T_Revenues)'   |
-			| '420.5' | 'Transit, TRY'      | 'Own company 2'   | ''                        | '3221'   | 'MoneyTransfer DR (R5022T_Expenses) CR (R3021B_CashInTransit)'   |
+			| 'Debit' | 'Cash/Bank account' | 'Company'       | 'Business unit'   | 'Credit' | 'Operation'                                                      |
+			| '3250'  | 'Bank account, TRY' | 'Own company 2' | 'Business unit 3' | '3250'   | 'MoneyTransfer DR (R3010B_CashOnHand) CR (R3010B_CashOnHand)'    |
+			| '3221'  | 'Bank account, TRY' | 'Own company 2' | 'Business unit 3' | '3250'   | 'MoneyTransfer DR (R3021B_CashInTransit) CR (R3010B_CashOnHand)' |
+			| '3250'  | 'Transit, TRY'      | 'Own company 2' | ''                | '3221'   | 'MoneyTransfer DR (R3010B_CashOnHand) CR (R3021B_CashInTransit)' |
+			| '3221'  | 'Business unit 3'   | 'Own company 2' | ''                | '9101'   | 'MoneyTransfer DR (R3021B_CashInTransit) CR (R5021T_Revenues)'   |
+			| '420.5' | 'Transit, TRY'      | 'Own company 2' | ''                | '3221'   | 'MoneyTransfer DR (R5022T_Expenses) CR (R3021B_CashInTransit)'   |		
 	And I close all client application windows

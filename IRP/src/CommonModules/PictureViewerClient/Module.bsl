@@ -79,7 +79,7 @@ Async Procedure Upload(Form, Object) Export
 	AddFile(FileRef, Undefined, StrParam);
 EndProcedure
 
-Function UploadPicture(File, Volume) Export
+Function UploadPicture(File, Volume, AdditionalParameters = Undefined) Export
 	
 	md5 = String(PictureViewerServer.MD5ByBinaryData(File.Address));
 	FileRef = PictureViewerServer.GetFileRefByMD5(md5);
@@ -114,7 +114,21 @@ Function UploadPicture(File, Volume) Export
 	Parameters.Insert("RequestBody", RequestBody);
 	Parameters.Insert("FileID", FileID);
 	If ConnectionSettings.Value.IntegrationType = PredefinedValue("Enum.IntegrationType.LocalFileStorage") Then
-		IntegrationServer.SaveFileToFileStorage(ConnectionSettings.Value.AddressPath, FileID + "."
+		FileName = FileID;
+		FilePrefix = "";
+		If TypeOf(AdditionalParameters) = Type("Structure") Then
+			
+			If AdditionalParameters.Property("FilePrefix") Then
+				FilePrefix = AdditionalParameters.FilePrefix;
+				FileName = StrTemplate("%1__%2", FilePrefix, FileName);
+			EndIf;
+			
+			If AdditionalParameters.Property("PrintFormName") Then
+				FileInfo.PrintFormName = AdditionalParameters.PrintFormName;
+			EndIf;
+		EndIf;
+		
+		IntegrationServer.SaveFileToFileStorage(ConnectionSettings.Value.AddressPath, FileName + "."
 			+ FileInfo.Extension, RequestBody);
 		FileInfo.Success = True;
 		FileInfo.URI = FileID + "." + FileInfo.Extension;
@@ -332,7 +346,7 @@ Procedure AddFile(File, Val Volume, AdditionalParameters) Export
 		EndIf;
 	EndIf;
 
-	FileInfo = UploadPicture(File, Volume);
+	FileInfo = UploadPicture(File, Volume, AdditionalParameters);
 	If FileInfo.Success Then
 		PictureViewerServer.CreateAndLinkFileToObject(Volume, FileInfo, Ref);
 		Notify("UpdateObjectPictures_AddNewOne", FileInfo.Ref, AdditionalParameters.UUID);

@@ -155,6 +155,51 @@
         <value></value>
       </fillValue>
     </attributes>
+    <attributes uuid="19edf0d7-efb2-4262-a9c6-3373e10ba124">
+      <name>FileStorageVolume</name>
+      <synonym>
+        <key>en</key>
+        <value>File storage volume</value>
+      </synonym>
+      <type>
+        <types>CatalogRef.FileStorageVolumes</types>
+      </type>
+      <minValue xsi:type="core:UndefinedValue"/>
+      <maxValue xsi:type="core:UndefinedValue"/>
+      <fillValue xsi:type="core:UndefinedValue"/>
+    </attributes>
+    <attributes uuid="d8836df0-8db6-4207-83fa-a528b61b9c7d">
+      <name>FillChecking</name>
+      <synonym>
+        <key>en</key>
+        <value>Fill checking</value>
+      </synonym>
+      <type>
+        <types>Number</types>
+        <numberQualifiers>
+          <precision>1</precision>
+        </numberQualifiers>
+      </type>
+      <minValue xsi:type="core:UndefinedValue"/>
+      <maxValue xsi:type="core:UndefinedValue"/>
+      <fillValue xsi:type="core:UndefinedValue"/>
+    </attributes>
+    <attributes uuid="437c81c9-11b1-42d7-8f7b-f9f210e5edd2">
+      <name>IsAuditLock</name>
+      <synonym>
+        <key>en</key>
+        <value>Is audit lock</value>
+      </synonym>
+      <type>
+        <types>Number</types>
+        <numberQualifiers>
+          <precision>1</precision>
+        </numberQualifiers>
+      </type>
+      <minValue xsi:type="core:UndefinedValue"/>
+      <maxValue xsi:type="core:UndefinedValue"/>
+      <fillValue xsi:type="core:UndefinedValue"/>
+    </attributes>
   </tabularSections>
   <tabularSections uuid="2364009b-31ed-45ee-97fb-e871d63bdfa9">
     <producedTypes>
@@ -213,6 +258,35 @@
       <maxValue xsi:type="core:UndefinedValue"/>
       <fillValue xsi:type="core:UndefinedValue"/>
     </attributes>
+    <attributes uuid="1f29a840-64a7-4259-87be-037affa8ee0d">
+      <name>FileTooltip</name>
+      <synonym>
+        <key>en</key>
+        <value>File tooltip</value>
+      </synonym>
+      <type>
+        <types>String</types>
+        <stringQualifiers/>
+      </type>
+      <minValue xsi:type="core:UndefinedValue"/>
+      <maxValue xsi:type="core:UndefinedValue"/>
+      <fillValue xsi:type="core:StringValue">
+        <value></value>
+      </fillValue>
+    </attributes>
+    <attributes uuid="830900d5-894c-4738-91aa-d63affefd826">
+      <name>IsRequired</name>
+      <synonym>
+        <key>en</key>
+        <value>Required</value>
+      </synonym>
+      <type>
+        <types>Boolean</types>
+      </type>
+      <minValue xsi:type="core:UndefinedValue"/>
+      <maxValue xsi:type="core:UndefinedValue"/>
+      <fillValue xsi:type="core:UndefinedValue"/>
+    </attributes>
     <attributes uuid="f7474e6a-4463-4ffa-a723-673cba88ddab">
       <name>FileFormat</name>
       <synonym>
@@ -254,6 +328,24 @@
         <types>String</types>
         <stringQualifiers>
           <length>10</length>
+        </stringQualifiers>
+      </type>
+      <minValue xsi:type="core:UndefinedValue"/>
+      <maxValue xsi:type="core:UndefinedValue"/>
+      <fillValue xsi:type="core:StringValue">
+        <value></value>
+      </fillValue>
+    </attributes>
+    <attributes uuid="5a72a22e-374b-437c-ab7f-8977c7318294">
+      <name>NamingFormat</name>
+      <synonym>
+        <key>en</key>
+        <value>Naming format</value>
+      </synonym>
+      <type>
+        <types>String</types>
+        <stringQualifiers>
+          <length>50</length>
         </stringQualifiers>
       </type>
       <minValue xsi:type="core:UndefinedValue"/>
